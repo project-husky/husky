@@ -35,6 +35,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.ehealth_connector.communication.mpi.MpiAdapterInterface;
+import org.ehealth_connector.fhir.FhirCommon;
 import org.ehealth_connector.fhir.FhirPatient;
 import org.hl7.fhir.dstu3.model.Address;
 import org.hl7.fhir.dstu3.model.Address.AddressUse;
@@ -110,9 +111,6 @@ import org.w3c.dom.Element;
  * @see "https://www.projects.openhealthtools.org/sf/projects/iheprofiles/profiles/pdq.html"
  */
 public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQueryResponse> {
-
-	/** Field referencing the String */
-	private static final String URN_OID = "urn:oid:";
 
 	/** The adapter cfg. */
 	private V3PixPdqAdapterConfig adapterCfg;
@@ -292,7 +290,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 *            oid for the domain to add as otherId in the pix v3 message
 	 */
 	public void addOtherIdsOid(String oid) {
-		otherIdsOidSet.add(URN_OID + oid);
+		otherIdsOidSet.add(FhirCommon.addUrnOid(oid));
 	}
 
 	/**
@@ -399,8 +397,8 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	protected void addPatientIds(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
 		for (final Identifier Identifier : patient.getIdentifier()) {
 			if ((Identifier.getSystem().length() > 8)
-					&& (Identifier.getSystem().startsWith("urn:oid:"))) {
-				final String oid = Identifier.getSystem().substring(8);
+					&& (Identifier.getSystem().startsWith(FhirCommon.oidUrn))) {
+				final String oid = FhirCommon.removeUrnOidPrefix(Identifier.getSystem());
 				if (this.otherIdsOidSet.contains(oid)) {
 					v3PixSourceMessage.addPatientOtherID(Identifier.getValue(), oid);
 				} else {
@@ -427,7 +425,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 		if (pdqPatient.getId() != null) {
 			for (final II patientId : pdqPatient.getId()) {
 				final Identifier Identifier = new Identifier();
-				Identifier.setSystem(URN_OID + patientId.getRoot());
+				Identifier.setSystem(FhirCommon.addUrnOid(patientId.getRoot()));
 				Identifier.setValue(patientId.getExtension());
 				patient.getIdentifier().add(Identifier);
 			}
@@ -441,7 +439,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 					final II patientId = asOtherId.getId().get(0);
 					if (patientId != null) {
 						final Identifier Identifier = new Identifier();
-						Identifier.setSystem(URN_OID + patientId.getRoot());
+						Identifier.setSystem(FhirCommon.addUrnOid(patientId.getRoot()));
 						Identifier.setValue(patientId.getExtension());
 						patient.getIdentifier().add(Identifier);
 					}
@@ -765,8 +763,9 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 */
 	protected String getHomeCommunityPatientId(FhirPatient patient) {
 		for (final Identifier Identifier : patient.getIdentifier()) {
-			if (Identifier.getSystem().startsWith(URN_OID)) {
-				if (Identifier.getSystem().substring(8).equals(this.homeCommunityOid)) {
+			if (Identifier.getSystem().startsWith(FhirCommon.oidUrn)) {
+				if (FhirCommon.removeUrnOidPrefix(Identifier.getSystem())
+						.equals(this.homeCommunityOid)) {
 					return Identifier.getValue();
 				}
 			}
@@ -1621,8 +1620,8 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 		if ((organization != null) && (organization.getIdentifier().size() > 0)) {
 			final Identifier organizationId = organization.getIdentifier().get(0);
-			if (organizationId.getSystem().startsWith(URN_OID)) {
-				organizationOid = organizationId.getSystem().substring(8);
+			if (organizationId.getSystem().startsWith(FhirCommon.oidUrn)) {
+				organizationOid = FhirCommon.removeUrnOidPrefix(organizationId.getSystem());
 			}
 		}
 
@@ -1660,7 +1659,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 					&& (pdqPatient.getProviderOrganization().getId().size() > 0)) {
 				for (final II id : pdqPatient.getProviderOrganization().getId()) {
 					final Identifier Identifier = new Identifier();
-					Identifier.setValue(URN_OID + id.getRoot());
+					Identifier.setValue(FhirCommon.addUrnOid(id.getRoot()));
 					organization.getIdentifier().add(Identifier);
 				}
 			}

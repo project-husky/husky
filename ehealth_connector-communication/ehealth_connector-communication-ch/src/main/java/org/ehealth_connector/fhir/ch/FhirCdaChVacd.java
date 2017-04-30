@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.cda.Consumable;
+import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.ActiveProblemConcern;
 import org.ehealth_connector.cda.ch.AllergyConcern;
 import org.ehealth_connector.cda.ch.CodedResults;
@@ -39,8 +40,10 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.CodeSystems;
+import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.ehealth_connector.common.enums.Ucum;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.fhir.FhirCommon;
 import org.hl7.fhir.dstu3.model.Basic;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
@@ -56,6 +59,7 @@ import org.hl7.fhir.dstu3.model.Medication;
 import org.hl7.fhir.dstu3.model.MedicationStatement;
 import org.hl7.fhir.dstu3.model.MedicationStatement.MedicationStatementTaken;
 import org.hl7.fhir.dstu3.model.Observation;
+import org.hl7.fhir.dstu3.model.Observation.ObservationRelatedComponent;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Patient;
 import org.hl7.fhir.dstu3.model.Person;
@@ -65,6 +69,12 @@ import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.StringType;
 import org.hl7.fhir.dstu3.model.TimeType;
 import org.hl7.fhir.exceptions.FHIRException;
+import org.openhealthtools.mdht.uml.hl7.datatypes.BL;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
+import org.openhealthtools.mdht.uml.hl7.datatypes.INT;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.context.FhirVersionEnum;
@@ -902,14 +912,14 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 	 * <div class="en">uniform resource name (urn) of this OID</div>
 	 * <div class="de"></div><div class="fr"></div>
 	 */
-	public static final String OID_CONFIDENTIALITY_CODE = "urn:oid:"
-			+ CodeSystems.ConfidentialityCode.getCodeSystemId();;
+	public static final String OID_CONFIDENTIALITY_CODE = FhirCommon
+			.addUrnOid(CodeSystems.ConfidentialityCode.getCodeSystemId());
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this OID</div>
 	 * <div class="de"></div><div class="fr"></div>
 	 */
-	public static final String OID_VACD = "urn:oid:" + CdaChVacd.OID_MAIN;
+	public static final String OID_VACD = FhirCommon.addUrnOid(CdaChVacd.OID_MAIN);
 
 	private final FhirContext fhirCtx = new FhirContext(FhirVersionEnum.DSTU3);
 
@@ -1055,8 +1065,8 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		if (!fhirMedicationStatement.getExtensionsByUrl(FhirCommon.urnUseAsCode).isEmpty()) {
 			final Coding fhirCode = (Coding) fhirMedicationStatement
 					.getExtensionsByUrl(FhirCommon.urnUseAsCode).get(0).getValue();
-			retVal = new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()), fhirCode.getCode(),
-					fhirCode.getDisplay());
+			retVal = new Code(FhirCommon.removeUrnOidPrefix(fhirCode.getSystem()),
+					fhirCode.getCode(), fhirCode.getDisplay());
 		}
 		return retVal;
 	}
@@ -1083,12 +1093,12 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 				final Identifier id = (Identifier) fhirMedi
 						.getExtensionsByUrl(FhirCommon.urnUseAsIdentifier).get(0).getValue();
 				retVal.setManufacturedProductId(new org.ehealth_connector.common.Identificator(
-						FhirCommon.removeURIPrefix(id.getSystem()), id.getValue()));
+						FhirCommon.removeUrnOidPrefix(id.getSystem()), id.getValue()));
 			}
 
 			// Set code
 			final Coding fhirCode = fhirMedi.getCode().getCodingFirstRep();
-			final Code code = new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
+			final Code code = new Code(FhirCommon.removeUrnOidPrefix(fhirCode.getSystem()),
 					fhirCode.getCode(), fhirCode.getDisplay());
 			retVal.setWhoAtcCode(code);
 
@@ -1142,7 +1152,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 
 		// Add Identifiers
 		for (final Identifier id : fhirMedicationStatement.getIdentifier()) {
-			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
+			final String codeSystem = FhirCommon.removeUrnOidPrefix(id.getSystem());
 			retVal.addId(new Identificator(codeSystem, id.getValue()));
 		}
 
@@ -1197,8 +1207,8 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 					fhirObs.getIdentifierFirstRep().getSystem().replace(FhirCommon.oidUrn, ""),
 					fhirObs.getIdentifierFirstRep().getValue()));
 			entry.setImmunizationTargetCode(
-					new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()), fhirCode.getCode(),
-							fhirCode.getDisplay()));
+					new Code(FhirCommon.removeUrnOidPrefix(fhirCode.getSystem()),
+							fhirCode.getCode(), fhirCode.getDisplay()));
 			retVal.addMedicationTargetEntry(entry);
 		}
 
@@ -1209,7 +1219,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 			final Observation fhirObs = (Observation) ref.getResource();
 			final Coding fhirCode = fhirObs.getCode().getCodingFirstRep();
 			final CriterionEntry entry = new CriterionEntry();
-			entry.setRecCategoryCode(new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
+			entry.setRecCategoryCode(new Code(FhirCommon.removeUrnOidPrefix(fhirCode.getSystem()),
 					fhirCode.getCode(), fhirCode.getDisplay()));
 			retVal.setCriterionEntry(entry);
 		}
@@ -1330,7 +1340,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 		// Add Identifiers
 		retVal.getMdht().getIds().clear();
 		for (final Identifier id : fhirMedicationStatement.getIdentifier()) {
-			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
+			final String codeSystem = FhirCommon.removeUrnOidPrefix(id.getSystem());
 			retVal.addId(new Identificator(codeSystem, id.getValue()));
 		}
 
@@ -1386,7 +1396,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 						fhirObs.getIdentifierFirstRep().getSystem().replace(FhirCommon.oidUrn, ""),
 						fhirObs.getIdentifierFirstRep().getValue()));
 				entry.setImmunizationTargetCode(
-						new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
+						new Code(FhirCommon.removeUrnOidPrefix(fhirCode.getSystem()),
 								fhirCode.getCode(), fhirCode.getDisplay()));
 				retVal.addMedicationTargetEntry(entry);
 			}
@@ -1398,8 +1408,9 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 				final Observation fhirObs = (Observation) ref.getResource();
 				final Coding fhirCode = fhirObs.getCode().getCodingFirstRep();
 				final CriterionEntry entry = new CriterionEntry();
-				entry.setRecCategoryCode(new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
-						fhirCode.getCode(), fhirCode.getDisplay()));
+				entry.setRecCategoryCode(
+						new Code(FhirCommon.removeUrnOidPrefix(fhirCode.getSystem()),
+								fhirCode.getCode(), fhirCode.getDisplay()));
 				retVal.setCriterionEntry(entry);
 			}
 
@@ -1442,7 +1453,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 
 	/**
 	 * Gets the VACD Laboratory Observation
-	 * 
+	 *
 	 * @param fhirObservation
 	 *            the FHIR resource
 	 * @return the VACD Laboratory Observation
@@ -1450,50 +1461,171 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 	private org.ehealth_connector.cda.ch.vacd.LaboratoryObservation getVacdLaboratoryObservation(
 			Observation fhirObservation) {
 		final org.ehealth_connector.cda.ch.vacd.LaboratoryObservation retVal = new LaboratoryObservation();
-		// TODO tsc copy von Abstract...
-		final Coding fhirCode = fhirObservation.getCode().getCodingFirstRep();
-		retVal.setCode(new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
-				fhirCode.getCode(), fhirCode.getDisplay()));
-		retVal.setEffectiveTime(fhirObservation.getIssued());
+
+		// TODO better inheritance: this code is copied from
+		// AbstractFhirCdaCh
+
+		fhirObservation.getCode().getCodingFirstRep();
+		retVal.setCode(FhirCommon.fhirCodeToEhcCode(fhirObservation.getCode()));
+		if (fhirObservation.getIssued() != null) {
+			retVal.setEffectiveTime(fhirObservation.getIssued());
+		}
 		if (!fhirObservation.getPerformer().isEmpty()) {
 			final Reference refPerf = fhirObservation.getPerformer().get(0);
 			retVal.setLaboratory(FhirCommon.getOrganization((Organization) refPerf.getResource()),
 					fhirObservation.getIssued());
 		}
-
+		Value v = null;
+		// type PQ
 		if (fhirObservation.getValue() instanceof Quantity) {
-			// type PQ
 			final Quantity fhirQuantity = (Quantity) fhirObservation.getValue();
-			retVal.addValue(new Value(fhirQuantity.getValue().toString(),
-					Ucum.getEnum(fhirQuantity.getUnit())));
-		} else if (fhirObservation.getValue() instanceof CodeableConcept) {
-			// type CD
+			v = new Value(fhirQuantity.getValue().toString(), Ucum.AHGEquivalentsPerMilliLiter);
+
+			// fix for the bug(?), which ommits the unit when it´s set to
+			// "1"
+			// Seems to be a bug in the MDHT. Ucum Unit can´t be set to "1".
+			// unit = fhirQuantity.getUnit().replace("#", "");
+			String unit;
+			if (fhirQuantity.getUnit().startsWith("#")) {
+				unit = fhirQuantity.getUnit();
+			} else {
+				unit = fhirQuantity.getUnit();
+			}
+			v.setUcumUnit(unit);
+		}
+		// type String
+		if (fhirObservation.getValue() instanceof StringType) {
+			final StringType fhirString = (StringType) fhirObservation.getValue();
+			// type BL
+			if (fhirString.getValueAsString().equalsIgnoreCase("false")
+					|| fhirString.getValueAsString().equalsIgnoreCase("true")
+					|| fhirString.getValueAsString().equalsIgnoreCase("NA")) {
+				if (!fhirObservation.getDataAbsentReason().isEmpty()) {
+					BL bl = DatatypesFactory.eINSTANCE.createBL();
+					bl.setNullFlavor(NullFlavor.NA);
+					v = new Value(bl);
+				} else {
+					if (fhirString.getValueAsString().equalsIgnoreCase("true")) {
+						v = new Value(true);
+					}
+					if (fhirString.getValueAsString().equalsIgnoreCase("false")) {
+						v = new Value(false);
+					}
+					if (fhirString.getValueAsString().equalsIgnoreCase("NA")) {
+						BL bl = DatatypesFactory.eINSTANCE.createBL();
+						bl.setNullFlavor(NullFlavor.NA);
+						v = new Value(bl);
+					}
+				}
+			}
+			if (fhirString.getValue().startsWith("INT:")) {
+				if (fhirString.getValue().startsWith("INT:NA")) {
+					INT intValue = DatatypesFactory.eINSTANCE.createINT();
+					intValue.setNullFlavor(NullFlavor.NA);
+					v = new Value(intValue);
+				} else {
+					v = new Value(Integer.parseInt(fhirString.getValue().replace("INT:", "")));
+				}
+			}
+			if (fhirString.getValue().startsWith("ED:")) {
+				if (fhirString.getValue().startsWith("ED:#")) {
+					ED edValue = Util.createReference(fhirString.getValue().replace("ED:", ""));
+					v = new Value(edValue);
+				} else {
+					v = new Value(Integer.parseInt(fhirString.getValue().replace("INT:", "")));
+				}
+			}
+			if (fhirString.getValue().startsWith("ST:")) {
+				if (fhirString.getValue().startsWith("ST:NA")) {
+					ST stValue = DatatypesFactory.eINSTANCE.createST();
+					stValue.setNullFlavor(NullFlavor.NA);
+					v = new Value(stValue);
+				} else {
+					ST stValue = DatatypesFactory.eINSTANCE
+							.createST(fhirString.getValue().replace("ST:", ""));
+					v = new Value(stValue);
+				}
+			}
+		}
+		// type CD
+		if (fhirObservation.getValue() instanceof CodeableConcept)
+
+		{
 			final Coding fhirValueCode = ((CodeableConcept) fhirObservation.getValue())
 					.getCodingFirstRep();
-			retVal.addValue(new Code(new Code(FhirCommon.removeURIPrefix(fhirValueCode.getSystem()),
-					fhirValueCode.getCode(), fhirValueCode.getDisplay())));
-		} else if (fhirObservation.getValue() instanceof Ratio) {
+			retVal.addValue(
+					new Code(new Code(FhirCommon.removeUrnOidPrefix(fhirValueCode.getSystem()),
+							fhirValueCode.getCode(), fhirValueCode.getDisplay())));
+		}
+		if (fhirObservation.getValue() instanceof Ratio) {
 			// type RTO not yet implemented
 		}
+		if (v != null) {
+			retVal.addValue(v);
+		}
 
-		if (fhirObservation.getReferenceRangeFirstRep() != null) {
-			// ReferenceRange not yet implemented
+		// ReferenceRange
+		if (!fhirObservation.getReferenceRange().isEmpty()) {
+			org.ehealth_connector.common.ReferenceRange rr = new org.ehealth_connector.common.ReferenceRange();
+			// Value
+			if (fhirObservation.getReferenceRangeFirstRep().getLow().getUnit() != null
+					&& fhirObservation.getReferenceRangeFirstRep().getHigh().getUnit() != null) {
+				v = new Value(fhirObservation.getReferenceRangeFirstRep().getLow().getValue(),
+						fhirObservation.getReferenceRangeFirstRep().getLow().getUnit(),
+						fhirObservation.getReferenceRangeFirstRep().getHigh().getValue(),
+						fhirObservation.getReferenceRangeFirstRep().getHigh().getUnit());
+			} else {
+				v = new Value(fhirObservation.getReferenceRangeFirstRep().getLow().getValue(),
+						fhirObservation.getReferenceRangeFirstRep().getHigh().getValue());
+			}
+
+			rr.setValue(v);
+
+			// Interpretation;
+			ObservationInterpretation obsInt = null;
+			if (fhirObservation.getReferenceRangeFirstRep().getAppliesTo() != null) {
+				if (fhirObservation.getReferenceRangeFirstRep().getAppliesTo().size() > 0) {
+					if (fhirObservation.getReferenceRangeFirstRep().getAppliesTo().get(0) != null) {
+						if (fhirObservation.getReferenceRangeFirstRep().getAppliesTo().get(0)
+								.getCodingFirstRep() != null) {
+							String code = fhirObservation.getReferenceRangeFirstRep().getAppliesTo()
+									.get(0).getCodingFirstRep().getCode();
+							obsInt = ObservationInterpretation.getEnum(code);
+						}
+					}
+				}
+			}
+			if (obsInt != null) {
+				rr.setInterpretationCode(obsInt);
+			}
+			retVal.setReferenceRange(rr);
 		}
 
 		final Coding fhirInterpretationCode = fhirObservation.getInterpretation()
 				.getCodingFirstRep();
 		if (fhirInterpretationCode != null) {
 			if (fhirInterpretationCode.getSystem() != null) {
-				retVal.setInterpretationCode(new Code(
-						FhirCommon.removeURIPrefix(fhirInterpretationCode.getSystem()),
+				retVal.addInterpretationCode(new Code(
+						FhirCommon.removeUrnOidPrefix(fhirInterpretationCode.getSystem()),
 						fhirInterpretationCode.getCode(), fhirInterpretationCode.getDisplay()));
 			}
 		}
+		// Text reference (inside the observation)
+		if (fhirObservation.getComment() != null && !fhirObservation.getComment().isEmpty()) {
+			retVal.setTextReference(fhirObservation.getComment());
+		}
 
-		retVal.setCommentText(fhirObservation.getComment());
+		// Comments
+		for (ObservationRelatedComponent commentRef : fhirObservation.getRelated()) {
+			if (commentRef.getTarget().getResource() instanceof Observation) {
+				Observation comment = (Observation) commentRef.getTarget().getResource();
+				if (comment.getComment() != null) {
+					retVal.addCommentEntry(new SectionAnnotationCommentEntry(comment.getComment()));
+				}
+			}
+		}
 
 		return retVal;
-
 	}
 
 	/**

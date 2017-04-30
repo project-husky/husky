@@ -455,7 +455,7 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 
 	/**
 	 * Gets the EDES Coded Vital Sign Organizer
-	 * 
+	 *
 	 * @param docManifest
 	 *            the FHIR resource
 	 * @return the EDES Coded Vital Sign Organizer
@@ -480,7 +480,7 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 							.getExtensionsByUrl(FhirCommon.urnUseAsCodedVitalSignList);
 					if (!extensions.isEmpty()) {
 						final Identifier id = list.getIdentifier().get(0);
-						id.setSystem(id.getSystem().replace("urn:oid:", ""));
+						id.setSystem(FhirCommon.removeUrnOidPrefix(id.getSystem()));
 						final TimeType timeStamp = ((TimeType) extensions.get(0).getValue());
 						retVal.setEffectiveTime(
 								DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
@@ -553,7 +553,7 @@ public class FhirCdaChEdesEdpn extends AbstractFhirCdaCh {
 									final Type fhirValue = component.getValue();
 
 									final Code code = new Code(
-											FhirCommon.removeURIPrefix(fhirCode.getSystem()),
+											FhirCommon.removeUrnOidPrefix(fhirCode.getSystem()),
 											fhirCode.getCode(), fhirCode.getDisplay());
 									if (fhirValue instanceof Quantity) {
 										// type PQ

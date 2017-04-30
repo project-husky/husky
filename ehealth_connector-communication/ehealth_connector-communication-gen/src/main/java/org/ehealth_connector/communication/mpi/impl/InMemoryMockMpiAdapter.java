@@ -23,6 +23,7 @@ import java.util.Map;
 import org.ehealth_connector.communication.mpi.MpiAdapterInterface;
 import org.ehealth_connector.communication.mpi.MpiQuery;
 import org.ehealth_connector.communication.mpi.MpiQueryResponse;
+import org.ehealth_connector.fhir.FhirCommon;
 import org.ehealth_connector.fhir.FhirPatient;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.openhealthtools.ihe.utils.UUID;
@@ -35,9 +36,6 @@ import org.slf4j.LoggerFactory;
  * identifier.
  */
 public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, MpiQueryResponse> {
-
-	/** Field referencing the String */
-	private static final String URN_OID = "urn:oid:";
 
 	static private Map<String, org.ehealth_connector.fhir.FhirPatient> map = new HashMap<String, FhirPatient>();
 
@@ -74,7 +72,7 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 				// data
 				immutablePatient.setIdentifier(patient.getIdentifier());
 				final org.hl7.fhir.dstu3.model.Identifier id = immutablePatient.addIdentifier();
-				id.setSystem(URN_OID + mpiCommunityOid);
+				id.setSystem(FhirCommon.addUrnOid(mpiCommunityOid));
 				id.setValue(mpiIdendity);
 				map.put(mapKey, immutablePatient);
 				log.info("added patient to mpi with key " + mapKey + " and mpi idendity "
@@ -106,7 +104,7 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 	 */
 	private String getHomeCommunityPatientId(FhirPatient patient) {
 		initHomeCommunityId(patient);
-		return getPatientId(patient, URN_OID + homeCommunityOid);
+		return getPatientId(patient, FhirCommon.addUrnOid(homeCommunityOid));
 	}
 
 	/**
@@ -144,7 +142,7 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 	 */
 	private String getMpiPatientId(FhirPatient patient) {
 		initHomeCommunityId(patient);
-		return getPatientId(patient, URN_OID + mpiCommunityOid);
+		return getPatientId(patient, FhirCommon.addUrnOid(mpiCommunityOid));
 	}
 
 	@Override
@@ -183,7 +181,6 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 			if (patient.getIdentifier().size() == 1) {
 				final String system = patient.getIdentifier().get(0).getSystem();
 				if (system.length() > 8) {
-					// "urn:oid:"+
 					homeCommunityOid = system.substring(8);
 				} else {
 					throw new IllegalStateException("system has to start with urn:oid:");
@@ -264,7 +261,7 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 				final FhirPatient patientMpi = map.get(mapKey);
 				final String[] returnIds = new String[domainOids.length];
 				for (int i = 0; i < returnIds.length; ++i) {
-					returnIds[i] = getPatientId(patientMpi, URN_OID + domainOids[i]);
+					returnIds[i] = getPatientId(patientMpi, FhirCommon.addUrnOid(domainOids[i]));
 				}
 				return returnIds;
 			}
@@ -309,7 +306,7 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 				// data
 				immutablePatient.setIdentifier(patient.getIdentifier());
 				final Identifier id = immutablePatient.addIdentifier();
-				id.setSystem(URN_OID + mpiCommunityOid);
+				id.setSystem(FhirCommon.addUrnOid(mpiCommunityOid));
 				id.setValue(getMpiPatientId(oldPatient));
 				map.put(mapKey, immutablePatient);
 				return true;

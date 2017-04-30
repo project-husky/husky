@@ -24,6 +24,7 @@ import java.util.Date;
 
 import org.ehealth_connector.common.enums.CountryCode;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.fhir.FhirCommon;
 import org.ehealth_connector.fhir.FhirPatient;
 import org.hl7.fhir.dstu3.model.Address.AddressUse;
 import org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender;
@@ -36,7 +37,7 @@ import org.hl7.fhir.dstu3.model.Identifier.IdentifierUse;
  */
 public class TestPatient {
 
-	static public String oidInsuranceCard = "urn:oid:2.16.756.5.30.1.123.100.1.1.1";
+	static public String oidInsuranceCard = FhirCommon.addUrnOid("2.16.756.5.30.1.123.100.1.1.1");
 
 	static private String oidLocalId = "1.2.3.4";
 
@@ -56,7 +57,7 @@ public class TestPatient {
 
 		final Identifier identifier = new Identifier();
 		identifier.setUse(IdentifierUse.USUAL);
-		identifier.setSystem("urn:oid:" + oidLocalId);
+		identifier.setSystem(FhirCommon.addUrnOid(oidLocalId));
 		identifier.setValue(testPatient.localId);
 
 		patient.getIdentifier().add(identifier);
@@ -85,7 +86,7 @@ public class TestPatient {
 
 		final Identifier identifier = new Identifier();
 		identifier.setUse(IdentifierUse.USUAL);
-		identifier.setSystem("urn:oid:" + oidLocalId);
+		identifier.setSystem(FhirCommon.addUrnOid(oidLocalId));
 		identifier.setValue(testPatient.localId);
 
 		patient.getIdentifier().add(identifier);

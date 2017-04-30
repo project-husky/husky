@@ -19,12 +19,12 @@ package org.ehealth_connector.communication.ch.testhelper;
 
 import org.ehealth_connector.common.ch.enums.AuthorRole;
 import org.ehealth_connector.common.ch.enums.AuthorSpeciality;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.communication.ch.enums.AvailabilityStatus;
 import org.ehealth_connector.communication.ch.enums.ClassCode;
 import org.ehealth_connector.communication.ch.enums.ConfidentialityCode;
 import org.ehealth_connector.communication.ch.enums.FormatCode;
 import org.ehealth_connector.communication.ch.enums.HealthcareFacilityTypeCode;
-import org.ehealth_connector.communication.ch.enums.LanguageCode;
 import org.ehealth_connector.communication.ch.enums.MimeType;
 import org.ehealth_connector.communication.ch.enums.PracticeSettingCode;
 import org.ehealth_connector.communication.ch.enums.SourcePatientInfo;
@@ -49,8 +49,8 @@ public class XdsChTestUtils extends XdsTestUtils {
 	public static HealthcareFacilityTypeCode[] healthCareFacilityCodes = new HealthcareFacilityTypeCode[] {
 			HealthcareFacilityTypeCode.AMBULANTE_EINRICHTUNG_INKL_AMBULATORIUM,
 			HealthcareFacilityTypeCode.ANDERE_GESUNDHEITS_ORGANISATION };
-	public static LanguageCode[] languageCodes = new LanguageCode[] { LanguageCode.DEUTSCH,
-			LanguageCode.ENGLISCH };
+	public static LanguageCode[] languageCodes = new LanguageCode[] { LanguageCode.GERMAN,
+			LanguageCode.ENGLISH };
 	public static MimeType[] mimeTypes = new MimeType[] { MimeType.CDA_LEVEL_1_MULTIPART,
 			MimeType.DICOM };
 	public static PracticeSettingCode[] practiceSettingCodes = new PracticeSettingCode[] {

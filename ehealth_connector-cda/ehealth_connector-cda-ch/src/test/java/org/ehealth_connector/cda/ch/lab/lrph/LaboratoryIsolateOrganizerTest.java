@@ -18,6 +18,7 @@
 package org.ehealth_connector.cda.ch.lab.lrph;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
@@ -103,14 +104,11 @@ public class LaboratoryIsolateOrganizerTest extends TestUtils {
 		assertTrue(xCount(document, "//participant[@typeCode='RESP']", 2));
 
 		// Laboratory Battery Organizer
-		// TODO tsc ihe/lrph problem
-		// LaboratoryBatteryOrganizer labBatteryOrganizer = new
-		// LaboratoryBatteryOrganizer();
-		// lio.addLaboratoryBatteryOrganizer(labBatteryOrganizer);
-		// assertNotNull(lio.getLaboratoryBatteryOrganizers());
-		// assertFalse(lio.getLaboratoryBatteryOrganizers().isEmpty());
-		// document = lio.getDocument();
-		// assertTrue(xExist(document,
-		// "//templateId[@root='1.3.6.1.4.1.19376.1.3.1.4']"));
+		LaboratoryBatteryOrganizer labBatteryOrganizer = new LaboratoryBatteryOrganizer();
+		lio.addLaboratoryBatteryOrganizer(labBatteryOrganizer);
+		assertNotNull(lio.getLaboratoryBatteryOrganizers());
+		assertFalse(lio.getLaboratoryBatteryOrganizers().isEmpty());
+		document = lio.getDocument();
+		assertTrue(xExist(document, "//templateId[@root='1.3.6.1.4.1.19376.1.3.1.4']"));
 	}
 }

@@ -25,6 +25,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.AbstractObservation;
+import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.ch.vacd.enums.ObservationInterpretationForImmunization;
 import org.ehealth_connector.cda.enums.ActSite;
@@ -32,6 +33,7 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Performer;
+import org.ehealth_connector.common.ReferenceRange;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.StatusCode;
@@ -179,6 +181,25 @@ public class LaboratoryObservation extends AbstractObservation {
 	}
 
 	/**
+	 * Add a comment entry.
+	 *
+	 * @param commentEntry
+	 *            the new comment entry
+	 */
+	public void addCommentEntry(SectionAnnotationCommentEntry commentEntry) {
+		mLaboratoryObservation.addAct(commentEntry.copy());
+		// need to add the the Subj and setInversionInd, cannot do this
+		// automatically with mdht
+		for (final EntryRelationship entryRelationShip : mLaboratoryObservation
+				.getEntryRelationships()) {
+			if (entryRelationShip.getAct() instanceof Comment) {
+				entryRelationShip.setInversionInd(true);
+				entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+			}
+		}
+	}
+
+	/**
 	 * Adds the id.
 	 *
 	 * @param id
@@ -187,6 +208,16 @@ public class LaboratoryObservation extends AbstractObservation {
 	public void addId(Identificator id) {
 		final II ii = CdaChUtil.createUniqueIiFromIdentificator(id);
 		mLaboratoryObservation.getIds().add(ii);
+	}
+
+	/**
+	 * Adds the interpretation code.
+	 *
+	 * @param code
+	 *            the new interpretation code
+	 */
+	public void addInterpretationCode(Code code) {
+		mLaboratoryObservation.getInterpretationCodes().add(code.getCE());
 	}
 
 	/**
@@ -531,6 +562,19 @@ public class LaboratoryObservation extends AbstractObservation {
 			e.printStackTrace();
 		}
 		mLaboratoryObservation.getPerformers().add(perf);
+	}
+
+	/**
+	 * Sets the reference range <div class="de">(Referenzbereich)</div>.
+	 *
+	 * @param referenceRange
+	 *            the new reference range
+	 */
+	public void setReferenceRange(ReferenceRange referenceRange) {
+		if (referenceRange != null) {
+			mLaboratoryObservation.getReferenceRanges().clear();
+			mLaboratoryObservation.getReferenceRanges().add(referenceRange.getMdht());
+		}
 	}
 
 	@Override

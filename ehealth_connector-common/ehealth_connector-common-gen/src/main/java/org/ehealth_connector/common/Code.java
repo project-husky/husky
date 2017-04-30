@@ -273,7 +273,33 @@ public class Code {
 	 * @return <div class="en">the cd</div>
 	 */
 	public CD getCD() {
-		return EcoreUtil.copy(mCD);
+		final CD cd = DatatypesFactory.eINSTANCE.createCD();
+		final CD mCD2 = EcoreUtil.copy(mCD);
+		if (mCD2.getCodeSystem() != null) {
+			cd.setCodeSystem(mCD2.getCodeSystem());
+		}
+		if (mCD2.getCode() != null) {
+			cd.setCode(mCD2.getCode());
+		}
+		if (mCD2.getCodeSystemName() != null) {
+			cd.setCodeSystemName(mCD2.getCodeSystemName());
+		}
+		if (mCD2.getDisplayName() != null) {
+			cd.setDisplayName(mCD2.getDisplayName());
+		}
+		if (mCD2.getCodeSystemVersion() != null) {
+			cd.setCodeSystemVersion(mCD2.getCodeSystemVersion());
+		}
+		if (mCD2.isNullFlavorDefined()) {
+			cd.setNullFlavor(mCD2.getNullFlavor());
+		}
+		if (mCD2.getOriginalText() != null) {
+			cd.setOriginalText(mCD2.getOriginalText());
+		}
+		for (CD translation : mCD2.getTranslations()) {
+			cd.getTranslations().add(EcoreUtil.copy(translation));
+		}
+		return cd;
 	}
 
 	/**
@@ -306,6 +332,34 @@ public class Code {
 		}
 		if (mCD2.getOriginalText() != null) {
 			ce.setOriginalText(mCD2.getOriginalText());
+		}
+		for (CD translation : mCD2.getTranslations()) {
+			final CE ceTranslation = DatatypesFactory.eINSTANCE.createCE();
+
+			final CD mCD3 = EcoreUtil.copy(translation);
+			if (mCD3.getCodeSystem() != null) {
+				ceTranslation.setCodeSystem(mCD3.getCodeSystem());
+			}
+			if (mCD3.getCode() != null) {
+				ceTranslation.setCode(mCD3.getCode());
+			}
+			if (mCD3.getCodeSystemName() != null) {
+				ceTranslation.setCodeSystemName(mCD3.getCodeSystemName());
+			}
+			if (mCD3.getDisplayName() != null) {
+				ceTranslation.setDisplayName(mCD3.getDisplayName());
+			}
+			if (mCD3.getCodeSystemVersion() != null) {
+				ceTranslation.setCodeSystemVersion(mCD3.getCodeSystemVersion());
+			}
+			if (mCD3.isNullFlavorDefined()) {
+				ceTranslation.setNullFlavor(mCD3.getNullFlavor());
+			}
+			if (mCD3.getOriginalText() != null) {
+				ceTranslation.setOriginalText(mCD3.getOriginalText());
+			}
+
+			ce.getTranslations().add(ceTranslation);
 		}
 		return ce;
 	}

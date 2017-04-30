@@ -321,7 +321,7 @@ public class FhirXdTransaction {
 
 	/**
 	 * Gets a list of Resources
-	 * 
+	 *
 	 * @param docManifest
 	 *            the FHIR document
 	 * @return the list of Resources
@@ -381,7 +381,7 @@ public class FhirXdTransaction {
 					retVal.setDestinationPatientId(
 							FhirCommon.getCommunityPatientId(pat, receiverFacilityOid));
 
-				retVal.setSourceId(fhirObject.getSource().replace("urn:oid:", ""));
+				retVal.setSourceId(FhirCommon.removeUrnOidPrefix(fhirObject.getSource()));
 
 				retVal.setTitle(fhirObject.getDescription());
 			}

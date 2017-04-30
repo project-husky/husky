@@ -436,7 +436,7 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 							.getExtensionsByUrl(FhirCommon.urnUseAsCodedVitalSignList);
 					if (!extensions.isEmpty()) {
 						final Identifier id = list.getIdentifier().get(0);
-						id.setSystem(id.getSystem().replace("urn:oid:", ""));
+						id.setSystem(FhirCommon.removeUrnOidPrefix(id.getSystem()));
 						final TimeType timeStamp = ((TimeType) extensions.get(0).getValue());
 						retVal.setEffectiveTime(
 								DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
@@ -509,7 +509,7 @@ public class FhirCdaChEdesCtnn extends AbstractFhirCdaCh {
 									final Type fhirValue = component.getValue();
 
 									final Code code = new Code(
-											FhirCommon.removeURIPrefix(fhirCode.getSystem()),
+											FhirCommon.removeUrnOidPrefix(fhirCode.getSystem()),
 											fhirCode.getCode(), fhirCode.getDisplay());
 									if (fhirValue instanceof Quantity) {
 										// type PQ

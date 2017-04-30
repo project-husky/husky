@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.ehealth_connector.communication.mpi.MpiQuery;
+import org.ehealth_connector.fhir.FhirCommon;
 import org.hl7.fhir.dstu3.model.ContactPoint;
 import org.hl7.fhir.dstu3.model.ContactPoint.ContactPointSystem;
 import org.hl7.fhir.dstu3.model.ContactPoint.ContactPointUse;
@@ -165,8 +166,8 @@ public class V3PdqQuery implements MpiQuery {
 	@Override
 	public MpiQuery addPatientIdentifier(Identifier Identifier) {
 		if ((Identifier != null) && (Identifier.getSystem().length() > 8)
-				&& (Identifier.getSystem().startsWith("urn:oid:"))) {
-			final String oid = Identifier.getSystem().substring(8);
+				&& (Identifier.getSystem().startsWith(FhirCommon.oidUrn))) {
+			final String oid = FhirCommon.removeUrnOidPrefix(Identifier.getSystem());
 			v3PdqConsumerQuery.addPatientID(oid, Identifier.getValue(), "");
 		} else {
 			log.error("identifier system is not starting with urn:oid: " + Identifier.getSystem());

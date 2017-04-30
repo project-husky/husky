@@ -38,6 +38,7 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.IntendedRecipient;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.ehealth_connector.common.enums.Ucum;
 import org.ehealth_connector.common.utils.DateUtil;
@@ -688,8 +689,9 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 		{
 			final Coding fhirValueCode = ((CodeableConcept) fhirObservation.getValue())
 					.getCodingFirstRep();
-			retVal.addValue(new Code(new Code(FhirCommon.removeURIPrefix(fhirValueCode.getSystem()),
-					fhirValueCode.getCode(), fhirValueCode.getDisplay())));
+			retVal.addValue(
+					new Code(new Code(FhirCommon.removeUrnOidPrefix(fhirValueCode.getSystem()),
+							fhirValueCode.getCode(), fhirValueCode.getDisplay())));
 		}
 		if (fhirObservation.getValue() instanceof Ratio) {
 			// type RTO not yet implemented
@@ -714,14 +716,24 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 			}
 
 			rr.setValue(v);
+
 			// Interpretation;
-			// TODO tsc
-			// ObservationInterpretation obsInt =
-			// ObservationInterpretation.getEnum(fhirObservation
-			// .getReferenceRangeFirstRep().getMeaning().getCodingFirstRep().getCode());
-			// if (obsInt != null) {
-			// rr.setInterpretationCode(obsInt);
-			// }
+			ObservationInterpretation obsInt = null;
+			if (fhirObservation.getReferenceRangeFirstRep().getAppliesTo() != null) {
+				if (fhirObservation.getReferenceRangeFirstRep().getAppliesTo().size() > 0) {
+					if (fhirObservation.getReferenceRangeFirstRep().getAppliesTo().get(0) != null) {
+						if (fhirObservation.getReferenceRangeFirstRep().getAppliesTo().get(0)
+								.getCodingFirstRep() != null) {
+							String code = fhirObservation.getReferenceRangeFirstRep().getAppliesTo()
+									.get(0).getCodingFirstRep().getCode();
+							obsInt = ObservationInterpretation.getEnum(code);
+						}
+					}
+				}
+			}
+			if (obsInt != null) {
+				rr.setInterpretationCode(obsInt);
+			}
 			retVal.setReferenceRange(rr);
 		}
 
@@ -730,11 +742,8 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 		if (fhirInterpretationCode != null) {
 			if (fhirInterpretationCode.getSystem() != null) {
 				retVal.addInterpretationCode(new Code(
-						FhirCommon.removeURIPrefix(fhirInterpretationCode.getSystem()),
+						FhirCommon.removeUrnOidPrefix(fhirInterpretationCode.getSystem()),
 						fhirInterpretationCode.getCode(), fhirInterpretationCode.getDisplay()));
-			} else {
-				retVal.addInterpretationCode(
-						new Code(org.ehealth_connector.common.enums.NullFlavor.UNKNOWN));
 			}
 		}
 		// Text reference (inside the observation)
@@ -756,7 +765,7 @@ public class FhirCdaChLrqc extends AbstractFhirCdaCh {
 
 	/**
 	 * Gets a list of the LRQC Laboratory Specialty Sections
-	 * 
+	 *
 	 * @param docManifest
 	 *            the FHIR resource
 	 * @return the LRQC Laboratory Specialty Sections

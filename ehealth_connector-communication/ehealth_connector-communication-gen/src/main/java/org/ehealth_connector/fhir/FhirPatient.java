@@ -296,7 +296,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 						.get(0);
 				final Identifier identifier = new Identifier();
 				identifier.setValue(ii.getExtension());
-				identifier.setSystem("urn:oid:" + ii.getRoot());
+				identifier.setSystem(FhirCommon.addUrnOid(ii.getRoot()));
 				fhirOrganization.getIdentifier().add(identifier);
 			}
 
@@ -560,8 +560,8 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 		final Patient patient = new Patient(patientName, patientGender, patientBirthdate);
 		for (final Identifier identDt : getIdentifier()) {
 			String oid = "";
-			if (identDt.getSystem().startsWith("urn:oid:")) {
-				oid = identDt.getSystem().substring(8);
+			if (identDt.getSystem().startsWith(FhirCommon.oidUrn)) {
+				oid = FhirCommon.removeUrnOidPrefix(identDt.getSystem());
 			}
 			final String id = identDt.getValue();
 			final Identificator identificator = new Identificator(oid, id);
@@ -586,7 +586,8 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 				convenienceOrganization.addName(org.getName());
 			}
 
-			if ((org != null) && org.getIdentifierFirstRep().getSystem().startsWith("urn:oid:")) {
+			if ((org != null)
+					&& org.getIdentifierFirstRep().getSystem().startsWith(FhirCommon.oidUrn)) {
 				String oid = "";
 				oid = org.getIdentifierFirstRep().getSystem().substring(8);
 				organization.getIds().add(

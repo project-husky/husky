@@ -406,15 +406,15 @@ public class CdaChLrph
 				final ADXP streetName = DatatypesFactory.eINSTANCE.createADXP();
 				streetName.setNullFlavor(NullFlavor.MSK);
 				ad.getStreetNames().add(streetName);
-				// City
-				if ((originalPr.getAddrs().get(0).getCities() != null)
-						&& !originalPr.getAddrs().get(0).getCities().isEmpty()) {
-					ad.addCity(originalPr.getAddrs().get(0).getCities().get(0).getText());
-				}
 				// Postal code
 				if (!originalPr.getAddrs().get(0).getPostalCodes().isEmpty()) {
 					ad.addPostalCode(
 							originalPr.getAddrs().get(0).getPostalCodes().get(0).getText());
+				}
+				// City
+				if ((originalPr.getAddrs().get(0).getCities() != null)
+						&& !originalPr.getAddrs().get(0).getCities().isEmpty()) {
+					ad.addCity(originalPr.getAddrs().get(0).getCities().get(0).getText());
 				}
 				processedPr.getAddrs().add(ad);
 			}

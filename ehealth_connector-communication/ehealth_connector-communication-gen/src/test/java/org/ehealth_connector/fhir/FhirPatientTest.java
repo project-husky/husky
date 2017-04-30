@@ -87,7 +87,7 @@ public class FhirPatientTest {
 		final Organization org = new Organization();
 		if (oid != null) {
 			final Identifier identifier = new Identifier();
-			identifier.setSystem("urn:oid:" + oid);
+			identifier.setSystem(FhirCommon.addUrnOid(oid));
 			org.getIdentifier().add(identifier);
 		}
 		if (name != null) {
@@ -111,7 +111,7 @@ public class FhirPatientTest {
 				.setCity("WEBSTER").setState("MO");
 		final Identifier identifier = new Identifier();
 		identifier.setValue("PIX");
-		identifier.setSystem("urn:oid:2.16.840.1.113883.3.72.5.9.1");
+		identifier.setSystem(FhirCommon.addUrnOid("2.16.840.1.113883.3.72.5.9.1"));
 		fhirPatient.getIdentifier().add(identifier);
 		fhirPatient.setBirthDate(DateUtil.parseDateyyyyMMdd("19380224"));
 		fhirPatient.getAddress().add(address);

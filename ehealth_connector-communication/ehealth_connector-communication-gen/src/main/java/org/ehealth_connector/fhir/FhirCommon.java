@@ -803,17 +803,17 @@ public class FhirCommon {
 	 */
 	public static Address fhirAddressToEhcAddress(org.hl7.fhir.dstu3.model.Address fAddr) {
 		final Address addr = new Address();
-		if (fAddr.getCity() != null) {
-			addr.setCity(fAddr.getCity());
-		}
-		if (fAddr.getCountry() != null) {
-			addr.setCountry(fAddr.getCountry());
-		}
 		for (StringType line : fAddr.getLine()) {
 			addr.getMdhtAdress().addStreetAddressLine(line.asStringValue());
 		}
 		if (fAddr.getPostalCode() != null) {
 			addr.setZip(fAddr.getPostalCode());
+		}
+		if (fAddr.getCity() != null) {
+			addr.setCity(fAddr.getCity());
+		}
+		if (fAddr.getCountry() != null) {
+			addr.setCountry(fAddr.getCountry());
 		}
 		if (fAddr.getState() != null) {
 			addr.getMdhtAdress().addState(fAddr.getState());
@@ -846,13 +846,13 @@ public class FhirCommon {
 	 */
 	public static Code fhirCodeToEhcCode(CodeableConcept codableConcept) {
 		Code code;
-		code = new Code(removeURIPrefix(codableConcept.getCodingFirstRep().getSystem()),
+		code = new Code(removeUrnOidPrefix(codableConcept.getCodingFirstRep().getSystem()),
 				codableConcept.getCodingFirstRep().getCode(),
 				codableConcept.getCodingFirstRep().getDisplay());
 		if (codableConcept.getCoding().size() > 1) {
 			for (int i = 1; i < codableConcept.getCoding().size(); i++) {
 				final Coding fhirCode = codableConcept.getCoding().get(i);
-				code.addTranslation(new Code(removeURIPrefix(fhirCode.getSystem()),
+				code.addTranslation(new Code(removeUrnOidPrefix(fhirCode.getSystem()),
 						fhirCode.getCode(), fhirCode.getDisplay()));
 			}
 
@@ -869,7 +869,7 @@ public class FhirCommon {
 	 */
 	public static Identificator fhirIdentifierToEhcIdentificator(Identifier id) {
 		if ((id != null) && !id.isEmpty()) {
-			return new Identificator(FhirCommon.removeURIPrefix(id.getSystem()), id.getValue());
+			return new Identificator(FhirCommon.removeUrnOidPrefix(id.getSystem()), id.getValue());
 		} else {
 			return null;
 		}
@@ -961,7 +961,7 @@ public class FhirCommon {
 
 		// Add Identifiers
 		for (final Identifier id : fhirObject.getIdentifier()) {
-			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
+			final String codeSystem = FhirCommon.removeUrnOidPrefix(id.getSystem());
 			retVal.addId(new Identificator(codeSystem, id.getValue()));
 		}
 
@@ -1022,7 +1022,7 @@ public class FhirCommon {
 
 		// Add Identifiers
 		for (final Identifier id : fhirObject.getIdentifier()) {
-			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
+			final String codeSystem = FhirCommon.removeUrnOidPrefix(id.getSystem());
 			retVal.addId(new Identificator(codeSystem, id.getValue()));
 		}
 
@@ -1092,7 +1092,7 @@ public class FhirCommon {
 
 		// Add Identifiers
 		for (final Identifier id : fhirObject.getIdentifier()) {
-			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
+			final String codeSystem = FhirCommon.removeUrnOidPrefix(id.getSystem());
 			retVal.addId(new Identificator(codeSystem, id.getValue()));
 		}
 
@@ -1608,7 +1608,7 @@ public class FhirCommon {
 
 			// Add Identifiers
 			for (final Identifier id : fhirOrganization.getIdentifier()) {
-				final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
+				final String codeSystem = FhirCommon.removeUrnOidPrefix(id.getSystem());
 				retVal.addId(new Identificator(codeSystem, id.getValue()));
 			}
 
@@ -1628,8 +1628,8 @@ public class FhirCommon {
 				if (addr.getLine().size() > 1) {
 					eHCAddr.setAddressline2(addr.getLine().get(1).getValueAsString());
 				}
-				eHCAddr.setCity(addr.getCity());
 				eHCAddr.setZip(addr.getPostalCode());
+				eHCAddr.setCity(addr.getCity());
 				eHCAddr.setCountry(addr.getCountry());
 				eHCAddr.setUsage(usage);
 				retVal.addAddress(eHCAddr);
@@ -1771,7 +1771,7 @@ public class FhirCommon {
 		}
 		// Add Identifiers
 		for (final Identifier id : fhirPatient.getIdentifier()) {
-			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
+			final String codeSystem = FhirCommon.removeUrnOidPrefix(id.getSystem());
 			retVal.addId(new Identificator(codeSystem, id.getValue()));
 		}
 
@@ -1885,10 +1885,10 @@ public class FhirCommon {
 	 * @return <div class="en">string without the prefix</div>
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
-	public static String removeURIPrefix(String value) {
+	public static String removeUrnOidPrefix(String value) {
 		String retVal = "";
 		if (value.toLowerCase().startsWith("urn:oid:"))
-			retVal = value.substring(8, value.length());
+			retVal = value.replace("urn:oid:", "");
 		else {
 			retVal = value;
 		}

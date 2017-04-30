@@ -316,8 +316,8 @@ public class Address {
 	}
 
 	private void setCityAndZip(String zip, String city, AddressUse usage) {
-		setCity(city);
 		setZip(zip);
+		setCity(city);
 		setUsage(usage);
 	}
 

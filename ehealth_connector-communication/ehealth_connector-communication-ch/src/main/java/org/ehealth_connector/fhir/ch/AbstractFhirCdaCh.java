@@ -60,6 +60,7 @@ import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.Confidentiality;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.ehealth_connector.common.enums.Ucum;
 import org.ehealth_connector.common.utils.DateUtil;
@@ -112,8 +113,8 @@ public abstract class AbstractFhirCdaCh {
 	 * <div class="en">uniform resource name (urn) of this OID</div>
 	 * <div class="de"></div><div class="fr"></div>
 	 */
-	public static final String OID_CONFIDENTIALITY_CODE = "urn:oid:"
-			+ CodeSystems.ConfidentialityCode.getCodeSystemId();
+	public static final String OID_CONFIDENTIALITY_CODE = FhirCommon
+			.addUrnOid(CodeSystems.ConfidentialityCode.getCodeSystemId());
 
 	protected final FhirContext fhirCtx = new FhirContext(FhirVersionEnum.DSTU3);
 
@@ -130,7 +131,8 @@ public abstract class AbstractFhirCdaCh {
 		fhirObservation.setStatus(ObservationStatus.UNKNOWN);
 
 		final CodeableConcept fhirCode = new CodeableConcept();
-		fhirCode.addCoding().setSystem("urn:oid:2.16.840.1.113883.6.1").setCode("48767-8");
+		fhirCode.addCoding().setSystem(FhirCommon.addUrnOid("2.16.840.1.113883.6.1"))
+				.setCode("48767-8");
 		fhirObservation.setCode(fhirCode);
 		fhirObservation.setComment(comment);
 
@@ -292,7 +294,7 @@ public abstract class AbstractFhirCdaCh {
 
 		// Add Problem Entry Identifiers
 		for (final Identifier id : fhirCondition.getIdentifier()) {
-			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
+			final String codeSystem = FhirCommon.removeUrnOidPrefix(id.getSystem());
 			retVal.addId(new Identificator(codeSystem, id.getValue()));
 		}
 
@@ -303,7 +305,7 @@ public abstract class AbstractFhirCdaCh {
 		retVal.setStartDate(fhirCondition.getAssertedDate());
 
 		// Value
-		retVal.addValue(new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
+		retVal.addValue(new Code(FhirCommon.removeUrnOidPrefix(fhirCode.getSystem()),
 				fhirCode.getCode(), fhirCode.getDisplay()));
 
 		return retVal;
@@ -463,7 +465,7 @@ public abstract class AbstractFhirCdaCh {
 							.getExtensionsByUrl(FhirCommon.urnUseAsCodedVitalSignList);
 					if (!extensions.isEmpty()) {
 						final Identifier id = list.getIdentifier().get(0);
-						id.setSystem(id.getSystem().replace("urn:oid:", ""));
+						id.setSystem(FhirCommon.removeUrnOidPrefix(id.getSystem()));
 						final TimeType timeStamp = ((TimeType) extensions.get(0).getValue());
 						retVal.setEffectiveTime(
 								DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
@@ -533,7 +535,7 @@ public abstract class AbstractFhirCdaCh {
 									final Type fhirValue = component.getValue();
 
 									final Code code = new Code(
-											FhirCommon.removeURIPrefix(fhirCode.getSystem()),
+											FhirCommon.removeUrnOidPrefix(fhirCode.getSystem()),
 											fhirCode.getCode(), fhirCode.getDisplay());
 									if (fhirValue instanceof Quantity) {
 										// type PQ
@@ -879,7 +881,7 @@ public abstract class AbstractFhirCdaCh {
 							if (!fhirObs.getIdentifier().isEmpty()) {
 								Identifier idTemp = fhirObs.getIdentifier().get(0);
 								final String codeSystem = FhirCommon
-										.removeURIPrefix(idTemp.getSystem());
+										.removeUrnOidPrefix(idTemp.getSystem());
 								idWeek = new Identificator(codeSystem, idTemp.getValue());
 							}
 						}
@@ -888,7 +890,7 @@ public abstract class AbstractFhirCdaCh {
 							if (!fhirObs.getIdentifier().isEmpty()) {
 								Identifier idTemp = fhirObs.getIdentifier().get(0);
 								final String codeSystem = FhirCommon
-										.removeURIPrefix(idTemp.getSystem());
+										.removeUrnOidPrefix(idTemp.getSystem());
 								idDay = new Identificator(codeSystem, idTemp.getValue());
 							}
 						}
@@ -1242,8 +1244,9 @@ public abstract class AbstractFhirCdaCh {
 		{
 			final Coding fhirValueCode = ((CodeableConcept) fhirObservation.getValue())
 					.getCodingFirstRep();
-			retVal.addValue(new Code(new Code(FhirCommon.removeURIPrefix(fhirValueCode.getSystem()),
-					fhirValueCode.getCode(), fhirValueCode.getDisplay())));
+			retVal.addValue(
+					new Code(new Code(FhirCommon.removeUrnOidPrefix(fhirValueCode.getSystem()),
+							fhirValueCode.getCode(), fhirValueCode.getDisplay())));
 		}
 		if (fhirObservation.getValue() instanceof Ratio) {
 			// type RTO not yet implemented
@@ -1268,14 +1271,24 @@ public abstract class AbstractFhirCdaCh {
 			}
 
 			rr.setValue(v);
+
 			// Interpretation;
-			// TODO tsc
-			// ObservationInterpretation obsInt =
-			// ObservationInterpretation.getEnum(fhirObservation
-			// .getReferenceRangeFirstRep().getMeaning().getCodingFirstRep().getCode());
-			// if (obsInt != null) {
-			// rr.setInterpretationCode(obsInt);
-			// }
+			ObservationInterpretation obsInt = null;
+			if (fhirObservation.getReferenceRangeFirstRep().getAppliesTo() != null) {
+				if (fhirObservation.getReferenceRangeFirstRep().getAppliesTo().size() > 0) {
+					if (fhirObservation.getReferenceRangeFirstRep().getAppliesTo().get(0) != null) {
+						if (fhirObservation.getReferenceRangeFirstRep().getAppliesTo().get(0)
+								.getCodingFirstRep() != null) {
+							String code = fhirObservation.getReferenceRangeFirstRep().getAppliesTo()
+									.get(0).getCodingFirstRep().getCode();
+							obsInt = ObservationInterpretation.getEnum(code);
+						}
+					}
+				}
+			}
+			if (obsInt != null) {
+				rr.setInterpretationCode(obsInt);
+			}
 			retVal.setReferenceRange(rr);
 		}
 
@@ -1284,11 +1297,8 @@ public abstract class AbstractFhirCdaCh {
 		if (fhirInterpretationCode != null) {
 			if (fhirInterpretationCode.getSystem() != null) {
 				retVal.addInterpretationCode(new Code(
-						FhirCommon.removeURIPrefix(fhirInterpretationCode.getSystem()),
+						FhirCommon.removeUrnOidPrefix(fhirInterpretationCode.getSystem()),
 						fhirInterpretationCode.getCode(), fhirInterpretationCode.getDisplay()));
-			} else {
-				retVal.addInterpretationCode(
-						new Code(org.ehealth_connector.common.enums.NullFlavor.UNKNOWN));
 			}
 		}
 		// Text reference (inside the observation)
@@ -1633,7 +1643,7 @@ public abstract class AbstractFhirCdaCh {
 							if (!fhirObs.getIdentifier().isEmpty()) {
 								Identifier idTemp = fhirObs.getIdentifier().get(0);
 								final String codeSystem = FhirCommon
-										.removeURIPrefix(idTemp.getSystem());
+										.removeUrnOidPrefix(idTemp.getSystem());
 								id = new Identificator(codeSystem, idTemp.getValue());
 							}
 						}
@@ -1686,7 +1696,7 @@ public abstract class AbstractFhirCdaCh {
 
 		// Add Problem Entry Identifiers
 		for (final Identifier id : fhirCondition.getIdentifier()) {
-			final String codeSystem = FhirCommon.removeURIPrefix(id.getSystem());
+			final String codeSystem = FhirCommon.removeUrnOidPrefix(id.getSystem());
 			retVal.setId(new Identificator(codeSystem, id.getValue()));
 		}
 
@@ -1697,7 +1707,7 @@ public abstract class AbstractFhirCdaCh {
 		retVal.setStartDate(fhirCondition.getAssertedDate());
 
 		// Value
-		retVal.addValue(new Code(FhirCommon.removeURIPrefix(fhirCode.getSystem()),
+		retVal.addValue(new Code(FhirCommon.removeUrnOidPrefix(fhirCode.getSystem()),
 				fhirCode.getCode(), fhirCode.getDisplay()));
 
 		return retVal;
@@ -1883,7 +1893,7 @@ public abstract class AbstractFhirCdaCh {
 
 	/**
 	 * Gets a Vital Sign Observation
-	 * 
+	 *
 	 * @param fhirObs
 	 *            the FHIR resource
 	 * @return the Vital Sign Observation

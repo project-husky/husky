@@ -126,20 +126,6 @@ public class LaboratoryObservation extends
 		super(mdht);
 	}
 
-	// /**
-	// * Instantiates a new laboratory observation.
-	// *
-	// * @param labObs
-	// * <br>
-	// * <div class="de"> lab obs</div> <div class="fr"> lab obs</div>
-	// * <div class="it"> lab obs</div>
-	// */
-	// public
-	// LaboratoryObservation(org.openhealthtools.mdht.uml.cda.ch.LaboratoryObservation
-	// labObs) {
-	// mLaboratoryObservation = labObs;
-	// }
-
 	/**
 	 * Add a comment entry.
 	 *

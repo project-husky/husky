@@ -26,6 +26,7 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
+import org.ehealth_connector.fhir.FhirCommon;
 import org.ehealth_connector.fhir.FhirPatient;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.Before;
@@ -100,18 +101,19 @@ public class V3PixPdqAdapterTest {
 		assertEquals("Some City", james.getAddressFirstRep().getCity());
 		assertEquals("IL", james.getAddressFirstRep().getState());
 
-		assertEquals("urn:oid:1.2.840.114350.1.13.99998.8734",
+		assertEquals(FhirCommon.addUrnOid("1.2.840.114350.1.13.99998.8734"),
 				james.getIdentifierFirstRep().getSystem());
 		assertEquals("34827K410", james.getIdentifierFirstRep().getValue());
-		assertEquals("urn:oid:1.2.840.114350.1.13.99997.2.3412",
+		assertEquals(FhirCommon.addUrnOid("1.2.840.114350.1.13.99997.2.3412"),
 				james.getIdentifier().get(1).getSystem());
 		assertEquals("38273D433", james.getIdentifier().get(1).getValue());
-		assertEquals("urn:oid:2.16.840.1.113883.4.1", james.getIdentifier().get(2).getSystem());
+		assertEquals(FhirCommon.addUrnOid("2.16.840.1.113883.4.1"),
+				james.getIdentifier().get(2).getSystem());
 		assertEquals("999-88-6345", james.getIdentifier().get(2).getValue());
 
 		assertNotNull(james.getManagingOrganization().getResource());
 		Organization organization = (Organization) james.getManagingOrganization().getResource();
-		assertEquals("urn:oid:1.2.840.114350.1.13.99998.8734",
+		assertEquals(FhirCommon.addUrnOid("1.2.840.114350.1.13.99998.8734"),
 				organization.getIdentifier().get(0).getValue());
 		assertEquals("Good Health Clinic", organization.getName());
 		assertEquals("+1-342-555-8394", organization.getTelecomFirstRep().getValue());
@@ -128,12 +130,12 @@ public class V3PixPdqAdapterTest {
 		assertEquals("IL", jim.getAddressFirstRep().getState());
 
 		organization = (Organization) jim.getManagingOrganization().getResource();
-		assertEquals("urn:oid:1.2.840.114350.1.13.99998.8734",
+		assertEquals(FhirCommon.addUrnOid("1.2.840.114350.1.13.99998.8734"),
 				organization.getIdentifier().get(0).getValue());
 		assertEquals("Good Health Clinic", organization.getName());
 		assertEquals("+1-342-555-8394", organization.getTelecomFirstRep().getValue());
 
-		assertEquals("urn:oid:1.2.840.114350.1.13.99998.8734",
+		assertEquals(FhirCommon.addUrnOid("1.2.840.114350.1.13.99998.8734"),
 				jim.getIdentifierFirstRep().getSystem());
 		assertEquals("34827R534", jim.getIdentifierFirstRep().getValue());
 	}

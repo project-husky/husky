@@ -22,6 +22,7 @@ import static org.junit.Assert.assertTrue;
 import java.net.URI;
 
 import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.fhir.FhirCommon;
 import org.ehealth_connector.fhir.FhirPatient;
 import org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender;
 import org.hl7.fhir.dstu3.model.HumanName;
@@ -75,7 +76,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 		final Organization org = new Organization();
 		final Identifier identifier = new Identifier();
 		identifier.setValue("OHT");
-		identifier.setSystem("urn:oid:" + homeCommunityOid);
+		identifier.setSystem(FhirCommon.addUrnOid(homeCommunityOid));
 		org.getIdentifier().add(identifier);
 		return org;
 	}
@@ -109,7 +110,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 				.addLine("1 PINETREE").setPostalCode("63119").setCity("WEBSTER").setState("MO");
 		final Identifier identifier = new Identifier();
 		identifier.setValue("PIX");
-		identifier.setSystem("urn:oid:" + homeCommunityOid);
+		identifier.setSystem(FhirCommon.addUrnOid(homeCommunityOid));
 		patient.getIdentifier().add(identifier);
 		patient.setBirthDate(DateUtil.date("19380224"));
 		patient.getAddress().add(address);
@@ -213,7 +214,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 				.addLine("100 JORIE BLVD").setPostalCode("60523").setCity("CHICAGO").setState("IL");
 		final Identifier identifier = new Identifier();
 		identifier.setValue("PIXL");
-		identifier.setSystem("urn:oid:" + homeCommunityOid);
+		identifier.setSystem(FhirCommon.addUrnOid(homeCommunityOid));
 		patient.getIdentifier().add(identifier);
 		patient.setBirthDate(DateUtil.date("19771208"));
 		patient.getAddress().add(address);
@@ -311,7 +312,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 				.setState("NY");
 		final Identifier identifier = new Identifier();
 		identifier.setValue("PIX");
-		identifier.setSystem("urn:oid:" + homeCommunityOid);
+		identifier.setSystem(FhirCommon.addUrnOid(homeCommunityOid));
 		patient.getIdentifier().add(identifier);
 		patient.setBirthDate(DateUtil.date("19780510"));
 		patient.getAddress().add(address);
@@ -405,7 +406,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 		final FhirPatient patient = new FhirPatient();
 		final Identifier identifier = new Identifier();
 		identifier.setValue("PIXL1");
-		identifier.setSystem("urn:oid:" + homeCommunityOid);
+		identifier.setSystem(FhirCommon.addUrnOid(homeCommunityOid));
 		patient.getIdentifier().add(identifier);
 
 		final FhirContext ctx = new FhirContext(FhirVersionEnum.DSTU3);
@@ -511,7 +512,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 		final FhirPatient patient = new FhirPatient();
 		final Identifier identifier = new Identifier();
 		identifier.setValue("PIXL1");
-		identifier.setSystem("urn:oid:" + homeCommunityOid);
+		identifier.setSystem(FhirCommon.addUrnOid(homeCommunityOid));
 		patient.getIdentifier().add(identifier);
 
 		final FhirContext ctx = new FhirContext(FhirVersionEnum.DSTU3);
