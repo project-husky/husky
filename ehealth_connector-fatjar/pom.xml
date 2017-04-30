@@ -7,7 +7,7 @@
 	<parent>
 		<groupId>org.ehealth_connector</groupId>
 		<artifactId>ehealth_connector-main</artifactId>
-		<version>1.4-SNAPSHOT</version>
+		<version>1.4.0-201704</version>
 	</parent>
 
 	<modules>
