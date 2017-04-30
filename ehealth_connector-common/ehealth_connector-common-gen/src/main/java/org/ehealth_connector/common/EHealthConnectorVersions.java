@@ -50,10 +50,10 @@ public enum EHealthConnectorVersions {
 	/**
 	 * OID: 2.16.756.5.30.1.139.1.1.6 eHealthConnector R201611
 	 */
-	EHealthConnectorR201611("2.16.756.5.30.1.139.1.1.6", "eHealthConnector R201611", "R201611xx");
+	EHealthConnectorR201704("2.16.756.5.30.1.139.1.1.6", "eHealthConnector R201704", "R20170430");
 
 	public static EHealthConnectorVersions getCurrentVersion() {
-		return EHealthConnectorDev;
+		return EHealthConnectorR201704;
 	}
 
 	private String oid;
