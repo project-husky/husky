@@ -28,6 +28,8 @@ import java.util.Map;
 import org.ehealth_connector.common.utils.FileUtil;
 import org.ehealth_connector.validation.service.config.bind.ApplicationType;
 import org.ehealth_connector.validation.service.config.bind.ConfigurationType;
+import org.ehealth_connector.validation.service.config.bind.InsufficientMemoryReaction;
+import org.ehealth_connector.validation.service.config.bind.MaxWaitReaction;
 import org.ehealth_connector.validation.service.config.bind.RuleSetType;
 import org.ehealth_connector.validation.service.config.bind.SchematronType;
 import org.ehealth_connector.validation.service.schematron.RuleSet;
@@ -45,14 +47,14 @@ public class Configuration {
 	/** The underlying unmarshalled configuration element. */
 	private ConfigurationType configuration;
 
-	/** Map object with current RuleSets */
+	/** Map object with current RuleSets. */
 	private final Map<String, RuleSet> ruleSetMap = new LinkedHashMap<String, RuleSet>();
 
-	/** Map object with current RuleSets */
+	/** Map object with current RuleSets. */
 	private final Map<String, RuleSet> ruleSetOidMap = new HashMap<String, RuleSet>();
 
 	/**
-	 * Default constructor
+	 * Default constructor.
 	 */
 	public Configuration() {
 		configuration = null;
@@ -65,6 +67,8 @@ public class Configuration {
 	 * @param configuration
 	 *            the underlying <tt>ConfigurationType</tt> instance, this
 	 *            configuration should be based on.
+	 * @throws ConfigurationException
+	 *             the configuration exception
 	 * @throws NullPointerException
 	 *             if the specified configuration is <tt>null</tt>.
 	 */
@@ -97,6 +101,9 @@ public class Configuration {
 
 	/**
 	 * Creates the RuleSetMaps.
+	 *
+	 * @param ruleSetList
+	 *            the rule set list
 	 */
 	private void createRuleSetMaps(List<RuleSet> ruleSetList) {
 		ruleSetMap.clear();
@@ -116,16 +123,29 @@ public class Configuration {
 	}
 
 	/**
-	 * Gets the BaseDir. This is a read-only system property containing the
-	 * Catalina Base Dir and only used by Online CDA Validators.
+	 * Gets the BaseDir. If it is not set in the configuration, then the
+	 * read-only system property containing the Catalina Base Dir will be
+	 * returned.$ This is only used by Online CDA Validators.
 	 *
 	 * @return the BaseDir.
 	 */
 	public File getBaseDir() {
+
+		File retVal = null;
+
 		if (configuration == null)
 			configuration = new ConfigurationType();
 
-		return configuration.getBaseDir();
+		String baseDir = configuration.getBaseDir();
+
+		if (baseDir == null) {
+			String catalinaBase = System.getProperty("catalina.base");
+			if (catalinaBase != null)
+				baseDir = new File(catalinaBase).getAbsolutePath();
+		}
+		if (baseDir != null)
+			retVal = new File(baseDir).getAbsoluteFile();
+		return retVal;
 	}
 
 	/**
@@ -173,11 +193,8 @@ public class Configuration {
 	 * @return the ConfigurationDir.
 	 */
 	public File getConfigurationDir() {
-
-		if (configuration == null)
-			configuration = new ConfigurationType();
-
-		return configuration.getConfigurationDir();
+		String configDir = System.getProperty("configuration.dir");
+		return new File(configDir).getAbsoluteFile();
 	}
 
 	/**
@@ -196,6 +213,30 @@ public class Configuration {
 	}
 
 	/**
+	 * Gets the configured Insufficient Memory Reaction. Default value, if not
+	 * configured: THROW_EXCEPTION On .Net use THROW_EXCEPTION
+	 *
+	 * @return the configured Insufficient Memory Reaction
+	 */
+	public InsufficientMemoryReaction getInsufficientMemoryReaction() {
+		InsufficientMemoryReaction retVal = null;
+
+		if (configuration == null)
+			configuration = new ConfigurationType();
+		if (configuration.getApplication() == null)
+			configuration.setApplication(new ApplicationType());
+
+		retVal = configuration.getApplication().getInsufficientMemoryReaction();
+
+		if (retVal == null) {
+			// default value
+			retVal = InsufficientMemoryReaction.THROW_EXCEPTION;
+		}
+
+		return retVal;
+	}
+
+	/**
 	 * Gets the LicenseKey for the external PDF-Tools PdfValidator engine.
 	 *
 	 * @return the the LicenseKey for the external PDF-Tools PdfValidator
@@ -208,6 +249,50 @@ public class Configuration {
 			configuration.setApplication(new ApplicationType());
 
 		return configuration.getApplication().getLicenseKey();
+	}
+
+	/**
+	 * Gets the configured Minimal Required Memory. Default value, if not
+	 * configured: 20m
+	 *
+	 * @return the Minimal Required Memory
+	 * @throws ConfigurationException
+	 */
+	public long getMinimalRequiredMemory() throws ConfigurationException {
+		long retVal = -1;
+		if (configuration == null)
+			configuration = new ConfigurationType();
+		if (configuration.getApplication() == null)
+			configuration.setApplication(new ApplicationType());
+
+		String minimalMemory = configuration.getApplication().getMinimalMemorySch();
+		if (minimalMemory == null) {
+			// default value
+			minimalMemory = "20m";
+		}
+		String tempValue = minimalMemory;
+		long factor = 1;
+
+		if (minimalMemory.toLowerCase().endsWith("k")) {
+			tempValue = tempValue.substring(0, minimalMemory.length() - 1);
+			factor = 1024;
+		} else if (minimalMemory.toLowerCase().endsWith("m")) {
+			tempValue = tempValue.substring(0, minimalMemory.length() - 1);
+			factor = 1024 * 1024;
+
+		} else if (minimalMemory.toLowerCase().endsWith("g")) {
+			tempValue = tempValue.substring(0, minimalMemory.length() - 1);
+			factor = 1024 * 1024 * 1024;
+		}
+
+		try {
+			retVal = Long.parseLong(tempValue) * factor;
+		} catch (NumberFormatException e) {
+			throw new ConfigurationException(
+					"minimal-memory-sch contains an invalid value: " + minimalMemory);
+		}
+
+		return retVal;
 	}
 
 	/**
@@ -278,6 +363,8 @@ public class Configuration {
 	 *
 	 * @return the base directory containing the <cite>Schematron</cite>
 	 *         rule-sets.
+	 * @throws ConfigurationException
+	 *             the configuration exception
 	 */
 	public File getRuleSetsDir() throws ConfigurationException {
 		File retVal = null;
@@ -322,7 +409,75 @@ public class Configuration {
 		if (configuration.getApplication() == null)
 			configuration.setApplication(new ApplicationType());
 
-		return configuration.getApplication().getTheme();
+		return configuration.getApplication().getJqueryTheme();
+	}
+
+	/**
+	 * Gets the maximum amount of seconds to wait in case of insufficient
+	 * memory. Default value, if not configured: 30
+	 *
+	 * @return the timeout value in seconds
+	 */
+	public int getTimeoutMax() {
+		Integer retVal = null;
+		if (configuration == null)
+			configuration = new ConfigurationType();
+		if (configuration.getApplication() == null)
+			configuration.setApplication(new ApplicationType());
+
+		retVal = configuration.getApplication().getTimeoutMaxS();
+		if (retVal == null) {
+			// default value
+			retVal = 30;
+		}
+
+		return retVal;
+	}
+
+	/**
+	 * Gets the timeout reaction. Default value, if not configured:
+	 * returnValidationError
+	 *
+	 * @return the timeout reaction
+	 */
+	public MaxWaitReaction getTimeoutReaction() {
+		MaxWaitReaction retVal = null;
+
+		if (configuration == null)
+			configuration = new ConfigurationType();
+		if (configuration.getApplication() == null)
+			configuration.setApplication(new ApplicationType());
+
+		retVal = configuration.getApplication().getTimeoutReaction();
+
+		if (retVal == null) {
+			// default value
+			retVal = MaxWaitReaction.RETURN_VALIDATION_ERROR;
+		}
+
+		return retVal;
+	}
+
+	/**
+	 * Gets the amount of milliseconds to sleep in case of insufficient memory.
+	 * Default value, if not configured: 500
+	 *
+	 * @return the timeout value in milliseconds
+	 */
+	public Integer getTimeoutSleep() {
+		Integer retVal = null;
+		if (configuration == null)
+			configuration = new ConfigurationType();
+		if (configuration.getApplication() == null)
+			configuration.setApplication(new ApplicationType());
+
+		retVal = configuration.getApplication().getTimeoutSleepMs();
+		if (retVal == null) {
+			// default value
+			retVal = 500;
+		}
+
+		return retVal;
 	}
 
 	/**
@@ -332,10 +487,7 @@ public class Configuration {
 	 * @return the directory where java was run from, where you started the JVM.
 	 */
 	public File getUserDir() {
-		if (configuration == null)
-			configuration = new ConfigurationType();
-
-		return configuration.getUserDir();
+		return new File(System.getProperty("user.dir")).getAbsoluteFile();
 	}
 
 	/**
@@ -348,12 +500,7 @@ public class Configuration {
 		if (configuration == null)
 			configuration = new ConfigurationType();
 
-		try {
-			return configuration.getWorkDir();
-		} catch (final ConfigurationException e) {
-			log.error("<<< Configuration failed: " + e.getCause());
-			return configuration.getBaseDir();
-		}
+		return new File(configuration.getWorkDir());
 	}
 
 	/**
@@ -486,7 +633,7 @@ public class Configuration {
 	 *            the WorkDir
 	 */
 	public void setWorkDir(File workDir) {
-		configuration.setWorkDir(workDir);
+		configuration.setWorkDir(workDir.getAbsolutePath());
 	}
 
 	/**

@@ -64,7 +64,14 @@
 		</xsd:attribute>
 	</xsd:complexType>
 
+	<!-- =================================================================== -->
+	<!-- The application configuration                                       -->
+	<!-- =================================================================== -->
 	<xsd:complexType name="ApplicationType">
+
+        <!-- =============================================================== -->
+		<!-- Application configuration for Online CDA Validator              -->
+        <!-- =============================================================== -->
 		<xsd:sequence>
 			<xsd:element name="downloads-url" type="xsd:string" minOccurs="0">
 				<xsd:annotation>
@@ -84,6 +91,10 @@
 					</xsd:documentation>
 				</xsd:annotation>
 			</xsd:element>
+
+	        <!-- =========================================================== -->
+			<!-- Application configuration for XML Schema Validation         -->
+	        <!-- =========================================================== -->
 			<xsd:element name="document-schema" type="xsd:string" minOccurs="0">
 				<xsd:annotation>
 					<xsd:documentation>
@@ -91,6 +102,10 @@
 					</xsd:documentation>
 				</xsd:annotation>
 			</xsd:element>
+
+	        <!-- =========================================================== -->
+			<!-- Application configuration for PDF Validation                -->
+	        <!-- =========================================================== -->
 			<xsd:element name="pdf-level" type="xsd:string" minOccurs="0">
 				<xsd:annotation>
 					<xsd:documentation>
@@ -124,6 +139,65 @@
 					</xsd:documentation>
 				</xsd:annotation>
 			</xsd:element>
+
+	        <!-- =========================================================== -->
+			<!-- Application configuration for Validation execution          -->
+	        <!-- =========================================================== -->
+			<xsd:element name="minimal-memory-sch" type="xsd:string" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						The initial Java heap size required for a Schematron validation.
+						
+						Supported format: nnn[suffix]
+						- nnn = amount
+						- suffix: k for kilobytes, m for megabytes, g for gigabytes
+						
+						Examples:
+						1073741824 = 1048576 = 1024 Bytes
+						1g = 1k = 1024 Bytes 
+						
+						Minimum recommendation for ELGA (ART-DECOR Schematron):
+						- Configuration minimal-memory-sch: 200m
+						- Java VM args: -Xmx800m -Xms800m for 4 Threads 
+						 
+						Minimum recommendation for CDA-CH (handwritten Schematron):
+						- Configuration minimal-memory-sch: 20m
+						- Java VM args: -Xmx65m -Xms65m for 4 Threads 
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="insufficient-memory-reaction" type="InsufficientMemoryReaction" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						The desired behavior in case of insufficient memory on the machine.
+						On .NET use: throwException  
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="timeout-sleep-ms" type="xsd:int" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						The amount of milliseconds to sleep in case of insufficient memory 
+						This is only applied when insufficient-memory-reaction=sleep 
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="timeout-max-s" type="xsd:int" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						The maximum amount of seconds to wait in case of insufficient memory 
+						This is only applied when insufficient-memory-reaction=sleep 
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="timeout-reaction" type="MaxWaitReaction" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>
+						The desired behavior in case when not enough memory was available during the maximum time specified 
+					</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+
 		</xsd:sequence>
 	</xsd:complexType>
 
@@ -219,5 +293,23 @@
 			</xsd:annotation>
 		</xsd:attribute>
 	</xsd:complexType>
+
+	<!-- =================================================================== -->
+	<!-- Enumerations used in this XML configuration file.                   -->
+	<!-- =================================================================== -->
+	<xsd:simpleType name="InsufficientMemoryReaction" final="restriction" >
+	    <xsd:restriction base="xsd:string">
+	        <xsd:enumeration value="throwException" />
+	        <xsd:enumeration value="returnValidationError" />
+	        <xsd:enumeration value="sleep" />
+	    </xsd:restriction>
+	</xsd:simpleType>
+
+	<xsd:simpleType name="MaxWaitReaction" final="restriction" >
+	    <xsd:restriction base="xsd:string">
+	        <xsd:enumeration value="throwException" />
+	        <xsd:enumeration value="returnValidationError" />
+	    </xsd:restriction>
+	</xsd:simpleType>
 
 </xsd:schema>

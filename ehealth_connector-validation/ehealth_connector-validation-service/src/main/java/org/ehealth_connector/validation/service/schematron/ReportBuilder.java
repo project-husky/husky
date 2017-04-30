@@ -318,76 +318,87 @@ public class ReportBuilder {
 	public byte[] createSvrlReport(RuleSet ruleSet, File workDir, StreamSource in, OutputStream out,
 			Properties parameters) throws TransformationException, InterruptedException {
 
-		final XsltExecutable styleSheet = getValidator(ruleSet, workDir);
-		final Transformation t1 = new Transformation(styleSheet);
-		t1.setURIResolver(new StylesheetURIResolver(ruleSet.getPath().getParentFile()));
-		XdmDestination destination = new XdmDestination();
-		t1.transform(in, destination);
-
-		// for debugging only - comment these lines for productive releases
-		// OutputStream outputStream1 = null;
-		// try {
-		// outputStream1 = new FileOutputStream("/temp/svrl_raw_out.xml");
-		// Serializer serializer = new Serializer();
-		// serializer.setOutputStream(outputStream1);
-		// getProcessor().writeXdmValue(destination.getXdmNode(), serializer);
-		// outputStream1.close();
-		// } catch (IOException | SaxonApiException e) {
-		// // do nothing
-		// e.printStackTrace();
-		// }
-		// end of debugging only
-
-		boolean destContainsXhtml = false;
-		final XPathCompiler xpathCompiler = getProcessor().newXPathCompiler();
-		xpathCompiler.declareNamespace("xhtml", "http://www.w3.org/1999/xhtml");
-
-		final String expression = "//xhtml:p";
-		try {
-			final XdmItem item = xpathCompiler.evaluateSingle(expression, destination.getXdmNode());
-			destContainsXhtml = (item != null);
-		} catch (SaxonApiException e) {
-			// Do nothing
-		}
-
-		XdmNode returnNode = destination.getXdmNode();
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		if (destContainsXhtml) {
-			XdmDestination destination2 = new XdmDestination();
-			final Transformation t2 = new Transformation(factory.getStylesheet(SVRL_TO_XML, false));
-			t2.setURIResolver(this.resolver);
-			t2.setParameters(parameters);
-			t2.transform(destination.getXdmNode().asSource(), destination2);
-			returnNode = destination2.getXdmNode();
+		byte[] retVal = null;
+		final XsltExecutable styleSheet1 = getValidator(ruleSet, workDir);
+		if (styleSheet1 != null) {
+			final Transformation t1 = new Transformation(styleSheet1);
+			t1.setURIResolver(new StylesheetURIResolver(ruleSet.getPath().getParentFile()));
+			XdmDestination destination = new XdmDestination();
+			t1.transform(in, destination);
 
 			// for debugging only - comment these lines for productive releases
-			// OutputStream outputStream2 = null;
+			// OutputStream outputStream1 = null;
 			// try {
-			// outputStream2 = new FileOutputStream("/temp/svrl2xml_out.xml");
+			// outputStream1 = new FileOutputStream("/temp/svrl_raw_out.xml");
 			// Serializer serializer = new Serializer();
-			// serializer.setOutputStream(outputStream2);
-			// getProcessor().writeXdmValue(destination2.getXdmNode(),
+			// serializer.setOutputStream(outputStream1);
+			// getProcessor().writeXdmValue(destination.getXdmNode(),
 			// serializer);
-			// outputStream2.close();
+			// outputStream1.close();
 			// } catch (IOException | SaxonApiException e) {
 			// // do nothing
 			// e.printStackTrace();
 			// }
 			// end of debugging only
 
+			boolean destContainsXhtml = false;
+			final XPathCompiler xpathCompiler = getProcessor().newXPathCompiler();
+			xpathCompiler.declareNamespace("xhtml", "http://www.w3.org/1999/xhtml");
+
+			final String expression = "//xhtml:p";
+			try {
+				final XdmItem item = xpathCompiler.evaluateSingle(expression,
+						destination.getXdmNode());
+				destContainsXhtml = (item != null);
+			} catch (SaxonApiException e) {
+				// Do nothing
+			}
+
+			XdmNode returnNode = destination.getXdmNode();
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			if (destContainsXhtml) {
+				XdmDestination destination2 = new XdmDestination();
+				XsltExecutable styleSheet2 = factory.getStylesheet(SVRL_TO_XML, false);
+				if (styleSheet2 != null) {
+					final Transformation t2 = new Transformation(styleSheet2);
+					t2.setURIResolver(this.resolver);
+					t2.setParameters(parameters);
+					t2.transform(destination.getXdmNode().asSource(), destination2);
+					returnNode = destination2.getXdmNode();
+
+					// for debugging only - comment these lines for productive
+					// releases
+					// OutputStream outputStream2 = null;
+					// try {
+					// outputStream2 = new
+					// FileOutputStream("/temp/svrl2xml_out.xml");
+					// Serializer serializer = new Serializer();
+					// serializer.setOutputStream(outputStream2);
+					// getProcessor().writeXdmValue(destination2.getXdmNode(),
+					// serializer);
+					// outputStream2.close();
+					// } catch (IOException | SaxonApiException e) {
+					// // do nothing
+					// e.printStackTrace();
+					// }
+					// end of debugging only
+				}
+
+			}
+
+			if (returnNode != null) {
+				Serializer serializer = new Serializer();
+				serializer.setOutputStream(baos);
+				try {
+					getProcessor().writeXdmValue(returnNode, serializer);
+					baos.close();
+				} catch (SaxonApiException | IOException e) {
+					// Do nothing
+				}
+			}
+			retVal = baos.toByteArray();
 		}
-
-		Serializer serializer = new Serializer();
-		serializer.setOutputStream(baos);
-		try {
-			getProcessor().writeXdmValue(returnNode, serializer);
-			baos.close();
-		} catch (SaxonApiException | IOException e) {
-			// Do nothing
-		}
-
-		return baos.toByteArray();
-
+		return retVal;
 	}
 
 	/**

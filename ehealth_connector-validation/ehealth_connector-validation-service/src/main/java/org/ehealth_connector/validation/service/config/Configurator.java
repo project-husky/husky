@@ -109,7 +109,7 @@ public class Configurator {
 
 		String homeDirName;
 		File homeDir;
-		if ((homeDirName = configurationType.getBaseDir().getAbsolutePath()) == null) {
+		if ((homeDirName = new File(configurationType.getBaseDir()).getAbsolutePath()) == null) {
 			homeDir = defaultDir;
 		} else if (!(homeDir = new File(homeDirName)).isAbsolute()) {
 			homeDir = new File(defaultDir, homeDirName);

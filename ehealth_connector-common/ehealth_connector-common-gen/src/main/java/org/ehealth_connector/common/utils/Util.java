@@ -22,7 +22,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -32,6 +35,9 @@ import java.util.Stack;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.log4j.xml.DOMConfigurator;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -76,8 +82,6 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Helper methods for the eHealth Connector and CDA
@@ -694,6 +698,34 @@ public class Util {
 	}
 
 	/**
+	 * Enables immediate logging. All appenders will flush at the end of each
+	 * write. Currently implemented for FileAppenders, only.
+	 *
+	 * @param logger
+	 *            the desired logger for which immediate logging shall be
+	 *            enabled.
+	 */
+	@SuppressWarnings("rawtypes")
+	public static void enableImmediateLogging(org.apache.log4j.Logger logger) {
+		Enumeration allAppenders = logger.getAllAppenders();
+		while (allAppenders.hasMoreElements()) {
+			Object nextElement = allAppenders.nextElement();
+			if (nextElement instanceof org.apache.log4j.FileAppender) {
+				org.apache.log4j.FileAppender fileAppender = (org.apache.log4j.FileAppender) nextElement;
+				fileAppender.setImmediateFlush(true);
+			}
+		}
+		allAppenders = logger.getParent().getAllAppenders();
+		while (allAppenders.hasMoreElements()) {
+			Object nextElement = allAppenders.nextElement();
+			if (nextElement instanceof org.apache.log4j.FileAppender) {
+				org.apache.log4j.FileAppender fileAppender = (org.apache.log4j.FileAppender) nextElement;
+				fileAppender.setImmediateFlush(true);
+			}
+		}
+	}
+
+	/**
 	 * <div class="en"> Extracts a file from embedded resources in the Jar as
 	 * temporary file on the local filesystem
 	 *
@@ -899,8 +931,7 @@ public class Util {
 		final String envVariable = "eHCTempPath";
 		String tempDirectoryPath = null;
 
-		/** The SLF4J logger instance. */
-		final Logger log = LoggerFactory.getLogger(Util.class);
+		final Logger log = LogManager.getLogger(Util.class);
 
 		try {
 			final String env = System.getenv(envVariable);
@@ -921,28 +952,6 @@ public class Util {
 		}
 		log.info("Temp folder: " + tempDirectoryPath);
 		return tempDirectoryPath;
-	}
-
-	/**
-	 * Extract text from an Ecore FeatureMap
-	 *
-	 * @param featureMap
-	 *            the featureMap
-	 * @return the text as String
-	 */
-	@SuppressWarnings("unused")
-	private static String getText(FeatureMap featureMap) {
-		final StringBuffer buffer = new StringBuffer("");
-		for (final FeatureMap.Entry entry : featureMap) {
-			if (FeatureMapUtil.isText(entry)) {
-				buffer.append(entry.getValue().toString());
-			} else {
-				if (entry.getEStructuralFeature() instanceof EReference) {
-					buffer.append("<" + entry.getEStructuralFeature().getName() + ">");
-				}
-			}
-		}
-		return buffer.toString().trim();
 	}
 
 	// /**
@@ -1007,6 +1016,28 @@ public class Util {
 	// }
 
 	/**
+	 * Extract text from an Ecore FeatureMap
+	 *
+	 * @param featureMap
+	 *            the featureMap
+	 * @return the text as String
+	 */
+	@SuppressWarnings("unused")
+	private static String getText(FeatureMap featureMap) {
+		final StringBuffer buffer = new StringBuffer("");
+		for (final FeatureMap.Entry entry : featureMap) {
+			if (FeatureMapUtil.isText(entry)) {
+				buffer.append(entry.getValue().toString());
+			} else {
+				if (entry.getEStructuralFeature() instanceof EReference) {
+					buffer.append("<" + entry.getEStructuralFeature().getName() + ">");
+				}
+			}
+		}
+		return buffer.toString().trim();
+	}
+
+	/**
 	 * <div class="en">Gets the website from an ArrayList of TEL.</div>
 	 * <div class="de">Liefert die Webseite aus einer ArrayList von TEL.</div>
 	 *
@@ -1032,6 +1063,27 @@ public class Util {
 		final II ii = DatatypesFactory.eINSTANCE.createII();
 		ii.setRoot(root);
 		return ii;
+	}
+
+	/**
+	 * Inits the logger.
+	 *
+	 * @param theClass
+	 *            the the class
+	 * @return the logger
+	 */
+	public static Logger initLogger(@SuppressWarnings("rawtypes") Class theClass) {
+		File logConfig = new File(
+				new File("").getAbsoluteFile().getAbsolutePath() + "/rsc/log4jConfigs/log4j.xml");
+		URL res;
+		try {
+			res = new URL("file:/" + logConfig.getAbsolutePath());
+			DOMConfigurator.configure(res);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return LogManager.getLogger(theClass);
 	}
 
 	/**
@@ -1154,6 +1206,24 @@ public class Util {
 			return Util.join(nameList, " ");
 		}
 		return names;
+	}
+
+	/**
+	 * Logs the available memory.
+	 *
+	 * @param theClass
+	 *            the the class Class to be used in the Log4J log
+	 * @param hint
+	 *            the hint hint to be added to the log message
+	 */
+	public static void logAvailableMemory(@SuppressWarnings("rawtypes") Class theClass,
+			String hint) {
+
+		final Logger log = LogManager.getLogger(theClass);
+		System.gc();
+		log.info(hint + ": freeMemory: "
+				+ Long.toString(Runtime.getRuntime().freeMemory() / (1024 * 1024)) + " MB");
+
 	}
 
 	/**
@@ -1280,5 +1350,4 @@ public class Util {
 		}
 		return sb;
 	}
-
 }

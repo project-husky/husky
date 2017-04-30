@@ -77,7 +77,7 @@ public class Exceptions {
 		} else if (t instanceof Error) {
 			throw (Error) t;
 		} else {
-			throw new IllegalStateException("Not unchecked", t);
+			throw new IllegalStateException("Unchecked exception", t);
 		}
 	}
 

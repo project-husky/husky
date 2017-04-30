@@ -26,10 +26,10 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.ehealth_connector.validation.service.transform.TransformationException;
 import org.ehealth_connector.validation.service.util.Exceptions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.XsltExecutable;
@@ -80,7 +80,7 @@ public class Validators {
 	private final RuleSetTransformer factory;
 
 	/** The SLF4J logger instance. */
-	private final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LogManager.getLogger(getClass());
 
 	/**
 	 * Creates a new <tt>Validators</tt> instance which relies on the specified
@@ -188,16 +188,30 @@ public class Validators {
 	 */
 	public XsltExecutable get(File in, File out, boolean cacheable)
 			throws TransformationException, InterruptedException {
-		final Future<XsltExecutable> f = load(in, out, cacheable);
 		try {
-			return f.get();
+			final Future<XsltExecutable> f = load(in, out, cacheable);
+			XsltExecutable executable = f.get();
+			return executable;
 		} catch (final InterruptedException e) {
 			cache.remove(in);
+			log.error("Failed to load compiled Schematron Validator stylesheet " + in.getName()
+					+ " - reason: " + e.getMessage());
 			throw e;
 		} catch (final ExecutionException e) {
 			if (e.getCause() instanceof TransformationException) {
+				log.error("Failed to load compiled Schematron Validator stylesheet " + in.getName()
+						+ " - reason: " + e.getMessage());
 				throw (TransformationException) e.getCause();
-			}
+			} else if (e.getCause() instanceof OutOfMemoryError) {
+				Long availableMemory = Runtime.getRuntime().freeMemory();
+				cache.remove(in);
+				log.error("Failed to load compiled Schematron Validator stylesheet " + in.getName()
+						+ " - reason: " + e.getMessage() + " (available: "
+						+ Long.toString(availableMemory / (1024 * 1024)) + "m)");
+				throw (OutOfMemoryError) e.getCause();
+			} else
+				log.error("Failed to load compiled Schematron Validator stylesheet " + in.getName()
+						+ " - reason: " + e.getMessage());
 			throw Exceptions.launderThrowable(e);
 		}
 	}

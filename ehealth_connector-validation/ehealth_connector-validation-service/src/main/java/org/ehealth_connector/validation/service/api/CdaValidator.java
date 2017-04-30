@@ -40,9 +40,12 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
+import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.validation.service.config.Configuration;
 import org.ehealth_connector.validation.service.config.ConfigurationException;
 import org.ehealth_connector.validation.service.config.Configurator;
+import org.ehealth_connector.validation.service.config.bind.InsufficientMemoryReaction;
+import org.ehealth_connector.validation.service.config.bind.MaxWaitReaction;
 import org.ehealth_connector.validation.service.pdf.PdfValidationResult;
 import org.ehealth_connector.validation.service.pdf.PdfValidationResultEntry;
 import org.ehealth_connector.validation.service.pdf.PdfValidationResultEntry.SEVERITY;
@@ -370,6 +373,11 @@ public class CdaValidator {
 		return this.configuration;
 	}
 
+	/**
+	 * Gets the pdf validator.
+	 *
+	 * @return the pdf validator
+	 */
 	public PdfValidator getPdfValidator() {
 		return pdfValidator;
 	}
@@ -547,23 +555,37 @@ public class CdaValidator {
 	 * @return ArrayList of PDF Validation results
 	 */
 	public PdfValidationResult validatePdf(StreamSource cdaStream) {
-
-		log.info("Start of PDF validation");
 		PdfValidationResult retVal = new PdfValidationResult();
-		if (pdfValidator != null) {
-			try {
-				pdfValidator.validateCda(cdaStream);
-			} catch (ConfigurationException | SaxonApiException | IOException e) {
-				PdfValidationResultEntry failure = new PdfValidationResultEntry();
-				failure.setErrMsg(e.getMessage(), SEVERITY.Error);
-				failure.setLineNumber("none");
-				retVal.add(failure);
-			}
-			retVal = pdfValidator.getPdfValidationResults();
-		} else
-			log.info("PDF Validator not initialized. PDF validation skipped!");
 
-		log.info("End of PDF validation");
+		String errorMsg = null;
+		if (this.configuration == null)
+			errorMsg = "No configuration available";
+		if (cdaStream == null)
+			errorMsg = "No CDA-Document provided for validation";
+
+		if (errorMsg == null) {
+			log.info("Start of PDF validation");
+			if (pdfValidator != null) {
+				try {
+					pdfValidator.validateCda(cdaStream);
+				} catch (ConfigurationException | SaxonApiException | IOException e) {
+					PdfValidationResultEntry failure = new PdfValidationResultEntry();
+					failure.setErrMsg(e.getMessage(), SEVERITY.Error);
+					failure.setLineNumber("none");
+					retVal.add(failure);
+				}
+				retVal = pdfValidator.getPdfValidationResults();
+			} else
+				log.info("PDF Validator not initialized. PDF validation skipped!");
+
+			log.info("End of PDF validation");
+		} else {
+			PdfValidationResultEntry failure = new PdfValidationResultEntry();
+			failure.setErrMsg(errorMsg, SEVERITY.Error);
+			failure.setLineNumber("none");
+			retVal.add(failure);
+		}
+
 		return retVal;
 	}
 
@@ -597,18 +619,177 @@ public class CdaValidator {
 	 * @return the Schematron validation results
 	 */
 	public SchematronValidationResult validateSch(StreamSource cdaStream) {
-		SchematronValidationResult schValRes = null;
-		try {
-			final SchematronOutput schOut = validateSchRaw(cdaStream);
-			schValRes = convertSchematronOutput(schOut);
 
-		} catch (SAXException | RuleSetDetectionException | TransformationException
-				| InterruptedException | ConfigurationException e) {
-			log.error("Schematron validation failed: " + e.getMessage());
+		// Run the Garbage Collector to get the most possible heap space free
+		System.gc();
+
+		SchematronValidationResult schValRes = null;
+
+		String errorMsg = null;
+		if (this.configuration == null)
+			errorMsg = "No configuration available";
+		if (cdaStream == null)
+			errorMsg = "No CDA-Document provided for validation";
+
+		// Initialize
+		long requiredMemory = -1;
+		long timeoutMaxMillis = -1;
+		long timeoutSleep = -1;
+		long timeoutMax = -1;
+		InsufficientMemoryReaction insufficientMemoryReaction = null;
+		MaxWaitReaction timeoutReaction = null;
+		if (errorMsg == null) {
+			try {
+				insufficientMemoryReaction = configuration.getInsufficientMemoryReaction();
+				requiredMemory = configuration.getMinimalRequiredMemory();
+				timeoutMax = configuration.getTimeoutMax();
+				timeoutMaxMillis = (timeoutMax * 1000);
+				timeoutSleep = configuration.getTimeoutSleep();
+				timeoutReaction = configuration.getTimeoutReaction();
+
+				log.debug("Schematron validation configuration - requiredMemory: "
+						+ Long.toString(requiredMemory / (1024 * 1024)) + "m");
+				log.debug("Schematron validation configuration - insufficientMemoryReaction: "
+						+ insufficientMemoryReaction);
+				log.debug("Schematron validation configuration - timeoutSleep: "
+						+ Long.toString(timeoutSleep) + "ms");
+				log.debug("Schematron validation configuration - timeoutMax: "
+						+ Long.toString(timeoutMax) + "s");
+				log.debug("Schematron validation configuration - timeoutReaction: "
+						+ timeoutReaction);
+
+			} catch (ConfigurationException e1) {
+				errorMsg = e1.getMessage();
+			}
+		}
+
+		if (errorMsg == null) {
+			boolean doValidate = false;
+
+			// Check minimum Java heap space
+			switch (insufficientMemoryReaction) {
+			case RETURN_VALIDATION_ERROR:
+				doValidate = (Runtime.getRuntime().freeMemory() >= requiredMemory);
+				if (!doValidate) {
+					errorMsg = "Insufficient memory (available: "
+							+ Long.toString(Runtime.getRuntime().freeMemory() / (1024 * 1024))
+							+ "m; configured minimum: "
+							+ Long.toString(requiredMemory / (1024 * 1024)) + "m)";
+					log.error(errorMsg);
+					schValRes = new SchematronValidationResult();
+					schValRes.setException(errorMsg);
+					schValRes.setSourceFile(null);
+				}
+				break;
+			case SLEEP:
+				boolean doAbort = false;
+				doValidate = (Runtime.getRuntime().freeMemory() >= requiredMemory);
+				long startTimeMillis = System.currentTimeMillis();
+				long endTimeMillis = startTimeMillis + timeoutMaxMillis;
+				if (!doValidate)
+					log.debug("Waiting for memory (currently available: "
+							+ Long.toString(Runtime.getRuntime().freeMemory() / (1024 * 1024))
+							+ "m; configured minimum: "
+							+ Long.toString(requiredMemory / (1024 * 1024)) + "m)");
+
+				while (!doValidate && !doAbort) {
+					try {
+						// Run the Garbage Collector to get the most possible
+						// heap space free
+						System.gc();
+						Thread.sleep(timeoutSleep);
+
+					} catch (InterruptedException e) {
+					}
+					doValidate = (Runtime.getRuntime().freeMemory() >= requiredMemory);
+					doAbort = (System.currentTimeMillis() > endTimeMillis);
+				}
+				if (doValidate)
+					log.debug("Waiting for memory was not worth it (currently available: "
+							+ Long.toString(Runtime.getRuntime().freeMemory() / (1024 * 1024))
+							+ "m; configured minimum: "
+							+ Long.toString(requiredMemory / (1024 * 1024)) + "m)");
+				else
+					log.debug("Waiting for memory was worth it (currently available: "
+							+ Long.toString(Runtime.getRuntime().freeMemory() / (1024 * 1024))
+							+ "m; configured minimum: "
+							+ Long.toString(requiredMemory / (1024 * 1024)) + "m)");
+				if (doAbort) {
+					errorMsg = "Insufficient memory (timeout reached after "
+							+ Long.toString(timeoutMax) + " seconds; currently available: "
+							+ Long.toString(Runtime.getRuntime().freeMemory() / (1024 * 1024))
+							+ "m; configured minimum: "
+							+ Long.toString(requiredMemory / (1024 * 1024)) + "m)";
+					switch (timeoutReaction) {
+					case RETURN_VALIDATION_ERROR:
+						log.error("Aborting validation - returning validation error: " + errorMsg);
+						schValRes = new SchematronValidationResult();
+						schValRes.setException(errorMsg);
+						schValRes.setSourceFile(null);
+						break;
+					case THROW_EXCEPTION:
+						log.error("Aborting validation - throwing OutOfMemoryError: " + errorMsg);
+						throw new OutOfMemoryError(errorMsg);
+					default:
+						schValRes = new SchematronValidationResult();
+						schValRes.setException("Invalid configuration value for TimeoutReaction ("
+								+ timeoutReaction + ")");
+						schValRes.setSourceFile(null);
+					}
+				}
+				break;
+			case THROW_EXCEPTION:
+				// default behavior.
+				// java.lang.OutOfMemoryError can be thrown by the underlying
+				// methods.
+				doValidate = true;
+				break;
+			default:
+				schValRes = new SchematronValidationResult();
+				schValRes
+						.setException("Invalid configuration value for InsufficientMemoryReaction ("
+								+ insufficientMemoryReaction + ")");
+				schValRes.setSourceFile(null);
+				break;
+			}
+
+			if (doValidate) {
+				Util.logAvailableMemory(getClass(), "Schematron validation (before)");
+				try {
+					final SchematronOutput schOut = validateSchRaw(cdaStream);
+					if (schOut != null)
+						schValRes = convertSchematronOutput(schOut);
+					else {
+						log.error("Schematron validation failed: validateSchRaw returned null");
+						schValRes = new SchematronValidationResult();
+						schValRes.setException(
+								"Schematron validation failed: validateSchRaw returned null");
+						schValRes.setSourceFile(null);
+					}
+
+				} catch (SAXException | RuleSetDetectionException | TransformationException
+						| InterruptedException | ConfigurationException | OutOfMemoryError e) {
+					log.error("Schematron validation failed: " + e.getMessage());
+					schValRes = new SchematronValidationResult();
+					schValRes.setException(e.getMessage());
+					schValRes.setSourceFile(null);
+				}
+				Util.logAvailableMemory(getClass(), "Schematron validation (after)");
+			} else {
+				log.error("Schematron validation not performed due to insufficient memory");
+			}
+
+		} else {
+			errorMsg = "Configuration error: " + errorMsg;
+			log.error(errorMsg);
 			schValRes = new SchematronValidationResult();
-			schValRes.setException(e.getMessage());
+			schValRes.setException(errorMsg);
 			schValRes.setSourceFile(null);
 		}
+
+		// Run the Garbage Collector to get the most possible heap space free
+		// for subsequent tasks
+		System.gc();
 
 		return schValRes;
 	}
@@ -648,6 +829,8 @@ public class CdaValidator {
 			throws SAXException, RuleSetDetectionException, TransformationException,
 			InterruptedException, ConfigurationException {
 
+		SchematronOutput retVal = null;
+
 		if (this.configuration == null)
 			throw new ConfigurationException("No configuration available");
 		if (cdaStream == null)
@@ -674,9 +857,11 @@ public class CdaValidator {
 
 		final byte[] svrlReport = reportBuilder.createSvrlReport(ruleSet,
 				configuration.getWorkDir(), cdaStream, out, null);
-		SchematronOutput retVal = createSchematronOutput(new ByteArrayInputStream(svrlReport));
-		retVal.setRuleSet(ruleSet);
-		retVal.setSourceFile(null);
+		if (svrlReport != null) {
+			retVal = createSchematronOutput(new ByteArrayInputStream(svrlReport));
+			retVal.setRuleSet(ruleSet);
+			retVal.setSourceFile(null);
+		}
 
 		return retVal;
 	}
@@ -714,12 +899,14 @@ public class CdaValidator {
 	 * @throws ConfigurationException
 	 */
 	public XsdValidationResult validateXsd(StreamSource cdaStream) {
+		final XsdValidationResult xsdValRes = new XsdValidationResult();
+
 		String errorMsg = null;
 		if (this.configuration == null)
 			errorMsg = "No configuration available";
 		if (cdaStream == null)
 			errorMsg = "No CDA-Document provided for validation";
-		final XsdValidationResult xsdValRes = new XsdValidationResult();
+
 		if (errorMsg == null) {
 			try {
 				final Schema schema = loadSchema(configuration.getCdaDocumentSchema());
@@ -737,5 +924,4 @@ public class CdaValidator {
 		}
 		return xsdValRes;
 	}
-
 }

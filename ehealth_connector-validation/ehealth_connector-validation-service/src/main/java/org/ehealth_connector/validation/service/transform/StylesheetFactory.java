@@ -27,6 +27,7 @@ import javax.xml.transform.Source;
 import javax.xml.transform.URIResolver;
 import javax.xml.transform.stream.StreamSource;
 
+import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.validation.service.util.Computable;
 import org.ehealth_connector.validation.service.util.Exceptions;
 import org.ehealth_connector.validation.service.util.JarUtils;
@@ -104,9 +105,18 @@ public class StylesheetFactory {
 			compiler.setURIResolver(resolver);
 		try {
 			log.info("Compiling stylesheet '{}'", sourceName);
-			return compiler.compile(source);
+			Util.logAvailableMemory(getClass(), "compiler.compile (before)");
+			// Run the Garbage Collector to get the most possible heap space
+			// free
+			System.gc();
+			// if problems with locking due to concurrent accesses from threads,
+			// use semaphore to avoid same source at the same time...
+			XsltExecutable executable = compiler.compile(source);
+			Util.logAvailableMemory(getClass(), "compiler.compile (after)");
+			return executable;
 		} catch (final SaxonApiException e) {
-			throw new TransformationException("Failed to compile stylesheet '{}'" + sourceName, e);
+			throw new TransformationException("Unable to prepare stylesheet '" + sourceName
+					+ "' - SaxonApiException: " + e.getMessage(), e);
 		}
 	}
 
@@ -153,11 +163,13 @@ public class StylesheetFactory {
 	public XsltExecutable getStylesheet(Source source, boolean useCache)
 			throws TransformationException {
 		try {
-			return (useCache ? cache : computable).compute(source);
+			Util.logAvailableMemory(getClass(), "Compile Schematron Validator stylesheet (before)");
+			XsltExecutable executable = (useCache ? cache : computable).compute(source);
+			Util.logAvailableMemory(getClass(), "Compile Schematron Validator stylesheet (before)");
+			return executable;
+		} catch (TransformationException e) {
+			throw e;
 		} catch (final Exception e) {
-			if (e.getCause() instanceof TransformationException) {
-				throw (TransformationException) e.getCause();
-			}
 			throw Exceptions.launderThrowable(e);
 		}
 	}
