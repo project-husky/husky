@@ -48,39 +48,6 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 public abstract class CdaChUtil extends CdaUtil {
 
 	/**
-	 * <div class="en">Loads a CdaChMtpsDis document from a given File.</div>
-	 * <div class="de">Lädt ein CdaChMtpsDis aus einer Datei.</div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @param filePath
-	 *            path to the XML file
-	 * @throws Exception
-	 *             the exception
-	 * @return the CdaChVacd Document
-	 */
-	public static CdaChMtpsDis loadDisFromFile(String filePath) throws Exception {
-		final InputStream inputstream = new FileInputStream(filePath);
-		return loadDisFromStream(inputstream);
-	}
-
-	/**
-	 * <div class="en">Loads a CdaChMtpsDis document from an input stream.</div>
-	 * <div class="de">Lädt ein CdaChMtpsDis aus einem inputstream.</div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @param inputStream
-	 *            the input stream
-	 * @return the CdaChMtpsDis Document
-	 * @throws Exception
-	 *             the exception
-	 */
-	public static CdaChMtpsDis loadDisFromStream(InputStream inputStream) throws Exception {
-		final CdaChLoader<CdaChMtpsDis> loader = new CdaChLoader<CdaChMtpsDis>();
-		return loader.loadFromStream(inputStream, CdaChMtpsDis.class,
-				org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis.class);
-	}
-
-	/**
 	 * <div class="en">Loads a CdaChEdesCtnn document from a given File.</div>
 	 * <div class="de">Lädt ein CdaChEdesCtnn aus einer Datei.</div>
 	 * <div class="fr"></div> <div class="it"></div>
