@@ -39,9 +39,11 @@ public class MedicationFrequencyContentModuleTest {
 	@Test
 	public void test10MorningEveningBeforeMeal() throws Exception {
 		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
-		final MedicationFrequencyContentModule frequency = new MedicationFrequencyContentModule(entry);
+		final MedicationFrequencyContentModule frequency = new MedicationFrequencyContentModule(
+				entry);
 		frequency.setMedicationFrequency(PosologyType.TIMING_EVENT, 0,
-				new TimingEvent[] { TimingEvent.BEFORE_BREAKFAST, TimingEvent.BEFORE_DINNER }, null, 3, null, null);
+				new TimingEvent[] { TimingEvent.BEFORE_BREAKFAST, TimingEvent.BEFORE_DINNER }, null,
+				3, null, null);
 		entry.getDocument();
 		final MedicationFrequency medicationFrequency = frequency.getMedicationFrequency();
 		assertEquals(PosologyType.TIMING_EVENT, medicationFrequency.getPosology());
@@ -55,7 +57,8 @@ public class MedicationFrequencyContentModuleTest {
 	@Test
 	public void test1NTimesPerDay() throws Exception {
 		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
-		final MedicationFrequencyContentModule frequency = new MedicationFrequencyContentModule(entry);
+		final MedicationFrequencyContentModule frequency = new MedicationFrequencyContentModule(
+				entry);
 		frequency.setMedicationFrequency(PosologyType.N_TIMES_A_DAY, 3, null, null, 0, null, null);
 		entry.getDocument();
 		final MedicationFrequency medicationFrequency = frequency.getMedicationFrequency();
@@ -69,9 +72,10 @@ public class MedicationFrequencyContentModuleTest {
 	@Test
 	public void test2NTimesPerDayDuringMeal() throws Exception {
 		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
-		final MedicationFrequencyContentModule frequency = new MedicationFrequencyContentModule(entry);
-		frequency.setMedicationFrequency(PosologyType.N_TIMES_A_DAY, 2, new TimingEvent[] { TimingEvent.DURING_MEAL },
-				null, 0, null, null);
+		final MedicationFrequencyContentModule frequency = new MedicationFrequencyContentModule(
+				entry);
+		frequency.setMedicationFrequency(PosologyType.N_TIMES_A_DAY, 2,
+				new TimingEvent[] { TimingEvent.DURING_MEAL }, null, 0, null, null);
 		entry.getDocument();
 		final MedicationFrequency medicationFrequency = frequency.getMedicationFrequency();
 		assertEquals(PosologyType.N_TIMES_A_DAY, medicationFrequency.getPosology());
@@ -85,7 +89,8 @@ public class MedicationFrequencyContentModuleTest {
 	@Test
 	public void test3NTimesPerWeek() throws Exception {
 		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
-		final MedicationFrequencyContentModule frequency = new MedicationFrequencyContentModule(entry);
+		final MedicationFrequencyContentModule frequency = new MedicationFrequencyContentModule(
+				entry);
 		frequency.setMedicationFrequency(PosologyType.N_TIMES_A_WEEK, 3, null, null, 0, null, null);
 		entry.getDocument();
 		final MedicationFrequency medicationFrequency = frequency.getMedicationFrequency();
@@ -99,7 +104,8 @@ public class MedicationFrequencyContentModuleTest {
 	@Test
 	public void test4NTimesPerHours() throws Exception {
 		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
-		final MedicationFrequencyContentModule frequency = new MedicationFrequencyContentModule(entry);
+		final MedicationFrequencyContentModule frequency = new MedicationFrequencyContentModule(
+				entry);
 		frequency.setMedicationFrequency(PosologyType.EVERY_X_HOURS, 3, null, null, 0, null, null);
 		entry.getDocument();
 		final MedicationFrequency medicationFrequency = frequency.getMedicationFrequency();
@@ -113,9 +119,11 @@ public class MedicationFrequencyContentModuleTest {
 	@Test
 	public void test5NTimesPerDayDuringMealsEvery3Days() throws Exception {
 		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
-		final MedicationFrequencyContentModule frequency = new MedicationFrequencyContentModule(entry);
-		frequency.setMedicationFrequency(PosologyType.N_TIMES_A_DAY, 2, new TimingEvent[] { TimingEvent.DURING_MEAL },
-				FrequencyType.EVERY_X_DAY, 3, null, null);
+		final MedicationFrequencyContentModule frequency = new MedicationFrequencyContentModule(
+				entry);
+		frequency.setMedicationFrequency(PosologyType.N_TIMES_A_DAY, 2,
+				new TimingEvent[] { TimingEvent.DURING_MEAL }, FrequencyType.EVERY_X_DAY, 3, null,
+				null);
 		entry.getDocument();
 		final MedicationFrequency medicationFrequency = frequency.getMedicationFrequency();
 		assertEquals(PosologyType.N_TIMES_A_DAY, medicationFrequency.getPosology());
@@ -131,7 +139,8 @@ public class MedicationFrequencyContentModuleTest {
 	@Test
 	public void test6BeforeBreakfast() throws Exception {
 		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
-		final MedicationFrequencyContentModule frequency = new MedicationFrequencyContentModule(entry);
+		final MedicationFrequencyContentModule frequency = new MedicationFrequencyContentModule(
+				entry);
 		frequency.setMedicationFrequency(PosologyType.TIMING_EVENT, 0,
 				new TimingEvent[] { TimingEvent.BEFORE_BREAKFAST }, null, 3, null, null);
 		entry.getDocument();
@@ -146,16 +155,17 @@ public class MedicationFrequencyContentModuleTest {
 	@Test
 	public void testSplitDosing() throws Exception {
 		final PrescriptionItemEntry entry = new PrescriptionItemEntry();
-		final MedicationFrequencyContentModule frequency = new MedicationFrequencyContentModule(entry);
+		final MedicationFrequencyContentModule frequency = new MedicationFrequencyContentModule(
+				entry);
 
 		final Value[] values = new Value[4];
 		values[0] = new Value(2.0);
 		values[1] = new Value(1.5);
 		values[2] = new Value(2.5);
 		values[3] = new Value(4.0);
-		frequency.setMedicationFrequency(
-				PosologyType.TIMING_EVENT, 0, new TimingEvent[] { TimingEvent.DURING_BREAKFAST,
-						TimingEvent.DURING_LUNCH, TimingEvent.DURING_DINNER, TimingEvent.BEFORE_SLEEP },
+		frequency.setMedicationFrequency(PosologyType.TIMING_EVENT, 0,
+				new TimingEvent[] { TimingEvent.DURING_BREAKFAST, TimingEvent.DURING_LUNCH,
+						TimingEvent.DURING_DINNER, TimingEvent.BEFORE_SLEEP },
 				null, 0, DosageType.Split, values);
 		entry.getDocument();
 
@@ -166,14 +176,14 @@ public class MedicationFrequencyContentModuleTest {
 		assertEquals(TimingEvent.DURING_DINNER, medicationFrequency.getTimingEvents()[2]);
 		assertEquals(TimingEvent.BEFORE_SLEEP, medicationFrequency.getTimingEvents()[3]);
 		assertEquals(DosageType.Split, medicationFrequency.getDosage());
-		assertEquals(new Double(2.0),
-				new Double(medicationFrequency.getDoseQuantities()[0].getPhysicalQuantity().getValue().doubleValue()));
-		assertEquals(new Double(1.5),
-				new Double(medicationFrequency.getDoseQuantities()[1].getPhysicalQuantity().getValue().doubleValue()));
-		assertEquals(new Double(2.5),
-				new Double(medicationFrequency.getDoseQuantities()[2].getPhysicalQuantity().getValue().doubleValue()));
-		assertEquals(new Double(4.0),
-				new Double(medicationFrequency.getDoseQuantities()[3].getPhysicalQuantity().getValue().doubleValue()));
+		assertEquals(new Double(2.0), new Double(medicationFrequency.getDoseQuantities()[0]
+				.getPhysicalQuantity().getValue().doubleValue()));
+		assertEquals(new Double(1.5), new Double(medicationFrequency.getDoseQuantities()[1]
+				.getPhysicalQuantity().getValue().doubleValue()));
+		assertEquals(new Double(2.5), new Double(medicationFrequency.getDoseQuantities()[2]
+				.getPhysicalQuantity().getValue().doubleValue()));
+		assertEquals(new Double(4.0), new Double(medicationFrequency.getDoseQuantities()[3]
+				.getPhysicalQuantity().getValue().doubleValue()));
 
 	}
 

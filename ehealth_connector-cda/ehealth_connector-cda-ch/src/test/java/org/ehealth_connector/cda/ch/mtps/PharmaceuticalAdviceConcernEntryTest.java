@@ -46,7 +46,7 @@ public class PharmaceuticalAdviceConcernEntryTest {
 
 	/**
 	 * Test method for the ProblemConcernEntry class
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test

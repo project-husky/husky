@@ -22,7 +22,7 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.LanguageCode;
 
 /**
- * The various types of posologies. See MTPS 7.5.10 and CDA Time intervals. 
+ * The various types of posologies. See MTPS 7.5.10 and CDA Time intervals.
  */
 public enum PosologyType {
 

@@ -104,6 +104,7 @@ public class LaboratoryObservation
 	 * @param the
 	 *            desired NullFlavor
 	 */
+	@Override
 	public void addInterpretationCode(NullFlavor na) {
 		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setNullFlavor(na);

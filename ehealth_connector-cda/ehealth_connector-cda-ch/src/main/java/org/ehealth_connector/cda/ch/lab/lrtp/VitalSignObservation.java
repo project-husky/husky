@@ -117,6 +117,7 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 * @param entry
 	 *            the entry
 	 */
+	@Override
 	public void addCommentEntry(SectionAnnotationCommentEntry entry) {
 		getVitalSignObservation().addAct(entry.getMdht());
 		final int nb = getVitalSignObservation().getEntryRelationships().size() - 1;

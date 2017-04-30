@@ -53,10 +53,12 @@ public class DispenseItemEntryTest {
 
 		final Document document = entry.getDocument();
 
-		final XPathExpression expr = xpath.compile("//code[@code='RFC' and @codeSystem='2.16.840.1.113883.5.4']");
+		final XPathExpression expr = xpath
+				.compile("//code[@code='RFC' and @codeSystem='2.16.840.1.113883.5.4']");
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
-		assertEquals(DispenseCodeList.REFILL_COMPLETE, DispenseCodeList.getEnum(entry.getDispenseCode().getCode()));
+		assertEquals(DispenseCodeList.REFILL_COMPLETE,
+				DispenseCodeList.getEnum(entry.getDispenseCode().getCode()));
 	}
 
 }

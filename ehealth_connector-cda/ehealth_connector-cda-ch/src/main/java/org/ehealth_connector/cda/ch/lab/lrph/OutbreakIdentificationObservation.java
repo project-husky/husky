@@ -76,6 +76,7 @@ public class OutbreakIdentificationObservation
 	 *
 	 * @return the comment entry
 	 */
+	@Override
 	public SectionAnnotationCommentEntry getCommentEntry() {
 		if (this.getMdht().getComment() != null) {
 			return new SectionAnnotationCommentEntry(this.getMdht().getComment());
@@ -89,6 +90,7 @@ public class OutbreakIdentificationObservation
 	 * @param commentEntry
 	 *            the new comment entry
 	 */
+	@Override
 	public void setCommentEntry(SectionAnnotationCommentEntry commentEntry) {
 		this.getMdht().addAct(commentEntry.getMdht());
 		// need to add the the Subj and setInversionInd, cannot do this

@@ -63,8 +63,8 @@ public class CdaChMtpsMtpTest extends TestUtils {
 	private final XPath xpath = xpathFactory.newXPath();
 
 	/**
-	 *<div class="en">Test class for the PHARM MTP document.</div>
-	 * <div class="de"></div>	 
+	 * <div class="en">Test class for the PHARM MTP document.</div>
+	 * <div class="de"></div>
 	 */
 	public CdaChMtpsMtpTest() {
 		super();
@@ -75,19 +75,10 @@ public class CdaChMtpsMtpTest extends TestUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	private MedicationListSection deserializeCdaSection(String document) throws Exception {
-		final InputSource source = new InputSource(new StringReader(document));
-		return new MedicationListSection((org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsMtp) CDAUtil.load(source));
-	}
-
-	/**
-	 * @param document
-	 * @return
-	 * @throws Exception
-	 */
 	private CdaChMtpsMtp deserializeCda(String document) throws Exception {
 		final InputSource source = new InputSource(new StringReader(document));
-		return new CdaChMtpsMtp((org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsMtp) CDAUtil.load(source));
+		return new CdaChMtpsMtp(
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsMtp) CDAUtil.load(source));
 	}
 
 	/**
@@ -97,8 +88,10 @@ public class CdaChMtpsMtpTest extends TestUtils {
 	 */
 	private MedicationListSection deserializeCdaDirect(String document) throws Exception {
 		final InputStream stream = new ByteArrayInputStream(document.getBytes());
-		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream, CHPackage.eINSTANCE.getCdaChMtpsMtp());
-		return new MedicationListSection((org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsMtp) clinicalDocument);
+		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
+				CHPackage.eINSTANCE.getCdaChMtpsMtp());
+		return new MedicationListSection(
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsMtp) clinicalDocument);
 	}
 
 	/**
@@ -118,6 +111,17 @@ public class CdaChMtpsMtpTest extends TestUtils {
 		assertNotNull(cdaDeserialized.getMedicationTreatmentPlanSection());
 		assertEquals("Plan de traitement médicamenteux",
 				cdaDeserialized.getMedicationTreatmentPlanSection().getTitle());
+	}
+
+	/**
+	 * @param document
+	 * @return
+	 * @throws Exception
+	 */
+	private MedicationListSection deserializeCdaSection(String document) throws Exception {
+		final InputSource source = new InputSource(new StringReader(document));
+		return new MedicationListSection(
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsMtp) CDAUtil.load(source));
 	}
 
 	/**
@@ -164,7 +168,8 @@ public class CdaChMtpsMtpTest extends TestUtils {
 		log.debug(deserialized);
 		final ClinicalDocument cdaDeserialized = deserializeClinicalDocument(deserialized);
 		assertTrue(cdaDeserialized != null);
-		assertEquals("Medication Treatment Plan", cda.getMedicationTreatmentPlanSection().getTitle());
+		assertEquals("Medication Treatment Plan",
+				cda.getMedicationTreatmentPlanSection().getTitle());
 	}
 
 	/**
@@ -172,7 +177,7 @@ public class CdaChMtpsMtpTest extends TestUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	private String serializeDocument(MedicationListSection doc) throws Exception {
+	private String serializeDocument(CdaChMtpsMtp doc) throws Exception {
 		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
 		CDAUtil.save(doc.getDoc(), boas);
 		return boas.toString();
@@ -183,7 +188,7 @@ public class CdaChMtpsMtpTest extends TestUtils {
 	 * @return
 	 * @throws Exception
 	 */
-	private String serializeDocument(CdaChMtpsMtp doc) throws Exception {
+	private String serializeDocument(MedicationListSection doc) throws Exception {
 		final ByteArrayOutputStream boas = new ByteArrayOutputStream();
 		CDAUtil.save(doc.getDoc(), boas);
 		return boas.toString();
@@ -203,7 +208,8 @@ public class CdaChMtpsMtpTest extends TestUtils {
 		assertEquals(1, nodes.getLength());
 
 		// typeId
-		expr = xpath.compile("//typeId[@root='2.16.840.1.113883.1.3' and @extension='POCD_HD000040']");
+		expr = xpath
+				.compile("//typeId[@root='2.16.840.1.113883.1.3' and @extension='POCD_HD000040']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
@@ -235,16 +241,19 @@ public class CdaChMtpsMtpTest extends TestUtils {
 		final MedicationListSection cda = new MedicationListSection(LanguageCode.GERMAN);
 		final Document document = cda.getDocument();
 
-		XPathExpression expr = xpath.compile("//*/section/templateId[@root='1.3.6.1.4.1.19376.1.9.1.2.6']");
+		XPathExpression expr = xpath
+				.compile("//*/section/templateId[@root='1.3.6.1.4.1.19376.1.9.1.2.6']");
 		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
-		expr = xpath.compile("//*/section/code[@code='77604-7' and @codeSystem='2.16.840.1.113883.6.1']");
+		expr = xpath.compile(
+				"//*/section/code[@code='77604-7' and @codeSystem='2.16.840.1.113883.6.1']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 
 		assertNotNull(cda.getMedicationTreatmentPlanSection());
-		assertEquals("Medikamentöser Behandlungsplan", cda.getMedicationTreatmentPlanSection().getTitle());
+		assertEquals("Medikamentöser Behandlungsplan",
+				cda.getMedicationTreatmentPlanSection().getTitle());
 	}
 
 	/**
@@ -258,8 +267,8 @@ public class CdaChMtpsMtpTest extends TestUtils {
 		mtpEntry.setTextReference("#mtp");
 
 		PharmSubstitutionHandlingEntry substitutionHandlingEntry = new PharmSubstitutionHandlingEntry();
-		substitutionHandlingEntry.setSubstanceAdminSubstitution(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE,
-				LanguageCode.ENGLISH);
+		substitutionHandlingEntry.setSubstanceAdminSubstitution(
+				SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE, LanguageCode.ENGLISH);
 		mtpEntry.setPharmSubstitutionHandlingEntry(substitutionHandlingEntry);
 
 		assertEquals(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE,
@@ -268,8 +277,8 @@ public class CdaChMtpsMtpTest extends TestUtils {
 		mtpEntry.setSupplyQuantityValue(new BigDecimal(1.5));
 
 		MedicationFrequencyContentModule frequency = new MedicationFrequencyContentModule(mtpEntry);
-		frequency.setMedicationFrequency(PosologyType.N_TIMES_A_DAY, 2, new TimingEvent[] { TimingEvent.DURING_MEAL },
-				null, 0, null, null);
+		frequency.setMedicationFrequency(PosologyType.N_TIMES_A_DAY, 2,
+				new TimingEvent[] { TimingEvent.DURING_MEAL }, null, 0, null, null);
 
 		cda.setMedicationTreatmentPlanItemEntry(mtpEntry);
 
@@ -281,10 +290,12 @@ public class CdaChMtpsMtpTest extends TestUtils {
 
 		assertEquals("#mtp", cdaDeserialized.getMedicationTreatmentPlanEntry().getTextReference());
 
-		assertEquals(new BigDecimal(1.5), cdaDeserialized.getMedicationTreatmentPlanEntry().getSupplyQuantityValue());
+		assertEquals(new BigDecimal(1.5),
+				cdaDeserialized.getMedicationTreatmentPlanEntry().getSupplyQuantityValue());
 
-		assertEquals(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE, cdaDeserialized
-				.getMedicationTreatmentPlanEntry().getPharmSubstitutionHandlingEntry().getSubstanceAdminSubstitution());
+		assertEquals(SubstanceAdminSubstitution.THERAPEUTIC_ALTERNATIVE,
+				cdaDeserialized.getMedicationTreatmentPlanEntry()
+						.getPharmSubstitutionHandlingEntry().getSubstanceAdminSubstitution());
 
 		MedicationFrequencyContentModule frequencyDeserialized = new MedicationFrequencyContentModule(
 				cdaDeserialized.getMedicationTreatmentPlanEntry());

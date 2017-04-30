@@ -56,8 +56,8 @@ public class CdaChMtpsPadvTest extends TestUtils {
 	private final XPath xpath = xpathFactory.newXPath();
 
 	/**
-	 *<div class="en">Test class for the PHARM PADV document.</div>
-	 * <div class="de"></div>	 
+	 * <div class="en">Test class for the PHARM PADV document.</div>
+	 * <div class="de"></div>
 	 */
 	public CdaChMtpsPadvTest() {
 		super();
@@ -201,7 +201,6 @@ public class CdaChMtpsPadvTest extends TestUtils {
 		expr = xpath.compile("//*/section/title[text()='Pharmaceutical Advice']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
-
 
 		expr = xpath.compile("//*/code[@code='61357-0' and @codeSystem='2.16.840.1.113883.6.1']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);

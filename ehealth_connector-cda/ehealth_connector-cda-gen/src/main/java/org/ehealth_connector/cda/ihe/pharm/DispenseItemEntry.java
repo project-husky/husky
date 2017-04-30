@@ -353,7 +353,7 @@ public class DispenseItemEntry
 
 	/**
 	 * Gets the dispensed quantity element
-	 * 
+	 *
 	 * @return the dispensed quantity element
 	 */
 	public PQ getQuantity() {

@@ -188,6 +188,7 @@ public class SpecimenCollectionEntry
 	 * @param entry
 	 *            the new specimen received entry
 	 */
+	@Override
 	public void setSpecimenReceivedEntry(SpecimenReceivedEntry entry) {
 		if (entry != null) {
 			// Check if the element already exist, if so, replace it, if not add

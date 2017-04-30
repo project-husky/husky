@@ -189,7 +189,6 @@ public class MedicationItemEntry
 
 		final EntryRelationship prescribedQty = CDAFactory.eINSTANCE.createEntryRelationship();
 
-
 		prescribedQty.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
 
 		final Supply prescribedQuantity = CDAFactory.eINSTANCE.createSupply();

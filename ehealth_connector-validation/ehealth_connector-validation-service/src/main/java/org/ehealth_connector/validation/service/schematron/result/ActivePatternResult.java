@@ -228,7 +228,7 @@ public class ActivePatternResult {
 
 	/**
 	 * Sets the id of the ActivePattern
-	 * 
+	 *
 	 * @param id
 	 *            the id of the ActivePattern
 	 */

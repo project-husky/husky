@@ -78,6 +78,7 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	 * @param laboratoryBatteryOrganizer
 	 *            the laboratory battery organizer
 	 */
+	@Override
 	public void addLaboratoryBatteryOrganizer(
 			LaboratoryBatteryOrganizer laboratoryBatteryOrganizer) {
 		getMdht().addOrganizer(laboratoryBatteryOrganizer.copy());
@@ -110,6 +111,7 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	 * @param code
 	 *            the new code
 	 */
+	@Override
 	public void setCode(SpecialtySections code) {
 		getMdht().setCode(code.getCE());
 	}

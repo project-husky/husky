@@ -194,6 +194,7 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 * @param entry
 	 *            the entry
 	 */
+	@Override
 	public void addCommentEntry(SectionAnnotationCommentEntry entry) {
 		getVitalSignObservation().addAct(entry.getMdht());
 		final int nb = getVitalSignObservation().getEntryRelationships().size() - 1;
@@ -256,6 +257,7 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	 * @param translation
 	 *            the new method code translation
 	 */
+	@Override
 	public void setMethodCodeTranslation(Code translation) {
 		getVitalSignObservation().getMethodCodes().clear();
 		final CE ce = DatatypesFactory.eINSTANCE.createCE();

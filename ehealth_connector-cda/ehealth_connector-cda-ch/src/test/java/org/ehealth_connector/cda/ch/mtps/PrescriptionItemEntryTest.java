@@ -42,7 +42,7 @@ public class PrescriptionItemEntryTest {
 
 	/**
 	 * Test method for the MedicationSpecialConditions
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test

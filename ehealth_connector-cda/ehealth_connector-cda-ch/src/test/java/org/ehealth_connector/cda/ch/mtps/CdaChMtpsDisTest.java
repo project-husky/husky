@@ -57,8 +57,8 @@ public class CdaChMtpsDisTest extends TestUtils {
 	private final XPath xpath = xpathFactory.newXPath();
 
 	/**
-	 *<div class="en">Test class for the PHARM DIS document.</div>
-	 * <div class="de"></div>	 
+	 * <div class="en">Test class for the PHARM DIS document.</div>
+	 * <div class="de"></div>
 	 */
 	public CdaChMtpsDisTest() {
 		super();

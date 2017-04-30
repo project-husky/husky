@@ -22,7 +22,7 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.LanguageCode;
 
 /**
- * The possible frequencies types. See MTPS 7.5.10 and CDA Time intervals. 
+ * The possible frequencies types. See MTPS 7.5.10 and CDA Time intervals.
  */
 public enum FrequencyType {
 

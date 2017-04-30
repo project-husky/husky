@@ -79,7 +79,7 @@ public class Identificator {
 	/**
 	 * <div class="de">Creates a new Identificator</div>
 	 * <div class="de">Erstellt einen neuen Identifikator.</div>
-	 * 
+	 *
 	 * @param identifier
 	 *            the identifier to be used
 	 */

@@ -36,63 +36,6 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
  */
 public class MedicationFrequency {
 
-	/** The dosage. */
-	private DosageType dosage;
-
-	/** The dose quantities. */
-	private Value[] doseQuantities;
-
-	/** The frequency. */
-	private FrequencyType frequency;
-
-	/** The frequency factor. */
-	private double frequencyFactor;
-
-	/** The posology. */
-	private PosologyType posology;
-
-	/** The posology factor. */
-	private double posologyFactor;
-
-	/** The timing events. */
-	private TimingEvent[] timingEvents;
-
-	/**
-	 * Gets the medication dosage.
-	 *
-	 * @return the medication dosage
-	 */
-	public DosageType getDosage() {
-		return this.dosage;
-	}
-
-	/**
-	 * Gets the medication dose quantities.
-	 *
-	 * @return the dose quantities
-	 */
-	public Value[] getDoseQuantities() {
-		return this.doseQuantities;
-	}
-
-	/**
-	 * Gets the medication frequency.
-	 *
-	 * @return the medication frequency
-	 */
-	public FrequencyType getFrequency() {
-		return this.frequency;
-	}
-
-	/**
-	 * Gets the medication frequency factor.
-	 *
-	 * @return the medication frequency factor
-	 */
-	public double getFrequencyFactor() {
-		return this.frequencyFactor;
-	}
-
 	/**
 	 * Gets the medication frequency data access object out of the datatypes.
 	 *
@@ -106,8 +49,8 @@ public class MedicationFrequency {
 	 *            the dosages
 	 * @return the medication frequency
 	 */
-	public static MedicationFrequency getMedicationFrequency(PIVL_TS period, PIVL_TS freqPeriod, EIVL_TS[] events,
-			IVL_PQ[] dosages) {
+	public static MedicationFrequency getMedicationFrequency(PIVL_TS period, PIVL_TS freqPeriod,
+			EIVL_TS[] events, IVL_PQ[] dosages) {
 		final MedicationFrequency medicationFrequency = new MedicationFrequency();
 		if (period != null) {
 			if (period.getInstitutionSpecified().booleanValue()) {
@@ -182,6 +125,74 @@ public class MedicationFrequency {
 	}
 
 	/**
+	 * Gets the value out of a dose quantity
+	 *
+	 * @param doseQuantity
+	 *            the dose quantity
+	 * @return the value
+	 */
+	private static Value getValue(IVL_PQ doseQuantity) {
+		return new Value(doseQuantity.getValue().doubleValue());
+	}
+
+	/** The dosage. */
+	private DosageType dosage;
+
+	/** The dose quantities. */
+	private Value[] doseQuantities;
+
+	/** The frequency. */
+	private FrequencyType frequency;
+
+	/** The frequency factor. */
+	private double frequencyFactor;
+
+	/** The posology. */
+	private PosologyType posology;
+
+	/** The posology factor. */
+	private double posologyFactor;
+
+	/** The timing events. */
+	private TimingEvent[] timingEvents;
+
+	/**
+	 * Gets the medication dosage.
+	 *
+	 * @return the medication dosage
+	 */
+	public DosageType getDosage() {
+		return this.dosage;
+	}
+
+	/**
+	 * Gets the medication dose quantities.
+	 *
+	 * @return the dose quantities
+	 */
+	public Value[] getDoseQuantities() {
+		return this.doseQuantities;
+	}
+
+	/**
+	 * Gets the medication frequency.
+	 *
+	 * @return the medication frequency
+	 */
+	public FrequencyType getFrequency() {
+		return this.frequency;
+	}
+
+	/**
+	 * Gets the medication frequency factor.
+	 *
+	 * @return the medication frequency factor
+	 */
+	public double getFrequencyFactor() {
+		return this.frequencyFactor;
+	}
+
+	/**
 	 * Gets the medication posology.
 	 *
 	 * @return the medication posology
@@ -200,17 +211,6 @@ public class MedicationFrequency {
 	}
 
 	/**
-	 * Gets the value out of a dose quantity
-	 *
-	 * @param doseQuantity
-	 *            the dose quantity
-	 * @return the value
-	 */
-	private static Value getValue(IVL_PQ doseQuantity) {
-		return new Value(doseQuantity.getValue().doubleValue());
-	}
-	
-	/**
 	 * Gets the medication timing events.
 	 *
 	 * @return the medication timing events
@@ -218,7 +218,7 @@ public class MedicationFrequency {
 	public TimingEvent[] getTimingEvents() {
 		return this.timingEvents;
 	}
-	
+
 	/**
 	 * Sets the medication dosage
 	 *
