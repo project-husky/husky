@@ -23,37 +23,44 @@ package org.ehealth_connector.common;
  */
 public enum EHealthConnectorVersions {
 	/**
-	 * OID: 2.16.756.5.30.1.139.1.1.1 eHealthConnector Proof of Concept
-	 */
-	EHealthConnectorR201402("2.16.756.5.30.1.139.1.1.1", "eHealthConnector Proof of Concept", "20140211"),
-
-	/**
-	 * OID: 2.16.756.5.30.1.139.1.1.2 eHealthConnector R201503
-	 */
-	EHealthConnectorR201503("2.16.756.5.30.1.139.1.1.2", "eHealthConnector R201503", "20150401"),
-
-	/**
-	 * OID: 2.16.756.5.30.1.139.1.1.3 eHealthConnector Rxxxxxx
+	 * OID eHealthConnector development edition (trunk)
 	 */
 	EHealthConnectorDev("2.16.756.5.30.1.139.1.1.3", "eHealthConnector trunk", "xxxxxxxx"),
 
 	/**
-	 * OID: 2.16.756.5.30.1.139.1.1.4 eHealthConnector R201510
+	 * OID eHealthConnector Proof of Concept
+	 */
+	EHealthConnectorR201402("2.16.756.5.30.1.139.1.1.1", "eHealthConnector Proof of Concept", "20140211"),
+
+	/**
+	 * OID eHealthConnector R201503
+	 */
+	EHealthConnectorR201503("2.16.756.5.30.1.139.1.1.2", "eHealthConnector R201503", "20150401"),
+
+	/**
+	 * OID eHealthConnector R201510
 	 */
 	EHealthConnectorR201510("2.16.756.5.30.1.139.1.1.4", "eHealthConnector R201510", "R20151031"),
 
 	/**
-	 * OID: 2.16.756.5.30.1.139.1.1.5 eHealthConnector R201604
+	 * OID eHealthConnector R201604
 	 */
 	EHealthConnectorR201604("2.16.756.5.30.1.139.1.1.5", "eHealthConnector R201604", "R20160430"),
 
 	/**
-	 * OID: 2.16.756.5.30.1.139.1.1.6 eHealthConnector R201611
+	 * OID eHealthConnector R201704
 	 */
 	EHealthConnectorR201704("2.16.756.5.30.1.139.1.1.6", "eHealthConnector R201704", "R20170430");
 
+	/**
+	 * OID eHealthConnector Rxxxxxx
+	 */
+	// This is preparation for next release, only
+	// EHealthConnectorRxxxxxx("2.16.756.5.30.1.139.1.1.7","eHealthConnector
+	// Rxxxxxx",todo release date);
+
 	public static EHealthConnectorVersions getCurrentVersion() {
-		return EHealthConnectorR201704;
+		return EHealthConnectorVersions.EHealthConnectorDev;
 	}
 
 	private String oid;
