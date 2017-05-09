@@ -795,6 +795,15 @@ public class Util {
 	}
 
 	/**
+	 * Run the Garbage Collector to get the most possible heap space free for
+	 * subsequent tasks. This is not recommended but can be used if situations
+	 * arise.
+	 */
+	public static void freeMemory() {
+		Runtime.getRuntime().gc();
+	}
+
+	/**
 	 * Creates a document ID with the eHC root ID
 	 *
 	 * @param applicationOidRoot
@@ -954,67 +963,6 @@ public class Util {
 		return tempDirectoryPath;
 	}
 
-	// /**
-	// * Updates a Reference if it is a comment (in a deph of two counters)
-	// *
-	// * @param er
-	// * the EntryRelationship
-	// * @param i
-	// * first counter
-	// * @param j
-	// * second counter
-	// * @param prefix
-	// * the prefix of the reference
-	// * @return the EntryRelationship
-	// */
-	// public static EntryRelationship updateRefIfComment(EntryRelationship er,
-	// int i, int j,
-	// SectionsVACD prefix) {
-	// if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)
-	// && er.getInversionInd().equals(true)) {
-	// // Get the ed and update it with the reference
-	// final ED ed = er.getAct().getText();
-	// final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-	// ed.setReference(tel);
-	// if (CdaChVacd.CDA_LEVEL2_TEXT_GENERATION) {
-	// tel.setValue("#" + prefix.getContentIdPrefix() + "-comment" + i + j);
-	// } else {
-	// tel.setValue(("#" + prefix.getContentIdPrefix() + "1"));
-	// }
-	// er.getAct().setText(ed);
-	// }
-	// return er;
-	// }
-	//
-	// /**
-	// * Updates a Reference if it is a comment
-	// *
-	// * @param er
-	// * the EntryRelationship
-	// * @param ref
-	// * the reference
-	// * @param prefix
-	// * the prefix of the reference
-	// * @return the EntryRelationship
-	// */
-	// public static EntryRelationship updateRefIfComment(EntryRelationship er,
-	// String ref,
-	// SectionsVACD prefix) {
-	// if (isComment(er)) {
-	// // Get the ed and update it with the reference
-	// final ED ed = er.getAct().getText();
-	// final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-	// ed.setReference(tel);
-	// if (CdaChVacd.CDA_LEVEL2_TEXT_GENERATION) {
-	// tel.setValue("#" + prefix.getContentIdPrefix() + "-comment" + ref);
-	// } else {
-	// tel.setValue(("#" + prefix.getContentIdPrefix() + "1"));
-	// }
-	// er.getAct().setText(ed);
-	// }
-	// return er;
-	// }
-
 	/**
 	 * Extract text from an Ecore FeatureMap
 	 *
@@ -1035,6 +983,48 @@ public class Util {
 			}
 		}
 		return buffer.toString().trim();
+	}
+
+	/**
+	 *
+	 * Gets the used memory as string for display e.g. to console.
+	 *
+	 * @param hint
+	 *            to be added to the string
+	 * @return the used memory string
+	 */
+	public static String getUsedMemoryString(String hint) {
+
+		return hint + ": Used VM memory: " + Long.toString(getVmMemoryUsedInMegaBytes()) + " MB\n";
+
+	}
+
+	/**
+	 * Gets the free Java VM heap space in mega bytes.
+	 *
+	 * @return the free Java VM heap space in mega bytes.
+	 */
+	public static int getVmMemoryFreeInMegaBytes() {
+		return (int) (Runtime.getRuntime().freeMemory() / (1024 * 1024));
+	}
+
+	/**
+	 * Gets the total Java VM heap space in mega bytes.
+	 *
+	 * @return the total Java VM heap space in mega bytes.
+	 */
+	public static int getVmMemoryTotalInMegaBytes() {
+		return (int) (Runtime.getRuntime().totalMemory() / (1024 * 1024));
+	}
+
+	/**
+	 * Gets the used Java VM heap space in mega bytes.
+	 *
+	 * @return the used Java VM heap space in mega bytes.
+	 */
+	public static int getVmMemoryUsedInMegaBytes() {
+		return (int) ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory())
+				/ (1024 * 1024));
 	}
 
 	/**
@@ -1124,6 +1114,16 @@ public class Util {
 		else {
 			return false;
 		}
+	}
+
+	/**
+	 * This is for debugging purposes, only. For normal use, this function shall
+	 * return false.
+	 *
+	 * @return true, when memory usage is to be displayed.
+	 */
+	public static boolean isDebug() {
+		return false;
 	}
 
 	/**
@@ -1244,9 +1244,9 @@ public class Util {
 			String hint) {
 
 		final Logger log = LogManager.getLogger(theClass);
-		System.gc();
-		log.info(hint + ": freeMemory: "
-				+ Long.toString(Runtime.getRuntime().freeMemory() / (1024 * 1024)) + " MB");
+		freeMemory();
+		log.info(
+				hint + ": freeMemory: " + Long.toString(Util.getVmMemoryFreeInMegaBytes()) + " MB");
 
 	}
 

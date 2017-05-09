@@ -620,9 +620,6 @@ public class CdaValidator {
 	 */
 	public SchematronValidationResult validateSch(StreamSource cdaStream) {
 
-		// Run the Garbage Collector to get the most possible heap space free
-		System.gc();
-
 		SchematronValidationResult schValRes = null;
 
 		String errorMsg = null;
@@ -694,9 +691,7 @@ public class CdaValidator {
 
 				while (!doValidate && !doAbort) {
 					try {
-						// Run the Garbage Collector to get the most possible
-						// heap space free
-						System.gc();
+						Util.freeMemory();
 						Thread.sleep(timeoutSleep);
 
 					} catch (InterruptedException e) {
@@ -787,9 +782,7 @@ public class CdaValidator {
 			schValRes.setSourceFile(null);
 		}
 
-		// Run the Garbage Collector to get the most possible heap space free
-		// for subsequent tasks
-		System.gc();
+		Util.freeMemory();
 
 		return schValRes;
 	}

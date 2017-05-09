@@ -105,10 +105,8 @@ public class StylesheetFactory {
 			compiler.setURIResolver(resolver);
 		try {
 			log.info("Compiling stylesheet '{}'", sourceName);
+			Util.freeMemory();
 			Util.logAvailableMemory(getClass(), "compiler.compile (before)");
-			// Run the Garbage Collector to get the most possible heap space
-			// free
-			System.gc();
 			// if problems with locking due to concurrent accesses from threads,
 			// use semaphore to avoid same source at the same time...
 			XsltExecutable executable = compiler.compile(source);
