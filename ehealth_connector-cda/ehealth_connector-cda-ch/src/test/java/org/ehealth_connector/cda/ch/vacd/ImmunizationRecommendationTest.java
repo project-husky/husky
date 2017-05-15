@@ -32,7 +32,7 @@ import javax.xml.xpath.XPathFactory;
 import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.ExternalDocumentEntry;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
-import org.ehealth_connector.cda.ch.enums.RouteOfAdministration;
+import org.ehealth_connector.cda.enums.RouteOfAdministration;
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdRecCategories;
 import org.ehealth_connector.common.Author;

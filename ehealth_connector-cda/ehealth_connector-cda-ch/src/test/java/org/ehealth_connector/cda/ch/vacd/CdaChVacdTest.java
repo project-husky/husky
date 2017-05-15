@@ -43,7 +43,7 @@ import org.ehealth_connector.cda.ch.AllergyConcern;
 import org.ehealth_connector.cda.ch.AllergyProblem;
 import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.PregnancyHistory;
-import org.ehealth_connector.cda.ch.enums.RouteOfAdministration;
+import org.ehealth_connector.cda.enums.RouteOfAdministration;
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.cda.ch.vacd.enums.ObservationInterpretationForImmunization;
 import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
