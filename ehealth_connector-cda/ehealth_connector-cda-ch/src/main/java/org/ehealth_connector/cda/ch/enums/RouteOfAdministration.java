@@ -25,6 +25,13 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  *<div class="de">Dieses Subset ist eine empfohlene Auswahl für den vorliegenden Implementierungsleitfaden. Andere Codes aus HL7 RouteOfAdministration dürfen ebenfalls verwendet werden.Hinweis: Für Impfungen relevante Einträge sind fett markiert.</div>
  *<div class="fr">Ce sous-ensemble (Subset) est une sélection recommandée pour le présent guide d'implémentation. Il est également possible dutiliser dautres codes tirés de HL7 RouteOfAdministration.Remarque : Les entrées pertinentes pour les vaccins sont indiquées en gras.</div>
  */
+
+/**
+ * This class has been moved and extended to org.ehealth_connector.cda.enums as it is used by other classes in org.ehealth_connector.cda
+ * @author sts
+ *
+ */
+@Deprecated
 public enum RouteOfAdministration {
 
 	/**
