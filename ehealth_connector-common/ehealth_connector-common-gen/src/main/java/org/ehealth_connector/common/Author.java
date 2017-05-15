@@ -734,6 +734,27 @@ public class Author {
 	}
 
 	/**
+	 * Sets the functionCode of the author
+	 *
+	 * @param codeSystem
+	 * 				the code system OID
+	 * @param codeSystemame
+	 * 				the name of the code system
+	 * @param originalText
+	 *            the function code (free text)
+	 */
+	public void setOtherFunctionCode(String codeSystem, String codeSystemName, String originalText) {
+		if (originalText != null) {
+			final CE otherCode = DatatypesFactory.eINSTANCE.createCE();
+			otherCode.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.OTH);
+			if (codeSystem != null) otherCode.setCode(codeSystem);
+			if (codeSystemName != null) otherCode.setCodeSystemName(codeSystemName);
+			otherCode.setOriginalText(DatatypesFactory.eINSTANCE.createED(originalText));
+			mAuthor.setFunctionCode(otherCode);
+		}
+	}
+
+	/**
 	 * Method to set
 	 *
 	 * @param person
