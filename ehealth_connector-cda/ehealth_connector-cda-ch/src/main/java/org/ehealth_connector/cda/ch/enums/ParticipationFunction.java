@@ -66,7 +66,7 @@ public enum ParticipationFunction {
 	/**
 	 * <div class="en">nurse assistant</div> <div class="fr">Aide soignant(e)</div>
 	 */
-	NURSE_ASSISANT("NASST", "nurse assistant"),
+	NURSE_ASSISTANT("NASST", "nurse assistant"),
 
 	/**
 	 * <div class="en">primary care physician</div> <div class="fr">Médecin de famille, médecin généraliste</div>
