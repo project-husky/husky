@@ -27,7 +27,7 @@ import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
-import org.ehealth_connector.cda.ch.enums.RouteOfAdministration;
+import org.ehealth_connector.cda.enums.RouteOfAdministration;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.enums.MedicationsSpecialConditions;
 import org.ehealth_connector.common.Author;
