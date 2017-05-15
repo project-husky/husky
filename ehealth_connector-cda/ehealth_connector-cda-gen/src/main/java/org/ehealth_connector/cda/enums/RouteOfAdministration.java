@@ -16,10 +16,12 @@
  *
  */
 
-package org.ehealth_connector.cda.ch.mtps.enums;
+package org.ehealth_connector.cda.enums;
 
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /**
  * The RouteOfAdministration. MTPS 7.6.4
@@ -33,6 +35,12 @@ public enum RouteOfAdministration {
 	CHEW_ORAL("CHEW", "chew, oral", "à mâcher ou à sucer"),
 
 	/**
+	 * <div class="de">Diffusion, transdermal</div> <div class="fr">Diffusion
+	 * transdermique</div>
+	 */
+	DIFFUSION_TRANSDERMAL("TRNSDERMD", "Diffusion, transdermal", "Diffusion, transdermal"),
+
+	/**
 	 * <div class="en"> dissolve, sublingual</div><div class="fr">sous la
 	 * langue</div>
 	 */
@@ -43,6 +51,12 @@ public enum RouteOfAdministration {
 	 * intraveineuse</div>
 	 */
 	INFUSION_INTRANEOUS("IV", "infusion, intravenous", "par voie intraveineuse"),
+
+	/**
+	 * <div class="de">Inhalation, Vernebelung, nasal</div>
+	 * <div class="fr">Inhalation par nébulisation nasale</div>
+	 */
+	INHALATION_NEBULIZATION_NASAL("NASNEB", "Inhalation, nebulization, nasal", "Inhalation, nébulisation, nasal"),
 
 	/**
 	 * <div class="en"> injection, intra-abdominal</div><div class="fr">intra
@@ -156,6 +170,13 @@ public enum RouteOfAdministration {
 
 	public static final String CODE_SYSTEM_NAME = "RouteOfAdministration";
 	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.112";
+	
+	public static final String DIFFUSION_TRANSDERMAL_CODE = "TRNSDERMD";
+	public static final String INHALATION_NEBULIZATION_NASAL_CODE = "NASNEB";
+	public static final String INJECTION_INTRADERMAL_CODE = "IDINJ";
+	public static final String INJECTION_INTRAMUSCULAR_CODE = "IM";
+	public static final String INJECTION_SUBCUTANEOUS_CODE = "SQ";
+	public static final String SWALLOW_ORAL_CODE = "PO";
 
 	/**
 	 * Gets the enum.
@@ -173,6 +194,46 @@ public enum RouteOfAdministration {
 		return null;
 	}
 
+	/**
+	 * <div class="en">Checks if a given enum is part of this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
+	 * ist.</div>
+	 *
+	 * @param enumName
+	 *            <br>
+	 *            <div class="de"> enumName</div>
+	 * @return true, if enum is in this value set
+	 */
+	public static boolean isEnumOfValueSet(String enumName) {
+		if (enumName == null) {
+			return false;
+		}
+		try {
+			Enum.valueOf(RouteOfAdministration.class, enumName);
+			return true;
+		} catch (final IllegalArgumentException ex) {
+			return false;
+		}
+	}
+
+	/**
+	 * <div class="en">Checks if a given code value is in this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
+	 * ist.</div>
+	 *
+	 * @param codeValue
+	 *            <div class="de">code</div>
+	 * @return true, if one enum of this valueset contains the given code
+	 */
+	public static boolean isInValueSet(String codeValue) {
+		for (final RouteOfAdministration x : values()) {
+			if (x.code.equals(codeValue)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/** The code. */
 	private String code;
 
@@ -199,6 +260,53 @@ public enum RouteOfAdministration {
 	}
 
 	/**
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 *
+	 * @return <div class="en">The MDHT Code</div>
+	 */
+	public CE getCE() {
+		return getCE(null);
+	}
+
+	/**
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 *
+	 * @return <div class="en">The MDHT Code</div>
+	 */
+	public CE getCE(LanguageCode languageCode) {
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setCodeSystem(CODE_SYSTEM_OID);
+		ce.setCodeSystemName(CODE_SYSTEM_NAME);
+		ce.setCode(code);
+		String displayName = null;
+		if (languageCode != null) {
+			switch (languageCode) {
+			case FRENCH:
+				displayName = displayNameFr;
+				break;
+			default:
+				displayName = displayNameEn;
+				break;
+			}
+		}
+		else displayName = displayNameEn;
+		ce.setDisplayName(displayName);
+		return ce;
+	}
+
+	/**
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
+	 *
+	 * @return <div class="en">the code</div>
+	 */
+	public Code getCode() {
+		return getCode(null);
+	}
+
+	/**
 	 * Gets the code.
 	 *
 	 * @param languageCode
@@ -215,10 +323,51 @@ public enum RouteOfAdministration {
 			default:
 				displayName = displayNameEn;
 				break;
-
 			}
 		}
-		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		else displayName = displayNameEn;
+		
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, CODE_SYSTEM_NAME, displayName);
 		return ehcCode;
+	}
+
+	/**
+	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
+	 * code system name.</div>
+	 *
+	 * @return <div class="en">the code system name</div>
+	 */
+	public String getCodeSystemName() {
+		return CODE_SYSTEM_NAME;
+	}
+
+	/**
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
+	 *
+	 * @return <div class="en">the code system id</div>
+	 */
+	public String getCodeSystemOid() {
+		return CODE_SYSTEM_OID;
+	}
+
+	/**
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
+	 *
+	 * @return <div class="en">the code</div>
+	 */
+	public String getCodeValue() {
+		return code;
+	}
+
+	/**
+	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
+	 * display name.</div>
+	 *
+	 * @return <div class="en">the display name</div>
+	 */
+	public String getDisplayName() {
+		return displayNameEn;
 	}
 }
