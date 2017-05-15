@@ -29,12 +29,14 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 public enum ParticipationFunction {
 
 	/**
-	 * <div class="en">admitting physician</div> <div class="fr">Médecin instruisant l'admission</div>
+	 * <div class="en">admitting physician</div> <div class="fr">Médecin
+	 * instruisant l'admission</div>
 	 */
 	ADMITTING_PHYSICIAN("ADMPHYS", "admitting physician"),
-	  
+
 	/**
-	 * <div class="en">anesthesia nurse</div> <div class="fr">Infirmière anesthésiste</div>
+	 * <div class="en">anesthesia nurse</div> <div class="fr">Infirmière
+	 * anesthésiste</div>
 	 */
 	ANESTHESIA_NURSE("ANRS", "anesthesia nurse"),
 
@@ -42,59 +44,68 @@ public enum ParticipationFunction {
 	 * <div class="en">Anesthesist</div> <div class="fr">Anesthésiste</div>
 	 */
 	ANESTHESIST("ANEST", "Anesthesist"),
-	  
+
 	/**
-	 * <div class="en">attending physician</div> <div class="fr">Médecin traitant</div>
+	 * <div class="en">attending physician</div> <div class="fr">Médecin
+	 * traitant</div>
 	 */
 	ATTENDING_PHYSICIAN("ATTPHYS", "attending physician"),
-	  
+
 	/**
-	 * <div class="en">discharging physician</div> <div class="fr">Médecin autorisant la sortie</div>
+	 * <div class="en">discharging physician</div> <div class="fr">Médecin
+	 * autorisant la sortie</div>
 	 */
 	DISCHARGING_PHYSICIAN("DISPHYS", "discharging physician"),
 
 	/**
-	 * <div class="en">first assistant surgeon</div> <div class="fr">Premier assistant chirurgien</div>
+	 * <div class="en">first assistant surgeon</div> <div class="fr">Premier
+	 * assistant chirurgien</div>
 	 */
 	FIRST_ASSISTANT_SURGEON("FASST", "first assistant surgeon"),
-	  
+
 	/**
 	 * <div class="en">Midwife</div> <div class="fr">Sage-femme</div>
 	 */
 	MIDWIFE("MDWF", "Midwife"),
-	  
+
 	/**
-	 * <div class="en">nurse assistant</div> <div class="fr">Aide soignant(e)</div>
+	 * <div class="en">nurse assistant</div> <div class="fr">Aide
+	 * soignant(e)</div>
 	 */
 	NURSE_ASSISTANT("NASST", "nurse assistant"),
 
 	/**
-	 * <div class="en">primary care physician</div> <div class="fr">Médecin de famille, médecin généraliste</div>
+	 * <div class="en">primary care physician</div> <div class="fr">Médecin de
+	 * famille, médecin généraliste</div>
 	 */
 	PRIMARY_CARE_PHYSICIAN("PCP", "primary care physician"),
-	  
+
 	/**
-	 * <div class="en">primary surgeon</div> <div class="fr">Chirurgien responsable</div>
+	 * <div class="en">primary surgeon</div> <div class="fr">Chirurgien
+	 * responsable</div>
 	 */
 	PRIMARY_SURGEON("PRISURG", "primary surgeon"),
-	  
+
 	/**
 	 * <div class="en">rounding physician</div> <div class="fr">N/A</div>
 	 */
 	ROUNDING_PHYSICIAN("RNDPHYS", "rounding physician"),
 
 	/**
-	 * <div class="en">scrub nurse</div> <div class="fr">Infirmière de salle d'opération/div>
+	 * <div class="en">scrub nurse</div> <div class="fr">Infirmière de salle
+	 * d'opération/div>
 	 */
 	SCRUB_NURSE("SNRS", "scrub nurse"),
 
 	/**
-	 * <div class="en">second assistant surgeon</div> <div class="fr">Deuxième assistant chirurgien</div>
+	 * <div class="en">second assistant surgeon</div> <div class="fr">Deuxième
+	 * assistant chirurgien</div>
 	 */
 	SECOND_ASSISANT("SASST", "second assistant surgeon"),
-	
+
 	/**
-	 * <div class="en">third assistant</div> <div class="fr">Autre assistant</div>
+	 * <div class="en">third assistant</div> <div class="fr">Autre
+	 * assistant</div>
 	 */
 	THIRD_ASSISANT("TASST", "third assistant");
 
@@ -117,23 +128,6 @@ public enum ParticipationFunction {
 			}
 		}
 		return null;
-	}
-
-	/**
-	 * <div class="en">Gets an "other value" code</div> <div class="de"></div>
-	 *
-	 * @param originalText
-	 * 				Original function display name
-	 * 
-	 * @return <div class="en">the corresponding code</div>
-	 */
-	public static Code getOtherCode(String originalText) {
-		final Code otherCode = new Code(org.ehealth_connector.common.enums.NullFlavor.OTHER);
-		// TODO: We should set these two according to CDA-CH Spec. However setting these two fields mask the nulLFlavor="OTH"!
-		// otherCode.setCodeSystem(CODE_SYSTEM_OID);
-		// otherCode.setCodeSystemName(CODE_SYSTEM_NAME);
-		otherCode.setOriginalTextReference(originalText);;
-		return otherCode;
 	}
 
 	/**
