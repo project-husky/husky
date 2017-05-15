@@ -142,7 +142,7 @@ public enum SubstanceAdminSubstitution {
 
 			}
 		}
-		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, CODE_SYSTEM_NAME, displayName);
 		return ehcCode;
 	}
 

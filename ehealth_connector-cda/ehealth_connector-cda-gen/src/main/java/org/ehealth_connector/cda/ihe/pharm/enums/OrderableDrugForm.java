@@ -530,7 +530,7 @@ public enum OrderableDrugForm {
 	 * @return the code
 	 */
 	public Code getCode() {
-		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayNameEn);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, CODE_SYSTEM_NAME, displayNameEn);
 		return ehcCode;
 	}
 

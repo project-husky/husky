@@ -123,7 +123,10 @@ public enum TimingEvent {
 	DURING_MEAL("C", "During meal", "Pendant le repas"),
 
 	/** <div class="en"> Waking up</div><div class="fr">Au réveil</div> */
-	WAKING_UP("WAKE", "Waking up", "Au réveil");
+	WAKING_UP("WAKE", "Waking up", "Au réveil"),
+
+	/** <div class="en"> Waking up</div><div class="fr">Au réveil</div> */
+	FAST("FAST", "On an empty stomach", "A jeun");
 
 	/** The Constant CODE_SYSTEM_NAME. */
 	public static final String CODE_SYSTEM_NAME = "HL7 TimingEvent";
