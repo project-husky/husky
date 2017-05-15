@@ -17,7 +17,6 @@
  */
 package org.ehealth_connector.cda.ch.enums;
 
-import org.ehealth_connector.cda.enums.NullFlavor;
 import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
