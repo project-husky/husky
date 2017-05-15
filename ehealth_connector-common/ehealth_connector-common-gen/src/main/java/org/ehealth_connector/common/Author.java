@@ -36,6 +36,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
+import org.openhealthtools.mdht.uml.hl7.datatypes.TS;
 
 /**
  * Author
@@ -196,6 +197,41 @@ public class Author {
 		this.setFunctionCodePatient();
 	}
 
+	/**
+	 * Creates a null flavored author according to ELGA spec (necessary for PHARM DIS)
+	 * 
+	 * @param nullFlavored
+	 * 			True
+	 */
+	public Author(boolean nullFlavored) {
+
+		/* ELGA spec:
+
+        <author nullFlavor="NA">
+            <time nullFlavor="NA"/>
+            <assignedAuthor nullFlavor="NA">
+               <id nullFlavor="NA"/>
+            </assignedAuthor>
+        </author>
+		 */
+
+		mAuthor = CDAFactory.eINSTANCE.createAuthor();
+		mPerson = null;
+		mAsAuthor = CDAFactory.eINSTANCE.createAssignedAuthor();
+
+		mAsAuthor.setAssignedPerson(mPerson);
+		mAuthor.setAssignedAuthor(mAsAuthor);
+		
+		mAuthor.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.NA);
+		mAuthor.getAssignedAuthor().setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.NA);
+		final II ii = DatatypesFactory.eINSTANCE.createII();
+		ii.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.NA);
+		mAuthor.getAssignedAuthor().getIds().add(ii);
+		final TS tsTime = DatatypesFactory.eINSTANCE.createTS();
+		tsTime.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.NA);
+		mAuthor.setTime(tsTime);
+	}
+	
 	/**
 	 * Weist dem Autor eine Postadresse zu.
 	 *
