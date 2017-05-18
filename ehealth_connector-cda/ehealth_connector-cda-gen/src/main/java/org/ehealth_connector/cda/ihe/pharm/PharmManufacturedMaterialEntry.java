@@ -26,6 +26,7 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.enums.Ucum;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
@@ -339,7 +340,6 @@ public class PharmManufacturedMaterialEntry extends
 	 *            the new ingredient code
 	 */
 	public void setIngredientCode(Code ingredientCode) {
-		init();
 		if (ingredientCode != null) {
 			this.getMdht().getIngredient().getIngredient().setCode(ingredientCode.getCE());
 		} else {
@@ -354,7 +354,6 @@ public class PharmManufacturedMaterialEntry extends
 	 *            the new ingredient name
 	 */
 	public void setIngredientName(String name) {
-		init();
 		final PharmSubstance pharmIngredient = this.getIngredient();
 		if (name != null) {
 			final EN en = DatatypesFactory.eINSTANCE.createEN();
@@ -372,7 +371,6 @@ public class PharmManufacturedMaterialEntry extends
 	 *            the new ingredient quantity
 	 */
 	public void setIngredientQuantity(Value quantity) {
-		init();
 		final PharmIngredient pharmIngredient = this.getMdht().getIngredient();
 		if (quantity != null) {
 			if (pharmIngredient.getQuantity() == null) {
@@ -383,6 +381,40 @@ public class PharmManufacturedMaterialEntry extends
 			}
 		} else {
 			pharmIngredient.setQuantity(null);
+		}
+	}
+
+	/**
+	 * Sets the ingredient quantity.
+	 *
+	 * @param numeratorQuantity
+	 *            the numerator ingredient quantity
+	 * @param numeratorUnit
+	 *            the unit of the numerator ingredient quantity
+	 * @param denominatorQuantity
+	 *            the denominator ingredient quantity
+	 * @param denominatorUnit
+	 *            the unit of the denominator ingredient quantity
+	 */
+	public void setIngredientQuantity(Double numeratorValue, Ucum numeratorUnit, Double denominatorValue, Ucum denominatorUnit) {
+		final PharmIngredient pharmIngredient = this.getMdht().getIngredient();
+		if (pharmIngredient.getQuantity() == null) {
+			
+	        final RTO rto = DatatypesFactory.eINSTANCE.createRTO();
+	        final PQ pq1 = DatatypesFactory.eINSTANCE.createPQ();
+	        if (numeratorUnit != null) pq1.setUnit(numeratorUnit.getCodeValue());
+	        pq1.setValue(numeratorValue);
+	        final PQ pq2 = DatatypesFactory.eINSTANCE.createPQ();
+	        if (denominatorUnit != null) pq2.setUnit(denominatorUnit.getCodeValue());
+	        pq2.setValue(denominatorValue);
+	        rto.setNumerator(pq1);
+	        rto.setDenominator(pq2);
+	        final Value quantity = new Value(rto);
+
+			final PharmQuantity pharmQuantity = CDAFactory.eINSTANCE.createPharmQuantity();
+			pharmIngredient.setQuantity(pharmQuantity);
+			pharmQuantity.setDenominator(quantity.copyMdhtRto().getDenominator());
+			pharmQuantity.setNumerator(quantity.copyMdhtRto().getNumerator());
 		}
 	}
 
@@ -415,7 +447,6 @@ public class PharmManufacturedMaterialEntry extends
 	 *            the new packaged medicine form code
 	 */
 	public void setPackagedMedicineFormCode(Code formCode) {
-		init();
 		if (formCode != null) {
 			this.getMdht().getAsContent().getContainerPackagedMedicine()
 					.setFormCode(formCode.getCE());
@@ -431,7 +462,6 @@ public class PharmManufacturedMaterialEntry extends
 	 *            the new packaged medicine name
 	 */
 	public void setPackagedMedicineName(String name) {
-		init();
 		if (name != null) {
 			final EN en = DatatypesFactory.eINSTANCE.createEN();
 			en.addText(name);
@@ -448,7 +478,6 @@ public class PharmManufacturedMaterialEntry extends
 	 *            the new packaged medicine product code
 	 */
 	public void setPackagedMedicineProductCode(Code productCode) {
-		init();
 		if (productCode != null) {
 			this.getMdht().getAsContent().getContainerPackagedMedicine()
 					.setCode(productCode.getCE());
@@ -464,7 +493,6 @@ public class PharmManufacturedMaterialEntry extends
 	 *            the new packaged medicine quantity
 	 */
 	public void setPackagedMedicineQuantity(BigDecimal value) {
-		init();
 		if (value != null) {
 			final PQ pq = DatatypesFactory.eINSTANCE.createPQ();
 			pq.setValue(value);

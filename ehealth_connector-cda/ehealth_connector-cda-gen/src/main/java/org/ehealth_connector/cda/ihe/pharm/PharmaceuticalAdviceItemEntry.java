@@ -23,6 +23,7 @@ import java.util.List;
 import org.ehealth_connector.cda.ExternalDocumentEntry;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ihe.pharm.enums.PharmaceuticalAdviceStatusList;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.LanguageCode;
@@ -35,7 +36,6 @@ import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Organizer;
 import org.openhealthtools.mdht.uml.cda.Precondition;
 import org.openhealthtools.mdht.uml.cda.Reference;
-import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.ExternalDocumentRef;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
@@ -97,6 +97,31 @@ public class PharmaceuticalAdviceItemEntry extends
 	}
 
 	/**
+	 * Adds a phamaceutical advice concern entry
+	 *
+	 * @param entry
+	 *            the entry
+	 */
+	public void addPharmaceuticalAdviceConcernEntry(PharmaceuticalAdviceConcernEntry entry) {
+		final PharmaceuticalAdviceConcernEntry old = this.getPharmaceuticalAdviceConcernEntry();
+		if (old != null) {
+			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+				if (old.getMdht() == entryRelationship.getAct()) {
+					entryRelationship.setAct(entry.getMdht());
+					break;
+				}
+			}
+		} else {
+			final EntryRelationship entryRelationship = CDAFactory.eINSTANCE
+					.createEntryRelationship();
+			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+			entryRelationship.setInversionInd(Boolean.FALSE);
+			entryRelationship.setAct(entry.copy());
+			this.getMdht().getEntryRelationships().add(entryRelationship);
+		}
+	}
+
+	/**
 	 * Add the modified Dosage instructions
 	 *
 	 * @param substanceAdministration
@@ -109,7 +134,7 @@ public class PharmaceuticalAdviceItemEntry extends
 		newDosageInstructions.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
 		newDosageInstructions.setInversionInd(false);
 
-		newDosageInstructions.setSubstanceAdministration(substanceAdministration);
+		newDosageInstructions.setSubstanceAdministration(substanceAdministration.copy());
 
 		this.getMdht().getEntryRelationships().add(newDosageInstructions);
 
@@ -127,6 +152,22 @@ public class PharmaceuticalAdviceItemEntry extends
 
 	}
 
+	/**
+	 * Add the modified Medication Treatment Plan
+	 *
+	 * @param medicationTreatmentPlanItemEntry
+	 *            New Medication Treatment Plan
+	 */
+	public void addModifiedMedicationTreatmentPlanItemEntry(MedicationTreatmentPlanItemEntry medicationTreatmentPlanItemEntry) {
+		
+		final EntryRelationship newMtpEntry = CDAFactory.eINSTANCE.createEntryRelationship();
+		newMtpEntry.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
+		newMtpEntry.setInversionInd(false);
+		newMtpEntry.setSubstanceAdministration((new SubstanceAdministration(medicationTreatmentPlanItemEntry.getMdht())).copy());
+		this.getMdht().getEntryRelationships().add(newMtpEntry);
+
+	}
+	
 	/**
 	 * Add the modified Prescription
 	 *
@@ -149,7 +190,7 @@ public class PharmaceuticalAdviceItemEntry extends
 
 		final Component4 newPrescriptionComponent = CDAFactory.eINSTANCE.createComponent4();
 		newPrescriptionComponent.setSeperatableInd(DatatypesFactory.eINSTANCE.createBL(false));
-		newPrescriptionComponent.setSubstanceAdministration(substanceAdministration);
+		newPrescriptionComponent.setSubstanceAdministration(substanceAdministration.copy());
 		organizer.getComponents().add(newPrescriptionComponent);
 		newPrescription.setOrganizer(organizer);
 		this.getMdht().getEntryRelationships().add(newPrescription);
@@ -503,31 +544,6 @@ public class PharmaceuticalAdviceItemEntry extends
 			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
 			entryRelationship.setInversionInd(Boolean.FALSE);
 			entryRelationship.setOrganizer(organizer);
-			this.getMdht().getEntryRelationships().add(entryRelationship);
-		}
-	}
-
-	/**
-	 * Sets the phamaceutical advice concern entry
-	 *
-	 * @param entry
-	 *            the entry
-	 */
-	public void setPharmaceuticalAdviceConcernEntry(PharmaceuticalAdviceConcernEntry entry) {
-		final PharmaceuticalAdviceConcernEntry old = this.getPharmaceuticalAdviceConcernEntry();
-		if (old != null) {
-			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
-				if (old.getMdht() == entryRelationship.getAct()) {
-					entryRelationship.setAct(entry.getMdht());
-					break;
-				}
-			}
-		} else {
-			final EntryRelationship entryRelationship = CDAFactory.eINSTANCE
-					.createEntryRelationship();
-			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
-			entryRelationship.setInversionInd(Boolean.FALSE);
-			entryRelationship.setAct(entry.getMdht());
 			this.getMdht().getEntryRelationships().add(entryRelationship);
 		}
 	}

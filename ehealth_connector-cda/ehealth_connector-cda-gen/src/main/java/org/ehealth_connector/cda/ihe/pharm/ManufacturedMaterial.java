@@ -40,7 +40,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.EntityDeterminerDetermined;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 /**
- * The Class CdaChMtpsMtp. see also CDA CH MTPS 7.4.2.3
+ * The Class ManufacturedMaterial. see also CDA CH MTPS 7.4.2.3
  */
 public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Material> {
 

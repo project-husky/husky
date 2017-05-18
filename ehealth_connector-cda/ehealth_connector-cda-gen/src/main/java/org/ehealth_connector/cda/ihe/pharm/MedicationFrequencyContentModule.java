@@ -110,8 +110,8 @@ public class MedicationFrequencyContentModule {
 	 *            the sequence number
 	 * @return the subordinate substance administration dose quantity
 	 */
-	protected IVL_PQ getSubordinateSubstanceAdminiatrationDoseQuantity(int sequenceNumber) {
-		final SubstanceAdministration sub = medicationItemEntry
+	protected IVL_PQ getSubordinateSubstanceAdministrationDoseQuantity(int sequenceNumber) {
+		final org.ehealth_connector.cda.ihe.pharm.SubstanceAdministration sub = medicationItemEntry
 				.getSubordinateSubstanceAdministration(sequenceNumber);
 		return sub.getDoseQuantity();
 	}
@@ -123,10 +123,10 @@ public class MedicationFrequencyContentModule {
 	 *            the sequence number
 	 * @return the subordinate substance administration effective time
 	 */
-	protected SXCM_TS getSubordinateSubstanceAdminiatrationEffectiveTime(int sequenceNumber) {
-		final SubstanceAdministration sub = medicationItemEntry
+	protected SXCM_TS getSubordinateSubstanceAdministrationEffectiveTime(int sequenceNumber) {
+		final org.ehealth_connector.cda.ihe.pharm.SubstanceAdministration sub = medicationItemEntry
 				.getSubordinateSubstanceAdministration(sequenceNumber);
-		return sub.getEffectiveTimes().get(0);
+		return sub.getMdht().getEffectiveTimes().get(0);
 	}
 
 	/**
@@ -136,7 +136,7 @@ public class MedicationFrequencyContentModule {
 	 *            the sequence number
 	 * @return the subordinate substance administration
 	 */
-	protected SubstanceAdministration getSubordinateSubstanceAdministration(int sequenceNumber) {
+	protected org.ehealth_connector.cda.ihe.pharm.SubstanceAdministration getSubordinateSubstanceAdministration(int sequenceNumber) {
 		return this.medicationItemEntry.getSubordinateSubstanceAdministration(sequenceNumber);
 	}
 
@@ -246,22 +246,19 @@ public class MedicationFrequencyContentModule {
 	 */
 	protected void setSubordinateSubstanceAdministration(int sequenceNumber, SXCM_TS effectiveTime,
 			IVL_PQ doseQuantity) {
-		final SubstanceAdministration sub = CDAFactory.eINSTANCE.createSubstanceAdministration();
-		sub.setMoodCode(x_DocumentSubstanceMood.INT);
+		final org.ehealth_connector.cda.ihe.pharm.SubstanceAdministration sub = new org.ehealth_connector.cda.ihe.pharm.SubstanceAdministration();
 
-		final Consumable consumable = CDAFactory.eINSTANCE.createConsumable();
-		final ManufacturedProduct manufacturedProduct = CDAFactory.eINSTANCE
-				.createManufacturedProduct();
-		final Material material = CDAFactory.eINSTANCE.createMaterial();
-		material.setNullFlavor(NullFlavor.NA);
+		final org.ehealth_connector.cda.Consumable consumable = new org.ehealth_connector.cda.Consumable(false);
+		final org.ehealth_connector.cda.ihe.pharm.ManufacturedProduct manufacturedProduct = new org.ehealth_connector.cda.ihe.pharm.ManufacturedProduct();
+		final ManufacturedMaterial material = new ManufacturedMaterial();
+		material.setNullFlavored();
 		manufacturedProduct.setManufacturedMaterial(material);
 		consumable.setManufacturedProduct(manufacturedProduct);
 		sub.setConsumable(consumable);
-
-		sub.getEffectiveTimes().add(effectiveTime);
+		sub.getMdht().getEffectiveTimes().add(effectiveTime);
 		sub.setDoseQuantity(doseQuantity);
 
-		this.medicationItemEntry.setSubordinateSubstanceAdminsitration(sequenceNumber, sub);
+		this.medicationItemEntry.setSubordinateSubstanceAdministration(sequenceNumber, sub);
 	}
 
 }

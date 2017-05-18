@@ -18,13 +18,18 @@
 
 package org.ehealth_connector.cda.ihe.pharm;
 
+import org.ehealth_connector.cda.ihe.pharm.enums.PharmacyItemTypeList;
 import org.ehealth_connector.common.Identificator;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ManufacturedProduct;
 import org.openhealthtools.mdht.uml.cda.Material;
 import org.openhealthtools.mdht.uml.cda.Product;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.vocab.ActClassSupply;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 
 /**
  * Implements the IHE DispenseItemReferenceEntry.
@@ -59,5 +64,31 @@ public class DispenseItemReferenceEntry extends DispenseItemEntry {
 		product.setManufacturedProduct(manufacturedProduct);
 		this.getMdht().setProduct(product);
 	}
+	
+	/**
+	 * Instantiates a new dispense item reference entry.
+	 *
+	 * @param itemId
+	 * 				ID of referenced item
+	 */
+	public DispenseItemReferenceEntry(Identificator itemId) {
+
+		this(PHARMFactory.eINSTANCE.createDispenseItemReferenceEntry().init());
+
+		final CD cd = DatatypesFactory.eINSTANCE.createCD();
+
+		cd.setCode(PharmacyItemTypeList.DISItem.getCode().getCode());
+		cd.setCodeSystem(PharmacyItemTypeList.CODE_SYSTEM_OID);
+		cd.setCodeSystemName(PharmacyItemTypeList.CODE_SYSTEM_NAME);
+		cd.setDisplayName(PharmacyItemTypeList.DISItem.getCode().getDisplayName());
+
+		this.getMdht().setCode(cd);
+
+		this.getMdht().setMoodCode(x_DocumentSubstanceMood.EVN);
+		this.getMdht().setClassCode(ActClassSupply.SPLY);
+		this.getMdht().getIds().add(itemId.getIi());
+	}
+
+
 
 }

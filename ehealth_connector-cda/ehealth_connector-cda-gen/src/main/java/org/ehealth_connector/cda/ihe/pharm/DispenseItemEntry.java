@@ -20,12 +20,14 @@ package org.ehealth_connector.cda.ihe.pharm;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.ExternalDocumentEntry;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ihe.pharm.enums.DispenseCodeList;
 import org.ehealth_connector.cda.ihe.pharm.enums.MedicationsSpecialConditions;
 import org.ehealth_connector.cda.ihe.pharm.enums.PharmacyItemTypeList;
 import org.ehealth_connector.cda.ihe.pharm.enums.SubstanceAdminSubstitution;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.LanguageCode;
@@ -36,8 +38,8 @@ import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.PharmComponent1;
 import org.openhealthtools.mdht.uml.cda.PharmSubstitutionMade;
 import org.openhealthtools.mdht.uml.cda.Precondition;
+import org.openhealthtools.mdht.uml.cda.Product;
 import org.openhealthtools.mdht.uml.cda.Reference;
-import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.ExternalDocumentRef;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
@@ -112,7 +114,27 @@ public class DispenseItemEntry
 		final EntryRelationship dailyDosageEntryRelationship = CDAFactory.eINSTANCE
 				.createEntryRelationship();
 		dailyDosageEntryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
-		dailyDosageEntryRelationship.setSubstanceAdministration(dailyDosage);
+		dailyDosageEntryRelationship.setSubstanceAdministration(dailyDosage.copy());
+		this.getMdht().getEntryRelationships().add(dailyDosageEntryRelationship);
+	}
+
+	/** 
+	 * Add the Daily Dosage
+	 *
+	 * @param dailyDosage
+	 *            Description of the daily dosage
+	 *
+	 */
+	public void addDailyDosage(Consumable dailyDosage) {
+
+		final EntryRelationship dailyDosageEntryRelationship = CDAFactory.eINSTANCE
+				.createEntryRelationship();
+		dailyDosageEntryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
+		
+		final SubstanceAdministration substanceAdministration = new SubstanceAdministration();
+		substanceAdministration.setConsumable(dailyDosage);
+		dailyDosageEntryRelationship.setSubstanceAdministration(substanceAdministration.copy());
+		
 		this.getMdht().getEntryRelationships().add(dailyDosageEntryRelationship);
 
 	}
@@ -214,9 +236,11 @@ public class DispenseItemEntry
 	 * return Product dispensed
 	 *
 	 */
-	public org.openhealthtools.mdht.uml.cda.Product getDispensedProduct() {
+	public ManufacturedProduct getDispensedProduct() {
 
-		return this.getMdht().getProduct();
+		if (this.getMdht().getProduct() != null && this.getMdht().getProduct().getManufacturedProduct() != null)
+			return new ManufacturedProduct(this.getMdht().getProduct().getManufacturedProduct());
+		return null;
 
 	}
 
@@ -408,17 +432,18 @@ public class DispenseItemEntry
 	}
 
 	/**
-	 * Set the dispensed product
+	 * Set the dispensed product (consumable)
 	 *
 	 * @param product
 	 *            Product dispensed
 	 *
 	 */
-	public void setDispensedProduct(org.openhealthtools.mdht.uml.cda.Product product) {
-
+	public void setDispensedProduct(ManufacturedProduct manufacturedProduct) {
+		final Product product = CdaUtil.getMdhtCdaFactoryInstance().createProduct();
+		product.setManufacturedProduct(manufacturedProduct.getMdht());
 		this.getMdht().setProduct(product);
-
 	}
+
 
 	/**
 	 * Sets the dosage instructions.
@@ -472,6 +497,19 @@ public class DispenseItemEntry
 		if (id != null) {
 			this.getMdht().getIds().add(id.getIi());
 		}
+	}
+
+	/**
+	 * Sets the medication fullfillment instructions.
+	 *
+	 * @param entry
+	 *            the new medication fullfillment instructions
+	 */
+	public void setMedicationFullfillmentInstructions(String instructions) {
+
+		final MedicationFullfillmentInstructionsEntry professionnalInstructions = new MedicationFullfillmentInstructionsEntry();
+		professionnalInstructions.setTextReference(instructions);
+		setMedicationFullfillmentInstructions(professionnalInstructions);
 	}
 
 	/**
@@ -667,5 +705,5 @@ public class DispenseItemEntry
 	public void setTextReference(String value) {
 		this.getMdht().setText(Util.createReference(value));
 	}
-
+	
 }

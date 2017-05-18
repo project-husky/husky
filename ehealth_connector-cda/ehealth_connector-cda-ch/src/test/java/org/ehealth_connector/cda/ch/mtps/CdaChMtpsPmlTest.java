@@ -36,7 +36,7 @@ import javax.xml.xpath.XPathFactory;
 
 import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.ExternalDocumentEntry;
-import org.ehealth_connector.cda.ch.mtps.enums.RouteOfAdministration;
+import org.ehealth_connector.cda.enums.RouteOfAdministration;
 import org.ehealth_connector.cda.ihe.pharm.DispenseItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.DispenseItemReferenceEntry;
 import org.ehealth_connector.cda.ihe.pharm.MedicationFullfillmentInstructionsEntry;
@@ -1076,7 +1076,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 			IVL_PQ doseQuantity, IVL_PQ rateQuantity, SXCM_TS planificationTime,
 			Consumable consumable, Author author, CD approachSite, SXCM_TS startTime,
 			SXCM_TS endTime,
-			org.ehealth_connector.cda.ch.mtps.enums.RouteOfAdministration routeOfAdministration,
+			org.ehealth_connector.cda.enums.RouteOfAdministration routeOfAdministration,
 			SXCM_TS uniqueDailyDoseTime, SXCM_TS multipleDailyDoseTime, Double prescribedQuantity,
 			String unitOfPrescribedQuantity, boolean isSubstitionPossible,
 			Identificator idReferencedDocument, ArrayList<Identificator> templateIds) {

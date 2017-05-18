@@ -121,7 +121,7 @@ public class PharmaceuticalAdviceItemEntryTest {
 
 		final PharmaceuticalAdviceConcernEntry concernEntry = new PharmaceuticalAdviceConcernEntry();
 		concernEntry.setTextReference("Test");
-		entry.setPharmaceuticalAdviceConcernEntry(concernEntry);
+		entry.addPharmaceuticalAdviceConcernEntry(concernEntry);
 
 		final Document document = entry.getDocument();
 

@@ -25,7 +25,7 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
-import org.ehealth_connector.cda.ch.mtps.enums.RouteOfAdministration;
+import org.ehealth_connector.cda.enums.RouteOfAdministration;
 import org.ehealth_connector.cda.ihe.pharm.PrescriptionItemEntry;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.junit.Test;

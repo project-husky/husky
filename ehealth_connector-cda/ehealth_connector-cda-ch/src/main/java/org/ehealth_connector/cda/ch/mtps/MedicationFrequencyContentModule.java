@@ -102,8 +102,8 @@ public class MedicationFrequencyContentModule
 			dosings = new IVL_PQ[getMaxSubordinateSequenceNumber()];
 			events = new EIVL_TS[getMaxSubordinateSequenceNumber()];
 			for (int i = 1; i <= this.getMaxSubordinateSequenceNumber(); ++i) {
-				events[i - 1] = (EIVL_TS) getSubordinateSubstanceAdminiatrationEffectiveTime(i);
-				dosings[i - 1] = this.getSubordinateSubstanceAdminiatrationDoseQuantity(i);
+				events[i - 1] = (EIVL_TS) getSubordinateSubstanceAdministrationEffectiveTime(i);
+				dosings[i - 1] = this.getSubordinateSubstanceAdministrationDoseQuantity(i);
 			}
 		}
 		if (effectiveTime == null) {
