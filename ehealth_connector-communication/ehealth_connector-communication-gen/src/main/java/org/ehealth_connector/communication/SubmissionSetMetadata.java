@@ -20,8 +20,8 @@ package org.ehealth_connector.communication;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.EHealthConnectorVersions;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.openhealthtools.ihe.utils.OID;
@@ -339,7 +339,7 @@ public class SubmissionSetMetadata {
 
 			// This is the eHealth Connector Root OID
 			// default value just in case...
-			final String organizationalId = EHealthConnectorVersions.getCurrentVersion().getOid();
+			final String organizationalId = EhcVersions.getCurrentVersion().getOid();
 
 			if (ohtSubmissionSetType.getUniqueId() == null) {
 				ohtSubmissionSetType.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));

@@ -15,13 +15,13 @@
  *
  */
 
-package org.ehealth_connector.common;
+package org.ehealth_connector.common.enums;
 
 /**
  * Enum that contains the different Versions of the eHealtConnector
  *
  */
-public enum EHealthConnectorVersions {
+public enum EhcVersions {
 	/**
 	 * OID eHealthConnector development edition (trunk)
 	 */
@@ -50,17 +50,16 @@ public enum EHealthConnectorVersions {
 	/**
 	 * OID eHealthConnector R201704
 	 */
-	EHealthConnectorR201704("2.16.756.5.30.1.139.1.1.6", "eHealthConnector R201704", "R20170430");
+	EHealthConnectorR201704("2.16.756.5.30.1.139.1.1.6", "eHealthConnector R201704", "R20170430"),
 
 	/**
 	 * OID eHealthConnector Rxxxxxx
 	 */
 	// This is preparation for next release, only
-	// EHealthConnectorRxxxxxx("2.16.756.5.30.1.139.1.1.7","eHealthConnector
-	// Rxxxxxx",todo release date);
+	EHealthConnectorRxxxxxx("2.16.756.5.30.1.139.1.1.7", "eHealthConnector Rxxxxxx", "todo release date");
 
-	public static EHealthConnectorVersions getCurrentVersion() {
-		return EHealthConnectorVersions.EHealthConnectorDev;
+	public static EhcVersions getCurrentVersion() {
+		return EhcVersions.EHealthConnectorDev;
 	}
 
 	private String oid;
@@ -68,7 +67,7 @@ public enum EHealthConnectorVersions {
 
 	private String releaseDate;
 
-	private EHealthConnectorVersions(String oid, String systemVersionName, String releaseDate) {
+	private EhcVersions(String oid, String systemVersionName, String releaseDate) {
 		this.oid = oid;
 		this.systemVersionName = systemVersionName;
 		this.releaseDate = releaseDate;

@@ -21,8 +21,8 @@ package org.ehealth_connector.cda.ch.vacd;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.EHealthConnectorVersions;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
@@ -48,7 +48,7 @@ public class MedicationTargetEntry
 						.getIi());
 
 		final Identificator id = new Identificator(
-				EHealthConnectorVersions.getCurrentVersion().getOid(), UUID.generate());
+				EhcVersions.getCurrentVersion().getOid(), UUID.generate());
 		this.setId(id);
 	}
 

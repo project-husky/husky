@@ -22,9 +22,9 @@ import org.ehealth_connector.cda.ch.enums.RiskOfComplications;
 import org.ehealth_connector.cda.ch.enums.RiskOfExposure;
 import org.ehealth_connector.cda.enums.ProblemType;
 import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.EHealthConnectorVersions;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.ihe.utils.UUID;
 
@@ -38,7 +38,7 @@ public class ProblemEntry extends AbstractProblemEntry {
 	 * Default constructor to instanciate the object
 	 */
 	public ProblemEntry() {
-		this.setId(new Identificator(EHealthConnectorVersions.getCurrentVersion().getOid(),
+		this.setId(new Identificator(EhcVersions.getCurrentVersion().getOid(),
 				UUID.generate()));
 	}
 

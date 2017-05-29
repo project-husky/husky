@@ -19,8 +19,8 @@ package org.ehealth_connector.cda.utils;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.common.EHealthConnectorVersions;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.enums.EhcVersions;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Component3;
@@ -61,7 +61,7 @@ public abstract class CdaUtil {
 	 */
 	public static Identificator createUniqueIdentificator() {
 		final II ii = DatatypesFactory.eINSTANCE.createII();
-		ii.setRoot(EHealthConnectorVersions.getCurrentVersion().getOid());
+		ii.setRoot(EhcVersions.getCurrentVersion().getOid());
 		ii.setExtension(UUID.generate());
 		return new Identificator(ii);
 	}
@@ -73,7 +73,7 @@ public abstract class CdaUtil {
 	 */
 	public static II createUniqueIi() {
 		final II ii = DatatypesFactory.eINSTANCE.createII();
-		ii.setRoot(EHealthConnectorVersions.getCurrentVersion().getOid());
+		ii.setRoot(EhcVersions.getCurrentVersion().getOid());
 		ii.setExtension(UUID.generate());
 		return ii;
 	}
@@ -106,7 +106,7 @@ public abstract class CdaUtil {
 	 */
 	public static II createUniqueIiFromString(String id) {
 		final II ii = DatatypesFactory.eINSTANCE.createII();
-		ii.setRoot(EHealthConnectorVersions.getCurrentVersion().getOid());
+		ii.setRoot(EhcVersions.getCurrentVersion().getOid());
 		if (id == null) {
 			ii.setExtension(UUID.generate());
 		} else {

@@ -27,8 +27,8 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdImmunizations;
-import org.ehealth_connector.common.EHealthConnectorVersions;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.enums.EhcVersions;
 import org.junit.Test;
 import org.openhealthtools.ihe.utils.UUID;
 import org.w3c.dom.Document;
@@ -145,13 +145,13 @@ public class MedicationTargetEntryTest {
 
 		final String uuid = UUID.generate();
 		final Identificator softwareId = new Identificator(
-				EHealthConnectorVersions.getCurrentVersion().getOid(), uuid);
+				EhcVersions.getCurrentVersion().getOid(), uuid);
 		entry.setId(softwareId);
 
 		final Document document = entry.getDocument();
 
 		final XPathExpression expr = xpath.compile(
-				"observation/id[@root='" + EHealthConnectorVersions.getCurrentVersion().getOid()
+				"observation/id[@root='" + EhcVersions.getCurrentVersion().getOid()
 						+ "' and @extension='" + uuid + "']");
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());

@@ -22,8 +22,8 @@ import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.Date;
 
-import org.ehealth_connector.common.EHealthConnectorVersions;
 import org.ehealth_connector.common.VendorInformation;
+import org.ehealth_connector.common.enums.EhcVersions;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -81,8 +81,8 @@ public class ReadmeTxt {
 
 		final Object[] values = new Object[] { vendorInfo.getVendorName(),
 				vendorInfo.getProductName(), vendorInfo.getModuleName(),
-				EHealthConnectorVersions.getCurrentVersion() + ", Release Date "
-						+ EHealthConnectorVersions.getCurrentVersion().getReleaseDate(),
+				EhcVersions.getCurrentVersion() + ", Release Date "
+						+ EhcVersions.getCurrentVersion().getReleaseDate(),
 				vendorInfo.getContactInformation(), new Date().toString() };
 		final String str = MessageFormat.format(TEMPLATE_EN, values);
 		inputStream = new ByteArrayInputStream(str.getBytes());

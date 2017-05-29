@@ -30,7 +30,7 @@ import java.util.zip.ZipFile;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.EHealthConnectorVersions;
+import org.ehealth_connector.common.enums.EhcVersions;
 //import org.ehealth_connector.common.ch.AuthorCh;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
@@ -256,7 +256,7 @@ public class ConvenienceCommunication {
 		final FolderMetadata folderMeta = new FolderMetadata(txnData.getFolder(fodlerEntryUUID));
 
 		if (folderMeta.getUniqueId() == null) {
-			final String organizationalId = EHealthConnectorVersions.getCurrentVersion().getOid();
+			final String organizationalId = EhcVersions.getCurrentVersion().getOid();
 			folderMeta.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
 		}
 		txnData.getSubmissionSet().setContentTypeCode(
@@ -492,7 +492,7 @@ public class ConvenienceCommunication {
 
 				// This is the eHealth Connector Root OID
 				// default value just in case...
-				String organizationalId = EHealthConnectorVersions.getCurrentVersion().getOid();
+				String organizationalId = EhcVersions.getCurrentVersion().getOid();
 
 				if (subSet.getUniqueId() == null) {
 					subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
@@ -541,7 +541,7 @@ public class ConvenienceCommunication {
 
 				// This is the eHealth Connector Root OID
 				// default value just in case...
-				String organizationalId = EHealthConnectorVersions.getCurrentVersion().getOid();
+				String organizationalId = EhcVersions.getCurrentVersion().getOid();
 
 				if (subSet.getUniqueId() == null) {
 					subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
