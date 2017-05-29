@@ -233,7 +233,7 @@ public class FhirPatientTest {
 	}
 
 	@Test
-	public void testConveniencePatientMaritialStatus() {
+	public void testConveniencePatientMaritalStatus() {
 		final FhirPatient fhirPatient = new FhirPatient();
 		CodeableConcept maritalStatus = new CodeableConcept();
 		maritalStatus.addCoding(
