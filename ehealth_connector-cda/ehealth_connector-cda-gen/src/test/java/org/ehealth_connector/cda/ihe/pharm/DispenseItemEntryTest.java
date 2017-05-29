@@ -103,6 +103,9 @@ public class DispenseItemEntryTest {
 		entry.setMedicationFullfillmentInstructions(medicalFullfillmentInstruction);
 		assertEquals("#abc", entry.getMedicationFullfillmentInstructions().getTextReference());
 
+		entry.setMedicationFullfillmentInstructions("#abcnew");
+		assertEquals("#abcnew", entry.getMedicationFullfillmentInstructions().getTextReference());
+		
 		MedicationFullfillmentInstructionsEntry medicalFullfillmentInstructionDisrupt = new MedicationFullfillmentInstructionsEntry();
 		medicalFullfillmentInstructionDisrupt.setTextReference("#ghi");
 		entry.setMedicationFullfillmentInstructions(medicalFullfillmentInstructionDisrupt);
@@ -111,6 +114,12 @@ public class DispenseItemEntryTest {
 		PatientMedicalInstructionsEntry patientInstructions = new PatientMedicalInstructionsEntry();
 		patientInstructions.setTextReference("#def");
 		entry.setPatientMedicalInstructions(patientInstructions);
+
+		assertEquals("#ghi", entry.getMedicationFullfillmentInstructions().getTextReference());
+		assertNotNull(entry.getPatientMedicalInstructions());
+		entry.getDocument();
+
+		assertEquals("#def", entry.getPatientMedicalInstructions().getTextReference());
 
 		assertEquals("#ghi", entry.getMedicationFullfillmentInstructions().getTextReference());
 		assertNotNull(entry.getPatientMedicalInstructions());

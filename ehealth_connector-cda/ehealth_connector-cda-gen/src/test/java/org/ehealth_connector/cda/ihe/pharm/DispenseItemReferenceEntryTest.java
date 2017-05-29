@@ -50,6 +50,31 @@ public class DispenseItemReferenceEntryTest {
 	}
 
 	@Test
+	public void testCreation() throws Exception {
+
+		final MedicationTreatmentPlanItemReferenceEntry entry = new MedicationTreatmentPlanItemReferenceEntry(new Identificator("oid", "id"));
+		final Document document = entry.getDocument();
+
+		XPathExpression expr = xpath.compile("//id[@root='oid' and @extension='id']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile("//templateId[@root='1.3.6.1.4.1.19376.1.9.1.3.10']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath.compile(
+				"//code[@code='MTPItem' and @codeSystem='1.3.6.1.4.1.19376.1.9.2.2' and @codeSystemName='IHE Pharmacy Item Type List']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+
+		expr = xpath
+				.compile("//consumable/manufacturedProduct/manufacturedMaterial[@nullFlavor='NA']");
+		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}
+	
+	@Test
 	public void testSerializeEmpty() throws Exception {
 		final DispenseItemReferenceEntry entry = new DispenseItemReferenceEntry();
 

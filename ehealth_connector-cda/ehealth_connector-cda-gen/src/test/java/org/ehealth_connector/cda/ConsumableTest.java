@@ -73,6 +73,7 @@ public class ConsumableTest {
 
 		assertEquals(whoAtc, consumable.getWhoAtcCode());
 		assertEquals(gtin, consumable.getManufacturedProductPackageId());
+		assertEquals(gtin, consumable.getManufacturedProductPackageId());
 		assertEquals("BOOSTRIX Polio Inj Susp", consumable.getTradeName());
 
 		Document document = consumable.getDocument();
