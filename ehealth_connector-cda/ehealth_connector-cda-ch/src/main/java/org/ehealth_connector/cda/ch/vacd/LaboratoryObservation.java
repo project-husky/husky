@@ -231,7 +231,7 @@ public class LaboratoryObservation extends AbstractObservation {
 	public void addInterpretationCode(NullFlavor na) {
 		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setNullFlavor(na);
-		getMdht().getInterpretationCodes().add(ce);
+		mLaboratoryObservation.getInterpretationCodes().add(ce);
 	}
 
 	/**
