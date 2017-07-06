@@ -173,7 +173,27 @@ public enum CodeSystems implements IdentityDomain {
 	 */
 	WHO_D_D_MED_PPROD_ID("2.16.840.1.113883.6.294", "WHO Drug Dictionary Medicinal Product ID");
 
+	/**
+	 * TODO tsc dokumentieren <div class="en">Gets the Enum with a given
+	 * code</div> <div class="de">Liefert den Enum anhand eines gegebenen
+	 * codes</div>
+	 *
+	 * @param code
+	 *            <br>
+	 *            <div class="de"> code</div>
+	 * @return <div class="en">the enum</div>
+	 */
+	public static CodeSystems getEnum(String codeSystemId) {
+		for (CodeSystems x : values()) {
+			if (x.getCodeSystemId().equals(codeSystemId)) {
+				return x;
+			}
+		}
+		return null;
+	}
+
 	private String codeSystem;
+
 	private String codeSystemName;
 
 	CodeSystems(String oid, String name) {
@@ -190,4 +210,5 @@ public enum CodeSystems implements IdentityDomain {
 	public String getCodeSystemName() {
 		return codeSystemName;
 	}
+
 }

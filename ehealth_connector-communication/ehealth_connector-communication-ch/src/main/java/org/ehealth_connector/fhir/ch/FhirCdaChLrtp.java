@@ -435,6 +435,10 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		for (LaboratorySpecialtySection lss : lssList) {
 			doc.addLaboratorySpecialtySection(lss);
 		}
+		if (doc.isNarrativeTextGenerationEnabled()) {
+			doc.setNarrativeTextSectionLaboratorySpeciality(
+					doc.generateNarrativeTextLaboratoryObservations("TODOtscLab", null));
+		}
 
 		// VitalSignsOrganizer
 		List<VitalSignsOrganizer> vsoList = getLrtpVitalSignsOrganizers(docManifest);

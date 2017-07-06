@@ -35,6 +35,7 @@ import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Performer;
 import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.ehealth_connector.common.utils.DateUtil;
@@ -229,7 +230,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 */
 	private void addTableHeaderLaboratorySpecialtySection() {
 
-		if (!"".equals(posCodeSystemOid))
+		if (!"".equals(posCodeSystemOid) && posCodeSystemOid != null)
 			headerColumns.add(resBundle.getString("observation.header.row_position"));
 		headerColumns.add(resBundle.getString("observation.header.row_number"));
 		headerColumns.add(resBundle.getString("observation.header.observation"));
@@ -401,7 +402,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 		if (observation != null) {
 			Code obsCode = observation.getCode();
 
-			if (!"".equals(posCodeSystemOid)) {
+			if (!"".equals(posCodeSystemOid) && posCodeSystemOid != null) {
 				// Position code
 				rowColumns.add(getCell(getPos(obsCode)));
 			}
@@ -448,10 +449,16 @@ public class ObservationChTextBuilder extends TextBuilder {
 
 			// Code System
 			String tempCodeSystem = observation.getCode().getCodeSystemName();
-			if (tempCodeSystem == null)
+			if (tempCodeSystem == null) {
 				tempCodeSystem = observation.getCode().getCodeSystem();
-			if (tempCodeSystem == "")
-				tempCodeSystem = observation.getCode().getCodeSystem();
+				if (tempCodeSystem == "")
+					tempCodeSystem = observation.getCode().getCodeSystem();
+				if (!"".equals(tempCodeSystem)) {
+					String temp = CodeSystems.getEnum(tempCodeSystem).getCodeSystemName();
+					if (!"".equals(temp))
+						tempCodeSystem = temp;
+				}
+			}
 			rowColumns.add(getCell(tempCodeSystem));
 
 			// Code
@@ -490,7 +497,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 
 		} else {
 			// create an empty row
-			if (!"".equals(posCodeSystemOid)) {
+			if (!"".equals(posCodeSystemOid) && posCodeSystemOid != null) {
 				// Position code
 				rowColumns.add(getCell(""));
 			}

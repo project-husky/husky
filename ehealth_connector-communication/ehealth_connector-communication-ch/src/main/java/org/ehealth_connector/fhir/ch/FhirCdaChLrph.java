@@ -442,9 +442,14 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 		}
 
 		// LaboratorySpecialtySection
-		final String narrative = getNarrative(docManifest,
-				FhirCommon.urnUseAsLaboratorySpecialtySection);
-		doc.setNarrativeTextSectionLaboratorySpeciality(narrative);
+		if (doc.isNarrativeTextGenerationEnabled()) {
+			doc.setNarrativeTextSectionLaboratorySpeciality(
+					doc.generateNarrativeTextLaboratoryObservations("TODOtscLab", null));
+		} else {
+			final String narrative = getNarrative(docManifest,
+					FhirCommon.urnUseAsLaboratorySpecialtySection);
+			doc.setNarrativeTextSectionLaboratorySpeciality(narrative);
+		}
 
 		AbstractSpecimenAct specimenAct = doc.getSpecimenAct();
 		if (specimenAct != null) {
