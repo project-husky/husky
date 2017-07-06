@@ -25,10 +25,12 @@ import org.ehealth_connector.cda.AbstractVitalSignObservation;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationForVitalSign;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.VitalSignList;
+import org.ehealth_connector.cda.enums.ActSite;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.utils.LangTexts;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
@@ -52,6 +54,35 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 		super.getVitalSignObservation().getInterpretationCodes().clear();
 		super.getVitalSignObservation().setText(null);
 		super.getVitalSignObservation().getTargetSiteCodes().clear();
+	}
+
+	/**
+	 * Instantiates a new vital sign observation.
+	 *
+	 * @param code
+	 *            <div class="en">Code for a vital sign observation</div>
+	 *            <div class="de">Code für ein Vitalzeichen</div>
+	 *            <div class="fr"></div> <div class="it"></div>
+	 * @param targetSite
+	 *            <div class="de">Anatomische Lage des Resultats</div>
+	 *            <div class="fr"></div> <div class="it"></div>
+	 * @param value
+	 *            <div class="de">Wert des Resultats (als Value-Objekt)</div>
+	 *            <div class="fr"></div> <div class="it"></div> xxx
+	 * @param targetSiteLangTexts
+	 *            the langTexts for the Value
+	 */
+	public VitalSignObservation(Code code, ActSite targetSite, Value value,
+			LangTexts valueLangTexts, LangTexts targetSiteLangTexts) {
+		super(null);
+		initMdht();
+
+		setCode(code);
+		setTargetSite(targetSite);
+		setValue(value);
+		super.myValueLangTexts = valueLangTexts;
+		super.myTargetSiteLangTexts = targetSiteLangTexts;
+		super.setTargetSite(targetSite, targetSiteLangTexts);
 	}
 
 	/**
@@ -83,6 +114,11 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 			org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation observation) {
 		super(null);
 		setVitalSignObservation(observation);
+	}
+
+	public VitalSignObservation(VitalSignList codeEnum, ActSite targetSite, Value value) {
+		this(codeEnum.getCode(), targetSite, value, codeEnum.getLangTexts(),
+				targetSite.getLangTexts());
 	}
 
 	/**

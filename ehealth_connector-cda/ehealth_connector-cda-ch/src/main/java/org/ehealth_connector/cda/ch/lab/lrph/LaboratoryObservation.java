@@ -35,6 +35,8 @@ import org.ehealth_connector.common.enums.ObservationInterpretation;
 public class LaboratoryObservation
 		extends org.ehealth_connector.cda.ch.lab.AbstractLaboratoryObservation {
 
+	protected org.openhealthtools.mdht.uml.cda.Observation mObservation;
+
 	/**
 	 * Instantiates a new laboratory observation.
 	 */

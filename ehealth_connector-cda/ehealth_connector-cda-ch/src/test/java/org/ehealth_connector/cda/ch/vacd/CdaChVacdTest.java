@@ -43,12 +43,12 @@ import org.ehealth_connector.cda.ch.AllergyConcern;
 import org.ehealth_connector.cda.ch.AllergyProblem;
 import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.PregnancyHistory;
-import org.ehealth_connector.cda.enums.RouteOfAdministration;
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.cda.ch.vacd.enums.ObservationInterpretationForImmunization;
 import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
 import org.ehealth_connector.cda.enums.AllergiesAndIntolerances;
 import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
+import org.ehealth_connector.cda.enums.RouteOfAdministration;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Author;
@@ -828,7 +828,7 @@ public class CdaChVacdTest extends TestUtils {
 		assertEquals(
 				ObservationInterpretationForImmunization.NEGATIVE_PATHOGEN_COULDNT_BE_DETERMINED_IN_SPECIMEN
 						.getCodeValue(),
-				l.getInterpretationCode());
+				l.getInterpretationCode().getCode());
 
 		l.addValue(code2);
 		assertTrue(TestUtils.isEqual(code2, l.getValue().getCode()));

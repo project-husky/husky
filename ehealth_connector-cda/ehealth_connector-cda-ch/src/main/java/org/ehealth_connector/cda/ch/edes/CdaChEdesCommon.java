@@ -26,7 +26,6 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.AbstractAllergyProblem;
 import org.ehealth_connector.cda.AbstractCda;
-import org.ehealth_connector.cda.AbstractObservation;
 import org.ehealth_connector.cda.AbstractProblemConcern;
 import org.ehealth_connector.cda.AbstractProblemEntry;
 import org.ehealth_connector.cda.ch.ActiveProblemConcern;
@@ -111,7 +110,7 @@ public class CdaChEdesCommon {
 
 		// update the MDHT Object content references to CDA level 1 text
 		if (updateProblemConcernReferences(section.getActs(), SectionsEDES.ACTIVE_PROBLEMS)) {
-			if (cdaDocument.IsNarrativeTextGenerationEnabled()) {
+			if (cdaDocument.isNarrativeTextGenerationEnabled()) {
 				// create the CDA level 1 text
 				section.createStrucDocText(generateNarrativeTextActiveProblemConcerns(section));
 			} else {
@@ -155,7 +154,7 @@ public class CdaChEdesCommon {
 		// update the MDHT Object content references to CDA level 1 text
 		if (updateAllergyConcernReferences(section.getActs(),
 				SectionsEDES.ALLERGIES_AND_OTHER_ADVERSE_REACTIONS)) {
-			if (cdaDocument.IsNarrativeTextGenerationEnabled()) {
+			if (cdaDocument.isNarrativeTextGenerationEnabled()) {
 				// create the CDA level 1 text
 				section.createStrucDocText(generateNarrativeTextAllergyProblemConcerns(section));
 			} else {
@@ -198,10 +197,9 @@ public class CdaChEdesCommon {
 
 		// update the MDHT Object content references to CDA level 1 text
 		if (updateProblemConcernReferences(section.getActs(), SectionsEDES.CODED_VITAL_SIGNS)) {
-			if (cdaDocument.IsNarrativeTextGenerationEnabled()) {
+			if (cdaDocument.isNarrativeTextGenerationEnabled()) {
 				// create the CDA level 1 text
-				section.createStrucDocText(generateNarrativeTextCodedVitalSigns(
-						mCodedVitalSigns.getVitalSignObservations()));
+				section.createStrucDocText(generateNarrativeTextCodedVitalSigns());
 			} else {
 				setNarrativeTextSection(SectionsEDES.CODED_VITAL_SIGNS, section, "");
 			}
@@ -221,7 +219,7 @@ public class CdaChEdesCommon {
 
 		// update the MDHT Object content references to CDA level 1 text
 		if (updateEdDiagnoseReferences(section.getActs(), SectionsEDES.ED_DIAGNOSIS)) {
-			if (cdaDocument.IsNarrativeTextGenerationEnabled()) {
+			if (cdaDocument.isNarrativeTextGenerationEnabled()) {
 				// create the CDA level 1 text
 				section.createStrucDocText(generateNarrativeTextEdDiagnoses(section));
 			} else {
@@ -265,7 +263,7 @@ public class CdaChEdesCommon {
 				SectionsEDES.HISTORY_OF_PAST_ILLNESS)) {
 			// create the CDA level 2 text (either generated or empty text with
 			// content reference)
-			if (cdaDocument.IsNarrativeTextGenerationEnabled()) {
+			if (cdaDocument.isNarrativeTextGenerationEnabled()) {
 				section.createStrucDocText(generateNarrativeTextPastProblemConcernEntries(section));
 			} else {
 				setNarrativeTextSection(SectionsEDES.HISTORY_OF_PAST_ILLNESS, section, "");
@@ -324,10 +322,11 @@ public class CdaChEdesCommon {
 	 *
 	 * @return the active problem concerns text
 	 */
-	public String generateNarrativeTextCodedVitalSigns(
-			List<AbstractObservation> vitalSignObservationList) {
-		final ObservationChTextBuilder b = new ObservationChTextBuilder(vitalSignObservationList,
-				SectionsEDES.CODED_VITAL_SIGNS);
+	public String generateNarrativeTextCodedVitalSigns() {
+		final ObservationChTextBuilder b = new ObservationChTextBuilder(
+				(org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection) mCodedVitalSigns
+						.getMdht(),
+				"TODO tsc", LanguageCode.getEnum(mdhtDocument.getLanguageCode().getCode()));
 		return b.toString();
 	}
 
@@ -709,7 +708,7 @@ public class CdaChEdesCommon {
 				} else {
 					// Create references to level 1 text
 					ED reference;
-					if (cdaDocument.IsNarrativeTextGenerationEnabled()) {
+					if (cdaDocument.isNarrativeTextGenerationEnabled()) {
 						reference = Util.createReference(i, loincSectionCode.getContentIdPrefix());
 					} else {
 						reference = Util.createReference(1, loincSectionCode.getContentIdPrefix());
@@ -719,7 +718,7 @@ public class CdaChEdesCommon {
 				}
 				for (final EntryRelationship er : problemEntry.getEntryRelationships()) {
 					j++;
-					CdaChUtil.updateRefIfComment(cdaDocument.IsNarrativeTextGenerationEnabled(), er,
+					CdaChUtil.updateRefIfComment(cdaDocument.isNarrativeTextGenerationEnabled(), er,
 							String.valueOf(i) + String.valueOf(j), loincSectionCode);
 				}
 			}
@@ -743,7 +742,7 @@ public class CdaChEdesCommon {
 				} else {
 					// Create references to level 1 text
 					ED reference;
-					if (cdaDocument.IsNarrativeTextGenerationEnabled()) {
+					if (cdaDocument.isNarrativeTextGenerationEnabled()) {
 						reference = Util.createReference(i, loincSectionCode.getContentIdPrefix());
 					} else {
 						reference = Util.createReference(1, loincSectionCode.getContentIdPrefix());
@@ -753,7 +752,7 @@ public class CdaChEdesCommon {
 				}
 				for (final EntryRelationship er : problemEntry.getEntryRelationships()) {
 					j++;
-					CdaChUtil.updateRefIfComment(cdaDocument.IsNarrativeTextGenerationEnabled(), er,
+					CdaChUtil.updateRefIfComment(cdaDocument.isNarrativeTextGenerationEnabled(), er,
 							String.valueOf(i) + String.valueOf(j), loincSectionCode);
 				}
 			}
@@ -777,7 +776,7 @@ public class CdaChEdesCommon {
 					// Create references to level 1 text
 					i++;
 					ED reference;
-					if (cdaDocument.IsNarrativeTextGenerationEnabled()) {
+					if (cdaDocument.isNarrativeTextGenerationEnabled()) {
 						reference = Util.createReference(i, loincSectionCode.getContentIdPrefix());
 					} else {
 						reference = Util.createReference(1, loincSectionCode.getContentIdPrefix());

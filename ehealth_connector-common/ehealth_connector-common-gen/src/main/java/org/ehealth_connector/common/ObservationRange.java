@@ -54,9 +54,21 @@ public class ObservationRange {
 	 *
 	 * @return the interpretation code
 	 */
-	public ObservationInterpretation getInterpretationCode() {
+	public ObservationInterpretation getInterpretation() {
 		if (mObsR.getInterpretationCode() != null) {
 			return ObservationInterpretation.getEnum(mObsR.getInterpretationCode().getCode());
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the interpretation code.
+	 *
+	 * @return the interpretation code
+	 */
+	public Code getInterpretationCode() {
+		if (mObsR.getInterpretationCode() != null) {
+			return new Code(mObsR.getInterpretationCode());
 		}
 		return null;
 	}
@@ -88,7 +100,17 @@ public class ObservationRange {
 	 * @param code
 	 *            the new interpretation code
 	 */
-	public void setInterpretationCode(ObservationInterpretation code) {
+	public void setInterpretation(ObservationInterpretation code) {
+		mObsR.setInterpretationCode(code.getCE());
+	}
+
+	/**
+	 * Sets the interpretation code.
+	 *
+	 * @param code
+	 *            the new interpretation code
+	 */
+	public void setInterpretationCode(Code code) {
 		mObsR.setInterpretationCode(code.getCE());
 	}
 

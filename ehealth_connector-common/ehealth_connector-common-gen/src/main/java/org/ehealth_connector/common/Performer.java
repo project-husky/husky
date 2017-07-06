@@ -30,6 +30,7 @@ import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 
 /**
@@ -38,8 +39,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
  */
 public class Performer {
 
-	private org.openhealthtools.mdht.uml.cda.Performer2 mPerfomer;
-	private org.openhealthtools.mdht.uml.cda.AssignedEntity mAsEntity;
+	private final org.openhealthtools.mdht.uml.cda.Performer2 mPerfomer;
+	private final org.openhealthtools.mdht.uml.cda.AssignedEntity mAsEntity;
 	private org.openhealthtools.mdht.uml.cda.Person mPerson;
 
 	/**
@@ -55,6 +56,27 @@ public class Performer {
 
 		// add time
 		setTimeValue(new Date());
+	}
+
+	/**
+	 * Default constructor to instanciate the object
+	 *
+	 * @param name
+	 *            the name of the performer
+	 */
+	public Performer(Author author) {
+		this();
+		addName(author.getName());
+		for (Identificator id : author.getIds()) {
+			mAsEntity.getIds().add(id.getIi());
+		}
+
+		// add time
+		setTimeValue(author.getTimeAsDate());
+
+		if (author.getOrganization() != null)
+			if (author.getOrganization().getMdhtOrganization() != null)
+				setOrganization(author.getOrganization());
 	}
 
 	/**
@@ -89,11 +111,11 @@ public class Performer {
 	}
 
 	/**
-	 * Erstellt ein eHealthconnector-Author Objekt mittels eines MDHT-Performer
-	 * Objekts.
+	 * Erstellt ein eHealthconnector-Performer Objekt mittels eines
+	 * MDHT-Performer Objekts.
 	 *
 	 * @param performerMdht
-	 *            the MDHT Author Object
+	 *            the MDHT Performer Object
 	 */
 	public Performer(org.openhealthtools.mdht.uml.cda.Performer2 performerMdht) {
 		mPerfomer = performerMdht;
@@ -152,10 +174,10 @@ public class Performer {
 	}
 
 	/**
-	 * <div class="en">Copy mdht author.</div> <div class="de"></div>
+	 * <div class="en">Copy mdht performer.</div> <div class="de"></div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @return org.openhealthtools.mdht.uml.cda.author
+	 * @return the org.openhealthtools.mdht.uml.cda. performer 2
 	 */
 	public org.openhealthtools.mdht.uml.cda.Performer2 copyMdhtPerfomer() {
 		return EcoreUtil.copy(mPerfomer);
@@ -195,7 +217,7 @@ public class Performer {
 	 * @return <div class="en">the complete name</div>
 	 */
 	public String getCompleteName() {
-		// Search for the author name. If it isn´t there, try to use the
+		// Search for the performer name. If it isn´t there, try to use the
 		// organisation name.
 		String retVal = "";
 		if ((mAsEntity != null) && (mAsEntity.getAssignedPerson() != null)) {
@@ -215,7 +237,7 @@ public class Performer {
 	}
 
 	/**
-	 * <div class="en">Gets the gln (identification of the author)</div>
+	 * <div class="en">Gets the gln (identification of the performer)</div>
 	 * <div class="de">Liefert die GLN (ID des Autors)</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
@@ -241,8 +263,9 @@ public class Performer {
 	}
 
 	/**
-	 * <div class="en">Gets all ids of the author</div> <div class="de">Liefert
-	 * alle IDs des Autoren</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets all ids of the performer</div>
+	 * <div class="de">Liefert alle IDs des Autoren</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return <div class="en">the ids</div>
 	 */
@@ -294,11 +317,11 @@ public class Performer {
 	}
 
 	/**
-	 * <div class="en">Gets the author mdht.</div> <div class="de">Liefert
-	 * author mdht.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the performer mdht.</div> <div class="de">Liefert
+	 * performer mdht.</div> <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @return org.openhealthtools.mdht.uml.cda.Author <div class="en">the
-	 *         author mdht</div>
+	 * @return org.openhealthtools.mdht.uml.cda.Performer2 <div class="en">the
+	 *         performer mdht</div>
 	 */
 	public org.openhealthtools.mdht.uml.cda.Performer2 getPerformerMdht() {
 		return EcoreUtil.copy(mPerfomer);
@@ -313,6 +336,27 @@ public class Performer {
 	public Telecoms getTelecoms() {
 		final Telecoms telecoms = new Telecoms(mAsEntity.getTelecoms());
 		return telecoms;
+	}
+
+	/**
+	 * <div class="en">Gets the performance time</div> <div class="de">Liefert
+	 * die Zeit für den Performer.</div> <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 *
+	 * @return date <div class="en">the performance time</div>
+	 *         <div class="de">die Zeit für den Performer.</div>
+	 *         <div class="fr"></div> <div class="it"></div>
+	 */
+	public IVL_TS getTimeAsIVL_TS() {
+		IVL_TS retVal = null;
+		if (mPerfomer.getTime() != null) {
+			try {
+				retVal = DateUtil.createIVL_TSFromHL7Date(mPerfomer.getTime().getValue());
+			} catch (final ParseException e) {
+			}
+		}
+		return retVal;
 	}
 
 	/**
@@ -371,4 +415,5 @@ public class Performer {
 			e.printStackTrace();
 		}
 	}
+
 }

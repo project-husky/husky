@@ -20,6 +20,7 @@ package org.ehealth_connector.cda.ch.lab.lrph;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ehealth_connector.cda.AbstractObservation;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.StatusCode;
@@ -108,7 +109,23 @@ public class LaboratoryBatteryOrganizer
 	 *
 	 * @return the laboratory observations
 	 */
-	public List<LaboratoryObservation> getLaboratoryObservations() {
+	@Override
+	public List<AbstractObservation> getLaboratoryObservations() {
+		final List<AbstractObservation> loList = new ArrayList<AbstractObservation>();
+		for (final Observation o : getMdht().getObservations()) {
+			if (o instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation) {
+				loList.add(new AbstractObservation(o));
+			}
+		}
+		return loList;
+	}
+
+	/**
+	 * Gets the laboratory observations.
+	 *
+	 * @return the laboratory observations
+	 */
+	public List<LaboratoryObservation> getLrphLaboratoryObservations() {
 		final List<LaboratoryObservation> loList = new ArrayList<LaboratoryObservation>();
 		for (final Observation o : getMdht().getObservations()) {
 			if (o instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation) {

@@ -28,7 +28,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  * <div class="en">LRPH CDA Body Level 2 Section Codes</div> <div
  * class="de">LRPH CDA Body Level 2 Section Codes</div>
  */
-public enum LrphSections {
+public enum SpecialtySections {
 
 	/**
 	 * <div class="en">MICROBIAL SUSCEPTIBILITY TESTS</div>
@@ -85,8 +85,8 @@ public enum LrphSections {
 	 *            the code (as present in this class with enumName_CODE)
 	 * @return the according enum object
 	 */
-	public static LrphSections getEnum(String code) {
-		for (final LrphSections x : values()) {
+	public static SpecialtySections getEnum(String code) {
+		for (final SpecialtySections x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -109,7 +109,7 @@ public enum LrphSections {
 			return false;
 		}
 		try {
-			Enum.valueOf(LrphSections.class, enumName);
+			Enum.valueOf(SpecialtySections.class, enumName);
 			return true;
 		} catch (final IllegalArgumentException ex) {
 			return false;
@@ -126,7 +126,7 @@ public enum LrphSections {
 	 * @return true, if an enum with the given code is part of this value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (final LrphSections x : values()) {
+		for (final SpecialtySections x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -159,7 +159,7 @@ public enum LrphSections {
 	 *            <br>
 	 *            <div class="de"> display name</div>
 	 */
-	private LrphSections(String code, String displayName) {
+	private SpecialtySections(String code, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
 	}

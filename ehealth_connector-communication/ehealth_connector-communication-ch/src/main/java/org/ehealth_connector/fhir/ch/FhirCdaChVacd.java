@@ -1596,7 +1596,7 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 				}
 			}
 			if (obsInt != null) {
-				rr.setInterpretationCode(obsInt);
+				rr.setInterpretation(obsInt);
 			}
 			retVal.setReferenceRange(rr);
 		}

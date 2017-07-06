@@ -649,8 +649,8 @@ public class Util {
 		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		final ED ed = DatatypesFactory.eINSTANCE.createED();
 		tel.setValue(url);
-		ed.setReference(tel);
 		ed.addText(narrativeText);
+		ed.setReference(tel);
 		return ed;
 	}
 

@@ -79,6 +79,38 @@ public class DateUtil {
 	/**
 	 * <div class="en">Convert date.</div>
 	 *
+	 * @param low
+	 *            the low value
+	 * @param high
+	 *            the high value
+	 * @return the ivl ts
+	 */
+	public static IVL_TS convertDateToIvlTsyyyyMMddHHmmssZZZZ(Date low, Date high) {
+		final IVL_TS ts = DatatypesFactory.eINSTANCE.createIVL_TS();
+		final IVXB_TS lowValue = DatatypesFactory.eINSTANCE.createIVXB_TS();
+		final IVXB_TS highValue = DatatypesFactory.eINSTANCE.createIVXB_TS();
+
+		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssZZZZ");
+		if (low == null) {
+			lowValue.setNullFlavor(NullFlavor.UNK);
+		} else {
+			String tsStr = sdf.format(low);
+			lowValue.setValue(tsStr);
+		}
+		if (high == null) {
+			highValue.setNullFlavor(NullFlavor.UNK);
+		} else {
+			String tsStr = sdf.format(high);
+			highValue.setValue(tsStr);
+		}
+		ts.setLow(lowValue);
+		ts.setHigh(highValue);
+		return ts;
+	}
+
+	/**
+	 * <div class="en">Convert date.</div>
+	 *
 	 * @param date
 	 *            <br>
 	 *            <div class="en"> date</div>

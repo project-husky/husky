@@ -25,6 +25,7 @@ import java.util.List;
 
 import org.ehealth_connector.cda.MdhtObservationFacade;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
@@ -43,12 +44,14 @@ import org.openhealthtools.mdht.uml.cda.Performer2;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationPhysicalPerformer;
+import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
@@ -128,6 +131,27 @@ public class LaboratoryObservation extends
 	}
 
 	/**
+	 * Adds a author.
+	 *
+	 * @param author
+	 *            the author
+	 * @param dateTimeOfDocumentation
+	 *            <div class="en">date and time, when the result was known</div>
+	 *            <div class="de">Datum und Uhrzeit, an dem das Resultat bekannt
+	 *            wurde.</div> <div class="fr"></div> <div class="it"></div>
+	 */
+	public void addAuthor(Author author, Date dateTimeOfDocumentation) {
+		final org.openhealthtools.mdht.uml.cda.Author mAuthor = author.copyMdhtAuthor();
+		mAuthor.setTypeCode(ParticipationType.AUT);
+		try {
+			mAuthor.setTime(DateUtil.createIVL_TSFromEuroDate(dateTimeOfDocumentation));
+		} catch (final ParseException e) {
+			e.printStackTrace();
+		}
+		getMdht().getAuthors().add(mAuthor);
+	}
+
+	/**
 	 * Add a comment entry.
 	 *
 	 * @param commentEntry
@@ -182,20 +206,30 @@ public class LaboratoryObservation extends
 	 *
 	 * @param performer
 	 *            the performer
-	 * @param dateTimeOfResult
+	 * @param dateTimeOfPerformance
 	 *            <div class="en">date and time, when the result was known</div>
 	 *            <div class="de">Datum und Uhrzeit, an dem das Resultat bekannt
 	 *            wurde.</div> <div class="fr"></div> <div class="it"></div>
 	 */
-	public void addPerformer(Performer performer, Date dateTimeOfResult) {
+	public void addPerformer(Performer performer, Date dateTimeOfPerformance) {
 		final Performer2 mPerformer = performer.copyMdhtPerfomer();
 		mPerformer.setTypeCode(ParticipationPhysicalPerformer.PRF);
 		try {
-			mPerformer.setTime(DateUtil.createIVL_TSFromEuroDate(dateTimeOfResult));
+			mPerformer.setTime(DateUtil.createIVL_TSFromEuroDate(dateTimeOfPerformance));
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
 		getMdht().getPerformers().add(mPerformer);
+	}
+
+	/**
+	 * Adds a translation code
+	 *
+	 * @param code
+	 *            the translation code
+	 */
+	public void addTranslation(Code code) {
+		getMdht().getCode().getTranslations().add(code.getCD());
 	}
 
 	/**
@@ -217,6 +251,20 @@ public class LaboratoryObservation extends
 	@Override
 	public void addValue(Value value) {
 		getMdht().getValues().add(value.getValue());
+	}
+
+	/**
+	 * Gets the auhtor list.
+	 *
+	 * @return the auhtor list
+	 */
+	public List<Author> getAuthors() {
+		final List<Author> list = new ArrayList<Author>();
+		for (final org.openhealthtools.mdht.uml.cda.Author mdht : getMdht().getAuthors()) {
+			final Author eHC = new Author(mdht);
+			list.add(eHC);
+		}
+		return list;
 	}
 
 	/**
@@ -375,13 +423,43 @@ public class LaboratoryObservation extends
 	 *
 	 * @return the performer list
 	 */
-	public List<Performer> getPerformerList() {
+	public List<Performer> getPerformers() {
 		final List<Performer> list = new ArrayList<Performer>();
 		for (final Performer2 mdht : getMdht().getPerformers()) {
 			final Performer eHC = new Performer(mdht);
 			list.add(eHC);
 		}
 		return list;
+	}
+
+	/**
+	 * Gets the text.
+	 *
+	 * @return the text
+	 */
+	public String getText() {
+		String retVal = "";
+		if (getMdht().getText() != null)
+			retVal = getMdht().getText().getText();
+		return retVal;
+	}
+
+	public Code getTranslation(String codeSystemOid) {
+		if (codeSystemOid != null) {
+			for (CD item : getMdht().getCode().getTranslations()) {
+				if (codeSystemOid.equals(item.getCodeSystem()))
+					return new Code(item);
+			}
+		}
+		return null;
+	}
+
+	public List<Code> getTranslations() {
+		List<Code> retVal = new ArrayList<Code>();
+		for (CD item : getMdht().getCode().getTranslations()) {
+			retVal.add(new Code(item));
+		}
+		return retVal;
 	}
 
 	/**
@@ -459,5 +537,29 @@ public class LaboratoryObservation extends
 			getMdht().getReferenceRanges().clear();
 			getMdht().getReferenceRanges().add(referenceRange.getMdht());
 		}
+	}
+
+	/**
+	 * Sets the text.
+	 *
+	 * @param text
+	 *            the new text
+	 */
+	public void setText(String text) {
+		setText(text, null);
+	}
+
+	public void setText(String text, String textReference) {
+		ED ed = null;
+		if (textReference != null) {
+			if (!textReference.startsWith("#"))
+				textReference = "#" + textReference;
+			ed = Util.createReference(textReference, text);
+		}
+		if (ed == null) {
+			ed = DatatypesFactory.eINSTANCE.createED();
+			ed.addText(text);
+		}
+		getMdht().setText(ed);
 	}
 }

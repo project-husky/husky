@@ -26,9 +26,7 @@ import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
 import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
 import org.ehealth_connector.cda.ch.lab.StudiesSummarySection;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.ReportScopes;
-import org.ehealth_connector.cda.ch.lab.lrtp.enums.SpecialtySections;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
-import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
@@ -41,7 +39,6 @@ import org.openhealthtools.mdht.uml.cda.PatientRole;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.ServiceEvent;
-import org.openhealthtools.mdht.uml.cda.StructuredBody;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
@@ -138,13 +135,6 @@ public class CdaChLrtp
 	public CdaChLrtp(LanguageCode languageCode, String styleSheet, String css) {
 		super(CHFactory.eINSTANCE.createCdaChLrtp().init(), languageCode, styleSheet, css);
 		this.setLanguageCode(languageCode);
-		// set the fixed laboratory Code
-		final CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setCode("11502-2");
-		ce.setCodeSystem("2.16.840.1.113883.6.1");
-		ce.setCodeSystemName("LOINC");
-		ce.setDisplayName("LABORATORY REPORT.TOTAL");
-		getMdht().setCode(ce);
 	}
 
 	/**
@@ -225,56 +215,109 @@ public class CdaChLrtp
 
 	/**
 	 * Convenience function to add a Laboratory Battery Organizer and create the
-	 * necessary elements. If these elements already exists, the Battery will be
-	 * added to new Laboratory Specialty Section. If you want to add the Battery
-	 * to an existing SpecialtySection, please use the according function of the
-	 * SpecimenAct Class.
+	 * necessary elements, if they do not exist. If the elements exist, their
+	 * contents will not be overwritten.
 	 *
-	 * These elements are: LaboratorySpecialtySection (section code is derived
-	 * automatically from the first LaboratoryObservation enum)
-	 * LaboratoryReportProcessingEntry SpecimenAct with the given Laboratory
-	 * Battery Organizer
+	 * These elements are: LaboratorySpecialtySection,
+	 * LaboratoryReportProcessingEntry, and SpecimenAct with the given
+	 * Laboratory Battery Organizer
 	 *
 	 * @param organizer
 	 *            the LaboratoryBatteryOrganizer holding at least one
 	 *            LaboratoryObservation
+	 * @param sectionCode
+	 *            the LOINC code for the LaboratorySpecialtySection
 	 */
-	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer organizer) {
-		LaboratorySpecialtySection laboratorySpecialtySection;
-		// Try to determine the right code from the LaboratoryObservation and
-		// set it
-		// in the Section
-		final String section = getSectionCodeFromLaboratoryObservationEnum(organizer);
-		Code sectionCode = null;
-		if (section != null) {
-			sectionCode = SpecialtySections.getEnum(section).getCode();
-		}
-
-		if (sectionCode != null) {
-			laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode,
-					getLanguageCode());
-		} else {
-			laboratorySpecialtySection = new LaboratorySpecialtySection();
-		}
-		LaboratoryReportDataProcessingEntry lrdpe;
-		lrdpe = new LaboratoryReportDataProcessingEntry();
-
-		SpecimenAct se;
-		if (lrdpe.getSpecimenAct() == null) {
-			se = new SpecimenAct();
+	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer organizer,
+			Code sectionCode) {
+		LaboratorySpecialtySection laboratorySpecialtySection = getLaboratorySpecialtySection(
+				sectionCode);
+		if (laboratorySpecialtySection == null) {
 			if (sectionCode != null) {
-				se.setCode(sectionCode);
+				laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode,
+						getLanguageCode());
+				getMdht().setCode(sectionCode.getCE());
+			} else {
+				laboratorySpecialtySection = new LaboratorySpecialtySection();
 			}
-		} else {
-			se = new SpecimenAct(lrdpe.getSpecimenAct().getMdht());
 		}
-
-		se.addLaboratoryBatteryOrganizer(organizer);
-		lrdpe.setSpecimenAct(se);
-		laboratorySpecialtySection.setLaboratoryReportDataProcessingEntry(lrdpe);
-
+		laboratorySpecialtySection.addLaboratoryBatteryOrganizer(sectionCode, organizer,
+				getLanguageCode());
+		if (isNarrativeTextGenerationEnabled()) {
+			laboratorySpecialtySection.setText(generateNarrativeTextLaboratoryObservations(
+					laboratorySpecialtySection, "TODO tsc"));
+		}
 		addLaboratorySpecialtySection(laboratorySpecialtySection);
+
+		// set the fixed laboratory Code
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setCode("11502-2");
+		ce.setCodeSystem("2.16.840.1.113883.6.1");
+		ce.setCodeSystemName("LOINC");
+		ce.setDisplayName("LABORATORY REPORT.TOTAL");
+		getMdht().setCode(ce);
+
 	}
+
+	// TODO tsc
+	// /**
+	// * Convenience function to add a Laboratory Battery Organizer and create
+	// the
+	// * necessary elements. If these elements already exists, the Battery will
+	// be
+	// * added to new Laboratory Specialty Section. If you want to add the
+	// Battery
+	// * to an existing SpecialtySection, please use the according function of
+	// the
+	// * SpecimenAct Class.
+	// *
+	// * These elements are: LaboratorySpecialtySection (section code is derived
+	// * automatically from the first LaboratoryObservation enum)
+	// * LaboratoryReportProcessingEntry SpecimenAct with the given Laboratory
+	// * Battery Organizer
+	// *
+	// * @param organizer
+	// * the LaboratoryBatteryOrganizer holding at least one
+	// * LaboratoryObservation
+	// */
+	// public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer
+	// organizer) {
+	// LaboratorySpecialtySection laboratorySpecialtySection;
+	// // Try to determine the right code from the LaboratoryObservation and
+	// // set it
+	// // in the Section
+	// final String section =
+	// getSectionCodeFromLaboratoryObservationEnum(organizer);
+	// Code sectionCode = null;
+	// if (section != null) {
+	// sectionCode = SpecialtySections.getEnum(section).getCode();
+	// }
+	//
+	// if (sectionCode != null) {
+	// laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode,
+	// getLanguageCode());
+	// } else {
+	// laboratorySpecialtySection = new LaboratorySpecialtySection();
+	// }
+	// LaboratoryReportDataProcessingEntry lrdpe;
+	// lrdpe = new LaboratoryReportDataProcessingEntry();
+	//
+	// SpecimenAct se;
+	// if (lrdpe.getSpecimenAct() == null) {
+	// se = new SpecimenAct();
+	// if (sectionCode != null) {
+	// se.setCode(sectionCode);
+	// }
+	// } else {
+	// se = new SpecimenAct(lrdpe.getSpecimenAct().getMdht());
+	// }
+	//
+	// se.addLaboratoryBatteryOrganizer(organizer);
+	// lrdpe.setSpecimenAct(se);
+	// laboratorySpecialtySection.setLaboratoryReportDataProcessingEntry(lrdpe);
+	//
+	// addLaboratorySpecialtySection(laboratorySpecialtySection);
+	// }
 
 	/**
 	 * Adds a LaboratorySpecialtySection.
@@ -286,6 +329,30 @@ public class CdaChLrtp
 			org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection laboratorySpecialtySection) {
 		getMdht().addSection(laboratorySpecialtySection.copy());
 	}
+
+	// TODO tsc löschen?
+	// /**
+	// * Sets a LaboratorySpecialtySection.
+	// *
+	// * @param laboratorySpecialtySection
+	// * the section
+	// */
+	// public void addLaboratorySpecialtySection(
+	// org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection
+	// laboratorySpecialtySection) {
+	// // Create a new structured body
+	// if (getMdht().getLaboratorySpecialtySections().isEmpty()) {
+	// getMdht().addSection(laboratorySpecialtySection.copy());
+	// } else {
+	// // We need to create a new Structured Body element, as the section
+	// // list is
+	// // not modifiable
+	// final StructuredBody sb = CDAFactory.eINSTANCE.createStructuredBody();
+	// CdaUtil.addSectionToStructuredBodyAsCopy(sb,
+	// laboratorySpecialtySection.copy());
+	// getMdht().setStructuredBody(sb);
+	// }
+	// }
 
 	/**
 	 * Applies the privacy filter to all record target elements.
@@ -463,30 +530,6 @@ public class CdaChLrtp
 	}
 
 	/**
-	 * Convenience function to return all LaboratoryBatteryOrganizers directly
-	 * from all underlying
-	 * LaboratorySpecialtySection/LaboratoryReportDataProcessingEntry/
-	 * SpecimenAct elements (even if they reside in a different
-	 * SpecialtySection).
-	 *
-	 * @return a list of LaboratoryBatteryOrganizers.
-	 */
-	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizerList() {
-		final ArrayList<LaboratoryBatteryOrganizer> lbol = new ArrayList<LaboratoryBatteryOrganizer>();
-		for (final LaboratorySpecialtySection lss : getLaboratorySpecialtySections()) {
-			final LaboratoryReportDataProcessingEntry lrdpe = lss
-					.getLaboratoryReportDataProcessingEntry();
-			if (lrdpe != null) {
-				final SpecimenAct se = lrdpe.getSpecimenAct();
-				if (se != null) {
-					lbol.addAll(se.getLaboratoryBatteryOrganizers());
-				}
-			}
-		}
-		return lbol;
-	}
-
-	/**
 	 * Gets the laboratory specialty section.
 	 *
 	 * @return the laboratory specialty section
@@ -504,6 +547,22 @@ public class CdaChLrtp
 	 *
 	 * @return the laboratory specialty section
 	 */
+	public LaboratorySpecialtySection getLaboratorySpecialtySection(Code sectionCode) {
+		for (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection section : getMdht()
+				.getLaboratorySpecialtySections()) {
+			Code currentSectionCode = new Code(section.getCode());
+			if (currentSectionCode.getCode().equals(sectionCode.getCode())
+					&& currentSectionCode.getCodeSystem().equals(sectionCode.getCodeSystem()))
+				return new LaboratorySpecialtySection(section);
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the laboratory specialty section.
+	 *
+	 * @return the laboratory specialty section
+	 */
 	public List<LaboratorySpecialtySection> getLaboratorySpecialtySections() {
 		final List<LaboratorySpecialtySection> ls = new ArrayList<LaboratorySpecialtySection>();
 		for (final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection lss : getMdht()
@@ -511,6 +570,30 @@ public class CdaChLrtp
 			ls.add(new LaboratorySpecialtySection(lss));
 		}
 		return ls;
+	}
+
+	/**
+	 * Convenience function to return all LaboratoryBatteryOrganizers directly
+	 * from all underlying
+	 * LaboratorySpecialtySection/LaboratoryReportDataProcessingEntry/
+	 * SpecimenAct elements (even if they reside in a different
+	 * SpecialtySection).
+	 *
+	 * @return a list of LaboratoryBatteryOrganizers.
+	 */
+	public List<LaboratoryBatteryOrganizer> getLrtpLaboratoryBatteryOrganizerList() {
+		final ArrayList<LaboratoryBatteryOrganizer> lbol = new ArrayList<LaboratoryBatteryOrganizer>();
+		for (final LaboratorySpecialtySection lss : getLaboratorySpecialtySections()) {
+			final LaboratoryReportDataProcessingEntry lrdpe = lss
+					.getLaboratoryReportDataProcessingEntry();
+			if (lrdpe != null) {
+				final SpecimenAct se = lrdpe.getSpecimenAct();
+				if (se != null) {
+					lbol.addAll(se.getLrtpLaboratoryBatteryOrganizers());
+				}
+			}
+		}
+		return lbol;
 	}
 
 	/**
@@ -552,9 +635,9 @@ public class CdaChLrtp
 	private String getSectionCodeFromLaboratoryObservationEnum(
 			LaboratoryBatteryOrganizer organizer) {
 		if (!organizer.getLaboratoryObservations().isEmpty()) {
-			if (organizer.getLaboratoryObservations().get(0).getCodeAsLoincEnum() != null) {
+			if (organizer.getLrtpLaboratoryObservations().get(0).getCodeAsLoincEnum() != null) {
 				// if present return LOINC Enum
-				return organizer.getLaboratoryObservations().get(0).getCodeAsLoincEnum()
+				return organizer.getLrtpLaboratoryObservations().get(0).getCodeAsLoincEnum()
 						.getSectionCode();
 			}
 		}
@@ -638,27 +721,6 @@ public class CdaChLrtp
 	public void setCodedVitalSignsSection(CodedVitalSignsSection codedVitalSigns) {
 		if (getCodedVitalSignsSection() == null) {
 			getMdht().addSection(codedVitalSigns.copy());
-		}
-	}
-
-	/**
-	 * Sets a LaboratorySpecialtySection.
-	 *
-	 * @param laboratorySpecialtySection
-	 *            the section
-	 */
-	public void setLaboratorySpecialtySection(
-			org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection laboratorySpecialtySection) {
-		// Create a new structured body
-		if (getMdht().getLaboratorySpecialtySections().isEmpty()) {
-			getMdht().addSection(laboratorySpecialtySection.copy());
-		} else {
-			// We need to create a new Structured Body element, as the section
-			// list is
-			// not modifiable
-			final StructuredBody sb = CDAFactory.eINSTANCE.createStructuredBody();
-			CdaUtil.addSectionToStructuredBodyAsCopy(sb, laboratorySpecialtySection.copy());
-			getMdht().setStructuredBody(sb);
 		}
 	}
 

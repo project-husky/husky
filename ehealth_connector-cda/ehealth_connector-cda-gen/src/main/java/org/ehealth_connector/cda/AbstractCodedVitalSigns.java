@@ -52,7 +52,7 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 		super(IHEFactory.eINSTANCE.createCodedVitalSignsSection().init());
 	}
 
-	protected AbstractCodedVitalSigns(CodedVitalSignsSection mdht) {
+	public AbstractCodedVitalSigns(CodedVitalSignsSection mdht) {
 		super(mdht);
 	}
 

@@ -86,7 +86,7 @@ public class LaboratoryObservationTest extends TestUtils {
 		observation.setLaboratory(organization1, endDate);
 		assertTrue(isEqual(organization1, observation.getLaboratory()));
 		assertEquals(endDate, DateUtil.parseIVL_TSVDateTimeValue(
-				observation.getPerformerList().get(0).getPerformerMdht().getTime()));
+				observation.getPerformers().get(0).getPerformerMdht().getTime()));
 
 		// code with translation
 		Code code = new Code(LabObsListSnomed.BRUCELLA_ABORTUS.getCode());

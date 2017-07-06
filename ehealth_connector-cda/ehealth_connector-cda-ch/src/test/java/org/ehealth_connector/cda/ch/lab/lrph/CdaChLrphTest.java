@@ -133,7 +133,7 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 				.getLaboratoryObservations().get(0));
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
 				.getSpecimenAct().getLrphLaboratoryBatteryOrganizers().get(0)
-				.getLaboratoryObservations().get(0).getCommentEntryList().get(0));
+				.getLrphLaboratoryObservations().get(0).getCommentEntryList().get(0));
 
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
 				.getSpecimenAct().getSpecimenCollectionEntry());
@@ -164,7 +164,7 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 				.getLrphLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0));
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
-				.getLrphLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
+				.getLrphLaboratoryBatteryOrganizers().get(0).getLrphLaboratoryObservations().get(0)
 				.getCommentEntryList().get(0));
 
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
@@ -189,7 +189,7 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 		assertTrue(LabObsListSnomed.BRUCELLA.getCode()
 				.equals(cdaDeserialized.getLaboratorySpecialtySection()
 						.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
-						.getLrphLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations()
+						.getLrphLaboratoryBatteryOrganizers().get(0).getLrphLaboratoryObservations()
 						.get(0).getCodeAsSnomedEnum().getCode()));
 	}
 

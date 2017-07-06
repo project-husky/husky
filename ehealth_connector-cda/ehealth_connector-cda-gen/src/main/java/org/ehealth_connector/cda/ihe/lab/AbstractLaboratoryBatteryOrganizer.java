@@ -17,15 +17,20 @@
  */
 package org.ehealth_connector.cda.ihe.lab;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.ehealth_connector.cda.AbstractObservation;
 import org.ehealth_connector.cda.MdhtOrganizerFacade;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.StatusCode;
+import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 
 /**
  * The Class AbstractLaboratoryBatteryOrganizer.
  */
-public abstract class AbstractLaboratoryBatteryOrganizer extends
+public class AbstractLaboratoryBatteryOrganizer extends
 		MdhtOrganizerFacade<org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer> {
 
 	/**
@@ -59,4 +64,18 @@ public abstract class AbstractLaboratoryBatteryOrganizer extends
 		getMdht().getIds().add(id.getIi());
 	}
 
+	/**
+	 * Gets the laboratory observations.
+	 *
+	 * @return the laboratory observations
+	 */
+	public List<AbstractObservation> getLaboratoryObservations() {
+		final List<AbstractObservation> loList = new ArrayList<AbstractObservation>();
+		for (final Observation o : getMdht().getObservations()) {
+			if (o instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation) {
+				loList.add(new AbstractObservation(o));
+			}
+		}
+		return loList;
+	}
 }

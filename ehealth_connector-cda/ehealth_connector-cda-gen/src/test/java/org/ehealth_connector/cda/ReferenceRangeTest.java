@@ -33,8 +33,8 @@ public class ReferenceRangeTest extends TestUtils {
 	public void testModel() {
 		ReferenceRange r = new ReferenceRange();
 
-		r.setInterpretationCode(ObservationInterpretation.ABNORMAL);
-		assertEquals(ObservationInterpretation.ABNORMAL, r.getInterpretationCode());
+		r.setInterpretation(ObservationInterpretation.ABNORMAL);
+		assertEquals(ObservationInterpretation.ABNORMAL, r.getInterpretation());
 
 		// Test Value with IVL_PQ Value
 		Value v = new Value(new BigDecimal("0.0"), new BigDecimal("5.0"));
@@ -44,7 +44,7 @@ public class ReferenceRangeTest extends TestUtils {
 		assertTrue("5.0".equals(r.getValue().getPhysicalQuantityIntervalHighValue().toString()));
 
 		// Test Observation Interpretation
-		r.setInterpretationCode(ObservationInterpretation.ABNORMAL);
-		assertEquals(ObservationInterpretation.ABNORMAL, r.getInterpretationCode());
+		r.setInterpretation(ObservationInterpretation.ABNORMAL);
+		assertEquals(ObservationInterpretation.ABNORMAL, r.getInterpretation());
 	}
 }

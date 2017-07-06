@@ -29,6 +29,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
@@ -579,6 +580,31 @@ public class Code {
 	 */
 	public void setNullFlavor(org.ehealth_connector.common.enums.NullFlavor nf) {
 		mCD.setNullFlavor(NullFlavor.getByName(nf.name()));
+	}
+
+	/**
+	 * Sets the OriginalText element
+	 */
+	public void setOriginalText(String originalText) {
+		setOriginalText(originalText, null);
+	}
+
+	/**
+	 * Sets the OriginalText element including the reference to the narrative
+	 * part
+	 */
+	public void setOriginalText(String originalText, String textReference) {
+		ED ed = null;
+		if (textReference != null) {
+			if (!textReference.startsWith("#"))
+				textReference = "#" + textReference;
+			ed = Util.createReference(textReference, originalText);
+		}
+		if (ed == null) {
+			ed = DatatypesFactory.eINSTANCE.createED();
+			ed.addText(originalText);
+		}
+		mCD.setOriginalText(ed);
 	}
 
 	/**

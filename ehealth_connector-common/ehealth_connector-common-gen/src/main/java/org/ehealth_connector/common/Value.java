@@ -33,6 +33,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVXB_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.RTO;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
+import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 /**
@@ -100,9 +101,11 @@ public class Value {
 		final IVXB_PQ mhigh = DatatypesFactory.eINSTANCE.createIVXB_PQ();
 
 		mlow.setValue(low);
+		mlow.setUnit("");
 		ivlPq.setLow(mlow);
 
 		mhigh.setValue(high);
+		mhigh.setUnit("");
 		ivlPq.setHigh(mhigh);
 
 		mValue = ivlPq;
@@ -136,6 +139,10 @@ public class Value {
 		ivlPq.setHigh(mhigh);
 
 		mValue = ivlPq;
+	}
+
+	public Value(BigDecimal low, Ucum lowUnit, BigDecimal high, Ucum highUnit) {
+		this(low, lowUnit.getCodeValue(), high, highUnit.getCodeValue());
 	}
 
 	/**
@@ -611,8 +618,18 @@ public class Value {
 	}
 
 	public void setOriginalTextReference(String originalText) {
-		final Code code = new Code((CD) mValue);
-		code.setOriginalTextReference(originalText);
+		if (mValue instanceof CD) {
+			final Code code = new Code((CD) mValue);
+			code.setOriginalTextReference(originalText);
+		}
+		if (mValue instanceof ED) {
+			final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+			if (!originalText.startsWith("#")) {
+				originalText = "#" + originalText;
+			}
+			tel.setValue(originalText);
+			((ED) mValue).setReference(tel);
+		}
 	}
 
 	private void setPqValue(String value) {
@@ -643,13 +660,14 @@ public class Value {
 			// TODO This is draft implementation only! the text needs to be
 			// translated by the real code. Displaynames should never be
 			// used!
-			resultText = getCode().getDisplayName();
+			resultText = getCode().getDisplayName()
+					+ "*** TODO tsc this is draft implementation only";
 		else if (isPhysicalQuantity())
 			resultText = getPhysicalQuantityValue() + " " + getPhysicalQuantityUnit();
 		else if (isEd())
 			resultText = getEdText();
 		else
-			resultText = "*** not yet implemented value type";
+			resultText = "*** TODO tsc not yet implemented value type";
 
 		if (resultText == null)
 			resultText = "";

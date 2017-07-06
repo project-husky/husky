@@ -852,7 +852,7 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 				}
 			}
 			if (obsInt != null) {
-				rr.setInterpretationCode(obsInt);
+				rr.setInterpretation(obsInt);
 			}
 			retVal.setReferenceRange(rr);
 		}

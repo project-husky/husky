@@ -17,6 +17,9 @@
 
 package org.ehealth_connector.common.enums;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -26,25 +29,79 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  *<div class="fr">Domaine de valeurs pour « Code dinterprétation »</div>
  */
 public enum ObservationInterpretation {
+
 	//@formatter:off
-	/** <div class="de">Abnormal</div>. */
-	ABNORMAL("A", "Abnormal"),
-	/** <div class="de">Abnormal (alarmierend)</div>. */
-	ABNORMAL_ALERT("AA", "Abnormal alert"),
-	/** <div class="de">Oberhalb Toleranz</div>. */
-	HIGH("H", "High"),
-	/** <div class="de"Oberhalb Toleranz (alarmierend)</div>. */
-	HIGH_ALERT("HH", "High alert"),
-	/** <div class="de"Unterhalb Toleranz</div>. */
-	LOW("L", "Low"),
-	/** <div class="de"Unterhalb Toleranz (alarmierend)</div>. */
-	LOW_ALERT("LL", "Low alert"),
-	/** <div class="de">Normal</div>. */
-	NORMAL("N",	"Normal"),
-	/** <div class="de">Positiv</div>. */
-	POS("POS", "Positiv"),
-	/** <div class="de">Negativ</div>. */
-	NEG("NEG", "Negativ");
+	/**
+	 * <div class="en">Abnormal</div>
+	 * <div class="de">Anormal</div>
+	 * <div class="fr">Anormalement</div>
+	 * <div class="it">Anormalmente</div>
+	 * */
+	ABNORMAL("A", "Abnormal", "Anormal", "Anormalement", "Anormalmente"),
+
+	/**
+	 * <div class="en">Abnormal alert</div>
+	 * <div class="de">Anormal alarmierend</div>
+	 * <div class="fr">Alerte anormale</div>
+	 * <div class="it">Allarme anomalo</div>
+	 * */
+	ABNORMAL_ALERT("AA", "Abnormal alert", "Anormal alarmierend", "Alerte anormale", "Avviso anomalo"),
+
+	/**
+	 * <div class="en">High</div>
+	 * <div class="de">Hoch</div>
+	 * <div class="fr">Haut</div>
+	 * <div class="it">Alto</div>
+	 * */
+	HIGH("H", "High", "Hoch", "Haut", "Alto"),
+
+	/**
+	 * <div class="en">High alert</div>
+	 * <div class="de">Hoch alarmierend</div>
+	 * <div class="fr">Alerte haut</div>
+	 * <div class="it">Allarme alto</div>
+	 * */
+	HIGH_ALERT("HH", "High alert", "Hoch alarmierend", "Alerte haut", "Allarme alto"),
+
+	/**
+	 * <div class="en">Low</div>
+	 * <div class="de">Tief</div>
+	 * <div class="fr">Bas</div>
+	 * <div class="it">Basso</div>
+	 * */
+	LOW("L", "Low", "Tief", "Bas", "Basso"),
+
+	/**
+	 * <div class="en">Low alert</div>
+	 * <div class="de">Tief alarmierend</div>
+	 * <div class="fr">Alerte bas</div>
+	 * <div class="it">Allarme basso</div>
+	 * */
+	LOW_ALERT("LL", "Low alert", "Tief alarmierend", "Alerte bas", "Allarme basso"),
+
+		/**
+	 * <div class="en">Normal</div>
+	 * <div class="de">Normal</div>
+	 * <div class="fr">Normal</div>
+	 * <div class="it">Normale</div>
+	 * */
+	NORMAL("N",	"Normal", "", "", ""),
+
+		/**
+	 * <div class="en">Positive</div>
+	 * <div class="de">Positiv</div>
+	 * <div class="fr">Positif</div>
+	 * <div class="it">Positivo</div>
+	 * */
+	POS("POS", "Positive", "Positiv", "Positif", "Positivo"),
+
+		/**
+	 * <div class="en">Negative</div>
+	 * <div class="de">Negativ</div>
+	 * <div class="fr">Négatif</div>
+	 * <div class="it">Negativo</div>
+	 * */
+	NEG("NEG", "Negative", "Negativ", "Négatif", "Negativo");
 	//@formatter:on
 
 	/**
@@ -52,6 +109,7 @@ public enum ObservationInterpretation {
 	 * Codes Systems</div>
 	 */
 	public static final String CODE_SYSTEM_NAME = "HL7ObservationInterpretation ";
+
 	/**
 	 * <div class="en">Identifier of the Code System</div>
 	 * <div class="de">Identifikator für das Code System</div>
@@ -118,6 +176,9 @@ public enum ObservationInterpretation {
 		return false;
 	}
 
+	/** The display names per language */
+	private Map<LanguageCode, String> displayNames;
+
 	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
@@ -133,19 +194,30 @@ public enum ObservationInterpretation {
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
-	 * mittels eines Codes und einem Display Name</div>
+	 * Display Name</div> <div class="de">Instantsiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>.
 	 *
 	 * @param code
 	 *            <br>
 	 *            <div class="de"> code</div>
-	 * @param displayName
-	 *            <br>
-	 *            <div class="de"> display name</div>
+	 * @param displayNameEn
+	 *            the display name de
+	 * @param displayNameDe
+	 *            the display name de
+	 * @param displayNameFr
+	 *            the display name fr
+	 * @param displayNameIt
+	 *            the display name it
 	 */
-	private ObservationInterpretation(String code, String displayName) {
+	private ObservationInterpretation(String code, String displayNameEn, String displayNameDe,
+			String displayNameFr, String displayNameIt) {
 		this.code = code;
-		this.displayName = displayName;
+
+		displayNames = new HashMap<>();
+		displayNames.put(LanguageCode.ENGLISH, displayNameEn);
+		displayNames.put(LanguageCode.GERMAN, displayNameDe);
+		displayNames.put(LanguageCode.FRENCH, displayNameFr);
+		displayNames.put(LanguageCode.ITALIAN, displayNameIt);
 	}
 
 	/**
@@ -211,6 +283,27 @@ public enum ObservationInterpretation {
 	 */
 	public String getDisplayName() {
 		return this.displayName;
+	}
+
+	/**
+	 * <div class="en">Gets the display name defined by the language param. If
+	 * language is unknow, german name is returned</div> <div class="de">Liefert
+	 * display name gemäss Parameter, falls die Sprache unbekannt ist, wird
+	 * standartmässig deutsch geliefert.</div>
+	 *
+	 * @param languageCode
+	 *            the language code to get the display name for
+	 * @return returns the display name in the desired language. if language not
+	 *         found, display name in german will returned
+	 */
+	public String getDisplayName(LanguageCode languageCode) {
+		String displayName = null;
+		if (languageCode != null && displayNames.get(languageCode) != null) {
+			displayName = displayNames.get(languageCode);
+		} else {
+			displayName = displayNames.get(LanguageCode.GERMAN);
+		}
+		return displayName;
 	}
 
 }

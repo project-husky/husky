@@ -17,15 +17,21 @@
  */
 package org.ehealth_connector.cda.ch.lab.lrqc;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.ehealth_connector.cda.AbstractObservation;
 import org.ehealth_connector.cda.ObservationMediaEntry;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryBatteryOrganizer;
 import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Performer;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.openhealthtools.mdht.uml.cda.ObservationMedia;
+import org.openhealthtools.mdht.uml.cda.Performer2;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
+import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationPhysicalPerformer;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 
 /**
@@ -83,9 +89,32 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 	 *            the author
 	 */
 	public void addAuthor(Author author) {
-		getMdht().getAuthors().add(author.copyMdhtAuthor());
-		final int nb = getMdht().getAuthors().size() - 1;
-		getMdht().getAuthors().get(nb).setTypeCode(ParticipationType.AUT);
+		addAuthor(author, null);
+		// TODO remove old code
+		// getMdht().getAuthors().add(author.copyMdhtAuthor());
+		// final int nb = getMdht().getAuthors().size() - 1;
+		// getMdht().getAuthors().get(nb).setTypeCode(ParticipationType.AUT);
+	}
+
+	/**
+	 * Adds a author.
+	 *
+	 * @param author
+	 *            the author
+	 * @param dateTimeOfDocumentation
+	 *            <div class="en">date and time, when the result was known</div>
+	 *            <div class="de">Datum und Uhrzeit, an dem das Resultat bekannt
+	 *            wurde.</div> <div class="fr"></div> <div class="it"></div>
+	 */
+	public void addAuthor(Author author, Date dateTimeOfDocumentation) {
+		final org.openhealthtools.mdht.uml.cda.Author mAuthor = author.copyMdhtAuthor();
+		mAuthor.setTypeCode(ParticipationType.AUT);
+		try {
+			mAuthor.setTime(DateUtil.createIVL_TSFromEuroDate(dateTimeOfDocumentation));
+		} catch (final ParseException e) {
+			e.printStackTrace();
+		}
+		getMdht().getAuthors().add(mAuthor);
 	}
 
 	/**
@@ -115,11 +144,57 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 	}
 
 	/**
+	 * Adds a performer.
+	 *
+	 * @param performer
+	 *            the performer
+	 */
+	public void addPerformer(Performer performer) {
+		addPerformer(performer, null);
+	}
+
+	/**
+	 * Adds a performer.
+	 *
+	 * @param performer
+	 *            the performer
+	 * @param dateTimeOfPerformance
+	 *            <div class="en">date and time, when the result was known</div>
+	 *            <div class="de">Datum und Uhrzeit, an dem das Resultat bekannt
+	 *            wurde.</div> <div class="fr"></div> <div class="it"></div>
+	 */
+	public void addPerformer(Performer performer, Date dateTimeOfPerformance) {
+		final Performer2 mPerformer = performer.copyMdhtPerfomer();
+		mPerformer.setTypeCode(ParticipationPhysicalPerformer.PRF);
+		try {
+			mPerformer.setTime(DateUtil.createIVL_TSFromEuroDate(dateTimeOfPerformance));
+		} catch (final ParseException e) {
+			e.printStackTrace();
+		}
+		getMdht().getPerformers().add(mPerformer);
+	}
+
+	/**
 	 * Gets the laboratory observations.
 	 *
 	 * @return the laboratory observations
 	 */
-	public List<LaboratoryObservation> getLaboratoryObservations() {
+	@Override
+	public List<AbstractObservation> getLaboratoryObservations() {
+		final List<AbstractObservation> loList = new ArrayList<AbstractObservation>();
+		for (final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation lo : getMdht()
+				.getLaboratoryObservations()) {
+			loList.add(new AbstractObservation(lo));
+		}
+		return loList;
+	}
+
+	/**
+	 * Gets the laboratory observations.
+	 *
+	 * @return the laboratory observations
+	 */
+	public List<LaboratoryObservation> getLrqcLaboratoryObservations() {
 		final List<LaboratoryObservation> loList = new ArrayList<LaboratoryObservation>();
 		for (final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation lo : getMdht()
 				.getLaboratoryObservations()) {

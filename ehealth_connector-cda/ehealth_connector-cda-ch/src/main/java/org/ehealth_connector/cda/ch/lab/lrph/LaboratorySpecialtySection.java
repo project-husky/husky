@@ -17,6 +17,7 @@
  */
 package org.ehealth_connector.cda.ch.lab.lrph;
 
+import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.LanguageCode;
@@ -100,6 +101,64 @@ public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySecti
 	public LaboratorySpecialtySection(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection mdht) {
 		super(mdht);
+	}
+
+	/**
+	 * Adds a laboratory battery organizer to the section.
+	 *
+	 * @param sectionCode
+	 *            the section code
+	 * @param organizer
+	 *            the organizer
+	 * @param languageCode
+	 *            the language code (used for narrative text generation)
+	 */
+	public void addLaboratoryBatteryOrganizer(Code sectionCode,
+			LaboratoryBatteryOrganizer organizer, LanguageCode languageCode) {
+		boolean newLrdpe = false;
+		boolean newSa = false;
+
+		LaboratoryReportDataProcessingEntry lrdpe = getLaboratoryReportDataProcessingEntry();
+		if (getLaboratoryReportDataProcessingEntry() == null) {
+			newLrdpe = true;
+			lrdpe = new LaboratoryReportDataProcessingEntry();
+		}
+
+		AbstractSpecimenAct sa;
+		if (lrdpe.getSpecimenAct() == null) {
+			newSa = true;
+			sa = new AbstractSpecimenAct();
+			if (sectionCode != null) {
+				sa.setCode(sectionCode);
+			}
+		} else {
+			sa = new AbstractSpecimenAct(lrdpe.getSpecimenAct().getMdht());
+		}
+
+		sa.addLaboratoryBatteryOrganizer(organizer);
+
+		// make sure that exactly one LaboratoryReportDataProcessingEntry and
+		// exactly one SpecimenAct exist between section and organizer
+		if (newSa)
+			lrdpe.setSpecimenAct(sa);
+		if (newLrdpe)
+			setLaboratoryReportDataProcessingEntry(lrdpe);
+
+		// update the MDHT Object content references to CDA level 1 text
+		// TODO tsc: implement
+		// if (updateProblemConcernReferences(section.getActs(),
+		// SectionsEDES.ACTIVE_PROBLEMS)) {
+		// if (cdaDocument.IsNarrativeTextGenerationEnabled()) {
+		// // create the CDA level 1 text
+		// section.createStrucDocText(generateNarrativeTextActiveProblemConcerns(section));
+		// } else {
+		// setNarrativeTextSection(SectionsEDES.ACTIVE_PROBLEMS, section,"");
+		// }
+		// } else {
+		// section.createStrucDocText("Keine Angaben");
+		// activeProblemConcern.copyMdhtProblemConcernEntry().getEntryRelationships().get(0)
+		// .getObservation().setText(Util.createEd(""));
+		// }
 	}
 
 	/**

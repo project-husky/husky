@@ -54,6 +54,12 @@ public enum CodeSystems implements IdentityDomain {
 	 */
 	WHOATCCode("2.16.840.1.113883.6.73", "WHO ATC Code"),
 	/**
+	 * OID: 2.16.756.5.30.1.129.1.3 <div class="en">Swiss Analysis List</div>
+	 * <div class="de">Analysenliste (AL)</div> <div class="fr">Liste des
+	 * analyses (LA)</div>
+	 */
+	SwissAL("2.16.756.5.30.1.129.1.3", "Swiss Analysis List"),
+	/**
 	 * OID: 2.16.756.5.32 <div class="en">AHV Number (the new one)</div>
 	 * <div class="de">AHV Nummer (die Neue)</div> <div class="fr">No AVS (le
 	 * nouveaux)</div>

@@ -19,6 +19,7 @@ package org.ehealth_connector.common;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipType;
 
 /**
@@ -28,7 +29,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipType;
 public class ReferenceRange extends ObservationRange {
 
 	/** The MDHT Reference Range. */
-	private org.openhealthtools.mdht.uml.cda.ReferenceRange mRr;
+	private final org.openhealthtools.mdht.uml.cda.ReferenceRange mRr;
 
 	/**
 	 * Instantiates a new reference range.
@@ -38,7 +39,7 @@ public class ReferenceRange extends ObservationRange {
 		mRr = CDAFactory.eINSTANCE.createReferenceRange();
 		mRr.setObservationRange(getObsR());
 		mRr.setTypeCode(ActRelationshipType.REFV);
-		this.setInterpretationCode(ObservationInterpretation.NORMAL);
+		this.setInterpretation(ObservationInterpretation.NORMAL);
 	}
 
 	/**
@@ -63,7 +64,7 @@ public class ReferenceRange extends ObservationRange {
 	public ReferenceRange(Value value, ObservationInterpretation interpretationCode) {
 		this();
 		setValue(value);
-		setInterpretationCode(interpretationCode);
+		setInterpretation(interpretationCode);
 	}
 
 	/**
@@ -82,5 +83,42 @@ public class ReferenceRange extends ObservationRange {
 	 */
 	public org.openhealthtools.mdht.uml.cda.ReferenceRange getMdht() {
 		return mRr;
+	}
+
+	/**
+	 * Returns narrative string.
+	 *
+	 * @return the Reference Range as narrative String
+	 */
+	public String toNarrativeString() {
+		String retVal = "";
+		String lowValue = "";
+		String lowUnit = "";
+		String highValue = "";
+		String highUnit = "";
+
+		IVL_PQ tempIvl = null;
+		if (mRr != null)
+			if (mRr.getObservationRange() != null)
+				if (mRr.getObservationRange().getValue() != null)
+					if (mRr.getObservationRange().getValue() instanceof IVL_PQ)
+						tempIvl = (IVL_PQ) mRr.getObservationRange().getValue();
+		if (tempIvl != null) {
+			lowValue = tempIvl.getLow().getValue().toString();
+			lowUnit = tempIvl.getLow().getUnit();
+			highValue = tempIvl.getHigh().getValue().toString();
+			highUnit = tempIvl.getHigh().getUnit();
+		}
+		if (!"".equals(lowUnit))
+			lowUnit = " " + lowUnit;
+		if (!"".equals(highUnit))
+			highUnit = " " + highUnit;
+
+		if (lowUnit.equals(highUnit))
+			retVal = lowValue + " - " + highValue + lowUnit;
+		else
+			retVal = lowValue + lowUnit + " - " + highValue + highUnit;
+
+		return retVal;
 	}
 }

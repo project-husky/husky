@@ -34,7 +34,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 /**
  * The Class AbstractSpecimenAct.
  */
-public class AbstractSpecimenAct extends org.ehealth_connector.cda.ihe.lab.AbstractSpecimenAct {
+public class AbstractSpecimenAct extends org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryAct {
 
 	/**
 	 * Instantiates a new abstract specimen act.

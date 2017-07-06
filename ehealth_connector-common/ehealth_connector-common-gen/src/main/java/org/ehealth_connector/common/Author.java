@@ -88,6 +88,40 @@ public class Author {
 	}
 
 	/**
+	 * Creates a null flavored author according to ELGA spec (necessary for
+	 * PHARM DIS)
+	 *
+	 * @param nullFlavored
+	 *            True
+	 */
+	public Author(boolean nullFlavored) {
+
+		/*
+		 * ELGA spec:
+		 *
+		 * <author nullFlavor="NA"> <time nullFlavor="NA"/> <assignedAuthor
+		 * nullFlavor="NA"> <id nullFlavor="NA"/> </assignedAuthor> </author>
+		 */
+
+		mAuthor = CDAFactory.eINSTANCE.createAuthor();
+		mPerson = null;
+		mAsAuthor = CDAFactory.eINSTANCE.createAssignedAuthor();
+
+		mAsAuthor.setAssignedPerson(mPerson);
+		mAuthor.setAssignedAuthor(mAsAuthor);
+
+		mAuthor.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.NA);
+		mAuthor.getAssignedAuthor()
+				.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.NA);
+		final II ii = DatatypesFactory.eINSTANCE.createII();
+		ii.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.NA);
+		mAuthor.getAssignedAuthor().getIds().add(ii);
+		final TS tsTime = DatatypesFactory.eINSTANCE.createTS();
+		tsTime.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.NA);
+		mAuthor.setTime(tsTime);
+	}
+
+	/**
 	 * Instantiates a new author.
 	 */
 	public Author(Code functionCode) {
@@ -197,41 +231,6 @@ public class Author {
 		this.setFunctionCodePatient();
 	}
 
-	/**
-	 * Creates a null flavored author according to ELGA spec (necessary for PHARM DIS)
-	 * 
-	 * @param nullFlavored
-	 * 			True
-	 */
-	public Author(boolean nullFlavored) {
-
-		/* ELGA spec:
-
-        <author nullFlavor="NA">
-            <time nullFlavor="NA"/>
-            <assignedAuthor nullFlavor="NA">
-               <id nullFlavor="NA"/>
-            </assignedAuthor>
-        </author>
-		 */
-
-		mAuthor = CDAFactory.eINSTANCE.createAuthor();
-		mPerson = null;
-		mAsAuthor = CDAFactory.eINSTANCE.createAssignedAuthor();
-
-		mAsAuthor.setAssignedPerson(mPerson);
-		mAuthor.setAssignedAuthor(mAsAuthor);
-		
-		mAuthor.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.NA);
-		mAuthor.getAssignedAuthor().setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.NA);
-		final II ii = DatatypesFactory.eINSTANCE.createII();
-		ii.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.NA);
-		mAuthor.getAssignedAuthor().getIds().add(ii);
-		final TS tsTime = DatatypesFactory.eINSTANCE.createTS();
-		tsTime.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.NA);
-		mAuthor.setTime(tsTime);
-	}
-	
 	/**
 	 * Weist dem Autor eine Postadresse zu.
 	 *
@@ -383,12 +382,14 @@ public class Author {
 		}
 		// If the Author has no name, try the represented organization
 		if (retVal.equals("")) {
-			if (mAuthor.getAssignedAuthor().getRepresentedOrganization() != null) {
-				if (!mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames()
-						.isEmpty()) {
-					final Name name = new Name(mAuthor.getAssignedAuthor()
-							.getRepresentedOrganization().getNames().get(0));
-					retVal = name.getCompleteName();
+			if (mAuthor.getAssignedAuthor() != null) {
+				if (mAuthor.getAssignedAuthor().getRepresentedOrganization() != null) {
+					if (!mAuthor.getAssignedAuthor().getRepresentedOrganization().getNames()
+							.isEmpty()) {
+						final Name name = new Name(mAuthor.getAssignedAuthor()
+								.getRepresentedOrganization().getNames().get(0));
+						retVal = name.getCompleteName();
+					}
 				}
 			}
 		}
@@ -730,25 +731,29 @@ public class Author {
 	 *            <div class="it"></div>
 	 */
 	public void setOrganization(Organization organization) {
-		mAsAuthor.setRepresentedOrganization(organization.copyMdhtOrganization());
+		if (organization != null)
+			mAsAuthor.setRepresentedOrganization(organization.copyMdhtOrganization());
 	}
 
 	/**
 	 * Sets the functionCode of the author
 	 *
 	 * @param codeSystem
-	 * 				the code system OID
+	 *            the code system OID
 	 * @param codeSystemame
-	 * 				the name of the code system
+	 *            the name of the code system
 	 * @param originalText
 	 *            the function code (free text)
 	 */
-	public void setOtherFunctionCode(String codeSystem, String codeSystemName, String originalText) {
+	public void setOtherFunctionCode(String codeSystem, String codeSystemName,
+			String originalText) {
 		if (originalText != null) {
 			final CE otherCode = DatatypesFactory.eINSTANCE.createCE();
 			otherCode.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.OTH);
-			if (codeSystem != null) otherCode.setCode(codeSystem);
-			if (codeSystemName != null) otherCode.setCodeSystemName(codeSystemName);
+			if (codeSystem != null)
+				otherCode.setCode(codeSystem);
+			if (codeSystemName != null)
+				otherCode.setCodeSystemName(codeSystemName);
 			otherCode.setOriginalText(DatatypesFactory.eINSTANCE.createED(originalText));
 			mAuthor.setFunctionCode(otherCode);
 		}

@@ -33,6 +33,7 @@ import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReportTest;
 import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
 import org.ehealth_connector.cda.ch.lab.StudiesSummarySection;
+import org.ehealth_connector.cda.ch.lab.lrqc.enums.SpecialtySections;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsList;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.ReportScopes;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
@@ -122,14 +123,14 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct());
 		assertNotNull(
 				cda.getLaboratorySpecialtySections().get(0).getLaboratoryReportDataProcessingEntry()
-						.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0));
+						.getSpecimenAct().getLrtpLaboratoryBatteryOrganizers().get(0));
 		assertNotNull(cda.getLaboratorySpecialtySections().get(0)
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
-				.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0));
+				.getLrtpLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0));
 		assertNotNull(
 				cda.getLaboratorySpecialtySections().get(0).getLaboratoryReportDataProcessingEntry()
-						.getSpecimenAct().getLaboratoryBatteryOrganizers().get(0)
-						.getLaboratoryObservations().get(0).getCommentEntryList().get(0));
+						.getSpecimenAct().getLrtpLaboratoryBatteryOrganizers().get(0)
+						.getLrtpLaboratoryObservations().get(0).getCommentEntryList().get(0));
 
 		// LRTP specific
 		// assertNotNull(cda.getLaboratoryBatteryOrganizerList().get(0).getLaboratoryObservations().get(0)
@@ -149,13 +150,13 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct());
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySections().get(0)
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
-				.getLaboratoryBatteryOrganizers().get(0));
+				.getLrtpLaboratoryBatteryOrganizers().get(0));
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySections().get(0)
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
-				.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0));
+				.getLrtpLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0));
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySections().get(0)
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
-				.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
+				.getLrtpLaboratoryBatteryOrganizers().get(0).getLrtpLaboratoryObservations().get(0)
 				.getCommentEntryList().get(0));
 		// assertNotNull(cda.getLaboratoryBatteryOrganizerList().get(0).getLaboratoryObservations().get(0)
 		// .getSoasInfoEnties().get(0));
@@ -169,8 +170,8 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		assertTrue(LabObsList.A11_HLA_ANTIGENE.getCode()
 				.equals(cdaDeserialized.getLaboratorySpecialtySections().get(0)
 						.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
-						.getLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
-						.getCodeAsLoincEnum().getCode()));
+						.getLrtpLaboratoryBatteryOrganizers().get(0).getLrtpLaboratoryObservations()
+						.get(0).getCodeAsLoincEnum().getCode()));
 	}
 
 	@Test
@@ -214,7 +215,7 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		org.addLaboratoryObservation(lo);
 
 		final CdaChLrtp cda = new CdaChLrtp();
-		cda.addLaboratoryBatteryOrganizer(org);
+		cda.addLaboratoryBatteryOrganizer(org, SpecialtySections.BLOOD_BANK_STUDIES.getCode());
 
 		cda.getLaboratorySpecialtySections().get(0).setTextReference(
 				"<table><tr><td>Dies ist ein Test<content ID=\"TestContentIdRef\">Hier steht der menschenlesbare Text</content></td></tr></table>");
@@ -240,8 +241,8 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		lo.setCode(LabObsList.A11_HLA_ANTIGENE);
 		LaboratoryBatteryOrganizer lbo = new LaboratoryBatteryOrganizer();
 		lbo.addLaboratoryObservation(lo);
-		doc.addLaboratoryBatteryOrganizer(lbo);
-		assertFalse(doc.getLaboratoryBatteryOrganizerList().isEmpty());
+		doc.addLaboratoryBatteryOrganizer(lbo, SpecialtySections.HLA_STUDIES.getCode());
+		assertFalse(doc.getLrtpLaboratoryBatteryOrganizerList().isEmpty());
 		document = doc.getDocument();
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.1.4", null));
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.3.2.1", null));
@@ -249,7 +250,7 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		assertTrue(xExist(document,
 				"/clinicaldocument/component/structuredBody/component/section/code[@code='18724-5']"));
 		// a second Laboratory Battery Organizer
-		doc.addLaboratoryBatteryOrganizer(lbo);
+		doc.addLaboratoryBatteryOrganizer(lbo, SpecialtySections.BLOOD_BANK_STUDIES.getCode());
 		document = doc.getDocument();
 		// there must be two Laboratory Battery Organizers in two
 		// LaboratorySpecialtySections

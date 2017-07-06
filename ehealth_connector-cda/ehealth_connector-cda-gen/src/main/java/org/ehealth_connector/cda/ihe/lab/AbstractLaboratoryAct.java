@@ -27,12 +27,12 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 /**
  * The Class AbstractSpecimenAct.
  */
-public abstract class AbstractSpecimenAct extends MdhtActFacade<Act> {
+public class AbstractLaboratoryAct extends MdhtActFacade<Act> {
 
 	/**
 	 * Instantiates a new abstract specimen act.
 	 */
-	public AbstractSpecimenAct() {
+	public AbstractLaboratoryAct() {
 		super(LABFactory.eINSTANCE.createSpecimenAct().init());
 	}
 
@@ -42,7 +42,7 @@ public abstract class AbstractSpecimenAct extends MdhtActFacade<Act> {
 	 * @param mdht
 	 *            the mdht
 	 */
-	public AbstractSpecimenAct(Act mdht) {
+	public AbstractLaboratoryAct(Act mdht) {
 		super(mdht);
 	}
 

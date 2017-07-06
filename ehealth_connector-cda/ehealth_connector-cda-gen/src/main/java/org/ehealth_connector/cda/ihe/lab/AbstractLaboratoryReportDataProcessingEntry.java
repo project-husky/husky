@@ -61,7 +61,7 @@ public abstract class AbstractLaboratoryReportDataProcessingEntry extends
 	 * @param specimenAct
 	 *            the new specimen act
 	 */
-	public void setSpecimenAct(org.ehealth_connector.cda.ihe.lab.AbstractSpecimenAct specimenAct) {
+	public void setSpecimenAct(org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryAct specimenAct) {
 		getMdht().setAct(specimenAct.getMdht());
 	}
 }

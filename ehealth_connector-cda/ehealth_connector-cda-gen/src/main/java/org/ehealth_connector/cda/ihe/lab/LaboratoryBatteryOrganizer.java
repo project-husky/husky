@@ -17,9 +17,6 @@
  */
 package org.ehealth_connector.cda.ihe.lab;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
@@ -72,17 +69,4 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 		getMdht().addObservation(observation.copy());
 	}
 
-	/**
-	 * Gets the laboratory observations.
-	 *
-	 * @return the laboratory observations
-	 */
-	public List<LaboratoryObservation> getLaboratoryObservations() {
-		final List<LaboratoryObservation> ol = new ArrayList<LaboratoryObservation>();
-		for (final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation o : getMdht()
-				.getLaboratoryObservations()) {
-			ol.add(new LaboratoryObservation(o));
-		}
-		return ol;
-	}
 }

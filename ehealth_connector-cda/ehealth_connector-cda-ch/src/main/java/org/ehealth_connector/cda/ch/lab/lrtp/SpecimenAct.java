@@ -92,7 +92,7 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecim
 	 *
 	 * @return the laboratory battery organizers
 	 */
-	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizers() {
+	public List<LaboratoryBatteryOrganizer> getLrtpLaboratoryBatteryOrganizers() {
 		final List<LaboratoryBatteryOrganizer> list = new ArrayList<LaboratoryBatteryOrganizer>();
 		if ((getMdht() != null) && (getMdht().getOrganizers() != null)) {
 			for (final Organizer organizer : this.getMdht().getOrganizers()) {

@@ -30,25 +30,25 @@ import org.ehealth_connector.common.utils.LangTexts;
 public enum VitalSignCodes {
 	//@formatter:off
 	/** <div class="en">body height (measured)</div><div class="de">Körpergrösse (gemessen)</div>*/
-	BODY_HEIGHT("8302-2", "Körpergrösse (gemessen)", null, null, "body height (measured)"),
+	BODY_HEIGHT("8302-2", "Körpergrösse", "Hauteur du corps", null, "Body height"),
 	/** <div class="en">body height lying</div><div class="de">Körpergrösse im Liegen</div>*/
-	BODY_HEIGHT_LYING("8306-3", "Körpergrösse im Liegen", null, null, "body height lying"),
+	BODY_HEIGHT_LYING("8306-3", "Körpergrösse im Liegen", "Hauteur du corps allongé", null, "Body height lying"),
 	/** <div class="en">body temperature</div><div class="de">Körpertemperatur</div>*/
-	BODY_TEMPERATURE_CEL("8310-5", "Körpertemperatur", null, null, "body temperature"),
+	BODY_TEMPERATURE_CEL("8310-5", "Körpertemperatur", "Température du corps", null, "Body temperature"),
 	/** <div class="en">body weight (measured)</div><div class="de">Körpergewicht (gewogen)</div>*/
-	BODY_WEIGHT("3141-9", "Körpergewicht (gewogen)", null, null, "body weight (measured)"),
+	BODY_WEIGHT("3141-9", "Körpergewicht", "Poids corporel", null, "Body weight"),
 	/** <div class="en">circumfence occipital frontal</div><div class="de">Kopfumfang okzipitofrontal</div>*/
-	CIRCUMFRENCE_OCCIPITAL_FRONTAL("8287-5", "Kopfumfang okzipitofrontal", null, null, "circumfence occipital frontal"),
+	CIRCUMFRENCE_OCCIPITAL_FRONTAL("8287-5", "Kopfumfang okzipitofrontal", "Circonférence front occipital", null, "Circumfence occipital frontal"),
 	/** <div class="en">heart beat</div><div class="de">Herzfrequenz</div>*/
-	HEART_BEAT("8867-4", "Herzfrequenz", null, null, "heart beat"),
+	HEART_BEAT("8867-4", "Herzfrequenz", "Fréquence cardiaque", null, "Heart beat"),
 	/** <div class="en">intravascular diastolic</div><div class="de">Intrvaskulärer diastolischer Druck</div>*/
-	INTRAVASCULAR_DIASTOLIC("8462-4", "Intrvaskulärer diastolischer Druck", null, null,"intravascular diastolic"),
+	INTRAVASCULAR_DIASTOLIC("8462-4", "Intrvaskulärer diastolischer Druck", "Diastolique intravasculaire", null,"Intravascular diastolic"),
 	/** <div class="en">intravascular systolic</div><div class="de">Intravaskulärer systolischer Druck</div>*/
-	INTRAVASCULAR_SYSTOLIC("8480-6", "Intravaskulärer systolischer Druck", null, null, "intravascular systolic"),
+	INTRAVASCULAR_SYSTOLIC("8480-6", "Intravaskulärer systolischer Druck", "Systolique intravasculaire", null, "Intravascular systolic"),
 	/** <div class="en">oxygen saturation</div><div class="de">Sauerstoffsättigung</div>*/
-	OXYGEN_SATURATION_PERCENT("2710-2", "Sauerstoffsättigung", null, null, "oxygen saturation"),
+	OXYGEN_SATURATION_PERCENT("2710-2", "Sauerstoffsättigung", "Saturation en oxygène", null, "Oxygen saturation"),
 	/** <div class="en">respiration rate</div><div class="de">Atemfrequenz</div>*/
-	RESPIRATION_RATE("9279-1", "Atemfrequenz", null, null, "respiration rate");
+	RESPIRATION_RATE("9279-1", "Atemfrequenz", "Taux de respiration", null, "Respiration rate");
 	//@formatter:on
 
 	/**

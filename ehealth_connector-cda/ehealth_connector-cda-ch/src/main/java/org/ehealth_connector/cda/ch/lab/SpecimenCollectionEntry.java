@@ -29,6 +29,7 @@ import org.ehealth_connector.common.PlayingEntity;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
@@ -152,7 +153,8 @@ public class SpecimenCollectionEntry
 		final Participant participant = new Participant();
 
 		// Fixed Loinc Code for Playing Entity
-		pl.setCode(new Code("2.16.756.5.30.2.1.1.10", "LOINC"));
+		Code code = new Code("2.16.756.5.30.2.1.1.10", "LOINC");
+		pl.setCode(code);
 		pr.setPlayingEntity(pl);
 		pr.getMdht().getIds().add(id);
 		participant.setParticipantRole(pr);
@@ -180,6 +182,42 @@ public class SpecimenCollectionEntry
 	 */
 	public void setEffectiveTimeNullFlavorUnk() {
 		getMdht().setEffectiveTime(Util.createEffectiveTimeNullFlavorUnk());
+	}
+
+	/**
+	 * Sets the specimen material original text
+	 *
+	 * @param originalText
+	 *            the new specimen material original text
+	 */
+	public void setSpecimenMaterialOriginalText(String originalText) {
+		setSpecimenMaterialOriginalText(originalText, null);
+	}
+
+	/**
+	 * Sets the specimen material original text element including the reference
+	 * to the narrative part
+	 *
+	 * @param originalText
+	 *            the original text
+	 * @param textReference
+	 *            the text reference
+	 */
+	public void setSpecimenMaterialOriginalText(String originalText, String textReference) {
+		CD cd = null;
+		if (this.getMdht() != null)
+			if (this.getMdht().getParticipants() != null)
+				if (this.getMdht().getParticipants().size() > 0)
+					if (this.getMdht().getParticipants().get(0) != null)
+						if (this.getMdht().getParticipants().get(0).getParticipantRole() != null)
+							if (this.getMdht().getParticipants().get(0).getParticipantRole()
+									.getPlayingEntity() != null)
+								cd = this.getMdht().getParticipants().get(0).getParticipantRole()
+										.getPlayingEntity().getCode();
+		if (cd != null) {
+			Code code = new Code(cd);
+			code.setOriginalText(originalText, textReference);
+		}
 	}
 
 	/**
@@ -219,6 +257,35 @@ public class SpecimenCollectionEntry
 			if (!textReference.startsWith("#"))
 				textReference = "#" + textReference;
 			this.getMdht().setText(Util.createReference(textReference));
+		}
+	}
+
+	/**
+	 * TODO tsc
+	 */
+	public void SpecimenCollectionApproachSiteCodeOriginalText(String originalText) {
+		SpecimenCollectionApproachSiteCodeOriginalText(originalText, null);
+	}
+
+	/**
+	 * TODO tsc
+	 */
+	public void SpecimenCollectionApproachSiteCodeOriginalText(String originalText,
+			String textReference) {
+		CD cd = null;
+		if (this.getMdht() != null)
+			if (this.getMdht().getApproachSiteCodes() != null)
+				if (this.getMdht().getApproachSiteCodes().size() > 0)
+					if (this.getMdht().getApproachSiteCodes().get(0) != null)
+						cd = this.getMdht().getApproachSiteCodes().get(0);
+		Code code = null;
+		if (cd != null) {
+			code = new Code(cd);
+			code.setOriginalText(originalText, textReference);
+		} else {
+			code = new Code(org.ehealth_connector.common.enums.NullFlavor.ASKED_BUT_UNKNOWN);
+			code.setOriginalText(originalText, textReference);
+			this.getMdht().getApproachSiteCodes().add(code.getCD());
 		}
 	}
 }

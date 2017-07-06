@@ -17,15 +17,24 @@
  */
 package org.ehealth_connector.cda.ihe.lab;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.emf.common.util.EList;
+import org.ehealth_connector.cda.AbstractObservation;
 import org.ehealth_connector.cda.MdhtSectionFacade;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.openhealthtools.mdht.uml.cda.Act;
+import org.openhealthtools.mdht.uml.cda.Entry;
+import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
+import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer;
 
 /**
  * The Class AbstractLaboratorySpecialtySection.
  */
-public abstract class AbstractLaboratorySpecialtySection extends
+public class AbstractLaboratorySpecialtySection extends
 		MdhtSectionFacade<org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection> {
 
 	/**
@@ -69,6 +78,40 @@ public abstract class AbstractLaboratorySpecialtySection extends
 	public AbstractLaboratorySpecialtySection(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection mdht) {
 		super(mdht);
+	}
+
+	public AbstractLaboratoryAct getAct() {
+		final EList<Entry> entries = getMdht().getEntries();
+
+		for (final Entry entry : entries) {
+			final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry mLabRdpe = (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry) entry;
+
+			return new AbstractLaboratoryAct(mLabRdpe.getAct());
+		}
+		return null;
+	}
+
+	public List<AbstractObservation> getObservations() {
+		final EList<Entry> entries = getMdht().getEntries();
+
+		final List<AbstractObservation> labObservations = new ArrayList<AbstractObservation>();
+		for (final Entry entry : entries) {
+			final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry mLabRdpe = (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry) entry;
+
+			final Act act = mLabRdpe.getAct();
+			for (final EntryRelationship er : act.getEntryRelationships()) {
+				if (er.getOrganizer() instanceof LaboratoryBatteryOrganizer) {
+					final LaboratoryBatteryOrganizer mLabOrg = (LaboratoryBatteryOrganizer) er
+							.getOrganizer();
+					for (final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation mLo : mLabOrg
+							.getLaboratoryObservations()) {
+						final AbstractObservation lo = new AbstractObservation(mLo);
+						labObservations.add(lo);
+					}
+				}
+			}
+		}
+		return labObservations;
 	}
 
 	/**

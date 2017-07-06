@@ -65,6 +65,38 @@ public class LaboratoryObservation
 	 *            des Kits</div>
 	 */
 	public LaboratoryObservation(LabObsList code, Value value,
+			ObservationInterpretation interpretationCode, SectionAnnotationCommentEntry reference) {
+		this();
+		setCode(code);
+		addValue(value);
+		addInterpretationCode(interpretationCode);
+		addCommentEntry(reference);
+	}
+
+	/**
+	 * Instantiates the class with the required elements.
+	 *
+	 * @param code
+	 *            the code
+	 * @param value
+	 *            the value
+	 * @param interpretationCode
+	 *            the interpretation code
+	 * @param textReference
+	 *            Reference to the human readable text
+	 * @param reference
+	 *            <div class="en">reference to the human readable text,
+	 *            regarding the lot number of the anylizer kit</div>
+	 *            <div class="de">Dieses Element ermöglicht zu jedem Entry einen
+	 *            Kommentar anzugeben. Bei Laborbefunden für die
+	 *            Qualitätskontrolle MUSS darin deklariert werden, wie die Probe
+	 *            analysiert worden ist. Wenn dazu ein Analyzer verwendet worden
+	 *            ist, soll dies folgendermassen deklariert werden (Freitext):
+	 *            Test-Hersteller [R]: Name des Unternehmens, Test-Gerät [R]:
+	 *            Name und Typ des Gerätes, Test-Kit [R2]: Genaue Bezeichnung
+	 *            des Kits</div>
+	 */
+	public LaboratoryObservation(LabObsList code, Value value,
 			ObservationInterpretation interpretationCode, String textReference,
 			SectionAnnotationCommentEntry reference) {
 		this();

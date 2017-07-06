@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.ehealth_connector.cda.AbstractObservation;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryBatteryOrganizer;
 import org.ehealth_connector.common.Author;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
@@ -119,7 +120,22 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 	 *
 	 * @return the laboratory observations
 	 */
-	public List<LaboratoryObservation> getLaboratoryObservations() {
+	@Override
+	public List<AbstractObservation> getLaboratoryObservations() {
+		final List<AbstractObservation> loList = new ArrayList<AbstractObservation>();
+		for (final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation lo : getMdht()
+				.getLaboratoryObservations()) {
+			loList.add(new AbstractObservation(lo));
+		}
+		return loList;
+	}
+
+	/**
+	 * Gets the laboratory observations.
+	 *
+	 * @return the laboratory observations
+	 */
+	public List<LaboratoryObservation> getLrtpLaboratoryObservations() {
 		final List<LaboratoryObservation> loList = new ArrayList<LaboratoryObservation>();
 		for (final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation lo : getMdht()
 				.getLaboratoryObservations()) {

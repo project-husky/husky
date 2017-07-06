@@ -116,6 +116,18 @@ public class SpecimenCollectionEntry
 	}
 
 	/**
+	 * Sets the effective time interval.
+	 *
+	 * @param low
+	 *            the low value
+	 * @param high
+	 *            the high value
+	 */
+	public void setEffectiveTime(Date low, Date high) {
+		getMdht().setEffectiveTime(DateUtil.convertDateToIvlTsyyyyMMddHHmmssZZZZ(low, high));
+	}
+
+	/**
 	 * Sets the specimen received entry.
 	 *
 	 * @param entry

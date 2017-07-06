@@ -1287,7 +1287,7 @@ public abstract class AbstractFhirCdaCh {
 				}
 			}
 			if (obsInt != null) {
-				rr.setInterpretationCode(obsInt);
+				rr.setInterpretation(obsInt);
 			}
 			retVal.setReferenceRange(rr);
 		}

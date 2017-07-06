@@ -32,21 +32,15 @@ public abstract class TextBuilder {
 	}
 
 	protected void addCell(String text) {
-		append("<td>");
-		append(text);
-		append("</td>");
+		append(getCell(text));
 	}
 
 	protected void addCellWithContent(String text, String prefix, int i) {
-		append("<td>");
-		addContent(text, prefix, i);
-		append("</td>");
+		append(getCellWithContent(text, prefix, i));
 	}
 
 	protected void addContent(String text, String prefix, int i) {
-		append("<content ID='" + prefix + i + "'>");
-		append(text);
-		append("</content>");
+		append(getContent(text, prefix, i));
 	}
 
 	protected void append(String text) {
@@ -57,8 +51,18 @@ public abstract class TextBuilder {
 		return ("<td>" + text + "</td>");
 	}
 
-	protected String buildCellWithContent(String text, int i, String prefix) {
-		return ("<td><content ID=\"" + prefix + i + "\">" + text + "</content></td>");
+	protected String getCell(String text) {
+		if (text == null)
+			text = "";
+		return "<td>" + text + "</td>";
+	}
+
+	protected String getCellWithContent(String text, String prefix, int i) {
+		return "<td>" + getContent(text, prefix, i) + "</td>";
+	}
+
+	protected String getContent(String text, String prefix, int i) {
+		return "<content ID='" + prefix + i + "'>" + text + "</content>";
 	}
 
 	@Override
@@ -66,48 +70,4 @@ public abstract class TextBuilder {
 		return buffer.toString();
 	}
 
-	// public void build(String[] tableHeader, String[][] tableBody,
-	// Boolean referenceBodyCell[]) {
-	// this.tableHeader = tableHeader;
-	// this.tableBody = tableBody;
-	//
-	// // Generate Table
-	// append("<table border='1' width='100%'>");
-	// // Table Header
-	// append("<thead>");
-	// append("<tr>");
-	// for (String headerCell : tableHeader) {
-	// append("<th>");
-	// append(headerCell);
-	// append("</th>");
-	// }
-	// append("</tr>");
-	// append("</thead>");
-	// // Table Body
-	// int cellCounter = 0;
-	// int idCounter = 0;
-	// // Algorithm for the generation of body Cells.
-	// // If the corresponding element in the referenceBodyCell array is true,
-	// // a new (successive) content id for this cell will be generated.
-	// for (String[] bodyRow : tableBody) {
-	// cellCounter = 0;
-	// append("<tr>");
-	// for (String bodyCell : bodyRow) {
-	// if (referenceBodyCell[cellCounter]) {
-	// append("<td><content ID=\"" + String.valueOf(idCounter)
-	// + "\">");
-	// append(bodyCell);
-	// append("</content></td>");
-	// idCounter++;
-	// } else {
-	// append("<td>");
-	// append(bodyCell);
-	// append("</td>");
-	// }
-	// cellCounter++;
-	// }
-	// append("</tr>");
-	// }
-	// append("</table>");
-	// }
 }

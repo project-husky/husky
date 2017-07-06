@@ -144,19 +144,6 @@ public class AbstractVitalSignObservation extends AbstractObservation {
 	}
 
 	/**
-	 * Gets the interpretation of the vital sign observation.
-	 *
-	 * @return the interpretation as code or null.
-	 */
-	public Code getInterpretationCode() {
-		final EList<CE> codes = getVitalSignObservation().getInterpretationCodes();
-		if (!codes.isEmpty()) {
-			return new Code(codes.get(0));
-		}
-		return null;
-	}
-
-	/**
 	 * <div class="de">Get a copy mdht vital sign observation.</div>
 	 * <div class="de">Gibt eine Kopie der mdth vital sign observation
 	 * zurück.</div> <div class="fr"></div> <div class="it"></div>
@@ -249,7 +236,7 @@ public class AbstractVitalSignObservation extends AbstractObservation {
 		cdNullFlavourCode.setNullFlavor(NullFlavor.NA);
 
 		getVitalSignObservation().getMethodCodes().add(EcoreUtil.copy(ceNullFlavourCode));
-		getVitalSignObservation().getInterpretationCodes().add(EcoreUtil.copy(ceNullFlavourCode));
+		// getVitalSignObservation().getInterpretationCodes().add(EcoreUtil.copy(ceNullFlavourCode));
 		getVitalSignObservation().getTargetSiteCodes().add(EcoreUtil.copy(cdNullFlavourCode));
 
 		getVitalSignObservation().setText(Util.createReference("#TODO"));
@@ -302,6 +289,7 @@ public class AbstractVitalSignObservation extends AbstractObservation {
 	 *            <div class="de">Beurteilung des Resultats</div>
 	 *            <div class="fr"></div> <div class="it"></div>
 	 */
+	@Override
 	public void setInterpretationCode(Code code) {
 		if (code != null) {
 			getVitalSignObservation().getInterpretationCodes().clear();
@@ -371,6 +359,7 @@ public class AbstractVitalSignObservation extends AbstractObservation {
 	 * @param text
 	 *            the new text
 	 */
+	@Override
 	public void setText(String text) {
 		getVitalSignObservation().setText(Util.createEd(text));
 	}
@@ -414,6 +403,7 @@ public class AbstractVitalSignObservation extends AbstractObservation {
 	public void setVitalSignObservation(
 			org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation vitalSignObservation) {
 		mVitalSignObservation = vitalSignObservation;
+		super.mObservation = mVitalSignObservation;
 	}
 
 }

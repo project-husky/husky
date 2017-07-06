@@ -36,6 +36,7 @@ import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReportTest;
 import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.LabObsList;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.QualabQcc;
+import org.ehealth_connector.cda.ch.lab.lrqc.enums.SpecialtySections;
 import org.ehealth_connector.cda.ihe.lab.SpecimenReceivedEntry;
 import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Author;
@@ -132,7 +133,7 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 				.getLaboratoryObservations().get(0));
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
 				.getSpecimenAct().getLrqcLaboratoryBatteryOrganizers().get(0)
-				.getLaboratoryObservations().get(0).getCommentEntryList().get(0));
+				.getLrqcLaboratoryObservations().get(0).getCommentEntryList().get(0));
 
 		assertNotNull(cda.getLaboratorySpecialtySection().getLaboratoryReportDataProcessingEntry()
 				.getSpecimenAct().getSpecimenCollectionEntries().get(0));
@@ -159,7 +160,7 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 				.getLrqcLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0));
 		assertNotNull(cdaDeserialized.getLaboratorySpecialtySection()
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
-				.getLrqcLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations().get(0)
+				.getLrqcLaboratoryBatteryOrganizers().get(0).getLrqcLaboratoryObservations().get(0)
 				.getCommentEntryList().get(0));
 		assertNotNull(cda.getLaboratoryBatteryOrganizerList().get(0).getObservationMediaEntries()
 				.get(0).getCommentEntryList().get(0));
@@ -176,7 +177,7 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 		assertTrue(LabObsList._5_FLUOROCYTOSINE_SUSCEPTIBILITY.getCode()
 				.equals(cdaDeserialized.getLaboratorySpecialtySection()
 						.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
-						.getLrqcLaboratoryBatteryOrganizers().get(0).getLaboratoryObservations()
+						.getLrqcLaboratoryBatteryOrganizers().get(0).getLrqcLaboratoryObservations()
 						.get(0).getCodeAsEnum().getCode()));
 	}
 
@@ -221,7 +222,7 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 		org.addLaboratoryObservation(lo);
 
 		final CdaChLrqc cda = new CdaChLrqc();
-		cda.addLaboratoryBatteryOrganizer(org);
+		cda.addLaboratoryBatteryOrganizer(org, SpecialtySections.BLOOD_BANK_STUDIES.getCode());
 
 		cda.getLaboratorySpecialtySection().setTextReference(
 				"<table><tr><td>Dies ist ein Test<content ID=\"TestContentIdRef\">Hier steht der menschenlesbare Text</content></td></tr></table>");
@@ -247,7 +248,8 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 		lo.setCode(LabObsList._5_FLUOROCYTOSINE_SUSCEPTIBILITY);
 		LaboratoryBatteryOrganizer lbo = new LaboratoryBatteryOrganizer();
 		lbo.addLaboratoryObservation(lo);
-		doc.addLaboratoryBatteryOrganizer(lbo);
+		doc.addLaboratoryBatteryOrganizer(lbo,
+				SpecialtySections.MICROBIAL_SUSCEPTIBILITY_TESTS_SET.getCode());
 		assertFalse(doc.getLaboratoryBatteryOrganizerList().isEmpty());
 		document = doc.getDocument();
 		assertTrue(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.1.4", null));
@@ -257,7 +259,7 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 				"/clinicaldocument/component/structuredBody/component/section/code[@code='"
 						+ LabObsList._5_FLUOROCYTOSINE_SUSCEPTIBILITY.getSectionCode() + "']"));
 		// a second Laboratory Battery Organizer
-		doc.addLaboratoryBatteryOrganizer(lbo);
+		doc.addLaboratoryBatteryOrganizer(lbo, SpecialtySections.BLOOD_BANK_STUDIES.getCode());
 		document = doc.getDocument();
 		// there must be two Laboratory Battery Organizer
 		assertFalse(xExistTemplateId(document, "1.3.6.1.4.1.19376.1.3.1.4", null));

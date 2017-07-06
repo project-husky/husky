@@ -24,7 +24,6 @@ import org.ehealth_connector.cda.ch.ParticipantClaimer;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport;
 import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.QualabQcc;
-import org.ehealth_connector.cda.ch.lab.lrqc.enums.SpecialtySections;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
@@ -304,41 +303,6 @@ public class CdaChLrqc
 	 * necessary elements, if they do not exist. If the elements exist, their
 	 * contents will not be overwritten.
 	 *
-	 * These elements are: LaboratorySpecialtySection (section code is derived
-	 * automatically from the LaboratoryObservation enum)
-	 * LaboratoryReportProcessingEntry SpecimenAct with the given Laboratory
-	 * Battery Organizer
-	 *
-	 * @param organizer
-	 *            the LaboratoryBatteryOrganizer holding at least one
-	 *            LaboratoryObservation
-	 */
-	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer organizer) {
-		// Try to determine the right code from the LaboratoryObservation and
-		// set it
-		// in the Section
-		final String section = getSpecialtySectionCodeFromLaboratoryObservationEnum(organizer);
-		Code sectionCode = null;
-		if (section != null) {
-			sectionCode = SpecialtySections.getEnum(section).getCode();
-		}
-
-		AbstractSpecimenAct se;
-		if (getSpecimenAct() == null) {
-			se = new AbstractSpecimenAct();
-		} else {
-			se = getSpecimenAct();
-		}
-		se.addLaboratoryBatteryOrganizer(organizer);
-
-		setSpecimenAct(se, sectionCode);
-	}
-
-	/**
-	 * Convenience function to add a Laboratory Battery Organizer and create the
-	 * necessary elements, if they do not exist. If the elements exist, their
-	 * contents will not be overwritten.
-	 *
 	 * These elements are: LaboratorySpecialtySection,
 	 * LaboratoryReportProcessingEntry, and SpecimenAct with the given
 	 * Laboratory Battery Organizer
@@ -351,41 +315,127 @@ public class CdaChLrqc
 	 */
 	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer organizer,
 			Code sectionCode) {
-		LaboratorySpecialtySection laboratorySpecialtySection;
-		if (getLaboratorySpecialtySection() == null) {
+		LaboratorySpecialtySection laboratorySpecialtySection = getLaboratorySpecialtySection();
+		if (laboratorySpecialtySection == null) {
 			if (sectionCode != null) {
 				laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode,
 						getLanguageCode());
-				// getMdht().setCode(sectionCode.getCE());
+				getMdht().setCode(sectionCode.getCE());
 			} else {
 				laboratorySpecialtySection = new LaboratorySpecialtySection();
 			}
-		} else {
-			laboratorySpecialtySection = getLaboratorySpecialtySection();
 		}
-
-		LaboratoryReportDataProcessingEntry lrdpe;
-		if (laboratorySpecialtySection.getLaboratoryReportDataProcessingEntry() == null) {
-			lrdpe = new LaboratoryReportDataProcessingEntry();
-		} else {
-			lrdpe = laboratorySpecialtySection.getLaboratoryReportDataProcessingEntry();
-		}
-
-		AbstractSpecimenAct se;
-		if (lrdpe.getSpecimenAct() == null) {
-			se = new AbstractSpecimenAct();
-			if (sectionCode != null) {
-				se.setCode(sectionCode);
-			}
-		} else {
-			se = new AbstractSpecimenAct(lrdpe.getSpecimenAct().getMdht());
-		}
-
-		se.addLaboratoryBatteryOrganizer(organizer);
-		lrdpe.setSpecimenAct(se);
-		laboratorySpecialtySection.setLaboratoryReportDataProcessingEntry(lrdpe);
+		laboratorySpecialtySection.addLaboratoryBatteryOrganizer(sectionCode, organizer,
+				getLanguageCode());
 		setLaboratorySpecialtySection(laboratorySpecialtySection);
+
+		// set the fixed laboratory Code
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setCode("11502-2");
+		ce.setCodeSystem("2.16.840.1.113883.6.1");
+		ce.setCodeSystemName("LOINC");
+		ce.setDisplayName("LABORATORY REPORT.TOTAL");
+		getMdht().setCode(ce);
+
 	}
+
+	// TODO tsc: getSpecialtySectionCodeFromLaboratoryObservationEnum oben
+	// einbauen und dann löschen
+	// /**
+	// * Convenience function to add a Laboratory Battery Organizer and create
+	// the
+	// * necessary elements, if they do not exist. If the elements exist, their
+	// * contents will not be overwritten.
+	// *
+	// * These elements are: LaboratorySpecialtySection (section code is derived
+	// * automatically from the LaboratoryObservation enum)
+	// * LaboratoryReportProcessingEntry SpecimenAct with the given Laboratory
+	// * Battery Organizer
+	// *
+	// * @param organizer
+	// * the LaboratoryBatteryOrganizer holding at least one
+	// * LaboratoryObservation
+	// */
+	// public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer
+	// organizer) {
+	// // Try to determine the right code from the LaboratoryObservation and
+	// // set it
+	// // in the Section
+	// final String section =
+	// getSpecialtySectionCodeFromLaboratoryObservationEnum(organizer);
+	// Code sectionCode = null;
+	// if (section != null) {
+	// sectionCode = SpecialtySections.getEnum(section).getCode();
+	// }
+	//
+	// AbstractSpecimenAct se;
+	// if (getSpecimenAct() == null) {
+	// se = new AbstractSpecimenAct();
+	// } else {
+	// se = getSpecimenAct();
+	// }
+	// se.addLaboratoryBatteryOrganizer(organizer);
+	//
+	// setSpecimenAct(se, sectionCode);
+	// }
+
+	// TODO tsc löschen
+	// /**
+	// * Convenience function to add a Laboratory Battery Organizer and create
+	// the
+	// * necessary elements, if they do not exist. If the elements exist, their
+	// * contents will not be overwritten.
+	// *
+	// * These elements are: LaboratorySpecialtySection,
+	// * LaboratoryReportProcessingEntry, and SpecimenAct with the given
+	// * Laboratory Battery Organizer
+	// *
+	// * @param organizer
+	// * the LaboratoryBatteryOrganizer holding at least one
+	// * LaboratoryObservation
+	// * @param sectionCode
+	// * the LOINC code for the LaboratorySpecialtySection
+	// */
+	// public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer
+	// organizer,
+	// Code sectionCode) {
+	// LaboratorySpecialtySection laboratorySpecialtySection;
+	// if (getLaboratorySpecialtySection() == null) {
+	// if (sectionCode != null) {
+	// laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode,
+	// getLanguageCode());
+	// // getMdht().setCode(sectionCode.getCE());
+	// } else {
+	// laboratorySpecialtySection = new LaboratorySpecialtySection();
+	// }
+	// } else {
+	// laboratorySpecialtySection = getLaboratorySpecialtySection();
+	// }
+	//
+	// LaboratoryReportDataProcessingEntry lrdpe;
+	// if (laboratorySpecialtySection.getLaboratoryReportDataProcessingEntry()
+	// == null) {
+	// lrdpe = new LaboratoryReportDataProcessingEntry();
+	// } else {
+	// lrdpe =
+	// laboratorySpecialtySection.getLaboratoryReportDataProcessingEntry();
+	// }
+	//
+	// AbstractSpecimenAct se;
+	// if (lrdpe.getSpecimenAct() == null) {
+	// se = new AbstractSpecimenAct();
+	// if (sectionCode != null) {
+	// se.setCode(sectionCode);
+	// }
+	// } else {
+	// se = new AbstractSpecimenAct(lrdpe.getSpecimenAct().getMdht());
+	// }
+	//
+	// se.addLaboratoryBatteryOrganizer(organizer);
+	// lrdpe.setSpecimenAct(se);
+	// laboratorySpecialtySection.setLaboratoryReportDataProcessingEntry(lrdpe);
+	// setLaboratorySpecialtySection(laboratorySpecialtySection);
+	// }
 
 	/*
 	 * (non-Javadoc)
@@ -508,14 +558,14 @@ public class CdaChLrqc
 	private String getSpecialtySectionCodeFromLaboratoryObservationEnum(
 			LaboratoryBatteryOrganizer organizer) {
 		if (!organizer.getLaboratoryObservations().isEmpty()) {
-			if (organizer.getLaboratoryObservations().get(0).getCodeAsEnum() != null) {
+			if (organizer.getLrqcLaboratoryObservations().get(0).getCodeAsEnum() != null) {
 				// if present return LOINC Enum
-				return organizer.getLaboratoryObservations().get(0).getCodeAsEnum()
+				return organizer.getLrqcLaboratoryObservations().get(0).getCodeAsEnum()
 						.getSectionCode();
 			} else {
 				// if present return SNOMED Enum
-				if (organizer.getLaboratoryObservations().get(0).getCodeAsEnum() != null) {
-					return organizer.getLaboratoryObservations().get(0).getCodeAsEnum()
+				if (organizer.getLrqcLaboratoryObservations().get(0).getCodeAsEnum() != null) {
+					return organizer.getLrqcLaboratoryObservations().get(0).getCodeAsEnum()
 							.getSectionCode();
 				}
 			}

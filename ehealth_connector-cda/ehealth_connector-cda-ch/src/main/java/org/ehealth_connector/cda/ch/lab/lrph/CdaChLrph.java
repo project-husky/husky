@@ -171,8 +171,8 @@ public class CdaChLrph
 	 */
 	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer organizer,
 			Code sectionCode) {
-		LaboratorySpecialtySection laboratorySpecialtySection;
-		if (getLaboratorySpecialtySection() == null) {
+		LaboratorySpecialtySection laboratorySpecialtySection = getLaboratorySpecialtySection();
+		if (laboratorySpecialtySection == null) {
 			if (sectionCode != null) {
 				laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode,
 						getLanguageCode());
@@ -180,30 +180,13 @@ public class CdaChLrph
 			} else {
 				laboratorySpecialtySection = new LaboratorySpecialtySection();
 			}
-		} else {
-			laboratorySpecialtySection = getLaboratorySpecialtySection();
 		}
-
-		LaboratoryReportDataProcessingEntry lrdpe;
-		if (laboratorySpecialtySection.getLaboratoryReportDataProcessingEntry() == null) {
-			lrdpe = new LaboratoryReportDataProcessingEntry();
-		} else {
-			lrdpe = laboratorySpecialtySection.getLaboratoryReportDataProcessingEntry();
+		laboratorySpecialtySection.addLaboratoryBatteryOrganizer(sectionCode, organizer,
+				getLanguageCode());
+		if (isNarrativeTextGenerationEnabled()) {
+			laboratorySpecialtySection.setText(generateNarrativeTextLaboratoryObservations(
+					laboratorySpecialtySection, "TODO tsc"));
 		}
-
-		AbstractSpecimenAct se;
-		if (lrdpe.getSpecimenAct() == null) {
-			se = new AbstractSpecimenAct();
-			if (sectionCode != null) {
-				se.setCode(sectionCode);
-			}
-		} else {
-			se = new AbstractSpecimenAct(lrdpe.getSpecimenAct().getMdht());
-		}
-
-		se.addLaboratoryBatteryOrganizer(organizer);
-		lrdpe.setSpecimenAct(se);
-		laboratorySpecialtySection.setLaboratoryReportDataProcessingEntry(lrdpe);
 		setLaboratorySpecialtySection(laboratorySpecialtySection);
 	}
 
@@ -543,4 +526,5 @@ public class CdaChLrph
 			getMdht().setStructuredBody(sb);
 		}
 	}
+
 }

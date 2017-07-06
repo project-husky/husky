@@ -48,11 +48,9 @@ import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
-import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationPhysicalPerformer;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
@@ -72,6 +70,7 @@ public class LaboratoryObservation extends AbstractObservation {
 		super(null);
 		mLaboratoryObservation = LABFactory.eINSTANCE.createLaboratoryObservation().init();
 		mLaboratoryObservation.setStatusCode(StatusCode.COMPLETED.getCS());
+		super.mObservation = mLaboratoryObservation;
 	}
 
 	/**
@@ -104,6 +103,7 @@ public class LaboratoryObservation extends AbstractObservation {
 		setEffectiveTime(dateTimeOfResult);
 		setLaboratory(laboratory, dateTimeOfResult);
 		mLaboratoryObservation.setStatusCode(StatusCode.COMPLETED.getCS());
+		super.mObservation = mLaboratoryObservation;
 	}
 
 	/**
@@ -213,28 +213,6 @@ public class LaboratoryObservation extends AbstractObservation {
 	}
 
 	/**
-	 * Adds the interpretation code.
-	 *
-	 * @param code
-	 *            the new interpretation code
-	 */
-	public void addInterpretationCode(Code code) {
-		mLaboratoryObservation.getInterpretationCodes().add(code.getCE());
-	}
-
-	/**
-	 * Adds a nullFlavor interpretation code.
-	 *
-	 * @param the
-	 *            desired NullFlavor
-	 */
-	public void addInterpretationCode(NullFlavor na) {
-		final CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setNullFlavor(na);
-		mLaboratoryObservation.getInterpretationCodes().add(ce);
-	}
-
-	/**
 	 * Adds a performer
 	 *
 	 * @param performer
@@ -244,6 +222,7 @@ public class LaboratoryObservation extends AbstractObservation {
 	 *            <div class="de">Datum und Uhrzeit, an dem das Resultat bekannt
 	 *            wurde.</div> <div class="fr"></div> <div class="it"></div>
 	 */
+	@Override
 	public void addPerformer(Performer performer, Date dateTimeOfResult) {
 		final Performer2 mPerformer = performer.copyMdhtPerfomer();
 		mPerformer.setTypeCode(ParticipationPhysicalPerformer.PRF);
@@ -396,22 +375,6 @@ public class LaboratoryObservation extends AbstractObservation {
 	}
 
 	/**
-	 * <div class="en">Gets the (first) interpretation code, which indicates
-	 * wheater an immune protection exists (Interpretation Code)</div>
-	 * <div class="de">Gibt zurück, ob ein Impfschutz besteht (erster
-	 * Interpretation Code).</div> <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @return the interpretation code
-	 */
-	public String getInterpretationCode() {
-		if (mLaboratoryObservation.getInterpretationCodes().size() > 0) {
-			return mLaboratoryObservation.getInterpretationCodes().get(0).getCode();
-		} else {
-			return null;
-		}
-	}
-
-	/**
 	 * <div class="en">Gets the laboratory organization, which performed the
 	 * examination</div> <div class="de">Gibt das Labor zurück, welches das
 	 * Ergebnis ermittelt hat.</div> <div class="fr"></div>
@@ -522,18 +485,7 @@ public class LaboratoryObservation extends AbstractObservation {
 	}
 
 	/**
-	 * Sets the interpretation code.
-	 *
-	 * @param code
-	 *            the new interpretation code
-	 */
-	public void setInterpretationCode(Code code) {
-		mLaboratoryObservation.getInterpretationCodes().clear();
-		mLaboratoryObservation.getInterpretationCodes().add(code.getCE());
-	}
-
-	/**
-	 * Sets the interpretation code.
+	 * Sets the interpretation code for immunization.
 	 *
 	 * @param code
 	 *            the new interpretation code

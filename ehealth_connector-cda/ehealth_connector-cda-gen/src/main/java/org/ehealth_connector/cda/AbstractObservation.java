@@ -19,29 +19,120 @@
 package org.ehealth_connector.cda;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.ehealth_connector.cda.enums.ActSite;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Performer;
+import org.ehealth_connector.common.ReferenceRange;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.LangTexts;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Observation;
+import org.openhealthtools.mdht.uml.cda.Performer2;
+import org.openhealthtools.mdht.uml.hl7.datatypes.BL;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
+import org.openhealthtools.mdht.uml.hl7.datatypes.RTO;
+import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
+import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationPhysicalPerformer;
 
-public abstract class AbstractObservation
+public class AbstractObservation
 		extends MdhtObservationFacade<org.openhealthtools.mdht.uml.cda.Observation> {
 
 	protected LangTexts myValueLangTexts = new LangTexts();
-
+	protected LangTexts myObservationLangTexts = new LangTexts();
 	protected LangTexts myTargetSiteLangTexts = new LangTexts();
-	protected ActSite myActSite = null;
 	protected org.openhealthtools.mdht.uml.cda.Observation mObservation;
 
-	protected AbstractObservation(Observation mdht) {
+	public AbstractObservation(Observation mdht) {
 		super(mdht);
 		mObservation = mdht;
+	}
+
+	/**
+	 * Adds a author.
+	 *
+	 * @param author
+	 *            the author
+	 * @param dateTimeOfDocumentation
+	 *            <div class="en">date and time, when the result was known</div>
+	 *            <div class="de">Datum und Uhrzeit, an dem das Resultat bekannt
+	 *            wurde.</div> <div class="fr"></div> <div class="it"></div>
+	 */
+	public void addAuthor(Author author, Date dateTimeOfDocumentation) {
+		final org.openhealthtools.mdht.uml.cda.Author mAuthor = author.copyMdhtAuthor();
+		// mAuthor.setTypeCode(ParticipationPhysicalPerformer.PRF);
+		try {
+			mAuthor.setTime(DateUtil.createIVL_TSFromEuroDate(dateTimeOfDocumentation));
+		} catch (final ParseException e) {
+			e.printStackTrace();
+		}
+		getMdht().getAuthors().add(mAuthor);
+	}
+
+	/**
+	 * Adds the interpretation code.
+	 *
+	 * @param code
+	 *            the new interpretation code
+	 */
+	public void addInterpretationCode(Code code) {
+		mObservation.getInterpretationCodes().add(code.getCE());
+	}
+
+	/**
+	 * Adds a nullFlavor interpretation code.
+	 *
+	 * @param the
+	 *            desired NullFlavor
+	 */
+	public void addInterpretationCode(NullFlavor na) {
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setNullFlavor(na);
+		mObservation.getInterpretationCodes().add(ce);
+	}
+
+	/**
+	 * Adds a performer.
+	 *
+	 * @param performer
+	 *            the performer
+	 * @param dateTimeOfPerformance
+	 *            <div class="en">date and time, when the result was known</div>
+	 *            <div class="de">Datum und Uhrzeit, an dem das Resultat bekannt
+	 *            wurde.</div> <div class="fr"></div> <div class="it"></div>
+	 */
+	public void addPerformer(Performer performer, Date dateTimeOfPerformance) {
+		final Performer2 mPerformer = performer.copyMdhtPerfomer();
+		mPerformer.setTypeCode(ParticipationPhysicalPerformer.PRF);
+		try {
+			mPerformer.setTime(DateUtil.createIVL_TSFromEuroDate(dateTimeOfPerformance));
+		} catch (final ParseException e) {
+			e.printStackTrace();
+		}
+		getMdht().getPerformers().add(mPerformer);
+	}
+
+	/**
+	 * Gets the auhtor list.
+	 *
+	 * @return the auhtor list
+	 */
+	public List<Author> getAuthors() {
+		final List<Author> list = new ArrayList<Author>();
+		for (final org.openhealthtools.mdht.uml.cda.Author mdht : getMdht().getAuthors()) {
+			final Author eHC = new Author(mdht);
+			list.add(eHC);
+		}
+		return list;
 	}
 
 	public Code getCode() {
@@ -58,8 +149,19 @@ public abstract class AbstractObservation
 		return DateUtil.parseIVL_TSVDateTimeValue(mObservation.getEffectiveTime());
 	}
 
-	public LangTexts getLangTexts() {
-		return myValueLangTexts;
+	/**
+	 * <div class="en">Gets the (first) interpretation code</div>
+	 *
+	 *
+	 * @return the interpretation code
+	 */
+	public Code getInterpretationCode() {
+		if (mObservation != null) {
+			if (mObservation.getInterpretationCodes().size() > 0) {
+				return new Code(mObservation.getInterpretationCodes().get(0));
+			}
+		}
+		return null;
 	}
 
 	public Object getMdhtObservation() {
@@ -70,18 +172,77 @@ public abstract class AbstractObservation
 		return mObservation;
 	}
 
+	public LangTexts getObservationLangTexts() {
+		return myObservationLangTexts;
+	}
+
+	/**
+	 * Gets the performer list.
+	 *
+	 * @return the performer list
+	 */
+	public List<Performer> getPerformers() {
+		final List<Performer> list = new ArrayList<Performer>();
+		for (final Performer2 mdht : getMdht().getPerformers()) {
+			final Performer eHC = new Performer(mdht);
+			list.add(eHC);
+		}
+		return list;
+	}
+
+	/**
+	 * Gets the reference range <div class="de">(Referenzbereich)</div>.
+	 *
+	 * @return the reference range
+	 */
+	public ReferenceRange getReferenceRange() {
+		if ((getMdht().getReferenceRanges() != null) && !getMdht().getReferenceRanges().isEmpty()) {
+			return new ReferenceRange(getMdht().getReferenceRanges().get(0));
+		}
+		return null;
+	}
+
 	public ActSite getTargetSite() {
-		return myActSite;
+		if (getMdht().getTargetSiteCodes() != null)
+			if (getMdht().getTargetSiteCodes().size() > 0)
+				return ActSite.getEnum(getMdht().getTargetSiteCodes().get(0).getCode());
+
+		return null;
+	}
+
+	public LangTexts getTargetSiteLangTexts() {
+		return myTargetSiteLangTexts;
+	}
+
+	/**
+	 * Gets the text.
+	 *
+	 * @return the text
+	 */
+	public String getText() {
+		String retVal = "";
+		if (mObservation != null)
+			if (mObservation.getText() != null)
+				retVal = mObservation.getText().getText();
+		return retVal;
 	}
 
 	@Override
 	public Value getValue() {
-		if (!mObservation.getValues().isEmpty()
-				&& (mObservation.getValues().get(0) instanceof PQ)) {
-			return new Value(mObservation.getValues().get(0));
+		if (!mObservation.getValues().isEmpty()) {
+			if ((mObservation.getValues().get(0) instanceof BL)
+					|| (mObservation.getValues().get(0) instanceof CD)
+					|| (mObservation.getValues().get(0) instanceof ED)
+					|| (mObservation.getValues().get(0) instanceof PQ)
+					|| (mObservation.getValues().get(0) instanceof RTO))
+				return new Value(mObservation.getValues().get(0));
 		}
 		return null;
 
+	}
+
+	public LangTexts getValueLangTexts() {
+		return myValueLangTexts;
 	}
 
 	@Override
@@ -94,8 +255,23 @@ public abstract class AbstractObservation
 		}
 	}
 
+	/**
+	 * Sets the interpretation code.
+	 *
+	 * @param code
+	 *            the new interpretation code
+	 */
+	public void setInterpretationCode(Code code) {
+		mObservation.getInterpretationCodes().clear();
+		mObservation.getInterpretationCodes().add(code.getCE());
+	}
+
 	public void setObservation(org.openhealthtools.mdht.uml.cda.Observation observation) {
 		mObservation = observation;
+	}
+
+	public void setObservationLangTexts(LangTexts observationLangTexts) {
+		this.myObservationLangTexts = observationLangTexts;
 	}
 
 	public void setTargetSite(ActSite actSite) {
@@ -107,8 +283,19 @@ public abstract class AbstractObservation
 
 	public void setTargetSite(ActSite actSite, LangTexts targetSiteLangTexts) {
 		setTargetSite(actSite);
-		myActSite = actSite;
 		this.myTargetSiteLangTexts = targetSiteLangTexts;
+	}
+
+	/**
+	 * Sets the text.
+	 *
+	 * @param text
+	 *            the new text
+	 */
+	public void setText(String text) {
+		final ED ed = DatatypesFactory.eINSTANCE.createED();
+		ed.addText(text);
+		mObservation.setText(ed);
 	}
 
 	public void setValue(Value value) {
@@ -127,4 +314,5 @@ public abstract class AbstractObservation
 		setValue(value);
 		this.myValueLangTexts = valueLangTexts;
 	}
+
 }
