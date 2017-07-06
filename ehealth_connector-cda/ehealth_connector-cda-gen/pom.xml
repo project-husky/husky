@@ -29,6 +29,12 @@
 			<artifactId>org.openhealthtools.ihe.utils</artifactId>
 		</dependency>
 
+		<!-- HL72PDF -->
+		<dependency>
+			<groupId>org.apache.pdfbox</groupId>
+			<artifactId>pdfbox</artifactId>
+		</dependency>
+
 		<!-- test stuff -->
 		<dependency>
 			<groupId>junit</groupId>
