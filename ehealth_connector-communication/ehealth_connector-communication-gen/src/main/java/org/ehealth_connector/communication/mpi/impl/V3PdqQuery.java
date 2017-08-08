@@ -170,7 +170,7 @@ public class V3PdqQuery implements MpiQuery {
 			final String oid = FhirCommon.removeUrnOidPrefix(Identifier.getSystem());
 			v3PdqConsumerQuery.addPatientID(oid, Identifier.getValue(), "");
 		} else {
-			log.error("identifier system is not starting with urn:oid: " + Identifier.getSystem());
+			v3PdqConsumerQuery.addPatientID(Identifier.getSystem(), Identifier.getValue(), "");
 		}
 		return this;
 	}

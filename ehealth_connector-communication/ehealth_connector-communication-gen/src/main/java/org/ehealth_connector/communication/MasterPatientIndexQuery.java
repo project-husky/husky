@@ -137,6 +137,7 @@ public class MasterPatientIndexQuery {
 		Identifier id = new Identifier();
 		id.setSystem(identificator.getRoot());
 		id.setValue(identificator.getExtension());
+		v3PdqQuery.addPatientIdentifier(id);
 		postFixV3Package();
 		return this;
 	}
