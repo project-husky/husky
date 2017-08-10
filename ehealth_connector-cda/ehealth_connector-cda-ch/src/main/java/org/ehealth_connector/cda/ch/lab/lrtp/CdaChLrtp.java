@@ -664,21 +664,6 @@ public class CdaChLrtp
 	}
 
 	/**
-	 * Gets the StudiesSummarySection.
-	 *
-	 * @return the StudiesSummarySection
-	 */
-	public StudiesSummarySection getStudiesSummarySection() {
-		for (final Section s : getMdht().getAllSections()) {
-			if (s instanceof org.openhealthtools.mdht.uml.cda.ch.StudiesSummarySection) {
-				return new StudiesSummarySection(
-						(org.openhealthtools.mdht.uml.cda.ch.StudiesSummarySection) s);
-			}
-		}
-		return null;
-	}
-
-	/**
 	 * Gets the VitalSignsOrganizer.
 	 *
 	 * @return the VitalSignsOrganizer

@@ -114,7 +114,7 @@ public class CdaChLrqc
 		this(languageCode);
 		setCustodian(custodian);
 		addIntendedRecipient(recipient);
-		addInFulfillmentOf(qkzOrderNumber);
+		addInFulfillmentOf(recipient, qkzOrderNumber);
 		setLegalAuthenticator(legalAuthenticator);
 		addAuthor(author);
 		setRecordTarget(id);
@@ -218,7 +218,7 @@ public class CdaChLrqc
 		this(languageCode, styleSheet, css);
 		setCustodian(custodian);
 		addIntendedRecipient(recipient);
-		addInFulfillmentOf(qkzOrderNumber);
+		addInFulfillmentOf(recipient, qkzOrderNumber);
 		addAuthor(legalAuthenticator);
 		setLegalAuthenticator(legalAuthenticator);
 		setRecordTarget(id);
@@ -237,11 +237,13 @@ public class CdaChLrqc
 	/**
 	 * Adds a inFulfillmentOf element with a fixed root.
 	 *
-	 * @param qkzOrderNumber
+	 * @param qcc
+	 *            the QKZ
+	 * @param qccOrderNumber
 	 *            the order number, given by the QKZ
 	 */
-	public void addInFulfillmentOf(String qkzOrderNumber) {
-		addInFulfillmentOf(new Identificator(QualabQcc.CODE_SYSTEM_OID, qkzOrderNumber));
+	public void addInFulfillmentOf(QualabQcc qcc, String qccOrderNumber) {
+		addInFulfillmentOf(new Identificator(qcc.getCodeSystemOid(), qccOrderNumber));
 	}
 
 	/**

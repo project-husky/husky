@@ -40,6 +40,7 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
+import org.openhealthtools.mdht.uml.cda.InFulfillmentOf;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.Organizer;
 import org.openhealthtools.mdht.uml.cda.Participant2;
@@ -62,7 +63,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	private final List<String> headerColumns = new ArrayList<String>();
 	private final AbstractLaboratoryAct laboratoryAct;
 	private final CodedVitalSignsSection codedVitalSignsSection;
-	// private final List<AbstractObservation> laboratoryObservations;
+	private final AbstractLaboratorySpecialtySection laboratorySpecialtySection;
 	private final String contentIdPrefix;
 	private final LanguageCode lang;
 	private final ResourceBundle resBundle;
@@ -115,9 +116,11 @@ public class ObservationChTextBuilder extends TextBuilder {
 	public ObservationChTextBuilder(AbstractLaboratorySpecialtySection section,
 			String contentIdPrefix, LanguageCode lang, String posCodeSystemOid) {
 		this.codedVitalSignsSection = null;
+		this.laboratorySpecialtySection = section;
 		this.laboratoryAct = section.getAct();
 		this.contentIdPrefix = contentIdPrefix;
 		this.lang = lang;
+		// TODO extern steuern lassen
 		this.resBundle = ResourceBundle.getBundle("Messages", new Locale(lang.getCodeValue()));
 		if (posCodeSystemOid == null)
 			this.posCodeSystemOid = "";
@@ -153,6 +156,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	public ObservationChTextBuilder(CodedVitalSignsSection section, String contentIdPrefix,
 			LanguageCode lang) {
 		this.laboratoryAct = null;
+		this.laboratorySpecialtySection = null;
 		this.codedVitalSignsSection = section;
 		this.contentIdPrefix = contentIdPrefix;
 		this.lang = lang;
@@ -919,6 +923,60 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 */
 	@Override
 	public String toString() {
+		if (laboratorySpecialtySection != null) {
+			String titleExtension = "";
+			String title = laboratorySpecialtySection.getTitle();
+			Code code = laboratorySpecialtySection.getCode();
+			String codeStr = "";
+			try {
+				codeStr = code.getCode();
+			} catch (Exception ex) {
+			}
+			if (!"".equals(codeStr))
+				titleExtension = resBundle.getString("loinc." + codeStr);
+			if (!"".equals(titleExtension) && !title.endsWith(titleExtension))
+				laboratorySpecialtySection.setTitle(title + " - " + titleExtension);
+
+			String paragraph = "";
+			String orderNr = "";
+
+			if (laboratorySpecialtySection.getMdht() != null) {
+				if (laboratorySpecialtySection.getMdht().getClinicalDocument() != null) {
+					for (InFulfillmentOf inf : laboratorySpecialtySection.getMdht()
+							.getClinicalDocument().getInFulfillmentOfs()) {
+						if (inf.getOrder() != null) {
+							for (II id : inf.getOrder().getIds()) {
+								if (!"".equals(orderNr))
+									orderNr = orderNr + ", ";
+								orderNr = orderNr + id.getExtension();
+							}
+						}
+					}
+				}
+			}
+			if ("".equals(orderNr))
+				orderNr = resBundle.getString("generic.unknown");
+			append(resBundle.getString("report.order.number") + ": " + orderNr + "<br />");
+
+			if (laboratoryAct != null) {
+				String organizerStatus = "";
+				for (Organizer battery : laboratoryAct.getMdht().getOrganizers()) {
+					if (battery instanceof LaboratoryBatteryOrganizerImpl) {
+						organizerStatus = battery.getStatusCode().getCode().toLowerCase();
+					}
+				}
+				if (!("aborted".equals(organizerStatus) || "completed".equals(organizerStatus)))
+					organizerStatus = "unknown";
+				append(resBundle.getString("organizer.status") + ": "
+						+ resBundle.getString("organizer.status." + organizerStatus) + "<br />");
+			}
+
+			if ("".equals(paragraph)) {
+				paragraph = paragraph + "<br />";
+				append(paragraph);
+			}
+		}
+
 		append("<table border='1' width='100%'>");
 		if (laboratoryAct != null)
 			addTableHeaderLaboratorySpecialtySection();

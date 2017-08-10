@@ -286,11 +286,13 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 				"/clinicaldocument/code[@code='11502-2' and @codeSystem='2.16.840.1.113883.6.1' and @codeSystemName='LOINC' and @displayName='LABORATORY REPORT.TOTAL']"));
 
 		// InFulfillmentOf
-		cda.addInFulfillmentOf("123");
+		cda.addInFulfillmentOf(QualabQcc.CENTRE_SUISSE_DE_CONTRÔLE_DE_QUALITÉ_CSCQ, "123");
 		assertEquals("123", cda.getInFulfillmentOfOrderIds().get(0).getExtension());
 		document = cda.getDocument();
 		assertTrue(xExist(document,
-				"/clinicaldocument/inFulfillmentOf/order/id[@root='2.51.1.3' and @extension='123']"));
+				"/clinicaldocument/inFulfillmentOf/order/id[@root='"
+						+ QualabQcc.CENTRE_SUISSE_DE_CONTRÔLE_DE_QUALITÉ_CSCQ.getCodeSystemOid()
+						+ "' and @extension='123']"));
 
 		// Recipient
 		cda.addIntendedRecipient(QualabQcc.CENTRE_SUISSE_DE_CONTRÔLE_DE_QUALITÉ_CSCQ);

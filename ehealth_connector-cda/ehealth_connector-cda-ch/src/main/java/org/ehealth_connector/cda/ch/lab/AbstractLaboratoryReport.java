@@ -25,12 +25,16 @@ import org.ehealth_connector.cda.AbstractObservation;
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.ch.ParticipantClaimer;
 import org.ehealth_connector.cda.ch.textbuilder.ObservationChTextBuilder;
+import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.IntendedRecipient;
+import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.CountryCode;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.AssignedCustodian;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
@@ -43,6 +47,8 @@ import org.openhealthtools.mdht.uml.cda.InFulfillmentOf;
 import org.openhealthtools.mdht.uml.cda.InformationRecipient;
 import org.openhealthtools.mdht.uml.cda.Participant1;
 import org.openhealthtools.mdht.uml.cda.Section;
+import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.RemarksSection;
 import org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.impl.CodedVitalSignsSectionImpl;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer;
@@ -371,6 +377,37 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	}
 
 	/**
+	 * Gets the RemarksSection.
+	 *
+	 * @return the RemarksSection
+	 */
+	public Section getRemarksSection() {
+		for (final Section section : getDoc().getSections()) {
+			if (section.getCode() != null) {
+				if (SectionsVACD.isRemarks(section.getCode().getCode())) {
+					return section;
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the StudiesSummarySection.
+	 *
+	 * @return the StudiesSummarySection
+	 */
+	public StudiesSummarySection getStudiesSummarySection() {
+		for (final Section s : getMdht().getAllSections()) {
+			if (s instanceof org.openhealthtools.mdht.uml.cda.ch.StudiesSummarySection) {
+				return new StudiesSummarySection(
+						(org.openhealthtools.mdht.uml.cda.ch.StudiesSummarySection) s);
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Creates an empty Custodian element, according to the LRXX specification.
 	 */
 	public void setEmtpyCustodian() {
@@ -417,6 +454,58 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 		if (getLaboratorySpecialtySection() != null) {
 			getLaboratorySpecialtySection().getMdht().createStrucDocText(text);
 		}
+	}
+
+	/**
+	 * Sets the section/text element for the RemarksSection.
+	 *
+	 * @param text
+	 *            the text
+	 */
+	public void setNarrativeTextSectionRemarks(String text) {
+		if (getRemarksSection() == null) {
+			RemarksSection rs = CHFactory.eINSTANCE.createRemarksSection().init();
+			II templateId2009 = null;
+			boolean templateId2009Found = false;
+			boolean templateId2017Found = false;
+			for (final II ii : rs.getTemplateIds()) {
+				if ("2.16.756.5.30.1.1.1.1.1".equals(ii.getRoot()))
+					templateId2009Found = true;
+				templateId2009 = ii;
+				if ("2.16.756.5.30.1.1.10.3.2".equals(ii.getRoot()))
+					templateId2017Found = true;
+			}
+			if (templateId2009Found) {
+				rs.getTemplateIds().remove(templateId2009);
+			}
+			if (!templateId2017Found) {
+				II ii = DatatypesFactory.eINSTANCE.createII();
+				ii.setRoot("2.16.756.5.30.1.1.10.3.2");
+				rs.getTemplateIds().add(ii);
+			}
+
+			switch (getLanguageCode()) {
+			case FRENCH:
+				rs.setTitle(Util.st("Commentaire"));
+				break;
+			case GERMAN:
+				rs.setTitle(Util.st("Kommentar"));
+				break;
+			case ITALIAN:
+				rs.setTitle(Util.st("Osservazione"));
+				break;
+			case ENGLISH:
+				rs.setTitle(Util.st("Comment"));
+				break;
+			}
+
+			Code code = new Code(CodeSystems.LOINC.getCodeSystemId(), "48767-8",
+					CodeSystems.LOINC.getCodeSystemName(), "ANNOTATION COMMENT");
+			rs.setCode(code.getCE());
+
+			getDoc().addSection(rs);
+		}
+		getRemarksSection().createStrucDocText(text);
 	}
 
 }
