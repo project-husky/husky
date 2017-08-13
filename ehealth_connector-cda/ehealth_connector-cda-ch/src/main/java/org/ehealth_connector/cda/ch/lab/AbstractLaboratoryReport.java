@@ -179,6 +179,25 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	/**
 	 * TODO tsc dokumentieren
 	 */
+	public String generateNarrativeTextBloodGroupObservations(String contentIdPrefix) {
+		return generateNarrativeTextBloodGroupObservations(getStudiesSummarySection(),
+				contentIdPrefix);
+	}
+
+	/**
+	 * TODO tsc dokumentieren
+	 */
+	public String generateNarrativeTextBloodGroupObservations(
+
+			StudiesSummarySection studiesSummarySection, String contentIdPrefix) {
+		final ObservationChTextBuilder b = new ObservationChTextBuilder(studiesSummarySection,
+				contentIdPrefix, LanguageCode.getEnum(getMdht().getLanguageCode().getCode()));
+		return b.toString();
+	}
+
+	/**
+	 * TODO tsc dokumentieren
+	 */
 	public String generateNarrativeTextLaboratoryObservations(
 			AbstractLaboratorySpecialtySection laboratorySpecialtySection, String contentIdPrefix) {
 		return generateNarrativeTextLaboratoryObservations(laboratorySpecialtySection,
@@ -231,6 +250,9 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 				contentIdPrefix, posCodeSystemOid);
 	}
 
+	/**
+	 * TODO tsc dokumentieren
+	 */
 	public String generateNarrativeTextVitalSignObservations(
 
 			org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection vitalSignsSection,

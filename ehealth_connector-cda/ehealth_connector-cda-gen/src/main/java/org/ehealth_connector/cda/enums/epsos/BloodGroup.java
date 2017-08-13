@@ -30,59 +30,59 @@ public enum BloodGroup {
 	/**
 	 * <div class="en">blood group 0</div> <div class="de">0</div>
 	 */
-	BLOOD_GROUP_0("58460004", "blood group 0"),
+	BLOOD_GROUP_0("58460004", "blood group 0", "0"),
 	/**
 	 * <div class="en">blood group 0 Rh(D) negative</div> <div class="de">0
 	 * neg</div>
 	 */
-	BLOOD_GROUP_0_RHD_NEGATIVE("278148006", "blood group 0 Rh(D) negative"),
+	BLOOD_GROUP_0_RHD_NEGATIVE("278148006", "blood group 0 Rh(D) negative", "0 Rh-"),
 	/**
 	 * <div class="en">blood group 0 Rh(D) positive</div> <div class="de">0
 	 * pos</div>
 	 */
-	BLOOD_GROUP_0_RHD_POSITIVE("278147001", "blood group 0 Rh(D) positive"),
+	BLOOD_GROUP_0_RHD_POSITIVE("278147001", "blood group 0 Rh(D) positive", "0 Rh+"),
 	/**
 	 * <div class="en">blood group A</div> <div class="de">A</div>
 	 */
-	BLOOD_GROUP_A("112144000", "blood group A"),
+	BLOOD_GROUP_A("112144000", "blood group A", "A"),
 	/**
 	 * <div class="en">blood group A Rh(D) negative</div> <div class="de">A
 	 * neg</div>
 	 */
-	BLOOD_GROUP_A_RHD_NEGATIVE("278152006", "blood group A Rh(D) negative"),
+	BLOOD_GROUP_A_RHD_NEGATIVE("278152006", "blood group A Rh(D) negative", "A Rh-"),
 	/**
 	 * <div class="en">blood group A Rh(D) positive</div> <div class="de">A
 	 * pos</div>
 	 */
-	BLOOD_GROUP_A_RHD_POSITIVE("278149003", "blood group A Rh(D) positive"),
+	BLOOD_GROUP_A_RHD_POSITIVE("278149003", "blood group A Rh(D) positive", "A Rh+"),
 	/**
 	 * <div class="en">blood group AB</div> <div class="de">AB</div>
 	 */
-	BLOOD_GROUP_AB("165743006", "blood group AB"),
+	BLOOD_GROUP_AB("165743006", "blood group AB", "AB"),
 	/**
 	 * <div class="en">blood group AB Rh(D) negative</div> <div class="de">AB
 	 * pos</div>
 	 */
-	BLOOD_GROUP_AB_RHD_NEGATIVE("278154007", "blood group AB Rh(D) negative"),
+	BLOOD_GROUP_AB_RHD_NEGATIVE("278154007", "blood group AB Rh(D) negative", "AB Rh-"),
 	/**
 	 * <div class="en">blood group AB Rh(D) positive</div> <div class="de">AB
 	 * neg</div>
 	 */
-	BLOOD_GROUP_AB_RHD_POSITIVE("278151004", "blood group AB Rh(D) positive"),
+	BLOOD_GROUP_AB_RHD_POSITIVE("278151004", "blood group AB Rh(D) positive", "AB Rh+"),
 	/**
 	 * <div class="en">blood group B</div> <div class="de">B</div>
 	 */
-	BLOOD_GROUP_B("112149005", "blood group B"),
+	BLOOD_GROUP_B("112149005", "blood group B", "B"),
 	/**
 	 * <div class="en">blood group B Rh(D) negative</div> <div class="de">B
 	 * neg</div>
 	 */
-	BLOOD_GROUP_B_RHD_NEGATIVE("278153001", "blood group B Rh(D) negative"),
+	BLOOD_GROUP_B_RHD_NEGATIVE("278153001", "blood group B Rh(D) negative", "B Rh-"),
 	/**
 	 * <div class="en">blood group B Rh(D) positive</div> <div class="de">B
 	 * pos</div>
 	 */
-	BLOOD_GROUP_B_RHD_POSITIVE("278150003", "blood group B Rh(D) positive");
+	BLOOD_GROUP_B_RHD_POSITIVE("278150003", "blood group B Rh(D) positive", "B Rh+");
 
 	/**
 	 * <div class="en">Code for blood group 0</div> <div class="de">Code für
@@ -239,6 +239,11 @@ public enum BloodGroup {
 	private String displayName;
 
 	/**
+	 * <div class="en">User friendly name</div>
+	 */
+	private String friendlyName;
+
+	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
 	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
 	 * mittels eines Codes und einem Display Name</div>
@@ -250,9 +255,10 @@ public enum BloodGroup {
 	 *            <br>
 	 *            <div class="de"> display name</div>
 	 */
-	private BloodGroup(String code, String displayName) {
+	private BloodGroup(String code, String displayName, String friendlyName) {
 		this.code = code;
 		this.displayName = displayName;
+		this.friendlyName = friendlyName;
 	}
 
 	/**
@@ -318,6 +324,16 @@ public enum BloodGroup {
 	 */
 	public String getDisplayName() {
 		return this.displayName;
+	}
+
+	/**
+	 * <div class="en">Gets the ueser friendly name.</div>
+	 * <div class="de">Liefert den Text für das Benutzerinterface.</div>
+	 *
+	 * @return <div class="en">the display name</div>
+	 */
+	public String getFriendlyName() {
+		return this.friendlyName;
 	}
 
 }

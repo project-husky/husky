@@ -26,8 +26,11 @@ import java.util.ResourceBundle;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.ehealth_connector.cda.AbstractObservation;
+import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
+import org.ehealth_connector.cda.ch.lab.StudiesSummarySection;
 import org.ehealth_connector.cda.enums.ContentIdPrefix;
 import org.ehealth_connector.cda.enums.VitalSignCodes;
+import org.ehealth_connector.cda.enums.epsos.BloodGroup;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryAct;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection;
 import org.ehealth_connector.cda.textbuilder.TextBuilder;
@@ -64,6 +67,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	private final AbstractLaboratoryAct laboratoryAct;
 	private final CodedVitalSignsSection codedVitalSignsSection;
 	private final AbstractLaboratorySpecialtySection laboratorySpecialtySection;
+	private final StudiesSummarySection studiesSummarySection;
 	private final String contentIdPrefix;
 	private final LanguageCode lang;
 	private final ResourceBundle resBundle;
@@ -116,6 +120,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	public ObservationChTextBuilder(AbstractLaboratorySpecialtySection section,
 			String contentIdPrefix, LanguageCode lang, String posCodeSystemOid) {
 		this.codedVitalSignsSection = null;
+		this.studiesSummarySection = null;
 		this.laboratorySpecialtySection = section;
 		this.laboratoryAct = section.getAct();
 		this.contentIdPrefix = contentIdPrefix;
@@ -157,7 +162,31 @@ public class ObservationChTextBuilder extends TextBuilder {
 			LanguageCode lang) {
 		this.laboratoryAct = null;
 		this.laboratorySpecialtySection = null;
+		this.studiesSummarySection = null;
 		this.codedVitalSignsSection = section;
+		this.contentIdPrefix = contentIdPrefix;
+		this.lang = lang;
+		this.resBundle = ResourceBundle.getBundle("Messages", new Locale(lang.getCodeValue()));
+		this.posCodeSystemOid = "";
+	}
+
+	/**
+	 * Constructor. TODO tsc neu dokumentieren
+	 */
+	public ObservationChTextBuilder(StudiesSummarySection section, ContentIdPrefix contentIdPrefix,
+			LanguageCode lang) {
+		this(section, contentIdPrefix.getContentIdPrefix(), lang);
+	}
+
+	/**
+	 * Constructor. TODO tsc neu dokumentieren
+	 */
+	public ObservationChTextBuilder(StudiesSummarySection section, String contentIdPrefix,
+			LanguageCode lang) {
+		this.laboratoryAct = null;
+		this.laboratorySpecialtySection = null;
+		this.codedVitalSignsSection = null;
+		this.studiesSummarySection = section;
 		this.contentIdPrefix = contentIdPrefix;
 		this.lang = lang;
 		this.resBundle = ResourceBundle.getBundle("Messages", new Locale(lang.getCodeValue()));
@@ -977,13 +1006,37 @@ public class ObservationChTextBuilder extends TextBuilder {
 			}
 		}
 
-		append("<table border='1' width='100%'>");
-		if (laboratoryAct != null)
-			addTableHeaderLaboratorySpecialtySection();
-		if (codedVitalSignsSection != null)
-			addTableHeaderCodedVitalSignsSection();
-		addTableBody();
-		append("</table>");
+		if (studiesSummarySection != null) {
+			String paragraph = "";
+			String text = resBundle.getString("generic.unknown");
+
+			// <content ID='bloodgr-1'>Blutgruppe: A pos</content>
+
+			BloodGroupObservation bgObs = studiesSummarySection.getBloodGroup();
+			BloodGroup bg = null;
+			if (bgObs != null)
+				bg = bgObs.getValueEnum();
+			if (bg != null)
+				text = bg.getFriendlyName();
+
+			paragraph = getContent(resBundle.getString("bloodgroup.header") + ": " + text,
+					this.contentIdPrefix, 1);
+
+			if (!"".equals(paragraph)) {
+				paragraph = paragraph + "<br />";
+				append(paragraph);
+			}
+		}
+
+		if (studiesSummarySection == null) {
+			append("<table border='1' width='100%'>");
+			if (laboratoryAct != null)
+				addTableHeaderLaboratorySpecialtySection();
+			if (codedVitalSignsSection != null)
+				addTableHeaderCodedVitalSignsSection();
+			addTableBody();
+			append("</table>");
+		}
 		return super.toString();
 	}
 
