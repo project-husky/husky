@@ -98,16 +98,16 @@ public class LaboratoryObservation
 		super(mdht);
 	}
 
-	/**
-	 * Adds a nullFlavor interpretation code.
-	 *
-	 * @param the
-	 *            desired NullFlavor
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.ehealth_connector.cda.ihe.lab.LaboratoryObservation#
+	 * addInterpretationCode(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor)
 	 */
 	@Override
-	public void addInterpretationCode(NullFlavor na) {
+	public void addInterpretationCode(NullFlavor nullFlavor) {
 		final CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setNullFlavor(na);
+		ce.setNullFlavor(nullFlavor);
 		getMdht().getInterpretationCodes().add(ce);
 	}
 

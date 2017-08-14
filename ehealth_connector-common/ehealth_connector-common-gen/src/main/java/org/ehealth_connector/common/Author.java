@@ -739,11 +739,21 @@ public class Author {
 	 * Sets the functionCode of the author
 	 *
 	 * @param codeSystem
-	 *            the code system OID
+	 *            the code system
 	 * @param codeSystemame
 	 *            the name of the code system
 	 * @param originalText
 	 *            the function code (free text)
+	 */
+	/**
+	 * Sets the other function code.
+	 *
+	 * @param codeSystem
+	 *            the code system OID.
+	 * @param codeSystemName
+	 *            the name of the code system.
+	 * @param originalText
+	 *            the original text (narrative text of the code).
 	 */
 	public void setOtherFunctionCode(String codeSystem, String codeSystemName,
 			String originalText) {

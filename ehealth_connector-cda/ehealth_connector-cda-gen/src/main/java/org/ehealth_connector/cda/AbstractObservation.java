@@ -91,12 +91,13 @@ public class AbstractObservation
 	/**
 	 * Adds a nullFlavor interpretation code.
 	 *
-	 * @param the
-	 *            desired NullFlavor
+	 * @param nullFlavor
+	 *            the desired NullFlavor
+	 *
 	 */
-	public void addInterpretationCode(NullFlavor na) {
+	public void addInterpretationCode(NullFlavor nullFlavor) {
 		final CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setNullFlavor(na);
+		ce.setNullFlavor(nullFlavor);
 		mObservation.getInterpretationCodes().add(ce);
 	}
 

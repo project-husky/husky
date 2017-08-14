@@ -44,7 +44,7 @@ public class Performer {
 	private org.openhealthtools.mdht.uml.cda.Person mPerson;
 
 	/**
-	 * Default constructor to instanciate the object
+	 * Instantiates a new performer.
 	 */
 	public Performer() {
 		mPerfomer = CDAFactory.eINSTANCE.createPerformer2();
@@ -59,10 +59,10 @@ public class Performer {
 	}
 
 	/**
-	 * Default constructor to instanciate the object
+	 * Instantiates a new performer.
 	 *
-	 * @param name
-	 *            the name of the performer
+	 * @param author
+	 *            the author to be used as performer.
 	 */
 	public Performer(Author author) {
 		this();

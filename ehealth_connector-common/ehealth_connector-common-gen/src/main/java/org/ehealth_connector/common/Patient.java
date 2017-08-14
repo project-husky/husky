@@ -558,9 +558,6 @@ public class Patient extends Person {
 	/**
 	 * Configures the eHC Patient objects purpose: It is a human patient
 	 * (default setting)
-	 *
-	 * @param value
-	 *            true for non human subjects, false for human patients
 	 */
 	public void setIsHumanPatient() {
 		this.isNonHumenSubject = false;
@@ -568,9 +565,6 @@ public class Patient extends Person {
 
 	/**
 	 * Configures the eHC Patient objects purpose: It is a non human subject
-	 *
-	 * @param value
-	 *            true for non human subjects, false for human patients
 	 */
 	public void setIsNonHumenSubject() {
 		this.isNonHumenSubject = true;

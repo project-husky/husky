@@ -367,6 +367,43 @@ public class PharmManufacturedMaterialEntry extends
 	/**
 	 * Sets the ingredient quantity.
 	 *
+	 * @param numeratorValue
+	 *            the numerator ingredient quantity.
+	 * @param numeratorUnit
+	 *            the numerators unit.
+	 * @param denominatorValue
+	 *            the denominator ingredient quantity.
+	 * @param denominatorUnit
+	 *            the denominators unit.
+	 */
+	public void setIngredientQuantity(Double numeratorValue, Ucum numeratorUnit,
+			Double denominatorValue, Ucum denominatorUnit) {
+		final PharmIngredient pharmIngredient = this.getMdht().getIngredient();
+		if (pharmIngredient.getQuantity() == null) {
+
+			final RTO rto = DatatypesFactory.eINSTANCE.createRTO();
+			final PQ pq1 = DatatypesFactory.eINSTANCE.createPQ();
+			if (numeratorUnit != null)
+				pq1.setUnit(numeratorUnit.getCodeValue());
+			pq1.setValue(numeratorValue);
+			final PQ pq2 = DatatypesFactory.eINSTANCE.createPQ();
+			if (denominatorUnit != null)
+				pq2.setUnit(denominatorUnit.getCodeValue());
+			pq2.setValue(denominatorValue);
+			rto.setNumerator(pq1);
+			rto.setDenominator(pq2);
+			final Value quantity = new Value(rto);
+
+			final PharmQuantity pharmQuantity = CDAFactory.eINSTANCE.createPharmQuantity();
+			pharmIngredient.setQuantity(pharmQuantity);
+			pharmQuantity.setDenominator(quantity.copyMdhtRto().getDenominator());
+			pharmQuantity.setNumerator(quantity.copyMdhtRto().getNumerator());
+		}
+	}
+
+	/**
+	 * Sets the ingredient quantity.
+	 *
 	 * @param quantity
 	 *            the new ingredient quantity
 	 */
@@ -381,40 +418,6 @@ public class PharmManufacturedMaterialEntry extends
 			}
 		} else {
 			pharmIngredient.setQuantity(null);
-		}
-	}
-
-	/**
-	 * Sets the ingredient quantity.
-	 *
-	 * @param numeratorQuantity
-	 *            the numerator ingredient quantity
-	 * @param numeratorUnit
-	 *            the unit of the numerator ingredient quantity
-	 * @param denominatorQuantity
-	 *            the denominator ingredient quantity
-	 * @param denominatorUnit
-	 *            the unit of the denominator ingredient quantity
-	 */
-	public void setIngredientQuantity(Double numeratorValue, Ucum numeratorUnit, Double denominatorValue, Ucum denominatorUnit) {
-		final PharmIngredient pharmIngredient = this.getMdht().getIngredient();
-		if (pharmIngredient.getQuantity() == null) {
-			
-	        final RTO rto = DatatypesFactory.eINSTANCE.createRTO();
-	        final PQ pq1 = DatatypesFactory.eINSTANCE.createPQ();
-	        if (numeratorUnit != null) pq1.setUnit(numeratorUnit.getCodeValue());
-	        pq1.setValue(numeratorValue);
-	        final PQ pq2 = DatatypesFactory.eINSTANCE.createPQ();
-	        if (denominatorUnit != null) pq2.setUnit(denominatorUnit.getCodeValue());
-	        pq2.setValue(denominatorValue);
-	        rto.setNumerator(pq1);
-	        rto.setDenominator(pq2);
-	        final Value quantity = new Value(rto);
-
-			final PharmQuantity pharmQuantity = CDAFactory.eINSTANCE.createPharmQuantity();
-			pharmIngredient.setQuantity(pharmQuantity);
-			pharmQuantity.setDenominator(quantity.copyMdhtRto().getDenominator());
-			pharmQuantity.setNumerator(quantity.copyMdhtRto().getNumerator());
 		}
 	}
 

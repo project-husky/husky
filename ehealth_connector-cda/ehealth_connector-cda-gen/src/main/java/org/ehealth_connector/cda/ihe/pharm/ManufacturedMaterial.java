@@ -22,7 +22,6 @@ import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ihe.pharm.enums.OrderableDrugForm;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.Ucum;
@@ -76,10 +75,10 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 
 	/**
 	 * Adds an ingredient to the manufactured material list of ingredients
-	 * 
+	 *
 	 * @param ingredient
 	 *            Ingredient to add
-	 * 
+	 *
 	 */
 	public void addIngredient(PharmManufacturedMaterialEntry ingredient) {
 
@@ -91,7 +90,7 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 
 	/**
 	 * Gets the form code of the content of the box
-	 * 
+	 *
 	 * @return Form code of the content of the box or null
 	 */
 	public OrderableDrugForm getBoxDescriptionFormCode() {
@@ -112,7 +111,7 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 
 	/**
 	 * Gets the GTIN of the box
-	 * 
+	 *
 	 * @return GTIN of the box or null
 	 */
 	public String getBoxDescriptionGtin() {
@@ -121,8 +120,8 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 			return null;
 
 		final CE codeAsContent = boxDescription.getContainerPackagedMedicine().getCode();
-		if (codeAsContent == null || codeAsContent.getCodeSystem() == null
-				|| !CodeSystems.GTIN.getCodeSystemId().equalsIgnoreCase(codeAsContent.getCodeSystem()))
+		if (codeAsContent == null || codeAsContent.getCodeSystem() == null || !CodeSystems.GTIN
+				.getCodeSystemId().equalsIgnoreCase(codeAsContent.getCodeSystem()))
 			return null;
 
 		return new String(codeAsContent.getCode());
@@ -130,7 +129,7 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 
 	/**
 	 * Gets the name of the box
-	 * 
+	 *
 	 * @return Name of the box or null
 	 */
 	public String getBoxDescriptionName() {
@@ -143,7 +142,7 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 
 	/**
 	 * Gets the size of the box
-	 * 
+	 *
 	 * @return Box size or null
 	 */
 	public Double getBoxDescriptionSize() {
@@ -159,7 +158,7 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 
 	/**
 	 * Gets the units of the size of the box
-	 * 
+	 *
 	 * @return Units of the size of the box or null
 	 */
 	public Ucum getBoxDescriptionSizeUnits() {
@@ -180,9 +179,9 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 
 	/**
 	 * Gets the ingredients of the manufactured material
-	 * 
+	 *
 	 * @return List of ingredients (or empty list)
-	 * 
+	 *
 	 */
 	public PharmManufacturedMaterialEntry[] getIngredients() {
 
@@ -200,21 +199,22 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 
 	/**
 	 * Gets the ATC code of the material
-	 * 
+	 *
 	 * @return ATC code or null
 	 */
 	public String getManufacturedMaterialAtcCode() {
 		CE code = this.getMdht().getCode();
-		if (code != null && CodeSystems.WHOATCCode.getCodeSystemId().equalsIgnoreCase(code.getCodeSystem()))
+		if (code != null
+				&& CodeSystems.WHOATCCode.getCodeSystemId().equalsIgnoreCase(code.getCodeSystem()))
 			return code.getCode();
 		return null;
 	}
 
 	/**
 	 * Gets the form code of the material
-	 * 
+	 *
 	 * @return Form code of material or null if unknown
-	 * 
+	 *
 	 */
 	public OrderableDrugForm getManufacturedMaterialFormCode() {
 		CE formCode = this.getMdht().getFormCode();
@@ -228,12 +228,9 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 	}
 
 	/**
-	 * Gets the lot number
-	 * 
-	 * @return
-	 * 
-	 * @return Lot number of material or null
-	 * 
+	 * Gets the manufactured material lot number.
+	 *
+	 * @return the Lot number of material or null.
 	 */
 	public String getManufacturedMaterialLotNumber() {
 
@@ -244,11 +241,9 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 	}
 
 	/**
-	 * Gets the name of the material
-	 * 
-	 * @param name
-	 *            Name of material
-	 * 
+	 * Gets the manufactured material name.
+	 *
+	 * @return the manufactured material name
 	 */
 	public String getManufacturedMaterialName() {
 		EN name = this.getMdht().getName();
@@ -258,27 +253,28 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 	}
 
 	/**
-	 * 
+	 *
 	 * @param packageName
 	 *            Commercial name
-	 * 
+	 *
 	 * @param packageGtin
 	 *            GTIN of box
-	 * 
+	 *
 	 * @param formCode
 	 *            Galenic form code
-	 * 
+	 *
 	 * @param packageSize
 	 *            Number of "elements" in the box
-	 * 
+	 *
 	 * @param packageUnits
 	 *            Only if not countable units
-	 * 
+	 *
 	 */
-	public void setBoxDescription(String packageName, String packageGtin, OrderableDrugForm formCode,
-			Double packageSize, Ucum packageUnits) {
+	public void setBoxDescription(String packageName, String packageGtin,
+			OrderableDrugForm formCode, Double packageSize, Ucum packageUnits) {
 
-		final PharmAsContent boxDescription = CdaUtil.getMdhtCdaFactoryInstance().createPharmAsContent();
+		final PharmAsContent boxDescription = CdaUtil.getMdhtCdaFactoryInstance()
+				.createPharmAsContent();
 		boxDescription.setClassCode(EntityClassManufacturedMaterial.CONT);
 
 		final PharmPackagedMedicine packagedMedicine = CdaUtil.getMdhtCdaFactoryInstance()
@@ -299,14 +295,16 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 
 		if (formCode != null) {
 			final Code formCodeCode = formCode.getCode();
-			final CE newFormCode = CdaUtil.getMdhtDatatypesFactoryInstance().createCE(formCodeCode.getCode(),
-					formCodeCode.getCodeSystem(), formCodeCode.getCodeSystemName(), formCodeCode.getDisplayName());
+			final CE newFormCode = CdaUtil.getMdhtDatatypesFactoryInstance().createCE(
+					formCodeCode.getCode(), formCodeCode.getCodeSystem(),
+					formCodeCode.getCodeSystemName(), formCodeCode.getDisplayName());
 			packagedMedicine.setFormCode(newFormCode);
 		}
 
 		if (packageSize != null)
-			packagedMedicine.setCapacityQuantity(CdaUtil.getMdhtDatatypesFactoryInstance()
-					.createPQ(packageSize.doubleValue(), (packageUnits != null ? packageUnits.getCodeValue() : null)));
+			packagedMedicine.setCapacityQuantity(
+					CdaUtil.getMdhtDatatypesFactoryInstance().createPQ(packageSize.doubleValue(),
+							(packageUnits != null ? packageUnits.getCodeValue() : null)));
 
 		if (packageName != null) {
 			final EN mMname = CdaUtil.getMdhtDatatypesFactoryInstance().createEN();
@@ -321,12 +319,12 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 
 	/**
 	 * Sets the ATC code of the material
-	 * 
+	 *
 	 * @param atcCode
 	 *            ATC code of material
 	 * @param atcName
 	 *            Name of ATC
-	 * 
+	 *
 	 */
 	public void setManufacturedMaterialAtcCode(String atcCode, String atcName) {
 		if (atcCode != null) {
@@ -344,48 +342,51 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 
 	/**
 	 * Sets the form code of the material
-	 * 
+	 *
 	 * @param formCode
 	 *            Form code of material
-	 * 
+	 *
 	 */
 	public void setManufacturedMaterialFormCode(OrderableDrugForm formCode) {
 		if (formCode != null) {
 			final Code formCodeCode = formCode.getCode();
-			final CE newFormCode = CdaUtil.getMdhtDatatypesFactoryInstance().createCE(formCodeCode.getCode(),
-					formCodeCode.getCodeSystem(), formCodeCode.getCodeSystemName(), formCodeCode.getDisplayName());
+			final CE newFormCode = CdaUtil.getMdhtDatatypesFactoryInstance().createCE(
+					formCodeCode.getCode(), formCodeCode.getCodeSystem(),
+					formCodeCode.getCodeSystemName(), formCodeCode.getDisplayName());
 			this.getMdht().setFormCode(newFormCode);
 		}
 	}
 
 	/**
 	 * Sets the lot number
-	 * 
+	 *
 	 * @param lotNumber
 	 *            Lot number of material
-	 * 
+	 *
 	 */
 	public void setManufacturedMaterialLotNumber(String lotNumber) {
 
 		if (lotNumber != null)
-			this.getMdht().setLotNumberText(CdaUtil.getMdhtDatatypesFactoryInstance().createST(lotNumber));
+			this.getMdht().setLotNumberText(
+					CdaUtil.getMdhtDatatypesFactoryInstance().createST(lotNumber));
 	}
 
 	/**
 	 * Sets the name of the material
-	 * 
+	 *
 	 * @param name
 	 *            Name of material
-	 * 
+	 *
 	 */
 	public void setManufacturedMaterialName(String name) {
 		if (name != null)
-			this.getMdht().setName(CdaUtil.getMdhtDatatypesFactoryInstance().createEN().addText(new String(name)));
+			this.getMdht().setName(
+					CdaUtil.getMdhtDatatypesFactoryInstance().createEN().addText(new String(name)));
 	}
-	
+
 	/**
 	 * Null-flavor the material
-	 * 
+	 *
 	 */
 	public void setNullFlavored() {
 		this.getMdht().setNullFlavor(NullFlavor.NA);

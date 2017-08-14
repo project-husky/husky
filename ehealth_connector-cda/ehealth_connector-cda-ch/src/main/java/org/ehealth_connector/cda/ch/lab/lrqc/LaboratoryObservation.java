@@ -42,7 +42,7 @@ public class LaboratoryObservation
 	}
 
 	/**
-	 * Instantiates the class with the required elements.
+	 * Instantiates a new laboratory observation.
 	 *
 	 * @param code
 	 *            the code
@@ -50,8 +50,6 @@ public class LaboratoryObservation
 	 *            the value
 	 * @param interpretationCode
 	 *            the interpretation code
-	 * @param textReference
-	 *            Reference to the human readable text
 	 * @param reference
 	 *            <div class="en">reference to the human readable text,
 	 *            regarding the lot number of the anylizer kit</div>
@@ -63,6 +61,7 @@ public class LaboratoryObservation
 	 *            Test-Hersteller [R]: Name des Unternehmens, Test-Gerät [R]:
 	 *            Name und Typ des Gerätes, Test-Kit [R2]: Genaue Bezeichnung
 	 *            des Kits</div>
+	 * 
 	 */
 	public LaboratoryObservation(LabObsList code, Value value,
 			ObservationInterpretation interpretationCode, SectionAnnotationCommentEntry reference) {

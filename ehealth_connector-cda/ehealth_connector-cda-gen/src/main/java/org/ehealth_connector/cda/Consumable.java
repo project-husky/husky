@@ -121,7 +121,8 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 
 		super(CDAFactory.eINSTANCE.createConsumable());
 		this.getMdht().setManufacturedProduct(IHEFactory.eINSTANCE.createProductEntry().init());
-		this.getMdht().getManufacturedProduct().setManufacturedMaterial(CDAFactory.eINSTANCE.createMaterial());
+		this.getMdht().getManufacturedProduct()
+				.setManufacturedMaterial(CDAFactory.eINSTANCE.createMaterial());
 
 		// The WhoAtcCode has to be present as code element, otherwise
 		// translations can´t be set
@@ -144,8 +145,8 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	 */
 	public void addManufacturedMaterialTranslation(Code codedId) {
 
-		this.getMdht().getManufacturedProduct().getManufacturedMaterial().getCode().getTranslations()
-				.add(codedId.getCD());
+		this.getMdht().getManufacturedProduct().getManufacturedMaterial().getCode()
+				.getTranslations().add(codedId.getCD());
 	}
 
 	/**
@@ -154,7 +155,8 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	 * @return the Lot Number
 	 */
 	public String getLotNr() {
-		if ((getMdhtManufacturedMaterial() != null) && (getMdhtManufacturedMaterial().getLotNumberText() != null)) {
+		if ((getMdhtManufacturedMaterial() != null)
+				&& (getMdhtManufacturedMaterial().getLotNumberText() != null)) {
 			return getMdhtManufacturedMaterial().getLotNumberText().getText();
 		}
 		return null;
@@ -166,8 +168,10 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	 * @return the manufactured material
 	 */
 	public ManufacturedMaterial getManufacturedMaterial() {
-		if (this.getManufacturedProduct() != null && this.getManufacturedProduct().getManufacturedMaterial() != null) {
-			return new ManufacturedMaterial(this.getManufacturedProduct().getManufacturedMaterial());
+		if (this.getManufacturedProduct() != null
+				&& this.getManufacturedProduct().getManufacturedMaterial() != null) {
+			return new ManufacturedMaterial(
+					this.getManufacturedProduct().getManufacturedMaterial());
 		}
 		return null;
 	}
@@ -178,7 +182,8 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	 * @return das codedId Objekt
 	 */
 	public Code getManufacturedMaterialCode() {
-		if ((getMdhtManufacturedMaterial() != null) && (getMdhtManufacturedMaterial().getCode() != null)) {
+		if ((getMdhtManufacturedMaterial() != null)
+				&& (getMdhtManufacturedMaterial().getCode() != null)) {
 			return new Code(getMdhtManufacturedMaterial().getCode());
 
 		}
@@ -191,7 +196,8 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	 * @return the manufactured material translations
 	 */
 	public EList<CD> getManufacturedMaterialTranslations() {
-		if ((getMdhtManufacturedMaterial() != null) && (getMdhtManufacturedMaterial().getCode() != null)) {
+		if ((getMdhtManufacturedMaterial() != null)
+				&& (getMdhtManufacturedMaterial().getCode() != null)) {
 			return getMdhtManufacturedMaterial().getCode().getTranslations();
 		}
 		return null;
@@ -213,38 +219,26 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	 * 2017/05/02 According to CDA-CH-II Medications-template, two IDs can be
 	 * present: root 1.3.88 --> Product GLN HAS TO BE PRESENT root 1.3.160 -->
 	 * Package GTIN HAS TO BE PRESENT IF KNOWN
-	 * 
+	 *
 	 * Methods getManufacturedProductProductId() and
 	 * getManufacturedProductPackageId() should be used instead (or use the
 	 * ihe.pharm.ManufacturedProduct class)
-	 * 
+	 *
 	 * @return the gtin or ean or swiss index, null otherwise
 	 */
 	public Identificator getManufacturedProductId() {
 		if (this.getManufacturedProduct() != null)
 			for (final II id : getManufacturedProduct().getIds()) {
-				if (((id.getRoot() != null) && id.getRoot().equals(CodeSystems.GTIN.getCodeSystemId()))
-						|| ((id.getRoot() != null) && id.getRoot().equals(CodeSystems.SwissINDEX.getCodeSystemId()))
-						|| ((id.getRoot() != null) && id.getRoot().equals(CodeSystems.GLN.getCodeSystemId()))) {
+				if (((id.getRoot() != null)
+						&& id.getRoot().equals(CodeSystems.GTIN.getCodeSystemId()))
+						|| ((id.getRoot() != null)
+								&& id.getRoot().equals(CodeSystems.SwissINDEX.getCodeSystemId()))
+						|| ((id.getRoot() != null)
+								&& id.getRoot().equals(CodeSystems.GLN.getCodeSystemId()))) {
 					final Identificator ide = new Identificator(id);
 					return ide;
 				}
 			}
-		return null;
-	}
-
-	/**
-	 * Gets the product id from the ManufacturedProduct
-	 *
-	 * @return the swiss index GLN, null otherwise
-	 */
-	public Identificator getManufacturedProductProductId() {
-		for (final II id : getManufacturedProduct().getIds()) {
-			if ((id.getRoot() != null) && id.getRoot().equals(CodeSystems.GLN.getCodeSystemId())) {
-				final Identificator ide = new Identificator(id);
-				return ide;
-			}
-		}
 		return null;
 	}
 
@@ -264,12 +258,28 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	}
 
 	/**
+	 * Gets the product id from the ManufacturedProduct
+	 *
+	 * @return the swiss index GLN, null otherwise
+	 */
+	public Identificator getManufacturedProductProductId() {
+		for (final II id : getManufacturedProduct().getIds()) {
+			if ((id.getRoot() != null) && id.getRoot().equals(CodeSystems.GLN.getCodeSystemId())) {
+				final Identificator ide = new Identificator(id);
+				return ide;
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Gets the Organization that manufactured this product
 	 *
 	 * @return the organization
 	 */
 	public Organization getManufacturer() {
-		if ((getManufacturedProduct() != null) && (getManufacturedProduct().getManufacturerOrganization() != null)) {
+		if ((getManufacturedProduct() != null)
+				&& (getManufacturedProduct().getManufacturerOrganization() != null)) {
 			return new Organization(getManufacturedProduct().getManufacturerOrganization());
 		}
 		return null;
@@ -287,7 +297,8 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	 * @return das tradeNameOfVaccine Objekt
 	 */
 	public String getTradeName() {
-		if ((getMdhtManufacturedMaterial() != null) && (getMdhtManufacturedMaterial().getName() != null)) {
+		if ((getMdhtManufacturedMaterial() != null)
+				&& (getMdhtManufacturedMaterial().getName() != null)) {
 			return getMdhtManufacturedMaterial().getName().getText();
 		}
 		return null;
@@ -301,7 +312,8 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	 */
 	public Code getWhoAtcCode() {
 		if (this.getManufacturedMaterialCode() != null) {
-			if (this.getManufacturedMaterialCode().getCodeSystem().equals(CodeSystems.WHOATCCode.getCodeSystemId())) {
+			if (this.getManufacturedMaterialCode().getCodeSystem()
+					.equals(CodeSystems.WHOATCCode.getCodeSystemId())) {
 				return getManufacturedMaterialCode();
 			}
 		}
@@ -321,12 +333,13 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	}
 
 	/**
-	 * Sets the manufactured product
+	 * Sets the manufactured product.
 	 *
-	 * @param organization
-	 *            the organization
+	 * @param manufacturedProduct
+	 *            the new manufactured product
 	 */
-	public void setManufacturedProduct(org.ehealth_connector.cda.ihe.pharm.ManufacturedProduct manufacturedProduct) {
+	public void setManufacturedProduct(
+			org.ehealth_connector.cda.ihe.pharm.ManufacturedProduct manufacturedProduct) {
 		if (manufacturedProduct != null) {
 
 			org.ehealth_connector.cda.ihe.pharm.ManufacturedProduct newProduct = new org.ehealth_connector.cda.ihe.pharm.ManufacturedProduct(
@@ -366,7 +379,8 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	 */
 	public void setManufacturer(Organization organization) {
 		if (this.getManufacturedProduct() != null) {
-			getManufacturedProduct().setManufacturerOrganization(organization.copyMdhtOrganization());
+			getManufacturedProduct()
+					.setManufacturerOrganization(organization.copyMdhtOrganization());
 		}
 	}
 
@@ -408,7 +422,7 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 
 	/**
 	 * Clears the type code
-	 * 
+	 *
 	 */
 	public void unsetTypeCode() {
 		this.getMdht().unsetTypeCode();

@@ -109,6 +109,27 @@ public class DispenseItemEntry
 	 *            Description of the daily dosage
 	 *
 	 */
+	public void addDailyDosage(Consumable dailyDosage) {
+
+		final EntryRelationship dailyDosageEntryRelationship = CDAFactory.eINSTANCE
+				.createEntryRelationship();
+		dailyDosageEntryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
+
+		final SubstanceAdministration substanceAdministration = new SubstanceAdministration();
+		substanceAdministration.setConsumable(dailyDosage);
+		dailyDosageEntryRelationship.setSubstanceAdministration(substanceAdministration.copy());
+
+		this.getMdht().getEntryRelationships().add(dailyDosageEntryRelationship);
+
+	}
+
+	/**
+	 * Add the Daily Dosage
+	 *
+	 * @param dailyDosage
+	 *            Description of the daily dosage
+	 *
+	 */
 	public void addDailyDosage(SubstanceAdministration dailyDosage) {
 
 		final EntryRelationship dailyDosageEntryRelationship = CDAFactory.eINSTANCE
@@ -116,27 +137,6 @@ public class DispenseItemEntry
 		dailyDosageEntryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
 		dailyDosageEntryRelationship.setSubstanceAdministration(dailyDosage.copy());
 		this.getMdht().getEntryRelationships().add(dailyDosageEntryRelationship);
-	}
-
-	/** 
-	 * Add the Daily Dosage
-	 *
-	 * @param dailyDosage
-	 *            Description of the daily dosage
-	 *
-	 */
-	public void addDailyDosage(Consumable dailyDosage) {
-
-		final EntryRelationship dailyDosageEntryRelationship = CDAFactory.eINSTANCE
-				.createEntryRelationship();
-		dailyDosageEntryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
-		
-		final SubstanceAdministration substanceAdministration = new SubstanceAdministration();
-		substanceAdministration.setConsumable(dailyDosage);
-		dailyDosageEntryRelationship.setSubstanceAdministration(substanceAdministration.copy());
-		
-		this.getMdht().getEntryRelationships().add(dailyDosageEntryRelationship);
-
 	}
 
 	/**
@@ -238,7 +238,8 @@ public class DispenseItemEntry
 	 */
 	public ManufacturedProduct getDispensedProduct() {
 
-		if (this.getMdht().getProduct() != null && this.getMdht().getProduct().getManufacturedProduct() != null)
+		if (this.getMdht().getProduct() != null
+				&& this.getMdht().getProduct().getManufacturedProduct() != null)
 			return new ManufacturedProduct(this.getMdht().getProduct().getManufacturedProduct());
 		return null;
 
@@ -432,18 +433,16 @@ public class DispenseItemEntry
 	}
 
 	/**
-	 * Set the dispensed product (consumable)
+	 * Sets the dispensed product (consumable).
 	 *
-	 * @param product
-	 *            Product dispensed
-	 *
+	 * @param manufacturedProduct
+	 *            the dispensed product
 	 */
 	public void setDispensedProduct(ManufacturedProduct manufacturedProduct) {
 		final Product product = CdaUtil.getMdhtCdaFactoryInstance().createProduct();
 		product.setManufacturedProduct(manufacturedProduct.getMdht());
 		this.getMdht().setProduct(product);
 	}
-
 
 	/**
 	 * Sets the dosage instructions.
@@ -505,19 +504,6 @@ public class DispenseItemEntry
 	 * @param entry
 	 *            the new medication fullfillment instructions
 	 */
-	public void setMedicationFullfillmentInstructions(String instructions) {
-
-		final MedicationFullfillmentInstructionsEntry professionnalInstructions = new MedicationFullfillmentInstructionsEntry();
-		professionnalInstructions.setTextReference(instructions);
-		setMedicationFullfillmentInstructions(professionnalInstructions);
-	}
-
-	/**
-	 * Sets the medication fullfillment instructions.
-	 *
-	 * @param entry
-	 *            the new medication fullfillment instructions
-	 */
 	public void setMedicationFullfillmentInstructions(
 			MedicationFullfillmentInstructionsEntry entry) {
 		final MedicationFullfillmentInstructionsEntry old = this
@@ -537,6 +523,19 @@ public class DispenseItemEntry
 			entryRelationship.setInversionInd(Boolean.TRUE);
 			this.getMdht().getEntryRelationships().add(entryRelationship);
 		}
+	}
+
+	/**
+	 * Sets the medication fullfillment instructions.
+	 *
+	 * @param instructions
+	 *            the new medication fullfillment instructions
+	 */
+	public void setMedicationFullfillmentInstructions(String instructions) {
+
+		final MedicationFullfillmentInstructionsEntry professionnalInstructions = new MedicationFullfillmentInstructionsEntry();
+		professionnalInstructions.setTextReference(instructions);
+		setMedicationFullfillmentInstructions(professionnalInstructions);
 	}
 
 	/**
@@ -705,5 +704,5 @@ public class DispenseItemEntry
 	public void setTextReference(String value) {
 		this.getMdht().setText(Util.createReference(value));
 	}
-	
+
 }

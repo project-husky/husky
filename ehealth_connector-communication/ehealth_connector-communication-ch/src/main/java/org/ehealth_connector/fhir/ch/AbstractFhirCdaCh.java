@@ -2029,15 +2029,14 @@ public abstract class AbstractFhirCdaCh {
 	}
 
 	/**
-	 * <div class="en"> Checks if a document type code with a matching oid is
-	 * present in the given FHIR resource
+	 * Checks if a document type code with a matching oid is present in the
+	 * given FHIR resource
 	 *
-	 * @param fhirResource
+	 * @param docManifest
 	 *            the FHIR resource
 	 * @param docOid
 	 *            the oid of the document
-	 * @return eHC document type code (full or masked patient
-	 *         demographics)</div> <div class="de"></div> <div class="fr"></div>
+	 * @return true, if is doc type oid was found. False otherwise.
 	 */
 	public boolean isDocType(DocumentManifest docManifest, String docOid) {
 		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {

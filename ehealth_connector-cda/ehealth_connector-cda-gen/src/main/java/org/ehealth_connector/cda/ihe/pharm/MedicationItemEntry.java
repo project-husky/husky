@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.ExternalDocumentEntry;
 import org.ehealth_connector.cda.MdhtFacade;
@@ -74,24 +73,26 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 /**
  * Implements the Base Class MedicationItemEntry from the IHE PHARM Model.
  */
-public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationItemEntry> {
+public class MedicationItemEntry
+		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationItemEntry> {
 
 	public static final String APPROACH_SITE_CODE_SYSTEM_OID = "2.16.840.1.113883.6.96";
 	public static final String APPROACH_SITE_CODE_SYSTEM_NAME = "SNOMED CT";
 
 	/**
-	 * Creates a Subordinate Substance Administration element
-	 * 
+	 * Creates the subordinate substance administration element.
+	 *
 	 * @param effectiveTime
-	 *            Effective Time (intake instructions)
+	 *            the effective time (intake instructions).
 	 * @param doseQuantity
-	 *            Dosage
+	 *            the dosage.
 	 * @param consumable
-	 *            Subordinate Consumable
-	 * @return
+	 *            the subordinate consumable.
+	 * @return the substance administration.
 	 */
-	public static SubstanceAdministration createSubordinateSubstanceAdministration(SXPR_TS effectiveTime,
-			IVL_PQ doseQuantity, org.ehealth_connector.cda.Consumable consumable) {
+	public static SubstanceAdministration createSubordinateSubstanceAdministration(
+			SXPR_TS effectiveTime, IVL_PQ doseQuantity,
+			org.ehealth_connector.cda.Consumable consumable) {
 
 		SubstanceAdministration substanceAdministration = new SubstanceAdministration();
 
@@ -108,10 +109,12 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	 * @param mdht
 	 *            the mdht model object
 	 */
-	protected MedicationItemEntry(org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationItemEntry mdht) {
+	protected MedicationItemEntry(
+			org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationItemEntry mdht) {
 		super(mdht, null, null);
 		// adding missing template pcc id
-		mdht.getTemplateIds().add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.1", "IHE PHARM").getIi());
+		mdht.getTemplateIds()
+				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.1", "IHE PHARM").getIi());
 		final CS statusCodeCompleted = DatatypesFactory.eINSTANCE.createCS();
 		statusCodeCompleted.setCode("completed");
 		this.getMdht().setStatusCode(statusCodeCompleted);
@@ -153,12 +156,14 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	public void addPossibleSubstitution(LanguageCode languageCode,
 			SubstanceAdminSubstitution substanceAdminSubstitution) {
 
-		final EntryRelationship possibleSubstitution = CDAFactory.eINSTANCE.createEntryRelationship();
+		final EntryRelationship possibleSubstitution = CDAFactory.eINSTANCE
+				.createEntryRelationship();
 
 		possibleSubstitution.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
 
 		final Supply substitutionSupply = CDAFactory.eINSTANCE.createSupply();
-		substitutionSupply.getTemplateIds().add(new Identificator("1.3.6.1.4.1.19376.1.9.1.3.9", "").getIi());
+		substitutionSupply.getTemplateIds()
+				.add(new Identificator("1.3.6.1.4.1.19376.1.9.1.3.9", "").getIi());
 		substitutionSupply.setClassCode(ActClassSupply.SPLY);
 		substitutionSupply.setMoodCode(x_DocumentSubstanceMood.RQO);
 		substitutionSupply.setIndependentInd(DatatypesFactory.eINSTANCE.createBL(false));
@@ -218,12 +223,13 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 		prescribedQty.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
 
 		final Supply prescribedQuantity = CDAFactory.eINSTANCE.createSupply();
-		prescribedQuantity.getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.9.1.3.8", "Amount of units of the consumable").getIi());
+		prescribedQuantity.getTemplateIds().add(new Identificator("1.3.6.1.4.1.19376.1.9.1.3.8",
+				"Amount of units of the consumable").getIi());
 		prescribedQuantity.setClassCode(ActClassSupply.SPLY);
 		prescribedQuantity.setMoodCode(x_DocumentSubstanceMood.RQO);
 		prescribedQuantity.setIndependentInd(DatatypesFactory.eINSTANCE.createBL(false));
-		prescribedQuantity.setQuantity(DatatypesFactory.eINSTANCE.createPQ(value.doubleValue(), valueUnit));
+		prescribedQuantity
+				.setQuantity(DatatypesFactory.eINSTANCE.createPQ(value.doubleValue(), valueUnit));
 		prescribedQuantity.setText(DatatypesFactory.eINSTANCE.createED(value + " " + textualUnit));
 		prescribedQty.setSupply(prescribedQuantity);
 
@@ -310,7 +316,7 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 
 	/**
 	 * Gets the second - n effective time
-	 * 
+	 *
 	 * @return 2nd - nth effective time or null
 	 */
 	public ArrayList<SXCM_TS> getEffectiveTimeList() {
@@ -380,7 +386,8 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	 */
 	public MedicationFullfillmentInstructionsEntry getMedicationFullfillmentInstructions() {
 		if (getMdht().getMedicationFullfillmentInstructions() != null) {
-			return new MedicationFullfillmentInstructionsEntry(getMdht().getMedicationFullfillmentInstructions());
+			return new MedicationFullfillmentInstructionsEntry(
+					getMdht().getMedicationFullfillmentInstructions());
 		}
 		return null;
 	}
@@ -393,7 +400,8 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	public MedicationsSpecialConditions getMedicationsSpecialConditions() {
 		if (this.getMdht().getCode() != null) {
 			final Code code = new Code(this.getMdht().getCode());
-			if ((code != null) && MedicationsSpecialConditions.CODE_SYSTEM_OID.equals(code.getCodeSystem())) {
+			if ((code != null)
+					&& MedicationsSpecialConditions.CODE_SYSTEM_OID.equals(code.getCodeSystem())) {
 				return MedicationsSpecialConditions.getEnum(code.getCode());
 			}
 		}
@@ -407,7 +415,8 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	 */
 	public PatientMedicalInstructionsEntry getPatientMedicalInstructions() {
 		if (getMdht().getPharmPatientMedicalInstructions() != null) {
-			return new PatientMedicalInstructionsEntry(getMdht().getPharmPatientMedicalInstructions());
+			return new PatientMedicalInstructionsEntry(
+					getMdht().getPharmPatientMedicalInstructions());
 		}
 		return null;
 	}
@@ -419,7 +428,8 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	 */
 	public PharmSubstitutionHandlingEntry getPharmSubstitutionHandlingEntry() {
 		if (getMdht().getPharmSubstitutionHandlingEntry() != null) {
-			return new PharmSubstitutionHandlingEntry(getMdht().getPharmSubstitutionHandlingEntry());
+			return new PharmSubstitutionHandlingEntry(
+					getMdht().getPharmSubstitutionHandlingEntry());
 		}
 		return null;
 	}
@@ -433,12 +443,14 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 
 		Supply supply;
 		for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
-			if (entryRelationship.getTypeCode().getValue() == x_ActRelationshipEntryRelationship.COMP.getValue()) {
+			if (entryRelationship.getTypeCode()
+					.getValue() == x_ActRelationshipEntryRelationship.COMP.getValue()) {
 				if ((supply = entryRelationship.getSupply()) != null) {
-					if (supply.getClassCode().getValue() == ActClassSupply.SPLY.getValue()
-							&& supply.getMoodCode().getValue() == x_DocumentSubstanceMood.RQO.getValue()) {
+					if (supply.getClassCode().getValue() == ActClassSupply.SPLY.getValue() && supply
+							.getMoodCode().getValue() == x_DocumentSubstanceMood.RQO.getValue()) {
 						for (final II templateId : supply.getTemplateIds()) {
-							if (templateId.getRoot().equalsIgnoreCase(SubstanceAdminSubstitution.CODE_SYSTEM_OID))
+							if (templateId.getRoot()
+									.equalsIgnoreCase(SubstanceAdminSubstitution.CODE_SYSTEM_OID))
 								return supply;
 						}
 					}
@@ -516,7 +528,7 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 
 	/**
 	 * Gets the first effective time
-	 * 
+	 *
 	 * @return Initial effective time or null
 	 */
 	public IVL_TS getStartEndDate() {
@@ -535,8 +547,8 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	 */
 	public SubstanceAdministration getSubordinateSubstanceAdministration(int sequenceNumber) {
 		for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
-			if (entryRelationship.getSubstanceAdministration() != null
-					&& entryRelationship.getSequenceNumber().getValue().intValue() == sequenceNumber) {
+			if (entryRelationship.getSubstanceAdministration() != null && entryRelationship
+					.getSequenceNumber().getValue().intValue() == sequenceNumber) {
 				return new SubstanceAdministration(entryRelationship.getSubstanceAdministration());
 			}
 		}
@@ -564,7 +576,8 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	 */
 	@Override
 	public String getTextReference() {
-		if ((this.getMdht().getText() != null) && (this.getMdht().getText().getReference() != null)) {
+		if ((this.getMdht().getText() != null)
+				&& (this.getMdht().getText().getReference() != null)) {
 			return this.getMdht().getText().getReference().getValue();
 		}
 		return null;
@@ -592,7 +605,7 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 
 	/**
 	 * Sets approach site code
-	 * 
+	 *
 	 * @param code
 	 *            Approach site code
 	 * @param displayName
@@ -604,8 +617,8 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	 * @param reference
 	 *            Reference
 	 */
-	public void setApproachSiteCode(String code, String displayName, String codeSystem, String codeSystemName,
-			String reference) {
+	public void setApproachSiteCode(String code, String displayName, String codeSystem,
+			String codeSystemName, String reference) {
 		final CD approachCode = CdaUtil.getMdhtDatatypesFactoryInstance().createCD();
 		if (codeSystem != null)
 			approachCode.setCodeSystem(codeSystem);
@@ -622,10 +635,10 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 			approachCode.setOriginalText(Util.createReference(reference));
 		this.getMdht().getApproachSiteCodes().add(approachCode);
 	}
-	
+
 	/**
 	 * Set type of dosing to Combination
-	 * 
+	 *
 	 */
 	public void setCombinationDosing() {
 		boolean alreadyPresent = false;
@@ -652,7 +665,7 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 
 	/**
 	 * Set type of dosing to Conditional
-	 * 
+	 *
 	 */
 	public void setConditionalDosing() {
 		boolean alreadyPresent = false;
@@ -711,7 +724,8 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	 */
 	public void setExternalDocumentEntry(ExternalDocumentEntry externalDocumentEntry) {
 		// note PCC Template only for REFR not for XCRPT
-		final ExternalDocumentRef reference = PHARMFactory.eINSTANCE.createExternalDocumentRef().init();
+		final ExternalDocumentRef reference = PHARMFactory.eINSTANCE.createExternalDocumentRef()
+				.init();
 		reference.getTemplateIds().clear();
 		externalDocumentEntry.getMdht().getTemplateIds().clear();
 		reference.setExternalDocument(externalDocumentEntry.getMdht());
@@ -720,10 +734,10 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	}
 
 	/**
-	 * Sets the identificator. Note: replaces all existing identifiers
+	 * Sets the id. Note: replaces all existing identifiers.
 	 *
 	 * @param id
-	 *            the new identificator
+	 *            the new id
 	 */
 	public void setId(Identificator id) {
 		this.getMdht().getIds().clear();
@@ -738,21 +752,10 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	 * @param entry
 	 *            the new medication fullfillment instructions
 	 */
-	public void setMedicationFullfillmentInstructions(String instructions) {
-
-		final MedicationFullfillmentInstructionsEntry professionnalInstructions = new MedicationFullfillmentInstructionsEntry();
-		professionnalInstructions.setTextReference(instructions);
-		setMedicationFullfillmentInstructions(professionnalInstructions);
-	}
-
-	/**
-	 * Sets the medication fullfillment instructions.
-	 *
-	 * @param entry
-	 *            the new medication fullfillment instructions
-	 */
-	public void setMedicationFullfillmentInstructions(MedicationFullfillmentInstructionsEntry entry) {
-		final MedicationFullfillmentInstructionsEntry old = this.getMedicationFullfillmentInstructions();
+	public void setMedicationFullfillmentInstructions(
+			MedicationFullfillmentInstructionsEntry entry) {
+		final MedicationFullfillmentInstructionsEntry old = this
+				.getMedicationFullfillmentInstructions();
 		if (old != null) {
 			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
 				if (old.getMdht() == entryRelationship.getAct()) {
@@ -761,12 +764,26 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 				}
 			}
 		} else {
-			final EntryRelationship entryRelationship = CDAFactory.eINSTANCE.createEntryRelationship();
+			final EntryRelationship entryRelationship = CDAFactory.eINSTANCE
+					.createEntryRelationship();
 			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 			entryRelationship.setAct(entry.getMdht());
 			entryRelationship.setInversionInd(Boolean.TRUE);
 			this.getMdht().getEntryRelationships().add(entryRelationship);
 		}
+	}
+
+	/**
+	 * Sets the medication fullfillment instructions.
+	 *
+	 * @param instructions
+	 *            the new medication fullfillment instructions
+	 */
+	public void setMedicationFullfillmentInstructions(String instructions) {
+
+		final MedicationFullfillmentInstructionsEntry professionnalInstructions = new MedicationFullfillmentInstructionsEntry();
+		professionnalInstructions.setTextReference(instructions);
+		setMedicationFullfillmentInstructions(professionnalInstructions);
 	}
 
 	/**
@@ -777,39 +794,16 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	 * @param languageCode
 	 *            the language code
 	 */
-	public void setMedicationsSpecialConditions(MedicationsSpecialConditions code, LanguageCode languageCode) {
+	public void setMedicationsSpecialConditions(MedicationsSpecialConditions code,
+			LanguageCode languageCode) {
 		if (code != null) {
 			this.getMdht().setCode(code.getCode(languageCode).getCD());
 		}
 	}
 
 	/**
-	 * Sets the patient medical instructions.
-	 *
-	 * @param entry
-	 *            the new patient medical instructions
-	 */
-	public void setPatientMedicalInstructions(PatientMedicalInstructionsEntry entry) {
-		final PatientMedicalInstructionsEntry old = this.getPatientMedicalInstructions();
-		if (old != null) {
-			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
-				if (old.getMdht() == entryRelationship.getAct()) {
-					entryRelationship.setAct(entry.getMdht());
-					break;
-				}
-			}
-		} else {
-			final EntryRelationship entryRelationShip = CDAFactory.eINSTANCE.createEntryRelationship();
-			entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
-			entryRelationShip.setAct(entry.getMdht());
-			entryRelationShip.setInversionInd(Boolean.TRUE);
-			this.getMdht().getEntryRelationships().add(entryRelationShip);
-		}
-	}
-
-	/**
 	 * Set type of dosing to Normal
-	 * 
+	 *
 	 */
 	public void setNormalDosing() {
 		boolean alreadyPresent = false;
@@ -835,6 +829,31 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	}
 
 	/**
+	 * Sets the patient medical instructions.
+	 *
+	 * @param entry
+	 *            the new patient medical instructions
+	 */
+	public void setPatientMedicalInstructions(PatientMedicalInstructionsEntry entry) {
+		final PatientMedicalInstructionsEntry old = this.getPatientMedicalInstructions();
+		if (old != null) {
+			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+				if (old.getMdht() == entryRelationship.getAct()) {
+					entryRelationship.setAct(entry.getMdht());
+					break;
+				}
+			}
+		} else {
+			final EntryRelationship entryRelationShip = CDAFactory.eINSTANCE
+					.createEntryRelationship();
+			entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+			entryRelationShip.setAct(entry.getMdht());
+			entryRelationShip.setInversionInd(Boolean.TRUE);
+			this.getMdht().getEntryRelationships().add(entryRelationShip);
+		}
+	}
+
+	/**
 	 * Sets the pharm substitution handling entry.
 	 *
 	 * @param entry
@@ -850,7 +869,8 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 				}
 			}
 		} else {
-			final EntryRelationship entryRelationShip = CDAFactory.eINSTANCE.createEntryRelationship();
+			final EntryRelationship entryRelationShip = CDAFactory.eINSTANCE
+					.createEntryRelationship();
 			entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
 			entryRelationShip.setSupply(entry.getMdht());
 			this.getMdht().getEntryRelationships().add(entryRelationShip);
@@ -877,17 +897,20 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	 *            the new reason for
 	 */
 	public void setReasonFor(Identificator internalReferenceIdentificator) {
-		if ((getMdht().getInternalReferences() != null) && (getMdht().getInternalReferences().size() > 0)) {
+		if ((getMdht().getInternalReferences() != null)
+				&& (getMdht().getInternalReferences().size() > 0)) {
 			final InternalReference internalReference = getMdht().getInternalReferences().get(0);
 			internalReference.getIds().clear();
 			internalReference.getIds().add(internalReferenceIdentificator.getIi());
 		} else {
-			final InternalReference internalReference = IHEFactory.eINSTANCE.createInternalReference().init();
+			final InternalReference internalReference = IHEFactory.eINSTANCE
+					.createInternalReference().init();
 			internalReference.getIds().add(internalReferenceIdentificator.getIi());
 			internalReference.setMoodCode(x_DocumentActMood.EVN);
 			internalReference.setClassCode(x_ActClassDocumentEntryAct.ACT);
 
-			final EntryRelationship entryRelationShip = CDAFactory.eINSTANCE.createEntryRelationship();
+			final EntryRelationship entryRelationShip = CDAFactory.eINSTANCE
+					.createEntryRelationship();
 			// needed? entryRelationShip.setInversionInd(false);
 			entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.RSON);
 			entryRelationShip.setAct(internalReference);
@@ -921,7 +944,7 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 
 	/**
 	 * Set type of dosing to Split
-	 * 
+	 *
 	 */
 	public void setSplitDosing() {
 		boolean alreadyPresent = false;
@@ -947,39 +970,14 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	}
 
 	/**
-	 * Defines the starting and ending date (clear existing ones before)
-	 * 
+	 * Defines the starting and ending date
+	 *
 	 * This is the first EffectiveTime in the sequence --> list of effective
 	 * times is cleared before setting this one
 	 *
-	 * @param effectiveTime
-	 *            Initial effective time
-	 */
-	public void setStartEndDate(IVL_TS effectiveTime) {
-
-		this.getMdht().getEffectiveTimes().clear();
-
-		final IVL_TS time = CdaUtil.getMdhtDatatypesFactoryInstance().createIVL_TS();
-		if (effectiveTime.getLow() != null && effectiveTime.getLow().getValue() != null)
-			time.setLow(DateUtil.createIVXB_TSFromDate(DateUtil.parseDateyyyyMMdd(effectiveTime.getLow().getValue())));
-		else time.setLow(null);
-		
-		if (effectiveTime.getHigh() != null && effectiveTime.getHigh().getValue() != null)
-			time.setHigh(DateUtil.createIVXB_TSFromDate(DateUtil.parseDateyyyyMMdd(effectiveTime.getHigh().getValue())));
-		else time.setHigh(null);
-
-		this.getMdht().getEffectiveTimes().add(time);
-	}
-	
-	/**
-	 * Defines the starting and ending date
-	 * 
-	 * This is the first EffectiveTime in the sequence --> list of effective
-	 * times is cleared before setting this one
-	 * 
 	 * @param startingDate
 	 *            Starting date
-	 * 
+	 *
 	 * @param endingDate
 	 *            Ending date
 	 */
@@ -994,15 +992,44 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 	}
 
 	/**
+	 * Defines the starting and ending date (clear existing ones before)
+	 *
+	 * This is the first EffectiveTime in the sequence --> list of effective
+	 * times is cleared before setting this one
+	 *
+	 * @param effectiveTime
+	 *            Initial effective time
+	 */
+	public void setStartEndDate(IVL_TS effectiveTime) {
+
+		this.getMdht().getEffectiveTimes().clear();
+
+		final IVL_TS time = CdaUtil.getMdhtDatatypesFactoryInstance().createIVL_TS();
+		if (effectiveTime.getLow() != null && effectiveTime.getLow().getValue() != null)
+			time.setLow(DateUtil.createIVXB_TSFromDate(
+					DateUtil.parseDateyyyyMMdd(effectiveTime.getLow().getValue())));
+		else
+			time.setLow(null);
+
+		if (effectiveTime.getHigh() != null && effectiveTime.getHigh().getValue() != null)
+			time.setHigh(DateUtil.createIVXB_TSFromDate(
+					DateUtil.parseDateyyyyMMdd(effectiveTime.getHigh().getValue())));
+		else
+			time.setHigh(null);
+
+		this.getMdht().getEffectiveTimes().add(time);
+	}
+
+	/**
 	 * Sets the subordinate substance administration.
 	 *
 	 * @param sequenceNumber
-	 *            the sequence number
+	 *            the sequence number.
 	 * @param substanceAdmin
-	 *            the substance admin
-	 * @param x_DocumentSubstanceMood.INT
+	 *            the substance administration.
 	 */
-	public void setSubordinateSubstanceAdministration(int sequenceNumber, SubstanceAdministration substanceAdmin) {
+	public void setSubordinateSubstanceAdministration(int sequenceNumber,
+			SubstanceAdministration substanceAdmin) {
 		for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
 			if (entryRelationship.getSubstanceAdministration() != null
 					&& entryRelationship.getSequenceNumber().getValue().equals(sequenceNumber)) {
@@ -1031,10 +1058,12 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 			final SupplyEntry supplyEntry = getMdht().getPharmSupplyEntry();
 			supplyEntry.setQuantity(pq);
 		} else {
-			final PharmSupplyEntry supplyEntry = PHARMFactory.eINSTANCE.createPharmSupplyEntry().init();
+			final PharmSupplyEntry supplyEntry = PHARMFactory.eINSTANCE.createPharmSupplyEntry()
+					.init();
 			supplyEntry.setQuantity(pq);
 			supplyEntry.setIndependentInd(DatatypesFactory.eINSTANCE.createBL(false));
-			final EntryRelationship entryRelationShip = CDAFactory.eINSTANCE.createEntryRelationship();
+			final EntryRelationship entryRelationShip = CDAFactory.eINSTANCE
+					.createEntryRelationship();
 			entryRelationShip.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
 			entryRelationShip.setSupply(supplyEntry);
 			this.getMdht().getEntryRelationships().add(entryRelationShip);
@@ -1043,7 +1072,7 @@ public class MedicationItemEntry extends MdhtFacade<org.openhealthtools.mdht.uml
 
 	/**
 	 * Set type of dosing to Tapered
-	 * 
+	 *
 	 */
 	public void setTaperedDosing() {
 		boolean alreadyPresent = false;

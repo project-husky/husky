@@ -26,7 +26,6 @@ import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.Material;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassManufacturedProduct;
@@ -34,7 +33,8 @@ import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassManufacturedProduct;
 /**
  * The Class CdaChMtpsMtp. see also CDA CH MTPS 7.4.2.3
  */
-public class ManufacturedProduct extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ManufacturedProduct> {
+public class ManufacturedProduct
+		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ManufacturedProduct> {
 
 	/**
 	 * Instantiates a new cda ch mtps mtp.
@@ -71,55 +71,41 @@ public class ManufacturedProduct extends MdhtFacade<org.openhealthtools.mdht.uml
 	 *
 	 * @see org.ehealth_connector.common.enums.CodeSystems
 	 *
-	 * 2017/05/02 According to CDA-CH-II Medications-template, two IDs can be present:
-	 * 			  root 1.3.88 --> Product GLN HAS TO BE PRESENT
-	 * 			  root 1.3.160 --> Package GTIN HAS TO BE PRESENT IF KNOWN
-	 * 			  --> several ids may be present
-	 * 
+	 *      2017/05/02 According to CDA-CH-II Medications-template, two IDs can
+	 *      be present: root 1.3.88 --> Product GLN HAS TO BE PRESENT root
+	 *      1.3.160 --> Package GTIN HAS TO BE PRESENT IF KNOWN --> several ids
+	 *      may be present
+	 *
 	 * @param gtinOrPharmacodeOrGln
-	 *            the new manufactured product id. If null, a NullFlavor.NA
-	 *            will be set instead and all others will be removed
+	 *            the new manufactured product id. If null, a NullFlavor.NA will
+	 *            be set instead and all others will be removed
 	 */
 	public void addManufacturedProductId(Identificator gtinOrPharmacodeOrGln) {
 		if (gtinOrPharmacodeOrGln != null) {
 			getMdht().getIds().add(gtinOrPharmacodeOrGln.getIi());
 		} else {
 			this.getMdht().getIds().clear();
-			this.getMdht().getIds().add(CdaUtil.getMdhtDatatypesFactoryInstance().createII(NullFlavor.NA));
+			this.getMdht().getIds()
+					.add(CdaUtil.getMdhtDatatypesFactoryInstance().createII(NullFlavor.NA));
 		}
 	}
 
 	/**
-	 * Clears the Manufactured Product in order to make a null flavored manufactured product
-	 * (required for references to MTP and PRE items)
-	 * 
+	 * Clears the Manufactured Product in order to make a null flavored
+	 * manufactured product (required for references to MTP and PRE items)
+	 *
 	 */
 	public void emptyManufacturedProduct() {
-    	this.getMdht().getTemplateIds().clear();
-    	this.setManufacturedMaterial(null);
-    	this.getMdht().getIds().clear();
-    	this.getMdht().unsetClassCode();
-	}
-	
-	/**
-	 * Gets the manufacturer organization
-	 * 
-	 * @param manufacturerOrganization
-	 *            Manufacturer organization
-	 * 
-	 */
-	public Organization getManufacturerOrganization() {
-		if (this.getMdht().getManufacturerOrganization() != null)
-			return new Organization(this.getMdht().getManufacturerOrganization());
-		return null;
+		this.getMdht().getTemplateIds().clear();
+		this.setManufacturedMaterial(null);
+		this.getMdht().getIds().clear();
+		this.getMdht().unsetClassCode();
 	}
 
 	/**
-	 * Gets the manufactured material
-	 * 
-	 * @param manufacturedMaterial
-	 *            Manufactured material
-	 * 
+	 * Gets the manufactured material.
+	 *
+	 * @return the manufactured material
 	 */
 	public ManufacturedMaterial getManufacturedMaterial() {
 		if (this.getMdht().getManufacturedMaterial() != null)
@@ -128,30 +114,13 @@ public class ManufacturedProduct extends MdhtFacade<org.openhealthtools.mdht.uml
 	}
 
 	/**
-	 * Gets the product id from the ManufacturedProduct
+	 * Gets the manufactured product package id.
 	 *
-	 * @return the swiss index GLN, null otherwise
-	 */
-	public Identificator getManufacturedProductProductId() {
-		for (final II id : getMdht().getIds()) {
-			if ((id.getRoot() != null)
-					&& id.getRoot().equals(CodeSystems.GLN.getCodeSystemId())) {
-				final Identificator ide = new Identificator(id);
-				return ide;
-			}
-		}
-		return null;
-	}
-
-	/**
-	 * Gets the package id from the ManufacturedProduct
-	 *
-	 * @return the swiss index GTIN, null otherwise
+	 * @return the manufactured product package id (swiss index GTIN) or null.
 	 */
 	public Identificator getManufacturedProductPackageId() {
 		for (final II id : getMdht().getIds()) {
-			if ((id.getRoot() != null)
-					&& id.getRoot().equals(CodeSystems.GTIN.getCodeSystemId())) {
+			if ((id.getRoot() != null) && id.getRoot().equals(CodeSystems.GTIN.getCodeSystemId())) {
 				final Identificator ide = new Identificator(id);
 				return ide;
 			}
@@ -175,38 +144,64 @@ public class ManufacturedProduct extends MdhtFacade<org.openhealthtools.mdht.uml
 		return null;
 	}
 
+	/**
+	 * Gets the product id from the ManufacturedProduct
+	 *
+	 * @return the swiss index GLN, null otherwise
+	 */
+	public Identificator getManufacturedProductProductId() {
+		for (final II id : getMdht().getIds()) {
+			if ((id.getRoot() != null) && id.getRoot().equals(CodeSystems.GLN.getCodeSystemId())) {
+				final Identificator ide = new Identificator(id);
+				return ide;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the manufacturer organization.
+	 *
+	 * @return the manufacturer organization
+	 */
+	public Organization getManufacturerOrganization() {
+		if (this.getMdht().getManufacturerOrganization() != null)
+			return new Organization(this.getMdht().getManufacturerOrganization());
+		return null;
+	}
+
+	/**
+	 * Sets the manufactured material
+	 *
+	 * @param manufacturedMaterial
+	 *            Manufactured material - if null, a NullFlavor.NA material is
+	 *            generated
+	 *
+	 */
+	public void setManufacturedMaterial(ManufacturedMaterial manufacturedMaterial) {
+		if (manufacturedMaterial != null) {
+			ManufacturedMaterial material = new ManufacturedMaterial(
+					manufacturedMaterial.getMdht());
+			this.getMdht().setManufacturedMaterial(material.getMdht());
+		} else {
+			final Material material = CdaUtil.getMdhtCdaFactoryInstance().createMaterial();
+			material.setNullFlavor(NullFlavor.NA);
+			material.getTemplateIds().clear();
+			this.getMdht().setManufacturedMaterial(material);
+		}
+	}
 
 	/**
 	 * Sets the manufacturer organization
-	 * 
+	 *
 	 * @param manufacturerOrganization
 	 *            Manufacturer organization
-	 * 
+	 *
 	 */
 	public void setManufacturerOrganization(Organization manufacturerOrganization) {
 		if (manufacturerOrganization != null) {
 			Organization newOrg = new Organization(manufacturerOrganization.getMdhtOrganization());
 			this.getMdht().setManufacturerOrganization(newOrg.getMdhtOrganization());
-		}
-	}
-
-	/**
-	 * Sets the manufactured material
-	 * 
-	 * @param manufacturedMaterial
-	 *            Manufactured material - if null, a NullFlavor.NA material is generated
-	 * 
-	 */
-	public void setManufacturedMaterial(ManufacturedMaterial manufacturedMaterial) {
-		if (manufacturedMaterial != null) {
-			ManufacturedMaterial material = new ManufacturedMaterial(manufacturedMaterial.getMdht());
-			this.getMdht().setManufacturedMaterial(material.getMdht());
-		}
-		else {
-			final Material material = CdaUtil.getMdhtCdaFactoryInstance().createMaterial();
-			material.setNullFlavor(NullFlavor.NA);
-			material.getTemplateIds().clear();
-			this.getMdht().setManufacturedMaterial(material);
 		}
 	}
 

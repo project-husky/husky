@@ -344,10 +344,11 @@ public class Address {
 	}
 
 	/**
-	 * Sets the state <div class="de">Setzt den Kanton</div>
+	 * <div class="en">Sets the state</div><div class="de">Setzt den
+	 * Kanton</div>.
 	 *
-	 * @param country
-	 *            the country
+	 * @param state
+	 *            the new state
 	 */
 	public void setState(String state) {
 		if (state != null) {
