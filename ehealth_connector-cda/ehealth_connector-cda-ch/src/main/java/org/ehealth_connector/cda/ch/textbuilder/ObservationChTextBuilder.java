@@ -74,13 +74,14 @@ public class ObservationChTextBuilder extends TextBuilder {
 	private final String posCodeSystemOid;
 
 	/**
-	 * Constructor. TODO tsc neu dokumentieren
+	 * Instantiates a new observation text builder for CDA-CH.
 	 *
+	 * @param section
+	 *            the section.
 	 * @param contentIdPrefix
-	 *            the content id prefix
+	 *            the content id prefix for text references.
 	 * @param lang
-	 *            the desired language for text generation (default language is
-	 *            English)
+	 *            the language.
 	 */
 	public ObservationChTextBuilder(AbstractLaboratorySpecialtySection section,
 			ContentIdPrefix contentIdPrefix, LanguageCode lang) {
@@ -88,15 +89,14 @@ public class ObservationChTextBuilder extends TextBuilder {
 	}
 
 	/**
-	 * Constructor. TODO tsc neu dokumentieren
+	 * Instantiates a new observation text builder for CDA-CH.
 	 *
-	 * @param list
-	 *            a list of laboratory observations
+	 * @param section
+	 *            the section.
 	 * @param contentIdPrefix
-	 *            the content id prefix
+	 *            the content id prefix for text references.
 	 * @param lang
-	 *            the desired language for text generation (default language is
-	 *            English)
+	 *            the language.
 	 * @param posCodeSystemOid
 	 *            the oid of the code system to be used as position (e.g.
 	 *            2.16.756.5.30.1.129.1.3 for the Swiss Analysis List)
@@ -107,15 +107,18 @@ public class ObservationChTextBuilder extends TextBuilder {
 	}
 
 	/**
-	 * Constructor. TODO tsc neu dokumentieren
+	 * Instantiates a new observation text builder for CDA-CH.
 	 *
-	 * @param list
-	 *            a list of laboratory observations
+	 * @param section
+	 *            the section.
 	 * @param contentIdPrefix
-	 *            the content id prefix
+	 *            the content id prefix for text refernces.
 	 * @param lang
-	 *            the desired language for text generation (default language is
-	 *            English)
+	 *            the language.
+	 * @param posCodeSystemOid
+	 *            the pos code system oid the oid of the code system to be used
+	 *            as position (e.g. 2.16.756.5.30.1.129.1.3 for the Swiss
+	 *            Analysis List)
 	 */
 	public ObservationChTextBuilder(AbstractLaboratorySpecialtySection section,
 			String contentIdPrefix, LanguageCode lang, String posCodeSystemOid) {
@@ -134,13 +137,14 @@ public class ObservationChTextBuilder extends TextBuilder {
 	}
 
 	/**
-	 * Constructor. TODO tsc neu dokumentieren
+	 * Instantiates a new observation text builder for CDA-CH.
 	 *
+	 * @param section
+	 *            the section.
 	 * @param contentIdPrefix
-	 *            the content id prefix
+	 *            the content id prefix for text references.
 	 * @param lang
-	 *            the desired language for text generation (default language is
-	 *            English)
+	 *            the language.
 	 */
 	public ObservationChTextBuilder(CodedVitalSignsSection section, ContentIdPrefix contentIdPrefix,
 			LanguageCode lang) {
@@ -148,15 +152,14 @@ public class ObservationChTextBuilder extends TextBuilder {
 	}
 
 	/**
-	 * Constructor. TODO tsc neu dokumentieren
+	 * Instantiates a new observation text builder for CDA-CH.
 	 *
-	 * @param list
-	 *            a list of laboratory observations
+	 * @param section
+	 *            the section.
 	 * @param contentIdPrefix
-	 *            the content id prefix
+	 *            the content id prefix for text refernces.
 	 * @param lang
-	 *            the desired language for text generation (default language is
-	 *            English)
+	 *            the language.
 	 */
 	public ObservationChTextBuilder(CodedVitalSignsSection section, String contentIdPrefix,
 			LanguageCode lang) {
@@ -172,7 +175,14 @@ public class ObservationChTextBuilder extends TextBuilder {
 	}
 
 	/**
-	 * Constructor. TODO tsc neu dokumentieren
+	 * Instantiates a new observation text builder for CDA-CH.
+	 *
+	 * @param section
+	 *            the section.
+	 * @param contentIdPrefix
+	 *            the content id prefix for text references.
+	 * @param lang
+	 *            the language.
 	 */
 	public ObservationChTextBuilder(StudiesSummarySection section, ContentIdPrefix contentIdPrefix,
 			LanguageCode lang) {
@@ -180,7 +190,14 @@ public class ObservationChTextBuilder extends TextBuilder {
 	}
 
 	/**
-	 * Constructor. TODO tsc neu dokumentieren
+	 * Instantiates a new observation text builder for CDA-CH.
+	 *
+	 * @param section
+	 *            the section.
+	 * @param contentIdPrefix
+	 *            the content id prefix for text references.
+	 * @param lang
+	 *            the language.
 	 */
 	public ObservationChTextBuilder(StudiesSummarySection section, String contentIdPrefix,
 			LanguageCode lang) {
@@ -235,7 +252,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	}
 
 	/**
-	 * TODO tsc dokumentieren Adds the table header.
+	 * Adds the table header for the CodedVitalSignsSection.
 	 */
 	private void addTableHeaderCodedVitalSignsSection() {
 
@@ -261,7 +278,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	}
 
 	/**
-	 * TODO tsc dokumentieren Adds the table header.
+	 * Adds the table header for the LaboratorySpecialtySection.
 	 */
 	private void addTableHeaderLaboratorySpecialtySection() {
 
@@ -299,12 +316,14 @@ public class ObservationChTextBuilder extends TextBuilder {
 	}
 
 	/**
-	 * TODO tsc: Dokumentieren Adds the table row.
+	 * Adds a table row to the narrative text of the CodedVitalSignsSection.
 	 *
 	 * @param rowNumber
-	 *            the row number
+	 *            the row number.
+	 * @param battery
+	 *            the laboratory observation battery (organizer).
 	 * @param observation
-	 *            the observation
+	 *            the observation.
 	 */
 	private void addTableRowCodedVitalSignsSection(int rowNumber, Organizer battery,
 			AbstractObservation observation) {
@@ -423,12 +442,14 @@ public class ObservationChTextBuilder extends TextBuilder {
 	}
 
 	/**
-	 * TODO tsc: Dokumentieren Adds the table row.
+	 * Adds a table row to the narrative text of the LaboratorySpecialtySection.
 	 *
 	 * @param rowNumber
-	 *            the row number
+	 *            the row number.
+	 * @param battery
+	 *            the laboratory observation battery (organizer).
 	 * @param observation
-	 *            the observation
+	 *            the observation.
 	 */
 	private void addTableRowLaboratorySpecialtySection(int rowNumber,
 			LaboratoryBatteryOrganizer battery, AbstractObservation observation) {
@@ -740,7 +761,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	}
 
 	/**
-	 * Gets the narrative text of the observation result obtention date
+	 * Gets the narrative text of the observation result obtention date.
 	 *
 	 * @return the narrative text of the specimen received date
 	 */
@@ -827,6 +848,13 @@ public class ObservationChTextBuilder extends TextBuilder {
 		return retVal;
 	}
 
+	/**
+	 * Gets the value for the position column.
+	 *
+	 * @param code
+	 *            the code.
+	 * @return the value for the position column.
+	 */
 	private String getPos(Code code) {
 		if (!"".equals(posCodeSystemOid)) {
 			for (Code item : code.getTranslations()) {
@@ -838,7 +866,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	}
 
 	/**
-	 * Gets the narrative text of the specimen collection approach site
+	 * Gets the narrative text of the specimen collection approach site.
 	 *
 	 * @return the narrative text of the specimen collection approach site
 	 */
@@ -866,7 +894,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	}
 
 	/**
-	 * Gets the narrative text of the specimen collection date
+	 * Gets the narrative text of the specimen collection date.
 	 *
 	 * @return the narrative text of the specimen collection date
 	 */
@@ -891,7 +919,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	}
 
 	/**
-	 * Gets the narrative text of the specimen material
+	 * Gets the narrative text of the specimen material.
 	 *
 	 * @return the narrative text of the specimen material
 	 */
@@ -930,7 +958,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	}
 
 	/**
-	 * Gets the narrative text of the specimen received date
+	 * Gets the narrative text of the specimen received date.
 	 *
 	 * @return the narrative text of the specimen received date
 	 */
@@ -965,9 +993,11 @@ public class ObservationChTextBuilder extends TextBuilder {
 	}
 
 	/**
-	 * Gets the narrative text of the vital sign target site
+	 * Gets the narrative text of the vital sign target site.
 	 *
-	 * @return the narrative text of the vital sign target site
+	 * @param observation
+	 *            the observation.
+	 * @return the narrative text of the vital sign target site.
 	 */
 	private String getVitalSignTargetSite(AbstractObservation observation) {
 		String retVal = "";
@@ -977,8 +1007,11 @@ public class ObservationChTextBuilder extends TextBuilder {
 	}
 
 	/**
-	 * Returns HTML formatted string.
+	 * Returns formatted string (similar to HTML but still conform to the CDA
+	 * schema) for the narrative text of the CDA section.
 	 *
+	 * @return the formatted string (similar to HTML but still conform to the
+	 *         CDA schema) for the narrative text of the CDA section.
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -1072,12 +1105,12 @@ public class ObservationChTextBuilder extends TextBuilder {
 	}
 
 	/**
-	 * Translates the interpretation code.
+	 * Translates the interpretation code into the current language.
 	 *
 	 * @param code
-	 *            the interpretation as code
+	 *            the interpretation as code.
 	 * @return the string the interpretation as narrative string in the current
-	 *         language
+	 *         language.
 	 */
 	private String translateInterpretationCode(Code code) {
 		String retVal = "";

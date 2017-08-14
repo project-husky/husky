@@ -259,66 +259,6 @@ public class CdaChLrtp
 
 	}
 
-	// TODO tsc
-	// /**
-	// * Convenience function to add a Laboratory Battery Organizer and create
-	// the
-	// * necessary elements. If these elements already exists, the Battery will
-	// be
-	// * added to new Laboratory Specialty Section. If you want to add the
-	// Battery
-	// * to an existing SpecialtySection, please use the according function of
-	// the
-	// * SpecimenAct Class.
-	// *
-	// * These elements are: LaboratorySpecialtySection (section code is derived
-	// * automatically from the first LaboratoryObservation enum)
-	// * LaboratoryReportProcessingEntry SpecimenAct with the given Laboratory
-	// * Battery Organizer
-	// *
-	// * @param organizer
-	// * the LaboratoryBatteryOrganizer holding at least one
-	// * LaboratoryObservation
-	// */
-	// public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer
-	// organizer) {
-	// LaboratorySpecialtySection laboratorySpecialtySection;
-	// // Try to determine the right code from the LaboratoryObservation and
-	// // set it
-	// // in the Section
-	// final String section =
-	// getSectionCodeFromLaboratoryObservationEnum(organizer);
-	// Code sectionCode = null;
-	// if (section != null) {
-	// sectionCode = SpecialtySections.getEnum(section).getCode();
-	// }
-	//
-	// if (sectionCode != null) {
-	// laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode,
-	// getLanguageCode());
-	// } else {
-	// laboratorySpecialtySection = new LaboratorySpecialtySection();
-	// }
-	// LaboratoryReportDataProcessingEntry lrdpe;
-	// lrdpe = new LaboratoryReportDataProcessingEntry();
-	//
-	// SpecimenAct se;
-	// if (lrdpe.getSpecimenAct() == null) {
-	// se = new SpecimenAct();
-	// if (sectionCode != null) {
-	// se.setCode(sectionCode);
-	// }
-	// } else {
-	// se = new SpecimenAct(lrdpe.getSpecimenAct().getMdht());
-	// }
-	//
-	// se.addLaboratoryBatteryOrganizer(organizer);
-	// lrdpe.setSpecimenAct(se);
-	// laboratorySpecialtySection.setLaboratoryReportDataProcessingEntry(lrdpe);
-	//
-	// addLaboratorySpecialtySection(laboratorySpecialtySection);
-	// }
-
 	/**
 	 * Adds a LaboratorySpecialtySection.
 	 *
@@ -329,30 +269,6 @@ public class CdaChLrtp
 			org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection laboratorySpecialtySection) {
 		getMdht().addSection(laboratorySpecialtySection.copy());
 	}
-
-	// TODO tsc löschen?
-	// /**
-	// * Sets a LaboratorySpecialtySection.
-	// *
-	// * @param laboratorySpecialtySection
-	// * the section
-	// */
-	// public void addLaboratorySpecialtySection(
-	// org.ehealth_connector.cda.ch.lab.lrtp.LaboratorySpecialtySection
-	// laboratorySpecialtySection) {
-	// // Create a new structured body
-	// if (getMdht().getLaboratorySpecialtySections().isEmpty()) {
-	// getMdht().addSection(laboratorySpecialtySection.copy());
-	// } else {
-	// // We need to create a new Structured Body element, as the section
-	// // list is
-	// // not modifiable
-	// final StructuredBody sb = CDAFactory.eINSTANCE.createStructuredBody();
-	// CdaUtil.addSectionToStructuredBodyAsCopy(sb,
-	// laboratorySpecialtySection.copy());
-	// getMdht().setStructuredBody(sb);
-	// }
-	// }
 
 	/**
 	 * Applies the privacy filter to all record target elements.

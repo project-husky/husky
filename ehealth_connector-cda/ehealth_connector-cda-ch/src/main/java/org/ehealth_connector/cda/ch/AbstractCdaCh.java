@@ -35,7 +35,11 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
 /**
- * CDA Dokument, das den Vorgaben der Spezifikation CDA-CH entspricht
+ * The Class AbstractCdaCh implements a CDA dcoument based on CDA-CH
+ * specification
+ *
+ * @param <EClinicalDocument>
+ *            the generic type
  */
 public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 		extends AbstractCda<EClinicalDocument> {
@@ -48,15 +52,24 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">Constructor for CdaCh documents</div>
-	 * <div class="de">Erstellt ein CdaCh Objekt</div> <div class="fr"></div>
+	 * <div class="de">Erstellt ein CdaCh Objekt</div> <div class="fr"></div>.
 	 *
 	 * @param doc
-	 *            the CDA-CH Object in its MDHT representation
+	 *            the CDA-CH Object in its MDHT representation.
 	 */
 	public AbstractCdaCh(EClinicalDocument doc) {
 		super(doc);
 	}
 
+	/**
+	 * <div class="en">Constructor for CdaCh documents</div>
+	 * <div class="de">Erstellt ein CdaCh Objekt</div> <div class="fr"></div>.
+	 *
+	 * @param doc
+	 *            the CDA-CH Object in its MDHT representation.
+	 * @param languageCode
+	 *            the desired document language.
+	 */
 	public AbstractCdaCh(EClinicalDocument doc, LanguageCode languageCode) {
 		super(doc, languageCode);
 	}
@@ -82,7 +95,13 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * TODO tsc dokumentieren
+	 * Generates the narrative text for laboratory observations.
+	 *
+	 * @param laboratorySpecialtySection
+	 *            the laboratory specialty section.
+	 * @param contentIdPrefix
+	 *            the content id prefix for text references.
+	 * @return the narrative text for laboratory observations.
 	 */
 	public String generateNarrativeTextLaboratoryObservations(
 			AbstractLaboratorySpecialtySection laboratorySpecialtySection, String contentIdPrefix) {
@@ -128,7 +147,14 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * TODO tsc dokumentieren
+	 * Generates the narrative text for laboratory observations.
+	 *
+	 * @param contentIdPrefix
+	 *            the content id prefix for text references.
+	 * @param posCodeSystemOid
+	 *            the oid of the code system to be used as position (e.g.
+	 *            2.16.756.5.30.1.129.1.3 for the Swiss Analysis List)
+	 * @return the narrative text for laboratory observations.
 	 */
 	public String generateNarrativeTextLaboratoryObservations(String contentIdPrefix,
 			String posCodeSystemOid) {
@@ -137,7 +163,13 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * TODO tsc dokumentieren
+	 * Generates the narrative text for laboratory observations.
+	 *
+	 * @param vitalSignsSection
+	 *            the vital signs section.
+	 * @param contentIdPrefix
+	 *            the content id prefix for text references.
+	 * @return the narrative text for laboratory observations.
 	 */
 	public String generateNarrativeTextVitalSignObservations(
 
@@ -149,7 +181,11 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * TODO tsc dokumentieren
+	 * Generates the narrative text for laboratory observations.
+	 *
+	 * @param contentIdPrefix
+	 *            the content id prefix for text references.
+	 * @return the narrative text for laboratory observations.
 	 */
 	public String generateNarrativeTextVitalSignObservations(String contentIdPrefix) {
 		return generateNarrativeTextVitalSignObservations(getCodedVitalSignsSection(),
@@ -196,9 +232,7 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 *
-	 * Method implementing
-	 *
+	 * Method implementing.
 	 */
 	@Override
 	public void initCda() {
@@ -264,5 +298,4 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 			getDoc().setSetId(ii);
 		}
 	}
-
 }

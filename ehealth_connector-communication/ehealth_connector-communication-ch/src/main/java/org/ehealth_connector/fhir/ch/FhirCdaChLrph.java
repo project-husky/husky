@@ -444,7 +444,7 @@ public class FhirCdaChLrph extends AbstractFhirCdaCh {
 		// LaboratorySpecialtySection
 		if (doc.isNarrativeTextGenerationEnabled()) {
 			doc.setNarrativeTextSectionLaboratorySpeciality(
-					doc.generateNarrativeTextLaboratoryObservations("TODOtscLab", null));
+					doc.generateNarrativeTextLaboratoryObservations("lss", null));
 		} else {
 			final String narrative = getNarrative(docManifest,
 					FhirCommon.urnUseAsLaboratorySpecialtySection);

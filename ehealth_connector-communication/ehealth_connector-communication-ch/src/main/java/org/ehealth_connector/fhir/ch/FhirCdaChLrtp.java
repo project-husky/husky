@@ -434,8 +434,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 				docManifest);
 		for (LaboratorySpecialtySection lss : lssList) {
 			if (doc.isNarrativeTextGenerationEnabled()) {
-				lss.setNarrativeText(
-						doc.generateNarrativeTextLaboratoryObservations(lss, "TODOtscLab"));
+				lss.setNarrativeText(doc.generateNarrativeTextLaboratoryObservations(lss, "lss"));
 			}
 			doc.addLaboratorySpecialtySection(lss);
 		}
@@ -447,7 +446,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		}
 		if (doc.isNarrativeTextGenerationEnabled()) {
 			doc.setNarrativeTextSectionCodedVitalSignsSection(
-					doc.generateNarrativeTextVitalSignObservations("TODOtscVS"));
+					doc.generateNarrativeTextVitalSignObservations("cvss"));
 		} else {
 			doc.setNarrativeTextSectionCodedVitalSignsSection(
 					getNarrative(docManifest, FhirCommon.urnUseAsCodedVitalSigns));
@@ -461,7 +460,7 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		}
 		if (doc.isNarrativeTextGenerationEnabled()) {
 			doc.setNarrativeTextSectionStudiesSummarySection(
-					doc.generateNarrativeTextBloodGroupObservations("TODOtscBG"));
+					doc.generateNarrativeTextBloodGroupObservations("ssss"));
 		} else {
 			doc.setNarrativeTextSectionStudiesSummarySection(
 					getNarrative(docManifest, FhirCommon.urnUseAsStudiesSummary));

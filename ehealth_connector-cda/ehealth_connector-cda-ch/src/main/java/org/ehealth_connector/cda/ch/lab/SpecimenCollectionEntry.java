@@ -185,6 +185,45 @@ public class SpecimenCollectionEntry
 	}
 
 	/**
+	 * Sets the original text for the specimen collection approach site code.
+	 *
+	 * @param originalText
+	 *            the original text for the specimen collection approach site
+	 *            code.
+	 */
+	public void setSpecimenCollectionApproachSiteCodeOriginalText(String originalText) {
+		setSpecimenCollectionApproachSiteCodeOriginalText(originalText, null);
+	}
+
+	/**
+	 * Sets the original text for the specimen collection approach site code.
+	 *
+	 * @param originalText
+	 *            the original text for the specimen collection approach site
+	 *            code.
+	 * @param textReference
+	 *            the text reference
+	 */
+	public void setSpecimenCollectionApproachSiteCodeOriginalText(String originalText,
+			String textReference) {
+		CD cd = null;
+		if (this.getMdht() != null)
+			if (this.getMdht().getApproachSiteCodes() != null)
+				if (this.getMdht().getApproachSiteCodes().size() > 0)
+					if (this.getMdht().getApproachSiteCodes().get(0) != null)
+						cd = this.getMdht().getApproachSiteCodes().get(0);
+		Code code = null;
+		if (cd != null) {
+			code = new Code(cd);
+			code.setOriginalText(originalText, textReference);
+		} else {
+			code = new Code(org.ehealth_connector.common.enums.NullFlavor.ASKED_BUT_UNKNOWN);
+			code.setOriginalText(originalText, textReference);
+			this.getMdht().getApproachSiteCodes().add(code.getCD());
+		}
+	}
+
+	/**
 	 * Sets the specimen material original text
 	 *
 	 * @param originalText
@@ -257,35 +296,6 @@ public class SpecimenCollectionEntry
 			if (!textReference.startsWith("#"))
 				textReference = "#" + textReference;
 			this.getMdht().setText(Util.createReference(textReference));
-		}
-	}
-
-	/**
-	 * TODO tsc
-	 */
-	public void SpecimenCollectionApproachSiteCodeOriginalText(String originalText) {
-		SpecimenCollectionApproachSiteCodeOriginalText(originalText, null);
-	}
-
-	/**
-	 * TODO tsc
-	 */
-	public void SpecimenCollectionApproachSiteCodeOriginalText(String originalText,
-			String textReference) {
-		CD cd = null;
-		if (this.getMdht() != null)
-			if (this.getMdht().getApproachSiteCodes() != null)
-				if (this.getMdht().getApproachSiteCodes().size() > 0)
-					if (this.getMdht().getApproachSiteCodes().get(0) != null)
-						cd = this.getMdht().getApproachSiteCodes().get(0);
-		Code code = null;
-		if (cd != null) {
-			code = new Code(cd);
-			code.setOriginalText(originalText, textReference);
-		} else {
-			code = new Code(org.ehealth_connector.common.enums.NullFlavor.ASKED_BUT_UNKNOWN);
-			code.setOriginalText(originalText, textReference);
-			this.getMdht().getApproachSiteCodes().add(code.getCD());
 		}
 	}
 }

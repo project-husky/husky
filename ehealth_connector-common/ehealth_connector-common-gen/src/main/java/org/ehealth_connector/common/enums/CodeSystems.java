@@ -179,14 +179,12 @@ public enum CodeSystems implements IdentityDomain {
 	SwissSoasHlaCodes("2.16.756.5.30.1.129.1.1.8", "HLA");
 
 	/**
-	 * TODO tsc dokumentieren <div class="en">Gets the Enum with a given
-	 * code</div> <div class="de">Liefert den Enum anhand eines gegebenen
-	 * codes</div>
+	 * <div class="en">Gets the Enum with a given OID</div>
+	 * <div class="de">Liefert den Enum anhand einer gegebenen OID</div>
 	 *
-	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
+	 * @param codeSystemId
+	 *            the code system OID.
+	 * @return the desired Enum.
 	 */
 	public static CodeSystems getEnum(String codeSystemId) {
 		for (CodeSystems x : values()) {

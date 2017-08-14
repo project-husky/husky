@@ -67,11 +67,6 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_InformationRecipient;
  * @param <EClinicalDocument>
  *            the generic type
  */
-/**
- * @author tony
- *
- * @param <EClinicalDocument>
- */
 public abstract class AbstractLaboratoryReport<EClinicalDocument extends ClinicalDocument>
 		extends AbstractCdaCh<EClinicalDocument> {
 
@@ -112,6 +107,7 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	protected AbstractLaboratoryReport(EClinicalDocument doc, LanguageCode languageCode,
 			String styleSheet, String css) {
 		super(doc, styleSheet, css);
+
 		// If the language code is null use default ENGLISH
 		if (languageCode == null) {
 			this.setLanguageCode(LanguageCode.ENGLISH);
@@ -120,6 +116,7 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 		}
 		setTitle(createDocumentTitle());
 		initCda();
+
 		// Fix RealmCode
 		final CS cs = DatatypesFactory.eINSTANCE.createCS();
 		cs.setCode(CountryCode.SWITZERLAND.getCodeValue());
@@ -183,7 +180,11 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	protected abstract String createDocumentTitle();
 
 	/**
-	 * TODO tsc dokumentieren
+	 * Generates the narrative text for blood group observations.
+	 *
+	 * @param contentIdPrefix
+	 *            the content id prefix for text references.
+	 * @return the narrative text for blood group observations.
 	 */
 	public String generateNarrativeTextBloodGroupObservations(String contentIdPrefix) {
 		return generateNarrativeTextBloodGroupObservations(getStudiesSummarySection(),
@@ -191,7 +192,13 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	}
 
 	/**
-	 * TODO tsc dokumentieren
+	 * Generates the narrative text for blood group observations.
+	 *
+	 * @param studiesSummarySection
+	 *            the StudiesSummarySection of the CDA document.
+	 * @param contentIdPrefix
+	 *            the content id prefix to be used for text references.
+	 * @return the narrative text for blood group observations.
 	 */
 	public String generateNarrativeTextBloodGroupObservations(
 
@@ -236,7 +243,7 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 
 	/**
 	 * <div class="en">Gets the laboratory observations</div>
-	 * <div class="de">Liefert alle Laborresultate zurück</div>
+	 * <div class="de">Liefert alle Laborresultate zurück</div>.
 	 *
 	 * @return List with laboratory observations
 	 */
@@ -277,8 +284,6 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	public String getNarrativeTextSectionLaboratorySpeciality() {
 		if ((getLaboratorySpecialtySection() != null)
 				&& (getLaboratorySpecialtySection().getText() != null)) {
-			// TODO tsc: Check
-			// return getLaboratorySpecialtySection().getText().getText();
 			return getLaboratorySpecialtySection().getText();
 		}
 		return null;
@@ -432,5 +437,4 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 		}
 		getRemarksSection().createStrucDocText(text);
 	}
-
 }
