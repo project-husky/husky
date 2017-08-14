@@ -18,12 +18,18 @@ package org.ehealth_connector.cda.ch;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.AbstractCda;
+import org.ehealth_connector.cda.ch.textbuilder.ObservationChTextBuilder;
+import org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.CountryCode;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.CDAPackage;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
+import org.openhealthtools.mdht.uml.cda.Section;
+import org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection;
+import org.openhealthtools.mdht.uml.cda.ihe.impl.CodedVitalSignsSectionImpl;
+import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -73,6 +79,109 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 	 */
 	public AbstractCdaCh(EClinicalDocument doc, String stylesheet, String css) {
 		super(doc, stylesheet, css);
+	}
+
+	/**
+	 * TODO tsc dokumentieren
+	 */
+	public String generateNarrativeTextLaboratoryObservations(
+			AbstractLaboratorySpecialtySection laboratorySpecialtySection, String contentIdPrefix) {
+		return generateNarrativeTextLaboratoryObservations(laboratorySpecialtySection,
+				contentIdPrefix, null);
+	}
+
+	/**
+	 * <div class="en">Generates the human readable text of the laboratory
+	 * observations chapter</div> <div class="de">Liefert den menschenlesbaren
+	 * Text zu dem Kapitel Laborresultate zurück</div>.
+	 *
+	 * @param laboratorySpecialtySection
+	 *            the laboratory specialty section
+	 * @param contentIdPrefix
+	 *            the content id prefix
+	 * @param posCodeSystemOid
+	 *            the oid of the code system to be used as position (e.g.
+	 *            2.16.756.5.30.1.129.1.3 for the Swiss Analysis List)
+	 * @return the laboratory observations text
+	 */
+	public String generateNarrativeTextLaboratoryObservations(
+			AbstractLaboratorySpecialtySection laboratorySpecialtySection, String contentIdPrefix,
+			String posCodeSystemOid) {
+		final ObservationChTextBuilder b = new ObservationChTextBuilder(laboratorySpecialtySection,
+				contentIdPrefix, LanguageCode.getEnum(getMdht().getLanguageCode().getCode()),
+				posCodeSystemOid);
+		return b.toString();
+	}
+
+	/**
+	 * <div class="en">Generates the human readable text of the laboratory
+	 * observations chapter</div> <div class="de">Liefert den menschenlesbaren
+	 * Text zu dem Kapitel Laborresultate zurück</div>.
+	 *
+	 * @param contentIdPrefix
+	 *            the content id prefix
+	 * @return the laboratory observations text
+	 */
+	public String generateNarrativeTextLaboratoryObservations(String contentIdPrefix) {
+		return generateNarrativeTextLaboratoryObservations(getLaboratorySpecialtySection(),
+				contentIdPrefix, null);
+	}
+
+	/**
+	 * TODO tsc dokumentieren
+	 */
+	public String generateNarrativeTextLaboratoryObservations(String contentIdPrefix,
+			String posCodeSystemOid) {
+		return generateNarrativeTextLaboratoryObservations(getLaboratorySpecialtySection(),
+				contentIdPrefix, posCodeSystemOid);
+	}
+
+	/**
+	 * TODO tsc dokumentieren
+	 */
+	public String generateNarrativeTextVitalSignObservations(
+
+			org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection vitalSignsSection,
+			String contentIdPrefix) {
+		final ObservationChTextBuilder b = new ObservationChTextBuilder(vitalSignsSection,
+				contentIdPrefix, LanguageCode.getEnum(getMdht().getLanguageCode().getCode()));
+		return b.toString();
+	}
+
+	/**
+	 * TODO tsc dokumentieren
+	 */
+	public String generateNarrativeTextVitalSignObservations(String contentIdPrefix) {
+		return generateNarrativeTextVitalSignObservations(getCodedVitalSignsSection(),
+				contentIdPrefix);
+	}
+
+	/**
+	 * Gets the coded vital signs section.
+	 *
+	 * @return the coded vital signs section
+	 */
+	private CodedVitalSignsSection getCodedVitalSignsSection() {
+		for (final Section s : getMdht().getAllSections()) {
+			if (s instanceof CodedVitalSignsSectionImpl) {
+				return (CodedVitalSignsSectionImpl) s;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Gets the laboratory specialty section.
+	 *
+	 * @return the laboratory specialty section
+	 */
+	public AbstractLaboratorySpecialtySection getLaboratorySpecialtySection() {
+		for (final Section s : getMdht().getAllSections()) {
+			if (s instanceof LaboratorySpecialtySection) {
+				return new AbstractLaboratorySpecialtySection((LaboratorySpecialtySection) s);
+			}
+		}
+		return null;
 	}
 
 	/**

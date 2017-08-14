@@ -593,7 +593,7 @@ public class CdaChVacdTest extends TestUtils {
 		lss2 = createLaboratoryObservation();
 		d.addLaboratoryObservation(lss1);
 		d.addLaboratoryObservation(lss2);
-		d.setNarrativeTextSectionLaboratorySpecialty(ts1);
+		d.setNarrativeTextSectionLaboratorySpeciality(ts1);
 		assertTrue(d.getNarrativeTextSectionLaboratorySpecialty().contains(ts1));
 
 		ph1 = createPregnancy();

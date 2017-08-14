@@ -35,6 +35,7 @@ import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.PregnancyHistory;
 import org.ehealth_connector.cda.ch.enums.RiskOfComplications;
 import org.ehealth_connector.cda.ch.enums.RiskOfExposure;
+import org.ehealth_connector.cda.ch.lab.lrph.LaboratorySpecialtySection;
 import org.ehealth_connector.cda.ch.textbuilder.AllergyConcernChTextBuilder;
 import org.ehealth_connector.cda.ch.textbuilder.ProblemConcernEntryChTextBuilder;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
@@ -469,7 +470,9 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		// create the CDA level 2 text (either generated or empty text with
 		// content reference)
 		if (isNarrativeTextGenerationEnabled()) {
-			lss.createStrucDocText(generateNarrativeTextLaboratoryObservations());
+			LaboratorySpecialtySection laboratorySpecialtySection = getLaboratorySpecialtySection();
+			lss.createStrucDocText(
+					generateNarrativeTextLaboratoryObservations(laboratorySpecialtySection, "lss"));
 		} else {
 			if (laboratoryObservation.getCommentText() != null) {
 				// Alle vorhandenen Kommentare zusammenfügen
@@ -482,9 +485,9 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 								+ " ";
 					}
 				}
-				setNarrativeTextSectionLaboratorySpecialty(allComments);
+				setNarrativeTextSectionLaboratorySpeciality(allComments);
 			} else {
-				setNarrativeTextSectionLaboratorySpecialty("-");
+				setNarrativeTextSectionLaboratorySpeciality("-");
 			}
 		}
 	}
@@ -762,23 +765,6 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	}
 
 	/**
-	 * <div class="en">Generates the human readable text of the laboratory
-	 * observations chapter</div> <div class="de">Liefert den menschenlesbaren
-	 * Text zu dem Kapitel Laborresultate zurück</div>
-	 *
-	 * @return the laboratory observations text
-	 */
-	public String generateNarrativeTextLaboratoryObservations() {
-		// TODO tsc wieder zum Laufen bringen
-		// final ObservationChTextBuilder b = new
-		// ObservationChTextBuilder(getLaboratoryObservations(),
-		// SectionsVACD.SEROLOGY_STUDIES,
-		// LanguageCode.getEnum(getMdht().getLanguageCode().getCode()));
-		// return b.toString();
-		return "TODO tsc";
-	}
-
-	/**
 	 * <div class="en">Generates the human readable text of the history of past
 	 * illness chapter</div> <div class="de">Liefert den menschenlesbaren Text
 	 * zu allen vergangenen Leiden zurück</div>
@@ -955,6 +941,23 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		return labObservations;
 	}
 
+	/**
+	 * Gets the laboratory specialty section.
+	 *
+	 * @return the laboratory specialty section
+	 */
+	@Override
+	public LaboratorySpecialtySection getLaboratorySpecialtySection() {
+		return new LaboratorySpecialtySection(getMdht().getLaboratorySpecialtySection());
+	}
+
+	/**
+	 * Gets the narrative text.
+	 *
+	 * @param s
+	 *            the section
+	 * @return the narrative text
+	 */
 	private String getNarrativeText(Section s) {
 		if (s != null) {
 			final StrucDocText t = s.getText();
@@ -1385,10 +1388,9 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 *            the cda document</div> <div class="de"> der neue text für den
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
-	public void setNarrativeTextSectionLaboratorySpecialty(String text) {
-		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsVACD.SEROLOGY_STUDIES, text);
+	public void setNarrativeTextSectionLaboratorySpeciality(String text) {
 		if (getDoc().getLaboratorySpecialtySection() != null) {
-			getDoc().getLaboratorySpecialtySection().createStrucDocText(sb.toString());
+			getDoc().getLaboratorySpecialtySection().createStrucDocText(text);
 		}
 	}
 

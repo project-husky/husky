@@ -58,7 +58,9 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 
 	public void add(AbstractVitalSignsOrganizer organizer, AbstractVitalSignObservation vitalSign,
 			Author author, String contendIdPrefix) {
+
 		myVitalSignObservations.add(vitalSign);
+
 		if (author == null) {
 			// default to author of document
 			if (!getMdht().getClinicalDocument().getAuthors().isEmpty()) {

@@ -171,7 +171,12 @@ public enum CodeSystems implements IdentityDomain {
 	 * OID: 2.16.840.1.113883.6.294 <div class="en">WHO Drug Dictionary
 	 * Medicinal Product ID</div>
 	 */
-	WHO_D_D_MED_PPROD_ID("2.16.840.1.113883.6.294", "WHO Drug Dictionary Medicinal Product ID");
+	WHO_D_D_MED_PPROD_ID("2.16.840.1.113883.6.294", "WHO Drug Dictionary Medicinal Product ID"),
+
+	/**
+	 * OID: 2.16.756.5.30.1.129.1.1.8 <div class="en">Swiss SOAS HLA Codes</div>
+	 */
+	SwissSoasHlaCodes("2.16.756.5.30.1.129.1.1.8", "HLA");
 
 	/**
 	 * TODO tsc dokumentieren <div class="en">Gets the Enum with a given

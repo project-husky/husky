@@ -326,7 +326,7 @@ public class CdaChEdesCommon {
 		final ObservationChTextBuilder b = new ObservationChTextBuilder(
 				(org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection) mCodedVitalSigns
 						.getMdht(),
-				"TODO tsc", LanguageCode.getEnum(mdhtDocument.getLanguageCode().getCode()));
+				"cvit", LanguageCode.getEnum(mdhtDocument.getLanguageCode().getCode()));
 		return b.toString();
 	}
 

@@ -373,12 +373,14 @@ public class Code {
 	 */
 	public String getCode() {
 		String codeStr = "";
-		if (mCD.getCode() == null) {
-			if (mCD.getNullFlavor() != null) {
-				mCD.getNullFlavor().getLiteral();
+		if (mCD != null) {
+			if (mCD.getCode() == null) {
+				if (mCD.getNullFlavor() != null) {
+					mCD.getNullFlavor().getLiteral();
+				}
+			} else {
+				codeStr = mCD.getCode();
 			}
-		} else {
-			codeStr = mCD.getCode();
 		}
 		return codeStr;
 	}

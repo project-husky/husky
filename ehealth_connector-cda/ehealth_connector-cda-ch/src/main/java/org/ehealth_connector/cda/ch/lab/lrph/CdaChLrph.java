@@ -184,8 +184,8 @@ public class CdaChLrph
 		laboratorySpecialtySection.addLaboratoryBatteryOrganizer(sectionCode, organizer,
 				getLanguageCode());
 		if (isNarrativeTextGenerationEnabled()) {
-			laboratorySpecialtySection.setText(generateNarrativeTextLaboratoryObservations(
-					laboratorySpecialtySection, "TODO tsc"));
+			laboratorySpecialtySection.setText(
+					generateNarrativeTextLaboratoryObservations(laboratorySpecialtySection, "lss"));
 		}
 		setLaboratorySpecialtySection(laboratorySpecialtySection);
 	}
@@ -479,6 +479,7 @@ public class CdaChLrph
 	 *
 	 * @return the laboratory specialty section
 	 */
+	@Override
 	public LaboratorySpecialtySection getLaboratorySpecialtySection() {
 		if (!getMdht().getLaboratorySpecialtySections().isEmpty()) {
 			return new LaboratorySpecialtySection(

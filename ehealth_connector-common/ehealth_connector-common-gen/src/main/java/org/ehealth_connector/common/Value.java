@@ -18,6 +18,7 @@
 package org.ehealth_connector.common;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.enums.Ucum;
@@ -28,9 +29,12 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
 import org.openhealthtools.mdht.uml.hl7.datatypes.INT;
+import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_INT;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
+import org.openhealthtools.mdht.uml.hl7.datatypes.IVXB_INT;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVXB_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
+import org.openhealthtools.mdht.uml.hl7.datatypes.QTY;
 import org.openhealthtools.mdht.uml.hl7.datatypes.RTO;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
@@ -143,6 +147,33 @@ public class Value {
 
 	public Value(BigDecimal low, Ucum lowUnit, BigDecimal high, Ucum highUnit) {
 		this(low, lowUnit.getCodeValue(), high, highUnit.getCodeValue());
+	}
+
+	/**
+	 * <div class="en">Instantiates a new value with the parameters for a MDHT
+	 * IVL_INT Objekt with two INT Values (A low and high bound of the
+	 * interval).</div> <div class="de">Instantiiert eine neues Value MDHT
+	 * IVL_INT Objekt mit zwei INT Werten (entspricht dem unteren und dem oberen
+	 * Ende des Intervalls).</div> <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param low
+	 *            The lower bound
+	 *
+	 * @param high
+	 *            The upper bound
+	 */
+	public Value(BigInteger low, BigInteger high) {
+		final IVL_INT ivlInt = DatatypesFactory.eINSTANCE.createIVL_INT();
+		final IVXB_INT mlow = DatatypesFactory.eINSTANCE.createIVXB_INT();
+		final IVXB_INT mhigh = DatatypesFactory.eINSTANCE.createIVXB_INT();
+
+		mlow.setValue(low);
+		ivlInt.setLow(mlow);
+
+		mhigh.setValue(high);
+		ivlInt.setHigh(mhigh);
+
+		mValue = ivlInt;
 	}
 
 	/**
@@ -423,6 +454,20 @@ public class Value {
 	}
 
 	/**
+	 * Returns the text of the underlying MDHT type BL
+	 *
+	 * @return the text of the underlying type BL
+	 */
+	public String getBlText() {
+		if (isBl()) {
+			final BL bl = (BL) mValue;
+			if (bl.getValue() != null)
+				return bl.getValue().toString();
+		}
+		return null;
+	}
+
+	/**
 	 * Return if this Value of the underlying MDHT type BL (boolean) is true or
 	 * false
 	 *
@@ -545,6 +590,81 @@ public class Value {
 	}
 
 	/**
+	 * Returns the unit of the underlying MDHT type RTO (Ratio)
+	 *
+	 * @return the unit of the underlying type RTO
+	 */
+	public String getRtoUnitText() {
+		if (isRto()) {
+			final RTO rto = (RTO) mValue;
+			String retVal = "";
+			String numeratorUnit = "";
+			String denominatorUnit = "";
+
+			if (rto != null) {
+				QTY numerator = rto.getNumerator();
+				QTY denominator = rto.getDenominator();
+				if (numerator != null) {
+					if (numerator instanceof PQ) {
+						numeratorUnit = ((PQ) numerator).getUnit();
+					}
+				}
+				if (denominator != null) {
+					if (denominator instanceof PQ) {
+						denominatorUnit = ((PQ) denominator).getUnit();
+					}
+				}
+			}
+			if (!"".equals(numeratorUnit))
+				numeratorUnit = " " + numeratorUnit;
+			if (!"".equals(denominatorUnit))
+				denominatorUnit = " " + denominatorUnit;
+
+			if (numeratorUnit.equals(denominatorUnit))
+				retVal = numeratorUnit;
+			else
+				retVal = numeratorUnit + " / " + denominatorUnit;
+
+			return retVal;
+		}
+		return null;
+	}
+
+	/**
+	 * Returns the text of the underlying MDHT type RTO (Ratio)
+	 *
+	 * @return the text of the underlying type RTO
+	 */
+	public String getRtoValueText() {
+		if (isRto()) {
+			final RTO rto = (RTO) mValue;
+			String retVal = "";
+			String numeratorValue = "";
+			String denominatorValue = "";
+
+			if (rto != null) {
+				QTY numerator = rto.getNumerator();
+				QTY denominator = rto.getDenominator();
+				if (numerator != null) {
+					if (numerator instanceof PQ) {
+						numeratorValue = ((PQ) numerator).getValue().toString();
+					} else
+						numeratorValue = "*** TODO: This is not yet implemented value type...";
+				}
+				if (denominator != null) {
+					if (denominator instanceof PQ) {
+						denominatorValue = ((PQ) denominator).getValue().toString();
+					} else
+						denominatorValue = "*** TODO: This is not yet implemented value type...";
+				}
+			}
+			retVal = numeratorValue + " / " + denominatorValue;
+			return retVal;
+		}
+		return null;
+	}
+
+	/**
 	 * <div class="en">Gets the value.</div> <div class="de">Liefert
 	 * value.</div> <div class="fr"></div> <div class="it"></div>
 	 *
@@ -660,14 +780,17 @@ public class Value {
 			// TODO This is draft implementation only! the text needs to be
 			// translated by the real code. Displaynames should never be
 			// used!
-			resultText = getCode().getDisplayName()
-					+ "*** TODO tsc this is draft implementation only";
+			resultText = getCode().getDisplayName();
 		else if (isPhysicalQuantity())
 			resultText = getPhysicalQuantityValue() + " " + getPhysicalQuantityUnit();
 		else if (isEd())
 			resultText = getEdText();
+		else if (isBl())
+			resultText = getBlText();
+		else if (isRto())
+			resultText = getRtoValueText() + " " + getRtoUnitText();
 		else
-			resultText = "*** TODO tsc not yet implemented value type";
+			resultText = "*** TODO: This is not yet implemented value type...";
 
 		if (resultText == null)
 			resultText = "";

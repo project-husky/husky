@@ -1575,8 +1575,11 @@ public class FhirCdaChVacd extends AbstractFhirCdaCh {
 						fhirObservation.getReferenceRangeFirstRep().getHigh().getValue(),
 						fhirObservation.getReferenceRangeFirstRep().getHigh().getUnit());
 			} else {
-				v = new Value(fhirObservation.getReferenceRangeFirstRep().getLow().getValue(),
-						fhirObservation.getReferenceRangeFirstRep().getHigh().getValue());
+				v = new Value(
+						fhirObservation.getReferenceRangeFirstRep().getLow().getValue()
+								.toBigInteger(),
+						fhirObservation.getReferenceRangeFirstRep().getHigh().getValue()
+								.toBigInteger());
 			}
 
 			rr.setValue(v);

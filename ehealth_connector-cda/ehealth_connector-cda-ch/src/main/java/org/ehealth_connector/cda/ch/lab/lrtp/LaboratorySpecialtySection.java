@@ -185,4 +185,8 @@ public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySecti
 		getMdht().getEntries().add(0, entry.copy());
 	}
 
+	public void setNarrativeText(String text) {
+		getMdht().createStrucDocText(text);
+	}
+
 }

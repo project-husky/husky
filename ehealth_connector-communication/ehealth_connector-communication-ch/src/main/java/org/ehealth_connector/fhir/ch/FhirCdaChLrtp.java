@@ -433,11 +433,11 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		final List<LaboratorySpecialtySection> lssList = getLrtpLaboratorySpecialtySections(
 				docManifest);
 		for (LaboratorySpecialtySection lss : lssList) {
+			if (doc.isNarrativeTextGenerationEnabled()) {
+				lss.setNarrativeText(
+						doc.generateNarrativeTextLaboratoryObservations(lss, "TODOtscLab"));
+			}
 			doc.addLaboratorySpecialtySection(lss);
-		}
-		if (doc.isNarrativeTextGenerationEnabled()) {
-			doc.setNarrativeTextSectionLaboratorySpeciality(
-					doc.generateNarrativeTextLaboratoryObservations("TODOtscLab", null));
 		}
 
 		// VitalSignsOrganizer
@@ -445,20 +445,27 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 		for (VitalSignsOrganizer vso : vsoList) {
 			doc.setVitalSignsOrganizer(vso);
 		}
+		if (doc.isNarrativeTextGenerationEnabled()) {
+			doc.setNarrativeTextSectionCodedVitalSignsSection(
+					doc.generateNarrativeTextVitalSignObservations("TODOtscVS"));
+		} else {
+			doc.setNarrativeTextSectionCodedVitalSignsSection(
+					getNarrative(docManifest, FhirCommon.urnUseAsCodedVitalSigns));
+
+		}
 
 		// BloodGroup
 		BloodGroupObservation bgo = getBloodGroupObservation(docManifest);
 		if (bgo != null) {
 			doc.setBloodGroupObservation(bgo);
 		}
-
-		// Narrative Text: CodedVitalSigns
-		doc.setNarrativeTextSectionCodedVitalSignsSection(
-				getNarrative(docManifest, FhirCommon.urnUseAsCodedVitalSigns));
-
-		// Narrative Text: StudiesSummary
-		doc.setNarrativeTextSectionStudiesSummarySection(
-				getNarrative(docManifest, FhirCommon.urnUseAsStudiesSummary));
+		if (doc.isNarrativeTextGenerationEnabled()) {
+			doc.setNarrativeTextSectionStudiesSummarySection(
+					doc.generateNarrativeTextBloodGroupObservations("TODOtscBG"));
+		} else {
+			doc.setNarrativeTextSectionStudiesSummarySection(
+					getNarrative(docManifest, FhirCommon.urnUseAsStudiesSummary));
+		}
 
 		return doc;
 	}
@@ -747,10 +754,12 @@ public class FhirCdaChLrtp extends AbstractFhirCdaCh {
 						fhirObservation.getReferenceRangeFirstRep().getHigh().getValue(),
 						fhirObservation.getReferenceRangeFirstRep().getHigh().getUnit());
 			} else {
-				v = new Value(fhirObservation.getReferenceRangeFirstRep().getLow().getValue(),
-						fhirObservation.getReferenceRangeFirstRep().getHigh().getValue());
+				v = new Value(
+						fhirObservation.getReferenceRangeFirstRep().getLow().getValue()
+								.toBigInteger(),
+						fhirObservation.getReferenceRangeFirstRep().getHigh().getValue()
+								.toBigInteger());
 			}
-
 			rr.setValue(v);
 
 			// Interpretation of the reference range

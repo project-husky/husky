@@ -125,8 +125,8 @@ public class ObservationChTextBuilder extends TextBuilder {
 		this.laboratoryAct = section.getAct();
 		this.contentIdPrefix = contentIdPrefix;
 		this.lang = lang;
-		// TODO extern steuern lassen
-		this.resBundle = ResourceBundle.getBundle("Messages", new Locale(lang.getCodeValue()));
+		this.resBundle = ResourceBundle.getBundle("Messages",
+				new Locale(lang.getCodeValue().toLowerCase()));
 		if (posCodeSystemOid == null)
 			this.posCodeSystemOid = "";
 		else
@@ -166,7 +166,8 @@ public class ObservationChTextBuilder extends TextBuilder {
 		this.codedVitalSignsSection = section;
 		this.contentIdPrefix = contentIdPrefix;
 		this.lang = lang;
-		this.resBundle = ResourceBundle.getBundle("Messages", new Locale(lang.getCodeValue()));
+		this.resBundle = ResourceBundle.getBundle("Messages",
+				new Locale(lang.getCodeValue().toLowerCase()));
 		this.posCodeSystemOid = "";
 	}
 
@@ -189,7 +190,8 @@ public class ObservationChTextBuilder extends TextBuilder {
 		this.studiesSummarySection = section;
 		this.contentIdPrefix = contentIdPrefix;
 		this.lang = lang;
-		this.resBundle = ResourceBundle.getBundle("Messages", new Locale(lang.getCodeValue()));
+		this.resBundle = ResourceBundle.getBundle("Messages",
+				new Locale(lang.getCodeValue().toLowerCase()));
 		this.posCodeSystemOid = "";
 	}
 
@@ -454,11 +456,31 @@ public class ObservationChTextBuilder extends TextBuilder {
 				if (value.isPhysicalQuantity()) {
 					tempValue = value.getPhysicalQuantityValue();
 					tempUnit = value.getPhysicalQuantityUnit();
+				} else if (value.isRto()) {
+					tempValue = value.getRtoValueText();
+					tempUnit = value.getRtoUnitText();
+				} else if (value.isBl()) {
+					if (value.getValue() != null) {
+						String temp = value.getBlText();
+						if (temp != null) {
+							tempValue = resBundle.getString("generic." + temp);
+						}
+					}
 				} else
 					tempValue = value.toString();
 			}
-			rowColumns
-					.add(getCellWithContent(getCellContent(tempValue), contentIdPrefix, rowNumber));
+			String sectionCode = "";
+			if (codedVitalSignsSection != null)
+				if (codedVitalSignsSection.getCode() != null)
+					sectionCode = codedVitalSignsSection.getCode().getCode();
+			if (laboratorySpecialtySection != null)
+				if (laboratorySpecialtySection.getCode() != null)
+					sectionCode = laboratorySpecialtySection.getCode().getCode();
+			if (studiesSummarySection != null)
+				if (studiesSummarySection.getCode() != null)
+					sectionCode = studiesSummarySection.getCode().getCode();
+			rowColumns.add(getCellWithContent(getCellContent(tempValue),
+					contentIdPrefix + "_" + sectionCode + "_", rowNumber));
 
 			// Unit
 			rowColumns.add(getCell(tempUnit));
@@ -487,9 +509,12 @@ public class ObservationChTextBuilder extends TextBuilder {
 				if (tempCodeSystem == "")
 					tempCodeSystem = observation.getCode().getCodeSystem();
 				if (!"".equals(tempCodeSystem)) {
-					String temp = CodeSystems.getEnum(tempCodeSystem).getCodeSystemName();
-					if (!"".equals(temp))
-						tempCodeSystem = temp;
+					CodeSystems codeSystem = CodeSystems.getEnum(tempCodeSystem);
+					if (codeSystem != null) {
+						String temp = codeSystem.getCodeSystemName();
+						if (!"".equals(temp))
+							tempCodeSystem = temp;
+					}
 				}
 			}
 			rowColumns.add(getCell(tempCodeSystem));
@@ -670,7 +695,10 @@ public class ObservationChTextBuilder extends TextBuilder {
 		for (Author author : observation.getAuthors()) {
 			if (!"".equals(retVal))
 				retVal = retVal + "<br />";
-			retVal = retVal + author.getCompleteName();
+			String name = author.getCompleteName();
+			if ("".equals(name))
+				name = resBundle.getString("generic.unknown");
+			retVal = retVal + name;
 			if (author.getTimeAsIVL_TS() != null) {
 				String dateStr = formatSingleTimestampOrInterval(author.getTimeAsIVL_TS());
 				if (!"".equals(dateStr))
@@ -769,7 +797,10 @@ public class ObservationChTextBuilder extends TextBuilder {
 		for (Performer performer : observation.getPerformers()) {
 			if (!"".equals(retVal))
 				retVal = retVal + "<br />";
-			retVal = retVal + performer.getCompleteName();
+			String name = performer.getCompleteName();
+			if ("".equals(name))
+				name = resBundle.getString("generic.unknown");
+			retVal = retVal + name;
 			if (performer.getTimeAsIVL_TS() != null) {
 				String dateStr = formatSingleTimestampOrInterval(performer.getTimeAsIVL_TS());
 				if (!"".equals(dateStr))

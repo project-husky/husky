@@ -172,13 +172,6 @@ public class CdaChLrqc
 	public CdaChLrqc(LanguageCode languageCode, String styleSheet, String css) {
 		super(CHFactory.eINSTANCE.createCdaChLrqc().init(), languageCode, styleSheet, css);
 		this.setLanguageCode(languageCode);
-		// set the fixed laboratory Code
-		final CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setCode("11502-2");
-		ce.setCodeSystem("2.16.840.1.113883.6.1");
-		ce.setCodeSystemName("LOINC");
-		ce.setDisplayName("LABORATORY REPORT.TOTAL");
-		getMdht().setCode(ce);
 	}
 
 	/**

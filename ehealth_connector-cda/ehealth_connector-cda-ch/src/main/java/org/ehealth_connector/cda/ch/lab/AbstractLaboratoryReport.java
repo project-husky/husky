@@ -49,12 +49,10 @@ import org.openhealthtools.mdht.uml.cda.Participant1;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ch.RemarksSection;
-import org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection;
-import org.openhealthtools.mdht.uml.cda.ihe.impl.CodedVitalSignsSectionImpl;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer;
-import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ADXP;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -127,6 +125,14 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 		cs.setCode(CountryCode.SWITZERLAND.getCodeValue());
 		getDoc().getRealmCodes().clear();
 		getDoc().getRealmCodes().add(cs);
+
+		// Default Document Code
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setCode("11502-2");
+		ce.setCodeSystem("2.16.840.1.113883.6.1");
+		ce.setCodeSystemName("LOINC");
+		ce.setDisplayName("LABORATORY REPORT.TOTAL");
+		getMdht().setCode(ce);
 	}
 
 	/**
@@ -196,95 +202,6 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	}
 
 	/**
-	 * TODO tsc dokumentieren
-	 */
-	public String generateNarrativeTextLaboratoryObservations(
-			AbstractLaboratorySpecialtySection laboratorySpecialtySection, String contentIdPrefix) {
-		return generateNarrativeTextLaboratoryObservations(laboratorySpecialtySection,
-				contentIdPrefix, null);
-	}
-
-	/**
-	 * <div class="en">Generates the human readable text of the laboratory
-	 * observations chapter</div> <div class="de">Liefert den menschenlesbaren
-	 * Text zu dem Kapitel Laborresultate zurück</div>.
-	 *
-	 * @param laboratorySpecialtySection
-	 *            the laboratory specialty section
-	 * @param contentIdPrefix
-	 *            the content id prefix
-	 * @param posCodeSystemOid
-	 *            the oid of the code system to be used as position (e.g.
-	 *            2.16.756.5.30.1.129.1.3 for the Swiss Analysis List)
-	 * @return the laboratory observations text
-	 */
-	public String generateNarrativeTextLaboratoryObservations(
-			AbstractLaboratorySpecialtySection laboratorySpecialtySection, String contentIdPrefix,
-			String posCodeSystemOid) {
-		final ObservationChTextBuilder b = new ObservationChTextBuilder(laboratorySpecialtySection,
-				contentIdPrefix, LanguageCode.getEnum(getMdht().getLanguageCode().getCode()),
-				posCodeSystemOid);
-		return b.toString();
-	}
-
-	/**
-	 * <div class="en">Generates the human readable text of the laboratory
-	 * observations chapter</div> <div class="de">Liefert den menschenlesbaren
-	 * Text zu dem Kapitel Laborresultate zurück</div>.
-	 *
-	 * @param contentIdPrefix
-	 *            the content id prefix
-	 * @return the laboratory observations text
-	 */
-	public String generateNarrativeTextLaboratoryObservations(String contentIdPrefix) {
-		return generateNarrativeTextLaboratoryObservations(getLaboratorySpecialtySection(),
-				contentIdPrefix, null);
-	}
-
-	/**
-	 * TODO tsc dokumentieren
-	 */
-	public String generateNarrativeTextLaboratoryObservations(String contentIdPrefix,
-			String posCodeSystemOid) {
-		return generateNarrativeTextLaboratoryObservations(getLaboratorySpecialtySection(),
-				contentIdPrefix, posCodeSystemOid);
-	}
-
-	/**
-	 * TODO tsc dokumentieren
-	 */
-	public String generateNarrativeTextVitalSignObservations(
-
-			org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection vitalSignsSection,
-			String contentIdPrefix) {
-		final ObservationChTextBuilder b = new ObservationChTextBuilder(vitalSignsSection,
-				contentIdPrefix, LanguageCode.getEnum(getMdht().getLanguageCode().getCode()));
-		return b.toString();
-	}
-
-	/**
-	 * TODO tsc dokumentieren
-	 */
-	public String generateNarrativeTextVitalSignObservations(String contentIdPrefix) {
-		return generateNarrativeTextVitalSignObservations(getCodedVitalSignsSection(),
-				contentIdPrefix);
-	}
-
-	/**
-	 * Gets the coded vital signs section.
-	 *
-	 * @return the coded vital signs section
-	 */
-	private CodedVitalSignsSection getCodedVitalSignsSection() {
-		for (final Section s : getMdht().getAllSections()) {
-			if (s instanceof CodedVitalSignsSectionImpl) {
-				return (CodedVitalSignsSectionImpl) s;
-			}
-		}
-		return null;
-	}
-
-	/**
 	 * Convenience function that returns a list of all order ids of all
 	 * inFulfillmentOf Elements.
 	 *
@@ -350,20 +267,6 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 			}
 		}
 		return labObservations;
-	}
-
-	/**
-	 * Gets the laboratory specialty section.
-	 *
-	 * @return the laboratory specialty section
-	 */
-	private AbstractLaboratorySpecialtySection getLaboratorySpecialtySection() {
-		for (final Section s : getMdht().getAllSections()) {
-			if (s instanceof LaboratorySpecialtySection) {
-				return new AbstractLaboratorySpecialtySection((LaboratorySpecialtySection) s);
-			}
-		}
-		return null;
 	}
 
 	/**
