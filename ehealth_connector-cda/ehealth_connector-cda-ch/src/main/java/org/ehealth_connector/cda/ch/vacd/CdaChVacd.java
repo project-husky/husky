@@ -1381,6 +1381,28 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	/**
 	 * <div class="en">Sets the human readable CDA section text for the
 	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
+	 * Section Text für die entsprechende Section</div>.
+	 *
+	 * @param text
+	 *            <div class="en"> the new text for the human readable part of
+	 *            the cda document</div> <div class="de"> der neue text für den
+	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
+	 * @param contentId
+	 *            the content id for text references.
+	 */
+	public void setNarrativeTextSectionImmunizations(String text, String contentId) {
+		String temp = contentId;
+		if (temp.startsWith("#"))
+			temp = temp.substring(1, temp.length());
+		final SimpleTextBuilder sb = new SimpleTextBuilder(temp, text);
+		if (getDoc().getImmunizationsSection() != null) {
+			getDoc().getImmunizationsSection().createStrucDocText(sb.toString());
+		}
+	}
+
+	/**
+	 * <div class="en">Sets the human readable CDA section text for the
+	 * according section</div> <div class="de">Setzt den menschenlesbaren CDA
 	 * Section Text für die entsprechende Section</div>
 	 *
 	 * @param text

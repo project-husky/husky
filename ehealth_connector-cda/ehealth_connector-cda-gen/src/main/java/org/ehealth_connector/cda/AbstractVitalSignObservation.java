@@ -239,7 +239,6 @@ public class AbstractVitalSignObservation extends AbstractObservation {
 		getVitalSignObservation().getInterpretationCodes().add(EcoreUtil.copy(ceNullFlavourCode));
 		getVitalSignObservation().getTargetSiteCodes().add(EcoreUtil.copy(cdNullFlavourCode));
 
-		getVitalSignObservation().setText(Util.createReference("#TODO"));
 	}
 
 	/**

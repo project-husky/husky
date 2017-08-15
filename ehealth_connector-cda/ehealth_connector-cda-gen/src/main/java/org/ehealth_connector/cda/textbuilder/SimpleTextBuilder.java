@@ -58,6 +58,13 @@ public class SimpleTextBuilder extends TextBuilder {
 		addContent(newText, contentIdPrefix, currentContentId);
 	}
 
+	public SimpleTextBuilder(String contentIdPrefix, String newText) {
+		this.contentIdPrefix = contentIdPrefix;
+		text = newText;
+		addContent(text, contentIdPrefix);
+		currentContentId = 1;
+	}
+
 	public int getNewTextContentIDNr() {
 		return currentContentId;
 	}

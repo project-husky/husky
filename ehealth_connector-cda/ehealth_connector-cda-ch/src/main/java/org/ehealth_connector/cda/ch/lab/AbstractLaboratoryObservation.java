@@ -27,7 +27,6 @@ import org.ehealth_connector.common.ReferenceRange;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.NullFlavor;
 import org.ehealth_connector.common.enums.StatusCode;
-import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
 
@@ -142,22 +141,6 @@ public abstract class AbstractLaboratoryObservation
 		final Code nullCode = new Code(NullFlavor.TEMPORARILY_UNAVAILABLE);
 		nullCode.addTranslation(code);
 		this.setCode(nullCode);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.cda.MdhtFacade#setTextReference(java.lang.String)
-	 */
-	@Override
-	public void setTextReference(String textReference) {
-		if (textReference != null) {
-			if (!textReference.equals("")) {
-				if (!textReference.startsWith("#"))
-					textReference = "#" + textReference;
-				this.getMdht().setText(Util.createReference(textReference));
-			}
-		}
 	}
 
 }

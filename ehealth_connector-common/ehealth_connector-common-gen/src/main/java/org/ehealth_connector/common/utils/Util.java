@@ -626,13 +626,8 @@ public class Util {
 	 * @return the MDHT ED
 	 */
 	public static ED createReference(String value) {
-		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
 		final ED ed = DatatypesFactory.eINSTANCE.createED();
-		if (!value.startsWith("#")) {
-			value = "#" + value;
-		}
-		tel.setValue(value);
-		ed.setReference(tel);
+		ed.setReference(createReferenceTel(value));
 		return ed;
 	}
 
@@ -652,6 +647,15 @@ public class Util {
 		ed.addText(narrativeText);
 		ed.setReference(tel);
 		return ed;
+	}
+
+	public static TEL createReferenceTel(String value) {
+		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		if (!value.startsWith("#")) {
+			value = "#" + value;
+		}
+		tel.setValue(value);
+		return tel;
 	}
 
 	/**
@@ -859,6 +863,28 @@ public class Util {
 			if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
 				// Get the ed and update it with the reference
 				final ED ed = er.getAct().getText();
+				return ed.getText();
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Returns the text of a comment from a given list of MDHT EntryRelationship
+	 * objects and sets the text reference.
+	 *
+	 * @param e
+	 *            the EntryRelationship list
+	 * @param contentId
+	 *            the content id for the text reference
+	 * @return the tet of the comment
+	 */
+	public static String getCommentText(EList<EntryRelationship> e, String contentId) {
+		for (final EntryRelationship er : e) {
+			if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
+				// Get the ed and update it with the reference
+				final ED ed = er.getAct().getText();
+				ed.setReference(Util.createReferenceTel(contentId));
 				return ed.getText();
 			}
 		}

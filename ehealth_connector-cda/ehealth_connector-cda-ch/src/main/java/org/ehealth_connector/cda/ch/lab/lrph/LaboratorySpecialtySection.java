@@ -144,21 +144,6 @@ public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySecti
 		if (newLrdpe)
 			setLaboratoryReportDataProcessingEntry(lrdpe);
 
-		// update the MDHT Object content references to CDA level 1 text
-		// TODO tsc: implement
-		// if (updateProblemConcernReferences(section.getActs(),
-		// SectionsEDES.ACTIVE_PROBLEMS)) {
-		// if (cdaDocument.IsNarrativeTextGenerationEnabled()) {
-		// // create the CDA level 1 text
-		// section.createStrucDocText(generateNarrativeTextActiveProblemConcerns(section));
-		// } else {
-		// setNarrativeTextSection(SectionsEDES.ACTIVE_PROBLEMS, section,"");
-		// }
-		// } else {
-		// section.createStrucDocText("Keine Angaben");
-		// activeProblemConcern.copyMdhtProblemConcernEntry().getEntryRelationships().get(0)
-		// .getObservation().setText(Util.createEd(""));
-		// }
 	}
 
 	/**

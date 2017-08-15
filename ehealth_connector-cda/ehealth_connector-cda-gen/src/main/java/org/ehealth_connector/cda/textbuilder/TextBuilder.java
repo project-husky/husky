@@ -39,6 +39,10 @@ public abstract class TextBuilder {
 		append(getCellWithContent(text, prefix, i));
 	}
 
+	protected void addContent(String text, String contentId) {
+		append(getContent(text, contentId));
+	}
+
 	protected void addContent(String text, String prefix, int i) {
 		append(getContent(text, prefix, i));
 	}
@@ -57,8 +61,16 @@ public abstract class TextBuilder {
 		return "<td>" + text + "</td>";
 	}
 
+	protected String getCellWithContent(String text, String contentId) {
+		return "<td>" + getContent(text, contentId) + "</td>";
+	}
+
 	protected String getCellWithContent(String text, String prefix, int i) {
 		return "<td>" + getContent(text, prefix, i) + "</td>";
+	}
+
+	protected String getContent(String text, String contentId) {
+		return "<content ID='" + contentId + "'>" + text + "</content>";
 	}
 
 	protected String getContent(String text, String prefix, int i) {

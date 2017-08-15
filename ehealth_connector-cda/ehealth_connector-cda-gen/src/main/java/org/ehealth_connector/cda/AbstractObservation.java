@@ -145,6 +145,13 @@ public class AbstractObservation
 		return Util.getCommentText(mObservation.getEntryRelationships());
 	}
 
+	public String getCommentText(String contentId) {
+		String retVal = Util.getCommentText(mObservation.getEntryRelationships(), contentId);
+		if (retVal == null)
+			retVal = "";
+		return retVal;
+	}
+
 	@Override
 	public Date getEffectiveTime() {
 		return DateUtil.parseIVL_TSVDateTimeValue(mObservation.getEffectiveTime());
@@ -228,6 +235,20 @@ public class AbstractObservation
 		return retVal;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.cda.MdhtFacade#getTextReference()
+	 */
+	@Override
+	public String getTextReference() {
+		if ((this.getMdht().getText() != null)
+				&& (this.getMdht().getText().getReference() != null)) {
+			return this.getMdht().getText().getReference().getValue();
+		}
+		return null;
+	}
+
 	@Override
 	public Value getValue() {
 		if (!mObservation.getValues().isEmpty()) {
@@ -297,6 +318,22 @@ public class AbstractObservation
 		final ED ed = DatatypesFactory.eINSTANCE.createED();
 		ed.addText(text);
 		mObservation.setText(ed);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.cda.MdhtFacade#setTextReference(java.lang.String)
+	 */
+	@Override
+	public void setTextReference(String textReference) {
+		if (textReference != null) {
+			if (!textReference.equals("")) {
+				if (!textReference.startsWith("#"))
+					textReference = "#" + textReference;
+				this.getMdht().setText(Util.createReference(textReference));
+			}
+		}
 	}
 
 	public void setValue(Value value) {
