@@ -732,6 +732,15 @@ public class Value {
 		return (mValue instanceof RTO);
 	}
 
+	/**
+	 * Checks if the Value object has the Datatype ST (String).
+	 *
+	 * @return boolean true, if it is ST, false otherwise
+	 */
+	public boolean isSt() {
+		return (mValue instanceof ST);
+	}
+
 	private void setIntValue(int value) {
 		INT i = (INT) mValue;
 		i.setValue(value);

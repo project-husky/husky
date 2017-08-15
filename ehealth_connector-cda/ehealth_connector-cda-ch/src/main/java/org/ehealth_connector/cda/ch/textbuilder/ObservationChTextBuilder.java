@@ -508,9 +508,11 @@ public class ObservationChTextBuilder extends TextBuilder {
 						}
 					}
 				} else if (value.isEd()) {
-					contentId = contentIdPrefix + "_" + sectionCode + "_value_" + rowNumber;
-					ED ed = (ED) value.getValue();
-					ed.setReference(Util.createReferenceTel(contentId));
+					if (!value.isSt()) {
+						contentId = contentIdPrefix + "_" + sectionCode + "_value_" + rowNumber;
+						ED ed = (ED) value.getValue();
+						ed.setReference(Util.createReferenceTel(contentId));
+					}
 					tempValue = value.toString();
 				} else
 					tempValue = value.toString();
