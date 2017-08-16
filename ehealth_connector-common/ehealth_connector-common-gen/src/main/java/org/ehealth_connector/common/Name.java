@@ -160,7 +160,7 @@ public class Name {
 		nameList.add(families);
 		nameList.add(suffixes);
 
-		return Util.join(nameList, " ");
+		return Util.join(nameList, " ").trim();
 	}
 
 	/**
