@@ -19,6 +19,7 @@
 package org.ehealth_connector.validation.service.api;
 
 import org.ehealth_connector.validation.service.pdf.PdfValidationResult;
+import org.ehealth_connector.validation.service.pdf.VeraPdfValidationResult;
 import org.ehealth_connector.validation.service.schematron.result.SchematronValidationResult;
 
 /**
@@ -34,6 +35,9 @@ public class ValidationResult {
 
 	/** The PDF validation results */
 	private PdfValidationResult pdfValRes = null;
+	
+	/** The veraPDF validation results */
+	private VeraPdfValidationResult veraPdfValRes = null;
 
 	/**
 	 * Default constructor
@@ -50,6 +54,15 @@ public class ValidationResult {
 		return pdfValRes;
 	}
 
+	/**
+	 * Gets the veraPDF validation results
+	 *
+	 * @return the PDF validation results
+	 */
+	public VeraPdfValidationResult getVeraPdfValRes() {
+		return veraPdfValRes;
+	}
+	
 	/**
 	 * Gets the Schematron validation results
 	 *
@@ -74,7 +87,10 @@ public class ValidationResult {
 	 * @return true when the embedded PDFs are valid, false otherwise
 	 */
 	public boolean isPdfValid() {
-		return pdfValRes.isPdfValid();
+		if (pdfValRes != null)
+			return pdfValRes.isPdfValid();
+		else 
+			return veraPdfValRes.isPdfValid();
 	}
 
 	/**
@@ -83,7 +99,10 @@ public class ValidationResult {
 	 * @return true when the PDF validation was performed, false otherwise
 	 */
 	public boolean isPdfValidationPerformed() {
-		return (pdfValRes != null);
+		if (pdfValRes != null)
+			return pdfValRes.isDone();
+		else 
+			return veraPdfValRes.isDone();
 	}
 
 	/**
@@ -140,6 +159,17 @@ public class ValidationResult {
 	public void setPdfValidationResult(PdfValidationResult pdfValRes) {
 		this.pdfValRes = pdfValRes;
 	}
+
+	/**
+	 * Sets the given veraPDF validation results
+	 *
+	 * @param pdfValRes
+	 *            the desired PDF validation results
+	 */
+	public void setVeraPdfValRes(VeraPdfValidationResult veraPdfValRes) {
+		this.veraPdfValRes = veraPdfValRes;
+	}
+
 
 	/**
 	 * Sets the Schematron validation success indicator
