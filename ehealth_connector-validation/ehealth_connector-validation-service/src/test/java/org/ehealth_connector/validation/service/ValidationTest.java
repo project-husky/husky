@@ -77,21 +77,18 @@ public class ValidationTest {
 
 		String testFile = null;
 		if (cdaVali.isUseVeraPdfValidator()) {
+
 			// test validation by passing the CDA document as file
 			testFile = cdaFilePath_ValidPdf;
 			veraPdfValiRes = cdaVali.validateVeraPdf(new File(testFile).getAbsoluteFile());
-			// log.info("PDF file validation result of '" + testFile + "': " +
-			// pdfValiRes.isPdfValid());
-			System.out.println("PDF file validation result of '" + testFile + "': "
+			log.info("PDF file validation result of '" + testFile + "': "
 					+ veraPdfValiRes.isPdfValid());
-			// assertTrue(pdfValiRes.isPdfValid() || !pdfValiRes.isDone());
 			assertTrue(veraPdfValiRes.isPdfValid());
 
+			// test validation by passing an invalid CDA document as file
 			testFile = cdaFilePath_InvalidPdf;
 			veraPdfValiRes = cdaVali.validateVeraPdf(new File(testFile).getAbsoluteFile());
-			// log.info("PDF file validation result of '" + testFile + "': " +
-			// pdfValiRes.isPdfValid());
-			System.out.println("PDF file validation result of '" + testFile + "': "
+			log.info("PDF file validation result of '" + testFile + "': "
 					+ veraPdfValiRes.isPdfValid());
 			assertTrue(!veraPdfValiRes.isPdfValid());
 
@@ -99,24 +96,7 @@ public class ValidationTest {
 			testFile = cdaFilePath_ValidPdf;
 			veraPdfValiRes = cdaVali
 					.validateVeraPdf(new StreamSource(new File(testFile).getAbsoluteFile()));
-			// log.info("PDF stream validation result of '" + testFile + "': " +
-			// pdfValiRes.isPdfValid());
-			System.out.println("PDF stream validation result of '" + testFile + "': "
-					+ veraPdfValiRes.isPdfValid());
-			assertTrue(veraPdfValiRes.isPdfValid());
-
-			// test validation by passing the CDA document as byte[]
-			testFile = cdaFilePath_ValidPdf;
-			// read the file into a byte[]
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-			byte[] cdaByteArray = null;
-			try {
-				IOUtils.copyLarge(new FileInputStream(new File(testFile).getAbsoluteFile()), baos);
-				cdaByteArray = baos.toByteArray();
-			} catch (IOException e) {
-			}
-			veraPdfValiRes = cdaVali.validateVeraPdf(cdaByteArray);
-			log.info("PDF byte[] validation result of '" + testFile + "': "
+			log.info("PDF stream validation result of '" + testFile + "': "
 					+ veraPdfValiRes.isPdfValid());
 			assertTrue(veraPdfValiRes.isPdfValid());
 
@@ -124,32 +104,21 @@ public class ValidationTest {
 			// test validation by passing the CDA document as file
 			testFile = cdaFilePath_ValidPdf;
 			pdfValiRes = cdaVali.validatePdf(new File(testFile).getAbsoluteFile());
-			// log.info("PDF file validation result of '" + testFile + "': " +
-			// pdfValiRes.isPdfValid());
-			System.out.println(
+			log.info(
 					"PDF file validation result of '" + testFile + "': " + pdfValiRes.isPdfValid());
-			// assertTrue(pdfValiRes.isPdfValid() || !pdfValiRes.isDone());
 			assertTrue(pdfValiRes.isPdfValid());
 
 			testFile = cdaFilePath_InvalidPdf;
 			pdfValiRes = cdaVali.validatePdf(new File(testFile).getAbsoluteFile());
-			// log.info("PDF file validation result of '" + testFile + "': " +
-			// pdfValiRes.isPdfValid());
-			System.out.println(
+			log.info(
 					"PDF file validation result of '" + testFile + "': " + pdfValiRes.isPdfValid());
-			// note that an external license is required for PDF validation.
-			// As this is not available in the open source environment, PDF
-			// validation will be skipped when the PDF Validator can not be
-			// initialized. Therefore this test is kind of stupid ;-)
 			assertTrue(!pdfValiRes.isPdfValid());
 
 			// test validation by passing the CDA document as stream
 			testFile = cdaFilePath_ValidPdf;
 			pdfValiRes = cdaVali
 					.validatePdf(new StreamSource(new File(testFile).getAbsoluteFile()));
-			// log.info("PDF stream validation result of '" + testFile + "': " +
-			// pdfValiRes.isPdfValid());
-			System.out.println("PDF stream validation result of '" + testFile + "': "
+			log.info("PDF stream validation result of '" + testFile + "': "
 					+ pdfValiRes.isPdfValid());
 			assertTrue(pdfValiRes.isPdfValid());
 
