@@ -46,6 +46,7 @@ import org.ehealth_connector.validation.service.config.ConfigurationException;
 import org.ehealth_connector.validation.service.config.Configurator;
 import org.ehealth_connector.validation.service.config.bind.InsufficientMemoryReaction;
 import org.ehealth_connector.validation.service.config.bind.MaxWaitReaction;
+import org.ehealth_connector.validation.service.enums.Severity;
 import org.ehealth_connector.validation.service.pdf.PdfValidationResult;
 import org.ehealth_connector.validation.service.pdf.PdfValidationResultEntry;
 import org.ehealth_connector.validation.service.pdf.PdfValidationResultEntry.SEVERITY;
@@ -269,7 +270,8 @@ public class CdaValidator {
 					prevObject = temp;
 					continue;
 				}
-				if ((temp instanceof ActivePattern) && (prevObject != null) && (prevObject instanceof ActivePattern)) {
+				if ((temp instanceof ActivePattern) && (prevObject != null)
+						&& (prevObject instanceof ActivePattern)) {
 					schValRes.getActivePatternResultFull().add(currentApResult);
 					currentApResult = new ActivePatternResult();
 					currentApResult.setAp((ActivePattern) temp);
@@ -424,6 +426,10 @@ public class CdaValidator {
 		initialize(configure(configFile));
 	}
 
+	public boolean isUseVeraPdfValidator() {
+		return useVeraPdfValidator;
+	}
+
 	/**
 	 * Loads the XML Schema to be used for schema validation
 	 *
@@ -438,7 +444,8 @@ public class CdaValidator {
 		log.info("Loading XSD schema '" + schemaPath + "' ...");
 		final File schemaFile = new File(schemaPath).getAbsoluteFile();
 		if (!schemaFile.canRead()) {
-			log.error("XSD schema " + schemaFile.toString() + " does not exist or can not be read.");
+			log.error(
+					"XSD schema " + schemaFile.toString() + " does not exist or can not be read.");
 			return null;
 		}
 		final Source source = new StreamSource(schemaFile);
@@ -601,63 +608,6 @@ public class CdaValidator {
 	}
 
 	/**
-	 * Executes a veraPDF validation of the given CDA document
-	 *
-	 * @param cdaByteArray
-	 *            the CDA document to be validated
-	 * @return ArrayList of PDF Validation results
-	 */
-	public VeraPdfValidationResult validateVeraPdf(byte[] cdaByteArray) {
-		return validateVeraPdf(new StreamSource(new ByteArrayInputStream(cdaByteArray)));
-	}
-
-	/**
-	 * Executes a veraPDF validation of the given CDA document
-	 *
-	 * @param cdaFile
-	 *            the CDA document to be validated
-	 * @return ArrayList of PDF Validation results
-	 */
-	public VeraPdfValidationResult validateVeraPdf(File cdaFile) {
-		return validateVeraPdf(new StreamSource(cdaFile));
-	}
-
-	/**
-	 * Executes a veraPDF validation of the given CDA document
-	 *
-	 * @param cdaStream
-	 *            the CDA document to be validated
-	 * @return ArrayList of PDF Validation results
-	 */
-	public VeraPdfValidationResult validateVeraPdf(StreamSource cdaStream) {
-		VeraPdfValidationResult retVal = new VeraPdfValidationResult();
-		String errorMsg = null;
-		if (this.configuration == null)
-			errorMsg = "No configuration available";
-		if (cdaStream == null)
-			errorMsg = "No CDA-Document provided for validation";
-		if (errorMsg == null) {
-			log.info("Start of veraPDF validation");
-				try {
-					veraPdfValidator.validateCda(cdaStream);
-				} catch (ConfigurationException | SaxonApiException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				retVal = veraPdfValidator.getPdfValidationResults();
-			
-			log.info("End of PDF validation");
-		} else {
-			VeraPdfValidationResultEntry failure = new VeraPdfValidationResultEntry();
-			failure.setErrMsg(errorMsg, VeraPdfValidationResultEntry.SEVERITY.Error);
-			failure.setLineNumber("none");
-			retVal.add(failure);
-		}
-
-		return retVal;
-	}
-
-	/**
 	 * Executes a Schematron validation of the given CDA document
 	 *
 	 * @param cdaByteArray
@@ -716,9 +666,12 @@ public class CdaValidator {
 						+ Long.toString(requiredMemory / (1024 * 1024)) + "m");
 				log.debug("Schematron validation configuration - insufficientMemoryReaction: "
 						+ insufficientMemoryReaction);
-				log.debug("Schematron validation configuration - timeoutSleep: " + Long.toString(timeoutSleep) + "ms");
-				log.debug("Schematron validation configuration - timeoutMax: " + Long.toString(timeoutMax) + "s");
-				log.debug("Schematron validation configuration - timeoutReaction: " + timeoutReaction);
+				log.debug("Schematron validation configuration - timeoutSleep: "
+						+ Long.toString(timeoutSleep) + "ms");
+				log.debug("Schematron validation configuration - timeoutMax: "
+						+ Long.toString(timeoutMax) + "s");
+				log.debug("Schematron validation configuration - timeoutReaction: "
+						+ timeoutReaction);
 
 			} catch (ConfigurationException e1) {
 				errorMsg = e1.getMessage();
@@ -735,7 +688,8 @@ public class CdaValidator {
 				if (!doValidate) {
 					errorMsg = "Insufficient memory (available: "
 							+ Long.toString(Runtime.getRuntime().freeMemory() / (1024 * 1024))
-							+ "m; configured minimum: " + Long.toString(requiredMemory / (1024 * 1024)) + "m)";
+							+ "m; configured minimum: "
+							+ Long.toString(requiredMemory / (1024 * 1024)) + "m)";
 					log.error(errorMsg);
 					schValRes = new SchematronValidationResult();
 					schValRes.setException(errorMsg);
@@ -750,7 +704,8 @@ public class CdaValidator {
 				if (!doValidate)
 					log.debug("Waiting for memory (currently available: "
 							+ Long.toString(Runtime.getRuntime().freeMemory() / (1024 * 1024))
-							+ "m; configured minimum: " + Long.toString(requiredMemory / (1024 * 1024)) + "m)");
+							+ "m; configured minimum: "
+							+ Long.toString(requiredMemory / (1024 * 1024)) + "m)");
 
 				while (!doValidate && !doAbort) {
 					try {
@@ -765,16 +720,19 @@ public class CdaValidator {
 				if (doValidate)
 					log.debug("Waiting for memory was not worth it (currently available: "
 							+ Long.toString(Runtime.getRuntime().freeMemory() / (1024 * 1024))
-							+ "m; configured minimum: " + Long.toString(requiredMemory / (1024 * 1024)) + "m)");
+							+ "m; configured minimum: "
+							+ Long.toString(requiredMemory / (1024 * 1024)) + "m)");
 				else
 					log.debug("Waiting for memory was worth it (currently available: "
 							+ Long.toString(Runtime.getRuntime().freeMemory() / (1024 * 1024))
-							+ "m; configured minimum: " + Long.toString(requiredMemory / (1024 * 1024)) + "m)");
+							+ "m; configured minimum: "
+							+ Long.toString(requiredMemory / (1024 * 1024)) + "m)");
 				if (doAbort) {
-					errorMsg = "Insufficient memory (timeout reached after " + Long.toString(timeoutMax)
-							+ " seconds; currently available: "
+					errorMsg = "Insufficient memory (timeout reached after "
+							+ Long.toString(timeoutMax) + " seconds; currently available: "
 							+ Long.toString(Runtime.getRuntime().freeMemory() / (1024 * 1024))
-							+ "m; configured minimum: " + Long.toString(requiredMemory / (1024 * 1024)) + "m)";
+							+ "m; configured minimum: "
+							+ Long.toString(requiredMemory / (1024 * 1024)) + "m)";
 					switch (timeoutReaction) {
 					case RETURN_VALIDATION_ERROR:
 						log.error("Aborting validation - returning validation error: " + errorMsg);
@@ -787,8 +745,8 @@ public class CdaValidator {
 						throw new OutOfMemoryError(errorMsg);
 					default:
 						schValRes = new SchematronValidationResult();
-						schValRes.setException(
-								"Invalid configuration value for TimeoutReaction (" + timeoutReaction + ")");
+						schValRes.setException("Invalid configuration value for TimeoutReaction ("
+								+ timeoutReaction + ")");
 						schValRes.setSourceFile(null);
 					}
 				}
@@ -801,8 +759,9 @@ public class CdaValidator {
 				break;
 			default:
 				schValRes = new SchematronValidationResult();
-				schValRes.setException("Invalid configuration value for InsufficientMemoryReaction ("
-						+ insufficientMemoryReaction + ")");
+				schValRes
+						.setException("Invalid configuration value for InsufficientMemoryReaction ("
+								+ insufficientMemoryReaction + ")");
 				schValRes.setSourceFile(null);
 				break;
 			}
@@ -816,12 +775,13 @@ public class CdaValidator {
 					else {
 						log.error("Schematron validation failed: validateSchRaw returned null");
 						schValRes = new SchematronValidationResult();
-						schValRes.setException("Schematron validation failed: validateSchRaw returned null");
+						schValRes.setException(
+								"Schematron validation failed: validateSchRaw returned null");
 						schValRes.setSourceFile(null);
 					}
 
-				} catch (SAXException | RuleSetDetectionException | TransformationException | InterruptedException
-						| ConfigurationException | OutOfMemoryError e) {
+				} catch (SAXException | RuleSetDetectionException | TransformationException
+						| InterruptedException | ConfigurationException | OutOfMemoryError e) {
 					log.error("Schematron validation failed: " + e.getMessage());
 					schValRes = new SchematronValidationResult();
 					schValRes.setException(e.getMessage());
@@ -858,8 +818,9 @@ public class CdaValidator {
 	 * @throws InterruptedException
 	 * @throws ConfigurationException
 	 */
-	public SchematronOutput validateSchRaw(File cdaFile) throws SAXException, FileNotFoundException,
-			RuleSetDetectionException, TransformationException, InterruptedException, ConfigurationException {
+	public SchematronOutput validateSchRaw(File cdaFile)
+			throws SAXException, FileNotFoundException, RuleSetDetectionException,
+			TransformationException, InterruptedException, ConfigurationException {
 		return validateSchRaw(new StreamSource(cdaFile));
 	}
 
@@ -875,8 +836,9 @@ public class CdaValidator {
 	 * @throws InterruptedException
 	 * @throws ConfigurationException
 	 */
-	public SchematronOutput validateSchRaw(StreamSource cdaStream) throws SAXException, RuleSetDetectionException,
-			TransformationException, InterruptedException, ConfigurationException {
+	public SchematronOutput validateSchRaw(StreamSource cdaStream)
+			throws SAXException, RuleSetDetectionException, TransformationException,
+			InterruptedException, ConfigurationException {
 
 		SchematronOutput retVal = null;
 
@@ -904,12 +866,69 @@ public class CdaValidator {
 
 		final ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-		final byte[] svrlReport = reportBuilder.createSvrlReport(ruleSet, configuration.getWorkDir(), cdaStream, out,
-				null);
+		final byte[] svrlReport = reportBuilder.createSvrlReport(ruleSet,
+				configuration.getWorkDir(), cdaStream, out, null);
 		if (svrlReport != null) {
 			retVal = createSchematronOutput(new ByteArrayInputStream(svrlReport));
 			retVal.setRuleSet(ruleSet);
 			retVal.setSourceFile(null);
+		}
+
+		return retVal;
+	}
+
+	/**
+	 * Executes a veraPDF validation of the given CDA document
+	 *
+	 * @param cdaByteArray
+	 *            the CDA document to be validated
+	 * @return ArrayList of PDF Validation results
+	 */
+	public VeraPdfValidationResult validateVeraPdf(byte[] cdaByteArray) {
+		return validateVeraPdf(new StreamSource(new ByteArrayInputStream(cdaByteArray)));
+	}
+
+	/**
+	 * Executes a veraPDF validation of the given CDA document
+	 *
+	 * @param cdaFile
+	 *            the CDA document to be validated
+	 * @return ArrayList of PDF Validation results
+	 */
+	public VeraPdfValidationResult validateVeraPdf(File cdaFile) {
+		return validateVeraPdf(new StreamSource(cdaFile));
+	}
+
+	/**
+	 * Executes a veraPDF validation of the given CDA document
+	 *
+	 * @param cdaStream
+	 *            the CDA document to be validated
+	 * @return ArrayList of PDF Validation results
+	 */
+	public VeraPdfValidationResult validateVeraPdf(StreamSource cdaStream) {
+		VeraPdfValidationResult retVal = new VeraPdfValidationResult();
+		String errorMsg = null;
+		if (this.configuration == null)
+			errorMsg = "No configuration available";
+		if (cdaStream == null)
+			errorMsg = "No CDA-Document provided for validation";
+		if (errorMsg == null) {
+			log.info("Start of veraPDF validation");
+			try {
+				veraPdfValidator.validateCda(cdaStream);
+			} catch (ConfigurationException | SaxonApiException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			retVal = veraPdfValidator.getPdfValidationResults();
+
+			log.info("End of PDF validation");
+		} else {
+			VeraPdfValidationResultEntry failure = new VeraPdfValidationResultEntry();
+			failure.setErrMsg(errorMsg, Severity.Error);
+			failure.setLineNumber("none");
+			retVal.add(failure);
 		}
 
 		return retVal;

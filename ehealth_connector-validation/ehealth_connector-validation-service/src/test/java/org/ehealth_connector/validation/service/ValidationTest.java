@@ -32,6 +32,7 @@ import org.ehealth_connector.validation.service.api.CdaValidator;
 import org.ehealth_connector.validation.service.api.XsdValidationResult;
 import org.ehealth_connector.validation.service.config.ConfigurationException;
 import org.ehealth_connector.validation.service.pdf.PdfValidationResult;
+import org.ehealth_connector.validation.service.pdf.VeraPdfValidationResult;
 import org.ehealth_connector.validation.service.schematron.RuleSetDetectionException;
 import org.ehealth_connector.validation.service.schematron.result.SchematronValidationResult;
 import org.ehealth_connector.validation.service.transform.TransformationException;
@@ -52,6 +53,7 @@ public class ValidationTest {
 	private XsdValidationResult xsdValiRes;
 	private SchematronValidationResult schValiRes;
 	private PdfValidationResult pdfValiRes;
+	private VeraPdfValidationResult veraPdfValiRes;
 
 	private final String configFilePath = "rsc/config.xml";
 	private final String cdaFilePath_Valid = "rsc/cda/miniCDA_Valid.xml";
@@ -74,41 +76,98 @@ public class ValidationTest {
 	public void testPdfValidation() throws ConfigurationException, SaxonApiException, IOException {
 
 		String testFile = null;
+		if (cdaVali.isUseVeraPdfValidator()) {
+			// test validation by passing the CDA document as file
+			testFile = cdaFilePath_ValidPdf;
+			veraPdfValiRes = cdaVali.validateVeraPdf(new File(testFile).getAbsoluteFile());
+			// log.info("PDF file validation result of '" + testFile + "': " +
+			// pdfValiRes.isPdfValid());
+			System.out.println("PDF file validation result of '" + testFile + "': "
+					+ veraPdfValiRes.isPdfValid());
+			// assertTrue(pdfValiRes.isPdfValid() || !pdfValiRes.isDone());
+			assertTrue(veraPdfValiRes.isPdfValid());
 
-		// test validation by passing the CDA document as file
-		testFile = cdaFilePath_ValidPdf;
-		pdfValiRes = cdaVali.validatePdf(new File(testFile).getAbsoluteFile());
-		log.info("PDF file validation result of '" + testFile + "': " + pdfValiRes.isPdfValid());
-		assertTrue(pdfValiRes.isPdfValid() || !pdfValiRes.isDone());
+			testFile = cdaFilePath_InvalidPdf;
+			veraPdfValiRes = cdaVali.validateVeraPdf(new File(testFile).getAbsoluteFile());
+			// log.info("PDF file validation result of '" + testFile + "': " +
+			// pdfValiRes.isPdfValid());
+			System.out.println("PDF file validation result of '" + testFile + "': "
+					+ veraPdfValiRes.isPdfValid());
+			assertTrue(!veraPdfValiRes.isPdfValid());
 
-		testFile = cdaFilePath_InvalidPdf;
-		pdfValiRes = cdaVali.validatePdf(new File(testFile).getAbsoluteFile());
-		log.info("PDF file validation result of '" + testFile + "': " + pdfValiRes.isPdfValid());
-		// note that an external license is required for PDF validation.
-		// As this is not available in the open source environment, PDF
-		// validation will be skipped when the PDF Validator can not be
-		// initialized. Therefore this test is kind of stupid ;-)
-		assertTrue(!pdfValiRes.isPdfValid() || !pdfValiRes.isDone());
+			// test validation by passing the CDA document as stream
+			testFile = cdaFilePath_ValidPdf;
+			veraPdfValiRes = cdaVali
+					.validateVeraPdf(new StreamSource(new File(testFile).getAbsoluteFile()));
+			// log.info("PDF stream validation result of '" + testFile + "': " +
+			// pdfValiRes.isPdfValid());
+			System.out.println("PDF stream validation result of '" + testFile + "': "
+					+ veraPdfValiRes.isPdfValid());
+			assertTrue(veraPdfValiRes.isPdfValid());
 
-		// test validation by passing the CDA document as stream
-		testFile = cdaFilePath_ValidPdf;
-		pdfValiRes = cdaVali.validatePdf(new StreamSource(new File(testFile).getAbsoluteFile()));
-		log.info("PDF stream validation result of '" + testFile + "': " + pdfValiRes.isPdfValid());
-		assertTrue(pdfValiRes.isPdfValid() || !pdfValiRes.isDone());
+			// test validation by passing the CDA document as byte[]
+			testFile = cdaFilePath_ValidPdf;
+			// read the file into a byte[]
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			byte[] cdaByteArray = null;
+			try {
+				IOUtils.copyLarge(new FileInputStream(new File(testFile).getAbsoluteFile()), baos);
+				cdaByteArray = baos.toByteArray();
+			} catch (IOException e) {
+			}
+			veraPdfValiRes = cdaVali.validateVeraPdf(cdaByteArray);
+			log.info("PDF byte[] validation result of '" + testFile + "': "
+					+ veraPdfValiRes.isPdfValid());
+			assertTrue(veraPdfValiRes.isPdfValid());
 
-		// test validation by passing the CDA document as byte[]
-		testFile = cdaFilePath_ValidPdf;
-		// read the file into a byte[]
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		byte[] cdaByteArray = null;
-		try {
-			IOUtils.copyLarge(new FileInputStream(new File(testFile).getAbsoluteFile()), baos);
-			cdaByteArray = baos.toByteArray();
-		} catch (IOException e) {
+		} else {
+			// test validation by passing the CDA document as file
+			testFile = cdaFilePath_ValidPdf;
+			pdfValiRes = cdaVali.validatePdf(new File(testFile).getAbsoluteFile());
+			// log.info("PDF file validation result of '" + testFile + "': " +
+			// pdfValiRes.isPdfValid());
+			System.out.println(
+					"PDF file validation result of '" + testFile + "': " + pdfValiRes.isPdfValid());
+			// assertTrue(pdfValiRes.isPdfValid() || !pdfValiRes.isDone());
+			assertTrue(pdfValiRes.isPdfValid());
+
+			testFile = cdaFilePath_InvalidPdf;
+			pdfValiRes = cdaVali.validatePdf(new File(testFile).getAbsoluteFile());
+			// log.info("PDF file validation result of '" + testFile + "': " +
+			// pdfValiRes.isPdfValid());
+			System.out.println(
+					"PDF file validation result of '" + testFile + "': " + pdfValiRes.isPdfValid());
+			// note that an external license is required for PDF validation.
+			// As this is not available in the open source environment, PDF
+			// validation will be skipped when the PDF Validator can not be
+			// initialized. Therefore this test is kind of stupid ;-)
+			assertTrue(!pdfValiRes.isPdfValid());
+
+			// test validation by passing the CDA document as stream
+			testFile = cdaFilePath_ValidPdf;
+			pdfValiRes = cdaVali
+					.validatePdf(new StreamSource(new File(testFile).getAbsoluteFile()));
+			// log.info("PDF stream validation result of '" + testFile + "': " +
+			// pdfValiRes.isPdfValid());
+			System.out.println("PDF stream validation result of '" + testFile + "': "
+					+ pdfValiRes.isPdfValid());
+			assertTrue(pdfValiRes.isPdfValid());
+
+			// test validation by passing the CDA document as byte[]
+			testFile = cdaFilePath_ValidPdf;
+			// read the file into a byte[]
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			byte[] cdaByteArray = null;
+			try {
+				IOUtils.copyLarge(new FileInputStream(new File(testFile).getAbsoluteFile()), baos);
+				cdaByteArray = baos.toByteArray();
+			} catch (IOException e) {
+			}
+			pdfValiRes = cdaVali.validatePdf(cdaByteArray);
+			log.info("PDF byte[] validation result of '" + testFile + "': "
+					+ pdfValiRes.isPdfValid());
+			assertTrue(pdfValiRes.isPdfValid() || !pdfValiRes.isDone());
 		}
-		pdfValiRes = cdaVali.validatePdf(cdaByteArray);
-		log.info("PDF byte[] validation result of '" + testFile + "': " + pdfValiRes.isPdfValid());
-		assertTrue(pdfValiRes.isPdfValid() || !pdfValiRes.isDone());
 	}
 
 	@Test

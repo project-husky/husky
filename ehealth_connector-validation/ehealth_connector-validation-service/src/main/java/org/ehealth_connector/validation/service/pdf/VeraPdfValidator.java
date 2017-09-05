@@ -28,7 +28,7 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.ehealth_connector.validation.service.config.Configuration;
 import org.ehealth_connector.validation.service.config.ConfigurationException;
-import org.ehealth_connector.validation.service.pdf.VeraPdfValidationResultEntry.SEVERITY;
+import org.ehealth_connector.validation.service.enums.Severity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.verapdf.core.EncryptedPdfException;
@@ -51,40 +51,35 @@ import net.sf.saxon.s9api.XdmItem;
 import net.sf.saxon.s9api.XdmNode;
 import net.sf.saxon.s9api.XdmValue;
 
+/**
+ * This class is executing the validation of a given PDF document.
+ *
+ */
 public class VeraPdfValidator {
-
-	/** Not installed error message */
-	public final static String ERR_NOT_INSTALLED = "PdfValidatorAPI not installed";
 
 	/** Not initialized error message */
 	public final static String ERR_NOT_INITIALIZED = "PdfValidatorAPI initialization failed";
 
-	/** Invalid license error message */
-	public final static String ERR_INVALID_LICENSE = "Invalid PdfValidatorAPI license";
+	/** Not installed error message */
+	public final static String ERR_NOT_INSTALLED = "PdfValidatorAPI not installed";
 
 	/** Current configuration */
 	private final Configuration config;
 
+	/** veraPDF validator flavour */
+	private PDFAFlavour flavour;
+
+	/** The SLF4J logger instance. */
+	private final Logger log = LoggerFactory.getLogger(getClass());
+
 	/** PDF compliance level as string */
 	private String pdfLevel;
-
-	/** PDF compliance level as enum/int */
-	// private int comlianceLevel = COMPLIANCE.ePDFUnk;
 
 	/** Current PDF validation results */
 	private VeraPdfValidationResult pdfValidationResult = null;
 
 	/** veraPDF validator */
 	private PDFAValidator pdfValidator = null;
-
-	/** veraPDF validator flavour */
-	PDFAFlavour flavour;
-
-	/** The SLF4J logger instance. */
-	private final Logger log = LoggerFactory.getLogger(getClass());
-
-	/** Error Message in case the License is invalid */
-	// private String licenseErrorMsg = null;
 
 	/**
 	 * Default constructor
@@ -170,7 +165,8 @@ public class VeraPdfValidator {
 	 * @throws SaxonApiException
 	 * @throws IOException
 	 */
-	public void validateCda(File cdaFile) throws ConfigurationException, SaxonApiException, IOException {
+	public void validateCda(File cdaFile)
+			throws ConfigurationException, SaxonApiException, IOException {
 		validateCda(new StreamSource(cdaFile));
 	}
 
@@ -183,7 +179,8 @@ public class VeraPdfValidator {
 	 * @throws SaxonApiException
 	 * @throws IOException
 	 */
-	public void validateCda(StreamSource cdaStream) throws ConfigurationException, SaxonApiException, IOException {
+	public void validateCda(StreamSource cdaStream)
+			throws ConfigurationException, SaxonApiException, IOException {
 
 		pdfValidationResult = new VeraPdfValidationResult();
 
@@ -198,8 +195,8 @@ public class VeraPdfValidator {
 		final XPathCompiler xpath = proc.newXPathCompiler();
 		xpath.declareNamespace("", "urn:hl7-org:v3");
 
-		final XPathSelector selector = xpath.compile("//*[@mediaType='application/pdf' and @representation='B64']")
-				.load();
+		final XPathSelector selector = xpath
+				.compile("//*[@mediaType='application/pdf' and @representation='B64']").load();
 		selector.setContextItem(hl7Doc);
 		final XdmValue children = selector.evaluate();
 		if (children.size() > 0) {
@@ -221,7 +218,8 @@ public class VeraPdfValidator {
 	 * @throws IOException
 	 * @throws ConfigurationException
 	 */
-	private void validatePdf(String pdfStrB64, String lineNumber) throws IOException, ConfigurationException {
+	private void validatePdf(String pdfStrB64, String lineNumber)
+			throws IOException, ConfigurationException {
 
 		initialize(lineNumber);
 		ValidationResult result = null;
@@ -231,11 +229,12 @@ public class VeraPdfValidator {
 			decodedBytes = Base64.getMimeDecoder().decode(pdfStrB64);
 			PDFAParser parser;
 			try {
-				parser = Foundries.defaultInstance().createParser(new ByteArrayInputStream(decodedBytes), flavour);
+				parser = Foundries.defaultInstance()
+						.createParser(new ByteArrayInputStream(decodedBytes), flavour);
 				result = pdfValidator.validate(parser);
 			} catch (ModelParsingException | EncryptedPdfException | ValidationException e) {
 				VeraPdfValidationResultEntry failure = new VeraPdfValidationResultEntry();
-				failure.setErrMsg(e.getMessage(), SEVERITY.CustomWarning);
+				failure.setErrMsg(e.getMessage(), Severity.CustomWarning);
 				pdfValidationResult.setIsDone();
 				pdfValidationResult.setPdfValid(false);
 				pdfValidationResult.add(failure);
@@ -244,20 +243,19 @@ public class VeraPdfValidator {
 				pdfValidationResult.setIsDone();
 				pdfValidationResult.setPdfValid(result.isCompliant());
 				if (!result.isCompliant()) {
-					Set<TestAssertion> assertionSet= result.getTestAssertions();
+					Set<TestAssertion> assertionSet = result.getTestAssertions();
 					Iterator<TestAssertion> iterator = assertionSet.iterator();
-				    while(iterator.hasNext()) {
-				    	TestAssertion assertion = iterator.next();
-				    	VeraPdfValidationResultEntry failure = new VeraPdfValidationResultEntry();
-				    	failure.setErrMsg(assertion.getMessage(), SEVERITY.Error);
+					while (iterator.hasNext()) {
+						TestAssertion assertion = iterator.next();
+						VeraPdfValidationResultEntry failure = new VeraPdfValidationResultEntry();
+						failure.setErrMsg(assertion.getMessage(), Severity.Error);
 						failure.setLineNumber(lineNumber);
 						pdfValidationResult.add(failure);
-				    }
-				    pdfValidationResult.setIsDone();
+					}
+					pdfValidationResult.setIsDone();
 					pdfValidationResult.setPdfValid(false);
 				}
-			}
-			else {
+			} else {
 				VeraPdfValidationResultEntry pdfVResult = new VeraPdfValidationResultEntry();
 				pdfVResult.setLineNumber(lineNumber);
 				pdfValidationResult.add(pdfVResult);

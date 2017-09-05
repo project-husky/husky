@@ -22,33 +22,36 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.ehealth_connector.validation.service.enums.Severity;
+
 /**
- * This class contains PDF validation results
+ * This class contains one entry of the veraPDF validation results
  *
  */
 public class VeraPdfValidationResultEntry {
 
-	/** Severity values */
-	public enum SEVERITY {
-		Error, Warning, Information, CustomWarning
-	};
-
-	/** Status values */
+	/**
+	 * Severity values
+	 *
+	 * public enum SEVERITY { CustomWarning, Error, Information, Warning };
+	 *
+	 * /** Status values
+	 */
 	public enum STATUS {
-		Success, Failure
+		Failure, Success
 	};
-
-	/** String indication an error */
-	private static String T_ERROR = "Error";
-
-	/** String indication a warning */
-	private static String T_WARNING = "Warning";
 
 	/** String indication a custom warning */
 	private static String T_CUSTOMWARNING = "Custom warning";
 
+	/** String indication an error */
+	private static String T_ERROR = "Error";
+
 	/** String indication an information */
 	private static String T_INFORMATION = "Information";
+
+	/** String indication a warning */
+	private static String T_WARNING = "Warning";
 
 	/**
 	 * Creates a copy of the given validation result entry
@@ -64,20 +67,20 @@ public class VeraPdfValidationResultEntry {
 		return retVal;
 	}
 
-	/** Status of this validation entry */
-	private STATUS status = STATUS.Success;
-
-	/** line number of the validated PDF within the parent CDA document */
-	private String lineNumber;
-
 	/** Error indicator */
 	private Boolean containsErrors = false;
+
+	/** Internal index */
+	private final int currentItem = 0;
 
 	/** Error messages */
 	private List<String> errMsgs = new ArrayList<>();
 
-	/** Internal index */
-	private final int currentItem = 0;
+	/** line number of the validated PDF within the parent CDA document */
+	private String lineNumber;
+
+	/** Status of this validation entry */
+	private STATUS status = STATUS.Success;
 
 	/**
 	 * Gets the current error message
@@ -157,16 +160,16 @@ public class VeraPdfValidationResultEntry {
 	 *            The error message to be interpreted for severity
 	 * @return The severity of the given error message
 	 */
-	public SEVERITY getSeverity(String errMsg) {
-		SEVERITY retVal = SEVERITY.Error;
+	public Severity getSeverity(String errMsg) {
+		Severity retVal = Severity.Error;
 		if (errMsg.startsWith(T_CUSTOMWARNING))
-			retVal = SEVERITY.CustomWarning;
+			retVal = Severity.CustomWarning;
 		if (errMsg.startsWith(T_ERROR))
-			retVal = SEVERITY.Error;
+			retVal = Severity.Error;
 		if (errMsg.startsWith(T_WARNING))
-			retVal = SEVERITY.Warning;
+			retVal = Severity.Warning;
 		if (errMsg.startsWith(T_INFORMATION))
-			retVal = SEVERITY.Information;
+			retVal = Severity.Information;
 		return retVal;
 	}
 
@@ -199,7 +202,7 @@ public class VeraPdfValidationResultEntry {
 	 * @param severity
 	 *            The severity of the error message
 	 */
-	public void setErrMsg(String errMsg, SEVERITY severity) {
+	public void setErrMsg(String errMsg, Severity severity) {
 		status = STATUS.Failure;
 		switch (severity) {
 		case CustomWarning:

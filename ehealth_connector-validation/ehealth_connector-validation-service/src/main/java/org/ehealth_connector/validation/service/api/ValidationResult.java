@@ -23,21 +23,21 @@ import org.ehealth_connector.validation.service.pdf.VeraPdfValidationResult;
 import org.ehealth_connector.validation.service.schematron.result.SchematronValidationResult;
 
 /**
- * Contains all validation results
+ * Contains all validation results (XSD, Schematron and PDF)
  */
 public class ValidationResult {
 
-	/** The Schema validation results */
-	private XsdValidationResult xsdValRes = null;
+	/** The PDF validation results */
+	private PdfValidationResult pdfValRes = null;
 
 	/** The Schematron validation results */
 	private SchematronValidationResult schValRes = null;
 
-	/** The PDF validation results */
-	private PdfValidationResult pdfValRes = null;
-	
 	/** The veraPDF validation results */
 	private VeraPdfValidationResult veraPdfValRes = null;
+
+	/** The Schema validation results */
+	private XsdValidationResult xsdValRes = null;
 
 	/**
 	 * Default constructor
@@ -55,21 +55,21 @@ public class ValidationResult {
 	}
 
 	/**
-	 * Gets the veraPDF validation results
-	 *
-	 * @return the PDF validation results
-	 */
-	public VeraPdfValidationResult getVeraPdfValRes() {
-		return veraPdfValRes;
-	}
-	
-	/**
 	 * Gets the Schematron validation results
 	 *
 	 * @return the Schematron validation results
 	 */
 	public SchematronValidationResult getSchValidationResult() {
 		return schValRes;
+	}
+
+	/**
+	 * Gets the veraPDF validation results
+	 *
+	 * @return the PDF validation results
+	 */
+	public VeraPdfValidationResult getVeraPdfValRes() {
+		return veraPdfValRes;
 	}
 
 	/**
@@ -89,7 +89,7 @@ public class ValidationResult {
 	public boolean isPdfValid() {
 		if (pdfValRes != null)
 			return pdfValRes.isPdfValid();
-		else 
+		else
 			return veraPdfValRes.isPdfValid();
 	}
 
@@ -101,7 +101,7 @@ public class ValidationResult {
 	public boolean isPdfValidationPerformed() {
 		if (pdfValRes != null)
 			return pdfValRes.isDone();
-		else 
+		else
 			return veraPdfValRes.isDone();
 	}
 
@@ -161,17 +161,6 @@ public class ValidationResult {
 	}
 
 	/**
-	 * Sets the given veraPDF validation results
-	 *
-	 * @param pdfValRes
-	 *            the desired PDF validation results
-	 */
-	public void setVeraPdfValRes(VeraPdfValidationResult veraPdfValRes) {
-		this.veraPdfValRes = veraPdfValRes;
-	}
-
-
-	/**
 	 * Sets the Schematron validation success indicator
 	 *
 	 * @param schematronValid
@@ -189,6 +178,16 @@ public class ValidationResult {
 	 */
 	public void setSchValidationResult(SchematronValidationResult schValRes) {
 		this.schValRes = schValRes;
+	}
+
+	/**
+	 * Sets the given veraPDF validation results
+	 *
+	 * @param veraPdfValRes
+	 *            the desired PDF validation results
+	 */
+	public void setVeraPdfValRes(VeraPdfValidationResult veraPdfValRes) {
+		this.veraPdfValRes = veraPdfValRes;
 	}
 
 	/**
