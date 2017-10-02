@@ -31,11 +31,7 @@ import org.ehealth_connector.validation.service.enums.Severity;
 public class VeraPdfValidationResultEntry {
 
 	/**
-	 * Severity values
-	 *
-	 * public enum SEVERITY { CustomWarning, Error, Information, Warning };
-	 *
-	 * /** Status values
+	 * Status values
 	 */
 	public enum STATUS {
 		Failure, Success

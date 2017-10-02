@@ -49,7 +49,6 @@ import org.ehealth_connector.validation.service.config.bind.MaxWaitReaction;
 import org.ehealth_connector.validation.service.enums.Severity;
 import org.ehealth_connector.validation.service.pdf.PdfValidationResult;
 import org.ehealth_connector.validation.service.pdf.PdfValidationResultEntry;
-import org.ehealth_connector.validation.service.pdf.PdfValidationResultEntry.SEVERITY;
 import org.ehealth_connector.validation.service.pdf.PdfValidator;
 import org.ehealth_connector.validation.service.pdf.VeraPdfValidationResult;
 import org.ehealth_connector.validation.service.pdf.VeraPdfValidationResultEntry;
@@ -590,7 +589,7 @@ public class CdaValidator {
 					pdfValidator.validateCda(cdaStream);
 				} catch (ConfigurationException | SaxonApiException | IOException e) {
 					PdfValidationResultEntry failure = new PdfValidationResultEntry();
-					failure.setErrMsg(e.getMessage(), SEVERITY.Error);
+					failure.setErrMsg(e.getMessage(), Severity.Error);
 					failure.setLineNumber("none");
 					retVal.add(failure);
 				}
@@ -599,7 +598,7 @@ public class CdaValidator {
 			log.info("End of PDF validation");
 		} else {
 			PdfValidationResultEntry failure = new PdfValidationResultEntry();
-			failure.setErrMsg(errorMsg, SEVERITY.Error);
+			failure.setErrMsg(errorMsg, Severity.Error);
 			failure.setLineNumber("none");
 			retVal.add(failure);
 		}

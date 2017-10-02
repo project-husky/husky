@@ -22,17 +22,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.ehealth_connector.validation.service.enums.Severity;
+
 /**
  * This class contains PDF validation results
  *
  */
 public class PdfValidationResultEntry {
-
-	/** Severity values */
-	public enum SEVERITY {
-		Error, Warning, Information, CustomWarning
-	};
-
 	/** Status values */
 	public enum STATUS {
 		Success, Failure
@@ -157,16 +153,16 @@ public class PdfValidationResultEntry {
 	 *            The error message to be interpreted for severity
 	 * @return The severity of the given error message
 	 */
-	public SEVERITY getSeverity(String errMsg) {
-		SEVERITY retVal = SEVERITY.Error;
+	public Severity getSeverity(String errMsg) {
+		Severity retVal = Severity.Error;
 		if (errMsg.startsWith(T_CUSTOMWARNING))
-			retVal = SEVERITY.CustomWarning;
+			retVal = Severity.CustomWarning;
 		if (errMsg.startsWith(T_ERROR))
-			retVal = SEVERITY.Error;
+			retVal = Severity.Error;
 		if (errMsg.startsWith(T_WARNING))
-			retVal = SEVERITY.Warning;
+			retVal = Severity.Warning;
 		if (errMsg.startsWith(T_INFORMATION))
-			retVal = SEVERITY.Information;
+			retVal = Severity.Information;
 		return retVal;
 	}
 
@@ -199,7 +195,7 @@ public class PdfValidationResultEntry {
 	 * @param severity
 	 *            The severity of the error message
 	 */
-	public void setErrMsg(String errMsg, SEVERITY severity) {
+	public void setErrMsg(String errMsg, Severity severity) {
 		status = STATUS.Failure;
 		switch (severity) {
 		case CustomWarning:

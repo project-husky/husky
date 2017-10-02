@@ -17,6 +17,20 @@
  */
 package org.ehealth_connector.validation.service.enums;
 
+/**
+ * The Severity Enum.
+ */
 public enum Severity {
-	Error, Warning, Information, CustomWarning
+
+	/** Error Severity. */
+	Error,
+	/** Warning Severity. */
+	Warning,
+	/** Information Severity. */
+	Information,
+	/**
+	 * Custom warning Severity (used for customizing warnings in the eHealth
+	 * Connector.).
+	 */
+	CustomWarning
 }

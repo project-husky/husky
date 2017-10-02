@@ -25,9 +25,9 @@ import java.util.BitSet;
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.transform.stream.StreamSource;
 
+import org.ehealth_connector.validation.service.enums.Severity;
 import org.ehealth_connector.validation.service.config.Configuration;
 import org.ehealth_connector.validation.service.config.ConfigurationException;
-import org.ehealth_connector.validation.service.pdf.PdfValidationResultEntry.SEVERITY;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,6 +44,10 @@ import net.sf.saxon.s9api.XdmItem;
 import net.sf.saxon.s9api.XdmNode;
 import net.sf.saxon.s9api.XdmValue;
 
+/**
+ * This class is executing the validation of a given PDF document.
+ *
+ */
 public class PdfValidator {
 
 	/** Not installed error message */
@@ -139,21 +143,21 @@ public class PdfValidator {
 				String errorMsg = ERR_NOT_INSTALLED + " (" + ue.getMessage() + ")";
 				log.error(errorMsg);
 				PdfValidationResultEntry failure = new PdfValidationResultEntry();
-				failure.setErrMsg(errorMsg, SEVERITY.Error);
+				failure.setErrMsg(errorMsg, Severity.Error);
 				failure.setLineNumber(lineNumber);
 				pdfValidationResult.add(failure);
 			} catch (NoClassDefFoundError e) {
 				String errorMsg = ERR_NOT_INITIALIZED + " (" + e.getMessage() + ")";
 				log.error(errorMsg);
 				PdfValidationResultEntry failure = new PdfValidationResultEntry();
-				failure.setErrMsg(errorMsg, SEVERITY.Error);
+				failure.setErrMsg(errorMsg, Severity.Error);
 				failure.setLineNumber(lineNumber);
 				pdfValidationResult.add(failure);
 			} catch (ExceptionInInitializerError e) {
 				String errorMsg = ERR_NOT_INITIALIZED + " (" + e.getMessage() + ")";
 				log.error(errorMsg);
 				PdfValidationResultEntry failure = new PdfValidationResultEntry();
-				failure.setErrMsg(errorMsg, SEVERITY.Error);
+				failure.setErrMsg(errorMsg, Severity.Error);
 				failure.setLineNumber(lineNumber);
 				pdfValidationResult.add(failure);
 			}
@@ -166,7 +170,7 @@ public class PdfValidator {
 					licenseErrorMsg = ERR_INVALID_LICENSE + " (" + licenseKey + ")";
 					log.error(licenseErrorMsg);
 					PdfValidationResultEntry failure = new PdfValidationResultEntry();
-					failure.setErrMsg(licenseErrorMsg, SEVERITY.Error);
+					failure.setErrMsg(licenseErrorMsg, Severity.Error);
 					failure.setLineNumber(lineNumber);
 					pdfValidationResult.add(failure);
 				}
@@ -318,18 +322,18 @@ public class PdfValidator {
 						if (errorCode != -2092890606) {
 							final BitSet tempBS = BitSet
 									.valueOf(ByteBuffer.allocate(4).putInt(errorCode).array());
-							SEVERITY severity = SEVERITY.Information;
+							Severity severity = Severity.Information;
 
 							// ErrorCode --> Bit 7 = Error, Bit 23 = Warnung,
 							// sonst
 							// Info
 							if (tempBS.get(7))
-								severity = SEVERITY.Error;
+								severity = Severity.Error;
 							if (tempBS.get(23))
-								severity = SEVERITY.Warning;
+								severity = Severity.Warning;
 							if ("The XMP property 'pdfaid:conformance' has the invalid value 'B'. Required is 'A'."
 									.equals(sErrorMsg)) {
-								severity = SEVERITY.CustomWarning;
+								severity = Severity.CustomWarning;
 							}
 							PdfValidationResultEntry pdfVResult = new PdfValidationResultEntry();
 							pdfVResult.setErrMsg(sErrorMsg, severity);
@@ -347,7 +351,7 @@ public class PdfValidator {
 				pdfValidator.destroyObject();
 			} else {
 				PdfValidationResultEntry pdfVResult = new PdfValidationResultEntry();
-				pdfVResult.setErrMsg(licenseErrorMsg, SEVERITY.Error);
+				pdfVResult.setErrMsg(licenseErrorMsg, Severity.Error);
 				pdfVResult.setLineNumber(lineNumber);
 				pdfValidationResult.add(pdfVResult);
 				pdfValidationResult.setIsDone();
