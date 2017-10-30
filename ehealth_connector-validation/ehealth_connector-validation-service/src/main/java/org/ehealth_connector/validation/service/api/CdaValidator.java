@@ -595,6 +595,10 @@ public class CdaValidator {
 			log.info("Start of PDF validation");
 			if (pdfValidator != null) {
 				try {
+					// make sure we read the stream from the beginning
+					InputStream is = cdaStream.getInputStream();
+					if (is != null)
+						cdaStream.getInputStream().reset();
 					pdfValidator.validateCda(cdaStream);
 				} catch (ConfigurationException | SaxonApiException | IOException e) {
 					PdfValidationResultEntry failure = new PdfValidationResultEntry();
@@ -663,6 +667,10 @@ public class CdaValidator {
 		MaxWaitReaction timeoutReaction = null;
 		if (errorMsg == null) {
 			try {
+				// make sure we read the stream from the beginning
+				InputStream is = cdaStream.getInputStream();
+				if (is != null)
+					cdaStream.getInputStream().reset();
 				insufficientMemoryReaction = configuration.getInsufficientMemoryReaction();
 				requiredMemory = configuration.getMinimalRequiredMemory();
 				timeoutMax = configuration.getTimeoutMax();
@@ -681,7 +689,7 @@ public class CdaValidator {
 				log.debug("Schematron validation configuration - timeoutReaction: "
 						+ timeoutReaction);
 
-			} catch (ConfigurationException e1) {
+			} catch (ConfigurationException | IOException e1) {
 				errorMsg = e1.getMessage();
 			}
 		}
@@ -856,6 +864,7 @@ public class CdaValidator {
 			throw new ConfigurationException("No CDA-Document provided for validation");
 
 		try {
+			// make sure we read the stream from the beginning
 			InputStream is = cdaStream.getInputStream();
 			if (is != null)
 				cdaStream.getInputStream().reset();
@@ -924,6 +933,10 @@ public class CdaValidator {
 		if (errorMsg == null) {
 			log.info("Start of veraPDF validation");
 			try {
+				// make sure we read the stream from the beginning
+				InputStream is = cdaStream.getInputStream();
+				if (is != null)
+					cdaStream.getInputStream().reset();
 				veraPdfValidator.validateCda(cdaStream);
 			} catch (ConfigurationException | SaxonApiException | IOException e) {
 				// TODO Auto-generated catch block
@@ -978,6 +991,7 @@ public class CdaValidator {
 		final XsdValidationResult xsdValRes = new XsdValidationResult();
 
 		String errorMsg = null;
+
 		if (this.configuration == null)
 			errorMsg = "No configuration available";
 		if (cdaStream == null)
@@ -987,6 +1001,11 @@ public class CdaValidator {
 			try {
 				final Schema schema = loadSchema(configuration.getCdaDocumentSchema());
 				final Validator validator = schema.newValidator();
+
+				// make sure we read the stream from the beginning
+				InputStream is = cdaStream.getInputStream();
+				if (is != null)
+					cdaStream.getInputStream().reset();
 				validator.validate(cdaStream);
 				xsdValRes.setXsdValid(true);
 				xsdValRes.setXsdValidationMsg("XSD Valid");
