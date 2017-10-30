@@ -216,6 +216,7 @@ public class VeraPdfValidator {
 
 		initialize(lineNumber);
 		ValidationResult result = null;
+		Boolean aborted = false;
 		if (pdfValidator != null) {
 			pdfValidationResult.resetIsDone();
 			byte[] decodedBytes;
@@ -227,54 +228,66 @@ public class VeraPdfValidator {
 						.createParser(new ByteArrayInputStream(decodedBytes), flavour);
 				result = pdfValidator.validate(parser);
 			} catch (ModelParsingException | EncryptedPdfException | ValidationException e) {
+				aborted = true;
 				VeraPdfValidationResultEntry failure = new VeraPdfValidationResultEntry();
-				failure.setErrMsg(e.getMessage(), Severity.CustomWarning);
+				String errMsg = e.getMessage();
+				if (e.getCause() != null) {
+					if (e.getCause().getMessage() != null)
+						errMsg = errMsg + " (" + e.getCause().getMessage() + ")";
+				}
+				errMsg = errMsg
+						+ "*** Note: veraPDF was not thread save with Version 1.8.1. See also https://github.com/veraPDF/veraPDF-library/issues/896";
+				failure.setErrMsg(errMsg, Severity.CustomWarning);
 				pdfValidationResult.setIsDone();
 				pdfValidationResult.setPdfValid(false);
 				pdfValidationResult.add(failure);
 			}
-			if (result != null) {
-				pdfValidationResult.setIsDone();
-				if (!result.isCompliant()) {
-					Set<TestAssertion> assertionSet = result.getTestAssertions();
-					Iterator<TestAssertion> iterator = assertionSet.iterator();
-					while (iterator.hasNext()) {
-						TestAssertion assertion = iterator.next();
-						VeraPdfValidationResultEntry failure = new VeraPdfValidationResultEntry();
-						failure.setPdfSpecificationId(
-								assertion.getRuleId().getSpecification().getId());
-						failure.setPdfSpecificationName(
-								assertion.getRuleId().getSpecification().getName());
-						failure.setVeraPdfRule(assertion.getRuleId().getClause());
-						failure.setVeraPdfTestNumber(
-								Integer.toString(assertion.getRuleId().getTestNumber()));
-						failure.setPdfContext(assertion.getLocation().getContext());
-						failure.setErrMsg(assertion.getMessage(), Severity.Error);
-						failure.setLineNumber(lineNumber);
+			if (!aborted) {
+				if (result != null) {
+					pdfValidationResult.setIsDone();
+					if (!result.isCompliant()) {
+						Set<TestAssertion> assertionSet = result.getTestAssertions();
+						Iterator<TestAssertion> iterator = assertionSet.iterator();
+						while (iterator.hasNext()) {
+							TestAssertion assertion = iterator.next();
+							VeraPdfValidationResultEntry failure = new VeraPdfValidationResultEntry();
+							failure.setPdfSpecificationId(
+									assertion.getRuleId().getSpecification().getId());
+							failure.setPdfSpecificationName(
+									assertion.getRuleId().getSpecification().getName());
+							failure.setVeraPdfRule(assertion.getRuleId().getClause());
+							failure.setVeraPdfTestNumber(
+									Integer.toString(assertion.getRuleId().getTestNumber()));
+							failure.setPdfContext(assertion.getLocation().getContext());
+							failure.setErrMsg(assertion.getMessage(), Severity.Error);
+							failure.setLineNumber(lineNumber);
 
-						Boolean realFailure = true;
-						// These rules appear under .Net, only. In order to
-						// synchronize Java and .Net validation results, these
-						// failures are suppressed.
-						if ("6.2.2".equals(assertion.getRuleId().getClause())
-								&& (assertion.getRuleId().getTestNumber() == 1))
-							realFailure = false;
-						if ("6.2.3".equals(assertion.getRuleId().getClause())
-								&& (assertion.getRuleId().getTestNumber() == 5))
-							realFailure = false;
+							Boolean realFailure = true;
+							// These rules appear under .Net, only. In order to
+							// synchronize Java and .Net validation results,
+							// these
+							// failures are suppressed.
+							if ("6.2.2".equals(assertion.getRuleId().getClause())
+									&& (assertion.getRuleId().getTestNumber() == 1))
+								realFailure = false;
+							if ("6.2.3".equals(assertion.getRuleId().getClause())
+									&& (assertion.getRuleId().getTestNumber() == 5))
+								realFailure = false;
 
-						if (realFailure)
-							pdfValidationResult.add(failure);
-					}
-					pdfValidationResult.setPdfValid(pdfValidationResult.getEntries().size() == 0);
-				} else
+							if (realFailure)
+								pdfValidationResult.add(failure);
+						}
+						pdfValidationResult
+								.setPdfValid(pdfValidationResult.getEntries().size() == 0);
+					} else
+						pdfValidationResult.setPdfValid(true);
+					pdfValidationResult.setIsDone();
+				} else {
+					VeraPdfValidationResultEntry pdfVResult = new VeraPdfValidationResultEntry();
+					pdfVResult.setLineNumber(lineNumber);
+					pdfValidationResult.add(pdfVResult);
 					pdfValidationResult.setPdfValid(true);
-				pdfValidationResult.setIsDone();
-			} else {
-				VeraPdfValidationResultEntry pdfVResult = new VeraPdfValidationResultEntry();
-				pdfVResult.setLineNumber(lineNumber);
-				pdfValidationResult.add(pdfVResult);
-				pdfValidationResult.setPdfValid(true);
+				}
 			}
 			pdfValidator.close();
 		}
