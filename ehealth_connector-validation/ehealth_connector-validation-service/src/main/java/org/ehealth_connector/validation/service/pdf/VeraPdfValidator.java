@@ -63,9 +63,6 @@ public class VeraPdfValidator {
 	/** Not installed error message */
 	public final static String ERR_NOT_INSTALLED = "PdfValidatorAPI not installed";
 
-	/** Current configuration */
-	private final Configuration config;
-
 	/** veraPDF validator flavour */
 	private PDFAFlavour flavour;
 
@@ -88,9 +85,7 @@ public class VeraPdfValidator {
 	 *            Current configuration
 	 */
 	public VeraPdfValidator(Configuration config) {
-		this.config = config;
 		this.pdfLevel = config.getPdfLevel();
-		VeraGreenfieldFoundryProvider.initialise();
 	}
 
 	/**
@@ -122,10 +117,7 @@ public class VeraPdfValidator {
 			initialize("none");
 		}
 		if (pdfValidator != null) {
-			// TODO ersetzen mit
-			// com.pdftools.pdfvalidator.PdfValidatorAPI.getVersion(),
-			// sobald 4.8.0 von PDF Tools freigegeben ist.
-			// retVal = com.pdftools.pdfvalidator.PdfValidatorAPI.VERSION;
+			retVal = pdfValidator.getDetails().getVersion();
 		}
 		return retVal;
 	}
@@ -141,6 +133,7 @@ public class VeraPdfValidator {
 			log.info("Trying to initialize veraPdfValidator...");
 			pdfValidationResult = new VeraPdfValidationResult();
 			flavour = PDFAFlavour.fromString(pdfLevel);
+			VeraGreenfieldFoundryProvider.initialise();
 			pdfValidator = Foundries.defaultInstance().createValidator(flavour, false);
 		} else
 			log.info("PdfValidatorAPI already initialized...");
@@ -227,6 +220,7 @@ public class VeraPdfValidator {
 			pdfValidationResult.resetIsDone();
 			byte[] decodedBytes;
 			decodedBytes = Base64.getMimeDecoder().decode(pdfStrB64);
+
 			PDFAParser parser;
 			try {
 				parser = Foundries.defaultInstance()
@@ -241,20 +235,41 @@ public class VeraPdfValidator {
 			}
 			if (result != null) {
 				pdfValidationResult.setIsDone();
-				pdfValidationResult.setPdfValid(result.isCompliant());
 				if (!result.isCompliant()) {
 					Set<TestAssertion> assertionSet = result.getTestAssertions();
 					Iterator<TestAssertion> iterator = assertionSet.iterator();
 					while (iterator.hasNext()) {
 						TestAssertion assertion = iterator.next();
 						VeraPdfValidationResultEntry failure = new VeraPdfValidationResultEntry();
+						failure.setPdfSpecificationId(
+								assertion.getRuleId().getSpecification().getId());
+						failure.setPdfSpecificationName(
+								assertion.getRuleId().getSpecification().getName());
+						failure.setVeraPdfRule(assertion.getRuleId().getClause());
+						failure.setVeraPdfTestNumber(
+								Integer.toString(assertion.getRuleId().getTestNumber()));
+						failure.setPdfContext(assertion.getLocation().getContext());
 						failure.setErrMsg(assertion.getMessage(), Severity.Error);
 						failure.setLineNumber(lineNumber);
-						pdfValidationResult.add(failure);
+
+						Boolean realFailure = true;
+						// These rules appear under .Net, only. In order to
+						// synchronize Java and .Net validation results, these
+						// failures are suppressed.
+						if ("6.2.2".equals(assertion.getRuleId().getClause())
+								&& (assertion.getRuleId().getTestNumber() == 1))
+							realFailure = false;
+						if ("6.2.3".equals(assertion.getRuleId().getClause())
+								&& (assertion.getRuleId().getTestNumber() == 5))
+							realFailure = false;
+
+						if (realFailure)
+							pdfValidationResult.add(failure);
 					}
-					pdfValidationResult.setIsDone();
-					pdfValidationResult.setPdfValid(false);
-				}
+					pdfValidationResult.setPdfValid(pdfValidationResult.getEntries().size() == 0);
+				} else
+					pdfValidationResult.setPdfValid(true);
+				pdfValidationResult.setIsDone();
 			} else {
 				VeraPdfValidationResultEntry pdfVResult = new VeraPdfValidationResultEntry();
 				pdfVResult.setLineNumber(lineNumber);

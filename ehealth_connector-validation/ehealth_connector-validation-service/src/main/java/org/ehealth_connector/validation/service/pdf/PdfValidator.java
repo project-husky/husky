@@ -25,9 +25,9 @@ import java.util.BitSet;
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.transform.stream.StreamSource;
 
-import org.ehealth_connector.validation.service.enums.Severity;
 import org.ehealth_connector.validation.service.config.Configuration;
 import org.ehealth_connector.validation.service.config.ConfigurationException;
+import org.ehealth_connector.validation.service.enums.Severity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

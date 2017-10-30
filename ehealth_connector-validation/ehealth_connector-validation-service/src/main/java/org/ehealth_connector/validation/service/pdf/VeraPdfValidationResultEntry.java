@@ -49,20 +49,6 @@ public class VeraPdfValidationResultEntry {
 	/** String indication a warning */
 	private static String T_WARNING = "Warning";
 
-	/**
-	 * Creates a copy of the given validation result entry
-	 *
-	 * @param src
-	 *            The validation result entry to be copied
-	 * @return The copy
-	 */
-	public static VeraPdfValidationResultEntry copy(VeraPdfValidationResultEntry src) {
-		VeraPdfValidationResultEntry retVal = new VeraPdfValidationResultEntry();
-		String errMsg = src.getErrMsg();
-		retVal.setErrMsg(errMsg, src.getSeverity(errMsg));
-		return retVal;
-	}
-
 	/** Error indicator */
 	private Boolean containsErrors = false;
 
@@ -74,6 +60,21 @@ public class VeraPdfValidationResultEntry {
 
 	/** line number of the validated PDF within the parent CDA document */
 	private String lineNumber;
+
+	/** context within the pdf */
+	private String pdfContext;
+
+	/** referenced specification */
+	private String pdfSpecificationId;
+
+	/** referenced specification */
+	private String pdfSpecificationName;
+
+	/** veraPDF Rule */
+	private String veraPdfRule;
+
+	/** veraPDF Test number */
+	private String veraPdfTestNumber;
 
 	/** Status of this validation entry */
 	private STATUS status = STATUS.Success;
@@ -150,6 +151,43 @@ public class VeraPdfValidationResultEntry {
 	}
 
 	/**
+	 * Gets the pdf context.
+	 *
+	 * @return the pdf context
+	 */
+	public String getPdfContext() {
+		return pdfContext;
+	}
+
+	/**
+	 * Gets the pdf specification id.
+	 *
+	 * @return the pdf specification id
+	 */
+	public String getPdfSpecificationId() {
+		return pdfSpecificationId;
+	}
+
+	/**
+	 * Gets the pdf specification name.
+	 *
+	 * @return the pdf specification name
+	 */
+	public String getPdfSpecificationName() {
+		return pdfSpecificationName;
+	}
+
+	/**
+	 * Gets the rule key.
+	 *
+	 * @return the rule key
+	 */
+	public String getRuleKey() {
+		return "Specification: " + getPdfSpecificationId() + ", Clause: " + getVeraPdfRule()
+				+ ", Test number: " + getVeraPdfTestNumber();
+	}
+
+	/**
 	 * Gets the severity of the given error message
 	 *
 	 * @param errMsg
@@ -176,6 +214,24 @@ public class VeraPdfValidationResultEntry {
 	 */
 	public STATUS getStatus() {
 		return status;
+	}
+
+	/**
+	 * Gets the vera pdf rule.
+	 *
+	 * @return the vera pdf rule
+	 */
+	public String getVeraPdfRule() {
+		return veraPdfRule;
+	}
+
+	/**
+	 * Gets the vera pdf test number.
+	 *
+	 * @return the vera pdf test number
+	 */
+	public String getVeraPdfTestNumber() {
+		return veraPdfTestNumber;
 	}
 
 	/**
@@ -242,5 +298,43 @@ public class VeraPdfValidationResultEntry {
 	 */
 	public void setLineNumber(String lineNumber) {
 		this.lineNumber = lineNumber;
+	}
+
+	/**
+	 * Sets the pdf context.
+	 *
+	 * @param pdfContext
+	 *            the new pdf context
+	 */
+	public void setPdfContext(String pdfContext) {
+		this.pdfContext = pdfContext;
+	}
+
+	public void setPdfSpecificationId(String pdfSpecificationId) {
+		this.pdfSpecificationId = pdfSpecificationId;
+	}
+
+	public void setPdfSpecificationName(String pdfSpecificationName) {
+		this.pdfSpecificationName = pdfSpecificationName;
+	}
+
+	/**
+	 * Sets the vera pdf rule.
+	 *
+	 * @param veraPdfRule
+	 *            the new vera pdf rule
+	 */
+	public void setVeraPdfRule(String veraPdfRule) {
+		this.veraPdfRule = veraPdfRule;
+	}
+
+	/**
+	 * Sets the vera pdf test number.
+	 *
+	 * @param veraPdfTestNumber
+	 *            the new vera pdf test number
+	 */
+	public void setVeraPdfTestNumber(String veraPdfTestNumber) {
+		this.veraPdfTestNumber = veraPdfTestNumber;
 	}
 }

@@ -390,6 +390,15 @@ public class CdaValidator {
 	}
 
 	/**
+	 * Gets the vera pdf validator.
+	 *
+	 * @return the vera pdf validator
+	 */
+	public VeraPdfValidator getVeraPdfValidator() {
+		return veraPdfValidator;
+	}
+
+	/**
 	 * Returns the validator's work directory
 	 *
 	 * @return the validator's work directory

@@ -26,7 +26,6 @@
 			<groupId>net.sf.saxon</groupId>
 			<artifactId>Saxon-HE</artifactId>
 		</dependency>
-		<!-- test stuff -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -42,7 +41,6 @@
 		<dependency>
 			<groupId>org.verapdf</groupId>
 			<artifactId>validation-model</artifactId>
-			<version>1.6.2</version>
 		</dependency>
 
 	</dependencies>
