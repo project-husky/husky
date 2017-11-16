@@ -39,7 +39,6 @@ import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.StringType;
 import org.hl7.fhir.exceptions.FHIRException;
-//import org.ehealth_connector.communication.ch.enums.AvailabilityStatus;
 import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;
 
 import ca.uhn.fhir.context.FhirContext;

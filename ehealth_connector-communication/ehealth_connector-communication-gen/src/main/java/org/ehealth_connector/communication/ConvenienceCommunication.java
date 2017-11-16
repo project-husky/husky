@@ -31,7 +31,6 @@ import java.util.zip.ZipFile;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.EhcVersions;
-//import org.ehealth_connector.common.ch.AuthorCh;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.ehealth_connector.communication.AtnaConfig.AtnaConfigMode;
@@ -39,9 +38,6 @@ import org.ehealth_connector.communication.DocumentMetadata.DocumentMetadataExtr
 import org.ehealth_connector.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
 import org.ehealth_connector.communication.tls.CustomHttpsTLSv11v12SocketFactory;
 import org.ehealth_connector.communication.utils.AbstractAxis2Util;
-//import org.ehealth_connector.communication.ch.DocumentMetadataCh;
-//import org.ehealth_connector.communication.ch.enums.AuthorRole;
-//import org.ehealth_connector.communication.ch.enums.AvailabilityStatus;
 import org.ehealth_connector.communication.xd.storedquery.FindDocumentsQuery;
 import org.ehealth_connector.communication.xd.storedquery.FindFoldersStoredQuery;
 import org.ehealth_connector.communication.xd.storedquery.StoredQueryInterface;
