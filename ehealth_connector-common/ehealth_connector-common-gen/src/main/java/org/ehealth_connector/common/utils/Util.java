@@ -22,8 +22,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -37,7 +35,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.log4j.xml.DOMConfigurator;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -1079,51 +1076,6 @@ public class Util {
 		final II ii = DatatypesFactory.eINSTANCE.createII();
 		ii.setRoot(root);
 		return ii;
-	}
-
-	/**
-	 * Inits the logger.
-	 *
-	 * @param theClass
-	 *            the the class
-	 * @return the logger
-	 */
-	public static Logger initLogger(@SuppressWarnings("rawtypes") Class theClass) {
-
-		org.apache.log4j.Logger log = null;
-		URL res = null;
-		String msg = null;
-
-		try {
-			File logConfig = new File(new File("").getAbsoluteFile().getAbsolutePath()
-					+ "/rsc/log4jConfigs/log4j.xml");
-			if (!logConfig.exists())
-				logConfig = new File(new File("").getAbsoluteFile().getAbsolutePath()
-						+ "/../rsc/log4jConfigs/log4j.xml");
-			if (!logConfig.exists())
-				res = theClass.getResource("/log4jConfigs/log4j.xml");
-			else
-				res = new URL("file:/" + logConfig.getAbsolutePath());
-		} catch (MalformedURLException e) {
-			msg = e.getMessage();
-		}
-
-		try {
-			DOMConfigurator.configure(res);
-		} catch (Exception e) {
-			msg = e.getMessage();
-		}
-
-		log = LogManager.getLogger(theClass);
-
-		if (msg != null) {
-			if (log != null)
-				log.error(msg);
-			else
-				System.out.print("***ERROR: No valid Demo selected\n\n");
-		}
-
-		return log;
 	}
 
 	/**
