@@ -26,20 +26,20 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  */
 public enum LanguageCode {
 
-	ENGLISH("en", "english"),
+	ENGLISH("en", "English"),
 	/**
 	 * <div class="de">französisch</div> <div class="fr"></div>
 	 */
-	FRENCH("fr-CH", "french"),
+	FRENCH("fr-CH", "French"),
 	/**
 	 * <div class="de">deutsch</div> <div class="fr"></div>
 	 */
-	GERMAN("de-CH", "german"),
+	GERMAN("de-CH", "German"),
 
 	/**
 	 * <div class="de">italienisch</div> <div class="fr"></div>
 	 */
-	ITALIAN("it-CH", "italian");
+	ITALIAN("it-CH", "Italian");
 	public static final String CODE_SYSTEM_NAME = "";
 	public static final String CODE_SYSTEM_OID = "ISO 3166";
 	public static final String ENGLISH_CODE = "en";
