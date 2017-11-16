@@ -343,9 +343,10 @@ public class PdfValidator {
 						err = pdfValidator.getNextError();
 					}
 				} else {
-					PdfValidationResultEntry pdfVResult = new PdfValidationResultEntry();
-					pdfVResult.setLineNumber(lineNumber);
-					pdfValidationResult.add(pdfVResult);
+					PdfValidationResultEntry success = new PdfValidationResultEntry();
+					success.setLineNumber(lineNumber);
+					success.setErrMsg("PDF is compliant", Severity.Information);
+					pdfValidationResult.add(success);
 				}
 				pdfValidator.close();
 				pdfValidator.destroyObject();

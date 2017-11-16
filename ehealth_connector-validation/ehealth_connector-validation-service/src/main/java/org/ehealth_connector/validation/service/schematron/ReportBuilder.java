@@ -45,6 +45,7 @@ import org.xml.sax.SAXException;
 import net.sf.saxon.s9api.DocumentBuilder;
 import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.SaxonApiException;
+import net.sf.saxon.s9api.SaxonApiUncheckedException;
 import net.sf.saxon.s9api.Serializer;
 import net.sf.saxon.s9api.XPathCompiler;
 import net.sf.saxon.s9api.XPathExecutable;
@@ -436,9 +437,8 @@ public class ReportBuilder {
 		try {
 			final XdmNode document = builder.build(source);
 			xPathSelector.setContextItem(document);
-		} catch (SaxonApiException e) {
-			e.printStackTrace();
-			// Do nothing
+		} catch (SaxonApiException | SaxonApiUncheckedException e) {
+			throw new RuleSetDetectionException(e.getClass().getName() + ":" + e.getMessage());
 		}
 
 		RuleSet match;

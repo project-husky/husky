@@ -88,7 +88,7 @@ public class VeraPdfValidationResultEntry {
 		if (currentItem < errMsgs.size())
 			return errMsgs.get(currentItem);
 		else
-			return "uups oput of bounds";
+			return "uups out of bounds";
 	}
 
 	/**

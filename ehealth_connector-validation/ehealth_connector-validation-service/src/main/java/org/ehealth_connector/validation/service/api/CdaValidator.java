@@ -602,7 +602,8 @@ public class CdaValidator {
 					pdfValidator.validateCda(cdaStream);
 				} catch (ConfigurationException | SaxonApiException | IOException e) {
 					PdfValidationResultEntry failure = new PdfValidationResultEntry();
-					failure.setErrMsg(e.getMessage(), Severity.Error);
+					failure.setErrMsg(e.getClass().getName() + ":" + e.getMessage(),
+							Severity.Error);
 					failure.setLineNumber("none");
 					retVal.add(failure);
 				}
@@ -690,7 +691,7 @@ public class CdaValidator {
 						+ timeoutReaction);
 
 			} catch (ConfigurationException | IOException e1) {
-				errorMsg = e1.getMessage();
+				errorMsg = e1.getCause().getMessage() + ":" + e1.getMessage();
 			}
 		}
 
@@ -939,8 +940,10 @@ public class CdaValidator {
 					cdaStream.getInputStream().reset();
 				veraPdfValidator.validateCda(cdaStream);
 			} catch (ConfigurationException | SaxonApiException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				VeraPdfValidationResultEntry failure = new VeraPdfValidationResultEntry();
+				failure.setErrMsg(e.getClass().getName() + ":" + e.getMessage(), Severity.Error);
+				failure.setLineNumber("none");
+				retVal.add(failure);
 			}
 			retVal = veraPdfValidator.getPdfValidationResults();
 
@@ -1011,7 +1014,7 @@ public class CdaValidator {
 				xsdValRes.setXsdValidationMsg("XSD Valid");
 			} catch (SAXException | IOException | ConfigurationException e) {
 				xsdValRes.setXsdValid(false);
-				xsdValRes.setXsdValidationMsg(e.getMessage());
+				xsdValRes.setXsdValidationMsg(e.getClass().getName() + ":" + e.getMessage());
 			}
 		} else {
 			xsdValRes.setXsdValid(false);

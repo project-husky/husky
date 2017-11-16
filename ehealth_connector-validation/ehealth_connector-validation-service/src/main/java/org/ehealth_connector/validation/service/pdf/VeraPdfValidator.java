@@ -230,7 +230,7 @@ public class VeraPdfValidator {
 			} catch (ModelParsingException | EncryptedPdfException | ValidationException e) {
 				aborted = true;
 				VeraPdfValidationResultEntry failure = new VeraPdfValidationResultEntry();
-				String errMsg = e.getMessage();
+				String errMsg = e.getClass().getName() + ": " + e.getMessage();
 				if (e.getCause() != null) {
 					if (e.getCause().getMessage() != null)
 						errMsg = errMsg + " (" + e.getCause().getMessage() + ")";
@@ -273,14 +273,25 @@ public class VeraPdfValidator {
 							if ("6.2.3".equals(assertion.getRuleId().getClause())
 									&& (assertion.getRuleId().getTestNumber() == 5))
 								realFailure = false;
+							if ("6.2.3".equals(assertion.getRuleId().getClause())
+									&& (assertion.getRuleId().getTestNumber() == 4))
+								realFailure = false;
+							if ("6.3.4".equals(assertion.getRuleId().getClause())
+									&& (assertion.getRuleId().getTestNumber() == 1))
+								realFailure = false;
 
 							if (realFailure)
 								pdfValidationResult.add(failure);
 						}
 						pdfValidationResult
 								.setPdfValid(pdfValidationResult.getEntries().size() == 0);
-					} else
+					} else {
 						pdfValidationResult.setPdfValid(true);
+						VeraPdfValidationResultEntry success = new VeraPdfValidationResultEntry();
+						success.setLineNumber(lineNumber);
+						success.setErrMsg("PDF is compliant", Severity.Information);
+						pdfValidationResult.add(success);
+					}
 					pdfValidationResult.setIsDone();
 				} else {
 					VeraPdfValidationResultEntry pdfVResult = new VeraPdfValidationResultEntry();
