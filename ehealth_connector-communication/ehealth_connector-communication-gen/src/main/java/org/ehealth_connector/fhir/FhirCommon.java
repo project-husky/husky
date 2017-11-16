@@ -1183,8 +1183,7 @@ public class FhirCommon {
 		String mimeType = "";
 		fhirObject.getContentFirstRep().getFormat();
 		Coding item = fhirObject.getContentFirstRep().getFormat();
-		final List<Extension> extensions = item
-				.getExtensionsByUrl(FhirCommon.urnUseAsDocumentDescriptor);
+		final List<Extension> extensions = item.getExtensionsByUrl(FhirCommon.urnUseAsMimeType);
 		if (!extensions.isEmpty()) {
 			mimeType = item.getCode();
 		}
