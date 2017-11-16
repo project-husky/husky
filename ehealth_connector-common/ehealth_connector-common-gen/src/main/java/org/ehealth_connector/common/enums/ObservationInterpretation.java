@@ -282,7 +282,7 @@ public enum ObservationInterpretation {
 	 * @return <div class="en">the display name</div>
 	 */
 	public String getDisplayName() {
-		return this.displayName;
+		return getDisplayName(LanguageCode.ENGLISH);
 	}
 
 	/**
