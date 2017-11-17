@@ -19,7 +19,10 @@ package org.ehealth_connector.cda.ch.utils;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
+import org.apache.commons.io.Charsets;
+import org.apache.commons.io.IOUtils;
 import org.ehealth_connector.cda.ch.edes.CdaChEdesCtnn;
 import org.ehealth_connector.cda.ch.edes.CdaChEdesEdpn;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
@@ -59,8 +62,9 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @return the CdaChEdesCtnn Document
 	 */
 	public static CdaChEdesCtnn loadEdesCtnnFromFile(String filePath) throws Exception {
-		final InputStream inputstream = new FileInputStream(filePath);
-		return loadEdesCtnnFromStream(inputstream);
+		return loadEdesCtnnFromStream(IOUtils.toInputStream(
+				IOUtils.toString(new InputStreamReader(new FileInputStream(filePath), "UTF-8")),
+				Charsets.UTF_8));
 	}
 
 	/**
@@ -94,8 +98,9 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @return the CdaChEdesEdpn Document
 	 */
 	public static CdaChEdesEdpn loadEdesEdpnFromFile(String filePath) throws Exception {
-		final InputStream inputstream = new FileInputStream(filePath);
-		return loadEdesEdpnFromStream(inputstream);
+		return loadEdesEdpnFromStream(IOUtils.toInputStream(
+				IOUtils.toString(new InputStreamReader(new FileInputStream(filePath), "UTF-8")),
+				Charsets.UTF_8));
 	}
 
 	/**
@@ -129,8 +134,9 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @return the CdaChLrph Document
 	 */
 	public static CdaChLrph loadLrphFromFile(String filePath) throws Exception {
-		final InputStream inputstream = new FileInputStream(filePath);
-		return loadLrphFromStream(inputstream);
+		return loadLrphFromStream(IOUtils.toInputStream(
+				IOUtils.toString(new InputStreamReader(new FileInputStream(filePath), "UTF-8")),
+				Charsets.UTF_8));
 	}
 
 	/**
@@ -162,8 +168,9 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @return the CdaChLrqc Document
 	 */
 	public static CdaChLrqc loadLrqcFromFile(String filePath) throws Exception {
-		final InputStream inputstream = new FileInputStream(filePath);
-		return loadLrqcFromStream(inputstream);
+		return loadLrqcFromStream(IOUtils.toInputStream(
+				IOUtils.toString(new InputStreamReader(new FileInputStream(filePath), "UTF-8")),
+				Charsets.UTF_8));
 	}
 
 	/**
@@ -195,8 +202,9 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @return the CdaChLrtp Document
 	 */
 	public static CdaChLrtp loadLrtpFromFile(String filePath) throws Exception {
-		final InputStream inputstream = new FileInputStream(filePath);
-		return loadLrtpFromStream(inputstream);
+		return loadLrtpFromStream(IOUtils.toInputStream(
+				IOUtils.toString(new InputStreamReader(new FileInputStream(filePath), "UTF-8")),
+				Charsets.UTF_8));
 	}
 
 	/**
@@ -228,8 +236,9 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @return the CdaChMtpsDis Document
 	 */
 	public static CdaChMtpsDis loadMtpsDisFromFile(String filePath) throws Exception {
-		final InputStream inputstream = new FileInputStream(filePath);
-		return loadMtpsDisFromStream(inputstream);
+		return loadMtpsDisFromStream(IOUtils.toInputStream(
+				IOUtils.toString(new InputStreamReader(new FileInputStream(filePath), "UTF-8")),
+				Charsets.UTF_8));
 	}
 
 	/**
@@ -261,8 +270,9 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @return the CdaChMtpsMtp Document
 	 */
 	public static CdaChMtpsMtp loadMtpsMtpFromFile(String filePath) throws Exception {
-		final InputStream inputstream = new FileInputStream(filePath);
-		return loadMtpsMtpFromStream(inputstream);
+		return loadMtpsMtpFromStream(IOUtils.toInputStream(
+				IOUtils.toString(new InputStreamReader(new FileInputStream(filePath), "UTF-8")),
+				Charsets.UTF_8));
 	}
 
 	/**
@@ -294,8 +304,9 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @return the CdaChMtpsPadv Document
 	 */
 	public static CdaChMtpsPadv loadMtpsPadvFromFile(String filePath) throws Exception {
-		final InputStream inputstream = new FileInputStream(filePath);
-		return loadMtpsPadvFromStream(inputstream);
+		return loadMtpsPadvFromStream(IOUtils.toInputStream(
+				IOUtils.toString(new InputStreamReader(new FileInputStream(filePath), "UTF-8")),
+				Charsets.UTF_8));
 	}
 
 	/**
@@ -327,8 +338,9 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @return the CdaChMtpsPml Document
 	 */
 	public static CdaChMtpsPml loadMtpsPmlFromFile(String filePath) throws Exception {
-		final InputStream inputstream = new FileInputStream(filePath);
-		return loadMtpsPmlFromStream(inputstream);
+		return loadMtpsPmlFromStream(IOUtils.toInputStream(
+				IOUtils.toString(new InputStreamReader(new FileInputStream(filePath), "UTF-8")),
+				Charsets.UTF_8));
 	}
 
 	/**
@@ -360,8 +372,9 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @return the CdaChVacd Document
 	 */
 	public static CdaChMtpsPre loadMtpsPreFromFile(String filePath) throws Exception {
-		final InputStream inputstream = new FileInputStream(filePath);
-		return loadMtpsPreFromStream(inputstream);
+		return loadMtpsPreFromStream(IOUtils.toInputStream(
+				IOUtils.toString(new InputStreamReader(new FileInputStream(filePath), "UTF-8")),
+				Charsets.UTF_8));
 	}
 
 	/**
@@ -393,8 +406,9 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @return the CdaChVacd Document
 	 */
 	public static CdaChVacd loadVacdFromFile(String filePath) throws Exception {
-		final InputStream inputstream = new FileInputStream(filePath);
-		return loadVacdFromStream(inputstream);
+		return loadVacdFromStream(IOUtils.toInputStream(
+				IOUtils.toString(new InputStreamReader(new FileInputStream(filePath), "UTF-8")),
+				Charsets.UTF_8));
 	}
 
 	/**
