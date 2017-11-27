@@ -114,7 +114,7 @@ public class VeraPdfValidator {
 	public String getPdfValidatorVersion() {
 		String retVal = "none";
 		if (pdfValidator == null) {
-			initialize("none");
+			initialize();
 		}
 		if (pdfValidator != null) {
 			retVal = pdfValidator.getDetails().getVersion();
@@ -124,11 +124,8 @@ public class VeraPdfValidator {
 
 	/**
 	 * Initializes the PDF validator
-	 *
-	 * @param lineNumber
-	 *            the line number where the PDF starts within the CDA document
 	 */
-	private void initialize(String lineNumber) {
+	private void initialize() {
 		if (pdfValidator == null) {
 			log.info("Trying to initialize veraPdfValidator...");
 			pdfValidationResult = new VeraPdfValidationResult();
@@ -175,7 +172,7 @@ public class VeraPdfValidator {
 	public void validateCda(StreamSource cdaStream)
 			throws ConfigurationException, SaxonApiException, IOException {
 
-		pdfValidationResult = new VeraPdfValidationResult();
+		initialize();
 
 		final Processor proc = new Processor(false);
 
@@ -214,9 +211,10 @@ public class VeraPdfValidator {
 	private void validatePdf(String pdfStrB64, String lineNumber)
 			throws IOException, ConfigurationException {
 
-		initialize(lineNumber);
+		initialize();
 		ValidationResult result = null;
 		Boolean aborted = false;
+		Boolean valid = true;
 		if (pdfValidator != null) {
 			pdfValidationResult.resetIsDone();
 			byte[] decodedBytes;
@@ -239,12 +237,12 @@ public class VeraPdfValidator {
 						+ "*** Note: veraPDF was not thread save with Version 1.8.1. See also https://github.com/veraPDF/veraPDF-library/issues/896";
 				failure.setErrMsg(errMsg, Severity.CustomWarning);
 				pdfValidationResult.setIsDone();
-				pdfValidationResult.setPdfValid(false);
 				pdfValidationResult.add(failure);
 			}
 			if (!aborted) {
 				if (result != null) {
 					pdfValidationResult.setIsDone();
+					int realFailures = 0;
 					if (!result.isCompliant()) {
 						Set<TestAssertion> assertionSet = result.getTestAssertions();
 						Iterator<TestAssertion> iterator = assertionSet.iterator();
@@ -271,6 +269,9 @@ public class VeraPdfValidator {
 									&& (assertion.getRuleId().getTestNumber() == 1))
 								realFailure = false;
 							if ("6.2.3".equals(assertion.getRuleId().getClause())
+									&& (assertion.getRuleId().getTestNumber() == 2))
+								realFailure = false;
+							if ("6.2.3".equals(assertion.getRuleId().getClause())
 									&& (assertion.getRuleId().getTestNumber() == 5))
 								realFailure = false;
 							if ("6.2.3".equals(assertion.getRuleId().getClause())
@@ -280,13 +281,16 @@ public class VeraPdfValidator {
 									&& (assertion.getRuleId().getTestNumber() == 1))
 								realFailure = false;
 
-							if (realFailure)
+							if (realFailure) {
+								realFailures++;
 								pdfValidationResult.add(failure);
+							}
 						}
-						pdfValidationResult
-								.setPdfValid(pdfValidationResult.getEntries().size() == 0);
-					} else {
-						pdfValidationResult.setPdfValid(true);
+					}
+					if (valid) {
+						valid = (realFailures == 0);
+					}
+					if (realFailures == 0) {
 						VeraPdfValidationResultEntry success = new VeraPdfValidationResultEntry();
 						success.setLineNumber(lineNumber);
 						success.setErrMsg("PDF is compliant", Severity.Information);
@@ -297,8 +301,8 @@ public class VeraPdfValidator {
 					VeraPdfValidationResultEntry pdfVResult = new VeraPdfValidationResultEntry();
 					pdfVResult.setLineNumber(lineNumber);
 					pdfValidationResult.add(pdfVResult);
-					pdfValidationResult.setPdfValid(true);
 				}
+				pdfValidationResult.setPdfValid(valid);
 			}
 			pdfValidator.close();
 		}
