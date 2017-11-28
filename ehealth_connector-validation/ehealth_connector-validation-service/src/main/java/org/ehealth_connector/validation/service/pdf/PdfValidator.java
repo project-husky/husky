@@ -120,10 +120,7 @@ public class PdfValidator {
 			initialize("none");
 		}
 		if (pdfValidator != null)
-			// TODO ersetzen mit
-			// com.pdftools.pdfvalidator.PdfValidatorAPI.getVersion(),
-			// sobald 4.8.0 von PDF Tools freigegeben ist.
-			retVal = com.pdftools.pdfvalidator.PdfValidatorAPI.VERSION;
+			retVal = com.pdftools.pdfvalidator.PdfValidatorAPI.getProductVersion();
 		return retVal;
 	}
 
