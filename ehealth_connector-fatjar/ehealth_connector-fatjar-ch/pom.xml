@@ -202,7 +202,7 @@
 		<profile>
 			<id>releasetest</id>
 			<properties>
-				<dll.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.99999</dll.version>
+				<dll.version>${parsedVersion.majorVersion}.${parsedVersion.minorVersion}.${parsedVersion.incrementalVersion}.999</dll.version>
 			</properties>
 		</profile>
 	</profiles>
