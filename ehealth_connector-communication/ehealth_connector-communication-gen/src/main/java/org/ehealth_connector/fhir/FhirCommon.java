@@ -729,6 +729,24 @@ public class FhirCommon {
 	 *            the id
 	 * @return the generated identifier
 	 */
+	public static Identifier createIdentifier(Identificator srcId) {
+		Identifier id = null;
+		id = new Identifier();
+		id.setSystem(oidUrn + srcId.getRoot());
+		id.setValue(srcId.getExtension());
+		return id;
+
+	}
+
+	/**
+	 * Creates a new Identifier containing the OID URN for the system component
+	 *
+	 * @param systemOid
+	 *            the systems oid
+	 * @param value
+	 *            the id
+	 * @return the generated identifier
+	 */
 	public static Identifier createIdentifier(String systemOid, String value) {
 		Identifier id = null;
 		id = new Identifier();
@@ -1131,12 +1149,14 @@ public class FhirCommon {
 	public static Identificator getCommunityPatientId(org.ehealth_connector.common.Patient patient,
 			String communityOid) {
 		Identificator retVal = null;
-		for (final Identificator item : patient.getIds()) {
+		if (communityOid != null) {
+			for (final Identificator item : patient.getIds()) {
 
-			if (item.getRoot().replace("urn:oid:", "")
-					.equals(communityOid.replace("urn:oid:", ""))) {
-				retVal = new Identificator(item.getRoot(), item.getExtension());
-				break;
+				if (item.getRoot().replace("urn:oid:", "")
+						.equals(communityOid.replace("urn:oid:", ""))) {
+					retVal = new Identificator(item.getRoot(), item.getExtension());
+					break;
+				}
 			}
 		}
 		return retVal;
@@ -1886,10 +1906,12 @@ public class FhirCommon {
 	 */
 	public static String removeUrnOidPrefix(String value) {
 		String retVal = "";
-		if (value.toLowerCase().startsWith("urn:oid:"))
-			retVal = value.replace("urn:oid:", "");
-		else {
-			retVal = value;
+		if (value != null) {
+			if (value.toLowerCase().startsWith("urn:oid:"))
+				retVal = value.replace("urn:oid:", "");
+			else {
+				retVal = value;
+			}
 		}
 		return retVal;
 	}
