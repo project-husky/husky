@@ -144,15 +144,14 @@ public class MedicationTargetEntryTest {
 		final MedicationTargetEntry entry = new MedicationTargetEntry();
 
 		final String uuid = UUID.generate();
-		final Identificator softwareId = new Identificator(
-				EhcVersions.getCurrentVersion().getOid(), uuid);
+		final Identificator softwareId = new Identificator(EhcVersions.getCurrentVersion().getOid(),
+				uuid);
 		entry.setId(softwareId);
 
 		final Document document = entry.getDocument();
 
-		final XPathExpression expr = xpath.compile(
-				"observation/id[@root='" + EhcVersions.getCurrentVersion().getOid()
-						+ "' and @extension='" + uuid + "']");
+		final XPathExpression expr = xpath.compile("observation/id[@root='"
+				+ EhcVersions.getCurrentVersion().getOid() + "' and @extension='" + uuid + "']");
 		final NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 

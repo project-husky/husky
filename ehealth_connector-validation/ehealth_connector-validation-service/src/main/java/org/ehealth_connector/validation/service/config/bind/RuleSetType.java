@@ -72,9 +72,9 @@ public class RuleSetType {
 
 	/**
 	 * Ruft den Wert der description-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getDescription() {
 		return description;
@@ -82,9 +82,9 @@ public class RuleSetType {
 
 	/**
 	 * Ruft den Wert der displayName-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getDisplayName() {
 		return displayName;
@@ -92,9 +92,9 @@ public class RuleSetType {
 
 	/**
 	 * Ruft den Wert der fileName-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getFileName() {
 		return fileName;
@@ -102,9 +102,9 @@ public class RuleSetType {
 
 	/**
 	 * Ruft den Wert der templateId-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getTemplateId() {
 		return templateId;
@@ -112,9 +112,9 @@ public class RuleSetType {
 
 	/**
 	 * Ruft den Wert der cacheable-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link Boolean }
-	 * 
+	 *
 	 */
 	public boolean isCacheable() {
 		if (cacheable == null) {
@@ -126,9 +126,9 @@ public class RuleSetType {
 
 	/**
 	 * Ruft den Wert der persistable-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link Boolean }
-	 * 
+	 *
 	 */
 	public boolean isPersistable() {
 		if (persistable == null) {
@@ -140,10 +140,10 @@ public class RuleSetType {
 
 	/**
 	 * Legt den Wert der cacheable-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link Boolean }
-	 * 
+	 *
 	 */
 	public void setCacheable(Boolean value) {
 		this.cacheable = value;
@@ -151,10 +151,10 @@ public class RuleSetType {
 
 	/**
 	 * Legt den Wert der description-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setDescription(String value) {
 		this.description = value;
@@ -162,10 +162,10 @@ public class RuleSetType {
 
 	/**
 	 * Legt den Wert der displayName-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setDisplayName(String value) {
 		this.displayName = value;
@@ -173,10 +173,10 @@ public class RuleSetType {
 
 	/**
 	 * Legt den Wert der fileName-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setFileName(String value) {
 		this.fileName = value;
@@ -184,10 +184,10 @@ public class RuleSetType {
 
 	/**
 	 * Legt den Wert der persistable-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link Boolean }
-	 * 
+	 *
 	 */
 	public void setPersistable(Boolean value) {
 		this.persistable = value;
@@ -195,10 +195,10 @@ public class RuleSetType {
 
 	/**
 	 * Legt den Wert der templateId-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setTemplateId(String value) {
 		this.templateId = value;

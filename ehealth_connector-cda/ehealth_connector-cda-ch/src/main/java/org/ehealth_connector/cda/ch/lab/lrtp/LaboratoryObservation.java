@@ -100,7 +100,7 @@ public class LaboratoryObservation
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.ehealth_connector.cda.ihe.lab.LaboratoryObservation#
 	 * addInterpretationCode(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor)
 	 */

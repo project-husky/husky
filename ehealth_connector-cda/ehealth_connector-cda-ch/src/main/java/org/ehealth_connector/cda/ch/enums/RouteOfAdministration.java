@@ -27,7 +27,9 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  */
 
 /**
- * This class has been moved and extended to org.ehealth_connector.cda.enums as it is used by other classes in org.ehealth_connector.cda
+ * This class has been moved and extended to org.ehealth_connector.cda.enums as
+ * it is used by other classes in org.ehealth_connector.cda
+ * 
  * @author sts
  *
  */

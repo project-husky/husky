@@ -93,9 +93,9 @@ public class ApplicationType {
 
 	/**
 	 * Ruft den Wert der documentSchema-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getDocumentSchema() {
 		return documentSchema;
@@ -103,9 +103,9 @@ public class ApplicationType {
 
 	/**
 	 * Ruft den Wert der downloadsUrl-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getDownloadsUrl() {
 		return downloadsUrl;
@@ -113,9 +113,9 @@ public class ApplicationType {
 
 	/**
 	 * Ruft den Wert der insufficientMemoryReaction-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link InsufficientMemoryReaction }
-	 * 
+	 *
 	 */
 	public InsufficientMemoryReaction getInsufficientMemoryReaction() {
 		return insufficientMemoryReaction;
@@ -123,9 +123,9 @@ public class ApplicationType {
 
 	/**
 	 * Ruft den Wert der jqueryTheme-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getJqueryTheme() {
 		return jqueryTheme;
@@ -133,9 +133,9 @@ public class ApplicationType {
 
 	/**
 	 * Ruft den Wert der licenseKey-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getLicenseKey() {
 		return licenseKey;
@@ -143,9 +143,9 @@ public class ApplicationType {
 
 	/**
 	 * Ruft den Wert der minimalMemorySch-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getMinimalMemorySch() {
 		return minimalMemorySch;
@@ -153,9 +153,9 @@ public class ApplicationType {
 
 	/**
 	 * Ruft den Wert der pdfLevel-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getPdfLevel() {
 		return pdfLevel;
@@ -163,9 +163,9 @@ public class ApplicationType {
 
 	/**
 	 * Ruft den Wert der pdfReportingLevel-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getPdfReportingLevel() {
 		return pdfReportingLevel;
@@ -173,9 +173,9 @@ public class ApplicationType {
 
 	/**
 	 * Ruft den Wert der timeoutMaxS-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link Integer }
-	 * 
+	 *
 	 */
 	public Integer getTimeoutMaxS() {
 		return timeoutMaxS;
@@ -183,9 +183,9 @@ public class ApplicationType {
 
 	/**
 	 * Ruft den Wert der timeoutReaction-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link MaxWaitReaction }
-	 * 
+	 *
 	 */
 	public MaxWaitReaction getTimeoutReaction() {
 		return timeoutReaction;
@@ -193,9 +193,9 @@ public class ApplicationType {
 
 	/**
 	 * Ruft den Wert der timeoutSleepMs-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link Integer }
-	 * 
+	 *
 	 */
 	public Integer getTimeoutSleepMs() {
 		return timeoutSleepMs;
@@ -203,10 +203,10 @@ public class ApplicationType {
 
 	/**
 	 * Legt den Wert der documentSchema-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setDocumentSchema(String value) {
 		this.documentSchema = value;
@@ -214,10 +214,10 @@ public class ApplicationType {
 
 	/**
 	 * Legt den Wert der downloadsUrl-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setDownloadsUrl(String value) {
 		this.downloadsUrl = value;
@@ -225,10 +225,10 @@ public class ApplicationType {
 
 	/**
 	 * Legt den Wert der insufficientMemoryReaction-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link InsufficientMemoryReaction }
-	 * 
+	 *
 	 */
 	public void setInsufficientMemoryReaction(InsufficientMemoryReaction value) {
 		this.insufficientMemoryReaction = value;
@@ -236,10 +236,10 @@ public class ApplicationType {
 
 	/**
 	 * Legt den Wert der jqueryTheme-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setJqueryTheme(String value) {
 		this.jqueryTheme = value;
@@ -247,10 +247,10 @@ public class ApplicationType {
 
 	/**
 	 * Legt den Wert der licenseKey-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setLicenseKey(String value) {
 		this.licenseKey = value;
@@ -258,10 +258,10 @@ public class ApplicationType {
 
 	/**
 	 * Legt den Wert der minimalMemorySch-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setMinimalMemorySch(String value) {
 		this.minimalMemorySch = value;
@@ -269,10 +269,10 @@ public class ApplicationType {
 
 	/**
 	 * Legt den Wert der pdfLevel-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setPdfLevel(String value) {
 		this.pdfLevel = value;
@@ -280,10 +280,10 @@ public class ApplicationType {
 
 	/**
 	 * Legt den Wert der pdfReportingLevel-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setPdfReportingLevel(String value) {
 		this.pdfReportingLevel = value;
@@ -291,10 +291,10 @@ public class ApplicationType {
 
 	/**
 	 * Legt den Wert der timeoutMaxS-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link Integer }
-	 * 
+	 *
 	 */
 	public void setTimeoutMaxS(Integer value) {
 		this.timeoutMaxS = value;
@@ -302,10 +302,10 @@ public class ApplicationType {
 
 	/**
 	 * Legt den Wert der timeoutReaction-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link MaxWaitReaction }
-	 * 
+	 *
 	 */
 	public void setTimeoutReaction(MaxWaitReaction value) {
 		this.timeoutReaction = value;
@@ -313,10 +313,10 @@ public class ApplicationType {
 
 	/**
 	 * Legt den Wert der timeoutSleepMs-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link Integer }
-	 * 
+	 *
 	 */
 	public void setTimeoutSleepMs(Integer value) {
 		this.timeoutSleepMs = value;

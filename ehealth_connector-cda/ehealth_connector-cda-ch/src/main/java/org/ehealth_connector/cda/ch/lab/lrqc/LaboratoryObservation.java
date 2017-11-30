@@ -61,7 +61,7 @@ public class LaboratoryObservation
 	 *            Test-Hersteller [R]: Name des Unternehmens, Test-Gerät [R]:
 	 *            Name und Typ des Gerätes, Test-Kit [R2]: Genaue Bezeichnung
 	 *            des Kits</div>
-	 * 
+	 *
 	 */
 	public LaboratoryObservation(LabObsList code, Value value,
 			ObservationInterpretation interpretationCode, SectionAnnotationCommentEntry reference) {

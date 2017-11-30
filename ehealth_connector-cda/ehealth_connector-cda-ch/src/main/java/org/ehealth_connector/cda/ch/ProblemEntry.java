@@ -38,8 +38,7 @@ public class ProblemEntry extends AbstractProblemEntry {
 	 * Default constructor to instanciate the object
 	 */
 	public ProblemEntry() {
-		this.setId(new Identificator(EhcVersions.getCurrentVersion().getOid(),
-				UUID.generate()));
+		this.setId(new Identificator(EhcVersions.getCurrentVersion().getOid(), UUID.generate()));
 	}
 
 	/**

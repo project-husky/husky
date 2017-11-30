@@ -47,8 +47,8 @@ public class MedicationTargetEntry
 				new Identificator("2.16.756.5.30.1.1.1.1.3.5.1", "CDA-CH.VACD.Body.MediL3.Reason")
 						.getIi());
 
-		final Identificator id = new Identificator(
-				EhcVersions.getCurrentVersion().getOid(), UUID.generate());
+		final Identificator id = new Identificator(EhcVersions.getCurrentVersion().getOid(),
+				UUID.generate());
 		this.setId(id);
 	}
 

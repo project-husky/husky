@@ -51,8 +51,7 @@ public enum NullFlavor {
 	NOT_ASKED("NASK", "not asked"),
 
 	/**
-	 * <div class="de">Andere wert</div>
-	 * <div class="fr">Autre</div>
+	 * <div class="de">Andere wert</div> <div class="fr">Autre</div>
 	 */
 	OTHER("OTH", "other"),
 

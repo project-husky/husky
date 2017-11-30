@@ -400,6 +400,7 @@ public class CdaChLrqc
 	 *
 	 * @return the laboratory specialty section
 	 */
+	@Override
 	public LaboratorySpecialtySection getLaboratorySpecialtySection() {
 		if (!getMdht().getLaboratorySpecialtySections().isEmpty()) {
 			return new LaboratorySpecialtySection(

@@ -35,8 +35,8 @@ public class DocDescriptor {
 		}
 		// fix for https://sourceforge.net/p/ehealthconnector/tickets/36/
 		if (documentDescriptor.toString().contains("!")) {
-       return documentDescriptor.toString().split("!")[0];
-    }
+			return documentDescriptor.toString().split("!")[0];
+		}
 		return null;
 	}
 }

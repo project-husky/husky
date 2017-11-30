@@ -70,9 +70,9 @@ public class ConfigurationType {
 
 	/**
 	 * Ruft den Wert der application-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link ApplicationType }
-	 * 
+	 *
 	 */
 	public ApplicationType getApplication() {
 		return application;
@@ -80,9 +80,9 @@ public class ConfigurationType {
 
 	/**
 	 * Ruft den Wert der baseDir-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getBaseDir() {
 		return baseDir;
@@ -90,9 +90,9 @@ public class ConfigurationType {
 
 	/**
 	 * Ruft den Wert der schematron-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link SchematronType }
-	 * 
+	 *
 	 */
 	public SchematronType getSchematron() {
 		return schematron;
@@ -100,9 +100,9 @@ public class ConfigurationType {
 
 	/**
 	 * Ruft den Wert der workDir-Eigenschaft ab.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getWorkDir() {
 		return workDir;
@@ -110,10 +110,10 @@ public class ConfigurationType {
 
 	/**
 	 * Legt den Wert der application-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link ApplicationType }
-	 * 
+	 *
 	 */
 	public void setApplication(ApplicationType value) {
 		this.application = value;
@@ -121,10 +121,10 @@ public class ConfigurationType {
 
 	/**
 	 * Legt den Wert der baseDir-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setBaseDir(String value) {
 		this.baseDir = value;
@@ -132,10 +132,10 @@ public class ConfigurationType {
 
 	/**
 	 * Legt den Wert der schematron-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link SchematronType }
-	 * 
+	 *
 	 */
 	public void setSchematron(SchematronType value) {
 		this.schematron = value;
@@ -143,10 +143,10 @@ public class ConfigurationType {
 
 	/**
 	 * Legt den Wert der workDir-Eigenschaft fest.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setWorkDir(String value) {
 		this.workDir = value;
