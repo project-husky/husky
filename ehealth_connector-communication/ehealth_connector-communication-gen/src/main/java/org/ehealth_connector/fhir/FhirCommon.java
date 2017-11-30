@@ -721,12 +721,10 @@ public class FhirCommon {
 	}
 
 	/**
-	 * Creates a new Identifier containing the OID URN for the system component
+	 * Creates a new Identifier containing the OID URN for the system component.
 	 *
-	 * @param systemOid
-	 *            the systems oid
-	 * @param value
-	 *            the id
+	 * @param srcId
+	 *            the src id
 	 * @return the generated identifier
 	 */
 	public static Identifier createIdentifier(Identificator srcId) {
