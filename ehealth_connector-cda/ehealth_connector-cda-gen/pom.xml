@@ -6,21 +6,21 @@
 	<parent>
 		<groupId>org.ehealth_connector.cda</groupId>
 		<artifactId>ehealth_connector-cda</artifactId>
-		<version>1.5-SNAPSHOT</version>
+		<version>1.5.0-201711</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.ehealth_connector.common</groupId>
 			<artifactId>ehealth_connector-common-gen</artifactId>
-			<version>1.5-SNAPSHOT</version>
+			<version>1.5.0-201711</version>
 		</dependency>
 
 		<!-- open health tools mdht cda-ch -->
 		<dependency>
 			<groupId>org.openhealthtools.mdht.uml.cda.ch</groupId>
 			<artifactId>org.openhealthtools.mdht.uml.cda.ch</artifactId>
-			<version>1.5-SNAPSHOT</version>
+			<version>1.5.0-201711</version>
 		</dependency>
 
 		<!-- open health tools ihe utils -->
