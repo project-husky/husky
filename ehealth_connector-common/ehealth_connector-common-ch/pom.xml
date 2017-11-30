@@ -7,14 +7,14 @@
 	<parent>
 		<groupId>org.ehealth_connector.common</groupId>
 		<artifactId>ehealth_connector-common</artifactId>
-		<version>1.5.0-201711</version>
+		<version>1.6-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.ehealth_connector.common</groupId>
 			<artifactId>ehealth_connector-common-gen</artifactId>
-			<version>1.5.0-201711</version>
+			<version>1.6-SNAPSHOT</version>
 		</dependency>
 
 		<!-- test stuff -->
@@ -41,7 +41,7 @@
 		<dependency>
 			<groupId>org.ehealth_connector.common</groupId>
 			<artifactId>ehealth_connector-common-gen</artifactId>
-			<version>1.5.0-201711</version>
+			<version>1.6-SNAPSHOT</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>

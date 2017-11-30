@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.ehealth_connector</groupId>
 		<artifactId>ehealth_connector-main</artifactId>
-		<version>1.5.0-201711</version>
+		<version>1.6-SNAPSHOT</version>
 	</parent>
 
 </project>

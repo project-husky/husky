@@ -12,7 +12,7 @@ are ok.</description>
 	<parent>
 		<groupId>org.ehealth_connector.common</groupId>
 		<artifactId>ehealth_connector-common</artifactId>
-		<version>1.5.0-201711</version>
+		<version>1.6-SNAPSHOT</version>
 	</parent>
 
 
@@ -27,7 +27,7 @@ are ok.</description>
 		<dependency>
 				<groupId>org.openhealthtools.mdht.uml.cda.ch</groupId>
 				<artifactId>org.openhealthtools.mdht.uml.cda.ch</artifactId>
-				<version>1.5.0-201711</version>
+				<version>1.6-SNAPSHOT</version>
 		</dependency>
 
 		<!-- open health tools ihe -->
@@ -92,7 +92,7 @@ are ok.</description>
 		<dependency>
 			<groupId>org.ehealth_connector</groupId>
 			<artifactId>ehealth_connector-valueset-api</artifactId>
-			<version>1.5.0-201711</version>
+			<version>1.6-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
