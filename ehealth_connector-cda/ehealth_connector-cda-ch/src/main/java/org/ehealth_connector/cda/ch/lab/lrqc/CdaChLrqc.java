@@ -445,33 +445,6 @@ public class CdaChLrqc
 	}
 
 	/**
-	 * Convenience function to return the (LOINC) section code from a given
-	 * LaboratoryObservation, which is hold in the given
-	 * LaboratoryBatteryOrganizer.
-	 *
-	 * @param organizer
-	 *            the LaboratoryBatteryOrganizer
-	 * @return the section code
-	 */
-	private String getSpecialtySectionCodeFromLaboratoryObservationEnum(
-			LaboratoryBatteryOrganizer organizer) {
-		if (!organizer.getLaboratoryObservations().isEmpty()) {
-			if (organizer.getLrqcLaboratoryObservations().get(0).getCodeAsEnum() != null) {
-				// if present return LOINC Enum
-				return organizer.getLrqcLaboratoryObservations().get(0).getCodeAsEnum()
-						.getSectionCode();
-			} else {
-				// if present return SNOMED Enum
-				if (organizer.getLrqcLaboratoryObservations().get(0).getCodeAsEnum() != null) {
-					return organizer.getLrqcLaboratoryObservations().get(0).getCodeAsEnum()
-							.getSectionCode();
-				}
-			}
-		}
-		return null;
-	}
-
-	/**
 	 * Convenience function, which returns the SpecimenAct directly from the
 	 * underlying LaboratorySpecialtySection/LaboratoryReportDataProcessingEntry
 	 * element.

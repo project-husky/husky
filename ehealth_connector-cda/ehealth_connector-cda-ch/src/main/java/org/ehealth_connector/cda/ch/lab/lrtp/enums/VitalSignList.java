@@ -17,12 +17,9 @@
  */
 package org.ehealth_connector.cda.ch.lab.lrtp.enums;
 
-import java.util.Date;
-
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.LangText;
 import org.ehealth_connector.common.utils.LangTexts;
 
@@ -72,20 +69,6 @@ public enum VitalSignList {
 		return null;
 	}
 
-	/**
-	 * <div class="en">Start date for the period in which this element can be
-	 * used</div> <div class="de">Startdatum der Periode, innerhalb derer dieses
-	 * Element valide ist</div>.
-	 */
-	private Date validFrom;
-
-	/**
-	 * <div class="en">End date for the period in which this element can be
-	 * used</div> <div class="de">Enddatum der Periode, innerhalb derer dieses
-	 * Element valide ist</div>.
-	 */
-	private Date validTo;
-
 	private String descriptionDe;
 	private String descriptionEn;
 	private String descriptionFr;
@@ -100,14 +83,6 @@ public enum VitalSignList {
 		this.descriptionFr = descriptionFr;
 		this.descriptionIt = descriptionIt;
 		this.descriptionEn = descriptionEn;
-
-		if ((validFrom != null) && !"".equals(validFrom)) {
-			this.validFrom = DateUtil.parseDateyyyyMMdd(validFrom);
-		}
-		if ((validTo != null) && !"".equals(validTo)) {
-			this.validTo = DateUtil.parseDateyyyyMMdd(validTo);
-		}
-
 	}
 
 	/**

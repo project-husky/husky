@@ -22,11 +22,6 @@ import org.eclipse.emf.common.util.EList;
 import org.ehealth_connector.cda.ihe.pharm.enums.TimingEvent;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.Ucum;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.Consumable;
-import org.openhealthtools.mdht.uml.cda.ManufacturedProduct;
-import org.openhealthtools.mdht.uml.cda.Material;
-import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.EIVL_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.EIVL_event;
@@ -35,9 +30,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PIVL_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.SXCM_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.SXPR_TS;
-import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.SetOperator;
-import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 
 /**
  * Implements the IHE MedicationFrequencyContentModule.
@@ -104,6 +97,18 @@ public class MedicationFrequencyContentModule {
 	}
 
 	/**
+	 * Gets the subordinate substance administration.
+	 *
+	 * @param sequenceNumber
+	 *            the sequence number
+	 * @return the subordinate substance administration
+	 */
+	protected org.ehealth_connector.cda.ihe.pharm.SubstanceAdministration getSubordinateSubstanceAdministration(
+			int sequenceNumber) {
+		return this.medicationItemEntry.getSubordinateSubstanceAdministration(sequenceNumber);
+	}
+
+	/**
 	 * Gets the subordinate substance administration dose quantity.
 	 *
 	 * @param sequenceNumber
@@ -127,17 +132,6 @@ public class MedicationFrequencyContentModule {
 		final org.ehealth_connector.cda.ihe.pharm.SubstanceAdministration sub = medicationItemEntry
 				.getSubordinateSubstanceAdministration(sequenceNumber);
 		return sub.getMdht().getEffectiveTimes().get(0);
-	}
-
-	/**
-	 * Gets the subordinate substance administration.
-	 *
-	 * @param sequenceNumber
-	 *            the sequence number
-	 * @return the subordinate substance administration
-	 */
-	protected org.ehealth_connector.cda.ihe.pharm.SubstanceAdministration getSubordinateSubstanceAdministration(int sequenceNumber) {
-		return this.medicationItemEntry.getSubordinateSubstanceAdministration(sequenceNumber);
 	}
 
 	/**
@@ -248,7 +242,8 @@ public class MedicationFrequencyContentModule {
 			IVL_PQ doseQuantity) {
 		final org.ehealth_connector.cda.ihe.pharm.SubstanceAdministration sub = new org.ehealth_connector.cda.ihe.pharm.SubstanceAdministration();
 
-		final org.ehealth_connector.cda.Consumable consumable = new org.ehealth_connector.cda.Consumable(false);
+		final org.ehealth_connector.cda.Consumable consumable = new org.ehealth_connector.cda.Consumable(
+				false);
 		final org.ehealth_connector.cda.ihe.pharm.ManufacturedProduct manufacturedProduct = new org.ehealth_connector.cda.ihe.pharm.ManufacturedProduct();
 		final ManufacturedMaterial material = new ManufacturedMaterial();
 		material.setNullFlavored();

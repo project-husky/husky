@@ -23,7 +23,6 @@ import java.util.List;
 import org.ehealth_connector.cda.ExternalDocumentEntry;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ihe.pharm.enums.PharmaceuticalAdviceStatusList;
-import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.LanguageCode;
@@ -97,31 +96,6 @@ public class PharmaceuticalAdviceItemEntry extends
 	}
 
 	/**
-	 * Adds a phamaceutical advice concern entry
-	 *
-	 * @param entry
-	 *            the entry
-	 */
-	public void addPharmaceuticalAdviceConcernEntry(PharmaceuticalAdviceConcernEntry entry) {
-		final PharmaceuticalAdviceConcernEntry old = this.getPharmaceuticalAdviceConcernEntry();
-		if (old != null) {
-			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
-				if (old.getMdht() == entryRelationship.getAct()) {
-					entryRelationship.setAct(entry.getMdht());
-					break;
-				}
-			}
-		} else {
-			final EntryRelationship entryRelationship = CDAFactory.eINSTANCE
-					.createEntryRelationship();
-			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
-			entryRelationship.setInversionInd(Boolean.FALSE);
-			entryRelationship.setAct(entry.copy());
-			this.getMdht().getEntryRelationships().add(entryRelationship);
-		}
-	}
-
-	/**
 	 * Add the modified Dosage instructions
 	 *
 	 * @param substanceAdministration
@@ -141,6 +115,24 @@ public class PharmaceuticalAdviceItemEntry extends
 	}
 
 	/**
+	 * Add the modified Medication Treatment Plan
+	 *
+	 * @param medicationTreatmentPlanItemEntry
+	 *            New Medication Treatment Plan
+	 */
+	public void addModifiedMedicationTreatmentPlanItemEntry(
+			MedicationTreatmentPlanItemEntry medicationTreatmentPlanItemEntry) {
+
+		final EntryRelationship newMtpEntry = CDAFactory.eINSTANCE.createEntryRelationship();
+		newMtpEntry.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
+		newMtpEntry.setInversionInd(false);
+		newMtpEntry.setSubstanceAdministration(
+				(new SubstanceAdministration(medicationTreatmentPlanItemEntry.getMdht())).copy());
+		this.getMdht().getEntryRelationships().add(newMtpEntry);
+
+	}
+
+	/**
 	 * Add the modified MTP Item
 	 *
 	 * @param newMtpItem
@@ -152,22 +144,6 @@ public class PharmaceuticalAdviceItemEntry extends
 
 	}
 
-	/**
-	 * Add the modified Medication Treatment Plan
-	 *
-	 * @param medicationTreatmentPlanItemEntry
-	 *            New Medication Treatment Plan
-	 */
-	public void addModifiedMedicationTreatmentPlanItemEntry(MedicationTreatmentPlanItemEntry medicationTreatmentPlanItemEntry) {
-		
-		final EntryRelationship newMtpEntry = CDAFactory.eINSTANCE.createEntryRelationship();
-		newMtpEntry.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
-		newMtpEntry.setInversionInd(false);
-		newMtpEntry.setSubstanceAdministration((new SubstanceAdministration(medicationTreatmentPlanItemEntry.getMdht())).copy());
-		this.getMdht().getEntryRelationships().add(newMtpEntry);
-
-	}
-	
 	/**
 	 * Add the modified Prescription
 	 *
@@ -195,6 +171,31 @@ public class PharmaceuticalAdviceItemEntry extends
 		newPrescription.setOrganizer(organizer);
 		this.getMdht().getEntryRelationships().add(newPrescription);
 
+	}
+
+	/**
+	 * Adds a phamaceutical advice concern entry
+	 *
+	 * @param entry
+	 *            the entry
+	 */
+	public void addPharmaceuticalAdviceConcernEntry(PharmaceuticalAdviceConcernEntry entry) {
+		final PharmaceuticalAdviceConcernEntry old = this.getPharmaceuticalAdviceConcernEntry();
+		if (old != null) {
+			for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
+				if (old.getMdht() == entryRelationship.getAct()) {
+					entryRelationship.setAct(entry.getMdht());
+					break;
+				}
+			}
+		} else {
+			final EntryRelationship entryRelationship = CDAFactory.eINSTANCE
+					.createEntryRelationship();
+			entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
+			entryRelationship.setInversionInd(Boolean.FALSE);
+			entryRelationship.setAct(entry.copy());
+			this.getMdht().getEntryRelationships().add(entryRelationship);
+		}
 	}
 
 	/**
