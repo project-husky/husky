@@ -24,8 +24,8 @@ import java.util.Date;
 
 import org.ehealth_connector.common.enums.CountryCode;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.ehealth_connector.fhir.FhirCommon;
-import org.ehealth_connector.fhir.FhirPatient;
+import org.ehealth_connector.fhir.structures.gen.FhirCommon;
+import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.hl7.fhir.dstu3.model.Address.AddressUse;
 import org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender;
 import org.hl7.fhir.dstu3.model.HumanName;

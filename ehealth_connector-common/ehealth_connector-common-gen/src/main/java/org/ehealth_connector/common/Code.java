@@ -23,8 +23,6 @@ import java.util.List;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.valueset.enums.IdentityDomain;
-import org.hl7.fhir.dstu3.model.CodeableConcept;
-import org.hl7.fhir.dstu3.model.Coding;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
@@ -80,34 +78,37 @@ public class Code {
 		this(code.getCodeSystem(), code.getCode(), code.getDisplayName());
 	}
 
-	/**
-	 * <div class="en">Instantiates a new code from FHIR CodeableConcept.</div>
-	 * <div class="de">Instantiiert ein neues Code Objekt von FHIR
-	 * CodeableConcept</div> <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div> <div class="fr"></div>
-	 *            <div class="it"></div>
-	 */
-	public Code(CodeableConcept code) {
-		this(code.getCodingFirstRep().getSystem().replace("urn:oid:", ""),
-				code.getCodingFirstRep().getCode(), code.getText());
-	}
+	// /**
+	// * <div class="en">Instantiates a new code from FHIR
+	// CodeableConcept.</div>
+	// * <div class="de">Instantiiert ein neues Code Objekt von FHIR
+	// * CodeableConcept</div> <div class="fr"></div> <div class="it"></div>
+	// *
+	// * @param code
+	// * <br>
+	// * <div class="de"> code</div> <div class="fr"></div>
+	// * <div class="it"></div>
+	// */
+	// public Code(CodeableConcept code) {
+	// this(code.getCodingFirstRep().getSystem().replace("urn:oid:", ""),
+	// code.getCodingFirstRep().getCode(), code.getText());
+	// }
 
-	/**
-	 * <div class="en">Instantiates a new code from FHIR Coding.</div>
-	 * <div class="de">Instantiiert ein neues Code Objekt von FHIR Coding</div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div> <div class="fr"></div>
-	 *            <div class="it"></div>
-	 */
-	public Code(Coding code) {
-		this(code.getSystem().replace("urn:oid:", ""), code.getCode(), code.getDisplay());
-	}
+	// /**
+	// * <div class="en">Instantiates a new code from FHIR Coding.</div>
+	// * <div class="de">Instantiiert ein neues Code Objekt von FHIR
+	// Coding</div>
+	// * <div class="fr"></div> <div class="it"></div>
+	// *
+	// * @param code
+	// * <br>
+	// * <div class="de"> code</div> <div class="fr"></div>
+	// * <div class="it"></div>
+	// */
+	// public Code(Coding code) {
+	// this(code.getSystem().replace("urn:oid:", ""), code.getCode(),
+	// code.getDisplay());
+	// }
 
 	/**
 	 * <div class="en">Instantiates a new code.</div>
@@ -297,7 +298,7 @@ public class Code {
 		if (mCD2.getOriginalText() != null) {
 			cd.setOriginalText(mCD2.getOriginalText());
 		}
-		for (CD translation : mCD2.getTranslations()) {
+		for (final CD translation : mCD2.getTranslations()) {
 			cd.getTranslations().add(EcoreUtil.copy(translation));
 		}
 		return cd;
@@ -334,7 +335,7 @@ public class Code {
 		if (mCD2.getOriginalText() != null) {
 			ce.setOriginalText(mCD2.getOriginalText());
 		}
-		for (CD translation : mCD2.getTranslations()) {
+		for (final CD translation : mCD2.getTranslations()) {
 			final CE ceTranslation = DatatypesFactory.eINSTANCE.createCE();
 
 			final CD mCD3 = EcoreUtil.copy(translation);
@@ -472,7 +473,7 @@ public class Code {
 	 * @return an List, which contains all translation codes
 	 */
 	public List<Code> getTranslations() {
-		final List<Code> cl = new ArrayList<Code>();
+		final List<Code> cl = new ArrayList<>();
 		for (final CD cd : mCD.getTranslations()) {
 			cl.add(new Code(cd));
 		}

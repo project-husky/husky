@@ -26,8 +26,8 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.ehealth_connector.fhir.FhirCommon;
-import org.ehealth_connector.fhir.FhirPatient;
+import org.ehealth_connector.fhir.structures.gen.FhirCommon;
+import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.Before;
 import org.junit.Test;

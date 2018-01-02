@@ -19,7 +19,7 @@ package org.ehealth_connector.communication.mpi;
 
 import java.util.List;
 
-import org.ehealth_connector.fhir.FhirPatient;
+import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 
 /**
  * The Interface MpiQueryResponse describes a generic Mpi Query Response.

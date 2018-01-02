@@ -23,8 +23,8 @@ import java.util.Map;
 import org.ehealth_connector.communication.mpi.MpiAdapterInterface;
 import org.ehealth_connector.communication.mpi.MpiQuery;
 import org.ehealth_connector.communication.mpi.MpiQueryResponse;
-import org.ehealth_connector.fhir.FhirCommon;
-import org.ehealth_connector.fhir.FhirPatient;
+import org.ehealth_connector.fhir.structures.gen.FhirCommon;
+import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.openhealthtools.ihe.utils.UUID;
 import org.slf4j.Logger;
@@ -37,7 +37,7 @@ import org.slf4j.LoggerFactory;
  */
 public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, MpiQueryResponse> {
 
-	static private Map<String, org.ehealth_connector.fhir.FhirPatient> map = new HashMap<String, FhirPatient>();
+	static private Map<String, org.ehealth_connector.fhir.structures.gen.FhirPatient> map = new HashMap<String, FhirPatient>();
 
 	/** The mpi community oid. */
 	static private String mpiCommunityOid = UUID.generate();

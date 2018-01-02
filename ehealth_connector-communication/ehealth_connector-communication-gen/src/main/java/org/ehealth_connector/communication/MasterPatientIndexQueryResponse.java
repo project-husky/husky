@@ -23,7 +23,7 @@ import java.util.List;
 
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.communication.mpi.MpiQueryResponse;
-import org.ehealth_connector.fhir.FhirPatient;
+import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 
 /**
  * The Class MasterPatientIndexQueryResponse.

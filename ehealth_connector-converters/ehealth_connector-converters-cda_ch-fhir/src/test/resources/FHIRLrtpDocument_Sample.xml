@@ -1,0 +1,868 @@
+<DocumentManifest xmlns="http://hl7.org/fhir">
+   <meta>
+      <versionId value="1" />
+   </meta>
+   <language value="de-CH" />
+   <contained>
+      <Basic xmlns="http://hl7.org/fhir">
+         <id value="1" />
+         <code>
+            <coding>
+               <code value="CHE" />
+            </coding>
+         </code>
+      </Basic>
+   </contained>
+   <contained>
+      <Basic xmlns="http://hl7.org/fhir">
+         <id value="2" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.16.756.5.30.1.1.1.1" />
+               <code value="pseudo" />
+            </coding>
+         </code>
+      </Basic>
+   </contained>
+   <contained>
+      <Basic xmlns="http://hl7.org/fhir">
+         <id value="3" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.5.25" />
+               <code value="R" />
+            </coding>
+         </code>
+      </Basic>
+   </contained>
+   <contained>
+      <Patient xmlns="http://hl7.org/fhir">
+         <id value="4" />
+         <identifier>
+            <system value="urn:oid:2.16.756.5.31" />
+            <value value="123.95.332.115" />
+         </identifier>
+         <identifier>
+            <system value="urn:oid:2.16.756.5.30.999999.1" />
+            <value value="012/08.111111" />
+         </identifier>
+         <identifier>
+            <system value="urn:oid:2.16.756.5.30.1.129.1.1.1" />
+            <value value="LR-2012-0001" />
+         </identifier>
+         <name>
+            <family value="Muster" />
+            <given value="Franz" />
+         </name>
+         <gender value="male" />
+         <birthDate value="1995-01-27" />
+      </Patient>
+   </contained>
+   <contained>
+      <Organization xmlns="http://hl7.org/fhir">
+         <id value="5" />
+         <identifier>
+            <system value="urn:oid:2.51.1.3" />
+            <value value="7606666666666" />
+         </identifier>
+         <name value="Transplantationscenter LIS" />
+         <telecom>
+            <system value="phone" />
+            <value value="tel:+41.31.919.09.09" />
+            <use value="work" />
+         </telecom>
+         <telecom>
+            <system value="fax" />
+            <value value="fax:+41.31.919.09.10" />
+            <use value="work" />
+         </telecom>
+         <address>
+            <use value="work" />
+            <line value="Organstrasse 51" />
+            <city value="Musterhausen" />
+            <postalCode value="8888" />
+         </address>
+      </Organization>
+   </contained>
+   <contained>
+      <Organization xmlns="http://hl7.org/fhir">
+         <id value="6" />
+         <identifier>
+            <system value="urn:oid:1.3.6.1.4.1.19376.1.3.4" />
+            <value value="0000" />
+         </identifier>
+         <name value="Swisstransplant" />
+         <telecom>
+            <system value="phone" />
+            <value value="tel:+41.31.380.81.30" />
+         </telecom>
+         <address>
+            <use value="work" />
+            <line value="Laupenstrasse 37" />
+            <city value="Bern" />
+            <postalCode value="3008" />
+         </address>
+      </Organization>
+   </contained>
+   <contained>
+      <Basic xmlns="http://hl7.org/fhir">
+         <id value="7" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.16.756.5.30.1.129.1.1.4" />
+               <code value="DDON" />
+            </coding>
+         </code>
+      </Basic>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="8" />
+         <status value="final" />
+         <category>
+            <coding>
+               <system value="urn:oid:dummy" />
+               <code value="dummy" />
+               <display value="&lt;content ID='bloodgr-1'>Blutgruppe: A pos&lt;/content>" />
+            </coding>
+         </category>
+         <code>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.6.1" />
+               <code value="30954-2" />
+               <display value="Relevant diagnostic tests/laboratory data" />
+            </coding>
+         </code>
+      </Observation>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="9" />
+         <status value="unknown" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.6.96" />
+               <code value="278149003" />
+               <display value="blood group A Rh(D) positive" />
+            </coding>
+         </code>
+         <performer>
+            <reference value="#10" />
+         </performer>
+         <comment value="bloodgr-1" />
+      </Observation>
+   </contained>
+   <contained>
+      <Practitioner xmlns="http://hl7.org/fhir">
+         <id value="10" />
+         <identifier>
+            <system value="urn:oid:2.51.1.3" />
+            <value value="7608888888888" />
+         </identifier>
+      </Practitioner>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="11" />
+         <status value="final" />
+         <category>
+            <coding>
+               <system value="urn:oid:dummy" />
+               <code value="dummy" />
+               <display value="&lt;content ID='o1'>Vitalzeichen:&lt;br />- Grösse: 178 cm&lt;/content>" />
+            </coding>
+         </category>
+         <code>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.6.1" />
+               <code value="8716-3" />
+               <display value="VITAL SIGNS" />
+            </coding>
+         </code>
+      </Observation>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="12" />
+         <identifier>
+            <system value="urn:oid:2.16.756.5.30.1.1.1.1.3.1.1" />
+            <value value="7586A249-889D-4F09-843A-9C3399ECFCB6" />
+         </identifier>
+         <status value="unknown" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.999" />
+               <code value="dummy" />
+               <display value="dummy code to make FHIR resource valid" />
+            </coding>
+         </code>
+         <effectiveDateTime value="2008-11-18T14:34:00+01:00" />
+         <performer>
+            <extension url="urn:ehealth_connector:FhirExtension:useAsAuthor">
+               <valueTime value="20160427224233+0200" />
+            </extension>
+            <reference value="#13" />
+         </performer>
+         <related>
+            <target>
+               <extension url="urn:ehealth_connector:FhirExtension:useAsVitalSignsObservation">
+                  <valueString value="dummy" />
+               </extension>
+               <reference value="#14" />
+            </target>
+         </related>
+      </Observation>
+   </contained>
+   <contained>
+      <Practitioner xmlns="http://hl7.org/fhir">
+         <id value="13" />
+         <identifier>
+            <system value="urn:oid:2.51.1.3" />
+            <value value="7608888888888" />
+         </identifier>
+      </Practitioner>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="14" />
+         <identifier>
+            <system value="urn:oid:2.16.756.5.30.1.1.1.1.3.1.1" />
+            <value value="3B9A88CF-E868-490B-B0BF-DA25E7D2F9FA" />
+         </identifier>
+         <status value="unknown" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.6.1" />
+               <code value="8302-2" />
+               <display value="Body height" />
+            </coding>
+         </code>
+         <valueQuantity>
+            <value value="178" />
+            <unit value="cm" />
+         </valueQuantity>
+         <interpretation>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.5.83" />
+               <code value="N" />
+            </coding>
+         </interpretation>
+         <related>
+            <target>
+               <extension url="urn:ehealth_connector:FhirExtension:useAsComment">
+                  <valueString value="dummy" />
+               </extension>
+               <reference value="#15" />
+            </target>
+         </related>
+      </Observation>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="15" />
+         <status value="unknown" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.999" />
+               <code value="dummy" />
+               <display value="dummy code to make FHIR resource valid" />
+            </coding>
+         </code>
+         <comment value="o1" />
+      </Observation>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="16" />
+         <status value="final" />
+         <category>
+            <coding>
+               <system value="urn:oid:dummy" />
+               <code value="dummy" />
+               <display value="Befundgruppe: Hämatologie&lt;br />Zeitpunkt der Feststellungen: 15.01.2014 10:37&lt;br />&lt;br />&lt;table>&lt;tbody>&lt;tr>&lt;th>Beobachtung&lt;/th>&lt;th>Resultat&lt;/th>&lt;th>Interpretation&lt;/th>&lt;th>Code&lt;/th>&lt;th>Codesystem&lt;/th>&lt;th>Autor&lt;/th>&lt;th>Kommentar&lt;/th>&lt;/tr>&lt;tr>&lt;td>Hemoglobin [Mass/volume] in Blood&lt;/td>&lt;td>159 g/l&lt;/td>&lt;td>N&lt;/td>&lt;td>718-7&lt;/td>&lt;td>LOINC&lt;/td>&lt;td>7608888888888&lt;/td>&lt;td>&lt;/td>&lt;/tr>&lt;tr>&lt;td>Fractional oxyhemoglobin in Blood&lt;/td>&lt;td>50%&lt;/td>&lt;td>N&lt;/td>&lt;td>11559-2&lt;/td>&lt;td>LOINC&lt;/td>&lt;td>7608888888888&lt;/td>&lt;td>&lt;/td>&lt;/tr>&lt;/tbody>&lt;/table>" />
+            </coding>
+         </category>
+         <code>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.6.1" />
+               <code value="18723-7" />
+               <display value="MICROBIOLOGY STUDIES" />
+            </coding>
+         </code>
+         <related>
+            <target>
+               <extension url="urn:ehealth_connector:FhirExtension:useAsLaboratoryBatteryOrganizer">
+                  <valueTime value="20160427224233+0200" />
+               </extension>
+               <reference value="#17" />
+            </target>
+         </related>
+      </Observation>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="17" />
+         <status value="unknown" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.999" />
+               <code value="dummy" />
+               <display value="dummy code to make FHIR resource valid" />
+            </coding>
+         </code>
+         <effectiveDateTime value="2014-01-15T11:38:00+01:00" />
+         <performer>
+            <extension url="urn:ehealth_connector:FhirExtension:useAsAuthor">
+               <valueTime value="20160427224233+0200" />
+            </extension>
+            <reference value="#18" />
+         </performer>
+         <related>
+            <target>
+               <extension url="urn:ehealth_connector:FhirExtension:useAsLaboratoryObservation">
+                  <valueString value="dummy" />
+               </extension>
+               <reference value="#19" />
+            </target>
+         </related>
+         <related>
+            <target>
+               <extension url="urn:ehealth_connector:FhirExtension:useAsLaboratoryObservation">
+                  <valueString value="dummy" />
+               </extension>
+               <reference value="#20" />
+            </target>
+         </related>
+      </Observation>
+   </contained>
+   <contained>
+      <Practitioner xmlns="http://hl7.org/fhir">
+         <id value="18" />
+         <identifier>
+            <system value="urn:oid:2.51.1.3" />
+            <value value="7608888888888" />
+         </identifier>
+      </Practitioner>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="19" />
+         <status value="unknown" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.6.1" />
+               <code value="718-7" />
+               <display value="Hemoglobin [Mass/volume] in Blood" />
+            </coding>
+            <coding>
+               <system value="urn:oid:2.16.756.5.30.1.999999999999" />
+               <code value="zzzzz" />
+               <display value="Hb" />
+            </coding>
+         </code>
+         <valueQuantity>
+            <value value="120" />
+            <unit value="g/L" />
+         </valueQuantity>
+         <interpretation>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.5.83" />
+               <code value="N" />
+            </coding>
+         </interpretation>
+         <referenceRange>
+            <low>
+               <value value="100" />
+               <unit value="g/L" />
+            </low>
+            <high>
+               <value value="130" />
+               <unit value="g/L" />
+            </high>
+         </referenceRange>
+      </Observation>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="20" />
+         <status value="unknown" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.6.1" />
+               <code value="11559-2" />
+               <display value="Fractional oxyhemoglobin in Blood" />
+            </coding>
+         </code>
+         <valueQuantity>
+            <value value="50" />
+            <unit value="%" />
+         </valueQuantity>
+         <interpretation>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.5.83" />
+               <code value="N" />
+            </coding>
+         </interpretation>
+         <referenceRange>
+            <low>
+               <value value="30" />
+               <unit value="%" />
+            </low>
+            <high>
+               <value value="70" />
+               <unit value="%" />
+            </high>
+         </referenceRange>
+      </Observation>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="21" />
+         <status value="final" />
+         <category>
+            <coding>
+               <system value="urn:oid:dummy" />
+               <code value="dummy" />
+               <display value="Befundgruppe: Mikrobiologie&lt;br />Zeitpunkt der Feststellungen: 15.01.2014 10:37&lt;br />&lt;br />&lt;table>&lt;tbody>&lt;tr>&lt;th>Beobachtung&lt;/th>&lt;th>Resultat&lt;/th>&lt;th>Interpretation&lt;/th>&lt;th>Code&lt;/th>&lt;th>Codesystem&lt;/th>&lt;th>Autor&lt;/th>&lt;th>Kommentar&lt;/th>&lt;/tr>&lt;tr>&lt;td>Hepatitis C virus RNA [Presence] in Serum or Plasma by Probe and target amplification method&lt;/td>&lt;td>Nein&lt;/td>&lt;td>N&lt;/td>&lt;td>11259-9&lt;/td>&lt;td>LOINC&lt;/td>&lt;td>7608888888888&lt;/td>&lt;td>&lt;/td>&lt;/tr>&lt;/tbody>&lt;/table>" />
+            </coding>
+         </category>
+         <code>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.6.1" />
+               <code value="18725-2" />
+               <display value="Microbiology studies" />
+            </coding>
+         </code>
+         <related>
+            <target>
+               <extension url="urn:ehealth_connector:FhirExtension:useAsLaboratoryBatteryOrganizer">
+                  <valueTime value="20160427224300+0200" />
+               </extension>
+               <reference value="#22" />
+            </target>
+         </related>
+      </Observation>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="22" />
+         <extension url="urn:ehealth_connector:FhirExtension:useAsAuthor">
+            <valueTime value="20160427224300+0200" />
+         </extension>
+         <extension url="urn:ehealth_connector:FhirExtension:useAsAuthor">
+            <valueTime value="20160427224300+0200" />
+         </extension>
+         <status value="unknown" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.999" />
+               <code value="dummy" />
+               <display value="dummy code to make FHIR resource valid" />
+            </coding>
+         </code>
+         <effectiveDateTime value="2014-01-15T12:39:00+01:00" />
+         <performer>
+            <extension url="urn:ehealth_connector:FhirExtension:useAsAuthor">
+               <valueTime value="20160427224233+0200" />
+            </extension>
+            <reference value="#23" />
+         </performer>
+         <related>
+            <target>
+               <extension url="urn:ehealth_connector:FhirExtension:useAsLaboratoryObservation">
+                  <valueString value="dummy" />
+               </extension>
+               <reference value="#24" />
+            </target>
+         </related>
+      </Observation>
+   </contained>
+   <contained>
+      <Practitioner xmlns="http://hl7.org/fhir">
+         <id value="23" />
+         <identifier>
+            <system value="urn:oid:2.51.1.3" />
+            <value value="7608888888888" />
+         </identifier>
+      </Practitioner>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="24" />
+         <status value="unknown" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.6.1" />
+               <code value="11259-9" />
+               <display value="Hepatitis C virus RNA [Presence] in Serum or Plasma by Probe and target amplification method" />
+            </coding>
+         </code>
+         <valueString value="false" />
+         <interpretation>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.5.83" />
+               <code value="N" />
+            </coding>
+         </interpretation>
+         <related>
+            <target>
+               <extension url="urn:ehealth_connector:FhirExtension:useAsComment">
+                  <valueString value="dummy" />
+               </extension>
+               <reference value="#25" />
+            </target>
+         </related>
+      </Observation>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="25" />
+         <status value="unknown" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.999" />
+               <code value="dummy" />
+               <display value="dummy code to make FHIR resource valid" />
+            </coding>
+         </code>
+      </Observation>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="26" />
+         <status value="final" />
+         <category>
+            <coding>
+               <system value="urn:oid:dummy" />
+               <code value="dummy" />
+               <display value="Befundgruppe: Chemie&lt;br />Zeitpunkt der Feststellungen: 15.01.2014 10:37&lt;br />&lt;br />&lt;table>&lt;tbody>&lt;tr>&lt;th>Beobachtung&lt;/th>&lt;th>Resultat&lt;/th>&lt;th>Interpretation&lt;/th>&lt;th>Code&lt;/th>&lt;th>Codesystem&lt;/th>&lt;th>Autor&lt;/th>&lt;th>Kommentar&lt;/th>&lt;/tr>&lt;tr>&lt;td>Protein [Presence] in Urine by Test strip&lt;/td>&lt;td>test&lt;/td>&lt;td>N&lt;/td>&lt;td>20454-5&lt;/td>&lt;td>LOINC&lt;/td>&lt;td>7608888888888&lt;/td>&lt;td>&lt;/td>&lt;/tr>&lt;/tbody>&lt;/table>" />
+            </coding>
+         </category>
+         <code>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.6.1" />
+               <code value="18719-5" />
+               <display value="Chemistry studies" />
+            </coding>
+         </code>
+         <related>
+            <target>
+               <extension url="urn:ehealth_connector:FhirExtension:useAsLaboratoryBatteryOrganizer">
+                  <valueTime value="20160427224300+0200" />
+               </extension>
+               <reference value="#27" />
+            </target>
+         </related>
+      </Observation>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="27" />
+         <status value="unknown" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.999" />
+               <code value="dummy" />
+               <display value="dummy code to make FHIR resource valid" />
+            </coding>
+         </code>
+         <effectiveDateTime value="2014-01-15T12:39:00+01:00" />
+         <performer>
+            <extension url="urn:ehealth_connector:FhirExtension:useAsAuthor">
+               <valueTime value="20160427224233+0200" />
+            </extension>
+            <reference value="#28" />
+         </performer>
+         <related>
+            <target>
+               <extension url="urn:ehealth_connector:FhirExtension:useAsLaboratoryObservation">
+                  <valueString value="dummy" />
+               </extension>
+               <reference value="#29" />
+            </target>
+         </related>
+      </Observation>
+   </contained>
+   <contained>
+      <Practitioner xmlns="http://hl7.org/fhir">
+         <id value="28" />
+         <identifier>
+            <system value="urn:oid:2.51.1.3" />
+            <value value="7608888888888" />
+         </identifier>
+      </Practitioner>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="29" />
+         <status value="unknown" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.6.1" />
+               <code value="20454-5" />
+               <display value="Protein [Presence] in Urine by Test strip" />
+            </coding>
+         </code>
+         <valueString value="ST:test" />
+         <interpretation>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.5.83" />
+               <code value="N" />
+            </coding>
+         </interpretation>
+         <related>
+            <target>
+               <extension url="urn:ehealth_connector:FhirExtension:useAsComment">
+                  <valueString value="dummy" />
+               </extension>
+               <reference value="#30" />
+            </target>
+         </related>
+      </Observation>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="30" />
+         <status value="unknown" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.999" />
+               <code value="dummy" />
+               <display value="dummy code to make FHIR resource valid" />
+            </coding>
+         </code>
+      </Observation>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="31" />
+         <status value="final" />
+         <category>
+            <coding>
+               <system value="urn:oid:dummy" />
+               <code value="dummy" />
+               <display value="Befundgruppe: HLA Studien&lt;br />Zeitpunkt der Feststellungen: 15.01.2014 10:37&lt;br/>&lt;br/>&lt;table>&lt;tbody>&lt;tr>&lt;th>Beobachtung&lt;/th>&lt;th>Resultat&lt;/th>&lt;th>Interpretation&lt;/th>&lt;th>Code&lt;/th>&lt;th>Codesystem&lt;/th>&lt;th>Autor&lt;/th>&lt;th>Kommentar&lt;/th>&lt;/tr>&lt;tr>&lt;td>DR18(3)HLA-Antigene&lt;/td>&lt;td>Nein&lt;/td>&lt;td>N&lt;/td>&lt;td>DR18(3)&lt;/td>&lt;td>HLA&lt;/td>&lt;td>7608888888888&lt;/td>&lt;td>&lt;/td>&lt;/tr>&lt;/tbody>&lt;/table>" />
+            </coding>
+         </category>
+         <code>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.6.1" />
+               <code value="18724-5" />
+               <display value="HLA studies" />
+            </coding>
+         </code>
+         <related>
+            <target>
+               <extension url="urn:ehealth_connector:FhirExtension:useAsLaboratoryBatteryOrganizer">
+                  <valueTime value="20160427224233+0200" />
+               </extension>
+               <reference value="#32" />
+            </target>
+         </related>
+      </Observation>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="32" />
+         <status value="unknown" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.999" />
+               <code value="dummy" />
+               <display value="dummy code to make FHIR resource valid" />
+            </coding>
+         </code>
+         <effectiveDateTime value="2014-01-15T12:39:00+01:00" />
+         <performer>
+            <extension url="urn:ehealth_connector:FhirExtension:useAsAuthor">
+               <valueTime value="20160427224233+0200" />
+            </extension>
+            <reference value="#33" />
+         </performer>
+         <related>
+            <target>
+               <extension url="urn:ehealth_connector:FhirExtension:useAsLaboratoryObservation">
+                  <valueString value="dummy" />
+               </extension>
+               <reference value="#34" />
+            </target>
+         </related>
+      </Observation>
+   </contained>
+   <contained>
+      <Practitioner xmlns="http://hl7.org/fhir">
+         <id value="33" />
+         <identifier>
+            <system value="urn:oid:2.51.1.3" />
+            <value value="7608888888888" />
+         </identifier>
+      </Practitioner>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="34" />
+         <status value="unknown" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.16.756.5.30.1.129.1.1.8" />
+               <code value="DR18" />
+               <display value="DR18(3) HLA-Antigene" />
+            </coding>
+         </code>
+         <valueString value="false" />
+         <interpretation>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.5.83" />
+               <code value="N" />
+            </coding>
+         </interpretation>
+         <related>
+            <target>
+               <extension url="urn:ehealth_connector:FhirExtension:useAsComment">
+                  <valueString value="dummy" />
+               </extension>
+               <reference value="#35" />
+            </target>
+         </related>
+      </Observation>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="35" />
+         <status value="unknown" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.999" />
+               <code value="dummy" />
+               <display value="dummy code to make FHIR resource valid" />
+            </coding>
+         </code>
+      </Observation>
+   </contained>
+   <identifier>
+      <system value="urn:oid:2.16.756.5.30.1.1.1.1" />
+      <value value="5e97015e-7e92-2b7a-cd0c-9e8115afcf35" />
+   </identifier>
+   <identifier>
+      <system value="urn:oid:2.16.756.5.30.1.1.1.1" />
+      <value value="5e97015e-7e92-2b7a-cd0c-9e8115afcf35" />
+   </identifier>
+   <status value="current" />
+   <created value="2017-04-24T00:00:00+02:00" />
+   <content>
+      <pReference>
+         <display value="dummy" />
+      </pReference>
+   </content>
+   <content>
+      <pReference>
+         <reference value="#1" />
+      </pReference>
+   </content>
+   <content>
+      <extension url="urn:ehealth_connector:FhirExtension:useAsDocType">
+         <valueString value="dummy" />
+      </extension>
+      <pReference>
+         <reference value="#2" />
+      </pReference>
+   </content>
+   <content>
+      <pReference>
+         <reference value="#3" />
+      </pReference>
+   </content>
+   <content>
+      <pReference>
+         <reference value="#4" />
+      </pReference>
+   </content>
+   <content>
+      <extension url="urn:ehealth_connector:FhirExtension:useAsAuthor">
+         <valueTime value="20160427224233+0200" />
+      </extension>
+      <pReference>
+         <reference value="#5" />
+      </pReference>
+   </content>
+   <content>
+      <extension url="urn:ehealth_connector:FhirExtension:useAsInformationRecipient">
+         <valueString value="dummy" />
+      </extension>
+      <pReference>
+         <reference value="#6" />
+      </pReference>
+   </content>
+   <content>
+      <extension url="urn:ehealth_connector:FhirExtension:useAsDocumentationOf">
+         <valueString value="dummy" />
+      </extension>
+      <pReference>
+         <reference value="#7" />
+      </pReference>
+   </content>
+   <content>
+      <extension url="urn:ehealth_connector:FhirExtension:useAsStudiesSummary">
+         <valueString value="dummy" />
+      </extension>
+      <pReference>
+         <reference value="#8" />
+      </pReference>
+   </content>
+   <content>
+      <extension url="urn:ehealth_connector:FhirExtension:useAsBloodGroup">
+         <valueString value="dummy" />
+      </extension>
+      <pReference>
+         <reference value="#9" />
+      </pReference>
+   </content>
+   <content>
+      <extension url="urn:ehealth_connector:FhirExtension:useAsCodedVitalSigns">
+         <valueString value="dummy" />
+      </extension>
+      <pReference>
+         <reference value="#11" />
+      </pReference>
+   </content>
+   <content>
+      <extension url="urn:ehealth_connector:FhirExtension:useAsVitalSignsOrganizer">
+         <valueTime value="20160427224300+0200" />
+      </extension>
+      <pReference>
+         <reference value="#12" />
+      </pReference>
+   </content>
+   <content>
+      <extension url="urn:ehealth_connector:FhirExtension:useAsLaboratorySpecialtySection">
+         <valueString value="dummy" />
+      </extension>
+      <pReference>
+         <reference value="#16" />
+      </pReference>
+   </content>
+   <content>
+      <extension url="urn:ehealth_connector:FhirExtension:useAsLaboratorySpecialtySection">
+         <valueString value="dummy" />
+      </extension>
+      <pReference>
+         <reference value="#21" />
+      </pReference>
+   </content>
+   <content>
+      <extension url="urn:ehealth_connector:FhirExtension:useAsLaboratorySpecialtySection">
+         <valueString value="dummy" />
+      </extension>
+      <pReference>
+         <reference value="#26" />
+      </pReference>
+   </content>
+   <content>
+      <extension url="urn:ehealth_connector:FhirExtension:useAsLaboratorySpecialtySection">
+         <valueString value="dummy" />
+      </extension>
+      <pReference>
+         <reference value="#31" />
+      </pReference>
+   </content>
+</DocumentManifest>

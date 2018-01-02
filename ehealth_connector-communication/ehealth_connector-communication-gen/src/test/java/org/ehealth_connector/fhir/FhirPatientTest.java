@@ -28,6 +28,8 @@ import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.enums.AddressUse;
 import org.ehealth_connector.common.enums.CountryCode;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.fhir.structures.gen.FhirCommon;
+import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.ehealth_connector.fhir.testhelper.TestPatient;
 import org.hl7.fhir.dstu3.model.Address;
 import org.hl7.fhir.dstu3.model.BooleanType;
@@ -57,7 +59,7 @@ import ca.uhn.fhir.validation.ValidationResult;
 /**
  * Junit Tests for the FhirPatient
  *
- * @see org.ehealth_connector.communication.mpi.FhirPatient
+ * @see org.org.ehealth_connector.fhir.structures.gen.FhirPatient
  */
 public class FhirPatientTest {
 

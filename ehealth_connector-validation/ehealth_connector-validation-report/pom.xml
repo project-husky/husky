@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ehealth_connector.validation.report</groupId>
 	<artifactId>ehealth_connector-validation-report</artifactId>
-	<name>ehealth_connector-validation-report</name>
+	<name>eHealthConnector Validation Report</name>
 
 	<parent>
 		<groupId>org.ehealth_connector.validation</groupId>

@@ -27,7 +27,7 @@ import org.ehealth_connector.communication.mpi.impl.V3PixPdqAdapter;
 import org.ehealth_connector.communication.mpi.impl.V3PixPdqAdapterConfig;
 import org.ehealth_connector.communication.tls.CustomHttpsTLSv11v12SocketFactory;
 import org.ehealth_connector.communication.utils.AbstractAxis2Util;
-import org.ehealth_connector.fhir.FhirPatient;
+import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

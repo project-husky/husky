@@ -17,7 +17,7 @@
  */
 package org.ehealth_connector.communication.mpi;
 
-import org.ehealth_connector.fhir.FhirPatient;
+import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 
 /**
  * General adapter Inteface for an MPI implementation.

@@ -21,7 +21,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.valueset.enums.IdentityDomain;
-import org.hl7.fhir.dstu3.model.Identifier;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
@@ -76,18 +75,18 @@ public class Identificator {
 
 	private final II mII;
 
-	/**
-	 * <div class="de">Creates a new Identificator</div>
-	 * <div class="de">Erstellt einen neuen Identifikator.</div>
-	 *
-	 * @param identifier
-	 *            the identifier to be used
-	 */
-	public Identificator(Identifier identifier) {
-		mII = DatatypesFactory.eINSTANCE.createII();
-		setRoot(identifier.getSystem());
-		setExtension(identifier.getValue());
-	}
+	// /**
+	// * <div class="de">Creates a new Identificator</div>
+	// * <div class="de">Erstellt einen neuen Identifikator.</div>
+	// *
+	// * @param identifier
+	// * the identifier to be used
+	// */
+	// public Identificator(Identifier identifier) {
+	// mII = DatatypesFactory.eINSTANCE.createII();
+	// setRoot(identifier.getSystem());
+	// setExtension(identifier.getValue());
+	// }
 
 	/**
 	 * <div class="de">Creates a new Identificator</div>
@@ -218,11 +217,11 @@ public class Identificator {
 			return prime;
 
 		int result = 1;
-		result = prime * result + (mII.getDisplayable() ? 0 : 1);
-		result = prime * result + mII.getExtension().hashCode();
-		result = prime * result + mII.getRoot().hashCode();
-		result = prime * result + mII.getNullFlavor().getName().hashCode();
-		result = prime * result + mII.getNullFlavor().getValue();
+		result = (prime * result) + (mII.getDisplayable() ? 0 : 1);
+		result = (prime * result) + mII.getExtension().hashCode();
+		result = (prime * result) + mII.getRoot().hashCode();
+		result = (prime * result) + mII.getNullFlavor().getName().hashCode();
+		result = (prime * result) + mII.getNullFlavor().getValue();
 		return result;
 	}
 

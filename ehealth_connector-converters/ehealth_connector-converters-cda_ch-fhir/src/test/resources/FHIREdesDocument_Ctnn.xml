@@ -1,0 +1,395 @@
+<DocumentManifest xmlns="http://hl7.org/fhir">
+   <meta>
+      <versionId value="1" />
+   </meta>
+   <language value="de-CH" />
+   <contained>
+      <Basic xmlns="http://hl7.org/fhir">
+         <id value="1" />
+         <code>
+            <coding>
+               <code value="CHE" />
+            </coding>
+         </code>
+      </Basic>
+   </contained>
+   <contained>
+      <Basic xmlns="http://hl7.org/fhir">
+         <id value="2" />
+         <code>
+            <coding>
+               <system value="urn:oid:1.3.6.1.4.1.19376.1.5.3.1.1.13.1.3" />
+               <code value="patient" />
+            </coding>
+         </code>
+      </Basic>
+   </contained>
+   <contained>
+      <Basic xmlns="http://hl7.org/fhir">
+         <id value="3" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.5.25" />
+               <code value="N" />
+               <display value="Normal" />
+            </coding>
+         </code>
+      </Basic>
+   </contained>
+   <contained>
+      <Patient xmlns="http://hl7.org/fhir">
+         <id value="4" />
+         <identifier>
+            <system value="urn:oid:2.16.756.5.30.999999999999" />
+            <value value="898989" />
+         </identifier>
+         <name>
+            <family value="Tigrinja" />
+            <given value="Sesuna" />
+         </name>
+         <telecom>
+            <system value="phone" />
+            <value value="tel:+41.32.685.12.34" />
+            <use value="home" />
+         </telecom>
+         <telecom>
+            <system value="phone" />
+            <value value="tel:+41.32.123.77.88" />
+            <use value="work" />
+         </telecom>
+         <gender value="female" />
+         <birthDate value="2000-04-04" />
+         <address>
+            <use value="home" />
+            <line value="Leidensweg 10" />
+            <city value="Specimendorf" />
+            <postalCode value="9876" />
+            <country value="CHE" />
+         </address>
+         <managingOrganization>
+            <reference value="#5" />
+         </managingOrganization>
+      </Patient>
+   </contained>
+   <contained>
+      <Organization xmlns="http://hl7.org/fhir">
+         <id value="5" />
+         <identifier>
+            <system value="urn:oid:2.51.1.3" />
+            <value value="7609999999999" />
+         </identifier>
+         <name value="Gruppenpraxis CH" />
+         <telecom>
+            <system value="phone" />
+            <value value="tel:+41.32.234.55.66" />
+            <use value="work" />
+         </telecom>
+         <telecom>
+            <system value="fax" />
+            <value value="fax:+41.32.234.66.77" />
+            <use value="work" />
+         </telecom>
+         <telecom>
+            <system value="email" />
+            <value value="mailto:bereit@gruppenpraxis.ch" />
+            <use value="work" />
+         </telecom>
+         <telecom>
+            <system value="url" />
+            <value value="http://www.gruppenpraxis.ch" />
+            <use value="work" />
+         </telecom>
+         <address>
+            <use value="work" />
+            <line value="Doktorgasse 2" />
+            <city value="Musterhausen" />
+            <postalCode value="8888" />
+            <country value="CHE" />
+         </address>
+      </Organization>
+   </contained>
+   <contained>
+      <Person xmlns="http://hl7.org/fhir">
+         <id value="6" />
+         <identifier>
+            <system value="urn:oid:2.51.1.3" />
+            <value value="7607777777777" />
+         </identifier>
+         <name>
+            <family value="Bereit" />
+            <given value="Allzeit" />
+            <prefix value="Dr. med." />
+            <suffix value="Facharzt für Allgemeine Medizin" />
+         </name>
+         <telecom>
+            <system value="phone" />
+            <value value="tel:+41.32.234.55.66" />
+         </telecom>
+         <telecom>
+            <system value="fax" />
+            <value value="fax:+41.32.234.66.77" />
+         </telecom>
+         <telecom>
+            <system value="email" />
+            <value value="mailto:bereit@gruppenpraxis.ch" />
+         </telecom>
+         <telecom>
+            <system value="url" />
+            <value value="http://www.gruppenpraxis.ch" />
+         </telecom>
+         <address>
+            <use value="work" />
+            <line value="Doktorgasse 2" />
+            <city value="Musterhausen" />
+            <postalCode value="8888" />
+         </address>
+         <managingOrganization>
+            <reference value="#5" />
+         </managingOrganization>
+      </Person>
+   </contained>
+   <contained>
+      <Basic xmlns="http://hl7.org/fhir">
+         <id value="7" />
+         <code>
+            <coding>
+               <system value="http://hl7.org/fhir/data-absent-reason" />
+               <code value="astext" />
+               <display value="Penicillin-Allergie" />
+            </coding>
+         </code>
+      </Basic>
+   </contained>
+   <contained>
+      <Basic xmlns="http://hl7.org/fhir">
+         <id value="8" />
+         <code>
+            <coding>
+               <system value="http://hl7.org/fhir/data-absent-reason" />
+               <code value="astext" />
+               <display value="Rückenschmerzen im Bereich der LWS" />
+            </coding>
+         </code>
+      </Basic>
+   </contained>
+   <contained>
+      <List xmlns="http://hl7.org/fhir">
+         <id value="9" />
+         <extension url="urn:ehealth_connector:FhirExtension:urnUseAsCodedVitalSignList">
+            <valueTime value="20150201100000+0100" />
+         </extension>
+         <identifier>
+            <system value="urn:oid:2.16.756.5.30.1.1.1.1.3.1.1" />
+            <value value="6d0331f4-ccfc-27c4-1601-e7195d5963e6" />
+         </identifier>
+         <status value="current" />
+         <mode value="snapshot" />
+         <entry>
+            <extension url="urn:ehealth_connector:FhirExtension:useAsAuthor">
+               <valueTime value="20160409140217+0200" />
+            </extension>
+            <item>
+               <reference value="#6" />
+            </item>
+         </entry>
+         <entry>
+            <extension url="urn:ehealth_connector:FhirExtension:useAsCodedVitalSignObservation">
+               <valueString value="dummy" />
+            </extension>
+            <item>
+               <reference value="#10" />
+            </item>
+         </entry>
+         <entry>
+            <extension url="urn:ehealth_connector:FhirExtension:useAsCodedVitalSignObservation">
+               <valueString value="dummy" />
+            </extension>
+            <item>
+               <reference value="#11" />
+            </item>
+         </entry>
+      </List>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="10" />
+         <status value="final" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.6.1" />
+               <code value="8716-3" />
+               <display value="Vital signs" />
+            </coding>
+         </code>
+         <effectiveDateTime value="2015-02-01T10:00:00+01:00" />
+         <component>
+            <code>
+               <coding>
+                  <system value="urn:oid:2.16.840.1.113883.6.1" />
+                  <code value="8302-2" />
+                  <display value="Body height" />
+               </coding>
+            </code>
+            <valueQuantity>
+               <value value="180" />
+               <unit value="cm" />
+            </valueQuantity>
+         </component>
+         <component>
+            <code>
+               <coding>
+                  <system value="urn:oid:2.16.840.1.113883.6.1" />
+                  <code value="3141-9" />
+                  <display value="Body weight Measured" />
+               </coding>
+            </code>
+            <valueQuantity>
+               <value value="80" />
+               <unit value="kg" />
+            </valueQuantity>
+         </component>
+      </Observation>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="11" />
+         <status value="final" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.6.1" />
+               <code value="8716-3" />
+               <display value="Vital signs" />
+            </coding>
+         </code>
+         <effectiveDateTime value="2015-02-01T10:00:00+01:00" />
+         <component>
+            <code>
+               <coding>
+                  <system value="urn:oid:2.16.840.1.113883.6.1" />
+                  <code value="8480-6" />
+                  <display value="Systolic blood pressure" />
+               </coding>
+            </code>
+            <valueQuantity>
+               <value value="140" />
+               <unit value="mm[Hg]" />
+            </valueQuantity>
+         </component>
+         <component>
+            <code>
+               <coding>
+                  <system value="urn:oid:2.16.840.1.113883.6.1" />
+                  <code value="8462-4" />
+                  <display value="Diastolic blood pressure" />
+               </coding>
+            </code>
+            <valueQuantity>
+               <value value="100" />
+               <unit value="mm[Hg]" />
+            </valueQuantity>
+         </component>
+      </Observation>
+   </contained>
+   <contained>
+      <Observation xmlns="http://hl7.org/fhir">
+         <id value="12" />
+         <status value="unknown" />
+         <code>
+            <coding>
+               <system value="urn:oid:2.16.840.1.113883.6.1" />
+               <code value="48767-8" />
+               <display value="Annotation comment [Interpretation] Narrative" />
+            </coding>
+         </code>
+         <comment value="Die Schulabgängerin, welche nicht über eine Versichertenkarte verfügt, wird anlässlich der Schularztuntersuchung gemäss Impfempfehlung vom CDSS geimpft." />
+      </Observation>
+   </contained>
+   <identifier>
+      <system value="urn:oid:2.16.756.5.30.1.1.1.1" />
+      <value value="6d031c00-ccfc-27c4-8198-e7195d5963e6" />
+   </identifier>
+   <identifier>
+      <system value="urn:oid:2.16.756.5.30.1.1.1.1" />
+      <value value="6d031c00-ccfc-27c4-8198-e7195d5963e6" />
+   </identifier>
+   <status value="current" />
+   <created value="2017-04-24T00:00:00+02:00" />
+   <content>
+      <pReference>
+         <display value="dummy" />
+      </pReference>
+   </content>
+   <content>
+      <pReference>
+         <reference value="#1" />
+      </pReference>
+   </content>
+   <content>
+      <pReference>
+         <reference value="#2" />
+      </pReference>
+   </content>
+   <content>
+      <pReference>
+         <reference value="#3" />
+      </pReference>
+   </content>
+   <content>
+      <pReference>
+         <reference value="#4" />
+      </pReference>
+   </content>
+   <content>
+      <extension url="urn:ehealth_connector:FhirExtension:useAsAuthor">
+         <valueTime value="20160409140217+0200" />
+      </extension>
+      <pReference>
+         <reference value="#6" />
+      </pReference>
+   </content>
+   <content>
+      <extension url="urn:ehealth_connector:FhirExtension:useAsCustodian">
+         <valueString value="dummy" />
+      </extension>
+      <pReference>
+         <reference value="#5" />
+      </pReference>
+   </content>
+   <content>
+      <extension url="urn:ehealth_connector:FhirExtension:useAsLegalAuthenticator">
+         <valueTime value="20160413210350+0200" />
+      </extension>
+      <pReference>
+         <reference value="#6" />
+      </pReference>
+   </content>
+   <content>
+      <extension url="urn:ehealth_connector:FhirExtension:useAsAllergyProblemConcern">
+         <valueString value="dummy" />
+      </extension>
+      <pReference>
+         <reference value="#7" />
+      </pReference>
+   </content>
+   <content>
+      <extension url="urn:ehealth_connector:FhirExtension:useAsChiefComplaint">
+         <valueString value="dummy" />
+      </extension>
+      <pReference>
+         <reference value="#8" />
+      </pReference>
+   </content>
+   <content>
+      <pReference>
+         <reference value="#9" />
+      </pReference>
+   </content>
+   <content>
+      <extension url="urn:ehealth_connector:FhirExtension:useAsComment">
+         <valueString value="dummy" />
+      </extension>
+      <pReference>
+         <reference value="#12" />
+      </pReference>
+   </content>
+</DocumentManifest>

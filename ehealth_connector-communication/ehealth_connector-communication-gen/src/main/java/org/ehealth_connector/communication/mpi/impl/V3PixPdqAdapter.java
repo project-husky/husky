@@ -35,8 +35,8 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.ehealth_connector.communication.mpi.MpiAdapterInterface;
-import org.ehealth_connector.fhir.FhirCommon;
-import org.ehealth_connector.fhir.FhirPatient;
+import org.ehealth_connector.fhir.structures.gen.FhirCommon;
+import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.hl7.fhir.dstu3.model.Address;
 import org.hl7.fhir.dstu3.model.Address.AddressUse;
 import org.hl7.fhir.dstu3.model.BooleanType;
@@ -987,7 +987,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 * @return the string[]
 	 */
 	@Override
-	public String[] queryPatientId(org.ehealth_connector.fhir.FhirPatient patient,
+	public String[] queryPatientId(org.ehealth_connector.fhir.structures.gen.FhirPatient patient,
 			String[] queryDomainOids, String[] queryDomainNamespaces) {
 
 		if (!configurePix(false)) {

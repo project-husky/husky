@@ -23,6 +23,11 @@
 			<artifactId>ehealth_connector-cda-gen</artifactId>
 			<version>1.6-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>org.ehealth_connector.fhir.structures</groupId>
+			<artifactId>ehealth_connector-fhir-structures-gen</artifactId>
+			<version>1.6-SNAPSHOT</version>
+		</dependency>
 
 		<!-- open health tools ihe xds -->
 		<dependency>

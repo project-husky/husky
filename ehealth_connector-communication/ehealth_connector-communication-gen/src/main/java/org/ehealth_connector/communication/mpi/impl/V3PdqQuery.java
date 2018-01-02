@@ -21,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.ehealth_connector.communication.mpi.MpiQuery;
-import org.ehealth_connector.fhir.FhirCommon;
+import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.hl7.fhir.dstu3.model.ContactPoint;
 import org.hl7.fhir.dstu3.model.ContactPoint.ContactPointSystem;
 import org.hl7.fhir.dstu3.model.ContactPoint.ContactPointUse;

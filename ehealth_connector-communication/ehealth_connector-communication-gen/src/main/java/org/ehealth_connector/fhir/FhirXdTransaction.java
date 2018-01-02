@@ -23,11 +23,13 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.communication.AffinityDomain;
 import org.ehealth_connector.communication.DocumentMetadata;
 import org.ehealth_connector.communication.SubmissionSetMetadata;
+import org.ehealth_connector.fhir.structures.gen.FhirCommon;
+import org.ehealth_connector.fhir.structures.utils.FhirUtilities;
+import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.DocumentManifest;
 import org.hl7.fhir.dstu3.model.DocumentManifest.DocumentManifestContentComponent;
 import org.hl7.fhir.dstu3.model.DocumentReference;
@@ -39,6 +41,7 @@ import org.hl7.fhir.dstu3.model.Reference;
 import org.hl7.fhir.dstu3.model.Resource;
 import org.hl7.fhir.dstu3.model.StringType;
 import org.hl7.fhir.exceptions.FHIRException;
+import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;
 
 import ca.uhn.fhir.context.FhirContext;
@@ -216,7 +219,7 @@ public class FhirXdTransaction {
 	 */
 	public List<DocumentMetadata> GetDocumentMetadatas(Transaction transaction,
 			String receiverFacilityOid, String senderFacilityOid) {
-		final List<DocumentMetadata> retVal = new ArrayList<DocumentMetadata>();
+		final List<DocumentMetadata> retVal = new ArrayList<>();
 
 		for (final Resource entry : getResources(transaction)) {
 			if (entry instanceof DocumentReference) {
@@ -225,16 +228,17 @@ public class FhirXdTransaction {
 				final DocumentMetadata metaData = new DocumentMetadata(
 						FhirCommon.getMetadataLanguage(fhirObject));
 				metaData.addAuthor(getAuthor(fhirObject));
-				metaData.addConfidentialityCode(new Code(fhirObject.getSecurityLabelFirstRep()));
+				metaData.addConfidentialityCode(
+						FhirUtilities.toCode(fhirObject.getSecurityLabelFirstRep()));
 
-				metaData.setClassCode(new Code(fhirObject.getClass_()));
+				metaData.setClassCode(FhirUtilities.toCode(fhirObject.getClass_()));
 				metaData.setCodedLanguage(fhirObject.getContentFirstRep().getAttachment()
 						.getLanguageElement().getValueAsString());
 				metaData.setCreationTime(fhirObject.getCreated());
-				metaData.setDocumentDescriptor(FhirCommon.getDocumentDescriptor(fhirObject));
+				metaData.setDocumentDescriptor(getDocumentDescriptor(fhirObject));
 				metaData.setFormatCode(FhirCommon.getFormatCode(fhirObject));
 				metaData.setHealthcareFacilityTypeCode(
-						new Code(fhirObject.getContext().getFacilityType()));
+						FhirUtilities.toCode(fhirObject.getContext().getFacilityType()));
 				metaData.setMimeType(FhirCommon.getMimeType(fhirObject));
 				final Patient pat = FhirCommon
 						.getPatient(fhirObject.getContext().getSourcePatientInfo());
@@ -245,7 +249,7 @@ public class FhirXdTransaction {
 				metaData.setSourcePatientId(
 						FhirCommon.getCommunityPatientId(pat, senderFacilityOid));
 				metaData.setTitle(fhirObject.getDescription());
-				metaData.setTypeCode(new Code(fhirObject.getType()));
+				metaData.setTypeCode(FhirUtilities.toCode(fhirObject.getType()));
 				metaData.setUniqueId(fhirObject.getMasterIdentifier().getValue());
 				metaData.setUri(FhirCommon.getDocumentFilepath(fhirObject));
 
@@ -254,6 +258,25 @@ public class FhirXdTransaction {
 		}
 
 		return retVal;
+	}
+
+	/**
+	 * Method to get DocumentDescriptor from DocumentReference
+	 *
+	 * @param fhirObject
+	 *            the FHIR DocumentReference
+	 * @return the DocumentDescriptor
+	 */
+	private DocumentDescriptor getDocumentDescriptor(DocumentReference fhirObject) {
+		String mimeType = "";
+		fhirObject.getContentFirstRep().getFormat();
+		final Coding item = fhirObject.getContentFirstRep().getFormat();
+		final List<org.hl7.fhir.dstu3.model.Extension> extensions = item
+				.getExtensionsByUrl(FhirCommon.urnUseAsDocumentDescriptor);
+		if (!extensions.isEmpty()) {
+			mimeType = item.getCode();
+		}
+		return DocumentDescriptor.getDocumentDescriptorForMimeType(mimeType);
 	}
 
 	/**
@@ -273,7 +296,7 @@ public class FhirXdTransaction {
 			Reference ref = null;
 			try {
 				ref = entry.getPReference();
-			} catch (FHIRException e) {
+			} catch (final FHIRException e) {
 			}
 			if (ref != null) {
 				if (ref.getResource() instanceof MessageHeader) {
@@ -298,13 +321,13 @@ public class FhirXdTransaction {
 	 */
 	public List<org.ehealth_connector.communication.Destination> getRepositories(
 			DocumentManifest docManifest) {
-		final List<org.ehealth_connector.communication.Destination> retVal = new ArrayList<org.ehealth_connector.communication.Destination>();
+		final List<org.ehealth_connector.communication.Destination> retVal = new ArrayList<>();
 
 		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
 			Reference ref = null;
 			try {
 				ref = entry.getPReference();
-			} catch (FHIRException e) {
+			} catch (final FHIRException e) {
 			}
 			if (ref != null) {
 				if (ref.getResource() instanceof MessageHeader) {
@@ -326,12 +349,12 @@ public class FhirXdTransaction {
 	 * @return the list of Resources
 	 */
 	public List<Resource> getResources(DocumentManifest docManifest) {
-		List<Resource> retVal = new ArrayList<Resource>();
+		final List<Resource> retVal = new ArrayList<>();
 		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
 			Reference ref = null;
 			try {
 				ref = entry.getPReference();
-			} catch (FHIRException e) {
+			} catch (final FHIRException e) {
 			}
 			if (ref != null) {
 				retVal.add((Resource) ref.getResource());
@@ -373,7 +396,7 @@ public class FhirXdTransaction {
 					retVal.setComments(
 							((StringType) extensions.get(0).getValue()).getValueAsString());
 
-				retVal.setContentTypeCode(new Code(fhirObject.getType()));
+				retVal.setContentTypeCode(FhirUtilities.toCode(fhirObject.getType()));
 
 				final Patient pat = FhirCommon.getPatient(fhirObject.getSubject());
 				if (!pat.getIds().isEmpty())
