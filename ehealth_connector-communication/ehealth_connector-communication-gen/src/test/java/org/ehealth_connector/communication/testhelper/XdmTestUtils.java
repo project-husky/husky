@@ -37,7 +37,7 @@ import org.apache.commons.io.IOUtils;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.enums.Confidentiality;
+import org.ehealth_connector.common.enums.ConfidentialityCode;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.communication.ConvenienceCommunication;
 import org.ehealth_connector.communication.DocumentMetadata;
@@ -254,7 +254,7 @@ public class XdmTestUtils extends TestUtils {
 				new Code("2.16.840.1.113883.5.11", "AMB", "Ambulance"));
 		metaData.setPracticeSettingCode(
 				new Code("2.16.840.1.113883.6.96", "408478003", "Critical Care Medicine"));
-		metaData.addConfidentialityCode(Confidentiality.NORMAL);
+		metaData.addConfidentialityCode(ConfidentialityCode.NORMAL);
 	}
 
 	protected void setNistMetadata2(DocumentMetadata metaData) {
@@ -274,6 +274,6 @@ public class XdmTestUtils extends TestUtils {
 				new Code("2.16.840.1.113883.5.11", "AMB", "Ambulance"));
 		metaData.setPracticeSettingCode(
 				new Code("2.16.840.1.113883.6.96", "394802001", "General Medicine"));
-		metaData.addConfidentialityCode(Confidentiality.NORMAL);
+		metaData.addConfidentialityCode(ConfidentialityCode.NORMAL);
 	}
 }

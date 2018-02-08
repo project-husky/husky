@@ -33,7 +33,7 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.Person;
-import org.ehealth_connector.common.enums.Confidentiality;
+import org.ehealth_connector.common.enums.ConfidentialityCode;
 import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.ParticipantType;
@@ -366,9 +366,9 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 *
 	 * @return code
 	 */
-	public Confidentiality getConfidentialityCode() {
+	public ConfidentialityCode getConfidentialityCode() {
 		if (getDoc().getConfidentialityCode() != null) {
-			return Confidentiality.getEnum(getDoc().getConfidentialityCode().getCode());
+			return ConfidentialityCode.getEnum(getDoc().getConfidentialityCode().getCode());
 		}
 		return null;
 	}
@@ -689,10 +689,10 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * @param code
 	 *            If null, "N" for "normal" will be set.
 	 */
-	public void setConfidentialityCode(Confidentiality code) {
+	public void setConfidentialityCode(ConfidentialityCode code) {
 		CE confidentialityCode;
 		if (code == null) {
-			confidentialityCode = Confidentiality.NORMAL.getCE();
+			confidentialityCode = ConfidentialityCode.NORMAL.getCE();
 		} else {
 			confidentialityCode = code.getCE();
 		}

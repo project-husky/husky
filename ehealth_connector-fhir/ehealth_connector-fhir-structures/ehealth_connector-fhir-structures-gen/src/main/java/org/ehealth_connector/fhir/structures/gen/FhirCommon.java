@@ -38,7 +38,7 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Telecoms;
 import org.ehealth_connector.common.enums.CodeSystems;
-import org.ehealth_connector.common.enums.Confidentiality;
+import org.ehealth_connector.common.enums.ConfidentialityCode;
 import org.ehealth_connector.common.enums.Isco08;
 import org.ehealth_connector.common.utils.FileUtil;
 import org.ehealth_connector.fhir.structures.utils.FhirUtilities;
@@ -1167,7 +1167,7 @@ public class FhirCommon {
 	 */
 	public static Basic getConfidentialityNormal() {
 		final Basic docRestrictedConfidentiality = new Basic();
-		final Confidentiality conf = Confidentiality.NORMAL;
+		final ConfidentialityCode conf = ConfidentialityCode.NORMAL;
 		docRestrictedConfidentiality.setCode(FhirCommon.createCodeableConcept(
 				conf.getCodeSystemOid(), conf.getCodeValue(), conf.getDisplayName()));
 		return docRestrictedConfidentiality;
@@ -1181,7 +1181,7 @@ public class FhirCommon {
 	 */
 	public static Basic getConfidentialityRestricted() {
 		final Basic docRestrictedConfidentiality = new Basic();
-		final Confidentiality conf = Confidentiality.RESTRICTED;
+		final ConfidentialityCode conf = ConfidentialityCode.RESTRICTED;
 		docRestrictedConfidentiality.setCode(FhirCommon.createCodeableConcept(
 				conf.getCodeSystemOid(), conf.getCodeValue(), conf.getDisplayName()));
 		return docRestrictedConfidentiality;

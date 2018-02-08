@@ -18,9 +18,9 @@
 package org.ehealth_connector.communication.ch.xd.storedquery;
 
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.ch.enums.ConfidentialityCode;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.ehealth_connector.communication.ch.enums.AvailabilityStatus;
-import org.ehealth_connector.communication.ch.enums.ConfidentialityCode;
 import org.ehealth_connector.communication.ch.enums.HealthcareFacilityTypeCode;
 import org.ehealth_connector.communication.utils.XdsUtil;
 import org.ehealth_connector.communication.xd.storedquery.StoredQueryInterface;
@@ -86,7 +86,7 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 			org.ehealth_connector.communication.xd.storedquery.DateTimeRange[] dateTimeRanges,
 			org.ehealth_connector.communication.ch.enums.PracticeSettingCode[] practiceSettingCodes,
 			HealthcareFacilityTypeCode[] healthCareFacilityCodes,
-			org.ehealth_connector.communication.ch.enums.ConfidentialityCode[] confidentialityCodes,
+			org.ehealth_connector.common.ch.enums.ConfidentialityCode[] confidentialityCodes,
 			org.ehealth_connector.communication.ch.enums.FormatCode[] formatCodes, XCN authorPerson,
 			AvailabilityStatus status) {
 

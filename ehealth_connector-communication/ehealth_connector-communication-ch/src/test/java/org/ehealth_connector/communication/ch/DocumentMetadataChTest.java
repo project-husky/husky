@@ -20,10 +20,10 @@ package org.ehealth_connector.communication.ch;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import org.ehealth_connector.common.ch.enums.ConfidentialityCode;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.communication.DocumentMetadataTest;
 import org.ehealth_connector.communication.ch.enums.ClassCode;
-import org.ehealth_connector.communication.ch.enums.ConfidentialityCode;
 import org.ehealth_connector.communication.ch.enums.HealthcareFacilityTypeCode;
 import org.ehealth_connector.communication.ch.enums.MimeType;
 import org.ehealth_connector.communication.ch.enums.PracticeSettingCode;

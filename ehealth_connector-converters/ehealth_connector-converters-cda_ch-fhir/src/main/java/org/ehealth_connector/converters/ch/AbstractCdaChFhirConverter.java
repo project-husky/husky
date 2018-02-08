@@ -57,7 +57,7 @@ import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Telecoms;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.CodeSystems;
-import org.ehealth_connector.common.enums.Confidentiality;
+import org.ehealth_connector.common.enums.ConfidentialityCode;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.ehealth_connector.common.enums.StatusCode;
@@ -623,8 +623,8 @@ public abstract class AbstractCdaChFhirConverter {
 	 * @return eHC confidentiality code </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public Confidentiality getConfidentialityCode(DocumentManifest docManifest) {
-		Confidentiality retVal = Confidentiality.NORMAL; // default
+	public ConfidentialityCode getConfidentialityCode(DocumentManifest docManifest) {
+		ConfidentialityCode retVal = ConfidentialityCode.NORMAL; // default
 
 		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
 			Reference ref = null;
@@ -640,14 +640,14 @@ public abstract class AbstractCdaChFhirConverter {
 					if ((langCode != null) && (langCode.getSystem() != null)
 							&& langCode.getSystem().equals(OID_CONFIDENTIALITY_CODE)) {
 						if ("veryrestricted".equals(langCode.getCode().toLowerCase())) {
-							retVal = Confidentiality.VERY_RESTRICTED;
+							retVal = ConfidentialityCode.VERY_RESTRICTED;
 							break;
 						} else if ("restricted".equals(langCode.getCode().toLowerCase())
 								|| "r".equals(langCode.getCode().toLowerCase())) {
-							retVal = Confidentiality.RESTRICTED;
+							retVal = ConfidentialityCode.RESTRICTED;
 							break;
 						} else if ("normal".equals(langCode.getCode().toLowerCase())) {
-							retVal = Confidentiality.NORMAL;
+							retVal = ConfidentialityCode.NORMAL;
 							break;
 						}
 					}

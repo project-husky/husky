@@ -28,7 +28,7 @@ import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Patient;
-import org.ehealth_connector.common.enums.Confidentiality;
+import org.ehealth_connector.common.enums.ConfidentialityCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.openhealthtools.ihe.common.hl7v2.SourcePatientInfoType;
@@ -249,7 +249,7 @@ public class DocumentMetadata {
 	 *            the code
 	 */
 	@SuppressWarnings("unchecked")
-	public void addConfidentialityCode(Confidentiality code) {
+	public void addConfidentialityCode(ConfidentialityCode code) {
 		xDoc.getConfidentialityCode().add(XdsMetadataUtil.createCodedMetadata(
 				code.getCodeSystemOid(), code.getCodeValue(), code.getDisplayName(), null));
 	}

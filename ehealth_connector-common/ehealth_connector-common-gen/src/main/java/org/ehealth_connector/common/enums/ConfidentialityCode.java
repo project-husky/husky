@@ -20,47 +20,44 @@ import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
-/*
- *<div class="de">Vertraulichkeit</div>
- *<div class="fr"></div>
+/**
+ * The Enum ConfidentialityCode contains the codes of the HL7 Vocabulary.
  */
-public enum Confidentiality {
+public enum ConfidentialityCode {
 
-	CH_30003("30003", "2.16.756.5.30.1.127.3.10.1.5", "medizinische Daten"),
-	/**
-	 * <div class="de">Normal</div> <div class="fr"></div>
-	 */
-	NORMAL("N", "2.16.840.1.113883.5.25", "Normal"),
-	/**
-	 * <div class="de">Vertraulich </div> <div class="fr"></div>
-	 */
-	RESTRICTED("R", "2.16.840.1.113883.5.25", "Restricted"),
+	/** <div class="de">Normal</div> <div class="fr"></div>. */
+	LOW("L", "2.16.840.1.113883.5.25", "low"),
 
-	/**
-	 * <div class="de">Streng vertraulich</div> <div class="fr"></div>
-	 */
-	VERY_RESTRICTED("VR", "2.16.840.1.113883.5.25", "Very restricted");
+	/** <div class="de">Normal</div> <div class="fr"></div>. */
+	MODERATE("M", "2.16.840.1.113883.5.25", "moderate"),
 
-	// public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.25";
+	/** <div class="de">Normal</div> <div class="fr"></div>. */
+	NORMAL("N", "2.16.840.1.113883.5.25", "normal"),
+
+	/** <div class="de">Vertraulich </div> <div class="fr"></div>. */
+	RESTRICTED("R", "2.16.840.1.113883.5.25", "restricted"),
+
+	/** <div class="de">Vertraulich </div> <div class="fr"></div>. */
+	UNRESTRICTED("U", "2.16.840.1.113883.5.25", "unestricted"),
+
+	/** <div class="de">Streng vertraulich</div> <div class="fr"></div>. */
+	VERY_RESTRICTED("V", "2.16.840.1.113883.5.25", "very restricted");
+
+	/** The Constant CODE_SYSTEM_NAME. */
+	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.25";
 	public static final String CODE_SYSTEM_NAME = "Confidentiality";
-	public static final String CODE_SYSTEM_OID_CH = "2.16.756.5.30.1.127.3.10.1.5";
-	public static final String NORMAL_CODE = "N";
-
-	public static final String RESTRICED_CODE = "R";
-
-	public static final String VERY_RESTRICTED_CODE = "VR";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>.
 	 *
 	 * @param code
 	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static Confidentiality getEnum(String code) {
-		for (final Confidentiality x : values()) {
+	public static ConfidentialityCode getEnum(String code) {
+		for (final ConfidentialityCode x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -83,7 +80,7 @@ public enum Confidentiality {
 			return false;
 		}
 		try {
-			Enum.valueOf(Confidentiality.class, enumName);
+			Enum.valueOf(ConfidentialityCode.class, enumName);
 			return true;
 		} catch (final IllegalArgumentException ex) {
 			return false;
@@ -100,7 +97,7 @@ public enum Confidentiality {
 	 * @return true, if one enum of this valueset contains the given code
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (Confidentiality x : values()) {
+		for (ConfidentialityCode x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -108,25 +105,30 @@ public enum Confidentiality {
 		return false;
 	}
 
+	/** The code. */
 	private String code;
 
+	/** The display name. */
 	private String displayName;
 
+	/** The oid. */
 	private String oid;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
 	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
-	 * mittels eines Codes und einem Display Name</div>
+	 * mittels eines Codes und einem Display Name</div>.
 	 *
 	 * @param code
 	 *            <br>
 	 *            <div class="de"> code</div>
+	 * @param oid
+	 *            the oid
 	 * @param displayName
 	 *            <br>
 	 *            <div class="de"> display name</div>
 	 */
-	private Confidentiality(String code, String oid, String displayName) {
+	private ConfidentialityCode(String code, String oid, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
 		this.oid = oid;
@@ -148,7 +150,7 @@ public enum Confidentiality {
 
 	/**
 	 * <div class="en">Gets the ehealthconnector Code Object</div>
-	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>.
 	 *
 	 * @return <div class="en">the code</div>
 	 */
@@ -179,7 +181,7 @@ public enum Confidentiality {
 
 	/**
 	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>.
 	 *
 	 * @return <div class="en">the code</div>
 	 */

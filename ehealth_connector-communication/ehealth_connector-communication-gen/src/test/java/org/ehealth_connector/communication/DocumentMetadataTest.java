@@ -25,7 +25,6 @@ import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Patient;
-import org.ehealth_connector.common.enums.Confidentiality;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.junit.Before;
 import org.junit.Test;
@@ -88,16 +87,6 @@ public class DocumentMetadataTest extends TestUtils {
 		d.setCodedLanguage(LanguageCode.GERMAN_CODE); // Can be extracted from
 		// CDA
 		assertEquals(LanguageCode.GERMAN_CODE, m.getLanguageCode());
-	}
-
-	@Test
-	public void testConfidentialityCode() {
-		code1 = createCode1();
-		d.addConfidentialityCode(code1);
-		d.addConfidentialityCode(Confidentiality.CH_30003);
-		assertTrue(isEqual(code1, d.getConfidentialityCodes().get(0)));
-		assertEquals(Confidentiality.CH_30003.getCodeValue(),
-				d.getConfidentialityCodes().get(1).getCode());
 	}
 
 	@Test

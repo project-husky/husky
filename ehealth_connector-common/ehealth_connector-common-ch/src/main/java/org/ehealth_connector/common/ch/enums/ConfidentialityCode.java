@@ -15,7 +15,7 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.communication.ch.enums;
+package org.ehealth_connector.common.ch.enums;
 
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.CodedMetadataEnumInterface;
