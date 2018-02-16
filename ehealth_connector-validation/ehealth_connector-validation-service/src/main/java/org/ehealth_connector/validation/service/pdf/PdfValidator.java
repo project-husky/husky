@@ -63,7 +63,10 @@ public class PdfValidator {
 	private final Configuration config;
 
 	/** PDF compliance level as string */
-	private String pdfLevel;
+	private String pdfConformanceLevel = "not set";
+
+	/** PDF reporting level as string */
+	private String reportingLevel = "not set";
 
 	/** PDF compliance level as enum/int */
 	private int comlianceLevel = COMPLIANCE.ePDFUnk;
@@ -88,7 +91,8 @@ public class PdfValidator {
 	 */
 	public PdfValidator(Configuration config) {
 		this.config = config;
-		this.pdfLevel = config.getPdfLevel();
+		this.pdfConformanceLevel = config.getPdfLevel();
+		this.reportingLevel = config.getPdfReportingLevel();
 	}
 
 	/**
@@ -96,8 +100,8 @@ public class PdfValidator {
 	 *
 	 * @return the PDF compliance level
 	 */
-	public String getPdfLevel() {
-		return pdfLevel;
+	public String getPdfConformanceLevel() {
+		return pdfConformanceLevel;
 	}
 
 	/**
@@ -122,6 +126,15 @@ public class PdfValidator {
 		if (pdfValidator != null)
 			retVal = com.pdftools.pdfvalidator.PdfValidatorAPI.getProductVersion();
 		return retVal;
+	}
+
+	/**
+	 * Gets the validator reporting level
+	 *
+	 * @return the validator reporting level
+	 */
+	public String getReportingLevel() {
+		return reportingLevel;
 	}
 
 	/**
@@ -191,9 +204,9 @@ public class PdfValidator {
 					pdfValidator.setReportingLevel(1);
 				}
 
-				if (pdfLevel == null)
-					pdfLevel = "";
-				switch (pdfLevel) {
+				if (pdfConformanceLevel == null)
+					pdfConformanceLevel = "";
+				switch (pdfConformanceLevel) {
 				case "1a":
 					comlianceLevel = COMPLIANCE.ePDFA1a;
 					break;
@@ -222,6 +235,8 @@ public class PdfValidator {
 					comlianceLevel = COMPLIANCE.ePDFUnk;
 				}
 			}
+			pdfValidationResult.setReportingLevel(reportingLevel);
+			pdfValidationResult.setPdfConformanceLevel(pdfConformanceLevel);
 		} else
 			log.info("PdfValidatorAPI already initialized...");
 	}
@@ -263,6 +278,8 @@ public class PdfValidator {
 			throws ConfigurationException, SaxonApiException, IOException {
 
 		pdfValidationResult = new PdfValidationResult();
+		pdfValidationResult.setReportingLevel(reportingLevel);
+		pdfValidationResult.setPdfConformanceLevel(pdfConformanceLevel);
 
 		final Processor proc = new Processor(false);
 

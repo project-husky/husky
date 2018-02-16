@@ -70,7 +70,10 @@ public class VeraPdfValidator {
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/** PDF compliance level as string */
-	private String pdfLevel;
+	private String pdfConformanceLevel = "not set";
+
+	/** PDF reporting level as string */
+	private String reportingLevel = "not set";
 
 	/** Current PDF validation results */
 	private VeraPdfValidationResult pdfValidationResult = null;
@@ -85,7 +88,8 @@ public class VeraPdfValidator {
 	 *            Current configuration
 	 */
 	public VeraPdfValidator(Configuration config) {
-		this.pdfLevel = config.getPdfLevel();
+		this.pdfConformanceLevel = config.getPdfLevel();
+		this.reportingLevel = config.getPdfReportingLevel();
 	}
 
 	/**
@@ -93,8 +97,8 @@ public class VeraPdfValidator {
 	 *
 	 * @return the PDF compliance level
 	 */
-	public String getPdfLevel() {
-		return pdfLevel;
+	public String getPdfConformanceLevel() {
+		return pdfConformanceLevel;
 	}
 
 	/**
@@ -123,13 +127,23 @@ public class VeraPdfValidator {
 	}
 
 	/**
+	 * Gets the validator reporting level
+	 *
+	 * @return the validator reporting level
+	 */
+	public String getReportingLevel() {
+		return reportingLevel;
+	}
+
+	/**
 	 * Initializes the PDF validator
 	 */
 	private void initialize() {
 		if (pdfValidator == null) {
 			log.info("Trying to initialize veraPdfValidator...");
 			pdfValidationResult = new VeraPdfValidationResult();
-			flavour = PDFAFlavour.fromString(pdfLevel);
+			flavour = PDFAFlavour.fromString(pdfConformanceLevel);
+			pdfValidationResult.setPdfConformanceLevel(pdfConformanceLevel);
 			VeraGreenfieldFoundryProvider.initialise();
 			pdfValidator = Foundries.defaultInstance().createValidator(flavour, false);
 		} else

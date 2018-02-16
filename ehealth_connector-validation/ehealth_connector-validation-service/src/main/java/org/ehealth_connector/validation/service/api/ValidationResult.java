@@ -45,6 +45,15 @@ public class ValidationResult {
 	public ValidationResult() {
 	}
 
+	public String getPdfConformanceLevel() {
+		String retVal = "not set";
+		if (pdfValRes != null)
+			retVal = pdfValRes.getPdfConformanceLevel();
+		if (veraPdfValRes != null)
+			retVal = veraPdfValRes.getPdfConformanceLevel();
+		return retVal;
+	}
+
 	/**
 	 * Gets the PDF validation results
 	 *
@@ -52,6 +61,15 @@ public class ValidationResult {
 	 */
 	public PdfValidationResult getPdfValidationResult() {
 		return pdfValRes;
+	}
+
+	public String getReportingLevel() {
+		String retVal = "not set";
+		if (pdfValRes != null)
+			retVal = pdfValRes.getReportingLevel();
+		if (veraPdfValRes != null)
+			retVal = veraPdfValRes.getReportingLevel();
+		return retVal;
 	}
 
 	/**

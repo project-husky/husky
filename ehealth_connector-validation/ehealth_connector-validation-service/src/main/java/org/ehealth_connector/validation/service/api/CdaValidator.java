@@ -220,12 +220,19 @@ public class CdaValidator {
 		String reportingLevel = this.configuration.getPdfReportingLevel();
 		if (reportingLevel == null)
 			reportingLevel = "not set";
+		// 0: none Nothing is reported
 		if (!retVal)
 			retVal = (reportingLevel.equals("0"));
+
+		// 1: errors Errors are reported
 		if (!retVal)
 			retVal = (reportingLevel.equals("1"));
+
+		// 2: warnings Errors and warnings are reported
 		if (!retVal)
 			retVal = (reportingLevel.equals("2"));
+
+		// 3: information Error, warnings and information are reported
 		if (!retVal)
 			retVal = (reportingLevel.equals("3"));
 
@@ -410,6 +417,14 @@ public class CdaValidator {
 		return retVal;
 	}
 
+	/**
+	 * Initializes the class.
+	 *
+	 * @param config
+	 *            the configuration
+	 * @throws ConfigurationException
+	 *             the configuration exception
+	 */
 	private void initialize(Configuration config) throws ConfigurationException {
 
 		this.configuration = config;
@@ -429,11 +444,24 @@ public class CdaValidator {
 		}
 	}
 
+	/**
+	 * Initializes the class.
+	 *
+	 * @param configFile
+	 *            the config file
+	 * @throws ConfigurationException
+	 *             the configuration exception
+	 */
 	private void initialize(File configFile) throws ConfigurationException {
 
 		initialize(configure(configFile));
 	}
 
+	/**
+	 * Indicates if the veraPDF validator is used for PDF validation.
+	 *
+	 * @return true, if the veraPDF validator is used for PDF validation
+	 */
 	public boolean isUseVeraPdfValidator() {
 		return useVeraPdfValidator;
 	}
@@ -594,6 +622,8 @@ public class CdaValidator {
 		if (errorMsg == null) {
 			log.info("Start of PDF validation");
 			if (pdfValidator != null) {
+				retVal.setReportingLevel(pdfValidator.getReportingLevel());
+				retVal.setPdfConformanceLevel(pdfValidator.getPdfConformanceLevel());
 				try {
 					// make sure we read the stream from the beginning
 					InputStream is = cdaStream.getInputStream();
