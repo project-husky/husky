@@ -80,7 +80,7 @@ public class SpecimenReceivedEntry
 			getMdht().getIds().add(id.getIi());
 		} else {
 			final II ii = DatatypesFactory.eINSTANCE.createII();
-			ii.setNullFlavor(NullFlavor.UNK);
+			ii.setNullFlavor(NullFlavor.ASKU);
 			getMdht().getIds().add(ii);
 		}
 	}

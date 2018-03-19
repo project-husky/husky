@@ -86,6 +86,18 @@ public class Value {
 	}
 
 	/**
+	 * Creates a new BigDecimal value.
+	 *
+	 * @param value
+	 *            The value
+	 */
+	public Value(BigDecimal value) {
+		this(DatatypesFactory.eINSTANCE.createPQ());
+		final PQ pq = (PQ) mValue;
+		pq.setValue(value);
+	}
+
+	/**
 	 * <div class="en">Instantiates a new value with the parameters for a MDHT
 	 * IVL_PQ Objekt with two PQ Values (A low and high bound of physical
 	 * quantities).</div> <div class="de">Instantiiert eine neues Value MDHT
@@ -289,6 +301,36 @@ public class Value {
 		mValue = rto;
 	}
 
+	/**
+	 * <div class="en">Instantiates a new value with the parameters for a MDHT
+	 * IVL_PQ Objekt with two PQ Values (A low and high bound of physical
+	 * quantities).</div> <div class="de">Instantiiert eine neues Value MDHT
+	 * IVL_PQ Objekt mit zwei PQ Werten (entspricht zwei Grenzen von
+	 * physikalischen Messgrößen).</div> <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param low
+	 *            The lower bound
+	 *
+	 * @param high
+	 *            The upper bound
+	 */
+	public Value(Double low, Double high) {
+		final IVL_PQ ivlPq = DatatypesFactory.eINSTANCE.createIVL_PQ();
+		final IVXB_PQ mlow = DatatypesFactory.eINSTANCE.createIVXB_PQ();
+		final IVXB_PQ mhigh = DatatypesFactory.eINSTANCE.createIVXB_PQ();
+
+		mlow.setValue(low);
+		mlow.setUnit("");
+		ivlPq.setLow(mlow);
+
+		mhigh.setValue(high);
+		mhigh.setUnit("");
+		ivlPq.setHigh(mhigh);
+
+		mValue = ivlPq;
+	}
+
 	public Value(ED ed) {
 		mValue = ed;
 	}
@@ -300,6 +342,17 @@ public class Value {
 	 *            Der eigentliche Wert
 	 */
 	public Value(int value) {
+		this(DatatypesFactory.eINSTANCE.createINT());
+		setIntValue(value);
+	}
+
+	/**
+	 * Creates a new INT value.
+	 *
+	 * @param value
+	 *            The value.
+	 */
+	public Value(Integer value) {
 		this(DatatypesFactory.eINSTANCE.createINT());
 		setIntValue(value);
 	}
@@ -518,6 +571,20 @@ public class Value {
 		return null;
 	}
 
+	/**
+	 * Returns the text of the underlying MDHT type INT
+	 *
+	 * @return the text of the underlying type INT
+	 */
+	public String getIntText() {
+		if (isInt()) {
+			final INT val = (INT) mValue;
+			if (val.getValue() != null)
+				return val.getValue().toString();
+		}
+		return null;
+	}
+
 	public String getOriginalTextReference() {
 		final Code code = new Code((CD) mValue);
 		return code.getOriginalTextReference();
@@ -710,6 +777,15 @@ public class Value {
 	}
 
 	/**
+	 * Checks if the Value object is an INT.
+	 *
+	 * @return boolean true, if it is INT, false otherwise
+	 */
+	public boolean isInt() {
+		return (mValue instanceof INT);
+	}
+
+	/**
 	 * Checks if the Value object is a physical quantity.
 	 *
 	 * @return boolean true, if it is physical quantity, false otherwise
@@ -785,12 +861,15 @@ public class Value {
 	public String toString() {
 		// Resultat
 		String resultText = "";
-		if (isCode())
-			// TODO This is draft implementation only! the text needs to be
-			// translated by the real code. Displaynames should never be
-			// used!
-			resultText = getCode().getDisplayName();
-		else if (isPhysicalQuantity())
+		if (isCode()) {
+			if (getCode().getOriginalText() != null)
+				resultText = getCode().getOriginalText();
+			if ("".equals(resultText))
+				// TODO This is draft implementation only! the text needs to be
+				// translated by the real code. Displaynames should never be
+				// used!
+				resultText = getCode().getDisplayName();
+		} else if (isPhysicalQuantity())
 			resultText = getPhysicalQuantityValue() + " " + getPhysicalQuantityUnit();
 		else if (isEd())
 			resultText = getEdText();
@@ -798,6 +877,8 @@ public class Value {
 			resultText = getBlText();
 		else if (isRto())
 			resultText = getRtoValueText() + " " + getRtoUnitText();
+		else if (isInt())
+			resultText = getIntText();
 		else
 			resultText = "*** TODO: This is not yet implemented value type...";
 

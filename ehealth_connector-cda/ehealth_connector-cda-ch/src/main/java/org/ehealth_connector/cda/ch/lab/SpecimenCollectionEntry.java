@@ -49,6 +49,7 @@ public class SpecimenCollectionEntry
 	 */
 	public SpecimenCollectionEntry() {
 		super();
+		setDefaultParticipant();
 	}
 
 	/**
@@ -95,7 +96,7 @@ public class SpecimenCollectionEntry
 		} else {
 			setEffectiveTime(effectiveTime);
 		}
-		addParticipant(participant);
+		setParticipant(participant);
 		setTextReference(textReference);
 	}
 
@@ -154,12 +155,14 @@ public class SpecimenCollectionEntry
 
 		// Fixed Loinc Code for Playing Entity
 		Code code = new Code("2.16.756.5.30.2.1.1.10", "LOINC");
+		code.setCodeSystemName("CDA-CH Material");
 		pl.setCode(code);
 		pr.setPlayingEntity(pl);
-		pr.getMdht().getIds().add(id);
+		if (id != null)
+			pr.getMdht().getIds().add(id);
 		participant.setParticipantRole(pr);
 
-		addParticipant(participant);
+		setParticipant(participant);
 	}
 
 	/**
@@ -174,6 +177,30 @@ public class SpecimenCollectionEntry
 			return this.getMdht().getText().getReference().getValue();
 		}
 		return null;
+	}
+
+	/**
+	 * Adds the participant (typically, a laboratory).
+	 *
+	 * @param id
+	 *            the id
+	 */
+	private void setDefaultParticipant() {
+		final PlayingEntity pl = new PlayingEntity();
+		final ParticipantRole pr = new ParticipantRole();
+		final Participant participant = new Participant();
+
+		// Fixed Loinc Code for Playing Entity
+		Code code = new Code("2.16.756.5.30.2.1.1.10", "LOINC");
+		code.setCodeSystemName("CDA-CH Material");
+		pl.setCode(code);
+		pr.setPlayingEntity(pl);
+		final II ii = DatatypesFactory.eINSTANCE.createII();
+		ii.setNullFlavor(NullFlavor.NA);
+		pr.getMdht().getIds().add(ii);
+		participant.setParticipantRole(pr);
+
+		setParticipant(participant);
 	}
 
 	/**

@@ -457,6 +457,18 @@ public class Code {
 	}
 
 	/**
+	 * Returns the text content of the originalText element
+	 *
+	 * @return originalText
+	 */
+	public String getOriginalText() {
+		String retVal = "";
+		if (mCD.getOriginalText() != null)
+			retVal = mCD.getOriginalText().getText();
+		return retVal;
+	}
+
+	/**
 	 * Returns a reference to human readable SectionText of the OriginalText
 	 * element
 	 *

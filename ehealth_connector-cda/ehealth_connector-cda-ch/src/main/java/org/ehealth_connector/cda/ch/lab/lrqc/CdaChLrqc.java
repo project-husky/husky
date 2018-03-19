@@ -311,17 +311,27 @@ public class CdaChLrqc
 	public void addLaboratoryBatteryOrganizer(LaboratoryBatteryOrganizer organizer,
 			Code sectionCode) {
 		LaboratorySpecialtySection laboratorySpecialtySection = getLaboratorySpecialtySection();
+		boolean newSection = false;
 		if (laboratorySpecialtySection == null) {
 			if (sectionCode != null) {
 				laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode,
 						getLanguageCode());
 				getMdht().setCode(sectionCode.getCE());
+				newSection = true;
 			} else {
 				laboratorySpecialtySection = new LaboratorySpecialtySection();
 			}
 		}
 		laboratorySpecialtySection.addLaboratoryBatteryOrganizer(sectionCode, organizer,
 				getLanguageCode());
+		if (newSection) {
+			// TODO move this to the model
+			laboratorySpecialtySection.getMdht().getEntries().get(0).getTemplateIds().clear();
+			Identificator id = new Identificator("1.3.6.1.4.1.19376.1.3.1", null);
+			laboratorySpecialtySection.getMdht().getEntries().get(0).getAct().getTemplateIds()
+					.add(id.getIi());
+		}
+
 		setLaboratorySpecialtySection(laboratorySpecialtySection);
 
 		// set the fixed laboratory Code

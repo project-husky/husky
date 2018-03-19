@@ -59,7 +59,7 @@ public class SpecimenCollectionEntryTest extends TestUtils {
 		pr.setClassCode(RoleClassRoot.SPEC);
 		pr.addId(id1);
 		p.setParticipantRole(pr);
-		entry.addParticipant(p);
+		entry.setParticipant(p);
 
 		assertTrue(entry.getParticipants() != null && !entry.getParticipants().isEmpty()
 				&& !(entry.getParticipants().get(0).getParticipantRole() == null));

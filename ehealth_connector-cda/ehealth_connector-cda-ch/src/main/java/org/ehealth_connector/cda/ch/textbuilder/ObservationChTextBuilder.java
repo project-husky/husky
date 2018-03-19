@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.ehealth_connector.cda.AbstractObservation;
@@ -216,8 +217,11 @@ public class ObservationChTextBuilder extends TextBuilder {
 
 	/**
 	 * Adds the table body (rows).
+	 *
+	 * @param sectionLabel
+	 *            the section number
 	 */
-	private void addTableBody() {
+	private void addTableBody(String sectionLabel) {
 		boolean empty = true;
 		append("<tbody>");
 		int i = 0;
@@ -228,14 +232,14 @@ public class ObservationChTextBuilder extends TextBuilder {
 							.getLaboratoryObservations()) {
 						empty = false;
 						i++;
-						addTableRowLaboratorySpecialtySection(i,
+						addTableRowLaboratorySpecialtySection(sectionLabel, i,
 								(LaboratoryBatteryOrganizerImpl) battery,
 								new AbstractObservation(obs));
 					}
 				}
 			}
 			if (empty)
-				addTableRowLaboratorySpecialtySection(1, null, null);
+				addTableRowLaboratorySpecialtySection(sectionLabel, 1, null, null);
 		} else if (codedVitalSignsSection != null) {
 			for (Organizer battery : codedVitalSignsSection.getOrganizers()) {
 				if (battery instanceof VitalSignsOrganizerImpl) {
@@ -457,23 +461,13 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 * @param observation
 	 *            the observation.
 	 */
-	private void addTableRowLaboratorySpecialtySection(int rowNumber,
+	private void addTableRowLaboratorySpecialtySection(String sectionLabel, int rowNumber,
 			LaboratoryBatteryOrganizer battery, AbstractObservation observation) {
 		List<String> rowColumns = new ArrayList<String>();
 		String contentId = "";
 
 		if (observation != null) {
-			String sectionCode = "";
-			if (codedVitalSignsSection != null)
-				if (codedVitalSignsSection.getCode() != null)
-					sectionCode = codedVitalSignsSection.getCode().getCode();
-			if (laboratorySpecialtySection != null)
-				if (laboratorySpecialtySection.getCode() != null)
-					sectionCode = laboratorySpecialtySection.getCode().getCode();
-			if (studiesSummarySection != null)
-				if (studiesSummarySection.getCode() != null)
-					sectionCode = studiesSummarySection.getCode().getCode();
-			contentId = contentIdPrefix + "_" + sectionCode + "_observation_" + rowNumber;
+			contentId = contentIdPrefix + "_" + sectionLabel + "_observation_" + rowNumber;
 			observation.setTextReference(contentId);
 
 			Code obsCode = observation.getCode();
@@ -487,7 +481,10 @@ public class ObservationChTextBuilder extends TextBuilder {
 			rowColumns.add(getCell(Integer.toString(rowNumber)));
 
 			// Observation
-			rowColumns.add(getCell(observation.getText()));
+			String text = observation.getText();
+			if ("".equals(text))
+				text = observation.getCode().getOriginalText();
+			rowColumns.add(getCell(text));
 
 			// Result
 			Value value = observation.getValue();
@@ -496,6 +493,8 @@ public class ObservationChTextBuilder extends TextBuilder {
 			if (value != null) {
 				if (value.isPhysicalQuantity()) {
 					tempValue = value.getPhysicalQuantityValue();
+					if ("-1".equals(tempValue))
+						tempValue = "-";
 					tempUnit = value.getPhysicalQuantityUnit();
 				} else if (value.isRto()) {
 					tempValue = value.getRtoValueText();
@@ -509,11 +508,13 @@ public class ObservationChTextBuilder extends TextBuilder {
 					}
 				} else if (value.isEd()) {
 					if (!value.isSt()) {
-						contentId = contentIdPrefix + "_" + sectionCode + "_value_" + rowNumber;
+						contentId = contentIdPrefix + "_" + sectionLabel + "_value_" + rowNumber;
 						ED ed = (ED) value.getValue();
 						ed.setReference(Util.createReferenceTel(contentId));
 					}
 					tempValue = value.toString();
+					tempValue = tempValue.replace("<", "&lt;");
+					tempValue = tempValue.replace(">", "&gt;");
 				} else
 					tempValue = value.toString();
 			}
@@ -527,9 +528,14 @@ public class ObservationChTextBuilder extends TextBuilder {
 					.add(getCell(translateInterpretationCode(observation.getInterpretationCode())));
 
 			// Reference Range
-			if (observation.getReferenceRange() != null)
-				rowColumns.add(getCell(observation.getReferenceRange().toNarrativeString()));
-			else
+			if (observation.getReferenceRange() != null) {
+				tempValue = observation.getReferenceRange().toNarrativeString();
+				if ("true".equals(tempValue))
+					tempValue = resBundle.getString("generic.true");
+				if ("false".equals(tempValue))
+					tempValue = resBundle.getString("generic.false");
+				rowColumns.add(getCell(tempValue));
+			} else
 				rowColumns.add(getCell(""));
 
 			// Interpretation Reference Range
@@ -563,15 +569,16 @@ public class ObservationChTextBuilder extends TextBuilder {
 			rowColumns.add(getCell(obsCode.getDisplayName()));
 
 			// Comments
-			contentId = contentIdPrefix + "_" + sectionCode + "_comment_" + rowNumber;
+			contentId = contentIdPrefix + "_" + sectionLabel + "_comment_" + rowNumber;
 			rowColumns.add(getCellWithContent(observation.getCommentText(contentId), contentId));
 
 			// Specimen Collection
-			contentId = contentIdPrefix + "_" + sectionCode + "_collectiondate_" + rowNumber;
+			contentId = contentIdPrefix + "_" + sectionLabel + "_collectiondate_" + rowNumber;
 			rowColumns.add(getCellWithContent(getSpecimenCollectionDate(contentId), contentId));
 
 			// Specimen Received
-			rowColumns.add(getCell(getSpecimenReceivedDate()));
+			contentId = contentIdPrefix + "_" + sectionLabel + "_specimenreceiveddate_" + rowNumber;
+			rowColumns.add(getCellWithContent(getSpecimenReceivedDate(contentId), contentId));
 
 			// Value obtained
 			rowColumns.add(getCell(getObservationResultObtainmentDate()));
@@ -981,9 +988,11 @@ public class ObservationChTextBuilder extends TextBuilder {
 	/**
 	 * Gets the narrative text of the specimen received date.
 	 *
+	 * @param contentId
+	 *            the content id
 	 * @return the narrative text of the specimen received date
 	 */
-	private String getSpecimenReceivedDate() {
+	private String getSpecimenReceivedDate(String contentId) {
 		String retVal = "";
 		for (EntryRelationship er : laboratoryAct.getMdht().getEntryRelationships()) {
 			if (er.getProcedure() != null) {
@@ -997,6 +1006,8 @@ public class ObservationChTextBuilder extends TextBuilder {
 										if (templateId2.getRoot()
 												.equals("1.3.6.1.4.1.19376.1.3.1.3")) {
 											if (er2.getAct().getEffectiveTime() != null) {
+												er2.getAct()
+														.setText(Util.createReference(contentId));
 												retVal = formatSingleTimestampOrInterval(
 														er2.getAct().getEffectiveTime());
 											}
@@ -1122,7 +1133,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 				addTableHeaderLaboratorySpecialtySection();
 			if (codedVitalSignsSection != null)
 				addTableHeaderCodedVitalSignsSection();
-			addTableBody();
+			addTableBody(UUID.randomUUID().toString());
 			append("</table>");
 		}
 		return super.toString();

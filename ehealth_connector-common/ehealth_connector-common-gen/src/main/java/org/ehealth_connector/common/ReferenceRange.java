@@ -19,6 +19,7 @@ package org.ehealth_connector.common;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.BL;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipType;
 
@@ -29,7 +30,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipType;
 public class ReferenceRange extends ObservationRange {
 
 	/** The MDHT Reference Range. */
-	private final org.openhealthtools.mdht.uml.cda.ReferenceRange mRr;
+	private org.openhealthtools.mdht.uml.cda.ReferenceRange mRr;
 
 	/**
 	 * Instantiates a new reference range.
@@ -92,6 +93,7 @@ public class ReferenceRange extends ObservationRange {
 	 */
 	public String toNarrativeString() {
 		String retVal = "";
+		String value = "";
 		String lowValue = "";
 		String lowUnit = "";
 		String highValue = "";
@@ -100,24 +102,31 @@ public class ReferenceRange extends ObservationRange {
 		IVL_PQ tempIvl = null;
 		if (mRr != null)
 			if (mRr.getObservationRange() != null)
-				if (mRr.getObservationRange().getValue() != null)
+				if (mRr.getObservationRange().getValue() != null) {
 					if (mRr.getObservationRange().getValue() instanceof IVL_PQ)
 						tempIvl = (IVL_PQ) mRr.getObservationRange().getValue();
+					if (mRr.getObservationRange().getValue() instanceof BL)
+						value = ((BL) mRr.getObservationRange().getValue()).getValue().toString();
+				}
 		if (tempIvl != null) {
 			lowValue = tempIvl.getLow().getValue().toString();
 			lowUnit = tempIvl.getLow().getUnit();
 			highValue = tempIvl.getHigh().getValue().toString();
 			highUnit = tempIvl.getHigh().getUnit();
 		}
-		if (!"".equals(lowUnit))
-			lowUnit = " " + lowUnit;
-		if (!"".equals(highUnit))
-			highUnit = " " + highUnit;
+		if (!"".equals(value)) {
+			retVal = value;
+		} else {
+			if (!"".equals(lowUnit))
+				lowUnit = " " + lowUnit;
+			if (!"".equals(highUnit))
+				highUnit = " " + highUnit;
 
-		if (lowUnit.equals(highUnit))
-			retVal = lowValue + " - " + highValue + lowUnit;
-		else
-			retVal = lowValue + lowUnit + " - " + highValue + highUnit;
+			if (lowUnit.equals(highUnit))
+				retVal = lowValue + " - " + highValue + lowUnit;
+			else
+				retVal = lowValue + lowUnit + " - " + highValue + highUnit;
+		}
 
 		return retVal;
 	}

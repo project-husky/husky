@@ -39,6 +39,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
+import org.openhealthtools.mdht.uml.hl7.datatypes.INT;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
 import org.openhealthtools.mdht.uml.hl7.datatypes.RTO;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
@@ -256,7 +257,8 @@ public class AbstractObservation
 					|| (mObservation.getValues().get(0) instanceof CD)
 					|| (mObservation.getValues().get(0) instanceof ED)
 					|| (mObservation.getValues().get(0) instanceof PQ)
-					|| (mObservation.getValues().get(0) instanceof RTO))
+					|| (mObservation.getValues().get(0) instanceof RTO)
+					|| (mObservation.getValues().get(0) instanceof INT))
 				return new Value(mObservation.getValues().get(0));
 		}
 		return null;

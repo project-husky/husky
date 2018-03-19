@@ -79,7 +79,7 @@ public enum ObservationInterpretation {
 	 * */
 	LOW_ALERT("LL", "Low alert", "Tief alarmierend", "Alerte bas", "Allarme basso"),
 
-		/**
+	/**
 	 * <div class="en">Normal</div>
 	 * <div class="de">Normal</div>
 	 * <div class="fr">Normal</div>
@@ -87,7 +87,7 @@ public enum ObservationInterpretation {
 	 * */
 	NORMAL("N",	"Normal", "", "", ""),
 
-		/**
+	/**
 	 * <div class="en">Positive</div>
 	 * <div class="de">Positiv</div>
 	 * <div class="fr">Positif</div>
@@ -95,13 +95,46 @@ public enum ObservationInterpretation {
 	 * */
 	POS("POS", "Positive", "Positiv", "Positif", "Positivo"),
 
-		/**
+	/**
 	 * <div class="en">Negative</div>
 	 * <div class="de">Negativ</div>
 	 * <div class="fr">Négatif</div>
 	 * <div class="it">Negativo</div>
 	 * */
-	NEG("NEG", "Negative", "Negativ", "Négatif", "Negativo");
+	NEG("NEG", "Negative", "Negativ", "Négatif", "Negativo"),
+
+	/**
+	 * <div class="en">Susceptible</div>
+	 * <div class="de">Sensibel</div>
+	 * <div class="fr">Sensible</div>
+	 * <div class="it">Sensitivo</div>
+	 * */
+	SUSCEPTIBLE("S", "Susceptible", "Sensibel", "Sensible", "Sensitivo"),
+
+	/**
+	 * <div class="en">Susceptible-dose dependent</div>
+	 * <div class="de">Sensibel (dosierungsabhängig)</div>
+	 * <div class="fr">Sensible (en fonction du dosage)</div>
+	 * <div class="it">Sensitivo (dose-dipendente)</div>
+	 * */
+	SUSCEPTIBLE_DOSE_DEPENDENT("SDD", "Susceptible-dose dependent", "Sensibel", "Sensibel (dosierungsabhängig)", "Sensitivo (dose-dipendente)"),
+
+	/**
+	 * <div class="en">Resistant</div>
+	 * <div class="de">Resistent</div>
+	 * <div class="fr">Résistant</div>
+	 * <div class="it">Resistente</div>
+	 * */
+	RESISTANT("R", "Resistant", "Resistent", "Résistant", "Resistente"),
+
+	/**
+	 * <div class="en">Intermediate</div>
+	 * <div class="de">Intermediär</div>
+	 * <div class="fr">Intermédiaire</div>
+	 * <div class="it">Intermedio</div>
+	 * */
+	INTERMEDIATE("I", "Intermediate", "Intermediär", "Intermédiaire", "Intermedio");
+
 	//@formatter:on
 
 	/**

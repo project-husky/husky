@@ -46,6 +46,8 @@ public class SpecimenCollectionEntry
 	 */
 	public SpecimenCollectionEntry() {
 		super(LABFactory.eINSTANCE.createSpecimenCollection().init());
+		// TODO move this to the model
+		getMdht().getCode().setDisplayName("Collection date of Unspecified specimen");
 	}
 
 	/**
@@ -56,20 +58,8 @@ public class SpecimenCollectionEntry
 	 */
 	public SpecimenCollectionEntry(SpecimenCollection mdht) {
 		super(mdht);
-	}
-
-	/**
-	 * Adds the participant.
-	 *
-	 * @param participant
-	 *            the participant
-	 */
-	public void addParticipant(Participant participant) {
-		// set ParticipantionType and ParticipantClassRole
-		participant.setTypeCode(ParticipationType.PRD);
-		participant.getParticipantRole().setClassCode(RoleClassRoot.SPEC);
-
-		getMdht().getParticipants().add(participant.copy());
+		// TODO move this to the model
+		getMdht().getCode().setDisplayName("Collection date of Unspecified specimen");
 	}
 
 	/**
@@ -125,6 +115,21 @@ public class SpecimenCollectionEntry
 	 */
 	public void setEffectiveTime(Date low, Date high) {
 		getMdht().setEffectiveTime(DateUtil.convertDateToIvlTsyyyyMMddHHmmssZZZZ(low, high));
+	}
+
+	/**
+	 * Sets the participant.
+	 *
+	 * @param participant
+	 *            the participant
+	 */
+	public void setParticipant(Participant participant) {
+		// set ParticipantionType and ParticipantClassRole
+		participant.setTypeCode(ParticipationType.PRD);
+		participant.getParticipantRole().setClassCode(RoleClassRoot.SPEC);
+
+		getMdht().getParticipants().clear();
+		getMdht().getParticipants().add(participant.copy());
 	}
 
 	/**
