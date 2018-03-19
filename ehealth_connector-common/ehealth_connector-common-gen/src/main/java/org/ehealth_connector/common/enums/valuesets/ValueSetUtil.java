@@ -58,7 +58,7 @@ public final class ValueSetUtil {
      * <div class="en">The path to the configuration YAML file.</div>
      */
     private static final String CONFIG_FILE_LOCATION =
-            RESOURCE_LOCATION + "/valuesets-sources.yaml";
+            RESOURCE_LOCATION + "/valuesets-sources-201704.2-beta.yaml";
 
     /**
      * <div class="en">The JSONPath path to extract a value set from the JSON definition
