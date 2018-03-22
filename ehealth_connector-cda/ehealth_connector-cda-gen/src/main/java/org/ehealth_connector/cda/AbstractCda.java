@@ -765,6 +765,24 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	public abstract void setId(Identificator id);
 
 	/**
+	 * <div class="en">Sets the in fulfillment of reference to another
+	 * document</div> <div class="de">Weist dem Dokument eine ID eines anderen
+	 * Dokumentes zu, auf das es sich bezieht</div>
+	 *
+	 * @param id
+	 *            of the referenced document
+	 */
+	public void setInFulfillmentOf(Identificator id) {
+		final InFulfillmentOf ifo = CDAFactory.eINSTANCE.createInFulfillmentOf();
+		final Order o = CDAFactory.eINSTANCE.createOrder();
+		o.getIds().add(id.getIi());
+
+		ifo.setOrder(o);
+		getDoc().getInFulfillmentOfs().clear();
+		getDoc().getInFulfillmentOfs().add(ifo);
+	}
+
+	/**
 	 * <div class="en">Sets the language of the document</div>
 	 * <div class="de">Weist dem document eine Sprache zu</div>
 	 *

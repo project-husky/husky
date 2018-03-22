@@ -18,6 +18,8 @@ package org.ehealth_connector.common;
 
 import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
+import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActClassObservation;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
 
@@ -131,7 +133,19 @@ public class ObservationRange {
 	 *            the new value
 	 */
 	public void setValue(Value value) {
-		mObsR.setValue(value.getValue());
+		ANY val = value.getValue();
+		if (val instanceof IVL_PQ) {
+			IVL_PQ valIvlPq = (IVL_PQ) val;
+			if (valIvlPq.getLow() != null) {
+				if ("".equals(valIvlPq.getLow().getUnit()))
+					valIvlPq.getLow().setUnit(null);
+			}
+			if (valIvlPq.getHigh() != null) {
+				if ("".equals(valIvlPq.getHigh().getUnit()))
+					valIvlPq.getHigh().setUnit(null);
+			}
+		}
+		mObsR.setValue(val);
 	}
 
 }

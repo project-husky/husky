@@ -33,6 +33,8 @@ import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 public class AbstractLaboratoryBatteryOrganizer extends
 		MdhtOrganizerFacade<org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer> {
 
+	String humanInformation;
+
 	/**
 	 * Instantiates a new abstract laboratory battery organizer.
 	 */

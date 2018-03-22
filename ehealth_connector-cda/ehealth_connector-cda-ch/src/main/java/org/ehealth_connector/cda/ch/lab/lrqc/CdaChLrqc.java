@@ -23,6 +23,7 @@ import java.util.List;
 import org.ehealth_connector.cda.ch.ParticipantClaimer;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport;
 import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
+import org.ehealth_connector.cda.ch.lab.SpecimenCollectionEntry;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.QualabQcc;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Author;
@@ -313,11 +314,11 @@ public class CdaChLrqc
 		LaboratorySpecialtySection laboratorySpecialtySection = getLaboratorySpecialtySection();
 		boolean newSection = false;
 		if (laboratorySpecialtySection == null) {
+			newSection = true;
 			if (sectionCode != null) {
 				laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode,
 						getLanguageCode());
 				getMdht().setCode(sectionCode.getCE());
-				newSection = true;
 			} else {
 				laboratorySpecialtySection = new LaboratorySpecialtySection();
 			}
@@ -342,6 +343,70 @@ public class CdaChLrqc
 		ce.setDisplayName("LABORATORY REPORT.TOTAL");
 		getMdht().setCode(ce);
 
+	}
+
+	/**
+	 * Convenience function to add a Laboratory Battery Organizer to a new
+	 * Section and create the necessary elements, if they do not exist. If the
+	 * elements exist, their contents will not be overwritten.
+	 *
+	 * These elements are: LaboratorySpecialtySection,
+	 * LaboratoryReportProcessingEntry, and SpecimenAct with the given
+	 * Laboratory Battery Organizer
+	 *
+	 * @param organizer
+	 *            the LaboratoryBatteryOrganizer holding at least one
+	 *            LaboratoryObservation
+	 * @param sectionCode
+	 *            the LOINC code for the LaboratorySpecialtySection
+	 * @return the laboratory specialty section
+	 */
+	public LaboratorySpecialtySection addLaboratoryBatteryOrganizerInNewSection(
+			LaboratoryBatteryOrganizer organizer, Code sectionCode, SpecimenCollectionEntry sce) {
+		boolean newSection = true;
+		LaboratorySpecialtySection laboratorySpecialtySection;
+		if (sectionCode != null) {
+			laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode,
+					getLanguageCode());
+			getMdht().setCode(sectionCode.getCE());
+		} else {
+			laboratorySpecialtySection = new LaboratorySpecialtySection();
+		}
+		laboratorySpecialtySection.addLaboratoryBatteryOrganizer(sectionCode, organizer,
+				getLanguageCode());
+		if (newSection) {
+			// TODO move this to the model
+			laboratorySpecialtySection.getMdht().getEntries().get(0).getTemplateIds().clear();
+			Identificator id = new Identificator("1.3.6.1.4.1.19376.1.3.1", null);
+			laboratorySpecialtySection.getMdht().getEntries().get(0).getAct().getTemplateIds()
+					.add(id.getIi());
+		}
+
+		laboratorySpecialtySection.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
+				.setSpecimenCollectionEntry(sce);
+
+		addLaboratorySpecialtySection(laboratorySpecialtySection);
+
+		// set the fixed laboratory Code
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setCode("11502-2");
+		ce.setCodeSystem("2.16.840.1.113883.6.1");
+		ce.setCodeSystemName("LOINC");
+		ce.setDisplayName("LABORATORY REPORT.TOTAL");
+		getMdht().setCode(ce);
+
+		return laboratorySpecialtySection;
+	}
+
+	/**
+	 * Adds a LaboratorySpecialtySection.
+	 *
+	 * @param laboratorySpecialtySection
+	 *            the section
+	 */
+	public void addLaboratorySpecialtySection(
+			org.ehealth_connector.cda.ch.lab.lrqc.LaboratorySpecialtySection laboratorySpecialtySection) {
+		getMdht().addSection(laboratorySpecialtySection.copy());
 	}
 
 	/*
@@ -474,7 +539,7 @@ public class CdaChLrqc
 	}
 
 	/**
-	 * Sets a LaboratorySpecialtySection.
+	 * Sets the LaboratorySpecialtySection.
 	 *
 	 * @param laboratorySpecialtySection
 	 *            the section

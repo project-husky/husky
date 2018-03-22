@@ -50,6 +50,7 @@ import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
 import org.openhealthtools.mdht.uml.cda.ch.RemarksSection;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer;
+import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ADXP;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
@@ -206,6 +207,22 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 		final ObservationChTextBuilder b = new ObservationChTextBuilder(studiesSummarySection,
 				contentIdPrefix, LanguageCode.getEnum(getMdht().getLanguageCode().getCode()));
 		return b.toString();
+	}
+
+	/**
+	 * Sets the section/text element for all LaboratorySpecialtySections.
+	 */
+	public void generateNarrativeTextForAllLaboratorySpecialitySections() {
+		int i = 0;
+		for (final Section s : getMdht().getAllSections()) {
+			if (s instanceof LaboratorySpecialtySection) {
+				i++;
+
+				s.createStrucDocText(generateNarrativeTextLaboratoryObservations(
+						new AbstractLaboratorySpecialtySection((LaboratorySpecialtySection) s),
+						"lss" + Integer.toString(i), CodeSystems.SwissAL.getCodeSystemId()));
+			}
+		}
 	}
 
 	/**
