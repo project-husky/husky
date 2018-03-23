@@ -1,0 +1,72 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>ehealth_connector-codegenerator-ch</artifactId>
+	<name>eHealthConnector Code Generator CH</name>
+
+	<parent>
+		<groupId>org.ehealth_connector.codegenerator</groupId>
+		<artifactId>ehealth_connector-codegenerator</artifactId>
+		<version>1.6-SNAPSHOT</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.javaparser</groupId>
+			<artifactId>javaparser-symbol-solver-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.jayway.jsonpath</groupId>
+			<artifactId>json-path</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+		</dependency>
+
+		<!-- test stuff -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.ehealth_connector.common</groupId>
+			<artifactId>ehealth_connector-common-gen</artifactId>
+			<version>1.6-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<!-- <finalName>codegenerator-ch</finalName> -->
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.6.0</version>
+				<configuration>
+					<mainClass>org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets</mainClass>
+					<executable>java</executable>
+					<workingDirectory>.</workingDirectory>
+					<arguments>
+						<argument>-classpath</argument>
+						<!-- automatically creates the classpath using all project dependencies, 
+							also adding the project build directory -->
+					</arguments>
+				</configuration>
+			</plugin>
+		</plugins>
+
+	</build>
+
+</project>

@@ -16,7 +16,7 @@
  *
  */
 
-package org.ehealth_connector.common.enums.valuesets.model;
+package org.ehealth_connector.codegenerator.ch.valuesets.model;
 
 import java.util.List;
 
