@@ -58,7 +58,7 @@ public enum CodeSystems implements IdentityDomain {
 	 * <div class="de">Analysenliste (AL)</div> <div class="fr">Liste des
 	 * analyses (LA)</div>
 	 */
-	SwissAL("2.16.756.5.30.1.129.1.3", "Swiss Analysis List"),
+	SwissAL("2.16.756.5.30.1.129.1.3", "Swiss analysis list (AL)"),
 	/**
 	 * OID: 2.16.756.5.30.1.129.1.4 <div class="en">Swiss Tarmed</div>
 	 * <div class="de">Tarmed</div> <div class="fr">Tarmed</div>

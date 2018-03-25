@@ -331,6 +331,37 @@ public class Value {
 		mValue = ivlPq;
 	}
 
+	/**
+	 * <div class="en">Instantiates a new value with the parameters for a MDHT
+	 * IVL_PQ Objekt with two PQ Values (A low and high bound of physical
+	 * quantities).</div> <div class="de">Instantiiert eine neues Value MDHT
+	 * IVL_PQ Objekt mit zwei PQ Werten (entspricht zwei Grenzen von
+	 * physikalischen Messgrößen).</div> <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param low
+	 *            The lower bound
+	 * @param high
+	 *            The upper bound
+	 * @param unit
+	 *            the unit
+	 */
+	public Value(Double low, Double high, String unit) {
+		final IVL_PQ ivlPq = DatatypesFactory.eINSTANCE.createIVL_PQ();
+		final IVXB_PQ mlow = DatatypesFactory.eINSTANCE.createIVXB_PQ();
+		final IVXB_PQ mhigh = DatatypesFactory.eINSTANCE.createIVXB_PQ();
+
+		mlow.setValue(low);
+		mlow.setUnit(unit);
+		ivlPq.setLow(mlow);
+
+		mhigh.setValue(high);
+		mhigh.setUnit(unit);
+		ivlPq.setHigh(mhigh);
+
+		mValue = ivlPq;
+	}
+
 	public Value(ED ed) {
 		mValue = ed;
 	}

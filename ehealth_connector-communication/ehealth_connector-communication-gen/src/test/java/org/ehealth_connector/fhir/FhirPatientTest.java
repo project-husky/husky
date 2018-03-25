@@ -299,16 +299,16 @@ public class FhirPatientTest {
 	public void testConveniencePatientNation() {
 		final FhirPatient fhirPatient = new FhirPatient();
 		final CodeableConcept nation = new CodeableConcept();
-		nation.setText(CountryCode.SWITZERLAND.getCodeValue());
+		nation.setText(CountryCode.SWITZERLAND.getCodeAlpha3());
 
 		fhirPatient.setNation(nation);
 
 		final Patient patient = fhirPatient.getPatient();
-		assertEquals(CountryCode.SWITZERLAND.getCodeValue(), patient.getNation());
+		assertEquals(CountryCode.SWITZERLAND.getCodeAlpha3(), patient.getNation());
 
 		final FhirPatient fhirPatient2 = new FhirPatient(patient);
 
-		assertEquals(CountryCode.SWITZERLAND.getCodeValue(), fhirPatient2.getNation().getText());
+		assertEquals(CountryCode.SWITZERLAND.getCodeAlpha3(), fhirPatient2.getNation().getText());
 	}
 
 	@Test
@@ -568,7 +568,7 @@ public class FhirPatientTest {
 		fhirPatient.setReligiousAffiliation(religion);
 
 		final CodeableConcept nation = new CodeableConcept();
-		nation.setText(CountryCode.SWITZERLAND.getCodeValue());
+		nation.setText(CountryCode.SWITZERLAND.getCodeAlpha3());
 		fhirPatient.setNation(nation);
 
 		final CodeableConcept employeeOccupationCode = new CodeableConcept();

@@ -108,7 +108,7 @@ public class TestPatient {
 		testPatient.addrLine1 = "Leidensweg 10";
 		testPatient.addrState = "ZH";
 		testPatient.addrPostalCode = "9876";
-		testPatient.addrCountry = CountryCode.SWITZERLAND.getCodeValue();
+		testPatient.addrCountry = CountryCode.SWITZERLAND.getCodeAlpha3();
 		testPatient.addrCity = "Musterhausen";
 		testPatient.addrUse = "home";
 		testPatient.gender = "male";
@@ -128,7 +128,7 @@ public class TestPatient {
 		testPatient.addrLine1 = "Leidensweg 10";
 		testPatient.addrState = "ZH";
 		testPatient.addrPostalCode = "9876";
-		testPatient.addrCountry = CountryCode.SWITZERLAND.getCodeValue();
+		testPatient.addrCountry = CountryCode.SWITZERLAND.getCodeAlpha3();
 		testPatient.addrCity = "Musterhausen";
 		testPatient.addrUse = "home";
 		testPatient.gender = "male";
@@ -148,7 +148,7 @@ public class TestPatient {
 		testPatient.addrLine1 = "Leidensweg 10";
 		testPatient.addrState = "ZH";
 		testPatient.addrPostalCode = "9876";
-		testPatient.addrCountry = CountryCode.SWITZERLAND.getCodeValue();
+		testPatient.addrCountry = CountryCode.SWITZERLAND.getCodeAlpha3();
 		testPatient.addrCity = "Musterhausen";
 		testPatient.addrUse = "home";
 		testPatient.gender = "female";

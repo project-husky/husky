@@ -75,19 +75,6 @@ public class Identificator {
 
 	private final II mII;
 
-	// /**
-	// * <div class="de">Creates a new Identificator</div>
-	// * <div class="de">Erstellt einen neuen Identifikator.</div>
-	// *
-	// * @param identifier
-	// * the identifier to be used
-	// */
-	// public Identificator(Identifier identifier) {
-	// mII = DatatypesFactory.eINSTANCE.createII();
-	// setRoot(identifier.getSystem());
-	// setExtension(identifier.getValue());
-	// }
-
 	/**
 	 * <div class="de">Creates a new Identificator</div>
 	 * <div class="de">Erstellt einen neuen Identifikator.</div>
@@ -116,6 +103,21 @@ public class Identificator {
 	 */
 	public Identificator(II ii) {
 		mII = ii;
+	}
+
+	/**
+	 * <div class="en">Instantiates a new identificator having a root,
+	 * only.</div> <div class="de">Instantiiert einen neuen Identificator nur
+	 * mit root</div>
+	 *
+	 * @param oid
+	 *            <div class="en">OID of the domain, in which the local id is
+	 *            uniqu</div><div class="de">OID der Domäne, in welcher die
+	 *            lokale ID eindeutig ist</div>
+	 */
+	public Identificator(String oid) {
+		mII = DatatypesFactory.eINSTANCE.createII();
+		setRoot(oid);
 	}
 
 	/**

@@ -30,12 +30,12 @@ public enum CountryCode {
 	 * <div class="en">Austria</div> <div class="de">Österreich</div>
 	 * <div class="fr">Autriche</div>
 	 */
-	AUSTRIA("AUT", "Austria"),
+	AUSTRIA("AT", "AUT", "Austria"),
 	/**
 	 * <div class="en">Switzerland</div> <div class="de">Schweiz</div>
 	 * <div class="fr">Suisse</div>
 	 */
-	SWITZERLAND("CHE", "Switzerland");
+	SWITZERLAND("CH", "CHE", "Switzerland");
 
 	public static final String CODE_SYSTEM_NAME = "ISO 3166-1 alpha-3";
 	public static final String CODE_SYSTEM_OID = "1.0.3166.2.2.3";
@@ -51,7 +51,7 @@ public enum CountryCode {
 	 */
 	public static CountryCode getEnum(String code) {
 		for (final CountryCode aLanguage : EnumUtils.getEnumList(CountryCode.class)) {
-			if (aLanguage.getCodeValue().equalsIgnoreCase(code)) {
+			if (aLanguage.getCodeAlpha3().equalsIgnoreCase(code)) {
 				return aLanguage;
 			}
 		}
@@ -84,31 +84,34 @@ public enum CountryCode {
 	 */
 	public static boolean isInValueSet(String codeValue) {
 		for (final CountryCode aLang : EnumUtils.getEnumList(CountryCode.class)) {
-			if (aLang.getCodeValue().equals(codeValue)) {
+			if (aLang.getCodeAlpha3().equals(codeValue)) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	private String code;
+	private String codeAlpha2;
+
+	private String codeAlpha3;
 
 	private String displayName;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
 	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
-	 * mittels eines Codes und einem Display Name</div>
+	 * mittels eines Codes und einem Display Name</div>.
 	 *
-	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div>
+	 * @param codeAlpha2
+	 *            the ISO county code alpha 2
+	 * @param codeAlpha3
+	 *            the ISO county code alpha 2
 	 * @param displayName
-	 *            <br>
-	 *            <div class="de"> display name</div>
+	 *            the displayName
 	 */
-	private CountryCode(String code, String displayName) {
-		this.code = code;
+	private CountryCode(String codeAlpha2, String codeAlpha3, String displayName) {
+		this.codeAlpha2 = codeAlpha2;
+		this.codeAlpha3 = codeAlpha3;
 		this.displayName = displayName;
 	}
 
@@ -119,8 +122,26 @@ public enum CountryCode {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(CODE_SYSTEM_OID, codeAlpha3, displayName);
 		return ehcCode;
+	}
+
+	/**
+	 * <div class="en">Gets the actual ISO Country Code Alpha 2 as string</div>
+	 *
+	 * @return <div class="en">the code</div>
+	 */
+	public String getCodeAlpha2() {
+		return codeAlpha2;
+	}
+
+	/**
+	 * <div class="en">Gets the actual ISO Country Code Alpha 3 as string</div>
+	 *
+	 * @return <div class="en">the code</div>
+	 */
+	public String getCodeAlpha3() {
+		return codeAlpha3;
 	}
 
 	/**
@@ -144,16 +165,6 @@ public enum CountryCode {
 	}
 
 	/**
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>
-	 *
-	 * @return <div class="en">the code</div>
-	 */
-	public String getCodeValue() {
-		return code;
-	}
-
-	/**
 	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
 	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
 	 *
@@ -161,7 +172,7 @@ public enum CountryCode {
 	 */
 	public CS getCS() {
 		final CS cs = DatatypesFactory.eINSTANCE.createCS();
-		cs.setCode(code);
+		cs.setCode(codeAlpha3);
 		return cs;
 	}
 

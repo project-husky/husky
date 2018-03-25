@@ -255,7 +255,7 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 
 		// Fix RealmCode
 		final CS cs = DatatypesFactory.eINSTANCE.createCS();
-		cs.setCode(CountryCode.SWITZERLAND.getCodeValue());
+		cs.setCode(CountryCode.SWITZERLAND.getCodeAlpha3());
 		getDoc().getRealmCodes().clear();
 		getDoc().getRealmCodes().add(cs);
 

@@ -467,8 +467,6 @@ public class ObservationChTextBuilder extends TextBuilder {
 		String contentId = "";
 
 		if (observation != null) {
-			contentId = contentIdPrefix + "_" + sectionLabel + "_observation_" + rowNumber;
-			observation.setTextReference(contentId);
 
 			Code obsCode = observation.getCode();
 
@@ -481,12 +479,15 @@ public class ObservationChTextBuilder extends TextBuilder {
 			rowColumns.add(getCell(Integer.toString(rowNumber)));
 
 			// Observation
+			contentId = contentIdPrefix + "_" + sectionLabel + "_observation_" + rowNumber;
 			String text = observation.getText();
 			if ("".equals(text))
 				text = observation.getCode().getOriginalText();
-			rowColumns.add(getCell(text));
+			rowColumns.add(getCellWithContent(text, contentId));
+			observation.setTextReference(contentId);
 
 			// Result
+			contentId = contentIdPrefix + "_" + sectionLabel + "_value_" + rowNumber;
 			Value value = observation.getValue();
 			String tempValue = "";
 			String tempUnit = "";
@@ -508,7 +509,6 @@ public class ObservationChTextBuilder extends TextBuilder {
 					}
 				} else if (value.isEd()) {
 					if (!value.isSt()) {
-						contentId = contentIdPrefix + "_" + sectionLabel + "_value_" + rowNumber;
 						ED ed = (ED) value.getValue();
 						ed.setReference(Util.createReferenceTel(contentId));
 					}

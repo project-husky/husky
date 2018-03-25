@@ -594,7 +594,25 @@ public class Code {
 	 *            the new null flavor
 	 */
 	public void setNullFlavor(org.ehealth_connector.common.enums.NullFlavor nf) {
-		mCD.setNullFlavor(NullFlavor.getByName(nf.name()));
+		NullFlavor mdhtNf = NullFlavor.UNK;
+		switch (nf) {
+		case ASKED_BUT_UNKNOWN:
+			mdhtNf = NullFlavor.ASKU;
+			break;
+		case MASKED:
+			mdhtNf = NullFlavor.MSK;
+			break;
+		case OTHER:
+			mdhtNf = NullFlavor.OTH;
+			break;
+		case TEMPORARILY_UNAVAILABLE:
+			mdhtNf = NullFlavor.NAV;
+			break;
+		default:
+			mdhtNf = NullFlavor.UNK;
+			break;
+		}
+		mCD.setNullFlavor(mdhtNf);
 	}
 
 	/**
