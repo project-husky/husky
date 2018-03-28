@@ -34,8 +34,8 @@ import org.ehealth_connector.communication.testhelper.XdsTestUtils;
 public class XdsChTestUtils extends XdsTestUtils {
 
 	// Initialize Example CH Enum Vectors
-	public static AuthorRole[] authorRoles = new AuthorRole[] { AuthorRole.ANDERE,
-			AuthorRole.APOTHEKER };
+	public static AuthorRole[] authorRoles = new AuthorRole[] { AuthorRole.HEALTHCARE_PROFESSIONAL,
+			AuthorRole.PHARMACIST };
 	public static AuthorSpeciality[] authorSpecialities = new AuthorSpeciality[] {
 			AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG,
 			AuthorSpeciality.APOTHEKERINAPOTHEKER_IN_OFFIZINPHARMAZIE };
@@ -43,22 +43,22 @@ public class XdsChTestUtils extends XdsTestUtils {
 	public static ClassCode[] classCodes = new ClassCode[] { ClassCode.ALERTS,
 			ClassCode.CARE_PLANS };
 	public static ConfidentialityCode[] confidentialityCodes = new ConfidentialityCode[] {
-			ConfidentialityCode.ADMINISTRATIVE_DATEN, ConfidentialityCode.GEHEIME_DATEN };
-	public static FormatCode[] formatCodes = new FormatCode[] { FormatCode.EIMPFDOSSIER,
-			FormatCode.EPD_DOKUMENT };
+			ConfidentialityCode.NORMAL, ConfidentialityCode.SECRET };
+	public static FormatCode[] formatCodes = new FormatCode[] {
+			FormatCode.IMMUNIZATION_CONTENT__IC_, FormatCode.UNSTRUCTURED_EPD_DOCUMENT };
 	public static HealthcareFacilityTypeCode[] healthCareFacilityCodes = new HealthcareFacilityTypeCode[] {
-			HealthcareFacilityTypeCode.AMBULANTE_EINRICHTUNG_INKL_AMBULATORIUM,
-			HealthcareFacilityTypeCode.ANDERE_GESUNDHEITS_ORGANISATION };
+			HealthcareFacilityTypeCode.AMBULATORY_CARE_SITE,
+			HealthcareFacilityTypeCode.OTHER_SITE_OF_CARE };
 	public static LanguageCode[] languageCodes = new LanguageCode[] { LanguageCode.GERMAN,
 			LanguageCode.ENGLISH };
 	public static MimeType[] mimeTypes = new MimeType[] { MimeType.CDA_LEVEL_1_MULTIPART,
 			MimeType.DICOM };
 	public static PracticeSettingCode[] practiceSettingCodes = new PracticeSettingCode[] {
-			PracticeSettingCode.ALLERGOLOGIE, PracticeSettingCode.ALLGEMEINMEDIZIN };
+			PracticeSettingCode.CLINICAL_IMMUNOLOGY_ALLERGY, PracticeSettingCode.GENERAL_MEDICINE };
 	public static SourcePatientInfo[] sourcePatientInfos = new SourcePatientInfo[] {
-			SourcePatientInfo.AMBIGUOUS, SourcePatientInfo.FEMALE };
-	public static TypeCode[] typeCodes = new TypeCode[] { TypeCode.ANDERE_NICHT_NAHER_SPEZIFIZIERT,
-			TypeCode.ANASTHESIE_BERICHT };
+			SourcePatientInfo.OTHER, SourcePatientInfo.FEMALE };
+	public static TypeCode[] typeCodes = new TypeCode[] { TypeCode.OTHER_EPD_DOCUMENT_TYPE,
+			TypeCode.ANAESTHESIOLOGY_REPORT };
 
 	public XdsChTestUtils() {
 		super();

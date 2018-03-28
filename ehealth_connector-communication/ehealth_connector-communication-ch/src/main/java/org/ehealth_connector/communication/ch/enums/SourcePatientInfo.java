@@ -17,88 +17,59 @@
  */
 package org.ehealth_connector.communication.ch.enums;
 
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.enums.CodedMetadataEnumInterface;
-import org.ehealth_connector.common.utils.XdsMetadataUtil;
-import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
-import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.enums.valuesets.ValueSetEnumInterface;
 
 /**
- * <div class="de">Dieses Attribut enthält demografische Daten des
- * Patienten.</div> <div class="fr"></div>
+ * <div class="en">Patient’s gender as per Annex 3&amp;#160; EPRO-FDHA, Chapter
+ * 2.10.&lt;br clear="none"/&gt;</div> <div class="de">Geschlecht der Patientin
+ * oder des Patienten gemäss Anhang 3 EPDV-EDI, Kapitel 2.10.&lt;br
+ * clear="none"/&gt;</div> <div class="fr">Sexe du patient selon l'annexe 3
+ * ODEP-DFI, chapitre 2.10.&lt;br clear="none"/&gt;</div> <div class="it">Sesso
+ * del paziente secondo l'allegato 3 OCIP-DFI, capitolo 2.10.&lt;br
+ * clear="none"/&gt;</div>
  */
-public enum SourcePatientInfo implements CodedMetadataEnumInterface {
+public enum SourcePatientInfo implements ValueSetEnumInterface {
 
 	/**
-	 * <div class="de">mehrdeutig</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Female</div> <div class="de">Weiblich</div>
+	 * <div class="fr">Féminin</div> <div class="it">Femminile</div>
 	 */
-	AMBIGUOUS("A", "Ambiguous"),
+	FEMALE("F", "Female", "Female", "Weiblich", "Féminin", "Femminile"),
 	/**
-	 * <div class="de">weiblich</div> <div class="fr">feminin</div>
-	 * <div class="it">femminile</div>
+	 * <div class="en">Male</div> <div class="de">Männlich</div>
+	 * <div class="fr">Masculin</div> <div class="it">Maschile</div>
 	 */
-	FEMALE("F", "Female"),
+	MALE("M", "Male", "Male", "Männlich", "Masculin", "Maschile"),
 	/**
-	 * <div class="de">männlich</div> <div class="fr">masculin</div>
-	 * <div class="it">maschile</div>
+	 * <div class="en">Other</div> <div class="de">Andere</div>
+	 * <div class="fr">Autre</div> <div class="it">Altro</div>
 	 */
-	MALE("M", "Male"),
-	/**
-	 * <div class="de">nicht zutreffend</div> <div class="fr"></div>
-	 * <div class="it"></div>
-	 */
-	NOT_APPLICABLE("N", "Not applicable"),
-	/**
-	 * <div class="de">andere</div> <div class="fr">autre</div>
-	 * <div class="it">altri</div>
-	 */
-	OTHER("O", "Other"),
-	/**
-	 * <div class="de">unbekannt</div> <div class="fr">inconnu</div>
-	 * <div class="it">ignoto</div>
-	 */
-	UNKNOWN("U", "Unknown");
+	OTHER("UN", "Undifferentiated", "Other", "Andere", "Autre", "Altro");
 
 	/**
-	 * <div class="de">Code für mehrdeutig</div>
-	 */
-	public static final String AMBIGUOUS_CODE = "A";
-
-	/**
-	 * <div class="de">Code für weiblich</div> <div class="fr">Code de
-	 * feminin</div> <div class="it">Code per femminile</div>
+	 * <div class="en">Code for Female</div> <div class="de">Code für
+	 * Weiblich</div> <div class="fr">Code de Féminin</div> <div class="it">Code
+	 * per Femminile</div>
 	 */
 	public static final String FEMALE_CODE = "F";
 
 	/**
-	 * <div class="de">Code für männlich</div> <div class="fr">Code de
-	 * masculin</div> <div class="it">Code per maschile</div>
+	 * <div class="en">Code for Male</div> <div class="de">Code für
+	 * Männlich</div> <div class="fr">Code de Masculin</div>
+	 * <div class="it">Code per Maschile</div>
 	 */
 	public static final String MALE_CODE = "M";
 
 	/**
-	 * <div class="de">Code für nicht zutreffend</div>
+	 * <div class="en">Code for Other</div> <div class="de">Code für
+	 * Andere</div> <div class="fr">Code de Autre</div> <div class="it">Code per
+	 * Altro</div>
 	 */
-	public static final String NOT_APPLICABLE_CODE = "N";
-
-	/**
-	 * <div class="de">Code für andere</div> <div class="fr">Code de autre</div>
-	 * <div class="it">Code per altri</div>
-	 */
-	public static final String OTHER_CODE = "O";
-
-	/**
-	 * <div class="de">Code für unbekannt</div> <div class="fr">Code de
-	 * inconnu</div> <div class="it">Code per ignoto</div>
-	 */
-	public static final String UNKNOWN_CODE = "U";
-
-	/**
-	 * <div class="en">Identifier of the Code System</div>
-	 * <div class="de">Identifikator für das Code System</div>
-	 */
-	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.10.1.25";
+	public static final String OTHER_CODE = "UN";
 
 	/**
 	 * <div class="en">Name of the Code System</div> <div class="de">Name des
@@ -107,11 +78,16 @@ public enum SourcePatientInfo implements CodedMetadataEnumInterface {
 	public static final String CODE_SYSTEM_NAME = "epd_xds_sourcePatientInfo";
 
 	/**
+	 * <div class="en">Identifier of the Code System</div>
+	 * <div class="de">Identifikator für das Code System</div>
+	 */
+	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.10.1.25";
+
+	/**
 	 * <div class="en">Gets the Enum with a given code</div>
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
@@ -130,7 +106,6 @@ public enum SourcePatientInfo implements CodedMetadataEnumInterface {
 	 * ist.</div>
 	 *
 	 * @param enumName
-	 *            <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -152,17 +127,22 @@ public enum SourcePatientInfo implements CodedMetadataEnumInterface {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *            <div class="de">code</div>
-	 * @return true, if one enum of this valueset contains the given code
+	 *            <div class="de"> code</div>
+	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (SourcePatientInfo x : values()) {
+		for (final SourcePatientInfo x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
 		}
 		return false;
 	}
+
+	/**
+	 * The display names per language
+	 */
+	private Map<LanguageCode, String> displayNames;
 
 	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
@@ -179,46 +159,31 @@ public enum SourcePatientInfo implements CodedMetadataEnumInterface {
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
-	 * mittels eines Codes und einem Display Name</div>
+	 * Display Name</div> <div class="de">Instanziiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>.
 	 *
 	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div>
+	 *            <div class="de">code</div>
 	 * @param displayName
-	 *            <br>
-	 *            <div class="de"> display name</div>
+	 *            the default display name
+	 * @param displayNameEn
+	 *            the display name en
+	 * @param displayNameDe
+	 *            the display name de
+	 * @param displayNameFr
+	 *            the display name fr
+	 * @param displayNameIt
+	 *            the display name it
 	 */
-	private SourcePatientInfo(String code, String displayName) {
+	SourcePatientInfo(String code, String displayName, String displayNameEn, String displayNameDe,
+			String displayNameFr, String displayNameIt) {
 		this.code = code;
-		this.displayName = displayName;
-	}
-
-	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div>
-	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
-	 *
-	 * @return <div class="en">the code</div>
-	 */
-	public Code getCode() {
-		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
-		return ehcCode;
-	}
-
-	/**
-	 * <div class="en">Gets the OHT CodedMetadataType Object</div>
-	 * <div class="de">Liefert das OHT CodedMetadataType Objekt</div>
-	 *
-	 * @return <div class="en">the codedMetadataType</div>
-	 */
-	@Override
-	public CodedMetadataType getCodedMetadataType() {
-		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
-		cmt.setSchemeName(CODE_SYSTEM_OID);
-		cmt.setCode(this.getCodeValue());
-		cmt.setDisplayName(
-				XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
-		return cmt;
+		displayNames = new HashMap<>();
+		displayNames.put(null, displayName);
+		displayNames.put(LanguageCode.ENGLISH, displayNameEn);
+		displayNames.put(LanguageCode.GERMAN, displayNameDe);
+		displayNames.put(LanguageCode.FRENCH, displayNameFr);
+		displayNames.put(LanguageCode.ITALIAN, displayNameIt);
 	}
 
 	/**
@@ -252,12 +217,22 @@ public enum SourcePatientInfo implements CodedMetadataEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
-	 * display name.</div>
+	 * <div class="en">Gets the display name defined by the language param. If
+	 * there is no english translation, the default display name is
+	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
+	 * falls es keine Englische Übersetzung gibt, wird der default-Name
+	 * zurückgegeben.</div>
 	 *
-	 * @return <div class="en">the display name</div>
+	 * @param languageCode
+	 *            the language code to get the display name for
+	 * @return returns the display name in the desired language. if language not
+	 *         found, display name in german will returned
 	 */
-	public String getDisplayName() {
-		return this.displayName;
+	public String getDisplayName(LanguageCode languageCode) {
+		String displayName = displayNames.get(languageCode);
+		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
+			return displayNames.get(null);
+		}
+		return displayName;
 	}
 }

@@ -17,225 +17,231 @@
  */
 package org.ehealth_connector.communication.ch.enums;
 
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.enums.CodedMetadataEnumInterface;
-import org.ehealth_connector.common.utils.XdsMetadataUtil;
-import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
-import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.enums.valuesets.ValueSetEnumInterface;
 
 /**
- * <div class="de">Dieser Code definiert die Klasse des Dokumentes und richtet
- * sich nach der CEN 13606 Norm. Unterhalb der Klassen sind Typen definiert im
- * Attribut epd_xds_typeCode.</div> <div class="fr"></div>
+ * <div class="en">Document class as per EPRO-FDHA Annex 3, Chapter 2.3. &lt;br
+ * clear="none"/&gt; </div> <div class="de">Dokumentenklasse gemäss EPDV-EDI
+ * Anhang 3, Kapitel 2.3. &lt;span style="text-decoration: none;"&gt; &lt;br
+ * clear="none"/&gt; &lt;/span&gt; </div> <div class="fr">Classification du
+ * document selon l'annexe 3 ODEP-DFI, chapitre 2.3&lt;br clear="none"/&gt;
+ * </div> <div class="it">Classe del documento secondo l'allegato 3 OCIP-DFI,
+ * capitolo 2.3.&lt;br clear="none"/&gt; </div>
  */
-public enum ClassCode implements CodedMetadataEnumInterface {
+public enum ClassCode implements ValueSetEnumInterface {
 
 	/**
-	 * <div class="de">Warnungen /Risiken</div> <div class="fr">Alertes</div>
-	 * <div class="it">Allertamenti</div>
+	 * <div class="en">Notes on Consultations</div>
+	 * <div class="de">Konsultationseinträge/-notizen</div>
+	 * <div class="fr">Notes de consultation</div> <div class="it">Rapporti e
+	 * note di consultazione</div>
 	 */
-	ALERTS("DTC13", "Alerts"),
+	NOTES_ON_CONSULTATIONS("1211000195104", "Note on Consultation (record artifact)", "Notes on Consultations", "Konsultationseinträge/-notizen", "Notes de consultation", "Rapporti e note di consultazione"),
 	/**
-	 * <div class="de">Behandlungspläne, Behandlungsschemata</div>
-	 * <div class="fr">Plans de soins</div> <div class="it">Schema di
-	 * terapia</div>
+	 * <div class="en">Progress Notes</div>
+	 * <div class="de">Verlaufseinträge/-notizen</div> <div class="fr">Notes de
+	 * suivi</div> <div class="it">Diario clinico</div>
 	 */
-	CARE_PLANS("DTC12", "Care Plans"),
+	PROGRESS_NOTES("1231000195106", "Progress Note (record artifact)", "Progress Notes", "Verlaufseinträge/-notizen", "Notes de suivi", "Diario clinico"),
 	/**
+	 * <div class="en">Notes on Procedures</div>
+	 * <div class="de">Interventionseinträge/-notizen</div>
+	 * <div class="fr">Notes d'intervention</div> <div class="it">Rapporti e
+	 * note d'intervento</div>
+	 */
+	NOTES_ON_PROCEDURES("1241000195103", "Note on Procedure (record artifact)", "Notes on Procedures", "Interventionseinträge/-notizen", "Notes d'intervention", "Rapporti e note d'intervento"),
+	/**
+	 * <div class="en">Tests/Procedure Requests</div>
+	 * <div class="de">Untersuchungs-/Prozeduranforderungen</div>
+	 * <div class="fr">Demandes d'examen / procédure</div>
+	 * <div class="it">Richieste d'esame</div>
+	 */
+	TESTS_PROCEDURE_REQUESTS("1251000195100", "Test or Procedure Request (record artifact)", "Tests/Procedure Requests", "Untersuchungs-/Prozeduranforderungen", "Demandes d'examen / procédure", "Richieste d'esame"),
+	/**
+	 * <div class="en">Clinical Care Referrals</div>
 	 * <div class="de">Zuweisungen/Überweisungen</div> <div class="fr">Demandes
 	 * de prise en charge</div> <div class="it">Richieste di presa a
 	 * carico</div>
 	 */
-	CLINICAL_CARE_REFERRALS("DTC05", "Clinical Care Referrals"),
+	CLINICAL_CARE_REFERRALS("1261000195102", "Clinical Care Referral (record artifact)", "Clinical Care Referrals", "Zuweisungen/Überweisungen", "Demandes de prise en charge", "Richieste di presa a carico"),
 	/**
-	 * <div class="de">Eigene Daten des Patienten</div>
-	 * <div class="fr">Documents introduits par le patients</div>
-	 * <div class="it">Documenti inseriti dal paziente</div>
+	 * <div class="en">Episode Summary Reports</div>
+	 * <div class="de">Zusammenfassende Berichte</div> <div class="fr">Résumés
+	 * d'épisode</div> <div class="it">Riassunti di episodio</div>
 	 */
-	DATA_FROM_PATIENT("DTC21", "Data from Patient"),
+	EPISODE_SUMMARY_REPORTS("1271000195108", "Episode Summary Report (record artifact)", "Episode Summary Reports", "Zusammenfassende Berichte", "Résumés d'épisode", "Riassunti di episodio"),
 	/**
+	 * <div class="en">Progress Reports</div>
+	 * <div class="de">Verlaufsberichte</div> <div class="fr">Rapports
+	 * d'évolution</div> <div class="it">Rapporti di evoluzione</div>
+	 */
+	PROGRESS_REPORTS("371532007", "Progress report (qualifier value)", "Progress Reports", "Verlaufsberichte", "Rapports d'évolution", "Rapporti di evoluzione"),
+	/**
+	 * <div class="en">Diagnostic Test Results</div>
 	 * <div class="de">Diagnostische Untersuchungsbefunde</div>
 	 * <div class="fr">Résultats d'examen diagnostic</div>
 	 * <div class="it">Risultati di esame diagnostico</div>
 	 */
-	DIAGNOSTIC_TEST_RESULTS("DTC08", "Diagnostic Test Results"),
+	DIAGNOSTIC_TEST_RESULTS("1291000195107", "Diagnostic Test Result (record artifact)", "Diagnostic Test Results", "Diagnostische Untersuchungsbefunde", "Résultats d'examen diagnostic", "Risultati di esame diagnostico"),
 	/**
-	 * <div class="de">Zusammenfassende Berichte</div> <div class="fr">Résumés
-	 * d'épisode</div> <div class="it">Riassunti di episodio</div>
+	 * <div class="en">Notifications</div> <div class="de">Meldungen</div>
+	 * <div class="fr">Notifications / déclarations</div>
+	 * <div class="it">Notifiche / dichiarazioni</div>
 	 */
-	EPISODE_SUMMARY_REPORTS("DTC06", "Episode Summary Reports"),
+	NOTIFICATIONS("1301000195106", "Notification (record artifact)", "Notifications", "Meldungen", "Notifications / déclarations", "Notifiche / dichiarazioni"),
 	/**
-	 * <div class="de">Zusammenfassungen der Krankengeschichte</div>
-	 * <div class="fr">Résumés d'antécédents</div> <div class="it">Riassunti
-	 * della storia clinica</div>
+	 * <div class="en">Historic Overviews</div> <div class="de">Medizinische
+	 * Vorgeschichte</div> <div class="fr">Résumés d'antécédents</div>
+	 * <div class="it">Riassunti della storia clinica</div>
 	 */
-	HISTORIC_OVERVIEWS("DTC10", "Historic Overviews"),
+	HISTORIC_OVERVIEWS("1281000195105", "Historic Overview (record artifact)", "Historic Overviews", "Medizinische Vorgeschichte", "Résumés d'antécédents", "Riassunti della storia clinica"),
 	/**
-	 * <div class="de">Konsultationseinträge/- Notizen</div>
-	 * <div class="fr">Notes de consultation</div> <div class="it">Rapporti e
-	 * note di consultazione</div>
+	 * <div class="en">Present State Summaries</div> <div class="de">Aktueller
+	 * Zustand</div> <div class="fr">Résumés de l'état actuel</div>
+	 * <div class="it">Riassunti dello stato attuale</div>
 	 */
-	NOTES_ON_CONSULTATIONS("DTC01", "Notes on Consultations"),
+	PRESENT_STATE_SUMMARIES("1311000195108", "Present State Summary (record artifact)", "Present State Summaries", "Aktueller Zustand", "Résumés de l'état actuel", "Riassunti dello stato attuale"),
 	/**
-	 * <div class="de">Interventionseinträge /-Notizen</div>
-	 * <div class="fr">Notes d'interventions</div> <div class="it">Rapporti e
-	 * note d'intervento</div>
+	 * <div class="en">Care Plans</div>
+	 * <div class="de">Behandlungspläne/Behandlungsschemata</div>
+	 * <div class="fr">Plans de soins</div> <div class="it">Piani di cura</div>
 	 */
-	NOTES_ON_PROCEDURES("DTC03", "Notes on Procedures"),
+	CARE_PLANS("1321000195103", "Care Plan (record artifact)", "Care Plans", "Behandlungspläne/Behandlungsschemata", "Plans de soins", "Piani di cura"),
 	/**
-	 * <div class="de">Meldungen</div> <div class="fr">
-	 * "Notifications/Déclarations"</div>
-	 * <div class="it">Notifiche/dichiarazioni </div>
+	 * <div class="en">Alerts</div> <div class="de">Warnungen/Risiken</div>
+	 * <div class="fr">Alertes</div> <div class="it">Avvertenze</div>
 	 */
-	NOTIFICATIONS("DTC09", "Notifications"),
+	ALERTS("1331000195101", "Alert (record artifact)", "Alerts", "Warnungen/Risiken", "Alertes", "Avvertenze"),
 	/**
-	 * <div class="de">anderweitige Dokumente</div> <div class="fr">Autre</div>
-	 * <div class="it">Altro</div>
+	 * <div class="en">Data from Patient</div> <div class="de">Eigene Daten des
+	 * Patienten</div> <div class="fr">Documents introduits par le patient</div>
+	 * <div class="it">Documenti inseriti dal paziente</div>
 	 */
-	OTHER_COMPOSITION("DTC90", "Other Composition"),
+	DATA_FROM_PATIENT("1351000195107", "Data from Patient (record artifact)", "Data from Patient", "Eigene Daten des Patienten", "Documents introduits par le patient", "Documenti inseriti dal paziente"),
 	/**
-	 * <div class="de">Zusammenfassungen aktueller Zustand</div>
-	 * <div class="fr">Résumés de l'état actuel</div> <div class="it">Riassunti
-	 * dello stato attuale</div>
+	 * <div class="en">Other Composition</div> <div class="de">Anderweitige
+	 * Dokumente</div> <div class="fr">Autre</div> <div class="it">Altro</div>
 	 */
-	PRESENT_STATE_SUMMARIES("DTC11", "Present State Summaries"),
-	/**
-	 * <div class="de">Verlaufseinträge/- Notizen</div> <div class="fr">Notes de
-	 * suivi</div> <div class="it">Note di evoluzione</div>
-	 */
-	PROGRESS_NOTES("DTC02", "Progress Notes"),
-	/**
-	 * <div class="de">Verlaufs-Berichte</div> <div class="fr">Rapports
-	 * d'évolution</div> <div class="it">Rapporti di evoluzione</div>
-	 */
-	PROGRESS_REPORTS("DTC07", "Progress Reports"),
-	/**
-	 * <div class="de">Gescannte Dokumente</div> <div class="fr">Documents
-	 * scannés</div> <div class="it">Documenti scansionati</div>
-	 */
-	SCANNED_DOCUMENTS("DTC20", "Scanned Documents"),
-	/**
-	 * <div class="de">Untersuchungs-/ Prozedur-Anforderungen</div>
-	 * <div class="fr">Demandes d'examen / procédure</div>
-	 * <div class="it">Richieste d'esame</div>
-	 */
-	TESTSPROCEDURE_REQUESTS("DTC04", "Tests/Procedure Requests");
+	OTHER_COMPOSITION("419891008", "Other Composition", "Other Composition", "Anderweitige Dokumente", "Autre", "Altro");
 
 	/**
-	 * <div class="de">Code für Warnungen /Risiken</div> <div class="fr">Code de
-	 * Alertes</div> <div class="it">Code per Allertamenti</div>
+	 * <div class="en">Code for Notes on Consultations</div>
+	 * <div class="de">Code für Konsultationseinträge/-notizen</div>
+	 * <div class="fr">Code de Notes de consultation</div> <div class="it">Code
+	 * per Rapporti e note di consultazione</div>
 	 */
-	public static final String ALERTS_CODE = "DTC13";
+	public static final String NOTES_ON_CONSULTATIONS_CODE = "1211000195104";
 
 	/**
-	 * <div class="de">Code für Behandlungspläne, Behandlungsschemata</div>
-	 * <div class="fr">Code de Plans de soins</div> <div class="it">Code per
-	 * Schema di terapia</div>
+	 * <div class="en">Code for Progress Notes</div> <div class="de">Code für
+	 * Verlaufseinträge/-notizen</div> <div class="fr">Code de Notes de
+	 * suivi</div> <div class="it">Code per Diario clinico</div>
 	 */
-	public static final String CARE_PLANS_CODE = "DTC12";
+	public static final String PROGRESS_NOTES_CODE = "1231000195106";
 
 	/**
+	 * <div class="en">Code for Notes on Procedures</div> <div class="de">Code
+	 * für Interventionseinträge/-notizen</div> <div class="fr">Code de Notes
+	 * d'intervention</div> <div class="it">Code per Rapporti e note
+	 * d'intervento</div>
+	 */
+	public static final String NOTES_ON_PROCEDURES_CODE = "1241000195103";
+
+	/**
+	 * <div class="en">Code for Tests/Procedure Requests</div>
+	 * <div class="de">Code für Untersuchungs-/Prozeduranforderungen</div>
+	 * <div class="fr">Code de Demandes d'examen / procédure</div>
+	 * <div class="it">Code per Richieste d'esame</div>
+	 */
+	public static final String TESTS_PROCEDURE_REQUESTS_CODE = "1251000195100";
+
+	/**
+	 * <div class="en">Code for Clinical Care Referrals</div>
 	 * <div class="de">Code für Zuweisungen/Überweisungen</div>
 	 * <div class="fr">Code de Demandes de prise en charge</div>
 	 * <div class="it">Code per Richieste di presa a carico</div>
 	 */
-	public static final String CLINICAL_CARE_REFERRALS_CODE = "DTC05";
+	public static final String CLINICAL_CARE_REFERRALS_CODE = "1261000195102";
 
 	/**
-	 * <div class="de">Code für Eigene Daten des Patienten</div>
-	 * <div class="fr">Code de Documents introduits par le patients</div>
-	 * <div class="it">Code per Documenti inseriti dal paziente</div>
-	 */
-	public static final String DATA_FROM_PATIENT_CODE = "DTC21";
-
-	/**
-	 * <div class="de">Code für Diagnostische Untersuchungsbefunde</div>
-	 * <div class="fr">Code de Résultats d'examen diagnostic</div>
-	 * <div class="it">Code per Risultati di esame diagnostico</div>
-	 */
-	public static final String DIAGNOSTIC_TEST_RESULTS_CODE = "DTC08";
-
-	/**
+	 * <div class="en">Code for Episode Summary Reports</div>
 	 * <div class="de">Code für Zusammenfassende Berichte</div>
 	 * <div class="fr">Code de Résumés d'épisode</div> <div class="it">Code per
 	 * Riassunti di episodio</div>
 	 */
-	public static final String EPISODE_SUMMARY_REPORTS_CODE = "DTC06";
+	public static final String EPISODE_SUMMARY_REPORTS_CODE = "1271000195108";
 
 	/**
-	 * <div class="de">Code für Zusammenfassungen der Krankengeschichte</div>
-	 * <div class="fr">Code de Résumés d'antécédents</div> <div class="it">Code
-	 * per Riassunti della storia clinica</div>
+	 * <div class="en">Code for Progress Reports</div> <div class="de">Code für
+	 * Verlaufsberichte</div> <div class="fr">Code de Rapports d'évolution</div>
+	 * <div class="it">Code per Rapporti di evoluzione</div>
 	 */
-	public static final String HISTORIC_OVERVIEWS_CODE = "DTC10";
+	public static final String PROGRESS_REPORTS_CODE = "371532007";
 
 	/**
-	 * <div class="de">Code für Konsultationseinträge/-Notizen</div>
-	 * <div class="fr">Code de Notes de consultation</div> <div class="it">Code
-	 * per Rapporti e note di consultazione</div>
+	 * <div class="en">Code for Diagnostic Test Results</div>
+	 * <div class="de">Code für Diagnostische Untersuchungsbefunde</div>
+	 * <div class="fr">Code de Résultats d'examen diagnostic</div>
+	 * <div class="it">Code per Risultati di esame diagnostico</div>
 	 */
-	public static final String NOTES_ON_CONSULTATIONS_CODE = "DTC01";
+	public static final String DIAGNOSTIC_TEST_RESULTS_CODE = "1291000195107";
 
 	/**
-	 * <div class="de">Code für Interventionseinträge/-Notizen</div>
-	 * <div class="fr">Code de Notes d'interventions</div> <div class="it">Code
-	 * per Rapporti e note d'intervento</div>
+	 * <div class="en">Code for Notifications</div> <div class="de">Code für
+	 * Meldungen</div> <div class="fr">Code de Notifications /
+	 * déclarations</div> <div class="it">Code per Notifiche /
+	 * dichiarazioni</div>
 	 */
-	public static final String NOTES_ON_PROCEDURES_CODE = "DTC03";
+	public static final String NOTIFICATIONS_CODE = "1301000195106";
 
 	/**
-	 * <div class="de">Code für Meldungen</div> <div class="fr">Code de
-	 * "Notifications/Déclarations"</div> <div class="it">Code per
-	 * Notifiche/dichiarazioni</div>
+	 * <div class="en">Code for Historic Overviews</div> <div class="de">Code
+	 * für Medizinische Vorgeschichte</div> <div class="fr">Code de Résumés
+	 * d'antécédents</div> <div class="it">Code per Riassunti della storia
+	 * clinica</div>
 	 */
-	public static final String NOTIFICATIONS_CODE = "DTC09";
+	public static final String HISTORIC_OVERVIEWS_CODE = "1281000195105";
 
 	/**
-	 * <div class="de">Code für anderweitige Dokumente</div>
-	 * <div class="fr">Code de Autre</div> <div class="it">Code per Altro</div>
+	 * <div class="en">Code for Present State Summaries</div>
+	 * <div class="de">Code für Aktueller Zustand</div> <div class="fr">Code de
+	 * Résumés de l'état actuel</div> <div class="it">Code per Riassunti dello
+	 * stato attuale</div>
 	 */
-	public static final String OTHER_COMPOSITION_CODE = "DTC90";
+	public static final String PRESENT_STATE_SUMMARIES_CODE = "1311000195108";
 
 	/**
-	 * <div class="de">Code für Zusammenfassungen aktueller Zustand</div>
-	 * <div class="fr">Code de Résumés de l'état actuel</div>
-	 * <div class="it">Code per Riassunti dello stato attuale</div>
+	 * <div class="en">Code for Care Plans</div> <div class="de">Code für
+	 * Behandlungspläne/Behandlungsschemata</div> <div class="fr">Code de Plans
+	 * de soins</div> <div class="it">Code per Piani di cura</div>
 	 */
-	public static final String PRESENT_STATE_SUMMARIES_CODE = "DTC11";
+	public static final String CARE_PLANS_CODE = "1321000195103";
 
 	/**
-	 * <div class="de">Code für Verlaufseinträge/-Notizen</div>
-	 * <div class="fr">Code de Notes de suivi</div> <div class="it">Code per
-	 * Note di evoluzione</div>
+	 * <div class="en">Code for Alerts</div> <div class="de">Code für
+	 * Warnungen/Risiken</div> <div class="fr">Code de Alertes</div>
+	 * <div class="it">Code per Avvertenze</div>
 	 */
-	public static final String PROGRESS_NOTES_CODE = "DTC02";
+	public static final String ALERTS_CODE = "1331000195101";
 
 	/**
-	 * <div class="de">Code für Verlaufs-Berichte</div> <div class="fr">Code de
-	 * Rapports d'évolution</div> <div class="it">Code per Rapporti di
-	 * evoluzione</div>
+	 * <div class="en">Code for Data from Patient</div> <div class="de">Code für
+	 * Eigene Daten des Patienten</div> <div class="fr">Code de Documents
+	 * introduits par le patient</div> <div class="it">Code per Documenti
+	 * inseriti dal paziente</div>
 	 */
-	public static final String PROGRESS_REPORTS_CODE = "DTC07";
+	public static final String DATA_FROM_PATIENT_CODE = "1351000195107";
 
 	/**
-	 * <div class="de">Code für Gescannte Dokumente</div> <div class="fr">Code
-	 * de Documents scannés</div> <div class="it">Code per Documenti
-	 * scansionati</div>
+	 * <div class="en">Code for Other Composition</div> <div class="de">Code für
+	 * Anderweitige Dokumente</div> <div class="fr">Code de Autre</div>
+	 * <div class="it">Code per Altro</div>
 	 */
-	public static final String SCANNED_DOCUMENTS_CODE = "DTC20";
-
-	/**
-	 * <div class="de">Code für Untersuchungs-/ Prozedur-Anforderungen</div>
-	 * <div class="fr">Code de Demandes d'examen / procédure</div>
-	 * <div class="it">Code per Richieste d'esame</div>
-	 */
-	public static final String TESTSPROCEDURE_REQUESTS_CODE = "DTC04";
-
-	/**
-	 * <div class="en">Identifier of the Code System</div>
-	 * <div class="de">Identifikator für das Code System</div>
-	 */
-	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.10.1.3";
+	public static final String OTHER_COMPOSITION_CODE = "419891008";
 
 	/**
 	 * <div class="en">Name of the Code System</div> <div class="de">Name des
@@ -244,11 +250,16 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 	public static final String CODE_SYSTEM_NAME = "epd_xds_classCode";
 
 	/**
+	 * <div class="en">Identifier of the Code System</div>
+	 * <div class="de">Identifikator für das Code System</div>
+	 */
+	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.10.1.3";
+
+	/**
 	 * <div class="en">Gets the Enum with a given code</div>
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
@@ -267,7 +278,6 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 	 * ist.</div>
 	 *
 	 * @param enumName
-	 *            <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -284,6 +294,29 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 	}
 
 	/**
+	 * <div class="en">Checks if a given code value is in this value set.</div>
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
+	 * ist.</div>
+	 *
+	 * @param codeValue
+	 *            <div class="de"> code</div>
+	 * @return true, if is in value set
+	 */
+	public static boolean isInValueSet(String codeValue) {
+		for (final ClassCode x : values()) {
+			if (x.getCodeValue().equals(codeValue)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * The display names per language
+	 */
+	private Map<LanguageCode, String> displayNames;
+
+	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>
@@ -298,46 +331,31 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
-	 * mittels eines Codes und einem Display Name</div>
+	 * Display Name</div> <div class="de">Instanziiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>.
 	 *
 	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div>
+	 *            <div class="de">code</div>
 	 * @param displayName
-	 *            <br>
-	 *            <div class="de"> display name</div>
+	 *            the default display name
+	 * @param displayNameEn
+	 *            the display name en
+	 * @param displayNameDe
+	 *            the display name de
+	 * @param displayNameFr
+	 *            the display name fr
+	 * @param displayNameIt
+	 *            the display name it
 	 */
-	private ClassCode(String code, String displayName) {
+	ClassCode(String code, String displayName, String displayNameEn, String displayNameDe,
+			String displayNameFr, String displayNameIt) {
 		this.code = code;
-		this.displayName = displayName;
-	}
-
-	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div>
-	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
-	 *
-	 * @return <div class="en">the code</div>
-	 */
-	public Code getCode() {
-		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
-		return ehcCode;
-	}
-
-	/**
-	 * <div class="en">Gets the OHT CodedMetadataType Object</div>
-	 * <div class="de">Liefert das OHT CodedMetadataType Objekt</div>
-	 *
-	 * @return <div class="en">the codedMetadataType</div>
-	 */
-	@Override
-	public CodedMetadataType getCodedMetadataType() {
-		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
-		cmt.setSchemeName(CODE_SYSTEM_OID);
-		cmt.setCode(this.getCodeValue());
-		cmt.setDisplayName(
-				XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
-		return cmt;
+		displayNames = new HashMap<>();
+		displayNames.put(null, displayName);
+		displayNames.put(LanguageCode.ENGLISH, displayNameEn);
+		displayNames.put(LanguageCode.GERMAN, displayNameDe);
+		displayNames.put(LanguageCode.FRENCH, displayNameFr);
+		displayNames.put(LanguageCode.ITALIAN, displayNameIt);
 	}
 
 	/**
@@ -371,31 +389,22 @@ public enum ClassCode implements CodedMetadataEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
-	 * display name.</div>
+	 * <div class="en">Gets the display name defined by the language param. If
+	 * there is no english translation, the default display name is
+	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
+	 * falls es keine Englische Übersetzung gibt, wird der default-Name
+	 * zurückgegeben.</div>
 	 *
-	 * @return <div class="en">the display name</div>
+	 * @param languageCode
+	 *            the language code to get the display name for
+	 * @return returns the display name in the desired language. if language not
+	 *         found, display name in german will returned
 	 */
-	public String getDisplayName() {
-		return this.displayName;
-	}
-
-	/**
-	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Sets
-	 * vorhanden ist.</div>
-	 *
-	 * @param codeValue
-	 *            <br>
-	 *            <div class="de"> code</div>
-	 * @return true, if is in value set
-	 */
-	public boolean isInValueSet(String codeValue) {
-		for (final ClassCode x : values()) {
-			if (x.getCodeValue().equals(code)) {
-				return true;
-			}
+	public String getDisplayName(LanguageCode languageCode) {
+		String displayName = displayNames.get(languageCode);
+		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
+			return displayNames.get(null);
 		}
-		return false;
+		return displayName;
 	}
 }

@@ -17,112 +17,159 @@
  */
 package org.ehealth_connector.communication.ch.enums;
 
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.enums.CodedMetadataEnumInterface;
-import org.ehealth_connector.common.utils.XdsMetadataUtil;
-import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
-import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.enums.valuesets.ValueSetEnumInterface;
 
 /**
- * <div class="de">MIME Typ des XDS Dokuments in der Dokumentenablage. </div>
- * <div class="fr"></div>
+ * <div class="en">MIME type of the document as per Annex 3&amp;#160; EPRO-FDHA,
+ * Chapter 2.8.&lt;br clear="none"/&gt;</div> <div class="de">MIME Typ des
+ * Dokumentes gemäss Anhang 3 EPDG, Kapitel 2.8.&lt;br clear="none"/&gt;</div>
+ * <div class="fr">MIME Type du document selon l'annexe 3 ODEP-DFI, chapitre
+ * 2.8.&lt;br clear="none"/&gt;</div> <div class="it">Tipo MIME del documento
+ * secondo l'allegato 3 OCIP-DFI, capitolo 2.8.&lt;br clear="none"/&gt;</div>
  */
-public enum MimeType implements CodedMetadataEnumInterface {
+public enum MimeType implements ValueSetEnumInterface {
 
 	/**
-	 * <div class="de">CDA Level 1 Multipart</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">DICOM</div> <div class="de">DICOM</div>
+	 * <div class="fr">DICOM</div> <div class="it">DICOM</div>
 	 */
-	CDA_LEVEL_1_MULTIPART("multipart/x-hl7-cda-level1  ", "CDA Level 1 Multipart"),
+	DICOM("application/dicom", "DICOM", "DICOM", "DICOM", "DICOM", "DICOM"),
 	/**
-	 * <div class="de">DICOM</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">PDF</div> <div class="de">PDF</div>
+	 * <div class="fr">PDF</div> <div class="it">PDF</div>
 	 */
-	DICOM("application/dicom", "DICOM"),
+	PDF("application/pdf", "PDF", "PDF", "PDF", "PDF", "PDF"),
 	/**
-	 * <div class="de">JPEG Image</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">MPEG audio layer 3</div> <div class="de">MPEG audio layer
+	 * 3</div> <div class="fr">MPEG audio layer 3</div> <div class="it">MPEG
+	 * audio layer 3</div>
 	 */
-	JPEG_IMAGE("image/jpeg", "JPEG Image"),
+	MPEG_AUDIO_LAYER_3("audio/mpeg", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3"),
 	/**
-	 * <div class="de">MPEG audio layer 3</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">GIF Graphics Interchange Format</div> <div class="de">GIF
+	 * Graphics Interchange Format</div> <div class="fr">GIF Graphics
+	 * Interchange Format</div> <div class="it">GIF Graphics Interchange
+	 * Format</div>
 	 */
-	MPEG_AUDIO_LAYER_3("audio/mpeg", "MPEG audio layer 3"),
+	GIF_GRAPHICS_INTERCHANGE_FORMAT("image/gif", "GIF Graphics Interchange Format", "GIF Graphics Interchange Format", "GIF Graphics Interchange Format", "GIF Graphics Interchange Format", "GIF Graphics Interchange Format"),
 	/**
-	 * <div class="de">MPEG Video</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">JPEG Image</div> <div class="de">JPEG Image</div>
+	 * <div class="fr">JPEG Image</div> <div class="it">JPEG Image</div>
 	 */
-	MPEG_VIDEO("video/mpeg", "MPEG Video"),
+	JPEG_IMAGE("image/jpeg", "JPEG Image", "JPEG Image", "JPEG Image", "JPEG Image", "JPEG Image"),
 	/**
-	 * <div class="de">PDF</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">PNG Portable Network Graphics</div> <div class="de">PNG
+	 * Portable Network Graphics</div> <div class="fr">PNG Portable Network
+	 * Graphics</div> <div class="it">PNG Portable Network Graphics</div>
 	 */
-	PDF("application/pdf", "PDF"),
+	PNG_PORTABLE_NETWORK_GRAPHICS("image/png", "PNG Portable Network Graphics", "PNG Portable Network Graphics", "PNG Portable Network Graphics", "PNG Portable Network Graphics", "PNG Portable Network Graphics"),
 	/**
-	 * <div class="de">Plain Text</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">TIFF Image</div> <div class="de">TIFF Image</div>
+	 * <div class="fr">TIFF Image</div> <div class="it">TIFF Image</div>
 	 */
-	PLAIN_TEXT("text/plain", "Plain Text"),
+	TIFF_IMAGE("image/tiff", "TIFF Image", "TIFF Image", "TIFF Image", "TIFF Image", "TIFF Image"),
 	/**
-	 * <div class="de">TIFF Image</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">CDA Level 1 Multipart</div> <div class="de">CDA Level 1
+	 * Multipart</div> <div class="fr">CDA Level 1 Multipart</div>
+	 * <div class="it">CDA Level 1 Multipart</div>
 	 */
-	TIFF_IMAGE("image/tiff", "TIFF Image"),
+	CDA_LEVEL_1_MULTIPART("multipart/x-hl7-cda-level1", "CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart"),
 	/**
-	 * <div class="de">XML-Text</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Plain Text</div> <div class="de">Plain Text</div>
+	 * <div class="fr">Plain Text</div> <div class="it">Plain Text</div>
 	 */
-	XML_TEXT("text/xml", "XML-Text");
+	PLAIN_TEXT("text/plain", "Plain Text", "Plain Text", "Plain Text", "Plain Text", "Plain Text"),
+	/**
+	 * <div class="en">XML-Text</div> <div class="de">XML-Text</div>
+	 * <div class="fr">XML-Text</div> <div class="it">XML-Text</div>
+	 */
+	XML_TEXT("text/xml", "XML-Text", "XML-Text", "XML-Text", "XML-Text", "XML-Text"),
+	/**
+	 * <div class="en">MPEG Video</div> <div class="de">MPEG Video</div>
+	 * <div class="fr">MPEG Video</div> <div class="it">MPEG Video</div>
+	 */
+	MPEG_VIDEO("video/mpeg", "MPEG Video", "MPEG Video", "MPEG Video", "MPEG Video", "MPEG Video");
 
 	/**
-	 * <div class="de">Code für CDA Level 1 Multipart</div>
-	 */
-	public static final String CDA_LEVEL_1_MULTIPART_CODE = "multipart/x-hl7-cda-level1  ";
-
-	/**
-	 * <div class="de">Code für DICOM</div>
+	 * <div class="en">Code for DICOM</div> <div class="de">Code für DICOM</div>
+	 * <div class="fr">Code de DICOM</div> <div class="it">Code per DICOM</div>
 	 */
 	public static final String DICOM_CODE = "application/dicom";
 
 	/**
-	 * <div class="de">Code für JPEG Image</div>
-	 */
-	public static final String JPEG_IMAGE_CODE = "image/jpeg";
-
-	/**
-	 * <div class="de">Code für MPEG audio layer 3</div>
-	 */
-	public static final String MPEG_AUDIO_LAYER_3_CODE = "audio/mpeg";
-
-	/**
-	 * <div class="de">Code für MPEG Video</div>
-	 */
-	public static final String MPEG_VIDEO_CODE = "video/mpeg";
-
-	/**
-	 * <div class="de">Code für PDF</div>
+	 * <div class="en">Code for PDF</div> <div class="de">Code für PDF</div>
+	 * <div class="fr">Code de PDF</div> <div class="it">Code per PDF</div>
 	 */
 	public static final String PDF_CODE = "application/pdf";
 
 	/**
-	 * <div class="de">Code für Plain Text</div>
+	 * <div class="en">Code for MPEG audio layer 3</div> <div class="de">Code
+	 * für MPEG audio layer 3</div> <div class="fr">Code de MPEG audio layer
+	 * 3</div> <div class="it">Code per MPEG audio layer 3</div>
 	 */
-	public static final String PLAIN_TEXT_CODE = "text/plain";
+	public static final String MPEG_AUDIO_LAYER_3_CODE = "audio/mpeg";
 
 	/**
-	 * <div class="de">Code für TIFF Image</div>
+	 * <div class="en">Code for GIF Graphics Interchange Format</div>
+	 * <div class="de">Code für GIF Graphics Interchange Format</div>
+	 * <div class="fr">Code de GIF Graphics Interchange Format</div>
+	 * <div class="it">Code per GIF Graphics Interchange Format</div>
+	 */
+	public static final String GIF_GRAPHICS_INTERCHANGE_FORMAT_CODE = "image/gif";
+
+	/**
+	 * <div class="en">Code for JPEG Image</div> <div class="de">Code für JPEG
+	 * Image</div> <div class="fr">Code de JPEG Image</div> <div class="it">Code
+	 * per JPEG Image</div>
+	 */
+	public static final String JPEG_IMAGE_CODE = "image/jpeg";
+
+	/**
+	 * <div class="en">Code for PNG Portable Network Graphics</div>
+	 * <div class="de">Code für PNG Portable Network Graphics</div>
+	 * <div class="fr">Code de PNG Portable Network Graphics</div>
+	 * <div class="it">Code per PNG Portable Network Graphics</div>
+	 */
+	public static final String PNG_PORTABLE_NETWORK_GRAPHICS_CODE = "image/png";
+
+	/**
+	 * <div class="en">Code for TIFF Image</div> <div class="de">Code für TIFF
+	 * Image</div> <div class="fr">Code de TIFF Image</div> <div class="it">Code
+	 * per TIFF Image</div>
 	 */
 	public static final String TIFF_IMAGE_CODE = "image/tiff";
 
 	/**
-	 * <div class="de">Code für XML-Text</div>
+	 * <div class="en">Code for CDA Level 1 Multipart</div> <div class="de">Code
+	 * für CDA Level 1 Multipart</div> <div class="fr">Code de CDA Level 1
+	 * Multipart</div> <div class="it">Code per CDA Level 1 Multipart</div>
+	 */
+	public static final String CDA_LEVEL_1_MULTIPART_CODE = "multipart/x-hl7-cda-level1";
+
+	/**
+	 * <div class="en">Code for Plain Text</div> <div class="de">Code für Plain
+	 * Text</div> <div class="fr">Code de Plain Text</div> <div class="it">Code
+	 * per Plain Text</div>
+	 */
+	public static final String PLAIN_TEXT_CODE = "text/plain";
+
+	/**
+	 * <div class="en">Code for XML-Text</div> <div class="de">Code für
+	 * XML-Text</div> <div class="fr">Code de XML-Text</div>
+	 * <div class="it">Code per XML-Text</div>
 	 */
 	public static final String XML_TEXT_CODE = "text/xml";
 
 	/**
-	 * <div class="en">Identifier of the Code System</div>
-	 * <div class="de">Identifikator für das Code System</div>
+	 * <div class="en">Code for MPEG Video</div> <div class="de">Code für MPEG
+	 * Video</div> <div class="fr">Code de MPEG Video</div> <div class="it">Code
+	 * per MPEG Video</div>
 	 */
-	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.10.1.16";
+	public static final String MPEG_VIDEO_CODE = "video/mpeg";
 
 	/**
 	 * <div class="en">Name of the Code System</div> <div class="de">Name des
@@ -131,11 +178,16 @@ public enum MimeType implements CodedMetadataEnumInterface {
 	public static final String CODE_SYSTEM_NAME = "epd_xds_mimeType";
 
 	/**
+	 * <div class="en">Identifier of the Code System</div>
+	 * <div class="de">Identifikator für das Code System</div>
+	 */
+	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.10.1.16";
+
+	/**
 	 * <div class="en">Gets the Enum with a given code</div>
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
@@ -154,7 +206,6 @@ public enum MimeType implements CodedMetadataEnumInterface {
 	 * ist.</div>
 	 *
 	 * @param enumName
-	 *            <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -176,17 +227,22 @@ public enum MimeType implements CodedMetadataEnumInterface {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *            <div class="de">code</div>
-	 * @return true, if one enum of this valueset contains the given code
+	 *            <div class="de"> code</div>
+	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (MimeType x : values()) {
+		for (final MimeType x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
 		}
 		return false;
 	}
+
+	/**
+	 * The display names per language
+	 */
+	private Map<LanguageCode, String> displayNames;
 
 	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
@@ -203,46 +259,31 @@ public enum MimeType implements CodedMetadataEnumInterface {
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
-	 * mittels eines Codes und einem Display Name</div>
+	 * Display Name</div> <div class="de">Instanziiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>.
 	 *
 	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div>
+	 *            <div class="de">code</div>
 	 * @param displayName
-	 *            <br>
-	 *            <div class="de"> display name</div>
+	 *            the default display name
+	 * @param displayNameEn
+	 *            the display name en
+	 * @param displayNameDe
+	 *            the display name de
+	 * @param displayNameFr
+	 *            the display name fr
+	 * @param displayNameIt
+	 *            the display name it
 	 */
-	private MimeType(String code, String displayName) {
+	MimeType(String code, String displayName, String displayNameEn, String displayNameDe,
+			String displayNameFr, String displayNameIt) {
 		this.code = code;
-		this.displayName = displayName;
-	}
-
-	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div>
-	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
-	 *
-	 * @return <div class="en">the code</div>
-	 */
-	public Code getCode() {
-		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
-		return ehcCode;
-	}
-
-	/**
-	 * <div class="en">Gets the OHT CodedMetadataType Object</div>
-	 * <div class="de">Liefert das OHT CodedMetadataType Objekt</div>
-	 *
-	 * @return <div class="en">the codedMetadataType</div>
-	 */
-	@Override
-	public CodedMetadataType getCodedMetadataType() {
-		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
-		cmt.setSchemeName(CODE_SYSTEM_OID);
-		cmt.setCode(this.getCodeValue());
-		cmt.setDisplayName(
-				XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
-		return cmt;
+		displayNames = new HashMap<>();
+		displayNames.put(null, displayName);
+		displayNames.put(LanguageCode.ENGLISH, displayNameEn);
+		displayNames.put(LanguageCode.GERMAN, displayNameDe);
+		displayNames.put(LanguageCode.FRENCH, displayNameFr);
+		displayNames.put(LanguageCode.ITALIAN, displayNameIt);
 	}
 
 	/**
@@ -276,12 +317,22 @@ public enum MimeType implements CodedMetadataEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
-	 * display name.</div>
+	 * <div class="en">Gets the display name defined by the language param. If
+	 * there is no english translation, the default display name is
+	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
+	 * falls es keine Englische Übersetzung gibt, wird der default-Name
+	 * zurückgegeben.</div>
 	 *
-	 * @return <div class="en">the display name</div>
+	 * @param languageCode
+	 *            the language code to get the display name for
+	 * @return returns the display name in the desired language. if language not
+	 *         found, display name in german will returned
 	 */
-	public String getDisplayName() {
-		return this.displayName;
+	public String getDisplayName(LanguageCode languageCode) {
+		String displayName = displayNames.get(languageCode);
+		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
+			return displayNames.get(null);
+		}
+		return displayName;
 	}
 }

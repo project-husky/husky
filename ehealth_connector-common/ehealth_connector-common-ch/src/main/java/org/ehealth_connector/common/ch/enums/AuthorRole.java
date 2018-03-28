@@ -17,185 +17,250 @@
  */
 package org.ehealth_connector.common.ch.enums;
 
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.enums.CodedMetadataEnumInterface;
-import org.ehealth_connector.common.utils.XdsMetadataUtil;
-import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
-import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.enums.valuesets.ValueSetEnumInterface;
 
 /**
- * <div class="de">Dieser Code definiert die Rolle des Authors innerhalb der
- * Institution, z.B Arzt, Pflegefachperson, Therapeut, etc. Dieser Wert soll in
- * Kombination mit anderen Attributen eine eindeutige Kategorisierung der
- * Dokumente ermöglichen. Dies ist ein Sub-Attribut von epd_xds_author. Dieses
- * Sub-Attribut ist zwingend erforderlich.</div> <div class="fr"></div>
+ * <div class="en">Role of the author as per Annex 3 EPRO-FDHA, Chapter
+ * 2.1&lt;br clear="none"/&gt; &lt;br clear="none"/&gt;This code defines the
+ * role of the author within the institution, e.g. doctor, nurse, therapist,
+ * etc, This is a sub-attribute of epd_xds_author.&lt;br clear="none"/&gt;</div>
+ * <div class="de">Rolle des Autors gemäss Anhang 3 EPDV-EDI, Kapitel 2.1&lt;br
+ * clear="none"/&gt; &lt;br clear="none"/&gt;Dieser Code definiert die Rolle des
+ * Authors innerhalb der Institution, z.B Arzt, Pflegefachperson, Therapeut,
+ * etc. Dies ist ein Sub-Attribut von epd_xds_author.&lt;br
+ * clear="none"/&gt;</div> <div class="fr">Rôle de l'auteur selon l'annexe 3
+ * ODEP-DFI, chapitre 2.1&lt;br clear="none"/&gt; &lt;br clear="none"/&gt;Ce
+ * code définit le rôle de l'auteur au sein de l'institution, p. ex, médecin,
+ * professionnel des soins, thérapeute, etc. Il s'agit d'un sous-attribut
+ * de&amp;#160; epd_xds_author.&lt;br clear="none"/&gt;</div>
+ * <div class="it">Ruolo dell'autore secondo l'allegato 3 OCIP-DFI, capitolo
+ * 2.1&lt;br clear="none"/&gt; &lt;br clear="none"/&gt;Questo codice definisce
+ * il ruolo dell'autore all'interno dell'istituzione, p. es. medico, infermiere,
+ * terapeuta, ecc. È un sottoattributo di epd_xds_author.&lt;br
+ * clear="none"/&gt;</div>
  */
-public enum AuthorRole implements CodedMetadataEnumInterface {
+public enum AuthorRole implements ValueSetEnumInterface {
 
 	/**
-	 * <div class="de">Andere</div> <div class="fr">Autre</div>
-	 * <div class="it">Altro</div>
+	 * <div class="en">Pharmacist</div> <div class="de">Apotheker</div>
+	 * <div class="fr">Pharmacien</div> <div class="it">Farmacista</div>
 	 */
-	ANDERE("40999", "Andere"),
+	PHARMACIST("46255001", "Pharmacist (occupation)", "Pharmacist", "Apotheker", "Pharmacien", "Farmacista"),
 	/**
-	 * <div class="de">Apotheker</div> <div class="fr">Pharmacien/ne</div>
-	 * <div class="it">Farmacista</div>
+	 * <div class="en">Physician </div> <div class="de">Arzt</div>
+	 * <div class="fr">Médecin</div> <div class="it">Medico</div>
 	 */
-	APOTHEKER("40001", "Apotheker"),
+	PHYSICIAN("309343006", "Physician (occupation)", "Physician ", "Arzt", "Médecin", "Medico"),
 	/**
-	 * <div class="de">Arzt</div> <div class="fr">Médecin</div>
-	 * <div class="it">Medico</div>
+	 * <div class="en">Chiropractor</div> <div class="de">Chiropraktiker</div>
+	 * <div class="fr">Chiropracteur</div> <div class="it">Chiropratico</div>
 	 */
-	ARZT("40002", "Arzt"),
+	CHIROPRACTOR("3842006", "Chiropractor (occupation)", "Chiropractor", "Chiropraktiker", "Chiropracteur", "Chiropratico"),
 	/**
-	 * <div class="de">Chiropraktiker</div> <div class="fr">Chiropracteur</div>
-	 * <div class="it">Chiropratico</div>
+	 * <div class="en">Dietitian</div> <div class="de">Ernährungsberater</div>
+	 * <div class="fr">Diététicien</div> <div class="it">Nutrizionista</div>
 	 */
-	CHIROPRAKTIKER("40003", "Chiropraktiker"),
+	DIETITIAN("159033005", "Dietitian (occupation)", "Dietitian", "Ernährungsberater", "Diététicien", "Nutrizionista"),
 	/**
-	 * <div class="de">Ernährungsberater</div>
-	 * <div class="fr">Diététicien/ne</div> <div class="it">Nutrizionista</div>
+	 * <div class="en">Midwife</div> <div class="de">Hebamme</div>
+	 * <div class="fr">Sage-femme</div> <div class="it">Ostetrica</div>
 	 */
-	ERNAHRUNGSBERATER("40004", "Ernährungsberater"),
+	MIDWIFE("309453006", "Registered midwife (occupation)", "Midwife", "Hebamme", "Sage-femme", "Ostetrica"),
 	/**
-	 * <div class="de">Hebamme</div> <div class="fr">Sage-femme</div>
-	 * <div class="it">Ostetrica</div>
-	 */
-	HEBAMME("40005", "Hebamme"),
-	/**
+	 * <div class="en">Complementary therapist</div>
 	 * <div class="de">Komplementärmediziner</div> <div class="fr">Thérapeute en
 	 * médecine alternative et complémentaire</div> <div class="it">Terapista
 	 * complementare</div>
 	 */
-	KOMPLEMENTARMEDIZINER("40006", "Komplementärmediziner"),
+	COMPLEMENTARY_THERAPIST("224609002", "Complementary health worker (occupation)", "Complementary therapist", "Komplementärmediziner", "Thérapeute en médecine alternative et complémentaire", "Terapista complementare"),
 	/**
-	 * <div class="de">Patient</div> <div class="fr">Patient/e</div>
-	 * <div class="it">Paziente</div>
+	 * <div class="en">Patient</div> <div class="de">Patient</div>
+	 * <div class="fr">Patient</div> <div class="it">Paziente</div>
 	 */
-	PATIENT("40007", "Patient"),
+	PATIENT("116154003", "Patient (person)", "Patient", "Patient", "Patient", "Paziente"),
 	/**
-	 * <div class="de">Pflegefachperson</div>
-	 * <div class="fr">Infirmier/ère</div> <div class="it">Professionista della
-	 * salute</div>
+	 * <div class="en">Professional nurse</div>
+	 * <div class="de">Pflegefachperson</div> <div class="fr">Infirmier</div>
+	 * <div class="it">Infermiere professionale</div>
 	 */
-	PFLEGEFACHPERSON("40008", "Pflegefachperson"),
+	PROFESSIONAL_NURSE("106292003", "Professional nurse (occupation)", "Professional nurse", "Pflegefachperson", "Infirmier", "Infermiere professionale"),
 	/**
-	 * <div class="de">Psychologe</div> <div class="fr">Psychologue</div>
-	 * <div class="it">Psicologo</div>
+	 * <div class="en">Psychologist </div> <div class="de">Psychologe</div>
+	 * <div class="fr">Psychologue</div> <div class="it">Psicologo</div>
 	 */
-	PSYCHOLOGE("40009", "Psychologe"),
+	PSYCHOLOGIST("59944000", "Psychologist (occupation)", "Psychologist ", "Psychologe", "Psychologue", "Psicologo"),
 	/**
-	 * <div class="de">Sozialdienst</div> <div class="fr">Service social</div>
-	 * <div class="it">Servizio sociale</div>
+	 * <div class="en">Social worker</div>
+	 * <div class="de">Sozialdienstmitarbeiter</div> <div class="fr">Assistant
+	 * social</div> <div class="it">Assistente sociale</div>
 	 */
-	SOZIALDIENST("40010", "Sozialdienst"),
+	SOCIAL_WORKER("158933003", "Social caseworker (general) (occupation)", "Social worker", "Sozialdienstmitarbeiter", "Assistant social", "Assistente sociale"),
 	/**
-	 * <div class="de">Therapeut</div> <div class="fr">Thérapeute</div>
-	 * <div class="it">Terapista</div>
+	 * <div class="en">Speech therapist</div> <div class="de">Logopäde</div>
+	 * <div class="fr">Logopédiste</div> <div class="it">Logopedista</div>
 	 */
-	THERAPEUT("40011", "Therapeut"),
+	SPEECH_THERAPIST("159026005", "Speech/language therapist (occupation)", "Speech therapist", "Logopäde", "Logopédiste", "Logopedista"),
 	/**
-	 * <div class="de">Unbekannt</div> <div class="fr">Inconnu</div>
-	 * <div class="it">Ignoto</div>
+	 * <div class="en">Physiotherapist</div>
+	 * <div class="de">Physiotherapeut</div>
+	 * <div class="fr">Physiothérapeute</div>
+	 * <div class="it">Fisioterapista</div>
 	 */
-	UNBEKANNT("40900", "Unbekannt"),
+	PHYSIOTHERAPIST("36682004", "Physiotherapist (occupation)", "Physiotherapist", "Physiotherapeut", "Physiothérapeute", "Fisioterapista"),
 	/**
-	 * <div class="de">Zahnarzt</div> <div class="fr">Dentiste</div>
-	 * <div class="it">Dentista</div>
+	 * <div class="en">Occupational therapist</div>
+	 * <div class="de">Ergotherapeut</div> <div class="fr">Ergothérapeute</div>
+	 * <div class="it">Ergoterapista</div>
 	 */
-	ZAHNARZT("40012", "Zahnarzt");
+	OCCUPATIONAL_THERAPIST("80546007", "Occupational therapist (occupation)", "Occupational therapist", "Ergotherapeut", "Ergothérapeute", "Ergoterapista"),
+	/**
+	 * <div class="en">Breast Feeding Consultant</div>
+	 * <div class="de">Stillberaterin</div> <div class="fr">Consultante en
+	 * lactation</div> <div class="it">Consulente per l'allattamento</div>
+	 */
+	BREAST_FEEDING_CONSULTANT("225726006", "Lactation consultant (occupation)", "Breast Feeding Consultant", "Stillberaterin", "Consultante en lactation", "Consulente per l'allattamento"),
+	/**
+	 * <div class="en">Dentist</div> <div class="de">Zahnarzt</div>
+	 * <div class="fr">Dentiste</div> <div class="it">Dentista</div>
+	 */
+	DENTIST("106289002", "Dentist (occupation)", "Dentist", "Zahnarzt", "Dentiste", "Dentista"),
+	/**
+	 * <div class="en">Radiologist</div> <div class="de">Radiologe</div>
+	 * <div class="fr">Radiologue</div> <div class="it">Radiologo</div>
+	 */
+	RADIOLOGIST("66862007", "Radiologist (occupation)", "Radiologist", "Radiologe", "Radiologue", "Radiologo"),
+	/**
+	 * <div class="en">Healthcare professional</div> <div class="de">Andere
+	 * Gesundheitsfachperson</div> <div class="fr">Autre professionnel de la
+	 * santé</div> <div class="it">Altri professionisti della salute</div>
+	 */
+	HEALTHCARE_PROFESSIONAL("223366009", "Healthcare professional (occupation)", "Healthcare professional", "Andere Gesundheitsfachperson", "Autre professionnel de la santé", "Altri professionisti della salute");
 
 	/**
-	 * <div class="de">Code für Andere</div> <div class="fr">Code de Autre</div>
-	 * <div class="it">Code per Altro</div>
+	 * <div class="en">Code for Pharmacist</div> <div class="de">Code für
+	 * Apotheker</div> <div class="fr">Code de Pharmacien</div>
+	 * <div class="it">Code per Farmacista</div>
 	 */
-	public static final String ANDERE_CODE = "40999";
+	public static final String PHARMACIST_CODE = "46255001";
 
 	/**
-	 * <div class="de">Code für Apotheker</div> <div class="fr">Code de
-	 * Pharmacien/ne</div> <div class="it">Code per Farmacista</div>
+	 * <div class="en">Code for Physician </div> <div class="de">Code für
+	 * Arzt</div> <div class="fr">Code de Médecin</div> <div class="it">Code per
+	 * Medico</div>
 	 */
-	public static final String APOTHEKER_CODE = "40001";
+	public static final String PHYSICIAN_CODE = "309343006";
 
 	/**
-	 * <div class="de">Code für Arzt</div> <div class="fr">Code de Médecin</div>
-	 * <div class="it">Code per Medico</div>
+	 * <div class="en">Code for Chiropractor</div> <div class="de">Code für
+	 * Chiropraktiker</div> <div class="fr">Code de Chiropracteur</div>
+	 * <div class="it">Code per Chiropratico</div>
 	 */
-	public static final String ARZT_CODE = "40002";
+	public static final String CHIROPRACTOR_CODE = "3842006";
 
 	/**
-	 * <div class="de">Code für Chiropraktiker</div> <div class="fr">Code de
-	 * Chiropracteur</div> <div class="it">Code per Chiropratico</div>
+	 * <div class="en">Code for Dietitian</div> <div class="de">Code für
+	 * Ernährungsberater</div> <div class="fr">Code de Diététicien</div>
+	 * <div class="it">Code per Nutrizionista</div>
 	 */
-	public static final String CHIROPRAKTIKER_CODE = "40003";
+	public static final String DIETITIAN_CODE = "159033005";
 
 	/**
-	 * <div class="de">Code für Ernährungsberater</div> <div class="fr">Code de
-	 * Diététicien/ne</div> <div class="it">Code per Nutrizionista</div>
+	 * <div class="en">Code for Midwife</div> <div class="de">Code für
+	 * Hebamme</div> <div class="fr">Code de Sage-femme</div>
+	 * <div class="it">Code per Ostetrica</div>
 	 */
-	public static final String ERNAHRUNGSBERATER_CODE = "40004";
+	public static final String MIDWIFE_CODE = "309453006";
 
 	/**
-	 * <div class="de">Code für Hebamme</div> <div class="fr">Code de
-	 * Sage-femme</div> <div class="it">Code per Ostetrica</div>
-	 */
-	public static final String HEBAMME_CODE = "40005";
-
-	/**
+	 * <div class="en">Code for Complementary therapist</div>
 	 * <div class="de">Code für Komplementärmediziner</div> <div class="fr">Code
 	 * de Thérapeute en médecine alternative et complémentaire</div>
 	 * <div class="it">Code per Terapista complementare</div>
 	 */
-	public static final String KOMPLEMENTARMEDIZINER_CODE = "40006";
+	public static final String COMPLEMENTARY_THERAPIST_CODE = "224609002";
 
 	/**
-	 * <div class="de">Code für Patient</div> <div class="fr">Code de
-	 * Patient/e</div> <div class="it">Code per Paziente</div>
+	 * <div class="en">Code for Patient</div> <div class="de">Code für
+	 * Patient</div> <div class="fr">Code de Patient</div> <div class="it">Code
+	 * per Paziente</div>
 	 */
-	public static final String PATIENT_CODE = "40007";
+	public static final String PATIENT_CODE = "116154003";
 
 	/**
-	 * <div class="de">Code für Pflegefachperson</div> <div class="fr">Code de
-	 * Infirmier/ère</div> <div class="it">Code per Professionista della
-	 * salute</div>
+	 * <div class="en">Code for Professional nurse</div> <div class="de">Code
+	 * für Pflegefachperson</div> <div class="fr">Code de Infirmier</div>
+	 * <div class="it">Code per Infermiere professionale</div>
 	 */
-	public static final String PFLEGEFACHPERSON_CODE = "40008";
+	public static final String PROFESSIONAL_NURSE_CODE = "106292003";
 
 	/**
-	 * <div class="de">Code für Psychologe</div> <div class="fr">Code de
-	 * Psychologue</div> <div class="it">Code per Psicologo</div>
+	 * <div class="en">Code for Psychologist </div> <div class="de">Code für
+	 * Psychologe</div> <div class="fr">Code de Psychologue</div>
+	 * <div class="it">Code per Psicologo</div>
 	 */
-	public static final String PSYCHOLOGE_CODE = "40009";
+	public static final String PSYCHOLOGIST_CODE = "59944000";
 
 	/**
-	 * <div class="de">Code für Sozialdienst</div> <div class="fr">Code de
-	 * Service social</div> <div class="it">Code per Servizio sociale</div>
+	 * <div class="en">Code for Social worker</div> <div class="de">Code für
+	 * Sozialdienstmitarbeiter</div> <div class="fr">Code de Assistant
+	 * social</div> <div class="it">Code per Assistente sociale</div>
 	 */
-	public static final String SOZIALDIENST_CODE = "40010";
+	public static final String SOCIAL_WORKER_CODE = "158933003";
 
 	/**
-	 * <div class="de">Code für Therapeut</div> <div class="fr">Code de
-	 * Thérapeute</div> <div class="it">Code per Terapista</div>
+	 * <div class="en">Code for Speech therapist</div> <div class="de">Code für
+	 * Logopäde</div> <div class="fr">Code de Logopédiste</div>
+	 * <div class="it">Code per Logopedista</div>
 	 */
-	public static final String THERAPEUT_CODE = "40011";
+	public static final String SPEECH_THERAPIST_CODE = "159026005";
 
 	/**
-	 * <div class="de">Code für Unbekannt</div> <div class="fr">Code de
-	 * Inconnu</div> <div class="it">Code per Ignoto</div>
+	 * <div class="en">Code for Physiotherapist</div> <div class="de">Code für
+	 * Physiotherapeut</div> <div class="fr">Code de Physiothérapeute</div>
+	 * <div class="it">Code per Fisioterapista</div>
 	 */
-	public static final String UNBEKANNT_CODE = "40900";
+	public static final String PHYSIOTHERAPIST_CODE = "36682004";
 
 	/**
-	 * <div class="de">Code für Zahnarzt</div> <div class="fr">Code de
-	 * Dentiste</div> <div class="it">Code per Dentista</div>
+	 * <div class="en">Code for Occupational therapist</div>
+	 * <div class="de">Code für Ergotherapeut</div> <div class="fr">Code de
+	 * Ergothérapeute</div> <div class="it">Code per Ergoterapista</div>
 	 */
-	public static final String ZAHNARZT_CODE = "40012";
+	public static final String OCCUPATIONAL_THERAPIST_CODE = "80546007";
 
 	/**
-	 * <div class="en">Identifier of the Code System</div>
-	 * <div class="de">Identifikator für das Code System</div>
+	 * <div class="en">Code for Breast Feeding Consultant</div>
+	 * <div class="de">Code für Stillberaterin</div> <div class="fr">Code de
+	 * Consultante en lactation</div> <div class="it">Code per Consulente per
+	 * l'allattamento</div>
 	 */
-	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.10.1.1.3";
+	public static final String BREAST_FEEDING_CONSULTANT_CODE = "225726006";
+
+	/**
+	 * <div class="en">Code for Dentist</div> <div class="de">Code für
+	 * Zahnarzt</div> <div class="fr">Code de Dentiste</div>
+	 * <div class="it">Code per Dentista</div>
+	 */
+	public static final String DENTIST_CODE = "106289002";
+
+	/**
+	 * <div class="en">Code for Radiologist</div> <div class="de">Code für
+	 * Radiologe</div> <div class="fr">Code de Radiologue</div>
+	 * <div class="it">Code per Radiologo</div>
+	 */
+	public static final String RADIOLOGIST_CODE = "66862007";
+
+	/**
+	 * <div class="en">Code for Healthcare professional</div>
+	 * <div class="de">Code für Andere Gesundheitsfachperson</div>
+	 * <div class="fr">Code de Autre professionnel de la santé</div>
+	 * <div class="it">Code per Altri professionisti della salute</div>
+	 */
+	public static final String HEALTHCARE_PROFESSIONAL_CODE = "223366009";
 
 	/**
 	 * <div class="en">Name of the Code System</div> <div class="de">Name des
@@ -204,11 +269,16 @@ public enum AuthorRole implements CodedMetadataEnumInterface {
 	public static final String CODE_SYSTEM_NAME = "epd_xds_authorRole";
 
 	/**
+	 * <div class="en">Identifier of the Code System</div>
+	 * <div class="de">Identifikator für das Code System</div>
+	 */
+	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.10.1.1.3";
+
+	/**
 	 * <div class="en">Gets the Enum with a given code</div>
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
 	 *
 	 * @param code
-	 *            <br>
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
@@ -227,7 +297,6 @@ public enum AuthorRole implements CodedMetadataEnumInterface {
 	 * ist.</div>
 	 *
 	 * @param enumName
-	 *            <br>
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
@@ -249,17 +318,22 @@ public enum AuthorRole implements CodedMetadataEnumInterface {
 	 * ist.</div>
 	 *
 	 * @param codeValue
-	 *            <div class="de">code</div>
-	 * @return true, if one enum of this valueset contains the given code
+	 *            <div class="de"> code</div>
+	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (AuthorRole x : values()) {
+		for (final AuthorRole x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
 		}
 		return false;
 	}
+
+	/**
+	 * The display names per language
+	 */
+	private Map<LanguageCode, String> displayNames;
 
 	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
@@ -276,46 +350,31 @@ public enum AuthorRole implements CodedMetadataEnumInterface {
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div> <div class="de">Instantiiert dieses Enum Object
-	 * mittels eines Codes und einem Display Name</div>
+	 * Display Name</div> <div class="de">Instanziiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>.
 	 *
 	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div>
+	 *            <div class="de">code</div>
 	 * @param displayName
-	 *            <br>
-	 *            <div class="de"> display name</div>
+	 *            the default display name
+	 * @param displayNameEn
+	 *            the display name en
+	 * @param displayNameDe
+	 *            the display name de
+	 * @param displayNameFr
+	 *            the display name fr
+	 * @param displayNameIt
+	 *            the display name it
 	 */
-	private AuthorRole(String code, String displayName) {
+	AuthorRole(String code, String displayName, String displayNameEn, String displayNameDe,
+			String displayNameFr, String displayNameIt) {
 		this.code = code;
-		this.displayName = displayName;
-	}
-
-	/**
-	 * <div class="en">Gets the ehealthconnector Code Object</div>
-	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
-	 *
-	 * @return <div class="en">the code</div>
-	 */
-	public Code getCode() {
-		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
-		return ehcCode;
-	}
-
-	/**
-	 * <div class="en">Gets the OHT CodedMetadataType Object</div>
-	 * <div class="de">Liefert das OHT CodedMetadataType Objekt</div>
-	 *
-	 * @return <div class="en">the codedMetadataType</div>
-	 */
-	@Override
-	public CodedMetadataType getCodedMetadataType() {
-		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
-		cmt.setSchemeName(CODE_SYSTEM_OID);
-		cmt.setCode(this.getCodeValue());
-		cmt.setDisplayName(
-				XdsMetadataUtil.createInternationalString(this.getDisplayName(), "de-ch"));
-		return cmt;
+		displayNames = new HashMap<>();
+		displayNames.put(null, displayName);
+		displayNames.put(LanguageCode.ENGLISH, displayNameEn);
+		displayNames.put(LanguageCode.GERMAN, displayNameDe);
+		displayNames.put(LanguageCode.FRENCH, displayNameFr);
+		displayNames.put(LanguageCode.ITALIAN, displayNameIt);
 	}
 
 	/**
@@ -349,12 +408,22 @@ public enum AuthorRole implements CodedMetadataEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
-	 * display name.</div>
+	 * <div class="en">Gets the display name defined by the language param. If
+	 * there is no english translation, the default display name is
+	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
+	 * falls es keine Englische Übersetzung gibt, wird der default-Name
+	 * zurückgegeben.</div>
 	 *
-	 * @return <div class="en">the display name</div>
+	 * @param languageCode
+	 *            the language code to get the display name for
+	 * @return returns the display name in the desired language. if language not
+	 *         found, display name in german will returned
 	 */
-	public String getDisplayName() {
-		return this.displayName;
+	public String getDisplayName(LanguageCode languageCode) {
+		String displayName = displayNames.get(languageCode);
+		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
+			return displayNames.get(null);
+		}
+		return displayName;
 	}
 }

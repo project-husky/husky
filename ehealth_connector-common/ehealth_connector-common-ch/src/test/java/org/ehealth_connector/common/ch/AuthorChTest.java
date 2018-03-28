@@ -126,8 +126,8 @@ public class AuthorChTest {
 		b.addId(testIdentificator1);
 		assertTrue(isEqual(testIdentificator1, b.getIds().get(0)));
 
-		b.setRoleFunction(AuthorRole.ANDERE);
-		assertEquals(AuthorRole.ANDERE.getCode().getCode(), b.getRoleFunction().getCode());
+		b.setRoleFunction(AuthorRole.HEALTHCARE_PROFESSIONAL);
+		assertEquals(AuthorRole.HEALTHCARE_PROFESSIONAL.getCode().getCode(), b.getRoleFunction().getCode());
 
 		b.setSpeciality(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG);
 		assertEquals(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG,
@@ -139,21 +139,21 @@ public class AuthorChTest {
 		final AuthorCh b1 = new AuthorCh();
 
 		b1.addId(testIdentificator2);
-		b1.setRoleFunction(AuthorRole.ANDERE);
+		b1.setRoleFunction(AuthorRole.HEALTHCARE_PROFESSIONAL);
 		b1.setSpeciality(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG);
 
 		assertTrue(AbstractTestHelper.isEqual(testIdentificator2, b1.getIds().get(0)));
-		assertEquals(AuthorRole.ANDERE.getCode().getCode(), b1.getRoleFunction().getCode());
+		assertEquals(AuthorRole.HEALTHCARE_PROFESSIONAL.getCode().getCode(), b1.getRoleFunction().getCode());
 		assertEquals(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG,
 				b1.getSpecialityEnum());
 
 		final AuthorCh b2 = new AuthorCh();
 		b2.addId(testIdentificator1);
-		b2.setRoleFunction(AuthorRole.APOTHEKER);
+		b2.setRoleFunction(AuthorRole.PHARMACIST);
 		b2.setSpeciality(AuthorSpeciality.FACHARZTINFACHARZT_FUR_CHIRURGIE);
 
 		assertTrue(AbstractTestHelper.isEqual(testIdentificator1, b2.getIds().get(0)));
-		assertEquals(AuthorRole.APOTHEKER.getCode().getCode(), b2.getRoleFunction().getCode());
+		assertEquals(AuthorRole.PHARMACIST.getCode().getCode(), b2.getRoleFunction().getCode());
 		assertEquals(AuthorSpeciality.FACHARZTINFACHARZT_FUR_CHIRURGIE, b2.getSpecialityEnum());
 
 	}

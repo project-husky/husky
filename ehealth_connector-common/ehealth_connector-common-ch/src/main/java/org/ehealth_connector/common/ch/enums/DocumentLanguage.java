@@ -24,64 +24,91 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.valuesets.ValueSetEnumInterface;
 
 /**
- * <div class="en">Document confidentiality as per Annex 3&amp;#160; EPRO-FDHA,
- * Chapter 2.4.&lt;br clear="none"/&gt;</div>
- * <div class="de">Vertraulichkeitsstufe gemäss Anhang 3 EPDV-EDI, Kapitel
- * 2.4.&lt;br clear="none"/&gt;</div> <div class="fr">Niveau de confidentialité
- * selon l'annexe 3 ODEP-DFI, chapitre 2.4.&lt;br clear="none"/&gt;</div>
- * <div class="it">Grado di riservatezza secondo l'allegato 3 OCIP-DFI, capitolo
- * 2.4.&lt;br clear="none"/&gt;</div>
+ * <div class="en">Document language as per Annex 3&amp;#160; EPRO-FDHA, Chapter
+ * 2.7. Defines the language in which the document was written.&lt;br
+ * clear="none"/&gt;</div> <div class="de">Sprache des Dokumentes gemäss Anhang
+ * 3 EPDV-EDI, Kapitel 2.7. Definiert die Sprache in welcher das Dokument
+ * verfasst wurde.&lt;br clear="none"/&gt;</div> <div class="fr">Langue du
+ * document selon l'annexe 3 ODEP-DFI, chapitre 2.7. Définit la langue dans
+ * laquelle est rédigé le document.&lt;br clear="none"/&gt;</div>
+ * <div class="it">Lingua del documento secondo l'allegato 3 OCIP-DFI, capitolo
+ * 2.7. Definisce la lingua nella quale è stato redatto il documento.&lt;br
+ * clear="none"/&gt;</div>
  */
-public enum ConfidentialityCode implements ValueSetEnumInterface {
+public enum DocumentLanguage implements ValueSetEnumInterface {
 
 	/**
-	 * <div class="en">normal</div> <div class="de">normal</div>
-	 * <div class="fr">normal</div> <div class="it">normale</div>
+	 * <div class="en">German</div> <div class="de">Deutsch</div>
+	 * <div class="fr">Allemand</div> <div class="it">Tedesco</div>
 	 */
-	NORMAL("1051000195109", "Normal (qualifier value)", "normal", "normal", "normal", "normale"),
+	GERMAN("de-CH", "German ", "German", "Deutsch", "Allemand", "Tedesco"),
 	/**
-	 * <div class="en">restricted</div> <div class="de">eingeschränkt</div>
-	 * <div class="fr">limité</div> <div class="it">limitato</div>
+	 * <div class="en">French</div> <div class="de">Französisch</div>
+	 * <div class="fr">Français </div> <div class="it">Francese</div>
 	 */
-	RESTRICTED("1131000195104", "Restricted (qualifier value)", "restricted", "eingeschränkt", "limité", "limitato"),
+	FRENCH("fr-CH", "French", "French", "Französisch", "Français ", "Francese"),
 	/**
-	 * <div class="en">secret</div> <div class="de">geheim</div>
-	 * <div class="fr">confidentiel</div> <div class="it">segreto</div>
+	 * <div class="en">Italian</div> <div class="de">Italienisch</div>
+	 * <div class="fr">Italien</div> <div class="it">Italiano</div>
 	 */
-	SECRET("1141000195107", "Secret (qualifier value)", "secret", "geheim", "confidentiel", "segreto");
+	ITALIAN("it-CH", "Italian ", "Italian", "Italienisch", "Italien", "Italiano"),
+	/**
+	 * <div class="en">Rhaeto-Romanic </div> <div class="de">Rätoromanisch</div>
+	 * <div class="fr">Rhéto-roman</div> <div class="it">Romancio</div>
+	 */
+	RHAETO_ROMANIC("rm", "Rhaeto-Romanic", "Rhaeto-Romanic ", "Rätoromanisch", "Rhéto-roman", "Romancio"),
+	/**
+	 * <div class="en">English</div> <div class="de">Englisch</div>
+	 * <div class="fr">Anglais</div> <div class="it">Inglese</div>
+	 */
+	ENGLISH("en-US", "English language (qualifier value)", "English", "Englisch", "Anglais", "Inglese");
 
 	/**
-	 * <div class="en">Code for normal</div> <div class="de">Code für
-	 * normal</div> <div class="fr">Code de normal</div> <div class="it">Code
-	 * per normale</div>
+	 * <div class="en">Code for German</div> <div class="de">Code für
+	 * Deutsch</div> <div class="fr">Code de Allemand</div> <div class="it">Code
+	 * per Tedesco</div>
 	 */
-	public static final String NORMAL_CODE = "1051000195109";
+	public static final String GERMAN_CODE = "de-CH";
 
 	/**
-	 * <div class="en">Code for restricted</div> <div class="de">Code für
-	 * eingeschränkt</div> <div class="fr">Code de limité</div>
-	 * <div class="it">Code per limitato</div>
+	 * <div class="en">Code for French</div> <div class="de">Code für
+	 * Französisch</div> <div class="fr">Code de Français </div>
+	 * <div class="it">Code per Francese</div>
 	 */
-	public static final String RESTRICTED_CODE = "1131000195104";
+	public static final String FRENCH_CODE = "fr-CH";
 
 	/**
-	 * <div class="en">Code for secret</div> <div class="de">Code für
-	 * geheim</div> <div class="fr">Code de confidentiel</div>
-	 * <div class="it">Code per segreto</div>
+	 * <div class="en">Code for Italian</div> <div class="de">Code für
+	 * Italienisch</div> <div class="fr">Code de Italien</div>
+	 * <div class="it">Code per Italiano</div>
 	 */
-	public static final String SECRET_CODE = "1141000195107";
+	public static final String ITALIAN_CODE = "it-CH";
+
+	/**
+	 * <div class="en">Code for Rhaeto-Romanic </div> <div class="de">Code für
+	 * Rätoromanisch</div> <div class="fr">Code de Rhéto-roman</div>
+	 * <div class="it">Code per Romancio</div>
+	 */
+	public static final String RHAETO_ROMANIC_CODE = "rm";
+
+	/**
+	 * <div class="en">Code for English</div> <div class="de">Code für
+	 * Englisch</div> <div class="fr">Code de Anglais</div> <div class="it">Code
+	 * per Inglese</div>
+	 */
+	public static final String ENGLISH_CODE = "en-US";
 
 	/**
 	 * <div class="en">Name of the Code System</div> <div class="de">Name des
 	 * Codes Systems</div>
 	 */
-	public static final String CODE_SYSTEM_NAME = "epd_xds_confidentialityCode";
+	public static final String CODE_SYSTEM_NAME = "epd_xds_documentLanguage";
 
 	/**
 	 * <div class="en">Identifier of the Code System</div>
 	 * <div class="de">Identifikator für das Code System</div>
 	 */
-	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.10.1.5";
+	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.10.1.13";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -91,8 +118,8 @@ public enum ConfidentialityCode implements ValueSetEnumInterface {
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static ConfidentialityCode getEnum(String code) {
-		for (final ConfidentialityCode x : values()) {
+	public static DocumentLanguage getEnum(String code) {
+		for (final DocumentLanguage x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -114,7 +141,7 @@ public enum ConfidentialityCode implements ValueSetEnumInterface {
 			return false;
 		}
 		try {
-			Enum.valueOf(ConfidentialityCode.class, enumName);
+			Enum.valueOf(DocumentLanguage.class, enumName);
 			return true;
 		} catch (final IllegalArgumentException ex) {
 			return false;
@@ -131,7 +158,7 @@ public enum ConfidentialityCode implements ValueSetEnumInterface {
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (final ConfidentialityCode x : values()) {
+		for (final DocumentLanguage x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -175,7 +202,7 @@ public enum ConfidentialityCode implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	ConfidentialityCode(String code, String displayName, String displayNameEn, String displayNameDe,
+	DocumentLanguage(String code, String displayName, String displayNameEn, String displayNameDe,
 			String displayNameFr, String displayNameIt) {
 		this.code = code;
 		displayNames = new HashMap<>();

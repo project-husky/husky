@@ -48,16 +48,15 @@ public class DocumentMetadataChTest extends DocumentMetadataTest {
 
 	@Test
 	public void testConfidentialityCodeEnum() {
-		m.addConfidentialityCode(ConfidentialityCode.ADMINISTRATIVE_DATEN);
-		assertTrue(isEqual(ConfidentialityCode.ADMINISTRATIVE_DATEN.getCode(),
+		m.addConfidentialityCode(ConfidentialityCode.NORMAL);
+		assertTrue(isEqual(ConfidentialityCode.NORMAL.getCode(),
 				m.getConfidentialityCodesEnum().get(0).getCode()));
 	}
 
 	@Test
 	public void testHealthcareFacilityEnum() {
-		m.setHealthcareFacilityTypeCode(
-				HealthcareFacilityTypeCode.AMBULANTE_EINRICHTUNG_INKL_AMBULATORIUM);
-		assertEquals(HealthcareFacilityTypeCode.AMBULANTE_EINRICHTUNG_INKL_AMBULATORIUM,
+		m.setHealthcareFacilityTypeCode(HealthcareFacilityTypeCode.AMBULATORY_CARE_SITE);
+		assertEquals(HealthcareFacilityTypeCode.AMBULATORY_CARE_SITE,
 				m.getHealthcareFacilityTypeCodeEnum());
 	}
 
@@ -69,13 +68,14 @@ public class DocumentMetadataChTest extends DocumentMetadataTest {
 
 	@Test
 	public void testPracticeSettingEnum() {
-		m.setPracticeSettingCode(PracticeSettingCode.ALLERGOLOGIE);
-		assertEquals(PracticeSettingCode.ALLERGOLOGIE, m.getPracticeSettingCodeEnum());
+		m.setPracticeSettingCode(PracticeSettingCode.CLINICAL_IMMUNOLOGY_ALLERGY);
+		assertEquals(PracticeSettingCode.CLINICAL_IMMUNOLOGY_ALLERGY,
+				m.getPracticeSettingCodeEnum());
 	}
 
 	@Test
 	public void testTypeCodeEnum() {
-		m.setTypeCode(TypeCode.ANDERE_NICHT_NAHER_SPEZIFIZIERT);
-		assertEquals(TypeCode.ANDERE_NICHT_NAHER_SPEZIFIZIERT, m.getTypeCodeEnum());
+		m.setTypeCode(TypeCode.OTHER_EPD_DOCUMENT_TYPE);
+		assertEquals(TypeCode.OTHER_EPD_DOCUMENT_TYPE, m.getTypeCodeEnum());
 	}
 }

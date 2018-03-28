@@ -49,7 +49,7 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 		try {
 			ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
 					XdsMetadataUtil.convertEhcIdentificator(patientId),
-					new AvailabilityStatusType[] { status.getAsOhtAvailabilityStatusType() });
+					new AvailabilityStatusType[] { getAsOhtAvailabilityStatusType(status) });
 		} catch (final MalformedStoredQueryException e) {
 			e.printStackTrace();
 		}
@@ -107,7 +107,7 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 					// Switzerland
 					XdsMetadataUtil.convertEhcEnumToCodedMetadataType(confidentialityCodes),
 					XdsMetadataUtil.convertEhcEnumToCodedMetadataType(formatCodes), authorPerson,
-					new AvailabilityStatusType[] { status.getAsOhtAvailabilityStatusType() });
+					new AvailabilityStatusType[] { getAsOhtAvailabilityStatusType(status) });
 		} catch (final MalformedStoredQueryException e) {
 			e.printStackTrace();
 		}
@@ -141,5 +141,24 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 	@Override
 	public StoredQuery getOhtStoredQuery() {
 		return ohtStoredQuery;
+	}
+
+	/**
+	 * <div class="en">Gets the AvailabilityStatus as OHT AvailabilityStatusType
+	 * Object.</div> <div class="de">Liefert AvailabilityStatus als OHT
+	 * AvailabilityStatusType Objekt.</div>
+	 *
+	 * @return <div class="en">the address use as postal address use</div>
+	 */
+	public AvailabilityStatusType getAsOhtAvailabilityStatusType(
+			AvailabilityStatus availabilityStatus) {
+		switch (availabilityStatus) {
+		case APPROVED:
+			return AvailabilityStatusType.APPROVED_LITERAL;
+		case DEPRECATED:
+			return AvailabilityStatusType.DEPRECATED_LITERAL;
+		default:
+			return AvailabilityStatusType.APPROVED_LITERAL;
+		}
 	}
 }
