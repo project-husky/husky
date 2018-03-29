@@ -49,20 +49,22 @@
 		</dependency>
 	</dependencies>
 
-	<plugins>
-		<plugin>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-resources-plugin</artifactId>
-			<configuration>
-				<!-- specify UTF-8, ISO-8859-1 or any other file encoding -->
-				<encoding>UTF-8</encoding>
-				<nonFilteredFileExtensions>
-					<nonFilteredFileExtension>jks</nonFilteredFileExtension>
-					<nonFilteredFileExtension>p12</nonFilteredFileExtension>
-					<nonFilteredFileExtension>jceks</nonFilteredFileExtension>
-				</nonFilteredFileExtensions>
-			</configuration>
-		</plugin>
-	</plugins>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<configuration>
+					<!-- specify UTF-8, ISO-8859-1 or any other file encoding -->
+					<encoding>UTF-8</encoding>
+					<nonFilteredFileExtensions>
+						<nonFilteredFileExtension>jks</nonFilteredFileExtension>
+						<nonFilteredFileExtension>p12</nonFilteredFileExtension>
+						<nonFilteredFileExtension>jceks</nonFilteredFileExtension>
+					</nonFilteredFileExtensions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
