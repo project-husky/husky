@@ -298,8 +298,8 @@ public interface XUserAssertionRequestBuilder {
 	 * <div class="it">ITALIANO</div>
 	 *
 	 * @return 
-	 *  <div class="en">a new AuthnRequest instance with the params set</div>
-	 *  <div class="de">eine neue AuthRequest instanz mit den gesetzten parametern</div>
+	 *  <div class="en">a new XUserAssertionRequest instance with the params set</div>
+	 *  <div class="de">eine neue XUserAssertionRequest instanz mit den gesetzten parametern</div>
 	 *  <div class="fr">VOICIFRANCAIS</div>
 	 *  <div class="it">ITALIANO</div>
 	 *  <!-- @formatter:on -->
