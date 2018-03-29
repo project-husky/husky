@@ -24,8 +24,8 @@ public interface AuthnRequestBuilder {
 	/**
 	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set the id on the authnrequest.</div>
-	 * <div class="de">Methode um die id im authnrequest zu setzen.</div>
+	 * <div class="en">Builds the id on the authnrequest.</div>
+	 * <div class="de">Bildet die id im authnrequest.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
@@ -47,8 +47,8 @@ public interface AuthnRequestBuilder {
 	/**
 	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set the issueInstant on the authnrequest.</div>
-	 * <div class="de">Methode um den issueInstant setzen.</div>
+	 * <div class="en">Builds the issueInstant on the authnrequest.</div>
+	 * <div class="de">Bildet den issueInstant im authnrequest.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 *
@@ -69,8 +69,8 @@ public interface AuthnRequestBuilder {
 	/**
 	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">Builds the assertion consumer service url attribute.</div>
-	 * <div class="de">Buildet das assertion consumer service url attribute.</div>
+	 * <div class="en">Builds the assertion consumer service url on the authnrequest.</div>
+	 * <div class="de">Bildet das assertion consumer service url im authnrequest.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 *
@@ -91,8 +91,8 @@ public interface AuthnRequestBuilder {
 	/**
 	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">Builds the assertion consumer service url attribute.</div>
-	 * <div class="de">Buildet das assertion consumer service index attribute.</div>
+	 * <div class="en">Builds the assertion consumer service index on the authnrequest.</div>
+	 * <div class="de">Buildet das assertion consumer service index im authnrequest.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 *
@@ -113,8 +113,8 @@ public interface AuthnRequestBuilder {
 	/**
 	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">HEREISENGLISH</div>
-	 * <div class="de">HIERISTDEUTSCH</div>
+	 * <div class="en">Builds the attribute consumer service index on the authnrequest.</div>
+	 * <div class="de">Buildet den attribute consumer service index im authnrequest.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 *
@@ -135,8 +135,8 @@ public interface AuthnRequestBuilder {
 	/**
 	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">Building the destination attribute.</div>
-	 * <div class="de">Bildet das destination attribute.</div>
+	 * <div class="en">Building the destination on the authnrequest.</div>
+	 * <div class="de">Bildet das destination im authnrequest.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 *
@@ -157,8 +157,8 @@ public interface AuthnRequestBuilder {
 	/**
 	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">Building the provider name attribute.</div>
-	 * <div class="de">Bildet das destination attribute.</div>
+	 * <div class="en">Building the provider name on the authnrequest.</div>
+	 * <div class="de">Bildet das destination im authnrequest.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 *
@@ -179,8 +179,8 @@ public interface AuthnRequestBuilder {
 	/**
 	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">Building the protocol binding attribute.</div>
-	 * <div class="de">Bildet das protocol binding attribute.</div>
+	 * <div class="en">Building the protocol binding on the authnrequest.</div>
+	 * <div class="de">Bildet das protocol binding im authnrequest.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 *
@@ -201,8 +201,8 @@ public interface AuthnRequestBuilder {
 	/**
 	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">Building the consent attribute.</div>
-	 * <div class="de">Bildet das consent attribute.</div>
+	 * <div class="en">Building the consent on the authnrequest.</div>
+	 * <div class="de">Bildet das consent im authnrequest.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 *
@@ -223,8 +223,8 @@ public interface AuthnRequestBuilder {
 	/**
 	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">Building the forceAuthn attribute.</div>
-	 * <div class="de">Bildet das forceAuthn attribute.</div>
+	 * <div class="en">Building the forceAuthn on the authnrequest.</div>
+	 * <div class="de">Bildet das forceAuthn im authnrequest.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 *
@@ -245,8 +245,8 @@ public interface AuthnRequestBuilder {
 	/**
 	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">Builds the Issuer element.</div>
-	 * <div class="de">Buildet das Issuer element.</div>
+	 * <div class="en">Builds the Issuer element on the authnrequest.</div>
+	 * <div class="de">Buildet das Issuer element im authnrequest.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 * 
@@ -267,8 +267,8 @@ public interface AuthnRequestBuilder {
 	/**
 	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">HEREISENGLISH</div>
-	 * <div class="de">Setzt das Flag Allow Create Name ID.</div>
+	 * <div class="en">Builds the NameIDpolicy.AllowCreate on the authnrequest.</div>
+	 * <div class="de">Bildet das NameIDpolicy.AllowCreate im authnrequest.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 * 
@@ -289,8 +289,8 @@ public interface AuthnRequestBuilder {
 	/**
 	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">HEREISENGLISH</div>
-	 * <div class="de">Setzt das Format für die Name ID.</div>
+	 * <div class="en">Builds the NameIDpolicy.Format on the authnrequest.</div>
+	 * <div class="de">Bildet das NameIDpolicy.Format im authnrequest.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 *
@@ -311,8 +311,8 @@ public interface AuthnRequestBuilder {
 	/**
 	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">HEREISENGLISH</div>
-	 * <div class="de">HIERISTDEUTSCH</div>
+	 * <div class="en">Builds the subject on the authnrequest.</div>
+	 * <div class="de">Bildet das subject im authnrequest.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 * 
@@ -333,8 +333,8 @@ public interface AuthnRequestBuilder {
 	/**
 	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">Creates the AuthnRequest.</div>
-	 * <div class="de">Erstellt den AuthnRequest.</div>
+	 * <div class="en">Creates a concrete instance of AuthnRequest with setted params.</div>
+	 * <div class="de">Erstellt die konkrete instanz des AuthnRequests mit den gesetzten parametern.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 *
