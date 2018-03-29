@@ -79,6 +79,8 @@ public class OpenSaml2DeserializerImpl<T> implements OpenSaml2Deserializer<T> {
 	 *
 	 * @see org.ehealth_connector.security.deserialization.OpenSaml2Deserializer#deserializeFromXml(org.w3c.dom.Element)
 	 */
+
+	@SuppressWarnings("unchecked")
 	@Override
 	public T deserializeFromXml(Element aXmlElement) throws DeserializeException {
 		try {
