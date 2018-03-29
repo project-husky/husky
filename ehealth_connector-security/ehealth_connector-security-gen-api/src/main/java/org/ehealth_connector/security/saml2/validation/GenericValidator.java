@@ -45,9 +45,14 @@ public interface GenericValidator<T> {
 	 * <div class="de">Der truststore</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
+	 * @param password
+	 * <div class="en">the password for the store/key</div>
+	 * <div class="de">Das passwort für den Store/Key</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
 	 */
-	public void setTruststore(KeyStore trustStore);
+	public void setTrustStore(KeyStore trustStore, String password);
 
 	/**
 	 * 
@@ -62,6 +67,11 @@ public interface GenericValidator<T> {
 	 * <div class="de">die Instanz vom Typ t</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
+	 * @param aAlias
+	 * <div class="en">the the alias of the key</div>
+	 * <div class="de">der Alis des Key der gebraucht werden soll</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
 	 * @throws ValidationException
 	 * 	<div class="en">will be thrown when an error occures while validating the instance of type T</div>
 	 *  <div class="de">wird geworfen wenn ein Fehler beim Validieren der Instance von T auftreten</div>
@@ -69,5 +79,5 @@ public interface GenericValidator<T> {
 	 *  <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
 	 */
-	public void validate(T aType) throws ValidationException;
+	public void validate(T aType, String aAlias) throws ValidationException;
 }
