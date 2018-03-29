@@ -19,6 +19,9 @@ package org.ehealth_connector.security.deserialization.impl;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import org.ehealth_connector.security.authentication.AuthnRequest;
 import org.ehealth_connector.security.exceptions.DeserializeException;
 import org.ehealth_connector.security.utilities.impl.AbstractTestHelper;
@@ -31,24 +34,15 @@ public class AuthnRequestDeserializerImplTest extends AbstractTestHelper {
 	private AuthnRequestDeserializerImpl testDeserializer;
 	private String testXmlString;
 	private Element testXmlElement;
+	private byte[] testXmlByteArray;
 
 	@Override
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-
 		testDeserializer = new AuthnRequestDeserializerImpl();
-
-		testXmlString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
-				+ "<saml2p:AuthnRequest xmlns:saml2p=\"urn:oasis:names:tc:SAML:2.0:protocol\" "
-				+ "AssertionConsumerServiceURL=\"https://test.it.now.ch/do/it/now/good\" "
-				+ "Destination=\"https://test.soe.healthcare/idp\" " + "ID=\"296b30cf-0ffc-434d-8ea1-3117d89e631d\" "
-				+ "IssueInstant=\"2018-02-21T12:49:01.539Z\" " + "ProtocolBinding=\"POST\" "
-				+ "ProviderName=\"IG eHealthConnector\" " + "Version=\"2.0\">\n"
-				+ "	<saml2:Issuer xmlns:saml2=\"urn:oasis:names:tc:SAML:2.0:assertion\">MyIssuer</saml2:Issuer>\n"
-				+ "	<saml2p:NameIDPolicy AllowCreate=\"true\" Format=\"urn:oasis:names:tc:SAML:2.0:nameid-format:transient\"/>\n"
-				+ "</saml2p:AuthnRequest>";
-
+		testXmlByteArray = Files.readAllBytes(Paths.get(getClass().getResource("/saml2/AuthnRequest.xml").toURI()));
+		testXmlString = new String(testXmlByteArray);
 		testXmlElement = new OpenSaml2DeserializerImpl().deserializeFromByteArrayToXmlElement(testXmlString.getBytes());
 	}
 
@@ -94,7 +88,7 @@ public class AuthnRequestDeserializerImplTest extends AbstractTestHelper {
 	 */
 	@Test
 	public void testFromXmlByteArray() throws DeserializeException {
-		final AuthnRequest ref = testDeserializer.fromXmlByteArray(testXmlString.getBytes());
+		final AuthnRequest ref = testDeserializer.fromXmlByteArray(testXmlByteArray);
 		assertNotNull(ref);
 	}
 

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><saml2p:AuthnRequest xmlns:saml2p="urn:oasis:names:tc:SAML:2.0:protocol" AssertionConsumerServiceURL="https://arpage.ch/saml/testprog" Destination="http://fed.hin.ch/saml/2.0/idp/" ID="6372bbe2-b53c-4f92-beac-788b5da1fdda" IssueInstant="2018-02-23T15:18:50.849Z" ProtocolBinding="POST" ProviderName="Arpage AG Testingapp" Version="2.0"><saml2:Issuer xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion">https://arpage.ch/saml/testprog</saml2:Issuer><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<ds:SignedInfo>
+<ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+<ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/>
+<ds:Reference URI="#6372bbe2-b53c-4f92-beac-788b5da1fdda">
+<ds:Transforms>
+<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+<ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
+</ds:Transforms>
+<ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+<ds:DigestValue>IoxPiriHdoQyCegNuk4NrBEqDSNts2E7Nq5cjxmzDyQ=</ds:DigestValue>
+</ds:Reference>
+</ds:SignedInfo>
+<ds:SignatureValue>
+WBW/cy6Lj5ziFTBacGQwlCeamkAy0SawnXuxYGbjWwLVShLOctO5O7bjA/TxKStz6s2ePI+IxYCc
+v+HULu4mxSdUkyouyhU6hEfijeXdvGi0Skyii7n7pkIR1hIOU9w4P+K//fCBMgRVfeI4By4D4Ozf
+SD/pmDdpVbBCeFTsw/rX8jAv9u7TpEXiWfpaQP2OtcIHOoOOcYptn9AafjWaUrboKrnCLuAXH3RC
+6ay6NYRLGZhMHwcuK8aKcavZcFBPKQUOh0l5K8mGhh+FxO/0P8/SFu8aoIHdkO22DpYRCs3v2BzA
+1qEacE136LqmZmmUKgcrox93JtjR25IP58yunA==
+</ds:SignatureValue>
+<ds:KeyInfo><ds:X509Data><ds:X509Certificate>MIIGKzCCBBOgAwIBAgIJAQARAAABEQCwMA0GCSqGSIb3DQEBCwUAMIGsMQswCQYDVQQGEwJDSDEN
+MAsGA1UECAwEQmVybjERMA8GA1UEBwwIR3VtbGlnZW4xGDAWBgNVBAkMD01hdHRlbnN0cmFzc2Ug
+OTENMAsGA1UEEQwEMzA3MzEgMB4GA1UECgwXU3RpZnR1bmcgbWVpbmVpbXBmdW5nZW4xCzAJBgNV
+BAsMAkNBMSMwIQYDVQQDDBpTdGlmdHVuZyBtZWluZWltcGZ1bmdlbiBDQTAeFw0xODAxMzAwNzM5
+MjhaFw0yMTAyMDMwNzM5MjhaMIHaMQswCQYDVQQGEwJDSDENMAsGA1UECAwEQmVybjERMA8GA1UE
+BwwIR3VtbGlnZW4xIDAeBgNVBAoMF1N0aWZ0dW5nIG1laW5laW1wZnVuZ2VuMRIwEAYDVQQLDAlB
+dXRoL1NhbWwxGDAWBgNVBAkMD01hdHRlbnN0cmFzc2UgOTENMAsGA1UEEQwEMzA3MzEkMCIGA1UE
+AwwbbWVpbmVpbXBmdW5nZW4td2ViYXBwLXRyYWluMSQwIgYJKoZIhvcNAQkBFhVzdXBwb3J0QG15
+dmFjY2luZXMuY2gwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQDrPtjxZAq67M1lMQ3B
+opHwNILXV2Jv77Z1eEwqJyZSWSqluvcVhECTIW6dVB7+m9atQpWUwfMy79Xxe1TeipNiEhO9r9iT
+R3j6D46jLz2Y+Ylr1fFPpmZ1I8Ca3u9sVQjrITk2GNe+iJwxJHcU7peKou/OXat5dz6hofXoK7cM
+TZegO7ebI+f5OdMOc6AKrtMQGWDVfwGREQxN0dhBcIUQclQzd1TySXyN+Rsop3QIT8gxV7mvp5YF
+7lvfnX7CLERBXrLHTnA2jtVwPChBrplCt/dEpp8uCH6ocR4ZNGYmH9p3GQXS0ZI9BTD+K91Yi0Yh
++u561Z5DegnhgJcNTychAgMBAAGjggEeMIIBGjAJBgNVHRMEAjAAMBEGCWCGSAGG+EIBAQQEAwIH
+gDALBgNVHQ8EBAMCBaAwEwYDVR0lBAwwCgYIKwYBBQUHAwIwNAYJYIZIAYb4QgENBCcWJVVzZXIg
+Q2VydGlmaWNhdGUgb2YgbWVpbmVpbXBmdW5nZW4uY2gwFwYEgQMBAwQPDA03NjAxMDAxNDAxNTcw
+MDQGC2CFdAUeAYEUAQIBBCUMI01ZVjpQUk9ELE1ZVjpURVNULFNPRTpQUk9ELFNPRTpURVNUMB0G
+A1UdDgQWBBRwNKc1RwC6meN446MBosrruj7lXDA0BgNVHR8ELTArMCmgJ6AlhiNodHRwczovL3d3
+dy5hcnBhZ2UuY2gvcGtpL2NhY3JsLmNybDANBgkqhkiG9w0BAQsFAAOCAgEAzORuqrB0X2P8nEEo
+8l/D5sx++yXFfJxv2+0cz+xKM+kZyRmfPxZb/ko2l7dqrD23NpZ+BtuQx3TzQ8UsvAKsi7I6UeKa
+935ybU2TldFi4McO4o6bk1V/ufjA9z41Jq0O/QtOL0DryqvmBcKyqVR9sVZqUNsEZlq4ovZxf4F9
+JhSLIj2otFgjjD9XYPnDzkmHrpR9mHToAIqzlyqlWc7n5ZGTdRrSGqIfVCgOrRzYLrH535mXIr1G
+IMSFPv7Gqx8IqawzuJG8ME8a9WcvqYUKqFBrZhXDXtVDh4YEm5gemurBzPF0eloGTv5OmcG13tld
+R6f9IY1Pz3WFb5LeI0XOCZeWg9AAY1mWpvAXMF4ri5ClwyRR900JVehDiU/OEqJZBdsHCqHbifH/
+01F8PxqlFl15CcAFW7Ly9Scpp0hMPoak1MufbT94KpnfKGYmVQjiR9i1z86QQrYu2yr5uLDuiQET
+IcoJsX6vf10vcdMRqX3ysZ1sqrztXjeV31m2IiXhY4EqY6k0HuGtu5jTCVmj4Eow4zyFdQm3NvZU
+TWvcIQv9BJLM9SOXCN6YmsNVlQCJmWlCJKLzpWE8M3vxSeJN2q4GGBSeb0tSoL+CFo+w179sGBvT
+sLRAN/6kULQcozFFTMj0VJp1jfw0rwfL10pFVgr7ImeAnYmSQXejCwMV2jA=</ds:X509Certificate></ds:X509Data></ds:KeyInfo></ds:Signature><saml2p:NameIDPolicy AllowCreate="true" Format="urn:oasis:names:tc:SAML:2.0:nameid-format:transient"/></saml2p:AuthnRequest>

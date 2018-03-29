@@ -17,39 +17,66 @@
  */
 package org.ehealth_connector.security.deserialization.impl;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertNotNull;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
+import org.ehealth_connector.security.exceptions.DeserializeException;
+import org.ehealth_connector.security.saml2.Response;
+import org.ehealth_connector.security.utilities.impl.AbstractTestHelper;
 import org.junit.Before;
 import org.junit.Test;
+import org.w3c.dom.Element;
 
-public class ResponseDeserializerImplTest {
+public class ResponseDeserializerImplTest extends AbstractTestHelper {
 
+	private ResponseDeserializerImpl testDeserializer;
+	private String testXmlString;
+	private byte[] testXmlByteArray;
+	private Element testXmlElement;
+
+	@Override
 	@Before
 	public void setUp() throws Exception {
+		super.setUp();
+		testDeserializer = new ResponseDeserializerImpl();
+		testXmlByteArray = Files.readAllBytes(Paths.get(getClass().getResource("/saml2/Response.xml").toURI()));
+		testXmlString = new String(testXmlByteArray);
+		testXmlElement = new OpenSaml2DeserializerImpl().deserializeFromByteArrayToXmlElement(testXmlString.getBytes());
 	}
 
 	/**
 	 * Test method for {@link org.ehealth_connector.security.deserialization.impl.ResponseDeserializerImpl#fromXmlElement(org.w3c.dom.Element)}.
+	 * 
+	 * @throws DeserializeException
 	 */
 	@Test
-	public void testFromXmlElement() {
-		fail("Not yet implemented");
+	public void testFromXmlElement() throws DeserializeException {
+		final Response ref = testDeserializer.fromXmlElement(testXmlElement);
+		assertNotNull(ref);
 	}
 
 	/**
 	 * Test method for {@link org.ehealth_connector.security.deserialization.impl.ResponseDeserializerImpl#fromXmlString(java.lang.String)}.
+	 * 
+	 * @throws DeserializeException
 	 */
 	@Test
-	public void testFromXmlString() {
-		fail("Not yet implemented");
+	public void testFromXmlString() throws DeserializeException {
+		final Response ref = testDeserializer.fromXmlString(testXmlString);
+		assertNotNull(ref);
 	}
 
 	/**
 	 * Test method for {@link org.ehealth_connector.security.deserialization.impl.ResponseDeserializerImpl#fromXmlByteArray(byte[])}.
+	 * 
+	 * @throws DeserializeException
 	 */
 	@Test
-	public void testFromXmlByteArray() {
-		fail("Not yet implemented");
+	public void testFromXmlByteArray() throws DeserializeException {
+		final Response ref = testDeserializer.fromXmlByteArray(testXmlByteArray);
+		assertNotNull(ref);
 	}
 
 }
