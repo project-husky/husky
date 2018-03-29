@@ -7,50 +7,63 @@
  */
 package org.ehealth_connector.security.authentication;
 
-import java.util.Calendar;
-
-import org.ehealth_connector.security.core.SecurityObject;
+import org.ehealth_connector.security.saml2.Base;
+import org.ehealth_connector.security.saml2.Subject;
 
 /**
- * @since Jan 17, 2018 3:05:16 PM
- *
+ * <!-- @formatter:off -->
+ * <div class="en">Interface describing the methods of authnrequest.</div>
+ * <div class="de">Interface beschreibt die methoden für den authnrequest.</div>
+ * <div class="fr">VOICIFRANCAIS</div>
+ * <div class="it">ITALIANO</div>
+ * <!-- @formatter:on -->
  */
-public interface AuthnRequest<T> extends SecurityObject<T> {
+public interface AuthnRequest extends Base {
 
 	/**
 	 * 
-	 * @formatter:off
-	 * <div class="en">get the protocol binding value.</div>
-	 * <div class="de">holt den protocol binding wert.</div>
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the protocol binding value.</div>
+	 * <div class="de">Methode um den protocol binding wert zu holen.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
-	 * @formatter:on
+	 * 
 	 *
-	 * @return the protocol binding value as string
+	 * @return 
+	 *  <div class="en">the protocol binding value as string</div>
+	 *  <div class="de">der protocol binding wert als string</div>
+	 *  <div class="fr">VOICIFRANCAIS</div>
+	 *  <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
 	 */
 	String getProtocolBinding();
 
 	/**
 	 * 
-	 * @formatter:off
-	 * <div class="en">get the assertion consumer service index.</div>
-	 * <div class="de">holt den  wert.</div>
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the assertion consumer service index.</div>
+	 * <div class="de">Methode um den assertion consumer service index zu holen.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
-	 * @formatter:on
+	 * 
 	 *
-	 * @return the assertion consumer service index as integer
+	 * @return  
+	 *  <div class="en">the assertion consumer service index as integer</div>
+	 *  <div class="de">der assertion consumer service index wert als string</div>
+	 *  <div class="fr">VOICIFRANCAIS</div>
+	 *  <div class="it">ITALIANO</div>
+	 *  <!-- @formatter:on -->
 	 */
 	Integer getAssertionConsumerServiceIndex();
 
 	/**
 	 * 
-	 * @formatter:off
-	 * <div class="en">get assertion consumer service url.</div>
-	 * <div class="de">holt den  wert.</div>
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get assertion consumer service url.</div>
+	 * <div class="de">Method um die assertion consumer service url zu holen .</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
-	 * @formatter:on
+	 * <!-- @formatter:on -->
 	 *
 	 * @return the assertion consumer service url as string
 	 */
@@ -58,12 +71,12 @@ public interface AuthnRequest<T> extends SecurityObject<T> {
 
 	/**
 	 * 
-	 * @formatter:off
-	 * <div class="en">get attribute consumer service index.</div>
-	 * <div class="de">holt den  wert.</div>
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get attribute consumer service index.</div>
+	 * <div class="de">Method um den attribute consumer service index zu holen.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
-	 * @formatter:on
+	 * <!-- @formatter:on -->
 	 *
 	 * @return the attribute consumer service index as integer
 	 */
@@ -71,12 +84,12 @@ public interface AuthnRequest<T> extends SecurityObject<T> {
 
 	/**
 	 * 
-	 * @formatter:off
-	 * <div class="en">get the provider name.</div>
-	 * <div class="de">holt den  wert.</div>
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the provider name.</div>
+	 * <div class="de">Methode um den provider name zu holen.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
-	 * @formatter:on
+	 * <!-- @formatter:on -->
 	 *
 	 * @return the provider name as string
 	 */
@@ -84,12 +97,12 @@ public interface AuthnRequest<T> extends SecurityObject<T> {
 
 	/**
 	 * 
-	 * @formatter:off
-	 * <div class="en">get the value.</div>
-	 * <div class="de">holt den  wert.</div>
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the forceauthn value.</div>
+	 * <div class="de">Methode um den forceauthn wert zu holen.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
-	 * @formatter:on
+	 * <!-- @formatter:on -->
 	 *
 	 * @return the force authn value
 	 */
@@ -97,12 +110,12 @@ public interface AuthnRequest<T> extends SecurityObject<T> {
 
 	/**
 	 * 
-	 * @formatter:off
-	 * <div class="en">get the value.</div>
-	 * <div class="de">holt den  wert.</div>
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the consent.</div>
+	 * <div class="de">Methode um den consent zu holen.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
-	 * @formatter:on
+	 * <!-- @formatter:on -->
 	 *
 	 * @return the consent as string
 	 */
@@ -110,76 +123,51 @@ public interface AuthnRequest<T> extends SecurityObject<T> {
 
 	/**
 	 * 
-	 * @formatter:off
-	 * <div class="en">get the value.</div>
-	 * <div class="de">holt den  wert.</div>
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the destination.</div>
+	 * <div class="de">Methode um die destination zu holen.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
-	 * @formatter:on
+	 * <!-- @formatter:on -->
 	 *
 	 * @return
 	 */
 	String getDestination();
 
 	/**
-	 * 
-	 * @formatter:off
-	 * <div class="en">get the value.</div>
-	 * <div class="de">holt den  wert.</div>
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the nameidpolicy allowcreate value.</div>
+	 * <div class="de">Methode um den nameidpolicy allowcreate wert zu holen.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
-	 * @formatter:on
+	 * <!-- @formatter:on --
 	 *
-	 * @return he issue instant as calendar
-	 */
-	Calendar getIssueInstant();
-
-	/**
-	 * 
-	 * @formatter:off
-	 * <div class="en">get the value.</div>
-	 * <div class="de">holt den  wert.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * @formatter:on
-	 *
-	 * @return
-	 */
-	String getID();
-
-	/**
-	 * @formatter:off
-	 * <div class="en">get the value.</div>
-	 * <div class="de">holt den  wert.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * @formatter:on
-	 *
-	 * @return the issuer value as string
-	 */
-	String getIssuer();
-
-	/**
-	 * @formatter:off
-	 * <div class="en">get the value.</div>
-	 * <div class="de">holt den  wert.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * @formatter:on
-	 *
-	 * @return the NameIdPolicy allow create value
+	 * @return the NameIdPolicy.AllowCreate as Boolean
 	 */
 	Boolean getNameIdPolicyAllowCreate();
 
 	/**
-	 * @formatter:off
-	 * <div class="en">get the value.</div>
-	 * <div class="de">holt den  wert.</div>
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the nameidpolicy format value.</div>
+	 * <div class="de">Methode um den nameidpolicy format wert zu holen.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
-	 * @formatter:on
+	 * <!-- @formatter:on -->
 	 *
-	 * @return the NameIdPolicy format as string
+	 * @return the NameIdPolicy.Format as string
 	 */
 	String getNameIdPolicyFormat();
+
+	/**
+	 * 
+	 * <!-- @formatter:off -->
+	 * <<div class="en">Method to get the subject value.</div>
+	 * <div class="de">Methode um das Subject zu holen.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 *
+	 * @return the subject
+	 */
+	Subject getSubject();
 }
