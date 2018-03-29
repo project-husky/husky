@@ -80,9 +80,9 @@ public class FhirCdaChVacd /* extends AbstractFhirCdaCh */ {
 	 * MedicationStatement Resource and provides extension attributes in order
 	 * to fulfill the needs for HL7 CDA-CH-VACD creation
 	 *
-	 * @formatter:off
+	 * <!-- @formatter:off -->
 	 * @see "http://jamesagnew.github.io/hapi-fhir/index.html"
-	 * @formatter:on</div><div class="de"></div><div class="fr"></div>
+	 * <!-- @formatter:on --></div><div class="de"></div><div class="fr"></div>
 	 */
 	/**
 	 * <div class="en"></div><div class="de"></div><div class="fr"></div>
