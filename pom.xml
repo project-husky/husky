@@ -24,6 +24,7 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 		<module>ehealth_connector-fhir</module>
 		<module>ehealth_connector-converters</module>
 		<module>ehealth_connector-codegenerator</module>
+                <module>ehealth_connector-security</module>
 	</modules>
 
 	<repositories>
