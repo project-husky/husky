@@ -8,19 +8,18 @@
 package org.ehealth_connector.security.exceptions;
 
 /**
- * 
  * <!-- @formatter:off -->
- * <div class="en">Class implementing the SerializeException.</div>
- * <div class="de">Klasse implemetiert die SerializeException.</div>
+ * <div class="en">Class implementing the SigningException.</div>
+ * <div class="de">Klasse implemetiert die SigningException.</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
- * 
  * <!-- @formatter:on -->
+ *
  */
-public class SerializeException extends Exception {
+public class SigningException extends Exception {
 
 	/** Field referencing the long */
-	private static final long serialVersionUID = 7674424286398103789L;
+	private static final long serialVersionUID = 5287879924827693361L;
 
 	/**
 	 * 
@@ -32,7 +31,7 @@ public class SerializeException extends Exception {
 	 * 
 	 * <!-- @formatter:on -->
 	 */
-	public SerializeException() {
+	public SigningException() {
 		super();
 	}
 
@@ -51,7 +50,7 @@ public class SerializeException extends Exception {
 	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
 	 */
-	public SerializeException(Throwable cause) {
+	public SigningException(Throwable cause) {
 		super(cause);
 	}
 
@@ -70,7 +69,7 @@ public class SerializeException extends Exception {
 	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
 	 */
-	public SerializeException(String message) {
+	public SigningException(String message) {
 		super(message);
 	}
 
