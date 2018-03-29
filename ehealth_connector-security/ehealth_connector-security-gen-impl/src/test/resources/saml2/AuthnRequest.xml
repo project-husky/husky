@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8"?><saml2p:AuthnRequest xmlns:saml2p="urn:oasis:names:tc:SAML:2.0:protocol" AssertionConsumerServiceURL="https://arpage.ch/saml/testprog" Destination="http://fed.hin.ch/saml/2.0/idp/" ID="6372bbe2-b53c-4f92-beac-788b5da1fdda" IssueInstant="2018-02-23T15:18:50.849Z" ProtocolBinding="POST" ProviderName="Arpage AG Testingapp" Version="2.0"><saml2:Issuer xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion">https://arpage.ch/saml/testprog</saml2:Issuer><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+<?xml version="1.0" encoding="UTF-8"?>
+<saml2p:AuthnRequest xmlns:saml2p="urn:oasis:names:tc:SAML:2.0:protocol" AssertionConsumerServiceURL="https://arpage.ch/saml/testprog" Destination="http://fed.hin.ch/saml/2.0/idp/" ID="6372bbe2-b53c-4f92-beac-788b5da1fdda" IssueInstant="2018-02-23T15:18:50.849Z" ProtocolBinding="POST" ProviderName="Arpage AG Testingapp" Version="2.0"><saml2:Issuer xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion">https://arpage.ch/saml/testprog</saml2:Issuer><ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
 <ds:SignedInfo>
 <ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/>
 <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha512"/>

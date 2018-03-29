@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XMLTooling xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.opensaml.org/xmltooling-config"
+xmlns:hl7="urn:hl7-org:v3">
+    
+    <ObjectProviders>
+
+        <!-- PurposeOfUse -->
+        <ObjectProvider qualifiedName="hl7:PurposeOfUse">
+            <BuilderClass className="org.ehealth_connector.security.hl7v3.impl.PurposeOfUseBuilder"/>
+            <MarshallingClass className="org.ehealth_connector.security.hl7v3.impl.PurposeOfUseMarshaller"/>
+            <UnmarshallingClass className="org.ehealth_connector.security.hl7v3.impl.PurposeOfUseUnmarshaller"/>
+        </ObjectProvider>
+    
+                
+    </ObjectProviders>
+
+</XMLTooling>

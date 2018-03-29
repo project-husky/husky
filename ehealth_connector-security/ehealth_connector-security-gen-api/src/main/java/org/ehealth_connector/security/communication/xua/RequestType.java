@@ -19,13 +19,38 @@ package org.ehealth_connector.security.communication.xua;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="en">Enumeration for ws-trust request type.</div>
+ * <div class="de">Enummerierung for den WS-Trust Request Typ</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
  * 
  * <!-- @formatter:on -->
  */
 public enum RequestType {
+
+	WST_ISSUE("http://docs.oasis-open.org/ws-sx/ws-trust/200512/Issue"), //
+	WST_RENEW("http://docs.oasis-open.org/ws-sx/ws-trust/200512/Renew"), //
+	WST_CANCEL("http://docs.oasis-open.org/ws-sx/ws-trust/200512/Cancel"), //
+	WST_VALIDATE(" http://docs.oasis-open.org/ws-sx/ws-trust/200512/Validate");
+
+	private String code;
+
+	RequestType(String aCode) {
+		this.code = aCode;
+	}
+
+	@Override
+	public String toString() {
+		return code;
+	}
+
+	public static RequestType getEnum(String code) {
+		for (final RequestType x : values()) {
+			if (x.toString().equals(code)) {
+				return x;
+			}
+		}
+		return null;
+	}
 
 }

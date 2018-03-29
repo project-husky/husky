@@ -15,37 +15,26 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.security.communication.xua;
+package org.ehealth_connector.security.deserialization.impl;
+
+import org.ehealth_connector.security.deserialization.OpenSaml2Deserializer;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="en">Abstract implementation class with the common methods and fields.</div>
+ * <div class="de">Abstrakte implementations Klasse mit den gemeinsamen Methoden und Feldern.</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
- * 
  * <!-- @formatter:on -->
  */
-public enum TokenType {
-	OASIS_WSS_SAML_PROFILE_11_SAMLV20("http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0");
+public abstract class AbstractDeserializerImpl<T> {
+	private OpenSaml2Deserializer<T> openSamlDeserializer;
 
-	private String code;
-
-	TokenType(String aCode) {
-		this.code = aCode;
+	public AbstractDeserializerImpl() {
+		openSamlDeserializer = new OpenSaml2DeserializerImpl<>();
 	}
 
-	@Override
-	public String toString() {
-		return code;
-	}
-
-	public static TokenType getEnum(String code) {
-		for (final TokenType x : values()) {
-			if (x.toString().equals(code)) {
-				return x;
-			}
-		}
-		return null;
+	protected OpenSaml2Deserializer<T> getOpenSamlDeserializer() {
+		return openSamlDeserializer;
 	}
 }

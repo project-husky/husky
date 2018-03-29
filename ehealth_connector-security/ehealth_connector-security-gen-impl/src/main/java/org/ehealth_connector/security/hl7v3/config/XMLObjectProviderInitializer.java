@@ -15,7 +15,9 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.security.communication.xua;
+package org.ehealth_connector.security.hl7v3.config;
+
+import org.opensaml.core.xml.config.AbstractXMLObjectProviderInitializer;
 
 /**
  * <!-- @formatter:off -->
@@ -26,26 +28,19 @@ package org.ehealth_connector.security.communication.xua;
  * 
  * <!-- @formatter:on -->
  */
-public enum TokenType {
-	OASIS_WSS_SAML_PROFILE_11_SAMLV20("http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0");
+public class XMLObjectProviderInitializer extends AbstractXMLObjectProviderInitializer {
 
-	private String code;
+	/** Config resources. */
+	private static String[] configs = { "/hl7-config.xml", };
 
-	TokenType(String aCode) {
-		this.code = aCode;
-	}
-
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.opensaml.core.xml.config.AbstractXMLObjectProviderInitializer#getConfigResources()
+	 */
 	@Override
-	public String toString() {
-		return code;
+	protected String[] getConfigResources() {
+		return configs;
 	}
 
-	public static TokenType getEnum(String code) {
-		for (final TokenType x : values()) {
-			if (x.toString().equals(code)) {
-				return x;
-			}
-		}
-		return null;
-	}
 }

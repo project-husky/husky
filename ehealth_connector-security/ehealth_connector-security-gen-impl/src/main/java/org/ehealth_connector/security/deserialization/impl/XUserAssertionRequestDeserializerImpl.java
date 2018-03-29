@@ -17,10 +17,11 @@
  */
 package org.ehealth_connector.security.deserialization.impl;
 
+import org.ehealth_connector.security.communication.xua.XUserAssertionRequest;
+import org.ehealth_connector.security.communication.xua.impl.XUserAssertionRequestBuilderImpl;
 import org.ehealth_connector.security.deserialization.Deserializer;
 import org.ehealth_connector.security.exceptions.DeserializeException;
-import org.ehealth_connector.security.saml2.Response;
-import org.ehealth_connector.security.saml2.impl.ResponseBuilderImpl;
+import org.opensaml.soap.wstrust.RequestSecurityToken;
 import org.w3c.dom.Element;
 
 /**
@@ -31,52 +32,34 @@ import org.w3c.dom.Element;
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public class ResponseDeserializerImpl extends AbstractDeserializerImpl<org.opensaml.saml.saml2.core.Response>
-		implements Deserializer<Response> {
+public class XUserAssertionRequestDeserializerImpl extends AbstractDeserializerImpl<RequestSecurityToken>
+		implements Deserializer<XUserAssertionRequest> {
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.deserialization.Deserializer#fromXmlElement(org.w3c.dom.Element)
-	 */
 	@Override
-	public Response fromXmlElement(Element aXmlElement) throws DeserializeException {
+	public XUserAssertionRequest fromXmlElement(Element aXmlElement) throws DeserializeException {
 		try {
-			final org.opensaml.saml.saml2.core.Response request = getOpenSamlDeserializer()
-					.deserializeFromXml(aXmlElement);
-			return new ResponseBuilderImpl().create(request);
+			final RequestSecurityToken request = getOpenSamlDeserializer().deserializeFromXml(aXmlElement);
+			return new XUserAssertionRequestBuilderImpl().create(request);
 		} catch (final Exception e) {
 			throw new DeserializeException(e);
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.deserialization.Deserializer#fromXmlString(java.lang.String)
-	 */
 	@Override
-	public Response fromXmlString(String aXmlString) throws DeserializeException {
+	public XUserAssertionRequest fromXmlString(String aXmlString) throws DeserializeException {
 		try {
-			final org.opensaml.saml.saml2.core.Response request = getOpenSamlDeserializer()
-					.deserializeFromString(aXmlString);
-			return new ResponseBuilderImpl().create(request);
+			final RequestSecurityToken request = getOpenSamlDeserializer().deserializeFromString(aXmlString);
+			return new XUserAssertionRequestBuilderImpl().create(request);
 		} catch (final Exception e) {
 			throw new DeserializeException(e);
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.deserialization.Deserializer#fromXmlByteArray(byte[])
-	 */
 	@Override
-	public Response fromXmlByteArray(byte[] aByteArray) throws DeserializeException {
+	public XUserAssertionRequest fromXmlByteArray(byte[] aByteArray) throws DeserializeException {
 		try {
-			final org.opensaml.saml.saml2.core.Response request = getOpenSamlDeserializer()
-					.deserializeFromByteArray(aByteArray);
-			return new ResponseBuilderImpl().create(request);
+			final RequestSecurityToken request = getOpenSamlDeserializer().deserializeFromByteArray(aByteArray);
+			return new XUserAssertionRequestBuilderImpl().create(request);
 		} catch (final Exception e) {
 			throw new DeserializeException(e);
 		}

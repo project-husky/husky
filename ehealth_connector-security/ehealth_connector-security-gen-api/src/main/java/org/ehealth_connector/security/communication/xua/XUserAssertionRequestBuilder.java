@@ -30,6 +30,50 @@ public interface XUserAssertionRequestBuilder {
 	/**
 	 * 	
 	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the dialect of the claims.</div>
+	 * <div class="de">Setzt den Dialekt des Claims.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @param aDialect
+	 *  <div class="en">the dialect to be set</div>
+	 * 	<div class="de">den Dialekt der gesetzt werden soll</div>
+	 *  <div class="fr">VOICIFRANCAIS</div>
+	 *  <div class="it">ITALIANO</div>
+	 * @return 
+	 *  <div class="en">the actual instance of this builder</div>
+	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="fr">VOICIFRANCAIS</div>
+	 *  <div class="it">ITALIANO</div>
+	 *  <!-- @formatter:on -->
+	 */
+	XUserAssertionRequestBuilder dialect(String aDialect);
+
+	/**
+	 * 	
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the context.</div>
+	 * <div class="de">Setzt den Kontext.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @param subjectId
+	 *  <div class="en">the context to be set</div>
+	 * 	<div class="de">die Kontext der gesetzt werden soll</div>
+	 *  <div class="fr">VOICIFRANCAIS</div>
+	 *  <div class="it">ITALIANO</div>
+	 * @return 
+	 *  <div class="en">the actual instance of this builder</div>
+	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="fr">VOICIFRANCAIS</div>
+	 *  <div class="it">ITALIANO</div>
+	 *  <!-- @formatter:on -->
+	 */
+	XUserAssertionRequestBuilder context(String aContext);
+
+	/**
+	 * 	
+	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the ID of the accessor (GLN oder EPD-PID).</div>
 	 * <div class="de">Setzt die Zugreifer ID (GLN oder EPD-PID).</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
@@ -69,7 +113,7 @@ public interface XUserAssertionRequestBuilder {
 	 *  <div class="it">ITALIANO</div>
 	 *  <!-- @formatter:on -->
 	 */
-	public XUserAssertionRequestBuilder subjectName(String subjectName);
+	XUserAssertionRequestBuilder subjectName(String subjectName);
 
 	/**
 	 * <!-- @formatter:off -->
@@ -91,7 +135,7 @@ public interface XUserAssertionRequestBuilder {
 	 *  <div class="it">ITALIANO</div>
 	 *  <!-- @formatter:on -->
 	 */
-	public XUserAssertionRequestBuilder subjectRole(String roleId);
+	XUserAssertionRequestBuilder subjectRole(String roleId);
 
 	/**
 	 * 
@@ -113,7 +157,7 @@ public interface XUserAssertionRequestBuilder {
 	 *  <div class="it">ITALIANO</div>
 	 *  <!-- @formatter:on -->
 	 */
-	public XUserAssertionRequestBuilder organizationId(String organizationId);
+	XUserAssertionRequestBuilder organizationId(String organizationId);
 
 	/**
 	 * 
@@ -135,7 +179,7 @@ public interface XUserAssertionRequestBuilder {
 	 *  <div class="it">ITALIANO</div>
 	 *  <!-- @formatter:on -->
 	 */
-	public XUserAssertionRequestBuilder organizationName(String organizationName);
+	XUserAssertionRequestBuilder organizationName(String organizationName);
 
 	/**
 	 * 
@@ -158,7 +202,7 @@ public interface XUserAssertionRequestBuilder {
 	 *  <div class="it">ITALIANO</div>
 	 *  <!-- @formatter:on -->
 	 */
-	public XUserAssertionRequestBuilder resourceId(String resourceId);
+	XUserAssertionRequestBuilder resourceId(String resourceId);
 
 	/**
 	 * 
@@ -181,7 +225,7 @@ public interface XUserAssertionRequestBuilder {
 	 *  <div class="it">ITALIANO</div>
 	 *  <!-- @formatter:on -->
 	 */
-	public XUserAssertionRequestBuilder purposeOfUse(String purposeOfUse);
+	XUserAssertionRequestBuilder purposeOfUse(String purposeOfUse);
 
 	/**
 	 * <!-- @formatter:off -->
@@ -189,62 +233,62 @@ public interface XUserAssertionRequestBuilder {
 	 * <div class="de">Setzt den Request Types Attribut.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
-	 *
+	 * 
 	 * @param requestType
-         *  <div class="en">the request type to be set</div>
-         *  <div class="de">der Request Typ der gesetzt werden soll</div>
-         *  <div class="fr">VOICIFRANCAIS</div>
-         *  <div class="it">ITALIANO</div>der rolle der
-         * @return 
-         *  <div class="en">the actual instance of this builder</div>
-         *  <div class="de">die aktuelle instanz des builders</div>
-         *  <div class="fr">VOICIFRANCAIS</div>
-         *  <div class="it">ITALIANO</div>
-         *  <!-- @formatter:on -->
+	 *  <div class="en">the request type to be set</div>
+	 *  <div class="de">der Request Typ der gesetzt werden soll</div>
+	 *  <div class="fr">VOICIFRANCAIS</div>
+	 *  <div class="it">ITALIANO</div>der rolle der
+	 * @return
+	 *  <div class="en">the actual instance of this builder</div>
+	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="fr">VOICIFRANCAIS</div>
+	 *  <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
 	 */
-	public XUserAssertionRequestBuilder setRequestType(RequestType requestType);
+	XUserAssertionRequestBuilder requestType(RequestType requestType);
 
 	/**
-         * <!-- @formatter:off -->
-         * <div class="en">Method to set the toke type attribute.</div>
-         * <div class="de">Setzt den Token Types Attribut.</div>
-         * <div class="fr">VOICIFRANCAIS</div>
-         * <div class="it">ITALIANO</div>
-         *
-         * @param requestType
-         *  <div class="en">the token type to be set</div>
-         *  <div class="de">der Token Typ der gesetzt werden soll</div>
-         *  <div class="fr">VOICIFRANCAIS</div>
-         *  <div class="it">ITALIANO</div>der rolle der
-         * @return 
-         *  <div class="en">the actual instance of this builder</div>
-         *  <div class="de">die aktuelle instanz des builders</div>
-         *  <div class="fr">VOICIFRANCAIS</div>
-         *  <div class="it">ITALIANO</div>
-         *  <!-- @formatter:on -->
-         */
-	public XUserAssertionRequestBuilder setTokenType(TokenType tokenType);
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the toke type attribute.</div>
+	 * <div class="de">Setzt den Token Types Attribut.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * 
+	 * @param tokenType
+	 * <div class="en">the token type to be set</div>
+	 * <div class="de">der Token Typ der gesetzt werden soll</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>der rolle der
+	 * @return
+	 * <div class="en">the actual instance of this builder</div>
+	 * <div class="de">die aktuelle instanz des builders</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	XUserAssertionRequestBuilder tokenType(TokenType tokenType);
 
 	/**
-         * <!-- @formatter:off -->
-         * <div class="en">Method to set the applies to attribute.</div>
-         * <div class="de">Setzt das AppliesTo Attribut.</div>
-         * <div class="fr">VOICIFRANCAIS</div>
-         * <div class="it">ITALIANO</div>
-         *
-         * @param requestType
-         *  <div class="en">the applies to to be set</div>
-         *  <div class="de">der applies to der gesetzt werden soll</div>
-         *  <div class="fr">VOICIFRANCAIS</div>
-         *  <div class="it">ITALIANO</div>der rolle der
-         * @return 
-         *  <div class="en">the actual instance of this builder</div>
-         *  <div class="de">die aktuelle instanz des builders</div>
-         *  <div class="fr">VOICIFRANCAIS</div>
-         *  <div class="it">ITALIANO</div>
-         *  <!-- @formatter:on -->
-         */
-	public XUserAssertionRequestBuilder setAppliesTo(String appliesTo);
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the applies to attribute.</div>
+	 * <div class="de">Setzt das AppliesTo Attribut.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * 
+	 * @param appliesTo
+	 * <div class="en">the applies to to be set</div>
+	 * <div class="de">der applies to der gesetzt werden soll</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>der rolle der
+	 * @return 
+	 * <div class="en">the actual instance of this builder</div>
+	 * <div class="de">die aktuelle instanz des builders</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	XUserAssertionRequestBuilder appliesTo(AppliesTo appliesTo);
 
 	/**
 	 * <!-- @formatter:off -->
@@ -260,6 +304,6 @@ public interface XUserAssertionRequestBuilder {
 	 *  <div class="it">ITALIANO</div>
 	 *  <!-- @formatter:on -->
 	 */
-	public XUserAssertionRequest create();
+	XUserAssertionRequest create();
 
 }

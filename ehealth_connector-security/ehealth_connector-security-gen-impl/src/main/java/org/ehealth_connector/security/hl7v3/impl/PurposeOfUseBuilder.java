@@ -15,7 +15,10 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.security.communication.xua;
+package org.ehealth_connector.security.hl7v3.impl;
+
+import org.ehealth_connector.security.hl7v3.PurposeOfUse;
+import org.opensaml.core.xml.AbstractXMLObjectBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -26,26 +29,18 @@ package org.ehealth_connector.security.communication.xua;
  * 
  * <!-- @formatter:on -->
  */
-public enum TokenType {
-	OASIS_WSS_SAML_PROFILE_11_SAMLV20("http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0");
+public class PurposeOfUseBuilder extends AbstractXMLObjectBuilder<PurposeOfUse> {
 
-	private String code;
-
-	TokenType(String aCode) {
-		this.code = aCode;
+	/** {@inheritDoc} */
+	public PurposeOfUse buildObject() {
+		return buildObject(PurposeOfUse.DEFAULT_NS_URI, PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME,
+				PurposeOfUse.DEFAULT_PREFIX);
 	}
 
+	/** {@inheritDoc} */
 	@Override
-	public String toString() {
-		return code;
+	public PurposeOfUse buildObject(String namespaceURI, String localName, String namespacePrefix) {
+		return new PurposeOfUseImpl(namespaceURI, localName, namespacePrefix);
 	}
 
-	public static TokenType getEnum(String code) {
-		for (final TokenType x : values()) {
-			if (x.toString().equals(code)) {
-				return x;
-			}
-		}
-		return null;
-	}
 }

@@ -14,6 +14,7 @@
 	<modules>
 		<module>ehealth_connector-security-gen-api</module>
 		<module>ehealth_connector-security-gen-impl</module>
+		<module>ehealth_connector-security-ch-impl</module>
 	</modules>
 
 </project>

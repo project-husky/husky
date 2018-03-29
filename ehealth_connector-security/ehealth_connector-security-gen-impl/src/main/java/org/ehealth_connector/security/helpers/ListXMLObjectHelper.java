@@ -15,7 +15,12 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.security.communication.xua;
+package org.ehealth_connector.security.helpers;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.opensaml.core.xml.XMLObject;
 
 /**
  * <!-- @formatter:off -->
@@ -26,26 +31,23 @@ package org.ehealth_connector.security.communication.xua;
  * 
  * <!-- @formatter:on -->
  */
-public enum TokenType {
-	OASIS_WSS_SAML_PROFILE_11_SAMLV20("http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0");
-
-	private String code;
-
-	TokenType(String aCode) {
-		this.code = aCode;
-	}
-
-	@Override
-	public String toString() {
-		return code;
-	}
-
-	public static TokenType getEnum(String code) {
-		for (final TokenType x : values()) {
-			if (x.toString().equals(code)) {
-				return x;
+public class ListXMLObjectHelper<T extends XMLObject> {
+	public T getComponent(Class<? extends XMLObject> aType, List<XMLObject> aList) {
+		for (final XMLObject item : aList) {
+			if (item.getClass().equals(aType)) {
+				return (T) item;
 			}
 		}
 		return null;
+	}
+
+	public List<T> getComponentList(Class<? extends XMLObject> aType, List<XMLObject> aList) {
+		final List<T> retVal = new ArrayList<>();
+		for (final XMLObject item : aList) {
+			if (item.getClass().equals(aType)) {
+				retVal.add((T) item);
+			}
+		}
+		return retVal;
 	}
 }

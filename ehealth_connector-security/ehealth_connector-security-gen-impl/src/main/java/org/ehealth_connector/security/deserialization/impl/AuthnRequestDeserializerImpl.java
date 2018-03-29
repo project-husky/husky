@@ -20,7 +20,6 @@ package org.ehealth_connector.security.deserialization.impl;
 import org.ehealth_connector.security.authentication.AuthnRequest;
 import org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl;
 import org.ehealth_connector.security.deserialization.Deserializer;
-import org.ehealth_connector.security.deserialization.OpenSaml2Deserializer;
 import org.ehealth_connector.security.exceptions.DeserializeException;
 import org.w3c.dom.Element;
 
@@ -32,13 +31,8 @@ import org.w3c.dom.Element;
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public class AuthnRequestDeserializerImpl implements Deserializer<AuthnRequest> {
-
-	private OpenSaml2Deserializer<org.opensaml.saml.saml2.core.AuthnRequest> openSamlDeserializer;
-
-	public AuthnRequestDeserializerImpl() {
-		openSamlDeserializer = new OpenSaml2DeserializerImpl<>();
-	}
+public class AuthnRequestDeserializerImpl extends AbstractDeserializerImpl<org.opensaml.saml.saml2.core.AuthnRequest>
+		implements Deserializer<AuthnRequest> {
 
 	/**
 	 * {@inheritDoc}
@@ -48,7 +42,7 @@ public class AuthnRequestDeserializerImpl implements Deserializer<AuthnRequest> 
 	@Override
 	public AuthnRequest fromXmlElement(Element aXmlElement) throws DeserializeException {
 		try {
-			final org.opensaml.saml.saml2.core.AuthnRequest request = openSamlDeserializer
+			final org.opensaml.saml.saml2.core.AuthnRequest request = getOpenSamlDeserializer()
 					.deserializeFromXml(aXmlElement);
 			return new AuthnRequestBuilderImpl().create(request);
 		} catch (final Exception e) {
@@ -64,7 +58,7 @@ public class AuthnRequestDeserializerImpl implements Deserializer<AuthnRequest> 
 	@Override
 	public AuthnRequest fromXmlString(String aXmlString) throws DeserializeException {
 		try {
-			final org.opensaml.saml.saml2.core.AuthnRequest request = openSamlDeserializer
+			final org.opensaml.saml.saml2.core.AuthnRequest request = getOpenSamlDeserializer()
 					.deserializeFromString(aXmlString);
 			return new AuthnRequestBuilderImpl().create(request);
 		} catch (final Exception e) {
@@ -80,7 +74,7 @@ public class AuthnRequestDeserializerImpl implements Deserializer<AuthnRequest> 
 	@Override
 	public AuthnRequest fromXmlByteArray(byte[] aByteArray) throws DeserializeException {
 		try {
-			final org.opensaml.saml.saml2.core.AuthnRequest request = openSamlDeserializer
+			final org.opensaml.saml.saml2.core.AuthnRequest request = getOpenSamlDeserializer()
 					.deserializeFromByteArray(aByteArray);
 			return new AuthnRequestBuilderImpl().create(request);
 		} catch (final Exception e) {

@@ -19,33 +19,29 @@ package org.ehealth_connector.security.communication.xua;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="en">Interface describing the methods of AppliesTo.</div>
+ * <div class="de">Interface beschreibt die Methoden für den AppliesTo.</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
- * 
  * <!-- @formatter:on -->
  */
-public enum TokenType {
-	OASIS_WSS_SAML_PROFILE_11_SAMLV20("http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0");
+public interface AppliesTo {
 
-	private String code;
+	/**
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the endpoint address.</div>
+	 * <div class="de">Methode um die Endpunktadresse zu erhalten.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @return
+	 * <div class="en">the address as string.</div>
+	 * <div class="de">Die Adresse als String.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	String getAddress();
 
-	TokenType(String aCode) {
-		this.code = aCode;
-	}
-
-	@Override
-	public String toString() {
-		return code;
-	}
-
-	public static TokenType getEnum(String code) {
-		for (final TokenType x : values()) {
-			if (x.toString().equals(code)) {
-				return x;
-			}
-		}
-		return null;
-	}
 }

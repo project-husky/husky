@@ -15,7 +15,9 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.security.communication.xua;
+package org.ehealth_connector.security.hl7v3.impl;
+
+import org.opensaml.core.xml.io.AbstractXMLObjectUnmarshaller;
 
 /**
  * <!-- @formatter:off -->
@@ -26,26 +28,6 @@ package org.ehealth_connector.security.communication.xua;
  * 
  * <!-- @formatter:on -->
  */
-public enum TokenType {
-	OASIS_WSS_SAML_PROFILE_11_SAMLV20("http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0");
+public class PurposeOfUseUnmarshaller extends AbstractXMLObjectUnmarshaller {
 
-	private String code;
-
-	TokenType(String aCode) {
-		this.code = aCode;
-	}
-
-	@Override
-	public String toString() {
-		return code;
-	}
-
-	public static TokenType getEnum(String code) {
-		for (final TokenType x : values()) {
-			if (x.toString().equals(code)) {
-				return x;
-			}
-		}
-		return null;
-	}
 }
