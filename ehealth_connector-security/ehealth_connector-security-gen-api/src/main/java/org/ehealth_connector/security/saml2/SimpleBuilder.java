@@ -24,6 +24,12 @@ package org.ehealth_connector.security.saml2;
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
+ * @param <T>
+ * <div class="en">the type T.</div>
+ * <div class="de">der Typ T.</div>
+ * <div class="fr">VOICIFRANCAIS</div>
+ * <div class="it">ITALIANO</div>
+ * <!-- @formatter:on -->
  */
 public interface SimpleBuilder<T> {
 	/**
