@@ -43,7 +43,8 @@ public class AuthnRequestDeserializerImplTest extends AbstractTestHelper {
 		testDeserializer = new AuthnRequestDeserializerImpl();
 		testXmlByteArray = Files.readAllBytes(Paths.get(getClass().getResource("/saml2/AuthnRequest.xml").toURI()));
 		testXmlString = new String(testXmlByteArray);
-		testXmlElement = new OpenSaml2DeserializerImpl().deserializeFromByteArrayToXmlElement(testXmlString.getBytes());
+		testXmlElement = new OpenSaml2DeserializerImpl<AuthnRequest>()
+				.deserializeFromByteArrayToXmlElement(testXmlString.getBytes());
 	}
 
 	/**

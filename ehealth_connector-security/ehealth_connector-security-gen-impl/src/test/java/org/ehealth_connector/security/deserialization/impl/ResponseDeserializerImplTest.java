@@ -43,7 +43,8 @@ public class ResponseDeserializerImplTest extends AbstractTestHelper {
 		testDeserializer = new ResponseDeserializerImpl();
 		testXmlByteArray = Files.readAllBytes(Paths.get(getClass().getResource("/saml2/Response.xml").toURI()));
 		testXmlString = new String(testXmlByteArray);
-		testXmlElement = new OpenSaml2DeserializerImpl().deserializeFromByteArrayToXmlElement(testXmlString.getBytes());
+		testXmlElement = new OpenSaml2DeserializerImpl<Response>()
+				.deserializeFromByteArrayToXmlElement(testXmlString.getBytes());
 	}
 
 	/**
