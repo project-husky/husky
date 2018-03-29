@@ -18,41 +18,52 @@
 package org.ehealth_connector.security.saml2.impl;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
+import java.util.UUID;
+
+import org.ehealth_connector.security.saml2.Assertion;
+import org.ehealth_connector.security.saml2.AssertionBuilder;
 import org.ehealth_connector.security.saml2.Attribute;
-import org.ehealth_connector.security.saml2.AttributeBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
-public class AttributeBuilderImplTest {
+public class AssertionBuilderImplTest {
 
-	public AttributeBuilder testBuilder;
+	private AssertionBuilder testBuilder;
+	private String testId;
 	private String testAttributeName;
 	private String testAttributeValue;
 
 	@Before
 	public void setUp() throws Exception {
-		testBuilder = new AttributeBuilderImpl();
+		testBuilder = new AssertionBuilderImpl();
+
+		testId = UUID.randomUUID().toString();
+
 		testAttributeName = "My Attribute Name";
 		testAttributeValue = "My Attribute Value";
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.AttributeBuilderImpl#name(java.lang.String)}.
+	 * Test method for {@link org.ehealth_connector.security.saml2.impl.AssertionBuilderImpl#id(java.lang.String)}.
 	 */
 	@Test
-	public void testName() {
-		final Attribute ref = testBuilder.name(testAttributeName).create();
-		assertEquals(testAttributeName, ref.getName());
+	public void testId() {
+		final Assertion ref = testBuilder.id(testId).create();
+		assertEquals(testId, ref.getId());
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.AttributeBuilderImpl#value(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.AssertionBuilderImpl#addAttribute(org.ehealth_connector.security.saml2.Attribute)}.
 	 */
 	@Test
-	public void testValue() {
-		final Attribute ref = testBuilder.value(testAttributeValue).create();
-		assertEquals(testAttributeValue, ref.getValue());
+	public void testAddAttribute() {
+		final Attribute attribute = new AttributeBuilderImpl().name(testAttributeName).value(testAttributeValue)
+				.create();
+		final Assertion ref = testBuilder.addAttribute(attribute).create();
+		assertNotNull(ref);
 	}
 
 }

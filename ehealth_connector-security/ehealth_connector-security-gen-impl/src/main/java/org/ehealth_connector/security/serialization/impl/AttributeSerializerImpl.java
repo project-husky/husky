@@ -17,26 +17,26 @@
  */
 package org.ehealth_connector.security.serialization.impl;
 
-import org.ehealth_connector.security.authentication.AuthnRequest;
-import org.ehealth_connector.security.authentication.impl.AuthnRequestImpl;
 import org.ehealth_connector.security.exceptions.SerializeException;
+import org.ehealth_connector.security.saml2.Attribute;
+import org.ehealth_connector.security.saml2.impl.AttributeImpl;
 import org.ehealth_connector.security.serialization.OpenSaml2Serializer;
 import org.ehealth_connector.security.serialization.Serializer;
 import org.w3c.dom.Element;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Implementation class of Serializer<AuthnRequest></div>
- * <div class="de">Implementations Klasse von Serializer<AuthnRequest></div>
+ * <div class="en">Implementation class of Serializer<Attribute</div>
+ * <div class="de">Implementations Klasse von Serializer<Attribute</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public class AuthnRequestSerializerImpl implements Serializer<AuthnRequest> {
+public class AttributeSerializerImpl implements Serializer<Attribute> {
 
 	private OpenSaml2Serializer openSamlSerializer;
 
-	public AuthnRequestSerializerImpl() {
+	public AttributeSerializerImpl() {
 		openSamlSerializer = new OpenSaml2SerializerImpl();
 	}
 
@@ -47,9 +47,9 @@ public class AuthnRequestSerializerImpl implements Serializer<AuthnRequest> {
 	 * @see org.ehealth_connector.security.serialization.Serializer#toXmlElement(java.lang.Object)
 	 */
 	@Override
-	public Element toXmlElement(AuthnRequest aSecurityObject) throws SerializeException {
+	public Element toXmlElement(Attribute aSecurityObject) throws SerializeException {
 		try {
-			return openSamlSerializer.serializeToXml(((AuthnRequestImpl) aSecurityObject).getWrappedObject());
+			return openSamlSerializer.serializeToXml(((AttributeImpl) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
@@ -62,9 +62,9 @@ public class AuthnRequestSerializerImpl implements Serializer<AuthnRequest> {
 	 * @see org.ehealth_connector.security.serialization.Serializer#toXmlString(java.lang.Object)
 	 */
 	@Override
-	public String toXmlString(AuthnRequest aSecurityObject) throws SerializeException {
+	public String toXmlString(Attribute aSecurityObject) throws SerializeException {
 		try {
-			return openSamlSerializer.serializeToString(((AuthnRequestImpl) aSecurityObject).getWrappedObject());
+			return openSamlSerializer.serializeToString(((AttributeImpl) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
@@ -77,9 +77,9 @@ public class AuthnRequestSerializerImpl implements Serializer<AuthnRequest> {
 	 * @see org.ehealth_connector.security.serialization.Serializer#toXmlByteArray(java.lang.Object)
 	 */
 	@Override
-	public byte[] toXmlByteArray(AuthnRequest aSecurityObject) throws SerializeException {
+	public byte[] toXmlByteArray(Attribute aSecurityObject) throws SerializeException {
 		try {
-			return openSamlSerializer.serializeToByteArray(((AuthnRequestImpl) aSecurityObject).getWrappedObject());
+			return openSamlSerializer.serializeToByteArray(((AttributeImpl) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}

@@ -17,26 +17,26 @@
  */
 package org.ehealth_connector.security.deserialization.impl;
 
-import org.ehealth_connector.security.authentication.AuthnRequest;
-import org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl;
 import org.ehealth_connector.security.deserialization.Deserializer;
 import org.ehealth_connector.security.deserialization.OpenSaml2Deserializer;
 import org.ehealth_connector.security.exceptions.DeserializeException;
+import org.ehealth_connector.security.saml2.Response;
+import org.ehealth_connector.security.saml2.impl.ResponseBuilderImpl;
 import org.w3c.dom.Element;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Class implementing the corresponding interface Deserializer<AuthnRequest> .</div>
- * <div class="de">Die Klasse implementiert das entsprechende interface Deserializer<AuthnRequest> .</div>
+ * <div class="en">Class implementing the corresponding interface Deserializer<Response> .</div>
+ * <div class="de">Die Klasse implementiert das entsprechende interface Deserializer<Response> .</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public class AuthnRequestDeserializerImpl implements Deserializer<AuthnRequest> {
+public class ResponseDeserializerImpl implements Deserializer<Response> {
 
-	private OpenSaml2Deserializer<org.opensaml.saml.saml2.core.AuthnRequest> openSamlDeserializer;
+	private OpenSaml2Deserializer<org.opensaml.saml.saml2.core.Response> openSamlDeserializer;
 
-	public AuthnRequestDeserializerImpl() {
+	public ResponseDeserializerImpl() {
 		openSamlDeserializer = new OpenSaml2DeserializerImpl<>();
 	}
 
@@ -46,11 +46,10 @@ public class AuthnRequestDeserializerImpl implements Deserializer<AuthnRequest> 
 	 * @see org.ehealth_connector.security.deserialization.Deserializer#fromXmlElement(org.w3c.dom.Element)
 	 */
 	@Override
-	public AuthnRequest fromXmlElement(Element aXmlElement) throws DeserializeException {
+	public Response fromXmlElement(Element aXmlElement) throws DeserializeException {
 		try {
-			final org.opensaml.saml.saml2.core.AuthnRequest request = openSamlDeserializer
-					.deserializeFromXml(aXmlElement);
-			return new AuthnRequestBuilderImpl().create(request);
+			final org.opensaml.saml.saml2.core.Response request = openSamlDeserializer.deserializeFromXml(aXmlElement);
+			return new ResponseBuilderImpl().create(request);
 		} catch (final Exception e) {
 			throw new DeserializeException(e);
 		}
@@ -62,11 +61,11 @@ public class AuthnRequestDeserializerImpl implements Deserializer<AuthnRequest> 
 	 * @see org.ehealth_connector.security.deserialization.Deserializer#fromXmlString(java.lang.String)
 	 */
 	@Override
-	public AuthnRequest fromXmlString(String aXmlString) throws DeserializeException {
+	public Response fromXmlString(String aXmlString) throws DeserializeException {
 		try {
-			final org.opensaml.saml.saml2.core.AuthnRequest request = openSamlDeserializer
+			final org.opensaml.saml.saml2.core.Response request = openSamlDeserializer
 					.deserializeFromString(aXmlString);
-			return new AuthnRequestBuilderImpl().create(request);
+			return new ResponseBuilderImpl().create(request);
 		} catch (final Exception e) {
 			throw new DeserializeException(e);
 		}
@@ -78,11 +77,11 @@ public class AuthnRequestDeserializerImpl implements Deserializer<AuthnRequest> 
 	 * @see org.ehealth_connector.security.deserialization.Deserializer#fromXmlByteArray(byte[])
 	 */
 	@Override
-	public AuthnRequest fromXmlByteArray(byte[] aByteArray) throws DeserializeException {
+	public Response fromXmlByteArray(byte[] aByteArray) throws DeserializeException {
 		try {
-			final org.opensaml.saml.saml2.core.AuthnRequest request = openSamlDeserializer
+			final org.opensaml.saml.saml2.core.Response request = openSamlDeserializer
 					.deserializeFromByteArray(aByteArray);
-			return new AuthnRequestBuilderImpl().create(request);
+			return new ResponseBuilderImpl().create(request);
 		} catch (final Exception e) {
 			throw new DeserializeException(e);
 		}

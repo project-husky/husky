@@ -1,29 +1,45 @@
 /*
- * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland. All rights reserved.
- * https://medshare.net Source code, documentation and other resources have been contributed by various people. Project Team:
- * https://sourceforge.net/p/ehealthconnector/wiki/Team/ For exact developer information, please refer to the commit history of the forge.
- * This code is made available under the terms of the Eclipse Public License v1.0. Accompanying materials are made available under the terms
- * of the Creative Commons Attribution-ShareAlike 4.0 License. This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ *
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ *
+ * Source code, documentation and other resources have been contributed by various people.
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * For exact developer information, please refer to the commit history of the forge.
+ *
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ *
  */
 package org.ehealth_connector.security.authentication.impl;
 
 import java.util.Calendar;
 
 import org.ehealth_connector.security.authentication.AuthnRequest;
+import org.ehealth_connector.security.core.SecurityObject;
+import org.ehealth_connector.security.saml2.Subject;
 import org.joda.time.DateTime;
 
 /**
- * @since Feb 20, 2018 3:01:05 PM
- *
+ * <!-- @formatter:off -->
+ * <div class="en">Class implementing the corresponding interface for authnrequest.</div>
+ * <div class="de">Die Klasse implementiert das entsprechende interface authnrequest.</div>
+ * <div class="fr">VOICIFRANCAIS</div>
+ * <div class="it">ITALIANO</div>
+ * <!-- @formatter:on -->
  */
-public class AuthnRequestImpl implements AuthnRequest<org.opensaml.saml2.core.AuthnRequest> {
+public class AuthnRequestImpl implements AuthnRequest, SecurityObject<org.opensaml.saml.saml2.core.AuthnRequest> {
 
-	private org.opensaml.saml2.core.AuthnRequest authnRequest;
+	private org.opensaml.saml.saml2.core.AuthnRequest authnRequest;
 
 	/**
 	 * Default constructor to instanciate the object
 	 */
-	protected AuthnRequestImpl(org.opensaml.saml2.core.AuthnRequest aAuthnRequest) {
+	protected AuthnRequestImpl(org.opensaml.saml.saml2.core.AuthnRequest aAuthnRequest) {
 		authnRequest = aAuthnRequest;
 	}
 
@@ -126,7 +142,7 @@ public class AuthnRequestImpl implements AuthnRequest<org.opensaml.saml2.core.Au
 	 * @see org.ehealth_connector.security.authentication.AuthnRequest#getID()
 	 */
 	@Override
-	public String getID() {
+	public String getId() {
 		return authnRequest.getID();
 	}
 
@@ -176,8 +192,33 @@ public class AuthnRequestImpl implements AuthnRequest<org.opensaml.saml2.core.Au
 	 * @see org.ehealth_connector.security.core.SecurityObject#getWrappedObject()
 	 */
 	@Override
-	public org.opensaml.saml2.core.AuthnRequest getWrappedObject() {
+	public org.opensaml.saml.saml2.core.AuthnRequest getWrappedObject() {
 		return authnRequest;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.authentication.AuthnRequest#getSubject()
+	 */
+	@Override
+	public Subject getSubject() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.Base#getVersion()
+	 */
+	@Override
+	public String getVersion() {
+		if (authnRequest.getVersion() != null) {
+			return authnRequest.getVersion().toString();
+		}
+		return "";
 	}
 
 }

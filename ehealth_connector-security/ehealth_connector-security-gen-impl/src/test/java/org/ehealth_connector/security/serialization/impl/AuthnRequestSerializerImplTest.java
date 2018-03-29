@@ -1,9 +1,19 @@
 /*
- * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland. All rights reserved.
- * https://medshare.net Source code, documentation and other resources have been contributed by various people. Project Team:
- * https://sourceforge.net/p/ehealthconnector/wiki/Team/ For exact developer information, please refer to the commit history of the forge.
- * This code is made available under the terms of the Eclipse Public License v1.0. Accompanying materials are made available under the terms
- * of the Creative Commons Attribution-ShareAlike 4.0 License. This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ *
+ * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+ * All rights reserved. https://medshare.net
+ *
+ * Source code, documentation and other resources have been contributed by various people.
+ * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * For exact developer information, please refer to the commit history of the forge.
+ *
+ * This code is made available under the terms of the Eclipse Public License v1.0.
+ *
+ * Accompanying materials are made available under the terms of the Creative Commons
+ * Attribution-ShareAlike 4.0 License.
+ *
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ *
  */
 package org.ehealth_connector.security.serialization.impl;
 
@@ -19,24 +29,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Element;
 
-/**
- * @since Feb 21, 2018 2:56:49 PM
- *
- */
 public class AuthnRequestSerializerImplTest extends AbstractTestHelper {
 
 	private AuthnRequestSerializerImpl testSerializer;
 
-	private AuthnRequest<org.opensaml.saml2.core.AuthnRequest> testXmlObject;
+	private AuthnRequest testXmlObject;
 
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @throws Exception
-	 *
-	 * @see org.ehealth_connector.security.utilities.impl.AbstractTestHelper#setUp()
-	 */
 	@Override
 	@Before
 	public void setUp() throws Exception {
@@ -53,7 +51,7 @@ public class AuthnRequestSerializerImplTest extends AbstractTestHelper {
 				.issuer(testIssuer)//
 				.nameIdPolicyAllowCreate(testNameIdPolicyAllowCreate)//
 				.nameIdPolicyFormat(testNameIdPolicyFormat)//
-				.createAuthnRequest();
+				.create();
 
 	}
 

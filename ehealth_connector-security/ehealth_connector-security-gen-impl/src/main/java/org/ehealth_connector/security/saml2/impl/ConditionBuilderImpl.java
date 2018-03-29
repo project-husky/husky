@@ -15,27 +15,26 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.security.deserialization;
+package org.ehealth_connector.security.saml2.impl;
 
-import org.ehealth_connector.security.exceptions.DeserializeException;
-import org.w3c.dom.Element;
+import org.ehealth_connector.security.core.SecurityObjectBuilder;
+import org.ehealth_connector.security.saml2.Condition;
+import org.ehealth_connector.security.saml2.ConditionBuilder;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Interface describing the generic methods of OpenSaml2Deserializer for the templated type T.</div>
- * <div class="de">Interface beschreibt die Methoden des OpenSaml2Deserializer für den templated Typ T</div>
+ * <div class="en">Class implementing the corresponding interface for Condition building.</div>
+ * <div class="de">Die Klasse implementiert das entsprechende interface um Condition bilden zu k&ooml;nnen.</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public interface OpenSaml2Deserializer<T> {
+public class ConditionBuilderImpl
+		implements ConditionBuilder, SecurityObjectBuilder<org.opensaml.saml.saml2.core.Condition, Condition> {
 
-	T deserializeFromXml(Element aXmlElement) throws DeserializeException;
-
-	T deserializeFromByteArray(byte[] aXmlBytes) throws DeserializeException;
-
-	Element deserializeFromByteArrayToXmlElement(byte[] aXmlBytes) throws DeserializeException;
-
-	T deserializeFromString(String aXmlString) throws DeserializeException;
+	@Override
+	public Condition create(org.opensaml.saml.saml2.core.Condition aInternalObject) {
+		return new ConditionImpl(aInternalObject);
+	}
 
 }

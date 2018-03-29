@@ -14,14 +14,20 @@
 			<artifactId>ehealth_connector-security-gen-api</artifactId>
 			<version>1.6-SNAPSHOT</version>
 		</dependency>
-
+		<!-- <dependency> <groupId>org.opensaml</groupId> <artifactId>opensaml</artifactId> </dependency> -->
 		<dependency>
-			<groupId>org.opensaml</groupId>
-			<artifactId>opensaml</artifactId>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>xml-apis</groupId>
-			<artifactId>xml-apis</artifactId>
+			<groupId>org.opensaml</groupId>
+			<artifactId>opensaml-saml-impl</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
 		</dependency>
 
 		<!-- test stuff -->
@@ -35,16 +41,28 @@
 			<artifactId>log4j</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<scope>test</scope>
-		</dependency>
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-resources-plugin</artifactId>
+			<configuration>
+				<!-- specify UTF-8, ISO-8859-1 or any other file encoding -->
+				<encoding>UTF-8</encoding>
+				<nonFilteredFileExtensions>
+					<nonFilteredFileExtension>jks</nonFilteredFileExtension>
+					<nonFilteredFileExtension>p12</nonFilteredFileExtension>
+					<nonFilteredFileExtension>jceks</nonFilteredFileExtension>
+				</nonFilteredFileExtensions>
+			</configuration>
+		</plugin>
+	</plugins>
 
 </project>
