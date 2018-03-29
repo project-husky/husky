@@ -8,32 +8,130 @@
 package org.ehealth_connector.security.saml2;
 
 import java.util.Calendar;
-
-import org.ehealth_connector.security.core.SecurityObject;
+import java.util.List;
 
 /**
- * @since Jan 16, 2018 1:56:01 PM
- *
+ * <!-- @formatter:off -->
+ * <div class="en">Interface describing the methods of Assertion. </div>
+ * <div class="de">Interface beschreibt die Methoden von Assertion.</div>
+ * <div class="fr">VOICIFRANCAIS</div>
+ * <div class="it">ITALIANO</div>
+ * <!-- @formatter:on -->
  */
-public interface Assertion<T> extends SecurityObject<T> {
+public interface Assertion extends Base {
 
-	Calendar getIssueInstant();
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the Subject.</div>
+	 * <div class="de">Methode um das Subject zu holen.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @return
+	 * <div class="en">the instance of {@link org.ehealth_connector.security.saml2.Subject}</div>
+	 * <div class="de">die Instanz von {@link org.ehealth_connector.security.saml2.Subject}</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	Subject getSubject();
 
-	String getID();
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the NotBefore of Conditions.</div>
+	 * <div class="de">Methode um das NotBefore of Condition zu holen.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @return
+	 * <div class="en">the NotBefore value as {@link java.util.Calendar}</div>
+	 * <div class="de">der NotBefore Wert als {@link java.util.Calendar}</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	Calendar getConditionsNotBefore();
 
-	String getIssuer();
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the NotOnOrAfter of Conditions.</div>
+	 * <div class="de">Methode um das NotOnOrAfter of Condition zu holen.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @return
+	 * <div class="en">the NotOnOrAfter value as {@link java.util.Calendar}</div>
+	 * <div class="de">der NotOnOrAfter Wert als {@link java.util.Calendar}</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	Calendar getConditionsNotOnOrAfter();
 
-	// Subject getSubject();
-	//
-	// Conditions getConditions();
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the Conditions.</div>
+	 * <div class="de">Methode um die Conditions zu holen.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @return
+	 * <div class="en">a {@link java.util.List} of  {@link org.ehealth_connector.security.saml2.Condition}</div>
+	 * <div class="de">eine {@link java.util.List} von {@link org.ehealth_connector.security.saml2.Condition}</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	List<Condition> getConditionsConditions();
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the AudienceRestrictions.</div>
+	 * <div class="de">Methode um die AudienceRestrictions zu holen.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @return
+	 * <div class="en">a {@link java.util.List} of {@link org.ehealth_connector.security.saml2.AudienceRestriction}</div>
+	 * <div class="de">eine {@link java.util.List} von {@link org.ehealth_connector.security.saml2.AudienceRestriction}</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	List<AudienceRestriction> getConditionsAudienceRestrictions();
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the AuthnContexts.</div>
+	 * <div class="de">Methode um die AuthnContexts zu holen.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @return
+	 * <div class="en">a {@link java.util.List} of {@link org.ehealth_connector.security.saml2.AuthnContext}</div>
+	 * <div class="de">eine {@link java.util.List} von {@link org.ehealth_connector.security.saml2.AuthnContext}</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	List<AuthnStatement> getAuthnStatements();
+
+	/**
+	 * * <!-- @formatter:off -->
+	 * <div class="en">Method to get the Attributes.</div>
+	 * <div class="de">Methode um die Attributes zu holen.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @return
+	 * <div class="en">a {@link java.util.List} of {@link org.ehealth_connector.security.saml2.Attribute}</div>
+	 * <div class="de">eine {@link java.util.List} von {@link org.ehealth_connector.security.saml2.Attribute}</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	List<Attribute> getAttributes();
+
 	//
 	// Advice getAdvice();
-	//
-	// List<Statement> getStatements();
-	//
-	// List<AuthnStatement> getAuthnStatements();
-	//
-	// List<AuthzDecisionStatement> getAuthzDecisionStatements();
-	//
-	// List<AttributeStatement> getAttributeStatements();
 }

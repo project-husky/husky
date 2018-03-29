@@ -28,7 +28,7 @@ public interface SignCryptModule {
 	 * 
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the key and truststore and the corresponding passwords.</div>
-	 * <div class="de">Methode um den key und trust store und deren passwörter zu setzen.</div>
+	 * <div class="de">Methode um den key und trust store und deren passw&ooml;rter zu setzen.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 *

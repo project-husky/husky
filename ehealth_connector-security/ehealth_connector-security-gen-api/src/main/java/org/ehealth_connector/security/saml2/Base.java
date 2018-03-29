@@ -7,78 +7,84 @@
  */
 package org.ehealth_connector.security.saml2;
 
+import java.util.Calendar;
+
 /**
  * <!-- @formatter:off -->
- * <div class="en">Interface describing the methods of Attribute. </div>
- * <div class="de">Interface beschreibt die Methoden von Attribute.</div>
+ * <div class="en">Interface describing the basic methods.</div>
+ * <div class="de">Beschreibendes Interface der basis methoden.</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
+ *
  */
-public interface Attribute {
+public interface Base {
 
 	/**
+	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to get the name.</div>
-	 * <div class="de">Methode um den namen zu holen.</div>
+	 * <div class="en">Method to get the ID.</div>
+	 * <div class="de">Methode die ID zu holen.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 *
 	 * @return
-	 * <div class="en">the name as {@link java.lang.String}</div>
-	 * <div class="de">der Name als {@link java.lang.String}</div>
+	 * <div class="en">the ID value as {@link java.lang.String}.</div>
+	 * <div class="de">der ID Wert als {@link java.lang.String}.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
 	 */
-	String getName();
+	String getId();
 
 	/**
+	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to get the NameFormat.</div>
-	 * <div class="de">Methode um das NameFormat zu holen.</div>
+	 * <div class="en">Method to get the IssueInstant.</div>
+	 * <div class="de">Methode den IssueInstant zu holen.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * 
+	 * @return
+	 * <div class="en">the IssueInstant value as {@link java.util.Calendar}.</div>
+	 * <div class="de">der IssueInstant Wert als {@link java.util.Calendar}.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	Calendar getIssueInstant();
+
+	/**
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the Issuer.</div>
+	 * <div class="de">Methode den Issuer zu holen.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 *
 	 * @return
-	 * <div class="en">the NameFormat as {@link java.lang.String}</div>
-	 * <div class="de">der NameFormat als {@link java.lang.String}</div>
+	 * <div class="en">the Issuer value as {@link java.lang.String}.</div>
+	 * <div class="de">der Issuer Wert als {@link java.lang.String}.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
 	 */
-	String getNameFormat();
+	String getIssuer();
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to get the FriendlyName.</div>
-	 * <div class="de">Methode um das FriendlyName zu holen.</div>
+	 * <div class="en">Method to get the Version.</div>
+	 * <div class="de">Methode den Version zu holen.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 *
 	 * @return
-	 * <div class="en">the FriendlyName as {@link java.lang.String}</div>
-	 * <div class="de">der FriendlyName als {@link java.lang.String}</div>
+	 * <div class="en">the Version value as {@link java.lang.String}.</div>
+	 * <div class="de">der Version Wert als {@link java.lang.String}.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
 	 */
-	String getFriendlyName();
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Method to get the value.</div>
-	 * <div class="de">Methode um das value zu holen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 *
-	 * @return
-	 * <div class="en">the value as {@link java.lang.String}</div>
-	 * <div class="de">der value als {@link java.lang.String}</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * <!-- @formatter:on -->
-	 */
-	String getValue();
+	String getVersion();
 
 }

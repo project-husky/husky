@@ -5,72 +5,67 @@
  * This code is made available under the terms of the Eclipse Public License v1.0. Accompanying materials are made available under the terms
  * of the Creative Commons Attribution-ShareAlike 4.0 License. This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  */
-package org.ehealth_connector.security.exceptions;
+package org.ehealth_connector.security.saml2;
+
+import java.util.List;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Class implementing the SigningException.</div>
- * <div class="de">Klasse implemetiert die SigningException.</div>
+ * <div class="en">Interface decribing the methods of Subject</div>
+ * <div class="de">Interface beschreibt die Methoden von Subject</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  *
  */
-public class SigningException extends Exception {
-
-	/** Field referencing the serialVersionUID */
-	private static final long serialVersionUID = 5287879924827693361L;
+public interface Subject {
 
 	/**
-	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">Default constructor to instanciate the object.</div>
-	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
+	 * <div class="en">Method to get the NameID.Value.</div>
+	 * <div class="de">Methode um den NameID.Value zu erhalten.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
-	 * 
-	 * <!-- @formatter:on -->
-	 */
-	public SigningException() {
-		super();
-	}
-
-	/**
-	 * 
-	 * <!-- @formatter:off -->
-	 * <div class="en">Default constructor to instanciate the object.</div>
-	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * 
-	 * @param cause
-	 * <div class="en">the throwable to be set</div>
-	 * <div class="de">der throwable der gesetzt werden soll</div>
+	 *
+	 * @return
+	 * <div class="en">the NameID.Format as {@link java.lang.String}</div>
+	 * <div class="de">den NameID.Format as {@link java.lang.String}</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
 	 */
-	public SigningException(Throwable cause) {
-		super(cause);
-	}
+	String getNameIDFormat();
 
 	/**
-	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">Default constructor to instanciate the object.</div>
-	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
+	 * <div class="en">Method to get the NameID.Value.</div>
+	 * <div class="de">Methode um den NameID.Value zu erhalten.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
-	 * 
-	 * @param message
-	 * <div class="en">the error message to be set</div>
-	 * <div class="de">Die Errormessage welche gesetzt werde soll</div>
+	 *
+	 * @return
+	 * <div class="en">the NameID.Value as {@link java.lang.String}</div>
+	 * <div class="de">den NameID.Value as {@link java.lang.String}</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
 	 */
-	public SigningException(String message) {
-		super(message);
-	}
+	String getNameIDValue();
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the SubjectConfirmations.</div>
+	 * <div class="de">Methode um den SubjectConfirmationen zu erhalten.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @return
+	 * <div class="en">a {@link java.uitl.List} of {@link org.ehealth_connector.security.saml2.SubjectConfirmation}s</div>
+	 * <div class="de">eine {@link java.uitl.List} von {@link org.ehealth_connector.security.saml2.SubjectConfirmation}en</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	List<SubjectConfirmation> getSubjectConfirmations();
 
 }

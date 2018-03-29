@@ -8,5 +8,13 @@
 		<version>1.6-SNAPSHOT</version>
 	</parent>
 
+	<dependencies>
+		<!-- test stuff -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 
 </project>

@@ -5,25 +5,17 @@
  * This code is made available under the terms of the Eclipse Public License v1.0. Accompanying materials are made available under the terms
  * of the Creative Commons Attribution-ShareAlike 4.0 License. This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  */
-package org.ehealth_connector.security.core;
+package org.ehealth_connector.security.saml2;
 
 /**
- * @since Feb 21, 2018 1:06:07 PM
- *
+ * <!-- @formatter:off -->
+ * <div class="en">HEREISENGLISH</div>
+ * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="fr">VOICIFRANCAIS</div>
+ * <div class="it">ITALIANO</div>
+ * 
+ * <!-- @formatter:on -->
  */
-public interface SecurityObject<T> {
-
-	/**
-	 * 
-	 * @formatter:off
-	 * <div class="en">Method to get the wrapped inner object.</div>
-	 * <div class="de">Method um das gewrappte innere object zu erhalten.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * @formatter:on
-	 *
-	 * @return returns the wrapped inner object (depends on implementation)
-	 */
-	T getWrappedObject();
+public interface AudienceRestrictionBuilder extends SimpleBuilder<AudienceRestriction> {
 
 }

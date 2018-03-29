@@ -8,17 +8,97 @@
 package org.ehealth_connector.security.saml2;
 
 /**
- * @since Jan 16, 2018 1:55:43 PM
- *
+ * <!-- @formatter:off -->
+ * <div class="en">Interface describing the methods of the AttributeBuilder. </div>
+ * <div class="de">Interface beschreibt die Methoden des AttributeBuilder.</div>
+ * <div class="fr">VOICIFRANCAIS</div>
+ * <div class="it">ITALIANO</div>
+ * <!-- @formatter:on -->
  */
-public interface AttributeBuilder<T> {
+public interface AttributeBuilder extends SimpleBuilder<Attribute> {
 
-	AttributeBuilder<T> name(String name);
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the name of the Attribute to be build.</div>
+	 * <div class="de">Methode um ein name dem Attribute hinzuzufügen.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @param aName
+	 * <div class="en">the name to be added.</div>
+	 * <div class="de">das name welches hinzugefügt werden soll.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * @return
+	 * 	<div class="en">the actual instance of this builder</div>
+	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="fr">VOICIFRANCAIS</div>
+	 *  <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	AttributeBuilder name(String aName);
 
-	AttributeBuilder<T> value(String value);
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the NameFormat of the Attribute to be build.</div>
+	 * <div class="de">Methode um ein NameFormat dem Attribute hinzuzufügen.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @param aNameFormat
+	 * <div class="en">the NameFormat to be added.</div>
+	 * <div class="de">das NameFormat welches hinzugefügt werden soll.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * @return
+	 * 	<div class="en">the actual instance of this builder</div>
+	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="fr">VOICIFRANCAIS</div>
+	 *  <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	AttributeBuilder nameFormat(String aNameFormat);
 
-	Attribute<T> createAttribute();
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the FriendlyName of the Attribute to be build.</div>
+	 * <div class="de">Methode um ein FriendlyName dem Attribute hinzuzufügen.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @param aFriendlyName
+	 * <div class="en">the FriendlyName to be added.</div>
+	 * <div class="de">das FriendlyName welches hinzugefügt werden soll.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * @return
+	 * 	<div class="en">the actual instance of this builder</div>
+	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="fr">VOICIFRANCAIS</div>
+	 *  <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	AttributeBuilder friendlyName(String aFriendlyName);
 
-	Attribute<T> createAttribute(T aInternalObject);
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the value of the Attribute to be build.</div>
+	 * <div class="de">Methode um ein value dem Attribute hinzuzufügen.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @param aValue
+	 * <div class="en">the value to be added.</div>
+	 * <div class="de">der WErt welches hinzugefügt werden soll.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * @return
+	 * 	<div class="en">the actual instance of this builder</div>
+	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="fr">VOICIFRANCAIS</div>
+	 *  <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	AttributeBuilder value(String aValue);
 
 }

@@ -7,8 +7,7 @@
  */
 package org.ehealth_connector.security.authentication;
 
-import java.util.Calendar;
-
+import org.ehealth_connector.security.saml2.BaseBuilder;
 import org.ehealth_connector.security.saml2.Subject;
 
 /**
@@ -19,52 +18,7 @@ import org.ehealth_connector.security.saml2.Subject;
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public interface AuthnRequestBuilder {
-
-	/**
-	 * 
-	 * <!-- @formatter:off -->
-	 * <div class="en">Builds the id on the authnrequest.</div>
-	 * <div class="de">Bildet die id im authnrequest.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @param id 
-	 * 	<div class="en">the id string to be set</div>
-	 *  <div class="de">der id string der gesetzt werden soll</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * @return 
-	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 *  <!-- @formatter:on -->
-	 */
-	AuthnRequestBuilder id(String id);
-
-	/**
-	 * 
-	 * <!-- @formatter:off -->
-	 * <div class="en">Builds the issueInstant on the authnrequest.</div>
-	 * <div class="de">Bildet den issueInstant im authnrequest.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 *
-	 * @param issueInstant
-	 * 	<div class="en">the issueInstant to be set</div>
-	 * 	<div class="de">der issue instant der gesetzt werden soll</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * @return 
-	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 *  <!-- @formatter:on -->
-	 */
-	AuthnRequestBuilder issueInstant(Calendar issueInstant);
+public interface AuthnRequestBuilder extends BaseBuilder<AuthnRequestBuilder> {
 
 	/**
 	 * 
@@ -245,28 +199,6 @@ public interface AuthnRequestBuilder {
 	/**
 	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">Builds the Issuer element on the authnrequest.</div>
-	 * <div class="de">Buildet das Issuer element im authnrequest.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * 
-	 * @param aIssuer
-	 *  <div class="en">the issuer to be set</div>
-	 * 	<div class="de">der issuer der gesetzt werden soll</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * @return 
-	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 *  <!-- @formatter:on -->
-	 */
-	AuthnRequestBuilder issuer(String aIssuer);
-
-	/**
-	 * 
-	 * <!-- @formatter:off -->
 	 * <div class="en">Builds the NameIDpolicy.AllowCreate on the authnrequest.</div>
 	 * <div class="de">Bildet das NameIDpolicy.AllowCreate im authnrequest.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
@@ -331,7 +263,6 @@ public interface AuthnRequestBuilder {
 	AuthnRequestBuilder subject(Subject aSubject);
 
 	/**
-	 * 
 	 * <!-- @formatter:off -->
 	 * <div class="en">Creates a concrete instance of AuthnRequest with setted params.</div>
 	 * <div class="de">Erstellt die konkrete instanz des AuthnRequests mit den gesetzten parametern.</div>

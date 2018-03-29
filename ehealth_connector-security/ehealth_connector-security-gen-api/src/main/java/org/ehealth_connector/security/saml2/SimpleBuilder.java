@@ -5,18 +5,30 @@
  * This code is made available under the terms of the Eclipse Public License v1.0. Accompanying materials are made available under the terms
  * of the Creative Commons Attribution-ShareAlike 4.0 License. This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  */
-package org.ehealth_connector.security.saml2.validation;
-
-import org.ehealth_connector.security.saml2.Assertion;
+package org.ehealth_connector.security.saml2;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Interface describing the Methods for the validation of Assertions.</div>
- * <div class="de">Interface beschreibend die Methoden für die Validierung von Assertions.</div>
+ * <div class="en">Interface describing the methods of the SimpleBuilder.</div>
+ * <div class="de">Interface beschreibt die Methoden des SimpleBuilder.</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public interface AssertionValidator extends GenericValidator<Assertion> {
-
+public interface SimpleBuilder<T> {
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Creates a concrete instance of T with setted params.</div>
+	 * <div class="de">Erstellt die konkrete Instanz von T mit den gesetzten parametern.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @return 
+	 *  <div class="en">a new instance of T with the params set</div>
+	 *  <div class="de">eine neue Instanz von T mit den gesetzten parametern</div>
+	 *  <div class="fr">VOICIFRANCAIS</div>
+	 *  <div class="it">ITALIANO</div>
+	 *  <!-- @formatter:on -->
+	 */
+	T create();
 }

@@ -8,63 +8,71 @@
 package org.ehealth_connector.security.saml2;
 
 /**
- * @since Jan 16, 2018 1:53:49 PM
- *
+ * <!-- @formatter:off -->
+ * <div class="en">Interface describing the methods of the AssertionBuilder. </div>
+ * <div class="de">Interface beschreibt die Methoden des AssertionBuilders.</div>
+ * <div class="fr">VOICIFRANCAIS</div>
+ * <div class="it">ITALIANO</div>
+ * <!-- @formatter:on -->
  */
-public interface AssertionBuilder<T> {
+public interface AssertionBuilder extends BaseBuilder<AssertionBuilder> {
 
 	/**
-	 * 
-	 * @formatter:off
-	 * <div class="en">HEREISENGLISH</div>
-	 * <div class="de">HIERISTDEUTSCH</div>
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to add an Attribute to the assertion to be build.</div>
+	 * <div class="de">Methode um ein Attribute dem Assertion hinzuzufügen.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
-	 * @formatter:on
 	 *
-	 * @param id
+	 * @param aAttribute
+	 * <div class="en">the Attribute to be added.</div>
+	 * <div class="de">das Attribute welches hinzugefügt werden soll.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
 	 * @return
+	 * 	<div class="en">the actual instance of this builder</div>
+	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="fr">VOICIFRANCAIS</div>
+	 *  <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
 	 */
-	AssertionBuilder<T> id(String id);
+	AssertionBuilder addAttribute(Attribute aAttribute);
 
 	/**
-	 * 
-	 * @formatter:off
-	 * <div class="en">HEREISENGLISH</div>
-	 * <div class="de">HIERISTDEUTSCH</div>
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to add a Condition to the assertion to be build.</div>
+	 * <div class="de">Methode um eine Condition dem Assertion hinzuzufügen.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
-	 * @formatter:on
 	 *
-	 * @param attribute
+	 * @param aAttribute
+	 * <div class="en">the Condition to be added.</div>
+	 * <div class="de">das Condition welches hinzugefügt werden soll.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
 	 * @return
+	 * 	<div class="en">the actual instance of this builder</div>
+	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="fr">VOICIFRANCAIS</div>
+	 *  <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
 	 */
-	AttributeBuilder<T> addAttribute(Attribute<T> attribute);
+	AssertionBuilder addCondition(Condition aCondition);
 
 	/**
-	 * 
-	 * @formatter:off
-	 * <div class="en">HEREISENGLISH</div>
-	 * <div class="de">HIERISTDEUTSCH</div>
+	 * <!-- @formatter:off -->
+	 * <div class="en">Creates a concrete instance of Assertion with setted params.</div>
+	 * <div class="de">Erstellt die konkrete instanz des Assertion mit den gesetzten parametern.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
-	 * @formatter:on
 	 *
-	 * @return
+	 * @return 
+	 *  <div class="en">a new Assertion instance with the params set</div>
+	 *  <div class="de">eine neue Assertion instanz mit den gesetzten parametern</div>
+	 *  <div class="fr">VOICIFRANCAIS</div>
+	 *  <div class="it">ITALIANO</div>
+	 *  <!-- @formatter:on -->
 	 */
-	Assertion<T> createAssertion();
+	Assertion create();
 
-	/**
-	 * 
-	 * @formatter:off
-	 * <div class="en">HEREISENGLISH</div>
-	 * <div class="de">HIERISTDEUTSCH</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * @formatter:on
-	 *
-	 * @param aInternalObject
-	 * @return
-	 */
-	Assertion<T> createAssertion(T aInternalObject);
 }

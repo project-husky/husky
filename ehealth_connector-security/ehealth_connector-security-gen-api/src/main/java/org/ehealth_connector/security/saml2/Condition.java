@@ -8,9 +8,14 @@
 package org.ehealth_connector.security.saml2;
 
 /**
- * @since Jan 16, 2018 2:18:53 PM
- *
+ * <!-- @formatter:off -->
+ * <div class="en">Interface describing the Condition methods.</div>
+ * <div class="de">Beschreibendes Interface der Condition methoden.</div>
+ * <div class="fr">VOICIFRANCAIS</div>
+ * <div class="it">ITALIANO</div>
+ * 
+ * <!-- @formatter:on -->
  */
-public interface AttributeQuery {
+public interface Condition {
 
 }

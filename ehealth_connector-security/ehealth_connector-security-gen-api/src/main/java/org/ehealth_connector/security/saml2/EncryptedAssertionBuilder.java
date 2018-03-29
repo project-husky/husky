@@ -8,9 +8,13 @@
 package org.ehealth_connector.security.saml2;
 
 /**
- * @since Feb 21, 2018 3:49:45 PM
- *
+ * <!-- @formatter:off -->
+ * <div class="en">Interface describing the methods of the ConditionBuilder.</div>
+ * <div class="de">Interface beschreibt die Methoden des ConditionBuilders.</div>
+ * <div class="fr">VOICIFRANCAIS</div>
+ * <div class="it">ITALIANO</div>
+ * <!-- @formatter:on -->
  */
-public interface ResponseBuilder extends SimpleBuilder<Response> {
+public interface EncryptedAssertionBuilder extends SimpleBuilder<EncryptedAssertion> {
 
 }

@@ -5,60 +5,49 @@
  * This code is made available under the terms of the Eclipse Public License v1.0. Accompanying materials are made available under the terms
  * of the Creative Commons Attribution-ShareAlike 4.0 License. This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  */
-package org.ehealth_connector.security.authentication;
-
-import java.net.URL;
-
-import org.ehealth_connector.security.saml2.Assertion;
+package org.ehealth_connector.security.saml2;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Interface describing the methods for the authentication module.</div>
- * <div class="de">Interface beschreibend die methoden des authentication modules.</div>
+ * <div class="en">Interface describing the methods of Status</div>
+ * <div class="de">Interface beschreibt die methoden von Status</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
- * Fügt eine SAML 2 Assertion 3 in den WS Security Header ein.
  * <!-- @formatter:on -->
+ *
  */
-public interface AuthentcationModule {
-
+public interface Status {
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to the endpoint url of the web service.</div>
-	 * <div class="de">Methode um den Web Service Endpunkt zu setzen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * 
-	 * @param url
-	 * <!-- @formatter:on -->
-	 */
-	public void setEndpointURL(URL url);
-
-	/**
-	 * 
-	 * <!-- @formatter:off -->
-	 * <div class="en">HEREISENGLISH</div>
-	 * <div class="de">HIERISTDEUTSCH</div>
+	 * <div class="en">Method to get the StatusCode.</div>
+	 * <div class="de">Methode um den StatusCode zu erhalten.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 *
-	 * @param assertion
-	 * <!-- @formatter:on -->
-	 */
-	public void setSecurityHeader(Assertion assertion);
-
-	/**
-	 * 
-	 * <!-- @formatter:off -->
-	 * <div class="en">HEREISENGLISH</div>
-	 * <div class="de">Führt den XML Soap Web Service aus, der über die Endpoint URL definiert wurde.</div>
+	 * @return
+	 * <div class="en">the StatusCode</div>
+	 * <div class="de">den StatusCode</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
-	 *
-	 * @param synchron
-	 * @param query
 	 */
-	public void invokeUserAuthentication(boolean synchron, AuthenticateUser query);
+	StatusCode getStatusCode();
 
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the StatusMessage.</div>
+	 * <div class="de">Methode um den StatusMessage zu erhalten.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @return
+	 * <div class="en">the StatusMessage as {@link java.lang.String}</div>
+	 * <div class="de">den StatusMessage als {@link java.lang.String}</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	String getStatusMessage();
+
+	// List<String> getStatusDetails();
 }

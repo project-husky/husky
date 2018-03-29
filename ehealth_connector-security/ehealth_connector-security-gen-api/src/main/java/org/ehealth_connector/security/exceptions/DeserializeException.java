@@ -17,6 +17,7 @@ package org.ehealth_connector.security.exceptions;
  */
 public class DeserializeException extends Exception {
 
+	/** Field referencing the serialVersionUID */
 	private static final long serialVersionUID = -1343781617387784825L;
 
 	/**

@@ -7,31 +7,119 @@
  */
 package org.ehealth_connector.security.saml2;
 
-import java.util.Calendar;
 import java.util.List;
 
-import org.ehealth_connector.security.core.SecurityObject;
-
 /**
- * @since Jan 16, 2018 2:24:45 PM
- *
+ * 
+ * <!-- @formatter:off -->
+ * <div class="en">Interface describing the methods of Response</div>
+ * <div class="de">Interface beschreibt die methoden eines Response</div>
+ * <div class="fr">VOICIFRANCAIS</div>
+ * <div class="it">ITALIANO</div>
+ * 
+ * <!-- @formatter:on -->
  */
-public interface Response<T, U> extends SecurityObject<T> {
+public interface Response extends Base {
 
-	String getID();
-
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get InResponseTo value.</div>
+	 * <div class="de">Methode um den InResponseTo zu erhalten.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @return
+	 * <div class="en">the InResponseTo value as {@link java.lang.String}.</div>
+	 * <div class="de">der InResponseTo Wert als {@link java.lang.String}.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
 	String getInResponseTo();
 
-	Calendar getIssueInstant();
-
+	/**
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get Destination value.</div>
+	 * <div class="de">Methode um den Destination wert zu erhalten.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @return
+	 * <div class="en">the Destination value as {@link java.lang.String}.</div>
+	 * <div class="de">der Destination Wert als {@link java.lang.String}.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
 	String getDestination();
 
+	/**
+	 * 
+	 * <!-- @formatter:off -->
+	 *<div class="en">Method to get Consent value.</div>
+	 * <div class="de">Methode um den Consent wert zu erhalten.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @return
+	 * <div class="en">the Destination value as {@link java.lang.String}.</div>
+	 * <div class="de">der Destination Wert als {@link java.lang.String}.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
 	String getConsent();
 
-	String getIssuer();
+	/**
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the Status.</div>
+	 * <div class="de">Methode um den Status zu holen.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @return
+	 * <div class="en">the Status value as {@link org.ehealth_connector.security.saml2.Status}.</div>
+	 * <div class="de">der Status Wert als {@link org.ehealth_connector.security.saml2.Status}.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	Status getStatus();
 
-	List<Assertion<U>> getAssertions();
+	/**
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the {@link org.ehealth_connector.security.saml2.Assertion}s.</div>
+	 * <div class="de">Methode um die Assertions zu erhalten.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @return
+	 * <div class="en">a {@link java.util.List} of {@link org.ehealth_connector.security.saml2.Assertion}.</div>
+	 * <div class="de">eine {@link java.util.List} von {@link org.ehealth_connector.security.saml2.Assertion}.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	List<Assertion> getAssertions();
 
-	// List<EncryptedAssertion> getEncryptedAssertions()
+	/**
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the {@link org.ehealth_connector.security.saml2.EncryptedAssertion}s.</div>
+	 * <div class="de">Methode um die EncryptedAssertions zu erhalten.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @return
+	 * <div class="en">a {@link java.util.List} of {@link org.ehealth_connector.security.saml2.EncryptedAssertion}.</div>
+	 * <div class="de">eine {@link java.util.List} von {@link org.ehealth_connector.security.saml2.EncryptedAssertion}.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	List<EncryptedAssertion> getEncryptedAssertions();
 
 }
