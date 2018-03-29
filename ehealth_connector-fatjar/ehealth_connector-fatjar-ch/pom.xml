@@ -36,6 +36,11 @@
 			<artifactId>ehealth_connector-validation-service</artifactId>
 			<version>1.6-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>org.ehealth_connector.security.ch</groupId>
+			<artifactId>ehealth_connector-security-ch-impl</artifactId>
+			<version>1.6-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>
