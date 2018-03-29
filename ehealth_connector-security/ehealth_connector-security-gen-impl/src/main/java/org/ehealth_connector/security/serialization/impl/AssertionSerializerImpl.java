@@ -18,58 +18,43 @@
 package org.ehealth_connector.security.serialization.impl;
 
 import org.ehealth_connector.security.exceptions.SerializeException;
-import org.ehealth_connector.security.saml2.Response;
-import org.ehealth_connector.security.saml2.impl.ResponseImpl;
+import org.ehealth_connector.security.saml2.Assertion;
+import org.ehealth_connector.security.saml2.impl.AssertionImpl;
 import org.ehealth_connector.security.serialization.Serializer;
 import org.w3c.dom.Element;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Implementation class of Serializer<Response></div>
- * <div class="de">Implementations Klasse von Serializer<Response></div>
+ * <div class="en">Implementation class of Serializer<Assertion</div>
+ * <div class="de">Implementations Klasse von Serializer<Assertion</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public class ResponseSerializerImpl extends AbstractSerializerImpl implements Serializer<Response> {
+public class AssertionSerializerImpl extends AbstractSerializerImpl implements Serializer<Assertion> {
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.serialization.Serializer#toXmlElement(java.lang.Object)
-	 */
 	@Override
-	public Element toXmlElement(Response aSecurityObject) throws SerializeException {
+	public Element toXmlElement(Assertion aSecurityObject) throws SerializeException {
 		try {
-			return getOpenSamlSerializer().serializeToXml(((ResponseImpl) aSecurityObject).getWrappedObject());
+			return getOpenSamlSerializer().serializeToXml(((AssertionImpl) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.serialization.Serializer#toXmlString(java.lang.Object)
-	 */
 	@Override
-	public String toXmlString(Response aSecurityObject) throws SerializeException {
+	public String toXmlString(Assertion aSecurityObject) throws SerializeException {
 		try {
-			return getOpenSamlSerializer().serializeToString(((ResponseImpl) aSecurityObject).getWrappedObject());
+			return getOpenSamlSerializer().serializeToString(((AssertionImpl) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.serialization.Serializer#toXmlByteArray(java.lang.Object)
-	 */
 	@Override
-	public byte[] toXmlByteArray(Response aSecurityObject) throws SerializeException {
+	public byte[] toXmlByteArray(Assertion aSecurityObject) throws SerializeException {
 		try {
-			return getOpenSamlSerializer().serializeToByteArray(((ResponseImpl) aSecurityObject).getWrappedObject());
+			return getOpenSamlSerializer().serializeToByteArray(((AssertionImpl) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}

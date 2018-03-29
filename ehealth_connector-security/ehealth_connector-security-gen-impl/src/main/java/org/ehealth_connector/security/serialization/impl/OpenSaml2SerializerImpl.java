@@ -45,7 +45,7 @@ import org.w3c.dom.Element;
  */
 public class OpenSaml2SerializerImpl implements OpenSaml2Serializer {
 
-	protected OpenSaml2SerializerImpl() {
+	public OpenSaml2SerializerImpl() {
 		System.setProperty("javax.xml.parsers.DocumentBuilderFactory",
 				"org.apache.xerces.jaxp.DocumentBuilderFactoryImpl");
 	}

@@ -20,7 +20,6 @@ package org.ehealth_connector.security.serialization.impl;
 import org.ehealth_connector.security.exceptions.SerializeException;
 import org.ehealth_connector.security.saml2.Attribute;
 import org.ehealth_connector.security.saml2.impl.AttributeImpl;
-import org.ehealth_connector.security.serialization.OpenSaml2Serializer;
 import org.ehealth_connector.security.serialization.Serializer;
 import org.w3c.dom.Element;
 
@@ -32,13 +31,7 @@ import org.w3c.dom.Element;
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public class AttributeSerializerImpl implements Serializer<Attribute> {
-
-	private OpenSaml2Serializer openSamlSerializer;
-
-	public AttributeSerializerImpl() {
-		openSamlSerializer = new OpenSaml2SerializerImpl();
-	}
+public class AttributeSerializerImpl extends AbstractSerializerImpl implements Serializer<Attribute> {
 
 	/**
 	 * 
@@ -49,7 +42,7 @@ public class AttributeSerializerImpl implements Serializer<Attribute> {
 	@Override
 	public Element toXmlElement(Attribute aSecurityObject) throws SerializeException {
 		try {
-			return openSamlSerializer.serializeToXml(((AttributeImpl) aSecurityObject).getWrappedObject());
+			return getOpenSamlSerializer().serializeToXml(((AttributeImpl) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
@@ -64,7 +57,7 @@ public class AttributeSerializerImpl implements Serializer<Attribute> {
 	@Override
 	public String toXmlString(Attribute aSecurityObject) throws SerializeException {
 		try {
-			return openSamlSerializer.serializeToString(((AttributeImpl) aSecurityObject).getWrappedObject());
+			return getOpenSamlSerializer().serializeToString(((AttributeImpl) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
@@ -79,7 +72,7 @@ public class AttributeSerializerImpl implements Serializer<Attribute> {
 	@Override
 	public byte[] toXmlByteArray(Attribute aSecurityObject) throws SerializeException {
 		try {
-			return openSamlSerializer.serializeToByteArray(((AttributeImpl) aSecurityObject).getWrappedObject());
+			return getOpenSamlSerializer().serializeToByteArray(((AttributeImpl) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}

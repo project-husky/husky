@@ -20,7 +20,6 @@ package org.ehealth_connector.security.serialization.impl;
 import org.ehealth_connector.security.authentication.AuthnRequest;
 import org.ehealth_connector.security.authentication.impl.AuthnRequestImpl;
 import org.ehealth_connector.security.exceptions.SerializeException;
-import org.ehealth_connector.security.serialization.OpenSaml2Serializer;
 import org.ehealth_connector.security.serialization.Serializer;
 import org.w3c.dom.Element;
 
@@ -32,13 +31,7 @@ import org.w3c.dom.Element;
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public class AuthnRequestSerializerImpl implements Serializer<AuthnRequest> {
-
-	private OpenSaml2Serializer openSamlSerializer;
-
-	public AuthnRequestSerializerImpl() {
-		openSamlSerializer = new OpenSaml2SerializerImpl();
-	}
+public class AuthnRequestSerializerImpl extends AbstractSerializerImpl implements Serializer<AuthnRequest> {
 
 	/**
 	 * 
@@ -49,7 +42,7 @@ public class AuthnRequestSerializerImpl implements Serializer<AuthnRequest> {
 	@Override
 	public Element toXmlElement(AuthnRequest aSecurityObject) throws SerializeException {
 		try {
-			return openSamlSerializer.serializeToXml(((AuthnRequestImpl) aSecurityObject).getWrappedObject());
+			return getOpenSamlSerializer().serializeToXml(((AuthnRequestImpl) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
@@ -64,7 +57,7 @@ public class AuthnRequestSerializerImpl implements Serializer<AuthnRequest> {
 	@Override
 	public String toXmlString(AuthnRequest aSecurityObject) throws SerializeException {
 		try {
-			return openSamlSerializer.serializeToString(((AuthnRequestImpl) aSecurityObject).getWrappedObject());
+			return getOpenSamlSerializer().serializeToString(((AuthnRequestImpl) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
@@ -79,7 +72,8 @@ public class AuthnRequestSerializerImpl implements Serializer<AuthnRequest> {
 	@Override
 	public byte[] toXmlByteArray(AuthnRequest aSecurityObject) throws SerializeException {
 		try {
-			return openSamlSerializer.serializeToByteArray(((AuthnRequestImpl) aSecurityObject).getWrappedObject());
+			return getOpenSamlSerializer()
+					.serializeToByteArray(((AuthnRequestImpl) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
