@@ -34,6 +34,11 @@
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+		</dependency>
+
 		<!-- test stuff -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -51,7 +56,7 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
+
 	</dependencies>
 
 	<build>

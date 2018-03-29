@@ -15,12 +15,7 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.security.communication.xua;
-
-import java.net.URL;
-
-import org.ehealth_connector.security.authentication.AuthnRequest;
-import org.ehealth_connector.security.saml2.Assertion;
+package org.ehealth_connector.security.communication.config.impl;
 
 /**
  * <!-- @formatter:off -->
@@ -31,9 +26,16 @@ import org.ehealth_connector.security.saml2.Assertion;
  * 
  * <!-- @formatter:on -->
  */
-public interface ConvenienceUserAccessAuthentication {
+public abstract class AbstractClientConfig {
 
-	Assertion getAuthentication(AuthnRequest aAuthnRequest, URL aIdpUrl);
+	private String enpointUrl;
 
-	// SecurityToken getXUserAssertion(Assertion aAssertion);
+	public void setUrl(String aUrl) {
+		enpointUrl = aUrl;
+	}
+
+	public String getUrl() {
+		return enpointUrl;
+	}
+
 }
