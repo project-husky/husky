@@ -5,35 +5,25 @@
  * This code is made available under the terms of the Eclipse Public License v1.0. Accompanying materials are made available under the terms
  * of the Creative Commons Attribution-ShareAlike 4.0 License. This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  */
-package org.ehealth_connector.security.saml2;
-
-import java.util.Calendar;
-
-import org.ehealth_connector.security.core.SecurityObject;
+package org.ehealth_connector.security.core;
 
 /**
- * @since Jan 16, 2018 1:56:01 PM
+ * @since Feb 21, 2018 1:06:07 PM
  *
  */
-public interface Assertion<T> extends SecurityObject<T> {
+public interface SecurityObject<T> {
 
-	Calendar getIssueInstant();
+	/**
+	 * 
+	 * @formatter:off
+	 * <div class="en">Method to get the wrapped inner object.</div>
+	 * <div class="de">Method um das gewrappte innere object zu erhalten.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * @formatter:on
+	 *
+	 * @return returns the wrapped inner object (depends on implementation)
+	 */
+	T getWrappedObject();
 
-	String getID();
-
-	String getIssuer();
-
-	// Subject getSubject();
-	//
-	// Conditions getConditions();
-	//
-	// Advice getAdvice();
-	//
-	// List<Statement> getStatements();
-	//
-	// List<AuthnStatement> getAuthnStatements();
-	//
-	// List<AuthzDecisionStatement> getAuthzDecisionStatements();
-	//
-	// List<AttributeStatement> getAttributeStatements();
 }

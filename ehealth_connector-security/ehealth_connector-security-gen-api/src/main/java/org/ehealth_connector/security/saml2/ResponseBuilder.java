@@ -7,33 +7,23 @@
  */
 package org.ehealth_connector.security.saml2;
 
-import java.util.Calendar;
-
-import org.ehealth_connector.security.core.SecurityObject;
-
 /**
- * @since Jan 16, 2018 1:56:01 PM
+ * @since Feb 21, 2018 3:49:45 PM
  *
  */
-public interface Assertion<T> extends SecurityObject<T> {
+public interface ResponseBuilder<T, U> {
 
-	Calendar getIssueInstant();
-
-	String getID();
-
-	String getIssuer();
-
-	// Subject getSubject();
-	//
-	// Conditions getConditions();
-	//
-	// Advice getAdvice();
-	//
-	// List<Statement> getStatements();
-	//
-	// List<AuthnStatement> getAuthnStatements();
-	//
-	// List<AuthzDecisionStatement> getAuthzDecisionStatements();
-	//
-	// List<AttributeStatement> getAttributeStatements();
+	/**
+	 * 
+	 * @formatter:off
+	 * <div class="en">HEREISENGLISH</div>
+	 * <div class="de">HIERISTDEUTSCH</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * @formatter:on
+	 *
+	 * @param aInternalObject
+	 * @return
+	 */
+	Response<T, U> createResponse(T aInternalObject);
 }

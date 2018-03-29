@@ -5,35 +5,31 @@
  * This code is made available under the terms of the Eclipse Public License v1.0. Accompanying materials are made available under the terms
  * of the Creative Commons Attribution-ShareAlike 4.0 License. This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  */
-package org.ehealth_connector.security.saml2;
-
-import java.util.Calendar;
-
-import org.ehealth_connector.security.core.SecurityObject;
+package org.ehealth_connector.security.exceptions;
 
 /**
- * @since Jan 16, 2018 1:56:01 PM
+ * @since Feb 21, 2018 10:31:16 AM
  *
  */
-public interface Assertion<T> extends SecurityObject<T> {
+public class SerializeException extends Exception {
 
-	Calendar getIssueInstant();
+	/** Field referencing the long */
+	private static final long serialVersionUID = 7674424286398103789L;
 
-	String getID();
+	/**
+	 * Default constructor to instanciate the object
+	 */
+	public SerializeException() {
+		super();
+	}
 
-	String getIssuer();
+	/**
+	 * Default constructor to instanciate the object
+	 * 
+	 * @param cause
+	 */
+	public SerializeException(Throwable cause) {
+		super(cause);
+	}
 
-	// Subject getSubject();
-	//
-	// Conditions getConditions();
-	//
-	// Advice getAdvice();
-	//
-	// List<Statement> getStatements();
-	//
-	// List<AuthnStatement> getAuthnStatements();
-	//
-	// List<AuthzDecisionStatement> getAuthzDecisionStatements();
-	//
-	// List<AttributeStatement> getAttributeStatements();
 }

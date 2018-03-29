@@ -5,35 +5,21 @@
  * This code is made available under the terms of the Eclipse Public License v1.0. Accompanying materials are made available under the terms
  * of the Creative Commons Attribution-ShareAlike 4.0 License. This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  */
-package org.ehealth_connector.security.saml2;
+package org.ehealth_connector.security.deserialization;
 
-import java.util.Calendar;
-
-import org.ehealth_connector.security.core.SecurityObject;
+import org.ehealth_connector.security.exceptions.DeserializeException;
+import org.w3c.dom.Element;
 
 /**
- * @since Jan 16, 2018 1:56:01 PM
+ * @since Feb 21, 2018 10:24:01 AM
  *
  */
-public interface Assertion<T> extends SecurityObject<T> {
+public interface Deserializer<T> {
 
-	Calendar getIssueInstant();
+	T fromXmlElement(Element aXmlElement) throws DeserializeException;
 
-	String getID();
+	T fromXmlString(String aXmlString) throws DeserializeException;
 
-	String getIssuer();
+	T fromXmlByteArray(byte[] aByteArray) throws DeserializeException;
 
-	// Subject getSubject();
-	//
-	// Conditions getConditions();
-	//
-	// Advice getAdvice();
-	//
-	// List<Statement> getStatements();
-	//
-	// List<AuthnStatement> getAuthnStatements();
-	//
-	// List<AuthzDecisionStatement> getAuthzDecisionStatements();
-	//
-	// List<AttributeStatement> getAttributeStatements();
 }

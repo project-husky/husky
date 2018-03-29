@@ -7,10 +7,31 @@
  */
 package org.ehealth_connector.security.saml2;
 
+import java.util.Calendar;
+import java.util.List;
+
+import org.ehealth_connector.security.core.SecurityObject;
+
 /**
  * @since Jan 16, 2018 2:24:45 PM
  *
  */
-public interface Response {
+public interface Response<T, U> extends SecurityObject<T> {
+
+	String getID();
+
+	String getInResponseTo();
+
+	Calendar getIssueInstant();
+
+	String getDestination();
+
+	String getConsent();
+
+	String getIssuer();
+
+	List<Assertion<U>> getAssertions();
+
+	// List<EncryptedAssertion> getEncryptedAssertions()
 
 }

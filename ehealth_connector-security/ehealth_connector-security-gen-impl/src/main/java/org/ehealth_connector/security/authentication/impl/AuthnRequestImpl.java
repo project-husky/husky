@@ -16,7 +16,7 @@ import org.joda.time.DateTime;
  * @since Feb 20, 2018 3:01:05 PM
  *
  */
-public class AuthnRequestImpl implements AuthnRequest {
+public class AuthnRequestImpl implements AuthnRequest<org.opensaml.saml2.core.AuthnRequest> {
 
 	private org.opensaml.saml2.core.AuthnRequest authnRequest;
 
@@ -171,15 +171,11 @@ public class AuthnRequestImpl implements AuthnRequest {
 
 	/**
 	 * 
-	 * @formatter:off
-	 * <div class="en">method to get the wrapped inner object (opensaml)</div>
-	 * <div class="de">Method um das gewrappted innere objet zu erhalten  (opensaml)</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * @formatter:on
+	 * {@inheritDoc}
 	 *
-	 * @return the inner authnrequest instance
+	 * @see org.ehealth_connector.security.core.SecurityObject#getWrappedObject()
 	 */
+	@Override
 	public org.opensaml.saml2.core.AuthnRequest getWrappedObject() {
 		return authnRequest;
 	}

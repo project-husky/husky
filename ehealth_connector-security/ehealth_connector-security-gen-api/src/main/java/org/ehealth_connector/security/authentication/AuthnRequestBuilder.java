@@ -13,7 +13,7 @@ import java.util.Calendar;
  * @since Jan 17, 2018 2:38:20 PM
  *
  */
-public interface AuthnRequestBuilder {
+public interface AuthnRequestBuilder<T> {
 
 	/**
 	 * 
@@ -27,7 +27,7 @@ public interface AuthnRequestBuilder {
 	 * @param id
 	 * @return this AuthnRequestBuilder instance
 	 */
-	public AuthnRequestBuilder id(String id);
+	public AuthnRequestBuilder<T> id(String id);
 
 	/**
 	 * 
@@ -41,7 +41,7 @@ public interface AuthnRequestBuilder {
 	 * @param issueInstant
 	 * @return this AuthnRequestBuilder instance
 	 */
-	public AuthnRequestBuilder issueInstant(Calendar issueInstant);
+	public AuthnRequestBuilder<T> issueInstant(Calendar issueInstant);
 
 	/**
 	 * 
@@ -55,7 +55,7 @@ public interface AuthnRequestBuilder {
 	 * @param aAssertionConsumerServiceURL
 	 * @return this AuthnRequestBuilder instance
 	 */
-	public AuthnRequestBuilder assertionConsumerServiceURL(String aAssertionConsumerServiceURL);
+	public AuthnRequestBuilder<T> assertionConsumerServiceURL(String aAssertionConsumerServiceURL);
 
 	/**
 	 * 
@@ -69,8 +69,7 @@ public interface AuthnRequestBuilder {
 	 * @param aAssertionConsumerServiceIndex
 	 * @return this AuthnRequestBuilder instance
 	 */
-	public AuthnRequestBuilder assertionConsumerServiceIndex(
-			Integer aAssertionConsumerServiceIndex);
+	public AuthnRequestBuilder<T> assertionConsumerServiceIndex(Integer aAssertionConsumerServiceIndex);
 
 	/**
 	 * 
@@ -84,8 +83,7 @@ public interface AuthnRequestBuilder {
 	 * @param aAttributeConsumingServiceIndex
 	 * @return this AuthnRequestBuilder instance
 	 */
-	public AuthnRequestBuilder attributeConsumingServiceIndex(
-			Integer aAttributeConsumingServiceIndex);
+	public AuthnRequestBuilder<T> attributeConsumingServiceIndex(Integer aAttributeConsumingServiceIndex);
 
 	/**
 	 * 
@@ -99,7 +97,7 @@ public interface AuthnRequestBuilder {
 	 * @param aDestination
 	 * @return this AuthnRequestBuilder instance
 	 */
-	public AuthnRequestBuilder destination(String aDestination);
+	public AuthnRequestBuilder<T> destination(String aDestination);
 
 	/**
 	 * 
@@ -113,7 +111,7 @@ public interface AuthnRequestBuilder {
 	 * @param aProviderName
 	 * @return this AuthnRequestBuilder instance
 	 */
-	public AuthnRequestBuilder providerName(String aProviderName);
+	public AuthnRequestBuilder<T> providerName(String aProviderName);
 
 	/**
 	 * 
@@ -127,7 +125,7 @@ public interface AuthnRequestBuilder {
 	 * @param aProtocolBinding
 	 * @return this AuthnRequestBuilder instance
 	 */
-	public AuthnRequestBuilder protocolBinding(String aProtocolBinding);
+	public AuthnRequestBuilder<T> protocolBinding(String aProtocolBinding);
 
 	/**
 	 * 
@@ -141,7 +139,7 @@ public interface AuthnRequestBuilder {
 	 * @param aConsent
 	 * @return this AuthnRequestBuilder instance
 	 */
-	public AuthnRequestBuilder consent(String aConsent);
+	public AuthnRequestBuilder<T> consent(String aConsent);
 
 	/**
 	 * 
@@ -155,7 +153,7 @@ public interface AuthnRequestBuilder {
 	 * @param aForceAuthn
 	 * @return this AuthnRequestBuilder instance
 	 */
-	public AuthnRequestBuilder forceAuthn(Boolean aForceAuthn);
+	public AuthnRequestBuilder<T> forceAuthn(Boolean aForceAuthn);
 
 	/**
 	 * 
@@ -169,7 +167,7 @@ public interface AuthnRequestBuilder {
 	 * @param aIssuer
 	 * @return this AuthnRequestBuilder instance
 	 */
-	public AuthnRequestBuilder issuer(String aIssuer);
+	public AuthnRequestBuilder<T> issuer(String aIssuer);
 
 	/**
 	 * 
@@ -183,7 +181,7 @@ public interface AuthnRequestBuilder {
 	 * @param aNameIdPolicyAllowCreate
 	 * @return this AuthnRequestBuilder instance
 	 */
-	public AuthnRequestBuilder nameIdPolicyAllowCreate(Boolean aNameIdPolicyAllowCreate);
+	public AuthnRequestBuilder<T> nameIdPolicyAllowCreate(Boolean aNameIdPolicyAllowCreate);
 
 	/**
 	 * 
@@ -197,19 +195,33 @@ public interface AuthnRequestBuilder {
 	 * @param aNameIdPolicyFormat
 	 * @return this AuthnRequestBuilder instance
 	 */
-	public AuthnRequestBuilder nameIdPolicyFormat(String aNameIdPolicyFormat);
+	public AuthnRequestBuilder<T> nameIdPolicyFormat(String aNameIdPolicyFormat);
 
 	/**
 	 * 
 	 * @formatter:off
-	 * <div class="en">HEREISENGLISH</div>
-	 * <div class="de">Erstellt den SAML 2 Authentication Request.</div>
+	 * <div class="en">Creates the AuthnRequest.</div>
+	 * <div class="de">Erstellt den AuthnRequest.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 * @formatter:on
 	 *
 	 * @return the AuthnRequest with params set
 	 */
-	public AuthnRequest createAuthnRequest();
+	public AuthnRequest<T> createAuthnRequest();
+
+	/**
+	 * 
+	 * @formatter:off
+	 * <div class="en">Creates the AuthnRequest.</div>
+	 * <div class="de">Erstellt den AuthnRequest.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * @formatter:on
+	 *
+	 * @param aInternalObject the internal object of type T
+	 * @return the AuthnRequest with params set
+	 */
+	public AuthnRequest<T> createAuthnRequest(T aInternalObject);
 
 }

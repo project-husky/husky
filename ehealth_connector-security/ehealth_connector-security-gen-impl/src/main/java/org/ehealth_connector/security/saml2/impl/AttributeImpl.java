@@ -14,7 +14,7 @@ import org.opensaml.xml.schema.XSString;
  * @since Feb 20, 2018 3:54:37 PM
  *
  */
-public class AttributeImpl implements Attribute {
+public class AttributeImpl implements Attribute<org.opensaml.saml2.core.Attribute> {
 
 	private org.opensaml.saml2.core.Attribute attribute;
 
@@ -59,15 +59,11 @@ public class AttributeImpl implements Attribute {
 
 	/**
 	 * 
-	 * @formatter:off
-	 * <div class="en">Method to get the wrapped object (opensaml)</div>
-	 * <div class="de">Methode zu holen des gewrappten objekt (opensaml)</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * @formatter:on
+	 * {@inheritDoc}
 	 *
-	 * @return
+	 * @see org.ehealth_connector.security.core.SecurityObject#getWrappedObject()
 	 */
+	@Override
 	public org.opensaml.saml2.core.Attribute getWrappedObject() {
 		return attribute;
 	}

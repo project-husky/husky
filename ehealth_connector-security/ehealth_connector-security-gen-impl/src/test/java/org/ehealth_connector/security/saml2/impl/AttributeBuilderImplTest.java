@@ -39,7 +39,7 @@ public class AttributeBuilderImplTest {
 	 */
 	@Test
 	public void testName() {
-		final Attribute ref = testBuilder.name(testName).createAttribute();
+		final Attribute<?> ref = testBuilder.name(testName).createAttribute();
 		assertEquals(testName, ref.getName());
 	}
 
@@ -48,7 +48,7 @@ public class AttributeBuilderImplTest {
 	 */
 	@Test
 	public void testValue() {
-		final Attribute ref = testBuilder.value(testValue).createAttribute();
+		final Attribute<?> ref = testBuilder.value(testValue).createAttribute();
 		assertEquals(testValue, ref.getValue());
 	}
 

@@ -14,7 +14,6 @@ import java.util.UUID;
 
 import org.ehealth_connector.security.authentication.AuthnRequest;
 import org.ehealth_connector.security.authentication.AuthnRequestBuilder;
-import org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.opensaml.common.xml.SAMLConstants;
@@ -165,7 +164,8 @@ public class AuthnRequestBuilderImplTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#nameIdPolicyAllowCreate(java.lang.Boolean)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#nameIdPolicyAllowCreate(java.lang.Boolean)}.
 	 */
 	@Test
 	public void testNameIdPolicyAllowCreate() {
@@ -180,6 +180,21 @@ public class AuthnRequestBuilderImplTest {
 	@Test
 	public void testNameIdPolicyFormat() {
 		final AuthnRequest request = testBuilder.nameIdPolicyFormat(testNameIdPolicyFormat).createAuthnRequest();
+		assertEquals(testNameIdPolicyFormat, request.getNameIdPolicyFormat());
+	}
+
+	@Test
+	public void testIdIssueInstant() {
+		final AuthnRequest request = testBuilder.id(testId).issueInstant(testIssueInstant).createAuthnRequest();
+		assertEquals(testId, request.getID());
+		assertEquals(testIssueInstant, request.getIssueInstant());
+	}
+
+	@Test
+	public void testNameIdPolicyAllowCreateFormat() {
+		final AuthnRequest request = testBuilder.nameIdPolicyAllowCreate(testNameIdPolicyAllowCreate)
+				.nameIdPolicyFormat(testNameIdPolicyFormat).createAuthnRequest();
+		assertEquals(testNameIdPolicyAllowCreate, request.getNameIdPolicyAllowCreate());
 		assertEquals(testNameIdPolicyFormat, request.getNameIdPolicyFormat());
 	}
 }

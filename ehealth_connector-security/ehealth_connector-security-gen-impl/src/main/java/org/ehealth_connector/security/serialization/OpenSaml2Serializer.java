@@ -5,15 +5,17 @@
  * This code is made available under the terms of the Eclipse Public License v1.0. Accompanying materials are made available under the terms
  * of the Creative Commons Attribution-ShareAlike 4.0 License. This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  */
-package org.ehealth_connector.security.saml2;
+package org.ehealth_connector.security.serialization;
 
-import org.ehealth_connector.security.core.SecurityObject;
+import org.ehealth_connector.security.exceptions.SerializeException;
+import org.opensaml.xml.XMLObject;
+import org.w3c.dom.Element;
 
 /**
- * @since Jan 16, 2018 2:04:16 PM
+ * @since Feb 21, 2018 10:24:01 AM
  *
  */
-public interface Attribute<T> extends SecurityObject<T> {
+public interface OpenSaml2Serializer {
 
 	/**
 	 * 
@@ -24,9 +26,11 @@ public interface Attribute<T> extends SecurityObject<T> {
 	 * <div class="it">ITALIANO</div>
 	 * @formatter:on
 	 *
-	 * @return
+	 * @param aObject the typed object to be serialized
+	 * @return the serialized xml
+	 * @throws SerializeException
 	 */
-	String getName();
+	Element serializeToXml(XMLObject aObject) throws SerializeException;
 
 	/**
 	 * 
@@ -37,9 +41,11 @@ public interface Attribute<T> extends SecurityObject<T> {
 	 * <div class="it">ITALIANO</div>
 	 * @formatter:on
 	 *
-	 * @return
+	 * @param aObject the typed object to be serialized
+	 * @return the serialized xml string
+	 * @throws SerializeException
 	 */
-	String getNameFormat();
+	String serializeToString(XMLObject aObject) throws SerializeException;
 
 	/**
 	 * 
@@ -50,20 +56,9 @@ public interface Attribute<T> extends SecurityObject<T> {
 	 * <div class="it">ITALIANO</div>
 	 * @formatter:on
 	 *
-	 * @return
+	 * @param aObject the typed object to be serialized
+	 * @return the serialized xml as byte array
+	 * @throws SerializeException
 	 */
-	String getFriendlyName();
-
-	/**
-	 * @formatter:off
-	 * <div class="en">HEREISENGLISH</div>
-	 * <div class="de">HIERISTDEUTSCH</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * @formatter:on
-	 *
-	 * @return
-	 */
-	String getValue();
-
+	byte[] serializeToByteArray(XMLObject aObject) throws SerializeException;
 }

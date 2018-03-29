@@ -11,12 +11,14 @@ package org.ehealth_connector.security.saml2;
  * @since Jan 16, 2018 1:55:43 PM
  *
  */
-public interface AttributeBuilder {
+public interface AttributeBuilder<T> {
 
-	AttributeBuilder name(String name);
+	AttributeBuilder<T> name(String name);
 
-	AttributeBuilder value(String value);
+	AttributeBuilder<T> value(String value);
 
-	Attribute createAttribute();
+	Attribute<T> createAttribute();
+
+	Attribute<T> createAttribute(T aInternalObject);
 
 }

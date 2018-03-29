@@ -21,7 +21,7 @@ import org.opensaml.saml2.core.impl.NameIDPolicyBuilder;
  * @since Feb 20, 2018 11:38:39 AM
  *
  */
-public class AuthnRequestBuilderImpl implements AuthnRequestBuilder {
+public class AuthnRequestBuilderImpl implements AuthnRequestBuilder<org.opensaml.saml2.core.AuthnRequest> {
 
 	private org.opensaml.saml2.core.AuthnRequest authnRequest;
 	private NameIDPolicy nameIDPolicy;
@@ -46,7 +46,7 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder {
 	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#id(java.lang.String)
 	 */
 	@Override
-	public AuthnRequestBuilder id(String aId) {
+	public AuthnRequestBuilder<org.opensaml.saml2.core.AuthnRequest> id(String aId) {
 		if (aId != null) {
 			authnRequest.setID(aId);
 		}
@@ -59,7 +59,7 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder {
 	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#issueInstant(java.util.Calendar)
 	 */
 	@Override
-	public AuthnRequestBuilder issueInstant(Calendar aIssueInstant) {
+	public AuthnRequestBuilder<org.opensaml.saml2.core.AuthnRequest> issueInstant(Calendar aIssueInstant) {
 		if (aIssueInstant != null) {
 			final DateTime dateTime = new DateTime(aIssueInstant.getTimeInMillis());
 			authnRequest.setIssueInstant(dateTime);
@@ -73,7 +73,8 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder {
 	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#assertionConsumerServiceIndex(java.lang.Integer)
 	 */
 	@Override
-	public AuthnRequestBuilder assertionConsumerServiceIndex(Integer aAssertionConsumerServiceIndex) {
+	public AuthnRequestBuilder<org.opensaml.saml2.core.AuthnRequest> assertionConsumerServiceIndex(
+			Integer aAssertionConsumerServiceIndex) {
 		if (aAssertionConsumerServiceIndex != null) {
 			authnRequest.setAssertionConsumerServiceIndex(aAssertionConsumerServiceIndex);
 		}
@@ -86,7 +87,8 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder {
 	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#assertionConsumerServiceURL(java.lang.String)
 	 */
 	@Override
-	public AuthnRequestBuilder assertionConsumerServiceURL(String aAssertionConsumerServiceURL) {
+	public AuthnRequestBuilder<org.opensaml.saml2.core.AuthnRequest> assertionConsumerServiceURL(
+			String aAssertionConsumerServiceURL) {
 		if (aAssertionConsumerServiceURL != null) {
 			authnRequest.setAssertionConsumerServiceURL(aAssertionConsumerServiceURL);
 		}
@@ -99,7 +101,8 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder {
 	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#attributeConsumingServiceIndex(java.lang.Integer)
 	 */
 	@Override
-	public AuthnRequestBuilder attributeConsumingServiceIndex(Integer aAttributeConsumingServiceIndex) {
+	public AuthnRequestBuilder<org.opensaml.saml2.core.AuthnRequest> attributeConsumingServiceIndex(
+			Integer aAttributeConsumingServiceIndex) {
 		if (aAttributeConsumingServiceIndex != null) {
 			authnRequest.setAttributeConsumingServiceIndex(aAttributeConsumingServiceIndex);
 		}
@@ -112,7 +115,7 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder {
 	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#destination(java.lang.String)
 	 */
 	@Override
-	public AuthnRequestBuilder destination(String aDestination) {
+	public AuthnRequestBuilder<org.opensaml.saml2.core.AuthnRequest> destination(String aDestination) {
 		if (aDestination != null) {
 			authnRequest.setDestination(aDestination);
 		}
@@ -125,7 +128,7 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder {
 	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#providerName(java.lang.String)
 	 */
 	@Override
-	public AuthnRequestBuilder providerName(String aProviderName) {
+	public AuthnRequestBuilder<org.opensaml.saml2.core.AuthnRequest> providerName(String aProviderName) {
 		if (aProviderName != null) {
 			authnRequest.setProviderName(aProviderName);
 		}
@@ -138,7 +141,7 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder {
 	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#protocolBinding(java.lang.String)
 	 */
 	@Override
-	public AuthnRequestBuilder protocolBinding(String aProtocolBinding) {
+	public AuthnRequestBuilder<org.opensaml.saml2.core.AuthnRequest> protocolBinding(String aProtocolBinding) {
 		if (aProtocolBinding != null) {
 			authnRequest.setProtocolBinding(aProtocolBinding);
 		}
@@ -151,7 +154,7 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder {
 	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#consent(java.lang.String)
 	 */
 	@Override
-	public AuthnRequestBuilder consent(String aConsent) {
+	public AuthnRequestBuilder<org.opensaml.saml2.core.AuthnRequest> consent(String aConsent) {
 		if (aConsent != null) {
 			authnRequest.setConsent(aConsent);
 		}
@@ -164,7 +167,7 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder {
 	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#forceAuthn(java.lang.Boolean)
 	 */
 	@Override
-	public AuthnRequestBuilder forceAuthn(Boolean aForceAuthn) {
+	public AuthnRequestBuilder<org.opensaml.saml2.core.AuthnRequest> forceAuthn(Boolean aForceAuthn) {
 		if (aForceAuthn != null) {
 			authnRequest.setForceAuthn(aForceAuthn);
 		}
@@ -177,7 +180,7 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder {
 	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#issuer(java.lang.String)
 	 */
 	@Override
-	public AuthnRequestBuilder issuer(String aIssuer) {
+	public AuthnRequestBuilder<org.opensaml.saml2.core.AuthnRequest> issuer(String aIssuer) {
 		if (aIssuer != null) {
 			issuer.setValue(aIssuer);
 		}
@@ -191,7 +194,8 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder {
 	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#nameIdPolicyAllowCreate(boolean)
 	 */
 	@Override
-	public AuthnRequestBuilder nameIdPolicyAllowCreate(Boolean aNameIdPolicyAllowCreate) {
+	public AuthnRequestBuilder<org.opensaml.saml2.core.AuthnRequest> nameIdPolicyAllowCreate(
+			Boolean aNameIdPolicyAllowCreate) {
 		if (aNameIdPolicyAllowCreate != null) {
 			nameIDPolicy.setAllowCreate(aNameIdPolicyAllowCreate);
 		}
@@ -204,7 +208,7 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder {
 	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#nameIdPolicyFormat(java.lang.String)
 	 */
 	@Override
-	public AuthnRequestBuilder nameIdPolicyFormat(String aNameIdPolicyFormat) {
+	public AuthnRequestBuilder<org.opensaml.saml2.core.AuthnRequest> nameIdPolicyFormat(String aNameIdPolicyFormat) {
 		if (aNameIdPolicyFormat != null) {
 			nameIDPolicy.setFormat(aNameIdPolicyFormat);
 		}
@@ -217,8 +221,19 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder {
 	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#createAuthnRequest()
 	 */
 	@Override
-	public AuthnRequest createAuthnRequest() {
+	public AuthnRequest<org.opensaml.saml2.core.AuthnRequest> createAuthnRequest() {
 		return new AuthnRequestImpl(authnRequest);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#createAuthnRequest(java.lang.Object)
+	 */
+	@Override
+	public AuthnRequest<org.opensaml.saml2.core.AuthnRequest> createAuthnRequest(
+			org.opensaml.saml2.core.AuthnRequest aInternalObject) {
+		return new AuthnRequestImpl(aInternalObject);
 	}
 
 }

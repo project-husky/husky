@@ -9,11 +9,13 @@ package org.ehealth_connector.security.authentication;
 
 import java.util.Calendar;
 
+import org.ehealth_connector.security.core.SecurityObject;
+
 /**
  * @since Jan 17, 2018 3:05:16 PM
  *
  */
-public interface AuthnRequest {
+public interface AuthnRequest<T> extends SecurityObject<T> {
 
 	/**
 	 * 

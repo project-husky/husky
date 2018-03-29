@@ -17,7 +17,7 @@ import org.opensaml.xml.schema.impl.XSStringBuilder;
  * @since Feb 20, 2018 11:18:52 AM
  *
  */
-public class AttributeBuilderImpl implements AttributeBuilder {
+public class AttributeBuilderImpl implements AttributeBuilder<org.opensaml.saml2.core.Attribute> {
 
 	private org.opensaml.saml2.core.Attribute attribute;
 
@@ -33,7 +33,7 @@ public class AttributeBuilderImpl implements AttributeBuilder {
 	 * @see org.ehealth_connector.security.saml2.AttributeBuilder#name(java.lang.String)
 	 */
 	@Override
-	public AttributeBuilder name(String aName) {
+	public AttributeBuilder<org.opensaml.saml2.core.Attribute> name(String aName) {
 		if (aName != null) {
 			attribute.setName(aName);
 		}
@@ -46,7 +46,7 @@ public class AttributeBuilderImpl implements AttributeBuilder {
 	 * @see org.ehealth_connector.security.saml2.AttributeBuilder#value(java.lang.String)
 	 */
 	@Override
-	public AttributeBuilder value(String aValue) {
+	public AttributeBuilder<org.opensaml.saml2.core.Attribute> value(String aValue) {
 		if (aValue != null) {
 			final XSStringBuilder builder = new XSStringBuilder();
 			final XSString attributeValue = builder.buildObject(AttributeValue.DEFAULT_ELEMENT_NAME,
@@ -64,8 +64,19 @@ public class AttributeBuilderImpl implements AttributeBuilder {
 	 * @see org.ehealth_connector.security.saml2.AttributeBuilder#createAttribute()
 	 */
 	@Override
-	public Attribute createAttribute() {
+	public Attribute<org.opensaml.saml2.core.Attribute> createAttribute() {
 		return new AttributeImpl(attribute);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.AttributeBuilder#createAttribute(java.lang.Object)
+	 */
+	@Override
+	public Attribute<org.opensaml.saml2.core.Attribute> createAttribute(
+			org.opensaml.saml2.core.Attribute aInternalObject) {
+		return new AttributeImpl(aInternalObject);
 	}
 
 }

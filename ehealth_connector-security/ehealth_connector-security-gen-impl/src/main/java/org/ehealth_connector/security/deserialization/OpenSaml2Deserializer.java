@@ -5,15 +5,17 @@
  * This code is made available under the terms of the Eclipse Public License v1.0. Accompanying materials are made available under the terms
  * of the Creative Commons Attribution-ShareAlike 4.0 License. This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  */
-package org.ehealth_connector.security.saml2;
+package org.ehealth_connector.security.deserialization;
 
-import org.ehealth_connector.security.core.SecurityObject;
+import org.ehealth_connector.security.exceptions.DeserializeException;
+import org.opensaml.xml.XMLObject;
+import org.w3c.dom.Element;
 
 /**
- * @since Jan 16, 2018 2:04:16 PM
+ * @since Feb 21, 2018 10:24:01 AM
  *
  */
-public interface Attribute<T> extends SecurityObject<T> {
+public interface OpenSaml2Deserializer {
 
 	/**
 	 * 
@@ -24,9 +26,11 @@ public interface Attribute<T> extends SecurityObject<T> {
 	 * <div class="it">ITALIANO</div>
 	 * @formatter:on
 	 *
-	 * @return
+	 * @param aXmlElement the xml element to be deserialized 
+	 * @return the deserialized object
+	 * @throws DeserializeException
 	 */
-	String getName();
+	XMLObject deserializeFromXml(Element aXmlElement) throws DeserializeException;
 
 	/**
 	 * 
@@ -37,9 +41,11 @@ public interface Attribute<T> extends SecurityObject<T> {
 	 * <div class="it">ITALIANO</div>
 	 * @formatter:on
 	 *
-	 * @return
+	 * @param aXmlBytes the byte array containing the xml to be deserialized 
+	 * @return the deserialized object
+	 * @throws DeserializeException
 	 */
-	String getNameFormat();
+	XMLObject deserializeFromByteArray(byte[] aXmlBytes) throws DeserializeException;
 
 	/**
 	 * 
@@ -50,11 +56,14 @@ public interface Attribute<T> extends SecurityObject<T> {
 	 * <div class="it">ITALIANO</div>
 	 * @formatter:on
 	 *
+	 * @param aXmlBytes
 	 * @return
+	 * @throws DeserializeException
 	 */
-	String getFriendlyName();
+	public Element deserializeFromByteArrayToXmlElement(byte[] aXmlBytes) throws DeserializeException;
 
 	/**
+	 * 
 	 * @formatter:off
 	 * <div class="en">HEREISENGLISH</div>
 	 * <div class="de">HIERISTDEUTSCH</div>
@@ -62,8 +71,10 @@ public interface Attribute<T> extends SecurityObject<T> {
 	 * <div class="it">ITALIANO</div>
 	 * @formatter:on
 	 *
-	 * @return
+	 * @param aXmlString the string containing the xml
+	 * @return the deserialized object
+	 * @throws DeserializeException
 	 */
-	String getValue();
+	XMLObject deserializeFromString(String aXmlString) throws DeserializeException;
 
 }
