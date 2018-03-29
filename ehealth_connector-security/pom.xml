@@ -1,19 +1,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.ehealth_connector.security</groupId>
-  <artifactId>ehealth_connector-security</artifactId>
-  <version>1.6-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  
-  <parent>
-	<groupId>org.ehealth_connector</groupId>
-	<artifactId>ehealth_connector-main</artifactId>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.ehealth_connector.security</groupId>
+	<artifactId>ehealth_connector-security</artifactId>
 	<version>1.6-SNAPSHOT</version>
-  </parent>
-  
-  <modules>
-  	<module>ehealth_connector-security-gen-api</module>
-  	<module>ehealth_connector-security-gen-impl</module>
-  </modules>
-  
+	<packaging>pom</packaging>
+
+	<parent>
+		<groupId>org.ehealth_connector</groupId>
+		<artifactId>ehealth_connector-main</artifactId>
+		<version>1.6-SNAPSHOT</version>
+	</parent>
+
+	<modules>
+		<module>ehealth_connector-security-gen-api</module>
+		<module>ehealth_connector-security-gen-impl</module>
+	</modules>
+
 </project>
