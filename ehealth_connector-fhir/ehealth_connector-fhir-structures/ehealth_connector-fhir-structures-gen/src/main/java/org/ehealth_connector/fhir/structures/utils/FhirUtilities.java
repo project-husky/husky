@@ -34,35 +34,46 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 public class FhirUtilities {
 
 	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Instantiates a new code from FHIR Coding.</div>
 	 * <div class="de">Instantiiert ein neues Code Objekt von FHIR Coding</div>
-	 * <div class="fr"></div> <div class="it"></div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
-	 * @param aCoding
-	 *            <br>
-	 *            <div class="de">Coding</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 * @param aCoding <br>
+	 * <div class="en">the Coding to be converted to Code</div>
+	 * <div class="de">Die Coding Instanz die in eine Code Instanz konvertiert werden soll.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @return <br>
-	 *         <div class="de">Instanz von Code</div> <div class="fr"></div>
-	 *         <div class="it"></div>
+	 * <div class="en">new instance of type Code</div>
+	 * <div class="de">Neue Instanz vom Typ Code</div>
+	 * <div class="it"></div>
+	 *<!-- @formatter:off -->
 	 */
 	public static Code toCode(Coding aCoding) {
-		return new Code(aCoding.getSystem().replace("urn:oid:", ""), aCoding.getCode(),
-				aCoding.getDisplay());
+		return new Code(aCoding.getSystem().replace("urn:oid:", ""), aCoding.getCode(), aCoding.getDisplay());
 	}
 
 	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Instantiates a new code from FHIR CodeableConcept.</div>
-	 * <div class="de">Instantiiert ein neues Code Objekt von FHIR
-	 * CodeableConcept</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="de">Instantiiert ein neues Code Objekt von FHIR7 CodeableConcept</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
-	 * @param aCoding
-	 *            <br>
-	 *            <div class="de">CodeableConcept</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 * @param aCodeableConcept <br>
+	 * <div class="en">the CodeableConcept to be converted</div>
+	 * <div class="de">Das CodeableConcept zum konvertieren</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * 
 	 * @return <br>
-	 *         <div class="de">Instanz von Code</div> <div class="fr"></div>
-	 *         <div class="it"></div>
+	 * <div class="en">new instance of type Code</div>
+	 * <div class="de">Neue Instanz vom Typ Code</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
 	 */
 	public static Code toCode(CodeableConcept aCodeableConcept) {
 		return new Code(aCodeableConcept.getCodingFirstRep().getSystem().replace("urn:oid:", ""),
@@ -70,16 +81,18 @@ public class FhirUtilities {
 	}
 
 	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Creates a new Identificator</div>
 	 * <div class="de">Erstellt einen neuen Identifikator.</div>
 	 *
-	 * @param identifier
-	 *            <br>
-	 *            <div class="en">the identifier to be used</div>
-	 *            <div class="de">der identifier der zum convertieren ist.</div>
+	 * @param identifier <br>
+	 * <div class="en">the identifier to be used</div>
+	 * <div class="de">der identifier der zum convertieren ist.</div>
+	 * 
 	 * @return <br>
-	 *         <div class="en">the Identificator initialized</div>
-	 *         <div class="de">der initialisierte Identificator</div>
+	 * <div class="en">the Identificator initialized</div>
+	 * <div class="de">der initialisierte Identificator</div>
+	 * <!-- @formatter:on -->
 	 */
 	public static Identificator toIdentificator(Identifier identifier) {
 		final Identificator retVal = new Identificator(DatatypesFactory.eINSTANCE.createII());
