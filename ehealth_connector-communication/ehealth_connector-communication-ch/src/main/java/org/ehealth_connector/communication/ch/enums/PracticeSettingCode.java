@@ -232,7 +232,7 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 * und Rettungsmedizin</div> <div class="fr">Médecine d'urgence et de
 	 * sauvetage</div> <div class="it">Medicina d'urgenza e di salvataggio</div>
 	 */
-	ACCIDENT__AMP__EMERGENCY("394576009", "Accident &amp; emergency (qualifier value)", "Accident &amp; emergency", "Notfall- und Rettungsmedizin", "Médecine d'urgence et de sauvetage", "Medicina d'urgenza e di salvataggio"),
+	ACCIDENT_AND_EMERGENCY("394576009", "Accident &amp; emergency (qualifier value)", "Accident &amp; emergency", "Notfall- und Rettungsmedizin", "Médecine d'urgence et de sauvetage", "Medicina d'urgenza e di salvataggio"),
 	/**
 	 * <div class="en">Nuclear medicine</div>
 	 * <div class="de">Nuklearmedizin</div> <div class="fr">Médecine
@@ -636,7 +636,7 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 * <div class="fr">Code de Médecine d'urgence et de sauvetage</div>
 	 * <div class="it">Code per Medicina d'urgenza e di salvataggio</div>
 	 */
-	public static final String ACCIDENT__AMP__EMERGENCY_CODE = "394576009";
+	public static final String ACCIDENT_AND_EMERGENCY_CODE = "394576009";
 
 	/**
 	 * <div class="en">Code for Nuclear medicine</div> <div class="de">Code für
@@ -956,12 +956,6 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div>
-	 * <div class="de">Menschenlesbarer Name</div>
-	 */
-	private String displayName;
-
-	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
 	 * Display Name</div> <div class="de">Instanziiert dieses Enum Object
 	 * mittels eines Codes und einem Display Name</div>.
@@ -996,6 +990,7 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 *
 	 * @return <div class="en">the code system name</div>
 	 */
+	@Override
 	public String getCodeSystemName() {
 		return CODE_SYSTEM_NAME;
 	}
@@ -1006,6 +1001,7 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */
+	@Override
 	public String getCodeSystemOid() {
 		return CODE_SYSTEM_OID;
 	}
@@ -1016,6 +1012,7 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 *
 	 * @return <div class="en">the code</div>
 	 */
+	@Override
 	public String getCodeValue() {
 		return this.code;
 	}
@@ -1032,6 +1029,7 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 * @return returns the display name in the desired language. if language not
 	 *         found, display name in german will returned
 	 */
+	@Override
 	public String getDisplayName(LanguageCode languageCode) {
 		String displayName = displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {

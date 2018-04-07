@@ -109,12 +109,6 @@ public enum TemplateNameToReplace implements ValueSetEnumInterface {
 	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div>
-	 * <div class="de">Menschenlesbarer Name</div>
-	 */
-	private String displayName;
-
-	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
 	 * Display Name</div>
 	 * <div class="de">Instanziiert dieses Enum Object mittels eines Codes

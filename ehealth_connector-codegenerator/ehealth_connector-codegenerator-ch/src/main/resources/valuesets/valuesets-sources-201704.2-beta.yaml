@@ -16,7 +16,7 @@
 # The base URL that is used to download the value sets in JSON.
 # To this URL the "id" and "effectiveDate" is appended in the form
 # "&id=<value-set-id>&effectiveDate=<value-set-effective-date" at run time.
-baseUrl: 'http://art-decor.org/decor/services/RetrieveValueSet?prefix=ch-epr-&version=&format=json'
+baseUrl: 'http://art-decor.org/decor/services/RetrieveValueSet?prefix=ch-epr-&format=json'
 
 # The list of all configured value sets that will be generated from the CH-EPR value set
 # repository (https://art-decor.org/art-decor/decor-valuesets--ch-epr-)

@@ -28,9 +28,11 @@ import java.io.InvalidClassException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.ehealth_connector.codegenerator.ch.valuesets.model.ValueSet;
@@ -73,10 +75,38 @@ public final class ValueSetUtil {
 	public static final String VALUE_SET_CONCEPTS_PATH = "$.conceptList[*].concept[*]";
 
 	/**
-	 * <div class="en">The default encoding used to encode files and URL
-	 * parameter.</div>
+	 * <div class="en">The default encoding used to encode URL parameter.</div>
 	 */
 	private static final String DEFAULT_ENCODING = "UTF-8";
+
+	/**
+	 * <div class="en">The default charset used to encode files.</div>
+	 */
+	public static final Charset DEFAULT_CHARSET = Charsets.UTF_8;
+
+	/**
+	 * <div class="en">Builds a Java compatible enum element name from a
+	 * string.</div>
+	 *
+	 * @param displayName
+	 *            The string to build the enum name from.
+	 * @return An all upper case string with every non-word character replaced
+	 *         with an underscore.
+	 */
+	public static String buildEnumName(String displayName) {
+		if (displayName == null || displayName.trim().isEmpty()) {
+			throw new IllegalArgumentException("displayName cannot be null or empty");
+		}
+
+		String enumName = displayName.trim().toUpperCase();
+
+		enumName = enumName.replaceAll("CLIENT'S", "CLIENT");
+		enumName = enumName.replaceAll("PATIENT'S", "PATIENT");
+
+		enumName = enumName.replaceAll("&AMP;", "AND");
+
+		return enumName.replaceAll("\\W", "_");
+	}
 
 	/**
 	 * <div class="en">Build the complete URL to retrieve a value set JSON
@@ -102,19 +132,52 @@ public final class ValueSetUtil {
 	}
 
 	/**
-	 * <div class="en">Load the configuration file and parse it into the
-	 * appropriate configuration classes.</div>
+	 * <div class="en">Reads the display name from a concept object parsed from
+	 * JSON.</div>
 	 *
-	 * @return A fully initialized configuration object containing the values of
-	 *         the config file.
-	 * @throws IOException
-	 *             If the configuration file cannot be found or read.
+	 * @param language
+	 *            The language to find the display name in.
+	 * @param concept
+	 *            The concept object parsed from JSON.
+	 * @return The display name or null if not found.
 	 */
-	public static ValueSetConfiguration loadConfiguration(String basePath) throws IOException {
-		File configFile = new File(basePath, CONFIG_FILE_LOCATION);
-		String valueSetConfiguration = FileUtils.readFileToString(configFile);
-		Yaml yaml = new Yaml();
-		return yaml.loadAs(valueSetConfiguration, ValueSetConfiguration.class);
+	@SuppressWarnings("unchecked")
+	public static String getDisplayName(LanguageCode language, Map<String, Object> concept) {
+		if (language == null) {
+			return concept.get("displayName").toString();
+		}
+
+		List<Map<String, String>> designations = (List<Map<String, String>>) concept
+				.get("designation");
+
+		for (Map<String, String> designation : designations) {
+			String designationLanguage = designation.get("language");
+			if (designationLanguage != null
+					&& designationLanguage.startsWith(language.getCodeValue())) {
+				return designation.get("displayName");
+			}
+		}
+
+		// nothing found for desired language, return the default for english
+		if (language == ENGLISH) {
+			return getDisplayName(null, concept);
+		}
+		throw new IllegalStateException("no designation found for language " + language);
+	}
+
+	/**
+	 * <div class="en">Create a file instance to a Java source file by its fully
+	 * qualified class name and a base folder.</div>
+	 *
+	 * @param baseJavaFolder
+	 *            The base source folder the Java code resides in.
+	 * @param fullyQualifiedClassName
+	 *            The class name including the package name.
+	 * @return A file instance of the Java file.
+	 */
+	public static File getSourceFileName(String baseJavaFolder, String fullyQualifiedClassName) {
+		return new File(new File(baseJavaFolder, "src/main/java"),
+				fullyQualifiedClassName.replaceAll("\\.", "/") + ".java");
 	}
 
 	/**
@@ -132,6 +195,40 @@ public final class ValueSetUtil {
 		File valueSetDefinitionFile = new File(new File(baseDir, RESOURCE_LOCATION),
 				valueSet.getCodeSystemName() + ".json");
 		return valueSetDefinitionFile;
+	}
+
+	/**
+	 * <div class="en">Load the configuration file and parse it into the
+	 * appropriate configuration classes.</div>
+	 *
+	 * @return A fully initialized configuration object containing the values of
+	 *         the config file.
+	 * @throws IOException
+	 *             If the configuration file cannot be found or read.
+	 */
+	public static ValueSetConfiguration loadConfiguration(String basePath) throws IOException {
+		File configFile = new File(basePath, CONFIG_FILE_LOCATION);
+		String valueSetConfiguration = FileUtils.readFileToString(configFile, DEFAULT_CHARSET);
+		Yaml yaml = new Yaml();
+		return yaml.loadAs(valueSetConfiguration, ValueSetConfiguration.class);
+	}
+
+	/**
+	 * <div class="en">Retrieves the primary type from a compilation unit.</div>
+	 *
+	 * @param javaSource
+	 *            Parsed AST representation of a Java file.
+	 * @return Parsed AST representation of the primary type found in the source
+	 *         file.
+	 * @throws IOException
+	 *             If there is no primary type found or the Compilation unit was
+	 *             not loaded from a file and the primary type could therefore
+	 *             not be established.
+	 */
+	public static TypeDeclaration<?> loadPrimaryType(CompilationUnit javaSource)
+			throws IOException {
+		return javaSource.getPrimaryType().orElseThrow(() -> new InvalidClassException(
+				"Failed to load primary type from compilation unit"));
 	}
 
 	/**
@@ -167,96 +264,15 @@ public final class ValueSetUtil {
 		// if it does not exist locally yet
 		if (!valueSetDefinitionFile.exists() && downloadIfNotInFileSystem) {
 			valueSetDefinition = IOUtils.toString(buildValueSetURL(baseUrl, valueSet));
-			FileUtils.write(valueSetDefinitionFile, valueSetDefinition);
+			FileUtils.write(valueSetDefinitionFile, valueSetDefinition, DEFAULT_CHARSET);
 		} else if (!valueSetDefinitionFile.exists()) {
 			throw new FileNotFoundException(valueSetDefinitionFile.getName());
 		} else {
-			valueSetDefinition = FileUtils.readFileToString(valueSetDefinitionFile);
+			valueSetDefinition = FileUtils.readFileToString(valueSetDefinitionFile,
+					DEFAULT_CHARSET);
 		}
 
 		// get the value set with the defined date
 		return JsonPath.read(valueSetDefinition, VALUE_SET_BASE_PATH);
-	}
-
-	/**
-	 * <div class="en">Retrieves the primary type from a compilation unit.</div>
-	 *
-	 * @param javaSource
-	 *            Parsed AST representation of a Java file.
-	 * @return Parsed AST representation of the primary type found in the source
-	 *         file.
-	 * @throws IOException
-	 *             If there is no primary type found or the Compilation unit was
-	 *             not loaded from a file and the primary type could therefore
-	 *             not be established.
-	 */
-	public static TypeDeclaration<?> loadPrimaryType(CompilationUnit javaSource) throws IOException {
-		return javaSource.getPrimaryType().orElseThrow(() -> new InvalidClassException(
-				"Failed to load primary type from compilation unit"));
-	}
-
-	/**
-	 * <div class="en">Create a file instance to a Java source file by its fully
-	 * qualified class name and a base folder.</div>
-	 *
-	 * @param baseJavaFolder
-	 *            The base source folder the Java code resides in.
-	 * @param fullyQualifiedClassName
-	 *            The class name including the package name.
-	 * @return A file instance of the Java file.
-	 */
-	public static File getSourceFileName(String baseJavaFolder, String fullyQualifiedClassName) {
-		return new File(new File(baseJavaFolder, "src/main/java"),
-				fullyQualifiedClassName.replaceAll("\\.", "/") + ".java");
-	}
-
-	/**
-	 * <div class="en">Builds a Java compatible enum element name from a
-	 * string.</div>
-	 *
-	 * @param displayName
-	 *            The string to build the enum name from.
-	 * @return An all upper case string with every non-word character replaced
-	 *         with an underscore.
-	 */
-	public static String buildEnumName(String displayName) {
-		if (displayName == null || displayName.trim().isEmpty()) {
-			throw new IllegalArgumentException("displayName cannot be null or empty");
-		}
-		return displayName.trim().replaceAll("\\W", "_").toUpperCase();
-	}
-
-	/**
-	 * <div class="en">Reads the display name from a concept object parsed from
-	 * JSON.</div>
-	 *
-	 * @param language
-	 *            The language to find the display name in.
-	 * @param concept
-	 *            The concept object parsed from JSON.
-	 * @return The display name or null if not found.
-	 */
-	@SuppressWarnings("unchecked")
-	public static String getDisplayName(LanguageCode language, Map<String, Object> concept) {
-		if (language == null) {
-			return concept.get("displayName").toString();
-		}
-
-		List<Map<String, String>> designations = (List<Map<String, String>>) concept
-				.get("designation");
-
-		for (Map<String, String> designation : designations) {
-			String designationLanguage = designation.get("language");
-			if (designationLanguage != null
-					&& designationLanguage.startsWith(language.getCodeValue())) {
-				return designation.get("displayName");
-			}
-		}
-
-		// nothing found for desired language, return the default for english
-		if (language == ENGLISH) {
-			return getDisplayName(null, concept);
-		}
-		throw new IllegalStateException("no designation found for language " + language);
 	}
 }

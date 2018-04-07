@@ -27,94 +27,95 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /**
- * <div class="en">Interface for all dynamically created/updated value sets.</div>
- * <div class="de">Interface für alle dynamisch erstellten/aktualisierten Valuesets.</div>
+ * <div class="en">Interface for all dynamically created/updated value
+ * sets.</div> <div class="de">Interface für alle dynamisch
+ * erstellten/aktualisierten Valuesets.</div>
  */
 public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
 
-    /**
-     * <div class="en">Gets the code system name.</div> <div class="de">Liefert
-     * code system name.</div>
-     *
-     * @return <div class="en">the code system name</div>
-     */
-    String getCodeSystemName();
+	/**
+	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
+	 * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
+	 *
+	 * @return <div class="en">The MDHT Code</div>
+	 */
+	default CE getCE() {
+		final CE ce = DatatypesFactory.eINSTANCE.createCE();
+		ce.setCodeSystem(getCodeSystemOid());
+		ce.setCode(getCodeValue());
+		ce.setDisplayName(getDisplayName());
+		return ce;
+	}
 
-    /**
-     * <div class="en">Gets the code system id.</div> <div class="de">Liefert
-     * die code system id.</div>
-     *
-     * @return <div class="en">the code system id</div>
-     */
-    String getCodeSystemOid();
+	/**
+	 * <div class="en">Gets the ehealthconnector Code Object</div>
+	 * <div class="de">Liefert das ehealthconnector Code Objekt</div>
+	 *
+	 * @return <div class="en">the code</div>
+	 */
+	default Code getCode() {
+		return new Code(getCodeSystemOid(), getCodeValue(), getDisplayName());
+	}
 
-    /**
-     * <div class="en">Gets the actual Code as string</div>
-     * <div class="de">Liefert den eigentlichen Code als String</div>
-     *
-     * @return <div class="en">the code</div>
-     */
-    String getCodeValue();
+	/**
+	 * <div class="en">Gets the OHT CodedMetadataType Object</div>
+	 * <div class="de">Liefert das OHT CodedMetadataType Objekt</div>
+	 *
+	 * @return <div class="en">the codedMetadataType</div>
+	 */
+	@Override
+	default CodedMetadataType getCodedMetadataType() {
+		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
+		cmt.setSchemeName(getCodeSystemOid());
+		cmt.setCode(getCodeValue());
+		cmt.setDisplayName(XdsMetadataUtil.createInternationalString(getDisplayName(), "de-ch"));
+		return cmt;
+	}
 
-    /**
-     * <div class="en">Gets the display name defined by the language param. If
-     * language is unknow, german name is returned</div> <div class="de">Liefert
-     * display name gemäss Parameter, falls die Sprache unbekannt ist, wird
-     * standartmässig deutsch geliefert.</div>
-     *
-     * @param languageCode
-     *            the language code to get the display name for
-     * @return returns the display name in the desired language. if language not
-     *         found, display name in german will returned
-     */
-    String getDisplayName(LanguageCode languageCode);
+	/**
+	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
+	 * code system name.</div>
+	 *
+	 * @return <div class="en">the code system name</div>
+	 */
+	String getCodeSystemName();
 
-    /**
-     * <div class="en">Gets the Code of this Enum as MDHT Object.</div>
-     * <div class="de">Liefert den Code dieses Enum als MDHT Objekt.</div>
-     *
-     * @return <div class="en">The MDHT Code</div>
-     */
-    default CE getCE() {
-        final CE ce = DatatypesFactory.eINSTANCE.createCE();
-        ce.setCodeSystem(getCodeSystemOid());
-        ce.setCode(getCodeValue());
-        ce.setDisplayName(getDisplayName());
-        return ce;
-    }
+	/**
+	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
+	 * die code system id.</div>
+	 *
+	 * @return <div class="en">the code system id</div>
+	 */
+	String getCodeSystemOid();
 
-    /**
-     * <div class="en">Gets the ehealthconnector Code Object</div>
-     * <div class="de">Liefert das ehealthconnector Code Objekt</div>
-     *
-     * @return <div class="en">the code</div>
-     */
-    default Code getCode() {
-        return new Code(getCodeSystemOid(), getCodeValue(), getDisplayName());
-    }
+	/**
+	 * <div class="en">Gets the actual Code as string</div>
+	 * <div class="de">Liefert den eigentlichen Code als String</div>
+	 *
+	 * @return <div class="en">the code</div>
+	 */
+	String getCodeValue();
 
-    /**
-     * <div class="en">Gets the display name.</div> <div class="de">Liefert
-     * display name.</div>
-     *
-     * @return <div class="en">the display name</div>
-     */
-    default String getDisplayName() {
-        return getDisplayName(null);
-    }
+	/**
+	 * <div class="en">Gets the display name.</div> <div class="de">Liefert
+	 * display name.</div>
+	 *
+	 * @return <div class="en">the display name</div>
+	 */
+	default String getDisplayName() {
+		return getDisplayName(null);
+	}
 
-    /**
-     * <div class="en">Gets the OHT CodedMetadataType Object</div>
-     * <div class="de">Liefert das OHT CodedMetadataType Objekt</div>
-     *
-     * @return <div class="en">the codedMetadataType</div>
-     */
-    @Override
-    default CodedMetadataType getCodedMetadataType() {
-        final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
-        cmt.setSchemeName(getCodeSystemOid());
-        cmt.setCode(getCodeValue());
-        cmt.setDisplayName(XdsMetadataUtil.createInternationalString(getDisplayName(), "de-ch"));
-        return cmt;
-    }
+	/**
+	 * <div class="en">Gets the display name defined by the language param. If
+	 * language is unknow, german name is returned</div> <div class="de">Liefert
+	 * display name gemäss Parameter, falls die Sprache unbekannt ist, wird
+	 * standartmässig deutsch geliefert.</div>
+	 *
+	 * @param languageCode
+	 *            the language code to get the display name for
+	 * @return returns the display name in the desired language. if language not
+	 *         found, display name in german will returned
+	 */
+	String getDisplayName(LanguageCode languageCode);
 }

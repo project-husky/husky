@@ -132,7 +132,7 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 * des Patienten</div> <div class="fr">Domicile du patient</div>
 	 * <div class="it">Domicilio del paziente</div>
 	 */
-	CLIENT_S_OR_PATIENT_S_HOME("394778007", "Client's or patient's home (environment)", "Client's or patient's home", "Domizil des Patienten", "Domicile du patient", "Domicilio del paziente"),
+	CLIENT_OR_PATIENT_HOME("394778007", "Client's or patient's home (environment)", "Client's or patient's home", "Domizil des Patienten", "Domicile du patient", "Domicilio del paziente"),
 	/**
 	 * <div class="en">Telemedicine institution</div>
 	 * <div class="de">Telemedizinische Einrichtung</div>
@@ -245,7 +245,7 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 * de Domicile du patient</div> <div class="it">Code per Domicilio del
 	 * paziente</div>
 	 */
-	public static final String CLIENT_S_OR_PATIENT_S_HOME_CODE = "394778007";
+	public static final String CLIENT_OR_PATIENT_HOME_CODE = "394778007";
 
 	/**
 	 * <div class="en">Code for Telemedicine institution</div>
@@ -351,12 +351,6 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div>
-	 * <div class="de">Menschenlesbarer Name</div>
-	 */
-	private String displayName;
-
-	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
 	 * Display Name</div> <div class="de">Instanziiert dieses Enum Object
 	 * mittels eines Codes und einem Display Name</div>.
@@ -391,6 +385,7 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 *
 	 * @return <div class="en">the code system name</div>
 	 */
+	@Override
 	public String getCodeSystemName() {
 		return CODE_SYSTEM_NAME;
 	}
@@ -401,6 +396,7 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */
+	@Override
 	public String getCodeSystemOid() {
 		return CODE_SYSTEM_OID;
 	}
@@ -411,6 +407,7 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 *
 	 * @return <div class="en">the code</div>
 	 */
+	@Override
 	public String getCodeValue() {
 		return this.code;
 	}
@@ -427,6 +424,7 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 * @return returns the display name in the desired language. if language not
 	 *         found, display name in german will returned
 	 */
+	@Override
 	public String getDisplayName(LanguageCode languageCode) {
 		String displayName = displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {

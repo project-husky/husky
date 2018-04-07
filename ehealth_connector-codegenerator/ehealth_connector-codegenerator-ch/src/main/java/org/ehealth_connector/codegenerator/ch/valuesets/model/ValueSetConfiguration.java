@@ -31,18 +31,42 @@ public class ValueSetConfiguration {
 
 	private List<ValueSet> valueSets;
 
+	/**
+	 * <div class="en">Gets the base URL that is used to download the value sets
+	 * in JSON</div>
+	 * 
+	 * @return
+	 */
 	public String getBaseUrl() {
 		return baseUrl;
 	}
 
-	public void setBaseUrl(String baseUrl) {
-		this.baseUrl = baseUrl;
-	}
-
+	/**
+	 * <div class="en">Gets the list of all configured value sets that will be
+	 * generated from the CH-EPR value set repository</div>
+	 * 
+	 * @return
+	 */
 	public List<ValueSet> getValueSets() {
 		return valueSets;
 	}
 
+	/**
+	 * <div class="en">Sets the base URL that is used to download the value sets
+	 * in JSON</div>
+	 * 
+	 * @param baseUrl
+	 */
+	public void setBaseUrl(String baseUrl) {
+		this.baseUrl = baseUrl;
+	}
+
+	/**
+	 * <div class="en">Sets the list of all configured value sets that will be
+	 * generated from the CH-EPR value set repository</div>
+	 * 
+	 * @param valueSets
+	 */
 	public void setValueSets(List<ValueSet> valueSets) {
 		this.valueSets = valueSets;
 	}

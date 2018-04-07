@@ -23,6 +23,7 @@ import static com.github.javaparser.ast.Modifier.FINAL;
 import static com.github.javaparser.ast.Modifier.PUBLIC;
 import static com.github.javaparser.ast.Modifier.STATIC;
 import static java.util.Arrays.asList;
+import static org.ehealth_connector.codegenerator.ch.valuesets.ValueSetUtil.DEFAULT_CHARSET;
 import static org.ehealth_connector.codegenerator.ch.valuesets.ValueSetUtil.VALUE_SET_CONCEPTS_PATH;
 import static org.ehealth_connector.codegenerator.ch.valuesets.ValueSetUtil.buildEnumName;
 import static org.ehealth_connector.codegenerator.ch.valuesets.ValueSetUtil.buildValueSetURL;
@@ -40,7 +41,6 @@ import static org.ehealth_connector.common.enums.LanguageCode.ITALIAN;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -64,6 +64,7 @@ import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.expr.StringLiteralExpr;
 import com.github.javaparser.ast.type.Type;
 import com.github.javaparser.printer.PrettyPrinterConfiguration;
+import com.google.common.collect.ImmutableMap;
 import com.jayway.jsonpath.JsonPath;
 
 /**
@@ -121,19 +122,132 @@ public class UpdateValueSets {
 	/**
 	 * <div class="en">Javadoc comment prefix for the code fields.</div>
 	 */
-	private static final Map<LanguageCode, String> CODE_JAVADOC_PREFIX = new HashMap<LanguageCode, String>() {
-		{
-			put(ENGLISH, "Code for ");
-			put(GERMAN, "Code für ");
-			put(FRENCH, "Code de ");
-			put(ITALIAN, "Code per ");
-		}
-	};
+	private static final Map<LanguageCode, String> CODE_JAVADOC_PREFIX = ImmutableMap.of(ENGLISH,
+			"Code for ", GERMAN, "Code für ", FRENCH, "Code de ", ITALIAN, "Code per ");
 
 	/**
 	 * <div class="en">Shortcut for the internal type of a string.</div>
 	 */
 	private static final Type STRING_TYPE = parseClassOrInterfaceType("String");
+
+	/**
+	 * <div class="en">Adds all concepts of the value set definition as enum
+	 * elements to the given enum type.</div>
+	 *
+	 * @param enumType
+	 *            The enum type representing parsed Java enum class.
+	 * @param concepts
+	 *            The concepts from the value set definition file.
+	 */
+	private static void addEnumElements(EnumDeclaration enumType,
+			List<Map<String, Object>> concepts) {
+		for (Map<String, Object> concept : concepts) {
+
+			String enumConstantName = buildEnumName(getDisplayName(ENGLISH, concept));
+			String code = concept.get("code").toString();
+
+			NodeList<Expression> values = new NodeList<>();
+			StringBuilder javadocEnum = new StringBuilder();
+			StringBuilder javadocConstant = new StringBuilder();
+
+			values.add(new StringLiteralExpr(code));
+			values.add(new StringLiteralExpr(concept.get("displayName").toString()));
+
+			// build comments per language
+			for (LanguageCode language : LANGUAGE_CODES) {
+				values.add(new StringLiteralExpr(getDisplayName(language, concept)));
+				String displayName = getDisplayName(language, concept);
+				javadocEnum.append(buildJavadocComment(language, displayName));
+				javadocConstant.append(buildJavadocComment(language,
+						CODE_JAVADOC_PREFIX.get(language) + displayName));
+			}
+
+			// the enum constant with all values
+			EnumConstantDeclaration enumConstant = new EnumConstantDeclaration(new NodeList<>(),
+					new SimpleName(enumConstantName), new NodeList<>(values), new NodeList<>());
+			enumConstant.setJavadocComment(javadocEnum.toString());
+			enumType.addEntry(enumConstant);
+
+			// the static final code field for each concept
+			enumType.addFieldWithInitializer(STRING_TYPE, enumConstantName + "_CODE",
+					new StringLiteralExpr(code), PUBLIC, STATIC, FINAL)
+					.setJavadocComment(javadocConstant.toString());
+		}
+	}
+
+	/**
+	 * <div class="en">Formats a javadoc comment HTML snippet in the given
+	 * language.</div>
+	 *
+	 * @param language
+	 *            The language code to add.
+	 * @param comment
+	 *            The comment to add.
+	 * @return The HTML snippet of the comment.
+	 */
+	private static String buildJavadocComment(LanguageCode language, String comment) {
+		return " <div class=\"" + language.getCodeValue().substring(0, 2) + "\">" + comment
+				+ "</div>\n";
+	}
+
+	/**
+	 * <div class="en">Creates an enum definition class.</div>
+	 *
+	 * @param id
+	 *            The unique code id that identifies the enum.
+	 * @param codeSystemName
+	 *            The code system name of the enum.
+	 * @param baseJavaFolder
+	 *            The base Java source folder (relative to the root of the
+	 *            project hierarchy) where the Java package structure begins.
+	 * @param className
+	 *            The fully qualified Java class name of the enum to update.
+	 * @param valueSetDefinition
+	 *            The parsed value set definition file.
+	 * @throws IOException
+	 *             When reading or writing the Java source file fails.
+	 */
+	private static void createEnumClassFromTemplate(String id, String codeSystemName,
+			String baseJavaFolder, String fullyQualifiedclassName) throws IOException {
+
+		String className = fullyQualifiedclassName
+				.substring(fullyQualifiedclassName.lastIndexOf('.') + 1);
+		String packageName = fullyQualifiedclassName.substring(0,
+				fullyQualifiedclassName.lastIndexOf('.'));
+
+		String templateString = FileUtils
+				.readFileToString(new File(TEMPLATE_FILE_LOCATION), DEFAULT_CHARSET)
+				.replaceAll(TEMPLATE_NAME_TO_REPLACE, className)
+				.replaceAll(TEMPLATE_PACKAGE_NAME_TO_REPLACE, packageName);
+
+		CompilationUnit javaSource = JavaParser.parse(templateString);
+
+		FileUtils.write(getSourceFileName(baseJavaFolder, fullyQualifiedclassName),
+				javaSource.toString(PRETTY_PRINTER_CONFIGURATION), DEFAULT_CHARSET);
+
+	}
+
+	/**
+	 * <div class="en">Parses the description of a value set from its parsed
+	 * JSON definition.</div>
+	 *
+	 * @param language
+	 *            The language of the description to parse.
+	 * @param descriptions
+	 *            The description JSON object.
+	 * @return The description in the desired language.
+	 * @throws IllegalStateException
+	 *             If no description was found.
+	 */
+	private static String getDescription(LanguageCode language, Object descriptions)
+			throws IllegalStateException {
+		List<Map<String, String>> filteredDescriptions = JsonPath.read(descriptions,
+				"$..[?(@.language =~ /" + language.getCodeValue() + ".*/i)]");
+		if (filteredDescriptions == null || filteredDescriptions.isEmpty()) {
+			throw new IllegalStateException("no designation found for language " + language);
+		}
+		return filteredDescriptions.get(0).get("content");
+	}
 
 	/**
 	 * <div class="en">The main entry for the value set generator.</div>
@@ -184,7 +298,7 @@ public class UpdateValueSets {
 			}
 
 			System.out.print("Project folder: " + valueSet.getProjectFolder() + "\n");
-			
+
 			System.out.print("Updating class: " + valueSet.getClassName() + " ... ");
 
 			updateEnumClass(valueSet.getId(), valueSet.getCodeSystemName(), baseJavaFolder,
@@ -198,39 +312,38 @@ public class UpdateValueSets {
 	}
 
 	/**
-	 * <div class="en">Creates an enum definition class.</div>
+	 * <div class="en">Remove everything from an enum type, leaving an empty
+	 * definition body.</div>
 	 *
-	 * @param id
-	 *            The unique code id that identifies the enum.
-	 * @param codeSystemName
-	 *            The code system name of the enum.
-	 * @param baseJavaFolder
-	 *            The base Java source folder (relative to the root of the
-	 *            project hierarchy) where the Java package structure begins.
-	 * @param className
-	 *            The fully qualified Java class name of the enum to update.
-	 * @param valueSetDefinition
-	 *            The parsed value set definition file.
-	 * @throws IOException
-	 *             When reading or writing the Java source file fails.
+	 * @param enumType
+	 *            The enum to clean out.
 	 */
-	private static void createEnumClassFromTemplate(String id, String codeSystemName,
-			String baseJavaFolder, String fullyQualifiedclassName) throws IOException {
+	private static void removeEverything(EnumDeclaration enumType) {
+		List<Node> allNodes = new ArrayList<>();
+		allNodes.addAll(enumType.getEntries());
+		allNodes.addAll(enumType.getFields());
+		allNodes.addAll(enumType.getConstructors());
+		allNodes.addAll(enumType.getMethods());
+		allNodes.addAll(enumType.getChildNodes());
+		allNodes.forEach(enumType::remove);
+	}
 
-		String className = fullyQualifiedclassName
-				.substring(fullyQualifiedclassName.lastIndexOf('.') + 1);
-		String packageName = fullyQualifiedclassName.substring(0,
-				fullyQualifiedclassName.lastIndexOf('.'));
-
-		String templateString = FileUtils.readFileToString(new File(TEMPLATE_FILE_LOCATION))
-				.replaceAll(TEMPLATE_NAME_TO_REPLACE, className)
-				.replaceAll(TEMPLATE_PACKAGE_NAME_TO_REPLACE, packageName);
-
-		CompilationUnit javaSource = JavaParser.parse(templateString);
-
-		FileUtils.write(getSourceFileName(baseJavaFolder, fullyQualifiedclassName),
-				javaSource.toString(PRETTY_PRINTER_CONFIGURATION));
-
+	/**
+	 * <div class="en">Replaces the value of a constant in the parsed type
+	 * declaration of a Java class.</div>
+	 *
+	 * @param body
+	 *            The parsed body declaration of the Java class that holds the
+	 *            constant.
+	 * @param constantName
+	 *            The name of the constant to replace the value of.
+	 * @param value
+	 *            The value to set.
+	 */
+	private static void replaceConstantValue(TypeDeclaration<? extends TypeDeclaration<?>> body,
+			String constantName, String value) {
+		body.getFieldByName(constantName).ifPresent(
+				field -> field.getVariable(0).setInitializer(new StringLiteralExpr(value)));
 	}
 
 	/**
@@ -251,9 +364,12 @@ public class UpdateValueSets {
 	 *            The parsed value set definition file.
 	 * @throws IOException
 	 *             When reading or writing the Java source file fails.
+	 * @throws IllegalStateException
+	 *             If the class does not declare an Enum type.
 	 */
 	private static void updateEnumClass(String id, String codeSystemName, String baseJavaFolder,
-			String className, Map<String, Object> valueSetDefinition) throws IOException {
+			String className, Map<String, Object> valueSetDefinition)
+			throws IOException, IllegalStateException {
 
 		CompilationUnit javaSource = JavaParser.parse(getSourceFileName(baseJavaFolder, className));
 		TypeDeclaration<?> primaryType = loadPrimaryType(javaSource);
@@ -289,125 +405,11 @@ public class UpdateValueSets {
 			new ArrayList<>(javaSource.getImports()).forEach(javaSource::remove);
 			templateSource.getImports().forEach(javaSource::addImport);
 		} else {
-			throw new RuntimeException(
+			throw new IllegalStateException(
 					"Class with name " + className + " does not declare an Enum type.");
 		}
 
 		FileUtils.write(getSourceFileName(baseJavaFolder, className),
-				javaSource.toString(PRETTY_PRINTER_CONFIGURATION));
-	}
-
-	/**
-	 * <div class="en">Adds all concepts of the value set definition as enum
-	 * elements to the given enum type.</div>
-	 *
-	 * @param enumType
-	 *            The enum type representing parsed Java enum class.
-	 * @param concepts
-	 *            The concepts from the value set definition file.
-	 */
-	private static void addEnumElements(EnumDeclaration enumType,
-			List<Map<String, Object>> concepts) {
-		for (Map<String, Object> concept : concepts) {
-
-			String enumConstantName = buildEnumName(getDisplayName(ENGLISH, concept));
-			String code = concept.get("code").toString();
-
-			NodeList<Expression> values = new NodeList<>();
-			StringBuilder javadocEnum = new StringBuilder();
-			StringBuilder javadocConstant = new StringBuilder();
-
-			values.add(new StringLiteralExpr(code));
-			values.add(new StringLiteralExpr(concept.get("displayName").toString()));
-
-			// build comments per language
-			for (LanguageCode language : LANGUAGE_CODES) {
-				values.add(new StringLiteralExpr(getDisplayName(language, concept)));
-				String displayName = getDisplayName(language, concept);
-				javadocEnum.append(buildJavadocComment(language, displayName));
-				javadocConstant.append(buildJavadocComment(language,
-						CODE_JAVADOC_PREFIX.get(language) + displayName));
-			}
-
-			// the enum constant with all values
-			EnumConstantDeclaration enumConstant = new EnumConstantDeclaration(new NodeList<>(),
-					new SimpleName(enumConstantName), new NodeList<>(values), new NodeList<>());
-			enumConstant.setJavadocComment(javadocEnum.toString());
-			enumType.addEntry(enumConstant);
-
-			// the static final code field for each concept
-			enumType.addFieldWithInitializer(STRING_TYPE, enumConstantName + "_CODE",
-					new StringLiteralExpr(code), PUBLIC, STATIC, FINAL)
-					.setJavadocComment(javadocConstant.toString());
-		}
-	}
-
-	/**
-	 * <div class="en">Parses the description of a value set from its parsed
-	 * JSON definition.</div>
-	 *
-	 * @param language
-	 *            The language of the description to parse.
-	 * @param descriptions
-	 *            The description JSON object.
-	 * @return The description in the desired language.
-	 */
-	private static String getDescription(LanguageCode language, Object descriptions) {
-		List<Map<String, String>> filteredDescriptions = JsonPath.read(descriptions,
-				"$..[?(@.language =~ /" + language.getCodeValue() + ".*/i)]");
-		if (filteredDescriptions == null || filteredDescriptions.isEmpty()) {
-			throw new IllegalStateException("no designation found for language " + language);
-		}
-		return filteredDescriptions.get(0).get("content");
-	}
-
-	/**
-	 * <div class="en">Formats a javadoc comment HTML snippet in the given
-	 * language.</div>
-	 *
-	 * @param language
-	 *            The language code to add.
-	 * @param comment
-	 *            The comment to add.
-	 * @return The HTML snippet of the comment.
-	 */
-	private static String buildJavadocComment(LanguageCode language, String comment) {
-		return " <div class=\"" + language.getCodeValue().substring(0, 2) + "\">" + comment
-				+ "</div>\n";
-	}
-
-	/**
-	 * <div class="en">Replaces the value of a constant in the parsed type
-	 * declaration of a Java class.</div>
-	 *
-	 * @param body
-	 *            The parsed body declaration of the Java class that holds the
-	 *            constant.
-	 * @param constantName
-	 *            The name of the constant to replace the value of.
-	 * @param value
-	 *            The value to set.
-	 */
-	private static void replaceConstantValue(TypeDeclaration<? extends TypeDeclaration<?>> body,
-			String constantName, String value) {
-		body.getFieldByName(constantName).ifPresent(
-				field -> field.getVariable(0).setInitializer(new StringLiteralExpr(value)));
-	}
-
-	/**
-	 * <div class="en">Remove everything from an enum type, leaving an empty
-	 * definition body.</div>
-	 *
-	 * @param enumType
-	 *            The enum to clean out.
-	 */
-	private static void removeEverything(EnumDeclaration enumType) {
-		List<Node> allNodes = new ArrayList<>();
-		allNodes.addAll(enumType.getEntries());
-		allNodes.addAll(enumType.getFields());
-		allNodes.addAll(enumType.getConstructors());
-		allNodes.addAll(enumType.getMethods());
-		allNodes.addAll(enumType.getChildNodes());
-		allNodes.forEach(enumType::remove);
+				javaSource.toString(PRETTY_PRINTER_CONFIGURATION), DEFAULT_CHARSET);
 	}
 }

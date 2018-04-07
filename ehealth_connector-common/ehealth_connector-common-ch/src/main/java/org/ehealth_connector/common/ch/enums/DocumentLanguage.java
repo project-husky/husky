@@ -179,12 +179,6 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	private String code;
 
 	/**
-	 * <div class="en">Human readable name</div>
-	 * <div class="de">Menschenlesbarer Name</div>
-	 */
-	private String displayName;
-
-	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
 	 * Display Name</div> <div class="de">Instanziiert dieses Enum Object
 	 * mittels eines Codes und einem Display Name</div>.
@@ -219,6 +213,7 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	 *
 	 * @return <div class="en">the code system name</div>
 	 */
+	@Override
 	public String getCodeSystemName() {
 		return CODE_SYSTEM_NAME;
 	}
@@ -229,6 +224,7 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */
+	@Override
 	public String getCodeSystemOid() {
 		return CODE_SYSTEM_OID;
 	}
@@ -239,6 +235,7 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	 *
 	 * @return <div class="en">the code</div>
 	 */
+	@Override
 	public String getCodeValue() {
 		return this.code;
 	}
@@ -255,6 +252,7 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	 * @return returns the display name in the desired language. if language not
 	 *         found, display name in german will returned
 	 */
+	@Override
 	public String getDisplayName(LanguageCode languageCode) {
 		String displayName = displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {

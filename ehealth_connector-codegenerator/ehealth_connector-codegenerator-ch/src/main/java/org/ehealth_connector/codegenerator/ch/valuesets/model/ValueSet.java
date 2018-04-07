@@ -35,43 +35,103 @@ public class ValueSet {
 
 	private String codeSystemName;
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getProjectFolder() {
-		return projectFolder;
-	}
-
-	public void setProjectFolder(String projectFolder) {
-		this.projectFolder = projectFolder;
-	}
-
+	/**
+	 * <div class="en">Gets the fully qualified class name of the enum class
+	 * that will be generated/overwritten</div>
+	 *
+	 * @return
+	 */
 	public String getClassName() {
 		return className;
 	}
 
-	public void setClassName(String className) {
-		this.className = className;
-	}
-
-	public String getEffectiveDate() {
-		return effectiveDate;
-	}
-
-	public void setEffectiveDate(String effectiveDate) {
-		this.effectiveDate = effectiveDate;
-	}
-
+	/**
+	 * <div class="en">Gets the code system name that should be set
+	 * (CODE_SYSTEM_NAME)</div>
+	 *
+	 * @return
+	 */
 	public String getCodeSystemName() {
 		return codeSystemName;
 	}
 
+	/**
+	 * <div class="en">Gets the date and time stamp of the version to download
+	 * from the CH-EPR repository</div>
+	 *
+	 * @return
+	 */
+	public String getEffectiveDate() {
+		return effectiveDate;
+	}
+
+	/**
+	 * <div class="en">Gets the unique OID of the value set
+	 * (CODE_SYSTEM_OID)</div>
+	 *
+	 * @return
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * <div class="en">Gets the base folder where the project containing the
+	 * enum Java class can be found</div>
+	 *
+	 * @return
+	 */
+	public String getProjectFolder() {
+		return projectFolder;
+	}
+
+	/**
+	 * <div class="en">Sets the fully qualified class name of the enum class
+	 * that will be generated/overwritten</div>
+	 *
+	 * @param className
+	 */
+	public void setClassName(String className) {
+		this.className = className;
+	}
+
+	/**
+	 * <div class="en">Sets the code system name that should be set
+	 * (CODE_SYSTEM_NAME)</div>
+	 *
+	 * @param codeSystemName
+	 */
 	public void setCodeSystemName(String codeSystemName) {
 		this.codeSystemName = codeSystemName;
+	}
+
+	/**
+	 * <div class="en">Sets the date and time stamp of the version to download
+	 * from the CH-EPR repository</div>
+	 *
+	 * @param effectiveDate
+	 */
+	public void setEffectiveDate(String effectiveDate) {
+		this.effectiveDate = effectiveDate;
+	}
+
+	/**
+	 * <div class="en">Sets the unique OID of the value set
+	 * (CODE_SYSTEM_OID)</div>
+	 *
+	 * @param id
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	/**
+	 * <div class="en">Sets the base folder where the project containing the
+	 * enum Java class can be found</div>
+	 *
+	 * @param projectFolder
+	 */
+	public void setProjectFolder(String projectFolder) {
+		this.projectFolder = projectFolder;
 	}
 }
