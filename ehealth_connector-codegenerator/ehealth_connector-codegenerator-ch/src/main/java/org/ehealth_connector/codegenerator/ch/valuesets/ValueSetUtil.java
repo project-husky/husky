@@ -54,13 +54,12 @@ public final class ValueSetUtil {
 	 * <div class="en">The path where the resources needed for the generation
 	 * are stored, relative to the project root directory.</div>
 	 */
-	public static final String RESOURCE_LOCATION = "src/main/resources/valuesets";
+	private static final String RESOURCE_LOCATION = "target";
 
 	/**
 	 * <div class="en">The path to the configuration YAML file.</div>
 	 */
-	private static final String CONFIG_FILE_LOCATION = RESOURCE_LOCATION
-			+ "/valuesets-sources-201704.2-beta.yaml";
+	private static final String CONFIG_FILE_LOCATION = "src/main/resources/valuesets/valuesets-sources-201704.2-beta.yaml";
 
 	/**
 	 * <div class="en">The JSONPath path to extract a value set from the JSON
@@ -92,8 +91,10 @@ public final class ValueSetUtil {
 	 *            The string to build the enum name from.
 	 * @return An all upper case string with every non-word character replaced
 	 *         with an underscore.
+	 * @throws IllegalArgumentException
+	 *             When the provided displayName is null or empty.
 	 */
-	public static String buildEnumName(String displayName) {
+	public static String buildEnumName(String displayName) throws IllegalArgumentException {
 		if (displayName == null || displayName.trim().isEmpty()) {
 			throw new IllegalArgumentException("displayName cannot be null or empty");
 		}
@@ -121,13 +122,13 @@ public final class ValueSetUtil {
 	 * @throws MalformedURLException
 	 *             When the provided baseUrl is invalid.
 	 */
-	public static URL buildValueSetURL(String baseUrl, ValueSet valueSet)
+	public static URL buildValueSetUrl(String baseUrl, ValueSet valueSet)
 			throws MalformedURLException {
 		try {
 			return new URL(baseUrl + "&id=" + encode(valueSet.getId(), DEFAULT_ENCODING)
 					+ "&effectiveDate=" + encode(valueSet.getEffectiveDate(), DEFAULT_ENCODING));
-		} catch (UnsupportedEncodingException ignored) {
-			return new URL(baseUrl);
+		} catch (UnsupportedEncodingException unsupportedEncodingException) {
+			throw new MalformedURLException(unsupportedEncodingException.getMessage());
 		}
 	}
 
@@ -140,9 +141,12 @@ public final class ValueSetUtil {
 	 * @param concept
 	 *            The concept object parsed from JSON.
 	 * @return The display name or null if not found.
+	 * @throws IllegalStateException
+	 *             When no designation found for the provided language
 	 */
 	@SuppressWarnings("unchecked")
-	public static String getDisplayName(LanguageCode language, Map<String, Object> concept) {
+	public static String getDisplayName(LanguageCode language, Map<String, Object> concept)
+			throws IllegalStateException {
 		if (language == null) {
 			return concept.get("displayName").toString();
 		}
@@ -224,9 +228,11 @@ public final class ValueSetUtil {
 	 *             If there is no primary type found or the Compilation unit was
 	 *             not loaded from a file and the primary type could therefore
 	 *             not be established.
+	 * @throws InvalidClassException
+	 *             When failed to load primary type from compilation unit.
 	 */
 	public static TypeDeclaration<?> loadPrimaryType(CompilationUnit javaSource)
-			throws IOException {
+			throws IOException, InvalidClassException {
 		return javaSource.getPrimaryType().orElseThrow(() -> new InvalidClassException(
 				"Failed to load primary type from compilation unit"));
 	}
@@ -251,19 +257,22 @@ public final class ValueSetUtil {
 	 *         file.
 	 * @throws IOException
 	 *             If the file cannot be loaded or parsed.
+	 * @throws FileNotFoundException
+	 *             If the value set definition file not exists.
+	 *
 	 */
 	public static Map<String, Object> loadValueSetDefinition(String baseDir, ValueSet valueSet,
-			boolean downloadIfNotInFileSystem, String baseUrl) throws IOException {
+			boolean downloadIfNotInFileSystem, String baseUrl)
+			throws IOException, FileNotFoundException {
 
 		String valueSetDefinition;
-		File valueSetDefinitionFile = new File(new File(baseDir, RESOURCE_LOCATION),
-				valueSet.getCodeSystemName() + ".json");
+		File valueSetDefinitionFile = getValueSetDefinitionFile(baseDir, valueSet);
 
 		// download the latest version of the value set definition from
 		// art-decor.org
 		// if it does not exist locally yet
 		if (!valueSetDefinitionFile.exists() && downloadIfNotInFileSystem) {
-			valueSetDefinition = IOUtils.toString(buildValueSetURL(baseUrl, valueSet));
+			valueSetDefinition = IOUtils.toString(buildValueSetUrl(baseUrl, valueSet));
 			FileUtils.write(valueSetDefinitionFile, valueSetDefinition, DEFAULT_CHARSET);
 		} else if (!valueSetDefinitionFile.exists()) {
 			throw new FileNotFoundException(valueSetDefinitionFile.getName());

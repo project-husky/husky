@@ -26,7 +26,7 @@ import static java.util.Arrays.asList;
 import static org.ehealth_connector.codegenerator.ch.valuesets.ValueSetUtil.DEFAULT_CHARSET;
 import static org.ehealth_connector.codegenerator.ch.valuesets.ValueSetUtil.VALUE_SET_CONCEPTS_PATH;
 import static org.ehealth_connector.codegenerator.ch.valuesets.ValueSetUtil.buildEnumName;
-import static org.ehealth_connector.codegenerator.ch.valuesets.ValueSetUtil.buildValueSetURL;
+import static org.ehealth_connector.codegenerator.ch.valuesets.ValueSetUtil.buildValueSetUrl;
 import static org.ehealth_connector.codegenerator.ch.valuesets.ValueSetUtil.getDisplayName;
 import static org.ehealth_connector.codegenerator.ch.valuesets.ValueSetUtil.getSourceFileName;
 import static org.ehealth_connector.codegenerator.ch.valuesets.ValueSetUtil.getValueSetDefinitionFile;
@@ -276,7 +276,7 @@ public class UpdateValueSets {
 			if (!getValueSetDefinitionFile(CONFIG_FILE_BASE_PATH, valueSet).exists()) {
 				downloadIfNotInFileSystem = true;
 				System.out.print("Download definition: "
-						+ buildValueSetURL(configuration.getBaseUrl(), valueSet) + "\n");
+						+ buildValueSetUrl(configuration.getBaseUrl(), valueSet) + "\n");
 			} else {
 				System.out.print("Definition file exists, no download\n");
 			}
