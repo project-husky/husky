@@ -488,35 +488,44 @@ public class ObservationChTextBuilder extends TextBuilder {
 
 			// Result
 			contentId = contentIdPrefix + "_" + sectionLabel + "_value_" + rowNumber;
-			Value value = observation.getValue();
 			String tempValue = "";
 			String tempUnit = "";
-			if (value != null) {
-				if (value.isPhysicalQuantity()) {
-					tempValue = value.getPhysicalQuantityValue();
-					if ("-1".equals(tempValue))
-						tempValue = "-";
-					tempUnit = value.getPhysicalQuantityUnit();
-				} else if (value.isRto()) {
-					tempValue = value.getRtoValueText();
-					tempUnit = value.getRtoUnitText();
-				} else if (value.isBl()) {
-					if (value.getValue() != null) {
-						String temp = value.getBlText();
-						if (temp != null) {
-							tempValue = resBundle.getString("generic." + temp);
+			for (Value value : observation.getValues()) {
+				String tempOneValue = "";
+				String tempOneUnit = "";
+				if (value != null) {
+					if (value.isPhysicalQuantity()) {
+						tempOneValue = value.getPhysicalQuantityValue();
+						if ("-1".equals(tempOneValue))
+							tempOneValue = "-";
+						tempOneUnit = value.getPhysicalQuantityUnit();
+					} else if (value.isRto()) {
+						tempOneValue = value.getRtoValueText();
+						tempOneUnit = value.getRtoUnitText();
+					} else if (value.isBl()) {
+						if (value.getValue() != null) {
+							String temp = value.getBlText();
+							if (temp != null) {
+								tempOneValue = resBundle.getString("generic." + temp);
+							}
 						}
-					}
-				} else if (value.isEd()) {
-					if (!value.isSt()) {
-						ED ed = (ED) value.getValue();
-						ed.setReference(Util.createReferenceTel(contentId));
-					}
-					tempValue = value.toString();
-					tempValue = tempValue.replace("<", "&lt;");
-					tempValue = tempValue.replace(">", "&gt;");
-				} else
-					tempValue = value.toString();
+					} else if (value.isEd()) {
+						if (!value.isSt()) {
+							ED ed = (ED) value.getValue();
+							ed.setReference(Util.createReferenceTel(contentId));
+						}
+						tempOneValue = value.toString();
+						tempOneValue = tempOneValue.replace("<", "&lt;");
+						tempOneValue = tempOneValue.replace(">", "&gt;");
+					} else
+						tempOneValue = value.toString();
+				}
+				if (!"".equals(tempValue))
+					tempValue = tempValue + ";<br />";
+				if (!"".equals(tempUnit))
+					tempUnit = tempUnit + ";<br />";
+				tempValue = tempValue + tempOneValue;
+				tempUnit = tempUnit + tempOneUnit;
 			}
 			rowColumns.add(getCellWithContent(getCellContent(tempValue), contentId));
 
@@ -546,7 +555,9 @@ public class ObservationChTextBuilder extends TextBuilder {
 				rowColumns.add(getCell(""));
 
 			// Code System
-			String tempCodeSystem = observation.getCode().getCodeSystemName();
+			String tempCode = obsCode.getCode();
+			String tempDisplayName = obsCode.getDisplayName();
+			String tempCodeSystem = obsCode.getCodeSystemName();
 			if (tempCodeSystem == null) {
 				tempCodeSystem = observation.getCode().getCodeSystem();
 				if (tempCodeSystem == "")
@@ -560,13 +571,28 @@ public class ObservationChTextBuilder extends TextBuilder {
 					}
 				}
 			}
+			for (Code translation : obsCode.getTranslations()) {
+				if (!posCodeSystemOid.equals(translation.getCodeSystem())) {
+					if (!"".equals(tempCode))
+						tempCode = tempCode + ";<br />";
+					if (!"".equals(tempCodeSystem))
+						tempCodeSystem = tempCodeSystem + ";<br />";
+					if (!"".equals(tempDisplayName))
+						tempDisplayName = tempDisplayName + ";<br />";
+
+					tempCode = tempCode + translation.getCode();
+					tempCodeSystem = tempCodeSystem + translation.getCodeSystemName();
+					tempDisplayName = tempDisplayName + translation.getDisplayName();
+				}
+			}
+
 			rowColumns.add(getCell(tempCodeSystem));
 
 			// Code
-			rowColumns.add(getCell(obsCode.getCode()));
+			rowColumns.add(getCell(tempCode));
 
 			// Original Name
-			rowColumns.add(getCell(obsCode.getDisplayName()));
+			rowColumns.add(getCell(tempDisplayName));
 
 			// Comments
 			contentId = contentIdPrefix + "_" + sectionLabel + "_comment_" + rowNumber;
@@ -740,7 +766,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 		// Try to find author on the observation
 		for (Author author : observation.getAuthors()) {
 			if (!"".equals(retVal))
-				retVal = retVal + "<br />";
+				retVal = retVal + ";<br />";
 			String name = author.getCompleteName();
 			if ("".equals(name))
 				name = resBundle.getString("generic.unknown");
@@ -757,7 +783,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 			for (org.openhealthtools.mdht.uml.cda.Author mAuthor : battery.getAuthors()) {
 				Author author = new Author(mAuthor);
 				if (!"".equals(retVal))
-					retVal = retVal + "<br />";
+					retVal = retVal + ";<br />";
 				retVal = retVal + author.getCompleteName();
 				if (author.getTimeAsIVL_TS() != null) {
 					String dateStr = formatSingleTimestampOrInterval(author.getTimeAsIVL_TS());
@@ -842,7 +868,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 		// Try to find performer on the observation
 		for (Performer performer : observation.getPerformers()) {
 			if (!"".equals(retVal))
-				retVal = retVal + "<br />";
+				retVal = retVal + ";<br />";
 			String name = performer.getCompleteName();
 			if ("".equals(name))
 				name = resBundle.getString("generic.unknown");
@@ -859,7 +885,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 			for (org.openhealthtools.mdht.uml.cda.Performer2 mPerformer : battery.getPerformers()) {
 				Performer performer = new Performer(mPerformer);
 				if (!"".equals(retVal))
-					retVal = retVal + "<br />";
+					retVal = retVal + ";<br />";
 				retVal = retVal + performer.getCompleteName();
 				if (performer.getTimeAsIVL_TS() != null) {
 					String dateStr = formatSingleTimestampOrInterval(performer.getTimeAsIVL_TS());
@@ -905,7 +931,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 							if (er.getProcedure().getApproachSiteCodes() != null) {
 								for (CD approchSite : er.getProcedure().getApproachSiteCodes()) {
 									if (!"".equals(retVal))
-										retVal = retVal + "<br />";
+										retVal = retVal + ";<br />";
 									retVal = retVal + approchSite.getOriginalText().getText();
 								}
 							}
@@ -967,7 +993,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 											if (participant.getParticipantRole().getPlayingEntity()
 													.getCode().getOriginalText() != null) {
 												if (!"".equals(retVal))
-													retVal = retVal + "<br />";
+													retVal = retVal + ";<br />";
 												retVal = retVal + participant.getParticipantRole()
 														.getPlayingEntity().getCode()
 														.getOriginalText().getText();
@@ -1122,7 +1148,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 					contentId);
 
 			if (!"".equals(paragraph)) {
-				paragraph = paragraph + "<br />";
+				paragraph = paragraph + ";<br />";
 				append(paragraph);
 			}
 		}

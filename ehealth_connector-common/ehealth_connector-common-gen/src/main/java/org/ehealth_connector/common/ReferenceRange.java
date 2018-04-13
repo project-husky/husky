@@ -113,6 +113,10 @@ public class ReferenceRange extends ObservationRange {
 			lowUnit = tempIvl.getLow().getUnit();
 			highValue = tempIvl.getHigh().getValue().toString();
 			highUnit = tempIvl.getHigh().getUnit();
+			if (lowUnit == null)
+				lowUnit = tempIvl.getUnit();
+			if (highUnit == null)
+				highUnit = tempIvl.getUnit();
 		}
 		if (!"".equals(value)) {
 			retVal = value;

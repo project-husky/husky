@@ -34,6 +34,7 @@ import org.ehealth_connector.common.utils.LangTexts;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.Performer2;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
 import org.openhealthtools.mdht.uml.hl7.datatypes.BL;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
@@ -267,6 +268,18 @@ public class AbstractObservation
 
 	public LangTexts getValueLangTexts() {
 		return myValueLangTexts;
+	}
+
+	@Override
+	public List<Value> getValues() {
+
+		List<Value> retVal = new ArrayList<Value>();
+		for (ANY value : mObservation.getValues()) {
+			if ((value instanceof BL) || (value instanceof CD) || (value instanceof ED)
+					|| (value instanceof PQ) || (value instanceof RTO) || (value instanceof INT))
+				retVal.add(new Value(value));
+		}
+		return retVal;
 	}
 
 	@Override
