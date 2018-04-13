@@ -184,6 +184,15 @@ public enum RiskOfComplications {
 	 * leucémie, myélome</div> <div class="it">Linfoma, leucemia, mieloma</div>
 	 */
 	LYMPHOM_LEUKAEMIE_MYELOM("113012", "Lymphom, Leukämie, Myelom", "Lymphome, leucémie, myélome", "Linfoma, leucemia, mieloma", "20130101", ""),
+
+	/**
+	 * <div class="de">Lymphom, Leukämie, Myelom während klinischer
+	 * Remission</div> <div class="fr">Lymphome, leucémie, myélome durant une
+	 * rémission clinique</div> <div class="it">Linfoma, leucemia, mieloma
+	 * durante una remissione clinica</div>
+	 */
+	LYMPHOM_LEUKAEMIE_MYELOM_WAEHREND_KLINISCHER_REMISSION("118001", "Lymphom, Leukämie, Myelom während klinischer Remission", "Lymphome, leucémie, myélome durant une rémission clinique", "Linfoma, leucemia, mieloma durante una remissione clinica", "20180101", ""),
+
 	/**
 	 * <div class="de">Mangel an Mannose-bindendem Lektin</div>
 	 * <div class="fr">Déficit en lectine liant le mannose</div>
