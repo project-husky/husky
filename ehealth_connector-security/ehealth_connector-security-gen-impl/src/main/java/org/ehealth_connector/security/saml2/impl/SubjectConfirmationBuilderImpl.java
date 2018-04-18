@@ -26,9 +26,9 @@ import org.joda.time.DateTime;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
- * <div class="fr">VOICIFRANCAIS</div>	
+ * <div class="en">Class implementing the corresponding interface for SubjectConfirmation building.</div>
+ * <div class="de">Die Klasse implementiert das entsprechende interface um SubjectConfirmation bilden zu k&ooml;nnen.</div>
+ * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  *

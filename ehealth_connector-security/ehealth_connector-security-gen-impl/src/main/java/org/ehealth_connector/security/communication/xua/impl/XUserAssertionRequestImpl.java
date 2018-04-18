@@ -26,8 +26,11 @@ import org.ehealth_connector.security.communication.xua.XUserAssertionConstants;
 import org.ehealth_connector.security.communication.xua.XUserAssertionRequest;
 import org.ehealth_connector.security.core.SecurityObject;
 import org.ehealth_connector.security.helpers.ListXMLObjectHelper;
+import org.ehealth_connector.security.hl7v3.PurposeOfUse;
 import org.opensaml.core.xml.XMLObject;
+import org.opensaml.core.xml.schema.XSAny;
 import org.opensaml.core.xml.schema.XSString;
+import org.opensaml.core.xml.schema.impl.XSAnyImpl;
 import org.opensaml.core.xml.schema.impl.XSStringImpl;
 import org.opensaml.saml.saml2.core.Attribute;
 import org.opensaml.saml.saml2.core.NameID;
@@ -39,8 +42,8 @@ import org.opensaml.soap.wstrust.impl.ClaimsImpl;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Implementation class of Interface XUserAssertionRequest</div>
- * <div class="de">Implementations Klasse von  Interface XUserAssertionRequest</div>
+ * <div class="en">Implementation class of Interface XUserAssertionRequest and SecurityObject</div>
+ * <div class="de">Implementations Klasse von  Interface XUserAssertionRequest und SecurityObject</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
@@ -94,17 +97,6 @@ public class XUserAssertionRequestImpl
 	}
 
 	@Override
-	public String getResourceId() {
-		return getAttributeValueByName(requestSecurityToken.getUnknownXMLObjects(),
-				XUserAssertionConstants.OASIS_XACML_RESOURCEID);
-	}
-
-	@Override
-	public String getPurposeOfUse() {
-		return null;
-	}
-
-	@Override
 	public RequestType getRequestType() {
 		final org.opensaml.soap.wstrust.RequestType wstRequestType = new ListXMLObjectHelper<org.opensaml.soap.wstrust.RequestType>()
 				.getComponent(org.opensaml.soap.wstrust.impl.RequestTypeImpl.class,
@@ -129,6 +121,28 @@ public class XUserAssertionRequestImpl
 	}
 
 	@Override
+	public String getResourceId() {
+		final Claims claimes = new ListXMLObjectHelper<Claims>().getComponent(ClaimsImpl.class,
+				requestSecurityToken.getUnknownXMLObjects());
+		if (claimes != null) {
+			return getAttributeValueByName(claimes.getUnknownXMLObjects(),
+					XUserAssertionConstants.OASIS_XACML_RESOURCEID);
+		}
+		return "";
+	}
+
+	@Override
+	public PurposeOfUse getPurposeOfUse() {
+		final Claims claimes = new ListXMLObjectHelper<Claims>().getComponent(ClaimsImpl.class,
+				requestSecurityToken.getUnknownXMLObjects());
+		if (claimes != null) {
+			return (PurposeOfUse) getAttributeValueAsXmlObjectByName(claimes.getUnknownXMLObjects(),
+					XUserAssertionConstants.OASIS_XACML_PURPOSEOFUSE);
+		}
+		return null;
+	}
+
+	@Override
 	public String getDialect() {
 		final Claims aClaim = new ListXMLObjectHelper<Claims>().getComponent(ClaimsImpl.class,
 				requestSecurityToken.getUnknownXMLObjects());
@@ -147,6 +161,21 @@ public class XUserAssertionRequestImpl
 				final XSString value = new ListXMLObjectHelper<XSString>().getComponent(XSStringImpl.class,
 						attribute.getAttributeValues());
 				return value.getValue();
+			}
+		}
+		return null;
+	}
+
+	private XMLObject getAttributeValueAsXmlObjectByName(List<XMLObject> unknownXMLObjects,
+			String oasisXacmlSubjectid) {
+		final List<Attribute> attributes = new ListXMLObjectHelper<Attribute>().getComponentList(AttributeImpl.class,
+				unknownXMLObjects);
+		if (attributes != null) {
+			final Attribute attribute = getAttributeByName(attributes, oasisXacmlSubjectid);
+			if (attribute != null) {
+				final XSAny value = new ListXMLObjectHelper<XSAny>().getComponent(XSAnyImpl.class,
+						attribute.getAttributeValues());
+				return value.getUnknownXMLObjects().get(0);
 			}
 		}
 		return null;

@@ -21,12 +21,10 @@ import java.util.Calendar;
 import java.util.UUID;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
-import org.opensaml.core.config.InitializationService;
 import org.opensaml.saml.common.xml.SAMLConstants;
 import org.opensaml.saml.saml2.core.NameID;
 
-public abstract class AbstractTestHelper {
+public abstract class AbstractTestHelper extends InitializerTestHelper {
 
 	protected String testId;
 	protected Calendar testIssueInstant;
@@ -43,12 +41,6 @@ public abstract class AbstractTestHelper {
 	protected String testNameIdPolicyFormat;
 	protected String testAttributeName;
 	protected String testAttributeValue;
-
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		// Initialize the library
-		InitializationService.initialize();
-	}
 
 	@Before
 	public void setUp() throws Exception {

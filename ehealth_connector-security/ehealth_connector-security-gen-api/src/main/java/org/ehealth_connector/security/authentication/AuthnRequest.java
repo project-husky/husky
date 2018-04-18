@@ -125,22 +125,26 @@ public interface AuthnRequest extends Base {
 	 * <div class="de">Methode um den consent zu holen.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
-	 * <!-- @formatter:on -->
+	 *
 	 *
 	 * @return the consent as string
+	 * <!-- @formatter:on -->
 	 */
 	String getConsent();
 
 	/**
-	 * 
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the destination.</div>
 	 * <div class="de">Methode um die destination zu holen.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
-	 * <!-- @formatter:on -->
 	 *
 	 * @return
+	 * <div class="en">the destination value.</div>
+	 * <div class="de">the Destination Wert</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
 	 */
 	String getDestination();
 
@@ -150,9 +154,14 @@ public interface AuthnRequest extends Base {
 	 * <div class="de">Methode um den nameidpolicy allowcreate wert zu holen.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
-	 * <!-- @formatter:on --
+	 * 
 	 *
-	 * @return the NameIdPolicy.AllowCreate as Boolean
+	 * @return
+	 * <div class="en">the NameIdPolicy.AllowCreate value.</div>
+	 * <div class="de">the NameIdPolicy.AllowCreate Wert</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
 	 */
 	Boolean getNameIdPolicyAllowCreate();
 

@@ -19,19 +19,19 @@ package org.ehealth_connector.security.hl7v3.impl;
 
 import java.util.List;
 
-import org.ehealth_connector.security.hl7v3.PurposeOfUse;
+import org.ehealth_connector.security.hl7v3.OpenSamlPurposeOfUse;
 import org.opensaml.core.xml.AbstractXMLObject;
 import org.opensaml.core.xml.XMLObject;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="en">Implementation class of Interface OpenSamlPurposeOfUse.</div>
+ * <div class="de">Implementations Klasse des Interfaces OpenSamlPurposeOfUse.</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public class PurposeOfUseImpl extends AbstractXMLObject implements PurposeOfUse {
+public class PurposeOfUseImpl extends AbstractXMLObject implements OpenSamlPurposeOfUse {
 
 	protected String code;
 	protected String codeSystem;

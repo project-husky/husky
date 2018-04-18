@@ -55,7 +55,7 @@ public interface StatusBuilder extends SimpleBuilder<Status> {
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 *
-	 * @param aStatusCode
+	 * @param aStatusMessage
 	 *  <div class="en">the StatusMessage to be set</div>
 	 * 	<div class="de">der StatusMessage der gesetzt werden soll</div>
 	 *  <div class="fr">VOICIFRANCAIS</div>

@@ -19,18 +19,17 @@ package org.ehealth_connector.security.exceptions;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="en">Class implementing ClientSendException.</div>
+ * <div class="de">Klasse welche die ClientSendException definiert.</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
- * 
  * <!-- @formatter:on -->
  */
 public class ClientSendException extends Exception {
 
 	/** <!-- @formatter:off -->
-	 * <div class="en">Field referencing the long </div>
-	 * <div class="de">Feld mit long reference</div>
+	 * <div class="en">Field referencing the serialVersionUID </div>
+	 * <div class="de">Feld mit der serialVersionUID reference</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
@@ -45,7 +44,16 @@ public class ClientSendException extends Exception {
 	 * <div class="it">ITALIANO</div>
 	 * 
 	 * @param message
+	 * <div class="en">the textual descriptin of the exception.</div>
+	 * <div class="de">Die textuelle Beschreibung des Fehlers.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * 
 	 * @param cause
+	 * <div class="en">The reason of the exception.</div>
+	 * <div class="de">Der Grund des Fehlers.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
 	 */
 	public ClientSendException(String message, Throwable cause) {
@@ -60,6 +68,10 @@ public class ClientSendException extends Exception {
 	 * <div class="it">ITALIANO</div>
 	 * 
 	 * @param cause
+	 * <div class="en">The reason of the exception.</div>
+	 * <div class="de">Der Grund des Fehlers.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
 	 */
 	public ClientSendException(Throwable cause) {

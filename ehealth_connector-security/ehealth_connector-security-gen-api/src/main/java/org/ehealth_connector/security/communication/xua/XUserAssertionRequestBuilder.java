@@ -17,6 +17,8 @@
  */
 package org.ehealth_connector.security.communication.xua;
 
+import org.ehealth_connector.security.hl7v3.PurposeOfUse;
+
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the x-user assertion request builder methods.</div>
@@ -57,7 +59,7 @@ public interface XUserAssertionRequestBuilder {
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 *
-	 * @param subjectId
+	 * @param aContext
 	 *  <div class="en">the context to be set</div>
 	 * 	<div class="de">die Kontext der gesetzt werden soll</div>
 	 *  <div class="fr">VOICIFRANCAIS</div>
@@ -213,7 +215,7 @@ public interface XUserAssertionRequestBuilder {
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 *
-	 * @param purposeOfUse
+	 * @param aPurposeOfUse
 	 *  <div class="en">the purpose of user to be set</div>
 	 * 	<div class="de">der Grund des Zugriffes der gesetzt werden soll</div>
 	 *  <div class="fr">VOICIFRANCAIS</div>
@@ -225,7 +227,7 @@ public interface XUserAssertionRequestBuilder {
 	 *  <div class="it">ITALIANO</div>
 	 *  <!-- @formatter:on -->
 	 */
-	XUserAssertionRequestBuilder purposeOfUse(String purposeOfUse);
+	XUserAssertionRequestBuilder purposeOfUse(PurposeOfUse aPurposeOfUse);
 
 	/**
 	 * <!-- @formatter:off -->

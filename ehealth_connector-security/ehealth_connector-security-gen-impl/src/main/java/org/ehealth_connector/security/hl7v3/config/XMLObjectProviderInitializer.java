@@ -21,11 +21,10 @@ import org.opensaml.core.xml.config.AbstractXMLObjectProviderInitializer;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="en">Implementation class of Interface XUserAssertionRequest and SecurityObject</div>
+ * <div class="de">Implementations Klasse von  Interface XUserAssertionRequest und SecurityObject</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
- * 
  * <!-- @formatter:on -->
  */
 public class XMLObjectProviderInitializer extends AbstractXMLObjectProviderInitializer {

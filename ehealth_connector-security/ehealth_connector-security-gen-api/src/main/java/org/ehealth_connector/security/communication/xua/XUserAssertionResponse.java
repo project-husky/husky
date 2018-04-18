@@ -27,4 +27,6 @@ package org.ehealth_connector.security.communication.xua;
  */
 public interface XUserAssertionResponse {
 
+	String getContext();
+
 }

@@ -19,11 +19,10 @@ package org.ehealth_connector.security.saml2;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="en">Interface describing the methods of AudienceRestriction. </div>
+ * <div class="de">Interface beschreibt die Methoden von AudienceRestriction.</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
- * 
  * <!-- @formatter:on -->
  */
 public interface AudienceRestriction {

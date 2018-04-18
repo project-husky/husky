@@ -19,7 +19,6 @@ package org.ehealth_connector.security.communication.xua.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
 
 import java.util.UUID;
 
@@ -27,8 +26,9 @@ import org.ehealth_connector.security.communication.xua.AppliesTo;
 import org.ehealth_connector.security.communication.xua.RequestType;
 import org.ehealth_connector.security.communication.xua.TokenType;
 import org.ehealth_connector.security.communication.xua.XUserAssertionRequest;
+import org.ehealth_connector.security.hl7v3.PurposeOfUse;
+import org.ehealth_connector.security.hl7v3.impl.PurposeOfUseBuilder;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.opensaml.soap.wstrust.RequestSecurityToken;
 import org.opensaml.soap.wstrust.impl.RequestSecurityTokenBuilder;
@@ -47,6 +47,11 @@ public class XUserAssertionRequestBuilderImplTest {
 	private String testRoleId;
 	private AppliesTo testAppliesTo;
 	private String testAddress;
+	private PurposeOfUse testPurposeOfUse;
+	private String testPoUCode;
+	private String testPoUCodeSystem;
+	private String testPoUCodeSystemName;
+	private String testPoUDisplayName;
 
 	@Before
 	public void setUp() throws Exception {
@@ -65,6 +70,17 @@ public class XUserAssertionRequestBuilderImplTest {
 
 		testAddress = "https://guguseli.org/test/access/endpoint/address";
 		testAppliesTo = new AppliesToBuilderImpl().address(testAddress).create();
+
+		testPurposeOfUse = new PurposeOfUseBuilder().buildObject();
+		testPoUCode = "987654321";
+		testPoUCodeSystem = "1.2.3.4.5.6.7.8.9.0";
+		testPoUCodeSystemName = "My Code System";
+		testPoUDisplayName = "The Ultimative Test Code";
+
+		testPurposeOfUse.setCode(testPoUCode);
+		testPurposeOfUse.setCodeSystem(testPoUCodeSystem);
+		testPurposeOfUse.setCodeSystemName(testPoUCodeSystemName);
+		testPurposeOfUse.setDisplayName(testPoUDisplayName);
 	}
 
 	@Test
@@ -124,9 +140,10 @@ public class XUserAssertionRequestBuilderImplTest {
 	}
 
 	@Test
-	@Ignore
 	public void testPurposeOfUse() {
-		fail("Not yet implemented");
+		final XUserAssertionRequest ref = builder.purposeOfUse(testPurposeOfUse).create();
+		assertNotNull(ref);
+		assertEquals(testPurposeOfUse, ref.getPurposeOfUse());
 	}
 
 	@Test

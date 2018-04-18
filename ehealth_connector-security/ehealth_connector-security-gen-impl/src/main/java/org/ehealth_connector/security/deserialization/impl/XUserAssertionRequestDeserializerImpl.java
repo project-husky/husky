@@ -19,7 +19,6 @@ package org.ehealth_connector.security.deserialization.impl;
 
 import org.ehealth_connector.security.communication.xua.XUserAssertionRequest;
 import org.ehealth_connector.security.communication.xua.impl.XUserAssertionRequestBuilderImpl;
-import org.ehealth_connector.security.deserialization.Deserializer;
 import org.ehealth_connector.security.exceptions.DeserializeException;
 import org.opensaml.soap.wstrust.RequestSecurityToken;
 import org.w3c.dom.Element;
@@ -32,8 +31,8 @@ import org.w3c.dom.Element;
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public class XUserAssertionRequestDeserializerImpl extends AbstractDeserializerImpl<RequestSecurityToken>
-		implements Deserializer<XUserAssertionRequest> {
+public class XUserAssertionRequestDeserializerImpl
+		extends AbstractDeserializerImpl<RequestSecurityToken, XUserAssertionRequest> {
 
 	@Override
 	public XUserAssertionRequest fromXmlElement(Element aXmlElement) throws DeserializeException {

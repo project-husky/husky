@@ -17,6 +17,8 @@
  */
 package org.ehealth_connector.security.communication.xua;
 
+import org.ehealth_connector.security.hl7v3.PurposeOfUse;
+
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of xuserassertionrequest.</div>
@@ -143,7 +145,7 @@ public interface XUserAssertionRequest {
 	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
 	 */
-	String getPurposeOfUse();
+	PurposeOfUse getPurposeOfUse();
 
 	/**
 	 * 

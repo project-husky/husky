@@ -24,8 +24,8 @@ import org.ehealth_connector.security.communication.xua.XUserAssertionConstants;
 import org.ehealth_connector.security.communication.xua.XUserAssertionRequest;
 import org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder;
 import org.ehealth_connector.security.core.SecurityObjectBuilder;
+import org.ehealth_connector.security.hl7v3.OpenSamlPurposeOfUse;
 import org.ehealth_connector.security.hl7v3.PurposeOfUse;
-import org.ehealth_connector.security.hl7v3.impl.PurposeOfUseBuilder;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.core.xml.schema.XSAny;
 import org.opensaml.core.xml.schema.XSString;
@@ -166,7 +166,7 @@ public class XUserAssertionRequestBuilderImpl
 	@Override
 	public XUserAssertionRequestBuilder resourceId(String resourceId) {
 		if (resourceId != null) {
-			addXMLObject(createStringAttribute(XUserAssertionConstants.OASIS_XACML_RESOURCEID, resourceId));
+			addXMLObjectToClaims(createStringAttribute(XUserAssertionConstants.OASIS_XACML_RESOURCEID, resourceId));
 		}
 		return this;
 	}
@@ -179,14 +179,10 @@ public class XUserAssertionRequestBuilderImpl
 	 *      xsi:type="CE" xmlns="urn:hl7-org:v3" />
 	 */
 	@Override
-	public XUserAssertionRequestBuilder purposeOfUse(String purposeOfUse) {
-		if (purposeOfUse != null) {
-			final PurposeOfUse hl7PurposeOfUse = new PurposeOfUseBuilder().buildObject();
-			hl7PurposeOfUse.setCode(purposeOfUse);
-			hl7PurposeOfUse.setCodeSystem("2.16.756.5.30.1.127.3.10.5");
-			hl7PurposeOfUse.setCodeSystemName("eHealth Suisse Verwendungszweck");
-			hl7PurposeOfUse.setDisplayName("Normal");
-			addXMLObject(createObjectAttribute(XUserAssertionConstants.OASIS_XACML_PURPOSEOFUSE, hl7PurposeOfUse));
+	public XUserAssertionRequestBuilder purposeOfUse(PurposeOfUse testPurposeOfUse) {
+		if (testPurposeOfUse != null) {
+			addXMLObjectToClaims(createObjectAttribute(XUserAssertionConstants.OASIS_XACML_PURPOSEOFUSE,
+					(OpenSamlPurposeOfUse) testPurposeOfUse));
 		}
 		return this;
 	}
@@ -259,7 +255,7 @@ public class XUserAssertionRequestBuilderImpl
 		return claims;
 	}
 
-	private XMLObject createObjectAttribute(String aName, PurposeOfUse hl7PurposeOfUse) {
+	private XMLObject createObjectAttribute(String aName, OpenSamlPurposeOfUse hl7PurposeOfUse) {
 		final Attribute attribute = new AttributeBuilder().buildObject();
 		attribute.setName(aName);
 		final XSAnyBuilder anyBuilder = new XSAnyBuilder();
@@ -283,6 +279,10 @@ public class XUserAssertionRequestBuilderImpl
 
 	protected void addXMLObject(XMLObject aXmlObject) {
 		requestSecurityToken.getUnknownXMLObjects().add(aXmlObject);
+	}
+
+	protected void addXMLObjectToClaims(XMLObject aXmlObject) {
+		claims.getUnknownXMLObjects().add(aXmlObject);
 	}
 
 }

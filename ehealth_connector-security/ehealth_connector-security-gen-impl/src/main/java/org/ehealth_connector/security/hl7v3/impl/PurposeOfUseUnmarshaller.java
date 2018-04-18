@@ -17,17 +17,54 @@
  */
 package org.ehealth_connector.security.hl7v3.impl;
 
+import org.ehealth_connector.security.hl7v3.OpenSamlPurposeOfUse;
+import org.opensaml.core.xml.XMLObject;
 import org.opensaml.core.xml.io.AbstractXMLObjectUnmarshaller;
+import org.opensaml.core.xml.io.UnmarshallingException;
+import org.w3c.dom.Attr;
+import org.w3c.dom.Element;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="en">Class implementing the unmarshaller for OpenSamlPurposeOfUse.</div>
+ * <div class="de">Die Klasse implementiert den unmarshaller für OpenSamlPurposeOfUse.</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
- * 
  * <!-- @formatter:on -->
  */
 public class PurposeOfUseUnmarshaller extends AbstractXMLObjectUnmarshaller {
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.opensaml.core.xml.io.AbstractXMLObjectUnmarshaller#unmarshall(org.w3c.dom.Element)
+	 */
+	@Override
+	public OpenSamlPurposeOfUse unmarshall(Element domElement) throws UnmarshallingException {
+		return (OpenSamlPurposeOfUse) super.unmarshall(domElement);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.opensaml.core.xml.io.AbstractXMLObjectUnmarshaller#processAttribute(org.opensaml.core.xml.XMLObject, org.w3c.dom.Attr)
+	 */
+	@Override
+	protected void processAttribute(XMLObject xmlObject, Attr attribute) throws UnmarshallingException {
+		final OpenSamlPurposeOfUse purposeOfUse = (OpenSamlPurposeOfUse) xmlObject;
+		if ("code".equalsIgnoreCase(attribute.getName())) {
+			purposeOfUse.setCode(attribute.getValue());
+		}
+		if ("codesystem".equalsIgnoreCase(attribute.getName())) {
+			purposeOfUse.setCodeSystem(attribute.getValue());
+		}
+		if ("codesystemname".equalsIgnoreCase(attribute.getName())) {
+			purposeOfUse.setCodeSystemName(attribute.getValue());
+		}
+		if ("displayName".equalsIgnoreCase(attribute.getName())) {
+			purposeOfUse.setDisplayName(attribute.getValue());
+		}
+
+	}
 
 }

@@ -20,6 +20,8 @@ package org.ehealth_connector.security.saml2;
 import java.util.Calendar;
 import java.util.List;
 
+import org.ehealth_connector.security.core.SecurityHeaderElement;
+
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of Assertion. </div>
@@ -28,7 +30,7 @@ import java.util.List;
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public interface Assertion extends Base {
+public interface Assertion extends Base, SecurityHeaderElement {
 
 	/**
 	 * <!-- @formatter:off -->
@@ -118,8 +120,8 @@ public interface Assertion extends Base {
 	 * <div class="it">ITALIANO</div>
 	 *
 	 * @return
-	 * <div class="en">a {@link java.util.List} of {@link org.ehealth_connector.security.saml2.AuthnContext}</div>
-	 * <div class="de">eine {@link java.util.List} von {@link org.ehealth_connector.security.saml2.AuthnContext}</div>
+	 * <div class="en">a {@link java.util.List} of {@link org.ehealth_connector.security.saml2.AuthnStatement}</div>
+	 * <div class="de">eine {@link java.util.List} von {@link org.ehealth_connector.security.saml2.AuthnStatement}</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->

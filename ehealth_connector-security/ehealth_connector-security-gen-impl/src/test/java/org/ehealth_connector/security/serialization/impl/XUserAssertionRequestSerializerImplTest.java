@@ -17,6 +17,7 @@
  */
 package org.ehealth_connector.security.serialization.impl;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -79,6 +80,7 @@ public class XUserAssertionRequestSerializerImplTest {
 		System.out.println(xmlString);
 		assertNotNull(xmlString);
 		assertTrue(xmlString.startsWith("<?xml version="));
+		assertTrue(xmlString.endsWith(">"));
 	}
 
 	/**
@@ -91,6 +93,9 @@ public class XUserAssertionRequestSerializerImplTest {
 	public void testToXmlByteArray() throws SerializeException {
 		final byte[] xmlArray = testSerializer.toXmlByteArray(testXmlObject);
 		assertNotNull(xmlArray);
+		final byte[] startPart = new byte["<?xml version=".length()];
+		System.arraycopy(xmlArray, 0, startPart, 0, "<?xml version=".length());
+		assertArrayEquals("<?xml version=".getBytes(), startPart);
 	}
 
 }

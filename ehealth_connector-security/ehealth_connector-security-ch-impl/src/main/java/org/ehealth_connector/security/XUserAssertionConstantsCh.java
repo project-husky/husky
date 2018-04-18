@@ -65,22 +65,4 @@ public final class XUserAssertionConstantsCh {
 	 */
 	public static final String ROLE_REPRESENTATIVE = "REP";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Purpose of use for normal access.</div>
-	 * <div class="de">Purpose of use für normalen Zugriff.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String PURPOSE_NORMAL = "NORM";
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Purpose of use for emergency access.</div>
-	 * <div class="de">Purpose of use für den Notfallzugriff.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String PURPOSE_EMERGENCY = "EMER";
 }

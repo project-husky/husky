@@ -20,60 +20,74 @@ package org.ehealth_connector.security.saml2;
 import java.util.Calendar;
 
 /**
- * @since Feb 22, 2018 11:51:41 AM
- *
+ * <!-- @formatter:off -->
+ * <div class="en">Interface describing the methods of AuthnStatement. </div>
+ * <div class="de">Interface beschreibt die Methoden von AuthnStatement.</div>
+ * <div class="fr">VOICIFRANCAIS</div>
+ * <div class="it">ITALIANO</div>
+ * <!-- @formatter:on -->
  */
 public interface AuthnStatement {
 
 	/**
 	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">HEREISENGLISH</div>
-	 * <div class="de">HIERISTDEUTSCH</div>
+	 * <div class="en">method to get the AuthInstant.</div>
+	 * <div class="de">Method um die AuthInstant zu erhalten.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * @return
+	 * <div class="en">the Calendar instance representing the value of AuthnInstant.</div>
+	 * <div class="de">die Calendar Instanz die den AuthInstance Wert repräsentiert.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
-	 *
-	 * @return the authn instant as calendar
 	 */
 	Calendar getAuthnInstant();
 
 	/**
 	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">HEREISENGLISH</div>
-	 * <div class="de">HIERISTDEUTSCH</div>
+	 * <div class="en">Method to get the Date NotOnOrAfter of the Session.</div>
+	 * <div class="de">Methode um das Datum NotOnOrAfter der Session zu erhalten.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * @return
+	 * <div class="en">the Calendar instance representing the value of NotOnOrAfter.</div>
+	 * <div class="de">die Calendar Instanz die den NotOnOrAfter Wert repräsentiert.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
-	 *
-	 * @return the session not on or after as calendar
 	 */
 	Calendar getSessionNotOnOrAfter();
 
 	/**
-	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">HEREISENGLISH</div>
-	 * <div class="de">HIERISTDEUTSCH</div>
+	 * <div class="en">Method to get the Date Index of the Session.</div>
+	 * <div class="de">Methode um das Datum Index der Session zu erhalten.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * @return
+	 * <div class="en">the Index as string.</div>
+	 * <div class="de">der Index als String.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
-	 *
-	 * @return the session index as string
 	 */
 	String getSessionIndex();
 
 	/**
-	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">HEREISENGLISH</div>
-	 * <div class="de">HIERISTDEUTSCH</div>
+	 * <div class="en">Method to get the AuthnContextClassRef.</div>
+	 * <div class="de">Methode um die AuthnContextClassRef zu erhalten.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * @return
+	 * <div class="en">the ClassRef as string.</div>
+	 * <div class="de">der ClassRef als String.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
-	 *
-	 * @return the authn context class ref as string
 	 */
 	String getAuthnContextClassRef();
 }

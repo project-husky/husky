@@ -1,1 +1,2 @@
 org.ehealth_connector.security.hl7v3.config.XMLObjectProviderInitializer
+org.opensaml.saml.config.SAMLConfigurationInitializer

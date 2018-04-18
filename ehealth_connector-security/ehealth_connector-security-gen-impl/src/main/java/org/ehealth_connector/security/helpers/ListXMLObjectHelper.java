@@ -24,11 +24,10 @@ import org.opensaml.core.xml.XMLObject;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="en">Helper class providing methods to get filtered lists.</div>
+ * <div class="de">Helferklasse welche methoden zur verfügung stellt um geilfetrte listen zu erhalten.</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
- * 
  * <!-- @formatter:on -->
  */
 public class ListXMLObjectHelper<T extends XMLObject> {

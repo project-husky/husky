@@ -27,51 +27,10 @@ import org.ehealth_connector.security.communication.config.XuaClientConfig;
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public class XuaClientConfigImpl extends AbstractClientConfig implements XuaClientConfig {
-
-	public String portName;
-	public String portNamespace;
-	public String serviceName;
-	public String serviceNamespace;
+public class XuaClientConfigImpl extends AbstractSoapClientConfig implements XuaClientConfig {
 
 	protected XuaClientConfigImpl() {
 
-	}
-
-	@Override
-	public String getPortName() {
-		return portName;
-	}
-
-	@Override
-	public String getPortNamespace() {
-		return portNamespace;
-	}
-
-	@Override
-	public String getServiceName() {
-		return serviceName;
-	}
-
-	@Override
-	public String getServiceNamespace() {
-		return serviceNamespace;
-	}
-
-	protected void setPortName(String portName) {
-		this.portName = portName;
-	}
-
-	protected void setPortNamespace(String portNamespace) {
-		this.portNamespace = portNamespace;
-	}
-
-	protected void setServiceName(String serviceName) {
-		this.serviceName = serviceName;
-	}
-
-	protected void setServiceNamespace(String serviceNamespace) {
-		this.serviceNamespace = serviceNamespace;
 	}
 
 }

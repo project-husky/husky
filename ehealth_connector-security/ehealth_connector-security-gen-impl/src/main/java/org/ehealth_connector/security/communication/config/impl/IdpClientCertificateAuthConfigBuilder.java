@@ -19,6 +19,8 @@ package org.ehealth_connector.security.communication.config.impl;
 
 import java.security.KeyStore;
 
+import org.ehealth_connector.security.communication.config.ClientConfigBuilder;
+
 /**
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the interface ClientConfigBuilder serving as builder to create config for client to communicate with client certificate.</div>
@@ -27,12 +29,17 @@ import java.security.KeyStore;
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public class IdpClientCertificateAuthConfigBuilder {
+public class IdpClientCertificateAuthConfigBuilder implements ClientConfigBuilder {
 
 	private IdpClientCertificateAuthConfigImpl clientConfig;
 
 	public IdpClientCertificateAuthConfigBuilder() {
 		clientConfig = new IdpClientCertificateAuthConfigImpl();
+	}
+
+	@Override
+	public IdpClientCertificateAuthConfigBuilder url(String aEndpointUrl) {
+		return null;
 	}
 
 	IdpClientCertificateAuthConfigBuilder keyStore(KeyStore clientKeyStore) {

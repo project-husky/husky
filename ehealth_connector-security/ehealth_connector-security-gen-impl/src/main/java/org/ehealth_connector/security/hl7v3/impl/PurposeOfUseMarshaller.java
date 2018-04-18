@@ -17,7 +17,7 @@
  */
 package org.ehealth_connector.security.hl7v3.impl;
 
-import org.ehealth_connector.security.hl7v3.PurposeOfUse;
+import org.ehealth_connector.security.hl7v3.OpenSamlPurposeOfUse;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.core.xml.io.AbstractXMLObjectMarshaller;
 import org.opensaml.core.xml.io.MarshallingException;
@@ -25,18 +25,17 @@ import org.w3c.dom.Element;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="en">Class implementing the marshaller for OpenSamlPurposeOfUse.</div>
+ * <div class="de">Die Klasse implementiert den Marshaller für OpenSamlPurposeOfUse.</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
- * 
  * <!-- @formatter:on -->
  */
 public class PurposeOfUseMarshaller extends AbstractXMLObjectMarshaller {
 
 	@Override
 	protected void marshallAttributes(XMLObject xmlObject, Element domElement) throws MarshallingException {
-		final PurposeOfUse purposeOfUse = (PurposeOfUse) xmlObject;
+		final OpenSamlPurposeOfUse purposeOfUse = (OpenSamlPurposeOfUse) xmlObject;
 		if (purposeOfUse.getCode() != null) {
 			domElement.setAttributeNS(null, "code", purposeOfUse.getCode());
 		}

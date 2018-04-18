@@ -36,7 +36,7 @@ public interface SubjectBuilder extends SimpleBuilder<Subject> {
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 *
-	 * @param aNameIDValue
+	 * @param aNameIDFormat
 	 *  <div class="en">the NameID.Format to be set</div>
 	 * 	<div class="de">das NameID.Format welches gesetzt werden soll</div>
 	 *  <div class="fr">VOICIFRANCAIS</div>

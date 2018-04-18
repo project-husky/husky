@@ -18,22 +18,34 @@
 package org.ehealth_connector.security.communication.xua.impl;
 
 import org.ehealth_connector.security.communication.xua.XUserAssertionResponse;
+import org.ehealth_connector.security.core.SecurityObject;
 import org.opensaml.soap.wstrust.RequestSecurityTokenResponse;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="en">Implementation class of Interface XUserAssertionResponse and SecurityObject</div>
+ * <div class="de">Implementations Klasse von  Interface XUserAssertionResponse und SecurityObject</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public class XUserAssertionResponseImpl implements XUserAssertionResponse {
+public class XUserAssertionResponseImpl
+		implements XUserAssertionResponse, SecurityObject<org.opensaml.soap.wstrust.RequestSecurityTokenResponse> {
 
-	private RequestSecurityTokenResponse response;
+	private RequestSecurityTokenResponse responseCollection;
 
 	protected XUserAssertionResponseImpl(RequestSecurityTokenResponse aRequestSecurityTokenResponse) {
-		response = aRequestSecurityTokenResponse;
+		responseCollection = aRequestSecurityTokenResponse;
+	}
+
+	@Override
+	public RequestSecurityTokenResponse getWrappedObject() {
+		return responseCollection;
+	}
+
+	@Override
+	public String getContext() {
+		return responseCollection.getContext();
 	}
 
 }

@@ -17,7 +17,6 @@
  */
 package org.ehealth_connector.security.deserialization.impl;
 
-import org.ehealth_connector.security.deserialization.Deserializer;
 import org.ehealth_connector.security.exceptions.DeserializeException;
 import org.ehealth_connector.security.saml2.Response;
 import org.ehealth_connector.security.saml2.impl.ResponseBuilderImpl;
@@ -31,8 +30,8 @@ import org.w3c.dom.Element;
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public class ResponseDeserializerImpl extends AbstractDeserializerImpl<org.opensaml.saml.saml2.core.Response>
-		implements Deserializer<Response> {
+public class ResponseDeserializerImpl
+		extends AbstractDeserializerImpl<org.opensaml.saml.saml2.core.Response, Response> {
 
 	/**
 	 * {@inheritDoc}

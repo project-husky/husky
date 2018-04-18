@@ -70,8 +70,8 @@ public interface Subject {
 	 * <div class="it">ITALIANO</div>
 	 *
 	 * @return
-	 * <div class="en">a {@link java.uitl.List} of {@link org.ehealth_connector.security.saml2.SubjectConfirmation}s</div>
-	 * <div class="de">eine {@link java.uitl.List} von {@link org.ehealth_connector.security.saml2.SubjectConfirmation}en</div>
+	 * <div class="en">a {@link java.util.List} of {@link org.ehealth_connector.security.saml2.SubjectConfirmation}s</div>
+	 * <div class="de">eine {@link java.util.List} von {@link org.ehealth_connector.security.saml2.SubjectConfirmation}en</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->

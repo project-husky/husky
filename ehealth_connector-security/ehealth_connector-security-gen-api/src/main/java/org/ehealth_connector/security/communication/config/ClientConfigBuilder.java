@@ -47,6 +47,6 @@ public interface ClientConfigBuilder {
 	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
 	 */
-	ClientConfigBuilder url(String aEndpointUri);
+	ClientConfigBuilder url(String aEndpointUrl);
 
 }

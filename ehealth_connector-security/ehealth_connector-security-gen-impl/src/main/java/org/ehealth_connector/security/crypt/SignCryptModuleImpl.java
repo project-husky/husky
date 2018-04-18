@@ -65,9 +65,11 @@ public class SignCryptModuleImpl implements SignCryptModule {
 	private String trustStorePassword;
 
 	/**
+	 * 
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.crypt.SignCryptModule#setPki(java.security.KeyStore, java.security.KeyStore)
+	 * @see org.ehealth_connector.security.crypt.SignCryptModule#setPki(java.security.KeyStore, java.lang.String, java.security.KeyStore,
+	 *      java.lang.String)
 	 */
 	@Override
 	public void setPki(KeyStore aKeyStore, String aKeyStorePassword, KeyStore aTrustStore, String aTrustStorePassword) {
@@ -78,11 +80,11 @@ public class SignCryptModuleImpl implements SignCryptModule {
 	}
 
 	/**
+	 * 
 	 * {@inheritDoc}
-	 * 
-	 * 
 	 *
-	 * @see org.ehealth_connector.security.crypt.SignCryptModule#signAuthnRequest(org.ehealth_connector.security.authentication.AuthnRequest)
+	 * @see org.ehealth_connector.security.crypt.SignCryptModule#signAuthnRequest(org.ehealth_connector.security.authentication.AuthnRequest,
+	 *      java.lang.String)
 	 */
 	@Override
 	public void signAuthnRequest(AuthnRequest aAuthnRequest, String aSigningAlias) throws SigningException {

@@ -19,7 +19,6 @@ package org.ehealth_connector.security.deserialization.impl;
 
 import org.ehealth_connector.security.authentication.AuthnRequest;
 import org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl;
-import org.ehealth_connector.security.deserialization.Deserializer;
 import org.ehealth_connector.security.exceptions.DeserializeException;
 import org.w3c.dom.Element;
 
@@ -31,8 +30,8 @@ import org.w3c.dom.Element;
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public class AuthnRequestDeserializerImpl extends AbstractDeserializerImpl<org.opensaml.saml.saml2.core.AuthnRequest>
-		implements Deserializer<AuthnRequest> {
+public class AuthnRequestDeserializerImpl
+		extends AbstractDeserializerImpl<org.opensaml.saml.saml2.core.AuthnRequest, AuthnRequest> {
 
 	/**
 	 * {@inheritDoc}

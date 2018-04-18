@@ -17,23 +17,26 @@
  */
 package org.ehealth_connector.security.communication.config.impl;
 
+import org.ehealth_connector.security.communication.config.ClientConfig;
+
 /**
  * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="en">Abstract implementation class of Interface ClientConfig</div>
+ * <div class="de">Abstrakte implementations Klasse des Interfaces ClientConfig</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
- * 
  * <!-- @formatter:on -->
  */
-public abstract class AbstractClientConfig {
+public abstract class AbstractClientConfig implements ClientConfig {
 
 	private String enpointUrl;
 
+	@Override
 	public void setUrl(String aUrl) {
 		enpointUrl = aUrl;
 	}
 
+	@Override
 	public String getUrl() {
 		return enpointUrl;
 	}

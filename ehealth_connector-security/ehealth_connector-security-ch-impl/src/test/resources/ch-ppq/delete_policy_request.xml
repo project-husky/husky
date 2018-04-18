@@ -1,0 +1,10 @@
+<epr:DeletePolicyRequest xmlns:epr="urn:e-health-suisse:2015:policy-administration"
+	xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xacml="urn:oasis:names:tc:xacml:2.0:policy:schema:os">
+	<saml:Assertion Version="2.0" ID="_9a71a18c-d7a7-4931-9168-150a8fbc5dc2" IssueInstant="2017-11-16T03:34:53Z">
+		<saml:Issuer NameQualifier="urn:e-health-suisse:community-index">urn:oid:1.3.6.1.4.1.21367.2017.2.6.2</saml:Issuer>
+		<saml:Statement xsi:type="epr:XACMLPolicySetIdReferenceStatementType">
+			<xacml:PolicySetIdReference>urn:uuid:356d68d7-44f0-4575-8647-7f4ea1499122</xacml:PolicySetIdReference>
+		</saml:Statement>
+	</saml:Assertion>
+</epr:DeletePolicyRequest>

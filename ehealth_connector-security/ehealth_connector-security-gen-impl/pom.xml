@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>ehealth_connector-security-gen-impl</artifactId>
 	<name>eHealthConnector Security Generic</name>
@@ -25,10 +26,6 @@
 			<groupId>org.opensaml</groupId>
 			<artifactId>opensaml-saml-impl</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.hl7.v3</groupId>
-			<artifactId>hl7v3-core</artifactId>
-		</dependency>
 
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -39,6 +36,11 @@
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.ehealth_connector.sts</groupId>
+			<artifactId>sts-webservice-api</artifactId>
+		</dependency>
+
 
 		<!-- test stuff -->
 		<dependency>
@@ -58,6 +60,7 @@
 			<scope>test</scope>
 		</dependency>
 
+
 	</dependencies>
 
 	<build>
@@ -71,7 +74,9 @@
 					<nonFilteredFileExtensions>
 						<nonFilteredFileExtension>jks</nonFilteredFileExtension>
 						<nonFilteredFileExtension>p12</nonFilteredFileExtension>
+						<nonFilteredFileExtension>p8</nonFilteredFileExtension>
 						<nonFilteredFileExtension>jceks</nonFilteredFileExtension>
+						<nonFilteredFileExtension>der</nonFilteredFileExtension>
 					</nonFilteredFileExtensions>
 				</configuration>
 			</plugin>

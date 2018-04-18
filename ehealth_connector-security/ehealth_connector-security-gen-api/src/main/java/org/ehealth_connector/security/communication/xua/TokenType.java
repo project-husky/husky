@@ -19,11 +19,10 @@ package org.ehealth_connector.security.communication.xua;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="en">Enumeration defining the TokenTypes.</div>
+ * <div class="de">Enumeration die die TokenTypes definiert.</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
- * 
  * <!-- @formatter:on -->
  */
 public enum TokenType {

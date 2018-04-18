@@ -25,7 +25,7 @@ package org.ehealth_connector.security.communication.config;
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-interface ClientConfig {
+public interface ClientConfig {
 
 	/**
 	 * <!-- @formatter:off -->

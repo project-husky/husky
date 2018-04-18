@@ -19,18 +19,15 @@ package org.ehealth_connector.security.hl7v3;
 
 import javax.xml.namespace.QName;
 
-import org.opensaml.core.xml.XMLObject;
-
 /**
  * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="en">Describing the methods of the PurposeOfUse Interface</div>
+ * <div class="de">Beschreibung der Methoden des PurposeOfUse Interfaces</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
- * 
  * <!-- @formatter:on -->
  */
-public interface PurposeOfUse extends XMLObject {
+public interface PurposeOfUse {
 
 	/** Element local name. */
 	public static final String DEFAULT_ELEMENT_LOCAL_NAME = "PurposeOfUse";
@@ -43,7 +40,7 @@ public interface PurposeOfUse extends XMLObject {
 	public static final QName ELEMENT_NAME = new QName(DEFAULT_NS_URI, DEFAULT_ELEMENT_LOCAL_NAME, DEFAULT_PREFIX);
 
 	/** Local name of the XSI type. */
-	public static final String TYPE_LOCAL_NAME = "PurposeOfUserType";
+	public static final String TYPE_LOCAL_NAME = "PurposeOfUse";
 
 	/** QName of the XSI type. */
 	public static final QName TYPE_NAME = new QName("urn:hl7-org:v3", TYPE_LOCAL_NAME, "hl7");

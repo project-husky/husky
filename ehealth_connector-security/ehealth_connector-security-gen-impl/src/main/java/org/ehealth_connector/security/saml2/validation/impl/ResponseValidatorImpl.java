@@ -26,11 +26,10 @@ import org.ehealth_connector.security.saml2.validation.ResponseValidator;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="en">Implementation class of ResponseValidator</div>
+ * <div class="de">Implementations Klasse von ResponseValidator</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
- * 
  * <!-- @formatter:on -->
  */
 public class ResponseValidatorImpl extends AbstractValidator implements ResponseValidator {

@@ -24,6 +24,14 @@ import org.ehealth_connector.security.saml2.Assertion;
 import org.ehealth_connector.security.saml2.impl.AssertionImpl;
 import org.ehealth_connector.security.saml2.validation.AssertionValidator;
 
+/**
+ * <!-- @formatter:off -->
+ * <div class="en">Implementation class of AssertionValidator</div>
+ * <div class="de">Implementations Klasse von AssertionValidator</div>
+ * <div class="fr">VOICIFRANCAIS</div>
+ * <div class="it">ITALIANO</div>
+ * <!-- @formatter:on -->
+ */
 public class AssertionValidatorImpl extends AbstractValidator implements AssertionValidator {
 
 	@Override

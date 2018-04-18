@@ -55,7 +55,7 @@ public interface AssertionBuilder extends BaseBuilder<AssertionBuilder> {
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 *
-	 * @param aAttribute
+	 * @param aCondition
 	 * <div class="en">the Condition to be added.</div>
 	 * <div class="de">das Condition welches hinzugefügt werden soll.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>

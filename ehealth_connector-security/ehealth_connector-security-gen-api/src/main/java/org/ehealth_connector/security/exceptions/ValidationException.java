@@ -19,11 +19,10 @@ package org.ehealth_connector.security.exceptions;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="en">Class implementing ValidationException.</div>
+ * <div class="de">Klasse welche die ValidationException definiert.</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
- * 
  * <!-- @formatter:on -->
  */
 public class ValidationException extends Exception {
@@ -54,8 +53,8 @@ public class ValidationException extends Exception {
 	 * <div class="it">ITALIANO</div>
 	 * 
 	 * @param cause
-	 * <div class="en">the throwable to be set</div>
-	 * <div class="de">der throwable der gesetzt werden soll</div>
+	 * <div class="en">the reason of the exception.</div>
+	 * <div class="de">Der Grund des Fehlers</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->

@@ -17,6 +17,7 @@
  */
 package org.ehealth_connector.security.deserialization.impl;
 
+import org.ehealth_connector.security.deserialization.Deserializer;
 import org.ehealth_connector.security.deserialization.OpenSaml2Deserializer;
 
 /**
@@ -27,7 +28,7 @@ import org.ehealth_connector.security.deserialization.OpenSaml2Deserializer;
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public abstract class AbstractDeserializerImpl<T> {
+public abstract class AbstractDeserializerImpl<T, U> implements Deserializer<U> {
 	private OpenSaml2Deserializer<T> openSamlDeserializer;
 
 	public AbstractDeserializerImpl() {

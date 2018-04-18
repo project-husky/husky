@@ -15,27 +15,21 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.security.communication;
+package org.ehealth_connector.security.authentication;
 
-import org.ehealth_connector.security.authentication.AuthnRequest;
 import org.ehealth_connector.security.communication.config.IdpClientConfig;
-import org.ehealth_connector.security.communication.config.XuaClientConfig;
-import org.ehealth_connector.security.communication.xua.XUserAssertionRequest;
-import org.ehealth_connector.security.communication.xua.XUserAssertionResponse;
 import org.ehealth_connector.security.exceptions.ClientSendException;
-import org.ehealth_connector.security.saml2.Assertion;
 import org.ehealth_connector.security.saml2.Response;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Describing the methods of the ConvenienceUserAccessAuthentication Interface</div>
- * <div class="de">Beschreibung der Methoden des ConvenienceUserAccessAuthentication Interfaces</div>
+ * <div class="en">Describing the methods of the Authentication Module Interface</div>
+ * <div class="de">Beschreibung der Methoden des Authentication Module Interfaces</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
- * 
  * <!-- @formatter:on -->
  */
-public interface ConvenienceUserAccessAuthentication {
+public interface AuthenticationModule {
 
 	/**
 	 * 
@@ -65,35 +59,7 @@ public interface ConvenienceUserAccessAuthentication {
 	 * <!-- @formatter:on -->
 	 * @throws ClientSendException 
 	 */
-	Response getAuthentication(AuthnRequest aAuthnRequest, IdpClientConfig clientConfiguration)
+	Response invokeUserAuthentication(AuthnRequest aAuthnRequest, IdpClientConfig clientConfiguration)
 			throws ClientSendException;
 
-	/**
-	 * 
-	 * <!-- @formatter:off -->
-	 * <div class="en">Method to get the xuser assertion from an xassertionprovider.</div>
-	 * <div class="de">Methode um die authentifizierungs assertion eines X Assertion Provider zu erhalten.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 *
-	 * @param aAssertion
-	 * <div class="en">The Assertion (from IdP) to be sent by soap header.</div>
-	 * <div class="de">Die Assertion (from IdP) die im soap header geschickt werden soll.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * @param aRequest
-	 * <div class="en">The XUserAssertionRequest to be sent.</div>
-	 * <div class="de">Die XUserAssertionRequest die geschickt werden soll.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * @param clientConfiguration
-	 * <div class="en">The client configuartion to be set..</div>
-	 * <div class="de">Die Client Konfiguration die gesetzt werden soll.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * @return
-	 * <!-- @formatter:on -->
-	 */
-	XUserAssertionResponse getXUserAssertion(Assertion aAssertion, XUserAssertionRequest aRequest,
-			XuaClientConfig clientConfiguration);
 }

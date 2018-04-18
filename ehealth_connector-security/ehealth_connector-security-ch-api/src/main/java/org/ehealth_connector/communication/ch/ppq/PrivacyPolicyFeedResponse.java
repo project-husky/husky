@@ -15,60 +15,50 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.security.authentication;
+package org.ehealth_connector.communication.ch.ppq;
 
-import java.net.URL;
-
-import org.ehealth_connector.security.saml2.Assertion;
+import org.ehealth_connector.communication.ch.ppq.PrivacyPolicyFeed.PpfMethod;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Interface describing the methods for the authentication module.</div>
- * <div class="de">Interface beschreibend die methoden des authentication modules.</div>
+ * <div class="en">Interface describing the methods for the PrivacyPolicyFeedResponse.</div>
+ * <div class="de">Interface welches die Methoden für den PrivacyPolicyFeedResponse beschreiben.</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
- * Fügt eine SAML 2 Assertion 3 in den WS Security Header ein.
  * <!-- @formatter:on -->
  */
-public interface AuthentcationModule {
+public interface PrivacyPolicyFeedResponse {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to the endpoint url of the web service.</div>
-	 * <div class="de">Methode um den Web Service Endpunkt zu setzen.</div>
+	 * <div class="en">Method to get the status of the Response.</div>
+	 * <div class="de">Methode um den status der Antwort zu erhalten.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
-	 * 
-	 * @param url
+	 * @return
+	 * <!-- @formatter:off -->
+	 * <div class="en">the status as string</div>
+	 * <div class="de">den Status als String</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
 	 */
-	public void setEndpointURL(URL url);
+	String getStatus();
 
 	/**
-	 * 
 	 * <!-- @formatter:off -->
-	 * <div class="en">HEREISENGLISH</div>
-	 * <div class="de">HIERISTDEUTSCH</div>
+	 * <div class="en">Method to get the method of the response.</div>
+	 * <div class="de">Methode um die methode des requests zu erhalten.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 *
-	 * @param assertion
-	 * <!-- @formatter:on -->
-	 */
-	public void setSecurityHeader(Assertion assertion);
-
-	/**
-	 * 
-	 * <!-- @formatter:off -->
-	 * <div class="en">HEREISENGLISH</div>
-	 * <div class="de">Führt den XML Soap Web Service aus, der über die Endpoint URL definiert wurde.</div>
+	 * @return
+	 * <div class="en">the {@link org.ehealth_connector.communication.ch.ppq.PrivacyPolicyFeed.PpfMethod} which is set.</div>
+	 * <div class="de">dei {@link org.ehealth_connector.communication.ch.ppq.PrivacyPolicyFeed.PpfMethod} die gesetzt ist.</div>
 	 * <div class="fr">VOICIFRANCAIS</div>
 	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
-	 *
-	 * @param synchron
-	 * @param query
 	 */
-	public void invokeUserAuthentication(boolean synchron, AuthenticateUser query);
+	PpfMethod getMethod();
 
 }

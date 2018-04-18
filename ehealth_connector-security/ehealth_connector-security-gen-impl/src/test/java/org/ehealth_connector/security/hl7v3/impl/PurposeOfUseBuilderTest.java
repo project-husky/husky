@@ -15,12 +15,28 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.security.authentication;
+package org.ehealth_connector.security.hl7v3.impl;
 
-/**
- * @since Jan 17, 2018 3:07:54 PM
- *
- */
-public class AuthenticateUser {
+import static org.junit.Assert.assertNotNull;
+
+import org.ehealth_connector.security.hl7v3.OpenSamlPurposeOfUse;
+import org.ehealth_connector.security.utilities.impl.InitializerTestHelper;
+import org.junit.Before;
+import org.junit.Test;
+
+public class PurposeOfUseBuilderTest extends InitializerTestHelper {
+
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	/**
+	 * Test method for {@link org.ehealth_connector.security.hl7v3.impl.PurposeOfUseBuilder#buildObject()}.
+	 */
+	@Test
+	public void testBuildObject() {
+		final OpenSamlPurposeOfUse ref = new PurposeOfUseBuilder().buildObject();
+		assertNotNull(ref);
+	}
 
 }

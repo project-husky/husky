@@ -17,30 +17,77 @@
  */
 package org.ehealth_connector.security.hl7v3.impl;
 
-import org.ehealth_connector.security.hl7v3.PurposeOfUse;
+import org.apache.commons.lang.StringUtils;
+import org.ehealth_connector.security.hl7v3.OpenSamlPurposeOfUse;
 import org.opensaml.core.xml.AbstractXMLObjectBuilder;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="en">Class extending the abstract class AbstractXMLObjectBuilder with type OpenSamlPurposeOfUse.</div>
+ * <div class="de">Die Klasse erweitert die abstrakte Klasse AbstractXMLObjectBuilder mit typ OpenSamlPurposeOfUse.</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
- * 
  * <!-- @formatter:on -->
  */
-public class PurposeOfUseBuilder extends AbstractXMLObjectBuilder<PurposeOfUse> {
+public class PurposeOfUseBuilder extends AbstractXMLObjectBuilder<OpenSamlPurposeOfUse> {
+
+	protected String code;
+	protected String codeSystem;
+	protected String codeSystemName;
+	protected String codeSystemVersion;
+	protected String displayName;
 
 	/** {@inheritDoc} */
-	public PurposeOfUse buildObject() {
-		return buildObject(PurposeOfUse.DEFAULT_NS_URI, PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME,
-				PurposeOfUse.DEFAULT_PREFIX);
+	public OpenSamlPurposeOfUse buildObject() {
+		return buildObject(OpenSamlPurposeOfUse.DEFAULT_NS_URI, OpenSamlPurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME,
+				OpenSamlPurposeOfUse.DEFAULT_PREFIX);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public PurposeOfUse buildObject(String namespaceURI, String localName, String namespacePrefix) {
-		return new PurposeOfUseImpl(namespaceURI, localName, namespacePrefix);
+	public OpenSamlPurposeOfUse buildObject(String namespaceURI, String localName, String namespacePrefix) {
+		final OpenSamlPurposeOfUse ppou = new PurposeOfUseImpl(namespaceURI, localName, namespacePrefix);
+		if (StringUtils.isEmpty(code)) {
+			ppou.setCode(code);
+		}
+		if (StringUtils.isEmpty(codeSystem)) {
+			ppou.setCodeSystem(codeSystem);
+		}
+		if (StringUtils.isEmpty(codeSystemName)) {
+			ppou.setCodeSystemName(codeSystemName);
+		}
+		if (StringUtils.isEmpty(codeSystemVersion)) {
+			ppou.setCodeSystemVersion(codeSystemVersion);
+		}
+		if (StringUtils.isEmpty(displayName)) {
+			ppou.setDisplayName(displayName);
+		}
+		return ppou;
+	}
+
+	PurposeOfUseBuilder code(String aCode) {
+		code = aCode;
+		return this;
+	}
+
+	PurposeOfUseBuilder codeSystem(String aCodeSystem) {
+		codeSystem = aCodeSystem;
+		return this;
+	}
+
+	PurposeOfUseBuilder codeSystemName(String aCodeSystemName) {
+		codeSystemName = aCodeSystemName;
+		return this;
+	}
+
+	PurposeOfUseBuilder codeSystemVersion(String aCodeSystemVersion) {
+		codeSystemVersion = aCodeSystemVersion;
+		return this;
+	}
+
+	PurposeOfUseBuilder displayName(String aDisplayNamen) {
+		displayName = aDisplayNamen;
+		return this;
 	}
 
 }
