@@ -33,6 +33,10 @@ public class IdpClientBasicAuthConfigImpl extends AbstractClientConfig implement
 
 	private String basicAuthPassword;
 
+	protected IdpClientBasicAuthConfigImpl() {
+
+	}
+
 	public String getBasicAuthUsername() {
 		return basicAuthUsername;
 	}

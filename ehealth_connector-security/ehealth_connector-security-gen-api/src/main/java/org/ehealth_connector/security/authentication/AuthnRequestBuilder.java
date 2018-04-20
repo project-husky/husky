@@ -273,6 +273,28 @@ public interface AuthnRequestBuilder extends BaseBuilder<AuthnRequestBuilder> {
 	AuthnRequestBuilder subject(Subject aSubject);
 
 	/**
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Builds the subject on the authnrequest.</div>
+	 * <div class="de">Bildet das subject im authnrequest.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @param aProviderID
+	 *  <div class="en">the provider id to be set</div>
+	 * 	<div class="de">die ProviderId welches gesetzt werden soll</div>
+	 *  <div class="fr">VOICIFRANCAIS</div>
+	 *  <div class="it">ITALIANO</div>
+	 * @return
+	 *  <div class="en">the actual instance of this builder</div>
+	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="fr">VOICIFRANCAIS</div>
+	 *  <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	AuthnRequestBuilder providerID(String aProviderID);
+
+	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Creates a concrete instance of AuthnRequest with setted params.</div>
 	 * <div class="de">Erstellt die konkrete instanz des AuthnRequests mit den gesetzten parametern.</div>

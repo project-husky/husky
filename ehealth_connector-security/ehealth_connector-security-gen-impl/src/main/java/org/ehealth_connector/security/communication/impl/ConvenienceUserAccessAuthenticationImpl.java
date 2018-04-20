@@ -31,7 +31,10 @@ import org.ehealth_connector.security.communication.xua.XUserAssertionRequest;
 import org.ehealth_connector.security.communication.xua.XUserAssertionResponse;
 import org.ehealth_connector.security.core.SecurityHeaderElement;
 import org.ehealth_connector.security.exceptions.ClientSendException;
+import org.ehealth_connector.security.exceptions.LibrariesInitializationException;
 import org.ehealth_connector.security.saml2.Response;
+import org.opensaml.core.config.InitializationException;
+import org.opensaml.core.config.InitializationService;
 
 /**
  * <!-- @formatter:off -->
@@ -42,6 +45,19 @@ import org.ehealth_connector.security.saml2.Response;
  * <!-- @formatter:on -->
  */
 public class ConvenienceUserAccessAuthenticationImpl implements AuthenticationModule, XUserAssertionModule {
+
+	protected boolean initialized = false;
+
+	public void initializeLibraries() throws LibrariesInitializationException {
+		try {
+			InitializationService.initialize();
+			initialized = true;
+		} catch (final InitializationException e) {
+			initialized = false;
+			throw new LibrariesInitializationException(e);
+		}
+
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -54,6 +70,8 @@ public class ConvenienceUserAccessAuthenticationImpl implements AuthenticationMo
 	@Override
 	public Response invokeUserAuthentication(AuthnRequest aAuthnRequest, IdpClientConfig clientConfiguration)
 			throws ClientSendException {
+		if (!initialized)
+			throw new ClientSendException("Opensaml Libs are not initialized");
 		final AbstractIdpClient client = ClientFactory.getIdpClient(clientConfiguration);
 		return client.send(aAuthnRequest);
 	}
@@ -68,6 +86,8 @@ public class ConvenienceUserAccessAuthenticationImpl implements AuthenticationMo
 	@Override
 	public List<XUserAssertionResponse> invokeGetXUserAssertion(SecurityHeaderElement aSecurityHeaderElement,
 			XUserAssertionRequest aRequest, XuaClientConfig clientConfiguration) throws ClientSendException {
+		if (!initialized)
+			throw new ClientSendException("Opensaml Libs are not initialized");
 		final XuaClient client = ClientFactory.getXuaClient(clientConfiguration);
 		return client.send(aSecurityHeaderElement, aRequest);
 	}

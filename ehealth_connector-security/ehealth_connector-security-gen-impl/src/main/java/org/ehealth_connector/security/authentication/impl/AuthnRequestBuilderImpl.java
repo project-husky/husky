@@ -19,16 +19,23 @@ package org.ehealth_connector.security.authentication.impl;
 
 import java.util.Calendar;
 
+import org.apache.commons.lang.StringUtils;
 import org.ehealth_connector.security.authentication.AuthnRequest;
 import org.ehealth_connector.security.authentication.AuthnRequestBuilder;
 import org.ehealth_connector.security.core.SecurityObjectBuilder;
 import org.ehealth_connector.security.saml2.Subject;
 import org.joda.time.DateTime;
 import org.opensaml.saml.common.SAMLVersion;
+import org.opensaml.saml.saml2.core.IDPEntry;
+import org.opensaml.saml.saml2.core.IDPList;
 import org.opensaml.saml.saml2.core.Issuer;
 import org.opensaml.saml.saml2.core.NameIDPolicy;
+import org.opensaml.saml.saml2.core.Scoping;
+import org.opensaml.saml.saml2.core.impl.IDPEntryBuilder;
+import org.opensaml.saml.saml2.core.impl.IDPListBuilder;
 import org.opensaml.saml.saml2.core.impl.IssuerBuilder;
 import org.opensaml.saml.saml2.core.impl.NameIDPolicyBuilder;
+import org.opensaml.saml.saml2.core.impl.ScopingBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -45,6 +52,7 @@ public class AuthnRequestBuilderImpl
 	private NameIDPolicy nameIDPolicy;
 	private Issuer issuer;
 	private org.opensaml.saml.saml2.core.Subject subject;
+	private IDPList idpList;
 
 	public AuthnRequestBuilderImpl() {
 		final org.opensaml.saml.saml2.core.impl.AuthnRequestBuilder builder = new org.opensaml.saml.saml2.core.impl.AuthnRequestBuilder();
@@ -58,6 +66,11 @@ public class AuthnRequestBuilderImpl
 		issuer = issueBuilder.buildObject();
 		authnRequest.setIssuer(issuer);
 
+		final Scoping scoping = new ScopingBuilder().buildObject();
+		idpList = new IDPListBuilder().buildObject();
+		scoping.setIDPList(idpList);
+		authnRequest.setScoping(scoping);
+
 	}
 
 	/**
@@ -68,7 +81,7 @@ public class AuthnRequestBuilderImpl
 	 */
 	@Override
 	public AuthnRequestBuilder id(String aId) {
-		if (aId != null) {
+		if (!StringUtils.isEmpty(aId)) {
 			authnRequest.setID(aId);
 		}
 		return this;
@@ -97,7 +110,7 @@ public class AuthnRequestBuilderImpl
 	 */
 	@Override
 	public AuthnRequestBuilder issuer(String aIssuer) {
-		if (aIssuer != null) {
+		if (!StringUtils.isEmpty(aIssuer)) {
 			issuer.setValue(aIssuer);
 		}
 
@@ -112,7 +125,7 @@ public class AuthnRequestBuilderImpl
 	 */
 	@Override
 	public AuthnRequestBuilder version(String aVersion) {
-		if (aVersion != null) {
+		if (!StringUtils.isEmpty(aVersion)) {
 			authnRequest.setVersion(SAMLVersion.valueOf(aVersion));
 		}
 		return this;
@@ -138,7 +151,7 @@ public class AuthnRequestBuilderImpl
 	 */
 	@Override
 	public AuthnRequestBuilder assertionConsumerServiceURL(String aAssertionConsumerServiceURL) {
-		if (aAssertionConsumerServiceURL != null) {
+		if (!StringUtils.isEmpty(aAssertionConsumerServiceURL)) {
 			authnRequest.setAssertionConsumerServiceURL(aAssertionConsumerServiceURL);
 		}
 		return this;
@@ -164,7 +177,7 @@ public class AuthnRequestBuilderImpl
 	 */
 	@Override
 	public AuthnRequestBuilder destination(String aDestination) {
-		if (aDestination != null) {
+		if (!StringUtils.isEmpty(aDestination)) {
 			authnRequest.setDestination(aDestination);
 		}
 		return this;
@@ -177,7 +190,7 @@ public class AuthnRequestBuilderImpl
 	 */
 	@Override
 	public AuthnRequestBuilder providerName(String aProviderName) {
-		if (aProviderName != null) {
+		if (!StringUtils.isEmpty(aProviderName)) {
 			authnRequest.setProviderName(aProviderName);
 		}
 		return this;
@@ -190,7 +203,7 @@ public class AuthnRequestBuilderImpl
 	 */
 	@Override
 	public AuthnRequestBuilder protocolBinding(String aProtocolBinding) {
-		if (aProtocolBinding != null) {
+		if (!StringUtils.isEmpty(aProtocolBinding)) {
 			authnRequest.setProtocolBinding(aProtocolBinding);
 		}
 		return this;
@@ -203,7 +216,7 @@ public class AuthnRequestBuilderImpl
 	 */
 	@Override
 	public AuthnRequestBuilder consent(String aConsent) {
-		if (aConsent != null) {
+		if (!StringUtils.isEmpty(aConsent)) {
 			authnRequest.setConsent(aConsent);
 		}
 		return this;
@@ -244,7 +257,7 @@ public class AuthnRequestBuilderImpl
 	 */
 	@Override
 	public AuthnRequestBuilder nameIdPolicyFormat(String aNameIdPolicyFormat) {
-		if (aNameIdPolicyFormat != null) {
+		if (!StringUtils.isEmpty(aNameIdPolicyFormat)) {
 			nameIDPolicy.setFormat(aNameIdPolicyFormat);
 		}
 		return this;
@@ -257,7 +270,25 @@ public class AuthnRequestBuilderImpl
 	 */
 	@Override
 	public AuthnRequestBuilder subject(Subject aSubject) {
-		authnRequest.setSubject(subject);
+		if (aSubject != null) {
+			authnRequest.setSubject(subject);
+		}
+		return this;
+	}
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#providerID(java.lang.String)
+	 */
+	@Override
+	public AuthnRequestBuilder providerID(String aProviderID) {
+		if (!StringUtils.isEmpty(aProviderID)) {
+			final IDPEntry idpEntry = new IDPEntryBuilder().buildObject();
+			idpEntry.setProviderID(aProviderID);
+			idpList.getIDPEntrys().add(idpEntry);
+		}
 		return this;
 	}
 

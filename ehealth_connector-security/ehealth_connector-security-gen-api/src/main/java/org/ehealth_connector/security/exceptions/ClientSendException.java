@@ -78,4 +78,8 @@ public class ClientSendException extends Exception {
 		super(cause);
 	}
 
+	public ClientSendException(String message) {
+		super(message);
+	}
+
 }

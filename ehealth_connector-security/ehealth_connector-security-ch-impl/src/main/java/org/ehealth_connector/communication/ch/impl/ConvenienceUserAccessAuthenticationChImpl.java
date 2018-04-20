@@ -50,6 +50,8 @@ public class ConvenienceUserAccessAuthenticationChImpl extends ConvenienceUserAc
 	@Override
 	public PrivacyPolicyQueryResponse invokePPQ(Assertion aAssertion, PrivacyPolicyQuery query,
 			PpqClientConfig clientConfiguration) throws ClientSendException {
+		if (!initialized)
+			throw new ClientSendException("Opensaml Libs are not initialized");
 		final PpqClient client = ClientFactoryCh.getPpqClient(clientConfiguration);
 		return client.send(aAssertion, query);
 	}

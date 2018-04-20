@@ -60,6 +60,19 @@ public abstract class AbstractIdpClient implements IdpClient {
 
 	public abstract CloseableHttpClient getHttpClient() throws ClientSendException;
 
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to create an UrlEncodedFormEntity with the authn request.</div>
+	 * <div class="de">Methode um eine UrlEncodedFormEntity mit dem AuthnRequest zu erstellen.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @param aAuthnRequest
+	 * @return
+	 * @throws SerializeException
+	 * @throws UnsupportedEncodingException
+	 * <!-- @formatter:on -->
+	 */
 	UrlEncodedFormEntity getUrlFormEntity(AuthnRequest aAuthnRequest)
 			throws SerializeException, UnsupportedEncodingException {
 		final AuthnRequestSerializerImpl serializer = new AuthnRequestSerializerImpl();
@@ -71,14 +84,64 @@ public abstract class AbstractIdpClient implements IdpClient {
 		return new UrlEncodedFormEntity(urlParameters);
 	}
 
-	HttpPost getHttpPost(IdpClientConfig config) throws UnsupportedEncodingException, SerializeException {
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to create and configure the HTTPPost instance.</div>
+	 * <div class="de">Methode um eine HTTPPost Instanz zu erstellen und zu konfigurieren.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @param config
+	 * <div class="en">the client configuration</div>
+	 * <div class="de">Die client konfiguration</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * @return
+	 * <div class="en">the created HTTP Post instance</div>
+	 * <div class="de">die erstellte HTTP Post Instanz</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * @throws UnsupportedEncodingException
+	 * <div class="en">will be thrown if an error occures.</div>
+	 * <div class="de">wird geworfen wenn eine Fehler auftritt.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	HttpPost getHttpPost(IdpClientConfig config) throws UnsupportedEncodingException {
 		final HttpPost post = new HttpPost(config.getUrl());
 		post.setConfig(getRequestConfig());
 		return post;
 	}
 
+	/**
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to execute a HTTP post request</div>
+	 * <div class="de">Methode um eine HTTP post Abfrage auszuführen</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @param post
+	 * <div class="en">the http post to be executed.</div>
+	 * <div class="de">der http post der ausgeführt werden soll.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * @return
+	 * <div class="en">the Response</div>
+	 * <div class="de">der Response</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * @throws Throwable
+	 * <div class="en">will be thrown if an error occures.</div>
+	 * <div class="de">wird geworfen wenn eine Fehler auftritt.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
 	Response execute(HttpPost post) throws Throwable {
-		final CloseableHttpClient httpclient = getHttpClient();// HttpClients.createDefault();
+		final CloseableHttpClient httpclient = getHttpClient();
+
 		final CloseableHttpResponse response = httpclient.execute(post);
 		if ((response.getStatusLine() != null) && (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)) {
 
@@ -88,17 +151,46 @@ public abstract class AbstractIdpClient implements IdpClient {
 		}
 	}
 
-	Response parseResponse(CloseableHttpResponse response) throws ParseException, IOException, DeserializeException {
-		final String responseEntity = EntityUtils.toString(response.getEntity());
-		final org.jsoup.nodes.Document doc = Jsoup.parse(responseEntity);
-		final Elements samlElements = doc.getElementsByAttributeValue("name", "SAMLResponse");
-		final Element samlElement = samlElements.first();
-		final String samlResponseBase64String = samlElement.attr("value");
+	/**
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to parse the http response content to the Response.</div>
+	 * <div class="de">Methode um den http Inhalt in ein Response umzuwandeln.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @param response
+	 * <div class="en">the http response</div>
+	 * <div class="de">der http response</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * @return
+	 * <div class="en">the Response</div>
+	 * <div class="de">der Response</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * @throws ClientSendException
+	 * <div class="en">will be thrown if an error occures.</div>
+	 * <div class="de">wird geworfen wenn eine Fehler auftritt.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	Response parseResponse(CloseableHttpResponse response) throws ClientSendException {
+		try {
+			final String responseEntity = EntityUtils.toString(response.getEntity());
+			final org.jsoup.nodes.Document doc = Jsoup.parse(responseEntity);
+			final Elements samlElements = doc.getElementsByAttributeValue("name", "SAMLResponse");
+			final Element samlElement = samlElements.first();
+			final String samlResponseBase64String = samlElement.attr("value");
 
-		final byte[] reponseByteArray = Base64.getDecoder().decode(samlResponseBase64String);
+			final byte[] reponseByteArray = Base64.getDecoder().decode(samlResponseBase64String);
 
-		final ResponseDeserializerImpl deserializer = new ResponseDeserializerImpl();
+			final ResponseDeserializerImpl deserializer = new ResponseDeserializerImpl();
 
-		return deserializer.fromXmlByteArray(reponseByteArray);
+			return deserializer.fromXmlByteArray(reponseByteArray);
+		} catch (ParseException | IOException | DeserializeException e) {
+			throw new ClientSendException(e);
+		}
 	}
 }
