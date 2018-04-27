@@ -145,12 +145,14 @@ public class UpdateValueSets {
 
 			String enumConstantName = buildEnumName(getDisplayName(ENGLISH, concept));
 			String code = concept.get("code").toString();
+			String codeSystem = concept.get("codeSystem").toString();
 
 			NodeList<Expression> values = new NodeList<>();
 			StringBuilder javadocEnum = new StringBuilder();
 			StringBuilder javadocConstant = new StringBuilder();
 
 			values.add(new StringLiteralExpr(code));
+			values.add(new StringLiteralExpr(codeSystem));
 			values.add(new StringLiteralExpr(concept.get("displayName").toString()));
 
 			// build comments per language
@@ -398,8 +400,8 @@ public class UpdateValueSets {
 			templateType.getMembers().forEach(enumType::addMember);
 
 			// replace constant values and imports
-			replaceConstantValue(enumType, "CODE_SYSTEM_NAME", codeSystemName);
-			replaceConstantValue(enumType, "CODE_SYSTEM_OID", id);
+			replaceConstantValue(enumType, "VALUE_SET_ID", id);
+			replaceConstantValue(enumType, "VALUE_SET_NAME", codeSystemName);
 
 			// replace imports with those found in the template
 			new ArrayList<>(javaSource.getImports()).forEach(javaSource::remove);

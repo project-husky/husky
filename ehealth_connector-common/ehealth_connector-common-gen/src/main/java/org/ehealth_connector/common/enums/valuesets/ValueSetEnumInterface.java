@@ -41,7 +41,7 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
 	 */
 	default CE getCE() {
 		final CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setCodeSystem(getCodeSystemOid());
+		ce.setCodeSystem(getCodeSystemValue());
 		ce.setCode(getCodeValue());
 		ce.setDisplayName(getDisplayName());
 		return ce;
@@ -54,7 +54,7 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
 	 * @return <div class="en">the code</div>
 	 */
 	default Code getCode() {
-		return new Code(getCodeSystemOid(), getCodeValue(), getDisplayName());
+		return new Code(getCodeSystemValue(), getCodeValue(), getDisplayName());
 	}
 
 	/**
@@ -66,19 +66,11 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
 	@Override
 	default CodedMetadataType getCodedMetadataType() {
 		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
-		cmt.setSchemeName(getCodeSystemOid());
+		cmt.setSchemeName(getCodeSystemValue());
 		cmt.setCode(getCodeValue());
 		cmt.setDisplayName(XdsMetadataUtil.createInternationalString(getDisplayName(), "de-ch"));
 		return cmt;
 	}
-
-	/**
-	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
-	 * code system name.</div>
-	 *
-	 * @return <div class="en">the code system name</div>
-	 */
-	String getCodeSystemName();
 
 	/**
 	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
@@ -86,7 +78,7 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */
-	String getCodeSystemOid();
+	String getCodeSystemValue();
 
 	/**
 	 * <div class="en">Gets the actual Code as string</div>
@@ -118,4 +110,20 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
 	 *         found, display name in german will returned
 	 */
 	String getDisplayName(LanguageCode languageCode);
+
+	/**
+	 * <div class="en">Gets the value set identifier.</div>
+	 * <div class="de">Liefert den Value Set Identifikator.</div>
+	 *
+	 * @return <div class="en">the value set identifier</div>
+	 */
+	String getValueSetId();
+
+	/**
+	 * <div class="en">Gets the value set name.</div> <div class="de">Liefert
+	 * den Value Set Namen.</div>
+	 *
+	 * @return <div class="en">the value set name</div>
+	 */
+	String getValueSetName();
 }

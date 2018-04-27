@@ -38,17 +38,17 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 	 * <div class="en">Female</div> <div class="de">Weiblich</div>
 	 * <div class="fr">Féminin</div> <div class="it">Femminile</div>
 	 */
-	FEMALE("F", "Female", "Female", "Weiblich", "Féminin", "Femminile"),
+	FEMALE("F", "2.16.840.1.113883.5.1", "Female", "Female", "Weiblich", "Féminin", "Femminile"),
 	/**
 	 * <div class="en">Male</div> <div class="de">Männlich</div>
 	 * <div class="fr">Masculin</div> <div class="it">Maschile</div>
 	 */
-	MALE("M", "Male", "Male", "Männlich", "Masculin", "Maschile"),
+	MALE("M", "2.16.840.1.113883.5.1", "Male", "Male", "Männlich", "Masculin", "Maschile"),
 	/**
 	 * <div class="en">Other</div> <div class="de">Andere</div>
 	 * <div class="fr">Autre</div> <div class="it">Altro</div>
 	 */
-	OTHER("UN", "Undifferentiated", "Other", "Andere", "Autre", "Altro");
+	OTHER("UN", "2.16.840.1.113883.5.1", "Undifferentiated", "Other", "Andere", "Autre", "Altro");
 
 	/**
 	 * <div class="en">Code for Female</div> <div class="de">Code für
@@ -72,16 +72,16 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 	public static final String OTHER_CODE = "UN";
 
 	/**
-	 * <div class="en">Name of the Code System</div> <div class="de">Name des
-	 * Codes Systems</div>
+	 * <div class="en">Name of the value set</div> <div class="de">Name des
+	 * Value Sets</div>
 	 */
-	public static final String CODE_SYSTEM_NAME = "epd_xds_sourcePatientInfo";
+	public static final String VALUE_SET_NAME = "epd_xds_sourcePatientInfo";
 
 	/**
-	 * <div class="en">Identifier of the Code System</div>
-	 * <div class="de">Identifikator für das Code System</div>
+	 * <div class="en">Identifier of the value set</div>
+	 * <div class="de">Identifikator für das Value Set</div>
 	 */
-	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.10.1.25";
+	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.25";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -152,12 +152,20 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 	private String code;
 
 	/**
+	 * <div class="en">Identifier of the referencing code system.</div>
+	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
+	 */
+	private String codeSystem;
+
+	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
 	 * Display Name</div> <div class="de">Instanziiert dieses Enum Object
 	 * mittels eines Codes und einem Display Name</div>.
 	 *
 	 * @param code
-	 *            <div class="de">code</div>
+	 *            code
+	 * @param codeSystem
+	 *            codeSystem
 	 * @param displayName
 	 *            the default display name
 	 * @param displayNameEn
@@ -169,9 +177,10 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	SourcePatientInfo(String code, String displayName, String displayNameEn, String displayNameDe,
-			String displayNameFr, String displayNameIt) {
+	SourcePatientInfo(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
+		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
 		displayNames.put(null, displayName);
 		displayNames.put(LanguageCode.ENGLISH, displayNameEn);
@@ -181,25 +190,14 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
-	 * code system name.</div>
+	 * <div class="en">Gets the code system identifier.</div>
+	 * <div class="de">Liefert den Code System Identifikator.</div>
 	 *
-	 * @return <div class="en">the code system name</div>
+	 * @return <div class="en">the code system identifier</div>
 	 */
 	@Override
-	public String getCodeSystemName() {
-		return CODE_SYSTEM_NAME;
-	}
-
-	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
-	 * die code system id.</div>
-	 *
-	 * @return <div class="en">the code system id</div>
-	 */
-	@Override
-	public String getCodeSystemOid() {
-		return CODE_SYSTEM_OID;
+	public String getCodeSystemValue() {
+		return this.codeSystem;
 	}
 
 	/**
@@ -232,5 +230,27 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 			return displayNames.get(null);
 		}
 		return displayName;
+	}
+
+	/**
+	 * <div class="en">Gets the value set identifier.</div>
+	 * <div class="de">Liefert den Value Set Identifikator.</div>
+	 *
+	 * @return <div class="en">the value set identifier</div>
+	 */
+	@Override
+	public String getValueSetId() {
+		return VALUE_SET_ID;
+	}
+
+	/**
+	 * <div class="en">Gets the value set name.</div> <div class="de">Liefert
+	 * den Value Set Namen.</div>
+	 *
+	 * @return <div class="en">the value set name</div>
+	 */
+	@Override
+	public String getValueSetName() {
+		return VALUE_SET_NAME;
 	}
 }

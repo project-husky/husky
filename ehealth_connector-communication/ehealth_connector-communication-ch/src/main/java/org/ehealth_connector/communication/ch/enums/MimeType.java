@@ -37,62 +37,62 @@ public enum MimeType implements ValueSetEnumInterface {
 	 * <div class="en">DICOM</div> <div class="de">DICOM</div>
 	 * <div class="fr">DICOM</div> <div class="it">DICOM</div>
 	 */
-	DICOM("application/dicom", "DICOM", "DICOM", "DICOM", "DICOM", "DICOM"),
+	DICOM("application/dicom", "2.16.840.1.113883.5.79", "DICOM", "DICOM", "DICOM", "DICOM", "DICOM"),
 	/**
 	 * <div class="en">PDF</div> <div class="de">PDF</div>
 	 * <div class="fr">PDF</div> <div class="it">PDF</div>
 	 */
-	PDF("application/pdf", "PDF", "PDF", "PDF", "PDF", "PDF"),
+	PDF("application/pdf", "2.16.840.1.113883.5.79", "PDF", "PDF", "PDF", "PDF", "PDF"),
 	/**
 	 * <div class="en">MPEG audio layer 3</div> <div class="de">MPEG audio layer
 	 * 3</div> <div class="fr">MPEG audio layer 3</div> <div class="it">MPEG
 	 * audio layer 3</div>
 	 */
-	MPEG_AUDIO_LAYER_3("audio/mpeg", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3"),
+	MPEG_AUDIO_LAYER_3("audio/mpeg", "2.16.840.1.113883.5.79", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3"),
 	/**
 	 * <div class="en">GIF Graphics Interchange Format</div> <div class="de">GIF
 	 * Graphics Interchange Format</div> <div class="fr">GIF Graphics
 	 * Interchange Format</div> <div class="it">GIF Graphics Interchange
 	 * Format</div>
 	 */
-	GIF_GRAPHICS_INTERCHANGE_FORMAT("image/gif", "GIF Graphics Interchange Format", "GIF Graphics Interchange Format", "GIF Graphics Interchange Format", "GIF Graphics Interchange Format", "GIF Graphics Interchange Format"),
+	GIF_GRAPHICS_INTERCHANGE_FORMAT("image/gif", "2.16.840.1.113883.5.79", "GIF Graphics Interchange Format", "GIF Graphics Interchange Format", "GIF Graphics Interchange Format", "GIF Graphics Interchange Format", "GIF Graphics Interchange Format"),
 	/**
 	 * <div class="en">JPEG Image</div> <div class="de">JPEG Image</div>
 	 * <div class="fr">JPEG Image</div> <div class="it">JPEG Image</div>
 	 */
-	JPEG_IMAGE("image/jpeg", "JPEG Image", "JPEG Image", "JPEG Image", "JPEG Image", "JPEG Image"),
+	JPEG_IMAGE("image/jpeg", "2.16.840.1.113883.5.79", "JPEG Image", "JPEG Image", "JPEG Image", "JPEG Image", "JPEG Image"),
 	/**
 	 * <div class="en">PNG Portable Network Graphics</div> <div class="de">PNG
 	 * Portable Network Graphics</div> <div class="fr">PNG Portable Network
 	 * Graphics</div> <div class="it">PNG Portable Network Graphics</div>
 	 */
-	PNG_PORTABLE_NETWORK_GRAPHICS("image/png", "PNG Portable Network Graphics", "PNG Portable Network Graphics", "PNG Portable Network Graphics", "PNG Portable Network Graphics", "PNG Portable Network Graphics"),
+	PNG_PORTABLE_NETWORK_GRAPHICS("image/png", "2.16.840.1.113883.5.79", "PNG Portable Network Graphics", "PNG Portable Network Graphics", "PNG Portable Network Graphics", "PNG Portable Network Graphics", "PNG Portable Network Graphics"),
 	/**
 	 * <div class="en">TIFF Image</div> <div class="de">TIFF Image</div>
 	 * <div class="fr">TIFF Image</div> <div class="it">TIFF Image</div>
 	 */
-	TIFF_IMAGE("image/tiff", "TIFF Image", "TIFF Image", "TIFF Image", "TIFF Image", "TIFF Image"),
+	TIFF_IMAGE("image/tiff", "2.16.840.1.113883.5.79", "TIFF Image", "TIFF Image", "TIFF Image", "TIFF Image", "TIFF Image"),
 	/**
 	 * <div class="en">CDA Level 1 Multipart</div> <div class="de">CDA Level 1
 	 * Multipart</div> <div class="fr">CDA Level 1 Multipart</div>
 	 * <div class="it">CDA Level 1 Multipart</div>
 	 */
-	CDA_LEVEL_1_MULTIPART("multipart/x-hl7-cda-level1", "CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart"),
+	CDA_LEVEL_1_MULTIPART("multipart/x-hl7-cda-level1", "2.16.840.1.113883.5.79", "CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart"),
 	/**
 	 * <div class="en">Plain Text</div> <div class="de">Plain Text</div>
 	 * <div class="fr">Plain Text</div> <div class="it">Plain Text</div>
 	 */
-	PLAIN_TEXT("text/plain", "Plain Text", "Plain Text", "Plain Text", "Plain Text", "Plain Text"),
+	PLAIN_TEXT("text/plain", "2.16.840.1.113883.5.79", "Plain Text", "Plain Text", "Plain Text", "Plain Text", "Plain Text"),
 	/**
 	 * <div class="en">XML-Text</div> <div class="de">XML-Text</div>
 	 * <div class="fr">XML-Text</div> <div class="it">XML-Text</div>
 	 */
-	XML_TEXT("text/xml", "XML-Text", "XML-Text", "XML-Text", "XML-Text", "XML-Text"),
+	XML_TEXT("text/xml", "2.16.840.1.113883.5.79", "XML-Text", "XML-Text", "XML-Text", "XML-Text", "XML-Text"),
 	/**
 	 * <div class="en">MPEG Video</div> <div class="de">MPEG Video</div>
 	 * <div class="fr">MPEG Video</div> <div class="it">MPEG Video</div>
 	 */
-	MPEG_VIDEO("video/mpeg", "MPEG Video", "MPEG Video", "MPEG Video", "MPEG Video", "MPEG Video");
+	MPEG_VIDEO("video/mpeg", "2.16.840.1.113883.5.79", "MPEG Video", "MPEG Video", "MPEG Video", "MPEG Video", "MPEG Video");
 
 	/**
 	 * <div class="en">Code for DICOM</div> <div class="de">Code für DICOM</div>
@@ -172,16 +172,16 @@ public enum MimeType implements ValueSetEnumInterface {
 	public static final String MPEG_VIDEO_CODE = "video/mpeg";
 
 	/**
-	 * <div class="en">Name of the Code System</div> <div class="de">Name des
-	 * Codes Systems</div>
+	 * <div class="en">Name of the value set</div> <div class="de">Name des
+	 * Value Sets</div>
 	 */
-	public static final String CODE_SYSTEM_NAME = "epd_xds_mimeType";
+	public static final String VALUE_SET_NAME = "epd_xds_mimeType";
 
 	/**
-	 * <div class="en">Identifier of the Code System</div>
-	 * <div class="de">Identifikator für das Code System</div>
+	 * <div class="en">Identifier of the value set</div>
+	 * <div class="de">Identifikator für das Value Set</div>
 	 */
-	public static final String CODE_SYSTEM_OID = "2.16.756.5.30.1.127.3.10.1.16";
+	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.16";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -252,12 +252,20 @@ public enum MimeType implements ValueSetEnumInterface {
 	private String code;
 
 	/**
+	 * <div class="en">Identifier of the referencing code system.</div>
+	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
+	 */
+	private String codeSystem;
+
+	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
 	 * Display Name</div> <div class="de">Instanziiert dieses Enum Object
 	 * mittels eines Codes und einem Display Name</div>.
 	 *
 	 * @param code
-	 *            <div class="de">code</div>
+	 *            code
+	 * @param codeSystem
+	 *            codeSystem
 	 * @param displayName
 	 *            the default display name
 	 * @param displayNameEn
@@ -269,9 +277,10 @@ public enum MimeType implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	MimeType(String code, String displayName, String displayNameEn, String displayNameDe,
-			String displayNameFr, String displayNameIt) {
+	MimeType(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
+		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
 		displayNames.put(null, displayName);
 		displayNames.put(LanguageCode.ENGLISH, displayNameEn);
@@ -281,25 +290,14 @@ public enum MimeType implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
-	 * code system name.</div>
+	 * <div class="en">Gets the code system identifier.</div>
+	 * <div class="de">Liefert den Code System Identifikator.</div>
 	 *
-	 * @return <div class="en">the code system name</div>
+	 * @return <div class="en">the code system identifier</div>
 	 */
 	@Override
-	public String getCodeSystemName() {
-		return CODE_SYSTEM_NAME;
-	}
-
-	/**
-	 * <div class="en">Gets the code system id.</div> <div class="de">Liefert
-	 * die code system id.</div>
-	 *
-	 * @return <div class="en">the code system id</div>
-	 */
-	@Override
-	public String getCodeSystemOid() {
-		return CODE_SYSTEM_OID;
+	public String getCodeSystemValue() {
+		return this.codeSystem;
 	}
 
 	/**
@@ -332,5 +330,27 @@ public enum MimeType implements ValueSetEnumInterface {
 			return displayNames.get(null);
 		}
 		return displayName;
+	}
+
+	/**
+	 * <div class="en">Gets the value set identifier.</div>
+	 * <div class="de">Liefert den Value Set Identifikator.</div>
+	 *
+	 * @return <div class="en">the value set identifier</div>
+	 */
+	@Override
+	public String getValueSetId() {
+		return VALUE_SET_ID;
+	}
+
+	/**
+	 * <div class="en">Gets the value set name.</div> <div class="de">Liefert
+	 * den Value Set Namen.</div>
+	 *
+	 * @return <div class="en">the value set name</div>
+	 */
+	@Override
+	public String getValueSetName() {
+		return VALUE_SET_NAME;
 	}
 }
