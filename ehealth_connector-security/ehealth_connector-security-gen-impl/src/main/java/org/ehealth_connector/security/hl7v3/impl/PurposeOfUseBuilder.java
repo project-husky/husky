@@ -47,19 +47,19 @@ public class PurposeOfUseBuilder extends AbstractXMLObjectBuilder<OpenSamlPurpos
 	@Override
 	public OpenSamlPurposeOfUse buildObject(String namespaceURI, String localName, String namespacePrefix) {
 		final OpenSamlPurposeOfUse ppou = new PurposeOfUseImpl(namespaceURI, localName, namespacePrefix);
-		if (StringUtils.isEmpty(code)) {
+		if (!StringUtils.isEmpty(code)) {
 			ppou.setCode(code);
 		}
-		if (StringUtils.isEmpty(codeSystem)) {
+		if (!StringUtils.isEmpty(codeSystem)) {
 			ppou.setCodeSystem(codeSystem);
 		}
-		if (StringUtils.isEmpty(codeSystemName)) {
+		if (!StringUtils.isEmpty(codeSystemName)) {
 			ppou.setCodeSystemName(codeSystemName);
 		}
-		if (StringUtils.isEmpty(codeSystemVersion)) {
+		if (!StringUtils.isEmpty(codeSystemVersion)) {
 			ppou.setCodeSystemVersion(codeSystemVersion);
 		}
-		if (StringUtils.isEmpty(displayName)) {
+		if (!StringUtils.isEmpty(displayName)) {
 			ppou.setDisplayName(displayName);
 		}
 		return ppou;

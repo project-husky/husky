@@ -80,6 +80,24 @@ public class XuaClientConfigBuilderImpl implements XuaClientConfigBuilder {
 		return this;
 	}
 
+	@Override
+	public XuaClientConfigBuilder clientKeyStore(String aClientKeyStoreFile) {
+		config.setKeyStore(aClientKeyStoreFile);
+		return this;
+	}
+
+	@Override
+	public XuaClientConfigBuilder clientKeyStorePassword(String clientKeyStorePassword) {
+		config.setKeyStorePassword(clientKeyStorePassword);
+		return this;
+	}
+
+	@Override
+	public XuaClientConfigBuilder clientKeyStoreType(String clientKeyStoreType) {
+		config.setKeyStoreType(clientKeyStoreType);
+		return this;
+	}
+
 	/**
 	 * {@inheritDoc}
 	 *
@@ -88,6 +106,12 @@ public class XuaClientConfigBuilderImpl implements XuaClientConfigBuilder {
 	@Override
 	public XuaClientConfigBuilder serviceNamespace(String serviceNamespace) {
 		config.setServiceNamespace(serviceNamespace);
+		return this;
+	}
+
+	@Override
+	public XuaClientConfigBuilder simple(boolean aSimple) {
+		config.setSimple(aSimple);
 		return this;
 	}
 

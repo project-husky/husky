@@ -29,8 +29,19 @@ import org.ehealth_connector.security.communication.config.XuaClientConfig;
  */
 public class XuaClientConfigImpl extends AbstractSoapClientConfig implements XuaClientConfig {
 
-	protected XuaClientConfigImpl() {
+	private boolean simple;
 
+	protected XuaClientConfigImpl() {
+		simple = true;
+	}
+
+	@Override
+	public boolean isSimple() {
+		return simple;
+	}
+
+	public void setSimple(boolean aSimple) {
+		simple = aSimple;
 	}
 
 }

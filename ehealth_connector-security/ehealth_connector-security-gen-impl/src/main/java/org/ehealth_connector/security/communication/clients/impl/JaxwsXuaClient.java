@@ -17,7 +17,11 @@
  */
 package org.ehealth_connector.security.communication.clients.impl;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.net.URL;
+import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -25,17 +29,22 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.net.ssl.SSLContext;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamReader;
+import javax.xml.transform.stream.StreamSource;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.handler.Handler;
 import javax.xml.ws.handler.HandlerResolver;
-import javax.xml.ws.handler.MessageContext;
 import javax.xml.ws.handler.PortInfo;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.http.ssl.SSLContexts;
 import org.ehealth_connector.security.communication.clients.XuaClient;
 import org.ehealth_connector.security.communication.config.XuaClientConfig;
 import org.ehealth_connector.security.communication.soap.impl.HeaderAddAssertionSoapHandler;
@@ -49,7 +58,10 @@ import org.ehealth_connector.security.core.SecurityHeaderElement;
 import org.ehealth_connector.security.deserialization.impl.AbstractDeserializerImpl;
 import org.ehealth_connector.security.exceptions.ClientSendException;
 import org.ehealth_connector.security.exceptions.DeserializeException;
+import org.ehealth_connector.security.pki.PkiManager;
 import org.ehealth_connector.security.serialization.impl.XUserAssertionRequestSerializerImpl;
+import org.ehealth_connector.security.serialization.pki.PkiManagerImpl;
+import org.oasis_open.docs.ws_sx.ws_trust._200512.CompleteSTSPort;
 import org.oasis_open.docs.ws_sx.ws_trust._200512.ExtendedSTSPort;
 import org.oasis_open.docs.ws_sx.ws_trust._200512.RequestSecurityToken;
 import org.oasis_open.docs.ws_sx.ws_trust._200512.STSPort;
@@ -67,11 +79,11 @@ import org.w3c.dom.Element;
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public class DefaultXuaClient implements XuaClient {
+public class JaxwsXuaClient implements XuaClient {
 
 	private XuaClientConfig config;
 
-	public DefaultXuaClient(XuaClientConfig clientConfiguration) {
+	public JaxwsXuaClient(XuaClientConfig clientConfiguration) {
 		config = clientConfiguration;
 	}
 
@@ -126,6 +138,15 @@ public class DefaultXuaClient implements XuaClient {
 			final URL wsdlLocation = new URL(config.getUrl());
 			final QName serviceName = new QName(config.getServiceNamespace(), config.getServiceName());
 
+			// final String keystore = new File(config.getKeyStore()).getAbsolutePath();
+			// System.setProperty("javax.net.ssl.keyStore", keystore);
+			// System.setProperty("javax.net.ssl.keyStorePassword", config.getKeyStorePassword());
+			// System.setProperty("javax.net.ssl.keyStoreType", config.getKeyStoreType());
+			//
+			// System.setProperty("javax.net.ssl.trustStore", keystore);
+			// System.setProperty("javax.net.ssl.trustStorePassword", config.getKeyStorePassword());
+			// System.setProperty("javax.net.ssl.trustStoreType", config.getKeyStoreType());
+
 			final org.oasis_open.docs.ws_sx.ws_trust._200512.SecurityTokenService service = new org.oasis_open.docs.ws_sx.ws_trust._200512.SecurityTokenService(
 					wsdlLocation, serviceName);
 
@@ -152,23 +173,34 @@ public class DefaultXuaClient implements XuaClient {
 			STSPort port = null;
 			try {
 				port = service.getPort(new QName(config.getPortNamespace(), config.getPortName()),
-						ExtendedSTSPort.class);
+						CompleteSTSPort.class);
 			} catch (final Exception e) {
-				port = service.getPort(new QName(config.getPortNamespace(), config.getPortName()), STSPort.class);
+				try {
+					port = service.getPort(new QName(config.getPortNamespace(), config.getPortName()),
+							ExtendedSTSPort.class);
+				} catch (final Exception e1) {
+					port = service.getPort(new QName(config.getPortNamespace(), config.getPortName()), STSPort.class);
+				}
 			}
 
 			final BindingProvider bp = (BindingProvider) port;
 			final Map<String, List<String>> requestHeaders = new LinkedHashMap<>();
 			final List<String> acceptList = new ArrayList<>();
 			acceptList.add("*/*");
-			// acceptList.add("application/soap+xml");
-			// acceptList.add("multipart/related");
 			requestHeaders.put("Accept", acceptList);// Collections.singletonList("text/xml"));
-			// requestHeaders.put("Content-Type", Collections.singletonList("text/xml"));// "application/soap+xml"));
-			bp.getRequestContext().put(MessageContext.HTTP_REQUEST_HEADERS, requestHeaders);
 
-			bp.getRequestContext().put(BindingProvider.USERNAME_PROPERTY, "roeland");
-			bp.getRequestContext().put(BindingProvider.PASSWORD_PROPERTY, "roeland-68");
+			if (!StringUtils.isEmpty(config.getKeyStore())) {
+
+				final PkiManager pki = new PkiManagerImpl();
+				final KeyStore keyStore = pki.loadStore(new FileInputStream(config.getKeyStore()),
+						config.getKeyStorePassword(), config.getKeyStoreType());
+				final SSLContext sslcontext = SSLContexts.custom()//
+						.loadKeyMaterial(keyStore, config.getKeyStorePassword().toCharArray())//
+						.loadTrustMaterial(new File(config.getKeyStore()), config.getKeyStorePassword().toCharArray())//
+						.build();
+				bp.getRequestContext().put("com.sun.xml.ws.transport.https.client.SSLSocketFactory",
+						sslcontext.getSocketFactory());
+			}
 
 			return port;
 		} catch (final Exception e) {
@@ -201,13 +233,29 @@ public class DefaultXuaClient implements XuaClient {
 	 */
 	private RequestSecurityToken convertToServiceObjects(XUserAssertionRequest aRequest) throws ClientSendException {
 		try {
-			final Element rstElement = new XUserAssertionRequestSerializerImpl().toXmlElement(aRequest);
+			// System.setProperty("javax.xml.parsers.DocumentBuilderFactory",
+			// "org.apache.xerces.jaxp.DocumentBuilderFactoryImpl");
+			// final Element rstElement = new XUserAssertionRequestSerializerImpl().toXmlElement(aRequest);
+			//
+			// final JAXBContext jaxbContext = JAXBContext
+			// .newInstance(org.oasis_open.docs.ws_sx.ws_trust._200512.ObjectFactory.class);
+			// final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+			//
+			// final org.oasis_open.docs.ws_sx.ws_trust._200512.RequestSecurityToken request =
+			// (org.oasis_open.docs.ws_sx.ws_trust._200512.RequestSecurityToken) unmarshaller
+			// .unmarshal(rstElement);
 
-			final JAXBContext jaxbContext = JAXBContext.newInstance("org.oasis_open.docs.ws_sx.ws_trust._200512");
-			final Unmarshaller unmarshaller = jaxbContext.createUnmarshaller();
+			final byte[] xmlbytes = new XUserAssertionRequestSerializerImpl().toXmlByteArray(aRequest);
 
+			final JAXBContext jc = JAXBContext
+					.newInstance(org.oasis_open.docs.ws_sx.ws_trust._200512.ObjectFactory.class);
+			final XMLInputFactory xif = XMLInputFactory.newFactory();
+			xif.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, true); // this is the magic line
+			final StreamSource source = new StreamSource(new ByteArrayInputStream(xmlbytes));
+			final XMLStreamReader xsr = xif.createXMLStreamReader(source);
+			final Unmarshaller unmarshaller = jc.createUnmarshaller();
 			final org.oasis_open.docs.ws_sx.ws_trust._200512.RequestSecurityToken request = (org.oasis_open.docs.ws_sx.ws_trust._200512.RequestSecurityToken) unmarshaller
-					.unmarshal(rstElement);
+					.unmarshal(xsr);
 
 			return request;
 		} catch (final Exception e) {
@@ -248,7 +296,9 @@ public class DefaultXuaClient implements XuaClient {
 			final Marshaller marshaller = jaxbContext.createMarshaller();
 
 			final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			dbf.setNamespaceAware(true);
 			final Document doc = dbf.newDocumentBuilder().newDocument();
+
 			marshaller.marshal(wsResponse, doc);
 
 			final RequestSecurityTokenResponseCollection response = new AbstractDeserializerImpl<RequestSecurityTokenResponseCollection, RequestSecurityTokenResponseCollection>() {

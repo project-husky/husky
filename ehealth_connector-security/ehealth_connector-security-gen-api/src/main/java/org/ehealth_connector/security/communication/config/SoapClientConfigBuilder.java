@@ -94,7 +94,6 @@ public interface SoapClientConfigBuilder extends ClientConfigBuilder {
 	SoapClientConfigBuilder serviceName(String serviceName);
 
 	/**
-	 * 
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the namespace of the service name of the security token webservice.</div>
 	 * <div class="de">Methode um den Namespace des Service Namen des security token webservices zu setzen.</div>
@@ -114,5 +113,68 @@ public interface SoapClientConfigBuilder extends ClientConfigBuilder {
 	 * <!-- @formatter:on -->
 	 */
 	SoapClientConfigBuilder serviceNamespace(String serviceNamespace);
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the client keystore to access the security token webservice.</div>
+	 * <div class="de">Methode um den Schlüsselspeicher für den Zugriff auf den Security Token Webservices zu setzen.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @param clientKeyStoreFile
+	 * <div class="en">the client keystore file</div>
+	 * <div class="de">der Client KeyStore file</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * @return
+	 * <div class="en">the actual instance of this builder</div>
+	 * <div class="de">die aktuelle instanz des builders</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	SoapClientConfigBuilder clientKeyStore(String clientKeyStoreFile);
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the password for the client keystore.</div>
+	 * <div class="de">Methode um das Passwort für den Schlüsselspeicher zu setzen.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @param clientKeyStorePassword
+	 * <div class="en">the client keystore password</div>
+	 * <div class="de">das Schlüsselspeicher Passwort</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * @return
+	 * <div class="en">the actual instance of this builder</div>
+	 * <div class="de">die aktuelle instanz des builders</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	SoapClientConfigBuilder clientKeyStorePassword(String clientKeyStorePassword);
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the type of the client keystore.</div>
+	 * <div class="de">Methode um den Typ des Schlüsselspeichers zu setzen.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @param clientKeyStoreType
+	 * <div class="en">the client keystore type</div>
+	 * <div class="de">der Schlüsselspeichertyp</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * @return
+	 * <div class="en">the actual instance of this builder</div>
+	 * <div class="de">die aktuelle instanz des builders</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	SoapClientConfigBuilder clientKeyStoreType(String clientKeyStoreType);
 
 }

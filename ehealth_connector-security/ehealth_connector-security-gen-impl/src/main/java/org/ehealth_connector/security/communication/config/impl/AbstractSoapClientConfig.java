@@ -33,6 +33,10 @@ public class AbstractSoapClientConfig extends AbstractClientConfig implements So
 	public String serviceName;
 	public String serviceNamespace;
 
+	public String keyStoreFile;
+	public String keyStorePassword;
+	public String keyStoreType;
+
 	@Override
 	public String getPortName() {
 		return portName;
@@ -72,4 +76,35 @@ public class AbstractSoapClientConfig extends AbstractClientConfig implements So
 	public void setServiceNamespace(String serviceNamespace) {
 		this.serviceNamespace = serviceNamespace;
 	}
+
+	@Override
+	public String getKeyStore() {
+		return keyStoreFile;
+	}
+
+	@Override
+	public String getKeyStorePassword() {
+		return keyStorePassword;
+	}
+
+	@Override
+	public String getKeyStoreType() {
+		return keyStoreType;
+	}
+
+	@Override
+	public void setKeyStore(String aKeyStore) {
+		keyStoreFile = aKeyStore;
+	}
+
+	@Override
+	public void setKeyStorePassword(String aKeyStorePassword) {
+		keyStorePassword = aKeyStorePassword;
+	}
+
+	@Override
+	public void setKeyStoreType(String aKeyStoreType) {
+		keyStoreType = aKeyStoreType;
+	}
+
 }

@@ -52,7 +52,7 @@ public class HeaderAddAssertionSoapHandler implements SOAPHandler<SOAPMessageCon
 	private SecurityHeaderElement mSecurityHeaderElement;
 
 	public HeaderAddAssertionSoapHandler(SecurityHeaderElement aSecurityHeaderElement) {
-		mLogger = LoggerFactory.getLogger(HeaderAddAssertionSoapHandler.class);
+		mLogger = LoggerFactory.getLogger(getClass());
 		mLogger.debug("AssertionSoapHandler()");
 		mSecurityHeaderElement = aSecurityHeaderElement;
 	}

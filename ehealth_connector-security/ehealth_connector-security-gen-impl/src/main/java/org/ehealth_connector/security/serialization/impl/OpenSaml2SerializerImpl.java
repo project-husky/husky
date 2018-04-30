@@ -100,8 +100,6 @@ public class OpenSaml2SerializerImpl implements OpenSaml2Serializer {
 		try {
 			final MarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport.getMarshallerFactory();
 
-			// final QName qName = aXmlObject.getElementQName();
-
 			final Marshaller marshaller = marshallerFactory.getMarshaller(aXmlObject);
 
 			return marshaller.marshall(aXmlObject);

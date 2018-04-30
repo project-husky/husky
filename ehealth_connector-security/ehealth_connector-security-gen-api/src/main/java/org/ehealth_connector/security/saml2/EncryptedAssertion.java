@@ -17,6 +17,8 @@
  */
 package org.ehealth_connector.security.saml2;
 
+import org.ehealth_connector.security.core.SecurityHeaderElement;
+
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the EncryptedAssertion.</div>
@@ -25,6 +27,6 @@ package org.ehealth_connector.security.saml2;
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public interface EncryptedAssertion {
+public interface EncryptedAssertion extends SecurityHeaderElement {
 
 }

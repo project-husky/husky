@@ -67,6 +67,24 @@ public class PpqClientConfigBuilderImpl implements PpqClientConfigBuilder {
 	}
 
 	@Override
+	public PpqClientConfigBuilder clientKeyStore(String clientKeyStore) {
+		config.setKeyStore(clientKeyStore);
+		return this;
+	}
+
+	@Override
+	public PpqClientConfigBuilder clientKeyStorePassword(String clientKeyStorePassword) {
+		config.setKeyStorePassword(clientKeyStorePassword);
+		return this;
+	}
+
+	@Override
+	public PpqClientConfigBuilder clientKeyStoreType(String clientKeyStoreType) {
+		config.setKeyStoreType(clientKeyStoreType);
+		return this;
+	}
+
+	@Override
 	public PpqClientConfig create() {
 		return config;
 	}

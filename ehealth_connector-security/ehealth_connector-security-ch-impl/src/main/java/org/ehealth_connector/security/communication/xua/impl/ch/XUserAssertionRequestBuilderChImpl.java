@@ -31,6 +31,11 @@ import org.ehealth_connector.security.communication.xua.impl.XUserAssertionReque
  */
 public class XUserAssertionRequestBuilderChImpl extends XUserAssertionRequestBuilderImpl {
 
+	public XUserAssertionRequestBuilderChImpl() {
+		super();
+		getClaims().setDialect(XUserAssertionConstantsCh.CH_EPR_2017_ANNEX5_ADDENDUM2);
+	}
+
 	@Override
 	public XUserAssertionRequestBuilder dialect(String aDialect) {
 		getClaims().setDialect(XUserAssertionConstantsCh.CH_EPR_2017_ANNEX5_ADDENDUM2);

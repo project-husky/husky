@@ -45,6 +45,9 @@ public class ClientFactory {
 	}
 
 	public static XuaClient getXuaClient(XuaClientConfig clientConfiguration) {
-		return new DefaultXuaClient(clientConfiguration);
+		if (clientConfiguration.isSimple()) {
+			return new SimpleXuaClient(clientConfiguration);
+		}
+		return new JaxwsXuaClient(clientConfiguration);
 	}
 }

@@ -57,7 +57,7 @@ public class WsaHeaderSoapHandler implements SOAPHandler<SOAPMessageContext> {
 	private WsaHeaderValue mWsaValues;
 
 	public WsaHeaderSoapHandler(WsaHeaderValue aActionValue) {
-		mLogger = LoggerFactory.getLogger(HeaderAddAssertionSoapHandler.class);
+		mLogger = LoggerFactory.getLogger(getClass());
 		mLogger.trace("WSAHeaderSoapHandler()");
 
 		mActionHeader = new QName(NAMESPACE_WSA_URI, "Action", NAMESPACE_WSA);
@@ -72,14 +72,15 @@ public class WsaHeaderSoapHandler implements SOAPHandler<SOAPMessageContext> {
 	public boolean handleMessage(SOAPMessageContext context) {
 		try {
 			final Boolean outboundProperty = (Boolean) context.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
-			final SOAPMessage soapMessage = context.getMessage();
-			final SOAPHeader soapHeader = soapMessage.getSOAPHeader();
-			mLogger.debug("InOutValue: " + context.get(IN_OUT_PARAM));
-
-			final String soapEnvelopPrefix = soapMessage.getSOAPPart().getEnvelope().getPrefix();
-			final QName mustUnderstandAttribute = new QName(NAMESPACE_SOAPENV_URI, "mustUnderstand", soapEnvelopPrefix);
-
 			if (outboundProperty.booleanValue()) {
+
+				final SOAPMessage soapMessage = context.getMessage();
+				final SOAPHeader soapHeader = soapMessage.getSOAPHeader();
+				mLogger.debug("InOutValue: " + context.get(IN_OUT_PARAM));
+
+				final String soapEnvelopPrefix = soapMessage.getSOAPPart().getEnvelope().getPrefix();
+				final QName mustUnderstandAttribute = new QName(NAMESPACE_SOAPENV_URI, "mustUnderstand",
+						soapEnvelopPrefix);
 
 				soapHeader.addNamespaceDeclaration(NAMESPACE_WSA, NAMESPACE_WSA_URI);
 
@@ -109,7 +110,7 @@ public class WsaHeaderSoapHandler implements SOAPHandler<SOAPMessageContext> {
 
 		} catch (final Throwable t) {
 			mLogger.error("error handling inout stuff", t);
-			return false;
+			return true;
 		}
 		return true;
 	}

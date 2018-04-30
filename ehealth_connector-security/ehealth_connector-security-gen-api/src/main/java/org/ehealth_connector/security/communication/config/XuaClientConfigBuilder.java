@@ -76,6 +76,35 @@ public interface XuaClientConfigBuilder extends SoapClientConfigBuilder {
 	 * 
 	 * {@inheritDoc}
 	 *
+	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#clientKeyStore(java.lang.String)
+	 */
+	@Override
+	XuaClientConfigBuilder clientKeyStore(String clientKeyStoreFile);
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#clientKeyStorePassword(java.lang.String)
+	 */
+	@Override
+	XuaClientConfigBuilder clientKeyStorePassword(String clientKeyStorePassword);
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#clientKeyStoreType(java.lang.String)
+	 */
+	@Override
+	XuaClientConfigBuilder clientKeyStoreType(String clientKeyStoreType);
+
+	XuaClientConfigBuilder simple(boolean aSimple);
+
+	/**
+	 * 
+	 * {@inheritDoc}
+	 *
 	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#create()
 	 */
 	XuaClientConfig create();

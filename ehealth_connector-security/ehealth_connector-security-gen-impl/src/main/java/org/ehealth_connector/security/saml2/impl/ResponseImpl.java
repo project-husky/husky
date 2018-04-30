@@ -166,6 +166,11 @@ public class ResponseImpl implements Response, SecurityObject<org.opensaml.saml.
 
 	@Override
 	public List<EncryptedAssertion> getEncryptedAssertions() {
-		return null;
+		final List<org.opensaml.saml.saml2.core.EncryptedAssertion> internal = response.getEncryptedAssertions();
+		final List<EncryptedAssertion> retVal = new ArrayList<>();
+		internal.forEach(c -> {
+			retVal.add(new EncryptedAssertionBuilderImpl().create(c));
+		});
+		return retVal;
 	}
 }

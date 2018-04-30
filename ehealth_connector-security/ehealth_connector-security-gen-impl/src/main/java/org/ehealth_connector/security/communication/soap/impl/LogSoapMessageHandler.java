@@ -19,9 +19,6 @@ package org.ehealth_connector.security.communication.soap.impl;
 
 import java.io.StringWriter;
 import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import javax.annotation.PostConstruct;
@@ -89,19 +86,6 @@ public class LogSoapMessageHandler implements SOAPHandler<SOAPMessageContext> {
 	public boolean handleMessage(SOAPMessageContext context) {
 		mLogger.debug("LogSoapMessageHandler.handleMessage()");
 		try {
-			final Map<String, List<String>> requestHeaders = (Map<String, List<String>>) context
-					.get(SOAPMessageContext.HTTP_REQUEST_HEADERS);
-			for (final Entry<String, List<String>> header : requestHeaders.entrySet()) {
-				if (header.getValue().isEmpty()) {
-					// I don't think this is legal, but let's just dump it,
-					// as the point of the dump is to uncover problems.
-					mLogger.debug(header.getValue().toString());
-				} else {
-					for (final String value : header.getValue()) {
-						mLogger.debug(header.getKey() + ": " + value);
-					}
-				}
-			}
 
 			final Boolean outboundProperty = (Boolean) context.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
 			String inout = "";
