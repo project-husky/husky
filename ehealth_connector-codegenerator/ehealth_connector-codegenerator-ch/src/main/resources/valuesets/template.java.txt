@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.enums.valuesets.ValueSetEnumInterface;
+import org.ehealth_connector.common.ch.enums.ValueSetEnumInterface;
 
 public enum TemplateNameToReplace implements ValueSetEnumInterface {
 

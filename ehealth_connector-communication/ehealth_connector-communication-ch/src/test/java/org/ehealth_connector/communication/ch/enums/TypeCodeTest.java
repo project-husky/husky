@@ -21,13 +21,13 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class ClassCodeTest {
+public class TypeCodeTest {
 
 	@Test
-	public void testClassCode() {
+	public void testTypeCode() {
 
-		assertEquals("2.16.756.5.30.1.127.3.10.1.3", ClassCode.VALUE_SET_ID);
-		assertValueSetEnumEntries(ClassCode.values());
+		assertEquals("2.16.756.5.30.1.127.3.10.1.27", TypeCode.VALUE_SET_ID);
+		assertValueSetEnumEntries(TypeCode.values());
 
 	}
 

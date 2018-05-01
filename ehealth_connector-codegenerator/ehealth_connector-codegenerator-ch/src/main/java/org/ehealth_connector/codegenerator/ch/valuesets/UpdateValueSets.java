@@ -47,8 +47,8 @@ import java.util.Map;
 import org.apache.commons.io.FileUtils;
 import org.ehealth_connector.codegenerator.ch.valuesets.model.ValueSet;
 import org.ehealth_connector.codegenerator.ch.valuesets.model.ValueSetConfiguration;
+import org.ehealth_connector.common.ch.enums.ValueSetEnumInterface;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.enums.valuesets.ValueSetEnumInterface;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

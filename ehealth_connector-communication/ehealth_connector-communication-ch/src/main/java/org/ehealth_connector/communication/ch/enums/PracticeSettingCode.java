@@ -20,8 +20,8 @@ package org.ehealth_connector.communication.ch.enums;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.ehealth_connector.common.ch.enums.ValueSetEnumInterface;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.enums.valuesets.ValueSetEnumInterface;
 
 /**
  * <div class="en">Medical specialisation of the data captured in the document

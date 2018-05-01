@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.enums.valuesets.ValueSetEnumInterface;
 
 /**
  * <div class="en">Document confidentiality as per Annex 3&amp;#160; EPRO-FDHA,

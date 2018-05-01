@@ -75,7 +75,13 @@
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>org.ehealth_connector.common.ch</groupId>
+			<artifactId>ehealth_connector-common-ch</artifactId>
+			<version>1.6-SNAPSHOT</version>
+			<type>test-jar</type>
+			<scope>test</scope>
+		</dependency>
 		
 	</dependencies>
 

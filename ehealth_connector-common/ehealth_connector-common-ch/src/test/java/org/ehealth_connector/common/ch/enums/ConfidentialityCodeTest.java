@@ -14,20 +14,20 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.communication.ch.enums;
+package org.ehealth_connector.common.ch.enums;
 
 import static org.ehealth_connector.common.ch.enums.ValueSetEnumInterfaceTest.assertValueSetEnumEntries;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class ClassCodeTest {
+public class ConfidentialityCodeTest {
 
 	@Test
-	public void testClassCode() {
+	public void testConfidentialityCode() {
 
-		assertEquals("2.16.756.5.30.1.127.3.10.1.3", ClassCode.VALUE_SET_ID);
-		assertValueSetEnumEntries(ClassCode.values());
+		assertEquals("2.16.756.5.30.1.127.3.10.1.5", ConfidentialityCode.VALUE_SET_ID);
+		assertValueSetEnumEntries(ConfidentialityCode.values());
 
 	}
 

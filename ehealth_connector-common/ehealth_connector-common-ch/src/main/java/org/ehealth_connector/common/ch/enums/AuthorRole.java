@@ -21,7 +21,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.enums.valuesets.ValueSetEnumInterface;
 
 /**
  * <div class="en">Role of the author as per Annex 3 EPRO-FDHA, Chapter

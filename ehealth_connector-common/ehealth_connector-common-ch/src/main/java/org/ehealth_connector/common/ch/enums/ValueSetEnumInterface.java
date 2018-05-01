@@ -15,7 +15,7 @@
  *
  */
 
-package org.ehealth_connector.common.enums.valuesets;
+package org.ehealth_connector.common.ch.enums;
 
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.CodedMetadataEnumInterface;
@@ -126,4 +126,5 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
 	 * @return <div class="en">the value set name</div>
 	 */
 	String getValueSetName();
+
 }

@@ -20,8 +20,8 @@ package org.ehealth_connector.communication.ch.enums;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.ehealth_connector.common.ch.enums.ValueSetEnumInterface;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.enums.valuesets.ValueSetEnumInterface;
 
 /**
  * <div class="en">Document class as per EPRO-FDHA Annex 3, Chapter 2.3. &lt;br
