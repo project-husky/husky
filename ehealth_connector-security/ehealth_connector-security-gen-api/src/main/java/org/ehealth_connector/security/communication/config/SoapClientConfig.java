@@ -254,4 +254,6 @@ public interface SoapClientConfig extends ClientConfig {
 	 */
 	void setKeyStoreType(String keyStoreType);
 
+	boolean isSimple();
+
 }

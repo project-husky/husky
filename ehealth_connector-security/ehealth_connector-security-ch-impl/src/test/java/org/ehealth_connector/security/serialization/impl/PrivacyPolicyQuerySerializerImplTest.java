@@ -25,24 +25,42 @@ import static org.junit.Assert.assertTrue;
 import org.ehealth_connector.communication.ch.ppq.PrivacyPolicyQuery;
 import org.ehealth_connector.communication.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl;
 import org.ehealth_connector.security.exceptions.SerializeException;
+import org.ehealth_connector.security.hl7v3.InstanceIdentifier;
+import org.ehealth_connector.security.hl7v3.impl.InstanceIdentifierBuilder;
 import org.ehealth_connector.security.utilities.impl.InitializerTestHelper;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 
 public class PrivacyPolicyQuerySerializerImplTest extends InitializerTestHelper {
+
+	private Logger logger = LoggerFactory.getLogger(PrivacyPolicyQuerySerializerImplTest.class);
 
 	private PrivacyPolicyQuerySerializerImpl testSerializer;
 	private PrivacyPolicyQuery testXmlObject;
 	private String testConsent;
 	private String testDestination;
+	private String testInstanceIdentifierRoot;
+	private String testInstanceIdentifierExt;
+	private InstanceIdentifier testInstanceIdentifier;
 
 	@Before
 	public void setUp() throws Exception {
 		testSerializer = new PrivacyPolicyQuerySerializerImpl();
 		testConsent = "My New Consent";
 		testDestination = "https://my.destination.org/path";
-		testXmlObject = new PrivacyPolicyQueryBuilderImpl().consent(testConsent).destination(testDestination).create();
+
+		testInstanceIdentifierRoot = "2.16.756.5.30.1.127.3.10.3";
+		testInstanceIdentifierExt = "761337610455909127";
+
+		testInstanceIdentifier = new InstanceIdentifierBuilder().buildObject();
+		testInstanceIdentifier.setRoot(testInstanceIdentifierRoot);
+		testInstanceIdentifier.setExtension(testInstanceIdentifierExt);
+
+		testXmlObject = new PrivacyPolicyQueryBuilderImpl().consent(testConsent).destination(testDestination)
+				.instanceIdentifier(testInstanceIdentifier).create();
 	}
 
 	/**
@@ -73,10 +91,11 @@ public class PrivacyPolicyQuerySerializerImplTest extends InitializerTestHelper 
 	@Test
 	public void testToXmlString() throws SerializeException {
 		final String xmlString = testSerializer.toXmlString(testXmlObject);
-		System.out.println(xmlString);
+		logger.debug(xmlString);
 		assertNotNull(xmlString);
 		assertTrue(xmlString.startsWith("<?xml version="));
 		assertTrue(xmlString.endsWith(">"));
+		assertTrue(xmlString.contains("urn:e-health-suisse:2015:epr-spid"));
 	}
 
 	/**

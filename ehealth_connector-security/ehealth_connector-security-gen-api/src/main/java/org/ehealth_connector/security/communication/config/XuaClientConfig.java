@@ -27,6 +27,4 @@ package org.ehealth_connector.security.communication.config;
  */
 public interface XuaClientConfig extends SoapClientConfig {
 
-	boolean isSimple();
-
 }

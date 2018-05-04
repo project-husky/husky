@@ -15,22 +15,28 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.security.communication.config.impl;
+package org.ehealth_connector.communication.ch.epr.policyadmin.impl;
 
-import org.ehealth_connector.security.communication.config.XuaClientConfig;
+import static org.junit.Assert.fail;
 
-/**
- * <!-- @formatter:off -->
- * <div class="en">Implementation class of Interface XuaClientConfig</div>
- * <div class="de">Implementations Klasse von  Interface XuaClientConfig</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
- * <!-- @formatter:on -->
- */
-public class XuaClientConfigImpl extends AbstractSoapClientConfig implements XuaClientConfig {
+import org.ehealth_connector.security.utilities.impl.InitializerTestHelper;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
 
-	protected XuaClientConfigImpl() {
-		setSimple(true);
+@Ignore
+public class AssertionBasedRequestMarshallerTest extends InitializerTestHelper {
+
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	/**
+	 * Test method for {@link org.opensaml.core.xml.io.AbstractXMLObjectMarshaller#marshall(org.opensaml.core.xml.XMLObject)}.
+	 */
+	@Test
+	public void testMarshallXMLObject() {
+		fail("Not yet implemented");
 	}
 
 }

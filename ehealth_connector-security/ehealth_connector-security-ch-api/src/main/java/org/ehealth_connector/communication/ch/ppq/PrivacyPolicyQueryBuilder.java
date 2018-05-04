@@ -17,6 +17,7 @@
  */
 package org.ehealth_connector.communication.ch.ppq;
 
+import org.ehealth_connector.security.hl7v3.InstanceIdentifier;
 import org.ehealth_connector.security.saml2.BaseBuilder;
 
 /**
@@ -72,6 +73,28 @@ public interface PrivacyPolicyQueryBuilder extends BaseBuilder<PrivacyPolicyQuer
 	PrivacyPolicyQueryBuilder destination(String newDestination);
 
 	/**
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the instance identifier of the PatientPrivacyQuery to be build.</div>
+	 * <div class="de">Methode um den instance identifier dem PatientPrivacyQuery hinzuzufügen.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 *
+	 * @param identifier
+	 *  <div class="en">the identifier to be set</div>
+	 * 	<div class="de">der identifier der gesetzt werden soll</div>
+	 *  <div class="fr">VOICIFRANCAIS</div>
+	 *  <div class="it">ITALIANO</div>
+	 * @return 
+	 *  <div class="en">the actual instance of this builder</div>
+	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="fr">VOICIFRANCAIS</div>
+	 *  <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	PrivacyPolicyQueryBuilder instanceIdentifier(InstanceIdentifier identifier);
+
+	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Creates a concrete instance of PatientPrivacyQuery with setted params.</div>
 	 * <div class="de">Erstellt die konkrete instanz des PatientPrivacyQuery mit den gesetzten parametern.</div>
@@ -86,4 +109,5 @@ public interface PrivacyPolicyQueryBuilder extends BaseBuilder<PrivacyPolicyQuer
 	 *  <!-- @formatter:on -->
 	 */
 	PrivacyPolicyQuery create();
+
 }

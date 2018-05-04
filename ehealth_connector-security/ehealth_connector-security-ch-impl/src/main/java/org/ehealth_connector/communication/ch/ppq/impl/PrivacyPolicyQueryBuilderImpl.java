@@ -22,10 +22,18 @@ import java.util.Calendar;
 import org.ehealth_connector.communication.ch.ppq.PrivacyPolicyQuery;
 import org.ehealth_connector.communication.ch.ppq.PrivacyPolicyQueryBuilder;
 import org.ehealth_connector.security.core.SecurityObjectBuilder;
+import org.ehealth_connector.security.hl7v3.InstanceIdentifier;
+import org.ehealth_connector.security.hl7v3.OpenSamlInstanceIdentifier;
 import org.joda.time.DateTime;
 import org.opensaml.saml.common.SAMLVersion;
 import org.opensaml.saml.saml2.core.Issuer;
 import org.opensaml.saml.saml2.core.impl.IssuerBuilder;
+import org.opensaml.xacml.ctx.AttributeType;
+import org.opensaml.xacml.ctx.AttributeValueType;
+import org.opensaml.xacml.ctx.RequestType;
+import org.opensaml.xacml.ctx.ResourceType;
+import org.opensaml.xacml.ctx.impl.AttributeTypeImplBuilder;
+import org.opensaml.xacml.ctx.impl.AttributeValueTypeImplBuilder;
 import org.opensaml.xacml.profile.saml.XACMLPolicyQueryType;
 import org.opensaml.xacml.profile.saml.impl.XACMLPolicyQueryTypeImplBuilder;
 
@@ -42,6 +50,8 @@ public class PrivacyPolicyQueryBuilderImpl
 
 	private XACMLPolicyQueryType wrappedObject;
 	private org.opensaml.saml.saml2.core.Issuer issuer;
+	private RequestType request;
+	private ResourceType resource;
 
 	public PrivacyPolicyQueryBuilderImpl() {
 		wrappedObject = new XACMLPolicyQueryTypeImplBuilder()
@@ -49,6 +59,12 @@ public class PrivacyPolicyQueryBuilderImpl
 		final IssuerBuilder issueBuilder = new IssuerBuilder();
 		issuer = issueBuilder.buildObject(Issuer.DEFAULT_ELEMENT_NAME);
 		wrappedObject.setIssuer(issuer);
+
+		request = new org.opensaml.xacml.ctx.impl.RequestTypeImplBuilder().buildObject();
+		wrappedObject.getRequests().add(request);
+
+		resource = new org.opensaml.xacml.ctx.impl.ResourceTypeImplBuilder().buildObject();
+		request.getResources().add(resource);
 	}
 
 	@Override
@@ -97,6 +113,22 @@ public class PrivacyPolicyQueryBuilderImpl
 		if (aDestination != null) {
 			wrappedObject.setDestination(aDestination);
 		}
+		return this;
+	}
+
+	@Override
+	public PrivacyPolicyQueryBuilder instanceIdentifier(InstanceIdentifier identifier) {
+
+		final AttributeType attribute = new AttributeTypeImplBuilder().buildObject();
+		attribute.setAttributeID("urn:e-health-suisse:2015:epr-spid");
+		attribute.setDataType("urn:hl7-org:v3#II");
+
+		final AttributeValueType attributeValue = new AttributeValueTypeImplBuilder().buildObject();
+		attribute.getAttributeValues().add(attributeValue);
+
+		attributeValue.getUnknownXMLObjects().add((OpenSamlInstanceIdentifier) identifier);
+
+		resource.getAttributes().add(attribute);
 		return this;
 	}
 

@@ -44,9 +44,7 @@ public interface PpqClientConfigBuilder extends SoapClientConfigBuilder {
 	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#portName(java.lang.String)
 	 */
 	@Override
-	default SoapClientConfigBuilder portName(String portName) {
-		return null;
-	}
+	PpqClientConfigBuilder portName(String portName);
 
 	/**
 	 * {@inheritDoc}
@@ -54,9 +52,7 @@ public interface PpqClientConfigBuilder extends SoapClientConfigBuilder {
 	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#portNamespace(java.lang.String)
 	 */
 	@Override
-	default SoapClientConfigBuilder portNamespace(String portNamespace) {
-		return null;
-	}
+	PpqClientConfigBuilder portNamespace(String portNamespace);
 
 	/**
 	 * {@inheritDoc}
@@ -64,9 +60,7 @@ public interface PpqClientConfigBuilder extends SoapClientConfigBuilder {
 	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#serviceName(java.lang.String)
 	 */
 	@Override
-	default SoapClientConfigBuilder serviceName(String serviceName) {
-		return null;
-	}
+	PpqClientConfigBuilder serviceName(String serviceName);
 
 	/**
 	 * {@inheritDoc}
@@ -74,9 +68,16 @@ public interface PpqClientConfigBuilder extends SoapClientConfigBuilder {
 	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#serviceNamespace(java.lang.String)
 	 */
 	@Override
-	default SoapClientConfigBuilder serviceNamespace(String serviceNamespace) {
-		return null;
-	}
+	PpqClientConfigBuilder serviceNamespace(String serviceNamespace);
+
+	@Override
+	PpqClientConfigBuilder clientKeyStore(String clientKeyStoreFile);
+
+	@Override
+	PpqClientConfigBuilder clientKeyStorePassword(String clientKeyStorePassword);
+
+	@Override
+	PpqClientConfigBuilder clientKeyStoreType(String clientKeyStoreType);
 
 	/**
 	  * <!-- @formatter:off -->

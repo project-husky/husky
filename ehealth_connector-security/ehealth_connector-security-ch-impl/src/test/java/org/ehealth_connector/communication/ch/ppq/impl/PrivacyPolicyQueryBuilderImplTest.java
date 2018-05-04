@@ -28,20 +28,18 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.ehealth_connector.communication.ch.ppq.PrivacyPolicyQuery;
+import org.ehealth_connector.security.hl7v3.InstanceIdentifier;
+import org.ehealth_connector.security.hl7v3.impl.InstanceIdentifierBuilder;
 import org.ehealth_connector.security.utilities.impl.InitializerTestHelper;
 import org.junit.Before;
 import org.junit.Test;
 import org.opensaml.core.xml.io.UnmarshallingException;
 import org.opensaml.xacml.profile.saml.XACMLPolicyQueryType;
 import org.opensaml.xacml.profile.saml.impl.XACMLPolicyQueryTypeUnmarshaller;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
-
-	private Logger logger = LoggerFactory.getLogger(PrivacyPolicyQueryBuilderImplTest.class);
 
 	private PrivacyPolicyQueryBuilderImpl builder;
 	private XACMLPolicyQueryType testXacmlPolicyQuery;
@@ -58,6 +56,10 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 
 	private String testDestination;
 
+	private String testInstanceIdentifierRoot;
+	private String testInstanceIdentifierExt;
+	private InstanceIdentifier testInstanceIdentifier;
+
 	@Before
 	public void setUp() throws Exception {
 		builder = new PrivacyPolicyQueryBuilderImpl();
@@ -68,6 +70,13 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 		testVersion = "2.0";
 		testConsent = "This is the consent of";
 		testDestination = "The destination";
+
+		testInstanceIdentifierRoot = "2.16.756.5.30.1.127.3.10.3";
+		testInstanceIdentifierExt = "761337610455909127";
+
+		testInstanceIdentifier = new InstanceIdentifierBuilder().buildObject();
+		testInstanceIdentifier.setRoot(testInstanceIdentifierRoot);
+		testInstanceIdentifier.setExtension(testInstanceIdentifierExt);
 	}
 
 	/**
@@ -108,6 +117,16 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 		final PrivacyPolicyQuery ref = builder.version(testVersion).create();
 		assertNotNull(ref);
 		assertEquals(testVersion, ref.getVersion());
+	}
+
+	/**
+	 * Test method for {@link org.ehealth_connector.communication.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#version(java.lang.String)}.
+	 */
+	@Test
+	public void testInstanceIdentifier() {
+		final PrivacyPolicyQuery ref = builder.instanceIdentifier(testInstanceIdentifier).create();
+		assertNotNull(ref);
+		assertEquals(testInstanceIdentifier, ref.getInstanceIdentifier());
 	}
 
 	/**

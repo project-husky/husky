@@ -15,22 +15,27 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.security.communication.config.impl;
-
-import org.ehealth_connector.security.communication.config.XuaClientConfig;
+package org.ehealth_connector.security.exceptions;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Implementation class of Interface XuaClientConfig</div>
- * <div class="de">Implementations Klasse von  Interface XuaClientConfig</div>
+ * <div class="en">HEREISENGLISH</div>
+ * <div class="de">HIERISTDEUTSCH</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
+ * 
  * <!-- @formatter:on -->
  */
-public class XuaClientConfigImpl extends AbstractSoapClientConfig implements XuaClientConfig {
+public class SoapException extends ClientSendException {
 
-	protected XuaClientConfigImpl() {
-		setSimple(true);
+	private static final long serialVersionUID = 718920336633885906L;
+
+	private String code;
+	private String message;
+
+	public SoapException(String aCode, String aMessage) {
+		super("Code: " + aCode + ", Message: " + aMessage);
+		code = aCode;
+		message = aMessage;
 	}
-
 }

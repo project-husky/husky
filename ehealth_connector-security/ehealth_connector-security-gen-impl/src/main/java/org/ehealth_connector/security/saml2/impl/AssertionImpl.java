@@ -143,7 +143,10 @@ public class AssertionImpl implements Assertion, SecurityObject<org.opensaml.sam
 	 */
 	@Override
 	public Subject getSubject() {
-		return new SubjectBuilderImpl().create(assertion.getSubject());
+		if (assertion.getSubject() != null) {
+			return new SubjectBuilderImpl().create();
+		}
+		return null;
 	}
 
 	/**

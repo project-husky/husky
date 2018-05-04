@@ -18,8 +18,9 @@
 package org.ehealth_connector.communication.ch.ppq;
 
 import org.ehealth_connector.communication.ch.ppq.config.PpqClientConfig;
+import org.ehealth_connector.security.core.SecurityHeaderElement;
 import org.ehealth_connector.security.exceptions.ClientSendException;
-import org.ehealth_connector.security.saml2.Assertion;
+import org.ehealth_connector.security.saml2.Response;
 
 /**
  * <!-- @formatter:off -->
@@ -66,7 +67,7 @@ public interface PrivacyPolicyQueryModule {
 	 * <div class="it">ITALIANO</div>
 	 * <!-- @formatter:on -->
 	 */
-	PrivacyPolicyQueryResponse invokePPQ(Assertion aAssertion, PrivacyPolicyQuery query,
-			PpqClientConfig clientConfiguration) throws ClientSendException;
+	Response invokePPQ(SecurityHeaderElement aAssertion, PrivacyPolicyQuery query, PpqClientConfig clientConfiguration)
+			throws ClientSendException;
 
 }

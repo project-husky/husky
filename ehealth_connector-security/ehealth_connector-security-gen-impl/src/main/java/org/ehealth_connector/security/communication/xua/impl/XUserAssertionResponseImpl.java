@@ -17,9 +17,18 @@
  */
 package org.ehealth_connector.security.communication.xua.impl;
 
+import java.util.List;
+
+import javax.xml.namespace.QName;
+
 import org.ehealth_connector.security.communication.xua.XUserAssertionResponse;
 import org.ehealth_connector.security.core.SecurityObject;
+import org.ehealth_connector.security.saml2.Assertion;
+import org.ehealth_connector.security.saml2.impl.AssertionBuilderImpl;
+import org.opensaml.core.xml.XMLObject;
 import org.opensaml.soap.wstrust.RequestSecurityTokenResponse;
+import org.opensaml.soap.wstrust.RequestedSecurityToken;
+import org.opensaml.soap.wstrust.Status;
 
 /**
  * <!-- @formatter:off -->
@@ -48,4 +57,26 @@ public class XUserAssertionResponseImpl
 		return responseCollection.getContext();
 	}
 
+	@Override
+	public Assertion getAssertion() {
+		final List<XMLObject> requestedTokens = responseCollection.getUnknownXMLObjects(
+				new QName("http://docs.oasis-open.org/ws-sx/ws-trust/200512", "RequestedSecurityToken"));
+		if ((requestedTokens != null) && !requestedTokens.isEmpty()) {
+			final RequestedSecurityToken token = (RequestedSecurityToken) requestedTokens.get(0);
+			return new AssertionBuilderImpl()
+					.create((org.opensaml.saml.saml2.core.Assertion) token.getUnknownXMLObject());
+
+		}
+		return null;
+	}
+
+	@Override
+	public String getStatus() {
+		final List<XMLObject> statusses = responseCollection
+				.getUnknownXMLObjects(new QName("http://docs.oasis-open.org/ws-sx/ws-trust/200512", "Status"));
+		if (!statusses.isEmpty() && (statusses.get(0) != null) && (((Status) statusses.get(0)).getCode() != null)) {
+			return ((Status) statusses.get(0)).getCode().getValue();
+		}
+		return null;
+	}
 }

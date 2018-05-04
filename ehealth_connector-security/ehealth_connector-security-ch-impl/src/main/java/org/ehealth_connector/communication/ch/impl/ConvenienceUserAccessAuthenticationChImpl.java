@@ -21,11 +21,11 @@ import org.ehealth_connector.communication.ch.clients.PpqClient;
 import org.ehealth_connector.communication.ch.clients.impl.ClientFactoryCh;
 import org.ehealth_connector.communication.ch.ppq.PrivacyPolicyQuery;
 import org.ehealth_connector.communication.ch.ppq.PrivacyPolicyQueryModule;
-import org.ehealth_connector.communication.ch.ppq.PrivacyPolicyQueryResponse;
 import org.ehealth_connector.communication.ch.ppq.config.PpqClientConfig;
 import org.ehealth_connector.security.communication.impl.ConvenienceUserAccessAuthenticationImpl;
+import org.ehealth_connector.security.core.SecurityHeaderElement;
 import org.ehealth_connector.security.exceptions.ClientSendException;
-import org.ehealth_connector.security.saml2.Assertion;
+import org.ehealth_connector.security.saml2.Response;
 
 /**
  * <!-- @formatter:off -->
@@ -48,7 +48,7 @@ public class ConvenienceUserAccessAuthenticationChImpl extends ConvenienceUserAc
 	 *      org.ehealth_connector.communication.ch.ppq.PrivacyPolicyQuery, org.ehealth_connector.communication.ch.ppq.config.PpqClientConfig)
 	 */
 	@Override
-	public PrivacyPolicyQueryResponse invokePPQ(Assertion aAssertion, PrivacyPolicyQuery query,
+	public Response invokePPQ(SecurityHeaderElement aAssertion, PrivacyPolicyQuery query,
 			PpqClientConfig clientConfiguration) throws ClientSendException {
 		if (!initialized)
 			throw new ClientSendException("Opensaml Libs are not initialized");

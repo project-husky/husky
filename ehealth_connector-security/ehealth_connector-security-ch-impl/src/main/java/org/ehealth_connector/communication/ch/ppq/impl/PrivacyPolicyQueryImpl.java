@@ -21,7 +21,13 @@ import java.util.Calendar;
 
 import org.ehealth_connector.communication.ch.ppq.PrivacyPolicyQuery;
 import org.ehealth_connector.security.core.SecurityObject;
+import org.ehealth_connector.security.hl7v3.InstanceIdentifier;
 import org.joda.time.DateTime;
+import org.opensaml.core.xml.XMLObject;
+import org.opensaml.xacml.ctx.AttributeType;
+import org.opensaml.xacml.ctx.AttributeValueType;
+import org.opensaml.xacml.ctx.RequestType;
+import org.opensaml.xacml.ctx.ResourceType;
 import org.opensaml.xacml.profile.saml.XACMLPolicyQueryType;
 
 /**
@@ -78,6 +84,28 @@ public class PrivacyPolicyQueryImpl implements PrivacyPolicyQuery, SecurityObjec
 			return internalObject.getVersion().toString();
 		}
 		return "";
+	}
+
+	@Override
+	public InstanceIdentifier getInstanceIdentifier() {
+		for (final RequestType request : internalObject.getRequests()) {
+			for (final ResourceType resource : request.getResources()) {
+				for (final AttributeType attribute : resource.getAttributes()) {
+					if ("urn:e-health-suisse:2015:epr-spid".equalsIgnoreCase(attribute.getAttributeId())) {
+						for (final AttributeValueType attVal : attribute.getAttributeValues()) {
+							for (final XMLObject value : attVal.getUnknownXMLObjects()) {
+								if (value instanceof InstanceIdentifier) {
+									final InstanceIdentifier retVal = (InstanceIdentifier) value;
+									return retVal;
+								}
+							}
+
+						}
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	@Override

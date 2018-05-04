@@ -15,11 +15,9 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.security.communication.clients.impl;
+package org.ehealth_connector.communication.ch.clients.impl;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -31,64 +29,67 @@ import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
-import org.ehealth_connector.security.communication.clients.XuaClient;
-import org.ehealth_connector.security.communication.config.XuaClientConfig;
+import org.ehealth_connector.communication.ch.clients.PpqClient;
+import org.ehealth_connector.communication.ch.ppq.PrivacyPolicyQuery;
+import org.ehealth_connector.communication.ch.ppq.config.PpqClientConfig;
+import org.ehealth_connector.security.communication.clients.impl.AbstractSoapClient;
 import org.ehealth_connector.security.communication.soap.impl.WsaHeaderValue;
-import org.ehealth_connector.security.communication.xua.XUserAssertionRequest;
-import org.ehealth_connector.security.communication.xua.XUserAssertionResponse;
-import org.ehealth_connector.security.communication.xua.impl.XUserAssertionResponseBuilderImpl;
 import org.ehealth_connector.security.core.SecurityHeaderElement;
 import org.ehealth_connector.security.exceptions.ClientSendException;
 import org.ehealth_connector.security.exceptions.SerializeException;
 import org.ehealth_connector.security.saml2.Assertion;
 import org.ehealth_connector.security.saml2.EncryptedAssertion;
+import org.ehealth_connector.security.saml2.Response;
+import org.ehealth_connector.security.saml2.impl.ResponseBuilderImpl;
 import org.ehealth_connector.security.serialization.impl.AssertionSerializerImpl;
 import org.ehealth_connector.security.serialization.impl.EncryptedAssertionSerializerImpl;
-import org.ehealth_connector.security.serialization.impl.XUserAssertionRequestSerializerImpl;
+import org.ehealth_connector.security.serialization.impl.PrivacyPolicyQuerySerializerImpl;
 import org.opensaml.core.xml.io.UnmarshallingException;
-import org.opensaml.soap.wstrust.RequestSecurityTokenResponse;
-import org.opensaml.soap.wstrust.RequestSecurityTokenResponseCollection;
-import org.opensaml.soap.wstrust.WSTrustConstants;
-import org.opensaml.soap.wstrust.impl.RequestSecurityTokenResponseCollectionUnmarshaller;
+import org.opensaml.saml.common.xml.SAMLConstants;
+import org.opensaml.saml.saml2.core.impl.ResponseUnmarshaller;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Class implementing the simple xua client.</div>
- * <div class="de">Klasser die den simple Client implementiert.</div>
+ * <div class="en">Class implementing the simple ppq client.</div>
+ * <div class="de">Klasser die den Simple PPQ Client implementiert.</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public class SimpleXuaClient extends AbstractSoapClient<List<XUserAssertionResponse>> implements XuaClient {
+public class SimplePpqClient extends AbstractSoapClient<Response> implements PpqClient {
 
-	public SimpleXuaClient(XuaClientConfig clientConfiguration) {
+	public SimplePpqClient(PpqClientConfig clientConfiguration) {
 		setLogger(LoggerFactory.getLogger(getClass()));
 		setConfig(clientConfiguration);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.communication.ch.clients.PpqClient#send(org.ehealth_connector.security.saml2.Assertion,
+	 *      org.ehealth_connector.communication.ch.ppq.PrivacyPolicyQuery)
+	 */
 	@Override
-	public List<XUserAssertionResponse> send(SecurityHeaderElement aSecurityHeaderElement,
-			XUserAssertionRequest aRequest) throws ClientSendException {
+	public Response send(SecurityHeaderElement aAssertion, PrivacyPolicyQuery query) throws ClientSendException {
 		try {
 			final HttpPost post = getHttpPost();
 
 			final WsaHeaderValue wsHeaders = new WsaHeaderValue("urn:uuid:" + UUID.randomUUID().toString(),
 					"http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/Issue", null);
 
-			post.setEntity(getSoapEntity(aSecurityHeaderElement, aRequest, wsHeaders));
+			post.setEntity(getSoapEntity(aAssertion, query, wsHeaders));
 
 			return execute(post);
-		} catch (SerializeException | ParserConfigurationException | TransformerException | IOException e) {
-			throw new ClientSendException(e);
+		} catch (final Throwable t) {
+			throw new ClientSendException(t);
 		}
 	}
 
-	private HttpEntity getSoapEntity(SecurityHeaderElement aSecurityHeaderElement, XUserAssertionRequest aRequest,
-			WsaHeaderValue wsHeaders) throws SerializeException, ParserConfigurationException, TransformerException {
-
+	private HttpEntity getSoapEntity(SecurityHeaderElement aSecurityHeaderElement, PrivacyPolicyQuery query,
+			WsaHeaderValue wsHeaders) throws ParserConfigurationException, SerializeException, TransformerException {
 		final Element envelopElement = createEnvelope();
 
 		Element headerAssertionElement = null;
@@ -101,8 +102,8 @@ public class SimpleXuaClient extends AbstractSoapClient<List<XUserAssertionRespo
 		createHeader(headerAssertionElement, wsHeaders, envelopElement);
 
 		// serialize the authnrequest to xml element
-		final XUserAssertionRequestSerializerImpl serializer = new XUserAssertionRequestSerializerImpl();
-		final Element authnRequestElement = serializer.toXmlElement(aRequest);
+		final PrivacyPolicyQuerySerializerImpl serializer = new PrivacyPolicyQuerySerializerImpl();
+		final Element authnRequestElement = serializer.toXmlElement(query);
 
 		createBody(authnRequestElement, envelopElement);
 
@@ -118,25 +119,16 @@ public class SimpleXuaClient extends AbstractSoapClient<List<XUserAssertionRespo
 	}
 
 	@Override
-	protected List<XUserAssertionResponse> parseResponse(CloseableHttpResponse response) throws ClientSendException {
+	protected Response parseResponse(CloseableHttpResponse httpResponse) throws ClientSendException {
 		try {
-			final Element reponseElement = getResponseElement(response, WSTrustConstants.WST_NS,
-					RequestSecurityTokenResponseCollection.ELEMENT_LOCAL_NAME);
+			// "urn:oasis:names:tc:SAML:2.0:protocol", "Response"
+			final Element reponseElement = getResponseElement(httpResponse, SAMLConstants.SAML20P_NS,
+					org.opensaml.saml.saml2.core.Response.DEFAULT_ELEMENT_LOCAL_NAME);
 
-			// deserialize to the Response instance
-			final RequestSecurityTokenResponseCollection wstResponseCollection = (RequestSecurityTokenResponseCollection) new RequestSecurityTokenResponseCollectionUnmarshaller()
+			final org.opensaml.saml.saml2.core.Response response = (org.opensaml.saml.saml2.core.Response) new ResponseUnmarshaller()
 					.unmarshall(reponseElement);
 
-			final List<RequestSecurityTokenResponse> wstResponses = wstResponseCollection
-					.getRequestSecurityTokenResponses();
-
-			final List<XUserAssertionResponse> retVal = new ArrayList<>();
-
-			wstResponses.forEach(c -> {
-				retVal.add(new XUserAssertionResponseBuilderImpl().create(c));
-			});
-
-			return retVal;
+			return new ResponseBuilderImpl().create(response);
 		} catch (UnsupportedOperationException | IOException | TransformerFactoryConfigurationError
 				| ParserConfigurationException | SAXException | UnmarshallingException | XPathExpressionException e) {
 			throw new ClientSendException(e);

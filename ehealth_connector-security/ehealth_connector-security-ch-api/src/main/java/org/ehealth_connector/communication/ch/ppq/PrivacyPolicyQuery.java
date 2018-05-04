@@ -17,6 +17,7 @@
  */
 package org.ehealth_connector.communication.ch.ppq;
 
+import org.ehealth_connector.security.hl7v3.InstanceIdentifier;
 import org.ehealth_connector.security.saml2.Base;
 
 /**
@@ -62,5 +63,22 @@ public interface PrivacyPolicyQuery extends Base {
 	 * <!-- @formatter:on -->
 	 */
 	String getConsent();
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the InstanceIdentifier value.</div>
+	 * <div class="de">Methode um denInstanceIdentifier zu holen.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * 
+	 *
+	 * @return 
+	 *  <div class="en">the InstanceIdentifier </div>
+	 *  <div class="de">den InstanceIdentifier</div>
+	 *  <div class="fr">VOICIFRANCAIS</div>
+	 *  <div class="it">ITALIANO</div>
+	 * <!-- @formatter:on -->
+	 */
+	InstanceIdentifier getInstanceIdentifier();
 
 }

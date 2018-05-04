@@ -144,6 +144,4 @@ public interface Assertion extends Base, SecurityHeaderElement {
 	 */
 	List<Attribute> getAttributes();
 
-	//
-	// Advice getAdvice();
 }

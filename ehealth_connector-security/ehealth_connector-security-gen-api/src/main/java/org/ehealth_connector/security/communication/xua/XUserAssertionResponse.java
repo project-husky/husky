@@ -17,6 +17,8 @@
  */
 package org.ehealth_connector.security.communication.xua;
 
+import org.ehealth_connector.security.saml2.Assertion;
+
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of XUserAssertionResponse.</div>
@@ -28,5 +30,9 @@ package org.ehealth_connector.security.communication.xua;
 public interface XUserAssertionResponse {
 
 	String getContext();
+
+	Assertion getAssertion();
+
+	String getStatus();
 
 }

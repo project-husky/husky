@@ -23,10 +23,10 @@
 			<version>1.6-SNAPSHOT</version>
 		</dependency>
 
-		<dependency>
+		<!-- dependency>
 			<groupId>ch.epd.ihe.ppq</groupId>
 			<artifactId>ch-ppq-webservice-api</artifactId>
-		</dependency>
+		</dependency -->
 		<dependency>
 			<groupId>org.opensaml</groupId>
 			<artifactId>opensaml-xacml-saml-impl</artifactId>

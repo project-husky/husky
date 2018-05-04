@@ -37,6 +37,8 @@ public class AbstractSoapClientConfig extends AbstractClientConfig implements So
 	public String keyStorePassword;
 	public String keyStoreType;
 
+	private boolean simple;
+
 	@Override
 	public String getPortName() {
 		return portName;
@@ -107,4 +109,12 @@ public class AbstractSoapClientConfig extends AbstractClientConfig implements So
 		keyStoreType = aKeyStoreType;
 	}
 
+	@Override
+	public boolean isSimple() {
+		return simple;
+	}
+
+	public void setSimple(boolean aSimple) {
+		simple = aSimple;
+	}
 }

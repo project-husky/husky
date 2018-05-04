@@ -32,6 +32,9 @@ import org.ehealth_connector.security.communication.clients.impl.ClientFactory;
 public class ClientFactoryCh extends ClientFactory {
 
 	public static PpqClient getPpqClient(PpqClientConfig clientConfiguration) {
-		return new DefaultPpqClient(clientConfiguration);
+		// if (clientConfiguration.isSimple()) {
+		return new SimplePpqClient(clientConfiguration);
+		// }
+		// return new DefaultPpqClient(clientConfiguration);
 	}
 }

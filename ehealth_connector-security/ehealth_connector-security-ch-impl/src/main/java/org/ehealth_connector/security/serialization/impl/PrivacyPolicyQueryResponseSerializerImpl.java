@@ -17,44 +17,48 @@
  */
 package org.ehealth_connector.security.serialization.impl;
 
-import org.ehealth_connector.communication.ch.ppq.PrivacyPolicyQuery;
-import org.ehealth_connector.communication.ch.ppq.impl.PrivacyPolicyQueryImpl;
+import org.ehealth_connector.communication.ch.ppq.PrivacyPolicyQueryResponse;
+import org.ehealth_connector.communication.ch.ppq.impl.PrivacyPolicyQueryResponseImpl;
 import org.ehealth_connector.security.exceptions.SerializeException;
 import org.ehealth_connector.security.serialization.Serializer;
 import org.w3c.dom.Element;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Implementation class of Serializer<PrivacyPolicyQuery></div>
- * <div class="de">Implementations Klasse von Serializer<PrivacyPolicyQuery></div>
+ * <div class="en">Implementation class of Serializer<PrivacyPolicyQueryResponse></div>
+ * <div class="de">Implementations Klasse von Serializer<PrivacyPolicyQueryResponse></div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
  * <!-- @formatter:on -->
  */
-public class PrivacyPolicyQuerySerializerImpl extends AbstractSerializerImpl implements Serializer<PrivacyPolicyQuery> {
+public class PrivacyPolicyQueryResponseSerializerImpl extends AbstractSerializerImpl
+		implements Serializer<PrivacyPolicyQueryResponse> {
 
 	@Override
-	public Element toXmlElement(PrivacyPolicyQuery ppQuery) throws SerializeException {
+	public Element toXmlElement(PrivacyPolicyQueryResponse ppqResponse) throws SerializeException {
 		try {
-			return getOpenSamlSerializer().serializeToXml(((PrivacyPolicyQueryImpl) ppQuery).getWrappedObject());
+			return getOpenSamlSerializer()
+					.serializeToXml(((PrivacyPolicyQueryResponseImpl) ppqResponse).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
 	}
 
 	@Override
-	public String toXmlString(PrivacyPolicyQuery ppQuery) throws SerializeException {
+	public String toXmlString(PrivacyPolicyQueryResponse ppqResponse) throws SerializeException {
 		try {
-			return getOpenSamlSerializer().serializeToString(((PrivacyPolicyQueryImpl) ppQuery).getWrappedObject());
+			return getOpenSamlSerializer()
+					.serializeToString(((PrivacyPolicyQueryResponseImpl) ppqResponse).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
 	}
 
 	@Override
-	public byte[] toXmlByteArray(PrivacyPolicyQuery ppQuery) throws SerializeException {
+	public byte[] toXmlByteArray(PrivacyPolicyQueryResponse ppqResponse) throws SerializeException {
 		try {
-			return getOpenSamlSerializer().serializeToByteArray(((PrivacyPolicyQueryImpl) ppQuery).getWrappedObject());
+			return getOpenSamlSerializer()
+					.serializeToByteArray(((PrivacyPolicyQueryResponseImpl) ppqResponse).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
