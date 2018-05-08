@@ -20,6 +20,8 @@ package org.ehealth_connector.common.ch.enums;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Generated;
+
 import org.ehealth_connector.common.enums.LanguageCode;
 
 /**
@@ -34,6 +36,7 @@ import org.ehealth_connector.common.enums.LanguageCode;
  * 2.7. Definisce la lingua nella quale è stato redatto il documento.&lt;br
  * clear="none"/&gt;</div>
  */
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
 public enum DocumentLanguage implements ValueSetEnumInterface {
 
 	/**

@@ -103,6 +103,7 @@ public final class ValueSetUtil {
 
 		enumName = enumName.replaceAll("CLIENT'S", "CLIENT");
 		enumName = enumName.replaceAll("PATIENT'S", "PATIENT");
+		enumName = enumName.replaceAll(" \\(IC\\)", "");
 
 		enumName = enumName.replaceAll("&AMP;", "AND");
 

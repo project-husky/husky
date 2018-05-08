@@ -20,6 +20,8 @@ package org.ehealth_connector.communication.ch.enums;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Generated;
+
 import org.ehealth_connector.common.ch.enums.ValueSetEnumInterface;
 import org.ehealth_connector.common.enums.LanguageCode;
 
@@ -31,6 +33,7 @@ import org.ehealth_connector.common.enums.LanguageCode;
  * 2.8.&lt;br clear="none"/&gt;</div> <div class="it">Tipo MIME del documento
  * secondo l'allegato 3 OCIP-DFI, capitolo 2.8.&lt;br clear="none"/&gt;</div>
  */
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
 public enum MimeType implements ValueSetEnumInterface {
 
 	/**

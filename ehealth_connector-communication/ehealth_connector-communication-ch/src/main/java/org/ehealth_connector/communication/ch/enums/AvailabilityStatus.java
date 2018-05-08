@@ -20,6 +20,8 @@ package org.ehealth_connector.communication.ch.enums;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Generated;
+
 import org.ehealth_connector.common.ch.enums.ValueSetEnumInterface;
 import org.ehealth_connector.common.enums.LanguageCode;
 
@@ -32,6 +34,7 @@ import org.ehealth_connector.common.enums.LanguageCode;
  * clear="none"/&gt;</div> <div class="it">Stato di disponibilità del documento
  * secondo l'allegato 3 OCIP-DFI, capitolo 2.2. &lt;br clear="none"/&gt;</div>
  */
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
 public enum AvailabilityStatus implements ValueSetEnumInterface {
 
 	/**

@@ -43,6 +43,9 @@ public class ValueSetUtilTest {
 		assertEquals("CLIENT_OR_PATIENT_HOME",
 				ValueSetUtil.buildEnumName("Client's or patient's home"));
 
+		assertEquals("IMMUNIZATION_CONTENT",
+				ValueSetUtil.buildEnumName("Immunization Content (IC)"));
+
 	}
 
 	@Test
@@ -58,7 +61,7 @@ public class ValueSetUtilTest {
 				+ "&id=2.16.756.5.30.1.127.3.10.1.1.3&effectiveDate=2018-01-31T14%3A06%3A48");
 
 		assertEquals(expectedUrl, ValueSetUtil.buildValueSetUrl(baseUrl, valueSet));
-		
+
 	}
 
 }

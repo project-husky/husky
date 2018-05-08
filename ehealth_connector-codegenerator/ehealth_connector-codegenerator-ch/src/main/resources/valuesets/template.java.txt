@@ -21,9 +21,12 @@ package TemplatePackageNameToReplace;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Generated;
+
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.ch.enums.ValueSetEnumInterface;
 
+@Generated(value="dummy-will-be-replaced")
 public enum TemplateNameToReplace implements ValueSetEnumInterface {
 
 	;
@@ -153,6 +156,7 @@ public enum TemplateNameToReplace implements ValueSetEnumInterface {
 	 *
 	 * @return <div class="en">the code system identifier</div>
 	 */
+	@Override
 	public String getCodeSystemValue() {
 		return this.codeSystem;
 	}
@@ -163,28 +167,9 @@ public enum TemplateNameToReplace implements ValueSetEnumInterface {
 	 *
 	 * @return <div class="en">the code</div>
 	 */
+	@Override
 	public String getCodeValue() {
 		return this.code;
-	}
-
-	/**
-	 * <div class="en">Gets the value set identifier.</div> <div class="de">Liefert
-	 * den Value Set Identifikator.</div>
-	 *
-	 * @return <div class="en">the value set identifier</div>
-	 */
-	public String getValueSetId() {
-		return VALUE_SET_ID;
-	}
-	
-	/**
-	 * <div class="en">Gets the value set name.</div> <div class="de">Liefert
-	 * den Value Set Namen.</div>
-	 *
-	 * @return <div class="en">the value set name</div>
-	 */
-	public String getValueSetName() {
-		return VALUE_SET_NAME;
 	}
 
 	/**
@@ -205,4 +190,27 @@ public enum TemplateNameToReplace implements ValueSetEnumInterface {
 		}
 		return displayName;
 	}
+	
+	/**
+	 * <div class="en">Gets the value set identifier.</div> <div class="de">Liefert
+	 * den Value Set Identifikator.</div>
+	 *
+	 * @return <div class="en">the value set identifier</div>
+	 */
+	@Override
+	public String getValueSetId() {
+		return VALUE_SET_ID;
+	}
+	
+	/**
+	 * <div class="en">Gets the value set name.</div> <div class="de">Liefert
+	 * den Value Set Namen.</div>
+	 *
+	 * @return <div class="en">the value set name</div>
+	 */
+	@Override
+	public String getValueSetName() {
+		return VALUE_SET_NAME;
+	}
+
 }

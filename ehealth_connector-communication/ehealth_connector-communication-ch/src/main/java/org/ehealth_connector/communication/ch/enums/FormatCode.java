@@ -20,6 +20,8 @@ package org.ehealth_connector.communication.ch.enums;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Generated;
+
 import org.ehealth_connector.common.ch.enums.ValueSetEnumInterface;
 import org.ehealth_connector.common.enums.LanguageCode;
 
@@ -46,6 +48,7 @@ import org.ehealth_connector.common.enums.LanguageCode;
  * sufficienti informazioni per capire se è in grado o meno di elaborare il
  * documento.&lt;br clear="none"/&gt;</div>
  */
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
 public enum FormatCode implements ValueSetEnumInterface {
 
 	/**
@@ -137,7 +140,7 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="fr">Immunization Content (IC)</div>
 	 * <div class="it">Immunization Content (IC)</div>
 	 */
-	IMMUNIZATION_CONTENT__IC_("urn:ihe:pcc:ic:2009", "1.3.6.1.4.1.19376.1.2.3", "Immunization Content (IC)", "Immunization Content (IC)", "Immunization Content (IC)", "Immunization Content (IC)", "Immunization Content (IC)"),
+	IMMUNIZATION_CONTENT("urn:ihe:pcc:ic:2009", "1.3.6.1.4.1.19376.1.2.3", "Immunization Content (IC)", "Immunization Content (IC)", "Immunization Content (IC)", "Immunization Content (IC)", "Immunization Content (IC)"),
 	/**
 	 * <div class="en">MimeType sufficient</div> <div class="de">MimeType
 	 * sufficient</div> <div class="fr">MimeType sufficient</div>
@@ -252,7 +255,7 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="fr">Code de Immunization Content (IC)</div>
 	 * <div class="it">Code per Immunization Content (IC)</div>
 	 */
-	public static final String IMMUNIZATION_CONTENT__IC__CODE = "urn:ihe:pcc:ic:2009";
+	public static final String IMMUNIZATION_CONTENT_CODE = "urn:ihe:pcc:ic:2009";
 
 	/**
 	 * <div class="en">Code for MimeType sufficient</div> <div class="de">Code

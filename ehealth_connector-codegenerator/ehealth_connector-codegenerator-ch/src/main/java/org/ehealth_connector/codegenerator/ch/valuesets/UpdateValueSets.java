@@ -44,6 +44,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Generated;
+
 import org.apache.commons.io.FileUtils;
 import org.ehealth_connector.codegenerator.ch.valuesets.model.ValueSet;
 import org.ehealth_connector.codegenerator.ch.valuesets.model.ValueSetConfiguration;
@@ -59,7 +61,9 @@ import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.EnumConstantDeclaration;
 import com.github.javaparser.ast.body.EnumDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
+import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.expr.Expression;
+import com.github.javaparser.ast.expr.MemberValuePair;
 import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.expr.StringLiteralExpr;
 import com.github.javaparser.ast.type.Type;
@@ -292,6 +296,9 @@ public class UpdateValueSets {
 			String baseJavaFolder = PROJECT_ROOT_RELATIVE_PATH + "/" + valueSet.getProjectFolder();
 			String fullyQualifiedclassName = valueSet.getClassName();
 
+			// delete existing class file
+			getSourceFileName(baseJavaFolder, fullyQualifiedclassName).delete();
+
 			if (!getSourceFileName(baseJavaFolder, fullyQualifiedclassName).exists()) {
 				System.out.print("Create class from template: " + fullyQualifiedclassName + "\n");
 
@@ -346,6 +353,30 @@ public class UpdateValueSets {
 			String constantName, String value) {
 		body.getFieldByName(constantName).ifPresent(
 				field -> field.getVariable(0).setInitializer(new StringLiteralExpr(value)));
+	}
+
+	/**
+	 * <div class="en">Replaces the value of a annotation parameter.</div>
+	 *
+	 * @param annotation
+	 *            The annotation that holds the parameter.
+	 * @param parameterName
+	 *            The name of the parameter to replace the value of.
+	 * @param value
+	 *            The value to set.
+	 */
+	private static void replaceParameterValue(AnnotationExpr annotationExpr, String parameterName,
+			String value) {
+		List<Node> parameters = annotationExpr.getChildNodes();
+		for (Node parameter : parameters) {
+			if (parameter instanceof MemberValuePair) {
+				MemberValuePair memberValuePair = (MemberValuePair) parameter;
+				if (parameterName.equals(memberValuePair.getNameAsString())) {
+					memberValuePair.setValue(new StringLiteralExpr(value));
+				}
+
+			}
+		}
 	}
 
 	/**
@@ -406,6 +437,16 @@ public class UpdateValueSets {
 			// replace imports with those found in the template
 			new ArrayList<>(javaSource.getImports()).forEach(javaSource::remove);
 			templateSource.getImports().forEach(javaSource::addImport);
+
+			// @generated
+			AnnotationExpr generated = templateType.getAnnotationByClass(Generated.class).get();
+			replaceParameterValue(generated, "value",
+					"org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets");
+			if (primaryType.getAnnotationByClass(Generated.class).isPresent()) {
+				primaryType.getAnnotationByClass(Generated.class).get().remove();
+			}
+			primaryType.addAnnotation(generated);
+
 		} else {
 			throw new IllegalStateException(
 					"Class with name " + className + " does not declare an Enum type.");
