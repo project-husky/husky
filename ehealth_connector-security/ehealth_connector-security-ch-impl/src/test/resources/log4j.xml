@@ -8,10 +8,15 @@
 			<param name="ConversionPattern" value="%p %c{1.} %x - %m%n" />
 		</layout>
 	</appender>
+	
+	<category name="org.ehealth_connector">
+		<level value="DEBUG" />
+		<appender-ref ref="stdout" />
+	</category>
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="debug" />
+		<priority value="INFO" />
 		<appender-ref ref="stdout" />
 	</root>
 

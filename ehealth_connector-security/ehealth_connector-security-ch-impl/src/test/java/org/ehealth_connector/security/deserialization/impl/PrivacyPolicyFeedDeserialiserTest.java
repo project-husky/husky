@@ -25,7 +25,7 @@ import java.nio.file.Paths;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.ehealth_connector.communication.ch.ppq.PrivacyPolicyFeed;
+import org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeed;
 import org.ehealth_connector.security.exceptions.DeserializeException;
 import org.ehealth_connector.security.utilities.impl.InitializerTestHelper;
 import org.junit.Before;

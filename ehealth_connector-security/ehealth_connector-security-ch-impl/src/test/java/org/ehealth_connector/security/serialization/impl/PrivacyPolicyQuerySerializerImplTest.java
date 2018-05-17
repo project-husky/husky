@@ -22,8 +22,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import org.ehealth_connector.communication.ch.ppq.PrivacyPolicyQuery;
-import org.ehealth_connector.communication.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl;
+import org.ehealth_connector.security.ch.ppq.PrivacyPolicyQuery;
+import org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl;
 import org.ehealth_connector.security.exceptions.SerializeException;
 import org.ehealth_connector.security.hl7v3.InstanceIdentifier;
 import org.ehealth_connector.security.hl7v3.impl.InstanceIdentifierBuilder;
@@ -65,7 +65,7 @@ public class PrivacyPolicyQuerySerializerImplTest extends InitializerTestHelper 
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.serialization.impl.PrivacyPolicyQuerySerializerImpl#toXmlElement(org.ehealth_connector.communication.ch.ppq.PrivacyPolicyQuery)}.
+	 * {@link org.ehealth_connector.security.serialization.impl.PrivacyPolicyQuerySerializerImpl#toXmlElement(org.ehealth_connector.security.ch.ppq.PrivacyPolicyQuery)}.
 	 * 
 	 * @throws SerializeException
 	 */
@@ -84,7 +84,7 @@ public class PrivacyPolicyQuerySerializerImplTest extends InitializerTestHelper 
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.serialization.impl.PrivacyPolicyQuerySerializerImpl#toXmlString(org.ehealth_connector.communication.ch.ppq.PrivacyPolicyQuery)}.
+	 * {@link org.ehealth_connector.security.serialization.impl.PrivacyPolicyQuerySerializerImpl#toXmlString(org.ehealth_connector.security.ch.ppq.PrivacyPolicyQuery)}.
 	 * 
 	 * @throws SerializeException
 	 */
@@ -100,7 +100,7 @@ public class PrivacyPolicyQuerySerializerImplTest extends InitializerTestHelper 
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.serialization.impl.PrivacyPolicyQuerySerializerImpl#toXmlByteArray(org.ehealth_connector.communication.ch.ppq.PrivacyPolicyQuery)}.
+	 * {@link org.ehealth_connector.security.serialization.impl.PrivacyPolicyQuerySerializerImpl#toXmlByteArray(org.ehealth_connector.security.ch.ppq.PrivacyPolicyQuery)}.
 	 * 
 	 * @throws SerializeException
 	 */

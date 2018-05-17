@@ -1,0 +1,2 @@
+org.ehealth_connector.security.ch.epr.config.EprObjectProviderInitializer
+org.opensaml.saml.config.SAMLConfigurationInitializer

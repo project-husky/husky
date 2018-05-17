@@ -28,7 +28,6 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.ehealth_connector.security.communication.clients.XuaClient;
@@ -118,9 +117,9 @@ public class SimpleXuaClient extends AbstractSoapClient<List<XUserAssertionRespo
 	}
 
 	@Override
-	protected List<XUserAssertionResponse> parseResponse(CloseableHttpResponse response) throws ClientSendException {
+	protected List<XUserAssertionResponse> parseResponse(String httpResponse) throws ClientSendException {
 		try {
-			final Element reponseElement = getResponseElement(response, WSTrustConstants.WST_NS,
+			final Element reponseElement = getResponseElement(httpResponse, WSTrustConstants.WST_NS,
 					RequestSecurityTokenResponseCollection.ELEMENT_LOCAL_NAME);
 
 			// deserialize to the Response instance

@@ -22,7 +22,7 @@ import static org.junit.Assert.assertNotNull;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import org.ehealth_connector.communication.ch.ppq.PrivacyPolicyQueryResponse;
+import org.ehealth_connector.security.ch.ppq.PrivacyPolicyQueryResponse;
 import org.ehealth_connector.security.exceptions.DeserializeException;
 import org.ehealth_connector.security.utilities.impl.InitializerTestHelper;
 import org.junit.Before;

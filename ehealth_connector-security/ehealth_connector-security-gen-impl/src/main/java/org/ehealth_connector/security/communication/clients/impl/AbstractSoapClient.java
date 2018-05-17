@@ -94,7 +94,7 @@ public abstract class AbstractSoapClient<T> {
 
 	private SoapClientConfig config;
 
-	protected abstract T parseResponse(CloseableHttpResponse response) throws ClientSendException;
+	protected abstract T parseResponse(String content) throws ClientSendException;
 
 	protected RequestConfig getRequestConfig() {
 		return RequestConfig.custom().build();
@@ -112,11 +112,14 @@ public abstract class AbstractSoapClient<T> {
 		final CloseableHttpClient httpclient = getHttpClient();
 
 		final CloseableHttpResponse response = httpclient.execute(post);
+		final HttpEntity errorEntity = response.getEntity();
+		final String content = EntityUtils.toString(errorEntity);
+		logger.debug("SOAP Message\n" + content);
 		if ((response.getStatusLine() != null) && (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)) {
-			return parseResponse(response);
+			return parseResponse(content);
 		} else {
-			parseResponseError(response);
-			return null;
+
+			return parseResponseError(content);
 		}
 	}
 
@@ -181,12 +184,9 @@ public abstract class AbstractSoapClient<T> {
 
 	}
 
-	protected void parseResponseError(CloseableHttpResponse response) throws ClientSendException {
+	protected T parseResponseError(String content) throws ClientSendException {
 		try {
 			String retVal = null;
-			final HttpEntity errorEntity = response.getEntity();
-			final String content = EntityUtils.toString(errorEntity);
-			logger.debug("SOAP Message\n" + content);
 			if (content.trim().startsWith("<") && content.trim().endsWith(">")) {
 				retVal = content;
 			} else {
@@ -210,9 +210,10 @@ public abstract class AbstractSoapClient<T> {
 				| ParserConfigurationException | SAXException | XPathExpressionException e) {
 			throw new ClientSendException(e);
 		}
+
 	}
 
-	private String paserSoapFault(String retVal)
+	private void paserSoapFault(String retVal)
 			throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, SoapException {
 		final DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 		docFactory.setNamespaceAware(true);
@@ -226,12 +227,18 @@ public abstract class AbstractSoapClient<T> {
 
 		final Node faultnode = getNode(document.getDocumentElement(),
 				"/" + prefix + "Envelope/" + prefix + "Body/" + prefix + "Fault");
+		final SoapException exception = getSoapException(faultnode);
+		throw exception;
+	}
+
+	protected SoapException getSoapException(Node faultnode) {
 		String faultCode = "";
 		String faultMessage = "";
 		if (faultnode != null) {
 			final NodeList childs = faultnode.getChildNodes();
 			for (int j = 0; j < childs.getLength(); ++j) {
 				final Node child = childs.item(j);
+				System.out.println("NodeName: " + child.getNodeName());
 				if ("faultcode".equalsIgnoreCase(child.getNodeName())) {
 					faultCode = child.getTextContent();
 				} else if ("faultstring".equalsIgnoreCase(child.getNodeName())) {
@@ -240,19 +247,21 @@ public abstract class AbstractSoapClient<T> {
 					faultCode = child.getFirstChild().getTextContent();
 				} else if ("Reason".equalsIgnoreCase(child.getNodeName())) {
 					faultMessage = child.getFirstChild().getTextContent();
+				} else if ("#text".equalsIgnoreCase(child.getNodeName())) {
+					faultCode = "Reason";
+					faultMessage = child.getTextContent();
 				}
 			}
 		}
 
 		if (!StringUtils.isEmpty(faultCode)) {
-			throw new SoapException(faultCode, faultMessage);
+			return new SoapException(faultCode, faultMessage);
 		} else {
-			throw new SoapException("Client", "No inforamtion available");
+			return new SoapException("Client", "No inforamtion available");
 		}
-
 	}
 
-	private Node getNode(Element element, String xPathExpression) throws XPathExpressionException {
+	protected Node getNode(Element element, String xPathExpression) throws XPathExpressionException {
 		final XPath xPath = XPathFactory.newInstance().newXPath();
 		xPath.setNamespaceContext(new NamespaceContext() {
 
@@ -307,13 +316,9 @@ public abstract class AbstractSoapClient<T> {
 		return HttpClients.createDefault();
 	}
 
-	protected Element getResponseElement(CloseableHttpResponse response, String nameSpaceUri, String localName)
+	protected Element getResponseElement(String content, String nameSpaceUri, String localName)
 			throws ParserConfigurationException, UnsupportedOperationException, SAXException, IOException,
 			XPathExpressionException {
-
-		final HttpEntity errorEntity = response.getEntity();
-		final String content = EntityUtils.toString(errorEntity);
-		logger.debug("SOAP Message\n" + content);
 
 		final DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 		docFactory.setNamespaceAware(true);
@@ -338,7 +343,9 @@ public abstract class AbstractSoapClient<T> {
 		if ((reponseNodes == null) || (reponseNodes.getLength() < 1)) {
 			reponseNodes = ((Element) bodyNode).getElementsByTagNameNS(nameSpaceUri, localName);
 		}
-		// final Node responseNode = getNode((Element) bodyNode, "//Response");
+		if (reponseNodes.getLength() == 0) {
+			throw new XPathExpressionException("No node of type " + localName + " found.");
+		}
 		final Node responseNode = reponseNodes.item(0);
 		final Document doc = docBuilder.newDocument();
 		final Node importedNode = doc.importNode(responseNode, true);
