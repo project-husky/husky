@@ -126,8 +126,8 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
-	 * ist.</div>
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set
+	 * vorhanden ist.</div>
 	 *
 	 * @param codeValue
 	 *            <div class="de"> code</div>

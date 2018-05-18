@@ -40,7 +40,8 @@ public enum MimeType implements ValueSetEnumInterface {
 	 * <div class="en">DICOM</div> <div class="de">DICOM</div>
 	 * <div class="fr">DICOM</div> <div class="it">DICOM</div>
 	 */
-	DICOM("application/dicom", "2.16.840.1.113883.5.79", "DICOM", "DICOM", "DICOM", "DICOM", "DICOM"),
+	DICOM("application/dicom", "2.16.840.1.113883.5.79", "DICOM", "DICOM", "DICOM", "DICOM",
+			"DICOM"),
 	/**
 	 * <div class="en">PDF</div> <div class="de">PDF</div>
 	 * <div class="fr">PDF</div> <div class="it">PDF</div>
@@ -51,51 +52,65 @@ public enum MimeType implements ValueSetEnumInterface {
 	 * 3</div> <div class="fr">MPEG audio layer 3</div> <div class="it">MPEG
 	 * audio layer 3</div>
 	 */
-	MPEG_AUDIO_LAYER_3("audio/mpeg", "2.16.840.1.113883.5.79", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3"),
+	MPEG_AUDIO_LAYER_3("audio/mpeg", "2.16.840.1.113883.5.79", "MPEG audio layer 3",
+			"MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3"),
 	/**
 	 * <div class="en">GIF Graphics Interchange Format</div> <div class="de">GIF
 	 * Graphics Interchange Format</div> <div class="fr">GIF Graphics
 	 * Interchange Format</div> <div class="it">GIF Graphics Interchange
 	 * Format</div>
 	 */
-	GIF_GRAPHICS_INTERCHANGE_FORMAT("image/gif", "2.16.840.1.113883.5.79", "GIF Graphics Interchange Format", "GIF Graphics Interchange Format", "GIF Graphics Interchange Format", "GIF Graphics Interchange Format", "GIF Graphics Interchange Format"),
+	GIF_GRAPHICS_INTERCHANGE_FORMAT("image/gif", "2.16.840.1.113883.5.79",
+			"GIF Graphics Interchange Format", "GIF Graphics Interchange Format",
+			"GIF Graphics Interchange Format", "GIF Graphics Interchange Format",
+			"GIF Graphics Interchange Format"),
 	/**
 	 * <div class="en">JPEG Image</div> <div class="de">JPEG Image</div>
 	 * <div class="fr">JPEG Image</div> <div class="it">JPEG Image</div>
 	 */
-	JPEG_IMAGE("image/jpeg", "2.16.840.1.113883.5.79", "JPEG Image", "JPEG Image", "JPEG Image", "JPEG Image", "JPEG Image"),
+	JPEG_IMAGE("image/jpeg", "2.16.840.1.113883.5.79", "JPEG Image", "JPEG Image", "JPEG Image",
+			"JPEG Image", "JPEG Image"),
 	/**
 	 * <div class="en">PNG Portable Network Graphics</div> <div class="de">PNG
 	 * Portable Network Graphics</div> <div class="fr">PNG Portable Network
 	 * Graphics</div> <div class="it">PNG Portable Network Graphics</div>
 	 */
-	PNG_PORTABLE_NETWORK_GRAPHICS("image/png", "2.16.840.1.113883.5.79", "PNG Portable Network Graphics", "PNG Portable Network Graphics", "PNG Portable Network Graphics", "PNG Portable Network Graphics", "PNG Portable Network Graphics"),
+	PNG_PORTABLE_NETWORK_GRAPHICS("image/png", "2.16.840.1.113883.5.79",
+			"PNG Portable Network Graphics", "PNG Portable Network Graphics",
+			"PNG Portable Network Graphics", "PNG Portable Network Graphics",
+			"PNG Portable Network Graphics"),
 	/**
 	 * <div class="en">TIFF Image</div> <div class="de">TIFF Image</div>
 	 * <div class="fr">TIFF Image</div> <div class="it">TIFF Image</div>
 	 */
-	TIFF_IMAGE("image/tiff", "2.16.840.1.113883.5.79", "TIFF Image", "TIFF Image", "TIFF Image", "TIFF Image", "TIFF Image"),
+	TIFF_IMAGE("image/tiff", "2.16.840.1.113883.5.79", "TIFF Image", "TIFF Image", "TIFF Image",
+			"TIFF Image", "TIFF Image"),
 	/**
 	 * <div class="en">CDA Level 1 Multipart</div> <div class="de">CDA Level 1
 	 * Multipart</div> <div class="fr">CDA Level 1 Multipart</div>
 	 * <div class="it">CDA Level 1 Multipart</div>
 	 */
-	CDA_LEVEL_1_MULTIPART("multipart/x-hl7-cda-level1", "2.16.840.1.113883.5.79", "CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart"),
+	CDA_LEVEL_1_MULTIPART("multipart/x-hl7-cda-level1", "2.16.840.1.113883.5.79",
+			"CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart",
+			"CDA Level 1 Multipart", "CDA Level 1 Multipart"),
 	/**
 	 * <div class="en">Plain Text</div> <div class="de">Plain Text</div>
 	 * <div class="fr">Plain Text</div> <div class="it">Plain Text</div>
 	 */
-	PLAIN_TEXT("text/plain", "2.16.840.1.113883.5.79", "Plain Text", "Plain Text", "Plain Text", "Plain Text", "Plain Text"),
+	PLAIN_TEXT("text/plain", "2.16.840.1.113883.5.79", "Plain Text", "Plain Text", "Plain Text",
+			"Plain Text", "Plain Text"),
 	/**
 	 * <div class="en">XML-Text</div> <div class="de">XML-Text</div>
 	 * <div class="fr">XML-Text</div> <div class="it">XML-Text</div>
 	 */
-	XML_TEXT("text/xml", "2.16.840.1.113883.5.79", "XML-Text", "XML-Text", "XML-Text", "XML-Text", "XML-Text"),
+	XML_TEXT("text/xml", "2.16.840.1.113883.5.79", "XML-Text", "XML-Text", "XML-Text", "XML-Text",
+			"XML-Text"),
 	/**
 	 * <div class="en">MPEG Video</div> <div class="de">MPEG Video</div>
 	 * <div class="fr">MPEG Video</div> <div class="it">MPEG Video</div>
 	 */
-	MPEG_VIDEO("video/mpeg", "2.16.840.1.113883.5.79", "MPEG Video", "MPEG Video", "MPEG Video", "MPEG Video", "MPEG Video");
+	MPEG_VIDEO("video/mpeg", "2.16.840.1.113883.5.79", "MPEG Video", "MPEG Video", "MPEG Video",
+			"MPEG Video", "MPEG Video");
 
 	/**
 	 * <div class="en">Code for DICOM</div> <div class="de">Code für DICOM</div>
@@ -182,7 +197,7 @@ public enum MimeType implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
+	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.16";
 
@@ -205,7 +220,7 @@ public enum MimeType implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
+	 * <div class="de">PrÃ¼ft, ob der gegebene enum Teil dieses Value Sets
 	 * ist.</div>
 	 *
 	 * @param enumName
@@ -226,8 +241,8 @@ public enum MimeType implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
-	 * ist.</div>
+	 * <div class="de">PrÃ¼ft, ob der gegebene code in diesem Value Set
+	 * vorhanden ist.</div>
 	 *
 	 * @param codeValue
 	 *            <div class="de"> code</div>
@@ -317,9 +332,9 @@ public enum MimeType implements ValueSetEnumInterface {
 	/**
 	 * <div class="en">Gets the display name defined by the language param. If
 	 * there is no english translation, the default display name is
-	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
-	 * falls es keine Englische Übersetzung gibt, wird der default-Name
-	 * zurückgegeben.</div>
+	 * returned.</div> <div class="de">Liefert display name gemÃ¤ss Parameter,
+	 * falls es keine Englische Ãœbersetzung gibt, wird der default-Name
+	 * zurÃ¼ckgegeben.</div>
 	 *
 	 * @param languageCode
 	 *            the language code to get the display name for

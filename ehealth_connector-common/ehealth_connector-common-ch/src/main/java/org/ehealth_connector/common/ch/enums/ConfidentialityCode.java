@@ -40,17 +40,20 @@ public enum ConfidentialityCode implements ValueSetEnumInterface {
 	 * <div class="en">normal</div> <div class="de">normal</div>
 	 * <div class="fr">normal</div> <div class="it">normale</div>
 	 */
-	NORMAL("1051000195109", "2.16.840.1.113883.6.96", "Normal (qualifier value)", "normal", "normal", "normal", "normale"),
+	NORMAL("1051000195109", "2.16.840.1.113883.6.96", "Normal (qualifier value)", "normal",
+			"normal", "normal", "normale"),
 	/**
 	 * <div class="en">restricted</div> <div class="de">eingeschränkt</div>
 	 * <div class="fr">limité</div> <div class="it">limitato</div>
 	 */
-	RESTRICTED("1131000195104", "2.16.840.1.113883.6.96", "Restricted (qualifier value)", "restricted", "eingeschränkt", "limité", "limitato"),
+	RESTRICTED("1131000195104", "2.16.840.1.113883.6.96", "Restricted (qualifier value)",
+			"restricted", "eingeschränkt", "limité", "limitato"),
 	/**
 	 * <div class="en">secret</div> <div class="de">geheim</div>
 	 * <div class="fr">confidentiel</div> <div class="it">segreto</div>
 	 */
-	SECRET("1141000195107", "2.16.840.1.113883.6.96", "Secret (qualifier value)", "secret", "geheim", "confidentiel", "segreto");
+	SECRET("1141000195107", "2.16.840.1.113883.6.96", "Secret (qualifier value)", "secret",
+			"geheim", "confidentiel", "segreto");
 
 	/**
 	 * <div class="en">Code for normal</div> <div class="de">Code für
@@ -81,7 +84,7 @@ public enum ConfidentialityCode implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
+	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.5";
 
@@ -104,7 +107,7 @@ public enum ConfidentialityCode implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
+	 * <div class="de">PrÃ¼ft, ob der gegebene enum Teil dieses Value Sets
 	 * ist.</div>
 	 *
 	 * @param enumName
@@ -125,8 +128,8 @@ public enum ConfidentialityCode implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
-	 * ist.</div>
+	 * <div class="de">PrÃ¼ft, ob der gegebene code in diesem Value Set
+	 * vorhanden ist.</div>
 	 *
 	 * @param codeValue
 	 *            <div class="de"> code</div>
@@ -216,9 +219,9 @@ public enum ConfidentialityCode implements ValueSetEnumInterface {
 	/**
 	 * <div class="en">Gets the display name defined by the language param. If
 	 * there is no english translation, the default display name is
-	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
-	 * falls es keine Englische Übersetzung gibt, wird der default-Name
-	 * zurückgegeben.</div>
+	 * returned.</div> <div class="de">Liefert display name gemÃ¤ss Parameter,
+	 * falls es keine Englische Ãœbersetzung gibt, wird der default-Name
+	 * zurÃ¼ckgegeben.</div>
 	 *
 	 * @param languageCode
 	 *            the language code to get the display name for

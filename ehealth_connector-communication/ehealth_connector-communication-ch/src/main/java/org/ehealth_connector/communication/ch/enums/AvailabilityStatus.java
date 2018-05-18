@@ -41,12 +41,15 @@ public enum AvailabilityStatus implements ValueSetEnumInterface {
 	 * <div class="en">Approved</div> <div class="de">genehmigt</div>
 	 * <div class="fr">approuvé</div> <div class="it">approvato</div>
 	 */
-	APPROVED("urn:oasis:names:tc:ebxml-regrep:StatusType:Approved", "2.16.756.5.30.1.127.77.10.5.1", "Approved", "Approved", "genehmigt", "approuvé", "approvato"),
+	APPROVED("urn:oasis:names:tc:ebxml-regrep:StatusType:Approved", "2.16.756.5.30.1.127.77.10.5.1",
+			"Approved", "Approved", "genehmigt", "approuvé", "approvato"),
 	/**
 	 * <div class="en">Deprecated</div> <div class="de">veraltet</div>
 	 * <div class="fr">caduc</div> <div class="it">obsoleto</div>
 	 */
-	DEPRECATED("urn:oasis:names:tc:ebxml-regrep:StatusType:Deprecated", "2.16.756.5.30.1.127.77.10.5.1", "Deprecated", "Deprecated", "veraltet", "caduc", "obsoleto");
+	DEPRECATED("urn:oasis:names:tc:ebxml-regrep:StatusType:Deprecated",
+			"2.16.756.5.30.1.127.77.10.5.1", "Deprecated", "Deprecated", "veraltet", "caduc",
+			"obsoleto");
 
 	/**
 	 * <div class="en">Code for Approved</div> <div class="de">Code für
@@ -70,7 +73,7 @@ public enum AvailabilityStatus implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
+	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.2";
 
@@ -93,7 +96,7 @@ public enum AvailabilityStatus implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
+	 * <div class="de">PrÃ¼ft, ob der gegebene enum Teil dieses Value Sets
 	 * ist.</div>
 	 *
 	 * @param enumName
@@ -114,8 +117,8 @@ public enum AvailabilityStatus implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
-	 * ist.</div>
+	 * <div class="de">PrÃ¼ft, ob der gegebene code in diesem Value Set
+	 * vorhanden ist.</div>
 	 *
 	 * @param codeValue
 	 *            <div class="de"> code</div>
@@ -205,9 +208,9 @@ public enum AvailabilityStatus implements ValueSetEnumInterface {
 	/**
 	 * <div class="en">Gets the display name defined by the language param. If
 	 * there is no english translation, the default display name is
-	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
-	 * falls es keine Englische Übersetzung gibt, wird der default-Name
-	 * zurückgegeben.</div>
+	 * returned.</div> <div class="de">Liefert display name gemÃ¤ss Parameter,
+	 * falls es keine Englische Ãœbersetzung gibt, wird der default-Name
+	 * zurÃ¼ckgegeben.</div>
 	 *
 	 * @param languageCode
 	 *            the language code to get the display name for

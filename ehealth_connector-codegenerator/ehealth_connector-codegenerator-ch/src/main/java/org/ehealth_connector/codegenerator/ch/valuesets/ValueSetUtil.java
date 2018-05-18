@@ -274,7 +274,6 @@ public final class ValueSetUtil {
 		// if it does not exist locally yet
 		if (!valueSetDefinitionFile.exists() && downloadIfNotInFileSystem) {
 			valueSetDefinition = IOUtils.toString(buildValueSetUrl(baseUrl, valueSet), "UTF-8");
-			System.out.println(valueSetDefinition);
 			FileUtils.write(valueSetDefinitionFile, valueSetDefinition, "UTF-8");
 		} else if (!valueSetDefinitionFile.exists()) {
 			throw new FileNotFoundException(valueSetDefinitionFile.getName());

@@ -57,96 +57,134 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="fr">Document DEP non structuré</div>
 	 * <div class="it">Documento CIP non strutturato</div>
 	 */
-	UNSTRUCTURED_EPD_DOCUMENT("urn:che:epd:EPD_Unstructured_Document", "2.16.756.5.30.1.127.77.10.5.2", "Unstructured EPD document", "Unstructured EPD document", "Unstrukturiertes EPD Dokument", "Document DEP non structuré", "Documento CIP non strutturato"),
+	UNSTRUCTURED_EPD_DOCUMENT("urn:che:epd:EPD_Unstructured_Document",
+			"2.16.756.5.30.1.127.77.10.5.2", "Unstructured EPD document",
+			"Unstructured EPD document", "Unstrukturiertes EPD Dokument",
+			"Document DEP non structuré", "Documento CIP non strutturato"),
 	/**
 	 * <div class="en">IHE KOS document</div> <div class="de">KOS Dokument</div>
 	 * <div class="fr">Document KOS</div> <div class="it">Documento KOS </div>
 	 */
-	IHE_KOS_DOCUMENT("1.2.840.10008.5.1.4.1.1.88.59", "1.2.840.10008.2.6.1", "	 DICOM Manifest (DICOM KOS SOP Class UID)", "IHE KOS document", "KOS Dokument", "Document KOS", "Documento KOS "),
+	IHE_KOS_DOCUMENT("1.2.840.10008.5.1.4.1.1.88.59", "1.2.840.10008.2.6.1",
+			"	 DICOM Manifest (DICOM KOS SOP Class UID)", "IHE KOS document", "KOS Dokument",
+			"Document KOS", "Documento KOS "),
 	/**
 	 * <div class="en">CDA Wrapped Text Report</div> <div class="de">CDA Wrapped
 	 * Text Report</div> <div class="fr">CDA Wrapped Text Report</div>
 	 * <div class="it">CDA Wrapped Text Report</div>
 	 */
-	CDA_WRAPPED_TEXT_REPORT("urn:ihe:rad:TEXT", "1.3.6.1.4.1.19376.1.2.3", "XDS-I CDA Wrapped Text Report (XDS-I)", "CDA Wrapped Text Report", "CDA Wrapped Text Report", "CDA Wrapped Text Report", "CDA Wrapped Text Report"),
+	CDA_WRAPPED_TEXT_REPORT("urn:ihe:rad:TEXT", "1.3.6.1.4.1.19376.1.2.3",
+			"XDS-I CDA Wrapped Text Report (XDS-I)", "CDA Wrapped Text Report",
+			"CDA Wrapped Text Report", "CDA Wrapped Text Report", "CDA Wrapped Text Report"),
 	/**
 	 * <div class="en">PDF Radiology Report</div> <div class="de">PDF Radiology
 	 * Report</div> <div class="fr">PDF Radiology Report</div>
 	 * <div class="it">PDF Radiology Report</div>
 	 */
-	PDF_RADIOLOGY_REPORT("urn:ihe:rad:PDF", "1.3.6.1.4.1.19376.1.2.3", "XDS-I PDF (XDS-I)", "PDF Radiology Report", "PDF Radiology Report", "PDF Radiology Report", "PDF Radiology Report"),
+	PDF_RADIOLOGY_REPORT("urn:ihe:rad:PDF", "1.3.6.1.4.1.19376.1.2.3", "XDS-I PDF (XDS-I)",
+			"PDF Radiology Report", "PDF Radiology Report", "PDF Radiology Report",
+			"PDF Radiology Report"),
 	/**
 	 * <div class="en">CDA Imaging Report with Structured Headings</div>
 	 * <div class="de">CDA Imaging Report with Structured Headings</div>
 	 * <div class="fr">CDA Imaging Report with Structured Headings</div>
 	 * <div class="it">CDA Imaging Report with Structured Headings</div>
 	 */
-	CDA_IMAGING_REPORT_WITH_STRUCTURED_HEADINGS("urn:ihe:rad:CDA:ImagingReportStructuredHeadings:2013", "1.3.6.1.4.1.19376.1.2.3", "XDS-I Imaging Report with Structured Headings (XDS-I)", "CDA Imaging Report with Structured Headings", "CDA Imaging Report with Structured Headings", "CDA Imaging Report with Structured Headings", "CDA Imaging Report with Structured Headings"),
+	CDA_IMAGING_REPORT_WITH_STRUCTURED_HEADINGS(
+			"urn:ihe:rad:CDA:ImagingReportStructuredHeadings:2013", "1.3.6.1.4.1.19376.1.2.3",
+			"XDS-I Imaging Report with Structured Headings (XDS-I)",
+			"CDA Imaging Report with Structured Headings",
+			"CDA Imaging Report with Structured Headings",
+			"CDA Imaging Report with Structured Headings",
+			"CDA Imaging Report with Structured Headings"),
 	/**
 	 * <div class="en">PDF embedded in CDA per XDS-SD profile</div>
 	 * <div class="de">PDF embedded in CDA per XDS-SD profile</div>
 	 * <div class="fr">PDF embedded in CDA per XDS-SD profile</div>
 	 * <div class="it">PDF embedded in CDA per XDS-SD profile</div>
 	 */
-	PDF_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE("urn:ihe:iti:xds-sd:pdf:2008", "1.3.6.1.4.1.19376.1.2.3", "Scanned Documents (PDF)", "PDF embedded in CDA per XDS-SD profile", "PDF embedded in CDA per XDS-SD profile", "PDF embedded in CDA per XDS-SD profile", "PDF embedded in CDA per XDS-SD profile"),
+	PDF_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE("urn:ihe:iti:xds-sd:pdf:2008", "1.3.6.1.4.1.19376.1.2.3",
+			"Scanned Documents (PDF)", "PDF embedded in CDA per XDS-SD profile",
+			"PDF embedded in CDA per XDS-SD profile", "PDF embedded in CDA per XDS-SD profile",
+			"PDF embedded in CDA per XDS-SD profile"),
 	/**
 	 * <div class="en">Text embedded in CDA per XDS-SD profile</div>
 	 * <div class="de">Text embedded in CDA per XDS-SD profile</div>
 	 * <div class="fr">Text embedded in CDA per XDS-SD profile</div>
 	 * <div class="it">Text embedded in CDA per XDS-SD profile</div>
 	 */
-	TEXT_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE("urn:ihe:iti:xds-sd:text:2008", "1.3.6.1.4.1.19376.1.2.3", "Scanned Documents (text)", "Text embedded in CDA per XDS-SD profile", "Text embedded in CDA per XDS-SD profile", "Text embedded in CDA per XDS-SD profile", "Text embedded in CDA per XDS-SD profile"),
+	TEXT_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE("urn:ihe:iti:xds-sd:text:2008",
+			"1.3.6.1.4.1.19376.1.2.3", "Scanned Documents (text)",
+			"Text embedded in CDA per XDS-SD profile", "Text embedded in CDA per XDS-SD profile",
+			"Text embedded in CDA per XDS-SD profile", "Text embedded in CDA per XDS-SD profile"),
 	/**
 	 * <div class="en">Community Medication List</div> <div class="de">Community
 	 * Medication List</div> <div class="fr">Community Medication List</div>
 	 * <div class="it">Community Medication List</div>
 	 */
-	COMMUNITY_MEDICATION_LIST("urn:ihe:pharm:pml:2013", "1.3.6.1.4.1.19376.1.2.3", "Community Medication List", "Community Medication List", "Community Medication List", "Community Medication List", "Community Medication List"),
+	COMMUNITY_MEDICATION_LIST("urn:ihe:pharm:pml:2013", "1.3.6.1.4.1.19376.1.2.3",
+			"Community Medication List", "Community Medication List", "Community Medication List",
+			"Community Medication List", "Community Medication List"),
 	/**
 	 * <div class="en">Community Prescription</div> <div class="de">Community
 	 * Prescription</div> <div class="fr">Community Prescription</div>
 	 * <div class="it">Community Prescription</div>
 	 */
-	COMMUNITY_PRESCRIPTION("urn:ihe:pharm:pre:2010", "1.3.6.1.4.1.19376.1.2.3", "Community Prescription", "Community Prescription", "Community Prescription", "Community Prescription", "Community Prescription"),
+	COMMUNITY_PRESCRIPTION("urn:ihe:pharm:pre:2010", "1.3.6.1.4.1.19376.1.2.3",
+			"Community Prescription", "Community Prescription", "Community Prescription",
+			"Community Prescription", "Community Prescription"),
 	/**
 	 * <div class="en">Community Dispense</div> <div class="de">Community
 	 * Dispense</div> <div class="fr">Community Dispense</div>
 	 * <div class="it">Community Dispense</div>
 	 */
-	COMMUNITY_DISPENSE("urn:ihe:pharm:dis:2010", "1.3.6.1.4.1.19376.1.2.3", "Community Dispense", "Community Dispense", "Community Dispense", "Community Dispense", "Community Dispense"),
+	COMMUNITY_DISPENSE("urn:ihe:pharm:dis:2010", "1.3.6.1.4.1.19376.1.2.3", "Community Dispense",
+			"Community Dispense", "Community Dispense", "Community Dispense", "Community Dispense"),
 	/**
 	 * <div class="en">Community Medication Treatment Plan</div>
 	 * <div class="de">Community Medication Treatment Plan</div>
 	 * <div class="fr">Community Medication Treatment Plan</div>
 	 * <div class="it">Community Medication Treatment Plan</div>
 	 */
-	COMMUNITY_MEDICATION_TREATMENT_PLAN("urn:ihe:pharm:mtp:2015", "1.3.6.1.4.1.19376.1.2.3", "Community Medication Treatment Plan", "Community Medication Treatment Plan", "Community Medication Treatment Plan", "Community Medication Treatment Plan", "Community Medication Treatment Plan"),
+	COMMUNITY_MEDICATION_TREATMENT_PLAN("urn:ihe:pharm:mtp:2015", "1.3.6.1.4.1.19376.1.2.3",
+			"Community Medication Treatment Plan", "Community Medication Treatment Plan",
+			"Community Medication Treatment Plan", "Community Medication Treatment Plan",
+			"Community Medication Treatment Plan"),
 	/**
 	 * <div class="en">Community Pharmaceutical Advice</div>
 	 * <div class="de">Community Pharmaceutical Advice</div>
 	 * <div class="fr">Community Pharmaceutical Advice</div>
 	 * <div class="it">Community Pharmaceutical Advice</div>
 	 */
-	COMMUNITY_PHARMACEUTICAL_ADVICE("urn:ihe:pharm:padv:2010", "1.3.6.1.4.1.19376.1.2.3", "Community Pharmaceutical Advice", "Community Pharmaceutical Advice", "Community Pharmaceutical Advice", "Community Pharmaceutical Advice", "Community Pharmaceutical Advice"),
+	COMMUNITY_PHARMACEUTICAL_ADVICE("urn:ihe:pharm:padv:2010", "1.3.6.1.4.1.19376.1.2.3",
+			"Community Pharmaceutical Advice", "Community Pharmaceutical Advice",
+			"Community Pharmaceutical Advice", "Community Pharmaceutical Advice",
+			"Community Pharmaceutical Advice"),
 	/**
 	 * <div class="en">CDA Laboratory Report</div> <div class="de">CDA
 	 * Laboratory Report</div> <div class="fr">CDA Laboratory Report</div>
 	 * <div class="it">CDA Laboratory Report</div>
 	 */
-	CDA_LABORATORY_REPORT("urn:ihe:lab:xd-lab:2008", "1.3.6.1.4.1.19376.1.2.3", "CDA Laboratory Report", "CDA Laboratory Report", "CDA Laboratory Report", "CDA Laboratory Report", "CDA Laboratory Report"),
+	CDA_LABORATORY_REPORT("urn:ihe:lab:xd-lab:2008", "1.3.6.1.4.1.19376.1.2.3",
+			"CDA Laboratory Report", "CDA Laboratory Report", "CDA Laboratory Report",
+			"CDA Laboratory Report", "CDA Laboratory Report"),
 	/**
 	 * <div class="en">Immunization Content (IC)</div>
 	 * <div class="de">Immunization Content (IC)</div>
 	 * <div class="fr">Immunization Content (IC)</div>
 	 * <div class="it">Immunization Content (IC)</div>
 	 */
-	IMMUNIZATION_CONTENT("urn:ihe:pcc:ic:2009", "1.3.6.1.4.1.19376.1.2.3", "Immunization Content (IC)", "Immunization Content (IC)", "Immunization Content (IC)", "Immunization Content (IC)", "Immunization Content (IC)"),
+	IMMUNIZATION_CONTENT("urn:ihe:pcc:ic:2009", "1.3.6.1.4.1.19376.1.2.3",
+			"Immunization Content (IC)", "Immunization Content (IC)", "Immunization Content (IC)",
+			"Immunization Content (IC)", "Immunization Content (IC)"),
 	/**
 	 * <div class="en">MimeType sufficient</div> <div class="de">MimeType
 	 * sufficient</div> <div class="fr">MimeType sufficient</div>
 	 * <div class="it">MimeType sufficient</div>
 	 */
-	MIMETYPE_SUFFICIENT("urn:ihe:iti:xds:2017:mimeTypeSufficient", "2.16.756.5.30.1.127.77.10.5.2", "MimeType sufficient", "MimeType sufficient", "MimeType sufficient", "MimeType sufficient", "MimeType sufficient");
+	MIMETYPE_SUFFICIENT("urn:ihe:iti:xds:2017:mimeTypeSufficient", "2.16.756.5.30.1.127.77.10.5.2",
+			"MimeType sufficient", "MimeType sufficient", "MimeType sufficient",
+			"MimeType sufficient", "MimeType sufficient");
 
 	/**
 	 * <div class="en">Code for Unstructured EPD document</div>
@@ -272,7 +310,7 @@ public enum FormatCode implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
+	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.9";
 
@@ -295,7 +333,7 @@ public enum FormatCode implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
+	 * <div class="de">PrÃ¼ft, ob der gegebene enum Teil dieses Value Sets
 	 * ist.</div>
 	 *
 	 * @param enumName
@@ -316,8 +354,8 @@ public enum FormatCode implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
-	 * ist.</div>
+	 * <div class="de">PrÃ¼ft, ob der gegebene code in diesem Value Set
+	 * vorhanden ist.</div>
 	 *
 	 * @param codeValue
 	 *            <div class="de"> code</div>
@@ -407,9 +445,9 @@ public enum FormatCode implements ValueSetEnumInterface {
 	/**
 	 * <div class="en">Gets the display name defined by the language param. If
 	 * there is no english translation, the default display name is
-	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
-	 * falls es keine Englische Übersetzung gibt, wird der default-Name
-	 * zurückgegeben.</div>
+	 * returned.</div> <div class="de">Liefert display name gemÃ¤ss Parameter,
+	 * falls es keine Englische Ãœbersetzung gibt, wird der default-Name
+	 * zurÃ¼ckgegeben.</div>
 	 *
 	 * @param languageCode
 	 *            the language code to get the display name for

@@ -62,364 +62,475 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 * <div class="fr">Immunologie/Allergologie</div>
 	 * <div class="it">Allergologia e immunologia clinica</div>
 	 */
-	CLINICAL_IMMUNOLOGY_ALLERGY("394805004", "2.16.840.1.113883.6.96", "Clinical immunology/allergy (qualifier value)", "Clinical immunology/allergy", "Immunologie/Allergologie", "Immunologie/Allergologie", "Allergologia e immunologia clinica"),
+	CLINICAL_IMMUNOLOGY_ALLERGY("394805004", "2.16.840.1.113883.6.96",
+			"Clinical immunology/allergy (qualifier value)", "Clinical immunology/allergy",
+			"Immunologie/Allergologie", "Immunologie/Allergologie",
+			"Allergologia e immunologia clinica"),
 	/**
 	 * <div class="en">General medicine </div>
 	 * <div class="de">Allgemeinmedizin</div> <div class="fr">Médecine générale
 	 * </div> <div class="it">Medicina generale </div>
 	 */
-	GENERAL_MEDICINE("394802001", "2.16.840.1.113883.6.96", "General medicine (qualifier value)", "General medicine ", "Allgemeinmedizin", "Médecine générale ", "Medicina generale "),
+	GENERAL_MEDICINE("394802001", "2.16.840.1.113883.6.96", "General medicine (qualifier value)",
+			"General medicine ", "Allgemeinmedizin", "Médecine générale ", "Medicina generale "),
 	/**
 	 * <div class="en">Anaesthesiology</div>
 	 * <div class="de">Anästhesiologie</div>
 	 * <div class="fr">Anesthésiologie</div>
 	 * <div class="it">Anestesiologia</div>
 	 */
-	ANAESTHESIOLOGY("394577000", "2.16.840.1.113883.6.96", "Anesthetics (qualifier value)", "Anaesthesiology", "Anästhesiologie", "Anesthésiologie", "Anestesiologia"),
+	ANAESTHESIOLOGY("394577000", "2.16.840.1.113883.6.96", "Anesthetics (qualifier value)",
+			"Anaesthesiology", "Anästhesiologie", "Anesthésiologie", "Anestesiologia"),
 	/**
 	 * <div class="en">Vascular medicine</div> <div class="de">Angiologie</div>
 	 * <div class="fr">Angiologie</div> <div class="it">Angiologia</div>
 	 */
-	VASCULAR_MEDICINE("722414000", "2.16.840.1.113883.6.96", "Vascular medicine (qualifier value)", "Vascular medicine", "Angiologie", "Angiologie", "Angiologia"),
+	VASCULAR_MEDICINE("722414000", "2.16.840.1.113883.6.96", "Vascular medicine (qualifier value)",
+			"Vascular medicine", "Angiologie", "Angiologie", "Angiologia"),
 	/**
 	 * <div class="en">Occupational medicine</div>
 	 * <div class="de">Arbeitsmedizin</div> <div class="fr">Médecine du
 	 * travail</div> <div class="it">Medicina del lavoro</div>
 	 */
-	OCCUPATIONAL_MEDICINE("394821009", "2.16.840.1.113883.6.96", "Occupational medicine (qualifier value)", "Occupational medicine", "Arbeitsmedizin", "Médecine du travail", "Medicina del lavoro"),
+	OCCUPATIONAL_MEDICINE("394821009", "2.16.840.1.113883.6.96",
+			"Occupational medicine (qualifier value)", "Occupational medicine", "Arbeitsmedizin",
+			"Médecine du travail", "Medicina del lavoro"),
 	/**
 	 * <div class="en">Chiropractic service </div>
 	 * <div class="de">Chiropraktik</div> <div class="fr">Chiropractie</div>
 	 * <div class="it">Chiropratica</div>
 	 */
-	CHIROPRACTIC_SERVICE("722170006", "2.16.840.1.113883.6.96", "Chiropractic service (qualifier value)", "Chiropractic service ", "Chiropraktik", "Chiropractie", "Chiropratica"),
+	CHIROPRACTIC_SERVICE("722170006", "2.16.840.1.113883.6.96",
+			"Chiropractic service (qualifier value)", "Chiropractic service ", "Chiropraktik",
+			"Chiropractie", "Chiropratica"),
 	/**
 	 * <div class="en">General surgery</div> <div class="de">Chirurgie</div>
 	 * <div class="fr">Chirurgie</div> <div class="it">Chirurgia</div>
 	 */
-	GENERAL_SURGERY("394609007", "2.16.840.1.113883.6.96", "General surgery (qualifier value)", "General surgery", "Chirurgie", "Chirurgie", "Chirurgia"),
+	GENERAL_SURGERY("394609007", "2.16.840.1.113883.6.96", "General surgery (qualifier value)",
+			"General surgery", "Chirurgie", "Chirurgie", "Chirurgia"),
 	/**
 	 * <div class="en">Dermatology</div> <div class="de">Dermatologie und
 	 * Venerologie</div> <div class="fr">Dermatologie et vénérologie</div>
 	 * <div class="it">Dermatologia e venereologia</div>
 	 */
-	DERMATOLOGY("394582007", "2.16.840.1.113883.6.96", "Dermatology (qualifier value)", "Dermatology", "Dermatologie und Venerologie", "Dermatologie et vénérologie", "Dermatologia e venereologia"),
+	DERMATOLOGY("394582007", "2.16.840.1.113883.6.96", "Dermatology (qualifier value)",
+			"Dermatology", "Dermatologie und Venerologie", "Dermatologie et vénérologie",
+			"Dermatologia e venereologia"),
 	/**
 	 * <div class="en">Endocrinology</div>
 	 * <div class="de">Endokrinologie/Diabetologie</div>
 	 * <div class="fr">Endocrinologie/diabétologie</div>
 	 * <div class="it">Endocrinologia/diabetologia</div>
 	 */
-	ENDOCRINOLOGY("394583002", "2.16.840.1.113883.6.96", "Endocrinology (qualifier value)", "Endocrinology", "Endokrinologie/Diabetologie", "Endocrinologie/diabétologie", "Endocrinologia/diabetologia"),
+	ENDOCRINOLOGY("394583002", "2.16.840.1.113883.6.96", "Endocrinology (qualifier value)",
+			"Endocrinology", "Endokrinologie/Diabetologie", "Endocrinologie/diabétologie",
+			"Endocrinologia/diabetologia"),
 	/**
 	 * <div class="en">Occupational therapy service</div>
 	 * <div class="de">Ergotherapie</div> <div class="fr">Ergothérapie</div>
 	 * <div class="it">Ergoterapia</div>
 	 */
-	OCCUPATIONAL_THERAPY_SERVICE("310093001", "2.16.840.1.113883.6.96", "Occupational therapy service (qualifier value)", "Occupational therapy service", "Ergotherapie", "Ergothérapie", "Ergoterapia"),
+	OCCUPATIONAL_THERAPY_SERVICE("310093001", "2.16.840.1.113883.6.96",
+			"Occupational therapy service (qualifier value)", "Occupational therapy service",
+			"Ergotherapie", "Ergothérapie", "Ergoterapia"),
 	/**
 	 * <div class="en">Dietetics and nutrition</div>
 	 * <div class="de">Ernährungsberatung</div> <div class="fr">Conseil en
 	 * nutrition et diététique</div> <div class="it">Dietetica</div>
 	 */
-	DIETETICS_AND_NUTRITION("722164000", "2.16.840.1.113883.6.96", "Dietetics and nutrition (qualifier value)", "Dietetics and nutrition", "Ernährungsberatung", "Conseil en nutrition et diététique", "Dietetica"),
+	DIETETICS_AND_NUTRITION("722164000", "2.16.840.1.113883.6.96",
+			"Dietetics and nutrition (qualifier value)", "Dietetics and nutrition",
+			"Ernährungsberatung", "Conseil en nutrition et diététique", "Dietetica"),
 	/**
 	 * <div class="en">Gastroenterology</div>
 	 * <div class="de">Gastroenterologie</div>
 	 * <div class="fr">Gastroentérologie</div>
 	 * <div class="it">Gastroenterologia</div>
 	 */
-	GASTROENTEROLOGY("394584008", "2.16.840.1.113883.6.96", "Gastroenterology (qualifier value)", "Gastroenterology", "Gastroenterologie", "Gastroentérologie", "Gastroenterologia"),
+	GASTROENTEROLOGY("394584008", "2.16.840.1.113883.6.96", "Gastroenterology (qualifier value)",
+			"Gastroenterology", "Gastroenterologie", "Gastroentérologie", "Gastroenterologia"),
 	/**
 	 * <div class="en">Geriatric medicine</div> <div class="de">Geriatrie</div>
 	 * <div class="fr">Gériatrie</div> <div class="it">Geriatria</div>
 	 */
-	GERIATRIC_MEDICINE("394811001", "2.16.840.1.113883.6.96", "Geriatric medicine (qualifier value)", "Geriatric medicine", "Geriatrie", "Gériatrie", "Geriatria"),
+	GERIATRIC_MEDICINE("394811001", "2.16.840.1.113883.6.96",
+			"Geriatric medicine (qualifier value)", "Geriatric medicine", "Geriatrie", "Gériatrie",
+			"Geriatria"),
 	/**
 	 * <div class="en">Gynecology and Obstretrics</div>
 	 * <div class="de">Gynäkologie und Geburtshilfe</div>
 	 * <div class="fr">Gynécologie et obstétrique</div>
 	 * <div class="it">Ginecologia e ostetricia</div>
 	 */
-	GYNECOLOGY_AND_OBSTRETRICS("394586005", "2.16.840.1.113883.6.96", "Gynecology (qualifier value)", "Gynecology and Obstretrics", "Gynäkologie und Geburtshilfe", "Gynécologie et obstétrique", "Ginecologia e ostetricia"),
+	GYNECOLOGY_AND_OBSTRETRICS("394586005", "2.16.840.1.113883.6.96",
+			"Gynecology (qualifier value)", "Gynecology and Obstretrics",
+			"Gynäkologie und Geburtshilfe", "Gynécologie et obstétrique",
+			"Ginecologia e ostetricia"),
 	/**
 	 * <div class="en">Clinical haematology</div>
 	 * <div class="de">Hämatologie</div> <div class="fr">Hématologie</div>
 	 * <div class="it">Ematologia</div>
 	 */
-	CLINICAL_HAEMATOLOGY("394803006", "2.16.840.1.113883.6.96", "Clinical hematology (qualifier value)", "Clinical haematology", "Hämatologie", "Hématologie", "Ematologia"),
+	CLINICAL_HAEMATOLOGY("394803006", "2.16.840.1.113883.6.96",
+			"Clinical hematology (qualifier value)", "Clinical haematology", "Hämatologie",
+			"Hématologie", "Ematologia"),
 	/**
 	 * <div class="en">Cardiac surgery</div> <div class="de">Herzchirurgie</div>
 	 * <div class="fr">Chirurgie cardiovasculaire</div>
 	 * <div class="it">Chirurgia cardiovascolare</div>
 	 */
-	CARDIAC_SURGERY("408466002", "2.16.840.1.113883.6.96", "Cardiac surgery (qualifier value)", "Cardiac surgery", "Herzchirurgie", "Chirurgie cardiovasculaire", "Chirurgia cardiovascolare"),
+	CARDIAC_SURGERY("408466002", "2.16.840.1.113883.6.96", "Cardiac surgery (qualifier value)",
+			"Cardiac surgery", "Herzchirurgie", "Chirurgie cardiovasculaire",
+			"Chirurgia cardiovascolare"),
 	/**
 	 * <div class="en">Clinical immunology</div>
 	 * <div class="de">Immunologie</div> <div class="fr">Immunologie</div>
 	 * <div class="it">Immunologia</div>
 	 */
-	CLINICAL_IMMUNOLOGY("408480009", "2.16.840.1.113883.6.96", "Clinical immunology (qualifier value)", "Clinical immunology", "Immunologie", "Immunologie", "Immunologia"),
+	CLINICAL_IMMUNOLOGY("408480009", "2.16.840.1.113883.6.96",
+			"Clinical immunology (qualifier value)", "Clinical immunology", "Immunologie",
+			"Immunologie", "Immunologia"),
 	/**
 	 * <div class="en">Infectious diseases</div>
 	 * <div class="de">Infektionskrankheiten</div> <div class="fr">Maladies
 	 * infectieuses</div> <div class="it">Malattia infettiva</div>
 	 */
-	INFECTIOUS_DISEASES("394807007", "2.16.840.1.113883.6.96", "Infectious diseases (specialty) (qualifier value)", "Infectious diseases", "Infektionskrankheiten", "Maladies infectieuses", "Malattia infettiva"),
+	INFECTIOUS_DISEASES("394807007", "2.16.840.1.113883.6.96",
+			"Infectious diseases (specialty) (qualifier value)", "Infectious diseases",
+			"Infektionskrankheiten", "Maladies infectieuses", "Malattia infettiva"),
 	/**
 	 * <div class="en">Internal medicine</div> <div class="de">Innere
 	 * Medizin</div> <div class="fr">Médecine interne</div>
 	 * <div class="it">Medicina interna</div>
 	 */
-	INTERNAL_MEDICINE("419192003", "2.16.840.1.113883.6.96", "Internal medicine (qualifier value)", "Internal medicine", "Innere Medizin", "Médecine interne", "Medicina interna"),
+	INTERNAL_MEDICINE("419192003", "2.16.840.1.113883.6.96", "Internal medicine (qualifier value)",
+			"Internal medicine", "Innere Medizin", "Médecine interne", "Medicina interna"),
 	/**
 	 * <div class="en">Critical care medicine</div>
 	 * <div class="de">Intensivmedizin</div> <div class="fr">Médecine
 	 * intensive</div> <div class="it">Medicina intensiva</div>
 	 */
-	CRITICAL_CARE_MEDICINE("408478003", "2.16.840.1.113883.6.96", "Critical care medicine (qualifier value)", "Critical care medicine", "Intensivmedizin", "Médecine intensive", "Medicina intensiva"),
+	CRITICAL_CARE_MEDICINE("408478003", "2.16.840.1.113883.6.96",
+			"Critical care medicine (qualifier value)", "Critical care medicine", "Intensivmedizin",
+			"Médecine intensive", "Medicina intensiva"),
 	/**
 	 * <div class="en">Cardiology</div> <div class="de">Kardiologie</div>
 	 * <div class="fr">Cardiologie</div> <div class="it">Cardiologia</div>
 	 */
-	CARDIOLOGY("394579002", "2.16.840.1.113883.6.96", "Cardiology (qualifier value)", "Cardiology", "Kardiologie", "Cardiologie", "Cardiologia"),
+	CARDIOLOGY("394579002", "2.16.840.1.113883.6.96", "Cardiology (qualifier value)", "Cardiology",
+			"Kardiologie", "Cardiologie", "Cardiologia"),
 	/**
 	 * <div class="en">Complementary therapy</div>
 	 * <div class="de">Komplementärmedizin</div> <div class="fr">Médecine
 	 * alternative et complémentaire</div> <div class="it">Medicina
 	 * complementare</div>
 	 */
-	COMPLEMENTARY_THERAPY("310025004", "2.16.840.1.113883.6.96", "Complementary therapy service (qualifier value)", "Complementary therapy", "Komplementärmedizin", "Médecine alternative et complémentaire", "Medicina complementare"),
+	COMPLEMENTARY_THERAPY("310025004", "2.16.840.1.113883.6.96",
+			"Complementary therapy service (qualifier value)", "Complementary therapy",
+			"Komplementärmedizin", "Médecine alternative et complémentaire",
+			"Medicina complementare"),
 	/**
 	 * <div class="en">Laboratory service</div>
 	 * <div class="de">Labormedizin</div> <div class="fr">Médecin de
 	 * laboratoire</div> <div class="it">Medicina di laboratorio</div>
 	 */
-	LABORATORY_SERVICE("708184003", "2.16.840.1.113883.6.96", "Clinical pathology service (qualifier value)", "Laboratory service", "Labormedizin", "Médecin de laboratoire", "Medicina di laboratorio"),
+	LABORATORY_SERVICE("708184003", "2.16.840.1.113883.6.96",
+			"Clinical pathology service (qualifier value)", "Laboratory service", "Labormedizin",
+			"Médecin de laboratoire", "Medicina di laboratorio"),
 	/**
 	 * <div class="en">Speech and language therapy service</div>
 	 * <div class="de">Logopädie</div> <div class="fr">Logopédie</div>
 	 * <div class="it">Logopedia</div>
 	 */
-	SPEECH_AND_LANGUAGE_THERAPY_SERVICE("310101009", "2.16.840.1.113883.6.96", "Speech and language therapy service (qualifier value)", "Speech and language therapy service", "Logopädie", "Logopédie", "Logopedia"),
+	SPEECH_AND_LANGUAGE_THERAPY_SERVICE("310101009", "2.16.840.1.113883.6.96",
+			"Speech and language therapy service (qualifier value)",
+			"Speech and language therapy service", "Logopädie", "Logopédie", "Logopedia"),
 	/**
 	 * <div class="en">Clinical genetics</div> <div class="de">Medizinische
 	 * Genetik</div> <div class="fr">Génétique médicale</div>
 	 * <div class="it">Genetica medica</div>
 	 */
-	CLINICAL_GENETICS("394580004", "2.16.840.1.113883.6.96", "Clinical genetics (qualifier value)", "Clinical genetics", "Medizinische Genetik", "Génétique médicale", "Genetica medica"),
+	CLINICAL_GENETICS("394580004", "2.16.840.1.113883.6.96", "Clinical genetics (qualifier value)",
+			"Clinical genetics", "Medizinische Genetik", "Génétique médicale", "Genetica medica"),
 	/**
 	 * <div class="en">Oral and maxillofacial surgery</div>
 	 * <div class="de">Mund-, Kiefer- und Gesichtschirurgie</div>
 	 * <div class="fr">Chirurgie dento-maxillo-faciale</div>
 	 * <div class="it">Chirurgia oro-maxillo-facciale</div>
 	 */
-	ORAL_AND_MAXILLOFACIAL_SURGERY("408465003", "2.16.840.1.113883.6.96", "Oral and maxillofacial surgery (qualifier value)", "Oral and maxillofacial surgery", "Mund-, Kiefer- und Gesichtschirurgie", "Chirurgie dento-maxillo-faciale", "Chirurgia oro-maxillo-facciale"),
+	ORAL_AND_MAXILLOFACIAL_SURGERY("408465003", "2.16.840.1.113883.6.96",
+			"Oral and maxillofacial surgery (qualifier value)", "Oral and maxillofacial surgery",
+			"Mund-, Kiefer- und Gesichtschirurgie", "Chirurgie dento-maxillo-faciale",
+			"Chirurgia oro-maxillo-facciale"),
 	/**
 	 * <div class="en">Nephrology</div> <div class="de">Nephrologie</div>
 	 * <div class="fr">Néphrologie</div> <div class="it">Nefrologia</div>
 	 */
-	NEPHROLOGY("394589003", "2.16.840.1.113883.6.96", "Nephrology (qualifier value)", "Nephrology", "Nephrologie", "Néphrologie", "Nefrologia"),
+	NEPHROLOGY("394589003", "2.16.840.1.113883.6.96", "Nephrology (qualifier value)", "Nephrology",
+			"Nephrologie", "Néphrologie", "Nefrologia"),
 	/**
 	 * <div class="en">Neurosurgery</div> <div class="de">Neurochirurgie</div>
 	 * <div class="fr">Neurochirurgie</div> <div class="it">Neurochirurgia</div>
 	 */
-	NEUROSURGERY("394610002", "2.16.840.1.113883.6.96", "Neurosurgery (qualifier value)", "Neurosurgery", "Neurochirurgie", "Neurochirurgie", "Neurochirurgia"),
+	NEUROSURGERY("394610002", "2.16.840.1.113883.6.96", "Neurosurgery (qualifier value)",
+			"Neurosurgery", "Neurochirurgie", "Neurochirurgie", "Neurochirurgia"),
 	/**
 	 * <div class="en">Neurology</div> <div class="de">Neurologie</div>
 	 * <div class="fr">Neurologie</div> <div class="it">Neurologia</div>
 	 */
-	NEUROLOGY("394591006", "2.16.840.1.113883.6.96", "Neurology (qualifier value)", "Neurology", "Neurologie", "Neurologie", "Neurologia"),
+	NEUROLOGY("394591006", "2.16.840.1.113883.6.96", "Neurology (qualifier value)", "Neurology",
+			"Neurologie", "Neurologie", "Neurologia"),
 	/**
 	 * <div class="en">Accident &amp; emergency</div> <div class="de">Notfall-
 	 * und Rettungsmedizin</div> <div class="fr">Médecine d'urgence et de
 	 * sauvetage</div> <div class="it">Medicina d'urgenza e di salvataggio</div>
 	 */
-	ACCIDENT_AND_EMERGENCY("394576009", "2.16.840.1.113883.6.96", "Accident &amp; emergency (qualifier value)", "Accident &amp; emergency", "Notfall- und Rettungsmedizin", "Médecine d'urgence et de sauvetage", "Medicina d'urgenza e di salvataggio"),
+	ACCIDENT_AND_EMERGENCY("394576009", "2.16.840.1.113883.6.96",
+			"Accident &amp; emergency (qualifier value)", "Accident &amp; emergency",
+			"Notfall- und Rettungsmedizin", "Médecine d'urgence et de sauvetage",
+			"Medicina d'urgenza e di salvataggio"),
 	/**
 	 * <div class="en">Nuclear medicine</div>
 	 * <div class="de">Nuklearmedizin</div> <div class="fr">Médecine
 	 * nucléaire</div> <div class="it">Medicina nucleare</div>
 	 */
-	NUCLEAR_MEDICINE("394649004", "2.16.840.1.113883.6.96", "Nuclear medicine - specialty (qualifier value)", "Nuclear medicine", "Nuklearmedizin", "Médecine nucléaire", "Medicina nucleare"),
+	NUCLEAR_MEDICINE("394649004", "2.16.840.1.113883.6.96",
+			"Nuclear medicine - specialty (qualifier value)", "Nuclear medicine", "Nuklearmedizin",
+			"Médecine nucléaire", "Medicina nucleare"),
 	/**
 	 * <div class="en">Ophthalmology</div> <div class="de">Ophthalmologie</div>
 	 * <div class="fr">Ophtalmologie</div> <div class="it">Oftalmologia</div>
 	 */
-	OPHTHALMOLOGY("394594003", "2.16.840.1.113883.6.96", "Ophthalmology (qualifier value)", "Ophthalmology", "Ophthalmologie", "Ophtalmologie", "Oftalmologia"),
+	OPHTHALMOLOGY("394594003", "2.16.840.1.113883.6.96", "Ophthalmology (qualifier value)",
+			"Ophthalmology", "Ophthalmologie", "Ophtalmologie", "Oftalmologia"),
 	/**
 	 * <div class="en">Trauma and orthopedics</div> <div class="de">Orthopädie
 	 * und Traumatologie</div> <div class="fr">Chirurgie orthopédique et
 	 * traumatologie de l'appareil locomoteur</div> <div class="it">Chirurgia
 	 * ortopedica e traumatologia dell'apparato locomotore</div>
 	 */
-	TRAUMA_AND_ORTHOPEDICS("394801008", "2.16.840.1.113883.6.96", "Trauma and orthopedics (qualifier value)", "Trauma and orthopedics", "Orthopädie und Traumatologie", "Chirurgie orthopédique et traumatologie de l'appareil locomoteur", "Chirurgia ortopedica e traumatologia dell'apparato locomotore"),
+	TRAUMA_AND_ORTHOPEDICS("394801008", "2.16.840.1.113883.6.96",
+			"Trauma and orthopedics (qualifier value)", "Trauma and orthopedics",
+			"Orthopädie und Traumatologie",
+			"Chirurgie orthopédique et traumatologie de l'appareil locomoteur",
+			"Chirurgia ortopedica e traumatologia dell'apparato locomotore"),
 	/**
 	 * <div class="en">Osteopathic manipulative medicine</div>
 	 * <div class="de">Osteopathie</div> <div class="fr">Ostéopathie</div>
 	 * <div class="it">Osteopatia</div>
 	 */
-	OSTEOPATHIC_MANIPULATIVE_MEDICINE("416304004", "2.16.840.1.113883.6.96", "Osteopathic manipulative medicine (qualifier value)", "Osteopathic manipulative medicine", "Osteopathie", "Ostéopathie", "Osteopatia"),
+	OSTEOPATHIC_MANIPULATIVE_MEDICINE("416304004", "2.16.840.1.113883.6.96",
+			"Osteopathic manipulative medicine (qualifier value)",
+			"Osteopathic manipulative medicine", "Osteopathie", "Ostéopathie", "Osteopatia"),
 	/**
 	 * <div class="en">Otolaryngology</div>
 	 * <div class="de">Oto-Rhino-Laryngologie</div>
 	 * <div class="fr">Oto-rhino-laryngologie</div>
 	 * <div class="it">Otorinolaringoiatria</div>
 	 */
-	OTOLARYNGOLOGY("418960008", "2.16.840.1.113883.6.96", "Otolaryngology (qualifier value)", "Otolaryngology", "Oto-Rhino-Laryngologie", "Oto-rhino-laryngologie", "Otorinolaringoiatria"),
+	OTOLARYNGOLOGY("418960008", "2.16.840.1.113883.6.96", "Otolaryngology (qualifier value)",
+			"Otolaryngology", "Oto-Rhino-Laryngologie", "Oto-rhino-laryngologie",
+			"Otorinolaringoiatria"),
 	/**
 	 * <div class="en">Pediatrics</div> <div class="de">Pädiatrie</div>
 	 * <div class="fr">Pédiatrie</div> <div class="it">Pediatria</div>
 	 */
-	PEDIATRICS("394537008", "2.16.840.1.113883.6.96", "Pediatric specialty (qualifier value)", "Pediatrics", "Pädiatrie", "Pédiatrie", "Pediatria"),
+	PEDIATRICS("394537008", "2.16.840.1.113883.6.96", "Pediatric specialty (qualifier value)",
+			"Pediatrics", "Pädiatrie", "Pédiatrie", "Pediatria"),
 	/**
 	 * <div class="en">Palliative medicine</div>
 	 * <div class="de">Palliativmedizin</div> <div class="fr">Médecine
 	 * palliative</div> <div class="it">Medicina palliativa</div>
 	 */
-	PALLIATIVE_MEDICINE("394806003", "2.16.840.1.113883.6.96", "Palliative medicine (qualifier value)", "Palliative medicine", "Palliativmedizin", "Médecine palliative", "Medicina palliativa"),
+	PALLIATIVE_MEDICINE("394806003", "2.16.840.1.113883.6.96",
+			"Palliative medicine (qualifier value)", "Palliative medicine", "Palliativmedizin",
+			"Médecine palliative", "Medicina palliativa"),
 	/**
 	 * <div class="en">Pathology</div> <div class="de">Pathologie</div>
 	 * <div class="fr">Pathologie</div> <div class="it">Patologia</div>
 	 */
-	PATHOLOGY("394595002", "2.16.840.1.113883.6.96", "Pathology (qualifier value)", "Pathology", "Pathologie", "Pathologie", "Patologia"),
+	PATHOLOGY("394595002", "2.16.840.1.113883.6.96", "Pathology (qualifier value)", "Pathology",
+			"Pathologie", "Pathologie", "Patologia"),
 	/**
 	 * <div class="en">Nursing</div> <div class="de">Pflege</div>
 	 * <div class="fr">Soins</div> <div class="it">Cure infermieristiche</div>
 	 */
-	NURSING("722165004", "2.16.840.1.113883.6.96", "Nursing (qualifier value)", "Nursing", "Pflege", "Soins", "Cure infermieristiche"),
+	NURSING("722165004", "2.16.840.1.113883.6.96", "Nursing (qualifier value)", "Nursing", "Pflege",
+			"Soins", "Cure infermieristiche"),
 	/**
 	 * <div class="en">Clinical pharmacology</div> <div class="de">Klinische
 	 * Pharmakologie</div> <div class="fr">Pharmacologie clinique</div>
 	 * <div class="it">Farmacologia clinica</div>
 	 */
-	CLINICAL_PHARMACOLOGY("394600006", "2.16.840.1.113883.6.96", "Clinical pharmacology (qualifier value)", "Clinical pharmacology", "Klinische Pharmakologie", "Pharmacologie clinique", "Farmacologia clinica"),
+	CLINICAL_PHARMACOLOGY("394600006", "2.16.840.1.113883.6.96",
+			"Clinical pharmacology (qualifier value)", "Clinical pharmacology",
+			"Klinische Pharmakologie", "Pharmacologie clinique", "Farmacologia clinica"),
 	/**
 	 * <div class="en">Pharmacy service</div>
 	 * <div class="de">Pharmazie-Dienstleistung</div> <div class="fr">Service
 	 * pharmaceutique</div> <div class="it">Farmacia</div>
 	 */
-	PHARMACY_SERVICE("310080006", "2.16.840.1.113883.6.96", "Pharmacy service (qualifier value)", "Pharmacy service", "Pharmazie-Dienstleistung", "Service pharmaceutique", "Farmacia"),
+	PHARMACY_SERVICE("310080006", "2.16.840.1.113883.6.96", "Pharmacy service (qualifier value)",
+			"Pharmacy service", "Pharmazie-Dienstleistung", "Service pharmaceutique", "Farmacia"),
 	/**
 	 * <div class="en">Physiotherapy</div> <div class="de">Physiotherapie</div>
 	 * <div class="fr">Physiothérapie</div> <div class="it">Fisioterapia</div>
 	 */
-	PHYSIOTHERAPY("722138006", "2.16.840.1.113883.6.96", "Physiotherapy (qualifier value)", "Physiotherapy", "Physiotherapie", "Physiothérapie", "Fisioterapia"),
+	PHYSIOTHERAPY("722138006", "2.16.840.1.113883.6.96", "Physiotherapy (qualifier value)",
+			"Physiotherapy", "Physiotherapie", "Physiothérapie", "Fisioterapia"),
 	/**
 	 * <div class="en">Plastic surgery</div> <div class="de">Plastische,
 	 * Rekonstruktive und Ästhetische Chirurgie</div> <div class="fr">Chirurgie
 	 * plastique, reconstructrice et esthétique</div> <div class="it">Chirurgia
 	 * plastica, ricostruttiva ed estetica</div>
 	 */
-	PLASTIC_SURGERY("394611003", "2.16.840.1.113883.6.96", "Plastic surgery - specialty (qualifier value)", "Plastic surgery", "Plastische, Rekonstruktive und Ästhetische Chirurgie", "Chirurgie plastique, reconstructrice et esthétique", "Chirurgia plastica, ricostruttiva ed estetica"),
+	PLASTIC_SURGERY("394611003", "2.16.840.1.113883.6.96",
+			"Plastic surgery - specialty (qualifier value)", "Plastic surgery",
+			"Plastische, Rekonstruktive und Ästhetische Chirurgie",
+			"Chirurgie plastique, reconstructrice et esthétique",
+			"Chirurgia plastica, ricostruttiva ed estetica"),
 	/**
 	 * <div class="en">Pulmonary medicine</div>
 	 * <div class="de">Pneumologie</div> <div class="fr">Pneumologie</div>
 	 * <div class="it">Pneumologia</div>
 	 */
-	PULMONARY_MEDICINE("418112009", "2.16.840.1.113883.6.96", "Pulmonary medicine (qualifier value)", "Pulmonary medicine", "Pneumologie", "Pneumologie", "Pneumologia"),
+	PULMONARY_MEDICINE("418112009", "2.16.840.1.113883.6.96",
+			"Pulmonary medicine (qualifier value)", "Pulmonary medicine", "Pneumologie",
+			"Pneumologie", "Pneumologia"),
 	/**
 	 * <div class="en">Podiatry service</div> <div class="de">Podologie</div>
 	 * <div class="fr">Podologie</div> <div class="it">Podologia</div>
 	 */
-	PODIATRY_SERVICE("310087009", "2.16.840.1.113883.6.96", "Podiatry service (qualifier value)", "Podiatry service", "Podologie", "Podologie", "Podologia"),
+	PODIATRY_SERVICE("310087009", "2.16.840.1.113883.6.96", "Podiatry service (qualifier value)",
+			"Podiatry service", "Podologie", "Podologie", "Podologia"),
 	/**
 	 * <div class="en">Preventive medicine</div>
 	 * <div class="de">Präventionsmedizin</div> <div class="fr">Médecine
 	 * préventive </div> <div class="it">Prevenzione</div>
 	 */
-	PREVENTIVE_MEDICINE("409968004", "2.16.840.1.113883.6.96", "Preventive medicine (qualifier value)", "Preventive medicine", "Präventionsmedizin", "Médecine préventive ", "Prevenzione"),
+	PREVENTIVE_MEDICINE("409968004", "2.16.840.1.113883.6.96",
+			"Preventive medicine (qualifier value)", "Preventive medicine", "Präventionsmedizin",
+			"Médecine préventive ", "Prevenzione"),
 	/**
 	 * <div class="en">Psychiatry</div> <div class="de">Psychiatrie und
 	 * Psychotherapie</div> <div class="fr">Psychiatrie et psychothérapie</div>
 	 * <div class="it">Psichiatria e psicoterapia</div>
 	 */
-	PSYCHIATRY("394587001", "2.16.840.1.113883.6.96", "Psychiatry (qualifier value)", "Psychiatry", "Psychiatrie und Psychotherapie", "Psychiatrie et psychothérapie", "Psichiatria e psicoterapia"),
+	PSYCHIATRY("394587001", "2.16.840.1.113883.6.96", "Psychiatry (qualifier value)", "Psychiatry",
+			"Psychiatrie und Psychotherapie", "Psychiatrie et psychothérapie",
+			"Psichiatria e psicoterapia"),
 	/**
 	 * <div class="en">Psychology</div> <div class="de">Psychologie</div>
 	 * <div class="fr">Psychologie</div> <div class="it">Psicologia</div>
 	 */
-	PSYCHOLOGY("722162001", "2.16.840.1.113883.6.96", "Psychology (qualifier value)", "Psychology", "Psychologie", "Psychologie", "Psicologia"),
+	PSYCHOLOGY("722162001", "2.16.840.1.113883.6.96", "Psychology (qualifier value)", "Psychology",
+			"Psychologie", "Psychologie", "Psicologia"),
 	/**
 	 * <div class="en">Psycho-Somatic medicine</div>
 	 * <div class="de">Psychosomatik</div> <div class="fr">Psychosomatique</div>
 	 * <div class="it">Medicina psicosomatica</div>
 	 */
-	PSYCHO_SOMATIC_MEDICINE("721961006", "2.16.840.1.113883.6.96", "Psychosomatic medicine (qualifier value)", "Psycho-Somatic medicine", "Psychosomatik", "Psychosomatique", "Medicina psicosomatica"),
+	PSYCHO_SOMATIC_MEDICINE("721961006", "2.16.840.1.113883.6.96",
+			"Psychosomatic medicine (qualifier value)", "Psycho-Somatic medicine", "Psychosomatik",
+			"Psychosomatique", "Medicina psicosomatica"),
 	/**
 	 * <div class="en">Radiology</div> <div class="de">Radiologie</div>
 	 * <div class="fr">Radiologie</div> <div class="it">Radiologia</div>
 	 */
-	RADIOLOGY("394914008", "2.16.840.1.113883.6.96", "Radiology - specialty (qualifier value)", "Radiology", "Radiologie", "Radiologie", "Radiologia"),
+	RADIOLOGY("394914008", "2.16.840.1.113883.6.96", "Radiology - specialty (qualifier value)",
+			"Radiology", "Radiologie", "Radiologie", "Radiologia"),
 	/**
 	 * <div class="en">Radiation oncology</div>
 	 * <div class="de">Radio-Onkologie/Strahlentherapie</div>
 	 * <div class="fr">Radio-oncologie&#160;/&#160;radiothérapie</div>
 	 * <div class="it">Radio-oncologia / radioterapia</div>
 	 */
-	RADIATION_ONCOLOGY("419815003", "2.16.840.1.113883.6.96", "Radiation oncology (qualifier value)", "Radiation oncology", "Radio-Onkologie/Strahlentherapie", "Radio-oncologie&#160;/&#160;radiothérapie", "Radio-oncologia / radioterapia"),
+	RADIATION_ONCOLOGY("419815003", "2.16.840.1.113883.6.96",
+			"Radiation oncology (qualifier value)", "Radiation oncology",
+			"Radio-Onkologie/Strahlentherapie", "Radio-oncologie&#160;/&#160;radiothérapie",
+			"Radio-oncologia / radioterapia"),
 	/**
 	 * <div class="en">Legal medicine</div> <div class="de">Rechtsmedizin</div>
 	 * <div class="fr">Médecine légale</div> <div class="it">Medicina
 	 * legale</div>
 	 */
-	LEGAL_MEDICINE("722204007", "2.16.840.1.113883.6.96", "Legal medicine (qualifier value)", "Legal medicine", "Rechtsmedizin", "Médecine légale", "Medicina legale"),
+	LEGAL_MEDICINE("722204007", "2.16.840.1.113883.6.96", "Legal medicine (qualifier value)",
+			"Legal medicine", "Rechtsmedizin", "Médecine légale", "Medicina legale"),
 	/**
 	 * <div class="en">Rehabilitation</div> <div class="de">Rehabilitation</div>
 	 * <div class="fr">Réadaptation</div> <div class="it">Riabilitazione</div>
 	 */
-	REHABILITATION("394602003", "2.16.840.1.113883.6.96", "Rehabilitation - specialty (qualifier value)", "Rehabilitation", "Rehabilitation", "Réadaptation", "Riabilitazione"),
+	REHABILITATION("394602003", "2.16.840.1.113883.6.96",
+			"Rehabilitation - specialty (qualifier value)", "Rehabilitation", "Rehabilitation",
+			"Réadaptation", "Riabilitazione"),
 	/**
 	 * <div class="en">Rheumatology</div> <div class="de">Rheumatologie</div>
 	 * <div class="fr">Rhumatologie</div> <div class="it">Reumatologia</div>
 	 */
-	RHEUMATOLOGY("394810000", "2.16.840.1.113883.6.96", "Rheumatology (qualifier value)", "Rheumatology", "Rheumatologie", "Rhumatologie", "Reumatologia"),
+	RHEUMATOLOGY("394810000", "2.16.840.1.113883.6.96", "Rheumatology (qualifier value)",
+			"Rheumatology", "Rheumatologie", "Rhumatologie", "Reumatologia"),
 	/**
 	 * <div class="en">Thoracic surgery</div>
 	 * <div class="de">Thoraxchirurgie</div> <div class="fr">Chirurgie
 	 * thoracique</div> <div class="it">Chirurgia toracica</div>
 	 */
-	THORACIC_SURGERY("408456005", "2.16.840.1.113883.6.96", "Thoracic surgery (qualifier value)", "Thoracic surgery", "Thoraxchirurgie", "Chirurgie thoracique", "Chirurgia toracica"),
+	THORACIC_SURGERY("408456005", "2.16.840.1.113883.6.96", "Thoracic surgery (qualifier value)",
+			"Thoracic surgery", "Thoraxchirurgie", "Chirurgie thoracique", "Chirurgia toracica"),
 	/**
 	 * <div class="en">Transfusion medicine</div>
 	 * <div class="de">Transfusionsmedizin</div> <div class="fr">Médecine
 	 * transfusionnelle</div> <div class="it">Medicina trasfusionale</div>
 	 */
-	TRANSFUSION_MEDICINE("394819004", "2.16.840.1.113883.6.96", "Blood transfusion (specialty) (qualifier value)", "Transfusion medicine", "Transfusionsmedizin", "Médecine transfusionnelle", "Medicina trasfusionale"),
+	TRANSFUSION_MEDICINE("394819004", "2.16.840.1.113883.6.96",
+			"Blood transfusion (specialty) (qualifier value)", "Transfusion medicine",
+			"Transfusionsmedizin", "Médecine transfusionnelle", "Medicina trasfusionale"),
 	/**
 	 * <div class="en">Tropical medicine</div> <div class="de">Tropen- und
 	 * Reisemedizin</div> <div class="fr">Médecine tropicale et des
 	 * voyages</div> <div class="it">Medicina tropicale e di viaggio</div>
 	 */
-	TROPICAL_MEDICINE("408448007", "2.16.840.1.113883.6.96", "Tropical medicine (qualifier value)", "Tropical medicine", "Tropen- und Reisemedizin", "Médecine tropicale et des voyages", "Medicina tropicale e di viaggio"),
+	TROPICAL_MEDICINE("408448007", "2.16.840.1.113883.6.96", "Tropical medicine (qualifier value)",
+			"Tropical medicine", "Tropen- und Reisemedizin", "Médecine tropicale et des voyages",
+			"Medicina tropicale e di viaggio"),
 	/**
 	 * <div class="en">Urology</div> <div class="de">Urologie</div>
 	 * <div class="fr">Urologie</div> <div class="it">Urologia</div>
 	 */
-	UROLOGY("394612005", "2.16.840.1.113883.6.96", "Urology (qualifier value)", "Urology", "Urologie", "Urologie", "Urologia"),
+	UROLOGY("394612005", "2.16.840.1.113883.6.96", "Urology (qualifier value)", "Urology",
+			"Urologie", "Urologie", "Urologia"),
 	/**
 	 * <div class="en">Dental medicine</div> <div class="de">Zahnheilkunde</div>
 	 * <div class="fr">Odontologie</div> <div class="it">Odontoiatria</div>
 	 */
-	DENTAL_MEDICINE("394812008", "2.16.840.1.113883.6.96", "Dental medicine specialties (qualifier value)", "Dental medicine", "Zahnheilkunde", "Odontologie", "Odontoiatria"),
+	DENTAL_MEDICINE("394812008", "2.16.840.1.113883.6.96",
+			"Dental medicine specialties (qualifier value)", "Dental medicine", "Zahnheilkunde",
+			"Odontologie", "Odontoiatria"),
 	/**
 	 * <div class="en">Clinical oncology</div> <div class="de">Onkologie</div>
 	 * <div class="fr">Oncologie</div> <div class="it">Oncologia medica</div>
 	 */
-	CLINICAL_ONCOLOGY("394592004", "2.16.840.1.113883.6.96", "Clinical oncology (qualifier value)", "Clinical oncology", "Onkologie", "Oncologie", "Oncologia medica"),
+	CLINICAL_ONCOLOGY("394592004", "2.16.840.1.113883.6.96", "Clinical oncology (qualifier value)",
+			"Clinical oncology", "Onkologie", "Oncologie", "Oncologia medica"),
 	/**
 	 * <div class="en">Transplant surgery</div>
 	 * <div class="de">Transplantationsmedizin</div> <div class="fr">Médecine de
 	 * la transplantation</div> <div class="it">Medicina dei trapianti</div>
 	 */
-	TRANSPLANT_SURGERY("408477008", "2.16.840.1.113883.6.96", "Transplantation surgery (qualifier value)", "Transplant surgery", "Transplantationsmedizin", "Médecine de la transplantation", "Medicina dei trapianti"),
+	TRANSPLANT_SURGERY("408477008", "2.16.840.1.113883.6.96",
+			"Transplantation surgery (qualifier value)", "Transplant surgery",
+			"Transplantationsmedizin", "Médecine de la transplantation", "Medicina dei trapianti"),
 	/**
 	 * <div class="en">other Clinical specialty</div> <div class="de">Andere
 	 * nicht näher spezifizierte medzinische Fachrichtung</div>
 	 * <div class="fr">Autres spécialisations non spécifiées</div>
 	 * <div class="it">Altre specialità mediche non meglio precisate</div>
 	 */
-	OTHER_CLINICAL_SPECIALTY("394658006", "2.16.840.1.113883.6.96", "Clinical specialty (qualifier value)", "other Clinical specialty", "Andere nicht näher spezifizierte medzinische Fachrichtung", "Autres spécialisations non spécifiées", "Altre specialità mediche non meglio precisate");
+	OTHER_CLINICAL_SPECIALTY("394658006", "2.16.840.1.113883.6.96",
+			"Clinical specialty (qualifier value)", "other Clinical specialty",
+			"Andere nicht näher spezifizierte medzinische Fachrichtung",
+			"Autres spécialisations non spécifiées",
+			"Altre specialità mediche non meglio precisate");
 
 	/**
 	 * <div class="en">Code for Clinical immunology/allergy</div>
@@ -886,7 +997,7 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
+	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.18";
 
@@ -909,7 +1020,7 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
+	 * <div class="de">PrÃ¼ft, ob der gegebene enum Teil dieses Value Sets
 	 * ist.</div>
 	 *
 	 * @param enumName
@@ -930,8 +1041,8 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
-	 * ist.</div>
+	 * <div class="de">PrÃ¼ft, ob der gegebene code in diesem Value Set
+	 * vorhanden ist.</div>
 	 *
 	 * @param codeValue
 	 *            <div class="de"> code</div>
@@ -1021,9 +1132,9 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	/**
 	 * <div class="en">Gets the display name defined by the language param. If
 	 * there is no english translation, the default display name is
-	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
-	 * falls es keine Englische Übersetzung gibt, wird der default-Name
-	 * zurückgegeben.</div>
+	 * returned.</div> <div class="de">Liefert display name gemÃ¤ss Parameter,
+	 * falls es keine Englische Ãœbersetzung gibt, wird der default-Name
+	 * zurÃ¼ckgegeben.</div>
 	 *
 	 * @param languageCode
 	 *            the language code to get the display name for

@@ -43,27 +43,32 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	 * <div class="en">German</div> <div class="de">Deutsch</div>
 	 * <div class="fr">Allemand</div> <div class="it">Tedesco</div>
 	 */
-	GERMAN("de-CH", "2.16.840.1.113883.6.316", "German ", "German", "Deutsch", "Allemand", "Tedesco"),
+	GERMAN("de-CH", "2.16.840.1.113883.6.316", "German ", "German", "Deutsch", "Allemand",
+			"Tedesco"),
 	/**
 	 * <div class="en">French</div> <div class="de">Französisch</div>
 	 * <div class="fr">Français </div> <div class="it">Francese</div>
 	 */
-	FRENCH("fr-CH", "2.16.840.1.113883.6.316", "French", "French", "Französisch", "Français ", "Francese"),
+	FRENCH("fr-CH", "2.16.840.1.113883.6.316", "French", "French", "Französisch", "Français ",
+			"Francese"),
 	/**
 	 * <div class="en">Italian</div> <div class="de">Italienisch</div>
 	 * <div class="fr">Italien</div> <div class="it">Italiano</div>
 	 */
-	ITALIAN("it-CH", "2.16.840.1.113883.6.316", "Italian ", "Italian", "Italienisch", "Italien", "Italiano"),
+	ITALIAN("it-CH", "2.16.840.1.113883.6.316", "Italian ", "Italian", "Italienisch", "Italien",
+			"Italiano"),
 	/**
 	 * <div class="en">Rhaeto-Romanic </div> <div class="de">Rätoromanisch</div>
 	 * <div class="fr">Rhéto-roman</div> <div class="it">Romancio</div>
 	 */
-	RHAETO_ROMANIC("rm", "2.16.840.1.113883.6.316", "Rhaeto-Romanic", "Rhaeto-Romanic ", "Rätoromanisch", "Rhéto-roman", "Romancio"),
+	RHAETO_ROMANIC("rm", "2.16.840.1.113883.6.316", "Rhaeto-Romanic", "Rhaeto-Romanic ",
+			"Rätoromanisch", "Rhéto-roman", "Romancio"),
 	/**
 	 * <div class="en">English</div> <div class="de">Englisch</div>
 	 * <div class="fr">Anglais</div> <div class="it">Inglese</div>
 	 */
-	ENGLISH("en-US", "2.16.840.1.113883.6.316", "English language (qualifier value)", "English", "Englisch", "Anglais", "Inglese");
+	ENGLISH("en-US", "2.16.840.1.113883.6.316", "English language (qualifier value)", "English",
+			"Englisch", "Anglais", "Inglese");
 
 	/**
 	 * <div class="en">Code for German</div> <div class="de">Code für
@@ -108,7 +113,7 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
+	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.13";
 
@@ -131,7 +136,7 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
+	 * <div class="de">PrÃ¼ft, ob der gegebene enum Teil dieses Value Sets
 	 * ist.</div>
 	 *
 	 * @param enumName
@@ -152,8 +157,8 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
-	 * ist.</div>
+	 * <div class="de">PrÃ¼ft, ob der gegebene code in diesem Value Set
+	 * vorhanden ist.</div>
 	 *
 	 * @param codeValue
 	 *            <div class="de"> code</div>
@@ -243,9 +248,9 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	/**
 	 * <div class="en">Gets the display name defined by the language param. If
 	 * there is no english translation, the default display name is
-	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
-	 * falls es keine Englische Übersetzung gibt, wird der default-Name
-	 * zurückgegeben.</div>
+	 * returned.</div> <div class="de">Liefert display name gemÃ¤ss Parameter,
+	 * falls es keine Englische Ãœbersetzung gibt, wird der default-Name
+	 * zurÃ¼ckgegeben.</div>
 	 *
 	 * @param languageCode
 	 *            the language code to get the display name for
