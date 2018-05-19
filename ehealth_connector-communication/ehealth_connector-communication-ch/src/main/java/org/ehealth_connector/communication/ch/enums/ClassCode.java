@@ -38,42 +38,19 @@ import org.ehealth_connector.common.enums.LanguageCode;
 public enum ClassCode implements ValueSetEnumInterface {
 
 	/**
-	 * <div class="en">Notes on Consultations</div>
-	 * <div class="de">Konsultationseinträge/-notizen</div>
-	 * <div class="fr">Notes de consultation</div> <div class="it">Rapporti e
-	 * note di consultazione</div>
+	 * <div class="en">Alerts</div> <div class="de">Warnungen/Risiken</div>
+	 * <div class="fr">Alertes</div> <div class="it">Avvertenze</div>
 	 */
-	NOTES_ON_CONSULTATIONS("1211000195104", "2.16.840.1.113883.6.96",
-			"Note on Consultation (record artifact)", "Notes on Consultations",
-			"Konsultationseinträge/-notizen", "Notes de consultation",
-			"Rapporti e note di consultazione"),
+	ALERTS("1331000195101", "2.16.840.1.113883.6.96", "Alert (record artifact)", "Alerts",
+			"Warnungen/Risiken", "Alertes", "Avvertenze"),
 	/**
-	 * <div class="en">Progress Notes</div>
-	 * <div class="de">Verlaufseinträge/-notizen</div> <div class="fr">Notes de
-	 * suivi</div> <div class="it">Diario clinico</div>
+	 * <div class="en">Care Plans</div>
+	 * <div class="de">Behandlungspläne/Behandlungsschemata</div>
+	 * <div class="fr">Plans de soins</div> <div class="it">Piani di cura</div>
 	 */
-	PROGRESS_NOTES("1231000195106", "2.16.840.1.113883.6.96", "Progress Note (record artifact)",
-			"Progress Notes", "Verlaufseinträge/-notizen", "Notes de suivi", "Diario clinico"),
-	/**
-	 * <div class="en">Notes on Procedures</div>
-	 * <div class="de">Interventionseinträge/-notizen</div>
-	 * <div class="fr">Notes d'intervention</div> <div class="it">Rapporti e
-	 * note d'intervento</div>
-	 */
-	NOTES_ON_PROCEDURES("1241000195103", "2.16.840.1.113883.6.96",
-			"Note on Procedure (record artifact)", "Notes on Procedures",
-			"Interventionseinträge/-notizen", "Notes d'intervention",
-			"Rapporti e note d'intervento"),
-	/**
-	 * <div class="en">Tests/Procedure Requests</div>
-	 * <div class="de">Untersuchungs-/Prozeduranforderungen</div>
-	 * <div class="fr">Demandes d'examen / procédure</div>
-	 * <div class="it">Richieste d'esame</div>
-	 */
-	TESTS_PROCEDURE_REQUESTS("1251000195100", "2.16.840.1.113883.6.96",
-			"Test or Procedure Request (record artifact)", "Tests/Procedure Requests",
-			"Untersuchungs-/Prozeduranforderungen", "Demandes d'examen / procédure",
-			"Richieste d'esame"),
+	CARE_PLANS("1321000195103", "2.16.840.1.113883.6.96", "Care Plan (record artifact)",
+			"Care Plans", "Behandlungspläne/Behandlungsschemata", "Plans de soins",
+			"Piani di cura"),
 	/**
 	 * <div class="en">Clinical Care Referrals</div>
 	 * <div class="de">Zuweisungen/Überweisungen</div> <div class="fr">Demandes
@@ -85,21 +62,14 @@ public enum ClassCode implements ValueSetEnumInterface {
 			"Zuweisungen/Überweisungen", "Demandes de prise en charge",
 			"Richieste di presa a carico"),
 	/**
-	 * <div class="en">Episode Summary Reports</div>
-	 * <div class="de">Zusammenfassende Berichte</div> <div class="fr">Résumés
-	 * d'épisode</div> <div class="it">Riassunti di episodio</div>
+	 * <div class="en">Data from Patient</div> <div class="de">Eigene Daten des
+	 * Patienten</div> <div class="fr">Documents introduits par le patient</div>
+	 * <div class="it">Documenti inseriti dal paziente</div>
 	 */
-	EPISODE_SUMMARY_REPORTS("1271000195108", "2.16.840.1.113883.6.96",
-			"Episode Summary Report (record artifact)", "Episode Summary Reports",
-			"Zusammenfassende Berichte", "Résumés d'épisode", "Riassunti di episodio"),
-	/**
-	 * <div class="en">Progress Reports</div>
-	 * <div class="de">Verlaufsberichte</div> <div class="fr">Rapports
-	 * d'évolution</div> <div class="it">Rapporti di evoluzione</div>
-	 */
-	PROGRESS_REPORTS("371532007", "2.16.840.1.113883.6.96", "Progress report (qualifier value)",
-			"Progress Reports", "Verlaufsberichte", "Rapports d'évolution",
-			"Rapporti di evoluzione"),
+	DATA_FROM_PATIENT("1351000195107", "2.16.840.1.113883.6.96",
+			"Data from Patient (record artifact)", "Data from Patient",
+			"Eigene Daten des Patienten", "Documents introduits par le patient",
+			"Documenti inseriti dal paziente"),
 	/**
 	 * <div class="en">Diagnostic Test Results</div>
 	 * <div class="de">Diagnostische Untersuchungsbefunde</div>
@@ -111,13 +81,13 @@ public enum ClassCode implements ValueSetEnumInterface {
 			"Diagnostische Untersuchungsbefunde", "Résultats d'examen diagnostic",
 			"Risultati di esame diagnostico"),
 	/**
-	 * <div class="en">Notifications</div> <div class="de">Meldungen</div>
-	 * <div class="fr">Notifications / déclarations</div>
-	 * <div class="it">Notifiche / dichiarazioni</div>
+	 * <div class="en">Episode Summary Reports</div>
+	 * <div class="de">Zusammenfassende Berichte</div> <div class="fr">Résumés
+	 * d'épisode</div> <div class="it">Riassunti di episodio</div>
 	 */
-	NOTIFICATIONS("1301000195106", "2.16.840.1.113883.6.96", "Notification (record artifact)",
-			"Notifications", "Meldungen", "Notifications / déclarations",
-			"Notifiche / dichiarazioni"),
+	EPISODE_SUMMARY_REPORTS("1271000195108", "2.16.840.1.113883.6.96",
+			"Episode Summary Report (record artifact)", "Episode Summary Reports",
+			"Zusammenfassende Berichte", "Résumés d'épisode", "Riassunti di episodio"),
 	/**
 	 * <div class="en">Historic Overviews</div> <div class="de">Medizinische
 	 * Vorgeschichte</div> <div class="fr">Résumés d'antécédents</div>
@@ -128,6 +98,40 @@ public enum ClassCode implements ValueSetEnumInterface {
 			"Medizinische Vorgeschichte", "Résumés d'antécédents",
 			"Riassunti della storia clinica"),
 	/**
+	 * <div class="en">Notes on Consultations</div>
+	 * <div class="de">Konsultationseinträge/-notizen</div>
+	 * <div class="fr">Notes de consultation</div> <div class="it">Rapporti e
+	 * note di consultazione</div>
+	 */
+	NOTES_ON_CONSULTATIONS("1211000195104", "2.16.840.1.113883.6.96",
+			"Note on Consultation (record artifact)", "Notes on Consultations",
+			"Konsultationseinträge/-notizen", "Notes de consultation",
+			"Rapporti e note di consultazione"),
+	/**
+	 * <div class="en">Notes on Procedures</div>
+	 * <div class="de">Interventionseinträge/-notizen</div>
+	 * <div class="fr">Notes d'intervention</div> <div class="it">Rapporti e
+	 * note d'intervento</div>
+	 */
+	NOTES_ON_PROCEDURES("1241000195103", "2.16.840.1.113883.6.96",
+			"Note on Procedure (record artifact)", "Notes on Procedures",
+			"Interventionseinträge/-notizen", "Notes d'intervention",
+			"Rapporti e note d'intervento"),
+	/**
+	 * <div class="en">Notifications</div> <div class="de">Meldungen</div>
+	 * <div class="fr">Notifications / déclarations</div>
+	 * <div class="it">Notifiche / dichiarazioni</div>
+	 */
+	NOTIFICATIONS("1301000195106", "2.16.840.1.113883.6.96", "Notification (record artifact)",
+			"Notifications", "Meldungen", "Notifications / déclarations",
+			"Notifiche / dichiarazioni"),
+	/**
+	 * <div class="en">Other Composition</div> <div class="de">Anderweitige
+	 * Dokumente</div> <div class="fr">Autre</div> <div class="it">Altro</div>
+	 */
+	OTHER_COMPOSITION("419891008", "2.16.840.1.113883.6.96", "Other Composition",
+			"Other Composition", "Anderweitige Dokumente", "Autre", "Altro"),
+	/**
 	 * <div class="en">Present State Summaries</div> <div class="de">Aktueller
 	 * Zustand</div> <div class="fr">Résumés de l'état actuel</div>
 	 * <div class="it">Riassunti dello stato attuale</div>
@@ -136,65 +140,44 @@ public enum ClassCode implements ValueSetEnumInterface {
 			"Present State Summary (record artifact)", "Present State Summaries",
 			"Aktueller Zustand", "Résumés de l'état actuel", "Riassunti dello stato attuale"),
 	/**
-	 * <div class="en">Care Plans</div>
-	 * <div class="de">Behandlungspläne/Behandlungsschemata</div>
-	 * <div class="fr">Plans de soins</div> <div class="it">Piani di cura</div>
+	 * <div class="en">Progress Notes</div>
+	 * <div class="de">Verlaufseinträge/-notizen</div> <div class="fr">Notes de
+	 * suivi</div> <div class="it">Diario clinico</div>
 	 */
-	CARE_PLANS("1321000195103", "2.16.840.1.113883.6.96", "Care Plan (record artifact)",
-			"Care Plans", "Behandlungspläne/Behandlungsschemata", "Plans de soins",
-			"Piani di cura"),
+	PROGRESS_NOTES("1231000195106", "2.16.840.1.113883.6.96", "Progress Note (record artifact)",
+			"Progress Notes", "Verlaufseinträge/-notizen", "Notes de suivi", "Diario clinico"),
 	/**
-	 * <div class="en">Alerts</div> <div class="de">Warnungen/Risiken</div>
-	 * <div class="fr">Alertes</div> <div class="it">Avvertenze</div>
+	 * <div class="en">Progress Reports</div>
+	 * <div class="de">Verlaufsberichte</div> <div class="fr">Rapports
+	 * d'évolution</div> <div class="it">Rapporti di evoluzione</div>
 	 */
-	ALERTS("1331000195101", "2.16.840.1.113883.6.96", "Alert (record artifact)", "Alerts",
-			"Warnungen/Risiken", "Alertes", "Avvertenze"),
+	PROGRESS_REPORTS("371532007", "2.16.840.1.113883.6.96", "Progress report (qualifier value)",
+			"Progress Reports", "Verlaufsberichte", "Rapports d'évolution",
+			"Rapporti di evoluzione"),
 	/**
-	 * <div class="en">Data from Patient</div> <div class="de">Eigene Daten des
-	 * Patienten</div> <div class="fr">Documents introduits par le patient</div>
-	 * <div class="it">Documenti inseriti dal paziente</div>
+	 * <div class="en">Tests/Procedure Requests</div>
+	 * <div class="de">Untersuchungs-/Prozeduranforderungen</div>
+	 * <div class="fr">Demandes d'examen / procédure</div>
+	 * <div class="it">Richieste d'esame</div>
 	 */
-	DATA_FROM_PATIENT("1351000195107", "2.16.840.1.113883.6.96",
-			"Data from Patient (record artifact)", "Data from Patient",
-			"Eigene Daten des Patienten", "Documents introduits par le patient",
-			"Documenti inseriti dal paziente"),
-	/**
-	 * <div class="en">Other Composition</div> <div class="de">Anderweitige
-	 * Dokumente</div> <div class="fr">Autre</div> <div class="it">Altro</div>
-	 */
-	OTHER_COMPOSITION("419891008", "2.16.840.1.113883.6.96", "Other Composition",
-			"Other Composition", "Anderweitige Dokumente", "Autre", "Altro");
+	TESTS_PROCEDURE_REQUESTS("1251000195100", "2.16.840.1.113883.6.96",
+			"Test or Procedure Request (record artifact)", "Tests/Procedure Requests",
+			"Untersuchungs-/Prozeduranforderungen", "Demandes d'examen / procédure",
+			"Richieste d'esame");
 
 	/**
-	 * <div class="en">Code for Notes on Consultations</div>
-	 * <div class="de">Code für Konsultationseinträge/-notizen</div>
-	 * <div class="fr">Code de Notes de consultation</div> <div class="it">Code
-	 * per Rapporti e note di consultazione</div>
+	 * <div class="en">Code for Alerts</div> <div class="de">Code für
+	 * Warnungen/Risiken</div> <div class="fr">Code de Alertes</div>
+	 * <div class="it">Code per Avvertenze</div>
 	 */
-	public static final String NOTES_ON_CONSULTATIONS_CODE = "1211000195104";
+	public static final String ALERTS_CODE = "1331000195101";
 
 	/**
-	 * <div class="en">Code for Progress Notes</div> <div class="de">Code für
-	 * Verlaufseinträge/-notizen</div> <div class="fr">Code de Notes de
-	 * suivi</div> <div class="it">Code per Diario clinico</div>
+	 * <div class="en">Code for Care Plans</div> <div class="de">Code für
+	 * Behandlungspläne/Behandlungsschemata</div> <div class="fr">Code de Plans
+	 * de soins</div> <div class="it">Code per Piani di cura</div>
 	 */
-	public static final String PROGRESS_NOTES_CODE = "1231000195106";
-
-	/**
-	 * <div class="en">Code for Notes on Procedures</div> <div class="de">Code
-	 * für Interventionseinträge/-notizen</div> <div class="fr">Code de Notes
-	 * d'intervention</div> <div class="it">Code per Rapporti e note
-	 * d'intervento</div>
-	 */
-	public static final String NOTES_ON_PROCEDURES_CODE = "1241000195103";
-
-	/**
-	 * <div class="en">Code for Tests/Procedure Requests</div>
-	 * <div class="de">Code für Untersuchungs-/Prozeduranforderungen</div>
-	 * <div class="fr">Code de Demandes d'examen / procédure</div>
-	 * <div class="it">Code per Richieste d'esame</div>
-	 */
-	public static final String TESTS_PROCEDURE_REQUESTS_CODE = "1251000195100";
+	public static final String CARE_PLANS_CODE = "1321000195103";
 
 	/**
 	 * <div class="en">Code for Clinical Care Referrals</div>
@@ -205,19 +188,12 @@ public enum ClassCode implements ValueSetEnumInterface {
 	public static final String CLINICAL_CARE_REFERRALS_CODE = "1261000195102";
 
 	/**
-	 * <div class="en">Code for Episode Summary Reports</div>
-	 * <div class="de">Code für Zusammenfassende Berichte</div>
-	 * <div class="fr">Code de Résumés d'épisode</div> <div class="it">Code per
-	 * Riassunti di episodio</div>
+	 * <div class="en">Code for Data from Patient</div> <div class="de">Code für
+	 * Eigene Daten des Patienten</div> <div class="fr">Code de Documents
+	 * introduits par le patient</div> <div class="it">Code per Documenti
+	 * inseriti dal paziente</div>
 	 */
-	public static final String EPISODE_SUMMARY_REPORTS_CODE = "1271000195108";
-
-	/**
-	 * <div class="en">Code for Progress Reports</div> <div class="de">Code für
-	 * Verlaufsberichte</div> <div class="fr">Code de Rapports d'évolution</div>
-	 * <div class="it">Code per Rapporti di evoluzione</div>
-	 */
-	public static final String PROGRESS_REPORTS_CODE = "371532007";
+	public static final String DATA_FROM_PATIENT_CODE = "1351000195107";
 
 	/**
 	 * <div class="en">Code for Diagnostic Test Results</div>
@@ -228,12 +204,12 @@ public enum ClassCode implements ValueSetEnumInterface {
 	public static final String DIAGNOSTIC_TEST_RESULTS_CODE = "1291000195107";
 
 	/**
-	 * <div class="en">Code for Notifications</div> <div class="de">Code für
-	 * Meldungen</div> <div class="fr">Code de Notifications /
-	 * déclarations</div> <div class="it">Code per Notifiche /
-	 * dichiarazioni</div>
+	 * <div class="en">Code for Episode Summary Reports</div>
+	 * <div class="de">Code für Zusammenfassende Berichte</div>
+	 * <div class="fr">Code de Résumés d'épisode</div> <div class="it">Code per
+	 * Riassunti di episodio</div>
 	 */
-	public static final String NOTIFICATIONS_CODE = "1301000195106";
+	public static final String EPISODE_SUMMARY_REPORTS_CODE = "1271000195108";
 
 	/**
 	 * <div class="en">Code for Historic Overviews</div> <div class="de">Code
@@ -244,34 +220,28 @@ public enum ClassCode implements ValueSetEnumInterface {
 	public static final String HISTORIC_OVERVIEWS_CODE = "1281000195105";
 
 	/**
-	 * <div class="en">Code for Present State Summaries</div>
-	 * <div class="de">Code für Aktueller Zustand</div> <div class="fr">Code de
-	 * Résumés de l'état actuel</div> <div class="it">Code per Riassunti dello
-	 * stato attuale</div>
+	 * <div class="en">Code for Notes on Consultations</div>
+	 * <div class="de">Code für Konsultationseinträge/-notizen</div>
+	 * <div class="fr">Code de Notes de consultation</div> <div class="it">Code
+	 * per Rapporti e note di consultazione</div>
 	 */
-	public static final String PRESENT_STATE_SUMMARIES_CODE = "1311000195108";
+	public static final String NOTES_ON_CONSULTATIONS_CODE = "1211000195104";
 
 	/**
-	 * <div class="en">Code for Care Plans</div> <div class="de">Code für
-	 * Behandlungspläne/Behandlungsschemata</div> <div class="fr">Code de Plans
-	 * de soins</div> <div class="it">Code per Piani di cura</div>
+	 * <div class="en">Code for Notes on Procedures</div> <div class="de">Code
+	 * für Interventionseinträge/-notizen</div> <div class="fr">Code de Notes
+	 * d'intervention</div> <div class="it">Code per Rapporti e note
+	 * d'intervento</div>
 	 */
-	public static final String CARE_PLANS_CODE = "1321000195103";
+	public static final String NOTES_ON_PROCEDURES_CODE = "1241000195103";
 
 	/**
-	 * <div class="en">Code for Alerts</div> <div class="de">Code für
-	 * Warnungen/Risiken</div> <div class="fr">Code de Alertes</div>
-	 * <div class="it">Code per Avvertenze</div>
+	 * <div class="en">Code for Notifications</div> <div class="de">Code für
+	 * Meldungen</div> <div class="fr">Code de Notifications /
+	 * déclarations</div> <div class="it">Code per Notifiche /
+	 * dichiarazioni</div>
 	 */
-	public static final String ALERTS_CODE = "1331000195101";
-
-	/**
-	 * <div class="en">Code for Data from Patient</div> <div class="de">Code für
-	 * Eigene Daten des Patienten</div> <div class="fr">Code de Documents
-	 * introduits par le patient</div> <div class="it">Code per Documenti
-	 * inseriti dal paziente</div>
-	 */
-	public static final String DATA_FROM_PATIENT_CODE = "1351000195107";
+	public static final String NOTIFICATIONS_CODE = "1301000195106";
 
 	/**
 	 * <div class="en">Code for Other Composition</div> <div class="de">Code für
@@ -281,16 +251,46 @@ public enum ClassCode implements ValueSetEnumInterface {
 	public static final String OTHER_COMPOSITION_CODE = "419891008";
 
 	/**
-	 * <div class="en">Name of the value set</div> <div class="de">Name des
-	 * Value Sets</div>
+	 * <div class="en">Code for Present State Summaries</div>
+	 * <div class="de">Code für Aktueller Zustand</div> <div class="fr">Code de
+	 * Résumés de l'état actuel</div> <div class="it">Code per Riassunti dello
+	 * stato attuale</div>
 	 */
-	public static final String VALUE_SET_NAME = "epd_xds_classCode";
+	public static final String PRESENT_STATE_SUMMARIES_CODE = "1311000195108";
+
+	/**
+	 * <div class="en">Code for Progress Notes</div> <div class="de">Code für
+	 * Verlaufseinträge/-notizen</div> <div class="fr">Code de Notes de
+	 * suivi</div> <div class="it">Code per Diario clinico</div>
+	 */
+	public static final String PROGRESS_NOTES_CODE = "1231000195106";
+
+	/**
+	 * <div class="en">Code for Progress Reports</div> <div class="de">Code für
+	 * Verlaufsberichte</div> <div class="fr">Code de Rapports d'évolution</div>
+	 * <div class="it">Code per Rapporti di evoluzione</div>
+	 */
+	public static final String PROGRESS_REPORTS_CODE = "371532007";
+
+	/**
+	 * <div class="en">Code for Tests/Procedure Requests</div>
+	 * <div class="de">Code für Untersuchungs-/Prozeduranforderungen</div>
+	 * <div class="fr">Code de Demandes d'examen / procédure</div>
+	 * <div class="it">Code per Richieste d'esame</div>
+	 */
+	public static final String TESTS_PROCEDURE_REQUESTS_CODE = "1251000195100";
 
 	/**
 	 * <div class="en">Identifier of the value set</div>
 	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.3";
+
+	/**
+	 * <div class="en">Name of the value set</div> <div class="de">Name des
+	 * Value Sets</div>
+	 */
+	public static final String VALUE_SET_NAME = "epd_xds_classCode";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -349,11 +349,6 @@ public enum ClassCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * The display names per language
-	 */
-	private Map<LanguageCode, String> displayNames;
-
-	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>
@@ -365,6 +360,11 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
 	 */
 	private String codeSystem;
+
+	/**
+	 * The display names per language
+	 */
+	private Map<LanguageCode, String> displayNames;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and

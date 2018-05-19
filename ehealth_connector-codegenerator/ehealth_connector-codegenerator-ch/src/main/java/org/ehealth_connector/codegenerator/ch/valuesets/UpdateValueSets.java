@@ -80,16 +80,41 @@ public class UpdateValueSets {
 	private static Logger log = LoggerFactory.getLogger(UpdateValueSets.class);
 
 	/**
-	 * <div class="en">Relative path to the root of the maven project
-	 * structure.</div>
+	 * <div class="en">Javadoc comment prefix for the code fields.</div>
 	 */
-	private static final String PROJECT_ROOT_RELATIVE_PATH = "../../../";
+	private static final Map<LanguageCode, String> CODE_JAVADOC_PREFIX = ImmutableMap.of(ENGLISH,
+			"Code for ", GERMAN, "Code für ", FRENCH, "Code de ", ITALIAN, "Code per ");
 
 	/**
 	 * <div class="en">Base path where to find the config files for the
 	 * generator (YAML and JSON files).</div>
 	 */
 	private static final String CONFIG_FILE_BASE_PATH = "./";
+
+	/**
+	 * <div class="en">List of all languages that should be used to generate
+	 * javadoc comments.</div>
+	 */
+	private static final List<LanguageCode> LANGUAGE_CODES = asList(ENGLISH, GERMAN, FRENCH,
+			ITALIAN);
+
+	/**
+	 * <div class="en">Java code formatter/pretty printer configuration used to
+	 * write Java code.</div>
+	 */
+	private static final PrettyPrinterConfiguration PRETTY_PRINTER_CONFIGURATION = new PrettyPrinterConfiguration()
+			.setIndent("\t").setMaxEnumConstantsToAlignHorizontally(1);
+
+	/**
+	 * <div class="en">Relative path to the root of the maven project
+	 * structure.</div>
+	 */
+	private static final String PROJECT_ROOT_RELATIVE_PATH = "../../../";
+
+	/**
+	 * <div class="en">Shortcut for the internal type of a string.</div>
+	 */
+	private static final Type STRING_TYPE = parseClassOrInterfaceType("String");
 
 	/**
 	 * <div class="en">Relative path where to find the Java template text
@@ -108,31 +133,6 @@ public class UpdateValueSets {
 	 * the actual generated enum name.</div>
 	 */
 	private static final String TEMPLATE_PACKAGE_NAME_TO_REPLACE = "TemplatePackageNameToReplace";
-
-	/**
-	 * <div class="en">Java code formatter/pretty printer configuration used to
-	 * write Java code.</div>
-	 */
-	private static final PrettyPrinterConfiguration PRETTY_PRINTER_CONFIGURATION = new PrettyPrinterConfiguration()
-			.setIndent("\t").setMaxEnumConstantsToAlignHorizontally(1);
-
-	/**
-	 * <div class="en">List of all languages that should be used to generate
-	 * javadoc comments.</div>
-	 */
-	private static final List<LanguageCode> LANGUAGE_CODES = asList(ENGLISH, GERMAN, FRENCH,
-			ITALIAN);
-
-	/**
-	 * <div class="en">Javadoc comment prefix for the code fields.</div>
-	 */
-	private static final Map<LanguageCode, String> CODE_JAVADOC_PREFIX = ImmutableMap.of(ENGLISH,
-			"Code for ", GERMAN, "Code für ", FRENCH, "Code de ", ITALIAN, "Code per ");
-
-	/**
-	 * <div class="en">Shortcut for the internal type of a string.</div>
-	 */
-	private static final Type STRING_TYPE = parseClassOrInterfaceType("String");
 
 	/**
 	 * <div class="en">Adds all concepts of the value set definition as enum

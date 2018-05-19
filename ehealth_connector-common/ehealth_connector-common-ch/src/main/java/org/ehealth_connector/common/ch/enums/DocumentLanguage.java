@@ -40,17 +40,23 @@ import org.ehealth_connector.common.enums.LanguageCode;
 public enum DocumentLanguage implements ValueSetEnumInterface {
 
 	/**
-	 * <div class="en">German</div> <div class="de">Deutsch</div>
-	 * <div class="fr">Allemand</div> <div class="it">Tedesco</div>
+	 * <div class="en">English</div> <div class="de">Englisch</div>
+	 * <div class="fr">Anglais</div> <div class="it">Inglese</div>
 	 */
-	GERMAN("de-CH", "2.16.840.1.113883.6.316", "German ", "German", "Deutsch", "Allemand",
-			"Tedesco"),
+	ENGLISH("en-US", "2.16.840.1.113883.6.316", "English language (qualifier value)", "English",
+			"Englisch", "Anglais", "Inglese"),
 	/**
 	 * <div class="en">French</div> <div class="de">Französisch</div>
 	 * <div class="fr">Français </div> <div class="it">Francese</div>
 	 */
 	FRENCH("fr-CH", "2.16.840.1.113883.6.316", "French", "French", "Französisch", "Français ",
 			"Francese"),
+	/**
+	 * <div class="en">German</div> <div class="de">Deutsch</div>
+	 * <div class="fr">Allemand</div> <div class="it">Tedesco</div>
+	 */
+	GERMAN("de-CH", "2.16.840.1.113883.6.316", "German ", "German", "Deutsch", "Allemand",
+			"Tedesco"),
 	/**
 	 * <div class="en">Italian</div> <div class="de">Italienisch</div>
 	 * <div class="fr">Italien</div> <div class="it">Italiano</div>
@@ -62,20 +68,14 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	 * <div class="fr">Rhéto-roman</div> <div class="it">Romancio</div>
 	 */
 	RHAETO_ROMANIC("rm", "2.16.840.1.113883.6.316", "Rhaeto-Romanic", "Rhaeto-Romanic ",
-			"Rätoromanisch", "Rhéto-roman", "Romancio"),
-	/**
-	 * <div class="en">English</div> <div class="de">Englisch</div>
-	 * <div class="fr">Anglais</div> <div class="it">Inglese</div>
-	 */
-	ENGLISH("en-US", "2.16.840.1.113883.6.316", "English language (qualifier value)", "English",
-			"Englisch", "Anglais", "Inglese");
+			"Rätoromanisch", "Rhéto-roman", "Romancio");
 
 	/**
-	 * <div class="en">Code for German</div> <div class="de">Code für
-	 * Deutsch</div> <div class="fr">Code de Allemand</div> <div class="it">Code
-	 * per Tedesco</div>
+	 * <div class="en">Code for English</div> <div class="de">Code für
+	 * Englisch</div> <div class="fr">Code de Anglais</div> <div class="it">Code
+	 * per Inglese</div>
 	 */
-	public static final String GERMAN_CODE = "de-CH";
+	public static final String ENGLISH_CODE = "en-US";
 
 	/**
 	 * <div class="en">Code for French</div> <div class="de">Code für
@@ -83,6 +83,13 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	 * <div class="it">Code per Francese</div>
 	 */
 	public static final String FRENCH_CODE = "fr-CH";
+
+	/**
+	 * <div class="en">Code for German</div> <div class="de">Code für
+	 * Deutsch</div> <div class="fr">Code de Allemand</div> <div class="it">Code
+	 * per Tedesco</div>
+	 */
+	public static final String GERMAN_CODE = "de-CH";
 
 	/**
 	 * <div class="en">Code for Italian</div> <div class="de">Code für
@@ -99,23 +106,16 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	public static final String RHAETO_ROMANIC_CODE = "rm";
 
 	/**
-	 * <div class="en">Code for English</div> <div class="de">Code für
-	 * Englisch</div> <div class="fr">Code de Anglais</div> <div class="it">Code
-	 * per Inglese</div>
+	 * <div class="en">Identifier of the value set</div>
+	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
 	 */
-	public static final String ENGLISH_CODE = "en-US";
+	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.13";
 
 	/**
 	 * <div class="en">Name of the value set</div> <div class="de">Name des
 	 * Value Sets</div>
 	 */
 	public static final String VALUE_SET_NAME = "epd_xds_documentLanguage";
-
-	/**
-	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
-	 */
-	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.13";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -174,11 +174,6 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * The display names per language
-	 */
-	private Map<LanguageCode, String> displayNames;
-
-	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>
@@ -190,6 +185,11 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
 	 */
 	private String codeSystem;
+
+	/**
+	 * The display names per language
+	 */
+	private Map<LanguageCode, String> displayNames;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and

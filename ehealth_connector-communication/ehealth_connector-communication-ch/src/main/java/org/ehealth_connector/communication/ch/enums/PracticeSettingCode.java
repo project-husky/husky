@@ -57,6 +57,68 @@ import org.ehealth_connector.common.enums.LanguageCode;
 public enum PracticeSettingCode implements ValueSetEnumInterface {
 
 	/**
+	 * <div class="en">Accident &amp; emergency</div> <div class="de">Notfall-
+	 * und Rettungsmedizin</div> <div class="fr">Médecine d'urgence et de
+	 * sauvetage</div> <div class="it">Medicina d'urgenza e di salvataggio</div>
+	 */
+	ACCIDENT_AND_EMERGENCY("394576009", "2.16.840.1.113883.6.96",
+			"Accident &amp; emergency (qualifier value)", "Accident &amp; emergency",
+			"Notfall- und Rettungsmedizin", "Médecine d'urgence et de sauvetage",
+			"Medicina d'urgenza e di salvataggio"),
+	/**
+	 * <div class="en">Anaesthesiology</div>
+	 * <div class="de">Anästhesiologie</div>
+	 * <div class="fr">Anesthésiologie</div>
+	 * <div class="it">Anestesiologia</div>
+	 */
+	ANAESTHESIOLOGY("394577000", "2.16.840.1.113883.6.96", "Anesthetics (qualifier value)",
+			"Anaesthesiology", "Anästhesiologie", "Anesthésiologie", "Anestesiologia"),
+	/**
+	 * <div class="en">Cardiac surgery</div> <div class="de">Herzchirurgie</div>
+	 * <div class="fr">Chirurgie cardiovasculaire</div>
+	 * <div class="it">Chirurgia cardiovascolare</div>
+	 */
+	CARDIAC_SURGERY("408466002", "2.16.840.1.113883.6.96", "Cardiac surgery (qualifier value)",
+			"Cardiac surgery", "Herzchirurgie", "Chirurgie cardiovasculaire",
+			"Chirurgia cardiovascolare"),
+	/**
+	 * <div class="en">Cardiology</div> <div class="de">Kardiologie</div>
+	 * <div class="fr">Cardiologie</div> <div class="it">Cardiologia</div>
+	 */
+	CARDIOLOGY("394579002", "2.16.840.1.113883.6.96", "Cardiology (qualifier value)", "Cardiology",
+			"Kardiologie", "Cardiologie", "Cardiologia"),
+	/**
+	 * <div class="en">Chiropractic service </div>
+	 * <div class="de">Chiropraktik</div> <div class="fr">Chiropractie</div>
+	 * <div class="it">Chiropratica</div>
+	 */
+	CHIROPRACTIC_SERVICE("722170006", "2.16.840.1.113883.6.96",
+			"Chiropractic service (qualifier value)", "Chiropractic service ", "Chiropraktik",
+			"Chiropractie", "Chiropratica"),
+	/**
+	 * <div class="en">Clinical genetics</div> <div class="de">Medizinische
+	 * Genetik</div> <div class="fr">Génétique médicale</div>
+	 * <div class="it">Genetica medica</div>
+	 */
+	CLINICAL_GENETICS("394580004", "2.16.840.1.113883.6.96", "Clinical genetics (qualifier value)",
+			"Clinical genetics", "Medizinische Genetik", "Génétique médicale", "Genetica medica"),
+	/**
+	 * <div class="en">Clinical haematology</div>
+	 * <div class="de">Hämatologie</div> <div class="fr">Hématologie</div>
+	 * <div class="it">Ematologia</div>
+	 */
+	CLINICAL_HAEMATOLOGY("394803006", "2.16.840.1.113883.6.96",
+			"Clinical hematology (qualifier value)", "Clinical haematology", "Hämatologie",
+			"Hématologie", "Ematologia"),
+	/**
+	 * <div class="en">Clinical immunology</div>
+	 * <div class="de">Immunologie</div> <div class="fr">Immunologie</div>
+	 * <div class="it">Immunologia</div>
+	 */
+	CLINICAL_IMMUNOLOGY("408480009", "2.16.840.1.113883.6.96",
+			"Clinical immunology (qualifier value)", "Clinical immunology", "Immunologie",
+			"Immunologie", "Immunologia"),
+	/**
 	 * <div class="en">Clinical immunology/allergy</div>
 	 * <div class="de">Immunologie/Allergologie</div>
 	 * <div class="fr">Immunologie/Allergologie</div>
@@ -67,48 +129,44 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 			"Immunologie/Allergologie", "Immunologie/Allergologie",
 			"Allergologia e immunologia clinica"),
 	/**
-	 * <div class="en">General medicine </div>
-	 * <div class="de">Allgemeinmedizin</div> <div class="fr">Médecine générale
-	 * </div> <div class="it">Medicina generale </div>
+	 * <div class="en">Clinical oncology</div> <div class="de">Onkologie</div>
+	 * <div class="fr">Oncologie</div> <div class="it">Oncologia medica</div>
 	 */
-	GENERAL_MEDICINE("394802001", "2.16.840.1.113883.6.96", "General medicine (qualifier value)",
-			"General medicine ", "Allgemeinmedizin", "Médecine générale ", "Medicina generale "),
+	CLINICAL_ONCOLOGY("394592004", "2.16.840.1.113883.6.96", "Clinical oncology (qualifier value)",
+			"Clinical oncology", "Onkologie", "Oncologie", "Oncologia medica"),
 	/**
-	 * <div class="en">Anaesthesiology</div>
-	 * <div class="de">Anästhesiologie</div>
-	 * <div class="fr">Anesthésiologie</div>
-	 * <div class="it">Anestesiologia</div>
+	 * <div class="en">Clinical pharmacology</div> <div class="de">Klinische
+	 * Pharmakologie</div> <div class="fr">Pharmacologie clinique</div>
+	 * <div class="it">Farmacologia clinica</div>
 	 */
-	ANAESTHESIOLOGY("394577000", "2.16.840.1.113883.6.96", "Anesthetics (qualifier value)",
-			"Anaesthesiology", "Anästhesiologie", "Anesthésiologie", "Anestesiologia"),
+	CLINICAL_PHARMACOLOGY("394600006", "2.16.840.1.113883.6.96",
+			"Clinical pharmacology (qualifier value)", "Clinical pharmacology",
+			"Klinische Pharmakologie", "Pharmacologie clinique", "Farmacologia clinica"),
 	/**
-	 * <div class="en">Vascular medicine</div> <div class="de">Angiologie</div>
-	 * <div class="fr">Angiologie</div> <div class="it">Angiologia</div>
+	 * <div class="en">Complementary therapy</div>
+	 * <div class="de">Komplementärmedizin</div> <div class="fr">Médecine
+	 * alternative et complémentaire</div> <div class="it">Medicina
+	 * complementare</div>
 	 */
-	VASCULAR_MEDICINE("722414000", "2.16.840.1.113883.6.96", "Vascular medicine (qualifier value)",
-			"Vascular medicine", "Angiologie", "Angiologie", "Angiologia"),
+	COMPLEMENTARY_THERAPY("310025004", "2.16.840.1.113883.6.96",
+			"Complementary therapy service (qualifier value)", "Complementary therapy",
+			"Komplementärmedizin", "Médecine alternative et complémentaire",
+			"Medicina complementare"),
 	/**
-	 * <div class="en">Occupational medicine</div>
-	 * <div class="de">Arbeitsmedizin</div> <div class="fr">Médecine du
-	 * travail</div> <div class="it">Medicina del lavoro</div>
+	 * <div class="en">Critical care medicine</div>
+	 * <div class="de">Intensivmedizin</div> <div class="fr">Médecine
+	 * intensive</div> <div class="it">Medicina intensiva</div>
 	 */
-	OCCUPATIONAL_MEDICINE("394821009", "2.16.840.1.113883.6.96",
-			"Occupational medicine (qualifier value)", "Occupational medicine", "Arbeitsmedizin",
-			"Médecine du travail", "Medicina del lavoro"),
+	CRITICAL_CARE_MEDICINE("408478003", "2.16.840.1.113883.6.96",
+			"Critical care medicine (qualifier value)", "Critical care medicine", "Intensivmedizin",
+			"Médecine intensive", "Medicina intensiva"),
 	/**
-	 * <div class="en">Chiropractic service </div>
-	 * <div class="de">Chiropraktik</div> <div class="fr">Chiropractie</div>
-	 * <div class="it">Chiropratica</div>
+	 * <div class="en">Dental medicine</div> <div class="de">Zahnheilkunde</div>
+	 * <div class="fr">Odontologie</div> <div class="it">Odontoiatria</div>
 	 */
-	CHIROPRACTIC_SERVICE("722170006", "2.16.840.1.113883.6.96",
-			"Chiropractic service (qualifier value)", "Chiropractic service ", "Chiropraktik",
-			"Chiropractie", "Chiropratica"),
-	/**
-	 * <div class="en">General surgery</div> <div class="de">Chirurgie</div>
-	 * <div class="fr">Chirurgie</div> <div class="it">Chirurgia</div>
-	 */
-	GENERAL_SURGERY("394609007", "2.16.840.1.113883.6.96", "General surgery (qualifier value)",
-			"General surgery", "Chirurgie", "Chirurgie", "Chirurgia"),
+	DENTAL_MEDICINE("394812008", "2.16.840.1.113883.6.96",
+			"Dental medicine specialties (qualifier value)", "Dental medicine", "Zahnheilkunde",
+			"Odontologie", "Odontoiatria"),
 	/**
 	 * <div class="en">Dermatology</div> <div class="de">Dermatologie und
 	 * Venerologie</div> <div class="fr">Dermatologie et vénérologie</div>
@@ -117,6 +175,14 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	DERMATOLOGY("394582007", "2.16.840.1.113883.6.96", "Dermatology (qualifier value)",
 			"Dermatology", "Dermatologie und Venerologie", "Dermatologie et vénérologie",
 			"Dermatologia e venereologia"),
+	/**
+	 * <div class="en">Dietetics and nutrition</div>
+	 * <div class="de">Ernährungsberatung</div> <div class="fr">Conseil en
+	 * nutrition et diététique</div> <div class="it">Dietetica</div>
+	 */
+	DIETETICS_AND_NUTRITION("722164000", "2.16.840.1.113883.6.96",
+			"Dietetics and nutrition (qualifier value)", "Dietetics and nutrition",
+			"Ernährungsberatung", "Conseil en nutrition et diététique", "Dietetica"),
 	/**
 	 * <div class="en">Endocrinology</div>
 	 * <div class="de">Endokrinologie/Diabetologie</div>
@@ -127,22 +193,6 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 			"Endocrinology", "Endokrinologie/Diabetologie", "Endocrinologie/diabétologie",
 			"Endocrinologia/diabetologia"),
 	/**
-	 * <div class="en">Occupational therapy service</div>
-	 * <div class="de">Ergotherapie</div> <div class="fr">Ergothérapie</div>
-	 * <div class="it">Ergoterapia</div>
-	 */
-	OCCUPATIONAL_THERAPY_SERVICE("310093001", "2.16.840.1.113883.6.96",
-			"Occupational therapy service (qualifier value)", "Occupational therapy service",
-			"Ergotherapie", "Ergothérapie", "Ergoterapia"),
-	/**
-	 * <div class="en">Dietetics and nutrition</div>
-	 * <div class="de">Ernährungsberatung</div> <div class="fr">Conseil en
-	 * nutrition et diététique</div> <div class="it">Dietetica</div>
-	 */
-	DIETETICS_AND_NUTRITION("722164000", "2.16.840.1.113883.6.96",
-			"Dietetics and nutrition (qualifier value)", "Dietetics and nutrition",
-			"Ernährungsberatung", "Conseil en nutrition et diététique", "Dietetica"),
-	/**
 	 * <div class="en">Gastroenterology</div>
 	 * <div class="de">Gastroenterologie</div>
 	 * <div class="fr">Gastroentérologie</div>
@@ -150,6 +200,19 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 */
 	GASTROENTEROLOGY("394584008", "2.16.840.1.113883.6.96", "Gastroenterology (qualifier value)",
 			"Gastroenterology", "Gastroenterologie", "Gastroentérologie", "Gastroenterologia"),
+	/**
+	 * <div class="en">General medicine </div>
+	 * <div class="de">Allgemeinmedizin</div> <div class="fr">Médecine générale
+	 * </div> <div class="it">Medicina generale </div>
+	 */
+	GENERAL_MEDICINE("394802001", "2.16.840.1.113883.6.96", "General medicine (qualifier value)",
+			"General medicine ", "Allgemeinmedizin", "Médecine générale ", "Medicina generale "),
+	/**
+	 * <div class="en">General surgery</div> <div class="de">Chirurgie</div>
+	 * <div class="fr">Chirurgie</div> <div class="it">Chirurgia</div>
+	 */
+	GENERAL_SURGERY("394609007", "2.16.840.1.113883.6.96", "General surgery (qualifier value)",
+			"General surgery", "Chirurgie", "Chirurgie", "Chirurgia"),
 	/**
 	 * <div class="en">Geriatric medicine</div> <div class="de">Geriatrie</div>
 	 * <div class="fr">Gériatrie</div> <div class="it">Geriatria</div>
@@ -168,30 +231,6 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 			"Gynäkologie und Geburtshilfe", "Gynécologie et obstétrique",
 			"Ginecologia e ostetricia"),
 	/**
-	 * <div class="en">Clinical haematology</div>
-	 * <div class="de">Hämatologie</div> <div class="fr">Hématologie</div>
-	 * <div class="it">Ematologia</div>
-	 */
-	CLINICAL_HAEMATOLOGY("394803006", "2.16.840.1.113883.6.96",
-			"Clinical hematology (qualifier value)", "Clinical haematology", "Hämatologie",
-			"Hématologie", "Ematologia"),
-	/**
-	 * <div class="en">Cardiac surgery</div> <div class="de">Herzchirurgie</div>
-	 * <div class="fr">Chirurgie cardiovasculaire</div>
-	 * <div class="it">Chirurgia cardiovascolare</div>
-	 */
-	CARDIAC_SURGERY("408466002", "2.16.840.1.113883.6.96", "Cardiac surgery (qualifier value)",
-			"Cardiac surgery", "Herzchirurgie", "Chirurgie cardiovasculaire",
-			"Chirurgia cardiovascolare"),
-	/**
-	 * <div class="en">Clinical immunology</div>
-	 * <div class="de">Immunologie</div> <div class="fr">Immunologie</div>
-	 * <div class="it">Immunologia</div>
-	 */
-	CLINICAL_IMMUNOLOGY("408480009", "2.16.840.1.113883.6.96",
-			"Clinical immunology (qualifier value)", "Clinical immunology", "Immunologie",
-			"Immunologie", "Immunologia"),
-	/**
 	 * <div class="en">Infectious diseases</div>
 	 * <div class="de">Infektionskrankheiten</div> <div class="fr">Maladies
 	 * infectieuses</div> <div class="it">Malattia infettiva</div>
@@ -207,30 +246,6 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	INTERNAL_MEDICINE("419192003", "2.16.840.1.113883.6.96", "Internal medicine (qualifier value)",
 			"Internal medicine", "Innere Medizin", "Médecine interne", "Medicina interna"),
 	/**
-	 * <div class="en">Critical care medicine</div>
-	 * <div class="de">Intensivmedizin</div> <div class="fr">Médecine
-	 * intensive</div> <div class="it">Medicina intensiva</div>
-	 */
-	CRITICAL_CARE_MEDICINE("408478003", "2.16.840.1.113883.6.96",
-			"Critical care medicine (qualifier value)", "Critical care medicine", "Intensivmedizin",
-			"Médecine intensive", "Medicina intensiva"),
-	/**
-	 * <div class="en">Cardiology</div> <div class="de">Kardiologie</div>
-	 * <div class="fr">Cardiologie</div> <div class="it">Cardiologia</div>
-	 */
-	CARDIOLOGY("394579002", "2.16.840.1.113883.6.96", "Cardiology (qualifier value)", "Cardiology",
-			"Kardiologie", "Cardiologie", "Cardiologia"),
-	/**
-	 * <div class="en">Complementary therapy</div>
-	 * <div class="de">Komplementärmedizin</div> <div class="fr">Médecine
-	 * alternative et complémentaire</div> <div class="it">Medicina
-	 * complementare</div>
-	 */
-	COMPLEMENTARY_THERAPY("310025004", "2.16.840.1.113883.6.96",
-			"Complementary therapy service (qualifier value)", "Complementary therapy",
-			"Komplementärmedizin", "Médecine alternative et complémentaire",
-			"Medicina complementare"),
-	/**
 	 * <div class="en">Laboratory service</div>
 	 * <div class="de">Labormedizin</div> <div class="fr">Médecin de
 	 * laboratoire</div> <div class="it">Medicina di laboratorio</div>
@@ -239,20 +254,66 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 			"Clinical pathology service (qualifier value)", "Laboratory service", "Labormedizin",
 			"Médecin de laboratoire", "Medicina di laboratorio"),
 	/**
-	 * <div class="en">Speech and language therapy service</div>
-	 * <div class="de">Logopädie</div> <div class="fr">Logopédie</div>
-	 * <div class="it">Logopedia</div>
+	 * <div class="en">Legal medicine</div> <div class="de">Rechtsmedizin</div>
+	 * <div class="fr">Médecine légale</div> <div class="it">Medicina
+	 * legale</div>
 	 */
-	SPEECH_AND_LANGUAGE_THERAPY_SERVICE("310101009", "2.16.840.1.113883.6.96",
-			"Speech and language therapy service (qualifier value)",
-			"Speech and language therapy service", "Logopädie", "Logopédie", "Logopedia"),
+	LEGAL_MEDICINE("722204007", "2.16.840.1.113883.6.96", "Legal medicine (qualifier value)",
+			"Legal medicine", "Rechtsmedizin", "Médecine légale", "Medicina legale"),
 	/**
-	 * <div class="en">Clinical genetics</div> <div class="de">Medizinische
-	 * Genetik</div> <div class="fr">Génétique médicale</div>
-	 * <div class="it">Genetica medica</div>
+	 * <div class="en">Nephrology</div> <div class="de">Nephrologie</div>
+	 * <div class="fr">Néphrologie</div> <div class="it">Nefrologia</div>
 	 */
-	CLINICAL_GENETICS("394580004", "2.16.840.1.113883.6.96", "Clinical genetics (qualifier value)",
-			"Clinical genetics", "Medizinische Genetik", "Génétique médicale", "Genetica medica"),
+	NEPHROLOGY("394589003", "2.16.840.1.113883.6.96", "Nephrology (qualifier value)", "Nephrology",
+			"Nephrologie", "Néphrologie", "Nefrologia"),
+	/**
+	 * <div class="en">Neurology</div> <div class="de">Neurologie</div>
+	 * <div class="fr">Neurologie</div> <div class="it">Neurologia</div>
+	 */
+	NEUROLOGY("394591006", "2.16.840.1.113883.6.96", "Neurology (qualifier value)", "Neurology",
+			"Neurologie", "Neurologie", "Neurologia"),
+	/**
+	 * <div class="en">Neurosurgery</div> <div class="de">Neurochirurgie</div>
+	 * <div class="fr">Neurochirurgie</div> <div class="it">Neurochirurgia</div>
+	 */
+	NEUROSURGERY("394610002", "2.16.840.1.113883.6.96", "Neurosurgery (qualifier value)",
+			"Neurosurgery", "Neurochirurgie", "Neurochirurgie", "Neurochirurgia"),
+	/**
+	 * <div class="en">Nuclear medicine</div>
+	 * <div class="de">Nuklearmedizin</div> <div class="fr">Médecine
+	 * nucléaire</div> <div class="it">Medicina nucleare</div>
+	 */
+	NUCLEAR_MEDICINE("394649004", "2.16.840.1.113883.6.96",
+			"Nuclear medicine - specialty (qualifier value)", "Nuclear medicine", "Nuklearmedizin",
+			"Médecine nucléaire", "Medicina nucleare"),
+	/**
+	 * <div class="en">Nursing</div> <div class="de">Pflege</div>
+	 * <div class="fr">Soins</div> <div class="it">Cure infermieristiche</div>
+	 */
+	NURSING("722165004", "2.16.840.1.113883.6.96", "Nursing (qualifier value)", "Nursing", "Pflege",
+			"Soins", "Cure infermieristiche"),
+	/**
+	 * <div class="en">Occupational medicine</div>
+	 * <div class="de">Arbeitsmedizin</div> <div class="fr">Médecine du
+	 * travail</div> <div class="it">Medicina del lavoro</div>
+	 */
+	OCCUPATIONAL_MEDICINE("394821009", "2.16.840.1.113883.6.96",
+			"Occupational medicine (qualifier value)", "Occupational medicine", "Arbeitsmedizin",
+			"Médecine du travail", "Medicina del lavoro"),
+	/**
+	 * <div class="en">Occupational therapy service</div>
+	 * <div class="de">Ergotherapie</div> <div class="fr">Ergothérapie</div>
+	 * <div class="it">Ergoterapia</div>
+	 */
+	OCCUPATIONAL_THERAPY_SERVICE("310093001", "2.16.840.1.113883.6.96",
+			"Occupational therapy service (qualifier value)", "Occupational therapy service",
+			"Ergotherapie", "Ergothérapie", "Ergoterapia"),
+	/**
+	 * <div class="en">Ophthalmology</div> <div class="de">Ophthalmologie</div>
+	 * <div class="fr">Ophtalmologie</div> <div class="it">Oftalmologia</div>
+	 */
+	OPHTHALMOLOGY("394594003", "2.16.840.1.113883.6.96", "Ophthalmology (qualifier value)",
+			"Ophthalmology", "Ophthalmologie", "Ophtalmologie", "Oftalmologia"),
 	/**
 	 * <div class="en">Oral and maxillofacial surgery</div>
 	 * <div class="de">Mund-, Kiefer- und Gesichtschirurgie</div>
@@ -264,58 +325,6 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 			"Mund-, Kiefer- und Gesichtschirurgie", "Chirurgie dento-maxillo-faciale",
 			"Chirurgia oro-maxillo-facciale"),
 	/**
-	 * <div class="en">Nephrology</div> <div class="de">Nephrologie</div>
-	 * <div class="fr">Néphrologie</div> <div class="it">Nefrologia</div>
-	 */
-	NEPHROLOGY("394589003", "2.16.840.1.113883.6.96", "Nephrology (qualifier value)", "Nephrology",
-			"Nephrologie", "Néphrologie", "Nefrologia"),
-	/**
-	 * <div class="en">Neurosurgery</div> <div class="de">Neurochirurgie</div>
-	 * <div class="fr">Neurochirurgie</div> <div class="it">Neurochirurgia</div>
-	 */
-	NEUROSURGERY("394610002", "2.16.840.1.113883.6.96", "Neurosurgery (qualifier value)",
-			"Neurosurgery", "Neurochirurgie", "Neurochirurgie", "Neurochirurgia"),
-	/**
-	 * <div class="en">Neurology</div> <div class="de">Neurologie</div>
-	 * <div class="fr">Neurologie</div> <div class="it">Neurologia</div>
-	 */
-	NEUROLOGY("394591006", "2.16.840.1.113883.6.96", "Neurology (qualifier value)", "Neurology",
-			"Neurologie", "Neurologie", "Neurologia"),
-	/**
-	 * <div class="en">Accident &amp; emergency</div> <div class="de">Notfall-
-	 * und Rettungsmedizin</div> <div class="fr">Médecine d'urgence et de
-	 * sauvetage</div> <div class="it">Medicina d'urgenza e di salvataggio</div>
-	 */
-	ACCIDENT_AND_EMERGENCY("394576009", "2.16.840.1.113883.6.96",
-			"Accident &amp; emergency (qualifier value)", "Accident &amp; emergency",
-			"Notfall- und Rettungsmedizin", "Médecine d'urgence et de sauvetage",
-			"Medicina d'urgenza e di salvataggio"),
-	/**
-	 * <div class="en">Nuclear medicine</div>
-	 * <div class="de">Nuklearmedizin</div> <div class="fr">Médecine
-	 * nucléaire</div> <div class="it">Medicina nucleare</div>
-	 */
-	NUCLEAR_MEDICINE("394649004", "2.16.840.1.113883.6.96",
-			"Nuclear medicine - specialty (qualifier value)", "Nuclear medicine", "Nuklearmedizin",
-			"Médecine nucléaire", "Medicina nucleare"),
-	/**
-	 * <div class="en">Ophthalmology</div> <div class="de">Ophthalmologie</div>
-	 * <div class="fr">Ophtalmologie</div> <div class="it">Oftalmologia</div>
-	 */
-	OPHTHALMOLOGY("394594003", "2.16.840.1.113883.6.96", "Ophthalmology (qualifier value)",
-			"Ophthalmology", "Ophthalmologie", "Ophtalmologie", "Oftalmologia"),
-	/**
-	 * <div class="en">Trauma and orthopedics</div> <div class="de">Orthopädie
-	 * und Traumatologie</div> <div class="fr">Chirurgie orthopédique et
-	 * traumatologie de l'appareil locomoteur</div> <div class="it">Chirurgia
-	 * ortopedica e traumatologia dell'apparato locomotore</div>
-	 */
-	TRAUMA_AND_ORTHOPEDICS("394801008", "2.16.840.1.113883.6.96",
-			"Trauma and orthopedics (qualifier value)", "Trauma and orthopedics",
-			"Orthopädie und Traumatologie",
-			"Chirurgie orthopédique et traumatologie de l'appareil locomoteur",
-			"Chirurgia ortopedica e traumatologia dell'apparato locomotore"),
-	/**
 	 * <div class="en">Osteopathic manipulative medicine</div>
 	 * <div class="de">Osteopathie</div> <div class="fr">Ostéopathie</div>
 	 * <div class="it">Osteopatia</div>
@@ -323,6 +332,17 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	OSTEOPATHIC_MANIPULATIVE_MEDICINE("416304004", "2.16.840.1.113883.6.96",
 			"Osteopathic manipulative medicine (qualifier value)",
 			"Osteopathic manipulative medicine", "Osteopathie", "Ostéopathie", "Osteopatia"),
+	/**
+	 * <div class="en">other Clinical specialty</div> <div class="de">Andere
+	 * nicht näher spezifizierte medzinische Fachrichtung</div>
+	 * <div class="fr">Autres spécialisations non spécifiées</div>
+	 * <div class="it">Altre specialità mediche non meglio precisate</div>
+	 */
+	OTHER_CLINICAL_SPECIALTY("394658006", "2.16.840.1.113883.6.96",
+			"Clinical specialty (qualifier value)", "other Clinical specialty",
+			"Andere nicht näher spezifizierte medzinische Fachrichtung",
+			"Autres spécialisations non spécifiées",
+			"Altre specialità mediche non meglio precisate"),
 	/**
 	 * <div class="en">Otolaryngology</div>
 	 * <div class="de">Oto-Rhino-Laryngologie</div>
@@ -332,12 +352,6 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	OTOLARYNGOLOGY("418960008", "2.16.840.1.113883.6.96", "Otolaryngology (qualifier value)",
 			"Otolaryngology", "Oto-Rhino-Laryngologie", "Oto-rhino-laryngologie",
 			"Otorinolaringoiatria"),
-	/**
-	 * <div class="en">Pediatrics</div> <div class="de">Pädiatrie</div>
-	 * <div class="fr">Pédiatrie</div> <div class="it">Pediatria</div>
-	 */
-	PEDIATRICS("394537008", "2.16.840.1.113883.6.96", "Pediatric specialty (qualifier value)",
-			"Pediatrics", "Pädiatrie", "Pédiatrie", "Pediatria"),
 	/**
 	 * <div class="en">Palliative medicine</div>
 	 * <div class="de">Palliativmedizin</div> <div class="fr">Médecine
@@ -353,19 +367,11 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	PATHOLOGY("394595002", "2.16.840.1.113883.6.96", "Pathology (qualifier value)", "Pathology",
 			"Pathologie", "Pathologie", "Patologia"),
 	/**
-	 * <div class="en">Nursing</div> <div class="de">Pflege</div>
-	 * <div class="fr">Soins</div> <div class="it">Cure infermieristiche</div>
+	 * <div class="en">Pediatrics</div> <div class="de">Pädiatrie</div>
+	 * <div class="fr">Pédiatrie</div> <div class="it">Pediatria</div>
 	 */
-	NURSING("722165004", "2.16.840.1.113883.6.96", "Nursing (qualifier value)", "Nursing", "Pflege",
-			"Soins", "Cure infermieristiche"),
-	/**
-	 * <div class="en">Clinical pharmacology</div> <div class="de">Klinische
-	 * Pharmakologie</div> <div class="fr">Pharmacologie clinique</div>
-	 * <div class="it">Farmacologia clinica</div>
-	 */
-	CLINICAL_PHARMACOLOGY("394600006", "2.16.840.1.113883.6.96",
-			"Clinical pharmacology (qualifier value)", "Clinical pharmacology",
-			"Klinische Pharmakologie", "Pharmacologie clinique", "Farmacologia clinica"),
+	PEDIATRICS("394537008", "2.16.840.1.113883.6.96", "Pediatric specialty (qualifier value)",
+			"Pediatrics", "Pädiatrie", "Pédiatrie", "Pediatria"),
 	/**
 	 * <div class="en">Pharmacy service</div>
 	 * <div class="de">Pharmazie-Dienstleistung</div> <div class="fr">Service
@@ -391,14 +397,6 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 			"Chirurgie plastique, reconstructrice et esthétique",
 			"Chirurgia plastica, ricostruttiva ed estetica"),
 	/**
-	 * <div class="en">Pulmonary medicine</div>
-	 * <div class="de">Pneumologie</div> <div class="fr">Pneumologie</div>
-	 * <div class="it">Pneumologia</div>
-	 */
-	PULMONARY_MEDICINE("418112009", "2.16.840.1.113883.6.96",
-			"Pulmonary medicine (qualifier value)", "Pulmonary medicine", "Pneumologie",
-			"Pneumologie", "Pneumologia"),
-	/**
 	 * <div class="en">Podiatry service</div> <div class="de">Podologie</div>
 	 * <div class="fr">Podologie</div> <div class="it">Podologia</div>
 	 */
@@ -421,12 +419,6 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 			"Psychiatrie und Psychotherapie", "Psychiatrie et psychothérapie",
 			"Psichiatria e psicoterapia"),
 	/**
-	 * <div class="en">Psychology</div> <div class="de">Psychologie</div>
-	 * <div class="fr">Psychologie</div> <div class="it">Psicologia</div>
-	 */
-	PSYCHOLOGY("722162001", "2.16.840.1.113883.6.96", "Psychology (qualifier value)", "Psychology",
-			"Psychologie", "Psychologie", "Psicologia"),
-	/**
 	 * <div class="en">Psycho-Somatic medicine</div>
 	 * <div class="de">Psychosomatik</div> <div class="fr">Psychosomatique</div>
 	 * <div class="it">Medicina psicosomatica</div>
@@ -435,11 +427,19 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 			"Psychosomatic medicine (qualifier value)", "Psycho-Somatic medicine", "Psychosomatik",
 			"Psychosomatique", "Medicina psicosomatica"),
 	/**
-	 * <div class="en">Radiology</div> <div class="de">Radiologie</div>
-	 * <div class="fr">Radiologie</div> <div class="it">Radiologia</div>
+	 * <div class="en">Psychology</div> <div class="de">Psychologie</div>
+	 * <div class="fr">Psychologie</div> <div class="it">Psicologia</div>
 	 */
-	RADIOLOGY("394914008", "2.16.840.1.113883.6.96", "Radiology - specialty (qualifier value)",
-			"Radiology", "Radiologie", "Radiologie", "Radiologia"),
+	PSYCHOLOGY("722162001", "2.16.840.1.113883.6.96", "Psychology (qualifier value)", "Psychology",
+			"Psychologie", "Psychologie", "Psicologia"),
+	/**
+	 * <div class="en">Pulmonary medicine</div>
+	 * <div class="de">Pneumologie</div> <div class="fr">Pneumologie</div>
+	 * <div class="it">Pneumologia</div>
+	 */
+	PULMONARY_MEDICINE("418112009", "2.16.840.1.113883.6.96",
+			"Pulmonary medicine (qualifier value)", "Pulmonary medicine", "Pneumologie",
+			"Pneumologie", "Pneumologia"),
 	/**
 	 * <div class="en">Radiation oncology</div>
 	 * <div class="de">Radio-Onkologie/Strahlentherapie</div>
@@ -451,12 +451,11 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 			"Radio-Onkologie/Strahlentherapie", "Radio-oncologie&#160;/&#160;radiothérapie",
 			"Radio-oncologia / radioterapia"),
 	/**
-	 * <div class="en">Legal medicine</div> <div class="de">Rechtsmedizin</div>
-	 * <div class="fr">Médecine légale</div> <div class="it">Medicina
-	 * legale</div>
+	 * <div class="en">Radiology</div> <div class="de">Radiologie</div>
+	 * <div class="fr">Radiologie</div> <div class="it">Radiologia</div>
 	 */
-	LEGAL_MEDICINE("722204007", "2.16.840.1.113883.6.96", "Legal medicine (qualifier value)",
-			"Legal medicine", "Rechtsmedizin", "Médecine légale", "Medicina legale"),
+	RADIOLOGY("394914008", "2.16.840.1.113883.6.96", "Radiology - specialty (qualifier value)",
+			"Radiology", "Radiologie", "Radiologie", "Radiologia"),
 	/**
 	 * <div class="en">Rehabilitation</div> <div class="de">Rehabilitation</div>
 	 * <div class="fr">Réadaptation</div> <div class="it">Riabilitazione</div>
@@ -470,6 +469,14 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 */
 	RHEUMATOLOGY("394810000", "2.16.840.1.113883.6.96", "Rheumatology (qualifier value)",
 			"Rheumatology", "Rheumatologie", "Rhumatologie", "Reumatologia"),
+	/**
+	 * <div class="en">Speech and language therapy service</div>
+	 * <div class="de">Logopädie</div> <div class="fr">Logopédie</div>
+	 * <div class="it">Logopedia</div>
+	 */
+	SPEECH_AND_LANGUAGE_THERAPY_SERVICE("310101009", "2.16.840.1.113883.6.96",
+			"Speech and language therapy service (qualifier value)",
+			"Speech and language therapy service", "Logopädie", "Logopédie", "Logopedia"),
 	/**
 	 * <div class="en">Thoracic surgery</div>
 	 * <div class="de">Thoraxchirurgie</div> <div class="fr">Chirurgie
@@ -486,6 +493,25 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 			"Blood transfusion (specialty) (qualifier value)", "Transfusion medicine",
 			"Transfusionsmedizin", "Médecine transfusionnelle", "Medicina trasfusionale"),
 	/**
+	 * <div class="en">Transplant surgery</div>
+	 * <div class="de">Transplantationsmedizin</div> <div class="fr">Médecine de
+	 * la transplantation</div> <div class="it">Medicina dei trapianti</div>
+	 */
+	TRANSPLANT_SURGERY("408477008", "2.16.840.1.113883.6.96",
+			"Transplantation surgery (qualifier value)", "Transplant surgery",
+			"Transplantationsmedizin", "Médecine de la transplantation", "Medicina dei trapianti"),
+	/**
+	 * <div class="en">Trauma and orthopedics</div> <div class="de">Orthopädie
+	 * und Traumatologie</div> <div class="fr">Chirurgie orthopédique et
+	 * traumatologie de l'appareil locomoteur</div> <div class="it">Chirurgia
+	 * ortopedica e traumatologia dell'apparato locomotore</div>
+	 */
+	TRAUMA_AND_ORTHOPEDICS("394801008", "2.16.840.1.113883.6.96",
+			"Trauma and orthopedics (qualifier value)", "Trauma and orthopedics",
+			"Orthopädie und Traumatologie",
+			"Chirurgie orthopédique et traumatologie de l'appareil locomoteur",
+			"Chirurgia ortopedica e traumatologia dell'apparato locomotore"),
+	/**
 	 * <div class="en">Tropical medicine</div> <div class="de">Tropen- und
 	 * Reisemedizin</div> <div class="fr">Médecine tropicale et des
 	 * voyages</div> <div class="it">Medicina tropicale e di viaggio</div>
@@ -500,37 +526,62 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	UROLOGY("394612005", "2.16.840.1.113883.6.96", "Urology (qualifier value)", "Urology",
 			"Urologie", "Urologie", "Urologia"),
 	/**
-	 * <div class="en">Dental medicine</div> <div class="de">Zahnheilkunde</div>
-	 * <div class="fr">Odontologie</div> <div class="it">Odontoiatria</div>
+	 * <div class="en">Vascular medicine</div> <div class="de">Angiologie</div>
+	 * <div class="fr">Angiologie</div> <div class="it">Angiologia</div>
 	 */
-	DENTAL_MEDICINE("394812008", "2.16.840.1.113883.6.96",
-			"Dental medicine specialties (qualifier value)", "Dental medicine", "Zahnheilkunde",
-			"Odontologie", "Odontoiatria"),
+	VASCULAR_MEDICINE("722414000", "2.16.840.1.113883.6.96", "Vascular medicine (qualifier value)",
+			"Vascular medicine", "Angiologie", "Angiologie", "Angiologia");
+
 	/**
-	 * <div class="en">Clinical oncology</div> <div class="de">Onkologie</div>
-	 * <div class="fr">Oncologie</div> <div class="it">Oncologia medica</div>
+	 * <div class="en">Code for Accident &amp; emergency</div>
+	 * <div class="de">Code für Notfall- und Rettungsmedizin</div>
+	 * <div class="fr">Code de Médecine d'urgence et de sauvetage</div>
+	 * <div class="it">Code per Medicina d'urgenza e di salvataggio</div>
 	 */
-	CLINICAL_ONCOLOGY("394592004", "2.16.840.1.113883.6.96", "Clinical oncology (qualifier value)",
-			"Clinical oncology", "Onkologie", "Oncologie", "Oncologia medica"),
+	public static final String ACCIDENT_AND_EMERGENCY_CODE = "394576009";
+
 	/**
-	 * <div class="en">Transplant surgery</div>
-	 * <div class="de">Transplantationsmedizin</div> <div class="fr">Médecine de
-	 * la transplantation</div> <div class="it">Medicina dei trapianti</div>
+	 * <div class="en">Code for Anaesthesiology</div> <div class="de">Code für
+	 * Anästhesiologie</div> <div class="fr">Code de Anesthésiologie</div>
+	 * <div class="it">Code per Anestesiologia</div>
 	 */
-	TRANSPLANT_SURGERY("408477008", "2.16.840.1.113883.6.96",
-			"Transplantation surgery (qualifier value)", "Transplant surgery",
-			"Transplantationsmedizin", "Médecine de la transplantation", "Medicina dei trapianti"),
+	public static final String ANAESTHESIOLOGY_CODE = "394577000";
+
 	/**
-	 * <div class="en">other Clinical specialty</div> <div class="de">Andere
-	 * nicht näher spezifizierte medzinische Fachrichtung</div>
-	 * <div class="fr">Autres spécialisations non spécifiées</div>
-	 * <div class="it">Altre specialità mediche non meglio precisate</div>
+	 * <div class="en">Code for Cardiac surgery</div> <div class="de">Code für
+	 * Herzchirurgie</div> <div class="fr">Code de Chirurgie
+	 * cardiovasculaire</div> <div class="it">Code per Chirurgia
+	 * cardiovascolare</div>
 	 */
-	OTHER_CLINICAL_SPECIALTY("394658006", "2.16.840.1.113883.6.96",
-			"Clinical specialty (qualifier value)", "other Clinical specialty",
-			"Andere nicht näher spezifizierte medzinische Fachrichtung",
-			"Autres spécialisations non spécifiées",
-			"Altre specialità mediche non meglio precisate");
+	public static final String CARDIAC_SURGERY_CODE = "408466002";
+
+	/**
+	 * <div class="en">Code for Cardiology</div> <div class="de">Code für
+	 * Kardiologie</div> <div class="fr">Code de Cardiologie</div>
+	 * <div class="it">Code per Cardiologia</div>
+	 */
+	public static final String CARDIOLOGY_CODE = "394579002";
+
+	/**
+	 * <div class="en">Code for Chiropractic service </div> <div class="de">Code
+	 * für Chiropraktik</div> <div class="fr">Code de Chiropractie</div>
+	 * <div class="it">Code per Chiropratica</div>
+	 */
+	public static final String CHIROPRACTIC_SERVICE_CODE = "722170006";
+
+	/**
+	 * <div class="en">Code for Clinical genetics</div> <div class="de">Code für
+	 * Medizinische Genetik</div> <div class="fr">Code de Génétique
+	 * médicale</div> <div class="it">Code per Genetica medica</div>
+	 */
+	public static final String CLINICAL_GENETICS_CODE = "394580004";
+
+	/**
+	 * <div class="en">Code for Clinical haematology</div> <div class="de">Code
+	 * für Hämatologie</div> <div class="fr">Code de Hématologie</div>
+	 * <div class="it">Code per Ematologia</div>
+	 */
+	public static final String CLINICAL_HAEMATOLOGY_CODE = "394803006";
 
 	/**
 	 * <div class="en">Code for Clinical immunology/allergy</div>
@@ -541,46 +592,48 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	public static final String CLINICAL_IMMUNOLOGY_ALLERGY_CODE = "394805004";
 
 	/**
-	 * <div class="en">Code for General medicine </div> <div class="de">Code für
-	 * Allgemeinmedizin</div> <div class="fr">Code de Médecine générale </div>
-	 * <div class="it">Code per Medicina generale </div>
+	 * <div class="en">Code for Clinical immunology</div> <div class="de">Code
+	 * für Immunologie</div> <div class="fr">Code de Immunologie</div>
+	 * <div class="it">Code per Immunologia</div>
 	 */
-	public static final String GENERAL_MEDICINE_CODE = "394802001";
+	public static final String CLINICAL_IMMUNOLOGY_CODE = "408480009";
 
 	/**
-	 * <div class="en">Code for Anaesthesiology</div> <div class="de">Code für
-	 * Anästhesiologie</div> <div class="fr">Code de Anesthésiologie</div>
-	 * <div class="it">Code per Anestesiologia</div>
+	 * <div class="en">Code for Clinical oncology</div> <div class="de">Code für
+	 * Onkologie</div> <div class="fr">Code de Oncologie</div>
+	 * <div class="it">Code per Oncologia medica</div>
 	 */
-	public static final String ANAESTHESIOLOGY_CODE = "394577000";
+	public static final String CLINICAL_ONCOLOGY_CODE = "394592004";
 
 	/**
-	 * <div class="en">Code for Vascular medicine</div> <div class="de">Code für
-	 * Angiologie</div> <div class="fr">Code de Angiologie</div>
-	 * <div class="it">Code per Angiologia</div>
+	 * <div class="en">Code for Clinical pharmacology</div> <div class="de">Code
+	 * für Klinische Pharmakologie</div> <div class="fr">Code de Pharmacologie
+	 * clinique</div> <div class="it">Code per Farmacologia clinica</div>
 	 */
-	public static final String VASCULAR_MEDICINE_CODE = "722414000";
+	public static final String CLINICAL_PHARMACOLOGY_CODE = "394600006";
 
 	/**
-	 * <div class="en">Code for Occupational medicine</div> <div class="de">Code
-	 * für Arbeitsmedizin</div> <div class="fr">Code de Médecine du
-	 * travail</div> <div class="it">Code per Medicina del lavoro</div>
+	 * <div class="en">Code for Complementary therapy</div> <div class="de">Code
+	 * für Komplementärmedizin</div> <div class="fr">Code de Médecine
+	 * alternative et complémentaire</div> <div class="it">Code per Medicina
+	 * complementare</div>
 	 */
-	public static final String OCCUPATIONAL_MEDICINE_CODE = "394821009";
+	public static final String COMPLEMENTARY_THERAPY_CODE = "310025004";
 
 	/**
-	 * <div class="en">Code for Chiropractic service </div> <div class="de">Code
-	 * für Chiropraktik</div> <div class="fr">Code de Chiropractie</div>
-	 * <div class="it">Code per Chiropratica</div>
+	 * <div class="en">Code for Critical care medicine</div>
+	 * <div class="de">Code für Intensivmedizin</div> <div class="fr">Code de
+	 * Médecine intensive</div> <div class="it">Code per Medicina
+	 * intensiva</div>
 	 */
-	public static final String CHIROPRACTIC_SERVICE_CODE = "722170006";
+	public static final String CRITICAL_CARE_MEDICINE_CODE = "408478003";
 
 	/**
-	 * <div class="en">Code for General surgery</div> <div class="de">Code für
-	 * Chirurgie</div> <div class="fr">Code de Chirurgie</div>
-	 * <div class="it">Code per Chirurgia</div>
+	 * <div class="en">Code for Dental medicine</div> <div class="de">Code für
+	 * Zahnheilkunde</div> <div class="fr">Code de Odontologie</div>
+	 * <div class="it">Code per Odontoiatria</div>
 	 */
-	public static final String GENERAL_SURGERY_CODE = "394609007";
+	public static final String DENTAL_MEDICINE_CODE = "394812008";
 
 	/**
 	 * <div class="en">Code for Dermatology</div> <div class="de">Code für
@@ -591,21 +644,6 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	public static final String DERMATOLOGY_CODE = "394582007";
 
 	/**
-	 * <div class="en">Code for Endocrinology</div> <div class="de">Code für
-	 * Endokrinologie/Diabetologie</div> <div class="fr">Code de
-	 * Endocrinologie/diabétologie</div> <div class="it">Code per
-	 * Endocrinologia/diabetologia</div>
-	 */
-	public static final String ENDOCRINOLOGY_CODE = "394583002";
-
-	/**
-	 * <div class="en">Code for Occupational therapy service</div>
-	 * <div class="de">Code für Ergotherapie</div> <div class="fr">Code de
-	 * Ergothérapie</div> <div class="it">Code per Ergoterapia</div>
-	 */
-	public static final String OCCUPATIONAL_THERAPY_SERVICE_CODE = "310093001";
-
-	/**
 	 * <div class="en">Code for Dietetics and nutrition</div>
 	 * <div class="de">Code für Ernährungsberatung</div> <div class="fr">Code de
 	 * Conseil en nutrition et diététique</div> <div class="it">Code per
@@ -614,11 +652,33 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	public static final String DIETETICS_AND_NUTRITION_CODE = "722164000";
 
 	/**
+	 * <div class="en">Code for Endocrinology</div> <div class="de">Code für
+	 * Endokrinologie/Diabetologie</div> <div class="fr">Code de
+	 * Endocrinologie/diabétologie</div> <div class="it">Code per
+	 * Endocrinologia/diabetologia</div>
+	 */
+	public static final String ENDOCRINOLOGY_CODE = "394583002";
+
+	/**
 	 * <div class="en">Code for Gastroenterology</div> <div class="de">Code für
 	 * Gastroenterologie</div> <div class="fr">Code de Gastroentérologie</div>
 	 * <div class="it">Code per Gastroenterologia</div>
 	 */
 	public static final String GASTROENTEROLOGY_CODE = "394584008";
+
+	/**
+	 * <div class="en">Code for General medicine </div> <div class="de">Code für
+	 * Allgemeinmedizin</div> <div class="fr">Code de Médecine générale </div>
+	 * <div class="it">Code per Medicina generale </div>
+	 */
+	public static final String GENERAL_MEDICINE_CODE = "394802001";
+
+	/**
+	 * <div class="en">Code for General surgery</div> <div class="de">Code für
+	 * Chirurgie</div> <div class="fr">Code de Chirurgie</div>
+	 * <div class="it">Code per Chirurgia</div>
+	 */
+	public static final String GENERAL_SURGERY_CODE = "394609007";
 
 	/**
 	 * <div class="en">Code for Geriatric medicine</div> <div class="de">Code
@@ -636,28 +696,6 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	public static final String GYNECOLOGY_AND_OBSTRETRICS_CODE = "394586005";
 
 	/**
-	 * <div class="en">Code for Clinical haematology</div> <div class="de">Code
-	 * für Hämatologie</div> <div class="fr">Code de Hématologie</div>
-	 * <div class="it">Code per Ematologia</div>
-	 */
-	public static final String CLINICAL_HAEMATOLOGY_CODE = "394803006";
-
-	/**
-	 * <div class="en">Code for Cardiac surgery</div> <div class="de">Code für
-	 * Herzchirurgie</div> <div class="fr">Code de Chirurgie
-	 * cardiovasculaire</div> <div class="it">Code per Chirurgia
-	 * cardiovascolare</div>
-	 */
-	public static final String CARDIAC_SURGERY_CODE = "408466002";
-
-	/**
-	 * <div class="en">Code for Clinical immunology</div> <div class="de">Code
-	 * für Immunologie</div> <div class="fr">Code de Immunologie</div>
-	 * <div class="it">Code per Immunologia</div>
-	 */
-	public static final String CLINICAL_IMMUNOLOGY_CODE = "408480009";
-
-	/**
 	 * <div class="en">Code for Infectious diseases</div> <div class="de">Code
 	 * für Infektionskrankheiten</div> <div class="fr">Code de Maladies
 	 * infectieuses</div> <div class="it">Code per Malattia infettiva</div>
@@ -672,29 +710,6 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	public static final String INTERNAL_MEDICINE_CODE = "419192003";
 
 	/**
-	 * <div class="en">Code for Critical care medicine</div>
-	 * <div class="de">Code für Intensivmedizin</div> <div class="fr">Code de
-	 * Médecine intensive</div> <div class="it">Code per Medicina
-	 * intensiva</div>
-	 */
-	public static final String CRITICAL_CARE_MEDICINE_CODE = "408478003";
-
-	/**
-	 * <div class="en">Code for Cardiology</div> <div class="de">Code für
-	 * Kardiologie</div> <div class="fr">Code de Cardiologie</div>
-	 * <div class="it">Code per Cardiologia</div>
-	 */
-	public static final String CARDIOLOGY_CODE = "394579002";
-
-	/**
-	 * <div class="en">Code for Complementary therapy</div> <div class="de">Code
-	 * für Komplementärmedizin</div> <div class="fr">Code de Médecine
-	 * alternative et complémentaire</div> <div class="it">Code per Medicina
-	 * complementare</div>
-	 */
-	public static final String COMPLEMENTARY_THERAPY_CODE = "310025004";
-
-	/**
 	 * <div class="en">Code for Laboratory service</div> <div class="de">Code
 	 * für Labormedizin</div> <div class="fr">Code de Médecin de
 	 * laboratoire</div> <div class="it">Code per Medicina di laboratorio</div>
@@ -702,18 +717,67 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	public static final String LABORATORY_SERVICE_CODE = "708184003";
 
 	/**
-	 * <div class="en">Code for Speech and language therapy service</div>
-	 * <div class="de">Code für Logopädie</div> <div class="fr">Code de
-	 * Logopédie</div> <div class="it">Code per Logopedia</div>
+	 * <div class="en">Code for Legal medicine</div> <div class="de">Code für
+	 * Rechtsmedizin</div> <div class="fr">Code de Médecine légale</div>
+	 * <div class="it">Code per Medicina legale</div>
 	 */
-	public static final String SPEECH_AND_LANGUAGE_THERAPY_SERVICE_CODE = "310101009";
+	public static final String LEGAL_MEDICINE_CODE = "722204007";
 
 	/**
-	 * <div class="en">Code for Clinical genetics</div> <div class="de">Code für
-	 * Medizinische Genetik</div> <div class="fr">Code de Génétique
-	 * médicale</div> <div class="it">Code per Genetica medica</div>
+	 * <div class="en">Code for Nephrology</div> <div class="de">Code für
+	 * Nephrologie</div> <div class="fr">Code de Néphrologie</div>
+	 * <div class="it">Code per Nefrologia</div>
 	 */
-	public static final String CLINICAL_GENETICS_CODE = "394580004";
+	public static final String NEPHROLOGY_CODE = "394589003";
+
+	/**
+	 * <div class="en">Code for Neurology</div> <div class="de">Code für
+	 * Neurologie</div> <div class="fr">Code de Neurologie</div>
+	 * <div class="it">Code per Neurologia</div>
+	 */
+	public static final String NEUROLOGY_CODE = "394591006";
+
+	/**
+	 * <div class="en">Code for Neurosurgery</div> <div class="de">Code für
+	 * Neurochirurgie</div> <div class="fr">Code de Neurochirurgie</div>
+	 * <div class="it">Code per Neurochirurgia</div>
+	 */
+	public static final String NEUROSURGERY_CODE = "394610002";
+
+	/**
+	 * <div class="en">Code for Nuclear medicine</div> <div class="de">Code für
+	 * Nuklearmedizin</div> <div class="fr">Code de Médecine nucléaire</div>
+	 * <div class="it">Code per Medicina nucleare</div>
+	 */
+	public static final String NUCLEAR_MEDICINE_CODE = "394649004";
+
+	/**
+	 * <div class="en">Code for Nursing</div> <div class="de">Code für
+	 * Pflege</div> <div class="fr">Code de Soins</div> <div class="it">Code per
+	 * Cure infermieristiche</div>
+	 */
+	public static final String NURSING_CODE = "722165004";
+
+	/**
+	 * <div class="en">Code for Occupational medicine</div> <div class="de">Code
+	 * für Arbeitsmedizin</div> <div class="fr">Code de Médecine du
+	 * travail</div> <div class="it">Code per Medicina del lavoro</div>
+	 */
+	public static final String OCCUPATIONAL_MEDICINE_CODE = "394821009";
+
+	/**
+	 * <div class="en">Code for Occupational therapy service</div>
+	 * <div class="de">Code für Ergotherapie</div> <div class="fr">Code de
+	 * Ergothérapie</div> <div class="it">Code per Ergoterapia</div>
+	 */
+	public static final String OCCUPATIONAL_THERAPY_SERVICE_CODE = "310093001";
+
+	/**
+	 * <div class="en">Code for Ophthalmology</div> <div class="de">Code für
+	 * Ophthalmologie</div> <div class="fr">Code de Ophtalmologie</div>
+	 * <div class="it">Code per Oftalmologia</div>
+	 */
+	public static final String OPHTHALMOLOGY_CODE = "394594003";
 
 	/**
 	 * <div class="en">Code for Oral and maxillofacial surgery</div>
@@ -724,63 +788,20 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	public static final String ORAL_AND_MAXILLOFACIAL_SURGERY_CODE = "408465003";
 
 	/**
-	 * <div class="en">Code for Nephrology</div> <div class="de">Code für
-	 * Nephrologie</div> <div class="fr">Code de Néphrologie</div>
-	 * <div class="it">Code per Nefrologia</div>
-	 */
-	public static final String NEPHROLOGY_CODE = "394589003";
-
-	/**
-	 * <div class="en">Code for Neurosurgery</div> <div class="de">Code für
-	 * Neurochirurgie</div> <div class="fr">Code de Neurochirurgie</div>
-	 * <div class="it">Code per Neurochirurgia</div>
-	 */
-	public static final String NEUROSURGERY_CODE = "394610002";
-
-	/**
-	 * <div class="en">Code for Neurology</div> <div class="de">Code für
-	 * Neurologie</div> <div class="fr">Code de Neurologie</div>
-	 * <div class="it">Code per Neurologia</div>
-	 */
-	public static final String NEUROLOGY_CODE = "394591006";
-
-	/**
-	 * <div class="en">Code for Accident &amp; emergency</div>
-	 * <div class="de">Code für Notfall- und Rettungsmedizin</div>
-	 * <div class="fr">Code de Médecine d'urgence et de sauvetage</div>
-	 * <div class="it">Code per Medicina d'urgenza e di salvataggio</div>
-	 */
-	public static final String ACCIDENT_AND_EMERGENCY_CODE = "394576009";
-
-	/**
-	 * <div class="en">Code for Nuclear medicine</div> <div class="de">Code für
-	 * Nuklearmedizin</div> <div class="fr">Code de Médecine nucléaire</div>
-	 * <div class="it">Code per Medicina nucleare</div>
-	 */
-	public static final String NUCLEAR_MEDICINE_CODE = "394649004";
-
-	/**
-	 * <div class="en">Code for Ophthalmology</div> <div class="de">Code für
-	 * Ophthalmologie</div> <div class="fr">Code de Ophtalmologie</div>
-	 * <div class="it">Code per Oftalmologia</div>
-	 */
-	public static final String OPHTHALMOLOGY_CODE = "394594003";
-
-	/**
-	 * <div class="en">Code for Trauma and orthopedics</div>
-	 * <div class="de">Code für Orthopädie und Traumatologie</div>
-	 * <div class="fr">Code de Chirurgie orthopédique et traumatologie de
-	 * l'appareil locomoteur</div> <div class="it">Code per Chirurgia ortopedica
-	 * e traumatologia dell'apparato locomotore</div>
-	 */
-	public static final String TRAUMA_AND_ORTHOPEDICS_CODE = "394801008";
-
-	/**
 	 * <div class="en">Code for Osteopathic manipulative medicine</div>
 	 * <div class="de">Code für Osteopathie</div> <div class="fr">Code de
 	 * Ostéopathie</div> <div class="it">Code per Osteopatia</div>
 	 */
 	public static final String OSTEOPATHIC_MANIPULATIVE_MEDICINE_CODE = "416304004";
+
+	/**
+	 * <div class="en">Code for other Clinical specialty</div>
+	 * <div class="de">Code für Andere nicht näher spezifizierte medzinische
+	 * Fachrichtung</div> <div class="fr">Code de Autres spécialisations non
+	 * spécifiées</div> <div class="it">Code per Altre specialità mediche non
+	 * meglio precisate</div>
+	 */
+	public static final String OTHER_CLINICAL_SPECIALTY_CODE = "394658006";
 
 	/**
 	 * <div class="en">Code for Otolaryngology</div> <div class="de">Code für
@@ -789,13 +810,6 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 * Otorinolaringoiatria</div>
 	 */
 	public static final String OTOLARYNGOLOGY_CODE = "418960008";
-
-	/**
-	 * <div class="en">Code for Pediatrics</div> <div class="de">Code für
-	 * Pädiatrie</div> <div class="fr">Code de Pédiatrie</div>
-	 * <div class="it">Code per Pediatria</div>
-	 */
-	public static final String PEDIATRICS_CODE = "394537008";
 
 	/**
 	 * <div class="en">Code for Palliative medicine</div> <div class="de">Code
@@ -812,18 +826,11 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	public static final String PATHOLOGY_CODE = "394595002";
 
 	/**
-	 * <div class="en">Code for Nursing</div> <div class="de">Code für
-	 * Pflege</div> <div class="fr">Code de Soins</div> <div class="it">Code per
-	 * Cure infermieristiche</div>
+	 * <div class="en">Code for Pediatrics</div> <div class="de">Code für
+	 * Pädiatrie</div> <div class="fr">Code de Pédiatrie</div>
+	 * <div class="it">Code per Pediatria</div>
 	 */
-	public static final String NURSING_CODE = "722165004";
-
-	/**
-	 * <div class="en">Code for Clinical pharmacology</div> <div class="de">Code
-	 * für Klinische Pharmakologie</div> <div class="fr">Code de Pharmacologie
-	 * clinique</div> <div class="it">Code per Farmacologia clinica</div>
-	 */
-	public static final String CLINICAL_PHARMACOLOGY_CODE = "394600006";
+	public static final String PEDIATRICS_CODE = "394537008";
 
 	/**
 	 * <div class="en">Code for Pharmacy service</div> <div class="de">Code für
@@ -849,13 +856,6 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	public static final String PLASTIC_SURGERY_CODE = "394611003";
 
 	/**
-	 * <div class="en">Code for Pulmonary medicine</div> <div class="de">Code
-	 * für Pneumologie</div> <div class="fr">Code de Pneumologie</div>
-	 * <div class="it">Code per Pneumologia</div>
-	 */
-	public static final String PULMONARY_MEDICINE_CODE = "418112009";
-
-	/**
 	 * <div class="en">Code for Podiatry service</div> <div class="de">Code für
 	 * Podologie</div> <div class="fr">Code de Podologie</div>
 	 * <div class="it">Code per Podologia</div>
@@ -878,13 +878,6 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	public static final String PSYCHIATRY_CODE = "394587001";
 
 	/**
-	 * <div class="en">Code for Psychology</div> <div class="de">Code für
-	 * Psychologie</div> <div class="fr">Code de Psychologie</div>
-	 * <div class="it">Code per Psicologia</div>
-	 */
-	public static final String PSYCHOLOGY_CODE = "722162001";
-
-	/**
 	 * <div class="en">Code for Psycho-Somatic medicine</div>
 	 * <div class="de">Code für Psychosomatik</div> <div class="fr">Code de
 	 * Psychosomatique</div> <div class="it">Code per Medicina
@@ -893,11 +886,18 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	public static final String PSYCHO_SOMATIC_MEDICINE_CODE = "721961006";
 
 	/**
-	 * <div class="en">Code for Radiology</div> <div class="de">Code für
-	 * Radiologie</div> <div class="fr">Code de Radiologie</div>
-	 * <div class="it">Code per Radiologia</div>
+	 * <div class="en">Code for Psychology</div> <div class="de">Code für
+	 * Psychologie</div> <div class="fr">Code de Psychologie</div>
+	 * <div class="it">Code per Psicologia</div>
 	 */
-	public static final String RADIOLOGY_CODE = "394914008";
+	public static final String PSYCHOLOGY_CODE = "722162001";
+
+	/**
+	 * <div class="en">Code for Pulmonary medicine</div> <div class="de">Code
+	 * für Pneumologie</div> <div class="fr">Code de Pneumologie</div>
+	 * <div class="it">Code per Pneumologia</div>
+	 */
+	public static final String PULMONARY_MEDICINE_CODE = "418112009";
 
 	/**
 	 * <div class="en">Code for Radiation oncology</div> <div class="de">Code
@@ -908,11 +908,11 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	public static final String RADIATION_ONCOLOGY_CODE = "419815003";
 
 	/**
-	 * <div class="en">Code for Legal medicine</div> <div class="de">Code für
-	 * Rechtsmedizin</div> <div class="fr">Code de Médecine légale</div>
-	 * <div class="it">Code per Medicina legale</div>
+	 * <div class="en">Code for Radiology</div> <div class="de">Code für
+	 * Radiologie</div> <div class="fr">Code de Radiologie</div>
+	 * <div class="it">Code per Radiologia</div>
 	 */
-	public static final String LEGAL_MEDICINE_CODE = "722204007";
+	public static final String RADIOLOGY_CODE = "394914008";
 
 	/**
 	 * <div class="en">Code for Rehabilitation</div> <div class="de">Code für
@@ -927,6 +927,13 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 * <div class="it">Code per Reumatologia</div>
 	 */
 	public static final String RHEUMATOLOGY_CODE = "394810000";
+
+	/**
+	 * <div class="en">Code for Speech and language therapy service</div>
+	 * <div class="de">Code für Logopädie</div> <div class="fr">Code de
+	 * Logopédie</div> <div class="it">Code per Logopedia</div>
+	 */
+	public static final String SPEECH_AND_LANGUAGE_THERAPY_SERVICE_CODE = "310101009";
 
 	/**
 	 * <div class="en">Code for Thoracic surgery</div> <div class="de">Code für
@@ -944,6 +951,23 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	public static final String TRANSFUSION_MEDICINE_CODE = "394819004";
 
 	/**
+	 * <div class="en">Code for Transplant surgery</div> <div class="de">Code
+	 * für Transplantationsmedizin</div> <div class="fr">Code de Médecine de la
+	 * transplantation</div> <div class="it">Code per Medicina dei
+	 * trapianti</div>
+	 */
+	public static final String TRANSPLANT_SURGERY_CODE = "408477008";
+
+	/**
+	 * <div class="en">Code for Trauma and orthopedics</div>
+	 * <div class="de">Code für Orthopädie und Traumatologie</div>
+	 * <div class="fr">Code de Chirurgie orthopédique et traumatologie de
+	 * l'appareil locomoteur</div> <div class="it">Code per Chirurgia ortopedica
+	 * e traumatologia dell'apparato locomotore</div>
+	 */
+	public static final String TRAUMA_AND_ORTHOPEDICS_CODE = "394801008";
+
+	/**
 	 * <div class="en">Code for Tropical medicine</div> <div class="de">Code für
 	 * Tropen- und Reisemedizin</div> <div class="fr">Code de Médecine tropicale
 	 * et des voyages</div> <div class="it">Code per Medicina tropicale e di
@@ -959,35 +983,10 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	public static final String UROLOGY_CODE = "394612005";
 
 	/**
-	 * <div class="en">Code for Dental medicine</div> <div class="de">Code für
-	 * Zahnheilkunde</div> <div class="fr">Code de Odontologie</div>
-	 * <div class="it">Code per Odontoiatria</div>
+	 * <div class="en">Identifier of the value set</div>
+	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
 	 */
-	public static final String DENTAL_MEDICINE_CODE = "394812008";
-
-	/**
-	 * <div class="en">Code for Clinical oncology</div> <div class="de">Code für
-	 * Onkologie</div> <div class="fr">Code de Oncologie</div>
-	 * <div class="it">Code per Oncologia medica</div>
-	 */
-	public static final String CLINICAL_ONCOLOGY_CODE = "394592004";
-
-	/**
-	 * <div class="en">Code for Transplant surgery</div> <div class="de">Code
-	 * für Transplantationsmedizin</div> <div class="fr">Code de Médecine de la
-	 * transplantation</div> <div class="it">Code per Medicina dei
-	 * trapianti</div>
-	 */
-	public static final String TRANSPLANT_SURGERY_CODE = "408477008";
-
-	/**
-	 * <div class="en">Code for other Clinical specialty</div>
-	 * <div class="de">Code für Andere nicht näher spezifizierte medzinische
-	 * Fachrichtung</div> <div class="fr">Code de Autres spécialisations non
-	 * spécifiées</div> <div class="it">Code per Altre specialità mediche non
-	 * meglio precisate</div>
-	 */
-	public static final String OTHER_CLINICAL_SPECIALTY_CODE = "394658006";
+	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.18";
 
 	/**
 	 * <div class="en">Name of the value set</div> <div class="de">Name des
@@ -996,10 +995,11 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	public static final String VALUE_SET_NAME = "epd_xds_practiceSettingCode";
 
 	/**
-	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
+	 * <div class="en">Code for Vascular medicine</div> <div class="de">Code für
+	 * Angiologie</div> <div class="fr">Code de Angiologie</div>
+	 * <div class="it">Code per Angiologia</div>
 	 */
-	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.18";
+	public static final String VASCULAR_MEDICINE_CODE = "722414000";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -1058,11 +1058,6 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * The display names per language
-	 */
-	private Map<LanguageCode, String> displayNames;
-
-	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>
@@ -1074,6 +1069,11 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
 	 */
 	private String codeSystem;
+
+	/**
+	 * The display names per language
+	 */
+	private Map<LanguageCode, String> displayNames;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and

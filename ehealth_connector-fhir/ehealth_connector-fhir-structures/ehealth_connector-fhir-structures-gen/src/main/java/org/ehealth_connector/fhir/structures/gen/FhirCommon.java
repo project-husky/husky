@@ -82,11 +82,11 @@ public class FhirCommon {
 		FILE, LOG, NONE
 	}
 
-	/** The Constant AHDIS_COMMUNITY_OID. */
-	public static final String AHDIS_COMMUNITY_OID = "2.16.756.5.37";
+	/** The Constant DEMO_COMMUNITY_OID. */
+	public static final String DEMO_COMMUNITY_OID = "2.16.756.5.37";
 
-	/** The Constant AHDIS_SOURCE_OID_PREFIX. */
-	public static final String AHDIS_SOURCE_OID_PREFIX = "1.3.6.1.4.1.21367";
+	/** The Constant DEMO_SOURCE_OID_PREFIX. */
+	public static final String DEMO_SOURCE_OID_PREFIX = "1.3.6.1.4.1.21367";
 
 	/** The Constant NIST_COMMUNITY_OID. */
 	public static final String NIST_COMMUNITY_OID = "1.3.6.1.4.1.21367.2005.13.20.3000";

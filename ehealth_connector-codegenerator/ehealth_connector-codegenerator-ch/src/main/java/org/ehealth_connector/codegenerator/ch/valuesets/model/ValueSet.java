@@ -25,15 +25,15 @@ package org.ehealth_connector.codegenerator.ch.valuesets.model;
  */
 public class ValueSet {
 
-	private String id;
-
-	private String projectFolder;
-
 	private String className;
+
+	private String codeSystemName;
 
 	private String effectiveDate;
 
-	private String codeSystemName;
+	private String id;
+
+	private String projectFolder;
 
 	/**
 	 * <div class="en">Gets the fully qualified class name of the enum class

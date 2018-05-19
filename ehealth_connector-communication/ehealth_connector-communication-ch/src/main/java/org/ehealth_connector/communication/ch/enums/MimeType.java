@@ -37,23 +37,19 @@ import org.ehealth_connector.common.enums.LanguageCode;
 public enum MimeType implements ValueSetEnumInterface {
 
 	/**
+	 * <div class="en">CDA Level 1 Multipart</div> <div class="de">CDA Level 1
+	 * Multipart</div> <div class="fr">CDA Level 1 Multipart</div>
+	 * <div class="it">CDA Level 1 Multipart</div>
+	 */
+	CDA_LEVEL_1_MULTIPART("multipart/x-hl7-cda-level1", "2.16.840.1.113883.5.79",
+			"CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart",
+			"CDA Level 1 Multipart", "CDA Level 1 Multipart"),
+	/**
 	 * <div class="en">DICOM</div> <div class="de">DICOM</div>
 	 * <div class="fr">DICOM</div> <div class="it">DICOM</div>
 	 */
 	DICOM("application/dicom", "2.16.840.1.113883.5.79", "DICOM", "DICOM", "DICOM", "DICOM",
 			"DICOM"),
-	/**
-	 * <div class="en">PDF</div> <div class="de">PDF</div>
-	 * <div class="fr">PDF</div> <div class="it">PDF</div>
-	 */
-	PDF("application/pdf", "2.16.840.1.113883.5.79", "PDF", "PDF", "PDF", "PDF", "PDF"),
-	/**
-	 * <div class="en">MPEG audio layer 3</div> <div class="de">MPEG audio layer
-	 * 3</div> <div class="fr">MPEG audio layer 3</div> <div class="it">MPEG
-	 * audio layer 3</div>
-	 */
-	MPEG_AUDIO_LAYER_3("audio/mpeg", "2.16.840.1.113883.5.79", "MPEG audio layer 3",
-			"MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3"),
 	/**
 	 * <div class="en">GIF Graphics Interchange Format</div> <div class="de">GIF
 	 * Graphics Interchange Format</div> <div class="fr">GIF Graphics
@@ -71,6 +67,30 @@ public enum MimeType implements ValueSetEnumInterface {
 	JPEG_IMAGE("image/jpeg", "2.16.840.1.113883.5.79", "JPEG Image", "JPEG Image", "JPEG Image",
 			"JPEG Image", "JPEG Image"),
 	/**
+	 * <div class="en">MPEG audio layer 3</div> <div class="de">MPEG audio layer
+	 * 3</div> <div class="fr">MPEG audio layer 3</div> <div class="it">MPEG
+	 * audio layer 3</div>
+	 */
+	MPEG_AUDIO_LAYER_3("audio/mpeg", "2.16.840.1.113883.5.79", "MPEG audio layer 3",
+			"MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3"),
+	/**
+	 * <div class="en">MPEG Video</div> <div class="de">MPEG Video</div>
+	 * <div class="fr">MPEG Video</div> <div class="it">MPEG Video</div>
+	 */
+	MPEG_VIDEO("video/mpeg", "2.16.840.1.113883.5.79", "MPEG Video", "MPEG Video", "MPEG Video",
+			"MPEG Video", "MPEG Video"),
+	/**
+	 * <div class="en">PDF</div> <div class="de">PDF</div>
+	 * <div class="fr">PDF</div> <div class="it">PDF</div>
+	 */
+	PDF("application/pdf", "2.16.840.1.113883.5.79", "PDF", "PDF", "PDF", "PDF", "PDF"),
+	/**
+	 * <div class="en">Plain Text</div> <div class="de">Plain Text</div>
+	 * <div class="fr">Plain Text</div> <div class="it">Plain Text</div>
+	 */
+	PLAIN_TEXT("text/plain", "2.16.840.1.113883.5.79", "Plain Text", "Plain Text", "Plain Text",
+			"Plain Text", "Plain Text"),
+	/**
 	 * <div class="en">PNG Portable Network Graphics</div> <div class="de">PNG
 	 * Portable Network Graphics</div> <div class="fr">PNG Portable Network
 	 * Graphics</div> <div class="it">PNG Portable Network Graphics</div>
@@ -86,50 +106,24 @@ public enum MimeType implements ValueSetEnumInterface {
 	TIFF_IMAGE("image/tiff", "2.16.840.1.113883.5.79", "TIFF Image", "TIFF Image", "TIFF Image",
 			"TIFF Image", "TIFF Image"),
 	/**
-	 * <div class="en">CDA Level 1 Multipart</div> <div class="de">CDA Level 1
-	 * Multipart</div> <div class="fr">CDA Level 1 Multipart</div>
-	 * <div class="it">CDA Level 1 Multipart</div>
-	 */
-	CDA_LEVEL_1_MULTIPART("multipart/x-hl7-cda-level1", "2.16.840.1.113883.5.79",
-			"CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart",
-			"CDA Level 1 Multipart", "CDA Level 1 Multipart"),
-	/**
-	 * <div class="en">Plain Text</div> <div class="de">Plain Text</div>
-	 * <div class="fr">Plain Text</div> <div class="it">Plain Text</div>
-	 */
-	PLAIN_TEXT("text/plain", "2.16.840.1.113883.5.79", "Plain Text", "Plain Text", "Plain Text",
-			"Plain Text", "Plain Text"),
-	/**
 	 * <div class="en">XML-Text</div> <div class="de">XML-Text</div>
 	 * <div class="fr">XML-Text</div> <div class="it">XML-Text</div>
 	 */
 	XML_TEXT("text/xml", "2.16.840.1.113883.5.79", "XML-Text", "XML-Text", "XML-Text", "XML-Text",
-			"XML-Text"),
+			"XML-Text");
+
 	/**
-	 * <div class="en">MPEG Video</div> <div class="de">MPEG Video</div>
-	 * <div class="fr">MPEG Video</div> <div class="it">MPEG Video</div>
+	 * <div class="en">Code for CDA Level 1 Multipart</div> <div class="de">Code
+	 * für CDA Level 1 Multipart</div> <div class="fr">Code de CDA Level 1
+	 * Multipart</div> <div class="it">Code per CDA Level 1 Multipart</div>
 	 */
-	MPEG_VIDEO("video/mpeg", "2.16.840.1.113883.5.79", "MPEG Video", "MPEG Video", "MPEG Video",
-			"MPEG Video", "MPEG Video");
+	public static final String CDA_LEVEL_1_MULTIPART_CODE = "multipart/x-hl7-cda-level1";
 
 	/**
 	 * <div class="en">Code for DICOM</div> <div class="de">Code für DICOM</div>
 	 * <div class="fr">Code de DICOM</div> <div class="it">Code per DICOM</div>
 	 */
 	public static final String DICOM_CODE = "application/dicom";
-
-	/**
-	 * <div class="en">Code for PDF</div> <div class="de">Code für PDF</div>
-	 * <div class="fr">Code de PDF</div> <div class="it">Code per PDF</div>
-	 */
-	public static final String PDF_CODE = "application/pdf";
-
-	/**
-	 * <div class="en">Code for MPEG audio layer 3</div> <div class="de">Code
-	 * für MPEG audio layer 3</div> <div class="fr">Code de MPEG audio layer
-	 * 3</div> <div class="it">Code per MPEG audio layer 3</div>
-	 */
-	public static final String MPEG_AUDIO_LAYER_3_CODE = "audio/mpeg";
 
 	/**
 	 * <div class="en">Code for GIF Graphics Interchange Format</div>
@@ -147,6 +141,33 @@ public enum MimeType implements ValueSetEnumInterface {
 	public static final String JPEG_IMAGE_CODE = "image/jpeg";
 
 	/**
+	 * <div class="en">Code for MPEG audio layer 3</div> <div class="de">Code
+	 * für MPEG audio layer 3</div> <div class="fr">Code de MPEG audio layer
+	 * 3</div> <div class="it">Code per MPEG audio layer 3</div>
+	 */
+	public static final String MPEG_AUDIO_LAYER_3_CODE = "audio/mpeg";
+
+	/**
+	 * <div class="en">Code for MPEG Video</div> <div class="de">Code für MPEG
+	 * Video</div> <div class="fr">Code de MPEG Video</div> <div class="it">Code
+	 * per MPEG Video</div>
+	 */
+	public static final String MPEG_VIDEO_CODE = "video/mpeg";
+
+	/**
+	 * <div class="en">Code for PDF</div> <div class="de">Code für PDF</div>
+	 * <div class="fr">Code de PDF</div> <div class="it">Code per PDF</div>
+	 */
+	public static final String PDF_CODE = "application/pdf";
+
+	/**
+	 * <div class="en">Code for Plain Text</div> <div class="de">Code für Plain
+	 * Text</div> <div class="fr">Code de Plain Text</div> <div class="it">Code
+	 * per Plain Text</div>
+	 */
+	public static final String PLAIN_TEXT_CODE = "text/plain";
+
+	/**
 	 * <div class="en">Code for PNG Portable Network Graphics</div>
 	 * <div class="de">Code für PNG Portable Network Graphics</div>
 	 * <div class="fr">Code de PNG Portable Network Graphics</div>
@@ -162,32 +183,10 @@ public enum MimeType implements ValueSetEnumInterface {
 	public static final String TIFF_IMAGE_CODE = "image/tiff";
 
 	/**
-	 * <div class="en">Code for CDA Level 1 Multipart</div> <div class="de">Code
-	 * für CDA Level 1 Multipart</div> <div class="fr">Code de CDA Level 1
-	 * Multipart</div> <div class="it">Code per CDA Level 1 Multipart</div>
+	 * <div class="en">Identifier of the value set</div>
+	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
 	 */
-	public static final String CDA_LEVEL_1_MULTIPART_CODE = "multipart/x-hl7-cda-level1";
-
-	/**
-	 * <div class="en">Code for Plain Text</div> <div class="de">Code für Plain
-	 * Text</div> <div class="fr">Code de Plain Text</div> <div class="it">Code
-	 * per Plain Text</div>
-	 */
-	public static final String PLAIN_TEXT_CODE = "text/plain";
-
-	/**
-	 * <div class="en">Code for XML-Text</div> <div class="de">Code für
-	 * XML-Text</div> <div class="fr">Code de XML-Text</div>
-	 * <div class="it">Code per XML-Text</div>
-	 */
-	public static final String XML_TEXT_CODE = "text/xml";
-
-	/**
-	 * <div class="en">Code for MPEG Video</div> <div class="de">Code für MPEG
-	 * Video</div> <div class="fr">Code de MPEG Video</div> <div class="it">Code
-	 * per MPEG Video</div>
-	 */
-	public static final String MPEG_VIDEO_CODE = "video/mpeg";
+	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.16";
 
 	/**
 	 * <div class="en">Name of the value set</div> <div class="de">Name des
@@ -196,10 +195,11 @@ public enum MimeType implements ValueSetEnumInterface {
 	public static final String VALUE_SET_NAME = "epd_xds_mimeType";
 
 	/**
-	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
+	 * <div class="en">Code for XML-Text</div> <div class="de">Code für
+	 * XML-Text</div> <div class="fr">Code de XML-Text</div>
+	 * <div class="it">Code per XML-Text</div>
 	 */
-	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.16";
+	public static final String XML_TEXT_CODE = "text/xml";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -258,11 +258,6 @@ public enum MimeType implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * The display names per language
-	 */
-	private Map<LanguageCode, String> displayNames;
-
-	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>
@@ -274,6 +269,11 @@ public enum MimeType implements ValueSetEnumInterface {
 	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
 	 */
 	private String codeSystem;
+
+	/**
+	 * The display names per language
+	 */
+	private Map<LanguageCode, String> displayNames;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and

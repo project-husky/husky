@@ -77,16 +77,16 @@ public enum ConfidentialityCode implements ValueSetEnumInterface {
 	public static final String SECRET_CODE = "1141000195107";
 
 	/**
-	 * <div class="en">Name of the value set</div> <div class="de">Name des
-	 * Value Sets</div>
-	 */
-	public static final String VALUE_SET_NAME = "epd_xds_confidentialityCode";
-
-	/**
 	 * <div class="en">Identifier of the value set</div>
 	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.5";
+
+	/**
+	 * <div class="en">Name of the value set</div> <div class="de">Name des
+	 * Value Sets</div>
+	 */
+	public static final String VALUE_SET_NAME = "epd_xds_confidentialityCode";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -145,11 +145,6 @@ public enum ConfidentialityCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * The display names per language
-	 */
-	private Map<LanguageCode, String> displayNames;
-
-	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>
@@ -161,6 +156,11 @@ public enum ConfidentialityCode implements ValueSetEnumInterface {
 	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
 	 */
 	private String codeSystem;
+
+	/**
+	 * The display names per language
+	 */
+	private Map<LanguageCode, String> displayNames;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and

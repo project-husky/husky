@@ -52,39 +52,6 @@ import org.ehealth_connector.common.enums.LanguageCode;
 public enum FormatCode implements ValueSetEnumInterface {
 
 	/**
-	 * <div class="en">Unstructured EPD document</div>
-	 * <div class="de">Unstrukturiertes EPD Dokument</div>
-	 * <div class="fr">Document DEP non structuré</div>
-	 * <div class="it">Documento CIP non strutturato</div>
-	 */
-	UNSTRUCTURED_EPD_DOCUMENT("urn:che:epd:EPD_Unstructured_Document",
-			"2.16.756.5.30.1.127.77.10.5.2", "Unstructured EPD document",
-			"Unstructured EPD document", "Unstrukturiertes EPD Dokument",
-			"Document DEP non structuré", "Documento CIP non strutturato"),
-	/**
-	 * <div class="en">IHE KOS document</div> <div class="de">KOS Dokument</div>
-	 * <div class="fr">Document KOS</div> <div class="it">Documento KOS </div>
-	 */
-	IHE_KOS_DOCUMENT("1.2.840.10008.5.1.4.1.1.88.59", "1.2.840.10008.2.6.1",
-			"	 DICOM Manifest (DICOM KOS SOP Class UID)", "IHE KOS document", "KOS Dokument",
-			"Document KOS", "Documento KOS "),
-	/**
-	 * <div class="en">CDA Wrapped Text Report</div> <div class="de">CDA Wrapped
-	 * Text Report</div> <div class="fr">CDA Wrapped Text Report</div>
-	 * <div class="it">CDA Wrapped Text Report</div>
-	 */
-	CDA_WRAPPED_TEXT_REPORT("urn:ihe:rad:TEXT", "1.3.6.1.4.1.19376.1.2.3",
-			"XDS-I CDA Wrapped Text Report (XDS-I)", "CDA Wrapped Text Report",
-			"CDA Wrapped Text Report", "CDA Wrapped Text Report", "CDA Wrapped Text Report"),
-	/**
-	 * <div class="en">PDF Radiology Report</div> <div class="de">PDF Radiology
-	 * Report</div> <div class="fr">PDF Radiology Report</div>
-	 * <div class="it">PDF Radiology Report</div>
-	 */
-	PDF_RADIOLOGY_REPORT("urn:ihe:rad:PDF", "1.3.6.1.4.1.19376.1.2.3", "XDS-I PDF (XDS-I)",
-			"PDF Radiology Report", "PDF Radiology Report", "PDF Radiology Report",
-			"PDF Radiology Report"),
-	/**
 	 * <div class="en">CDA Imaging Report with Structured Headings</div>
 	 * <div class="de">CDA Imaging Report with Structured Headings</div>
 	 * <div class="fr">CDA Imaging Report with Structured Headings</div>
@@ -98,25 +65,28 @@ public enum FormatCode implements ValueSetEnumInterface {
 			"CDA Imaging Report with Structured Headings",
 			"CDA Imaging Report with Structured Headings"),
 	/**
-	 * <div class="en">PDF embedded in CDA per XDS-SD profile</div>
-	 * <div class="de">PDF embedded in CDA per XDS-SD profile</div>
-	 * <div class="fr">PDF embedded in CDA per XDS-SD profile</div>
-	 * <div class="it">PDF embedded in CDA per XDS-SD profile</div>
+	 * <div class="en">CDA Laboratory Report</div> <div class="de">CDA
+	 * Laboratory Report</div> <div class="fr">CDA Laboratory Report</div>
+	 * <div class="it">CDA Laboratory Report</div>
 	 */
-	PDF_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE("urn:ihe:iti:xds-sd:pdf:2008", "1.3.6.1.4.1.19376.1.2.3",
-			"Scanned Documents (PDF)", "PDF embedded in CDA per XDS-SD profile",
-			"PDF embedded in CDA per XDS-SD profile", "PDF embedded in CDA per XDS-SD profile",
-			"PDF embedded in CDA per XDS-SD profile"),
+	CDA_LABORATORY_REPORT("urn:ihe:lab:xd-lab:2008", "1.3.6.1.4.1.19376.1.2.3",
+			"CDA Laboratory Report", "CDA Laboratory Report", "CDA Laboratory Report",
+			"CDA Laboratory Report", "CDA Laboratory Report"),
 	/**
-	 * <div class="en">Text embedded in CDA per XDS-SD profile</div>
-	 * <div class="de">Text embedded in CDA per XDS-SD profile</div>
-	 * <div class="fr">Text embedded in CDA per XDS-SD profile</div>
-	 * <div class="it">Text embedded in CDA per XDS-SD profile</div>
+	 * <div class="en">CDA Wrapped Text Report</div> <div class="de">CDA Wrapped
+	 * Text Report</div> <div class="fr">CDA Wrapped Text Report</div>
+	 * <div class="it">CDA Wrapped Text Report</div>
 	 */
-	TEXT_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE("urn:ihe:iti:xds-sd:text:2008",
-			"1.3.6.1.4.1.19376.1.2.3", "Scanned Documents (text)",
-			"Text embedded in CDA per XDS-SD profile", "Text embedded in CDA per XDS-SD profile",
-			"Text embedded in CDA per XDS-SD profile", "Text embedded in CDA per XDS-SD profile"),
+	CDA_WRAPPED_TEXT_REPORT("urn:ihe:rad:TEXT", "1.3.6.1.4.1.19376.1.2.3",
+			"XDS-I CDA Wrapped Text Report (XDS-I)", "CDA Wrapped Text Report",
+			"CDA Wrapped Text Report", "CDA Wrapped Text Report", "CDA Wrapped Text Report"),
+	/**
+	 * <div class="en">Community Dispense</div> <div class="de">Community
+	 * Dispense</div> <div class="fr">Community Dispense</div>
+	 * <div class="it">Community Dispense</div>
+	 */
+	COMMUNITY_DISPENSE("urn:ihe:pharm:dis:2010", "1.3.6.1.4.1.19376.1.2.3", "Community Dispense",
+			"Community Dispense", "Community Dispense", "Community Dispense", "Community Dispense"),
 	/**
 	 * <div class="en">Community Medication List</div> <div class="de">Community
 	 * Medication List</div> <div class="fr">Community Medication List</div>
@@ -125,21 +95,6 @@ public enum FormatCode implements ValueSetEnumInterface {
 	COMMUNITY_MEDICATION_LIST("urn:ihe:pharm:pml:2013", "1.3.6.1.4.1.19376.1.2.3",
 			"Community Medication List", "Community Medication List", "Community Medication List",
 			"Community Medication List", "Community Medication List"),
-	/**
-	 * <div class="en">Community Prescription</div> <div class="de">Community
-	 * Prescription</div> <div class="fr">Community Prescription</div>
-	 * <div class="it">Community Prescription</div>
-	 */
-	COMMUNITY_PRESCRIPTION("urn:ihe:pharm:pre:2010", "1.3.6.1.4.1.19376.1.2.3",
-			"Community Prescription", "Community Prescription", "Community Prescription",
-			"Community Prescription", "Community Prescription"),
-	/**
-	 * <div class="en">Community Dispense</div> <div class="de">Community
-	 * Dispense</div> <div class="fr">Community Dispense</div>
-	 * <div class="it">Community Dispense</div>
-	 */
-	COMMUNITY_DISPENSE("urn:ihe:pharm:dis:2010", "1.3.6.1.4.1.19376.1.2.3", "Community Dispense",
-			"Community Dispense", "Community Dispense", "Community Dispense", "Community Dispense"),
 	/**
 	 * <div class="en">Community Medication Treatment Plan</div>
 	 * <div class="de">Community Medication Treatment Plan</div>
@@ -161,13 +116,20 @@ public enum FormatCode implements ValueSetEnumInterface {
 			"Community Pharmaceutical Advice", "Community Pharmaceutical Advice",
 			"Community Pharmaceutical Advice"),
 	/**
-	 * <div class="en">CDA Laboratory Report</div> <div class="de">CDA
-	 * Laboratory Report</div> <div class="fr">CDA Laboratory Report</div>
-	 * <div class="it">CDA Laboratory Report</div>
+	 * <div class="en">Community Prescription</div> <div class="de">Community
+	 * Prescription</div> <div class="fr">Community Prescription</div>
+	 * <div class="it">Community Prescription</div>
 	 */
-	CDA_LABORATORY_REPORT("urn:ihe:lab:xd-lab:2008", "1.3.6.1.4.1.19376.1.2.3",
-			"CDA Laboratory Report", "CDA Laboratory Report", "CDA Laboratory Report",
-			"CDA Laboratory Report", "CDA Laboratory Report"),
+	COMMUNITY_PRESCRIPTION("urn:ihe:pharm:pre:2010", "1.3.6.1.4.1.19376.1.2.3",
+			"Community Prescription", "Community Prescription", "Community Prescription",
+			"Community Prescription", "Community Prescription"),
+	/**
+	 * <div class="en">IHE KOS document</div> <div class="de">KOS Dokument</div>
+	 * <div class="fr">Document KOS</div> <div class="it">Documento KOS </div>
+	 */
+	IHE_KOS_DOCUMENT("1.2.840.10008.5.1.4.1.1.88.59", "1.2.840.10008.2.6.1",
+			"	 DICOM Manifest (DICOM KOS SOP Class UID)", "IHE KOS document", "KOS Dokument",
+			"Document KOS", "Documento KOS "),
 	/**
 	 * <div class="en">Immunization Content (IC)</div>
 	 * <div class="de">Immunization Content (IC)</div>
@@ -184,37 +146,45 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 */
 	MIMETYPE_SUFFICIENT("urn:ihe:iti:xds:2017:mimeTypeSufficient", "2.16.756.5.30.1.127.77.10.5.2",
 			"MimeType sufficient", "MimeType sufficient", "MimeType sufficient",
-			"MimeType sufficient", "MimeType sufficient");
-
+			"MimeType sufficient", "MimeType sufficient"),
 	/**
-	 * <div class="en">Code for Unstructured EPD document</div>
-	 * <div class="de">Code für Unstrukturiertes EPD Dokument</div>
-	 * <div class="fr">Code de Document DEP non structuré</div>
-	 * <div class="it">Code per Documento CIP non strutturato</div>
+	 * <div class="en">PDF embedded in CDA per XDS-SD profile</div>
+	 * <div class="de">PDF embedded in CDA per XDS-SD profile</div>
+	 * <div class="fr">PDF embedded in CDA per XDS-SD profile</div>
+	 * <div class="it">PDF embedded in CDA per XDS-SD profile</div>
 	 */
-	public static final String UNSTRUCTURED_EPD_DOCUMENT_CODE = "urn:che:epd:EPD_Unstructured_Document";
-
+	PDF_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE("urn:ihe:iti:xds-sd:pdf:2008", "1.3.6.1.4.1.19376.1.2.3",
+			"Scanned Documents (PDF)", "PDF embedded in CDA per XDS-SD profile",
+			"PDF embedded in CDA per XDS-SD profile", "PDF embedded in CDA per XDS-SD profile",
+			"PDF embedded in CDA per XDS-SD profile"),
 	/**
-	 * <div class="en">Code for IHE KOS document</div> <div class="de">Code für
-	 * KOS Dokument</div> <div class="fr">Code de Document KOS</div>
-	 * <div class="it">Code per Documento KOS </div>
+	 * <div class="en">PDF Radiology Report</div> <div class="de">PDF Radiology
+	 * Report</div> <div class="fr">PDF Radiology Report</div>
+	 * <div class="it">PDF Radiology Report</div>
 	 */
-	public static final String IHE_KOS_DOCUMENT_CODE = "1.2.840.10008.5.1.4.1.1.88.59";
-
+	PDF_RADIOLOGY_REPORT("urn:ihe:rad:PDF", "1.3.6.1.4.1.19376.1.2.3", "XDS-I PDF (XDS-I)",
+			"PDF Radiology Report", "PDF Radiology Report", "PDF Radiology Report",
+			"PDF Radiology Report"),
 	/**
-	 * <div class="en">Code for CDA Wrapped Text Report</div>
-	 * <div class="de">Code für CDA Wrapped Text Report</div>
-	 * <div class="fr">Code de CDA Wrapped Text Report</div>
-	 * <div class="it">Code per CDA Wrapped Text Report</div>
+	 * <div class="en">Text embedded in CDA per XDS-SD profile</div>
+	 * <div class="de">Text embedded in CDA per XDS-SD profile</div>
+	 * <div class="fr">Text embedded in CDA per XDS-SD profile</div>
+	 * <div class="it">Text embedded in CDA per XDS-SD profile</div>
 	 */
-	public static final String CDA_WRAPPED_TEXT_REPORT_CODE = "urn:ihe:rad:TEXT";
-
+	TEXT_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE("urn:ihe:iti:xds-sd:text:2008",
+			"1.3.6.1.4.1.19376.1.2.3", "Scanned Documents (text)",
+			"Text embedded in CDA per XDS-SD profile", "Text embedded in CDA per XDS-SD profile",
+			"Text embedded in CDA per XDS-SD profile", "Text embedded in CDA per XDS-SD profile"),
 	/**
-	 * <div class="en">Code for PDF Radiology Report</div> <div class="de">Code
-	 * für PDF Radiology Report</div> <div class="fr">Code de PDF Radiology
-	 * Report</div> <div class="it">Code per PDF Radiology Report</div>
+	 * <div class="en">Unstructured EPD document</div>
+	 * <div class="de">Unstrukturiertes EPD Dokument</div>
+	 * <div class="fr">Document DEP non structuré</div>
+	 * <div class="it">Documento CIP non strutturato</div>
 	 */
-	public static final String PDF_RADIOLOGY_REPORT_CODE = "urn:ihe:rad:PDF";
+	UNSTRUCTURED_EPD_DOCUMENT("urn:che:epd:EPD_Unstructured_Document",
+			"2.16.756.5.30.1.127.77.10.5.2", "Unstructured EPD document",
+			"Unstructured EPD document", "Unstrukturiertes EPD Dokument",
+			"Document DEP non structuré", "Documento CIP non strutturato");
 
 	/**
 	 * <div class="en">Code for CDA Imaging Report with Structured
@@ -226,20 +196,26 @@ public enum FormatCode implements ValueSetEnumInterface {
 	public static final String CDA_IMAGING_REPORT_WITH_STRUCTURED_HEADINGS_CODE = "urn:ihe:rad:CDA:ImagingReportStructuredHeadings:2013";
 
 	/**
-	 * <div class="en">Code for PDF embedded in CDA per XDS-SD profile</div>
-	 * <div class="de">Code für PDF embedded in CDA per XDS-SD profile</div>
-	 * <div class="fr">Code de PDF embedded in CDA per XDS-SD profile</div>
-	 * <div class="it">Code per PDF embedded in CDA per XDS-SD profile</div>
+	 * <div class="en">Code for CDA Laboratory Report</div> <div class="de">Code
+	 * für CDA Laboratory Report</div> <div class="fr">Code de CDA Laboratory
+	 * Report</div> <div class="it">Code per CDA Laboratory Report</div>
 	 */
-	public static final String PDF_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE_CODE = "urn:ihe:iti:xds-sd:pdf:2008";
+	public static final String CDA_LABORATORY_REPORT_CODE = "urn:ihe:lab:xd-lab:2008";
 
 	/**
-	 * <div class="en">Code for Text embedded in CDA per XDS-SD profile</div>
-	 * <div class="de">Code für Text embedded in CDA per XDS-SD profile</div>
-	 * <div class="fr">Code de Text embedded in CDA per XDS-SD profile</div>
-	 * <div class="it">Code per Text embedded in CDA per XDS-SD profile</div>
+	 * <div class="en">Code for CDA Wrapped Text Report</div>
+	 * <div class="de">Code für CDA Wrapped Text Report</div>
+	 * <div class="fr">Code de CDA Wrapped Text Report</div>
+	 * <div class="it">Code per CDA Wrapped Text Report</div>
 	 */
-	public static final String TEXT_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE_CODE = "urn:ihe:iti:xds-sd:text:2008";
+	public static final String CDA_WRAPPED_TEXT_REPORT_CODE = "urn:ihe:rad:TEXT";
+
+	/**
+	 * <div class="en">Code for Community Dispense</div> <div class="de">Code
+	 * für Community Dispense</div> <div class="fr">Code de Community
+	 * Dispense</div> <div class="it">Code per Community Dispense</div>
+	 */
+	public static final String COMMUNITY_DISPENSE_CODE = "urn:ihe:pharm:dis:2010";
 
 	/**
 	 * <div class="en">Code for Community Medication List</div>
@@ -248,21 +224,6 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="it">Code per Community Medication List</div>
 	 */
 	public static final String COMMUNITY_MEDICATION_LIST_CODE = "urn:ihe:pharm:pml:2013";
-
-	/**
-	 * <div class="en">Code for Community Prescription</div>
-	 * <div class="de">Code für Community Prescription</div>
-	 * <div class="fr">Code de Community Prescription</div> <div class="it">Code
-	 * per Community Prescription</div>
-	 */
-	public static final String COMMUNITY_PRESCRIPTION_CODE = "urn:ihe:pharm:pre:2010";
-
-	/**
-	 * <div class="en">Code for Community Dispense</div> <div class="de">Code
-	 * für Community Dispense</div> <div class="fr">Code de Community
-	 * Dispense</div> <div class="it">Code per Community Dispense</div>
-	 */
-	public static final String COMMUNITY_DISPENSE_CODE = "urn:ihe:pharm:dis:2010";
 
 	/**
 	 * <div class="en">Code for Community Medication Treatment Plan</div>
@@ -281,11 +242,19 @@ public enum FormatCode implements ValueSetEnumInterface {
 	public static final String COMMUNITY_PHARMACEUTICAL_ADVICE_CODE = "urn:ihe:pharm:padv:2010";
 
 	/**
-	 * <div class="en">Code for CDA Laboratory Report</div> <div class="de">Code
-	 * für CDA Laboratory Report</div> <div class="fr">Code de CDA Laboratory
-	 * Report</div> <div class="it">Code per CDA Laboratory Report</div>
+	 * <div class="en">Code for Community Prescription</div>
+	 * <div class="de">Code für Community Prescription</div>
+	 * <div class="fr">Code de Community Prescription</div> <div class="it">Code
+	 * per Community Prescription</div>
 	 */
-	public static final String CDA_LABORATORY_REPORT_CODE = "urn:ihe:lab:xd-lab:2008";
+	public static final String COMMUNITY_PRESCRIPTION_CODE = "urn:ihe:pharm:pre:2010";
+
+	/**
+	 * <div class="en">Code for IHE KOS document</div> <div class="de">Code für
+	 * KOS Dokument</div> <div class="fr">Code de Document KOS</div>
+	 * <div class="it">Code per Documento KOS </div>
+	 */
+	public static final String IHE_KOS_DOCUMENT_CODE = "1.2.840.10008.5.1.4.1.1.88.59";
 
 	/**
 	 * <div class="en">Code for Immunization Content (IC)</div>
@@ -303,16 +272,47 @@ public enum FormatCode implements ValueSetEnumInterface {
 	public static final String MIMETYPE_SUFFICIENT_CODE = "urn:ihe:iti:xds:2017:mimeTypeSufficient";
 
 	/**
-	 * <div class="en">Name of the value set</div> <div class="de">Name des
-	 * Value Sets</div>
+	 * <div class="en">Code for PDF embedded in CDA per XDS-SD profile</div>
+	 * <div class="de">Code für PDF embedded in CDA per XDS-SD profile</div>
+	 * <div class="fr">Code de PDF embedded in CDA per XDS-SD profile</div>
+	 * <div class="it">Code per PDF embedded in CDA per XDS-SD profile</div>
 	 */
-	public static final String VALUE_SET_NAME = "epd_xds_formatCode";
+	public static final String PDF_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE_CODE = "urn:ihe:iti:xds-sd:pdf:2008";
+
+	/**
+	 * <div class="en">Code for PDF Radiology Report</div> <div class="de">Code
+	 * für PDF Radiology Report</div> <div class="fr">Code de PDF Radiology
+	 * Report</div> <div class="it">Code per PDF Radiology Report</div>
+	 */
+	public static final String PDF_RADIOLOGY_REPORT_CODE = "urn:ihe:rad:PDF";
+
+	/**
+	 * <div class="en">Code for Text embedded in CDA per XDS-SD profile</div>
+	 * <div class="de">Code für Text embedded in CDA per XDS-SD profile</div>
+	 * <div class="fr">Code de Text embedded in CDA per XDS-SD profile</div>
+	 * <div class="it">Code per Text embedded in CDA per XDS-SD profile</div>
+	 */
+	public static final String TEXT_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE_CODE = "urn:ihe:iti:xds-sd:text:2008";
+
+	/**
+	 * <div class="en">Code for Unstructured EPD document</div>
+	 * <div class="de">Code für Unstrukturiertes EPD Dokument</div>
+	 * <div class="fr">Code de Document DEP non structuré</div>
+	 * <div class="it">Code per Documento CIP non strutturato</div>
+	 */
+	public static final String UNSTRUCTURED_EPD_DOCUMENT_CODE = "urn:che:epd:EPD_Unstructured_Document";
 
 	/**
 	 * <div class="en">Identifier of the value set</div>
 	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.9";
+
+	/**
+	 * <div class="en">Name of the value set</div> <div class="de">Name des
+	 * Value Sets</div>
+	 */
+	public static final String VALUE_SET_NAME = "epd_xds_formatCode";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -371,11 +371,6 @@ public enum FormatCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * The display names per language
-	 */
-	private Map<LanguageCode, String> displayNames;
-
-	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>
@@ -387,6 +382,11 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
 	 */
 	private String codeSystem;
+
+	/**
+	 * The display names per language
+	 */
+	private Map<LanguageCode, String> displayNames;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and

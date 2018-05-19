@@ -48,6 +48,71 @@ import org.ehealth_connector.common.enums.LanguageCode;
 public enum AuthorRole implements ValueSetEnumInterface {
 
 	/**
+	 * <div class="en">Breast Feeding Consultant</div>
+	 * <div class="de">Stillberaterin</div> <div class="fr">Consultante en
+	 * lactation</div> <div class="it">Consulente per l'allattamento</div>
+	 */
+	BREAST_FEEDING_CONSULTANT("225726006", "2.16.840.1.113883.6.96",
+			"Lactation consultant (occupation)", "Breast Feeding Consultant", "Stillberaterin",
+			"Consultante en lactation", "Consulente per l'allattamento"),
+	/**
+	 * <div class="en">Chiropractor</div> <div class="de">Chiropraktiker</div>
+	 * <div class="fr">Chiropracteur</div> <div class="it">Chiropratico</div>
+	 */
+	CHIROPRACTOR("3842006", "2.16.840.1.113883.6.96", "Chiropractor (occupation)", "Chiropractor",
+			"Chiropraktiker", "Chiropracteur", "Chiropratico"),
+	/**
+	 * <div class="en">Complementary therapist</div>
+	 * <div class="de">Komplementärmediziner</div> <div class="fr">Thérapeute en
+	 * médecine alternative et complémentaire</div> <div class="it">Terapista
+	 * complementare</div>
+	 */
+	COMPLEMENTARY_THERAPIST("224609002", "2.16.840.1.113883.6.96",
+			"Complementary health worker (occupation)", "Complementary therapist",
+			"Komplementärmediziner", "Thérapeute en médecine alternative et complémentaire",
+			"Terapista complementare"),
+	/**
+	 * <div class="en">Dentist</div> <div class="de">Zahnarzt</div>
+	 * <div class="fr">Dentiste</div> <div class="it">Dentista</div>
+	 */
+	DENTIST("106289002", "2.16.840.1.113883.6.96", "Dentist (occupation)", "Dentist", "Zahnarzt",
+			"Dentiste", "Dentista"),
+	/**
+	 * <div class="en">Dietitian</div> <div class="de">Ernährungsberater</div>
+	 * <div class="fr">Diététicien</div> <div class="it">Nutrizionista</div>
+	 */
+	DIETITIAN("159033005", "2.16.840.1.113883.6.96", "Dietitian (occupation)", "Dietitian",
+			"Ernährungsberater", "Diététicien", "Nutrizionista"),
+	/**
+	 * <div class="en">Healthcare professional</div> <div class="de">Andere
+	 * Gesundheitsfachperson</div> <div class="fr">Autre professionnel de la
+	 * santé</div> <div class="it">Altri professionisti della salute</div>
+	 */
+	HEALTHCARE_PROFESSIONAL("223366009", "2.16.840.1.113883.6.96",
+			"Healthcare professional (occupation)", "Healthcare professional",
+			"Andere Gesundheitsfachperson", "Autre professionnel de la santé",
+			"Altri professionisti della salute"),
+	/**
+	 * <div class="en">Midwife</div> <div class="de">Hebamme</div>
+	 * <div class="fr">Sage-femme</div> <div class="it">Ostetrica</div>
+	 */
+	MIDWIFE("309453006", "2.16.840.1.113883.6.96", "Registered midwife (occupation)", "Midwife",
+			"Hebamme", "Sage-femme", "Ostetrica"),
+	/**
+	 * <div class="en">Occupational therapist</div>
+	 * <div class="de">Ergotherapeut</div> <div class="fr">Ergothérapeute</div>
+	 * <div class="it">Ergoterapista</div>
+	 */
+	OCCUPATIONAL_THERAPIST("80546007", "2.16.840.1.113883.6.96",
+			"Occupational therapist (occupation)", "Occupational therapist", "Ergotherapeut",
+			"Ergothérapeute", "Ergoterapista"),
+	/**
+	 * <div class="en">Patient</div> <div class="de">Patient</div>
+	 * <div class="fr">Patient</div> <div class="it">Paziente</div>
+	 */
+	PATIENT("116154003", "2.16.840.1.113883.6.96", "Patient (person)", "Patient", "Patient",
+			"Patient", "Paziente"),
+	/**
 	 * <div class="en">Pharmacist</div> <div class="de">Apotheker</div>
 	 * <div class="fr">Pharmacien</div> <div class="it">Farmacista</div>
 	 */
@@ -60,39 +125,13 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	PHYSICIAN("309343006", "2.16.840.1.113883.6.96", "Physician (occupation)", "Physician ", "Arzt",
 			"Médecin", "Medico"),
 	/**
-	 * <div class="en">Chiropractor</div> <div class="de">Chiropraktiker</div>
-	 * <div class="fr">Chiropracteur</div> <div class="it">Chiropratico</div>
+	 * <div class="en">Physiotherapist</div>
+	 * <div class="de">Physiotherapeut</div>
+	 * <div class="fr">Physiothérapeute</div>
+	 * <div class="it">Fisioterapista</div>
 	 */
-	CHIROPRACTOR("3842006", "2.16.840.1.113883.6.96", "Chiropractor (occupation)", "Chiropractor",
-			"Chiropraktiker", "Chiropracteur", "Chiropratico"),
-	/**
-	 * <div class="en">Dietitian</div> <div class="de">Ernährungsberater</div>
-	 * <div class="fr">Diététicien</div> <div class="it">Nutrizionista</div>
-	 */
-	DIETITIAN("159033005", "2.16.840.1.113883.6.96", "Dietitian (occupation)", "Dietitian",
-			"Ernährungsberater", "Diététicien", "Nutrizionista"),
-	/**
-	 * <div class="en">Midwife</div> <div class="de">Hebamme</div>
-	 * <div class="fr">Sage-femme</div> <div class="it">Ostetrica</div>
-	 */
-	MIDWIFE("309453006", "2.16.840.1.113883.6.96", "Registered midwife (occupation)", "Midwife",
-			"Hebamme", "Sage-femme", "Ostetrica"),
-	/**
-	 * <div class="en">Complementary therapist</div>
-	 * <div class="de">Komplementärmediziner</div> <div class="fr">Thérapeute en
-	 * médecine alternative et complémentaire</div> <div class="it">Terapista
-	 * complementare</div>
-	 */
-	COMPLEMENTARY_THERAPIST("224609002", "2.16.840.1.113883.6.96",
-			"Complementary health worker (occupation)", "Complementary therapist",
-			"Komplementärmediziner", "Thérapeute en médecine alternative et complémentaire",
-			"Terapista complementare"),
-	/**
-	 * <div class="en">Patient</div> <div class="de">Patient</div>
-	 * <div class="fr">Patient</div> <div class="it">Paziente</div>
-	 */
-	PATIENT("116154003", "2.16.840.1.113883.6.96", "Patient (person)", "Patient", "Patient",
-			"Patient", "Paziente"),
+	PHYSIOTHERAPIST("36682004", "2.16.840.1.113883.6.96", "Physiotherapist (occupation)",
+			"Physiotherapist", "Physiotherapeut", "Physiothérapeute", "Fisioterapista"),
 	/**
 	 * <div class="en">Professional nurse</div>
 	 * <div class="de">Pflegefachperson</div> <div class="fr">Infirmier</div>
@@ -107,6 +146,12 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	PSYCHOLOGIST("59944000", "2.16.840.1.113883.6.96", "Psychologist (occupation)", "Psychologist ",
 			"Psychologe", "Psychologue", "Psicologo"),
 	/**
+	 * <div class="en">Radiologist</div> <div class="de">Radiologe</div>
+	 * <div class="fr">Radiologue</div> <div class="it">Radiologo</div>
+	 */
+	RADIOLOGIST("66862007", "2.16.840.1.113883.6.96", "Radiologist (occupation)", "Radiologist",
+			"Radiologe", "Radiologue", "Radiologo"),
+	/**
 	 * <div class="en">Social worker</div>
 	 * <div class="de">Sozialdienstmitarbeiter</div> <div class="fr">Assistant
 	 * social</div> <div class="it">Assistente sociale</div>
@@ -119,52 +164,73 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	 */
 	SPEECH_THERAPIST("159026005", "2.16.840.1.113883.6.96",
 			"Speech/language therapist (occupation)", "Speech therapist", "Logopäde", "Logopédiste",
-			"Logopedista"),
+			"Logopedista");
+
 	/**
-	 * <div class="en">Physiotherapist</div>
-	 * <div class="de">Physiotherapeut</div>
-	 * <div class="fr">Physiothérapeute</div>
-	 * <div class="it">Fisioterapista</div>
+	 * <div class="en">Code for Breast Feeding Consultant</div>
+	 * <div class="de">Code für Stillberaterin</div> <div class="fr">Code de
+	 * Consultante en lactation</div> <div class="it">Code per Consulente per
+	 * l'allattamento</div>
 	 */
-	PHYSIOTHERAPIST("36682004", "2.16.840.1.113883.6.96", "Physiotherapist (occupation)",
-			"Physiotherapist", "Physiotherapeut", "Physiothérapeute", "Fisioterapista"),
+	public static final String BREAST_FEEDING_CONSULTANT_CODE = "225726006";
+
 	/**
-	 * <div class="en">Occupational therapist</div>
-	 * <div class="de">Ergotherapeut</div> <div class="fr">Ergothérapeute</div>
-	 * <div class="it">Ergoterapista</div>
+	 * <div class="en">Code for Chiropractor</div> <div class="de">Code für
+	 * Chiropraktiker</div> <div class="fr">Code de Chiropracteur</div>
+	 * <div class="it">Code per Chiropratico</div>
 	 */
-	OCCUPATIONAL_THERAPIST("80546007", "2.16.840.1.113883.6.96",
-			"Occupational therapist (occupation)", "Occupational therapist", "Ergotherapeut",
-			"Ergothérapeute", "Ergoterapista"),
+	public static final String CHIROPRACTOR_CODE = "3842006";
+
 	/**
-	 * <div class="en">Breast Feeding Consultant</div>
-	 * <div class="de">Stillberaterin</div> <div class="fr">Consultante en
-	 * lactation</div> <div class="it">Consulente per l'allattamento</div>
+	 * <div class="en">Code for Complementary therapist</div>
+	 * <div class="de">Code für Komplementärmediziner</div> <div class="fr">Code
+	 * de Thérapeute en médecine alternative et complémentaire</div>
+	 * <div class="it">Code per Terapista complementare</div>
 	 */
-	BREAST_FEEDING_CONSULTANT("225726006", "2.16.840.1.113883.6.96",
-			"Lactation consultant (occupation)", "Breast Feeding Consultant", "Stillberaterin",
-			"Consultante en lactation", "Consulente per l'allattamento"),
+	public static final String COMPLEMENTARY_THERAPIST_CODE = "224609002";
+
 	/**
-	 * <div class="en">Dentist</div> <div class="de">Zahnarzt</div>
-	 * <div class="fr">Dentiste</div> <div class="it">Dentista</div>
+	 * <div class="en">Code for Dentist</div> <div class="de">Code für
+	 * Zahnarzt</div> <div class="fr">Code de Dentiste</div>
+	 * <div class="it">Code per Dentista</div>
 	 */
-	DENTIST("106289002", "2.16.840.1.113883.6.96", "Dentist (occupation)", "Dentist", "Zahnarzt",
-			"Dentiste", "Dentista"),
+	public static final String DENTIST_CODE = "106289002";
+
 	/**
-	 * <div class="en">Radiologist</div> <div class="de">Radiologe</div>
-	 * <div class="fr">Radiologue</div> <div class="it">Radiologo</div>
+	 * <div class="en">Code for Dietitian</div> <div class="de">Code für
+	 * Ernährungsberater</div> <div class="fr">Code de Diététicien</div>
+	 * <div class="it">Code per Nutrizionista</div>
 	 */
-	RADIOLOGIST("66862007", "2.16.840.1.113883.6.96", "Radiologist (occupation)", "Radiologist",
-			"Radiologe", "Radiologue", "Radiologo"),
+	public static final String DIETITIAN_CODE = "159033005";
+
 	/**
-	 * <div class="en">Healthcare professional</div> <div class="de">Andere
-	 * Gesundheitsfachperson</div> <div class="fr">Autre professionnel de la
-	 * santé</div> <div class="it">Altri professionisti della salute</div>
+	 * <div class="en">Code for Healthcare professional</div>
+	 * <div class="de">Code für Andere Gesundheitsfachperson</div>
+	 * <div class="fr">Code de Autre professionnel de la santé</div>
+	 * <div class="it">Code per Altri professionisti della salute</div>
 	 */
-	HEALTHCARE_PROFESSIONAL("223366009", "2.16.840.1.113883.6.96",
-			"Healthcare professional (occupation)", "Healthcare professional",
-			"Andere Gesundheitsfachperson", "Autre professionnel de la santé",
-			"Altri professionisti della salute");
+	public static final String HEALTHCARE_PROFESSIONAL_CODE = "223366009";
+
+	/**
+	 * <div class="en">Code for Midwife</div> <div class="de">Code für
+	 * Hebamme</div> <div class="fr">Code de Sage-femme</div>
+	 * <div class="it">Code per Ostetrica</div>
+	 */
+	public static final String MIDWIFE_CODE = "309453006";
+
+	/**
+	 * <div class="en">Code for Occupational therapist</div>
+	 * <div class="de">Code für Ergotherapeut</div> <div class="fr">Code de
+	 * Ergothérapeute</div> <div class="it">Code per Ergoterapista</div>
+	 */
+	public static final String OCCUPATIONAL_THERAPIST_CODE = "80546007";
+
+	/**
+	 * <div class="en">Code for Patient</div> <div class="de">Code für
+	 * Patient</div> <div class="fr">Code de Patient</div> <div class="it">Code
+	 * per Paziente</div>
+	 */
+	public static final String PATIENT_CODE = "116154003";
 
 	/**
 	 * <div class="en">Code for Pharmacist</div> <div class="de">Code für
@@ -181,40 +247,11 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	public static final String PHYSICIAN_CODE = "309343006";
 
 	/**
-	 * <div class="en">Code for Chiropractor</div> <div class="de">Code für
-	 * Chiropraktiker</div> <div class="fr">Code de Chiropracteur</div>
-	 * <div class="it">Code per Chiropratico</div>
+	 * <div class="en">Code for Physiotherapist</div> <div class="de">Code für
+	 * Physiotherapeut</div> <div class="fr">Code de Physiothérapeute</div>
+	 * <div class="it">Code per Fisioterapista</div>
 	 */
-	public static final String CHIROPRACTOR_CODE = "3842006";
-
-	/**
-	 * <div class="en">Code for Dietitian</div> <div class="de">Code für
-	 * Ernährungsberater</div> <div class="fr">Code de Diététicien</div>
-	 * <div class="it">Code per Nutrizionista</div>
-	 */
-	public static final String DIETITIAN_CODE = "159033005";
-
-	/**
-	 * <div class="en">Code for Midwife</div> <div class="de">Code für
-	 * Hebamme</div> <div class="fr">Code de Sage-femme</div>
-	 * <div class="it">Code per Ostetrica</div>
-	 */
-	public static final String MIDWIFE_CODE = "309453006";
-
-	/**
-	 * <div class="en">Code for Complementary therapist</div>
-	 * <div class="de">Code für Komplementärmediziner</div> <div class="fr">Code
-	 * de Thérapeute en médecine alternative et complémentaire</div>
-	 * <div class="it">Code per Terapista complementare</div>
-	 */
-	public static final String COMPLEMENTARY_THERAPIST_CODE = "224609002";
-
-	/**
-	 * <div class="en">Code for Patient</div> <div class="de">Code für
-	 * Patient</div> <div class="fr">Code de Patient</div> <div class="it">Code
-	 * per Paziente</div>
-	 */
-	public static final String PATIENT_CODE = "116154003";
+	public static final String PHYSIOTHERAPIST_CODE = "36682004";
 
 	/**
 	 * <div class="en">Code for Professional nurse</div> <div class="de">Code
@@ -231,6 +268,13 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	public static final String PSYCHOLOGIST_CODE = "59944000";
 
 	/**
+	 * <div class="en">Code for Radiologist</div> <div class="de">Code für
+	 * Radiologe</div> <div class="fr">Code de Radiologue</div>
+	 * <div class="it">Code per Radiologo</div>
+	 */
+	public static final String RADIOLOGIST_CODE = "66862007";
+
+	/**
 	 * <div class="en">Code for Social worker</div> <div class="de">Code für
 	 * Sozialdienstmitarbeiter</div> <div class="fr">Code de Assistant
 	 * social</div> <div class="it">Code per Assistente sociale</div>
@@ -245,60 +289,16 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	public static final String SPEECH_THERAPIST_CODE = "159026005";
 
 	/**
-	 * <div class="en">Code for Physiotherapist</div> <div class="de">Code für
-	 * Physiotherapeut</div> <div class="fr">Code de Physiothérapeute</div>
-	 * <div class="it">Code per Fisioterapista</div>
+	 * <div class="en">Identifier of the value set</div>
+	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
 	 */
-	public static final String PHYSIOTHERAPIST_CODE = "36682004";
-
-	/**
-	 * <div class="en">Code for Occupational therapist</div>
-	 * <div class="de">Code für Ergotherapeut</div> <div class="fr">Code de
-	 * Ergothérapeute</div> <div class="it">Code per Ergoterapista</div>
-	 */
-	public static final String OCCUPATIONAL_THERAPIST_CODE = "80546007";
-
-	/**
-	 * <div class="en">Code for Breast Feeding Consultant</div>
-	 * <div class="de">Code für Stillberaterin</div> <div class="fr">Code de
-	 * Consultante en lactation</div> <div class="it">Code per Consulente per
-	 * l'allattamento</div>
-	 */
-	public static final String BREAST_FEEDING_CONSULTANT_CODE = "225726006";
-
-	/**
-	 * <div class="en">Code for Dentist</div> <div class="de">Code für
-	 * Zahnarzt</div> <div class="fr">Code de Dentiste</div>
-	 * <div class="it">Code per Dentista</div>
-	 */
-	public static final String DENTIST_CODE = "106289002";
-
-	/**
-	 * <div class="en">Code for Radiologist</div> <div class="de">Code für
-	 * Radiologe</div> <div class="fr">Code de Radiologue</div>
-	 * <div class="it">Code per Radiologo</div>
-	 */
-	public static final String RADIOLOGIST_CODE = "66862007";
-
-	/**
-	 * <div class="en">Code for Healthcare professional</div>
-	 * <div class="de">Code für Andere Gesundheitsfachperson</div>
-	 * <div class="fr">Code de Autre professionnel de la santé</div>
-	 * <div class="it">Code per Altri professionisti della salute</div>
-	 */
-	public static final String HEALTHCARE_PROFESSIONAL_CODE = "223366009";
+	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.1.3";
 
 	/**
 	 * <div class="en">Name of the value set</div> <div class="de">Name des
 	 * Value Sets</div>
 	 */
 	public static final String VALUE_SET_NAME = "epd_xds_authorRole";
-
-	/**
-	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
-	 */
-	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.1.3";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -357,11 +357,6 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * The display names per language
-	 */
-	private Map<LanguageCode, String> displayNames;
-
-	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>
@@ -373,6 +368,11 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
 	 */
 	private String codeSystem;
+
+	/**
+	 * The display names per language
+	 */
+	private Map<LanguageCode, String> displayNames;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and

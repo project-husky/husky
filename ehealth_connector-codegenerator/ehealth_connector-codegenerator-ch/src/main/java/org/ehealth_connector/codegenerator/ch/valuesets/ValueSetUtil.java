@@ -51,15 +51,25 @@ import com.jayway.jsonpath.JsonPath;
 public final class ValueSetUtil {
 
 	/**
+	 * <div class="en">The path to the configuration YAML file.</div>
+	 */
+	private static final String CONFIG_FILE_LOCATION = "src/main/resources/valuesets/valuesets-sources-201704.2-beta.yaml";
+
+	/**
+	 * <div class="en">The default charset used to encode files.</div>
+	 */
+	public static final Charset DEFAULT_CHARSET = Charsets.UTF_8;
+
+	/**
+	 * <div class="en">The default encoding used to encode URL parameter.</div>
+	 */
+	private static final String DEFAULT_ENCODING = "UTF-8";
+
+	/**
 	 * <div class="en">The path where the resources needed for the generation
 	 * are stored, relative to the project root directory.</div>
 	 */
 	private static final String RESOURCE_LOCATION = "target";
-
-	/**
-	 * <div class="en">The path to the configuration YAML file.</div>
-	 */
-	private static final String CONFIG_FILE_LOCATION = "src/main/resources/valuesets/valuesets-sources-201704.2-beta.yaml";
 
 	/**
 	 * <div class="en">The JSONPath path to extract a value set from the JSON
@@ -72,16 +82,6 @@ public final class ValueSetUtil {
 	 * a value set object.</div>
 	 */
 	public static final String VALUE_SET_CONCEPTS_PATH = "$.conceptList[*].concept[*]";
-
-	/**
-	 * <div class="en">The default encoding used to encode URL parameter.</div>
-	 */
-	private static final String DEFAULT_ENCODING = "UTF-8";
-
-	/**
-	 * <div class="en">The default charset used to encode files.</div>
-	 */
-	public static final Charset DEFAULT_CHARSET = Charsets.UTF_8;
 
 	/**
 	 * <div class="en">Builds a Java compatible enum element name from a
