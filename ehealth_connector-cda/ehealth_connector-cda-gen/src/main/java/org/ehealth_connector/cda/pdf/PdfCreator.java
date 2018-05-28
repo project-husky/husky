@@ -16,10 +16,7 @@
  */
 package org.ehealth_connector.cda.pdf;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,18 +25,6 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.lang3.SystemUtils;
 import org.ehealth_connector.cda.utils.Xml2Html;
-
-import com.itextpdf.html2pdf.ConverterProperties;
-import com.itextpdf.html2pdf.HtmlConverter;
-import com.itextpdf.kernel.pdf.PdfAConformanceLevel;
-import com.itextpdf.kernel.pdf.PdfDocumentInfo;
-import com.itextpdf.kernel.pdf.PdfOutputIntent;
-import com.itextpdf.kernel.pdf.PdfString;
-import com.itextpdf.kernel.pdf.PdfViewerPreferences;
-import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.kernel.pdf.WriterProperties;
-import com.itextpdf.layout.font.FontProvider;
-import com.itextpdf.pdfa.PdfADocument;
 
 /**
  *
@@ -68,55 +53,8 @@ public class PdfCreator {
 			// FileUtils.write(new File("C:\\temp\\test.html"),
 			// html.getWriter().toString(), "UTF-8");
 
-			FileOutputStream outputStream = new FileOutputStream(output_file);
+			// TODO HTML TO PDF
 
-			WriterProperties writerProperties = new WriterProperties();
-			// Add metadata
-			writerProperties.addXmpMetadata();
-
-			PdfWriter pdfWriter = new PdfWriter(outputStream, writerProperties);
-			PdfADocument pdfDoc = new PdfADocument(pdfWriter, PdfAConformanceLevel.PDF_A_1A,
-					new PdfOutputIntent("Custom", "", "http://www.color.org", "sRGB IEC61966-2.1",
-							PdfCreator.class.getClassLoader()
-									.getResourceAsStream("sRGB_CS_profile.icm")));
-			// TODO grab this from the input file
-			pdfDoc.getCatalog().setLang(new PdfString("en-US"));
-			// Set the document to be tagged
-			pdfDoc.setTagged();
-			pdfDoc.getCatalog()
-					.setViewerPreferences(new PdfViewerPreferences().setDisplayDocTitle(true));
-
-			// Set meta tags
-			PdfDocumentInfo pdfMetaData = pdfDoc.getDocumentInfo();
-
-			// TODO grab this from the input file
-			pdfMetaData.setAuthor("eHealth Connector");
-			// TODO grab this from the input file
-			pdfMetaData.addCreationDate();
-			pdfMetaData.getProducer();
-			pdfMetaData.setCreator("iText Software");
-			pdfMetaData.setKeywords("cda, document");
-			pdfMetaData.setSubject("PDF representation of a CDA document");
-			// Title is derived from html
-
-			// pdf conversion
-			ConverterProperties props = new ConverterProperties();
-			// TODO grab this from the input file
-			props.setBaseUri("C:\\xsl");
-			FontProvider fp = new FontProvider();
-			fp.addStandardPdfFonts();
-			// TODO implement other OS fonts dir
-
-			for (String fPath : getSystemFontsPaths()) {
-				fp.addDirectory(fPath);
-			}
-			props.setFontProvider(fp);
-
-			HtmlConverter.convertToPdf(
-					new ByteArrayInputStream(
-							html.getWriter().toString().getBytes(StandardCharsets.UTF_8)),
-					pdfDoc, props);
-			pdfDoc.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -149,15 +87,4 @@ public class PdfCreator {
 		return result;
 	}
 
-	//
-	// private static String createPath(String cda_file) {
-	// File pathfile = new File(cda_file);
-	// String path = pathfile.getParentFile().getAbsolutePath();
-	// path = "file:///" + path;
-	// path = path.replace("\\", "/");
-	// path = path + "/";
-	//
-	// return path;
-	// }
-	//
 }

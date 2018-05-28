@@ -29,24 +29,6 @@
 			<artifactId>org.openhealthtools.ihe.utils</artifactId>
 		</dependency>
 
-		<!-- HL72PDF -->
-		<dependency>
-			<groupId>org.apache.pdfbox</groupId>
-			<artifactId>pdfbox</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.itextpdf</groupId>
-			<artifactId>html2pdf</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.itextpdf</groupId>
-			<artifactId>itextpdf</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.itextpdf</groupId>
-			<artifactId>pdfa</artifactId>
-		</dependency>
-
 		<!-- test stuff -->
 		<dependency>
 			<groupId>junit</groupId>
