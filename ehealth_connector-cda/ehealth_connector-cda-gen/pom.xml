@@ -34,6 +34,18 @@
 			<groupId>org.apache.pdfbox</groupId>
 			<artifactId>pdfbox</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>html2pdf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>itextpdf</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.itextpdf</groupId>
+			<artifactId>pdfa</artifactId>
+		</dependency>
 
 		<!-- test stuff -->
 		<dependency>
@@ -54,7 +66,7 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
@@ -92,36 +104,40 @@
 	<profiles>
 		<profile>
 			<id>ehc4dotnet-disabled</id>
-			<!-- activation> <os> <family>Windows</family> </os> </activation -->
-			<!-- Converts the ehealthconnector library to a .net version using IKVMC -->
-			<build>
-				<plugins>
+			<!-- activation>
+			<os>
+			<family>Windows</family>
+			</os>
+		</activation -->
+		<!-- Converts the ehealthconnector library to a .net version using IKVMC -->
+		<build>
+			<plugins>
 
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-antrun-plugin</artifactId>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-antrun-plugin</artifactId>
 
-						<configuration>
-							<target>
-								<exec executable="ikvmc">
-									<arg value="-target:library" />
-									<arg value="-out:${project.build.directory}/${project.artifactId}-${project.version}.dll" />
-									<arg value="${project.build.directory}/${project.artifactId}-${project.version}.jar" />
-								</exec>
-							</target>
-						</configuration>
-						<executions>
-							<execution>
-								<phase>package</phase>
-								<goals>
-									<goal>run</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
+					<configuration>
+						<target>
+							<exec executable="ikvmc">
+								<arg value="-target:library" />
+								<arg value="-out:${project.build.directory}/${project.artifactId}-${project.version}.dll" />
+								<arg value="${project.build.directory}/${project.artifactId}-${project.version}.jar" />
+							</exec>
+						</target>
+					</configuration>
+					<executions>
+						<execution>
+							<phase>package</phase>
+							<goals>
+								<goal>run</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</build>
+	</profile>
+</profiles>
 
 </project>
