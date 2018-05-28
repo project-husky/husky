@@ -273,8 +273,8 @@ public final class ValueSetUtil {
 		// art-decor.org
 		// if it does not exist locally yet
 		if (!valueSetDefinitionFile.exists() && downloadIfNotInFileSystem) {
-			valueSetDefinition = IOUtils.toString(buildValueSetUrl(baseUrl, valueSet), "UTF-8");
-			FileUtils.write(valueSetDefinitionFile, valueSetDefinition, "UTF-8");
+			valueSetDefinition = IOUtils.toString(buildValueSetUrl(baseUrl, valueSet), DEFAULT_ENCODING);
+			FileUtils.write(valueSetDefinitionFile, valueSetDefinition, DEFAULT_ENCODING);
 		} else if (!valueSetDefinitionFile.exists()) {
 			throw new FileNotFoundException(valueSetDefinitionFile.getName());
 		} else {
