@@ -200,7 +200,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	public void addCss(String css) {
 		// Add the stylesheet processing instructions to the document
 		FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(), 0, "xml-stylesheet",
-				"type=\"text/css\" href=\"" + css + "\"");
+				"type='text/css' href='" + css + "'");
 	}
 
 	/**
@@ -288,11 +288,8 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	public void addStylesheet(String stylesheet) {
 		if (stylesheet != null) {
 			// Add the stylesheet processing instructions to the document
-			// FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(),
-			// "xml-stylesheet",
-			// "type=\"text/xsl\" href=\"" + stylesheet + "\"");
 			FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(), 0, "xml-stylesheet",
-					"type=\"text/xsl\" href=\"" + stylesheet + "\"");
+					"type='text/xsl' href='" + stylesheet + "'");
 		}
 	}
 
