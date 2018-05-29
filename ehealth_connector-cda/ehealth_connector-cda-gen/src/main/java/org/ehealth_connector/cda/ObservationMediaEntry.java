@@ -252,6 +252,25 @@ public class ObservationMediaEntry
 	}
 
 	/**
+	 * Sets the base64 object.
+	 *
+	 * @param is
+	 *            the is
+	 * @param mimeType
+	 *            the mime type
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public void setBase64Object(InputStream is, String mimeType) throws IOException {
+		final String valueString = new String(IOUtils.toByteArray(is));
+		final ED value = Util.createEd(valueString);
+		value.setMediaType(mimeType);
+		value.setRepresentation(BinaryDataEncoding.B64);
+		getMdht().setValue(value);
+
+	}
+
+	/**
 	 * Sets the (not Base64 encoded) inputStream and MimeType.
 	 *
 	 * @param inputStream
