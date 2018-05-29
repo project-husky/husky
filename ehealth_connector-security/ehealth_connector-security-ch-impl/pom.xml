@@ -41,6 +41,11 @@
 			<artifactId>xercesImpl</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.openhealthtools.ihe.atna</groupId>
+			<artifactId>org.openhealthtools.ihe.atna.auditor</artifactId>
+		</dependency>
 
 		<!-- test stuff -->
 		<dependency>
