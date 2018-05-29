@@ -21,8 +21,8 @@ import java.util.List;
 
 import org.ehealth_connector.security.authentication.AuthenticationModule;
 import org.ehealth_connector.security.authentication.AuthnRequest;
+import org.ehealth_connector.security.communication.clients.IdpClient;
 import org.ehealth_connector.security.communication.clients.XuaClient;
-import org.ehealth_connector.security.communication.clients.impl.AbstractIdpClient;
 import org.ehealth_connector.security.communication.clients.impl.ClientFactory;
 import org.ehealth_connector.security.communication.config.IdpClientConfig;
 import org.ehealth_connector.security.communication.config.XuaClientConfig;
@@ -72,7 +72,7 @@ public class ConvenienceUserAccessAuthenticationImpl implements AuthenticationMo
 			throws ClientSendException {
 		if (!initialized)
 			throw new ClientSendException("Opensaml Libs are not initialized");
-		final AbstractIdpClient client = ClientFactory.getIdpClient(clientConfiguration);
+		final IdpClient client = ClientFactory.getIdpClient(clientConfiguration);
 		return client.send(aAuthnRequest);
 	}
 

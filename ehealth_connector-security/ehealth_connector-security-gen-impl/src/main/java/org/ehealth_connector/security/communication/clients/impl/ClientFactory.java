@@ -17,10 +17,12 @@
  */
 package org.ehealth_connector.security.communication.clients.impl;
 
+import org.ehealth_connector.security.communication.clients.IdpClient;
 import org.ehealth_connector.security.communication.clients.XuaClient;
 import org.ehealth_connector.security.communication.config.IdpClientConfig;
 import org.ehealth_connector.security.communication.config.XuaClientConfig;
 import org.ehealth_connector.security.communication.config.impl.IdpClientBasicAuthConfigImpl;
+import org.ehealth_connector.security.communication.config.impl.IdpClientByBrowserAndProtocolHandlerConfigImpl;
 import org.ehealth_connector.security.communication.config.impl.IdpClientCertificateAuthConfigImpl;
 import org.ehealth_connector.security.communication.config.impl.IdpClientViaHttpProxyConfigImpl;
 
@@ -33,13 +35,16 @@ import org.ehealth_connector.security.communication.config.impl.IdpClientViaHttp
  * <!-- @formatter:on -->
  */
 public class ClientFactory {
-	public static AbstractIdpClient getIdpClient(IdpClientConfig clientConfiguration) {
+	public static IdpClient getIdpClient(IdpClientConfig clientConfiguration) {
 		if (clientConfiguration instanceof IdpClientViaHttpProxyConfigImpl) {
 			return new IdpClientByProxy((IdpClientViaHttpProxyConfigImpl) clientConfiguration);
 		} else if (clientConfiguration instanceof IdpClientCertificateAuthConfigImpl) {
 			return new IdpClientByCert((IdpClientCertificateAuthConfigImpl) clientConfiguration);
 		} else if (clientConfiguration instanceof IdpClientBasicAuthConfigImpl) {
 			return new IdpSoapBindingClientByBasicAuth((IdpClientBasicAuthConfigImpl) clientConfiguration);
+		} else if (clientConfiguration instanceof IdpClientByBrowserAndProtocolHandlerConfigImpl) {
+			return new IdpClientByBrowserAndProtocolHandler(
+					(IdpClientByBrowserAndProtocolHandlerConfigImpl) clientConfiguration);
 		}
 		return null;
 	}

@@ -45,6 +45,8 @@ import org.ehealth_connector.security.serialization.impl.AuthnRequestSerializerI
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <!-- @formatter:off -->
@@ -55,6 +57,8 @@ import org.jsoup.select.Elements;
  * <!-- @formatter:on -->
  */
 public abstract class AbstractIdpClient implements IdpClient {
+
+	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	public abstract RequestConfig getRequestConfig();
 
@@ -179,6 +183,7 @@ public abstract class AbstractIdpClient implements IdpClient {
 	Response parseResponse(CloseableHttpResponse response) throws ClientSendException {
 		try {
 			final String responseEntity = EntityUtils.toString(response.getEntity());
+			logger.debug("Response:\n" + responseEntity);
 			final org.jsoup.nodes.Document doc = Jsoup.parse(responseEntity);
 			final Elements samlElements = doc.getElementsByAttributeValue("name", "SAMLResponse");
 			final Element samlElement = samlElements.first();
@@ -192,5 +197,9 @@ public abstract class AbstractIdpClient implements IdpClient {
 		} catch (ParseException | IOException | DeserializeException e) {
 			throw new ClientSendException(e);
 		}
+	}
+
+	protected Logger getLogger() {
+		return logger;
 	}
 }
