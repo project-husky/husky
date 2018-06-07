@@ -138,7 +138,7 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 		template = template.replaceAll("@base64samlrequest@", samlRequest);
 		template = template.replaceAll("@idpurl@", config.getUrl());
 
-		final File tempFile = File.createTempFile("saml_", "html");
+		final File tempFile = File.createTempFile("saml_", ".html");
 		tempFile.deleteOnExit();
 
 		final FileOutputStream os = new FileOutputStream(tempFile);
