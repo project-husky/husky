@@ -29,8 +29,8 @@ import org.ehealth_connector.security.exceptions.SerializeException;
  * <!-- @formatter:off -->
  * <div class="en">Abstract class implementing common methods for the concrete IdpClient implementations.</div>
  * <div class="de">Abstrakte Klasse die die gemeinsamen Methoden für die konkreten IdpClient Implementationen implementiert.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public abstract class AbstractHttpFormIdpClient extends AbstractIdpClient {

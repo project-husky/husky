@@ -28,28 +28,64 @@ import org.opensaml.saml.saml2.core.AttributeValue;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for Attribute building.</div>
  * <div class="de">Die Klasse implementiert das entsprechende interface um Attribute bilden zu k&ooml;nnen.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class AttributeBuilderImpl
-		implements AttributeBuilder, SecurityObjectBuilder<org.opensaml.saml.saml2.core.Attribute, Attribute> {
+public class AttributeBuilderImpl implements AttributeBuilder,
+		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Attribute, Attribute> {
 
 	private org.opensaml.saml.saml2.core.Attribute attribute;
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Default constructor to instanciate the object.</div>
 	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * 
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
 	 * <!-- @formatter:on -->
 	 */
 	public AttributeBuilderImpl() {
 		attribute = new org.opensaml.saml.saml2.core.impl.AttributeBuilder().buildObject();
 
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.AttributeBuilder#create()
+	 */
+	@Override
+	public Attribute create() {
+		return new AttributeImpl(attribute);
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.core.SecurityObjectBuilder#create(java.lang.Object)
+	 */
+	@Override
+	public Attribute create(org.opensaml.saml.saml2.core.Attribute aInternalObject) {
+		return new AttributeImpl(aInternalObject);
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.AttributeBuilder#friendlyName(java.lang.String)
+	 */
+	@Override
+	public AttributeBuilder friendlyName(String aFriendlyName) {
+		if (aFriendlyName != null) {
+			attribute.setFriendlyName(aFriendlyName);
+		}
+		return this;
 	}
 
 	/**
@@ -66,7 +102,7 @@ public class AttributeBuilderImpl
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.saml2.AttributeBuilder#nameFormat(java.lang.String)
@@ -75,20 +111,6 @@ public class AttributeBuilderImpl
 	public AttributeBuilder nameFormat(String aNameFormat) {
 		if (aNameFormat != null) {
 			attribute.setNameFormat(aNameFormat);
-		}
-		return this;
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.saml2.AttributeBuilder#friendlyName(java.lang.String)
-	 */
-	@Override
-	public AttributeBuilder friendlyName(String aFriendlyName) {
-		if (aFriendlyName != null) {
-			attribute.setFriendlyName(aFriendlyName);
 		}
 		return this;
 	}
@@ -109,28 +131,6 @@ public class AttributeBuilderImpl
 		}
 
 		return this;
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.saml2.AttributeBuilder#create()
-	 */
-	@Override
-	public Attribute create() {
-		return new AttributeImpl(attribute);
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.core.SecurityObjectBuilder#create(java.lang.Object)
-	 */
-	@Override
-	public Attribute create(org.opensaml.saml.saml2.core.Attribute aInternalObject) {
-		return new AttributeImpl(aInternalObject);
 	}
 
 }

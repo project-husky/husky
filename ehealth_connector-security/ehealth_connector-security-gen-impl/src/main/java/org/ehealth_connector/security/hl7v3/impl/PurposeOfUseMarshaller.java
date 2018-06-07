@@ -27,14 +27,15 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the marshaller for OpenSamlPurposeOfUse.</div>
  * <div class="de">Die Klasse implementiert den Marshaller für OpenSamlPurposeOfUse.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class PurposeOfUseMarshaller extends AbstractXMLObjectMarshaller {
 
 	@Override
-	protected void marshallAttributes(XMLObject xmlObject, Element domElement) throws MarshallingException {
+	protected void marshallAttributes(XMLObject xmlObject, Element domElement)
+			throws MarshallingException {
 		final OpenSamlPurposeOfUse purposeOfUse = (OpenSamlPurposeOfUse) xmlObject;
 		if (purposeOfUse.getCode() != null) {
 			domElement.setAttributeNS(null, "code", purposeOfUse.getCode());

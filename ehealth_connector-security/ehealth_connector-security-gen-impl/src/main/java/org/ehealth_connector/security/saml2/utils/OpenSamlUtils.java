@@ -26,12 +26,16 @@ import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 public final class OpenSamlUtils {
 	public static <T> T buildSAMLObject(final Class<T> clazz) throws BuildException {
 		try {
-			final XMLObjectBuilderFactory builderFactory = XMLObjectProviderRegistrySupport.getBuilderFactory();
-			final QName defaultElementName = (QName) clazz.getDeclaredField("DEFAULT_ELEMENT_NAME").get(null);
+			final XMLObjectBuilderFactory builderFactory = XMLObjectProviderRegistrySupport
+					.getBuilderFactory();
+			final QName defaultElementName = (QName) clazz.getDeclaredField("DEFAULT_ELEMENT_NAME")
+					.get(null);
 			@SuppressWarnings("unchecked")
-			final T object = (T) builderFactory.getBuilder(defaultElementName).buildObject(defaultElementName);
+			final T object = (T) builderFactory.getBuilder(defaultElementName)
+					.buildObject(defaultElementName);
 			return object;
-		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+		} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException
+				| SecurityException e) {
 			throw new BuildException(clazz, e);
 		}
 

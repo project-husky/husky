@@ -38,18 +38,22 @@ public class UnknownPolicySetIdMarshallerTest extends InitializerTestHelper {
 	@Before
 	public void setUp() throws Exception {
 		testMessage = "This is a message";
-		testOpenSamlUnknownPolicySetId = new UnknownPolicySetIdBuilderImpl().message(testMessage).buildObject();
+		testOpenSamlUnknownPolicySetId = new UnknownPolicySetIdBuilderImpl().message(testMessage)
+				.buildObject();
 	}
 
 	/**
-	 * Test method for {@link org.opensaml.core.xml.io.AbstractXMLObjectMarshaller#marshall(org.opensaml.core.xml.XMLObject)}.
-	 * 
+	 * Test method for
+	 * {@link org.opensaml.core.xml.io.AbstractXMLObjectMarshaller#marshall(org.opensaml.core.xml.XMLObject)}.
+	 *
 	 * @throws MarshallingException
 	 */
 	@Test
 	public void testMarshallXMLObject() throws MarshallingException {
-		final MarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport.getMarshallerFactory();
-		final Marshaller marshaller = marshallerFactory.getMarshaller(testOpenSamlUnknownPolicySetId);
+		final MarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport
+				.getMarshallerFactory();
+		final Marshaller marshaller = marshallerFactory
+				.getMarshaller(testOpenSamlUnknownPolicySetId);
 
 		final Element serialized = marshaller.marshall(testOpenSamlUnknownPolicySetId);
 		assertNotNull(serialized);

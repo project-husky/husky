@@ -55,8 +55,8 @@ import org.xml.sax.SAXException;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the simple ppq client.</div>
  * <div class="de">Klasser die den Simple PPQ Client implementiert.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class SimplePpqClient extends AbstractSoapClient<Response> implements PpqClient {
@@ -75,11 +75,13 @@ public class SimplePpqClient extends AbstractSoapClient<Response> implements Ppq
 	 *      org.ehealth_connector.security.ch.ppq.PrivacyPolicyQuery)
 	 */
 	@Override
-	public Response send(SecurityHeaderElement aAssertion, PrivacyPolicyQuery query) throws ClientSendException {
+	public Response send(SecurityHeaderElement aAssertion, PrivacyPolicyQuery query)
+			throws ClientSendException {
 		try {
 			final HttpPost post = getHttpPost();
 
-			final WsaHeaderValue wsHeaders = new WsaHeaderValue("urn:uuid:" + UUID.randomUUID().toString(),
+			final WsaHeaderValue wsHeaders = new WsaHeaderValue(
+					"urn:uuid:" + UUID.randomUUID().toString(),
 					"urn:e-health-suisse:2015:policy-administration:PolicyQuery", null);
 
 			post.setEntity(getSoapEntity(aAssertion, query, wsHeaders));
@@ -90,14 +92,15 @@ public class SimplePpqClient extends AbstractSoapClient<Response> implements Ppq
 		}
 	}
 
-	private HttpEntity getSoapEntity(SecurityHeaderElement aSecurityHeaderElement, PrivacyPolicyQuery query,
-			WsaHeaderValue wsHeaders)
-			throws ParserConfigurationException, SerializeException, TransformerException, MarshallingException {
+	private HttpEntity getSoapEntity(SecurityHeaderElement aSecurityHeaderElement,
+			PrivacyPolicyQuery query, WsaHeaderValue wsHeaders) throws ParserConfigurationException,
+			SerializeException, TransformerException, MarshallingException {
 		final Element envelopElement = createEnvelope();
 
 		Element headerAssertionElement = null;
 		if (aSecurityHeaderElement instanceof Assertion) {
-			headerAssertionElement = new AssertionSerializerImpl().toXmlElement((Assertion) aSecurityHeaderElement);
+			headerAssertionElement = new AssertionSerializerImpl()
+					.toXmlElement((Assertion) aSecurityHeaderElement);
 		} else if (aSecurityHeaderElement instanceof EncryptedAssertion) {
 			headerAssertionElement = new EncryptedAssertionSerializerImpl()
 					.toXmlElement((EncryptedAssertion) aSecurityHeaderElement);
@@ -123,7 +126,8 @@ public class SimplePpqClient extends AbstractSoapClient<Response> implements Ppq
 	protected Response parseResponse(String httpResponse) throws ClientSendException {
 		try {
 			// "urn:oasis:names:tc:SAML:2.0:protocol", "Response"
-			final Element reponseElement = getResponseElement(httpResponse, SAMLConstants.SAML20P_NS,
+			final Element reponseElement = getResponseElement(httpResponse,
+					SAMLConstants.SAML20P_NS,
 					org.opensaml.saml.saml2.core.Response.DEFAULT_ELEMENT_LOCAL_NAME);
 
 			final org.opensaml.saml.saml2.core.Response response = (org.opensaml.saml.saml2.core.Response) new ResponseUnmarshaller()
@@ -131,7 +135,8 @@ public class SimplePpqClient extends AbstractSoapClient<Response> implements Ppq
 
 			return new ResponseBuilderImpl().create(response);
 		} catch (UnsupportedOperationException | IOException | TransformerFactoryConfigurationError
-				| ParserConfigurationException | SAXException | UnmarshallingException | XPathExpressionException e) {
+				| ParserConfigurationException | SAXException | UnmarshallingException
+				| XPathExpressionException e) {
 			throw new ClientSendException(e);
 		}
 	}

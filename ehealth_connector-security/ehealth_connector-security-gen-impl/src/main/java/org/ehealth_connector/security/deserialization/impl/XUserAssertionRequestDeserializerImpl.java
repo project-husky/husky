@@ -27,17 +27,29 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface Deserializer<Response> .</div>
  * <div class="de">Die Klasse implementiert das entsprechende interface Deserializer<Response> .</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class XUserAssertionRequestDeserializerImpl
 		extends AbstractDeserializerImpl<RequestSecurityToken, XUserAssertionRequest> {
 
 	@Override
+	public XUserAssertionRequest fromXmlByteArray(byte[] aByteArray) throws DeserializeException {
+		try {
+			final RequestSecurityToken request = getOpenSamlDeserializer()
+					.deserializeFromByteArray(aByteArray);
+			return new XUserAssertionRequestBuilderImpl().create(request);
+		} catch (final Exception e) {
+			throw new DeserializeException(e);
+		}
+	}
+
+	@Override
 	public XUserAssertionRequest fromXmlElement(Element aXmlElement) throws DeserializeException {
 		try {
-			final RequestSecurityToken request = getOpenSamlDeserializer().deserializeFromXml(aXmlElement);
+			final RequestSecurityToken request = getOpenSamlDeserializer()
+					.deserializeFromXml(aXmlElement);
 			return new XUserAssertionRequestBuilderImpl().create(request);
 		} catch (final Exception e) {
 			throw new DeserializeException(e);
@@ -47,17 +59,8 @@ public class XUserAssertionRequestDeserializerImpl
 	@Override
 	public XUserAssertionRequest fromXmlString(String aXmlString) throws DeserializeException {
 		try {
-			final RequestSecurityToken request = getOpenSamlDeserializer().deserializeFromString(aXmlString);
-			return new XUserAssertionRequestBuilderImpl().create(request);
-		} catch (final Exception e) {
-			throw new DeserializeException(e);
-		}
-	}
-
-	@Override
-	public XUserAssertionRequest fromXmlByteArray(byte[] aByteArray) throws DeserializeException {
-		try {
-			final RequestSecurityToken request = getOpenSamlDeserializer().deserializeFromByteArray(aByteArray);
+			final RequestSecurityToken request = getOpenSamlDeserializer()
+					.deserializeFromString(aXmlString);
 			return new XUserAssertionRequestBuilderImpl().create(request);
 		} catch (final Exception e) {
 			throw new DeserializeException(e);

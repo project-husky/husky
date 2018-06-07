@@ -26,11 +26,12 @@ import org.opensaml.core.xml.AbstractXMLObjectBuilder;
  * <!-- @formatter:off -->
  * <div class="en">Builder class for OpenSamlUpdatePolicyRequest.</div>
  * <div class="de">Builder Klasse für OpenSamlUpdatePolicyRequest.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class UpdatePolicyRequestBuilder extends AbstractXMLObjectBuilder<OpenSamlUpdatePolicyRequest> {
+public class UpdatePolicyRequestBuilder
+		extends AbstractXMLObjectBuilder<OpenSamlUpdatePolicyRequest> {
 
 	private Assertion assertion;
 
@@ -40,13 +41,15 @@ public class UpdatePolicyRequestBuilder extends AbstractXMLObjectBuilder<OpenSam
 	}
 
 	public OpenSamlUpdatePolicyRequest buildObject() {
-		return buildObject(UpdatePolicyRequest.DEFAULT_NS_URI, UpdatePolicyRequest.DEFAULT_ELEMENT_LOCAL_NAME,
-				UpdatePolicyRequest.DEFAULT_PREFIX);
+		return buildObject(UpdatePolicyRequest.DEFAULT_NS_URI,
+				UpdatePolicyRequest.DEFAULT_ELEMENT_LOCAL_NAME, UpdatePolicyRequest.DEFAULT_PREFIX);
 	}
 
 	@Override
-	public OpenSamlUpdatePolicyRequest buildObject(String namespaceURI, String localName, String namespacePrefix) {
-		final OpenSamlUpdatePolicyRequest abr = new UpdatePolicyRequestImpl(namespaceURI, localName, namespacePrefix);
+	public OpenSamlUpdatePolicyRequest buildObject(String namespaceURI, String localName,
+			String namespacePrefix) {
+		final OpenSamlUpdatePolicyRequest abr = new UpdatePolicyRequestImpl(namespaceURI, localName,
+				namespacePrefix);
 		if (assertion != null) {
 			abr.setAssertion(assertion);
 		}

@@ -25,8 +25,8 @@ import org.ehealth_connector.security.saml2.StatusCode;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Status</div>
  * <div class="de">Implementations Klasse von Status</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class StatusImpl implements Status, SecurityObject<org.opensaml.saml.saml2.core.Status> {

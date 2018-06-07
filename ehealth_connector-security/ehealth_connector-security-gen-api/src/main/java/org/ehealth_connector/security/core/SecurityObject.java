@@ -18,28 +18,28 @@
 package org.ehealth_connector.security.core;
 
 /**
- * 
+ *
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the generic methods of SecurityObject for the templated type T.</div>
  * <div class="de">Interface beschreibt die Methoden des SecurityObject für den templated Typ T</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * @param <T>
  * <div class="en">the type T.</div>
  * <div class="de">der Typ T.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface SecurityObject<T> {
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the wrapped inner object.</div>
 	 * <div class="de">Method um das gewrappte innere object zu erhalten.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @return returns the wrapped inner object (depends on implementation)

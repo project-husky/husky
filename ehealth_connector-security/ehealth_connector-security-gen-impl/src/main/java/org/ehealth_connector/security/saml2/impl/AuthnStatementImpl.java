@@ -27,22 +27,23 @@ import org.joda.time.DateTime;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of AuthnStatement</div>
  * <div class="de">Implementations Klasse von AuthnStatement</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class AuthnStatementImpl implements AuthnStatement, SecurityObject<org.opensaml.saml.saml2.core.AuthnStatement> {
+public class AuthnStatementImpl
+		implements AuthnStatement, SecurityObject<org.opensaml.saml.saml2.core.AuthnStatement> {
 
 	private org.opensaml.saml.saml2.core.AuthnStatement authnStatement;
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Default constructor to instanciate the object.</div>
 	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * 
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
 	 * @param aAuthnStatement
 	 * <!-- @formatter:on -->
 	 */
@@ -51,18 +52,23 @@ public class AuthnStatementImpl implements AuthnStatement, SecurityObject<org.op
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.core.SecurityObject#getWrappedObject()
+	 * @see org.ehealth_connector.security.saml2.AuthnStatement#getAuthnContextClassRef()
 	 */
 	@Override
-	public org.opensaml.saml.saml2.core.AuthnStatement getWrappedObject() {
-		return authnStatement;
+	public String getAuthnContextClassRef() {
+		if ((authnStatement.getAuthnContext() != null)
+				&& (authnStatement.getAuthnContext().getAuthnContextClassRef() != null)) {
+			return authnStatement.getAuthnContext().getAuthnContextClassRef()
+					.getAuthnContextClassRef();
+		}
+		return "";
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.saml2.AuthnStatement#getAuthnInstant()
@@ -76,7 +82,18 @@ public class AuthnStatementImpl implements AuthnStatement, SecurityObject<org.op
 	}
 
 	/**
-	 * 
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.AuthnStatement#getSessionIndex()
+	 */
+	@Override
+	public String getSessionIndex() {
+		return authnStatement.getSessionIndex();
+	}
+
+	/**
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.saml2.AuthnStatement#getSessionNotOnOrAfter()
@@ -90,29 +107,14 @@ public class AuthnStatementImpl implements AuthnStatement, SecurityObject<org.op
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.saml2.AuthnStatement#getSessionIndex()
+	 * @see org.ehealth_connector.security.core.SecurityObject#getWrappedObject()
 	 */
 	@Override
-	public String getSessionIndex() {
-		return authnStatement.getSessionIndex();
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.saml2.AuthnStatement#getAuthnContextClassRef()
-	 */
-	@Override
-	public String getAuthnContextClassRef() {
-		if ((authnStatement.getAuthnContext() != null)
-				&& (authnStatement.getAuthnContext().getAuthnContextClassRef() != null)) {
-			return authnStatement.getAuthnContext().getAuthnContextClassRef().getAuthnContextClassRef();
-		}
-		return "";
+	public org.opensaml.saml.saml2.core.AuthnStatement getWrappedObject() {
+		return authnStatement;
 	}
 
 }

@@ -26,13 +26,15 @@ import org.opensaml.core.xml.XMLObject;
  * <!-- @formatter:off -->
  * <div class="en">Implementing class of OpenSamlUpdatePolicyRequest interface.</div>
  * <div class="de">Implementierende Klasse des OpenSamlUpdatePolicyRequest Interfaces.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class UpdatePolicyRequestImpl extends AbstractAssertionBasedRequestImpl implements OpenSamlUpdatePolicyRequest {
+public class UpdatePolicyRequestImpl extends AbstractAssertionBasedRequestImpl
+		implements OpenSamlUpdatePolicyRequest {
 
-	protected UpdatePolicyRequestImpl(String namespaceURI, String elementLocalName, String namespacePrefix) {
+	protected UpdatePolicyRequestImpl(String namespaceURI, String elementLocalName,
+			String namespacePrefix) {
 		super(namespaceURI, elementLocalName, namespacePrefix);
 	}
 

@@ -28,8 +28,8 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the unmarshaller for OpenSamlInstanceIdentifier.</div>
  * <div class="de">Die Klasse implementiert den unmarshaller für OpenSamlInstanceIdentifier.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class InstanceIdentifierUnmarshaller extends AbstractXMLObjectUnmarshaller {
@@ -40,7 +40,8 @@ public class InstanceIdentifierUnmarshaller extends AbstractXMLObjectUnmarshalle
 	}
 
 	@Override
-	protected void processAttribute(XMLObject xmlObject, Attr attribute) throws UnmarshallingException {
+	protected void processAttribute(XMLObject xmlObject, Attr attribute)
+			throws UnmarshallingException {
 		final OpenSamlInstanceIdentifier purposeOfUse = (OpenSamlInstanceIdentifier) xmlObject;
 
 		if ("root".equalsIgnoreCase(attribute.getName())) {

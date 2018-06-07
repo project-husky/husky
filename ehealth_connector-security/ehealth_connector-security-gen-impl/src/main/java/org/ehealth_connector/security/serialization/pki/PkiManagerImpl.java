@@ -48,8 +48,8 @@ import org.ehealth_connector.security.pki.PkiManager;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of PkiManager</div>
  * <div class="de">Implementations Klasse von PkiManager</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class PkiManagerImpl implements PkiManager {
@@ -57,7 +57,63 @@ public class PkiManagerImpl implements PkiManager {
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.pki.PkiManager#createNewStore(java.io.File, java.lang.String, java.lang.String)
+	 * @see org.ehealth_connector.security.pki.PkiManager#addClientCert(java.io.File,
+	 *      java.io.File, java.lang.String, java.security.KeyStore)
+	 */
+	@Override
+	public void addClientKeyAndCert(File privateKeyPemPath, File clientCertPemPath, String alias,
+			KeyStore keyStore, String aKeyPassword) throws KeyStoreException {
+		try {
+			final CertificateFactory fact = CertificateFactory.getInstance("X.509");
+			final FileInputStream is = new FileInputStream(clientCertPemPath);
+			final X509Certificate cer = (X509Certificate) fact.generateCertificate(is);
+			final Certificate[] chain = new Certificate[] { cer };
+
+			final URI keyUri = new URI("file://" + privateKeyPemPath.getAbsolutePath());
+			String privateKeyContent = new String(Files.readAllBytes(Paths.get(keyUri)));
+
+			privateKeyContent = privateKeyContent.replaceAll("\\n", "")
+					.replace("-----BEGIN PRIVATE KEY-----", "")
+					.replace("-----END PRIVATE KEY-----", "");
+
+			final KeyFactory kf = KeyFactory.getInstance("RSA");
+			final PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(
+					Base64.getDecoder().decode(privateKeyContent));
+			final PrivateKey privKey = kf.generatePrivate(keySpecPKCS8);
+
+			keyStore.setKeyEntry(alias.toLowerCase(), privKey, aKeyPassword.toCharArray(), chain);
+		} catch (NoSuchAlgorithmException | CertificateException | IOException
+				| InvalidKeySpecException | URISyntaxException e) {
+			throw new KeyStoreException(e);
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @throws KeyStoreException
+	 *
+	 * @see org.ehealth_connector.security.pki.PkiManager#addPublicCert(java.io.File,
+	 *      java.security.KeyStore)
+	 */
+	@Override
+	public void addPublicCert(File publiCertPath, String alias, KeyStore keyStore)
+			throws KeyStoreException {
+		try {
+			final CertificateFactory fact = CertificateFactory.getInstance("X.509");
+			final FileInputStream is = new FileInputStream(publiCertPath);
+			final X509Certificate cer = (X509Certificate) fact.generateCertificate(is);
+			keyStore.setCertificateEntry(alias.toLowerCase(), cer);
+		} catch (CertificateException | IOException | KeyStoreException e) {
+			throw new KeyStoreException(e);
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.pki.PkiManager#createNewStore(java.io.File,
+	 *      java.lang.String, java.lang.String)
 	 */
 	@Override
 	public KeyStore createNewStore(String storeType) throws KeyStoreException {
@@ -71,108 +127,8 @@ public class PkiManagerImpl implements PkiManager {
 	}
 
 	/**
-	 * 
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.pki.PkiManager#loadStore(java.io.File, java.lang.String, java.lang.String)
-	 */
-	@Override
-	public KeyStore loadStore(InputStream storeInputStream, String storePassword, String storeType)
-			throws KeyStoreException {
-		try {
-			final KeyStore keyStore = KeyStore.getInstance(storeType);
-			keyStore.load(storeInputStream, storePassword.toCharArray());
-			return keyStore;
-		} catch (NoSuchAlgorithmException | CertificateException | IOException e) {
-			throw new KeyStoreException(e);
-		}
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.pki.PkiManager#storeStore(java.security.KeyStore, java.io.File, java.lang.String)
-	 */
-	@Override
-	public void storeStore(KeyStore keyStore, OutputStream storeOutputStream, String storePassword)
-			throws KeyStoreException {
-		try {
-			keyStore.store(storeOutputStream, storePassword.toCharArray());
-		} catch (NoSuchAlgorithmException | CertificateException | IOException e) {
-			throw new KeyStoreException(e);
-		}
-
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.pki.PkiManager#addClientCert(java.io.File, java.io.File, java.lang.String, java.security.KeyStore)
-	 */
-	@Override
-	public void addClientKeyAndCert(File privateKeyPemPath, File clientCertPemPath, String alias, KeyStore keyStore,
-			String aKeyPassword) throws KeyStoreException {
-		try {
-			final CertificateFactory fact = CertificateFactory.getInstance("X.509");
-			final FileInputStream is = new FileInputStream(clientCertPemPath);
-			final X509Certificate cer = (X509Certificate) fact.generateCertificate(is);
-			final Certificate[] chain = new Certificate[] { cer };
-
-			final URI keyUri = new URI("file://" + privateKeyPemPath.getAbsolutePath());
-			String privateKeyContent = new String(Files.readAllBytes(Paths.get(keyUri)));
-
-			privateKeyContent = privateKeyContent.replaceAll("\\n", "").replace("-----BEGIN PRIVATE KEY-----", "")
-					.replace("-----END PRIVATE KEY-----", "");
-
-			final KeyFactory kf = KeyFactory.getInstance("RSA");
-			final PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(
-					Base64.getDecoder().decode(privateKeyContent));
-			final PrivateKey privKey = kf.generatePrivate(keySpecPKCS8);
-
-			keyStore.setKeyEntry(alias.toLowerCase(), privKey, aKeyPassword.toCharArray(), chain);
-		} catch (NoSuchAlgorithmException | CertificateException | IOException | InvalidKeySpecException
-				| URISyntaxException e) {
-			throw new KeyStoreException(e);
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @throws KeyStoreException
-	 *
-	 * @see org.ehealth_connector.security.pki.PkiManager#addPublicCert(java.io.File, java.security.KeyStore)
-	 */
-	@Override
-	public void addPublicCert(File publiCertPath, String alias, KeyStore keyStore) throws KeyStoreException {
-		try {
-			final CertificateFactory fact = CertificateFactory.getInstance("X.509");
-			final FileInputStream is = new FileInputStream(publiCertPath);
-			final X509Certificate cer = (X509Certificate) fact.generateCertificate(is);
-			keyStore.setCertificateEntry(alias.toLowerCase(), cer);
-		} catch (CertificateException | IOException | KeyStoreException e) {
-			throw new KeyStoreException(e);
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
-	 * @throws KeyStoreException
-	 *
-	 * @see org.ehealth_connector.security.pki.PkiManager#removeCert(java.lang.String, java.io.File)
-	 */
-	@Override
-	public void removeCert(String alias, KeyStore keyStore) throws KeyStoreException {
-		if (keyStore.isCertificateEntry(alias.toLowerCase())) {
-			keyStore.deleteEntry(alias.toLowerCase());
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 * 
 	 * @throws KeyStoreException
 	 *
 	 * @see org.ehealth_connector.security.pki.PkiManager#listCertificateAliases(java.security.KeyStore)
@@ -192,7 +148,7 @@ public class PkiManagerImpl implements PkiManager {
 
 	/**
 	 * {@inheritDoc}
-	 * 
+	 *
 	 * @throws KeyStoreException
 	 *
 	 * @see org.ehealth_connector.security.pki.PkiManager#listCertificates(java.security.KeyStore)
@@ -205,6 +161,58 @@ public class PkiManagerImpl implements PkiManager {
 			retVal.add(keyStore.getCertificate(alias.toLowerCase()));
 		}
 		return retVal;
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.pki.PkiManager#loadStore(java.io.File,
+	 *      java.lang.String, java.lang.String)
+	 */
+	@Override
+	public KeyStore loadStore(InputStream storeInputStream, String storePassword, String storeType)
+			throws KeyStoreException {
+		try {
+			final KeyStore keyStore = KeyStore.getInstance(storeType);
+			keyStore.load(storeInputStream, storePassword.toCharArray());
+			return keyStore;
+		} catch (NoSuchAlgorithmException | CertificateException | IOException e) {
+			throw new KeyStoreException(e);
+		}
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @throws KeyStoreException
+	 *
+	 * @see org.ehealth_connector.security.pki.PkiManager#removeCert(java.lang.String,
+	 *      java.io.File)
+	 */
+	@Override
+	public void removeCert(String alias, KeyStore keyStore) throws KeyStoreException {
+		if (keyStore.isCertificateEntry(alias.toLowerCase())) {
+			keyStore.deleteEntry(alias.toLowerCase());
+		}
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.pki.PkiManager#storeStore(java.security.KeyStore,
+	 *      java.io.File, java.lang.String)
+	 */
+	@Override
+	public void storeStore(KeyStore keyStore, OutputStream storeOutputStream, String storePassword)
+			throws KeyStoreException {
+		try {
+			keyStore.store(storeOutputStream, storePassword.toCharArray());
+		} catch (NoSuchAlgorithmException | CertificateException | IOException e) {
+			throw new KeyStoreException(e);
+		}
+
 	}
 
 }

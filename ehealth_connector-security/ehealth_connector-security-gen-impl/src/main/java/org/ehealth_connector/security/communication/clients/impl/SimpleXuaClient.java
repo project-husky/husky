@@ -57,11 +57,12 @@ import org.xml.sax.SAXException;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the simple xua client.</div>
  * <div class="de">Klasser die den simple Client implementiert.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class SimpleXuaClient extends AbstractSoapClient<List<XUserAssertionResponse>> implements XuaClient {
+public class SimpleXuaClient extends AbstractSoapClient<List<XUserAssertionResponse>>
+		implements XuaClient {
 
 	public SimpleXuaClient(XuaClientConfig clientConfiguration) {
 		setLogger(LoggerFactory.getLogger(getClass()));
@@ -74,25 +75,29 @@ public class SimpleXuaClient extends AbstractSoapClient<List<XUserAssertionRespo
 		try {
 			final HttpPost post = getHttpPost();
 
-			final WsaHeaderValue wsHeaders = new WsaHeaderValue("urn:uuid:" + UUID.randomUUID().toString(),
+			final WsaHeaderValue wsHeaders = new WsaHeaderValue(
+					"urn:uuid:" + UUID.randomUUID().toString(),
 					"http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/Issue", null);
 
 			post.setEntity(getSoapEntity(aSecurityHeaderElement, aRequest, wsHeaders));
 
 			return execute(post);
-		} catch (SerializeException | ParserConfigurationException | TransformerException | IOException e) {
+		} catch (SerializeException | ParserConfigurationException | TransformerException
+				| IOException e) {
 			throw new ClientSendException(e);
 		}
 	}
 
-	private HttpEntity getSoapEntity(SecurityHeaderElement aSecurityHeaderElement, XUserAssertionRequest aRequest,
-			WsaHeaderValue wsHeaders) throws SerializeException, ParserConfigurationException, TransformerException {
+	private HttpEntity getSoapEntity(SecurityHeaderElement aSecurityHeaderElement,
+			XUserAssertionRequest aRequest, WsaHeaderValue wsHeaders)
+			throws SerializeException, ParserConfigurationException, TransformerException {
 
 		final Element envelopElement = createEnvelope();
 
 		Element headerAssertionElement = null;
 		if (aSecurityHeaderElement instanceof Assertion) {
-			headerAssertionElement = new AssertionSerializerImpl().toXmlElement((Assertion) aSecurityHeaderElement);
+			headerAssertionElement = new AssertionSerializerImpl()
+					.toXmlElement((Assertion) aSecurityHeaderElement);
 		} else if (aSecurityHeaderElement instanceof EncryptedAssertion) {
 			headerAssertionElement = new EncryptedAssertionSerializerImpl()
 					.toXmlElement((EncryptedAssertion) aSecurityHeaderElement);
@@ -117,7 +122,8 @@ public class SimpleXuaClient extends AbstractSoapClient<List<XUserAssertionRespo
 	}
 
 	@Override
-	protected List<XUserAssertionResponse> parseResponse(String httpResponse) throws ClientSendException {
+	protected List<XUserAssertionResponse> parseResponse(String httpResponse)
+			throws ClientSendException {
 		try {
 			final Element reponseElement = getResponseElement(httpResponse, WSTrustConstants.WST_NS,
 					RequestSecurityTokenResponseCollection.ELEMENT_LOCAL_NAME);
@@ -137,7 +143,8 @@ public class SimpleXuaClient extends AbstractSoapClient<List<XUserAssertionRespo
 
 			return retVal;
 		} catch (UnsupportedOperationException | IOException | TransformerFactoryConfigurationError
-				| ParserConfigurationException | SAXException | UnmarshallingException | XPathExpressionException e) {
+				| ParserConfigurationException | SAXException | UnmarshallingException
+				| XPathExpressionException e) {
 			throw new ClientSendException(e);
 		}
 	}

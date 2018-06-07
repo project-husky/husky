@@ -26,8 +26,8 @@ import org.opensaml.core.xml.AbstractXMLObjectBuilder;
  * <!-- @formatter:off -->
  * <div class="en">Builder class for OpenSamlAddPolicyRequest.</div>
  * <div class="de">Builder Klasse für OpenSamlAddPolicyRequest.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class AddPolicyRequestBuilder extends AbstractXMLObjectBuilder<OpenSamlAddPolicyRequest> {
@@ -40,13 +40,15 @@ public class AddPolicyRequestBuilder extends AbstractXMLObjectBuilder<OpenSamlAd
 	}
 
 	public OpenSamlAddPolicyRequest buildObject() {
-		return buildObject(AddPolicyRequest.DEFAULT_NS_URI, AddPolicyRequest.DEFAULT_ELEMENT_LOCAL_NAME,
-				AddPolicyRequest.DEFAULT_PREFIX);
+		return buildObject(AddPolicyRequest.DEFAULT_NS_URI,
+				AddPolicyRequest.DEFAULT_ELEMENT_LOCAL_NAME, AddPolicyRequest.DEFAULT_PREFIX);
 	}
 
 	@Override
-	public OpenSamlAddPolicyRequest buildObject(String namespaceURI, String localName, String namespacePrefix) {
-		final OpenSamlAddPolicyRequest abr = new AddPolicyRequestImpl(namespaceURI, localName, namespacePrefix);
+	public OpenSamlAddPolicyRequest buildObject(String namespaceURI, String localName,
+			String namespacePrefix) {
+		final OpenSamlAddPolicyRequest abr = new AddPolicyRequestImpl(namespaceURI, localName,
+				namespacePrefix);
 		if (assertion != null) {
 			abr.setAssertion(assertion);
 		}

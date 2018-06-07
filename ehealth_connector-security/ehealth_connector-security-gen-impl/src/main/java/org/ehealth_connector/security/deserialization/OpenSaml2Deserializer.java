@@ -24,18 +24,18 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the generic methods of OpenSaml2Deserializer for the templated type T.</div>
  * <div class="de">Interface beschreibt die Methoden des OpenSaml2Deserializer für den templated Typ T</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface OpenSaml2Deserializer<T> {
-
-	T deserializeFromXml(Element aXmlElement) throws DeserializeException;
 
 	T deserializeFromByteArray(byte[] aXmlBytes) throws DeserializeException;
 
 	Element deserializeFromByteArrayToXmlElement(byte[] aXmlBytes) throws DeserializeException;
 
 	T deserializeFromString(String aXmlString) throws DeserializeException;
+
+	T deserializeFromXml(Element aXmlElement) throws DeserializeException;
 
 }

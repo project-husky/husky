@@ -26,8 +26,8 @@ import org.ehealth_connector.security.saml2.impl.AssertionBuilderImpl;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for PrivacyPolicyFeed.</div>
  * <div class="de">Die Klasse implementiert das entsprechende interface PrivacyPolicyFeed.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class PrivacyPolicyFeedImpl
@@ -36,19 +36,20 @@ public class PrivacyPolicyFeedImpl
 	private PpfMethod mPpfMethod;
 	private org.opensaml.saml.saml2.core.Assertion mAssertion;
 
-	protected PrivacyPolicyFeedImpl(PpfMethod ppfMethod, org.opensaml.saml.saml2.core.Assertion aInternalObject) {
+	protected PrivacyPolicyFeedImpl(PpfMethod ppfMethod,
+			org.opensaml.saml.saml2.core.Assertion aInternalObject) {
 		mPpfMethod = ppfMethod;
 		mAssertion = aInternalObject;
 	}
 
 	@Override
-	public PpfMethod getMethod() {
-		return mPpfMethod;
+	public Assertion getAssertion() {
+		return new AssertionBuilderImpl().create(mAssertion);
 	}
 
 	@Override
-	public Assertion getAssertion() {
-		return new AssertionBuilderImpl().create(mAssertion);
+	public PpfMethod getMethod() {
+		return mPpfMethod;
 	}
 
 	@Override

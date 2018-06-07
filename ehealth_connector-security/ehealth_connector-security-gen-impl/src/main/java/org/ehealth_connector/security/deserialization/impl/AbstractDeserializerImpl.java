@@ -24,8 +24,8 @@ import org.ehealth_connector.security.deserialization.OpenSaml2Deserializer;
  * <!-- @formatter:off -->
  * <div class="en">Abstract implementation class with the common methods and fields.</div>
  * <div class="de">Abstrakte implementations Klasse mit den gemeinsamen Methoden und Feldern.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public abstract class AbstractDeserializerImpl<T, U> implements Deserializer<U> {

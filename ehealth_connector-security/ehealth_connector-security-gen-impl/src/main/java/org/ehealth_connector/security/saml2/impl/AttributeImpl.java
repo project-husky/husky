@@ -25,22 +25,33 @@ import org.opensaml.core.xml.schema.XSString;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Attribute</div>
  * <div class="de">Implementations Klasse von Attribute</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class AttributeImpl implements Attribute, SecurityObject<org.opensaml.saml.saml2.core.Attribute> {
+public class AttributeImpl
+		implements Attribute, SecurityObject<org.opensaml.saml.saml2.core.Attribute> {
 
 	private org.opensaml.saml.saml2.core.Attribute attribute;
 
 	/**
-	 * 
+	 *
 	 * Default constructor to instanciate the object
-	 * 
+	 *
 	 * @param aAttribute
 	 */
 	protected AttributeImpl(org.opensaml.saml.saml2.core.Attribute aAttribute) {
 		attribute = aAttribute;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.Attribute#getFriendlyName()
+	 */
+	@Override
+	public String getFriendlyName() {
+		return attribute.getFriendlyName();
 	}
 
 	/**
@@ -66,21 +77,12 @@ public class AttributeImpl implements Attribute, SecurityObject<org.opensaml.sam
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.saml2.Attribute#getFriendlyName()
-	 */
-	@Override
-	public String getFriendlyName() {
-		return attribute.getFriendlyName();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
 	 * @see org.ehealth_connector.security.saml2.Attribute#getValue()
 	 */
 	@Override
 	public String getValue() {
-		if ((attribute.getAttributeValues() != null) && (attribute.getAttributeValues().size() > 0)) {
+		if ((attribute.getAttributeValues() != null)
+				&& (attribute.getAttributeValues().size() > 0)) {
 			final XSString attributeValue = (XSString) attribute.getAttributeValues().get(0);
 			return attributeValue.getValue();
 		}
@@ -88,7 +90,7 @@ public class AttributeImpl implements Attribute, SecurityObject<org.opensaml.sam
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.core.SecurityObject#getWrappedObject()

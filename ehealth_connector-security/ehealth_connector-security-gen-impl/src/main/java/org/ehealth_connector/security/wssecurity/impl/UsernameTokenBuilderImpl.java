@@ -25,8 +25,8 @@ import org.ehealth_connector.security.wssecurity.UsernameTokenBuilder;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for UsernameToken building.</div>
  * <div class="de">Die Klasse implementiert das entsprechende interface um UsernameToken bilden zu k&ooml;nnen.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class UsernameTokenBuilderImpl implements UsernameTokenBuilder,
@@ -47,9 +47,29 @@ public class UsernameTokenBuilderImpl implements UsernameTokenBuilder,
 	}
 
 	@Override
-	public UsernameTokenBuilder username(String aUsername) {
-		if (aUsername != null) {
-			userName.setValue(aUsername);
+	public UsernameToken create() {
+		if ((userName != null) && (userName.getValue() != null)) {
+			wrappedObject.setUsername(userName);
+		}
+		if ((password != null) && (password.getValue() != null)) {
+			wrappedObject.getUnknownXMLObjects().add(password);
+		}
+		if ((nonce != null) && (nonce.getValue() != null)) {
+			wrappedObject.getUnknownXMLObjects().add(nonce);
+		}
+
+		return new UsernameTokenImpl(wrappedObject);
+	}
+
+	@Override
+	public UsernameToken create(org.opensaml.soap.wssecurity.UsernameToken aInternalObject) {
+		return new UsernameTokenImpl(aInternalObject);
+	}
+
+	@Override
+	public UsernameTokenBuilder nonce(String aNonce) {
+		if (aNonce != null) {
+			nonce.setValue(aNonce);
 		}
 		return this;
 	}
@@ -63,31 +83,11 @@ public class UsernameTokenBuilderImpl implements UsernameTokenBuilder,
 	}
 
 	@Override
-	public UsernameTokenBuilder nonce(String aNonce) {
-		if (aNonce != null) {
-			nonce.setValue(aNonce);
+	public UsernameTokenBuilder username(String aUsername) {
+		if (aUsername != null) {
+			userName.setValue(aUsername);
 		}
 		return this;
-	}
-
-	@Override
-	public UsernameToken create(org.opensaml.soap.wssecurity.UsernameToken aInternalObject) {
-		return new UsernameTokenImpl(aInternalObject);
-	}
-
-	@Override
-	public UsernameToken create() {
-		if ((userName != null) && (userName.getValue() != null)) {
-			wrappedObject.setUsername(userName);
-		}
-		if ((password != null) && (password.getValue() != null)) {
-			wrappedObject.getUnknownXMLObjects().add(password);
-		}
-		if ((nonce != null) && (nonce.getValue() != null)) {
-			wrappedObject.getUnknownXMLObjects().add(nonce);
-		}
-
-		return new UsernameTokenImpl(wrappedObject);
 	}
 
 }

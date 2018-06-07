@@ -59,14 +59,34 @@ public class PrivacyPolicyQuerySerializerImplTest extends InitializerTestHelper 
 		testInstanceIdentifier.setRoot(testInstanceIdentifierRoot);
 		testInstanceIdentifier.setExtension(testInstanceIdentifierExt);
 
-		testXmlObject = new PrivacyPolicyQueryBuilderImpl().consent(testConsent).destination(testDestination)
-				.instanceIdentifier(testInstanceIdentifier).create();
+		testXmlObject = new PrivacyPolicyQueryBuilderImpl().consent(testConsent)
+				.destination(testDestination).instanceIdentifier(testInstanceIdentifier).create();
+	}
+
+	@Test(expected = SerializeException.class)
+	public void testSerializeToXml_InputNull() throws SerializeException {
+		testSerializer.toXmlElement(null);
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.serialization.impl.PrivacyPolicyQuerySerializerImpl#toXmlByteArray(org.ehealth_connector.security.ch.ppq.PrivacyPolicyQuery)}.
+	 *
+	 * @throws SerializeException
+	 */
+	@Test
+	public void testToXmlByteArray() throws SerializeException {
+		final byte[] xmlArray = testSerializer.toXmlByteArray(testXmlObject);
+		assertNotNull(xmlArray);
+		final byte[] startPart = new byte["<?xml version=".length()];
+		System.arraycopy(xmlArray, 0, startPart, 0, "<?xml version=".length());
+		assertArrayEquals("<?xml version=".getBytes(), startPart);
 	}
 
 	/**
 	 * Test method for
 	 * {@link org.ehealth_connector.security.serialization.impl.PrivacyPolicyQuerySerializerImpl#toXmlElement(org.ehealth_connector.security.ch.ppq.PrivacyPolicyQuery)}.
-	 * 
+	 *
 	 * @throws SerializeException
 	 */
 	@Test
@@ -77,15 +97,10 @@ public class PrivacyPolicyQuerySerializerImplTest extends InitializerTestHelper 
 		assertEquals(testConsent, xmlElement.getAttributeNode("Consent").getValue());
 	}
 
-	@Test(expected = SerializeException.class)
-	public void testSerializeToXml_InputNull() throws SerializeException {
-		testSerializer.toXmlElement(null);
-	}
-
 	/**
 	 * Test method for
 	 * {@link org.ehealth_connector.security.serialization.impl.PrivacyPolicyQuerySerializerImpl#toXmlString(org.ehealth_connector.security.ch.ppq.PrivacyPolicyQuery)}.
-	 * 
+	 *
 	 * @throws SerializeException
 	 */
 	@Test
@@ -96,21 +111,6 @@ public class PrivacyPolicyQuerySerializerImplTest extends InitializerTestHelper 
 		assertTrue(xmlString.startsWith("<?xml version="));
 		assertTrue(xmlString.endsWith(">"));
 		assertTrue(xmlString.contains("urn:e-health-suisse:2015:epr-spid"));
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.security.serialization.impl.PrivacyPolicyQuerySerializerImpl#toXmlByteArray(org.ehealth_connector.security.ch.ppq.PrivacyPolicyQuery)}.
-	 * 
-	 * @throws SerializeException
-	 */
-	@Test
-	public void testToXmlByteArray() throws SerializeException {
-		final byte[] xmlArray = testSerializer.toXmlByteArray(testXmlObject);
-		assertNotNull(xmlArray);
-		final byte[] startPart = new byte["<?xml version=".length()];
-		System.arraycopy(xmlArray, 0, startPart, 0, "<?xml version=".length());
-		assertArrayEquals("<?xml version=".getBytes(), startPart);
 	}
 
 }

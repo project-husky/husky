@@ -25,8 +25,8 @@ import org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeed.PpfMethod;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods for the PrivacyPolicyFeedResponse.</div>
  * <div class="de">Interface welches die Methoden für den PrivacyPolicyFeedResponse beschreiben.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface PrivacyPolicyFeedResponse {
@@ -36,50 +36,50 @@ public interface PrivacyPolicyFeedResponse {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to get the status of the Response.</div>
-	 * <div class="de">Methode um den status der Antwort zu erhalten.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="en">Method to get the list of errors if available.</div>
+	 * <div class="de">Methode die Liste von Fehlern zu erhalten falls vorhanden.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
 	 * @return
-	 * <!-- @formatter:off -->
-	 * <div class="en">the status as string</div>
-	 * <div class="de">den Status als String</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="en">a {@link java.util.List<java.lang.Exception>} with exceptions if available.</div>
+	 * <div class="de">eine {@link java.util.List<java.lang.Exception>} mit fehlern wenn vorhande.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	String getStatus();
+	List<Exception> getExceptions();
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the method of the response.</div>
 	 * <div class="de">Methode um die methode des requests zu erhalten.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return
 	 * <div class="en">the {@link org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeed.PpfMethod} which is set.</div>
 	 * <div class="de">dei {@link org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeed.PpfMethod} die gesetzt ist.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	PpfMethod getMethod();
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to get the list of errors if available.</div>
-	 * <div class="de">Methode die Liste von Fehlern zu erhalten falls vorhanden.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 *
+	 * <div class="en">Method to get the status of the Response.</div>
+	 * <div class="de">Methode um den status der Antwort zu erhalten.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @return
-	 * <div class="en">a {@link java.util.List<java.lang.Exception>} with exceptions if available.</div>
-	 * <div class="de">eine {@link java.util.List<java.lang.Exception>} mit fehlern wenn vorhande.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <!-- @formatter:off -->
+	 * <div class="en">the status as string</div>
+	 * <div class="de">den Status als String</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	List<Exception> getExceptions();
+	String getStatus();
 
 }

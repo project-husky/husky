@@ -21,8 +21,8 @@ package org.ehealth_connector.security.saml2;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of Status</div>
  * <div class="de">Interface beschreibt die methoden von Status</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  *
  */
@@ -31,14 +31,14 @@ public interface Status {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the StatusCode.</div>
 	 * <div class="de">Methode um den StatusCode zu erhalten.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return
 	 * <div class="en">the StatusCode</div>
 	 * <div class="de">den StatusCode</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	StatusCode getStatusCode();
@@ -47,14 +47,14 @@ public interface Status {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the StatusMessage.</div>
 	 * <div class="de">Methode um den StatusMessage zu erhalten.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return
 	 * <div class="en">the StatusMessage as {@link java.lang.String}</div>
 	 * <div class="de">den StatusMessage als {@link java.lang.String}</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	String getStatusMessage();

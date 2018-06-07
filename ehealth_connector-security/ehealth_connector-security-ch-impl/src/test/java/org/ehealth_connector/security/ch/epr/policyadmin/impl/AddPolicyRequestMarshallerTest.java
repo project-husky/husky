@@ -39,11 +39,14 @@ public class AddPolicyRequestMarshallerTest extends InitializerTestHelper {
 
 	@Before
 	public void setUp() throws Exception {
-		final Element testAssertionXmlElement = loadXmlDokument("/ch-ppq/add_policy_request_assertion_only.xml");
+		final Element testAssertionXmlElement = loadXmlDokument(
+				"/ch-ppq/add_policy_request_assertion_only.xml");
 
-		final UnmarshallerFactory unmarshallerFactory = XMLObjectProviderRegistrySupport.getUnmarshallerFactory();
+		final UnmarshallerFactory unmarshallerFactory = XMLObjectProviderRegistrySupport
+				.getUnmarshallerFactory();
 
-		final Unmarshaller unmarshaller = unmarshallerFactory.getUnmarshaller(testAssertionXmlElement);
+		final Unmarshaller unmarshaller = unmarshallerFactory
+				.getUnmarshaller(testAssertionXmlElement);
 		final org.opensaml.saml.saml2.core.Assertion innerAssertion = (org.opensaml.saml.saml2.core.Assertion) unmarshaller
 				.unmarshall(testAssertionXmlElement);
 
@@ -54,7 +57,8 @@ public class AddPolicyRequestMarshallerTest extends InitializerTestHelper {
 
 	@Test
 	public void testMarshall() throws MarshallingException {
-		final MarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport.getMarshallerFactory();
+		final MarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport
+				.getMarshallerFactory();
 		final Marshaller marshaller = marshallerFactory.getMarshaller(testAddPolicyRequest);
 
 		final Element serialized = marshaller.marshall(testAddPolicyRequest);

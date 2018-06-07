@@ -23,9 +23,9 @@ import org.openhealthtools.ihe.atna.auditor.IHEAuditor;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the PPQ Consumer Auditor for ATNA</div>
  * <div class="de">Klasse die den PPQ Consumer Auditor für ATNA implementiert</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
- * 
+ * <div class="fr"></div>
+ * <div class="it"></div>
+ *
  * <!-- @formatter:on -->
  */
 public class PPQConsumerAuditor extends IHEAuditor {

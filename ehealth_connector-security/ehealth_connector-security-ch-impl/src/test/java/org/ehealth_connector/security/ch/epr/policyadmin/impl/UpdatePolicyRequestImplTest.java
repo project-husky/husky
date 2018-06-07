@@ -35,9 +35,9 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">HEREISENGLISH</div>
  * <div class="de">HIERISTDEUTSCH</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
- * 
+ * <div class="fr"></div>
+ * <div class="it"></div>
+ *
  * <!-- @formatter:on -->
  */
 public class UpdatePolicyRequestImplTest extends InitializerTestHelper {
@@ -46,9 +46,12 @@ public class UpdatePolicyRequestImplTest extends InitializerTestHelper {
 
 	@Before
 	public void setUp() throws Exception {
-		final Element testAssertionXmlElement = loadXmlDokument("/ch-ppq/update_policy_request_assertion_only.xml");
-		final UnmarshallerFactory unmarshallerFactory = XMLObjectProviderRegistrySupport.getUnmarshallerFactory();
-		final Unmarshaller unmarshaller = unmarshallerFactory.getUnmarshaller(testAssertionXmlElement);
+		final Element testAssertionXmlElement = loadXmlDokument(
+				"/ch-ppq/update_policy_request_assertion_only.xml");
+		final UnmarshallerFactory unmarshallerFactory = XMLObjectProviderRegistrySupport
+				.getUnmarshallerFactory();
+		final Unmarshaller unmarshaller = unmarshallerFactory
+				.getUnmarshaller(testAssertionXmlElement);
 		final org.opensaml.saml.saml2.core.Assertion innerAssertion = (org.opensaml.saml.saml2.core.Assertion) unmarshaller
 				.unmarshall(testAssertionXmlElement);
 		testAssertion = new AssertionBuilderImpl().create(innerAssertion);
@@ -56,7 +59,8 @@ public class UpdatePolicyRequestImplTest extends InitializerTestHelper {
 
 	@Test
 	public void testAssertion() {
-		final UpdatePolicyRequest ref = new UpdatePolicyRequestBuilder().assertion(testAssertion).buildObject();
+		final UpdatePolicyRequest ref = new UpdatePolicyRequestBuilder().assertion(testAssertion)
+				.buildObject();
 		assertNotNull(ref);
 		assertEquals(testAssertion, ref.getAssertion());
 	}

@@ -38,8 +38,8 @@ public class XUserAssertionRequestDeserializerImplTest {
 	@Before
 	public void setUp() throws Exception {
 		testDeserializer = new XUserAssertionRequestDeserializerImpl();
-		testXmlByteArray = Files
-				.readAllBytes(Paths.get(getClass().getResource("/wstrust/XUserAssertionRequest.xml").toURI()));
+		testXmlByteArray = Files.readAllBytes(
+				Paths.get(getClass().getResource("/wstrust/XUserAssertionRequest.xml").toURI()));
 		testXmlString = new String(testXmlByteArray);
 		testXmlElement = new OpenSaml2DeserializerImpl<XUserAssertionRequest>()
 				.deserializeFromByteArrayToXmlElement(testXmlString.getBytes());
@@ -47,8 +47,20 @@ public class XUserAssertionRequestDeserializerImplTest {
 
 	/**
 	 * Test method for
+	 * {@link org.ehealth_connector.security.deserialization.impl.XUserAssertionRequestDeserializerImpl#fromXmlByteArray(byte[])}.
+	 *
+	 * @throws DeserializeException
+	 */
+	@Test
+	public void testFromXmlByteArray() throws DeserializeException {
+		final XUserAssertionRequest ref = testDeserializer.fromXmlByteArray(testXmlByteArray);
+		assertNotNull(ref);
+	}
+
+	/**
+	 * Test method for
 	 * {@link org.ehealth_connector.security.deserialization.impl.XUserAssertionRequestDeserializerImpl#fromXmlElement(org.w3c.dom.Element)}.
-	 * 
+	 *
 	 * @throws DeserializeException
 	 */
 	@Test
@@ -60,24 +72,12 @@ public class XUserAssertionRequestDeserializerImplTest {
 	/**
 	 * Test method for
 	 * {@link org.ehealth_connector.security.deserialization.impl.XUserAssertionRequestDeserializerImpl#fromXmlString(java.lang.String)}.
-	 * 
+	 *
 	 * @throws DeserializeException
 	 */
 	@Test
 	public void testFromXmlString() throws DeserializeException {
 		final XUserAssertionRequest ref = testDeserializer.fromXmlString(testXmlString);
-		assertNotNull(ref);
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.security.deserialization.impl.XUserAssertionRequestDeserializerImpl#fromXmlByteArray(byte[])}.
-	 * 
-	 * @throws DeserializeException
-	 */
-	@Test
-	public void testFromXmlByteArray() throws DeserializeException {
-		final XUserAssertionRequest ref = testDeserializer.fromXmlByteArray(testXmlByteArray);
 		assertNotNull(ref);
 	}
 

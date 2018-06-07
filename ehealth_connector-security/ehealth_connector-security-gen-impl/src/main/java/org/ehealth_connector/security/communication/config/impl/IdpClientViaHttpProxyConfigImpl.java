@@ -23,11 +23,12 @@ import org.ehealth_connector.security.communication.config.IdpClientConfig;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Interface IdpClientViaHttpProxyConfig</div>
  * <div class="de">Implementations Klasse von  Interface IdpClientViaHttpProxyConfig</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class IdpClientViaHttpProxyConfigImpl extends AbstractClientConfig implements IdpClientConfig {
+public class IdpClientViaHttpProxyConfigImpl extends AbstractClientConfig
+		implements IdpClientConfig {
 
 	private String proxyHost;
 
@@ -47,16 +48,16 @@ public class IdpClientViaHttpProxyConfigImpl extends AbstractClientConfig implem
 		return proxyPort;
 	}
 
+	public String getProxyProtocol() {
+		return proxyProtocol;
+	}
+
 	public void setProxyHost(String proxyHost) {
 		this.proxyHost = proxyHost;
 	}
 
 	public void setProxyPort(int proxyPort) {
 		this.proxyPort = proxyPort;
-	}
-
-	public String getProxyProtocol() {
-		return proxyProtocol;
 	}
 
 	public void setProxyProtocol(String proxyProtocol) {

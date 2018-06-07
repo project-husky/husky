@@ -38,8 +38,8 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of OpenSaml2Serializer</div>
  * <div class="de">Implementations Klasse von OpenSaml2Serializer</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class OpenSaml2SerializerImpl implements OpenSaml2Serializer {
@@ -50,7 +50,7 @@ public class OpenSaml2SerializerImpl implements OpenSaml2Serializer {
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.serialization.OpenSaml2Serializer#serializeToByteArray(org.opensaml.core.xml.XMLObject)
@@ -61,7 +61,7 @@ public class OpenSaml2SerializerImpl implements OpenSaml2Serializer {
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.serialization.OpenSaml2Serializer#serializeToString(org.opensaml.core.xml.XMLObject)
@@ -71,7 +71,30 @@ public class OpenSaml2SerializerImpl implements OpenSaml2Serializer {
 		return serializeToBytArrayOutputStream(aXmlObject).toString();
 	}
 
-	private ByteArrayOutputStream serializeToBytArrayOutputStream(XMLObject aXmlObject) throws SerializeException {
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.serialization.OpenSaml2Serializer#serializeToXml(org.opensaml.core.xml.XMLObject)
+	 */
+	@Override
+	public Element serializeToXml(XMLObject aXmlObject) throws SerializeException {
+		try {
+			final MarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport
+					.getMarshallerFactory();
+
+			final Marshaller marshaller = marshallerFactory.getMarshaller(aXmlObject);
+
+			return marshaller.marshall(aXmlObject);
+
+		} catch (final MarshallingException | NullPointerException e) {
+			throw new SerializeException(e);
+		}
+
+	}
+
+	private ByteArrayOutputStream serializeToBytArrayOutputStream(XMLObject aXmlObject)
+			throws SerializeException {
 		try {
 			final Element element = serializeToXml(aXmlObject);
 
@@ -87,26 +110,5 @@ public class OpenSaml2SerializerImpl implements OpenSaml2Serializer {
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.serialization.OpenSaml2Serializer#serializeToXml(org.opensaml.core.xml.XMLObject)
-	 */
-	@Override
-	public Element serializeToXml(XMLObject aXmlObject) throws SerializeException {
-		try {
-			final MarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport.getMarshallerFactory();
-
-			final Marshaller marshaller = marshallerFactory.getMarshaller(aXmlObject);
-
-			return marshaller.marshall(aXmlObject);
-
-		} catch (final MarshallingException | NullPointerException e) {
-			throw new SerializeException(e);
-		}
-
 	}
 }

@@ -40,11 +40,12 @@ import org.opensaml.core.config.InitializationService;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the interface ConvenienceUserAccessAuthentication.</div>
  * <div class="de">Klasse die das Interface ConvenienceUserAccessAuthentication implementiert.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class ConvenienceUserAccessAuthenticationImpl implements AuthenticationModule, XUserAssertionModule {
+public class ConvenienceUserAccessAuthenticationImpl
+		implements AuthenticationModule, XUserAssertionModule {
 
 	protected boolean initialized = false;
 
@@ -61,35 +62,36 @@ public class ConvenienceUserAccessAuthenticationImpl implements AuthenticationMo
 
 	/**
 	 * {@inheritDoc}
-	 * 
-	 * @throws ClientSendException
-	 *
-	 * @see org.ehealth_connector.security.communication.ConvenienceUserAccessAuthentication#invokeUserAuthentication(org.ehealth_connector.security.authentication.AuthnRequest,
-	 *      org.ehealth_connector.security.communication.config.IdpClientConfig)
-	 */
-	@Override
-	public Response invokeUserAuthentication(AuthnRequest aAuthnRequest, IdpClientConfig clientConfiguration)
-			throws ClientSendException {
-		if (!initialized)
-			throw new ClientSendException("Opensaml Libs are not initialized");
-		final IdpClient client = ClientFactory.getIdpClient(clientConfiguration);
-		return client.send(aAuthnRequest);
-	}
-
-	/**
-	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.communication.ConvenienceUserAccessAuthentication#invokeGetXUserAssertion(org.ehealth_connector.security.saml2.Assertion,
 	 *      org.ehealth_connector.security.communication.xua.XUserAssertionRequest,
 	 *      org.ehealth_connector.security.communication.config.XuaClientConfig)
 	 */
 	@Override
-	public List<XUserAssertionResponse> invokeGetXUserAssertion(SecurityHeaderElement aSecurityHeaderElement,
-			XUserAssertionRequest aRequest, XuaClientConfig clientConfiguration) throws ClientSendException {
+	public List<XUserAssertionResponse> invokeGetXUserAssertion(
+			SecurityHeaderElement aSecurityHeaderElement, XUserAssertionRequest aRequest,
+			XuaClientConfig clientConfiguration) throws ClientSendException {
 		if (!initialized)
 			throw new ClientSendException("Opensaml Libs are not initialized");
 		final XuaClient client = ClientFactory.getXuaClient(clientConfiguration);
 		return client.send(aSecurityHeaderElement, aRequest);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @throws ClientSendException
+	 *
+	 * @see org.ehealth_connector.security.communication.ConvenienceUserAccessAuthentication#invokeUserAuthentication(org.ehealth_connector.security.authentication.AuthnRequest,
+	 *      org.ehealth_connector.security.communication.config.IdpClientConfig)
+	 */
+	@Override
+	public Response invokeUserAuthentication(AuthnRequest aAuthnRequest,
+			IdpClientConfig clientConfiguration) throws ClientSendException {
+		if (!initialized)
+			throw new ClientSendException("Opensaml Libs are not initialized");
+		final IdpClient client = ClientFactory.getIdpClient(clientConfiguration);
+		return client.send(aAuthnRequest);
 	}
 
 }

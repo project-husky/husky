@@ -45,17 +45,8 @@ public class PpqClientConfigBuilderImplTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.communication.ch.ppq.config.impl.PpqClientConfigBuilderImpl#url(java.lang.String)}.
-	 */
-	@Test
-	public void testUrl() {
-		final PpClientConfig ref = builder.url(testEnpointUrl).create();
-		assertNotNull(ref);
-		assertEquals(testEnpointUrl, ref.getUrl());
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.communication.ch.ppq.config.impl.PpqClientConfigBuilderImpl#portName(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.communication.ch.ppq.config.impl.PpqClientConfigBuilderImpl#portName(java.lang.String)}.
 	 */
 	@Test
 	public void testPortName() {
@@ -76,7 +67,8 @@ public class PpqClientConfigBuilderImplTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.communication.ch.ppq.config.impl.PpqClientConfigBuilderImpl#serviceName(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.communication.ch.ppq.config.impl.PpqClientConfigBuilderImpl#serviceName(java.lang.String)}.
 	 */
 	@Test
 	public void testServiceName() {
@@ -94,6 +86,17 @@ public class PpqClientConfigBuilderImplTest {
 		final PpClientConfig ref = builder.serviceNamespace(testServiceNamespace).create();
 		assertNotNull(ref);
 		assertEquals(testServiceNamespace, ref.getServiceNamespace());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.communication.ch.ppq.config.impl.PpqClientConfigBuilderImpl#url(java.lang.String)}.
+	 */
+	@Test
+	public void testUrl() {
+		final PpClientConfig ref = builder.url(testEnpointUrl).create();
+		assertNotNull(ref);
+		assertEquals(testEnpointUrl, ref.getUrl());
 	}
 
 }

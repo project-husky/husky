@@ -23,8 +23,8 @@ import org.ehealth_connector.security.saml2.Assertion;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods for the privacy policy feed</div>
  * <div class="de">Interface welches die Methoden für den Privacy Policy Feed beschreiben.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface PrivacyPolicyFeed {
@@ -33,8 +33,8 @@ public interface PrivacyPolicyFeed {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Enumeration defining the PrivacyPolicyFeed methods.</div>
 	 * <div class="de">Enumration die die PrivacyPolicyFeed methoden definiert.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	public enum PpfMethod {
@@ -42,37 +42,37 @@ public interface PrivacyPolicyFeed {
 	};
 
 	/**
-	 * 
-	 * <!-- @formatter:off -->
-	 * <div class="en">Method to get the defined PrivacyPolicyFeed method.</div>
-	 * <div class="de">Methode um die Methode des PrivacyPolicyFeed zu erhalten.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
 	 *
-	 * @return
-	 * <div class="en">the {@link org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeed.PpfMethod} which is set.</div>
-	 * <div class="de">dei {@link org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeed.PpfMethod} die gesetzt ist.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * <!-- @formatter:on -->
-	 */
-	PpfMethod getMethod();
-
-	/**
-	 * 
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the defined Assertion.</div>
 	 * <div class="de">Methode um die Assertion welche gesetzt wurde zu bekommen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return
 	 * <div class="en">the {@link org.ehealth_connector.security.saml2.Assertion} which is set.</div>
 	 * <div class="de">die {@link org.ehealth_connector.security.saml2.Assertion} die gesetzt ist.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	Assertion getAssertion();
+
+	/**
+	 *
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the defined PrivacyPolicyFeed method.</div>
+	 * <div class="de">Methode um die Methode des PrivacyPolicyFeed zu erhalten.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return
+	 * <div class="en">the {@link org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeed.PpfMethod} which is set.</div>
+	 * <div class="de">dei {@link org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeed.PpfMethod} die gesetzt ist.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	PpfMethod getMethod();
 
 }

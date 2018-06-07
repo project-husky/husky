@@ -45,6 +45,12 @@ public class StatusBuilderImplTest {
 	}
 
 	@Test
+	public void testCreateStatus() {
+		final Status ref = builder.create(testInnerObject);
+		assertEquals(testInnerObject, ((StatusImpl) ref).getWrappedObject());
+	}
+
+	@Test
 	public void testStatusCode() {
 		final Status ref = builder.statusCode(testStatusCode).create();
 		assertEquals(testStatusCode, ref.getStatusCode());
@@ -54,12 +60,6 @@ public class StatusBuilderImplTest {
 	public void testStatusMessage() {
 		final Status ref = builder.statusMessage(testStatusMessage).create();
 		assertEquals(testStatusMessage, ref.getStatusMessage());
-	}
-
-	@Test
-	public void testCreateStatus() {
-		final Status ref = builder.create(testInnerObject);
-		assertEquals(testInnerObject, ((StatusImpl) ref).getWrappedObject());
 	}
 
 }

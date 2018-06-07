@@ -38,19 +38,22 @@ public class EprPolicyRepositoryResponseMarshallerTest extends InitializerTestHe
 	@Before
 	public void setUp() throws Exception {
 		testStatus = "This is a status";
-		testOpenSamlEpdPolicyRepositoryResponse = new EprPolicyRepositoryResponseBuilderImpl().status(testStatus)
-				.buildObject();
+		testOpenSamlEpdPolicyRepositoryResponse = new EprPolicyRepositoryResponseBuilderImpl()
+				.status(testStatus).buildObject();
 	}
 
 	/**
-	 * Test method for {@link org.opensaml.core.xml.io.AbstractXMLObjectMarshaller#marshall(org.opensaml.core.xml.XMLObject)}.
-	 * 
+	 * Test method for
+	 * {@link org.opensaml.core.xml.io.AbstractXMLObjectMarshaller#marshall(org.opensaml.core.xml.XMLObject)}.
+	 *
 	 * @throws MarshallingException
 	 */
 	@Test
 	public void testMarshallXMLObject() throws MarshallingException {
-		final MarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport.getMarshallerFactory();
-		final Marshaller marshaller = marshallerFactory.getMarshaller(testOpenSamlEpdPolicyRepositoryResponse);
+		final MarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport
+				.getMarshallerFactory();
+		final Marshaller marshaller = marshallerFactory
+				.getMarshaller(testOpenSamlEpdPolicyRepositoryResponse);
 
 		final Element serialized = marshaller.marshall(testOpenSamlEpdPolicyRepositoryResponse);
 		assertNotNull(serialized);

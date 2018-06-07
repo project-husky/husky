@@ -21,8 +21,8 @@ package org.ehealth_connector.security.exceptions;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the BuildException.</div>
  * <div class="de">Klasse implemetiert die BuildException.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class BuildException extends Exception {
@@ -31,23 +31,23 @@ public class BuildException extends Exception {
 	private static final long serialVersionUID = -4015345681495951592L;
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Default constructor to instanciate the object.</div>
 	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * 
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
 	 * @param clazz
 	 * <div class="en">the class wanted to be created</div>
 	 * <div class="de">die Klasse die erstellt werden sollte</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @param cause
 	 * <div class="en">the throwable to be set</div>
 	 * <div class="de">der throwable der gesetzt werden soll</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	public BuildException(Class<?> clazz, Throwable cause) {

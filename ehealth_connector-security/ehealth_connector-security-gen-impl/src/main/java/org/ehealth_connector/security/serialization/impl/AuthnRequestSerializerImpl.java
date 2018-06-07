@@ -27,44 +27,15 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Serializer<AuthnRequest></div>
  * <div class="de">Implementations Klasse von Serializer<AuthnRequest></div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class AuthnRequestSerializerImpl extends AbstractSerializerImpl implements Serializer<AuthnRequest> {
+public class AuthnRequestSerializerImpl extends AbstractSerializerImpl
+		implements Serializer<AuthnRequest> {
 
 	/**
-	 * 
-	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.serialization.Serializer#toXmlElement(java.lang.Object)
-	 */
-	@Override
-	public Element toXmlElement(AuthnRequest aSecurityObject) throws SerializeException {
-		try {
-			return getOpenSamlSerializer().serializeToXml(((AuthnRequestImpl) aSecurityObject).getWrappedObject());
-		} catch (final Exception e) {
-			throw new SerializeException(e);
-		}
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.serialization.Serializer#toXmlString(java.lang.Object)
-	 */
-	@Override
-	public String toXmlString(AuthnRequest aSecurityObject) throws SerializeException {
-		try {
-			return getOpenSamlSerializer().serializeToString(((AuthnRequestImpl) aSecurityObject).getWrappedObject());
-		} catch (final Exception e) {
-			throw new SerializeException(e);
-		}
-	}
-
-	/**
-	 * 
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.serialization.Serializer#toXmlByteArray(java.lang.Object)
@@ -74,6 +45,38 @@ public class AuthnRequestSerializerImpl extends AbstractSerializerImpl implement
 		try {
 			return getOpenSamlSerializer()
 					.serializeToByteArray(((AuthnRequestImpl) aSecurityObject).getWrappedObject());
+		} catch (final Exception e) {
+			throw new SerializeException(e);
+		}
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.serialization.Serializer#toXmlElement(java.lang.Object)
+	 */
+	@Override
+	public Element toXmlElement(AuthnRequest aSecurityObject) throws SerializeException {
+		try {
+			return getOpenSamlSerializer()
+					.serializeToXml(((AuthnRequestImpl) aSecurityObject).getWrappedObject());
+		} catch (final Exception e) {
+			throw new SerializeException(e);
+		}
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.serialization.Serializer#toXmlString(java.lang.Object)
+	 */
+	@Override
+	public String toXmlString(AuthnRequest aSecurityObject) throws SerializeException {
+		try {
+			return getOpenSamlSerializer()
+					.serializeToString(((AuthnRequestImpl) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}

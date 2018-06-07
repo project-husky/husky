@@ -21,8 +21,8 @@ package org.ehealth_connector.security.ch.epr.policyadmin;
  * <!-- @formatter:off -->
  * <div class="en">Describing the methods of the AssertionBasedRequestBuilder Interface</div>
  * <div class="de">Beschreibung der Methoden des AssertionBasedRequestBuilder Interfaces</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface UnknownPolicySetIdBuilder {

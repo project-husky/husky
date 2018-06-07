@@ -25,8 +25,8 @@ import org.ehealth_connector.security.saml2.Response;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods for the identity provider client.</div>
  * <div class="de">Interface welches die Methoden für den Identity provider client beschreiben.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface IdpClient {
@@ -35,24 +35,24 @@ public interface IdpClient {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to send an AuthnRequest.</div>
 	 * <div class="de">Methode um einen AuthnRequest zu senden.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aAuthnRequest
 	 * <div class="en">the AuthnRequest to be sent.</div>
 	 * <div class="de">Die AuthnRequest welcher geschickt werden soll.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the idp response</div>
 	 * <div class="de">Der IdP Response.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @throws ClientSendException
 	 * <div class="en">will be thrown if an error occoures</div>
 	 * <div class="de">wird geworfen wenn ein Fehler auftritt.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	Response send(AuthnRequest aAuthnRequest) throws ClientSendException;

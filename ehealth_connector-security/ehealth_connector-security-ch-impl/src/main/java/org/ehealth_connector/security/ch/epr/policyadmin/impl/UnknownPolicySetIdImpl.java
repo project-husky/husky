@@ -26,15 +26,17 @@ import org.opensaml.core.xml.XMLObject;
  * <!-- @formatter:off -->
  * <div class="en">Implementing class of OpenSamlUnknownPolicySetId interface.</div>
  * <div class="de">Implementierende Klasse des OpenSamlUnknownPolicySetId Interfaces.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class UnknownPolicySetIdImpl extends AbstractAssertionBasedRequestImpl implements OpenSamlUnknownPolicySetId {
+public class UnknownPolicySetIdImpl extends AbstractAssertionBasedRequestImpl
+		implements OpenSamlUnknownPolicySetId {
 
 	private String message;
 
-	protected UnknownPolicySetIdImpl(String namespaceURI, String elementLocalName, String namespacePrefix) {
+	protected UnknownPolicySetIdImpl(String namespaceURI, String elementLocalName,
+			String namespacePrefix) {
 		super(namespaceURI, elementLocalName, namespacePrefix);
 	}
 

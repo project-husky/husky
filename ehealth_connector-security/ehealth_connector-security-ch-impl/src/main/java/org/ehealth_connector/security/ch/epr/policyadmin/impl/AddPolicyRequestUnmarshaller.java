@@ -28,8 +28,8 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the unmarshaller for OpenSamlAddPolicyRequest.</div>
  * <div class="de">Die Klasse implementiert den Unmarshaller für OpenSamlAddPolicyRequest.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class AddPolicyRequestUnmarshaller extends AbstractXMLObjectUnmarshaller {
@@ -44,8 +44,8 @@ public class AddPolicyRequestUnmarshaller extends AbstractXMLObjectUnmarshaller 
 			throws UnmarshallingException {
 		if (childXMLObject instanceof org.opensaml.saml.saml2.core.Assertion) {
 			final OpenSamlAddPolicyRequest request = (OpenSamlAddPolicyRequest) parentXMLObject;
-			request.setAssertion(
-					new AssertionBuilderImpl().create((org.opensaml.saml.saml2.core.Assertion) childXMLObject));
+			request.setAssertion(new AssertionBuilderImpl()
+					.create((org.opensaml.saml.saml2.core.Assertion) childXMLObject));
 		} else {
 			super.processChildElement(parentXMLObject, childXMLObject);
 		}

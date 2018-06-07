@@ -21,59 +21,14 @@ package org.ehealth_connector.security.communication.config;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the XuaClientConfigBuilder methods.</div>
  * <div class="de">Interface beschreibende methoden des XuaClientConfigBuilder.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface XuaClientConfigBuilder extends SoapClientConfigBuilder {
 
 	/**
-	 * 
-	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.communication.config.ClientConfigBuilder#url(java.lang.String)
-	 */
-	@Override
-	XuaClientConfigBuilder url(String aEndpointUri);
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#portName(java.lang.String)
-	 */
-	@Override
-	XuaClientConfigBuilder portName(String portName);
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#portNamespace(java.lang.String)
-	 */
-	@Override
-	XuaClientConfigBuilder portNamespace(String portNamespace);
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#serviceName(java.lang.String)
-	 */
-	@Override
-	XuaClientConfigBuilder serviceName(String serviceName);
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#serviceNamespace(java.lang.String)
-	 */
-	@Override
-	XuaClientConfigBuilder serviceNamespace(String serviceNamespace);
-
-	/**
-	 * 
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#clientKeyStore(java.lang.String)
@@ -82,7 +37,7 @@ public interface XuaClientConfigBuilder extends SoapClientConfigBuilder {
 	XuaClientConfigBuilder clientKeyStore(String clientKeyStoreFile);
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#clientKeyStorePassword(java.lang.String)
@@ -91,7 +46,7 @@ public interface XuaClientConfigBuilder extends SoapClientConfigBuilder {
 	XuaClientConfigBuilder clientKeyStorePassword(String clientKeyStorePassword);
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#clientKeyStoreType(java.lang.String)
@@ -99,13 +54,58 @@ public interface XuaClientConfigBuilder extends SoapClientConfigBuilder {
 	@Override
 	XuaClientConfigBuilder clientKeyStoreType(String clientKeyStoreType);
 
-	XuaClientConfigBuilder simple(boolean aSimple);
-
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#create()
 	 */
 	XuaClientConfig create();
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#portName(java.lang.String)
+	 */
+	@Override
+	XuaClientConfigBuilder portName(String portName);
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#portNamespace(java.lang.String)
+	 */
+	@Override
+	XuaClientConfigBuilder portNamespace(String portNamespace);
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#serviceName(java.lang.String)
+	 */
+	@Override
+	XuaClientConfigBuilder serviceName(String serviceName);
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#serviceNamespace(java.lang.String)
+	 */
+	@Override
+	XuaClientConfigBuilder serviceNamespace(String serviceNamespace);
+
+	XuaClientConfigBuilder simple(boolean aSimple);
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.communication.config.ClientConfigBuilder#url(java.lang.String)
+	 */
+	@Override
+	XuaClientConfigBuilder url(String aEndpointUri);
 }

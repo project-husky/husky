@@ -41,12 +41,12 @@ import org.opensaml.xacml.profile.saml.impl.XACMLPolicyQueryTypeImplBuilder;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for PatientPrivacyQuery building.</div>
  * <div class="de">Die Klasse implementiert das entsprechende interface um PatientPrivacyQuery bilden zu k&ooml;nnen.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class PrivacyPolicyQueryBuilderImpl
-		implements PrivacyPolicyQueryBuilder, SecurityObjectBuilder<XACMLPolicyQueryType, PrivacyPolicyQuery> {
+public class PrivacyPolicyQueryBuilderImpl implements PrivacyPolicyQueryBuilder,
+		SecurityObjectBuilder<XACMLPolicyQueryType, PrivacyPolicyQuery> {
 
 	private XACMLPolicyQueryType wrappedObject;
 	private org.opensaml.saml.saml2.core.Issuer issuer;
@@ -68,10 +68,52 @@ public class PrivacyPolicyQueryBuilderImpl
 	}
 
 	@Override
+	public PrivacyPolicyQueryBuilder consent(String aConsent) {
+		if (aConsent != null) {
+			wrappedObject.setConsent(aConsent);
+		}
+		return this;
+	}
+
+	@Override
+	public PrivacyPolicyQuery create() {
+		return new PrivacyPolicyQueryImpl(wrappedObject);
+	}
+
+	@Override
+	public PrivacyPolicyQuery create(XACMLPolicyQueryType aInternalObject) {
+		return new PrivacyPolicyQueryImpl(aInternalObject);
+	}
+
+	@Override
+	public PrivacyPolicyQueryBuilder destination(String aDestination) {
+		if (aDestination != null) {
+			wrappedObject.setDestination(aDestination);
+		}
+		return this;
+	}
+
+	@Override
 	public PrivacyPolicyQueryBuilder id(String aId) {
 		if (aId != null) {
 			wrappedObject.setID(aId);
 		}
+		return this;
+	}
+
+	@Override
+	public PrivacyPolicyQueryBuilder instanceIdentifier(InstanceIdentifier identifier) {
+
+		final AttributeType attribute = new AttributeTypeImplBuilder().buildObject();
+		attribute.setAttributeID("urn:e-health-suisse:2015:epr-spid");
+		attribute.setDataType("urn:hl7-org:v3#II");
+
+		final AttributeValueType attributeValue = new AttributeValueTypeImplBuilder().buildObject();
+		attribute.getAttributeValues().add(attributeValue);
+
+		attributeValue.getUnknownXMLObjects().add((OpenSamlInstanceIdentifier) identifier);
+
+		resource.getAttributes().add(attribute);
 		return this;
 	}
 
@@ -98,48 +140,6 @@ public class PrivacyPolicyQueryBuilderImpl
 			wrappedObject.setVersion(SAMLVersion.valueOf(aVersion));
 		}
 		return this;
-	}
-
-	@Override
-	public PrivacyPolicyQueryBuilder consent(String aConsent) {
-		if (aConsent != null) {
-			wrappedObject.setConsent(aConsent);
-		}
-		return this;
-	}
-
-	@Override
-	public PrivacyPolicyQueryBuilder destination(String aDestination) {
-		if (aDestination != null) {
-			wrappedObject.setDestination(aDestination);
-		}
-		return this;
-	}
-
-	@Override
-	public PrivacyPolicyQueryBuilder instanceIdentifier(InstanceIdentifier identifier) {
-
-		final AttributeType attribute = new AttributeTypeImplBuilder().buildObject();
-		attribute.setAttributeID("urn:e-health-suisse:2015:epr-spid");
-		attribute.setDataType("urn:hl7-org:v3#II");
-
-		final AttributeValueType attributeValue = new AttributeValueTypeImplBuilder().buildObject();
-		attribute.getAttributeValues().add(attributeValue);
-
-		attributeValue.getUnknownXMLObjects().add((OpenSamlInstanceIdentifier) identifier);
-
-		resource.getAttributes().add(attribute);
-		return this;
-	}
-
-	@Override
-	public PrivacyPolicyQuery create() {
-		return new PrivacyPolicyQueryImpl(wrappedObject);
-	}
-
-	@Override
-	public PrivacyPolicyQuery create(XACMLPolicyQueryType aInternalObject) {
-		return new PrivacyPolicyQueryImpl(aInternalObject);
 	}
 
 }

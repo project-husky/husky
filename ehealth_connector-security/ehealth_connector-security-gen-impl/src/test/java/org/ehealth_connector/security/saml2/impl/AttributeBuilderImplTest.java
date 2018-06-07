@@ -38,7 +38,8 @@ public class AttributeBuilderImplTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.AttributeBuilderImpl#name(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.AttributeBuilderImpl#name(java.lang.String)}.
 	 */
 	@Test
 	public void testName() {
@@ -47,7 +48,8 @@ public class AttributeBuilderImplTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.AttributeBuilderImpl#value(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.AttributeBuilderImpl#value(java.lang.String)}.
 	 */
 	@Test
 	public void testValue() {

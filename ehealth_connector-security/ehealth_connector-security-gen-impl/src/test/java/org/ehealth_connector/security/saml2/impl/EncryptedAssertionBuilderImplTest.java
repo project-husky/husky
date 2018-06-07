@@ -36,7 +36,8 @@ public class EncryptedAssertionBuilderImplTest {
 	@Before
 	public void setUp() throws Exception {
 		builder = new EncryptedAssertionBuilderImpl();
-		testInnerObject = new org.opensaml.saml.saml2.core.impl.EncryptedAssertionBuilder().buildObject();
+		testInnerObject = new org.opensaml.saml.saml2.core.impl.EncryptedAssertionBuilder()
+				.buildObject();
 		final EncryptedData newEncryptedData = new org.opensaml.xmlsec.encryption.impl.EncryptedDataBuilder()
 				.buildObject();
 		testId = UUID.randomUUID().toString();
@@ -45,7 +46,8 @@ public class EncryptedAssertionBuilderImplTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.EncryptedAssertionBuilderImpl#create()}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.EncryptedAssertionBuilderImpl#create()}.
 	 */
 	@Test
 	public void testCreate() {

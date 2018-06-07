@@ -52,24 +52,96 @@ import org.slf4j.LoggerFactory;
  * <!-- @formatter:off -->
  * <div class="en">Abstract class implementing common methods for the concrete IdpClient implementations.</div>
  * <div class="de">Abstrakte Klasse die die gemeinsamen Methoden für die konkreten IdpClient Implementationen implementiert.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public abstract class AbstractIdpClient implements IdpClient {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
+	public abstract CloseableHttpClient getHttpClient() throws ClientSendException;
+
 	public abstract RequestConfig getRequestConfig();
 
-	public abstract CloseableHttpClient getHttpClient() throws ClientSendException;
+	protected Logger getLogger() {
+		return logger;
+	}
+
+	/**
+	 *
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to execute a HTTP post request</div>
+	 * <div class="de">Methode um eine HTTP post Abfrage auszuführen</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param post
+	 * <div class="en">the http post to be executed.</div>
+	 * <div class="de">der http post der ausgeführt werden soll.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * @return
+	 * <div class="en">the Response</div>
+	 * <div class="de">der Response</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * @throws Throwable
+	 * <div class="en">will be thrown if an error occures.</div>
+	 * <div class="de">wird geworfen wenn eine Fehler auftritt.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	Response execute(HttpPost post) throws Throwable {
+		final CloseableHttpClient httpclient = getHttpClient();
+
+		final CloseableHttpResponse response = httpclient.execute(post);
+		if ((response.getStatusLine() != null)
+				&& (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)) {
+
+			return parseResponse(response);
+		} else {
+			throw new Throwable("No valid response found: " + response);
+		}
+	}
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to create and configure the HTTPPost instance.</div>
+	 * <div class="de">Methode um eine HTTPPost Instanz zu erstellen und zu konfigurieren.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param config
+	 * <div class="en">the client configuration</div>
+	 * <div class="de">Die client konfiguration</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * @return
+	 * <div class="en">the created HTTP Post instance</div>
+	 * <div class="de">die erstellte HTTP Post Instanz</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * @throws UnsupportedEncodingException
+	 * <div class="en">will be thrown if an error occures.</div>
+	 * <div class="de">wird geworfen wenn eine Fehler auftritt.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	HttpPost getHttpPost(IdpClientConfig config) throws UnsupportedEncodingException {
+		final HttpPost post = new HttpPost(config.getUrl());
+		post.setConfig(getRequestConfig());
+		return post;
+	}
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to create an UrlEncodedFormEntity with the authn request.</div>
 	 * <div class="de">Methode um eine UrlEncodedFormEntity mit dem AuthnRequest zu erstellen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aAuthnRequest
 	 * @return
@@ -83,101 +155,35 @@ public abstract class AbstractIdpClient implements IdpClient {
 		final byte[] authnByteArray = serializer.toXmlByteArray(aAuthnRequest);
 
 		final List<NameValuePair> urlParameters = new ArrayList<>();
-		urlParameters.add(new BasicNameValuePair("SAMLRequest", Base64.getEncoder().encodeToString(authnByteArray)));
+		urlParameters.add(new BasicNameValuePair("SAMLRequest",
+				Base64.getEncoder().encodeToString(authnByteArray)));
 
 		return new UrlEncodedFormEntity(urlParameters);
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Method to create and configure the HTTPPost instance.</div>
-	 * <div class="de">Methode um eine HTTPPost Instanz zu erstellen und zu konfigurieren.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
 	 *
-	 * @param config
-	 * <div class="en">the client configuration</div>
-	 * <div class="de">Die client konfiguration</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * @return
-	 * <div class="en">the created HTTP Post instance</div>
-	 * <div class="de">die erstellte HTTP Post Instanz</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * @throws UnsupportedEncodingException
-	 * <div class="en">will be thrown if an error occures.</div>
-	 * <div class="de">wird geworfen wenn eine Fehler auftritt.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * <!-- @formatter:on -->
-	 */
-	HttpPost getHttpPost(IdpClientConfig config) throws UnsupportedEncodingException {
-		final HttpPost post = new HttpPost(config.getUrl());
-		post.setConfig(getRequestConfig());
-		return post;
-	}
-
-	/**
-	 * 
-	 * <!-- @formatter:off -->
-	 * <div class="en">Method to execute a HTTP post request</div>
-	 * <div class="de">Methode um eine HTTP post Abfrage auszuführen</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 *
-	 * @param post
-	 * <div class="en">the http post to be executed.</div>
-	 * <div class="de">der http post der ausgeführt werden soll.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * @return
-	 * <div class="en">the Response</div>
-	 * <div class="de">der Response</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * @throws Throwable
-	 * <div class="en">will be thrown if an error occures.</div>
-	 * <div class="de">wird geworfen wenn eine Fehler auftritt.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * <!-- @formatter:on -->
-	 */
-	Response execute(HttpPost post) throws Throwable {
-		final CloseableHttpClient httpclient = getHttpClient();
-
-		final CloseableHttpResponse response = httpclient.execute(post);
-		if ((response.getStatusLine() != null) && (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)) {
-
-			return parseResponse(response);
-		} else {
-			throw new Throwable("No valid response found: " + response);
-		}
-	}
-
-	/**
-	 * 
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to parse the http response content to the Response.</div>
 	 * <div class="de">Methode um den http Inhalt in ein Response umzuwandeln.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param response
 	 * <div class="en">the http response</div>
 	 * <div class="de">der http response</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the Response</div>
 	 * <div class="de">der Response</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @throws ClientSendException
 	 * <div class="en">will be thrown if an error occures.</div>
 	 * <div class="de">wird geworfen wenn eine Fehler auftritt.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	Response parseResponse(CloseableHttpResponse response) throws ClientSendException {
@@ -197,9 +203,5 @@ public abstract class AbstractIdpClient implements IdpClient {
 		} catch (ParseException | IOException | DeserializeException e) {
 			throw new ClientSendException(e);
 		}
-	}
-
-	protected Logger getLogger() {
-		return logger;
 	}
 }

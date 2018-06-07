@@ -59,10 +59,10 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 			"Tedesco"),
 	/**
 	 * <div class="en">Italian</div> <div class="de">Italienisch</div>
-	 * <div class="fr">Italien</div> <div class="it">Italiano</div>
+	 * <div class="fr">Italien</div> <div class="it"></div>
 	 */
 	ITALIAN("it-CH", "2.16.840.1.113883.6.316", "Italian ", "Italian", "Italienisch", "Italien",
-			"Italiano"),
+			""),
 	/**
 	 * <div class="en">Rhaeto-Romanic </div> <div class="de">Rätoromanisch</div>
 	 * <div class="fr">Rhéto-roman</div> <div class="it">Romancio</div>
@@ -94,7 +94,7 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	/**
 	 * <div class="en">Code for Italian</div> <div class="de">Code für
 	 * Italienisch</div> <div class="fr">Code de Italien</div>
-	 * <div class="it">Code per Italiano</div>
+	 * <div class="it">Code per </div>
 	 */
 	public static final String ITALIAN_CODE = "it-CH";
 

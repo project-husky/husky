@@ -42,8 +42,8 @@ public class IdpClientCertificateAuthConfigBuilderTest {
 
 		testStorePassword = "changeit";
 
-		testClientKeyStore = new PkiManagerImpl().loadStore(getKeyStoreInputStream("classpath:/testKeystore.p12"),
-				testStorePassword, "pkcs12");
+		testClientKeyStore = new PkiManagerImpl().loadStore(
+				getKeyStoreInputStream("classpath:/testKeystore.p12"), testStorePassword, "pkcs12");
 
 	}
 
@@ -53,14 +53,16 @@ public class IdpClientCertificateAuthConfigBuilderTest {
 	 */
 	@Test
 	public void testKeyStore() {
-		final IdpClientCertificateAuthConfigImpl ref = builder.keyStore(testClientKeyStore).create();
+		final IdpClientCertificateAuthConfigImpl ref = builder.keyStore(testClientKeyStore)
+				.create();
 		assertNotNull(ref);
 		assertEquals(testClientKeyStore, ref.getClientKeyStore());
 	}
 
 	@Test
 	public void testKeyStorePassword() {
-		final IdpClientCertificateAuthConfigImpl ref = builder.keyStorePassword(testStorePassword).create();
+		final IdpClientCertificateAuthConfigImpl ref = builder.keyStorePassword(testStorePassword)
+				.create();
 		assertNotNull(ref);
 		assertArrayEquals(testStorePassword.toCharArray(), ref.getClientKeyStorePassword());
 	}

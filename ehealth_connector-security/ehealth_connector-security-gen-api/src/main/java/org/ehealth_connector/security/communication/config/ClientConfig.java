@@ -21,40 +21,40 @@ package org.ehealth_connector.security.communication.config;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of client configuration.</div>
  * <div class="de">Interface beschreibt die Methoden für die Client Konfiguration.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface ClientConfig {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set the enpoint URI.</div>
-	 * <div class="de">Methode um die Url des Zielpunktes zu setzen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * @param aUrl
-	 * <div class="en">the url to be set.</div>
-	 * <div class="de">Die Url die zu setzen ist.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * <!-- @formatter:on -->
-	 */
-	void setUrl(String aUrl);
-
-	/**
-	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the enpoint url.</div>
 	 * <div class="de">Methode um die Ziel Url zu erhalten.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return
 	 * <div class="en">the enpoind URI.</div>
 	 * <div class="de">Die Ziel URI.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	String getUrl();
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the enpoint URI.</div>
+	 * <div class="de">Methode um die Url des Zielpunktes zu setzen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * @param aUrl
+	 * <div class="en">the url to be set.</div>
+	 * <div class="de">Die Url die zu setzen ist.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	void setUrl(String aUrl);
 }

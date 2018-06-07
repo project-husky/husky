@@ -42,17 +42,6 @@ public class IdpClientViaHttpProxyConfigBuilderTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.communication.config.impl.IdpClientViaHttpProxyConfigBuilder#url(java.lang.String)}.
-	 */
-	@Test
-	public void testUrl() {
-		final IdpClientViaHttpProxyConfigImpl ref = builder.url(testEnpointUrl).create();
-		assertNotNull(ref);
-		assertEquals(testEnpointUrl, ref.getUrl());
-	}
-
-	/**
-	 * Test method for
 	 * {@link org.ehealth_connector.security.communication.config.impl.IdpClientViaHttpProxyConfigBuilder#proxyHost(java.lang.String)}.
 	 */
 	@Test
@@ -63,7 +52,8 @@ public class IdpClientViaHttpProxyConfigBuilderTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.communication.config.impl.IdpClientViaHttpProxyConfigBuilder#proxyPort(int)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.communication.config.impl.IdpClientViaHttpProxyConfigBuilder#proxyPort(int)}.
 	 */
 	@Test
 	public void testProxyPort() {
@@ -78,9 +68,21 @@ public class IdpClientViaHttpProxyConfigBuilderTest {
 	 */
 	@Test
 	public void testProxyProtocol() {
-		final IdpClientViaHttpProxyConfigImpl ref = builder.proxyProtocol(testProxyProtocol).create();
+		final IdpClientViaHttpProxyConfigImpl ref = builder.proxyProtocol(testProxyProtocol)
+				.create();
 		assertNotNull(ref);
 		assertEquals(testProxyProtocol, ref.getProxyProtocol());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.communication.config.impl.IdpClientViaHttpProxyConfigBuilder#url(java.lang.String)}.
+	 */
+	@Test
+	public void testUrl() {
+		final IdpClientViaHttpProxyConfigImpl ref = builder.url(testEnpointUrl).create();
+		assertNotNull(ref);
+		assertEquals(testEnpointUrl, ref.getUrl());
 	}
 
 }

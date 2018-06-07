@@ -26,13 +26,15 @@ import org.opensaml.core.xml.XMLObject;
  * <!-- @formatter:off -->
  * <div class="en">Implementing class of OpenSamlDeletePolicyRequest interface.</div>
  * <div class="de">Implementierende Klasse des OpenSamlDeletePolicyRequest Interfaces.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class DeletePolicyRequestImpl extends AbstractAssertionBasedRequestImpl implements OpenSamlDeletePolicyRequest {
+public class DeletePolicyRequestImpl extends AbstractAssertionBasedRequestImpl
+		implements OpenSamlDeletePolicyRequest {
 
-	protected DeletePolicyRequestImpl(String namespaceURI, String elementLocalName, String namespacePrefix) {
+	protected DeletePolicyRequestImpl(String namespaceURI, String elementLocalName,
+			String namespacePrefix) {
 		super(namespaceURI, elementLocalName, namespacePrefix);
 	}
 

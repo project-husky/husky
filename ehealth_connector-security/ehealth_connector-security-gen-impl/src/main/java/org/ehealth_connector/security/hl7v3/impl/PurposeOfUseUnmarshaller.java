@@ -28,8 +28,8 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the unmarshaller for OpenSamlPurposeOfUse.</div>
  * <div class="de">Die Klasse implementiert den unmarshaller für OpenSamlPurposeOfUse.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class PurposeOfUseUnmarshaller extends AbstractXMLObjectUnmarshaller {
@@ -47,10 +47,12 @@ public class PurposeOfUseUnmarshaller extends AbstractXMLObjectUnmarshaller {
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.opensaml.core.xml.io.AbstractXMLObjectUnmarshaller#processAttribute(org.opensaml.core.xml.XMLObject, org.w3c.dom.Attr)
+	 * @see org.opensaml.core.xml.io.AbstractXMLObjectUnmarshaller#processAttribute(org.opensaml.core.xml.XMLObject,
+	 *      org.w3c.dom.Attr)
 	 */
 	@Override
-	protected void processAttribute(XMLObject xmlObject, Attr attribute) throws UnmarshallingException {
+	protected void processAttribute(XMLObject xmlObject, Attr attribute)
+			throws UnmarshallingException {
 		final OpenSamlPurposeOfUse purposeOfUse = (OpenSamlPurposeOfUse) xmlObject;
 		if ("code".equalsIgnoreCase(attribute.getName())) {
 			purposeOfUse.setCode(attribute.getValue());

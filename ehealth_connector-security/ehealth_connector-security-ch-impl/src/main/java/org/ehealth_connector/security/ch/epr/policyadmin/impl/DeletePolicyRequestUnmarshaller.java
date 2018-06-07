@@ -28,14 +28,15 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the unmarshaller for OpenSamlDeletePolicyRequest.</div>
  * <div class="de">Die Klasse implementiert den Unmarshaller für OpenSamlDeletePolicyRequest.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class DeletePolicyRequestUnmarshaller extends AbstractXMLObjectUnmarshaller {
 
 	@Override
-	public OpenSamlDeletePolicyRequest unmarshall(Element domElement) throws UnmarshallingException {
+	public OpenSamlDeletePolicyRequest unmarshall(Element domElement)
+			throws UnmarshallingException {
 		return (OpenSamlDeletePolicyRequest) super.unmarshall(domElement);
 	}
 
@@ -44,8 +45,8 @@ public class DeletePolicyRequestUnmarshaller extends AbstractXMLObjectUnmarshall
 			throws UnmarshallingException {
 		if (childXMLObject instanceof org.opensaml.saml.saml2.core.Assertion) {
 			final OpenSamlDeletePolicyRequest request = (OpenSamlDeletePolicyRequest) parentXMLObject;
-			request.setAssertion(
-					new AssertionBuilderImpl().create((org.opensaml.saml.saml2.core.Assertion) childXMLObject));
+			request.setAssertion(new AssertionBuilderImpl()
+					.create((org.opensaml.saml.saml2.core.Assertion) childXMLObject));
 		} else {
 			super.processChildElement(parentXMLObject, childXMLObject);
 		}

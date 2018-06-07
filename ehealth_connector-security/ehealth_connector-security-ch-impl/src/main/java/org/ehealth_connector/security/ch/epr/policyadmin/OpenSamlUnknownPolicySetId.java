@@ -23,10 +23,12 @@ import org.opensaml.core.xml.XMLObject;
 * <!-- @formatter:off -->
 * <div class="en">Extending interface to integrate UnknownPolicySetId interface to opensaml implementation.</div>
 * <div class="de">Erweiterndes Interface um das UnknownPolicySetId Interface in OpenSAML Implementation zu integrieren.</div>
-* <div class="fr">VOICIFRANCAIS</div>
-* <div class="it">ITALIANO</div>
+* <div class="fr"></div>
+* <div class="it"></div>
 * <!-- @formatter:on -->
 */
 public interface OpenSamlUnknownPolicySetId extends UnknownPolicySetId, XMLObject {
 	public void setMessage(String aMessage);
+	// There are no special methods defined, but this intermediat interface has
+	// to be declared for opensaml reasons
 }

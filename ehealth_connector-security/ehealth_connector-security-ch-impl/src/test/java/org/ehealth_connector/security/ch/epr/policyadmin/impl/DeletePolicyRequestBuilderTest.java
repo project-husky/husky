@@ -37,9 +37,12 @@ public class DeletePolicyRequestBuilderTest extends InitializerTestHelper {
 
 	@Before
 	public void setUp() throws Exception {
-		final Element testAssertionXmlElement = loadXmlDokument("/ch-ppq/delete_policy_request_assertion_only.xml");
-		final UnmarshallerFactory unmarshallerFactory = XMLObjectProviderRegistrySupport.getUnmarshallerFactory();
-		final Unmarshaller unmarshaller = unmarshallerFactory.getUnmarshaller(testAssertionXmlElement);
+		final Element testAssertionXmlElement = loadXmlDokument(
+				"/ch-ppq/delete_policy_request_assertion_only.xml");
+		final UnmarshallerFactory unmarshallerFactory = XMLObjectProviderRegistrySupport
+				.getUnmarshallerFactory();
+		final Unmarshaller unmarshaller = unmarshallerFactory
+				.getUnmarshaller(testAssertionXmlElement);
 		final org.opensaml.saml.saml2.core.Assertion innerAssertion = (org.opensaml.saml.saml2.core.Assertion) unmarshaller
 				.unmarshall(testAssertionXmlElement);
 		testAssertion = new AssertionBuilderImpl().create(innerAssertion);
@@ -47,7 +50,8 @@ public class DeletePolicyRequestBuilderTest extends InitializerTestHelper {
 
 	@Test
 	public void testAssertion() {
-		final OpenSamlDeletePolicyRequest ref = new DeletePolicyRequestBuilder().assertion(testAssertion).buildObject();
+		final OpenSamlDeletePolicyRequest ref = new DeletePolicyRequestBuilder()
+				.assertion(testAssertion).buildObject();
 		assertNotNull(ref);
 		assertEquals(testAssertion, ref.getAssertion());
 	}

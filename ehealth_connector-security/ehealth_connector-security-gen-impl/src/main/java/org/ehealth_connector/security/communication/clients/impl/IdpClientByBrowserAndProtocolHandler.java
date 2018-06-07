@@ -47,8 +47,8 @@ import org.slf4j.LoggerFactory;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the idp client starting a browser for login..</div>
  * <div class="de">Klasse die den idp client für das login mit dem browser implementiert.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
@@ -57,8 +57,24 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 
 	private IdpClientByBrowserAndProtocolHandlerConfigImpl config;
 
-	public IdpClientByBrowserAndProtocolHandler(IdpClientByBrowserAndProtocolHandlerConfigImpl clientConfiguration) {
+	public IdpClientByBrowserAndProtocolHandler(
+			IdpClientByBrowserAndProtocolHandlerConfigImpl clientConfiguration) {
 		config = clientConfiguration;
+	}
+
+	public String readFromJARFile(String filename) throws IOException {
+		final InputStream is = getClass().getResourceAsStream(filename);
+		final InputStreamReader isr = new InputStreamReader(is);
+		final BufferedReader br = new BufferedReader(isr);
+		final StringBuffer sb = new StringBuffer();
+		String line;
+		while ((line = br.readLine()) != null) {
+			sb.append(line);
+		}
+		br.close();
+		isr.close();
+		is.close();
+		return sb.toString();
 	}
 
 	@Override
@@ -73,58 +89,6 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 		} catch (final Throwable t) {
 			logger.error("An error occured sending authnrequest.", t);
 			throw new ClientSendException(t);
-		}
-	}
-
-	private Response startWaitForResponse() throws IOException, ClientSendException, DeserializeException {
-		final Calendar end = Calendar.getInstance();
-		end.add(Calendar.MINUTE, 1);
-
-		final File tempFile = new File(System.getProperty("java.io.tmpdir"), config.getProtocolHandlerName() + ".io");
-		if (tempFile.exists()) {
-			tempFile.delete();
-		}
-		tempFile.createNewFile();
-		final BufferedReader in = new BufferedReader(new FileReader(tempFile));
-		String line = in.readLine();
-		while ((line == null) || line.isEmpty() || !line.startsWith(config.getProtocolHandlerName())) {
-			line = in.readLine();
-			if (Calendar.getInstance().after(end)) {
-				break;
-			}
-		}
-
-		in.close();
-		if (tempFile.exists()) {
-			tempFile.delete();
-		}
-		if ((line == null) && (!line.startsWith(config.getProtocolHandlerName()))) {
-			throw new ClientSendException("No SAML response found");
-		}
-		line = java.net.URLDecoder.decode(line, "UTF-8");
-		final String[] urlSplit = line.split("SAMLResponse");
-		final String samlReponse = urlSplit[1].substring(1);
-
-		return getResponse(samlReponse);
-	}
-
-	private Response getResponse(String samlReponse) throws DeserializeException, UnsupportedEncodingException {
-		final byte[] samlReponseBytes = Base64.getDecoder().decode(samlReponse);
-		final ResponseDeserializerImpl deserializer = new ResponseDeserializerImpl();
-		return deserializer.fromXmlByteArray(samlReponseBytes);
-	}
-
-	private void startBrowser(URI requestUri) {
-		try {
-			if (Desktop.isDesktopSupported()) {
-				final Desktop desktop = Desktop.getDesktop();
-
-				desktop.browse(requestUri);
-			} else {
-				logger.error("Desktop not supported.");
-			}
-		} catch (final Throwable t) {
-			logger.error("An error occured starting the browser.", t);
 		}
 	}
 
@@ -147,18 +111,59 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 		return tempFile;
 	}
 
-	public String readFromJARFile(String filename) throws IOException {
-		final InputStream is = getClass().getResourceAsStream(filename);
-		final InputStreamReader isr = new InputStreamReader(is);
-		final BufferedReader br = new BufferedReader(isr);
-		final StringBuffer sb = new StringBuffer();
-		String line;
-		while ((line = br.readLine()) != null) {
-			sb.append(line);
+	private Response getResponse(String samlReponse)
+			throws DeserializeException, UnsupportedEncodingException {
+		final byte[] samlReponseBytes = Base64.getDecoder().decode(samlReponse);
+		final ResponseDeserializerImpl deserializer = new ResponseDeserializerImpl();
+		return deserializer.fromXmlByteArray(samlReponseBytes);
+	}
+
+	private void startBrowser(URI requestUri) {
+		try {
+			if (Desktop.isDesktopSupported()) {
+				final Desktop desktop = Desktop.getDesktop();
+
+				desktop.browse(requestUri);
+			} else {
+				logger.error("Desktop not supported.");
+			}
+		} catch (final Throwable t) {
+			logger.error("An error occured starting the browser.", t);
 		}
-		br.close();
-		isr.close();
-		is.close();
-		return sb.toString();
+	}
+
+	private Response startWaitForResponse()
+			throws IOException, ClientSendException, DeserializeException {
+		final Calendar end = Calendar.getInstance();
+		end.add(Calendar.MINUTE, 1);
+
+		final File tempFile = new File(System.getProperty("java.io.tmpdir"),
+				config.getProtocolHandlerName() + ".io");
+		if (tempFile.exists()) {
+			tempFile.delete();
+		}
+		tempFile.createNewFile();
+		final BufferedReader in = new BufferedReader(new FileReader(tempFile));
+		String line = in.readLine();
+		while ((line == null) || line.isEmpty()
+				|| !line.startsWith(config.getProtocolHandlerName())) {
+			line = in.readLine();
+			if (Calendar.getInstance().after(end)) {
+				break;
+			}
+		}
+
+		in.close();
+		if (tempFile.exists()) {
+			tempFile.delete();
+		}
+		if ((line == null) && (!line.startsWith(config.getProtocolHandlerName()))) {
+			throw new ClientSendException("No SAML response found");
+		}
+		line = java.net.URLDecoder.decode(line, "UTF-8");
+		final String[] urlSplit = line.split("SAMLResponse");
+		final String samlReponse = urlSplit[1].substring(1);
+
+		return getResponse(samlReponse);
 	}
 }

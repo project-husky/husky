@@ -40,8 +40,8 @@ public class EprPolicyRepositoryResponseBuilderImplTest extends InitializerTestH
 	 */
 	@Test
 	public void testStatus() {
-		final OpenSamlEprPolicyRepositoryResponse ref = new EprPolicyRepositoryResponseBuilderImpl().status(testStatus)
-				.buildObject();
+		final OpenSamlEprPolicyRepositoryResponse ref = new EprPolicyRepositoryResponseBuilderImpl()
+				.status(testStatus).buildObject();
 		assertNotNull(ref);
 		assertEquals(testStatus, ref.getStatus());
 	}

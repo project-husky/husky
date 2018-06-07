@@ -25,8 +25,8 @@ import org.ehealth_connector.security.communication.config.ClientConfigBuilder;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the interface ClientConfigBuilder serving as builder to create config for client to communicate with client certificate.</div>
  * <div class="de">Klasser die das Interface ClienConfiguilder implementiert. Dient dazu eine Clientkonfiguration zu bilden für die Kommunikation mit Clientzertifikat.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class IdpClientCertificateAuthConfigBuilder implements ClientConfigBuilder {
@@ -37,23 +37,23 @@ public class IdpClientCertificateAuthConfigBuilder implements ClientConfigBuilde
 		clientConfig = new IdpClientCertificateAuthConfigImpl();
 	}
 
-	@Override
-	public IdpClientCertificateAuthConfigBuilder url(String aEndpointUrl) {
-		return null;
-	}
-
-	IdpClientCertificateAuthConfigBuilder keyStore(KeyStore clientKeyStore) {
-		clientConfig.setClientKeyStore(clientKeyStore);
-		return this;
-	}
-
 	public IdpClientCertificateAuthConfigBuilder keyStorePassword(String testStorePassword) {
 		clientConfig.setClientKeyStorePassword(testStorePassword);
 		return this;
 	}
 
+	@Override
+	public IdpClientCertificateAuthConfigBuilder url(String aEndpointUrl) {
+		return null;
+	}
+
 	IdpClientCertificateAuthConfigImpl create() {
 		return clientConfig;
+	}
+
+	IdpClientCertificateAuthConfigBuilder keyStore(KeyStore clientKeyStore) {
+		clientConfig.setClientKeyStore(clientKeyStore);
+		return this;
 	}
 
 }

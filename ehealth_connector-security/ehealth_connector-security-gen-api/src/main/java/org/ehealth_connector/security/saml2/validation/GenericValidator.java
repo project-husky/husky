@@ -22,13 +22,13 @@ import java.security.KeyStore;
 import org.ehealth_connector.security.exceptions.ValidationException;
 
 /**
- * 
+ *
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the generic Methods for the validation of Assertions.</div>
  * <div class="de">Interface beschreibend die generic Methoden für die Validierung von Assertions.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
- * 
+ * <div class="fr"></div>
+ * <div class="it"></div>
+ *
  * @param <T>
  * <!-- @formatter:on -->
  */
@@ -37,46 +37,46 @@ public interface GenericValidator<T> {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the KeyStore with the keys/certificates used for the Validation.</div>
 	 * <div class="de">Methode um den KeyStore mit den Schlüsseln und Zertifikaten gebraucht bei der Validierung.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param trustStore
 	 * <div class="en">the truststore</div>
 	 * <div class="de">Der truststore</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @param password
 	 * <div class="en">the password for the store/key</div>
 	 * <div class="de">Das passwort für den Store/Key</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	public void setTrustStore(KeyStore trustStore, String password);
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to validate the instance of type T</div>
 	 * <div class="de">Methode um die Instanz vom Typ t zu validieren</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aType
 	 * <div class="en">the instance of type T</div>
 	 * <div class="de">die Instanz vom Typ t</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @param aAlias
 	 * <div class="en">the the alias of the key</div>
 	 * <div class="de">der Alis des Key der gebraucht werden soll</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @throws ValidationException
 	 * 	<div class="en">will be thrown when an error occures while validating the instance of type T</div>
 	 *  <div class="de">wird geworfen wenn ein Fehler beim Validieren der Instance von T auftreten</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	public void validate(T aType, String aAlias) throws ValidationException;

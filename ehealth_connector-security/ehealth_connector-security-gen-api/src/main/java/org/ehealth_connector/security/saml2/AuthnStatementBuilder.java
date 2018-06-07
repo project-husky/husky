@@ -23,99 +23,99 @@ import java.util.Calendar;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the AuthnStatementBuilder. </div>
  * <div class="de">Interface beschreibt die Methoden des AuthnStatementBuilder.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface AuthnStatementBuilder extends SimpleBuilder<AuthnStatement> {
 
 	/**
+	 *
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the AuthnContextClassRef as Calendar.</div>
+	 * <div class="de">Methode um die AuthnContextClassRef as Calendar.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param aAuthnContextClassRef
+	 * 	<div class="en">the AuthnContextClassRef string to be set.</div>
+	 *  <div class="de">der AuthnContextClassRef String der gesetzt werden soll.</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * @return
+	 * 	<div class="en">the actual instance of this builder</div>
+	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	AuthnStatementBuilder authnContextClassRef(String aAuthnContextClassRef);
+
+	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the AuthnInstant as Calendar.</div>
 	 * <div class="de">Methode um die AuthnInstant as Calendar.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aCalendar
 	 * <div class="en">The Calendar value to be set as AuthnInstant.</div>
 	 * <div class="de">Der Calendar wert der als AuthnInstant gesetzt werden soll.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * 
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
 	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	AuthnStatementBuilder authnInstant(Calendar aCalendar);
 
 	/**
-	 * 
-	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set the SessionNotOnOrAfter as Calendar.</div>
-	 * <div class="de">Methode um die SessionNotOnOrAfter as Calendar.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
 	 *
-	 * @param aSessionNotOnOrAfter
-	 * 	<div class="en">the SessionNotOnOrAfter as Calendar to be set</div>
-	 *  <div class="de">der SessionNotOnOrAfter als Calendar der gesetzt werden soll</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 *  
-	 * @return
-	 * 	<div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * <!-- @formatter:on -->
-	 */
-	AuthnStatementBuilder sessionNotOnOrAfter(Calendar aSessionNotOnOrAfter);
-
-	/**
-	 * 
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the SessionIndex as Calendar.</div>
 	 * <div class="de">Methode um die SessionIndex as Calendar.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aSessionIndex
 	 * 	<div class="en">the sessionIndex string to be set.</div>
 	 *  <div class="de">der SessionIndex String der gesetzt werden soll.</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 * @return
 	 * 	<div class="en">the actual instance of this builder</div>
 	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	AuthnStatementBuilder sessionIndex(String aSessionIndex);
 
 	/**
-	 * 
-	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set the AuthnContextClassRef as Calendar.</div>
-	 * <div class="de">Methode um die AuthnContextClassRef as Calendar.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
 	 *
-	 * @param aAuthnContextClassRef
-	 * 	<div class="en">the AuthnContextClassRef string to be set.</div>
-	 *  <div class="de">der AuthnContextClassRef String der gesetzt werden soll.</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the SessionNotOnOrAfter as Calendar.</div>
+	 * <div class="de">Methode um die SessionNotOnOrAfter as Calendar.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param aSessionNotOnOrAfter
+	 * 	<div class="en">the SessionNotOnOrAfter as Calendar to be set</div>
+	 *  <div class="de">der SessionNotOnOrAfter als Calendar der gesetzt werden soll</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 *
 	 * @return
 	 * 	<div class="en">the actual instance of this builder</div>
 	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	AuthnStatementBuilder authnContextClassRef(String aAuthnContextClassRef);
+	AuthnStatementBuilder sessionNotOnOrAfter(Calendar aSessionNotOnOrAfter);
 
 }

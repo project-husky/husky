@@ -25,8 +25,8 @@ import org.ehealth_connector.security.saml2.ResponseBuilder;
  * @since Feb 22, 2018 9:26:34 AM
  *
  */
-public class ResponseBuilderImpl
-		implements ResponseBuilder, SecurityObjectBuilder<org.opensaml.saml.saml2.core.Response, Response> {
+public class ResponseBuilderImpl implements ResponseBuilder,
+		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Response, Response> {
 
 	private org.opensaml.saml.saml2.core.Response wrappedObject;
 
@@ -35,18 +35,7 @@ public class ResponseBuilderImpl
 	}
 
 	/**
-	 * 
-	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.core.SecurityObjectBuilder#create(java.lang.Object)
-	 */
-	@Override
-	public Response create(org.opensaml.saml.saml2.core.Response aInternalObject) {
-		return new ResponseImpl(aInternalObject);
-	}
-
-	/**
-	 * 
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.saml2.ResponseBuilder#create()
@@ -54,6 +43,17 @@ public class ResponseBuilderImpl
 	@Override
 	public Response create() {
 		return new ResponseImpl(wrappedObject);
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.core.SecurityObjectBuilder#create(java.lang.Object)
+	 */
+	@Override
+	public Response create(org.opensaml.saml.saml2.core.Response aInternalObject) {
+		return new ResponseImpl(aInternalObject);
 	}
 
 }

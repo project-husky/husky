@@ -21,10 +21,12 @@ package org.ehealth_connector.security.ch.epr.policyadmin;
 * <!-- @formatter:off -->
 * <div class="en">Extending interface to integrate UpdatePolicyRequest interface to opensaml implementation.</div>
 * <div class="de">Erweiterndes Interface um das UpdatePolicyRequest Interface in OpenSAML Implementation zu integrieren.</div>
-* <div class="fr">VOICIFRANCAIS</div>
-* <div class="it">ITALIANO</div>
+* <div class="fr"></div>
+* <div class="it"></div>
 * <!-- @formatter:on -->
 */
-public interface OpenSamlUpdatePolicyRequest extends UpdatePolicyRequest, OpenSamlAssertionBasedRequest {
-
+public interface OpenSamlUpdatePolicyRequest
+		extends UpdatePolicyRequest, OpenSamlAssertionBasedRequest {
+	// There are no special methods defined, but this intermediat interface has
+	// to be declared for opensaml reasons
 }

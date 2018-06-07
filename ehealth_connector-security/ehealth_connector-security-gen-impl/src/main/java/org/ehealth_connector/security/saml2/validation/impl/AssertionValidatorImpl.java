@@ -28,8 +28,8 @@ import org.ehealth_connector.security.saml2.validation.AssertionValidator;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of AssertionValidator</div>
  * <div class="de">Implementations Klasse von AssertionValidator</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class AssertionValidatorImpl extends AbstractValidator implements AssertionValidator {
@@ -42,7 +42,8 @@ public class AssertionValidatorImpl extends AbstractValidator implements Asserti
 
 	@Override
 	public void validate(Assertion aType, String aAlias) throws ValidationException {
-		final org.opensaml.saml.saml2.core.Assertion innerAssertion = ((AssertionImpl) aType).getWrappedObject();
+		final org.opensaml.saml.saml2.core.Assertion innerAssertion = ((AssertionImpl) aType)
+				.getWrappedObject();
 		innerAssertion.getDOM().setIdAttribute("ID", true);
 		validate(innerAssertion.getSignature(), aAlias);
 	}

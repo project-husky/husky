@@ -47,12 +47,12 @@ import org.opensaml.soap.wstrust.impl.TokenTypeBuilder;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for XUserAssertionRequest building.</div>
  * <div class="de">Die Klasse implementiert das entsprechende interface um XUserAssertionRequest bilden zu k&ooml;nnen.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class XUserAssertionRequestBuilderImpl
-		implements XUserAssertionRequestBuilder, SecurityObjectBuilder<RequestSecurityToken, XUserAssertionRequest> {
+public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBuilder,
+		SecurityObjectBuilder<RequestSecurityToken, XUserAssertionRequest> {
 
 	private RequestSecurityToken requestSecurityToken;
 	private Claims claims;
@@ -64,7 +64,55 @@ public class XUserAssertionRequestBuilderImpl
 	}
 
 	/**
-	 * 
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#appliesTo(java.lang.String)
+	 */
+	@Override
+	public XUserAssertionRequestBuilder appliesTo(AppliesTo appliesTo) {
+		if (appliesTo != null) {
+			addXMLObject(((AppliesToImpl) appliesTo).getWrappedObject());
+		}
+		return this;
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#context(java.lang.String)
+	 */
+	@Override
+	public XUserAssertionRequestBuilder context(String aContext) {
+		if (aContext != null) {
+			requestSecurityToken.setContext(aContext);
+		}
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#create()
+	 */
+	@Override
+	public XUserAssertionRequest create() {
+		return new XUserAssertionRequestImpl(requestSecurityToken);
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.core.SecurityObjectBuilder#create(java.lang.Object)
+	 */
+	@Override
+	public XUserAssertionRequest create(RequestSecurityToken aInternalObject) {
+		return new XUserAssertionRequestImpl(aInternalObject);
+	}
+
+	/**
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#dialect(java.lang.String)
@@ -78,15 +126,77 @@ public class XUserAssertionRequestBuilderImpl
 	}
 
 	/**
-	 * 
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#context(java.lang.String)
+	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#organizationId(java.lang.String)
 	 */
 	@Override
-	public XUserAssertionRequestBuilder context(String aContext) {
-		if (aContext != null) {
-			requestSecurityToken.setContext(aContext);
+	public XUserAssertionRequestBuilder organizationId(String organizationId) {
+		if (organizationId != null) {
+			addXMLObject(createStringAttribute(XUserAssertionConstants.OASIS_XACML_ORGANISATIONID,
+					organizationId));
+		}
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#organizationName(java.lang.String)
+	 */
+	@Override
+	public XUserAssertionRequestBuilder organizationName(String organizationName) {
+		if (organizationName != null) {
+			addXMLObject(createStringAttribute(XUserAssertionConstants.OASIS_XACML_ORGANISATION,
+					organizationName));
+		}
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#purposeOfUse(java.lang.String)
+	 *      <PurposeOfUse code="NORM" codeSystem="2.16.756.5.30.1.127.3.10.5"
+	 *      codeSystemName="eHealth Suisse Verwendungszweck" displayName=
+	 *      "Normal" xsi:type="CE" xmlns="urn:hl7-org:v3" />
+	 */
+	@Override
+	public XUserAssertionRequestBuilder purposeOfUse(PurposeOfUse testPurposeOfUse) {
+		if (testPurposeOfUse != null) {
+			addXMLObjectToClaims(
+					createObjectAttribute(XUserAssertionConstants.OASIS_XACML_PURPOSEOFUSE,
+							(OpenSamlPurposeOfUse) testPurposeOfUse));
+		}
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#requestType(org.ehealth_connector.security.communication.xua.RequestType)
+	 */
+	@Override
+	public XUserAssertionRequestBuilder requestType(RequestType requestType) {
+		if (requestType != null) {
+			final org.opensaml.soap.wstrust.RequestType wstRequestType = new RequestTypeBuilder()
+					.buildObject();
+			wstRequestType.setValue(requestType.toString());
+			addXMLObject(wstRequestType);
+		}
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#resourceId(java.lang.String)
+	 */
+	@Override
+	public XUserAssertionRequestBuilder resourceId(String resourceId) {
+		if (resourceId != null) {
+			addXMLObjectToClaims(createStringAttribute(
+					XUserAssertionConstants.OASIS_XACML_RESOURCEID, resourceId));
 		}
 		return this;
 	}
@@ -114,7 +224,8 @@ public class XUserAssertionRequestBuilderImpl
 	@Override
 	public XUserAssertionRequestBuilder subjectName(String subjectName) {
 		if (subjectName != null) {
-			addXMLObject(createStringAttribute(XUserAssertionConstants.OASIS_XACML_SUBJECTID, subjectName));
+			addXMLObject(createStringAttribute(XUserAssertionConstants.OASIS_XACML_SUBJECTID,
+					subjectName));
 		}
 		return this;
 	}
@@ -135,124 +246,17 @@ public class XUserAssertionRequestBuilderImpl
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#organizationId(java.lang.String)
-	 */
-	@Override
-	public XUserAssertionRequestBuilder organizationId(String organizationId) {
-		if (organizationId != null) {
-			addXMLObject(createStringAttribute(XUserAssertionConstants.OASIS_XACML_ORGANISATIONID, organizationId));
-		}
-		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#organizationName(java.lang.String)
-	 */
-	@Override
-	public XUserAssertionRequestBuilder organizationName(String organizationName) {
-		if (organizationName != null) {
-			addXMLObject(createStringAttribute(XUserAssertionConstants.OASIS_XACML_ORGANISATION, organizationName));
-		}
-		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#resourceId(java.lang.String)
-	 */
-	@Override
-	public XUserAssertionRequestBuilder resourceId(String resourceId) {
-		if (resourceId != null) {
-			addXMLObjectToClaims(createStringAttribute(XUserAssertionConstants.OASIS_XACML_RESOURCEID, resourceId));
-		}
-		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#purposeOfUse(java.lang.String) <PurposeOfUse
-	 *      code="NORM" codeSystem="2.16.756.5.30.1.127.3.10.5" codeSystemName="eHealth Suisse Verwendungszweck" displayName="Normal"
-	 *      xsi:type="CE" xmlns="urn:hl7-org:v3" />
-	 */
-	@Override
-	public XUserAssertionRequestBuilder purposeOfUse(PurposeOfUse testPurposeOfUse) {
-		if (testPurposeOfUse != null) {
-			addXMLObjectToClaims(createObjectAttribute(XUserAssertionConstants.OASIS_XACML_PURPOSEOFUSE,
-					(OpenSamlPurposeOfUse) testPurposeOfUse));
-		}
-		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#appliesTo(java.lang.String)
-	 */
-	@Override
-	public XUserAssertionRequestBuilder appliesTo(AppliesTo appliesTo) {
-		if (appliesTo != null) {
-			addXMLObject(((AppliesToImpl) appliesTo).getWrappedObject());
-		}
-		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#requestType(org.ehealth_connector.security.communication.xua.RequestType)
-	 */
-	@Override
-	public XUserAssertionRequestBuilder requestType(RequestType requestType) {
-		if (requestType != null) {
-			final org.opensaml.soap.wstrust.RequestType wstRequestType = new RequestTypeBuilder().buildObject();
-			wstRequestType.setValue(requestType.toString());
-			addXMLObject(wstRequestType);
-		}
-		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
 	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#tokenType(org.ehealth_connector.security.communication.xua.TokenType)
 	 */
 	@Override
 	public XUserAssertionRequestBuilder tokenType(TokenType tokenType) {
 		if (tokenType != null) {
-			final org.opensaml.soap.wstrust.TokenType wstTokeType = new TokenTypeBuilder().buildObject();
+			final org.opensaml.soap.wstrust.TokenType wstTokeType = new TokenTypeBuilder()
+					.buildObject();
 			wstTokeType.setValue(tokenType.toString());
 			addXMLObject(wstTokeType);
 		}
 		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#create()
-	 */
-	@Override
-	public XUserAssertionRequest create() {
-		return new XUserAssertionRequestImpl(requestSecurityToken);
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.core.SecurityObjectBuilder#create(java.lang.Object)
-	 */
-	@Override
-	public XUserAssertionRequest create(RequestSecurityToken aInternalObject) {
-		return new XUserAssertionRequestImpl(aInternalObject);
-	}
-
-	protected Claims getClaims() {
-		return claims;
 	}
 
 	private XMLObject createObjectAttribute(String aName, OpenSamlPurposeOfUse hl7PurposeOfUse) {
@@ -270,8 +274,8 @@ public class XUserAssertionRequestBuilderImpl
 		attribute.setName(aName);
 
 		final XSStringBuilder stringBuilder = new XSStringBuilder();
-		final XSString attributeValue = stringBuilder.buildObject(AttributeValue.DEFAULT_ELEMENT_NAME,
-				XSString.TYPE_NAME);
+		final XSString attributeValue = stringBuilder
+				.buildObject(AttributeValue.DEFAULT_ELEMENT_NAME, XSString.TYPE_NAME);
 		attributeValue.setValue(aValue);
 		attribute.getAttributeValues().add(attributeValue);
 		return attribute;
@@ -283,6 +287,10 @@ public class XUserAssertionRequestBuilderImpl
 
 	protected void addXMLObjectToClaims(XMLObject aXmlObject) {
 		claims.getUnknownXMLObjects().add(aXmlObject);
+	}
+
+	protected Claims getClaims() {
+		return claims;
 	}
 
 }

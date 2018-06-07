@@ -58,16 +58,6 @@ public class PkiManagerImplTest {
 	private File testCertPath;
 	private String testRemoveCertAlias;
 
-	private InputStream getKeyStoreInputStream(String aKeyStorePath) throws FileNotFoundException {
-		if (aKeyStorePath.startsWith("classpath:")) {
-			return getClass().getResourceAsStream(aKeyStorePath.substring("classpath:".length()));
-		} else if (aKeyStorePath.startsWith("file:")) {
-			return new FileInputStream(aKeyStorePath.substring("file:".length()));
-		} else {
-			return new FileInputStream(aKeyStorePath);
-		}
-	}
-
 	@Before
 	public void setUp() throws Exception {
 		testPkiManager = new PkiManagerImpl();
@@ -318,6 +308,16 @@ public class PkiManagerImplTest {
 		assertNotNull(ref);
 		testPkiManager.storeStore(ref, new FileOutputStream(testOutputFile), testStorePassword);
 		assertTrue(new File(testOutputFile).exists());
+	}
+
+	private InputStream getKeyStoreInputStream(String aKeyStorePath) throws FileNotFoundException {
+		if (aKeyStorePath.startsWith("classpath:")) {
+			return getClass().getResourceAsStream(aKeyStorePath.substring("classpath:".length()));
+		} else if (aKeyStorePath.startsWith("file:")) {
+			return new FileInputStream(aKeyStorePath.substring("file:".length()));
+		} else {
+			return new FileInputStream(aKeyStorePath);
+		}
 	}
 
 }

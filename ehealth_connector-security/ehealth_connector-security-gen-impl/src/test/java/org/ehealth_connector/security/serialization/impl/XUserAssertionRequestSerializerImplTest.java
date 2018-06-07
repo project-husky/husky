@@ -49,10 +49,30 @@ public class XUserAssertionRequestSerializerImplTest {
 				.create();
 	}
 
+	@Test(expected = SerializeException.class)
+	public void testSerializeToXml_InputNull() throws SerializeException {
+		testSerializer.toXmlElement(null);
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.serialization.impl.XUserAssertionRequestSerializerImpl#toXmlByteArray(org.ehealth_connector.security.communication.xua.XUserAssertionRequest)}.
+	 *
+	 * @throws SerializeException
+	 */
+	@Test
+	public void testToXmlByteArray() throws SerializeException {
+		final byte[] xmlArray = testSerializer.toXmlByteArray(testXmlObject);
+		assertNotNull(xmlArray);
+		final byte[] startPart = new byte["<?xml version=".length()];
+		System.arraycopy(xmlArray, 0, startPart, 0, "<?xml version=".length());
+		assertArrayEquals("<?xml version=".getBytes(), startPart);
+	}
+
 	/**
 	 * Test method for
 	 * {@link org.ehealth_connector.security.serialization.impl.XUserAssertionRequestSerializerImpl#toXmlElement(org.ehealth_connector.security.communication.xua.XUserAssertionRequest)}.
-	 * 
+	 *
 	 * @throws SerializeException
 	 */
 	@Test
@@ -63,15 +83,10 @@ public class XUserAssertionRequestSerializerImplTest {
 		assertEquals(testContext, xmlElement.getAttributeNode("Context").getValue());
 	}
 
-	@Test(expected = SerializeException.class)
-	public void testSerializeToXml_InputNull() throws SerializeException {
-		testSerializer.toXmlElement(null);
-	}
-
 	/**
 	 * Test method for
 	 * {@link org.ehealth_connector.security.serialization.impl.XUserAssertionRequestSerializerImpl#toXmlString(org.ehealth_connector.security.communication.xua.XUserAssertionRequest)}.
-	 * 
+	 *
 	 * @throws SerializeException
 	 */
 	@Test
@@ -81,21 +96,6 @@ public class XUserAssertionRequestSerializerImplTest {
 		assertNotNull(xmlString);
 		assertTrue(xmlString.startsWith("<?xml version="));
 		assertTrue(xmlString.endsWith(">"));
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.security.serialization.impl.XUserAssertionRequestSerializerImpl#toXmlByteArray(org.ehealth_connector.security.communication.xua.XUserAssertionRequest)}.
-	 * 
-	 * @throws SerializeException
-	 */
-	@Test
-	public void testToXmlByteArray() throws SerializeException {
-		final byte[] xmlArray = testSerializer.toXmlByteArray(testXmlObject);
-		assertNotNull(xmlArray);
-		final byte[] startPart = new byte["<?xml version=".length()];
-		System.arraycopy(xmlArray, 0, startPart, 0, "<?xml version=".length());
-		assertArrayEquals("<?xml version=".getBytes(), startPart);
 	}
 
 }

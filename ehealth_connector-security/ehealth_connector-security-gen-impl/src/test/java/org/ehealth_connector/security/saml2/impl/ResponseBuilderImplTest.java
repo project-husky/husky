@@ -45,7 +45,20 @@ public class ResponseBuilderImplTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.ResponseBuilderImpl#create(org.opensaml.saml.saml2.core.Response)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.ResponseBuilderImpl#create()}.
+	 */
+	@Test
+	public void testCreate() {
+		final Response ref = responseBuilder.create();
+
+		assertNull(ref.getConsent());
+		assertNull(ref.getId());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.ResponseBuilderImpl#create(org.opensaml.saml.saml2.core.Response)}.
 	 */
 	@Test
 	public void testCreateResponse() {
@@ -61,17 +74,6 @@ public class ResponseBuilderImplTest {
 		assertEquals(testConsent, ref.getConsent());
 		assertEquals(testId, ref.getId());
 		assertEquals(testIssueInstant.getMillis(), ref.getIssueInstant().getTimeInMillis());
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.ResponseBuilderImpl#create()}.
-	 */
-	@Test
-	public void testCreate() {
-		final Response ref = responseBuilder.create();
-
-		assertNull(ref.getConsent());
-		assertNull(ref.getId());
 	}
 
 }

@@ -27,8 +27,8 @@ import org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeedResponse;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for PrivacyPolicyFeed.</div>
  * <div class="de">Die Klasse implementiert das entsprechende interface PrivacyPolicyFeed.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class PrivacyPolicyFeedResponseImpl implements PrivacyPolicyFeedResponse {
@@ -43,58 +43,13 @@ public class PrivacyPolicyFeedResponseImpl implements PrivacyPolicyFeedResponse 
 		mExceptions = new ArrayList<>();
 	}
 
-	@Override
-	public String getStatus() {
-		return mStatus;
-	}
-
-	@Override
-	public PpfMethod getMethod() {
-		return mMethod;
-	}
-
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set the status of the Response.</div>
-	 * <div class="de">Methode um den Status der Antwort zu setzen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * @param aStatus
-	 * <div class="en">the status to be set.</div>
-	 * <div class="de">der Status der gesetzt werden soll.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * <!-- @formatter:on -->
-	 */
-	public void setStatus(String aStatus) {
-		mStatus = aStatus;
-	}
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set the method.</div>
-	 * <div class="de">Methode um die Methode zu setzen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
 	 *
-	 * @param aMethod
-	 * <div class="en">the method to be set.</div>
-	 * <div class="de">der Method der gesetzt werden soll.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * <!-- @formatter:on -->
-	 */
-	public void setMethod(PpfMethod aMethod) {
-		mMethod = aMethod;
-	}
-
-	/**
-	 * 
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to add a exception to the list of exceptions.</div>
 	 * <div class="de">Methode um ein Fehler der Liste von Fehlern hinzuzufügen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aException
 	 * <!-- @formatter:on -->
@@ -106,6 +61,51 @@ public class PrivacyPolicyFeedResponseImpl implements PrivacyPolicyFeedResponse 
 	@Override
 	public List<Exception> getExceptions() {
 		return mExceptions;
+	}
+
+	@Override
+	public PpfMethod getMethod() {
+		return mMethod;
+	}
+
+	@Override
+	public String getStatus() {
+		return mStatus;
+	}
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the method.</div>
+	 * <div class="de">Methode um die Methode zu setzen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param aMethod
+	 * <div class="en">the method to be set.</div>
+	 * <div class="de">der Method der gesetzt werden soll.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	public void setMethod(PpfMethod aMethod) {
+		mMethod = aMethod;
+	}
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the status of the Response.</div>
+	 * <div class="de">Methode um den Status der Antwort zu setzen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * @param aStatus
+	 * <div class="en">the status to be set.</div>
+	 * <div class="de">der Status der gesetzt werden soll.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	public void setStatus(String aStatus) {
+		mStatus = aStatus;
 	}
 
 }

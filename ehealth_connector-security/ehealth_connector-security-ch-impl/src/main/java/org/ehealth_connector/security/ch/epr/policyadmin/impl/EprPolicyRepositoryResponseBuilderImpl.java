@@ -26,32 +26,34 @@ import org.opensaml.core.xml.AbstractXMLObjectBuilder;
  * <!-- @formatter:off -->
  * <div class="en">Builder class for OpenSamlEpdPolicyRepositoryResponse.</div>
  * <div class="de">Builder Klasse für OpenSamlEpdPolicyRepositoryResponse.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class EprPolicyRepositoryResponseBuilderImpl extends
-		AbstractXMLObjectBuilder<OpenSamlEprPolicyRepositoryResponse> implements EprPolicyRepositoryResponseBuilder {
+public class EprPolicyRepositoryResponseBuilderImpl
+		extends AbstractXMLObjectBuilder<OpenSamlEprPolicyRepositoryResponse>
+		implements EprPolicyRepositoryResponseBuilder {
 
 	private String status;
 
-	@Override
-	public EprPolicyRepositoryResponseBuilderImpl status(String aStatus) {
-		status = aStatus;
-		return this;
-	}
-
 	public OpenSamlEprPolicyRepositoryResponse buildObject() {
 		return buildObject(EprPolicyRepositoryResponse.DEFAULT_NS_URI,
-				EprPolicyRepositoryResponse.DEFAULT_ELEMENT_LOCAL_NAME, EprPolicyRepositoryResponse.DEFAULT_PREFIX);
+				EprPolicyRepositoryResponse.DEFAULT_ELEMENT_LOCAL_NAME,
+				EprPolicyRepositoryResponse.DEFAULT_PREFIX);
 	}
 
 	@Override
 	public OpenSamlEprPolicyRepositoryResponse buildObject(String namespaceURI, String localName,
 			String namespacePrefix) {
-		final OpenSamlEprPolicyRepositoryResponse abr = new EprPolicyRepositoryResponseImpl(namespaceURI, localName,
-				namespacePrefix);
+		final OpenSamlEprPolicyRepositoryResponse abr = new EprPolicyRepositoryResponseImpl(
+				namespaceURI, localName, namespacePrefix);
 		abr.setStatus(status);
 		return abr;
+	}
+
+	@Override
+	public EprPolicyRepositoryResponseBuilderImpl status(String aStatus) {
+		status = aStatus;
+		return this;
 	}
 }

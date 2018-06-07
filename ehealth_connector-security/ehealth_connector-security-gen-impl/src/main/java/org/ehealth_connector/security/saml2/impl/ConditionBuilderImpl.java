@@ -25,12 +25,12 @@ import org.ehealth_connector.security.saml2.ConditionBuilder;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for Condition building.</div>
  * <div class="de">Die Klasse implementiert das entsprechende interface um Condition bilden zu k&ooml;nnen.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class ConditionBuilderImpl
-		implements ConditionBuilder, SecurityObjectBuilder<org.opensaml.saml.saml2.core.Condition, Condition> {
+public class ConditionBuilderImpl implements ConditionBuilder,
+		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Condition, Condition> {
 
 	@Override
 	public Condition create(org.opensaml.saml.saml2.core.Condition aInternalObject) {

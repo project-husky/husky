@@ -24,23 +24,24 @@ import org.ehealth_connector.security.saml2.Condition;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Condition</div>
  * <div class="de">Implementations Klasse von Condition</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
- * 
+ * <div class="fr"></div>
+ * <div class="it"></div>
+ *
  * <!-- @formatter:on -->
  */
-public class ConditionImpl implements Condition, SecurityObject<org.opensaml.saml.saml2.core.Condition> {
+public class ConditionImpl
+		implements Condition, SecurityObject<org.opensaml.saml.saml2.core.Condition> {
 
 	private org.opensaml.saml.saml2.core.Condition wrappedObject;
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Default constructor to instanciate the object.</div>
 	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * 
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
 	 * @param aInternalObject
 	 * <!-- @formatter:on -->
 	 */

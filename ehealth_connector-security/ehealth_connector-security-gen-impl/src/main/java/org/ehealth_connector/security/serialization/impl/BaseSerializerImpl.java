@@ -28,18 +28,28 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">HEREISENGLISH</div>
  * <div class="de">HIERISTDEUTSCH</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
- * 
+ * <div class="fr"></div>
+ * <div class="it"></div>
+ *
  * <!-- @formatter:on -->
  */
 public class BaseSerializerImpl extends AbstractSerializerImpl implements Serializer<Base> {
 
 	@Override
+	public byte[] toXmlByteArray(Base aSecurityObject) throws SerializeException {
+		try {
+			return getOpenSamlSerializer().serializeToByteArray(
+					((SecurityObject<XMLObject>) aSecurityObject).getWrappedObject());
+		} catch (final Exception e) {
+			throw new SerializeException(e);
+		}
+	}
+
+	@Override
 	public Element toXmlElement(Base aSecurityObject) throws SerializeException {
 		try {
-			return getOpenSamlSerializer()
-					.serializeToXml(((SecurityObject<XMLObject>) aSecurityObject).getWrappedObject());
+			return getOpenSamlSerializer().serializeToXml(
+					((SecurityObject<XMLObject>) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
@@ -48,18 +58,8 @@ public class BaseSerializerImpl extends AbstractSerializerImpl implements Serial
 	@Override
 	public String toXmlString(Base aSecurityObject) throws SerializeException {
 		try {
-			return getOpenSamlSerializer()
-					.serializeToString(((SecurityObject<XMLObject>) aSecurityObject).getWrappedObject());
-		} catch (final Exception e) {
-			throw new SerializeException(e);
-		}
-	}
-
-	@Override
-	public byte[] toXmlByteArray(Base aSecurityObject) throws SerializeException {
-		try {
-			return getOpenSamlSerializer()
-					.serializeToByteArray(((SecurityObject<XMLObject>) aSecurityObject).getWrappedObject());
+			return getOpenSamlSerializer().serializeToString(
+					((SecurityObject<XMLObject>) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}

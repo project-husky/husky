@@ -23,10 +23,12 @@ import org.ehealth_connector.security.communication.config.SoapClientConfig;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of CH:PPQ client configuration.</div>
  * <div class="de">Interface beschreibt die Methoden für die CH:PPQ Client Konfiguration.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface PpClientConfig extends SoapClientConfig {
 
+	// There are no special methods defined, but the interface has to be
+	// declared for selection reasons.
 }

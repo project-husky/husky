@@ -24,290 +24,290 @@ import org.ehealth_connector.security.saml2.Subject;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the authnrequest builder methods.</div>
  * <div class="de">Interface beschreibende methoden des authnrequest builders.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface AuthnRequestBuilder extends BaseBuilder<AuthnRequestBuilder> {
 
 	/**
-	 * 
-	 * <!-- @formatter:off -->
-	 * <div class="en">Builds the assertion consumer service url on the authnrequest.</div>
-	 * <div class="de">Bildet das assertion consumer service url im authnrequest.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
 	 *
-	 * @param aAssertionConsumerServiceURL
-	 *  <div class="en">the assertion consumer service url to be set</div>
-	 * 	<div class="de">die assertion consumer service url die gesetzt werden soll</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * @return 
-	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 *  <!-- @formatter:on -->
-	 */
-	AuthnRequestBuilder assertionConsumerServiceURL(String aAssertionConsumerServiceURL);
-
-	/**
-	 * 
 	 * <!-- @formatter:off -->
 	 * <div class="en">Builds the assertion consumer service index on the authnrequest.</div>
 	 * <div class="de">Buildet das assertion consumer service index im authnrequest.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aAssertionConsumerServiceIndex
 	 *  <div class="en">the assertion consumer service index to be set</div>
 	 * 	<div class="de">die assertion consumer service index die gesetzt werden soll</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * @return 
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
 	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
 	 */
 	AuthnRequestBuilder assertionConsumerServiceIndex(Integer aAssertionConsumerServiceIndex);
 
 	/**
-	 * 
+	 *
+	 * <!-- @formatter:off -->
+	 * <div class="en">Builds the assertion consumer service url on the authnrequest.</div>
+	 * <div class="de">Bildet das assertion consumer service url im authnrequest.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param aAssertionConsumerServiceURL
+	 *  <div class="en">the assertion consumer service url to be set</div>
+	 * 	<div class="de">die assertion consumer service url die gesetzt werden soll</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * @return
+	 *  <div class="en">the actual instance of this builder</div>
+	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 *  <!-- @formatter:on -->
+	 */
+	AuthnRequestBuilder assertionConsumerServiceURL(String aAssertionConsumerServiceURL);
+
+	/**
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Builds the attribute consumer service index on the authnrequest.</div>
 	 * <div class="de">Buildet den attribute consumer service index im authnrequest.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aAttributeConsumingServiceIndex
 	 *  <div class="en">the attribute consuming service index to be set</div>
 	 * 	<div class="de">der attribute consuming service index der gesetzt werden soll</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * @return 
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
 	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
 	 */
 	AuthnRequestBuilder attributeConsumingServiceIndex(Integer aAttributeConsumingServiceIndex);
 
 	/**
-	 * 
-	 * <!-- @formatter:off -->
-	 * <div class="en">Building the destination on the authnrequest.</div>
-	 * <div class="de">Bildet das destination im authnrequest.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
 	 *
-	 * @param aDestination
-	 *  <div class="en">the destination to be set</div>
-	 * 	<div class="de">die destination die gesetzt werden soll</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * @return 
-	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 *  <!-- @formatter:on -->
-	 */
-	AuthnRequestBuilder destination(String aDestination);
-
-	/**
-	 * 
-	 * <!-- @formatter:off -->
-	 * <div class="en">Building the provider name on the authnrequest.</div>
-	 * <div class="de">Bildet das destination im authnrequest.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 *
-	 * @param aProviderName
-	 *  <div class="en">the provider name to be set</div>
-	 * 	<div class="de">der provider name der gesetzt werden soll</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * @return 
-	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 *  <!-- @formatter:on -->
-	 */
-	AuthnRequestBuilder providerName(String aProviderName);
-
-	/**
-	 * 
-	 * <!-- @formatter:off -->
-	 * <div class="en">Building the protocol binding on the authnrequest.</div>
-	 * <div class="de">Bildet das protocol binding im authnrequest.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 *
-	 * @param aProtocolBinding
-	 *  <div class="en">the protocol binding to be set</div>
-	 * 	<div class="de">das protocol binding welches gesetzt werden soll</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * @return 
-	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 *  <!-- @formatter:on -->
-	 */
-	AuthnRequestBuilder protocolBinding(String aProtocolBinding);
-
-	/**
-	 * 
 	 * <!-- @formatter:off -->
 	 * <div class="en">Building the consent on the authnrequest.</div>
 	 * <div class="de">Bildet das consent im authnrequest.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aConsent
 	 *  <div class="en">the consent to be set</div>
 	 * 	<div class="de">der consent der gesetzt werden soll</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * @return 
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
 	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
 	 */
 	AuthnRequestBuilder consent(String aConsent);
 
 	/**
-	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Creates a concrete instance of AuthnRequest with setted params.</div>
+	 * <div class="de">Erstellt die konkrete instanz des AuthnRequests mit den gesetzten parametern.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return
+	 *  <div class="en">a new AuthnRequest instance with the params set</div>
+	 *  <div class="de">eine neue AuthRequest instanz mit den gesetzten parametern</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 *  <!-- @formatter:on -->
+	 */
+	AuthnRequest create();
+
+	/**
+	 *
+	 * <!-- @formatter:off -->
+	 * <div class="en">Building the destination on the authnrequest.</div>
+	 * <div class="de">Bildet das destination im authnrequest.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param aDestination
+	 *  <div class="en">the destination to be set</div>
+	 * 	<div class="de">die destination die gesetzt werden soll</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * @return
+	 *  <div class="en">the actual instance of this builder</div>
+	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 *  <!-- @formatter:on -->
+	 */
+	AuthnRequestBuilder destination(String aDestination);
+
+	/**
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Building the forceAuthn on the authnrequest.</div>
 	 * <div class="de">Bildet das forceAuthn im authnrequest.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aForceAuthn
 	 *  <div class="en">the force authn to be set</div>
 	 * 	<div class="de">der force authn der gesetzt werden soll</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * @return 
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
 	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
 	 */
 	AuthnRequestBuilder forceAuthn(Boolean aForceAuthn);
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Builds the NameIDpolicy.AllowCreate on the authnrequest.</div>
 	 * <div class="de">Bildet das NameIDpolicy.AllowCreate im authnrequest.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * 
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
 	 * @param aNameIdPolicyAllowCreate
 	 *  <div class="en">the nameidpolicy allowcreate to be set</div>
 	 * 	<div class="de">die nameidpolicy allowcreate die gesetzt werden soll</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * @return 
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
 	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
 	 */
 	AuthnRequestBuilder nameIdPolicyAllowCreate(Boolean aNameIdPolicyAllowCreate);
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Builds the NameIDpolicy.Format on the authnrequest.</div>
 	 * <div class="de">Bildet das NameIDpolicy.Format im authnrequest.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aNameIdPolicyFormat
 	 *  <div class="en">the nameidpolicy format to be set</div>
 	 * 	<div class="de">das nameidpolicy format welches gesetzt werden soll</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * @return 
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
 	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
 	 */
 	AuthnRequestBuilder nameIdPolicyFormat(String aNameIdPolicyFormat);
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Builds the subject on the authnrequest.</div>
-	 * <div class="de">Bildet das subject im authnrequest.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * 
-	 * @param aSubject
-	 *  <div class="en">the subject to be set</div>
-	 * 	<div class="de">das subject welches gesetzt werden soll</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * @return 
+	 * <div class="en">Building the protocol binding on the authnrequest.</div>
+	 * <div class="de">Bildet das protocol binding im authnrequest.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param aProtocolBinding
+	 *  <div class="en">the protocol binding to be set</div>
+	 * 	<div class="de">das protocol binding welches gesetzt werden soll</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
 	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
 	 */
-	AuthnRequestBuilder subject(Subject aSubject);
+	AuthnRequestBuilder protocolBinding(String aProtocolBinding);
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Builds the subject on the authnrequest.</div>
 	 * <div class="de">Bildet das subject im authnrequest.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aProviderID
 	 *  <div class="en">the provider id to be set</div>
 	 * 	<div class="de">die ProviderId welches gesetzt werden soll</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
 	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	AuthnRequestBuilder providerID(String aProviderID);
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Creates a concrete instance of AuthnRequest with setted params.</div>
-	 * <div class="de">Erstellt die konkrete instanz des AuthnRequests mit den gesetzten parametern.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
 	 *
-	 * @return 
-	 *  <div class="en">a new AuthnRequest instance with the params set</div>
-	 *  <div class="de">eine neue AuthRequest instanz mit den gesetzten parametern</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 * <!-- @formatter:off -->
+	 * <div class="en">Building the provider name on the authnrequest.</div>
+	 * <div class="de">Bildet das destination im authnrequest.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param aProviderName
+	 *  <div class="en">the provider name to be set</div>
+	 * 	<div class="de">der provider name der gesetzt werden soll</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * @return
+	 *  <div class="en">the actual instance of this builder</div>
+	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
 	 */
-	AuthnRequest create();
+	AuthnRequestBuilder providerName(String aProviderName);
+
+	/**
+	 *
+	 * <!-- @formatter:off -->
+	 * <div class="en">Builds the subject on the authnrequest.</div>
+	 * <div class="de">Bildet das subject im authnrequest.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param aSubject
+	 *  <div class="en">the subject to be set</div>
+	 * 	<div class="de">das subject welches gesetzt werden soll</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * @return
+	 *  <div class="en">the actual instance of this builder</div>
+	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 *  <!-- @formatter:on -->
+	 */
+	AuthnRequestBuilder subject(Subject aSubject);
 
 }

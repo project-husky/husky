@@ -32,21 +32,68 @@ import org.joda.time.DateTime;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Response</div>
  * <div class="de">Implementations Klasse von Response</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class ResponseImpl implements Response, SecurityObject<org.opensaml.saml.saml2.core.Response> {
+public class ResponseImpl
+		implements Response, SecurityObject<org.opensaml.saml.saml2.core.Response> {
 
 	private org.opensaml.saml.saml2.core.Response response;
 
 	/**
 	 * Default constructor to instanciate the object
-	 * 
+	 *
 	 * @param response
 	 */
 	protected ResponseImpl(org.opensaml.saml.saml2.core.Response response) {
 		this.response = response;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.Response#getAssertions()
+	 */
+	@Override
+	public List<Assertion> getAssertions() {
+		final List<org.opensaml.saml.saml2.core.Assertion> internal = response.getAssertions();
+		final List<Assertion> retVal = new ArrayList<>();
+		internal.forEach(c -> {
+			retVal.add(new AssertionBuilderImpl().create(c));
+		});
+		return retVal;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.Response#getConsent()
+	 */
+	@Override
+	public String getConsent() {
+		return response.getConsent();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.Response#getDestination()
+	 */
+	@Override
+	public String getDestination() {
+		return response.getDestination();
+	}
+
+	@Override
+	public List<EncryptedAssertion> getEncryptedAssertions() {
+		final List<org.opensaml.saml.saml2.core.EncryptedAssertion> internal = response
+				.getEncryptedAssertions();
+		final List<EncryptedAssertion> retVal = new ArrayList<>();
+		internal.forEach(c -> {
+			retVal.add(new EncryptedAssertionBuilderImpl().create(c));
+		});
+		return retVal;
 	}
 
 	/**
@@ -85,26 +132,6 @@ public class ResponseImpl implements Response, SecurityObject<org.opensaml.saml.
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.saml2.Response#getDestination()
-	 */
-	@Override
-	public String getDestination() {
-		return response.getDestination();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.saml2.Response#getConsent()
-	 */
-	@Override
-	public String getConsent() {
-		return response.getConsent();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
 	 * @see org.ehealth_connector.security.saml2.Response#getIssuer()
 	 */
 	@Override
@@ -118,31 +145,6 @@ public class ResponseImpl implements Response, SecurityObject<org.opensaml.saml.
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.saml2.Response#getAssertions()
-	 */
-	@Override
-	public List<Assertion> getAssertions() {
-		final List<org.opensaml.saml.saml2.core.Assertion> internal = response.getAssertions();
-		final List<Assertion> retVal = new ArrayList<>();
-		internal.forEach(c -> {
-			retVal.add(new AssertionBuilderImpl().create(c));
-		});
-		return retVal;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.core.SecurityObject#getWrappedObject()
-	 */
-	@Override
-	public org.opensaml.saml.saml2.core.Response getWrappedObject() {
-		return response;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
 	 * @see org.ehealth_connector.security.saml2.Response#getStatus()
 	 */
 	@Override
@@ -151,7 +153,7 @@ public class ResponseImpl implements Response, SecurityObject<org.opensaml.saml.
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.saml2.Base#getVersion()
@@ -164,13 +166,13 @@ public class ResponseImpl implements Response, SecurityObject<org.opensaml.saml.
 		return "";
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.core.SecurityObject#getWrappedObject()
+	 */
 	@Override
-	public List<EncryptedAssertion> getEncryptedAssertions() {
-		final List<org.opensaml.saml.saml2.core.EncryptedAssertion> internal = response.getEncryptedAssertions();
-		final List<EncryptedAssertion> retVal = new ArrayList<>();
-		internal.forEach(c -> {
-			retVal.add(new EncryptedAssertionBuilderImpl().create(c));
-		});
-		return retVal;
+	public org.opensaml.saml.saml2.core.Response getWrappedObject() {
+		return response;
 	}
 }

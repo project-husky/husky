@@ -23,8 +23,8 @@ import org.ehealth_connector.security.communication.config.XuaClientConfig;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Interface XuaClientConfig</div>
  * <div class="de">Implementations Klasse von  Interface XuaClientConfig</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class XuaClientConfigImpl extends AbstractSoapClientConfig implements XuaClientConfig {

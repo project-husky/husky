@@ -27,11 +27,12 @@ import org.opensaml.soap.wsaddressing.impl.EndpointReferenceImpl;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Interface AppliesTo</div>
  * <div class="de">Implementations Klasse von  Interface AppliesTo</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class AppliesToImpl implements AppliesTo, SecurityObject<org.opensaml.soap.wspolicy.AppliesTo> {
+public class AppliesToImpl
+		implements AppliesTo, SecurityObject<org.opensaml.soap.wspolicy.AppliesTo> {
 
 	private org.opensaml.soap.wspolicy.AppliesTo appliesTo;
 

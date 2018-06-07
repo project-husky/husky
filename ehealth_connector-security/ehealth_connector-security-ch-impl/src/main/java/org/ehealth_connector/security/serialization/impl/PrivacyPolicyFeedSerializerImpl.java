@@ -27,16 +27,28 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">Class implementating the interface Serializer&gt;Assertion&lt; </div>
  * <div class="de">Klasse die das Interface Serializer&gt;Assertion&lt; implementiert.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class PrivacyPolicyFeedSerializerImpl extends AbstractSerializerImpl implements Serializer<PrivacyPolicyFeed> {
+public class PrivacyPolicyFeedSerializerImpl extends AbstractSerializerImpl
+		implements Serializer<PrivacyPolicyFeed> {
+
+	@Override
+	public byte[] toXmlByteArray(PrivacyPolicyFeed ppFeed) throws SerializeException {
+		try {
+			return getOpenSamlSerializer()
+					.serializeToByteArray(((PrivacyPolicyFeedImpl) ppFeed).getWrappedObject());
+		} catch (final Exception e) {
+			throw new SerializeException(e);
+		}
+	}
 
 	@Override
 	public Element toXmlElement(PrivacyPolicyFeed ppFeed) throws SerializeException {
 		try {
-			return getOpenSamlSerializer().serializeToXml(((PrivacyPolicyFeedImpl) ppFeed).getWrappedObject());
+			return getOpenSamlSerializer()
+					.serializeToXml(((PrivacyPolicyFeedImpl) ppFeed).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
@@ -45,16 +57,8 @@ public class PrivacyPolicyFeedSerializerImpl extends AbstractSerializerImpl impl
 	@Override
 	public String toXmlString(PrivacyPolicyFeed ppFeed) throws SerializeException {
 		try {
-			return getOpenSamlSerializer().serializeToString(((PrivacyPolicyFeedImpl) ppFeed).getWrappedObject());
-		} catch (final Exception e) {
-			throw new SerializeException(e);
-		}
-	}
-
-	@Override
-	public byte[] toXmlByteArray(PrivacyPolicyFeed ppFeed) throws SerializeException {
-		try {
-			return getOpenSamlSerializer().serializeToByteArray(((PrivacyPolicyFeedImpl) ppFeed).getWrappedObject());
+			return getOpenSamlSerializer()
+					.serializeToString(((PrivacyPolicyFeedImpl) ppFeed).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}

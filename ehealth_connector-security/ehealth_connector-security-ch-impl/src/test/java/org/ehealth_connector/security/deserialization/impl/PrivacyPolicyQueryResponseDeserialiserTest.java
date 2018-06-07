@@ -39,8 +39,8 @@ public class PrivacyPolicyQueryResponseDeserialiserTest extends InitializerTestH
 	@Before
 	public void setUp() throws Exception {
 		testDeserializer = new PrivacyPolicyQueryResponseDeserialiser();
-		testXmlByteArray = Files
-				.readAllBytes(Paths.get(getClass().getResource("/xacml/xacml_policy_query_response.xml").toURI()));
+		testXmlByteArray = Files.readAllBytes(Paths
+				.get(getClass().getResource("/xacml/xacml_policy_query_response.xml").toURI()));
 		testXmlString = new String(testXmlByteArray);
 		testXmlElement = new OpenSaml2DeserializerImpl<PrivacyPolicyQueryResponse>()
 				.deserializeFromByteArrayToXmlElement(testXmlString.getBytes());
@@ -48,8 +48,20 @@ public class PrivacyPolicyQueryResponseDeserialiserTest extends InitializerTestH
 
 	/**
 	 * Test method for
+	 * {@link org.ehealth_connector.security.deserialization.impl.PrivacyPolicyQueryResponseDeserialiser#fromXmlByteArray(byte[])}.
+	 *
+	 * @throws DeserializeException
+	 */
+	@Test
+	public void testFromXmlByteArray() throws DeserializeException {
+		final PrivacyPolicyQueryResponse ref = testDeserializer.fromXmlByteArray(testXmlByteArray);
+		assertNotNull(ref);
+	}
+
+	/**
+	 * Test method for
 	 * {@link org.ehealth_connector.security.deserialization.impl.PrivacyPolicyQueryResponseDeserialiser#fromXmlElement(org.w3c.dom.Element)}.
-	 * 
+	 *
 	 * @throws DeserializeException
 	 */
 	@Test
@@ -61,24 +73,12 @@ public class PrivacyPolicyQueryResponseDeserialiserTest extends InitializerTestH
 	/**
 	 * Test method for
 	 * {@link org.ehealth_connector.security.deserialization.impl.PrivacyPolicyQueryResponseDeserialiser#fromXmlString(java.lang.String)}.
-	 * 
+	 *
 	 * @throws DeserializeException
 	 */
 	@Test
 	public void testFromXmlString() throws DeserializeException {
 		final PrivacyPolicyQueryResponse ref = testDeserializer.fromXmlString(testXmlString);
-		assertNotNull(ref);
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.security.deserialization.impl.PrivacyPolicyQueryResponseDeserialiser#fromXmlByteArray(byte[])}.
-	 * 
-	 * @throws DeserializeException
-	 */
-	@Test
-	public void testFromXmlByteArray() throws DeserializeException {
-		final PrivacyPolicyQueryResponse ref = testDeserializer.fromXmlByteArray(testXmlByteArray);
 		assertNotNull(ref);
 	}
 

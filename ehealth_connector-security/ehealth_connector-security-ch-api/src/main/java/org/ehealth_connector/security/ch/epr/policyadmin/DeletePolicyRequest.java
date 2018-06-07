@@ -23,8 +23,8 @@ import javax.xml.namespace.QName;
  * <!-- @formatter:off -->
  * <div class="en">Describing the methods of the DeletePolicyRequest Interface</div>
  * <div class="de">Beschreibung der Methoden des DeletePolicyRequest Interfaces</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface DeletePolicyRequest extends AssertionBasedRequest {
@@ -32,11 +32,13 @@ public interface DeletePolicyRequest extends AssertionBasedRequest {
 	public static final String DEFAULT_ELEMENT_LOCAL_NAME = "DeletePolicyRequest";
 
 	/** Default element name. */
-	public static final QName ELEMENT_NAME = new QName(DEFAULT_NS_URI, DEFAULT_ELEMENT_LOCAL_NAME, DEFAULT_PREFIX);
+	public static final QName ELEMENT_NAME = new QName(DEFAULT_NS_URI, DEFAULT_ELEMENT_LOCAL_NAME,
+			DEFAULT_PREFIX);
 
 	/** Local name of the XSI type. */
 	public static final String TYPE_LOCAL_NAME = "DeletePolicyRequest";
 
 	/** QName of the XSI type. */
-	public static final QName TYPE_NAME = new QName(DEFAULT_NS_URI, TYPE_LOCAL_NAME, DEFAULT_PREFIX);
+	public static final QName TYPE_NAME = new QName(DEFAULT_NS_URI, TYPE_LOCAL_NAME,
+			DEFAULT_PREFIX);
 }

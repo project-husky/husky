@@ -84,8 +84,8 @@ import org.xml.sax.SAXException;
  * <!-- @formatter:off -->
  * <div class="en">Abstract Class implementing a soap client based on httpclient.</div>
  * <div class="de">Abstrakte Klasse welche einen soap client implementiert auf basis von httpclient.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public abstract class AbstractSoapClient<T> {
@@ -94,33 +94,34 @@ public abstract class AbstractSoapClient<T> {
 
 	private SoapClientConfig config;
 
-	protected abstract T parseResponse(String content) throws ClientSendException;
+	private void paserSoapFault(String retVal) throws ParserConfigurationException, SAXException,
+			IOException, XPathExpressionException, SoapException {
+		final DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+		docFactory.setNamespaceAware(true);
+		final DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+		final Document document = docBuilder.parse(new ByteArrayInputStream(retVal.getBytes()));
 
-	protected RequestConfig getRequestConfig() {
-		return RequestConfig.custom().build();
-	}
-
-	protected HttpPost getHttpPost() throws UnsupportedEncodingException, SerializeException,
-			ParserConfigurationException, TransformerException {
-		final HttpPost post = new HttpPost(config.getUrl());
-		post.setConfig(getRequestConfig());
-		post.setHeader(HttpHeaders.CONTENT_TYPE, "application/soap+xml; charset=utf-8");
-		return post;
-	}
-
-	protected T execute(HttpPost post) throws ClientSendException, ClientProtocolException, IOException {
-		final CloseableHttpClient httpclient = getHttpClient();
-
-		final CloseableHttpResponse response = httpclient.execute(post);
-		final HttpEntity errorEntity = response.getEntity();
-		final String content = EntityUtils.toString(errorEntity);
-		logger.debug("SOAP Message\n" + content);
-		if ((response.getStatusLine() != null) && (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)) {
-			return parseResponse(content);
-		} else {
-
-			return parseResponseError(content);
+		String prefix = document.getDocumentElement().getPrefix();
+		if (!StringUtils.isEmpty(prefix)) {
+			prefix += ":";
 		}
+
+		final Node faultnode = getNode(document.getDocumentElement(),
+				"/" + prefix + "Envelope/" + prefix + "Body/" + prefix + "Fault");
+		final SoapException exception = getSoapException(faultnode);
+		throw exception;
+	}
+
+	protected void createBody(Element aBodyElement, Element envelopElement)
+			throws SerializeException {
+		// create soap body
+		final Element soapBody = envelopElement.getOwnerDocument()
+				.createElementNS("http://schemas.xmlsoap.org/soap/envelope/", "Body");
+		envelopElement.appendChild(soapBody);
+
+		// add authnrequest to soap body
+		final Node importedNode = envelopElement.getOwnerDocument().importNode(aBodyElement, true);
+		soapBody.appendChild(importedNode);
 	}
 
 	protected Element createEnvelope() throws ParserConfigurationException {
@@ -131,13 +132,14 @@ public abstract class AbstractSoapClient<T> {
 		final Document soapDoc = docBuilder.newDocument();
 
 		// create soap envelope
-		final Element envelopElement = soapDoc.createElementNS("http://schemas.xmlsoap.org/soap/envelope/", "Envelope");
+		final Element envelopElement = soapDoc
+				.createElementNS("http://schemas.xmlsoap.org/soap/envelope/", "Envelope");
 		soapDoc.appendChild(envelopElement);
 		return envelopElement;
 	}
 
-	protected void createHeader(Element aSecurityHeaderElement, WsaHeaderValue wsHeaders, Element envelopElement)
-			throws SerializeException {
+	protected void createHeader(Element aSecurityHeaderElement, WsaHeaderValue wsHeaders,
+			Element envelopElement) throws SerializeException {
 
 		// create soap header
 		final Element headerElement = envelopElement.getOwnerDocument()
@@ -155,80 +157,161 @@ public abstract class AbstractSoapClient<T> {
 		headerElement.appendChild(headerWsaMessageID);
 
 		final Element headerSecurityElement = envelopElement.getOwnerDocument().createElementNS(
-				"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd", "Security");
+				"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd",
+				"Security");
 		headerElement.appendChild(headerSecurityElement);
 
 		// add security header element (assertion) to the headers
-		final Node importedHeaderNode = envelopElement.getOwnerDocument().importNode(aSecurityHeaderElement, true);
+		final Node importedHeaderNode = envelopElement.getOwnerDocument()
+				.importNode(aSecurityHeaderElement, true);
 		headerSecurityElement.appendChild(importedHeaderNode);
 	}
 
-	protected void createBody(Element aBodyElement, Element envelopElement) throws SerializeException {
-		// create soap body
-		final Element soapBody = envelopElement.getOwnerDocument()
-				.createElementNS("http://schemas.xmlsoap.org/soap/envelope/", "Body");
-		envelopElement.appendChild(soapBody);
-
-		// add authnrequest to soap body
-		final Node importedNode = envelopElement.getOwnerDocument().importNode(aBodyElement, true);
-		soapBody.appendChild(importedNode);
-	}
-
-	protected String createXmlString(Element aEnvelope) throws TransformerException {// transform to string
+	protected String createXmlString(Element aEnvelope) throws TransformerException {// transform
+																						// to
+																						// string
 		final TransformerFactory tf = TransformerFactory.newInstance();
 		final Transformer transformer = tf.newTransformer();
 		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
 		final StringWriter writer = new StringWriter();
-		transformer.transform(new DOMSource(aEnvelope.getOwnerDocument()), new StreamResult(writer));
+		transformer.transform(new DOMSource(aEnvelope.getOwnerDocument()),
+				new StreamResult(writer));
 		return writer.toString();
 
 	}
 
-	protected T parseResponseError(String content) throws ClientSendException {
-		try {
-			String retVal = null;
-			if (content.trim().startsWith("<") && content.trim().endsWith(">")) {
-				retVal = content;
-			} else {
+	protected T execute(HttpPost post)
+			throws ClientSendException, ClientProtocolException, IOException {
+		final CloseableHttpClient httpclient = getHttpClient();
 
-				// final String pattern = "--" + boundary + "\\R(.*?\\R*?)*?\\R--" + boundary + "--";
-				// final String pattern = "<soap\\:Envelope (.*?\\R*?)*?\\R</soap\\:Envelope>";
-				final String pattern = "<([a-zA-Z:]+)Envelope(.+)>(.+)</([a-zA-Z:]+)Envelope>";
-				final Pattern regex = Pattern.compile(pattern);
-				final Matcher matcher = regex.matcher(content);
-				while (matcher.find()) {
-					retVal = matcher.group();
-					break;
+		final CloseableHttpResponse response = httpclient.execute(post);
+		final HttpEntity errorEntity = response.getEntity();
+		final String content = EntityUtils.toString(errorEntity);
+		logger.debug("SOAP Message\n" + content);
+		if ((response.getStatusLine() != null)
+				&& (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)) {
+			return parseResponse(content);
+		} else {
+
+			return parseResponseError(content);
+		}
+	}
+
+	protected SoapClientConfig getConfig() {
+		return config;
+	}
+
+	protected CloseableHttpClient getHttpClient() throws ClientSendException {
+		if (!StringUtils.isEmpty(config.getKeyStore())) {
+			try {
+				final PkiManager pki = new PkiManagerImpl();
+				final KeyStore keyStore = pki.loadStore(new FileInputStream(config.getKeyStore()),
+						config.getKeyStorePassword(), config.getKeyStoreType());
+
+				final TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain,
+						String authType) -> true;
+				final SSLContext sslcontext = SSLContexts.custom()//
+						.loadKeyMaterial(keyStore, config.getKeyStorePassword().toCharArray())//
+						.loadTrustMaterial(keyStore, acceptingTrustStrategy)//
+						.build();
+				return HttpClients.custom().setSslcontext(sslcontext).build();
+			} catch (KeyStoreException | KeyManagementException | UnrecoverableKeyException
+					| NoSuchAlgorithmException | IOException e) {
+				throw new ClientSendException(e);
+			}
+		}
+
+		return HttpClients.createDefault();
+	}
+
+	protected HttpPost getHttpPost() throws UnsupportedEncodingException, SerializeException,
+			ParserConfigurationException, TransformerException {
+		final HttpPost post = new HttpPost(config.getUrl());
+		post.setConfig(getRequestConfig());
+		post.setHeader(HttpHeaders.CONTENT_TYPE, "application/soap+xml; charset=utf-8");
+		return post;
+	}
+
+	protected Logger getLogger() {
+		return logger;
+	}
+
+	protected Node getNode(Element element, String xPathExpression)
+			throws XPathExpressionException {
+		final XPath xPath = XPathFactory.newInstance().newXPath();
+		xPath.setNamespaceContext(new NamespaceContext() {
+
+			// The lookup for the namespace uris is delegated to the stored
+			// document.
+			@Override
+			public String getNamespaceURI(String prefix) {
+				if (prefix.equals(XMLConstants.DEFAULT_NS_PREFIX)) {
+					return element.getOwnerDocument().lookupNamespaceURI(null);
+				} else {
+					return element.getOwnerDocument().lookupNamespaceURI(prefix);
 				}
 			}
 
-			if (retVal != null) {
-				paserSoapFault(retVal);
+			@Override
+			public String getPrefix(String namespaceURI) {
+				return element.getOwnerDocument().lookupPrefix(namespaceURI);
 			}
-			throw new ClientSendException("Error occurred. No detailed error information available");
-		} catch (UnsupportedOperationException | TransformerFactoryConfigurationError | ParseException | IOException
-				| ParserConfigurationException | SAXException | XPathExpressionException e) {
-			throw new ClientSendException(e);
-		}
+
+			@Override
+			@SuppressWarnings("rawtypes")
+			public Iterator getPrefixes(String namespaceURI) {
+				return null;
+			}
+
+		});
+
+		final XPathExpression expr = xPath.compile(xPathExpression);
+
+		return (Node) expr.evaluate(element, XPathConstants.NODE);
 
 	}
 
-	private void paserSoapFault(String retVal)
-			throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, SoapException {
+	protected RequestConfig getRequestConfig() {
+		return RequestConfig.custom().build();
+	}
+
+	protected Element getResponseElement(String content, String nameSpaceUri, String localName)
+			throws ParserConfigurationException, UnsupportedOperationException, SAXException,
+			IOException, XPathExpressionException {
+
 		final DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 		docFactory.setNamespaceAware(true);
 		final DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-		final Document document = docBuilder.parse(new ByteArrayInputStream(retVal.getBytes()));
+		final Document soapDocument = docBuilder
+				.parse(new ByteArrayInputStream(content.getBytes()));
 
-		String prefix = document.getDocumentElement().getPrefix();
+		String prefix = soapDocument.getDocumentElement().getPrefix();
 		if (!StringUtils.isEmpty(prefix)) {
 			prefix += ":";
 		}
+		final Node bodyNode = getNode(soapDocument.getDocumentElement(),
+				"/" + prefix + "Envelope/" + prefix + "Body");
 
-		final Node faultnode = getNode(document.getDocumentElement(),
-				"/" + prefix + "Envelope/" + prefix + "Body/" + prefix + "Fault");
-		final SoapException exception = getSoapException(faultnode);
-		throw exception;
+		// final Node first = soapDocument.getFirstChild();
+		// System.out.println("First: " + first.getNodeName());
+		// final Node lastOfFirst = first.getLastChild();
+		// System.out.println("LastOfFirst: " + lastOfFirst.getNodeName());
+		// // get the xml response node
+		// final Node responseNode = lastOfFirst.getFirstChild();
+		// System.out.println("responseNode: " + responseNode.getNodeName());
+
+		NodeList reponseNodes = ((Element) bodyNode).getElementsByTagNameNS("*", localName);
+		if ((reponseNodes == null) || (reponseNodes.getLength() < 1)) {
+			reponseNodes = ((Element) bodyNode).getElementsByTagNameNS(nameSpaceUri, localName);
+		}
+		if (reponseNodes.getLength() == 0) {
+			throw new XPathExpressionException("No node of type " + localName + " found.");
+		}
+		final Node responseNode = reponseNodes.item(0);
+		final Document doc = docBuilder.newDocument();
+		final Node importedNode = doc.importNode(responseNode, true);
+		doc.appendChild(importedNode);
+		return doc.getDocumentElement();
 	}
 
 	protected SoapException getSoapException(Node faultnode) {
@@ -261,108 +344,43 @@ public abstract class AbstractSoapClient<T> {
 		}
 	}
 
-	protected Node getNode(Element element, String xPathExpression) throws XPathExpressionException {
-		final XPath xPath = XPathFactory.newInstance().newXPath();
-		xPath.setNamespaceContext(new NamespaceContext() {
+	protected abstract T parseResponse(String content) throws ClientSendException;
 
-			// The lookup for the namespace uris is delegated to the stored document.
-			@Override
-			public String getNamespaceURI(String prefix) {
-				if (prefix.equals(XMLConstants.DEFAULT_NS_PREFIX)) {
-					return element.getOwnerDocument().lookupNamespaceURI(null);
-				} else {
-					return element.getOwnerDocument().lookupNamespaceURI(prefix);
+	protected T parseResponseError(String content) throws ClientSendException {
+		try {
+			String retVal = null;
+			if (content.trim().startsWith("<") && content.trim().endsWith(">")) {
+				retVal = content;
+			} else {
+
+				// final String pattern = "--" + boundary +
+				// "\\R(.*?\\R*?)*?\\R--" + boundary + "--";
+				// final String pattern = "<soap\\:Envelope
+				// (.*?\\R*?)*?\\R</soap\\:Envelope>";
+				final String pattern = "<([a-zA-Z:]+)Envelope(.+)>(.+)</([a-zA-Z:]+)Envelope>";
+				final Pattern regex = Pattern.compile(pattern);
+				final Matcher matcher = regex.matcher(content);
+				while (matcher.find()) {
+					retVal = matcher.group();
+					break;
 				}
 			}
 
-			@Override
-			public String getPrefix(String namespaceURI) {
-				return element.getOwnerDocument().lookupPrefix(namespaceURI);
+			if (retVal != null) {
+				paserSoapFault(retVal);
 			}
-
-			@Override
-			@SuppressWarnings("rawtypes")
-			public Iterator getPrefixes(String namespaceURI) {
-				return null;
-			}
-
-		});
-
-		final XPathExpression expr = xPath.compile(xPathExpression);
-
-		return (Node) expr.evaluate(element, XPathConstants.NODE);
-
-	}
-
-	protected CloseableHttpClient getHttpClient() throws ClientSendException {
-		if (!StringUtils.isEmpty(config.getKeyStore())) {
-			try {
-				final PkiManager pki = new PkiManagerImpl();
-				final KeyStore keyStore = pki.loadStore(new FileInputStream(config.getKeyStore()),
-						config.getKeyStorePassword(), config.getKeyStoreType());
-
-				final TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) -> true;
-				final SSLContext sslcontext = SSLContexts.custom()//
-						.loadKeyMaterial(keyStore, config.getKeyStorePassword().toCharArray())//
-						.loadTrustMaterial(keyStore, acceptingTrustStrategy)//
-						.build();
-				return HttpClients.custom().setSslcontext(sslcontext).build();
-			} catch (KeyStoreException | KeyManagementException | UnrecoverableKeyException | NoSuchAlgorithmException
-					| IOException e) {
-				throw new ClientSendException(e);
-			}
+			throw new ClientSendException(
+					"Error occurred. No detailed error information available");
+		} catch (UnsupportedOperationException | TransformerFactoryConfigurationError
+				| ParseException | IOException | ParserConfigurationException | SAXException
+				| XPathExpressionException e) {
+			throw new ClientSendException(e);
 		}
 
-		return HttpClients.createDefault();
-	}
-
-	protected Element getResponseElement(String content, String nameSpaceUri, String localName)
-			throws ParserConfigurationException, UnsupportedOperationException, SAXException, IOException,
-			XPathExpressionException {
-
-		final DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-		docFactory.setNamespaceAware(true);
-		final DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-		final Document soapDocument = docBuilder.parse(new ByteArrayInputStream(content.getBytes()));
-
-		String prefix = soapDocument.getDocumentElement().getPrefix();
-		if (!StringUtils.isEmpty(prefix)) {
-			prefix += ":";
-		}
-		final Node bodyNode = getNode(soapDocument.getDocumentElement(), "/" + prefix + "Envelope/" + prefix + "Body");
-
-		// final Node first = soapDocument.getFirstChild();
-		// System.out.println("First: " + first.getNodeName());
-		// final Node lastOfFirst = first.getLastChild();
-		// System.out.println("LastOfFirst: " + lastOfFirst.getNodeName());
-		// // get the xml response node
-		// final Node responseNode = lastOfFirst.getFirstChild();
-		// System.out.println("responseNode: " + responseNode.getNodeName());
-
-		NodeList reponseNodes = ((Element) bodyNode).getElementsByTagNameNS("*", localName);
-		if ((reponseNodes == null) || (reponseNodes.getLength() < 1)) {
-			reponseNodes = ((Element) bodyNode).getElementsByTagNameNS(nameSpaceUri, localName);
-		}
-		if (reponseNodes.getLength() == 0) {
-			throw new XPathExpressionException("No node of type " + localName + " found.");
-		}
-		final Node responseNode = reponseNodes.item(0);
-		final Document doc = docBuilder.newDocument();
-		final Node importedNode = doc.importNode(responseNode, true);
-		doc.appendChild(importedNode);
-		return doc.getDocumentElement();
-	}
-
-	protected SoapClientConfig getConfig() {
-		return config;
 	}
 
 	protected void setConfig(SoapClientConfig config) {
 		this.config = config;
-	}
-
-	protected Logger getLogger() {
-		return logger;
 	}
 
 	protected void setLogger(Logger logger) {

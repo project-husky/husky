@@ -27,8 +27,8 @@ import org.opensaml.soap.wstrust.impl.RequestSecurityTokenResponseBuilder;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interfaces XUserAssertionResponseBuilder and SecurityObjectBuilder.</div>
  * <div class="de">Die Klasse implementiert die entsprechenden Interfaces  XUserAssertionResponseBuilder und SecurityObjectBuilder.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class XUserAssertionResponseBuilderImpl implements XUserAssertionResponseBuilder,

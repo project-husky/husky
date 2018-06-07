@@ -49,7 +49,18 @@ public class AuthnStatementBuilderImplTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.AuthnStatementBuilderImpl#authnInstant(java.util.Calendar)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.AuthnStatementBuilderImpl#authnContextClassRef(java.lang.String)}.
+	 */
+	@Test
+	public void testAuthnContextClassRef() {
+		final AuthnStatement ref = builder.authnContextClassRef(testAuthnContextClassRef).create();
+		assertEquals(testAuthnContextClassRef, ref.getAuthnContextClassRef());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.AuthnStatementBuilderImpl#authnInstant(java.util.Calendar)}.
 	 */
 	@Test
 	public void testAuthnInstant() {
@@ -58,16 +69,8 @@ public class AuthnStatementBuilderImplTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.AuthnStatementBuilderImpl#sessionNotOnOrAfter(java.util.Calendar)}.
-	 */
-	@Test
-	public void testSessionNotOnOrAfter() {
-		final AuthnStatement ref = builder.sessionNotOnOrAfter(testSessionNotOnOrAfter).create();
-		assertEquals(testSessionNotOnOrAfter, ref.getSessionNotOnOrAfter());
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.AuthnStatementBuilderImpl#sessionIndex(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.AuthnStatementBuilderImpl#sessionIndex(java.lang.String)}.
 	 */
 	@Test
 	public void testSessionIndex() {
@@ -76,12 +79,13 @@ public class AuthnStatementBuilderImplTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.AuthnStatementBuilderImpl#authnContextClassRef(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.AuthnStatementBuilderImpl#sessionNotOnOrAfter(java.util.Calendar)}.
 	 */
 	@Test
-	public void testAuthnContextClassRef() {
-		final AuthnStatement ref = builder.authnContextClassRef(testAuthnContextClassRef).create();
-		assertEquals(testAuthnContextClassRef, ref.getAuthnContextClassRef());
+	public void testSessionNotOnOrAfter() {
+		final AuthnStatement ref = builder.sessionNotOnOrAfter(testSessionNotOnOrAfter).create();
+		assertEquals(testSessionNotOnOrAfter, ref.getSessionNotOnOrAfter());
 	}
 
 }

@@ -46,24 +46,25 @@ public class AssertionBuilderImplTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.AssertionBuilderImpl#id(java.lang.String)}.
-	 */
-	@Test
-	public void testId() {
-		final Assertion ref = testBuilder.id(testId).create();
-		assertEquals(testId, ref.getId());
-	}
-
-	/**
 	 * Test method for
 	 * {@link org.ehealth_connector.security.saml2.impl.AssertionBuilderImpl#addAttribute(org.ehealth_connector.security.saml2.Attribute)}.
 	 */
 	@Test
 	public void testAddAttribute() {
-		final Attribute attribute = new AttributeBuilderImpl().name(testAttributeName).value(testAttributeValue)
-				.create();
+		final Attribute attribute = new AttributeBuilderImpl().name(testAttributeName)
+				.value(testAttributeValue).create();
 		final Assertion ref = testBuilder.addAttribute(attribute).create();
 		assertNotNull(ref);
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.AssertionBuilderImpl#id(java.lang.String)}.
+	 */
+	@Test
+	public void testId() {
+		final Assertion ref = testBuilder.id(testId).create();
+		assertEquals(testId, ref.getId());
 	}
 
 }

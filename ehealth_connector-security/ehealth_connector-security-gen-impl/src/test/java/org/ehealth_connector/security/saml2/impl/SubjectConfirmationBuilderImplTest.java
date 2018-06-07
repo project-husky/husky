@@ -55,47 +55,13 @@ public class SubjectConfirmationBuilderImplTest {
 
 		testRecepient = "The Recepient of";
 
-		testInternalObject = new org.opensaml.saml.saml2.core.impl.SubjectConfirmationBuilder().buildObject();
+		testInternalObject = new org.opensaml.saml.saml2.core.impl.SubjectConfirmationBuilder()
+				.buildObject();
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.SubjectConfirmationBuilderImpl#method(java.lang.String)}.
-	 */
-	@Test
-	public void testMethod() {
-		final SubjectConfirmation ref = builder.method(testMethod).create();
-		assertEquals(testMethod, ref.getMethod());
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.SubjectConfirmationBuilderImpl#inResponseTo(java.lang.String)}.
-	 */
-	@Test
-	public void testInResponseTo() {
-		final SubjectConfirmation ref = builder.inResponseTo(testInResponseTO).create();
-		assertEquals(testInResponseTO, ref.getInResponseTo());
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.SubjectConfirmationBuilderImpl#notOnOrAfter(java.util.Calendar)}.
-	 */
-	@Test
-	public void testNotOnOrAfter() {
-		final SubjectConfirmation ref = builder.notOnOrAfter(testNotOnOrAfter).create();
-		assertEquals(testNotOnOrAfter, ref.getNotOnOrAfter());
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.SubjectConfirmationBuilderImpl#notBefore(java.util.Calendar)}.
-	 */
-	@Test
-	public void testNotBefore() {
-		final SubjectConfirmation ref = builder.notBefore(testNotBefore).create();
-		assertEquals(testNotBefore, ref.getNotBefore());
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.SubjectConfirmationBuilderImpl#address(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.SubjectConfirmationBuilderImpl#address(java.lang.String)}.
 	 */
 	@Test
 	public void testAddress() {
@@ -104,22 +70,64 @@ public class SubjectConfirmationBuilderImplTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.SubjectConfirmationBuilderImpl#recipient(java.lang.String)}.
-	 */
-	@Test
-	public void testRecipient() {
-		final SubjectConfirmation ref = builder.recipient(testRecepient).create();
-		assertEquals(testRecepient, ref.getRecipient());
-	}
-
-	/**
 	 * Test method for
 	 * {@link org.ehealth_connector.security.saml2.impl.SubjectConfirmationBuilderImpl#create(org.opensaml.saml.saml2.core.SubjectConfirmation)}.
 	 */
 	@Test
 	public void testCreateSubjectConfirmation() {
-		final SubjectConfirmation ref = ((SubjectConfirmationBuilderImpl) builder).create(testInternalObject);
+		final SubjectConfirmation ref = ((SubjectConfirmationBuilderImpl) builder)
+				.create(testInternalObject);
 		assertEquals(testInternalObject, ((SubjectConfirmationImpl) ref).getWrappedObject());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.SubjectConfirmationBuilderImpl#inResponseTo(java.lang.String)}.
+	 */
+	@Test
+	public void testInResponseTo() {
+		final SubjectConfirmation ref = builder.inResponseTo(testInResponseTO).create();
+		assertEquals(testInResponseTO, ref.getInResponseTo());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.SubjectConfirmationBuilderImpl#method(java.lang.String)}.
+	 */
+	@Test
+	public void testMethod() {
+		final SubjectConfirmation ref = builder.method(testMethod).create();
+		assertEquals(testMethod, ref.getMethod());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.SubjectConfirmationBuilderImpl#notBefore(java.util.Calendar)}.
+	 */
+	@Test
+	public void testNotBefore() {
+		final SubjectConfirmation ref = builder.notBefore(testNotBefore).create();
+		assertEquals(testNotBefore, ref.getNotBefore());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.SubjectConfirmationBuilderImpl#notOnOrAfter(java.util.Calendar)}.
+	 */
+	@Test
+	public void testNotOnOrAfter() {
+		final SubjectConfirmation ref = builder.notOnOrAfter(testNotOnOrAfter).create();
+		assertEquals(testNotOnOrAfter, ref.getNotOnOrAfter());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.SubjectConfirmationBuilderImpl#recipient(java.lang.String)}.
+	 */
+	@Test
+	public void testRecipient() {
+		final SubjectConfirmation ref = builder.recipient(testRecepient).create();
+		assertEquals(testRecepient, ref.getRecipient());
 	}
 
 }

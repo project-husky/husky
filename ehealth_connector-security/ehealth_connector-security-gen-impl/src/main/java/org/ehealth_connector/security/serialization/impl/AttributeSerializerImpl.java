@@ -27,44 +27,15 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Serializer<Attribute</div>
  * <div class="de">Implementations Klasse von Serializer<Attribute</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class AttributeSerializerImpl extends AbstractSerializerImpl implements Serializer<Attribute> {
+public class AttributeSerializerImpl extends AbstractSerializerImpl
+		implements Serializer<Attribute> {
 
 	/**
-	 * 
-	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.serialization.Serializer#toXmlElement(java.lang.Object)
-	 */
-	@Override
-	public Element toXmlElement(Attribute aSecurityObject) throws SerializeException {
-		try {
-			return getOpenSamlSerializer().serializeToXml(((AttributeImpl) aSecurityObject).getWrappedObject());
-		} catch (final Exception e) {
-			throw new SerializeException(e);
-		}
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.serialization.Serializer#toXmlString(java.lang.Object)
-	 */
-	@Override
-	public String toXmlString(Attribute aSecurityObject) throws SerializeException {
-		try {
-			return getOpenSamlSerializer().serializeToString(((AttributeImpl) aSecurityObject).getWrappedObject());
-		} catch (final Exception e) {
-			throw new SerializeException(e);
-		}
-	}
-
-	/**
-	 * 
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.serialization.Serializer#toXmlByteArray(java.lang.Object)
@@ -72,7 +43,40 @@ public class AttributeSerializerImpl extends AbstractSerializerImpl implements S
 	@Override
 	public byte[] toXmlByteArray(Attribute aSecurityObject) throws SerializeException {
 		try {
-			return getOpenSamlSerializer().serializeToByteArray(((AttributeImpl) aSecurityObject).getWrappedObject());
+			return getOpenSamlSerializer()
+					.serializeToByteArray(((AttributeImpl) aSecurityObject).getWrappedObject());
+		} catch (final Exception e) {
+			throw new SerializeException(e);
+		}
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.serialization.Serializer#toXmlElement(java.lang.Object)
+	 */
+	@Override
+	public Element toXmlElement(Attribute aSecurityObject) throws SerializeException {
+		try {
+			return getOpenSamlSerializer()
+					.serializeToXml(((AttributeImpl) aSecurityObject).getWrappedObject());
+		} catch (final Exception e) {
+			throw new SerializeException(e);
+		}
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.serialization.Serializer#toXmlString(java.lang.Object)
+	 */
+	@Override
+	public String toXmlString(Attribute aSecurityObject) throws SerializeException {
+		try {
+			return getOpenSamlSerializer()
+					.serializeToString(((AttributeImpl) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}

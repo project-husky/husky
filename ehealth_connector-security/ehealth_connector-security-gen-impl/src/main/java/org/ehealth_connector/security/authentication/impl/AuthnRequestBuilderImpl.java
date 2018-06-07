@@ -41,12 +41,12 @@ import org.opensaml.saml.saml2.core.impl.ScopingBuilder;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for authnrequest building.</div>
  * <div class="de">Die Klasse implementiert das entsprechende interface um authnrequests bilden zu k&ooml;nnen.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class AuthnRequestBuilderImpl
-		implements AuthnRequestBuilder, SecurityObjectBuilder<org.opensaml.saml.saml2.core.AuthnRequest, AuthnRequest> {
+public class AuthnRequestBuilderImpl implements AuthnRequestBuilder,
+		SecurityObjectBuilder<org.opensaml.saml.saml2.core.AuthnRequest, AuthnRequest> {
 
 	private org.opensaml.saml.saml2.core.AuthnRequest authnRequest;
 	private NameIDPolicy nameIDPolicy;
@@ -74,70 +74,13 @@ public class AuthnRequestBuilderImpl
 	}
 
 	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.saml2.BaseBuilder#id(java.lang.String)
-	 */
-	@Override
-	public AuthnRequestBuilder id(String aId) {
-		if (!StringUtils.isEmpty(aId)) {
-			authnRequest.setID(aId);
-		}
-		return this;
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.saml2.BaseBuilder#issueInstant(java.util.Calendar)
-	 */
-	@Override
-	public AuthnRequestBuilder issueInstant(Calendar aIssueInstant) {
-		if (aIssueInstant != null) {
-			final DateTime dateTime = new DateTime(aIssueInstant.getTimeInMillis());
-			authnRequest.setIssueInstant(dateTime);
-		}
-		return this;
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.saml2.BaseBuilder#issuer(java.lang.String)
-	 */
-	@Override
-	public AuthnRequestBuilder issuer(String aIssuer) {
-		if (!StringUtils.isEmpty(aIssuer)) {
-			issuer.setValue(aIssuer);
-		}
-
-		return this;
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.saml2.BaseBuilder#version(java.lang.String)
-	 */
-	@Override
-	public AuthnRequestBuilder version(String aVersion) {
-		if (!StringUtils.isEmpty(aVersion)) {
-			authnRequest.setVersion(SAMLVersion.valueOf(aVersion));
-		}
-		return this;
-	}
-
-	/**
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#assertionConsumerServiceIndex(java.lang.Integer)
 	 */
 	@Override
-	public AuthnRequestBuilder assertionConsumerServiceIndex(Integer aAssertionConsumerServiceIndex) {
+	public AuthnRequestBuilder assertionConsumerServiceIndex(
+			Integer aAssertionConsumerServiceIndex) {
 		if (aAssertionConsumerServiceIndex != null) {
 			authnRequest.setAssertionConsumerServiceIndex(aAssertionConsumerServiceIndex);
 		}
@@ -163,11 +106,47 @@ public class AuthnRequestBuilderImpl
 	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#attributeConsumingServiceIndex(java.lang.Integer)
 	 */
 	@Override
-	public AuthnRequestBuilder attributeConsumingServiceIndex(Integer aAttributeConsumingServiceIndex) {
+	public AuthnRequestBuilder attributeConsumingServiceIndex(
+			Integer aAttributeConsumingServiceIndex) {
 		if (aAttributeConsumingServiceIndex != null) {
 			authnRequest.setAttributeConsumingServiceIndex(aAttributeConsumingServiceIndex);
 		}
 		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#consent(java.lang.String)
+	 */
+	@Override
+	public AuthnRequestBuilder consent(String aConsent) {
+		if (!StringUtils.isEmpty(aConsent)) {
+			authnRequest.setConsent(aConsent);
+		}
+		return this;
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#create()
+	 */
+	@Override
+	public AuthnRequest create() {
+		return new AuthnRequestImpl(authnRequest);
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.core.SecurityObjectBuilder#create(java.lang.Object)
+	 */
+	@Override
+	public AuthnRequest create(org.opensaml.saml.saml2.core.AuthnRequest aInternalObject) {
+		return new AuthnRequestImpl(aInternalObject);
 	}
 
 	/**
@@ -179,6 +158,120 @@ public class AuthnRequestBuilderImpl
 	public AuthnRequestBuilder destination(String aDestination) {
 		if (!StringUtils.isEmpty(aDestination)) {
 			authnRequest.setDestination(aDestination);
+		}
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#forceAuthn(java.lang.Boolean)
+	 */
+	@Override
+	public AuthnRequestBuilder forceAuthn(Boolean aForceAuthn) {
+		if (aForceAuthn != null) {
+			authnRequest.setForceAuthn(aForceAuthn);
+		}
+		return this;
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.BaseBuilder#id(java.lang.String)
+	 */
+	@Override
+	public AuthnRequestBuilder id(String aId) {
+		if (!StringUtils.isEmpty(aId)) {
+			authnRequest.setID(aId);
+		}
+		return this;
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.BaseBuilder#issueInstant(java.util.Calendar)
+	 */
+	@Override
+	public AuthnRequestBuilder issueInstant(Calendar aIssueInstant) {
+		if (aIssueInstant != null) {
+			final DateTime dateTime = new DateTime(aIssueInstant.getTimeInMillis());
+			authnRequest.setIssueInstant(dateTime);
+		}
+		return this;
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.BaseBuilder#issuer(java.lang.String)
+	 */
+	@Override
+	public AuthnRequestBuilder issuer(String aIssuer) {
+		if (!StringUtils.isEmpty(aIssuer)) {
+			issuer.setValue(aIssuer);
+		}
+
+		return this;
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#nameIdPolicyAllowCreate(java.lang.Boolean)
+	 */
+	@Override
+	public AuthnRequestBuilder nameIdPolicyAllowCreate(Boolean aNameIdPolicyAllowCreate) {
+		if (aNameIdPolicyAllowCreate != null) {
+			nameIDPolicy.setAllowCreate(aNameIdPolicyAllowCreate);
+		}
+		return this;
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#nameIdPolicyFormat(java.lang.String)
+	 */
+	@Override
+	public AuthnRequestBuilder nameIdPolicyFormat(String aNameIdPolicyFormat) {
+		if (!StringUtils.isEmpty(aNameIdPolicyFormat)) {
+			nameIDPolicy.setFormat(aNameIdPolicyFormat);
+		}
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#protocolBinding(java.lang.String)
+	 */
+	@Override
+	public AuthnRequestBuilder protocolBinding(String aProtocolBinding) {
+		if (!StringUtils.isEmpty(aProtocolBinding)) {
+			authnRequest.setProtocolBinding(aProtocolBinding);
+		}
+		return this;
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#providerID(java.lang.String)
+	 */
+	@Override
+	public AuthnRequestBuilder providerID(String aProviderID) {
+		if (!StringUtils.isEmpty(aProviderID)) {
+			final IDPEntry idpEntry = new IDPEntryBuilder().buildObject();
+			idpEntry.setProviderID(aProviderID);
+			idpList.getIDPEntrys().add(idpEntry);
 		}
 		return this;
 	}
@@ -199,73 +292,6 @@ public class AuthnRequestBuilderImpl
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#protocolBinding(java.lang.String)
-	 */
-	@Override
-	public AuthnRequestBuilder protocolBinding(String aProtocolBinding) {
-		if (!StringUtils.isEmpty(aProtocolBinding)) {
-			authnRequest.setProtocolBinding(aProtocolBinding);
-		}
-		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#consent(java.lang.String)
-	 */
-	@Override
-	public AuthnRequestBuilder consent(String aConsent) {
-		if (!StringUtils.isEmpty(aConsent)) {
-			authnRequest.setConsent(aConsent);
-		}
-		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#forceAuthn(java.lang.Boolean)
-	 */
-	@Override
-	public AuthnRequestBuilder forceAuthn(Boolean aForceAuthn) {
-		if (aForceAuthn != null) {
-			authnRequest.setForceAuthn(aForceAuthn);
-		}
-		return this;
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#nameIdPolicyAllowCreate(java.lang.Boolean)
-	 */
-	@Override
-	public AuthnRequestBuilder nameIdPolicyAllowCreate(Boolean aNameIdPolicyAllowCreate) {
-		if (aNameIdPolicyAllowCreate != null) {
-			nameIDPolicy.setAllowCreate(aNameIdPolicyAllowCreate);
-		}
-		return this;
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#nameIdPolicyFormat(java.lang.String)
-	 */
-	@Override
-	public AuthnRequestBuilder nameIdPolicyFormat(String aNameIdPolicyFormat) {
-		if (!StringUtils.isEmpty(aNameIdPolicyFormat)) {
-			nameIDPolicy.setFormat(aNameIdPolicyFormat);
-		}
-		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
 	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#subject(org.ehealth_connector.security.saml2.Subject)
 	 */
 	@Override
@@ -277,41 +303,17 @@ public class AuthnRequestBuilderImpl
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#providerID(java.lang.String)
+	 * @see org.ehealth_connector.security.saml2.BaseBuilder#version(java.lang.String)
 	 */
 	@Override
-	public AuthnRequestBuilder providerID(String aProviderID) {
-		if (!StringUtils.isEmpty(aProviderID)) {
-			final IDPEntry idpEntry = new IDPEntryBuilder().buildObject();
-			idpEntry.setProviderID(aProviderID);
-			idpList.getIDPEntrys().add(idpEntry);
+	public AuthnRequestBuilder version(String aVersion) {
+		if (!StringUtils.isEmpty(aVersion)) {
+			authnRequest.setVersion(SAMLVersion.valueOf(aVersion));
 		}
 		return this;
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#create()
-	 */
-	@Override
-	public AuthnRequest create() {
-		return new AuthnRequestImpl(authnRequest);
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.core.SecurityObjectBuilder#create(java.lang.Object)
-	 */
-	@Override
-	public AuthnRequest create(org.opensaml.saml.saml2.core.AuthnRequest aInternalObject) {
-		return new AuthnRequestImpl(aInternalObject);
 	}
 
 }

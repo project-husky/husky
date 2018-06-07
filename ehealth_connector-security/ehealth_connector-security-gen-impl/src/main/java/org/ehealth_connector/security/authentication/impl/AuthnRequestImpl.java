@@ -28,11 +28,12 @@ import org.joda.time.DateTime;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for authnrequest.</div>
  * <div class="de">Die Klasse implementiert das entsprechende interface authnrequest.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class AuthnRequestImpl implements AuthnRequest, SecurityObject<org.opensaml.saml.saml2.core.AuthnRequest> {
+public class AuthnRequestImpl
+		implements AuthnRequest, SecurityObject<org.opensaml.saml.saml2.core.AuthnRequest> {
 
 	private org.opensaml.saml.saml2.core.AuthnRequest authnRequest;
 
@@ -41,16 +42,6 @@ public class AuthnRequestImpl implements AuthnRequest, SecurityObject<org.opensa
 	 */
 	protected AuthnRequestImpl(org.opensaml.saml.saml2.core.AuthnRequest aAuthnRequest) {
 		authnRequest = aAuthnRequest;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.authentication.AuthnRequest#getProtocolBinding()
-	 */
-	@Override
-	public String getProtocolBinding() {
-		return authnRequest.getProtocolBinding();
 	}
 
 	/**
@@ -86,26 +77,6 @@ public class AuthnRequestImpl implements AuthnRequest, SecurityObject<org.opensa
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.authentication.AuthnRequest#getProviderName()
-	 */
-	@Override
-	public String getProviderName() {
-		return authnRequest.getProviderName();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.authentication.AuthnRequest#getForceAuthn()
-	 */
-	@Override
-	public Boolean getForceAuthn() {
-		return authnRequest.isForceAuthn();
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
 	 * @see org.ehealth_connector.security.authentication.AuthnRequest#getConsent()
 	 */
 	@Override
@@ -126,14 +97,11 @@ public class AuthnRequestImpl implements AuthnRequest, SecurityObject<org.opensa
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.authentication.AuthnRequest#getIssueInstant()
+	 * @see org.ehealth_connector.security.authentication.AuthnRequest#getForceAuthn()
 	 */
 	@Override
-	public Calendar getIssueInstant() {
-		final DateTime instant = authnRequest.getIssueInstant();
-		final Calendar retVal = Calendar.getInstance();
-		retVal.setTimeInMillis(instant.getMillis());
-		return retVal;
+	public Boolean getForceAuthn() {
+		return authnRequest.isForceAuthn();
 	}
 
 	/**
@@ -144,6 +112,19 @@ public class AuthnRequestImpl implements AuthnRequest, SecurityObject<org.opensa
 	@Override
 	public String getId() {
 		return authnRequest.getID();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.authentication.AuthnRequest#getIssueInstant()
+	 */
+	@Override
+	public Calendar getIssueInstant() {
+		final DateTime instant = authnRequest.getIssueInstant();
+		final Calendar retVal = Calendar.getInstance();
+		retVal.setTimeInMillis(instant.getMillis());
+		return retVal;
 	}
 
 	/**
@@ -186,14 +167,23 @@ public class AuthnRequestImpl implements AuthnRequest, SecurityObject<org.opensa
 	}
 
 	/**
-	 * 
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.core.SecurityObject#getWrappedObject()
+	 * @see org.ehealth_connector.security.authentication.AuthnRequest#getProtocolBinding()
 	 */
 	@Override
-	public org.opensaml.saml.saml2.core.AuthnRequest getWrappedObject() {
-		return authnRequest;
+	public String getProtocolBinding() {
+		return authnRequest.getProtocolBinding();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.authentication.AuthnRequest#getProviderName()
+	 */
+	@Override
+	public String getProviderName() {
+		return authnRequest.getProviderName();
 	}
 
 	/**
@@ -208,7 +198,7 @@ public class AuthnRequestImpl implements AuthnRequest, SecurityObject<org.opensa
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.saml2.Base#getVersion()
@@ -219,6 +209,17 @@ public class AuthnRequestImpl implements AuthnRequest, SecurityObject<org.opensa
 			return authnRequest.getVersion().toString();
 		}
 		return "";
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.core.SecurityObject#getWrappedObject()
+	 */
+	@Override
+	public org.opensaml.saml.saml2.core.AuthnRequest getWrappedObject() {
+		return authnRequest;
 	}
 
 }

@@ -34,33 +34,24 @@ import org.opensaml.soap.wstrust.Status;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Interface XUserAssertionResponse and SecurityObject</div>
  * <div class="de">Implementations Klasse von  Interface XUserAssertionResponse und SecurityObject</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class XUserAssertionResponseImpl
-		implements XUserAssertionResponse, SecurityObject<org.opensaml.soap.wstrust.RequestSecurityTokenResponse> {
+public class XUserAssertionResponseImpl implements XUserAssertionResponse,
+		SecurityObject<org.opensaml.soap.wstrust.RequestSecurityTokenResponse> {
 
 	private RequestSecurityTokenResponse responseCollection;
 
-	protected XUserAssertionResponseImpl(RequestSecurityTokenResponse aRequestSecurityTokenResponse) {
+	protected XUserAssertionResponseImpl(
+			RequestSecurityTokenResponse aRequestSecurityTokenResponse) {
 		responseCollection = aRequestSecurityTokenResponse;
 	}
 
 	@Override
-	public RequestSecurityTokenResponse getWrappedObject() {
-		return responseCollection;
-	}
-
-	@Override
-	public String getContext() {
-		return responseCollection.getContext();
-	}
-
-	@Override
 	public Assertion getAssertion() {
-		final List<XMLObject> requestedTokens = responseCollection.getUnknownXMLObjects(
-				new QName("http://docs.oasis-open.org/ws-sx/ws-trust/200512", "RequestedSecurityToken"));
+		final List<XMLObject> requestedTokens = responseCollection.getUnknownXMLObjects(new QName(
+				"http://docs.oasis-open.org/ws-sx/ws-trust/200512", "RequestedSecurityToken"));
 		if ((requestedTokens != null) && !requestedTokens.isEmpty()) {
 			final RequestedSecurityToken token = (RequestedSecurityToken) requestedTokens.get(0);
 			return new AssertionBuilderImpl()
@@ -71,12 +62,23 @@ public class XUserAssertionResponseImpl
 	}
 
 	@Override
+	public String getContext() {
+		return responseCollection.getContext();
+	}
+
+	@Override
 	public String getStatus() {
-		final List<XMLObject> statusses = responseCollection
-				.getUnknownXMLObjects(new QName("http://docs.oasis-open.org/ws-sx/ws-trust/200512", "Status"));
-		if (!statusses.isEmpty() && (statusses.get(0) != null) && (((Status) statusses.get(0)).getCode() != null)) {
+		final List<XMLObject> statusses = responseCollection.getUnknownXMLObjects(
+				new QName("http://docs.oasis-open.org/ws-sx/ws-trust/200512", "Status"));
+		if (!statusses.isEmpty() && (statusses.get(0) != null)
+				&& (((Status) statusses.get(0)).getCode() != null)) {
 			return ((Status) statusses.get(0)).getCode().getValue();
 		}
 		return null;
+	}
+
+	@Override
+	public RequestSecurityTokenResponse getWrappedObject() {
+		return responseCollection;
 	}
 }

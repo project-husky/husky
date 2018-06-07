@@ -21,8 +21,8 @@ package org.ehealth_connector.security.communication.xua;
  * <!-- @formatter:off -->
  * <div class="en">Class defining XUserAssertionConstants.</div>
  * <div class="de">Klasse welche XUserAssertionConstanten definiert.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class XUserAssertionConstants {

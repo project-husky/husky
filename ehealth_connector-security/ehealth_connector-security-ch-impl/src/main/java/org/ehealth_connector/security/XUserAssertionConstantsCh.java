@@ -21,8 +21,8 @@ package org.ehealth_connector.security;
  * <!-- @formatter:off -->
  * <div class="en">Class holding some constants from swiss EPD</div>
  * <div class="de">Klasse mit verschiendene konstanten des Schweizer EPD</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public final class XUserAssertionConstantsCh {
@@ -32,8 +32,8 @@ public final class XUserAssertionConstantsCh {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Assertion role value for patient.</div>
 	 * <div class="de">Assertion Rollenwert für Patient.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String ROLE_PATIENT = "PAT";
@@ -41,8 +41,8 @@ public final class XUserAssertionConstantsCh {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Assertion role value for healthcare professional.</div>
 	 * <div class="de">Assertion Rollenwert für Healthcare Professional.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String ROLE_HE_CARE_PRO = "HCP";
@@ -50,8 +50,8 @@ public final class XUserAssertionConstantsCh {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Assertion role value for assistant.</div>
 	 * <div class="de">Assertion Rollenwert für Assitent.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String ROLE_ASSITANT = "ASS";
@@ -59,8 +59,8 @@ public final class XUserAssertionConstantsCh {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Assertion role value for representativ.</div>
 	 * <div class="de">Assertion Rollenwert für eine vertreter des patienten.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String ROLE_REPRESENTATIVE = "REP";

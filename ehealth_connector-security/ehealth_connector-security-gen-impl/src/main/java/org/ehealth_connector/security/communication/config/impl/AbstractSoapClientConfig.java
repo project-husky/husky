@@ -23,8 +23,8 @@ import org.ehealth_connector.security.communication.config.SoapClientConfig;
  * <!-- @formatter:off -->
  * <div class="en">Abstract implementation class of Interface SoapClientConfig</div>
  * <div class="de">Abstrakte implementations Klasse des Interfaces SoapClientConfig</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class AbstractSoapClientConfig extends AbstractClientConfig implements SoapClientConfig {
@@ -38,6 +38,21 @@ public class AbstractSoapClientConfig extends AbstractClientConfig implements So
 	public String keyStoreType;
 
 	private boolean simple;
+
+	@Override
+	public String getKeyStore() {
+		return keyStoreFile;
+	}
+
+	@Override
+	public String getKeyStorePassword() {
+		return keyStorePassword;
+	}
+
+	@Override
+	public String getKeyStoreType() {
+		return keyStoreType;
+	}
 
 	@Override
 	public String getPortName() {
@@ -60,38 +75,8 @@ public class AbstractSoapClientConfig extends AbstractClientConfig implements So
 	}
 
 	@Override
-	public void setPortName(String portName) {
-		this.portName = portName;
-	}
-
-	@Override
-	public void setPortNamespace(String portNamespace) {
-		this.portNamespace = portNamespace;
-	}
-
-	@Override
-	public void setServiceName(String serviceName) {
-		this.serviceName = serviceName;
-	}
-
-	@Override
-	public void setServiceNamespace(String serviceNamespace) {
-		this.serviceNamespace = serviceNamespace;
-	}
-
-	@Override
-	public String getKeyStore() {
-		return keyStoreFile;
-	}
-
-	@Override
-	public String getKeyStorePassword() {
-		return keyStorePassword;
-	}
-
-	@Override
-	public String getKeyStoreType() {
-		return keyStoreType;
+	public boolean isSimple() {
+		return simple;
 	}
 
 	@Override
@@ -110,8 +95,23 @@ public class AbstractSoapClientConfig extends AbstractClientConfig implements So
 	}
 
 	@Override
-	public boolean isSimple() {
-		return simple;
+	public void setPortName(String portName) {
+		this.portName = portName;
+	}
+
+	@Override
+	public void setPortNamespace(String portNamespace) {
+		this.portNamespace = portNamespace;
+	}
+
+	@Override
+	public void setServiceName(String serviceName) {
+		this.serviceName = serviceName;
+	}
+
+	@Override
+	public void setServiceNamespace(String serviceNamespace) {
+		this.serviceNamespace = serviceNamespace;
 	}
 
 	public void setSimple(boolean aSimple) {

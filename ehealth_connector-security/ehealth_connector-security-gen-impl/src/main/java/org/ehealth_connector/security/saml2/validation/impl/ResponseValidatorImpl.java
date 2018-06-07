@@ -28,8 +28,8 @@ import org.ehealth_connector.security.saml2.validation.ResponseValidator;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of ResponseValidator</div>
  * <div class="de">Implementations Klasse von ResponseValidator</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class ResponseValidatorImpl extends AbstractValidator implements ResponseValidator {
@@ -43,7 +43,8 @@ public class ResponseValidatorImpl extends AbstractValidator implements Response
 	@Override
 	public void validate(Response aType, String aAlias) throws ValidationException {
 
-		final org.opensaml.saml.saml2.core.Response innerResponse = ((ResponseImpl) aType).getWrappedObject();
+		final org.opensaml.saml.saml2.core.Response innerResponse = ((ResponseImpl) aType)
+				.getWrappedObject();
 		if (innerResponse.getSignature() != null) {
 			validate(innerResponse.getSignature(), aAlias);
 		}

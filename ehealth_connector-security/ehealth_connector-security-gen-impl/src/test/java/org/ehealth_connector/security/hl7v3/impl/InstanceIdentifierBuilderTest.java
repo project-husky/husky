@@ -31,7 +31,8 @@ public class InstanceIdentifierBuilderTest extends InitializerTestHelper {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.hl7v3.impl.InstanceIdentifierBuilder#buildObject()}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.hl7v3.impl.InstanceIdentifierBuilder#buildObject()}.
 	 */
 	@Test
 	public void testBuildObject() {

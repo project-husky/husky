@@ -23,8 +23,8 @@ import org.ehealth_connector.security.saml2.Assertion;
  * <!-- @formatter:off -->
  * <div class="en">Describing the methods of the AssertionBasedRequestBuilder Interface</div>
  * <div class="de">Beschreibung der Methoden des AssertionBasedRequestBuilder Interfaces</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface AssertionBasedRequestBuilder {

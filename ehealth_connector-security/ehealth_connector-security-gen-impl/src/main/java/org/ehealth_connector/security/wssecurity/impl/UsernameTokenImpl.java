@@ -24,16 +24,57 @@ import org.ehealth_connector.security.wssecurity.UsernameToken;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of interfaces UsernameToken and SecurityObject</div>
  * <div class="de">Implementations Klasse der Interfaces UsernameToken und SecurityObject</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class UsernameTokenImpl implements UsernameToken, SecurityObject<org.opensaml.soap.wssecurity.UsernameToken> {
+public class UsernameTokenImpl
+		implements UsernameToken, SecurityObject<org.opensaml.soap.wssecurity.UsernameToken> {
 
 	private org.opensaml.soap.wssecurity.UsernameToken wrappedObject;
 
 	public UsernameTokenImpl(org.opensaml.soap.wssecurity.UsernameToken aInternalObject) {
 		wrappedObject = aInternalObject;
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.wssecurity.UsernameToken#getNonce()
+	 */
+	@Override
+	public String getNonce() {
+		if ((wrappedObject
+				.getUnknownXMLObjects(org.opensaml.soap.wssecurity.Nonce.ELEMENT_NAME) != null)
+				&& (wrappedObject
+						.getUnknownXMLObjects(org.opensaml.soap.wssecurity.Nonce.ELEMENT_NAME)
+						.size() > 0)) {
+			final org.opensaml.soap.wssecurity.Nonce nonce = (org.opensaml.soap.wssecurity.Nonce) wrappedObject
+					.getUnknownXMLObjects(org.opensaml.soap.wssecurity.Nonce.ELEMENT_NAME).get(0);
+			return nonce.getValue();
+		}
+		return "";
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.wssecurity.UsernameToken#getPassword()
+	 */
+	@Override
+	public String getPassword() {
+		if ((wrappedObject
+				.getUnknownXMLObjects(org.opensaml.soap.wssecurity.Password.ELEMENT_NAME) != null)
+				&& (wrappedObject
+						.getUnknownXMLObjects(org.opensaml.soap.wssecurity.Password.ELEMENT_NAME)
+						.size() > 0)) {
+			final org.opensaml.soap.wssecurity.Password password = (org.opensaml.soap.wssecurity.Password) wrappedObject
+					.getUnknownXMLObjects(org.opensaml.soap.wssecurity.Password.ELEMENT_NAME)
+					.get(0);
+			return password.getValue();
+		}
+		return "";
 	}
 
 	/**
@@ -50,41 +91,7 @@ public class UsernameTokenImpl implements UsernameToken, SecurityObject<org.open
 	}
 
 	/**
-	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.wssecurity.UsernameToken#getPassword()
-	 */
-	@Override
-	public String getPassword() {
-		if ((wrappedObject.getUnknownXMLObjects(org.opensaml.soap.wssecurity.Password.ELEMENT_NAME) != null)
-				&& (wrappedObject.getUnknownXMLObjects(org.opensaml.soap.wssecurity.Password.ELEMENT_NAME)
-						.size() > 0)) {
-			final org.opensaml.soap.wssecurity.Password password = (org.opensaml.soap.wssecurity.Password) wrappedObject
-					.getUnknownXMLObjects(org.opensaml.soap.wssecurity.Password.ELEMENT_NAME).get(0);
-			return password.getValue();
-		}
-		return "";
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.wssecurity.UsernameToken#getNonce()
-	 */
-	@Override
-	public String getNonce() {
-		if ((wrappedObject.getUnknownXMLObjects(org.opensaml.soap.wssecurity.Nonce.ELEMENT_NAME) != null)
-				&& (wrappedObject.getUnknownXMLObjects(org.opensaml.soap.wssecurity.Nonce.ELEMENT_NAME).size() > 0)) {
-			final org.opensaml.soap.wssecurity.Nonce nonce = (org.opensaml.soap.wssecurity.Nonce) wrappedObject
-					.getUnknownXMLObjects(org.opensaml.soap.wssecurity.Nonce.ELEMENT_NAME).get(0);
-			return nonce.getValue();
-		}
-		return "";
-	}
-
-	/**
-	 * 
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.core.SecurityObject#getWrappedObject()

@@ -35,11 +35,13 @@ public class UnknownPolicySetIdBuilderImplTest extends InitializerTestHelper {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.ch.epr.policyadmin.impl.UnknownPolicySetIdBuilderImpl#message(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.ch.epr.policyadmin.impl.UnknownPolicySetIdBuilderImpl#message(java.lang.String)}.
 	 */
 	@Test
 	public void testMessage() {
-		final OpenSamlUnknownPolicySetId ref = new UnknownPolicySetIdBuilderImpl().message(testMessage).buildObject();
+		final OpenSamlUnknownPolicySetId ref = new UnknownPolicySetIdBuilderImpl()
+				.message(testMessage).buildObject();
 		assertNotNull(ref);
 		assertEquals(testMessage, ref.getMessage());
 	}

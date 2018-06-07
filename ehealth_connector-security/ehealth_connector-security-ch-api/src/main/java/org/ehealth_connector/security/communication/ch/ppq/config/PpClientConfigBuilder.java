@@ -23,20 +23,36 @@ import org.ehealth_connector.security.communication.config.SoapClientConfigBuild
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the PpClientConfigBuilder methods.</div>
  * <div class="de">Interface beschreibende methoden des PpClientConfigBuilder.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface PpClientConfigBuilder extends SoapClientConfigBuilder {
 
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.communication.config.ClientConfigBuilder#url(java.lang.String)
-	 */
 	@Override
-	PpClientConfigBuilder url(String aEndpointUrl);
+	PpClientConfigBuilder clientKeyStore(String clientKeyStoreFile);
+
+	@Override
+	PpClientConfigBuilder clientKeyStorePassword(String clientKeyStorePassword);
+
+	@Override
+	PpClientConfigBuilder clientKeyStoreType(String clientKeyStoreType);
+
+	/**
+	  * <!-- @formatter:off -->
+	 * <div class="en">Creates a concrete instance of PpClientConfig with setted params.</div>
+	 * <div class="de">Erstellt die konkrete instanz des PpClientConfig mit den gesetzten parametern.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return
+	 *  <div class="en">a new PpClientConfig instance with the params set</div>
+	 *  <div class="de">eine neue PpClientConfig instanz mit den gesetzten parametern</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 *  <!-- @formatter:on -->
+	 */
+	PpClientConfig create();
 
 	/**
 	 * {@inheritDoc}
@@ -70,29 +86,13 @@ public interface PpClientConfigBuilder extends SoapClientConfigBuilder {
 	@Override
 	PpClientConfigBuilder serviceNamespace(String serviceNamespace);
 
-	@Override
-	PpClientConfigBuilder clientKeyStore(String clientKeyStoreFile);
-
-	@Override
-	PpClientConfigBuilder clientKeyStorePassword(String clientKeyStorePassword);
-
-	@Override
-	PpClientConfigBuilder clientKeyStoreType(String clientKeyStoreType);
-
 	/**
-	  * <!-- @formatter:off -->
-	 * <div class="en">Creates a concrete instance of PpClientConfig with setted params.</div>
-	 * <div class="de">Erstellt die konkrete instanz des PpClientConfig mit den gesetzten parametern.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
 	 *
-	 * @return 
-	 *  <div class="en">a new PpClientConfig instance with the params set</div>
-	 *  <div class="de">eine neue PpClientConfig instanz mit den gesetzten parametern</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 *  <!-- @formatter:on -->
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.communication.config.ClientConfigBuilder#url(java.lang.String)
 	 */
-	PpClientConfig create();
+	@Override
+	PpClientConfigBuilder url(String aEndpointUrl);
 
 }

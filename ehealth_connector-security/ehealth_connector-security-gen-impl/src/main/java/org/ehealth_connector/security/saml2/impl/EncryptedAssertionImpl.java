@@ -24,24 +24,24 @@ import org.ehealth_connector.security.saml2.EncryptedAssertion;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of EncryptedAssertion</div>
  * <div class="de">Implementations Klasse von EncryptedAssertion</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
- * 
+ * <div class="fr"></div>
+ * <div class="it"></div>
+ *
  * <!-- @formatter:on -->
  */
-public class EncryptedAssertionImpl
-		implements EncryptedAssertion, SecurityObject<org.opensaml.saml.saml2.core.EncryptedAssertion> {
+public class EncryptedAssertionImpl implements EncryptedAssertion,
+		SecurityObject<org.opensaml.saml.saml2.core.EncryptedAssertion> {
 
 	private org.opensaml.saml.saml2.core.EncryptedAssertion wrappedObject;
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Default constructor to instanciate the object.</div>
 	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * 
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
 	 * @param aInnerObject
 	 * <!-- @formatter:on -->
 	 */
@@ -50,7 +50,7 @@ public class EncryptedAssertionImpl
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.core.SecurityObject#getWrappedObject()

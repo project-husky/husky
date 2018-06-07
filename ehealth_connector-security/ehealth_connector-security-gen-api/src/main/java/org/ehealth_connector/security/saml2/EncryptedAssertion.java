@@ -23,8 +23,8 @@ import org.ehealth_connector.security.core.SecurityHeaderElement;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the EncryptedAssertion.</div>
  * <div class="de">Interface beschreibt die Methoden des EncryptedAssertion.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface EncryptedAssertion extends SecurityHeaderElement {

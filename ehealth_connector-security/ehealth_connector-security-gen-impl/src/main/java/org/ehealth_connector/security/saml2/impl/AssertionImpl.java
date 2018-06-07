@@ -34,11 +34,12 @@ import org.joda.time.DateTime;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Interface Assertion</div>
  * <div class="de">Implementations Klasse von  Interface Assertion</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class AssertionImpl implements Assertion, SecurityObject<org.opensaml.saml.saml2.core.Assertion> {
+public class AssertionImpl
+		implements Assertion, SecurityObject<org.opensaml.saml.saml2.core.Assertion> {
 
 	private org.opensaml.saml.saml2.core.Assertion assertion;
 
@@ -49,23 +50,56 @@ public class AssertionImpl implements Assertion, SecurityObject<org.opensaml.sam
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.core.SecurityObject#getWrappedObject()
+	 * @see org.ehealth_connector.security.saml2.Assertion#getAttributes()
 	 */
 	@Override
-	public org.opensaml.saml.saml2.core.Assertion getWrappedObject() {
-		return assertion;
+	public List<Attribute> getAttributes() {
+		final List<Attribute> retVal = new ArrayList<>();
+
+		final List<org.opensaml.saml.saml2.core.AttributeStatement> internalAttributes = assertion
+				.getAttributeStatements();
+		internalAttributes.forEach(c -> {
+			final List<org.opensaml.saml.saml2.core.Attribute> listOfAttributes = c.getAttributes();
+			listOfAttributes.forEach(d -> {
+				retVal.add(new AttributeBuilderImpl().create(d));
+			});
+		});
+		return retVal;
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.saml2.Assertion#getIssueInstant()
+	 * @see org.ehealth_connector.security.saml2.Assertion#getAuthnStatements()
 	 */
 	@Override
-	public Calendar getIssueInstant() {
-		final DateTime instant = assertion.getIssueInstant();
-		final Calendar retVal = Calendar.getInstance();
-		retVal.setTimeInMillis(instant.getMillis());
+	public List<AuthnStatement> getAuthnStatements() {
+		final List<AuthnStatement> retVal = new ArrayList<>();
+		final List<org.opensaml.saml.saml2.core.AuthnStatement> innerList = assertion
+				.getAuthnStatements();
+		innerList.forEach(c -> {
+			retVal.add(new AuthnStatementBuilderImpl().create(c));
+		});
+		return retVal;
+	}
+
+	@Override
+	public List<AudienceRestriction> getConditionsAudienceRestrictions() {
+		final List<AudienceRestriction> retVal = new ArrayList<>();
+		return retVal;
+	}
+
+	@Override
+	public List<Condition> getConditionsConditions() {
+		final List<Condition> retVal = new ArrayList<>();
+		if (assertion.getConditions() != null) {
+			final List<org.opensaml.saml.saml2.core.Condition> innerList = assertion.getConditions()
+					.getConditions();
+			innerList.forEach(c -> {
+				retVal.add(new ConditionBuilderImpl().create(c));
+			});
+		}
 		return retVal;
 	}
 
@@ -92,7 +126,7 @@ public class AssertionImpl implements Assertion, SecurityObject<org.opensaml.sam
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.saml2.Assertion#getId()
@@ -103,7 +137,20 @@ public class AssertionImpl implements Assertion, SecurityObject<org.opensaml.sam
 	}
 
 	/**
-	 * 
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.Assertion#getIssueInstant()
+	 */
+	@Override
+	public Calendar getIssueInstant() {
+		final DateTime instant = assertion.getIssueInstant();
+		final Calendar retVal = Calendar.getInstance();
+		retVal.setTimeInMillis(instant.getMillis());
+		return retVal;
+	}
+
+	/**
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.saml2.Assertion#getIssuer()
@@ -114,26 +161,6 @@ public class AssertionImpl implements Assertion, SecurityObject<org.opensaml.sam
 			return assertion.getIssuer().getValue();
 		}
 		return "";
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.saml2.Assertion#getAttributes()
-	 */
-	@Override
-	public List<Attribute> getAttributes() {
-		final List<Attribute> retVal = new ArrayList<>();
-
-		final List<org.opensaml.saml.saml2.core.AttributeStatement> internalAttributes = assertion
-				.getAttributeStatements();
-		internalAttributes.forEach(c -> {
-			final List<org.opensaml.saml.saml2.core.Attribute> listOfAttributes = c.getAttributes();
-			listOfAttributes.forEach(d -> {
-				retVal.add(new AttributeBuilderImpl().create(d));
-			});
-		});
-		return retVal;
 	}
 
 	/**
@@ -150,7 +177,7 @@ public class AssertionImpl implements Assertion, SecurityObject<org.opensaml.sam
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.saml2.Base#getVersion()
@@ -164,37 +191,13 @@ public class AssertionImpl implements Assertion, SecurityObject<org.opensaml.sam
 	}
 
 	/**
-	 * 
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.saml2.Assertion#getAuthnStatements()
+	 * @see org.ehealth_connector.security.core.SecurityObject#getWrappedObject()
 	 */
 	@Override
-	public List<AuthnStatement> getAuthnStatements() {
-		final List<AuthnStatement> retVal = new ArrayList<>();
-		final List<org.opensaml.saml.saml2.core.AuthnStatement> innerList = assertion.getAuthnStatements();
-		innerList.forEach(c -> {
-			retVal.add(new AuthnStatementBuilderImpl().create(c));
-		});
-		return retVal;
-	}
-
-	@Override
-	public List<Condition> getConditionsConditions() {
-		final List<Condition> retVal = new ArrayList<>();
-		if (assertion.getConditions() != null) {
-			final List<org.opensaml.saml.saml2.core.Condition> innerList = assertion.getConditions().getConditions();
-			innerList.forEach(c -> {
-				retVal.add(new ConditionBuilderImpl().create(c));
-			});
-		}
-		return retVal;
-	}
-
-	@Override
-	public List<AudienceRestriction> getConditionsAudienceRestrictions() {
-		final List<AudienceRestriction> retVal = new ArrayList<>();
-		return retVal;
+	public org.opensaml.saml.saml2.core.Assertion getWrappedObject() {
+		return assertion;
 	}
 
 }

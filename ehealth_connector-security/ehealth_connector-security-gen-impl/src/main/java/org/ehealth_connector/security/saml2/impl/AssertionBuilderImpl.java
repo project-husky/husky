@@ -36,12 +36,12 @@ import org.opensaml.saml.saml2.core.impl.IssuerBuilder;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for Assertion building.</div>
  * <div class="de">Die Klasse implementiert das entsprechende interface um Assertion bilden zu k&ooml;nnen.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class AssertionBuilderImpl
-		implements AssertionBuilder, SecurityObjectBuilder<org.opensaml.saml.saml2.core.Assertion, Assertion> {
+public class AssertionBuilderImpl implements AssertionBuilder,
+		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Assertion, Assertion> {
 
 	private org.opensaml.saml.saml2.core.Assertion wrappedObject;
 	private org.opensaml.saml.saml2.core.Issuer issuer;
@@ -56,7 +56,59 @@ public class AssertionBuilderImpl
 	}
 
 	/**
-	 * 
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.AssertionBuilder#addAttribute(org.ehealth_connector.security.saml2.Attribute)
+	 */
+	@Override
+	public AssertionBuilder addAttribute(Attribute attribute) {
+		final List<AttributeStatement> attributeStatements = wrappedObject.getAttributeStatements();
+		AttributeStatement statement = null;
+		if (attributeStatements.isEmpty()) {
+			statement = new AttributeStatementBuilder()
+					.buildObject(AttributeStatement.DEFAULT_ELEMENT_NAME);
+			attributeStatements.add(statement);
+		} else {
+			statement = attributeStatements.get(0);
+		}
+		statement.getAttributes().add(((AttributeImpl) attribute).getWrappedObject());
+		return this;
+	}
+
+	@Override
+	public AssertionBuilder addCondition(Condition condition) {
+		if (wrappedObject.getConditions() != null) {
+			final List<org.opensaml.saml.saml2.core.Condition> conditionList = wrappedObject
+					.getConditions().getConditions();
+			conditionList.add(((ConditionImpl) condition).getWrappedObject());
+		}
+		return this;
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.AssertionBuilder#create()
+	 */
+	@Override
+	public Assertion create() {
+		return new AssertionImpl(wrappedObject);
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.core.SecurityObjectBuilder#create(java.lang.Object)
+	 */
+	@Override
+	public Assertion create(org.opensaml.saml.saml2.core.Assertion aInternalObject) {
+		return new AssertionImpl(aInternalObject);
+	}
+
+	/**
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.saml2.BaseBuilder#id(java.lang.String)
@@ -70,7 +122,7 @@ public class AssertionBuilderImpl
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.saml2.BaseBuilder#issueInstant(java.util.Calendar)
@@ -98,7 +150,7 @@ public class AssertionBuilderImpl
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.saml2.BaseBuilder#version(java.lang.String)
@@ -109,57 +161,6 @@ public class AssertionBuilderImpl
 			wrappedObject.setVersion(SAMLVersion.valueOf(aVersion));
 		}
 		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.saml2.AssertionBuilder#addAttribute(org.ehealth_connector.security.saml2.Attribute)
-	 */
-	@Override
-	public AssertionBuilder addAttribute(Attribute attribute) {
-		final List<AttributeStatement> attributeStatements = wrappedObject.getAttributeStatements();
-		AttributeStatement statement = null;
-		if (attributeStatements.isEmpty()) {
-			statement = new AttributeStatementBuilder().buildObject(AttributeStatement.DEFAULT_ELEMENT_NAME);
-			attributeStatements.add(statement);
-		} else {
-			statement = attributeStatements.get(0);
-		}
-		statement.getAttributes().add(((AttributeImpl) attribute).getWrappedObject());
-		return this;
-	}
-
-	@Override
-	public AssertionBuilder addCondition(Condition condition) {
-		if (wrappedObject.getConditions() != null) {
-			final List<org.opensaml.saml.saml2.core.Condition> conditionList = wrappedObject.getConditions()
-					.getConditions();
-			conditionList.add(((ConditionImpl) condition).getWrappedObject());
-		}
-		return this;
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.saml2.AssertionBuilder#create()
-	 */
-	@Override
-	public Assertion create() {
-		return new AssertionImpl(wrappedObject);
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.core.SecurityObjectBuilder#create(java.lang.Object)
-	 */
-	@Override
-	public Assertion create(org.opensaml.saml.saml2.core.Assertion aInternalObject) {
-		return new AssertionImpl(aInternalObject);
 	}
 
 }

@@ -84,10 +84,10 @@ public class XUserAssertionRequestBuilderImplTest {
 	}
 
 	@Test
-	public void testDialect() {
-		final XUserAssertionRequest ref = builder.dialect(testDialect).create();
+	public void testAppliesTo() {
+		final XUserAssertionRequest ref = builder.appliesTo(testAppliesTo).create();
 		assertNotNull(ref);
-		assertEquals(testDialect, ref.getDialect());
+		assertEquals(testAppliesTo.getAddress(), ref.getAppliesTo().getAddress());
 	}
 
 	@Test
@@ -95,6 +95,56 @@ public class XUserAssertionRequestBuilderImplTest {
 		final XUserAssertionRequest ref = builder.context(testContext).create();
 		assertNotNull(ref);
 		assertEquals(testContext, ref.getContext());
+	}
+
+	@Test
+	public void testCreateRequestSecurityToken() {
+		final XUserAssertionRequest ref = builder.create(testInternalFromOutside);
+		assertNotNull(ref);
+		assertEquals(testInternalFromOutside, ((XUserAssertionRequestImpl) ref).getWrappedObject());
+		assertEquals(testContext, ref.getContext());
+	}
+
+	@Test
+	public void testDialect() {
+		final XUserAssertionRequest ref = builder.dialect(testDialect).create();
+		assertNotNull(ref);
+		assertEquals(testDialect, ref.getDialect());
+	}
+
+	@Test
+	public void testOrganizationId() {
+		final XUserAssertionRequest ref = builder.organizationId(testOrganizationId).create();
+		assertNotNull(ref);
+		assertEquals(testOrganizationId, ref.getOrganizationId());
+	}
+
+	@Test
+	public void testOrganizationName() {
+		final XUserAssertionRequest ref = builder.organizationName(testOrganizationName).create();
+		assertNotNull(ref);
+		assertEquals(testOrganizationName, ref.getOrganizationName());
+	}
+
+	@Test
+	public void testPurposeOfUse() {
+		final XUserAssertionRequest ref = builder.purposeOfUse(testPurposeOfUse).create();
+		assertNotNull(ref);
+		assertEquals(testPurposeOfUse, ref.getPurposeOfUse());
+	}
+
+	@Test
+	public void testRequestType() {
+		final XUserAssertionRequest ref = builder.requestType(RequestType.WST_ISSUE).create();
+		assertNotNull(ref);
+		assertEquals(RequestType.WST_ISSUE, ref.getRequestType());
+	}
+
+	@Test
+	public void testResourceId() {
+		final XUserAssertionRequest ref = builder.resourceId(testResourceId).create();
+		assertNotNull(ref);
+		assertEquals(testResourceId, ref.getResourceId());
 	}
 
 	@Test
@@ -119,60 +169,11 @@ public class XUserAssertionRequestBuilderImplTest {
 	}
 
 	@Test
-	public void testOrganizationId() {
-		final XUserAssertionRequest ref = builder.organizationId(testOrganizationId).create();
-		assertNotNull(ref);
-		assertEquals(testOrganizationId, ref.getOrganizationId());
-	}
-
-	@Test
-	public void testOrganizationName() {
-		final XUserAssertionRequest ref = builder.organizationName(testOrganizationName).create();
-		assertNotNull(ref);
-		assertEquals(testOrganizationName, ref.getOrganizationName());
-	}
-
-	@Test
-	public void testResourceId() {
-		final XUserAssertionRequest ref = builder.resourceId(testResourceId).create();
-		assertNotNull(ref);
-		assertEquals(testResourceId, ref.getResourceId());
-	}
-
-	@Test
-	public void testPurposeOfUse() {
-		final XUserAssertionRequest ref = builder.purposeOfUse(testPurposeOfUse).create();
-		assertNotNull(ref);
-		assertEquals(testPurposeOfUse, ref.getPurposeOfUse());
-	}
-
-	@Test
-	public void testRequestType() {
-		final XUserAssertionRequest ref = builder.requestType(RequestType.WST_ISSUE).create();
-		assertNotNull(ref);
-		assertEquals(RequestType.WST_ISSUE, ref.getRequestType());
-	}
-
-	@Test
 	public void testTokenType() {
-		final XUserAssertionRequest ref = builder.tokenType(TokenType.OASIS_WSS_SAML_PROFILE_11_SAMLV20).create();
+		final XUserAssertionRequest ref = builder
+				.tokenType(TokenType.OASIS_WSS_SAML_PROFILE_11_SAMLV20).create();
 		assertNotNull(ref);
 		assertEquals(TokenType.OASIS_WSS_SAML_PROFILE_11_SAMLV20, ref.getTokenType());
-	}
-
-	@Test
-	public void testAppliesTo() {
-		final XUserAssertionRequest ref = builder.appliesTo(testAppliesTo).create();
-		assertNotNull(ref);
-		assertEquals(testAppliesTo.getAddress(), ref.getAppliesTo().getAddress());
-	}
-
-	@Test
-	public void testCreateRequestSecurityToken() {
-		final XUserAssertionRequest ref = builder.create(testInternalFromOutside);
-		assertNotNull(ref);
-		assertEquals(testInternalFromOutside, ((XUserAssertionRequestImpl) ref).getWrappedObject());
-		assertEquals(testContext, ref.getContext());
 	}
 
 }

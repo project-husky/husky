@@ -34,37 +34,16 @@ import org.ehealth_connector.security.saml2.Response;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the interface ConvenienceUserAccessAuthentication for CH.</div>
  * <div class="de">Klasse die das Interface ConvenienceUserAccessAuthentication für CH implementiert.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class ConvenienceUserAccessAuthenticationChImpl extends ConvenienceUserAccessAuthenticationImpl
-		implements PrivacyPolicyQueryModule {
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 * 
-	 * @throws ClientSendException
-	 *
-	 * @see org.ehealth_connector.security.ch.ppq.PrivacyPolicyQueryModule#invokePPQ(org.ehealth_connector.security.saml2.Assertion,
-	 *      org.ehealth_connector.security.ch.ppq.PrivacyPolicyQuery,
-	 *      org.ehealth_connector.security.communication.ch.ppq.config.PpClientConfig)
-	 */
-	@Override
-	public Response invokePPQ(SecurityHeaderElement aAssertion, PrivacyPolicyQuery query,
-			PpClientConfig clientConfiguration) throws ClientSendException {
-		if (!initialized) {
-			throw new ClientSendException("Opensaml Libs are not initialized");
-		}
-		final PpqClient client = ClientFactoryCh.getPpqClient(clientConfiguration);
-		return client.send(aAssertion, query);
-
-	}
+public class ConvenienceUserAccessAuthenticationChImpl
+		extends ConvenienceUserAccessAuthenticationImpl implements PrivacyPolicyQueryModule {
 
 	@Override
-	public PrivacyPolicyFeedResponse invokePPF(SecurityHeaderElement aAssertion, PrivacyPolicyFeed feed,
-			PpClientConfig clientConfiguration) throws ClientSendException {
+	public PrivacyPolicyFeedResponse invokePrivacyPolicyFeed(SecurityHeaderElement aAssertion,
+			PrivacyPolicyFeed feed, PpClientConfig clientConfiguration) throws ClientSendException {
 		if (!initialized)
 			throw new ClientSendException("Opensaml Libs are not initialized");
 		if (!initialized) {
@@ -72,6 +51,28 @@ public class ConvenienceUserAccessAuthenticationChImpl extends ConvenienceUserAc
 		}
 		final SimplePpfClient client = ClientFactoryCh.getPpfClient(clientConfiguration);
 		return client.send(aAssertion, feed);
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @throws ClientSendException
+	 *
+	 * @see org.ehealth_connector.security.ch.ppq.PrivacyPolicyQueryModule#invokePrivacyPolicyQuery(org.ehealth_connector.security.saml2.Assertion,
+	 *      org.ehealth_connector.security.ch.ppq.PrivacyPolicyQuery,
+	 *      org.ehealth_connector.security.communication.ch.ppq.config.PpClientConfig)
+	 */
+	@Override
+	public Response invokePrivacyPolicyQuery(SecurityHeaderElement aAssertion,
+			PrivacyPolicyQuery query, PpClientConfig clientConfiguration)
+			throws ClientSendException {
+		if (!initialized) {
+			throw new ClientSendException("Opensaml Libs are not initialized");
+		}
+		final PpqClient client = ClientFactoryCh.getPpqClient(clientConfiguration);
+		return client.send(aAssertion, query);
+
 	}
 
 }

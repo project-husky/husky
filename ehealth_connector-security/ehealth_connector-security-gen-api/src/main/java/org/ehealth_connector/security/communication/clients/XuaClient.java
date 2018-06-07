@@ -28,8 +28,8 @@ import org.ehealth_connector.security.exceptions.ClientSendException;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods for the X User Assertion Provider client.</div>
  * <div class="de">Interface welches die Methoden für den X User Assertion Provider client beschreiben.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface XuaClient {
@@ -38,32 +38,32 @@ public interface XuaClient {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to send an AuthnRequest.</div>
 	 * <div class="de">Methode um einen AuthnRequest zu senden.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aSecurityHeaderElement
 	 * <div class="en">the SecurityHeaderElement to be sent.</div>
 	 * <div class="de">Die SecurityHeaderElement welcher geschickt werden soll.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @param aRequest
 	 * <div class="en">the XUserAssertionRequest to be sent.</div>
 	 * <div class="de">Die XUserAssertionRequest welcher geschickt werden soll.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">a list of XUserAssertionResponses</div>
 	 * <div class="de">Die Liste von XUserAssertionResponse.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @throws ClientSendException
 	 * <div class="en">will be thrown if an error occoures</div>
 	 * <div class="de">wird geworfen wenn ein Fehler auftritt.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	List<XUserAssertionResponse> send(SecurityHeaderElement aSecurityHeaderElement, XUserAssertionRequest aRequest)
-			throws ClientSendException;
+	List<XUserAssertionResponse> send(SecurityHeaderElement aSecurityHeaderElement,
+			XUserAssertionRequest aRequest) throws ClientSendException;
 
 }

@@ -23,8 +23,8 @@ import org.ehealth_connector.security.communication.config.ClientConfigBuilder;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the interface ClientConfigBuilder serving as builder to create config for client with basic authentication.</div>
  * <div class="de">Klasser die das Interface ClienConfiguilder implementiert. Dient dazu eine Clientkonfiguration zu bilden für die Kommunikation mit BasicAuthentication.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class IdpClientBasicAuthConfigBuilderImpl implements ClientConfigBuilder {
@@ -33,6 +33,20 @@ public class IdpClientBasicAuthConfigBuilderImpl implements ClientConfigBuilder 
 
 	public IdpClientBasicAuthConfigBuilderImpl() {
 		config = new IdpClientBasicAuthConfigImpl();
+	}
+
+	public IdpClientBasicAuthConfigBuilderImpl basicAuthPassword(String aBasicAuthPassword) {
+		config.setBasicAuthPassword(aBasicAuthPassword);
+		return this;
+	}
+
+	public IdpClientBasicAuthConfigBuilderImpl basicAuthUsername(String aBasicAuthUsername) {
+		config.setBasicAuthUsername(aBasicAuthUsername);
+		return this;
+	}
+
+	public IdpClientBasicAuthConfigImpl create() {
+		return config;
 	}
 
 	/**
@@ -44,20 +58,6 @@ public class IdpClientBasicAuthConfigBuilderImpl implements ClientConfigBuilder 
 	public IdpClientBasicAuthConfigBuilderImpl url(String aEndpointUrl) {
 		config.setUrl(aEndpointUrl);
 		return this;
-	}
-
-	public IdpClientBasicAuthConfigBuilderImpl basicAuthUsername(String aBasicAuthUsername) {
-		config.setBasicAuthUsername(aBasicAuthUsername);
-		return this;
-	}
-
-	public IdpClientBasicAuthConfigBuilderImpl basicAuthPassword(String aBasicAuthPassword) {
-		config.setBasicAuthPassword(aBasicAuthPassword);
-		return this;
-	}
-
-	public IdpClientBasicAuthConfigImpl create() {
-		return config;
 	}
 
 }

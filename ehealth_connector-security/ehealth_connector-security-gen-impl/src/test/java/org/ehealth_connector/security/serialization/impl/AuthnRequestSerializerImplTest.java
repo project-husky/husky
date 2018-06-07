@@ -57,8 +57,31 @@ public class AuthnRequestSerializerImplTest extends AbstractTestHelper {
 
 	/**
 	 * Test method for
+	 * {@link org.ehealth_connector.security.utilities.impl.SerializerDeserializerImpl#serializeToXml(org.opensaml.xml.XMLObject)}.
+	 *
+	 * @throws SerializeException
+	 */
+	@Test(expected = SerializeException.class)
+	public void testSerializeToXml_InputNull() throws SerializeException {
+		testSerializer.toXmlElement(null);
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.serialization.impl.AuthnRequestSerializerImpl#toXmlByteArray(org.ehealth_connector.security.authentication.AuthnRequest)}.
+	 *
+	 * @throws SerializeException
+	 */
+	@Test
+	public void testToXmlByteArray() throws SerializeException {
+		final byte[] xmlArray = testSerializer.toXmlByteArray(testXmlObject);
+		assertNotNull(xmlArray);
+	}
+
+	/**
+	 * Test method for
 	 * {@link org.ehealth_connector.security.serialization.impl.AuthnRequestSerializerImpl#toXmlElement(org.ehealth_connector.security.authentication.AuthnRequest)}.
-	 * 
+	 *
 	 * @throws SerializeException
 	 */
 	@Test
@@ -77,19 +100,8 @@ public class AuthnRequestSerializerImplTest extends AbstractTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.utilities.impl.SerializerDeserializerImpl#serializeToXml(org.opensaml.xml.XMLObject)}.
-	 * 
-	 * @throws SerializeException
-	 */
-	@Test(expected = SerializeException.class)
-	public void testSerializeToXml_InputNull() throws SerializeException {
-		testSerializer.toXmlElement(null);
-	}
-
-	/**
-	 * Test method for
 	 * {@link org.ehealth_connector.security.serialization.impl.AuthnRequestSerializerImpl#toXmlString(org.ehealth_connector.security.authentication.AuthnRequest)}.
-	 * 
+	 *
 	 * @throws SerializeException
 	 */
 	@Test
@@ -98,18 +110,6 @@ public class AuthnRequestSerializerImplTest extends AbstractTestHelper {
 		System.out.println(xmlString);
 		assertNotNull(xmlString);
 		assertTrue(xmlString.startsWith("<?xml version="));
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.security.serialization.impl.AuthnRequestSerializerImpl#toXmlByteArray(org.ehealth_connector.security.authentication.AuthnRequest)}.
-	 * 
-	 * @throws SerializeException
-	 */
-	@Test
-	public void testToXmlByteArray() throws SerializeException {
-		final byte[] xmlArray = testSerializer.toXmlByteArray(testXmlObject);
-		assertNotNull(xmlArray);
 	}
 
 }

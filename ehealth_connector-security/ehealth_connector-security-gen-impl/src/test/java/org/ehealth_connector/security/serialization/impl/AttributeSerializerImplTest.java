@@ -42,13 +42,26 @@ public class AttributeSerializerImplTest extends AbstractTestHelper {
 		super.setUp();
 		testSerializer = new AttributeSerializerImpl();
 
-		testXmlObject = new AttributeBuilderImpl().name(testAttributeName).value(testAttributeValue).create();
+		testXmlObject = new AttributeBuilderImpl().name(testAttributeName).value(testAttributeValue)
+				.create();
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.serialization.impl.AttributeSerializerImpl#toXmlByteArray(org.ehealth_connector.security.saml2.Attribute)}.
+	 *
+	 * @throws SerializeException
+	 */
+	@Test
+	public void testToXmlByteArray() throws SerializeException {
+		final byte[] xmlArray = testSerializer.toXmlByteArray(testXmlObject);
+		assertNotNull(xmlArray);
 	}
 
 	/**
 	 * Test method for
 	 * {@link org.ehealth_connector.security.serialization.impl.AttributeSerializerImpl#toXmlElement(org.ehealth_connector.security.saml2.Attribute)}.
-	 * 
+	 *
 	 * @throws SerializeException
 	 */
 	@Test
@@ -66,7 +79,7 @@ public class AttributeSerializerImplTest extends AbstractTestHelper {
 	/**
 	 * Test method for
 	 * {@link org.ehealth_connector.security.serialization.impl.AttributeSerializerImpl#toXmlString(org.ehealth_connector.security.saml2.Attribute)}.
-	 * 
+	 *
 	 * @throws SerializeException
 	 */
 	@Test
@@ -74,18 +87,6 @@ public class AttributeSerializerImplTest extends AbstractTestHelper {
 		final String xmlString = testSerializer.toXmlString(testXmlObject);
 		assertNotNull(xmlString);
 		assertTrue(xmlString.startsWith("<?xml version="));
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.security.serialization.impl.AttributeSerializerImpl#toXmlByteArray(org.ehealth_connector.security.saml2.Attribute)}.
-	 * 
-	 * @throws SerializeException
-	 */
-	@Test
-	public void testToXmlByteArray() throws SerializeException {
-		final byte[] xmlArray = testSerializer.toXmlByteArray(testXmlObject);
-		assertNotNull(xmlArray);
 	}
 
 }

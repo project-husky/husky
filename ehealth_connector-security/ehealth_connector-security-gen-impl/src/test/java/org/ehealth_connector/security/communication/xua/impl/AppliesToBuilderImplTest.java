@@ -39,7 +39,8 @@ public class AppliesToBuilderImplTest {
 	public void setUp() throws Exception {
 		builder = new AppliesToBuilderImpl();
 		testAddress = "https://guguesli.org/test/access/";
-		testFromOutsietAppliesTo = new org.opensaml.soap.wspolicy.impl.AppliesToBuilder().buildObject();
+		testFromOutsietAppliesTo = new org.opensaml.soap.wspolicy.impl.AppliesToBuilder()
+				.buildObject();
 		final Address wsaAddress = new AddressBuilder().buildObject();
 		wsaAddress.setValue(testAddress);
 		final EndpointReference enpointRef = new EndpointReferenceBuilder().buildObject();

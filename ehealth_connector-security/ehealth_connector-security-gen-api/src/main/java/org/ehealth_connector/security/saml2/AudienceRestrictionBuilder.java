@@ -21,8 +21,8 @@ package org.ehealth_connector.security.saml2;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the AudienceRestrictionBuilder. </div>
  * <div class="de">Interface beschreibt die Methoden des AudienceRestrictionBuilder.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div
+ * <div class="fr"></div>
+ * <div class="it"></div
  */
 public interface AudienceRestrictionBuilder extends SimpleBuilder<AudienceRestriction> {
 

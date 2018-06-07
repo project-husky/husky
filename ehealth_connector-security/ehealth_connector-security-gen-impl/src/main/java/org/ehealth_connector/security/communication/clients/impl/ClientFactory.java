@@ -30,8 +30,8 @@ import org.ehealth_connector.security.communication.config.impl.IdpClientViaHttp
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the factory to instantiate correct clients according to the configuration.</div>
  * <div class="de">Klasse implementiert die factory um client instanzen entsprechend der Konfiguration zu erstellen.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div> 
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class ClientFactory {
@@ -41,7 +41,8 @@ public class ClientFactory {
 		} else if (clientConfiguration instanceof IdpClientCertificateAuthConfigImpl) {
 			return new IdpClientByCert((IdpClientCertificateAuthConfigImpl) clientConfiguration);
 		} else if (clientConfiguration instanceof IdpClientBasicAuthConfigImpl) {
-			return new IdpSoapBindingClientByBasicAuth((IdpClientBasicAuthConfigImpl) clientConfiguration);
+			return new IdpSoapBindingClientByBasicAuth(
+					(IdpClientBasicAuthConfigImpl) clientConfiguration);
 		} else if (clientConfiguration instanceof IdpClientByBrowserAndProtocolHandlerConfigImpl) {
 			return new IdpClientByBrowserAndProtocolHandler(
 					(IdpClientByBrowserAndProtocolHandlerConfigImpl) clientConfiguration);

@@ -28,8 +28,8 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the unmarshaller for OpenSamlUnknownPolicySetId.</div>
  * <div class="de">Die Klasse implementiert den Unmarshaller für OpenSamlUnknownPolicySetId	.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class UnknownPolicySetIdUnmarshaller extends AbstractXMLObjectUnmarshaller {
@@ -40,7 +40,8 @@ public class UnknownPolicySetIdUnmarshaller extends AbstractXMLObjectUnmarshalle
 	}
 
 	@Override
-	protected void processAttribute(XMLObject xmlObject, Attr attribute) throws UnmarshallingException {
+	protected void processAttribute(XMLObject xmlObject, Attr attribute)
+			throws UnmarshallingException {
 		final OpenSamlUnknownPolicySetId reponse = (OpenSamlUnknownPolicySetId) xmlObject;
 		if ("status".equalsIgnoreCase(attribute.getName())) {
 			reponse.setMessage(attribute.getValue());

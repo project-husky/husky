@@ -21,24 +21,40 @@ package org.ehealth_connector.security.saml2;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of Attribute. </div>
  * <div class="de">Interface beschreibt die Methoden von Attribute.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface Attribute {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the FriendlyName.</div>
+	 * <div class="de">Methode um das FriendlyName zu holen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return
+	 * <div class="en">the FriendlyName as {@link java.lang.String}</div>
+	 * <div class="de">der FriendlyName als {@link java.lang.String}</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	String getFriendlyName();
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the name.</div>
 	 * <div class="de">Methode um den namen zu holen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return
 	 * <div class="en">the name as {@link java.lang.String}</div>
 	 * <div class="de">der Name als {@link java.lang.String}</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	String getName();
@@ -47,46 +63,30 @@ public interface Attribute {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the NameFormat.</div>
 	 * <div class="de">Methode um das NameFormat zu holen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return
 	 * <div class="en">the NameFormat as {@link java.lang.String}</div>
 	 * <div class="de">der NameFormat als {@link java.lang.String}</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	String getNameFormat();
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to get the FriendlyName.</div>
-	 * <div class="de">Methode um das FriendlyName zu holen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 *
-	 * @return
-	 * <div class="en">the FriendlyName as {@link java.lang.String}</div>
-	 * <div class="de">der FriendlyName als {@link java.lang.String}</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * <!-- @formatter:on -->
-	 */
-	String getFriendlyName();
-
-	/**
-	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the value.</div>
 	 * <div class="de">Methode um das value zu holen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return
 	 * <div class="en">the value as {@link java.lang.String}</div>
 	 * <div class="de">der value als {@link java.lang.String}</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	String getValue();

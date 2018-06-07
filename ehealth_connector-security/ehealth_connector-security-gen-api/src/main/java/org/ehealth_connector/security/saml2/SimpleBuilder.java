@@ -21,14 +21,14 @@ package org.ehealth_connector.security.saml2;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the SimpleBuilder.</div>
  * <div class="de">Interface beschreibt die Methoden des SimpleBuilder.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  * @param <T>
  * <div class="en">the type T.</div>
  * <div class="de">der Typ T.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface SimpleBuilder<T> {
@@ -36,14 +36,14 @@ public interface SimpleBuilder<T> {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Creates a concrete instance of T with setted params.</div>
 	 * <div class="de">Erstellt die konkrete Instanz von T mit den gesetzten parametern.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
-	 * @return 
+	 * @return
 	 *  <div class="en">a new instance of T with the params set</div>
 	 *  <div class="de">eine neue Instanz von T mit den gesetzten parametern</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
 	 */
 	T create();

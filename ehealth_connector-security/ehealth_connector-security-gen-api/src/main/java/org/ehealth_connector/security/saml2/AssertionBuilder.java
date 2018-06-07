@@ -21,8 +21,8 @@ package org.ehealth_connector.security.saml2;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the AssertionBuilder. </div>
  * <div class="de">Interface beschreibt die Methoden des AssertionBuilders.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface AssertionBuilder extends BaseBuilder<AssertionBuilder> {
@@ -31,19 +31,19 @@ public interface AssertionBuilder extends BaseBuilder<AssertionBuilder> {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to add an Attribute to the assertion to be build.</div>
 	 * <div class="de">Methode um ein Attribute dem Assertion hinzuzufügen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aAttribute
 	 * <div class="en">the Attribute to be added.</div>
 	 * <div class="de">das Attribute welches hinzugefügt werden soll.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @return
 	 * 	<div class="en">the actual instance of this builder</div>
 	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	AssertionBuilder addAttribute(Attribute aAttribute);
@@ -52,19 +52,19 @@ public interface AssertionBuilder extends BaseBuilder<AssertionBuilder> {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to add a Condition to the assertion to be build.</div>
 	 * <div class="de">Methode um eine Condition dem Assertion hinzuzufügen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aCondition
 	 * <div class="en">the Condition to be added.</div>
 	 * <div class="de">das Condition welches hinzugefügt werden soll.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @return
 	 * 	<div class="en">the actual instance of this builder</div>
 	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	AssertionBuilder addCondition(Condition aCondition);
@@ -73,14 +73,14 @@ public interface AssertionBuilder extends BaseBuilder<AssertionBuilder> {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Creates a concrete instance of Assertion with setted params.</div>
 	 * <div class="de">Erstellt die konkrete instanz des Assertion mit den gesetzten parametern.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
-	 * @return 
+	 * @return
 	 *  <div class="en">a new Assertion instance with the params set</div>
 	 *  <div class="de">eine neue Assertion instanz mit den gesetzten parametern</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
 	 */
 	Assertion create();

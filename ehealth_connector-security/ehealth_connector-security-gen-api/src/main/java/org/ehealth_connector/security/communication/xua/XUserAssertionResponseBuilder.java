@@ -21,8 +21,8 @@ package org.ehealth_connector.security.communication.xua;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the x-user assertion response builder methods.</div>
  * <div class="de">Interface beschreibende methoden des x user  assertion builders.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface XUserAssertionResponseBuilder {
@@ -31,14 +31,14 @@ public interface XUserAssertionResponseBuilder {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Creates a concrete instance of XUserAssertionResponse with setted params.</div>
 	 * <div class="de">Erstellt die konkrete instanz des XUserAssertionResponse mit den gesetzten parametern.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
-	 * @return 
+	 * @return
 	 *  <div class="en">a new XUserAssertionResponse instance with the params set</div>
 	 *  <div class="de">eine neue XUserAssertionResponse instanz mit den gesetzten parametern</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
 	 */
 	XUserAssertionResponse create();

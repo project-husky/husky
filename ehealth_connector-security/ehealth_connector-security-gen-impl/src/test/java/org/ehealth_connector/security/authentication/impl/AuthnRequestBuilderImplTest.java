@@ -65,31 +65,13 @@ public class AuthnRequestBuilderImplTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#id(java.lang.String)}.
-	 */
-	@Test
-	public void testId() {
-		final AuthnRequest request = testBuilder.id(testId).create();
-		assertEquals(testId, request.getId());
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#issueInstant(java.util.Calendar)}.
-	 */
-	@Test
-	public void testIssueInstant() {
-		final AuthnRequest request = testBuilder.issueInstant(testIssueInstant).create();
-		assertEquals(testIssueInstant, request.getIssueInstant());
-	}
-
-	/**
 	 * Test method for
 	 * {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#assertionConsumerServiceIndex(java.lang.Integer)}.
 	 */
 	@Test
 	public void testAssertionConsumerServiceIndex() {
-		final AuthnRequest request = testBuilder.assertionConsumerServiceIndex(testAssertionConsumerServiceIndex)
-				.create();
+		final AuthnRequest request = testBuilder
+				.assertionConsumerServiceIndex(testAssertionConsumerServiceIndex).create();
 		assertEquals(testAssertionConsumerServiceIndex, request.getAssertionConsumerServiceIndex());
 	}
 
@@ -99,7 +81,8 @@ public class AuthnRequestBuilderImplTest {
 	 */
 	@Test
 	public void testAssertionConsumerServiceURL() {
-		final AuthnRequest request = testBuilder.assertionConsumerServiceURL(testAssertionConsumerServiceURL).create();
+		final AuthnRequest request = testBuilder
+				.assertionConsumerServiceURL(testAssertionConsumerServiceURL).create();
 		assertEquals(testAssertionConsumerServiceURL, request.getAssertionConsumerServiceURL());
 	}
 
@@ -109,40 +92,15 @@ public class AuthnRequestBuilderImplTest {
 	 */
 	@Test
 	public void testAttributeConsumingServiceIndex() {
-		final AuthnRequest request = testBuilder.attributeConsumingServiceIndex(testAttributeConsumingServiceIndex)
-				.create();
-		assertEquals(testAttributeConsumingServiceIndex, request.getAttributeConsumingServiceIndex());
+		final AuthnRequest request = testBuilder
+				.attributeConsumingServiceIndex(testAttributeConsumingServiceIndex).create();
+		assertEquals(testAttributeConsumingServiceIndex,
+				request.getAttributeConsumingServiceIndex());
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#destination(java.lang.String)}.
-	 */
-	@Test
-	public void testDestination() {
-		final AuthnRequest request = testBuilder.destination(testDestination).create();
-		assertEquals(testDestination, request.getDestination());
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#providerName(java.lang.String)}.
-	 */
-	@Test
-	public void testProviderName() {
-		final AuthnRequest request = testBuilder.providerName(testProviderName).create();
-		assertEquals(testProviderName, request.getProviderName());
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#protocolBinding(java.lang.String)}.
-	 */
-	@Test
-	public void testProtocolBinding() {
-		final AuthnRequest request = testBuilder.protocolBinding(testProtocolBinding).create();
-		assertEquals(testProtocolBinding, request.getProtocolBinding());
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#consent(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#consent(java.lang.String)}.
 	 */
 	@Test
 	public void testConsent() {
@@ -151,7 +109,18 @@ public class AuthnRequestBuilderImplTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#forceAuthn(java.lang.Boolean)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#destination(java.lang.String)}.
+	 */
+	@Test
+	public void testDestination() {
+		final AuthnRequest request = testBuilder.destination(testDestination).create();
+		assertEquals(testDestination, request.getDestination());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#forceAuthn(java.lang.Boolean)}.
 	 */
 	@Test
 	public void testForceAuthn() {
@@ -160,7 +129,35 @@ public class AuthnRequestBuilderImplTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#issuer(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#id(java.lang.String)}.
+	 */
+	@Test
+	public void testId() {
+		final AuthnRequest request = testBuilder.id(testId).create();
+		assertEquals(testId, request.getId());
+	}
+
+	@Test
+	public void testIdIssueInstant() {
+		final AuthnRequest request = testBuilder.id(testId).issueInstant(testIssueInstant).create();
+		assertEquals(testId, request.getId());
+		assertEquals(testIssueInstant, request.getIssueInstant());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#issueInstant(java.util.Calendar)}.
+	 */
+	@Test
+	public void testIssueInstant() {
+		final AuthnRequest request = testBuilder.issueInstant(testIssueInstant).create();
+		assertEquals(testIssueInstant, request.getIssueInstant());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#issuer(java.lang.String)}.
 	 */
 	@Test
 	public void testIssuer() {
@@ -174,31 +171,48 @@ public class AuthnRequestBuilderImplTest {
 	 */
 	@Test
 	public void testNameIdPolicyAllowCreate() {
-		final AuthnRequest request = testBuilder.nameIdPolicyAllowCreate(testNameIdPolicyAllowCreate).create();
+		final AuthnRequest request = testBuilder
+				.nameIdPolicyAllowCreate(testNameIdPolicyAllowCreate).create();
 		assertEquals(testNameIdPolicyAllowCreate, request.getNameIdPolicyAllowCreate());
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#nameIdPolicyFormat(java.lang.String)}.
-	 */
-	@Test
-	public void testNameIdPolicyFormat() {
-		final AuthnRequest request = testBuilder.nameIdPolicyFormat(testNameIdPolicyFormat).create();
-		assertEquals(testNameIdPolicyFormat, request.getNameIdPolicyFormat());
-	}
-
-	@Test
-	public void testIdIssueInstant() {
-		final AuthnRequest request = testBuilder.id(testId).issueInstant(testIssueInstant).create();
-		assertEquals(testId, request.getId());
-		assertEquals(testIssueInstant, request.getIssueInstant());
 	}
 
 	@Test
 	public void testNameIdPolicyAllowCreateFormat() {
-		final AuthnRequest request = testBuilder.nameIdPolicyAllowCreate(testNameIdPolicyAllowCreate)
+		final AuthnRequest request = testBuilder
+				.nameIdPolicyAllowCreate(testNameIdPolicyAllowCreate)
 				.nameIdPolicyFormat(testNameIdPolicyFormat).create();
 		assertEquals(testNameIdPolicyAllowCreate, request.getNameIdPolicyAllowCreate());
 		assertEquals(testNameIdPolicyFormat, request.getNameIdPolicyFormat());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#nameIdPolicyFormat(java.lang.String)}.
+	 */
+	@Test
+	public void testNameIdPolicyFormat() {
+		final AuthnRequest request = testBuilder.nameIdPolicyFormat(testNameIdPolicyFormat)
+				.create();
+		assertEquals(testNameIdPolicyFormat, request.getNameIdPolicyFormat());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#protocolBinding(java.lang.String)}.
+	 */
+	@Test
+	public void testProtocolBinding() {
+		final AuthnRequest request = testBuilder.protocolBinding(testProtocolBinding).create();
+		assertEquals(testProtocolBinding, request.getProtocolBinding());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#providerName(java.lang.String)}.
+	 */
+	@Test
+	public void testProviderName() {
+		final AuthnRequest request = testBuilder.providerName(testProviderName).create();
+		assertEquals(testProviderName, request.getProviderName());
 	}
 }

@@ -25,8 +25,8 @@ import org.ehealth_connector.security.saml2.EncryptedAssertionBuilder;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for EncryptedAssertion building.</div>
  * <div class="de">Die Klasse implementiert das entsprechende interface um EncryptedAssertion bilden zu k&ooml;nnen.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class EncryptedAssertionBuilderImpl implements EncryptedAssertionBuilder,
@@ -35,11 +35,12 @@ public class EncryptedAssertionBuilderImpl implements EncryptedAssertionBuilder,
 	private org.opensaml.saml.saml2.core.EncryptedAssertion encryptedAssertion;
 
 	public EncryptedAssertionBuilderImpl() {
-		encryptedAssertion = new org.opensaml.saml.saml2.core.impl.EncryptedAssertionBuilder().buildObject();
+		encryptedAssertion = new org.opensaml.saml.saml2.core.impl.EncryptedAssertionBuilder()
+				.buildObject();
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.saml2.SimpleBuilder#create()
@@ -50,13 +51,14 @@ public class EncryptedAssertionBuilderImpl implements EncryptedAssertionBuilder,
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.core.SecurityObjectBuilder#create(java.lang.Object)
 	 */
 	@Override
-	public EncryptedAssertion create(org.opensaml.saml.saml2.core.EncryptedAssertion aInternalObject) {
+	public EncryptedAssertion create(
+			org.opensaml.saml.saml2.core.EncryptedAssertion aInternalObject) {
 		return new EncryptedAssertionImpl(aInternalObject);
 	}
 

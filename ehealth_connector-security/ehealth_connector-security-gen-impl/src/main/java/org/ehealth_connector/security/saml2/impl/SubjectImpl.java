@@ -28,8 +28,8 @@ import org.ehealth_connector.security.saml2.SubjectConfirmation;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Subject</div>
  * <div class="de">Implementations Klasse von Subject</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class SubjectImpl implements Subject, SecurityObject<org.opensaml.saml.saml2.core.Subject> {
@@ -74,7 +74,8 @@ public class SubjectImpl implements Subject, SecurityObject<org.opensaml.saml.sa
 	@Override
 	public List<SubjectConfirmation> getSubjectConfirmations() {
 		final List<SubjectConfirmation> retVal = new ArrayList<>();
-		final List<org.opensaml.saml.saml2.core.SubjectConfirmation> innerConfirms = subject.getSubjectConfirmations();
+		final List<org.opensaml.saml.saml2.core.SubjectConfirmation> innerConfirms = subject
+				.getSubjectConfirmations();
 		innerConfirms.forEach(c -> {
 			retVal.add(new SubjectConfirmationBuilderImpl().create(c));
 		});

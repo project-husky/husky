@@ -26,31 +26,33 @@ import org.opensaml.core.xml.AbstractXMLObjectBuilder;
  * <!-- @formatter:off -->
  * <div class="en">Builder class for OpenSamlUnknownPolicySetId.</div>
  * <div class="de">Builder Klasse für OpenSamlUnknownPolicySetId.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class UnknownPolicySetIdBuilderImpl extends AbstractXMLObjectBuilder<OpenSamlUnknownPolicySetId>
-		implements UnknownPolicySetIdBuilder {
+public class UnknownPolicySetIdBuilderImpl extends
+		AbstractXMLObjectBuilder<OpenSamlUnknownPolicySetId> implements UnknownPolicySetIdBuilder {
 
 	private String message;
+
+	public OpenSamlUnknownPolicySetId buildObject() {
+		return buildObject(UnknownPolicySetId.DEFAULT_NS_URI,
+				UnknownPolicySetId.DEFAULT_ELEMENT_LOCAL_NAME, UnknownPolicySetId.DEFAULT_PREFIX);
+	}
+
+	@Override
+	public OpenSamlUnknownPolicySetId buildObject(String namespaceURI, String localName,
+			String namespacePrefix) {
+		final OpenSamlUnknownPolicySetId abr = new UnknownPolicySetIdImpl(namespaceURI, localName,
+				namespacePrefix);
+		abr.setMessage(message);
+		return abr;
+	}
 
 	@Override
 	public UnknownPolicySetIdBuilderImpl message(String aMessage) {
 		message = aMessage;
 		return this;
-	}
-
-	public OpenSamlUnknownPolicySetId buildObject() {
-		return buildObject(UnknownPolicySetId.DEFAULT_NS_URI, UnknownPolicySetId.DEFAULT_ELEMENT_LOCAL_NAME,
-				UnknownPolicySetId.DEFAULT_PREFIX);
-	}
-
-	@Override
-	public OpenSamlUnknownPolicySetId buildObject(String namespaceURI, String localName, String namespacePrefix) {
-		final OpenSamlUnknownPolicySetId abr = new UnknownPolicySetIdImpl(namespaceURI, localName, namespacePrefix);
-		abr.setMessage(message);
-		return abr;
 	}
 
 }

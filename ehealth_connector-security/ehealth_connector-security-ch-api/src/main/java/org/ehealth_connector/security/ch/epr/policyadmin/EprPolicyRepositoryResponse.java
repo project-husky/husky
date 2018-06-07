@@ -23,8 +23,8 @@ import javax.xml.namespace.QName;
  * <!-- @formatter:off -->
  * <div class="en">Describing the methods of the EprPolicyRepositoryResponse Interface</div>
  * <div class="de">Beschreibung der Methoden des EprPolicyRepositoryResponse Interfaces</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface EprPolicyRepositoryResponse extends BasePolicyAdministration {
@@ -33,26 +33,28 @@ public interface EprPolicyRepositoryResponse extends BasePolicyAdministration {
 	public static final String DEFAULT_ELEMENT_LOCAL_NAME = "EprPolicyRepositoryResponse";
 
 	/** Default element name. */
-	public static final QName ELEMENT_NAME = new QName(DEFAULT_NS_URI, DEFAULT_ELEMENT_LOCAL_NAME, DEFAULT_PREFIX);
+	public static final QName ELEMENT_NAME = new QName(DEFAULT_NS_URI, DEFAULT_ELEMENT_LOCAL_NAME,
+			DEFAULT_PREFIX);
 
 	/** Local name of the XSI type. */
 	public static final String TYPE_LOCAL_NAME = "EprPolicyRepositoryResponse";
 
 	/** QName of the XSI type. */
-	public static final QName TYPE_NAME = new QName(DEFAULT_NS_URI, TYPE_LOCAL_NAME, DEFAULT_PREFIX);
+	public static final QName TYPE_NAME = new QName(DEFAULT_NS_URI, TYPE_LOCAL_NAME,
+			DEFAULT_PREFIX);
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the status out of the response.</div>
 	 * <div class="de">Methode um den Status aus dem Response zu lesen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return
 	 * <div class="en">The status of the response.</div>
 	 * <div class="de">Der Status des Respons.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	String getStatus();

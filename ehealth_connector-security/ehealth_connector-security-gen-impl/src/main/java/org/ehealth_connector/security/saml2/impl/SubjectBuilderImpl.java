@@ -30,8 +30,8 @@ import org.opensaml.saml.saml2.core.impl.NameIDBuilder;
  * @since Feb 22, 2018 9:26:34 AM
  *
  */
-public class SubjectBuilderImpl
-		implements SubjectBuilder, SecurityObjectBuilder<org.opensaml.saml.saml2.core.Subject, Subject> {
+public class SubjectBuilderImpl implements SubjectBuilder,
+		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Subject, Subject> {
 
 	private org.opensaml.saml.saml2.core.Subject subject;
 	private NameID nameID;
@@ -41,6 +41,43 @@ public class SubjectBuilderImpl
 
 		nameID = new NameIDBuilder().buildObject();
 		subject.setNameID(nameID);
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.SubjectBuilder#addSubjectConfirmations(org.ehealth_connector.security.saml2.SubjectConfirmation)
+	 */
+	@Override
+	public SubjectBuilder addSubjectConfirmations(SubjectConfirmation aSubjectConfirmation) {
+		if (aSubjectConfirmation != null) {
+			final List<org.opensaml.saml.saml2.core.SubjectConfirmation> subjectConfirms = subject
+					.getSubjectConfirmations();
+			subjectConfirms
+					.add(((SubjectConfirmationImpl) aSubjectConfirmation).getWrappedObject());
+		}
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.SubjectBuilder#create()
+	 */
+	@Override
+	public Subject create() {
+		return new SubjectImpl(subject);
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.core.SecurityObjectBuilder#create(java.lang.Object)
+	 */
+	@Override
+	public Subject create(org.opensaml.saml.saml2.core.Subject aInternalObject) {
+		return new SubjectImpl(aInternalObject);
 	}
 
 	/**
@@ -84,42 +121,6 @@ public class SubjectBuilderImpl
 			});
 		}
 		return this;
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.saml2.SubjectBuilder#addSubjectConfirmations(org.ehealth_connector.security.saml2.SubjectConfirmation)
-	 */
-	@Override
-	public SubjectBuilder addSubjectConfirmations(SubjectConfirmation aSubjectConfirmation) {
-		if (aSubjectConfirmation != null) {
-			final List<org.opensaml.saml.saml2.core.SubjectConfirmation> subjectConfirms = subject
-					.getSubjectConfirmations();
-			subjectConfirms.add(((SubjectConfirmationImpl) aSubjectConfirmation).getWrappedObject());
-		}
-		return this;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.saml2.SubjectBuilder#create()
-	 */
-	@Override
-	public Subject create() {
-		return new SubjectImpl(subject);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.core.SecurityObjectBuilder#create(java.lang.Object)
-	 */
-	@Override
-	public Subject create(org.opensaml.saml.saml2.core.Subject aInternalObject) {
-		return new SubjectImpl(aInternalObject);
 	}
 
 }

@@ -30,21 +30,13 @@ public abstract class InitializerTestHelper {
 		InitializationService.initialize();
 	}
 
-	public Element loadXmlDokument(String aPath) throws SAXException, IOException, ParserConfigurationException {
+	public Element loadXmlDokument(String aPath)
+			throws SAXException, IOException, ParserConfigurationException {
 		final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		dbf.setNamespaceAware(true);
-		final Document doc = dbf.newDocumentBuilder().parse(this.getClass().getResourceAsStream(aPath));
+		final Document doc = dbf.newDocumentBuilder()
+				.parse(this.getClass().getResourceAsStream(aPath));
 		return doc.getDocumentElement();
-	}
-
-	public void logXmlObject(XMLObject aXmlObject) {
-		try {
-			final OpenSaml2Serializer openSamlSerializer = new OpenSaml2SerializerImpl();
-			final String xmlString = openSamlSerializer.serializeToString(aXmlObject);
-			LoggerFactory.getLogger(getClass()).info("\n" + xmlString);
-		} catch (final SerializeException e) {
-			LoggerFactory.getLogger(getClass()).error("Error", e);
-		}
 	}
 
 	public void logXmlObject(Element element) {
@@ -58,6 +50,16 @@ public abstract class InitializerTestHelper {
 			tr.transform(new DOMSource(element), new StreamResult(bas));
 			LoggerFactory.getLogger(getClass()).info("\n" + bas.toString());
 		} catch (final TransformerException e) {
+			LoggerFactory.getLogger(getClass()).error("Error", e);
+		}
+	}
+
+	public void logXmlObject(XMLObject aXmlObject) {
+		try {
+			final OpenSaml2Serializer openSamlSerializer = new OpenSaml2SerializerImpl();
+			final String xmlString = openSamlSerializer.serializeToString(aXmlObject);
+			LoggerFactory.getLogger(getClass()).info("\n" + xmlString);
+		} catch (final SerializeException e) {
 			LoggerFactory.getLogger(getClass()).error("Error", e);
 		}
 	}

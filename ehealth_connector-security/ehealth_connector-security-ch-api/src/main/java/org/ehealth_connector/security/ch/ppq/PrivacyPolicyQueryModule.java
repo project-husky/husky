@@ -26,85 +26,85 @@ import org.ehealth_connector.security.saml2.Response;
  * <!-- @formatter:off -->
  * <div class="en">Describing the methods of the CH:PPQ communication Interface</div>
  * <div class="de">Beschreibung der Methoden des CH:PPQ kommunikations Interface</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface PrivacyPolicyQueryModule {
 
 	/**
-	 * 
-	 * <!-- @formatter:off -->
-	 * <div class="en">Method to invoke the PrivacyPolicyQuery.</div>
-	 * <div class="de">Mkethode um die PrivacyPolicyQuery auszuführen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 *
-	 * @param aAssertion
-	 * <div class="en">the Assertion to be added to the soap security header.</div>
-	 * <div class="de">Die Assertion die dem SOAP Security Header hinzugefügt werden soll.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * @param query
-	 * <div class="en">the PrivacyPolicyQuery to be sent.</div>
-	 * <div class="de">Die PrivacyPolicyQuery die gesendet werden soll.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * @param clientConfiguration
-	 * <div class="en">the PpClientConfig to configure the client.</div>
-	 * <div class="de">Die PrivacyPolicyQuery  um den client zu konfigurieren.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * @return
-	 * <div class="en">the PrivacyPolicyQueryResponse be received.</div>
-	 * <div class="de">Die PrivacyPolicyQueryResponse der empfangen wird.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * @throws ClientSendException 
-	 * <div class="en">will be thrown an error occures.</div>
-	 * <div class="de">wird geworfen wenn ein Fehler auftritt.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * <!-- @formatter:on -->
-	 */
-	Response invokePPQ(SecurityHeaderElement aAssertion, PrivacyPolicyQuery query, PpClientConfig clientConfiguration)
-			throws ClientSendException;
-
-	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to invoke the PrivacyPolicyFeed.</div>
 	 * <div class="de">Mkethode um die PrivacyPolicyFeed auszuführen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aAssertion
 	 * <div class="en">the Assertion to be added to the soap security header.</div>
 	 * <div class="de">Die Assertion die dem SOAP Security Header hinzugefügt werden soll.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @param feed
 	 * <div class="en">the PrivacyPolicyFeed to be sent.</div>
 	 * <div class="de">Die PrivacyPolicyFeed die gesendet werden soll.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @param clientConfiguration
 	 * <div class="en">the PpClientConfig to configure the client.</div>
 	 * <div class="de">Die PrivacyPolicyQuery  um den client zu konfigurieren.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the PrivacyPolicyFeedResponse be received.</div>
 	 * <div class="de">Die PrivacyPolicyFeedResponse der empfangen wird.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * @throws ClientSendException 
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * @throws ClientSendException
 	 * <div class="en">will be thrown an error occures.</div>
 	 * <div class="de">wird geworfen wenn ein Fehler auftritt.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	PrivacyPolicyFeedResponse invokePPF(SecurityHeaderElement aAssertion, PrivacyPolicyFeed feed,
+	PrivacyPolicyFeedResponse invokePrivacyPolicyFeed(SecurityHeaderElement aAssertion,
+			PrivacyPolicyFeed feed, PpClientConfig clientConfiguration) throws ClientSendException;
+
+	/**
+	 *
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to invoke the PrivacyPolicyQuery.</div>
+	 * <div class="de">Mkethode um die PrivacyPolicyQuery auszuführen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param aAssertion
+	 * <div class="en">the Assertion to be added to the soap security header.</div>
+	 * <div class="de">Die Assertion die dem SOAP Security Header hinzugefügt werden soll.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * @param query
+	 * <div class="en">the PrivacyPolicyQuery to be sent.</div>
+	 * <div class="de">Die PrivacyPolicyQuery die gesendet werden soll.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * @param clientConfiguration
+	 * <div class="en">the PpClientConfig to configure the client.</div>
+	 * <div class="de">Die PrivacyPolicyQuery  um den client zu konfigurieren.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * @return
+	 * <div class="en">the PrivacyPolicyQueryResponse be received.</div>
+	 * <div class="de">Die PrivacyPolicyQueryResponse der empfangen wird.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * @throws ClientSendException
+	 * <div class="en">will be thrown an error occures.</div>
+	 * <div class="de">wird geworfen wenn ein Fehler auftritt.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	Response invokePrivacyPolicyQuery(SecurityHeaderElement aAssertion, PrivacyPolicyQuery query,
 			PpClientConfig clientConfiguration) throws ClientSendException;
 
 }

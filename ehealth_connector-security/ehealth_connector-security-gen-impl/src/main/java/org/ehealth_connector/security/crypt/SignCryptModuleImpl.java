@@ -48,8 +48,8 @@ import org.slf4j.LoggerFactory;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface SignCryptModule.</div>
  * <div class="de">Die Klasse implementiert das entsprechende interface SignCryptModule.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class SignCryptModuleImpl implements SignCryptModule {
@@ -65,14 +65,15 @@ public class SignCryptModuleImpl implements SignCryptModule {
 	private String trustStorePassword;
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.crypt.SignCryptModule#setPki(java.security.KeyStore, java.lang.String, java.security.KeyStore,
-	 *      java.lang.String)
+	 * @see org.ehealth_connector.security.crypt.SignCryptModule#setPki(java.security.KeyStore,
+	 *      java.lang.String, java.security.KeyStore, java.lang.String)
 	 */
 	@Override
-	public void setPki(KeyStore aKeyStore, String aKeyStorePassword, KeyStore aTrustStore, String aTrustStorePassword) {
+	public void setPki(KeyStore aKeyStore, String aKeyStorePassword, KeyStore aTrustStore,
+			String aTrustStorePassword) {
 		keyStore = aKeyStore;
 		keyStorePassword = aKeyStorePassword;
 		trustStore = aTrustStore;
@@ -80,28 +81,32 @@ public class SignCryptModuleImpl implements SignCryptModule {
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.crypt.SignCryptModule#signAuthnRequest(org.ehealth_connector.security.authentication.AuthnRequest,
 	 *      java.lang.String)
 	 */
 	@Override
-	public void signAuthnRequest(AuthnRequest aAuthnRequest, String aSigningAlias) throws SigningException {
+	public void signAuthnRequest(AuthnRequest aAuthnRequest, String aSigningAlias)
+			throws SigningException {
 		try {
 			final AuthnRequestImpl concrete = (AuthnRequestImpl) aAuthnRequest;
 
-			final Signature signature = new SignatureBuilder().buildObject(Signature.DEFAULT_ELEMENT_NAME);
+			final Signature signature = new SignatureBuilder()
+					.buildObject(Signature.DEFAULT_ELEMENT_NAME);
 
 			final BasicX509Credential signingCredential = getSigningCredential(aSigningAlias);
 
 			signature.setSigningCredential(signingCredential);
 			signature.setSignatureAlgorithm(SignatureConstants.ALGO_ID_SIGNATURE_RSA_SHA512);
-			signature.setCanonicalizationAlgorithm(SignatureConstants.ALGO_ID_C14N_EXCL_OMIT_COMMENTS);
+			signature.setCanonicalizationAlgorithm(
+					SignatureConstants.ALGO_ID_C14N_EXCL_OMIT_COMMENTS);
 
 			final X509KeyInfoGeneratorFactory keyInfoGeneratorFactory = new X509KeyInfoGeneratorFactory();
 			keyInfoGeneratorFactory.setEmitEntityCertificate(true);
-			keyInfoGeneratorFactory.setX509DigestAlgorithmURI(SignatureConstants.ALGO_ID_DIGEST_SHA1);
+			keyInfoGeneratorFactory
+					.setX509DigestAlgorithmURI(SignatureConstants.ALGO_ID_DIGEST_SHA1);
 
 			if (keyInfoGeneratorFactory.handles(signingCredential)) {
 				final KeyInfoGenerator keyInfoGenerator = keyInfoGeneratorFactory.newInstance();
@@ -111,7 +116,8 @@ public class SignCryptModuleImpl implements SignCryptModule {
 
 				concrete.getWrappedObject().setSignature(signature);
 
-				XMLObjectProviderRegistrySupport.getMarshallerFactory().getMarshaller(concrete.getWrappedObject())
+				XMLObjectProviderRegistrySupport.getMarshallerFactory()
+						.getMarshaller(concrete.getWrappedObject())
 						.marshall(concrete.getWrappedObject());
 
 				Signer.signObject(signature);
@@ -123,34 +129,34 @@ public class SignCryptModuleImpl implements SignCryptModule {
 	}
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the desired BasicX509Credential for signing by alias.</div>
 	 * <div class="de">Method um das BasicX509Credential referenziert durch das alias zu bekommen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aSigningAlias
 	 * <div class="en">the alias</div>
 	 * <div class="de">Das alias</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the BasicX509Credential with the corresponding certificate and key</div>
 	 * <div class="de">Das BasicX509Credential mit dem entspechenden Zertifikat und Key</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @throws SigningException
 	 * <div class="en">will be thrown when an error occures loading the BasicX509Credential from keystore.</div>
 	 *  <div class="de">wird geworfen wenn eine fehler beim laden des BasicX509Credential aus dem keystore auftritt</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	private BasicX509Credential getSigningCredential(String aSigningAlias) throws SigningException {
 		try {
-			final PrivateKeyEntry privateKeyEntry = (PrivateKeyEntry) keyStore.getEntry(aSigningAlias,
-					new PasswordProtection(keyStorePassword.toCharArray()));
+			final PrivateKeyEntry privateKeyEntry = (PrivateKeyEntry) keyStore.getEntry(
+					aSigningAlias, new PasswordProtection(keyStorePassword.toCharArray()));
 			final PrivateKey privateKey = privateKeyEntry.getPrivateKey();
 			final X509Certificate certificate = (X509Certificate) privateKeyEntry.getCertificate();
 

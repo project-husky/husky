@@ -26,12 +26,23 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface Deserializer<Assertion> .</div>
  * <div class="de">Die Klasse implementiert das entsprechende interface Deserializer<Assertion> .</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class AssertionDeserializerImpl
 		extends AbstractDeserializerImpl<org.opensaml.saml.saml2.core.Assertion, Assertion> {
+
+	@Override
+	public Assertion fromXmlByteArray(byte[] aByteArray) throws DeserializeException {
+		try {
+			final org.opensaml.saml.saml2.core.Assertion request = getOpenSamlDeserializer()
+					.deserializeFromByteArray(aByteArray);
+			return new AssertionBuilderImpl().create(request);
+		} catch (final Exception e) {
+			throw new DeserializeException(e);
+		}
+	}
 
 	@Override
 	public Assertion fromXmlElement(Element aXmlElement) throws DeserializeException {
@@ -49,17 +60,6 @@ public class AssertionDeserializerImpl
 		try {
 			final org.opensaml.saml.saml2.core.Assertion request = getOpenSamlDeserializer()
 					.deserializeFromString(aXmlString);
-			return new AssertionBuilderImpl().create(request);
-		} catch (final Exception e) {
-			throw new DeserializeException(e);
-		}
-	}
-
-	@Override
-	public Assertion fromXmlByteArray(byte[] aByteArray) throws DeserializeException {
-		try {
-			final org.opensaml.saml.saml2.core.Assertion request = getOpenSamlDeserializer()
-					.deserializeFromByteArray(aByteArray);
 			return new AssertionBuilderImpl().create(request);
 		} catch (final Exception e) {
 			throw new DeserializeException(e);

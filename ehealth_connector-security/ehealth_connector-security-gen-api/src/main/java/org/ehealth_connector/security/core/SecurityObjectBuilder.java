@@ -21,9 +21,9 @@ package org.ehealth_connector.security.core;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the generic methods for SecurityObjectBuilder using the templated type T and U.</div>
  * <div class="de">Interface beschreibt die Methoden des SecurityObjectBuilder unter der Verwendung der templated Typen T und T.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
- * 
+ * <div class="fr"></div>
+ * <div class="it"></div>
+ *
  * @param <T>
  * @param <U>
  * <!-- @formatter:on -->
@@ -31,23 +31,23 @@ package org.ehealth_connector.security.core;
 public interface SecurityObjectBuilder<T, U> {
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to create an instance of type T.</div>
 	 * <div class="de">Methode um eine Instanc des Typs T zu erstellen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
-	 * @param aInternalObject 
+	 * @param aInternalObject
 	 * <div class="en">the internal wrapped object of type T</div>
 	 * <div class="de">das innere gewrappte Object vom Typ T</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @return the Object ot the type U
 	 * <div class="en">the instance of type U</div>
 	 * <div class="de">die erstellte Instanz vom Typ U</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *  <!-- @formatter:on -->
 	 */
 	U create(T aInternalObject);

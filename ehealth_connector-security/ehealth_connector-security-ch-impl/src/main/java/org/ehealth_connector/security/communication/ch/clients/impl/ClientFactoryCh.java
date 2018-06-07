@@ -25,17 +25,17 @@ import org.ehealth_connector.security.communication.clients.impl.ClientFactory;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the factory to instantiate correct clients according to the configuration for CH implementations.</div>
  * <div class="de">Klasse implementiert die factory um client instanzen entsprechend der Konfiguration zu erstellen für CH spezifische clients.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div> 
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class ClientFactoryCh extends ClientFactory {
 
-	public static PpqClient getPpqClient(PpClientConfig clientConfiguration) {
-		return new SimplePpqClient(clientConfiguration);
-	}
-
 	public static SimplePpfClient getPpfClient(PpClientConfig clientConfiguration) {
 		return new SimplePpfClient(clientConfiguration);
+	}
+
+	public static PpqClient getPpqClient(PpClientConfig clientConfiguration) {
+		return new SimplePpqClient(clientConfiguration);
 	}
 }

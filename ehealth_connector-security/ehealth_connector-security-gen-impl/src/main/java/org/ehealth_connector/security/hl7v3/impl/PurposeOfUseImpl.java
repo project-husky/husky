@@ -27,8 +27,8 @@ import org.opensaml.core.xml.XMLObject;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Interface OpenSamlPurposeOfUse.</div>
  * <div class="de">Implementations Klasse des Interfaces OpenSamlPurposeOfUse.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class PurposeOfUseImpl extends AbstractXMLObject implements OpenSamlPurposeOfUse {
@@ -39,7 +39,8 @@ public class PurposeOfUseImpl extends AbstractXMLObject implements OpenSamlPurpo
 	protected String codeSystemVersion;
 	protected String displayName;
 
-	protected PurposeOfUseImpl(String namespaceURI, String elementLocalName, String namespacePrefix) {
+	protected PurposeOfUseImpl(String namespaceURI, String elementLocalName,
+			String namespacePrefix) {
 		super(namespaceURI, elementLocalName, namespacePrefix);
 	}
 
@@ -49,18 +50,8 @@ public class PurposeOfUseImpl extends AbstractXMLObject implements OpenSamlPurpo
 	}
 
 	@Override
-	public void setCode(String value) {
-		code = value;
-	}
-
-	@Override
 	public String getCodeSystem() {
 		return codeSystem;
-	}
-
-	@Override
-	public void setCodeSystem(String value) {
-		codeSystem = value;
 	}
 
 	@Override
@@ -69,18 +60,8 @@ public class PurposeOfUseImpl extends AbstractXMLObject implements OpenSamlPurpo
 	}
 
 	@Override
-	public void setCodeSystemName(String value) {
-		codeSystemName = value;
-	}
-
-	@Override
 	public String getCodeSystemVersion() {
 		return codeSystemVersion;
-	}
-
-	@Override
-	public void setCodeSystemVersion(String value) {
-		codeSystemVersion = value;
 	}
 
 	@Override
@@ -89,13 +70,33 @@ public class PurposeOfUseImpl extends AbstractXMLObject implements OpenSamlPurpo
 	}
 
 	@Override
-	public void setDisplayName(String value) {
-		displayName = value;
+	public List<XMLObject> getOrderedChildren() {
+		return null;
 	}
 
 	@Override
-	public List<XMLObject> getOrderedChildren() {
-		return null;
+	public void setCode(String value) {
+		code = value;
+	}
+
+	@Override
+	public void setCodeSystem(String value) {
+		codeSystem = value;
+	}
+
+	@Override
+	public void setCodeSystemName(String value) {
+		codeSystemName = value;
+	}
+
+	@Override
+	public void setCodeSystemVersion(String value) {
+		codeSystemVersion = value;
+	}
+
+	@Override
+	public void setDisplayName(String value) {
+		displayName = value;
 	}
 
 }

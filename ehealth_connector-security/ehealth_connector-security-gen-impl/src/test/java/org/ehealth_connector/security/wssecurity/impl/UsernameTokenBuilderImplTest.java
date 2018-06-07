@@ -49,27 +49,19 @@ public class UsernameTokenBuilderImplTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.wssecurity.impl.UsernameTokenBuilderImpl#username(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.wssecurity.impl.UsernameTokenBuilderImpl#create(org.opensaml.soap.wssecurity.UsernameToken)}.
 	 */
 	@Test
-	public void testUsername() {
-		final UsernameToken ref = builder.username(testUsername).create();
+	public void testCreateUsernameToken() {
+		final UsernameToken ref = builder.create(testInternalObject);
 		assertNotNull(ref);
-		assertEquals(testUsername, ref.getUsername());
+		assertEquals(testInternalObject, ((UsernameTokenImpl) ref).getWrappedObject());
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.wssecurity.impl.UsernameTokenBuilderImpl#password(java.lang.String)}.
-	 */
-	@Test
-	public void testPassword() {
-		final UsernameToken ref = builder.password(testPassword).create();
-		assertNotNull(ref);
-		assertEquals(testPassword, ref.getPassword());
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.wssecurity.impl.UsernameTokenBuilderImpl#nonce(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.wssecurity.impl.UsernameTokenBuilderImpl#nonce(java.lang.String)}.
 	 */
 	@Test
 	public void testNonce() {
@@ -80,13 +72,24 @@ public class UsernameTokenBuilderImplTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.wssecurity.impl.UsernameTokenBuilderImpl#create(org.opensaml.soap.wssecurity.UsernameToken)}.
+	 * {@link org.ehealth_connector.security.wssecurity.impl.UsernameTokenBuilderImpl#password(java.lang.String)}.
 	 */
 	@Test
-	public void testCreateUsernameToken() {
-		final UsernameToken ref = builder.create(testInternalObject);
+	public void testPassword() {
+		final UsernameToken ref = builder.password(testPassword).create();
 		assertNotNull(ref);
-		assertEquals(testInternalObject, ((UsernameTokenImpl) ref).getWrappedObject());
+		assertEquals(testPassword, ref.getPassword());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.wssecurity.impl.UsernameTokenBuilderImpl#username(java.lang.String)}.
+	 */
+	@Test
+	public void testUsername() {
+		final UsernameToken ref = builder.username(testUsername).create();
+		assertNotNull(ref);
+		assertEquals(testUsername, ref.getUsername());
 	}
 
 }

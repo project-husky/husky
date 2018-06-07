@@ -24,36 +24,40 @@ import org.opensaml.core.xml.AbstractXMLObjectBuilder;
  * <!-- @formatter:off -->
  * <div class="en">Class extending the abstract class AbstractXMLObjectBuilder with type OpenSamlInstanceIdentifier.</div>
  * <div class="de">Die Klasse erweitert die abstrakte Klasse AbstractXMLObjectBuilder mit typ OpenSamlInstanceIdentifier.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class InstanceIdentifierBuilder extends AbstractXMLObjectBuilder<OpenSamlInstanceIdentifier> {
+public class InstanceIdentifierBuilder
+		extends AbstractXMLObjectBuilder<OpenSamlInstanceIdentifier> {
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">method to create an instance of OpenSamlInstanceIdentifier.</div>
 	 * <div class="de">Methode um eine Instanz von OpenSamlInstanceIdentifier zu erstellen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @return
 	 * <!-- @formatter:on -->
 	 */
 	public OpenSamlInstanceIdentifier buildObject() {
 		return buildObject(OpenSamlInstanceIdentifier.DEFAULT_NS_URI,
-				OpenSamlInstanceIdentifier.DEFAULT_ELEMENT_LOCAL_NAME, OpenSamlInstanceIdentifier.DEFAULT_PREFIX);
+				OpenSamlInstanceIdentifier.DEFAULT_ELEMENT_LOCAL_NAME,
+				OpenSamlInstanceIdentifier.DEFAULT_PREFIX);
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.opensaml.core.xml.AbstractXMLObjectBuilder#buildObject(java.lang.String, java.lang.String, java.lang.String)
+	 * @see org.opensaml.core.xml.AbstractXMLObjectBuilder#buildObject(java.lang.String,
+	 *      java.lang.String, java.lang.String)
 	 */
 	@Override
-	public OpenSamlInstanceIdentifier buildObject(String namespaceURI, String localName, String namespacePrefix) {
+	public OpenSamlInstanceIdentifier buildObject(String namespaceURI, String localName,
+			String namespacePrefix) {
 		return new InstanceIdentifierImpl(namespaceURI, localName, namespacePrefix);
 	}
 

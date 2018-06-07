@@ -18,13 +18,13 @@
 package org.ehealth_connector.security.exceptions;
 
 /**
- * 
+ *
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the SerializeException.</div>
  * <div class="de">Klasse implemetiert die SerializeException.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
- * 
+ * <div class="fr"></div>
+ * <div class="it"></div>
+ *
  * <!-- @formatter:on -->
  */
 public class SerializeException extends Exception {
@@ -33,13 +33,13 @@ public class SerializeException extends Exception {
 	private static final long serialVersionUID = 7674424286398103789L;
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Default constructor to instanciate the object.</div>
 	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * 
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
 	 * <!-- @formatter:on -->
 	 */
 	public SerializeException() {
@@ -47,41 +47,41 @@ public class SerializeException extends Exception {
 	}
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Default constructor to instanciate the object.</div>
 	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * 
-	 * @param cause
-	 * <div class="en">the throwable to be set</div>
-	 * <div class="de">der throwable der gesetzt werden soll</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * <!-- @formatter:on -->
-	 */
-	public SerializeException(Throwable cause) {
-		super(cause);
-	}
-
-	/**
-	 * 
-	 * <!-- @formatter:off -->
-	 * <div class="en">Default constructor to instanciate the object.</div>
-	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * 
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
 	 * @param message
 	 * <div class="en">the error message to be set</div>
 	 * <div class="de">Die Errormessage welche gesetzt werde soll</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	public SerializeException(String message) {
 		super(message);
+	}
+
+	/**
+	 *
+	 * <!-- @formatter:off -->
+	 * <div class="en">Default constructor to instanciate the object.</div>
+	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param cause
+	 * <div class="en">the throwable to be set</div>
+	 * <div class="de">der throwable der gesetzt werden soll</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	public SerializeException(Throwable cause) {
+		super(cause);
 	}
 
 }

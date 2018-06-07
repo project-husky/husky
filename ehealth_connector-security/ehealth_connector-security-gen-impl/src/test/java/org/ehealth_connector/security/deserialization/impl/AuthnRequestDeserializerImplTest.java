@@ -41,7 +41,8 @@ public class AuthnRequestDeserializerImplTest extends AbstractTestHelper {
 	public void setUp() throws Exception {
 		super.setUp();
 		testDeserializer = new AuthnRequestDeserializerImpl();
-		testXmlByteArray = Files.readAllBytes(Paths.get(getClass().getResource("/saml2/AuthnRequest.xml").toURI()));
+		testXmlByteArray = Files
+				.readAllBytes(Paths.get(getClass().getResource("/saml2/AuthnRequest.xml").toURI()));
 		testXmlString = new String(testXmlByteArray);
 		testXmlElement = new OpenSaml2DeserializerImpl<AuthnRequest>()
 				.deserializeFromByteArrayToXmlElement(testXmlString.getBytes());
@@ -49,8 +50,20 @@ public class AuthnRequestDeserializerImplTest extends AbstractTestHelper {
 
 	/**
 	 * Test method for
+	 * {@link org.ehealth_connector.security.deserialization.impl.AuthnRequestDeserializerImpl#fromXmlByteArray(byte[])}.
+	 *
+	 * @throws DeserializeException
+	 */
+	@Test
+	public void testFromXmlByteArray() throws DeserializeException {
+		final AuthnRequest ref = testDeserializer.fromXmlByteArray(testXmlByteArray);
+		assertNotNull(ref);
+	}
+
+	/**
+	 * Test method for
 	 * {@link org.ehealth_connector.security.deserialization.impl.AuthnRequestDeserializerImpl#fromXmlElement(org.w3c.dom.Element)}.
-	 * 
+	 *
 	 * @throws DeserializeException
 	 */
 	@Test
@@ -62,7 +75,7 @@ public class AuthnRequestDeserializerImplTest extends AbstractTestHelper {
 	/**
 	 * Test method for
 	 * {@link org.ehealth_connector.security.deserialization.impl.AuthnRequestDeserializerImpl#fromXmlElement(org.w3c.dom.Element)}.
-	 * 
+	 *
 	 * @throws DeserializeException
 	 */
 	@Test(expected = DeserializeException.class)
@@ -72,24 +85,14 @@ public class AuthnRequestDeserializerImplTest extends AbstractTestHelper {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.deserialization.impl.AuthnRequestDeserializerImpl#fromXmlString(java.lang.String)}.
-	 * 
+	 * Test method for
+	 * {@link org.ehealth_connector.security.deserialization.impl.AuthnRequestDeserializerImpl#fromXmlString(java.lang.String)}.
+	 *
 	 * @throws DeserializeException
 	 */
 	@Test
 	public void testFromXmlString() throws DeserializeException {
 		final AuthnRequest ref = testDeserializer.fromXmlString(testXmlString);
-		assertNotNull(ref);
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.deserialization.impl.AuthnRequestDeserializerImpl#fromXmlByteArray(byte[])}.
-	 * 
-	 * @throws DeserializeException
-	 */
-	@Test
-	public void testFromXmlByteArray() throws DeserializeException {
-		final AuthnRequest ref = testDeserializer.fromXmlByteArray(testXmlByteArray);
 		assertNotNull(ref);
 	}
 

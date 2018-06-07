@@ -26,8 +26,8 @@ import org.opensaml.core.xml.XMLObject;
  * <!-- @formatter:off -->
  * <div class="en">Implementing class of OpenSamlEpdPolicyRepositoryResponse interface.</div>
  * <div class="de">Implementierende Klasse des OpenSamlEpdPolicyRepositoryResponse Interfaces.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class EprPolicyRepositoryResponseImpl extends AbstractAssertionBasedRequestImpl
@@ -35,7 +35,8 @@ public class EprPolicyRepositoryResponseImpl extends AbstractAssertionBasedReque
 
 	private String status;
 
-	protected EprPolicyRepositoryResponseImpl(String namespaceURI, String elementLocalName, String namespacePrefix) {
+	protected EprPolicyRepositoryResponseImpl(String namespaceURI, String elementLocalName,
+			String namespacePrefix) {
 		super(namespaceURI, elementLocalName, namespacePrefix);
 	}
 

@@ -25,8 +25,8 @@ import org.opensaml.core.xml.AbstractXMLObject;
  * <!-- @formatter:off -->
  * <div class="en">Abstract Class implelementing the common methods for AssertionBasedRequests.</div>
  * <div class="de">Abstrakte Klasse welche die gemeinsamen methoden für AssertionBasedRequests implementiert</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public abstract class AbstractAssertionBasedRequestImpl extends AbstractXMLObject
@@ -34,7 +34,8 @@ public abstract class AbstractAssertionBasedRequestImpl extends AbstractXMLObjec
 
 	private Assertion assertion;
 
-	protected AbstractAssertionBasedRequestImpl(String namespaceURI, String elementLocalName, String namespacePrefix) {
+	protected AbstractAssertionBasedRequestImpl(String namespaceURI, String elementLocalName,
+			String namespacePrefix) {
 		super(namespaceURI, elementLocalName, namespacePrefix);
 	}
 
@@ -49,18 +50,18 @@ public abstract class AbstractAssertionBasedRequestImpl extends AbstractXMLObjec
 	}
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the assertion</div>
 	 * <div class="de">Method um die Assertion zu setzen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aAssertion
 	 * <div class="en">the assertion to be set.</div>
 	 * <div class="de">die Assertion die gesetzt werden soll.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	@Override

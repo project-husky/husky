@@ -26,8 +26,8 @@ import org.ehealth_connector.security.exceptions.ClientSendException;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods for the privacy policy admin client</div>
  * <div class="de">Interface welches die Methoden für den Privacy Policy Admin Client beschreiben.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface PpfClient {
@@ -36,29 +36,29 @@ public interface PpfClient {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to send an Add, Update or DeletePolicyRequest.</div>
 	 * <div class="de">Methode um einen  Add, Update oder DeletePolicyRequest zu senden.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aAssertion
 	 * <div class="en">the Assertion to be sent in the soap security header</div>
 	 * <div class="de">Die Assertion welches im soap security header mitgeschickt werden soll.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @param query
 	 * <div class="en">the PrivacyPolicyFeed to be sent.</div>
 	 * <div class="de">Die PrivacyPolicyFeed welche geschickt werden soll.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the PrivacyPolicyFeedResponse</div>
 	 * <div class="de">Die PrivacyPolicyFeedResponse.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @throws ClientSendException
 	 * <div class="en">will be thrown if an error occoures</div>
 	 * <div class="de">wird geworfen wenn ein Fehler auftritt.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	PrivacyPolicyFeedResponse send(SecurityHeaderElement aAssertion, PrivacyPolicyFeed request)

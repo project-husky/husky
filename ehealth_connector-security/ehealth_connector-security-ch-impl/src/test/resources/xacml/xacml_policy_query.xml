@@ -1,8 +1,5 @@
-<xacml-samlp:XACMLPolicyQuery
-	xmlns:xacml-samlp="urn:oasis:names:tc:xacml:1.1:profile:saml2.0:v2:schema:protocol"
-	xmlns:xacml-context="urn:oasis:names:tc:xacml:2.0:context:schema:os"
-	xmlns:hl7="urn:hl7-org:v3"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<xacml-samlp:XACMLPolicyQuery xmlns:xacml-samlp="urn:oasis:names:tc:xacml:1.1:profile:saml2.0:v2:schema:protocol"
+	xmlns:xacml-context="urn:oasis:names:tc:xacml:2.0:context:schema:os" xmlns:hl7="urn:hl7-org:v3" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<xacml-context:Request>
 		<xacml-context:Subject />
 		<xacml-context:Resource>

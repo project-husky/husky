@@ -25,8 +25,8 @@ import org.opensaml.core.xml.AbstractXMLObjectBuilder;
  * <!-- @formatter:off -->
  * <div class="en">Class extending the abstract class AbstractXMLObjectBuilder with type OpenSamlPurposeOfUse.</div>
  * <div class="de">Die Klasse erweitert die abstrakte Klasse AbstractXMLObjectBuilder mit typ OpenSamlPurposeOfUse.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class PurposeOfUseBuilder extends AbstractXMLObjectBuilder<OpenSamlPurposeOfUse> {
@@ -39,14 +39,17 @@ public class PurposeOfUseBuilder extends AbstractXMLObjectBuilder<OpenSamlPurpos
 
 	/** {@inheritDoc} */
 	public OpenSamlPurposeOfUse buildObject() {
-		return buildObject(OpenSamlPurposeOfUse.DEFAULT_NS_URI, OpenSamlPurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME,
+		return buildObject(OpenSamlPurposeOfUse.DEFAULT_NS_URI,
+				OpenSamlPurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME,
 				OpenSamlPurposeOfUse.DEFAULT_PREFIX);
 	}
 
 	/** {@inheritDoc} */
 	@Override
-	public OpenSamlPurposeOfUse buildObject(String namespaceURI, String localName, String namespacePrefix) {
-		final OpenSamlPurposeOfUse ppou = new PurposeOfUseImpl(namespaceURI, localName, namespacePrefix);
+	public OpenSamlPurposeOfUse buildObject(String namespaceURI, String localName,
+			String namespacePrefix) {
+		final OpenSamlPurposeOfUse ppou = new PurposeOfUseImpl(namespaceURI, localName,
+				namespacePrefix);
 		if (!StringUtils.isEmpty(code)) {
 			ppou.setCode(code);
 		}

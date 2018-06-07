@@ -21,8 +21,8 @@ package org.ehealth_connector.security.communication.soap.impl;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the parameters for SOAP WSA Headers</div>
  * <div class="de">Klasse welche die paramater und methoden für SOAP WSA Headers definiert</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class WsaHeaderValue {
@@ -47,36 +47,36 @@ public class WsaHeaderValue {
 		mMustUnderstand = aMustUnderstand;
 	}
 
-	public String getMessageId() {
-		return mMessageId;
-	}
-
-	public void setMessageId(String messageId) {
-		mMessageId = messageId;
-	}
-
 	public String getAction() {
 		return mAction;
 	}
 
-	public void setAction(String action) {
-		mAction = action;
+	public String getMessageId() {
+		return mMessageId;
 	}
 
 	public String getTo() {
 		return mTo;
 	}
 
-	public void setTo(String to) {
-		mTo = to;
-	}
-
 	public boolean isMustUnderstand() {
 		return mMustUnderstand;
 	}
 
+	public void setAction(String action) {
+		mAction = action;
+	}
+
+	public void setMessageId(String messageId) {
+		mMessageId = messageId;
+	}
+
 	public void setMustUnderstand(boolean mustUnderstand) {
 		mMustUnderstand = mustUnderstand;
+	}
+
+	public void setTo(String to) {
+		mTo = to;
 	}
 
 }

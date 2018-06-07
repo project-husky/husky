@@ -28,19 +28,21 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the marshaller for OpenSamlAddPolicyRequest.</div>
  * <div class="de">Die Klasse implementiert den Marshaller für OpenSamlAddPolicyRequest.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class UpdatePolicyRequestMarshaller extends AbstractXMLObjectMarshaller {
 
 	@Override
-	protected void marshallChildElements(XMLObject xmlObject, Element domElement) throws MarshallingException {
+	protected void marshallChildElements(XMLObject xmlObject, Element domElement)
+			throws MarshallingException {
 		if (xmlObject instanceof OpenSamlDeletePolicyRequest) {
 			final OpenSamlDeletePolicyRequest request = (OpenSamlDeletePolicyRequest) xmlObject;
 			if (request.getAssertion() != null) {
 				final AssertionImpl assertion = (AssertionImpl) request.getAssertion();
-				final org.opensaml.saml.saml2.core.Assertion innerAssertion = assertion.getWrappedObject();
+				final org.opensaml.saml.saml2.core.Assertion innerAssertion = assertion
+						.getWrappedObject();
 				final Element assertionElement = marshall(innerAssertion);
 				domElement.appendChild(assertionElement);
 			}

@@ -26,8 +26,8 @@ import org.opensaml.core.xml.XMLObject;
  * <!-- @formatter:off -->
  * <div class="en">Helper class providing methods to get filtered lists.</div>
  * <div class="de">Helferklasse welche methoden zur verfügung stellt um geilfetrte listen zu erhalten.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class ListXMLObjectHelper<T extends XMLObject> {

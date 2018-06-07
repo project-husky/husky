@@ -25,11 +25,12 @@ import org.ehealth_connector.security.communication.config.IdpClientConfig;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Interface IdpClientCertificateAuthConfigImpl</div>
  * <div class="de">Implementations Klasse von  Interface IdpClientCertificateAuthConfigImpl</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class IdpClientCertificateAuthConfigImpl extends AbstractClientConfig implements IdpClientConfig {
+public class IdpClientCertificateAuthConfigImpl extends AbstractClientConfig
+		implements IdpClientConfig {
 
 	private KeyStore clientKeyStore;
 
@@ -43,12 +44,12 @@ public class IdpClientCertificateAuthConfigImpl extends AbstractClientConfig imp
 		return clientKeyStore;
 	}
 
-	public void setClientKeyStore(KeyStore clientKeyStore) {
-		this.clientKeyStore = clientKeyStore;
-	}
-
 	public char[] getClientKeyStorePassword() {
 		return clientKeyStorePassword;
+	}
+
+	public void setClientKeyStore(KeyStore clientKeyStore) {
+		this.clientKeyStore = clientKeyStore;
 	}
 
 	public void setClientKeyStorePassword(String aPassword) {

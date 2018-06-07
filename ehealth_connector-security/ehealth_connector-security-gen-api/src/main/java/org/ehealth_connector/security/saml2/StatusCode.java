@@ -21,8 +21,8 @@ package org.ehealth_connector.security.saml2;
  * <!-- @formatter:off -->
  * <div class="en">Enumeration of the possible StatusCodes</div>
  * <div class="de">Enumerierung der m&ooml;glichen StatusCodes</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  *
  */
@@ -97,6 +97,15 @@ public enum StatusCode {
 	/** URI for UnsupportedBinding status code. */
 	UNSUPPORTED_BINDING("urn:oasis:names:tc:SAML:2.0:status:UnsupportedBinding");
 
+	public static StatusCode getEnum(String code) {
+		for (final StatusCode x : values()) {
+			if (x.toString().equals(code)) {
+				return x;
+			}
+		}
+		return null;
+	}
+
 	private String code;
 
 	StatusCode(String aCode) {
@@ -106,14 +115,5 @@ public enum StatusCode {
 	@Override
 	public String toString() {
 		return code;
-	}
-
-	public static StatusCode getEnum(String code) {
-		for (final StatusCode x : values()) {
-			if (x.toString().equals(code)) {
-				return x;
-			}
-		}
-		return null;
 	}
 }

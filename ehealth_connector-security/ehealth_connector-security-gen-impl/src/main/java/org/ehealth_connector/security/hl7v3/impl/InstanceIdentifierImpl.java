@@ -27,17 +27,24 @@ import org.opensaml.core.xml.XMLObject;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Interface OpenSamlInstanceIdentifier.</div>
  * <div class="de">Implementations Klasse des Interfaces OpenSamlInstanceIdentifier.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class InstanceIdentifierImpl extends AbstractXMLObject implements OpenSamlInstanceIdentifier {
+public class InstanceIdentifierImpl extends AbstractXMLObject
+		implements OpenSamlInstanceIdentifier {
 
 	protected String root;
 	protected String extension;
 
-	protected InstanceIdentifierImpl(String namespaceURI, String elementLocalName, String namespacePrefix) {
+	protected InstanceIdentifierImpl(String namespaceURI, String elementLocalName,
+			String namespacePrefix) {
 		super(namespaceURI, elementLocalName, namespacePrefix);
+	}
+
+	@Override
+	public String getExtension() {
+		return extension;
 	}
 
 	@Override
@@ -51,17 +58,12 @@ public class InstanceIdentifierImpl extends AbstractXMLObject implements OpenSam
 	}
 
 	@Override
-	public void setRoot(String value) {
-		root = value;
-	}
-
-	@Override
-	public String getExtension() {
-		return extension;
-	}
-
-	@Override
 	public void setExtension(String value) {
 		extension = value;
+	}
+
+	@Override
+	public void setRoot(String value) {
+		root = value;
 	}
 }

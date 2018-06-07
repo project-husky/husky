@@ -21,8 +21,8 @@ package org.ehealth_connector.security.saml2;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the ResponseBuilder.</div>
  * <div class="de">Interface beschreibt die Methoden des ResponseBuilder.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface ResponseBuilder extends SimpleBuilder<Response> {
@@ -37,6 +37,7 @@ public interface ResponseBuilder extends SimpleBuilder<Response> {
 	//
 	// ResponseBuilder assertions(List<Assertion> aAssertions);
 	//
-	// ResponseBuilder encryptedAssertions(List<EncryptedAssertion> aEncryptedAssertions);
+	// ResponseBuilder encryptedAssertions(List<EncryptedAssertion>
+	// aEncryptedAssertions);
 
 }

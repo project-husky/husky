@@ -24,8 +24,8 @@ import org.ehealth_connector.security.communication.ch.ppq.config.PpClientConfig
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the interface PpClientConfigBuilder.</div>
  * <div class="de">Klasser die das Interface PpClientConfigBuilder implementiert.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class PpqClientConfigBuilderImpl implements PpClientConfigBuilder {
@@ -37,9 +37,26 @@ public class PpqClientConfigBuilderImpl implements PpClientConfigBuilder {
 	}
 
 	@Override
-	public PpClientConfigBuilder url(String aEndpointUrl) {
-		config.setUrl(aEndpointUrl);
+	public PpClientConfigBuilder clientKeyStore(String clientKeyStore) {
+		config.setKeyStore(clientKeyStore);
 		return this;
+	}
+
+	@Override
+	public PpClientConfigBuilder clientKeyStorePassword(String clientKeyStorePassword) {
+		config.setKeyStorePassword(clientKeyStorePassword);
+		return this;
+	}
+
+	@Override
+	public PpClientConfigBuilder clientKeyStoreType(String clientKeyStoreType) {
+		config.setKeyStoreType(clientKeyStoreType);
+		return this;
+	}
+
+	@Override
+	public PpClientConfig create() {
+		return config;
 	}
 
 	@Override
@@ -67,26 +84,9 @@ public class PpqClientConfigBuilderImpl implements PpClientConfigBuilder {
 	}
 
 	@Override
-	public PpClientConfigBuilder clientKeyStore(String clientKeyStore) {
-		config.setKeyStore(clientKeyStore);
+	public PpClientConfigBuilder url(String aEndpointUrl) {
+		config.setUrl(aEndpointUrl);
 		return this;
-	}
-
-	@Override
-	public PpClientConfigBuilder clientKeyStorePassword(String clientKeyStorePassword) {
-		config.setKeyStorePassword(clientKeyStorePassword);
-		return this;
-	}
-
-	@Override
-	public PpClientConfigBuilder clientKeyStoreType(String clientKeyStoreType) {
-		config.setKeyStoreType(clientKeyStoreType);
-		return this;
-	}
-
-	@Override
-	public PpClientConfig create() {
-		return config;
 	}
 
 }

@@ -27,16 +27,28 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Serializer<PrivacyPolicyQuery></div>
  * <div class="de">Implementations Klasse von Serializer<PrivacyPolicyQuery></div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class PrivacyPolicyQuerySerializerImpl extends AbstractSerializerImpl implements Serializer<PrivacyPolicyQuery> {
+public class PrivacyPolicyQuerySerializerImpl extends AbstractSerializerImpl
+		implements Serializer<PrivacyPolicyQuery> {
+
+	@Override
+	public byte[] toXmlByteArray(PrivacyPolicyQuery ppQuery) throws SerializeException {
+		try {
+			return getOpenSamlSerializer()
+					.serializeToByteArray(((PrivacyPolicyQueryImpl) ppQuery).getWrappedObject());
+		} catch (final Exception e) {
+			throw new SerializeException(e);
+		}
+	}
 
 	@Override
 	public Element toXmlElement(PrivacyPolicyQuery ppQuery) throws SerializeException {
 		try {
-			return getOpenSamlSerializer().serializeToXml(((PrivacyPolicyQueryImpl) ppQuery).getWrappedObject());
+			return getOpenSamlSerializer()
+					.serializeToXml(((PrivacyPolicyQueryImpl) ppQuery).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
@@ -45,16 +57,8 @@ public class PrivacyPolicyQuerySerializerImpl extends AbstractSerializerImpl imp
 	@Override
 	public String toXmlString(PrivacyPolicyQuery ppQuery) throws SerializeException {
 		try {
-			return getOpenSamlSerializer().serializeToString(((PrivacyPolicyQueryImpl) ppQuery).getWrappedObject());
-		} catch (final Exception e) {
-			throw new SerializeException(e);
-		}
-	}
-
-	@Override
-	public byte[] toXmlByteArray(PrivacyPolicyQuery ppQuery) throws SerializeException {
-		try {
-			return getOpenSamlSerializer().serializeToByteArray(((PrivacyPolicyQueryImpl) ppQuery).getWrappedObject());
+			return getOpenSamlSerializer()
+					.serializeToString(((PrivacyPolicyQueryImpl) ppQuery).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}

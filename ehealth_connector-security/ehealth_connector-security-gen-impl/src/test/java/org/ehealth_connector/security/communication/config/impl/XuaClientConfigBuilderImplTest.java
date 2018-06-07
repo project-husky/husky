@@ -40,17 +40,8 @@ public class XuaClientConfigBuilderImplTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.communication.config.impl.XuaClientConfigBuilderImpl#url(java.lang.String)}.
-	 */
-	@Test
-	public void testUrl() {
-		final XuaClientConfig ref = builder.url(testEndpointUrl).create();
-		assertNotNull(ref);
-		assertEquals(testEndpointUrl, ref.getUrl());
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.communication.config.impl.XuaClientConfigBuilderImpl#portName(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.communication.config.impl.XuaClientConfigBuilderImpl#portName(java.lang.String)}.
 	 */
 	@Test
 	public void testPortName() {
@@ -90,6 +81,17 @@ public class XuaClientConfigBuilderImplTest {
 		final XuaClientConfig ref = builder.serviceNamespace(testServiceNamespace).create();
 		assertNotNull(ref);
 		assertEquals(testServiceNamespace, ref.getServiceNamespace());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.communication.config.impl.XuaClientConfigBuilderImpl#url(java.lang.String)}.
+	 */
+	@Test
+	public void testUrl() {
+		final XuaClientConfig ref = builder.url(testEndpointUrl).create();
+		assertNotNull(ref);
+		assertEquals(testEndpointUrl, ref.getUrl());
 	}
 
 }

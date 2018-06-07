@@ -34,11 +34,12 @@ import org.opensaml.xacml.profile.saml.XACMLPolicyQueryType;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for PatientPrivacyQuery.</div>
  * <div class="de">Die Klasse implementiert das entsprechende interface PatientPrivacyQuery.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class PrivacyPolicyQueryImpl implements PrivacyPolicyQuery, SecurityObject<XACMLPolicyQueryType> {
+public class PrivacyPolicyQueryImpl
+		implements PrivacyPolicyQuery, SecurityObject<XACMLPolicyQueryType> {
 
 	private XACMLPolicyQueryType internalObject;
 
@@ -47,8 +48,44 @@ public class PrivacyPolicyQueryImpl implements PrivacyPolicyQuery, SecurityObjec
 	}
 
 	@Override
+	public String getConsent() {
+		if (internalObject.getConsent() != null) {
+			return internalObject.getConsent();
+		}
+		return "";
+	}
+
+	@Override
+	public String getDestination() {
+		return internalObject.getDestination();
+	}
+
+	@Override
 	public String getId() {
 		return internalObject.getID();
+	}
+
+	@Override
+	public InstanceIdentifier getInstanceIdentifier() {
+		for (final RequestType request : internalObject.getRequests()) {
+			for (final ResourceType resource : request.getResources()) {
+				for (final AttributeType attribute : resource.getAttributes()) {
+					if ("urn:e-health-suisse:2015:epr-spid"
+							.equalsIgnoreCase(attribute.getAttributeId())) {
+						for (final AttributeValueType attVal : attribute.getAttributeValues()) {
+							for (final XMLObject value : attVal.getUnknownXMLObjects()) {
+								if (value instanceof InstanceIdentifier) {
+									final InstanceIdentifier retVal = (InstanceIdentifier) value;
+									return retVal;
+								}
+							}
+
+						}
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	@Override
@@ -66,46 +103,11 @@ public class PrivacyPolicyQueryImpl implements PrivacyPolicyQuery, SecurityObjec
 	}
 
 	@Override
-	public String getDestination() {
-		return internalObject.getDestination();
-	}
-
-	@Override
-	public String getConsent() {
-		if (internalObject.getConsent() != null) {
-			return internalObject.getConsent();
-		}
-		return "";
-	}
-
-	@Override
 	public String getVersion() {
 		if (internalObject.getVersion() != null) {
 			return internalObject.getVersion().toString();
 		}
 		return "";
-	}
-
-	@Override
-	public InstanceIdentifier getInstanceIdentifier() {
-		for (final RequestType request : internalObject.getRequests()) {
-			for (final ResourceType resource : request.getResources()) {
-				for (final AttributeType attribute : resource.getAttributes()) {
-					if ("urn:e-health-suisse:2015:epr-spid".equalsIgnoreCase(attribute.getAttributeId())) {
-						for (final AttributeValueType attVal : attribute.getAttributeValues()) {
-							for (final XMLObject value : attVal.getUnknownXMLObjects()) {
-								if (value instanceof InstanceIdentifier) {
-									final InstanceIdentifier retVal = (InstanceIdentifier) value;
-									return retVal;
-								}
-							}
-
-						}
-					}
-				}
-			}
-		}
-		return null;
 	}
 
 	@Override

@@ -28,8 +28,6 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.ehealth_connector.security.ch.ppq.PrivacyPolicyQuery;
-import org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl;
-import org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryImpl;
 import org.ehealth_connector.security.hl7v3.InstanceIdentifier;
 import org.ehealth_connector.security.hl7v3.impl.InstanceIdentifierBuilder;
 import org.ehealth_connector.security.utilities.impl.InitializerTestHelper;
@@ -82,73 +80,14 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#id(java.lang.String)}.
-	 */
-	@Test
-	public void testId() {
-		final PrivacyPolicyQuery ref = builder.id(testId).create();
-		assertNotNull(ref);
-		assertEquals(testId, ref.getId());
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#issueInstant(java.util.Calendar)}.
-	 */
-	@Test
-	public void testIssueInstant() {
-		final PrivacyPolicyQuery ref = builder.issueInstant(testIssueInstant).create();
-		assertNotNull(ref);
-		assertEquals(testIssueInstant, ref.getIssueInstant());
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#issuer(java.lang.String)}.
-	 */
-	@Test
-	public void testIssuer() {
-		final PrivacyPolicyQuery ref = builder.issuer(testIssuer).create();
-		assertNotNull(ref);
-		assertEquals(testIssuer, ref.getIssuer());
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#version(java.lang.String)}.
-	 */
-	@Test
-	public void testVersion() {
-		final PrivacyPolicyQuery ref = builder.version(testVersion).create();
-		assertNotNull(ref);
-		assertEquals(testVersion, ref.getVersion());
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#version(java.lang.String)}.
-	 */
-	@Test
-	public void testInstanceIdentifier() {
-		final PrivacyPolicyQuery ref = builder.instanceIdentifier(testInstanceIdentifier).create();
-		assertNotNull(ref);
-		assertEquals(testInstanceIdentifier, ref.getInstanceIdentifier());
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#consent(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#consent(java.lang.String)}.
 	 */
 	@Test
 	public void testConsent() {
 		final PrivacyPolicyQuery ref = builder.consent(testConsent).create();
 		assertNotNull(ref);
 		assertEquals(testConsent, ref.getConsent());
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#destination(java.lang.String)}.
-	 */
-	@Test
-	public void testDestination() {
-		final PrivacyPolicyQuery ref = builder.destination(testDestination).create();
-		assertNotNull(ref);
-		assertEquals(testDestination, ref.getDestination());
 	}
 
 	/**
@@ -162,13 +101,80 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 		assertEquals(testXacmlPolicyQuery, ((PrivacyPolicyQueryImpl) ref).getWrappedObject());
 	}
 
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#destination(java.lang.String)}.
+	 */
+	@Test
+	public void testDestination() {
+		final PrivacyPolicyQuery ref = builder.destination(testDestination).create();
+		assertNotNull(ref);
+		assertEquals(testDestination, ref.getDestination());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#id(java.lang.String)}.
+	 */
+	@Test
+	public void testId() {
+		final PrivacyPolicyQuery ref = builder.id(testId).create();
+		assertNotNull(ref);
+		assertEquals(testId, ref.getId());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#version(java.lang.String)}.
+	 */
+	@Test
+	public void testInstanceIdentifier() {
+		final PrivacyPolicyQuery ref = builder.instanceIdentifier(testInstanceIdentifier).create();
+		assertNotNull(ref);
+		assertEquals(testInstanceIdentifier, ref.getInstanceIdentifier());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#issueInstant(java.util.Calendar)}.
+	 */
+	@Test
+	public void testIssueInstant() {
+		final PrivacyPolicyQuery ref = builder.issueInstant(testIssueInstant).create();
+		assertNotNull(ref);
+		assertEquals(testIssueInstant, ref.getIssueInstant());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#issuer(java.lang.String)}.
+	 */
+	@Test
+	public void testIssuer() {
+		final PrivacyPolicyQuery ref = builder.issuer(testIssuer).create();
+		assertNotNull(ref);
+		assertEquals(testIssuer, ref.getIssuer());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#version(java.lang.String)}.
+	 */
+	@Test
+	public void testVersion() {
+		final PrivacyPolicyQuery ref = builder.version(testVersion).create();
+		assertNotNull(ref);
+		assertEquals(testVersion, ref.getVersion());
+	}
+
 	private XACMLPolicyQueryType loadTestPolicySet()
 			throws UnmarshallingException, SAXException, IOException, ParserConfigurationException {
 		final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		dbf.setNamespaceAware(true);
 		final Document doc = dbf.newDocumentBuilder()
 				.parse(this.getClass().getResourceAsStream("/xacml/xacml_policy_query.xml"));
-		return (XACMLPolicyQueryType) new XACMLPolicyQueryTypeUnmarshaller().unmarshall(doc.getDocumentElement());
+		return (XACMLPolicyQueryType) new XACMLPolicyQueryTypeUnmarshaller()
+				.unmarshall(doc.getDocumentElement());
 	}
 
 }

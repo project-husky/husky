@@ -24,8 +24,8 @@ import org.ehealth_connector.security.communication.config.XuaClientConfigBuilde
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the interface XuaClientConfigBuilder.</div>
  * <div class="de">Klasser die das Interface XuaClientConfigBuilder implementiert.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class XuaClientConfigBuilderImpl implements XuaClientConfigBuilder {
@@ -36,15 +36,32 @@ public class XuaClientConfigBuilderImpl implements XuaClientConfigBuilder {
 		config = new XuaClientConfigImpl();
 	}
 
+	@Override
+	public XuaClientConfigBuilder clientKeyStore(String aClientKeyStoreFile) {
+		config.setKeyStore(aClientKeyStoreFile);
+		return this;
+	}
+
+	@Override
+	public XuaClientConfigBuilder clientKeyStorePassword(String clientKeyStorePassword) {
+		config.setKeyStorePassword(clientKeyStorePassword);
+		return this;
+	}
+
+	@Override
+	public XuaClientConfigBuilder clientKeyStoreType(String clientKeyStoreType) {
+		config.setKeyStoreType(clientKeyStoreType);
+		return this;
+	}
+
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.communication.config.ClientConfigBuilder#url(java.lang.String)
+	 * @see org.ehealth_connector.security.communication.config.XuaClientConfigBuilder#create()
 	 */
 	@Override
-	public XuaClientConfigBuilder url(String aEndpointUri) {
-		config.setUrl(aEndpointUri);
-		return this;
+	public XuaClientConfig create() {
+		return config;
 	}
 
 	/**
@@ -80,24 +97,6 @@ public class XuaClientConfigBuilderImpl implements XuaClientConfigBuilder {
 		return this;
 	}
 
-	@Override
-	public XuaClientConfigBuilder clientKeyStore(String aClientKeyStoreFile) {
-		config.setKeyStore(aClientKeyStoreFile);
-		return this;
-	}
-
-	@Override
-	public XuaClientConfigBuilder clientKeyStorePassword(String clientKeyStorePassword) {
-		config.setKeyStorePassword(clientKeyStorePassword);
-		return this;
-	}
-
-	@Override
-	public XuaClientConfigBuilder clientKeyStoreType(String clientKeyStoreType) {
-		config.setKeyStoreType(clientKeyStoreType);
-		return this;
-	}
-
 	/**
 	 * {@inheritDoc}
 	 *
@@ -118,11 +117,12 @@ public class XuaClientConfigBuilderImpl implements XuaClientConfigBuilder {
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.communication.config.XuaClientConfigBuilder#create()
+	 * @see org.ehealth_connector.security.communication.config.ClientConfigBuilder#url(java.lang.String)
 	 */
 	@Override
-	public XuaClientConfig create() {
-		return config;
+	public XuaClientConfigBuilder url(String aEndpointUri) {
+		config.setUrl(aEndpointUri);
+		return this;
 	}
 
 }

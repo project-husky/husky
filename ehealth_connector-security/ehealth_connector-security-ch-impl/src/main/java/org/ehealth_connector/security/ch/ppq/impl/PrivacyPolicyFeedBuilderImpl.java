@@ -28,8 +28,8 @@ import org.opensaml.saml.saml2.core.impl.AssertionBuilder;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the interfaces PrivacyPolicyFeedBuilder and SecurityObjectBuilder.</div>
  * <div class="de">Klasse welche das Interface PrivacyPolicyFeedBuilder and SecurityObjectBuilder implementiert.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class PrivacyPolicyFeedBuilderImpl
@@ -42,9 +42,8 @@ public class PrivacyPolicyFeedBuilderImpl
 	}
 
 	@Override
-	public PrivacyPolicyFeedBuilderImpl method(PpfMethod aMethod) {
-		ppfMethod = aMethod;
-		return this;
+	public PrivacyPolicyFeed create() {
+		return new PrivacyPolicyFeedImpl(ppfMethod, new AssertionBuilder().buildObject());
 	}
 
 	@Override
@@ -53,8 +52,9 @@ public class PrivacyPolicyFeedBuilderImpl
 	}
 
 	@Override
-	public PrivacyPolicyFeed create() {
-		return new PrivacyPolicyFeedImpl(ppfMethod, new AssertionBuilder().buildObject());
+	public PrivacyPolicyFeedBuilderImpl method(PpfMethod aMethod) {
+		ppfMethod = aMethod;
+		return this;
 	}
 
 }

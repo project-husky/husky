@@ -23,8 +23,8 @@ import org.opensaml.core.xml.XMLObject;
  * <!-- @formatter:off -->
  * <div class="en">Describing the methods of the InstanceIdentifier Interface</div>
  * <div class="de">Beschreibung der Methoden des InstanceIdentifier Interfaces</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface OpenSamlInstanceIdentifier extends InstanceIdentifier, XMLObject {

@@ -21,88 +21,88 @@ package org.ehealth_connector.security.wssecurity;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the UsernameTokenBuilder.</div>
  * <div class="de">Interface beschreibt die Methoden des UsernameTokenBuilder.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface UsernameTokenBuilder {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set the username of the UsernameToken to be build.</div>
-	 * <div class="de">Methode um den Usernamen dem UsernameToken hinzuzufügen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="en">Creates a concrete instance of UsernameToken with setted params.</div>
+	 * <div class="de">Erstellt die konkrete Instanz von UsernameToken mit den gesetzten parametern.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
-	 * @param aUsername
-	 *  <div class="en">the username to be set</div>
-	 *  <div class="de">der Usernamen der gesetzt werden soll</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
 	 * @return
-	 * 	<div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * <!-- @formatter:on -->
+	 *  <div class="en">a new instance of UsernameToken with the params set</div>
+	 *  <div class="de">eine neue Instanz von UsernameToken mit den gesetzten parametern</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 *  <!-- @formatter:on -->
 	 */
-	UsernameTokenBuilder username(String aUsername);
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set the password of the UsernameToken to be build.</div>
-	 * <div class="de">Methode um das Passwort dem UsernameToken hinzuzufügen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 *
-	 * @param aPassword
-	 *  <div class="en">the password to be set</div>
-	 *  <div class="de">das Passwort das gesetzt werden soll</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * @return
-	 * 	<div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * <!-- @formatter:on -->
-	 */
-	UsernameTokenBuilder password(String aPassword);
+	UsernameToken create();
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the nonce (randonm value) of the UsernameToken to be build.</div>
 	 * <div class="de">Methode um den Nonce (Zufallswert) dem UsernameToken hinzuzufügen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aNonce
 	 *  <div class="en">the nonce to be set</div>
 	 *  <div class="de">der Nonce der gesetzt werden soll</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 * @return
 	 * 	<div class="en">the actual instance of this builder</div>
 	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	UsernameTokenBuilder nonce(String aNonce);
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Creates a concrete instance of UsernameToken with setted params.</div>
-	 * <div class="de">Erstellt die konkrete Instanz von UsernameToken mit den gesetzten parametern.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="en">Method to set the password of the UsernameToken to be build.</div>
+	 * <div class="de">Methode um das Passwort dem UsernameToken hinzuzufügen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
-	 * @return 
-	 *  <div class="en">a new instance of UsernameToken with the params set</div>
-	 *  <div class="de">eine neue Instanz von UsernameToken mit den gesetzten parametern</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 *  <!-- @formatter:on -->
+	 * @param aPassword
+	 *  <div class="en">the password to be set</div>
+	 *  <div class="de">das Passwort das gesetzt werden soll</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * @return
+	 * 	<div class="en">the actual instance of this builder</div>
+	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * <!-- @formatter:on -->
 	 */
-	UsernameToken create();
+	UsernameTokenBuilder password(String aPassword);
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the username of the UsernameToken to be build.</div>
+	 * <div class="de">Methode um den Usernamen dem UsernameToken hinzuzufügen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param aUsername
+	 *  <div class="en">the username to be set</div>
+	 *  <div class="de">der Usernamen der gesetzt werden soll</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * @return
+	 * 	<div class="en">the actual instance of this builder</div>
+	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	UsernameTokenBuilder username(String aUsername);
 }

@@ -27,11 +27,22 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Serializer<Assertion</div>
  * <div class="de">Implementations Klasse von Serializer<Assertion</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class EncryptedAssertionSerializerImpl extends AbstractSerializerImpl implements Serializer<EncryptedAssertion> {
+public class EncryptedAssertionSerializerImpl extends AbstractSerializerImpl
+		implements Serializer<EncryptedAssertion> {
+
+	@Override
+	public byte[] toXmlByteArray(EncryptedAssertion aSecurityObject) throws SerializeException {
+		try {
+			return getOpenSamlSerializer().serializeToByteArray(
+					((EncryptedAssertionImpl) aSecurityObject).getWrappedObject());
+		} catch (final Exception e) {
+			throw new SerializeException(e);
+		}
+	}
 
 	@Override
 	public Element toXmlElement(EncryptedAssertion aSecurityObject) throws SerializeException {
@@ -46,18 +57,8 @@ public class EncryptedAssertionSerializerImpl extends AbstractSerializerImpl imp
 	@Override
 	public String toXmlString(EncryptedAssertion aSecurityObject) throws SerializeException {
 		try {
-			return getOpenSamlSerializer()
-					.serializeToString(((EncryptedAssertionImpl) aSecurityObject).getWrappedObject());
-		} catch (final Exception e) {
-			throw new SerializeException(e);
-		}
-	}
-
-	@Override
-	public byte[] toXmlByteArray(EncryptedAssertion aSecurityObject) throws SerializeException {
-		try {
-			return getOpenSamlSerializer()
-					.serializeToByteArray(((EncryptedAssertionImpl) aSecurityObject).getWrappedObject());
+			return getOpenSamlSerializer().serializeToString(
+					((EncryptedAssertionImpl) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}

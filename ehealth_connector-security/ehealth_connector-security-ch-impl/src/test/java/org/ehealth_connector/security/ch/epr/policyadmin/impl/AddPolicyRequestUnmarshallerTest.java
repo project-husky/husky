@@ -43,7 +43,8 @@ public class AddPolicyRequestUnmarshallerTest extends InitializerTestHelper {
 
 	@Test
 	public void test() throws UnmarshallingException, MarshallingException {
-		final UnmarshallerFactory unmarshallerFactory = XMLObjectProviderRegistrySupport.getUnmarshallerFactory();
+		final UnmarshallerFactory unmarshallerFactory = XMLObjectProviderRegistrySupport
+				.getUnmarshallerFactory();
 		final Unmarshaller unmarshaller = unmarshallerFactory.getUnmarshaller(testXmlElement);
 
 		final XMLObject xmlObject = unmarshaller.unmarshall(testXmlElement);

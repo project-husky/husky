@@ -29,8 +29,8 @@ import org.opensaml.saml.saml2.core.AuthnContextClassRef;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for AuthnStatement building.</div>
  * <div class="de">Die Klasse implementiert das entsprechende interface um AuthnStatement bilden zu k&ooml;nnen.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class AuthnStatementBuilderImpl implements AuthnStatementBuilder,
@@ -44,8 +44,17 @@ public class AuthnStatementBuilderImpl implements AuthnStatementBuilder,
 		final org.opensaml.saml.saml2.core.AuthnContext authnContext = new org.opensaml.saml.saml2.core.impl.AuthnContextBuilder()
 				.buildObject();
 		wrappedObject.setAuthnContext(authnContext);
-		authnContextClassRef = new org.opensaml.saml.saml2.core.impl.AuthnContextClassRefBuilder().buildObject();
+		authnContextClassRef = new org.opensaml.saml.saml2.core.impl.AuthnContextClassRefBuilder()
+				.buildObject();
 		authnContext.setAuthnContextClassRef(authnContextClassRef);
+	}
+
+	@Override
+	public AuthnStatementBuilder authnContextClassRef(String aAuthnContextClassRef) {
+		if (aAuthnContextClassRef != null) {
+			authnContextClassRef.setAuthnContextClassRef(aAuthnContextClassRef);
+		}
+		return this;
 	}
 
 	@Override
@@ -58,12 +67,13 @@ public class AuthnStatementBuilderImpl implements AuthnStatementBuilder,
 	}
 
 	@Override
-	public AuthnStatementBuilder sessionNotOnOrAfter(Calendar aSessionNotOnOrAfter) {
-		if (aSessionNotOnOrAfter != null) {
-			final DateTime dateTime = new DateTime(aSessionNotOnOrAfter.getTimeInMillis());
-			wrappedObject.setSessionNotOnOrAfter(dateTime);
-		}
-		return this;
+	public org.ehealth_connector.security.saml2.AuthnStatement create() {
+		return new AuthnStatementImpl(wrappedObject);
+	}
+
+	@Override
+	public AuthnStatement create(org.opensaml.saml.saml2.core.AuthnStatement aAuthnStatement) {
+		return new AuthnStatementImpl(aAuthnStatement);
 	}
 
 	@Override
@@ -75,21 +85,12 @@ public class AuthnStatementBuilderImpl implements AuthnStatementBuilder,
 	}
 
 	@Override
-	public AuthnStatementBuilder authnContextClassRef(String aAuthnContextClassRef) {
-		if (aAuthnContextClassRef != null) {
-			authnContextClassRef.setAuthnContextClassRef(aAuthnContextClassRef);
+	public AuthnStatementBuilder sessionNotOnOrAfter(Calendar aSessionNotOnOrAfter) {
+		if (aSessionNotOnOrAfter != null) {
+			final DateTime dateTime = new DateTime(aSessionNotOnOrAfter.getTimeInMillis());
+			wrappedObject.setSessionNotOnOrAfter(dateTime);
 		}
 		return this;
-	}
-
-	@Override
-	public org.ehealth_connector.security.saml2.AuthnStatement create() {
-		return new AuthnStatementImpl(wrappedObject);
-	}
-
-	@Override
-	public AuthnStatement create(org.opensaml.saml.saml2.core.AuthnStatement aAuthnStatement) {
-		return new AuthnStatementImpl(aAuthnStatement);
 	}
 
 }

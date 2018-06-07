@@ -41,15 +41,29 @@ public class ResponseDeserializerImplTest extends AbstractTestHelper {
 	public void setUp() throws Exception {
 		super.setUp();
 		testDeserializer = new ResponseDeserializerImpl();
-		testXmlByteArray = Files.readAllBytes(Paths.get(getClass().getResource("/saml2/Response.xml").toURI()));
+		testXmlByteArray = Files
+				.readAllBytes(Paths.get(getClass().getResource("/saml2/Response.xml").toURI()));
 		testXmlString = new String(testXmlByteArray);
 		testXmlElement = new OpenSaml2DeserializerImpl<Response>()
 				.deserializeFromByteArrayToXmlElement(testXmlString.getBytes());
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.deserialization.impl.ResponseDeserializerImpl#fromXmlElement(org.w3c.dom.Element)}.
-	 * 
+	 * Test method for
+	 * {@link org.ehealth_connector.security.deserialization.impl.ResponseDeserializerImpl#fromXmlByteArray(byte[])}.
+	 *
+	 * @throws DeserializeException
+	 */
+	@Test
+	public void testFromXmlByteArray() throws DeserializeException {
+		final Response ref = testDeserializer.fromXmlByteArray(testXmlByteArray);
+		assertNotNull(ref);
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.deserialization.impl.ResponseDeserializerImpl#fromXmlElement(org.w3c.dom.Element)}.
+	 *
 	 * @throws DeserializeException
 	 */
 	@Test
@@ -59,24 +73,14 @@ public class ResponseDeserializerImplTest extends AbstractTestHelper {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.deserialization.impl.ResponseDeserializerImpl#fromXmlString(java.lang.String)}.
-	 * 
+	 * Test method for
+	 * {@link org.ehealth_connector.security.deserialization.impl.ResponseDeserializerImpl#fromXmlString(java.lang.String)}.
+	 *
 	 * @throws DeserializeException
 	 */
 	@Test
 	public void testFromXmlString() throws DeserializeException {
 		final Response ref = testDeserializer.fromXmlString(testXmlString);
-		assertNotNull(ref);
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.deserialization.impl.ResponseDeserializerImpl#fromXmlByteArray(byte[])}.
-	 * 
-	 * @throws DeserializeException
-	 */
-	@Test
-	public void testFromXmlByteArray() throws DeserializeException {
-		final Response ref = testDeserializer.fromXmlByteArray(testXmlByteArray);
 		assertNotNull(ref);
 	}
 

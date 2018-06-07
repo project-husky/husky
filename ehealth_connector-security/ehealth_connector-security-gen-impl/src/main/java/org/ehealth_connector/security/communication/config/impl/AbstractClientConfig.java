@@ -23,8 +23,8 @@ import org.ehealth_connector.security.communication.config.ClientConfig;
  * <!-- @formatter:off -->
  * <div class="en">Abstract implementation class of Interface ClientConfig</div>
  * <div class="de">Abstrakte implementations Klasse des Interfaces ClientConfig</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public abstract class AbstractClientConfig implements ClientConfig {
@@ -32,13 +32,13 @@ public abstract class AbstractClientConfig implements ClientConfig {
 	private String enpointUrl;
 
 	@Override
-	public void setUrl(String aUrl) {
-		enpointUrl = aUrl;
+	public String getUrl() {
+		return enpointUrl;
 	}
 
 	@Override
-	public String getUrl() {
-		return enpointUrl;
+	public void setUrl(String aUrl) {
+		enpointUrl = aUrl;
 	}
 
 }

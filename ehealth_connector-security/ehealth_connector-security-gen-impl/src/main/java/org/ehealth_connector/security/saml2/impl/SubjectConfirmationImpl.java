@@ -27,42 +27,58 @@ import org.joda.time.DateTime;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of SubjectConfirmation</div>
  * <div class="de">Implementations Klasse von SubjectConfirmation</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class SubjectConfirmationImpl
-		implements SubjectConfirmation, SecurityObject<org.opensaml.saml.saml2.core.SubjectConfirmation> {
+public class SubjectConfirmationImpl implements SubjectConfirmation,
+		SecurityObject<org.opensaml.saml.saml2.core.SubjectConfirmation> {
 
 	private org.opensaml.saml.saml2.core.SubjectConfirmation subjectConfirmation;
 
 	/**
 	 * Default constructor to instanciate the object
-	 * 
+	 *
 	 * @param aInternalObject
 	 */
-	protected SubjectConfirmationImpl(org.opensaml.saml.saml2.core.SubjectConfirmation aInternalObject) {
+	protected SubjectConfirmationImpl(
+			org.opensaml.saml.saml2.core.SubjectConfirmation aInternalObject) {
 		subjectConfirmation = aInternalObject;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.saml2.SubjectConfirmation#getMethod()
+	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
-	public String getMethod() {
-		return subjectConfirmation.getMethod();
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		final SubjectConfirmationImpl other = (SubjectConfirmationImpl) obj;
+		if (subjectConfirmation == null) {
+			if (other.subjectConfirmation != null)
+				return false;
+		} else if (!subjectConfirmation.equals(other.subjectConfirmation))
+			return false;
+		return true;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.core.SecurityObject#getWrappedObject()
+	 * @see org.ehealth_connector.security.saml2.SubjectConfirmationData#getAddress()
 	 */
 	@Override
-	public org.opensaml.saml.saml2.core.SubjectConfirmation getWrappedObject() {
-		return subjectConfirmation;
+	public String getAddress() {
+		if (subjectConfirmation.getSubjectConfirmationData() != null) {
+			return subjectConfirmation.getSubjectConfirmationData().getAddress();
+		}
+		return "";
 	}
 
 	/**
@@ -81,12 +97,23 @@ public class SubjectConfirmationImpl
 	/**
 	 * {@inheritDoc}
 	 *
+	 * @see org.ehealth_connector.security.saml2.SubjectConfirmation#getMethod()
+	 */
+	@Override
+	public String getMethod() {
+		return subjectConfirmation.getMethod();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
 	 * @see org.ehealth_connector.security.saml2.SubjectConfirmationData#getNotBefore()
 	 */
 	@Override
 	public Calendar getNotBefore() {
 		if (subjectConfirmation.getSubjectConfirmationData() != null) {
-			final DateTime notOnOrAfter = subjectConfirmation.getSubjectConfirmationData().getNotBefore();
+			final DateTime notOnOrAfter = subjectConfirmation.getSubjectConfirmationData()
+					.getNotBefore();
 			final Calendar retVal = Calendar.getInstance();
 			retVal.setTimeInMillis(notOnOrAfter.getMillis());
 			return retVal;
@@ -102,7 +129,8 @@ public class SubjectConfirmationImpl
 	@Override
 	public Calendar getNotOnOrAfter() {
 		if (subjectConfirmation.getSubjectConfirmationData() != null) {
-			final DateTime notOnOrAfter = subjectConfirmation.getSubjectConfirmationData().getNotOnOrAfter();
+			final DateTime notOnOrAfter = subjectConfirmation.getSubjectConfirmationData()
+					.getNotOnOrAfter();
 			final Calendar retVal = Calendar.getInstance();
 			retVal.setTimeInMillis(notOnOrAfter.getMillis());
 			return retVal;
@@ -126,14 +154,11 @@ public class SubjectConfirmationImpl
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.saml2.SubjectConfirmationData#getAddress()
+	 * @see org.ehealth_connector.security.core.SecurityObject#getWrappedObject()
 	 */
 	@Override
-	public String getAddress() {
-		if (subjectConfirmation.getSubjectConfirmationData() != null) {
-			return subjectConfirmation.getSubjectConfirmationData().getAddress();
-		}
-		return "";
+	public org.opensaml.saml.saml2.core.SubjectConfirmation getWrappedObject() {
+		return subjectConfirmation;
 	}
 
 	/**
@@ -145,30 +170,9 @@ public class SubjectConfirmationImpl
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = (prime * result) + ((subjectConfirmation == null) ? 0 : subjectConfirmation.hashCode());
+		result = (prime * result)
+				+ ((subjectConfirmation == null) ? 0 : subjectConfirmation.hashCode());
 		return result;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		final SubjectConfirmationImpl other = (SubjectConfirmationImpl) obj;
-		if (subjectConfirmation == null) {
-			if (other.subjectConfirmation != null)
-				return false;
-		} else if (!subjectConfirmation.equals(other.subjectConfirmation))
-			return false;
-		return true;
 	}
 
 }

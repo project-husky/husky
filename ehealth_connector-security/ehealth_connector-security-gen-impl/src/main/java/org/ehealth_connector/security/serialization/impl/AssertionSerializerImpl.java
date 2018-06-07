@@ -27,16 +27,28 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Serializer<Assertion</div>
  * <div class="de">Implementations Klasse von Serializer<Assertion</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class AssertionSerializerImpl extends AbstractSerializerImpl implements Serializer<Assertion> {
+public class AssertionSerializerImpl extends AbstractSerializerImpl
+		implements Serializer<Assertion> {
+
+	@Override
+	public byte[] toXmlByteArray(Assertion aSecurityObject) throws SerializeException {
+		try {
+			return getOpenSamlSerializer()
+					.serializeToByteArray(((AssertionImpl) aSecurityObject).getWrappedObject());
+		} catch (final Exception e) {
+			throw new SerializeException(e);
+		}
+	}
 
 	@Override
 	public Element toXmlElement(Assertion aSecurityObject) throws SerializeException {
 		try {
-			return getOpenSamlSerializer().serializeToXml(((AssertionImpl) aSecurityObject).getWrappedObject());
+			return getOpenSamlSerializer()
+					.serializeToXml(((AssertionImpl) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
@@ -45,16 +57,8 @@ public class AssertionSerializerImpl extends AbstractSerializerImpl implements S
 	@Override
 	public String toXmlString(Assertion aSecurityObject) throws SerializeException {
 		try {
-			return getOpenSamlSerializer().serializeToString(((AssertionImpl) aSecurityObject).getWrappedObject());
-		} catch (final Exception e) {
-			throw new SerializeException(e);
-		}
-	}
-
-	@Override
-	public byte[] toXmlByteArray(Assertion aSecurityObject) throws SerializeException {
-		try {
-			return getOpenSamlSerializer().serializeToByteArray(((AssertionImpl) aSecurityObject).getWrappedObject());
+			return getOpenSamlSerializer()
+					.serializeToString(((AssertionImpl) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}

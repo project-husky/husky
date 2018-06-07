@@ -21,8 +21,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.ehealth_connector.security.ch.ppq.PrivacyPolicyQueryResponse;
-import org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryResponseBuilderImpl;
-import org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryResponseImpl;
 import org.ehealth_connector.security.utilities.impl.InitializerTestHelper;
 import org.junit.Before;
 import org.junit.Test;

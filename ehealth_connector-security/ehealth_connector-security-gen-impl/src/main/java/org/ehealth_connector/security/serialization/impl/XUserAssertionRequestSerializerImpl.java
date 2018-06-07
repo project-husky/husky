@@ -27,38 +27,41 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Serializer<Response></div>
  * <div class="de">Implementations Klasse von Serializer<Response></div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class XUserAssertionRequestSerializerImpl extends AbstractSerializerImpl
 		implements Serializer<XUserAssertionRequest> {
 
 	@Override
-	public Element toXmlElement(XUserAssertionRequest aXUserAssertionRequest) throws SerializeException {
+	public byte[] toXmlByteArray(XUserAssertionRequest aXUserAssertionRequest)
+			throws SerializeException {
 		try {
-			return getOpenSamlSerializer()
-					.serializeToXml(((XUserAssertionRequestImpl) aXUserAssertionRequest).getWrappedObject());
+			return getOpenSamlSerializer().serializeToByteArray(
+					((XUserAssertionRequestImpl) aXUserAssertionRequest).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
 	}
 
 	@Override
-	public String toXmlString(XUserAssertionRequest aXUserAssertionRequest) throws SerializeException {
+	public Element toXmlElement(XUserAssertionRequest aXUserAssertionRequest)
+			throws SerializeException {
 		try {
-			return getOpenSamlSerializer()
-					.serializeToString(((XUserAssertionRequestImpl) aXUserAssertionRequest).getWrappedObject());
+			return getOpenSamlSerializer().serializeToXml(
+					((XUserAssertionRequestImpl) aXUserAssertionRequest).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
 	}
 
 	@Override
-	public byte[] toXmlByteArray(XUserAssertionRequest aXUserAssertionRequest) throws SerializeException {
+	public String toXmlString(XUserAssertionRequest aXUserAssertionRequest)
+			throws SerializeException {
 		try {
-			return getOpenSamlSerializer()
-					.serializeToByteArray(((XUserAssertionRequestImpl) aXUserAssertionRequest).getWrappedObject());
+			return getOpenSamlSerializer().serializeToString(
+					((XUserAssertionRequestImpl) aXUserAssertionRequest).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}

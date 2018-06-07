@@ -27,8 +27,8 @@ import org.opensaml.saml.saml2.core.impl.StatusMessageBuilder;
  * @since Feb 22, 2018 9:26:34 AM
  *
  */
-public class StatusBuilderImpl
-		implements StatusBuilder, SecurityObjectBuilder<org.opensaml.saml.saml2.core.Status, Status> {
+public class StatusBuilderImpl implements StatusBuilder,
+		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Status, Status> {
 
 	private org.opensaml.saml.saml2.core.Status status;
 	private org.opensaml.saml.saml2.core.StatusCode statusCode;
@@ -45,27 +45,13 @@ public class StatusBuilderImpl
 	}
 
 	/**
-	 * 
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.saml2.StatusBuilder#statusCode(org.ehealth_connector.security.saml2.StatusCode)
+	 * @see org.ehealth_connector.security.saml2.StatusBuilder#create()
 	 */
 	@Override
-	public StatusBuilder statusCode(StatusCode aStatusCode) {
-		statusCode.setValue(aStatusCode.toString());
-		return this;
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.saml2.StatusBuilder#statusMessage(java.lang.String)
-	 */
-	@Override
-	public StatusBuilder statusMessage(String aStatusMessage) {
-		statusMessage.setMessage(aStatusMessage);
-		return this;
+	public Status create() {
+		return new StatusImpl(status);
 	}
 
 	/**
@@ -79,13 +65,27 @@ public class StatusBuilderImpl
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.saml2.StatusBuilder#create()
+	 * @see org.ehealth_connector.security.saml2.StatusBuilder#statusCode(org.ehealth_connector.security.saml2.StatusCode)
 	 */
 	@Override
-	public Status create() {
-		return new StatusImpl(status);
+	public StatusBuilder statusCode(StatusCode aStatusCode) {
+		statusCode.setValue(aStatusCode.toString());
+		return this;
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.StatusBuilder#statusMessage(java.lang.String)
+	 */
+	@Override
+	public StatusBuilder statusMessage(String aStatusMessage) {
+		statusMessage.setMessage(aStatusMessage);
+		return this;
 	}
 
 }

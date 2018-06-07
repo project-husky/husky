@@ -21,8 +21,8 @@ package org.ehealth_connector.security.exceptions;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the SigningException.</div>
  * <div class="de">Klasse implemetiert die SigningException.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  *
  */
@@ -32,13 +32,13 @@ public class SigningException extends Exception {
 	private static final long serialVersionUID = 5287879924827693361L;
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Default constructor to instanciate the object.</div>
 	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * 
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
 	 * <!-- @formatter:on -->
 	 */
 	public SigningException() {
@@ -46,41 +46,41 @@ public class SigningException extends Exception {
 	}
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Default constructor to instanciate the object.</div>
 	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * 
-	 * @param cause
-	 * <div class="en">the throwable to be set</div>
-	 * <div class="de">der throwable der gesetzt werden soll</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * <!-- @formatter:on -->
-	 */
-	public SigningException(Throwable cause) {
-		super(cause);
-	}
-
-	/**
-	 * 
-	 * <!-- @formatter:off -->
-	 * <div class="en">Default constructor to instanciate the object.</div>
-	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * 
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
 	 * @param message
 	 * <div class="en">the error message to be set</div>
 	 * <div class="de">Die Errormessage welche gesetzt werde soll</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	public SigningException(String message) {
 		super(message);
+	}
+
+	/**
+	 *
+	 * <!-- @formatter:off -->
+	 * <div class="en">Default constructor to instanciate the object.</div>
+	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param cause
+	 * <div class="en">the throwable to be set</div>
+	 * <div class="de">der throwable der gesetzt werden soll</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	public SigningException(Throwable cause) {
+		super(cause);
 	}
 
 }

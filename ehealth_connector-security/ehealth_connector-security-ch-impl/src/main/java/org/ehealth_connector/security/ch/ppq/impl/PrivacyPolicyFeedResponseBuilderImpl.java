@@ -25,8 +25,8 @@ import org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeedResponseBuilder;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the interfaces PrivacyPolicyFeedResponseBuilder.</div>
  * <div class="de">Klasse welche das Interface PrivacyPolicyFeedResponseBuilder implementiert.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class PrivacyPolicyFeedResponseBuilderImpl implements PrivacyPolicyFeedResponseBuilder {
@@ -38,8 +38,13 @@ public class PrivacyPolicyFeedResponseBuilderImpl implements PrivacyPolicyFeedRe
 	}
 
 	@Override
-	public PrivacyPolicyFeedResponseBuilder status(String aStatus) {
-		response.setStatus(aStatus);
+	public PrivacyPolicyFeedResponse create() {
+		return response;
+	}
+
+	@Override
+	public PrivacyPolicyFeedResponseBuilder exception(Exception aException) {
+		response.addException(aException);
 		return this;
 	}
 
@@ -50,14 +55,9 @@ public class PrivacyPolicyFeedResponseBuilderImpl implements PrivacyPolicyFeedRe
 	}
 
 	@Override
-	public PrivacyPolicyFeedResponseBuilder exception(Exception aException) {
-		response.addException(aException);
+	public PrivacyPolicyFeedResponseBuilder status(String aStatus) {
+		response.setStatus(aStatus);
 		return this;
-	}
-
-	@Override
-	public PrivacyPolicyFeedResponse create() {
-		return response;
 	}
 
 }

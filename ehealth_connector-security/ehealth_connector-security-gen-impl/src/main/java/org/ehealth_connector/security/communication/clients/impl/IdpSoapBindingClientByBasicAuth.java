@@ -60,8 +60,8 @@ import org.xml.sax.SAXException;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the idp client with basic authentication.</div>
  * <div class="de">Klasse die den idp client mit basic authentication implementiert.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
@@ -75,8 +75,13 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 
 	}
 
+	@Override
+	public CloseableHttpClient getHttpClient() throws ClientSendException {
+		return HttpClients.createDefault();
+	}
+
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.communication.clients.impl.AbstractIdpClient#getRequestConfig()
@@ -87,7 +92,7 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.communication.clients.IdpClient#send(org.ehealth_connector.security.authentication.AuthnRequest)
@@ -110,19 +115,20 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 	}
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to add the basic authentication header.</div>
 	 * <div class="de">Methode um den basic authentication header hinzuzufügen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param post
 	 * <!-- @formatter:on -->
 	 */
 	private void addBasicAuthentication(HttpPost post) {
 		final String auth = config.getBasicAuthUsername() + ":" + config.getBasicAuthPassword();
-		final byte[] encodedAuth = Base64.getEncoder().encode(auth.getBytes(Charset.forName("ISO-8859-1")));
+		final byte[] encodedAuth = Base64.getEncoder()
+				.encode(auth.getBytes(Charset.forName("ISO-8859-1")));
 		final String authHeader = "Basic " + new String(encodedAuth);
 		post.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
 	}
@@ -131,34 +137,34 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to create the soap entity.</div>
 	 * <div class="de">Methode um die SOAP Entity zu erstellen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aAuthnRequest
 	 * <div class="en">the authnrequest to be sent.</div>
 	 * <div class="de">Der AuthnRequest der geschickt werden soll.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the httpentity with the soap message as body.</div>
 	 * <div class="de">Die httpentity mit der soap nachricht als body.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @throws SerializeException
 	 * <div class="en">will be thrown on error occuring during serialization.</div>
 	 * <div class="de">wird geworfen wenn ein fehler bei der serialisierung auftritt.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @throws ParserConfigurationException
 	 * <div class="en">will be thrown on error occuring during parser configuration.</div>
 	 * <div class="de">wird geworfen wenn ein fehler bei der parser konfiguration auftritt.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @throws TransformerException
 	 * <div class="en">will be thrown on error occuring during transformation.</div>
 	 * <div class="de">wird geworfen wenn ein fehler bei der Transformierung auftritt.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	private HttpEntity getSoapEntity(AuthnRequest aAuthnRequest)
@@ -175,11 +181,13 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 		final Document soapDoc = docBuilder.newDocument();
 
 		// create soap envelope
-		final Element envelopElement = soapDoc.createElementNS("http://schemas.xmlsoap.org/soap/envelope/", "Envelope");
+		final Element envelopElement = soapDoc
+				.createElementNS("http://schemas.xmlsoap.org/soap/envelope/", "Envelope");
 		soapDoc.appendChild(envelopElement);
 
 		// create soap body
-		final Element soapBody = soapDoc.createElementNS("http://schemas.xmlsoap.org/soap/envelope/", "Body");
+		final Element soapBody = soapDoc
+				.createElementNS("http://schemas.xmlsoap.org/soap/envelope/", "Body");
 		envelopElement.appendChild(soapBody);
 
 		// add authnrequest to soap body
@@ -201,7 +209,7 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.communication.clients.impl.AbstractIdpClient#parseResponse(org.apache.http.client.methods.CloseableHttpResponse)
@@ -212,7 +220,8 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 			// // build new document
 			// final Properties systemProperties = System.getProperties();
 			// logger.debug("the document builder factory: "
-			// + systemProperties.get("javax.xml.parsers.DocumentBuilderFactory"));
+			// +
+			// systemProperties.get("javax.xml.parsers.DocumentBuilderFactory"));
 			// systemProperties.remove("javax.xml.parsers.DocumentBuilderFactory");
 			// systemProperties.setProperty("javax.xml.parsers.DocumentBuilderFactory",
 			// "org.apache.xerces.jaxp.DocumentBuilderFactoryImpl");
@@ -234,15 +243,11 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 			final ResponseDeserializerImpl deserializer = new ResponseDeserializerImpl();
 			return deserializer.fromXmlElement(doc.getDocumentElement());
 		} catch (UnsupportedOperationException | IOException | DeserializeException
-				| TransformerFactoryConfigurationError | ParserConfigurationException | SAXException e) {
+				| TransformerFactoryConfigurationError | ParserConfigurationException
+				| SAXException e) {
 			throw new ClientSendException(e);
 		}
 
-	}
-
-	@Override
-	public CloseableHttpClient getHttpClient() throws ClientSendException {
-		return HttpClients.createDefault();
 	}
 
 }

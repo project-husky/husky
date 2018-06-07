@@ -38,8 +38,8 @@ import net.shibboleth.utilities.java.support.resolver.Criterion;
  * <!-- @formatter:off -->
  * <div class="en">Abstract class implementing the generic functions for all validators.</div>
  * <div class="de">Abstrakte Klasse implemtiert alle generischen funktionen für die validatoren.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public abstract class AbstractValidator {
@@ -49,24 +49,24 @@ public abstract class AbstractValidator {
 	private KeyStore trustStore;
 	private String password;
 
-	public KeyStore getTrustStore() {
-		return trustStore;
-	}
-
-	public void setTrustStore(KeyStore trustStore) {
-		this.trustStore = trustStore;
+	public Logger getLog() {
+		return log;
 	}
 
 	public String getPassword() {
 		return password;
 	}
 
+	public KeyStore getTrustStore() {
+		return trustStore;
+	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
-	public Logger getLog() {
-		return log;
+	public void setTrustStore(KeyStore trustStore) {
+		this.trustStore = trustStore;
 	}
 
 	public void validate(Signature aSignature, String aAlias) throws ValidationException {
@@ -79,7 +79,8 @@ public abstract class AbstractValidator {
 		}
 		try {
 			final Map<String, String> passwordMap = new HashMap<>();
-			final KeyStoreCredentialResolver resolver = new KeyStoreCredentialResolver(trustStore, passwordMap);
+			final KeyStoreCredentialResolver resolver = new KeyStoreCredentialResolver(trustStore,
+					passwordMap);
 
 			final Criterion criterion = new EntityIdCriterion(aAlias);
 			final CriteriaSet criteriaSet = new CriteriaSet(criterion);

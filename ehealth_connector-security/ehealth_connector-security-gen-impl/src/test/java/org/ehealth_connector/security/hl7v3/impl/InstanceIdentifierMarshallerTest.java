@@ -31,15 +31,16 @@ import org.w3c.dom.Element;
 
 public class InstanceIdentifierMarshallerTest extends InitializerTestHelper {
 
-	private OpenSamlInstanceIdentifier testXmlObject;
-	private String testRoot;
-	private String testExtension;
-
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		// Initialize the library
 		InitializationService.initialize();
 	}
+
+	private OpenSamlInstanceIdentifier testXmlObject;
+	private String testRoot;
+
+	private String testExtension;
 
 	@Before
 	public void setUp() throws Exception {
@@ -54,7 +55,7 @@ public class InstanceIdentifierMarshallerTest extends InitializerTestHelper {
 	/**
 	 * Test method for
 	 * {@link org.opensaml.core.xml.io.AbstractXMLObjectMarshaller#marshall(org.opensaml.core.xml.XMLObject, org.w3c.dom.Document)}.
-	 * 
+	 *
 	 * @throws MarshallingException
 	 */
 	@Test

@@ -31,8 +31,8 @@ import org.ehealth_connector.security.saml2.Response;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the idp client using auth proxy like HIN Client.</div>
  * <div class="de">Klasse die den idp client unter verwendung eines auth proxy wie den HIN Client verwendet.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class IdpClientByProxy extends AbstractHttpFormIdpClient {
@@ -45,8 +45,14 @@ public class IdpClientByProxy extends AbstractHttpFormIdpClient {
 	}
 
 	@Override
+	public CloseableHttpClient getHttpClient() throws ClientSendException {
+		return HttpClients.createDefault();
+	}
+
+	@Override
 	public RequestConfig getRequestConfig() {
-		final HttpHost proxy = new HttpHost(config.getProxyHost(), config.getProxyPort(), config.getProxyProtocol());
+		final HttpHost proxy = new HttpHost(config.getProxyHost(), config.getProxyPort(),
+				config.getProxyProtocol());
 		return RequestConfig.custom().setProxy(proxy).build();
 	}
 
@@ -60,10 +66,5 @@ public class IdpClientByProxy extends AbstractHttpFormIdpClient {
 			throw new ClientSendException(t);
 		}
 
-	}
-
-	@Override
-	public CloseableHttpClient getHttpClient() throws ClientSendException {
-		return HttpClients.createDefault();
 	}
 }

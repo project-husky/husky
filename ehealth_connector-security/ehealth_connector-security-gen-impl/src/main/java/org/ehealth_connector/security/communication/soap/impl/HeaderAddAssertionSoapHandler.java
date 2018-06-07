@@ -41,8 +41,8 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the internface SOAPHandler to add an assertion to securityheader.</div>
  * <div class="de">Klasse die das interface SOAPHandler implementiert um einer message eine assertion dem security header hinzuzufügen.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class HeaderAddAssertionSoapHandler implements SOAPHandler<SOAPMessageContext> {
@@ -58,9 +58,26 @@ public class HeaderAddAssertionSoapHandler implements SOAPHandler<SOAPMessageCon
 	}
 
 	@Override
+	public void close(MessageContext context) {
+	}
+
+	@Override
+	public Set<QName> getHeaders() {
+		return Collections.emptySet();
+	}
+
+	@Override
+	public boolean handleFault(SOAPMessageContext context) {
+		// throw new UnsupportedOperationException("Not supported yet.");
+		mLogger.error("SOAP Fault: " + context);
+		return true;
+	}
+
+	@Override
 	public boolean handleMessage(SOAPMessageContext context) {
 		mLogger.debug("AssertionSoapHandler.handleMessage()");
-		final Boolean outboundProperty = (Boolean) context.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
+		final Boolean outboundProperty = (Boolean) context
+				.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
 		if (outboundProperty.booleanValue()) {
 			try {
 				final SOAPEnvelope envelope = context.getMessage().getSOAPPart().getEnvelope();
@@ -70,9 +87,9 @@ public class HeaderAddAssertionSoapHandler implements SOAPHandler<SOAPMessageCon
 				if (header == null) {
 					header = envelope.addHeader();
 				}
-				final SOAPElement securityElem = factory.createElement(
-						new QName("http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd",
-								"Security"));
+				final SOAPElement securityElem = factory.createElement(new QName(
+						"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd",
+						"Security"));
 
 				final Element serializedElement = new OpenSaml2SerializerImpl()
 						.serializeToXml((XMLObject) mSecurityHeaderElement.getWrappedObject());
@@ -88,22 +105,6 @@ public class HeaderAddAssertionSoapHandler implements SOAPHandler<SOAPMessageCon
 			// inbound
 		}
 		return true;
-	}
-
-	@Override
-	public boolean handleFault(SOAPMessageContext context) {
-		// throw new UnsupportedOperationException("Not supported yet.");
-		mLogger.error("SOAP Fault: " + context);
-		return true;
-	}
-
-	@Override
-	public void close(MessageContext context) {
-	}
-
-	@Override
-	public Set<QName> getHeaders() {
-		return Collections.emptySet();
 	}
 
 }

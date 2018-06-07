@@ -35,8 +35,8 @@ import org.slf4j.LoggerFactory;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the internface SOAPHandler to add WSA header.</div>
  * <div class="de">Klasse die das interface SOAPHandler implementiert um einer message WSA headers hinzuzufügen.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class WsaHeaderSoapHandler implements SOAPHandler<SOAPMessageContext> {
@@ -69,37 +69,63 @@ public class WsaHeaderSoapHandler implements SOAPHandler<SOAPMessageContext> {
 	}
 
 	@Override
+	public void close(MessageContext context) {
+		mLogger.trace("close: " + context);
+	}
+
+	@Override
+	public Set<QName> getHeaders() {
+		final Set<QName> headers = new HashSet<>();
+		headers.add(mActionHeader);
+		headers.add(mMessageIdHeader);
+		headers.add(mToHeader);
+		mLogger.trace("getHeaders: " + headers);
+		return headers;
+	}
+
+	@Override
+	public boolean handleFault(SOAPMessageContext context) {
+		mLogger.error("SOAP Fault: " + context);
+		return true;
+	}
+
+	@Override
 	public boolean handleMessage(SOAPMessageContext context) {
 		try {
-			final Boolean outboundProperty = (Boolean) context.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
+			final Boolean outboundProperty = (Boolean) context
+					.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
 			if (outboundProperty.booleanValue()) {
 
 				final SOAPMessage soapMessage = context.getMessage();
 				final SOAPHeader soapHeader = soapMessage.getSOAPHeader();
 				mLogger.debug("InOutValue: " + context.get(IN_OUT_PARAM));
 
-				final String soapEnvelopPrefix = soapMessage.getSOAPPart().getEnvelope().getPrefix();
-				final QName mustUnderstandAttribute = new QName(NAMESPACE_SOAPENV_URI, "mustUnderstand",
-						soapEnvelopPrefix);
+				final String soapEnvelopPrefix = soapMessage.getSOAPPart().getEnvelope()
+						.getPrefix();
+				final QName mustUnderstandAttribute = new QName(NAMESPACE_SOAPENV_URI,
+						"mustUnderstand", soapEnvelopPrefix);
 
 				soapHeader.addNamespaceDeclaration(NAMESPACE_WSA, NAMESPACE_WSA_URI);
 
 				if ((mWsaValues.getAction() != null) && !"".equals(mWsaValues.getAction())) {
-					final SOAPHeaderElement actionHeader = soapHeader.addHeaderElement(mActionHeader);
+					final SOAPHeaderElement actionHeader = soapHeader
+							.addHeaderElement(mActionHeader);
 					actionHeader.setValue(mWsaValues.getAction());
 					if (mWsaValues.isMustUnderstand()) {
 						actionHeader.addAttribute(mustUnderstandAttribute, "true");
 					}
 				}
 				if ((mWsaValues.getMessageId() != null) && !"".equals(mWsaValues.getMessageId())) {
-					final SOAPHeaderElement relatesMessageIdHeader = soapHeader.addHeaderElement(mMessageIdHeader);
+					final SOAPHeaderElement relatesMessageIdHeader = soapHeader
+							.addHeaderElement(mMessageIdHeader);
 					relatesMessageIdHeader.setValue(mWsaValues.getMessageId());
 					if (mWsaValues.isMustUnderstand()) {
 						relatesMessageIdHeader.addAttribute(mustUnderstandAttribute, "true");
 					}
 				}
 				if ((mWsaValues.getTo() != null) && !"".equals(mWsaValues.getTo())) {
-					final SOAPHeaderElement relatesToHeader = soapHeader.addHeaderElement(mToHeader);
+					final SOAPHeaderElement relatesToHeader = soapHeader
+							.addHeaderElement(mToHeader);
 					relatesToHeader.setValue(mWsaValues.getTo());
 					if (mWsaValues.isMustUnderstand()) {
 						relatesToHeader.addAttribute(mustUnderstandAttribute, "true");
@@ -113,26 +139,5 @@ public class WsaHeaderSoapHandler implements SOAPHandler<SOAPMessageContext> {
 			return true;
 		}
 		return true;
-	}
-
-	@Override
-	public boolean handleFault(SOAPMessageContext context) {
-		mLogger.error("SOAP Fault: " + context);
-		return true;
-	}
-
-	@Override
-	public void close(MessageContext context) {
-		mLogger.trace("close: " + context);
-	}
-
-	@Override
-	public Set<QName> getHeaders() {
-		final Set<QName> headers = new HashSet<>();
-		headers.add(mActionHeader);
-		headers.add(mMessageIdHeader);
-		headers.add(mToHeader);
-		mLogger.trace("getHeaders: " + headers);
-		return headers;
 	}
 }

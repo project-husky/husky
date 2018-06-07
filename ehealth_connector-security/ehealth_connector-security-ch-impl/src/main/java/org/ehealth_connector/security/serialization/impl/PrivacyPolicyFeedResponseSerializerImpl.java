@@ -27,18 +27,28 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Serializer<PrivacyPolicyFeedResponse></div>
  * <div class="de">Implementations Klasse von Serializer<PrivacyPolicyFeedResponse></div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class PrivacyPolicyFeedResponseSerializerImpl extends AbstractSerializerImpl
 		implements Serializer<PrivacyPolicyFeedResponse> {
 
 	@Override
+	public byte[] toXmlByteArray(PrivacyPolicyFeedResponse ppfResponse) throws SerializeException {
+		try {
+			return getOpenSamlSerializer().serializeToByteArray(
+					((PrivacyPolicyQueryResponseImpl) ppfResponse).getWrappedObject());
+		} catch (final Exception e) {
+			throw new SerializeException(e);
+		}
+	}
+
+	@Override
 	public Element toXmlElement(PrivacyPolicyFeedResponse ppfResponse) throws SerializeException {
 		try {
-			return getOpenSamlSerializer()
-					.serializeToXml(((PrivacyPolicyQueryResponseImpl) ppfResponse).getWrappedObject());
+			return getOpenSamlSerializer().serializeToXml(
+					((PrivacyPolicyQueryResponseImpl) ppfResponse).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
@@ -47,18 +57,8 @@ public class PrivacyPolicyFeedResponseSerializerImpl extends AbstractSerializerI
 	@Override
 	public String toXmlString(PrivacyPolicyFeedResponse ppfResponse) throws SerializeException {
 		try {
-			return getOpenSamlSerializer()
-					.serializeToString(((PrivacyPolicyQueryResponseImpl) ppfResponse).getWrappedObject());
-		} catch (final Exception e) {
-			throw new SerializeException(e);
-		}
-	}
-
-	@Override
-	public byte[] toXmlByteArray(PrivacyPolicyFeedResponse ppfResponse) throws SerializeException {
-		try {
-			return getOpenSamlSerializer()
-					.serializeToByteArray(((PrivacyPolicyQueryResponseImpl) ppfResponse).getWrappedObject());
+			return getOpenSamlSerializer().serializeToString(
+					((PrivacyPolicyQueryResponseImpl) ppfResponse).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}

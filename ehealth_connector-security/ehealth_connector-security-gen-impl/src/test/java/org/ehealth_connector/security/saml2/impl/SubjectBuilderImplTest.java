@@ -61,7 +61,29 @@ public class SubjectBuilderImplTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.SubjectBuilderImpl#nameIDFormat(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.SubjectBuilderImpl#addSubjectConfirmations(org.ehealth_connector.security.saml2.SubjectConfirmation)}.
+	 */
+	@Test
+	public void testAddSubjectConfirmations() {
+		final Subject ref = builder.addSubjectConfirmations(testSubjectConfirm).create();
+		assertEquals(testSubjectConfirm.getAddress(),
+				ref.getSubjectConfirmations().get(0).getAddress());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.SubjectBuilderImpl#create(org.opensaml.saml.saml2.core.Subject)}.
+	 */
+	@Test
+	public void testCreateSubject() {
+		final Subject ref = builder.create(testInnerObject);
+		assertEquals(testInnerObject, ((SubjectImpl) ref).getWrappedObject());
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.SubjectBuilderImpl#nameIDFormat(java.lang.String)}.
 	 */
 	@Test
 	public void testNameIDFormat() {
@@ -70,7 +92,8 @@ public class SubjectBuilderImplTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.SubjectBuilderImpl#nameIDValue(java.lang.String)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.SubjectBuilderImpl#nameIDValue(java.lang.String)}.
 	 */
 	@Test
 	public void testNameIDValue() {
@@ -79,32 +102,17 @@ public class SubjectBuilderImplTest {
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.SubjectBuilderImpl#subjectConfirmations(java.util.List)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.SubjectBuilderImpl#subjectConfirmations(java.util.List)}.
 	 */
 	@Test
 	public void testSubjectConfirmations() {
 		final Subject ref = builder.subjectConfirmations(testSubjectConfirmations).create();
-		assertArrayEquals(testSubjectConfirmations.toArray(new SubjectConfirmation[testSubjectConfirmations.size()]),
-				ref.getSubjectConfirmations().toArray(new SubjectConfirmation[testSubjectConfirmations.size()]));
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.security.saml2.impl.SubjectBuilderImpl#addSubjectConfirmations(org.ehealth_connector.security.saml2.SubjectConfirmation)}.
-	 */
-	@Test
-	public void testAddSubjectConfirmations() {
-		final Subject ref = builder.addSubjectConfirmations(testSubjectConfirm).create();
-		assertEquals(testSubjectConfirm.getAddress(), ref.getSubjectConfirmations().get(0).getAddress());
-	}
-
-	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.SubjectBuilderImpl#create(org.opensaml.saml.saml2.core.Subject)}.
-	 */
-	@Test
-	public void testCreateSubject() {
-		final Subject ref = builder.create(testInnerObject);
-		assertEquals(testInnerObject, ((SubjectImpl) ref).getWrappedObject());
+		assertArrayEquals(
+				testSubjectConfirmations
+						.toArray(new SubjectConfirmation[testSubjectConfirmations.size()]),
+				ref.getSubjectConfirmations()
+						.toArray(new SubjectConfirmation[testSubjectConfirmations.size()]));
 	}
 
 }

@@ -24,10 +24,12 @@ import org.opensaml.core.xml.XMLObject;
 * <!-- @formatter:off -->
 * <div class="en">Extending interface to integrate AssertionBasedRequest interface to opensaml implementation.</div>
 * <div class="de">Erweiterndes Interface um das AssertionBasedRequest Interface in OpenSAML Implementation zu integrieren.</div>
-* <div class="fr">VOICIFRANCAIS</div>
-* <div class="it">ITALIANO</div>
+* <div class="fr"></div>
+* <div class="it"></div>
 * <!-- @formatter:on -->
 */
 public interface OpenSamlAssertionBasedRequest extends AssertionBasedRequest, XMLObject {
 	public void setAssertion(Assertion aAssertion);
+	// There are no special methods defined, but this intermediat interface has
+	// to be declared for opensaml reasons
 }

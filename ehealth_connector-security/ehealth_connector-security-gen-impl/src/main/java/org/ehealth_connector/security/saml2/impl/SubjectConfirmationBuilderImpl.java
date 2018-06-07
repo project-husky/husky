@@ -28,8 +28,8 @@ import org.joda.time.DateTime;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for SubjectConfirmation building.</div>
  * <div class="de">Die Klasse implementiert das entsprechende interface um SubjectConfirmation bilden zu k&ooml;nnen.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  *
  */
@@ -40,63 +40,17 @@ public class SubjectConfirmationBuilderImpl implements SubjectConfirmationBuilde
 	private org.opensaml.saml.saml2.core.SubjectConfirmationData subjectConfirmationData;
 
 	public SubjectConfirmationBuilderImpl() {
-		subjectConfirmation = new org.opensaml.saml.saml2.core.impl.SubjectConfirmationBuilder().buildObject();
-		subjectConfirmationData = new org.opensaml.saml.saml2.core.impl.SubjectConfirmationDataBuilder().buildObject();
+		subjectConfirmation = new org.opensaml.saml.saml2.core.impl.SubjectConfirmationBuilder()
+				.buildObject();
+		subjectConfirmationData = new org.opensaml.saml.saml2.core.impl.SubjectConfirmationDataBuilder()
+				.buildObject();
 		subjectConfirmation.setSubjectConfirmationData(subjectConfirmationData);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.saml2.SubjectConfirmationBuilder#method(java.lang.String)
-	 */
-	@Override
-	public SubjectConfirmationBuilder method(String aMethod) {
-		if (aMethod != null) {
-			subjectConfirmation.setMethod(aMethod);
-		}
-		return this;
-	}
-
-	@Override
-	public SubjectConfirmationBuilder inResponseTo(String aResponseTo) {
-		if (aResponseTo != null) {
-			subjectConfirmationData.setInResponseTo(aResponseTo);
-			;
-		}
-		return this;
-	}
-
-	@Override
-	public SubjectConfirmationBuilder notOnOrAfter(Calendar aNotOnOrAfter) {
-		if (aNotOnOrAfter != null) {
-			final DateTime dateTime = new DateTime(aNotOnOrAfter.getTimeInMillis());
-			subjectConfirmationData.setNotOnOrAfter(dateTime);
-		}
-		return this;
-	}
-
-	@Override
-	public SubjectConfirmationBuilder notBefore(Calendar aNotBefore) {
-		if (aNotBefore != null) {
-			final DateTime dateTime = new DateTime(aNotBefore.getTimeInMillis());
-			subjectConfirmationData.setNotBefore(dateTime);
-		}
-		return this;
 	}
 
 	@Override
 	public SubjectConfirmationBuilder address(String aAddress) {
 		if (aAddress != null) {
 			subjectConfirmationData.setAddress(aAddress);
-		}
-		return this;
-	}
-
-	@Override
-	public SubjectConfirmationBuilder recipient(String aRecipient) {
-		if (aRecipient != null) {
-			subjectConfirmationData.setRecipient(aRecipient);
 		}
 		return this;
 	}
@@ -117,8 +71,57 @@ public class SubjectConfirmationBuilderImpl implements SubjectConfirmationBuilde
 	 * @see org.ehealth_connector.security.core.SecurityObjectBuilder#create(java.lang.Object)
 	 */
 	@Override
-	public SubjectConfirmation create(org.opensaml.saml.saml2.core.SubjectConfirmation aInternalObject) {
+	public SubjectConfirmation create(
+			org.opensaml.saml.saml2.core.SubjectConfirmation aInternalObject) {
 		return new SubjectConfirmationImpl(aInternalObject);
+	}
+
+	@Override
+	public SubjectConfirmationBuilder inResponseTo(String aResponseTo) {
+		if (aResponseTo != null) {
+			subjectConfirmationData.setInResponseTo(aResponseTo);
+			;
+		}
+		return this;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.SubjectConfirmationBuilder#method(java.lang.String)
+	 */
+	@Override
+	public SubjectConfirmationBuilder method(String aMethod) {
+		if (aMethod != null) {
+			subjectConfirmation.setMethod(aMethod);
+		}
+		return this;
+	}
+
+	@Override
+	public SubjectConfirmationBuilder notBefore(Calendar aNotBefore) {
+		if (aNotBefore != null) {
+			final DateTime dateTime = new DateTime(aNotBefore.getTimeInMillis());
+			subjectConfirmationData.setNotBefore(dateTime);
+		}
+		return this;
+	}
+
+	@Override
+	public SubjectConfirmationBuilder notOnOrAfter(Calendar aNotOnOrAfter) {
+		if (aNotOnOrAfter != null) {
+			final DateTime dateTime = new DateTime(aNotOnOrAfter.getTimeInMillis());
+			subjectConfirmationData.setNotOnOrAfter(dateTime);
+		}
+		return this;
+	}
+
+	@Override
+	public SubjectConfirmationBuilder recipient(String aRecipient) {
+		if (aRecipient != null) {
+			subjectConfirmationData.setRecipient(aRecipient);
+		}
+		return this;
 	}
 
 }

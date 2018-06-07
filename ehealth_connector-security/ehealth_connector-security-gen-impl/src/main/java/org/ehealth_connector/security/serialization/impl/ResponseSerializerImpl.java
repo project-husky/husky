@@ -27,11 +27,26 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Serializer<Response></div>
  * <div class="de">Implementations Klasse von Serializer<Response></div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class ResponseSerializerImpl extends AbstractSerializerImpl implements Serializer<Response> {
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.serialization.Serializer#toXmlByteArray(java.lang.Object)
+	 */
+	@Override
+	public byte[] toXmlByteArray(Response aSecurityObject) throws SerializeException {
+		try {
+			return getOpenSamlSerializer()
+					.serializeToByteArray(((ResponseImpl) aSecurityObject).getWrappedObject());
+		} catch (final Exception e) {
+			throw new SerializeException(e);
+		}
+	}
 
 	/**
 	 * {@inheritDoc}
@@ -41,7 +56,8 @@ public class ResponseSerializerImpl extends AbstractSerializerImpl implements Se
 	@Override
 	public Element toXmlElement(Response aSecurityObject) throws SerializeException {
 		try {
-			return getOpenSamlSerializer().serializeToXml(((ResponseImpl) aSecurityObject).getWrappedObject());
+			return getOpenSamlSerializer()
+					.serializeToXml(((ResponseImpl) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
@@ -55,21 +71,8 @@ public class ResponseSerializerImpl extends AbstractSerializerImpl implements Se
 	@Override
 	public String toXmlString(Response aSecurityObject) throws SerializeException {
 		try {
-			return getOpenSamlSerializer().serializeToString(((ResponseImpl) aSecurityObject).getWrappedObject());
-		} catch (final Exception e) {
-			throw new SerializeException(e);
-		}
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.serialization.Serializer#toXmlByteArray(java.lang.Object)
-	 */
-	@Override
-	public byte[] toXmlByteArray(Response aSecurityObject) throws SerializeException {
-		try {
-			return getOpenSamlSerializer().serializeToByteArray(((ResponseImpl) aSecurityObject).getWrappedObject());
+			return getOpenSamlSerializer()
+					.serializeToString(((ResponseImpl) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}

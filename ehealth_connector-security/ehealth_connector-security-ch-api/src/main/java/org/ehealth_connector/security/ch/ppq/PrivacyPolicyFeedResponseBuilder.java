@@ -23,89 +23,89 @@ import org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeed.PpfMethod;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods for the PrivacyPolicyFeedResponseBuilder</div>
  * <div class="de">Interface welches die Methoden für den Privacy Policy Feed beschreiben.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface PrivacyPolicyFeedResponseBuilder {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set the status of the PrivacyPolicyFeedResponse to be build.</div>
-	 * <div class="de">Methode um ein status dem PrivacyPolicyFeedResponse hinzuzufügen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="en">Creates a concrete instance of PrivacyPolicyFeedResponse with setted params.</div>
+	 * <div class="de">Erstellt die konkrete instanz des PrivacyPolicyFeedResponse mit den gesetzten parametern.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
-	 * @param aStatus
-	 *  <div class="en">the consent to be set</div>
-	 * 	<div class="de">der consent der gesetzt werden soll</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * @return 
-	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * <!-- @formatter:on -->
+	 * @return
+	 *  <div class="en">a new PrivacyPolicyFeedResponse instance with the params set</div>
+	 *  <div class="de">eine neue PrivacyPolicyFeedResponse instanz mit den gesetzten parametern</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 *  <!-- @formatter:on -->
 	 */
-	PrivacyPolicyFeedResponseBuilder status(String aStatus);
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set the method of the PrivacyPolicyFeedResponse to be build.</div>
-	 * <div class="de">Methode um ein method dem PrivacyPolicyFeedResponse hinzuzufügen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 *
-	 * @param aMethod
-	 *  <div class="en">the method of the request which will be set</div>
-	 * 	<div class="de">die Methode des Requests die gesetzt werden soll.</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * @return 
-	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * <!-- @formatter:on -->
-	 */
-	PrivacyPolicyFeedResponseBuilder method(PpfMethod aMethod);
+	PrivacyPolicyFeedResponse create();
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the exception to be build.</div>
 	 * <div class="de">Methode um eine Exception hinzuzufügen.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aException
 	 *  <div class="en">the exception extracted from the message.</div>
 	 * 	<div class="de">der Fehler der aus der meldung gelesen wurde.</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 * @return 
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
 	 *  <div class="de">die aktuelle instanz des builders</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	PrivacyPolicyFeedResponseBuilder exception(Exception aException);
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Creates a concrete instance of PrivacyPolicyFeedResponse with setted params.</div>
-	 * <div class="de">Erstellt die konkrete instanz des PrivacyPolicyFeedResponse mit den gesetzten parametern.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="en">Method to set the method of the PrivacyPolicyFeedResponse to be build.</div>
+	 * <div class="de">Methode um ein method dem PrivacyPolicyFeedResponse hinzuzufügen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
-	 * @return 
-	 *  <div class="en">a new PrivacyPolicyFeedResponse instance with the params set</div>
-	 *  <div class="de">eine neue PrivacyPolicyFeedResponse instanz mit den gesetzten parametern</div>
-	 *  <div class="fr">VOICIFRANCAIS</div>
-	 *  <div class="it">ITALIANO</div>
-	 *  <!-- @formatter:on -->
+	 * @param aMethod
+	 *  <div class="en">the method of the request which will be set</div>
+	 * 	<div class="de">die Methode des Requests die gesetzt werden soll.</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * @return
+	 *  <div class="en">the actual instance of this builder</div>
+	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * <!-- @formatter:on -->
 	 */
-	PrivacyPolicyFeedResponse create();
+	PrivacyPolicyFeedResponseBuilder method(PpfMethod aMethod);
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the status of the PrivacyPolicyFeedResponse to be build.</div>
+	 * <div class="de">Methode um ein status dem PrivacyPolicyFeedResponse hinzuzufügen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param aStatus
+	 *  <div class="en">the consent to be set</div>
+	 * 	<div class="de">der consent der gesetzt werden soll</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * @return
+	 *  <div class="en">the actual instance of this builder</div>
+	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	PrivacyPolicyFeedResponseBuilder status(String aStatus);
 
 }

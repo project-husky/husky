@@ -31,11 +31,13 @@ public class ConditionBuilderImplTest {
 	@Before
 	public void setUp() throws Exception {
 		builder = new ConditionBuilderImpl();
-		testInnerObject = new org.opensaml.saml.saml2.core.impl.AudienceRestrictionBuilder().buildObject();
+		testInnerObject = new org.opensaml.saml.saml2.core.impl.AudienceRestrictionBuilder()
+				.buildObject();
 	}
 
 	/**
-	 * Test method for {@link org.ehealth_connector.security.saml2.impl.ConditionBuilderImpl#create(org.opensaml.saml.saml2.core.Condition)}.
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.ConditionBuilderImpl#create(org.opensaml.saml.saml2.core.Condition)}.
 	 */
 	@Test
 	public void testCreate() {

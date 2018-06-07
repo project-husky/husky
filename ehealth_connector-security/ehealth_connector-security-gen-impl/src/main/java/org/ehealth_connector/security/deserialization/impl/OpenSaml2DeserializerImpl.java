@@ -34,8 +34,8 @@ import org.w3c.dom.Element;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface OpenSaml2Deserializer<T> .</div>
  * <div class="de">Die Klasse implementiert das entsprechende interfaceOpenSaml2Deserializer<T> .</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class OpenSaml2DeserializerImpl<T> implements OpenSaml2Deserializer<T> {
@@ -46,18 +46,7 @@ public class OpenSaml2DeserializerImpl<T> implements OpenSaml2Deserializer<T> {
 	}
 
 	/**
-	 * 
-	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.deserialization.OpenSaml2Deserializer#deserializeFromString(java.lang.String)
-	 */
-	@Override
-	public T deserializeFromString(String aXmlString) throws DeserializeException {
-		return deserializeFromByteArray(aXmlString.getBytes());
-	}
-
-	/**
-	 * 
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.deserialization.OpenSaml2Deserializer#deserializeFromByteArray(byte[])
@@ -74,7 +63,42 @@ public class OpenSaml2DeserializerImpl<T> implements OpenSaml2Deserializer<T> {
 	}
 
 	/**
-	 * 
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.deserialization.OpenSaml2Deserializer#deserializeFromByteArrayToXmlElement(byte[])
+	 */
+	@Override
+	public Element deserializeFromByteArrayToXmlElement(byte[] aXmlBytes)
+			throws DeserializeException {
+		final String FEATURE = "http://xml.org/sax/features/external-general-entities";
+		try {
+			final DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
+					.newInstance();
+			documentBuilderFactory.setNamespaceAware(true);
+			documentBuilderFactory.setFeature(FEATURE, false);
+			final DocumentBuilder docBuilder = documentBuilderFactory.newDocumentBuilder();
+			final Document document = docBuilder.parse(new ByteArrayInputStream(aXmlBytes));
+
+			return document.getDocumentElement();
+		} catch (final Exception e) {
+			throw new DeserializeException(e);
+		}
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.deserialization.OpenSaml2Deserializer#deserializeFromString(java.lang.String)
+	 */
+	@Override
+	public T deserializeFromString(String aXmlString) throws DeserializeException {
+		return deserializeFromByteArray(aXmlString.getBytes());
+	}
+
+	/**
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.deserialization.OpenSaml2Deserializer#deserializeFromXml(org.w3c.dom.Element)
@@ -84,32 +108,11 @@ public class OpenSaml2DeserializerImpl<T> implements OpenSaml2Deserializer<T> {
 	@Override
 	public T deserializeFromXml(Element aXmlElement) throws DeserializeException {
 		try {
-			final UnmarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport.getUnmarshallerFactory();
+			final UnmarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport
+					.getUnmarshallerFactory();
 			final Unmarshaller unmarshaller = marshallerFactory.getUnmarshaller(aXmlElement);
 
 			return (T) unmarshaller.unmarshall(aXmlElement);
-		} catch (final Exception e) {
-			throw new DeserializeException(e);
-		}
-	}
-
-	/**
-	 * 
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.deserialization.OpenSaml2Deserializer#deserializeFromByteArrayToXmlElement(byte[])
-	 */
-	@Override
-	public Element deserializeFromByteArrayToXmlElement(byte[] aXmlBytes) throws DeserializeException {
-		final String FEATURE = "http://xml.org/sax/features/external-general-entities";
-		try {
-			final DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-			documentBuilderFactory.setNamespaceAware(true);
-			documentBuilderFactory.setFeature(FEATURE, false);
-			final DocumentBuilder docBuilder = documentBuilderFactory.newDocumentBuilder();
-			final Document document = docBuilder.parse(new ByteArrayInputStream(aXmlBytes));
-
-			return document.getDocumentElement();
 		} catch (final Exception e) {
 			throw new DeserializeException(e);
 		}

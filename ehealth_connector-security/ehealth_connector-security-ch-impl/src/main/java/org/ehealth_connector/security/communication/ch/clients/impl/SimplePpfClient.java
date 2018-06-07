@@ -65,11 +65,12 @@ import org.xml.sax.SAXException;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the simple ppq client.</div>
  * <div class="de">Klasser die den Simple PPQ Client implementiert.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class SimplePpfClient extends AbstractSoapClient<PrivacyPolicyFeedResponse> implements PpfClient {
+public class SimplePpfClient extends AbstractSoapClient<PrivacyPolicyFeedResponse>
+		implements PpfClient {
 
 	private static final String EHS_2015_POLYADMIN = "urn:e-health-suisse:2015:policy-administration:";
 
@@ -79,20 +80,21 @@ public class SimplePpfClient extends AbstractSoapClient<PrivacyPolicyFeedRespons
 	}
 
 	@Override
-	public PrivacyPolicyFeedResponse send(SecurityHeaderElement aAssertion, PrivacyPolicyFeed request)
-			throws ClientSendException {
+	public PrivacyPolicyFeedResponse send(SecurityHeaderElement aAssertion,
+			PrivacyPolicyFeed request) throws ClientSendException {
 
 		try {
 			final HttpPost post = getHttpPost();
 
 			final String actionString = EHS_2015_POLYADMIN + request.getMethod().name();
 
-			final WsaHeaderValue wsHeaders = new WsaHeaderValue("urn:uuid:" + UUID.randomUUID().toString(),
-					actionString, null);
+			final WsaHeaderValue wsHeaders = new WsaHeaderValue(
+					"urn:uuid:" + UUID.randomUUID().toString(), actionString, null);
 
 			post.setEntity(getSoapEntity(aAssertion, request, wsHeaders));
 
-			final PrivacyPolicyFeedResponseImpl response = (PrivacyPolicyFeedResponseImpl) execute(post);
+			final PrivacyPolicyFeedResponseImpl response = (PrivacyPolicyFeedResponseImpl) execute(
+					post);
 			response.setMethod(request.getMethod());
 			return response;
 		} catch (final Throwable t) {
@@ -100,14 +102,15 @@ public class SimplePpfClient extends AbstractSoapClient<PrivacyPolicyFeedRespons
 		}
 	}
 
-	private HttpEntity getSoapEntity(SecurityHeaderElement aSecurityHeaderElement, PrivacyPolicyFeed feed,
-			WsaHeaderValue wsHeaders)
-			throws ParserConfigurationException, SerializeException, TransformerException, MarshallingException {
+	private HttpEntity getSoapEntity(SecurityHeaderElement aSecurityHeaderElement,
+			PrivacyPolicyFeed feed, WsaHeaderValue wsHeaders) throws ParserConfigurationException,
+			SerializeException, TransformerException, MarshallingException {
 		final Element envelopElement = createEnvelope();
 
 		Element headerAssertionElement = null;
 		if (aSecurityHeaderElement instanceof Assertion) {
-			headerAssertionElement = new AssertionSerializerImpl().toXmlElement((Assertion) aSecurityHeaderElement);
+			headerAssertionElement = new AssertionSerializerImpl()
+					.toXmlElement((Assertion) aSecurityHeaderElement);
 		} else if (aSecurityHeaderElement instanceof EncryptedAssertion) {
 			headerAssertionElement = new EncryptedAssertionSerializerImpl()
 					.toXmlElement((EncryptedAssertion) aSecurityHeaderElement);
@@ -116,15 +119,19 @@ public class SimplePpfClient extends AbstractSoapClient<PrivacyPolicyFeedRespons
 
 		OpenSamlAssertionBasedRequest opensamlFeed = null;
 		if (PrivacyPolicyFeed.PpfMethod.AddPolicy.equals(feed.getMethod())) {
-			opensamlFeed = new AddPolicyRequestBuilder().assertion(feed.getAssertion()).buildObject();
+			opensamlFeed = new AddPolicyRequestBuilder().assertion(feed.getAssertion())
+					.buildObject();
 		} else if (PrivacyPolicyFeed.PpfMethod.UpdatePolicy.equals(feed.getMethod())) {
-			opensamlFeed = new UpdatePolicyRequestBuilder().assertion(feed.getAssertion()).buildObject();
+			opensamlFeed = new UpdatePolicyRequestBuilder().assertion(feed.getAssertion())
+					.buildObject();
 		} else if (PrivacyPolicyFeed.PpfMethod.DeletePolicy.equals(feed.getMethod())) {
-			opensamlFeed = new DeletePolicyRequestBuilder().assertion(feed.getAssertion()).buildObject();
+			opensamlFeed = new DeletePolicyRequestBuilder().assertion(feed.getAssertion())
+					.buildObject();
 		}
 
 		// serialize the authnrequest to xml element
-		final MarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport.getMarshallerFactory();
+		final MarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport
+				.getMarshallerFactory();
 		final Marshaller marshaller = marshallerFactory.getMarshaller(opensamlFeed);
 
 		final Element policyElement = marshaller.marshall(opensamlFeed);
@@ -143,12 +150,15 @@ public class SimplePpfClient extends AbstractSoapClient<PrivacyPolicyFeedRespons
 	}
 
 	@Override
-	protected PrivacyPolicyFeedResponse parseResponse(String httpResponse) throws ClientSendException {
+	protected PrivacyPolicyFeedResponse parseResponse(String httpResponse)
+			throws ClientSendException {
 		try {
 
-			final Element reponseElement = getResponseElement(httpResponse, EprPolicyRepositoryResponse.DEFAULT_NS_URI,
+			final Element reponseElement = getResponseElement(httpResponse,
+					EprPolicyRepositoryResponse.DEFAULT_NS_URI,
 					EprPolicyRepositoryResponse.DEFAULT_ELEMENT_LOCAL_NAME);
-			final UnmarshallerFactory unmarshallerFactory = XMLObjectProviderRegistrySupport.getUnmarshallerFactory();
+			final UnmarshallerFactory unmarshallerFactory = XMLObjectProviderRegistrySupport
+					.getUnmarshallerFactory();
 			final Unmarshaller unmarshaller = unmarshallerFactory.getUnmarshaller(reponseElement);
 
 			final EprPolicyRepositoryResponse response = (EprPolicyRepositoryResponse) unmarshaller
@@ -160,17 +170,21 @@ public class SimplePpfClient extends AbstractSoapClient<PrivacyPolicyFeedRespons
 
 			return new PrivacyPolicyFeedResponseBuilderImpl().status(response.getStatus()).create();
 		} catch (UnsupportedOperationException | IOException | TransformerFactoryConfigurationError
-				| ParserConfigurationException | SAXException | UnmarshallingException | XPathExpressionException e) {
+				| ParserConfigurationException | SAXException | UnmarshallingException
+				| XPathExpressionException e) {
 			throw new ClientSendException(e);
 		}
 	}
 
 	@Override
-	protected PrivacyPolicyFeedResponse parseResponseError(String httpResponse) throws ClientSendException {
+	protected PrivacyPolicyFeedResponse parseResponseError(String httpResponse)
+			throws ClientSendException {
 		try {
-			final Element reponseElement = getResponseElement(httpResponse, EprPolicyRepositoryResponse.DEFAULT_NS_URI,
+			final Element reponseElement = getResponseElement(httpResponse,
+					EprPolicyRepositoryResponse.DEFAULT_NS_URI,
 					EprPolicyRepositoryResponse.DEFAULT_ELEMENT_LOCAL_NAME);
-			final UnmarshallerFactory unmarshallerFactory = XMLObjectProviderRegistrySupport.getUnmarshallerFactory();
+			final UnmarshallerFactory unmarshallerFactory = XMLObjectProviderRegistrySupport
+					.getUnmarshallerFactory();
 			final Unmarshaller unmarshaller = unmarshallerFactory.getUnmarshaller(reponseElement);
 
 			final EprPolicyRepositoryResponse response = (EprPolicyRepositoryResponse) unmarshaller
@@ -180,8 +194,8 @@ public class SimplePpfClient extends AbstractSoapClient<PrivacyPolicyFeedRespons
 					.status(response.getStatus()).create();
 
 			try {
-				final Element faultElement = getResponseElement(httpResponse, "http://www.w3.org/2003/05/soap-envelope",
-						"Fault");
+				final Element faultElement = getResponseElement(httpResponse,
+						"http://www.w3.org/2003/05/soap-envelope", "Fault");
 				if (faultElement != null) {
 					final SoapException exception = getSoapException(faultElement);
 					ppfResponse.getExceptions().add(exception);
@@ -191,8 +205,8 @@ public class SimplePpfClient extends AbstractSoapClient<PrivacyPolicyFeedRespons
 				getLogger().trace("Error", e);
 			}
 			try {
-				final Element faultText = getResponseElement(httpResponse, "http://www.w3.org/2003/05/soap-envelope",
-						"Text");
+				final Element faultText = getResponseElement(httpResponse,
+						"http://www.w3.org/2003/05/soap-envelope", "Text");
 				if (faultText != null) {
 					final SoapException exception = getSoapException(faultText);
 					ppfResponse.getExceptions().add(exception);
@@ -202,8 +216,9 @@ public class SimplePpfClient extends AbstractSoapClient<PrivacyPolicyFeedRespons
 			}
 
 			return ppfResponse;
-		} catch (UnsupportedOperationException | TransformerFactoryConfigurationError | ParseException | IOException
-				| ParserConfigurationException | SAXException | UnmarshallingException | XPathExpressionException e) {
+		} catch (UnsupportedOperationException | TransformerFactoryConfigurationError
+				| ParseException | IOException | ParserConfigurationException | SAXException
+				| UnmarshallingException | XPathExpressionException e) {
 			throw new ClientSendException(e);
 		}
 	}

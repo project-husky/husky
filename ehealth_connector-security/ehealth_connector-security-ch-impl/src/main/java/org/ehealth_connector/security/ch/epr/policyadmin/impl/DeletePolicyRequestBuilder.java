@@ -26,11 +26,12 @@ import org.opensaml.core.xml.AbstractXMLObjectBuilder;
  * <!-- @formatter:off -->
  * <div class="en">Builder class for OpenSamlDeletePolicyRequest.</div>
  * <div class="de">Builder Klasse für OpenSamlDeletePolicyRequest.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class DeletePolicyRequestBuilder extends AbstractXMLObjectBuilder<OpenSamlDeletePolicyRequest> {
+public class DeletePolicyRequestBuilder
+		extends AbstractXMLObjectBuilder<OpenSamlDeletePolicyRequest> {
 
 	private Assertion assertion;
 
@@ -40,13 +41,15 @@ public class DeletePolicyRequestBuilder extends AbstractXMLObjectBuilder<OpenSam
 	}
 
 	public OpenSamlDeletePolicyRequest buildObject() {
-		return buildObject(DeletePolicyRequest.DEFAULT_NS_URI, DeletePolicyRequest.DEFAULT_ELEMENT_LOCAL_NAME,
-				DeletePolicyRequest.DEFAULT_PREFIX);
+		return buildObject(DeletePolicyRequest.DEFAULT_NS_URI,
+				DeletePolicyRequest.DEFAULT_ELEMENT_LOCAL_NAME, DeletePolicyRequest.DEFAULT_PREFIX);
 	}
 
 	@Override
-	public OpenSamlDeletePolicyRequest buildObject(String namespaceURI, String localName, String namespacePrefix) {
-		final OpenSamlDeletePolicyRequest abr = new DeletePolicyRequestImpl(namespaceURI, localName, namespacePrefix);
+	public OpenSamlDeletePolicyRequest buildObject(String namespaceURI, String localName,
+			String namespacePrefix) {
+		final OpenSamlDeletePolicyRequest abr = new DeletePolicyRequestImpl(namespaceURI, localName,
+				namespacePrefix);
 		if (assertion != null) {
 			abr.setAssertion(assertion);
 		}

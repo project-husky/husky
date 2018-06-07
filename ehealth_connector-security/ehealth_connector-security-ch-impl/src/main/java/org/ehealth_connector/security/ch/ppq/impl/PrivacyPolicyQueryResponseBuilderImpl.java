@@ -26,13 +26,13 @@ import org.opensaml.saml.saml2.core.Response;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the interfaces PrivacyPolicyQueryResponseBuilder and SecurityObjectBuilder.</div>
  * <div class="de">Klasse welche das Interface PrivacyPolicyQueryResponseBuilder and SecurityObjectBuilder implementiert.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->/div>
  * <!-- @formatter:on -->
  */
-public class PrivacyPolicyQueryResponseBuilderImpl
-		implements PrivacyPolicyQueryResponseBuilder, SecurityObjectBuilder<Response, PrivacyPolicyQueryResponse> {
+public class PrivacyPolicyQueryResponseBuilderImpl implements PrivacyPolicyQueryResponseBuilder,
+		SecurityObjectBuilder<Response, PrivacyPolicyQueryResponse> {
 
 	@Override
 	public PrivacyPolicyQueryResponse create(Response request) {

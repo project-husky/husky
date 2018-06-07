@@ -38,8 +38,8 @@ import org.ehealth_connector.security.saml2.Response;
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the idp client with cert authentication.</div>
  * <div class="de">Klasse die den idp client mit cert authentication implementiert.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class IdpClientByCert extends AbstractHttpFormIdpClient {
@@ -52,14 +52,17 @@ public class IdpClientByCert extends AbstractHttpFormIdpClient {
 	}
 
 	@Override
-	public Response send(AuthnRequest aAuthnRequest) throws ClientSendException {
+	public CloseableHttpClient getHttpClient() throws ClientSendException {
 		try {
-			final HttpPost post = getHttpPost(aAuthnRequest, config);
-
-			return execute(post);
-		} catch (final Throwable t) {
-			throw new ClientSendException(t);
+			final SSLContext sslContext = SSLContexts.custom()
+					.loadKeyMaterial(config.getClientKeyStore(), config.getClientKeyStorePassword())
+					.build();
+			return HttpClients.custom().setSslcontext(sslContext).build();
+		} catch (KeyManagementException | UnrecoverableKeyException | NoSuchAlgorithmException
+				| KeyStoreException e) {
+			throw new ClientSendException(e);
 		}
+
 	}
 
 	@Override
@@ -68,15 +71,14 @@ public class IdpClientByCert extends AbstractHttpFormIdpClient {
 	}
 
 	@Override
-	public CloseableHttpClient getHttpClient() throws ClientSendException {
+	public Response send(AuthnRequest aAuthnRequest) throws ClientSendException {
 		try {
-			final SSLContext sslContext = SSLContexts.custom()
-					.loadKeyMaterial(config.getClientKeyStore(), config.getClientKeyStorePassword()).build();
-			return HttpClients.custom().setSslcontext(sslContext).build();
-		} catch (KeyManagementException | UnrecoverableKeyException | NoSuchAlgorithmException | KeyStoreException e) {
-			throw new ClientSendException(e);
-		}
+			final HttpPost post = getHttpPost(aAuthnRequest, config);
 
+			return execute(post);
+		} catch (final Throwable t) {
+			throw new ClientSendException(t);
+		}
 	}
 
 }

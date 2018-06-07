@@ -21,12 +21,22 @@ package org.ehealth_connector.security.communication.xua;
  * <!-- @formatter:off -->
  * <div class="en">Enumeration defining the TokenTypes.</div>
  * <div class="de">Enumeration die die TokenTypes definiert.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public enum TokenType {
-	OASIS_WSS_SAML_PROFILE_11_SAMLV20("http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0");
+	OASIS_WSS_SAML_PROFILE_11_SAMLV20(
+			"http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0");
+
+	public static TokenType getEnum(String code) {
+		for (final TokenType x : values()) {
+			if (x.toString().equals(code)) {
+				return x;
+			}
+		}
+		return null;
+	}
 
 	private String code;
 
@@ -37,14 +47,5 @@ public enum TokenType {
 	@Override
 	public String toString() {
 		return code;
-	}
-
-	public static TokenType getEnum(String code) {
-		for (final TokenType x : values()) {
-			if (x.toString().equals(code)) {
-				return x;
-			}
-		}
-		return null;
 	}
 }

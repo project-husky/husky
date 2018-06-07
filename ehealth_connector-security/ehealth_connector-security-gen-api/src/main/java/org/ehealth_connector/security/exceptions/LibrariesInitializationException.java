@@ -21,16 +21,16 @@ public class LibrariesInitializationException extends Exception {
 
 	private static final long serialVersionUID = -558241448346503409L;
 
+	public LibrariesInitializationException(String message) {
+		super(message);
+	}
+
 	public LibrariesInitializationException(String message, Throwable cause) {
 		super(message, cause);
 	}
 
 	public LibrariesInitializationException(Throwable cause) {
 		super(cause);
-	}
-
-	public LibrariesInitializationException(String message) {
-		super(message);
 	}
 
 }

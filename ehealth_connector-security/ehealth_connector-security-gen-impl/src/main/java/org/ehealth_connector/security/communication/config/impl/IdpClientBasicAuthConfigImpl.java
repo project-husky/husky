@@ -23,8 +23,8 @@ import org.ehealth_connector.security.communication.config.IdpClientConfig;
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Interface IdpClientConfig</div>
  * <div class="de">Implementations Klasse von Interface IdpClientConfig</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class IdpClientBasicAuthConfigImpl extends AbstractClientConfig implements IdpClientConfig {
@@ -37,20 +37,20 @@ public class IdpClientBasicAuthConfigImpl extends AbstractClientConfig implement
 
 	}
 
-	public String getBasicAuthUsername() {
-		return basicAuthUsername;
-	}
-
-	public void setBasicAuthUsername(String basicAuthUsername) {
-		this.basicAuthUsername = basicAuthUsername;
-	}
-
 	public String getBasicAuthPassword() {
 		return basicAuthPassword;
 	}
 
+	public String getBasicAuthUsername() {
+		return basicAuthUsername;
+	}
+
 	public void setBasicAuthPassword(String basicAuthPassword) {
 		this.basicAuthPassword = basicAuthPassword;
+	}
+
+	public void setBasicAuthUsername(String basicAuthUsername) {
+		this.basicAuthUsername = basicAuthUsername;
 	}
 
 }

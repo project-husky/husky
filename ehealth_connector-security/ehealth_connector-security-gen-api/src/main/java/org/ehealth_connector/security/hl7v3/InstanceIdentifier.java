@@ -23,8 +23,8 @@ import javax.xml.namespace.QName;
  * <!-- @formatter:off -->
  * <div class="en">Describing the methods of the InstanceIdentifier Interface</div>
  * <div class="de">Beschreibung der Methoden des InstanceIdentifier Interfaces</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface InstanceIdentifier {
@@ -37,7 +37,8 @@ public interface InstanceIdentifier {
 	public static final String DEFAULT_PREFIX = "hl7";
 
 	/** Default element name. */
-	public static final QName ELEMENT_NAME = new QName(DEFAULT_NS_URI, DEFAULT_ELEMENT_LOCAL_NAME, DEFAULT_PREFIX);
+	public static final QName ELEMENT_NAME = new QName(DEFAULT_NS_URI, DEFAULT_ELEMENT_LOCAL_NAME,
+			DEFAULT_PREFIX);
 
 	/** Local name of the XSI type. */
 	public static final String TYPE_LOCAL_NAME = "InstanceIdentifier";
@@ -46,37 +47,37 @@ public interface InstanceIdentifier {
 	public static final QName TYPE_NAME = new QName("urn:hl7-org:v3", TYPE_LOCAL_NAME, "hl7");
 
 	/**
-	 * Gets the value of the root property.
-	 * 
-	 * @return possible object is {@link String }
-	 * 
-	 */
-	public String getRoot();
-
-	/**
-	 * Sets the value of the root property.
-	 * 
-	 * @param value
-	 *            allowed object is {@link String }
-	 * 
-	 */
-	public void setRoot(String value);
-
-	/**
 	 * Gets the value of the extension property.
-	 * 
+	 *
 	 * @return possible object is {@link String }
-	 * 
+	 *
 	 */
 	public String getExtension();
 
 	/**
+	 * Gets the value of the root property.
+	 *
+	 * @return possible object is {@link String }
+	 *
+	 */
+	public String getRoot();
+
+	/**
 	 * Sets the value of the extension property.
-	 * 
+	 *
 	 * @param value
 	 *            allowed object is {@link String }
-	 * 
+	 *
 	 */
 	public void setExtension(String value);
+
+	/**
+	 * Sets the value of the root property.
+	 *
+	 * @param value
+	 *            allowed object is {@link String }
+	 *
+	 */
+	public void setRoot(String value);
 
 }

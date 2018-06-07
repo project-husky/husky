@@ -31,13 +31,13 @@
 			<MarshallingClass className="org.ehealth_connector.security.ch.epr.policyadmin.impl.EprPolicyRepositoryResponseMarshaller" />
 			<UnmarshallingClass className="org.ehealth_connector.security.ch.epr.policyadmin.impl.EprPolicyRepositoryResponseUnmarshaller" />
 		</ObjectProvider>
-		
+
 		<!-- UnknownPolicySetId -->
-       <ObjectProvider qualifiedName="epr:UnknownPolicySetId">
-            <BuilderClass       className="org.ehealth_connector.security.ch.epr.policyadmin.impl.UnknownPolicySetIdBuilderImpl"/>
-            <MarshallingClass   className="org.ehealth_connector.security.ch.epr.policyadmin.impl.UnknownPolicySetIdMarshaller"/>
-            <UnmarshallingClass className="org.ehealth_connector.security.ch.epr.policyadmin.impl.UnknownPolicySetIdUnmarshaller"/>
-        </ObjectProvider>
+		<ObjectProvider qualifiedName="epr:UnknownPolicySetId">
+			<BuilderClass className="org.ehealth_connector.security.ch.epr.policyadmin.impl.UnknownPolicySetIdBuilderImpl" />
+			<MarshallingClass className="org.ehealth_connector.security.ch.epr.policyadmin.impl.UnknownPolicySetIdMarshaller" />
+			<UnmarshallingClass className="org.ehealth_connector.security.ch.epr.policyadmin.impl.UnknownPolicySetIdUnmarshaller" />
+		</ObjectProvider>
 
 	</ObjectProviders>
 

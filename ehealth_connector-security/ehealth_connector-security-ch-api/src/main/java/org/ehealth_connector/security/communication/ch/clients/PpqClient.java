@@ -26,8 +26,8 @@ import org.ehealth_connector.security.saml2.Response;
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods for the privacy policy query client</div>
  * <div class="de">Interface welches die Methoden für den Privacy Policy Query Client beschreiben.</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface PpqClient {
@@ -36,31 +36,32 @@ public interface PpqClient {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to send an PrivacyPolicyQuery.</div>
 	 * <div class="de">Methode um einene PrivacyPolicyQuery zu senden.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param aAssertion
 	 * <div class="en">the Assertion to be sent in the soap security header</div>
 	 * <div class="de">Die Assertion welches im soap security header mitgeschickt werden soll.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @param query
 	 * <div class="en">the PrivacyPolicyQuery to be sent.</div>
 	 * <div class="de">Die PrivacyPolicyQuery welches geschickt werden soll.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the Response</div>
 	 * <div class="de">Die Response.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * @throws ClientSendException
 	 * <div class="en">will be thrown if an error occoures</div>
 	 * <div class="de">wird geworfen wenn ein Fehler auftritt.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	Response send(SecurityHeaderElement aAssertion, PrivacyPolicyQuery query) throws ClientSendException;
+	Response send(SecurityHeaderElement aAssertion, PrivacyPolicyQuery query)
+			throws ClientSendException;
 
 }
