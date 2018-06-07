@@ -44,7 +44,7 @@ public interface PpfClient {
 	 * <div class="de">Die Assertion welches im soap security header mitgeschickt werden soll.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
-	 * @param query
+	 * @param request
 	 * <div class="en">the PrivacyPolicyFeed to be sent.</div>
 	 * <div class="de">Die PrivacyPolicyFeed welche geschickt werden soll.</div>
 	 * <div class="fr"></div>

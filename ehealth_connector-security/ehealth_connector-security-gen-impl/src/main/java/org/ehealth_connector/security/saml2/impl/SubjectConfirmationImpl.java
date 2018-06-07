@@ -69,9 +69,10 @@ public class SubjectConfirmationImpl implements SubjectConfirmation,
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.saml2.SubjectConfirmationData#getAddress()
+	 * @see org.ehealth_connector.security.saml2.SubjectConfirmation#getAddress()
 	 */
 	@Override
 	public String getAddress() {
@@ -82,9 +83,10 @@ public class SubjectConfirmationImpl implements SubjectConfirmation,
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.saml2.SubjectConfirmationData#getInResponseTo()
+	 * @see org.ehealth_connector.security.saml2.SubjectConfirmation#getInResponseTo()
 	 */
 	@Override
 	public String getInResponseTo() {
@@ -105,9 +107,10 @@ public class SubjectConfirmationImpl implements SubjectConfirmation,
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.saml2.SubjectConfirmationData#getNotBefore()
+	 * @see org.ehealth_connector.security.saml2.SubjectConfirmation#getNotBefore()
 	 */
 	@Override
 	public Calendar getNotBefore() {
@@ -122,9 +125,10 @@ public class SubjectConfirmationImpl implements SubjectConfirmation,
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.saml2.SubjectConfirmationData#getNotOnOrAfter()
+	 * @see org.ehealth_connector.security.saml2.SubjectConfirmation#getNotOnOrAfter()
 	 */
 	@Override
 	public Calendar getNotOnOrAfter() {
@@ -139,9 +143,10 @@ public class SubjectConfirmationImpl implements SubjectConfirmation,
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.saml2.SubjectConfirmationData#getRecipient()
+	 * @see org.ehealth_connector.security.saml2.SubjectConfirmation#getRecipient()
 	 */
 	@Override
 	public String getRecipient() {

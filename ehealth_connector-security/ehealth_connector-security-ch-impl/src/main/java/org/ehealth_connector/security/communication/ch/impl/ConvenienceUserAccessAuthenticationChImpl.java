@@ -57,9 +57,7 @@ public class ConvenienceUserAccessAuthenticationChImpl
 	 *
 	 * {@inheritDoc}
 	 *
-	 * @throws ClientSendException
-	 *
-	 * @see org.ehealth_connector.security.ch.ppq.PrivacyPolicyQueryModule#invokePrivacyPolicyQuery(org.ehealth_connector.security.saml2.Assertion,
+	 * @see org.ehealth_connector.security.ch.ppq.PrivacyPolicyQueryModule#invokePrivacyPolicyQuery(org.ehealth_connector.security.core.SecurityHeaderElement,
 	 *      org.ehealth_connector.security.ch.ppq.PrivacyPolicyQuery,
 	 *      org.ehealth_connector.security.communication.ch.ppq.config.PpClientConfig)
 	 */

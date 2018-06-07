@@ -22,6 +22,7 @@ import java.util.Calendar;
 import org.ehealth_connector.security.authentication.AuthnRequest;
 import org.ehealth_connector.security.core.SecurityObject;
 import org.ehealth_connector.security.saml2.Subject;
+import org.ehealth_connector.security.saml2.impl.SubjectBuilderImpl;
 import org.joda.time.DateTime;
 
 /**
@@ -105,9 +106,10 @@ public class AuthnRequestImpl
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.authentication.AuthnRequest#getID()
+	 * @see org.ehealth_connector.security.saml2.Base#getId()
 	 */
 	@Override
 	public String getId() {
@@ -115,9 +117,10 @@ public class AuthnRequestImpl
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.authentication.AuthnRequest#getIssueInstant()
+	 * @see org.ehealth_connector.security.saml2.Base#getIssueInstant()
 	 */
 	@Override
 	public Calendar getIssueInstant() {
@@ -141,6 +144,7 @@ public class AuthnRequestImpl
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.authentication.AuthnRequest#getNameIdPolicyAllowCreate()
@@ -154,6 +158,7 @@ public class AuthnRequestImpl
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.authentication.AuthnRequest#getNameIdPolicyFormat()
@@ -167,6 +172,7 @@ public class AuthnRequestImpl
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.authentication.AuthnRequest#getProtocolBinding()
@@ -177,6 +183,7 @@ public class AuthnRequestImpl
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.authentication.AuthnRequest#getProviderName()
@@ -187,14 +194,17 @@ public class AuthnRequestImpl
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.authentication.AuthnRequest#getSubject()
 	 */
 	@Override
 	public Subject getSubject() {
-		// TODO Auto-generated method stub
-		return null;
+		if (authnRequest.getSubject() != null) {
+			return new SubjectBuilderImpl().create(authnRequest.getSubject());
+		}
+		return new SubjectBuilderImpl().create();
 	}
 
 	/**

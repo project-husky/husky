@@ -41,6 +41,7 @@ public class SubjectImpl implements Subject, SecurityObject<org.opensaml.saml.sa
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.saml2.Subject#getNameIDFormat()
@@ -54,6 +55,7 @@ public class SubjectImpl implements Subject, SecurityObject<org.opensaml.saml.sa
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.saml2.Subject#getNameIDValue()
@@ -67,9 +69,10 @@ public class SubjectImpl implements Subject, SecurityObject<org.opensaml.saml.sa
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.saml2.Subject#getSubjectConfirmation()
+	 * @see org.ehealth_connector.security.saml2.Subject#getSubjectConfirmations()
 	 */
 	@Override
 	public List<SubjectConfirmation> getSubjectConfirmations() {
@@ -83,6 +86,7 @@ public class SubjectImpl implements Subject, SecurityObject<org.opensaml.saml.sa
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.core.SecurityObject#getWrappedObject()

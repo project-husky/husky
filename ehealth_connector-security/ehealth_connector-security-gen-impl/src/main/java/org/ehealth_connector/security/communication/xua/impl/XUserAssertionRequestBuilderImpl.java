@@ -64,9 +64,10 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#appliesTo(java.lang.String)
+	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#appliesTo(org.ehealth_connector.security.communication.xua.AppliesTo)
 	 */
 	@Override
 	public XUserAssertionRequestBuilder appliesTo(AppliesTo appliesTo) {
@@ -154,12 +155,10 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#purposeOfUse(java.lang.String)
-	 *      <PurposeOfUse code="NORM" codeSystem="2.16.756.5.30.1.127.3.10.5"
-	 *      codeSystemName="eHealth Suisse Verwendungszweck" displayName=
-	 *      "Normal" xsi:type="CE" xmlns="urn:hl7-org:v3" />
+	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#purposeOfUse(org.ehealth_connector.security.hl7v3.PurposeOfUse)
 	 */
 	@Override
 	public XUserAssertionRequestBuilder purposeOfUse(PurposeOfUse testPurposeOfUse) {

@@ -56,9 +56,18 @@ public interface XuaClientConfigBuilder extends SoapClientConfigBuilder {
 
 	/**
 	 *
-	 * {@inheritDoc}
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to create  the config with the parameters set.</div>
+	 * <div class="de">Methode um die Konfiguration mit den gesetzten parametern zu erstellen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
-	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#create()
+	 * @return
+	 * <div class="en">the creakted XuaClientConfig instace.</div>
+	 * <div class="de">Die erstellte XuaClientConfig Instanz.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
 	 */
 	XuaClientConfig create();
 
@@ -98,6 +107,13 @@ public interface XuaClientConfigBuilder extends SoapClientConfigBuilder {
 	@Override
 	XuaClientConfigBuilder serviceNamespace(String serviceNamespace);
 
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#simple(boolean)
+	 */
+	@Override
 	XuaClientConfigBuilder simple(boolean aSimple);
 
 	/**

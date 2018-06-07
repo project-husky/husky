@@ -71,7 +71,7 @@ import org.ehealth_connector.security.exceptions.ClientSendException;
 import org.ehealth_connector.security.exceptions.SerializeException;
 import org.ehealth_connector.security.exceptions.SoapException;
 import org.ehealth_connector.security.pki.PkiManager;
-import org.ehealth_connector.security.serialization.pki.PkiManagerImpl;
+import org.ehealth_connector.security.pki.impl.PkiManagerImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;

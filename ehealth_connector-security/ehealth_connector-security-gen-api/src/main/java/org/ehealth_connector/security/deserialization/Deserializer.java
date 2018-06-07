@@ -92,7 +92,7 @@ public interface Deserializer<T> {
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
-	 * @param aXmlElement
+	 * @param aXmlString
 	 *  <div class="en">Method to deserialize the xml String</div>
 	 *  <div class="de">Methode um das xml String zu deserialisieren</div>
 	 *  <div class="fr"></div>

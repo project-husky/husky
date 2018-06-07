@@ -61,9 +61,10 @@ public class ConvenienceUserAccessAuthenticationImpl
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.communication.ConvenienceUserAccessAuthentication#invokeGetXUserAssertion(org.ehealth_connector.security.saml2.Assertion,
+	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionModule#invokeGetXUserAssertion(org.ehealth_connector.security.core.SecurityHeaderElement,
 	 *      org.ehealth_connector.security.communication.xua.XUserAssertionRequest,
 	 *      org.ehealth_connector.security.communication.config.XuaClientConfig)
 	 */
@@ -78,11 +79,10 @@ public class ConvenienceUserAccessAuthenticationImpl
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @throws ClientSendException
-	 *
-	 * @see org.ehealth_connector.security.communication.ConvenienceUserAccessAuthentication#invokeUserAuthentication(org.ehealth_connector.security.authentication.AuthnRequest,
+	 * @see org.ehealth_connector.security.authentication.AuthenticationModule#invokeUserAuthentication(org.ehealth_connector.security.authentication.AuthnRequest,
 	 *      org.ehealth_connector.security.communication.config.IdpClientConfig)
 	 */
 	@Override

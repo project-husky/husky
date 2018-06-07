@@ -15,7 +15,7 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.security.serialization.pki;
+package org.ehealth_connector.security.pki.impl;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -55,10 +55,12 @@ import org.ehealth_connector.security.pki.PkiManager;
 public class PkiManagerImpl implements PkiManager {
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.pki.PkiManager#addClientCert(java.io.File,
-	 *      java.io.File, java.lang.String, java.security.KeyStore)
+	 * @see org.ehealth_connector.security.pki.PkiManager#addClientKeyAndCert(java.io.File,
+	 *      java.io.File, java.lang.String, java.security.KeyStore,
+	 *      java.lang.String)
 	 */
 	@Override
 	public void addClientKeyAndCert(File privateKeyPemPath, File clientCertPemPath, String alias,
@@ -89,12 +91,11 @@ public class PkiManagerImpl implements PkiManager {
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @throws KeyStoreException
-	 *
 	 * @see org.ehealth_connector.security.pki.PkiManager#addPublicCert(java.io.File,
-	 *      java.security.KeyStore)
+	 *      java.lang.String, java.security.KeyStore)
 	 */
 	@Override
 	public void addPublicCert(File publiCertPath, String alias, KeyStore keyStore)
@@ -110,10 +111,10 @@ public class PkiManagerImpl implements PkiManager {
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.pki.PkiManager#createNewStore(java.io.File,
-	 *      java.lang.String, java.lang.String)
+	 * @see org.ehealth_connector.security.pki.PkiManager#createNewStore(java.lang.String)
 	 */
 	@Override
 	public KeyStore createNewStore(String storeType) throws KeyStoreException {
@@ -127,9 +128,8 @@ public class PkiManagerImpl implements PkiManager {
 	}
 
 	/**
-	 * {@inheritDoc}
 	 *
-	 * @throws KeyStoreException
+	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.pki.PkiManager#listCertificateAliases(java.security.KeyStore)
 	 */
@@ -147,9 +147,8 @@ public class PkiManagerImpl implements PkiManager {
 	}
 
 	/**
-	 * {@inheritDoc}
 	 *
-	 * @throws KeyStoreException
+	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.pki.PkiManager#listCertificates(java.security.KeyStore)
 	 */
@@ -167,7 +166,7 @@ public class PkiManagerImpl implements PkiManager {
 	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.pki.PkiManager#loadStore(java.io.File,
+	 * @see org.ehealth_connector.security.pki.PkiManager#loadStore(java.io.InputStream,
 	 *      java.lang.String, java.lang.String)
 	 */
 	@Override
@@ -183,12 +182,11 @@ public class PkiManagerImpl implements PkiManager {
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @throws KeyStoreException
-	 *
 	 * @see org.ehealth_connector.security.pki.PkiManager#removeCert(java.lang.String,
-	 *      java.io.File)
+	 *      java.security.KeyStore)
 	 */
 	@Override
 	public void removeCert(String alias, KeyStore keyStore) throws KeyStoreException {
@@ -202,7 +200,7 @@ public class PkiManagerImpl implements PkiManager {
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.pki.PkiManager#storeStore(java.security.KeyStore,
-	 *      java.io.File, java.lang.String)
+	 *      java.io.OutputStream, java.lang.String)
 	 */
 	@Override
 	public void storeStore(KeyStore keyStore, OutputStream storeOutputStream, String storePassword)

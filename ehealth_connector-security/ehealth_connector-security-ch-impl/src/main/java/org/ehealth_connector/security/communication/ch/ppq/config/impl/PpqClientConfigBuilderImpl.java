@@ -19,6 +19,7 @@ package org.ehealth_connector.security.communication.ch.ppq.config.impl;
 
 import org.ehealth_connector.security.communication.ch.ppq.config.PpClientConfig;
 import org.ehealth_connector.security.communication.ch.ppq.config.PpClientConfigBuilder;
+import org.ehealth_connector.security.communication.config.SoapClientConfigBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -80,6 +81,12 @@ public class PpqClientConfigBuilderImpl implements PpClientConfigBuilder {
 	@Override
 	public PpClientConfigBuilder serviceNamespace(String serviceNamespace) {
 		config.setServiceNamespace(serviceNamespace);
+		return this;
+	}
+
+	@Override
+	public SoapClientConfigBuilder simple(boolean aSimple) {
+		config.setSimple(aSimple);
 		return this;
 	}
 

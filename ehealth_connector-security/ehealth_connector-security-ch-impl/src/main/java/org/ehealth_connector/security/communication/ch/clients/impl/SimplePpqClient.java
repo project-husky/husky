@@ -69,9 +69,10 @@ public class SimplePpqClient extends AbstractSoapClient<Response> implements Ppq
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.communication.ch.clients.PpqClient#send(org.ehealth_connector.security.saml2.Assertion,
+	 * @see org.ehealth_connector.security.communication.ch.clients.PpqClient#send(org.ehealth_connector.security.core.SecurityHeaderElement,
 	 *      org.ehealth_connector.security.ch.ppq.PrivacyPolicyQuery)
 	 */
 	@Override

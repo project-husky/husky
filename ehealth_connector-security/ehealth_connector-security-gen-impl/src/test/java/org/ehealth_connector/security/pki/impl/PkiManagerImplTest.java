@@ -15,7 +15,7 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.security.serialization.pki;
+package org.ehealth_connector.security.pki.impl;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -86,7 +86,7 @@ public class PkiManagerImplTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.serialization.pki.PkiManagerImpl#addClientCert(java.io.File, java.io.File, java.lang.String, java.security.KeyStore)}.
+	 * {@link org.ehealth_connector.security.pki.impl.PkiManagerImpl#addClientCert(java.io.File, java.io.File, java.lang.String, java.security.KeyStore)}.
 	 *
 	 * @throws KeyStoreException
 	 * @throws NoSuchAlgorithmException
@@ -106,9 +106,9 @@ public class PkiManagerImplTest {
 		// character in authority at index 7:
 		// file://C:\src\ehc-Metadata\ehealthconnector\ehealth_connector-security\ehealth_connector-security-gen-impl\.\src\test\resources\testClientKey_key.p8
 		// at
-		// org.ehealth_connector.security.serialization.pki.PkiManagerImpl.addClientKeyAndCert(PkiManagerImpl.java:136)
+		// org.ehealth_connector.security.pki.impl.PkiManagerImpl.addClientKeyAndCert(PkiManagerImpl.java:136)
 		// at
-		// org.ehealth_connector.security.serialization.pki.PkiManagerImplTest.testAddClientKeyAndCert(PkiManagerImplTest.java:173)
+		// org.ehealth_connector.security.pki.impl.PkiManagerImplTest.testAddClientKeyAndCert(PkiManagerImplTest.java:173)
 		// at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
 		// at
 		// sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
@@ -157,7 +157,7 @@ public class PkiManagerImplTest {
 		// at java.net.URI$Parser.parse(URI.java:3053)
 		// at java.net.URI.<init>(URI.java:588)
 		// at
-		// org.ehealth_connector.security.serialization.pki.PkiManagerImpl.addClientKeyAndCert(PkiManagerImpl.java:122)
+		// org.ehealth_connector.security.pki.impl.PkiManagerImpl.addClientKeyAndCert(PkiManagerImpl.java:122)
 		// ... 25 more
 		//
 
@@ -165,7 +165,7 @@ public class PkiManagerImplTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.serialization.pki.PkiManagerImpl#addPublicCert(java.io.File, java.security.KeyStore)}.
+	 * {@link org.ehealth_connector.security.pki.impl.PkiManagerImpl#addPublicCert(java.io.File, java.security.KeyStore)}.
 	 *
 	 * @throws KeyStoreException
 	 * @throws FileNotFoundException
@@ -184,7 +184,7 @@ public class PkiManagerImplTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.serialization.pki.PkiManagerImpl#createNewStore(java.lang.String)}.
+	 * {@link org.ehealth_connector.security.pki.impl.PkiManagerImpl#createNewStore(java.lang.String)}.
 	 *
 	 * @throws KeyStoreException
 	 */
@@ -196,7 +196,7 @@ public class PkiManagerImplTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.serialization.pki.PkiManagerImpl#listCertificateAliases(java.security.KeyStore)}.
+	 * {@link org.ehealth_connector.security.pki.impl.PkiManagerImpl#listCertificateAliases(java.security.KeyStore)}.
 	 *
 	 * @throws KeyStoreException
 	 */
@@ -211,7 +211,7 @@ public class PkiManagerImplTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.serialization.pki.PkiManagerImpl#listCertificates(java.security.KeyStore)}.
+	 * {@link org.ehealth_connector.security.pki.impl.PkiManagerImpl#listCertificates(java.security.KeyStore)}.
 	 *
 	 * @throws KeyStoreException
 	 */
@@ -226,7 +226,7 @@ public class PkiManagerImplTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.serialization.pki.PkiManagerImpl#loadStore(java.io.InputStream, java.lang.String, java.lang.String)}.
+	 * {@link org.ehealth_connector.security.pki.impl.PkiManagerImpl#loadStore(java.io.InputStream, java.lang.String, java.lang.String)}.
 	 *
 	 * @throws KeyStoreException
 	 * @throws NoSuchAlgorithmException
@@ -244,7 +244,7 @@ public class PkiManagerImplTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.serialization.pki.PkiManagerImpl#loadStore(java.io.InputStream, java.lang.String, java.lang.String)}.
+	 * {@link org.ehealth_connector.security.pki.impl.PkiManagerImpl#loadStore(java.io.InputStream, java.lang.String, java.lang.String)}.
 	 *
 	 * @throws KeyStoreException
 	 * @throws NoSuchAlgorithmException
@@ -262,7 +262,7 @@ public class PkiManagerImplTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.serialization.pki.PkiManagerImpl#loadStore(java.io.InputStream, java.lang.String, java.lang.String)}.
+	 * {@link org.ehealth_connector.security.pki.impl.PkiManagerImpl#loadStore(java.io.InputStream, java.lang.String, java.lang.String)}.
 	 *
 	 * @throws KeyStoreException
 	 * @throws NoSuchAlgorithmException
@@ -280,7 +280,7 @@ public class PkiManagerImplTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.serialization.pki.PkiManagerImpl#removeCert(java.lang.String, java.io.File)}.
+	 * {@link org.ehealth_connector.security.pki.impl.PkiManagerImpl#removeCert(java.lang.String, java.io.File)}.
 	 *
 	 * @throws KeyStoreException
 	 */
@@ -297,7 +297,7 @@ public class PkiManagerImplTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.serialization.pki.PkiManagerImpl#storeStore(java.security.KeyStore, java.io.OutputStream, java.lang.String)}.
+	 * {@link org.ehealth_connector.security.pki.impl.PkiManagerImpl#storeStore(java.security.KeyStore, java.io.OutputStream, java.lang.String)}.
 	 *
 	 * @throws KeyStoreException
 	 * @throws FileNotFoundException

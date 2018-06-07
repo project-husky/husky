@@ -37,14 +37,34 @@ public class PurposeOfUseBuilder extends AbstractXMLObjectBuilder<OpenSamlPurpos
 	protected String codeSystemVersion;
 	protected String displayName;
 
-	/** {@inheritDoc} */
+	/**
+	 *
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to build an OpenSamlPurposeOfUse instance.</div>
+	 * <div class="de">Methode um eine OpenSamlPurposeOfUse instanz zu creiiren.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return
+	 * <div class="en">the OpenSamlPurposeOfUse instance.</div>
+	 * <div class="de">Die OpenSamlPurposeOfUse instanz.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
 	public OpenSamlPurposeOfUse buildObject() {
 		return buildObject(OpenSamlPurposeOfUse.DEFAULT_NS_URI,
 				OpenSamlPurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME,
 				OpenSamlPurposeOfUse.DEFAULT_PREFIX);
 	}
 
-	/** {@inheritDoc} */
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.opensaml.core.xml.AbstractXMLObjectBuilder#buildObject(java.lang.String,
+	 *      java.lang.String, java.lang.String)
+	 */
 	@Override
 	public OpenSamlPurposeOfUse buildObject(String namespaceURI, String localName,
 			String namespacePrefix) {

@@ -37,7 +37,7 @@ public interface PrivacyPolicyQueryBuilder extends BaseBuilder<PrivacyPolicyQuer
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
-	 * @param aStatusCode
+	 * @param newConsent
 	 *  <div class="en">the consent to be set</div>
 	 * 	<div class="de">der consent der gesetzt werden soll</div>
 	 *  <div class="fr"></div>
@@ -74,7 +74,7 @@ public interface PrivacyPolicyQueryBuilder extends BaseBuilder<PrivacyPolicyQuer
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
-	 * @param aStatusCode
+	 * @param newDestination
 	 *  <div class="en">the consent to be set</div>
 	 * 	<div class="de">der consent der gesetzt werden soll</div>
 	 *  <div class="fr"></div>

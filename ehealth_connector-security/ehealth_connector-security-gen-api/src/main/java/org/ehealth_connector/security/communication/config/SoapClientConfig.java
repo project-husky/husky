@@ -183,8 +183,8 @@ public interface SoapClientConfig extends ClientConfig {
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
-	 * @param keyStorePassword
-	 * <div class="en">the keystore ty1p1e.</div>
+	 * @param keyStoreType
+	 * <div class="en">the keystore type.</div>
 	 * <div class="de">der Typ des Keystores.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
@@ -247,7 +247,7 @@ public interface SoapClientConfig extends ClientConfig {
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
-	 * @param serviceName
+	 * @param serviceNamespace
 	 * <div class="en">the namespace of the serice name of the webservice.</div>
 	 * <div class="de">der Namespace des service Namen des webservices</div>
 	 * <div class="fr"></div>

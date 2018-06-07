@@ -26,7 +26,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.security.KeyStore;
 
-import org.ehealth_connector.security.serialization.pki.PkiManagerImpl;
+import org.ehealth_connector.security.pki.impl.PkiManagerImpl;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -41,11 +41,6 @@ public class ResponseImpl
 
 	private org.opensaml.saml.saml2.core.Response response;
 
-	/**
-	 * Default constructor to instanciate the object
-	 *
-	 * @param response
-	 */
 	protected ResponseImpl(org.opensaml.saml.saml2.core.Response response) {
 		this.response = response;
 	}
@@ -97,9 +92,10 @@ public class ResponseImpl
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.saml2.Response#getID()
+	 * @see org.ehealth_connector.security.saml2.Base#getId()
 	 */
 	@Override
 	public String getId() {
@@ -107,6 +103,7 @@ public class ResponseImpl
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.saml2.Response#getInResponseTo()
@@ -117,9 +114,10 @@ public class ResponseImpl
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.saml2.Response#getIssueInstant()
+	 * @see org.ehealth_connector.security.saml2.Base#getIssueInstant()
 	 */
 	@Override
 	public Calendar getIssueInstant() {
@@ -130,9 +128,10 @@ public class ResponseImpl
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.saml2.Response#getIssuer()
+	 * @see org.ehealth_connector.security.saml2.Base#getIssuer()
 	 */
 	@Override
 	public String getIssuer() {
@@ -143,6 +142,7 @@ public class ResponseImpl
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.saml2.Response#getStatus()
@@ -167,6 +167,7 @@ public class ResponseImpl
 	}
 
 	/**
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.core.SecurityObject#getWrappedObject()

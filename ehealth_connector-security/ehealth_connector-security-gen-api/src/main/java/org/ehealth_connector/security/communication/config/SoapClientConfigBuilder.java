@@ -177,4 +177,26 @@ public interface SoapClientConfigBuilder extends ClientConfigBuilder {
 	 */
 	SoapClientConfigBuilder serviceNamespace(String serviceNamespace);
 
+	/**
+	 *
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the simple flag.</div>
+	 * <div class="de">Methode um den das simple flag zu setzen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param aSimple
+	 * <div class="en">true or false as value to be set</div>
+	 * <div class="de">true oder false was gesetzt werden soll</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * @return
+	 * <div class="en">the actual instance of this builder</div>
+	 * <div class="de">die aktuelle instanz des builders</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	SoapClientConfigBuilder simple(boolean aSimple);
+
 }

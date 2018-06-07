@@ -42,8 +42,8 @@ public interface PrivacyPolicyFeedResponse {
 	 * <div class="it"></div>
 	 *
 	 * @return
-	 * <div class="en">a {@link java.util.List<java.lang.Exception>} with exceptions if available.</div>
-	 * <div class="de">eine {@link java.util.List<java.lang.Exception>} mit fehlern wenn vorhande.</div>
+	 * <div class="en">a {@link java.util.List} of {@link java.lang.Exception} with exceptions if available.</div>
+	 * <div class="de">eine {@link java.util.List} von {@link java.lang.Exception} mit fehlern wenn vorhande.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
