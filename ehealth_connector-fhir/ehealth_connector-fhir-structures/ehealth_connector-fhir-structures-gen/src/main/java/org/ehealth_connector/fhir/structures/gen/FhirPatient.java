@@ -104,7 +104,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 				if ((mdhtAddr.getCountries() != null) && (mdhtAddr.getCountries().size() > 0)) {
 					fhirAddr.setCountry(mdhtAddr.getCountries().get(0).getText());
 				}
-				if ((mdhtAddr.getUses() != null) && (mdhtAddr.getCountries().size() > 0)) {
+				if ((mdhtAddr.getUses() != null) && (!mdhtAddr.getUses().isEmpty()) && (mdhtAddr.getCountries().size() > 0)) {
 					switch (mdhtAddr.getUses().get(0)) {
 					case H:
 					case HP:
@@ -586,14 +586,13 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 				convenienceOrganization.addName(org.getName());
 			}
 
-			if ((org != null)
-					&& org.getIdentifierFirstRep().getSystem().startsWith(FhirCommon.oidUrn)) {
+			if ((org != null) && (org.getIdentifierFirstRep() != null) && (org.getIdentifierFirstRep().getSystem() != null) && org.getIdentifierFirstRep().getSystem().startsWith(FhirCommon.oidUrn)) {
 				String oid = "";
 				oid = org.getIdentifierFirstRep().getSystem().substring(8);
 				organization.getIds().add(
 						new Identificator(oid, org.getIdentifierFirstRep().getValue()).getIi());
 			}
-			if ((org != null) && (org.getTelecom().size() > 0)) {
+			if ((org != null) && (org.getTelecom() != null) && (org.getTelecom().size() > 0)) {
 				final ContactPoint ContactPoint = org.getTelecomFirstRep();
 				if ((ContactPoint != null) && (ContactPoint.getValue() != null)) {
 					final TEL tel = Util.createTel(ContactPoint.getValue(), null);

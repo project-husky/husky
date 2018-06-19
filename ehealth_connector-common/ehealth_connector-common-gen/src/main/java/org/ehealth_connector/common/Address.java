@@ -165,7 +165,7 @@ public class Address {
 	 * @return Adress-Zeile 1
 	 */
 	public String getAddressline1() {
-		if (!mAd.getStreetAddressLines().isEmpty()) {
+		if (mAd.getStreetAddressLines() != null && !mAd.getStreetAddressLines().isEmpty()) {
 			return mAd.getStreetAddressLines().get(0).getText();
 		}
 		return null;
@@ -177,7 +177,11 @@ public class Address {
 	 * @return Adress-Zeile 2
 	 */
 	public String getAddressline2() {
-		return mAd.getStreetAddressLines().get(1).getText();
+		if (mAd.getStreetAddressLines() != null && mAd.getStreetAddressLines().size() > 1) {
+			return mAd.getStreetAddressLines().get(1).getText();
+		} else {
+			return null;
+		}
 	}
 
 	/**
@@ -186,7 +190,11 @@ public class Address {
 	 * @return Adress-Zeile 3
 	 */
 	public String getAddressline3() {
-		return mAd.getStreetAddressLines().get(2).getText();
+		if (mAd.getStreetAddressLines() != null && mAd.getStreetAddressLines().size() > 2) {
+			return mAd.getStreetAddressLines().get(2).getText();
+		} else {
+			return null;
+		}
 	}
 
 	/**
@@ -195,7 +203,11 @@ public class Address {
 	 * @return Ort
 	 */
 	public String getCity() {
-		return mAd.getCities().get(0).getText();
+		if (mAd.getCities() != null && !mAd.getCities().isEmpty()) {
+			return mAd.getCities().get(0).getText();
+		} else {
+			return null;
+		}
 	}
 
 	/**
@@ -218,7 +230,11 @@ public class Address {
 	 * @return Hausnummer
 	 */
 	public String getHouseNumber() {
-		return mAd.getHouseNumbers().get(0).getText();
+		if (mAd.getHouseNumbers() != null && !mAd.getHouseNumbers().isEmpty()) {
+			return mAd.getHouseNumbers().get(0).getText();
+		} else {
+			return null;
+		}
 	}
 
 	/**
@@ -237,10 +253,8 @@ public class Address {
 	 * @return State
 	 */
 	public String getState() {
-		if (mAd.getStates() != null) {
-			if (mAd.getStates().get(0) != null) {
+		if (mAd.getStates() != null && !mAd.getStates().isEmpty()) {
 				return mAd.getStates().get(0).getText();
-			}
 		}
 		return null;
 	}
@@ -251,7 +265,11 @@ public class Address {
 	 * @return Strasse
 	 */
 	public String getStreet() {
-		return mAd.getStreetNames().get(0).getText();
+		if (mAd.getStreetNames() != null && !mAd.getStreetNames().isEmpty()) {
+			return mAd.getStreetNames().get(0).getText();
+		} else {
+			return null;
+		}
 	}
 
 	/**
@@ -260,7 +278,11 @@ public class Address {
 	 * @return Art der Adresse
 	 */
 	public String getUsage() {
-		return mAd.getUses().get(0).getLiteral();
+		if (mAd.getUses() != null && !mAd.getUses().isEmpty()) {
+			return mAd.getUses().get(0).getLiteral();
+		} else {
+			return null;
+		}
 	}
 
 	/**
@@ -269,7 +291,11 @@ public class Address {
 	 * @return PLZ
 	 */
 	public String getZip() {
-		return mAd.getPostalCodes().get(0).getText();
+		if (mAd.getPostalCodes() != null && !mAd.getPostalCodes().isEmpty()) {
+			return mAd.getPostalCodes().get(0).getText();
+		} else {
+			return null;
+		}
 	}
 
 	/**
