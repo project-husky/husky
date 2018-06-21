@@ -17,21 +17,39 @@
  */
 package org.ehealth_connector.communication;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.communication.AtnaConfig.AtnaConfigMode;
 import org.ehealth_connector.communication.DocumentMetadata.DocumentMetadataExtractionMode;
 import org.ehealth_connector.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
+import org.ehealth_connector.security.deserialization.impl.AssertionDeserializerImpl;
+import org.ehealth_connector.security.exceptions.DeserializeException;
+import org.ehealth_connector.security.exceptions.SerializeException;
+import org.ehealth_connector.security.saml2.Assertion;
+import org.ehealth_connector.security.serialization.impl.AssertionSerializerImpl;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.response.XDSQueryResponseType;
+import org.openhealthtools.ihe.xua.XUAAssertion;
+import org.openhealthtools.ihe.xua.context.XUAModuleContext;
+import org.opensaml.core.config.InitializationException;
+import org.opensaml.core.config.InitializationService;
+import org.w3c.dom.Element;
 
-@Ignore
 public class ConvenienceCommunicationTest {
 
 	// NIST Repository
@@ -64,9 +82,11 @@ public class ConvenienceCommunicationTest {
 	Destination repo;
 	ConvenienceCommunication c;
 	XDSQueryResponseType qr;
+	private Assertion testAssertion;
 
 	@Before
-	public void init() {
+	public void init()
+			throws IOException, URISyntaxException, DeserializeException, InitializationException {
 		try {
 			repUri = new java.net.URI(NIST_SECURED);
 		} catch (final URISyntaxException e) {
@@ -88,9 +108,14 @@ public class ConvenienceCommunicationTest {
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
+
+		InitializationService.initialize();
+		final byte[] aByteArray = readInputFile(this.getClass().getResource("/xua/assertion.xml"));
+		testAssertion = new AssertionDeserializerImpl().fromXmlByteArray(aByteArray);
 	}
 
 	@Test
+	@Ignore
 	public void testAddDocument() {
 		try {
 			final DocumentMetadata d = c.addDocument(DocumentDescriptor.CDA_R2, cdaFilePath);
@@ -99,5 +124,37 @@ public class ConvenienceCommunicationTest {
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Test
+	public void testCreateXUAAssertion() throws SerializeException {
+		final Element assertionElement = new AssertionSerializerImpl().toXmlElement(testAssertion);
+		final XUAAssertion ohtAssertion = new XUAAssertion(assertionElement);
+		final String atnaUserName = ohtAssertion.getAtnaUsername();
+		assertNotNull(atnaUserName);
+		assertEquals("<7601000080776@https://ehealthsuisse.ihe-europe.net/STS>", atnaUserName);
+	}
+
+	@Test
+	public void testAddXUserAssertion() throws SerializeException {
+		c.addXUserAssertion(testAssertion);
+
+		final XUAModuleContext xuaContext = XUAModuleContext.getContext();
+		assertTrue(xuaContext.isXUAEnabled());
+
+		final List<String> activeActions = xuaContext.getConfig().getXUAEnabledActions();
+		assertNotNull(activeActions);
+		assertTrue(activeActions.contains("urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b"));
+
+		final XUAAssertion activeAssertion = xuaContext.getActiveAssertion();
+		assertNotNull(activeAssertion);
+
+	}
+
+	private byte[] readInputFile(URL url) throws IOException, URISyntaxException {
+
+		final File file = new File(url.toURI());
+		final Path path = Paths.get(file.getParent(), file.getName());
+		return Files.readAllBytes(path);
 	}
 }

@@ -44,7 +44,11 @@ import org.ehealth_connector.communication.xd.storedquery.StoredQueryInterface;
 import org.ehealth_connector.communication.xd.xdm.IndexHtm;
 import org.ehealth_connector.communication.xd.xdm.ReadmeTxt;
 import org.ehealth_connector.communication.xd.xdm.XdmContents;
+import org.ehealth_connector.security.exceptions.SerializeException;
+import org.ehealth_connector.security.saml2.Assertion;
+import org.ehealth_connector.security.serialization.impl.AssertionSerializerImpl;
 import org.openhealthtools.ihe.atna.auditor.XDSSourceAuditor;
+import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
 import org.openhealthtools.ihe.common.hl7v2.CX;
 import org.openhealthtools.ihe.utils.OID;
 import org.openhealthtools.ihe.xds.consumer.B_Consumer;
@@ -64,8 +68,11 @@ import org.openhealthtools.ihe.xds.response.XDSRetrieveResponseType;
 import org.openhealthtools.ihe.xds.source.B_Source;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionCompositionException;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
+import org.openhealthtools.ihe.xua.XUAAssertion;
+import org.openhealthtools.ihe.xua.context.XUAModuleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.Element;
 
 /**
  * <div class="en">The ConvenienceCommunication class provides a convenience API
@@ -889,5 +896,18 @@ public class ConvenienceCommunication {
 		submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
 		// txnData.saveMetadataToFile("C:/temp/metadata_fhir.xml");
 		return submit();
+	}
+
+	public void addXUserAssertion(Assertion assertion) throws SerializeException {
+		final XUAModuleContext xuaContext = XUAModuleContext.getContext();
+		final Element assertionElement = new AssertionSerializerImpl().toXmlElement(assertion);
+		final XUAAssertion ohtAssertion = new XUAAssertion(assertionElement);
+		xuaContext.cacheAssertion(ohtAssertion);
+		xuaContext.getConfig().getXUAEnabledActions()
+				.add("urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b");
+		AuditorModuleContext.getContext().getConfig()
+				.setSystemUserName(ohtAssertion.getAtnaUsername());
+		xuaContext.setXUAEnabled(true);
+		xuaContext.setActiveAssertion(ohtAssertion);
 	}
 }

@@ -1,0 +1,83 @@
+<saml2:Assertion xmlns:saml2="urn:oasis:names:tc:SAML:2.0:assertion" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	ID="_4cd7cfe1-0c9e-40c4-b3bd-1e1b28af7d3c" IssueInstant="2018-05-04T13:30:31.853Z" Version="2.0">
+	<saml2:Issuer>https://ehealthsuisse.ihe-europe.net/STS</saml2:Issuer>
+	<ds:Signature xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+		<ds:SignedInfo>
+			<ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+			<ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+			<ds:Reference URI="#_4cd7cfe1-0c9e-40c4-b3bd-1e1b28af7d3c">
+				<ds:Transforms>
+					<ds:Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+					<ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+				</ds:Transforms>
+				<ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+				<ds:DigestValue>iGrHxJKdQNOAmaUCbhywhmDtvz0=</ds:DigestValue>
+			</ds:Reference>
+		</ds:SignedInfo>
+		<ds:SignatureValue>h4SUpNR999QG/YJen63UeubiSd+b9fyWcGFel/XcPI/WnzLOJ9l4MYuX9jU5gbZurz+nY3fMnHB5hAWJkatOcog5MiodlYDlbfZ7xvCFli4pSuxL7ZRTi0MDrD1ttdbmSgStixEHrCUTCS8DYblYs4oytFSEVqjhLxwZw3faRzU=</ds:SignatureValue>
+		<ds:KeyInfo>
+			<ds:X509Data>
+				<ds:X509Certificate>MIIDhjCCAu+gAwIBAgIBCzANBgkqhkiG9w0BAQ0FADBFMQswCQYDVQQGEwJDSDEMMAoGA1UECgwD
+					SUhFMSgwJgYDVQQDDB9laGVhbHRoc3Vpc3NlLmloZS1ldXJvcGUubmV0IENBMB4XDTE3MDMyMjE2
+					MDgyNFoXDTI3MDMyMjE2MDgyNFowQjELMAkGA1UEBhMCQ0gxDDAKBgNVBAoMA0lIRTElMCMGA1UE
+					AwwcZWhlYWx0aHN1aXNzZS5paGUtZXVyb3BlLm5ldDCBnzANBgkqhkiG9w0BAQEFAAOBjQAwgYkC
+					gYEAw5dTR17Y1w9cIhY0XSP9Cx7ThQ05YZTf4pKGgGb5ZZbFqm9Q5EKIrJT2EHE7MGO6D/miU3Jt
+					BUmexcf9ceftSXEW+FaNVAqDePBst4l2RSZeJvez0FmcbWcPeufsUumcGXGAJmNmSviMLd1IrMEh
+					whv6wuQvspY0Y2wAOvSkUmECAwEAAaOCAYcwggGDMEoGA1UdHwRDMEEwP6A9oDuGOWh0dHBzOi8v
+					ZWhlYWx0aHN1aXNzZS5paGUtZXVyb3BlLm5ldC9nc3MvY3JsLzIyL2NhY3JsLmNybDBIBglghkgB
+					hvhCAQQEOxY5aHR0cHM6Ly9laGVhbHRoc3Vpc3NlLmloZS1ldXJvcGUubmV0L2dzcy9jcmwvMjIv
+					Y2FjcmwuY3JsMEgGCWCGSAGG+EIBAwQ7FjlodHRwczovL2VoZWFsdGhzdWlzc2UuaWhlLWV1cm9w
+					ZS5uZXQvZ3NzL2NybC8yMi9jYWNybC5jcmwwCQYDVR0TBAIwADAOBgNVHQ8BAf8EBAMCBPAwEQYJ
+					YIZIAYb4QgEBBAQDAgXgMB0GA1UdDgQWBBSG1oKBcZvZJWlqKJ9i/67Htv7frDAfBgNVHSMEGDAW
+					gBQol+/d3jFYbFbyhkbiEeQ+OHFfLzAzBgNVHSUELDAqBggrBgEFBQcDAgYIKwYBBQUHAwQGCisG
+					AQQBgjcUAgIGCCsGAQUFBwMBMA0GCSqGSIb3DQEBDQUAA4GBAI1OT9P0oSrfNedZ4T4CfxPoUOFC
+					D1tU2X3iRAZFPoUHeFBiccsqMYnNlo3S2cKP6gxt+QPTGNSs171sS0MLa73aR8qrQC+vl5ZP7q4+
+					/3hYQLe+z3DjSflZNW6shSAp4vD43Dnd8OzgX41LRw1gSEWuAK/+7CedM6IkFEUV2NSF
+				</ds:X509Certificate>
+			</ds:X509Data>
+		</ds:KeyInfo>
+	</ds:Signature>
+	<saml2:Subject>
+		<saml2:NameID Format="urn:oasis:names:tc:SAML:2.0:nameid-format:persistent" NameQualifier="urn:gs1:gln">7601000080776</saml2:NameID>
+		<saml2:SubjectConfirmation Method="urn:oasis:names:tc:SAML:2.0:cm:bearer">
+			<saml2:SubjectConfirmationData InResponseTo="_43ef3e4fefdb03a31781d7ea52617674bcd25a6c26"
+				NotOnOrAfter="2018-05-04T15:30:31.853Z" Recipient="https://sp.community.ch/epd" />
+		</saml2:SubjectConfirmation>
+	</saml2:Subject>
+	<saml2:Conditions NotBefore="2018-05-04T13:30:31.853Z" NotOnOrAfter="2018-05-04T15:30:31.853Z">
+		<saml2:AudienceRestriction>
+			<saml2:Audience>urn:e-health-suisse:token-audience:all-communities</saml2:Audience>
+		</saml2:AudienceRestriction>
+	</saml2:Conditions>
+	<saml2:AuthnStatement AuthnInstant="2018-05-04T13:30:31.853Z" SessionNotOnOrAfter="2018-05-04T15:30:31.853Z">
+		<saml2:AuthnContext>
+			<saml2:AuthnContextClassRef>http://bag.admin.ch/LoA/3</saml2:AuthnContextClassRef>
+		</saml2:AuthnContext>
+	</saml2:AuthnStatement>
+	<saml2:AttributeStatement>
+		<saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:subject-id">
+			<saml2:AttributeValue>Alexander Maes</saml2:AttributeValue>
+		</saml2:Attribute>
+		<saml2:Attribute Name="urn:oasis:names:tc:xacml:2.0:subject:role">
+			<saml2:AttributeValue>
+				<Role xmlns="urn:hl7-org:v3" code="HCP" codeSystem="2.16.756.5.30.1.127.3.10.4" codeSystemName="eHealth Suisse EPR Akteure"
+					displayName="Behandelnde(r)" xs:type="CE" />
+			</saml2:AttributeValue>
+		</saml2:Attribute>
+		<saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:organization">
+			<saml2:AttributeValue>Uni Spital Zurich</saml2:AttributeValue>
+		</saml2:Attribute>
+		<saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:organization-id">
+			<saml2:AttributeValue>7601001355781</saml2:AttributeValue>
+		</saml2:Attribute>
+		<saml2:Attribute Name="urn:oasis:names:tc:xacml:2.0:resource:resource-id">
+			<saml2:AttributeValue>761337610435209810^^^SPID&amp;amp;2.16.756.5.30.1.127.3.10.3&amp;amp;ISO</saml2:AttributeValue>
+		</saml2:Attribute>
+		<saml2:Attribute Name="urn:oasis:names:tc:xspa:1.0:subject:purposeofuse">
+			<saml2:AttributeValue>
+				<PurposeOfUse xmlns="urn:hl7-org:v3" code="NORM" codeSystem="2.16.756.5.30.1.127.3.10.5"
+					codeSystemName="eHealth Suisse Verwendungszweck" displayName="Normalzugriff" xs:type="CE" />
+			</saml2:AttributeValue>
+		</saml2:Attribute>
+	</saml2:AttributeStatement>
+</saml2:Assertion>
