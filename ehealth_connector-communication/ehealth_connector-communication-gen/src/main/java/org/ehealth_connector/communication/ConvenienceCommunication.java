@@ -898,6 +898,16 @@ public class ConvenienceCommunication {
 		return submit();
 	}
 
+	/**
+	 *
+	 * <div class="en">Method to add a xuser assertion to allow authentication
+	 * on XDS.b transactions.</div>
+	 *
+	 * @param assertion
+	 *            The assertion to be added to the soap header
+	 * @throws SerializeException
+	 *             if there are problems adding the assertion
+	 */
 	public void addXUserAssertion(Assertion assertion) throws SerializeException {
 		final XUAModuleContext xuaContext = XUAModuleContext.getContext();
 		final Element assertionElement = new AssertionSerializerImpl().toXmlElement(assertion);
