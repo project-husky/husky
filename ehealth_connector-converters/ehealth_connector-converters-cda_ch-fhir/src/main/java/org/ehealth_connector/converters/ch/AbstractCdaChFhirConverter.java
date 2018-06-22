@@ -113,23 +113,14 @@ import ca.uhn.fhir.context.FhirVersionEnum;
  */
 public abstract class AbstractCdaChFhirConverter {
 
-	private final FhirContext fhirCtx = new FhirContext(FhirVersionEnum.DSTU3);
-
-	/**
-	 * Method to get
-	 * 
-	 * @return the fhirCtx
-	 */
-	public FhirContext getFhirCtx() {
-		return fhirCtx;
-	}
-
 	/**
 	 * <div class="en">uniform resource name (urn) of this OID</div>
 	 * <div class="de"></div><div class="fr"></div>
 	 */
 	public static final String OID_CONFIDENTIALITY_CODE = FhirCommon
 			.addUrnOid(CodeSystems.ConfidentialityCode.getCodeSystemId());
+
+	private final FhirContext fhirCtx = new FhirContext(FhirVersionEnum.DSTU3);
 
 	/**
 	 * Creates a Comment Observation
@@ -655,7 +646,7 @@ public abstract class AbstractCdaChFhirConverter {
 			}
 		}
 		return retVal;
-	};
+	}
 
 	/**
 	 * <div class="en">Gets the eHC Custodian from the given FHIR resource
@@ -683,7 +674,7 @@ public abstract class AbstractCdaChFhirConverter {
 		}
 
 		return retVal;
-	}
+	};
 
 	/**
 	 * <div class="en"> Gets the eHC document language code from the given FHIR
@@ -746,7 +737,7 @@ public abstract class AbstractCdaChFhirConverter {
 		Date retVal = null;
 		retVal = docManifest.getCreated();
 		return retVal;
-	};
+	}
 
 	/**
 	 * <div class="en"> Gets the document Id from the given FHIR resource
@@ -774,7 +765,7 @@ public abstract class AbstractCdaChFhirConverter {
 	public Identificator getDocumentSetId(DocumentManifest docManifest) {
 		final Identifier docId = docManifest.getIdentifier().get(1);
 		return new Identificator(docId.getSystem(), docId.getValue());
-	}
+	};
 
 	/**
 	 * Gets the document version
@@ -860,6 +851,15 @@ public abstract class AbstractCdaChFhirConverter {
 			}
 		}
 		return retVal;
+	}
+
+	/**
+	 * Method to get
+	 *
+	 * @return the fhirCtx
+	 */
+	public FhirContext getFhirCtx() {
+		return fhirCtx;
 	}
 
 	/**
@@ -1048,13 +1048,14 @@ public abstract class AbstractCdaChFhirConverter {
 	}
 
 	/**
-	 * <div class="en">Gets a list of eHC LRQC LaboratoryBatteryOrganizers from
-	 * the given FHIR resource
+	 * <div class="en">Gets a list of IHE XD-LAB LaboratoryBatteryOrganizers
+	 * from the given FHIR resource.</div>
 	 *
-	 * @param fhirObs2
-	 *            the FHIR resource
-	 * @return list of eHC LRQC LaboratoryBatteryOrganizers</div>
-	 *         <div class="de"></div> <div class="fr"></div>
+	 * @param labObsList
+	 *            <div class="en">the observations FHIR resource</div>
+	 * @return <div class="en">list of IHE XD-LAB
+	 *         LaboratoryBatteryOrganizers</div>
+	 * 
 	 */
 	protected LaboratoryBatteryOrganizer getLaboratoryBatteryOrganizers(Observation labObsList) {
 		final LaboratoryBatteryOrganizer lbo = new LaboratoryBatteryOrganizer();

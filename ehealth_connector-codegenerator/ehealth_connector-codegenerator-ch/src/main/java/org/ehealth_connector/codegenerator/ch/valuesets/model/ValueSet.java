@@ -37,9 +37,10 @@ public class ValueSet {
 
 	/**
 	 * <div class="en">Gets the fully qualified class name of the enum class
-	 * that will be generated/overwritten</div>
+	 * that will be generated/overwritten</div>.
 	 *
-	 * @return
+	 * @return <div class="en">the fully qualified class name of the enum class
+	 *         that will be generated/overwritten</div>.
 	 */
 	public String getClassName() {
 		return className;
@@ -47,9 +48,10 @@ public class ValueSet {
 
 	/**
 	 * <div class="en">Gets the code system name that should be set
-	 * (CODE_SYSTEM_NAME)</div>
+	 * (CODE_SYSTEM_NAME)</div>.
 	 *
-	 * @return
+	 * @return <div class="en">the code system name that should be set
+	 *         (CODE_SYSTEM_NAME)</div>.
 	 */
 	public String getCodeSystemName() {
 		return codeSystemName;
@@ -59,7 +61,8 @@ public class ValueSet {
 	 * <div class="en">Gets the date and time stamp of the version to download
 	 * from the CH-EPR repository</div>
 	 *
-	 * @return
+	 * @return <div class="en">the date and time stamp of the version to
+	 *         download from the CH-EPR repository</div>
 	 */
 	public String getEffectiveDate() {
 		return effectiveDate;
@@ -69,7 +72,8 @@ public class ValueSet {
 	 * <div class="en">Gets the unique OID of the value set
 	 * (CODE_SYSTEM_OID)</div>
 	 *
-	 * @return
+	 * @return <div class="en">the unique OID of the value set
+	 *         (CODE_SYSTEM_OID)</div>
 	 */
 	public String getId() {
 		return id;
@@ -79,7 +83,8 @@ public class ValueSet {
 	 * <div class="en">Gets the base folder where the project containing the
 	 * enum Java class can be found</div>
 	 *
-	 * @return
+	 * @return <div class="en">the base folder where the project containing the
+	 *         enum Java class can be found</div>
 	 */
 	public String getProjectFolder() {
 		return projectFolder;
