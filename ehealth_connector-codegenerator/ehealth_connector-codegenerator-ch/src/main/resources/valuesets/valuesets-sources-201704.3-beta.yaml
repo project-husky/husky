@@ -1,0 +1,123 @@
+# The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
+# All rights reserved. https://medshare.net
+#
+# Source code, documentation and other resources have been contributed by various people.
+# Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+# For exact developer information, please refer to the commit history of the forge.
+#
+# This code is made available under the terms of the Eclipse Public License v1.0.
+#
+# Accompanying materials are made available under the terms of the Creative Commons
+# Attribution-ShareAlike 4.0 License.
+#
+# This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+
+
+# The base URL that is used to download the value sets in JSON.
+# To this URL the "id" and "effectiveDate" is appended in the form
+# "&id=<value-set-id>&effectiveDate=<value-set-effective-date" at run time.
+baseUrl: 'http://art-decor.org/decor/services/RetrieveValueSet?prefix=ch-epr-&format=json'
+
+# The list of all configured value sets that will be generated from the CH-EPR value set
+# repository (https://art-decor.org/art-decor/decor-valuesets--ch-epr-)
+#
+# Required fields for each item in the list are:
+#  id:              The unique OID of the value set (CODE_SYSTEM_OID)
+#  projectFolder:   The base folder where the project containing the enum Java class can be found
+#  className:       The fully qualified class name of the enum class that will be generated/overwritten
+#  effectiveDate:   The date and time stamp of the version to download from the CH-EPR repository
+#  codeSystemName:  The code system name that should be set (CODE_SYSTEM_NAME)
+#
+# The generator will first look if there is a file called
+# src/main/resources/generateValueSets/<codeSystemName>.json
+# If the file exists, that file is used to generate the Java code of the enum. Otherwise the file
+# is downloaded from the repository using the baseUrl, id and effectiveDate and then stored
+# at the previously mentioned location for future usage.
+
+valueSets:
+ # Beta value sets with version label 201704.2-beta for the Projectathon in The Hague.
+ # https://www.e-health-suisse.ch/fileadmin/user_upload/Dokumente/2017/D/180131_Anleitung_Zugang_Metadaten_und_Synonymen_v1.2_d.pdf
+
+ # EprAuthorRole
+ - id: '2.16.756.5.30.1.127.3.10.1.1.3'
+   projectFolder: 'ehealthconnector/ehealth_connector-common/ehealth_connector-common-ch'
+   className: 'org.ehealth_connector.common.ch.enums.AuthorRole'
+   effectiveDate: '2018-06-13T07:40:11'
+   codeSystemName: 'EprAuthorRole'
+
+ # EprAvailabilityStatus
+ - id: '2.16.756.5.30.1.127.3.10.1.2'
+   projectFolder: 'ehealthconnector/ehealth_connector-communication/ehealth_connector-communication-ch'
+   className: 'org.ehealth_connector.communication.ch.enums.AvailabilityStatus'
+   effectiveDate: '2018-06-13T07:48:02'
+   codeSystemName: 'EprDocumentAvailabilityStatus'
+
+ # EprDocumentClassCode
+ - id: '2.16.756.5.30.1.127.3.10.1.3'
+   projectFolder: 'ehealthconnector/ehealth_connector-communication/ehealth_connector-communication-ch'
+   className: 'org.ehealth_connector.communication.ch.enums.ClassCode'
+   effectiveDate: '2018-06-13T07:51:49'
+   codeSystemName: 'EprDocumentClassCode'
+
+ # EprDocumentConfidentialityCode
+ - id: '2.16.756.5.30.1.127.3.10.1.5'
+   projectFolder: 'ehealthconnector/ehealth_connector-common/ehealth_connector-common-ch'
+   className: 'org.ehealth_connector.common.ch.enums.ConfidentialityCode'
+   effectiveDate: '2018-06-13T07:57:38'
+   codeSystemName: 'EprDocumentConfidentialityCode'
+
+ # EprDocumentFormatCode
+ - id: '2.16.756.5.30.1.127.3.10.1.9'
+   projectFolder: 'ehealthconnector/ehealth_connector-communication/ehealth_connector-communication-ch'
+   className: 'org.ehealth_connector.communication.ch.enums.FormatCode'
+   effectiveDate: '2018-06-13T08:02:20'
+   codeSystemName: 'EprDocumentFormatCode'
+
+ # EprHealthcareFacilityTypeCode
+ - id: '2.16.756.5.30.1.127.3.10.1.11'
+   projectFolder: 'ehealthconnector/ehealth_connector-communication/ehealth_connector-communication-ch'
+   className: 'org.ehealth_connector.communication.ch.enums.HealthcareFacilityTypeCode'
+   effectiveDate: '2018-06-13T08:25:54'
+   codeSystemName: 'EprHealthcareFacilityTypeCode'
+
+ # EprDocumentLanguage
+ - id: '2.16.756.5.30.1.127.3.10.1.13'
+   projectFolder: 'ehealthconnector/ehealth_connector-common/ehealth_connector-common-ch'
+   className: 'org.ehealth_connector.common.ch.enums.DocumentLanguage'
+   effectiveDate: '2018-06-13T08:05:31'
+   codeSystemName: 'EprDocumentLanguage'
+
+ # EprDocumentMimeType
+ - id: '2.16.756.5.30.1.127.3.10.1.16'
+   projectFolder: 'ehealthconnector/ehealth_connector-communication/ehealth_connector-communication-ch'
+   className: 'org.ehealth_connector.communication.ch.enums.MimeType'
+   effectiveDate: '2018-06-13T08:07:07'
+   codeSystemName: 'EprDocumentMimeType'
+
+ # EprDocumentPracticeSettingCode
+ - id: '2.16.756.5.30.1.127.3.10.1.18'
+   projectFolder: 'ehealthconnector/ehealth_connector-communication/ehealth_connector-communication-ch'
+   className: 'org.ehealth_connector.communication.ch.enums.PracticeSettingCode'
+   effectiveDate: '2018-06-13T08:10:59'
+   codeSystemName: 'EprDocumentPracticeSettingCode'
+
+ # EprGender
+ - id: '2.16.756.5.30.1.127.3.10.1.25'
+   projectFolder: 'ehealthconnector/ehealth_connector-communication/ehealth_connector-communication-ch'
+   className: 'org.ehealth_connector.communication.ch.enums.SourcePatientInfo'
+   effectiveDate: '2018-06-13T08:21:07'
+   codeSystemName: 'EprGender'
+
+ # EprDocumentTypeCode
+ - id: '2.16.756.5.30.1.127.3.10.1.27'
+   projectFolder: 'ehealthconnector/ehealth_connector-communication/ehealth_connector-communication-ch'
+   className: 'org.ehealth_connector.communication.ch.enums.TypeCode'
+   effectiveDate: '2018-06-13T08:18:20'
+   codeSystemName: 'EprDocumentTypeCode'
+   
+# EprPurposeOfUse
+ - id: '2.16.756.5.30.1.127.77.10.11.5'
+   projectFolder: 'ehealthconnector/ehealth_connector-security/ehealth_connector-security-ch-impl'
+   className: 'org.ehealth_connector.security.ch.epr.enums.PurposeOfUse'
+   effectiveDate: '2018-05-22T13:48:17'
+   codeSystemName: 'EprPurposeOfUse'

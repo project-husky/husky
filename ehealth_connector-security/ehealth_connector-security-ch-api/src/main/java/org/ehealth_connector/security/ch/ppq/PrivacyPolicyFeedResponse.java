@@ -31,8 +31,8 @@ import org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeed.PpfMethod;
  */
 public interface PrivacyPolicyFeedResponse {
 
-	public static final String SUCCESS = "urn:e-health-suisse:2015:response-status:success";
 	public static final String FAILURE = "urn:e-health-suisse:2015:response-status:failure";
+	public static final String SUCCESS = "urn:e-health-suisse:2015:response-status:success";
 
 	/**
 	 * <!-- @formatter:off -->

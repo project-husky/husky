@@ -45,7 +45,7 @@ public class XdsChTestUtils extends XdsTestUtils {
 	public static ConfidentialityCode[] confidentialityCodes = new ConfidentialityCode[] {
 			ConfidentialityCode.NORMAL, ConfidentialityCode.SECRET };
 	public static FormatCode[] formatCodes = new FormatCode[] { FormatCode.IMMUNIZATION_CONTENT,
-			FormatCode.UNSTRUCTURED_EPD_DOCUMENT };
+			FormatCode.UNSTRUCTURED_EPR_DOCUMENT };
 	public static HealthcareFacilityTypeCode[] healthCareFacilityCodes = new HealthcareFacilityTypeCode[] {
 			HealthcareFacilityTypeCode.AMBULATORY_CARE_SITE,
 			HealthcareFacilityTypeCode.OTHER_SITE_OF_CARE };

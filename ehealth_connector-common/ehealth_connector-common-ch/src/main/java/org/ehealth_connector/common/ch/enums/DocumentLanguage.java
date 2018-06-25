@@ -25,89 +25,120 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.enums.LanguageCode;
 
 /**
- * <div class="en">Document language as per Annex 3&amp;#160; EPRO-FDHA, Chapter
- * 2.7. Defines the language in which the document was written.&lt;br
- * clear="none"/&gt;</div> <div class="de">Sprache des Dokumentes gemäss Anhang
- * 3 EPDV-EDI, Kapitel 2.7. Definiert die Sprache in welcher das Dokument
- * verfasst wurde.&lt;br clear="none"/&gt;</div> <div class="fr">Langue du
- * document selon l'annexe 3 ODEP-DFI, chapitre 2.7. Définit la langue dans
- * laquelle est rédigé le document.&lt;br clear="none"/&gt;</div>
- * <div class="it">Lingua del documento secondo l'allegato 3 OCIP-DFI, capitolo
- * 2.7. Definisce la lingua nella quale è stato redatto il documento.&lt;br
- * clear="none"/&gt;</div>
+ *<!-- @formatter:off -->
+ * <div class="en">Document language as per Annex 3&amp;#160; EPRO-FDHA, Chapter 2.7. Defines the language in which the document was written.&lt;br clear="none"/&gt;</div>
+ * <div class="de">Sprache des Dokumentes gemäss Anhang 3 EPDV-EDI, Kapitel 2.7. Definiert die Sprache in welcher das Dokument verfasst wurde.&lt;br clear="none"/&gt;</div>
+ * <div class="fr">Langue du document selon l'annexe 3 ODEP-DFI, chapitre 2.7. Définit la langue dans laquelle est rédigé le document.&lt;br clear="none"/&gt;</div>
+ * <div class="it">Lingua del documento secondo l'allegato 3 OCIP-DFI, capitolo 2.7. Definisce la lingua nella quale è stato redatto il documento.&lt;br clear="none"/&gt;</div>
+ *<!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
 public enum DocumentLanguage implements ValueSetEnumInterface {
 
 	/**
-	 * <div class="en">English</div> <div class="de">Englisch</div>
-	 * <div class="fr">Anglais</div> <div class="it">Inglese</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">English</div>
+	 * <div class="de">Englisch</div>
+	 * <div class="fr">Anglais</div>
+	 * <div class="it">Inglese</div>
+	 *<!-- @formatter:on -->
 	 */
 	ENGLISH("en-US", "2.16.840.1.113883.6.316", "English language (qualifier value)", "English",
 			"Englisch", "Anglais", "Inglese"),
 	/**
-	 * <div class="en">French</div> <div class="de">Französisch</div>
-	 * <div class="fr">Français </div> <div class="it">Francese</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">French</div>
+	 * <div class="de">Französisch</div>
+	 * <div class="fr">Français </div>
+	 * <div class="it">Francese</div>
+	 *<!-- @formatter:on -->
 	 */
 	FRENCH("fr-CH", "2.16.840.1.113883.6.316", "French", "French", "Französisch", "Français ",
 			"Francese"),
 	/**
-	 * <div class="en">German</div> <div class="de">Deutsch</div>
-	 * <div class="fr">Allemand</div> <div class="it">Tedesco</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">German</div>
+	 * <div class="de">Deutsch</div>
+	 * <div class="fr">Allemand</div>
+	 * <div class="it">Tedesco</div>
+	 *<!-- @formatter:on -->
 	 */
 	GERMAN("de-CH", "2.16.840.1.113883.6.316", "German ", "German", "Deutsch", "Allemand",
 			"Tedesco"),
 	/**
-	 * <div class="en">Italian</div> <div class="de">Italienisch</div>
-	 * <div class="fr">Italien</div> <div class="it"></div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Italian</div>
+	 * <div class="de">Italienisch</div>
+	 * <div class="fr">Italien</div>
+	 * <div class="it">Italiano</div>
+	 *<!-- @formatter:on -->
 	 */
 	ITALIAN("it-CH", "2.16.840.1.113883.6.316", "Italian ", "Italian", "Italienisch", "Italien",
-			""),
+			"Italiano"),
 	/**
-	 * <div class="en">Rhaeto-Romanic </div> <div class="de">Rätoromanisch</div>
-	 * <div class="fr">Rhéto-roman</div> <div class="it">Romancio</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Rhaeto-Romanic </div>
+	 * <div class="de">Rätoromanisch</div>
+	 * <div class="fr">Rhéto-roman</div>
+	 * <div class="it">Romancio</div>
+	 *<!-- @formatter:on -->
 	 */
 	RHAETO_ROMANIC("rm", "2.16.840.1.113883.6.316", "Rhaeto-Romanic", "Rhaeto-Romanic ",
 			"Rätoromanisch", "Rhéto-roman", "Romancio");
 
 	/**
-	 * <div class="en">Code for English</div> <div class="de">Code für
-	 * Englisch</div> <div class="fr">Code de Anglais</div> <div class="it">Code
-	 * per Inglese</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for English</div>
+	 * <div class="de">Code für Englisch</div>
+	 * <div class="fr">Code de Anglais</div>
+	 * <div class="it">Code per Inglese</div>
+	 *<!-- @formatter:on -->
 	 */
 	public static final String ENGLISH_CODE = "en-US";
 
 	/**
-	 * <div class="en">Code for French</div> <div class="de">Code für
-	 * Französisch</div> <div class="fr">Code de Français </div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for French</div>
+	 * <div class="de">Code für Französisch</div>
+	 * <div class="fr">Code de Français </div>
 	 * <div class="it">Code per Francese</div>
+	 *<!-- @formatter:on -->
 	 */
 	public static final String FRENCH_CODE = "fr-CH";
 
 	/**
-	 * <div class="en">Code for German</div> <div class="de">Code für
-	 * Deutsch</div> <div class="fr">Code de Allemand</div> <div class="it">Code
-	 * per Tedesco</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for German</div>
+	 * <div class="de">Code für Deutsch</div>
+	 * <div class="fr">Code de Allemand</div>
+	 * <div class="it">Code per Tedesco</div>
+	 *<!-- @formatter:on -->
 	 */
 	public static final String GERMAN_CODE = "de-CH";
 
 	/**
-	 * <div class="en">Code for Italian</div> <div class="de">Code für
-	 * Italienisch</div> <div class="fr">Code de Italien</div>
-	 * <div class="it">Code per </div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for Italian</div>
+	 * <div class="de">Code für Italienisch</div>
+	 * <div class="fr">Code de Italien</div>
+	 * <div class="it">Code per Italiano</div>
+	 *<!-- @formatter:on -->
 	 */
 	public static final String ITALIAN_CODE = "it-CH";
 
 	/**
-	 * <div class="en">Code for Rhaeto-Romanic </div> <div class="de">Code für
-	 * Rätoromanisch</div> <div class="fr">Code de Rhéto-roman</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for Rhaeto-Romanic </div>
+	 * <div class="de">Code für Rätoromanisch</div>
+	 * <div class="fr">Code de Rhéto-roman</div>
 	 * <div class="it">Code per Romancio</div>
+	 *<!-- @formatter:on -->
 	 */
 	public static final String RHAETO_ROMANIC_CODE = "rm";
 
 	/**
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
+	 * <div class="de">Identifikator für das Value Set</div>
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.13";
 
@@ -115,7 +146,7 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	 * <div class="en">Name of the value set</div> <div class="de">Name des
 	 * Value Sets</div>
 	 */
-	public static final String VALUE_SET_NAME = "epd_xds_documentLanguage";
+	public static final String VALUE_SET_NAME = "EprDocumentLanguage";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -136,7 +167,7 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">PrÃ¼ft, ob der gegebene enum Teil dieses Value Sets
+	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
 	 * ist.</div>
 	 *
 	 * @param enumName
@@ -157,8 +188,8 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">PrÃ¼ft, ob der gegebene code in diesem Value Set
-	 * vorhanden ist.</div>
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
+	 * ist.</div>
 	 *
 	 * @param codeValue
 	 *            <div class="de"> code</div>
@@ -248,9 +279,9 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	/**
 	 * <div class="en">Gets the display name defined by the language param. If
 	 * there is no english translation, the default display name is
-	 * returned.</div> <div class="de">Liefert display name gemÃ¤ss Parameter,
-	 * falls es keine Englische Ãœbersetzung gibt, wird der default-Name
-	 * zurÃ¼ckgegeben.</div>
+	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
+	 * falls es keine Englische Übersetzung gibt, wird der default-Name
+	 * zurückgegeben.</div>
 	 *
 	 * @param languageCode
 	 *            the language code to get the display name for

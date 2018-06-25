@@ -25,272 +25,392 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.enums.LanguageCode;
 
 /**
- * <div class="en">Role of the author as per Annex 3 EPRO-FDHA, Chapter
- * 2.1&lt;br clear="none"/&gt; &lt;br clear="none"/&gt;This code defines the
- * role of the author within the institution, e.g. doctor, nurse, therapist,
- * etc, This is a sub-attribute of epd_xds_author.&lt;br clear="none"/&gt;</div>
- * <div class="de">Rolle des Autors gemäss Anhang 3 EPDV-EDI, Kapitel 2.1&lt;br
- * clear="none"/&gt; &lt;br clear="none"/&gt;Dieser Code definiert die Rolle des
- * Authors innerhalb der Institution, z.B Arzt, Pflegefachperson, Therapeut,
- * etc. Dies ist ein Sub-Attribut von epd_xds_author.&lt;br
- * clear="none"/&gt;</div> <div class="fr">Rôle de l'auteur selon l'annexe 3
- * ODEP-DFI, chapitre 2.1&lt;br clear="none"/&gt; &lt;br clear="none"/&gt;Ce
- * code définit le rôle de l'auteur au sein de l'institution, p. ex, médecin,
- * professionnel des soins, thérapeute, etc. Il s'agit d'un sous-attribut
- * de&amp;#160; epd_xds_author.&lt;br clear="none"/&gt;</div>
- * <div class="it">Ruolo dell'autore secondo l'allegato 3 OCIP-DFI, capitolo
- * 2.1&lt;br clear="none"/&gt; &lt;br clear="none"/&gt;Questo codice definisce
- * il ruolo dell'autore all'interno dell'istituzione, p. es. medico, infermiere,
- * terapeuta, ecc. È un sottoattributo di epd_xds_author.&lt;br
- * clear="none"/&gt;</div>
+ *<!-- @formatter:off -->
+ * <div class="en">Role of the author as per Annex 3 EPRO-FDHA, Chapter 2.1&lt;br clear="none"/&gt;
+ *&lt;br clear="none"/&gt;This code defines the role of the author within the institution, e.g. doctor, nurse, therapist, etc, This is a sub-attribute of epd_xds_author.&lt;br clear="none"/&gt;</div>
+ * <div class="de">Rolle des Autors gemäss Anhang 3 EPDV-EDI, Kapitel 2.1&lt;br clear="none"/&gt;
+ *&lt;br clear="none"/&gt;Dieser Code definiert die Rolle des Authors innerhalb der Institution, z.B Arzt, Pflegefachperson, Therapeut, etc. Dies ist ein Sub-Attribut von epd_xds_author.&lt;br clear="none"/&gt;</div>
+ * <div class="fr">Rôle de l'auteur selon l'annexe 3 ODEP-DFI, chapitre 2.1&lt;br clear="none"/&gt;
+ *&lt;br clear="none"/&gt;Ce code définit le rôle de l'auteur au sein de l'institution, p. ex, médecin, professionnel des soins, thérapeute, etc. Il s'agit d'un sous-attribut de&amp;#160; epd_xds_author.&lt;br clear="none"/&gt;</div>
+ * <div class="it">Ruolo dell'autore secondo l'allegato 3 OCIP-DFI, capitolo 2.1&lt;br clear="none"/&gt;
+ *&lt;br clear="none"/&gt;Questo codice definisce il ruolo dell'autore all'interno dell'istituzione, p. es. medico, infermiere, terapeuta, ecc. È un sottoattributo di epd_xds_author.&lt;br clear="none"/&gt;</div>
+ *<!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
 public enum AuthorRole implements ValueSetEnumInterface {
 
 	/**
+	 *<!-- @formatter:off -->
 	 * <div class="en">Breast Feeding Consultant</div>
-	 * <div class="de">Stillberaterin</div> <div class="fr">Consultante en
-	 * lactation</div> <div class="it">Consulente per l'allattamento</div>
+	 * <div class="de">Stillberaterin</div>
+	 * <div class="fr">Consultante en lactation</div>
+	 * <div class="it">Consulente per l'allattamento</div>
+	 *<!-- @formatter:on -->
 	 */
 	BREAST_FEEDING_CONSULTANT("225726006", "2.16.840.1.113883.6.96",
 			"Lactation consultant (occupation)", "Breast Feeding Consultant", "Stillberaterin",
 			"Consultante en lactation", "Consulente per l'allattamento"),
 	/**
-	 * <div class="en">Chiropractor</div> <div class="de">Chiropraktiker</div>
-	 * <div class="fr">Chiropracteur</div> <div class="it">Chiropratico</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Chiropractor</div>
+	 * <div class="de">Chiropraktiker</div>
+	 * <div class="fr">Chiropracteur</div>
+	 * <div class="it">Chiropratico</div>
+	 *<!-- @formatter:on -->
 	 */
 	CHIROPRACTOR("3842006", "2.16.840.1.113883.6.96", "Chiropractor (occupation)", "Chiropractor",
 			"Chiropraktiker", "Chiropracteur", "Chiropratico"),
 	/**
+	 *<!-- @formatter:off -->
 	 * <div class="en">Complementary therapist</div>
-	 * <div class="de">Komplementärmediziner</div> <div class="fr">Thérapeute en
-	 * médecine alternative et complémentaire</div> <div class="it">Terapista
-	 * complementare</div>
+	 * <div class="de">Komplementärmediziner</div>
+	 * <div class="fr">Thérapeute en médecine alternative et complémentaire</div>
+	 * <div class="it">Terapista complementare</div>
+	 *<!-- @formatter:on -->
 	 */
 	COMPLEMENTARY_THERAPIST("224609002", "2.16.840.1.113883.6.96",
 			"Complementary health worker (occupation)", "Complementary therapist",
 			"Komplementärmediziner", "Thérapeute en médecine alternative et complémentaire",
 			"Terapista complementare"),
 	/**
-	 * <div class="en">Dentist</div> <div class="de">Zahnarzt</div>
-	 * <div class="fr">Dentiste</div> <div class="it">Dentista</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Dentist</div>
+	 * <div class="de">Zahnarzt</div>
+	 * <div class="fr">Dentiste</div>
+	 * <div class="it">Dentista</div>
+	 *<!-- @formatter:on -->
 	 */
 	DENTIST("106289002", "2.16.840.1.113883.6.96", "Dentist (occupation)", "Dentist", "Zahnarzt",
 			"Dentiste", "Dentista"),
 	/**
-	 * <div class="en">Dietitian</div> <div class="de">Ernährungsberater</div>
-	 * <div class="fr">Diététicien</div> <div class="it">Nutrizionista</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Dietitian</div>
+	 * <div class="de">Ernährungsberater</div>
+	 * <div class="fr">Diététicien</div>
+	 * <div class="it">Nutrizionista</div>
+	 *<!-- @formatter:on -->
 	 */
 	DIETITIAN("159033005", "2.16.840.1.113883.6.96", "Dietitian (occupation)", "Dietitian",
 			"Ernährungsberater", "Diététicien", "Nutrizionista"),
 	/**
-	 * <div class="en">Healthcare professional</div> <div class="de">Andere
-	 * Gesundheitsfachperson</div> <div class="fr">Autre professionnel de la
-	 * santé</div> <div class="it">Altri professionisti della salute</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Healthcare professional</div>
+	 * <div class="de">Andere Gesundheitsfachperson</div>
+	 * <div class="fr">Autre professionnel de la santé</div>
+	 * <div class="it">Altri professionisti della salute</div>
+	 *<!-- @formatter:on -->
 	 */
 	HEALTHCARE_PROFESSIONAL("223366009", "2.16.840.1.113883.6.96",
 			"Healthcare professional (occupation)", "Healthcare professional",
 			"Andere Gesundheitsfachperson", "Autre professionnel de la santé",
 			"Altri professionisti della salute"),
 	/**
-	 * <div class="en">Midwife</div> <div class="de">Hebamme</div>
-	 * <div class="fr">Sage-femme</div> <div class="it">Ostetrica</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Laboratory technician</div>
+	 * <div class="de">Laborfachperson</div>
+	 * <div class="fr">Spécialiste laboratoire</div>
+	 * <div class="it">Specialista di laboratorio</div>
+	 *<!-- @formatter:on -->
+	 */
+	LABORATORY_TECHNICIAN("159282002", "2.16.840.1.113883.6.96",
+			" Laboratory technician (occupation)", "Laboratory technician", "Laborfachperson",
+			"Spécialiste laboratoire", "Specialista di laboratorio"),
+	/**
+	 *<!-- @formatter:off -->
+	 * <div class="en">Midwife</div>
+	 * <div class="de">Hebamme</div>
+	 * <div class="fr">Sage-femme</div>
+	 * <div class="it">Ostetrica</div>
+	 *<!-- @formatter:on -->
 	 */
 	MIDWIFE("309453006", "2.16.840.1.113883.6.96", "Registered midwife (occupation)", "Midwife",
 			"Hebamme", "Sage-femme", "Ostetrica"),
 	/**
+	 *<!-- @formatter:off -->
 	 * <div class="en">Occupational therapist</div>
-	 * <div class="de">Ergotherapeut</div> <div class="fr">Ergothérapeute</div>
+	 * <div class="de">Ergotherapeut</div>
+	 * <div class="fr">Ergothérapeute</div>
 	 * <div class="it">Ergoterapista</div>
+	 *<!-- @formatter:on -->
 	 */
 	OCCUPATIONAL_THERAPIST("80546007", "2.16.840.1.113883.6.96",
 			"Occupational therapist (occupation)", "Occupational therapist", "Ergotherapeut",
 			"Ergothérapeute", "Ergoterapista"),
 	/**
-	 * <div class="en">Patient</div> <div class="de">Patient</div>
-	 * <div class="fr">Patient</div> <div class="it">Paziente</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Patient</div>
+	 * <div class="de">Patient</div>
+	 * <div class="fr">Patient</div>
+	 * <div class="it">Paziente</div>
+	 *<!-- @formatter:on -->
 	 */
 	PATIENT("116154003", "2.16.840.1.113883.6.96", "Patient (person)", "Patient", "Patient",
 			"Patient", "Paziente"),
 	/**
-	 * <div class="en">Pharmacist</div> <div class="de">Apotheker</div>
-	 * <div class="fr">Pharmacien</div> <div class="it">Farmacista</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Pharmacist</div>
+	 * <div class="de">Apotheker</div>
+	 * <div class="fr">Pharmacien</div>
+	 * <div class="it">Farmacista</div>
+	 *<!-- @formatter:on -->
 	 */
 	PHARMACIST("46255001", "2.16.840.1.113883.6.96", "Pharmacist (occupation)", "Pharmacist",
 			"Apotheker", "Pharmacien", "Farmacista"),
 	/**
-	 * <div class="en">Physician </div> <div class="de">Arzt</div>
-	 * <div class="fr">Médecin</div> <div class="it">Medico</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Physician </div>
+	 * <div class="de">Arzt</div>
+	 * <div class="fr">Médecin</div>
+	 * <div class="it">Medico</div>
+	 *<!-- @formatter:on -->
 	 */
 	PHYSICIAN("309343006", "2.16.840.1.113883.6.96", "Physician (occupation)", "Physician ", "Arzt",
 			"Médecin", "Medico"),
 	/**
+	 *<!-- @formatter:off -->
 	 * <div class="en">Physiotherapist</div>
 	 * <div class="de">Physiotherapeut</div>
 	 * <div class="fr">Physiothérapeute</div>
 	 * <div class="it">Fisioterapista</div>
+	 *<!-- @formatter:on -->
 	 */
 	PHYSIOTHERAPIST("36682004", "2.16.840.1.113883.6.96", "Physiotherapist (occupation)",
 			"Physiotherapist", "Physiotherapeut", "Physiothérapeute", "Fisioterapista"),
 	/**
+	 *<!-- @formatter:off -->
 	 * <div class="en">Professional nurse</div>
-	 * <div class="de">Pflegefachperson</div> <div class="fr">Infirmier</div>
+	 * <div class="de">Pflegefachperson</div>
+	 * <div class="fr">Infirmier</div>
 	 * <div class="it">Infermiere professionale</div>
+	 *<!-- @formatter:on -->
 	 */
 	PROFESSIONAL_NURSE("106292003", "2.16.840.1.113883.6.96", "Professional nurse (occupation)",
 			"Professional nurse", "Pflegefachperson", "Infirmier", "Infermiere professionale"),
 	/**
-	 * <div class="en">Psychologist </div> <div class="de">Psychologe</div>
-	 * <div class="fr">Psychologue</div> <div class="it">Psicologo</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Psychologist </div>
+	 * <div class="de">Psychologe</div>
+	 * <div class="fr">Psychologue</div>
+	 * <div class="it">Psicologo</div>
+	 *<!-- @formatter:on -->
 	 */
 	PSYCHOLOGIST("59944000", "2.16.840.1.113883.6.96", "Psychologist (occupation)", "Psychologist ",
 			"Psychologe", "Psychologue", "Psicologo"),
 	/**
-	 * <div class="en">Radiologist</div> <div class="de">Radiologe</div>
-	 * <div class="fr">Radiologue</div> <div class="it">Radiologo</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Radiologist</div>
+	 * <div class="de">Radiologe</div>
+	 * <div class="fr">Radiologue</div>
+	 * <div class="it">Radiologo</div>
+	 *<!-- @formatter:on -->
 	 */
 	RADIOLOGIST("66862007", "2.16.840.1.113883.6.96", "Radiologist (occupation)", "Radiologist",
 			"Radiologe", "Radiologue", "Radiologo"),
 	/**
+	 *<!-- @formatter:off -->
 	 * <div class="en">Social worker</div>
-	 * <div class="de">Sozialdienstmitarbeiter</div> <div class="fr">Assistant
-	 * social</div> <div class="it">Assistente sociale</div>
+	 * <div class="de">Sozialdienstmitarbeiter</div>
+	 * <div class="fr">Assistant social</div>
+	 * <div class="it">Assistente sociale</div>
+	 *<!-- @formatter:on -->
 	 */
 	SOCIAL_WORKER("158933003", "2.16.840.1.113883.6.96", "Social caseworker (general) (occupation)",
 			"Social worker", "Sozialdienstmitarbeiter", "Assistant social", "Assistente sociale"),
 	/**
-	 * <div class="en">Speech therapist</div> <div class="de">Logopäde</div>
-	 * <div class="fr">Logopédiste</div> <div class="it">Logopedista</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Speech therapist</div>
+	 * <div class="de">Logopäde</div>
+	 * <div class="fr">Logopédiste</div>
+	 * <div class="it">Logopedista</div>
+	 *<!-- @formatter:on -->
 	 */
 	SPEECH_THERAPIST("159026005", "2.16.840.1.113883.6.96",
 			"Speech/language therapist (occupation)", "Speech therapist", "Logopäde", "Logopédiste",
 			"Logopedista");
 
 	/**
+	 *<!-- @formatter:off -->
 	 * <div class="en">Code for Breast Feeding Consultant</div>
-	 * <div class="de">Code für Stillberaterin</div> <div class="fr">Code de
-	 * Consultante en lactation</div> <div class="it">Code per Consulente per
-	 * l'allattamento</div>
+	 * <div class="de">Code für Stillberaterin</div>
+	 * <div class="fr">Code de Consultante en lactation</div>
+	 * <div class="it">Code per Consulente per l'allattamento</div>
+	 *<!-- @formatter:on -->
 	 */
 	public static final String BREAST_FEEDING_CONSULTANT_CODE = "225726006";
 
 	/**
-	 * <div class="en">Code for Chiropractor</div> <div class="de">Code für
-	 * Chiropraktiker</div> <div class="fr">Code de Chiropracteur</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for Chiropractor</div>
+	 * <div class="de">Code für Chiropraktiker</div>
+	 * <div class="fr">Code de Chiropracteur</div>
 	 * <div class="it">Code per Chiropratico</div>
+	 *<!-- @formatter:on -->
 	 */
 	public static final String CHIROPRACTOR_CODE = "3842006";
 
 	/**
+	 *<!-- @formatter:off -->
 	 * <div class="en">Code for Complementary therapist</div>
-	 * <div class="de">Code für Komplementärmediziner</div> <div class="fr">Code
-	 * de Thérapeute en médecine alternative et complémentaire</div>
+	 * <div class="de">Code für Komplementärmediziner</div>
+	 * <div class="fr">Code de Thérapeute en médecine alternative et complémentaire</div>
 	 * <div class="it">Code per Terapista complementare</div>
+	 *<!-- @formatter:on -->
 	 */
 	public static final String COMPLEMENTARY_THERAPIST_CODE = "224609002";
 
 	/**
-	 * <div class="en">Code for Dentist</div> <div class="de">Code für
-	 * Zahnarzt</div> <div class="fr">Code de Dentiste</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for Dentist</div>
+	 * <div class="de">Code für Zahnarzt</div>
+	 * <div class="fr">Code de Dentiste</div>
 	 * <div class="it">Code per Dentista</div>
+	 *<!-- @formatter:on -->
 	 */
 	public static final String DENTIST_CODE = "106289002";
 
 	/**
-	 * <div class="en">Code for Dietitian</div> <div class="de">Code für
-	 * Ernährungsberater</div> <div class="fr">Code de Diététicien</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for Dietitian</div>
+	 * <div class="de">Code für Ernährungsberater</div>
+	 * <div class="fr">Code de Diététicien</div>
 	 * <div class="it">Code per Nutrizionista</div>
+	 *<!-- @formatter:on -->
 	 */
 	public static final String DIETITIAN_CODE = "159033005";
 
 	/**
+	 *<!-- @formatter:off -->
 	 * <div class="en">Code for Healthcare professional</div>
 	 * <div class="de">Code für Andere Gesundheitsfachperson</div>
 	 * <div class="fr">Code de Autre professionnel de la santé</div>
 	 * <div class="it">Code per Altri professionisti della salute</div>
+	 *<!-- @formatter:on -->
 	 */
 	public static final String HEALTHCARE_PROFESSIONAL_CODE = "223366009";
 
 	/**
-	 * <div class="en">Code for Midwife</div> <div class="de">Code für
-	 * Hebamme</div> <div class="fr">Code de Sage-femme</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for Laboratory technician</div>
+	 * <div class="de">Code für Laborfachperson</div>
+	 * <div class="fr">Code de Spécialiste laboratoire</div>
+	 * <div class="it">Code per Specialista di laboratorio</div>
+	 *<!-- @formatter:on -->
+	 */
+	public static final String LABORATORY_TECHNICIAN_CODE = "159282002";
+
+	/**
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for Midwife</div>
+	 * <div class="de">Code für Hebamme</div>
+	 * <div class="fr">Code de Sage-femme</div>
 	 * <div class="it">Code per Ostetrica</div>
+	 *<!-- @formatter:on -->
 	 */
 	public static final String MIDWIFE_CODE = "309453006";
 
 	/**
+	 *<!-- @formatter:off -->
 	 * <div class="en">Code for Occupational therapist</div>
-	 * <div class="de">Code für Ergotherapeut</div> <div class="fr">Code de
-	 * Ergothérapeute</div> <div class="it">Code per Ergoterapista</div>
+	 * <div class="de">Code für Ergotherapeut</div>
+	 * <div class="fr">Code de Ergothérapeute</div>
+	 * <div class="it">Code per Ergoterapista</div>
+	 *<!-- @formatter:on -->
 	 */
 	public static final String OCCUPATIONAL_THERAPIST_CODE = "80546007";
 
 	/**
-	 * <div class="en">Code for Patient</div> <div class="de">Code für
-	 * Patient</div> <div class="fr">Code de Patient</div> <div class="it">Code
-	 * per Paziente</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for Patient</div>
+	 * <div class="de">Code für Patient</div>
+	 * <div class="fr">Code de Patient</div>
+	 * <div class="it">Code per Paziente</div>
+	 *<!-- @formatter:on -->
 	 */
 	public static final String PATIENT_CODE = "116154003";
 
 	/**
-	 * <div class="en">Code for Pharmacist</div> <div class="de">Code für
-	 * Apotheker</div> <div class="fr">Code de Pharmacien</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for Pharmacist</div>
+	 * <div class="de">Code für Apotheker</div>
+	 * <div class="fr">Code de Pharmacien</div>
 	 * <div class="it">Code per Farmacista</div>
+	 *<!-- @formatter:on -->
 	 */
 	public static final String PHARMACIST_CODE = "46255001";
 
 	/**
-	 * <div class="en">Code for Physician </div> <div class="de">Code für
-	 * Arzt</div> <div class="fr">Code de Médecin</div> <div class="it">Code per
-	 * Medico</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for Physician </div>
+	 * <div class="de">Code für Arzt</div>
+	 * <div class="fr">Code de Médecin</div>
+	 * <div class="it">Code per Medico</div>
+	 *<!-- @formatter:on -->
 	 */
 	public static final String PHYSICIAN_CODE = "309343006";
 
 	/**
-	 * <div class="en">Code for Physiotherapist</div> <div class="de">Code für
-	 * Physiotherapeut</div> <div class="fr">Code de Physiothérapeute</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for Physiotherapist</div>
+	 * <div class="de">Code für Physiotherapeut</div>
+	 * <div class="fr">Code de Physiothérapeute</div>
 	 * <div class="it">Code per Fisioterapista</div>
+	 *<!-- @formatter:on -->
 	 */
 	public static final String PHYSIOTHERAPIST_CODE = "36682004";
 
 	/**
-	 * <div class="en">Code for Professional nurse</div> <div class="de">Code
-	 * für Pflegefachperson</div> <div class="fr">Code de Infirmier</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for Professional nurse</div>
+	 * <div class="de">Code für Pflegefachperson</div>
+	 * <div class="fr">Code de Infirmier</div>
 	 * <div class="it">Code per Infermiere professionale</div>
+	 *<!-- @formatter:on -->
 	 */
 	public static final String PROFESSIONAL_NURSE_CODE = "106292003";
 
 	/**
-	 * <div class="en">Code for Psychologist </div> <div class="de">Code für
-	 * Psychologe</div> <div class="fr">Code de Psychologue</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for Psychologist </div>
+	 * <div class="de">Code für Psychologe</div>
+	 * <div class="fr">Code de Psychologue</div>
 	 * <div class="it">Code per Psicologo</div>
+	 *<!-- @formatter:on -->
 	 */
 	public static final String PSYCHOLOGIST_CODE = "59944000";
 
 	/**
-	 * <div class="en">Code for Radiologist</div> <div class="de">Code für
-	 * Radiologe</div> <div class="fr">Code de Radiologue</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for Radiologist</div>
+	 * <div class="de">Code für Radiologe</div>
+	 * <div class="fr">Code de Radiologue</div>
 	 * <div class="it">Code per Radiologo</div>
+	 *<!-- @formatter:on -->
 	 */
 	public static final String RADIOLOGIST_CODE = "66862007";
 
 	/**
-	 * <div class="en">Code for Social worker</div> <div class="de">Code für
-	 * Sozialdienstmitarbeiter</div> <div class="fr">Code de Assistant
-	 * social</div> <div class="it">Code per Assistente sociale</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for Social worker</div>
+	 * <div class="de">Code für Sozialdienstmitarbeiter</div>
+	 * <div class="fr">Code de Assistant social</div>
+	 * <div class="it">Code per Assistente sociale</div>
+	 *<!-- @formatter:on -->
 	 */
 	public static final String SOCIAL_WORKER_CODE = "158933003";
 
 	/**
-	 * <div class="en">Code for Speech therapist</div> <div class="de">Code für
-	 * Logopäde</div> <div class="fr">Code de Logopédiste</div>
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for Speech therapist</div>
+	 * <div class="de">Code für Logopäde</div>
+	 * <div class="fr">Code de Logopédiste</div>
 	 * <div class="it">Code per Logopedista</div>
+	 *<!-- @formatter:on -->
 	 */
 	public static final String SPEECH_THERAPIST_CODE = "159026005";
 
 	/**
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
+	 * <div class="de">Identifikator für das Value Set</div>
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.1.3";
 
@@ -298,7 +418,7 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	 * <div class="en">Name of the value set</div> <div class="de">Name des
 	 * Value Sets</div>
 	 */
-	public static final String VALUE_SET_NAME = "epd_xds_authorRole";
+	public static final String VALUE_SET_NAME = "EprAuthorRole";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -319,7 +439,7 @@ public enum AuthorRole implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">PrÃ¼ft, ob der gegebene enum Teil dieses Value Sets
+	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
 	 * ist.</div>
 	 *
 	 * @param enumName
@@ -340,8 +460,8 @@ public enum AuthorRole implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">PrÃ¼ft, ob der gegebene code in diesem Value Set
-	 * vorhanden ist.</div>
+	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
+	 * ist.</div>
 	 *
 	 * @param codeValue
 	 *            <div class="de"> code</div>
@@ -431,9 +551,9 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	/**
 	 * <div class="en">Gets the display name defined by the language param. If
 	 * there is no english translation, the default display name is
-	 * returned.</div> <div class="de">Liefert display name gemÃ¤ss Parameter,
-	 * falls es keine Englische Ãœbersetzung gibt, wird der default-Name
-	 * zurÃ¼ckgegeben.</div>
+	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
+	 * falls es keine Englische Übersetzung gibt, wird der default-Name
+	 * zurückgegeben.</div>
 	 *
 	 * @param languageCode
 	 *            the language code to get the display name for

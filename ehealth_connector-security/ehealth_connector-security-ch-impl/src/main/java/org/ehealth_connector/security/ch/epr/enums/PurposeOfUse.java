@@ -15,7 +15,7 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.communication.ch.enums;
+package org.ehealth_connector.security.ch.epr.enums;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,84 +27,68 @@ import org.ehealth_connector.common.enums.LanguageCode;
 
 /**
  *<!-- @formatter:off -->
- * <div class="en">Patient’s gender as per Annex 3&amp;#160; EPRO-FDHA, Chapter 2.10.&lt;br clear="none"/&gt;</div>
- * <div class="de">Geschlecht der Patientin oder des Patienten gemäss Anhang 3 EPDV-EDI, Kapitel 2.10.&lt;br clear="none"/&gt;</div>
- * <div class="fr">Sexe du patient selon l'annexe 3 ODEP-DFI, chapitre 2.10.&lt;br clear="none"/&gt;</div>
- * <div class="it">Sesso del paziente secondo l'allegato 3 OCIP-DFI, capitolo 2.10.&lt;br clear="none"/&gt;</div>
+ * <div class="en">&lt;span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;"&gt;Purpose Of Use as per Annex 5 EPRO-FDHA, Extension 1.&lt;/span&gt;
+ *&lt;br clear="none" style="font-family: Verdana, Arial, sans-serif; font-size: 12px; color: rgb(51, 51, 51);"/&gt;</div>
+ * <div class="de">no designation found for language GERMAN</div>
+ * <div class="fr">no designation found for language FRENCH</div>
+ * <div class="it">no designation found for language ITALIAN</div>
  *<!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
-public enum SourcePatientInfo implements ValueSetEnumInterface {
+public enum PurposeOfUse implements ValueSetEnumInterface {
 
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">Female</div>
-	 * <div class="de">Weiblich</div>
-	 * <div class="fr">Féminin</div>
-	 * <div class="it">Femminile</div>
+	 * <div class="en">Emergency Access</div>
+	 * <div class="de">Emergency Access</div>
+	 * <div class="fr">Emergency Access</div>
+	 * <div class="it">Emergency Access</div>
 	 *<!-- @formatter:on -->
 	 */
-	FEMALE("F", "2.16.840.1.113883.5.1", "Female", "Female", "Weiblich", "Féminin", "Femminile"),
+	EMERGENCY_ACCESS("EMER", "2.16.756.5.30.1.127.3.10.5", "Emergency Access", "Emergency Access",
+			"Emergency Access", "Emergency Access", "Emergency Access"),
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">Male</div>
-	 * <div class="de">Männlich</div>
-	 * <div class="fr">Masculin</div>
-	 * <div class="it">Maschile</div>
+	 * <div class="en">Normal Access</div>
+	 * <div class="de">Normal Access</div>
+	 * <div class="fr">Normal Access</div>
+	 * <div class="it">Normal Access</div>
 	 *<!-- @formatter:on -->
 	 */
-	MALE("M", "2.16.840.1.113883.5.1", "Male", "Male", "Männlich", "Masculin", "Maschile"),
-	/**
-	 *<!-- @formatter:off -->
-	 * <div class="en">Other</div>
-	 * <div class="de">Andere</div>
-	 * <div class="fr">Autre</div>
-	 * <div class="it">Altro</div>
-	 *<!-- @formatter:on -->
-	 */
-	OTHER("UN", "2.16.840.1.113883.5.1", "Undifferentiated", "Other", "Andere", "Autre", "Altro");
+	NORMAL_ACCESS("NORM", "2.16.756.5.30.1.127.3.10.5", "Normal Access", "Normal Access",
+			"Normal Access", "Normal Access", "Normal Access");
 
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">Code for Female</div>
-	 * <div class="de">Code für Weiblich</div>
-	 * <div class="fr">Code de Féminin</div>
-	 * <div class="it">Code per Femminile</div>
+	 * <div class="en">Code for Emergency Access</div>
+	 * <div class="de">Code für Emergency Access</div>
+	 * <div class="fr">Code de Emergency Access</div>
+	 * <div class="it">Code per Emergency Access</div>
 	 *<!-- @formatter:on -->
 	 */
-	public static final String FEMALE_CODE = "F";
+	public static final String EMERGENCY_ACCESS_CODE = "EMER";
 
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">Code for Male</div>
-	 * <div class="de">Code für Männlich</div>
-	 * <div class="fr">Code de Masculin</div>
-	 * <div class="it">Code per Maschile</div>
+	 * <div class="en">Code for Normal Access</div>
+	 * <div class="de">Code für Normal Access</div>
+	 * <div class="fr">Code de Normal Access</div>
+	 * <div class="it">Code per Normal Access</div>
 	 *<!-- @formatter:on -->
 	 */
-	public static final String MALE_CODE = "M";
-
-	/**
-	 *<!-- @formatter:off -->
-	 * <div class="en">Code for Other</div>
-	 * <div class="de">Code für Andere</div>
-	 * <div class="fr">Code de Autre</div>
-	 * <div class="it">Code per Altro</div>
-	 *<!-- @formatter:on -->
-	 */
-	public static final String OTHER_CODE = "UN";
+	public static final String NORMAL_ACCESS_CODE = "NORM";
 
 	/**
 	 * <div class="en">Identifier of the value set</div>
 	 * <div class="de">Identifikator für das Value Set</div>
 	 */
-	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.25";
+	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.77.10.11.5";
 
 	/**
 	 * <div class="en">Name of the value set</div> <div class="de">Name des
 	 * Value Sets</div>
 	 */
-	public static final String VALUE_SET_NAME = "EprGender";
+	public static final String VALUE_SET_NAME = "EprPurposeOfUse";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -114,8 +98,8 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static SourcePatientInfo getEnum(String code) {
-		for (final SourcePatientInfo x : values()) {
+	public static PurposeOfUse getEnum(String code) {
+		for (final PurposeOfUse x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -137,7 +121,7 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 			return false;
 		}
 		try {
-			Enum.valueOf(SourcePatientInfo.class, enumName);
+			Enum.valueOf(PurposeOfUse.class, enumName);
 			return true;
 		} catch (final IllegalArgumentException ex) {
 			return false;
@@ -154,7 +138,7 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (final SourcePatientInfo x : values()) {
+		for (final PurposeOfUse x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -200,7 +184,7 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	SourcePatientInfo(String code, String codeSystem, String displayName, String displayNameEn,
+	PurposeOfUse(String code, String codeSystem, String displayName, String displayNameEn,
 			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;

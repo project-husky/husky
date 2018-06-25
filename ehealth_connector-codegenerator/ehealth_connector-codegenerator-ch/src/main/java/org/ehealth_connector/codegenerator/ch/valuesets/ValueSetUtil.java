@@ -53,7 +53,7 @@ public final class ValueSetUtil {
 	/**
 	 * <div class="en">The path to the configuration YAML file.</div>
 	 */
-	private static final String CONFIG_FILE_LOCATION = "src/main/resources/valuesets/valuesets-sources-201704.2-beta.yaml";
+	private static final String CONFIG_FILE_LOCATION = "src/main/resources/valuesets/valuesets-sources-201704.3-beta.yaml";
 
 	/**
 	 * <div class="en">The default charset used to encode files.</div>
@@ -155,19 +155,23 @@ public final class ValueSetUtil {
 		List<Map<String, String>> designations = (List<Map<String, String>>) concept
 				.get("designation");
 
-		for (Map<String, String> designation : designations) {
-			String designationLanguage = designation.get("language");
-			if (designationLanguage != null
-					&& designationLanguage.startsWith(language.getCodeValue())) {
-				return designation.get("displayName");
+		if (designations != null) {
+			for (Map<String, String> designation : designations) {
+				String designationLanguage = designation.get("language");
+				if (designationLanguage != null
+						&& designationLanguage.startsWith(language.getCodeValue())) {
+					return designation.get("displayName");
+				}
 			}
-		}
 
-		// nothing found for desired language, return the default for english
-		if (language == ENGLISH) {
-			return getDisplayName(null, concept);
-		}
-		throw new IllegalStateException("no designation found for language " + language);
+			// nothing found for desired language, return the default for
+			// english
+			if (language == ENGLISH) {
+				return getDisplayName(null, concept);
+			}
+			throw new IllegalStateException("no designation found for language " + language);
+		} else
+			return concept.get("displayName").toString();
 	}
 
 	/**
@@ -273,7 +277,8 @@ public final class ValueSetUtil {
 		// art-decor.org
 		// if it does not exist locally yet
 		if (!valueSetDefinitionFile.exists() && downloadIfNotInFileSystem) {
-			valueSetDefinition = IOUtils.toString(buildValueSetUrl(baseUrl, valueSet), DEFAULT_ENCODING);
+			valueSetDefinition = IOUtils.toString(buildValueSetUrl(baseUrl, valueSet),
+					DEFAULT_ENCODING);
 			FileUtils.write(valueSetDefinitionFile, valueSetDefinition, DEFAULT_ENCODING);
 		} else if (!valueSetDefinitionFile.exists()) {
 			throw new FileNotFoundException(valueSetDefinitionFile.getName());

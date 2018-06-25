@@ -30,31 +30,27 @@ import org.ehealth_connector.security.hl7v3.PurposeOfUse;
 public abstract class PurposeOfUseChImpl {
 
 	/**
-	 * <pre>
-	 * <PurposeOfUse xs:type="CE" code="EMER" codeSystem=
-	"2.16.756.5.30.1.127.3.10.5" codeSystemName=
-	"eHealth Suisse Verwendungszweck" displayName="Notfallzugriff" xmlns=
-	"urn:hl7-org:v3"/>
-	 * </pre>
+	 * Emergency access.
+	 *
+	 * @return the purpose of use
 	 */
 	public static PurposeOfUse EMER() {
-		return new PurposeOfUseBuilder().code("EMER").codeSystem("2.16.756.5.30.1.127.3.10.5")
-				.codeSystemName("eHealth Suisse Verwendungszweck").displayName("Notfallzugriff")
-				.buildObject();
+		org.ehealth_connector.security.ch.epr.enums.PurposeOfUse code = org.ehealth_connector.security.ch.epr.enums.PurposeOfUse.EMERGENCY_ACCESS;
+		return new PurposeOfUseBuilder().code(code.getCodeValue())
+				.codeSystem(code.getCodeSystemValue()).codeSystemName(code.getValueSetName())
+				.displayName(code.getDisplayName()).buildObject();
 	}
 
 	/**
-	 * <pre>
-	 * <PurposeOfUse xs:type="CE" code="NORM" codeSystem=
-	"2.16.756.5.30.1.127.3.10.5" codeSystemName=
-	"eHealth Suisse Verwendungszweck" displayName="Normalzugriff" xmlns=
-	"urn:hl7-org:v3"/>
-	 * </pre>
+	 * Normal access.
+	 *
+	 * @return the purpose of use
 	 */
 	public static PurposeOfUse NORM() {
-		return new PurposeOfUseBuilder().code("NORM").codeSystem("2.16.756.5.30.1.127.3.10.5")
-				.codeSystemName("eHealth Suisse Verwendungszweck").displayName("Normalzugriff")
-				.buildObject();
+		org.ehealth_connector.security.ch.epr.enums.PurposeOfUse code = org.ehealth_connector.security.ch.epr.enums.PurposeOfUse.NORMAL_ACCESS;
+		return new PurposeOfUseBuilder().code(code.getCodeValue())
+				.codeSystem(code.getCodeSystemValue()).codeSystemName(code.getValueSetName())
+				.displayName(code.getDisplayName()).buildObject();
 	}
 
 }

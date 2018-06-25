@@ -27,4 +27,7 @@ package org.ehealth_connector.security.ch.ppq;
  */
 public interface PrivacyPolicyQueryResponse {
 
+	// There are no special methods defined, but the interface has to be
+	// declared for selection reasons.
+
 }

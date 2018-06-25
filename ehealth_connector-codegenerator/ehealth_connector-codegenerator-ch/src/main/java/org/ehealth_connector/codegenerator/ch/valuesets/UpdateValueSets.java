@@ -160,6 +160,8 @@ public class UpdateValueSets {
 			values.add(new StringLiteralExpr(concept.get("displayName").toString()));
 
 			// build comments per language
+			javadocEnum.append("<!-- @formatter:off -->\n");
+			javadocConstant.append("<!-- @formatter:off -->\n");
 			for (LanguageCode language : LANGUAGE_CODES) {
 				values.add(new StringLiteralExpr(getDisplayName(language, concept)));
 				String displayName = getDisplayName(language, concept);
@@ -167,6 +169,8 @@ public class UpdateValueSets {
 				javadocConstant.append(buildJavadocComment(language,
 						CODE_JAVADOC_PREFIX.get(language) + displayName));
 			}
+			javadocEnum.append("<!-- @formatter:on -->\n");
+			javadocConstant.append("<!-- @formatter:on -->\n");
 
 			// the enum constant with all values
 			EnumConstantDeclaration enumConstant = new EnumConstantDeclaration(new NodeList<>(),
@@ -250,9 +254,9 @@ public class UpdateValueSets {
 		List<Map<String, String>> filteredDescriptions = JsonPath.read(descriptions,
 				"$..[?(@.language =~ /" + language.getCodeValue() + ".*/i)]");
 		if (filteredDescriptions == null || filteredDescriptions.isEmpty()) {
-			throw new IllegalStateException("no designation found for language " + language);
-		}
-		return filteredDescriptions.get(0).get("content");
+			return "no designation found for language " + language;
+		} else
+			return filteredDescriptions.get(0).get("content");
 	}
 
 	/**
@@ -417,10 +421,12 @@ public class UpdateValueSets {
 
 			// add main javadoc
 			StringBuilder javadoc = new StringBuilder();
+			javadoc.append("<!-- @formatter:off -->\n");
 			for (LanguageCode language : LANGUAGE_CODES) {
 				javadoc.append(buildJavadocComment(language,
 						getDescription(language, valueSetDefinition.get("desc"))));
 			}
+			javadoc.append("<!-- @formatter:on -->\n");
 			enumType.setJavadocComment(javadoc.toString());
 
 			// add all members from template file
