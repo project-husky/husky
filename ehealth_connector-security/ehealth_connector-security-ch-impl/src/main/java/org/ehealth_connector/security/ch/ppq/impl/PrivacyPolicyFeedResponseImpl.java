@@ -33,11 +33,11 @@ import org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeedResponse;
  */
 public class PrivacyPolicyFeedResponseImpl implements PrivacyPolicyFeedResponse {
 
-	private String mStatus;
+	private List<Exception> mExceptions;
 
 	private PpfMethod mMethod;
 
-	private List<Exception> mExceptions;
+	private String mStatus;
 
 	protected PrivacyPolicyFeedResponseImpl() {
 		mExceptions = new ArrayList<>();

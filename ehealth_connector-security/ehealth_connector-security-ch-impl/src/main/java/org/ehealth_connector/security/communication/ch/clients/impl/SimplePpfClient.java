@@ -79,29 +79,6 @@ public class SimplePpfClient extends AbstractSoapClient<PrivacyPolicyFeedRespons
 		setConfig(clientConfiguration);
 	}
 
-	@Override
-	public PrivacyPolicyFeedResponse send(SecurityHeaderElement aAssertion,
-			PrivacyPolicyFeed request) throws ClientSendException {
-
-		try {
-			final HttpPost post = getHttpPost();
-
-			final String actionString = EHS_2015_POLYADMIN + request.getMethod().name();
-
-			final WsaHeaderValue wsHeaders = new WsaHeaderValue(
-					"urn:uuid:" + UUID.randomUUID().toString(), actionString, null);
-
-			post.setEntity(getSoapEntity(aAssertion, request, wsHeaders));
-
-			final PrivacyPolicyFeedResponseImpl response = (PrivacyPolicyFeedResponseImpl) execute(
-					post);
-			response.setMethod(request.getMethod());
-			return response;
-		} catch (final Throwable t) {
-			throw new ClientSendException(t);
-		}
-	}
-
 	private HttpEntity getSoapEntity(SecurityHeaderElement aSecurityHeaderElement,
 			PrivacyPolicyFeed feed, WsaHeaderValue wsHeaders) throws ParserConfigurationException,
 			SerializeException, TransformerException, MarshallingException {
@@ -220,6 +197,29 @@ public class SimplePpfClient extends AbstractSoapClient<PrivacyPolicyFeedRespons
 				| ParseException | IOException | ParserConfigurationException | SAXException
 				| UnmarshallingException | XPathExpressionException e) {
 			throw new ClientSendException(e);
+		}
+	}
+
+	@Override
+	public PrivacyPolicyFeedResponse send(SecurityHeaderElement aAssertion,
+			PrivacyPolicyFeed request) throws ClientSendException {
+
+		try {
+			final HttpPost post = getHttpPost();
+
+			final String actionString = EHS_2015_POLYADMIN + request.getMethod().name();
+
+			final WsaHeaderValue wsHeaders = new WsaHeaderValue(
+					"urn:uuid:" + UUID.randomUUID().toString(), actionString, null);
+
+			post.setEntity(getSoapEntity(aAssertion, request, wsHeaders));
+
+			final PrivacyPolicyFeedResponseImpl response = (PrivacyPolicyFeedResponseImpl) execute(
+					post);
+			response.setMethod(request.getMethod());
+			return response;
+		} catch (final Throwable t) {
+			throw new ClientSendException(t);
 		}
 	}
 

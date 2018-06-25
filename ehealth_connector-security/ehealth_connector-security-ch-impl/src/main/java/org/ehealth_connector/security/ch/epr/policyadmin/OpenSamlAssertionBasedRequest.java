@@ -30,6 +30,6 @@ import org.opensaml.core.xml.XMLObject;
 */
 public interface OpenSamlAssertionBasedRequest extends AssertionBasedRequest, XMLObject {
 	public void setAssertion(Assertion aAssertion);
-	// There are no special methods defined, but this intermediat interface has
+	// There are no special methods defined, but this intermediate interface has
 	// to be declared for opensaml reasons
 }

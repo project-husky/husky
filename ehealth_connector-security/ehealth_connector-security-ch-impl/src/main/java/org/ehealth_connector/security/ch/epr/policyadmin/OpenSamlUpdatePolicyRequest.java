@@ -27,6 +27,6 @@ package org.ehealth_connector.security.ch.epr.policyadmin;
 */
 public interface OpenSamlUpdatePolicyRequest
 		extends UpdatePolicyRequest, OpenSamlAssertionBasedRequest {
-	// There are no special methods defined, but this intermediat interface has
+	// There are no special methods defined, but this intermediate interface has
 	// to be declared for opensaml reasons
 }

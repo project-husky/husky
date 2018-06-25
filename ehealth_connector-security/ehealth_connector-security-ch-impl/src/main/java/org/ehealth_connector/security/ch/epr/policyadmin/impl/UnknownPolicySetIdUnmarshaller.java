@@ -35,17 +35,17 @@ import org.w3c.dom.Element;
 public class UnknownPolicySetIdUnmarshaller extends AbstractXMLObjectUnmarshaller {
 
 	@Override
-	public OpenSamlUnknownPolicySetId unmarshall(Element domElement) throws UnmarshallingException {
-		return (OpenSamlUnknownPolicySetId) super.unmarshall(domElement);
-	}
-
-	@Override
 	protected void processAttribute(XMLObject xmlObject, Attr attribute)
 			throws UnmarshallingException {
 		final OpenSamlUnknownPolicySetId reponse = (OpenSamlUnknownPolicySetId) xmlObject;
 		if ("status".equalsIgnoreCase(attribute.getName())) {
 			reponse.setMessage(attribute.getValue());
 		}
+	}
+
+	@Override
+	public OpenSamlUnknownPolicySetId unmarshall(Element domElement) throws UnmarshallingException {
+		return (OpenSamlUnknownPolicySetId) super.unmarshall(domElement);
 	}
 
 }

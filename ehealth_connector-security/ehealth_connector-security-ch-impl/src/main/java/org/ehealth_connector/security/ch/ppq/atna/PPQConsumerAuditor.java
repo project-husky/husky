@@ -30,4 +30,7 @@ import org.openhealthtools.ihe.atna.auditor.IHEAuditor;
  */
 public class PPQConsumerAuditor extends IHEAuditor {
 
+	// There are no special methods defined, but the interface has to be
+	// declared for selection reasons.
+
 }

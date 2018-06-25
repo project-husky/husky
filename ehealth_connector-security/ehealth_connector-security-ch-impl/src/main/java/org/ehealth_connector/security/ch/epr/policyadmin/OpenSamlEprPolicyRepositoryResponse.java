@@ -30,6 +30,6 @@ import org.opensaml.core.xml.XMLObject;
 public interface OpenSamlEprPolicyRepositoryResponse
 		extends EprPolicyRepositoryResponse, XMLObject {
 	public void setStatus(String aStatus);
-	// There are no special methods defined, but this intermediat interface has
+	// There are no special methods defined, but this intermediate interface has
 	// to be declared for opensaml reasons
 }

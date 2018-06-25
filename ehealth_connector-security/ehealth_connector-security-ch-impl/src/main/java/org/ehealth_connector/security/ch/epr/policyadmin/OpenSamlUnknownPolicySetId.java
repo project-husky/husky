@@ -29,6 +29,6 @@ import org.opensaml.core.xml.XMLObject;
 */
 public interface OpenSamlUnknownPolicySetId extends UnknownPolicySetId, XMLObject {
 	public void setMessage(String aMessage);
-	// There are no special methods defined, but this intermediat interface has
+	// There are no special methods defined, but this intermediate interface has
 	// to be declared for opensaml reasons
 }

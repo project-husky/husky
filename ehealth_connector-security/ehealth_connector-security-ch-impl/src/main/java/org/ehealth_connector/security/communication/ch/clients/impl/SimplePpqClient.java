@@ -68,31 +68,6 @@ public class SimplePpqClient extends AbstractSoapClient<Response> implements Ppq
 		setConfig(clientConfiguration);
 	}
 
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.communication.ch.clients.PpqClient#send(org.ehealth_connector.security.core.SecurityHeaderElement,
-	 *      org.ehealth_connector.security.ch.ppq.PrivacyPolicyQuery)
-	 */
-	@Override
-	public Response send(SecurityHeaderElement aAssertion, PrivacyPolicyQuery query)
-			throws ClientSendException {
-		try {
-			final HttpPost post = getHttpPost();
-
-			final WsaHeaderValue wsHeaders = new WsaHeaderValue(
-					"urn:uuid:" + UUID.randomUUID().toString(),
-					"urn:e-health-suisse:2015:policy-administration:PolicyQuery", null);
-
-			post.setEntity(getSoapEntity(aAssertion, query, wsHeaders));
-
-			return execute(post);
-		} catch (final Throwable t) {
-			throw new ClientSendException(t);
-		}
-	}
-
 	private HttpEntity getSoapEntity(SecurityHeaderElement aSecurityHeaderElement,
 			PrivacyPolicyQuery query, WsaHeaderValue wsHeaders) throws ParserConfigurationException,
 			SerializeException, TransformerException, MarshallingException {
@@ -139,6 +114,31 @@ public class SimplePpqClient extends AbstractSoapClient<Response> implements Ppq
 				| ParserConfigurationException | SAXException | UnmarshallingException
 				| XPathExpressionException e) {
 			throw new ClientSendException(e);
+		}
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.communication.ch.clients.PpqClient#send(org.ehealth_connector.security.core.SecurityHeaderElement,
+	 *      org.ehealth_connector.security.ch.ppq.PrivacyPolicyQuery)
+	 */
+	@Override
+	public Response send(SecurityHeaderElement aAssertion, PrivacyPolicyQuery query)
+			throws ClientSendException {
+		try {
+			final HttpPost post = getHttpPost();
+
+			final WsaHeaderValue wsHeaders = new WsaHeaderValue(
+					"urn:uuid:" + UUID.randomUUID().toString(),
+					"urn:e-health-suisse:2015:policy-administration:PolicyQuery", null);
+
+			post.setEntity(getSoapEntity(aAssertion, query, wsHeaders));
+
+			return execute(post);
+		} catch (final Throwable t) {
+			throw new ClientSendException(t);
 		}
 	}
 

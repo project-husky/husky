@@ -48,10 +48,10 @@ import org.opensaml.xacml.profile.saml.impl.XACMLPolicyQueryTypeImplBuilder;
 public class PrivacyPolicyQueryBuilderImpl implements PrivacyPolicyQueryBuilder,
 		SecurityObjectBuilder<XACMLPolicyQueryType, PrivacyPolicyQuery> {
 
-	private XACMLPolicyQueryType wrappedObject;
 	private org.opensaml.saml.saml2.core.Issuer issuer;
 	private RequestType request;
 	private ResourceType resource;
+	private XACMLPolicyQueryType wrappedObject;
 
 	public PrivacyPolicyQueryBuilderImpl() {
 		wrappedObject = new XACMLPolicyQueryTypeImplBuilder()

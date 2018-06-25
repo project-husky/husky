@@ -30,13 +30,13 @@ public final class XUserAssertionConstantsCh {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Assertion role value for patient.</div>
-	 * <div class="de">Assertion Rollenwert für Patient.</div>
+	 * <div class="en">Assertion role value for assistant.</div>
+	 * <div class="de">Assertion Rollenwert für Assitent.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String ROLE_PATIENT = "PAT";
+	public static final String ROLE_ASSITANT = "ASS";
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Assertion role value for healthcare professional.</div>
@@ -48,13 +48,13 @@ public final class XUserAssertionConstantsCh {
 	public static final String ROLE_HE_CARE_PRO = "HCP";
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Assertion role value for assistant.</div>
-	 * <div class="de">Assertion Rollenwert für Assitent.</div>
+	 * <div class="en">Assertion role value for patient.</div>
+	 * <div class="de">Assertion Rollenwert für Patient.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String ROLE_ASSITANT = "ASS";
+	public static final String ROLE_PATIENT = "PAT";
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Assertion role value for representativ.</div>

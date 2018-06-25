@@ -33,8 +33,8 @@ import org.ehealth_connector.security.saml2.impl.AssertionBuilderImpl;
 public class PrivacyPolicyFeedImpl
 		implements PrivacyPolicyFeed, SecurityObject<org.opensaml.saml.saml2.core.Assertion> {
 
-	private PpfMethod mPpfMethod;
 	private org.opensaml.saml.saml2.core.Assertion mAssertion;
+	private PpfMethod mPpfMethod;
 
 	protected PrivacyPolicyFeedImpl(PpfMethod ppfMethod,
 			org.opensaml.saml.saml2.core.Assertion aInternalObject) {
