@@ -38,13 +38,13 @@ public class PrivacyPolicyQuerySerializerImplTest extends InitializerTestHelper 
 
 	private Logger logger = LoggerFactory.getLogger(PrivacyPolicyQuerySerializerImplTest.class);
 
-	private PrivacyPolicyQuerySerializerImpl testSerializer;
-	private PrivacyPolicyQuery testXmlObject;
 	private String testConsent;
 	private String testDestination;
-	private String testInstanceIdentifierRoot;
-	private String testInstanceIdentifierExt;
 	private InstanceIdentifier testInstanceIdentifier;
+	private String testInstanceIdentifierExt;
+	private String testInstanceIdentifierRoot;
+	private PrivacyPolicyQuerySerializerImpl testSerializer;
+	private PrivacyPolicyQuery testXmlObject;
 
 	@Before
 	public void setUp() throws Exception {

@@ -90,10 +90,10 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder,
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#assertionConsumerServiceURL(java.lang.String)
+	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#assertionConsumerServiceUrl(java.lang.String)
 	 */
 	@Override
-	public AuthnRequestBuilder assertionConsumerServiceURL(String aAssertionConsumerServiceURL) {
+	public AuthnRequestBuilder assertionConsumerServiceUrl(String aAssertionConsumerServiceURL) {
 		if (!StringUtils.isEmpty(aAssertionConsumerServiceURL)) {
 			authnRequest.setAssertionConsumerServiceURL(aAssertionConsumerServiceURL);
 		}
@@ -264,10 +264,10 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder,
 	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#providerID(java.lang.String)
+	 * @see org.ehealth_connector.security.authentication.AuthnRequestBuilder#providerId(java.lang.String)
 	 */
 	@Override
-	public AuthnRequestBuilder providerID(String aProviderID) {
+	public AuthnRequestBuilder providerId(String aProviderID) {
 		if (!StringUtils.isEmpty(aProviderID)) {
 			final IDPEntry idpEntry = new IDPEntryBuilder().buildObject();
 			idpEntry.setProviderID(aProviderID);

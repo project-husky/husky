@@ -46,7 +46,7 @@ public interface Attribute {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the name.</div>
-	 * <div class="de">Methode um den namen zu holen.</div>
+	 * <div class="de">Methode um den Namen zu holen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *

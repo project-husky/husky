@@ -20,7 +20,7 @@ package org.ehealth_connector.security.communication.config;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the ClientConfigBuilder methods.</div>
- * <div class="de">Interface beschreibende methoden des ClientConfigBuilders.</div>
+ * <div class="de">Interface welches die Methoden des ClientConfigBuilders beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -41,7 +41,7 @@ public interface SoapClientConfigBuilder extends ClientConfigBuilder {
 	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the actual instance of this builder</div>
-	 * <div class="de">die aktuelle instanz des builders</div>
+	 * <div class="de">die aktuelle Instanz des Builders</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -62,7 +62,7 @@ public interface SoapClientConfigBuilder extends ClientConfigBuilder {
 	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the actual instance of this builder</div>
-	 * <div class="de">die aktuelle instanz des builders</div>
+	 * <div class="de">die aktuelle Instanz des Builders</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -83,7 +83,7 @@ public interface SoapClientConfigBuilder extends ClientConfigBuilder {
 	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the actual instance of this builder</div>
-	 * <div class="de">die aktuelle instanz des builders</div>
+	 * <div class="de">die aktuelle Instanz des Builders</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -94,7 +94,7 @@ public interface SoapClientConfigBuilder extends ClientConfigBuilder {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the port name of the security token webservice.</div>
-	 * <div class="de">Methode um den Port Namen des security token webservices zu setzen.</div>
+	 * <div class="de">Methode um den Port Namen des Security Token Webservices zu setzen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -102,10 +102,10 @@ public interface SoapClientConfigBuilder extends ClientConfigBuilder {
 	 * <div class="en">the port name</div>
 	 * <div class="de">der Port Name</div>
 	 * <div class="fr"></div>
-	 * <div class="it"></div>XuaClientConfig
+	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the actual instance of this builder</div>
-	 * <div class="de">die aktuelle instanz des builders</div>
+	 * <div class="de">die aktuelle Instanz des Builders</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -116,7 +116,7 @@ public interface SoapClientConfigBuilder extends ClientConfigBuilder {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the namespace of the port name of the security token webservice.</div>
-	 * <div class="de">Methode um den Namespace des Port Namen des security token webservices zu setzen.</div>
+	 * <div class="de">Methode um den Namespace des Port Namen des Security Token Webservices zu setzen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -127,7 +127,7 @@ public interface SoapClientConfigBuilder extends ClientConfigBuilder {
 	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the actual instance of this builder</div>
-	 * <div class="de">die aktuelle instanz des builders</div>
+	 * <div class="de">die aktuelle Instanz des Builders</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -138,7 +138,7 @@ public interface SoapClientConfigBuilder extends ClientConfigBuilder {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the service  name of the security token webservice.</div>
-	 * <div class="de">Methode um den Service Namen des security token webservices zu setzen.</div>
+	 * <div class="de">Methode um den Service Namen des Security Token Webservices zu setzen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -149,7 +149,7 @@ public interface SoapClientConfigBuilder extends ClientConfigBuilder {
 	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the actual instance of this builder</div>
-	 * <div class="de">die aktuelle instanz des builders</div>
+	 * <div class="de">die aktuelle Instanz des Builders</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -159,7 +159,7 @@ public interface SoapClientConfigBuilder extends ClientConfigBuilder {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the namespace of the service name of the security token webservice.</div>
-	 * <div class="de">Methode um den Namespace des Service Namen des security token webservices zu setzen.</div>
+	 * <div class="de">Methode um den Namespace des Service Namen des Security Token Webservices zu setzen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -170,7 +170,7 @@ public interface SoapClientConfigBuilder extends ClientConfigBuilder {
 	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the actual instance of this builder</div>
-	 * <div class="de">die aktuelle instanz des builders</div>
+	 * <div class="de">die aktuelle Instanz des Builders</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -181,18 +181,18 @@ public interface SoapClientConfigBuilder extends ClientConfigBuilder {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the simple flag.</div>
-	 * <div class="de">Methode um den das simple flag zu setzen.</div>
+	 * <div class="de">Methode um den das Simple Flag zu setzen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param aSimple
 	 * <div class="en">true or false as value to be set</div>
-	 * <div class="de">true oder false was gesetzt werden soll</div>
+	 * <div class="de">true oder false als Wert, der gesetzt werden soll</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the actual instance of this builder</div>
-	 * <div class="de">die aktuelle instanz des builders</div>
+	 * <div class="de">die aktuelle Instanz des Builders</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

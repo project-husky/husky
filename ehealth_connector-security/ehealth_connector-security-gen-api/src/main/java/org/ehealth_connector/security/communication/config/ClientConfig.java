@@ -20,7 +20,7 @@ package org.ehealth_connector.security.communication.config;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of client configuration.</div>
- * <div class="de">Interface beschreibt die Methoden für die Client Konfiguration.</div>
+ * <div class="de">Interface welches die Methoden für die Client Konfiguration beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

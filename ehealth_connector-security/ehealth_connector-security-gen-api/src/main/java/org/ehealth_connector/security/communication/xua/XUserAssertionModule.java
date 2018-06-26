@@ -35,19 +35,19 @@ public interface XUserAssertionModule {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to get the xuser assertion from an xassertionprovider.</div>
-	 * <div class="de">Methode um die authentifizierungs assertion eines X Assertion Provider zu erhalten.</div>
+	 * <div class="en">Method to get the xuser assertion from an X-Assertion Provider.</div>
+	 * <div class="de">Methode um die Authentifizierungs Assertion eines X-Assertion Providers zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param aSecurityHeaderElement
-	 * <div class="en">The ASecurityHeaderElement to be sent by soap header.</div>
-	 * <div class="de">Das SecurityHeaderElement welcehs im soap header mitgeschickt werden soll.</div>
+	 * <div class="en">The SecurityHeaderElement to be sent by SOAP header.</div>
+	 * <div class="de">Das SecurityHeaderElement welcehs im SOAP header mitgeschickt werden soll.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @param aRequest
 	 * <div class="en">The XUserAssertionRequest to be sent.</div>
-	 * <div class="de">Die XUserAssertionRequest die geschickt werden soll.</div>
+	 * <div class="de">Der XUserAssertionRequest der geschickt werden soll.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @param clientConfiguration

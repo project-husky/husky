@@ -26,7 +26,7 @@ import org.ehealth_connector.security.exceptions.SigningException;
  *
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the sign and crypt module.</div>
- * <div class="de">Interfacte welches die methoden des sign und crypt modules beschreiben.</div>
+ * <div class="de">Interface welches die Methoden des sign und crypt modules beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -38,28 +38,28 @@ public interface SignCryptModule {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the key and truststore and the corresponding passwords.</div>
-	 * <div class="de">Methode um den key und trust store und deren passw&ooml;rter zu setzen.</div>
+	 * <div class="de">Methode um den key und trust store und deren Passwörter zu setzen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param keyStore
-	 *  <div class="en">the keystore.</div>
-	 *  <div class="de">der Keystore der gesetzt werde soll.</div>
+	 *  <div class="en">the keystore to be set.</div>
+	 *  <div class="de">der Keystore der gesetzt werden soll.</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @param aKeyStorePassword
 	 * 	<div class="en">the password of the keystore to be set.</div>
-	 *  <div class="de">das passwort zum Keystore</div>
+	 *  <div class="de">das Passwort zum Keystore</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @param trustStore
 	 *  <div class="en">the truststore to be set.</div>
-	 *  <div class="de">der Truststore der gesetzt werde soll.</div>
+	 *  <div class="de">der Truststore der gesetzt werden soll.</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @param aTrustStorePassword
 	 *  <div class="en">the password of the truststore to be set.</div>
-	 *  <div class="de">das passwort zum Truststore</div>
+	 *  <div class="de">das Passwort zum Truststore</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -88,7 +88,7 @@ public interface SignCryptModule {
 	 *  <div class="it"></div>
 	 * @throws SigningException
 	 * <div class="en">will be thrown when an error occures signing the AuthnRequest</div>
-	 *  <div class="de">wird geworfen wenn eine fehler beim Signieren des Authnrequests auftritt</div>
+	 *  <div class="de">wird geworfen wenn ein Fehler beim Signieren des Authnrequests auftritt</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 */

@@ -19,8 +19,8 @@ package org.ehealth_connector.security.communication.xua;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Enumeration for ws-trust request type.</div>
- * <div class="de">Enummerierung for den WS-Trust Request Typ</div>
+ * <div class="en">Enumeration for the WS-Trust Request type.</div>
+ * <div class="de">Enummerierung für den WS-Trust Request Typ</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  *
@@ -28,9 +28,9 @@ package org.ehealth_connector.security.communication.xua;
  */
 public enum RequestType {
 
+	WST_CANCEL("http://docs.oasis-open.org/ws-sx/ws-trust/200512/Cancel"), //
 	WST_ISSUE("http://docs.oasis-open.org/ws-sx/ws-trust/200512/Issue"), //
 	WST_RENEW("http://docs.oasis-open.org/ws-sx/ws-trust/200512/Renew"), //
-	WST_CANCEL("http://docs.oasis-open.org/ws-sx/ws-trust/200512/Cancel"), //
 	WST_VALIDATE(" http://docs.oasis-open.org/ws-sx/ws-trust/200512/Validate");
 
 	public static RequestType getEnum(String code) {

@@ -24,7 +24,7 @@ import org.ehealth_connector.security.saml2.Response;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods for the identity provider client.</div>
- * <div class="de">Interface welches die Methoden für den Identity provider client beschreiben.</div>
+ * <div class="de">Interface welches die Methoden für den Identity Provider Client beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -40,17 +40,17 @@ public interface IdpClient {
 	 *
 	 * @param aAuthnRequest
 	 * <div class="en">the AuthnRequest to be sent.</div>
-	 * <div class="de">Die AuthnRequest welcher geschickt werden soll.</div>
+	 * <div class="de">Der AuthnRequest welcher geschickt werden soll.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the idp response</div>
-	 * <div class="de">Der IdP Response.</div>
+	 * <div class="de">Die IdP Response.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @throws ClientSendException
 	 * <div class="en">will be thrown if an error occoures</div>
-	 * <div class="de">wird geworfen wenn ein Fehler auftritt.</div>
+	 * <div class="de">Wird geworfen wenn ein Fehler auftritt.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

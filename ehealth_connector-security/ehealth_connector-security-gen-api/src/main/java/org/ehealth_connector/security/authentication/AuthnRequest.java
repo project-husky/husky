@@ -22,8 +22,8 @@ import org.ehealth_connector.security.saml2.Subject;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Interface describing the methods of authnrequest.</div>
- * <div class="de">Interface beschreibt die methoden für den authnrequest.</div>
+ * <div class="en">Interface describing the methods of AuthnRequest.</div>
+ * <div class="de">Interface welches die Methoden für den AuthnRequest beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -34,14 +34,14 @@ public interface AuthnRequest extends Base {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the assertion consumer service index.</div>
-	 * <div class="de">Methode um den assertion consumer service index zu holen.</div>
+	 * <div class="de">Methode um den Assertion Consumer Service Index zu holen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 *
 	 * @return
 	 *  <div class="en">the assertion consumer service index as integer</div>
-	 *  <div class="de">der assertion consumer service index wert als string</div>
+	 *  <div class="de">der Assertion Consumer Service index Wert als string</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -52,20 +52,20 @@ public interface AuthnRequest extends Base {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get assertion consumer service url.</div>
-	 * <div class="de">Method um die assertion consumer service url zu holen .</div>
+	 * <div class="de">Method um die Assertion Consumer Service URL zu holen .</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @return the assertion consumer service url as string
 	 */
-	String getAssertionConsumerServiceURL();
+	String getAssertionConsumerServiceUrl();
 
 	/**
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get attribute consumer service index.</div>
-	 * <div class="de">Method um den attribute consumer service index zu holen.</div>
+	 * <div class="de">Method um den Attribute Consumer Service Index zu holen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -78,7 +78,7 @@ public interface AuthnRequest extends Base {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the consent.</div>
-	 * <div class="de">Methode um den consent zu holen.</div>
+	 * <div class="de">Methode um den Consent zu holen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -91,13 +91,13 @@ public interface AuthnRequest extends Base {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the destination.</div>
-	 * <div class="de">Methode um die destination zu holen.</div>
+	 * <div class="de">Methode um die Destination zu holen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
 	 * <div class="en">the destination value.</div>
-	 * <div class="de">the Destination Wert</div>
+	 * <div class="de">der Inhalt von Destination.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -107,8 +107,8 @@ public interface AuthnRequest extends Base {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to get the forceauthn value.</div>
-	 * <div class="de">Methode um den forceauthn wert zu holen.</div>
+	 * <div class="en">Method to get the ForceAuthn value.</div>
+	 * <div class="de">Methode um den ForceAuthn wert zu holen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -119,8 +119,8 @@ public interface AuthnRequest extends Base {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to get the nameidpolicy allowcreate value.</div>
-	 * <div class="de">Methode um den nameidpolicy allowcreate wert zu holen.</div>
+	 * <div class="en">Method to get the NameIdPolicy.AllowCreate value.</div>
+	 * <div class="de">Methode um den NameIdPolicy.AllowCreate Wert zu holen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -136,8 +136,8 @@ public interface AuthnRequest extends Base {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to get the nameidpolicy format value.</div>
-	 * <div class="de">Methode um den nameidpolicy format wert zu holen.</div>
+	 * <div class="en">Method to get the NameIdPolicy.Format value.</div>
+	 * <div class="de">Methode um den NameIdPolicy.Format Wert zu holen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -149,15 +149,15 @@ public interface AuthnRequest extends Base {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to get the protocol binding value.</div>
-	 * <div class="de">Methode um den protocol binding wert zu holen.</div>
+	 * <div class="en">Method to get the ProtocolBinding value.</div>
+	 * <div class="de">Methode um den ProtocolBinding Wert zu holen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 *
 	 * @return
-	 *  <div class="en">the protocol binding value as string</div>
-	 *  <div class="de">der protocol binding wert als string</div>
+	 *  <div class="en">the ProtocolBinding value as string</div>
+	 *  <div class="de">der ProtocolBinding Wert als string</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -168,7 +168,7 @@ public interface AuthnRequest extends Base {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the provider name.</div>
-	 * <div class="de">Methode um den provider name zu holen.</div>
+	 * <div class="de">Methode um den Provider Namen zu holen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

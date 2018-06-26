@@ -22,7 +22,7 @@ import org.ehealth_connector.security.communication.config.SoapClientConfigBuild
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the PpClientConfigBuilder methods.</div>
- * <div class="de">Interface beschreibende methoden des PpClientConfigBuilder.</div>
+ * <div class="de">Interface beschreibt die Methoden des PpClientConfigBuilder.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -41,13 +41,13 @@ public interface PpClientConfigBuilder extends SoapClientConfigBuilder {
 	/**
 	  * <!-- @formatter:off -->
 	 * <div class="en">Creates a concrete instance of PpClientConfig with setted params.</div>
-	 * <div class="de">Erstellt die konkrete instanz des PpClientConfig mit den gesetzten parametern.</div>
+	 * <div class="de">Erstellt die konkrete Instanz des PpClientConfig mit den gesetzten Parametern.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
 	 *  <div class="en">a new PpClientConfig instance with the params set</div>
-	 *  <div class="de">eine neue PpClientConfig instanz mit den gesetzten parametern</div>
+	 *  <div class="de">eine neue PpClientConfig Instanz mit den gesetzten Parametern</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->

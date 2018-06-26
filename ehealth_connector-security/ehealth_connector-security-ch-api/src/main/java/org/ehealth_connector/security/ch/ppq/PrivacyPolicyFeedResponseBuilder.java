@@ -22,7 +22,7 @@ import org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeed.PpfMethod;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods for the PrivacyPolicyFeedResponseBuilder</div>
- * <div class="de">Interface welches die Methoden für den Privacy Policy Feed beschreiben.</div>
+ * <div class="de">Interface welches die Methoden für den Privacy Policy Feed beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -32,13 +32,13 @@ public interface PrivacyPolicyFeedResponseBuilder {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Creates a concrete instance of PrivacyPolicyFeedResponse with setted params.</div>
-	 * <div class="de">Erstellt die konkrete instanz des PrivacyPolicyFeedResponse mit den gesetzten parametern.</div>
+	 * <div class="de">Erstellt die konkrete Instanz des PrivacyPolicyFeedResponse mit den gesetzten Parametern.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
 	 *  <div class="en">a new PrivacyPolicyFeedResponse instance with the params set</div>
-	 *  <div class="de">eine neue PrivacyPolicyFeedResponse instanz mit den gesetzten parametern</div>
+	 *  <div class="de">eine neue PrivacyPolicyFeedResponse Instanz mit den gesetzten Parametern</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -54,12 +54,12 @@ public interface PrivacyPolicyFeedResponseBuilder {
 	 *
 	 * @param aException
 	 *  <div class="en">the exception extracted from the message.</div>
-	 * 	<div class="de">der Fehler der aus der meldung gelesen wurde.</div>
+	 * 	<div class="de">der Fehler der aus der Meldung gelesen wurde.</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -69,7 +69,7 @@ public interface PrivacyPolicyFeedResponseBuilder {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the method of the PrivacyPolicyFeedResponse to be build.</div>
-	 * <div class="de">Methode um ein method dem PrivacyPolicyFeedResponse hinzuzufügen.</div>
+	 * <div class="de">Methode um eine Methode dem PrivacyPolicyFeedResponse hinzuzufügen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -80,7 +80,7 @@ public interface PrivacyPolicyFeedResponseBuilder {
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -90,18 +90,18 @@ public interface PrivacyPolicyFeedResponseBuilder {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the status of the PrivacyPolicyFeedResponse to be build.</div>
-	 * <div class="de">Methode um ein status dem PrivacyPolicyFeedResponse hinzuzufügen.</div>
+	 * <div class="de">Methode um ein Status dem PrivacyPolicyFeedResponse hinzuzufügen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param aStatus
 	 *  <div class="en">the consent to be set</div>
-	 * 	<div class="de">der consent der gesetzt werden soll</div>
+	 * 	<div class="de">der Consent der gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->

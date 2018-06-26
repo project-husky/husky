@@ -35,13 +35,13 @@ public interface SimpleBuilder<T> {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Creates a concrete instance of T with setted params.</div>
-	 * <div class="de">Erstellt die konkrete Instanz von T mit den gesetzten parametern.</div>
+	 * <div class="de">Erstellt die konkrete Instanz von T mit den gesetzten Parametern.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
 	 *  <div class="en">a new instance of T with the params set</div>
-	 *  <div class="de">eine neue Instanz von T mit den gesetzten parametern</div>
+	 *  <div class="de">eine neue Instanz von T mit den gesetzten Parametern</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->

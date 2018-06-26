@@ -20,7 +20,7 @@ package org.ehealth_connector.security.core;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of SecurityHeaderElement. </div>
- * <div class="de">Interface beschreibt die Methoden von SecurityHeaderElement.</div>
+ * <div class="de">Interface welches die Methoden von SecurityHeaderElement beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

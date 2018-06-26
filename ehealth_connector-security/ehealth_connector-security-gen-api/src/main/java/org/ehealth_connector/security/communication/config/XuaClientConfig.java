@@ -19,12 +19,15 @@ package org.ehealth_connector.security.communication.config;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Interface describing the methods of idp client configuration.</div>
- * <div class="de">Interface beschreibt die Methoden für die IdP Client Konfiguration.</div>
+ * <div class="en">Interface describing the methods of IdP client configuration.</div>
+ * <div class="de">Interface welches die Methoden für die IdP Client Konfiguration beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface XuaClientConfig extends SoapClientConfig {
+
+	// There are no special methods defined, but the interface has to be
+	// declared for selection reasons.
 
 }

@@ -20,7 +20,7 @@ package org.ehealth_connector.security.core;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the generic methods for SecurityObjectBuilder using the templated type T and U.</div>
- * <div class="de">Interface beschreibt die Methoden des SecurityObjectBuilder unter der Verwendung der templated Typen T und T.</div>
+ * <div class="de">Interface welches die Methoden des SecurityObjectBuilder unter der Verwendung der templated Typen T und U beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  *
@@ -40,7 +40,7 @@ public interface SecurityObjectBuilder<T, U> {
 	 *
 	 * @param aInternalObject
 	 * <div class="en">the internal wrapped object of type T</div>
-	 * <div class="de">das innere gewrappte Object vom Typ T</div>
+	 * <div class="de">das Innere, gewrappte Object vom Typ T</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @return the Object ot the type U

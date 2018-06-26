@@ -21,8 +21,8 @@ import org.ehealth_connector.security.hl7v3.PurposeOfUse;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Interface describing the methods of xuserassertionrequest.</div>
- * <div class="de">Interface beschreibt die Methoden für den xuserassertionrequest.</div>
+ * <div class="en">Interface describing the methods of XUserAssertionRequest.</div>
+ * <div class="de">Interface welches die Methoden für den XUserAssertionRequest beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -32,14 +32,14 @@ public interface XUserAssertionRequest {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to get the applies to value.</div>
-	 * <div class="de">Method um den Applies To wert zu erhalten.</div>
+	 * <div class="en">Method to get the AppliesTo attribute value.</div>
+	 * <div class="de">Method um den Wert des AppliesTo Attributs zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
-	 * <div class="en">The applies to as string</div>
-	 * <div class="de">den Applies To Wert als string</div>
+	 * <div class="en">the value as string</div>
+	 * <div class="de">den Wert als string</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -50,13 +50,13 @@ public interface XUserAssertionRequest {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the context value.</div>
-	 * <div class="de">Method um den Kontext Wert zu erhalten.</div>
+	 * <div class="de">Method um den Inhalt des Context zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
-	 * <div class="en">The dialect as string</div>
-	 * <div class="de">den Dialekt wert als String</div>
+	 * <div class="en">The value as string</div>
+	 * <div class="de">den Wert als String</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -67,13 +67,13 @@ public interface XUserAssertionRequest {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the dialect value.</div>
-	 * <div class="de">Method um den Dialekt Wert zu erhalten.</div>
+	 * <div class="de">Method um den Inhalt des Dialect zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
-	 * <div class="en">The dialect as string</div>
-	 * <div class="de">den Dialekt wert als String</div>
+	 * <div class="en">The value as string</div>
+	 * <div class="de">den Wert als String</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -100,7 +100,7 @@ public interface XUserAssertionRequest {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the organisation name of the accessor.</div>
-	 * <div class="de">Method um den namen der Organisation des Zugreifers zu erhalten.</div>
+	 * <div class="de">Method um den Namen der Organisation des Zugreifers zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -117,13 +117,13 @@ public interface XUserAssertionRequest {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the purpose of use.</div>
-	 * <div class="de">Method um den Grund des Zugriffes zu erhalten.</div>
+	 * <div class="de">Method um den Grund des Zugriffs zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
 	 * <div class="en">The purpose of use as string</div>
-	 * <div class="de">den Grund des Zugriffes als string</div>
+	 * <div class="de">den Grund des Zugriffs als string</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -140,7 +140,7 @@ public interface XUserAssertionRequest {
 	 *
 	 * @return
 	 * <div class="en">The request type</div>
-	 * <div class="de">der request typ</div>
+	 * <div class="de">der Request Typ</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -151,13 +151,13 @@ public interface XUserAssertionRequest {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the resource id.</div>
-	 * <div class="de">Method um die ressourcen Id zu erhalten.</div>
+	 * <div class="de">Methode um die Ressourcen-ID zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
 	 * <div class="en">The resource id as string</div>
-	 * <div class="de">die ressourcen Id des Zugreifers als string</div>
+	 * <div class="de">die Ressourcen-ID des Zugreifers als string</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -168,13 +168,13 @@ public interface XUserAssertionRequest {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the id of the accessor.</div>
-	 * <div class="de">Method um die Id des Zugreifers zu erhalten.</div>
+	 * <div class="de">Methode um die ID des Zugreifers zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
 	 * <div class="en">The accessor id as string</div>
-	 * <div class="de">die Id des Zugreifers als String</div>
+	 * <div class="de">die ID des Zugreifers als String</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -185,7 +185,7 @@ public interface XUserAssertionRequest {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the name of the accessor.</div>
-	 * <div class="de">Method um den Namen des Zugreifers zu erhalten.</div>
+	 * <div class="de">Methode um den Namen des Zugreifers zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -202,7 +202,7 @@ public interface XUserAssertionRequest {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the role of the accessor.</div>
-	 * <div class="de">Method um die  Rolle des Zugreifers zu erhalten.</div>
+	 * <div class="de">Methode um die  Rolle des Zugreifers zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -225,7 +225,7 @@ public interface XUserAssertionRequest {
 	 *
 	 * @return
 	 * <div class="en">The token type</div>
-	 * <div class="de">der token typ</div>
+	 * <div class="de">der Token Typ</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

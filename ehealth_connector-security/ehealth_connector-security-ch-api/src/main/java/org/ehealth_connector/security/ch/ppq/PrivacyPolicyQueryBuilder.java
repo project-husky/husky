@@ -44,7 +44,7 @@ public interface PrivacyPolicyQueryBuilder extends BaseBuilder<PrivacyPolicyQuer
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -54,13 +54,13 @@ public interface PrivacyPolicyQueryBuilder extends BaseBuilder<PrivacyPolicyQuer
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Creates a concrete instance of PatientPrivacyQuery with setted params.</div>
-	 * <div class="de">Erstellt die konkrete instanz des PatientPrivacyQuery mit den gesetzten parametern.</div>
+	 * <div class="de">Erstellt die konkrete Instanz des PatientPrivacyQuery mit den gesetzten Parametern.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
 	 *  <div class="en">a new PatientPrivacyQuery instance with the params set</div>
-	 *  <div class="de">eine neue PatientPrivacyQuery instanz mit den gesetzten parametern</div>
+	 *  <div class="de">eine neue PatientPrivacyQuery Instanz mit den gesetzten Parametern</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -70,18 +70,18 @@ public interface PrivacyPolicyQueryBuilder extends BaseBuilder<PrivacyPolicyQuer
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the destination of the PatientPrivacyQuery to be build.</div>
-	 * <div class="de">Methode um ein destination dem PatientPrivacyQuery hinzuzufügen.</div>
+	 * <div class="de">Methode um eine Destination dem PatientPrivacyQuery hinzuzufügen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param newDestination
 	 *  <div class="en">the consent to be set</div>
-	 * 	<div class="de">der consent der gesetzt werden soll</div>
+	 * 	<div class="de">der Consent der gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -98,12 +98,12 @@ public interface PrivacyPolicyQueryBuilder extends BaseBuilder<PrivacyPolicyQuer
 	 *
 	 * @param identifier
 	 *  <div class="en">the identifier to be set</div>
-	 * 	<div class="de">der identifier der gesetzt werden soll</div>
+	 * 	<div class="de">der Identifier der gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->

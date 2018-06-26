@@ -41,7 +41,7 @@ public interface StatusBuilder extends SimpleBuilder<Status> {
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -62,7 +62,7 @@ public interface StatusBuilder extends SimpleBuilder<Status> {
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->

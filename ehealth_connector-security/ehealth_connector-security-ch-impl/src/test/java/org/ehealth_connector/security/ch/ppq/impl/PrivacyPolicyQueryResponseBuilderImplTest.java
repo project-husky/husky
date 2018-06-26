@@ -30,8 +30,8 @@ import org.opensaml.saml.saml2.core.impl.ResponseBuilder;
 public class PrivacyPolicyQueryResponseBuilderImplTest extends InitializerTestHelper {
 
 	private PrivacyPolicyQueryResponseBuilderImpl builder;
-	private Response testInternalObject;
 	private String testConsent;
+	private Response testInternalObject;
 
 	@Before
 	public void setUp() throws Exception {

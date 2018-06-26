@@ -33,14 +33,14 @@ public interface PrivacyPolicyQuery extends Base {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the consent value.</div>
-	 * <div class="de">Methode um den Consent wert zu holen.</div>
+	 * <div class="de">Methode um den Inhalt des Consent zu holen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 *
 	 * @return
 	 *  <div class="en">the consent value as string</div>
-	 *  <div class="de">der Consent Wert als String</div>
+	 *  <div class="de">der Inhalt des Consent als String</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -50,14 +50,14 @@ public interface PrivacyPolicyQuery extends Base {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the destination value.</div>
-	 * <div class="de">Methode um den destination wert zu holen.</div>
+	 * <div class="de">Methode um den Inhalt der Destination zu holen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 *
 	 * @return
 	 *  <div class="en">the destination value as string</div>
-	 *  <div class="de">der Destination Wert als String</div>
+	 *  <div class="de">der Inhalt der Destination als String</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -67,7 +67,7 @@ public interface PrivacyPolicyQuery extends Base {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the InstanceIdentifier value.</div>
-	 * <div class="de">Methode um denInstanceIdentifier zu holen.</div>
+	 * <div class="de">Methode um den InstanceIdentifier zu holen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *

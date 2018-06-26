@@ -25,7 +25,7 @@ import org.ehealth_connector.security.exceptions.ClientSendException;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods for the privacy policy admin client</div>
- * <div class="de">Interface welches die Methoden für den Privacy Policy Admin Client beschreiben.</div>
+ * <div class="de">Interface welches die Methoden für den Privacy Policy Admin Client beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -41,7 +41,7 @@ public interface PpfClient {
 	 *
 	 * @param aAssertion
 	 * <div class="en">the Assertion to be sent in the soap security header</div>
-	 * <div class="de">Die Assertion welches im soap security header mitgeschickt werden soll.</div>
+	 * <div class="de">Die Assertion welche im SOAP security header mitgeschickt werden soll.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @param request
@@ -56,7 +56,7 @@ public interface PpfClient {
 	 * <div class="it"></div>
 	 * @throws ClientSendException
 	 * <div class="en">will be thrown if an error occoures</div>
-	 * <div class="de">wird geworfen wenn ein Fehler auftritt.</div>
+	 * <div class="de">Wird geworfen wenn ein Fehler auftritt.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

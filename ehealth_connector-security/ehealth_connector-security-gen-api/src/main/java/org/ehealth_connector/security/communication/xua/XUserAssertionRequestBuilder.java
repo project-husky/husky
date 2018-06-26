@@ -21,8 +21,8 @@ import org.ehealth_connector.security.hl7v3.PurposeOfUse;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Interface describing the x-user assertion request builder methods.</div>
- * <div class="de">Interface beschreibende methoden des x user  assertion builders.</div>
+ * <div class="en">Interface describing the X-User assertion request builder methods.</div>
+ * <div class="de">Interface welches die Methoden des X-User assertion builders beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -31,19 +31,19 @@ public interface XUserAssertionRequestBuilder {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set the applies to attribute.</div>
+	 * <div class="en">Method to set the AppliesTo attribute.</div>
 	 * <div class="de">Setzt das AppliesTo Attribut.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param appliesTo
-	 * <div class="en">the applies to to be set</div>
-	 * <div class="de">der applies to der gesetzt werden soll</div>
+	 * <div class="en">the value to be set</div>
+	 * <div class="de">der Wert der gesetzt werden soll</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>der rolle der
 	 * @return
 	 * <div class="en">the actual instance of this builder</div>
-	 * <div class="de">die aktuelle instanz des builders</div>
+	 * <div class="de">die aktuelle Instanz des Builders</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -60,12 +60,12 @@ public interface XUserAssertionRequestBuilder {
 	 *
 	 * @param aContext
 	 *  <div class="en">the context to be set</div>
-	 * 	<div class="de">die Kontext der gesetzt werden soll</div>
+	 * 	<div class="de">der Kontext der gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -75,13 +75,13 @@ public interface XUserAssertionRequestBuilder {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Creates a concrete instance of XUserAssertionRequest with setted params.</div>
-	 * <div class="de">Erstellt die konkrete instanz des XUserAssertionRequest mit den gesetzten parametern.</div>
+	 * <div class="de">Erstellt die konkrete Instanz des XUserAssertionRequest mit den gesetzten Parametern.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
 	 *  <div class="en">a new XUserAssertionRequest instance with the params set</div>
-	 *  <div class="de">eine neue XUserAssertionRequest instanz mit den gesetzten parametern</div>
+	 *  <div class="de">eine neue XUserAssertionRequest Instanz mit den gesetzten Parametern</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -103,7 +103,7 @@ public interface XUserAssertionRequestBuilder {
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -113,19 +113,19 @@ public interface XUserAssertionRequestBuilder {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set the id of the organisation of the accessing person.</div>
-	 * <div class="de">Setzt die Organisations ID des Zugreifers (GLN einer Organisation oder einer Gruppe aus dem HOI).</div>
+	 * <div class="en">Method to set the id of the organisation of the accessing person (GLN of an organisation or a group from the HOI).</div>
+	 * <div class="de">Setzt die Organisations-ID des Zugreifers (GLN einer Organisation oder einer Gruppe aus dem HOI).</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param organizationId
 	 *  <div class="en">the organisation id of the accessing person to be set</div>
-	 * 	<div class="de">die id der Organisation der zugreifenden Person die gesetzt werden soll</div>
+	 * 	<div class="de">die Organisations-ID der zugreifenden Person die gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>der rolle der
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -135,7 +135,7 @@ public interface XUserAssertionRequestBuilder {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set the name of the organisation of the accessing person.</div>
+	 * <div class="en">Method to set the name of the organisation of the accessing person (plain text of the organisation).</div>
 	 * <div class="de">Setzt den Organisationsnamen des Zugreifers (Klartext des Organisationsnamens).</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
@@ -147,7 +147,7 @@ public interface XUserAssertionRequestBuilder {
 	 *  <div class="it"></div>der rolle der
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -157,9 +157,8 @@ public interface XUserAssertionRequestBuilder {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set the reason of access in the actual application context.</div>
-	 * <div class="de">Setzt die Grund für den Zugriff im aktuellen Applikationskontext
-	 * (für das EPD in der Schweiz: Code aus dem schweizerischen Value-Set für die Rolle: Normalzugriff, Notfallzugriff).</div>
+	 * <div class="en">Method to set the reason of access in the actual application context (for the EPR in Switzerland: Code from the Swiss value set: normal access, emergency access).</div>
+	 * <div class="de">Setzt den Grund für den Zugriff im aktuellen Applikationskontext (für das EPD in der Schweiz: Code aus dem schweizerischen Value-Set: Normalzugriff, Notfallzugriff).</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -170,7 +169,7 @@ public interface XUserAssertionRequestBuilder {
 	 *  <div class="it"></div>der rolle der
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -191,7 +190,7 @@ public interface XUserAssertionRequestBuilder {
 	 *  <div class="it"></div>der rolle der
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -201,20 +200,19 @@ public interface XUserAssertionRequestBuilder {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set the ressource id of the actual application context of the transaction.</div>
-	 * <div class="de">Setzt die Ressourcen ID im aktuellen Applikationskontext auf welche sich die Transaktion bezieht.
-	 * (für das EPD in der Schweiz: EPD-PID des gewünschten Patienten-Dossiers).</div>
+	 * <div class="en">Method to set the resource id of the actual application context of the transaction (for the EPR in Switzerland: EPR-SPID of the desired patient record).</div>
+	 * <div class="de">Setzt die Ressourcen-ID im aktuellen Applikationskontext auf welche sich die Transaktion bezieht (für das EPD in der Schweiz: EPR-SPID des gewünschten Patienten-Dossiers).</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param resourceId
 	 *  <div class="en">the resource id to be set</div>
-	 * 	<div class="de">die Id der Ressource die gesetzt werden soll</div>
+	 * 	<div class="de">die ID der Ressource die gesetzt werden soll</div>
 	 *  <div class="fr"></div>
-	 *  <div class="it"></div>der rolle der
+	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -224,8 +222,8 @@ public interface XUserAssertionRequestBuilder {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set the ID of the accessor (GLN oder EPD-PID).</div>
-	 * <div class="de">Setzt die Zugreifer ID (GLN oder EPD-PID).</div>
+	 * <div class="en">Method to set the ID of the accessor (GLN or EPR-SPID).</div>
+	 * <div class="de">Setzt die Zugreifer ID (GLN oder EPR-SPID).</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -236,7 +234,7 @@ public interface XUserAssertionRequestBuilder {
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -246,7 +244,7 @@ public interface XUserAssertionRequestBuilder {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set the name of the accessor</div>
+	 * <div class="en">Method to set the name of the accessor (plain text of the user name)</div>
 	 * <div class="de">Setzt den Namen des Zugreifes (Klartext des Benutzernamens).</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
@@ -258,7 +256,7 @@ public interface XUserAssertionRequestBuilder {
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -267,20 +265,19 @@ public interface XUserAssertionRequestBuilder {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set roleid of the accessor in the actual application context.</div>
-	 * <div class="de">Setzt die Rolle des Zugreifers im aktuellen Applikationskontext
-	 * (für das EPD in der Schweiz: Code aus dem schweizerischen Value-Set für die Rolle: Patient(in), Behandelnde(r), Hilfsperson, Stellvertreter(in)).</div>
+	 * <div class="en">Method to set role id of the accessor in the actual application context (for the EPR in Switzerland: Code from the Swiss Value Set for the role: patient, health professional, assistant, deputy).</div>
+	 * <div class="de">Setzt die ID der Rolle des Zugreifers im aktuellen Applikationskontext (für das EPD in der Schweiz: Code aus dem schweizerischen Value-Set für die Rolle: Patient(in), Behandelnde(r), Hilfsperson, Stellvertreter(in)).</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param roleId
 	 *  <div class="en">the id of the role to be set</div>
-	 * 	<div class="de">die id der rolle der zugreifenden Person die gesetzt werden soll</div>
+	 * 	<div class="de">die ID der rolle der zugreifenden Person die gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -301,7 +298,7 @@ public interface XUserAssertionRequestBuilder {
 	 * <div class="it"></div>der rolle der
 	 * @return
 	 * <div class="en">the actual instance of this builder</div>
-	 * <div class="de">die aktuelle instanz des builders</div>
+	 * <div class="de">die aktuelle Instanz des Builders</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

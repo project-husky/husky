@@ -41,7 +41,7 @@ public class PurposeOfUseBuilder extends AbstractXMLObjectBuilder<OpenSamlPurpos
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to build an OpenSamlPurposeOfUse instance.</div>
-	 * <div class="de">Methode um eine OpenSamlPurposeOfUse instanz zu creiiren.</div>
+	 * <div class="de">Methode um eine OpenSamlPurposeOfUse Instanz zu creiiren.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *

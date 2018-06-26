@@ -22,7 +22,7 @@ import org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeed.PpfMethod;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods for the PrivacyPolicyFeedBuilder.</div>
- * <div class="de">Interface welches die Methoden für den PrivacyPolicyFeedBuilder beschreiben.</div>
+ * <div class="de">Interface welches die Methoden für den PrivacyPolicyFeedBuilder beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -32,13 +32,13 @@ public interface PrivacyPolicyFeedBuilder {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Creates a concrete instance of PrivacyPolicyFeed with setted params.</div>
-	 * <div class="de">Erstellt die konkrete instanz des PrivacyPolicyFeed mit den gesetzten parametern.</div>
+	 * <div class="de">Erstellt die konkrete Instanz des PrivacyPolicyFeed mit den gesetzten Parametern.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
 	 *  <div class="en">a new PrivacyPolicyFeed instance with the params set</div>
-	 *  <div class="de">eine neue PrivacyPolicyFeed instanz mit den gesetzten parametern</div>
+	 *  <div class="de">eine neue PrivacyPolicyFeed Instanz mit den gesetzten Parametern</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -48,7 +48,7 @@ public interface PrivacyPolicyFeedBuilder {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the method of the PrivacyPolicyFeedResponse to be build.</div>
-	 * <div class="de">Methode um ein method dem PrivacyPolicyFeedResponse hinzuzufügen.</div>
+	 * <div class="de">Methode um eine Methode dem PrivacyPolicyFeedResponse hinzuzufügen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -59,7 +59,7 @@ public interface PrivacyPolicyFeedBuilder {
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->

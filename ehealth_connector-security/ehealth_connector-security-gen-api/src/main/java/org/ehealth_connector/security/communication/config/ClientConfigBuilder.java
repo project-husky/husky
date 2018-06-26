@@ -20,7 +20,7 @@ package org.ehealth_connector.security.communication.config;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the ClientConfigBuilder methods.</div>
- * <div class="de">Interface beschreibende methoden des ClientConfigBuilders.</div>
+ * <div class="de">Interface welches die Methoden des ClientConfigBuilders beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -31,18 +31,18 @@ public interface ClientConfigBuilder {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the enpoint URI.</div>
-	 * <div class="de">Method um die Enpunkturi zu bilden.</div>
+	 * <div class="de">Methode um die Enpunkt URI zu bilden.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param aEndpointUrl
 	 * <div class="en">the enpoint URI to be set.</div>
-	 * <div class="de">Die Enpunkturi die zu setzen ist.</div>
+	 * <div class="de">Die Enpunkt URI die zu setzen ist.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the actual instance of this builder</div>
-	 * <div class="de">die aktuelle instanz des builders</div>
+	 * <div class="de">die aktuelle Instanz des Builders</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

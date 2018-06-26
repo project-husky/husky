@@ -22,8 +22,8 @@ import org.ehealth_connector.security.saml2.Subject;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Interface describing the authnrequest builder methods.</div>
- * <div class="de">Interface beschreibende methoden des authnrequest builders.</div>
+ * <div class="en">Interface describing the AuthnRequest builder methods.</div>
+ * <div class="de">Interface welches die Methoden des AuthnRequest Builders beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -33,19 +33,19 @@ public interface AuthnRequestBuilder extends BaseBuilder<AuthnRequestBuilder> {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Builds the assertion consumer service index on the authnrequest.</div>
-	 * <div class="de">Buildet das assertion consumer service index im authnrequest.</div>
+	 * <div class="en">Builds the assertion consumer service index in the AuthnRequest.</div>
+	 * <div class="de">Buildet den Assertion Consumer Service Index im AuthnRequest.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param aAssertionConsumerServiceIndex
 	 *  <div class="en">the assertion consumer service index to be set</div>
-	 * 	<div class="de">die assertion consumer service index die gesetzt werden soll</div>
+	 * 	<div class="de">Der Assertion Consumer Service Index der gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -55,41 +55,41 @@ public interface AuthnRequestBuilder extends BaseBuilder<AuthnRequestBuilder> {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Builds the assertion consumer service url on the authnrequest.</div>
-	 * <div class="de">Bildet das assertion consumer service url im authnrequest.</div>
+	 * <div class="en">Builds the assertion consumer service url on the AuthnRequest.</div>
+	 * <div class="de">Bildet die Assertion Consumer W`Service url im AuthnRequest.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param aAssertionConsumerServiceURL
 	 *  <div class="en">the assertion consumer service url to be set</div>
-	 * 	<div class="de">die assertion consumer service url die gesetzt werden soll</div>
+	 * 	<div class="de">die Assertion Consumer Service URL die gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
 	 */
-	AuthnRequestBuilder assertionConsumerServiceURL(String aAssertionConsumerServiceURL);
+	AuthnRequestBuilder assertionConsumerServiceUrl(String aAssertionConsumerServiceURL);
 
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Builds the attribute consumer service index on the authnrequest.</div>
-	 * <div class="de">Buildet den attribute consumer service index im authnrequest.</div>
+	 * <div class="en">Builds the attribute consumer service index on the AuthnRequest.</div>
+	 * <div class="de">Buildet den Attribute Consumer Service Index im AuthnRequest.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param aAttributeConsumingServiceIndex
 	 *  <div class="en">the attribute consuming service index to be set</div>
-	 * 	<div class="de">der attribute consuming service index der gesetzt werden soll</div>
+	 * 	<div class="de">der Attribute Consuming Service Index der gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -99,19 +99,19 @@ public interface AuthnRequestBuilder extends BaseBuilder<AuthnRequestBuilder> {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Building the consent on the authnrequest.</div>
-	 * <div class="de">Bildet das consent im authnrequest.</div>
+	 * <div class="en">Building the consent on the AuthnRequest.</div>
+	 * <div class="de">Bildet den Consent im AuthnRequest.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param aConsent
 	 *  <div class="en">the consent to be set</div>
-	 * 	<div class="de">der consent der gesetzt werden soll</div>
+	 * 	<div class="de">der Consent der gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -121,13 +121,13 @@ public interface AuthnRequestBuilder extends BaseBuilder<AuthnRequestBuilder> {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Creates a concrete instance of AuthnRequest with setted params.</div>
-	 * <div class="de">Erstellt die konkrete instanz des AuthnRequests mit den gesetzten parametern.</div>
+	 * <div class="de">Erstellt die konkrete Instanz des AuthnRequests mit den gesetzten Parametern.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
 	 *  <div class="en">a new AuthnRequest instance with the params set</div>
-	 *  <div class="de">eine neue AuthRequest instanz mit den gesetzten parametern</div>
+	 *  <div class="de">eine neue AuthRequest Instanz mit den gesetzten Parametern</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -137,19 +137,19 @@ public interface AuthnRequestBuilder extends BaseBuilder<AuthnRequestBuilder> {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Building the destination on the authnrequest.</div>
-	 * <div class="de">Bildet das destination im authnrequest.</div>
+	 * <div class="en">Building the destination on the AuthnRequest.</div>
+	 * <div class="de">Bildet die Destination im AuthnRequest.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param aDestination
 	 *  <div class="en">the destination to be set</div>
-	 * 	<div class="de">die destination die gesetzt werden soll</div>
+	 * 	<div class="de">die Destination die gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -159,19 +159,19 @@ public interface AuthnRequestBuilder extends BaseBuilder<AuthnRequestBuilder> {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Building the forceAuthn on the authnrequest.</div>
-	 * <div class="de">Bildet das forceAuthn im authnrequest.</div>
+	 * <div class="en">Building the forceAuthn attribute in the AuthnRequest.</div>
+	 * <div class="de">Bildet das forceAuthn Attribut im AuthnRequest.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param aForceAuthn
-	 *  <div class="en">the force authn to be set</div>
-	 * 	<div class="de">der force authn der gesetzt werden soll</div>
+	 *  <div class="en">the value to be set</div>
+	 * 	<div class="de">der Wert der gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -181,19 +181,19 @@ public interface AuthnRequestBuilder extends BaseBuilder<AuthnRequestBuilder> {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Builds the NameIDpolicy.AllowCreate on the authnrequest.</div>
-	 * <div class="de">Bildet das NameIDpolicy.AllowCreate im authnrequest.</div>
+	 * <div class="en">Builds the NameIDpolicy.AllowCreate attribute in the AuthnRequest.</div>
+	 * <div class="de">Bildet das NameIDpolicy.AllowCreate Attribut im AuthnRequest.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param aNameIdPolicyAllowCreate
-	 *  <div class="en">the nameidpolicy allowcreate to be set</div>
-	 * 	<div class="de">die nameidpolicy allowcreate die gesetzt werden soll</div>
+	 *  <div class="en">the value to be set</div>
+	 * 	<div class="de">der Wert der gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -203,19 +203,19 @@ public interface AuthnRequestBuilder extends BaseBuilder<AuthnRequestBuilder> {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Builds the NameIDpolicy.Format on the authnrequest.</div>
-	 * <div class="de">Bildet das NameIDpolicy.Format im authnrequest.</div>
+	 * <div class="en">Builds the NameIDpolicy.Format attribute in the AuthnRequest.</div>
+	 * <div class="de">Bildet das NameIDpolicy.Format Attribut im AuthnRequest.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param aNameIdPolicyFormat
-	 *  <div class="en">the nameidpolicy format to be set</div>
-	 * 	<div class="de">das nameidpolicy format welches gesetzt werden soll</div>
+	 *  <div class="en">the value to be set</div>
+	 * 	<div class="de">der Wert der gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -225,19 +225,19 @@ public interface AuthnRequestBuilder extends BaseBuilder<AuthnRequestBuilder> {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Building the protocol binding on the authnrequest.</div>
-	 * <div class="de">Bildet das protocol binding im authnrequest.</div>
+	 * <div class="en">Building the ProtocolBinding attribute in the AuthnRequest.</div>
+	 * <div class="de">Bildet das ProtocolBinding Attribut im AuthnRequest.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param aProtocolBinding
-	 *  <div class="en">the protocol binding to be set</div>
-	 * 	<div class="de">das protocol binding welches gesetzt werden soll</div>
+	 *  <div class="en">the value to be set</div>
+	 * 	<div class="de">der Wert der gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -247,41 +247,41 @@ public interface AuthnRequestBuilder extends BaseBuilder<AuthnRequestBuilder> {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Builds the subject on the authnrequest.</div>
-	 * <div class="de">Bildet das subject im authnrequest.</div>
+	 * <div class="en">Builds the ProviderID attribute in the AuthnRequest.</div>
+	 * <div class="de">Bildet das ProviderID Attribut im AuthnRequest.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param aProviderID
-	 *  <div class="en">the provider id to be set</div>
-	 * 	<div class="de">die ProviderId welches gesetzt werden soll</div>
+	 *  <div class="en">the value to be set</div>
+	 * 	<div class="de">der Wert der gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	AuthnRequestBuilder providerID(String aProviderID);
+	AuthnRequestBuilder providerId(String aProviderID);
 
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Building the provider name on the authnrequest.</div>
-	 * <div class="de">Bildet das destination im authnrequest.</div>
+	 * <div class="en">Building the provider name on the AuthnRequest.</div>
+	 * <div class="de">Bildet das Proivider Namen im AuthnRequest.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param aProviderName
-	 *  <div class="en">the provider name to be set</div>
-	 * 	<div class="de">der provider name der gesetzt werden soll</div>
+	 *  <div class="en">the value to be set</div>
+	 * 	<div class="de">der Wert der gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -291,19 +291,19 @@ public interface AuthnRequestBuilder extends BaseBuilder<AuthnRequestBuilder> {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Builds the subject on the authnrequest.</div>
-	 * <div class="de">Bildet das subject im authnrequest.</div>
+	 * <div class="en">Builds the subject attribute in the AuthnRequest.</div>
+	 * <div class="de">Bildet das Subject Attribut im AuthnRequest.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param aSubject
-	 *  <div class="en">the subject to be set</div>
-	 * 	<div class="de">das subject welches gesetzt werden soll</div>
+	 *  <div class="en">the value to be set</div>
+	 * 	<div class="de">der Wert der gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return
 	 *  <div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->

@@ -25,7 +25,7 @@ import org.ehealth_connector.security.saml2.Response;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods for the privacy policy query client</div>
- * <div class="de">Interface welches die Methoden für den Privacy Policy Query Client beschreiben.</div>
+ * <div class="de">Interface welches die Methoden für den Privacy Policy Query Client beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -35,7 +35,7 @@ public interface PpqClient {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to send an PrivacyPolicyQuery.</div>
-	 * <div class="de">Methode um einene PrivacyPolicyQuery zu senden.</div>
+	 * <div class="de">Methode um eine PrivacyPolicyQuery zu senden.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -46,7 +46,7 @@ public interface PpqClient {
 	 * <div class="it"></div>
 	 * @param query
 	 * <div class="en">the PrivacyPolicyQuery to be sent.</div>
-	 * <div class="de">Die PrivacyPolicyQuery welches geschickt werden soll.</div>
+	 * <div class="de">Das PrivacyPolicyQuery welches geschickt werden soll.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @return
@@ -56,7 +56,7 @@ public interface PpqClient {
 	 * <div class="it"></div>
 	 * @throws ClientSendException
 	 * <div class="en">will be thrown if an error occoures</div>
-	 * <div class="de">wird geworfen wenn ein Fehler auftritt.</div>
+	 * <div class="de">Wird geworfen, wenn ein Fehler auftritt.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

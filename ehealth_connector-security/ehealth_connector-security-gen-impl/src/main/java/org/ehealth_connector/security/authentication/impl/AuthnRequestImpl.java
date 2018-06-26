@@ -58,10 +58,10 @@ public class AuthnRequestImpl
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.authentication.AuthnRequest#getAssertionConsumerServiceURL()
+	 * @see org.ehealth_connector.security.authentication.AuthnRequest#getAssertionConsumerServiceUrl()
 	 */
 	@Override
-	public String getAssertionConsumerServiceURL() {
+	public String getAssertionConsumerServiceUrl() {
 		return authnRequest.getAssertionConsumerServiceURL();
 	}
 

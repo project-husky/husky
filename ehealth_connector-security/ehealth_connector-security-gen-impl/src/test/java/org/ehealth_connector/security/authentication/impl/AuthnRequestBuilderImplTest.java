@@ -77,13 +77,13 @@ public class AuthnRequestBuilderImplTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#assertionConsumerServiceURL(java.lang.String)}.
+	 * {@link org.ehealth_connector.security.authentication.impl.AuthnRequestBuilderImpl#assertionConsumerServiceUrl(java.lang.String)}.
 	 */
 	@Test
 	public void testAssertionConsumerServiceURL() {
 		final AuthnRequest request = testBuilder
-				.assertionConsumerServiceURL(testAssertionConsumerServiceURL).create();
-		assertEquals(testAssertionConsumerServiceURL, request.getAssertionConsumerServiceURL());
+				.assertionConsumerServiceUrl(testAssertionConsumerServiceURL).create();
+		assertEquals(testAssertionConsumerServiceURL, request.getAssertionConsumerServiceUrl());
 	}
 
 	/**

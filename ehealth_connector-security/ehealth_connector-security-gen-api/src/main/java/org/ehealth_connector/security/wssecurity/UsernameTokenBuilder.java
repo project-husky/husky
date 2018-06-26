@@ -30,13 +30,13 @@ public interface UsernameTokenBuilder {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Creates a concrete instance of UsernameToken with setted params.</div>
-	 * <div class="de">Erstellt die konkrete Instanz von UsernameToken mit den gesetzten parametern.</div>
+	 * <div class="de">Erstellt die konkrete Instanz von UsernameToken mit den gesetzten Parametern.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
 	 *  <div class="en">a new instance of UsernameToken with the params set</div>
-	 *  <div class="de">eine neue Instanz von UsernameToken mit den gesetzten parametern</div>
+	 *  <div class="de">eine neue Instanz von UsernameToken mit den gesetzten Parametern</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
@@ -57,7 +57,7 @@ public interface UsernameTokenBuilder {
 	 *  <div class="it"></div>
 	 * @return
 	 * 	<div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -78,7 +78,7 @@ public interface UsernameTokenBuilder {
 	 *  <div class="it"></div>
 	 * @return
 	 * 	<div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -99,7 +99,7 @@ public interface UsernameTokenBuilder {
 	 *  <div class="it"></div>
 	 * @return
 	 * 	<div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->

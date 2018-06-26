@@ -45,7 +45,7 @@ public class AuthnRequestSerializerImplTest extends AbstractTestHelper {
 				.id(testId)//
 				.issueInstant(testIssueInstant)//
 				.destination(testDestination)//
-				.assertionConsumerServiceURL(testAssertionConsumerServiceURL)//
+				.assertionConsumerServiceUrl(testAssertionConsumerServiceURL)//
 				.providerName(testProviderName)//
 				.protocolBinding(testProtocolBinding)//
 				.issuer(testIssuer)//

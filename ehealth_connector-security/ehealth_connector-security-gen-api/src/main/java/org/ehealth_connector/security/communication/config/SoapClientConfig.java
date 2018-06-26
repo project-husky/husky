@@ -20,7 +20,7 @@ package org.ehealth_connector.security.communication.config;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of sopa client configuration.</div>
- * <div class="de">Interface beschreibt die Methoden für die SOAP Client Konfiguration.</div>
+ * <div class="de">Interface welches die Methoden für die SOAP Client Konfiguration beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -52,7 +52,7 @@ public interface SoapClientConfig extends ClientConfig {
 	 *
 	 * @return
 	 * <div class="en">the client keystore password.</div>
-	 * <div class="de">der Client Keystore Passwort.</div>
+	 * <div class="de">das Client Keystore Passwort.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -62,7 +62,7 @@ public interface SoapClientConfig extends ClientConfig {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the client keystore type.</div>
-	 * <div class="de">Methode um den typ des Client Keystores zu erhalten.</div>
+	 * <div class="de">Methode um den Typ des Client Keystores zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -78,14 +78,14 @@ public interface SoapClientConfig extends ClientConfig {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to get the port name of the  webservice.</div>
-	 * <div class="de">Methode um den Port Namen des security zu erhalten.</div>
+	 * <div class="en">Method to get the port name of the webservice.</div>
+	 * <div class="de">Methode um den Port Namen des Webservices zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
 	 * <div class="en">the port name of the webservice.</div>
-	 * <div class="de">der Port Namen des webservices</div>
+	 * <div class="de">der Port Namen des Webservices</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -96,13 +96,13 @@ public interface SoapClientConfig extends ClientConfig {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the namespace of the port name of the webservice.</div>
-	 * <div class="de">Methode um den Namespace des Port Namens des security zu erhalten.</div>
+	 * <div class="de">Methode um den Namespace des Port Namens des Webservices zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
 	 * <div class="en">the namespace of the port name of the webservice.</div>
-	 * <div class="de">der Namespace des Port Namen des webservices</div>
+	 * <div class="de">der Namespace des Port Namen des Webservices</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -113,13 +113,13 @@ public interface SoapClientConfig extends ClientConfig {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the service name of the webservice.</div>
-	 * <div class="de">Methode um den Service Namen des security zu erhalten.</div>
+	 * <div class="de">Methode um den Service Namen des Webservices zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
-	 * <div class="en">the service name of the webservice.</div>
-	 * <div class="de">der Service Namen des webservices</div>
+	 * <div class="en">the name of the webservice.</div>
+	 * <div class="de">der Namen des Webservices</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -129,13 +129,13 @@ public interface SoapClientConfig extends ClientConfig {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the namespace of the service name of the webservice.</div>
-	 * <div class="de">Methode um den Namespace des Service Namens des security zu erhalten.</div>
+	 * <div class="de">Methode um den Namespace des Service Namens des Webservices zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
-	 * <div class="en">the namespace of the service name of the webservice.</div>
-	 * <div class="de">der Namespace des service Namen des webservices</div>
+	 * <div class="en">the namespace of the name of the webservice.</div>
+	 * <div class="de">der Namespace des Namens des Webservices.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -194,14 +194,14 @@ public interface SoapClientConfig extends ClientConfig {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set the port name of the service name of the webservice.</div>
-	 * <div class="de">Methode um den port name des Service Namens des security zu setzen.</div>
+	 * <div class="en">Method to set the port name of the webservice.</div>
+	 * <div class="de">Methode um den Port Namen des Webservices zu setzen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param portName
 	 * <div class="en">the name of the port of the webservice.</div>
-	 * <div class="de">der Name des ports Namen des webservices</div>
+	 * <div class="de">der Port Name des Webservices</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -211,7 +211,7 @@ public interface SoapClientConfig extends ClientConfig {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the port namespace of the port name of the webservice.</div>
-	 * <div class="de">Methode um den port namespace des port Namens des security zu setzen.</div>
+	 * <div class="de">Methode um den Namespace des Port Namens des Webservices zu setzen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -226,14 +226,14 @@ public interface SoapClientConfig extends ClientConfig {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set the port namespace of the port name of the webservice.</div>
-	 * <div class="de">Methode um den port namespace des port Namens des security zu setzen.</div>
+	 * <div class="en">Method to set the name of the webservice.</div>
+	 * <div class="de">Methode um den Namen des Webservices zu setzen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param serviceName
-	 * <div class="en">the namespace of the port of the webservice.</div>
-	 * <div class="de">der Nmespace des ports des webservices</div>
+	 * <div class="en">the service name.</div>
+	 * <div class="de">der Namen des Webservices.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -242,14 +242,14 @@ public interface SoapClientConfig extends ClientConfig {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set the service namespace of the service name of the webservice.</div>
-	 * <div class="de">Methode um den service namespace des service namens des webservice zu setzen.</div>
+	 * <div class="en">Method to set the namespace of the service name of the webservice.</div>
+	 * <div class="de">Methode um den Namespace des Service Namens des Webservices zu setzen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param serviceNamespace
-	 * <div class="en">the namespace of the serice name of the webservice.</div>
-	 * <div class="de">der Namespace des service Namen des webservices</div>
+	 * <div class="en">the namespace of the serivce name of the webservice.</div>
+	 * <div class="de">der Namespace des Service Namens des Webservices.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

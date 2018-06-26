@@ -32,9 +32,9 @@ import org.w3c.dom.Element;
 public class PrivacyPolicyQueryResponseDeserialiserTest extends InitializerTestHelper {
 
 	private PrivacyPolicyQueryResponseDeserialiser testDeserializer;
+	private byte[] testXmlByteArray;
 	private Element testXmlElement;
 	private String testXmlString;
-	private byte[] testXmlByteArray;
 
 	@Before
 	public void setUp() throws Exception {

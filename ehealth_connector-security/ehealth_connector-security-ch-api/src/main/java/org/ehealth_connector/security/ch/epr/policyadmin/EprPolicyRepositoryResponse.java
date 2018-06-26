@@ -46,13 +46,13 @@ public interface EprPolicyRepositoryResponse extends BasePolicyAdministration {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the status out of the response.</div>
-	 * <div class="de">Methode um den Status aus dem Response zu lesen.</div>
+	 * <div class="de">Methode um den Status aus der Response zu lesen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
 	 * <div class="en">The status of the response.</div>
-	 * <div class="de">Der Status des Respons.</div>
+	 * <div class="de">Der Status der Response.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

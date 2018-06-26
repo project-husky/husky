@@ -35,7 +35,7 @@ public interface AuthenticationModule {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the authentication assertion from an idp.</div>
-	 * <div class="de">Methode um die authentifizierungs assertion eines IdP zu erhalten.</div>
+	 * <div class="de">Methode um die Authentifizierungs-Assertion eines IdP zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -47,13 +47,13 @@ public interface AuthenticationModule {
 	 *
 	 * @param clientConfiguration
 	 * <div class="en">The client configuration to be used to communicate with the IdP service.</div>
-	 * <div class="de">Die Clientkonfiguartion di gebraucht wird um mit dem Service des IdP zu kommunizieren.</div>
+	 * <div class="de">Die Client Konfiguration die gebraucht wird um mit dem Service des IdP zu kommunizieren.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
 	 * <div class="en">The response to the AuthnRequest from IdP service.</div>
-	 * <div class="de">Die Antwort auf die Authn Anfrage des  Service des IdP.</div>
+	 * <div class="de">Die Antwort auf eine AuthnRequest des IdP Services.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

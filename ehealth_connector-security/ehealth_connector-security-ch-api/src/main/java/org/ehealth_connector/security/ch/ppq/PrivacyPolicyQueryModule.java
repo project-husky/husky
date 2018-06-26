@@ -25,7 +25,7 @@ import org.ehealth_connector.security.saml2.Response;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Describing the methods of the CH:PPQ communication Interface</div>
- * <div class="de">Beschreibung der Methoden des CH:PPQ kommunikations Interface</div>
+ * <div class="de">Beschreibung der Methoden des CH:PPQ Kommunikations-Interfaces</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -35,7 +35,7 @@ public interface PrivacyPolicyQueryModule {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to invoke the PrivacyPolicyFeed.</div>
-	 * <div class="de">Mkethode um die PrivacyPolicyFeed auszuführen.</div>
+	 * <div class="de">Methode um die PrivacyPolicyFeed auszuführen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -51,17 +51,17 @@ public interface PrivacyPolicyQueryModule {
 	 * <div class="it"></div>
 	 * @param clientConfiguration
 	 * <div class="en">the PpClientConfig to configure the client.</div>
-	 * <div class="de">Die PrivacyPolicyQuery  um den client zu konfigurieren.</div>
+	 * <div class="de">Die PrivacyPolicyQuery um den Client zu konfigurieren.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the PrivacyPolicyFeedResponse be received.</div>
-	 * <div class="de">Die PrivacyPolicyFeedResponse der empfangen wird.</div>
+	 * <div class="de">Die PrivacyPolicyFeedResponse die empfangen wird.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @throws ClientSendException
 	 * <div class="en">will be thrown an error occures.</div>
-	 * <div class="de">wird geworfen wenn ein Fehler auftritt.</div>
+	 * <div class="de">Wird geworfen wenn ein Fehler auftritt.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -73,7 +73,7 @@ public interface PrivacyPolicyQueryModule {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to invoke the PrivacyPolicyQuery.</div>
-	 * <div class="de">Mkethode um die PrivacyPolicyQuery auszuführen.</div>
+	 * <div class="de">Methode um die PrivacyPolicyQuery auszuführen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -89,17 +89,17 @@ public interface PrivacyPolicyQueryModule {
 	 * <div class="it"></div>
 	 * @param clientConfiguration
 	 * <div class="en">the PpClientConfig to configure the client.</div>
-	 * <div class="de">Die PrivacyPolicyQuery  um den client zu konfigurieren.</div>
+	 * <div class="de">Die PrivacyPolicyQuery um den Client zu konfigurieren.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the PrivacyPolicyQueryResponse be received.</div>
-	 * <div class="de">Die PrivacyPolicyQueryResponse der empfangen wird.</div>
+	 * <div class="de">Die PrivacyPolicyQueryResponse die empfangen wird.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @throws ClientSendException
 	 * <div class="en">will be thrown an error occures.</div>
-	 * <div class="de">wird geworfen wenn ein Fehler auftritt.</div>
+	 * <div class="de">Wird geworfen wenn ein Fehler auftritt.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

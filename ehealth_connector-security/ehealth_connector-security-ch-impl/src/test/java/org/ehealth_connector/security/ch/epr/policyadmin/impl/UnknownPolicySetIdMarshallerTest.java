@@ -32,8 +32,8 @@ import org.w3c.dom.Element;
 
 public class UnknownPolicySetIdMarshallerTest extends InitializerTestHelper {
 
-	private OpenSamlUnknownPolicySetId testOpenSamlUnknownPolicySetId;
 	private String testMessage;
+	private OpenSamlUnknownPolicySetId testOpenSamlUnknownPolicySetId;
 
 	@Before
 	public void setUp() throws Exception {

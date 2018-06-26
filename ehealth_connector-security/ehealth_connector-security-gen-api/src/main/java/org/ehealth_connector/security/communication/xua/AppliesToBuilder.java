@@ -20,7 +20,7 @@ package org.ehealth_connector.security.communication.xua;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the AppliesTo builder.</div>
- * <div class="de">Interface beschreibende methoden des AppliesTo builders.</div>
+ * <div class="de">Interface welches die Methoden des AppliesTo Builders beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -30,7 +30,7 @@ public interface AppliesToBuilder {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to set the endpoint ref address</div>
+	 * <div class="en">Method to set the endpoint address</div>
 	 * <div class="de">Method um die Endpunktadresse zu setzen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
@@ -48,13 +48,13 @@ public interface AppliesToBuilder {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Creates a concrete instance of XUserAssertionRequest with setted params.</div>
-	 * <div class="de">Erstellt die konkrete instanz des XUserAssertionRequest mit den gesetzten parametern.</div>
+	 * <div class="de">Erstellt die konkrete Instanz des XUserAssertionRequest mit den gesetzten Parametern.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
-	 *  <div class="en">a new AuthnRequest instance with the params set</div>
-	 *  <div class="de">eine neue AuthRequest instanz mit den gesetzten parametern</div>
+	 *  <div class="en">a new AppliesTo instance with the params set</div>
+	 *  <div class="de">eine neue AppliesTo Instanz mit den gesetzten Parametern</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->

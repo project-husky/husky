@@ -42,23 +42,33 @@ import org.xml.sax.SAXException;
 public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 
 	private PrivacyPolicyQueryBuilderImpl builder;
-	private XACMLPolicyQueryType testXacmlPolicyQuery;
-
-	private String testId;
-
-	private Calendar testIssueInstant;
-
-	private String testIssuer;
-
-	private String testVersion;
-
 	private String testConsent;
 
 	private String testDestination;
 
-	private String testInstanceIdentifierRoot;
-	private String testInstanceIdentifierExt;
+	private String testId;
+
 	private InstanceIdentifier testInstanceIdentifier;
+
+	private String testInstanceIdentifierExt;
+
+	private String testInstanceIdentifierRoot;
+
+	private Calendar testIssueInstant;
+
+	private String testIssuer;
+	private String testVersion;
+	private XACMLPolicyQueryType testXacmlPolicyQuery;
+
+	private XACMLPolicyQueryType loadTestPolicySet()
+			throws UnmarshallingException, SAXException, IOException, ParserConfigurationException {
+		final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		dbf.setNamespaceAware(true);
+		final Document doc = dbf.newDocumentBuilder()
+				.parse(this.getClass().getResourceAsStream("/xacml/xacml_policy_query.xml"));
+		return (XACMLPolicyQueryType) new XACMLPolicyQueryTypeUnmarshaller()
+				.unmarshall(doc.getDocumentElement());
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -165,16 +175,6 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 		final PrivacyPolicyQuery ref = builder.version(testVersion).create();
 		assertNotNull(ref);
 		assertEquals(testVersion, ref.getVersion());
-	}
-
-	private XACMLPolicyQueryType loadTestPolicySet()
-			throws UnmarshallingException, SAXException, IOException, ParserConfigurationException {
-		final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		dbf.setNamespaceAware(true);
-		final Document doc = dbf.newDocumentBuilder()
-				.parse(this.getClass().getResourceAsStream("/xacml/xacml_policy_query.xml"));
-		return (XACMLPolicyQueryType) new XACMLPolicyQueryTypeUnmarshaller()
-				.unmarshall(doc.getDocumentElement());
 	}
 
 }

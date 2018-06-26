@@ -52,7 +52,7 @@ public interface UnknownPolicySetId extends BasePolicyAdministration {
 	 *
 	 * @return
 	 * <div class="en">The status of the response.</div>
-	 * <div class="de">Der Status des Respons.</div>
+	 * <div class="de">Der Status der Response.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

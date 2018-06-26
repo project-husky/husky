@@ -20,11 +20,14 @@ package org.ehealth_connector.security.communication.config;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of idp client configuration.</div>
- * <div class="de">Interface beschreibt die Methoden für die IdP Client Konfiguration.</div>
+ * <div class="de">Interface welches die Methoden für die IdP Client Konfiguration beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface IdpClientConfig extends ClientConfig {
+
+	// There are no special methods defined, but the interface has to be
+	// declared for selection reasons.
 
 }

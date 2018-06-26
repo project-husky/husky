@@ -20,7 +20,7 @@ package org.ehealth_connector.security.communication.config;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the XuaClientConfigBuilder methods.</div>
- * <div class="de">Interface beschreibende methoden des XuaClientConfigBuilder.</div>
+ * <div class="de">Interface welches die Methoden des XuaClientConfigBuilders beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -57,8 +57,8 @@ public interface XuaClientConfigBuilder extends SoapClientConfigBuilder {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to create  the config with the parameters set.</div>
-	 * <div class="de">Methode um die Konfiguration mit den gesetzten parametern zu erstellen.</div>
+	 * <div class="en">Method to create the config with the parameters set.</div>
+	 * <div class="de">Methode um die Konfiguration mit den gesetzten Parametern zu erstellen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *

@@ -20,7 +20,7 @@ package org.ehealth_connector.security.communication.xua;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of AppliesTo.</div>
- * <div class="de">Interface beschreibt die Methoden für den AppliesTo.</div>
+ * <div class="de">Interface welches die Methoden für AppliesTo beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -31,7 +31,7 @@ public interface AppliesTo {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the endpoint address.</div>
-	 * <div class="de">Methode um die Endpunktadresse zu erhalten.</div>
+	 * <div class="de">Methode um die Endpunkt Adresse zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *

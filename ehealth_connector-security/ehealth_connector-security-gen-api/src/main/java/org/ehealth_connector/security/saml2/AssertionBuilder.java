@@ -41,7 +41,7 @@ public interface AssertionBuilder extends BaseBuilder<AssertionBuilder> {
 	 * <div class="it"></div>
 	 * @return
 	 * 	<div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -62,7 +62,7 @@ public interface AssertionBuilder extends BaseBuilder<AssertionBuilder> {
 	 * <div class="it"></div>
 	 * @return
 	 * 	<div class="en">the actual instance of this builder</div>
-	 *  <div class="de">die aktuelle instanz des builders</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -72,13 +72,13 @@ public interface AssertionBuilder extends BaseBuilder<AssertionBuilder> {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Creates a concrete instance of Assertion with setted params.</div>
-	 * <div class="de">Erstellt die konkrete instanz des Assertion mit den gesetzten parametern.</div>
+	 * <div class="de">Erstellt die konkrete Instanz des Assertion mit den gesetzten Parametern.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
 	 *  <div class="en">a new Assertion instance with the params set</div>
-	 *  <div class="de">eine neue Assertion instanz mit den gesetzten parametern</div>
+	 *  <div class="de">eine neue Assertion Instanz mit den gesetzten Parametern</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->

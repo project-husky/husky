@@ -41,22 +41,49 @@ public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 
 	private Logger mLogger = LoggerFactory.getLogger(getClass());
 
-	private PrivacyPolicyFeedDeserialiser testDeserializer;
-	private Element testXmlElementAddPol;
-	private String testXmlStringAddPol;
-	private byte[] testXmlByteArrayAddPol;
-
-	private Element testXmlElementUpdPol;
-	private String testXmlStringUpdPol;
-	private byte[] testXmlByteArrayUpdPol;
-
-	private Element testXmlElementDelPol;
-	private String testXmlStringDelPol;
-	private byte[] testXmlByteArrayDelPol;
-
 	private String testAddPolAssertionId;
 	private String testDelPolAssertionId;
+	private PrivacyPolicyFeedDeserialiser testDeserializer;
 	private String testUpdPolAssertionId;
+
+	private byte[] testXmlByteArrayAddPol;
+	private byte[] testXmlByteArrayDelPol;
+	private byte[] testXmlByteArrayUpdPol;
+
+	private Element testXmlElementAddPol;
+	private Element testXmlElementDelPol;
+	private Element testXmlElementUpdPol;
+
+	private String testXmlStringAddPol;
+	private String testXmlStringDelPol;
+	private String testXmlStringUpdPol;
+
+	private Element getAssertionAsElement(byte[] xmlByteArray) throws DeserializeException {
+		try {
+			// final JAXBContext jaxbContext =
+			// JAXBContext.newInstance("suisse.health.e._2015.policy_administration");
+			// final Unmarshaller unmarshaller =
+			// jaxbContext.createUnmarshaller();
+			// final JAXBElement<?> jxbAssBasReqTyp = (JAXBElement<?>)
+			// unmarshaller
+			// .unmarshal(new ByteArrayInputStream(xmlByteArray));
+			//
+			// final AssertionBasedRequest wsAssBasReqTyp =
+			// (AssertionBasedRequest) jxbAssBasReqTyp.getValue();
+			//
+			// final Assertion wsAssertion = wsAssBasReqTyp.getAssertion();
+			//
+			// final Marshaller marshaller = jaxbContext.createMarshaller();
+
+			final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+			final Document doc = dbf.newDocumentBuilder().newDocument();
+			// marshaller.marshal(wsAssertion, doc);
+			return doc.getDocumentElement();
+		} catch (final Exception e) {
+			mLogger.error("error in deserializing to Element.", e);
+			throw new DeserializeException(e);
+		}
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -194,33 +221,6 @@ public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 		final PrivacyPolicyFeed ref = testDeserializer.fromXmlString(testXmlStringUpdPol);
 		assertNotNull(ref);
 		assertEquals(testUpdPolAssertionId, ref.getAssertion().getId());
-	}
-
-	private Element getAssertionAsElement(byte[] xmlByteArray) throws DeserializeException {
-		try {
-			// final JAXBContext jaxbContext =
-			// JAXBContext.newInstance("suisse.health.e._2015.policy_administration");
-			// final Unmarshaller unmarshaller =
-			// jaxbContext.createUnmarshaller();
-			// final JAXBElement<?> jxbAssBasReqTyp = (JAXBElement<?>)
-			// unmarshaller
-			// .unmarshal(new ByteArrayInputStream(xmlByteArray));
-			//
-			// final AssertionBasedRequest wsAssBasReqTyp =
-			// (AssertionBasedRequest) jxbAssBasReqTyp.getValue();
-			//
-			// final Assertion wsAssertion = wsAssBasReqTyp.getAssertion();
-			//
-			// final Marshaller marshaller = jaxbContext.createMarshaller();
-
-			final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-			final Document doc = dbf.newDocumentBuilder().newDocument();
-			// marshaller.marshal(wsAssertion, doc);
-			return doc.getDocumentElement();
-		} catch (final Exception e) {
-			mLogger.error("error in deserializing to Element.", e);
-			throw new DeserializeException(e);
-		}
 	}
 
 }
