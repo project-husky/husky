@@ -19,8 +19,8 @@ package org.ehealth_connector.security.saml2;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Interface describing the methods of Status</div>
- * <div class="de">Interface beschreibt die methoden von Status</div>
+ * <div class="en">Interface describing the methods of Status.</div>
+ * <div class="de">Interface welches die Methoden von Status beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -52,12 +52,10 @@ public interface Status {
 	 *
 	 * @return
 	 * <div class="en">the StatusMessage as {@link java.lang.String}</div>
-	 * <div class="de">den StatusMessage als {@link java.lang.String}</div>
+	 * <div class="de">die StatusMessage als {@link java.lang.String}</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	String getStatusMessage();
-
-	// List<String> getStatusDetails();
 }

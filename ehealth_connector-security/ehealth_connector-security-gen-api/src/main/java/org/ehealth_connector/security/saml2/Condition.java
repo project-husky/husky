@@ -20,12 +20,14 @@ package org.ehealth_connector.security.saml2;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the Condition methods.</div>
- * <div class="de">Beschreibendes Interface der Condition methoden.</div>
+ * <div class="de">Interface welches die Condition Methoden beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
- *
  * <!-- @formatter:on -->
  */
 public interface Condition {
+
+	// There are no special methods defined, but the interface has to be
+	// declared for selection reasons.
 
 }

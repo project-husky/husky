@@ -20,7 +20,7 @@ package org.ehealth_connector.security.wssecurity;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the UsernameTokenBuilder.</div>
- * <div class="de">Interface beschreibt die Methoden des UsernameTokenBuilder.</div>
+ * <div class="de">Interface welches die Methoden des UsernameTokenBuilders beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

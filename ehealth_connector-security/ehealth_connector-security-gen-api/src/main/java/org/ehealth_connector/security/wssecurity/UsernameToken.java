@@ -22,7 +22,7 @@ import org.ehealth_connector.security.core.SecurityHeaderElement;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface decribing the methods of UsernameToken</div>
- * <div class="de">Interface beschreibt die Methoden von UsernameToken</div>
+ * <div class="de">Interface welches die Methoden von UsernameToken beschreibt</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -48,7 +48,7 @@ public interface UsernameToken extends SecurityHeaderElement {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the password.</div>
-	 * <div class="de">Methode um den Passwort zu erhalten</div>
+	 * <div class="de">Methode um das Passwort zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -64,7 +64,7 @@ public interface UsernameToken extends SecurityHeaderElement {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the username.</div>
-	 * <div class="de">Methode um den Usernamen zu erhalten</div>
+	 * <div class="de">Methode um den Usernamen zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *

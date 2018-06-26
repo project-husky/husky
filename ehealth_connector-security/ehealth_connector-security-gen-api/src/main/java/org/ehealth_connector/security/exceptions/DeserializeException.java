@@ -72,8 +72,8 @@ public class DeserializeException extends Exception {
 	 * <div class="it"></div>
 	 *
 	 * @param cause
-	 * <div class="en">the throwable to be set</div>
-	 * <div class="de">der throwable der gesetzt werden soll</div>
+	 * <div class="en">the cause to be set</div>
+	 * <div class="de">der Grund der gesetzt werden soll</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

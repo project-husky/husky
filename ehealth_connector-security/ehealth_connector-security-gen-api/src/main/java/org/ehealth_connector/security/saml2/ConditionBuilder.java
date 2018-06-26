@@ -20,11 +20,14 @@ package org.ehealth_connector.security.saml2;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the ConditionBuilder.</div>
- * <div class="de">Interface beschreibt die Methoden des ConditionBuilders.</div>
+ * <div class="de">Interface welches die Methoden des ConditionBuilders beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface ConditionBuilder {
+
+	// There are no special methods defined, but the interface has to be
+	// declared for selection reasons.
 
 }

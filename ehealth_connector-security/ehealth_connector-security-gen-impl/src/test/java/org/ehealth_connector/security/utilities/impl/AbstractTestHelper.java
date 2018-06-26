@@ -26,21 +26,21 @@ import org.opensaml.saml.saml2.core.NameID;
 
 public abstract class AbstractTestHelper extends InitializerTestHelper {
 
-	protected String testId;
-	protected Calendar testIssueInstant;
 	protected Integer testAssertionConsumerServiceIndex;
 	protected String testAssertionConsumerServiceURL;
 	protected Integer testAttributeConsumingServiceIndex;
-	protected String testDestination;
-	protected String testProviderName;
+	protected String testAttributeName;
+	protected String testAttributeValue;
 	protected String testConsent;
-	protected String testProtocolBinding;
+	protected String testDestination;
 	protected Boolean testForceAuthn;
+	protected String testId;
+	protected Calendar testIssueInstant;
 	protected String testIssuer;
 	protected Boolean testNameIdPolicyAllowCreate;
 	protected String testNameIdPolicyFormat;
-	protected String testAttributeName;
-	protected String testAttributeValue;
+	protected String testProtocolBinding;
+	protected String testProviderName;
 
 	@Before
 	public void setUp() throws Exception {

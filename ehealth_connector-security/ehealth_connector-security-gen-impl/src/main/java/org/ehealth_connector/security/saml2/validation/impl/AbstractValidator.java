@@ -46,8 +46,8 @@ public abstract class AbstractValidator {
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
-	private KeyStore trustStore;
 	private String password;
+	private KeyStore trustStore;
 
 	public Logger getLog() {
 		return log;

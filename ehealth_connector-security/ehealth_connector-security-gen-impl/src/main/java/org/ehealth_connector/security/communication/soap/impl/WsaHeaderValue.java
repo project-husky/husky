@@ -26,10 +26,10 @@ package org.ehealth_connector.security.communication.soap.impl;
  * <!-- @formatter:on -->
  */
 public class WsaHeaderValue {
-	private String mMessageId;
 	private String mAction;
-	private String mTo;
+	private String mMessageId;
 	private boolean mMustUnderstand;
+	private String mTo;
 
 	public WsaHeaderValue(String messageId, String action, String to) {
 		super();

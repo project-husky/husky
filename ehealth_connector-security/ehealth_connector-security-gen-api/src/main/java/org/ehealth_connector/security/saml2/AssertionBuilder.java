@@ -20,7 +20,7 @@ package org.ehealth_connector.security.saml2;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the AssertionBuilder. </div>
- * <div class="de">Interface beschreibt die Methoden des AssertionBuilders.</div>
+ * <div class="de">Interface welches die Methoden des AssertionBuilders beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -51,13 +51,13 @@ public interface AssertionBuilder extends BaseBuilder<AssertionBuilder> {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to add a Condition to the assertion to be build.</div>
-	 * <div class="de">Methode um eine Condition dem Assertion hinzuzufügen.</div>
+	 * <div class="de">Methode um eine Condition der Assertion hinzuzufügen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param aCondition
 	 * <div class="en">the Condition to be added.</div>
-	 * <div class="de">das Condition welches hinzugefügt werden soll.</div>
+	 * <div class="de">die Condition welche hinzugefügt werden soll.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @return

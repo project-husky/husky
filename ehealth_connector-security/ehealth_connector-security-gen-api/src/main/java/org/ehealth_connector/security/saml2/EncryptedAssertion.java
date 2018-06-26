@@ -22,11 +22,14 @@ import org.ehealth_connector.security.core.SecurityHeaderElement;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the EncryptedAssertion.</div>
- * <div class="de">Interface beschreibt die Methoden des EncryptedAssertion.</div>
+ * <div class="de">Interface welches die Methoden der EncryptedAssertion beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface EncryptedAssertion extends SecurityHeaderElement {
+
+	// There are no special methods defined, but the interface has to be
+	// declared for selection reasons.
 
 }

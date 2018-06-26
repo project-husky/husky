@@ -30,10 +30,10 @@ import org.junit.Test;
 
 public class AssertionBuilderImplTest {
 
-	private AssertionBuilder testBuilder;
-	private String testId;
 	private String testAttributeName;
 	private String testAttributeValue;
+	private AssertionBuilder testBuilder;
+	private String testId;
 
 	@Before
 	public void setUp() throws Exception {

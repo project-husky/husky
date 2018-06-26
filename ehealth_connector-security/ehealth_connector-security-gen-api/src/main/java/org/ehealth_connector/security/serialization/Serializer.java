@@ -23,13 +23,13 @@ import org.w3c.dom.Element;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Typed interface describing some generic methods for serializing model instances to different serialized forms.</div>
- * <div class="de">Typisiertes Interface beschreibend die Methoden für die Serialisierung von Modell instanzen in verschiedene formen der serialisierung.</div>
+ * <div class="de">Typisiertes Interface welches die Methoden für die Serialisierung von Modell Instanzen in verschiedene Formen der Serialisierung beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  *
  * @param <T>
- * <div class="en">the type of instance the methods should hanlde with.</div>
- * <div class="de">der Typ der Instanz auf die Methoden Anwendung finden </div>
+ * <div class="en">the type of instance the methods should deal with.</div>
+ * <div class="de">der Typ der Instanz auf welchen die Methoden Anwendung finden.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -39,7 +39,7 @@ public interface Serializer<T> {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to serialize the instance of T into an byte array.</div>
-	 * <div class="de">Methode um eine Instanz von T in einen byte array zu serialisieren.</div>
+	 * <div class="de">Methode um eine Instanz von T in ein Byte Array zu serialisieren.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -50,12 +50,12 @@ public interface Serializer<T> {
 	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the serialized instance as byte array</div>
-	 * <div class="de">die serialisierte Instanz als byte array</div>
+	 * <div class="de">die serialisierte Instanz als Byte Array</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @throws SerializeException
 	 * <div class="en">will be thrown when an error occures serializing the object</div>
-	 *  <div class="de">wird geworfen wenn ein Fehler beim serialisieren des Objektes auftritt</div>
+	 *  <div class="de">wird geworfen wenn ein Fehler beim Serialisieren des Objektes auftritt</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -65,7 +65,7 @@ public interface Serializer<T> {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to serialize the instance of T into an xml structure.</div>
-	 * <div class="de">Methode um eine Instanz von T in eine xml struktur zu serialisieren.</div>
+	 * <div class="de">Methode um eine Instanz von T in eine XML Struktur zu serialisieren.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -76,12 +76,12 @@ public interface Serializer<T> {
 	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the serialized instance as xml structure</div>
-	 * <div class="de">die serialisierte Instanz als xml Struktur</div>
+	 * <div class="de">die serialisierte Instanz als XML Struktur</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @throws SerializeException
 	 * <div class="en">will be thrown when an error occures serializing the object</div>
-	 *  <div class="de">wird geworfen wenn ein Fehler beim serialisieren des Objektes auftritt</div>
+	 *  <div class="de">wird geworfen wenn ein Fehler beim Serialisieren des Objektes auftritt</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -107,7 +107,7 @@ public interface Serializer<T> {
 	 * <div class="it"></div>
 	 * @throws SerializeException
 	 * <div class="en">will be thrown when an error occures serializing the object</div>
-	 *  <div class="de">wird geworfen wenn ein Fehler beim serialisieren des Objektes auftritt</div>
+	 *  <div class="de">wird geworfen wenn ein Fehler beim Serialisieren des Objektes auftritt</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->

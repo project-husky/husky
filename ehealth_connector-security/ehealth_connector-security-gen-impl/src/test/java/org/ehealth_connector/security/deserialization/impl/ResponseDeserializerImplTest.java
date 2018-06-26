@@ -32,9 +32,9 @@ import org.w3c.dom.Element;
 public class ResponseDeserializerImplTest extends AbstractTestHelper {
 
 	private ResponseDeserializerImpl testDeserializer;
-	private String testXmlString;
 	private byte[] testXmlByteArray;
 	private Element testXmlElement;
+	private String testXmlString;
 
 	@Override
 	@Before

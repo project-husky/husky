@@ -33,8 +33,8 @@ import org.opensaml.saml.saml2.core.impl.NameIDBuilder;
 public class SubjectBuilderImpl implements SubjectBuilder,
 		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Subject, Subject> {
 
-	private org.opensaml.saml.saml2.core.Subject subject;
 	private NameID nameID;
+	private org.opensaml.saml.saml2.core.Subject subject;
 
 	public SubjectBuilderImpl() {
 		subject = new org.opensaml.saml.saml2.core.impl.SubjectBuilder().buildObject();

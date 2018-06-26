@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the SubjectBuilder.</div>
- * <div class="de">Interface beschreibt die Methoden des SubjectBuilder.</div>
+ * <div class="de">Interface welches die Methoden des SubjectBuilders beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -96,7 +96,7 @@ public interface SubjectBuilder extends SimpleBuilder<Subject> {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set a list {@link org.ehealth_connector.security.saml2.SubjectConfirmation}s of the SubjectConfirmation to be build.</div>
-	 * <div class="de">Methode um eine liste von  {@link org.ehealth_connector.security.saml2.SubjectConfirmation} dem SubjectConfirmation hinzuzufügen.</div>
+	 * <div class="de">Methode um eine liste von {@link org.ehealth_connector.security.saml2.SubjectConfirmation} dem SubjectConfirmation hinzuzufügen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *

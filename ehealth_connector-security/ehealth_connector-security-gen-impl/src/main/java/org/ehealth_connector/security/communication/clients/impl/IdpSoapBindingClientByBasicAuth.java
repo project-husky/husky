@@ -66,51 +66,12 @@ import org.xml.sax.SAXException;
  */
 public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 
-	private Logger logger = LoggerFactory.getLogger(getClass());
-
 	private IdpClientBasicAuthConfigImpl config;
+
+	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	public IdpSoapBindingClientByBasicAuth(IdpClientBasicAuthConfigImpl clientConfiguration) {
 		config = clientConfiguration;
-
-	}
-
-	@Override
-	public CloseableHttpClient getHttpClient() throws ClientSendException {
-		return HttpClients.createDefault();
-	}
-
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.communication.clients.impl.AbstractIdpClient#getRequestConfig()
-	 */
-	@Override
-	public RequestConfig getRequestConfig() {
-		return RequestConfig.custom().setAuthenticationEnabled(true).build();
-	}
-
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.communication.clients.IdpClient#send(org.ehealth_connector.security.authentication.AuthnRequest)
-	 */
-	@Override
-	public Response send(AuthnRequest aAuthnRequest) throws ClientSendException {
-		try {
-			final HttpPost post = getHttpPost(config);
-			post.setHeader(HttpHeaders.CONTENT_TYPE, "text/xml");
-			post.setEntity(getSoapEntity(aAuthnRequest));
-			post.addHeader("Accept", "text/xml");
-
-			addBasicAuthentication(post);
-
-			return execute(post);
-		} catch (final Throwable t) {
-			throw new ClientSendException(t);
-		}
 
 	}
 
@@ -131,6 +92,22 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 				.encode(auth.getBytes(Charset.forName("ISO-8859-1")));
 		final String authHeader = "Basic " + new String(encodedAuth);
 		post.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
+	}
+
+	@Override
+	public CloseableHttpClient getHttpClient() throws ClientSendException {
+		return HttpClients.createDefault();
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.communication.clients.impl.AbstractIdpClient#getRequestConfig()
+	 */
+	@Override
+	public RequestConfig getRequestConfig() {
+		return RequestConfig.custom().setAuthenticationEnabled(true).build();
 	}
 
 	/**
@@ -246,6 +223,29 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 				| TransformerFactoryConfigurationError | ParserConfigurationException
 				| SAXException e) {
 			throw new ClientSendException(e);
+		}
+
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.communication.clients.IdpClient#send(org.ehealth_connector.security.authentication.AuthnRequest)
+	 */
+	@Override
+	public Response send(AuthnRequest aAuthnRequest) throws ClientSendException {
+		try {
+			final HttpPost post = getHttpPost(config);
+			post.setHeader(HttpHeaders.CONTENT_TYPE, "text/xml");
+			post.setEntity(getSoapEntity(aAuthnRequest));
+			post.addHeader("Accept", "text/xml");
+
+			addBasicAuthentication(post);
+
+			return execute(post);
+		} catch (final Throwable t) {
+			throw new ClientSendException(t);
 		}
 
 	}

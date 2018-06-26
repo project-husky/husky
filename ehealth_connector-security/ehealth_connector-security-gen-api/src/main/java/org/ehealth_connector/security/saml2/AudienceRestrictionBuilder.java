@@ -20,10 +20,13 @@ package org.ehealth_connector.security.saml2;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the AudienceRestrictionBuilder. </div>
- * <div class="de">Interface beschreibt die Methoden des AudienceRestrictionBuilder.</div>
+ * <div class="de">Interface welches die Methoden des AudienceRestrictionBuilder beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div
  */
 public interface AudienceRestrictionBuilder extends SimpleBuilder<AudienceRestriction> {
+
+	// There are no special methods defined, but the interface has to be
+	// declared for selection reasons.
 
 }

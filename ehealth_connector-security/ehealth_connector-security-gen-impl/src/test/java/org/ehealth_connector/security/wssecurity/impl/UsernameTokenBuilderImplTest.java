@@ -30,10 +30,10 @@ import org.junit.Test;
 public class UsernameTokenBuilderImplTest {
 
 	private UsernameTokenBuilderImpl builder;
-	private String testUsername;
-	private String testPassword;
-	private String testNonce;
 	private org.opensaml.soap.wssecurity.UsernameToken testInternalObject;
+	private String testNonce;
+	private String testPassword;
+	private String testUsername;
 
 	@Before
 	public void setUp() throws Exception {

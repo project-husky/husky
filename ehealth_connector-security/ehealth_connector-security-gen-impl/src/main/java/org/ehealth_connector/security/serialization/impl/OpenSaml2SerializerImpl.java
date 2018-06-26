@@ -49,6 +49,25 @@ public class OpenSaml2SerializerImpl implements OpenSaml2Serializer {
 				"org.apache.xerces.jaxp.DocumentBuilderFactoryImpl");
 	}
 
+	private ByteArrayOutputStream serializeToBytArrayOutputStream(XMLObject aXmlObject)
+			throws SerializeException {
+		try {
+			final Element element = serializeToXml(aXmlObject);
+
+			final Transformer tr = TransformerFactory.newInstance().newTransformer();
+			tr.setOutputProperty(OutputKeys.INDENT, "no");
+			tr.setOutputProperty(OutputKeys.METHOD, "xml");
+			tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", String.valueOf(4));
+
+			final ByteArrayOutputStream bas = new ByteArrayOutputStream();
+			tr.transform(new DOMSource(element), new StreamResult(bas));
+
+			return bas;
+		} catch (final Exception e) {
+			throw new SerializeException(e);
+		}
+	}
+
 	/**
 	 *
 	 * {@inheritDoc}
@@ -91,24 +110,5 @@ public class OpenSaml2SerializerImpl implements OpenSaml2Serializer {
 			throw new SerializeException(e);
 		}
 
-	}
-
-	private ByteArrayOutputStream serializeToBytArrayOutputStream(XMLObject aXmlObject)
-			throws SerializeException {
-		try {
-			final Element element = serializeToXml(aXmlObject);
-
-			final Transformer tr = TransformerFactory.newInstance().newTransformer();
-			tr.setOutputProperty(OutputKeys.INDENT, "no");
-			tr.setOutputProperty(OutputKeys.METHOD, "xml");
-			tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", String.valueOf(4));
-
-			final ByteArrayOutputStream bas = new ByteArrayOutputStream();
-			tr.transform(new DOMSource(element), new StreamResult(bas));
-
-			return bas;
-		} catch (final Exception e) {
-			throw new SerializeException(e);
-		}
 	}
 }

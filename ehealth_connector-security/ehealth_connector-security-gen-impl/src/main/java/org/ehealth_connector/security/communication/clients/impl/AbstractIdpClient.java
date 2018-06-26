@@ -60,14 +60,6 @@ public abstract class AbstractIdpClient implements IdpClient {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
-	public abstract CloseableHttpClient getHttpClient() throws ClientSendException;
-
-	public abstract RequestConfig getRequestConfig();
-
-	protected Logger getLogger() {
-		return logger;
-	}
-
 	/**
 	 *
 	 * <!-- @formatter:off -->
@@ -106,6 +98,8 @@ public abstract class AbstractIdpClient implements IdpClient {
 		}
 	}
 
+	public abstract CloseableHttpClient getHttpClient() throws ClientSendException;
+
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to create and configure the HTTPPost instance.</div>
@@ -135,6 +129,12 @@ public abstract class AbstractIdpClient implements IdpClient {
 		post.setConfig(getRequestConfig());
 		return post;
 	}
+
+	protected Logger getLogger() {
+		return logger;
+	}
+
+	public abstract RequestConfig getRequestConfig();
 
 	/**
 	 * <!-- @formatter:off -->

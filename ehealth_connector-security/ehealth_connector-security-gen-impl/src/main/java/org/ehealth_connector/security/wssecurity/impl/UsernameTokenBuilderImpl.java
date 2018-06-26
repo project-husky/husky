@@ -32,10 +32,10 @@ import org.ehealth_connector.security.wssecurity.UsernameTokenBuilder;
 public class UsernameTokenBuilderImpl implements UsernameTokenBuilder,
 		SecurityObjectBuilder<org.opensaml.soap.wssecurity.UsernameToken, UsernameToken> {
 
-	private org.opensaml.soap.wssecurity.UsernameToken wrappedObject;
-	private org.opensaml.soap.wssecurity.Username userName;
-	private org.opensaml.soap.wssecurity.Password password;
 	private org.opensaml.soap.wssecurity.Nonce nonce;
+	private org.opensaml.soap.wssecurity.Password password;
+	private org.opensaml.soap.wssecurity.Username userName;
+	private org.opensaml.soap.wssecurity.UsernameToken wrappedObject;
 
 	public UsernameTokenBuilderImpl() {
 		wrappedObject = new org.opensaml.soap.wssecurity.impl.UsernameTokenBuilder().buildObject();

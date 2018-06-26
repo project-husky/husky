@@ -32,12 +32,12 @@ import org.junit.Test;
 public class SubjectBuilderImplTest {
 
 	private SubjectBuilderImpl builder;
-	private org.opensaml.saml.saml2.core.Subject testInnerObject;
-	private String testNameIdValue;
-	private String testNameIdFormat;
-	private List<SubjectConfirmation> testSubjectConfirmations;
 	private String testAddress;
+	private org.opensaml.saml.saml2.core.Subject testInnerObject;
+	private String testNameIdFormat;
+	private String testNameIdValue;
 	private SubjectConfirmation testSubjectConfirm;
+	private List<SubjectConfirmation> testSubjectConfirmations;
 
 	@Before
 	public void setUp() throws Exception {

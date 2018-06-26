@@ -36,6 +36,16 @@ public class IdpClientCertificateAuthConfigBuilderTest {
 	private KeyStore testClientKeyStore;
 	private String testStorePassword;
 
+	private InputStream getKeyStoreInputStream(String aKeyStorePath) throws FileNotFoundException {
+		if (aKeyStorePath.startsWith("classpath:")) {
+			return getClass().getResourceAsStream(aKeyStorePath.substring("classpath:".length()));
+		} else if (aKeyStorePath.startsWith("file:")) {
+			return new FileInputStream(aKeyStorePath.substring("file:".length()));
+		} else {
+			return new FileInputStream(aKeyStorePath);
+		}
+	}
+
 	@Before
 	public void setUp() throws Exception {
 		builder = new IdpClientCertificateAuthConfigBuilder();
@@ -65,15 +75,5 @@ public class IdpClientCertificateAuthConfigBuilderTest {
 				.create();
 		assertNotNull(ref);
 		assertArrayEquals(testStorePassword.toCharArray(), ref.getClientKeyStorePassword());
-	}
-
-	private InputStream getKeyStoreInputStream(String aKeyStorePath) throws FileNotFoundException {
-		if (aKeyStorePath.startsWith("classpath:")) {
-			return getClass().getResourceAsStream(aKeyStorePath.substring("classpath:".length()));
-		} else if (aKeyStorePath.startsWith("file:")) {
-			return new FileInputStream(aKeyStorePath.substring("file:".length()));
-		} else {
-			return new FileInputStream(aKeyStorePath);
-		}
 	}
 }

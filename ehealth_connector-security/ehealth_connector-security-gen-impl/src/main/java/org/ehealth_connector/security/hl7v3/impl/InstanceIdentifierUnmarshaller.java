@@ -35,11 +35,6 @@ import org.w3c.dom.Element;
 public class InstanceIdentifierUnmarshaller extends AbstractXMLObjectUnmarshaller {
 
 	@Override
-	public OpenSamlInstanceIdentifier unmarshall(Element domElement) throws UnmarshallingException {
-		return (OpenSamlInstanceIdentifier) super.unmarshall(domElement);
-	}
-
-	@Override
 	protected void processAttribute(XMLObject xmlObject, Attr attribute)
 			throws UnmarshallingException {
 		final OpenSamlInstanceIdentifier purposeOfUse = (OpenSamlInstanceIdentifier) xmlObject;
@@ -50,6 +45,11 @@ public class InstanceIdentifierUnmarshaller extends AbstractXMLObjectUnmarshalle
 		if ("extension".equalsIgnoreCase(attribute.getName())) {
 			purposeOfUse.setExtension(attribute.getValue());
 		}
+	}
+
+	@Override
+	public OpenSamlInstanceIdentifier unmarshall(Element domElement) throws UnmarshallingException {
+		return (OpenSamlInstanceIdentifier) super.unmarshall(domElement);
 	}
 
 }

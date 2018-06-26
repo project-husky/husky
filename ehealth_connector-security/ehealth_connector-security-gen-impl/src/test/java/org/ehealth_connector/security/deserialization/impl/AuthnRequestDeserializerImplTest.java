@@ -32,9 +32,9 @@ import org.w3c.dom.Element;
 public class AuthnRequestDeserializerImplTest extends AbstractTestHelper {
 
 	private AuthnRequestDeserializerImpl testDeserializer;
-	private String testXmlString;
-	private Element testXmlElement;
 	private byte[] testXmlByteArray;
+	private Element testXmlElement;
+	private String testXmlString;
 
 	@Override
 	@Before

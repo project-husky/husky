@@ -22,7 +22,7 @@ import java.util.Calendar;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the basic methods.</div>
- * <div class="de">Beschreibendes Interface der basis methoden.</div>
+ * <div class="de">Interface welches die Basis Methoden beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -68,7 +68,7 @@ public interface Base {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the Issuer.</div>
-	 * <div class="de">Methode den Issuer zu holen.</div>
+	 * <div class="de">Methode um den Issuer zu holen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -84,13 +84,13 @@ public interface Base {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the Version.</div>
-	 * <div class="de">Methode den Version zu holen.</div>
+	 * <div class="de">Methode um die Version zu holen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
 	 * <div class="en">the Version value as {@link java.lang.String}.</div>
-	 * <div class="de">der Version Wert als {@link java.lang.String}.</div>
+	 * <div class="de">die Version als {@link java.lang.String}.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

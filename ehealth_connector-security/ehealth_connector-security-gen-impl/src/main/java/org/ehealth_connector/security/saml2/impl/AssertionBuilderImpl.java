@@ -43,8 +43,8 @@ import org.opensaml.saml.saml2.core.impl.IssuerBuilder;
 public class AssertionBuilderImpl implements AssertionBuilder,
 		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Assertion, Assertion> {
 
-	private org.opensaml.saml.saml2.core.Assertion wrappedObject;
 	private org.opensaml.saml.saml2.core.Issuer issuer;
+	private org.opensaml.saml.saml2.core.Assertion wrappedObject;
 
 	public AssertionBuilderImpl() {
 		final org.opensaml.saml.saml2.core.impl.AssertionBuilder builder = new org.opensaml.saml.saml2.core.impl.AssertionBuilder();

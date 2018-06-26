@@ -54,13 +54,21 @@ import org.opensaml.soap.wstrust.impl.TokenTypeBuilder;
 public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBuilder,
 		SecurityObjectBuilder<RequestSecurityToken, XUserAssertionRequest> {
 
-	private RequestSecurityToken requestSecurityToken;
 	private Claims claims;
+	private RequestSecurityToken requestSecurityToken;
 
 	public XUserAssertionRequestBuilderImpl() {
 		requestSecurityToken = new RequestSecurityTokenBuilder().buildObject();
 		claims = new ClaimsBuilder().buildObject();
 		addXMLObject(claims);
+	}
+
+	protected void addXMLObject(XMLObject aXmlObject) {
+		requestSecurityToken.getUnknownXMLObjects().add(aXmlObject);
+	}
+
+	protected void addXMLObjectToClaims(XMLObject aXmlObject) {
+		claims.getUnknownXMLObjects().add(aXmlObject);
 	}
 
 	/**
@@ -112,6 +120,28 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 		return new XUserAssertionRequestImpl(aInternalObject);
 	}
 
+	private XMLObject createObjectAttribute(String aName, OpenSamlPurposeOfUse hl7PurposeOfUse) {
+		final Attribute attribute = new AttributeBuilder().buildObject();
+		attribute.setName(aName);
+		final XSAnyBuilder anyBuilder = new XSAnyBuilder();
+		final XSAny any = anyBuilder.buildObject(AttributeValue.DEFAULT_ELEMENT_NAME);
+		any.getUnknownXMLObjects().add(hl7PurposeOfUse);
+		attribute.getAttributeValues().add(any);
+		return attribute;
+	}
+
+	private Attribute createStringAttribute(String aName, String aValue) {
+		final Attribute attribute = new AttributeBuilder().buildObject();
+		attribute.setName(aName);
+
+		final XSStringBuilder stringBuilder = new XSStringBuilder();
+		final XSString attributeValue = stringBuilder
+				.buildObject(AttributeValue.DEFAULT_ELEMENT_NAME, XSString.TYPE_NAME);
+		attributeValue.setValue(aValue);
+		attribute.getAttributeValues().add(attributeValue);
+		return attribute;
+	}
+
 	/**
 	 *
 	 * {@inheritDoc}
@@ -124,6 +154,10 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 			claims.setDialect(aDialect);
 		}
 		return this;
+	}
+
+	protected Claims getClaims() {
+		return claims;
 	}
 
 	/**
@@ -256,40 +290,6 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 			addXMLObject(wstTokeType);
 		}
 		return this;
-	}
-
-	private XMLObject createObjectAttribute(String aName, OpenSamlPurposeOfUse hl7PurposeOfUse) {
-		final Attribute attribute = new AttributeBuilder().buildObject();
-		attribute.setName(aName);
-		final XSAnyBuilder anyBuilder = new XSAnyBuilder();
-		final XSAny any = anyBuilder.buildObject(AttributeValue.DEFAULT_ELEMENT_NAME);
-		any.getUnknownXMLObjects().add(hl7PurposeOfUse);
-		attribute.getAttributeValues().add(any);
-		return attribute;
-	}
-
-	private Attribute createStringAttribute(String aName, String aValue) {
-		final Attribute attribute = new AttributeBuilder().buildObject();
-		attribute.setName(aName);
-
-		final XSStringBuilder stringBuilder = new XSStringBuilder();
-		final XSString attributeValue = stringBuilder
-				.buildObject(AttributeValue.DEFAULT_ELEMENT_NAME, XSString.TYPE_NAME);
-		attributeValue.setValue(aValue);
-		attribute.getAttributeValues().add(attributeValue);
-		return attribute;
-	}
-
-	protected void addXMLObject(XMLObject aXmlObject) {
-		requestSecurityToken.getUnknownXMLObjects().add(aXmlObject);
-	}
-
-	protected void addXMLObjectToClaims(XMLObject aXmlObject) {
-		claims.getUnknownXMLObjects().add(aXmlObject);
-	}
-
-	protected Claims getClaims() {
-		return claims;
 	}
 
 }

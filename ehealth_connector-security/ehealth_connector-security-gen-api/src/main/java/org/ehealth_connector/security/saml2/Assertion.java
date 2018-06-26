@@ -25,7 +25,7 @@ import org.ehealth_connector.security.core.SecurityHeaderElement;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of Assertion. </div>
- * <div class="de">Interface beschreibt die Methoden von Assertion.</div>
+ * <div class="de">Interface welches die Methoden von Assertion beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -50,8 +50,8 @@ public interface Assertion extends Base, SecurityHeaderElement {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to get the AuthnContexts.</div>
-	 * <div class="de">Methode um die AuthnContexts zu holen.</div>
+	 * <div class="en">Method to get the AuthnStatements.</div>
+	 * <div class="de">Methode um die AuthnStatements zu holen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -99,7 +99,7 @@ public interface Assertion extends Base, SecurityHeaderElement {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the NotBefore of Conditions.</div>
-	 * <div class="de">Methode um das NotBefore of Condition zu holen.</div>
+	 * <div class="de">Methode um das NotBefore von Condition zu holen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -115,7 +115,7 @@ public interface Assertion extends Base, SecurityHeaderElement {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the NotOnOrAfter of Conditions.</div>
-	 * <div class="de">Methode um das NotOnOrAfter of Condition zu holen.</div>
+	 * <div class="de">Methode um das NotOnOrAfter von Condition zu holen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *

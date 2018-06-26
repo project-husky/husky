@@ -20,7 +20,7 @@ package org.ehealth_connector.security.saml2;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the StatusBuilder.</div>
- * <div class="de">Interface beschreibt die Methoden des StatusBuilder.</div>
+ * <div class="de">Interface welches die Methoden des StatusBuilders beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -51,13 +51,13 @@ public interface StatusBuilder extends SimpleBuilder<Status> {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the StatusMessage of the Status to be build.</div>
-	 * <div class="de">Methode um ein StatusMessage dem Status hinzuzufügen.</div>
+	 * <div class="de">Methode um eine StatusMessage dem Status hinzuzufügen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param aStatusMessage
 	 *  <div class="en">the StatusMessage to be set</div>
-	 * 	<div class="de">der StatusMessage der gesetzt werden soll</div>
+	 * 	<div class="de">die StatusMessage der gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return

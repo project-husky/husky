@@ -31,20 +31,20 @@ import org.opensaml.saml.saml2.core.NameID;
 
 public class AuthnRequestBuilderImplTest {
 
-	public AuthnRequestBuilder testBuilder;
-	private String testId;
-	private Calendar testIssueInstant;
 	private Integer testAssertionConsumerServiceIndex;
 	private String testAssertionConsumerServiceURL;
 	private Integer testAttributeConsumingServiceIndex;
-	private String testDestination;
-	private String testProviderName;
+	public AuthnRequestBuilder testBuilder;
 	private String testConsent;
-	private String testProtocolBinding;
+	private String testDestination;
 	private Boolean testForceAuthn;
+	private String testId;
+	private Calendar testIssueInstant;
 	private String testIssuer;
 	private Boolean testNameIdPolicyAllowCreate;
 	private String testNameIdPolicyFormat;
+	private String testProtocolBinding;
+	private String testProviderName;
 
 	@Before
 	public void setUp() throws Exception {

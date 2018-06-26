@@ -22,7 +22,7 @@ import java.util.Calendar;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of AuthnStatement. </div>
- * <div class="de">Interface beschreibt die Methoden von AuthnStatement.</div>
+ * <div class="de">Interface welches die Methoden von AuthnStatement beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

@@ -22,11 +22,10 @@ import java.util.List;
 /**
  *
  * <!-- @formatter:off -->
- * <div class="en">Interface describing the methods of Response</div>
- * <div class="de">Interface beschreibt die methoden eines Response</div>
+ * <div class="en">Interface describing the methods of Response.</div>
+ * <div class="de">Interface welches die Methoden einer Response beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
- *
  * <!-- @formatter:on -->
  */
 public interface Response extends Base {
@@ -35,7 +34,7 @@ public interface Response extends Base {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the {@link org.ehealth_connector.security.saml2.Assertion}s.</div>
-	 * <div class="de">Methode um die Assertions zu erhalten.</div>
+	 * <div class="de">Methode um die {@link org.ehealth_connector.security.saml2.Assertion}s zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -69,13 +68,13 @@ public interface Response extends Base {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get Destination value.</div>
-	 * <div class="de">Methode um den Destination wert zu erhalten.</div>
+	 * <div class="de">Methode um den Inhalt der Destination zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
 	 * <div class="en">the Destination value as {@link java.lang.String}.</div>
-	 * <div class="de">der Destination Wert als {@link java.lang.String}.</div>
+	 * <div class="de">der Inhalt der Destination als {@link java.lang.String}.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -86,7 +85,7 @@ public interface Response extends Base {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the {@link org.ehealth_connector.security.saml2.EncryptedAssertion}s.</div>
-	 * <div class="de">Methode um die EncryptedAssertions zu erhalten.</div>
+	 * <div class="de">Methode um die {@link org.ehealth_connector.security.saml2.EncryptedAssertion}s zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -125,7 +124,7 @@ public interface Response extends Base {
 	 *
 	 * @return
 	 * <div class="en">the Status value as {@link org.ehealth_connector.security.saml2.Status}.</div>
-	 * <div class="de">der Status Wert als {@link org.ehealth_connector.security.saml2.Status}.</div>
+	 * <div class="de">der Status als {@link org.ehealth_connector.security.saml2.Status}.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

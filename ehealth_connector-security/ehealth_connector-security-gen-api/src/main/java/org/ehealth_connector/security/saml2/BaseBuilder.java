@@ -22,7 +22,7 @@ import java.util.Calendar;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the BaseBuilder.</div>
- * <div class="de">Interface beschreibt die Methoden des BaseBuilders.</div>
+ * <div class="de">Interface welches die Methoden des BaseBuilders beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  *
@@ -34,14 +34,14 @@ public interface BaseBuilder<T> {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Builds the id on the T.</div>
-	 * <div class="de">Bildet die id im T.</div>
+	 * <div class="de">Bildet die ID im T.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param aId
 	 * 	<div class="en">the id string to be set</div>
-	 *  <div class="de">der id string der gesetzt werden soll</div>
+	 *  <div class="de">die ID die gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return
@@ -63,7 +63,7 @@ public interface BaseBuilder<T> {
 	 *
 	 * @param aIssueInstant
 	 * 	<div class="en">the issueInstant to be set</div>
-	 * 	<div class="de">der issue instant der gesetzt werden soll</div>
+	 * 	<div class="de">der issueInstant der gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return
@@ -85,7 +85,7 @@ public interface BaseBuilder<T> {
 	 *
 	 * @param aIssuer
 	 *  <div class="en">the issuer to be set</div>
-	 * 	<div class="de">der issuer der gesetzt werden soll</div>
+	 * 	<div class="de">der Issuer der gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return
@@ -100,13 +100,13 @@ public interface BaseBuilder<T> {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Builds the Version on the T.</div>
-	 * <div class="de">Buildet das Version im T.</div>
+	 * <div class="de">Buildet die Version im T.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param aVersion
 	 *  <div class="en">the issuer to be set</div>
-	 * 	<div class="de">der issuer der gesetzt werden soll</div>
+	 * 	<div class="de">der Issuer der gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return

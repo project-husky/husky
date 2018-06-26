@@ -42,19 +42,19 @@ import org.slf4j.LoggerFactory;
 public class WsaHeaderSoapHandler implements SOAPHandler<SOAPMessageContext> {
 
 	public final String IN_OUT_PARAM = "InOutExchange";
-	public final String NAMESPACE_WSA = "wsa";
-	public final String NAMESPACE_WSA_URI = "http://www.w3.org/2005/08/addressing";
-
-	public final String NAMESPACE_SOAPENV_URI = "http://www.w3.org/2003/05/soap-envelope";
-
-	private Logger mLogger;
-
 	private QName mActionHeader;
+	private Logger mLogger;
 
 	private QName mMessageIdHeader;
 
 	private QName mToHeader;
+
 	private WsaHeaderValue mWsaValues;
+
+	public final String NAMESPACE_SOAPENV_URI = "http://www.w3.org/2003/05/soap-envelope";
+
+	public final String NAMESPACE_WSA = "wsa";
+	public final String NAMESPACE_WSA_URI = "http://www.w3.org/2005/08/addressing";
 
 	public WsaHeaderSoapHandler(WsaHeaderValue aActionValue) {
 		mLogger = LoggerFactory.getLogger(getClass());

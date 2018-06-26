@@ -29,9 +29,9 @@ import org.ehealth_connector.security.communication.config.IdpClientConfig;
  */
 public class IdpClientBasicAuthConfigImpl extends AbstractClientConfig implements IdpClientConfig {
 
-	private String basicAuthUsername;
-
 	private String basicAuthPassword;
+
+	private String basicAuthUsername;
 
 	protected IdpClientBasicAuthConfigImpl() {
 

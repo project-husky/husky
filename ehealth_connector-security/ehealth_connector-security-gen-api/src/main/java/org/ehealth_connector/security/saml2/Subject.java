@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface decribing the methods of Subject</div>
- * <div class="de">Interface beschreibt die Methoden von Subject</div>
+ * <div class="de">Interface welches die Methoden von Subject beschreibt</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -39,7 +39,7 @@ public interface Subject {
 	 *
 	 * @return
 	 * <div class="en">the NameID.Format as {@link java.lang.String}</div>
-	 * <div class="de">den NameID.Format as {@link java.lang.String}</div>
+	 * <div class="de">das NameID.Format als {@link java.lang.String}</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -55,7 +55,7 @@ public interface Subject {
 	 *
 	 * @return
 	 * <div class="en">the NameID.Value as {@link java.lang.String}</div>
-	 * <div class="de">den NameID.Value as {@link java.lang.String}</div>
+	 * <div class="de">den NameID.Value als {@link java.lang.String}</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -65,13 +65,13 @@ public interface Subject {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the SubjectConfirmations.</div>
-	 * <div class="de">Methode um den SubjectConfirmationen zu erhalten.</div>
+	 * <div class="de">Methode um die SubjectConfirmationen zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
 	 * <div class="en">a {@link java.util.List} of {@link org.ehealth_connector.security.saml2.SubjectConfirmation}s</div>
-	 * <div class="de">eine {@link java.util.List} von {@link org.ehealth_connector.security.saml2.SubjectConfirmation}en</div>
+	 * <div class="de">eine {@link java.util.List} von {@link org.ehealth_connector.security.saml2.SubjectConfirmation}s</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

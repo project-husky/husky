@@ -22,11 +22,14 @@ import org.ehealth_connector.security.saml2.Response;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the Methods for the validation of Responses.</div>
- * <div class="de">Interface beschreibend die Methoden für die Validierung von Responses.</div>
+ * <div class="de">Interface welches die Methoden für die Validierung von Responses beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface ResponseValidator extends GenericValidator<Response> {
+
+	// There are no special methods defined, but the interface has to be
+	// declared for selection reasons.
 
 }

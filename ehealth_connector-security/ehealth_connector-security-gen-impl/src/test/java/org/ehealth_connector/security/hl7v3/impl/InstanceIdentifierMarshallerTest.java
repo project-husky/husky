@@ -37,10 +37,10 @@ public class InstanceIdentifierMarshallerTest extends InitializerTestHelper {
 		InitializationService.initialize();
 	}
 
-	private OpenSamlInstanceIdentifier testXmlObject;
+	private String testExtension;
 	private String testRoot;
 
-	private String testExtension;
+	private OpenSamlInstanceIdentifier testXmlObject;
 
 	@Before
 	public void setUp() throws Exception {

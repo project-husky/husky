@@ -90,27 +90,9 @@ import org.xml.sax.SAXException;
  */
 public abstract class AbstractSoapClient<T> {
 
-	private Logger logger = LoggerFactory.getLogger(getClass());
-
 	private SoapClientConfig config;
 
-	private void paserSoapFault(String retVal) throws ParserConfigurationException, SAXException,
-			IOException, XPathExpressionException, SoapException {
-		final DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-		docFactory.setNamespaceAware(true);
-		final DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-		final Document document = docBuilder.parse(new ByteArrayInputStream(retVal.getBytes()));
-
-		String prefix = document.getDocumentElement().getPrefix();
-		if (!StringUtils.isEmpty(prefix)) {
-			prefix += ":";
-		}
-
-		final Node faultnode = getNode(document.getDocumentElement(),
-				"/" + prefix + "Envelope/" + prefix + "Body/" + prefix + "Fault");
-		final SoapException exception = getSoapException(faultnode);
-		throw exception;
-	}
+	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	protected void createBody(Element aBodyElement, Element envelopElement)
 			throws SerializeException {
@@ -377,6 +359,24 @@ public abstract class AbstractSoapClient<T> {
 			throw new ClientSendException(e);
 		}
 
+	}
+
+	private void paserSoapFault(String retVal) throws ParserConfigurationException, SAXException,
+			IOException, XPathExpressionException, SoapException {
+		final DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+		docFactory.setNamespaceAware(true);
+		final DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+		final Document document = docBuilder.parse(new ByteArrayInputStream(retVal.getBytes()));
+
+		String prefix = document.getDocumentElement().getPrefix();
+		if (!StringUtils.isEmpty(prefix)) {
+			prefix += ":";
+		}
+
+		final Node faultnode = getNode(document.getDocumentElement(),
+				"/" + prefix + "Envelope/" + prefix + "Body/" + prefix + "Fault");
+		final SoapException exception = getSoapException(faultnode);
+		throw exception;
 	}
 
 	protected void setConfig(SoapClientConfig config) {

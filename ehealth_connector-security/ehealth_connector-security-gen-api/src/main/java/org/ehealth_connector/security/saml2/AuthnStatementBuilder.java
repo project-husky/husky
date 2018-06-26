@@ -22,7 +22,7 @@ import java.util.Calendar;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the AuthnStatementBuilder. </div>
- * <div class="de">Interface beschreibt die Methoden des AuthnStatementBuilder.</div>
+ * <div class="de">Interface welches die Methoden des AuthnStatementBuilder beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -60,7 +60,7 @@ public interface AuthnStatementBuilder extends SimpleBuilder<AuthnStatement> {
 	 *
 	 * @param aCalendar
 	 * <div class="en">The Calendar value to be set as AuthnInstant.</div>
-	 * <div class="de">Der Calendar wert der als AuthnInstant gesetzt werden soll.</div>
+	 * <div class="de">Der Calendar Wert der als AuthnInstant gesetzt werden soll.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -99,7 +99,7 @@ public interface AuthnStatementBuilder extends SimpleBuilder<AuthnStatement> {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the SessionNotOnOrAfter as Calendar.</div>
-	 * <div class="de">Methode um die SessionNotOnOrAfter as Calendar.</div>
+	 * <div class="de">Methode um die SessionNotOnOrAfter als Calendar zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *

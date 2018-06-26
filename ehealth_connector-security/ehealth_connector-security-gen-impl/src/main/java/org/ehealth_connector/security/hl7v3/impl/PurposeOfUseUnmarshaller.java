@@ -37,16 +37,6 @@ public class PurposeOfUseUnmarshaller extends AbstractXMLObjectUnmarshaller {
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.opensaml.core.xml.io.AbstractXMLObjectUnmarshaller#unmarshall(org.w3c.dom.Element)
-	 */
-	@Override
-	public OpenSamlPurposeOfUse unmarshall(Element domElement) throws UnmarshallingException {
-		return (OpenSamlPurposeOfUse) super.unmarshall(domElement);
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
 	 * @see org.opensaml.core.xml.io.AbstractXMLObjectUnmarshaller#processAttribute(org.opensaml.core.xml.XMLObject,
 	 *      org.w3c.dom.Attr)
 	 */
@@ -67,6 +57,16 @@ public class PurposeOfUseUnmarshaller extends AbstractXMLObjectUnmarshaller {
 			purposeOfUse.setDisplayName(attribute.getValue());
 		}
 
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.opensaml.core.xml.io.AbstractXMLObjectUnmarshaller#unmarshall(org.w3c.dom.Element)
+	 */
+	@Override
+	public OpenSamlPurposeOfUse unmarshall(Element domElement) throws UnmarshallingException {
+		return (OpenSamlPurposeOfUse) super.unmarshall(domElement);
 	}
 
 }

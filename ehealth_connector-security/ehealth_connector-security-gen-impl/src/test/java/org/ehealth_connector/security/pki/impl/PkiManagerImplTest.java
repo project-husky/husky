@@ -43,20 +43,30 @@ import org.slf4j.LoggerFactory;
 
 public class PkiManagerImplTest {
 
-	private PkiManager testPkiManager;
+	private String testCertAlias;
+	private File testCertPath;
+	private File testClientCertPemPath;
+	private String testClientKeyAlias;
+	private String testKeyAlias;
+	private String testKeyStoreCreateType;
 	private InputStream testKeyStoreJceksInStream;
 	private InputStream testKeyStoreJksInStream;
 	private InputStream testKeyStorePkcs12InStream;
-	private String testKeyStoreCreateType;
-	private String testStorePassword;
-	private String testKeyAlias;
 	private String testOutputFile;
-	private String testClientKeyAlias;
+	private PkiManager testPkiManager;
 	private File testPrivateKeyPemPath;
-	private File testClientCertPemPath;
-	private String testCertAlias;
-	private File testCertPath;
 	private String testRemoveCertAlias;
+	private String testStorePassword;
+
+	private InputStream getKeyStoreInputStream(String aKeyStorePath) throws FileNotFoundException {
+		if (aKeyStorePath.startsWith("classpath:")) {
+			return getClass().getResourceAsStream(aKeyStorePath.substring("classpath:".length()));
+		} else if (aKeyStorePath.startsWith("file:")) {
+			return new FileInputStream(aKeyStorePath.substring("file:".length()));
+		} else {
+			return new FileInputStream(aKeyStorePath);
+		}
+	}
 
 	@Before
 	public void setUp() throws Exception {
@@ -308,16 +318,6 @@ public class PkiManagerImplTest {
 		assertNotNull(ref);
 		testPkiManager.storeStore(ref, new FileOutputStream(testOutputFile), testStorePassword);
 		assertTrue(new File(testOutputFile).exists());
-	}
-
-	private InputStream getKeyStoreInputStream(String aKeyStorePath) throws FileNotFoundException {
-		if (aKeyStorePath.startsWith("classpath:")) {
-			return getClass().getResourceAsStream(aKeyStorePath.substring("classpath:".length()));
-		} else if (aKeyStorePath.startsWith("file:")) {
-			return new FileInputStream(aKeyStorePath.substring("file:".length()));
-		} else {
-			return new FileInputStream(aKeyStorePath);
-		}
 	}
 
 }

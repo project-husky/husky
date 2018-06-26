@@ -26,9 +26,9 @@ import org.junit.Test;
 
 public class AttributeBuilderImplTest {
 
-	public AttributeBuilder testBuilder;
 	private String testAttributeName;
 	private String testAttributeValue;
+	public AttributeBuilder testBuilder;
 
 	@Before
 	public void setUp() throws Exception {

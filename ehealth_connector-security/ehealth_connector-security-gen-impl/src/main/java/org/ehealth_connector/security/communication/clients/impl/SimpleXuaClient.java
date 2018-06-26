@@ -69,25 +69,6 @@ public class SimpleXuaClient extends AbstractSoapClient<List<XUserAssertionRespo
 		setConfig(clientConfiguration);
 	}
 
-	@Override
-	public List<XUserAssertionResponse> send(SecurityHeaderElement aSecurityHeaderElement,
-			XUserAssertionRequest aRequest) throws ClientSendException {
-		try {
-			final HttpPost post = getHttpPost();
-
-			final WsaHeaderValue wsHeaders = new WsaHeaderValue(
-					"urn:uuid:" + UUID.randomUUID().toString(),
-					"http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/Issue", null);
-
-			post.setEntity(getSoapEntity(aSecurityHeaderElement, aRequest, wsHeaders));
-
-			return execute(post);
-		} catch (SerializeException | ParserConfigurationException | TransformerException
-				| IOException e) {
-			throw new ClientSendException(e);
-		}
-	}
-
 	private HttpEntity getSoapEntity(SecurityHeaderElement aSecurityHeaderElement,
 			XUserAssertionRequest aRequest, WsaHeaderValue wsHeaders)
 			throws SerializeException, ParserConfigurationException, TransformerException {
@@ -145,6 +126,25 @@ public class SimpleXuaClient extends AbstractSoapClient<List<XUserAssertionRespo
 		} catch (UnsupportedOperationException | IOException | TransformerFactoryConfigurationError
 				| ParserConfigurationException | SAXException | UnmarshallingException
 				| XPathExpressionException e) {
+			throw new ClientSendException(e);
+		}
+	}
+
+	@Override
+	public List<XUserAssertionResponse> send(SecurityHeaderElement aSecurityHeaderElement,
+			XUserAssertionRequest aRequest) throws ClientSendException {
+		try {
+			final HttpPost post = getHttpPost();
+
+			final WsaHeaderValue wsHeaders = new WsaHeaderValue(
+					"urn:uuid:" + UUID.randomUUID().toString(),
+					"http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/Issue", null);
+
+			post.setEntity(getSoapEntity(aSecurityHeaderElement, aRequest, wsHeaders));
+
+			return execute(post);
+		} catch (SerializeException | ParserConfigurationException | TransformerException
+				| IOException e) {
 			throw new ClientSendException(e);
 		}
 	}

@@ -29,13 +29,13 @@ import org.junit.Test;
 public class SubjectConfirmationBuilderImplTest {
 
 	private SubjectConfirmationBuilder builder;
-	private String testMethod;
-	private String testInResponseTO;
-	private Calendar testNotOnOrAfter;
-	private Calendar testNotBefore;
 	private String testAddress;
-	private String testRecepient;
+	private String testInResponseTO;
 	private org.opensaml.saml.saml2.core.SubjectConfirmation testInternalObject;
+	private String testMethod;
+	private Calendar testNotBefore;
+	private Calendar testNotOnOrAfter;
+	private String testRecepient;
 
 	@Before
 	public void setUp() throws Exception {

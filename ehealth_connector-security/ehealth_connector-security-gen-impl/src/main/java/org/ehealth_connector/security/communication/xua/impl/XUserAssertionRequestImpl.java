@@ -65,6 +65,45 @@ public class XUserAssertionRequestImpl implements XUserAssertionRequest,
 		return new AppliesToBuilderImpl().create(wspAppliesTo);
 	}
 
+	private Attribute getAttributeByName(List<Attribute> attributes, String aName) {
+		for (final Attribute attribute : attributes) {
+			if (aName.equals(attribute.getName())) {
+				return attribute;
+			}
+		}
+		return null;
+	}
+
+	private XMLObject getAttributeValueAsXmlObjectByName(List<XMLObject> unknownXMLObjects,
+			String oasisXacmlSubjectid) {
+		final List<Attribute> attributes = new ListXMLObjectHelper<Attribute>()
+				.getComponentList(AttributeImpl.class, unknownXMLObjects);
+		if (attributes != null) {
+			final Attribute attribute = getAttributeByName(attributes, oasisXacmlSubjectid);
+			if (attribute != null) {
+				final XSAny value = new ListXMLObjectHelper<XSAny>().getComponent(XSAnyImpl.class,
+						attribute.getAttributeValues());
+				return value.getUnknownXMLObjects().get(0);
+			}
+		}
+		return null;
+	}
+
+	private String getAttributeValueByName(List<XMLObject> unknownXMLObjects,
+			String oasisXacmlSubjectid) {
+		final List<Attribute> attributes = new ListXMLObjectHelper<Attribute>()
+				.getComponentList(AttributeImpl.class, unknownXMLObjects);
+		if (attributes != null) {
+			final Attribute attribute = getAttributeByName(attributes, oasisXacmlSubjectid);
+			if (attribute != null) {
+				final XSString value = new ListXMLObjectHelper<XSString>()
+						.getComponent(XSStringImpl.class, attribute.getAttributeValues());
+				return value.getValue();
+			}
+		}
+		return null;
+	}
+
 	@Override
 	public String getContext() {
 		return requestSecurityToken.getContext();
@@ -155,45 +194,6 @@ public class XUserAssertionRequestImpl implements XUserAssertionRequest,
 	@Override
 	public RequestSecurityToken getWrappedObject() {
 		return requestSecurityToken;
-	}
-
-	private Attribute getAttributeByName(List<Attribute> attributes, String aName) {
-		for (final Attribute attribute : attributes) {
-			if (aName.equals(attribute.getName())) {
-				return attribute;
-			}
-		}
-		return null;
-	}
-
-	private XMLObject getAttributeValueAsXmlObjectByName(List<XMLObject> unknownXMLObjects,
-			String oasisXacmlSubjectid) {
-		final List<Attribute> attributes = new ListXMLObjectHelper<Attribute>()
-				.getComponentList(AttributeImpl.class, unknownXMLObjects);
-		if (attributes != null) {
-			final Attribute attribute = getAttributeByName(attributes, oasisXacmlSubjectid);
-			if (attribute != null) {
-				final XSAny value = new ListXMLObjectHelper<XSAny>().getComponent(XSAnyImpl.class,
-						attribute.getAttributeValues());
-				return value.getUnknownXMLObjects().get(0);
-			}
-		}
-		return null;
-	}
-
-	private String getAttributeValueByName(List<XMLObject> unknownXMLObjects,
-			String oasisXacmlSubjectid) {
-		final List<Attribute> attributes = new ListXMLObjectHelper<Attribute>()
-				.getComponentList(AttributeImpl.class, unknownXMLObjects);
-		if (attributes != null) {
-			final Attribute attribute = getAttributeByName(attributes, oasisXacmlSubjectid);
-			if (attribute != null) {
-				final XSString value = new ListXMLObjectHelper<XSString>()
-						.getComponent(XSStringImpl.class, attribute.getAttributeValues());
-				return value.getValue();
-			}
-		}
-		return null;
 	}
 
 }

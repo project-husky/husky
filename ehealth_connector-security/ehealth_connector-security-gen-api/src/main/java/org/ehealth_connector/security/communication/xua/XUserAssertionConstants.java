@@ -27,13 +27,13 @@ package org.ehealth_connector.security.communication.xua;
  */
 public class XUserAssertionConstants {
 
-	public static final String OASIS_XACML_SUBJECTID = "urn:oasis:names:tc:xacml:1.0:subject:subject-id";
-	public static final String OASIS_XACML_ROLE = "urn:oasis:names:tc:xacml:2.0:subject:role";
-	public static final String OASIS_XACML_ORGANISATIONID = "urn:oasis:names:tc:xspa:1.0:subject:organization-id";
-	public static final String OASIS_XACML_ORGANISATION = "urn:oasis:names:tc:xspa:1.0:subject:organization";
-	public static final String OASIS_XACML_RESOURCEID = "urn:oasis:names:tc:xacml:2.0:resource:resource-id";
-	public static final String OASIS_XACML_PURPOSEOFUSE = "urn:oasis:names:tc:xspa:1.0:subject:purposeofuse";
-
 	public static final String OASIS_WSS_SAML_PROFILE_11_SAMLV20 = "http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0";
+	public static final String OASIS_XACML_ORGANISATION = "urn:oasis:names:tc:xspa:1.0:subject:organization";
+	public static final String OASIS_XACML_ORGANISATIONID = "urn:oasis:names:tc:xspa:1.0:subject:organization-id";
+	public static final String OASIS_XACML_PURPOSEOFUSE = "urn:oasis:names:tc:xspa:1.0:subject:purposeofuse";
+	public static final String OASIS_XACML_RESOURCEID = "urn:oasis:names:tc:xacml:2.0:resource:resource-id";
+	public static final String OASIS_XACML_ROLE = "urn:oasis:names:tc:xacml:2.0:subject:role";
+
+	public static final String OASIS_XACML_SUBJECTID = "urn:oasis:names:tc:xacml:1.0:subject:subject-id";
 
 }

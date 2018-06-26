@@ -20,25 +20,13 @@ package org.ehealth_connector.security.saml2;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Enumeration of the possible StatusCodes</div>
- * <div class="de">Enumerierung der m&ooml;glichen StatusCodes</div>
+ * <div class="de">Enumerierung der möglichen StatusCodes</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
  *
  */
 public enum StatusCode {
-
-	/** URI for Success status code. */
-	SUCCESS("urn:oasis:names:tc:SAML:2.0:status:Success"),
-
-	/** URI for Requester status code. */
-	REQUESTER("urn:oasis:names:tc:SAML:2.0:status:Requester"),
-
-	/** URI for Responder status code. */
-	RESPONDER("urn:oasis:names:tc:SAML:2.0:status:Responder"),
-
-	/** URI for VersionMismatch status code. */
-	VERSION_MISMATCH("urn:oasis:names:tc:SAML:2.0:status:VersionMismatch"),
 
 	/** URI for AuthnFailed status code. */
 	AUTHN_FAILED("urn:oasis:names:tc:SAML:2.0:status:AuthnFailed"),
@@ -82,8 +70,17 @@ public enum StatusCode {
 	/** URI for RequestVersionTooLow status code. */
 	REQUEST_VERSION_TOO_LOW("urn:oasis:names:tc:SAML:2.0:status:RequestVersionTooLow"),
 
+	/** URI for Requester status code. */
+	REQUESTER("urn:oasis:names:tc:SAML:2.0:status:Requester"),
+
 	/** URI for ResourceNotRecognized status code. */
 	RESOURCE_NOT_RECOGNIZED("urn:oasis:names:tc:SAML:2.0:status:ResourceNotRecognized"),
+
+	/** URI for Responder status code. */
+	RESPONDER("urn:oasis:names:tc:SAML:2.0:status:Responder"),
+
+	/** URI for Success status code. */
+	SUCCESS("urn:oasis:names:tc:SAML:2.0:status:Success"),
 
 	/** URI for TooManyResponses status code. */
 	TOO_MANY_RESPONSES("urn:oasis:names:tc:SAML:2.0:status:TooManyResponses"),
@@ -95,8 +92,18 @@ public enum StatusCode {
 	UNKNOWN_PRINCIPAL("urn:oasis:names:tc:SAML:2.0:status:UnknownPrincipal"),
 
 	/** URI for UnsupportedBinding status code. */
-	UNSUPPORTED_BINDING("urn:oasis:names:tc:SAML:2.0:status:UnsupportedBinding");
+	UNSUPPORTED_BINDING("urn:oasis:names:tc:SAML:2.0:status:UnsupportedBinding"),
 
+	/** URI for VersionMismatch status code. */
+	VERSION_MISMATCH("urn:oasis:names:tc:SAML:2.0:status:VersionMismatch");
+
+	/**
+	 * Gets the enum.
+	 *
+	 * @param code
+	 *            the code
+	 * @return the enum
+	 */
 	public static StatusCode getEnum(String code) {
 		for (final StatusCode x : values()) {
 			if (x.toString().equals(code)) {
@@ -106,8 +113,15 @@ public enum StatusCode {
 		return null;
 	}
 
+	/** The status code. */
 	private String code;
 
+	/**
+	 * Instantiates a new status code.
+	 *
+	 * @param aCode
+	 *            the a code
+	 */
 	StatusCode(String aCode) {
 		this.code = aCode;
 	}

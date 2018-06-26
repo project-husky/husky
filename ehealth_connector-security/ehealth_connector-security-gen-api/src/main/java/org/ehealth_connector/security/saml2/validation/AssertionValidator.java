@@ -22,11 +22,14 @@ import org.ehealth_connector.security.saml2.Assertion;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the Methods for the validation of Assertions.</div>
- * <div class="de">Interface beschreibend die Methoden für die Validierung von Assertions.</div>
+ * <div class="de">Interface welches die Methoden für die Validierung von Assertions beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public interface AssertionValidator extends GenericValidator<Assertion> {
+
+	// There are no special methods defined, but the interface has to be
+	// declared for selection reasons.
 
 }

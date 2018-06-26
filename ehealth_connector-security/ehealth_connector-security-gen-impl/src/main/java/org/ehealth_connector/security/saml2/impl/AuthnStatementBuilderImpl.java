@@ -36,8 +36,8 @@ import org.opensaml.saml.saml2.core.AuthnContextClassRef;
 public class AuthnStatementBuilderImpl implements AuthnStatementBuilder,
 		SecurityObjectBuilder<org.opensaml.saml.saml2.core.AuthnStatement, AuthnStatement> {
 
-	private org.opensaml.saml.saml2.core.AuthnStatement wrappedObject;
 	private AuthnContextClassRef authnContextClassRef;
+	private org.opensaml.saml.saml2.core.AuthnStatement wrappedObject;
 
 	public AuthnStatementBuilderImpl() {
 		wrappedObject = new org.opensaml.saml.saml2.core.impl.AuthnStatementBuilder().buildObject();

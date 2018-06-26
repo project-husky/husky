@@ -34,8 +34,8 @@ import org.opensaml.core.xml.XMLObject;
 public class InstanceIdentifierImpl extends AbstractXMLObject
 		implements OpenSamlInstanceIdentifier {
 
-	protected String root;
 	protected String extension;
+	protected String root;
 
 	protected InstanceIdentifierImpl(String namespaceURI, String elementLocalName,
 			String namespacePrefix) {

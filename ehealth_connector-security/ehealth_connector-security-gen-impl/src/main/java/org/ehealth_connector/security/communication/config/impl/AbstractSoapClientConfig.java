@@ -28,14 +28,14 @@ import org.ehealth_connector.security.communication.config.SoapClientConfig;
  * <!-- @formatter:on -->
  */
 public class AbstractSoapClientConfig extends AbstractClientConfig implements SoapClientConfig {
-	public String portName;
-	public String portNamespace;
-	public String serviceName;
-	public String serviceNamespace;
-
 	public String keyStoreFile;
 	public String keyStorePassword;
 	public String keyStoreType;
+	public String portName;
+
+	public String portNamespace;
+	public String serviceName;
+	public String serviceNamespace;
 
 	private boolean simple;
 

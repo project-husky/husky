@@ -20,7 +20,7 @@ package org.ehealth_connector.security.saml2;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the AttributeBuilder. </div>
- * <div class="de">Interface beschreibt die Methoden des AttributeBuilder.</div>
+ * <div class="de">Interface welches die Methoden des AttributeBuilder beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -57,7 +57,7 @@ public interface AttributeBuilder extends SimpleBuilder<Attribute> {
 	 *
 	 * @param aName
 	 * <div class="en">the name to be added.</div>
-	 * <div class="de">das name welches hinzugefügt werden soll.</div>
+	 * <div class="de">der Name welcher hinzugefügt werden soll.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @return
@@ -99,7 +99,7 @@ public interface AttributeBuilder extends SimpleBuilder<Attribute> {
 	 *
 	 * @param aValue
 	 * <div class="en">the value to be added.</div>
-	 * <div class="de">der WErt welches hinzugefügt werden soll.</div>
+	 * <div class="de">der Wert welcher hinzugefügt werden soll.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @return

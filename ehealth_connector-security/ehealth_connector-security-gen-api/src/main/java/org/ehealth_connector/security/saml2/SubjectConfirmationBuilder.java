@@ -22,7 +22,7 @@ import java.util.Calendar;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the SubjectConfirmation.</div>
- * <div class="de">Interface beschreibt die Methoden des SubjectConfirmation.</div>
+ * <div class="de">Interface welches die Methoden des SubjectConfirmation beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -38,7 +38,7 @@ public interface SubjectConfirmationBuilder extends SimpleBuilder<SubjectConfirm
 	 *
 	 * @param aAddress
 	 *  <div class="en">the Address to be set</div>
-	 * 	<div class="de">die Address die gesetzt werden soll</div>
+	 * 	<div class="de">die Addresse die gesetzt werden soll</div>
 	 *  <div class="fr"></div>
 	 *  <div class="it"></div>
 	 * @return

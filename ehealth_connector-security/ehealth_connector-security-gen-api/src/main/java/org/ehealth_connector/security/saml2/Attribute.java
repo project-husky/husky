@@ -20,7 +20,7 @@ package org.ehealth_connector.security.saml2;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of Attribute. </div>
- * <div class="de">Interface beschreibt die Methoden von Attribute.</div>
+ * <div class="de">Interface welches die Methoden von Attribute beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

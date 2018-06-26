@@ -30,8 +30,8 @@ import org.opensaml.xmlsec.encryption.EncryptedData;
 public class EncryptedAssertionBuilderImplTest {
 
 	private EncryptedAssertionBuilderImpl builder;
-	private org.opensaml.saml.saml2.core.EncryptedAssertion testInnerObject;
 	private String testId;
+	private org.opensaml.saml.saml2.core.EncryptedAssertion testInnerObject;
 
 	@Before
 	public void setUp() throws Exception {

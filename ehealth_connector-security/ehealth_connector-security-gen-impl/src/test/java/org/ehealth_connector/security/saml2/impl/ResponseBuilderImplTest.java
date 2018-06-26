@@ -32,8 +32,8 @@ public class ResponseBuilderImplTest {
 
 	private ResponseBuilderImpl responseBuilder;
 	private String testConsent;
-	private DateTime testIssueInstant;
 	private String testId;
+	private DateTime testIssueInstant;
 
 	@Before
 	public void setUp() throws Exception {

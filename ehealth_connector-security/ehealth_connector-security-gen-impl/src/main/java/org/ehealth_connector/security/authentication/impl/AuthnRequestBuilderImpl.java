@@ -49,10 +49,10 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder,
 		SecurityObjectBuilder<org.opensaml.saml.saml2.core.AuthnRequest, AuthnRequest> {
 
 	private org.opensaml.saml.saml2.core.AuthnRequest authnRequest;
-	private NameIDPolicy nameIDPolicy;
-	private Issuer issuer;
-	private org.opensaml.saml.saml2.core.Subject subject;
 	private IDPList idpList;
+	private Issuer issuer;
+	private NameIDPolicy nameIDPolicy;
+	private org.opensaml.saml.saml2.core.Subject subject;
 
 	public AuthnRequestBuilderImpl() {
 		final org.opensaml.saml.saml2.core.impl.AuthnRequestBuilder builder = new org.opensaml.saml.saml2.core.impl.AuthnRequestBuilder();

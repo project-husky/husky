@@ -66,6 +66,50 @@ public class SignCryptModuleImpl implements SignCryptModule {
 
 	/**
 	 *
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the desired BasicX509Credential for signing by alias.</div>
+	 * <div class="de">Method um das BasicX509Credential referenziert durch das alias zu bekommen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param aSigningAlias
+	 * <div class="en">the alias</div>
+	 * <div class="de">Das alias</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * @return
+	 * <div class="en">the BasicX509Credential with the corresponding certificate and key</div>
+	 * <div class="de">Das BasicX509Credential mit dem entspechenden Zertifikat und Key</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * @throws SigningException
+	 * <div class="en">will be thrown when an error occures loading the BasicX509Credential from keystore.</div>
+	 *  <div class="de">wird geworfen wenn eine fehler beim laden des BasicX509Credential aus dem keystore auftritt</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	private BasicX509Credential getSigningCredential(String aSigningAlias) throws SigningException {
+		try {
+			final PrivateKeyEntry privateKeyEntry = (PrivateKeyEntry) keyStore.getEntry(
+					aSigningAlias, new PasswordProtection(keyStorePassword.toCharArray()));
+			final PrivateKey privateKey = privateKeyEntry.getPrivateKey();
+			final X509Certificate certificate = (X509Certificate) privateKeyEntry.getCertificate();
+
+			LOG.debug(certificate.getIssuerDN().getName());
+			LOG.debug(certificate.getSubjectDN().getName());
+
+			final BasicX509Credential credential = new BasicX509Credential(certificate, privateKey);
+			credential.setEntityId(aSigningAlias);
+
+			return credential;
+		} catch (NoSuchAlgorithmException | UnrecoverableEntryException | KeyStoreException e) {
+			throw new SigningException(e);
+		}
+	}
+
+	/**
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.crypt.SignCryptModule#setPki(java.security.KeyStore,
@@ -124,50 +168,6 @@ public class SignCryptModuleImpl implements SignCryptModule {
 
 			}
 		} catch (SecurityException | MarshallingException | SignatureException e) {
-			throw new SigningException(e);
-		}
-	}
-
-	/**
-	 *
-	 * <!-- @formatter:off -->
-	 * <div class="en">Method to get the desired BasicX509Credential for signing by alias.</div>
-	 * <div class="de">Method um das BasicX509Credential referenziert durch das alias zu bekommen.</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>
-	 *
-	 * @param aSigningAlias
-	 * <div class="en">the alias</div>
-	 * <div class="de">Das alias</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>
-	 * @return
-	 * <div class="en">the BasicX509Credential with the corresponding certificate and key</div>
-	 * <div class="de">Das BasicX509Credential mit dem entspechenden Zertifikat und Key</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>
-	 * @throws SigningException
-	 * <div class="en">will be thrown when an error occures loading the BasicX509Credential from keystore.</div>
-	 *  <div class="de">wird geworfen wenn eine fehler beim laden des BasicX509Credential aus dem keystore auftritt</div>
-	 *  <div class="fr"></div>
-	 *  <div class="it"></div>
-	 * <!-- @formatter:on -->
-	 */
-	private BasicX509Credential getSigningCredential(String aSigningAlias) throws SigningException {
-		try {
-			final PrivateKeyEntry privateKeyEntry = (PrivateKeyEntry) keyStore.getEntry(
-					aSigningAlias, new PasswordProtection(keyStorePassword.toCharArray()));
-			final PrivateKey privateKey = privateKeyEntry.getPrivateKey();
-			final X509Certificate certificate = (X509Certificate) privateKeyEntry.getCertificate();
-
-			LOG.debug(certificate.getIssuerDN().getName());
-			LOG.debug(certificate.getSubjectDN().getName());
-
-			final BasicX509Credential credential = new BasicX509Credential(certificate, privateKey);
-			credential.setEntityId(aSigningAlias);
-
-			return credential;
-		} catch (NoSuchAlgorithmException | UnrecoverableEntryException | KeyStoreException e) {
 			throw new SigningException(e);
 		}
 	}

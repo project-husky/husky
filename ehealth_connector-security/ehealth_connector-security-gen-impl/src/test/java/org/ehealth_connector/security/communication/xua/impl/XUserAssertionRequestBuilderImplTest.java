@@ -36,22 +36,22 @@ import org.opensaml.soap.wstrust.impl.RequestSecurityTokenBuilder;
 public class XUserAssertionRequestBuilderImplTest {
 
 	private XUserAssertionRequestBuilderImpl builder;
-	private String testDialect;
+	private String testAddress;
+	private AppliesTo testAppliesTo;
 	private String testContext;
-	private String testSubjectId;
-	private String testSubjectName;
+	private String testDialect;
+	private RequestSecurityToken testInternalFromOutside;
 	private String testOrganizationId;
 	private String testOrganizationName;
-	private String testResourceId;
-	private RequestSecurityToken testInternalFromOutside;
-	private String testRoleId;
-	private AppliesTo testAppliesTo;
-	private String testAddress;
-	private PurposeOfUse testPurposeOfUse;
 	private String testPoUCode;
 	private String testPoUCodeSystem;
 	private String testPoUCodeSystemName;
 	private String testPoUDisplayName;
+	private PurposeOfUse testPurposeOfUse;
+	private String testResourceId;
+	private String testRoleId;
+	private String testSubjectId;
+	private String testSubjectName;
 
 	@Before
 	public void setUp() throws Exception {

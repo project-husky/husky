@@ -31,10 +31,10 @@ import org.w3c.dom.Element;
 
 public class XUserAssertionRequestSerializerImplTest {
 
-	private XUserAssertionRequestSerializerImpl testSerializer;
-	private XUserAssertionRequest testXmlObject;
 	private String testContext;
 	private String testDialect;
+	private XUserAssertionRequestSerializerImpl testSerializer;
+	private XUserAssertionRequest testXmlObject;
 
 	@Before
 	public void setUp() throws Exception {

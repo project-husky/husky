@@ -30,10 +30,10 @@ import org.junit.Test;
 public class AuthnStatementBuilderImplTest {
 
 	private AuthnStatementBuilder builder;
-	private Calendar testAuthnInstance;
-	private Calendar testSessionNotOnOrAfter;
-	private String testSessionIndex;
 	private String testAuthnContextClassRef;
+	private Calendar testAuthnInstance;
+	private String testSessionIndex;
+	private Calendar testSessionNotOnOrAfter;
 
 	@Before
 	public void setUp() throws Exception {

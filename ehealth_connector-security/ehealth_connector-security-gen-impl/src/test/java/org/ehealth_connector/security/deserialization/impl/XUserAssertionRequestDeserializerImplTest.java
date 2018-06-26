@@ -31,9 +31,9 @@ import org.w3c.dom.Element;
 public class XUserAssertionRequestDeserializerImplTest {
 
 	private XUserAssertionRequestDeserializerImpl testDeserializer;
-	private String testXmlString;
-	private Element testXmlElement;
 	private byte[] testXmlByteArray;
+	private Element testXmlElement;
+	private String testXmlString;
 
 	@Before
 	public void setUp() throws Exception {

@@ -20,7 +20,7 @@ package org.ehealth_connector.security.exceptions;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Class implementing ClientSendException.</div>
- * <div class="de">Klasse welche die ClientSendException definiert.</div>
+ * <div class="de">Klasse welche die ClientSendException implementiert.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
