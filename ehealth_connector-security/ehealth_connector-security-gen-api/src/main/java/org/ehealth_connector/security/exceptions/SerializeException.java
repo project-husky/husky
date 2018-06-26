@@ -36,7 +36,7 @@ public class SerializeException extends Exception {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Default constructor to instanciate the object.</div>
-	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
+	 * <div class="de">Default Konstruktor für die Instanziierung des Objekts.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -50,13 +50,13 @@ public class SerializeException extends Exception {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Default constructor to instanciate the object.</div>
-	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
+	 * <div class="de">Default Konstruktor für die Instanziierung des Objekts.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @param message
 	 * <div class="en">the error message to be set</div>
-	 * <div class="de">Die Errormessage welche gesetzt werde soll</div>
+	 * <div class="de">Die Fehlermeldung welche gesetzt werden soll</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -69,7 +69,7 @@ public class SerializeException extends Exception {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Default constructor to instanciate the object.</div>
-	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
+	 * <div class="de">Default Konstruktor für die Instanziierung des Objekts.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *

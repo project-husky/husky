@@ -51,7 +51,7 @@ public class LogSoapMessageHandler implements SOAPHandler<SOAPMessageContext> {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Default constructor to instanciate the object.</div>
-	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
+	 * <div class="de">Default Konstruktor für die Instanziierung des Objekts.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

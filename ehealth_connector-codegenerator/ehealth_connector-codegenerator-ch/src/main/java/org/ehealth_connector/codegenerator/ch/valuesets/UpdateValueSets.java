@@ -364,12 +364,12 @@ public class UpdateValueSets {
 	 *
 	 * @param annotation
 	 *            The annotation that holds the parameter.
-	 * @param Parametername
+	 * @param parameterName
 	 *            The name of the parameter to replace the value of.
 	 * @param value
 	 *            The value to set.
 	 */
-	private static void replaceParameterValue(AnnotationExpr annotationExpr, String Parametername,
+	private static void replaceParameterValue(AnnotationExpr annotationExpr, String parameterName,
 			String value) {
 		List<Node> parameters = annotationExpr.getChildNodes();
 		for (Node parameter : parameters) {
