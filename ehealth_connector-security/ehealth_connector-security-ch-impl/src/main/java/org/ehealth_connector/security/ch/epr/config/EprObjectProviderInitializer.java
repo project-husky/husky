@@ -22,7 +22,7 @@ import org.opensaml.core.xml.config.AbstractXMLObjectProviderInitializer;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Interface XUserAssertionRequest and SecurityObject</div>
- * <div class="de">Implementations Klasse von  Interface XUserAssertionRequest und SecurityObject</div>
+ * <div class="de">Implementations Klasse von Interface XUserAssertionRequest und SecurityObject</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

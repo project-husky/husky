@@ -44,12 +44,35 @@ import org.w3c.dom.Element;
  */
 public class OpenSaml2SerializerImpl implements OpenSaml2Serializer {
 
+	/**
+	 * Instantiates a new OpenSaml2SerializerImpl.
+	 */
 	public OpenSaml2SerializerImpl() {
 		System.setProperty("javax.xml.parsers.DocumentBuilderFactory",
 				"org.apache.xerces.jaxp.DocumentBuilderFactoryImpl");
 	}
 
-	private ByteArrayOutputStream serializeToBytArrayOutputStream(XMLObject aXmlObject)
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.serialization.OpenSaml2Serializer#serializeToByteArray(org.opensaml.core.xml.XMLObject)
+	 */
+	@Override
+	public byte[] serializeToByteArray(XMLObject aXmlObject) throws SerializeException {
+		return serializeToByteArrayOutputStream(aXmlObject).toByteArray();
+	}
+
+	/**
+	 * Serialize to byte array output stream.
+	 *
+	 * @param aXmlObject
+	 *            the a xml object
+	 * @return the byte array output stream
+	 * @throws SerializeException
+	 *             the serialize exception
+	 */
+	private ByteArrayOutputStream serializeToByteArrayOutputStream(XMLObject aXmlObject)
 			throws SerializeException {
 		try {
 			final Element element = serializeToXml(aXmlObject);
@@ -72,22 +95,11 @@ public class OpenSaml2SerializerImpl implements OpenSaml2Serializer {
 	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.serialization.OpenSaml2Serializer#serializeToByteArray(org.opensaml.core.xml.XMLObject)
-	 */
-	@Override
-	public byte[] serializeToByteArray(XMLObject aXmlObject) throws SerializeException {
-		return serializeToBytArrayOutputStream(aXmlObject).toByteArray();
-	}
-
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
 	 * @see org.ehealth_connector.security.serialization.OpenSaml2Serializer#serializeToString(org.opensaml.core.xml.XMLObject)
 	 */
 	@Override
 	public String serializeToString(XMLObject aXmlObject) throws SerializeException {
-		return serializeToBytArrayOutputStream(aXmlObject).toString();
+		return serializeToByteArrayOutputStream(aXmlObject).toString();
 	}
 
 	/**

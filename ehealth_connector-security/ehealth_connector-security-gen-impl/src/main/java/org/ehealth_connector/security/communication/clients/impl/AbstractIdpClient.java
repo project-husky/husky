@@ -58,6 +58,7 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class AbstractIdpClient implements IdpClient {
 
+	/** The logger. */
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	/**
@@ -80,7 +81,7 @@ public abstract class AbstractIdpClient implements IdpClient {
 	 * <div class="it"></div>
 	 * @throws Throwable
 	 * <div class="en">will be thrown if an error occures.</div>
-	 * <div class="de">wird geworfen wenn eine Fehler auftritt.</div>
+	 * <div class="de">wird geworfen wenn ein Fehler auftritt.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -109,7 +110,7 @@ public abstract class AbstractIdpClient implements IdpClient {
 	 *
 	 * @param config
 	 * <div class="en">the client configuration</div>
-	 * <div class="de">Die client konfiguration</div>
+	 * <div class="de">Die Client Konfiguration</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @return
@@ -119,7 +120,7 @@ public abstract class AbstractIdpClient implements IdpClient {
 	 * <div class="it"></div>
 	 * @throws UnsupportedEncodingException
 	 * <div class="en">will be thrown if an error occures.</div>
-	 * <div class="de">wird geworfen wenn eine Fehler auftritt.</div>
+	 * <div class="de">wird geworfen wenn ein Fehler auftritt.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -171,17 +172,17 @@ public abstract class AbstractIdpClient implements IdpClient {
 	 *
 	 * @param response
 	 * <div class="en">the http response</div>
-	 * <div class="de">der http response</div>
+	 * <div class="de">die http response</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the Response</div>
-	 * <div class="de">der Response</div>
+	 * <div class="de">die Response</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @throws ClientSendException
 	 * <div class="en">will be thrown if an error occures.</div>
-	 * <div class="de">wird geworfen wenn eine Fehler auftritt.</div>
+	 * <div class="de">wird geworfen wenn ein Fehler auftritt.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

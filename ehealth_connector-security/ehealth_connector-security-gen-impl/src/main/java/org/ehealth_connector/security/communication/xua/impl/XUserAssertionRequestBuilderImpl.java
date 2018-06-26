@@ -46,7 +46,7 @@ import org.opensaml.soap.wstrust.impl.TokenTypeBuilder;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for XUserAssertionRequest building.</div>
- * <div class="de">Die Klasse implementiert das entsprechende interface um XUserAssertionRequest bilden zu k&ooml;nnen.</div>
+ * <div class="de">Die Klasse implementiert das entsprechende Interface um XUserAssertionRequests bilden zu können.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

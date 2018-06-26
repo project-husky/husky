@@ -24,13 +24,13 @@ import org.w3c.dom.Element;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Helper class providing methods to add a fragment of an xml document to an other xml element as child.</div>
- * <div class="de">Helferklasse welche Methoden für das Kopieren von xml Teilen in ein Element als Kind zur verfügung stellt.</div>
+ * <div class="de">Helferklasse welche Methoden für das Kopieren von XML Teilen in ein Element als Kind zur Verfügung stellt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  *
  * <!-- @formatter:on -->
  */
-public final class XMLAppender {
+public final class XmlAppender {
 
 	public static void addFragment(Element sourceElement, Element destinationElement) {
 

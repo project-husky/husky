@@ -33,7 +33,7 @@ public interface XUserAssertionRequest {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the AppliesTo attribute value.</div>
-	 * <div class="de">Method um den Wert des AppliesTo Attributs zu erhalten.</div>
+	 * <div class="de">Methode um den Wert des AppliesTo Attributs zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -50,7 +50,7 @@ public interface XUserAssertionRequest {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the context value.</div>
-	 * <div class="de">Method um den Inhalt des Context zu erhalten.</div>
+	 * <div class="de">Methode um den Inhalt des Context zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -67,7 +67,7 @@ public interface XUserAssertionRequest {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the dialect value.</div>
-	 * <div class="de">Method um den Inhalt des Dialect zu erhalten.</div>
+	 * <div class="de">Methode um den Inhalt des Dialect zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -84,7 +84,7 @@ public interface XUserAssertionRequest {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the organisation id of the accessor.</div>
-	 * <div class="de">Method um die Id der Organisation des Zugreifers zu erhalten.</div>
+	 * <div class="de">Methode um die Id der Organisation des Zugreifers zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -100,7 +100,7 @@ public interface XUserAssertionRequest {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the organisation name of the accessor.</div>
-	 * <div class="de">Method um den Namen der Organisation des Zugreifers zu erhalten.</div>
+	 * <div class="de">Methode um den Namen der Organisation des Zugreifers zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -117,7 +117,7 @@ public interface XUserAssertionRequest {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the purpose of use.</div>
-	 * <div class="de">Method um den Grund des Zugriffs zu erhalten.</div>
+	 * <div class="de">Methode um den Grund des Zugriffs zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -134,7 +134,7 @@ public interface XUserAssertionRequest {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the request type.</div>
-	 * <div class="de">Method um den Requst Typ zu erhalten.</div>
+	 * <div class="de">Methode um den Requst Typ zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -219,7 +219,7 @@ public interface XUserAssertionRequest {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the token type.</div>
-	 * <div class="de">Method um den Token Typ zu erhalten.</div>
+	 * <div class="de">Methode um den Token Typ zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *

@@ -22,7 +22,7 @@ import org.ehealth_connector.security.communication.config.ClientConfigBuilder;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the interface ClientConfigBuilder serving as builder to create config for client with basic authentication.</div>
- * <div class="de">Klasser die das Interface ClienConfiguilder implementiert. Dient dazu eine Clientkonfiguration zu bilden für die Kommunikation mit BasicAuthentication.</div>
+ * <div class="de">Klasse die das Interface ClienConfiguilder implementiert. Dient dazu eine Client Konfiguration zu bilden für die Kommunikation mit BasicAuthentication.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

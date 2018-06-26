@@ -33,7 +33,7 @@ import org.opensaml.soap.wstrust.Status;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Interface XUserAssertionResponse and SecurityObject</div>
- * <div class="de">Implementations Klasse von  Interface XUserAssertionResponse und SecurityObject</div>
+ * <div class="de">Implementations Klasse von Interface XUserAssertionResponse und SecurityObject</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

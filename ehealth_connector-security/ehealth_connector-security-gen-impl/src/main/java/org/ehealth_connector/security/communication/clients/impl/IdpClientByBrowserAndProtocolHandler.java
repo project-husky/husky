@@ -45,8 +45,8 @@ import org.slf4j.LoggerFactory;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Class implementing the idp client starting a browser for login..</div>
- * <div class="de">Klasse die den idp client für das login mit dem browser implementiert.</div>
+ * <div class="en">Class implementing the IdP Client starting a browser for login..</div>
+ * <div class="de">Klasse die den IdP Client für das Login mit dem Browser implementiert.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

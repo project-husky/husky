@@ -40,6 +40,9 @@ import org.w3c.dom.Element;
  */
 public class OpenSaml2DeserializerImpl<T> implements OpenSaml2Deserializer<T> {
 
+	/**
+	 * Instantiates a new OpenSaml2DeserializerImpl.
+	 */
 	public OpenSaml2DeserializerImpl() {
 		System.setProperty("javax.xml.parsers.DocumentBuilderFactory",
 				"org.apache.xerces.jaxp.DocumentBuilderFactoryImpl");

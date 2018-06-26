@@ -25,8 +25,8 @@ import org.w3c.dom.Element;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Class implementing the marshaller for OpenSamlInstanceIdentifier.</div>
- * <div class="de">Die Klasse implementiert den Marshaller für OpenSamlInstanceIdentifier.</div>
+ * <div class="en">Class implementing the marshaller for OpenSaml InstanceIdentifier.</div>
+ * <div class="de">Die Klasse implementiert den Marshaller für OpenSaml InstanceIdentifier.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

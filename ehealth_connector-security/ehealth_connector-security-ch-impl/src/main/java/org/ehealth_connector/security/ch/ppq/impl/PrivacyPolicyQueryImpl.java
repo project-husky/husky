@@ -33,7 +33,7 @@ import org.opensaml.xacml.profile.saml.XACMLPolicyQueryType;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for PatientPrivacyQuery.</div>
- * <div class="de">Die Klasse implementiert das entsprechende interface PatientPrivacyQuery.</div>
+ * <div class="de">Die Klasse implementiert das entsprechende Interface PatientPrivacyQuery.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

@@ -34,7 +34,7 @@ import org.slf4j.LoggerFactory;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the internface SOAPHandler to add WSA header.</div>
- * <div class="de">Klasse die das interface SOAPHandler implementiert um einer message WSA headers hinzuzufügen.</div>
+ * <div class="de">Klasse die das Interface SOAPHandler implementiert um einer Message WSA headers hinzuzufügen.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

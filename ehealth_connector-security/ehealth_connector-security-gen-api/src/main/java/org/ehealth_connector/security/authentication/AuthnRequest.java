@@ -52,7 +52,7 @@ public interface AuthnRequest extends Base {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get assertion consumer service url.</div>
-	 * <div class="de">Method um die Assertion Consumer Service URL zu holen .</div>
+	 * <div class="de">Methode um die Assertion Consumer Service URL zu holen .</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
@@ -65,7 +65,7 @@ public interface AuthnRequest extends Base {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get attribute consumer service index.</div>
-	 * <div class="de">Method um den Attribute Consumer Service Index zu holen.</div>
+	 * <div class="de">Methode um den Attribute Consumer Service Index zu holen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

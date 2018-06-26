@@ -32,23 +32,29 @@ import org.ehealth_connector.security.saml2.Condition;
 public class ConditionImpl
 		implements Condition, SecurityObject<org.opensaml.saml.saml2.core.Condition> {
 
+	/** The wrapped object. */
 	private org.opensaml.saml.saml2.core.Condition wrappedObject;
 
 	/**
-	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Default constructor to instanciate the object.</div>
 	 * <div class="de">Default Konstruktor für die Instanziierung des Objekts.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
-	 * @param aInternalObject
 	 * <!-- @formatter:on -->
+	 *
+	 * @param aInternalObject the Condition
 	 */
 	protected ConditionImpl(org.opensaml.saml.saml2.core.Condition aInternalObject) {
 		wrappedObject = aInternalObject;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.core.SecurityObject#getWrappedObject()
+	 */
 	@Override
 	public org.opensaml.saml.saml2.core.Condition getWrappedObject() {
 		return wrappedObject;

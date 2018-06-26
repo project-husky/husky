@@ -24,7 +24,7 @@ import org.w3c.dom.Element;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the generic methods of OpenSaml2Serializer for the templated type T.</div>
- * <div class="de">Interface beschreibt die Methoden des OpenSaml2Serializer für den templated Typ T</div>
+ * <div class="de">Interface welches die Methoden des OpenSaml2Serializer für den templated Typ T beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -34,7 +34,7 @@ public interface OpenSaml2Serializer {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to serialize an XMLObject to an byte array.</div>
-	 * <div class="de">Methode um ein XMLObject in einen byte Array zu serialisieren.</div>
+	 * <div class="de">Methode um ein XMLObject in ein Byte Array zu serialisieren.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @param aObject
@@ -44,7 +44,7 @@ public interface OpenSaml2Serializer {
 	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the serialized byte array.</div>
-	 * <div class="de">das serialisierte byte Array.</div>
+	 * <div class="de">das serialisierte Byte Array.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @throws SerializeException
@@ -69,7 +69,7 @@ public interface OpenSaml2Serializer {
 	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the serialized String.</div>
-	 * <div class="de">das serialisierte String.</div>
+	 * <div class="de">der serialisierte String.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @throws SerializeException
@@ -84,8 +84,8 @@ public interface OpenSaml2Serializer {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to serialize an XMLObject to an Element.</div>
-	 * <div class="de">Methode um ein XMLObject in ein Element zu serialisieren.</div>
+	 * <div class="en">Method to serialize an XMLObject to an xml element.</div>
+	 * <div class="de">Methode um ein XMLObject in ein XML Element zu serialisieren.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @param aObject
@@ -94,8 +94,8 @@ public interface OpenSaml2Serializer {
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @return
-	 * <div class="en">the serialized Element.</div>
-	 * <div class="de">das serialisierte Element.</div>
+	 * <div class="en">the serialized xml element.</div>
+	 * <div class="de">das serialisierte XML Element.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @throws SerializeException

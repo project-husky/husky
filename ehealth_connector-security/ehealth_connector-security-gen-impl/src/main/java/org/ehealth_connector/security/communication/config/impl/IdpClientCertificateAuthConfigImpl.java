@@ -24,7 +24,7 @@ import org.ehealth_connector.security.communication.config.IdpClientConfig;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Interface IdpClientCertificateAuthConfigImpl</div>
- * <div class="de">Implementations Klasse von  Interface IdpClientCertificateAuthConfigImpl</div>
+ * <div class="de">Implementations Klasse von Interface IdpClientCertificateAuthConfigImpl</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

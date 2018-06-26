@@ -24,7 +24,7 @@ import org.ehealth_connector.security.saml2.EncryptedAssertionBuilder;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for EncryptedAssertion building.</div>
- * <div class="de">Die Klasse implementiert das entsprechende interface um EncryptedAssertion bilden zu k&ooml;nnen.</div>
+ * <div class="de">Die Klasse implementiert das entsprechende Interface um EncryptedAssertions bilden zu können.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -32,6 +32,7 @@ import org.ehealth_connector.security.saml2.EncryptedAssertionBuilder;
 public class EncryptedAssertionBuilderImpl implements EncryptedAssertionBuilder,
 		SecurityObjectBuilder<org.opensaml.saml.saml2.core.EncryptedAssertion, EncryptedAssertion> {
 
+	/** The encrypted assertion. */
 	private org.opensaml.saml.saml2.core.EncryptedAssertion encryptedAssertion;
 
 	public EncryptedAssertionBuilderImpl() {

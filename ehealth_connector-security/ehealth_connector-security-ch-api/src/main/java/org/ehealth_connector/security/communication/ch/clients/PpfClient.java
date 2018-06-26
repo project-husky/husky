@@ -56,7 +56,7 @@ public interface PpfClient {
 	 * <div class="it"></div>
 	 * @throws ClientSendException
 	 * <div class="en">will be thrown if an error occoures</div>
-	 * <div class="de">Wird geworfen wenn ein Fehler auftritt.</div>
+	 * <div class="de">wird geworfen wenn ein Fehler auftritt.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

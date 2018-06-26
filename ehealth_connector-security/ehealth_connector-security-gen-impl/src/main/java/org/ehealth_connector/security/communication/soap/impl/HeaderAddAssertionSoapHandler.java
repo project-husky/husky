@@ -30,7 +30,7 @@ import javax.xml.ws.handler.soap.SOAPHandler;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
 
 import org.ehealth_connector.security.core.SecurityHeaderElement;
-import org.ehealth_connector.security.saml2.utils.XMLAppender;
+import org.ehealth_connector.security.saml2.utils.XmlAppender;
 import org.ehealth_connector.security.serialization.impl.OpenSaml2SerializerImpl;
 import org.opensaml.core.xml.XMLObject;
 import org.slf4j.Logger;
@@ -40,7 +40,7 @@ import org.w3c.dom.Element;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the internface SOAPHandler to add an assertion to securityheader.</div>
- * <div class="de">Klasse die das interface SOAPHandler implementiert um einer message eine assertion dem security header hinzuzufügen.</div>
+ * <div class="de">Klasse die das Interface SOAPHandler implementiert um einer Message eine Assertion dem Security Header hinzuzufügen.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -94,7 +94,7 @@ public class HeaderAddAssertionSoapHandler implements SOAPHandler<SOAPMessageCon
 				final Element serializedElement = new OpenSaml2SerializerImpl()
 						.serializeToXml((XMLObject) mSecurityHeaderElement.getWrappedObject());
 
-				XMLAppender.addFragment(serializedElement, securityElem);
+				XmlAppender.addFragment(serializedElement, securityElem);
 
 				header.addChildElement(securityElem);
 

@@ -37,7 +37,7 @@ import net.shibboleth.utilities.java.support.resolver.Criterion;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Abstract class implementing the generic functions for all validators.</div>
- * <div class="de">Abstrakte Klasse implemtiert alle generischen funktionen für die validatoren.</div>
+ * <div class="de">Abstrakte Klasse implementiert alle generischen Funktionen für die Validatoren.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -75,7 +75,6 @@ public abstract class AbstractValidator {
 			profileValidator.validate(aSignature);
 		} catch (final Exception e) {
 			log.error("Error", e);
-			// throw new ValidationException(e);
 		}
 		try {
 			final Map<String, String> passwordMap = new HashMap<>();

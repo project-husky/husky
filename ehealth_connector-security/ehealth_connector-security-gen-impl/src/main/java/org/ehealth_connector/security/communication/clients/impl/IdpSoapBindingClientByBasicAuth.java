@@ -58,8 +58,8 @@ import org.xml.sax.SAXException;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Class implementing the idp client with basic authentication.</div>
- * <div class="de">Klasse die den idp client mit basic authentication implementiert.</div>
+ * <div class="en">Class implementing the IdP Client with basic authentication.</div>
+ * <div class="de">Klasse die den IdP Client mit Basic Authentication implementiert.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -79,7 +79,7 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to add the basic authentication header.</div>
-	 * <div class="de">Methode um den basic authentication header hinzuzufügen.</div>
+	 * <div class="de">Methode um den Basic Authentication Header hinzuzufügen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -124,22 +124,22 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 	 * <div class="it"></div>
 	 * @return
 	 * <div class="en">the httpentity with the soap message as body.</div>
-	 * <div class="de">Die httpentity mit der soap nachricht als body.</div>
+	 * <div class="de">Die Httpentity mit der SOAP Nachricht als Body.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @throws SerializeException
 	 * <div class="en">will be thrown on error occuring during serialization.</div>
-	 * <div class="de">wird geworfen wenn ein fehler bei der serialisierung auftritt.</div>
+	 * <div class="de">wird geworfen wenn ein Fehler bei der Serialisierung auftritt.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @throws ParserConfigurationException
 	 * <div class="en">will be thrown on error occuring during parser configuration.</div>
-	 * <div class="de">wird geworfen wenn ein fehler bei der parser konfiguration auftritt.</div>
+	 * <div class="de">wird geworfen wenn ein Fehler bei der Parser Konfiguration auftritt.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @throws TransformerException
 	 * <div class="en">will be thrown on error occuring during transformation.</div>
-	 * <div class="de">wird geworfen wenn ein fehler bei der Transformierung auftritt.</div>
+	 * <div class="de">wird geworfen wenn ein Fehler bei der Transformierung auftritt.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

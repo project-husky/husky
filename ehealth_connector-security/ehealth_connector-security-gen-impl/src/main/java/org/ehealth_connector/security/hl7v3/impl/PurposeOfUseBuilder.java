@@ -23,31 +23,40 @@ import org.opensaml.core.xml.AbstractXMLObjectBuilder;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Class extending the abstract class AbstractXMLObjectBuilder with type OpenSamlPurposeOfUse.</div>
- * <div class="de">Die Klasse erweitert die abstrakte Klasse AbstractXMLObjectBuilder mit typ OpenSamlPurposeOfUse.</div>
+ * <div class="en">Class extending the abstract class AbstractXMLObjectBuilder with type OpenSaml PurposeOfUse.</div>
+ * <div class="de">Die Klasse erweitert die abstrakte Klasse AbstractXMLObjectBuilder mit typ OpenSaml PurposeOfUse.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class PurposeOfUseBuilder extends AbstractXMLObjectBuilder<OpenSamlPurposeOfUse> {
 
+	/** The code. */
 	protected String code;
+
+	/** The code system. */
 	protected String codeSystem;
+
+	/** The code system name. */
 	protected String codeSystemName;
+
+	/** The code system version. */
 	protected String codeSystemVersion;
+
+	/** The display name. */
 	protected String displayName;
 
 	/**
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to build an OpenSamlPurposeOfUse instance.</div>
-	 * <div class="de">Methode um eine OpenSamlPurposeOfUse Instanz zu creiiren.</div>
+	 * <div class="de">Methode um eine OpenSamlPurposeOfUse Instanz zu kreiiren.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
 	 * <div class="en">the OpenSamlPurposeOfUse instance.</div>
-	 * <div class="de">Die OpenSamlPurposeOfUse instanz.</div>
+	 * <div class="de">Die OpenSamlPurposeOfUse Instanz.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

@@ -22,7 +22,7 @@ import org.ehealth_connector.security.communication.config.SoapClientConfig;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Abstract implementation class of Interface SoapClientConfig</div>
- * <div class="de">Abstrakte implementations Klasse des Interfaces SoapClientConfig</div>
+ * <div class="de">Abstrakte Implementations Klasse des Interfaces SoapClientConfig</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

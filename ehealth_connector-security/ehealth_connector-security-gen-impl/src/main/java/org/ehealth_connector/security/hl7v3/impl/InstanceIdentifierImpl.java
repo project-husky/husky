@@ -25,8 +25,8 @@ import org.opensaml.core.xml.XMLObject;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Implementation class of Interface OpenSamlInstanceIdentifier.</div>
- * <div class="de">Implementations Klasse des Interfaces OpenSamlInstanceIdentifier.</div>
+ * <div class="en">Implementation class of Interface OpenSaml InstanceIdentifier.</div>
+ * <div class="de">Implementations Klasse des Interfaces OpenSaml InstanceIdentifier.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

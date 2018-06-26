@@ -32,18 +32,19 @@ import org.ehealth_connector.security.saml2.EncryptedAssertion;
 public class EncryptedAssertionImpl implements EncryptedAssertion,
 		SecurityObject<org.opensaml.saml.saml2.core.EncryptedAssertion> {
 
+	/** The wrapped object. */
 	private org.opensaml.saml.saml2.core.EncryptedAssertion wrappedObject;
 
 	/**
-	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Default constructor to instanciate the object.</div>
 	 * <div class="de">Default Konstruktor für die Instanziierung des Objekts.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
-	 * @param aInnerObject
 	 * <!-- @formatter:on -->
+	 *
+	 * @param aInnerObject the EncryptedAssertion
 	 */
 	protected EncryptedAssertionImpl(org.opensaml.saml.saml2.core.EncryptedAssertion aInnerObject) {
 		wrappedObject = aInnerObject;

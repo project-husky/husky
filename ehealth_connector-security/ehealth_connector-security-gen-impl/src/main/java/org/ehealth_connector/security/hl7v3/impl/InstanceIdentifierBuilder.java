@@ -22,8 +22,8 @@ import org.opensaml.core.xml.AbstractXMLObjectBuilder;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Class extending the abstract class AbstractXMLObjectBuilder with type OpenSamlInstanceIdentifier.</div>
- * <div class="de">Die Klasse erweitert die abstrakte Klasse AbstractXMLObjectBuilder mit typ OpenSamlInstanceIdentifier.</div>
+ * <div class="en">Class extending the abstract class AbstractXMLObjectBuilder with type OpenSaml InstanceIdentifier.</div>
+ * <div class="de">Die Klasse erweitert die abstrakte Klasse AbstractXMLObjectBuilder mit typ OpenSaml InstanceIdentifier.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

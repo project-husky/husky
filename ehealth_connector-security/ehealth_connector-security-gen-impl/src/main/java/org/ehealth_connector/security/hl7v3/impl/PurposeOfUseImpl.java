@@ -25,8 +25,8 @@ import org.opensaml.core.xml.XMLObject;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Implementation class of Interface OpenSamlPurposeOfUse.</div>
- * <div class="de">Implementations Klasse des Interfaces OpenSamlPurposeOfUse.</div>
+ * <div class="en">Implementation class of Interface OpenSaml PurposeOfUse.</div>
+ * <div class="de">Implementations Klasse des Interfaces OpenSaml PurposeOfUse.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

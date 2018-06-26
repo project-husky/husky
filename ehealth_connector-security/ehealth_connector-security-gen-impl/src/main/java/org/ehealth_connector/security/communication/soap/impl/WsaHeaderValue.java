@@ -20,7 +20,7 @@ package org.ehealth_connector.security.communication.soap.impl;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the parameters for SOAP WSA Headers</div>
- * <div class="de">Klasse welche die paramater und methoden für SOAP WSA Headers definiert</div>
+ * <div class="de">Klasse welche die Parameter und Methoden für SOAP WSA Headers definiert</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

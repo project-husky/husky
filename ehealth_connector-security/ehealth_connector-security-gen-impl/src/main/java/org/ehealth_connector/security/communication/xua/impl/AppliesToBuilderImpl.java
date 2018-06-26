@@ -28,7 +28,7 @@ import org.opensaml.soap.wsaddressing.impl.EndpointReferenceBuilder;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interfaces AppliesToBuilder and SecurityObjectBuilder.</div>
- * <div class="de">Die Klasse implementiert die entsprechenden Interfaces  AppliesToBuilder und SecurityObjectBuilder.</div>
+ * <div class="de">Die Klasse implementiert die entsprechenden Interfaces AppliesToBuilder und SecurityObjectBuilder.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

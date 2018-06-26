@@ -24,7 +24,7 @@ import org.ehealth_connector.security.communication.config.SoapClientConfigBuild
 /**
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the interface PpClientConfigBuilder.</div>
- * <div class="de">Klasser die das Interface PpClientConfigBuilder implementiert.</div>
+ * <div class="de">Klasse die das Interface PpClientConfigBuilder implementiert.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

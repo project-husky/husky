@@ -39,8 +39,15 @@ import org.joda.time.DateTime;
 public class ResponseImpl
 		implements Response, SecurityObject<org.opensaml.saml.saml2.core.Response> {
 
+	/** The response. */
 	private org.opensaml.saml.saml2.core.Response response;
 
+	/**
+	 * Instantiates a new ResponseImpl.
+	 *
+	 * @param response
+	 *            the response
+	 */
 	protected ResponseImpl(org.opensaml.saml.saml2.core.Response response) {
 		this.response = response;
 	}
@@ -80,6 +87,11 @@ public class ResponseImpl
 		return response.getDestination();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.Response#getEncryptedAssertions()
+	 */
 	@Override
 	public List<EncryptedAssertion> getEncryptedAssertions() {
 		final List<org.opensaml.saml.saml2.core.EncryptedAssertion> internal = response

@@ -31,8 +31,15 @@ import org.ehealth_connector.security.wssecurity.UsernameToken;
 public class UsernameTokenImpl
 		implements UsernameToken, SecurityObject<org.opensaml.soap.wssecurity.UsernameToken> {
 
+	/** The wrapped object. */
 	private org.opensaml.soap.wssecurity.UsernameToken wrappedObject;
 
+	/**
+	 * Instantiates a new UsernameTokenImpl.
+	 *
+	 * @param aInternalObject
+	 *            the UsernameToken
+	 */
 	public UsernameTokenImpl(org.opensaml.soap.wssecurity.UsernameToken aInternalObject) {
 		wrappedObject = aInternalObject;
 	}

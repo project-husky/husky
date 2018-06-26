@@ -31,7 +31,7 @@ public interface AppliesToBuilder {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the endpoint address</div>
-	 * <div class="de">Method um die Endpunktadresse zu setzen.</div>
+	 * <div class="de">Methode um die Endpunktadresse zu setzen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *

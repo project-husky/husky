@@ -33,7 +33,7 @@ import org.joda.time.DateTime;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Interface Assertion</div>
- * <div class="de">Implementations Klasse von  Interface Assertion</div>
+ * <div class="de">Implementations Klasse von Interface Assertion</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -41,8 +41,15 @@ import org.joda.time.DateTime;
 public class AssertionImpl
 		implements Assertion, SecurityObject<org.opensaml.saml.saml2.core.Assertion> {
 
+	/** The assertion. */
 	private org.opensaml.saml.saml2.core.Assertion assertion;
 
+	/**
+	 * Instantiates a new AssertionImpl.
+	 *
+	 * @param aAssertion
+	 *            the Assertion
+	 */
 	protected AssertionImpl(org.opensaml.saml.saml2.core.Assertion aAssertion) {
 		assertion = aAssertion;
 	}

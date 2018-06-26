@@ -34,8 +34,15 @@ import org.ehealth_connector.security.saml2.SubjectConfirmation;
  */
 public class SubjectImpl implements Subject, SecurityObject<org.opensaml.saml.saml2.core.Subject> {
 
+	/** The subject. */
 	private org.opensaml.saml.saml2.core.Subject subject;
 
+	/**
+	 * Instantiates a new SubjectImpl.
+	 *
+	 * @param aSubject
+	 *            the a subject
+	 */
 	protected SubjectImpl(org.opensaml.saml.saml2.core.Subject aSubject) {
 		subject = aSubject;
 	}

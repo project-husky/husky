@@ -29,8 +29,8 @@ import org.ehealth_connector.security.saml2.Response;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Class implementing the idp client using auth proxy like HIN Client.</div>
- * <div class="de">Klasse die den idp client unter verwendung eines auth proxy wie den HIN Client verwendet.</div>
+ * <div class="en">Class implementing the IdP Client using auth proxy like e.g. HIN Client.</div>
+ * <div class="de">Klasse die den IdP Client unter Verwendung eines auth proxy wie beispielsweis den HIN Client verwendet.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

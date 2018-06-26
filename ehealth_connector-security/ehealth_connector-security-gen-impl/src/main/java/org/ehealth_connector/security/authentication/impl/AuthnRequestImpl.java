@@ -27,8 +27,8 @@ import org.joda.time.DateTime;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Class implementing the corresponding interface for authnrequest.</div>
- * <div class="de">Die Klasse implementiert das entsprechende interface authnrequest.</div>
+ * <div class="en">Class implementing the corresponding interface for AuthnRequest.</div>
+ * <div class="de">Die Klasse implementiert das entsprechende Interface AuthnRequest.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -36,6 +36,7 @@ import org.joda.time.DateTime;
 public class AuthnRequestImpl
 		implements AuthnRequest, SecurityObject<org.opensaml.saml.saml2.core.AuthnRequest> {
 
+	/** The AuthnRequest. */
 	private org.opensaml.saml.saml2.core.AuthnRequest authnRequest;
 
 	/**

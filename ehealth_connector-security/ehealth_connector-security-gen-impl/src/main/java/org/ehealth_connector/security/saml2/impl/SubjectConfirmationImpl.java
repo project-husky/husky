@@ -34,6 +34,7 @@ import org.joda.time.DateTime;
 public class SubjectConfirmationImpl implements SubjectConfirmation,
 		SecurityObject<org.opensaml.saml.saml2.core.SubjectConfirmation> {
 
+	/** The subject confirmation. */
 	private org.opensaml.saml.saml2.core.SubjectConfirmation subjectConfirmation;
 
 	/**

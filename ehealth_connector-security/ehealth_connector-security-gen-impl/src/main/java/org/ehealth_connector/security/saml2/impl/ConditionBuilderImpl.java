@@ -24,7 +24,7 @@ import org.ehealth_connector.security.saml2.ConditionBuilder;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for Condition building.</div>
- * <div class="de">Die Klasse implementiert das entsprechende interface um Condition bilden zu k&ooml;nnen.</div>
+ * <div class="de">Die Klasse implementiert das entsprechende Interface um Conditions bilden zu k&ooml;nnen.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -32,6 +32,12 @@ import org.ehealth_connector.security.saml2.ConditionBuilder;
 public class ConditionBuilderImpl implements ConditionBuilder,
 		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Condition, Condition> {
 
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.core.SecurityObjectBuilder#create(java.lang.Object)
+	 */
 	@Override
 	public Condition create(org.opensaml.saml.saml2.core.Condition aInternalObject) {
 		return new ConditionImpl(aInternalObject);

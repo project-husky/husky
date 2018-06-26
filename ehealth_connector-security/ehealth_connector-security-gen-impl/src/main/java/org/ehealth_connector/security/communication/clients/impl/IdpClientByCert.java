@@ -36,8 +36,8 @@ import org.ehealth_connector.security.saml2.Response;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Class implementing the idp client with cert authentication.</div>
- * <div class="de">Klasse die den idp client mit cert authentication implementiert.</div>
+ * <div class="en">Class implementing the IdP Client with cert authentication.</div>
+ * <div class="de">Klasse die den IdP Client mit Cert Authentication implementiert.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

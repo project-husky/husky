@@ -48,7 +48,7 @@ public interface AuthnStatement {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">method to get the AuthInstant.</div>
-	 * <div class="de">Method um die AuthInstant zu erhalten.</div>
+	 * <div class="de">Methode um die AuthInstant zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @return

@@ -40,7 +40,7 @@ import org.opensaml.saml.saml2.core.impl.ScopingBuilder;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for authnrequest building.</div>
- * <div class="de">Die Klasse implementiert das entsprechende interface um authnrequests bilden zu k&ooml;nnen.</div>
+ * <div class="de">Die Klasse implementiert das entsprechende Interface um authnrequests bilden zu k&ooml;nnen.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -48,19 +48,31 @@ import org.opensaml.saml.saml2.core.impl.ScopingBuilder;
 public class AuthnRequestBuilderImpl implements AuthnRequestBuilder,
 		SecurityObjectBuilder<org.opensaml.saml.saml2.core.AuthnRequest, AuthnRequest> {
 
+	/** The AuthnRequest. */
 	private org.opensaml.saml.saml2.core.AuthnRequest authnRequest;
+
+	/** The list of IdPs. */
 	private IDPList idpList;
+
+	/** The issuer. */
 	private Issuer issuer;
-	private NameIDPolicy nameIDPolicy;
+
+	/** The name id policy. */
+	private NameIDPolicy nameIdPolicy;
+
+	/** The subject. */
 	private org.opensaml.saml.saml2.core.Subject subject;
 
+	/**
+	 * Instantiates a new AuthnRequestBuilderImpl.
+	 */
 	public AuthnRequestBuilderImpl() {
 		final org.opensaml.saml.saml2.core.impl.AuthnRequestBuilder builder = new org.opensaml.saml.saml2.core.impl.AuthnRequestBuilder();
 		authnRequest = builder.buildObject();
 
 		final NameIDPolicyBuilder nameidpolBuilder = new NameIDPolicyBuilder();
-		nameIDPolicy = nameidpolBuilder.buildObject();
-		authnRequest.setNameIDPolicy(nameIDPolicy);
+		nameIdPolicy = nameidpolBuilder.buildObject();
+		authnRequest.setNameIDPolicy(nameIdPolicy);
 
 		final IssuerBuilder issueBuilder = new IssuerBuilder();
 		issuer = issueBuilder.buildObject();
@@ -228,7 +240,7 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder,
 	@Override
 	public AuthnRequestBuilder nameIdPolicyAllowCreate(Boolean aNameIdPolicyAllowCreate) {
 		if (aNameIdPolicyAllowCreate != null) {
-			nameIDPolicy.setAllowCreate(aNameIdPolicyAllowCreate);
+			nameIdPolicy.setAllowCreate(aNameIdPolicyAllowCreate);
 		}
 		return this;
 	}
@@ -242,7 +254,7 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder,
 	@Override
 	public AuthnRequestBuilder nameIdPolicyFormat(String aNameIdPolicyFormat) {
 		if (!StringUtils.isEmpty(aNameIdPolicyFormat)) {
-			nameIDPolicy.setFormat(aNameIdPolicyFormat);
+			nameIdPolicy.setFormat(aNameIdPolicyFormat);
 		}
 		return this;
 	}

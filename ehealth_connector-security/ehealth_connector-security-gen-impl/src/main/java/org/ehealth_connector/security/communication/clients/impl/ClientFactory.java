@@ -29,7 +29,7 @@ import org.ehealth_connector.security.communication.config.impl.IdpClientViaHttp
 /**
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the factory to instantiate correct clients according to the configuration.</div>
- * <div class="de">Klasse implementiert die factory um client instanzen entsprechend der Konfiguration zu erstellen.</div>
+ * <div class="de">Klasse welche die Factory implementiert um Client Instanzen entsprechend der Konfiguration zu erstellen.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

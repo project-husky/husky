@@ -28,7 +28,7 @@ import org.opensaml.saml.saml2.core.AuthnContextClassRef;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for AuthnStatement building.</div>
- * <div class="de">Die Klasse implementiert das entsprechende interface um AuthnStatement bilden zu k&ooml;nnen.</div>
+ * <div class="de">Die Klasse implementiert das entsprechende Interface um AuthnStatements bilden zu können.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

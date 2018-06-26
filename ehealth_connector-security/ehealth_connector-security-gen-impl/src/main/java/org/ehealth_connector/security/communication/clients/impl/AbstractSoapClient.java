@@ -83,7 +83,7 @@ import org.xml.sax.SAXException;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Abstract Class implementing a soap client based on httpclient.</div>
- * <div class="de">Abstrakte Klasse welche einen soap client implementiert auf basis von httpclient.</div>
+ * <div class="de">Abstrakte Klasse welche einen SOAP Client implementiert auf Basis von Httpclient.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

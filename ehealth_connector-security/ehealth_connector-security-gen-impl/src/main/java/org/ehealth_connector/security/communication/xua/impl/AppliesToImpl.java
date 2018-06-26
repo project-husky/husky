@@ -19,14 +19,14 @@ package org.ehealth_connector.security.communication.xua.impl;
 
 import org.ehealth_connector.security.communication.xua.AppliesTo;
 import org.ehealth_connector.security.core.SecurityObject;
-import org.ehealth_connector.security.helpers.ListXMLObjectHelper;
+import org.ehealth_connector.security.helpers.ListXmlObjectHelper;
 import org.opensaml.soap.wsaddressing.EndpointReference;
 import org.opensaml.soap.wsaddressing.impl.EndpointReferenceImpl;
 
 /**
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Interface AppliesTo</div>
- * <div class="de">Implementations Klasse von  Interface AppliesTo</div>
+ * <div class="de">Implementations Klasse von Interface AppliesTo</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -42,7 +42,7 @@ public class AppliesToImpl
 
 	@Override
 	public String getAddress() {
-		final EndpointReference wsEndpointReference = new ListXMLObjectHelper<EndpointReference>()
+		final EndpointReference wsEndpointReference = new ListXmlObjectHelper<EndpointReference>()
 				.getComponent(EndpointReferenceImpl.class, appliesTo.getUnknownXMLObjects());
 		if ((wsEndpointReference != null) && (wsEndpointReference.getAddress() != null)) {
 			return wsEndpointReference.getAddress().getValue();

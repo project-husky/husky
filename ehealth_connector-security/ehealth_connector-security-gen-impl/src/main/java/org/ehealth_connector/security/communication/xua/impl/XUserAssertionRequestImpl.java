@@ -25,7 +25,7 @@ import org.ehealth_connector.security.communication.xua.TokenType;
 import org.ehealth_connector.security.communication.xua.XUserAssertionConstants;
 import org.ehealth_connector.security.communication.xua.XUserAssertionRequest;
 import org.ehealth_connector.security.core.SecurityObject;
-import org.ehealth_connector.security.helpers.ListXMLObjectHelper;
+import org.ehealth_connector.security.helpers.ListXmlObjectHelper;
 import org.ehealth_connector.security.hl7v3.PurposeOfUse;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.core.xml.schema.XSAny;
@@ -43,7 +43,7 @@ import org.opensaml.soap.wstrust.impl.ClaimsImpl;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Interface XUserAssertionRequest and SecurityObject</div>
- * <div class="de">Implementations Klasse von  Interface XUserAssertionRequest und SecurityObject</div>
+ * <div class="de">Implementations Klasse von Interface XUserAssertionRequest und SecurityObject</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -59,7 +59,7 @@ public class XUserAssertionRequestImpl implements XUserAssertionRequest,
 
 	@Override
 	public AppliesTo getAppliesTo() {
-		final org.opensaml.soap.wspolicy.AppliesTo wspAppliesTo = new ListXMLObjectHelper<org.opensaml.soap.wspolicy.AppliesTo>()
+		final org.opensaml.soap.wspolicy.AppliesTo wspAppliesTo = new ListXmlObjectHelper<org.opensaml.soap.wspolicy.AppliesTo>()
 				.getComponent(org.opensaml.soap.wspolicy.impl.AppliesToImpl.class,
 						requestSecurityToken.getUnknownXMLObjects());
 		return new AppliesToBuilderImpl().create(wspAppliesTo);
@@ -76,12 +76,12 @@ public class XUserAssertionRequestImpl implements XUserAssertionRequest,
 
 	private XMLObject getAttributeValueAsXmlObjectByName(List<XMLObject> unknownXMLObjects,
 			String oasisXacmlSubjectid) {
-		final List<Attribute> attributes = new ListXMLObjectHelper<Attribute>()
+		final List<Attribute> attributes = new ListXmlObjectHelper<Attribute>()
 				.getComponentList(AttributeImpl.class, unknownXMLObjects);
 		if (attributes != null) {
 			final Attribute attribute = getAttributeByName(attributes, oasisXacmlSubjectid);
 			if (attribute != null) {
-				final XSAny value = new ListXMLObjectHelper<XSAny>().getComponent(XSAnyImpl.class,
+				final XSAny value = new ListXmlObjectHelper<XSAny>().getComponent(XSAnyImpl.class,
 						attribute.getAttributeValues());
 				return value.getUnknownXMLObjects().get(0);
 			}
@@ -91,12 +91,12 @@ public class XUserAssertionRequestImpl implements XUserAssertionRequest,
 
 	private String getAttributeValueByName(List<XMLObject> unknownXMLObjects,
 			String oasisXacmlSubjectid) {
-		final List<Attribute> attributes = new ListXMLObjectHelper<Attribute>()
+		final List<Attribute> attributes = new ListXmlObjectHelper<Attribute>()
 				.getComponentList(AttributeImpl.class, unknownXMLObjects);
 		if (attributes != null) {
 			final Attribute attribute = getAttributeByName(attributes, oasisXacmlSubjectid);
 			if (attribute != null) {
-				final XSString value = new ListXMLObjectHelper<XSString>()
+				final XSString value = new ListXmlObjectHelper<XSString>()
 						.getComponent(XSStringImpl.class, attribute.getAttributeValues());
 				return value.getValue();
 			}
@@ -111,7 +111,7 @@ public class XUserAssertionRequestImpl implements XUserAssertionRequest,
 
 	@Override
 	public String getDialect() {
-		final Claims aClaim = new ListXMLObjectHelper<Claims>().getComponent(ClaimsImpl.class,
+		final Claims aClaim = new ListXmlObjectHelper<Claims>().getComponent(ClaimsImpl.class,
 				requestSecurityToken.getUnknownXMLObjects());
 		if (aClaim != null) {
 			return aClaim.getDialect();
@@ -133,7 +133,7 @@ public class XUserAssertionRequestImpl implements XUserAssertionRequest,
 
 	@Override
 	public PurposeOfUse getPurposeOfUse() {
-		final Claims claimes = new ListXMLObjectHelper<Claims>().getComponent(ClaimsImpl.class,
+		final Claims claimes = new ListXmlObjectHelper<Claims>().getComponent(ClaimsImpl.class,
 				requestSecurityToken.getUnknownXMLObjects());
 		if (claimes != null) {
 			return (PurposeOfUse) getAttributeValueAsXmlObjectByName(claimes.getUnknownXMLObjects(),
@@ -144,7 +144,7 @@ public class XUserAssertionRequestImpl implements XUserAssertionRequest,
 
 	@Override
 	public RequestType getRequestType() {
-		final org.opensaml.soap.wstrust.RequestType wstRequestType = new ListXMLObjectHelper<org.opensaml.soap.wstrust.RequestType>()
+		final org.opensaml.soap.wstrust.RequestType wstRequestType = new ListXmlObjectHelper<org.opensaml.soap.wstrust.RequestType>()
 				.getComponent(org.opensaml.soap.wstrust.impl.RequestTypeImpl.class,
 						requestSecurityToken.getUnknownXMLObjects());
 		return RequestType.getEnum(wstRequestType.getValue());
@@ -152,7 +152,7 @@ public class XUserAssertionRequestImpl implements XUserAssertionRequest,
 
 	@Override
 	public String getResourceId() {
-		final Claims claimes = new ListXMLObjectHelper<Claims>().getComponent(ClaimsImpl.class,
+		final Claims claimes = new ListXmlObjectHelper<Claims>().getComponent(ClaimsImpl.class,
 				requestSecurityToken.getUnknownXMLObjects());
 		if (claimes != null) {
 			return getAttributeValueByName(claimes.getUnknownXMLObjects(),
@@ -163,7 +163,7 @@ public class XUserAssertionRequestImpl implements XUserAssertionRequest,
 
 	@Override
 	public String getSubjectId() {
-		final NameID nameId = new ListXMLObjectHelper<NameID>().getComponent(NameIDImpl.class,
+		final NameID nameId = new ListXmlObjectHelper<NameID>().getComponent(NameIDImpl.class,
 				requestSecurityToken.getUnknownXMLObjects());
 		if (nameId != null) {
 			return nameId.getValue();
@@ -185,7 +185,7 @@ public class XUserAssertionRequestImpl implements XUserAssertionRequest,
 
 	@Override
 	public TokenType getTokenType() {
-		final org.opensaml.soap.wstrust.TokenType wstRequestType = new ListXMLObjectHelper<org.opensaml.soap.wstrust.TokenType>()
+		final org.opensaml.soap.wstrust.TokenType wstRequestType = new ListXmlObjectHelper<org.opensaml.soap.wstrust.TokenType>()
 				.getComponent(org.opensaml.soap.wstrust.impl.TokenTypeImpl.class,
 						requestSecurityToken.getUnknownXMLObjects());
 		return TokenType.getEnum(wstRequestType.getValue());

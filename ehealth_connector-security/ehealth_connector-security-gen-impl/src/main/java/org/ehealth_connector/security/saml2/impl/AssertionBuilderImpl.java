@@ -35,7 +35,7 @@ import org.opensaml.saml.saml2.core.impl.IssuerBuilder;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for Assertion building.</div>
- * <div class="de">Die Klasse implementiert das entsprechende interface um Assertion bilden zu k&ooml;nnen.</div>
+ * <div class="de">Die Klasse implementiert das entsprechende Interface um Assertion bilden zu k&ooml;nnen.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

@@ -37,15 +37,15 @@ public class AuthnStatementImpl
 	private org.opensaml.saml.saml2.core.AuthnStatement authnStatement;
 
 	/**
-	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Default constructor to instanciate the object.</div>
 	 * <div class="de">Default Konstruktor für die Instanziierung des Objekts.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
-	 * @param aAuthnStatement
 	 * <!-- @formatter:on -->
+	 *
+	 * @param aAuthnStatement the AuthnStatement
 	 */
 	protected AuthnStatementImpl(org.opensaml.saml.saml2.core.AuthnStatement aAuthnStatement) {
 		authnStatement = aAuthnStatement;

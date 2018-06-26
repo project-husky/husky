@@ -37,7 +37,7 @@ public interface SecurityObject<T> {
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the wrapped inner object.</div>
-	 * <div class="de">Method um das Innere, gewrappte object zu erhalten.</div>
+	 * <div class="de">Methode um das Innere, gewrappte object zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

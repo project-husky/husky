@@ -25,7 +25,7 @@ import org.w3c.dom.Element;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface Deserializer<Response> .</div>
- * <div class="de">Die Klasse implementiert das entsprechende interface Deserializer<Response> .</div>
+ * <div class="de">Die Klasse implementiert das entsprechende Interface Deserializer<Response> .</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

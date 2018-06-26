@@ -38,13 +38,14 @@ import org.slf4j.LoggerFactory;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Class to log out soap messages.</div>
- * <div class="de">Klasse um die soap message zu loggen.</div>
+ * <div class="de">Klasse um die SOAP Message zu loggen.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
 public class LogSoapMessageHandler implements SOAPHandler<SOAPMessageContext> {
 
+	/** The Logger. */
 	private Logger mLogger;
 
 	/**

@@ -25,12 +25,13 @@ import org.opensaml.core.xml.XMLObject;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Helper class providing methods to get filtered lists.</div>
- * <div class="de">Helferklasse welche methoden zur verfügung stellt um geilfetrte listen zu erhalten.</div>
+ * <div class="de">Helferklasse welche Methoden zur Verfügung stellt um gefilterte Listen zu erhalten.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class ListXMLObjectHelper<T extends XMLObject> {
+public class ListXmlObjectHelper<T extends XMLObject> {
+	@SuppressWarnings("unchecked")
 	public T getComponent(Class<? extends XMLObject> aType, List<XMLObject> aList) {
 		for (final XMLObject item : aList) {
 			if (item.getClass().equals(aType)) {
@@ -40,6 +41,7 @@ public class ListXMLObjectHelper<T extends XMLObject> {
 		return null;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<T> getComponentList(Class<? extends XMLObject> aType, List<XMLObject> aList) {
 		final List<T> retVal = new ArrayList<>();
 		for (final XMLObject item : aList) {

@@ -22,7 +22,7 @@ import org.ehealth_connector.security.communication.config.IdpClientConfig;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Implementation class of Interface IdpClientViaHttpProxyConfig</div>
- * <div class="de">Implementations Klasse von  Interface IdpClientViaHttpProxyConfig</div>
+ * <div class="de">Implementations Klasse von Interface IdpClientViaHttpProxyConfig</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

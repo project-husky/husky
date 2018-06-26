@@ -27,7 +27,7 @@ import org.joda.time.DateTime;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for SubjectConfirmation building.</div>
- * <div class="de">Die Klasse implementiert das entsprechende interface um SubjectConfirmation bilden zu k&ooml;nnen.</div>
+ * <div class="de">Die Klasse implementiert das entsprechende Interface um SubjectConfirmation bilden zu k&ooml;nnen.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
@@ -36,9 +36,15 @@ import org.joda.time.DateTime;
 public class SubjectConfirmationBuilderImpl implements SubjectConfirmationBuilder,
 		SecurityObjectBuilder<org.opensaml.saml.saml2.core.SubjectConfirmation, SubjectConfirmation> {
 
+	/** The subject confirmation. */
 	private org.opensaml.saml.saml2.core.SubjectConfirmation subjectConfirmation;
+
+	/** The subject confirmation data. */
 	private org.opensaml.saml.saml2.core.SubjectConfirmationData subjectConfirmationData;
 
+	/**
+	 * Instantiates a new SubjectConfirmationBuilderImpl.
+	 */
 	public SubjectConfirmationBuilderImpl() {
 		subjectConfirmation = new org.opensaml.saml.saml2.core.impl.SubjectConfirmationBuilder()
 				.buildObject();
@@ -47,6 +53,11 @@ public class SubjectConfirmationBuilderImpl implements SubjectConfirmationBuilde
 		subjectConfirmation.setSubjectConfirmationData(subjectConfirmationData);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.SubjectConfirmationBuilder#address(java.lang.String)
+	 */
 	@Override
 	public SubjectConfirmationBuilder address(String aAddress) {
 		if (aAddress != null) {
@@ -76,6 +87,11 @@ public class SubjectConfirmationBuilderImpl implements SubjectConfirmationBuilde
 		return new SubjectConfirmationImpl(aInternalObject);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.SubjectConfirmationBuilder#inResponseTo(java.lang.String)
+	 */
 	@Override
 	public SubjectConfirmationBuilder inResponseTo(String aResponseTo) {
 		if (aResponseTo != null) {
@@ -98,6 +114,11 @@ public class SubjectConfirmationBuilderImpl implements SubjectConfirmationBuilde
 		return this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.SubjectConfirmationBuilder#notBefore(java.util.Calendar)
+	 */
 	@Override
 	public SubjectConfirmationBuilder notBefore(Calendar aNotBefore) {
 		if (aNotBefore != null) {
@@ -107,6 +128,11 @@ public class SubjectConfirmationBuilderImpl implements SubjectConfirmationBuilde
 		return this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.SubjectConfirmationBuilder#notOnOrAfter(java.util.Calendar)
+	 */
 	@Override
 	public SubjectConfirmationBuilder notOnOrAfter(Calendar aNotOnOrAfter) {
 		if (aNotOnOrAfter != null) {
@@ -116,6 +142,11 @@ public class SubjectConfirmationBuilderImpl implements SubjectConfirmationBuilde
 		return this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.SubjectConfirmationBuilder#recipient(java.lang.String)
+	 */
 	@Override
 	public SubjectConfirmationBuilder recipient(String aRecipient) {
 		if (aRecipient != null) {

@@ -53,7 +53,7 @@ public abstract class AbstractAssertionBasedRequestImpl extends AbstractXMLObjec
 	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the assertion</div>
-	 * <div class="de">Method um die Assertion zu setzen.</div>
+	 * <div class="de">Methode um die Assertion zu setzen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *

@@ -19,7 +19,7 @@ package org.ehealth_connector.security.communication.config;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Interface describing the methods of IdP client configuration.</div>
+ * <div class="en">Interface describing the methods of IdP Client configuration.</div>
  * <div class="de">Interface welches die Methoden für die IdP Client Konfiguration beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>

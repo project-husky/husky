@@ -24,7 +24,7 @@ import org.ehealth_connector.security.communication.xua.impl.XUserAssertionReque
 /**
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the corresponding interface for XUserAssertionRequest building for Swiss EPR.</div>
- * <div class="de">Die Klasse implementiert das entsprechende interface um XUserAssertionRequest bilden zu k&ooml;nnen für Swiss EPR.</div>
+ * <div class="de">Die Klasse implementiert das entsprechende Interface um XUserAssertionRequest bilden zu k&ooml;nnen für Swiss EPR.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

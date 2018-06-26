@@ -29,4 +29,7 @@ import org.opensaml.core.xml.XMLObject;
  */
 public interface OpenSamlPurposeOfUse extends PurposeOfUse, XMLObject {
 
+	// There are no special methods defined, but the interface has to be
+	// declared for selection reasons.
+
 }

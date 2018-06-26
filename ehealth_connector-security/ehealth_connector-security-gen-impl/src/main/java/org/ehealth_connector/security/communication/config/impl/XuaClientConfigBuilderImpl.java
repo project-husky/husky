@@ -23,7 +23,7 @@ import org.ehealth_connector.security.communication.config.XuaClientConfigBuilde
 /**
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the interface XuaClientConfigBuilder.</div>
- * <div class="de">Klasser die das Interface XuaClientConfigBuilder implementiert.</div>
+ * <div class="de">Klasse die das Interface XuaClientConfigBuilder implementiert.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->

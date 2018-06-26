@@ -54,7 +54,7 @@ import org.xml.sax.SAXException;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Class implementing the simple ppq client.</div>
- * <div class="de">Klasser die den Simple PPQ Client implementiert.</div>
+ * <div class="de">Klasse die den Simple PPQ Client implementiert.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
