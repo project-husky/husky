@@ -32,6 +32,22 @@ import org.w3c.dom.Element;
  */
 public final class XmlAppender {
 
+	/**
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to attach a xml fragment to an other xml element.</div>
+	 * <div class="de">Method um ein xml Fragment an eine anderes xml element anzuhängen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param sourceElement
+	 * <div class="en">The xml fragment</div>
+	 * <div class="de">Das xml Fragment</div>
+	 * @param destinationElement
+	 * <div class="en">The xml element the fragment will be attached.</div>
+	 * <div class="de">Das xml Element an den das Fragment angehängt werden soll.</div>
+	 * <!-- @formatter:on -->
+	 */
 	public static void addFragment(Element sourceElement, Element destinationElement) {
 
 		final Document document = sourceElement.getOwnerDocument();

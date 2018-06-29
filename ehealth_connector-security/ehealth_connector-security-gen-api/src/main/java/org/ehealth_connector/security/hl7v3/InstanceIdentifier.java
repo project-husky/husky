@@ -47,37 +47,71 @@ public interface InstanceIdentifier {
 	public static final QName TYPE_NAME = new QName("urn:hl7-org:v3", TYPE_LOCAL_NAME, "hl7");
 
 	/**
-	 * Gets the value of the extension property.
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the value of the extension.</div>
+	 * <div class="de">Methode um den Wert der extension zu erhalten.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
-	 * @return possible object is {@link String }
-	 *
+	 * @return
+	 * <div class="en">The extension as string.</div>
+	 * <div class="de">Die Extention als String.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
 	 */
-	public String getExtension();
+	String getExtension();
 
 	/**
-	 * Gets the value of the root property.
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the value of the root.</div>
+	 * <div class="de">Methode um den Wert von Root zu erhalten.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
-	 * @return possible object is {@link String }
-	 *
+	 * @return
+	 * <div class="en">The root as string.</div>
+	 * <div class="de">Die Root als String.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
 	 */
-	public String getRoot();
+	String getRoot();
 
 	/**
-	 * Sets the value of the extension property.
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the extension.</div>
+	 * <div class="de">Methode um die Extension zu setzten.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param value
-	 *            allowed object is {@link String }
-	 *
+	 * <div class="en">The value to be set as extension.</div>
+	 * <div class="de">Der wert der als Extesion gesetzt werden soll.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
 	 */
-	public void setExtension(String value);
+	void setExtension(String value);
 
 	/**
-	 * Sets the value of the root property.
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the root.</div>
+	 * <div class="de">Methode um die Root zu setzten.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param value
-	 *            allowed object is {@link String }
-	 *
+	 * <div class="en">The value to be set as root.</div>
+	 * <div class="de">Der wert der als Root gesetzt werden soll.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
 	 */
-	public void setRoot(String value);
+	void setRoot(String value);
 
 }

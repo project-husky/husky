@@ -29,10 +29,53 @@ import org.ehealth_connector.security.saml2.Assertion;
  */
 public interface XUserAssertionResponse {
 
+	/**
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the assertion.</div>
+	 * <div class="de">Methode um die Assertion zu erhalten.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return
+	 * <div class="en">The assertion.</div>
+	 * <div class="de">Die Assertion.</div>
+	 * <!-- @formatter:on -->
+	 */
 	Assertion getAssertion();
 
+	/**
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the context.</div>
+	 * <div class="de">Methode um den Context zu erhalten.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return
+	 * <div class="en">The context.</div>
+	 * <div class="de">Der Context.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
 	String getContext();
 
+	/**
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the status.</div>
+	 * <div class="de">Methode um den Status zu erhalten.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return
+	 * <div class="en">The status.</div>
+	 * <div class="de">Die Status.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
 	String getStatus();
 
 }

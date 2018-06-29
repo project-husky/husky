@@ -88,6 +88,31 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 		return deserializer.fromXmlByteArray(samlReponseBytes);
 	}
 
+	/**
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to read content from a file packed in a jar file.</div>
+	 * <div class="de">Methode um den Inhalt eines Files gepacket in einem jar File zu laden.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param filename
+	 * <div class="en">The name of the file incl. the classpath.</div>
+	 * <div class="de">Der Name des Files incl, des Klassenpfades</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * @return
+	 * <div class="en">The content of the file as string.</div>
+	 * <div class="de">Der Inhalt des Files als String.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * @throws IOException
+	 * <div class="en">will be thrown occuring an error reading the file.</div>
+	 * <div class="de">wird geworfen wenn ein fehler beim lesen auftritt.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
 	public String readFromJARFile(String filename) throws IOException {
 		final InputStream is = getClass().getResourceAsStream(filename);
 		final InputStreamReader isr = new InputStreamReader(is);
@@ -103,6 +128,12 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 		return sb.toString();
 	}
 
+	/**
+	 * 
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.communication.clients.IdpClient#send(org.ehealth_connector.security.authentication.AuthnRequest)
+	 */
 	@Override
 	public Response send(AuthnRequest aAuthnRequest) throws ClientSendException {
 		try {

@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URI;
-import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.KeyFactory;
@@ -71,7 +70,8 @@ public class PkiManagerImpl implements PkiManager {
 			final X509Certificate cer = (X509Certificate) fact.generateCertificate(is);
 			final Certificate[] chain = new Certificate[] { cer };
 
-			final URI keyUri = new URI("file://" + privateKeyPemPath.getAbsolutePath());
+			final URI keyUri = privateKeyPemPath.toURI();
+
 			String privateKeyContent = new String(Files.readAllBytes(Paths.get(keyUri)));
 
 			privateKeyContent = privateKeyContent.replaceAll("\\n", "")
@@ -85,7 +85,7 @@ public class PkiManagerImpl implements PkiManager {
 
 			keyStore.setKeyEntry(alias.toLowerCase(), privKey, aKeyPassword.toCharArray(), chain);
 		} catch (NoSuchAlgorithmException | CertificateException | IOException
-				| InvalidKeySpecException | URISyntaxException e) {
+				| InvalidKeySpecException e) {
 			throw new KeyStoreException(e);
 		}
 	}

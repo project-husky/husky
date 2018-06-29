@@ -19,20 +19,41 @@ package org.ehealth_connector.security.exceptions;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="en">Class implementing the SoapException.</div>
+ * <div class="de">Klasse implemetiert die SoapException.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
- *
  * <!-- @formatter:on -->
  */
 public class SoapException extends ClientSendException {
 
 	private static final long serialVersionUID = 718920336633885906L;
 
+	/** the soap exception code */
 	private String code;
+	/** the soap exception message */
 	private String message;
 
+	/**
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Default constructor to instanciate the object.</div>
+	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
+	 * <div class="fr">VOICIFRANCAIS</div>
+	 * <div class="it">ITALIANO</div>
+	 * 
+	 * @param aCode
+	 * <div class="en">The code of the exception.</div>
+	 * <div class="de">Der Code des Fehlers.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * @param aMessage
+	 * <div class="en">The message of the exception.</div>
+	 * <div class="de">Die Nachricht des Fehlers.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
 	public SoapException(String aCode, String aMessage) {
 		super("Code: " + aCode + ", Message: " + aMessage);
 		code = aCode;

@@ -37,11 +37,11 @@ public class IdpClientCertificateAuthConfigBuilder implements ClientConfigBuilde
 		clientConfig = new IdpClientCertificateAuthConfigImpl();
 	}
 
-	IdpClientCertificateAuthConfigImpl create() {
+	public IdpClientCertificateAuthConfigImpl create() {
 		return clientConfig;
 	}
 
-	IdpClientCertificateAuthConfigBuilder keyStore(KeyStore clientKeyStore) {
+	public IdpClientCertificateAuthConfigBuilder keyStore(KeyStore clientKeyStore) {
 		clientConfig.setClientKeyStore(clientKeyStore);
 		return this;
 	}
@@ -53,7 +53,8 @@ public class IdpClientCertificateAuthConfigBuilder implements ClientConfigBuilde
 
 	@Override
 	public IdpClientCertificateAuthConfigBuilder url(String aEndpointUrl) {
-		return null;
+		clientConfig.setUrl(aEndpointUrl);
+		return this;
 	}
 
 }

@@ -44,7 +44,6 @@ import org.slf4j.LoggerFactory;
 public class PkiManagerImplTest {
 
 	private String testCertAlias;
-	private File testCertPath;
 	private File testClientCertPemPath;
 	private String testClientKeyAlias;
 	private String testKeyAlias;
@@ -84,11 +83,12 @@ public class PkiManagerImplTest {
 		testKeyStoreCreateType = PkiManager.TYPE_PKCS12;
 
 		testClientKeyAlias = "testClientKeyCert";
-		testPrivateKeyPemPath = new File("./src/test/resources/testClientKey_key.p8");
-		testClientCertPemPath = new File("./src/test/resources/testClientKey_crt.pem");
+
+		testPrivateKeyPemPath = new File(getClass().getResource("/testClientKey_key.p8").getPath());
+		testClientCertPemPath = new File(
+				getClass().getResource("/testClientKey_crt.pem").getPath());
 
 		testCertAlias = "testImportCert";
-		testCertPath = new File("./src/test/resources/testCert_crt.pem");
 
 		testRemoveCertAlias = "testcertremove";
 
@@ -103,74 +103,11 @@ public class PkiManagerImplTest {
 	 */
 	@Test
 	public void testAddClientKeyAndCert() throws KeyStoreException, NoSuchAlgorithmException {
-		// final KeyStore ref =
-		// testPkiManager.createNewStore(testKeyStoreCreateType);
-		// testPkiManager.addClientKeyAndCert(testPrivateKeyPemPath,
-		// testClientCertPemPath, testClientKeyAlias, ref,
-		// testStorePassword);
-		//
-		// assertTrue(ref.isKeyEntry(testClientKeyAlias));
+		final KeyStore ref = testPkiManager.createNewStore(testKeyStoreCreateType);
+		testPkiManager.addClientKeyAndCert(testPrivateKeyPemPath, testClientCertPemPath,
+				testClientKeyAlias, ref, testStorePassword);
 
-		// TODO: This fails with the following exception
-		// java.security.KeyStoreException: java.net.URISyntaxException: Illegal
-		// character in authority at index 7:
-		// file://C:\src\ehc-Metadata\ehealthconnector\ehealth_connector-security\ehealth_connector-security-gen-impl\.\src\test\resources\testClientKey_key.p8
-		// at
-		// org.ehealth_connector.security.pki.impl.PkiManagerImpl.addClientKeyAndCert(PkiManagerImpl.java:136)
-		// at
-		// org.ehealth_connector.security.pki.impl.PkiManagerImplTest.testAddClientKeyAndCert(PkiManagerImplTest.java:173)
-		// at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-		// at
-		// sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-		// at
-		// sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-		// at java.lang.reflect.Method.invoke(Method.java:497)
-		// at
-		// org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-		// at
-		// org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-		// at
-		// org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-		// at
-		// org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-		// at
-		// org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:26)
-		// at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
-		// at
-		// org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:78)
-		// at
-		// org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:57)
-		// at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-		// at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-		// at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-		// at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-		// at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-		// at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-		// at
-		// org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
-		// at
-		// org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
-		// at
-		// org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:538)
-		// at
-		// org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:760)
-		// at
-		// org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:460)
-		// at
-		// org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:206)
-		// Caused by: java.net.URISyntaxException: Illegal character in
-		// authority at index 7:
-		// file://C:\src\ehc-Metadata\ehealthconnector\ehealth_connector-security\ehealth_connector-security-gen-impl\.\src\test\resources\testClientKey_key.p8
-		// at java.net.URI$Parser.fail(URI.java:2848)
-		// at java.net.URI$Parser.parseAuthority(URI.java:3186)
-		// at java.net.URI$Parser.parseHierarchical(URI.java:3097)
-		// at java.net.URI$Parser.parse(URI.java:3053)
-		// at java.net.URI.<init>(URI.java:588)
-		// at
-		// org.ehealth_connector.security.pki.impl.PkiManagerImpl.addClientKeyAndCert(PkiManagerImpl.java:122)
-		// ... 25 more
-		//
-
+		assertTrue(ref.isKeyEntry(testClientKeyAlias));
 	}
 
 	/**
@@ -183,7 +120,7 @@ public class PkiManagerImplTest {
 	@Test
 	public void testAddPublicCert() throws KeyStoreException, FileNotFoundException {
 		final KeyStore keyStore = testPkiManager.createNewStore(testKeyStoreCreateType);
-		testPkiManager.addPublicCert(testCertPath, testCertAlias, keyStore);
+		testPkiManager.addPublicCert(testClientCertPemPath, testCertAlias, keyStore);
 		LoggerFactory.getLogger(getClass()).info("" + Collections.list(keyStore.aliases()));
 		assertTrue(keyStore.containsAlias(testCertAlias));
 		assertTrue(keyStore.isCertificateEntry(testCertAlias));

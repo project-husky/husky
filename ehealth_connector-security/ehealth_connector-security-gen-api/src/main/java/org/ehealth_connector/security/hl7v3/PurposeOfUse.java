@@ -47,87 +47,172 @@ public interface PurposeOfUse {
 	public static final QName TYPE_NAME = new QName("urn:hl7-org:v3", TYPE_LOCAL_NAME, "hl7");
 
 	/**
-	 * Gets the value of the code property.
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the code.</div>
+	 * <div class="de">Methode um den code zu erhalten.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
-	 * @return possible object is {@link String }
-	 *
+	 * @return
+	 * <div class="en">The Code.</div>
+	 * <div class="de">Der Code.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
 	 */
 	public String getCode();
 
 	/**
-	 * Gets the value of the codeSystem property.
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the CodeSystem.</div>
+	 * <div class="de">Methode um das CodeSystem zu erhalten.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
-	 * @return possible object is {@link String }
-	 *
+	 * @return
+	 * <div class="en">The CodeSystem.</div>
+	 * <div class="de">Das CodeSystem.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
 	 */
 	public String getCodeSystem();
 
 	/**
-	 * Gets the value of the codeSystemName property.
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the CodeSystemName.</div>
+	 * <div class="de">Methode um den CodeSystemName zu erhalten.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
-	 * @return possible object is {@link String }
-	 *
+	 * @return
+	 * <div class="en">The CodeSystemName.</div>
+	 * <div class="de">Der CodeSystemName.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
 	 */
 	public String getCodeSystemName();
 
 	/**
-	 * Gets the value of the codeSystemVersion property.
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the CodeSystemVersion.</div>
+	 * <div class="de">Methode um die CodeSystemVersion zu erhalten.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
-	 * @return possible object is {@link String }
-	 *
+	 * @return
+	 * <div class="en">The CodeSystemVersion.</div>
+	 * <div class="de">Die CodeSystemVersion.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
 	 */
 	public String getCodeSystemVersion();
 
 	/**
-	 * Gets the value of the displayName property.
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the DisplayName.</div>
+	 * <div class="de">Methode um den DisplayName zu erhalten.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
-	 * @return possible object is {@link String }
-	 *
+	 * @return
+	 * <div class="en">The DisplayName.</div>
+	 * <div class="de">Der DisplayName.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
 	 */
 	public String getDisplayName();
 
 	/**
-	 * Sets the value of the code property.
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the Code.</div>
+	 * <div class="de">Methode um den Code zu setzen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param value
-	 *            allowed object is {@link String }
-	 *
+	 * <div class="en">The value to be set as Code.</div>
+	 * <div class="de">Der Wert der als Code gesetzt werden soll.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
 	 */
 	public void setCode(String value);
 
 	/**
-	 * Sets the value of the codeSystem property.
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the CodeSystem.</div>
+	 * <div class="de">Methode um das CodeSystem zu setzen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param value
-	 *            allowed object is {@link String }
-	 *
+	 * <div class="en">The value to be set as CodeSystem.</div>
+	 * <div class="de">Der Wert der als CodeSystem gesetzt werden soll.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
 	 */
 	public void setCodeSystem(String value);
 
 	/**
-	 * Sets the value of the codeSystemName property.
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the CodeSystemName.</div>
+	 * <div class="de">Methode um den CodeSystemName zu setzen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param value
-	 *            allowed object is {@link String }
-	 *
+	 * <div class="en">The value to be set as CodeSystemName.</div>
+	 * <div class="de">Der Wert der als CodeSystemName gesetzt werden soll.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
 	 */
 	public void setCodeSystemName(String value);
 
 	/**
-	 * Sets the value of the codeSystemVersion property.
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the CodeSystemVersion.</div>
+	 * <div class="de">Methode um die CodeSystemVersion zu setzen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param value
-	 *            allowed object is {@link String }
-	 *
+	 * <div class="en">The value to be set as CodeSystemVersion.</div>
+	 * <div class="de">Der Wert der als CodeSystemVersion gesetzt werden soll.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
 	 */
 	public void setCodeSystemVersion(String value);
 
 	/**
-	 * Sets the value of the displayName property.
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the DisplayName.</div>
+	 * <div class="de">Methode um den DisplayName zu setzen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
 	 * @param value
-	 *            allowed object is {@link String }
-	 *
+	 * <div class="en">The value to be set as DisplayName.</div>
+	 * <div class="de">Der Wert der als DisplayName gesetzt werden soll.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
 	 */
 	public void setDisplayName(String value);
 }
