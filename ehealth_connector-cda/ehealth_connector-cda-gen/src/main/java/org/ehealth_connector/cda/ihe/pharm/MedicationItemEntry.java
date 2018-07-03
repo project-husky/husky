@@ -113,8 +113,16 @@ public class MedicationItemEntry
 			org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationItemEntry mdht) {
 		super(mdht, null, null);
 		// adding missing template pcc id
-		mdht.getTemplateIds()
-				.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.1", "IHE PHARM").getIi());
+		boolean alreadyPresent = false;
+		for (II templateId : this.getMdht().getTemplateIds()) {
+			if ("1.3.6.1.4.1.19376.1.5.3.1.4.7.1".equalsIgnoreCase(templateId.getRoot())) {
+				alreadyPresent = true;
+			}
+		}
+		if (!alreadyPresent) {
+			mdht.getTemplateIds()
+					.add(new Identificator("1.3.6.1.4.1.19376.1.5.3.1.4.7.1", "IHE PHARM").getIi());
+		}
 		final CS statusCodeCompleted = DatatypesFactory.eINSTANCE.createCS();
 		statusCodeCompleted.setCode("completed");
 		this.getMdht().setStatusCode(statusCodeCompleted);
