@@ -327,10 +327,10 @@ public class CdaChLrqc
 				getLanguageCode());
 		if (newSection) {
 			// TODO move this to the model
-			laboratorySpecialtySection.getMdht().getEntries().get(0).getTemplateIds().clear();
-			Identificator id = new Identificator("1.3.6.1.4.1.19376.1.3.1", null);
-			laboratorySpecialtySection.getMdht().getEntries().get(0).getAct().getTemplateIds()
-					.add(id.getIi());
+//			laboratorySpecialtySection.getMdht().getEntries().get(0).getTemplateIds().clear();
+//			Identificator id = new Identificator("1.3.6.1.4.1.19376.1.3.1", null);
+//			laboratorySpecialtySection.getMdht().getEntries().get(0).getAct().getTemplateIds()
+//					.add(id.getIi());
 		}
 
 		setLaboratorySpecialtySection(laboratorySpecialtySection);
@@ -376,10 +376,10 @@ public class CdaChLrqc
 				getLanguageCode());
 		if (newSection) {
 			// TODO move this to the model
-			laboratorySpecialtySection.getMdht().getEntries().get(0).getTemplateIds().clear();
-			Identificator id = new Identificator("1.3.6.1.4.1.19376.1.3.1", null);
-			laboratorySpecialtySection.getMdht().getEntries().get(0).getAct().getTemplateIds()
-					.add(id.getIi());
+//			laboratorySpecialtySection.getMdht().getEntries().get(0).getTemplateIds().clear();
+//			Identificator id = new Identificator("1.3.6.1.4.1.19376.1.3.1", null);
+//			laboratorySpecialtySection.getMdht().getEntries().get(0).getAct().getTemplateIds()
+//					.add(id.getIi());
 		}
 
 		laboratorySpecialtySection.getLaboratoryReportDataProcessingEntry().getSpecimenAct()

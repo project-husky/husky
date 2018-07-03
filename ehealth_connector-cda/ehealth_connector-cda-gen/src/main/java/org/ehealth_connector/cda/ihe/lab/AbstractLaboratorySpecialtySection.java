@@ -45,8 +45,8 @@ public class AbstractLaboratorySpecialtySection extends
 		super(LABFactory.eINSTANCE.createLaboratorySpecialtySection().init());
 		setTitle(LanguageCode.ENGLISH);
 		// TODO move this to the model
-		Identificator id = new Identificator("2.16.756.5.30.1.1.10.3.3", null);
-		getMdht().getTemplateIds().add(id.getIi());
+//		Identificator id = new Identificator("2.16.756.5.30.1.1.10.3.3", null);
+//		getMdht().getTemplateIds().add(id.getIi());
 
 	}
 

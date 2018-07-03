@@ -47,7 +47,7 @@ public class SpecimenCollectionEntry
 	public SpecimenCollectionEntry() {
 		super(LABFactory.eINSTANCE.createSpecimenCollection().init());
 		// TODO move this to the model
-		getMdht().getCode().setDisplayName("Collection date of Unspecified specimen");
+//		getMdht().getCode().setDisplayName("Collection date of Unspecified specimen");
 	}
 
 	/**
@@ -59,7 +59,7 @@ public class SpecimenCollectionEntry
 	public SpecimenCollectionEntry(SpecimenCollection mdht) {
 		super(mdht);
 		// TODO move this to the model
-		getMdht().getCode().setDisplayName("Collection date of Unspecified specimen");
+//		getMdht().getCode().setDisplayName("Collection date of Unspecified specimen");
 	}
 
 	/**

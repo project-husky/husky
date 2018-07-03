@@ -19,7 +19,6 @@ package org.ehealth_connector.cda.ch.lab.lrqc;
 
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.LabObsList;
-import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
@@ -40,7 +39,8 @@ public class LaboratoryObservation
 	 */
 	public LaboratoryObservation() {
 		super();
-		getMdht().getTemplateIds().add(new Identificator("2.16.756.5.30.1.1.10.4.3").getIi());
+		// getMdht().getTemplateIds().add(new
+		// Identificator("2.16.756.5.30.1.1.10.4.3").getIi());
 	}
 
 	/**

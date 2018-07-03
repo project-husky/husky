@@ -90,10 +90,6 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 	 */
 	public void addAuthor(Author author) {
 		addAuthor(author, null);
-		// TODO remove old code
-		// getMdht().getAuthors().add(author.copyMdhtAuthor());
-		// final int nb = getMdht().getAuthors().size() - 1;
-		// getMdht().getAuthors().get(nb).setTypeCode(ParticipationType.AUT);
 	}
 
 	/**
