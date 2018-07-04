@@ -44,7 +44,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 
 /**
- * The Class AbstractCdaCh implements a CDA dcoument based on CDA-CH
+ * The Class AbstractCdaCh implements a CDA document based on CDA-CH
  * specification
  *
  * @param <EClinicalDocument>
@@ -301,7 +301,7 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 		setId(null);
 		setVersion(null, null);
 
-		setConfidentialityCode(null);
+		setConfidentialityCode(org.ehealth_connector.common.ch.enums.ConfidentialityCode.NORMAL);
 
 		// Set creation time of the document
 		setTimestamp(null);
@@ -314,6 +314,26 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 
 		// Type ID
 		setTypeId();
+	}
+
+	/**
+	 *
+	 * Sets Swiss EPR Confidentially Code
+	 *
+	 * @param code
+	 *            If null, "N" for "normal" will be set.
+	 *
+	 */
+	public void setConfidentialityCode(
+			org.ehealth_connector.common.ch.enums.ConfidentialityCode code) {
+		CE confidentialityCode;
+		if (code == null) {
+			confidentialityCode = org.ehealth_connector.common.ch.enums.ConfidentialityCode.NORMAL
+					.getCE();
+		} else {
+			confidentialityCode = code.getCE();
+		}
+		getDoc().setConfidentialityCode(confidentialityCode);
 	}
 
 	/**
@@ -351,4 +371,5 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 			getDoc().setSetId(ii);
 		}
 	}
+
 }

@@ -15,4 +15,12 @@
 		<module>ehealth_connector-cda-gen</module>
 		<module>ehealth_connector-cda-ch</module>
 	</modules>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.ehealth_connector.common.ch</groupId>
+			<artifactId>ehealth_connector-common-ch</artifactId>
+			<version>1.6-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
 </project>
