@@ -942,8 +942,10 @@ public class Util {
 		final Map<String, AddressUse> tl = new HashMap<>();
 		for (final TEL tel : telecoms) {
 			if (tel.getValue().toLowerCase().contains(type)) {
-				tl.put(tel.getValue(), (tel.getUses().size() > 0
-						? AddressUse.getEnum(tel.getUses().get(0).getName()) : null));
+				tl.put(tel.getValue(),
+						(tel.getUses().size() > 0
+								? AddressUse.getEnum(tel.getUses().get(0).getName())
+								: null));
 			}
 		}
 		return tl;
@@ -1098,10 +1100,13 @@ public class Util {
 	 * This is for debugging purposes, only. For normal use, this function shall
 	 * return false.
 	 *
-	 * @return true, when memory usage is to be displayed.
+	 * Debug examples: memory usage is to be displayed, make CDA contents
+	 * comparable to previous releases
+	 *
+	 * @return true, when Debug mode is on. false for normal usage.
 	 */
 	public static boolean isDebug() {
-		return false;
+		return true;
 	}
 
 	/**
