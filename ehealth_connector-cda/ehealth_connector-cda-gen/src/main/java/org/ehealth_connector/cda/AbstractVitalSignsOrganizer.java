@@ -28,23 +28,46 @@ import org.openhealthtools.mdht.uml.cda.ihe.VitalSignsOrganizer;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 
+/**
+ * The Class AbstractVitalSignsOrganizer.
+ */
 public class AbstractVitalSignsOrganizer
 		extends MdhtOrganizerFacade<org.openhealthtools.mdht.uml.cda.ihe.VitalSignsOrganizer> {
 
+	/**
+	 * Instantiates a new abstract vital signs organizer.
+	 */
 	protected AbstractVitalSignsOrganizer() {
 		super(IHEFactory.eINSTANCE.createVitalSignsOrganizer().init());
 		// Correct wrong MDHT CodeSystemName
 		getMdht().getCode().setCodeSystemName("SNOMED CT");
 	}
 
+	/**
+	 * Instantiates a new abstract vital signs organizer.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
 	protected AbstractVitalSignsOrganizer(VitalSignsOrganizer mdht) {
 		super(mdht);
 	}
 
+	/**
+	 * Adds the id.
+	 *
+	 * @param id
+	 *            the id
+	 */
 	public void addId(Identificator id) {
 		getMdht().getIds().add(id.getIi());
 	}
 
+	/**
+	 * Gets the effective time null flavor.
+	 *
+	 * @return the effective time null flavor
+	 */
 	public NullFlavor getEffectiveTimeNullFlavor() {
 		if ((getMdht().getEffectiveTime() != null)
 				&& getMdht().getEffectiveTime().isSetNullFlavor()) {
@@ -53,15 +76,37 @@ public class AbstractVitalSignsOrganizer
 		return null;
 	}
 
+	/**
+	 * Gets the ids.
+	 *
+	 * @return the ids
+	 */
 	public List<Identificator> getIds() {
 		return Util.convertIds(getMdht().getIds());
 	}
 
+	/**
+	 * Sets the effective time null flavor.
+	 *
+	 * @param nullFlavor
+	 *            the new effective time null flavor
+	 */
 	public void setEffectiveTimeNullFlavor(NullFlavor nullFlavor) {
 		final IVL_TS ivlts = DatatypesFactory.eINSTANCE.createIVL_TS();
 		ivlts.setNullFlavor(
 				org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.get(nullFlavor.getCodeValue()));
 		getMdht().setEffectiveTime(ivlts);
+	}
+
+	/**
+	 * Sets the id.
+	 *
+	 * @param id
+	 *            the id
+	 */
+	public void setId(Identificator id) {
+		getMdht().getIds().clear();
+		getMdht().getIds().add(id.getIi());
 	}
 
 }

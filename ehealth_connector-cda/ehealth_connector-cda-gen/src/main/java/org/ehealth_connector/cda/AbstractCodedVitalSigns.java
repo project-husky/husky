@@ -79,7 +79,10 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 		}
 		final VitalSignsOrganizer mdhtOrganizer = getOrganizer(id, vitalSign.getEffectiveTime(),
 				author);
-		// VitalSignsOrganizer mdhtOrganizer = organizer.getMdht();
+		mdhtOrganizer.getIds().clear();
+		for (Identificator id1 : organizer.getIds()) {
+			mdhtOrganizer.getIds().add(id1.getIi());
+		}
 		mdhtOrganizer.addObservation(vitalSign.getMdhtCopy());
 		// update the component type
 		final EList<Component4> components = mdhtOrganizer.getComponents();
