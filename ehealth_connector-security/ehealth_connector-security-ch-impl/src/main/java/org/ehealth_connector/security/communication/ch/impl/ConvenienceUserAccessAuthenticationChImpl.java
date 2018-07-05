@@ -21,9 +21,9 @@ import org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeed;
 import org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeedResponse;
 import org.ehealth_connector.security.ch.ppq.PrivacyPolicyQuery;
 import org.ehealth_connector.security.ch.ppq.PrivacyPolicyQueryModule;
+import org.ehealth_connector.security.communication.ch.clients.PpfClient;
 import org.ehealth_connector.security.communication.ch.clients.PpqClient;
 import org.ehealth_connector.security.communication.ch.clients.impl.ClientFactoryCh;
-import org.ehealth_connector.security.communication.ch.clients.impl.SimplePpfClient;
 import org.ehealth_connector.security.communication.ch.ppq.config.PpClientConfig;
 import org.ehealth_connector.security.communication.impl.ConvenienceUserAccessAuthenticationImpl;
 import org.ehealth_connector.security.core.SecurityHeaderElement;
@@ -49,7 +49,7 @@ public class ConvenienceUserAccessAuthenticationChImpl
 		if (!initialized) {
 			throw new ClientSendException("Opensaml Libs are not initialized");
 		}
-		final SimplePpfClient client = ClientFactoryCh.getPpfClient(clientConfiguration);
+		final PpfClient client = ClientFactoryCh.getPpfClient(clientConfiguration);
 		return client.send(aAssertion, feed);
 	}
 

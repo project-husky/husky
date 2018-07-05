@@ -22,14 +22,27 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 
+import org.apache.http.HttpException;
+import org.apache.http.HttpRequest;
+import org.apache.http.HttpResponse;
+import org.apache.http.config.SocketConfig;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.bootstrap.HttpServer;
+import org.apache.http.impl.bootstrap.ServerBootstrap;
+import org.apache.http.protocol.HttpContext;
+import org.apache.http.protocol.HttpRequestHandler;
 import org.ehealth_connector.security.authentication.AuthnRequest;
 import org.ehealth_connector.security.communication.config.impl.IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl;
 import org.ehealth_connector.security.deserialization.impl.AuthnRequestDeserializerImpl;
 import org.ehealth_connector.security.exceptions.ClientSendException;
 import org.ehealth_connector.security.saml2.Response;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 
 /**
@@ -43,12 +56,47 @@ import org.w3c.dom.Element;
  */
 public class IdpClientByBrowserAndProtocolHandlerTest extends ServerTestHelper {
 
+	private static Logger logger = LoggerFactory
+			.getLogger(IdpClientByBrowserAndProtocolHandlerTest.class);
+
+	private static HttpServer server;
+
+	private static int httpPort;
+
 	private IdpClientByBrowserAndProtocolHandler client;
+
 	private String testFilename;
 
 	private AuthnRequest testAuthnRequest;
 
 	private Response testResponse;
+
+	@BeforeClass
+	public static void setUpBefore() throws IOException {
+		final SocketConfig socketConfig = SocketConfig.custom().setSoTimeout(15000)
+				.setTcpNoDelay(true).build();
+
+		server = ServerBootstrap.bootstrap().setServerInfo("Test/1.1").setSocketConfig(socketConfig)
+				.registerHandler("*", new HttpRequestHandler() {
+
+					@Override
+					public void handle(HttpRequest request, HttpResponse response,
+							HttpContext context) throws HttpException, IOException {
+						logger.debug("The request %s", request.getRequestLine());
+						response.setStatusCode(500);
+						response.setEntity(new StringEntity("Hello this is a testserver"));
+					}
+
+				}).create();
+
+		server.start();
+		httpPort = server.getLocalPort();
+	}
+
+	@AfterClass
+	public static void tearDownAfter() {
+		server.stop();
+	}
 
 	/**
 	 * set up test parameters

@@ -50,12 +50,15 @@ public abstract class ServerTestHelper extends InitializerTestHelper {
 
 	private static int httpPort;
 
+	private static ServerBootstrap bootstrap;
+
 	@BeforeClass
 	public static void setUpBefore() throws IOException {
 		final SocketConfig socketConfig = SocketConfig.custom().setSoTimeout(15000)
 				.setTcpNoDelay(true).build();
 
-		server = ServerBootstrap.bootstrap().setServerInfo("Test/1.1").setSocketConfig(socketConfig)
+		bootstrap = ServerBootstrap.bootstrap();
+		server = bootstrap.setServerInfo("Test/1.1").setSocketConfig(socketConfig)
 				.registerHandler("*", new HttpRequestHandler() {
 
 					@Override
@@ -67,6 +70,7 @@ public abstract class ServerTestHelper extends InitializerTestHelper {
 					}
 
 				}).create();
+
 		server.start();
 		httpPort = server.getLocalPort();
 

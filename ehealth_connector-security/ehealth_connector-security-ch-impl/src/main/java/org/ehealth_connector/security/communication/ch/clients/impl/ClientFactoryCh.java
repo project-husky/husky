@@ -17,6 +17,7 @@
  */
 package org.ehealth_connector.security.communication.ch.clients.impl;
 
+import org.ehealth_connector.security.communication.ch.clients.PpfClient;
 import org.ehealth_connector.security.communication.ch.clients.PpqClient;
 import org.ehealth_connector.security.communication.ch.ppq.config.PpClientConfig;
 import org.ehealth_connector.security.communication.clients.impl.ClientFactory;
@@ -31,7 +32,7 @@ import org.ehealth_connector.security.communication.clients.impl.ClientFactory;
  */
 public class ClientFactoryCh extends ClientFactory {
 
-	public static SimplePpfClient getPpfClient(PpClientConfig clientConfiguration) {
+	public static PpfClient getPpfClient(PpClientConfig clientConfiguration) {
 		return new SimplePpfClient(clientConfiguration);
 	}
 
