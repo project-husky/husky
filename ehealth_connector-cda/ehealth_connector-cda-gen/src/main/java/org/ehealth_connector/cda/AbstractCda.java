@@ -23,12 +23,16 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.NotImplementedException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.emf.ecore.util.FeatureMap.Entry;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
+import org.eclipse.emf.ecore.xml.type.impl.ProcessingInstructionImpl;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Patient;
@@ -81,6 +85,38 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipDocument;
 public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		extends MdhtFacade<EClinicalDocument> {
 
+	/**
+	 * This comparator allows to make sure that the top level XML content always
+	 * appear in the same order (this simplifies comparison of CDA contents with
+	 * previous releases)
+	 */
+	private class FeatureMapEntryComparator implements Comparator<Entry> {
+
+		/**
+		 *
+		 * Compares two FeatureMap Entries. ProcessingInstructions based on
+		 * their data content.
+		 *
+		 * {@inheritDoc}
+		 *
+		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+		 */
+		@Override
+		public int compare(Entry a, Entry b) {
+			if (a.getValue().getClass() == b.getValue().getClass()) {
+				if (a.getValue() instanceof ProcessingInstructionImpl) {
+					return ((ProcessingInstructionImpl) a.getValue()).getData()
+							.compareTo(((ProcessingInstructionImpl) b.getValue()).getData());
+				} else if (a.getValue() instanceof String) {
+					return ((String) a.getValue()).compareTo(((String) b.getValue()));
+				} else
+					throw new NotImplementedException(a.getValue().getClass().getName());
+			} else
+				return a.getValue().getClass().getName()
+						.compareTo(b.getValue().getClass().getName());
+		}
+	}
+
 	private DocumentRoot docRoot;
 	private boolean performNarrativeTextGeneration = true;
 
@@ -93,11 +129,14 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 */
 	public AbstractCda(EClinicalDocument doc) {
 		super(doc);
+		// Set the eHealthConnector comment
 		docRoot = CDAFactory.eINSTANCE.createDocumentRoot();
 		FeatureMapUtil.addComment(docRoot.getMixed(), 0, generateComment());
 		// set xml namespace
 		docRoot.getXMLNSPrefixMap().put("", CDAPackage.eNS_URI);
 		docRoot.setClinicalDocument(doc);
+		sortXmlHeader();
+
 	}
 
 	public AbstractCda(EClinicalDocument doc, LanguageCode languageCode) {
@@ -128,6 +167,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		}
 		addStylesheet(stylesheet);
 		initCda();
+		sortXmlHeader();
 	}
 
 	/**
@@ -296,7 +336,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	/**
 	 * Switch automatic generation of narrative text off
 	 */
-	public void DisableNarrativeTextGeneration() {
+	public void disableNarrativeTextGeneration() {
 		performNarrativeTextGeneration = false;
 	}
 
@@ -928,5 +968,12 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 			i.setValue(number);
 		}
 		getDoc().setVersionNumber(i);
+	}
+
+	public void sortXmlHeader() {
+		// Make sure that the top level XML content always appear in the same
+		// order (this simplifies comparison of CDA contents with previous
+		// releases)
+		docRoot.getMixed().sort(new FeatureMapEntryComparator());
 	}
 }

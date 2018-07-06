@@ -20,12 +20,15 @@ package org.ehealth_connector.cda.ch.edes;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.AbstractAllergyProblem;
 import org.ehealth_connector.cda.AbstractCda;
+import org.ehealth_connector.cda.AbstractObservation;
+import org.ehealth_connector.cda.AbstractOrganizer;
 import org.ehealth_connector.cda.AbstractProblemConcern;
 import org.ehealth_connector.cda.AbstractProblemEntry;
 import org.ehealth_connector.cda.ch.ActiveProblemConcern;
@@ -327,6 +330,29 @@ public class CdaChEdesCommon {
 				(org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection) mCodedVitalSigns
 						.getMdht(),
 				"cvit", LanguageCode.getEnum(mdhtDocument.getLanguageCode().getCode()));
+		return b.toString();
+	}
+
+	/**
+	 * <div class="en">Generates the human readable text of the coded vital
+	 * signs section</div> <div class="de">Liefert den menschenlesbaren Text des
+	 * Kapitels zu Aktiven Leiden zurück</div>.
+	 *
+	 * @param organizerComparator
+	 *            the organizer comparator
+	 * @param observationComparator
+	 *            the observation comparator
+	 * @return the active problem concerns text
+	 */
+	public String generateNarrativeTextCodedVitalSigns(
+			Comparator<AbstractOrganizer> organizerComparator,
+			Comparator<AbstractObservation> observationComparator) {
+		final ObservationChTextBuilder b = new ObservationChTextBuilder(
+				(org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection) mCodedVitalSigns
+						.getMdht(),
+				"cvit", LanguageCode.getEnum(mdhtDocument.getLanguageCode().getCode()));
+		b.setOrganizerComparator(organizerComparator);
+		b.setObservationComparator(observationComparator);
 		return b.toString();
 	}
 

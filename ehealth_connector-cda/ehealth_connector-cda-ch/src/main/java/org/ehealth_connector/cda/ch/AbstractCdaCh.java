@@ -29,9 +29,9 @@ import org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.CountryCode;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.CDAPackage;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection;
@@ -182,6 +182,7 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 		final ObservationChTextBuilder b = new ObservationChTextBuilder(laboratorySpecialtySection,
 				contentIdPrefix, LanguageCode.getEnum(getMdht().getLanguageCode().getCode()),
 				posCodeSystemOid);
+		// TODO: Custom Comparators hinzufügen
 		return b.toString();
 	}
 
@@ -289,22 +290,6 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 	 */
 	@Override
 	public void initCda() {
-		// // Set the eHealthConnector comment
-		// FeatureMapUtil.addComment(docRoot.getMixed(), 0, generateComment());
-
-		// Add the stylesheet processing instructions to the document root using
-		// featuremaputil
-		// set xml namespace
-		getDocRoot().getXMLNSPrefixMap().put("", CDAPackage.eNS_URI);
-
-		// Set OID of the document
-		setId(null);
-		setVersion(null, null);
-
-		setConfidentialityCode(org.ehealth_connector.common.ch.enums.ConfidentialityCode.NORMAL);
-
-		// Set creation time of the document
-		setTimestamp(null);
 
 		// Fix RealmCode
 		final CS cs = DatatypesFactory.eINSTANCE.createCS();
@@ -314,6 +299,18 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 
 		// Type ID
 		setTypeId();
+
+		// Set OID of the document
+		setId(null);
+		setSetId(null);
+		setVersion(null, null);
+
+		// Set default Swiss EPR confidentiality code of the document (normal)
+		setConfidentialityCode(org.ehealth_connector.common.ch.enums.ConfidentialityCode.NORMAL);
+
+		// Set creation time of the document
+		setTimestamp(DateUtil.nowAsDate());
+
 	}
 
 	/**

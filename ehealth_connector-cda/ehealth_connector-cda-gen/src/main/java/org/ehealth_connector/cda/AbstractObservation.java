@@ -20,15 +20,18 @@ package org.ehealth_connector.cda;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.enums.ActSite;
+import org.ehealth_connector.cda.enums.VitalSignCodes;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Performer;
 import org.ehealth_connector.common.ReferenceRange;
 import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.LangTexts;
 import org.ehealth_connector.common.utils.Util;
@@ -47,8 +50,10 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationPhysicalPerformer;
 
 public class AbstractObservation
-		extends MdhtObservationFacade<org.openhealthtools.mdht.uml.cda.Observation> {
+		extends MdhtObservationFacade<org.openhealthtools.mdht.uml.cda.Observation>
+		implements Comparator<AbstractObservation> {
 
+	protected LanguageCode myLang = LanguageCode.ENGLISH;
 	protected LangTexts myValueLangTexts = new LangTexts();
 	protected LangTexts myObservationLangTexts = new LangTexts();
 	protected LangTexts myTargetSiteLangTexts = new LangTexts();
@@ -57,6 +62,12 @@ public class AbstractObservation
 	public AbstractObservation(Observation mdht) {
 		super(mdht);
 		mObservation = mdht;
+	}
+
+	public AbstractObservation(Observation mdht, LanguageCode lang) {
+		super(mdht);
+		mObservation = mdht;
+		myLang = lang;
 	}
 
 	/**
@@ -125,6 +136,17 @@ public class AbstractObservation
 	}
 
 	/**
+	 * {@inheritDoc}
+	 * 
+	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+	 */
+	@Override
+	public int compare(AbstractObservation o1, AbstractObservation o2) {
+		AbstractObservationComparator comparator = new AbstractObservationComparator();
+		return comparator.compare(o1, o2);
+	}
+
+	/**
 	 * Gets the auhtor list.
 	 *
 	 * @return the auhtor list
@@ -176,6 +198,24 @@ public class AbstractObservation
 
 	public Object getMdhtObservation() {
 		return mObservation;
+	}
+
+	/**
+	 * Gets the narrative text of he observation in the desired language.
+	 *
+	 * @return the observation name
+	 */
+	public String getNarrativeText() {
+		String obsName = getText();
+		if ("".equals(obsName)) {
+			VitalSignCodes vs = VitalSignCodes.getEnum(getCode().getCode());
+			if (vs != null)
+				obsName = vs.getDisplayName(myLang);
+		}
+		if ("".equals(obsName)) {
+			obsName = getCode().getOriginalText();
+		}
+		return obsName;
 	}
 
 	public org.openhealthtools.mdht.uml.cda.Observation getObservation() {

@@ -20,9 +20,12 @@ package org.ehealth_connector.cda.ch.edes;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.ehealth_connector.cda.AbstractObservation;
+import org.ehealth_connector.cda.AbstractOrganizer;
 import org.ehealth_connector.cda.AbstractVitalSignObservation;
 import org.ehealth_connector.cda.ch.AbstractCdaCh;
 import org.ehealth_connector.cda.ch.ActiveProblemConcern;
@@ -195,6 +198,38 @@ public class CdaChEdesEdpn
 	 */
 	public void addPastIllness(PastProblemConcern pastIllness) {
 		mCommon.addPastIllness(pastIllness, getDoc().getHistoryOfPastIllnessSection());
+	}
+
+	/**
+	 * <div class="en">Generates the human readable text of the coded vital
+	 * signs section</div> <div class="de">Generiert den menschenlesbaren Text
+	 * des Kapitels zu Vitalzeichen</div>.
+	 *
+	 * @param organizerComparator
+	 *            the organizer comparator (pass null for default sorting)
+	 * @param observationComparator
+	 *            the observation comparator (pass null for default sorting)
+	 */
+	public void generateNarrativeTextCodedVitalSigns() {
+		getCodedVitalSignsSection().getMdht()
+				.createStrucDocText(mCommon.generateNarrativeTextCodedVitalSigns());
+	}
+
+	/**
+	 * <div class="en">Generates the human readable text of the coded vital
+	 * signs section</div> <div class="de">Generiert den menschenlesbaren Text
+	 * des Kapitels zu Vitalzeichen</div>.
+	 *
+	 * @param organizerComparator
+	 *            the organizer comparator (pass null for default sorting)
+	 * @param observationComparator
+	 *            the observation comparator (pass null for default sorting)
+	 */
+	public void generateNarrativeTextCodedVitalSigns(
+			Comparator<AbstractOrganizer> organizerComparator,
+			Comparator<AbstractObservation> observationComparator) {
+		getCodedVitalSignsSection().getMdht().createStrucDocText(mCommon
+				.generateNarrativeTextCodedVitalSigns(organizerComparator, observationComparator));
 	}
 
 	/**
@@ -1259,4 +1294,5 @@ public class CdaChEdesEdpn
 		cvs.setVitalSignsOrganizer(organizer);
 		setCodedVitalSignsSection(cvs);
 	}
+
 }

@@ -784,8 +784,12 @@ public class DateUtil {
 	 * @return the date
 	 */
 	public static Date parseIVL_TSVDateTimeValue(IVL_TS effectiveTime) {
-		final String value = effectiveTime.getValue();
-		return parseDates(value);
+		Date date = null;
+		if (effectiveTime != null) {
+			final String value = effectiveTime.getValue();
+			date = parseDates(value);
+		}
+		return date;
 	}
 
 	/**

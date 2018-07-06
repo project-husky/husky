@@ -20,6 +20,8 @@ package org.ehealth_connector.cda.ch.textbuilder;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -27,10 +29,12 @@ import java.util.UUID;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.ehealth_connector.cda.AbstractObservation;
+import org.ehealth_connector.cda.AbstractObservationComparator;
+import org.ehealth_connector.cda.AbstractOrganizer;
+import org.ehealth_connector.cda.AbstractOrganizerComparator;
 import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
 import org.ehealth_connector.cda.ch.lab.StudiesSummarySection;
 import org.ehealth_connector.cda.enums.ContentIdPrefix;
-import org.ehealth_connector.cda.enums.VitalSignCodes;
 import org.ehealth_connector.cda.enums.epsos.BloodGroup;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryAct;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection;
@@ -74,6 +78,9 @@ public class ObservationChTextBuilder extends TextBuilder {
 	private final String contentIdPrefix;
 	private final LanguageCode lang;
 	private final ResourceBundle resBundle;
+	private Comparator<AbstractOrganizer> organizerComparator = new AbstractOrganizerComparator();
+	private Comparator<AbstractObservation> observationComparator = new AbstractObservationComparator();
+
 	private final String posCodeSystemOid;
 
 	/**
@@ -234,19 +241,32 @@ public class ObservationChTextBuilder extends TextBuilder {
 						i++;
 						addTableRowLaboratorySpecialtySection(sectionLabel, i,
 								(LaboratoryBatteryOrganizerImpl) battery,
-								new AbstractObservation(obs));
+								new AbstractObservation(obs, lang));
 					}
 				}
 			}
 			if (empty)
 				addTableRowLaboratorySpecialtySection(sectionLabel, 1, null, null);
 		} else if (codedVitalSignsSection != null) {
-			for (Organizer battery : codedVitalSignsSection.getOrganizers()) {
-				if (battery instanceof VitalSignsOrganizerImpl) {
-					for (Observation obs : ((VitalSignsOrganizerImpl) battery).getObservations()) {
+			ArrayList<AbstractOrganizer> organizers = new ArrayList<AbstractOrganizer>();
+			for (Organizer bat : codedVitalSignsSection.getOrganizers()) {
+				organizers.add(new AbstractOrganizer(bat, lang));
+			}
+			organizers.sort(organizerComparator);
+			for (AbstractOrganizer battery : organizers) {
+				if (battery.getMdht() instanceof VitalSignsOrganizerImpl) {
+					ArrayList<AbstractObservation> observations = new ArrayList<AbstractObservation>();
+					for (Observation obs : ((VitalSignsOrganizerImpl) battery.getMdht())
+							.getObservations()) {
+						observations.add(new AbstractObservation(obs, lang));
+						empty = false;
+					}
+					observations.sort(observationComparator);
+					for (AbstractObservation obs : observations) {
 						empty = false;
 						i++;
-						addTableRowCodedVitalSignsSection(i, battery, new AbstractObservation(obs));
+						addTableRowCodedVitalSignsSection(i, battery.getMdht(),
+								new AbstractObservation(obs.getObservation(), lang));
 					}
 				}
 			}
@@ -343,12 +363,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 			rowColumns.add(getCell(Integer.toString(rowNumber)));
 
 			// Observation
-			String obsName = observation.getText();
-			if ("".equals(obsName)) {
-				VitalSignCodes vs = VitalSignCodes.getEnum(obsCode.getCode());
-				if (vs != null)
-					obsName = vs.getDisplayName(lang);
-			}
+			String obsName = observation.getNarrativeText();
 			contentId = contentIdPrefix + "_observation_" + rowNumber;
 			observation.setTextReference(contentId);
 			rowColumns.add(getCellWithContent(getCellContent(obsName), contentId));
@@ -389,7 +404,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 			rowColumns.add(getCellWithContent(observation.getCommentText(contentId), contentId));
 
 			// Value obtained
-			rowColumns.add(getCell(getObservationResultObtainmentDate()));
+			rowColumns.add(getCell(getObservationResultObtainmentTimestamp(battery, observation)));
 
 			// Performer
 			rowColumns.add(getCell(getPerformer(battery, observation)));
@@ -479,12 +494,10 @@ public class ObservationChTextBuilder extends TextBuilder {
 			rowColumns.add(getCell(Integer.toString(rowNumber)));
 
 			// Observation
+			String obsName = observation.getNarrativeText();
 			contentId = contentIdPrefix + "_" + sectionLabel + "_observation_" + rowNumber;
-			String text = observation.getText();
-			if ("".equals(text))
-				text = observation.getCode().getOriginalText();
-			rowColumns.add(getCellWithContent(text, contentId));
 			observation.setTextReference(contentId);
+			rowColumns.add(getCellWithContent(getCellContent(obsName), contentId));
 
 			// Result
 			contentId = contentIdPrefix + "_" + sectionLabel + "_value_" + rowNumber;
@@ -607,7 +620,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 			rowColumns.add(getCellWithContent(getSpecimenReceivedDate(contentId), contentId));
 
 			// Value obtained
-			rowColumns.add(getCell(getObservationResultObtainmentDate()));
+			rowColumns.add(getCell(getObservationResultObtainmentTimestamp(battery, observation)));
 
 			// Performer
 			rowColumns.add(getCell(getPerformer(battery, observation)));
@@ -705,6 +718,18 @@ public class ObservationChTextBuilder extends TextBuilder {
 	}
 
 	/**
+	 * Format the given date as dd.MM.yyyy HH:mm
+	 *
+	 * @param date
+	 *            the date
+	 * @return the formatted timestamp
+	 */
+	public String formatDate(Date date) {
+		final SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+		return sdf.format(date);
+	}
+
+	/**
 	 * Format single timestamp or interval (dd.MM.yyyy HH:mm).
 	 *
 	 * @param ivlTS
@@ -713,7 +738,6 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 */
 	private String formatSingleTimestampOrInterval(IVL_TS ivlTS) {
 		String retVal = "";
-		final SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 
 		String value = ivlTS.getValue();
 		String low = null;
@@ -730,19 +754,19 @@ public class ObservationChTextBuilder extends TextBuilder {
 			high = "";
 		if (!"".equals(value))
 			if (value.length() == 17)
-				value = sdf.format(DateUtil.parseDateyyyyMMddHHmmZZZZ(value));
+				value = formatDate(DateUtil.parseDateyyyyMMddHHmmZZZZ(value));
 			else
-				value = sdf.format(DateUtil.parseDateyyyyMMddHHmmssZZZZ(value));
+				value = formatDate(DateUtil.parseDateyyyyMMddHHmmssZZZZ(value));
 		if (!"".equals(low))
 			if (low.length() == 17)
-				low = sdf.format(DateUtil.parseDateyyyyMMddHHmmZZZZ(low));
+				low = formatDate(DateUtil.parseDateyyyyMMddHHmmZZZZ(low));
 			else
-				low = sdf.format(DateUtil.parseDateyyyyMMddHHmmssZZZZ(low));
+				low = formatDate(DateUtil.parseDateyyyyMMddHHmmssZZZZ(low));
 		if (!"".equals(high))
 			if (high.length() == 17)
-				high = sdf.format(DateUtil.parseDateyyyyMMddHHmmZZZZ(high));
+				high = formatDate(DateUtil.parseDateyyyyMMddHHmmZZZZ(high));
 			else
-				high = sdf.format(DateUtil.parseDateyyyyMMddHHmmssZZZZ(high));
+				high = formatDate(DateUtil.parseDateyyyyMMddHHmmssZZZZ(high));
 		if ("".equals(low) && "".equals(high))
 			retVal = value;
 		else
@@ -812,44 +836,51 @@ public class ObservationChTextBuilder extends TextBuilder {
 	}
 
 	/**
-	 * Gets the narrative text of the observation result obtention date.
+	 * Gets the observation comparator.
 	 *
-	 * @return the narrative text of the specimen received date
+	 * @return the observation comparator
 	 */
-	private String getObservationResultObtainmentDate() {
-		String retVal = "";
-		if (laboratoryAct != null) {
-			for (EntryRelationship er : laboratoryAct.getMdht().getEntryRelationships()) {
-				if (er.getOrganizer() != null) {
-					if (er.getOrganizer().getTemplateIds() != null) {
-						for (II templateId : er.getOrganizer().getTemplateIds()) {
-							if (templateId.getRoot().equals("1.3.6.1.4.1.19376.1.3.1.4")) {
-								if (er.getOrganizer().getEffectiveTime() != null) {
-									retVal = formatSingleTimestampOrInterval(
-											er.getOrganizer().getEffectiveTime());
-								}
-							}
-						}
-					}
+	public Comparator<AbstractObservation> getObservationComparator() {
+		return observationComparator;
+	}
 
-				}
-			}
-		} else if (codedVitalSignsSection != null) {
-			for (Organizer organizer : codedVitalSignsSection.getOrganizers()) {
-				if (organizer.getTemplateIds() != null) {
-					for (II templateId : organizer.getTemplateIds()) {
-						if (templateId.getRoot().equals("1.3.6.1.4.1.19376.1.5.3.1.4.13.1")) {
-							if (organizer.getEffectiveTime() != null) {
-								retVal = formatSingleTimestampOrInterval(
-										organizer.getEffectiveTime());
-							}
-						}
-					}
-				}
+	/**
+	 * Gets the narrative text of the observation result obtainment timestamp.
+	 *
+	 * @param battery
+	 *            the battery
+	 * @param observation
+	 *            the observation
+	 * @return the narrative text of the observation result obtainment timestamp
+	 */
+	private String getObservationResultObtainmentTimestamp(Organizer battery,
+			AbstractObservation observation) {
+
+		String retVal = "";
+		Date obsDate = null;
+
+		// Try to find timestamp on the observation
+		obsDate = observation.getEffectiveTime();
+		if (obsDate != null) {
+			retVal = formatDate(obsDate);
+		}
+
+		if ("".equals(retVal)) {
+			IVL_TS batteryDate = battery.getEffectiveTime();
+			if (batteryDate != null) {
+				retVal = formatSingleTimestampOrInterval(batteryDate);
 			}
 		}
 		return retVal;
+	}
 
+	/**
+	 * Gets the organizer comparator.
+	 *
+	 * @return the organizer comparator
+	 */
+	public Comparator<AbstractOrganizer> getOrganizerComparator() {
+		return organizerComparator;
 	}
 
 	/**
@@ -1065,6 +1096,28 @@ public class ObservationChTextBuilder extends TextBuilder {
 	}
 
 	/**
+	 * Sets the observation comparator.
+	 *
+	 * @param comparator
+	 *            the new observation comparator
+	 */
+	public void setObservationComparator(Comparator<AbstractObservation> comparator) {
+		if (comparator != null)
+			observationComparator = comparator;
+	}
+
+	/**
+	 * Sets the organizer comparator.
+	 *
+	 * @param comparator
+	 *            the new organizer comparator
+	 */
+	public void setOrganizerComparator(Comparator<AbstractOrganizer> comparator) {
+		if (comparator != null)
+			organizerComparator = comparator;
+	}
+
+	/**
 	 * Returns formatted string (similar to HTML but still conform to the CDA
 	 * schema) for the narrative text of the CDA section.
 	 *
@@ -1189,4 +1242,5 @@ public class ObservationChTextBuilder extends TextBuilder {
 		}
 		return retVal;
 	}
+
 }
