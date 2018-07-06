@@ -594,6 +594,24 @@ public class Util {
 	}
 
 	/**
+	 * Creates an MDHT ED reference from a given String. Adds the hashtag '#'
+	 * automatically, if not present as first character.
+	 *
+	 * @param existingText
+	 *            the existing text
+	 * @param reference
+	 *            the reference
+	 * @return the MDHT ED
+	 */
+	public static ED createReference(ED existingText, String reference) {
+		ED ed = existingText;
+		if (ed == null)
+			ed = DatatypesFactory.eINSTANCE.createED();
+		ed.setReference(createReferenceTel(reference));
+		return ed;
+	}
+
+	/**
 	 * <div class="en">Creates the reference.</div>
 	 *
 	 * @param contentId
@@ -618,13 +636,13 @@ public class Util {
 	 * Creates an MDHT ED reference from a given String. Adds the hashtag '#'
 	 * automatically, if not present as first character.
 	 *
-	 * @param value
+	 * @param reference
 	 *            the reference value
 	 * @return the MDHT ED
 	 */
-	public static ED createReference(String value) {
-		final ED ed = DatatypesFactory.eINSTANCE.createED();
-		ed.setReference(createReferenceTel(value));
+	public static ED createReference(String reference) {
+		ED ed = DatatypesFactory.eINSTANCE.createED();
+		ed.setReference(createReferenceTel(reference));
 		return ed;
 	}
 

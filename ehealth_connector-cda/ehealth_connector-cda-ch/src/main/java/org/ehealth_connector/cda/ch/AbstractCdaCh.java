@@ -18,11 +18,14 @@ package org.ehealth_connector.cda.ch;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.Comparator;
 
 import javax.xml.bind.DatatypeConverter;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.AbstractCda;
+import org.ehealth_connector.cda.AbstractObservation;
+import org.ehealth_connector.cda.AbstractOrganizer;
 import org.ehealth_connector.cda.ObservationMediaEntry;
 import org.ehealth_connector.cda.ch.textbuilder.ObservationChTextBuilder;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection;
@@ -182,7 +185,36 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 		final ObservationChTextBuilder b = new ObservationChTextBuilder(laboratorySpecialtySection,
 				contentIdPrefix, LanguageCode.getEnum(getMdht().getLanguageCode().getCode()),
 				posCodeSystemOid);
-		// TODO: Custom Comparators hinzufügen
+		return b.toString();
+	}
+
+	/**
+	 * <div class="en">Generates the human readable text of the laboratory
+	 * observations chapter</div> <div class="de">Liefert den menschenlesbaren
+	 * Text zu dem Kapitel Laborresultate zurück</div>.
+	 *
+	 * @param laboratorySpecialtySection
+	 *            the laboratory specialty section
+	 * @param contentIdPrefix
+	 *            the content id prefix
+	 * @param posCodeSystemOid
+	 *            the oid of the code system to be used as position (e.g.
+	 *            2.16.756.5.30.1.129.1.3 for the Swiss Analysis List)
+	 * @param organizerComparator
+	 *            the organizer comparator (pass null for default sorting)
+	 * @param observationComparator
+	 *            the observation comparator (pass null for default sorting)
+	 * @return the laboratory observations text
+	 */
+	public String generateNarrativeTextLaboratoryObservations(
+			AbstractLaboratorySpecialtySection laboratorySpecialtySection, String contentIdPrefix,
+			String posCodeSystemOid, Comparator<AbstractOrganizer> organizerComparator,
+			Comparator<AbstractObservation> observationComparator) {
+		final ObservationChTextBuilder b = new ObservationChTextBuilder(laboratorySpecialtySection,
+				contentIdPrefix, LanguageCode.getEnum(getMdht().getLanguageCode().getCode()),
+				posCodeSystemOid);
+		b.setOrganizerComparator(organizerComparator);
+		b.setObservationComparator(observationComparator);
 		return b.toString();
 	}
 

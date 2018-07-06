@@ -34,6 +34,21 @@ public class AbstractObservationComparator implements Comparator<AbstractObserva
 	 */
 	@Override
 	public int compare(AbstractObservation a, AbstractObservation b) {
-		return a.getNarrativeText().compareToIgnoreCase(b.getNarrativeText());
+		if ((a == null) && (b == null))
+			return 0;
+		else if ((a == null) && (b != null))
+			return -1;
+		else if ((a != null) && (b == null))
+			return 1;
+		else {
+			if ((a.getNarrativeText() == null) && (b.getNarrativeText() == null))
+				return 0;
+			else if ((a.getNarrativeText() == null) && (b.getNarrativeText() != null))
+				return -1;
+			else if ((a.getNarrativeText() != null) && (b.getNarrativeText() == null))
+				return 1;
+			else
+				return a.getNarrativeText().compareToIgnoreCase(b.getNarrativeText());
+		}
 	}
 }

@@ -137,7 +137,7 @@ public class AbstractObservation
 
 	/**
 	 * {@inheritDoc}
-	 * 
+	 *
 	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 	 */
 	@Override
@@ -382,11 +382,12 @@ public class AbstractObservation
 	 */
 	@Override
 	public void setTextReference(String textReference) {
+		ED existingText = this.getMdht().getText();
 		if (textReference != null) {
 			if (!textReference.equals("")) {
 				if (!textReference.startsWith("#"))
 					textReference = "#" + textReference;
-				this.getMdht().setText(Util.createReference(textReference));
+				this.getMdht().setText(Util.createReference(existingText, textReference));
 			}
 		}
 	}

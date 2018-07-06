@@ -25,7 +25,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.UUID;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.ehealth_connector.cda.AbstractObservation;
@@ -56,7 +55,6 @@ import org.openhealthtools.mdht.uml.cda.Participant2;
 import org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.impl.VitalSignsOrganizerImpl;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer;
-import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.impl.LaboratoryBatteryOrganizerImpl;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
@@ -233,15 +231,28 @@ public class ObservationChTextBuilder extends TextBuilder {
 		append("<tbody>");
 		int i = 0;
 		if (laboratoryAct != null) {
-			for (Organizer battery : laboratoryAct.getMdht().getOrganizers()) {
-				if (battery instanceof LaboratoryBatteryOrganizerImpl) {
-					for (LaboratoryObservation obs : ((LaboratoryBatteryOrganizerImpl) battery)
-							.getLaboratoryObservations()) {
+			ArrayList<AbstractOrganizer> organizers = new ArrayList<AbstractOrganizer>();
+			for (Organizer bat : laboratoryAct.getMdht().getOrganizers()) {
+				organizers.add(new AbstractOrganizer(bat, lang));
+			}
+			if (organizerComparator != null)
+				organizers.sort(organizerComparator);
+			for (AbstractOrganizer battery : organizers) {
+				if (battery.getMdht() instanceof LaboratoryBatteryOrganizerImpl) {
+					ArrayList<AbstractObservation> observations = new ArrayList<AbstractObservation>();
+					for (Observation obs : ((LaboratoryBatteryOrganizerImpl) battery.getMdht())
+							.getObservations()) {
+						observations.add(new AbstractObservation(obs, lang));
+						empty = false;
+					}
+					if (observationComparator != null)
+						observations.sort(observationComparator);
+					for (AbstractObservation obs : observations) {
 						empty = false;
 						i++;
 						addTableRowLaboratorySpecialtySection(sectionLabel, i,
-								(LaboratoryBatteryOrganizerImpl) battery,
-								new AbstractObservation(obs, lang));
+								(LaboratoryBatteryOrganizerImpl) battery.getMdht(),
+								new AbstractObservation(obs.getObservation(), lang));
 					}
 				}
 			}
@@ -252,7 +263,8 @@ public class ObservationChTextBuilder extends TextBuilder {
 			for (Organizer bat : codedVitalSignsSection.getOrganizers()) {
 				organizers.add(new AbstractOrganizer(bat, lang));
 			}
-			organizers.sort(organizerComparator);
+			if (organizerComparator != null)
+				organizers.sort(organizerComparator);
 			for (AbstractOrganizer battery : organizers) {
 				if (battery.getMdht() instanceof VitalSignsOrganizerImpl) {
 					ArrayList<AbstractObservation> observations = new ArrayList<AbstractObservation>();
@@ -261,7 +273,8 @@ public class ObservationChTextBuilder extends TextBuilder {
 						observations.add(new AbstractObservation(obs, lang));
 						empty = false;
 					}
-					observations.sort(observationComparator);
+					if (observationComparator != null)
+						observations.sort(observationComparator);
 					for (AbstractObservation obs : observations) {
 						empty = false;
 						i++;
@@ -1207,12 +1220,16 @@ public class ObservationChTextBuilder extends TextBuilder {
 		}
 
 		if (studiesSummarySection == null) {
+			String sectionLabel = "";
 			append("<table border='1' width='100%'>");
-			if (laboratoryAct != null)
+			if (laboratoryAct != null) {
+				sectionLabel = laboratorySpecialtySection.getCode().getCode();
 				addTableHeaderLaboratorySpecialtySection();
-			if (codedVitalSignsSection != null)
+			} else if (codedVitalSignsSection != null) {
+				sectionLabel = codedVitalSignsSection.getCode().getCode();
 				addTableHeaderCodedVitalSignsSection();
-			addTableBody(UUID.randomUUID().toString());
+			}
+			addTableBody(sectionLabel);
 			append("</table>");
 		}
 		return super.toString();

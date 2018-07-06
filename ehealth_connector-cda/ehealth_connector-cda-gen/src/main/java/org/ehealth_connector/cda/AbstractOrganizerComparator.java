@@ -34,6 +34,21 @@ public class AbstractOrganizerComparator implements Comparator<AbstractOrganizer
 	 */
 	@Override
 	public int compare(AbstractOrganizer a, AbstractOrganizer b) {
-		return a.getEffectiveTime().compareTo(b.getEffectiveTime());
+		if ((a == null) && (b == null))
+			return 0;
+		else if ((a == null) && (b != null))
+			return -1;
+		else if ((a != null) && (b == null))
+			return 1;
+		else {
+			if ((a.getEffectiveTime() == null) && (b.getEffectiveTime() == null))
+				return 0;
+			else if ((a.getEffectiveTime() == null) && (b.getEffectiveTime() != null))
+				return -1;
+			else if ((a.getEffectiveTime() != null) && (b.getEffectiveTime() == null))
+				return 1;
+			else
+				return a.getEffectiveTime().compareTo(b.getEffectiveTime());
+		}
 	}
 }

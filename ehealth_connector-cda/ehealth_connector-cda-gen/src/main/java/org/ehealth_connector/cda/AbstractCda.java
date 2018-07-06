@@ -132,7 +132,8 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		// Set the eHealthConnector comment
 		docRoot = CDAFactory.eINSTANCE.createDocumentRoot();
 		FeatureMapUtil.addComment(docRoot.getMixed(), 0, generateComment());
-		// set xml namespace
+		// set xml namespaces
+		docRoot.getXMLNSPrefixMap().put("xsi", "http://www.w3.org/2001/XMLSchema-instance");
 		docRoot.getXMLNSPrefixMap().put("", CDAPackage.eNS_URI);
 		docRoot.setClinicalDocument(doc);
 		sortXmlHeader();
