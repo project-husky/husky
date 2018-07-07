@@ -18,6 +18,7 @@
 package org.ehealth_connector.cda.ch.lab.lrtp;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -62,6 +63,42 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  */
 public class CdaChLrtp
 		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp> {
+
+	/**
+	 * This class implements the default comparison algorithm for HL7 CDA
+	 * Battery Organizers.
+	 */
+	private class LaboratoryBatteryOrganizerComparator
+			implements Comparator<LaboratoryBatteryOrganizer> {
+
+		/**
+		 *
+		 * Compares two Organizers on their effective date timestamp.
+		 *
+		 * {@inheritDoc}
+		 *
+		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+		 */
+		@Override
+		public int compare(LaboratoryBatteryOrganizer a, LaboratoryBatteryOrganizer b) {
+			if ((a == null) && (b == null))
+				return 0;
+			else if ((a == null) && (b != null))
+				return -1;
+			else if ((a != null) && (b == null))
+				return 1;
+			else {
+				if ((a.getEffectiveTime() == null) && (b.getEffectiveTime() == null))
+					return 0;
+				else if ((a.getEffectiveTime() == null) && (b.getEffectiveTime() != null))
+					return -1;
+				else if ((a.getEffectiveTime() != null) && (b.getEffectiveTime() == null))
+					return 1;
+				else
+					return a.getEffectiveTime().compareTo(b.getEffectiveTime());
+			}
+		}
+	}
 
 	/**
 	 * Standard constructor.
@@ -510,6 +547,7 @@ public class CdaChLrtp
 				}
 			}
 		}
+		lbol.sort(new LaboratoryBatteryOrganizerComparator());
 		return lbol;
 	}
 

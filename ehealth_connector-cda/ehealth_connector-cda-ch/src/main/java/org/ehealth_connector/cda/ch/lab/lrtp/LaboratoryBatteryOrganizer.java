@@ -18,10 +18,12 @@
 package org.ehealth_connector.cda.ch.lab.lrtp;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.AbstractObservation;
+import org.ehealth_connector.cda.AbstractObservationComparator;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryBatteryOrganizer;
 import org.ehealth_connector.common.Author;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
@@ -35,6 +37,41 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
  * XD-LAB die Gruppierung von Resultaten.</div>
  */
 public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganizer {
+
+	/**
+	 * This class implements the default comparison algorithm for HL7 CDA
+	 * observations.
+	 */
+	private class LaboratoryObservationComparator implements Comparator<LaboratoryObservation> {
+
+		/**
+		 *
+		 * Compares two observations on their narrative text.
+		 *
+		 * {@inheritDoc}
+		 *
+		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+		 */
+		@Override
+		public int compare(LaboratoryObservation a, LaboratoryObservation b) {
+			if ((a == null) && (b == null))
+				return 0;
+			else if ((a == null) && (b != null))
+				return -1;
+			else if ((a != null) && (b == null))
+				return 1;
+			else {
+				if ((a.getNarrativeText() == null) && (b.getNarrativeText() == null))
+					return 0;
+				else if ((a.getNarrativeText() == null) && (b.getNarrativeText() != null))
+					return -1;
+				else if ((a.getNarrativeText() != null) && (b.getNarrativeText() == null))
+					return 1;
+				else
+					return a.getNarrativeText().compareToIgnoreCase(b.getNarrativeText());
+			}
+		}
+	}
 
 	/**
 	 * Instantiates a new laboratory battery organizer.
@@ -127,6 +164,7 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 				.getLaboratoryObservations()) {
 			loList.add(new AbstractObservation(lo));
 		}
+		loList.sort(new AbstractObservationComparator());
 		return loList;
 	}
 
@@ -141,6 +179,7 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 				.getLaboratoryObservations()) {
 			loList.add(new LaboratoryObservation(lo));
 		}
+		loList.sort(new LaboratoryObservationComparator());
 		return loList;
 	}
 }

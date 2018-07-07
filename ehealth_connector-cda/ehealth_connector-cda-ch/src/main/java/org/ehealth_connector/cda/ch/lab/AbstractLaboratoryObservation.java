@@ -21,10 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
+import org.ehealth_connector.cda.enums.VitalSignCodes;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.ReferenceRange;
 import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.NullFlavor;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
@@ -35,6 +37,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
  */
 public abstract class AbstractLaboratoryObservation
 		extends org.ehealth_connector.cda.ihe.lab.LaboratoryObservation {
+
+	protected LanguageCode myLang = LanguageCode.ENGLISH;
 
 	/**
 	 * Instantiates a new abstract laboratory observation.
@@ -53,6 +57,20 @@ public abstract class AbstractLaboratoryObservation
 	public AbstractLaboratoryObservation(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation mdht) {
 		super(mdht);
+		getMdht().setStatusCode(StatusCode.COMPLETED.getCS());
+	}
+
+	/**
+	 * Instantiates a new abstract laboratory observation.
+	 *
+	 * @param mdht
+	 *            the mdht object
+	 */
+	public AbstractLaboratoryObservation(
+			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation mdht,
+			LanguageCode lang) {
+		super(mdht);
+		myLang = lang;
 		getMdht().setStatusCode(StatusCode.COMPLETED.getCS());
 	}
 
@@ -85,6 +103,24 @@ public abstract class AbstractLaboratoryObservation
 			return comments;
 		}
 		return null;
+	}
+
+	/**
+	 * Gets the narrative text of he observation in the desired language.
+	 *
+	 * @return the observation name
+	 */
+	public String getNarrativeText() {
+		String obsName = getText();
+		if ("".equals(obsName)) {
+			VitalSignCodes vs = VitalSignCodes.getEnum(getCode().getCode());
+			if (vs != null)
+				obsName = vs.getDisplayName(myLang);
+		}
+		if ("".equals(obsName)) {
+			obsName = getCode().getOriginalText();
+		}
+		return obsName;
 	}
 
 	/**
@@ -142,5 +178,4 @@ public abstract class AbstractLaboratoryObservation
 		nullCode.addTranslation(code);
 		this.setCode(nullCode);
 	}
-
 }

@@ -133,28 +133,4 @@ public class LaboratoryObservation
 		getMdht().setCode(code.getCD());
 	}
 
-	// Problem: What should be returned, if a nullflavor is used or if the
-	// SoasElement does not exist?
-	// // Convenience function: creates a SoasInfoEntry and sets the according
-	// code
-	// // and value
-	// public void setSoasInfoCenterSpecificAvoid(boolean centerSpecificAvoid) {
-	// SoasInfoEntry sie = new SoasInfoEntry();
-	//
-	// sie.setCode(CENTER_SPECIFIC_AVOID_CODE);
-	// Value v = new Value(centerSpecificAvoid);
-	// sie.setValue(v);
-	//
-	// byte index = findSoasInfoEntryIndex(CENTER_SPECIFIC_AVOID_CODE);
-	//
-	// if (index != -1) {
-	// this.addSoasInfoEntry(sie);
-	// } else {
-	// this.getSoasInfoEnties().set(index, sie);
-	// }
-	// }
-	//
-	// public void setSoasInfoPreviousTx(boolean previousTx) {
-	//
-	// }
 }

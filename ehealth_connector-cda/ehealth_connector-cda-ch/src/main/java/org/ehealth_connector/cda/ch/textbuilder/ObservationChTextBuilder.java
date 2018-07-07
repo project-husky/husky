@@ -1214,7 +1214,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 					contentId);
 
 			if (!"".equals(paragraph)) {
-				paragraph = paragraph + ";<br />";
+				paragraph = paragraph + "<br />";
 				append(paragraph);
 			}
 		}
