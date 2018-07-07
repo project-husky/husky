@@ -47,11 +47,13 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
+import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.InFulfillmentOf;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.Organizer;
 import org.openhealthtools.mdht.uml.cda.Participant2;
+import org.openhealthtools.mdht.uml.cda.ch.impl.CdaChLrqcImpl;
 import org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.impl.VitalSignsOrganizerImpl;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer;
@@ -68,6 +70,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
  */
 public class ObservationChTextBuilder extends TextBuilder {
 
+	private ClinicalDocument doc = null;
 	private final List<String> headerColumns = new ArrayList<String>();
 	private final AbstractLaboratoryAct laboratoryAct;
 	private final CodedVitalSignsSection codedVitalSignsSection;
@@ -84,6 +87,8 @@ public class ObservationChTextBuilder extends TextBuilder {
 	/**
 	 * Instantiates a new observation text builder for CDA-CH.
 	 *
+	 * @param doc
+	 *            the doc
 	 * @param section
 	 *            the section.
 	 * @param contentIdPrefix
@@ -91,14 +96,17 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 * @param lang
 	 *            the language.
 	 */
-	public ObservationChTextBuilder(AbstractLaboratorySpecialtySection section,
-			ContentIdPrefix contentIdPrefix, LanguageCode lang) {
-		this(section, contentIdPrefix.getContentIdPrefix(), lang, null);
+	public ObservationChTextBuilder(ClinicalDocument doc,
+			AbstractLaboratorySpecialtySection section, ContentIdPrefix contentIdPrefix,
+			LanguageCode lang) {
+		this(doc, section, contentIdPrefix.getContentIdPrefix(), lang, null);
 	}
 
 	/**
 	 * Instantiates a new observation text builder for CDA-CH.
 	 *
+	 * @param doc
+	 *            the doc
 	 * @param section
 	 *            the section.
 	 * @param contentIdPrefix
@@ -109,14 +117,17 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *            the oid of the code system to be used as position (e.g.
 	 *            2.16.756.5.30.1.129.1.3 for the Swiss Analysis List)
 	 */
-	public ObservationChTextBuilder(AbstractLaboratorySpecialtySection section,
-			ContentIdPrefix contentIdPrefix, LanguageCode lang, String posCodeSystemOid) {
-		this(section, contentIdPrefix.getContentIdPrefix(), lang, posCodeSystemOid);
+	public ObservationChTextBuilder(ClinicalDocument doc,
+			AbstractLaboratorySpecialtySection section, ContentIdPrefix contentIdPrefix,
+			LanguageCode lang, String posCodeSystemOid) {
+		this(doc, section, contentIdPrefix.getContentIdPrefix(), lang, posCodeSystemOid);
 	}
 
 	/**
 	 * Instantiates a new observation text builder for CDA-CH.
 	 *
+	 * @param doc
+	 *            the doc
 	 * @param section
 	 *            the section.
 	 * @param contentIdPrefix
@@ -128,8 +139,10 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *            as position (e.g. 2.16.756.5.30.1.129.1.3 for the Swiss
 	 *            Analysis List)
 	 */
-	public ObservationChTextBuilder(AbstractLaboratorySpecialtySection section,
-			String contentIdPrefix, LanguageCode lang, String posCodeSystemOid) {
+	public ObservationChTextBuilder(ClinicalDocument doc,
+			AbstractLaboratorySpecialtySection section, String contentIdPrefix, LanguageCode lang,
+			String posCodeSystemOid) {
+		this.doc = doc;
 		this.codedVitalSignsSection = null;
 		this.studiesSummarySection = null;
 		this.laboratorySpecialtySection = section;
@@ -586,9 +599,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 			String tempCodeSystem = obsCode.getCodeSystemName();
 			if (tempCodeSystem == null) {
 				tempCodeSystem = observation.getCode().getCodeSystem();
-				if (tempCodeSystem == "")
-					tempCodeSystem = observation.getCode().getCodeSystem();
-				if (!"".equals(tempCodeSystem)) {
+				if (tempCodeSystem != null) {
 					CodeSystems codeSystem = CodeSystems.getEnum(tempCodeSystem);
 					if (codeSystem != null) {
 						String temp = codeSystem.getCodeSystemName();
@@ -606,8 +617,20 @@ public class ObservationChTextBuilder extends TextBuilder {
 					if (!"".equals(tempDisplayName))
 						tempDisplayName = tempDisplayName + ";<br />";
 
+					String translateCodeSystem = translation.getCodeSystemName();
+					if (translateCodeSystem == null) {
+						translateCodeSystem = translation.getCodeSystem();
+						if (translateCodeSystem != null) {
+							CodeSystems codeSystem = CodeSystems.getEnum(translateCodeSystem);
+							if (codeSystem != null) {
+								String temp = codeSystem.getCodeSystemName();
+								if (!"".equals(temp))
+									translateCodeSystem = temp;
+							}
+						}
+					}
 					tempCode = tempCode + translation.getCode();
-					tempCodeSystem = tempCodeSystem + translation.getCodeSystemName();
+					tempCodeSystem = tempCodeSystem + translateCodeSystem;
 					tempDisplayName = tempDisplayName + translation.getDisplayName();
 				}
 			}
@@ -1076,8 +1099,9 @@ public class ObservationChTextBuilder extends TextBuilder {
 										if (templateId2.getRoot()
 												.equals("1.3.6.1.4.1.19376.1.3.1.3")) {
 											if (er2.getAct().getEffectiveTime() != null) {
-												er2.getAct()
-														.setText(Util.createReference(contentId));
+												if (!(doc instanceof CdaChLrqcImpl))
+													er2.getAct().setText(
+															Util.createReference(contentId));
 												retVal = formatSingleTimestampOrInterval(
 														er2.getAct().getEffectiveTime());
 											}

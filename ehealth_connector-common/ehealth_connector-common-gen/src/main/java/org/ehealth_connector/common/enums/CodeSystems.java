@@ -34,7 +34,8 @@ public enum CodeSystems implements IdentityDomain {
 	 * de la maladie ou de la séquelle d’accident (OCA-DFI, chapitre
 	 * 2.1.1)</div>
 	 */
-	IcrDha080401Disease("2.16.756.5.30.1.127.3.1.20080401.1", "diseaseName (ICR-DHA, chapter 2.1.1)"),
+	IcrDha080401Disease("2.16.756.5.30.1.127.3.1.20080401.1",
+			"diseaseName (ICR-DHA, chapter 2.1.1)"),
 	/**
 	 * OID: 2.51.1.3 <div class="en"> Global Location Number</div>
 	 */
@@ -88,7 +89,8 @@ public enum CodeSystems implements IdentityDomain {
 	 * (VeKa)</div> <div class="de">Kartennummern für die Versichertenkarte
 	 * (VeKa)</div> <div class="fr">No carte d insurance (VeKa)</div>
 	 */
-	SWISS_VEKA_NR("2.16.756.5.30.1.123.100.1.1.1", "Kartennummern für die Versichertenkarte (VeKa)"),
+	SWISS_VEKA_NR("2.16.756.5.30.1.123.100.1.1.1",
+			"Kartennummern für die Versichertenkarte (VeKa)"),
 	/**
 	 * OID: 2.16.756.5.31 <div class= "en">ICD-10 </div> <div class= "de">ICD-10
 	 * </div> <div class= "fr">ICD-10 </div>
@@ -181,7 +183,13 @@ public enum CodeSystems implements IdentityDomain {
 	/**
 	 * OID: 2.16.756.5.30.1.129.1.1.8 <div class="en">Swiss SOAS HLA Codes</div>
 	 */
-	SwissSoasHlaCodes("2.16.756.5.30.1.129.1.1.8", "HLA");
+	SwissSoasHlaCodes("2.16.756.5.30.1.129.1.1.8", "Swiss SOAS HLA"),
+
+	/**
+	 * OID: 2.16.756.5.30.1.127.3.2.20121101.2 <div class="en">Swiss PLRR-DHA
+	 * LabObsList Codes</div>
+	 */
+	SwissPlrrDhaLabObsList("2.16.756.5.30.1.127.3.2.20121101.2", "Swiss PLRR-DHA LabObsList");
 
 	/**
 	 * <div class="en">Gets the Enum with a given OID</div>

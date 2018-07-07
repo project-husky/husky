@@ -182,9 +182,9 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 	public String generateNarrativeTextLaboratoryObservations(
 			AbstractLaboratorySpecialtySection laboratorySpecialtySection, String contentIdPrefix,
 			String posCodeSystemOid) {
-		final ObservationChTextBuilder b = new ObservationChTextBuilder(laboratorySpecialtySection,
-				contentIdPrefix, LanguageCode.getEnum(getMdht().getLanguageCode().getCode()),
-				posCodeSystemOid);
+		final ObservationChTextBuilder b = new ObservationChTextBuilder(this.getMdht(),
+				laboratorySpecialtySection, contentIdPrefix,
+				LanguageCode.getEnum(getMdht().getLanguageCode().getCode()), posCodeSystemOid);
 		return b.toString();
 	}
 
@@ -210,9 +210,9 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 			AbstractLaboratorySpecialtySection laboratorySpecialtySection, String contentIdPrefix,
 			String posCodeSystemOid, Comparator<AbstractOrganizer> organizerComparator,
 			Comparator<AbstractObservation> observationComparator) {
-		final ObservationChTextBuilder b = new ObservationChTextBuilder(laboratorySpecialtySection,
-				contentIdPrefix, LanguageCode.getEnum(getMdht().getLanguageCode().getCode()),
-				posCodeSystemOid);
+		final ObservationChTextBuilder b = new ObservationChTextBuilder(this.getMdht(),
+				laboratorySpecialtySection, contentIdPrefix,
+				LanguageCode.getEnum(getMdht().getLanguageCode().getCode()), posCodeSystemOid);
 		b.setOrganizerComparator(organizerComparator);
 		b.setObservationComparator(observationComparator);
 		return b.toString();
