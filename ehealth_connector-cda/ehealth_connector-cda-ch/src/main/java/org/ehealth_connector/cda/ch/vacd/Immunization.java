@@ -691,4 +691,18 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 		this.getMdht().setNegationInd(true);
 	}
 
+	/**
+	 * Sort medication targets.
+	 */
+	public void sortMedicationTargets() {
+		ArrayList<EntryRelationship> erList = new ArrayList<EntryRelationship>();
+		for (EntryRelationship er : getMdht().getEntryRelationships()) {
+			erList.add(er);
+		}
+		erList.sort(new MedicationTargetERComparator());
+		getMdht().getEntryRelationships().clear();
+		for (EntryRelationship entryRelationship : erList) {
+			getMdht().getEntryRelationships().add(entryRelationship);
+		}
+	}
 }

@@ -183,7 +183,8 @@ public class MedicationTargetEntry
 		int result = 1;
 		result = (prime * result) + (this.getId() != null ? this.getId().hashCode() : 0);
 		result = (prime * result) + (this.getImmunizationTargetCode() != null
-				? this.getImmunizationTargetCode().hashCode() : 0);
+				? this.getImmunizationTargetCode().hashCode()
+				: 0);
 		return result;
 	}
 
