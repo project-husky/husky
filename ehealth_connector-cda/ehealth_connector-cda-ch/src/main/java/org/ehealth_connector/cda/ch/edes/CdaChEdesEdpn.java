@@ -204,11 +204,6 @@ public class CdaChEdesEdpn
 	 * <div class="en">Generates the human readable text of the coded vital
 	 * signs section</div> <div class="de">Generiert den menschenlesbaren Text
 	 * des Kapitels zu Vitalzeichen</div>.
-	 *
-	 * @param organizerComparator
-	 *            the organizer comparator (pass null for default sorting)
-	 * @param observationComparator
-	 *            the observation comparator (pass null for default sorting)
 	 */
 	public void generateNarrativeTextCodedVitalSigns() {
 		getCodedVitalSignsSection().getMdht()
