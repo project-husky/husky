@@ -27,7 +27,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  *<div class="de">Dieses Subset ist eine empfohlene Auswahl für den vorliegenden Implementierungsleitfaden. Andere LOINC Codes dürfen ebenfalls verwendet werden.</div>
  *<div class="fr">Ce sous-ensemble (Subset) est une sélection recommandée pour le présent guide d'implémentation. Il est également possible dutiliser dautres codes tirés LOINC.</div>
  */
-public enum SerologieForVACD {
+public enum SerologieForVacd {
 
 	/**
 	 * <div class="de">Windpocken</div> <div class="fr">Varicelle</div>
@@ -87,8 +87,8 @@ public enum SerologieForVACD {
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static SerologieForVACD getEnum(String code) {
-		for (final SerologieForVACD x : values()) {
+	public static SerologieForVacd getEnum(String code) {
+		for (final SerologieForVacd x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -106,7 +106,7 @@ public enum SerologieForVACD {
 	 * @return true, if one enum of this valueset contains the given code
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (SerologieForVACD x : values()) {
+		for (SerologieForVacd x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -130,7 +130,7 @@ public enum SerologieForVACD {
 	 *            <br>
 	 *            <div class="de"> display name</div>
 	 */
-	SerologieForVACD(String code, String displayName) {
+	SerologieForVacd(String code, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
 	}

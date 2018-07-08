@@ -43,7 +43,7 @@ import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
-import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
+import org.openhealthtools.mdht.uml.cda.ch.ChPackage;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABPackage;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -66,12 +66,12 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 
 	private CdaChLrph deserializeCda(String document) throws Exception {
 		final InputSource source = new InputSource(new StringReader(document));
-		CHPackage.eINSTANCE.eClass();
+		ChPackage.eINSTANCE.eClass();
 		LABPackage.eINSTANCE.eClass();
 		final ClinicalDocument clinicalDocument = CDAUtil.load(source);
-		if (clinicalDocument instanceof org.openhealthtools.mdht.uml.cda.ch.CdaChLrph) {
+		if (clinicalDocument instanceof org.openhealthtools.mdht.uml.cda.ch.CdaChLrphV1) {
 			CdaChLrph test = new CdaChLrph(
-					(org.openhealthtools.mdht.uml.cda.ch.CdaChLrph) clinicalDocument);
+					(org.openhealthtools.mdht.uml.cda.ch.CdaChLrphV1) clinicalDocument);
 			return test;
 		} else
 			return null;
@@ -80,8 +80,8 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 	private CdaChLrph deserializeCdaDirect(String document) throws Exception {
 		final InputStream stream = new ByteArrayInputStream(document.getBytes());
 		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
-				CHPackage.eINSTANCE.getCdaChLrph());
-		return new CdaChLrph((org.openhealthtools.mdht.uml.cda.ch.CdaChLrph) clinicalDocument);
+				ChPackage.eINSTANCE.getCdaChLrphV1());
+		return new CdaChLrph((org.openhealthtools.mdht.uml.cda.ch.CdaChLrphV1) clinicalDocument);
 	}
 
 	@Test

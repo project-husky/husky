@@ -40,7 +40,7 @@ import org.openhealthtools.mdht.uml.cda.PatientRole;
 import org.openhealthtools.mdht.uml.cda.Person;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.cda.StructuredBody;
-import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -62,7 +62,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_InformationRecipient;
  * auf HL7 CDA. </div>
  */
 public class CdaChLrqc
-		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc> {
+		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrqcV1> {
 
 	/** Root ID for the ZSR ID. */
 	public static final String ZSR_ID_ROOT = CodeSystems.SwissZSR.getCodeSystemId();
@@ -171,7 +171,7 @@ public class CdaChLrqc
 	 *            rendering
 	 */
 	public CdaChLrqc(LanguageCode languageCode, String styleSheet, String css) {
-		super(CHFactory.eINSTANCE.createCdaChLrqc().init(), languageCode, styleSheet, css);
+		super(ChFactory.eINSTANCE.createCdaChLrqcV1().init(), languageCode, styleSheet, css);
 		this.setLanguageCode(languageCode);
 	}
 
@@ -224,7 +224,7 @@ public class CdaChLrqc
 	 * @param doc
 	 *            mdht model document
 	 */
-	public CdaChLrqc(org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc doc) {
+	public CdaChLrqc(org.openhealthtools.mdht.uml.cda.ch.CdaChLrqcV1 doc) {
 		super(doc);
 	}
 
@@ -327,10 +327,11 @@ public class CdaChLrqc
 				getLanguageCode());
 		if (newSection) {
 			// TODO move this to the model
-//			laboratorySpecialtySection.getMdht().getEntries().get(0).getTemplateIds().clear();
-//			Identificator id = new Identificator("1.3.6.1.4.1.19376.1.3.1", null);
-//			laboratorySpecialtySection.getMdht().getEntries().get(0).getAct().getTemplateIds()
-//					.add(id.getIi());
+			// laboratorySpecialtySection.getMdht().getEntries().get(0).getTemplateIds().clear();
+			// Identificator id = new Identificator("1.3.6.1.4.1.19376.1.3.1",
+			// null);
+			// laboratorySpecialtySection.getMdht().getEntries().get(0).getAct().getTemplateIds()
+			// .add(id.getIi());
 		}
 
 		setLaboratorySpecialtySection(laboratorySpecialtySection);
@@ -376,10 +377,11 @@ public class CdaChLrqc
 				getLanguageCode());
 		if (newSection) {
 			// TODO move this to the model
-//			laboratorySpecialtySection.getMdht().getEntries().get(0).getTemplateIds().clear();
-//			Identificator id = new Identificator("1.3.6.1.4.1.19376.1.3.1", null);
-//			laboratorySpecialtySection.getMdht().getEntries().get(0).getAct().getTemplateIds()
-//					.add(id.getIi());
+			// laboratorySpecialtySection.getMdht().getEntries().get(0).getTemplateIds().clear();
+			// Identificator id = new Identificator("1.3.6.1.4.1.19376.1.3.1",
+			// null);
+			// laboratorySpecialtySection.getMdht().getEntries().get(0).getAct().getTemplateIds()
+			// .add(id.getIi());
 		}
 
 		laboratorySpecialtySection.getLaboratoryReportDataProcessingEntry().getSpecimenAct()

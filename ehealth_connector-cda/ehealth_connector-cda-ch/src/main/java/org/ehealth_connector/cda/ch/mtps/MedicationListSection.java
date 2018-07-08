@@ -18,16 +18,16 @@
 
 package org.ehealth_connector.cda.ch.mtps;
 
-import org.ehealth_connector.cda.ch.AbstractCdaCh;
+import org.ehealth_connector.cda.ch.AbstractCdaChV1;
 import org.ehealth_connector.cda.ihe.pharm.MedicationTreatmentPlanSection;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 
 /**
  * The Class CdaChMtpsMtp. see also CDA CH MTPS 7.4.2.3
  */
 public class MedicationListSection
-		extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsMtp> {
+		extends AbstractCdaChV1<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsV1Mtp> {
 
 	/**
 	 * Instantiates a new cda ch mtps mtp.
@@ -43,7 +43,7 @@ public class MedicationListSection
 	 *            the language code
 	 */
 	public MedicationListSection(LanguageCode languageCode) {
-		super(CHFactory.eINSTANCE.createCdaChMtpsMtp().init());
+		super(ChFactory.eINSTANCE.createCdaChMtpsV1Mtp().init());
 		this.setLanguageCode(languageCode);
 		super.initCda();
 		switch (this.getLanguageCode()) {
@@ -71,7 +71,7 @@ public class MedicationListSection
 	 * @param doc
 	 *            the document
 	 */
-	public MedicationListSection(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsMtp doc) {
+	public MedicationListSection(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsV1Mtp doc) {
 		super(doc);
 	}
 

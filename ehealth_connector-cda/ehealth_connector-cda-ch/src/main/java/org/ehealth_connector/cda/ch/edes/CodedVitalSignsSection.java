@@ -20,7 +20,7 @@ package org.ehealth_connector.cda.ch.edes;
 
 import org.ehealth_connector.cda.AbstractCodedVitalSigns;
 import org.ehealth_connector.cda.AbstractVitalSignObservation;
-import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
+import org.ehealth_connector.cda.ch.edes.enums.SectionsEdes;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.LanguageCode;
@@ -40,7 +40,7 @@ public class CodedVitalSignsSection extends AbstractCodedVitalSigns {
 	public CodedVitalSignsSection(LanguageCode languageCode) {
 		super(IHEFactory.eINSTANCE.createCodedVitalSignsSection().init());
 		this.setLanguageCode(languageCode);
-		this.getMdht().setTitle(Util.st(SectionsEDES.CODED_VITAL_SIGNS
+		this.getMdht().setTitle(Util.st(SectionsEdes.CODED_VITAL_SIGNS
 				.getSectionTitle((languageCode != null ? languageCode : null))));
 	}
 

@@ -19,7 +19,7 @@ package org.ehealth_connector.cda.ch.lab;
 
 import org.ehealth_connector.cda.MdhtSectionFacade;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 
 /**
  * The Class StudiesSummarySection. <div class="en">This element contains
@@ -33,7 +33,7 @@ public class StudiesSummarySection
 	 * Instantiates a new studies summary section.
 	 */
 	public StudiesSummarySection() {
-		super(CHFactory.eINSTANCE.createStudiesSummarySection().init(),
+		super(ChFactory.eINSTANCE.createStudiesSummarySection().init(),
 				"2.16.756.5.30.1.1.1.1.3.4.1", "CDA-CH.LRTP.Body.StudiesSummaryL2");
 	}
 

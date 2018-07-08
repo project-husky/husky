@@ -22,10 +22,10 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.ehealth_connector.cda.AbstractObservation;
-import org.ehealth_connector.cda.ch.AbstractCdaCh;
+import org.ehealth_connector.cda.ch.AbstractCdaChV1;
 import org.ehealth_connector.cda.ch.ParticipantClaimer;
 import org.ehealth_connector.cda.ch.textbuilder.ObservationChTextBuilder;
-import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
+import org.ehealth_connector.cda.ch.vacd.enums.SectionsVacd;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.common.Code;
@@ -47,7 +47,7 @@ import org.openhealthtools.mdht.uml.cda.InFulfillmentOf;
 import org.openhealthtools.mdht.uml.cda.InformationRecipient;
 import org.openhealthtools.mdht.uml.cda.Participant1;
 import org.openhealthtools.mdht.uml.cda.Section;
-import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 import org.openhealthtools.mdht.uml.cda.ch.RemarksSection;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection;
@@ -69,7 +69,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_InformationRecipient;
  *            the generic type
  */
 public abstract class AbstractLaboratoryReport<EClinicalDocument extends ClinicalDocument>
-		extends AbstractCdaCh<EClinicalDocument> {
+		extends AbstractCdaChV1<EClinicalDocument> {
 
 	/**
 	 * Instantiates a new abstract laboratory report.
@@ -331,7 +331,7 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	public Section getRemarksSection() {
 		for (final Section section : getDoc().getSections()) {
 			if (section.getCode() != null) {
-				if (SectionsVACD.isRemarks(section.getCode().getCode())) {
+				if (SectionsVacd.isRemarks(section.getCode().getCode())) {
 					return section;
 				}
 			}
@@ -411,7 +411,7 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	 */
 	public void setNarrativeTextSectionRemarks(String text) {
 		if (getRemarksSection() == null) {
-			RemarksSection rs = CHFactory.eINSTANCE.createRemarksSection().init();
+			RemarksSection rs = ChFactory.eINSTANCE.createRemarksSection().init();
 			II templateId2009 = null;
 			boolean templateId2009Found = false;
 			boolean templateId2017Found = false;

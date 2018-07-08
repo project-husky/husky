@@ -36,7 +36,7 @@ import org.ehealth_connector.cda.ihe.pharm.DispenseSection;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
-import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
+import org.openhealthtools.mdht.uml.cda.ch.ChPackage;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.slf4j.Logger;
@@ -72,7 +72,7 @@ public class CdaChMtpsDisTest extends TestUtils {
 	private CdaChMtpsDis deserializeCda(String document) throws Exception {
 		final InputSource source = new InputSource(new StringReader(document));
 		return new CdaChMtpsDis(
-				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis) CDAUtil.load(source));
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsV1Dis) CDAUtil.load(source));
 	}
 
 	/**
@@ -83,9 +83,9 @@ public class CdaChMtpsDisTest extends TestUtils {
 	private CdaChMtpsDis deserializeCdaDirect(String document) throws Exception {
 		final InputStream stream = new ByteArrayInputStream(document.getBytes());
 		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
-				CHPackage.eINSTANCE.getCdaChMtpsDis());
+				ChPackage.eINSTANCE.getCdaChMtpsV1Dis());
 		return new CdaChMtpsDis(
-				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis) clinicalDocument);
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsV1Dis) clinicalDocument);
 	}
 
 	/**

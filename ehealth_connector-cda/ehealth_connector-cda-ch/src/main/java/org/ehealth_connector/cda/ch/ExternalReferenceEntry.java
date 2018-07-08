@@ -18,7 +18,7 @@
 
 package org.ehealth_connector.cda.ch;
 
-import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 
 /**
  * ExternalDocumentEntry implements the relationship for holding an External
@@ -33,7 +33,7 @@ public class ExternalReferenceEntry
 	 * Instantiates a new external reference entry.
 	 */
 	public ExternalReferenceEntry() {
-		super(CHFactory.eINSTANCE.createCDACHBodyExtRef().init(), "2.16.756.5.30.1.1.1.1.1",
+		super(ChFactory.eINSTANCE.createCdaChBodyExtRef().init(), "2.16.756.5.30.1.1.1.1.1",
 				"CDA-CH.Body.ExtRef");
 	}
 
@@ -44,7 +44,7 @@ public class ExternalReferenceEntry
 	 *            the external reference
 	 */
 	public ExternalReferenceEntry(
-			org.openhealthtools.mdht.uml.cda.ch.CDACHBodyExtRef externalReference) {
+			org.openhealthtools.mdht.uml.cda.ch.CdaChBodyExtRef externalReference) {
 		super(externalReference);
 	}
 

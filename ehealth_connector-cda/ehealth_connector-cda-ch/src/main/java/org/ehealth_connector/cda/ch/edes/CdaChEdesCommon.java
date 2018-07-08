@@ -35,7 +35,7 @@ import org.ehealth_connector.cda.ch.ActiveProblemConcern;
 import org.ehealth_connector.cda.ch.AllergyConcern;
 import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.ProblemConcern;
-import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
+import org.ehealth_connector.cda.ch.edes.enums.SectionsEdes;
 import org.ehealth_connector.cda.ch.textbuilder.AllergyConcernChTextBuilder;
 import org.ehealth_connector.cda.ch.textbuilder.EdDiagnosisChTextBuilder;
 import org.ehealth_connector.cda.ch.textbuilder.ObservationChTextBuilder;
@@ -112,12 +112,12 @@ public class CdaChEdesCommon {
 		section.addAct(activeProblemConcern.copyMdhtProblemConcernEntry());
 
 		// update the MDHT Object content references to CDA level 1 text
-		if (updateProblemConcernReferences(section.getActs(), SectionsEDES.ACTIVE_PROBLEMS)) {
+		if (updateProblemConcernReferences(section.getActs(), SectionsEdes.ACTIVE_PROBLEMS)) {
 			if (cdaDocument.isNarrativeTextGenerationEnabled()) {
 				// create the CDA level 1 text
 				section.createStrucDocText(generateNarrativeTextActiveProblemConcerns(section));
 			} else {
-				setNarrativeTextSection(SectionsEDES.ACTIVE_PROBLEMS, section, "");
+				setNarrativeTextSection(SectionsEdes.ACTIVE_PROBLEMS, section, "");
 			}
 		} else {
 			section.createStrucDocText("Keine Angaben");
@@ -156,12 +156,12 @@ public class CdaChEdesCommon {
 
 		// update the MDHT Object content references to CDA level 1 text
 		if (updateAllergyConcernReferences(section.getActs(),
-				SectionsEDES.ALLERGIES_AND_OTHER_ADVERSE_REACTIONS)) {
+				SectionsEdes.ALLERGIES_AND_OTHER_ADVERSE_REACTIONS)) {
 			if (cdaDocument.isNarrativeTextGenerationEnabled()) {
 				// create the CDA level 1 text
 				section.createStrucDocText(generateNarrativeTextAllergyProblemConcerns(section));
 			} else {
-				setNarrativeTextSection(SectionsEDES.ALLERGIES_AND_OTHER_ADVERSE_REACTIONS, section,
+				setNarrativeTextSection(SectionsEdes.ALLERGIES_AND_OTHER_ADVERSE_REACTIONS, section,
 						"");
 			}
 		} else {
@@ -199,12 +199,12 @@ public class CdaChEdesCommon {
 		mCodedVitalSigns.add(organizer, vitalSign, author, "vs");
 
 		// update the MDHT Object content references to CDA level 1 text
-		if (updateProblemConcernReferences(section.getActs(), SectionsEDES.CODED_VITAL_SIGNS)) {
+		if (updateProblemConcernReferences(section.getActs(), SectionsEdes.CODED_VITAL_SIGNS)) {
 			if (cdaDocument.isNarrativeTextGenerationEnabled()) {
 				// create the CDA level 1 text
 				section.createStrucDocText(generateNarrativeTextCodedVitalSigns());
 			} else {
-				setNarrativeTextSection(SectionsEDES.CODED_VITAL_SIGNS, section, "");
+				setNarrativeTextSection(SectionsEdes.CODED_VITAL_SIGNS, section, "");
 			}
 		}
 	}
@@ -221,12 +221,12 @@ public class CdaChEdesCommon {
 		// content reference)
 
 		// update the MDHT Object content references to CDA level 1 text
-		if (updateEdDiagnoseReferences(section.getActs(), SectionsEDES.ED_DIAGNOSIS)) {
+		if (updateEdDiagnoseReferences(section.getActs(), SectionsEdes.ED_DIAGNOSIS)) {
 			if (cdaDocument.isNarrativeTextGenerationEnabled()) {
 				// create the CDA level 1 text
 				section.createStrucDocText(generateNarrativeTextEdDiagnoses(section));
 			} else {
-				setNarrativeTextSection(SectionsEDES.ED_DIAGNOSIS, section, "");
+				setNarrativeTextSection(SectionsEdes.ED_DIAGNOSIS, section, "");
 			}
 		} else {
 			section.createStrucDocText("Keine Angaben");
@@ -263,13 +263,13 @@ public class CdaChEdesCommon {
 
 		// update the MDHT Object content references to CDA level 1 text
 		if (updateProblemConcernReferences(section.getActs(),
-				SectionsEDES.HISTORY_OF_PAST_ILLNESS)) {
+				SectionsEdes.HISTORY_OF_PAST_ILLNESS)) {
 			// create the CDA level 2 text (either generated or empty text with
 			// content reference)
 			if (cdaDocument.isNarrativeTextGenerationEnabled()) {
 				section.createStrucDocText(generateNarrativeTextPastProblemConcernEntries(section));
 			} else {
-				setNarrativeTextSection(SectionsEDES.HISTORY_OF_PAST_ILLNESS, section, "");
+				setNarrativeTextSection(SectionsEdes.HISTORY_OF_PAST_ILLNESS, section, "");
 			}
 		} else {
 			section.createStrucDocText("");
@@ -279,7 +279,7 @@ public class CdaChEdesCommon {
 	}
 
 	public void addSection(Section section) {
-		final SectionsEDES sectionEnum = SectionsEDES.getEnum(section);
+		final SectionsEdes sectionEnum = SectionsEdes.getEnum(section);
 		if (mdhtDocument.getLanguageCode() != null) {
 			section.setTitle(Util.st(sectionEnum.getSectionTitle(
 					LanguageCode.getEnum(mdhtDocument.getLanguageCode().getCode()))));
@@ -300,7 +300,7 @@ public class CdaChEdesCommon {
 		// general PastProblemConcern
 		problemConcernEntryList.addAll(getActiveProblemConcerns(section));
 		final ProblemConcernEntryChTextBuilder b = new ProblemConcernEntryChTextBuilder(
-				problemConcernEntryList, SectionsEDES.ACTIVE_PROBLEMS);
+				problemConcernEntryList, SectionsEdes.ACTIVE_PROBLEMS);
 		return b.toString();
 	}
 
@@ -314,7 +314,7 @@ public class CdaChEdesCommon {
 	public String generateNarrativeTextAllergyProblemConcerns(Section section) {
 		final AllergyConcernChTextBuilder b = new AllergyConcernChTextBuilder(
 				getAllergyProblemConcerns(section),
-				SectionsEDES.ALLERGIES_AND_OTHER_ADVERSE_REACTIONS);
+				SectionsEdes.ALLERGIES_AND_OTHER_ADVERSE_REACTIONS);
 		return b.toString();
 	}
 
@@ -367,7 +367,7 @@ public class CdaChEdesCommon {
 		final List<AbstractProblemConcern> problemConcernEntryList = new ArrayList<AbstractProblemConcern>();
 		problemConcernEntryList.addAll(getEdDiagnoses(section));
 		final EdDiagnosisChTextBuilder b = new EdDiagnosisChTextBuilder(problemConcernEntryList,
-				SectionsEDES.ED_DIAGNOSIS);
+				SectionsEdes.ED_DIAGNOSIS);
 		return b.toString();
 	}
 
@@ -386,7 +386,7 @@ public class CdaChEdesCommon {
 		// general PastProblemConcern
 		problemConcernEntryList.addAll(pastProblemConcerns);
 		final ProblemConcernEntryChTextBuilder b = new ProblemConcernEntryChTextBuilder(
-				problemConcernEntryList, SectionsEDES.HISTORY_OF_PAST_ILLNESS);
+				problemConcernEntryList, SectionsEdes.HISTORY_OF_PAST_ILLNESS);
 		return b.toString();
 	}
 
@@ -404,7 +404,7 @@ public class CdaChEdesCommon {
 		// general PastProblemConcern
 		problemConcernEntryList.addAll(getPastProblemConcerns(section));
 		final ProblemConcernEntryChTextBuilder b = new ProblemConcernEntryChTextBuilder(
-				problemConcernEntryList, SectionsEDES.HISTORY_OF_PAST_ILLNESS);
+				problemConcernEntryList, SectionsEdes.HISTORY_OF_PAST_ILLNESS);
 		return b.toString();
 	}
 
@@ -710,7 +710,7 @@ public class CdaChEdesCommon {
 		mCodedVitalSigns.initAfterLoad();
 	}
 
-	public void setNarrativeTextSection(SectionsEDES sectionEdes, Section section, String text) {
+	public void setNarrativeTextSection(SectionsEdes sectionEdes, Section section, String text) {
 		if (section == null) {
 			section = sectionEdes.createSection();
 			addSection(section);
@@ -718,7 +718,7 @@ public class CdaChEdesCommon {
 		section.createStrucDocText(new SimpleTextBuilder(sectionEdes, text).toString());
 	}
 
-	private boolean updateAllergyConcernReferences(EList<Act> acts, SectionsEDES loincSectionCode) {
+	private boolean updateAllergyConcernReferences(EList<Act> acts, SectionsEdes loincSectionCode) {
 		int i = 0;
 		for (final Act act : acts) {
 			int j = 0;
@@ -752,7 +752,7 @@ public class CdaChEdesCommon {
 		return true;
 	}
 
-	private boolean updateEdDiagnoseReferences(EList<Act> acts, SectionsEDES loincSectionCode) {
+	private boolean updateEdDiagnoseReferences(EList<Act> acts, SectionsEdes loincSectionCode) {
 		int i = 0;
 		for (final Act act : acts) {
 			int j = 0;
@@ -786,7 +786,7 @@ public class CdaChEdesCommon {
 		return true;
 	}
 
-	public boolean updateProblemConcernReferences(EList<Act> acts, SectionsEDES loincSectionCode) {
+	public boolean updateProblemConcernReferences(EList<Act> acts, SectionsEdes loincSectionCode) {
 		int i = 0;
 		for (final Act act : acts) {
 			final org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act;

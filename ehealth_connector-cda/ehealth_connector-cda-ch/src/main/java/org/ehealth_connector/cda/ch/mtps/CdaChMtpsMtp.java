@@ -21,7 +21,7 @@ package org.ehealth_connector.cda.ch.mtps;
 import java.util.Date;
 import java.util.List;
 
-import org.ehealth_connector.cda.ch.AbstractCdaCh;
+import org.ehealth_connector.cda.ch.AbstractCdaChV1;
 import org.ehealth_connector.cda.ihe.pharm.MedicationTreatmentPlanItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.MedicationTreatmentPlanSection;
 import org.ehealth_connector.cda.ihe.pharm.PatientMedicalInstructionsEntry;
@@ -32,13 +32,14 @@ import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
-import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 
 /**
  * The Class CdaChMtpsMtp. See also CDA-CH-MTPS 7.4.2.3
  */
-public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsMtp> {
+public class CdaChMtpsMtp
+		extends AbstractCdaChV1<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsV1Mtp> {
 
 	/**
 	 * <div class="en">Creates a Patient Medical Instructions Entry using the
@@ -95,7 +96,7 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 *            >
 	 */
 	public CdaChMtpsMtp(LanguageCode languageCode, String stylesheet, String cascadingStylesheet) {
-		super(CHFactory.eINSTANCE.createCdaChMtpsMtp().init(), stylesheet, cascadingStylesheet);
+		super(ChFactory.eINSTANCE.createCdaChMtpsV1Mtp().init(), stylesheet, cascadingStylesheet);
 		this.setLanguageCode(languageCode);
 		super.initCda();
 		switch (this.getLanguageCode()) {
@@ -126,7 +127,7 @@ public class CdaChMtpsMtp extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 * @param doc
 	 *            the document
 	 */
-	public CdaChMtpsMtp(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsMtp doc) {
+	public CdaChMtpsMtp(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsV1Mtp doc) {
 		super(doc);
 	}
 

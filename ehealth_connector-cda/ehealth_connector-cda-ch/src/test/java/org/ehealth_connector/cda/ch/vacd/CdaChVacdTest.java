@@ -45,7 +45,7 @@ import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.PregnancyHistory;
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.cda.ch.vacd.enums.ObservationInterpretationForImmunization;
-import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
+import org.ehealth_connector.cda.ch.vacd.enums.SectionsVacd;
 import org.ehealth_connector.cda.enums.AllergiesAndIntolerances;
 import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
 import org.ehealth_connector.cda.enums.RouteOfAdministration;
@@ -68,8 +68,8 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
-import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
-import org.openhealthtools.mdht.uml.cda.ch.VACD;
+import org.openhealthtools.mdht.uml.cda.ch.CdaChVacdV1;
+import org.openhealthtools.mdht.uml.cda.ch.ChPackage;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -377,16 +377,16 @@ public class CdaChVacdTest extends TestUtils {
 		assertTrue(vacdDeserialized != null);
 	}
 
-	private VACD deserializeVacd(String document) throws Exception {
+	private CdaChVacdV1 deserializeVacd(String document) throws Exception {
 		final InputSource source = new InputSource(new StringReader(document));
-		return (VACD) CDAUtil.load(source);
+		return (CdaChVacdV1) CDAUtil.load(source);
 	}
 
-	private VACD deserializeVacDirect(String document) throws Exception {
+	private CdaChVacdV1 deserializeVacDirect(String document) throws Exception {
 		final InputStream stream = new ByteArrayInputStream(document.getBytes());
 		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
-				CHPackage.eINSTANCE.getVACD());
-		return (VACD) clinicalDocument;
+				ChPackage.eINSTANCE.getCdaChVacdV1());
+		return (CdaChVacdV1) clinicalDocument;
 	}
 
 	@Test
@@ -394,7 +394,7 @@ public class CdaChVacdTest extends TestUtils {
 		final CdaChVacd vacd = new CdaChVacd();
 		final String deserialized = this.serializeDocument(vacd);
 		log.debug(deserialized);
-		final VACD vacdDeserialized = deserializeVacDirect(deserialized);
+		final CdaChVacdV1 vacdDeserialized = deserializeVacDirect(deserialized);
 		assertTrue(vacdDeserialized != null);
 	}
 
@@ -403,18 +403,18 @@ public class CdaChVacdTest extends TestUtils {
 		final CdaChVacd vacd = new CdaChVacd();
 		final String deserialized = this.serializeDocument(vacd);
 		log.debug(deserialized);
-		final VACD vacdDeserialized = deserializeVacd(deserialized);
+		final CdaChVacdV1 vacdDeserialized = deserializeVacd(deserialized);
 		assertTrue(vacdDeserialized != null);
 	}
 
 	@Test
 	public void deserializeVacdTestTemplateId() throws Exception {
-		CHPackage.eINSTANCE.eClass();
-		CHPackage.eINSTANCE.getVACD();
+		ChPackage.eINSTANCE.eClass();
+		ChPackage.eINSTANCE.getCdaChVacdV1();
 		final CdaChVacd vacd = new CdaChVacd();
 		final String deserialized = this.serializeDocument(vacd);
 		log.debug(deserialized);
-		final VACD vacdDeserialized = deserializeVacd(deserialized);
+		final CdaChVacdV1 vacdDeserialized = deserializeVacd(deserialized);
 		assertTrue(vacdDeserialized != null);
 	}
 
@@ -616,7 +616,7 @@ public class CdaChVacdTest extends TestUtils {
 		assertTrue(d.getNarrativeTextSectionRemarks().contains(ts4));
 
 		try {
-			d.saveToFile(getTempFilePath("testVACD.xml"));
+			d.saveToFile(getTempFilePath("testVacd.xml"));
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
@@ -632,37 +632,37 @@ public class CdaChVacdTest extends TestUtils {
 		immunization2 = createImmunization();
 		d.setLanguageCode(LanguageCode.GERMAN);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleDe(),
+		assertEquals(SectionsVacd.HISTORY_OF_IMMUNIZATION.getSectionTitleDe(),
 				d.getDoc().getImmunizationsSection().getTitle().getText());
 
 		d = createHeader();
 		d.setLanguageCode(LanguageCode.FRENCH);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleFr(),
+		assertEquals(SectionsVacd.HISTORY_OF_IMMUNIZATION.getSectionTitleFr(),
 				d.getDoc().getImmunizationsSection().getTitle().getText());
 
 		d = createHeader();
 		d.setLanguageCode(LanguageCode.ITALIAN);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleIt(),
+		assertEquals(SectionsVacd.HISTORY_OF_IMMUNIZATION.getSectionTitleIt(),
 				d.getDoc().getImmunizationsSection().getTitle().getText());
 
 		d = createHeader();
 		d.setLanguageCode(LanguageCode.GERMAN);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleDe(),
+		assertEquals(SectionsVacd.HISTORY_OF_IMMUNIZATION.getSectionTitleDe(),
 				d.getDoc().getImmunizationsSection().getTitle().getText());
 
 		d = createHeader();
 		d.setLanguageCode(LanguageCode.FRENCH);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleFr(),
+		assertEquals(SectionsVacd.HISTORY_OF_IMMUNIZATION.getSectionTitleFr(),
 				d.getDoc().getImmunizationsSection().getTitle().getText());
 
 		d = createHeader();
 		d.setLanguageCode(LanguageCode.ITALIAN);
 		d.addImmunization(immunization1);
-		assertEquals(SectionsVACD.HISTORY_OF_IMMUNIZATION.getSectionTitleIt(),
+		assertEquals(SectionsVacd.HISTORY_OF_IMMUNIZATION.getSectionTitleIt(),
 				d.getDoc().getImmunizationsSection().getTitle().getText());
 
 	}

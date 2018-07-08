@@ -25,7 +25,7 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Criterion;
-import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 
 /**
  * CriterionEntry implements the structured recommendation category for
@@ -39,7 +39,7 @@ public class CriterionEntry extends MdhtFacade<org.openhealthtools.mdht.uml.cda.
 	 * Instantiates a new criterion entry.
 	 */
 	public CriterionEntry() {
-		super(CHFactory.eINSTANCE.createCriterionEntry().init());
+		super(ChFactory.eINSTANCE.createCriterionEntry().init());
 		// cannot add it in the model because VACD has the same templateId
 		this.getMdht().getTemplateIds().clear();
 		this.getMdht().getTemplateIds().add(

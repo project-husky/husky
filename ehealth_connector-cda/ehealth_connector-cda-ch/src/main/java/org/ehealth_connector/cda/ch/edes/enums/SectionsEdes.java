@@ -21,13 +21,13 @@ package org.ehealth_connector.cda.ch.edes.enums;
 import org.ehealth_connector.cda.enums.ContentIdPrefix;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.Section;
-import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
-import org.openhealthtools.mdht.uml.cda.ch.CdaChEdes;
+import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
+import org.openhealthtools.mdht.uml.cda.ch.CdaChEdesV1;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.pcc.PCCFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 
-public enum SectionsEDES implements ContentIdPrefix {
+public enum SectionsEdes implements ContentIdPrefix {
 	//@formatter:off
 	/** <div class="en">Ability to Work</div><div class="de">Arbeitsfähigkeit</div><div class="fr">Capacité de travail</div><div class="it">Abilità lavorativa</div>*/
 	ABILITY_TO_WORK("X-ATWRK", "atw", "Arbeitsfähigkeit", "Capacité de travail", "Abilità lavorativa", "Ability to Work"),
@@ -104,12 +104,12 @@ public enum SectionsEDES implements ContentIdPrefix {
 	 *            the Section to lookup
 	 * @return the Enum constant or null if not found
 	 */
-	public static SectionsEDES getEnum(Section section) {
+	public static SectionsEdes getEnum(Section section) {
 		final CE code = section.getCode();
 		if (code != null) {
-			for (final SectionsEDES sectionsEDES : values()) {
-				if (code.getCode().equals(sectionsEDES.getLoincCode())) {
-					return sectionsEDES;
+			for (final SectionsEdes sectionsEdes : values()) {
+				if (code.getCode().equals(sectionsEdes.getLoincCode())) {
+					return sectionsEdes;
 				}
 			}
 		}
@@ -128,7 +128,7 @@ public enum SectionsEDES implements ContentIdPrefix {
 
 	private String sectionTitleIt;
 
-	SectionsEDES(String loincCode, String contentIdPrefix, String sectionTitleDe,
+	SectionsEdes(String loincCode, String contentIdPrefix, String sectionTitleDe,
 			String sectionTitleFr, String sectionTitleIt, String sectionTitleEn) {
 		this.loincCode = loincCode;
 		this.contentIdPrefix = contentIdPrefix;
@@ -147,7 +147,7 @@ public enum SectionsEDES implements ContentIdPrefix {
 		final SectionsDefaultInitializer initializer = new SectionsDefaultInitializer();
 		switch (name()) {
 		case "ABILITY_TO_WORK":
-			return CHFactory.eINSTANCE.createAbilityToWorkSection().init();
+			return ChFactory.eINSTANCE.createAbilityToWorkSection().init();
 		case "ACTIVE_PROBLEMS":
 			return initializer.init(IHEFactory.eINSTANCE.createActiveProblemsSection().init());
 		case "ACUITY_ASSESSMENT":
@@ -206,9 +206,9 @@ public enum SectionsEDES implements ContentIdPrefix {
 		case "REFERRAL_SOURCE":
 			return PCCFactory.eINSTANCE.createReferralSourceSection().init();
 		case "REMARKS":
-			return CHFactory.eINSTANCE.createRemarksSection().init();
+			return ChFactory.eINSTANCE.createRemarksSection().init();
 		case "RESULTS":
-			return CHFactory.eINSTANCE.createCodedResultsSection().init();
+			return ChFactory.eINSTANCE.createCodedResultsSection().init();
 		case "REVIEW_OF_SYSTEMS":
 			return IHEFactory.eINSTANCE.createReviewOfSystemsSection().init();
 		case "SOCIAL_HISTORY":
@@ -224,7 +224,7 @@ public enum SectionsEDES implements ContentIdPrefix {
 	 * @param edesDocument
 	 * @return the section or null if not found
 	 */
-	public Section findSection(CdaChEdes edesDocument) {
+	public Section findSection(CdaChEdesV1 edesDocument) {
 		for (final Section section : edesDocument.getSections()) {
 			if (section.getCode() != null) {
 				if (loincCode.equals(section.getCode().getCode())) {

@@ -28,7 +28,7 @@ import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ch.BloodgroupObservation;
-import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
@@ -47,7 +47,7 @@ public class BloodGroupObservation
 	 * Instantiates a new blood group observation.
 	 */
 	public BloodGroupObservation() {
-		super(CHFactory.eINSTANCE.createBloodgroupObservation().init(),
+		super(ChFactory.eINSTANCE.createBloodgroupObservation().init(),
 				"2.16.756.5.30.1.1.1.1.3.4.1", "CDA-CH.LRTP.Body.StudiesSummaryL3.Bloodgroup");
 	}
 

@@ -41,7 +41,7 @@ import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.IntendedRecipient;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
-import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
+import org.openhealthtools.mdht.uml.cda.ch.ChPackage;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABPackage;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.slf4j.Logger;
@@ -60,12 +60,12 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 
 	private CdaChLrtp deserializeCda(String document) throws Exception {
 		final InputSource source = new InputSource(new StringReader(document));
-		CHPackage.eINSTANCE.eClass();
+		ChPackage.eINSTANCE.eClass();
 		LABPackage.eINSTANCE.eClass();
 		final ClinicalDocument clinicalDocument = CDAUtil.load(source);
-		if (clinicalDocument instanceof org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp) {
+		if (clinicalDocument instanceof org.openhealthtools.mdht.uml.cda.ch.CdaChLrtpV1) {
 			CdaChLrtp test = new CdaChLrtp(
-					(org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp) clinicalDocument);
+					(org.openhealthtools.mdht.uml.cda.ch.CdaChLrtpV1) clinicalDocument);
 			return test;
 		} else
 			return null;
@@ -74,8 +74,8 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 	private CdaChLrtp deserializeCdaDirect(String document) throws Exception {
 		final InputStream stream = new ByteArrayInputStream(document.getBytes());
 		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
-				CHPackage.eINSTANCE.getCdaChLrtp());
-		return new CdaChLrtp((org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp) clinicalDocument);
+				ChPackage.eINSTANCE.getCdaChLrtpV1());
+		return new CdaChLrtp((org.openhealthtools.mdht.uml.cda.ch.CdaChLrtpV1) clinicalDocument);
 	}
 
 	@Test

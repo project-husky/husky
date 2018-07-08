@@ -23,7 +23,7 @@ import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
-import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.CodedResultsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.ProcedureEntry;
@@ -43,7 +43,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 public class CodedResults extends AbstractCodedResults {
 
 	public CodedResults() {
-		super(CHFactory.eINSTANCE.createCodedResultsSection().init());
+		super(ChFactory.eINSTANCE.createCodedResultsSection().init());
 	}
 
 	public CodedResults(CodedResultsSection crsection) {

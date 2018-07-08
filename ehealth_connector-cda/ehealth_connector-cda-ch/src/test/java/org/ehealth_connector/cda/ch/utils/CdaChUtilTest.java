@@ -31,7 +31,7 @@ import org.ehealth_connector.cda.ch.lab.lrph.CdaChLrph;
 import org.ehealth_connector.cda.ch.lab.lrqc.CdaChLrqc;
 import org.ehealth_connector.cda.ch.lab.lrtp.CdaChLrtp;
 import org.ehealth_connector.cda.ch.vacd.CdaChVacd;
-import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
+import org.ehealth_connector.cda.ch.vacd.enums.SectionsVacd;
 import org.ehealth_connector.cda.utils.CdaUtilTest;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.junit.Before;
@@ -48,13 +48,13 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
  *
  */
 public class CdaChUtilTest extends CdaUtilTest {
-	private SectionsVACD testPrefix;
+	private SectionsVacd testPrefix;
 
 	@Override
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
-		testPrefix = SectionsVACD.ALLERGIES_REACTIONS;
+		testPrefix = SectionsVacd.ALLERGIES_REACTIONS;
 	}
 
 	/**
@@ -252,11 +252,11 @@ public class CdaChUtilTest extends CdaUtilTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.utils.CdaUtil#updateRefIfComment(org.openhealthtools.mdht.uml.cda.EntryRelationship, int, int, org.ehealth_connector.cda.ch.enums.SectionsVACD)}
+	 * {@link org.ehealth_connector.cda.utils.CdaUtil#updateRefIfComment(org.openhealthtools.mdht.uml.cda.EntryRelationship, int, int, org.ehealth_connector.cda.ch.enums.SectionsVacd)}
 	 * .
 	 */
 	@Test
-	public void testUpdateRefIfCommentEntryRelationshipIntIntSectionsVACD() {
+	public void testUpdateRefIfCommentEntryRelationshipIntIntSectionsVacd() {
 		final EntryRelationship ref = CdaChUtil.updateRefIfComment(false, testEr, testI, testJ,
 				testPrefix);
 		assertNotNull(ref);
@@ -274,11 +274,11 @@ public class CdaChUtilTest extends CdaUtilTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.utils.CdaUtil#updateRefIfComment(org.openhealthtools.mdht.uml.cda.EntryRelationship, java.lang.String, org.ehealth_connector.cda.ch.enums.SectionsVACD)}
+	 * {@link org.ehealth_connector.cda.utils.CdaUtil#updateRefIfComment(org.openhealthtools.mdht.uml.cda.EntryRelationship, java.lang.String, org.ehealth_connector.cda.ch.enums.SectionsVacd)}
 	 * .
 	 */
 	@Test
-	public void testUpdateRefIfCommentEntryRelationshipStringSectionsVACD() {
+	public void testUpdateRefIfCommentEntryRelationshipStringSectionsVacd() {
 		final EntryRelationship ref = CdaChUtil.updateRefIfComment(false, testEr, testRef,
 				testPrefix);
 		assertNotNull(ref);

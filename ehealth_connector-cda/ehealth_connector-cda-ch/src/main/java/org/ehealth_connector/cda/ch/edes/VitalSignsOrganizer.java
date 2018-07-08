@@ -23,7 +23,7 @@ import java.util.List;
 
 import org.ehealth_connector.cda.AbstractVitalSignObservation;
 import org.ehealth_connector.cda.AbstractVitalSignsOrganizer;
-import org.ehealth_connector.cda.ch.AbstractCdaCh;
+import org.ehealth_connector.cda.ch.AbstractCdaChV1;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.NullFlavor;
@@ -117,7 +117,7 @@ public class VitalSignsOrganizer extends AbstractVitalSignsOrganizer {
 	@Override
 	public void addId(Identificator id) {
 		if (id == null) {
-			id = new Identificator(AbstractCdaCh.OID_MAIN, UUID.generate());
+			id = new Identificator(AbstractCdaChV1.OID_MAIN, UUID.generate());
 		}
 		getMdht().getIds().add(id.getIi());
 	}

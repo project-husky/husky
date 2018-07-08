@@ -25,11 +25,11 @@ import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdRecCategories;
-import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
+import org.ehealth_connector.cda.ch.vacd.enums.SectionsVacd;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
-import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 
 /**
  * The Class ImmunizationSection provides the support for immunization section
@@ -48,9 +48,9 @@ public class ImmunizationSection
 	 *            the language code
 	 */
 	public ImmunizationSection(LanguageCode languageCode) {
-		super(CHFactory.eINSTANCE.createImmunizationsSection().init(), null, null);
+		super(ChFactory.eINSTANCE.createImmunizationsSection().init(), null, null);
 		this.languageCode = languageCode;
-		this.getMdht().setTitle(Util.st(SectionsVACD.HISTORY_OF_IMMUNIZATION
+		this.getMdht().setTitle(Util.st(SectionsVacd.HISTORY_OF_IMMUNIZATION
 				.getSectionTitle((languageCode != null ? languageCode.getCS() : null))));
 	}
 

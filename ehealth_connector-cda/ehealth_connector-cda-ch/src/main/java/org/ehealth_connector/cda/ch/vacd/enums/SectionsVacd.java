@@ -21,7 +21,7 @@ import org.ehealth_connector.cda.enums.ContentIdPrefix;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 
-public enum SectionsVACD implements ContentIdPrefix {
+public enum SectionsVacd implements ContentIdPrefix {
 	//@formatter:off
 	HISTORY_OF_IMMUNIZATION("11369-6", "hoi", "Impfungen", "Vaccinations", "Vaccinazioni","Immunizations"),
 	ACTIVE_PROBLEMS("11450-4", "ap", "Problemliste", "Liste des problèmes", "Elenco dei problemi", "Active Problems"),
@@ -78,7 +78,7 @@ public enum SectionsVACD implements ContentIdPrefix {
 
 	private String sectionTitleEn;
 
-	SectionsVACD(String loincCode, String contentIdPrefix, String sectionTitleDe,
+	SectionsVacd(String loincCode, String contentIdPrefix, String sectionTitleDe,
 			String sectionTitleFr, String sectionTitleIt, String sectionTitleEn) {
 		this.loincCode = loincCode;
 		this.contentIdPrefix = contentIdPrefix;

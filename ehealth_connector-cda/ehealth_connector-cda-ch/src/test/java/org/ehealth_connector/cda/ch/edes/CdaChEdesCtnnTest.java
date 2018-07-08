@@ -37,7 +37,7 @@ import javax.xml.xpath.XPathFactory;
 
 import org.ehealth_connector.cda.AbstractVitalSignObservation;
 import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationForVitalSign;
-import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
+import org.ehealth_connector.cda.ch.edes.enums.SectionsEdes;
 import org.ehealth_connector.cda.enums.ActSite;
 import org.ehealth_connector.cda.enums.VitalSignCodes;
 import org.ehealth_connector.cda.testhelper.TestUtils;
@@ -47,7 +47,7 @@ import org.ehealth_connector.common.enums.Ucum;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
-import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
+import org.openhealthtools.mdht.uml.cda.ch.ChPackage;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -158,15 +158,15 @@ public class CdaChEdesCtnnTest extends TestUtils {
 	private CdaChEdesCtnn deserializeCda(String document) throws Exception {
 		final InputSource source = new InputSource(new StringReader(document));
 		return new CdaChEdesCtnn(
-				(org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn) CDAUtil.load(source));
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChEdesV1Ctnn) CDAUtil.load(source));
 	}
 
 	private CdaChEdesCtnn deserializeCdaDirect(String document) throws Exception {
 		final InputStream stream = new ByteArrayInputStream(document.getBytes());
 		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
-				CHPackage.eINSTANCE.getCdaChEdesCtnn());
+				ChPackage.eINSTANCE.getCdaChEdesV1Ctnn());
 		return new CdaChEdesCtnn(
-				(org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn) clinicalDocument);
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChEdesV1Ctnn) clinicalDocument);
 	}
 
 	@Test
@@ -263,19 +263,19 @@ public class CdaChEdesCtnnTest extends TestUtils {
 
 		assertTrue(cdaDeserialized.getNarrativeTextSectionModeOfArrival().contains(testText));
 		assertTrue(cdaDeserialized.getNarrativeTextSectionModeOfArrival()
-				.contains(SectionsEDES.MODE_OF_ARRIVAL.getContentIdPrefix()));
+				.contains(SectionsEdes.MODE_OF_ARRIVAL.getContentIdPrefix()));
 
 		assertTrue(cdaDeserialized.getNarrativeTextSectionAcuityAssessment().contains(testText));
 		assertTrue(cdaDeserialized.getNarrativeTextSectionAcuityAssessment()
-				.contains(SectionsEDES.ACUITY_ASSESSMENT.getContentIdPrefix()));
+				.contains(SectionsEdes.ACUITY_ASSESSMENT.getContentIdPrefix()));
 
 		assertTrue(cdaDeserialized.getNarrativeTextSectionRemarks().contains(testText));
 		assertTrue(cdaDeserialized.getNarrativeTextSectionRemarks()
-				.contains(SectionsEDES.REMARKS.getContentIdPrefix()));
+				.contains(SectionsEdes.REMARKS.getContentIdPrefix()));
 
 		assertTrue(cdaDeserialized.getNarrativeTextSectionAbilityToWork().contains(testText));
 		assertTrue(cdaDeserialized.getNarrativeTextSectionAbilityToWork()
-				.contains(SectionsEDES.ABILITY_TO_WORK.getContentIdPrefix()));
+				.contains(SectionsEdes.ABILITY_TO_WORK.getContentIdPrefix()));
 	}
 
 	@Test

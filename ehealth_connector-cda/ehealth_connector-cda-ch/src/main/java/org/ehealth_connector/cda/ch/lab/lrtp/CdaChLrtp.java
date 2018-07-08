@@ -40,7 +40,7 @@ import org.openhealthtools.mdht.uml.cda.PatientRole;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.ServiceEvent;
-import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -62,7 +62,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  * SOAS, damit diese bei der Organzuteilung berücksichtigt werden können.</div>
  */
 public class CdaChLrtp
-		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp> {
+		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrtpV1> {
 
 	/**
 	 * This class implements the default comparison algorithm for HL7 CDA
@@ -170,7 +170,7 @@ public class CdaChLrtp
 	 *            rendering
 	 */
 	public CdaChLrtp(LanguageCode languageCode, String styleSheet, String css) {
-		super(CHFactory.eINSTANCE.createCdaChLrtp().init(), languageCode, styleSheet, css);
+		super(ChFactory.eINSTANCE.createCdaChLrtpV1().init(), languageCode, styleSheet, css);
 		this.setLanguageCode(languageCode);
 	}
 
@@ -226,7 +226,7 @@ public class CdaChLrtp
 	 * @param doc
 	 *            mdht model document
 	 */
-	public CdaChLrtp(org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp doc) {
+	public CdaChLrtp(org.openhealthtools.mdht.uml.cda.ch.CdaChLrtpV1 doc) {
 		super(doc);
 	}
 

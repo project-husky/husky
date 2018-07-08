@@ -65,7 +65,7 @@ import org.openhealthtools.mdht.uml.cda.Participant1;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.cda.RelatedDocument;
-import org.openhealthtools.mdht.uml.cda.ch.CDACH;
+import org.openhealthtools.mdht.uml.cda.ch.CdaChV1;
 import org.openhealthtools.mdht.uml.cda.internal.resource.CDAResource;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
@@ -469,8 +469,8 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 *
 	 * @return the doc
 	 */
-	public CDACH getDoc() {
-		return (CDACH) this.getMdht();
+	public CdaChV1 getDoc() {
+		return (CdaChV1) this.getMdht();
 	}
 
 	/**

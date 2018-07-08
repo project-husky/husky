@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.ehealth_connector.cda.ch.AbstractCdaCh;
+import org.ehealth_connector.cda.ch.AbstractCdaChV1;
 import org.ehealth_connector.cda.ihe.pharm.DispenseItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.MedicationListSection;
 import org.ehealth_connector.cda.ihe.pharm.MedicationTreatmentPlanItemEntry;
@@ -33,12 +33,13 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 
 /**
  * The Class CdaChMtpsPml. See also CDA-CH-MTPS 7.4.2.2
  */
-public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPml> {
+public class CdaChMtpsPml
+		extends AbstractCdaChV1<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsV1Pml> {
 
 	/**
 	 * <div class="en">Instantiates a new CDA-CH-MTPS PML Document using the
@@ -76,7 +77,7 @@ public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 *            >
 	 */
 	public CdaChMtpsPml(LanguageCode languageCode, String stylesheet, String cascadingStylesheet) {
-		super(CHFactory.eINSTANCE.createCdaChMtpsPml().init(), stylesheet, cascadingStylesheet);
+		super(ChFactory.eINSTANCE.createCdaChMtpsV1Pml().init(), stylesheet, cascadingStylesheet);
 		this.setLanguageCode(languageCode);
 		super.initCda();
 		switch (this.getLanguageCode()) {
@@ -104,7 +105,7 @@ public class CdaChMtpsPml extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 * @param doc
 	 *            the MDHT document
 	 */
-	public CdaChMtpsPml(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPml doc) {
+	public CdaChMtpsPml(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsV1Pml doc) {
 		super(doc);
 	}
 

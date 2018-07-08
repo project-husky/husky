@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.ehealth_connector.cda.ch.AbstractCdaCh;
+import org.ehealth_connector.cda.ch.AbstractCdaChV1;
 import org.ehealth_connector.cda.ihe.pharm.PrescriptionItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.PrescriptionSection;
 import org.ehealth_connector.common.Author;
@@ -30,12 +30,13 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 
 /**
  * The Class CdaChMtpsPre. See also CDA-CH-MTPS 7.4.2.4
  */
-public class CdaChMtpsPre extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre> {
+public class CdaChMtpsPre
+		extends AbstractCdaChV1<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsV1Pre> {
 
 	/**
 	 * <div class="en">Instantiates a new CDA-CH-MTPS PRE Document using the
@@ -73,7 +74,7 @@ public class CdaChMtpsPre extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 *            >
 	 */
 	public CdaChMtpsPre(LanguageCode languageCode, String stylesheet, String cascadingStylesheet) {
-		super(CHFactory.eINSTANCE.createCdaChMtpsPre().init(), stylesheet, cascadingStylesheet);
+		super(ChFactory.eINSTANCE.createCdaChMtpsV1Pre().init(), stylesheet, cascadingStylesheet);
 		this.setLanguageCode(languageCode);
 		super.initCda();
 		switch (this.getLanguageCode()) {
@@ -102,7 +103,7 @@ public class CdaChMtpsPre extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda
 	 * @param doc
 	 *            the MDHT document
 	 */
-	public CdaChMtpsPre(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre doc) {
+	public CdaChMtpsPre(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsV1Pre doc) {
 		super(doc);
 	}
 

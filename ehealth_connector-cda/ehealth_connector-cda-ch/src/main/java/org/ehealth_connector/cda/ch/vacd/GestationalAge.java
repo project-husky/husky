@@ -23,7 +23,7 @@ import org.ehealth_connector.cda.ch.CodedResults;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 import org.openhealthtools.mdht.uml.cda.ch.CodedResultsSection;
 import org.openhealthtools.mdht.uml.cda.ch.GestationalAgeDaysSimpleObservation;
 import org.openhealthtools.mdht.uml.cda.ch.GestationalAgeWeeksSimpleObservation;
@@ -53,9 +53,9 @@ public class GestationalAge extends CodedResults {
 	 *
 	 */
 	public GestationalAge() {
-		super(CHFactory.eINSTANCE.createCodedResultsSection().init());
-		mWeeks = CHFactory.eINSTANCE.createGestationalAgeWeeksSimpleObservation().init();
-		mDays = CHFactory.eINSTANCE.createGestationalAgeDaysSimpleObservation().init();
+		super(ChFactory.eINSTANCE.createCodedResultsSection().init());
+		mWeeks = ChFactory.eINSTANCE.createGestationalAgeWeeksSimpleObservation().init();
+		mDays = ChFactory.eINSTANCE.createGestationalAgeDaysSimpleObservation().init();
 
 		getCrs().addObservation(mWeeks);
 		getCrs().addObservation(mDays);

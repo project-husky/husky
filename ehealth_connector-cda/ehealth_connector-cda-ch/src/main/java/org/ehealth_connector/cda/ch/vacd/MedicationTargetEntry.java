@@ -25,7 +25,7 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.ihe.utils.UUID;
-import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 
 /**
  * MedicationTargetEntry convenience functionality for the CDA Body Level 3 -
@@ -40,7 +40,7 @@ public class MedicationTargetEntry
 	 * Instantiates a new medication target entry.
 	 */
 	public MedicationTargetEntry() {
-		super(CHFactory.eINSTANCE.createMedicationTargetEntry().init(), null, null);
+		super(ChFactory.eINSTANCE.createMedicationTargetEntry().init(), null, null);
 		this.getMdht().getTemplateIds().clear();
 		// cannot add it in the model because VACD has the same templateId
 		this.getMdht().getTemplateIds().add(

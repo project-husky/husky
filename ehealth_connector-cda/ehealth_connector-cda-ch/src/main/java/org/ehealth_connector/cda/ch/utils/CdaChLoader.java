@@ -21,7 +21,7 @@ import java.io.InputStream;
 import java.lang.reflect.Constructor;
 
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
-import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
+import org.openhealthtools.mdht.uml.cda.ch.ChPackage;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 
 /**
@@ -54,7 +54,7 @@ public class CdaChLoader<T> {
 	public T loadFromStream(InputStream input, Class<T> aClazz, Class<?> aConstrParam)
 			throws Exception {
 		// Explicit initialization
-		CHPackage.eINSTANCE.eClass();
+		ChPackage.eINSTANCE.eClass();
 
 		// load the clinical document
 		final ClinicalDocument clinicalDocument = CDAUtil.load(input);

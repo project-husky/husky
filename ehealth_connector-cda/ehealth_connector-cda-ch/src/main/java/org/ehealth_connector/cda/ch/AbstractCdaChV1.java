@@ -53,7 +53,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
  * @param <EClinicalDocument>
  *            the generic type
  */
-public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
+public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument>
 		extends AbstractCda<EClinicalDocument> {
 
 	/** main OID for CDA-CH */
@@ -69,7 +69,7 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 	 * @param doc
 	 *            the CDA-CH Object in its MDHT representation.
 	 */
-	public AbstractCdaCh(EClinicalDocument doc) {
+	public AbstractCdaChV1(EClinicalDocument doc) {
 		super(doc);
 	}
 
@@ -82,7 +82,7 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 	 * @param languageCode
 	 *            the desired document language.
 	 */
-	public AbstractCdaCh(EClinicalDocument doc, LanguageCode languageCode) {
+	public AbstractCdaChV1(EClinicalDocument doc, LanguageCode languageCode) {
 		super(doc, languageCode);
 	}
 
@@ -102,7 +102,7 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 	 *            the Cascasing stylesheet for the document (e.g.
 	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
 	 */
-	public AbstractCdaCh(EClinicalDocument doc, String stylesheet, String css) {
+	public AbstractCdaChV1(EClinicalDocument doc, String stylesheet, String css) {
 		super(doc, stylesheet, css);
 	}
 
@@ -375,7 +375,7 @@ public abstract class AbstractCdaCh<EClinicalDocument extends ClinicalDocument>
 	public void setId(Identificator id) {
 		if (id == null) {
 			final II docID = DatatypesFactory.eINSTANCE.createII();
-			docID.setRoot(AbstractCdaCh.OID_MAIN);
+			docID.setRoot(AbstractCdaChV1.OID_MAIN);
 			docID.setExtension(UUID.generate());
 			getDoc().setId(docID);
 		} else {

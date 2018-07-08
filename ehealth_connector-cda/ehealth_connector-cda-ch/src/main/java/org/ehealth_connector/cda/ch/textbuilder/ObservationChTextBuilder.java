@@ -53,7 +53,7 @@ import org.openhealthtools.mdht.uml.cda.InFulfillmentOf;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.Organizer;
 import org.openhealthtools.mdht.uml.cda.Participant2;
-import org.openhealthtools.mdht.uml.cda.ch.impl.CdaChLrqcImpl;
+import org.openhealthtools.mdht.uml.cda.ch.impl.CdaChLrqcV1Impl;
 import org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection;
 import org.openhealthtools.mdht.uml.cda.ihe.impl.VitalSignsOrganizerImpl;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer;
@@ -1099,7 +1099,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 										if (templateId2.getRoot()
 												.equals("1.3.6.1.4.1.19376.1.3.1.3")) {
 											if (er2.getAct().getEffectiveTime() != null) {
-												if (!(doc instanceof CdaChLrqcImpl))
+												if (!(doc instanceof CdaChLrqcV1Impl))
 													er2.getAct().setText(
 															Util.createReference(contentId));
 												retVal = formatSingleTimestampOrInterval(

@@ -27,17 +27,17 @@ import org.eclipse.emf.common.util.EList;
 import org.ehealth_connector.cda.AbstractObservation;
 import org.ehealth_connector.cda.AbstractOrganizer;
 import org.ehealth_connector.cda.AbstractVitalSignObservation;
-import org.ehealth_connector.cda.ch.AbstractCdaCh;
+import org.ehealth_connector.cda.ch.AbstractCdaChV1;
 import org.ehealth_connector.cda.ch.ActiveProblemConcern;
 import org.ehealth_connector.cda.ch.AllergyConcern;
 import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.ProblemConcern;
-import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
+import org.ehealth_connector.cda.ch.edes.enums.SectionsEdes;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.Section;
-import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.pcc.EDDiagnosesSection;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
@@ -51,7 +51,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  *
  */
 public class CdaChEdesEdpn
-		extends AbstractCdaCh<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn> {
+		extends AbstractCdaChV1<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesV1Edpn> {
 
 	private static final String DOCTITLE_EN = "Emergency Department Encounter Summary (Physician Note)";
 	private static final String DOCTITLE_GER = "Notfallaustrittsbericht (aus ärztlicher Sicht)";
@@ -66,7 +66,7 @@ public class CdaChEdesEdpn
 	 * <div class="de">Erstellt ein neues EDES EDPN CDA Dokument.</div>
 	 */
 	public CdaChEdesEdpn() {
-		super(CHFactory.eINSTANCE.createCdaChEdesEdpn().init());
+		super(ChFactory.eINSTANCE.createCdaChEdesV1Edpn().init());
 		mCommon = new CdaChEdesCommon(this);
 	}
 
@@ -97,7 +97,7 @@ public class CdaChEdesEdpn
 	 *            >
 	 */
 	public CdaChEdesEdpn(LanguageCode language, String stylesheet, String cascadingStylesheet) {
-		super(CHFactory.eINSTANCE.createCdaChEdesEdpn().init(), stylesheet, cascadingStylesheet);
+		super(ChFactory.eINSTANCE.createCdaChEdesV1Edpn().init(), stylesheet, cascadingStylesheet);
 		setLanguageCode(language);
 		// set the fixed Ctnn Code
 		final CE ce = DatatypesFactory.eINSTANCE.createCE();
@@ -111,15 +111,15 @@ public class CdaChEdesEdpn
 	}
 
 	/**
-	 * <div class="en">Creates a new CdaChEdesEdpn convenience object on the
-	 * basis of a MDHT-CdaChEdesEdpn object.</div> <div class="de">Erstellt ein
-	 * neues CdaChEdesEdpn Convenience Objekt mittels eines MDHT-CdaChEdesEdpn
-	 * Objekts.</div>
+	 * <div class="en">Creates a new CdaChEdesV1Edpn convenience object on the
+	 * basis of a MDHT-CdaChEdesV1Edpn object.</div> <div class="de">Erstellt
+	 * ein neues CdaChEdesV1Edpn Convenience Objekt mittels eines
+	 * MDHT-CdaChEdesV1Edpn Objekts.</div>
 	 *
 	 * @param doc
-	 *            MDHT CdaChEdesEdpn object
+	 *            MDHT CdaChEdesV1Edpn object
 	 */
-	public CdaChEdesEdpn(org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn doc) {
+	public CdaChEdesEdpn(org.openhealthtools.mdht.uml.cda.ch.CdaChEdesV1Edpn doc) {
 		super(doc);
 		mCommon = new CdaChEdesCommon(this);
 	}
@@ -273,14 +273,14 @@ public class CdaChEdesEdpn
 	}
 
 	/**
-	 * <div class="en">Gets the MDHT-CdaChEdesEdpn Object</div>
-	 * <div class="de">Liefert das MDHT-CdaChEdesEdpn-Objekt zurück.</div>
+	 * <div class="en">Gets the MDHT-CdaChEdesV1Edpn Object</div>
+	 * <div class="de">Liefert das MDHT-CdaChEdesV1Edpn-Objekt zurück.</div>
 	 *
 	 * @return the doc
 	 */
 	@Override
-	public org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn getDoc() {
-		return (org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn) super.getDoc();
+	public org.openhealthtools.mdht.uml.cda.ch.CdaChEdesV1Edpn getDoc() {
+		return (org.openhealthtools.mdht.uml.cda.ch.CdaChEdesV1Edpn) super.getDoc();
 	}
 
 	public String getDocumentTitle() {
@@ -332,7 +332,7 @@ public class CdaChEdesEdpn
 	 *         Teils des CDA-Dokuments</div>
 	 */
 	public String getNarrativeTextSectionAbilityToWork() {
-		return mCommon.getNarrativeText(SectionsEDES.ABILITY_TO_WORK.findSection(getDoc()));
+		return mCommon.getNarrativeText(SectionsEdes.ABILITY_TO_WORK.findSection(getDoc()));
 	}
 
 	/**
@@ -696,7 +696,7 @@ public class CdaChEdesEdpn
 	 *         Teils des CDA-Dokuments</div>
 	 */
 	public String getNarrativeTextSectionRemarks() {
-		return mCommon.getNarrativeText(SectionsEDES.REMARKS.findSection(getDoc()));
+		return mCommon.getNarrativeText(SectionsEdes.REMARKS.findSection(getDoc()));
 	}
 
 	/**
@@ -801,8 +801,8 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionAbilityToWork(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.ABILITY_TO_WORK,
-				SectionsEDES.ABILITY_TO_WORK.findSection(getDoc()), text);
+		mCommon.setNarrativeTextSection(SectionsEdes.ABILITY_TO_WORK,
+				SectionsEdes.ABILITY_TO_WORK.findSection(getDoc()), text);
 	}
 
 	/**
@@ -816,7 +816,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionActiveProblems(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.ACTIVE_PROBLEMS,
+		mCommon.setNarrativeTextSection(SectionsEdes.ACTIVE_PROBLEMS,
 				getDoc().getActiveProblemsSection(), text);
 	}
 
@@ -831,7 +831,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionAdvanceDirectives(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.ADVANCE_DIRECTIVES,
+		mCommon.setNarrativeTextSection(SectionsEdes.ADVANCE_DIRECTIVES,
 				getDoc().getAdvanceDirectivesSection(), text);
 	}
 
@@ -846,7 +846,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionAllergiesAndOtherAdverseReactions(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.ALLERGIES_AND_OTHER_ADVERSE_REACTIONS,
+		mCommon.setNarrativeTextSection(SectionsEdes.ALLERGIES_AND_OTHER_ADVERSE_REACTIONS,
 				getDoc().getAllergiesReactionsSection(), text);
 	}
 
@@ -861,7 +861,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionAssessmentAndPlan(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.ASSESSMENT_AND_PLAN,
+		mCommon.setNarrativeTextSection(SectionsEdes.ASSESSMENT_AND_PLAN,
 				getDoc().getAssessmentAndPlanSection(), text);
 	}
 
@@ -876,7 +876,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionAssessments(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.ASSESSMENTS, getDoc().getAssessmentsSection(),
+		mCommon.setNarrativeTextSection(SectionsEdes.ASSESSMENTS, getDoc().getAssessmentsSection(),
 				text);
 	}
 
@@ -891,7 +891,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionCarePlan(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.CARE_PLAN, getDoc().getCarePlanSection(),
+		mCommon.setNarrativeTextSection(SectionsEdes.CARE_PLAN, getDoc().getCarePlanSection(),
 				text);
 	}
 
@@ -906,7 +906,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionChiefComplaint(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.CHIEF_COMPLAINT,
+		mCommon.setNarrativeTextSection(SectionsEdes.CHIEF_COMPLAINT,
 				getDoc().getChiefComplaintSection(), text);
 	}
 
@@ -921,7 +921,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionCodedPhysicalExam(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.CODED_PHYSICAL_EXAM,
+		mCommon.setNarrativeTextSection(SectionsEdes.CODED_PHYSICAL_EXAM,
 				getDoc().getPhysicalExamSection(), text);
 	}
 
@@ -936,7 +936,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionCodedVitalSigns(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.CODED_VITAL_SIGNS,
+		mCommon.setNarrativeTextSection(SectionsEdes.CODED_VITAL_SIGNS,
 				getDoc().getCodedVitalSignsSection(), text);
 	}
 
@@ -951,7 +951,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionEdConsultations(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.ED_CONSULTATIONS,
+		mCommon.setNarrativeTextSection(SectionsEdes.ED_CONSULTATIONS,
 				getDoc().getConsultationsSection(), text);
 	}
 
@@ -966,7 +966,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionEdDiagnosis(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.ED_DIAGNOSIS, getDoc().getEDDiagnosesSection(),
+		mCommon.setNarrativeTextSection(SectionsEdes.ED_DIAGNOSIS, getDoc().getEDDiagnosesSection(),
 				text);
 	}
 
@@ -981,7 +981,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionEdDisposition(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.ED_DISPOSITION,
+		mCommon.setNarrativeTextSection(SectionsEdes.ED_DISPOSITION,
 				getDoc().getEDDispositionSection(), text);
 	}
 
@@ -996,7 +996,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionFamilyMedicalHistory(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.FAMILY_MEDICAL_HISTORY,
+		mCommon.setNarrativeTextSection(SectionsEdes.FAMILY_MEDICAL_HISTORY,
 				getDoc().getFamilyMedicalHistorySection(), text);
 	}
 
@@ -1011,7 +1011,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionHistoryOfPastIllness(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.HISTORY_OF_PAST_ILLNESS,
+		mCommon.setNarrativeTextSection(SectionsEdes.HISTORY_OF_PAST_ILLNESS,
 				getDoc().getHistoryOfPastIllnessSection(), text);
 	}
 
@@ -1026,7 +1026,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionHistoryOfPresentIllness(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.HISTORY_OF_PRESENT_ILLNESS,
+		mCommon.setNarrativeTextSection(SectionsEdes.HISTORY_OF_PRESENT_ILLNESS,
 				getDoc().getHistoryOfPresentIllness(), text);
 	}
 
@@ -1041,7 +1041,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionHospitalDischargeMedications(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.HOSPITAL_DISCHARGE_MEDICATIONS,
+		mCommon.setNarrativeTextSection(SectionsEdes.HOSPITAL_DISCHARGE_MEDICATIONS,
 				getDoc().getHospitalDischargeMedicationsSection(), text);
 	}
 
@@ -1056,7 +1056,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionImmunizations(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.HISTORY_OF_IMMUNIZATION,
+		mCommon.setNarrativeTextSection(SectionsEdes.HISTORY_OF_IMMUNIZATION,
 				getDoc().getImmunizationsSection(), text);
 	}
 
@@ -1071,7 +1071,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionIntravenousFluidsAdministered(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.INTRAVENOUS_FLUIDS_ADMINISTERED,
+		mCommon.setNarrativeTextSection(SectionsEdes.INTRAVENOUS_FLUIDS_ADMINISTERED,
 				getDoc().getIntravenousFluidsAdministeredSection(), text);
 	}
 
@@ -1086,7 +1086,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionListOfSurgeries(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.LIST_OF_SURGERIES,
+		mCommon.setNarrativeTextSection(SectionsEdes.LIST_OF_SURGERIES,
 				getDoc().getSurgeriesSection(), text);
 	}
 
@@ -1101,7 +1101,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionMedications(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.CURRENT_MEDICATIONS,
+		mCommon.setNarrativeTextSection(SectionsEdes.CURRENT_MEDICATIONS,
 				getDoc().getMedicationsSection(), text);
 	}
 
@@ -1116,7 +1116,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionMedicationsAdministered(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.MEDICATIONS_ADMINISTERED,
+		mCommon.setNarrativeTextSection(SectionsEdes.MEDICATIONS_ADMINISTERED,
 				getDoc().getMedicationsAdministeredSection(), text);
 	}
 
@@ -1131,7 +1131,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionModeOfArrival(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.MODE_OF_ARRIVAL,
+		mCommon.setNarrativeTextSection(SectionsEdes.MODE_OF_ARRIVAL,
 				getDoc().getModeOfArrivalSection(), text);
 	}
 
@@ -1146,7 +1146,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionPregnancyHistory(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.HISTORY_OF_PREGNANCIES,
+		mCommon.setNarrativeTextSection(SectionsEdes.HISTORY_OF_PREGNANCIES,
 				getDoc().getPregnancyHistorySection(), text);
 	}
 
@@ -1161,7 +1161,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionProceduresAndInterventions(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.PROCEDURES,
+		mCommon.setNarrativeTextSection(SectionsEdes.PROCEDURES,
 				getDoc().getProceduresAndInterventionsSection(), text);
 	}
 
@@ -1176,7 +1176,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionProgressNote(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.PROGRESS_NOTE,
+		mCommon.setNarrativeTextSection(SectionsEdes.PROGRESS_NOTE,
 				getDoc().getProgressNoteSection(), text);
 	}
 
@@ -1191,7 +1191,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionReasonForVisit(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.REASON_FOR_VISIT,
+		mCommon.setNarrativeTextSection(SectionsEdes.REASON_FOR_VISIT,
 				getDoc().getReasonForVisitSection(), text);
 	}
 
@@ -1206,7 +1206,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionReferralSource(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.REFERRAL_SOURCE,
+		mCommon.setNarrativeTextSection(SectionsEdes.REFERRAL_SOURCE,
 				getDoc().getReferralSourceSection(), text);
 	}
 
@@ -1221,8 +1221,8 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionRemarks(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.REMARKS,
-				SectionsEDES.REMARKS.findSection(getDoc()), text);
+		mCommon.setNarrativeTextSection(SectionsEdes.REMARKS,
+				SectionsEdes.REMARKS.findSection(getDoc()), text);
 	}
 
 	/**
@@ -1236,7 +1236,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionResults(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.RESULTS, getDoc().getCodedResultsSection(),
+		mCommon.setNarrativeTextSection(SectionsEdes.RESULTS, getDoc().getCodedResultsSection(),
 				text);
 	}
 
@@ -1251,7 +1251,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionReviewOfSystems(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.REVIEW_OF_SYSTEMS,
+		mCommon.setNarrativeTextSection(SectionsEdes.REVIEW_OF_SYSTEMS,
 				getDoc().getReviewOfSystemsSection(), text);
 	}
 
@@ -1266,7 +1266,7 @@ public class CdaChEdesEdpn
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionSocialHistory(String text) {
-		mCommon.setNarrativeTextSection(SectionsEDES.SOCIAL_HISTORY,
+		mCommon.setNarrativeTextSection(SectionsEdes.SOCIAL_HISTORY,
 				getDoc().getSocialHistorySection(), text);
 	}
 

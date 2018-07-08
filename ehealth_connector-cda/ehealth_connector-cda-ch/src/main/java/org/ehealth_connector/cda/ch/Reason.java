@@ -25,8 +25,8 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ExternalDocument;
-import org.openhealthtools.mdht.uml.cda.ch.CDACHBodyExtRef;
-import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
+import org.openhealthtools.mdht.uml.cda.ch.CdaChBodyExtRef;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActClassDocument;
@@ -38,7 +38,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
 @Deprecated
 public class Reason extends MedicationTargetEntry {
 
-	private CDACHBodyExtRef mExtRef = null;
+	private CdaChBodyExtRef mExtRef = null;
 
 	/**
 	 * Standard constructor
@@ -89,7 +89,7 @@ public class Reason extends MedicationTargetEntry {
 	 *
 	 * @return the CDACHBodyExtRef
 	 */
-	public CDACHBodyExtRef copyMdhtCDACHBodyExtRef() {
+	public CdaChBodyExtRef copyMdhtCDACHBodyExtRef() {
 		return EcoreUtil.copy(mExtRef);
 	}
 
@@ -107,7 +107,7 @@ public class Reason extends MedicationTargetEntry {
 	 *
 	 * @return the CDACHBodyExtRef
 	 */
-	public CDACHBodyExtRef getMdhtCDACHBodyExtRef() {
+	public CdaChBodyExtRef getMdhtCDACHBodyExtRef() {
 		return mExtRef;
 	}
 
@@ -140,13 +140,13 @@ public class Reason extends MedicationTargetEntry {
 	}
 
 	private void initExtRef() {
-		mExtRef = CHFactory.eINSTANCE.createCDACHBodyExtRef().init();
+		mExtRef = ChFactory.eINSTANCE.createCdaChBodyExtRef().init();
 		final ExternalDocument e = CDAFactory.eINSTANCE.createExternalDocument();
 		mExtRef.setExternalDocument(e);
 
 		// Fix Template ID
 		mExtRef.getTemplateIds().clear();
-		final II ii = DatatypesFactory.eINSTANCE.createII(AbstractCdaCh.OID_V1,
+		final II ii = DatatypesFactory.eINSTANCE.createII(AbstractCdaChV1.OID_V1,
 				"CDA-CH.Body.ExtRef");
 		mExtRef.getTemplateIds().add(ii);
 

@@ -42,7 +42,7 @@ import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
-import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
+import org.openhealthtools.mdht.uml.cda.ch.ChPackage;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,7 +78,7 @@ public class CdaChMtpsPreTest extends TestUtils {
 	private CdaChMtpsPre deserializeCda(String document) throws Exception {
 		final InputSource source = new InputSource(new StringReader(document));
 		return new CdaChMtpsPre(
-				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre) CDAUtil.load(source));
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsV1Pre) CDAUtil.load(source));
 	}
 
 	/**
@@ -89,9 +89,9 @@ public class CdaChMtpsPreTest extends TestUtils {
 	private CdaChMtpsPre deserializeCdaDirect(String document) throws Exception {
 		final InputStream stream = new ByteArrayInputStream(document.getBytes());
 		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
-				CHPackage.eINSTANCE.getCdaChMtpsPre());
+				ChPackage.eINSTANCE.getCdaChMtpsV1Pre());
 		return new CdaChMtpsPre(
-				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre) clinicalDocument);
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsV1Pre) clinicalDocument);
 	}
 
 	/**

@@ -27,7 +27,7 @@ import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.ExternalDocumentEntry;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
-import org.ehealth_connector.cda.ch.AbstractCdaCh;
+import org.ehealth_connector.cda.ch.AbstractCdaChV1;
 import org.ehealth_connector.cda.ch.ExternalReferenceEntry;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.enums.MedicationsSpecialConditions;
@@ -42,7 +42,7 @@ import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Precondition;
 import org.openhealthtools.mdht.uml.cda.Reference;
-import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 import org.openhealthtools.mdht.uml.cda.ch.PreconditionEntry;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
@@ -73,7 +73,7 @@ public class ImmunizationRecommendation
 	 * Instantiates a new immunization recommendation.
 	 */
 	public ImmunizationRecommendation() {
-		super(CHFactory.eINSTANCE.createImmunizationRecommendation().init(), AbstractCdaCh.OID_V1,
+		super(ChFactory.eINSTANCE.createImmunizationRecommendation().init(), AbstractCdaChV1.OID_V1,
 				"CDA-CH.Body.MediL3");
 
 		setRouteOfAdministration(null);
@@ -259,7 +259,7 @@ public class ImmunizationRecommendation
 		if (getMdht().getReferences().size() > 0) {
 			final Reference reference = this.getMdht().getReferences().get(0);
 			return new ExternalReferenceEntry(
-					(org.openhealthtools.mdht.uml.cda.ch.CDACHBodyExtRef) reference)
+					(org.openhealthtools.mdht.uml.cda.ch.CdaChBodyExtRef) reference)
 							.getExternalDocumentEntry();
 		}
 		return null;
@@ -533,7 +533,7 @@ public class ImmunizationRecommendation
 	 */
 	public void setCriterionEntry(CriterionEntry citerionEntry) {
 		this.getMdht().getPreconditions().clear();
-		final PreconditionEntry preconditionEntry = CHFactory.eINSTANCE.createPreconditionEntry()
+		final PreconditionEntry preconditionEntry = ChFactory.eINSTANCE.createPreconditionEntry()
 				.init();
 		preconditionEntry.setCriterion(citerionEntry.getMdht());
 		this.getMdht().getPreconditions().add(preconditionEntry);

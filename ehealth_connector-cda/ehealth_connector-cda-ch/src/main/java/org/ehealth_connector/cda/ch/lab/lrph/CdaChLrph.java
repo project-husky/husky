@@ -37,7 +37,7 @@ import org.openhealthtools.mdht.uml.cda.Patient;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.cda.StructuredBody;
-import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
+import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ADXP;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -55,7 +55,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  * Sektion Meldesysteme des BAG, basierend auf HL7 CDA-CH um.</div>
  */
 public class CdaChLrph
-		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrph> {
+		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrphV1> {
 
 	/**
 	 * Standard constructor.
@@ -112,7 +112,7 @@ public class CdaChLrph
 	 *            rendering
 	 */
 	public CdaChLrph(LanguageCode languageCode, String styleSheet, String css) {
-		super(CHFactory.eINSTANCE.createCdaChLrph().init(), languageCode, styleSheet, css);
+		super(ChFactory.eINSTANCE.createCdaChLrphV1().init(), languageCode, styleSheet, css);
 		this.setLanguageCode(languageCode);
 	}
 
@@ -153,7 +153,7 @@ public class CdaChLrph
 	 * @param doc
 	 *            mdht model document
 	 */
-	public CdaChLrph(org.openhealthtools.mdht.uml.cda.ch.CdaChLrph doc) {
+	public CdaChLrph(org.openhealthtools.mdht.uml.cda.ch.CdaChLrphV1 doc) {
 		super(doc);
 	}
 

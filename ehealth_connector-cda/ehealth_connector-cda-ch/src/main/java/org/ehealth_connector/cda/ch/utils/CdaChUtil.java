@@ -25,7 +25,7 @@ import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
 import org.ehealth_connector.cda.ch.edes.CdaChEdesCtnn;
 import org.ehealth_connector.cda.ch.edes.CdaChEdesEdpn;
-import org.ehealth_connector.cda.ch.edes.enums.SectionsEDES;
+import org.ehealth_connector.cda.ch.edes.enums.SectionsEdes;
 import org.ehealth_connector.cda.ch.lab.lrph.CdaChLrph;
 import org.ehealth_connector.cda.ch.lab.lrqc.CdaChLrqc;
 import org.ehealth_connector.cda.ch.lab.lrtp.CdaChLrtp;
@@ -35,7 +35,7 @@ import org.ehealth_connector.cda.ch.mtps.CdaChMtpsPadv;
 import org.ehealth_connector.cda.ch.mtps.CdaChMtpsPml;
 import org.ehealth_connector.cda.ch.mtps.CdaChMtpsPre;
 import org.ehealth_connector.cda.ch.vacd.CdaChVacd;
-import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
+import org.ehealth_connector.cda.ch.vacd.enums.SectionsVacd;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
@@ -81,7 +81,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	public static CdaChEdesCtnn loadEdesCtnnFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChEdesCtnn> loader = new CdaChLoader<CdaChEdesCtnn>();
 		CdaChEdesCtnn retVal = loader.loadFromStream(inputStream, CdaChEdesCtnn.class,
-				org.openhealthtools.mdht.uml.cda.ch.CdaChEdesCtnn.class);
+				org.openhealthtools.mdht.uml.cda.ch.CdaChEdesV1Ctnn.class);
 		retVal.initAfterLoad();
 		return retVal;
 	}
@@ -117,7 +117,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	public static CdaChEdesEdpn loadEdesEdpnFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChEdesEdpn> loader = new CdaChLoader<CdaChEdesEdpn>();
 		CdaChEdesEdpn retVal = loader.loadFromStream(inputStream, CdaChEdesEdpn.class,
-				org.openhealthtools.mdht.uml.cda.ch.CdaChEdesEdpn.class);
+				org.openhealthtools.mdht.uml.cda.ch.CdaChEdesV1Edpn.class);
 		retVal.initAfterLoad();
 		return retVal;
 	}
@@ -153,7 +153,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	public static CdaChLrph loadLrphFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChLrph> loader = new CdaChLoader<CdaChLrph>();
 		return loader.loadFromStream(inputStream, CdaChLrph.class,
-				org.openhealthtools.mdht.uml.cda.ch.CdaChLrph.class);
+				org.openhealthtools.mdht.uml.cda.ch.CdaChLrphV1.class);
 	}
 
 	/**
@@ -187,7 +187,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	public static CdaChLrqc loadLrqcFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChLrqc> loader = new CdaChLoader<CdaChLrqc>();
 		return loader.loadFromStream(inputStream, CdaChLrqc.class,
-				org.openhealthtools.mdht.uml.cda.ch.CdaChLrqc.class);
+				org.openhealthtools.mdht.uml.cda.ch.CdaChLrqcV1.class);
 	}
 
 	/**
@@ -221,7 +221,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	public static CdaChLrtp loadLrtpFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChLrtp> loader = new CdaChLoader<CdaChLrtp>();
 		return loader.loadFromStream(inputStream, CdaChLrtp.class,
-				org.openhealthtools.mdht.uml.cda.ch.CdaChLrtp.class);
+				org.openhealthtools.mdht.uml.cda.ch.CdaChLrtpV1.class);
 	}
 
 	/**
@@ -255,7 +255,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	public static CdaChMtpsDis loadMtpsDisFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChMtpsDis> loader = new CdaChLoader<CdaChMtpsDis>();
 		return loader.loadFromStream(inputStream, CdaChMtpsDis.class,
-				org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsDis.class);
+				org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsV1Dis.class);
 	}
 
 	/**
@@ -289,7 +289,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	public static CdaChMtpsMtp loadMtpsMtpFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChMtpsMtp> loader = new CdaChLoader<CdaChMtpsMtp>();
 		return loader.loadFromStream(inputStream, CdaChMtpsMtp.class,
-				org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsMtp.class);
+				org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsV1Mtp.class);
 	}
 
 	/**
@@ -323,7 +323,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	public static CdaChMtpsPadv loadMtpsPadvFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChMtpsPadv> loader = new CdaChLoader<CdaChMtpsPadv>();
 		return loader.loadFromStream(inputStream, CdaChMtpsPadv.class,
-				org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPadv.class);
+				org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsV1Padv.class);
 	}
 
 	/**
@@ -357,7 +357,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	public static CdaChMtpsPml loadMtpsPmlFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChMtpsPml> loader = new CdaChLoader<CdaChMtpsPml>();
 		return loader.loadFromStream(inputStream, CdaChMtpsPml.class,
-				org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPml.class);
+				org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsV1Pml.class);
 	}
 
 	/**
@@ -391,7 +391,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	public static CdaChMtpsPre loadMtpsPreFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChMtpsPre> loader = new CdaChLoader<CdaChMtpsPre>();
 		return loader.loadFromStream(inputStream, CdaChMtpsPre.class,
-				org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPre.class);
+				org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsV1Pre.class);
 	}
 
 	/**
@@ -425,7 +425,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	public static CdaChVacd loadVacdFromStream(InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChVacd> loader = new CdaChLoader<CdaChVacd>();
 		return loader.loadFromStream(inputStream, CdaChVacd.class,
-				org.openhealthtools.mdht.uml.cda.ch.VACD.class);
+				org.openhealthtools.mdht.uml.cda.ch.CdaChVacdV1.class);
 	}
 
 	/**
@@ -444,7 +444,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @return the EntryRelationship
 	 */
 	public static EntryRelationship updateRefIfComment(boolean doNarrTextGen, EntryRelationship er,
-			int i, int j, SectionsVACD prefix) {
+			int i, int j, SectionsVacd prefix) {
 		if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)
 				&& er.getInversionInd()) {
 			// Get the ed and update it with the reference
@@ -475,7 +475,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @return the EntryRelationship
 	 */
 	public static EntryRelationship updateRefIfComment(boolean doNarrTextGen, EntryRelationship er,
-			String ref, SectionsEDES prefix) {
+			String ref, SectionsEdes prefix) {
 		if (Util.isComment(er)) {
 			// Get the ed and update it with the reference
 			final ED ed = er.getAct().getText();
@@ -505,7 +505,7 @@ public abstract class CdaChUtil extends CdaUtil {
 	 * @return the EntryRelationship
 	 */
 	public static EntryRelationship updateRefIfComment(boolean doNarrTextGen, EntryRelationship er,
-			String ref, SectionsVACD prefix) {
+			String ref, SectionsVacd prefix) {
 		if (Util.isComment(er)) {
 			// Get the ed and update it with the reference
 			final ED ed = er.getAct().getText();

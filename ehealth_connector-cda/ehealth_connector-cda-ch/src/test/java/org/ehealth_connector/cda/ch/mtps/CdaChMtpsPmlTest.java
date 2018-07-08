@@ -89,7 +89,7 @@ import org.openhealthtools.mdht.uml.cda.Product;
 import org.openhealthtools.mdht.uml.cda.Reference;
 import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
 import org.openhealthtools.mdht.uml.cda.Supply;
-import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
+import org.openhealthtools.mdht.uml.cda.ch.ChPackage;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
@@ -1265,7 +1265,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 	private CdaChMtpsPml deserializeCda(String document) throws Exception {
 		final InputSource source = new InputSource(new StringReader(document));
 		return new CdaChMtpsPml(
-				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPml) CDAUtil.load(source));
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsV1Pml) CDAUtil.load(source));
 	}
 
 	/**
@@ -1276,9 +1276,9 @@ public class CdaChMtpsPmlTest extends TestUtils {
 	private CdaChMtpsPml deserializeCdaDirect(String document) throws Exception {
 		final InputStream stream = new ByteArrayInputStream(document.getBytes());
 		final ClinicalDocument clinicalDocument = CDAUtil.loadAs(stream,
-				CHPackage.eINSTANCE.getCdaChMtpsPml());
+				ChPackage.eINSTANCE.getCdaChMtpsV1Pml());
 		return new CdaChMtpsPml(
-				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsPml) clinicalDocument);
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsV1Pml) clinicalDocument);
 	}
 
 	/**

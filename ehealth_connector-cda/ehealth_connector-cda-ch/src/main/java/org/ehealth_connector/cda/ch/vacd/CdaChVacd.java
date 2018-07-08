@@ -28,7 +28,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.AbstractCodedResults;
 import org.ehealth_connector.cda.AbstractObservation;
 import org.ehealth_connector.cda.AbstractProblemConcern;
-import org.ehealth_connector.cda.ch.AbstractCdaCh;
+import org.ehealth_connector.cda.ch.AbstractCdaChV1;
 import org.ehealth_connector.cda.ch.ActiveProblemConcern;
 import org.ehealth_connector.cda.ch.AllergyConcern;
 import org.ehealth_connector.cda.ch.PastProblemConcern;
@@ -40,8 +40,8 @@ import org.ehealth_connector.cda.ch.textbuilder.AllergyConcernChTextBuilder;
 import org.ehealth_connector.cda.ch.textbuilder.ProblemConcernEntryChTextBuilder;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.ch.vacd.enums.ObservationInterpretationForImmunization;
-import org.ehealth_connector.cda.ch.vacd.enums.SectionsVACD;
-import org.ehealth_connector.cda.ch.vacd.enums.SerologieForVACD;
+import org.ehealth_connector.cda.ch.vacd.enums.SectionsVacd;
+import org.ehealth_connector.cda.ch.vacd.enums.SerologieForVacd;
 import org.ehealth_connector.cda.enums.ProblemsSpecialConditions;
 import org.ehealth_connector.cda.textbuilder.SimpleTextBuilder;
 import org.ehealth_connector.cda.utils.CdaUtil;
@@ -62,9 +62,9 @@ import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.StrucDocText;
 import org.openhealthtools.mdht.uml.cda.StructuredBody;
 import org.openhealthtools.mdht.uml.cda.SubstanceAdministration;
-import org.openhealthtools.mdht.uml.cda.ch.CHFactory;
-import org.openhealthtools.mdht.uml.cda.ch.CHPackage;
-import org.openhealthtools.mdht.uml.cda.ch.VACD;
+import org.openhealthtools.mdht.uml.cda.ch.CdaChVacdV1;
+import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
+import org.openhealthtools.mdht.uml.cda.ch.ChPackage;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.PregnancyHistorySection;
@@ -85,20 +85,20 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
- * <div class="en">A CDA document, which is conform to the CDA-CH-VACD
+ * <div class="en">A CDA document, which is conform to the CDA-CH-CdaChVacdV1
  * specification</div> <div class="de">Ein CDA Dokument, welches der
- * Spezifikation CDA-CH-VACD entspricht.</div> <div class="fr">Class
+ * Spezifikation CDA-CH-CdaChVacdV1 entspricht.</div> <div class="fr">Class
  * CdaChVacd.</div> <div class="it">Class CdaChVacd.</div>
  */
-public class CdaChVacd extends AbstractCdaCh<VACD> {
+public class CdaChVacd extends AbstractCdaChV1<CdaChVacdV1> {
 
 	/** The Constant eVACDOCTitle. */
-	public static final String EVACDOC_TITLE = "eVACDOC";
+	public static final String ECdaChVacdV1OC_TITLE = "eVACDOC";
 
-	/** main OID for CDA-CH-VACD */
+	/** main OID for CDA-CH-CdaChVacdV1 */
 	public static final String OID_MAIN = "2.16.756.5.30.1.1.1.1.3.5";
 
-	/** main OID for CDA-CH-VACD V1 */
+	/** main OID for CDA-CH-CdaChVacdV1 V1 */
 	public static final String OID_V1 = "2.16.756.5.30.1.1.1.1.3.5.1";
 
 	/**
@@ -106,9 +106,24 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 * <div class="de">Erstellt ein neues eVACDOC CDA Dokument.</div>
 	 */
 	public CdaChVacd() {
-		super(CHFactory.eINSTANCE.createVACD().init());
+		super(ChFactory.eINSTANCE.createCdaChVacdV1().init());
 		super.initCda();
 		initVacd();
+	}
+
+	/**
+	 * <div class="en">Creates a new CdaChVacd convenience object on the basis
+	 * of a MDHT-CdaChVacdV1 object. Both represent an immunization
+	 * document</div> <div class="de">Erstellt ein neues CdaChVacd Convenience
+	 * Objekt mittels eines MDHT-CdaChVacdV1 Objekts. Beide repräsentieren ein
+	 * Impfdokument.</div> <div class="fr"></div>
+	 *
+	 * @param doc
+	 *            MDHT CdaChVacdV1 object
+	 */
+	public CdaChVacd(CdaChVacdV1 doc) {
+		super(doc);
+		new Query(getDoc());
 	}
 
 	/**
@@ -153,7 +168,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 *            >
 	 */
 	public CdaChVacd(LanguageCode language, String stylesheet, String cascadingStylesheet) {
-		super(CHFactory.eINSTANCE.createVACD().init(), stylesheet, cascadingStylesheet);
+		super(ChFactory.eINSTANCE.createCdaChVacdV1().init(), stylesheet, cascadingStylesheet);
 		initVacd();
 		setLanguageCode(language);
 	}
@@ -195,21 +210,6 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	}
 
 	/**
-	 * <div class="en">Creates a new CdaChVacd convenience object on the basis
-	 * of a MDHT-VACD object. Both represent an immunization document</div>
-	 * <div class="de">Erstellt ein neues CdaChVacd Convenience Objekt mittels
-	 * eines MDHT-VACD Objekts. Beide repräsentieren ein Impfdokument.</div>
-	 * <div class="fr"></div>
-	 *
-	 * @param doc
-	 *            MDHT VACD object
-	 */
-	public CdaChVacd(VACD doc) {
-		super(doc);
-		new Query(getDoc());
-	}
-
-	/**
 	 * <div class="en">Adds the active problem concern.</div>
 	 * <div class="de">Fügt ein Aktives Leiden hinzu</div>
 	 * <div class="fr"></div> <div class="it"></div>
@@ -227,7 +227,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		if (aps == null) {
 			aps = IHEFactory.eINSTANCE.createActiveProblemsSection().init();
 			aps.setTitle(Util
-					.st(SectionsVACD.ACTIVE_PROBLEMS.getSectionTitle(getDoc().getLanguageCode())));
+					.st(SectionsVacd.ACTIVE_PROBLEMS.getSectionTitle(getDoc().getLanguageCode())));
 			getDoc().addSection(aps);
 		}
 
@@ -235,7 +235,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		aps.addAct(activeProblemConcern.copyMdhtProblemConcernEntry());
 
 		// update the MDHT Object content references to CDA level 1 text
-		if (updateProblemConcernReferences(aps.getActs(), SectionsVACD.ACTIVE_PROBLEMS)) {
+		if (updateProblemConcernReferences(aps.getActs(), SectionsVacd.ACTIVE_PROBLEMS)) {
 			if (isNarrativeTextGenerationEnabled()) {
 				// create the CDA level 1 text
 				aps.createStrucDocText(generateNarrativeTextActiveProblemConcerns());
@@ -265,7 +265,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		if (ars == null) {
 			ars = IHEFactory.eINSTANCE.createAllergiesReactionsSection().init();
 			ars.setTitle(Util.st(
-					SectionsVACD.ALLERGIES_REACTIONS.getSectionTitle(getDoc().getLanguageCode())));
+					SectionsVacd.ALLERGIES_REACTIONS.getSectionTitle(getDoc().getLanguageCode())));
 			getDoc().addSection(ars);
 		}
 
@@ -276,7 +276,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		// content reference)
 
 		// update the MDHT Object content references to CDA level 1 text
-		if (updateAllergyConcernReferences(ars.getActs(), SectionsVACD.ALLERGIES_REACTIONS)) {
+		if (updateAllergyConcernReferences(ars.getActs(), SectionsVacd.ALLERGIES_REACTIONS)) {
 			if (isNarrativeTextGenerationEnabled()) {
 				// create the CDA level 1 text
 				ars.createStrucDocText(generateNarrativeTextAllergyProblemConcerns());
@@ -301,11 +301,11 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		// update the MDHT Object content references to CDA level 1 text
 		if (codedResults instanceof GestationalAge) {
 			final GestationalAge gestationalAge = (GestationalAge) codedResults;
-			final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsVACD.CODED_RESULTS,
+			final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsVacd.CODED_RESULTS,
 					gestationalAge.getCodedResultsText());
 
 			final ED reference = Util.createReference(sb.getNewTextContentIDNr(),
-					SectionsVACD.CODED_RESULTS.getContentIdPrefix());
+					SectionsVacd.CODED_RESULTS.getContentIdPrefix());
 			gestationalAge.getMdhtGestationalAgeWeeksObservation()
 					.setText(EcoreUtil.copy(reference));
 			gestationalAge.getMdhtGestationalAgeDaysObservation()
@@ -317,7 +317,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 			gestationalAge.getCrs().createStrucDocText("");
 
 			gestationalAge.getCrs().setTitle(Util
-					.st(SectionsVACD.CODED_RESULTS.getSectionTitle(getDoc().getLanguageCode())));
+					.st(SectionsVacd.CODED_RESULTS.getSectionTitle(getDoc().getLanguageCode())));
 		}
 		getDoc().addSection(codedResults.copyMdhtCodedResultsSection());
 	}
@@ -334,13 +334,13 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		// find or create (and add) the Section
 		Section rs = findRemarksSection();
 		if (rs == null) {
-			rs = CHFactory.eINSTANCE.createRemarksSection().init();
+			rs = ChFactory.eINSTANCE.createRemarksSection().init();
 			for (final II ii : rs.getTemplateIds()) {
 				if ("2.16.756.5.30.1.1.1.1.1".equals(ii.getRoot())) {
 					ii.setExtension("CDA-CH.Body.CodedRem");
 				}
 			}
-			rs.setTitle(Util.st(SectionsVACD.REMARKS.getSectionTitle(getDoc().getLanguageCode())));
+			rs.setTitle(Util.st(SectionsVacd.REMARKS.getSectionTitle(getDoc().getLanguageCode())));
 			getDoc().addSection(rs);
 		}
 
@@ -352,13 +352,13 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		SimpleTextBuilder sb = null;
 		if (rs.getText() != null) {
 			final String oldSectionText = Util.extractStringFromNonQuotedStrucDocText(rs.getText());
-			sb = new SimpleTextBuilder(SectionsVACD.REMARKS, comment, oldSectionText);
+			sb = new SimpleTextBuilder(SectionsVacd.REMARKS, comment, oldSectionText);
 		} else {
-			sb = new SimpleTextBuilder(SectionsVACD.REMARKS, comment);
+			sb = new SimpleTextBuilder(SectionsVacd.REMARKS, comment);
 		}
 
 		final ED reference = Util.createReference(sb.getNewTextContentIDNr(),
-				SectionsVACD.REMARKS.getContentIdPrefix());
+				SectionsVacd.REMARKS.getContentIdPrefix());
 
 		// create the CDA level 1 text
 		rs.createStrucDocText(sb.toString());
@@ -437,7 +437,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 			lrdpe.getAct().setCode(labSpec.getCD());
 
 			lss.setTitle(Util
-					.st(SectionsVACD.SEROLOGY_STUDIES.getSectionTitle(getDoc().getLanguageCode())));
+					.st(SectionsVacd.SEROLOGY_STUDIES.getSectionTitle(getDoc().getLanguageCode())));
 			getDoc().addSection(lss);
 		}
 		// If the section is already present, get instances of the templates
@@ -465,7 +465,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 
 		// Update the MDHT Object content references to CDA level 1 text
 		// (if necessary)
-		updateLaboratoryObservationReferences(spa, SectionsVACD.SEROLOGY_STUDIES);
+		updateLaboratoryObservationReferences(spa, SectionsVacd.SEROLOGY_STUDIES);
 
 		// create the CDA level 2 text (either generated or empty text with
 		// content reference)
@@ -507,7 +507,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		hopis = getDoc().getHistoryOfPastIllnessSection();
 		if (hopis == null) {
 			hopis = IHEFactory.eINSTANCE.createHistoryOfPastIllnessSection().init();
-			hopis.setTitle(Util.st(SectionsVACD.HISTORY_OF_PAST_ILLNESS
+			hopis.setTitle(Util.st(SectionsVacd.HISTORY_OF_PAST_ILLNESS
 					.getSectionTitle(getDoc().getLanguageCode())));
 			getDoc().addSection(hopis);
 		}
@@ -516,7 +516,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		hopis.addAct(pastProblemConcern.copyMdhtProblemConcernEntry());
 
 		// update the MDHT Object content references to CDA level 1 text
-		if (updateProblemConcernReferences(hopis.getActs(), SectionsVACD.HISTORY_OF_PAST_ILLNESS)) {
+		if (updateProblemConcernReferences(hopis.getActs(), SectionsVacd.HISTORY_OF_PAST_ILLNESS)) {
 			// create the CDA level 2 text (either generated or empty text with
 			// content reference)
 			if (isNarrativeTextGenerationEnabled()) {
@@ -547,7 +547,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 
 		if (phs == null) {
 			phs = IHEFactory.eINSTANCE.createPregnancyHistorySection().init();
-			phs.setTitle(Util.st(SectionsVACD.HISTORY_OF_PREGNANCIES
+			phs.setTitle(Util.st(SectionsVacd.HISTORY_OF_PREGNANCIES
 					.getSectionTitle(getDoc().getLanguageCode())));
 			getDoc().addSection(phs);
 		}
@@ -563,34 +563,34 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 			if (phs.getText() != null) {
 				final String oldSectionText = Util
 						.extractStringFromNonQuotedStrucDocText(phs.getText());
-				sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_PREGNANCIES, pregnancyText,
+				sb = new SimpleTextBuilder(SectionsVacd.HISTORY_OF_PREGNANCIES, pregnancyText,
 						oldSectionText);
 			} else {
-				sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_PREGNANCIES, pregnancyText);
+				sb = new SimpleTextBuilder(SectionsVacd.HISTORY_OF_PREGNANCIES, pregnancyText);
 			}
 
 			reference = Util.createReference(sb.getNewTextContentIDNr(),
-					SectionsVACD.HISTORY_OF_PREGNANCIES.getContentIdPrefix());
+					SectionsVacd.HISTORY_OF_PREGNANCIES.getContentIdPrefix());
 			phs.createStrucDocText(sb.toString());
 		} else {
 			setNarrativeTextSectionHistoryOfPregnancies("");
 			reference = Util.createReference(1,
-					SectionsVACD.HISTORY_OF_PREGNANCIES.getContentIdPrefix());
+					SectionsVacd.HISTORY_OF_PREGNANCIES.getContentIdPrefix());
 		}
 		pregnancy.getMdhtPregnancy().setText(reference);
 		phs.addObservation(pregnancy.copyMdhtPregnancy());
 	}
 
-	protected VACD correctSectionSequence() {
+	protected CdaChVacdV1 correctSectionSequence() {
 		// Correct the order of the body sections
 		// Create a copy of the current document
-		final VACD newVacd = EcoreUtil.copy(getMdht());
+		final CdaChVacdV1 newVacd = EcoreUtil.copy(getMdht());
 
 		// Create a new structured body
 		final StructuredBody sb = CDAFactory.eINSTANCE.createStructuredBody();
 
 		// Copy all sections from the original document in the right order
-		final VACD oldVacd = getMdht();
+		final CdaChVacdV1 oldVacd = getMdht();
 		CdaUtil.addSectionToStructuredBodyAsCopy(sb, oldVacd.getImmunizationsSection());
 		CdaUtil.addSectionToStructuredBodyAsCopy(sb, oldVacd.getActiveProblemsSection());
 		CdaUtil.addSectionToStructuredBodyAsCopy(sb, oldVacd.getHistoryOfPastIllnessSection());
@@ -609,10 +609,11 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	}
 
 	/**
-	 * <div class="en">creates a VACD specific laboratory observation</div>
+	 * <div class="en">creates a CdaChVacdV1 specific laboratory
+	 * observation</div>
 	 *
 	 * @param serologieCode
-	 *            the VACD specific serologie code
+	 *            the CdaChVacdV1 specific serologie code
 	 * @param laboratorySpecificCode
 	 *            a code that is used in the laboratory
 	 * @param dateTimeOfResult
@@ -623,7 +624,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 *            the value of the observation
 	 * @return the laboratory observation
 	 */
-	public LaboratoryObservation createLaboratoryObservation(SerologieForVACD serologieCode,
+	public LaboratoryObservation createLaboratoryObservation(SerologieForVacd serologieCode,
 			Code laboratorySpecificCode, Date dateTimeOfResult, Performer performer, Value value) {
 		final LaboratoryObservation lo = new LaboratoryObservation();
 		final Code serCode = serologieCode.getCode();
@@ -636,10 +637,11 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	}
 
 	/**
-	 * <div class="en">creates a VACD specific laboratory observation</div>
+	 * <div class="en">creates a CdaChVacdV1 specific laboratory
+	 * observation</div>
 	 *
 	 * @param serologieCode
-	 *            the VACD specific serologie code
+	 *            the CdaChVacdV1 specific serologie code
 	 * @param laboratorySpecificCode
 	 *            a code that is used in the laboratory
 	 * @param dateTimeOfResult
@@ -649,10 +651,10 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 * @param value
 	 *            the value of the observation
 	 * @param observationInterpretation
-	 *            a VACD related code for the observationInterpretation
+	 *            a CdaChVacdV1 related code for the observationInterpretation
 	 * @return the laboratory observation
 	 */
-	public LaboratoryObservation createLaboratoryObservation(SerologieForVACD serologieCode,
+	public LaboratoryObservation createLaboratoryObservation(SerologieForVacd serologieCode,
 			Code laboratorySpecificCode, Date dateTimeOfResult, Performer performer, Value value,
 			final ObservationInterpretationForImmunization observationInterpretation) {
 		final LaboratoryObservation lo = createLaboratoryObservation(serologieCode,
@@ -662,10 +664,11 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	}
 
 	/**
-	 * <div class="en">creates a VACD specific laboratory observation</div>
+	 * <div class="en">creates a CdaChVacdV1 specific laboratory
+	 * observation</div>
 	 *
 	 * @param serologieCode
-	 *            the VACD specific serologie code
+	 *            the CdaChVacdV1 specific serologie code
 	 * @param laboratorySpecificCode
 	 *            a code that is used in the laboratory
 	 * @param dateTimeOfResult
@@ -675,12 +678,12 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 * @param value
 	 *            the value of the observation
 	 * @param observationInterpretation
-	 *            a VACD related code for the observationInterpretation
+	 *            a CdaChVacdV1 related code for the observationInterpretation
 	 * @param comment
 	 *            a comment for this Laboratory Observation
 	 * @return the laboratory observation
 	 */
-	public LaboratoryObservation createLaboratoryObservation(SerologieForVACD serologieCode,
+	public LaboratoryObservation createLaboratoryObservation(SerologieForVacd serologieCode,
 			Code laboratorySpecificCode, Date dateTimeOfResult, Performer performer, Value value,
 			final ObservationInterpretationForImmunization observationInterpretation,
 			String comment) {
@@ -718,7 +721,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	private Section findRemarksSection() {
 		for (final Section section : getDoc().getSections()) {
 			if (section.getCode() != null) {
-				if (SectionsVACD.isRemarks(section.getCode().getCode())) {
+				if (SectionsVacd.isRemarks(section.getCode().getCode())) {
 					return section;
 				}
 			}
@@ -747,7 +750,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		// general PastProblemConcern
 		problemConcernEntryList.addAll(getActiveProblemConcerns());
 		final ProblemConcernEntryChTextBuilder b = new ProblemConcernEntryChTextBuilder(
-				problemConcernEntryList, SectionsVACD.ACTIVE_PROBLEMS);
+				problemConcernEntryList, SectionsVacd.ACTIVE_PROBLEMS);
 		return b.toString();
 	}
 
@@ -760,7 +763,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 */
 	public String generateNarrativeTextAllergyProblemConcerns() {
 		final AllergyConcernChTextBuilder b = new AllergyConcernChTextBuilder(
-				getAllergyProblemConcerns(), SectionsVACD.ALLERGIES_REACTIONS);
+				getAllergyProblemConcerns(), SectionsVacd.ALLERGIES_REACTIONS);
 		return b.toString();
 	}
 
@@ -778,7 +781,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		// general PastProblemConcern
 		problemConcernEntryList.addAll(getPastProblemConcerns());
 		final ProblemConcernEntryChTextBuilder b = new ProblemConcernEntryChTextBuilder(
-				problemConcernEntryList, SectionsVACD.HISTORY_OF_PAST_ILLNESS);
+				problemConcernEntryList, SectionsVacd.HISTORY_OF_PAST_ILLNESS);
 		return b.toString();
 	}
 
@@ -861,14 +864,14 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	}
 
 	/**
-	 * <div class="en">Gets the MDHT-VACD Object</div> <div class="de">Liefert
-	 * das MDHT-VACD-Objekt zurück.</div>
+	 * <div class="en">Gets the MDHT-CdaChVacdV1 Object</div>
+	 * <div class="de">Liefert das MDHT-CdaChVacdV1-Objekt zurück.</div>
 	 *
 	 * @return the doc
 	 */
 	@Override
-	public VACD getDoc() {
-		return (VACD) super.getDoc();
+	public CdaChVacdV1 getDoc() {
+		return (CdaChVacdV1) super.getDoc();
 	}
 
 	/**
@@ -1195,27 +1198,19 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	}
 
 	private void initVacd() {
-		CHPackage.eINSTANCE.eClass();
-		// fix missing extension values in MDHT model.
-		// for (final II templateId : getDoc().getTemplateIds()) {
-		// if (CdaChVacd.OID_V1.equals(templateId.getRoot())) {
-		// templateId.setExtension("CDA-CH-VACD");
-		// }
-		// if (AbstractCdaCh.OID_MAIN.equals(templateId.getRoot())) {
-		// templateId.setExtension("CDA-CH");
-		// }
-		// }
-		setTitle(EVACDOC_TITLE);
+		ChPackage.eINSTANCE.eClass();
+		setTitle(ECdaChVacdV1OC_TITLE);
 		fixGeneralHeaderConstraintTemplateId();
 		new Query(getDoc());
 	}
 
 	/**
 	 * <div class="en">Pseudonymization of a clinical document according to the
-	 * CDA-CH-VACD specification (Rule CH-VACD-HPAT)</div>
+	 * CDA-CH-CdaChVacdV1 specification (Rule CH-CdaChVacdV1-HPAT)</div>
 	 * <div class="de">Pseudonymisierung eines ClinicalDocument nach der
-	 * CDA-CH-VACD Spezifikation (siehe CDA-CH-VACD, UseCases ab Kapitel 6.3 und
-	 * insbesondere Kapitel "7.4 CDA Header", Regel CH-VACD-HPAT)</div>
+	 * CDA-CH-CdaChVacdV1 Spezifikation (siehe CDA-CH-CdaChVacdV1, UseCases ab
+	 * Kapitel 6.3 und insbesondere Kapitel "7.4 CDA Header", Regel
+	 * CH-CdaChVacdV1-HPAT)</div>
 	 */
 	public void pseudonymization() {
 		final RecordTarget destRecordTarget = CDAFactory.eINSTANCE.createRecordTarget();
@@ -1268,7 +1263,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionActiveProblems(String text) {
-		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsVACD.ACTIVE_PROBLEMS, text);
+		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsVacd.ACTIVE_PROBLEMS, text);
 		if (getDoc().getActiveProblemsSection() != null) {
 			getDoc().getActiveProblemsSection().createStrucDocText(sb.toString());
 		}
@@ -1285,7 +1280,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionAllergiesAndOtherAdverseReactions(String text) {
-		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsVACD.ALLERGIES_REACTIONS, text);
+		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsVacd.ALLERGIES_REACTIONS, text);
 		if (getDoc().getAllergiesReactionsSection() != null) {
 			getDoc().getAllergiesReactionsSection().createStrucDocText(sb.toString());
 		}
@@ -1318,7 +1313,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionHistoryOfPastIllnes(String text) {
-		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_PAST_ILLNESS,
+		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsVacd.HISTORY_OF_PAST_ILLNESS,
 				text);
 		if (getDoc().getHistoryOfPastIllnessSection() != null) {
 			getDoc().getHistoryOfPastIllnessSection().createStrucDocText(sb.toString());
@@ -1336,7 +1331,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionHistoryOfPregnancies(String text) {
-		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_PREGNANCIES,
+		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsVacd.HISTORY_OF_PREGNANCIES,
 				text);
 		if (getDoc().getPregnancyHistorySection() != null) {
 			getDoc().getPregnancyHistorySection().createStrucDocText(sb.toString());
@@ -1354,7 +1349,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionImmunizationRecommendations(String text) {
-		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsVACD.TREATMENT_PLAN, text);
+		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsVacd.TREATMENT_PLAN, text);
 		if (getDoc().getImmunizationRecommendationSection() != null) {
 			getDoc().getImmunizationRecommendationSection().createStrucDocText(sb.toString());
 		}
@@ -1371,7 +1366,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionImmunizations(String text) {
-		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsVACD.HISTORY_OF_IMMUNIZATION,
+		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsVacd.HISTORY_OF_IMMUNIZATION,
 				text);
 		if (getDoc().getImmunizationsSection() != null) {
 			getDoc().getImmunizationsSection().createStrucDocText(sb.toString());
@@ -1427,13 +1422,13 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	 *            menschlenlesbaren Teil des CDA-Dokuments</div>
 	 */
 	public void setNarrativeTextSectionRemarks(String text) {
-		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsVACD.REMARKS, text);
+		final SimpleTextBuilder sb = new SimpleTextBuilder(SectionsVacd.REMARKS, text);
 		if (findRemarksSection() != null) {
 			findRemarksSection().createStrucDocText(sb.toString());
 		}
 	}
 
-	private boolean updateAllergyConcernReferences(EList<Act> acts, SectionsVACD loincSectionCode) {
+	private boolean updateAllergyConcernReferences(EList<Act> acts, SectionsVacd loincSectionCode) {
 		int i = 0;
 		for (final Act act : acts) {
 			int j = 0;
@@ -1468,7 +1463,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 	}
 
 	private void updateLaboratoryObservationReferences(SpecimenAct spa,
-			SectionsVACD loincSectionCode) {
+			SectionsVacd loincSectionCode) {
 		for (int i = 0; i < spa.getLaboratoryBatteryOrganizers().size(); i++) {
 			final LaboratoryBatteryOrganizer lba = spa.getLaboratoryBatteryOrganizers().get(i);
 			for (int j = 0; j < lba.getLaboratoryObservations().size(); j++) {
@@ -1488,7 +1483,7 @@ public class CdaChVacd extends AbstractCdaCh<VACD> {
 		}
 	}
 
-	private boolean updateProblemConcernReferences(EList<Act> acts, SectionsVACD loincSectionCode) {
+	private boolean updateProblemConcernReferences(EList<Act> acts, SectionsVacd loincSectionCode) {
 		int i = 0;
 		for (final Act act : acts) {
 			final org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry = (org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry) act;
