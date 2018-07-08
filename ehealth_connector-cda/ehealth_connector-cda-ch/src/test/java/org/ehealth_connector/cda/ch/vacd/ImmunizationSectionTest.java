@@ -80,9 +80,9 @@ public class ImmunizationSectionTest {
 		immunizationSection.addImmunization(immunization, true);
 
 		assertEquals("#is10", immunization.getTextReference());
-		assertEquals("#is11", hepB.getTextReference());
-		assertEquals("#is12", diphterie.getTextReference());
-		assertEquals("#is13", hepA.getTextReference());
+		assertEquals("#is11", diphterie.getTextReference());
+		assertEquals("#is12", hepA.getTextReference());
+		assertEquals("#is13", hepB.getTextReference());
 		assertEquals("#is14", criterionEntry.getTextReference());
 		assertEquals("#is15", commentEntry.getContentIdReference());
 

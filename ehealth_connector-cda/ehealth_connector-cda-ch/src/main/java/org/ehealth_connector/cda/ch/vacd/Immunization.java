@@ -19,6 +19,7 @@
 package org.ehealth_connector.cda.ch.vacd;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -62,6 +63,27 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
  * Impfungen.</div>
  */
 public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.Immunization> {
+
+	/**
+	 * Class for sorting the MedicationTargetEntries..
+	 */
+	public class MedicationTargetComparator implements Comparator<MedicationTargetEntry> {
+
+		/**
+		 *
+		 * Sorts based on the display name for alphabetic sorting
+		 *
+		 * {@inheritDoc}
+		 *
+		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+		 */
+		@Override
+		public int compare(MedicationTargetEntry o1, MedicationTargetEntry o2) {
+			return o1.getImmunizationTargetCode().getDisplayName()
+					.compareTo(o2.getImmunizationTargetCode().getDisplayName());
+		}
+
+	}
 
 	/**
 	 * <div class="en">Creates an object, which represents an
@@ -401,6 +423,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 				.getMedicalTargets()) {
 			medicationTargetEntries.add(new MedicationTargetEntry(mte));
 		}
+		medicationTargetEntries.sort(new MedicationTargetComparator());
 		return medicationTargetEntries;
 	}
 
