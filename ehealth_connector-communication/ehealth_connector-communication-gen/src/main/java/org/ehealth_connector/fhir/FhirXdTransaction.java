@@ -203,6 +203,25 @@ public class FhirXdTransaction {
 	}
 
 	/**
+	 * Method to get DocumentDescriptor from DocumentReference
+	 *
+	 * @param fhirObject
+	 *            the FHIR DocumentReference
+	 * @return the DocumentDescriptor
+	 */
+	private DocumentDescriptor getDocumentDescriptor(DocumentReference fhirObject) {
+		String mimeType = "";
+		fhirObject.getContentFirstRep().getFormat();
+		final Coding item = fhirObject.getContentFirstRep().getFormat();
+		final List<org.hl7.fhir.dstu3.model.Extension> extensions = item
+				.getExtensionsByUrl(FhirCommon.urnUseAsMimeType);
+		if (!extensions.isEmpty()) {
+			mimeType = item.getCode();
+		}
+		return DocumentDescriptor.getDocumentDescriptorForMimeType(mimeType);
+	}
+
+	/**
 	 * <div class="en">Gets a list containing all document metadatas from the
 	 * FHIR resource
 	 *
@@ -258,25 +277,6 @@ public class FhirXdTransaction {
 		}
 
 		return retVal;
-	}
-
-	/**
-	 * Method to get DocumentDescriptor from DocumentReference
-	 *
-	 * @param fhirObject
-	 *            the FHIR DocumentReference
-	 * @return the DocumentDescriptor
-	 */
-	private DocumentDescriptor getDocumentDescriptor(DocumentReference fhirObject) {
-		String mimeType = "";
-		fhirObject.getContentFirstRep().getFormat();
-		final Coding item = fhirObject.getContentFirstRep().getFormat();
-		final List<org.hl7.fhir.dstu3.model.Extension> extensions = item
-				.getExtensionsByUrl(FhirCommon.urnUseAsDocumentDescriptor);
-		if (!extensions.isEmpty()) {
-			mimeType = item.getCode();
-		}
-		return DocumentDescriptor.getDocumentDescriptorForMimeType(mimeType);
 	}
 
 	/**

@@ -89,7 +89,7 @@ public class FhirCommon {
 	public static final String DEMO_SOURCE_OID_PREFIX = "1.3.6.1.4.1.21367";
 
 	/** The Constant NIST_COMMUNITY_OID. */
-	public static final String NIST_COMMUNITY_OID = "1.3.6.1.4.1.21367.2005.13.20.3000";
+	public static final String NIST_COMMUNITY_OID = "1.3.6.1.4.1.21367.13.20.1000";
 
 	/** The Constant NIST_SOURCE_OID_PREFIX. */
 	public static final String NIST_SOURCE_OID_PREFIX = "1.3.6.1.4.1.21367";
@@ -289,6 +289,12 @@ public class FhirCommon {
 	 * <div class="de"></div><div class="fr"></div>.
 	 */
 	public static final String urnUseAsExternalDocument = "urn:ehealth_connector:FhirExtension:useAsExternalDocument";
+
+	/**
+	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
+	 * <div class="de"></div><div class="fr"></div>.
+	 */
+	public static final String urnUseAsFormatCode = "urn:ehealth_connector:FhirExtension:useAsFormatCode";
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this FHIR extension</div>
@@ -1390,6 +1396,16 @@ public class FhirCommon {
 	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
 	 * <div class="fr"></div>.
 	 *
+	 * @return the extension format code
+	 */
+	public static Extension getExtensionFormatCode() {
+		return new Extension(FhirCommon.urnUseAsFormatCode, new StringType("dummy"));
+	}
+
+	/**
+	 * <div class="en">Gets this FHIR extension</div> <div class="de"></div>
+	 * <div class="fr"></div>.
+	 *
 	 * @return the extension FunctionCodeDoctor
 	 */
 	public static Extension getExtensionFunctionCodeDoctor() {
@@ -1542,7 +1558,12 @@ public class FhirCommon {
 	 *         <div class="fr"></div>
 	 */
 	public static Code getFormatCode(DocumentReference fhirObject) {
-		return FhirUtilities.toCode(fhirObject.getContentFirstRep().getFormat());
+		Code retVal = null;
+		final List<Extension> extensions = fhirObject
+				.getExtensionsByUrl(FhirCommon.urnUseAsFormatCode);
+		if (!extensions.isEmpty())
+			retVal = FhirUtilities.toCode((Coding) extensions.get(0).getValue());
+		return retVal;
 	}
 
 	/**

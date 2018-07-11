@@ -311,6 +311,29 @@ public class ConvenienceCommunication {
 	}
 
 	/**
+	 *
+	 * <div class="en">Method to add a xuser assertion to allow authentication
+	 * on XDS.b transactions.</div>
+	 *
+	 * @param assertion
+	 *            The assertion to be added to the soap header
+	 * @throws SerializeException
+	 *             if there are problems adding the assertion
+	 */
+	public void addXUserAssertion(Assertion assertion) throws SerializeException {
+		final XUAModuleContext xuaContext = XUAModuleContext.getContext();
+		final Element assertionElement = new AssertionSerializerImpl().toXmlElement(assertion);
+		final XUAAssertion ohtAssertion = new XUAAssertion(assertionElement);
+		xuaContext.cacheAssertion(ohtAssertion);
+		xuaContext.getConfig().getXUAEnabledActions()
+				.add("urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b");
+		AuditorModuleContext.getContext().getConfig()
+				.setSystemUserName(ohtAssertion.getAtnaUsername());
+		xuaContext.setXUAEnabled(true);
+		xuaContext.setActiveAssertion(ohtAssertion);
+	}
+
+	/**
 	 * <div class="en">Cda fixes of OHT CDAExtraction bugs and extraction
 	 * methods, which are unsafe, because an XDS registry might use another
 	 * value set.</div>
@@ -474,9 +497,14 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">Generate missing Submission Set attributes</div>
+	 * <div class="en">Generate missing Submission Set attributes</div>.
+	 *
+	 * @return the submission set
 	 */
-	private void generateDefaultSubmissionSetAttributes() {
+	public SubmissionSetType generateDefaultSubmissionSetAttributes() {
+
+		// Create SubmissionSet
+		final SubmissionSetType subSet = txnData.getSubmissionSet();
 
 		if ((txnData.getMetadata().getDocumentEntry() != null)
 				&& !txnData.getMetadata().getDocumentEntry().isEmpty()
@@ -487,9 +515,6 @@ public class ConvenienceCommunication {
 				throw new IllegalStateException(
 						"Missing destination patient ID in DocumentMetadata of first document.");
 			}
-
-			// Create SubmissionSet
-			final SubmissionSetType subSet = txnData.getSubmissionSet();
 
 			if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
 
@@ -537,8 +562,6 @@ public class ConvenienceCommunication {
 				throw new IllegalStateException(
 						"Missing destination patient ID in DocumentMetadata of first document.");
 			}
-			// Create SubmissionSet
-			final SubmissionSetType subSet = txnData.getSubmissionSet();
 
 			if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
 
@@ -580,6 +603,7 @@ public class ConvenienceCommunication {
 			}
 
 		}
+		return subSet;
 	}
 
 	/**
@@ -594,16 +618,6 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * Gets the status of the automatic metadata extraction
-	 *
-	 * @return true, if metadata will be extracted as far as possible)
-	 *         automatically, false otherwise
-	 */
-	public DocumentMetadataExtractionMode getAutomaticExtractionEnabled() {
-		return documentMetadataExtractionMode;
-	}
-
-	/**
 	 * Query a registry for documents, using a find documents query.
 	 *
 	 * @param queryParameter
@@ -614,6 +628,16 @@ public class ConvenienceCommunication {
 	 *            references instead of the complete document metadata.
 	 * @return the XDSQueryResponseType
 	 */
+
+	/**
+	 * Gets the status of the automatic metadata extraction
+	 *
+	 * @return true, if metadata will be extracted as far as possible)
+	 *         automatically, false otherwise
+	 */
+	public DocumentMetadataExtractionMode getAutomaticExtractionEnabled() {
+		return documentMetadataExtractionMode;
+	}
 
 	/**
 	 * <div class="en">Gets the OHT transaction data (SubmissionSet and
@@ -834,7 +858,7 @@ public class ConvenienceCommunication {
 		// System.setProperty("https.protocols", "TLSv1.2");
 		// System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
 		// System.setProperty("https.ciphersuites",
-		// "TLS_DHE_RSA_WITH_AES_128_GCM_SHA256");
+		// "TLS_RSA_WITH_AES_128_CBC_SHA,SSL_RSA_WITH_3DES_EDE_CBC_SHA");
 
 		// System.setProperty("https.ciphersuites",
 		// "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_DSS_WITH_AES_256_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_DSS_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_DSS_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_DSS_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,TLS_ECDHE_RSA_WITH_RC4_128_SHA,SSL_RSA_WITH_RC4_128_SHA,TLS_ECDH_ECDSA_WITH_RC4_128_SHA,TLS_ECDH_RSA_WITH_RC4_128_SHA,TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,SSL_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA,SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA,SSL_DHE_DSS_WITH_3DES_EDE_CBC_SHA,SSL_RSA_WITH_RC4_128_MD5");
@@ -896,28 +920,5 @@ public class ConvenienceCommunication {
 		submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
 		// txnData.saveMetadataToFile("C:/temp/metadata_fhir.xml");
 		return submit();
-	}
-
-	/**
-	 *
-	 * <div class="en">Method to add a xuser assertion to allow authentication
-	 * on XDS.b transactions.</div>
-	 *
-	 * @param assertion
-	 *            The assertion to be added to the soap header
-	 * @throws SerializeException
-	 *             if there are problems adding the assertion
-	 */
-	public void addXUserAssertion(Assertion assertion) throws SerializeException {
-		final XUAModuleContext xuaContext = XUAModuleContext.getContext();
-		final Element assertionElement = new AssertionSerializerImpl().toXmlElement(assertion);
-		final XUAAssertion ohtAssertion = new XUAAssertion(assertionElement);
-		xuaContext.cacheAssertion(ohtAssertion);
-		xuaContext.getConfig().getXUAEnabledActions()
-				.add("urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b");
-		AuditorModuleContext.getContext().getConfig()
-				.setSystemUserName(ohtAssertion.getAtnaUsername());
-		xuaContext.setXUAEnabled(true);
-		xuaContext.setActiveAssertion(ohtAssertion);
 	}
 }
