@@ -28,9 +28,9 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.AbstractCodedResults;
 import org.ehealth_connector.cda.AbstractObservation;
 import org.ehealth_connector.cda.AbstractProblemConcern;
+import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.ch.AbstractCdaChV1;
 import org.ehealth_connector.cda.ch.ActiveProblemConcern;
-import org.ehealth_connector.cda.ch.AllergyConcern;
 import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.PregnancyHistory;
 import org.ehealth_connector.cda.ch.enums.RiskOfComplications;
@@ -168,9 +168,9 @@ public class CdaChVacd extends AbstractCdaChV1<CdaChVacdV1> {
 	 *            >
 	 */
 	public CdaChVacd(LanguageCode language, String stylesheet, String cascadingStylesheet) {
-		super(ChFactory.eINSTANCE.createCdaChVacdV1().init(), stylesheet, cascadingStylesheet);
+		super(ChFactory.eINSTANCE.createCdaChVacdV1().init(), language, stylesheet,
+				cascadingStylesheet);
 		initVacd();
-		setLanguageCode(language);
 	}
 
 	/**
@@ -279,7 +279,8 @@ public class CdaChVacd extends AbstractCdaChV1<CdaChVacdV1> {
 		if (updateAllergyConcernReferences(ars.getActs(), SectionsVacd.ALLERGIES_REACTIONS)) {
 			if (isNarrativeTextGenerationEnabled()) {
 				// create the CDA level 1 text
-				ars.createStrucDocText(generateNarrativeTextAllergyProblemConcerns());
+				ars.createStrucDocText(generateNarrativeTextAllergyProblemConcerns(
+						LanguageCode.getEnum(getMdht().getLanguageCode().getCode())));
 			} else {
 				setNarrativeTextSectionAllergiesAndOtherAdverseReactions("");
 			}
@@ -761,9 +762,9 @@ public class CdaChVacd extends AbstractCdaChV1<CdaChVacdV1> {
 	 *
 	 * @return the allergy problem concerns text
 	 */
-	public String generateNarrativeTextAllergyProblemConcerns() {
+	public String generateNarrativeTextAllergyProblemConcerns(LanguageCode lang) {
 		final AllergyConcernChTextBuilder b = new AllergyConcernChTextBuilder(
-				getAllergyProblemConcerns(), SectionsVacd.ALLERGIES_REACTIONS);
+				getAllergyProblemConcerns(), SectionsVacd.ALLERGIES_REACTIONS, lang);
 		return b.toString();
 	}
 

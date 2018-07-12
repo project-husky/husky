@@ -173,6 +173,44 @@ public class DateUtil {
 	}
 
 	/**
+	 * Creates an TS Object.
+	 *
+	 * @param eurDate
+	 *            <br>
+	 *            <div class="de"> eur date</div>
+	 * @return HL7 TS Object
+	 * @throws ParseException
+	 *             the parse exception
+	 */
+	public static TS createDateTSFromEuroDate(Date eurDate) throws ParseException {
+		final DateFormat ohtDateFormatter = new SimpleDateFormat("yyyyMMdd");
+
+		final String ohtDateStr = ohtDateFormatter.format(eurDate);
+
+		final TS ohtDate = DatatypesFactory.eINSTANCE.createTS(ohtDateStr);
+		return ohtDate;
+	}
+
+	/**
+	 * Creates an TS Object.
+	 *
+	 * @param eurDate
+	 *            <br>
+	 *            <div class="de"> eur date</div>
+	 * @return HL7 TS Object
+	 * @throws ParseException
+	 *             the parse exception
+	 */
+	public static TS createFullTSFromEuroDate(Date eurDate) throws ParseException {
+		final DateFormat ohtDateFormatter = new SimpleDateFormat("yyyyMMddHHmmssZZZZ");
+
+		final String ohtDateStr = ohtDateFormatter.format(eurDate);
+
+		final TS ohtDate = DatatypesFactory.eINSTANCE.createTS(ohtDateStr);
+		return ohtDate;
+	}
+
+	/**
 	 * Creates an IVL_TS object
 	 *
 	 * @param eurDateTime
@@ -414,8 +452,8 @@ public class DateUtil {
 	 * @throws ParseException
 	 *             the parse exception
 	 */
-	public static TS createTSFromEuroDate(Date eurDate) throws ParseException {
-		final DateFormat ohtDateFormatter = new SimpleDateFormat("yyyyMMdd");
+	public static TS createTimeTSFromEuroDate(Date eurDate) throws ParseException {
+		final DateFormat ohtDateFormatter = new SimpleDateFormat("HHmmss");
 
 		final String ohtDateStr = ohtDateFormatter.format(eurDate);
 

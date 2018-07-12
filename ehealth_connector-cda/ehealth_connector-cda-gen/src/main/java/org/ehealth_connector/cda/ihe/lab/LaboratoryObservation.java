@@ -66,6 +66,7 @@ public class LaboratoryObservation extends
 	 */
 	public LaboratoryObservation() {
 		super(LABFactory.eINSTANCE.createLaboratoryObservation().init());
+		getMdht().getInterpretationCodes().clear();
 	}
 
 	/**
@@ -489,6 +490,17 @@ public class LaboratoryObservation extends
 				.get(getMdht().getEntryRelationships().size() - 1);
 		er.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 		er.setInversionInd(true);
+	}
+
+	/**
+	 * Adds the interpretation code.
+	 *
+	 * @param code
+	 *            the new interpretation code
+	 */
+	public void setInterpretationCode(ObservationInterpretation code) {
+		getMdht().getInterpretationCodes().clear();
+		getMdht().getInterpretationCodes().add(code.getCE());
 	}
 
 	/**

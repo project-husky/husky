@@ -87,6 +87,7 @@ public class ImmunizationRecommendationSection
 			org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation immunizationRecommendation,
 			LanguageCode languageCode, boolean createSectionText) {
 		if (immunizationRecommendation != null) {
+			immunizationRecommendation.sortMedicationTargets();
 			getMdht().addSubstanceAdministration(immunizationRecommendation.getMdht());
 		}
 		if (createSectionText) {
@@ -164,7 +165,7 @@ public class ImmunizationRecommendationSection
 		stringBuffer.append("</td><td>");
 		// <th>Impfung gegen</th>
 		final List<MedicationTargetEntry> medicationTargetEntries = immunizationRecommendation
-				.getMedicationTargetEntries();
+				.sortMedicationTargets();
 		if (medicationTargetEntries != null) {
 			int i = 0;
 			for (final MedicationTargetEntry medicationTargetEntry : medicationTargetEntries) {

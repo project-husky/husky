@@ -19,6 +19,8 @@ package org.ehealth_connector.cda;
 
 import java.io.ByteArrayOutputStream;
 import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -31,6 +33,8 @@ import javax.xml.xpath.XPathFactory;
 import org.eclipse.emf.ecore.EAnnotation;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.cda.utils.IdentificatorComparator;
+import org.ehealth_connector.common.Identificator;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.rim.InfrastructureRoot;
@@ -100,6 +104,35 @@ public class MdhtFacade<E extends InfrastructureRoot> {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Adds the template id.
+	 *
+	 * @param id
+	 *            the id
+	 */
+	public void addTemplateId(Identificator id) {
+		mdht.getTemplateIds().add(id.getIi());
+		sortTemplateIds();
+	}
+
+	/**
+	 * Adds the given template id to the given MDHT object, if it does not
+	 * exist, yet.
+	 *
+	 * @param id
+	 *            the id to be added if it doesn't exist, yet.
+	 */
+	public void addTemplateIdOnce(Identificator id) {
+		boolean alreadyExists = false;
+		for (II existingId : mdht.getTemplateIds()) {
+			if (existingId.equals(id.getIi()))
+				alreadyExists = true;
+		}
+		if (!alreadyExists)
+			addTemplateId(id);
+		sortTemplateIds();
 	}
 
 	/**
@@ -223,6 +256,19 @@ public class MdhtFacade<E extends InfrastructureRoot> {
 	}
 
 	/**
+	 * Gets the template ids of this object.
+	 *
+	 * @return the template id list
+	 */
+	public List<Identificator> getTemplateIds() {
+		ArrayList<Identificator> retVal = new ArrayList<Identificator>();
+		for (II ii : mdht.getTemplateIds()) {
+			retVal.add(new Identificator(ii));
+		}
+		return retVal;
+	}
+
+	/**
 	 * Gets the text reference.
 	 *
 	 * @return the text reference
@@ -240,4 +286,19 @@ public class MdhtFacade<E extends InfrastructureRoot> {
 	public void setTextReference(String value) {
 	}
 
+	/**
+	 * Sort template ids.
+	 */
+	public void sortTemplateIds() {
+		ArrayList<Identificator> list = new ArrayList<Identificator>();
+		for (II ii : mdht.getTemplateIds()) {
+			list.add(new Identificator(ii));
+		}
+		mdht.getTemplateIds().clear();
+		list.sort(new IdentificatorComparator());
+		for (Identificator identificator : list) {
+			mdht.getTemplateIds().add(identificator.getIi());
+		}
+
+	}
 }

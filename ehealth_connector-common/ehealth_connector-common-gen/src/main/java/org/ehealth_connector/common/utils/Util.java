@@ -1124,7 +1124,7 @@ public class Util {
 	 * @return true, when Debug mode is on. false for normal usage.
 	 */
 	public static boolean isDebug() {
-		return true;
+		return false;
 	}
 
 	/**

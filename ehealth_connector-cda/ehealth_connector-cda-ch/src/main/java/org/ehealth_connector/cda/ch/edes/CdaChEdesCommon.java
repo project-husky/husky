@@ -31,8 +31,8 @@ import org.ehealth_connector.cda.AbstractObservation;
 import org.ehealth_connector.cda.AbstractOrganizer;
 import org.ehealth_connector.cda.AbstractProblemConcern;
 import org.ehealth_connector.cda.AbstractProblemEntry;
+import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.ch.ActiveProblemConcern;
-import org.ehealth_connector.cda.ch.AllergyConcern;
 import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.ProblemConcern;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEdes;
@@ -314,7 +314,8 @@ public class CdaChEdesCommon {
 	public String generateNarrativeTextAllergyProblemConcerns(Section section) {
 		final AllergyConcernChTextBuilder b = new AllergyConcernChTextBuilder(
 				getAllergyProblemConcerns(section),
-				SectionsEdes.ALLERGIES_AND_OTHER_ADVERSE_REACTIONS);
+				SectionsEdes.ALLERGIES_AND_OTHER_ADVERSE_REACTIONS,
+				LanguageCode.getEnum(mdhtDocument.getLanguageCode().getCode()));
 		return b.toString();
 	}
 

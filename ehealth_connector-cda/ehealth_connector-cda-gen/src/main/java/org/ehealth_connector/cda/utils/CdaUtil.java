@@ -135,5 +135,4 @@ public abstract class CdaUtil {
 		final int nb = erList.size() - 1;
 		erList.get(nb).setTypeCode(typeCode);
 	}
-
 }

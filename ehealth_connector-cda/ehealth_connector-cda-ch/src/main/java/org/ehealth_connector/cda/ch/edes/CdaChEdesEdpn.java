@@ -27,9 +27,9 @@ import org.eclipse.emf.common.util.EList;
 import org.ehealth_connector.cda.AbstractObservation;
 import org.ehealth_connector.cda.AbstractOrganizer;
 import org.ehealth_connector.cda.AbstractVitalSignObservation;
+import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.ch.AbstractCdaChV1;
 import org.ehealth_connector.cda.ch.ActiveProblemConcern;
-import org.ehealth_connector.cda.ch.AllergyConcern;
 import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.ProblemConcern;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEdes;
@@ -97,8 +97,8 @@ public class CdaChEdesEdpn
 	 *            >
 	 */
 	public CdaChEdesEdpn(LanguageCode language, String stylesheet, String cascadingStylesheet) {
-		super(ChFactory.eINSTANCE.createCdaChEdesV1Edpn().init(), stylesheet, cascadingStylesheet);
-		setLanguageCode(language);
+		super(ChFactory.eINSTANCE.createCdaChEdesV1Edpn().init(), language, stylesheet,
+				cascadingStylesheet);
 		// set the fixed Ctnn Code
 		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setCode("28568-4");

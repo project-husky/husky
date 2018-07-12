@@ -20,6 +20,7 @@ package org.ehealth_connector.cda.ch.utils;
 import java.io.InputStream;
 import java.lang.reflect.Constructor;
 
+import org.ehealth_connector.cda.ch.CdaChV2StructuredBody;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.ChPackage;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
@@ -29,6 +30,20 @@ import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
  * <div class="de">Eine Hilfsklasse zum laden von CH clinical dokumente.</div>
  */
 public class CdaChLoader<T> {
+
+	public CdaChV2StructuredBody<org.openhealthtools.mdht.uml.cda.ch.CdaChV2StructuredBody> loadCdaChV2StructuredBodyFromStream(
+			InputStream input) throws Exception {
+		// Explicit initialization
+		ChPackage.eINSTANCE.eClass();
+
+		// load the clinical document
+		final ClinicalDocument clinicalDocument = CDAUtil.load(input);
+
+		// the instance
+		final CdaChV2StructuredBody<org.openhealthtools.mdht.uml.cda.ch.CdaChV2StructuredBody> retVal = new CdaChV2StructuredBody<org.openhealthtools.mdht.uml.cda.ch.CdaChV2StructuredBody>(
+				(org.openhealthtools.mdht.uml.cda.ch.CdaChV2StructuredBody) clinicalDocument);
+		return retVal;
+	}
 
 	/**
 	 * <div class="en">Loads a CdaCh document from an input stream and

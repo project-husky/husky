@@ -160,15 +160,32 @@ public class AbstractObservation
 		return list;
 	}
 
+	/**
+	 * Gets the code.
+	 *
+	 * @return the code
+	 */
 	public Code getCode() {
 		final Code code = new Code(mObservation.getCode());
 		return code;
 	}
 
+	/**
+	 * Gets the comment text.
+	 *
+	 * @return the comment text
+	 */
 	public String getCommentText() {
 		return Util.getCommentText(mObservation.getEntryRelationships());
 	}
 
+	/**
+	 * Gets the comment text.
+	 *
+	 * @param contentId
+	 *            the content id
+	 * @return the comment text
+	 */
 	public String getCommentText(String contentId) {
 		String retVal = Util.getCommentText(mObservation.getEntryRelationships(), contentId);
 		if (retVal == null)

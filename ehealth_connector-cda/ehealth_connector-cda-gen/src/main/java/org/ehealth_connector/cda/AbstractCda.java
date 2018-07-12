@@ -33,6 +33,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMap.Entry;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.eclipse.emf.ecore.xml.type.impl.ProcessingInstructionImpl;
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Patient;
@@ -65,7 +66,6 @@ import org.openhealthtools.mdht.uml.cda.Participant1;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.cda.RelatedDocument;
-import org.openhealthtools.mdht.uml.cda.ch.CdaChV1;
 import org.openhealthtools.mdht.uml.cda.internal.resource.CDAResource;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
@@ -140,11 +140,6 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	}
 
-	public AbstractCda(EClinicalDocument doc, LanguageCode languageCode) {
-		this(doc);
-		setLanguageCode(languageCode);
-	}
-
 	/**
 	 * <div class="en">Constructor that includes a stylesheet and a cascasing
 	 * stylesheet into the document processing instructions and initalizes the
@@ -161,12 +156,14 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 *            the Cascasing stylesheet for the document (e.g.
 	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
 	 */
-	public AbstractCda(EClinicalDocument doc, String stylesheet, String css) {
+	public AbstractCda(EClinicalDocument doc, LanguageCode languageCode, String stylesheet,
+			String css) {
 		this(doc);
 		if (css != null) {
 			addCss(css);
 		}
 		addStylesheet(stylesheet);
+		setLanguageCode(languageCode);
 		initCda();
 		sortXmlHeader();
 	}
@@ -465,12 +462,12 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * Method to get
+	 * Method to get the document
 	 *
 	 * @return the doc
 	 */
-	public CdaChV1 getDoc() {
-		return (CdaChV1) this.getMdht();
+	public EClinicalDocument getDoc() {
+		return this.getMdht();
 	}
 
 	/**
@@ -722,6 +719,17 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
+	 * Sets the code.
+	 *
+	 * @param code
+	 *            the new code
+	 */
+	public void setCode(Code code) {
+		if (code != null)
+			getDoc().setCode(code.getCE());
+	}
+
+	/**
 	 * Sets Confidentially Code
 	 *
 	 * @param code
@@ -788,19 +796,22 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		final RelatedDocument relatedDocument = CDAFactory.eINSTANCE.createRelatedDocument();
 		relatedDocument.setTypeCode(x_ActRelationshipDocument.RPLC);
 		final ParentDocument parentDocument = CDAFactory.eINSTANCE.createParentDocument();
-		parentDocument.getIds().add(documentId.getIi());
+		if (documentId != null)
+			parentDocument.getIds().add(documentId.getIi());
 		relatedDocument.setParentDocument(parentDocument);
 		this.getMdht().getRelatedDocuments().add(relatedDocument);
 	}
 
 	/**
-	 * <div class="en">Sets the id of the document</div> <div class="de">Weist
-	 * dem CDA Dokument eine id zu</div>
+	 * Sets the id.
 	 *
 	 * @param id
-	 *            the id
+	 *            the new id
 	 */
-	public abstract void setId(Identificator id);
+	public void setId(Identificator id) {
+		if (id != null)
+			getDoc().setId(id.getIi());
+	}
 
 	/**
 	 * <div class="en">Sets the in fulfillment of reference to another
@@ -899,13 +910,21 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * <div class="en">Sets the set id of the document</div>
-	 * <div class="de">Weist dem CDA Dokument eine set id zu</div>
+	 * Sets the sets the id.
 	 *
 	 * @param id
-	 *            id of the document
+	 *            the new sets the id
 	 */
-	public abstract void setSetId(Identificator id);
+	public void setSetId(Identificator id) {
+		if (id == null) {
+			getDoc().setSetId(EcoreUtil.copy(getDoc().getId()));
+		} else {
+			final II ii = DatatypesFactory.eINSTANCE.createII();
+			ii.setRoot(id.getRoot());
+			ii.setExtension(id.getExtension());
+			getDoc().setSetId(ii);
+		}
+	}
 
 	/**
 	 * <div class="en">Sets the timestamp of the document</div>
@@ -919,14 +938,23 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 			getDoc().setEffectiveTime(DateUtil.nowAsTS());
 		} else {
 			try {
-				getDoc().setEffectiveTime(DateUtil.createTSFromEuroDate(date));
+				if ("000000".equals(DateUtil.createTimeTSFromEuroDate(date).getValue()))
+					getDoc().setEffectiveTime(DateUtil.createDateTSFromEuroDate(date));
+				else
+					getDoc().setEffectiveTime(DateUtil.createFullTSFromEuroDate(date));
 			} catch (final ParseException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
-	protected void setTitle(String title) {
+	/**
+	 * Sets the code.
+	 *
+	 * @param code
+	 *            the new code
+	 */
+	public void setTitle(String title) {
 		final ST titleSt = DatatypesFactory.eINSTANCE.createST();
 		titleSt.addText(title);
 		getDoc().setTitle(titleSt);

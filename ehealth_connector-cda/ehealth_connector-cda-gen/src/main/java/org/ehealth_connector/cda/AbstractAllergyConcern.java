@@ -18,12 +18,17 @@
 
 package org.ehealth_connector.cda;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
+import org.ehealth_connector.cda.enums.VitalSignCodes;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -36,7 +41,9 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  * Allergien und Unverträglichkeiten des Patienten.</div> <div class="fr"></div>
  * .
  */
-public abstract class AbstractAllergyConcern extends AbstractConcern {
+public class AbstractAllergyConcern extends AbstractConcern {
+
+	protected LanguageCode myLang = LanguageCode.ENGLISH;
 
 	/**
 	 * The MDHT allergy concern.
@@ -52,17 +59,48 @@ public abstract class AbstractAllergyConcern extends AbstractConcern {
 	}
 
 	/**
+	 * Instantiates a new allergy concern.
+	 *
+	 * @param lang
+	 *            the language
+	 */
+	public AbstractAllergyConcern(LanguageCode lang) {
+		super(IHEFactory.eINSTANCE.createAllergyIntoleranceConcern().init());
+		myLang = lang;
+		mAllergyConcern = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) super.getMdhtConcern();
+	}
+
+	/**
 	 * <div class="en">Creates an object which represents an allergy
 	 * concern</div> <div class="de">Erzeugt ein Objekt welches ein Leiden
 	 * repräsentiert.</div> <div class="fr">Crée un objet qui représente un
 	 * problème.</div>
 	 *
-	 * @param allergyConcern
+	 * @param mdht
 	 *            allergy concern
 	 **/
 	public AbstractAllergyConcern(
-			org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern allergyConcern) {
-		super(allergyConcern);
+			org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern mdht) {
+		super(mdht);
+		mAllergyConcern = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) super.getMdhtConcern();
+	}
+
+	/**
+	 * <div class="en">Creates an object which represents an allergy
+	 * concern</div> <div class="de">Erzeugt ein Objekt welches ein Leiden
+	 * repräsentiert.</div> <div class="fr">Crée un objet qui représente un
+	 * problème.</div>
+	 *
+	 * @param mdht
+	 *            allergy concern
+	 * @param lang
+	 *            the language
+	 */
+	public AbstractAllergyConcern(
+			org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern mdht,
+			LanguageCode lang) {
+		super(mdht);
+		myLang = lang;
 		mAllergyConcern = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) super.getMdhtConcern();
 	}
 
@@ -172,7 +210,39 @@ public abstract class AbstractAllergyConcern extends AbstractConcern {
 	 *
 	 * @return the allergy problems
 	 */
-	public abstract List<AbstractAllergyProblem> getAllergyProblems();
+	public List<AbstractAllergyProblem> getAllergyProblems() {
+		final List<AbstractAllergyProblem> apl = new ArrayList<AbstractAllergyProblem>();
+		for (final AllergyIntolerance mAllergy : getMdht().getAllergyIntolerances()) {
+			final AllergyProblem allergy = new AllergyProblem(mAllergy);
+			apl.add(allergy);
+		}
+		return apl;
+	}
+
+	/**
+	 * Gets the code.
+	 *
+	 * @return the code
+	 */
+	public Code getCode() {
+		final Code code = new Code(mAllergyConcern.getCode());
+		return code;
+	}
+
+	/**
+	 * Gets the effective time.
+	 *
+	 * @return the effective time
+	 */
+	public Date getEffectiveTime() {
+		if (getMdht() != null) {
+			if (getMdht().getEffectiveTime() != null) {
+				if (getMdht().getEffectiveTime().getValue() != null)
+					return DateUtil.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
+			}
+		}
+		return null;
+	}
 
 	/**
 	 * Gets the mdht allergy concern.
@@ -182,5 +252,36 @@ public abstract class AbstractAllergyConcern extends AbstractConcern {
 	@Override
 	public AllergyIntoleranceConcern getMdht() {
 		return mAllergyConcern;
+	}
+
+	/**
+	 * Gets the narrative text of he observation in the desired language.
+	 *
+	 * @return the observation name
+	 */
+	public String getNarrativeText() {
+		String obsName = getText();
+		if ("".equals(obsName)) {
+			VitalSignCodes vs = VitalSignCodes.getEnum(getCode().getCode());
+			if (vs != null)
+				obsName = vs.getDisplayName(myLang);
+		}
+		if ("".equals(obsName)) {
+			obsName = getCode().getOriginalText();
+		}
+		return obsName;
+	}
+
+	/**
+	 * Gets the text.
+	 *
+	 * @return the text
+	 */
+	public String getText() {
+		String retVal = "";
+		if (mAllergyConcern != null)
+			if (mAllergyConcern.getText() != null)
+				retVal = mAllergyConcern.getText().getText();
+		return retVal;
 	}
 }

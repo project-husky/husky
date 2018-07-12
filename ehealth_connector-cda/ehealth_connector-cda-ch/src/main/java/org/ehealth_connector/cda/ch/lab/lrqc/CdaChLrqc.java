@@ -172,7 +172,6 @@ public class CdaChLrqc
 	 */
 	public CdaChLrqc(LanguageCode languageCode, String styleSheet, String css) {
 		super(ChFactory.eINSTANCE.createCdaChLrqcV1().init(), languageCode, styleSheet, css);
-		this.setLanguageCode(languageCode);
 	}
 
 	/**

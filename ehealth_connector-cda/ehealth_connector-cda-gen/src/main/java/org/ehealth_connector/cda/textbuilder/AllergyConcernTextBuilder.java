@@ -18,10 +18,13 @@
 
 package org.ehealth_connector.cda.textbuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.cda.AbstractAllergyConcern;
+import org.ehealth_connector.cda.AbstractAllergyConcernComparator;
 import org.ehealth_connector.cda.enums.ContentIdPrefix;
+import org.ehealth_connector.common.enums.LanguageCode;
 
 /**
  * Builds the &lt;text&gt; part of the Immunization recommendations.
@@ -33,6 +36,7 @@ public abstract class AllergyConcernTextBuilder extends TextBuilder {
 
 	private List<org.ehealth_connector.cda.AbstractAllergyConcern> problemConcerns;
 	private String contentIdPrefix;
+	protected LanguageCode myLang = LanguageCode.ENGLISH;
 
 	/**
 	 * Constructor.
@@ -41,17 +45,25 @@ public abstract class AllergyConcernTextBuilder extends TextBuilder {
 	 *            a list of problem concerns
 	 * @param section
 	 *            the section
+	 * @param lang
+	 *            the language
 	 */
 	public AllergyConcernTextBuilder(List<AbstractAllergyConcern> problemConcerns,
-			ContentIdPrefix section) {
+			ContentIdPrefix section, LanguageCode lang) {
 		this.problemConcerns = problemConcerns;
 		contentIdPrefix = section.getContentIdPrefix();
+		myLang = lang;
 	}
 
 	private void addBody() {
 		append("<tbody>");
 		int i = 1;
-		for (final org.ehealth_connector.cda.AbstractAllergyConcern problemConcern : problemConcerns) {
+		ArrayList<AbstractAllergyConcern> list = new ArrayList<AbstractAllergyConcern>();
+		for (AbstractAllergyConcern abstractAllergyConcern : problemConcerns) {
+			list.add((new AbstractAllergyConcern(abstractAllergyConcern.getMdht(), myLang)));
+		}
+		list.sort(new AbstractAllergyConcernComparator());
+		for (final org.ehealth_connector.cda.AbstractAllergyConcern problemConcern : list) {
 			addRow(problemConcern, i++);
 		}
 		append("</tbody>");

@@ -23,6 +23,7 @@ import java.io.InputStreamReader;
 
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
+import org.ehealth_connector.cda.ch.CdaChV2StructuredBody;
 import org.ehealth_connector.cda.ch.edes.CdaChEdesCtnn;
 import org.ehealth_connector.cda.ch.edes.CdaChEdesEdpn;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEdes;
@@ -49,6 +50,43 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  * <div class="de">Eine Klasse mit Hilfsfunktionen.</div>
  */
 public abstract class CdaChUtil extends CdaUtil {
+
+	/**
+	 * <div class="en">Loads a CdaChCdaChV2 document from a given File.</div>
+	 * <div class="de">Lädt ein CdaChCdaChV2 aus einer Datei.</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param filePath
+	 *            path to the XML file
+	 * @throws Exception
+	 *             the exception
+	 * @return the CdaChCdaChV2 Document
+	 */
+	public static CdaChV2StructuredBody<org.openhealthtools.mdht.uml.cda.ch.CdaChV2StructuredBody> loadCdaChV2FromFile(
+			String filePath) throws Exception {
+		return loadCdaChV2FromStream(IOUtils.toInputStream(
+				IOUtils.toString(new InputStreamReader(new FileInputStream(filePath), "UTF-8")),
+				Charsets.UTF_8));
+	}
+
+	/**
+	 * <div class="en">Loads a CdaChCdaChV2 document from an inputstream.</div>
+	 * <div class="de">Lädt ein CdaChCdaChV2 aus einem Inputstream.</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param inputStream
+	 *            the inputstream
+	 * @throws Exception
+	 *             the exception
+	 * @return the CdaChCdaChV2 Document
+	 */
+	public static CdaChV2StructuredBody<org.openhealthtools.mdht.uml.cda.ch.CdaChV2StructuredBody> loadCdaChV2FromStream(
+			InputStream inputStream) throws Exception {
+		final CdaChLoader<CdaChV2StructuredBody<org.openhealthtools.mdht.uml.cda.ch.CdaChV2StructuredBody>> loader = new CdaChLoader<CdaChV2StructuredBody<org.openhealthtools.mdht.uml.cda.ch.CdaChV2StructuredBody>>();
+		CdaChV2StructuredBody<org.openhealthtools.mdht.uml.cda.ch.CdaChV2StructuredBody> retVal = loader
+				.loadCdaChV2StructuredBodyFromStream(inputStream);
+		return retVal;
+	}
 
 	/**
 	 * <div class="en">Loads a CdaChEdesCtnn document from a given File.</div>

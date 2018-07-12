@@ -49,7 +49,7 @@ public class CdaChMtpsDis
 	 * <div class="en">Creates a new MTPS DIS CDA document</div>
 	 * <div class="de">Erstellt ein neues MTPS DIS CDA Dokument.</div>
 	 *
-	 * @param languageCode
+	 * @param language
 	 *            <br>
 	 *            <div class="en">document language</div>
 	 *            <div class="de">Sprache des Dokments</div>
@@ -71,9 +71,9 @@ public class CdaChMtpsDis
 	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').</div
 	 *            >
 	 */
-	public CdaChMtpsDis(LanguageCode languageCode, String stylesheet, String cascadingStylesheet) {
-		super(ChFactory.eINSTANCE.createCdaChMtpsV1Dis().init(), stylesheet, cascadingStylesheet);
-		this.setLanguageCode(languageCode);
+	public CdaChMtpsDis(LanguageCode language, String stylesheet, String cascadingStylesheet) {
+		super(ChFactory.eINSTANCE.createCdaChMtpsV1Dis().init(), language, stylesheet,
+				cascadingStylesheet);
 		super.initCda();
 		switch (this.getLanguageCode()) {
 		case FRENCH:
@@ -89,7 +89,7 @@ public class CdaChMtpsDis
 			setTitle("Medication dispensed"); // IHE PHARM DIS L350
 			break;
 		}
-		final DispenseSection dispenseSection = new DispenseSection(languageCode);
+		final DispenseSection dispenseSection = new DispenseSection(language);
 		this.getDoc().addSection(dispenseSection.getMdht());
 	}
 

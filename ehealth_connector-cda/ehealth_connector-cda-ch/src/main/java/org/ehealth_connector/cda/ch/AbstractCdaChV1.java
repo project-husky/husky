@@ -16,25 +16,16 @@
  */
 package org.ehealth_connector.cda.ch;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.util.Comparator;
 
-import javax.xml.bind.DatatypeConverter;
-
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.AbstractCda;
 import org.ehealth_connector.cda.AbstractObservation;
 import org.ehealth_connector.cda.AbstractOrganizer;
-import org.ehealth_connector.cda.ObservationMediaEntry;
 import org.ehealth_connector.cda.ch.textbuilder.ObservationChTextBuilder;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection;
-import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.CountryCode;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.openhealthtools.ihe.utils.UUID;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection;
@@ -43,8 +34,6 @@ import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.II;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 
 /**
  * The Class AbstractCdaCh implements a CDA document based on CDA-CH
@@ -74,19 +63,6 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	}
 
 	/**
-	 * <div class="en">Constructor for CdaCh documents</div>
-	 * <div class="de">Erstellt ein CdaCh Objekt</div> <div class="fr"></div>.
-	 *
-	 * @param doc
-	 *            the CDA-CH Object in its MDHT representation.
-	 * @param languageCode
-	 *            the desired document language.
-	 */
-	public AbstractCdaChV1(EClinicalDocument doc, LanguageCode languageCode) {
-		super(doc, languageCode);
-	}
-
-	/**
 	 * <div class="en">Constructor that includes a stylesheet and a cascasing
 	 * stylesheet into the document processing instructions and initalizes the
 	 * standard document attributes.</div> <div class="de">Erzeugt ein CdaCh
@@ -95,6 +71,8 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	 *
 	 * @param doc
 	 *            the CDA-CH Object in its MDHT representation
+	 * @param languageCode
+	 *            the desired document language.
 	 * @param stylesheet
 	 *            the stylesheet for the document (e.g.
 	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
@@ -102,52 +80,9 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	 *            the Cascasing stylesheet for the document (e.g.
 	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
 	 */
-	public AbstractCdaChV1(EClinicalDocument doc, String stylesheet, String css) {
-		super(doc, stylesheet, css);
-	}
-
-	/**
-	 * <div class="en">Adds the original representation section.</div>
-	 *
-	 * @param pdf
-	 *            <div class="en">the pdf containing the original representation
-	 *            in PDF/A format</div>
-	 * @throws IOException
-	 *             <div class="en">Signals that an I/O exception has
-	 *             occurred.</div>
-	 */
-	public void addOriginalRepresentationSection(byte[] pdf) throws IOException {
-		Section s = CDAFactory.eINSTANCE.createSection();
-		final II tIi = DatatypesFactory.eINSTANCE.createII();
-		tIi.setRoot("2.16.756.5.30.1.1.10.3.45");
-		s.getTemplateIds().add(tIi);
-
-		final CE tCe = DatatypesFactory.eINSTANCE.createCE();
-		tCe.setCode("55108-5");
-		tCe.setCodeSystem("2.16.840.1.113883.6.1");
-		tCe.setCodeSystemName("LOINC");
-		tCe.setDisplayName("Clinical presentation");
-		s.setCode(tCe);
-
-		final ST tSt = DatatypesFactory.eINSTANCE.createST();
-		tSt.addText("Original representation");
-		s.setTitle(tSt);
-
-		s.createStrucDocText(
-				"Representation of the original view which has been signed by the legal authenticator:\r\n"
-						+ "						<renderMultiMedia referencedObject=\"originalrepresentationpdf\"/>\r\n          ");
-
-		ObservationMediaEntry obsMedia = new ObservationMediaEntry();
-		obsMedia.setObservationMediaId("originalrepresentationpdf");
-		final II tObsIi = DatatypesFactory.eINSTANCE.createII();
-		tObsIi.setRoot("2.16.756.5.30.1.1.10.4.83");
-		obsMedia.getMdht().getTemplateIds().add(tIi);
-		obsMedia.setBase64Object(
-				new ByteArrayInputStream(DatatypeConverter.printBase64Binary(pdf).getBytes()),
-				"application/pdf");
-		s.addObservationMedia(obsMedia.copy());
-
-		getDoc().addSection(s);
+	public AbstractCdaChV1(EClinicalDocument doc, LanguageCode languageCode, String stylesheet,
+			String css) {
+		super(doc, languageCode, stylesheet, css);
 	}
 
 	/**
@@ -363,42 +298,6 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 			confidentialityCode = code.getCE();
 		}
 		getDoc().setConfidentialityCode(confidentialityCode);
-	}
-
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.cda.AbstractCda#setId(org.ehealth_connector.common.Identificator)
-	 */
-	@Override
-	public void setId(Identificator id) {
-		if (id == null) {
-			final II docID = DatatypesFactory.eINSTANCE.createII();
-			docID.setRoot(AbstractCdaChV1.OID_MAIN);
-			docID.setExtension(UUID.generate());
-			getDoc().setId(docID);
-		} else {
-			getDoc().setId(id.getIi());
-		}
-	}
-
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.cda.AbstractCda#setSetId(org.ehealth_connector.common.Identificator)
-	 */
-	@Override
-	public void setSetId(Identificator id) {
-		if (id == null) {
-			getDoc().setSetId(EcoreUtil.copy(getDoc().getId()));
-		} else {
-			final II ii = DatatypesFactory.eINSTANCE.createII();
-			ii.setRoot(id.getRoot());
-			ii.setExtension(id.getExtension());
-			getDoc().setSetId(ii);
-		}
 	}
 
 }

@@ -15,17 +15,14 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.cda.ch;
+package org.ehealth_connector.cda;
 
 import java.util.Date;
 
-import org.ehealth_connector.cda.AbstractAllergyProblem;
-import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.enums.AllergiesAndIntolerances;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance;
-import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
 /**
  * <div class="en">A class representing the allergy problem information.</div>
@@ -96,18 +93,6 @@ public class AllergyProblem extends AbstractAllergyProblem {
 	 */
 	public AllergyProblem(AllergyIntolerance allergyIntolerance) {
 		super(allergyIntolerance);
-	}
-
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.cda.AbstractAllergyProblem#addId(org.ehealth_connector.common.Identificator)
-	 */
-	@Override
-	public void addId(Identificator id) {
-		final II ii = CdaChUtil.createUniqueIiFromIdentificator(id);
-		getAllergyProblem().getIds().add(ii);
 	}
 
 }

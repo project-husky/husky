@@ -20,10 +20,10 @@ package org.ehealth_connector.converters.ch;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.ActiveProblemConcern;
-import org.ehealth_connector.cda.ch.AllergyConcern;
 import org.ehealth_connector.cda.ch.CodedResults;
 import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.PregnancyHistory;

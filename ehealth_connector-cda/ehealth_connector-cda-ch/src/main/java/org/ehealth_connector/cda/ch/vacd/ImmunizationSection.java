@@ -80,6 +80,7 @@ public class ImmunizationSection
 	public void addImmunization(org.ehealth_connector.cda.ch.vacd.Immunization immunization,
 			boolean createSectionText) {
 		if (immunization != null) {
+			immunization.sortMedicationTargets();
 			getMdht().addSubstanceAdministration(immunization.getMdht());
 		}
 		if (createSectionText) {
@@ -158,7 +159,7 @@ public class ImmunizationSection
 		stringBuffer.append("</td><td>");
 		// Impfung gegen
 		final List<MedicationTargetEntry> medicationTargetEntries = immunization
-				.getMedicationTargetEntries();
+				.sortMedicationTargets();
 		if (medicationTargetEntries != null) {
 			int i = 0;
 			for (final MedicationTargetEntry medicationTargetEntry : medicationTargetEntries) {

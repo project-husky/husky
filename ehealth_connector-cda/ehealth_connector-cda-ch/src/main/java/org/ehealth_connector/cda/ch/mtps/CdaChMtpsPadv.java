@@ -49,7 +49,7 @@ public class CdaChMtpsPadv
 	 * <div class="en">Creates a new MTPS PADV CDA document</div>
 	 * <div class="de">Erstellt ein neues MTPS PADV CDA Dokument.</div>
 	 *
-	 * @param languageCode
+	 * @param language
 	 *            <br>
 	 *            <div class="en">document language</div>
 	 *            <div class="de">Sprache des Dokments</div>
@@ -71,9 +71,9 @@ public class CdaChMtpsPadv
 	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').</div
 	 *            >
 	 */
-	public CdaChMtpsPadv(LanguageCode languageCode, String stylesheet, String cascadingStylesheet) {
-		super(ChFactory.eINSTANCE.createCdaChMtpsV1Padv().init(), stylesheet, cascadingStylesheet);
-		this.setLanguageCode(languageCode);
+	public CdaChMtpsPadv(LanguageCode language, String stylesheet, String cascadingStylesheet) {
+		super(ChFactory.eINSTANCE.createCdaChMtpsV1Padv().init(), language, stylesheet,
+				cascadingStylesheet);
 		super.initCda();
 		switch (this.getLanguageCode()) {
 		case FRENCH:

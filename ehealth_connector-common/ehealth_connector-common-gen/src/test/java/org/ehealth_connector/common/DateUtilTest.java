@@ -139,7 +139,7 @@ public class DateUtilTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.utils.DateUtil#createTSFromEuroDate(java.util.Date)}
+	 * {@link org.ehealth_connector.common.utils.DateUtil#createDateTSFromEuroDate(java.util.Date)}
 	 * .
 	 */
 	@Test

@@ -88,18 +88,6 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	 *            the doc
 	 * @param languageCode
 	 *            the language code
-	 */
-	protected AbstractLaboratoryReport(EClinicalDocument doc, LanguageCode languageCode) {
-		super(doc, languageCode);
-	}
-
-	/**
-	 * Instantiates a new abstract laboratory report.
-	 *
-	 * @param doc
-	 *            the doc
-	 * @param languageCode
-	 *            the language code
 	 * @param styleSheet
 	 *            the style sheet
 	 * @param css
@@ -107,7 +95,7 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	 */
 	protected AbstractLaboratoryReport(EClinicalDocument doc, LanguageCode languageCode,
 			String styleSheet, String css) {
-		super(doc, styleSheet, css);
+		super(doc, languageCode, styleSheet, css);
 
 		// If the language code is null use default ENGLISH
 		if (languageCode == null) {

@@ -54,7 +54,7 @@ public class CdaChMtpsPml
 	 * <div class="en">Creates a new MTPS PML CDA document</div>
 	 * <div class="de">Erstellt ein neues MTPS PML CDA Dokument.</div>
 	 *
-	 * @param languageCode
+	 * @param language
 	 *            <br>
 	 *            <div class="en">document language</div>
 	 *            <div class="de">Sprache des Dokments</div>
@@ -76,9 +76,9 @@ public class CdaChMtpsPml
 	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').</div
 	 *            >
 	 */
-	public CdaChMtpsPml(LanguageCode languageCode, String stylesheet, String cascadingStylesheet) {
-		super(ChFactory.eINSTANCE.createCdaChMtpsV1Pml().init(), stylesheet, cascadingStylesheet);
-		this.setLanguageCode(languageCode);
+	public CdaChMtpsPml(LanguageCode language, String stylesheet, String cascadingStylesheet) {
+		super(ChFactory.eINSTANCE.createCdaChMtpsV1Pml().init(), language, stylesheet,
+				cascadingStylesheet);
 		super.initCda();
 		switch (this.getLanguageCode()) {
 		case GERMAN:

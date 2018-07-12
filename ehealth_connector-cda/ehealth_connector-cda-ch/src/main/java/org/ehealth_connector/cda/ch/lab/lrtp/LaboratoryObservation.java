@@ -61,7 +61,7 @@ public class LaboratoryObservation
 		this();
 		setCode(code);
 		addValue(value);
-		addInterpretationCode(interpretationCode);
+		setInterpretationCode(interpretationCode);
 	}
 
 	/**

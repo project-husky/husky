@@ -24,6 +24,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
@@ -68,7 +69,10 @@ public abstract class AbstractConcern
 	 * @param id
 	 *            the new id
 	 */
-	public abstract void addId(Identificator id);
+	public void addId(Identificator id) {
+		final II ii = CdaUtil.createUniqueIiFromIdentificator(id);
+		mConcernEntry.getIds().add(ii);
+	}
 
 	private org.openhealthtools.mdht.uml.cda.ihe.ConcernEntry copyMdhtConcernEntry() {
 		return EcoreUtil.copy(getConcernEntry());
@@ -267,5 +271,4 @@ public abstract class AbstractConcern
 	public void setStatus(ProblemConcernStatusCode concernStatus) {
 		getConcernEntry().setStatusCode(concernStatus.getCS());
 	}
-
 }

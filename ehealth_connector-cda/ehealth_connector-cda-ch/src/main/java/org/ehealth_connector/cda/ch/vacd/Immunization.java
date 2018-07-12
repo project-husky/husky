@@ -46,6 +46,7 @@ import org.openhealthtools.mdht.uml.cda.Performer2;
 import org.openhealthtools.mdht.uml.cda.Precondition;
 import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 import org.openhealthtools.mdht.uml.cda.ch.PreconditionEntry;
+import org.openhealthtools.mdht.uml.cda.ch.impl.MedicationTargetEntryImpl;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -717,15 +718,22 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	/**
 	 * Sort medication targets.
 	 */
-	public void sortMedicationTargets() {
+	public List<MedicationTargetEntry> sortMedicationTargets() {
 		ArrayList<EntryRelationship> erList = new ArrayList<EntryRelationship>();
 		for (EntryRelationship er : getMdht().getEntryRelationships()) {
 			erList.add(er);
 		}
 		erList.sort(new MedicationTargetERComparator());
 		getMdht().getEntryRelationships().clear();
+		List<MedicationTargetEntry> medicationTargetEntries = new ArrayList<MedicationTargetEntry>();
 		for (EntryRelationship entryRelationship : erList) {
 			getMdht().getEntryRelationships().add(entryRelationship);
+			if (entryRelationship.getObservation() instanceof MedicationTargetEntryImpl) {
+				MedicationTargetEntryImpl mte = (MedicationTargetEntryImpl) entryRelationship
+						.getObservation();
+				medicationTargetEntries.add(new MedicationTargetEntry(mte));
+			}
 		}
+		return medicationTargetEntries;
 	}
 }

@@ -23,9 +23,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.AbstractVitalSignObservation;
+import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.AssociatedEntity;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
-import org.ehealth_connector.cda.ch.AllergyConcern;
 import org.ehealth_connector.cda.ch.ParticipantClaimer;
 import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.PregnancyHistory;
@@ -222,17 +222,17 @@ public abstract class AbstractCdaChFhirConverter {
 	 *            the FHIR resource
 	 * @return the Allergy Problem Concern
 	 */
-	private org.ehealth_connector.cda.ch.AllergyConcern getAllergyProblemConcern(
+	private org.ehealth_connector.cda.AllergyConcern getAllergyProblemConcern(
 			Condition fhirCondition) {
 
 		final String concern = fhirCondition.getNoteFirstRep().getText();
-		final org.ehealth_connector.cda.ch.AllergyProblem problemEntry = getAllergyProblemEntry(
+		final org.ehealth_connector.cda.AllergyProblem problemEntry = getAllergyProblemEntry(
 				fhirCondition);
 
 		final org.ehealth_connector.cda.enums.ProblemConcernStatusCode problemStatusCode = getProblemConcernStatusCode(
 				fhirCondition);
 
-		final org.ehealth_connector.cda.ch.AllergyConcern retVal = new org.ehealth_connector.cda.ch.AllergyConcern(
+		final org.ehealth_connector.cda.AllergyConcern retVal = new org.ehealth_connector.cda.AllergyConcern(
 				concern, fhirCondition.getAssertedDate(), null, problemEntry, problemStatusCode);
 
 		return retVal;
@@ -248,9 +248,9 @@ public abstract class AbstractCdaChFhirConverter {
 	 * @return list of eHC AllergyConcerns </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public List<org.ehealth_connector.cda.ch.AllergyConcern> getAllergyProblemConcernEntries(
+	public List<org.ehealth_connector.cda.AllergyConcern> getAllergyProblemConcernEntries(
 			DocumentManifest docManifest) {
-		final List<org.ehealth_connector.cda.ch.AllergyConcern> retVal = new ArrayList<>();
+		final List<org.ehealth_connector.cda.AllergyConcern> retVal = new ArrayList<>();
 		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
 			final List<org.hl7.fhir.dstu3.model.Extension> extensions = entry
 					.getExtensionsByUrl(FhirCommon.urnUseAsAllergyProblemConcern);
@@ -290,10 +290,10 @@ public abstract class AbstractCdaChFhirConverter {
 	 *
 	 * @return the Allergy Problem Entry
 	 */
-	private org.ehealth_connector.cda.ch.AllergyProblem getAllergyProblemEntry(
+	private org.ehealth_connector.cda.AllergyProblem getAllergyProblemEntry(
 			Condition fhirCondition) {
 
-		final org.ehealth_connector.cda.ch.AllergyProblem retVal = new org.ehealth_connector.cda.ch.AllergyProblem();
+		final org.ehealth_connector.cda.AllergyProblem retVal = new org.ehealth_connector.cda.AllergyProblem();
 		final Coding fhirCode = fhirCondition.getCode().getCodingFirstRep();
 
 		// Add Problem Entry Identifiers

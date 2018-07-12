@@ -25,8 +25,8 @@ import java.util.List;
 import org.ehealth_connector.cda.AbstractObservation;
 import org.ehealth_connector.cda.AbstractOrganizer;
 import org.ehealth_connector.cda.AbstractVitalSignObservation;
+import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.ch.AbstractCdaChV1;
-import org.ehealth_connector.cda.ch.AllergyConcern;
 import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEdes;
 import org.ehealth_connector.common.Author;
@@ -93,8 +93,8 @@ public class CdaChEdesCtnn
 	 *            >
 	 */
 	public CdaChEdesCtnn(LanguageCode language, String stylesheet, String cascadingStylesheet) {
-		super(ChFactory.eINSTANCE.createCdaChEdesV1Ctnn().init(), stylesheet, cascadingStylesheet);
-		setLanguageCode(language);
+		super(ChFactory.eINSTANCE.createCdaChEdesV1Ctnn().init(), language, stylesheet,
+				cascadingStylesheet);
 
 		// set the fixed Ctnn Code
 		final CE ce = DatatypesFactory.eINSTANCE.createCE();

@@ -140,7 +140,7 @@ public class Patient extends Person {
 		// Create and fill birth date
 		if (birthDay != null) {
 			try {
-				mPatient.setBirthTime(DateUtil.createTSFromEuroDate(birthDay));
+				mPatient.setBirthTime(DateUtil.createDateTSFromEuroDate(birthDay));
 			} catch (final ParseException e) {
 				e.printStackTrace();
 			}
@@ -519,7 +519,7 @@ public class Patient extends Person {
 	 */
 	public void setBirthday(Date birthDay) {
 		try {
-			mPatient.setBirthTime(DateUtil.createTSFromEuroDate(birthDay));
+			mPatient.setBirthTime(DateUtil.createDateTSFromEuroDate(birthDay));
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}

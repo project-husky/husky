@@ -23,10 +23,12 @@ import java.util.List;
 
 import org.ehealth_connector.cda.AbstractAllergyConcern;
 import org.ehealth_connector.cda.AbstractAllergyProblem;
-import org.ehealth_connector.cda.ch.AllergyConcern;
+import org.ehealth_connector.cda.AbstractAllergyProblemComparator;
+import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.enums.ContentIdPrefix;
 import org.ehealth_connector.cda.textbuilder.AllergyConcernTextBuilder;
 import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 
 /**
@@ -53,8 +55,8 @@ public class AllergyConcernChTextBuilder extends AllergyConcernTextBuilder {
 	 *            the section
 	 */
 	public AllergyConcernChTextBuilder(List<AllergyConcern> problemConcerns,
-			ContentIdPrefix section) {
-		super(toAbstracAllergyConcernList(problemConcerns), section);
+			ContentIdPrefix section, LanguageCode lang) {
+		super(toAbstracAllergyConcernList(problemConcerns), section, lang);
 	}
 
 	@Override
@@ -78,7 +80,12 @@ public class AllergyConcernChTextBuilder extends AllergyConcernTextBuilder {
 		// welcome
 		int j = 0;
 		String contentPrefix = getContentIdPrefix() + i;
-		for (AbstractAllergyProblem problem : allergyConcern.getAllergyProblems()) {
+		ArrayList<AbstractAllergyProblem> list = new ArrayList<AbstractAllergyProblem>();
+		for (AbstractAllergyProblem abstractAllergyProblem : allergyConcern.getAllergyProblems()) {
+			list.add(new AbstractAllergyProblem(abstractAllergyProblem.getMdht(), myLang));
+		}
+		list.sort(new AbstractAllergyProblemComparator());
+		for (AbstractAllergyProblem problem : list) {
 			j++;
 			append("<tr>");
 			if (j == 1)

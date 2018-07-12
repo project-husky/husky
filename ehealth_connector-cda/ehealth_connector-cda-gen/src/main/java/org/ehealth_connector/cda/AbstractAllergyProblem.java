@@ -24,10 +24,12 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.enums.AllergiesAndIntolerances;
+import org.ehealth_connector.cda.enums.VitalSignCodes;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.valueset.enums.IdentityDomain;
@@ -47,7 +49,9 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  * <div class="en">An Allergy Problem</div> <div class="de">Ein Allergie
  * Problem</div> <div class="fr"></div>.
  */
-public abstract class AbstractAllergyProblem {
+public class AbstractAllergyProblem {
+
+	protected LanguageCode myLang = LanguageCode.ENGLISH;
 
 	/** The m allergy problem. */
 	private AllergyIntolerance mAllergyProblem;
@@ -163,6 +167,14 @@ public abstract class AbstractAllergyProblem {
 
 	/**
 	 * Instantiates a new allergy problem.
+	 */
+	public AbstractAllergyProblem(LanguageCode lang) {
+		setAllergyProblem(IHEFactory.eINSTANCE.createAllergyIntolerance().init());
+		myLang = lang;
+	}
+
+	/**
+	 * Instantiates a new allergy problem.
 	 *
 	 * @param allergyIntolerance
 	 *            <br>
@@ -175,12 +187,32 @@ public abstract class AbstractAllergyProblem {
 	}
 
 	/**
+	 * Instantiates a new allergy problem.
+	 *
+	 * @param allergyIntolerance
+	 *            <br>
+	 *            <div class="de"> allergy intolerance</div>
+	 *            <div class="fr"></div> <div class="it"></div>
+	 * @param lang
+	 *            the lang
+	 */
+	public AbstractAllergyProblem(
+			org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance allergyIntolerance,
+			LanguageCode lang) {
+		setAllergyProblem(allergyIntolerance);
+		myLang = lang;
+	}
+
+	/**
 	 * Adds the id.
 	 *
 	 * @param id
 	 *            the new id
 	 */
-	public abstract void addId(Identificator id);
+	public void addId(Identificator id) {
+		final II ii = CdaUtil.createUniqueIiFromIdentificator(id);
+		mAllergyProblem.getIds().add(ii);
+	}
 
 	/**
 	 * Adds the value.
@@ -308,8 +340,26 @@ public abstract class AbstractAllergyProblem {
 	 *
 	 * @return the mdht allergy problem
 	 */
-	public AllergyIntolerance getMdhtAllergyProblem() {
+	public AllergyIntolerance getMdht() {
 		return getAllergyProblem();
+	}
+
+	/**
+	 * Gets the narrative text of he observation in the desired language.
+	 *
+	 * @return the observation name
+	 */
+	public String getNarrativeText() {
+		String obsName = getText();
+		if ("".equals(obsName)) {
+			VitalSignCodes vs = VitalSignCodes.getEnum(getCode().getCode());
+			if (vs != null)
+				obsName = vs.getDisplayName(myLang);
+		}
+		if ("".equals(obsName)) {
+			obsName = getCode().getOriginalText();
+		}
+		return obsName;
 	}
 
 	/**
@@ -338,6 +388,19 @@ public abstract class AbstractAllergyProblem {
 				}
 			}
 		}
+		return retVal;
+	}
+
+	/**
+	 * Gets the text.
+	 *
+	 * @return the text
+	 */
+	public String getText() {
+		String retVal = "";
+		if (mAllergyProblem != null)
+			if (mAllergyProblem.getText() != null)
+				retVal = mAllergyProblem.getText().getText();
 		return retVal;
 	}
 
