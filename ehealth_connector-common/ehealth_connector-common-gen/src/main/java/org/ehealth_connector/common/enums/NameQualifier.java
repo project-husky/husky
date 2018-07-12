@@ -14,40 +14,20 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-
 package org.ehealth_connector.common.enums;
 
 import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
-/*
- *<div class="de">Nutzungszweck von Namen gemäss HL7 Vocabulary EntityNameUse [2.16.840.1.113883.5.45], derzeit nur wichtigste für die Schweiz</div>
- *<div class="fr"></div>
- */
-/**
- * <div class="de">Enum NameUse.</div> <div class="fr">Enum NameUse.</div>
- * <div class="it">Enum NameUse.</div>
- */
-public enum NameUse {
-
+public enum NameQualifier {
 	/**
-	 * <div class="en">eCH-0011 V8.1 nameData: Other official person's family
-	 * name</div>
+	 * <div class="en">Academic title</div>
 	 */
-	ASSIGNED("ASGN", "Assigned"),
-	/**
-	 * <div class="en">eCH-0011 V8.1 nameData: The person's pseudonym name</div>
-	 */
-	PSEUDONYM("P", "Pseudonym"),
-	/**
-	 * <div class="en">eCH-0011 V8.1 nameData: The person's legal name. This is
-	 * the default. Thus, name elements without @use are legal names.</div>
-	 */
-	LEGAL("L", "Legal");
+	ACADEMIC("AC", "Academic"),;
 
 	/** The Constant CODE_SYSTEM_NAME. */
-	public static final String CODE_SYSTEM_NAME = "NameUse";
+	public static final String CODE_SYSTEM_NAME = "NameQualifier";
 
 	/** The Constant CODE_SYSTEM. */
 	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.1119";
@@ -61,8 +41,8 @@ public enum NameUse {
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static NameUse getEnum(String code) {
-		for (final NameUse x : values()) {
+	public static NameQualifier getEnum(String code) {
+		for (final NameQualifier x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -85,7 +65,7 @@ public enum NameUse {
 			return false;
 		}
 		try {
-			Enum.valueOf(NameUse.class, enumName);
+			Enum.valueOf(NameQualifier.class, enumName);
 			return true;
 		} catch (final IllegalArgumentException ex) {
 			return false;
@@ -102,7 +82,7 @@ public enum NameUse {
 	 * @return true, if one enum of this valueset contains the given code
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (NameUse x : values()) {
+		for (NameQualifier x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -126,7 +106,7 @@ public enum NameUse {
 	 *            <br>
 	 *            <div class="de"> display name</div>
 	 */
-	NameUse(String code, String displayName) {
+	NameQualifier(String code, String displayName) {
 		this.code = code;
 		this.displayName = displayName;
 	}

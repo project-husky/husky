@@ -21,11 +21,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.common.enums.NameQualifier;
 import org.ehealth_connector.common.enums.NameUse;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.ENXP;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
+import org.openhealthtools.mdht.uml.hl7.vocab.EntityNamePartQualifier;
 import org.openhealthtools.mdht.uml.hl7.vocab.EntityNameUse;
 
 public class Name {
@@ -324,6 +327,30 @@ public class Name {
 		if ((prefix != null) && !"".equals(prefix)) {
 			mPn.addPrefix(prefix);
 		}
+	}
+
+	/**
+	 * <div class="en">Sets the prefix.</div> <div class="de">Setzt ein prefix
+	 * (z.B. "Dr. med.")</div> <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param prefix
+	 *            das prefix Objekt welches gesetzt wird
+	 * @param qualifier
+	 *            the qualifier
+	 */
+	public void setPrefix(String prefix, NameQualifier qualifier) {
+		if ((prefix != null) && !"".equals(prefix)) {
+			final ENXP enxp = DatatypesFactory.eINSTANCE.createENXP();
+			enxp.addText(prefix);
+			enxp.getQualifiers().clear();
+			switch (qualifier) {
+			case ACADEMIC:
+				enxp.getQualifiers().add(EntityNamePartQualifier.AC);
+			}
+			mPn.getPrefixes().clear();
+			mPn.getPrefixes().add(enxp);
+		}
+
 	}
 
 	/**

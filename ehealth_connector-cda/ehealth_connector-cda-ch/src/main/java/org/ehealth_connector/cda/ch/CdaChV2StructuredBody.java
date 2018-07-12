@@ -28,6 +28,7 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.openhealthtools.mdht.uml.cda.Author;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
@@ -57,6 +58,20 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	public CdaChV2StructuredBody(EClinicalDocument doc, LanguageCode languageCode,
 			String stylesheet, String css) {
 		super(doc, languageCode, stylesheet, css);
+	}
+
+	/**
+	 * <div class="en">Adds an author</div> <div class="de">Fügt einen Autoren
+	 * hinzu</div>
+	 *
+	 * @param author
+	 *            the autor
+	 */
+	@Override
+	public void addAuthor(org.ehealth_connector.common.Author author) {
+		final Author docAuthor = author.copyMdhtAuthor();
+		CdaUtil.addTemplateIdOnce(docAuthor, new Identificator("2.16.756.5.30.1.1.10.9.23"));
+		getDoc().getAuthors().add(docAuthor);
 	}
 
 	/**
