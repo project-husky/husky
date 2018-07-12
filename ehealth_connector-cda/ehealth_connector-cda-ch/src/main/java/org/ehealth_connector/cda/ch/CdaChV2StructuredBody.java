@@ -23,11 +23,14 @@ import javax.xml.bind.DatatypeConverter;
 
 import org.ehealth_connector.cda.AbstractCda;
 import org.ehealth_connector.cda.ObservationMediaEntry;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
+import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -105,9 +108,9 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	public void initCda() {
 
 		// Make sure the document contains all necessary templateIds
-		addTemplateIdOnce(new Identificator("2.16.840.1.113883.10.12.1"));
-		addTemplateIdOnce(new Identificator("2.16.840.1.113883.10.12.2"));
-		addTemplateIdOnce(new Identificator("2.16.756.5.30.1.1.1.1.4"));
+		CdaUtil.addTemplateIdOnce(getDoc(), new Identificator("2.16.840.1.113883.10.12.1"));
+		CdaUtil.addTemplateIdOnce(getDoc(), new Identificator("2.16.840.1.113883.10.12.2"));
+		CdaUtil.addTemplateIdOnce(getDoc(), new Identificator("2.16.756.5.30.1.1.1.1.4"));
 
 		// Type ID
 		setTypeId();
@@ -121,23 +124,6 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		setSetId(id);
 		setVersion(id, 1);
 		setTimestamp(DateUtil.nowAsDate());
-
-		// // // Fix RealmCode
-		// // final CS cs = DatatypesFactory.eINSTANCE.createCS();
-		// // cs.setCode(CountryCode.SWITZERLAND.getCodeAlpha3());
-		// // getDoc().getRealmCodes().clear();
-		// // getDoc().getRealmCodes().add)(cs);
-		//
-		//
-		// // // Set OID of the document
-		// // setId(null);
-		// // setSetId(null);
-		// // setVersion(null, null);
-		// //
-		//
-		// // Set creation time of the document
-		//
-		//
 	}
 
 	/**
@@ -206,4 +192,19 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		// Todo remove the old section if exists
 		getDoc().addSection(s);
 	}
+
+	/**
+	 * <div class="en">Adds a patient</div> <div class="de">Weist dem CDA
+	 * Dokument einen Patienten zu</div>
+	 *
+	 * @param patient
+	 *            Patient
+	 */
+	@Override
+	public void setPatient(Patient patient) {
+		RecordTarget mdhtPatient = patient.getMdhtRecordTarget();
+		CdaUtil.addTemplateIdOnce(mdhtPatient, new Identificator("2.16.756.5.30.1.1.10.2.1"));
+		getDoc().getRecordTargets().add(mdhtPatient);
+	}
+
 }

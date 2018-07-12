@@ -43,8 +43,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.TS;
 public class Patient extends Person {
 
 	private final RecordTarget mRecordTarget;
-	private final PatientRole mPatientRole;
-	private final org.openhealthtools.mdht.uml.cda.Patient mPatient;
+	protected PatientRole mPatientRole;
+	protected org.openhealthtools.mdht.uml.cda.Patient mPatient;
 	private Boolean isNonHumenSubject = false;
 
 	/**
@@ -460,6 +460,15 @@ public class Patient extends Person {
 	}
 
 	/**
+	 * Gets the provider organization.
+	 *
+	 * @return the provider organization
+	 */
+	public Organization getProviderOrganization() {
+		return new Organization(mPatientRole.getProviderOrganization());
+	}
+
+	/**
 	 * Gets the religious affiliation.
 	 *
 	 * @return the religious affiliation
@@ -608,6 +617,16 @@ public class Patient extends Person {
 	 */
 	public void setNation(String nation) {
 		this.nation = nation;
+	}
+
+	/**
+	 * Sets the provider organization.
+	 *
+	 * @param organization
+	 *            the new provider organization
+	 */
+	public void setProviderOrganization(Organization organization) {
+		mPatientRole.setProviderOrganization(organization.getMdhtOrganization());
 	}
 
 	/**

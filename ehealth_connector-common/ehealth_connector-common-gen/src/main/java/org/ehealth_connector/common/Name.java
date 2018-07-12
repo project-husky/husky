@@ -21,10 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.common.enums.NameUse;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
+import org.openhealthtools.mdht.uml.hl7.vocab.EntityNameUse;
 
 public class Name {
 
@@ -94,6 +96,23 @@ public class Name {
 		if ((familyName != null) && !"".equals(familyName)) {
 			setFamilyName(familyName);
 		}
+	}
+
+	/**
+	 * Erzeugt einen Personennamen (Dieser Konstruktor wird oft gebraucht für
+	 * Patienten).
+	 *
+	 * @param givenName
+	 *            Vorname
+	 * @param familyName
+	 *            Nachname
+	 * @param use
+	 *            the person name usage code
+	 */
+	public Name(String givenName, String familyName, NameUse use) {
+		this(givenName, familyName);
+		setUse(use);
+		// TODO getter und setter
 	}
 
 	/**
@@ -227,6 +246,33 @@ public class Name {
 	}
 
 	/**
+	 * <div class="en">Gets the person name use. Default is LEGAL.</div>
+	 * <div class="de">Liefert den Verwendungszweck (default ist LEGAL).</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @return the use
+	 */
+	public NameUse getUse() {
+		NameUse retVal = NameUse.LEGAL;
+		if (mPn.getUses() != null) {
+			if (mPn.getUses().size() >= 1) {
+				switch (mPn.getUses().get(1)) {
+				case ASGN:
+					retVal = NameUse.ASSIGNED;
+					break;
+				case L:
+					retVal = NameUse.LEGAL;
+					break;
+				case P:
+					retVal = NameUse.PSEUDONYM;
+					break;
+				}
+			}
+		}
+		return retVal;
+	}
+
+	/**
 	 * <div class="en">Sets the family name.</div> <div class="de">Setzt family
 	 * name.</div> <div class="fr"></div> <div class="it"></div>
 	 *
@@ -290,6 +336,32 @@ public class Name {
 	public void setSuffix(String suffix) {
 		if ((suffix != null) && !"".equals(suffix)) {
 			mPn.addSuffix(suffix);
+		}
+	}
+
+	/**
+	 * <div class="en">Sets the use code.</div> <div class="de">Setzt den
+	 * Verwendungszweck."</div> <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param suffix
+	 *            das suffix Objekt welches gesetzt wird
+	 */
+	public void setUse(NameUse use) {
+		if (use != null) {
+			EntityNameUse useCode = EntityNameUse.L;
+			mPn.getUses().clear();
+			switch (use) {
+			case ASSIGNED:
+				useCode = EntityNameUse.ASGN;
+				break;
+			case LEGAL:
+				useCode = EntityNameUse.L;
+				break;
+			case PSEUDONYM:
+				useCode = EntityNameUse.P;
+				break;
+			}
+			mPn.getUses().add(useCode);
 		}
 	}
 }

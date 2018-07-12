@@ -156,6 +156,7 @@ public enum AdministrativeGender {
 	public CE getCE() {
 		final CE ce = DatatypesFactory.eINSTANCE.createCE();
 		ce.setCodeSystem(CODE_SYSTEM_OID);
+		ce.setCodeSystemName(CODE_SYSTEM_NAME);
 		ce.setCode(code);
 		ce.setDisplayName(displayName);
 		return ce;

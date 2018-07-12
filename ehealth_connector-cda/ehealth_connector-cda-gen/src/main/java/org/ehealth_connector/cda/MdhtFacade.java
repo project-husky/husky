@@ -59,7 +59,7 @@ public class MdhtFacade<E extends InfrastructureRoot> {
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/** The facade objects. */
-	private E mdht;
+	protected E mdht;
 
 	/** The template id. */
 	private String templateId;

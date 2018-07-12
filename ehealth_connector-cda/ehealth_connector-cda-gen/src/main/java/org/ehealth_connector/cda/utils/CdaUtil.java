@@ -17,14 +17,18 @@
  */
 package org.ehealth_connector.cda.utils;
 
+import java.util.ArrayList;
+
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.EhcVersions;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.Component3;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
+import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.StructuredBody;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -51,6 +55,63 @@ public abstract class CdaUtil {
 			c.setSection(EcoreUtil.copy(s));
 			sb.getComponents().add(c);
 		}
+	}
+
+	/**
+	 * Adds the template id.
+	 *
+	 * @param doc
+	 *            the doc
+	 * @param id
+	 *            the id
+	 */
+	public static void addTemplateId(ClinicalDocument doc, Identificator id) {
+		doc.getTemplateIds().add(id.getIi());
+		sortTemplateIds(doc);
+	}
+
+	/**
+	 * Adds the template id.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
+	public static void addTemplateId(RecordTarget mdht, Identificator id) {
+		mdht.getTemplateIds().add(id.getIi());
+		sortTemplateIds(mdht);
+	}
+
+	/**
+	 * Adds the given template id to the given MDHT object, if it does not
+	 * exist, yet.
+	 *
+	 * @param doc
+	 *            the doc
+	 * @param id
+	 *            the id to be added if it doesn't exist, yet.
+	 */
+	public static void addTemplateIdOnce(ClinicalDocument doc, Identificator id) {
+		boolean alreadyExists = false;
+		for (II existingId : doc.getTemplateIds()) {
+			if (existingId.equals(id.getIi()))
+				alreadyExists = true;
+		}
+		if (!alreadyExists)
+			addTemplateId(doc, id);
+		sortTemplateIds(doc);
+	}
+
+	public static void addTemplateIdOnce(RecordTarget mdht, Identificator id) {
+		boolean alreadyExists = false;
+		for (II existingId : mdht.getTemplateIds()) {
+			if (existingId.equals(id.getIi()))
+				alreadyExists = true;
+		}
+		if (!alreadyExists)
+			addTemplateId(mdht, id);
+		sortTemplateIds(mdht);
 	}
 
 	/**
@@ -134,5 +195,43 @@ public abstract class CdaUtil {
 			x_ActRelationshipEntryRelationship typeCode) {
 		final int nb = erList.size() - 1;
 		erList.get(nb).setTypeCode(typeCode);
+	}
+
+	/**
+	 * Sort template ids.
+	 *
+	 * @param doc
+	 *            the doc
+	 */
+	public static void sortTemplateIds(ClinicalDocument doc) {
+		ArrayList<Identificator> list = new ArrayList<Identificator>();
+		for (II ii : doc.getTemplateIds()) {
+			list.add(new Identificator(ii));
+		}
+		doc.getTemplateIds().clear();
+		list.sort(new IdentificatorComparator());
+		for (Identificator identificator : list) {
+			doc.getTemplateIds().add(identificator.getIi());
+		}
+
+	}
+
+	/**
+	 * Sort template ids.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
+	public static void sortTemplateIds(RecordTarget mdht) {
+		ArrayList<Identificator> list = new ArrayList<Identificator>();
+		for (II ii : mdht.getTemplateIds()) {
+			list.add(new Identificator(ii));
+		}
+		mdht.getTemplateIds().clear();
+		list.sort(new IdentificatorComparator());
+		for (Identificator identificator : list) {
+			mdht.getTemplateIds().add(identificator.getIi());
+		}
+
 	}
 }

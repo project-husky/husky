@@ -22,12 +22,14 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.enums.CodeSystems;
+import org.ehealth_connector.common.enums.NameUse;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
+import org.openhealthtools.mdht.uml.hl7.vocab.EntityNameUse;
 import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
 
 /**
@@ -70,6 +72,19 @@ public class Organization {
 	}
 
 	/**
+	 * Erstellt eine neue Organisation (Spital, Arztpraxis, Firma, Verein, etc.)
+	 *
+	 * @param name
+	 *            Name der Organisation
+	 * @param use
+	 *            the use
+	 */
+	public Organization(String name, NameUse use) {
+		mOrganization = CDAFactory.eINSTANCE.createOrganization();
+		addName(name, use);
+	}
+
+	/**
 	 * Erstellt eine neue Organisation (Spital, Arztpraxis), die über eine
 	 * eigene ID (GLN) verfügt.
 	 *
@@ -109,7 +124,7 @@ public class Organization {
 	}
 
 	/**
-	 * Weist der Organisation eine Postadresse zu (Geschäftsadresse).
+	 * Weist der Organisation einen Namen zu.
 	 *
 	 * @param name
 	 *            Name
@@ -117,6 +132,24 @@ public class Organization {
 	public void addName(String name) {
 		if (name != null) {
 			final ON orgaName = DatatypesFactory.eINSTANCE.createON();
+			getMdhtOrganization().getNames().add(orgaName);
+			orgaName.addText(name);
+		}
+	}
+
+	/**
+	 * Weist der Organisation einen Namen zu.
+	 *
+	 * @param name
+	 *            Name
+	 * @param use
+	 *            the use
+	 */
+	public void addName(String name, NameUse use) {
+		if (name != null) {
+			final ON orgaName = DatatypesFactory.eINSTANCE.createON();
+			orgaName.getUses().clear();
+			orgaName.getUses().add(convertUse(use));
 			getMdhtOrganization().getNames().add(orgaName);
 			orgaName.addText(name);
 		}
@@ -133,6 +166,31 @@ public class Organization {
 		tel.getUses().add(TelecommunicationAddressUse.WP);
 		tel.setValue("http://" + url);
 		getMdhtOrganization().getTelecoms().add(tel);
+	}
+
+	/**
+	 * Convert use.
+	 *
+	 * @param use
+	 *            the use
+	 * @return the entity name use
+	 */
+	public EntityNameUse convertUse(NameUse use) {
+		EntityNameUse useCode = EntityNameUse.L;
+		if (use != null) {
+			switch (use) {
+			case ASSIGNED:
+				useCode = EntityNameUse.ASGN;
+				break;
+			case LEGAL:
+				useCode = EntityNameUse.L;
+				break;
+			case PSEUDONYM:
+				useCode = EntityNameUse.P;
+				break;
+			}
+		}
+		return useCode;
 	}
 
 	/**
@@ -219,4 +277,5 @@ public class Organization {
 	public void setTelecoms(Telecoms telecoms) {
 		mOrganization.getTelecoms().addAll(EcoreUtil.copyAll(telecoms.getMdhtTelecoms()));
 	}
+
 }
