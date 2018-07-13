@@ -230,9 +230,14 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * @param author
 	 *            the autor
 	 */
-	public void addAuthor(org.ehealth_connector.common.Author author) {
+	/**
+	 * @param author
+	 * @return the added MDHT Author
+	 */
+	public Author addAuthor(org.ehealth_connector.common.Author author) {
 		final Author docAuthor = author.copyMdhtAuthor();
 		getDoc().getAuthors().add(docAuthor);
+		return docAuthor;
 	}
 
 	public void addAuthorizationConsent(String narrativeConsent) {
@@ -314,7 +319,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		assEnt.setScopingOrganization(docOrganization);
 	}
 
-	public void addRecipient(Organization organization) {
+	public InformationRecipient addRecipient(Organization organization) {
 
 		InformationRecipient recipient = CDAFactory.eINSTANCE.createInformationRecipient();
 		recipient.setTypeCode(x_InformationRecipient.TRC);
@@ -322,7 +327,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		ir.setReceivedOrganization(organization.getMdhtOrganization());
 		recipient.setIntendedRecipient(ir);
 		getDoc().getInformationRecipients().add(recipient);
-
+		return recipient;
 	}
 
 	/**
@@ -822,7 +827,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 *            <div class="en">custodian organization</div>
 	 *            <div class="de">verwaltende Organisation</div>
 	 */
-	public void setCustodian(Organization organization) {
+	public Custodian setCustodian(Organization organization) {
 		// create and set the mdht Custodian object
 		final Custodian mdhtCustodian = CDAFactory.eINSTANCE.createCustodian();
 		final AssignedCustodian assCust = CDAFactory.eINSTANCE.createAssignedCustodian();
@@ -839,6 +844,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 		mdhtCustodian.setAssignedCustodian(assCust);
 		getDoc().setCustodian(mdhtCustodian);
+		return mdhtCustodian;
 	}
 
 	/**
@@ -912,8 +918,9 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 *            the new id
 	 */
 	public void setId(Identificator id) {
-		if (id != null)
+		if (id != null) {
 			getDoc().setId(id.getIi());
+		}
 	}
 
 	/**
@@ -963,12 +970,13 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">Adds a patient</div> <div class="de">Weist dem CDA
-	 * Dokument einen Patienten zu</div>
+	 * Dokument einen Patienten zu</div>.
 	 *
 	 * @param patient
 	 *            Patient
+	 * @return the MDHT record target
 	 */
-	public void setPatient(Patient patient) {
+	public RecordTarget setPatient(Patient patient) {
 		if (patient != null) {
 			if (patient.isNonHumenSubject()) {
 				// Create a record target for a non-human subject
@@ -1009,10 +1017,10 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 			} else
 				getDoc().getRecordTargets().add(patient.getMdhtRecordTarget());
 		}
-
+		return patient.getMdhtRecordTarget();
 	}
 
-	public void setPrimaryRecipient(Organization organization) {
+	public InformationRecipient setPrimaryRecipient(Organization organization) {
 
 		InformationRecipient recipient = CDAFactory.eINSTANCE.createInformationRecipient();
 		recipient.setTypeCode(x_InformationRecipient.PRCP);
@@ -1021,7 +1029,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		recipient.setIntendedRecipient(ir);
 		getDoc().getInformationRecipients().clear();
 		getDoc().getInformationRecipients().add(recipient);
-
+		return recipient;
 	}
 
 	/**

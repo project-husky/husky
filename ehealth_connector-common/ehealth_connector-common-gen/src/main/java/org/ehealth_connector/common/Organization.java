@@ -20,6 +20,7 @@ package org.ehealth_connector.common;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.NameUse;
@@ -269,6 +270,10 @@ public class Organization {
 	 */
 	public org.openhealthtools.mdht.uml.cda.Organization getMdhtOrganization() {
 		return mOrganization;
+	}
+
+	public EList<TEL> getMdhtTelecoms() {
+		return mOrganization.getTelecoms();
 	}
 
 	/**

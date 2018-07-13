@@ -304,32 +304,7 @@ public class Code {
 			ce.setOriginalText(mCD2.getOriginalText());
 		}
 		for (final CD translation : mCD2.getTranslations()) {
-			// final CE ceTranslation = DatatypesFactory.eINSTANCE.createCE();
-			//
-			// final CD mCD3 = EcoreUtil.copy(translation);
-			// if (mCD3.getCodeSystem() != null) {
-			// ceTranslation.setCodeSystem(mCD3.getCodeSystem());
-			// }
-			// if (mCD3.getCode() != null) {
-			// ceTranslation.setCode(mCD3.getCode());
-			// }
-			// if (mCD3.getCodeSystemName() != null) {
-			// ceTranslation.setCodeSystemName(mCD3.getCodeSystemName());
-			// }
-			// if (mCD3.getDisplayName() != null) {
-			// ceTranslation.setDisplayName(mCD3.getDisplayName());
-			// }
-			// if (mCD3.getCodeSystemVersion() != null) {
-			// ceTranslation.setCodeSystemVersion(mCD3.getCodeSystemVersion());
-			// }
-			// if (mCD3.isNullFlavorDefined()) {
-			// ceTranslation.setNullFlavor(mCD3.getNullFlavor());
-			// }
-			// if (mCD3.getOriginalText() != null) {
-			// ceTranslation.setOriginalText(mCD3.getOriginalText());
-			// }
-			//
-			// ce.getTranslations().add(ceTranslation);
+			ce.getTranslations().clear();
 			ce.getTranslations().add(EcoreUtil.copy(translation));
 		}
 		return ce;

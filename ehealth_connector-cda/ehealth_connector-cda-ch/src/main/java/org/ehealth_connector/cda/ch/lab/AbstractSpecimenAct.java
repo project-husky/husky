@@ -121,6 +121,20 @@ public class AbstractSpecimenAct extends org.ehealth_connector.cda.ihe.lab.Abstr
 	 *            the laboratory battery organizer
 	 */
 	public void addLaboratoryBatteryOrganizer(
+			org.ehealth_connector.cda.ch.lab.lrep.LaboratoryBatteryOrganizer laboratoryBatteryOrganizer) {
+		getMdht().addOrganizer(laboratoryBatteryOrganizer.copy());
+		// Set the right type for the entryRelationship
+		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+				x_ActRelationshipEntryRelationship.COMP);
+	}
+
+	/**
+	 * Adds the laboratory battery organizer.
+	 *
+	 * @param laboratoryBatteryOrganizer
+	 *            the laboratory battery organizer
+	 */
+	public void addLaboratoryBatteryOrganizer(
 			org.ehealth_connector.cda.ch.lab.lrph.LaboratoryBatteryOrganizer laboratoryBatteryOrganizer) {
 		getMdht().addOrganizer(laboratoryBatteryOrganizer.copy());
 		// Set the right type for the entryRelationship
@@ -222,8 +236,8 @@ public class AbstractSpecimenAct extends org.ehealth_connector.cda.ihe.lab.Abstr
 			for (final Organizer organizer : this.getMdht().getOrganizers()) {
 				if (organizer instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryIsolateOrganizer) {
 					final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryIsolateOrganizer iheLabIsolateOrganizer = (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryIsolateOrganizer) organizer;
-					laboratoryOrganizerList
-							.add(new org.ehealth_connector.cda.ch.lab.lrph.LaboratoryIsolateOrganizer(
+					laboratoryOrganizerList.add(
+							new org.ehealth_connector.cda.ch.lab.lrph.LaboratoryIsolateOrganizer(
 									iheLabIsolateOrganizer));
 				}
 			}

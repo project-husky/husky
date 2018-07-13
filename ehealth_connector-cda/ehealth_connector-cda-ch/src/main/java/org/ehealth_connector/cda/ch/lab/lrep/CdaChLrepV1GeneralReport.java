@@ -16,9 +16,22 @@
  */
 package org.ehealth_connector.cda.ch.lab.lrep;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.CdaChV2StructuredBody;
+import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.common.Address;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Organization;
+import org.ehealth_connector.common.Patient;
+import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.openhealthtools.mdht.uml.cda.Author;
+import org.openhealthtools.mdht.uml.cda.Custodian;
+import org.openhealthtools.mdht.uml.cda.InformationRecipient;
+import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 
 /**
  * @formatter:off
@@ -36,19 +49,31 @@ public class CdaChLrepV1GeneralReport extends
 		super(ChFactory.eINSTANCE.createCdaChLrepV1GeneralReport().init(), languageCode, styleSheet,
 				css);
 		super.initCda();
+
+		Code code = new Code(CodeSystems.LOINC.getCodeSystemId(), "11502-2",
+				CodeSystems.LOINC.getCodeSystemName(), "LABORATORY REPORT.TOTAL");
+		code.addTranslation(new Code(CodeSystems.SNOMEDCT.getCodeSystemId(), "4241000179101",
+				CodeSystems.SNOMEDCT.getCodeSystemName(), "Laboratory report"));
+		getDoc().setCode(code.getCE());
+
 		switch (this.getLanguageCode()) {
 		case GERMAN:
-			this.setTitle("TODO title de");
+			this.setTitle("Laborbefund ");
 			break;
 		case FRENCH:
-			setTitle("TODO title fr");
+			setTitle("Rapport de laboratoire");
 			break;
 		case ITALIAN:
-			setTitle("TODO title it");
+			setTitle("Referto di laboratorio");
 			break;
 		case ENGLISH:
-			setTitle("TODO title en");
+			setTitle("Laboratory report");
 		}
+
+		// Make sure the document contains all necessary templateIds
+		CdaUtil.addTemplateIdOnce(getDoc(), new Identificator("2.16.756.5.30.1.1.1.1.3.9.1"));
+		CdaUtil.addTemplateIdOnce(getDoc(), new Identificator("1.3.6.1.4.1.19376.1.3.3"));
+
 	}
 
 	/**
@@ -59,4 +84,121 @@ public class CdaChLrepV1GeneralReport extends
 		super(doc);
 	}
 
+	/**
+	 * <div class="en">Adds an author</div> <div class="de">Fügt einen Autoren
+	 * hinzu</div>
+	 *
+	 * @param author
+	 *            the autor
+	 */
+	@Override
+	public Author addAuthor(org.ehealth_connector.common.Author author) {
+		Author mdht = super.addAuthor(author);
+		CdaUtil.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.2.59"));
+		return mdht;
+	}
+
+	/**
+	 * Convenience function to add a Laboratory Battery Organizer to a new
+	 * Section and create the necessary elements, if they do not exist. If the
+	 * elements exist, their contents will not be overwritten.
+	 *
+	 * These elements are: LaboratorySpecialtySection,
+	 * LaboratoryReportProcessingEntry, and SpecimenAct with the given
+	 * Laboratory Battery Organizer
+	 *
+	 * @param organizer
+	 *            the LaboratoryBatteryOrganizer holding at least one
+	 *            LaboratoryObservation
+	 * @param sectionCode
+	 *            the LOINC code for the LaboratorySpecialtySection
+	 * @return the laboratory specialty section
+	 */
+	public LaboratorySpecialtySection addLaboratoryBatteryOrganizerInNewSection(
+			LaboratoryBatteryOrganizer organizer, Code sectionCode, SpecimenCollectionEntry sce) {
+		LaboratorySpecialtySection laboratorySpecialtySection;
+		if (sectionCode != null) {
+			laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode,
+					getLanguageCode());
+		} else {
+			laboratorySpecialtySection = new LaboratorySpecialtySection();
+		}
+		laboratorySpecialtySection.addLaboratoryBatteryOrganizer(sectionCode, organizer,
+				getLanguageCode());
+		laboratorySpecialtySection.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
+				.setSpecimenCollectionEntry(sce);
+
+		laboratorySpecialtySection.setText(generateNarrativeTextLaboratoryObservations(
+				laboratorySpecialtySection, "lss", CodeSystems.SwissAL.getCodeSystemId()));
+
+		addLaboratorySpecialtySection(laboratorySpecialtySection);
+
+		return laboratorySpecialtySection;
+	}
+
+	/**
+	 * Adds a LaboratorySpecialtySection.
+	 *
+	 * @param laboratorySpecialtySection
+	 *            the section
+	 */
+	public void addLaboratorySpecialtySection(
+			org.ehealth_connector.cda.ch.lab.lrep.LaboratorySpecialtySection laboratorySpecialtySection) {
+		getMdht().addSection(laboratorySpecialtySection.copy());
+	}
+
+	@Override
+	public InformationRecipient addRecipient(Organization recipient) {
+		InformationRecipient mdht = super.addRecipient(recipient);
+		CdaUtil.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.2.57"));
+		return mdht;
+	}
+
+	/**
+	 * <div class="en">Sets an organization as the custodian of the
+	 * document</div> <div class="de">Weist dem CDA Dokument die verwaltende
+	 * Organisation zu</div>
+	 *
+	 * @param organization
+	 *            <div class="en">custodian organization</div>
+	 *            <div class="de">verwaltende Organisation</div>
+	 */
+	@Override
+	public Custodian setCustodian(Organization organization) {
+		Custodian mdht = super.setCustodian(organization);
+		CdaUtil.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.2.60"));
+		return mdht;
+	}
+
+	/**
+	 * <div class="en">Adds a patient</div> <div class="de">Weist dem CDA
+	 * Dokument einen Patienten zu</div>
+	 *
+	 * @param patient
+	 *            Patient
+	 */
+	@Override
+	public RecordTarget setPatient(Patient patient) {
+		RecordTarget mdht = super.setPatient(patient);
+		CdaUtil.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.2.58"));
+		CdaUtil.addTemplateIdOnce(mdht, new Identificator("1.3.6.1.4.1.19376.1.3.3.1.4"));
+		return mdht;
+	}
+
+	@Override
+	public InformationRecipient setPrimaryRecipient(Organization recipient) {
+		InformationRecipient mdht = super.setPrimaryRecipient(recipient);
+
+		for (Address item : recipient.getAddresses()) {
+			mdht.getIntendedRecipient().getAddrs().add(item.copyMdhtAdress());
+		}
+
+		for (TEL item : recipient.getMdhtTelecoms()) {
+			mdht.getIntendedRecipient().getTelecoms().add(EcoreUtil.copy(item));
+		}
+
+		CdaUtil.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.2.57"));
+		CdaUtil.addTemplateIdOnce(mdht, new Identificator("1.3.6.1.4.1.19376.1.3.3.1.4"));
+		return mdht;
+	}
 }

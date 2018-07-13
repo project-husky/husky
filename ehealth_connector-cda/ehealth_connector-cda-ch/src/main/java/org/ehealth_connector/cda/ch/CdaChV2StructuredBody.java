@@ -25,6 +25,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.AbstractCda;
 import org.ehealth_connector.cda.DataEnterer;
 import org.ehealth_connector.cda.ObservationMediaEntry;
+import org.ehealth_connector.cda.ch.textbuilder.ObservationChTextBuilder;
+import org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
@@ -38,6 +40,7 @@ import org.openhealthtools.mdht.uml.cda.Authenticator;
 import org.openhealthtools.mdht.uml.cda.Author;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
+import org.openhealthtools.mdht.uml.cda.Custodian;
 import org.openhealthtools.mdht.uml.cda.InformationRecipient;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.cda.Section;
@@ -91,10 +94,11 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	 *            the autor
 	 */
 	@Override
-	public void addAuthor(org.ehealth_connector.common.Author author) {
+	public Author addAuthor(org.ehealth_connector.common.Author author) {
 		final Author docAuthor = author.copyMdhtAuthor();
 		CdaUtil.addTemplateIdOnce(docAuthor, new Identificator("2.16.756.5.30.1.1.10.9.23"));
 		getDoc().getAuthors().add(docAuthor);
+		return docAuthor;
 	}
 
 	public void addNarrativeTextSection(String title, String text) {
@@ -102,6 +106,29 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		s.setTitle(DatatypesFactory.eINSTANCE.createST(title));
 		s.createStrucDocText(text);
 		getDoc().addSection(s);
+	}
+
+	/**
+	 * <div class="en">Generates the human readable text of the laboratory
+	 * observations chapter</div> <div class="de">Liefert den menschenlesbaren
+	 * Text zu dem Kapitel Laborresultate zurück</div>.
+	 *
+	 * @param laboratorySpecialtySection
+	 *            the laboratory specialty section
+	 * @param contentIdPrefix
+	 *            the content id prefix
+	 * @param posCodeSystemOid
+	 *            the oid of the code system to be used as position (e.g.
+	 *            2.16.756.5.30.1.129.1.3 for the Swiss Analysis List)
+	 * @return the laboratory observations text
+	 */
+	public String generateNarrativeTextLaboratoryObservations(
+			AbstractLaboratorySpecialtySection laboratorySpecialtySection, String contentIdPrefix,
+			String posCodeSystemOid) {
+		final ObservationChTextBuilder b = new ObservationChTextBuilder(this.getMdht(),
+				laboratorySpecialtySection, contentIdPrefix,
+				LanguageCode.getEnum(getMdht().getLanguageCode().getCode()), posCodeSystemOid);
+		return b.toString();
 	}
 
 	@Override
@@ -156,10 +183,10 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	 *            <div class="de">verwaltende Organisation</div>
 	 */
 	@Override
-	public void setCustodian(Organization organization) {
-		super.setCustodian(organization);
-		CdaUtil.addTemplateIdOnce(getCustodian(), new Identificator("2.16.756.5.30.1.1.10.2.3"));
-
+	public Custodian setCustodian(Organization organization) {
+		Custodian mdht = super.setCustodian(organization);
+		CdaUtil.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.2.3"));
+		return mdht;
 	}
 
 	/**
@@ -199,6 +226,20 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		enterer.setAssignedEntity(entity);
 		CdaUtil.addTemplateIdOnce(enterer, new Identificator("2.16.756.5.30.1.1.10.2.7"));
 		getDoc().setDataEnterer(enterer);
+	}
+
+	/**
+	 * Sets the id.
+	 *
+	 * @param id
+	 *            the new id
+	 */
+	@Override
+	public void setId(Identificator id) {
+		if (id != null) {
+			getDoc().setId(id.getIi());
+			getDoc().setSetId(id.getIi());
+		}
 	}
 
 	/**
@@ -274,18 +315,18 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	 *            Patient
 	 */
 	@Override
-	public void setPatient(Patient patient) {
+	public RecordTarget setPatient(Patient patient) {
 		RecordTarget mdhtPatient = patient.getMdhtRecordTarget();
 		CdaUtil.addTemplateIdOnce(mdhtPatient, new Identificator("2.16.756.5.30.1.1.10.2.1"));
 		getDoc().getRecordTargets().add(mdhtPatient);
+		return mdhtPatient;
 	}
 
 	@Override
-	public void setPrimaryRecipient(Organization recipient) {
+	public InformationRecipient setPrimaryRecipient(Organization recipient) {
 		super.setPrimaryRecipient(recipient);
 		InformationRecipient mdhtRecipient = getMdhtPrimaryRecipient();
 		CdaUtil.addTemplateIdOnce(mdhtRecipient, new Identificator("2.16.756.5.30.1.1.10.2.4"));
-
+		return mdhtRecipient;
 	}
-
 }
