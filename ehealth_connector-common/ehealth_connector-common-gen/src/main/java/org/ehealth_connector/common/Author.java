@@ -196,7 +196,7 @@ public class Author {
 	public Author(Organization organizationAsAuthor) {
 		mAuthor = CDAFactory.eINSTANCE.createAuthor();
 		if (organizationAsAuthor.getMdhtOrganization() != null) {
-			mAsAuthor = Util.createAuthorFromOrganization(organizationAsAuthor);
+			mAsAuthor = Util.createAssignedAuthorFromOrganization(organizationAsAuthor);
 			mAuthor.setAssignedAuthor(mAsAuthor);
 		}
 		setTime(null);

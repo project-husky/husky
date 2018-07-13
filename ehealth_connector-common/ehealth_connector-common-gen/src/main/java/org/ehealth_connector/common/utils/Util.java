@@ -196,6 +196,21 @@ public class Util {
 		return asAut;
 	}
 
+	public static AssignedAuthor createAssignedAuthorFromOrganization(Organization organization) {
+		final org.openhealthtools.mdht.uml.cda.Organization o = organization.getMdhtOrganization();
+		final AssignedAuthor a = CDAFactory.eINSTANCE.createAssignedAuthor();
+		if (!o.getAddrs().isEmpty()) {
+			a.getAddrs().addAll(EcoreUtil.copyAll(o.getAddrs()));
+		}
+		if (!o.getTelecoms().isEmpty()) {
+			a.getTelecoms().addAll(EcoreUtil.copyAll(o.getTelecoms()));
+		}
+		if (!o.getIds().isEmpty()) {
+			a.getIds().addAll(EcoreUtil.copyAll(o.getIds()));
+		}
+		return a;
+	}
+
 	/**
 	 * Creates an MDHT assignedEntity object from an MDHT AssignedAuthor object
 	 *
@@ -229,6 +244,21 @@ public class Util {
 		return asEnt;
 	}
 
+	public static AssignedEntity createAssignedEntityFromOrganization(Organization organization) {
+		final org.openhealthtools.mdht.uml.cda.Organization o = organization.getMdhtOrganization();
+		final AssignedEntity a = CDAFactory.eINSTANCE.createAssignedEntity();
+		if (!o.getAddrs().isEmpty()) {
+			a.getAddrs().addAll(EcoreUtil.copyAll(o.getAddrs()));
+		}
+		if (!o.getTelecoms().isEmpty()) {
+			a.getTelecoms().addAll(EcoreUtil.copyAll(o.getTelecoms()));
+		}
+		if (!o.getIds().isEmpty()) {
+			a.getIds().addAll(EcoreUtil.copyAll(o.getIds()));
+		}
+		return a;
+	}
+
 	/**
 	 * Creates a new MDHT Author object from an MDHT LegalAuthenticator object.
 	 *
@@ -247,21 +277,6 @@ public class Util {
 		// Copy Time
 		a.setTime(EcoreUtil.copy(authenticator.getTime()));
 
-		return a;
-	}
-
-	public static AssignedAuthor createAuthorFromOrganization(Organization organization) {
-		final org.openhealthtools.mdht.uml.cda.Organization o = organization.getMdhtOrganization();
-		final AssignedAuthor a = CDAFactory.eINSTANCE.createAssignedAuthor();
-		if (!o.getAddrs().isEmpty()) {
-			a.getAddrs().addAll(EcoreUtil.copyAll(o.getAddrs()));
-		}
-		if (!o.getTelecoms().isEmpty()) {
-			a.getTelecoms().addAll(EcoreUtil.copyAll(o.getTelecoms()));
-		}
-		if (!o.getIds().isEmpty()) {
-			a.getIds().addAll(EcoreUtil.copyAll(o.getIds()));
-		}
 		return a;
 	}
 

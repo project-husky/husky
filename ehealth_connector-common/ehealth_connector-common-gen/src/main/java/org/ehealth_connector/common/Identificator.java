@@ -63,7 +63,7 @@ public class Identificator {
 	 *            <div class="de"> root</div>
 	 * @return <div class="en">the identificator</div>
 	 */
-	protected static Identificator getIdentificator(List<II> iiList, String root) {
+	public static Identificator getIdentificator(List<II> iiList, String root) {
 		for (final II i : iiList) {
 			if (i.getRoot().equals(root)) {
 				final Identificator id = new Identificator(i);

@@ -55,7 +55,6 @@ import org.openhealthtools.mdht.uml.cda.CDAPackage;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.Custodian;
 import org.openhealthtools.mdht.uml.cda.CustodianOrganization;
-import org.openhealthtools.mdht.uml.cda.DataEnterer;
 import org.openhealthtools.mdht.uml.cda.DocumentRoot;
 import org.openhealthtools.mdht.uml.cda.InFulfillmentOf;
 import org.openhealthtools.mdht.uml.cda.InfrastructureRootTypeId;
@@ -239,26 +238,6 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		// Add the stylesheet processing instructions to the document
 		FeatureMapUtil.addProcessingInstruction(docRoot.getMixed(), 0, "xml-stylesheet",
 				"type=\"text/css\" href=\"" + css + "\"");
-	}
-
-	/**
-	 * <div class="en">Adds a data enterer</div> <div class="de">Fügt dem CDA
-	 * Dokument einen Erfasser hinzu</div>
-	 *
-	 * @param dataEnterer
-	 *            <div class="en">a person, which delivered content for this
-	 *            document</div> <div class="de">Erfasser oder
-	 *            Sachbearbeiter/-in, welche(r) das Dokument erstellt oder
-	 *            Beiträge dazu geliefert hat.</div>
-	 */
-	public void addDataEnterer(Person dataEnterer) {
-		final DataEnterer enterer = CDAFactory.eINSTANCE.createDataEnterer();
-		final AssignedEntity entity = CDAFactory.eINSTANCE.createAssignedEntity();
-
-		enterer.setAssignedEntity(entity);
-		entity.setAssignedPerson(dataEnterer.copyMdhtPerson());
-
-		getDoc().getDataEnterer().setAssignedEntity(entity);
 	}
 
 	/**
@@ -771,6 +750,41 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 		mdhtCustodian.setAssignedCustodian(assCust);
 		getDoc().setCustodian(mdhtCustodian);
+	}
+
+	/**
+	 * <div class="en">Adds a data enterer</div> <div class="de">Fügt dem CDA
+	 * Dokument einen Erfasser hinzu</div>.
+	 *
+	 * @param dataEnterer
+	 *            <div class="en">a person, which delivered content for this
+	 *            document</div> <div class="de">Erfasser oder
+	 *            Sachbearbeiter/-in, welche(r) das Dokument erstellt oder
+	 *            Beiträge dazu geliefert hat.</div>
+	 */
+	public void setDataEnterer(DataEnterer dataEnterer) {
+		getDoc().setDataEnterer(dataEnterer.getMdht());
+	}
+
+	/**
+	 * <div class="en">Adds a data enterer</div> <div class="de">Fügt dem CDA
+	 * Dokument einen Erfasser hinzu</div>
+	 *
+	 * @param dataEnterer
+	 *            <div class="en">a person, which delivered content for this
+	 *            document</div> <div class="de">Erfasser oder
+	 *            Sachbearbeiter/-in, welche(r) das Dokument erstellt oder
+	 *            Beiträge dazu geliefert hat.</div>
+	 */
+	public void setDataEnterer(Person dataEnterer) {
+		final org.openhealthtools.mdht.uml.cda.DataEnterer enterer = CDAFactory.eINSTANCE
+				.createDataEnterer();
+		final AssignedEntity entity = CDAFactory.eINSTANCE.createAssignedEntity();
+
+		entity.setAssignedPerson(dataEnterer.copyMdhtPerson());
+		enterer.setAssignedEntity(entity);
+
+		getDoc().setDataEnterer(enterer);
 	}
 
 	/**

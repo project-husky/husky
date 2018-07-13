@@ -22,12 +22,15 @@ import java.io.IOException;
 import javax.xml.bind.DatatypeConverter;
 
 import org.ehealth_connector.cda.AbstractCda;
+import org.ehealth_connector.cda.DataEnterer;
 import org.ehealth_connector.cda.ObservationMediaEntry;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Patient;
+import org.ehealth_connector.common.Person;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.openhealthtools.mdht.uml.cda.AssignedEntity;
 import org.openhealthtools.mdht.uml.cda.Author;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
@@ -74,51 +77,6 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		getDoc().getAuthors().add(docAuthor);
 	}
 
-	/**
-	 * <div class="en">Adds a comment</div> <div class="de">Fügt einen Kommentar
-	 * hinzu</div> <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @param comment
-	 *            the comment
-	 */
-	public void addComment(String comment) {
-
-		// // find or create (and add) the Section
-		// Section rs = findRemarksSection();
-		// if (rs == null) {
-		// rs = ChFactory.eINSTANCE.createRemarksSection().init();
-		// for (final II ii : rs.getTemplateIds()) {
-		// if ("2.16.756.5.30.1.1.1.1.1".equals(ii.getRoot())) {
-		// ii.setExtension("CDA-CH.Body.CodedRem");
-		// }
-		// }
-		// rs.setTitle(Util.st(SectionsVacd.REMARKS.getSectionTitle(getDoc().getLanguageCode())));
-		// getDoc().addSection(rs);
-		// }
-		//
-		// // create add the MDHT Object to the section
-		// final Comment mComment = IHEFactory.eINSTANCE.createComment().init();
-		// rs.addAct(mComment);
-		//
-		// // update the MDHT Object content references to CDA level 1 text
-		// SimpleTextBuilder sb = null;
-		// if (rs.getText() != null) {
-		// final String oldSectionText =
-		// Util.extractStringFromNonQuotedStrucDocText(rs.getText());
-		// sb = new SimpleTextBuilder(SectionsVacd.REMARKS, comment,
-		// oldSectionText);
-		// } else {
-		// sb = new SimpleTextBuilder(SectionsVacd.REMARKS, comment);
-		// }
-		//
-		// final ED reference = Util.createReference(sb.getNewTextContentIDNr(),
-		// SectionsVacd.REMARKS.getContentIdPrefix());
-		//
-		// // create the CDA level 1 text
-		// rs.createStrucDocText(sb.toString());
-		// mComment.setText(reference);
-	}
-
 	@Override
 	public void initCda() {
 
@@ -159,6 +117,45 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 			confidentialityCode = code.getCE();
 		}
 		getDoc().setConfidentialityCode(confidentialityCode);
+	}
+
+	/**
+	 * <div class="en">Adds a data enterer</div> <div class="de">Fügt dem CDA
+	 * Dokument einen Erfasser hinzu</div>.
+	 *
+	 * @param dataEnterer
+	 *            <div class="en">a person, which delivered content for this
+	 *            document</div> <div class="de">Erfasser oder
+	 *            Sachbearbeiter/-in, welche(r) das Dokument erstellt oder
+	 *            Beiträge dazu geliefert hat.</div>
+	 */
+	@Override
+	public void setDataEnterer(DataEnterer dataEnterer) {
+		CdaUtil.addTemplateIdOnce(dataEnterer.getMdht(),
+				new Identificator("2.16.756.5.30.1.1.10.2.7"));
+		getDoc().setDataEnterer(dataEnterer.getMdht());
+	}
+
+	/**
+	 * <div class="en">Adds a data enterer</div> <div class="de">Fügt dem CDA
+	 * Dokument einen Erfasser hinzu</div>
+	 *
+	 * @param dataEnterer
+	 *            <div class="en">a person, which delivered content for this
+	 *            document</div> <div class="de">Erfasser oder
+	 *            Sachbearbeiter/-in, welche(r) das Dokument erstellt oder
+	 *            Beiträge dazu geliefert hat.</div>
+	 */
+	@Override
+	public void setDataEnterer(Person dataEnterer) {
+		final org.openhealthtools.mdht.uml.cda.DataEnterer enterer = CDAFactory.eINSTANCE
+				.createDataEnterer();
+		final AssignedEntity entity = CDAFactory.eINSTANCE.createAssignedEntity();
+
+		entity.setAssignedPerson(dataEnterer.copyMdhtPerson());
+		enterer.setAssignedEntity(entity);
+		CdaUtil.addTemplateIdOnce(enterer, new Identificator("2.16.756.5.30.1.1.10.2.7"));
+		getDoc().setDataEnterer(enterer);
 	}
 
 	/**
@@ -221,5 +218,4 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		CdaUtil.addTemplateIdOnce(mdhtPatient, new Identificator("2.16.756.5.30.1.1.10.2.1"));
 		getDoc().getRecordTargets().add(mdhtPatient);
 	}
-
 }
