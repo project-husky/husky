@@ -329,6 +329,23 @@ public class Patient extends Person {
 	}
 
 	/**
+	 * <div class="en">Gets the complete name.</div> <div class="de">Liefert den
+	 * ganzen Namen</div> <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @return <div class="en">the complete name</div>
+	 */
+	public String getCompleteName() {
+		String retVal = "";
+		if (mPatient.getNames() != null) {
+			if (mPatient.getNames().size() > 0) {
+				final Name name = new Name(mPatient.getNames().get(0));
+				retVal = name.getCompleteName();
+			}
+		}
+		return retVal;
+	}
+
+	/**
 	 * Gets the deceased Indicator
 	 *
 	 * @return the deceased ind
@@ -652,4 +669,5 @@ public class Patient extends Person {
 	public void setTelecoms(Telecoms telecoms) {
 		mPatientRole.getTelecoms().addAll(telecoms.getMdhtTelecoms());
 	}
+
 }

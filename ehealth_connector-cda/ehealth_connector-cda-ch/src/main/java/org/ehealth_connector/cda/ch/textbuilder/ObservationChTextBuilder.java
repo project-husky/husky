@@ -789,20 +789,11 @@ public class ObservationChTextBuilder extends TextBuilder {
 		if (high == null)
 			high = "";
 		if (!"".equals(value))
-			if (value.length() == 17)
-				value = formatDate(DateUtil.parseDateyyyyMMddHHmmZZZZ(value));
-			else
-				value = formatDate(DateUtil.parseDateyyyyMMddHHmmssZZZZ(value));
+			value = parseDate(value);
 		if (!"".equals(low))
-			if (low.length() == 17)
-				low = formatDate(DateUtil.parseDateyyyyMMddHHmmZZZZ(low));
-			else
-				low = formatDate(DateUtil.parseDateyyyyMMddHHmmssZZZZ(low));
+			value = parseDate(low);
 		if (!"".equals(high))
-			if (high.length() == 17)
-				high = formatDate(DateUtil.parseDateyyyyMMddHHmmZZZZ(high));
-			else
-				high = formatDate(DateUtil.parseDateyyyyMMddHHmmssZZZZ(high));
+			value = parseDate(high);
 		if ("".equals(low) && "".equals(high))
 			retVal = value;
 		else
@@ -1129,6 +1120,19 @@ public class ObservationChTextBuilder extends TextBuilder {
 		String retVal = "";
 		if (observation.getTargetSite() != null)
 			retVal = observation.getTargetSite().getDisplayName(lang);
+		return retVal;
+	}
+
+	private String parseDate(String value) {
+		String retVal = "";
+		if (value.length() > 17)
+			retVal = formatDate(DateUtil.parseDateyyyyMMddHHmmssZZZZ(value));
+		else if (value.length() == 17)
+			retVal = formatDate(DateUtil.parseDateyyyyMMddHHmmZZZZ(value));
+		else if (value.length() == 8)
+			retVal = formatDate(DateUtil.parseDateyyyyMMdd(value));
+		else
+			retVal = "Not yet implemented";
 		return retVal;
 	}
 

@@ -23,6 +23,7 @@ import java.util.Map;
 
 import javax.annotation.Generated;
 
+import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.ch.enums.ValueSetEnumInterface;
 
@@ -157,8 +158,23 @@ public enum TemplateNameToReplace implements ValueSetEnumInterface {
 	 * @return <div class="en">the code system identifier</div>
 	 */
 	@Override
-	public String getCodeSystemValue() {
+	public String getCodeSystemId() {
 		return this.codeSystem;
+	}
+
+	/**
+	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
+	 * den Code System Namen.</div>
+	 *
+	 * @return <div class="en">the code system identifier</div>
+	 */
+	@Override
+	public String getCodeSystemName() {
+		String retVal = "";
+		CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
+		if (cs != null)
+			retVal = cs.getCodeSystemName();
+		return retVal;
 	}
 
 	/**

@@ -41,8 +41,9 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
 	 */
 	default CE getCE() {
 		final CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setCodeSystem(getCodeSystemValue());
+		ce.setCodeSystem(getCodeSystemId());
 		ce.setCode(getCodeValue());
+		ce.setCodeSystemName(getCodeSystemName());
 		ce.setDisplayName(getDisplayName());
 		return ce;
 	}
@@ -54,7 +55,7 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
 	 * @return <div class="en">the code</div>
 	 */
 	default Code getCode() {
-		return new Code(getCodeSystemValue(), getCodeValue(), getDisplayName());
+		return new Code(getCodeSystemId(), getCodeValue(), getDisplayName());
 	}
 
 	/**
@@ -66,7 +67,7 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
 	@Override
 	default CodedMetadataType getCodedMetadataType() {
 		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
-		cmt.setSchemeName(getCodeSystemValue());
+		cmt.setSchemeName(getCodeSystemId());
 		cmt.setCode(getCodeValue());
 		cmt.setDisplayName(XdsMetadataUtil.createInternationalString(getDisplayName(), "de-ch"));
 		return cmt;
@@ -78,7 +79,15 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
 	 *
 	 * @return <div class="en">the code system id</div>
 	 */
-	String getCodeSystemValue();
+	String getCodeSystemId();
+
+	/**
+	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
+	 * den code system Namen.</div>
+	 *
+	 * @return <div class="en">the code system id</div>
+	 */
+	String getCodeSystemName();
 
 	/**
 	 * <div class="en">Gets the actual Code as string</div>

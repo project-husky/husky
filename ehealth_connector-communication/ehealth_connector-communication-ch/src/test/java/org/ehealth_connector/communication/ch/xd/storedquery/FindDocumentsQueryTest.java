@@ -71,7 +71,7 @@ public class FindDocumentsQueryTest extends XdsChTestUtils {
 
 		assertTrue(sqpl.get("$XDSDocumentEntryClassCode").contains(classCodes[0].getCodeValue()));
 		assertTrue(sqpl.get("$XDSDocumentEntryPracticeSettingCode")
-				.contains(practiceSettingCodes[0].getCodeSystemValue()));
+				.contains(practiceSettingCodes[0].getCodeSystemId()));
 		assertTrue(sqpl.get("$XDSDocumentEntryHealthcareFacilityTypeCode")
 				.contains(healthCareFacilityCodes[0].getCodeValue()));
 		assertTrue(sqpl.get("$XDSDocumentEntryConfidentialityCode")

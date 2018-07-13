@@ -90,7 +90,7 @@ public class AuthorCh extends org.ehealth_connector.common.Author {
 	 * @return code the function code
 	 */
 	public AuthorRole getRoleFunctionEnum() {
-		return AuthorRole.getEnum(getAuthor().getFunctionCode().getCode());
+		return AuthorRole.getEnum(getAuthorMdht().getFunctionCode().getCode());
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class AuthorCh extends org.ehealth_connector.common.Author {
 	 *            the function code
 	 */
 	public void setRoleFunction(AuthorRole code) {
-		getAuthor().setFunctionCode(code.getCode().getCE());
+		getAuthorMdht().setFunctionCode(code.getCode().getCE());
 	}
 
 	/**

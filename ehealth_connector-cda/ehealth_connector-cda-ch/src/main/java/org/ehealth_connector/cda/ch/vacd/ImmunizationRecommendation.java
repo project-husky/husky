@@ -23,6 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.ExternalDocumentEntry;
 import org.ehealth_connector.cda.MdhtFacade;
@@ -460,7 +461,7 @@ public class ImmunizationRecommendation
 	public void setAuthor(org.ehealth_connector.common.Author author) {
 		getMdht().getAuthors().clear();
 		if (author != null)
-			getMdht().getAuthors().add(author.getAuthorMdht());
+			getMdht().getAuthors().add(EcoreUtil.copy(author.getAuthorMdht()));
 
 	}
 

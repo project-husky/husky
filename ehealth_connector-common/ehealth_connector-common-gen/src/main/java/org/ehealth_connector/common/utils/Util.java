@@ -283,7 +283,28 @@ public class Util {
 	 *            <div class="de">the authenticator</div>
 	 * @return the Author
 	 */
-	public static Author createAuthorFromLagalAuthenticator(
+	public static Author createAuthorFromAuthenticator(
+			org.openhealthtools.mdht.uml.cda.Authenticator authenticator) {
+		final org.openhealthtools.mdht.uml.cda.Author a = CDAFactory.eINSTANCE.createAuthor();
+
+		a.setAssignedAuthor(
+				createAssignedAuthorFromAssignedEntity(authenticator.getAssignedEntity()));
+
+		// Copy Time
+		a.setTime(EcoreUtil.copy(authenticator.getTime()));
+
+		return a;
+	}
+
+	/**
+	 * Creates a new MDHT Author object from an MDHT LegalAuthenticator object.
+	 *
+	 * @param authenticator
+	 *            <br>
+	 *            <div class="de">the authenticator</div>
+	 * @return the Author
+	 */
+	public static Author createAuthorFromLegalAuthenticator(
 			org.openhealthtools.mdht.uml.cda.LegalAuthenticator authenticator) {
 		final org.openhealthtools.mdht.uml.cda.Author a = CDAFactory.eINSTANCE.createAuthor();
 

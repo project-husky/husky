@@ -95,6 +95,23 @@ public class Person {
 	}
 
 	/**
+	 * <div class="en">Gets the complete name.</div> <div class="de">Liefert den
+	 * ganzen Namen</div> <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @return <div class="en">the complete name</div>
+	 */
+	public String getCompleteName() {
+		String retVal = "";
+		if (mPerson.getNames() != null) {
+			if (mPerson.getNames().size() > 0) {
+				final Name name = new Name(mPerson.getNames().get(0));
+				retVal = name.getCompleteName();
+			}
+		}
+		return retVal;
+	}
+
+	/**
 	 * <div class="en">Gets the mdht person.</div> <div class="de">Liefert mdht
 	 * person.</div> <div class="fr"></div> <div class="it"></div>
 	 *
@@ -130,4 +147,5 @@ public class Person {
 		}
 		return nl;
 	}
+
 }

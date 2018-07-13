@@ -24,8 +24,10 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.NameUse;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.cda.CustodianOrganization;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.openhealthtools.mdht.uml.hl7.datatypes.EN;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
@@ -44,6 +46,22 @@ public class Organization {
 
 	public Organization() {
 		mOrganization = CDAFactory.eINSTANCE.createOrganization();
+	}
+
+	public Organization(CustodianOrganization representedCustodianOrganization) {
+		mOrganization = CDAFactory.eINSTANCE.createOrganization();
+		for (II item : representedCustodianOrganization.getIds()) {
+			mOrganization.getIds().add(EcoreUtil.copy(item));
+		}
+		for (EN item : representedCustodianOrganization.getNames()) {
+			mOrganization.getNames().add(EcoreUtil.copy((ON) item));
+		}
+		for (AD item : representedCustodianOrganization.getAddrs()) {
+			mOrganization.getAddrs().add(EcoreUtil.copy(item));
+		}
+		for (TEL item : representedCustodianOrganization.getTelecoms()) {
+			mOrganization.getTelecoms().add(EcoreUtil.copy(item));
+		}
 	}
 
 	/**
@@ -216,6 +234,17 @@ public class Organization {
 			al.add(address);
 		}
 		return al;
+	}
+
+	public String getCompleteName() {
+		String retVal = "";
+		if (mOrganization.getNames() != null) {
+			if (mOrganization.getNames().size() > 0) {
+				final Name name = new Name(mOrganization.getNames().get(0));
+				retVal = name.getCompleteName();
+			}
+		}
+		return retVal;
 	}
 
 	/**

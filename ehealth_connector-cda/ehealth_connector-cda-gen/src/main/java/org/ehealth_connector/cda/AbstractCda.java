@@ -43,6 +43,7 @@ import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.ParticipantType;
 import org.ehealth_connector.common.enums.Signature;
+import org.ehealth_connector.common.enums.StatusCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.AssignedCustodian;
@@ -50,9 +51,11 @@ import org.openhealthtools.mdht.uml.cda.AssignedEntity;
 import org.openhealthtools.mdht.uml.cda.AssociatedEntity;
 import org.openhealthtools.mdht.uml.cda.Authenticator;
 import org.openhealthtools.mdht.uml.cda.Author;
+import org.openhealthtools.mdht.uml.cda.Authorization;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.CDAPackage;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
+import org.openhealthtools.mdht.uml.cda.Consent;
 import org.openhealthtools.mdht.uml.cda.Custodian;
 import org.openhealthtools.mdht.uml.cda.CustodianOrganization;
 import org.openhealthtools.mdht.uml.cda.DocumentRoot;
@@ -232,6 +235,18 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		getDoc().getAuthors().add(docAuthor);
 	}
 
+	public void addAuthorizationConsent(String narrativeConsent) {
+		Authorization authorization = CDAFactory.eINSTANCE.createAuthorization();
+		Consent consent = CDAFactory.eINSTANCE.createConsent();
+		CE code = DatatypesFactory.eINSTANCE.createCE(null, "2.16.756.5.30.2.1.1.2");
+		code.setNullFlavor(NullFlavor.OTH);
+		code.setOriginalText(DatatypesFactory.eINSTANCE.createED(narrativeConsent));
+		consent.setCode(code);
+		consent.setStatusCode(StatusCode.COMPLETED.getCS());
+		authorization.setConsent(consent);
+		getDoc().getAuthorizations().add(authorization);
+	}
+
 	/**
 	 * <div class="en">Adds a cascading stylesheet (CSS) to the XML processing
 	 * instructions</div> <div class="de">Fügt ein Cascading Stylesheet (CSS) zu
@@ -274,17 +289,6 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		addParticipant(versicherung, ParticipantType.Insurance);
 	}
 
-	public void addRecipient(Organization organization) {
-
-		InformationRecipient recipient = CDAFactory.eINSTANCE.createInformationRecipient();
-		recipient.setTypeCode(x_InformationRecipient.TRC);
-		IntendedRecipient ir = CDAFactory.eINSTANCE.createIntendedRecipient();
-		ir.setReceivedOrganization(organization.getMdhtOrganization());
-		recipient.setIntendedRecipient(ir);
-		getDoc().getInformationRecipients().add(recipient);
-
-	}
-
 	/**
 	 * <div class="en">Adds a participant</div> <div class="de">Fügt dem CDA
 	 * Dokument einen Teilnehmer hinzu</div>
@@ -308,6 +312,17 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		final org.openhealthtools.mdht.uml.cda.Organization docOrganization = organization
 				.getMdhtOrganization();
 		assEnt.setScopingOrganization(docOrganization);
+	}
+
+	public void addRecipient(Organization organization) {
+
+		InformationRecipient recipient = CDAFactory.eINSTANCE.createInformationRecipient();
+		recipient.setTypeCode(x_InformationRecipient.TRC);
+		IntendedRecipient ir = CDAFactory.eINSTANCE.createIntendedRecipient();
+		ir.setReceivedOrganization(organization.getMdhtOrganization());
+		recipient.setIntendedRecipient(ir);
+		getDoc().getInformationRecipients().add(recipient);
+
 	}
 
 	/**
@@ -362,6 +377,17 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 			persons.add(person);
 		}
 		return persons;
+	}
+
+	public List<org.ehealth_connector.common.Author> getAuthenticatorsAsAuthor() {
+		List<org.ehealth_connector.common.Author> retVal = new ArrayList<org.ehealth_connector.common.Author>();
+
+		for (final Authenticator authenticator : getDoc().getAuthenticators()) {
+			org.ehealth_connector.common.Author author = new org.ehealth_connector.common.Author(
+					Util.createAuthorFromAuthenticator(authenticator));
+			retVal.add(author);
+		}
+		return retVal;
 	}
 
 	/**
@@ -438,13 +464,14 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		return null;
 	}
 
-	/**
-	 * <div class="en">Gets all authors of the document</div>
-	 * <div class="de">Gibt alle Autoren des Dokuments zurück</div>
-	 *
-	 * @return das eHealthConnector Author Objekt
-	 */
-	public org.ehealth_connector.common.Person getDataEnterer() {
+	public DataEnterer getDataEnterer() {
+		if (getDoc().getDataEnterer() != null) {
+			return new DataEnterer(getDoc().getDataEnterer());
+		}
+		return null;
+	}
+
+	public org.ehealth_connector.common.Person getDataEntererPerson() {
 		if (getDoc().getDataEnterer() != null) {
 			if (getDoc().getDataEnterer().getAssignedEntity() != null) {
 				if (getDoc().getDataEnterer().getAssignedEntity().getAssignedPerson() != null) {
@@ -565,7 +592,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 		if (la != null) {
 			return new org.ehealth_connector.common.Author(
-					Util.createAuthorFromLagalAuthenticator(la));
+					Util.createAuthorFromLegalAuthenticator(la));
 		}
 		return null;
 	}

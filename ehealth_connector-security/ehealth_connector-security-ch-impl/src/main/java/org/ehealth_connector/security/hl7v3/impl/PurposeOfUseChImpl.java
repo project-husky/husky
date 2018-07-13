@@ -37,7 +37,7 @@ public abstract class PurposeOfUseChImpl {
 	public static PurposeOfUse EMER() {
 		org.ehealth_connector.security.ch.epr.enums.PurposeOfUse code = org.ehealth_connector.security.ch.epr.enums.PurposeOfUse.EMERGENCY_ACCESS;
 		return new PurposeOfUseBuilder().code(code.getCodeValue())
-				.codeSystem(code.getCodeSystemValue()).codeSystemName(code.getValueSetName())
+				.codeSystem(code.getCodeSystemId()).codeSystemName(code.getValueSetName())
 				.displayName(code.getDisplayName()).buildObject();
 	}
 
@@ -49,7 +49,7 @@ public abstract class PurposeOfUseChImpl {
 	public static PurposeOfUse NORM() {
 		org.ehealth_connector.security.ch.epr.enums.PurposeOfUse code = org.ehealth_connector.security.ch.epr.enums.PurposeOfUse.NORMAL_ACCESS;
 		return new PurposeOfUseBuilder().code(code.getCodeValue())
-				.codeSystem(code.getCodeSystemValue()).codeSystemName(code.getValueSetName())
+				.codeSystem(code.getCodeSystemId()).codeSystemName(code.getValueSetName())
 				.displayName(code.getDisplayName()).buildObject();
 	}
 

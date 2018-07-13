@@ -368,15 +368,6 @@ public class Author {
 	}
 
 	/**
-	 * Method to get
-	 *
-	 * @return the author
-	 */
-	public org.openhealthtools.mdht.uml.cda.Author getAuthor() {
-		return mAuthor;
-	}
-
-	/**
 	 * <div class="en">Gets the author mdht.</div> <div class="de">Liefert
 	 * author mdht.</div> <div class="fr"></div> <div class="it"></div>
 	 *

@@ -97,6 +97,13 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		getDoc().getAuthors().add(docAuthor);
 	}
 
+	public void addNarrativeTextSection(String title, String text) {
+		Section s = CDAFactory.eINSTANCE.createSection();
+		s.setTitle(DatatypesFactory.eINSTANCE.createST(title));
+		s.createStrucDocText(text);
+		getDoc().addSection(s);
+	}
+
 	@Override
 	public void initCda() {
 

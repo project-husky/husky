@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.junit.Test;
@@ -52,8 +53,17 @@ public class ValueSetEnumInterfaceTest {
 		}
 
 		@Override
-		public String getCodeSystemValue() {
+		public String getCodeSystemId() {
 			return codeSystem;
+		}
+
+		@Override
+		public String getCodeSystemName() {
+			String retVal = "";
+			CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
+			if (cs != null)
+				retVal = cs.getCodeSystemName();
+			return retVal;
 		}
 
 		@Override
@@ -87,7 +97,7 @@ public class ValueSetEnumInterfaceTest {
 
 		for (ValueSetEnumInterface enumEntry : enumEntries) {
 
-			assertNotNull(enumEntry.getCodeSystemValue());
+			assertNotNull(enumEntry.getCodeSystemId());
 			assertNotNull(enumEntry.getCodeValue());
 			assertNotNull(enumEntry.getDisplayName());
 			assertNotNull(enumEntry.getDisplayName(LanguageCode.ENGLISH));
@@ -97,18 +107,18 @@ public class ValueSetEnumInterfaceTest {
 
 			final Code code = enumEntry.getCode();
 			assertEquals(enumEntry.getCodeValue(), code.getCode());
-			assertEquals(enumEntry.getCodeSystemValue(), code.getCodeSystem());
+			assertEquals(enumEntry.getCodeSystemId(), code.getCodeSystem());
 			assertEquals(enumEntry.getDisplayName(), code.getDisplayName());
 
 			final CodedMetadataType cmt = enumEntry.getCodedMetadataType();
 			assertEquals(enumEntry.getCodeValue(), cmt.getCode());
-			assertEquals(enumEntry.getCodeSystemValue(), cmt.getSchemeName());
+			assertEquals(enumEntry.getCodeSystemId(), cmt.getSchemeName());
 			assertEquals(enumEntry.getDisplayName(),
 					XdsMetadataUtil.convertInternationalStringType(cmt.getDisplayName()));
 
 			final CE ce = enumEntry.getCE();
 			assertEquals(enumEntry.getCodeValue(), ce.getCode());
-			assertEquals(enumEntry.getCodeSystemValue(), ce.getCodeSystem());
+			assertEquals(enumEntry.getCodeSystemId(), ce.getCodeSystem());
 			assertEquals(enumEntry.getDisplayName(), ce.getDisplayName());
 
 		}

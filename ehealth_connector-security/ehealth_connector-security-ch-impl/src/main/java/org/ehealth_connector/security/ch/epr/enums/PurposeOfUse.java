@@ -19,11 +19,10 @@ package org.ehealth_connector.security.ch.epr.enums;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.annotation.Generated;
-
-import org.ehealth_connector.common.ch.enums.ValueSetEnumInterface;
+import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.ch.enums.ValueSetEnumInterface;
 
 /**
  *<!-- @formatter:off -->
@@ -45,8 +44,7 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
 	 * <div class="it">Emergency Access</div>
 	 *<!-- @formatter:on -->
 	 */
-	EMERGENCY_ACCESS("EMER", "2.16.756.5.30.1.127.3.10.5", "Emergency Access", "Emergency Access",
-			"Emergency Access", "Emergency Access", "Emergency Access"),
+	EMERGENCY_ACCESS("EMER", "2.16.756.5.30.1.127.3.10.5", "Emergency Access", "Emergency Access", "Emergency Access", "Emergency Access", "Emergency Access"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Normal Access</div>
@@ -55,8 +53,7 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
 	 * <div class="it">Normal Access</div>
 	 *<!-- @formatter:on -->
 	 */
-	NORMAL_ACCESS("NORM", "2.16.756.5.30.1.127.3.10.5", "Normal Access", "Normal Access",
-			"Normal Access", "Normal Access", "Normal Access");
+	NORMAL_ACCESS("NORM", "2.16.756.5.30.1.127.3.10.5", "Normal Access", "Normal Access", "Normal Access", "Normal Access", "Normal Access");
 
 	/**
 	 *<!-- @formatter:off -->
@@ -79,16 +76,16 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
 	public static final String NORMAL_ACCESS_CODE = "NORM";
 
 	/**
+	 * <div class="en">Name of the value set</div>
+	 * <div class="de">Name des Value Sets</div>
+	 */
+	public static final String VALUE_SET_NAME = "EprPurposeOfUse";
+
+	/**
 	 * <div class="en">Identifier of the value set</div>
 	 * <div class="de">Identifikator für das Value Set</div>
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.77.10.11.5";
-
-	/**
-	 * <div class="en">Name of the value set</div> <div class="de">Name des
-	 * Value Sets</div>
-	 */
-	public static final String VALUE_SET_NAME = "EprPurposeOfUse";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -147,9 +144,15 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
 	}
 
 	/**
+	 * The display names per language
+	 */
+	private Map<LanguageCode, String> displayNames;
+
+	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
-	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
-	 * dieser Klasse) eindeutiger Code</div>
+	 * code</div>
+	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse)
+	 * eindeutiger Code</div>
 	 */
 	private String code;
 
@@ -160,14 +163,10 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
 	private String codeSystem;
 
 	/**
-	 * The display names per language
-	 */
-	private Map<LanguageCode, String> displayNames;
-
-	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div> <div class="de">Instanziiert dieses Enum Object
-	 * mittels eines Codes und einem Display Name</div>.
+	 * Display Name</div>
+	 * <div class="de">Instanziiert dieses Enum Object mittels eines Codes
+	 * und einem Display Name</div>.
 	 *
 	 * @param code
 	 *            code
@@ -184,8 +183,7 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	PurposeOfUse(String code, String codeSystem, String displayName, String displayNameEn,
-			String displayNameDe, String displayNameFr, String displayNameIt) {
+	PurposeOfUse(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
@@ -203,8 +201,23 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
 	 * @return <div class="en">the code system identifier</div>
 	 */
 	@Override
-	public String getCodeSystemValue() {
+	public String getCodeSystemId() {
 		return this.codeSystem;
+	}
+
+	/**
+	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
+	 * den Code System Namen.</div>
+	 *
+	 * @return <div class="en">the code system identifier</div>
+	 */
+	@Override
+	public String getCodeSystemName() {
+		String retVal = "";
+		CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
+		if (cs != null)
+			retVal = cs.getCodeSystemName();
+		return retVal;
 	}
 
 	/**
@@ -220,17 +233,15 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Gets the display name defined by the language param. If
-	 * there is no english translation, the default display name is
-	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
-	 * falls es keine Englische Übersetzung gibt, wird der default-Name
-	 * zurückgegeben.</div>
+	 * there is no english translation, the default display name is returned.</div>
+	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
+	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
 	 *
 	 * @param languageCode
 	 *            the language code to get the display name for
 	 * @return returns the display name in the desired language. if language not
 	 *         found, display name in german will returned
 	 */
-	@Override
 	public String getDisplayName(LanguageCode languageCode) {
 		String displayName = displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
@@ -240,8 +251,8 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the value set identifier.</div>
-	 * <div class="de">Liefert den Value Set Identifikator.</div>
+	 * <div class="en">Gets the value set identifier.</div> <div class="de">Liefert
+	 * den Value Set Identifikator.</div>
 	 *
 	 * @return <div class="en">the value set identifier</div>
 	 */

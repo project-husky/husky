@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
@@ -520,7 +521,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	public void setAuthor(Author author) {
 		getMdht().getAuthors().clear();
 		if (author != null)
-			getMdht().getAuthors().add(author.getAuthorMdht());
+			getMdht().getAuthors().add(EcoreUtil.copy(author.getAuthorMdht()));
 	}
 
 	/**

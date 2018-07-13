@@ -171,12 +171,14 @@ public class Name {
 	 * @return String <div class="en">the complete name</div>
 	 */
 	public String getCompleteName() {
+
 		final String prefixes = getPrefixes();
 		final String givens = getGivenNames();
 		final String families = getFamilyNames();
 		final String suffixes = getSuffixes();
 
 		final List<String> nameList = new ArrayList<String>();
+		nameList.add(mPn.getText());
 		nameList.add(prefixes);
 		nameList.add(givens);
 		nameList.add(families);

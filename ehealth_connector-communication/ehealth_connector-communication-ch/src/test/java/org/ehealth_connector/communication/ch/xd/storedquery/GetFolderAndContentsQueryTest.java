@@ -55,7 +55,7 @@ public class GetFolderAndContentsQueryTest extends XdsChTestUtils {
 		assertTrue(
 				sqpl1.get("$XDSDocumentEntryFormatCode").contains(formatCodes[1].getCodeValue()));
 		assertTrue(sqpl1.get("$XDSDocumentEntryConfidentialityCode")
-				.contains(confidentialityCodes[1].getCodeSystemValue()));
+				.contains(confidentialityCodes[1].getCodeSystemId()));
 	}
 
 	/**

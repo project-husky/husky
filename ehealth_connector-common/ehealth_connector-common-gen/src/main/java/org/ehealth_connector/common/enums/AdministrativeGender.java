@@ -45,7 +45,7 @@ public enum AdministrativeGender {
 	 * <div class="en">Name of the Code System</div> <div class="de">Name des
 	 * Codes Systems</div>
 	 */
-	public static final String CODE_SYSTEM_NAME = "AdministrativeGender";
+	public static final String CODE_SYSTEM_NAME = "HL7 AdministrativeGender";
 	/**
 	 * <div class="en">Identifier of the Code System</div>
 	 * <div class="de">Identifikator für das Code System</div>

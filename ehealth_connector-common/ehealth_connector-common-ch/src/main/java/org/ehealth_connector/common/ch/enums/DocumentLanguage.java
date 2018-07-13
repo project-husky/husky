@@ -19,10 +19,10 @@ package org.ehealth_connector.common.ch.enums;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.annotation.Generated;
-
+import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.ch.enums.ValueSetEnumInterface;
 
 /**
  *<!-- @formatter:off -->
@@ -37,14 +37,13 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">English</div>
-	 * <div class="de">Englisch</div>
-	 * <div class="fr">Anglais</div>
-	 * <div class="it">Inglese</div>
+	 * <div class="en">German</div>
+	 * <div class="de">Deutsch</div>
+	 * <div class="fr">Allemand</div>
+	 * <div class="it">Tedesco</div>
 	 *<!-- @formatter:on -->
 	 */
-	ENGLISH("en-US", "2.16.840.1.113883.6.316", "English language (qualifier value)", "English",
-			"Englisch", "Anglais", "Inglese"),
+	GERMAN("de-CH", "2.16.840.1.113883.6.316", "German ", "German", "Deutsch", "Allemand", "Tedesco"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">French</div>
@@ -53,18 +52,7 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	 * <div class="it">Francese</div>
 	 *<!-- @formatter:on -->
 	 */
-	FRENCH("fr-CH", "2.16.840.1.113883.6.316", "French", "French", "Französisch", "Français ",
-			"Francese"),
-	/**
-	 *<!-- @formatter:off -->
-	 * <div class="en">German</div>
-	 * <div class="de">Deutsch</div>
-	 * <div class="fr">Allemand</div>
-	 * <div class="it">Tedesco</div>
-	 *<!-- @formatter:on -->
-	 */
-	GERMAN("de-CH", "2.16.840.1.113883.6.316", "German ", "German", "Deutsch", "Allemand",
-			"Tedesco"),
+	FRENCH("fr-CH", "2.16.840.1.113883.6.316", "French", "French", "Französisch", "Français ", "Francese"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Italian</div>
@@ -73,8 +61,7 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	 * <div class="it">Italiano</div>
 	 *<!-- @formatter:on -->
 	 */
-	ITALIAN("it-CH", "2.16.840.1.113883.6.316", "Italian ", "Italian", "Italienisch", "Italien",
-			"Italiano"),
+	ITALIAN("it-CH", "2.16.840.1.113883.6.316", "Italian ", "Italian", "Italienisch", "Italien", "Italiano"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Rhaeto-Romanic </div>
@@ -83,28 +70,16 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	 * <div class="it">Romancio</div>
 	 *<!-- @formatter:on -->
 	 */
-	RHAETO_ROMANIC("rm", "2.16.840.1.113883.6.316", "Rhaeto-Romanic", "Rhaeto-Romanic ",
-			"Rätoromanisch", "Rhéto-roman", "Romancio");
-
+	RHAETO_ROMANIC("rm", "2.16.840.1.113883.6.316", "Rhaeto-Romanic", "Rhaeto-Romanic ", "Rätoromanisch", "Rhéto-roman", "Romancio"),
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">Code for English</div>
-	 * <div class="de">Code für Englisch</div>
-	 * <div class="fr">Code de Anglais</div>
-	 * <div class="it">Code per Inglese</div>
+	 * <div class="en">English</div>
+	 * <div class="de">Englisch</div>
+	 * <div class="fr">Anglais</div>
+	 * <div class="it">Inglese</div>
 	 *<!-- @formatter:on -->
 	 */
-	public static final String ENGLISH_CODE = "en-US";
-
-	/**
-	 *<!-- @formatter:off -->
-	 * <div class="en">Code for French</div>
-	 * <div class="de">Code für Französisch</div>
-	 * <div class="fr">Code de Français </div>
-	 * <div class="it">Code per Francese</div>
-	 *<!-- @formatter:on -->
-	 */
-	public static final String FRENCH_CODE = "fr-CH";
+	ENGLISH("en-US", "2.16.840.1.113883.6.316", "English language (qualifier value)", "English", "Englisch", "Anglais", "Inglese");
 
 	/**
 	 *<!-- @formatter:off -->
@@ -115,6 +90,16 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	 *<!-- @formatter:on -->
 	 */
 	public static final String GERMAN_CODE = "de-CH";
+
+	/**
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for French</div>
+	 * <div class="de">Code für Französisch</div>
+	 * <div class="fr">Code de Français </div>
+	 * <div class="it">Code per Francese</div>
+	 *<!-- @formatter:on -->
+	 */
+	public static final String FRENCH_CODE = "fr-CH";
 
 	/**
 	 *<!-- @formatter:off -->
@@ -137,16 +122,26 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	public static final String RHAETO_ROMANIC_CODE = "rm";
 
 	/**
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for English</div>
+	 * <div class="de">Code für Englisch</div>
+	 * <div class="fr">Code de Anglais</div>
+	 * <div class="it">Code per Inglese</div>
+	 *<!-- @formatter:on -->
+	 */
+	public static final String ENGLISH_CODE = "en-US";
+
+	/**
+	 * <div class="en">Name of the value set</div>
+	 * <div class="de">Name des Value Sets</div>
+	 */
+	public static final String VALUE_SET_NAME = "EprDocumentLanguage";
+
+	/**
 	 * <div class="en">Identifier of the value set</div>
 	 * <div class="de">Identifikator für das Value Set</div>
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.13";
-
-	/**
-	 * <div class="en">Name of the value set</div> <div class="de">Name des
-	 * Value Sets</div>
-	 */
-	public static final String VALUE_SET_NAME = "EprDocumentLanguage";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -205,9 +200,15 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	}
 
 	/**
+	 * The display names per language
+	 */
+	private Map<LanguageCode, String> displayNames;
+
+	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
-	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
-	 * dieser Klasse) eindeutiger Code</div>
+	 * code</div>
+	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse)
+	 * eindeutiger Code</div>
 	 */
 	private String code;
 
@@ -218,14 +219,10 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	private String codeSystem;
 
 	/**
-	 * The display names per language
-	 */
-	private Map<LanguageCode, String> displayNames;
-
-	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div> <div class="de">Instanziiert dieses Enum Object
-	 * mittels eines Codes und einem Display Name</div>.
+	 * Display Name</div>
+	 * <div class="de">Instanziiert dieses Enum Object mittels eines Codes
+	 * und einem Display Name</div>.
 	 *
 	 * @param code
 	 *            code
@@ -242,8 +239,7 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	DocumentLanguage(String code, String codeSystem, String displayName, String displayNameEn,
-			String displayNameDe, String displayNameFr, String displayNameIt) {
+	DocumentLanguage(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
@@ -261,8 +257,23 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	 * @return <div class="en">the code system identifier</div>
 	 */
 	@Override
-	public String getCodeSystemValue() {
+	public String getCodeSystemId() {
 		return this.codeSystem;
+	}
+
+	/**
+	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
+	 * den Code System Namen.</div>
+	 *
+	 * @return <div class="en">the code system identifier</div>
+	 */
+	@Override
+	public String getCodeSystemName() {
+		String retVal = "";
+		CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
+		if (cs != null)
+			retVal = cs.getCodeSystemName();
+		return retVal;
 	}
 
 	/**
@@ -278,17 +289,15 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Gets the display name defined by the language param. If
-	 * there is no english translation, the default display name is
-	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
-	 * falls es keine Englische Übersetzung gibt, wird der default-Name
-	 * zurückgegeben.</div>
+	 * there is no english translation, the default display name is returned.</div>
+	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
+	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
 	 *
 	 * @param languageCode
 	 *            the language code to get the display name for
 	 * @return returns the display name in the desired language. if language not
 	 *         found, display name in german will returned
 	 */
-	@Override
 	public String getDisplayName(LanguageCode languageCode) {
 		String displayName = displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
@@ -298,8 +307,8 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the value set identifier.</div>
-	 * <div class="de">Liefert den Value Set Identifikator.</div>
+	 * <div class="en">Gets the value set identifier.</div> <div class="de">Liefert
+	 * den Value Set Identifikator.</div>
 	 *
 	 * @return <div class="en">the value set identifier</div>
 	 */
