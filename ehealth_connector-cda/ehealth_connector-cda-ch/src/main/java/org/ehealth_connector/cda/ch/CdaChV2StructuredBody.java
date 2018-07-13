@@ -35,6 +35,7 @@ import org.openhealthtools.mdht.uml.cda.AssignedEntity;
 import org.openhealthtools.mdht.uml.cda.Author;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
+import org.openhealthtools.mdht.uml.cda.InformationRecipient;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
@@ -235,4 +236,13 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		CdaUtil.addTemplateIdOnce(mdhtPatient, new Identificator("2.16.756.5.30.1.1.10.2.1"));
 		getDoc().getRecordTargets().add(mdhtPatient);
 	}
+
+	@Override
+	public void setPrimaryRecipient(Organization recipient) {
+		super.setPrimaryRecipient(recipient);
+		InformationRecipient mdhtRecipient = getMdhtPrimaryRecipient();
+		CdaUtil.addTemplateIdOnce(mdhtRecipient, new Identificator("2.16.756.5.30.1.1.10.2.4"));
+
+	}
+
 }

@@ -31,6 +31,7 @@ import org.openhealthtools.mdht.uml.cda.Component3;
 import org.openhealthtools.mdht.uml.cda.Custodian;
 import org.openhealthtools.mdht.uml.cda.DataEnterer;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
+import org.openhealthtools.mdht.uml.cda.InformationRecipient;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.StructuredBody;
@@ -120,6 +121,19 @@ public abstract class CdaUtil {
 	 * @param id
 	 *            the id
 	 */
+	public static void addTemplateId(InformationRecipient mdht, Identificator id) {
+		mdht.getTemplateIds().add(id.getIi());
+		sortTemplateIds(mdht);
+	}
+
+	/**
+	 * Adds the template id.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
 	public static void addTemplateId(RecordTarget mdht, Identificator id) {
 		mdht.getTemplateIds().add(id.getIi());
 		sortTemplateIds(mdht);
@@ -168,6 +182,17 @@ public abstract class CdaUtil {
 	}
 
 	public static void addTemplateIdOnce(DataEnterer mdht, Identificator id) {
+		boolean alreadyExists = false;
+		for (II existingId : mdht.getTemplateIds()) {
+			if (existingId.equals(id.getIi()))
+				alreadyExists = true;
+		}
+		if (!alreadyExists)
+			addTemplateId(mdht, id);
+		sortTemplateIds(mdht);
+	}
+
+	public static void addTemplateIdOnce(InformationRecipient mdht, Identificator id) {
 		boolean alreadyExists = false;
 		for (II existingId : mdht.getTemplateIds()) {
 			if (existingId.equals(id.getIi()))
@@ -336,6 +361,25 @@ public abstract class CdaUtil {
 	 *            the mdht
 	 */
 	public static void sortTemplateIds(DataEnterer mdht) {
+		ArrayList<Identificator> list = new ArrayList<Identificator>();
+		for (II ii : mdht.getTemplateIds()) {
+			list.add(new Identificator(ii));
+		}
+		mdht.getTemplateIds().clear();
+		list.sort(new IdentificatorComparator());
+		for (Identificator identificator : list) {
+			mdht.getTemplateIds().add(identificator.getIi());
+		}
+
+	}
+
+	/**
+	 * Sort template ids.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
+	public static void sortTemplateIds(InformationRecipient mdht) {
 		ArrayList<Identificator> list = new ArrayList<Identificator>();
 		for (II ii : mdht.getTemplateIds()) {
 			list.add(new Identificator(ii));

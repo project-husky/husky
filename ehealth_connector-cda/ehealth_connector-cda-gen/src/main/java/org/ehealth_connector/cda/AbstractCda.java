@@ -57,7 +57,9 @@ import org.openhealthtools.mdht.uml.cda.Custodian;
 import org.openhealthtools.mdht.uml.cda.CustodianOrganization;
 import org.openhealthtools.mdht.uml.cda.DocumentRoot;
 import org.openhealthtools.mdht.uml.cda.InFulfillmentOf;
+import org.openhealthtools.mdht.uml.cda.InformationRecipient;
 import org.openhealthtools.mdht.uml.cda.InfrastructureRootTypeId;
+import org.openhealthtools.mdht.uml.cda.IntendedRecipient;
 import org.openhealthtools.mdht.uml.cda.LegalAuthenticator;
 import org.openhealthtools.mdht.uml.cda.Order;
 import org.openhealthtools.mdht.uml.cda.ParentDocument;
@@ -77,6 +79,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 import org.openhealthtools.mdht.uml.hl7.vocab.RoleClass;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipDocument;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_InformationRecipient;
 
 /**
  * CDA Dokument, das den Vorgaben der Spezifikation CDA entspricht
@@ -266,6 +269,17 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 */
 	public void addInsurance(Organization versicherung) {
 		addParticipant(versicherung, ParticipantType.Insurance);
+	}
+
+	public void addOtherRecipient(Organization organization) {
+
+		InformationRecipient recipient = CDAFactory.eINSTANCE.createInformationRecipient();
+		recipient.setTypeCode(x_InformationRecipient.TRC);
+		IntendedRecipient ir = CDAFactory.eINSTANCE.createIntendedRecipient();
+		ir.setReceivedOrganization(organization.getMdhtOrganization());
+		recipient.setIntendedRecipient(ir);
+		getDoc().getInformationRecipients().add(recipient);
+
 	}
 
 	/**
@@ -553,6 +567,34 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		return null;
 	}
 
+	public InformationRecipient getMdhtPrimaryRecipient() {
+
+		InformationRecipient retVal = null;
+		for (InformationRecipient ir : getDoc().getInformationRecipients()) {
+			if (ir.getTypeCode() == x_InformationRecipient.PRCP) {
+				retVal = ir;
+				break;
+			}
+		}
+		return retVal;
+	}
+
+	public List<Organization> getOtherRecipients() {
+
+		ArrayList<Organization> retVal = new ArrayList<Organization>();
+		for (InformationRecipient ir : getDoc().getInformationRecipients()) {
+			if (ir.getTypeCode() != x_InformationRecipient.PRCP) {
+				if (ir.getIntendedRecipient() != null) {
+					if (ir.getIntendedRecipient().getReceivedOrganization() != null) {
+						retVal.add(new Organization(
+								ir.getIntendedRecipient().getReceivedOrganization()));
+					}
+				}
+			}
+		}
+		return retVal;
+	}
+
 	/**
 	 * Gets the CDA document as ByteArrayOutputStream
 	 *
@@ -593,6 +635,23 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	public Patient getPatient() {
 		final Patient patient = new Patient(getDoc().getRecordTargets().get(0));
 		return patient;
+	}
+
+	public Organization getPrimaryRecipient() {
+
+		Organization retVal = null;
+		for (InformationRecipient ir : getDoc().getInformationRecipients()) {
+			if (ir.getTypeCode() == x_InformationRecipient.PRCP) {
+				if (ir.getIntendedRecipient() != null) {
+					if (ir.getIntendedRecipient().getReceivedOrganization() != null) {
+						retVal = new Organization(
+								ir.getIntendedRecipient().getReceivedOrganization());
+						break;
+					}
+				}
+			}
+		}
+		return retVal;
 	}
 
 	/**
@@ -920,6 +979,18 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 			} else
 				getDoc().getRecordTargets().add(patient.getMdhtRecordTarget());
 		}
+
+	}
+
+	public void setPrimaryRecipient(Organization organization) {
+
+		InformationRecipient recipient = CDAFactory.eINSTANCE.createInformationRecipient();
+		recipient.setTypeCode(x_InformationRecipient.PRCP);
+		IntendedRecipient ir = CDAFactory.eINSTANCE.createIntendedRecipient();
+		ir.setReceivedOrganization(organization.getMdhtOrganization());
+		recipient.setIntendedRecipient(ir);
+		getDoc().getInformationRecipients().clear();
+		getDoc().getInformationRecipients().add(recipient);
 
 	}
 
