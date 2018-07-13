@@ -170,21 +170,24 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		sortXmlHeader();
 	}
 
+	public void addAuthenticator(Authenticator authenticator) {
+		getDoc().getAuthenticators().add(authenticator);
+	}
+
 	/**
 	 * <div class="en">Adds an authenricator to the CDA document</div>
 	 * <div class="de">Fügt dem CDA Dokument einen Unterzeichner hinzu</div>
 	 *
-	 * @param authenticator
+	 * @param author
 	 *            Unterzeichner
 	 */
-	public void addAuthenticator(org.ehealth_connector.common.Author authenticator) {
+	public void addAuthenticator(org.ehealth_connector.common.Author author) {
 		final Authenticator auth = CDAFactory.eINSTANCE.createAuthenticator();
 		final AssignedEntity entity = CDAFactory.eINSTANCE.createAssignedEntity();
 
 		auth.setAssignedEntity(entity);
-		auth.setTime(EcoreUtil.copy(authenticator.getAuthorMdht().getTime()));
-		entity.setAssignedPerson(
-				authenticator.copyMdhtAuthor().getAssignedAuthor().getAssignedPerson());
+		auth.setTime(EcoreUtil.copy(author.getAuthorMdht().getTime()));
+		entity.setAssignedPerson(author.copyMdhtAuthor().getAssignedAuthor().getAssignedPerson());
 
 		getDoc().getAuthenticators().add(auth);
 	}
@@ -271,7 +274,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		addParticipant(versicherung, ParticipantType.Insurance);
 	}
 
-	public void addOtherRecipient(Organization organization) {
+	public void addRecipient(Organization organization) {
 
 		InformationRecipient recipient = CDAFactory.eINSTANCE.createInformationRecipient();
 		recipient.setTypeCode(x_InformationRecipient.TRC);
@@ -926,7 +929,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 *            <div class="de">rechtsgültiger Unterzeichner</div>
 	 */
 	public void setLegalAuthenticator(org.ehealth_connector.common.Author legalAuthenticator) {
-		getDoc().setLegalAuthenticator(Util.createLagalAuthenticatorFromAuthor(legalAuthenticator));
+		getDoc().setLegalAuthenticator(Util.createLegalAuthenticatorFromAuthor(legalAuthenticator));
 		getDoc().getLegalAuthenticator()
 				.setTime(EcoreUtil.copy(legalAuthenticator.getAuthorMdht().getTime()));
 	}

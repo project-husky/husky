@@ -56,6 +56,7 @@ import org.ehealth_connector.common.enums.AddressUse;
 import org.ehealth_connector.common.enums.Signature;
 import org.openhealthtools.mdht.uml.cda.AssignedAuthor;
 import org.openhealthtools.mdht.uml.cda.AssignedEntity;
+import org.openhealthtools.mdht.uml.cda.Authenticator;
 import org.openhealthtools.mdht.uml.cda.Author;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.CustodianOrganization;
@@ -257,6 +258,21 @@ public class Util {
 			a.getIds().addAll(EcoreUtil.copyAll(o.getIds()));
 		}
 		return a;
+	}
+
+	public static Authenticator createAuthenticatorFromAuthor(
+			org.ehealth_connector.common.Author author) {
+		final org.openhealthtools.mdht.uml.cda.Author a = author.copyMdhtAuthor();
+		final Authenticator mdhtAuth = CDAFactory.eINSTANCE.createAuthenticator();
+		mdhtAuth.setAssignedEntity(createAssignedEntityFromAssignedAuthor(a.getAssignedAuthor()));
+
+		// Set signature Code to 's'
+		final CS cs = Signature.SIGNED.getCS();
+		mdhtAuth.setSignatureCode(cs);
+		// Copy Time
+		mdhtAuth.setTime(a.getTime());
+
+		return mdhtAuth;
 	}
 
 	/**
@@ -478,7 +494,7 @@ public class Util {
 	 *            <div class="de">the author</div>
 	 * @return the legal authenticator
 	 */
-	public static LegalAuthenticator createLagalAuthenticatorFromAuthor(
+	public static LegalAuthenticator createLegalAuthenticatorFromAuthor(
 			org.ehealth_connector.common.Author author) {
 		final org.openhealthtools.mdht.uml.cda.Author a = author.copyMdhtAuthor();
 		final LegalAuthenticator mdhtLegAuth = CDAFactory.eINSTANCE.createLegalAuthenticator();

@@ -47,27 +47,19 @@ public class Author {
 	final public static Code FUNCTION_CODE_AUTHORDEVICE = new Code("2.16.756.5.30.2.1.1.1",
 			"TASST");
 
-	/** assigned Author */
-	private org.openhealthtools.mdht.uml.cda.AssignedAuthor mAsAuthor;
-
-	/**
-	 * author.
-	 */
 	private org.openhealthtools.mdht.uml.cda.Author mAuthor;
-
-	/** person */
-	private org.openhealthtools.mdht.uml.cda.Person mPerson;
 
 	/**
 	 * Instantiates a new author.
 	 */
 	public Author() {
 		mAuthor = CDAFactory.eINSTANCE.createAuthor();
-		mPerson = CDAFactory.eINSTANCE.createPerson();
-		mAsAuthor = CDAFactory.eINSTANCE.createAssignedAuthor();
+		org.openhealthtools.mdht.uml.cda.AssignedAuthor asAuthor = CDAFactory.eINSTANCE
+				.createAssignedAuthor();
+		org.openhealthtools.mdht.uml.cda.Person person = CDAFactory.eINSTANCE.createPerson();
 
-		mAsAuthor.setAssignedPerson(mPerson);
-		mAuthor.setAssignedAuthor(mAsAuthor);
+		asAuthor.setAssignedPerson(person);
+		mAuthor.setAssignedAuthor(asAuthor);
 
 		// add functionCode and time
 		mAuthor.setFunctionCode(Isco08.MEDICAL_DOCTORS.getCE());
@@ -104,11 +96,12 @@ public class Author {
 		 */
 
 		mAuthor = CDAFactory.eINSTANCE.createAuthor();
-		mPerson = null;
-		mAsAuthor = CDAFactory.eINSTANCE.createAssignedAuthor();
+		org.openhealthtools.mdht.uml.cda.AssignedAuthor asAuthor = CDAFactory.eINSTANCE
+				.createAssignedAuthor();
+		org.openhealthtools.mdht.uml.cda.Person person = null;
 
-		mAsAuthor.setAssignedPerson(mPerson);
-		mAuthor.setAssignedAuthor(mAsAuthor);
+		asAuthor.setAssignedPerson(person);
+		mAuthor.setAssignedAuthor(asAuthor);
 
 		mAuthor.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.NA);
 		mAuthor.getAssignedAuthor()
@@ -126,11 +119,12 @@ public class Author {
 	 */
 	public Author(Code functionCode) {
 		mAuthor = CDAFactory.eINSTANCE.createAuthor();
-		mPerson = CDAFactory.eINSTANCE.createPerson();
-		mAsAuthor = CDAFactory.eINSTANCE.createAssignedAuthor();
+		org.openhealthtools.mdht.uml.cda.AssignedAuthor asAuthor = CDAFactory.eINSTANCE
+				.createAssignedAuthor();
+		org.openhealthtools.mdht.uml.cda.Person person = CDAFactory.eINSTANCE.createPerson();
 
-		mAsAuthor.setAssignedPerson(mPerson);
-		mAuthor.setAssignedAuthor(mAsAuthor);
+		asAuthor.setAssignedPerson(person);
+		mAuthor.setAssignedAuthor(asAuthor);
 
 		// add functionCode and time
 		if (functionCode != null) {
@@ -169,7 +163,7 @@ public class Author {
 		id.setRoot(CodeSystems.GLN.getCodeSystemId());
 		id.setExtension(gln);
 
-		mAsAuthor.getIds().add(id);
+		mAuthor.getAssignedAuthor().getIds().add(id);
 	}
 
 	/**
@@ -196,8 +190,9 @@ public class Author {
 	public Author(Organization organizationAsAuthor) {
 		mAuthor = CDAFactory.eINSTANCE.createAuthor();
 		if (organizationAsAuthor.getMdhtOrganization() != null) {
-			mAsAuthor = Util.createAssignedAuthorFromOrganization(organizationAsAuthor);
-			mAuthor.setAssignedAuthor(mAsAuthor);
+			org.openhealthtools.mdht.uml.cda.AssignedAuthor asAuthor = Util
+					.createAssignedAuthorFromOrganization(organizationAsAuthor);
+			mAuthor.setAssignedAuthor(asAuthor);
 		}
 		setTime(null);
 	}
@@ -215,20 +210,52 @@ public class Author {
 	public Author(Patient patientAsAuthor) {
 		this();
 		if (patientAsAuthor.getMdhtPerson() != null) {
-			mPerson = patientAsAuthor.copyMdhtPerson();
-			mAsAuthor.setAssignedPerson(mPerson);
+			org.openhealthtools.mdht.uml.cda.Person person = patientAsAuthor.copyMdhtPerson();
+			mAuthor.getAssignedAuthor().setAssignedPerson(person);
 		}
 
 		if (patientAsAuthor.getMdhtPatient().getNames() != null) {
 			for (final Name name : patientAsAuthor.getNames()) {
-				mPerson.getNames().add(name.copyMdhtPn());
+				mAuthor.getAssignedAuthor().getAssignedPerson().getNames().add(name.copyMdhtPn());
 			}
 		}
 
 		if ((patientAsAuthor.getIds() != null) && (patientAsAuthor.getIds().size() > 0)) {
-			mAsAuthor.getIds().addAll(patientAsAuthor.copyMdhtPatientRole().getIds());
+			mAuthor.getAssignedAuthor().getIds()
+					.addAll(patientAsAuthor.copyMdhtPatientRole().getIds());
 		}
 		this.setFunctionCodePatient();
+	}
+
+	/**
+	 * Instantiates a new human author.
+	 *
+	 * @param person
+	 *            the person
+	 */
+	public Author(Person person) {
+		this();
+		addName(person.getName());
+	}
+
+	/**
+	 * Erstellt einen neuen (menschlien) Autor (Dieser Konstruktor wird oft
+	 * gebraucht für Behandelnde).
+	 *
+	 * @param name
+	 *            Name
+	 * @param gln
+	 *            Global Location Number (GLN)
+	 */
+	public Author(Person person, String gln) {
+		this(person);
+
+		// Create and fill Person Name and GLN
+		final II id = DatatypesFactory.eINSTANCE.createII();
+		id.setRoot(CodeSystems.GLN.getCodeSystemId());
+		id.setExtension(gln);
+
+		mAuthor.getAssignedAuthor().getIds().add(id);
 	}
 
 	/**
@@ -273,37 +300,37 @@ public class Author {
 		return EcoreUtil.copy(mAuthor);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		final Author other = (Author) obj;
-		if (mAsAuthor == null) {
-			if (other.mAsAuthor != null)
-				return false;
-		} else if (!mAsAuthor.equals(other.mAsAuthor))
-			return false;
-		if (mAuthor == null) {
-			if (other.mAuthor != null)
-				return false;
-		} else if (!mAuthor.equals(other.mAuthor))
-			return false;
-		if (mPerson == null) {
-			if (other.mPerson != null)
-				return false;
-		} else if (!mPerson.equals(other.mPerson))
-			return false;
-		return true;
-	}
+	// /*
+	// * (non-Javadoc)
+	// *
+	// * @see java.lang.Object#equals(java.lang.Object)
+	// */
+	// @Override
+	// public boolean equals(Object obj) {
+	// if (this == obj)
+	// return true;
+	// if (obj == null)
+	// return false;
+	// if (getClass() != obj.getClass())
+	// return false;
+	// final Author other = (Author) obj;
+	// if (asAuthor == null) {
+	// if (other.asAuthor != null)
+	// return false;
+	// } else if (!asAuthor.equals(other.asAuthor))
+	// return false;
+	// if (mAuthor == null) {
+	// if (other.mAuthor != null)
+	// return false;
+	// } else if (!mAuthor.equals(other.mAuthor))
+	// return false;
+	// if (person == null) {
+	// if (other.person != null)
+	// return false;
+	// } else if (!person.equals(other.person))
+	// return false;
+	// return true;
+	// }
 
 	/**
 	 * <div class="en">Gets the address.</div> <div class="de">Liefert die
@@ -337,7 +364,7 @@ public class Author {
 	 * @return the asAuthor
 	 */
 	public org.openhealthtools.mdht.uml.cda.AssignedAuthor getAsAuthor() {
-		return mAsAuthor;
+		return mAuthor.getAssignedAuthor();
 	}
 
 	/**
@@ -357,7 +384,7 @@ public class Author {
 	 *         author mdht</div>
 	 */
 	public org.openhealthtools.mdht.uml.cda.Author getAuthorMdht() {
-		return EcoreUtil.copy(mAuthor);
+		return mAuthor;
 	}
 
 	/**
@@ -505,7 +532,8 @@ public class Author {
 	 *         <div class="it"></div>
 	 */
 	public Organization getOrganization() {
-		final Organization o = new Organization(mAsAuthor.getRepresentedOrganization());
+		final Organization o = new Organization(
+				mAuthor.getAssignedAuthor().getRepresentedOrganization());
 		return o;
 	}
 
@@ -515,7 +543,7 @@ public class Author {
 	 * @return the person
 	 */
 	public org.openhealthtools.mdht.uml.cda.Person getPerson() {
-		return mPerson;
+		return mAuthor.getAssignedAuthor().getAssignedPerson();
 	}
 
 	/**
@@ -539,7 +567,7 @@ public class Author {
 	 * @return code the speciality code
 	 */
 	public Code getSpeciality() {
-		return new Code(mAsAuthor.getCode());
+		return new Code(mAuthor.getAssignedAuthor().getCode());
 	}
 
 	/**
@@ -616,21 +644,22 @@ public class Author {
 		return null;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = (prime * result) + ((mAsAuthor == null) ? 0 : mAsAuthor.hashCode());
-		result = (prime * result) + ((mAuthor == null) ? 0 : mAuthor.hashCode());
-		result = (prime * result) + ((mPerson == null) ? 0 : mPerson.hashCode());
-		return result;
-	}
-
+	// /*
+	// * (non-Javadoc)
+	// *
+	// * @see java.lang.Object#hashCode()
+	// */
+	// @Override
+	// public int hashCode() {
+	// final int prime = 31;
+	// int result = 1;
+	// result = (prime * result) + ((asAuthor == null) ? 0 :
+	// asAuthor.hashCode());
+	// result = (prime * result) + ((mAuthor == null) ? 0 : mAuthor.hashCode());
+	// result = (prime * result) + ((person == null) ? 0 : person.hashCode());
+	// return result;
+	// }
+	//
 	/**
 	 * Checks if is author patient.
 	 *
@@ -651,16 +680,17 @@ public class Author {
 	 *            the asAuthor to set
 	 */
 	public void setAsAuthor(org.openhealthtools.mdht.uml.cda.AssignedAuthor asAuthor) {
-		mAsAuthor = asAuthor;
+		mAuthor.setAssignedAuthor(asAuthor);
 	}
 
 	public void setAssignedAuthoringDevice(AuthoringDevice device) {
-		if (mAsAuthor == null) {
-			mAsAuthor = CDAFactory.eINSTANCE.createAssignedAuthor();
+		if (mAuthor.getAssignedAuthor() == null) {
+			mAuthor.setAssignedAuthor(CDAFactory.eINSTANCE.createAssignedAuthor());
 		}
-		mAsAuthor.setAssignedAuthoringDevice(device.copy());
-		if (mAsAuthor.getAssignedPerson() != null) {
-			mAsAuthor.eUnset(mPerson.eContainingFeature());
+		mAuthor.getAssignedAuthor().setAssignedAuthoringDevice(device.copy());
+		if (mAuthor.getAssignedAuthor().getAssignedPerson() != null) {
+			mAuthor.getAssignedAuthor()
+					.eUnset(mAuthor.getAssignedAuthor().getAssignedPerson().eContainingFeature());
 		}
 	}
 
@@ -711,7 +741,7 @@ public class Author {
 		} else {
 			final II ii = DatatypesFactory.eINSTANCE.createII();
 			ii.setNullFlavor(org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor.NA);
-			mAsAuthor.getIds().add(ii);
+			mAuthor.getAssignedAuthor().getIds().add(ii);
 		}
 	}
 
@@ -732,7 +762,8 @@ public class Author {
 	 */
 	public void setOrganization(Organization organization) {
 		if (organization != null)
-			mAsAuthor.setRepresentedOrganization(organization.copyMdhtOrganization());
+			mAuthor.getAssignedAuthor()
+					.setRepresentedOrganization(organization.copyMdhtOrganization());
 	}
 
 	/**
@@ -776,7 +807,7 @@ public class Author {
 	 *            the person to set
 	 */
 	public void setPerson(org.openhealthtools.mdht.uml.cda.Person person) {
-		mPerson = person;
+		mAuthor.getAssignedAuthor().setAssignedPerson(person);
 	}
 
 	/**
@@ -802,7 +833,7 @@ public class Author {
 	 *            the speciality code
 	 */
 	public void setSpeciality(Code code) {
-		mAsAuthor.setCode(code.getCE());
+		mAuthor.getAssignedAuthor().setCode(code.getCE());
 	}
 
 	/**
@@ -836,7 +867,13 @@ public class Author {
 	 */
 	public void setTime(Date date) {
 		if (date != null) {
-			mAuthor.setTime(DateUtil.convertDateToTsyyyyMMddHHmmssZZZZ(date));
+			try {
+				if ("000000".equals(DateUtil.createTimeTSFromEuroDate(date).getValue()))
+					mAuthor.setTime(DateUtil.createDateTSFromEuroDate(date));
+				else
+					mAuthor.setTime(DateUtil.createFullTSFromEuroDate(date));
+			} catch (ParseException e) {
+			}
 		} else {
 			mAuthor.setTime(DateUtil.convertDateToTsyyyyMMddHHmmssZZZZ(new Date()));
 		}

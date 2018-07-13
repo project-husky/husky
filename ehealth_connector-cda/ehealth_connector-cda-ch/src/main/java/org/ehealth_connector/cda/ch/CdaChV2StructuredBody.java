@@ -21,6 +21,7 @@ import java.io.IOException;
 
 import javax.xml.bind.DatatypeConverter;
 
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.AbstractCda;
 import org.ehealth_connector.cda.DataEnterer;
 import org.ehealth_connector.cda.ObservationMediaEntry;
@@ -31,7 +32,9 @@ import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.Person;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.AssignedEntity;
+import org.openhealthtools.mdht.uml.cda.Authenticator;
 import org.openhealthtools.mdht.uml.cda.Author;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
@@ -63,6 +66,21 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	public CdaChV2StructuredBody(EClinicalDocument doc, LanguageCode languageCode,
 			String stylesheet, String css) {
 		super(doc, languageCode, stylesheet, css);
+	}
+
+	/**
+	 * <div class="en">Adds an authenricator to the CDA document</div>
+	 * <div class="de">Fügt dem CDA Dokument einen Unterzeichner hinzu</div>
+	 *
+	 * @param authenticator
+	 *            Unterzeichner
+	 */
+	@Override
+	public void addAuthenticator(org.ehealth_connector.common.Author author) {
+		Authenticator authenticator = Util.createAuthenticatorFromAuthor(author);
+		getDoc().getLegalAuthenticator().setTime(EcoreUtil.copy(author.getAuthorMdht().getTime()));
+		CdaUtil.addTemplateIdOnce(authenticator, new Identificator("2.16.756.5.30.1.1.10.2.6"));
+		super.addAuthenticator(authenticator);
 	}
 
 	/**
@@ -174,6 +192,24 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		enterer.setAssignedEntity(entity);
 		CdaUtil.addTemplateIdOnce(enterer, new Identificator("2.16.756.5.30.1.1.10.2.7"));
 		getDoc().setDataEnterer(enterer);
+	}
+
+	/**
+	 * <div class="en">Sets the legal authenticator of the document</div>
+	 * <div class="de">Weist dem CDA Dokument einen rechtsgültigen Unterzeichner
+	 * hinzu</div>
+	 *
+	 * @param legalAuthenticator
+	 *            <div class="en">legal authenticator</div>
+	 *            <div class="de">rechtsgültiger Unterzeichner</div>
+	 */
+	@Override
+	public void setLegalAuthenticator(org.ehealth_connector.common.Author legalAuthenticator) {
+		getDoc().setLegalAuthenticator(Util.createLegalAuthenticatorFromAuthor(legalAuthenticator));
+		getDoc().getLegalAuthenticator()
+				.setTime(EcoreUtil.copy(legalAuthenticator.getAuthorMdht().getTime()));
+		CdaUtil.addTemplateIdOnce(getDoc().getLegalAuthenticator(),
+				new Identificator("2.16.756.5.30.1.1.10.2.5"));
 	}
 
 	/**

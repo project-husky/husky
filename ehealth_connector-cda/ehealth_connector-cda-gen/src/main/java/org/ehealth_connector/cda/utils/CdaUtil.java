@@ -24,6 +24,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.EhcVersions;
 import org.openhealthtools.ihe.utils.UUID;
+import org.openhealthtools.mdht.uml.cda.Authenticator;
 import org.openhealthtools.mdht.uml.cda.Author;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
@@ -32,6 +33,7 @@ import org.openhealthtools.mdht.uml.cda.Custodian;
 import org.openhealthtools.mdht.uml.cda.DataEnterer;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.InformationRecipient;
+import org.openhealthtools.mdht.uml.cda.LegalAuthenticator;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.StructuredBody;
@@ -59,6 +61,19 @@ public abstract class CdaUtil {
 			c.setSection(EcoreUtil.copy(s));
 			sb.getComponents().add(c);
 		}
+	}
+
+	/**
+	 * Adds the template id.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
+	public static void addTemplateId(Authenticator mdht, Identificator id) {
+		mdht.getTemplateIds().add(id.getIi());
+		sortTemplateIds(mdht);
 	}
 
 	/**
@@ -134,8 +149,32 @@ public abstract class CdaUtil {
 	 * @param id
 	 *            the id
 	 */
+	public static void addTemplateId(LegalAuthenticator mdht, Identificator id) {
+		mdht.getTemplateIds().add(id.getIi());
+		sortTemplateIds(mdht);
+	}
+
+	/**
+	 * Adds the template id.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
 	public static void addTemplateId(RecordTarget mdht, Identificator id) {
 		mdht.getTemplateIds().add(id.getIi());
+		sortTemplateIds(mdht);
+	}
+
+	public static void addTemplateIdOnce(Authenticator mdht, Identificator id) {
+		boolean alreadyExists = false;
+		for (II existingId : mdht.getTemplateIds()) {
+			if (existingId.equals(id.getIi()))
+				alreadyExists = true;
+		}
+		if (!alreadyExists)
+			addTemplateId(mdht, id);
 		sortTemplateIds(mdht);
 	}
 
@@ -193,6 +232,17 @@ public abstract class CdaUtil {
 	}
 
 	public static void addTemplateIdOnce(InformationRecipient mdht, Identificator id) {
+		boolean alreadyExists = false;
+		for (II existingId : mdht.getTemplateIds()) {
+			if (existingId.equals(id.getIi()))
+				alreadyExists = true;
+		}
+		if (!alreadyExists)
+			addTemplateId(mdht, id);
+		sortTemplateIds(mdht);
+	}
+
+	public static void addTemplateIdOnce(LegalAuthenticator mdht, Identificator id) {
 		boolean alreadyExists = false;
 		for (II existingId : mdht.getTemplateIds()) {
 			if (existingId.equals(id.getIi()))
@@ -303,6 +353,25 @@ public abstract class CdaUtil {
 	 * @param mdht
 	 *            the mdht
 	 */
+	public static void sortTemplateIds(Authenticator mdht) {
+		ArrayList<Identificator> list = new ArrayList<Identificator>();
+		for (II ii : mdht.getTemplateIds()) {
+			list.add(new Identificator(ii));
+		}
+		mdht.getTemplateIds().clear();
+		list.sort(new IdentificatorComparator());
+		for (Identificator identificator : list) {
+			mdht.getTemplateIds().add(identificator.getIi());
+		}
+
+	}
+
+	/**
+	 * Sort template ids.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
 	public static void sortTemplateIds(Author mdht) {
 		ArrayList<Identificator> list = new ArrayList<Identificator>();
 		for (II ii : mdht.getTemplateIds()) {
@@ -380,6 +449,25 @@ public abstract class CdaUtil {
 	 *            the mdht
 	 */
 	public static void sortTemplateIds(InformationRecipient mdht) {
+		ArrayList<Identificator> list = new ArrayList<Identificator>();
+		for (II ii : mdht.getTemplateIds()) {
+			list.add(new Identificator(ii));
+		}
+		mdht.getTemplateIds().clear();
+		list.sort(new IdentificatorComparator());
+		for (Identificator identificator : list) {
+			mdht.getTemplateIds().add(identificator.getIi());
+		}
+
+	}
+
+	/**
+	 * Sort template ids.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
+	public static void sortTemplateIds(LegalAuthenticator mdht) {
 		ArrayList<Identificator> list = new ArrayList<Identificator>();
 		for (II ii : mdht.getTemplateIds()) {
 			list.add(new Identificator(ii));
