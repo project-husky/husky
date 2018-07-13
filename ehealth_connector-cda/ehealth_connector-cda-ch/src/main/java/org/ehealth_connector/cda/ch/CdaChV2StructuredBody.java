@@ -26,6 +26,7 @@ import org.ehealth_connector.cda.DataEnterer;
 import org.ehealth_connector.cda.ObservationMediaEntry;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.Person;
 import org.ehealth_connector.common.enums.LanguageCode;
@@ -117,6 +118,22 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 			confidentialityCode = code.getCE();
 		}
 		getDoc().setConfidentialityCode(confidentialityCode);
+	}
+
+	/**
+	 * <div class="en">Sets an organization as the custodian of the
+	 * document</div> <div class="de">Weist dem CDA Dokument die verwaltende
+	 * Organisation zu</div>
+	 *
+	 * @param organization
+	 *            <div class="en">custodian organization</div>
+	 *            <div class="de">verwaltende Organisation</div>
+	 */
+	@Override
+	public void setCustodian(Organization organization) {
+		super.setCustodian(organization);
+		CdaUtil.addTemplateIdOnce(getCustodian(), new Identificator("2.16.756.5.30.1.1.10.2.3"));
+
 	}
 
 	/**

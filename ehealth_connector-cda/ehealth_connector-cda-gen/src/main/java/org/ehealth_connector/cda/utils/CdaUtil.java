@@ -28,6 +28,7 @@ import org.openhealthtools.mdht.uml.cda.Author;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.Component3;
+import org.openhealthtools.mdht.uml.cda.Custodian;
 import org.openhealthtools.mdht.uml.cda.DataEnterer;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
@@ -93,6 +94,19 @@ public abstract class CdaUtil {
 	 * @param id
 	 *            the id
 	 */
+	public static void addTemplateId(Custodian mdht, Identificator id) {
+		mdht.getTemplateIds().add(id.getIi());
+		sortTemplateIds(mdht);
+	}
+
+	/**
+	 * Adds the template id.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
 	public static void addTemplateId(DataEnterer mdht, Identificator id) {
 		mdht.getTemplateIds().add(id.getIi());
 		sortTemplateIds(mdht);
@@ -140,6 +154,17 @@ public abstract class CdaUtil {
 		if (!alreadyExists)
 			addTemplateId(doc, id);
 		sortTemplateIds(doc);
+	}
+
+	public static void addTemplateIdOnce(Custodian mdht, Identificator id) {
+		boolean alreadyExists = false;
+		for (II existingId : mdht.getTemplateIds()) {
+			if (existingId.equals(id.getIi()))
+				alreadyExists = true;
+		}
+		if (!alreadyExists)
+			addTemplateId(mdht, id);
+		sortTemplateIds(mdht);
 	}
 
 	public static void addTemplateIdOnce(DataEnterer mdht, Identificator id) {
@@ -281,6 +306,25 @@ public abstract class CdaUtil {
 		list.sort(new IdentificatorComparator());
 		for (Identificator identificator : list) {
 			doc.getTemplateIds().add(identificator.getIi());
+		}
+
+	}
+
+	/**
+	 * Sort template ids.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
+	public static void sortTemplateIds(Custodian mdht) {
+		ArrayList<Identificator> list = new ArrayList<Identificator>();
+		for (II ii : mdht.getTemplateIds()) {
+			list.add(new Identificator(ii));
+		}
+		mdht.getTemplateIds().clear();
+		list.sort(new IdentificatorComparator());
+		for (Identificator identificator : list) {
+			mdht.getTemplateIds().add(identificator.getIi());
 		}
 
 	}
