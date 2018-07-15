@@ -32,12 +32,12 @@ import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 public class CdaChLoader<T> {
 
 	public CdaChV2StructuredBody<org.openhealthtools.mdht.uml.cda.ch.CdaChV2StructuredBody> loadCdaChV2StructuredBodyFromStream(
-			InputStream input) throws Exception {
+			InputStream inputStream) throws Exception {
 		// Explicit initialization
 		ChPackage.eINSTANCE.eClass();
 
 		// load the clinical document
-		final ClinicalDocument clinicalDocument = CDAUtil.load(input);
+		final ClinicalDocument clinicalDocument = CDAUtil.load(inputStream);
 
 		// the instance
 		final CdaChV2StructuredBody<org.openhealthtools.mdht.uml.cda.ch.CdaChV2StructuredBody> retVal = new CdaChV2StructuredBody<org.openhealthtools.mdht.uml.cda.ch.CdaChV2StructuredBody>(

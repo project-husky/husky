@@ -78,6 +78,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
+import org.openhealthtools.mdht.uml.hl7.vocab.EntityNameUse;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
@@ -378,6 +379,15 @@ public class Util {
 
 			final ON on = DatatypesFactory.eINSTANCE.createON();
 			on.addText(organization.getName());
+			if (!organization.getMdhtOrganization().getNames().isEmpty()) {
+				if (organization.getMdhtOrganization().getNames().get(0).getUses() != null) {
+					on.getUses().clear();
+					for (EntityNameUse item : organization.getMdhtOrganization().getNames().get(0)
+							.getUses()) {
+						on.getUses().add(item);
+					}
+				}
+			}
 			mdhtCustOrg.setName(on);
 
 			// take the first address and set it as CustodianAdress

@@ -90,13 +90,16 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	 *
 	 * @param laboratorySpecialtySection
 	 *            the laboratory specialty section.
+	 * @param sectionIndex
+	 *            the section index number.
 	 * @param contentIdPrefix
 	 *            the content id prefix for text references.
 	 * @return the narrative text for laboratory observations.
 	 */
 	public String generateNarrativeTextLaboratoryObservations(
-			AbstractLaboratorySpecialtySection laboratorySpecialtySection, String contentIdPrefix) {
-		return generateNarrativeTextLaboratoryObservations(laboratorySpecialtySection,
+			AbstractLaboratorySpecialtySection laboratorySpecialtySection, Integer sectionIndex,
+			String contentIdPrefix) {
+		return generateNarrativeTextLaboratoryObservations(laboratorySpecialtySection, sectionIndex,
 				contentIdPrefix, null);
 	}
 
@@ -107,6 +110,8 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	 *
 	 * @param laboratorySpecialtySection
 	 *            the laboratory specialty section
+	 * @param sectionIndex
+	 *            the section index number.
 	 * @param contentIdPrefix
 	 *            the content id prefix
 	 * @param posCodeSystemOid
@@ -115,10 +120,10 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	 * @return the laboratory observations text
 	 */
 	public String generateNarrativeTextLaboratoryObservations(
-			AbstractLaboratorySpecialtySection laboratorySpecialtySection, String contentIdPrefix,
-			String posCodeSystemOid) {
+			AbstractLaboratorySpecialtySection laboratorySpecialtySection, Integer sectionIndex,
+			String contentIdPrefix, String posCodeSystemOid) {
 		final ObservationChTextBuilder b = new ObservationChTextBuilder(this.getMdht(),
-				laboratorySpecialtySection, contentIdPrefix,
+				laboratorySpecialtySection, sectionIndex, contentIdPrefix,
 				LanguageCode.getEnum(getMdht().getLanguageCode().getCode()), posCodeSystemOid);
 		return b.toString();
 	}
@@ -130,6 +135,8 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	 *
 	 * @param laboratorySpecialtySection
 	 *            the laboratory specialty section
+	 * @param sectionIndex
+	 *            the section index number.
 	 * @param contentIdPrefix
 	 *            the content id prefix
 	 * @param posCodeSystemOid
@@ -142,11 +149,12 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	 * @return the laboratory observations text
 	 */
 	public String generateNarrativeTextLaboratoryObservations(
-			AbstractLaboratorySpecialtySection laboratorySpecialtySection, String contentIdPrefix,
-			String posCodeSystemOid, Comparator<AbstractOrganizer> organizerComparator,
+			AbstractLaboratorySpecialtySection laboratorySpecialtySection, Integer sectionIndex,
+			String contentIdPrefix, String posCodeSystemOid,
+			Comparator<AbstractOrganizer> organizerComparator,
 			Comparator<AbstractObservation> observationComparator) {
 		final ObservationChTextBuilder b = new ObservationChTextBuilder(this.getMdht(),
-				laboratorySpecialtySection, contentIdPrefix,
+				laboratorySpecialtySection, sectionIndex, contentIdPrefix,
 				LanguageCode.getEnum(getMdht().getLanguageCode().getCode()), posCodeSystemOid);
 		b.setOrganizerComparator(organizerComparator);
 		b.setObservationComparator(observationComparator);
@@ -158,18 +166,23 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	 * observations chapter</div> <div class="de">Liefert den menschenlesbaren
 	 * Text zu dem Kapitel Laborresultate zurück</div>.
 	 *
+	 * @param sectionIndex
+	 *            the section index number.
 	 * @param contentIdPrefix
 	 *            the content id prefix
 	 * @return the laboratory observations text
 	 */
-	public String generateNarrativeTextLaboratoryObservations(String contentIdPrefix) {
+	public String generateNarrativeTextLaboratoryObservations(Integer sectionIndex,
+			String contentIdPrefix) {
 		return generateNarrativeTextLaboratoryObservations(getLaboratorySpecialtySection(),
-				contentIdPrefix, null);
+				sectionIndex, contentIdPrefix, null);
 	}
 
 	/**
 	 * Generates the narrative text for laboratory observations.
 	 *
+	 * @param sectionIndex
+	 *            the section index number.
 	 * @param contentIdPrefix
 	 *            the content id prefix for text references.
 	 * @param posCodeSystemOid
@@ -177,10 +190,25 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	 *            2.16.756.5.30.1.129.1.3 for the Swiss Analysis List)
 	 * @return the narrative text for laboratory observations.
 	 */
-	public String generateNarrativeTextLaboratoryObservations(String contentIdPrefix,
-			String posCodeSystemOid) {
+	public String generateNarrativeTextLaboratoryObservations(Integer sectionIndex,
+			String contentIdPrefix, String posCodeSystemOid) {
 		return generateNarrativeTextLaboratoryObservations(getLaboratorySpecialtySection(),
-				contentIdPrefix, posCodeSystemOid);
+				sectionIndex, contentIdPrefix, posCodeSystemOid);
+	}
+
+	/**
+	 * Generates the narrative text for laboratory observations.
+	 *
+	 * @param sectionIndex
+	 *            the section index number.
+	 * @param contentIdPrefix
+	 *            the content id prefix for text references.
+	 * @return the narrative text for laboratory observations.
+	 */
+	public String generateNarrativeTextVitalSignObservations(Integer sectionIndex,
+			String contentIdPrefix) {
+		return generateNarrativeTextVitalSignObservations(getCodedVitalSignsSection(), sectionIndex,
+				contentIdPrefix);
 	}
 
 	/**
@@ -188,6 +216,8 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	 *
 	 * @param vitalSignsSection
 	 *            the vital signs section.
+	 * @param sectionIndex
+	 *            the section index number.
 	 * @param contentIdPrefix
 	 *            the content id prefix for text references.
 	 * @return the narrative text for laboratory observations.
@@ -195,22 +225,11 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	public String generateNarrativeTextVitalSignObservations(
 
 			org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection vitalSignsSection,
-			String contentIdPrefix) {
+			Integer sectionIndex, String contentIdPrefix) {
 		final ObservationChTextBuilder b = new ObservationChTextBuilder(vitalSignsSection,
-				contentIdPrefix, LanguageCode.getEnum(getMdht().getLanguageCode().getCode()));
+				sectionIndex, contentIdPrefix,
+				LanguageCode.getEnum(getMdht().getLanguageCode().getCode()));
 		return b.toString();
-	}
-
-	/**
-	 * Generates the narrative text for laboratory observations.
-	 *
-	 * @param contentIdPrefix
-	 *            the content id prefix for text references.
-	 * @return the narrative text for laboratory observations.
-	 */
-	public String generateNarrativeTextVitalSignObservations(String contentIdPrefix) {
-		return generateNarrativeTextVitalSignObservations(getCodedVitalSignsSection(),
-				contentIdPrefix);
 	}
 
 	/**

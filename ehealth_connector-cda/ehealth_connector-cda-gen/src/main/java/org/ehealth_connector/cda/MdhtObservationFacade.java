@@ -22,10 +22,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.ehealth_connector.cda.ihe.lab.LaboratoryObservation;
+import org.ehealth_connector.cda.ihe.lab.LaboratoryObservationComparator;
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 public class MdhtObservationFacade<E extends Observation> extends MdhtFacade<E> {
 
@@ -35,6 +42,23 @@ public class MdhtObservationFacade<E extends Observation> extends MdhtFacade<E> 
 
 	protected MdhtObservationFacade(E mdht, String templateIdRoot, String templateIdExtension) {
 		super(mdht, templateIdRoot, templateIdExtension);
+	}
+
+	/**
+	 * Adds the interpretation code.
+	 *
+	 * @param code
+	 *            the new interpretation code
+	 */
+	public void addInterpretationCode(Code code) {
+		getMdht().getInterpretationCodes().add(code.getCE());
+	}
+
+	public void addPreviousObservation(LaboratoryObservation prevObs) {
+		EntryRelationship er = CDAFactory.eINSTANCE.createEntryRelationship();
+		er.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
+		er.setObservation(prevObs.getMdht());
+		getMdht().getEntryRelationships().add(er);
 	}
 
 	protected void addValue(Value value) {
@@ -50,6 +74,36 @@ public class MdhtObservationFacade<E extends Observation> extends MdhtFacade<E> 
 	 */
 	public Date getEffectiveTime() {
 		return DateUtil.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
+	}
+
+	/**
+	 * <div class="en">Gets interpretation code values, which indicates wheater
+	 * an immune protection exists (Interpretation Code)</div>
+	 * <div class="de">Gibt zurück, ob ein Impfschutz besteht (erster
+	 * Interpretation Code).</div> <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @return the interpretation code
+	 */
+	public List<Code> getInterpretationCodes() {
+		final List<Code> icl = new ArrayList<Code>();
+		for (final CE ic : getMdht().getInterpretationCodes()) {
+			icl.add(new Code(ic));
+		}
+		return icl;
+	}
+
+	public List<LaboratoryObservation> getPreviousObservations() {
+		ArrayList<LaboratoryObservation> retVal = new ArrayList<LaboratoryObservation>();
+		for (EntryRelationship er : getMdht().getEntryRelationships()) {
+			if (er.getObservation() != null) {
+				org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation mdhtObs = (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation) er
+						.getObservation();
+				LaboratoryObservation lObs = new LaboratoryObservation(mdhtObs);
+				retVal.add(lObs);
+			}
+		}
+		retVal.sort(new LaboratoryObservationComparator());
+		return retVal;
 	}
 
 	/**
@@ -95,4 +149,5 @@ public class MdhtObservationFacade<E extends Observation> extends MdhtFacade<E> 
 			}
 		}
 	}
+
 }

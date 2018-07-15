@@ -18,6 +18,9 @@ package org.ehealth_connector.cda.ch;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 import javax.xml.bind.DatatypeConverter;
 
@@ -61,6 +64,49 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
  */
 public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		extends AbstractCda<EClinicalDocument> {
+
+	private class MyComparator implements Comparator<org.ehealth_connector.cda.Section> {
+		/**
+		 *
+		 * Compares two Section on their logical order regarding the
+		 * implementation guide (use the index property therefore) or on the
+		 * title.
+		 *
+		 * {@inheritDoc}
+		 *
+		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+		 */
+		@Override
+		public int compare(org.ehealth_connector.cda.Section a,
+				org.ehealth_connector.cda.Section b) {
+			if ((a == null) && (b == null))
+				return 0;
+			else if ((a == null) && (b != null))
+				return -1;
+			else if ((a != null) && (b == null))
+				return 1;
+			else {
+				if ((a.getIndex() == null) && (b.getIndex() == null)) {
+					if ((a.getTitle() == null) && (b.getTitle() == null))
+						return 0;
+					else if ((a.getTitle() == null) && (b.getTitle() != null))
+						return -1;
+					else if ((a.getTitle() != null) && (b.getTitle() == null))
+						return 1;
+					else
+						return a.getTitle().compareTo(b.getTitle());
+
+				} else if ((a.getIndex() == null) && (b.getIndex() != null))
+					return -1;
+				else if ((a.getIndex() != null) && (b.getIndex() == null))
+					return 1;
+				else
+					return a.getIndex().compareTo(b.getIndex());
+			}
+		}
+	}
+
+	private Comparator<org.ehealth_connector.cda.Section> mComparator = new MyComparator();
 
 	public CdaChV2StructuredBody(EClinicalDocument doc) {
 		super(doc);
@@ -115,6 +161,8 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	 *
 	 * @param laboratorySpecialtySection
 	 *            the laboratory specialty section
+	 * @param sectionIndex
+	 *            the section index number
 	 * @param contentIdPrefix
 	 *            the content id prefix
 	 * @param posCodeSystemOid
@@ -123,12 +171,31 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	 * @return the laboratory observations text
 	 */
 	public String generateNarrativeTextLaboratoryObservations(
-			AbstractLaboratorySpecialtySection laboratorySpecialtySection, String contentIdPrefix,
-			String posCodeSystemOid) {
+			AbstractLaboratorySpecialtySection laboratorySpecialtySection, Integer sectionIndex,
+			String contentIdPrefix, String posCodeSystemOid) {
 		final ObservationChTextBuilder b = new ObservationChTextBuilder(this.getMdht(),
-				laboratorySpecialtySection, contentIdPrefix,
+				laboratorySpecialtySection, sectionIndex, contentIdPrefix,
 				LanguageCode.getEnum(getMdht().getLanguageCode().getCode()), posCodeSystemOid);
 		return b.toString();
+	}
+
+	public List<LaboratorySpecialtySection> getLaboratorySpecialtySections() {
+		ArrayList<LaboratorySpecialtySection> retVal = new ArrayList<LaboratorySpecialtySection>();
+		for (Section item : getMdht().getSections()) {
+			retVal.add(new LaboratorySpecialtySection(item));
+		}
+		retVal.sort(mComparator);
+		return retVal;
+	}
+
+	public List<org.ehealth_connector.cda.Section> getSections() {
+		ArrayList<org.ehealth_connector.cda.Section> retVal = new ArrayList<org.ehealth_connector.cda.Section>();
+		for (Section item : getMdht().getSections()) {
+			retVal.add(new org.ehealth_connector.cda.Section(item.getTitle().getText(),
+					item.getText().getText()));
+		}
+		retVal.sort(mComparator);
+		return retVal;
 	}
 
 	@Override
@@ -148,9 +215,79 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		// Set the basic elements of the document as default values
 		Identificator id = new Identificator(org.openhealthtools.ihe.utils.UUID.generate());
 		setId(id);
-		setSetId(id);
 		setVersion(id, 1);
 		setTimestamp(DateUtil.nowAsDate());
+	}
+
+	/**
+	 * Sets the version number to 1 and makes sure the setId is the same as the
+	 * document id
+	 */
+	public void initFirstVersion() {
+		Identificator docId = getId();
+		if (docId == null) {
+			docId = new Identificator(org.openhealthtools.ihe.utils.UUID.generate());
+			setId(docId);
+		}
+		setVersion(docId, 1);
+	}
+
+	/**
+	 * Sets the version number to 1 and makes sure the setId is the same as the
+	 * document id
+	 */
+	public void initFirstVersion(Identificator newDocId) {
+		Identificator docId = newDocId;
+		if (docId == null) {
+			docId = new Identificator(org.openhealthtools.ihe.utils.UUID.generate());
+		}
+		setId(docId);
+		setVersion(docId, 1);
+	}
+
+	/**
+	 * Increases the version number by one and makes sure the setId remains the
+	 * same as previously
+	 */
+	public void initNextVersion() {
+		Identificator newDocId = new Identificator(org.openhealthtools.ihe.utils.UUID.generate());
+		Identificator setId = getSetId();
+
+		if (setId == null)
+			setId = getId();
+		if (setId == null)
+			setId = newDocId;
+
+		Integer version = getVersion();
+		if (version == null)
+			version = 1;
+
+		setId(newDocId);
+		setVersion(setId, version + 1);
+	}
+
+	/**
+	 * Increases the version number by one and makes sure the setId remains the
+	 * same as previously
+	 */
+	public void initNextVersion(Identificator newDocId) {
+		Identificator setId = getSetId();
+
+		if (setId == null)
+			setId = getId();
+		if (setId == null)
+			setId = newDocId;
+
+		Integer version = getVersion();
+		if (version == null)
+			version = 1;
+
+		setId(newDocId);
+		setVersion(setId, version + 1);
+	}
+
+	public void setComparator(Comparator<org.ehealth_connector.cda.Section> comparator) {
+		mComparator = comparator;
 	}
 
 	/**
@@ -238,7 +375,6 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	public void setId(Identificator id) {
 		if (id != null) {
 			getDoc().setId(id.getIi());
-			getDoc().setSetId(id.getIi());
 		}
 	}
 
@@ -271,8 +407,6 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	 *             occurred.</div>
 	 */
 	public void setOriginalRepresentationSection(byte[] pdf) throws IOException {
-		// TODO Add Template ID 2.16.756.5.30.1.1.10.1.14 ( CDA-CH v2.0 -
-		// structuredBody enhanced) if it dos not exist
 		Section s = CDAFactory.eINSTANCE.createSection();
 		final II tIi = DatatypesFactory.eINSTANCE.createII();
 		tIi.setRoot("2.16.756.5.30.1.1.10.3.45");

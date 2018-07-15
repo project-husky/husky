@@ -70,7 +70,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import ca.uhn.fhir.parser.IParser;
 
 /**
- * 
+ *
  * @author roeland
  * @version 1.0
  * @since Dec 30, 2017 10:15:32 PM
@@ -178,7 +178,7 @@ public class LrqcConverter extends AbstractCdaChFhirConverter {
 		// LaboratorySpecialtySection
 		if (doc.isNarrativeTextGenerationEnabled()) {
 			doc.setNarrativeTextSectionLaboratorySpeciality(
-					doc.generateNarrativeTextLaboratoryObservations("lss", null));
+					doc.generateNarrativeTextLaboratoryObservations(1, "lss", null));
 		} else {
 			final String narrative = getNarrative(docManifest,
 					FhirCommon.urnUseAsLaboratorySpecialtySection);

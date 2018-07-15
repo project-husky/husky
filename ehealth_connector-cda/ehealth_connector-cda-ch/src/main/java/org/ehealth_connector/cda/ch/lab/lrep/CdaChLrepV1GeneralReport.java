@@ -16,6 +16,10 @@
  */
 package org.ehealth_connector.cda.ch.lab.lrep;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.CdaChV2StructuredBody;
 import org.ehealth_connector.cda.utils.CdaUtil;
@@ -28,9 +32,13 @@ import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.Author;
 import org.openhealthtools.mdht.uml.cda.Custodian;
+import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.InformationRecipient;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
+import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
+import org.openhealthtools.mdht.uml.cda.ihe.lab.impl.LaboratoryBatteryOrganizerImpl;
+import org.openhealthtools.mdht.uml.cda.ihe.lab.impl.LaboratorySpecialtySectionImpl;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 
 /**
@@ -41,6 +49,8 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
  */
 public class CdaChLrepV1GeneralReport extends
 		CdaChV2StructuredBody<org.openhealthtools.mdht.uml.cda.ch.CdaChLrepV1GeneralReport> {
+
+	private int mSectionIndex = 0;
 
 	/**
 	 * {@inheritDoc}
@@ -117,19 +127,22 @@ public class CdaChLrepV1GeneralReport extends
 	public LaboratorySpecialtySection addLaboratoryBatteryOrganizerInNewSection(
 			LaboratoryBatteryOrganizer organizer, Code sectionCode, SpecimenCollectionEntry sce) {
 		LaboratorySpecialtySection laboratorySpecialtySection;
+		mSectionIndex++;
 		if (sectionCode != null) {
 			laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode,
 					getLanguageCode());
 		} else {
 			laboratorySpecialtySection = new LaboratorySpecialtySection();
 		}
+
 		laboratorySpecialtySection.addLaboratoryBatteryOrganizer(sectionCode, organizer,
 				getLanguageCode());
 		laboratorySpecialtySection.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
 				.setSpecimenCollectionEntry(sce);
 
-		laboratorySpecialtySection.setText(generateNarrativeTextLaboratoryObservations(
-				laboratorySpecialtySection, "lss", CodeSystems.SwissAL.getCodeSystemId()));
+		laboratorySpecialtySection
+				.setText(generateNarrativeTextLaboratoryObservations(laboratorySpecialtySection,
+						mSectionIndex, "lss", CodeSystems.SwissAL.getCodeSystemId()));
 
 		addLaboratorySpecialtySection(laboratorySpecialtySection);
 
@@ -152,6 +165,24 @@ public class CdaChLrepV1GeneralReport extends
 		InformationRecipient mdht = super.addRecipient(recipient);
 		CdaUtil.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.2.57"));
 		return mdht;
+	}
+
+	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteries() {
+		ArrayList<LaboratoryBatteryOrganizer> retVal = new ArrayList<LaboratoryBatteryOrganizer>();
+		for (Section section : getMdht().getSections()) {
+			if (section instanceof LaboratorySpecialtySectionImpl) {
+				EList<EntryRelationship> erList = section.getEntries().get(0).getAct()
+						.getEntryRelationships();
+				for (EntryRelationship er : erList) {
+					if (er.getOrganizer() instanceof LaboratoryBatteryOrganizerImpl) {
+						retVal.add(new LaboratoryBatteryOrganizer(
+								(org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer) er
+										.getOrganizer()));
+					}
+				}
+			}
+		}
+		return retVal;
 	}
 
 	/**

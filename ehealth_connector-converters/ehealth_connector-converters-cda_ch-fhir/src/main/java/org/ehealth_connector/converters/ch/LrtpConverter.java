@@ -77,7 +77,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import ca.uhn.fhir.parser.IParser;
 
 /**
- * 
+ *
  * @author roeland
  * @version 1.0
  * @since Dec 30, 2017 10:19:21 PM
@@ -164,7 +164,8 @@ public class LrtpConverter extends AbstractCdaChFhirConverter {
 				docManifest);
 		for (final LaboratorySpecialtySection lss : lssList) {
 			if (doc.isNarrativeTextGenerationEnabled()) {
-				lss.setNarrativeText(doc.generateNarrativeTextLaboratoryObservations(lss, "lss"));
+				lss.setNarrativeText(
+						doc.generateNarrativeTextLaboratoryObservations(lss, 1, "lss"));
 			}
 			doc.addLaboratorySpecialtySection(lss);
 		}
@@ -176,7 +177,7 @@ public class LrtpConverter extends AbstractCdaChFhirConverter {
 		}
 		if (doc.isNarrativeTextGenerationEnabled()) {
 			doc.setNarrativeTextSectionCodedVitalSignsSection(
-					doc.generateNarrativeTextVitalSignObservations("cvss"));
+					doc.generateNarrativeTextVitalSignObservations(2, "cvss"));
 		} else {
 			doc.setNarrativeTextSectionCodedVitalSignsSection(
 					getNarrative(docManifest, FhirCommon.urnUseAsCodedVitalSigns));

@@ -97,6 +97,7 @@ public class AbstractObservation
 	 * @param code
 	 *            the new interpretation code
 	 */
+	@Override
 	public void addInterpretationCode(Code code) {
 		mObservation.getInterpretationCodes().add(code.getCE());
 	}
@@ -267,6 +268,44 @@ public class AbstractObservation
 			return new ReferenceRange(getMdht().getReferenceRanges().get(0));
 		}
 		return null;
+	}
+
+	public String getResult() {
+		String retVal = "";
+		for (Value value : getValues()) {
+			String tempOneValue = "";
+			String tempOneUnit = "";
+			if (value != null) {
+				if (value.isPhysicalQuantity()) {
+					tempOneValue = value.getPhysicalQuantityValue();
+					if ("-1".equals(tempOneValue))
+						tempOneValue = "-";
+					tempOneUnit = value.getPhysicalQuantityUnit();
+				} else if (value.isRto()) {
+					tempOneValue = value.getRtoValueText();
+					tempOneUnit = value.getRtoUnitText();
+				} else if (value.isBl()) {
+					if (value.getValue() != null) {
+						String temp = value.getBlText();
+						if (temp != null) {
+							tempOneValue = temp;
+						}
+					}
+				} else if (value.isEd()) {
+					tempOneValue = value.toString();
+					tempOneValue = tempOneValue.replace("<", "&lt;");
+					tempOneValue = tempOneValue.replace(">", "&gt;");
+				} else
+					tempOneValue = value.toString();
+			}
+			if (!"".equals(retVal))
+				retVal = retVal + "<br />";
+			if (!"".equals(tempOneValue) && !"".equals(tempOneUnit))
+				retVal = tempOneValue + " " + tempOneUnit;
+			else
+				retVal = tempOneValue + tempOneUnit;
+		}
+		return retVal;
 	}
 
 	public ActSite getTargetSite() {

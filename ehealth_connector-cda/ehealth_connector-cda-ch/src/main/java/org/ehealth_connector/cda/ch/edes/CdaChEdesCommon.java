@@ -330,7 +330,7 @@ public class CdaChEdesCommon {
 		final ObservationChTextBuilder b = new ObservationChTextBuilder(
 				(org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection) mCodedVitalSigns
 						.getMdht(),
-				"cvit", LanguageCode.getEnum(mdhtDocument.getLanguageCode().getCode()));
+				1, "cvit", LanguageCode.getEnum(mdhtDocument.getLanguageCode().getCode()));
 		return b.toString();
 	}
 
@@ -351,7 +351,7 @@ public class CdaChEdesCommon {
 		final ObservationChTextBuilder b = new ObservationChTextBuilder(
 				(org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection) mCodedVitalSigns
 						.getMdht(),
-				"cvit", LanguageCode.getEnum(mdhtDocument.getLanguageCode().getCode()));
+				1, "cvit", LanguageCode.getEnum(mdhtDocument.getLanguageCode().getCode()));
 		b.setOrganizerComparator(organizerComparator);
 		b.setObservationComparator(observationComparator);
 		return b.toString();

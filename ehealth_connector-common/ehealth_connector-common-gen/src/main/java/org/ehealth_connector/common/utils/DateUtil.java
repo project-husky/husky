@@ -543,7 +543,12 @@ public class DateUtil {
 	 */
 	public static Date dateAndTime(String dateSt) {
 		try {
-			final SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+			SimpleDateFormat sdf;
+			if (dateSt.length() > 16)
+				sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
+			else
+				sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+
 			return sdf.parse(dateSt);
 		} catch (final ParseException e) {
 			// convert to RuntimeException

@@ -472,8 +472,8 @@ public class CdaChVacd extends AbstractCdaChV1<CdaChVacdV1> {
 		// content reference)
 		if (isNarrativeTextGenerationEnabled()) {
 			LaboratorySpecialtySection laboratorySpecialtySection = getLaboratorySpecialtySection();
-			lss.createStrucDocText(
-					generateNarrativeTextLaboratoryObservations(laboratorySpecialtySection, "lss"));
+			lss.createStrucDocText(generateNarrativeTextLaboratoryObservations(
+					laboratorySpecialtySection, 1, "lss"));
 		} else {
 			if (laboratoryObservation.getCommentText() != null) {
 				// Alle vorhandenen Kommentare zusammenfügen
@@ -872,7 +872,7 @@ public class CdaChVacd extends AbstractCdaChV1<CdaChVacdV1> {
 	 */
 	@Override
 	public CdaChVacdV1 getDoc() {
-		return (CdaChVacdV1) super.getDoc();
+		return super.getDoc();
 	}
 
 	/**

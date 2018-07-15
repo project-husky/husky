@@ -37,6 +37,7 @@ import org.ehealth_connector.cda.enums.ContentIdPrefix;
 import org.ehealth_connector.cda.enums.epsos.BloodGroup;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryAct;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection;
+import org.ehealth_connector.cda.ihe.lab.LaboratoryObservation;
 import org.ehealth_connector.cda.textbuilder.TextBuilder;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
@@ -76,6 +77,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	private final CodedVitalSignsSection codedVitalSignsSection;
 	private final AbstractLaboratorySpecialtySection laboratorySpecialtySection;
 	private final StudiesSummarySection studiesSummarySection;
+	private final Integer sectionIndex;
 	private final String contentIdPrefix;
 	private final LanguageCode lang;
 	private final ResourceBundle resBundle;
@@ -91,15 +93,17 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *            the doc
 	 * @param section
 	 *            the section.
+	 * @param sectionIndex
+	 *            the section index number.
 	 * @param contentIdPrefix
 	 *            the content id prefix for text references.
 	 * @param lang
 	 *            the language.
 	 */
 	public ObservationChTextBuilder(ClinicalDocument doc,
-			AbstractLaboratorySpecialtySection section, ContentIdPrefix contentIdPrefix,
-			LanguageCode lang) {
-		this(doc, section, contentIdPrefix.getContentIdPrefix(), lang, null);
+			AbstractLaboratorySpecialtySection section, Integer sectionIndex,
+			ContentIdPrefix contentIdPrefix, LanguageCode lang) {
+		this(doc, section, sectionIndex, contentIdPrefix.getContentIdPrefix(), lang, null);
 	}
 
 	/**
@@ -109,6 +113,8 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *            the doc
 	 * @param section
 	 *            the section.
+	 * @param sectionIndex
+	 *            the section index number
 	 * @param contentIdPrefix
 	 *            the content id prefix for text references.
 	 * @param lang
@@ -118,9 +124,10 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *            2.16.756.5.30.1.129.1.3 for the Swiss Analysis List)
 	 */
 	public ObservationChTextBuilder(ClinicalDocument doc,
-			AbstractLaboratorySpecialtySection section, ContentIdPrefix contentIdPrefix,
-			LanguageCode lang, String posCodeSystemOid) {
-		this(doc, section, contentIdPrefix.getContentIdPrefix(), lang, posCodeSystemOid);
+			AbstractLaboratorySpecialtySection section, Integer sectionIndex,
+			ContentIdPrefix contentIdPrefix, LanguageCode lang, String posCodeSystemOid) {
+		this(doc, section, sectionIndex, contentIdPrefix.getContentIdPrefix(), lang,
+				posCodeSystemOid);
 	}
 
 	/**
@@ -130,6 +137,8 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *            the doc
 	 * @param section
 	 *            the section.
+	 * @param sectionIndex
+	 *            the section index number
 	 * @param contentIdPrefix
 	 *            the content id prefix for text refernces.
 	 * @param lang
@@ -140,14 +149,15 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *            Analysis List)
 	 */
 	public ObservationChTextBuilder(ClinicalDocument doc,
-			AbstractLaboratorySpecialtySection section, String contentIdPrefix, LanguageCode lang,
-			String posCodeSystemOid) {
+			AbstractLaboratorySpecialtySection section, Integer sectionIndex,
+			String contentIdPrefix, LanguageCode lang, String posCodeSystemOid) {
 		this.doc = doc;
+		this.sectionIndex = sectionIndex;
 		this.codedVitalSignsSection = null;
 		this.studiesSummarySection = null;
 		this.laboratorySpecialtySection = section;
 		this.laboratoryAct = section.getAct();
-		this.contentIdPrefix = contentIdPrefix;
+		this.contentIdPrefix = contentIdPrefix + Integer.toString(sectionIndex);
 		this.lang = lang;
 		this.resBundle = ResourceBundle.getBundle("Messages",
 				new Locale(lang.getCodeValue().toLowerCase()));
@@ -162,14 +172,16 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *
 	 * @param section
 	 *            the section.
+	 * @param sectionIndex
+	 *            the section index number.
 	 * @param contentIdPrefix
 	 *            the content id prefix for text references.
 	 * @param lang
 	 *            the language.
 	 */
-	public ObservationChTextBuilder(CodedVitalSignsSection section, ContentIdPrefix contentIdPrefix,
-			LanguageCode lang) {
-		this(section, contentIdPrefix.getContentIdPrefix(), lang);
+	public ObservationChTextBuilder(CodedVitalSignsSection section, Integer sectionIndex,
+			ContentIdPrefix contentIdPrefix, LanguageCode lang) {
+		this(section, sectionIndex, contentIdPrefix.getContentIdPrefix(), lang);
 	}
 
 	/**
@@ -177,18 +189,21 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *
 	 * @param section
 	 *            the section.
+	 * @param sectionIndex
+	 *            the section index number.
 	 * @param contentIdPrefix
 	 *            the content id prefix for text refernces.
 	 * @param lang
 	 *            the language.
 	 */
-	public ObservationChTextBuilder(CodedVitalSignsSection section, String contentIdPrefix,
-			LanguageCode lang) {
+	public ObservationChTextBuilder(CodedVitalSignsSection section, Integer sectionIndex,
+			String contentIdPrefix, LanguageCode lang) {
 		this.laboratoryAct = null;
 		this.laboratorySpecialtySection = null;
 		this.studiesSummarySection = null;
 		this.codedVitalSignsSection = section;
-		this.contentIdPrefix = contentIdPrefix;
+		this.sectionIndex = sectionIndex;
+		this.contentIdPrefix = contentIdPrefix + Integer.toString(sectionIndex);
 		this.lang = lang;
 		this.resBundle = ResourceBundle.getBundle("Messages",
 				new Locale(lang.getCodeValue().toLowerCase()));
@@ -200,14 +215,16 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *
 	 * @param section
 	 *            the section.
+	 * @param sectionIndex
+	 *            the section index number.
 	 * @param contentIdPrefix
 	 *            the content id prefix for text references.
 	 * @param lang
 	 *            the language.
 	 */
-	public ObservationChTextBuilder(StudiesSummarySection section, ContentIdPrefix contentIdPrefix,
-			LanguageCode lang) {
-		this(section, contentIdPrefix.getContentIdPrefix(), lang);
+	public ObservationChTextBuilder(StudiesSummarySection section, Integer sectionIndex,
+			ContentIdPrefix contentIdPrefix, LanguageCode lang) {
+		this(section, sectionIndex, contentIdPrefix.getContentIdPrefix(), lang);
 	}
 
 	/**
@@ -215,18 +232,21 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *
 	 * @param section
 	 *            the section.
+	 * @param sectionIndex
+	 *            the section index n umber.
 	 * @param contentIdPrefix
 	 *            the content id prefix for text references.
 	 * @param lang
 	 *            the language.
 	 */
-	public ObservationChTextBuilder(StudiesSummarySection section, String contentIdPrefix,
-			LanguageCode lang) {
+	public ObservationChTextBuilder(StudiesSummarySection section, Integer sectionIndex,
+			String contentIdPrefix, LanguageCode lang) {
 		this.laboratoryAct = null;
 		this.laboratorySpecialtySection = null;
 		this.codedVitalSignsSection = null;
 		this.studiesSummarySection = section;
-		this.contentIdPrefix = contentIdPrefix;
+		this.sectionIndex = sectionIndex;
+		this.contentIdPrefix = contentIdPrefix + Integer.toString(sectionIndex);
 		this.lang = lang;
 		this.resBundle = ResourceBundle.getBundle("Messages",
 				new Locale(lang.getCodeValue().toLowerCase()));
@@ -427,7 +447,8 @@ public class ObservationChTextBuilder extends TextBuilder {
 
 			// Comments
 			contentId = contentIdPrefix + "_comment_" + rowNumber;
-			rowColumns.add(getCellWithContent(observation.getCommentText(contentId), contentId));
+			String comment = observation.getCommentText(contentId);
+			rowColumns.add(getCellWithContent(comment, contentId));
 
 			// Value obtained
 			rowColumns.add(getCell(getObservationResultObtainmentTimestamp(battery, observation)));
@@ -645,7 +666,16 @@ public class ObservationChTextBuilder extends TextBuilder {
 
 			// Comments
 			contentId = contentIdPrefix + "_" + sectionLabel + "_comment_" + rowNumber;
-			rowColumns.add(getCellWithContent(observation.getCommentText(contentId), contentId));
+			String comment = observation.getCommentText(contentId);
+			String prevObs = getPreviousObservationsText(observation,
+					contentIdPrefix + "_" + sectionLabel + "prevobs_" + rowNumber);
+			if (!"".equals(prevObs))
+				prevObs = resBundle.getString("observation.previous") + ":<br />" + prevObs;
+			if (!"".equals(comment) && !"".equals(prevObs))
+				comment = comment + "<br />" + prevObs;
+			else
+				comment = comment + prevObs;
+			rowColumns.add(getCellWithContent(comment, contentId));
 
 			// Specimen Collection
 			contentId = contentIdPrefix + "_" + sectionLabel + "_collectiondate_" + rowNumber;
@@ -761,8 +791,12 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 * @return the formatted timestamp
 	 */
 	public String formatDate(Date date) {
-		final SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
-		return sdf.format(date);
+		if (date == null)
+			return "";
+		else {
+			final SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+			return sdf.format(date);
+		}
 	}
 
 	/**
@@ -791,9 +825,9 @@ public class ObservationChTextBuilder extends TextBuilder {
 		if (!"".equals(value))
 			value = parseDate(value);
 		if (!"".equals(low))
-			value = parseDate(low);
+			low = parseDate(low);
 		if (!"".equals(high))
-			value = parseDate(high);
+			high = parseDate(high);
 		if ("".equals(low) && "".equals(high))
 			retVal = value;
 		else
@@ -974,6 +1008,19 @@ public class ObservationChTextBuilder extends TextBuilder {
 		return "";
 	}
 
+	private String getPreviousObservationsText(AbstractObservation observation, String contentId) {
+		String retVal = "";
+		if (observation != null) {
+			for (LaboratoryObservation prevObs : observation.getPreviousObservations()) {
+				if (!"".equals(retVal))
+					retVal = retVal + "<br />";
+				retVal = retVal + formatDate(prevObs.getDateTimeOfResult()) + ": "
+						+ prevObs.getResult(resBundle);
+			}
+		}
+		return retVal;
+	}
+
 	/**
 	 * Gets the narrative text of the specimen collection approach site.
 	 *
@@ -996,7 +1043,6 @@ public class ObservationChTextBuilder extends TextBuilder {
 						}
 					}
 				}
-
 			}
 		}
 		return retVal;
@@ -1177,25 +1223,22 @@ public class ObservationChTextBuilder extends TextBuilder {
 				codeStr = code.getCode();
 			} catch (Exception ex) {
 			}
+
 			if (!"".equals(codeStr))
 				titleExtension = resBundle.getString("loinc." + codeStr);
 			if (!"".equals(titleExtension) && !title.endsWith(titleExtension))
-				laboratorySpecialtySection.setTitle(title + " - " + titleExtension);
+				laboratorySpecialtySection.setTitle(
+						title + " " + Integer.toString(sectionIndex) + " - " + titleExtension);
 
 			String paragraph = "";
 			String orderNr = "";
 
-			if (laboratorySpecialtySection.getMdht() != null) {
-				if (laboratorySpecialtySection.getMdht().getClinicalDocument() != null) {
-					for (InFulfillmentOf inf : laboratorySpecialtySection.getMdht()
-							.getClinicalDocument().getInFulfillmentOfs()) {
-						if (inf.getOrder() != null) {
-							for (II id : inf.getOrder().getIds()) {
-								if (!"".equals(orderNr))
-									orderNr = orderNr + ", ";
-								orderNr = orderNr + id.getExtension();
-							}
-						}
+			for (InFulfillmentOf inf : doc.getInFulfillmentOfs()) {
+				if (inf.getOrder() != null) {
+					for (II id : inf.getOrder().getIds()) {
+						if (!"".equals(orderNr))
+							orderNr = orderNr + ", ";
+						orderNr = orderNr + id.getExtension();
 					}
 				}
 			}

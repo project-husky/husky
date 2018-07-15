@@ -35,9 +35,12 @@ import org.openhealthtools.mdht.uml.cda.DataEnterer;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.InformationRecipient;
 import org.openhealthtools.mdht.uml.cda.LegalAuthenticator;
+import org.openhealthtools.mdht.uml.cda.Organizer;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.StructuredBody;
+import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation;
+import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -165,6 +168,32 @@ public abstract class CdaUtil {
 	 * @param id
 	 *            the id
 	 */
+	public static void addTemplateId(LaboratoryObservation mdht, Identificator id) {
+		mdht.getTemplateIds().add(id.getIi());
+		sortTemplateIds(mdht);
+	}
+
+	/**
+	 * Adds the template id.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
+	public static void addTemplateId(LaboratoryReportDataProcessingEntry mdht, Identificator id) {
+		mdht.getTemplateIds().add(id.getIi());
+		sortTemplateIds(mdht);
+	}
+
+	/**
+	 * Adds the template id.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
 	public static void addTemplateId(LaboratorySpecialtySection mdht, Identificator id) {
 		mdht.getTemplateIds().add(id.getIi());
 		sortTemplateIds(mdht);
@@ -179,6 +208,19 @@ public abstract class CdaUtil {
 	 *            the id
 	 */
 	public static void addTemplateId(LegalAuthenticator mdht, Identificator id) {
+		mdht.getTemplateIds().add(id.getIi());
+		sortTemplateIds(mdht);
+	}
+
+	/**
+	 * Adds the template id.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
+	public static void addTemplateId(Organizer mdht, Identificator id) {
 		mdht.getTemplateIds().add(id.getIi());
 		sortTemplateIds(mdht);
 	}
@@ -295,6 +337,29 @@ public abstract class CdaUtil {
 		sortTemplateIds(mdht);
 	}
 
+	public static void addTemplateIdOnce(LaboratoryObservation mdht, Identificator id) {
+		boolean alreadyExists = false;
+		for (II existingId : mdht.getTemplateIds()) {
+			if (existingId.equals(id.getIi()))
+				alreadyExists = true;
+		}
+		if (!alreadyExists)
+			addTemplateId(mdht, id);
+		sortTemplateIds(mdht);
+	}
+
+	public static void addTemplateIdOnce(LaboratoryReportDataProcessingEntry mdht,
+			Identificator id) {
+		boolean alreadyExists = false;
+		for (II existingId : mdht.getTemplateIds()) {
+			if (existingId.equals(id.getIi()))
+				alreadyExists = true;
+		}
+		if (!alreadyExists)
+			addTemplateId(mdht, id);
+		sortTemplateIds(mdht);
+	}
+
 	public static void addTemplateIdOnce(LaboratorySpecialtySection mdht, Identificator id) {
 		boolean alreadyExists = false;
 		for (II existingId : mdht.getTemplateIds()) {
@@ -307,6 +372,17 @@ public abstract class CdaUtil {
 	}
 
 	public static void addTemplateIdOnce(LegalAuthenticator mdht, Identificator id) {
+		boolean alreadyExists = false;
+		for (II existingId : mdht.getTemplateIds()) {
+			if (existingId.equals(id.getIi()))
+				alreadyExists = true;
+		}
+		if (!alreadyExists)
+			addTemplateId(mdht, id);
+		sortTemplateIds(mdht);
+	}
+
+	public static void addTemplateIdOnce(Organizer mdht, Identificator id) {
 		boolean alreadyExists = false;
 		for (II existingId : mdht.getTemplateIds()) {
 			if (existingId.equals(id.getIi()))
@@ -561,6 +637,44 @@ public abstract class CdaUtil {
 	 * @param mdht
 	 *            the mdht
 	 */
+	public static void sortTemplateIds(LaboratoryObservation mdht) {
+		ArrayList<Identificator> list = new ArrayList<Identificator>();
+		for (II ii : mdht.getTemplateIds()) {
+			list.add(new Identificator(ii));
+		}
+		mdht.getTemplateIds().clear();
+		list.sort(new IdentificatorComparator());
+		for (Identificator identificator : list) {
+			mdht.getTemplateIds().add(identificator.getIi());
+		}
+
+	}
+
+	/**
+	 * Sort template ids.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
+	public static void sortTemplateIds(LaboratoryReportDataProcessingEntry mdht) {
+		ArrayList<Identificator> list = new ArrayList<Identificator>();
+		for (II ii : mdht.getTemplateIds()) {
+			list.add(new Identificator(ii));
+		}
+		mdht.getTemplateIds().clear();
+		list.sort(new IdentificatorComparator());
+		for (Identificator identificator : list) {
+			mdht.getTemplateIds().add(identificator.getIi());
+		}
+
+	}
+
+	/**
+	 * Sort template ids.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
 	public static void sortTemplateIds(LaboratorySpecialtySection mdht) {
 		ArrayList<Identificator> list = new ArrayList<Identificator>();
 		for (II ii : mdht.getTemplateIds()) {
@@ -581,6 +695,25 @@ public abstract class CdaUtil {
 	 *            the mdht
 	 */
 	public static void sortTemplateIds(LegalAuthenticator mdht) {
+		ArrayList<Identificator> list = new ArrayList<Identificator>();
+		for (II ii : mdht.getTemplateIds()) {
+			list.add(new Identificator(ii));
+		}
+		mdht.getTemplateIds().clear();
+		list.sort(new IdentificatorComparator());
+		for (Identificator identificator : list) {
+			mdht.getTemplateIds().add(identificator.getIi());
+		}
+
+	}
+
+	/**
+	 * Sort template ids.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
+	public static void sortTemplateIds(Organizer mdht) {
 		ArrayList<Identificator> list = new ArrayList<Identificator>();
 		for (II ii : mdht.getTemplateIds()) {
 			list.add(new Identificator(ii));

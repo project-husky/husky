@@ -57,6 +57,8 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 public class CdaChLrph
 		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrphV1> {
 
+	private Integer sectionIndex = 0;
+
 	/**
 	 * Standard constructor.
 	 */
@@ -176,6 +178,7 @@ public class CdaChLrph
 			Code sectionCode) {
 		LaboratorySpecialtySection laboratorySpecialtySection = getLaboratorySpecialtySection();
 		if (laboratorySpecialtySection == null) {
+			sectionIndex++;
 			if (sectionCode != null) {
 				laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode,
 						getLanguageCode());
@@ -187,8 +190,8 @@ public class CdaChLrph
 		laboratorySpecialtySection.addLaboratoryBatteryOrganizer(sectionCode, organizer,
 				getLanguageCode());
 		if (isNarrativeTextGenerationEnabled()) {
-			laboratorySpecialtySection.setText(
-					generateNarrativeTextLaboratoryObservations(laboratorySpecialtySection, "lss"));
+			laboratorySpecialtySection.setText(generateNarrativeTextLaboratoryObservations(
+					laboratorySpecialtySection, sectionIndex, "lss"));
 		}
 		setLaboratorySpecialtySection(laboratorySpecialtySection);
 	}
@@ -471,7 +474,7 @@ public class CdaChLrph
 
 		laboratorySpecialtySection
 				.setText(generateNarrativeTextLaboratoryObservations(laboratorySpecialtySection,
-						"lss1", null, organizerComparator, observationComparator));
+						sectionIndex, "lss", null, organizerComparator, observationComparator));
 
 	}
 

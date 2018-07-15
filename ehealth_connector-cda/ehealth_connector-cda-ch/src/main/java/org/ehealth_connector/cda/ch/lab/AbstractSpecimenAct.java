@@ -24,6 +24,7 @@ import org.ehealth_connector.cda.ihe.lab.NotificationOrganizer;
 import org.ehealth_connector.cda.ihe.lab.OutbreakIdentificationObservation;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
@@ -122,7 +123,9 @@ public class AbstractSpecimenAct extends org.ehealth_connector.cda.ihe.lab.Abstr
 	 */
 	public void addLaboratoryBatteryOrganizer(
 			org.ehealth_connector.cda.ch.lab.lrep.LaboratoryBatteryOrganizer laboratoryBatteryOrganizer) {
-		getMdht().addOrganizer(laboratoryBatteryOrganizer.copy());
+		Organizer organizer = laboratoryBatteryOrganizer.copy();
+		CdaUtil.addTemplateIdOnce(organizer, new Identificator("2.16.756.5.30.1.1.10.4.19"));
+		getMdht().addOrganizer(organizer);
 		// Set the right type for the entryRelationship
 		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
 				x_ActRelationshipEntryRelationship.COMP);

@@ -17,5 +17,5 @@
 package org.ehealth_connector.common.enums;
 
 public enum ParticipantType {
-	Insurance;
+	Insurance, Employer;
 }

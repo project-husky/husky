@@ -142,6 +142,17 @@ public class Performer {
 	}
 
 	/**
+	 * Instantiates a new performer.
+	 *
+	 * @param author
+	 *            the author to be used as performer.
+	 */
+	public Performer(Person person) {
+		this();
+		addName(person.getName());
+	}
+
+	/**
 	 * Weist dem Autor eine Postadresse zu.
 	 *
 	 * @param address

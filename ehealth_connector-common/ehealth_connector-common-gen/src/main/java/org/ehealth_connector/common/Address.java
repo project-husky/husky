@@ -19,6 +19,7 @@ package org.ehealth_connector.common;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.enums.AddressUse;
+import org.ehealth_connector.common.enums.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse;
@@ -51,6 +52,19 @@ public class Address {
 		mAd = adress;
 	}
 
+	public Address(NullFlavor nullFlavor) {
+		org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor nf = org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor
+				.get(nullFlavor.getCodeValue());
+		mAd = DatatypesFactory.eINSTANCE.createAD();
+		mAd.setNullFlavor(nf);
+		mAd.addPostalCode("");
+		mAd.addCity("");
+		mAd.addCountry("");
+		mAd.getPostalCodes().get(0).setNullFlavor(nf);
+		mAd.getCities().get(0).setNullFlavor(nf);
+		mAd.getCountries().get(0).setNullFlavor(nf);
+	}
+
 	/**
 	 * Erstellt ein Adress-Objekt
 	 *
@@ -61,7 +75,7 @@ public class Address {
 	 * @param usage
 	 *            Verwendungszweck (Privat, Geschäft)
 	 */
-	private Address(String zip, String city, AddressUse usage) {
+	public Address(String zip, String city, AddressUse usage) {
 		mAd = DatatypesFactory.eINSTANCE.createAD();
 		setCityAndZip(zip, city, usage);
 	}
@@ -100,7 +114,9 @@ public class Address {
 	public Address(String street, String houseNumber, String zip, String city) {
 		mAd = DatatypesFactory.eINSTANCE.createAD();
 		setStreet(street);
-		setHouseNumber(houseNumber);
+		if (houseNumber != null)
+			if (!"".equals(houseNumber))
+				setHouseNumber(houseNumber);
 		setCityAndZip(zip, city, AddressUse.PRIVATE);
 	}
 
@@ -121,7 +137,9 @@ public class Address {
 	public Address(String street, String houseNumber, String zip, String city, AddressUse usage) {
 		mAd = DatatypesFactory.eINSTANCE.createAD();
 		setStreet(street);
-		setHouseNumber(houseNumber);
+		if (houseNumber != null)
+			if (!"".equals(houseNumber))
+				setHouseNumber(houseNumber);
 		setCityAndZip(zip, city, usage);
 	}
 
@@ -254,7 +272,7 @@ public class Address {
 	 */
 	public String getState() {
 		if (mAd.getStates() != null && !mAd.getStates().isEmpty()) {
-				return mAd.getStates().get(0).getText();
+			return mAd.getStates().get(0).getText();
 		}
 		return null;
 	}
@@ -355,6 +373,7 @@ public class Address {
 	 */
 	public void setCountry(String country) {
 		if (country != null) {
+			mAd.getCountries().clear();
 			mAd.addCountry(country);
 		}
 	}
@@ -365,8 +384,10 @@ public class Address {
 	 * @param aHouseNumber
 	 *            Hausnummer
 	 */
-	public void setHouseNumber(String aHouseNumber) {
-		mAd.addHouseNumber(aHouseNumber);
+	public void setHouseNumber(String houseNumber) {
+		if (houseNumber != null)
+			if (!"".equals(houseNumber))
+				mAd.addHouseNumber(houseNumber);
 	}
 
 	/**

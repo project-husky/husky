@@ -29,7 +29,9 @@ import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.NullFlavor;
 import org.ehealth_connector.common.enums.StatusCode;
+import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
+import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
 
 /**
@@ -46,6 +48,10 @@ public abstract class AbstractLaboratoryObservation
 	public AbstractLaboratoryObservation() {
 		super();
 		getMdht().setStatusCode(StatusCode.COMPLETED.getCS());
+	}
+
+	public AbstractLaboratoryObservation(Observation observation) {
+		super((LaboratoryObservation) observation);
 	}
 
 	/**

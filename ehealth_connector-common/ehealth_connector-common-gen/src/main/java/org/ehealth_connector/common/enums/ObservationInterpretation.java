@@ -85,7 +85,7 @@ public enum ObservationInterpretation {
 	 * <div class="fr">Normal</div>
 	 * <div class="it">Normale</div>
 	 * */
-	NORMAL("N",	"Normal", "", "", ""),
+	NORMAL("N",	"Normal", "Normal", "Normal", "Normale"),
 
 	/**
 	 * <div class="en">Positive</div>

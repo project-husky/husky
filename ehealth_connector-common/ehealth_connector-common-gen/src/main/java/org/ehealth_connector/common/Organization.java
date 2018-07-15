@@ -66,6 +66,36 @@ public class Organization {
 	}
 
 	/**
+	 * Erstellt eine neue Organisation (Spital, Arztpraxis, Firma, Verein, etc.)
+	 *
+	 * @param name
+	 *            Name der Organisation
+	 */
+	public Organization(Name name) {
+		mOrganization = CDAFactory.eINSTANCE.createOrganization();
+		addName(name);
+	}
+
+	/**
+	 * Erstellt eine neue Organisation (Spital, Arztpraxis), die über eine
+	 * eigene ID (GLN) verfügt.
+	 *
+	 * @param name
+	 *            Name der Organisation
+	 * @param gln
+	 *            <br>
+	 *            <div class="de"> gln</div> <div class="fr"></div>
+	 *            <div class="it"></div>
+	 */
+	public Organization(Name name, String gln) {
+		this(name);
+		final II id = DatatypesFactory.eINSTANCE.createII();
+		id.setRoot(CodeSystems.GLN.getCodeSystemId());
+		id.setExtension(gln);
+		mOrganization.getIds().add(id);
+	}
+
+	/**
 	 * <div class="en">Instantiates a new organization.</div>
 	 * <div class="de">Instantiiert ein neues Organization Objekt</div>
 	 * <div class="fr"></div> <div class="it"></div>
@@ -148,11 +178,29 @@ public class Organization {
 	 * @param name
 	 *            Name
 	 */
+	public void addName(Name name) {
+		if (name != null) {
+			final ON orgaName = DatatypesFactory.eINSTANCE.createON();
+			orgaName.addText(name.getCompleteName());
+			if (name.getMdhtPn().getUses() != null) {
+				orgaName.getUses().clear();
+				orgaName.getUses().add(convertUse(name.getUse()));
+			}
+			getMdhtOrganization().getNames().add(orgaName);
+		}
+	}
+
+	/**
+	 * Weist der Organisation einen Namen zu.
+	 *
+	 * @param name
+	 *            Name
+	 */
 	public void addName(String name) {
 		if (name != null) {
 			final ON orgaName = DatatypesFactory.eINSTANCE.createON();
-			getMdhtOrganization().getNames().add(orgaName);
 			orgaName.addText(name);
+			getMdhtOrganization().getNames().add(orgaName);
 		}
 	}
 
@@ -169,8 +217,8 @@ public class Organization {
 			final ON orgaName = DatatypesFactory.eINSTANCE.createON();
 			orgaName.getUses().clear();
 			orgaName.getUses().add(convertUse(use));
-			getMdhtOrganization().getNames().add(orgaName);
 			orgaName.addText(name);
+			getMdhtOrganization().getNames().add(orgaName);
 		}
 	}
 
@@ -230,9 +278,11 @@ public class Organization {
 	 */
 	public List<Address> getAddresses() {
 		final List<Address> al = new ArrayList<Address>();
-		for (final AD mAddress : mOrganization.getAddrs()) {
-			final Address address = new Address(mAddress);
-			al.add(address);
+		if (mOrganization != null) {
+			for (final AD mAddress : mOrganization.getAddrs()) {
+				final Address address = new Address(mAddress);
+				al.add(address);
+			}
 		}
 		return al;
 	}
@@ -273,7 +323,10 @@ public class Organization {
 	}
 
 	public EList<TEL> getMdhtTelecoms() {
-		return mOrganization.getTelecoms();
+		if (mOrganization != null)
+			return mOrganization.getTelecoms();
+		else
+			return null;
 	}
 
 	/**

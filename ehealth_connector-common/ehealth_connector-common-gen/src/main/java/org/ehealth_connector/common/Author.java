@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.Isco08;
@@ -36,6 +37,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
+import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TS;
 
 /**
@@ -477,6 +479,10 @@ public class Author {
 	 */
 	public List<Identificator> getIds() {
 		return Util.convertIds(mAuthor.getAssignedAuthor().getIds());
+	}
+
+	public EList<TEL> getMdhtTelecoms() {
+		return mAuthor.getAssignedAuthor().getTelecoms();
 	}
 
 	/**

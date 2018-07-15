@@ -192,7 +192,7 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	public String generateNarrativeTextBloodGroupObservations(
 
 			StudiesSummarySection studiesSummarySection, String contentIdPrefix) {
-		final ObservationChTextBuilder b = new ObservationChTextBuilder(studiesSummarySection,
+		final ObservationChTextBuilder b = new ObservationChTextBuilder(studiesSummarySection, 1,
 				contentIdPrefix, LanguageCode.getEnum(getMdht().getLanguageCode().getCode()));
 		return b.toString();
 	}
@@ -207,8 +207,8 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 				i++;
 
 				s.createStrucDocText(generateNarrativeTextLaboratoryObservations(
-						new AbstractLaboratorySpecialtySection((LaboratorySpecialtySection) s),
-						"lss" + Integer.toString(i), CodeSystems.SwissAL.getCodeSystemId()));
+						new AbstractLaboratorySpecialtySection((LaboratorySpecialtySection) s), i,
+						"lss", CodeSystems.SwissAL.getCodeSystemId()));
 			}
 		}
 	}

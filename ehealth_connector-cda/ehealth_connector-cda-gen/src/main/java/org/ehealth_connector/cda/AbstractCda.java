@@ -81,6 +81,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 import org.openhealthtools.mdht.uml.hl7.vocab.RoleClass;
+import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassAssociative;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipDocument;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_InformationRecipient;
 
@@ -266,6 +267,10 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 				"type=\"text/css\" href=\"" + css + "\"");
 	}
 
+	public void addEmployer(Organization employer, Identificator employeeId) {
+		addParticipant(employer, employeeId, ParticipantType.Employer);
+	}
+
 	/**
 	 * <div class="en">Sets the in fulfillment of reference to another
 	 * document</div> <div class="de">Weist dem Dokument eine ID eines anderen
@@ -290,8 +295,8 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * @param versicherung
 	 *            the insurance organization
 	 */
-	public void addInsurance(Organization versicherung) {
-		addParticipant(versicherung, ParticipantType.Insurance);
+	public void addInsurance(Organization versicherung, Identificator insurantId) {
+		addParticipant(versicherung, insurantId, ParticipantType.Insurance);
 	}
 
 	/**
@@ -305,18 +310,38 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 *            <div class="de">Art der Partizipation (z.B.
 	 *            Versicherung)</div>
 	 */
-	public void addParticipant(Organization organization, ParticipantType participantType) {
-		// Set the given organization as Participant of this document.
+	public Participant1 addParticipant(Organization organization, Identificator participationId,
+			ParticipantType participantType) {
 		final Participant1 participant = CDAFactory.eINSTANCE.createParticipant1();
 		getDoc().getParticipants().add(participant);
 		final AssociatedEntity assEnt = CDAFactory.eINSTANCE.createAssociatedEntity();
-		participant.setAssociatedEntity(assEnt);
 
-		// org.openhealthtools.mdht.uml.cda.Organization docOrganization =
-		// CDAFactory.eINSTANCE.createOrganization();
 		final org.openhealthtools.mdht.uml.cda.Organization docOrganization = organization
 				.getMdhtOrganization();
 		assEnt.setScopingOrganization(docOrganization);
+
+		if (participationId != null) {
+			assEnt.getIds().clear();
+			assEnt.getIds().add(participationId.getIi());
+		}
+
+		switch (participantType) {
+		case Employer:
+			participant.setTypeCode(ParticipationType.IND);
+			assEnt.setClassCode(RoleClassAssociative.CON);
+			assEnt.setCode(
+					new Code("1.3.5.1.4.1.19376.1.5.3.3", "EMPLOYER", "Employer", "IHERoleCode")
+							.getCE());
+			break;
+		case Insurance:
+			break;
+		default:
+			break;
+		}
+
+		participant.setAssociatedEntity(assEnt);
+		return participant;
+
 	}
 
 	public InformationRecipient addRecipient(Organization organization) {
@@ -935,6 +960,26 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		final InFulfillmentOf ifo = CDAFactory.eINSTANCE.createInFulfillmentOf();
 		final Order o = CDAFactory.eINSTANCE.createOrder();
 		o.getIds().add(id.getIi());
+
+		ifo.setOrder(o);
+		getDoc().getInFulfillmentOfs().clear();
+		getDoc().getInFulfillmentOfs().add(ifo);
+	}
+
+	/**
+	 * <div class="en">Sets the in fulfillment of reference other
+	 * documents</div> <div class="de">Weist dem Dokument IDs von anderen
+	 * Dokumentes zu, auf die es sich bezieht</div>
+	 *
+	 * @param id
+	 *            of the referenced documents
+	 */
+	public void setInFulfillmentOf(List<Identificator> ids) {
+		final InFulfillmentOf ifo = CDAFactory.eINSTANCE.createInFulfillmentOf();
+		final Order o = CDAFactory.eINSTANCE.createOrder();
+		for (Identificator identificator : ids) {
+			o.getIds().add(identificator.getIi());
+		}
 
 		ifo.setOrder(o);
 		getDoc().getInFulfillmentOfs().clear();

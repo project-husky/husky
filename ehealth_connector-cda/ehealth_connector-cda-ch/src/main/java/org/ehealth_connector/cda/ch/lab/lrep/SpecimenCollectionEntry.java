@@ -54,4 +54,5 @@ public class SpecimenCollectionEntry
 	public SpecimenCollectionEntry(SpecimenCollection mdht) {
 		super(mdht);
 	}
+
 }

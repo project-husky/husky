@@ -100,6 +100,8 @@ public class CdaChLrtp
 		}
 	}
 
+	private Integer sectionIndex = 0;
+
 	/**
 	 * Standard constructor.
 	 */
@@ -270,6 +272,7 @@ public class CdaChLrtp
 		LaboratorySpecialtySection laboratorySpecialtySection = getLaboratorySpecialtySection(
 				sectionCode);
 		if (laboratorySpecialtySection == null) {
+			sectionIndex++;
 			if (sectionCode != null) {
 				laboratorySpecialtySection = new LaboratorySpecialtySection(sectionCode,
 						getLanguageCode());
@@ -281,8 +284,8 @@ public class CdaChLrtp
 		laboratorySpecialtySection.addLaboratoryBatteryOrganizer(sectionCode, organizer,
 				getLanguageCode());
 		if (isNarrativeTextGenerationEnabled()) {
-			laboratorySpecialtySection.setText(
-					generateNarrativeTextLaboratoryObservations(laboratorySpecialtySection, "lss"));
+			laboratorySpecialtySection.setText(generateNarrativeTextLaboratoryObservations(
+					laboratorySpecialtySection, sectionIndex, "lss"));
 		}
 		addLaboratorySpecialtySection(laboratorySpecialtySection);
 

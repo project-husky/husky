@@ -82,6 +82,24 @@ public class Name {
 	}
 
 	/**
+	 * <div class="en">Instantiates a new name.</div>
+	 * <div class="de">Instantiiert ein neues Name Objekt</div>
+	 * <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param name
+	 *            <br>
+	 *            <div class="de"> on</div> <div class="fr"></div>
+	 *            <div class="it"></div>
+	 * @param use
+	 *            the use
+	 */
+	public Name(String name, NameUse use) {
+		mPn = DatatypesFactory.eINSTANCE.createPN();
+		mPn.addText(name);
+		setUse(use);
+	}
+
+	/**
 	 * Erzeugt einen Personennamen (Dieser Konstruktor wird oft gebraucht für
 	 * Patienten).
 	 *
@@ -258,10 +276,10 @@ public class Name {
 	 * @return the use
 	 */
 	public NameUse getUse() {
-		NameUse retVal = NameUse.LEGAL;
+		NameUse retVal = null;
 		if (mPn.getUses() != null) {
-			if (mPn.getUses().size() >= 1) {
-				switch (mPn.getUses().get(1)) {
+			if (mPn.getUses().size() > 0) {
+				switch (mPn.getUses().get(0)) {
 				case ASGN:
 					retVal = NameUse.ASSIGNED;
 					break;
@@ -270,6 +288,9 @@ public class Name {
 					break;
 				case P:
 					retVal = NameUse.PSEUDONYM;
+					break;
+				default:
+					retVal = NameUse.LEGAL;
 					break;
 				}
 			}

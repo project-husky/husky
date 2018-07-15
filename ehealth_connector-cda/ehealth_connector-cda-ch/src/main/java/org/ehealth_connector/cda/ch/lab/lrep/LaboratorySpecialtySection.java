@@ -129,6 +129,7 @@ public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySecti
 			newLrdpe = true;
 			lrdpe = new LaboratoryReportDataProcessingEntry();
 		}
+		CdaUtil.addTemplateIdOnce(lrdpe.getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.4"));
 
 		AbstractSpecimenAct sa;
 		if (lrdpe.getSpecimenAct() == null) {
@@ -140,8 +141,6 @@ public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySecti
 		} else {
 			sa = new AbstractSpecimenAct(lrdpe.getSpecimenAct().getMdht());
 		}
-		CdaUtil.addTemplateIdOnce(sa.getMdht(), new Identificator("1.3.6.1.4.1.19376.1.3.1"));
-		CdaUtil.addTemplateIdOnce(sa.getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.4"));
 
 		sa.addLaboratoryBatteryOrganizer(organizer);
 

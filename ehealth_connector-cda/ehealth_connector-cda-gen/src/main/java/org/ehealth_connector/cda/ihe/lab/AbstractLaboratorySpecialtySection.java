@@ -24,7 +24,6 @@ import org.eclipse.emf.common.util.EList;
 import org.ehealth_connector.cda.AbstractObservation;
 import org.ehealth_connector.cda.MdhtSectionFacade;
 import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.Entry;
@@ -44,10 +43,6 @@ public class AbstractLaboratorySpecialtySection extends
 	public AbstractLaboratorySpecialtySection() {
 		super(LABFactory.eINSTANCE.createLaboratorySpecialtySection().init());
 		setTitle(LanguageCode.ENGLISH);
-		// TODO move this to the model
-//		Identificator id = new Identificator("2.16.756.5.30.1.1.10.3.3", null);
-//		getMdht().getTemplateIds().add(id.getIi());
-
 	}
 
 	/**

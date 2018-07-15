@@ -23,9 +23,12 @@ import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.AbstractObservation;
+import org.ehealth_connector.cda.AbstractObservationComparator;
 import org.ehealth_connector.cda.ObservationMediaEntry;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryBatteryOrganizer;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Performer;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.openhealthtools.mdht.uml.cda.ObservationMedia;
@@ -120,7 +123,9 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 	 *            the observation
 	 */
 	public void addLaboratoryObservation(LaboratoryObservation observation) {
-		getMdht().addObservation(observation.copy());
+		org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation mdht = observation.copy();
+		CdaUtil.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.4.3"));
+		getMdht().addObservation(mdht);
 
 		final int nb = getMdht().getComponents().size() - 1;
 		getMdht().getComponents().get(nb).setTypeCode(ActRelationshipHasComponent.COMP);
@@ -182,6 +187,7 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 				.getLaboratoryObservations()) {
 			loList.add(new AbstractObservation(lo));
 		}
+		loList.sort(new AbstractObservationComparator());
 		return loList;
 	}
 
@@ -210,6 +216,18 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 			ol.add(new ObservationMediaEntry(om));
 		}
 		return ol;
+	}
+
+	/**
+	 * Sets the effective time interval.
+	 *
+	 * @param low
+	 *            the low value
+	 * @param high
+	 *            the high value
+	 */
+	public void setEffectiveTime(Date low, Date high) {
+		getMdht().setEffectiveTime(DateUtil.convertDateToIvlTsyyyyMMddHHmmssZZZZ(low, high));
 	}
 
 }

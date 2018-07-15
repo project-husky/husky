@@ -27,6 +27,7 @@ import org.ehealth_connector.cda.ch.CdaChV2StructuredBody;
 import org.ehealth_connector.cda.ch.edes.CdaChEdesCtnn;
 import org.ehealth_connector.cda.ch.edes.CdaChEdesEdpn;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEdes;
+import org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport;
 import org.ehealth_connector.cda.ch.lab.lrph.CdaChLrph;
 import org.ehealth_connector.cda.ch.lab.lrqc.CdaChLrqc;
 import org.ehealth_connector.cda.ch.lab.lrtp.CdaChLrtp;
@@ -52,15 +53,43 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 public abstract class CdaChUtil extends CdaUtil {
 
 	/**
-	 * <div class="en">Loads a CdaChCdaChV2 document from a given File.</div>
-	 * <div class="de">Lädt ein CdaChCdaChV2 aus einer Datei.</div>
+	 * <div class="en">Loads a CdaChLrepV1GeneralReport document from a given
+	 * File.</div> <div class="de">Lädt ein CdaChLrepV1GeneralReport aus einer
+	 * Datei.</div> <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param filePath
+	 *            path to the XML file
+	 * @throws Exception
+	 *             the exception
+	 * @return the CdaChLrepV1GeneralReport Document
+	 */
+	public static CdaChLrepV1GeneralReport loadCdaChLrepV1GeneralReportFromFile(String filePath)
+			throws Exception {
+		return loadCdaChLrepV1GeneralReportFromStream(IOUtils.toInputStream(
+				IOUtils.toString(new InputStreamReader(new FileInputStream(filePath), "UTF-8")),
+				Charsets.UTF_8));
+	}
+
+	public static CdaChLrepV1GeneralReport loadCdaChLrepV1GeneralReportFromStream(
+			InputStream inputStream) throws Exception {
+		final CdaChLoader<CdaChLrepV1GeneralReport> loader = new CdaChLoader<CdaChLrepV1GeneralReport>();
+		CdaChLrepV1GeneralReport retVal = loader.loadFromStream(inputStream,
+				CdaChLrepV1GeneralReport.class,
+				org.openhealthtools.mdht.uml.cda.ch.CdaChLrepV1GeneralReport.class);
+		return retVal;
+
+	}
+
+	/**
+	 * <div class="en">Loads a CdaChV2 document from a given File.</div>
+	 * <div class="de">Lädt ein CdaChV2 aus einer Datei.</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param filePath
 	 *            path to the XML file
 	 * @throws Exception
 	 *             the exception
-	 * @return the CdaChCdaChV2 Document
+	 * @return the CdaChV2 Document
 	 */
 	public static CdaChV2StructuredBody<org.openhealthtools.mdht.uml.cda.ch.CdaChV2StructuredBody> loadCdaChV2FromFile(
 			String filePath) throws Exception {
@@ -70,15 +99,15 @@ public abstract class CdaChUtil extends CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Loads a CdaChCdaChV2 document from an inputstream.</div>
-	 * <div class="de">Lädt ein CdaChCdaChV2 aus einem Inputstream.</div>
+	 * <div class="en">Loads a CdaChV2 document from an inputstream.</div>
+	 * <div class="de">Lädt ein CdaChV2 aus einem Inputstream.</div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @param inputStream
 	 *            the inputstream
 	 * @throws Exception
 	 *             the exception
-	 * @return the CdaChCdaChV2 Document
+	 * @return the CdaChV2 Document
 	 */
 	public static CdaChV2StructuredBody<org.openhealthtools.mdht.uml.cda.ch.CdaChV2StructuredBody> loadCdaChV2FromStream(
 			InputStream inputStream) throws Exception {
