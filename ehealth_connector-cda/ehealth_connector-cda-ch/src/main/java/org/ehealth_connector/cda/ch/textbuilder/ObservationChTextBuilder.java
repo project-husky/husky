@@ -22,9 +22,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.NotImplementedException;
 import org.ehealth_connector.cda.AbstractObservation;
@@ -71,6 +77,21 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
  */
 public class ObservationChTextBuilder extends TextBuilder {
 
+	private static Map<String, Integer> sortMapByValue(Map<String, Integer> unsortMap,
+			final boolean order) {
+		List<Entry<String, Integer>> list = new LinkedList<>(unsortMap.entrySet());
+
+		// Sorting the list based on values
+		list.sort((o1, o2) -> order
+				? o1.getValue().compareTo(o2.getValue()) == 0 ? o1.getKey().compareTo(o2.getKey())
+						: o1.getValue().compareTo(o2.getValue())
+				: o2.getValue().compareTo(o1.getValue()) == 0 ? o2.getKey().compareTo(o1.getKey())
+						: o2.getValue().compareTo(o1.getValue()));
+		return list.stream().collect(
+				Collectors.toMap(Entry::getKey, Entry::getValue, (a, b) -> b, LinkedHashMap::new));
+
+	}
+
 	private ClinicalDocument doc = null;
 	private final List<String> headerColumns = new ArrayList<String>();
 	private final AbstractLaboratoryAct laboratoryAct;
@@ -83,6 +104,8 @@ public class ObservationChTextBuilder extends TextBuilder {
 	private final ResourceBundle resBundle;
 	private Comparator<AbstractOrganizer> organizerComparator = new AbstractOrganizerComparator();
 	private Comparator<AbstractObservation> observationComparator = new AbstractObservationComparator();
+
+	private Map<String, Integer> participationsMap = new HashMap();
 
 	private final String posCodeSystemOid;
 
@@ -335,11 +358,9 @@ public class ObservationChTextBuilder extends TextBuilder {
 		headerColumns.add(resBundle.getString("observation.header.codesystem"));
 		headerColumns.add(resBundle.getString("observation.header.code"));
 		headerColumns.add(resBundle.getString("observation.header.original_name"));
-		headerColumns.add(resBundle.getString("observation.header.comment"));
 		headerColumns.add(resBundle.getString("observation.header.result_obtain_date"));
-		headerColumns.add(resBundle.getString("observation.header.performer"));
-		headerColumns.add(resBundle.getString("observation.header.author"));
-		headerColumns.add(resBundle.getString("vitalsign.header.targetsite"));
+		headerColumns.add(resBundle.getString("observation.header.comment"));
+		headerColumns.add(resBundle.getString("generic.footnotes"));
 		append("<thead>");
 		append("<tr>");
 		for (String column : headerColumns) {
@@ -366,17 +387,9 @@ public class ObservationChTextBuilder extends TextBuilder {
 		headerColumns.add(resBundle.getString("observation.header.codesystem"));
 		headerColumns.add(resBundle.getString("observation.header.code"));
 		headerColumns.add(resBundle.getString("observation.header.original_name"));
-		headerColumns.add(resBundle.getString("observation.header.comment"));
-		headerColumns.add(resBundle.getString("observation.header.specimen_collection_date"));
-		headerColumns.add(resBundle.getString("observation.header.specimen_received_date"));
 		headerColumns.add(resBundle.getString("observation.header.result_obtain_date"));
-		headerColumns.add(resBundle.getString("observation.header.performer"));
-		headerColumns.add(resBundle.getString("observation.header.author"));
-		// Not yet implemented. This will be added by CDA-CH-LREP
-		// headerColumns.add(resBundle.getString("observation.header.validator"));
-		headerColumns.add(resBundle.getString("observation.header.specimen_material"));
-		headerColumns
-				.add(resBundle.getString("observation.header.specimen_collection_approchsite"));
+		headerColumns.add(resBundle.getString("observation.header.comment"));
+		headerColumns.add(resBundle.getString("generic.footnotes"));
 
 		append("<thead>");
 		append("<tr>");
@@ -445,22 +458,21 @@ public class ObservationChTextBuilder extends TextBuilder {
 			// Original Name
 			rowColumns.add(getCell(obsCode.getDisplayName()));
 
+			// Value obtained
+			rowColumns.add(getCell(getObservationResultObtainmentTimestamp(battery, observation)));
+
 			// Comments
 			contentId = contentIdPrefix + "_comment_" + rowNumber;
 			String comment = observation.getCommentText(contentId);
 			rowColumns.add(getCellWithContent(comment, contentId));
 
-			// Value obtained
-			rowColumns.add(getCell(getObservationResultObtainmentTimestamp(battery, observation)));
-
-			// Performer
-			rowColumns.add(getCell(getPerformer(battery, observation)));
-
-			// Author
-			rowColumns.add(getCell(getAuthor(battery, observation)));
-
-			// Target site
-			rowColumns.add(getCell(getVitalSignTargetSite(observation)));
+			// ----------------------------------------
+			// Foot notes
+			String footNnotes = "";
+			footNnotes = footNnotes + " " + getPerformer(battery, observation);
+			footNnotes = footNnotes + " " + getAuthor(battery, observation);
+			footNnotes = footNnotes + " " + getVitalSignTargetSite(observation);
+			rowColumns.add(getCell(footNnotes));
 
 		} else {
 			// create an empty row
@@ -485,20 +497,15 @@ public class ObservationChTextBuilder extends TextBuilder {
 			// Original Name
 			rowColumns.add(getCell(""));
 
-			// Comments
-			rowColumns.add(getCell(""));
-
 			// Value obtained
 			rowColumns.add(getCell(""));
 
-			// Performer
+			// Comments
 			rowColumns.add(getCell(""));
 
-			// Author
+			// Footnotes
 			rowColumns.add(getCell(""));
 
-			// Target site
-			rowColumns.add(getCell(""));
 		}
 
 		if (rowColumns.size() != headerColumns.size())
@@ -664,6 +671,9 @@ public class ObservationChTextBuilder extends TextBuilder {
 			// Original Name
 			rowColumns.add(getCell(tempDisplayName));
 
+			// Value obtained
+			rowColumns.add(getCell(getObservationResultObtainmentTimestamp(battery, observation)));
+
 			// Comments
 			contentId = contentIdPrefix + "_" + sectionLabel + "_comment_" + rowNumber;
 			String comment = observation.getCommentText(contentId);
@@ -677,32 +687,20 @@ public class ObservationChTextBuilder extends TextBuilder {
 				comment = comment + prevObs;
 			rowColumns.add(getCellWithContent(comment, contentId));
 
-			// Specimen Collection
+			// ----------------------------------------
+			// Foot notes
+			String footNnotes = "";
 			contentId = contentIdPrefix + "_" + sectionLabel + "_collectiondate_" + rowNumber;
-			rowColumns.add(getCellWithContent(getSpecimenCollectionDate(contentId), contentId));
-
-			// Specimen Received
+			footNnotes = footNnotes + " "
+					+ getContent(getSpecimenCollectionDate(contentId), contentId);
 			contentId = contentIdPrefix + "_" + sectionLabel + "_specimenreceiveddate_" + rowNumber;
-			rowColumns.add(getCellWithContent(getSpecimenReceivedDate(contentId), contentId));
-
-			// Value obtained
-			rowColumns.add(getCell(getObservationResultObtainmentTimestamp(battery, observation)));
-
-			// Performer
-			rowColumns.add(getCell(getPerformer(battery, observation)));
-
-			// Author
-			rowColumns.add(getCell(getAuthor(battery, observation)));
-
-			// Validator
-			// Not yet implemented. This will be added by CDA-CH-LREP
-			// rowColumns.add(getCell(""));
-
-			// Specimen Material
-			rowColumns.add(getCell(getSpecimenMaterial()));
-
-			// Specimen Collection Approach Site
-			rowColumns.add(getCell(getSpecimenCollectionApprochSite()));
+			footNnotes = footNnotes + " "
+					+ getContent(getSpecimenReceivedDate(contentId), contentId);
+			footNnotes = footNnotes + " " + getPerformer(battery, observation);
+			footNnotes = footNnotes + " " + getAuthor(battery, observation);
+			footNnotes = footNnotes + " " + getSpecimenMaterial();
+			footNnotes = footNnotes + " " + getSpecimenCollectionApprochSite();
+			rowColumns.add(getCell(footNnotes));
 
 		} else {
 			// create an empty row
@@ -741,32 +739,13 @@ public class ObservationChTextBuilder extends TextBuilder {
 			// Original Name
 			rowColumns.add(getCell(""));
 
-			// Comments
-			rowColumns.add(getCell(""));
-
-			// Specimen Collection
-			rowColumns.add(getCell(""));
-
-			// Specimen Received
-			rowColumns.add(getCell(""));
-
 			// Value obtained
 			rowColumns.add(getCell(""));
 
-			// Performer
+			// Comments
 			rowColumns.add(getCell(""));
 
-			// Author
-			rowColumns.add(getCell(""));
-
-			// Validator
-			// Not yet implemented. This will be added by CDA-CH-LREP
-			// rowColumns.add(getCell(""));
-
-			// Specimen Material
-			rowColumns.add(getCell(""));
-
-			// Specimen Collection Approach Site
+			// Footnotes
 			rowColumns.add(getCell(""));
 
 		}
@@ -879,6 +858,11 @@ public class ObservationChTextBuilder extends TextBuilder {
 			}
 
 		}
+		if (!"".equals(retVal))
+			retVal = "<sup>"
+					+ storeParticipationInMap(
+							resBundle.getString("observation.header.author") + ": " + retVal)
+					+ ")</sup>";
 		return retVal;
 	}
 
@@ -988,6 +972,11 @@ public class ObservationChTextBuilder extends TextBuilder {
 			}
 
 		}
+		if (!"".equals(retVal))
+			retVal = "<sup>"
+					+ storeParticipationInMap(
+							resBundle.getString("observation.header.performer") + ": " + retVal)
+					+ ")</sup>";
 		return retVal;
 	}
 
@@ -1045,6 +1034,11 @@ public class ObservationChTextBuilder extends TextBuilder {
 				}
 			}
 		}
+		if (!"".equals(retVal))
+			retVal = "<sup>"
+					+ storeParticipationInMap(resBundle.getString(
+							"observation.header.specimen_collection_approchsite") + ": " + retVal)
+					+ ")</sup>";
 		return retVal;
 	}
 
@@ -1073,6 +1067,11 @@ public class ObservationChTextBuilder extends TextBuilder {
 
 			}
 		}
+		if (!"".equals(retVal))
+			retVal = "<sup>" + storeParticipationInMap(
+					resBundle.getString("observation.header.specimen_collection_date") + ": "
+							+ retVal)
+					+ ")</sup>";
 		return retVal;
 	}
 
@@ -1112,6 +1111,10 @@ public class ObservationChTextBuilder extends TextBuilder {
 
 			}
 		}
+		if (!"".equals(retVal))
+			retVal = "<sup>" + storeParticipationInMap(
+					resBundle.getString("observation.header.specimen_material") + ": " + retVal)
+					+ ")</sup>";
 		return retVal;
 	}
 
@@ -1152,6 +1155,11 @@ public class ObservationChTextBuilder extends TextBuilder {
 
 			}
 		}
+		if (!"".equals(retVal))
+			retVal = "<sup>" + storeParticipationInMap(
+					resBundle.getString("observation.header.specimen_received_date") + ": "
+							+ retVal)
+					+ ")</sup>";
 		return retVal;
 	}
 
@@ -1166,6 +1174,13 @@ public class ObservationChTextBuilder extends TextBuilder {
 		String retVal = "";
 		if (observation.getTargetSite() != null)
 			retVal = observation.getTargetSite().getDisplayName(lang);
+
+		if (!"".equals(retVal))
+			retVal = "<sup>"
+					+ storeParticipationInMap(
+							resBundle.getString("vitalsign.header.targetsite") + ": " + retVal)
+					+ ")</sup>";
+
 		return retVal;
 	}
 
@@ -1202,6 +1217,18 @@ public class ObservationChTextBuilder extends TextBuilder {
 	public void setOrganizerComparator(Comparator<AbstractOrganizer> comparator) {
 		if (comparator != null)
 			organizerComparator = comparator;
+	}
+
+	private String storeParticipationInMap(String displayText) {
+		String retVal = null;
+		if (participationsMap.containsKey(displayText)) {
+			retVal = Integer.toString(participationsMap.get(displayText));
+		} else {
+			Integer value = participationsMap.size() + 1;
+			retVal = Integer.toString(value);
+			participationsMap.put(displayText, value);
+		}
+		return retVal;
 	}
 
 	/**
@@ -1303,6 +1330,13 @@ public class ObservationChTextBuilder extends TextBuilder {
 			addTableBody(sectionLabel);
 			append("</table>");
 		}
+
+		append("<br />");
+		for (Entry<String, Integer> entry : sortMapByValue(participationsMap, true).entrySet()) {
+			append("<sup>" + Integer.toString(entry.getValue()) + ") </sup>" + entry.getKey()
+					+ "<br />");
+		}
+
 		return super.toString();
 	}
 
@@ -1330,5 +1364,4 @@ public class ObservationChTextBuilder extends TextBuilder {
 		}
 		return retVal;
 	}
-
 }

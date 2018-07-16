@@ -172,7 +172,7 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 				.getLaboratoryReportDataProcessingEntry().getSpecimenAct()
 				.getSpecimenCollectionEntries().get(0).getSpecimenReceivedEntry());
 		assertTrue(cdaDeserialized != null);
-		assertEquals("Laboratory Specialty Section",
+		assertEquals("Laboratory report",
 				cdaDeserialized.getLaboratorySpecialtySection().getTitle());
 		assertTrue(LabObsList._5_FLUOROCYTOSINE_SUSCEPTIBILITY.getCode()
 				.equals(cdaDeserialized.getLaboratorySpecialtySection()

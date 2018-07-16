@@ -184,7 +184,7 @@ public class CdaChLrphTest extends AbstractLaboratoryReportTest {
 				.getNotificationOrganizer().getOutbreakIdentificationObservation());
 
 		assertTrue(cdaDeserialized != null);
-		assertEquals("Laboratory Specialty Section",
+		assertEquals("Laboratory report",
 				cdaDeserialized.getLaboratorySpecialtySection().getTitle());
 		assertTrue(LabObsListSnomed.BRUCELLA.getCode()
 				.equals(cdaDeserialized.getLaboratorySpecialtySection()

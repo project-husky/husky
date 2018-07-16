@@ -165,7 +165,7 @@ public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
 		assertNotNull(cda.getBloodGroupObservation());
 
 		assertTrue(cdaDeserialized != null);
-		assertEquals("Laboratory Specialty Section",
+		assertEquals("Laboratory report",
 				cdaDeserialized.getLaboratorySpecialtySections().get(0).getTitle());
 		assertTrue(LabObsList.A11_HLA_ANTIGENE.getCode()
 				.equals(cdaDeserialized.getLaboratorySpecialtySections().get(0)

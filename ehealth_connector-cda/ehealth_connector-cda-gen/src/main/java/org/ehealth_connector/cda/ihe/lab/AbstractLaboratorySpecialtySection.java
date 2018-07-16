@@ -143,7 +143,7 @@ public class AbstractLaboratorySpecialtySection extends
 			setTitle("Rapporto di laboratorio");
 			break;
 		case ENGLISH:
-			setTitle("Laboratory Specialty Section");
+			setTitle("Laboratory report");
 			break;
 		}
 	}
