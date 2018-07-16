@@ -12,6 +12,7 @@ Updated by Tony Schaller, medshare GmbH and HL7 affiliate Switzerland, for CDA-C
 Updated by Nico Ehinger, ELCA SA, code refactoring
 Updated by Tony Schaller, medshare GmbH and HL7 affiliate Switzerland, revised for CDA-CH Body templates and language dependent rendering
 Updated by Tony Schaller, medshare GmbH, revised for base64 embedded object rendering
+Updated by Tony Schaller, medshare GmbH, revised for tfoot and CDA-CH V2
 
 ********************************************************
 -->
@@ -26,6 +27,10 @@ Updated by Tony Schaller, medshare GmbH, revised for base64 embedded object rend
 	>
 
 	<xsl:output method="html" indent="yes" version="4.01" encoding="ISO-8859-1" doctype-public="-//W3C//DTD HTML 4.01//EN"/>
+
+	<xsl:variable name="stylesheetVersion">
+		<xsl:value-of select="'2.0.20180716'"/>
+	</xsl:variable>
 
 	<!-- The following variables are designed to be overwritten in a project specific xsl that imports the current cda-ch.xsl an example can be found in suva-emedidoc.xsl -->
 	<xsl:variable name="organizationName">
@@ -208,6 +213,10 @@ Updated by Tony Schaller, medshare GmbH, revised for base64 embedded object rend
 				<hr/>
 				<xsl:call-template name="bottomline"/>
 				<hr/>
+				<i>
+					<small>Rendered by cda-ch.xsl, v<xsl:value-of select="$stylesheetVersion"/>
+					</small>
+				</i>
 			</body>
 		</html>
 	</xsl:template>
@@ -546,6 +555,14 @@ Updated by Tony Schaller, medshare GmbH, revised for base64 embedded object rend
 		<span style="font-weight:bold; ">
 			<xsl:apply-templates/>
 		</span>
+	</xsl:template>
+	<xsl:template match="n1:tfoot/*/n1:td">
+		<xsl:variable name="numColumns">
+			<xsl:value-of select="count(ancestor::n1:table/*/*/n1:th)"/>
+		</xsl:variable>
+		<td colspan="{$numColumns}">
+			<xsl:apply-templates/>
+		</td>
 	</xsl:template>
 
 	<!--  RenderMultiMedia	-->
@@ -940,17 +957,84 @@ Updated by Tony Schaller, medshare GmbH, revised for base64 embedded object rend
 	<!--  Bottomline  -->
 	<xsl:template name="bottomline">
 		<table class="foot">
-			<xsl:if test="/n1:ClinicalDocument/n1:authorization/n1:consent">
-				<tr>
-					<th>
-						<xsl:value-of select="document('cda-ch-xsl-voc.xml')/localization/text[@language=$language and @value='Consent']/@displayName"/>
-						<xsl:text>:</xsl:text>
-					</th>
-					<td>
-						<xsl:value-of select="/n1:ClinicalDocument/n1:authorization/n1:consent/n1:code/n1:originalText"/>
-					</td>
-				</tr>
-			</xsl:if>
+			<xsl:for-each select="/n1:ClinicalDocument/n1:informationRecipient">
+				<xsl:choose>
+					<xsl:when test="n1:intendedRecipient/n1:informationRecipient and n1:intendedRecipient/n1:receivedOrganization">
+						<tr>
+							<th>
+								<xsl:call-template name="getRecipientType">
+									<xsl:with-param name="typeCode" select="@typeCode"/>
+								</xsl:call-template>
+							</th>
+							<td>
+								<xsl:call-template name="getName">
+									<xsl:with-param name="name" select="n1:intendedRecipient/n1:informationRecipient/n1:name"/>
+								</xsl:call-template>
+							</td>
+						</tr>
+						<tr>
+							<th class="empty"/>
+							<td>
+								<xsl:call-template name="getContactInfo">
+									<xsl:with-param name="contact" select="n1:intendedRecipient"/>
+								</xsl:call-template>
+							</td>
+						</tr>
+						<tr>
+							<th class="empty"/>
+							<td>
+								<xsl:call-template name="getName">
+									<xsl:with-param name="name" select="n1:intendedRecipient/n1:receivedOrganization/n1:name"/>
+								</xsl:call-template>
+							</td>
+						</tr>
+						<tr>
+							<th class="empty"/>
+							<td>
+								<xsl:call-template name="getContactInfo">
+									<xsl:with-param name="contact" select="n1:intendedRecipient/n1:receivedOrganization"/>
+								</xsl:call-template>
+							</td>
+						</tr>
+					</xsl:when>
+					<xsl:otherwise>
+						<tr>
+							<th>
+								<xsl:call-template name="getRecipientType">
+									<xsl:with-param name="typeCode" select="@typeCode"/>
+								</xsl:call-template>
+							</th>
+							<td>
+								<xsl:if test="n1:intendedRecipient/n1:informationRecipient">
+									<xsl:call-template name="getName">
+										<xsl:with-param name="name" select="n1:intendedRecipient/n1:informationRecipient/n1:name"/>
+									</xsl:call-template>
+								</xsl:if>
+								<xsl:if test="n1:intendedRecipient/n1:receivedOrganization">
+									<xsl:call-template name="getName">
+										<xsl:with-param name="name" select="n1:intendedRecipient/n1:receivedOrganization/n1:name"/>
+									</xsl:call-template>
+								</xsl:if>
+							</td>
+						</tr>
+						<tr>
+							<th class="empty"/>
+							<td>
+								<xsl:if test="n1:intendedRecipient/n1:informationRecipient">
+									<xsl:call-template name="getContactInfo">
+										<xsl:with-param name="contact" select="n1:intendedRecipient"/>
+									</xsl:call-template>
+								</xsl:if>
+								<xsl:if test="n1:intendedRecipient/n1:receivedOrganization">
+									<xsl:call-template name="getContactInfo">
+										<xsl:with-param name="contact" select="n1:intendedRecipient/n1:receivedOrganization"/>
+									</xsl:call-template>
+								</xsl:if>
+							</td>
+						</tr>
+					</xsl:otherwise>
+				</xsl:choose>
+			</xsl:for-each>
 			<tr>
 				<th>
 					<xsl:value-of select="document('cda-ch-xsl-voc.xml')/localization/text[@language=$language and @value='Custodian']/@displayName"/>
@@ -1009,7 +1093,24 @@ Updated by Tony Schaller, medshare GmbH, revised for base64 embedded object rend
 								<xsl:with-param name="contact" select="n1:assignedAuthor"/>
 							</xsl:call-template>
 						</xsl:if>
-						<xsl:if test="n1:assignedAuthor/n1:representedOrganization">
+						<xsl:variable name="testContent1">
+							<xsl:for-each select="n1:assignedAuthor/n1:representedOrganization/n1:addr/*">
+								<xsl:value-of select="./text()"/>
+							</xsl:for-each>
+							<xsl:for-each select="n1:assignedAuthor/n1:representedOrganization/n1:telecom">
+								<xsl:value-of select="@value"/>
+							</xsl:for-each>
+						</xsl:variable>
+						<xsl:variable name="testContent2">
+							<xsl:for-each select="n1:assignedAuthor/n1:addr/*">
+								<xsl:value-of select="./text()"/>
+							</xsl:for-each>
+							<xsl:for-each select="n1:assignedAuthor/n1:telecom">
+								<xsl:value-of select="@value"/>
+							</xsl:for-each>
+						</xsl:variable>
+						<xsl:variable name="contactInfoEqual" select="$testContent1=$testContent2"/>
+						<xsl:if test="not($contactInfoEqual)">
 							<xsl:call-template name="getContactInfo">
 								<xsl:with-param name="contact" select="n1:assignedAuthor/n1:representedOrganization"/>
 							</xsl:call-template>
@@ -1121,45 +1222,17 @@ Updated by Tony Schaller, medshare GmbH, revised for base64 embedded object rend
 					</td>
 				</tr>
 			</xsl:for-each>
-			<xsl:for-each select="/n1:ClinicalDocument/n1:informationRecipient">
+			<xsl:if test="/n1:ClinicalDocument/n1:authorization/n1:consent">
 				<tr>
 					<th>
-						<xsl:call-template name="getRecipientType">
-							<xsl:with-param name="typeCode" select="@typeCode"/>
-						</xsl:call-template>
+						<xsl:value-of select="document('cda-ch-xsl-voc.xml')/localization/text[@language=$language and @value='Consent']/@displayName"/>
+						<xsl:text>:</xsl:text>
 					</th>
 					<td>
-						<xsl:if test="n1:intendedRecipient/n1:informationRecipient">
-							<xsl:call-template name="getName">
-								<xsl:with-param name="name" select="n1:intendedRecipient/n1:informationRecipient/n1:name"/>
-							</xsl:call-template>
-						</xsl:if>
-						<xsl:if test="n1:intendedRecipient/n1:receivedOrganization">
-							<xsl:call-template name="getName">
-								<xsl:with-param name="name" select="n1:intendedRecipient/n1:receivedOrganization/n1:name"/>
-							</xsl:call-template>
-						</xsl:if>
+						<xsl:value-of select="/n1:ClinicalDocument/n1:authorization/n1:consent/n1:code/n1:originalText"/>
 					</td>
 				</tr>
-				<tr>
-					<th class="empty"/>
-					<td>
-						<xsl:call-template name="getContactInfo">
-							<xsl:with-param name="contact" select="n1:intendedRecipient/n1:receivedOrganization"/>
-						</xsl:call-template>
-						<xsl:if test="n1:intendedRecipient/n1:receivedOrganization">
-							<br />
-							<xsl:call-template name="getName">
-								<xsl:with-param name="name" select="n1:intendedRecipient/n1:receivedOrganization/n1:name"/>
-							</xsl:call-template>
-							<br />
-							<xsl:call-template name="getContactInfo">
-								<xsl:with-param name="contact" select="n1:intendedRecipient/n1:receivedOrganization"/>
-							</xsl:call-template>
-						</xsl:if>
-					</td>
-				</tr>
-			</xsl:for-each>
+			</xsl:if>
 		</table>
 	</xsl:template>
 
