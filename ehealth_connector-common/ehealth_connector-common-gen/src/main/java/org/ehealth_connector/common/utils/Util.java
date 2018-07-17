@@ -17,11 +17,13 @@
 
 package org.ehealth_connector.common.utils;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -1360,6 +1362,17 @@ public class Util {
 		final ST value = DatatypesFactory.eINSTANCE.createST();
 		value.addText(text);
 		return value;
+	}
+
+	/**
+	 * Converts the given string to an InputStream.
+	 *
+	 * @param inputStr
+	 *            the input string
+	 * @return the input stream
+	 */
+	public static InputStream string2InputStream(String inputStr) {
+		return new ByteArrayInputStream(inputStr.getBytes(StandardCharsets.UTF_8));
 	}
 
 	/**
