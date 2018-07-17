@@ -45,6 +45,7 @@ import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
+import org.openhealthtools.mdht.uml.hl7.rim.InfrastructureRoot;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
@@ -156,6 +157,19 @@ public abstract class CdaUtil {
 	 *            the id
 	 */
 	public static void addTemplateId(InformationRecipient mdht, Identificator id) {
+		mdht.getTemplateIds().add(id.getIi());
+		sortTemplateIds(mdht);
+	}
+
+	/**
+	 * Adds the template id.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
+	public static void addTemplateId(InfrastructureRoot mdht, Identificator id) {
 		mdht.getTemplateIds().add(id.getIi());
 		sortTemplateIds(mdht);
 	}
@@ -335,6 +349,17 @@ public abstract class CdaUtil {
 		if (!alreadyExists)
 			addTemplateId(mdht, id);
 		sortTemplateIds(mdht);
+	}
+
+	public static void addTemplateIdOnce(InfrastructureRoot doc, Identificator id) {
+		boolean alreadyExists = false;
+		for (II existingId : doc.getTemplateIds()) {
+			if (existingId.equals(id.getIi()))
+				alreadyExists = true;
+		}
+		if (!alreadyExists)
+			addTemplateId(doc, id);
+		sortTemplateIds(doc);
 	}
 
 	public static void addTemplateIdOnce(LaboratoryObservation mdht, Identificator id) {
@@ -619,6 +644,25 @@ public abstract class CdaUtil {
 	 *            the mdht
 	 */
 	public static void sortTemplateIds(InformationRecipient mdht) {
+		ArrayList<Identificator> list = new ArrayList<Identificator>();
+		for (II ii : mdht.getTemplateIds()) {
+			list.add(new Identificator(ii));
+		}
+		mdht.getTemplateIds().clear();
+		list.sort(new IdentificatorComparator());
+		for (Identificator identificator : list) {
+			mdht.getTemplateIds().add(identificator.getIi());
+		}
+
+	}
+
+	/**
+	 * Sort template ids.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
+	public static void sortTemplateIds(InfrastructureRoot mdht) {
 		ArrayList<Identificator> list = new ArrayList<Identificator>();
 		for (II ii : mdht.getTemplateIds()) {
 			list.add(new Identificator(ii));
