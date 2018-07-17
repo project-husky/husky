@@ -289,7 +289,7 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 		// Set OID of the document
 		setId(null);
 		setSetId(null);
-		setVersion(null, null);
+		setVersion(null, 1);
 
 		// Set default Swiss EPR confidentiality code of the document (normal)
 		setConfidentialityCode(org.ehealth_connector.common.ch.enums.ConfidentialityCode.NORMAL);

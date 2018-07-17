@@ -754,11 +754,11 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 *
 	 * @return the version
 	 */
-	public Integer getVersion() {
+	public int getVersion() {
 		if (getDoc().getVersionNumber() != null) {
 			return getDoc().getVersionNumber().getValue().intValue();
 		}
-		return null;
+		return 1;
 	}
 
 	/**
@@ -1174,18 +1174,14 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * @param version
 	 *            the version of the document
 	 */
-	public void setVersion(Identificator idVersion1, Integer version) {
+	public void setVersion(Identificator idVersion1, int version) {
 		setSetId(idVersion1);
-		setVersionNumber(version);
+		setVersion(version);
 	}
 
-	protected void setVersionNumber(Integer number) {
+	protected void setVersion(int number) {
 		final INT i = DatatypesFactory.eINSTANCE.createINT();
-		if (number == null) {
-			i.setValue(1);
-		} else {
-			i.setValue(number);
-		}
+		i.setValue(number);
 		getDoc().setVersionNumber(i);
 	}
 
