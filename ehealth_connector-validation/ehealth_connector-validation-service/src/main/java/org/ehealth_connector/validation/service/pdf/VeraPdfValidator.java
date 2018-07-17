@@ -236,8 +236,9 @@ public class VeraPdfValidator {
 
 			PDFAParser parser;
 			try {
-				parser = Foundries.defaultInstance()
-						.createParser(new ByteArrayInputStream(decodedBytes), flavour);
+				ByteArrayInputStream is = new ByteArrayInputStream(decodedBytes);
+				parser = Foundries.defaultInstance().createParser(is, flavour);
+				is.reset();
 				result = pdfValidator.validate(parser);
 			} catch (ModelParsingException | EncryptedPdfException | ValidationException e) {
 				aborted = true;
