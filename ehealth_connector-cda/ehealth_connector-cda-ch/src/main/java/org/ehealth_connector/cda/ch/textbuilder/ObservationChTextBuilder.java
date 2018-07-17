@@ -98,7 +98,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	private final CodedVitalSignsSection codedVitalSignsSection;
 	private final AbstractLaboratorySpecialtySection laboratorySpecialtySection;
 	private final StudiesSummarySection studiesSummarySection;
-	private final Integer sectionIndex;
+	private final int sectionIndex;
 	private final String contentIdPrefix;
 	private final LanguageCode lang;
 	private final ResourceBundle resBundle;
@@ -124,7 +124,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *            the language.
 	 */
 	public ObservationChTextBuilder(ClinicalDocument doc,
-			AbstractLaboratorySpecialtySection section, Integer sectionIndex,
+			AbstractLaboratorySpecialtySection section, int sectionIndex,
 			ContentIdPrefix contentIdPrefix, LanguageCode lang) {
 		this(doc, section, sectionIndex, contentIdPrefix.getContentIdPrefix(), lang, null);
 	}
@@ -147,7 +147,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *            2.16.756.5.30.1.129.1.3 for the Swiss Analysis List)
 	 */
 	public ObservationChTextBuilder(ClinicalDocument doc,
-			AbstractLaboratorySpecialtySection section, Integer sectionIndex,
+			AbstractLaboratorySpecialtySection section, int sectionIndex,
 			ContentIdPrefix contentIdPrefix, LanguageCode lang, String posCodeSystemOid) {
 		this(doc, section, sectionIndex, contentIdPrefix.getContentIdPrefix(), lang,
 				posCodeSystemOid);
@@ -172,8 +172,8 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *            Analysis List)
 	 */
 	public ObservationChTextBuilder(ClinicalDocument doc,
-			AbstractLaboratorySpecialtySection section, Integer sectionIndex,
-			String contentIdPrefix, LanguageCode lang, String posCodeSystemOid) {
+			AbstractLaboratorySpecialtySection section, int sectionIndex, String contentIdPrefix,
+			LanguageCode lang, String posCodeSystemOid) {
 		this.doc = doc;
 		this.sectionIndex = sectionIndex;
 		this.codedVitalSignsSection = null;
@@ -202,7 +202,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 * @param lang
 	 *            the language.
 	 */
-	public ObservationChTextBuilder(CodedVitalSignsSection section, Integer sectionIndex,
+	public ObservationChTextBuilder(CodedVitalSignsSection section, int sectionIndex,
 			ContentIdPrefix contentIdPrefix, LanguageCode lang) {
 		this(section, sectionIndex, contentIdPrefix.getContentIdPrefix(), lang);
 	}
@@ -219,7 +219,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 * @param lang
 	 *            the language.
 	 */
-	public ObservationChTextBuilder(CodedVitalSignsSection section, Integer sectionIndex,
+	public ObservationChTextBuilder(CodedVitalSignsSection section, int sectionIndex,
 			String contentIdPrefix, LanguageCode lang) {
 		this.laboratoryAct = null;
 		this.laboratorySpecialtySection = null;
@@ -245,7 +245,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 * @param lang
 	 *            the language.
 	 */
-	public ObservationChTextBuilder(StudiesSummarySection section, Integer sectionIndex,
+	public ObservationChTextBuilder(StudiesSummarySection section, int sectionIndex,
 			ContentIdPrefix contentIdPrefix, LanguageCode lang) {
 		this(section, sectionIndex, contentIdPrefix.getContentIdPrefix(), lang);
 	}
@@ -262,7 +262,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 * @param lang
 	 *            the language.
 	 */
-	public ObservationChTextBuilder(StudiesSummarySection section, Integer sectionIndex,
+	public ObservationChTextBuilder(StudiesSummarySection section, int sectionIndex,
 			String contentIdPrefix, LanguageCode lang) {
 		this.laboratoryAct = null;
 		this.laboratorySpecialtySection = null;

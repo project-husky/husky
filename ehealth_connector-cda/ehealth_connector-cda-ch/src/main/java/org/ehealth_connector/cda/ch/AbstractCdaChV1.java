@@ -97,7 +97,7 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	 * @return the narrative text for laboratory observations.
 	 */
 	public String generateNarrativeTextLaboratoryObservations(
-			AbstractLaboratorySpecialtySection laboratorySpecialtySection, Integer sectionIndex,
+			AbstractLaboratorySpecialtySection laboratorySpecialtySection, int sectionIndex,
 			String contentIdPrefix) {
 		return generateNarrativeTextLaboratoryObservations(laboratorySpecialtySection, sectionIndex,
 				contentIdPrefix, null);
@@ -120,7 +120,7 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	 * @return the laboratory observations text
 	 */
 	public String generateNarrativeTextLaboratoryObservations(
-			AbstractLaboratorySpecialtySection laboratorySpecialtySection, Integer sectionIndex,
+			AbstractLaboratorySpecialtySection laboratorySpecialtySection, int sectionIndex,
 			String contentIdPrefix, String posCodeSystemOid) {
 		final ObservationChTextBuilder b = new ObservationChTextBuilder(this.getMdht(),
 				laboratorySpecialtySection, sectionIndex, contentIdPrefix,
@@ -149,7 +149,7 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	 * @return the laboratory observations text
 	 */
 	public String generateNarrativeTextLaboratoryObservations(
-			AbstractLaboratorySpecialtySection laboratorySpecialtySection, Integer sectionIndex,
+			AbstractLaboratorySpecialtySection laboratorySpecialtySection, int sectionIndex,
 			String contentIdPrefix, String posCodeSystemOid,
 			Comparator<AbstractOrganizer> organizerComparator,
 			Comparator<AbstractObservation> observationComparator) {
@@ -172,7 +172,7 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	 *            the content id prefix
 	 * @return the laboratory observations text
 	 */
-	public String generateNarrativeTextLaboratoryObservations(Integer sectionIndex,
+	public String generateNarrativeTextLaboratoryObservations(int sectionIndex,
 			String contentIdPrefix) {
 		return generateNarrativeTextLaboratoryObservations(getLaboratorySpecialtySection(),
 				sectionIndex, contentIdPrefix, null);
@@ -190,7 +190,7 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	 *            2.16.756.5.30.1.129.1.3 for the Swiss Analysis List)
 	 * @return the narrative text for laboratory observations.
 	 */
-	public String generateNarrativeTextLaboratoryObservations(Integer sectionIndex,
+	public String generateNarrativeTextLaboratoryObservations(int sectionIndex,
 			String contentIdPrefix, String posCodeSystemOid) {
 		return generateNarrativeTextLaboratoryObservations(getLaboratorySpecialtySection(),
 				sectionIndex, contentIdPrefix, posCodeSystemOid);
@@ -205,7 +205,7 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	 *            the content id prefix for text references.
 	 * @return the narrative text for laboratory observations.
 	 */
-	public String generateNarrativeTextVitalSignObservations(Integer sectionIndex,
+	public String generateNarrativeTextVitalSignObservations(int sectionIndex,
 			String contentIdPrefix) {
 		return generateNarrativeTextVitalSignObservations(getCodedVitalSignsSection(), sectionIndex,
 				contentIdPrefix);
@@ -225,7 +225,7 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	public String generateNarrativeTextVitalSignObservations(
 
 			org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection vitalSignsSection,
-			Integer sectionIndex, String contentIdPrefix) {
+			int sectionIndex, String contentIdPrefix) {
 		final ObservationChTextBuilder b = new ObservationChTextBuilder(vitalSignsSection,
 				sectionIndex, contentIdPrefix,
 				LanguageCode.getEnum(getMdht().getLanguageCode().getCode()));

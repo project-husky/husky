@@ -33,6 +33,7 @@ import java.util.Stack;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.lang3.SystemUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
@@ -1005,6 +1006,40 @@ public class Util {
 	 */
 	public static Map<String, AddressUse> getPhones(List<TEL> telecoms) {
 		return getTelecomType(telecoms, TELECOMS_PHONE_PREFIX);
+	}
+
+	/**
+	 * <div class="en">Gets the system fonts paths in relation to the current
+	 * OS. This is where all the fonts must be found in order to embed them into
+	 * the PDF/A document.</div>
+	 *
+	 * @return <div class="en">the system fonts paths</div>
+	 */
+	public static List<String> getSystemFontsPaths() {
+		List<String> result = new ArrayList<String>();
+		if (SystemUtils.IS_OS_WINDOWS) {
+			String path = System.getenv("WINDIR");
+			result.add(path + "\\" + "Fonts");
+			return result;
+		} else if (SystemUtils.IS_OS_MAC_OSX || SystemUtils.IS_OS_MAC) {
+			result.add(System.getProperty("user.home") + File.separator + "Library/Fonts");
+			result.add("/Library/Fonts");
+			result.add("/System/Library/Fonts");
+			return result;
+		} else if (SystemUtils.IS_OS_LINUX) {
+			String[] pathsToCheck = { System.getProperty("user.home") + File.separator + ".fonts",
+					"/usr/share/fonts/truetype", "/usr/share/fonts/TTF" };
+			ArrayList<String> resultList = new ArrayList<>();
+
+			for (int i = pathsToCheck.length - 1; i >= 0; i--) {
+				String path = pathsToCheck[i];
+				File tmp = new File(path);
+				if (tmp.exists() && tmp.isDirectory() && tmp.canRead()) {
+					resultList.add(path);
+				}
+			}
+		}
+		return result;
 	}
 
 	/**

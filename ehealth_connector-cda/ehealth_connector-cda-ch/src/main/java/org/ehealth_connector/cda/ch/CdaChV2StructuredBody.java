@@ -171,7 +171,7 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	 * @return the laboratory observations text
 	 */
 	public String generateNarrativeTextLaboratoryObservations(
-			AbstractLaboratorySpecialtySection laboratorySpecialtySection, Integer sectionIndex,
+			AbstractLaboratorySpecialtySection laboratorySpecialtySection, int sectionIndex,
 			String contentIdPrefix, String posCodeSystemOid) {
 		final ObservationChTextBuilder b = new ObservationChTextBuilder(this.getMdht(),
 				laboratorySpecialtySection, sectionIndex, contentIdPrefix,

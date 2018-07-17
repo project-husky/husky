@@ -57,7 +57,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 public class CdaChLrph
 		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrphV1> {
 
-	private Integer sectionIndex = 0;
+	private int sectionIndex = 0;
 
 	/**
 	 * Standard constructor.

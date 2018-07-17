@@ -100,7 +100,7 @@ public class CdaChLrtp
 		}
 	}
 
-	private Integer sectionIndex = 0;
+	private int sectionIndex = 0;
 
 	/**
 	 * Standard constructor.
