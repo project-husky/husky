@@ -107,7 +107,7 @@ public class PharmManufacturedMaterialEntryTest {
 		String brandName = "various";
 		entry.setIngredientName(brandName);
 
-		Value quantity = new Value(1000, 1, Ucum.MilliGram);
+		Value quantity = new Value(new Double(1000), new Double(1), Ucum.MilliGram);
 
 		entry.setIngredientQuantity(quantity);
 

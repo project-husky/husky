@@ -263,42 +263,10 @@ public class Value {
 	 * @param value
 	 *            Der eigentliche Wert
 	 */
-	public Value(double value) {
+	public Value(Double value) {
 		this(DatatypesFactory.eINSTANCE.createPQ());
 		final PQ pq = (PQ) mValue;
 		pq.setValue(Double.valueOf(value));
-	}
-
-	/**
-	 * <div class="en">Instantiates a new value with the parameters for a MDHT
-	 * RTO Objekt (A quantity constructed as the quotient of a numerator
-	 * quantity divided by a denominator quantity.).</div>
-	 * <div class="de">Instantiiert eine neues Value RTO Objekt. Dieses wird
-	 * häufig für die Angabe von Titer verwendet. Mit diesem Konstruktor wird
-	 * ein Value Objekt auf Basis eines MDHT RTO Datenobjekts
-	 * initialisiert.</div> <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @param numerator
-	 *            The nominator value (nominator/denominator)
-	 *
-	 * @param denominator
-	 *            The denominator value (nominator/denominator)
-	 * @param ucumUnit
-	 *            the UCUM Unit
-	 */
-	public Value(double numerator, double denominator, Ucum ucumUnit) {
-		final RTO rto = DatatypesFactory.eINSTANCE.createRTO();
-
-		final PQ pq1 = DatatypesFactory.eINSTANCE.createPQ();
-		pq1.setUnit(ucumUnit.getCodeValue());
-		pq1.setValue(numerator);
-		final PQ pq2 = DatatypesFactory.eINSTANCE.createPQ();
-		pq2.setUnit(ucumUnit.getCodeValue());
-		pq2.setValue(denominator);
-
-		rto.setNumerator(pq1);
-		rto.setDenominator(pq2);
-		mValue = rto;
 	}
 
 	/**
@@ -360,6 +328,38 @@ public class Value {
 		ivlPq.setHigh(mhigh);
 
 		mValue = ivlPq;
+	}
+
+	/**
+	 * <div class="en">Instantiates a new value with the parameters for a MDHT
+	 * RTO Objekt (A quantity constructed as the quotient of a numerator
+	 * quantity divided by a denominator quantity.).</div>
+	 * <div class="de">Instantiiert eine neues Value RTO Objekt. Dieses wird
+	 * häufig für die Angabe von Titer verwendet. Mit diesem Konstruktor wird
+	 * ein Value Objekt auf Basis eines MDHT RTO Datenobjekts
+	 * initialisiert.</div> <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param numerator
+	 *            The nominator value (nominator/denominator)
+	 *
+	 * @param denominator
+	 *            The denominator value (nominator/denominator)
+	 * @param ucumUnit
+	 *            the UCUM Unit
+	 */
+	public Value(Double numerator, Double denominator, Ucum ucumUnit) {
+		final RTO rto = DatatypesFactory.eINSTANCE.createRTO();
+
+		final PQ pq1 = DatatypesFactory.eINSTANCE.createPQ();
+		pq1.setUnit(ucumUnit.getCodeValue());
+		pq1.setValue(numerator);
+		final PQ pq2 = DatatypesFactory.eINSTANCE.createPQ();
+		pq2.setUnit(ucumUnit.getCodeValue());
+		pq2.setValue(denominator);
+
+		rto.setNumerator(pq1);
+		rto.setDenominator(pq2);
+		mValue = rto;
 	}
 
 	public Value(ED ed) {

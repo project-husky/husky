@@ -1415,7 +1415,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 
 		// Ingredients
 		final PharmManufacturedMaterialEntry ingredientEntry = new PharmManufacturedMaterialEntry();
-		final Value quantity = new Value(16, 1, Ucum.MilliGram);
+		final Value quantity = new Value(new Double(16), new Double(1), Ucum.MilliGram);
 		final String brandName = "various";
 		ingredientEntry.setWhoAtcCode(getCodeWhoAtc());
 		ingredientEntry.setIngredientName(brandName);
