@@ -23,6 +23,7 @@ import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
@@ -946,6 +947,27 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		if (id != null) {
 			getDoc().setId(id.getIi());
 		}
+	}
+
+	/**
+	 * <div class="en">Sets the in fulfillment of reference other
+	 * documents</div> <div class="de">Weist dem Dokument IDs von anderen
+	 * Dokumentes zu, auf die es sich bezieht</div>
+	 *
+	 * @param id
+	 *            of the referenced documents
+	 */
+	public void setInFulfillmentOf(@SuppressWarnings("rawtypes") Collection ids) {
+		final InFulfillmentOf ifo = CDAFactory.eINSTANCE.createInFulfillmentOf();
+		final Order o = CDAFactory.eINSTANCE.createOrder();
+		for (Object identificator : ids) {
+			if (identificator instanceof Identificator)
+				o.getIds().add(((Identificator) identificator).getIi());
+		}
+
+		ifo.setOrder(o);
+		getDoc().getInFulfillmentOfs().clear();
+		getDoc().getInFulfillmentOfs().add(ifo);
 	}
 
 	/**
