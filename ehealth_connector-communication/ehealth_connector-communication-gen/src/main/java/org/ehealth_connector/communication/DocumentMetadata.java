@@ -41,8 +41,6 @@ import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 import org.openhealthtools.ihe.xds.metadata.extract.cdar2.CDAR2Extractor;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 
 /**
  * Provides metadata attributes as specified in [IHE ITI TF-3], Table 4.1-5:
@@ -214,11 +212,47 @@ public class DocumentMetadata {
 		// Workaround for a Bug in the CDAR2Extractor, which causes a
 		// NullpointerException, if no Telecom value is interted and
 		// logger.Debug is set to true
-		if ((author.getAuthorMdht().getAssignedAuthor().getTelecoms() == null)
-				|| author.getAuthorMdht().getAssignedAuthor().getTelecoms().isEmpty()) {
-			final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-			author.getAuthorMdht().getAssignedAuthor().getTelecoms().add(tel);
-		}
+
+		// 20180718 ts: empty TELs lead to the problem that the XTN cannot be
+		// extracted while processing the query response of an XDS document
+		// query:
+		// java.lang.ArrayStoreException:
+		// org.openhealthtools.ihe.common.hl7v2.impl.XTNImpl
+		// at org.eclipse.emf.common.util.BasicEList.assign(BasicEList.java:118)
+		// at
+		// org.eclipse.emf.common.util.BasicEList.addUnique(BasicEList.java:418)
+		// at
+		// org.eclipse.emf.common.notify.impl.NotifyingListImpl.doAddUnique(NotifyingListImpl.java:325)
+		// at
+		// org.eclipse.emf.common.notify.impl.NotifyingListImpl.addUnique(NotifyingListImpl.java:309)
+		// at
+		// org.eclipse.emf.common.util.AbstractEList.add(AbstractEList.java:303)
+		// at
+		// org.openhealthtools.ihe.xds.metadata.extract.EbXML_3_0DocumentEntryExtractor.extractExtrinsicObjectClassifications(EbXML_3_0DocumentEntryExtractor.java:574)
+		// at
+		// org.openhealthtools.ihe.xds.metadata.extract.EbXML_3_0DocumentEntryExtractor.extract(EbXML_3_0DocumentEntryExtractor.java:215)
+		// at
+		// org.openhealthtools.ihe.xds.consumer.utils.EbXML_3_0MetadataUtils.processEbXML_3_0QueryResults(EbXML_3_0MetadataUtils.java:226)
+		// at
+		// org.openhealthtools.ihe.xds.consumer.handlers.RegistryStoredQueryMetadataHandler.processResponse(RegistryStoredQueryMetadataHandler.java:71)
+		// at
+		// org.openhealthtools.ihe.xds.consumer.AbstractConsumer.invokeStoredQuery(AbstractConsumer.java:218)
+		// at
+		// org.openhealthtools.ihe.xds.consumer.B_Consumer.invokeStoredQuery(B_Consumer.java:215)
+		// at
+		// org.openhealthtools.ihe.xds.consumer.B_Consumer.invokeStoredQuery(B_Consumer.java:207)
+		// at
+		// org.ehealth_connector.communication.ConvenienceCommunication.queryDocuments(ConvenienceCommunication.java:751)
+		//
+		// Therefore we do no longer send empty TELs, here
+		// if ((author.getAuthorMdht().getAssignedAuthor().getTelecoms() ==
+		// null)
+		// ||
+		// author.getAuthorMdht().getAssignedAuthor().getTelecoms().isEmpty()) {
+		// final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		// author.getAuthorMdht().getAssignedAuthor().getTelecoms().add(tel);
+		// }
+
 		// There is another bug in the extractAuthorPerson Member. When the
 		// author has no id, the authorPerson object is not extracted. No
 		// workaround yet.
