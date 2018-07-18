@@ -326,44 +326,58 @@ public class PdfValidator {
 				pdfValidator.open(DatatypeConverter.parseBase64Binary(pdfStrB64), "",
 						comlianceLevel);
 
-				pdfValidator.validate();
-				pdfValidationResult.setIsDone();
-				PdfError err = pdfValidator.getFirstError();
-				if (err != null) {
-					while (err != null) {
-						final String sErrorMsg = err.getMessage();
-						final int errorCode = err.getErrorCode();
-						if (errorCode != -2092890606) {
-							final BitSet tempBS = BitSet
-									.valueOf(ByteBuffer.allocate(4).putInt(errorCode).array());
-							Severity severity = Severity.Information;
-
-							// ErrorCode --> Bit 7 = Error, Bit 23 = Warnung,
-							// sonst
-							// Info
-							if (tempBS.get(7))
-								severity = Severity.Error;
-							if (tempBS.get(23))
-								severity = Severity.Warning;
-							if ("The XMP property 'pdfaid:conformance' has the invalid value 'B'. Required is 'A'."
-									.equals(sErrorMsg)) {
-								severity = Severity.CustomWarning;
-							}
-							PdfValidationResultEntry pdfVResult = new PdfValidationResultEntry();
-							pdfVResult.setErrMsg(sErrorMsg, severity);
-							pdfVResult.setLineNumber(lineNumber);
-							pdfValidationResult.add(pdfVResult);
-						}
-						err = pdfValidator.getNextError();
-					}
-				} else {
-					PdfValidationResultEntry success = new PdfValidationResultEntry();
-					success.setLineNumber(lineNumber);
-					success.setErrMsg("PDF is compliant", Severity.Information);
-					pdfValidationResult.add(success);
+				if (pdfStrB64 == null) {
+					PdfValidationResultEntry failure = new PdfValidationResultEntry();
+					failure.setErrMsg("Base64 input string is null", Severity.Error);
+					pdfValidationResult.setIsDone();
+					pdfValidationResult.add(failure);
 				}
-				pdfValidator.close();
-				pdfValidator.destroyObject();
+				if (pdfStrB64.length() == 0) {
+					PdfValidationResultEntry failure = new PdfValidationResultEntry();
+					failure.setErrMsg("Base64 input string is empty", Severity.Error);
+					pdfValidationResult.setIsDone();
+					pdfValidationResult.add(failure);
+				} else {
+					pdfValidator.validate();
+					pdfValidationResult.setIsDone();
+					PdfError err = pdfValidator.getFirstError();
+					if (err != null) {
+						while (err != null) {
+							final String sErrorMsg = err.getMessage();
+							final int errorCode = err.getErrorCode();
+							if (errorCode != -2092890606) {
+								final BitSet tempBS = BitSet
+										.valueOf(ByteBuffer.allocate(4).putInt(errorCode).array());
+								Severity severity = Severity.Information;
+
+								// ErrorCode --> Bit 7 = Error, Bit 23 =
+								// Warnung,
+								// sonst
+								// Info
+								if (tempBS.get(7))
+									severity = Severity.Error;
+								if (tempBS.get(23))
+									severity = Severity.Warning;
+								if ("The XMP property 'pdfaid:conformance' has the invalid value 'B'. Required is 'A'."
+										.equals(sErrorMsg)) {
+									severity = Severity.CustomWarning;
+								}
+								PdfValidationResultEntry pdfVResult = new PdfValidationResultEntry();
+								pdfVResult.setErrMsg(sErrorMsg, severity);
+								pdfVResult.setLineNumber(lineNumber);
+								pdfValidationResult.add(pdfVResult);
+							}
+							err = pdfValidator.getNextError();
+						}
+					} else {
+						PdfValidationResultEntry success = new PdfValidationResultEntry();
+						success.setLineNumber(lineNumber);
+						success.setErrMsg("PDF is compliant", Severity.Information);
+						pdfValidationResult.add(success);
+					}
+					pdfValidator.close();
+					pdfValidator.destroyObject();
+				}
 			} else {
 				PdfValidationResultEntry pdfVResult = new PdfValidationResultEntry();
 				pdfVResult.setErrMsg(licenseErrorMsg, Severity.Error);

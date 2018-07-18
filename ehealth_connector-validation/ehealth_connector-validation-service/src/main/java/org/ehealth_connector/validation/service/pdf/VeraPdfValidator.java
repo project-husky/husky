@@ -26,6 +26,7 @@ import java.util.Set;
 
 import javax.xml.transform.stream.StreamSource;
 
+import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.validation.service.config.Configuration;
 import org.ehealth_connector.validation.service.config.ConfigurationException;
 import org.ehealth_connector.validation.service.enums.Severity;
@@ -234,26 +235,54 @@ public class VeraPdfValidator {
 			byte[] decodedBytes;
 			decodedBytes = Base64.getMimeDecoder().decode(pdfStrB64);
 
-			PDFAParser parser;
-			try {
-				ByteArrayInputStream is = new ByteArrayInputStream(decodedBytes);
-				parser = Foundries.defaultInstance().createParser(is, flavour);
-				is.reset();
-				result = pdfValidator.validate(parser);
-			} catch (ModelParsingException | EncryptedPdfException | ValidationException e) {
+			String debugString = "";
+			if (Util.isDebug()) {
+				debugString = debugString + "\n*** Debug: \n";
+				debugString = debugString + "pdfStrB64.length()="
+						+ Integer.toString(pdfStrB64.length()) + "\n";
+				debugString = debugString + "decodedBytes.length="
+						+ Integer.toString(decodedBytes.length) + "\n";
+				debugString = debugString + "\n*** End of debug\n";
+				System.out.print(debugString);
+			}
+
+			if (pdfStrB64 == null) {
 				aborted = true;
 				VeraPdfValidationResultEntry failure = new VeraPdfValidationResultEntry();
-				String errMsg = e.getClass().getName() + ": " + e.getMessage();
-				if (e.getCause() != null) {
-					if (e.getCause().getMessage() != null)
-						errMsg = errMsg + " (" + e.getCause().getMessage() + ")";
-				}
-				errMsg = errMsg
-						+ "*** Note: veraPDF seems still not to be fully thread save with version 1.12.1"
-						+ "Debug: decodedBytes.length=" + Integer.toString(decodedBytes.length);
-				failure.setErrMsg(errMsg, Severity.CustomWarning);
+				failure.setErrMsg("Base64 input string is null", Severity.Error);
 				pdfValidationResult.setIsDone();
 				pdfValidationResult.add(failure);
+			}
+			if (pdfStrB64.length() == 0) {
+				aborted = true;
+				VeraPdfValidationResultEntry failure = new VeraPdfValidationResultEntry();
+				failure.setErrMsg("Base64 input string is empty", Severity.Error);
+				pdfValidationResult.setIsDone();
+				pdfValidationResult.add(failure);
+			} else {
+				PDFAParser parser;
+				try {
+					ByteArrayInputStream is = new ByteArrayInputStream(decodedBytes);
+					parser = Foundries.defaultInstance().createParser(is, flavour);
+					is.reset();
+					result = pdfValidator.validate(parser);
+				} catch (ModelParsingException | EncryptedPdfException | ValidationException e) {
+					aborted = true;
+					VeraPdfValidationResultEntry failure = new VeraPdfValidationResultEntry();
+					String errMsg = e.getClass().getName() + ": " + e.getMessage();
+					if (e.getCause() != null) {
+						if (e.getCause().getMessage() != null)
+							errMsg = errMsg + " (" + e.getCause().getMessage() + ")";
+					}
+					errMsg = errMsg
+							+ "*** Note: veraPDF seems still not to be fully thread save with version 1.12.1";
+					if (Util.isDebug()) {
+						errMsg = errMsg + debugString;
+					}
+					failure.setErrMsg(errMsg, Severity.CustomWarning);
+					pdfValidationResult.setIsDone();
+					pdfValidationResult.add(failure);
+				}
 			}
 			if (!aborted) {
 				if (result != null) {
@@ -279,8 +308,7 @@ public class VeraPdfValidator {
 							Boolean realFailure = true;
 							// These rules appear under .Net, only. In order to
 							// synchronize Java and .Net validation results,
-							// these
-							// failures are suppressed.
+							// these failures are suppressed.
 							if ("6.2.2".equals(assertion.getRuleId().getClause())
 									&& (assertion.getRuleId().getTestNumber() == 1))
 								realFailure = false;

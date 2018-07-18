@@ -32,6 +32,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.ehealth_connector.communication.AtnaConfig.AtnaConfigMode;
 import org.ehealth_connector.communication.DocumentMetadata.DocumentMetadataExtractionMode;
@@ -132,6 +133,8 @@ public class ConvenienceCommunication {
 	 */
 	private SubmitTransactionData txnData = null;
 
+	private String lastError = "";
+
 	/**
 	 * <div class="en">Instantiates a new convenience communication without
 	 * affinity domain set-up. ATNA audit is disabled (unsecure) </div>
@@ -198,6 +201,7 @@ public class ConvenienceCommunication {
 	 * @return the document metadata (which have to be completed)</div>
 	 */
 	public DocumentMetadata addDocument(DocumentDescriptor desc, InputStream inputStream) {
+		lastError = "";
 		DocumentMetadata retVal = null;
 		XDSDocument doc;
 		try {
@@ -205,6 +209,12 @@ public class ConvenienceCommunication {
 			retVal = addXdsDocument(doc, desc);
 		} catch (final IOException e) {
 			log.error("Error adding document from inputstream.", e);
+			String message = e.getMessage();
+			if (e.getCause() != null)
+				message = e.getCause().getMessage() + ": " + message;
+			lastError = "Error adding document from inputstream: " + message;
+			if (Util.isDebug())
+				e.printStackTrace();
 		}
 		if (retVal != null)
 			retVal.setDocumentDescriptor(desc);
@@ -278,6 +288,7 @@ public class ConvenienceCommunication {
 	 * @return the DocumentMetadata
 	 */
 	protected DocumentMetadata addXdsDocument(XDSDocument doc, DocumentDescriptor desc) {
+		lastError = "";
 		if (txnData == null) {
 			txnData = new SubmitTransactionData();
 		}
@@ -304,8 +315,22 @@ public class ConvenienceCommunication {
 			return docMetadata;
 		} catch (final MetadataExtractionException e) {
 			log.error("Error adding document by extracting metadata.", e);
+			String message = e.getMessage();
+			if (e.getCause() != null)
+				message = e.getCause().getMessage() + ": " + message;
+			lastError = "Error adding document by extracting metadata: " + message;
+			if (Util.isDebug())
+				e.printStackTrace();
+
 		} catch (final SubmitTransactionCompositionException e) {
 			log.error("Error adding document by submit transaction.", e);
+			String message = e.getMessage();
+			if (e.getCause() != null)
+				message = e.getCause().getMessage() + ": " + message;
+			lastError = "Error adding document by submit transaction: " + message;
+			if (Util.isDebug())
+				e.printStackTrace();
+
 		}
 		return null;
 	}
@@ -639,6 +664,10 @@ public class ConvenienceCommunication {
 		return documentMetadataExtractionMode;
 	}
 
+	public String getLastError() {
+		return lastError;
+	}
+
 	/**
 	 * <div class="en">Gets the OHT transaction data (SubmissionSet and
 	 * DocumentMetadata)
@@ -713,6 +742,7 @@ public class ConvenienceCommunication {
 	 *         metadata</div>
 	 */
 	public XDSQueryResponseType queryDocuments(StoredQueryInterface query) {
+		lastError = "";
 		setDefaultKeystoreTruststore(affinityDomain.getRegistryDestination());
 		final B_Consumer consumer = new B_Consumer(
 				affinityDomain.getRegistryDestination().getUri());
@@ -721,6 +751,13 @@ public class ConvenienceCommunication {
 			return consumer.invokeStoredQuery(query.getOhtStoredQuery(), false);
 		} catch (final Exception e) {
 			log.error("Exception", e);
+			String message = e.getMessage();
+			if (e.getCause() != null)
+				message = e.getCause().getMessage() + ": " + message;
+			lastError = "Query for documents failed: " + message;
+			if (Util.isDebug())
+				e.printStackTrace();
+
 		}
 		return null;
 	}
@@ -741,6 +778,7 @@ public class ConvenienceCommunication {
 	 *         complete document metadata</div>
 	 */
 	public XDSQueryResponseType queryDocumentsReferencesOnly(StoredQueryInterface query) {
+		lastError = "";
 		setDefaultKeystoreTruststore(affinityDomain.getRegistryDestination());
 		final B_Consumer consumer = new B_Consumer(
 				affinityDomain.getRegistryDestination().getUri());
@@ -749,6 +787,13 @@ public class ConvenienceCommunication {
 			return consumer.invokeStoredQuery(query.getOhtStoredQuery(), true);
 		} catch (final Exception e) {
 			log.error("Exception", e);
+			String message = e.getMessage();
+			if (e.getCause() != null)
+				message = e.getCause().getMessage() + ": " + message;
+			lastError = "Query for document references failed: " + message;
+			if (Util.isDebug())
+				e.printStackTrace();
+
 		}
 		return null;
 	}

@@ -23,7 +23,9 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.AbstractObservation;
+import org.ehealth_connector.cda.AbstractObservationComparator;
 import org.ehealth_connector.cda.AbstractOrganizer;
+import org.ehealth_connector.cda.AbstractOrganizerComparator;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport;
 import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
@@ -454,6 +456,26 @@ public class CdaChLrph
 			return ("Laboratory Reports for Public Health");
 		}
 		return "Laboratory report";
+	}
+
+	/**
+	 * <div class="en">Generates the human readable text of the coded vital
+	 * signs section</div> <div class="de">Generiert den menschenlesbaren Text
+	 * des Kapitels zu Vitalzeichen</div>.
+	 *
+	 * @param organizerComparator
+	 *            the organizer comparator (pass null for default sorting)
+	 * @param observationComparator
+	 *            the observation comparator (pass null for default sorting)
+	 */
+	public void generateNarrativeTextLaboratoryObservations() {
+
+		LaboratorySpecialtySection laboratorySpecialtySection = getLaboratorySpecialtySection();
+
+		laboratorySpecialtySection.setText(generateNarrativeTextLaboratoryObservations(
+				laboratorySpecialtySection, sectionIndex, "lss", null,
+				new AbstractOrganizerComparator(), new AbstractObservationComparator()));
+
 	}
 
 	/**
