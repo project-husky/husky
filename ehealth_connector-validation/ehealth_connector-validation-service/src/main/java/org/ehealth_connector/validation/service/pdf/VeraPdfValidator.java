@@ -313,13 +313,16 @@ public class VeraPdfValidator {
 									&& (assertion.getRuleId().getTestNumber() == 1))
 								realFailure = false;
 							if ("6.2.3".equals(assertion.getRuleId().getClause())
+									&& (assertion.getRuleId().getTestNumber() == 1))
+								realFailure = false;
+							if ("6.2.3".equals(assertion.getRuleId().getClause())
 									&& (assertion.getRuleId().getTestNumber() == 2))
 								realFailure = false;
 							if ("6.2.3".equals(assertion.getRuleId().getClause())
-									&& (assertion.getRuleId().getTestNumber() == 5))
+									&& (assertion.getRuleId().getTestNumber() == 4))
 								realFailure = false;
 							if ("6.2.3".equals(assertion.getRuleId().getClause())
-									&& (assertion.getRuleId().getTestNumber() == 4))
+									&& (assertion.getRuleId().getTestNumber() == 5))
 								realFailure = false;
 							if ("6.3.4".equals(assertion.getRuleId().getClause())
 									&& (assertion.getRuleId().getTestNumber() == 1))
