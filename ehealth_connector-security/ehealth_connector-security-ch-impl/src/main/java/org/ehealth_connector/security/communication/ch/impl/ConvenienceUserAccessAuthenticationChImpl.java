@@ -17,6 +17,9 @@
  */
 package org.ehealth_connector.security.communication.ch.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeed;
 import org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeedResponse;
 import org.ehealth_connector.security.ch.ppq.PrivacyPolicyQuery;
@@ -29,6 +32,8 @@ import org.ehealth_connector.security.communication.impl.ConvenienceUserAccessAu
 import org.ehealth_connector.security.core.SecurityHeaderElement;
 import org.ehealth_connector.security.exceptions.ClientSendException;
 import org.ehealth_connector.security.saml2.Response;
+import org.opensaml.core.config.InitializationException;
+import org.opensaml.core.config.Initializer;
 
 /**
  * <!-- @formatter:off -->
@@ -41,14 +46,39 @@ import org.ehealth_connector.security.saml2.Response;
 public class ConvenienceUserAccessAuthenticationChImpl
 		extends ConvenienceUserAccessAuthenticationImpl implements PrivacyPolicyQueryModule {
 
+	/**
+	 * Instantiates a new instance and initializes the OpenSaml Libraries.
+	 *
+	 * @throws InitializationException
+	 */
+	public ConvenienceUserAccessAuthenticationChImpl() throws InitializationException {
+		super();
+
+		// This makes sure the Marshallers are loaded for serialisation!
+		// Note: the initial implementation did not work under .net. It has been
+		// therefore changed as follows:
+		List<Initializer> initializers = new ArrayList<Initializer>();
+		initializers.add(
+				new org.ehealth_connector.security.ch.epr.config.EprObjectProviderInitializer());
+		initializers.add(new org.opensaml.xacml.config.XMLObjectProviderInitializer());
+		initializers.add(new org.opensaml.xacml.profile.saml.config.XMLObjectProviderInitializer());
+		for (Initializer initializer : initializers) {
+			initializer.init();
+		}
+
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.ch.ppq.PrivacyPolicyQueryModule#invokePrivacyPolicyFeed(org.ehealth_connector.security.core.SecurityHeaderElement,
+	 *      org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeed,
+	 *      org.ehealth_connector.security.communication.ch.ppq.config.PpClientConfig)
+	 */
 	@Override
 	public PrivacyPolicyFeedResponse invokePrivacyPolicyFeed(SecurityHeaderElement aAssertion,
 			PrivacyPolicyFeed feed, PpClientConfig clientConfiguration) throws ClientSendException {
-		if (!initialized)
-			throw new ClientSendException("Opensaml Libs are not initialized");
-		if (!initialized) {
-			throw new ClientSendException("Opensaml Libs are not initialized");
-		}
 		final PpfClient client = ClientFactoryCh.getPpfClient(clientConfiguration);
 		return client.send(aAssertion, feed);
 	}
@@ -65,9 +95,6 @@ public class ConvenienceUserAccessAuthenticationChImpl
 	public Response invokePrivacyPolicyQuery(SecurityHeaderElement aAssertion,
 			PrivacyPolicyQuery query, PpClientConfig clientConfiguration)
 			throws ClientSendException {
-		if (!initialized) {
-			throw new ClientSendException("Opensaml Libs are not initialized");
-		}
 		final PpqClient client = ClientFactoryCh.getPpqClient(clientConfiguration);
 		return client.send(aAssertion, query);
 
