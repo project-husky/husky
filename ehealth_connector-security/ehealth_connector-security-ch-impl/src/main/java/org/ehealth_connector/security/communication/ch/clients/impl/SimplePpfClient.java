@@ -141,7 +141,7 @@ public class SimplePpfClient extends AbstractSoapClient<PrivacyPolicyFeedRespons
 			final EprPolicyRepositoryResponse response = (EprPolicyRepositoryResponse) unmarshaller
 					.unmarshall(reponseElement);
 
-			if (PrivacyPolicyFeedResponse.FAILURE.equals(response.getStatus())) {
+			if (!response.isStatusSuccess()) {
 				return parseResponseError(httpResponse);
 			}
 

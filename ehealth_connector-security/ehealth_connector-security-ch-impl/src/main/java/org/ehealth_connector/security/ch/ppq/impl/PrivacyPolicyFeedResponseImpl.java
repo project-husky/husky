@@ -33,6 +33,9 @@ import org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeedResponse;
  */
 public class PrivacyPolicyFeedResponseImpl implements PrivacyPolicyFeedResponse {
 
+	public static final String FAILURE = "urn:e-health-suisse:2015:response-status:failure";
+	public static final String SUCCESS = "urn:e-health-suisse:2015:response-status:success";
+
 	private List<Exception> mExceptions;
 
 	private PpfMethod mMethod;
@@ -71,6 +74,11 @@ public class PrivacyPolicyFeedResponseImpl implements PrivacyPolicyFeedResponse 
 	@Override
 	public String getStatus() {
 		return mStatus;
+	}
+
+	@Override
+	public Boolean isStatusSuccess() {
+		return PrivacyPolicyFeedResponseImpl.SUCCESS.equals(mStatus);
 	}
 
 	/**

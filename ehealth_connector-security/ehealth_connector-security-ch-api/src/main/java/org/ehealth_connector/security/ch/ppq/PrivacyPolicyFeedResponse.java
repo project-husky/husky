@@ -31,9 +31,6 @@ import org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeed.PpfMethod;
  */
 public interface PrivacyPolicyFeedResponse {
 
-	public static final String FAILURE = "urn:e-health-suisse:2015:response-status:failure";
-	public static final String SUCCESS = "urn:e-health-suisse:2015:response-status:success";
-
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the list of errors if available.</div>
@@ -82,4 +79,10 @@ public interface PrivacyPolicyFeedResponse {
 	 */
 	String getStatus();
 
+	/**
+	 * Checks whether the response contains a successful status.
+	 *
+	 * @return True in case of success. False in case of failure
+	 */
+	Boolean isStatusSuccess();
 }

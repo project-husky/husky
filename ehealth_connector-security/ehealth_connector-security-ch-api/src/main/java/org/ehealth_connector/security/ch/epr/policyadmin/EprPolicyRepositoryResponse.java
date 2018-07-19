@@ -59,4 +59,10 @@ public interface EprPolicyRepositoryResponse extends BasePolicyAdministration {
 	 */
 	String getStatus();
 
+	/**
+	 * Checks whether the response contains a successful status.
+	 *
+	 * @return True in case of success. False in case of failure
+	 */
+	Boolean isStatusSuccess();
 }

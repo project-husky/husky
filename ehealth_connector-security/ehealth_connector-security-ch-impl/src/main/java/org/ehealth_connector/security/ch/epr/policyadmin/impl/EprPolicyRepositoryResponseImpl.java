@@ -20,6 +20,7 @@ package org.ehealth_connector.security.ch.epr.policyadmin.impl;
 import java.util.List;
 
 import org.ehealth_connector.security.ch.epr.policyadmin.OpenSamlEprPolicyRepositoryResponse;
+import org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyFeedResponseImpl;
 import org.opensaml.core.xml.XMLObject;
 
 /**
@@ -51,8 +52,12 @@ public class EprPolicyRepositoryResponseImpl extends AbstractAssertionBasedReque
 	}
 
 	@Override
+	public Boolean isStatusSuccess() {
+		return PrivacyPolicyFeedResponseImpl.SUCCESS.equals(status);
+	}
+
+	@Override
 	public void setStatus(String aStatus) {
 		status = aStatus;
 	}
-
 }
