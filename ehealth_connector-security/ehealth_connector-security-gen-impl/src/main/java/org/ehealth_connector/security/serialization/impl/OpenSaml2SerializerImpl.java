@@ -18,7 +18,9 @@
 package org.ehealth_connector.security.serialization.impl;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Map;
 
+import javax.xml.namespace.QName;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
@@ -50,6 +52,29 @@ public class OpenSaml2SerializerImpl implements OpenSaml2Serializer {
 	public OpenSaml2SerializerImpl() {
 		System.setProperty("javax.xml.parsers.DocumentBuilderFactory",
 				"org.apache.xerces.jaxp.DocumentBuilderFactoryImpl");
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.serialization.OpenSaml2Serializer#getLoadedMarshallerCount()
+	 */
+	@Override
+	public Integer getLoadedMarshallerCount() {
+		Integer retVal = 0;
+		try {
+			final MarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport
+					.getMarshallerFactory();
+			if (marshallerFactory != null) {
+				Map<QName, Marshaller> map = marshallerFactory.getMarshallers();
+				if (map != null)
+					retVal = marshallerFactory.getMarshallers().size();
+			}
+		} catch (Exception e) {
+			// Do nothing
+		}
+		return retVal;
 	}
 
 	/**

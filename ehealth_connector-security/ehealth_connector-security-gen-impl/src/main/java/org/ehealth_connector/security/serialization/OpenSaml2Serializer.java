@@ -32,6 +32,13 @@ import org.w3c.dom.Element;
 public interface OpenSaml2Serializer {
 
 	/**
+	 * Gets the number of loaded marshallers.
+	 *
+	 * @return the marshaller count
+	 */
+	public Integer getLoadedMarshallerCount();
+
+	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to serialize an XMLObject to an byte array.</div>
 	 * <div class="de">Methode um ein XMLObject in ein Byte Array zu serialisieren.</div>
