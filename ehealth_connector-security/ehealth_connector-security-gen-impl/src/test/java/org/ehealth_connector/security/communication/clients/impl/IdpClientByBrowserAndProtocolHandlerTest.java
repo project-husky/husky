@@ -45,15 +45,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 
-/**
- * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
- * 
- * <!-- @formatter:on -->
- */
 public class IdpClientByBrowserAndProtocolHandlerTest extends ServerTestHelper {
 
 	private static Logger logger = LoggerFactory
@@ -61,15 +52,8 @@ public class IdpClientByBrowserAndProtocolHandlerTest extends ServerTestHelper {
 
 	private static HttpServer server;
 
+	@SuppressWarnings("unused")
 	private static int httpPort;
-
-	private IdpClientByBrowserAndProtocolHandler client;
-
-	private String testFilename;
-
-	private AuthnRequest testAuthnRequest;
-
-	private Response testResponse;
 
 	@BeforeClass
 	public static void setUpBefore() throws IOException {
@@ -98,6 +82,12 @@ public class IdpClientByBrowserAndProtocolHandlerTest extends ServerTestHelper {
 		server.stop();
 	}
 
+	private IdpClientByBrowserAndProtocolHandler client;
+
+	private String testFilename;
+
+	private AuthnRequest testAuthnRequest;
+
 	/**
 	 * set up test parameters
 	 */
@@ -116,7 +106,7 @@ public class IdpClientByBrowserAndProtocolHandlerTest extends ServerTestHelper {
 	/**
 	 * Test method for
 	 * {@link org.ehealth_connector.security.communication.clients.impl.IdpClientByBrowserAndProtocolHandler#readFromJARFile(java.lang.String)}.
-	 * 
+	 *
 	 * @throws IOException
 	 */
 	@Test
@@ -129,7 +119,7 @@ public class IdpClientByBrowserAndProtocolHandlerTest extends ServerTestHelper {
 	/**
 	 * Test method for
 	 * {@link org.ehealth_connector.security.communication.clients.impl.IdpClientByBrowserAndProtocolHandler#send(org.ehealth_connector.security.authentication.AuthnRequest)}.
-	 * 
+	 *
 	 * @throws ClientSendException
 	 */
 	@Test

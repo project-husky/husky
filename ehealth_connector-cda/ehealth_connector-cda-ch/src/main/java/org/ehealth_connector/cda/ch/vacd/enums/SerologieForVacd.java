@@ -56,7 +56,8 @@ public enum SerologieForVacd {
 	/**
 	 * <div class="de">FSME </div> <div class="fr"> Encéphalite à tiques</div>
 	 */
-	EUROPEAN_TICK_BORNE_ENCEPHALITIS_VIRUS_AB("26061-2", "European tick borne encephalitis virus Ab"),
+	EUROPEAN_TICK_BORNE_ENCEPHALITIS_VIRUS_AB("26061-2",
+			"European tick borne encephalitis virus Ab"),
 	/**
 	 * <div class="de"> Gelbfieber</div> <div class="fr"> Fièvre jaune</div>
 	 */
@@ -212,6 +213,7 @@ public enum SerologieForVacd {
 	 *            <div class="de"> enum str</div>
 	 * @return true, if is enum of value set
 	 */
+	@SuppressWarnings("unlikely-arg-type")
 	public boolean isEnumOfValueSet(String enumStr) {
 		return Arrays.asList(values()).contains(enumStr);
 	}

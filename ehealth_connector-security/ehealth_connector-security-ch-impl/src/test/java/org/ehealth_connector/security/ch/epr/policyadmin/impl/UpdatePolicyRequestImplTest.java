@@ -31,15 +31,6 @@ import org.opensaml.core.xml.io.Unmarshaller;
 import org.opensaml.core.xml.io.UnmarshallerFactory;
 import org.w3c.dom.Element;
 
-/**
- * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- *
- * <!-- @formatter:on -->
- */
 public class UpdatePolicyRequestImplTest extends InitializerTestHelper {
 
 	private Assertion testAssertion;

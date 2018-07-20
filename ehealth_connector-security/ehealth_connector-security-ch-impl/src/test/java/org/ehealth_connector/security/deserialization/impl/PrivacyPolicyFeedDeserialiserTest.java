@@ -60,21 +60,6 @@ public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 
 	private Element getAssertionAsElement(byte[] xmlByteArray) throws DeserializeException {
 		try {
-			// final JAXBContext jaxbContext =
-			// JAXBContext.newInstance("suisse.health.e._2015.policy_administration");
-			// final Unmarshaller unmarshaller =
-			// jaxbContext.createUnmarshaller();
-			// final JAXBElement<?> jxbAssBasReqTyp = (JAXBElement<?>)
-			// unmarshaller
-			// .unmarshal(new ByteArrayInputStream(xmlByteArray));
-			//
-			// final AssertionBasedRequest wsAssBasReqTyp =
-			// (AssertionBasedRequest) jxbAssBasReqTyp.getValue();
-			//
-			// final Assertion wsAssertion = wsAssBasReqTyp.getAssertion();
-			//
-			// final Marshaller marshaller = jaxbContext.createMarshaller();
-
 			final DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			final Document doc = dbf.newDocumentBuilder().newDocument();
 			// marshaller.marshal(wsAssertion, doc);

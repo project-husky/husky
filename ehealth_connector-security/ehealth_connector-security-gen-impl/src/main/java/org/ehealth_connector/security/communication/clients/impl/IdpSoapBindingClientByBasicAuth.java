@@ -49,8 +49,6 @@ import org.ehealth_connector.security.exceptions.DeserializeException;
 import org.ehealth_connector.security.exceptions.SerializeException;
 import org.ehealth_connector.security.saml2.Response;
 import org.ehealth_connector.security.serialization.impl.AuthnRequestSerializerImpl;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -67,8 +65,6 @@ import org.xml.sax.SAXException;
 public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 
 	private IdpClientBasicAuthConfigImpl config;
-
-	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	public IdpSoapBindingClientByBasicAuth(IdpClientBasicAuthConfigImpl clientConfiguration) {
 		config = clientConfiguration;
@@ -194,16 +190,6 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 	@Override
 	Response parseResponse(CloseableHttpResponse response) throws ClientSendException {
 		try {
-			// // build new document
-			// final Properties systemProperties = System.getProperties();
-			// logger.debug("the document builder factory: "
-			// +
-			// systemProperties.get("javax.xml.parsers.DocumentBuilderFactory"));
-			// systemProperties.remove("javax.xml.parsers.DocumentBuilderFactory");
-			// systemProperties.setProperty("javax.xml.parsers.DocumentBuilderFactory",
-			// "org.apache.xerces.jaxp.DocumentBuilderFactoryImpl");
-			//
-			// System.setProperties(systemProperties);
 			final DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			docFactory.setNamespaceAware(true);
 			final DocumentBuilder docBuilder = docFactory.newDocumentBuilder();

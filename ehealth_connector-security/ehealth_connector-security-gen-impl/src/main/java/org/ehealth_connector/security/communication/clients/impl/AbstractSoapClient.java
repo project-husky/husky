@@ -274,14 +274,6 @@ public abstract class AbstractSoapClient<T> {
 		final Node bodyNode = getNode(soapDocument.getDocumentElement(),
 				"/" + prefix + "Envelope/" + prefix + "Body");
 
-		// final Node first = soapDocument.getFirstChild();
-		// System.out.println("First: " + first.getNodeName());
-		// final Node lastOfFirst = first.getLastChild();
-		// System.out.println("LastOfFirst: " + lastOfFirst.getNodeName());
-		// // get the xml response node
-		// final Node responseNode = lastOfFirst.getFirstChild();
-		// System.out.println("responseNode: " + responseNode.getNodeName());
-
 		NodeList reponseNodes = ((Element) bodyNode).getElementsByTagNameNS("*", localName);
 		if ((reponseNodes == null) || (reponseNodes.getLength() < 1)) {
 			reponseNodes = ((Element) bodyNode).getElementsByTagNameNS(nameSpaceUri, localName);
@@ -335,10 +327,6 @@ public abstract class AbstractSoapClient<T> {
 				retVal = content;
 			} else {
 
-				// final String pattern = "--" + boundary +
-				// "\\R(.*?\\R*?)*?\\R--" + boundary + "--";
-				// final String pattern = "<soap\\:Envelope
-				// (.*?\\R*?)*?\\R</soap\\:Envelope>";
 				final String pattern = "<([a-zA-Z:]+)Envelope(.+)>(.+)</([a-zA-Z:]+)Envelope>";
 				final Pattern regex = Pattern.compile(pattern);
 				final Matcher matcher = regex.matcher(content);

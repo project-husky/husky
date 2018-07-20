@@ -61,7 +61,8 @@ import org.xml.sax.SAXException;
  */
 public class SimplePpqClient extends AbstractSoapClient<Response> implements PpqClient {
 
-	private static final String EHS_2015_POLYADMIN = "urn:e-health-suisse:2015:policy-administration:";
+	// private static final String EHS_2015_POLYADMIN =
+	// "urn:e-health-suisse:2015:policy-administration:";
 
 	public SimplePpqClient(PpClientConfig clientConfiguration) {
 		setLogger(LoggerFactory.getLogger(getClass()));

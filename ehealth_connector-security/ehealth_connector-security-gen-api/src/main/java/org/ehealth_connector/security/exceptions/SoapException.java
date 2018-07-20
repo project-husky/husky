@@ -30,18 +30,20 @@ public class SoapException extends ClientSendException {
 	private static final long serialVersionUID = 718920336633885906L;
 
 	/** the soap exception code */
+	@SuppressWarnings("unused")
 	private String code;
 	/** the soap exception message */
+	@SuppressWarnings("unused")
 	private String message;
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Default constructor to instanciate the object.</div>
 	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
-	 * 
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
 	 * @param aCode
 	 * <div class="en">The code of the exception.</div>
 	 * <div class="de">Der Code des Fehlers.</div>

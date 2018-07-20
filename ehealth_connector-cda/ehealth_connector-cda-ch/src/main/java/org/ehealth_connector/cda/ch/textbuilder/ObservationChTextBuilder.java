@@ -105,7 +105,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	private Comparator<AbstractOrganizer> organizerComparator = new AbstractOrganizerComparator();
 	private Comparator<AbstractObservation> observationComparator = new AbstractObservationComparator();
 
-	private Map<String, Integer> participationsMap = new HashMap();
+	private Map<String, Integer> participationsMap = new HashMap<String, Integer>();
 
 	private final String posCodeSystemOid;
 

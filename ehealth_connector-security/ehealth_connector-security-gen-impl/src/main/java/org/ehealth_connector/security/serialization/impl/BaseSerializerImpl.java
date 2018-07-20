@@ -26,15 +26,15 @@ import org.w3c.dom.Element;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="en">Base Serializer for OpenSaml objects.</div>
+ * <div class="de">Basis Serializer für OpenSaml-Objekte.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
- *
  * <!-- @formatter:on -->
  */
 public class BaseSerializerImpl extends AbstractSerializerImpl implements Serializer<Base> {
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public byte[] toXmlByteArray(Base aSecurityObject) throws SerializeException {
 		try {
@@ -45,6 +45,7 @@ public class BaseSerializerImpl extends AbstractSerializerImpl implements Serial
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Element toXmlElement(Base aSecurityObject) throws SerializeException {
 		try {
@@ -55,6 +56,7 @@ public class BaseSerializerImpl extends AbstractSerializerImpl implements Serial
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public String toXmlString(Base aSecurityObject) throws SerializeException {
 		try {

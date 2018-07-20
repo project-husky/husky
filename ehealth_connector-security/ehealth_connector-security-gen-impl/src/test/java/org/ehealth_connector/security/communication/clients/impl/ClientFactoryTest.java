@@ -20,8 +20,6 @@ package org.ehealth_connector.security.communication.clients.impl;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import java.security.KeyStore;
-
 import org.ehealth_connector.security.communication.clients.IdpClient;
 import org.ehealth_connector.security.communication.clients.XuaClient;
 import org.ehealth_connector.security.communication.config.XuaClientConfig;
@@ -48,17 +46,9 @@ import org.junit.Test;
 public class ClientFactoryTest {
 
 	private IdpClientViaHttpProxyConfigImpl testClientConfigurationHttpProxy;
-	private String testProxyHost;
-	private int testProxyPort;
-	private String testProxyProtocol;
-
 	private IdpClientCertificateAuthConfigImpl testClientConfigurationAuthConfig;
-	private String testStorePassword;
-	private KeyStore testKeyStore;
 
 	private IdpClientBasicAuthConfigImpl testClientBasicAuthConfig;
-	private String testBasicAuthPassword;
-	private String testBasicAuthUsername;
 	private XuaClientConfig testClientConfigurationXua;
 
 	public IdpClientByBrowserAndProtocolHandlerConfigImpl testIdpClientByBrowserAndProtocolHandlerConfig;
@@ -86,10 +76,10 @@ public class ClientFactoryTest {
 	 * {@link org.ehealth_connector.security.communication.clients.impl.ClientFactory#getIdpClient(org.ehealth_connector.security.communication.config.IdpClientConfig)}.
 	 */
 	@Test
-	public void testGetIdpClientHttpProxy() {
-		final IdpClient client = ClientFactory.getIdpClient(testClientConfigurationHttpProxy);
+	public void testGetIdpClientBasicAuth() {
+		final IdpClient client = ClientFactory.getIdpClient(testClientBasicAuthConfig);
 		assertNotNull(client);
-		assertTrue(client instanceof IdpClientByProxy);
+		assertTrue(client instanceof IdpSoapBindingClientByBasicAuth);
 	}
 
 	/**
@@ -108,10 +98,21 @@ public class ClientFactoryTest {
 	 * {@link org.ehealth_connector.security.communication.clients.impl.ClientFactory#getIdpClient(org.ehealth_connector.security.communication.config.IdpClientConfig)}.
 	 */
 	@Test
-	public void testGetIdpClientBasicAuth() {
-		final IdpClient client = ClientFactory.getIdpClient(testClientBasicAuthConfig);
+	public void testGetIdpClientHttpProxy() {
+		final IdpClient client = ClientFactory.getIdpClient(testClientConfigurationHttpProxy);
 		assertNotNull(client);
-		assertTrue(client instanceof IdpSoapBindingClientByBasicAuth);
+		assertTrue(client instanceof IdpClientByProxy);
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.communication.clients.impl.ClientFactory#getXuaClient(org.ehealth_connector.security.communication.config.XuaClientConfig)}.
+	 */
+	@Test
+	public void testGetXuaClient() {
+		final XuaClient client = ClientFactory.getXuaClient(testClientConfigurationXua);
+		assertNotNull(client);
+		assertTrue(client instanceof SimpleXuaClient);
 	}
 
 	/**
@@ -124,17 +125,6 @@ public class ClientFactoryTest {
 				.getIdpClient(testIdpClientByBrowserAndProtocolHandlerConfig);
 		assertNotNull(client);
 		assertTrue(client instanceof IdpClientByBrowserAndProtocolHandler);
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.security.communication.clients.impl.ClientFactory#getXuaClient(org.ehealth_connector.security.communication.config.XuaClientConfig)}.
-	 */
-	@Test
-	public void testGetXuaClient() {
-		final XuaClient client = ClientFactory.getXuaClient(testClientConfigurationXua);
-		assertNotNull(client);
-		assertTrue(client instanceof SimpleXuaClient);
 	}
 
 }

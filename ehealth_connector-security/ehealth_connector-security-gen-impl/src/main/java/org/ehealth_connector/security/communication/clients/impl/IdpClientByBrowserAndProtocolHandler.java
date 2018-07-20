@@ -89,7 +89,7 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 	}
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to read content from a file packed in a jar file.</div>
 	 * <div class="de">Methode um den Inhalt eines Files gepacket in einem jar File zu laden.</div>
@@ -129,7 +129,7 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.communication.clients.IdpClient#send(org.ehealth_connector.security.authentication.AuthnRequest)
@@ -188,7 +188,9 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 		if (tempFile.exists()) {
 			tempFile.delete();
 		}
-		if ((line == null) && (!line.startsWith(config.getProtocolHandlerName()))) {
+		if (line == null) {
+			// maybe add this restriction, later:
+			// (!line.startsWith(config.getProtocolHandlerName()))
 			throw new ClientSendException("No SAML response found");
 		}
 		line = java.net.URLDecoder.decode(line, "UTF-8");

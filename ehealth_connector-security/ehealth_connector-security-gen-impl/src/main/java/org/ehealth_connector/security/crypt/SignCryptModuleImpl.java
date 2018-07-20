@@ -60,8 +60,10 @@ public class SignCryptModuleImpl implements SignCryptModule {
 
 	private String keyStorePassword;
 
+	@SuppressWarnings("unused")
 	private KeyStore trustStore;
 
+	@SuppressWarnings("unused")
 	private String trustStorePassword;
 
 	/**

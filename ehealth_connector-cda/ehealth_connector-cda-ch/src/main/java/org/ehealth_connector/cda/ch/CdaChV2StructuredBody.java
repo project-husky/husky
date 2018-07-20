@@ -259,8 +259,6 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 			setId = newDocId;
 
 		Integer version = getVersion();
-		if (version == null)
-			version = 1;
 
 		setId(newDocId);
 		setVersion(setId, version + 1);
@@ -279,8 +277,6 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 			setId = newDocId;
 
 		Integer version = getVersion();
-		if (version == null)
-			version = 1;
 
 		setId(newDocId);
 		setVersion(setId, version + 1);

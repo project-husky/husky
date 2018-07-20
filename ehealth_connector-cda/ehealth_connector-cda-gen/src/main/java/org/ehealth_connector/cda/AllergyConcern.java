@@ -17,14 +17,11 @@
  */
 package org.ehealth_connector.cda;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Identificator;
-import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 

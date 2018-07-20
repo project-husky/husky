@@ -18,7 +18,6 @@
 package org.ehealth_connector.cda.ihe.lab;
 
 import org.ehealth_connector.cda.MdhtEntryFacade;
-import org.ehealth_connector.common.Identificator;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 
 /**
@@ -32,9 +31,6 @@ public abstract class AbstractLaboratoryReportDataProcessingEntry extends
 	 */
 	public AbstractLaboratoryReportDataProcessingEntry() {
 		super(LABFactory.eINSTANCE.createLaboratoryReportDataProcessingEntry().init());
-//		if (getMdht().getAct() != null)
-//			getMdht().getAct().getTemplateIds()
-//					.add(new Identificator("2.16.756.5.30.1.1.10.4.4").getIi());
 	}
 
 	/**
@@ -46,9 +42,6 @@ public abstract class AbstractLaboratoryReportDataProcessingEntry extends
 	public AbstractLaboratoryReportDataProcessingEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry mdht) {
 		super(mdht);
-//		if (getMdht().getAct() != null)
-//			getMdht().getAct().getTemplateIds()
-//					.add(new Identificator("2.16.756.5.30.1.1.10.4.4").getIi());
 	}
 
 	/**
@@ -60,9 +53,6 @@ public abstract class AbstractLaboratoryReportDataProcessingEntry extends
 	public AbstractLaboratoryReportDataProcessingEntry(SpecimenAct act) {
 		this();
 		setSpecimenAct(act);
-//		if (getMdht().getAct() != null)
-//			getMdht().getAct().getTemplateIds()
-//					.add(new Identificator("2.16.756.5.30.1.1.10.4.4").getIi());
 	}
 
 	/**

@@ -169,6 +169,7 @@ public abstract class AbstractTestHelper {
 		return true;
 	}
 
+	@SuppressWarnings("unlikely-arg-type")
 	public static boolean isEqual(Telecoms t1, Telecoms t2) {
 		if (t1.getEMails() != null) {
 			for (int i = 0; i < t1.getEMails().size(); i++) {

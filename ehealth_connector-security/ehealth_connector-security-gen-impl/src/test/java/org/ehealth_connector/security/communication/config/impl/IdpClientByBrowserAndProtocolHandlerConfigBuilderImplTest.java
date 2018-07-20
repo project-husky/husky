@@ -23,15 +23,6 @@ import static org.junit.Assert.assertNotNull;
 import org.junit.Before;
 import org.junit.Test;
 
-/**
- * <!-- @formatter:off -->
- * <div class="en">HEREISENGLISH</div>
- * <div class="de">HIERISTDEUTSCH</div>
- * <div class="fr">VOICIFRANCAIS</div>
- * <div class="it">ITALIANO</div>
- * 
- * <!-- @formatter:on -->
- */
 public class IdpClientByBrowserAndProtocolHandlerConfigBuilderImplTest {
 
 	private IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl builder;
@@ -39,14 +30,10 @@ public class IdpClientByBrowserAndProtocolHandlerConfigBuilderImplTest {
 	private String testUrl;
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">HEREISENGLISH</div>
-	 * <div class="de">HIERISTDEUTSCH</div>
-	 * <div class="fr">VOICIFRANCAIS</div>
-	 * <div class="it">ITALIANO</div>
+	 * Initialization of the test.
 	 *
-	 * @throws java.lang.Exception
-	 * <!-- @formatter:on -->
+	 * @throws Exception
+	 *             the exception
 	 */
 	@Before
 	public void setUp() throws Exception {

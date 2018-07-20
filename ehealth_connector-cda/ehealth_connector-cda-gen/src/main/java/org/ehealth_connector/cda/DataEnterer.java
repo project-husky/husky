@@ -280,8 +280,6 @@ public class DataEnterer {
 
 	public List<Identificator> getAssignedEntityIds() {
 		org.openhealthtools.mdht.uml.cda.AssignedEntity asEntity = mDataEnterer.getAssignedEntity();
-		org.openhealthtools.mdht.uml.cda.Person person = mDataEnterer.getAssignedEntity()
-				.getAssignedPerson();
 		ArrayList<Identificator> retVal = new ArrayList<Identificator>();
 		if (asEntity.getIds() != null) {
 			for (II id : asEntity.getIds()) {
@@ -611,16 +609,6 @@ public class DataEnterer {
 			mDataEnterer.getAssignedEntity().getRepresentedOrganizations()
 					.add(organization.copyMdhtOrganization());
 		}
-	}
-
-	/**
-	 * Method to set
-	 *
-	 * @param person
-	 *            the person to set
-	 */
-	public void setPerson(org.openhealthtools.mdht.uml.cda.Person person) {
-		person = person;
 	}
 
 	/**
