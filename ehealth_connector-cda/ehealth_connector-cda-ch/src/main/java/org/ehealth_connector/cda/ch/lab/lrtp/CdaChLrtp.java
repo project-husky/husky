@@ -23,7 +23,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport;
-import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
+import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
 import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
 import org.ehealth_connector.cda.ch.lab.StudiesSummarySection;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.ReportScopes;
@@ -32,6 +32,7 @@ import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.IntendedRecipient;
+import org.ehealth_connector.common.enums.CountryCode;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.DocumentationOf;
@@ -43,6 +44,7 @@ import org.openhealthtools.mdht.uml.cda.ServiceEvent;
 import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
@@ -173,7 +175,12 @@ public class CdaChLrtp
 	 */
 	public CdaChLrtp(LanguageCode languageCode, String styleSheet, String css) {
 		super(ChFactory.eINSTANCE.createCdaChLrtpV1().init(), languageCode, styleSheet, css);
-		this.setLanguageCode(languageCode);
+		// Fix RealmCode
+		final CS cs = DatatypesFactory.eINSTANCE.createCS();
+		cs.setCode(CountryCode.SWITZERLAND.getCodeAlpha3());
+		getDoc().getRealmCodes().clear();
+		getDoc().getRealmCodes().add(cs);
+
 	}
 
 	/**
@@ -588,7 +595,7 @@ public class CdaChLrtp
 	 *
 	 * @return the SpecimenAct. Returns null, if this element does not exist.
 	 */
-	public AbstractSpecimenAct getSpecimenAct() {
+	public BaseChSpecimenAct getSpecimenAct() {
 		if ((getLaboratorySpecialtySection() != null)
 				&& (getLaboratorySpecialtySection()
 						.getLaboratoryReportDataProcessingEntry() != null)

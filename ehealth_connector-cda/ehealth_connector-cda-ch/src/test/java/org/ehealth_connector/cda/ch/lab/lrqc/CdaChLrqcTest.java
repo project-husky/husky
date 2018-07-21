@@ -32,8 +32,8 @@ import javax.xml.xpath.XPathExpressionException;
 import org.ehealth_connector.cda.ObservationMediaEntry;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.ParticipantClaimer;
-import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReportTest;
-import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
+import org.ehealth_connector.cda.ch.lab.CdaChV12LaboratoryReportTest;
+import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.LabObsList;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.QualabQcc;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.SpecialtySections;
@@ -56,7 +56,7 @@ import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
-public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
+public class CdaChLrqcTest extends CdaChV12LaboratoryReportTest {
 
 	/** The SLF4J logger instance. */
 	protected final Logger log = LoggerFactory.getLogger(getClass());
@@ -100,7 +100,7 @@ public class CdaChLrqcTest extends AbstractLaboratoryReportTest {
 		final CdaChLrqc cda = new CdaChLrqc();
 		LaboratorySpecialtySection sps = new LaboratorySpecialtySection();
 		LaboratoryReportDataProcessingEntry lrd = new LaboratoryReportDataProcessingEntry();
-		AbstractSpecimenAct spa = new AbstractSpecimenAct();
+		BaseChSpecimenAct spa = new BaseChSpecimenAct();
 		LaboratoryBatteryOrganizer lbo = new LaboratoryBatteryOrganizer();
 		LaboratoryObservation lo = new LaboratoryObservation();
 

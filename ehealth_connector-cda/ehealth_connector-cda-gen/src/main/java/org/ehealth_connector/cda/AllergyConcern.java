@@ -30,7 +30,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
  * <div class="de">Eine Klasse die die Informationen zu Allergiebelangen
  * representiert.</div>
  */
-public class AllergyConcern extends AbstractAllergyConcern {
+public class AllergyConcern extends BaseAllergyConcern {
 
 	/**
 	 * Default constructor to instanciate the object
@@ -58,7 +58,7 @@ public class AllergyConcern extends AbstractAllergyConcern {
 	 * @param concernStatus
 	 *            the concern status
 	 */
-	public AllergyConcern(String concern, AbstractAllergyProblem problemEntry,
+	public AllergyConcern(String concern, BaseAllergyProblem problemEntry,
 			ProblemConcernStatusCode concernStatus) {
 		super(concern, problemEntry, concernStatus);
 	}
@@ -77,7 +77,7 @@ public class AllergyConcern extends AbstractAllergyConcern {
 	 * @param concernStatus
 	 *            the concern status
 	 */
-	public AllergyConcern(String concern, Date begin, Date end, AbstractAllergyProblem problemEntry,
+	public AllergyConcern(String concern, Date begin, Date end, BaseAllergyProblem problemEntry,
 			ProblemConcernStatusCode concernStatus) {
 		super(concern, begin, end, problemEntry, concernStatus);
 	}

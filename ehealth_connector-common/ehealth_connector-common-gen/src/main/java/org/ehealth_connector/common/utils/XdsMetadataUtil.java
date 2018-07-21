@@ -273,8 +273,10 @@ public class XdsMetadataUtil {
 		if (Util.atLeastOne(at.getAuthorTelecommunication())) {
 			for (int i = 0; i < at.getAuthorTelecommunication().size(); i++) {
 				xtn = (XTN) at.getAuthorTelecommunication().get(i);
-				t.add(xtn.getTelecommunicationType(), xtn.getTelecommunicationAddress(),
-						AddressUse.PRIVATE);
+				if ((xtn.getTelecommunicationAddress() != null)
+						&& (xtn.getTelecommunicationType() != null))
+					t.add(xtn.getTelecommunicationType(), xtn.getTelecommunicationAddress(),
+							AddressUse.PRIVATE);
 			}
 		}
 

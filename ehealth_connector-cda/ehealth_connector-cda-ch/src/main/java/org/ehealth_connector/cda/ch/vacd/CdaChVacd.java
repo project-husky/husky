@@ -26,8 +26,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.AbstractCodedResults;
-import org.ehealth_connector.cda.AbstractObservation;
-import org.ehealth_connector.cda.AbstractProblemConcern;
+import org.ehealth_connector.cda.BaseObservation;
+import org.ehealth_connector.cda.BaseProblemConcern;
 import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.ch.AbstractCdaChV1;
 import org.ehealth_connector.cda.ch.ActiveProblemConcern;
@@ -479,7 +479,7 @@ public class CdaChVacd extends AbstractCdaChV1<CdaChVacdV1> {
 				// Alle vorhandenen Kommentare zusammenfügen
 				int i = 0;
 				String allComments = "";
-				for (final AbstractObservation t : getLaboratoryObservations()) {
+				for (final BaseObservation t : getLaboratoryObservations()) {
 					if (t.getCommentText() != null) {
 						i++;
 						allComments = allComments + "Kommentar " + i + ": " + t.getCommentText()
@@ -746,7 +746,7 @@ public class CdaChVacd extends AbstractCdaChV1<CdaChVacdV1> {
 	 * @return the active problem concerns text
 	 */
 	public String generateNarrativeTextActiveProblemConcerns() {
-		final List<AbstractProblemConcern> problemConcernEntryList = new ArrayList<AbstractProblemConcern>();
+		final List<BaseProblemConcern> problemConcernEntryList = new ArrayList<BaseProblemConcern>();
 		// Convert from the specific PastProblemConcern Type to the more
 		// general PastProblemConcern
 		problemConcernEntryList.addAll(getActiveProblemConcerns());
@@ -776,7 +776,7 @@ public class CdaChVacd extends AbstractCdaChV1<CdaChVacdV1> {
 	 * @return the past problem concern entries text
 	 */
 	public String generateNarrativeTextPastProblemConcernEntries() {
-		final List<AbstractProblemConcern> problemConcernEntryList = new ArrayList<AbstractProblemConcern>();
+		final List<BaseProblemConcern> problemConcernEntryList = new ArrayList<BaseProblemConcern>();
 
 		// Convert from the specific PastProblemConcern Type to the more
 		// general PastProblemConcern
@@ -916,7 +916,7 @@ public class CdaChVacd extends AbstractCdaChV1<CdaChVacdV1> {
 	 *
 	 * @return List with laboratory observations
 	 */
-	public List<AbstractObservation> getLaboratoryObservations() {
+	public List<BaseObservation> getLaboratoryObservations() {
 		// Search for the right section
 		final Section los = getDoc().getLaboratorySpecialtySection();
 		if (los == null) {
@@ -924,7 +924,7 @@ public class CdaChVacd extends AbstractCdaChV1<CdaChVacdV1> {
 		}
 		final EList<Entry> entries = los.getEntries();
 
-		final List<AbstractObservation> labObservations = new ArrayList<AbstractObservation>();
+		final List<BaseObservation> labObservations = new ArrayList<BaseObservation>();
 		for (final Entry entry : entries) {
 			final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry mLabRdpe = (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry) entry;
 

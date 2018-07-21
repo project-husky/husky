@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.cda.AbstractObservation;
+import org.ehealth_connector.cda.BaseObservation;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.ch.vacd.enums.ObservationInterpretationForImmunization;
@@ -58,7 +58,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  * <div class="en">Class LaboratoryObservation.</div> <div class="de">Klasse
  * Laborbefund</div> <div class="it"></div>
  */
-public class LaboratoryObservation extends AbstractObservation {
+public class LaboratoryObservation extends BaseObservation {
 
 	/** The m laboratory observation. */
 	private final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation mLaboratoryObservation;

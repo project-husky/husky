@@ -27,7 +27,7 @@ import org.ehealth_connector.common.enums.LanguageCode;
  * specialty (e.g., a microbiology report, a virology report), or from any
  * number of specialties (a report from a multidisciplinary laboratory).
  */
-public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySection {
+public class LaboratorySpecialtySection extends BaseLaboratorySpecialtySection {
 
 	/**
 	 * Instantiates a new laboratory specialty section.

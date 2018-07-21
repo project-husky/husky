@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.ehealth_connector.cda.AbstractProblemConcern;
+import org.ehealth_connector.cda.BaseProblemConcern;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.utils.DateUtil;
@@ -64,7 +64,7 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 * @param problemConcernEntry
 	 *            the problem concern entry
 	 */
-	public void addProblemConcernEntry(AbstractProblemConcern problemConcernEntry) {
+	public void addProblemConcernEntry(BaseProblemConcern problemConcernEntry) {
 		final EntryRelationship entryRelationship = CDAFactory.eINSTANCE.createEntryRelationship();
 		entryRelationship.setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 		entryRelationship.setInversionInd(Boolean.FALSE);
@@ -129,12 +129,12 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 *
 	 * @return the problem concern entries
 	 */
-	public List<AbstractProblemConcern> getProblemConcernEntries() {
-		final List<AbstractProblemConcern> list = new ArrayList<AbstractProblemConcern>();
+	public List<BaseProblemConcern> getProblemConcernEntries() {
+		final List<BaseProblemConcern> list = new ArrayList<BaseProblemConcern>();
 		if (this.getMdht().getProblemConcernEntriess() != null) {
 			for (final org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry : getMdht()
 					.getProblemConcernEntriess()) {
-				list.add(new AbstractProblemConcern(problemConcernEntry));
+				list.add(new BaseProblemConcern(problemConcernEntry));
 			}
 		}
 		return list;

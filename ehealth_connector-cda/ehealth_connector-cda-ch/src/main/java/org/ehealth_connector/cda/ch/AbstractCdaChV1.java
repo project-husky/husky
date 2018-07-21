@@ -19,10 +19,10 @@ package org.ehealth_connector.cda.ch;
 import java.util.Comparator;
 
 import org.ehealth_connector.cda.AbstractCda;
-import org.ehealth_connector.cda.AbstractObservation;
-import org.ehealth_connector.cda.AbstractOrganizer;
+import org.ehealth_connector.cda.BaseObservation;
+import org.ehealth_connector.cda.BaseOrganizer;
 import org.ehealth_connector.cda.ch.textbuilder.ObservationChTextBuilder;
-import org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection;
+import org.ehealth_connector.cda.ihe.lab.BaseLaboratorySpecialtySection;
 import org.ehealth_connector.common.enums.CountryCode;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
@@ -97,7 +97,7 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	 * @return the narrative text for laboratory observations.
 	 */
 	public String generateNarrativeTextLaboratoryObservations(
-			AbstractLaboratorySpecialtySection laboratorySpecialtySection, int sectionIndex,
+			BaseLaboratorySpecialtySection laboratorySpecialtySection, int sectionIndex,
 			String contentIdPrefix) {
 		return generateNarrativeTextLaboratoryObservations(laboratorySpecialtySection, sectionIndex,
 				contentIdPrefix, null);
@@ -120,7 +120,7 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	 * @return the laboratory observations text
 	 */
 	public String generateNarrativeTextLaboratoryObservations(
-			AbstractLaboratorySpecialtySection laboratorySpecialtySection, int sectionIndex,
+			BaseLaboratorySpecialtySection laboratorySpecialtySection, int sectionIndex,
 			String contentIdPrefix, String posCodeSystemOid) {
 		final ObservationChTextBuilder b = new ObservationChTextBuilder(this.getMdht(),
 				laboratorySpecialtySection, sectionIndex, contentIdPrefix,
@@ -149,10 +149,10 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	 * @return the laboratory observations text
 	 */
 	public String generateNarrativeTextLaboratoryObservations(
-			AbstractLaboratorySpecialtySection laboratorySpecialtySection, int sectionIndex,
+			BaseLaboratorySpecialtySection laboratorySpecialtySection, int sectionIndex,
 			String contentIdPrefix, String posCodeSystemOid,
-			Comparator<AbstractOrganizer> organizerComparator,
-			Comparator<AbstractObservation> observationComparator) {
+			Comparator<BaseOrganizer> organizerComparator,
+			Comparator<BaseObservation> observationComparator) {
 		final ObservationChTextBuilder b = new ObservationChTextBuilder(this.getMdht(),
 				laboratorySpecialtySection, sectionIndex, contentIdPrefix,
 				LanguageCode.getEnum(getMdht().getLanguageCode().getCode()), posCodeSystemOid);
@@ -251,10 +251,10 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 	 *
 	 * @return the laboratory specialty section
 	 */
-	public AbstractLaboratorySpecialtySection getLaboratorySpecialtySection() {
+	public BaseLaboratorySpecialtySection getLaboratorySpecialtySection() {
 		for (final Section s : getMdht().getAllSections()) {
 			if (s instanceof LaboratorySpecialtySection) {
-				return new AbstractLaboratorySpecialtySection((LaboratorySpecialtySection) s);
+				return new BaseLaboratorySpecialtySection((LaboratorySpecialtySection) s);
 			}
 		}
 		return null;

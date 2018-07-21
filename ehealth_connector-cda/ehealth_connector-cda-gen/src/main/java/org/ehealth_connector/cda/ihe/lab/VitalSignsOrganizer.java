@@ -17,7 +17,7 @@
  */
 package org.ehealth_connector.cda.ihe.lab;
 
-import org.ehealth_connector.cda.AbstractVitalSignObservation;
+import org.ehealth_connector.cda.BaseVitalSignObservation;
 import org.ehealth_connector.cda.MdhtOrganizerFacade;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Author;
@@ -65,7 +65,7 @@ public class VitalSignsOrganizer
 	 * @param id
 	 *            the id. If null, an ID with the CdaChLrtp root and a generated
 	 *            extension will be created
-	 * @see org.ehealth_connector.cda.AbstractVitalSignsOrganizer#addId(org.ehealth_connector.common.Identificator)
+	 * @see org.ehealth_connector.cda.BaseVitalSignsOrganizer#addId(org.ehealth_connector.common.Identificator)
 	 */
 	public void addId(Identificator id) {
 		if (id == null) {
@@ -80,7 +80,7 @@ public class VitalSignsOrganizer
 	 * @param observation
 	 *            the observation
 	 */
-	public void addVitalSignObservation(AbstractVitalSignObservation observation) {
+	public void addVitalSignObservation(BaseVitalSignObservation observation) {
 		getMdht().addObservation(observation.getMdhtCopy());
 		final int nb = getMdht().getComponents().size() - 1;
 		getMdht().getComponents().get(nb).setTypeCode(ActRelationshipHasComponent.COMP);

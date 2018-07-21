@@ -77,13 +77,13 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import ca.uhn.fhir.parser.IParser;
 
 /**
- * 
+ *
  * @author roeland
  * @version 1.0
  * @since Dec 30, 2017 10:22:34 PM
  *
  */
-public class VacdConverter extends AbstractCdaChFhirConverter {
+public class VacdConverter extends AbstractCdaChV12FhirConverter {
 
 	/**
 	 * <div class="en">Creates an eHC CdaChVacd instance from a valid FHIR
@@ -762,6 +762,7 @@ public class VacdConverter extends AbstractCdaChFhirConverter {
 		}
 
 		// Interpretation of the observation
+		retVal.getMdhtLaboratoryObservation().getInterpretationCodes().clear();
 		final Coding fhirInterpretationCode = fhirObservation.getInterpretation()
 				.getCodingFirstRep();
 		if (fhirInterpretationCode != null) {

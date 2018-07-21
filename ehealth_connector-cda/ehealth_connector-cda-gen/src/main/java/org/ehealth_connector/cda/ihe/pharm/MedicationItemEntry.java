@@ -365,9 +365,10 @@ public class MedicationItemEntry
 	 */
 	public Identificator getId() {
 		Identificator id = null;
-		if ((getMdht().getIds() != null) && (getMdht().getIds().size() > 0)) {
-			id = new Identificator(getMdht().getIds().get(0));
-		}
+		if (getMdht().getIds() != null)
+			if (getMdht().getIds().size() > 0)
+				id = new Identificator(getMdht().getIds().get(0));
+
 		return id;
 	}
 

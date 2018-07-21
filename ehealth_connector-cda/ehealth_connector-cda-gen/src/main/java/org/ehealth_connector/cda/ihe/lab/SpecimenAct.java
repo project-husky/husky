@@ -22,7 +22,7 @@ import org.ehealth_connector.common.Code;
 /**
  * The Class SpecimenAct.
  */
-public class SpecimenAct extends AbstractLaboratoryAct {
+public class SpecimenAct extends BaseLaboratoryAct {
 
 	/**
 	 * Instantiates a new specimen act. One Laboratory Report Data Processing
@@ -51,7 +51,7 @@ public class SpecimenAct extends AbstractLaboratoryAct {
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryAct#getStatusCode()
+	 * @see org.ehealth_connector.cda.ihe.lab.BaseLaboratoryAct#getStatusCode()
 	 */
 	@Override
 	public Code getStatusCode() {
@@ -77,7 +77,7 @@ public class SpecimenAct extends AbstractLaboratoryAct {
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryAct#setStatusCode(org.ehealth_connector.common.Code)
+	 * @see org.ehealth_connector.cda.ihe.lab.BaseLaboratoryAct#setStatusCode(org.ehealth_connector.common.Code)
 	 */
 	@Override
 	public void setStatusCode(Code code) {

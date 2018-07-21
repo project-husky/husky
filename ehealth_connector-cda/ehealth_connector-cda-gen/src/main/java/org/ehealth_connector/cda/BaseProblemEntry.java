@@ -35,16 +35,14 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 /**
  * ProblemEntry convenience functionality for the CDA Body Level 3 -Problem
  */
-public class AbstractProblemEntry
+public class BaseProblemEntry
 		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry> {
 
 	/**
 	 * Instantiates a new problem entry.
 	 */
-	public AbstractProblemEntry() {
+	public BaseProblemEntry() {
 		super(IHEFactory.eINSTANCE.createProblemEntry().init());
-		// clear default code <code codeSystem="2.16.840.1.113883.6.96"
-		// codeSystemName="SNOMEDCT"/>
 		this.getMdht().setCode(Util.createCENullFlavorUNK());
 		this.setNotOccured(false);
 	}
@@ -52,7 +50,7 @@ public class AbstractProblemEntry
 	/**
 	 * Instantiates a new problem entry.
 	 */
-	protected AbstractProblemEntry(org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry entry) {
+	protected BaseProblemEntry(org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry entry) {
 		super(entry);
 	}
 
@@ -64,10 +62,10 @@ public class AbstractProblemEntry
 		if (obj == null) {
 			return false;
 		}
-		if (!(obj instanceof AbstractProblemEntry)) {
+		if (!(obj instanceof BaseProblemEntry)) {
 			return false;
 		}
-		final AbstractProblemEntry other = (AbstractProblemEntry) obj;
+		final BaseProblemEntry other = (BaseProblemEntry) obj;
 
 		final Identificator id = this.getId();
 		if (((id != null) && !id.equals(other.getId()))
@@ -269,7 +267,8 @@ public class AbstractProblemEntry
 		result = (prime * result) + (this.getEndDate() != null ? getEndDate().hashCode() : 0);
 		result = (prime * result) + (this.getCode() != null ? getCode().hashCode() : 0);
 		result = (prime * result) + ((this.getValue() != null) && this.getValue().isCode()
-				? getValue().getCode().hashCode() : 0);
+				? getValue().getCode().hashCode()
+				: 0);
 		return result;
 	}
 

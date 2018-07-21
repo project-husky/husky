@@ -18,22 +18,18 @@ package org.ehealth_connector.cda;
 
 import java.util.Comparator;
 
-/**
- * This class implements the default comparison algorithm for HL7 CDA Battery
- * Organizers.
- */
-public class AbstractOrganizerComparator implements Comparator<AbstractOrganizer> {
+public class BaseAllergyConcernComparator implements Comparator<BaseAllergyConcern> {
 
 	/**
 	 *
-	 * Compares two Organizers on their effective date timestamp.
+	 * Compares two observations on their narrative text.
 	 *
 	 * {@inheritDoc}
 	 *
 	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 	 */
 	@Override
-	public int compare(AbstractOrganizer a, AbstractOrganizer b) {
+	public int compare(BaseAllergyConcern a, BaseAllergyConcern b) {
 		if ((a == null) && (b == null))
 			return 0;
 		else if ((a == null) && (b != null))
@@ -41,14 +37,14 @@ public class AbstractOrganizerComparator implements Comparator<AbstractOrganizer
 		else if ((a != null) && (b == null))
 			return 1;
 		else {
-			if ((a.getEffectiveTime() == null) && (b.getEffectiveTime() == null))
+			if ((a.getNarrativeText() == null) && (b.getNarrativeText() == null))
 				return 0;
-			else if ((a.getEffectiveTime() == null) && (b.getEffectiveTime() != null))
+			else if ((a.getNarrativeText() == null) && (b.getNarrativeText() != null))
 				return -1;
-			else if ((a.getEffectiveTime() != null) && (b.getEffectiveTime() == null))
+			else if ((a.getNarrativeText() != null) && (b.getNarrativeText() == null))
 				return 1;
 			else
-				return a.getEffectiveTime().compareTo(b.getEffectiveTime());
+				return a.getNarrativeText().compareToIgnoreCase(b.getNarrativeText());
 		}
 	}
 }

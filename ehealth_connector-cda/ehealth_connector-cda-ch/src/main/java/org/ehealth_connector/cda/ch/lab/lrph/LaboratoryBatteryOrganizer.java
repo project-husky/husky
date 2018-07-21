@@ -20,7 +20,7 @@ package org.ehealth_connector.cda.ch.lab.lrph;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ehealth_connector.cda.AbstractObservation;
+import org.ehealth_connector.cda.BaseObservation;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.StatusCode;
@@ -37,7 +37,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
  * XD-LAB die Gruppierung von Resultaten.</div>
  */
 public class LaboratoryBatteryOrganizer
-		extends org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryBatteryOrganizer {
+		extends org.ehealth_connector.cda.ihe.lab.BaseLaboratoryBatteryOrganizer {
 
 	/**
 	 * Instantiates a new laboratory battery organizer.
@@ -110,11 +110,11 @@ public class LaboratoryBatteryOrganizer
 	 * @return the laboratory observations
 	 */
 	@Override
-	public List<AbstractObservation> getLaboratoryObservations() {
-		final List<AbstractObservation> loList = new ArrayList<AbstractObservation>();
+	public List<BaseObservation> getLaboratoryObservations() {
+		final List<BaseObservation> loList = new ArrayList<BaseObservation>();
 		for (final Observation o : getMdht().getObservations()) {
 			if (o instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation) {
-				loList.add(new AbstractObservation(o));
+				loList.add(new BaseObservation(o));
 			}
 		}
 		return loList;

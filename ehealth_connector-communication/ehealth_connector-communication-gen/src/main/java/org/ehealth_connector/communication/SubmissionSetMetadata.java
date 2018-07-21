@@ -123,6 +123,15 @@ public class SubmissionSetMetadata {
 	}
 
 	/**
+	 * Gets the mdht author type .
+	 *
+	 * @return the mdht author type.
+	 */
+	public AuthorType getAuthorTypeMdht() {
+		return s.getAuthor();
+	}
+
+	/**
 	 * Gets the Availability Status of the Document
 	 *
 	 * @return status the AvailabilityStatus

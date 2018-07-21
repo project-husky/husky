@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.ehealth_connector.cda.AbstractVitalSignObservation;
+import org.ehealth_connector.cda.BaseVitalSignObservation;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationForVitalSign;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.VitalSignList;
@@ -42,7 +42,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  * <div class="de">Strukturierte Angabe eines Messwerts resp. einer Beobachtung
  * zu einem einzelnen Vitalzeichen (wie z.B. Grösse, Gewicht, Blutdruck).</div>
  */
-public class VitalSignObservation extends AbstractVitalSignObservation {
+public class VitalSignObservation extends BaseVitalSignObservation {
 
 	/**
 	 * Instantiates a new vital signs observation.
@@ -226,7 +226,7 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.cda.AbstractVitalSignObservation#initMdht()
+	 * @see org.ehealth_connector.cda.BaseVitalSignObservation#initMdht()
 	 */
 	@Override
 	protected void initMdht() {

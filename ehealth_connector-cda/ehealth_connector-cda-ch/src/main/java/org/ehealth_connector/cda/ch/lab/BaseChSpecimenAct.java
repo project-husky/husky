@@ -35,12 +35,12 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 /**
  * The Class AbstractSpecimenAct.
  */
-public class AbstractSpecimenAct extends org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryAct {
+public class BaseChSpecimenAct extends org.ehealth_connector.cda.ihe.lab.BaseLaboratoryAct {
 
 	/**
 	 * Instantiates a new abstract specimen act.
 	 */
-	public AbstractSpecimenAct() {
+	public BaseChSpecimenAct() {
 		super();
 		super.setStatusCode(StatusCode.COMPLETED.getCode());
 	}
@@ -51,7 +51,7 @@ public class AbstractSpecimenAct extends org.ehealth_connector.cda.ihe.lab.Abstr
 	 * @param mdht
 	 *            the mdht
 	 */
-	public AbstractSpecimenAct(Act mdht) {
+	public BaseChSpecimenAct(Act mdht) {
 		super(mdht);
 	}
 
@@ -67,7 +67,7 @@ public class AbstractSpecimenAct extends org.ehealth_connector.cda.ihe.lab.Abstr
 	 * @param nonHumanSubject
 	 *            the specimen <div class="de">Angaben zur Probe.</div>
 	 */
-	public AbstractSpecimenAct(org.ehealth_connector.cda.ch.lab.lrqc.enums.SpecialtySections code,
+	public BaseChSpecimenAct(org.ehealth_connector.cda.ch.lab.lrqc.enums.SpecialtySections code,
 			SpecimenCollectionEntry entry,
 			org.ehealth_connector.cda.ch.lab.lrqc.LaboratoryBatteryOrganizer organizer,
 			NonHumanSubject nonHumanSubject) {
@@ -90,7 +90,7 @@ public class AbstractSpecimenAct extends org.ehealth_connector.cda.ihe.lab.Abstr
 	 * @param nonHumanSubject
 	 *            the specimen <div class="de">Angaben zur Probe.</div>
 	 */
-	public AbstractSpecimenAct(org.ehealth_connector.cda.ch.lab.lrtp.enums.SpecialtySections code,
+	public BaseChSpecimenAct(org.ehealth_connector.cda.ch.lab.lrtp.enums.SpecialtySections code,
 			SpecimenCollectionEntry entry,
 			org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer organizer,
 			NonHumanSubject nonHumanSubject) {

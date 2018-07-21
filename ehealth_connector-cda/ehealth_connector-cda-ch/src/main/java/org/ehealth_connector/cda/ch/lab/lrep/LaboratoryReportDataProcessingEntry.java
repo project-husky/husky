@@ -17,7 +17,7 @@
  */
 package org.ehealth_connector.cda.ch.lab.lrep;
 
-import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
+import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryReportDataProcessingEntry;
 import org.openhealthtools.mdht.uml.cda.Act;
 
@@ -45,7 +45,7 @@ public class LaboratoryReportDataProcessingEntry
 	 * @param act
 	 *            the SpecimentAct
 	 */
-	public LaboratoryReportDataProcessingEntry(AbstractSpecimenAct act) {
+	public LaboratoryReportDataProcessingEntry(BaseChSpecimenAct act) {
 		this();
 		setSpecimenAct(act);
 	}
@@ -66,9 +66,9 @@ public class LaboratoryReportDataProcessingEntry
 	 *
 	 * @return the specimen act
 	 */
-	public AbstractSpecimenAct getSpecimenAct() {
+	public BaseChSpecimenAct getSpecimenAct() {
 		if (getMdht().getAct() != null) {
-			return new AbstractSpecimenAct(getMdht().getAct());
+			return new BaseChSpecimenAct(getMdht().getAct());
 		}
 		return null;
 	}
@@ -79,7 +79,7 @@ public class LaboratoryReportDataProcessingEntry
 	 * @param specimenAct
 	 *            the new specimen act
 	 */
-	public void setSpecimenAct(AbstractSpecimenAct specimenAct) {
+	public void setSpecimenAct(BaseChSpecimenAct specimenAct) {
 		Act act = specimenAct.copy();
 		getMdht().setAct(act);
 	}

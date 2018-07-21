@@ -19,7 +19,7 @@
 package org.ehealth_connector.cda.ch.edes;
 
 import org.ehealth_connector.cda.AbstractCodedVitalSigns;
-import org.ehealth_connector.cda.AbstractVitalSignObservation;
+import org.ehealth_connector.cda.BaseVitalSignObservation;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEdes;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.common.Identificator;
@@ -76,7 +76,7 @@ public class CodedVitalSignsSection extends AbstractCodedVitalSigns {
 	 * @return EDES VitalSignObservation
 	 */
 	@Override
-	protected AbstractVitalSignObservation createVitalSignObservation(VitalSignObservation mdht) {
+	protected BaseVitalSignObservation createVitalSignObservation(VitalSignObservation mdht) {
 		return new org.ehealth_connector.cda.ch.edes.VitalSignObservation(mdht);
 	}
 

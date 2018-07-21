@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.ehealth_connector.cda.AbstractObservation;
+import org.ehealth_connector.cda.BaseObservation;
 import org.ehealth_connector.cda.MdhtSectionFacade;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.LanguageCode;
@@ -34,13 +34,13 @@ import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer;
 /**
  * The Class AbstractLaboratorySpecialtySection.
  */
-public class AbstractLaboratorySpecialtySection extends
+public class BaseLaboratorySpecialtySection extends
 		MdhtSectionFacade<org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection> {
 
 	/**
 	 * Instantiates a new abstract laboratory specialty section.
 	 */
-	public AbstractLaboratorySpecialtySection() {
+	public BaseLaboratorySpecialtySection() {
 		super(LABFactory.eINSTANCE.createLaboratorySpecialtySection().init());
 		setTitle(LanguageCode.ENGLISH);
 	}
@@ -51,7 +51,7 @@ public class AbstractLaboratorySpecialtySection extends
 	 * @param code
 	 *            the code
 	 */
-	public AbstractLaboratorySpecialtySection(Code code) {
+	public BaseLaboratorySpecialtySection(Code code) {
 		this();
 		setCode(code);
 	}
@@ -64,7 +64,7 @@ public class AbstractLaboratorySpecialtySection extends
 	 * @param languageCode
 	 *            the language code
 	 */
-	public AbstractLaboratorySpecialtySection(Code code, LanguageCode languageCode) {
+	public BaseLaboratorySpecialtySection(Code code, LanguageCode languageCode) {
 		this(code);
 		setTitle(languageCode);
 	}
@@ -75,26 +75,26 @@ public class AbstractLaboratorySpecialtySection extends
 	 * @param mdht
 	 *            the mdht
 	 */
-	public AbstractLaboratorySpecialtySection(
+	public BaseLaboratorySpecialtySection(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection mdht) {
 		super(mdht);
 	}
 
-	public AbstractLaboratoryAct getAct() {
+	public BaseLaboratoryAct getAct() {
 		final EList<Entry> entries = getMdht().getEntries();
 
 		for (final Entry entry : entries) {
 			final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry mLabRdpe = (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry) entry;
 
-			return new AbstractLaboratoryAct(mLabRdpe.getAct());
+			return new BaseLaboratoryAct(mLabRdpe.getAct());
 		}
 		return null;
 	}
 
-	public List<AbstractObservation> getObservations() {
+	public List<BaseObservation> getObservations() {
 		final EList<Entry> entries = getMdht().getEntries();
 
-		final List<AbstractObservation> labObservations = new ArrayList<AbstractObservation>();
+		final List<BaseObservation> labObservations = new ArrayList<BaseObservation>();
 		for (final Entry entry : entries) {
 			final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry mLabRdpe = (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry) entry;
 
@@ -105,7 +105,7 @@ public class AbstractLaboratorySpecialtySection extends
 							.getOrganizer();
 					for (final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation mLo : mLabOrg
 							.getLaboratoryObservations()) {
-						final AbstractObservation lo = new AbstractObservation(mLo);
+						final BaseObservation lo = new BaseObservation(mLo);
 						labObservations.add(lo);
 					}
 				}

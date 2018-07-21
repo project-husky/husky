@@ -34,9 +34,9 @@ import org.junit.Test;
  * @since Jan 2, 2018 11:56:26 AM
  *
  */
-public class AbstractCdaChFhirConverterTest {
+public class CdaChV12FhirConverterTest {
 
-	private AbstractCdaChFhirConverter converter;
+	private AbstractCdaChV12FhirConverter converter;
 	private String testComment;
 	private String testText;
 
@@ -55,7 +55,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#createComment(java.lang.String)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#createComment(java.lang.String)}.
 	 */
 	@Test
 	public void testCreateComment() {
@@ -66,7 +66,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#createText(java.lang.String)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#createText(java.lang.String)}.
 	 */
 	@Test
 	public void testCreateText() {
@@ -77,7 +77,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#getActiveProblemConcernEntries(org.hl7.fhir.dstu3.model.DocumentManifest)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getActiveProblemConcernEntries(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
 	@Ignore
@@ -87,7 +87,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#getAllergyProblemConcernEntries(org.hl7.fhir.dstu3.model.DocumentManifest)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getAllergyProblemConcernEntries(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
 	@Ignore
@@ -97,7 +97,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#getAuthors(org.hl7.fhir.dstu3.model.DocumentManifest)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getAuthors(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
 	@Ignore
@@ -107,7 +107,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#getCodedVitalSigns(org.hl7.fhir.dstu3.model.DocumentManifest)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getCodedVitalSigns(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
 	@Ignore
@@ -117,7 +117,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#getComment(org.hl7.fhir.dstu3.model.DocumentManifest)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getComment(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
 	@Ignore
@@ -127,7 +127,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#getConfidentialityCode(org.hl7.fhir.dstu3.model.DocumentManifest)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getConfidentialityCode(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
 	@Ignore
@@ -137,7 +137,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#getCustodian(org.hl7.fhir.dstu3.model.DocumentManifest)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getCustodian(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
 	@Ignore
@@ -147,7 +147,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#getDocLanguage(org.hl7.fhir.dstu3.model.DocumentManifest)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getDocLanguage(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
 	@Ignore
@@ -157,7 +157,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#getDocumentDate(org.hl7.fhir.dstu3.model.DocumentManifest)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getDocumentDate(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
 	@Ignore
@@ -167,7 +167,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#getDocumentId(org.hl7.fhir.dstu3.model.DocumentManifest)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getDocumentId(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
 	@Ignore
@@ -177,7 +177,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#getDocumentSetId(org.hl7.fhir.dstu3.model.DocumentManifest)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getDocumentSetId(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
 	@Ignore
@@ -187,7 +187,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#getEdDiagnoses(org.hl7.fhir.dstu3.model.DocumentManifest)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getEdDiagnoses(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
 	@Ignore
@@ -197,7 +197,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#getGestationalAge(org.hl7.fhir.dstu3.model.DocumentManifest)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getGestationalAge(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
 	@Ignore
@@ -207,7 +207,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#getIntendedRecipient(org.hl7.fhir.dstu3.model.DocumentManifest)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getIntendedRecipient(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
 	@Ignore
@@ -217,7 +217,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#getLaboratoryObservations(org.hl7.fhir.dstu3.model.DocumentManifest)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getLaboratoryObservations(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
 	@Ignore
@@ -227,7 +227,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#getLegalAuthenticator(org.hl7.fhir.dstu3.model.DocumentManifest)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getLegalAuthenticator(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
 	@Ignore
@@ -237,7 +237,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#getNarrative(org.hl7.fhir.dstu3.model.DocumentManifest, java.lang.String)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getNarrative(org.hl7.fhir.dstu3.model.DocumentManifest, java.lang.String)}.
 	 */
 	@Test
 	@Ignore
@@ -247,7 +247,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#getPastProblemConcernEntries(org.hl7.fhir.dstu3.model.DocumentManifest)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getPastProblemConcernEntries(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
 	@Ignore
@@ -257,7 +257,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#getPerformer(org.hl7.fhir.dstu3.model.MedicationStatement)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getPerformer(org.hl7.fhir.dstu3.model.MedicationStatement)}.
 	 */
 	@Test
 	@Ignore
@@ -267,7 +267,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#getPregnancyHistory(org.hl7.fhir.dstu3.model.DocumentManifest)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getPregnancyHistory(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
 	@Ignore
@@ -277,7 +277,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#getValueFromKeyValueString(org.hl7.fhir.dstu3.model.Observation, java.lang.String)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getValueFromKeyValueString(org.hl7.fhir.dstu3.model.Observation, java.lang.String)}.
 	 */
 	@Test
 	@Ignore
@@ -287,7 +287,7 @@ public class AbstractCdaChFhirConverterTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChFhirConverter#isDocType(org.hl7.fhir.dstu3.model.DocumentManifest, java.lang.String)}.
+	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#isDocType(org.hl7.fhir.dstu3.model.DocumentManifest, java.lang.String)}.
 	 */
 	@Test
 	@Ignore
@@ -295,7 +295,7 @@ public class AbstractCdaChFhirConverterTest {
 		fail("Not yet implemented");
 	}
 
-	public class MyCdaChFhirConverter extends AbstractCdaChFhirConverter {
+	public class MyCdaChFhirConverter extends AbstractCdaChV12FhirConverter {
 
 	}
 

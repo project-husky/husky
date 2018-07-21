@@ -29,12 +29,13 @@ import org.ehealth_connector.cda.AbstractCda;
 import org.ehealth_connector.cda.DataEnterer;
 import org.ehealth_connector.cda.ObservationMediaEntry;
 import org.ehealth_connector.cda.ch.textbuilder.ObservationChTextBuilder;
-import org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection;
+import org.ehealth_connector.cda.ihe.lab.BaseLaboratorySpecialtySection;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.Person;
+import org.ehealth_connector.common.enums.CountryCode;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
@@ -48,6 +49,7 @@ import org.openhealthtools.mdht.uml.cda.InformationRecipient;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
@@ -171,7 +173,7 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	 * @return the laboratory observations text
 	 */
 	public String generateNarrativeTextLaboratoryObservations(
-			AbstractLaboratorySpecialtySection laboratorySpecialtySection, int sectionIndex,
+			BaseLaboratorySpecialtySection laboratorySpecialtySection, int sectionIndex,
 			String contentIdPrefix, String posCodeSystemOid) {
 		final ObservationChTextBuilder b = new ObservationChTextBuilder(this.getMdht(),
 				laboratorySpecialtySection, sectionIndex, contentIdPrefix,
@@ -200,6 +202,12 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 
 	@Override
 	public void initCda() {
+
+		// Fix RealmCode
+		final CS cs = DatatypesFactory.eINSTANCE.createCS();
+		cs.setCode(CountryCode.SWITZERLAND.getCodeAlpha3());
+		getDoc().getRealmCodes().clear();
+		getDoc().getRealmCodes().add(cs);
 
 		// Make sure the document contains all necessary templateIds
 		CdaUtil.addTemplateIdOnce(getDoc(), new Identificator("2.16.840.1.113883.10.12.1"));

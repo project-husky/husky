@@ -20,7 +20,7 @@ package org.ehealth_connector.cda.ihe.lab;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ehealth_connector.cda.AbstractObservation;
+import org.ehealth_connector.cda.BaseObservation;
 import org.ehealth_connector.cda.MdhtOrganizerFacade;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.StatusCode;
@@ -30,7 +30,7 @@ import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 /**
  * The Class AbstractLaboratoryBatteryOrganizer.
  */
-public class AbstractLaboratoryBatteryOrganizer extends
+public class BaseLaboratoryBatteryOrganizer extends
 		MdhtOrganizerFacade<org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer> {
 
 	String humanInformation;
@@ -38,7 +38,7 @@ public class AbstractLaboratoryBatteryOrganizer extends
 	/**
 	 * Instantiates a new abstract laboratory battery organizer.
 	 */
-	public AbstractLaboratoryBatteryOrganizer() {
+	public BaseLaboratoryBatteryOrganizer() {
 		super(LABFactory.eINSTANCE.createLaboratoryBatteryOrganizer().init());
 		setStatusCode(StatusCode.COMPLETED);
 		// getMdht().getTemplateIds().add(new
@@ -51,7 +51,7 @@ public class AbstractLaboratoryBatteryOrganizer extends
 	 * @param mdht
 	 *            the mdht
 	 */
-	public AbstractLaboratoryBatteryOrganizer(
+	public BaseLaboratoryBatteryOrganizer(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer mdht) {
 		super(mdht);
 		// getMdht().getTemplateIds().add(new
@@ -75,11 +75,11 @@ public class AbstractLaboratoryBatteryOrganizer extends
 	 *
 	 * @return the laboratory observations
 	 */
-	public List<AbstractObservation> getLaboratoryObservations() {
-		final List<AbstractObservation> loList = new ArrayList<AbstractObservation>();
+	public List<BaseObservation> getLaboratoryObservations() {
+		final List<BaseObservation> loList = new ArrayList<BaseObservation>();
 		for (final Observation o : getMdht().getObservations()) {
 			if (o instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation) {
-				loList.add(new AbstractObservation(o));
+				loList.add(new BaseObservation(o));
 			}
 		}
 		return loList;

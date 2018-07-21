@@ -29,7 +29,7 @@ import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-public class AbstractLaboratoryReportTest extends TestUtils {
+public class CdaChV12LaboratoryReportTest extends TestUtils {
 
 	@Test
 	public void testDocumentHeader() throws XPathExpressionException {

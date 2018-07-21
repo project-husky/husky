@@ -161,8 +161,8 @@ public class CdaChLrepV1GeneralReport extends
 	}
 
 	@Override
-	public InformationRecipient addRecipient(Organization recipient) {
-		InformationRecipient mdht = super.addRecipient(recipient);
+	public InformationRecipient addOtherRecipient(Organization recipient) {
+		InformationRecipient mdht = super.addOtherRecipient(recipient);
 		CdaUtil.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.2.57"));
 		return mdht;
 	}

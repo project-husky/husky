@@ -21,8 +21,8 @@ package org.ehealth_connector.cda.textbuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ehealth_connector.cda.AbstractAllergyConcern;
-import org.ehealth_connector.cda.AbstractAllergyConcernComparator;
+import org.ehealth_connector.cda.BaseAllergyConcern;
+import org.ehealth_connector.cda.BaseAllergyConcernComparator;
 import org.ehealth_connector.cda.enums.ContentIdPrefix;
 import org.ehealth_connector.common.enums.LanguageCode;
 
@@ -34,7 +34,7 @@ import org.ehealth_connector.common.enums.LanguageCode;
  */
 public abstract class AllergyConcernTextBuilder extends TextBuilder {
 
-	private List<org.ehealth_connector.cda.AbstractAllergyConcern> problemConcerns;
+	private List<org.ehealth_connector.cda.BaseAllergyConcern> problemConcerns;
 	private String contentIdPrefix;
 	protected LanguageCode myLang = LanguageCode.ENGLISH;
 
@@ -48,7 +48,7 @@ public abstract class AllergyConcernTextBuilder extends TextBuilder {
 	 * @param lang
 	 *            the language
 	 */
-	public AllergyConcernTextBuilder(List<AbstractAllergyConcern> problemConcerns,
+	public AllergyConcernTextBuilder(List<BaseAllergyConcern> problemConcerns,
 			ContentIdPrefix section, LanguageCode lang) {
 		this.problemConcerns = problemConcerns;
 		contentIdPrefix = section.getContentIdPrefix();
@@ -58,12 +58,12 @@ public abstract class AllergyConcernTextBuilder extends TextBuilder {
 	private void addBody() {
 		append("<tbody>");
 		int i = 1;
-		ArrayList<AbstractAllergyConcern> list = new ArrayList<AbstractAllergyConcern>();
-		for (AbstractAllergyConcern abstractAllergyConcern : problemConcerns) {
-			list.add((new AbstractAllergyConcern(abstractAllergyConcern.getMdht(), myLang)));
+		ArrayList<BaseAllergyConcern> list = new ArrayList<BaseAllergyConcern>();
+		for (BaseAllergyConcern abstractAllergyConcern : problemConcerns) {
+			list.add((new BaseAllergyConcern(abstractAllergyConcern.getMdht(), myLang)));
 		}
-		list.sort(new AbstractAllergyConcernComparator());
-		for (final org.ehealth_connector.cda.AbstractAllergyConcern problemConcern : list) {
+		list.sort(new BaseAllergyConcernComparator());
+		for (final org.ehealth_connector.cda.BaseAllergyConcern problemConcern : list) {
 			addRow(problemConcern, i++);
 		}
 		append("</tbody>");
@@ -84,7 +84,7 @@ public abstract class AllergyConcernTextBuilder extends TextBuilder {
 	 *            elements; make sure you do not use duplicate indexes other
 	 *            wise the CDA xml will become invalid!)
 	 */
-	protected abstract void addRow(AbstractAllergyConcern allergyConcern, int i);
+	protected abstract void addRow(BaseAllergyConcern allergyConcern, int i);
 
 	/**
 	 * Method to get
@@ -100,7 +100,7 @@ public abstract class AllergyConcernTextBuilder extends TextBuilder {
 	 *
 	 * @return the problemConcerns
 	 */
-	public List<org.ehealth_connector.cda.AbstractAllergyConcern> getProblemConcerns() {
+	public List<org.ehealth_connector.cda.BaseAllergyConcern> getProblemConcerns() {
 		return problemConcerns;
 	}
 
@@ -121,7 +121,7 @@ public abstract class AllergyConcernTextBuilder extends TextBuilder {
 	 *            the problemConcerns to set
 	 */
 	public void setProblemConcerns(
-			List<org.ehealth_connector.cda.AbstractAllergyConcern> problemConcerns) {
+			List<org.ehealth_connector.cda.BaseAllergyConcern> problemConcerns) {
 		this.problemConcerns = problemConcerns;
 	}
 

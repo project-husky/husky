@@ -273,14 +273,14 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * <div class="en">Sets the in fulfillment of reference to another
+	 * <div class="en">Adds an inFulfillmentOf reference to another
 	 * document</div> <div class="de">Weist dem Dokument eine ID eines anderen
 	 * Dokumentes zu, auf das es sich bezieht</div>
 	 *
 	 * @param id
 	 *            of the referenced document
 	 */
-	public void addInFulfillmentOf(Identificator id) {
+	public void addInFulfillmentOfOrder(Identificator id) {
 		final InFulfillmentOf ifo = CDAFactory.eINSTANCE.createInFulfillmentOf();
 		final Order o = CDAFactory.eINSTANCE.createOrder();
 		o.getIds().add(id.getIi());
@@ -300,6 +300,17 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		addParticipant(versicherung, insurantId, ParticipantType.Insurance);
 	}
 
+	public InformationRecipient addOtherRecipient(Organization organization) {
+
+		InformationRecipient recipient = CDAFactory.eINSTANCE.createInformationRecipient();
+		recipient.setTypeCode(x_InformationRecipient.TRC);
+		IntendedRecipient ir = CDAFactory.eINSTANCE.createIntendedRecipient();
+		ir.setReceivedOrganization(organization.getMdhtOrganization());
+		recipient.setIntendedRecipient(ir);
+		getDoc().getInformationRecipients().add(recipient);
+		return recipient;
+	}
+
 	/**
 	 * <div class="en">Adds a participant</div> <div class="de">Fügt dem CDA
 	 * Dokument einen Teilnehmer hinzu</div>
@@ -313,6 +324,32 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 */
 	public Participant1 addParticipant(Organization organization, Identificator participationId,
 			ParticipantType participantType) {
+		return addParticipant(organization, participationId, participantType, null);
+	}
+
+	/**
+	 * <div class="en">Adds a participant</div> <div class="de">Fügt dem CDA
+	 * Dokument einen Teilnehmer hinzu</div>.
+	 *
+	 * @param organization
+	 *            Organisation
+	 * @param participationId
+	 *            the participation id
+	 * @param participantType
+	 *            <div class="en">Kind of participation (e.g. insurance)</div>
+	 *            <div class="de">Art der Partizipation (z.B.
+	 *            Versicherung)</div>
+	 * @param roleCode
+	 *            <div class="en">Role of participation (e.g. insurance law).
+	 *            Important note: this attribute will be ignored for employers,
+	 *            as their role is defined by IHE</div> <div class="de">Rolle
+	 *            der Partizipation (z.B. Versicherungsgesetz). Wichtiger
+	 *            Hinweis: Dieses Attribut wird bei Arbeitgebern ignoriert, weil
+	 *            deren Rolle durch IHE definiert ist.</div>
+	 * @return the participant 1
+	 */
+	public Participant1 addParticipant(Organization organization, Identificator participationId,
+			ParticipantType participantType, Code roleCode) {
 		final Participant1 participant = CDAFactory.eINSTANCE.createParticipant1();
 		getDoc().getParticipants().add(participant);
 		final AssociatedEntity assEnt = CDAFactory.eINSTANCE.createAssociatedEntity();
@@ -335,6 +372,10 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 							.getCE());
 			break;
 		case Insurance:
+			participant.setTypeCode(ParticipationType.COV);
+			assEnt.setClassCode(RoleClassAssociative.PAYOR);
+			if (roleCode != null)
+				assEnt.setCode(roleCode.getCE());
 			break;
 		default:
 			break;
@@ -343,17 +384,6 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		participant.setAssociatedEntity(assEnt);
 		return participant;
 
-	}
-
-	public InformationRecipient addRecipient(Organization organization) {
-
-		InformationRecipient recipient = CDAFactory.eINSTANCE.createInformationRecipient();
-		recipient.setTypeCode(x_InformationRecipient.TRC);
-		IntendedRecipient ir = CDAFactory.eINSTANCE.createIntendedRecipient();
-		ir.setReceivedOrganization(organization.getMdhtOrganization());
-		recipient.setIntendedRecipient(ir);
-		getDoc().getInformationRecipients().add(recipient);
-		return recipient;
 	}
 
 	/**
@@ -431,6 +461,19 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		final org.ehealth_connector.common.Author author = new org.ehealth_connector.common.Author(
 				getDoc().getAuthors().get(0));
 		return author;
+	}
+
+	/**
+	 * Gets the authorization consents as strings.
+	 *
+	 * @return the authorization consents
+	 */
+	public List<String> getAuthorizationConsents() {
+		List<String> retVal = new ArrayList<String>();
+		for (Authorization item : getDoc().getAuthorizations()) {
+			retVal.add(item.getConsent().getCode().getOriginalText().getText());
+		}
+		return retVal;
 	}
 
 	/**
@@ -555,11 +598,55 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		return null;
 	}
 
+	/**
+	 * <div class="en">Gets all employers</div> <div class="de">Gibt alle
+	 * Arbeitgeber zurück</div>
+	 *
+	 * @return arraylist of organizations
+	 */
+	public List<Organization> getEmployers() {
+		final List<Organization> organizations = new ArrayList<Organization>();
+		for (final Participant1 part : getDoc().getParticipants()) {
+			if (part.getTypeCode().equals(ParticipationType.IND)) {
+				if (part.getAssociatedEntity() != null) {
+					if (part.getAssociatedEntity().getClassCode()
+							.equals(RoleClassAssociative.CON)) {
+						CE ce = part.getAssociatedEntity().getCode();
+						if (ce.getCodeSystem().equals("1.3.5.1.4.1.19376.1.5.3.3")
+								&& ce.getCode().equals("EMPLOYER")) {
+							final Organization org = new Organization(
+									part.getAssociatedEntity().getScopingOrganization());
+							organizations.add(org);
+						}
+					}
+				}
+			}
+		}
+		return organizations;
+	}
+
 	public Identificator getId() {
 		if (getDoc().getId() != null) {
 			return new Identificator(getDoc().getId());
 		}
 		return null;
+	}
+
+	/**
+	 * <div class="en">Returns a List of all inFulfillmentOf references to other
+	 * documents</div> <div class="de">Gibt eine Liste aller Referenzen auf
+	 * Dokumente zurück, auf welche sich dasDokument bezieht</div>
+	 *
+	 * @return the in fulfillment ofs
+	 */
+	public List<Identificator> getInFulfillmentOfOrders() {
+		List<Identificator> retVal = new ArrayList<Identificator>();
+		for (InFulfillmentOf ifo : getDoc().getInFulfillmentOfs()) {
+			for (II id : ifo.getOrder().getIds()) {
+				retVal.add(new Identificator(id));
+			}
+		}
+		return retVal;
 	}
 
 	/**
@@ -571,12 +658,18 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	public List<Organization> getInsurances() {
 		final List<Organization> organizations = new ArrayList<Organization>();
 		for (final Participant1 part : getDoc().getParticipants()) {
-			if (part.getTypeCode().equals(ParticipantType.Insurance)) {
-				final Organization org = new Organization(
-						part.getAssociatedEntity().getScopingOrganization());
-				organizations.add(org);
+			if (part.getTypeCode().equals(ParticipationType.COV)) {
+				if (part.getAssociatedEntity() != null) {
+					if (part.getAssociatedEntity().getClassCode()
+							.equals(RoleClassAssociative.PAYOR)) {
+						final Organization org = new Organization(
+								part.getAssociatedEntity().getScopingOrganization());
+						organizations.add(org);
+					}
+				}
 			}
 		}
+		// ParticipantType.Insurance
 		return organizations;
 	}
 

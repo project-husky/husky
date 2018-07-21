@@ -23,19 +23,19 @@ import java.util.Comparator;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.Organizer;
 
-public class AbstractOrganizer
+public class BaseOrganizer
 		extends MdhtOrganizerFacade<org.openhealthtools.mdht.uml.cda.Organizer>
-		implements Comparator<AbstractOrganizer> {
+		implements Comparator<BaseOrganizer> {
 
 	protected LanguageCode myLang = LanguageCode.ENGLISH;
 	protected org.openhealthtools.mdht.uml.cda.Organizer mOrganizer;
 
-	public AbstractOrganizer(Organizer mdht) {
+	public BaseOrganizer(Organizer mdht) {
 		super(mdht);
 		mOrganizer = mdht;
 	}
 
-	public AbstractOrganizer(Organizer mdht, LanguageCode lang) {
+	public BaseOrganizer(Organizer mdht, LanguageCode lang) {
 		super(mdht);
 		mOrganizer = mdht;
 		myLang = lang;
@@ -47,8 +47,8 @@ public class AbstractOrganizer
 	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 	 */
 	@Override
-	public int compare(AbstractOrganizer o1, AbstractOrganizer o2) {
-		AbstractOrganizerComparator comparator = new AbstractOrganizerComparator();
+	public int compare(BaseOrganizer o1, BaseOrganizer o2) {
+		BaseOrganizerComparator comparator = new BaseOrganizerComparator();
 		return comparator.compare(o1, o2);
 	}
 

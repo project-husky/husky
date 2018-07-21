@@ -25,12 +25,12 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.cda.AbstractAllergyProblem;
+import org.ehealth_connector.cda.BaseAllergyProblem;
 import org.ehealth_connector.cda.AbstractCda;
-import org.ehealth_connector.cda.AbstractObservation;
-import org.ehealth_connector.cda.AbstractOrganizer;
-import org.ehealth_connector.cda.AbstractProblemConcern;
-import org.ehealth_connector.cda.AbstractProblemEntry;
+import org.ehealth_connector.cda.BaseObservation;
+import org.ehealth_connector.cda.BaseOrganizer;
+import org.ehealth_connector.cda.BaseProblemConcern;
+import org.ehealth_connector.cda.BaseProblemEntry;
 import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.ch.ActiveProblemConcern;
 import org.ehealth_connector.cda.ch.PastProblemConcern;
@@ -295,7 +295,7 @@ public class CdaChEdesCommon {
 	 * @return the active problem concerns text
 	 */
 	public String generateNarrativeTextActiveProblemConcerns(Section section) {
-		final List<AbstractProblemConcern> problemConcernEntryList = new ArrayList<AbstractProblemConcern>();
+		final List<BaseProblemConcern> problemConcernEntryList = new ArrayList<BaseProblemConcern>();
 		// Convert from the specific PastProblemConcern Type to the more
 		// general PastProblemConcern
 		problemConcernEntryList.addAll(getActiveProblemConcerns(section));
@@ -346,8 +346,8 @@ public class CdaChEdesCommon {
 	 * @return the active problem concerns text
 	 */
 	public String generateNarrativeTextCodedVitalSigns(
-			Comparator<AbstractOrganizer> organizerComparator,
-			Comparator<AbstractObservation> observationComparator) {
+			Comparator<BaseOrganizer> organizerComparator,
+			Comparator<BaseObservation> observationComparator) {
 		final ObservationChTextBuilder b = new ObservationChTextBuilder(
 				(org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection) mCodedVitalSigns
 						.getMdht(),
@@ -365,7 +365,7 @@ public class CdaChEdesCommon {
 	 * @return the allergy problem concerns text
 	 */
 	public String generateNarrativeTextEdDiagnoses(Section section) {
-		final List<AbstractProblemConcern> problemConcernEntryList = new ArrayList<AbstractProblemConcern>();
+		final List<BaseProblemConcern> problemConcernEntryList = new ArrayList<BaseProblemConcern>();
 		problemConcernEntryList.addAll(getEdDiagnoses(section));
 		final EdDiagnosisChTextBuilder b = new EdDiagnosisChTextBuilder(problemConcernEntryList,
 				SectionsEdes.ED_DIAGNOSIS);
@@ -381,7 +381,7 @@ public class CdaChEdesCommon {
 	 */
 	public String generateNarrativeTextPastProblemConcernEntries(
 			List<PastProblemConcern> pastProblemConcerns) {
-		final List<AbstractProblemConcern> problemConcernEntryList = new ArrayList<AbstractProblemConcern>();
+		final List<BaseProblemConcern> problemConcernEntryList = new ArrayList<BaseProblemConcern>();
 
 		// Convert from the specific PastProblemConcern Type to the more
 		// general PastProblemConcern
@@ -399,7 +399,7 @@ public class CdaChEdesCommon {
 	 * @return the past problem concern entries text
 	 */
 	public String generateNarrativeTextPastProblemConcernEntries(Section section) {
-		final List<AbstractProblemConcern> problemConcernEntryList = new ArrayList<AbstractProblemConcern>();
+		final List<BaseProblemConcern> problemConcernEntryList = new ArrayList<BaseProblemConcern>();
 
 		// Convert from the specific PastProblemConcern Type to the more
 		// general PastProblemConcern
@@ -504,7 +504,7 @@ public class CdaChEdesCommon {
 					strStatus = AllergyConcern.getStatus().toString();
 				if (AllergyConcern.getConcernEntry().getText().getText() != null)
 					strCommentar = AllergyConcern.getConcernEntry().getText().getText();
-				for (final AbstractAllergyProblem AllergyProblem : AllergyConcern
+				for (final BaseAllergyProblem AllergyProblem : AllergyConcern
 						.getAllergyProblems()) {
 					String strStartDateTime = "-";
 					String strEndDateTime = "-";
@@ -643,7 +643,7 @@ public class CdaChEdesCommon {
 					strCommentar = Problemconcern.getConcernEntry().getText().getText();
 				if (Problemconcern.getStatus().toString() != null)
 					strStatus = Problemconcern.getStatus().toString();
-				for (final AbstractProblemEntry Problementry : Problemconcern.getProblemEntries()) {
+				for (final BaseProblemEntry Problementry : Problemconcern.getProblemEntries()) {
 					String strStartDateTime = "-";
 					String strEndDateTime = "-";
 					String strCode = "-";

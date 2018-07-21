@@ -38,6 +38,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.QTY;
 import org.openhealthtools.mdht.uml.hl7.datatypes.RTO;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
+import org.openhealthtools.mdht.uml.hl7.datatypes.impl.PQImpl;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 /**
@@ -869,13 +870,17 @@ public class Value {
 	}
 
 	private void setPqValue(String value) {
-		final PQ pq = (PQ) mValue;
-		pq.setValue(Double.valueOf(value));
+		if (mValue instanceof PQImpl) {
+			final PQ pq = (PQ) mValue;
+			pq.setValue(Double.valueOf(value));
+		}
 	}
 
 	public void setUcumUnit(String unit) {
-		final PQ pq = (PQ) mValue;
-		pq.setUnit(unit);
+		if (mValue instanceof PQImpl) {
+			final PQ pq = (PQ) mValue;
+			pq.setUnit(unit);
+		}
 	}
 
 	private void setUcumUnit(Ucum unit) {

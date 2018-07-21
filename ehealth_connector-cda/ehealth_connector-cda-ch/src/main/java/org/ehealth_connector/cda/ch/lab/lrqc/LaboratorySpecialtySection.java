@@ -17,8 +17,8 @@
  */
 package org.ehealth_connector.cda.ch.lab.lrqc;
 
-import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
-import org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection;
+import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
+import org.ehealth_connector.cda.ihe.lab.BaseLaboratorySpecialtySection;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.LanguageCode;
 
@@ -32,7 +32,7 @@ import org.ehealth_connector.common.enums.LanguageCode;
  * Dieses Kapitel KANN demzufolge mehrfach vorkommen (mit dem jeweils passenden
  * Code für die Laborbefundgruppe zu den eigentlichen Laborresultaten).</div>
  */
-public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySection {
+public class LaboratorySpecialtySection extends BaseLaboratorySpecialtySection {
 
 	/**
 	 * Instantiates a new laboratory specialty section.
@@ -125,15 +125,15 @@ public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySecti
 			lrdpe = new LaboratoryReportDataProcessingEntry();
 		}
 
-		AbstractSpecimenAct sa;
+		BaseChSpecimenAct sa;
 		if (lrdpe.getSpecimenAct() == null) {
 			newSa = true;
-			sa = new AbstractSpecimenAct();
+			sa = new BaseChSpecimenAct();
 			if (sectionCode != null) {
 				sa.setCode(sectionCode);
 			}
 		} else {
-			sa = new AbstractSpecimenAct(lrdpe.getSpecimenAct().getMdht());
+			sa = new BaseChSpecimenAct(lrdpe.getSpecimenAct().getMdht());
 		}
 
 		sa.addLaboratoryBatteryOrganizer(organizer);
@@ -163,7 +163,7 @@ public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySecti
 	}
 
 	/**
-	 * @see org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection#setLaboratoryReportDataProcessingEntry(org.ehealth_connector.cda.ihe.lab.LaboratoryReportDataProcessingEntry)
+	 * @see org.ehealth_connector.cda.ihe.lab.BaseLaboratorySpecialtySection#setLaboratoryReportDataProcessingEntry(org.ehealth_connector.cda.ihe.lab.LaboratoryReportDataProcessingEntry)
 	 */
 	public void setLaboratoryReportDataProcessingEntry(
 			org.ehealth_connector.cda.ch.lab.lrqc.LaboratoryReportDataProcessingEntry entry) {

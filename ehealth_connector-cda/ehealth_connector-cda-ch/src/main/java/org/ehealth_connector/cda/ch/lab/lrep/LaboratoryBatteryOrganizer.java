@@ -22,10 +22,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.ehealth_connector.cda.AbstractObservation;
-import org.ehealth_connector.cda.AbstractObservationComparator;
+import org.ehealth_connector.cda.BaseObservation;
+import org.ehealth_connector.cda.BaseObservationComparator;
 import org.ehealth_connector.cda.ObservationMediaEntry;
-import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryBatteryOrganizer;
+import org.ehealth_connector.cda.ihe.lab.BaseLaboratoryBatteryOrganizer;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Identificator;
@@ -44,7 +44,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
  * </div> <div class="de">Der Laboratory Battery Organizer erlaubt gemäss IHE
  * XD-LAB die Gruppierung von Resultaten.</div>
  */
-public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganizer {
+public class LaboratoryBatteryOrganizer extends BaseLaboratoryBatteryOrganizer {
 
 	/**
 	 * Instantiates a new laboratory battery organizer.
@@ -181,13 +181,13 @@ public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganiz
 	 * @return the laboratory observations
 	 */
 	@Override
-	public List<AbstractObservation> getLaboratoryObservations() {
-		final List<AbstractObservation> loList = new ArrayList<AbstractObservation>();
+	public List<BaseObservation> getLaboratoryObservations() {
+		final List<BaseObservation> loList = new ArrayList<BaseObservation>();
 		for (final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation lo : getMdht()
 				.getLaboratoryObservations()) {
-			loList.add(new AbstractObservation(lo));
+			loList.add(new BaseObservation(lo));
 		}
-		loList.sort(new AbstractObservationComparator());
+		loList.sort(new BaseObservationComparator());
 		return loList;
 	}
 

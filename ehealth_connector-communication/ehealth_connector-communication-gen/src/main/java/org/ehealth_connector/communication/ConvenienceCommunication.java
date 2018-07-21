@@ -373,9 +373,8 @@ public class ConvenienceCommunication {
 		// clean the list.
 		docMetadata.clearExtracted();
 
-		// Fix the OHT CDAExtraction bug(?), that authorTelecommunication is not
-		// a known Slot for the NIST Registry by deleting all
-		// authorTelecommunications
+		// Fix the OHT for invalid empty authorTelecommunicationentries by
+		// deleting all authorTelecommunications
 		for (final Object object : docMetadata.getMdhtDocumentEntryType().getAuthors()) {
 			final AuthorType at = (AuthorType) object;
 			at.getAuthorTelecommunication().clear();

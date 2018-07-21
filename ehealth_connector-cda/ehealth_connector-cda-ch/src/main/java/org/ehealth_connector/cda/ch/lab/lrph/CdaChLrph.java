@@ -22,17 +22,18 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.cda.AbstractObservation;
-import org.ehealth_connector.cda.AbstractObservationComparator;
-import org.ehealth_connector.cda.AbstractOrganizer;
-import org.ehealth_connector.cda.AbstractOrganizerComparator;
+import org.ehealth_connector.cda.BaseObservation;
+import org.ehealth_connector.cda.BaseObservationComparator;
+import org.ehealth_connector.cda.BaseOrganizer;
+import org.ehealth_connector.cda.BaseOrganizerComparator;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport;
-import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
+import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.IntendedRecipient;
+import org.ehealth_connector.common.enums.CountryCode;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Patient;
@@ -42,6 +43,7 @@ import org.openhealthtools.mdht.uml.cda.StructuredBody;
 import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ADXP;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ENXP;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -117,7 +119,11 @@ public class CdaChLrph
 	 */
 	public CdaChLrph(LanguageCode languageCode, String styleSheet, String css) {
 		super(ChFactory.eINSTANCE.createCdaChLrphV1().init(), languageCode, styleSheet, css);
-		this.setLanguageCode(languageCode);
+		// Fix RealmCode
+		final CS cs = DatatypesFactory.eINSTANCE.createCS();
+		cs.setCode(CountryCode.SWITZERLAND.getCodeAlpha3());
+		getDoc().getRealmCodes().clear();
+		getDoc().getRealmCodes().add(cs);
 	}
 
 	/**
@@ -474,7 +480,7 @@ public class CdaChLrph
 
 		laboratorySpecialtySection.setText(generateNarrativeTextLaboratoryObservations(
 				laboratorySpecialtySection, sectionIndex, "lss", null,
-				new AbstractOrganizerComparator(), new AbstractObservationComparator()));
+				new BaseOrganizerComparator(), new BaseObservationComparator()));
 
 	}
 
@@ -489,8 +495,8 @@ public class CdaChLrph
 	 *            the observation comparator (pass null for default sorting)
 	 */
 	public void generateNarrativeTextLaboratoryObservations(
-			Comparator<AbstractOrganizer> organizerComparator,
-			Comparator<AbstractObservation> observationComparator) {
+			Comparator<BaseOrganizer> organizerComparator,
+			Comparator<BaseObservation> observationComparator) {
 
 		LaboratorySpecialtySection laboratorySpecialtySection = getLaboratorySpecialtySection();
 
@@ -515,7 +521,7 @@ public class CdaChLrph
 			final LaboratoryReportDataProcessingEntry lrdpe = lss
 					.getLaboratoryReportDataProcessingEntry();
 			if (lrdpe != null) {
-				final AbstractSpecimenAct se = lrdpe.getSpecimenAct();
+				final BaseChSpecimenAct se = lrdpe.getSpecimenAct();
 				if (se != null) {
 					lbol.addAll(se.getLrphLaboratoryBatteryOrganizers());
 				}
@@ -545,7 +551,7 @@ public class CdaChLrph
 	 *
 	 * @return the SpecimenAct. Returns null, if this element does not exist.
 	 */
-	public AbstractSpecimenAct getSpecimenAct() {
+	public BaseChSpecimenAct getSpecimenAct() {
 		if ((getLaboratorySpecialtySection() != null)
 				&& (getLaboratorySpecialtySection()
 						.getLaboratoryReportDataProcessingEntry() != null)

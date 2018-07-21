@@ -18,7 +18,7 @@
 
 package org.ehealth_connector.cda;
 
-public class Observation extends AbstractObservation {
+public class Observation extends BaseObservation {
 
 	public Observation() {
 		super(null);

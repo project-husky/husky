@@ -22,7 +22,7 @@ import java.util.List;
 
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.ParticipantClaimer;
-import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
+import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
 import org.ehealth_connector.cda.ch.lab.SpecimenCollectionEntry;
 import org.ehealth_connector.cda.ch.lab.lrph.CdaChLrph;
 import org.ehealth_connector.cda.ch.lab.lrph.LaboratoryBatteryOrganizer;
@@ -77,7 +77,7 @@ import ca.uhn.fhir.parser.IParser;
  * @since Sep 19, 2017 6:38:47 AM
  *
  */
-public class LrphConverter extends AbstractCdaChFhirConverter {
+public class LrphConverter extends AbstractCdaChV12FhirConverter {
 
 	/**
 	 * <div class="en">Creates an eHC CdaChLrph instance from a valid FHIR
@@ -130,7 +130,7 @@ public class LrphConverter extends AbstractCdaChFhirConverter {
 		// InFulfillmentOf
 		final Identificator ifoId = getInFulfillmentOf(docManifest);
 		if (ifoId != null) {
-			doc.addInFulfillmentOf(ifoId);
+			doc.addInFulfillmentOfOrder(ifoId);
 		}
 		// DocVersion
 		final Integer docVersion = getDocVersion(docManifest);
@@ -173,7 +173,7 @@ public class LrphConverter extends AbstractCdaChFhirConverter {
 			doc.setNarrativeTextSectionLaboratorySpeciality(narrative);
 		}
 
-		final AbstractSpecimenAct specimenAct = doc.getSpecimenAct();
+		final BaseChSpecimenAct specimenAct = doc.getSpecimenAct();
 		if (specimenAct != null) {
 			// SpecimenCollection
 			doc.getSpecimenAct()
@@ -654,7 +654,7 @@ public class LrphConverter extends AbstractCdaChFhirConverter {
 							code, LanguageCode.getEnum(docManifest.getLanguage()));
 
 					// Add all LaboratoryBatteryOrganizers
-					final AbstractSpecimenAct spa = new AbstractSpecimenAct();
+					final BaseChSpecimenAct spa = new BaseChSpecimenAct();
 					spa.setCode(code);
 					for (final ObservationRelatedComponent relatedObs : obs.getRelated()) {
 						final Observation fhirObs = (Observation) relatedObs.getTarget()

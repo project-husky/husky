@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
 
 import javax.xml.xpath.XPathExpressionException;
 
-import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
+import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.junit.Test;
 import org.w3c.dom.Document;
@@ -31,7 +31,7 @@ public class SpecimenActTest extends TestUtils {
 
 	@Test
 	public void testLrph() throws XPathExpressionException {
-		AbstractSpecimenAct act = new AbstractSpecimenAct();
+		BaseChSpecimenAct act = new BaseChSpecimenAct();
 
 		// LaboratoryIsolateOrganizer
 		LaboratoryIsolateOrganizer labIsolateOrganizer = new LaboratoryIsolateOrganizer();
@@ -63,7 +63,7 @@ public class SpecimenActTest extends TestUtils {
 
 	@Test
 	public void testModel() throws XPathExpressionException {
-		AbstractSpecimenAct act = new AbstractSpecimenAct();
+		BaseChSpecimenAct act = new BaseChSpecimenAct();
 		// add
 		// LabortatoryBatteryOrganizer
 		act.addLaboratoryBatteryOrganizer(new LaboratoryBatteryOrganizer());

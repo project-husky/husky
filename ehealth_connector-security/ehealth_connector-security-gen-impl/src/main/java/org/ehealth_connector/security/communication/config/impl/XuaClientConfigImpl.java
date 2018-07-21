@@ -27,7 +27,7 @@ import org.ehealth_connector.security.communication.config.XuaClientConfig;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class XuaClientConfigImpl extends AbstractSoapClientConfig implements XuaClientConfig {
+public class XuaClientConfigImpl extends BaseSoapClientConfig implements XuaClientConfig {
 
 	protected XuaClientConfigImpl() {
 		setSimple(true);

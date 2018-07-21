@@ -41,7 +41,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
-public class AbstractVitalSignObservation extends AbstractObservation {
+public class BaseVitalSignObservation extends BaseObservation {
 
 	/** The m vital sign observation. */
 	private org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation mVitalSignObservation;
@@ -49,7 +49,7 @@ public class AbstractVitalSignObservation extends AbstractObservation {
 	/**
 	 * Instantiates a new vital signs observation.
 	 */
-	public AbstractVitalSignObservation() {
+	public BaseVitalSignObservation() {
 		super(null);
 		initMdht();
 		setMethodCodeTranslation(null);
@@ -65,14 +65,14 @@ public class AbstractVitalSignObservation extends AbstractObservation {
 	 * @param value
 	 *            the value according to [IHE PCC TF-2] 6.3.4.22.3
 	 */
-	public AbstractVitalSignObservation(Code code, Date effectiveTime, Value value) {
+	public BaseVitalSignObservation(Code code, Date effectiveTime, Value value) {
 		super(null);
 		setCode(code);
 		setValue(value);
 		setEffectiveTime(effectiveTime);
 	}
 
-	protected AbstractVitalSignObservation(Observation mdht) {
+	protected BaseVitalSignObservation(Observation mdht) {
 		super(mdht);
 	}
 

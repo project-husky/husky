@@ -30,7 +30,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 /**
  * The Class SpecimenAct <div class="de">Probenuntersuchung</div>.
  */
-public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct {
+public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct {
 
 	/**
 	 * This class implements the default comparison algorithm for HL7 CDA

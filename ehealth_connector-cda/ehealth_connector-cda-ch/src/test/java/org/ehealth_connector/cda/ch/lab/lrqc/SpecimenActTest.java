@@ -21,7 +21,7 @@ import static org.junit.Assert.assertNotNull;
 
 import javax.xml.xpath.XPathExpressionException;
 
-import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
+import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
 import org.ehealth_connector.cda.ihe.lab.NonHumanSubject;
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.junit.Test;
@@ -32,7 +32,7 @@ public class SpecimenActTest extends TestUtils {
 	@Test
 	public void testModel() throws XPathExpressionException {
 		NonHumanSubject nhs = new NonHumanSubject();
-		AbstractSpecimenAct spa = new AbstractSpecimenAct();
+		BaseChSpecimenAct spa = new BaseChSpecimenAct();
 
 		spa.setNonHumanSubject(nhs);
 		assertNotNull(spa.getNonHumanSubject());

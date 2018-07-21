@@ -49,9 +49,9 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.RTO;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationPhysicalPerformer;
 
-public class AbstractObservation
+public class BaseObservation
 		extends MdhtObservationFacade<org.openhealthtools.mdht.uml.cda.Observation>
-		implements Comparator<AbstractObservation> {
+		implements Comparator<BaseObservation> {
 
 	protected LanguageCode myLang = LanguageCode.ENGLISH;
 	protected LangTexts myValueLangTexts = new LangTexts();
@@ -59,12 +59,12 @@ public class AbstractObservation
 	protected LangTexts myTargetSiteLangTexts = new LangTexts();
 	protected org.openhealthtools.mdht.uml.cda.Observation mObservation;
 
-	public AbstractObservation(Observation mdht) {
+	public BaseObservation(Observation mdht) {
 		super(mdht);
 		mObservation = mdht;
 	}
 
-	public AbstractObservation(Observation mdht, LanguageCode lang) {
+	public BaseObservation(Observation mdht, LanguageCode lang) {
 		super(mdht);
 		mObservation = mdht;
 		myLang = lang;
@@ -142,8 +142,8 @@ public class AbstractObservation
 	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 	 */
 	@Override
-	public int compare(AbstractObservation o1, AbstractObservation o2) {
-		AbstractObservationComparator comparator = new AbstractObservationComparator();
+	public int compare(BaseObservation o1, BaseObservation o2) {
+		BaseObservationComparator comparator = new BaseObservationComparator();
 		return comparator.compare(o1, o2);
 	}
 
@@ -242,6 +242,21 @@ public class AbstractObservation
 
 	public LangTexts getObservationLangTexts() {
 		return myObservationLangTexts;
+	}
+
+	/**
+	 * Gets the narrative text of he observation in the desired language.
+	 *
+	 * @return the observation name
+	 */
+	public String getOriginalText() {
+		String obsName = null;
+		if (getCode() != null) {
+			if (!"".equals(getCode().getOriginalText())) {
+				obsName = getCode().getOriginalText();
+			}
+		}
+		return obsName;
 	}
 
 	/**

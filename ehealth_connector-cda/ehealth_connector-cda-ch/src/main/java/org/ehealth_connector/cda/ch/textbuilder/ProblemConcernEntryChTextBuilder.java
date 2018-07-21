@@ -20,8 +20,8 @@ package org.ehealth_connector.cda.ch.textbuilder;
 
 import java.util.List;
 
-import org.ehealth_connector.cda.AbstractProblemConcern;
-import org.ehealth_connector.cda.AbstractProblemEntry;
+import org.ehealth_connector.cda.BaseProblemConcern;
+import org.ehealth_connector.cda.BaseProblemEntry;
 import org.ehealth_connector.cda.enums.ContentIdPrefix;
 import org.ehealth_connector.cda.textbuilder.TextBuilder;
 import org.ehealth_connector.common.Value;
@@ -35,7 +35,7 @@ import org.ehealth_connector.common.utils.DateUtil;
  */
 public class ProblemConcernEntryChTextBuilder extends TextBuilder {
 
-	private final List<org.ehealth_connector.cda.AbstractProblemConcern> problemConcerns;
+	private final List<org.ehealth_connector.cda.BaseProblemConcern> problemConcerns;
 	private final String contentIdPrefix;
 
 	/**
@@ -46,7 +46,7 @@ public class ProblemConcernEntryChTextBuilder extends TextBuilder {
 	 * @param section
 	 *            the section
 	 */
-	public ProblemConcernEntryChTextBuilder(List<AbstractProblemConcern> problemConcerns,
+	public ProblemConcernEntryChTextBuilder(List<BaseProblemConcern> problemConcerns,
 			ContentIdPrefix section) {
 		this.problemConcerns = problemConcerns;
 		contentIdPrefix = section.getContentIdPrefix();
@@ -55,7 +55,7 @@ public class ProblemConcernEntryChTextBuilder extends TextBuilder {
 	private void addBody() {
 		append("<tbody>");
 		int i = 0;
-		for (final org.ehealth_connector.cda.AbstractProblemConcern problemConcern : problemConcerns) {
+		for (final org.ehealth_connector.cda.BaseProblemConcern problemConcern : problemConcerns) {
 			addRow(problemConcern, i);
 			i++;
 		}
@@ -75,12 +75,12 @@ public class ProblemConcernEntryChTextBuilder extends TextBuilder {
 		append("</thead>");
 	}
 
-	private void addRow(org.ehealth_connector.cda.AbstractProblemConcern problemConcerns,
+	private void addRow(org.ehealth_connector.cda.BaseProblemConcern problemConcerns,
 			int index) {
 		// Currently only German available. Translation contributions are
 		// welcome
 		int i = 0;
-		for (AbstractProblemEntry problem : problemConcerns.getProblemEntries()) {
+		for (BaseProblemEntry problem : problemConcerns.getProblemEntries()) {
 			append("<tr>");
 			if (i == 0 && problemConcerns.getConcern() != null) {
 				addCell(problemConcerns.getConcern());

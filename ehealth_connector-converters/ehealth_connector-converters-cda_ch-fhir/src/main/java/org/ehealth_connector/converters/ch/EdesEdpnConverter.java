@@ -62,7 +62,7 @@ import ca.uhn.fhir.parser.IParser;
  * @since Dec 30, 2017 10:03:05 PM
  *
  */
-public class EdesEdpnConverter extends AbstractCdaChFhirConverter {
+public class EdesEdpnConverter extends AbstractCdaChV12FhirConverter {
 
 	/**
 	 * <div class="en">Creates an eHC CdaChEdesEdpn instance from a valid FHIR

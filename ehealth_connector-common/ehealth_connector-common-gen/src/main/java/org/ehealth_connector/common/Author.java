@@ -302,38 +302,6 @@ public class Author {
 		return EcoreUtil.copy(mAuthor);
 	}
 
-	// /*
-	// * (non-Javadoc)
-	// *
-	// * @see java.lang.Object#equals(java.lang.Object)
-	// */
-	// @Override
-	// public boolean equals(Object obj) {
-	// if (this == obj)
-	// return true;
-	// if (obj == null)
-	// return false;
-	// if (getClass() != obj.getClass())
-	// return false;
-	// final Author other = (Author) obj;
-	// if (asAuthor == null) {
-	// if (other.asAuthor != null)
-	// return false;
-	// } else if (!asAuthor.equals(other.asAuthor))
-	// return false;
-	// if (mAuthor == null) {
-	// if (other.mAuthor != null)
-	// return false;
-	// } else if (!mAuthor.equals(other.mAuthor))
-	// return false;
-	// if (person == null) {
-	// if (other.person != null)
-	// return false;
-	// } else if (!person.equals(other.person))
-	// return false;
-	// return true;
-	// }
-
 	/**
 	 * <div class="en">Gets the address.</div> <div class="de">Liefert die
 	 * (erste) Adresse.</div> <div class="fr"></div> <div class="it"></div>

@@ -43,13 +43,13 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  * <div class="en">A medical concern</div> <div class="de">Ein gesundheitliches
  * Leiden</div> <div class="fr">Une souffrance de la santé</div>.
  */
-public class AbstractProblemConcern
+public class BaseProblemConcern
 		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry> {
 
 	/**
 	 * Instantiates a new problem concern entry.
 	 */
-	public AbstractProblemConcern() {
+	public BaseProblemConcern() {
 		super(IHEFactory.eINSTANCE.createProblemConcernEntry().init());
 	}
 
@@ -69,7 +69,7 @@ public class AbstractProblemConcern
 	 *            <div class="fr">Objet préexistante à cloner</div>
 	 *
 	 */
-	public AbstractProblemConcern(
+	public BaseProblemConcern(
 			org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry problemConcernEntry) {
 		super(problemConcernEntry);
 	}
@@ -97,7 +97,7 @@ public class AbstractProblemConcern
 	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
 	 *            statut du problème (active/suspended/aborted/completed)</div>
 	 */
-	public AbstractProblemConcern(String concern, AbstractProblemEntry problemEntry,
+	public BaseProblemConcern(String concern, BaseProblemEntry problemEntry,
 			org.ehealth_connector.cda.enums.ProblemConcernStatusCode concernStatus) {
 		super(IHEFactory.eINSTANCE.createProblemConcernEntry().init());
 
@@ -138,7 +138,7 @@ public class AbstractProblemConcern
 	 *            <div class="en">end of concern</div> <div class="de">Ende des
 	 *            Leidens</div> <div class="fr">Le fin du problème</div>
 	 */
-	public AbstractProblemConcern(String concern, AbstractProblemEntry problemEntry,
+	public BaseProblemConcern(String concern, BaseProblemEntry problemEntry,
 			ProblemConcernStatusCode concernStatus, Date start, Date end) {
 		this(concern, problemEntry, concernStatus);
 		setEffectiveTime(start, end);
@@ -163,7 +163,7 @@ public class AbstractProblemConcern
 	 *            <div class="en">the problem</div>
 	 *
 	 */
-	public void addProblemEntry(AbstractProblemEntry problemEntry) {
+	public void addProblemEntry(BaseProblemEntry problemEntry) {
 		this.getMdht().addObservation(problemEntry.copy());
 		for (Observation obs : this.getMdht().getObservations()) {
 			if (obs.getIds().isEmpty())
@@ -274,11 +274,11 @@ public class AbstractProblemConcern
 	 *
 	 * @return the problem entries
 	 */
-	public List<AbstractProblemEntry> getProblemEntries() {
-		final List<AbstractProblemEntry> pel = new ArrayList<AbstractProblemEntry>();
+	public List<BaseProblemEntry> getProblemEntries() {
+		final List<BaseProblemEntry> pel = new ArrayList<BaseProblemEntry>();
 		for (final org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry mAllergy : getMdhtProblemConcernEntry()
 				.getProblemEntries()) {
-			final AbstractProblemEntry problem = new AbstractProblemEntry(mAllergy);
+			final BaseProblemEntry problem = new BaseProblemEntry(mAllergy);
 			pel.add(problem);
 		}
 		return pel;
@@ -291,8 +291,8 @@ public class AbstractProblemConcern
 	 *
 	 * @return the medical problem
 	 */
-	public AbstractProblemEntry getProblemEntry() {
-		final AbstractProblemEntry problemEntry = new AbstractProblemEntry(
+	public BaseProblemEntry getProblemEntry() {
+		final BaseProblemEntry problemEntry = new BaseProblemEntry(
 				copyMdhtProblemConcernEntry().getProblemEntries().get(0));
 		return problemEntry;
 	}

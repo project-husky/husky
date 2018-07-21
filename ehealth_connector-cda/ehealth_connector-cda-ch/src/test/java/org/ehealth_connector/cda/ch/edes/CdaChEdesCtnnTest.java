@@ -35,7 +35,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.ehealth_connector.cda.AbstractVitalSignObservation;
+import org.ehealth_connector.cda.BaseVitalSignObservation;
 import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationForVitalSign;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEdes;
 import org.ehealth_connector.cda.enums.ActSite;
@@ -85,12 +85,12 @@ public class CdaChEdesCtnnTest extends TestUtils {
 		log.debug(deserialized);
 		final CdaChEdesCtnn cdaDeserialized = deserializeCdaDirect(deserialized);
 
-		List<AbstractVitalSignObservation> observations = cdaDeserialized.getCodedVitalSigns();
+		List<BaseVitalSignObservation> observations = cdaDeserialized.getCodedVitalSigns();
 		assertFalse(observations.isEmpty());
 		assertEquals(2, observations.size());
 
-		AbstractVitalSignObservation vsObservation = getVitalSignObservation(
-				VitalSignCodes.BODY_HEIGHT, observations);
+		BaseVitalSignObservation vsObservation = getVitalSignObservation(VitalSignCodes.BODY_HEIGHT,
+				observations);
 		assertNotNull(vsObservation);
 
 		assertEquals("LOINC", vsObservation.getCode().getCodeSystemName());
@@ -128,12 +128,12 @@ public class CdaChEdesCtnnTest extends TestUtils {
 						new Value("80", Ucum.MilliMetersOfMercury)),
 				null);
 
-		List<AbstractVitalSignObservation> observations = cda.getCodedVitalSigns();
+		List<BaseVitalSignObservation> observations = cda.getCodedVitalSigns();
 		assertFalse(observations.isEmpty());
 		assertEquals(5, observations.size());
 
-		AbstractVitalSignObservation vsObservation = getVitalSignObservation(
-				VitalSignCodes.BODY_HEIGHT, observations);
+		BaseVitalSignObservation vsObservation = getVitalSignObservation(VitalSignCodes.BODY_HEIGHT,
+				observations);
 		assertNotNull(vsObservation);
 
 		assertEquals("LOINC", vsObservation.getCode().getCodeSystemName());
@@ -237,9 +237,9 @@ public class CdaChEdesCtnnTest extends TestUtils {
 		assertEquals(1, nodes.getLength());
 	}
 
-	private AbstractVitalSignObservation getVitalSignObservation(VitalSignCodes vsCode,
-			List<AbstractVitalSignObservation> observations) {
-		for (AbstractVitalSignObservation vitalSignObservation : observations) {
+	private BaseVitalSignObservation getVitalSignObservation(VitalSignCodes vsCode,
+			List<BaseVitalSignObservation> observations) {
+		for (BaseVitalSignObservation vitalSignObservation : observations) {
 			if (vitalSignObservation.getCode().getCode().equals(vsCode.getLoinc())) {
 				return vitalSignObservation;
 			}

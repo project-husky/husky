@@ -27,7 +27,7 @@ import org.ehealth_connector.security.communication.config.SoapClientConfig;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class AbstractSoapClientConfig extends AbstractClientConfig implements SoapClientConfig {
+public class BaseSoapClientConfig extends AbstractClientConfig implements SoapClientConfig {
 	public String keyStoreFile;
 	public String keyStorePassword;
 	public String keyStoreType;

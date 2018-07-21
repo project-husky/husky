@@ -22,7 +22,7 @@ import java.util.List;
 
 import org.ehealth_connector.cda.ch.ParticipantClaimer;
 import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport;
-import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
+import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
 import org.ehealth_connector.cda.ch.lab.SpecimenCollectionEntry;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.QualabQcc;
 import org.ehealth_connector.cda.utils.CdaUtil;
@@ -31,6 +31,7 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.enums.CodeSystems;
+import org.ehealth_connector.common.enums.CountryCode;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.InformationRecipient;
@@ -43,6 +44,7 @@ import org.openhealthtools.mdht.uml.cda.StructuredBody;
 import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
+import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
@@ -152,7 +154,7 @@ public class CdaChLrqc
 		this(languageCode);
 		setCustodian(custodian);
 		addIntendedRecipient(recipient);
-		addInFulfillmentOf(new Identificator(recipient.getCodeSystemOid(), qkzOrderNumber));
+		addInFulfillmentOfOrder(new Identificator(recipient.getCodeSystemOid(), qkzOrderNumber));
 		setLegalAuthenticator(legalAuthenticator);
 		addAuthor(legalAuthenticator);
 		setRecordTarget(id);
@@ -172,6 +174,11 @@ public class CdaChLrqc
 	 */
 	public CdaChLrqc(LanguageCode languageCode, String styleSheet, String css) {
 		super(ChFactory.eINSTANCE.createCdaChLrqcV1().init(), languageCode, styleSheet, css);
+		// Fix RealmCode
+		final CS cs = DatatypesFactory.eINSTANCE.createCS();
+		cs.setCode(CountryCode.SWITZERLAND.getCodeAlpha3());
+		getDoc().getRealmCodes().clear();
+		getDoc().getRealmCodes().add(cs);
 	}
 
 	/**
@@ -236,7 +243,7 @@ public class CdaChLrqc
 	 *            the order number, given by the QKZ
 	 */
 	public void addInFulfillmentOf(QualabQcc qcc, String qccOrderNumber) {
-		addInFulfillmentOf(new Identificator(qcc.getCodeSystemOid(), qccOrderNumber));
+		addInFulfillmentOfOrder(new Identificator(qcc.getCodeSystemOid(), qccOrderNumber));
 	}
 
 	/**
@@ -462,7 +469,7 @@ public class CdaChLrqc
 			final LaboratoryReportDataProcessingEntry lrdpe = lss
 					.getLaboratoryReportDataProcessingEntry();
 			if (lrdpe != null) {
-				final AbstractSpecimenAct se = lrdpe.getSpecimenAct();
+				final BaseChSpecimenAct se = lrdpe.getSpecimenAct();
 				if (se != null) {
 					lbol.addAll(se.getLrqcLaboratoryBatteryOrganizers());
 				}
@@ -527,7 +534,7 @@ public class CdaChLrqc
 	 *
 	 * @return the SpecimenAct. Returns null, if this element does not exist.
 	 */
-	public AbstractSpecimenAct getSpecimenAct() {
+	public BaseChSpecimenAct getSpecimenAct() {
 		if ((getLaboratorySpecialtySection() != null)
 				&& (getLaboratorySpecialtySection()
 						.getLaboratoryReportDataProcessingEntry() != null)
@@ -607,7 +614,7 @@ public class CdaChLrqc
 	 * @param sectionCode
 	 *            the section code
 	 */
-	public void setSpecimenAct(AbstractSpecimenAct act, Code sectionCode) {
+	public void setSpecimenAct(BaseChSpecimenAct act, Code sectionCode) {
 		LaboratorySpecialtySection laboratorySpecialtySection;
 		if (getLaboratorySpecialtySection() == null) {
 			if (sectionCode != null) {

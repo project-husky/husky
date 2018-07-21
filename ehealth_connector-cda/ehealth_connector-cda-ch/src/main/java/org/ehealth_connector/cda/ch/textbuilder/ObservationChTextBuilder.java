@@ -33,16 +33,16 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.NotImplementedException;
-import org.ehealth_connector.cda.AbstractObservation;
-import org.ehealth_connector.cda.AbstractObservationComparator;
-import org.ehealth_connector.cda.AbstractOrganizer;
-import org.ehealth_connector.cda.AbstractOrganizerComparator;
+import org.ehealth_connector.cda.BaseObservation;
+import org.ehealth_connector.cda.BaseObservationComparator;
+import org.ehealth_connector.cda.BaseOrganizer;
+import org.ehealth_connector.cda.BaseOrganizerComparator;
 import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
 import org.ehealth_connector.cda.ch.lab.StudiesSummarySection;
 import org.ehealth_connector.cda.enums.ContentIdPrefix;
 import org.ehealth_connector.cda.enums.epsos.BloodGroup;
-import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryAct;
-import org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection;
+import org.ehealth_connector.cda.ihe.lab.BaseLaboratoryAct;
+import org.ehealth_connector.cda.ihe.lab.BaseLaboratorySpecialtySection;
 import org.ehealth_connector.cda.ihe.lab.LaboratoryObservation;
 import org.ehealth_connector.cda.textbuilder.TextBuilder;
 import org.ehealth_connector.common.Author;
@@ -94,16 +94,16 @@ public class ObservationChTextBuilder extends TextBuilder {
 
 	private ClinicalDocument doc = null;
 	private final List<String> headerColumns = new ArrayList<String>();
-	private final AbstractLaboratoryAct laboratoryAct;
+	private final BaseLaboratoryAct laboratoryAct;
 	private final CodedVitalSignsSection codedVitalSignsSection;
-	private final AbstractLaboratorySpecialtySection laboratorySpecialtySection;
+	private final BaseLaboratorySpecialtySection laboratorySpecialtySection;
 	private final StudiesSummarySection studiesSummarySection;
 	private final int sectionIndex;
 	private final String contentIdPrefix;
 	private final LanguageCode lang;
 	private final ResourceBundle resBundle;
-	private Comparator<AbstractOrganizer> organizerComparator = new AbstractOrganizerComparator();
-	private Comparator<AbstractObservation> observationComparator = new AbstractObservationComparator();
+	private Comparator<BaseOrganizer> organizerComparator = new BaseOrganizerComparator();
+	private Comparator<BaseObservation> observationComparator = new BaseObservationComparator();
 
 	private Map<String, Integer> participationsMap = new HashMap<String, Integer>();
 
@@ -124,7 +124,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *            the language.
 	 */
 	public ObservationChTextBuilder(ClinicalDocument doc,
-			AbstractLaboratorySpecialtySection section, int sectionIndex,
+			BaseLaboratorySpecialtySection section, int sectionIndex,
 			ContentIdPrefix contentIdPrefix, LanguageCode lang) {
 		this(doc, section, sectionIndex, contentIdPrefix.getContentIdPrefix(), lang, null);
 	}
@@ -147,7 +147,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *            2.16.756.5.30.1.129.1.3 for the Swiss Analysis List)
 	 */
 	public ObservationChTextBuilder(ClinicalDocument doc,
-			AbstractLaboratorySpecialtySection section, int sectionIndex,
+			BaseLaboratorySpecialtySection section, int sectionIndex,
 			ContentIdPrefix contentIdPrefix, LanguageCode lang, String posCodeSystemOid) {
 		this(doc, section, sectionIndex, contentIdPrefix.getContentIdPrefix(), lang,
 				posCodeSystemOid);
@@ -172,7 +172,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *            Analysis List)
 	 */
 	public ObservationChTextBuilder(ClinicalDocument doc,
-			AbstractLaboratorySpecialtySection section, int sectionIndex, String contentIdPrefix,
+			BaseLaboratorySpecialtySection section, int sectionIndex, String contentIdPrefix,
 			LanguageCode lang, String posCodeSystemOid) {
 		this.doc = doc;
 		this.sectionIndex = sectionIndex;
@@ -287,55 +287,55 @@ public class ObservationChTextBuilder extends TextBuilder {
 		append("<tbody>");
 		int i = 0;
 		if (laboratoryAct != null) {
-			ArrayList<AbstractOrganizer> organizers = new ArrayList<AbstractOrganizer>();
+			ArrayList<BaseOrganizer> organizers = new ArrayList<BaseOrganizer>();
 			for (Organizer bat : laboratoryAct.getMdht().getOrganizers()) {
-				organizers.add(new AbstractOrganizer(bat, lang));
+				organizers.add(new BaseOrganizer(bat, lang));
 			}
 			if (organizerComparator != null)
 				organizers.sort(organizerComparator);
-			for (AbstractOrganizer battery : organizers) {
+			for (BaseOrganizer battery : organizers) {
 				if (battery.getMdht() instanceof LaboratoryBatteryOrganizerImpl) {
-					ArrayList<AbstractObservation> observations = new ArrayList<AbstractObservation>();
+					ArrayList<BaseObservation> observations = new ArrayList<BaseObservation>();
 					for (Observation obs : ((LaboratoryBatteryOrganizerImpl) battery.getMdht())
 							.getObservations()) {
-						observations.add(new AbstractObservation(obs, lang));
+						observations.add(new BaseObservation(obs, lang));
 						empty = false;
 					}
 					if (observationComparator != null)
 						observations.sort(observationComparator);
-					for (AbstractObservation obs : observations) {
+					for (BaseObservation obs : observations) {
 						empty = false;
 						i++;
 						addTableRowLaboratorySpecialtySection(sectionLabel, i,
 								(LaboratoryBatteryOrganizerImpl) battery.getMdht(),
-								new AbstractObservation(obs.getObservation(), lang));
+								new BaseObservation(obs.getObservation(), lang));
 					}
 				}
 			}
 			if (empty)
 				addTableRowLaboratorySpecialtySection(sectionLabel, 1, null, null);
 		} else if (codedVitalSignsSection != null) {
-			ArrayList<AbstractOrganizer> organizers = new ArrayList<AbstractOrganizer>();
+			ArrayList<BaseOrganizer> organizers = new ArrayList<BaseOrganizer>();
 			for (Organizer bat : codedVitalSignsSection.getOrganizers()) {
-				organizers.add(new AbstractOrganizer(bat, lang));
+				organizers.add(new BaseOrganizer(bat, lang));
 			}
 			if (organizerComparator != null)
 				organizers.sort(organizerComparator);
-			for (AbstractOrganizer battery : organizers) {
+			for (BaseOrganizer battery : organizers) {
 				if (battery.getMdht() instanceof VitalSignsOrganizerImpl) {
-					ArrayList<AbstractObservation> observations = new ArrayList<AbstractObservation>();
+					ArrayList<BaseObservation> observations = new ArrayList<BaseObservation>();
 					for (Observation obs : ((VitalSignsOrganizerImpl) battery.getMdht())
 							.getObservations()) {
-						observations.add(new AbstractObservation(obs, lang));
+						observations.add(new BaseObservation(obs, lang));
 						empty = false;
 					}
 					if (observationComparator != null)
 						observations.sort(observationComparator);
-					for (AbstractObservation obs : observations) {
+					for (BaseObservation obs : observations) {
 						empty = false;
 						i++;
 						addTableRowCodedVitalSignsSection(i, battery.getMdht(),
-								new AbstractObservation(obs.getObservation(), lang));
+								new BaseObservation(obs.getObservation(), lang));
 					}
 				}
 			}
@@ -411,7 +411,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *            the observation.
 	 */
 	private void addTableRowCodedVitalSignsSection(int rowNumber, Organizer battery,
-			AbstractObservation observation) {
+			BaseObservation observation) {
 		List<String> rowColumns = new ArrayList<String>();
 		String contentId = "";
 
@@ -531,7 +531,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *            the observation.
 	 */
 	private void addTableRowLaboratorySpecialtySection(String sectionLabel, int rowNumber,
-			LaboratoryBatteryOrganizer battery, AbstractObservation observation) {
+			LaboratoryBatteryOrganizer battery, BaseObservation observation) {
 		List<String> rowColumns = new ArrayList<String>();
 		String contentId = "";
 
@@ -824,7 +824,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 * @return the author the narrative text of the author and the authoring
 	 *         date
 	 */
-	private String getAuthor(Organizer battery, AbstractObservation observation) {
+	private String getAuthor(Organizer battery, BaseObservation observation) {
 		String retVal = "";
 
 		// Try to find author on the observation
@@ -885,7 +885,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *
 	 * @return the observation comparator
 	 */
-	public Comparator<AbstractObservation> getObservationComparator() {
+	public Comparator<BaseObservation> getObservationComparator() {
 		return observationComparator;
 	}
 
@@ -899,7 +899,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 * @return the narrative text of the observation result obtainment timestamp
 	 */
 	private String getObservationResultObtainmentTimestamp(Organizer battery,
-			AbstractObservation observation) {
+			BaseObservation observation) {
 
 		String retVal = "";
 		Date obsDate = null;
@@ -924,7 +924,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *
 	 * @return the organizer comparator
 	 */
-	public Comparator<AbstractOrganizer> getOrganizerComparator() {
+	public Comparator<BaseOrganizer> getOrganizerComparator() {
 		return organizerComparator;
 	}
 
@@ -938,7 +938,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 * @return the author the narrative text of the author and the authoring
 	 *         date
 	 */
-	private String getPerformer(Organizer battery, AbstractObservation observation) {
+	private String getPerformer(Organizer battery, BaseObservation observation) {
 		String retVal = "";
 
 		// Try to find performer on the observation
@@ -997,7 +997,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 		return "";
 	}
 
-	private String getPreviousObservationsText(AbstractObservation observation, String contentId) {
+	private String getPreviousObservationsText(BaseObservation observation, String contentId) {
 		String retVal = "";
 		if (observation != null) {
 			for (LaboratoryObservation prevObs : observation.getPreviousObservations()) {
@@ -1170,7 +1170,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *            the observation.
 	 * @return the narrative text of the vital sign target site.
 	 */
-	private String getVitalSignTargetSite(AbstractObservation observation) {
+	private String getVitalSignTargetSite(BaseObservation observation) {
 		String retVal = "";
 		if (observation.getTargetSite() != null)
 			retVal = observation.getTargetSite().getDisplayName(lang);
@@ -1203,7 +1203,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 * @param comparator
 	 *            the new observation comparator
 	 */
-	public void setObservationComparator(Comparator<AbstractObservation> comparator) {
+	public void setObservationComparator(Comparator<BaseObservation> comparator) {
 		if (comparator != null)
 			observationComparator = comparator;
 	}
@@ -1214,7 +1214,7 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 * @param comparator
 	 *            the new organizer comparator
 	 */
-	public void setOrganizerComparator(Comparator<AbstractOrganizer> comparator) {
+	public void setOrganizerComparator(Comparator<BaseOrganizer> comparator) {
 		if (comparator != null)
 			organizerComparator = comparator;
 	}

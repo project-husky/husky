@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.ehealth_connector.cda.AbstractProblemConcern;
-import org.ehealth_connector.cda.AbstractProblemEntry;
+import org.ehealth_connector.cda.BaseProblemConcern;
+import org.ehealth_connector.cda.BaseProblemEntry;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
 import org.ehealth_connector.common.Identificator;
@@ -33,7 +33,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
  * <div class="en">A class representing the problemconcern.</div>
  * <div class="de">Eine Klasse die die Problembelange representiert.</div>
  */
-public class ProblemConcern extends AbstractProblemConcern {
+public class ProblemConcern extends BaseProblemConcern {
 
 	/**
 	 * Default constructor to instanciate the object.
@@ -61,7 +61,7 @@ public class ProblemConcern extends AbstractProblemConcern {
 	 * @param concernStatus
 	 *            the concern status
 	 */
-	public ProblemConcern(String concern, AbstractProblemEntry problemEntry,
+	public ProblemConcern(String concern, BaseProblemEntry problemEntry,
 			ProblemConcernStatusCode concernStatus) {
 		super(concern, problemEntry, concernStatus);
 	}
@@ -80,7 +80,7 @@ public class ProblemConcern extends AbstractProblemConcern {
 	 * @param end
 	 *            the end
 	 */
-	public ProblemConcern(String concern, AbstractProblemEntry problemEntry,
+	public ProblemConcern(String concern, BaseProblemEntry problemEntry,
 			ProblemConcernStatusCode concernStatus, Date start, Date end) {
 		super(concern, problemEntry, concernStatus, start, end);
 	}
@@ -100,14 +100,14 @@ public class ProblemConcern extends AbstractProblemConcern {
 	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.cda.AbstractProblemConcern#getProblemEntries()
+	 * @see org.ehealth_connector.cda.BaseProblemConcern#getProblemEntries()
 	 */
 	@Override
-	public List<AbstractProblemEntry> getProblemEntries() {
-		final List<AbstractProblemEntry> pel = new ArrayList<AbstractProblemEntry>();
+	public List<BaseProblemEntry> getProblemEntries() {
+		final List<BaseProblemEntry> pel = new ArrayList<BaseProblemEntry>();
 		for (final org.openhealthtools.mdht.uml.cda.ihe.ProblemEntry mAllergy : getMdhtProblemConcernEntry()
 				.getProblemEntries()) {
-			final AbstractProblemEntry problem = new ProblemEntry(mAllergy);
+			final BaseProblemEntry problem = new ProblemEntry(mAllergy);
 			pel.add(problem);
 		}
 		return pel;
@@ -117,11 +117,11 @@ public class ProblemConcern extends AbstractProblemConcern {
 	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.cda.AbstractProblemConcern#getProblemEntry()
+	 * @see org.ehealth_connector.cda.BaseProblemConcern#getProblemEntry()
 	 */
 	@Override
-	public AbstractProblemEntry getProblemEntry() {
-		final AbstractProblemEntry problemEntry = new ProblemEntry(
+	public BaseProblemEntry getProblemEntry() {
+		final BaseProblemEntry problemEntry = new ProblemEntry(
 				copyMdhtProblemConcernEntry().getProblemEntries().get(0));
 		return problemEntry;
 	}

@@ -21,12 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.ehealth_connector.cda.AbstractObservation;
+import org.ehealth_connector.cda.BaseObservation;
 import org.ehealth_connector.cda.ch.AbstractCdaChV1;
 import org.ehealth_connector.cda.ch.ParticipantClaimer;
 import org.ehealth_connector.cda.ch.textbuilder.ObservationChTextBuilder;
 import org.ehealth_connector.cda.ch.vacd.enums.SectionsVacd;
-import org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection;
+import org.ehealth_connector.cda.ihe.lab.BaseLaboratorySpecialtySection;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
@@ -105,12 +105,6 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 		}
 		setTitle(createDocumentTitle());
 		initCda();
-
-		// Fix RealmCode
-		final CS cs = DatatypesFactory.eINSTANCE.createCS();
-		cs.setCode(CountryCode.SWITZERLAND.getCodeAlpha3());
-		getDoc().getRealmCodes().clear();
-		getDoc().getRealmCodes().add(cs);
 
 		// Default Document Code
 		final CE ce = DatatypesFactory.eINSTANCE.createCE();
@@ -207,7 +201,7 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 				i++;
 
 				s.createStrucDocText(generateNarrativeTextLaboratoryObservations(
-						new AbstractLaboratorySpecialtySection((LaboratorySpecialtySection) s), i,
+						new BaseLaboratorySpecialtySection((LaboratorySpecialtySection) s), i,
 						"lss", CodeSystems.SwissAL.getCodeSystemId()));
 			}
 		}
@@ -252,15 +246,15 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 	 *
 	 * @return List with laboratory observations
 	 */
-	public List<AbstractObservation> getLaboratoryObservations() {
+	public List<BaseObservation> getLaboratoryObservations() {
 		// Search for the right section
-		final AbstractLaboratorySpecialtySection los = getLaboratorySpecialtySection();
+		final BaseLaboratorySpecialtySection los = getLaboratorySpecialtySection();
 		if (los == null) {
 			return null;
 		}
 		final EList<Entry> entries = los.getMdht().getEntries();
 
-		final List<AbstractObservation> labObservations = new ArrayList<AbstractObservation>();
+		final List<BaseObservation> labObservations = new ArrayList<BaseObservation>();
 		for (final Entry entry : entries) {
 			final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry mLabRdpe = (org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry) entry;
 

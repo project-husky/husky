@@ -17,7 +17,7 @@
  */
 package org.ehealth_connector.cda.ch;
 
-import org.ehealth_connector.cda.AbstractProblemEntry;
+import org.ehealth_connector.cda.BaseProblemEntry;
 import org.ehealth_connector.cda.ch.enums.RiskOfComplications;
 import org.ehealth_connector.cda.ch.enums.RiskOfExposure;
 import org.ehealth_connector.cda.enums.ProblemType;
@@ -32,7 +32,7 @@ import org.openhealthtools.ihe.utils.UUID;
  * ProblemEntry convenience functionality for the CDA Body Level 3 -Problem
  *
  */
-public class ProblemEntry extends AbstractProblemEntry {
+public class ProblemEntry extends BaseProblemEntry {
 
 	/**
 	 * Default constructor to instanciate the object

@@ -18,11 +18,7 @@ package org.ehealth_connector.cda;
 
 import java.util.Comparator;
 
-/**
- * This class implements the default comparison algorithm for HL7 CDA
- * observations.
- */
-public class AbstractObservationComparator implements Comparator<AbstractObservation> {
+public class BaseAllergyProblemComparator implements Comparator<BaseAllergyProblem> {
 
 	/**
 	 *
@@ -33,7 +29,7 @@ public class AbstractObservationComparator implements Comparator<AbstractObserva
 	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 	 */
 	@Override
-	public int compare(AbstractObservation a, AbstractObservation b) {
+	public int compare(BaseAllergyProblem a, BaseAllergyProblem b) {
 		if ((a == null) && (b == null))
 			return 0;
 		else if ((a == null) && (b != null))

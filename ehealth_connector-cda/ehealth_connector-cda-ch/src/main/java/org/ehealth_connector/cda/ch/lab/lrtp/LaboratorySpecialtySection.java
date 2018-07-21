@@ -17,9 +17,9 @@
  */
 package org.ehealth_connector.cda.ch.lab.lrtp;
 
-import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
+import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.SpecialtySections;
-import org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection;
+import org.ehealth_connector.cda.ihe.lab.BaseLaboratorySpecialtySection;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.LanguageCode;
 
@@ -29,7 +29,7 @@ import org.ehealth_connector.common.enums.LanguageCode;
  * <div class="de">Für meldepflichtige Laborbefunde in der Schweiz wird
  * festgelegt, dass genau ein Kapitel vorhanden sein muss.</div>
  */
-public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySection {
+public class LaboratorySpecialtySection extends BaseLaboratorySpecialtySection {
 
 	/**
 	 * Instantiates a new laboratory specialty section.
@@ -124,15 +124,15 @@ public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySecti
 			lrdpe = new LaboratoryReportDataProcessingEntry();
 		}
 
-		AbstractSpecimenAct sa;
+		BaseChSpecimenAct sa;
 		if (lrdpe.getSpecimenAct() == null) {
 			newSa = true;
-			sa = new AbstractSpecimenAct();
+			sa = new BaseChSpecimenAct();
 			if (sectionCode != null) {
 				sa.setCode(sectionCode);
 			}
 		} else {
-			sa = new AbstractSpecimenAct(lrdpe.getSpecimenAct().getMdht());
+			sa = new BaseChSpecimenAct(lrdpe.getSpecimenAct().getMdht());
 		}
 
 		sa.addLaboratoryBatteryOrganizer(organizer);
@@ -162,7 +162,7 @@ public class LaboratorySpecialtySection extends AbstractLaboratorySpecialtySecti
 	}
 
 	/**
-	 * @see org.ehealth_connector.cda.ihe.lab.AbstractLaboratorySpecialtySection#setLaboratoryReportDataProcessingEntry(org.ehealth_connector.cda.ihe.lab.LaboratoryReportDataProcessingEntry)
+	 * @see org.ehealth_connector.cda.ihe.lab.BaseLaboratorySpecialtySection#setLaboratoryReportDataProcessingEntry(org.ehealth_connector.cda.ihe.lab.LaboratoryReportDataProcessingEntry)
 	 */
 	public void setLaboratoryReportDataProcessingEntry(
 			org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryReportDataProcessingEntry entry) {

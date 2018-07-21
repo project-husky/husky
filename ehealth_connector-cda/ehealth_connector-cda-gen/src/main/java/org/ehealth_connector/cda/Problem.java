@@ -39,7 +39,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  *
  * use org.ehealth_connector.cda.ProblemEntry whenever possible
  */
-public class Problem extends AbstractProblemEntry {
+public class Problem extends BaseProblemEntry {
 
 	/**
 	 * Instantiates a new problem entry.

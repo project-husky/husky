@@ -30,7 +30,7 @@ import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance;
  * representiert.</div>
  *
  */
-public class AllergyProblem extends AbstractAllergyProblem {
+public class AllergyProblem extends BaseAllergyProblem {
 
 	/**
 	 * Default constructor to instanciate the object.

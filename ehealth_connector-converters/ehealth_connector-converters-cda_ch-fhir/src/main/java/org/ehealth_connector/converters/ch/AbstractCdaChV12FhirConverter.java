@@ -22,9 +22,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.ehealth_connector.cda.AbstractVitalSignObservation;
 import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.AssociatedEntity;
+import org.ehealth_connector.cda.BaseVitalSignObservation;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.ParticipantClaimer;
 import org.ehealth_connector.cda.ch.PastProblemConcern;
@@ -111,7 +111,7 @@ import ca.uhn.fhir.context.FhirVersionEnum;
  * <div class="en">Abstract Class for CDACH and FHIR convesion</div>
  * <div class="de"></div> <div class="fr"></div>
  */
-public abstract class AbstractCdaChFhirConverter {
+public abstract class AbstractCdaChV12FhirConverter {
 
 	/**
 	 * <div class="en">uniform resource name (urn) of this OID</div>
@@ -505,9 +505,9 @@ public abstract class AbstractCdaChFhirConverter {
 	 * @return list of eHC EDES VitalSignObservation </div>
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
-	public List<AbstractVitalSignObservation> getCodedVitalSigns(DocumentManifest docManifest) {
+	public List<BaseVitalSignObservation> getCodedVitalSigns(DocumentManifest docManifest) {
 
-		final List<AbstractVitalSignObservation> retVal = new ArrayList<>();
+		final List<BaseVitalSignObservation> retVal = new ArrayList<>();
 		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
 			Reference ref = null;
 			try {
@@ -549,7 +549,7 @@ public abstract class AbstractCdaChFhirConverter {
 										pq.setValue(fhirQuantity.getValue());
 										value = new Value(pq);
 									}
-									retVal.add(new AbstractVitalSignObservation(code, effectiveTime,
+									retVal.add(new BaseVitalSignObservation(code, effectiveTime,
 											value));
 								}
 							}
@@ -1055,7 +1055,7 @@ public abstract class AbstractCdaChFhirConverter {
 	 *            <div class="en">the observations FHIR resource</div>
 	 * @return <div class="en">list of IHE XD-LAB
 	 *         LaboratoryBatteryOrganizers</div>
-	 * 
+	 *
 	 */
 	protected LaboratoryBatteryOrganizer getLaboratoryBatteryOrganizers(Observation labObsList) {
 		final LaboratoryBatteryOrganizer lbo = new LaboratoryBatteryOrganizer();
@@ -1921,8 +1921,8 @@ public abstract class AbstractCdaChFhirConverter {
 	 *            the FHIR resource
 	 * @return the Vital Sign Observation
 	 */
-	private AbstractVitalSignObservation getVitalSignObservation(Observation fhirObs) {
-		final AbstractVitalSignObservation vso = new AbstractVitalSignObservation();
+	private BaseVitalSignObservation getVitalSignObservation(Observation fhirObs) {
+		final BaseVitalSignObservation vso = new BaseVitalSignObservation();
 		// Value
 		Value v = null;
 		if (fhirObs.getValue() instanceof Quantity) {
@@ -2034,8 +2034,7 @@ public abstract class AbstractCdaChFhirConverter {
 					for (final ObservationRelatedComponent relatedObs : obs.getRelated()) {
 						final Observation fhirObs = (org.hl7.fhir.dstu3.model.Observation) relatedObs
 								.getTarget().getResource();
-						final AbstractVitalSignObservation labObs = getVitalSignObservation(
-								fhirObs);
+						final BaseVitalSignObservation labObs = getVitalSignObservation(fhirObs);
 						lbo.addVitalSignObservation(labObs);
 					}
 					retVal.add(lbo);

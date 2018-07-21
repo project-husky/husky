@@ -18,7 +18,7 @@
 package org.ehealth_connector.cda.ch.lab.lrtp;
 
 import org.ehealth_connector.cda.AbstractCodedVitalSigns;
-import org.ehealth_connector.cda.AbstractVitalSignObservation;
+import org.ehealth_connector.cda.BaseVitalSignObservation;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEdes;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.common.Identificator;
@@ -84,7 +84,7 @@ public class CodedVitalSignsSection extends AbstractCodedVitalSigns {
 	 * @see org.ehealth_connector.cda.AbstractCodedVitalSigns#createVitalSignObservation(org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation)
 	 */
 	@Override
-	protected AbstractVitalSignObservation createVitalSignObservation(
+	protected BaseVitalSignObservation createVitalSignObservation(
 			org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation mdht) {
 		return new VitalSignObservation(mdht);
 	}

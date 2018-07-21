@@ -21,7 +21,7 @@ package org.ehealth_connector.cda.ch.edes;
 import java.text.ParseException;
 import java.util.Date;
 
-import org.ehealth_connector.cda.AbstractVitalSignObservation;
+import org.ehealth_connector.cda.BaseVitalSignObservation;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.AbstractCdaChV1;
 import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationForVitalSign;
@@ -37,7 +37,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
-public class VitalSignObservation extends AbstractVitalSignObservation {
+public class VitalSignObservation extends BaseVitalSignObservation {
 
 	/**
 	 * Instantiates a new vital sign observation.
@@ -216,7 +216,8 @@ public class VitalSignObservation extends AbstractVitalSignObservation {
 	@Override
 	protected void initMdht() {
 		super.initMdht();
-		final Identificator id = new Identificator(AbstractCdaChV1.OID_V1, "CDA-CH.Body.VitalSignL3");
+		final Identificator id = new Identificator(AbstractCdaChV1.OID_V1,
+				"CDA-CH.Body.VitalSignL3");
 		getVitalSignObservation().getTemplateIds().add(id.getIi());
 	}
 

@@ -383,6 +383,9 @@ public class FhirXdTransaction {
 				final DocumentManifest fhirObject = (DocumentManifest) entry;
 
 				retVal.setAuthor(getAuthor(fhirObject));
+				// Fix the OHT for invalid empty authorTelecommunicationentries
+				// by deleting all authorTelecommunications
+				retVal.getAuthorTypeMdht().getAuthorTelecommunication().clear();
 
 				AvailabilityStatusType availabilityStatus = AvailabilityStatusType.APPROVED_LITERAL;
 				if (fhirObject.getStatusElement().getValue() != DocumentReferenceStatus.CURRENT) {

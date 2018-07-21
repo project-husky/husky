@@ -17,7 +17,7 @@
  */
 package org.ehealth_connector.cda.ch.lab.lrtp;
 
-import org.ehealth_connector.cda.ch.lab.AbstractSpecimenAct;
+import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryReportDataProcessingEntry;
 
 /**
@@ -44,7 +44,7 @@ public class LaboratoryReportDataProcessingEntry
 	 * @param act
 	 *            the SpecimentAct
 	 */
-	public LaboratoryReportDataProcessingEntry(AbstractSpecimenAct act) {
+	public LaboratoryReportDataProcessingEntry(BaseChSpecimenAct act) {
 		this();
 		setSpecimenAct(act);
 	}

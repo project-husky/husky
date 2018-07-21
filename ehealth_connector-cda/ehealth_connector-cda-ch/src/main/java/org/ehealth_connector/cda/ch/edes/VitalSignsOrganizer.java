@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.ehealth_connector.cda.AbstractVitalSignObservation;
-import org.ehealth_connector.cda.AbstractVitalSignsOrganizer;
+import org.ehealth_connector.cda.BaseVitalSignObservation;
+import org.ehealth_connector.cda.BaseVitalSignsOrganizer;
 import org.ehealth_connector.cda.ch.AbstractCdaChV1;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Identificator;
@@ -38,7 +38,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
  * verschiedene Messwerte zu Vitalzeichen, welche zum gleichen Zeitpunkt durch
  * denselben Behandelnden gemessen wurden.</div>
  */
-public class VitalSignsOrganizer extends AbstractVitalSignsOrganizer {
+public class VitalSignsOrganizer extends BaseVitalSignsOrganizer {
 
 	/**
 	 * Instantiates a new vital signs organizer.
@@ -112,7 +112,7 @@ public class VitalSignsOrganizer extends AbstractVitalSignsOrganizer {
 	 * @param id
 	 *            the id. If null, an ID with the CdaChLrtp root and a generated
 	 *            extension will be created
-	 * @see org.ehealth_connector.cda.AbstractVitalSignsOrganizer#addId(org.ehealth_connector.common.Identificator)
+	 * @see org.ehealth_connector.cda.BaseVitalSignsOrganizer#addId(org.ehealth_connector.common.Identificator)
 	 */
 	@Override
 	public void addId(Identificator id) {
@@ -165,11 +165,11 @@ public class VitalSignsOrganizer extends AbstractVitalSignsOrganizer {
 	 *
 	 * @return the vital signs observations
 	 */
-	public List<AbstractVitalSignObservation> getVitalSignsObservations() {
-		final List<AbstractVitalSignObservation> vsl = new ArrayList<AbstractVitalSignObservation>();
+	public List<BaseVitalSignObservation> getVitalSignsObservations() {
+		final List<BaseVitalSignObservation> vsl = new ArrayList<BaseVitalSignObservation>();
 		for (final org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation mdht : getMdht()
 				.getVitalSignObservations()) {
-			final AbstractVitalSignObservation ehc = new VitalSignObservation(mdht);
+			final BaseVitalSignObservation ehc = new VitalSignObservation(mdht);
 			vsl.add(ehc);
 		}
 		return vsl;

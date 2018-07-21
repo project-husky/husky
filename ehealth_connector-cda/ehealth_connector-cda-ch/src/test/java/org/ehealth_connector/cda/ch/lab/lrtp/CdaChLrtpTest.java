@@ -30,7 +30,7 @@ import java.io.StringReader;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
-import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReportTest;
+import org.ehealth_connector.cda.ch.lab.CdaChV12LaboratoryReportTest;
 import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
 import org.ehealth_connector.cda.ch.lab.StudiesSummarySection;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.SpecialtySections;
@@ -49,7 +49,7 @@ import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
-public class CdaChLrtpTest extends AbstractLaboratoryReportTest {
+public class CdaChLrtpTest extends CdaChV12LaboratoryReportTest {
 
 	/** The SLF4J logger instance. */
 	protected final Logger log = LoggerFactory.getLogger(getClass());

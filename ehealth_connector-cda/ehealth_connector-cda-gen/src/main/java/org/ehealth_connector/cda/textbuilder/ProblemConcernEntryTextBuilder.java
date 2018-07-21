@@ -20,7 +20,7 @@ package org.ehealth_connector.cda.textbuilder;
 
 import java.util.List;
 
-import org.ehealth_connector.cda.AbstractProblemConcern;
+import org.ehealth_connector.cda.BaseProblemConcern;
 import org.ehealth_connector.cda.enums.ContentIdPrefix;
 
 /**
@@ -31,7 +31,7 @@ import org.ehealth_connector.cda.enums.ContentIdPrefix;
  */
 public abstract class ProblemConcernEntryTextBuilder extends TextBuilder {
 
-	private final List<org.ehealth_connector.cda.AbstractProblemConcern> problemConcerns;
+	private final List<org.ehealth_connector.cda.BaseProblemConcern> problemConcerns;
 
 	/**
 	 * Constructor.
@@ -41,7 +41,7 @@ public abstract class ProblemConcernEntryTextBuilder extends TextBuilder {
 	 * @param section
 	 *            the section
 	 */
-	public ProblemConcernEntryTextBuilder(List<AbstractProblemConcern> problemConcerns,
+	public ProblemConcernEntryTextBuilder(List<BaseProblemConcern> problemConcerns,
 			ContentIdPrefix section) {
 		this.problemConcerns = problemConcerns;
 	}
@@ -49,7 +49,7 @@ public abstract class ProblemConcernEntryTextBuilder extends TextBuilder {
 	private void addBody() {
 		append("<tbody>");
 		int i = 1;
-		for (final org.ehealth_connector.cda.AbstractProblemConcern problemConcern : problemConcerns) {
+		for (final org.ehealth_connector.cda.BaseProblemConcern problemConcern : problemConcerns) {
 			addRow(problemConcern, i++);
 		}
 		append("</tbody>");
@@ -70,7 +70,7 @@ public abstract class ProblemConcernEntryTextBuilder extends TextBuilder {
 	 *            elements; make sure you do not use duplicate indexes other
 	 *            wise the CDA xml will become invalid!)
 	 */
-	protected abstract void addRow(org.ehealth_connector.cda.AbstractProblemConcern problemConcern,
+	protected abstract void addRow(org.ehealth_connector.cda.BaseProblemConcern problemConcern,
 			int i);
 
 	/**

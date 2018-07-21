@@ -19,7 +19,7 @@ package org.ehealth_connector.cda.ch;
 
 import java.util.Date;
 
-import org.ehealth_connector.cda.AbstractProblemEntry;
+import org.ehealth_connector.cda.BaseProblemEntry;
 import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
 
 /**
@@ -88,7 +88,7 @@ public class ActiveProblemConcern extends ProblemConcern {
 	 *            problem status code</div> <div class="it"> problem status
 	 *            code</div>
 	 */
-	public ActiveProblemConcern(String concern, AbstractProblemEntry problemEntry,
+	public ActiveProblemConcern(String concern, BaseProblemEntry problemEntry,
 			ProblemConcernStatusCode concernStatus) {
 		super(concern, problemEntry, concernStatus);
 	}
@@ -114,7 +114,7 @@ public class ActiveProblemConcern extends ProblemConcern {
 	 *            problem status code</div> <div class="it"> problem status
 	 *            code</div>
 	 */
-	public ActiveProblemConcern(String concern, Date date, AbstractProblemEntry problemEntry,
+	public ActiveProblemConcern(String concern, Date date, BaseProblemEntry problemEntry,
 			ProblemConcernStatusCode problemStatusCode) {
 		this(concern, date, null, problemEntry, problemStatusCode);
 	}
@@ -149,7 +149,7 @@ public class ActiveProblemConcern extends ProblemConcern {
 	 *            status</div>
 	 */
 	public ActiveProblemConcern(String concern, Date begin, Date end,
-			AbstractProblemEntry problemEntry, ProblemConcernStatusCode problemConcernStatus) {
+			BaseProblemEntry problemEntry, ProblemConcernStatusCode problemConcernStatus) {
 		super(concern, problemEntry, problemConcernStatus, begin, end);
 	}
 }

@@ -27,8 +27,8 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.ehealth_connector.cda.AbstractAllergyProblem;
-import org.ehealth_connector.cda.AbstractProblemEntry;
+import org.ehealth_connector.cda.BaseAllergyProblem;
+import org.ehealth_connector.cda.BaseProblemEntry;
 import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Author;
@@ -62,7 +62,7 @@ public class TestUtils {
 		return new String(text);
 	}
 
-	public static boolean isEqual(AbstractAllergyProblem p1, AbstractAllergyProblem p2) {
+	public static boolean isEqual(BaseAllergyProblem p1, BaseAllergyProblem p2) {
 		if (!isEqual(p1.getCode(), p2.getCode()))
 			return false;
 		if ((p1.getEndDate() != null) && !p1.getEndDate().equals(p2.getEndDate()))
@@ -78,7 +78,7 @@ public class TestUtils {
 		return true;
 	}
 
-	public static boolean isEqual(AbstractProblemEntry p1, AbstractProblemEntry p2) {
+	public static boolean isEqual(BaseProblemEntry p1, BaseProblemEntry p2) {
 		if (p1 == null) {
 			return false;
 		}

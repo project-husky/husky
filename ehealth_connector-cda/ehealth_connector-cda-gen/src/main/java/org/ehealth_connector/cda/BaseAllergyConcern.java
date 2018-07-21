@@ -41,7 +41,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  * Allergien und Unverträglichkeiten des Patienten.</div> <div class="fr"></div>
  * .
  */
-public class AbstractAllergyConcern extends AbstractConcern {
+public class BaseAllergyConcern extends AbstractConcern {
 
 	protected LanguageCode myLang = LanguageCode.ENGLISH;
 
@@ -53,7 +53,7 @@ public class AbstractAllergyConcern extends AbstractConcern {
 	/**
 	 * Instantiates a new allergy concern.
 	 */
-	public AbstractAllergyConcern() {
+	public BaseAllergyConcern() {
 		super(IHEFactory.eINSTANCE.createAllergyIntoleranceConcern().init());
 		mAllergyConcern = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) super.getMdhtConcern();
 	}
@@ -64,7 +64,7 @@ public class AbstractAllergyConcern extends AbstractConcern {
 	 * @param lang
 	 *            the language
 	 */
-	public AbstractAllergyConcern(LanguageCode lang) {
+	public BaseAllergyConcern(LanguageCode lang) {
 		super(IHEFactory.eINSTANCE.createAllergyIntoleranceConcern().init());
 		myLang = lang;
 		mAllergyConcern = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) super.getMdhtConcern();
@@ -79,7 +79,7 @@ public class AbstractAllergyConcern extends AbstractConcern {
 	 * @param mdht
 	 *            allergy concern
 	 **/
-	public AbstractAllergyConcern(
+	public BaseAllergyConcern(
 			org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern mdht) {
 		super(mdht);
 		mAllergyConcern = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) super.getMdhtConcern();
@@ -96,7 +96,7 @@ public class AbstractAllergyConcern extends AbstractConcern {
 	 * @param lang
 	 *            the language
 	 */
-	public AbstractAllergyConcern(
+	public BaseAllergyConcern(
 			org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern mdht,
 			LanguageCode lang) {
 		super(mdht);
@@ -125,7 +125,7 @@ public class AbstractAllergyConcern extends AbstractConcern {
 	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
 	 *            statut du problème (active/suspended/aborted/completed)</div>
 	 */
-	public AbstractAllergyConcern(String concern, AbstractAllergyProblem problemEntry,
+	public BaseAllergyConcern(String concern, BaseAllergyProblem problemEntry,
 			org.ehealth_connector.cda.enums.ProblemConcernStatusCode concernStatus) {
 		super(IHEFactory.eINSTANCE.createAllergyIntoleranceConcern().init());
 		mAllergyConcern = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) super.getConcernEntry();
@@ -166,8 +166,8 @@ public class AbstractAllergyConcern extends AbstractConcern {
 	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
 	 *            statut du problème (active/suspended/aborted/completed)</div>
 	 */
-	public AbstractAllergyConcern(String concern, Date begin, Date end,
-			AbstractAllergyProblem problemEntry, ProblemConcernStatusCode concernStatus) {
+	public BaseAllergyConcern(String concern, Date begin, Date end,
+			BaseAllergyProblem problemEntry, ProblemConcernStatusCode concernStatus) {
 		this(concern, problemEntry, concernStatus);
 		if (end != null) {
 			setEffectiveTime(begin, end);
@@ -185,7 +185,7 @@ public class AbstractAllergyConcern extends AbstractConcern {
 	 * @param problemEntry
 	 *            Das Problem
 	 */
-	public void addAllergyProblem(AbstractAllergyProblem problemEntry) {
+	public void addAllergyProblem(BaseAllergyProblem problemEntry) {
 		mAllergyConcern.addObservation(EcoreUtil.copy(problemEntry.getAllergyProblem()));
 		mAllergyConcern.getEntryRelationships()
 				.get(mAllergyConcern.getEntryRelationships().size() - 1)
@@ -210,8 +210,8 @@ public class AbstractAllergyConcern extends AbstractConcern {
 	 *
 	 * @return the allergy problems
 	 */
-	public List<AbstractAllergyProblem> getAllergyProblems() {
-		final List<AbstractAllergyProblem> apl = new ArrayList<AbstractAllergyProblem>();
+	public List<BaseAllergyProblem> getAllergyProblems() {
+		final List<BaseAllergyProblem> apl = new ArrayList<BaseAllergyProblem>();
 		for (final AllergyIntolerance mAllergy : getMdht().getAllergyIntolerances()) {
 			final AllergyProblem allergy = new AllergyProblem(mAllergy);
 			apl.add(allergy);

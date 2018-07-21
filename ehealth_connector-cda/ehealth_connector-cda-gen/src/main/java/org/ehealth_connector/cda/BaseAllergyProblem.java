@@ -49,7 +49,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  * <div class="en">An Allergy Problem</div> <div class="de">Ein Allergie
  * Problem</div> <div class="fr"></div>.
  */
-public class AbstractAllergyProblem {
+public class BaseAllergyProblem {
 
 	protected LanguageCode myLang = LanguageCode.ENGLISH;
 
@@ -59,7 +59,7 @@ public class AbstractAllergyProblem {
 	/**
 	 * Instantiates a new allergy problem.
 	 */
-	public AbstractAllergyProblem() {
+	public BaseAllergyProblem() {
 		setAllergyProblem(IHEFactory.eINSTANCE.createAllergyIntolerance().init());
 	}
 
@@ -76,7 +76,7 @@ public class AbstractAllergyProblem {
 	 *            <div class="en">The allergy</div> <div class="de">Die Art der
 	 *            Allergie</div> <div class="fr"></div> <div class="it"></div>
 	 */
-	public AbstractAllergyProblem(AllergiesAndIntolerances allergy) {
+	public BaseAllergyProblem(AllergiesAndIntolerances allergy) {
 		setAllergyProblem(IHEFactory.eINSTANCE.createAllergyIntolerance().init());
 		// mAllergyProblem.setEffectiveTime(DateUtil
 		// .createUnknownLowHighTimeNullFlavor());
@@ -113,7 +113,7 @@ public class AbstractAllergyProblem {
 	 *            <div class="en">end of problem</div> <div class="de">Ende des
 	 *            Problems</div> <div class="fr"></div> <div class="it"></div>
 	 */
-	public AbstractAllergyProblem(AllergiesAndIntolerances kindOfAllergy,
+	public BaseAllergyProblem(AllergiesAndIntolerances kindOfAllergy,
 			org.ehealth_connector.common.Code problem, Date startOfProblem, Date endOfProblem) {
 		this(kindOfAllergy, problem, startOfProblem, endOfProblem, null);
 
@@ -153,7 +153,7 @@ public class AbstractAllergyProblem {
 	 *            stattdesssen eine GUID durch die Convenience API
 	 *            generiert.</div> <div class="fr"></div> <div class="it"></div>
 	 */
-	public AbstractAllergyProblem(AllergiesAndIntolerances kindOfAllergy,
+	public BaseAllergyProblem(AllergiesAndIntolerances kindOfAllergy,
 			org.ehealth_connector.common.Code problem, Date startOfProblem, Date endOfProblem,
 			Identificator internalProblemId) {
 		setAllergyProblem(IHEFactory.eINSTANCE.createAllergyIntolerance().init());
@@ -168,7 +168,7 @@ public class AbstractAllergyProblem {
 	/**
 	 * Instantiates a new allergy problem.
 	 */
-	public AbstractAllergyProblem(LanguageCode lang) {
+	public BaseAllergyProblem(LanguageCode lang) {
 		setAllergyProblem(IHEFactory.eINSTANCE.createAllergyIntolerance().init());
 		myLang = lang;
 	}
@@ -181,7 +181,7 @@ public class AbstractAllergyProblem {
 	 *            <div class="de"> allergy intolerance</div>
 	 *            <div class="fr"></div> <div class="it"></div>
 	 */
-	public AbstractAllergyProblem(
+	public BaseAllergyProblem(
 			org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance allergyIntolerance) {
 		setAllergyProblem(allergyIntolerance);
 	}
@@ -196,7 +196,7 @@ public class AbstractAllergyProblem {
 	 * @param lang
 	 *            the lang
 	 */
-	public AbstractAllergyProblem(
+	public BaseAllergyProblem(
 			org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance allergyIntolerance,
 			LanguageCode lang) {
 		setAllergyProblem(allergyIntolerance);

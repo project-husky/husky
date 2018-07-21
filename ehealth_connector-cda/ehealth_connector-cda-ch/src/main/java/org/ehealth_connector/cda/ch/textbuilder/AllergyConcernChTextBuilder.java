@@ -21,9 +21,9 @@ package org.ehealth_connector.cda.ch.textbuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ehealth_connector.cda.AbstractAllergyConcern;
-import org.ehealth_connector.cda.AbstractAllergyProblem;
-import org.ehealth_connector.cda.AbstractAllergyProblemComparator;
+import org.ehealth_connector.cda.BaseAllergyConcern;
+import org.ehealth_connector.cda.BaseAllergyProblem;
+import org.ehealth_connector.cda.BaseAllergyProblemComparator;
 import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.enums.ContentIdPrefix;
 import org.ehealth_connector.cda.textbuilder.AllergyConcernTextBuilder;
@@ -39,9 +39,9 @@ import org.ehealth_connector.common.utils.DateUtil;
  */
 public class AllergyConcernChTextBuilder extends AllergyConcernTextBuilder {
 
-	private static List<AbstractAllergyConcern> toAbstracAllergyConcernList(
+	private static List<BaseAllergyConcern> toAbstracAllergyConcernList(
 			List<AllergyConcern> allergyProblemConcerns) {
-		final List<AbstractAllergyConcern> retVal = new ArrayList<>();
+		final List<BaseAllergyConcern> retVal = new ArrayList<>();
 		retVal.addAll(allergyProblemConcerns);
 		return retVal;
 	}
@@ -75,17 +75,17 @@ public class AllergyConcernChTextBuilder extends AllergyConcernTextBuilder {
 	}
 
 	@Override
-	protected void addRow(AbstractAllergyConcern allergyConcern, int i) {
+	protected void addRow(BaseAllergyConcern allergyConcern, int i) {
 		// Currently only German available. Translation contributions are
 		// welcome
 		int j = 0;
 		String contentPrefix = getContentIdPrefix() + i;
-		ArrayList<AbstractAllergyProblem> list = new ArrayList<AbstractAllergyProblem>();
-		for (AbstractAllergyProblem abstractAllergyProblem : allergyConcern.getAllergyProblems()) {
-			list.add(new AbstractAllergyProblem(abstractAllergyProblem.getMdht(), myLang));
+		ArrayList<BaseAllergyProblem> list = new ArrayList<BaseAllergyProblem>();
+		for (BaseAllergyProblem abstractAllergyProblem : allergyConcern.getAllergyProblems()) {
+			list.add(new BaseAllergyProblem(abstractAllergyProblem.getMdht(), myLang));
 		}
-		list.sort(new AbstractAllergyProblemComparator());
-		for (AbstractAllergyProblem problem : list) {
+		list.sort(new BaseAllergyProblemComparator());
+		for (BaseAllergyProblem problem : list) {
 			j++;
 			append("<tr>");
 			if (j == 1)

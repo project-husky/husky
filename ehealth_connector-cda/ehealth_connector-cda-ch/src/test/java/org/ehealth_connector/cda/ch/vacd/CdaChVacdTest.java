@@ -32,8 +32,8 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
-import org.ehealth_connector.cda.AbstractAllergyConcern;
-import org.ehealth_connector.cda.AbstractAllergyProblem;
+import org.ehealth_connector.cda.BaseAllergyConcern;
+import org.ehealth_connector.cda.BaseAllergyProblem;
 import org.ehealth_connector.cda.AbstractPregnancyHistory;
 import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.AllergyProblem;
@@ -148,7 +148,7 @@ public class CdaChVacdTest extends TestUtils {
 	private AllergyConcern ac1;
 	private ImmunizationRecommendation immunizationRecommendation1;
 	private Problem problem2;
-	private AbstractAllergyProblem allergyProblem1;
+	private BaseAllergyProblem allergyProblem1;
 	private GestationalAge cr1;
 	private LaboratoryObservation lss1;
 	private PregnancyHistory ph1;
@@ -196,8 +196,8 @@ public class CdaChVacdTest extends TestUtils {
 		return a;
 	}
 
-	private AbstractAllergyProblem createAllergyProblem() {
-		final AbstractAllergyProblem p = new AllergyProblem();
+	private BaseAllergyProblem createAllergyProblem() {
+		final BaseAllergyProblem p = new AllergyProblem();
 		p.setCode(AllergiesAndIntolerances.FOOD_ALLERGY);
 		p.setId(id1);
 		p.setStartDate(startDate);
@@ -501,7 +501,7 @@ public class CdaChVacdTest extends TestUtils {
 	// 4
 	@Test
 	public void testAllergyConcernSetterGetter() {
-		final AbstractAllergyConcern a = new AllergyConcern();
+		final BaseAllergyConcern a = new AllergyConcern();
 
 		a.addId(id1);
 		assertEquals(true, TestUtils.isEqual(id1, a.getIds().get(0)));
@@ -527,7 +527,7 @@ public class CdaChVacdTest extends TestUtils {
 
 	@Test
 	public void testAllergyProblemSetterGetter() {
-		final AbstractAllergyProblem p = new AllergyProblem();
+		final BaseAllergyProblem p = new AllergyProblem();
 
 		p.setId(id1);
 		assertEquals(true, TestUtils.isEqual(id1, p.getId()));

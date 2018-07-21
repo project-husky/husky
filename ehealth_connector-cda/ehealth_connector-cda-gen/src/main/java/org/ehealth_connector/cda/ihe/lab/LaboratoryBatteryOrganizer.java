@@ -26,7 +26,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
  * The Class LaboratoryBatteryOrganizer. A Laboratory Battery Organizer is used
  * to group Laboratory Observations for a battery of tests.
  */
-public class LaboratoryBatteryOrganizer extends AbstractLaboratoryBatteryOrganizer {
+public class LaboratoryBatteryOrganizer extends BaseLaboratoryBatteryOrganizer {
 
 	/**
 	 * Instantiates a new laboratory battery organizer.

@@ -43,7 +43,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 
 public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSection> {
 
-	protected final List<AbstractObservation> myVitalSignObservations = new ArrayList<AbstractObservation>();
+	protected final List<BaseObservation> myVitalSignObservations = new ArrayList<BaseObservation>();
 
 	// default language is German
 	private LanguageCode languageCode = LanguageCode.GERMAN;
@@ -56,7 +56,7 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 		super(mdht);
 	}
 
-	public void add(AbstractVitalSignsOrganizer organizer, AbstractVitalSignObservation vitalSign,
+	public void add(BaseVitalSignsOrganizer organizer, BaseVitalSignObservation vitalSign,
 			Author author, String contendIdPrefix) {
 
 		myVitalSignObservations.add(vitalSign);
@@ -90,11 +90,11 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 
 	}
 
-	protected abstract AbstractVitalSignObservation createVitalSignObservation(
+	protected abstract BaseVitalSignObservation createVitalSignObservation(
 			org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation mdht);
 
-	public List<AbstractVitalSignObservation> getCodedVitalSignObservations() {
-		final List<AbstractVitalSignObservation> ret = new ArrayList<AbstractVitalSignObservation>();
+	public List<BaseVitalSignObservation> getCodedVitalSignObservations() {
+		final List<BaseVitalSignObservation> ret = new ArrayList<BaseVitalSignObservation>();
 		final EList<Organizer> organizers = getMdht().getOrganizers();
 		for (final Organizer organizer : organizers) {
 			final EList<Observation> observations = organizer.getObservations();
@@ -105,10 +105,10 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 				}
 			}
 		}
-		ret.sort(new Comparator<AbstractVitalSignObservation>() {
+		ret.sort(new Comparator<BaseVitalSignObservation>() {
 			@Override
-			public int compare(AbstractVitalSignObservation left,
-					AbstractVitalSignObservation right) {
+			public int compare(BaseVitalSignObservation left,
+					BaseVitalSignObservation right) {
 				return right.getEffectiveTime().compareTo(left.getEffectiveTime());
 			}
 		});
@@ -162,7 +162,7 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 
 	protected abstract Identificator getUuid();
 
-	public List<AbstractObservation> getVitalSignObservations() {
+	public List<BaseObservation> getVitalSignObservations() {
 		return myVitalSignObservations;
 	}
 

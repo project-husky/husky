@@ -31,13 +31,13 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
 /**
  * The Class AbstractVitalSignsOrganizer.
  */
-public class AbstractVitalSignsOrganizer
+public class BaseVitalSignsOrganizer
 		extends MdhtOrganizerFacade<org.openhealthtools.mdht.uml.cda.ihe.VitalSignsOrganizer> {
 
 	/**
 	 * Instantiates a new abstract vital signs organizer.
 	 */
-	protected AbstractVitalSignsOrganizer() {
+	protected BaseVitalSignsOrganizer() {
 		super(IHEFactory.eINSTANCE.createVitalSignsOrganizer().init());
 		// Correct wrong MDHT CodeSystemName
 		getMdht().getCode().setCodeSystemName("SNOMED CT");
@@ -49,7 +49,7 @@ public class AbstractVitalSignsOrganizer
 	 * @param mdht
 	 *            the mdht
 	 */
-	protected AbstractVitalSignsOrganizer(VitalSignsOrganizer mdht) {
+	protected BaseVitalSignsOrganizer(VitalSignsOrganizer mdht) {
 		super(mdht);
 	}
 

@@ -24,10 +24,10 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.ehealth_connector.cda.AbstractObservation;
-import org.ehealth_connector.cda.AbstractOrganizer;
-import org.ehealth_connector.cda.AbstractVitalSignObservation;
 import org.ehealth_connector.cda.AllergyConcern;
+import org.ehealth_connector.cda.BaseObservation;
+import org.ehealth_connector.cda.BaseOrganizer;
+import org.ehealth_connector.cda.BaseVitalSignObservation;
 import org.ehealth_connector.cda.ch.AbstractCdaChV1;
 import org.ehealth_connector.cda.ch.ActiveProblemConcern;
 import org.ehealth_connector.cda.ch.PastProblemConcern;
@@ -220,9 +220,8 @@ public class CdaChEdesEdpn
 	 * @param observationComparator
 	 *            the observation comparator (pass null for default sorting)
 	 */
-	public void generateNarrativeTextCodedVitalSigns(
-			Comparator<AbstractOrganizer> organizerComparator,
-			Comparator<AbstractObservation> observationComparator) {
+	public void generateNarrativeTextCodedVitalSigns(Comparator<BaseOrganizer> organizerComparator,
+			Comparator<BaseObservation> observationComparator) {
 		getCodedVitalSignsSection().getMdht().createStrucDocText(mCommon
 				.generateNarrativeTextCodedVitalSigns(organizerComparator, observationComparator));
 	}
@@ -244,7 +243,7 @@ public class CdaChEdesEdpn
 	 *
 	 * @return List with coded vital sign observations
 	 */
-	public List<AbstractVitalSignObservation> getCodedVitalSigns() {
+	public List<BaseVitalSignObservation> getCodedVitalSigns() {
 		final org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection section = getDoc()
 				.getCodedVitalSignsSection();
 		if (section == null) {
@@ -280,7 +279,7 @@ public class CdaChEdesEdpn
 	 */
 	@Override
 	public org.openhealthtools.mdht.uml.cda.ch.CdaChEdesV1Edpn getDoc() {
-		return (org.openhealthtools.mdht.uml.cda.ch.CdaChEdesV1Edpn) super.getDoc();
+		return super.getDoc();
 	}
 
 	public String getDocumentTitle() {

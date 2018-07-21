@@ -18,7 +18,11 @@ package org.ehealth_connector.cda;
 
 import java.util.Comparator;
 
-public class AbstractAllergyConcernComparator implements Comparator<AbstractAllergyConcern> {
+/**
+ * This class implements the default comparison algorithm for HL7 CDA
+ * observations.
+ */
+public class BaseObservationComparator implements Comparator<BaseObservation> {
 
 	/**
 	 *
@@ -29,7 +33,7 @@ public class AbstractAllergyConcernComparator implements Comparator<AbstractAlle
 	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
 	 */
 	@Override
-	public int compare(AbstractAllergyConcern a, AbstractAllergyConcern b) {
+	public int compare(BaseObservation a, BaseObservation b) {
 		if ((a == null) && (b == null))
 			return 0;
 		else if ((a == null) && (b != null))
@@ -43,8 +47,35 @@ public class AbstractAllergyConcernComparator implements Comparator<AbstractAlle
 				return -1;
 			else if ((a.getNarrativeText() != null) && (b.getNarrativeText() == null))
 				return 1;
-			else
-				return a.getNarrativeText().compareToIgnoreCase(b.getNarrativeText());
+			else {
+				int retVal = a.getNarrativeText().compareToIgnoreCase(b.getNarrativeText());
+				if (retVal == 0) {
+					if ((a.getOriginalText() == null) && (b.getOriginalText() == null))
+						return 0;
+					else if ((a.getOriginalText() == null) && (b.getOriginalText() != null))
+						return -1;
+					else if ((a.getOriginalText() != null) && (b.getOriginalText() == null))
+						return 1;
+					else {
+						retVal = a.getOriginalText().compareToIgnoreCase(b.getOriginalText());
+						if (retVal == 0) {
+							String aDisplayName = "";
+							String bDisplayName = "";
+							if (a.getCode() != null)
+								if (a.getCode().getDisplayName() != null)
+									aDisplayName = a.getCode().getDisplayName();
+
+							if (b.getCode() != null)
+								if (b.getCode().getDisplayName() != null)
+									bDisplayName = b.getCode().getDisplayName();
+
+							return aDisplayName.compareToIgnoreCase(bDisplayName);
+						}
+						return retVal;
+					}
+				}
+				return retVal;
+			}
 		}
 	}
 }
