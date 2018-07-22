@@ -51,6 +51,7 @@ public class LaboratoryBatteryOrganizer extends BaseLaboratoryBatteryOrganizer {
 	 */
 	public LaboratoryBatteryOrganizer() {
 		super();
+		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.19"));
 	}
 
 	/**
@@ -83,6 +84,7 @@ public class LaboratoryBatteryOrganizer extends BaseLaboratoryBatteryOrganizer {
 	public LaboratoryBatteryOrganizer(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer mdht) {
 		super(mdht);
+		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.19"));
 	}
 
 	/**
@@ -124,7 +126,6 @@ public class LaboratoryBatteryOrganizer extends BaseLaboratoryBatteryOrganizer {
 	 */
 	public void addLaboratoryObservation(LaboratoryObservation observation) {
 		org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation mdht = observation.copy();
-		CdaUtil.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.4.3"));
 		getMdht().addObservation(mdht);
 
 		final int nb = getMdht().getComponents().size() - 1;
@@ -176,6 +177,19 @@ public class LaboratoryBatteryOrganizer extends BaseLaboratoryBatteryOrganizer {
 	}
 
 	/**
+	 * Gets the list of authors.
+	 *
+	 * @return the list of authors
+	 */
+	public List<Author> getAuthors() {
+		List<Author> retVal = new ArrayList<Author>();
+		for (org.openhealthtools.mdht.uml.cda.Author author : getMdht().getAuthors()) {
+			retVal.add(new Author(author));
+		}
+		return retVal;
+	}
+
+	/**
 	 * Gets the laboratory observations.
 	 *
 	 * @return the laboratory observations
@@ -196,7 +210,7 @@ public class LaboratoryBatteryOrganizer extends BaseLaboratoryBatteryOrganizer {
 	 *
 	 * @return the laboratory observations
 	 */
-	public List<LaboratoryObservation> getLrqcLaboratoryObservations() {
+	public List<LaboratoryObservation> getLrepLaboratoryObservations() {
 		final List<LaboratoryObservation> loList = new ArrayList<LaboratoryObservation>();
 		for (final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation lo : getMdht()
 				.getLaboratoryObservations()) {
@@ -216,6 +230,19 @@ public class LaboratoryBatteryOrganizer extends BaseLaboratoryBatteryOrganizer {
 			ol.add(new ObservationMediaEntry(om));
 		}
 		return ol;
+	}
+
+	/**
+	 * Gets the list of performers.
+	 *
+	 * @return the list of performers
+	 */
+	public List<Performer> getPerformers() {
+		List<Performer> retVal = new ArrayList<Performer>();
+		for (Performer2 performer : getMdht().getPerformers()) {
+			retVal.add(new Performer(performer));
+		}
+		return retVal;
 	}
 
 	/**

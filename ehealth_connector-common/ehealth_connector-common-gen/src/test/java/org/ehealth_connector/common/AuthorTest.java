@@ -307,7 +307,7 @@ public class AuthorTest {
 		final Author auth = new Author(testName1);
 		final Name ref = auth.getName();
 		assertEquals(testFamilyName, ref.getFamilyName());
-		assertEquals(testGivenName, ref.getGivenNames());
+		assertEquals(testGivenName, ref.getAllGivenNames());
 	}
 
 	/**
@@ -321,7 +321,7 @@ public class AuthorTest {
 
 		final Name ref = auth.getName();
 		assertEquals(testFamilyName, ref.getFamilyName());
-		assertEquals(testGivenName, ref.getGivenNames());
+		assertEquals(testGivenName, ref.getAllGivenNames());
 
 		assertEquals(testGln1, auth.getGln());
 	}

@@ -24,7 +24,6 @@ import org.ehealth_connector.cda.ihe.lab.NotificationOrganizer;
 import org.ehealth_connector.cda.ihe.lab.OutbreakIdentificationObservation;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
@@ -101,20 +100,6 @@ public class BaseChSpecimenAct extends org.ehealth_connector.cda.ihe.lab.BaseLab
 		setNonHumanSubject(nonHumanSubject);
 	}
 
-	// /**
-	// * Adds the laboratory battery organizer.
-	// *
-	// * @param laboratoryBatteryOrganizer
-	// * the laboratory battery organizer
-	// */
-	// public void addLaboratoryBatteryOrganizer(
-	// LaboratoryBatteryOrganizer laboratoryBatteryOrganizer) {
-	// getMdht().addOrganizer(laboratoryBatteryOrganizer.copy());
-	// // Set the right type for the entryRelationship
-	// CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
-	// x_ActRelationshipEntryRelationship.COMP);
-	// }
-	//
 	/**
 	 * Adds the laboratory battery organizer.
 	 *
@@ -124,7 +109,6 @@ public class BaseChSpecimenAct extends org.ehealth_connector.cda.ihe.lab.BaseLab
 	public void addLaboratoryBatteryOrganizer(
 			org.ehealth_connector.cda.ch.lab.lrep.LaboratoryBatteryOrganizer laboratoryBatteryOrganizer) {
 		Organizer organizer = laboratoryBatteryOrganizer.copy();
-		CdaUtil.addTemplateIdOnce(organizer, new Identificator("2.16.756.5.30.1.1.10.4.19"));
 		getMdht().addOrganizer(organizer);
 		// Set the right type for the entryRelationship
 		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),

@@ -153,7 +153,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 	static public HumanName convertName(Name name) {
 		if (name != null) {
 			final HumanName humanName = new HumanName();
-			if (name.getGivenNames() != null) {
+			if (name.getAllGivenNames() != null) {
 				final EList<ENXP> givens = name.getMdhtPn().getGivens();
 				for (final ENXP given : givens) {
 					humanName.addGiven(given.getText());

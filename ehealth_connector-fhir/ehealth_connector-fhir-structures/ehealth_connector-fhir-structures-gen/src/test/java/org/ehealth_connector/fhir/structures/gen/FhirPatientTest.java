@@ -126,7 +126,7 @@ public class FhirPatientTest {
 		assertEquals("63119", patient.getAddress().getZip());
 		assertEquals("WEBSTER", patient.getAddress().getCity());
 		assertEquals("ALPHA", patient.getName().getFamilyName());
-		assertEquals("ALAN", patient.getName().getGivenNames());
+		assertEquals("ALAN", patient.getName().getAllGivenNames());
 
 		org.openhealthtools.mdht.uml.hl7.datatypes.II ii = patient.getMdhtPatientRole()
 				.getProviderOrganization().getIds().get(0);
@@ -141,7 +141,7 @@ public class FhirPatientTest {
 		assertEquals("63119", patientEquals.getAddress().getZip());
 		assertEquals("WEBSTER", patientEquals.getAddress().getCity());
 		assertEquals("ALPHA", patientEquals.getName().getFamilyName());
-		assertEquals("ALAN", patientEquals.getName().getGivenNames());
+		assertEquals("ALAN", patientEquals.getName().getAllGivenNames());
 
 		ii = patientEquals.getMdhtPatientRole().getProviderOrganization().getIds().get(0);
 		assertEquals("2.16.840.1.113883.3.72.5.9.2", ii.getRoot());

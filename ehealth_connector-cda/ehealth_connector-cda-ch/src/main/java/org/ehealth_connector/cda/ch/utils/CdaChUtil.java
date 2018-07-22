@@ -65,9 +65,12 @@ public abstract class CdaChUtil extends CdaUtil {
 	 */
 	public static CdaChLrepV1GeneralReport loadCdaChLrepV1GeneralReportFromFile(String filePath)
 			throws Exception {
-		return loadCdaChLrepV1GeneralReportFromStream(IOUtils.toInputStream(
-				IOUtils.toString(new InputStreamReader(new FileInputStream(filePath), "UTF-8")),
-				Charsets.UTF_8));
+		CdaChLrepV1GeneralReport retVal = null;
+		FileInputStream fs = new FileInputStream(filePath);
+		retVal = loadCdaChLrepV1GeneralReportFromStream(
+				IOUtils.toInputStream(IOUtils.toString(fs, Charsets.UTF_8)));
+		fs.close();
+		return retVal;
 	}
 
 	public static CdaChLrepV1GeneralReport loadCdaChLrepV1GeneralReportFromStream(
@@ -93,9 +96,11 @@ public abstract class CdaChUtil extends CdaUtil {
 	 */
 	public static CdaChV2StructuredBody<org.openhealthtools.mdht.uml.cda.ch.CdaChV2StructuredBody> loadCdaChV2FromFile(
 			String filePath) throws Exception {
-		return loadCdaChV2FromStream(IOUtils.toInputStream(
-				IOUtils.toString(new InputStreamReader(new FileInputStream(filePath), "UTF-8")),
-				Charsets.UTF_8));
+		CdaChV2StructuredBody<org.openhealthtools.mdht.uml.cda.ch.CdaChV2StructuredBody> retVal = null;
+		FileInputStream fs = new FileInputStream(filePath);
+		retVal = loadCdaChV2FromStream(IOUtils.toInputStream(IOUtils.toString(fs, Charsets.UTF_8)));
+		fs.close();
+		return retVal;
 	}
 
 	/**

@@ -365,7 +365,7 @@ public class CdaChLrphTest extends CdaChV12LaboratoryReportTest {
 				.getNames().get(0).getGivens().get(0).getText().length());
 		assertEquals(1, doc.getMdht().getRecordTargets().get(0).getPatientRole().getPatient()
 				.getNames().get(0).getGivens().size());
-		assertEquals("X2", doc.getPatient().getName().getGivenNames());
+		assertEquals("X2", doc.getPatient().getName().getAllGivenNames());
 		// Family Name MSK
 		assertEquals(NullFlavor.MSK, doc.getMdht().getRecordTargets().get(0).getPatientRole()
 				.getPatient().getNames().get(0).getFamilies().get(0).getNullFlavor());
@@ -407,11 +407,11 @@ public class CdaChLrphTest extends CdaChV12LaboratoryReportTest {
 		// Document document = doc.getDocument();
 
 		// Name length 1
-		assertTrue(doc.getPatient().getName().getGivenNames().length() == 1);
+		assertTrue(doc.getPatient().getName().getAllGivenNames().length() == 1);
 		assertTrue(doc.getPatient().getName().getFamilyName().length() == 1);
 		// Name first letter equal
-		assertEquals(patient1.getName().getGivenNames().charAt(0),
-				doc.getPatient().getName().getGivenNames().charAt(0));
+		assertEquals(patient1.getName().getAllGivenNames().charAt(0),
+				doc.getPatient().getName().getAllGivenNames().charAt(0));
 		assertEquals(patient1.getName().getFamilyName().charAt(0),
 				doc.getPatient().getName().getFamilyName().charAt(0));
 		// Name MSK

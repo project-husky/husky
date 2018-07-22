@@ -62,7 +62,7 @@ public class EdesEdpnConverterTest extends AbstractConverter {
 		assertNotNull(ref.getPatient());
 		assertNotNull(ref.getPatient().getName());
 		assertEquals("Tigrinja", ref.getPatient().getName().getFamilyName());
-		assertEquals("Sesuna", ref.getPatient().getName().getGivenNames());
+		assertEquals("Sesuna", ref.getPatient().getName().getAllGivenNames());
 	}
 
 }

@@ -17,6 +17,8 @@
  */
 package org.ehealth_connector.cda.ch.lab.lrep;
 
+import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -36,6 +38,7 @@ public class LaboratoryObservation
 	 */
 	public LaboratoryObservation() {
 		super();
+		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.3"));
 	}
 
 	/**
@@ -47,6 +50,7 @@ public class LaboratoryObservation
 	public LaboratoryObservation(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation mdht) {
 		super(mdht);
+		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.3"));
 	}
 
 	/**
@@ -66,7 +70,7 @@ public class LaboratoryObservation
 		}
 	}
 
-	public void addPreviousObservation(PreviousLaboratoryObservation prevObs) {
+	public void addPreviousObservation(PreviousObservation prevObs) {
 		super.addPreviousObservation(new LaboratoryObservation(prevObs.getMdht()));
 	}
 }

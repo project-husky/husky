@@ -24,17 +24,19 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Value;
 
-public class PreviousLaboratoryObservation
+public class PreviousObservation
 		extends org.ehealth_connector.cda.ihe.lab.PreviousLaboratoryObservation {
 
-	public PreviousLaboratoryObservation() {
+	public PreviousObservation() {
 		super();
 		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.22"));
+		CdaUtil.removeTemplateId(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.3"));
 	}
 
-	public PreviousLaboratoryObservation(LaboratoryObservation currentObservation, Date timestamp,
+	public PreviousObservation(LaboratoryObservation currentObservation, Date timestamp,
 			Value value, Code interpretationCode) {
 		super(EcoreUtil.copy(currentObservation.getMdht()), timestamp, value, interpretationCode);
 		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.22"));
+		CdaUtil.removeTemplateId(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.3"));
 	}
 }

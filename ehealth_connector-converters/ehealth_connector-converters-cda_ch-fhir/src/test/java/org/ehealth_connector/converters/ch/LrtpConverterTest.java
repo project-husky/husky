@@ -63,7 +63,7 @@ public class LrtpConverterTest extends AbstractConverter {
 		assertNotNull(ref.getPatient());
 		assertNotNull(ref.getPatient().getName());
 		assertEquals("Muster", ref.getPatient().getName().getFamilyName());
-		assertEquals("Franz", ref.getPatient().getName().getGivenNames());
+		assertEquals("Franz", ref.getPatient().getName().getAllGivenNames());
 		assertNotNull(ref.getPatient().getAdministrativeGenderCode());
 		assertEquals(AdministrativeGender.MALE, ref.getPatient().getAdministrativeGenderCode());
 	}

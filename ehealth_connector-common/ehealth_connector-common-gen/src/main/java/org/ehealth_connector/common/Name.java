@@ -77,8 +77,7 @@ public class Name {
 	 *            <div class="it"></div>
 	 */
 	public Name(String name) {
-		mPn = DatatypesFactory.eINSTANCE.createPN();
-		mPn.addText(name);
+		setName(name);
 	}
 
 	/**
@@ -133,7 +132,6 @@ public class Name {
 	public Name(String givenName, String familyName, NameUse use) {
 		this(givenName, familyName);
 		setUse(use);
-		// TODO getter und setter
 	}
 
 	/**
@@ -182,6 +180,26 @@ public class Name {
 	}
 
 	/**
+	 * <div class="en">Gets the family names.</div> <div class="de">Liefert alle
+	 * Familiennamen</div> <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @return das suffix Objekt
+	 */
+	public String getAllFamilyNames() {
+		return Util.joinEListStr(mPn.getFamilies());
+	}
+
+	/**
+	 * <div class="en">Gets the given names.</div> <div class="de">Liefert alle
+	 * Vornamen</div> <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @return Vornamen
+	 */
+	public String getAllGivenNames() {
+		return Util.joinEListStr(mPn.getGivens());
+	}
+
+	/**
 	 * <div class="en">Gets the complete name.</div> <div class="de">Liefert den
 	 * ganzen Namen (z.B. "Dr. Allzeit Bereit der Dritte")</div>
 	 * <div class="fr"></div> <div class="it"></div>
@@ -191,8 +209,8 @@ public class Name {
 	public String getCompleteName() {
 
 		final String prefixes = getPrefixes();
-		final String givens = getGivenNames();
-		final String families = getFamilyNames();
+		final String givens = getAllGivenNames();
+		final String families = getAllFamilyNames();
 		final String suffixes = getSuffixes();
 
 		final List<String> nameList = new ArrayList<String>();
@@ -217,23 +235,29 @@ public class Name {
 	}
 
 	/**
-	 * <div class="en">Gets the family names.</div> <div class="de">Liefert alle
-	 * Familiennamen</div> <div class="fr"></div> <div class="it"></div>
+	 * Gets the Family names as list of String.
 	 *
-	 * @return das suffix Objekt
+	 * @return the Family names
 	 */
-	public String getFamilyNames() {
-		return Util.joinEListStr(mPn.getFamilies());
+	public List<String> getFamilyNames() {
+		List<String> retVal = new ArrayList<String>();
+		for (ENXP item : mPn.getFamilies()) {
+			retVal.add(item.getText());
+		}
+		return retVal;
 	}
 
 	/**
-	 * <div class="en">Gets the given names.</div> <div class="de">Liefert alle
-	 * Vornamen</div> <div class="fr"></div> <div class="it"></div>
+	 * Gets the given names as list of String.
 	 *
-	 * @return Vornamen
+	 * @return the given names
 	 */
-	public String getGivenNames() {
-		return Util.joinEListStr(mPn.getGivens());
+	public List<String> getGivenNames() {
+		List<String> retVal = new ArrayList<String>();
+		for (ENXP item : mPn.getGivens()) {
+			retVal.add(item.getText());
+		}
+		return retVal;
 	}
 
 	/**
@@ -244,6 +268,15 @@ public class Name {
 	 */
 	public PN getMdhtPn() {
 		return mPn;
+	}
+
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
+	public Object getName() {
+		return mPn.getText();
 	}
 
 	/**
@@ -324,6 +357,17 @@ public class Name {
 		if ((givenName != null) && !"".equals(givenName)) {
 			mPn.addGiven(givenName);
 		}
+	}
+
+	/**
+	 * Sets the name.
+	 *
+	 * @param name
+	 *            the new name
+	 */
+	private void setName(String name) {
+		mPn = DatatypesFactory.eINSTANCE.createPN();
+		mPn.addText(name);
 	}
 
 	/**

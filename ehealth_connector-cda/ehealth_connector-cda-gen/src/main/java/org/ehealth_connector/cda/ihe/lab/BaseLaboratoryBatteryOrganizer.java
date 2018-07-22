@@ -41,8 +41,6 @@ public class BaseLaboratoryBatteryOrganizer extends
 	public BaseLaboratoryBatteryOrganizer() {
 		super(LABFactory.eINSTANCE.createLaboratoryBatteryOrganizer().init());
 		setStatusCode(StatusCode.COMPLETED);
-		// getMdht().getTemplateIds().add(new
-		// Identificator("2.16.756.5.30.1.1.10.4.19").getIi());
 	}
 
 	/**
@@ -54,8 +52,6 @@ public class BaseLaboratoryBatteryOrganizer extends
 	public BaseLaboratoryBatteryOrganizer(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer mdht) {
 		super(mdht);
-		// getMdht().getTemplateIds().add(new
-		// Identificator("2.16.756.5.30.1.1.10.4.19").getIi());
 	}
 
 	/**

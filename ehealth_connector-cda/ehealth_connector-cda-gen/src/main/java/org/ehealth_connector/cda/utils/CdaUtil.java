@@ -510,6 +510,16 @@ public abstract class CdaUtil {
 		return DatatypesFactory.eINSTANCE;
 	}
 
+	public static void removeTemplateId(LaboratoryObservation mdht, Identificator id) {
+		for (II existingId : mdht.getTemplateIds()) {
+			if (existingId.equals(id.getIi())) {
+				mdht.getTemplateIds().remove(existingId);
+				break;
+			}
+		}
+		sortTemplateIds(mdht);
+	}
+
 	public static void setEntryRelationshipCommentInversionIdAndTypeCode(
 			EList<EntryRelationship> entryRelationships) {
 		final int erNb = entryRelationships.size() - 1;

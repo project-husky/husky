@@ -35,6 +35,7 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.Person;
+import org.ehealth_connector.common.ch.enums.ConfidentialityCode;
 import org.ehealth_connector.common.enums.CountryCode;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
@@ -67,7 +68,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		extends AbstractCda<EClinicalDocument> {
 
-	private class MyComparator implements Comparator<org.ehealth_connector.cda.Section> {
+	private class MySectionComparator implements Comparator<org.ehealth_connector.cda.Section> {
 		/**
 		 *
 		 * Compares two Section on their logical order regarding the
@@ -108,7 +109,7 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		}
 	}
 
-	private Comparator<org.ehealth_connector.cda.Section> mComparator = new MyComparator();
+	private Comparator<org.ehealth_connector.cda.Section> mComparator = new MySectionComparator();
 
 	public CdaChV2StructuredBody(EClinicalDocument doc) {
 		super(doc);
@@ -129,7 +130,7 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	@Override
 	public void addAuthenticator(org.ehealth_connector.common.Author author) {
 		Authenticator authenticator = Util.createAuthenticatorFromAuthor(author);
-		getDoc().getLegalAuthenticator().setTime(EcoreUtil.copy(author.getAuthorMdht().getTime()));
+		authenticator.setTime(EcoreUtil.copy(author.getAuthorMdht().getTime()));
 		CdaUtil.addTemplateIdOnce(authenticator, new Identificator("2.16.756.5.30.1.1.10.2.6"));
 		super.addAuthenticator(authenticator);
 	}
@@ -181,6 +182,18 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		return b.toString();
 	}
 
+	/**
+	 * <div class="en">Gets the Confidentially Code</div> <div class="de"></div>
+	 *
+	 * @return code
+	 */
+	public ConfidentialityCode getConfidentialityCodeCh() {
+		if (getDoc().getConfidentialityCode() != null) {
+			return ConfidentialityCode.getEnum(getDoc().getConfidentialityCode().getCode());
+		}
+		return null;
+	}
+
 	public List<LaboratorySpecialtySection> getLaboratorySpecialtySections() {
 		ArrayList<LaboratorySpecialtySection> retVal = new ArrayList<LaboratorySpecialtySection>();
 		for (Section item : getMdht().getSections()) {
@@ -190,11 +203,21 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		return retVal;
 	}
 
+	/**
+	 * Gets the list of all sections in this document.
+	 *
+	 * @return the sections list
+	 */
 	public List<org.ehealth_connector.cda.Section> getSections() {
 		ArrayList<org.ehealth_connector.cda.Section> retVal = new ArrayList<org.ehealth_connector.cda.Section>();
 		for (Section item : getMdht().getSections()) {
-			retVal.add(new org.ehealth_connector.cda.Section(item.getTitle().getText(),
-					item.getText().getText()));
+			String title = null;
+			String text = null;
+			if (item.getTitle() != null)
+				title = item.getTitle().getText();
+			if (item.getText() != null)
+				text = item.getText().getText();
+			retVal.add(new org.ehealth_connector.cda.Section(title, text));
 		}
 		retVal.sort(mComparator);
 		return retVal;

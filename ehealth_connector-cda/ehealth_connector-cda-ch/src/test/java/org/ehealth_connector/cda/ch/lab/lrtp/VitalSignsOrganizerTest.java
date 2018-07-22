@@ -58,7 +58,7 @@ public class VitalSignsOrganizerTest extends TestUtils {
 		// Author
 		o.addAuthor(new Author(new Name("Axel", "Helmer")));
 		assertFalse(o.getAuthors().isEmpty());
-		assertEquals("Axel", o.getAuthors().get(0).getName().getGivenNames());
+		assertEquals("Axel", o.getAuthors().get(0).getName().getAllGivenNames());
 		document = o.getDocument();
 		assertTrue(xExist(document, "//author[@typeCode='AUT']"));
 	}

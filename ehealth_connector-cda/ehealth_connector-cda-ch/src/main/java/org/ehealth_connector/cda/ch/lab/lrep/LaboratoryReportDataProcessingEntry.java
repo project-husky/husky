@@ -17,9 +17,16 @@
  */
 package org.ehealth_connector.cda.ch.lab.lrep;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryReportDataProcessingEntry;
+import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.common.Identificator;
 import org.openhealthtools.mdht.uml.cda.Act;
+import org.openhealthtools.mdht.uml.cda.EntryRelationship;
+import org.openhealthtools.mdht.uml.cda.ihe.lab.impl.LaboratoryBatteryOrganizerImpl;
 
 /**
  * The Class LaboratoryReportDataProcessingEntry.
@@ -37,6 +44,7 @@ public class LaboratoryReportDataProcessingEntry
 	 */
 	public LaboratoryReportDataProcessingEntry() {
 		super();
+		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.4"));
 	}
 
 	/**
@@ -59,6 +67,18 @@ public class LaboratoryReportDataProcessingEntry
 	public LaboratoryReportDataProcessingEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry mdht) {
 		super(mdht);
+		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.4"));
+	}
+
+	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizers() {
+		List<LaboratoryBatteryOrganizer> retVal = new ArrayList<LaboratoryBatteryOrganizer>();
+
+		for (EntryRelationship er : getMdht().getAct().getEntryRelationships()) {
+			if (er.getOrganizer() instanceof LaboratoryBatteryOrganizerImpl)
+				retVal.add(new LaboratoryBatteryOrganizer(
+						((LaboratoryBatteryOrganizerImpl) er.getOrganizer())));
+		}
+		return retVal;
 	}
 
 	/**

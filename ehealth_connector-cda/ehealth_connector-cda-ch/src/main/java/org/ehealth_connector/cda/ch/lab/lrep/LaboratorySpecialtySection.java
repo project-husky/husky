@@ -17,12 +17,16 @@
  */
 package org.ehealth_connector.cda.ch.lab.lrep;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
 import org.ehealth_connector.cda.ihe.lab.BaseLaboratorySpecialtySection;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.openhealthtools.mdht.uml.cda.Entry;
 
 /**
  * The Class LaboratorySpecialtySection.
@@ -151,6 +155,40 @@ public class LaboratorySpecialtySection extends BaseLaboratorySpecialtySection {
 		if (newLrdpe)
 			setLaboratoryReportDataProcessingEntry(lrdpe);
 
+	}
+
+	/**
+	 * Gets the laboratory battery organizers.
+	 *
+	 * @return the laboratory battery organizers
+	 */
+	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizers() {
+		List<LaboratoryBatteryOrganizer> retVal = new ArrayList<LaboratoryBatteryOrganizer>();
+		for (LaboratoryReportDataProcessingEntry lrdpe : getLaboratoryReportDataProcessingEntries()) {
+			for (LaboratoryBatteryOrganizer organizer : lrdpe.getLaboratoryBatteryOrganizers()) {
+				retVal.add(organizer);
+
+			}
+		}
+		return retVal;
+	}
+
+	/**
+	 * Gets the laboratory report data processing entries.
+	 *
+	 * @return the laboratory report data processing entries
+	 */
+	public List<org.ehealth_connector.cda.ch.lab.lrep.LaboratoryReportDataProcessingEntry> getLaboratoryReportDataProcessingEntries() {
+		List<org.ehealth_connector.cda.ch.lab.lrep.LaboratoryReportDataProcessingEntry> retVal = new ArrayList<org.ehealth_connector.cda.ch.lab.lrep.LaboratoryReportDataProcessingEntry>();
+
+		for (Entry entry : getMdht().getEntries()) {
+			if (entry instanceof org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry) {
+				retVal.add(
+						new org.ehealth_connector.cda.ch.lab.lrep.LaboratoryReportDataProcessingEntry(
+								(org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry) entry));
+			}
+		}
+		return retVal;
 	}
 
 	/**

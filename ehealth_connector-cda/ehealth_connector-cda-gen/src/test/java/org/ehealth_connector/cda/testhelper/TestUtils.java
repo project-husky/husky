@@ -145,7 +145,7 @@ public class TestUtils {
 	public static boolean isEqual(Name n1, Name n2) {
 		if (!n1.getPrefixes().equals(n2.getPrefixes()))
 			return false;
-		if (!n1.getGivenNames().equals(n2.getGivenNames()))
+		if (!n1.getAllGivenNames().equals(n2.getAllGivenNames()))
 			return false;
 		if (!n1.getFamilyNames().equals(n2.getFamilyNames()))
 			return false;

@@ -77,12 +77,23 @@ public class MdhtObservationFacade<E extends Observation> extends MdhtFacade<E> 
 	}
 
 	/**
-	 * <div class="en">Gets interpretation code values, which indicates wheater
-	 * an immune protection exists (Interpretation Code)</div>
-	 * <div class="de">Gibt zurück, ob ein Impfschutz besteht (erster
-	 * Interpretation Code).</div> <div class="fr"></div> <div class="it"></div>
+	 * Gets the interpretation code (first of the list or null if none in the
+	 * list).
 	 *
 	 * @return the interpretation code
+	 */
+	public Code getInterpretationCode() {
+		List<Code> list = getInterpretationCodes();
+		if (list.size() > 0)
+			return list.get(0);
+		else
+			return null;
+	}
+
+	/**
+	 * Gets a list of all observation interpretation codes.
+	 *
+	 * @return the list
 	 */
 	public List<Code> getInterpretationCodes() {
 		final List<Code> icl = new ArrayList<Code>();
@@ -120,12 +131,11 @@ public class MdhtObservationFacade<E extends Observation> extends MdhtFacade<E> 
 	}
 
 	/**
-	 * Get a list of all problem values. Each Value may be a coded or uncoded
-	 * String.
+	 * Get a list of all values. Each Value may be a coded or uncoded String.
 	 *
 	 * @return all problem values as ArrayList.
 	 */
-	protected List<Value> getValues() {
+	public List<Value> getValues() {
 		final List<Value> vl = new ArrayList<Value>();
 		for (final ANY a : getMdht().getValues()) {
 			final Value v = new Value(a);
