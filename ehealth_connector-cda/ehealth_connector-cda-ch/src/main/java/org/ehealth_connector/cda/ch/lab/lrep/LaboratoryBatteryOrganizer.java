@@ -88,7 +88,7 @@ public class LaboratoryBatteryOrganizer extends BaseLaboratoryBatteryOrganizer {
 	}
 
 	/**
-	 * Adds the author.
+	 * Adds a author.
 	 *
 	 * @param author
 	 *            the author
@@ -119,7 +119,7 @@ public class LaboratoryBatteryOrganizer extends BaseLaboratoryBatteryOrganizer {
 	}
 
 	/**
-	 * Adds the laboratory observation.
+	 * Adds a laboratory observation.
 	 *
 	 * @param observation
 	 *            the observation
@@ -134,7 +134,7 @@ public class LaboratoryBatteryOrganizer extends BaseLaboratoryBatteryOrganizer {
 	}
 
 	/**
-	 * Adds the observation media entry.
+	 * Adds a observation media entry.
 	 *
 	 * @param observationMedia
 	 *            the observation media
@@ -190,9 +190,9 @@ public class LaboratoryBatteryOrganizer extends BaseLaboratoryBatteryOrganizer {
 	}
 
 	/**
-	 * Gets the laboratory observations.
+	 * Gets the list of laboratory observations.
 	 *
-	 * @return the laboratory observations
+	 * @return the laboratory observation list
 	 */
 	@Override
 	public List<BaseObservation> getLaboratoryObservations() {
@@ -206,9 +206,9 @@ public class LaboratoryBatteryOrganizer extends BaseLaboratoryBatteryOrganizer {
 	}
 
 	/**
-	 * Gets the laboratory observations.
+	 * Gets the list of laboratory observations.
 	 *
-	 * @return the laboratory observations
+	 * @return the laboratory observation list
 	 */
 	public List<LaboratoryObservation> getLrepLaboratoryObservations() {
 		final List<LaboratoryObservation> loList = new ArrayList<LaboratoryObservation>();
@@ -220,9 +220,9 @@ public class LaboratoryBatteryOrganizer extends BaseLaboratoryBatteryOrganizer {
 	}
 
 	/**
-	 * Gets the observation media entries.
+	 * Gets the list of observation media entries.
 	 *
-	 * @return the observation media entries
+	 * @return the observation media entry list
 	 */
 	public List<ObservationMediaEntry> getObservationMediaEntries() {
 		final List<ObservationMediaEntry> ol = new ArrayList<ObservationMediaEntry>();

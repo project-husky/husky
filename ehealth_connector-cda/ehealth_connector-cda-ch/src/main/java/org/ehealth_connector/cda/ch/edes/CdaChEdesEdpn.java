@@ -50,6 +50,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
  * </div>
  *
  */
+@SuppressWarnings("deprecation")
 public class CdaChEdesEdpn
 		extends AbstractCdaChV1<org.openhealthtools.mdht.uml.cda.ch.CdaChEdesV1Edpn> {
 

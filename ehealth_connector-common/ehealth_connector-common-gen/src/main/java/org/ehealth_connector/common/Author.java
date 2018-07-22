@@ -149,8 +149,7 @@ public class Author {
 	}
 
 	/**
-	 * Erstellt einen neuen (menschlien) Autor (Dieser Konstruktor wird oft
-	 * gebraucht für Behandelnde).
+	 * Instantiates a new author.
 	 *
 	 * @param name
 	 *            Name
@@ -241,11 +240,10 @@ public class Author {
 	}
 
 	/**
-	 * Erstellt einen neuen (menschlien) Autor (Dieser Konstruktor wird oft
-	 * gebraucht für Behandelnde).
+	 * Instantiates a new author.
 	 *
-	 * @param name
-	 *            Name
+	 * @param person
+	 *            the person
 	 * @param gln
 	 *            Global Location Number (GLN)
 	 */

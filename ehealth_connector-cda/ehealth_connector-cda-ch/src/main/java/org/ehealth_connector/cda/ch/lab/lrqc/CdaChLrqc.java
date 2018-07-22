@@ -63,6 +63,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_InformationRecipient;
  * Gesundheitswesen Schweiz. Es beinhaltet die normative Spezifikation basierend
  * auf HL7 CDA. </div>
  */
+@SuppressWarnings("deprecation")
 public class CdaChLrqc
 		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrqcV1> {
 

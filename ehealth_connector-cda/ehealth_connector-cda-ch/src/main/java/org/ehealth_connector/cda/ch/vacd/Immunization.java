@@ -64,6 +64,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
  * enthält die verabreichten Impfungen und die ausdrücklich nicht erwünschten
  * Impfungen.</div>
  */
+@SuppressWarnings("deprecation")
 public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.Immunization> {
 
 	/**

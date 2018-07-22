@@ -23,12 +23,29 @@ import org.ehealth_connector.common.enums.StatusCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.openhealthtools.mdht.uml.cda.Organizer;
 
+/**
+ * The MDHT Facade for Organizers.
+ *
+ * @param <E>
+ *            the element type
+ */
 public class MdhtOrganizerFacade<E extends Organizer> extends MdhtFacade<E> {
 
+	/**
+	 * Instantiates a new instance.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
 	protected MdhtOrganizerFacade(E mdht) {
 		super(mdht);
 	}
 
+	/**
+	 * Gets the effective time.
+	 *
+	 * @return the effective time
+	 */
 	public Date getEffectiveTime() {
 		if (getMdht() != null && getMdht().getEffectiveTime() != null) {
 			return DateUtil.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
@@ -36,6 +53,11 @@ public class MdhtOrganizerFacade<E extends Organizer> extends MdhtFacade<E> {
 		return null;
 	}
 
+	/**
+	 * Gets the status code.
+	 *
+	 * @return the status code
+	 */
 	public StatusCode getStatusCode() {
 		if (getMdht() != null && getMdht().getStatusCode() != null) {
 			return StatusCode.getEnum(getMdht().getStatusCode().getCode());
@@ -43,11 +65,23 @@ public class MdhtOrganizerFacade<E extends Organizer> extends MdhtFacade<E> {
 		return null;
 	}
 
+	/**
+	 * Sets the effective time.
+	 *
+	 * @param date
+	 *            the new effective time
+	 */
 	public void setEffectiveTime(Date date) {
 		if (date != null)
 			getMdht().setEffectiveTime(DateUtil.convertDateToIvlTsyyyyMMddHHmmssZZZZ(date));
 	}
 
+	/**
+	 * Sets the status code.
+	 *
+	 * @param statusCode
+	 *            the new status code
+	 */
 	public void setStatusCode(StatusCode statusCode) {
 		getMdht().setStatusCode(statusCode.getCS());
 	}

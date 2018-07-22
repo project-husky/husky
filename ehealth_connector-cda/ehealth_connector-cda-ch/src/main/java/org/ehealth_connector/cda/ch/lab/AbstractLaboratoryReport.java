@@ -32,7 +32,6 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.IntendedRecipient;
 import org.ehealth_connector.common.enums.CodeSystems;
-import org.ehealth_connector.common.enums.CountryCode;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Act;
@@ -54,7 +53,6 @@ import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ADXP;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
@@ -68,6 +66,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_InformationRecipient;
  * @param <EClinicalDocument>
  *            the generic type
  */
+@Deprecated
 public abstract class AbstractLaboratoryReport<EClinicalDocument extends ClinicalDocument>
 		extends AbstractCdaChV1<EClinicalDocument> {
 

@@ -56,18 +56,20 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
 
 /**
- * @formatter:off
- * <div class="en">Implements a CDA document based on the CDA-CH V2 (2017) specification.</div>
- * <div class="de">Implementiert ein CDA-Dokument basierend auf der CDA-CH V2 (2017) Spezifikation.</div>
- * <div class="fr">TODO.</div>
- * @formatter:on
+ * The implementation of the Swiss CDA-CH V2 Standard.
  *
  * @param <EClinicalDocument>
- *            the generic type
+ *            the generic type <div class="en">Implements a CDA document based
+ *            on the CDA-CH V2 (2017) specification.</div>
+ *            <div class="de">Implementiert ein CDA-Dokument basierend auf der
+ *            CDA-CH V2 (2017) Spezifikation.</div>
  */
 public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		extends AbstractCda<EClinicalDocument> {
 
+	/**
+	 * The default Section Comparator.
+	 */
 	private class MySectionComparator implements Comparator<org.ehealth_connector.cda.Section> {
 		/**
 		 *
@@ -109,23 +111,42 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		}
 	}
 
+	/** The Section Comparator to be used. */
 	private Comparator<org.ehealth_connector.cda.Section> mComparator = new MySectionComparator();
 
+	/**
+	 * Instantiates a new CDA-CH V2 structured body.
+	 *
+	 * @param doc
+	 *            the doc
+	 */
 	public CdaChV2StructuredBody(EClinicalDocument doc) {
 		super(doc);
 	}
 
+	/**
+	 * Instantiates a new CDA-CH V2 structured body document.
+	 *
+	 * @param doc
+	 *            the document
+	 * @param languageCode
+	 *            the language code
+	 * @param stylesheet
+	 *            the stylesheet
+	 * @param css
+	 *            the css
+	 */
 	public CdaChV2StructuredBody(EClinicalDocument doc, LanguageCode languageCode,
 			String stylesheet, String css) {
 		super(doc, languageCode, stylesheet, css);
 	}
 
 	/**
-	 * <div class="en">Adds an authenricator to the CDA document</div>
-	 * <div class="de">Fügt dem CDA Dokument einen Unterzeichner hinzu</div>
+	 * <div class="en">Adds an authenticator to the CDA document</div>
+	 * <div class="de">Fügt dem CDA Dokument einen Unterzeichner hinzu</div>.
 	 *
-	 * @param authenticator
-	 *            Unterzeichner
+	 * @param author
+	 *            the author
 	 */
 	@Override
 	public void addAuthenticator(org.ehealth_connector.common.Author author) {
@@ -137,10 +158,11 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">Adds an author</div> <div class="de">Fügt einen Autoren
-	 * hinzu</div>
+	 * hinzu</div>.
 	 *
 	 * @param author
 	 *            the autor
+	 * @return the author
 	 */
 	@Override
 	public Author addAuthor(org.ehealth_connector.common.Author author) {
@@ -150,6 +172,14 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		return docAuthor;
 	}
 
+	/**
+	 * Adds the narrative text section.
+	 *
+	 * @param title
+	 *            the title
+	 * @param text
+	 *            the text
+	 */
 	public void addNarrativeTextSection(String title, String text) {
 		Section s = CDAFactory.eINSTANCE.createSection();
 		s.setTitle(DatatypesFactory.eINSTANCE.createST(title));
@@ -183,7 +213,9 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * <div class="en">Gets the Confidentially Code</div> <div class="de"></div>
+	 * <div class="en">Gets the ConfidentialityCode as defined by the Swiss
+	 * EPR</div> <div class="de">Gibt den ConfidentialityCode zurück wie er vom
+	 * EPD in der Schweiz definiert ist.</div>.
 	 *
 	 * @return code
 	 */
@@ -194,6 +226,11 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		return null;
 	}
 
+	/**
+	 * Gets a list of all laboratory specialty sections.
+	 *
+	 * @return the laboratory specialty sections list.
+	 */
 	public List<LaboratorySpecialtySection> getLaboratorySpecialtySections() {
 		ArrayList<LaboratorySpecialtySection> retVal = new ArrayList<LaboratorySpecialtySection>();
 		for (Section item : getMdht().getSections()) {
@@ -223,10 +260,15 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		return retVal;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.cda.AbstractCda#initCda()
+	 */
 	@Override
 	public void initCda() {
 
-		// Fix RealmCode
+		// Fix the RealmCode
 		final CS cs = DatatypesFactory.eINSTANCE.createCS();
 		cs.setCode(CountryCode.SWITZERLAND.getCodeAlpha3());
 		getDoc().getRealmCodes().clear();
@@ -252,7 +294,7 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * Sets the version number to 1 and makes sure the setId is the same as the
-	 * document id
+	 * document id.
 	 */
 	public void initFirstVersion() {
 		Identificator docId = getId();
@@ -265,7 +307,10 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * Sets the version number to 1 and makes sure the setId is the same as the
-	 * document id
+	 * document id.
+	 *
+	 * @param newDocId
+	 *            the new doc id
 	 */
 	public void initFirstVersion(Identificator newDocId) {
 		Identificator docId = newDocId;
@@ -278,7 +323,7 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * Increases the version number by one and makes sure the setId remains the
-	 * same as previously
+	 * same as previously.
 	 */
 	public void initNextVersion() {
 		Identificator newDocId = new Identificator(org.openhealthtools.ihe.utils.UUID.generate());
@@ -297,7 +342,10 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * Increases the version number by one and makes sure the setId remains the
-	 * same as previously
+	 * same as previously.
+	 *
+	 * @param newDocId
+	 *            the new doc id
 	 */
 	public void initNextVersion(Identificator newDocId) {
 		Identificator setId = getSetId();
@@ -313,17 +361,21 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		setVersion(setId, version + 1);
 	}
 
+	/**
+	 * Sets the section comparator to be used.
+	 *
+	 * @param comparator
+	 *            the new comparator
+	 */
 	public void setComparator(Comparator<org.ehealth_connector.cda.Section> comparator) {
 		mComparator = comparator;
 	}
 
 	/**
-	 *
-	 * Sets Swiss EPR Confidentially Code
+	 * Sets Swiss EPR Confidentiality Code.
 	 *
 	 * @param code
 	 *            If null, "N" for "normal" will be set.
-	 *
 	 */
 	public void setConfidentialityCode(
 			org.ehealth_connector.common.ch.enums.ConfidentialityCode code) {
@@ -340,11 +392,12 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	/**
 	 * <div class="en">Sets an organization as the custodian of the
 	 * document</div> <div class="de">Weist dem CDA Dokument die verwaltende
-	 * Organisation zu</div>
+	 * Organisation zu</div>.
 	 *
 	 * @param organization
 	 *            <div class="en">custodian organization</div>
 	 *            <div class="de">verwaltende Organisation</div>
+	 * @return the custodian
 	 */
 	@Override
 	public Custodian setCustodian(Organization organization) {
@@ -372,7 +425,7 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">Adds a data enterer</div> <div class="de">Fügt dem CDA
-	 * Dokument einen Erfasser hinzu</div>
+	 * Dokument einen Erfasser hinzu</div>.
 	 *
 	 * @param dataEnterer
 	 *            <div class="en">a person, which delivered content for this
@@ -393,7 +446,7 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * Sets the id.
+	 * Sets the CDA main document id.
 	 *
 	 * @param id
 	 *            the new id
@@ -408,7 +461,7 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	/**
 	 * <div class="en">Sets the legal authenticator of the document</div>
 	 * <div class="de">Weist dem CDA Dokument einen rechtsgültigen Unterzeichner
-	 * hinzu</div>
+	 * hinzu</div>.
 	 *
 	 * @param legalAuthenticator
 	 *            <div class="en">legal authenticator</div>
@@ -470,10 +523,11 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">Adds a patient</div> <div class="de">Weist dem CDA
-	 * Dokument einen Patienten zu</div>
+	 * Dokument einen Patienten zu</div>.
 	 *
 	 * @param patient
 	 *            Patient
+	 * @return the record target
 	 */
 	@Override
 	public RecordTarget setPatient(Patient patient) {
@@ -483,6 +537,13 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		return mdhtPatient;
 	}
 
+	/**
+	 * Sets the primary recipient.
+	 *
+	 * @param recipient
+	 *            the recipient
+	 * @return the information recipient
+	 */
 	@Override
 	public InformationRecipient setPrimaryRecipient(Organization recipient) {
 		super.setPrimaryRecipient(recipient);

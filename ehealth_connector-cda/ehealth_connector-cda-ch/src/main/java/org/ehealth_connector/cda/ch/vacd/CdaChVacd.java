@@ -26,9 +26,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.AbstractCodedResults;
+import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.BaseObservation;
 import org.ehealth_connector.cda.BaseProblemConcern;
-import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.ch.AbstractCdaChV1;
 import org.ehealth_connector.cda.ch.ActiveProblemConcern;
 import org.ehealth_connector.cda.ch.PastProblemConcern;
@@ -90,6 +90,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  * Spezifikation CDA-CH-CdaChVacdV1 entspricht.</div> <div class="fr">Class
  * CdaChVacd.</div> <div class="it">Class CdaChVacd.</div>
  */
+@SuppressWarnings("deprecation")
 public class CdaChVacd extends AbstractCdaChV1<CdaChVacdV1> {
 
 	/** The Constant eVACDOCTitle. */

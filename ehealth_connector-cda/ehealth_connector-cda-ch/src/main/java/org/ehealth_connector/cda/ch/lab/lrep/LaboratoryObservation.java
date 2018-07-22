@@ -70,6 +70,12 @@ public class LaboratoryObservation
 		}
 	}
 
+	/**
+	 * Adds the previous observation.
+	 *
+	 * @param prevObs
+	 *            the prev obs
+	 */
 	public void addPreviousObservation(PreviousObservation prevObs) {
 		super.addPreviousObservation(new LaboratoryObservation(prevObs.getMdht()));
 	}

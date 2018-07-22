@@ -27,7 +27,7 @@ public class IdentificatorComparator implements Comparator<Identificator> {
 
 	/**
 	 *
-	 * Compares two Organizers on their effective date timestamp.
+	 * Compares two Identificator on their root and if exists the extension.
 	 *
 	 * {@inheritDoc}
 	 *

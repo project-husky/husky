@@ -38,6 +38,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
  * verschiedene Messwerte zu Vitalzeichen, welche zum gleichen Zeitpunkt durch
  * denselben Behandelnden gemessen wurden.</div>
  */
+@SuppressWarnings("deprecation")
 public class VitalSignsOrganizer extends BaseVitalSignsOrganizer {
 
 	/**
@@ -117,7 +118,7 @@ public class VitalSignsOrganizer extends BaseVitalSignsOrganizer {
 	@Override
 	public void addId(Identificator id) {
 		if (id == null) {
-			id = new Identificator(AbstractCdaChV1.OID_MAIN, UUID.generate());
+			id = new Identificator(AbstractCdaChV1.OID_V1, UUID.generate());
 		}
 		getMdht().getIds().add(id.getIi());
 	}

@@ -31,8 +31,8 @@ import java.util.Date;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
-import org.ehealth_connector.cda.ch.lab.CdaChV12LaboratoryReportTest;
 import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
+import org.ehealth_connector.cda.ch.lab.CdaChV12LaboratoryReportTest;
 import org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListSnomed;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.cda.ihe.lab.SpecimenReceivedEntry;
@@ -54,6 +54,7 @@ import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
+@SuppressWarnings("deprecation")
 public class CdaChLrphTest extends CdaChV12LaboratoryReportTest {
 
 	/** The SLF4J logger instance. */

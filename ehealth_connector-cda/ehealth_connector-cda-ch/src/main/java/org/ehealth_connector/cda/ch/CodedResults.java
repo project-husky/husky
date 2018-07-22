@@ -42,20 +42,28 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  */
 public class CodedResults extends AbstractCodedResults {
 
+	/**
+	 * Instantiates a new instance
+	 */
 	public CodedResults() {
 		super(ChFactory.eINSTANCE.createCodedResultsSection().init());
 	}
 
+	/**
+	 * Instantiates a new instance.
+	 *
+	 * @param crsection
+	 *            the section
+	 */
 	public CodedResults(CodedResultsSection crsection) {
 		super(crsection);
 	}
 
 	/**
-	 * Instantiates a new Simple Observation
+	 * Instantiates a new instance.
 	 *
 	 * @param so
 	 *            the simple observation
-	 *
 	 */
 	public CodedResults(SimpleObservation so) {
 		super(so);

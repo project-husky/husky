@@ -34,12 +34,34 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
+/**
+ * The Mdht Facade for Observations.
+ *
+ * @param <E>
+ *            the element type
+ */
 public class MdhtObservationFacade<E extends Observation> extends MdhtFacade<E> {
 
+	/**
+	 * Instantiates a new instance.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
 	protected MdhtObservationFacade(E mdht) {
 		super(mdht, null, null);
 	}
 
+	/**
+	 * Instantiates a new instance.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param templateIdRoot
+	 *            the template id root
+	 * @param templateIdExtension
+	 *            the template id extension
+	 */
 	protected MdhtObservationFacade(E mdht, String templateIdRoot, String templateIdExtension) {
 		super(mdht, templateIdRoot, templateIdExtension);
 	}
@@ -54,6 +76,12 @@ public class MdhtObservationFacade<E extends Observation> extends MdhtFacade<E> 
 		getMdht().getInterpretationCodes().add(code.getCE());
 	}
 
+	/**
+	 * Adds the previous observation.
+	 *
+	 * @param prevObs
+	 *            the prev obs
+	 */
 	public void addPreviousObservation(LaboratoryObservation prevObs) {
 		EntryRelationship er = CDAFactory.eINSTANCE.createEntryRelationship();
 		er.setTypeCode(x_ActRelationshipEntryRelationship.REFR);
@@ -61,6 +89,12 @@ public class MdhtObservationFacade<E extends Observation> extends MdhtFacade<E> 
 		getMdht().getEntryRelationships().add(er);
 	}
 
+	/**
+	 * Adds the value.
+	 *
+	 * @param value
+	 *            the value
+	 */
 	protected void addValue(Value value) {
 		if (getMdht() != null && getMdht().getValues() != null) {
 			getMdht().getValues().add(value.getValue());
@@ -68,7 +102,7 @@ public class MdhtObservationFacade<E extends Observation> extends MdhtFacade<E> 
 	}
 
 	/**
-	 * Gets the Effective Time
+	 * Gets the Effective Time.
 	 *
 	 * @return the effective time as date
 	 */
@@ -103,6 +137,11 @@ public class MdhtObservationFacade<E extends Observation> extends MdhtFacade<E> 
 		return icl;
 	}
 
+	/**
+	 * Gets the previous observations.
+	 *
+	 * @return the previous observations
+	 */
 	public List<LaboratoryObservation> getPreviousObservations() {
 		ArrayList<LaboratoryObservation> retVal = new ArrayList<LaboratoryObservation>();
 		for (EntryRelationship er : getMdht().getEntryRelationships()) {

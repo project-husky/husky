@@ -83,6 +83,7 @@ import ca.uhn.fhir.parser.IParser;
  * @since Dec 30, 2017 10:19:21 PM
  *
  */
+@SuppressWarnings("deprecation")
 public class LrtpConverter extends AbstractCdaChV12FhirConverter {
 
 	/**

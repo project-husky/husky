@@ -38,6 +38,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
 /**
  * The Class CdaChMtpsMtp. See also CDA-CH-MTPS 7.4.2.3
  */
+@SuppressWarnings("deprecation")
 public class CdaChMtpsMtp
 		extends AbstractCdaChV1<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsV1Mtp> {
 

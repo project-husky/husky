@@ -41,7 +41,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
- * The Class ObservationMediaEntry.
+ * This represents a HL7 CDA ObservationMediaEntry.
  */
 public class ObservationMediaEntry
 		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ObservationMedia> {

@@ -37,6 +37,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
+@SuppressWarnings("deprecation")
 public class VitalSignObservation extends BaseVitalSignObservation {
 
 	/**

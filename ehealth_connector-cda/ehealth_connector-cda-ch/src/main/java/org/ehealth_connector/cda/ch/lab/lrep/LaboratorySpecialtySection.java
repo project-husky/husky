@@ -158,9 +158,9 @@ public class LaboratorySpecialtySection extends BaseLaboratorySpecialtySection {
 	}
 
 	/**
-	 * Gets the laboratory battery organizers.
+	 * Gets a list with all laboratory battery organizers.
 	 *
-	 * @return the laboratory battery organizers
+	 * @return the laboratory battery organizer list
 	 */
 	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteryOrganizers() {
 		List<LaboratoryBatteryOrganizer> retVal = new ArrayList<LaboratoryBatteryOrganizer>();
@@ -174,9 +174,9 @@ public class LaboratorySpecialtySection extends BaseLaboratorySpecialtySection {
 	}
 
 	/**
-	 * Gets the laboratory report data processing entries.
+	 * Gets a list with all laboratory report data processing entries.
 	 *
-	 * @return the laboratory report data processing entries
+	 * @return the laboratory report data processing entry list
 	 */
 	public List<org.ehealth_connector.cda.ch.lab.lrep.LaboratoryReportDataProcessingEntry> getLaboratoryReportDataProcessingEntries() {
 		List<org.ehealth_connector.cda.ch.lab.lrep.LaboratoryReportDataProcessingEntry> retVal = new ArrayList<org.ehealth_connector.cda.ch.lab.lrep.LaboratoryReportDataProcessingEntry>();
@@ -207,6 +207,10 @@ public class LaboratorySpecialtySection extends BaseLaboratorySpecialtySection {
 	}
 
 	/**
+	 * Sets the laboratory report data processing entry.
+	 *
+	 * @param entry
+	 *            the new laboratory report data processing entry
 	 * @see org.ehealth_connector.cda.ihe.lab.BaseLaboratorySpecialtySection#setLaboratoryReportDataProcessingEntry(org.ehealth_connector.cda.ihe.lab.LaboratoryReportDataProcessingEntry)
 	 */
 	public void setLaboratoryReportDataProcessingEntry(

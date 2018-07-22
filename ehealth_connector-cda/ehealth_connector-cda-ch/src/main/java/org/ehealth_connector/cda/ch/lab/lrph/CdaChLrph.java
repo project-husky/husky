@@ -58,6 +58,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  * Spezifikation für die elektronische Meldung von Erregernachweisen an die
  * Sektion Meldesysteme des BAG, basierend auf HL7 CDA-CH um.</div>
  */
+@SuppressWarnings("deprecation")
 public class CdaChLrph
 		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrphV1> {
 
@@ -469,10 +470,6 @@ public class CdaChLrph
 	 * signs section</div> <div class="de">Generiert den menschenlesbaren Text
 	 * des Kapitels zu Vitalzeichen</div>.
 	 *
-	 * @param organizerComparator
-	 *            the organizer comparator (pass null for default sorting)
-	 * @param observationComparator
-	 *            the observation comparator (pass null for default sorting)
 	 */
 	public void generateNarrativeTextLaboratoryObservations() {
 

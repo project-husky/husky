@@ -40,6 +40,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
 public abstract class AbstractLaboratoryObservation
 		extends org.ehealth_connector.cda.ihe.lab.LaboratoryObservation {
 
+	/** The language code for narrative text generation. */
 	protected LanguageCode myLang = LanguageCode.ENGLISH;
 
 	/**
@@ -50,6 +51,12 @@ public abstract class AbstractLaboratoryObservation
 		getMdht().setStatusCode(StatusCode.COMPLETED.getCS());
 	}
 
+	/**
+	 * Instantiates a new abstract laboratory observation.
+	 *
+	 * @param observation
+	 *            the observation
+	 */
 	public AbstractLaboratoryObservation(Observation observation) {
 		super((LaboratoryObservation) observation);
 	}
@@ -71,6 +78,8 @@ public abstract class AbstractLaboratoryObservation
 	 *
 	 * @param mdht
 	 *            the mdht object
+	 * @param lang
+	 *            the lang
 	 */
 	public AbstractLaboratoryObservation(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation mdht,
@@ -96,9 +105,9 @@ public abstract class AbstractLaboratoryObservation
 	}
 
 	/**
-	 * Gets the comment entries.
+	 * Gets the list of all comment entries.
 	 *
-	 * @return the comment entry
+	 * @return the comment entry list.
 	 */
 	public List<SectionAnnotationCommentEntry> getCommentEntryList() {
 		if (this.getMdht().getComments() != null) {
@@ -112,7 +121,7 @@ public abstract class AbstractLaboratoryObservation
 	}
 
 	/**
-	 * Gets the narrative text of he observation in the desired language.
+	 * Gets the narrative text of the observation in the desired language.
 	 *
 	 * @return the observation name
 	 */

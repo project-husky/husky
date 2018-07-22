@@ -32,8 +32,8 @@ import javax.xml.xpath.XPathExpressionException;
 import org.ehealth_connector.cda.ObservationMediaEntry;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.ParticipantClaimer;
-import org.ehealth_connector.cda.ch.lab.CdaChV12LaboratoryReportTest;
 import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
+import org.ehealth_connector.cda.ch.lab.CdaChV12LaboratoryReportTest;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.LabObsList;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.QualabQcc;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.SpecialtySections;
@@ -56,6 +56,7 @@ import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
+@SuppressWarnings("deprecation")
 public class CdaChLrqcTest extends CdaChV12LaboratoryReportTest {
 
 	/** The SLF4J logger instance. */

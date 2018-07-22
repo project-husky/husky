@@ -134,7 +134,7 @@ public class LaboratoryObservation extends
 	}
 
 	/**
-	 * Adds a author.
+	 * Adds an author.
 	 *
 	 * @param author
 	 *            the author
@@ -185,7 +185,7 @@ public class LaboratoryObservation extends
 	}
 
 	/**
-	 * Adds the interpretation code.
+	 * Adds a interpretation code.
 	 *
 	 * @param code
 	 *            the new interpretation code
@@ -215,6 +215,13 @@ public class LaboratoryObservation extends
 		getMdht().getPerformers().add(mPerformer);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * org.ehealth_connector.cda.MdhtObservationFacade#addPreviousObservation(
+	 * org.ehealth_connector.cda.ihe.lab.LaboratoryObservation)
+	 */
 	@Override
 	public void addPreviousObservation(LaboratoryObservation laboratoryObservation) {
 		CdaUtil.removeTemplateId(laboratoryObservation.getMdht(),
@@ -223,7 +230,7 @@ public class LaboratoryObservation extends
 	}
 
 	/**
-	 * Adds a translation code
+	 * Adds a translation code.
 	 *
 	 * @param code
 	 *            the translation code
@@ -243,7 +250,7 @@ public class LaboratoryObservation extends
 	}
 
 	/**
-	 * Adds the value.
+	 * Adds a value.
 	 *
 	 * @param value
 	 *            the new value
@@ -416,6 +423,13 @@ public class LaboratoryObservation extends
 		return list;
 	}
 
+	/**
+	 * Gets the result.
+	 *
+	 * @param resBundle
+	 *            the res bundle
+	 * @return the result
+	 */
 	public String getResult(ResourceBundle resBundle) {
 		String retVal = "";
 		for (Value value : getValues()) {
@@ -466,6 +480,13 @@ public class LaboratoryObservation extends
 		return retVal;
 	}
 
+	/**
+	 * Gets the translation.
+	 *
+	 * @param codeSystemOid
+	 *            the code system oid
+	 * @return the translation
+	 */
 	public Code getTranslation(String codeSystemOid) {
 		if (codeSystemOid != null) {
 			for (CD item : getMdht().getCode().getTranslations()) {
@@ -476,6 +497,11 @@ public class LaboratoryObservation extends
 		return null;
 	}
 
+	/**
+	 * Gets the translations.
+	 *
+	 * @return the translations
+	 */
 	public List<Code> getTranslations() {
 		List<Code> retVal = new ArrayList<Code>();
 		for (CD item : getMdht().getCode().getTranslations()) {
@@ -485,7 +511,7 @@ public class LaboratoryObservation extends
 	}
 
 	/**
-	 * Adds the code.
+	 * Adds a code.
 	 *
 	 * @param code
 	 *            the new code
@@ -514,7 +540,7 @@ public class LaboratoryObservation extends
 	}
 
 	/**
-	 * Adds the interpretation code.
+	 * Adds a interpretation code.
 	 *
 	 * @param code
 	 *            the new interpretation code
@@ -582,6 +608,14 @@ public class LaboratoryObservation extends
 		setText(text, null);
 	}
 
+	/**
+	 * Sets the text.
+	 *
+	 * @param text
+	 *            the text
+	 * @param textReference
+	 *            the text reference
+	 */
 	public void setText(String text, String textReference) {
 		ED ed = null;
 		if (textReference != null) {

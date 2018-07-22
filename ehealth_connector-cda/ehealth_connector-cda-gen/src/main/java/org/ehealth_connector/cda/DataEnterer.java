@@ -101,7 +101,7 @@ public class DataEnterer {
 	 * Erstellt ein eHealthconnector-DataEnterer Objekt mittels eines
 	 * MDHT-DataEnterer Objekts.
 	 *
-	 * @param DataEntererMdht
+	 * @param mdht
 	 *            the MDHT DataEnterer Object
 	 */
 	public DataEnterer(org.openhealthtools.mdht.uml.cda.DataEnterer mdht) {

@@ -35,6 +35,7 @@ import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 /**
  * The Class CdaChMtpsPre. See also CDA-CH-MTPS 7.4.2.4
  */
+@SuppressWarnings("deprecation")
 public class CdaChMtpsPre
 		extends AbstractCdaChV1<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsV1Pre> {
 

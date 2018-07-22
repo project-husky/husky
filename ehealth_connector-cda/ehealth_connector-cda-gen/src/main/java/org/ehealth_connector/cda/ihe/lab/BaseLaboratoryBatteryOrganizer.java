@@ -28,11 +28,12 @@ import org.openhealthtools.mdht.uml.cda.Observation;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 
 /**
- * The Class AbstractLaboratoryBatteryOrganizer.
+ * A base LaboratoryBatteryOrganizer.
  */
 public class BaseLaboratoryBatteryOrganizer extends
 		MdhtOrganizerFacade<org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer> {
 
+	/** The human information. */
 	String humanInformation;
 
 	/**

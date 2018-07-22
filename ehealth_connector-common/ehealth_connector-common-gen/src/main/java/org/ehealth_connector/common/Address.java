@@ -379,10 +379,10 @@ public class Address {
 	}
 
 	/**
-	 * Setzt die Hausnummer.
+	 * Sets the house number.<div class="de">Setzt die Hausnummer.</div>
 	 *
-	 * @param aHouseNumber
-	 *            Hausnummer
+	 * @param houseNumber
+	 *            the new house number
 	 */
 	public void setHouseNumber(String houseNumber) {
 		if (houseNumber != null)

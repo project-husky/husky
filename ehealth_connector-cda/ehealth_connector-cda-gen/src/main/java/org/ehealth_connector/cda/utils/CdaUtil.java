@@ -55,7 +55,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
 public abstract class CdaUtil {
 
 	/**
-	 * Adds the copy of a given section to a given structured body
+	 * Adds a copy of a given section to a given structured body.
 	 *
 	 * @param sb
 	 *            the StructuredBody
@@ -71,7 +71,7 @@ public abstract class CdaUtil {
 	}
 
 	/**
-	 * Adds the template id.
+	 * Adds a template id.
 	 *
 	 * @param mdht
 	 *            the mdht
@@ -84,7 +84,7 @@ public abstract class CdaUtil {
 	}
 
 	/**
-	 * Adds the template id.
+	 * Adds a template id.
 	 *
 	 * @param mdht
 	 *            the mdht
@@ -97,7 +97,7 @@ public abstract class CdaUtil {
 	}
 
 	/**
-	 * Adds the template id.
+	 * Adds a template id.
 	 *
 	 * @param mdht
 	 *            the mdht
@@ -110,7 +110,7 @@ public abstract class CdaUtil {
 	}
 
 	/**
-	 * Adds the template id.
+	 * Adds a template id.
 	 *
 	 * @param doc
 	 *            the doc
@@ -123,7 +123,7 @@ public abstract class CdaUtil {
 	}
 
 	/**
-	 * Adds the template id.
+	 * Adds a template id.
 	 *
 	 * @param mdht
 	 *            the mdht
@@ -136,7 +136,7 @@ public abstract class CdaUtil {
 	}
 
 	/**
-	 * Adds the template id.
+	 * Adds a template id.
 	 *
 	 * @param mdht
 	 *            the mdht
@@ -149,7 +149,7 @@ public abstract class CdaUtil {
 	}
 
 	/**
-	 * Adds the template id.
+	 * Adds a template id.
 	 *
 	 * @param mdht
 	 *            the mdht
@@ -162,7 +162,7 @@ public abstract class CdaUtil {
 	}
 
 	/**
-	 * Adds the template id.
+	 * Adds a template id.
 	 *
 	 * @param mdht
 	 *            the mdht
@@ -175,7 +175,7 @@ public abstract class CdaUtil {
 	}
 
 	/**
-	 * Adds the template id.
+	 * Adds a template id.
 	 *
 	 * @param mdht
 	 *            the mdht
@@ -188,7 +188,7 @@ public abstract class CdaUtil {
 	}
 
 	/**
-	 * Adds the template id.
+	 * Adds a template id.
 	 *
 	 * @param mdht
 	 *            the mdht
@@ -201,7 +201,7 @@ public abstract class CdaUtil {
 	}
 
 	/**
-	 * Adds the template id.
+	 * Adds a template id.
 	 *
 	 * @param mdht
 	 *            the mdht
@@ -214,7 +214,7 @@ public abstract class CdaUtil {
 	}
 
 	/**
-	 * Adds the template id.
+	 * Adds a template id.
 	 *
 	 * @param mdht
 	 *            the mdht
@@ -227,7 +227,7 @@ public abstract class CdaUtil {
 	}
 
 	/**
-	 * Adds the template id.
+	 * Adds a template id.
 	 *
 	 * @param mdht
 	 *            the mdht
@@ -240,7 +240,7 @@ public abstract class CdaUtil {
 	}
 
 	/**
-	 * Adds the template id.
+	 * Adds a template id.
 	 *
 	 * @param mdht
 	 *            the mdht
@@ -253,7 +253,7 @@ public abstract class CdaUtil {
 	}
 
 	/**
-	 * Adds the template id.
+	 * Adds a template id.
 	 *
 	 * @param mdht
 	 *            the mdht
@@ -265,6 +265,14 @@ public abstract class CdaUtil {
 		sortTemplateIds(mdht);
 	}
 
+	/**
+	 * Adds a template id once.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
 	public static void addTemplateIdOnce(Act mdht, Identificator id) {
 		boolean alreadyExists = false;
 		for (II existingId : mdht.getTemplateIds()) {
@@ -276,6 +284,14 @@ public abstract class CdaUtil {
 		sortTemplateIds(mdht);
 	}
 
+	/**
+	 * Adds a template id once.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
 	public static void addTemplateIdOnce(Authenticator mdht, Identificator id) {
 		boolean alreadyExists = false;
 		for (II existingId : mdht.getTemplateIds()) {
@@ -287,6 +303,14 @@ public abstract class CdaUtil {
 		sortTemplateIds(mdht);
 	}
 
+	/**
+	 * Adds a template id once.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
 	public static void addTemplateIdOnce(Author mdht, Identificator id) {
 		boolean alreadyExists = false;
 		for (II existingId : mdht.getTemplateIds()) {
@@ -299,8 +323,8 @@ public abstract class CdaUtil {
 	}
 
 	/**
-	 * Adds the given template id to the given MDHT object, if it does not
-	 * exist, yet.
+	 * Adds a given template id to the given MDHT object, if it does not exist,
+	 * yet.
 	 *
 	 * @param doc
 	 *            the doc
@@ -318,6 +342,14 @@ public abstract class CdaUtil {
 		sortTemplateIds(doc);
 	}
 
+	/**
+	 * Adds a template id once.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
 	public static void addTemplateIdOnce(Custodian mdht, Identificator id) {
 		boolean alreadyExists = false;
 		for (II existingId : mdht.getTemplateIds()) {
@@ -329,6 +361,14 @@ public abstract class CdaUtil {
 		sortTemplateIds(mdht);
 	}
 
+	/**
+	 * Adds a template id once.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
 	public static void addTemplateIdOnce(DataEnterer mdht, Identificator id) {
 		boolean alreadyExists = false;
 		for (II existingId : mdht.getTemplateIds()) {
@@ -340,6 +380,14 @@ public abstract class CdaUtil {
 		sortTemplateIds(mdht);
 	}
 
+	/**
+	 * Adds a template id once.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
 	public static void addTemplateIdOnce(InformationRecipient mdht, Identificator id) {
 		boolean alreadyExists = false;
 		for (II existingId : mdht.getTemplateIds()) {
@@ -351,6 +399,14 @@ public abstract class CdaUtil {
 		sortTemplateIds(mdht);
 	}
 
+	/**
+	 * Adds a template id once.
+	 *
+	 * @param doc
+	 *            the doc
+	 * @param id
+	 *            the id
+	 */
 	public static void addTemplateIdOnce(InfrastructureRoot doc, Identificator id) {
 		boolean alreadyExists = false;
 		for (II existingId : doc.getTemplateIds()) {
@@ -362,6 +418,14 @@ public abstract class CdaUtil {
 		sortTemplateIds(doc);
 	}
 
+	/**
+	 * Adds a template id once.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
 	public static void addTemplateIdOnce(LaboratoryObservation mdht, Identificator id) {
 		boolean alreadyExists = false;
 		for (II existingId : mdht.getTemplateIds()) {
@@ -373,6 +437,14 @@ public abstract class CdaUtil {
 		sortTemplateIds(mdht);
 	}
 
+	/**
+	 * Adds a template id once.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
 	public static void addTemplateIdOnce(LaboratoryReportDataProcessingEntry mdht,
 			Identificator id) {
 		boolean alreadyExists = false;
@@ -385,6 +457,14 @@ public abstract class CdaUtil {
 		sortTemplateIds(mdht);
 	}
 
+	/**
+	 * Adds a template id once.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
 	public static void addTemplateIdOnce(LaboratorySpecialtySection mdht, Identificator id) {
 		boolean alreadyExists = false;
 		for (II existingId : mdht.getTemplateIds()) {
@@ -396,6 +476,14 @@ public abstract class CdaUtil {
 		sortTemplateIds(mdht);
 	}
 
+	/**
+	 * Adds a template id once.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
 	public static void addTemplateIdOnce(LegalAuthenticator mdht, Identificator id) {
 		boolean alreadyExists = false;
 		for (II existingId : mdht.getTemplateIds()) {
@@ -407,6 +495,14 @@ public abstract class CdaUtil {
 		sortTemplateIds(mdht);
 	}
 
+	/**
+	 * Adds a template id once.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
 	public static void addTemplateIdOnce(Organizer mdht, Identificator id) {
 		boolean alreadyExists = false;
 		for (II existingId : mdht.getTemplateIds()) {
@@ -418,6 +514,14 @@ public abstract class CdaUtil {
 		sortTemplateIds(mdht);
 	}
 
+	/**
+	 * Adds a template id once.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
 	public static void addTemplateIdOnce(RecordTarget mdht, Identificator id) {
 		boolean alreadyExists = false;
 		for (II existingId : mdht.getTemplateIds()) {
@@ -429,6 +533,14 @@ public abstract class CdaUtil {
 		sortTemplateIds(mdht);
 	}
 
+	/**
+	 * Adds a template id once.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
 	public static void addTemplateIdOnce(SpecimenCollection mdht, Identificator id) {
 		boolean alreadyExists = false;
 		for (II existingId : mdht.getTemplateIds()) {
@@ -442,7 +554,7 @@ public abstract class CdaUtil {
 
 	/**
 	 * <div class="en">Creates a unique Identificator (root=ehc OID;
-	 * extension=UUID)</div>
+	 * extension=UUID)</div>.
 	 *
 	 * @return the Identificator
 	 */
@@ -454,7 +566,7 @@ public abstract class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Creates a unique II (root=ehc OID; extension=UUID)</div>
+	 * <div class="en">Creates a unique II (root=ehc OID; extension=UUID)</div>.
 	 *
 	 * @return the II
 	 */
@@ -467,7 +579,7 @@ public abstract class CdaUtil {
 
 	/**
 	 * <div class="en">Creates a unique II (root=from the id or the ehc OID;
-	 * extension=from the id or a UUID)</div>
+	 * extension=from the id or a UUID)</div>.
 	 *
 	 * @param id
 	 *            the base id
@@ -485,7 +597,7 @@ public abstract class CdaUtil {
 
 	/**
 	 * <div class="en">Creates a unique II (root=the ehc OID; extension=from the
-	 * id or a UUID)</div>
+	 * id or a UUID)</div>.
 	 *
 	 * @param id
 	 *            the base id
@@ -502,14 +614,32 @@ public abstract class CdaUtil {
 		return ii;
 	}
 
+	/**
+	 * Gets the mdht cda factory instance.
+	 *
+	 * @return the mdht cda factory instance
+	 */
 	public static CDAFactory getMdhtCdaFactoryInstance() {
 		return CDAFactory.eINSTANCE;
 	}
 
+	/**
+	 * Gets the mdht datatypes factory instance.
+	 *
+	 * @return the mdht datatypes factory instance
+	 */
 	public static DatatypesFactory getMdhtDatatypesFactoryInstance() {
 		return DatatypesFactory.eINSTANCE;
 	}
 
+	/**
+	 * Removes the template id.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param id
+	 *            the id
+	 */
 	public static void removeTemplateId(LaboratoryObservation mdht, Identificator id) {
 		for (II existingId : mdht.getTemplateIds()) {
 			if (existingId.equals(id.getIi())) {
@@ -520,6 +650,12 @@ public abstract class CdaUtil {
 		sortTemplateIds(mdht);
 	}
 
+	/**
+	 * Sets the entry relationship comment inversion id and type code.
+	 *
+	 * @param entryRelationships
+	 *            the new entry relationship comment inversion id and type code
+	 */
 	public static void setEntryRelationshipCommentInversionIdAndTypeCode(
 			EList<EntryRelationship> entryRelationships) {
 		final int erNb = entryRelationships.size() - 1;
@@ -527,6 +663,14 @@ public abstract class CdaUtil {
 		entryRelationships.get(erNb).setTypeCode(x_ActRelationshipEntryRelationship.SUBJ);
 	}
 
+	/**
+	 * Sets the entry relationship type code.
+	 *
+	 * @param erList
+	 *            the er list
+	 * @param typeCode
+	 *            the type code
+	 */
 	public static void setEntryRelationshipTypeCode(EList<EntryRelationship> erList,
 			x_ActRelationshipEntryRelationship typeCode) {
 		final int nb = erList.size() - 1;

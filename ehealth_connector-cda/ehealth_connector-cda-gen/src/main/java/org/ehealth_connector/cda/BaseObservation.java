@@ -49,21 +49,47 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.RTO;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationPhysicalPerformer;
 
+/**
+ * The base Observation.
+ */
 public class BaseObservation
 		extends MdhtObservationFacade<org.openhealthtools.mdht.uml.cda.Observation>
 		implements Comparator<BaseObservation> {
 
-	protected LanguageCode myLang = LanguageCode.ENGLISH;
-	protected LangTexts myValueLangTexts = new LangTexts();
-	protected LangTexts myObservationLangTexts = new LangTexts();
-	protected LangTexts myTargetSiteLangTexts = new LangTexts();
+	/** The local observation. */
 	protected org.openhealthtools.mdht.uml.cda.Observation mObservation;
 
+	/** The local language code. */
+	protected LanguageCode myLang = LanguageCode.ENGLISH;
+
+	/** The local observation language texts. */
+	protected LangTexts myObservationLangTexts = new LangTexts();
+
+	/** The local target site language texts. */
+	protected LangTexts myTargetSiteLangTexts = new LangTexts();
+
+	/** The local value language texts. */
+	protected LangTexts myValueLangTexts = new LangTexts();
+
+	/**
+	 * Instantiates a new base observation.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
 	public BaseObservation(Observation mdht) {
 		super(mdht);
 		mObservation = mdht;
 	}
 
+	/**
+	 * Instantiates a new base observation.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param lang
+	 *            the lang
+	 */
 	public BaseObservation(Observation mdht, LanguageCode lang) {
 		super(mdht);
 		mObservation = mdht;
@@ -71,7 +97,7 @@ public class BaseObservation
 	}
 
 	/**
-	 * Adds a author.
+	 * Adds an author.
 	 *
 	 * @param author
 	 *            the author
@@ -92,7 +118,7 @@ public class BaseObservation
 	}
 
 	/**
-	 * Adds the interpretation code.
+	 * Adds a interpretation code.
 	 *
 	 * @param code
 	 *            the new interpretation code
@@ -148,9 +174,9 @@ public class BaseObservation
 	}
 
 	/**
-	 * Gets the auhtor list.
+	 * Gets the author list.
 	 *
-	 * @return the auhtor list
+	 * @return the author list
 	 */
 	public List<Author> getAuthors() {
 		final List<Author> list = new ArrayList<Author>();
@@ -162,9 +188,9 @@ public class BaseObservation
 	}
 
 	/**
-	 * Gets the code.
+	 * Gets the observation code.
 	 *
-	 * @return the code
+	 * @return the observation code
 	 */
 	public Code getCode() {
 		final Code code = new Code(mObservation.getCode());
@@ -194,17 +220,22 @@ public class BaseObservation
 		return retVal;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.cda.MdhtObservationFacade#getEffectiveTime()
+	 */
 	@Override
 	public Date getEffectiveTime() {
 		return DateUtil.parseIVL_TSVDateTimeValue(mObservation.getEffectiveTime());
 	}
 
 	/**
-	 * <div class="en">Gets the (first) interpretation code</div>
-	 *
+	 * <div class="en">Gets the (first) interpretation code</div>.
 	 *
 	 * @return the interpretation code
 	 */
+	@Override
 	public Code getInterpretationCode() {
 		if (mObservation != null) {
 			if (mObservation.getInterpretationCodes().size() > 0) {
@@ -214,6 +245,11 @@ public class BaseObservation
 		return null;
 	}
 
+	/**
+	 * Gets the mdht observation.
+	 *
+	 * @return the mdht observation
+	 */
 	public Object getMdhtObservation() {
 		return mObservation;
 	}
@@ -236,10 +272,20 @@ public class BaseObservation
 		return obsName;
 	}
 
+	/**
+	 * Gets the observation.
+	 *
+	 * @return the observation
+	 */
 	public org.openhealthtools.mdht.uml.cda.Observation getObservation() {
 		return mObservation;
 	}
 
+	/**
+	 * Gets the observation language texts.
+	 *
+	 * @return the observation language texts
+	 */
 	public LangTexts getObservationLangTexts() {
 		return myObservationLangTexts;
 	}
@@ -285,6 +331,11 @@ public class BaseObservation
 		return null;
 	}
 
+	/**
+	 * Gets the result.
+	 *
+	 * @return the result
+	 */
 	public String getResult() {
 		String retVal = "";
 		for (Value value : getValues()) {
@@ -323,6 +374,11 @@ public class BaseObservation
 		return retVal;
 	}
 
+	/**
+	 * Gets the target site.
+	 *
+	 * @return the target site
+	 */
 	public ActSite getTargetSite() {
 		if (getMdht().getTargetSiteCodes() != null)
 			if (getMdht().getTargetSiteCodes().size() > 0)
@@ -331,6 +387,11 @@ public class BaseObservation
 		return null;
 	}
 
+	/**
+	 * Gets the target site language texts.
+	 *
+	 * @return the target site language texts
+	 */
 	public LangTexts getTargetSiteLangTexts() {
 		return myTargetSiteLangTexts;
 	}
@@ -362,6 +423,11 @@ public class BaseObservation
 		return null;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.cda.MdhtObservationFacade#getValue()
+	 */
 	@Override
 	public Value getValue() {
 		if (!mObservation.getValues().isEmpty()) {
@@ -377,10 +443,20 @@ public class BaseObservation
 
 	}
 
+	/**
+	 * Gets the language texts of the value.
+	 *
+	 * @return the language texts of the value.
+	 */
 	public LangTexts getValueLangTexts() {
 		return myValueLangTexts;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.cda.MdhtObservationFacade#getValues()
+	 */
 	@Override
 	public List<Value> getValues() {
 
@@ -393,6 +469,12 @@ public class BaseObservation
 		return retVal;
 	}
 
+	/**
+	 * Sets the date time of result.
+	 *
+	 * @param dateTimeOfResult
+	 *            the new date time of result
+	 */
 	@Override
 	public void setEffectiveTime(Date dateTimeOfResult) {
 		try {
@@ -414,14 +496,32 @@ public class BaseObservation
 		mObservation.getInterpretationCodes().add(code.getCE());
 	}
 
+	/**
+	 * Sets the observation.
+	 *
+	 * @param observation
+	 *            the new observation
+	 */
 	public void setObservation(org.openhealthtools.mdht.uml.cda.Observation observation) {
 		mObservation = observation;
 	}
 
+	/**
+	 * Sets the observation language texts.
+	 *
+	 * @param observationLangTexts
+	 *            the new observation language texts
+	 */
 	public void setObservationLangTexts(LangTexts observationLangTexts) {
 		this.myObservationLangTexts = observationLangTexts;
 	}
 
+	/**
+	 * Sets the target site.
+	 *
+	 * @param actSite
+	 *            the new target site
+	 */
 	public void setTargetSite(ActSite actSite) {
 		if (actSite != null) {
 			mObservation.getTargetSiteCodes().clear();
@@ -429,6 +529,14 @@ public class BaseObservation
 		}
 	}
 
+	/**
+	 * Sets the target site.
+	 *
+	 * @param actSite
+	 *            the act site
+	 * @param targetSiteLangTexts
+	 *            the target site language texts
+	 */
 	public void setTargetSite(ActSite actSite, LangTexts targetSiteLangTexts) {
 		setTargetSite(actSite);
 		this.myTargetSiteLangTexts = targetSiteLangTexts;
@@ -463,6 +571,12 @@ public class BaseObservation
 		}
 	}
 
+	/**
+	 * Sets the value.
+	 *
+	 * @param value
+	 *            the new value
+	 */
 	public void setValue(Value value) {
 		if (value.isPhysicalQuantity()) {
 			mObservation.getValues().add(value.copyMdhtPhysicalQuantity());
@@ -475,6 +589,14 @@ public class BaseObservation
 		}
 	}
 
+	/**
+	 * Sets the value.
+	 *
+	 * @param value
+	 *            the value
+	 * @param valueLangTexts
+	 *            the value language texts
+	 */
 	public void setValue(Value value, LangTexts valueLangTexts) {
 		setValue(value);
 		this.myValueLangTexts = valueLangTexts;

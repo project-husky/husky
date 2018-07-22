@@ -24,9 +24,11 @@ import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
-/*
- *<div class="de">Codesystem: HL7 ObservationInterpretation (OID: 2.16.840.1.113883.5.83).</div>
- *<div class="fr">Domaine de valeurs pour « Code dinterprétation »</div>
+/**
+ * <div class="en">The Enum containing the supported ObservationInterpretation
+ * codes.</div> <div class="de">Codesystem: HL7 ObservationInterpretation (OID:
+ * 2.16.840.1.113883.5.83).</div> <div class="fr">Domaine de valeurs pour « Code
+ * dinterprétation »</div>
  */
 public enum ObservationInterpretation {
 

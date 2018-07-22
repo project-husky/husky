@@ -32,7 +32,7 @@ import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer;
 
 /**
- * The Class AbstractLaboratorySpecialtySection.
+ * A base LaboratorySpecialtySection.
  */
 public class BaseLaboratorySpecialtySection extends
 		MdhtSectionFacade<org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratorySpecialtySection> {
@@ -80,6 +80,11 @@ public class BaseLaboratorySpecialtySection extends
 		super(mdht);
 	}
 
+	/**
+	 * Gets the act.
+	 *
+	 * @return the act
+	 */
 	public BaseLaboratoryAct getAct() {
 		final EList<Entry> entries = getMdht().getEntries();
 
@@ -91,6 +96,11 @@ public class BaseLaboratorySpecialtySection extends
 		return null;
 	}
 
+	/**
+	 * Gets the observations.
+	 *
+	 * @return the observations
+	 */
 	public List<BaseObservation> getObservations() {
 		final EList<Entry> entries = getMdht().getEntries();
 

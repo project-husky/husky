@@ -55,6 +55,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 
+@SuppressWarnings("deprecation")
 public class CdaChEdesEdpnTest extends TestUtils {
 
 	/** The SLF4J logger instance. */

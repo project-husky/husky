@@ -36,12 +36,13 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /**
- * The Class AbstractCdaCh implements a CDA document based on CDA-CH
- * specification
+ * The Class AbstractCdaCh implements a CDA document based on CDA-CH V1.2
+ * specification. Do not inherit from this class for new exchange Formats!
  *
  * @param <EClinicalDocument>
  *            the generic type
  */
+@Deprecated
 public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument>
 		extends AbstractCda<EClinicalDocument> {
 

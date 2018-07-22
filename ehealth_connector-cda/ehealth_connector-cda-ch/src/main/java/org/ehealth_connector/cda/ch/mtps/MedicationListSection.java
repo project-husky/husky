@@ -26,6 +26,7 @@ import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 /**
  * The Class CdaChMtpsMtp. see also CDA CH MTPS 7.4.2.3
  */
+@SuppressWarnings("deprecation")
 public class MedicationListSection
 		extends AbstractCdaChV1<org.openhealthtools.mdht.uml.cda.ch.CdaChMtpsV1Mtp> {
 

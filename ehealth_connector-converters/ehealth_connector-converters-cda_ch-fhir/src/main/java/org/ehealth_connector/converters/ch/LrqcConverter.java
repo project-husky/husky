@@ -76,6 +76,7 @@ import ca.uhn.fhir.parser.IParser;
  * @since Dec 30, 2017 10:15:32 PM
  *
  */
+@SuppressWarnings("deprecation")
 public class LrqcConverter extends AbstractCdaChV12FhirConverter {
 
 	/**

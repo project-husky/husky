@@ -18,12 +18,24 @@
 
 package org.ehealth_connector.cda;
 
+/**
+ * This represents an Observation.
+ */
 public class Observation extends BaseObservation {
 
+	/**
+	 * Instantiates a new observation.
+	 */
 	public Observation() {
 		super(null);
 	}
 
+	/**
+	 * Instantiates a new observation.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
 	public Observation(org.openhealthtools.mdht.uml.cda.Observation mdht) {
 		super(mdht);
 	}

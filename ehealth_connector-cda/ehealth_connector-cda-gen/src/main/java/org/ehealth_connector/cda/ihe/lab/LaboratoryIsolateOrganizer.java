@@ -76,7 +76,7 @@ public class LaboratoryIsolateOrganizer extends
 	}
 
 	/**
-	 * Adds the author.
+	 * Adds an author.
 	 *
 	 * @param author
 	 *            the author
@@ -88,7 +88,7 @@ public class LaboratoryIsolateOrganizer extends
 	}
 
 	/**
-	 * Adds the laboratory battery organizer.
+	 * Adds a laboratory battery organizer.
 	 *
 	 * @param labBatteryOrganizer
 	 *            the lab battery organizer

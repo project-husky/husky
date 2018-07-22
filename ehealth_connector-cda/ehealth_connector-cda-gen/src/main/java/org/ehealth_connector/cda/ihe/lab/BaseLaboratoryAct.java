@@ -25,7 +25,7 @@ import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
- * The Class AbstractSpecimenAct.
+ * A base SpecimenAct.
  */
 public class BaseLaboratoryAct extends MdhtActFacade<Act> {
 

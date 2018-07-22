@@ -42,18 +42,27 @@ import org.openhealthtools.mdht.uml.cda.ihe.lab.impl.LaboratorySpecialtySectionI
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 
 /**
- * @formatter:off
- * <div class="en">TODO</div>
- * <div class="de">TODO</div>
- * @formatter:on
+ * The implementation of the Swiss CDA-CH-LREP General Report exchange format.
+ *
+ * <div class="en">Implements a CDA document based on the CDA-CH-LREP (2018)
+ * exchange format.</div> <div class="de">Implementiert ein CDA-Dokument
+ * basierend auf dem Austauschformat CDA-CH-LREP (2018).</div>
  */
 public class CdaChLrepV1GeneralReport extends
 		CdaChV2StructuredBody<org.openhealthtools.mdht.uml.cda.ch.CdaChLrepV1GeneralReport> {
 
+	/** A section index, used for automatic narrative text generation. */
 	private int mSectionIndex = 0;
 
 	/**
-	 * {@inheritDoc}
+	 * Instantiates a new CDA-CH-LREP General Report document.
+	 *
+	 * @param languageCode
+	 *            the language code
+	 * @param styleSheet
+	 *            the style sheet
+	 * @param css
+	 *            the css
 	 */
 	public CdaChLrepV1GeneralReport(LanguageCode languageCode, String styleSheet, String css) {
 		super(ChFactory.eINSTANCE.createCdaChLrepV1GeneralReport().init(), languageCode, styleSheet,
@@ -87,7 +96,10 @@ public class CdaChLrepV1GeneralReport extends
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Instantiates a new CDA-CH-LREP General Report document.
+	 *
+	 * @param doc
+	 *            the doc
 	 */
 	public CdaChLrepV1GeneralReport(
 			org.openhealthtools.mdht.uml.cda.ch.CdaChLrepV1GeneralReport doc) {
@@ -95,11 +107,12 @@ public class CdaChLrepV1GeneralReport extends
 	}
 
 	/**
-	 * <div class="en">Adds an author</div> <div class="de">Fügt einen Autoren
-	 * hinzu</div>
+	 * <div class="en">Adds an author</div> <div class="de">Fügt einen Autor
+	 * hinzu</div>.
 	 *
 	 * @param author
 	 *            the autor
+	 * @return the author
 	 */
 	@Override
 	public Author addAuthor(org.ehealth_connector.common.Author author) {
@@ -122,6 +135,8 @@ public class CdaChLrepV1GeneralReport extends
 	 *            LaboratoryObservation
 	 * @param sectionCode
 	 *            the LOINC code for the LaboratorySpecialtySection
+	 * @param sce
+	 *            the sce
 	 * @return the laboratory specialty section
 	 */
 	public LaboratorySpecialtySection addLaboratoryBatteryOrganizerInNewSection(
@@ -160,6 +175,13 @@ public class CdaChLrepV1GeneralReport extends
 		getMdht().addSection(laboratorySpecialtySection.copy());
 	}
 
+	/**
+	 * Adds another information recipient.
+	 *
+	 * @param recipient
+	 *            the information recipient
+	 * @return the information recipient
+	 */
 	@Override
 	public InformationRecipient addOtherRecipient(Organization recipient) {
 		InformationRecipient mdht = super.addOtherRecipient(recipient);
@@ -167,6 +189,11 @@ public class CdaChLrepV1GeneralReport extends
 		return mdht;
 	}
 
+	/**
+	 * Gets the list of laboratory batteries.
+	 *
+	 * @return the laboratory batteriy list
+	 */
 	public List<LaboratoryBatteryOrganizer> getLaboratoryBatteries() {
 		ArrayList<LaboratoryBatteryOrganizer> retVal = new ArrayList<LaboratoryBatteryOrganizer>();
 		for (Section section : getMdht().getSections()) {
@@ -188,11 +215,12 @@ public class CdaChLrepV1GeneralReport extends
 	/**
 	 * <div class="en">Sets an organization as the custodian of the
 	 * document</div> <div class="de">Weist dem CDA Dokument die verwaltende
-	 * Organisation zu</div>
+	 * Organisation zu</div>.
 	 *
 	 * @param organization
 	 *            <div class="en">custodian organization</div>
 	 *            <div class="de">verwaltende Organisation</div>
+	 * @return the custodian
 	 */
 	@Override
 	public Custodian setCustodian(Organization organization) {
@@ -203,10 +231,11 @@ public class CdaChLrepV1GeneralReport extends
 
 	/**
 	 * <div class="en">Adds a patient</div> <div class="de">Weist dem CDA
-	 * Dokument einen Patienten zu</div>
+	 * Dokument einen Patienten zu</div>.
 	 *
 	 * @param patient
 	 *            Patient
+	 * @return the record target
 	 */
 	@Override
 	public RecordTarget setPatient(Patient patient) {
@@ -216,6 +245,12 @@ public class CdaChLrepV1GeneralReport extends
 		return mdht;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.cda.ch.CdaChV2StructuredBody#setPrimaryRecipient(
+	 *      org.ehealth_connector.common.Organization)
+	 */
 	@Override
 	public InformationRecipient setPrimaryRecipient(Organization recipient) {
 		InformationRecipient mdht = super.setPrimaryRecipient(recipient);

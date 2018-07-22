@@ -68,6 +68,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
  * Decision Support System; CDSS) oder wenn beabsichtigte aber noch nicht
  * erfolgte Impfungen dokumentiert werden.
  */
+@SuppressWarnings("deprecation")
 public class ImmunizationRecommendation
 		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch.ImmunizationRecommendation> {
 

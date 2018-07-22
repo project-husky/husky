@@ -144,8 +144,8 @@ public class Performer {
 	/**
 	 * Instantiates a new performer.
 	 *
-	 * @param author
-	 *            the author to be used as performer.
+	 * @param person
+	 *            the person to be used as performer.
 	 */
 	public Performer(Person person) {
 		this();

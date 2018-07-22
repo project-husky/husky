@@ -23,18 +23,37 @@ import java.util.Comparator;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.Organizer;
 
-public class BaseOrganizer
-		extends MdhtOrganizerFacade<org.openhealthtools.mdht.uml.cda.Organizer>
+/**
+ * The base Organizer.
+ */
+public class BaseOrganizer extends MdhtOrganizerFacade<org.openhealthtools.mdht.uml.cda.Organizer>
 		implements Comparator<BaseOrganizer> {
 
-	protected LanguageCode myLang = LanguageCode.ENGLISH;
+	/** The local organizer. */
 	protected org.openhealthtools.mdht.uml.cda.Organizer mOrganizer;
 
+	/** The local language. */
+	protected LanguageCode myLang = LanguageCode.ENGLISH;
+
+	/**
+	 * Instantiates a new base organizer.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
 	public BaseOrganizer(Organizer mdht) {
 		super(mdht);
 		mOrganizer = mdht;
 	}
 
+	/**
+	 * Instantiates a new base organizer.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 * @param lang
+	 *            the lang
+	 */
 	public BaseOrganizer(Organizer mdht, LanguageCode lang) {
 		super(mdht);
 		mOrganizer = mdht;

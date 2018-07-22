@@ -63,6 +63,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  * Die Transplantationszentren übermitteln die Labordaten der Organempfänger an
  * SOAS, damit diese bei der Organzuteilung berücksichtigt werden können.</div>
  */
+@SuppressWarnings("deprecation")
 public class CdaChLrtp
 		extends AbstractLaboratoryReport<org.openhealthtools.mdht.uml.cda.ch.CdaChLrtpV1> {
 

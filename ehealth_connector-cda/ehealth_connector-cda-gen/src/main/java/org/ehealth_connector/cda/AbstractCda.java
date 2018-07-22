@@ -87,7 +87,10 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipDocument;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_InformationRecipient;
 
 /**
- * CDA Dokument, das den Vorgaben der Spezifikation CDA entspricht
+ * The implementation of the HL7 CDA R2 (2005) Standard.
+ *
+ * @param <EClinicalDocument>
+ *            the generic type
  */
 public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		extends MdhtFacade<EClinicalDocument> {
@@ -95,7 +98,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	/**
 	 * This comparator allows to make sure that the top level XML content always
 	 * appear in the same order (this simplifies comparison of CDA contents with
-	 * previous releases)
+	 * previous releases).
 	 */
 	private class FeatureMapEntryComparator implements Comparator<Entry> {
 
@@ -124,12 +127,16 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		}
 	}
 
+	/** The document root. */
 	private DocumentRoot docRoot;
+
+	/** The "perform narrative text generation" indicator. */
 	private boolean performNarrativeTextGeneration = true;
 
 	/**
-	 * <div class="en">Constructor for Cda documents</div>
-	 * <div class="de">Erstellt ein Cda Objekt</div> <div class="fr"></div>
+	 * <div class="en">Constructor for HL7 CDA documents</div>
+	 * <div class="de">Erstellt ein HL7 CDA Dokument</div>
+	 * <div class="fr"></div>.
 	 *
 	 * @param doc
 	 *            the CDA Object in its MDHT representation
@@ -156,6 +163,8 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 *
 	 * @param doc
 	 *            the CDA Object in its MDHT representation
+	 * @param languageCode
+	 *            the language code
 	 * @param stylesheet
 	 *            the stylesheet for the document (e.g.
 	 *            '../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl').
@@ -175,13 +184,19 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		sortXmlHeader();
 	}
 
+	/**
+	 * Adds the authenticator.
+	 *
+	 * @param authenticator
+	 *            the authenticator
+	 */
 	public void addAuthenticator(Authenticator authenticator) {
 		getDoc().getAuthenticators().add(authenticator);
 	}
 
 	/**
 	 * <div class="en">Adds an authenricator to the CDA document</div>
-	 * <div class="de">Fügt dem CDA Dokument einen Unterzeichner hinzu</div>
+	 * <div class="de">Fügt dem CDA Dokument einen Unterzeichner hinzu</div>.
 	 *
 	 * @param author
 	 *            Unterzeichner
@@ -199,7 +214,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">Adds an authenticator to the CDA document</div>
-	 * <div class="de">Fügt dem CDA Dokument einen Unterzeichner hinzu</div>
+	 * <div class="de">Fügt dem CDA Dokument einen Unterzeichner hinzu</div>.
 	 *
 	 * @param authenticator
 	 *            Unterzeichner
@@ -227,10 +242,11 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">Adds an author</div> <div class="de">Fügt einen Autoren
-	 * hinzu</div>
+	 * hinzu</div>.
 	 *
 	 * @param author
 	 *            the autor
+	 * @return the author
 	 */
 	/**
 	 * @param author
@@ -242,6 +258,12 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		return docAuthor;
 	}
 
+	/**
+	 * Adds the authorization consent.
+	 *
+	 * @param narrativeConsent
+	 *            the narrative consent
+	 */
 	public void addAuthorizationConsent(String narrativeConsent) {
 		Authorization authorization = CDAFactory.eINSTANCE.createAuthorization();
 		Consent consent = CDAFactory.eINSTANCE.createConsent();
@@ -257,7 +279,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	/**
 	 * <div class="en">Adds a cascading stylesheet (CSS) to the XML processing
 	 * instructions</div> <div class="de">Fügt ein Cascading Stylesheet (CSS) zu
-	 * den XML Processing Instructions hinzu</div>
+	 * den XML Processing Instructions hinzu</div>.
 	 *
 	 * @param css
 	 *            path of the CSS file
@@ -268,6 +290,14 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 				"type=\"text/css\" href=\"" + css + "\"");
 	}
 
+	/**
+	 * Adds the employer.
+	 *
+	 * @param employer
+	 *            the employer
+	 * @param employeeId
+	 *            the employee id
+	 */
 	public void addEmployer(Organization employer, Identificator employeeId) {
 		addParticipant(employer, employeeId, ParticipantType.Employer);
 	}
@@ -275,7 +305,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	/**
 	 * <div class="en">Adds an inFulfillmentOf reference to another
 	 * document</div> <div class="de">Weist dem Dokument eine ID eines anderen
-	 * Dokumentes zu, auf das es sich bezieht</div>
+	 * Dokumentes zu, auf das es sich bezieht</div>.
 	 *
 	 * @param id
 	 *            of the referenced document
@@ -291,15 +321,24 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">Adds a insurance organization</div> <div class="de">Fügt
-	 * eine Versicherung hinzu</div>
+	 * eine Versicherung hinzu</div>.
 	 *
 	 * @param versicherung
 	 *            the insurance organization
+	 * @param insurantId
+	 *            the insurant id
 	 */
 	public void addInsurance(Organization versicherung, Identificator insurantId) {
 		addParticipant(versicherung, insurantId, ParticipantType.Insurance);
 	}
 
+	/**
+	 * Adds the other recipient.
+	 *
+	 * @param organization
+	 *            the organization
+	 * @return the information recipient
+	 */
 	public InformationRecipient addOtherRecipient(Organization organization) {
 
 		InformationRecipient recipient = CDAFactory.eINSTANCE.createInformationRecipient();
@@ -313,14 +352,17 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">Adds a participant</div> <div class="de">Fügt dem CDA
-	 * Dokument einen Teilnehmer hinzu</div>
+	 * Dokument einen Teilnehmer hinzu</div>.
 	 *
 	 * @param organization
 	 *            Organisation
+	 * @param participationId
+	 *            the participation id
 	 * @param participantType
 	 *            <div class="en">Kind of participation (e.g. insurance)</div>
 	 *            <div class="de">Art der Partizipation (z.B.
 	 *            Versicherung)</div>
+	 * @return the participant 1
 	 */
 	public Participant1 addParticipant(Organization organization, Identificator participationId,
 			ParticipantType participantType) {
@@ -389,7 +431,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	/**
 	 * <div class="en">Adds a stylesheet to the XML processing
 	 * instructions</div> <div class="de">Fügt ein Stylesheet zu den XML
-	 * Processing Instructions hinzu</div>
+	 * Processing Instructions hinzu</div>.
 	 *
 	 * @param stylesheet
 	 *            Path to the stylesheet (e.g.
@@ -404,19 +446,24 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * Switch automatic generation of narrative text off
+	 * Switch automatic generation of narrative text off.
 	 */
 	public void disableNarrativeTextGeneration() {
 		performNarrativeTextGeneration = false;
 	}
 
 	/**
-	 * Switch automatic generation of narrative text on
+	 * Switch automatic generation of narrative text on.
 	 */
 	public void enableNarrativeTextGeneration() {
 		performNarrativeTextGeneration = true;
 	}
 
+	/**
+	 * Generate comment.
+	 *
+	 * @return the string
+	 */
 	private String generateComment() {
 		return "Document based on CDA R2 generated by "
 				+ EhcVersions.getCurrentVersion().getSystemVersionName() + ", Release Date "
@@ -425,7 +472,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">Returns a list of authenticators of this document</div>
-	 * <div class="de">Gibt alle Unterzeichner des Dokuments zurück</div>
+	 * <div class="de">Gibt alle Unterzeichner des Dokuments zurück</div>.
 	 *
 	 * @return <div class="en">the authenticators</div> <div class="de">die
 	 *         Unterzeichner</div>
@@ -440,6 +487,11 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		return persons;
 	}
 
+	/**
+	 * Gets the authenticators as author.
+	 *
+	 * @return the authenticators as author
+	 */
 	public List<org.ehealth_connector.common.Author> getAuthenticatorsAsAuthor() {
 		List<org.ehealth_connector.common.Author> retVal = new ArrayList<org.ehealth_connector.common.Author>();
 
@@ -453,7 +505,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">Returns the (first) author of the document</div>
-	 * <div class="de">Gibt den (ersten) Autor des Dokuments zurück</div>
+	 * <div class="de">Gibt den (ersten) Autor des Dokuments zurück</div>.
 	 *
 	 * @return the author
 	 */
@@ -478,7 +530,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">Returns all authors of the document</div>
-	 * <div class="de">Gibt alle Autoren des Dokuments zurück</div>
+	 * <div class="de">Gibt alle Autoren des Dokuments zurück</div>.
 	 *
 	 * @return list of authors
 	 */
@@ -493,7 +545,8 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * <div class="en">Gets the Confidentially Code</div> <div class="de"></div>
+	 * <div class="en">Gets the Confidentially Code</div>
+	 * <div class="de"></div>.
 	 *
 	 * @return code
 	 */
@@ -506,7 +559,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">Gets the custodian</div> <div class="de">Gibt den
-	 * Verantwortlichen für das Dokument zurück</div>
+	 * Verantwortlichen für das Dokument zurück</div>.
 	 *
 	 * @return das openHealthTools Custodian Objekt
 	 */
@@ -517,7 +570,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	/**
 	 * Returns a new Organization object based on the
 	 * custodian/representedOrganization object (name, ids, addr, telecoms will
-	 * be copied)
+	 * be copied).
 	 *
 	 * @return the Organization
 	 */
@@ -538,6 +591,11 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		return null;
 	}
 
+	/**
+	 * Gets the data enterer.
+	 *
+	 * @return the data enterer
+	 */
 	public DataEnterer getDataEnterer() {
 		if (getDoc().getDataEnterer() != null) {
 			return new DataEnterer(getDoc().getDataEnterer());
@@ -545,6 +603,11 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		return null;
 	}
 
+	/**
+	 * Gets the data enterer person.
+	 *
+	 * @return the data enterer person
+	 */
 	public org.ehealth_connector.common.Person getDataEntererPerson() {
 		if (getDoc().getDataEnterer() != null) {
 			if (getDoc().getDataEnterer().getAssignedEntity() != null) {
@@ -559,7 +622,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * Method to get the document
+	 * Method to get the document.
 	 *
 	 * @return the doc
 	 */
@@ -569,7 +632,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">Gets the document root (which helds the cda
-	 * document)</div>
+	 * document)</div>.
 	 *
 	 * @return the document root
 	 */
@@ -600,7 +663,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">Gets all employers</div> <div class="de">Gibt alle
-	 * Arbeitgeber zurück</div>
+	 * Arbeitgeber zurück</div>.
 	 *
 	 * @return arraylist of organizations
 	 */
@@ -625,6 +688,11 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		return organizations;
 	}
 
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
 	public Identificator getId() {
 		if (getDoc().getId() != null) {
 			return new Identificator(getDoc().getId());
@@ -635,7 +703,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	/**
 	 * <div class="en">Returns a List of all inFulfillmentOf references to other
 	 * documents</div> <div class="de">Gibt eine Liste aller Referenzen auf
-	 * Dokumente zurück, auf welche sich dasDokument bezieht</div>
+	 * Dokumente zurück, auf welche sich dasDokument bezieht</div>.
 	 *
 	 * @return the in fulfillment ofs
 	 */
@@ -651,7 +719,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">Gets all insurances</div> <div class="de">Gibt alle
-	 * Versicherungen zurück</div>
+	 * Versicherungen zurück</div>.
 	 *
 	 * @return arraylist of organizations
 	 */
@@ -687,7 +755,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * Gets the legal authenticator of the document <div class="de">Gibt den
-	 * juristisch verantwortlichen Unterzeichner des Dokuments zurück</div>
+	 * juristisch verantwortlichen Unterzeichner des Dokuments zurück</div>.
 	 *
 	 * @return the legal authenticator
 	 */
@@ -707,7 +775,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	/**
 	 * Gets the legal authenticator of the document <div class="de">Gibt den
 	 * juristisch verantwortlichen Unterzeichner des Dokuments als Autor Objekt
-	 * zurück</div>
+	 * zurück</div>.
 	 *
 	 * @return the legal authenticator as Author object
 	 */
@@ -721,6 +789,11 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		return null;
 	}
 
+	/**
+	 * Gets the mdht primary recipient.
+	 *
+	 * @return the mdht primary recipient
+	 */
 	public InformationRecipient getMdhtPrimaryRecipient() {
 
 		InformationRecipient retVal = null;
@@ -733,6 +806,11 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		return retVal;
 	}
 
+	/**
+	 * Gets the other recipients.
+	 *
+	 * @return the other recipients
+	 */
 	public List<Organization> getOtherRecipients() {
 
 		ArrayList<Organization> retVal = new ArrayList<Organization>();
@@ -750,7 +828,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * Gets the CDA document as ByteArrayOutputStream
+	 * Gets the CDA document as ByteArrayOutputStream.
 	 *
 	 * @return the output stream
 	 */
@@ -766,7 +844,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">Gets all participating organizations</div>
-	 * <div class="de">Gibt alle Teilnehmenden Organisationen zurück</div>
+	 * <div class="de">Gibt alle Teilnehmenden Organisationen zurück</div>.
 	 *
 	 * @return the arraylist of organizations
 	 */
@@ -782,7 +860,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">Gets the patient</div> <div class="de">Liefert den
-	 * Patienten zurück</div>
+	 * Patienten zurück</div>.
 	 *
 	 * @return the patient
 	 */
@@ -791,6 +869,11 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		return patient;
 	}
 
+	/**
+	 * Gets the primary recipient.
+	 *
+	 * @return the primary recipient
+	 */
 	public Organization getPrimaryRecipient() {
 
 		Organization retVal = null;
@@ -809,7 +892,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * <div class="en">Gets the set Id</div>
+	 * <div class="en">Gets the set Id</div>.
 	 *
 	 * @return the set id
 	 */
@@ -822,7 +905,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * <div class="en">Gets the timestamp</div>
+	 * <div class="en">Gets the timestamp</div>.
 	 *
 	 * @return the timestamp
 	 */
@@ -834,7 +917,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * <div class="en">Gets the title</div>
+	 * <div class="en">Gets the title</div>.
 	 *
 	 * @return the title
 	 */
@@ -843,7 +926,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * <div class="en">Gets the version</div>
+	 * <div class="en">Gets the version</div>.
 	 *
 	 * @return the version
 	 */
@@ -855,12 +938,12 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * <div class="en">Initializes the CdaCh document header defaults</div>
+	 * <div class="en">Initializes the CdaCh document header defaults</div>.
 	 */
 	public abstract void initCda();
 
 	/**
-	 * Indicates whether narrative text generation is enabled or disabled
+	 * Indicates whether narrative text generation is enabled or disabled.
 	 *
 	 * @return true when enabled; false when disabled
 	 */
@@ -871,7 +954,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	/**
 	 * <div class="en">prints the XML representation of the document to the
 	 * console</div> <div class="de">Gibt die XML-Repräsentation des Dokuments
-	 * auf der Konsole aus</div>
+	 * auf der Konsole aus</div>.
 	 */
 	public void printXmlToConsole() {
 		try {
@@ -883,7 +966,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">Stores the CDA document as XML file</div>
-	 * <div class="de">Speichert das CDA Dokument als XML Datei</div>
+	 * <div class="de">Speichert das CDA Dokument als XML Datei</div>.
 	 *
 	 * @param fileName
 	 *            file name (incl. path)
@@ -922,7 +1005,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * Sets Confidentially Code
+	 * Sets Confidentially Code.
 	 *
 	 * @param code
 	 *            If null, "N" for "normal" will be set.
@@ -940,11 +1023,12 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	/**
 	 * <div class="en">Sets an organization as the custodian of the
 	 * document</div> <div class="de">Weist dem CDA Dokument die verwaltende
-	 * Organisation zu</div>
+	 * Organisation zu</div>.
 	 *
 	 * @param organization
 	 *            <div class="en">custodian organization</div>
 	 *            <div class="de">verwaltende Organisation</div>
+	 * @return the custodian
 	 */
 	public Custodian setCustodian(Organization organization) {
 		// create and set the mdht Custodian object
@@ -982,7 +1066,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">Adds a data enterer</div> <div class="de">Fügt dem CDA
-	 * Dokument einen Erfasser hinzu</div>
+	 * Dokument einen Erfasser hinzu</div>.
 	 *
 	 * @param dataEnterer
 	 *            <div class="en">a person, which delivered content for this
@@ -1002,7 +1086,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	}
 
 	/**
-	 * Method implementing
+	 * Method implementing.
 	 *
 	 * @param docRoot
 	 *            the document root
@@ -1045,10 +1129,10 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	/**
 	 * <div class="en">Sets the in fulfillment of reference other
 	 * documents</div> <div class="de">Weist dem Dokument IDs von anderen
-	 * Dokumentes zu, auf die es sich bezieht</div>
+	 * Dokumentes zu, auf die es sich bezieht</div>.
 	 *
-	 * @param id
-	 *            of the referenced documents
+	 * @param ids
+	 *            the new in fulfillment of
 	 */
 	public void setInFulfillmentOf(@SuppressWarnings("rawtypes") Collection ids) {
 		final InFulfillmentOf ifo = CDAFactory.eINSTANCE.createInFulfillmentOf();
@@ -1066,7 +1150,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	/**
 	 * <div class="en">Sets the in fulfillment of reference to another
 	 * document</div> <div class="de">Weist dem Dokument eine ID eines anderen
-	 * Dokumentes zu, auf das es sich bezieht</div>
+	 * Dokumentes zu, auf das es sich bezieht</div>.
 	 *
 	 * @param id
 	 *            of the referenced document
@@ -1084,10 +1168,10 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	/**
 	 * <div class="en">Sets the in fulfillment of reference other
 	 * documents</div> <div class="de">Weist dem Dokument IDs von anderen
-	 * Dokumentes zu, auf die es sich bezieht</div>
+	 * Dokumentes zu, auf die es sich bezieht</div>.
 	 *
-	 * @param id
-	 *            of the referenced documents
+	 * @param ids
+	 *            the new in fulfillment of
 	 */
 	public void setInFulfillmentOf(List<Identificator> ids) {
 		final InFulfillmentOf ifo = CDAFactory.eINSTANCE.createInFulfillmentOf();
@@ -1103,7 +1187,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">Sets the language of the document</div>
-	 * <div class="de">Weist dem document eine Sprache zu</div>
+	 * <div class="de">Weist dem document eine Sprache zu</div>.
 	 *
 	 * @param language
 	 *            code for the language
@@ -1116,7 +1200,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	/**
 	 * <div class="en">Sets the legal authenticator of the document</div>
 	 * <div class="de">Weist dem CDA Dokument einen rechtsgültigen Unterzeichner
-	 * hinzu</div>
+	 * hinzu</div>.
 	 *
 	 * @param legalAuthenticator
 	 *            <div class="en">legal authenticator</div>
@@ -1180,6 +1264,13 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		return patient.getMdhtRecordTarget();
 	}
 
+	/**
+	 * Sets the primary recipient.
+	 *
+	 * @param organization
+	 *            the organization
+	 * @return the information recipient
+	 */
 	public InformationRecipient setPrimaryRecipient(Organization organization) {
 
 		InformationRecipient recipient = CDAFactory.eINSTANCE.createInformationRecipient();
@@ -1211,7 +1302,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 
 	/**
 	 * <div class="en">Sets the timestamp of the document</div>
-	 * <div class="de">Weist dem Dokument einen Zeitstempel zu</div>
+	 * <div class="de">Weist dem Dokument einen Zeitstempel zu</div>.
 	 *
 	 * @param date
 	 *            the timestamp
@@ -1234,8 +1325,8 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	/**
 	 * Sets the code.
 	 *
-	 * @param code
-	 *            the new code
+	 * @param title
+	 *            the new title
 	 */
 	public void setTitle(String title) {
 		final ST titleSt = DatatypesFactory.eINSTANCE.createST();
@@ -1260,7 +1351,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	/**
 	 * <div class="en">Sets the document set Id and version number</div>
 	 * <div class="de">Weist dem Dokument eine Set Id und eine Versionsnummer
-	 * zu</div>
+	 * zu</div>.
 	 *
 	 * @param idVersion1
 	 *            the set Id (if null, the document ID will be used)
@@ -1272,12 +1363,21 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		setVersion(version);
 	}
 
+	/**
+	 * Sets the version.
+	 *
+	 * @param number
+	 *            the new version
+	 */
 	protected void setVersion(int number) {
 		final INT i = DatatypesFactory.eINSTANCE.createINT();
 		i.setValue(number);
 		getDoc().setVersionNumber(i);
 	}
 
+	/**
+	 * Sort xml header.
+	 */
 	public void sortXmlHeader() {
 		// Make sure that the top level XML content always appear in the same
 		// order (this simplifies comparison of CDA contents with previous

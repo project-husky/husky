@@ -23,6 +23,9 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Value;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 
+/**
+ * A previous laboratory pbservation.
+ */
 public class PreviousLaboratoryObservation extends
 		MdhtObservationFacade<org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation> {
 
@@ -34,6 +37,18 @@ public class PreviousLaboratoryObservation extends
 		getMdht().getInterpretationCodes().clear();
 	}
 
+	/**
+	 * Instantiates a new previous laboratory observation.
+	 *
+	 * @param currentObservation
+	 *            the current observation
+	 * @param timestamp
+	 *            the timestamp of the previous observation
+	 * @param value
+	 *            the value of the previous observation
+	 * @param interpretationCode
+	 *            the interpretation code of the previous observation
+	 */
 	public PreviousLaboratoryObservation(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation currentObservation,
 			Date timestamp, Value value, Code interpretationCode) {

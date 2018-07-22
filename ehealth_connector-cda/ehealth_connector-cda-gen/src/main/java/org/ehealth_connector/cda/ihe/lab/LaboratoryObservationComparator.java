@@ -18,6 +18,9 @@ package org.ehealth_connector.cda.ihe.lab;
 
 import java.util.Comparator;
 
+/**
+ * The default LaboratoryObservation Comparator.
+ */
 public class LaboratoryObservationComparator implements Comparator<LaboratoryObservation> {
 
 	/**

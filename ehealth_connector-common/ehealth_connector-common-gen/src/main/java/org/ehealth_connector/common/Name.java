@@ -437,8 +437,8 @@ public class Name {
 	 * <div class="en">Sets the use code.</div> <div class="de">Setzt den
 	 * Verwendungszweck."</div> <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @param suffix
-	 *            das suffix Objekt welches gesetzt wird
+	 * @param use
+	 *            the new use code
 	 */
 	public void setUse(NameUse use) {
 		if (use != null) {

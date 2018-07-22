@@ -32,12 +32,12 @@ import org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
- * The Class AbstractSpecimenAct.
+ * The base SpecimenAct.
  */
 public class BaseChSpecimenAct extends org.ehealth_connector.cda.ihe.lab.BaseLaboratoryAct {
 
 	/**
-	 * Instantiates a new abstract specimen act.
+	 * Instantiates a new specimen act.
 	 */
 	public BaseChSpecimenAct() {
 		super();
@@ -45,7 +45,7 @@ public class BaseChSpecimenAct extends org.ehealth_connector.cda.ihe.lab.BaseLab
 	}
 
 	/**
-	 * Instantiates a new abstract specimen act.
+	 * Instantiates a new specimen act.
 	 *
 	 * @param mdht
 	 *            the mdht
@@ -311,9 +311,9 @@ public class BaseChSpecimenAct extends org.ehealth_connector.cda.ihe.lab.BaseLab
 	}
 
 	/**
-	 * Gets the specimen collection entries.
+	 * Gets a list with all specimen collection entries.
 	 *
-	 * @return the specimen collection entries
+	 * @return the specimen collection entries list
 	 */
 	public List<SpecimenCollectionEntry> getSpecimenCollectionEntries() {
 		final List<SpecimenCollectionEntry> scel = new ArrayList<SpecimenCollectionEntry>();
@@ -458,5 +458,4 @@ public class BaseChSpecimenAct extends org.ehealth_connector.cda.ihe.lab.BaseLab
 			}
 		}
 	}
-
 }

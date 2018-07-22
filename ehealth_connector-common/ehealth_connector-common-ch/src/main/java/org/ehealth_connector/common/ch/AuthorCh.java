@@ -22,29 +22,20 @@ import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.ch.enums.AuthorRole;
 import org.ehealth_connector.common.ch.enums.AuthorSpeciality;
 
+/**
+ * The Swis derivation of an Author (adds features for GLN).
+ */
 public class AuthorCh extends org.ehealth_connector.common.Author {
 
+	/**
+	 * Instantiates a new instance.
+	 */
 	public AuthorCh() {
 		super();
 	}
 
-	// /**
-	// * <div class="en">Instantiates a new author.</div> <div
-	// * class="de">Instantiiert a neuen Autor</div> <div class="fr"></div> <div
-	// * class="it"></div>
-	// *
-	// * @param iAuthor
-	// * <br>
-	// * <div class="de">IHE Author-Objekt</div> <div class="fr"></div>
-	// * <div class="it"></div>
-	// */
-	// public AuthorCh(AuthorType iAuthor) {
-	// super(iAuthor);
-	// }
-
 	/**
-	 *
-	 * Default constructor to instanciate the object
+	 * Default constructor to instantiate the object.
 	 *
 	 * @param aAuthor
 	 *            the generic author
@@ -53,13 +44,18 @@ public class AuthorCh extends org.ehealth_connector.common.Author {
 		super(aAuthor.getAuthorMdht());
 	}
 
+	/**
+	 * Instantiates a new instance.
+	 *
+	 * @param name
+	 *            the name
+	 */
 	public AuthorCh(Name name) {
 		super(name);
 	}
 
 	/**
-	 * Erstellt einen neuen Autor (Dieser Konstruktor wird oft gebraucht für
-	 * Behandelnde).
+	 * Instantiates a new instance.
 	 *
 	 * @param name
 	 *            Name
@@ -71,8 +67,7 @@ public class AuthorCh extends org.ehealth_connector.common.Author {
 	}
 
 	/**
-	 * Erstellt ein eHealthconnector-Author Objekt mittels eines MDHT-Author
-	 * Objekts.
+	 * Instantiates a new instance.
 	 *
 	 * @param authorMdht
 	 *            the MDHT Author Object
