@@ -166,6 +166,8 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 	private Response startWaitForResponse()
 			throws IOException, ClientSendException, DeserializeException {
 		final Calendar end = Calendar.getInstance();
+
+		// This is the timeout to wait for the SAML response
 		end.add(Calendar.MINUTE, 1);
 
 		final File tempFile = new File(System.getProperty("java.io.tmpdir"),
@@ -189,8 +191,6 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 			tempFile.delete();
 		}
 		if (line == null) {
-			// maybe add this restriction, later:
-			// (!line.startsWith(config.getProtocolHandlerName()))
 			throw new ClientSendException("No SAML response found");
 		}
 		line = java.net.URLDecoder.decode(line, "UTF-8");
