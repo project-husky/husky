@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.ehealth_connector</groupId>
 		<artifactId>ehealth_connector-fatjar</artifactId>
-		<version>1.6-SNAPSHOT</version>
+		<version>1.6.0-201807</version>
 	</parent>
 
 	<properties>
@@ -24,22 +24,22 @@
 		<dependency>
 			<groupId>org.ehealth_connector.converters</groupId>
 			<artifactId>ehealth_connector-converters-cda_ch-fhir</artifactId>
-			<version>1.6-SNAPSHOT</version>
+			<version>1.6.0-201807</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ehealth_connector.communication.ch</groupId>
 			<artifactId>ehealth_connector-communication-ch</artifactId>
-			<version>1.6-SNAPSHOT</version>
+			<version>1.6.0-201807</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ehealth_connector.validation.service</groupId>
 			<artifactId>ehealth_connector-validation-service</artifactId>
-			<version>1.6-SNAPSHOT</version>
+			<version>1.6.0-201807</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ehealth_connector.security.ch</groupId>
 			<artifactId>ehealth_connector-security-ch-impl</artifactId>
-			<version>1.6-SNAPSHOT</version>
+			<version>1.6.0-201807</version>
 		</dependency>
 	</dependencies>
 

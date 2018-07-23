@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ehealth_connector.security.ch</groupId>
 	<artifactId>ehealth_connector-security-ch-impl</artifactId>
@@ -8,29 +7,29 @@
 	<parent>
 		<groupId>org.ehealth_connector.security</groupId>
 		<artifactId>ehealth_connector-security</artifactId>
-		<version>1.6-SNAPSHOT</version>
+		<version>1.6.0-201807</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.ehealth_connector.security</groupId>
 			<artifactId>ehealth_connector-security-ch-api</artifactId>
-			<version>1.6-SNAPSHOT</version>
+			<version>1.6.0-201807</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ehealth_connector.security</groupId>
 			<artifactId>ehealth_connector-security-gen-impl</artifactId>
-			<version>1.6-SNAPSHOT</version>
+			<version>1.6.0-201807</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ehealth_connector.common</groupId>
 			<artifactId>ehealth_connector-common-gen</artifactId>
-			<version>1.6-SNAPSHOT</version>
+			<version>1.6.0-201807</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ehealth_connector.common.ch</groupId>
 			<artifactId>ehealth_connector-common-ch</artifactId>
-			<version>1.6-SNAPSHOT</version>
+			<version>1.6.0-201807</version>
 		</dependency>
 
 		<!-- dependency> <groupId>ch.epd.ihe.ppq</groupId> <artifactId>ch-ppq-webservice-api</artifactId> </dependency -->
