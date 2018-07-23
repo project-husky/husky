@@ -47,7 +47,7 @@ public interface PurposeOfUse {
 	public static final QName TYPE_NAME = new QName("urn:hl7-org:v3", TYPE_LOCAL_NAME, "hl7");
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the code.</div>
 	 * <div class="de">Methode um den code zu erhalten.</div>
@@ -64,7 +64,7 @@ public interface PurposeOfUse {
 	public String getCode();
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the CodeSystem.</div>
 	 * <div class="de">Methode um das CodeSystem zu erhalten.</div>
@@ -81,7 +81,7 @@ public interface PurposeOfUse {
 	public String getCodeSystem();
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the CodeSystemName.</div>
 	 * <div class="de">Methode um den CodeSystemName zu erhalten.</div>
@@ -98,7 +98,7 @@ public interface PurposeOfUse {
 	public String getCodeSystemName();
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the CodeSystemVersion.</div>
 	 * <div class="de">Methode um die CodeSystemVersion zu erhalten.</div>
@@ -115,7 +115,7 @@ public interface PurposeOfUse {
 	public String getCodeSystemVersion();
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the DisplayName.</div>
 	 * <div class="de">Methode um den DisplayName zu erhalten.</div>
@@ -132,7 +132,7 @@ public interface PurposeOfUse {
 	public String getDisplayName();
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the Code.</div>
 	 * <div class="de">Methode um den Code zu setzen.</div>
@@ -149,7 +149,7 @@ public interface PurposeOfUse {
 	public void setCode(String value);
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the CodeSystem.</div>
 	 * <div class="de">Methode um das CodeSystem zu setzen.</div>
@@ -166,7 +166,7 @@ public interface PurposeOfUse {
 	public void setCodeSystem(String value);
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the CodeSystemName.</div>
 	 * <div class="de">Methode um den CodeSystemName zu setzen.</div>
@@ -183,7 +183,7 @@ public interface PurposeOfUse {
 	public void setCodeSystemName(String value);
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the CodeSystemVersion.</div>
 	 * <div class="de">Methode um die CodeSystemVersion zu setzen.</div>
@@ -200,7 +200,7 @@ public interface PurposeOfUse {
 	public void setCodeSystemVersion(String value);
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the DisplayName.</div>
 	 * <div class="de">Methode um den DisplayName zu setzen.</div>

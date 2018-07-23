@@ -35,114 +35,145 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 public enum LabObsList {
 
 	/** <div class="en">5-Fluorocytosine [Susceptibility]</div>. */
-	_5_FLUOROCYTOSINE_SUSCEPTIBILITY("18855-7", "5-Fluorocytosine [Susceptibility]", "18769-0", "20150101", ""),
+	_5_FLUOROCYTOSINE_SUSCEPTIBILITY("18855-7", "5-Fluorocytosine [Susceptibility]", "18769-0",
+			"20150101", ""),
 
 	/** <div class="en">ABO and Rh group [Type] in Blood</div>. */
-	ABO_AND_RH_GROUP_TYPE_IN_BLOOD("882-1", "ABO and Rh group [Type] in Blood", "18723-7", "20150101", ""),
+	ABO_AND_RH_GROUP_TYPE_IN_BLOOD("882-1", "ABO and Rh group [Type] in Blood", "18723-7",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Activated partial thromboplastin time (aPTT) in Blood by
 	 * Coagulation assay</div>.
 	 */
-	ACTIVATED_PARTIAL_THROMBOPLASTIN_TIME_APTT_IN_BLOOD_BY_COAGULATION_ASSAY("3173-2", "Activated partial thromboplastin time (aPTT) in Blood by Coagulation assay", "18720-3", "20150101", ""),
+	ACTIVATED_PARTIAL_THROMBOPLASTIN_TIME_APTT_IN_BLOOD_BY_COAGULATION_ASSAY("3173-2",
+			"Activated partial thromboplastin time (aPTT) in Blood by Coagulation assay", "18720-3",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Alanine aminotransferase [Enzymatic activity/volume] in
 	 * Serum or Plasma</div>.
 	 */
-	ALANINE_AMINOTRANSFERASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA("1742-6", "Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	ALANINE_AMINOTRANSFERASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA("1742-6",
+			"Alanine aminotransferase [Enzymatic activity/volume] in Serum or Plasma", "18719-5",
+			"20150101", ""),
 
 	/** <div class="en">Albumin [Mass/volume] in Serum or Plasma</div>. */
-	ALBUMIN_MASSVOLUME_IN_SERUM_OR_PLASMA("1751-7", "Albumin [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	ALBUMIN_MASSVOLUME_IN_SERUM_OR_PLASMA("1751-7", "Albumin [Mass/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Albumin [Mass/?volume] in Serum or Plasma by Bromocresol
 	 * green (BCG) dye binding method</div>.
 	 */
-	ALBUMIN_MASSVOLUME_IN_SERUM_OR_PLASMA_BY_BROMOCRESOL_GREEN_BCG_DYE_BINDING_METHOD("61151-7", "Albumin [Mass/?volume] in Serum or Plasma by Bromocresol green (BCG) dye binding method", "18719-5", "20150101", ""),
+	ALBUMIN_MASSVOLUME_IN_SERUM_OR_PLASMA_BY_BROMOCRESOL_GREEN_BCG_DYE_BINDING_METHOD("61151-7",
+			"Albumin [Mass/?volume] in Serum or Plasma by Bromocresol green (BCG) dye binding method",
+			"18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Albumin [Mass/?volume] in Serum or Plasma by Bromocresol
 	 * purple (BCP) dye binding method</div>.
 	 */
-	ALBUMIN_MASSVOLUME_IN_SERUM_OR_PLASMA_BY_BROMOCRESOL_PURPLE_BCP_DYE_BINDING_METHOD("61152-5", "Albumin [Mass/?volume] in Serum or Plasma by Bromocresol purple (BCP) dye binding method", "18719-5", "20150101", ""),
+	ALBUMIN_MASSVOLUME_IN_SERUM_OR_PLASMA_BY_BROMOCRESOL_PURPLE_BCP_DYE_BINDING_METHOD("61152-5",
+			"Albumin [Mass/?volume] in Serum or Plasma by Bromocresol purple (BCP) dye binding method",
+			"18719-5", "20150101", ""),
 
 	/** <div class="en">Albumin [Moles/volume] in Serum or Plasma</div>. */
-	ALBUMIN_MOLESVOLUME_IN_SERUM_OR_PLASMA("54347-0", "Albumin [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	ALBUMIN_MOLESVOLUME_IN_SERUM_OR_PLASMA("54347-0", "Albumin [Moles/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Alkaline phosphatase [Enzymatic activity/volume] in Serum
 	 * or Plasma</div>.
 	 */
-	ALKALINE_PHOSPHATASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA("6768-6", "Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	ALKALINE_PHOSPHATASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA("6768-6",
+			"Alkaline phosphatase [Enzymatic activity/volume] in Serum or Plasma", "18719-5",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Alpha-1-Fetoprotein [Mass/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	ALPHA_1_FETOPROTEIN_MASSVOLUME_IN_SERUM_OR_PLASMA("1834-1", "Alpha-1-Fetoprotein [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	ALPHA_1_FETOPROTEIN_MASSVOLUME_IN_SERUM_OR_PLASMA("1834-1",
+			"Alpha-1-Fetoprotein [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Alpha-1-Fetoprotein [Moles/?volume] in Serum or
 	 * Plasma</div>.
 	 */
-	ALPHA_1_FETOPROTEIN_MOLESVOLUME_IN_SERUM_OR_PLASMA("19177-5", "Alpha-1-Fetoprotein [Moles/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	ALPHA_1_FETOPROTEIN_MOLESVOLUME_IN_SERUM_OR_PLASMA("19177-5",
+			"Alpha-1-Fetoprotein [Moles/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Alpha-1-Fetoprotein [Units/volume] in Serum or
 	 * Plasma</div> .
 	 */
-	ALPHA_1_FETOPROTEIN_UNITSVOLUME_IN_SERUM_OR_PLASMA("19176-7", "Alpha-1-Fetoprotein [Units/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	ALPHA_1_FETOPROTEIN_UNITSVOLUME_IN_SERUM_OR_PLASMA("19176-7",
+			"Alpha-1-Fetoprotein [Units/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Amitriptyline [Mass/volume] in Serum or Plasma</div>. */
-	AMITRIPTYLINE_MASSVOLUME_IN_SERUM_OR_PLASMA("3333-2", "Amitriptyline [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	AMITRIPTYLINE_MASSVOLUME_IN_SERUM_OR_PLASMA("3333-2",
+			"Amitriptyline [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Amitriptyline [Moles/volume] in Serum or Plasma</div>.
 	 */
-	AMITRIPTYLINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14597-9", "Amitriptyline [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	AMITRIPTYLINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14597-9",
+			"Amitriptyline [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Amitriptyline+Nortriptyline [Mass/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	AMITRIPTYLINE_NORTRIPTYLINE_MASSVOLUME_IN_SERUM_OR_PLASMA("3335-7", "Amitriptyline+Nortriptyline [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	AMITRIPTYLINE_NORTRIPTYLINE_MASSVOLUME_IN_SERUM_OR_PLASMA("3335-7",
+			"Amitriptyline+Nortriptyline [Mass/volume] in Serum or Plasma", "18719-5", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Amitriptyline+Nortriptyline [Moles/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	AMITRIPTYLINE_NORTRIPTYLINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14598-7", "Amitriptyline+Nortriptyline [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	AMITRIPTYLINE_NORTRIPTYLINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14598-7",
+			"Amitriptyline+Nortriptyline [Moles/volume] in Serum or Plasma", "18719-5", "20150101",
+			""),
 
 	/** <div class="en">Amphetamines [Presence] in Urine</div>. */
-	AMPHETAMINES_PRESENCE_IN_URINE("3349-8", "Amphetamines [Presence] in Urine", "18729-4", "20150101", ""),
+	AMPHETAMINES_PRESENCE_IN_URINE("3349-8", "Amphetamines [Presence] in Urine", "18729-4",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Amphetamines [Presence] in Urine by Screen method</div>.
 	 */
-	AMPHETAMINES_PRESENCE_IN_URINE_BY_SCREEN_METHOD("19261-7", "Amphetamines [Presence] in Urine by Screen method", "18729-4", "20150101", ""),
+	AMPHETAMINES_PRESENCE_IN_URINE_BY_SCREEN_METHOD("19261-7",
+			"Amphetamines [Presence] in Urine by Screen method", "18729-4", "20150101", ""),
 
 	/** <div class="en">Amphotericin B [Susceptibility]</div>. */
-	AMPHOTERICIN_B_SUSCEPTIBILITY("18863-1", "Amphotericin B [Susceptibility]", "18769-0", "20150101", ""),
+	AMPHOTERICIN_B_SUSCEPTIBILITY("18863-1", "Amphotericin B [Susceptibility]", "18769-0",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Amylase [Enzymatic activity/?volume] in Serum or
 	 * Plasma</div>.
 	 */
-	AMYLASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA("1798-8", "Amylase [Enzymatic activity/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	AMYLASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA("1798-8",
+			"Amylase [Enzymatic activity/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Amylase.pancreatic [Enzymatic activity/volume] in Serum
 	 * or Plasma</div>
 	 */
-	AMYLASE_PANCREATIC_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA("1805-1", "Amylase.pancreatic [Enzymatic activity/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	AMYLASE_PANCREATIC_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA("1805-1",
+			"Amylase.pancreatic [Enzymatic activity/volume] in Serum or Plasma", "18719-5",
+			"20150101", ""),
 
 	/** <div class="en">Anidulafungin [Susceptibility]</div>. */
-	ANIDULAFUNGIN_SUSCEPTIBILITY("57095-2", "Anidulafungin [Susceptibility]", "18769-0", "20150101", ""),
+	ANIDULAFUNGIN_SUSCEPTIBILITY("57095-2", "Anidulafungin [Susceptibility]", "18769-0", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Antidepressants [Identifier] in Serum or Plasma</div>.
 	 */
-	ANTIDEPRESSANTS_IDENTIFIER_IN_SERUM_OR_PLASMA("16389-9", "Antidepressants [Identifier] in Serum or Plasma", "18719-5", "20150101", ""),
+	ANTIDEPRESSANTS_IDENTIFIER_IN_SERUM_OR_PLASMA("16389-9",
+			"Antidepressants [Identifier] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Appearance of Urine</div>. */
 	APPEARANCE_OF_URINE("5767-9", "Appearance of Urine", "18729-4", "20150101", ""),
@@ -151,301 +182,381 @@ public enum LabObsList {
 	 * <div class="en">Aspartate aminotransferase [Enzymatic activity/?volume]
 	 * in Serum or Plasma</div>.
 	 */
-	ASPARTATE_AMINOTRANSFERASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA("1920-8", "Aspartate aminotransferase [Enzymatic activity/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	ASPARTATE_AMINOTRANSFERASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA("1920-8",
+			"Aspartate aminotransferase [Enzymatic activity/?volume] in Serum or Plasma", "18719-5",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Bacteria [#/area] in Urine sediment by Automated
 	 * count</div>.
 	 */
-	BACTERIA_AREA_IN_URINE_SEDIMENT_BY_AUTOMATED_COUNT("33218-9", "Bacteria [#/area] in Urine sediment by Automated count", "18729-4", "20150101", ""),
+	BACTERIA_AREA_IN_URINE_SEDIMENT_BY_AUTOMATED_COUNT("33218-9",
+			"Bacteria [#/area] in Urine sediment by Automated count", "18729-4", "20150101", ""),
 
 	/** <div class="en">Bacteria identified in Urine by Culture</div>. */
-	BACTERIA_IDENTIFIED_IN_URINE_BY_CULTURE("630-4", "Bacteria identified in Urine by Culture", "18725-2", "20150101", ""),
+	BACTERIA_IDENTIFIED_IN_URINE_BY_CULTURE("630-4", "Bacteria identified in Urine by Culture",
+			"18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Bacteria [Presence] in Urine sediment by Light
 	 * microscopy</div>.
 	 */
-	BACTERIA_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("25145-4", "Bacteria [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101", ""),
+	BACTERIA_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("25145-4",
+			"Bacteria [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101", ""),
 
 	/**
 	 * <div class="en">Barbiturates [Presence] in Serum or Plasma by Screen
 	 * method</div>.
 	 */
-	BARBITURATES_PRESENCE_IN_SERUM_OR_PLASMA_BY_SCREEN_METHOD("20421-4", "Barbiturates [Presence] in Serum or Plasma by Screen method", "18719-5", "20150101", ""),
+	BARBITURATES_PRESENCE_IN_SERUM_OR_PLASMA_BY_SCREEN_METHOD("20421-4",
+			"Barbiturates [Presence] in Serum or Plasma by Screen method", "18719-5", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Barbiturates [Presence] in Serum, Plasma or Blood</div>.
 	 */
-	BARBITURATES_PRESENCE_IN_SERUM_PLASMA_OR_BLOOD("3376-1", "Barbiturates [Presence] in Serum, Plasma or Blood", "18719-5", "20150101", ""),
+	BARBITURATES_PRESENCE_IN_SERUM_PLASMA_OR_BLOOD("3376-1",
+			"Barbiturates [Presence] in Serum, Plasma or Blood", "18719-5", "20150101", ""),
 
 	/** <div class="en">Barbiturates [Presence] in Urine</div>. */
-	BARBITURATES_PRESENCE_IN_URINE("3377-9", "Barbiturates [Presence] in Urine", "18729-4", "20150101", ""),
+	BARBITURATES_PRESENCE_IN_URINE("3377-9", "Barbiturates [Presence] in Urine", "18729-4",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Barbiturates [Presence] in Urine by Screen method</div>.
 	 */
-	BARBITURATES_PRESENCE_IN_URINE_BY_SCREEN_METHOD("19270-8", "Barbiturates [Presence] in Urine by Screen method", "18729-4", "20150101", ""),
+	BARBITURATES_PRESENCE_IN_URINE_BY_SCREEN_METHOD("19270-8",
+			"Barbiturates [Presence] in Urine by Screen method", "18729-4", "20150101", ""),
 
 	/**
 	 * <div class="en">Basophils/?100 leukocytes in Blood by Manual count</div>.
 	 */
-	BASOPHILS100_LEUKOCYTES_IN_BLOOD_BY_MANUAL_COUNT("707-0", "Basophils/?100 leukocytes in Blood by Manual count", "18768-2", "20150101", ""),
+	BASOPHILS100_LEUKOCYTES_IN_BLOOD_BY_MANUAL_COUNT("707-0",
+			"Basophils/?100 leukocytes in Blood by Manual count", "18768-2", "20150101", ""),
 
 	/** <div class="en">Benzodiazepines [Presence] in Serum or Plasma</div>. */
-	BENZODIAZEPINES_PRESENCE_IN_SERUM_OR_PLASMA("3389-4", "Benzodiazepines [Presence] in Serum or Plasma", "18719-5", "20150101", ""),
+	BENZODIAZEPINES_PRESENCE_IN_SERUM_OR_PLASMA("3389-4",
+			"Benzodiazepines [Presence] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Benzodiazepines [Presence] in Urine</div>. */
-	BENZODIAZEPINES_PRESENCE_IN_URINE("3390-2", "Benzodiazepines [Presence] in Urine", "18729-4", "20150101", ""),
+	BENZODIAZEPINES_PRESENCE_IN_URINE("3390-2", "Benzodiazepines [Presence] in Urine", "18729-4",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Benzodiazepines [Presence] in Urine by Screen
 	 * method</div>.
 	 */
-	BENZODIAZEPINES_PRESENCE_IN_URINE_BY_SCREEN_METHOD("14316-4", "Benzodiazepines [Presence] in Urine by Screen method", "18729-4", "20150101", ""),
+	BENZODIAZEPINES_PRESENCE_IN_URINE_BY_SCREEN_METHOD("14316-4",
+			"Benzodiazepines [Presence] in Urine by Screen method", "18729-4", "20150101", ""),
 
 	/** <div class="en">Bg sup(a) Ab [Presence] in Serum or Plasma</div>. */
-	BG_SUPA_AB_PRESENCE_IN_SERUM_OR_PLASMA("57902-9", "Bg sup(a) Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	BG_SUPA_AB_PRESENCE_IN_SERUM_OR_PLASMA("57902-9", "Bg sup(a) Ab [Presence] in Serum or Plasma",
+			"18717-9", "20150101", ""),
 	/**
 	 * <div class="en">Bilirubin.total [Mass/volume] in Serum or Plasma</div>
 	 */
-	BILIRUBIN_TOTAL_MASSVOLUME_IN_SERUM_OR_PLASMA("1975-2", "Bilirubin.total [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	BILIRUBIN_TOTAL_MASSVOLUME_IN_SERUM_OR_PLASMA("1975-2",
+			"Bilirubin.total [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Bilirubin.total [Moles/volume] in Serum or Plasma</div>
 	 */
-	BILIRUBIN_TOTAL_MOLESVOLUME_IN_SERUM_OR_PLASMA("14631-6", "Bilirubin.total [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	BILIRUBIN_TOTAL_MOLESVOLUME_IN_SERUM_OR_PLASMA("14631-6",
+			"Bilirubin.total [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Bilirubin.total [Presence] in Urine by Automated test
 	 * strip</div>
 	 */
-	BILIRUBIN_TOTAL_PRESENCE_IN_URINE_BY_AUTOMATED_TEST_STRIP("50551-1", "Bilirubin.total [Presence] in Urine by Automated test strip", "18729-4", "20150101", ""),
+	BILIRUBIN_TOTAL_PRESENCE_IN_URINE_BY_AUTOMATED_TEST_STRIP("50551-1",
+			"Bilirubin.total [Presence] in Urine by Automated test strip", "18729-4", "20150101",
+			""),
 	/**
 	 * <div class="en">Bilirubin.total [Presence] in Urine by Test strip</div>
 	 */
-	BILIRUBIN_TOTAL_PRESENCE_IN_URINE_BY_TEST_STRIP("5770-3", "Bilirubin.total [Presence] in Urine by Test strip", "18729-4", "20150101", ""),
+	BILIRUBIN_TOTAL_PRESENCE_IN_URINE_BY_TEST_STRIP("5770-3",
+			"Bilirubin.total [Presence] in Urine by Test strip", "18729-4", "20150101", ""),
 
 	/**
 	 * <div class="en">Blasts/?100 leukocytes in Blood by Manual count</div>.
 	 */
-	BLASTS100_LEUKOCYTES_IN_BLOOD_BY_MANUAL_COUNT("709-6", "Blasts/?100 leukocytes in Blood by Manual count", "18768-2", "20150101", ""),
+	BLASTS100_LEUKOCYTES_IN_BLOOD_BY_MANUAL_COUNT("709-6",
+			"Blasts/?100 leukocytes in Blood by Manual count", "18768-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Blood group antibodies identified in Serum or
 	 * Plasma</div>.
 	 */
-	BLOOD_GROUP_ANTIBODIES_IDENTIFIED_IN_SERUM_OR_PLASMA("888-8", "Blood group antibodies identified in Serum or Plasma", "18717-9", "20150101", ""),
+	BLOOD_GROUP_ANTIBODIES_IDENTIFIED_IN_SERUM_OR_PLASMA("888-8",
+			"Blood group antibodies identified in Serum or Plasma", "18717-9", "20150101", ""),
 
 	/**
 	 * <div class="en">Blood group antibody screen [Presence] in Serum or
 	 * Plasma</div>.
 	 */
-	BLOOD_GROUP_ANTIBODY_SCREEN_PRESENCE_IN_SERUM_OR_PLASMA("890-4", "Blood group antibody screen [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	BLOOD_GROUP_ANTIBODY_SCREEN_PRESENCE_IN_SERUM_OR_PLASMA("890-4",
+			"Blood group antibody screen [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
 
 	/**
 	 * <div class="en">C reactive protein [Mass/volume] in Serum or Plasma</div>
 	 * .
 	 */
-	C_REACTIVE_PROTEIN_MASSVOLUME_IN_SERUM_OR_PLASMA("1988-5", "C reactive protein [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	C_REACTIVE_PROTEIN_MASSVOLUME_IN_SERUM_OR_PLASMA("1988-5",
+			"C reactive protein [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">C reactive protein [Mass/?volume] in Serum or Plasma by
 	 * High sensitivity method</div>.
 	 */
-	C_REACTIVE_PROTEIN_MASSVOLUME_IN_SERUM_OR_PLASMA_BY_HIGH_SENSITIVITY_METHOD("30522-7", "C reactive protein [Mass/?volume] in Serum or Plasma by High sensitivity method", "18719-5", "20150101", ""),
+	C_REACTIVE_PROTEIN_MASSVOLUME_IN_SERUM_OR_PLASMA_BY_HIGH_SENSITIVITY_METHOD("30522-7",
+			"C reactive protein [Mass/?volume] in Serum or Plasma by High sensitivity method",
+			"18719-5", "20150101", ""),
 
 	/** <div class="en">Calcidiol [Mass/volume] in Serum or Plasma</div>. */
-	CALCIDIOL_MASSVOLUME_IN_SERUM_OR_PLASMA("1989-3", "Calcidiol [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CALCIDIOL_MASSVOLUME_IN_SERUM_OR_PLASMA("1989-3", "Calcidiol [Mass/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/** <div class="en">Calcidiol [Moles/volume] in Serum or Plasma</div>. */
-	CALCIDIOL_MOLESVOLUME_IN_SERUM_OR_PLASMA("14635-7", "Calcidiol [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CALCIDIOL_MOLESVOLUME_IN_SERUM_OR_PLASMA("14635-7",
+			"Calcidiol [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Calcium [Mass/?volume] in Serum or Plasma</div>. */
-	CALCIUM_MASSVOLUME_IN_SERUM_OR_PLASMA("17861-6", "Calcium [Mass/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CALCIUM_MASSVOLUME_IN_SERUM_OR_PLASMA("17861-6", "Calcium [Mass/?volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/** <div class="en">Calcium [Moles/?volume] in Serum or Plasma</div>. */
-	CALCIUM_MOLESVOLUME_IN_SERUM_OR_PLASMA("2000-8", "Calcium [Moles/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CALCIUM_MOLESVOLUME_IN_SERUM_OR_PLASMA("2000-8", "Calcium [Moles/?volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Calcium oxalate crystals [Presence] in Urine sediment by
 	 * Light microscopy</div>.
 	 */
-	CALCIUM_OXALATE_CRYSTALS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("5774-5", "Calcium oxalate crystals [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101", ""),
+	CALCIUM_OXALATE_CRYSTALS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("5774-5",
+			"Calcium oxalate crystals [Presence] in Urine sediment by Light microscopy", "18729-4",
+			"20150101", ""),
 
 	/** <div class="en">Cannabinoids [Presence] in Urine</div>. */
-	CANNABINOIDS_PRESENCE_IN_URINE("3427-2", "Cannabinoids [Presence] in Urine", "18729-4", "20150101", ""),
+	CANNABINOIDS_PRESENCE_IN_URINE("3427-2", "Cannabinoids [Presence] in Urine", "18729-4",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Cannabinoids [Presence] in Urine by Screen method</div>.
 	 */
-	CANNABINOIDS_PRESENCE_IN_URINE_BY_SCREEN_METHOD("18282-4", "Cannabinoids [Presence] in Urine by Screen method", "18729-4", "20150101", ""),
+	CANNABINOIDS_PRESENCE_IN_URINE_BY_SCREEN_METHOD("18282-4",
+			"Cannabinoids [Presence] in Urine by Screen method", "18729-4", "20150101", ""),
 
 	/** <div class="en">Carbon dioxide [Partial pressure] in Blood</div>. */
-	CARBON_DIOXIDE_PARTIAL_PRESSURE_IN_BLOOD("11557-6", "Carbon dioxide [Partial pressure] in Blood", "18767-4", "20150101", ""),
+	CARBON_DIOXIDE_PARTIAL_PRESSURE_IN_BLOOD("11557-6",
+			"Carbon dioxide [Partial pressure] in Blood", "18767-4", "20150101", ""),
 
 	/**
 	 * <div class="en">Carbon dioxide [Partial pressure] in Venous blood</div>.
 	 */
-	CARBON_DIOXIDE_PARTIAL_PRESSURE_IN_VENOUS_BLOOD("2021-4", "Carbon dioxide [Partial pressure] in Venous blood", "18767-4", "20150101", ""),
+	CARBON_DIOXIDE_PARTIAL_PRESSURE_IN_VENOUS_BLOOD("2021-4",
+			"Carbon dioxide [Partial pressure] in Venous blood", "18767-4", "20150101", ""),
 
 	/**
 	 * <div class="en">Carcinoembryonic Ag [Mass/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	CARCINOEMBRYONIC_AG_MASSVOLUME_IN_SERUM_OR_PLASMA("2039-6", "Carcinoembryonic Ag [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CARCINOEMBRYONIC_AG_MASSVOLUME_IN_SERUM_OR_PLASMA("2039-6",
+			"Carcinoembryonic Ag [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Carcinoembryonic Ag [Moles/volume] in Serum or
 	 * Plasma</div> .
 	 */
-	CARCINOEMBRYONIC_AG_MOLESVOLUME_IN_SERUM_OR_PLASMA("19167-6", "Carcinoembryonic Ag [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CARCINOEMBRYONIC_AG_MOLESVOLUME_IN_SERUM_OR_PLASMA("19167-6",
+			"Carcinoembryonic Ag [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Carcinoembryonic Ag [Units/volume] in Serum or
 	 * Plasma</div> .
 	 */
-	CARCINOEMBRYONIC_AG_UNITSVOLUME_IN_SERUM_OR_PLASMA("19166-8", "Carcinoembryonic Ag [Units/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CARCINOEMBRYONIC_AG_UNITSVOLUME_IN_SERUM_OR_PLASMA("19166-8",
+			"Carcinoembryonic Ag [Units/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Caspofungin [Susceptibility]</div>. */
-	CASPOFUNGIN_SUSCEPTIBILITY("32378-2", "Caspofungin [Susceptibility]", "18769-0", "20150101", ""),
+	CASPOFUNGIN_SUSCEPTIBILITY("32378-2", "Caspofungin [Susceptibility]", "18769-0", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Cat dander IgE Ab RAST class [Presence] in Serum</div>.
 	 */
-	CAT_DANDER_IGE_AB_RAST_CLASS_PRESENCE_IN_SERUM("15609-1", "Cat dander IgE Ab RAST class [Presence] in Serum", "18719-5", "20150101", ""),
+	CAT_DANDER_IGE_AB_RAST_CLASS_PRESENCE_IN_SERUM("15609-1",
+			"Cat dander IgE Ab RAST class [Presence] in Serum", "18719-5", "20150101", ""),
 
 	/** <div class="en">Cat dander IgE Ab [Units/volume] in Serum</div>. */
-	CAT_DANDER_IGE_AB_UNITSVOLUME_IN_SERUM("6833-8", "Cat dander IgE Ab [Units/volume] in Serum", "18719-5", "20150101", ""),
+	CAT_DANDER_IGE_AB_UNITSVOLUME_IN_SERUM("6833-8", "Cat dander IgE Ab [Units/volume] in Serum",
+			"18719-5", "20150101", ""),
 
 	/** <div class="en">CD16+CD56+ cells [#/volume] in Blood</div>. */
-	CD16_CD56_CELLS_VOLUME_IN_BLOOD("20402-4", "CD16+CD56+ cells [#/volume] in Blood", "18768-2", "20150101", ""),
+	CD16_CD56_CELLS_VOLUME_IN_BLOOD("20402-4", "CD16+CD56+ cells [#/volume] in Blood", "18768-2",
+			"20150101", ""),
 
 	/** <div class="en">CD16+CD56+ cells/100 cells in Blood</div>. */
-	CD16_CD56_CELLS100_CELLS_IN_BLOOD("18267-5", "CD16+CD56+ cells/100 cells in Blood", "18768-2", "20150101", ""),
+	CD16_CD56_CELLS100_CELLS_IN_BLOOD("18267-5", "CD16+CD56+ cells/100 cells in Blood", "18768-2",
+			"20150101", ""),
 
 	/** <div class="en">CD19 cells [#/volume] in Blood</div>. */
-	CD19_CELLS_VOLUME_IN_BLOOD("8116-6", "CD19 cells [#/volume] in Blood", "18768-2", "20150101", ""),
+	CD19_CELLS_VOLUME_IN_BLOOD("8116-6", "CD19 cells [#/volume] in Blood", "18768-2", "20150101",
+			""),
 
 	/** <div class="en">CD19 cells/100 cells in Blood</div>. */
-	CD19_CELLS100_CELLS_IN_BLOOD("8117-4", "CD19 cells/100 cells in Blood", "18768-2", "20150101", ""),
+	CD19_CELLS100_CELLS_IN_BLOOD("8117-4", "CD19 cells/100 cells in Blood", "18768-2", "20150101",
+			""),
 
 	/** <div class="en">CD3+CD4+ (T4 helper) cells [#/volume] in Blood</div>. */
-	CD3_CD4_T4_HELPER_CELLS_VOLUME_IN_BLOOD("24467-3", "CD3+CD4+ (T4 helper) cells [#/volume] in Blood", "18768-2", "20150101", ""),
+	CD3_CD4_T4_HELPER_CELLS_VOLUME_IN_BLOOD("24467-3",
+			"CD3+CD4+ (T4 helper) cells [#/volume] in Blood", "18768-2", "20150101", ""),
 
 	/** <div class="en">CD3+CD4+ (T4 helper) cells/100 cells in Blood</div>. */
-	CD3_CD4_T4_HELPER_CELLS100_CELLS_IN_BLOOD("8123-2", "CD3+CD4+ (T4 helper) cells/100 cells in Blood", "18768-2", "20150101", ""),
+	CD3_CD4_T4_HELPER_CELLS100_CELLS_IN_BLOOD("8123-2",
+			"CD3+CD4+ (T4 helper) cells/100 cells in Blood", "18768-2", "20150101", ""),
 
 	/**
 	 * <div class="en">CD3+CD4+ (T4 helper) cells/CD3+CD8+ (T8 suppressor cells)
 	 * cells [# Ratio] in Blood</div>.
 	 */
-	CD3_CD4_T4_HELPER_CELLSCD3_CD8_T8_SUPPRESSOR_CELLS_CELLS_RATIO_IN_BLOOD("54218-3", "CD3+CD4+ (T4 helper) cells/CD3+CD8+ (T8 suppressor cells) cells [# Ratio] in Blood", "18768-2", "20150101", ""),
+	CD3_CD4_T4_HELPER_CELLSCD3_CD8_T8_SUPPRESSOR_CELLS_CELLS_RATIO_IN_BLOOD("54218-3",
+			"CD3+CD4+ (T4 helper) cells/CD3+CD8+ (T8 suppressor cells) cells [# Ratio] in Blood",
+			"18768-2", "20150101", ""),
 
 	/**
 	 * <div class="en">CD3+CD8+ (T8 suppressor cells) cells [#/volume] in
 	 * Blood</div>.
 	 */
-	CD3_CD8_T8_SUPPRESSOR_CELLS_CELLS_VOLUME_IN_BLOOD("14135-8", "CD3+CD8+ (T8 suppressor cells) cells [#/volume] in Blood", "18768-2", "20150101", ""),
+	CD3_CD8_T8_SUPPRESSOR_CELLS_CELLS_VOLUME_IN_BLOOD("14135-8",
+			"CD3+CD8+ (T8 suppressor cells) cells [#/volume] in Blood", "18768-2", "20150101", ""),
 
 	/**
 	 * <div class="en">CD3+CD8+ (T8 suppressor cells) cells/100 cells in
 	 * Blood</div>.
 	 */
-	CD3_CD8_T8_SUPPRESSOR_CELLS_CELLS100_CELLS_IN_BLOOD("8101-8", "CD3+CD8+ (T8 suppressor cells) cells/100 cells in Blood", "18768-2", "20150101", ""),
+	CD3_CD8_T8_SUPPRESSOR_CELLS_CELLS100_CELLS_IN_BLOOD("8101-8",
+			"CD3+CD8+ (T8 suppressor cells) cells/100 cells in Blood", "18768-2", "20150101", ""),
 
 	/** <div class="en">CD3 cells [#/volume] in Blood</div>. */
 	CD3_CELLS_VOLUME_IN_BLOOD("8122-4", "CD3 cells [#/volume] in Blood", "18768-2", "20150101", ""),
 
 	/** <div class="en">CD3 cells/100 cells in Blood</div>. */
-	CD3_CELLS100_CELLS_IN_BLOOD("8124-0", "CD3 cells/100 cells in Blood", "18768-2", "20150101", ""),
+	CD3_CELLS100_CELLS_IN_BLOOD("8124-0", "CD3 cells/100 cells in Blood", "18768-2", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Chlamydia trachomatis DNA [Presence] in Unspecified
 	 * specimen by Probe and target amplification method</div>.
 	 */
-	CHLAMYDIA_TRACHOMATIS_DNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("21613-5", "Chlamydia trachomatis DNA [Presence] in Unspecified specimen by Probe and target amplification method", "18725-2", "20150101", ""),
+	CHLAMYDIA_TRACHOMATIS_DNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"21613-5",
+			"Chlamydia trachomatis DNA [Presence] in Unspecified specimen by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/** <div class="en">Chloride [Moles/volume] in Serum or Plasma</div>. */
-	CHLORIDE_MOLESVOLUME_IN_SERUM_OR_PLASMA("2075-0", "Chloride [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CHLORIDE_MOLESVOLUME_IN_SERUM_OR_PLASMA("2075-0", "Chloride [Moles/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Cholecalciferol (Vit D3) [Mass/?volume] in Serum or
 	 * Plasma</div>.
 	 */
-	CHOLECALCIFEROL_VIT_D3_MASSVOLUME_IN_SERUM_OR_PLASMA("1990-1", "Cholecalciferol (Vit D3) [Mass/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CHOLECALCIFEROL_VIT_D3_MASSVOLUME_IN_SERUM_OR_PLASMA("1990-1",
+			"Cholecalciferol (Vit D3) [Mass/?volume] in Serum or Plasma", "18719-5", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Cholecalciferol (Vit D3) [Moles/?volume] in Serum or
 	 * Plasma</div>.
 	 */
-	CHOLECALCIFEROL_VIT_D3_MOLESVOLUME_IN_SERUM_OR_PLASMA("33958-0", "Cholecalciferol (Vit D3) [Moles/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CHOLECALCIFEROL_VIT_D3_MOLESVOLUME_IN_SERUM_OR_PLASMA("33958-0",
+			"Cholecalciferol (Vit D3) [Moles/?volume] in Serum or Plasma", "18719-5", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Cholesterol in HDL [Mass/volume] in Serum or Plasma</div>
 	 * .
 	 */
-	CHOLESTEROL_IN_HDL_MASSVOLUME_IN_SERUM_OR_PLASMA("2085-9", "Cholesterol in HDL [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CHOLESTEROL_IN_HDL_MASSVOLUME_IN_SERUM_OR_PLASMA("2085-9",
+			"Cholesterol in HDL [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Cholesterol in HDL [Moles/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	CHOLESTEROL_IN_HDL_MOLESVOLUME_IN_SERUM_OR_PLASMA("14646-4", "Cholesterol in HDL [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CHOLESTEROL_IN_HDL_MOLESVOLUME_IN_SERUM_OR_PLASMA("14646-4",
+			"Cholesterol in HDL [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Cholesterol [Mass/volume] in Serum or Plasma</div>. */
-	CHOLESTEROL_MASSVOLUME_IN_SERUM_OR_PLASMA("2093-3", "Cholesterol [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CHOLESTEROL_MASSVOLUME_IN_SERUM_OR_PLASMA("2093-3",
+			"Cholesterol [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Cholesterol [Moles/volume] in Serum or Plasma</div>. */
-	CHOLESTEROL_MOLESVOLUME_IN_SERUM_OR_PLASMA("14647-2", "Cholesterol [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CHOLESTEROL_MOLESVOLUME_IN_SERUM_OR_PLASMA("14647-2",
+			"Cholesterol [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Choriogonadotropin.beta subunit free [Moles/?volume] in
 	 * Serum or Plasma</div>
 	 */
-	CHORIOGONADOTROPIN_BETA_SUBUNIT_FREE_MOLESVOLUME_IN_SERUM_OR_PLASMA("2115-4", "Choriogonadotropin.beta subunit free [Moles/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CHORIOGONADOTROPIN_BETA_SUBUNIT_FREE_MOLESVOLUME_IN_SERUM_OR_PLASMA("2115-4",
+			"Choriogonadotropin.beta subunit free [Moles/?volume] in Serum or Plasma", "18719-5",
+			"20150101", ""),
 	/**
 	 * <div class="en">Choriogonadotropin.beta subunit [Units/?volume] in Serum
 	 * or Plasma</div>
 	 */
-	CHORIOGONADOTROPIN_BETA_SUBUNIT_UNITSVOLUME_IN_SERUM_OR_PLASMA("21198-7", "Choriogonadotropin.beta subunit [Units/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CHORIOGONADOTROPIN_BETA_SUBUNIT_UNITSVOLUME_IN_SERUM_OR_PLASMA("21198-7",
+			"Choriogonadotropin.beta subunit [Units/?volume] in Serum or Plasma", "18719-5",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Choriogonadotropin [Mass/volume] in Serum or Plasma</div>
 	 * .
 	 */
-	CHORIOGONADOTROPIN_MASSVOLUME_IN_SERUM_OR_PLASMA("34670-0", "Choriogonadotropin [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CHORIOGONADOTROPIN_MASSVOLUME_IN_SERUM_OR_PLASMA("34670-0",
+			"Choriogonadotropin [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Choriogonadotropin [Moles/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	CHORIOGONADOTROPIN_MOLESVOLUME_IN_SERUM_OR_PLASMA("2119-6", "Choriogonadotropin [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CHORIOGONADOTROPIN_MOLESVOLUME_IN_SERUM_OR_PLASMA("2119-6",
+			"Choriogonadotropin [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Choriogonadotropin [Units/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	CHORIOGONADOTROPIN_UNITSVOLUME_IN_SERUM_OR_PLASMA("19080-1", "Choriogonadotropin [Units/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CHORIOGONADOTROPIN_UNITSVOLUME_IN_SERUM_OR_PLASMA("19080-1",
+			"Choriogonadotropin [Units/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Chromosome analysis.interphase [interpretation] in
 	 * Unspecified specimen by Fluorescent in situ hybridization (FISH)
 	 * Narrative</div>
 	 */
-	CHROMOSOME_ANALYSIS_INTERPHASE_INTERPRETATION_IN_UNSPECIFIED_SPECIMEN_BY_FLUORESCENT_IN_SITU_HYBRIDIZATION_FISH_NARRATIVE("59050-5", "Chromosome analysis.interphase [interpretation] in Unspecified specimen by Fluorescent in situ hybridization (FISH) Narrative", "26435-8", "20150101", ""),
+	CHROMOSOME_ANALYSIS_INTERPHASE_INTERPRETATION_IN_UNSPECIFIED_SPECIMEN_BY_FLUORESCENT_IN_SITU_HYBRIDIZATION_FISH_NARRATIVE(
+			"59050-5",
+			"Chromosome analysis.interphase [interpretation] in Unspecified specimen by Fluorescent in situ hybridization (FISH) Narrative",
+			"26435-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Chromosome analysis master panel - Blood or Tissue</div>.
 	 */
-	CHROMOSOME_ANALYSIS_MASTER_PANEL_BLOOD_OR_TISSUE("62389-2", "Chromosome analysis master panel - Blood or Tissue", "26435-8", "20150101", ""),
+	CHROMOSOME_ANALYSIS_MASTER_PANEL_BLOOD_OR_TISSUE("62389-2",
+			"Chromosome analysis master panel - Blood or Tissue", "26435-8", "20150101", ""),
 	/**
 	 * <div class="en">Chromosome analysis.metaphase panel - Blood by
 	 * Fluorescent in situ hybridization (FISH)</div>
 	 */
-	CHROMOSOME_ANALYSIS_METAPHASE_PANEL_BLOOD_BY_FLUORESCENT_IN_SITU_HYBRIDIZATION_FISH("62344-7", "Chromosome analysis.metaphase panel - Blood by Fluorescent in situ hybridization (FISH)", "26435-8", "20150101", ""),
+	CHROMOSOME_ANALYSIS_METAPHASE_PANEL_BLOOD_BY_FLUORESCENT_IN_SITU_HYBRIDIZATION_FISH("62344-7",
+			"Chromosome analysis.metaphase panel - Blood by Fluorescent in situ hybridization (FISH)",
+			"26435-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Chromosome [Identifier] in Blood or Tissue by Molecular
 	 * genetics method</div>.
 	 */
-	CHROMOSOME_IDENTIFIER_IN_BLOOD_OR_TISSUE_BY_MOLECULAR_GENETICS_METHOD("48000-4", "Chromosome [Identifier] in Blood or Tissue by Molecular genetics method", "26435-8", "20150101", ""),
+	CHROMOSOME_IDENTIFIER_IN_BLOOD_OR_TISSUE_BY_MOLECULAR_GENETICS_METHOD("48000-4",
+			"Chromosome [Identifier] in Blood or Tissue by Molecular genetics method", "26435-8",
+			"20150101", ""),
 
 	/** <div class="en">Clarity of Urine</div>. */
 	CLARITY_OF_URINE("32167-9", "Clarity of Urine", "18729-4", "20150101", ""),
@@ -454,1429 +565,1857 @@ public enum LabObsList {
 	 * <div class="en">Clostridium difficile DNA [Presence] in Unspecified
 	 * specimen by Probe and target amplification method</div>.
 	 */
-	CLOSTRIDIUM_DIFFICILE_DNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("61367-9", "Clostridium difficile DNA [Presence] in Unspecified specimen by Probe and target amplification method", "18725-2", "20150101", ""),
+	CLOSTRIDIUM_DIFFICILE_DNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"61367-9",
+			"Clostridium difficile DNA [Presence] in Unspecified specimen by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Coarse Granular Casts [#/area] in Urine sediment by
 	 * Automated count</div>.
 	 */
-	COARSE_GRANULAR_CASTS_AREA_IN_URINE_SEDIMENT_BY_AUTOMATED_COUNT("33227-0", "Coarse Granular Casts [#/area] in Urine sediment by Automated count", "18729-4", "20150101", ""),
+	COARSE_GRANULAR_CASTS_AREA_IN_URINE_SEDIMENT_BY_AUTOMATED_COUNT("33227-0",
+			"Coarse Granular Casts [#/area] in Urine sediment by Automated count", "18729-4",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Coarse Granular Casts [Presence] in Urine sediment by
 	 * Light microscopy</div>.
 	 */
-	COARSE_GRANULAR_CASTS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("32175-2", "Coarse Granular Casts [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101", ""),
+	COARSE_GRANULAR_CASTS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("32175-2",
+			"Coarse Granular Casts [Presence] in Urine sediment by Light microscopy", "18729-4",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Cobalamin (Vitamin B12) [Mass/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	COBALAMIN_VITAMIN_B12_MASSVOLUME_IN_SERUM_OR_PLASMA("2132-9", "Cobalamin (Vitamin B12) [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	COBALAMIN_VITAMIN_B12_MASSVOLUME_IN_SERUM_OR_PLASMA("2132-9",
+			"Cobalamin (Vitamin B12) [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Cobalamin (Vitamin B12) [Moles/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	COBALAMIN_VITAMIN_B12_MOLESVOLUME_IN_SERUM_OR_PLASMA("14685-2", "Cobalamin (Vitamin B12) [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	COBALAMIN_VITAMIN_B12_MOLESVOLUME_IN_SERUM_OR_PLASMA("14685-2",
+			"Cobalamin (Vitamin B12) [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Cocaine [Presence] in Urine</div>. */
 	COCAINE_PRESENCE_IN_URINE("3397-7", "Cocaine [Presence] in Urine", "18729-4", "20150101", ""),
 
 	/** <div class="en">Cocaine [Presence] in Urine by Screen method</div>. */
-	COCAINE_PRESENCE_IN_URINE_BY_SCREEN_METHOD("19359-9", "Cocaine [Presence] in Urine by Screen method", "18729-4", "20150101", ""),
+	COCAINE_PRESENCE_IN_URINE_BY_SCREEN_METHOD("19359-9",
+			"Cocaine [Presence] in Urine by Screen method", "18729-4", "20150101", ""),
 
 	/** <div class="en">Cortisol [Mass/volume] in Serum or Plasma</div>. */
-	CORTISOL_MASSVOLUME_IN_SERUM_OR_PLASMA("2143-6", "Cortisol [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CORTISOL_MASSVOLUME_IN_SERUM_OR_PLASMA("2143-6", "Cortisol [Mass/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/** <div class="en">Cortisol [Moles/volume] in Serum or Plasma</div>. */
-	CORTISOL_MOLESVOLUME_IN_SERUM_OR_PLASMA("14675-3", "Cortisol [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CORTISOL_MOLESVOLUME_IN_SERUM_OR_PLASMA("14675-3", "Cortisol [Moles/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Creatine kinase [Enzymatic activity/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	CREATINE_KINASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA("2157-6", "Creatine kinase [Enzymatic activity/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CREATINE_KINASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA("2157-6",
+			"Creatine kinase [Enzymatic activity/volume] in Serum or Plasma", "18719-5", "20150101",
+			""),
 
 	/** <div class="en">Creatinine [Mass/volume] in Serum or Plasma</div>. */
-	CREATININE_MASSVOLUME_IN_SERUM_OR_PLASMA("2160-0", "Creatinine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CREATININE_MASSVOLUME_IN_SERUM_OR_PLASMA("2160-0",
+			"Creatinine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Creatinine [Mass/volume] in Urine</div>. */
-	CREATININE_MASSVOLUME_IN_URINE("2161-8", "Creatinine [Mass/volume] in Urine", "18719-5", "20150101", ""),
+	CREATININE_MASSVOLUME_IN_URINE("2161-8", "Creatinine [Mass/volume] in Urine", "18719-5",
+			"20150101", ""),
 
 	/** <div class="en">Creatinine [Moles/volume] in Serum or Plasma</div>. */
-	CREATININE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14682-9", "Creatinine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	CREATININE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14682-9",
+			"Creatinine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Creatinine [Moles/volume] in Urine</div>. */
-	CREATININE_MOLESVOLUME_IN_URINE("14683-7", "Creatinine [Moles/volume] in Urine", "18719-5", "20150101", ""),
+	CREATININE_MOLESVOLUME_IN_URINE("14683-7", "Creatinine [Moles/volume] in Urine", "18719-5",
+			"20150101", ""),
 	/**
 	 * <div class="en">Crystals.amorphous [Presence] in Urine sediment by Light
 	 * microscopy</div>
 	 */
-	CRYSTALS_AMORPHOUS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("60340-7", "Crystals.amorphous [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101", ""),
+	CRYSTALS_AMORPHOUS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("60340-7",
+			"Crystals.amorphous [Presence] in Urine sediment by Light microscopy", "18729-4",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Crystals [#/area] in Urine sediment by Automated
 	 * count</div>.
 	 */
-	CRYSTALS_AREA_IN_URINE_SEDIMENT_BY_AUTOMATED_COUNT("53322-4", "Crystals [#/area] in Urine sediment by Automated count", "18729-4", "20150101", ""),
+	CRYSTALS_AREA_IN_URINE_SEDIMENT_BY_AUTOMATED_COUNT("53322-4",
+			"Crystals [#/area] in Urine sediment by Automated count", "18729-4", "20150101", ""),
 
 	/**
 	 * <div class="en">Crystals [Presence] in Urine sediment by Light
 	 * microscopy</div>.
 	 */
-	CRYSTALS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("49755-2", "Crystals [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101", ""),
+	CRYSTALS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("49755-2",
+			"Crystals [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101", ""),
 
 	/**
 	 * <div class="en">Cyclic citrullinated peptide Ab [Units/?volume] in
 	 * Serum</div>.
 	 */
-	CYCLIC_CITRULLINATED_PEPTIDE_AB_UNITSVOLUME_IN_SERUM("53027-9", "Cyclic citrullinated peptide Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	CYCLIC_CITRULLINATED_PEPTIDE_AB_UNITSVOLUME_IN_SERUM("53027-9",
+			"Cyclic citrullinated peptide Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Cyclic citrullinated peptide Ab [Units/?volume] in Serum
 	 * by Immunoassay</div>.
 	 */
-	CYCLIC_CITRULLINATED_PEPTIDE_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("32218-0", "Cyclic citrullinated peptide Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	CYCLIC_CITRULLINATED_PEPTIDE_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("32218-0",
+			"Cyclic citrullinated peptide Ab [Units/?volume] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Cyclic citrullinated peptide IgG Ab [Units/?volume] in
 	 * Serum</div>.
 	 */
-	CYCLIC_CITRULLINATED_PEPTIDE_IGG_AB_UNITSVOLUME_IN_SERUM("33935-8", "Cyclic citrullinated peptide IgG Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	CYCLIC_CITRULLINATED_PEPTIDE_IGG_AB_UNITSVOLUME_IN_SERUM("33935-8",
+			"Cyclic citrullinated peptide IgG Ab [Units/?volume] in Serum", "18727-8", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Cystine crystals [Presence] in Urine sediment by Light
 	 * microscopy</div>.
 	 */
-	CYSTINE_CRYSTALS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("5784-4", "Cystine crystals [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101", ""),
+	CYSTINE_CRYSTALS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("5784-4",
+			"Cystine crystals [Presence] in Urine sediment by Light microscopy", "18729-4",
+			"20150101", ""),
 
 	/** <div class="en">Cytomegalovirus Ab [Presence] in Serum</div>. */
-	CYTOMEGALOVIRUS_AB_PRESENCE_IN_SERUM("22239-8", "Cytomegalovirus Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	CYTOMEGALOVIRUS_AB_PRESENCE_IN_SERUM("22239-8", "Cytomegalovirus Ab [Presence] in Serum",
+			"18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Cytomegalovirus DNA [Units/?volume] (viral load) in
 	 * Plasma by Probe and target amplification method</div>.
 	 */
-	CYTOMEGALOVIRUS_DNA_UNITSVOLUME_VIRAL_LOAD_IN_PLASMA_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("72493-0", "Cytomegalovirus DNA [Units/?volume] (viral load) in Plasma by Probe and target amplification method", "18725-2", "20150101", ""),
+	CYTOMEGALOVIRUS_DNA_UNITSVOLUME_VIRAL_LOAD_IN_PLASMA_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"72493-0",
+			"Cytomegalovirus DNA [Units/?volume] (viral load) in Plasma by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Cytomegalovirus DNA [#/?volume] (viral load) in Serum or
 	 * Plasma by Probe and target amplification method</div>.
 	 */
-	CYTOMEGALOVIRUS_DNA_VOLUME_VIRAL_LOAD_IN_SERUM_OR_PLASMA_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("30247-1", "Cytomegalovirus DNA [#/?volume] (viral load) in Serum or Plasma by Probe and target amplification method", "18725-2", "20150101", ""),
+	CYTOMEGALOVIRUS_DNA_VOLUME_VIRAL_LOAD_IN_SERUM_OR_PLASMA_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"30247-1",
+			"Cytomegalovirus DNA [#/?volume] (viral load) in Serum or Plasma by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/** <div class="en">Cytomegalovirus IgG Ab [Presence] in Serum</div>. */
-	CYTOMEGALOVIRUS_IGG_AB_PRESENCE_IN_SERUM("22244-8", "Cytomegalovirus IgG Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	CYTOMEGALOVIRUS_IGG_AB_PRESENCE_IN_SERUM("22244-8",
+			"Cytomegalovirus IgG Ab [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Cytomegalovirus IgG Ab [Presence] in Serum by
 	 * Immunoassay</div>.
 	 */
-	CYTOMEGALOVIRUS_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("13949-3", "Cytomegalovirus IgG Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	CYTOMEGALOVIRUS_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("13949-3",
+			"Cytomegalovirus IgG Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Cytomegalovirus IgG Ab [Units/?volume] in Serum</div>.
 	 */
-	CYTOMEGALOVIRUS_IGG_AB_UNITSVOLUME_IN_SERUM("7852-7", "Cytomegalovirus IgG Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	CYTOMEGALOVIRUS_IGG_AB_UNITSVOLUME_IN_SERUM("7852-7",
+			"Cytomegalovirus IgG Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Cytomegalovirus IgG Ab [Units/?volume] in Serum by
 	 * Immunoassay</div>.
 	 */
-	CYTOMEGALOVIRUS_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5124-3", "Cytomegalovirus IgG Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	CYTOMEGALOVIRUS_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5124-3",
+			"Cytomegalovirus IgG Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101",
+			""),
 
 	/** <div class="en">Cytomegalovirus IgM Ab [Presence] in Serum</div>. */
-	CYTOMEGALOVIRUS_IGM_AB_PRESENCE_IN_SERUM("30325-5", "Cytomegalovirus IgM Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	CYTOMEGALOVIRUS_IGM_AB_PRESENCE_IN_SERUM("30325-5",
+			"Cytomegalovirus IgM Ab [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Cytomegalovirus IgM Ab [Presence] in Serum by
 	 * Immunoassay</div>.
 	 */
-	CYTOMEGALOVIRUS_IGM_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("24119-0", "Cytomegalovirus IgM Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	CYTOMEGALOVIRUS_IGM_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("24119-0",
+			"Cytomegalovirus IgM Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Cytomegalovirus IgM Ab [Units/?volume] in Serum</div>.
 	 */
-	CYTOMEGALOVIRUS_IGM_AB_UNITSVOLUME_IN_SERUM("7853-5", "Cytomegalovirus IgM Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	CYTOMEGALOVIRUS_IGM_AB_UNITSVOLUME_IN_SERUM("7853-5",
+			"Cytomegalovirus IgM Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Cytomegalovirus IgM Ab [Units/?volume] in Serum by
 	 * Immunoassay</div>.
 	 */
-	CYTOMEGALOVIRUS_IGM_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5126-8", "Cytomegalovirus IgM Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	CYTOMEGALOVIRUS_IGM_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5126-8",
+			"Cytomegalovirus IgM Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101",
+			""),
 
 	/** <div class="en">D Ab [Presence] in Serum or Plasma</div>. */
-	D_AB_PRESENCE_IN_SERUM_OR_PLASMA("975-3", "D Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	D_AB_PRESENCE_IN_SERUM_OR_PLASMA("975-3", "D Ab [Presence] in Serum or Plasma", "18717-9",
+			"20150101", ""),
 
 	/** <div class="en">Desipramine [Mass/volume] in Serum or Plasma</div>. */
-	DESIPRAMINE_MASSVOLUME_IN_SERUM_OR_PLASMA("3531-1", "Desipramine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	DESIPRAMINE_MASSVOLUME_IN_SERUM_OR_PLASMA("3531-1",
+			"Desipramine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Desipramine [Moles/volume] in Serum or Plasma</div>. */
-	DESIPRAMINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14691-0", "Desipramine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	DESIPRAMINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14691-0",
+			"Desipramine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Digoxin [Mass/volume] in Serum or Plasma</div>. */
-	DIGOXIN_MASSVOLUME_IN_SERUM_OR_PLASMA("10535-3", "Digoxin [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	DIGOXIN_MASSVOLUME_IN_SERUM_OR_PLASMA("10535-3", "Digoxin [Mass/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/** <div class="en">Digoxin [Moles/volume] in Serum or Plasma</div>. */
-	DIGOXIN_MOLESVOLUME_IN_SERUM_OR_PLASMA("14698-5", "Digoxin [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	DIGOXIN_MOLESVOLUME_IN_SERUM_OR_PLASMA("14698-5", "Digoxin [Moles/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/** <div class="en">E Ab [Presence] in Serum or Plasma</div>. */
-	E_AB_PRESENCE_IN_SERUM_OR_PLASMA("1018-1", "E Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	E_AB_PRESENCE_IN_SERUM_OR_PLASMA("1018-1", "E Ab [Presence] in Serum or Plasma", "18717-9",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Enterovirus RNA [Presence] in Unspecified specimen by
 	 * Probe and target amplification method</div>.
 	 */
-	ENTEROVIRUS_RNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("29591-5", "Enterovirus RNA [Presence] in Unspecified specimen by Probe and target amplification method", "18725-2", "20150101", ""),
+	ENTEROVIRUS_RNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"29591-5",
+			"Enterovirus RNA [Presence] in Unspecified specimen by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Eosinophils/?100 leukocytes in Blood by Manual
 	 * count</div>.
 	 */
-	EOSINOPHILS100_LEUKOCYTES_IN_BLOOD_BY_MANUAL_COUNT("714-6", "Eosinophils/?100 leukocytes in Blood by Manual count", "18768-2", "20150101", ""),
+	EOSINOPHILS100_LEUKOCYTES_IN_BLOOD_BY_MANUAL_COUNT("714-6",
+			"Eosinophils/?100 leukocytes in Blood by Manual count", "18768-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Epithelial cells [#/area] in Urine sediment by Automated
 	 * count</div>.
 	 */
-	EPITHELIAL_CELLS_AREA_IN_URINE_SEDIMENT_BY_AUTOMATED_COUNT("33342-7", "Epithelial cells [#/area] in Urine sediment by Automated count", "18729-4", "20150101", ""),
+	EPITHELIAL_CELLS_AREA_IN_URINE_SEDIMENT_BY_AUTOMATED_COUNT("33342-7",
+			"Epithelial cells [#/area] in Urine sediment by Automated count", "18729-4", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Epithelial cells [Presence] in Urine sediment by Light
 	 * microscopy</div>.
 	 */
-	EPITHELIAL_CELLS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("20453-7", "Epithelial cells [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101", ""),
+	EPITHELIAL_CELLS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("20453-7",
+			"Epithelial cells [Presence] in Urine sediment by Light microscopy", "18729-4",
+			"20150101", ""),
 	/**
 	 * <div class="en">Epithelial cells.renal [#/?volume] in Urine
 	 * sediment</div>
 	 */
-	EPITHELIAL_CELLS_RENAL_VOLUME_IN_URINE_SEDIMENT("13653-1", "Epithelial cells.renal [#/?volume] in Urine sediment", "18729-4", "20150101", ""),
+	EPITHELIAL_CELLS_RENAL_VOLUME_IN_URINE_SEDIMENT("13653-1",
+			"Epithelial cells.renal [#/?volume] in Urine sediment", "18729-4", "20150101", ""),
 	/**
 	 * <div class="en">Epithelial cells.squamous [#/?volume] in Urine
 	 * sediment</div>
 	 */
-	EPITHELIAL_CELLS_SQUAMOUS_VOLUME_IN_URINE_SEDIMENT("13654-9", "Epithelial cells.squamous [#/?volume] in Urine sediment", "18729-4", "20150101", ""),
+	EPITHELIAL_CELLS_SQUAMOUS_VOLUME_IN_URINE_SEDIMENT("13654-9",
+			"Epithelial cells.squamous [#/?volume] in Urine sediment", "18729-4", "20150101", ""),
 
 	/**
 	 * <div class="en">Epstein Barr virus capsid IgG Ab [Presence] in
 	 * Serum</div>.
 	 */
-	EPSTEIN_BARR_VIRUS_CAPSID_IGG_AB_PRESENCE_IN_SERUM("30339-6", "Epstein Barr virus capsid IgG Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	EPSTEIN_BARR_VIRUS_CAPSID_IGG_AB_PRESENCE_IN_SERUM("30339-6",
+			"Epstein Barr virus capsid IgG Ab [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Epstein Barr virus capsid IgG Ab [Presence] in Serum by
 	 * Immunoassay</div>.
 	 */
-	EPSTEIN_BARR_VIRUS_CAPSID_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("24114-1", "Epstein Barr virus capsid IgG Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	EPSTEIN_BARR_VIRUS_CAPSID_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("24114-1",
+			"Epstein Barr virus capsid IgG Ab [Presence] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Epstein Barr virus capsid IgG Ab [Units/?volume] in
 	 * Serum</div>.
 	 */
-	EPSTEIN_BARR_VIRUS_CAPSID_IGG_AB_UNITSVOLUME_IN_SERUM("7885-7", "Epstein Barr virus capsid IgG Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	EPSTEIN_BARR_VIRUS_CAPSID_IGG_AB_UNITSVOLUME_IN_SERUM("7885-7",
+			"Epstein Barr virus capsid IgG Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Epstein Barr virus capsid IgG Ab [Units/?volume] in Serum
 	 * by Immunoassay</div>.
 	 */
-	EPSTEIN_BARR_VIRUS_CAPSID_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5157-3", "Epstein Barr virus capsid IgG Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	EPSTEIN_BARR_VIRUS_CAPSID_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5157-3",
+			"Epstein Barr virus capsid IgG Ab [Units/?volume] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Epstein Barr virus capsid IgM Ab [Presence] in
 	 * Serum</div>.
 	 */
-	EPSTEIN_BARR_VIRUS_CAPSID_IGM_AB_PRESENCE_IN_SERUM("30340-4", "Epstein Barr virus capsid IgM Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	EPSTEIN_BARR_VIRUS_CAPSID_IGM_AB_PRESENCE_IN_SERUM("30340-4",
+			"Epstein Barr virus capsid IgM Ab [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Epstein Barr virus capsid IgM Ab [Presence] in Serum by
 	 * Immunoassay</div>.
 	 */
-	EPSTEIN_BARR_VIRUS_CAPSID_IGM_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("24115-8", "Epstein Barr virus capsid IgM Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	EPSTEIN_BARR_VIRUS_CAPSID_IGM_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("24115-8",
+			"Epstein Barr virus capsid IgM Ab [Presence] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Epstein Barr virus capsid IgM Ab [Units/?volume] in
 	 * Serum</div>.
 	 */
-	EPSTEIN_BARR_VIRUS_CAPSID_IGM_AB_UNITSVOLUME_IN_SERUM("7886-5", "Epstein Barr virus capsid IgM Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	EPSTEIN_BARR_VIRUS_CAPSID_IGM_AB_UNITSVOLUME_IN_SERUM("7886-5",
+			"Epstein Barr virus capsid IgM Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Epstein Barr virus capsid IgM Ab [Units/?volume] in Serum
 	 * by Immunoassay</div>.
 	 */
-	EPSTEIN_BARR_VIRUS_CAPSID_IGM_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5159-9", "Epstein Barr virus capsid IgM Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	EPSTEIN_BARR_VIRUS_CAPSID_IGM_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5159-9",
+			"Epstein Barr virus capsid IgM Ab [Units/?volume] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Epstein Barr virus DNA [#/?volume] (viral load) in Serum
 	 * or Plasma by Probe and target amplification method</div>.
 	 */
-	EPSTEIN_BARR_VIRUS_DNA_VOLUME_VIRAL_LOAD_IN_SERUM_OR_PLASMA_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("47982-4", "Epstein Barr virus DNA [#/?volume] (viral load) in Serum or Plasma by Probe and target amplification method", "18725-2", "20150101", ""),
+	EPSTEIN_BARR_VIRUS_DNA_VOLUME_VIRAL_LOAD_IN_SERUM_OR_PLASMA_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"47982-4",
+			"Epstein Barr virus DNA [#/?volume] (viral load) in Serum or Plasma by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Epstein Barr virus DNA [#/?volume] (viral load) in
 	 * Unspecified specimen by Probe and target amplification method</div>.
 	 */
-	EPSTEIN_BARR_VIRUS_DNA_VOLUME_VIRAL_LOAD_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("32585-2", "Epstein Barr virus DNA [#/?volume] (viral load) in Unspecified specimen by Probe and target amplification method", "18725-2", "20150101", ""),
+	EPSTEIN_BARR_VIRUS_DNA_VOLUME_VIRAL_LOAD_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"32585-2",
+			"Epstein Barr virus DNA [#/?volume] (viral load) in Unspecified specimen by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Epstein Barr virus early IgG Ab [Presence] in Serum</div>
 	 * .
 	 */
-	EPSTEIN_BARR_VIRUS_EARLY_IGG_AB_PRESENCE_IN_SERUM("22295-0", "Epstein Barr virus early IgG Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	EPSTEIN_BARR_VIRUS_EARLY_IGG_AB_PRESENCE_IN_SERUM("22295-0",
+			"Epstein Barr virus early IgG Ab [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Epstein Barr virus early IgG Ab [Presence] in Serum by
 	 * Immunoassay</div>.
 	 */
-	EPSTEIN_BARR_VIRUS_EARLY_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("40752-8", "Epstein Barr virus early IgG Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	EPSTEIN_BARR_VIRUS_EARLY_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("40752-8",
+			"Epstein Barr virus early IgG Ab [Presence] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Epstein Barr virus early IgG Ab [Units/?volume] in
 	 * Serum</div>.
 	 */
-	EPSTEIN_BARR_VIRUS_EARLY_IGG_AB_UNITSVOLUME_IN_SERUM("24007-7", "Epstein Barr virus early IgG Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	EPSTEIN_BARR_VIRUS_EARLY_IGG_AB_UNITSVOLUME_IN_SERUM("24007-7",
+			"Epstein Barr virus early IgG Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Epstein Barr virus nuclear IgG Ab [Presence] in
 	 * Serum</div> .
 	 */
-	EPSTEIN_BARR_VIRUS_NUCLEAR_IGG_AB_PRESENCE_IN_SERUM("7883-2", "Epstein Barr virus nuclear IgG Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	EPSTEIN_BARR_VIRUS_NUCLEAR_IGG_AB_PRESENCE_IN_SERUM("7883-2",
+			"Epstein Barr virus nuclear IgG Ab [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Epstein Barr virus nuclear IgG Ab [Presence] in Serum by
 	 * Immunoassay</div>.
 	 */
-	EPSTEIN_BARR_VIRUS_NUCLEAR_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("5156-5", "Epstein Barr virus nuclear IgG Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	EPSTEIN_BARR_VIRUS_NUCLEAR_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("5156-5",
+			"Epstein Barr virus nuclear IgG Ab [Presence] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Epstein Barr virus nuclear IgG Ab [Units/?volume] in
 	 * Serum</div>.
 	 */
-	EPSTEIN_BARR_VIRUS_NUCLEAR_IGG_AB_UNITSVOLUME_IN_SERUM("31374-2", "Epstein Barr virus nuclear IgG Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	EPSTEIN_BARR_VIRUS_NUCLEAR_IGG_AB_UNITSVOLUME_IN_SERUM("31374-2",
+			"Epstein Barr virus nuclear IgG Ab [Units/?volume] in Serum", "18727-8", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Epstein Barr virus nuclear IgG Ab [Units/?volume] in
 	 * Serum by Immunoassay</div>.
 	 */
-	EPSTEIN_BARR_VIRUS_NUCLEAR_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("30083-0", "Epstein Barr virus nuclear IgG Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	EPSTEIN_BARR_VIRUS_NUCLEAR_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("30083-0",
+			"Epstein Barr virus nuclear IgG Ab [Units/?volume] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Erythrocytes [#/area] in Urine sediment by Automated
 	 * count</div>.
 	 */
-	ERYTHROCYTES_AREA_IN_URINE_SEDIMENT_BY_AUTOMATED_COUNT("46419-8", "Erythrocytes [#/area] in Urine sediment by Automated count", "18729-4", "20150101", ""),
+	ERYTHROCYTES_AREA_IN_URINE_SEDIMENT_BY_AUTOMATED_COUNT("46419-8",
+			"Erythrocytes [#/area] in Urine sediment by Automated count", "18729-4", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Erythrocytes [Presence] in Urine sediment by Light
 	 * microscopy</div>.
 	 */
-	ERYTHROCYTES_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("32776-7", "Erythrocytes [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101", ""),
+	ERYTHROCYTES_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("32776-7",
+			"Erythrocytes [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Erythrocytes [#/?volume] in Blood by Automated
 	 * count</div>.
 	 */
-	ERYTHROCYTES_VOLUME_IN_BLOOD_BY_AUTOMATED_COUNT("789-8", "Erythrocytes [#/?volume] in Blood by Automated count", "18723-7", "20150101", ""),
+	ERYTHROCYTES_VOLUME_IN_BLOOD_BY_AUTOMATED_COUNT("789-8",
+			"Erythrocytes [#/?volume] in Blood by Automated count", "18723-7", "20150101", ""),
 
 	/**
 	 * <div class="en">Erythrocytes [#/volume] in Blood by Manual count</div>.
 	 */
-	ERYTHROCYTES_VOLUME_IN_BLOOD_BY_MANUAL_COUNT("790-6", "Erythrocytes [#/volume] in Blood by Manual count", "18723-7", "20150101", ""),
+	ERYTHROCYTES_VOLUME_IN_BLOOD_BY_MANUAL_COUNT("790-6",
+			"Erythrocytes [#/volume] in Blood by Manual count", "18723-7", "20150101", ""),
 
 	/**
 	 * <div class="en">Erythrocytes [#/volume] in Urine by Automated test
 	 * strip</div>.
 	 */
-	ERYTHROCYTES_VOLUME_IN_URINE_BY_AUTOMATED_TEST_STRIP("57747-8", "Erythrocytes [#/volume] in Urine by Automated test strip", "18729-4", "20150101", ""),
+	ERYTHROCYTES_VOLUME_IN_URINE_BY_AUTOMATED_TEST_STRIP("57747-8",
+			"Erythrocytes [#/volume] in Urine by Automated test strip", "18729-4", "20150101", ""),
 
 	/** <div class="en">Erythrocytes [#/volume] in Urine by Test strip</div>. */
-	ERYTHROCYTES_VOLUME_IN_URINE_BY_TEST_STRIP("20409-9", "Erythrocytes [#/volume] in Urine by Test strip", "18729-4", "20150101", ""),
+	ERYTHROCYTES_VOLUME_IN_URINE_BY_TEST_STRIP("20409-9",
+			"Erythrocytes [#/volume] in Urine by Test strip", "18729-4", "20150101", ""),
 
 	/**
 	 * <div class="en">Erythrocytes [#/?volume] in Urine sediment by Microscopy
 	 * high power field</div>.
 	 */
-	ERYTHROCYTES_VOLUME_IN_URINE_SEDIMENT_BY_MICROSCOPY_HIGH_POWER_FIELD("5808-1", "Erythrocytes [#/?volume] in Urine sediment by Microscopy high power field", "18729-4", "20150101", ""),
+	ERYTHROCYTES_VOLUME_IN_URINE_SEDIMENT_BY_MICROSCOPY_HIGH_POWER_FIELD("5808-1",
+			"Erythrocytes [#/?volume] in Urine sediment by Microscopy high power field", "18729-4",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Estradiol (E2) [Mass/volume] in Serum or Plasma</div>.
 	 */
-	ESTRADIOL_E2_MASSVOLUME_IN_SERUM_OR_PLASMA("2243-4", "Estradiol (E2) [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	ESTRADIOL_E2_MASSVOLUME_IN_SERUM_OR_PLASMA("2243-4",
+			"Estradiol (E2) [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Estradiol (E2) [Moles/volume] in Serum or Plasma</div>.
 	 */
-	ESTRADIOL_E2_MOLESVOLUME_IN_SERUM_OR_PLASMA("14715-7", "Estradiol (E2) [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	ESTRADIOL_E2_MOLESVOLUME_IN_SERUM_OR_PLASMA("14715-7",
+			"Estradiol (E2) [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Ethambutol 10 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	ETHAMBUTOL_10_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25195-9", "Ethambutol 10 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	ETHAMBUTOL_10_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25195-9",
+			"Ethambutol 10 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria",
+			"18769-0", "20150101", ""),
 	/**
 	 * <div class="en">Ethambutol 2.5 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>
 	 */
-	ETHAMBUTOL_2_5_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25230-4", "Ethambutol 2.5 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	ETHAMBUTOL_2_5_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25230-4",
+			"Ethambutol 2.5 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria",
+			"18769-0", "20150101", ""),
 
 	/**
 	 * <div class="en">Ethambutol 2 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	ETHAMBUTOL_2_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("55674-6", "Ethambutol 2 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	ETHAMBUTOL_2_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("55674-6",
+			"Ethambutol 2 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria",
+			"18769-0", "20150101", ""),
 
 	/**
 	 * <div class="en">Ethambutol 5 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	ETHAMBUTOL_5_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25194-2", "Ethambutol 5 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	ETHAMBUTOL_5_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25194-2",
+			"Ethambutol 5 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria",
+			"18769-0", "20150101", ""),
 	/**
 	 * <div class="en">Ethambutol 7.5 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>
 	 */
-	ETHAMBUTOL_7_5_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25187-6", "Ethambutol 7.5 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	ETHAMBUTOL_7_5_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25187-6",
+			"Ethambutol 7.5 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria",
+			"18769-0", "20150101", ""),
 
 	/**
 	 * <div class="en">Ethambutol 8 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	ETHAMBUTOL_8_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("56025-0", "Ethambutol 8 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	ETHAMBUTOL_8_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("56025-0",
+			"Ethambutol 8 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria",
+			"18769-0", "20150101", ""),
 
 	/**
 	 * <div class="en">Ethambutol+Rifampin [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	ETHAMBUTOL_RIFAMPIN_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("55154-9", "Ethambutol+Rifampin [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	ETHAMBUTOL_RIFAMPIN_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("55154-9",
+			"Ethambutol+Rifampin [Susceptibility] by Method for Slow-growing mycobacteria",
+			"18769-0", "20150101", ""),
 
 	/**
 	 * <div class="en">Ethambutol [Susceptibility] by Method for Slow-growing
 	 * mycobacteria</div>.
 	 */
-	ETHAMBUTOL_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("20381-0", "Ethambutol [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	ETHAMBUTOL_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("20381-0",
+			"Ethambutol [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0",
+			"20150101", ""),
 
 	/** <div class="en">Ferritin [Mass/volume] in Serum or Plasma</div>. */
-	FERRITIN_MASSVOLUME_IN_SERUM_OR_PLASMA("2276-4", "Ferritin [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	FERRITIN_MASSVOLUME_IN_SERUM_OR_PLASMA("2276-4", "Ferritin [Mass/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Fibrin D-dimer FEU [Mass/volume] in Platelet poor
 	 * plasma</div>.
 	 */
-	FIBRIN_D_DIMER_FEU_MASSVOLUME_IN_PLATELET_POOR_PLASMA("48065-7", "Fibrin D-dimer FEU [Mass/volume] in Platelet poor plasma", "18719-5", "20150101", ""),
+	FIBRIN_D_DIMER_FEU_MASSVOLUME_IN_PLATELET_POOR_PLASMA("48065-7",
+			"Fibrin D-dimer FEU [Mass/volume] in Platelet poor plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Fibrin D-dimer FEU [Mass/volume] in Platelet poor plasma
 	 * by Immunoassay</div>.
 	 */
-	FIBRIN_D_DIMER_FEU_MASSVOLUME_IN_PLATELET_POOR_PLASMA_BY_IMMUNOASSAY("48067-3", "Fibrin D-dimer FEU [Mass/volume] in Platelet poor plasma by Immunoassay", "18719-5", "20150101", ""),
+	FIBRIN_D_DIMER_FEU_MASSVOLUME_IN_PLATELET_POOR_PLASMA_BY_IMMUNOASSAY("48067-3",
+			"Fibrin D-dimer FEU [Mass/volume] in Platelet poor plasma by Immunoassay", "18719-5",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Fibrin D-dimer [Presence] in Platelet poor plasma</div>.
 	 */
-	FIBRIN_D_DIMER_PRESENCE_IN_PLATELET_POOR_PLASMA("15179-5", "Fibrin D-dimer [Presence] in Platelet poor plasma", "18719-5", "20150101", ""),
+	FIBRIN_D_DIMER_PRESENCE_IN_PLATELET_POOR_PLASMA("15179-5",
+			"Fibrin D-dimer [Presence] in Platelet poor plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Fibrinogen [Mass/volume] in Platelet poor plasma by
 	 * Coagulation assay</div>.
 	 */
-	FIBRINOGEN_MASSVOLUME_IN_PLATELET_POOR_PLASMA_BY_COAGULATION_ASSAY("3255-7", "Fibrinogen [Mass/volume] in Platelet poor plasma by Coagulation assay", "18720-3", "20150101", ""),
+	FIBRINOGEN_MASSVOLUME_IN_PLATELET_POOR_PLASMA_BY_COAGULATION_ASSAY("3255-7",
+			"Fibrinogen [Mass/volume] in Platelet poor plasma by Coagulation assay", "18720-3",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Fine Granular Casts [#/area] in Urine sediment by
 	 * Automated count</div>.
 	 */
-	FINE_GRANULAR_CASTS_AREA_IN_URINE_SEDIMENT_BY_AUTOMATED_COUNT("33225-4", "Fine Granular Casts [#/area] in Urine sediment by Automated count", "18729-4", "20150101", ""),
+	FINE_GRANULAR_CASTS_AREA_IN_URINE_SEDIMENT_BY_AUTOMATED_COUNT("33225-4",
+			"Fine Granular Casts [#/area] in Urine sediment by Automated count", "18729-4",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Fine Granular Casts [Presence] in Urine sediment by Light
 	 * microscopy</div>.
 	 */
-	FINE_GRANULAR_CASTS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("32176-0", "Fine Granular Casts [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101", ""),
+	FINE_GRANULAR_CASTS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("32176-0",
+			"Fine Granular Casts [Presence] in Urine sediment by Light microscopy", "18729-4",
+			"20150101", ""),
 
 	/** <div class="en">Fluconazole [Susceptibility]</div>. */
-	FLUCONAZOLE_SUSCEPTIBILITY("18924-1", "Fluconazole [Susceptibility]", "18769-0", "20150101", ""),
+	FLUCONAZOLE_SUSCEPTIBILITY("18924-1", "Fluconazole [Susceptibility]", "18769-0", "20150101",
+			""),
 
 	/** <div class="en">Fluoxetine [Mass/volume] in Serum or Plasma</div>. */
-	FLUOXETINE_MASSVOLUME_IN_SERUM_OR_PLASMA("3644-2", "Fluoxetine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	FLUOXETINE_MASSVOLUME_IN_SERUM_OR_PLASMA("3644-2",
+			"Fluoxetine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Fluoxetine [Moles/volume] in Serum or Plasma</div>. */
-	FLUOXETINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14728-0", "Fluoxetine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	FLUOXETINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14728-0",
+			"Fluoxetine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Fluoxetine+Norfluoxetine [Mass/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	FLUOXETINE_NORFLUOXETINE_MASSVOLUME_IN_SERUM_OR_PLASMA("10339-0", "Fluoxetine+Norfluoxetine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	FLUOXETINE_NORFLUOXETINE_MASSVOLUME_IN_SERUM_OR_PLASMA("10339-0",
+			"Fluoxetine+Norfluoxetine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Folate [Mass/volume] in Serum or Plasma</div>. */
-	FOLATE_MASSVOLUME_IN_SERUM_OR_PLASMA("2284-8", "Folate [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	FOLATE_MASSVOLUME_IN_SERUM_OR_PLASMA("2284-8", "Folate [Mass/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/** <div class="en">Folate [Moles/volume] in Serum or Plasma</div>. */
-	FOLATE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14732-2", "Folate [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	FOLATE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14732-2", "Folate [Moles/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/** <div class="en">Follitropin [Units/volume] in Serum or Plasma</div>. */
-	FOLLITROPIN_UNITSVOLUME_IN_SERUM_OR_PLASMA("15067-2", "Follitropin [Units/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	FOLLITROPIN_UNITSVOLUME_IN_SERUM_OR_PLASMA("15067-2",
+			"Follitropin [Units/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Fungus identified in Unspecified specimen by
 	 * Culture</div>.
 	 */
-	FUNGUS_IDENTIFIED_IN_UNSPECIFIED_SPECIMEN_BY_CULTURE("580-1", "Fungus identified in Unspecified specimen by Culture", "18725-2", "20150101", ""),
+	FUNGUS_IDENTIFIED_IN_UNSPECIFIED_SPECIMEN_BY_CULTURE("580-1",
+			"Fungus identified in Unspecified specimen by Culture", "18725-2", "20150101", ""),
 
 	/** <div class="en">Fy sup(a) Ab [Presence] in Serum or Plasma</div>. */
-	FY_SUPA_AB_PRESENCE_IN_SERUM_OR_PLASMA("1024-9", "Fy sup(a) Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	FY_SUPA_AB_PRESENCE_IN_SERUM_OR_PLASMA("1024-9", "Fy sup(a) Ab [Presence] in Serum or Plasma",
+			"18717-9", "20150101", ""),
 
 	/** <div class="en">Fy sup(b) Ab [Presence] in Serum or Plasma</div>. */
-	FY_SUPB_AB_PRESENCE_IN_SERUM_OR_PLASMA("1030-6", "Fy sup(b) Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	FY_SUPB_AB_PRESENCE_IN_SERUM_OR_PLASMA("1030-6", "Fy sup(b) Ab [Presence] in Serum or Plasma",
+			"18717-9", "20150101", ""),
 
 	/**
 	 * <div class="en">Gamma glutamyl transferase [Enzymatic activity/volume] in
 	 * Serum or Plasma</div>.
 	 */
-	GAMMA_GLUTAMYL_TRANSFERASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA("2324-2", "Gamma glutamyl transferase [Enzymatic activity/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	GAMMA_GLUTAMYL_TRANSFERASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA("2324-2",
+			"Gamma glutamyl transferase [Enzymatic activity/volume] in Serum or Plasma", "18719-5",
+			"20150101", ""),
 
 	/** <div class="en">Glucose [Mass/volume] in Serum or Plasma</div>. */
-	GLUCOSE_MASSVOLUME_IN_SERUM_OR_PLASMA("2345-7", "Glucose [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	GLUCOSE_MASSVOLUME_IN_SERUM_OR_PLASMA("2345-7", "Glucose [Mass/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/** <div class="en">Glucose [Moles/volume] in Serum or Plasma</div>. */
-	GLUCOSE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14749-6", "Glucose [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	GLUCOSE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14749-6", "Glucose [Moles/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Glucose [Presence] in Urine by Automated test strip</div>
 	 * .
 	 */
-	GLUCOSE_PRESENCE_IN_URINE_BY_AUTOMATED_TEST_STRIP("50555-2", "Glucose [Presence] in Urine by Automated test strip", "18729-4", "20150101", ""),
+	GLUCOSE_PRESENCE_IN_URINE_BY_AUTOMATED_TEST_STRIP("50555-2",
+			"Glucose [Presence] in Urine by Automated test strip", "18729-4", "20150101", ""),
 
 	/** <div class="en">Glucose [Presence] in Urine by Test strip</div>. */
-	GLUCOSE_PRESENCE_IN_URINE_BY_TEST_STRIP("25428-4", "Glucose [Presence] in Urine by Test strip", "18729-4", "20150101", ""),
+	GLUCOSE_PRESENCE_IN_URINE_BY_TEST_STRIP("25428-4", "Glucose [Presence] in Urine by Test strip",
+			"18729-4", "20150101", ""),
 
 	/**
 	 * <div class="en">Granular casts [Presence] in Urine sediment by Light
 	 * microscopy</div>.
 	 */
-	GRANULAR_CASTS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("25160-3", "Granular casts [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101", ""),
+	GRANULAR_CASTS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("25160-3",
+			"Granular casts [Presence] in Urine sediment by Light microscopy", "18729-4",
+			"20150101", ""),
 
 	/** <div class="en">H Ab [Presence] in Serum</div>. */
 	H_AB_PRESENCE_IN_SERUM("1044-7", "H Ab [Presence] in Serum", "18717-9", "20150101", ""),
 
 	/** <div class="en">Hematocrit [Volume Fraction] of Blood</div>. */
-	HEMATOCRIT_VOLUME_FRACTION_OF_BLOOD("20570-8", "Hematocrit [Volume Fraction] of Blood", "18723-7", "20150101", ""),
+	HEMATOCRIT_VOLUME_FRACTION_OF_BLOOD("20570-8", "Hematocrit [Volume Fraction] of Blood",
+			"18723-7", "20150101", ""),
 
 	/** <div class="en">Hemoglobin A1c [Mass/?volume] in Blood</div>. */
-	HEMOGLOBIN_A1C_MASSVOLUME_IN_BLOOD("41995-2", "Hemoglobin A1c [Mass/?volume] in Blood", "18719-5", "20150101", ""),
+	HEMOGLOBIN_A1C_MASSVOLUME_IN_BLOOD("41995-2", "Hemoglobin A1c [Mass/?volume] in Blood",
+			"18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Hemoglobin A1c/Hemoglobin.total in Blood</div>
 	 */
-	HEMOGLOBIN_A1CHEMOGLOBIN_TOTAL_IN_BLOOD("4548-4", "Hemoglobin A1c/Hemoglobin.total in Blood", "18719-5", "20150101", ""),
+	HEMOGLOBIN_A1CHEMOGLOBIN_TOTAL_IN_BLOOD("4548-4", "Hemoglobin A1c/Hemoglobin.total in Blood",
+			"18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Hemoglobin A1c/Hemoglobin.total in Blood by HPLC</div>
 	 */
-	HEMOGLOBIN_A1CHEMOGLOBIN_TOTAL_IN_BLOOD_BY_HPLC("17856-6", "Hemoglobin A1c/Hemoglobin.total in Blood by HPLC", "18719-5", "20150101", ""),
+	HEMOGLOBIN_A1CHEMOGLOBIN_TOTAL_IN_BLOOD_BY_HPLC("17856-6",
+			"Hemoglobin A1c/Hemoglobin.total in Blood by HPLC", "18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Hemoglobin A1c/Hemoglobin.total in Blood by IFCC
 	 * protocol</div>
 	 */
-	HEMOGLOBIN_A1CHEMOGLOBIN_TOTAL_IN_BLOOD_BY_IFCC_PROTOCOL("59261-8", "Hemoglobin A1c/Hemoglobin.total in Blood by IFCC protocol", "18719-5", "20150101", ""),
+	HEMOGLOBIN_A1CHEMOGLOBIN_TOTAL_IN_BLOOD_BY_IFCC_PROTOCOL("59261-8",
+			"Hemoglobin A1c/Hemoglobin.total in Blood by IFCC protocol", "18719-5", "20150101", ""),
 
 	/** <div class="en">Hemoglobin [Mass/volume] in Blood</div>. */
-	HEMOGLOBIN_MASSVOLUME_IN_BLOOD("718-7", "Hemoglobin [Mass/volume] in Blood", "18723-7", "20150101", ""),
+	HEMOGLOBIN_MASSVOLUME_IN_BLOOD("718-7", "Hemoglobin [Mass/volume] in Blood", "18723-7",
+			"20150101", ""),
 
 	/** <div class="en">Hemoglobin [Moles/?volume] in Blood</div>. */
-	HEMOGLOBIN_MOLESVOLUME_IN_BLOOD("59260-0", "Hemoglobin [Moles/?volume] in Blood", "18723-7", "20150101", ""),
+	HEMOGLOBIN_MOLESVOLUME_IN_BLOOD("59260-0", "Hemoglobin [Moles/?volume] in Blood", "18723-7",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Hemoglobin [Presence] in Urine by Automated test
 	 * strip</div>.
 	 */
-	HEMOGLOBIN_PRESENCE_IN_URINE_BY_AUTOMATED_TEST_STRIP("57751-0", "Hemoglobin [Presence] in Urine by Automated test strip", "18729-4", "20150101", ""),
+	HEMOGLOBIN_PRESENCE_IN_URINE_BY_AUTOMATED_TEST_STRIP("57751-0",
+			"Hemoglobin [Presence] in Urine by Automated test strip", "18729-4", "20150101", ""),
 
 	/** <div class="en">Hemoglobin [Presence] in Urine by Test strip</div>. */
-	HEMOGLOBIN_PRESENCE_IN_URINE_BY_TEST_STRIP("5794-3", "Hemoglobin [Presence] in Urine by Test strip", "18729-4", "20150101", ""),
+	HEMOGLOBIN_PRESENCE_IN_URINE_BY_TEST_STRIP("5794-3",
+			"Hemoglobin [Presence] in Urine by Test strip", "18729-4", "20150101", ""),
 
 	/** <div class="en">Hepatitis A virus Ab [Presence] in Serum</div>. */
-	HEPATITIS_A_VIRUS_AB_PRESENCE_IN_SERUM("20575-7", "Hepatitis A virus Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_A_VIRUS_AB_PRESENCE_IN_SERUM("20575-7", "Hepatitis A virus Ab [Presence] in Serum",
+			"18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis A virus Ab [Presence] in Serum by
 	 * Immunoassay</div>.
 	 */
-	HEPATITIS_A_VIRUS_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("13951-9", "Hepatitis A virus Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	HEPATITIS_A_VIRUS_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("13951-9",
+			"Hepatitis A virus Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
 
 	/** <div class="en">Hepatitis A virus Ab [Units/?volume] in Serum</div>. */
-	HEPATITIS_A_VIRUS_AB_UNITSVOLUME_IN_SERUM("22312-3", "Hepatitis A virus Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_A_VIRUS_AB_UNITSVOLUME_IN_SERUM("22312-3",
+			"Hepatitis A virus Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis A virus Ab [Units/?volume] in Serum by
 	 * Immunoassay</div>.
 	 */
-	HEPATITIS_A_VIRUS_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5183-9", "Hepatitis A virus Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	HEPATITIS_A_VIRUS_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5183-9",
+			"Hepatitis A virus Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101",
+			""),
 
 	/** <div class="en">Hepatitis A virus IgG Ab [Presence] in Serum</div>. */
-	HEPATITIS_A_VIRUS_IGG_AB_PRESENCE_IN_SERUM("32018-4", "Hepatitis A virus IgG Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_A_VIRUS_IGG_AB_PRESENCE_IN_SERUM("32018-4",
+			"Hepatitis A virus IgG Ab [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis A virus IgG Ab [Presence] in Serum by
 	 * Immunoassay</div>.
 	 */
-	HEPATITIS_A_VIRUS_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("40724-7", "Hepatitis A virus IgG Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	HEPATITIS_A_VIRUS_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("40724-7",
+			"Hepatitis A virus IgG Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Hepatitis A virus IgG Ab [Units/?volume] in Serum</div>.
 	 */
-	HEPATITIS_A_VIRUS_IGG_AB_UNITSVOLUME_IN_SERUM("22313-1", "Hepatitis A virus IgG Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_A_VIRUS_IGG_AB_UNITSVOLUME_IN_SERUM("22313-1",
+			"Hepatitis A virus IgG Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis A virus IgG Ab [Units/?volume] in Serum by
 	 * Immunoassay</div>.
 	 */
-	HEPATITIS_A_VIRUS_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5179-7", "Hepatitis A virus IgG Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	HEPATITIS_A_VIRUS_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5179-7",
+			"Hepatitis A virus IgG Ab [Units/?volume] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis A virus IgG+?IgM Ab [Presence] in Serum</div>.
 	 */
-	HEPATITIS_A_VIRUS_IGG_IGM_AB_PRESENCE_IN_SERUM("51913-2", "Hepatitis A virus IgG+?IgM Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_A_VIRUS_IGG_IGM_AB_PRESENCE_IN_SERUM("51913-2",
+			"Hepatitis A virus IgG+?IgM Ab [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/** <div class="en">Hepatitis A virus IgM Ab [Presence] in Serum</div>. */
-	HEPATITIS_A_VIRUS_IGM_AB_PRESENCE_IN_SERUM("22314-9", "Hepatitis A virus IgM Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_A_VIRUS_IGM_AB_PRESENCE_IN_SERUM("22314-9",
+			"Hepatitis A virus IgM Ab [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis A virus IgM Ab [Units/?volume] in Serum</div>.
 	 */
-	HEPATITIS_A_VIRUS_IGM_AB_UNITSVOLUME_IN_SERUM("22315-6", "Hepatitis A virus IgM Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_A_VIRUS_IGM_AB_UNITSVOLUME_IN_SERUM("22315-6",
+			"Hepatitis A virus IgM Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis A virus IgM Ab [Units/?volume] in Serum by
 	 * Immunoassay</div>.
 	 */
-	HEPATITIS_A_VIRUS_IGM_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5181-3", "Hepatitis A virus IgM Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	HEPATITIS_A_VIRUS_IGM_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5181-3",
+			"Hepatitis A virus IgM Ab [Units/?volume] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/** <div class="en">Hepatitis B virus core Ab [Presence] in Serum</div>. */
-	HEPATITIS_B_VIRUS_CORE_AB_PRESENCE_IN_SERUM("16933-4", "Hepatitis B virus core Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_CORE_AB_PRESENCE_IN_SERUM("16933-4",
+			"Hepatitis B virus core Ab [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus core Ab [Presence] in Serum or Plasma
 	 * by Immunoassay</div>.
 	 */
-	HEPATITIS_B_VIRUS_CORE_AB_PRESENCE_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY("13952-7", "Hepatitis B virus core Ab [Presence] in Serum or Plasma by Immunoassay", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_CORE_AB_PRESENCE_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY("13952-7",
+			"Hepatitis B virus core Ab [Presence] in Serum or Plasma by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus core Ab [Units/?volume] in Serum</div>.
 	 */
-	HEPATITIS_B_VIRUS_CORE_AB_UNITSVOLUME_IN_SERUM("22316-4", "Hepatitis B virus core Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_CORE_AB_UNITSVOLUME_IN_SERUM("22316-4",
+			"Hepatitis B virus core Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus core IgG+?IgM Ab [Presence] in
 	 * Serum</div>.
 	 */
-	HEPATITIS_B_VIRUS_CORE_IGG_IGM_AB_PRESENCE_IN_SERUM("51914-0", "Hepatitis B virus core IgG+?IgM Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_CORE_IGG_IGM_AB_PRESENCE_IN_SERUM("51914-0",
+			"Hepatitis B virus core IgG+?IgM Ab [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus core IgM Ab [Presence] in Serum</div>.
 	 */
-	HEPATITIS_B_VIRUS_CORE_IGM_AB_PRESENCE_IN_SERUM("31204-1", "Hepatitis B virus core IgM Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_CORE_IGM_AB_PRESENCE_IN_SERUM("31204-1",
+			"Hepatitis B virus core IgM Ab [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus core IgM Ab [Presence] in Serum or
 	 * Plasma by Immunoassay</div>.
 	 */
-	HEPATITIS_B_VIRUS_CORE_IGM_AB_PRESENCE_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY("24113-3", "Hepatitis B virus core IgM Ab [Presence] in Serum or Plasma by Immunoassay", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_CORE_IGM_AB_PRESENCE_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY("24113-3",
+			"Hepatitis B virus core IgM Ab [Presence] in Serum or Plasma by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus core IgM Ab [Units/?volume] in Serum by
 	 * Immunoassay</div>.
 	 */
-	HEPATITIS_B_VIRUS_CORE_IGM_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5185-4", "Hepatitis B virus core IgM Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_CORE_IGM_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5185-4",
+			"Hepatitis B virus core IgM Ab [Units/?volume] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus DNA [Units/?volume] (viral load) in
 	 * Serum or Plasma by Probe and target amplification method</div>.
 	 */
-	HEPATITIS_B_VIRUS_DNA_UNITSVOLUME_VIRAL_LOAD_IN_SERUM_OR_PLASMA_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("42595-9", "Hepatitis B virus DNA [Units/?volume] (viral load) in Serum or Plasma by Probe and target amplification method", "18725-2", "20150101", ""),
+	HEPATITIS_B_VIRUS_DNA_UNITSVOLUME_VIRAL_LOAD_IN_SERUM_OR_PLASMA_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"42595-9",
+			"Hepatitis B virus DNA [Units/?volume] (viral load) in Serum or Plasma by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus DNA [#/?volume] (viral load) in Serum
 	 * or Plasma by Probe and target amplification method</div>.
 	 */
-	HEPATITIS_B_VIRUS_DNA_VOLUME_VIRAL_LOAD_IN_SERUM_OR_PLASMA_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("29615-2", "Hepatitis B virus DNA [#/?volume] (viral load) in Serum or Plasma by Probe and target amplification method", "18725-2", "20150101", ""),
+	HEPATITIS_B_VIRUS_DNA_VOLUME_VIRAL_LOAD_IN_SERUM_OR_PLASMA_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"29615-2",
+			"Hepatitis B virus DNA [#/?volume] (viral load) in Serum or Plasma by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/** <div class="en">Hepatitis B virus e Ab [Presence] in Serum</div>. */
-	HEPATITIS_B_VIRUS_E_AB_PRESENCE_IN_SERUM("22320-6", "Hepatitis B virus e Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_E_AB_PRESENCE_IN_SERUM("22320-6",
+			"Hepatitis B virus e Ab [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus e Ab [Presence] in Serum by
 	 * Immunoassay</div>.
 	 */
-	HEPATITIS_B_VIRUS_E_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("13953-5", "Hepatitis B virus e Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_E_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("13953-5",
+			"Hepatitis B virus e Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus e Ab [Units/?volume] in Serum</div>.
 	 */
-	HEPATITIS_B_VIRUS_E_AB_UNITSVOLUME_IN_SERUM("22321-4", "Hepatitis B virus e Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_E_AB_UNITSVOLUME_IN_SERUM("22321-4",
+			"Hepatitis B virus e Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus e Ab [Units/?volume] in Serum by
 	 * Immunoassay</div>.
 	 */
-	HEPATITIS_B_VIRUS_E_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5189-6", "Hepatitis B virus e Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_E_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5189-6",
+			"Hepatitis B virus e Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101",
+			""),
 
 	/** <div class="en">Hepatitis B virus e Ag [Presence] in Serum</div>. */
-	HEPATITIS_B_VIRUS_E_AG_PRESENCE_IN_SERUM("31844-4", "Hepatitis B virus e Ag [Presence] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_E_AG_PRESENCE_IN_SERUM("31844-4",
+			"Hepatitis B virus e Ag [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus e Ag [Presence] in Serum by
 	 * Immunoassay</div>.
 	 */
-	HEPATITIS_B_VIRUS_E_AG_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("13954-3", "Hepatitis B virus e Ag [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_E_AG_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("13954-3",
+			"Hepatitis B virus e Ag [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus e Ag [Units/?volume] in Serum</div>.
 	 */
-	HEPATITIS_B_VIRUS_E_AG_UNITSVOLUME_IN_SERUM("31845-1", "Hepatitis B virus e Ag [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_E_AG_UNITSVOLUME_IN_SERUM("31845-1",
+			"Hepatitis B virus e Ag [Units/?volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus e Ag [Units/?volume] in Serum by
 	 * Immunoassay</div>.
 	 */
-	HEPATITIS_B_VIRUS_E_AG_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5191-2", "Hepatitis B virus e Ag [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_E_AG_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5191-2",
+			"Hepatitis B virus e Ag [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101",
+			""),
 
 	/** <div class="en">Hepatitis B virus e IgG Ab [Presence] in Serum</div>. */
-	HEPATITIS_B_VIRUS_E_IGG_AB_PRESENCE_IN_SERUM("41151-2", "Hepatitis B virus e IgG Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_E_IGG_AB_PRESENCE_IN_SERUM("41151-2",
+			"Hepatitis B virus e IgG Ab [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus e IgG Ab [Presence] in Serum by
 	 * Immunoassay</div>.
 	 */
-	HEPATITIS_B_VIRUS_E_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("33463-1", "Hepatitis B virus e IgG Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_E_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("33463-1",
+			"Hepatitis B virus e IgG Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Hepatitis B virus surface Ab [Presence] in Serum</div>.
 	 */
-	HEPATITIS_B_VIRUS_SURFACE_AB_PRESENCE_IN_SERUM("22322-2", "Hepatitis B virus surface Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_SURFACE_AB_PRESENCE_IN_SERUM("22322-2",
+			"Hepatitis B virus surface Ab [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus surface Ab [Presence] in Serum by
 	 * Immunoassay</div>.
 	 */
-	HEPATITIS_B_VIRUS_SURFACE_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("10900-9", "Hepatitis B virus surface Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_SURFACE_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("10900-9",
+			"Hepatitis B virus surface Ab [Presence] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus surface Ab [Units/?volume] in
 	 * Serum</div> .
 	 */
-	HEPATITIS_B_VIRUS_SURFACE_AB_UNITSVOLUME_IN_SERUM("16935-9", "Hepatitis B virus surface Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_SURFACE_AB_UNITSVOLUME_IN_SERUM("16935-9",
+			"Hepatitis B virus surface Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus surface Ab [Units/?volume] in Serum by
 	 * Immunoassay</div>.
 	 */
-	HEPATITIS_B_VIRUS_SURFACE_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5193-8", "Hepatitis B virus surface Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_SURFACE_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5193-8",
+			"Hepatitis B virus surface Ab [Units/?volume] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus surface Ag [Presence] in Serum</div>.
 	 */
-	HEPATITIS_B_VIRUS_SURFACE_AG_PRESENCE_IN_SERUM("5195-3", "Hepatitis B virus surface Ag [Presence] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_SURFACE_AG_PRESENCE_IN_SERUM("5195-3",
+			"Hepatitis B virus surface Ag [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus surface Ag [Presence] in Serum or
 	 * Plasma by Immunoassay</div>.
 	 */
-	HEPATITIS_B_VIRUS_SURFACE_AG_PRESENCE_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY("5196-1", "Hepatitis B virus surface Ag [Presence] in Serum or Plasma by Immunoassay", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_SURFACE_AG_PRESENCE_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY("5196-1",
+			"Hepatitis B virus surface Ag [Presence] in Serum or Plasma by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus surface Ag [Units/?volume] in
 	 * Serum</div> .
 	 */
-	HEPATITIS_B_VIRUS_SURFACE_AG_UNITSVOLUME_IN_SERUM("58452-4", "Hepatitis B virus surface Ag [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_SURFACE_AG_UNITSVOLUME_IN_SERUM("58452-4",
+			"Hepatitis B virus surface Ag [Units/?volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus surface Ag [Units/?volume] in Serum or
 	 * Plasma by Immunoassay</div>.
 	 */
-	HEPATITIS_B_VIRUS_SURFACE_AG_UNITSVOLUME_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY("63557-3", "Hepatitis B virus surface Ag [Units/?volume] in Serum or Plasma by Immunoassay", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_SURFACE_AG_UNITSVOLUME_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY("63557-3",
+			"Hepatitis B virus surface Ag [Units/?volume] in Serum or Plasma by Immunoassay",
+			"18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus surface IgG Ab [Presence] in
 	 * Serum</div>.
 	 */
-	HEPATITIS_B_VIRUS_SURFACE_IGG_AB_PRESENCE_IN_SERUM("49177-9", "Hepatitis B virus surface IgG Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_SURFACE_IGG_AB_PRESENCE_IN_SERUM("49177-9",
+			"Hepatitis B virus surface IgG Ab [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis B virus surface IgG Ab [Presence] in Serum by
 	 * Immunoassay</div>.
 	 */
-	HEPATITIS_B_VIRUS_SURFACE_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("48070-7", "Hepatitis B virus surface IgG Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	HEPATITIS_B_VIRUS_SURFACE_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("48070-7",
+			"Hepatitis B virus surface IgG Ab [Presence] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/** <div class="en">Hepatitis C virus Ab [Presence] in Serum</div>. */
-	HEPATITIS_C_VIRUS_AB_PRESENCE_IN_SERUM("16128-1", "Hepatitis C virus Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_C_VIRUS_AB_PRESENCE_IN_SERUM("16128-1", "Hepatitis C virus Ab [Presence] in Serum",
+			"18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis C virus Ab [Presence] in Serum by Immunoblot
 	 * (IB)</div>.
 	 */
-	HEPATITIS_C_VIRUS_AB_PRESENCE_IN_SERUM_BY_IMMUNOBLOT_IB("5199-5", "Hepatitis C virus Ab [Presence] in Serum by Immunoblot (IB)", "18727-8", "20150101", ""),
+	HEPATITIS_C_VIRUS_AB_PRESENCE_IN_SERUM_BY_IMMUNOBLOT_IB("5199-5",
+			"Hepatitis C virus Ab [Presence] in Serum by Immunoblot (IB)", "18727-8", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Hepatitis C virus Ab [Presence] in Serum or Plasma by
 	 * Immunoassay</div>.
 	 */
-	HEPATITIS_C_VIRUS_AB_PRESENCE_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY("13955-0", "Hepatitis C virus Ab [Presence] in Serum or Plasma by Immunoassay", "18727-8", "20150101", ""),
+	HEPATITIS_C_VIRUS_AB_PRESENCE_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY("13955-0",
+			"Hepatitis C virus Ab [Presence] in Serum or Plasma by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis C virus Ab [Units/?volume] in Serum by
 	 * Immunoassay</div>.
 	 */
-	HEPATITIS_C_VIRUS_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5198-7", "Hepatitis C virus Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	HEPATITIS_C_VIRUS_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5198-7",
+			"Hepatitis C virus Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Hepatitis C virus genotype [Identifier] in Serum or
 	 * Plasma by Probe and target amplification method</div>.
 	 */
-	HEPATITIS_C_VIRUS_GENOTYPE_IDENTIFIER_IN_SERUM_OR_PLASMA_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("32286-7", "Hepatitis C virus genotype [Identifier] in Serum or Plasma by Probe and target amplification method", "18725-2", "20150101", ""),
+	HEPATITIS_C_VIRUS_GENOTYPE_IDENTIFIER_IN_SERUM_OR_PLASMA_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"32286-7",
+			"Hepatitis C virus genotype [Identifier] in Serum or Plasma by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/** <div class="en">Hepatitis C virus IgG Ab [Presence] in Serum</div>. */
-	HEPATITIS_C_VIRUS_IGG_AB_PRESENCE_IN_SERUM("16129-9", "Hepatitis C virus IgG Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_C_VIRUS_IGG_AB_PRESENCE_IN_SERUM("16129-9",
+			"Hepatitis C virus IgG Ab [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis C virus IgG Ab [Presence] in Serum by
 	 * Immunoassay</div>.
 	 */
-	HEPATITIS_C_VIRUS_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("40726-2", "Hepatitis C virus IgG Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	HEPATITIS_C_VIRUS_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("40726-2",
+			"Hepatitis C virus IgG Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Hepatitis C virus IgG Ab [Presence] in Serum by
 	 * Immunoblot (IB)</div>.
 	 */
-	HEPATITIS_C_VIRUS_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOBLOT_IB("33462-3", "Hepatitis C virus IgG Ab [Presence] in Serum by Immunoblot (IB)", "18727-8", "20150101", ""),
+	HEPATITIS_C_VIRUS_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOBLOT_IB("33462-3",
+			"Hepatitis C virus IgG Ab [Presence] in Serum by Immunoblot (IB)", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis C virus IgG Ab [Units/?volume] in Serum</div>.
 	 */
-	HEPATITIS_C_VIRUS_IGG_AB_UNITSVOLUME_IN_SERUM("16936-7", "Hepatitis C virus IgG Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	HEPATITIS_C_VIRUS_IGG_AB_UNITSVOLUME_IN_SERUM("16936-7",
+			"Hepatitis C virus IgG Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis C virus IgG Ab [Units/?volume] in Serum by
 	 * Immunoassay</div>.
 	 */
-	HEPATITIS_C_VIRUS_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("57006-9", "Hepatitis C virus IgG Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	HEPATITIS_C_VIRUS_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("57006-9",
+			"Hepatitis C virus IgG Ab [Units/?volume] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis C virus RNA [Units/volume] (viral load) in
 	 * Serum or Plasma by Probe and target amplification method</div>.
 	 */
-	HEPATITIS_C_VIRUS_RNA_UNITSVOLUME_VIRAL_LOAD_IN_SERUM_OR_PLASMA_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("11011-4", "Hepatitis C virus RNA [Units/volume] (viral load) in Serum or Plasma by Probe and target amplification method", "18725-2", "20150101", ""),
+	HEPATITIS_C_VIRUS_RNA_UNITSVOLUME_VIRAL_LOAD_IN_SERUM_OR_PLASMA_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"11011-4",
+			"Hepatitis C virus RNA [Units/volume] (viral load) in Serum or Plasma by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Hepatitis C virus RNA [#/?volume] (viral load) in Serum
 	 * or Plasma by Probe and target amplification method</div>.
 	 */
-	HEPATITIS_C_VIRUS_RNA_VOLUME_VIRAL_LOAD_IN_SERUM_OR_PLASMA_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("20416-4", "Hepatitis C virus RNA [#/?volume] (viral load) in Serum or Plasma by Probe and target amplification method", "18725-2", "20150101", ""),
+	HEPATITIS_C_VIRUS_RNA_VOLUME_VIRAL_LOAD_IN_SERUM_OR_PLASMA_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"20416-4",
+			"Hepatitis C virus RNA [#/?volume] (viral load) in Serum or Plasma by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Herpes simplex virus 1+?2 DNA [Presence] in Unspecified
 	 * specimen by Probe and target amplification method</div>.
 	 */
-	HERPES_SIMPLEX_VIRUS_1_2_DNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("20444-6", "Herpes simplex virus 1+?2 DNA [Presence] in Unspecified specimen by Probe and target amplification method", "18725-2", "20150101", ""),
+	HERPES_SIMPLEX_VIRUS_1_2_DNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"20444-6",
+			"Herpes simplex virus 1+?2 DNA [Presence] in Unspecified specimen by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Herpes simplex virus 1 DNA [Presence] in Unspecified
 	 * specimen by Probe and target amplification method</div>.
 	 */
-	HERPES_SIMPLEX_VIRUS_1_DNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("16130-7", "Herpes simplex virus 1 DNA [Presence] in Unspecified specimen by Probe and target amplification method", "18725-2", "20150101", ""),
+	HERPES_SIMPLEX_VIRUS_1_DNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"16130-7",
+			"Herpes simplex virus 1 DNA [Presence] in Unspecified specimen by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Herpes simplex virus 2 DNA [Presence] in Unspecified
 	 * specimen by Probe and target amplification method</div>.
 	 */
-	HERPES_SIMPLEX_VIRUS_2_DNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("16131-5", "Herpes simplex virus 2 DNA [Presence] in Unspecified specimen by Probe and target amplification method", "18725-2", "20150101", ""),
+	HERPES_SIMPLEX_VIRUS_2_DNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"16131-5",
+			"Herpes simplex virus 2 DNA [Presence] in Unspecified specimen by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">HIV 1+2 Ab+HIV1 p24 Ag [Presence] in Serum by
 	 * Immunoassay</div>.
 	 */
-	HIV_1_2_AB_HIV1_P24_AG_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("56888-1", "HIV 1+2 Ab+HIV1 p24 Ag [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	HIV_1_2_AB_HIV1_P24_AG_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("56888-1",
+			"HIV 1+2 Ab+HIV1 p24 Ag [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">HIV 1+?2 Ab+?HIV1 p24 Ag [Units/?volume] in Serum by
 	 * Immunoassay</div>.
 	 */
-	HIV_1_2_AB_HIV1_P24_AG_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("58900-2", "HIV 1+?2 Ab+?HIV1 p24 Ag [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	HIV_1_2_AB_HIV1_P24_AG_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("58900-2",
+			"HIV 1+?2 Ab+?HIV1 p24 Ag [Units/?volume] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">HIV 1+?2 Ab [Presence] in Serum by Immunoblot (IB)</div>.
 	 */
-	HIV_1_2_AB_PRESENCE_IN_SERUM_BY_IMMUNOBLOT_IB("44873-8", "HIV 1+?2 Ab [Presence] in Serum by Immunoblot (IB)", "18727-8", "20150101", ""),
+	HIV_1_2_AB_PRESENCE_IN_SERUM_BY_IMMUNOBLOT_IB("44873-8",
+			"HIV 1+?2 Ab [Presence] in Serum by Immunoblot (IB)", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">HIV 1+?2 Ab [Presence] in Unspecified specimen by Rapid
 	 * immunoassay</div>.
 	 */
-	HIV_1_2_AB_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_RAPID_IMMUNOASSAY("49580-4", "HIV 1+?2 Ab [Presence] in Unspecified specimen by Rapid immunoassay", "18727-8", "20150101", ""),
+	HIV_1_2_AB_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_RAPID_IMMUNOASSAY("49580-4",
+			"HIV 1+?2 Ab [Presence] in Unspecified specimen by Rapid immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">HIV 1 Ab [Presence] in Serum by Immunoblot (IB)</div>.
 	 */
-	HIV_1_AB_PRESENCE_IN_SERUM_BY_IMMUNOBLOT_IB("5221-7", "HIV 1 Ab [Presence] in Serum by Immunoblot (IB)", "18727-8", "20150101", ""),
+	HIV_1_AB_PRESENCE_IN_SERUM_BY_IMMUNOBLOT_IB("5221-7",
+			"HIV 1 Ab [Presence] in Serum by Immunoblot (IB)", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">HIV 1 IgG Ab [Presence] in Serum by Immunoblot (IB)</div>
 	 * .
 	 */
-	HIV_1_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOBLOT_IB("40732-0", "HIV 1 IgG Ab [Presence] in Serum by Immunoblot (IB)", "18727-8", "20150101", ""),
+	HIV_1_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOBLOT_IB("40732-0",
+			"HIV 1 IgG Ab [Presence] in Serum by Immunoblot (IB)", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">HIV 1 RNA [Units/?volume] (viral load) in Serum or Plasma
 	 * by Probe and target amplification method</div>.
 	 */
-	HIV_1_RNA_UNITSVOLUME_VIRAL_LOAD_IN_SERUM_OR_PLASMA_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("62469-2", "HIV 1 RNA [Units/?volume] (viral load) in Serum or Plasma by Probe and target amplification method", "18725-2", "20150101", ""),
+	HIV_1_RNA_UNITSVOLUME_VIRAL_LOAD_IN_SERUM_OR_PLASMA_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"62469-2",
+			"HIV 1 RNA [Units/?volume] (viral load) in Serum or Plasma by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">HIV 1 RNA [#/?volume] (viral load) in Serum or Plasma by
 	 * Probe and target amplification method</div>.
 	 */
-	HIV_1_RNA_VOLUME_VIRAL_LOAD_IN_SERUM_OR_PLASMA_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("20447-9", "HIV 1 RNA [#/?volume] (viral load) in Serum or Plasma by Probe and target amplification method", "18725-2", "20150101", ""),
+	HIV_1_RNA_VOLUME_VIRAL_LOAD_IN_SERUM_OR_PLASMA_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"20447-9",
+			"HIV 1 RNA [#/?volume] (viral load) in Serum or Plasma by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">HIV 2 Ab [Presence] in Serum by Immunoblot (IB)</div>.
 	 */
-	HIV_2_AB_PRESENCE_IN_SERUM_BY_IMMUNOBLOT_IB("5225-8", "HIV 2 Ab [Presence] in Serum by Immunoblot (IB)", "18727-8", "20150101", ""),
+	HIV_2_AB_PRESENCE_IN_SERUM_BY_IMMUNOBLOT_IB("5225-8",
+			"HIV 2 Ab [Presence] in Serum by Immunoblot (IB)", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">HIV 2 IgG Ab [Presence] in Serum by Immunoblot (IB)</div>
 	 * .
 	 */
-	HIV_2_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOBLOT_IB("33806-1", "HIV 2 IgG Ab [Presence] in Serum by Immunoblot (IB)", "18727-8", "20150101", ""),
+	HIV_2_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOBLOT_IB("33806-1",
+			"HIV 2 IgG Ab [Presence] in Serum by Immunoblot (IB)", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Hyaline casts [#/area] in Urine sediment by Automated
 	 * count</div>.
 	 */
-	HYALINE_CASTS_AREA_IN_URINE_SEDIMENT_BY_AUTOMATED_COUNT("33223-9", "Hyaline casts [#/area] in Urine sediment by Automated count", "18729-4", "20150101", ""),
+	HYALINE_CASTS_AREA_IN_URINE_SEDIMENT_BY_AUTOMATED_COUNT("33223-9",
+			"Hyaline casts [#/area] in Urine sediment by Automated count", "18729-4", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Hyaline casts [Presence] in Urine sediment by Light
 	 * microscopy</div>.
 	 */
-	HYALINE_CASTS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("25162-9", "Hyaline casts [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101", ""),
+	HYALINE_CASTS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("25162-9",
+			"Hyaline casts [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101",
+			""),
 
 	/** <div class="en">I Ab [Presence] in Serum or Plasma</div>. */
-	I_AB_PRESENCE_IN_SERUM_OR_PLASMA("1060-3", "I Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	I_AB_PRESENCE_IN_SERUM_OR_PLASMA("1060-3", "I Ab [Presence] in Serum or Plasma", "18717-9",
+			"20150101", ""),
 
 	/** <div class="en">IgA [Mass/volume] in Serum or Plasma</div>. */
-	IGA_MASSVOLUME_IN_SERUM_OR_PLASMA("2458-8", "IgA [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	IGA_MASSVOLUME_IN_SERUM_OR_PLASMA("2458-8", "IgA [Mass/volume] in Serum or Plasma", "18719-5",
+			"20150101", ""),
 
 	/** <div class="en">IgE [Units/volume] in Serum or Plasma</div>. */
-	IGE_UNITSVOLUME_IN_SERUM_OR_PLASMA("19113-0", "IgE [Units/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	IGE_UNITSVOLUME_IN_SERUM_OR_PLASMA("19113-0", "IgE [Units/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/** <div class="en">IgG [Mass/volume] in Serum or Plasma</div>. */
-	IGG_MASSVOLUME_IN_SERUM_OR_PLASMA("2465-3", "IgG [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	IGG_MASSVOLUME_IN_SERUM_OR_PLASMA("2465-3", "IgG [Mass/volume] in Serum or Plasma", "18719-5",
+			"20150101", ""),
 
 	/** <div class="en">IgM [Mass/volume] in Serum or Plasma</div>. */
-	IGM_MASSVOLUME_IN_SERUM_OR_PLASMA("2472-9", "IgM [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	IGM_MASSVOLUME_IN_SERUM_OR_PLASMA("2472-9", "IgM [Mass/volume] in Serum or Plasma", "18719-5",
+			"20150101", ""),
 
 	/** <div class="en">IH Ab [Presence] in Serum or Plasma</div>. */
-	IH_AB_PRESENCE_IN_SERUM_OR_PLASMA("58078-7", "IH Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	IH_AB_PRESENCE_IN_SERUM_OR_PLASMA("58078-7", "IH Ab [Presence] in Serum or Plasma", "18717-9",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Imipramine+Desipramine [Mass/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	IMIPRAMINE_DESIPRAMINE_MASSVOLUME_IN_SERUM_OR_PLASMA("9627-1", "Imipramine+Desipramine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	IMIPRAMINE_DESIPRAMINE_MASSVOLUME_IN_SERUM_OR_PLASMA("9627-1",
+			"Imipramine+Desipramine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Imipramine+Desipramine [Moles/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	IMIPRAMINE_DESIPRAMINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14794-2", "Imipramine+Desipramine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	IMIPRAMINE_DESIPRAMINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14794-2",
+			"Imipramine+Desipramine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Imipramine [Mass/volume] in Serum or Plasma</div>. */
-	IMIPRAMINE_MASSVOLUME_IN_SERUM_OR_PLASMA("3690-5", "Imipramine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	IMIPRAMINE_MASSVOLUME_IN_SERUM_OR_PLASMA("3690-5",
+			"Imipramine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Imipramine [Moles/volume] in Serum or Plasma</div>. */
-	IMIPRAMINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("15107-6", "Imipramine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	IMIPRAMINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("15107-6",
+			"Imipramine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Influenza virus A+B RNA [Presence] in Unspecified
 	 * specimen by Probe and target amplification method</div>.
 	 */
-	INFLUENZA_VIRUS_A_B_RNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("62462-7", "Influenza virus A+B RNA [Presence] in Unspecified specimen by Probe and target amplification method", "18725-2", "20150101", ""),
+	INFLUENZA_VIRUS_A_B_RNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"62462-7",
+			"Influenza virus A+B RNA [Presence] in Unspecified specimen by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/** <div class="en">INR in Blood by Coagulation assay</div>. */
-	INR_IN_BLOOD_BY_COAGULATION_ASSAY("34714-6", "INR in Blood by Coagulation assay", "18720-3", "20150101", ""),
+	INR_IN_BLOOD_BY_COAGULATION_ASSAY("34714-6", "INR in Blood by Coagulation assay", "18720-3",
+			"20150101", ""),
 
 	/** <div class="en">Iron [Mass/volume] in Serum or Plasma</div>. */
-	IRON_MASSVOLUME_IN_SERUM_OR_PLASMA("2498-4", "Iron [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	IRON_MASSVOLUME_IN_SERUM_OR_PLASMA("2498-4", "Iron [Mass/volume] in Serum or Plasma", "18719-5",
+			"20150101", ""),
 
 	/** <div class="en">Iron [Moles/volume] in Serum or Plasma</div>. */
-	IRON_MOLESVOLUME_IN_SERUM_OR_PLASMA("14798-3", "Iron [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	IRON_MOLESVOLUME_IN_SERUM_OR_PLASMA("14798-3", "Iron [Moles/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Isoniazid 0.1 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>
 	 */
-	ISONIAZID_0_1_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25217-1", "Isoniazid 0.1 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	ISONIAZID_0_1_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25217-1",
+			"Isoniazid 0.1 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria",
+			"18769-0", "20150101", ""),
 	/**
 	 * <div class="en">Isoniazid 0.2 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>
 	 */
-	ISONIAZID_0_2_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25218-9", "Isoniazid 0.2 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	ISONIAZID_0_2_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25218-9",
+			"Isoniazid 0.2 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria",
+			"18769-0", "20150101", ""),
 	/**
 	 * <div class="en">Isoniazid 0.4 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>
 	 */
-	ISONIAZID_0_4_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("29315-9", "Isoniazid 0.4 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	ISONIAZID_0_4_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("29315-9",
+			"Isoniazid 0.4 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria",
+			"18769-0", "20150101", ""),
 
 	/**
 	 * <div class="en">Isoniazid 1 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	ISONIAZID_1_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25219-7", "Isoniazid 1 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	ISONIAZID_1_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25219-7",
+			"Isoniazid 1 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Isoniazid 10 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	ISONIAZID_10_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("55685-2", "Isoniazid 10 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	ISONIAZID_10_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("55685-2",
+			"Isoniazid 10 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria",
+			"18769-0", "20150101", ""),
 
 	/**
 	 * <div class="en">Isoniazid 2 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	ISONIAZID_2_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("45215-1", "Isoniazid 2 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	ISONIAZID_2_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("45215-1",
+			"Isoniazid 2 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Isoniazid 5 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	ISONIAZID_5_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("42651-0", "Isoniazid 5 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	ISONIAZID_5_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("42651-0",
+			"Isoniazid 5 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Isoniazid [Susceptibility] by Method for Slow-growing
 	 * mycobacteria</div>.
 	 */
-	ISONIAZID_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("20383-6", "Isoniazid [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	ISONIAZID_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("20383-6",
+			"Isoniazid [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0",
+			"20150101", ""),
 
 	/** <div class="en">Itraconazole [Susceptibility]</div>. */
-	ITRACONAZOLE_SUSCEPTIBILITY("32603-3", "Itraconazole [Susceptibility]", "18769-0", "20150101", ""),
+	ITRACONAZOLE_SUSCEPTIBILITY("32603-3", "Itraconazole [Susceptibility]", "18769-0", "20150101",
+			""),
 
 	/** <div class="en">Jk sup(a) Ab [Presence] in Serum or Plasma</div>. */
-	JK_SUPA_AB_PRESENCE_IN_SERUM_OR_PLASMA("1069-4", "Jk sup(a) Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	JK_SUPA_AB_PRESENCE_IN_SERUM_OR_PLASMA("1069-4", "Jk sup(a) Ab [Presence] in Serum or Plasma",
+			"18717-9", "20150101", ""),
 
 	/** <div class="en">Jk sup(b) Ab [Presence] in Serum or Plasma</div>. */
-	JK_SUPB_AB_PRESENCE_IN_SERUM_OR_PLASMA("1075-1", "Jk sup(b) Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	JK_SUPB_AB_PRESENCE_IN_SERUM_OR_PLASMA("1075-1", "Jk sup(b) Ab [Presence] in Serum or Plasma",
+			"18717-9", "20150101", ""),
 
 	/** <div class="en">Js sup(a) Ab [Presence] in Serum or Plasma</div>. */
-	JS_SUPA_AB_PRESENCE_IN_SERUM_OR_PLASMA("1081-9", "Js sup(a) Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	JS_SUPA_AB_PRESENCE_IN_SERUM_OR_PLASMA("1081-9", "Js sup(a) Ab [Presence] in Serum or Plasma",
+			"18717-9", "20150101", ""),
 
 	/** <div class="en">Js sup(b) Ab [Presence] in Serum or Plasma</div>. */
-	JS_SUPB_AB_PRESENCE_IN_SERUM_OR_PLASMA("1087-6", "Js sup(b) Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	JS_SUPB_AB_PRESENCE_IN_SERUM_OR_PLASMA("1087-6", "Js sup(b) Ab [Presence] in Serum or Plasma",
+			"18717-9", "20150101", ""),
 
 	/** <div class="en">K Ab [Presence] in Serum or Plasma</div>. */
-	K_AB_PRESENCE_IN_SERUM_OR_PLASMA("1093-4", "K Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	K_AB_PRESENCE_IN_SERUM_OR_PLASMA("1093-4", "K Ab [Presence] in Serum or Plasma", "18717-9",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Karyotype [Identifier] in Blood or Tissue Narrative</div>
 	 * .
 	 */
-	KARYOTYPE_IDENTIFIER_IN_BLOOD_OR_TISSUE_NARRATIVE("50619-6", "Karyotype [Identifier] in Blood or Tissue Narrative", "26435-8", "20150101", ""),
+	KARYOTYPE_IDENTIFIER_IN_BLOOD_OR_TISSUE_NARRATIVE("50619-6",
+			"Karyotype [Identifier] in Blood or Tissue Narrative", "26435-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Karyotype [Identifier] in Blood or Tissue Nominal</div>.
 	 */
-	KARYOTYPE_IDENTIFIER_IN_BLOOD_OR_TISSUE_NOMINAL("29770-5", "Karyotype [Identifier] in Blood or Tissue Nominal", "26435-8", "20150101", ""),
+	KARYOTYPE_IDENTIFIER_IN_BLOOD_OR_TISSUE_NOMINAL("29770-5",
+			"Karyotype [Identifier] in Blood or Tissue Nominal", "26435-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Ketones [Presence] in Urine by Automated test strip</div>
 	 * .
 	 */
-	KETONES_PRESENCE_IN_URINE_BY_AUTOMATED_TEST_STRIP("57734-6", "Ketones [Presence] in Urine by Automated test strip", "18729-4", "20150101", ""),
+	KETONES_PRESENCE_IN_URINE_BY_AUTOMATED_TEST_STRIP("57734-6",
+			"Ketones [Presence] in Urine by Automated test strip", "18729-4", "20150101", ""),
 
 	/** <div class="en">Kp sup(a) Ab [Presence] in Serum or Plasma</div>. */
-	KP_SUPA_AB_PRESENCE_IN_SERUM_OR_PLASMA("1099-1", "Kp sup(a) Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	KP_SUPA_AB_PRESENCE_IN_SERUM_OR_PLASMA("1099-1", "Kp sup(a) Ab [Presence] in Serum or Plasma",
+			"18717-9", "20150101", ""),
 
 	/** <div class="en">Kp sup(b) Ab [Presence] in Serum or Plasma</div>. */
-	KP_SUPB_AB_PRESENCE_IN_SERUM_OR_PLASMA("1105-6", "Kp sup(b) Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	KP_SUPB_AB_PRESENCE_IN_SERUM_OR_PLASMA("1105-6", "Kp sup(b) Ab [Presence] in Serum or Plasma",
+			"18717-9", "20150101", ""),
 
 	/**
 	 * <div class="en">Lactate dehydrogenase [Enzymatic activity/volume] in
 	 * Serum or Plasma by Lactate to pyruvate reaction</div>.
 	 */
-	LACTATE_DEHYDROGENASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA_BY_LACTATE_TO_PYRUVATE_REACTION("14804-9", "Lactate dehydrogenase [Enzymatic activity/volume] in Serum or Plasma by Lactate to pyruvate reaction", "18719-5", "20150101", ""),
+	LACTATE_DEHYDROGENASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA_BY_LACTATE_TO_PYRUVATE_REACTION(
+			"14804-9",
+			"Lactate dehydrogenase [Enzymatic activity/volume] in Serum or Plasma by Lactate to pyruvate reaction",
+			"18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Lactate dehydrogenase [Enzymatic activity/volume] in
 	 * Serum or Plasma by Pyruvate to lactate reaction</div>.
 	 */
-	LACTATE_DEHYDROGENASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA_BY_PYRUVATE_TO_LACTATE_REACTION("14805-6", "Lactate dehydrogenase [Enzymatic activity/volume] in Serum or Plasma by Pyruvate to lactate reaction", "18719-5", "20150101", ""),
+	LACTATE_DEHYDROGENASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA_BY_PYRUVATE_TO_LACTATE_REACTION(
+			"14805-6",
+			"Lactate dehydrogenase [Enzymatic activity/volume] in Serum or Plasma by Pyruvate to lactate reaction",
+			"18719-5", "20150101", ""),
 
 	/** <div class="en">Le sup(a) Ab [Presence] in Serum or Plasma</div>. */
-	LE_SUPA_AB_PRESENCE_IN_SERUM_OR_PLASMA("1112-2", "Le sup(a) Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	LE_SUPA_AB_PRESENCE_IN_SERUM_OR_PLASMA("1112-2", "Le sup(a) Ab [Presence] in Serum or Plasma",
+			"18717-9", "20150101", ""),
 
 	/** <div class="en">Le sup(b) Ab [Presence] in Serum or Plasma</div>. */
-	LE_SUPB_AB_PRESENCE_IN_SERUM_OR_PLASMA("1118-9", "Le sup(b) Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	LE_SUPB_AB_PRESENCE_IN_SERUM_OR_PLASMA("1118-9", "Le sup(b) Ab [Presence] in Serum or Plasma",
+			"18717-9", "20150101", ""),
 
 	/**
 	 * <div class="en">Leucine crystals [Presence] in Urine sediment by Light
 	 * microscopy</div>.
 	 */
-	LEUCINE_CRYSTALS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("5798-4", "Leucine crystals [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101", ""),
+	LEUCINE_CRYSTALS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("5798-4",
+			"Leucine crystals [Presence] in Urine sediment by Light microscopy", "18729-4",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Leukocytes [#/area] in Urine sediment by Automated
 	 * count</div>.
 	 */
-	LEUKOCYTES_AREA_IN_URINE_SEDIMENT_BY_AUTOMATED_COUNT("46702-7", "Leukocytes [#/area] in Urine sediment by Automated count", "18729-4", "20150101", ""),
+	LEUKOCYTES_AREA_IN_URINE_SEDIMENT_BY_AUTOMATED_COUNT("46702-7",
+			"Leukocytes [#/area] in Urine sediment by Automated count", "18729-4", "20150101", ""),
 
 	/**
 	 * <div class="en">Leukocytes [Presence] in Urine sediment by Light
 	 * microscopy</div>.
 	 */
-	LEUKOCYTES_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("20455-2", "Leukocytes [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101", ""),
+	LEUKOCYTES_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("20455-2",
+			"Leukocytes [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Leukocytes [#/?volume] in Blood by Automated count</div>.
 	 */
-	LEUKOCYTES_VOLUME_IN_BLOOD_BY_AUTOMATED_COUNT("6690-2", "Leukocytes [#/?volume] in Blood by Automated count", "18723-7", "20150101", ""),
+	LEUKOCYTES_VOLUME_IN_BLOOD_BY_AUTOMATED_COUNT("6690-2",
+			"Leukocytes [#/?volume] in Blood by Automated count", "18723-7", "20150101", ""),
 
 	/** <div class="en">Leukocytes [#/volume] in Blood by Manual count</div>. */
-	LEUKOCYTES_VOLUME_IN_BLOOD_BY_MANUAL_COUNT("804-5", "Leukocytes [#/volume] in Blood by Manual count", "18723-7", "20150101", ""),
+	LEUKOCYTES_VOLUME_IN_BLOOD_BY_MANUAL_COUNT("804-5",
+			"Leukocytes [#/volume] in Blood by Manual count", "18723-7", "20150101", ""),
 
 	/**
 	 * <div class="en">Leukocytes [#/?volume] in unspecified time Urine sediment
 	 * by Microscopy high power field</div>.
 	 */
-	LEUKOCYTES_VOLUME_IN_UNSPECIFIED_TIME_URINE_SEDIMENT_BY_MICROSCOPY_HIGH_POWER_FIELD("63555-7", "Leukocytes [#/?volume] in unspecified time Urine sediment by Microscopy high power field", "18729-4", "20150101", ""),
+	LEUKOCYTES_VOLUME_IN_UNSPECIFIED_TIME_URINE_SEDIMENT_BY_MICROSCOPY_HIGH_POWER_FIELD("63555-7",
+			"Leukocytes [#/?volume] in unspecified time Urine sediment by Microscopy high power field",
+			"18729-4", "20150101", ""),
 
 	/**
 	 * <div class="en">Leukocytes [#/volume] in Urine by Automated test
 	 * strip</div>.
 	 */
-	LEUKOCYTES_VOLUME_IN_URINE_BY_AUTOMATED_TEST_STRIP("58805-3", "Leukocytes [#/volume] in Urine by Automated test strip", "18729-4", "20150101", ""),
+	LEUKOCYTES_VOLUME_IN_URINE_BY_AUTOMATED_TEST_STRIP("58805-3",
+			"Leukocytes [#/volume] in Urine by Automated test strip", "18729-4", "20150101", ""),
 
 	/** <div class="en">Leukocytes [#/volume] in Urine by Test strip</div>. */
-	LEUKOCYTES_VOLUME_IN_URINE_BY_TEST_STRIP("20408-1", "Leukocytes [#/volume] in Urine by Test strip", "18729-4", "20150101", ""),
+	LEUKOCYTES_VOLUME_IN_URINE_BY_TEST_STRIP("20408-1",
+			"Leukocytes [#/volume] in Urine by Test strip", "18729-4", "20150101", ""),
 
 	/**
 	 * <div class="en">Lipase [Enzymatic activity/volume] in Serum or
 	 * Plasma</div> .
 	 */
-	LIPASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA("3040-3", "Lipase [Enzymatic activity/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	LIPASE_ENZYMATIC_ACTIVITYVOLUME_IN_SERUM_OR_PLASMA("3040-3",
+			"Lipase [Enzymatic activity/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Lithium [Mass/volume] in Serum or Plasma</div>. */
-	LITHIUM_MASSVOLUME_IN_SERUM_OR_PLASMA("3719-2", "Lithium [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	LITHIUM_MASSVOLUME_IN_SERUM_OR_PLASMA("3719-2", "Lithium [Mass/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/** <div class="en">Lithium [Moles/volume] in Serum or Plasma</div>. */
-	LITHIUM_MOLESVOLUME_IN_SERUM_OR_PLASMA("14334-7", "Lithium [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	LITHIUM_MOLESVOLUME_IN_SERUM_OR_PLASMA("14334-7", "Lithium [Moles/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/** <div class="en">little e Ab [Presence] in Serum or Plasma</div>. */
-	LITTLE_E_AB_PRESENCE_IN_SERUM_OR_PLASMA("1162-7", "little e Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	LITTLE_E_AB_PRESENCE_IN_SERUM_OR_PLASMA("1162-7", "little e Ab [Presence] in Serum or Plasma",
+			"18717-9", "20150101", ""),
 
 	/** <div class="en">little f Ab [Presence] in Serum or Plasma</div>. */
-	LITTLE_F_AB_PRESENCE_IN_SERUM_OR_PLASMA("1168-4", "little f Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	LITTLE_F_AB_PRESENCE_IN_SERUM_OR_PLASMA("1168-4", "little f Ab [Presence] in Serum or Plasma",
+			"18717-9", "20150101", ""),
 
 	/** <div class="en">little k Ab [Presence] in Serum or Plasma</div>. */
-	LITTLE_K_AB_PRESENCE_IN_SERUM_OR_PLASMA("1192-4", "little k Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	LITTLE_K_AB_PRESENCE_IN_SERUM_OR_PLASMA("1192-4", "little k Ab [Presence] in Serum or Plasma",
+			"18717-9", "20150101", ""),
 
 	/** <div class="en">little s Ab [Presence] in Serum or Plasma</div>. */
-	LITTLE_S_AB_PRESENCE_IN_SERUM_OR_PLASMA("1210-4", "little s Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	LITTLE_S_AB_PRESENCE_IN_SERUM_OR_PLASMA("1210-4", "little s Ab [Presence] in Serum or Plasma",
+			"18717-9", "20150101", ""),
 
 	/** <div class="en">Lu sup(a) Ab [Presence] in Serum or Plasma</div>. */
-	LU_SUPA_AB_PRESENCE_IN_SERUM_OR_PLASMA("1135-3", "Lu sup(a) Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	LU_SUPA_AB_PRESENCE_IN_SERUM_OR_PLASMA("1135-3", "Lu sup(a) Ab [Presence] in Serum or Plasma",
+			"18717-9", "20150101", ""),
 
 	/** <div class="en">Lu sup(b) Ab [Presence] in Serum or Plasma</div>. */
-	LU_SUPB_AB_PRESENCE_IN_SERUM_OR_PLASMA("1144-5", "Lu sup(b) Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	LU_SUPB_AB_PRESENCE_IN_SERUM_OR_PLASMA("1144-5", "Lu sup(b) Ab [Presence] in Serum or Plasma",
+			"18717-9", "20150101", ""),
 
 	/** <div class="en">Lutropin [Units/volume] in Serum or Plasma</div>. */
-	LUTROPIN_UNITSVOLUME_IN_SERUM_OR_PLASMA("10501-5", "Lutropin [Units/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	LUTROPIN_UNITSVOLUME_IN_SERUM_OR_PLASMA("10501-5", "Lutropin [Units/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Lymphocytes/?100 leukocytes in Blood by Manual
 	 * count</div>.
 	 */
-	LYMPHOCYTES100_LEUKOCYTES_IN_BLOOD_BY_MANUAL_COUNT("737-7", "Lymphocytes/?100 leukocytes in Blood by Manual count", "18768-2", "20150101", ""),
+	LYMPHOCYTES100_LEUKOCYTES_IN_BLOOD_BY_MANUAL_COUNT("737-7",
+			"Lymphocytes/?100 leukocytes in Blood by Manual count", "18768-2", "20150101", ""),
 
 	/** <div class="en">M Ab [Presence] in Serum or Plasma</div>. */
-	M_AB_PRESENCE_IN_SERUM_OR_PLASMA("1228-6", "M Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	M_AB_PRESENCE_IN_SERUM_OR_PLASMA("1228-6", "M Ab [Presence] in Serum or Plasma", "18717-9",
+			"20150101", ""),
 
 	/** <div class="en">Magnesium [Mass/volume] in Serum or Plasma</div>. */
-	MAGNESIUM_MASSVOLUME_IN_SERUM_OR_PLASMA("19123-9", "Magnesium [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	MAGNESIUM_MASSVOLUME_IN_SERUM_OR_PLASMA("19123-9", "Magnesium [Mass/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/** <div class="en">Magnesium [Moles/volume] in Serum or Plasma</div>. */
-	MAGNESIUM_MOLESVOLUME_IN_SERUM_OR_PLASMA("2601-3", "Magnesium [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	MAGNESIUM_MOLESVOLUME_IN_SERUM_OR_PLASMA("2601-3",
+			"Magnesium [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Major crossmatch [interpretation]</div>. */
-	MAJOR_CROSSMATCH_INTERPRETATION("1250-0", "Major crossmatch [interpretation]", "18723-7", "20150101", ""),
+	MAJOR_CROSSMATCH_INTERPRETATION("1250-0", "Major crossmatch [interpretation]", "18723-7",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Metamyelocytes/?100 leukocytes in Blood by Manual
 	 * count</div>.
 	 */
-	METAMYELOCYTES100_LEUKOCYTES_IN_BLOOD_BY_MANUAL_COUNT("740-1", "Metamyelocytes/?100 leukocytes in Blood by Manual count", "18768-2", "20150101", ""),
+	METAMYELOCYTES100_LEUKOCYTES_IN_BLOOD_BY_MANUAL_COUNT("740-1",
+			"Metamyelocytes/?100 leukocytes in Blood by Manual count", "18768-2", "20150101", ""),
 
 	/** <div class="en">Methadone [Mass/?volume] in Urine</div>. */
-	METHADONE_MASSVOLUME_IN_URINE("3774-7", "Methadone [Mass/?volume] in Urine", "18729-4", "20150101", ""),
+	METHADONE_MASSVOLUME_IN_URINE("3774-7", "Methadone [Mass/?volume] in Urine", "18729-4",
+			"20150101", ""),
 
 	/** <div class="en">Methadone [Moles/?volume] in Urine</div>. */
-	METHADONE_MOLESVOLUME_IN_URINE("52958-6", "Methadone [Moles/?volume] in Urine", "18729-4", "20150101", ""),
+	METHADONE_MOLESVOLUME_IN_URINE("52958-6", "Methadone [Moles/?volume] in Urine", "18729-4",
+			"20150101", ""),
 
 	/** <div class="en">Methadone [Presence] in Urine</div>. */
-	METHADONE_PRESENCE_IN_URINE("3773-9", "Methadone [Presence] in Urine", "18729-4", "20150101", ""),
+	METHADONE_PRESENCE_IN_URINE("3773-9", "Methadone [Presence] in Urine", "18729-4", "20150101",
+			""),
 
 	/** <div class="en">Methadone [Presence] in Urine by Screen method</div>. */
-	METHADONE_PRESENCE_IN_URINE_BY_SCREEN_METHOD("19550-3", "Methadone [Presence] in Urine by Screen method", "18729-4", "20150101", ""),
+	METHADONE_PRESENCE_IN_URINE_BY_SCREEN_METHOD("19550-3",
+			"Methadone [Presence] in Urine by Screen method", "18729-4", "20150101", ""),
 
 	/**
 	 * <div class="en">Methicillin resistant Staphylococcus aureus (MRSA) DNA
 	 * [Presence] by Probe and target amplification method</div>.
 	 */
-	METHICILLIN_RESISTANT_STAPHYLOCOCCUS_AUREUS_MRSA_DNA_PRESENCE_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("35492-8", "Methicillin resistant Staphylococcus aureus (MRSA) DNA [Presence] by Probe and target amplification method", "18725-2", "20150101", ""),
+	METHICILLIN_RESISTANT_STAPHYLOCOCCUS_AUREUS_MRSA_DNA_PRESENCE_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"35492-8",
+			"Methicillin resistant Staphylococcus aureus (MRSA) DNA [Presence] by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Methicillin resistant Staphylococcus aureus [Presence] in
 	 * Unspecified specimen by Organism specific culture</div>.
 	 */
-	METHICILLIN_RESISTANT_STAPHYLOCOCCUS_AUREUS_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_ORGANISM_SPECIFIC_CULTURE("13317-3", "Methicillin resistant Staphylococcus aureus [Presence] in Unspecified specimen by Organism specific culture", "18725-2", "20150101", ""),
+	METHICILLIN_RESISTANT_STAPHYLOCOCCUS_AUREUS_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_ORGANISM_SPECIFIC_CULTURE(
+			"13317-3",
+			"Methicillin resistant Staphylococcus aureus [Presence] in Unspecified specimen by Organism specific culture",
+			"18725-2", "20150101", ""),
 
 	/** <div class="en">Mianserin [Mass/volume] in Serum or Plasma</div>. */
-	MIANSERIN_MASSVOLUME_IN_SERUM_OR_PLASMA("2635-1", "Mianserin [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	MIANSERIN_MASSVOLUME_IN_SERUM_OR_PLASMA("2635-1", "Mianserin [Mass/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/** <div class="en">Mianserin [Moles/volume] in Serum or Plasma</div>. */
-	MIANSERIN_MOLESVOLUME_IN_SERUM_OR_PLASMA("25721-2", "Mianserin [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	MIANSERIN_MOLESVOLUME_IN_SERUM_OR_PLASMA("25721-2",
+			"Mianserin [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Mianserin+Normianserin [Mass/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	MIANSERIN_NORMIANSERIN_MASSVOLUME_IN_SERUM_OR_PLASMA("34341-8", "Mianserin+Normianserin [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	MIANSERIN_NORMIANSERIN_MASSVOLUME_IN_SERUM_OR_PLASMA("34341-8",
+			"Mianserin+Normianserin [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Micafungin [Susceptibility]</div>. */
 	MICAFUNGIN_SUSCEPTIBILITY("65340-2", "Micafungin [Susceptibility]", "18769-0", "20150101", ""),
 
 	/** <div class="en">Mirtazapine [Mass/volume] in Serum or Plasma</div>. */
-	MIRTAZAPINE_MASSVOLUME_IN_SERUM_OR_PLASMA("17283-3", "Mirtazapine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	MIRTAZAPINE_MASSVOLUME_IN_SERUM_OR_PLASMA("17283-3",
+			"Mirtazapine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Mirtazapine [Moles/volume] in Serum or Plasma</div>. */
-	MIRTAZAPINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("55554-0", "Mirtazapine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	MIRTAZAPINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("55554-0",
+			"Mirtazapine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Mirtazapine+Normirtazapine [Mass/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	MIRTAZAPINE_NORMIRTAZAPINE_MASSVOLUME_IN_SERUM_OR_PLASMA("62848-7", "Mirtazapine+Normirtazapine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	MIRTAZAPINE_NORMIRTAZAPINE_MASSVOLUME_IN_SERUM_OR_PLASMA("62848-7",
+			"Mirtazapine+Normirtazapine [Mass/volume] in Serum or Plasma", "18719-5", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Miscellaneous allergen IgE Ab RAST class [Presence] in
 	 * Serum</div>.
 	 */
-	MISCELLANEOUS_ALLERGEN_IGE_AB_RAST_CLASS_PRESENCE_IN_SERUM("33536-4", "Miscellaneous allergen IgE Ab RAST class [Presence] in Serum", "18719-5", "20150101", ""),
+	MISCELLANEOUS_ALLERGEN_IGE_AB_RAST_CLASS_PRESENCE_IN_SERUM("33536-4",
+			"Miscellaneous allergen IgE Ab RAST class [Presence] in Serum", "18719-5", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Mixed cellular casts [Presence] in Urine sediment by
 	 * Light microscopy</div>.
 	 */
-	MIXED_CELLULAR_CASTS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("34173-5", "Mixed cellular casts [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101", ""),
+	MIXED_CELLULAR_CASTS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("34173-5",
+			"Mixed cellular casts [Presence] in Urine sediment by Light microscopy", "18729-4",
+			"20150101", ""),
 
 	/** <div class="en">Moclobemide [Mass/volume] in Serum or Plasma</div>. */
-	MOCLOBEMIDE_MASSVOLUME_IN_SERUM_OR_PLASMA("74941-6", "Moclobemide [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	MOCLOBEMIDE_MASSVOLUME_IN_SERUM_OR_PLASMA("74941-6",
+			"Moclobemide [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Moclobemide [Moles/volume] in Serum or Plasma</div>. */
-	MOCLOBEMIDE_MOLESVOLUME_IN_SERUM_OR_PLASMA("34413-5", "Moclobemide [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	MOCLOBEMIDE_MOLESVOLUME_IN_SERUM_OR_PLASMA("34413-5",
+			"Moclobemide [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Monocytes/100 leukocytes in Blood by Manual count</div>.
 	 */
-	MONOCYTES100_LEUKOCYTES_IN_BLOOD_BY_MANUAL_COUNT("744-3", "Monocytes/100 leukocytes in Blood by Manual count", "18768-2", "20150101", ""),
+	MONOCYTES100_LEUKOCYTES_IN_BLOOD_BY_MANUAL_COUNT("744-3",
+			"Monocytes/100 leukocytes in Blood by Manual count", "18768-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Mycobacterium sp identified in Unspecified specimen by
 	 * Organism specific culture</div>.
 	 */
-	MYCOBACTERIUM_SP_IDENTIFIED_IN_UNSPECIFIED_SPECIMEN_BY_ORGANISM_SPECIFIC_CULTURE("543-9", "Mycobacterium sp identified in Unspecified specimen by Organism specific culture", "18725-2", "20150101", ""),
+	MYCOBACTERIUM_SP_IDENTIFIED_IN_UNSPECIFIED_SPECIMEN_BY_ORGANISM_SPECIFIC_CULTURE("543-9",
+			"Mycobacterium sp identified in Unspecified specimen by Organism specific culture",
+			"18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Mycobacterium tuberculosis complex DNA [Presence] in
 	 * Unspecified specimen by Probe and target amplification method</div>.
 	 */
-	MYCOBACTERIUM_TUBERCULOSIS_COMPLEX_DNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("38379-4", "Mycobacterium tuberculosis complex DNA [Presence] in Unspecified specimen by Probe and target amplification method", "18725-2", "20150101", ""),
+	MYCOBACTERIUM_TUBERCULOSIS_COMPLEX_DNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"38379-4",
+			"Mycobacterium tuberculosis complex DNA [Presence] in Unspecified specimen by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Mycobacterium tuberculosis complex rRNA [Presence] in
 	 * Unspecified specimen by DNA probe</div>.
 	 */
-	MYCOBACTERIUM_TUBERCULOSIS_COMPLEX_RRNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_DNA_PROBE("17296-5", "Mycobacterium tuberculosis complex rRNA [Presence] in Unspecified specimen by DNA probe", "18725-2", "20150101", ""),
+	MYCOBACTERIUM_TUBERCULOSIS_COMPLEX_RRNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_DNA_PROBE("17296-5",
+			"Mycobacterium tuberculosis complex rRNA [Presence] in Unspecified specimen by DNA probe",
+			"18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Myelocytes/?100 leukocytes in Blood by Manual count</div>
 	 * .
 	 */
-	MYELOCYTES100_LEUKOCYTES_IN_BLOOD_BY_MANUAL_COUNT("749-2", "Myelocytes/?100 leukocytes in Blood by Manual count", "18768-2", "20150101", ""),
+	MYELOCYTES100_LEUKOCYTES_IN_BLOOD_BY_MANUAL_COUNT("749-2",
+			"Myelocytes/?100 leukocytes in Blood by Manual count", "18768-2", "20150101", ""),
 
 	/** <div class="en">Myoglobin [Mass/volume] in Serum or Plasma</div>. */
-	MYOGLOBIN_MASSVOLUME_IN_SERUM_OR_PLASMA("2639-3", "Myoglobin [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	MYOGLOBIN_MASSVOLUME_IN_SERUM_OR_PLASMA("2639-3", "Myoglobin [Mass/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/** <div class="en">Myoglobin [Mass/?volume] in Urine</div>. */
-	MYOGLOBIN_MASSVOLUME_IN_URINE("2641-9", "Myoglobin [Mass/?volume] in Urine", "18729-4", "20150101", ""),
+	MYOGLOBIN_MASSVOLUME_IN_URINE("2641-9", "Myoglobin [Mass/?volume] in Urine", "18729-4",
+			"20150101", ""),
 
 	/** <div class="en">Myoglobin [Moles/volume] in Serum or Plasma</div>. */
-	MYOGLOBIN_MOLESVOLUME_IN_SERUM_OR_PLASMA("56887-3", "Myoglobin [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	MYOGLOBIN_MOLESVOLUME_IN_SERUM_OR_PLASMA("56887-3",
+			"Myoglobin [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">N Ab [Presence] in Serum or Plasma</div>. */
-	N_AB_PRESENCE_IN_SERUM_OR_PLASMA("1258-3", "N Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	N_AB_PRESENCE_IN_SERUM_OR_PLASMA("1258-3", "N Ab [Presence] in Serum or Plasma", "18717-9",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Natriuretic peptide B [Mass/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	NATRIURETIC_PEPTIDE_B_MASSVOLUME_IN_SERUM_OR_PLASMA("30934-4", "Natriuretic peptide B [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	NATRIURETIC_PEPTIDE_B_MASSVOLUME_IN_SERUM_OR_PLASMA("30934-4",
+			"Natriuretic peptide B [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Natriuretic peptide B [Moles/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	NATRIURETIC_PEPTIDE_B_MOLESVOLUME_IN_SERUM_OR_PLASMA("47092-2", "Natriuretic peptide B [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	NATRIURETIC_PEPTIDE_B_MOLESVOLUME_IN_SERUM_OR_PLASMA("47092-2",
+			"Natriuretic peptide B [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Natriuretic peptide.B prohormone N-Terminal
 	 * [Mass/?volume] in Serum or Plasma</div>
 	 */
-	NATRIURETIC_PEPTIDE_B_PROHORMONE_N_TERMINAL_MASSVOLUME_IN_SERUM_OR_PLASMA("33762-6", "Natriuretic peptide.B prohormone N-Terminal [Mass/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	NATRIURETIC_PEPTIDE_B_PROHORMONE_N_TERMINAL_MASSVOLUME_IN_SERUM_OR_PLASMA("33762-6",
+			"Natriuretic peptide.B prohormone N-Terminal [Mass/?volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Natriuretic peptide.B prohormone N-Terminal
 	 * [Moles/?volume] in Serum or Plasma</div>
 	 */
-	NATRIURETIC_PEPTIDE_B_PROHORMONE_N_TERMINAL_MOLESVOLUME_IN_SERUM_OR_PLASMA("33763-4", "Natriuretic peptide.B prohormone N-Terminal [Moles/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	NATRIURETIC_PEPTIDE_B_PROHORMONE_N_TERMINAL_MOLESVOLUME_IN_SERUM_OR_PLASMA("33763-4",
+			"Natriuretic peptide.B prohormone N-Terminal [Moles/?volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Neisseria gonorrhoeae DNA [Presence] in Unspecified
 	 * specimen by Probe and target amplification method</div>.
 	 */
-	NEISSERIA_GONORRHOEAE_DNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("24111-7", "Neisseria gonorrhoeae DNA [Presence] in Unspecified specimen by Probe and target amplification method", "18725-2", "20150101", ""),
+	NEISSERIA_GONORRHOEAE_DNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"24111-7",
+			"Neisseria gonorrhoeae DNA [Presence] in Unspecified specimen by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Neutrophil cytoplasmic Ab [interpretation] in Serum</div>
 	 * .
 	 */
-	NEUTROPHIL_CYTOPLASMIC_AB_INTERPRETATION_IN_SERUM("17352-6", "Neutrophil cytoplasmic Ab [interpretation] in Serum", "18727-8", "20150101", ""),
+	NEUTROPHIL_CYTOPLASMIC_AB_INTERPRETATION_IN_SERUM("17352-6",
+			"Neutrophil cytoplasmic Ab [interpretation] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Neutrophil cytoplasmic Ab pattern [interpretation] in
 	 * Serum by Immunofluorescence</div>.
 	 */
-	NEUTROPHIL_CYTOPLASMIC_AB_PATTERN_INTERPRETATION_IN_SERUM_BY_IMMUNOFLUORESCENCE("21419-7", "Neutrophil cytoplasmic Ab pattern [interpretation] in Serum by Immunofluorescence", "18727-8", "20150101", ""),
+	NEUTROPHIL_CYTOPLASMIC_AB_PATTERN_INTERPRETATION_IN_SERUM_BY_IMMUNOFLUORESCENCE("21419-7",
+			"Neutrophil cytoplasmic Ab pattern [interpretation] in Serum by Immunofluorescence",
+			"18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Neutrophil cytoplasmic Ab pattern [interpretation] in
 	 * Serum by Immunofluorescence Narrative</div>.
 	 */
-	NEUTROPHIL_CYTOPLASMIC_AB_PATTERN_INTERPRETATION_IN_SERUM_BY_IMMUNOFLUORESCENCE_NARRATIVE("49308-0", "Neutrophil cytoplasmic Ab pattern [interpretation] in Serum by Immunofluorescence Narrative", "18727-8", "20150101", ""),
+	NEUTROPHIL_CYTOPLASMIC_AB_PATTERN_INTERPRETATION_IN_SERUM_BY_IMMUNOFLUORESCENCE_NARRATIVE(
+			"49308-0",
+			"Neutrophil cytoplasmic Ab pattern [interpretation] in Serum by Immunofluorescence Narrative",
+			"18727-8", "20150101", ""),
 
 	/** <div class="en">Neutrophil cytoplasmic Ab [Presence] in Serum</div>. */
-	NEUTROPHIL_CYTOPLASMIC_AB_PRESENCE_IN_SERUM("17351-8", "Neutrophil cytoplasmic Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	NEUTROPHIL_CYTOPLASMIC_AB_PRESENCE_IN_SERUM("17351-8",
+			"Neutrophil cytoplasmic Ab [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Neutrophil cytoplasmic Ab [Presence] in Serum by
 	 * Immunofluorescence</div>.
 	 */
-	NEUTROPHIL_CYTOPLASMIC_AB_PRESENCE_IN_SERUM_BY_IMMUNOFLUORESCENCE("35279-9", "Neutrophil cytoplasmic Ab [Presence] in Serum by Immunofluorescence", "18727-8", "20150101", ""),
+	NEUTROPHIL_CYTOPLASMIC_AB_PRESENCE_IN_SERUM_BY_IMMUNOFLUORESCENCE("35279-9",
+			"Neutrophil cytoplasmic Ab [Presence] in Serum by Immunofluorescence", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Neutrophil cytoplasmic IgG Ab [Presence] in Serum</div>.
 	 */
-	NEUTROPHIL_CYTOPLASMIC_IGG_AB_PRESENCE_IN_SERUM("17355-9", "Neutrophil cytoplasmic IgG Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	NEUTROPHIL_CYTOPLASMIC_IGG_AB_PRESENCE_IN_SERUM("17355-9",
+			"Neutrophil cytoplasmic IgG Ab [Presence] in Serum", "18727-8", "20150101", ""),
 	/**
 	 * <div class="en">Neutrophils.band form/100 leukocytes in Blood by Manual
 	 * count</div>
 	 */
-	NEUTROPHILS_BAND_FORM100_LEUKOCYTES_IN_BLOOD_BY_MANUAL_COUNT("764-1", "Neutrophils.band form/100 leukocytes in Blood by Manual count", "18768-2", "20150101", ""),
+	NEUTROPHILS_BAND_FORM100_LEUKOCYTES_IN_BLOOD_BY_MANUAL_COUNT("764-1",
+			"Neutrophils.band form/100 leukocytes in Blood by Manual count", "18768-2", "20150101",
+			""),
 	/**
 	 * <div class="en">Neutrophils.segmented/?100 leukocytes in Blood by Manual
 	 * count</div>
 	 */
-	NEUTROPHILS_SEGMENTED100_LEUKOCYTES_IN_BLOOD_BY_MANUAL_COUNT("769-0", "Neutrophils.segmented/?100 leukocytes in Blood by Manual count", "18768-2", "20150101", ""),
+	NEUTROPHILS_SEGMENTED100_LEUKOCYTES_IN_BLOOD_BY_MANUAL_COUNT("769-0",
+			"Neutrophils.segmented/?100 leukocytes in Blood by Manual count", "18768-2", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Nitrite [Presence] in Urine by Automated test strip</div>
 	 * .
 	 */
-	NITRITE_PRESENCE_IN_URINE_BY_AUTOMATED_TEST_STRIP("50558-6", "Nitrite [Presence] in Urine by Automated test strip", "18729-4", "20150101", ""),
+	NITRITE_PRESENCE_IN_URINE_BY_AUTOMATED_TEST_STRIP("50558-6",
+			"Nitrite [Presence] in Urine by Automated test strip", "18729-4", "20150101", ""),
 
 	/** <div class="en">Nitrite [Presence] in Urine by Test strip</div>. */
-	NITRITE_PRESENCE_IN_URINE_BY_TEST_STRIP("5802-4", "Nitrite [Presence] in Urine by Test strip", "18729-4", "20150101", ""),
+	NITRITE_PRESENCE_IN_URINE_BY_TEST_STRIP("5802-4", "Nitrite [Presence] in Urine by Test strip",
+			"18729-4", "20150101", ""),
 
 	/** <div class="en">Norfluoxetine [Mass/volume] in Serum or Plasma</div>. */
-	NORFLUOXETINE_MASSVOLUME_IN_SERUM_OR_PLASMA("3868-7", "Norfluoxetine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	NORFLUOXETINE_MASSVOLUME_IN_SERUM_OR_PLASMA("3868-7",
+			"Norfluoxetine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Norfluoxetine [Moles/volume] in Serum or Plasma</div>.
 	 */
-	NORFLUOXETINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14855-1", "Norfluoxetine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	NORFLUOXETINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14855-1",
+			"Norfluoxetine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Normianserin [Mass/volume] in Serum or Plasma</div>. */
-	NORMIANSERIN_MASSVOLUME_IN_SERUM_OR_PLASMA("34414-3", "Normianserin [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	NORMIANSERIN_MASSVOLUME_IN_SERUM_OR_PLASMA("34414-3",
+			"Normianserin [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Normirtazapine [Mass/volume] in Serum or Plasma</div>.
 	 */
-	NORMIRTAZAPINE_MASSVOLUME_IN_SERUM_OR_PLASMA("34415-0", "Normirtazapine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	NORMIRTAZAPINE_MASSVOLUME_IN_SERUM_OR_PLASMA("34415-0",
+			"Normirtazapine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Norsertraline [Mass/volume] in Serum or Plasma</div>. */
-	NORSERTRALINE_MASSVOLUME_IN_SERUM_OR_PLASMA("6897-3", "Norsertraline [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	NORSERTRALINE_MASSVOLUME_IN_SERUM_OR_PLASMA("6897-3",
+			"Norsertraline [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Nortrimipramine [Mass/volume] in Serum or Plasma</div>.
 	 */
-	NORTRIMIPRAMINE_MASSVOLUME_IN_SERUM_OR_PLASMA("16746-0", "Nortrimipramine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	NORTRIMIPRAMINE_MASSVOLUME_IN_SERUM_OR_PLASMA("16746-0",
+			"Nortrimipramine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Nortrimipramine [Moles/volume] in Serum or Plasma</div>.
 	 */
-	NORTRIMIPRAMINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("25394-8", "Nortrimipramine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	NORTRIMIPRAMINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("25394-8",
+			"Nortrimipramine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Nortriptyline [Mass/volume] in Serum or Plasma</div>. */
-	NORTRIPTYLINE_MASSVOLUME_IN_SERUM_OR_PLASMA("3872-9", "Nortriptyline [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	NORTRIPTYLINE_MASSVOLUME_IN_SERUM_OR_PLASMA("3872-9",
+			"Nortriptyline [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Nortriptyline [Moles/volume] in Serum or Plasma</div>.
 	 */
-	NORTRIPTYLINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14856-9", "Nortriptyline [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	NORTRIPTYLINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14856-9",
+			"Nortriptyline [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Norvenlafaxine [Mass/volume] in Serum or Plasma</div>.
 	 */
-	NORVENLAFAXINE_MASSVOLUME_IN_SERUM_OR_PLASMA("9628-9", "Norvenlafaxine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	NORVENLAFAXINE_MASSVOLUME_IN_SERUM_OR_PLASMA("9628-9",
+			"Norvenlafaxine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Norvenlafaxine [Moles/volume] in Serum or Plasma</div>.
 	 */
-	NORVENLAFAXINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("48362-8", "Norvenlafaxine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	NORVENLAFAXINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("48362-8",
+			"Norvenlafaxine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Nuclear Ab [Presence] in Serum</div>. */
-	NUCLEAR_AB_PRESENCE_IN_SERUM("8061-4", "Nuclear Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	NUCLEAR_AB_PRESENCE_IN_SERUM("8061-4", "Nuclear Ab [Presence] in Serum", "18727-8", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Nuclear Ab [Presence] in Serum by Hep2 substrate</div>.
 	 */
-	NUCLEAR_AB_PRESENCE_IN_SERUM_BY_HEP2_SUBSTRATE("59069-5", "Nuclear Ab [Presence] in Serum by Hep2 substrate", "18727-8", "20150101", ""),
+	NUCLEAR_AB_PRESENCE_IN_SERUM_BY_HEP2_SUBSTRATE("59069-5",
+			"Nuclear Ab [Presence] in Serum by Hep2 substrate", "18727-8", "20150101", ""),
 
 	/** <div class="en">Nuclear Ab [Presence] in Serum by Immunoassay</div>. */
-	NUCLEAR_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("47383-5", "Nuclear Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	NUCLEAR_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("47383-5",
+			"Nuclear Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Nuclear Ab [Presence] in Serum by
 	 * Immunofluorescence</div>.
 	 */
-	NUCLEAR_AB_PRESENCE_IN_SERUM_BY_IMMUNOFLUORESCENCE("42254-3", "Nuclear Ab [Presence] in Serum by Immunofluorescence", "18727-8", "20150101", ""),
+	NUCLEAR_AB_PRESENCE_IN_SERUM_BY_IMMUNOFLUORESCENCE("42254-3",
+			"Nuclear Ab [Presence] in Serum by Immunofluorescence", "18727-8", "20150101", ""),
 
 	/** <div class="en">Opiates [Mass/?volume] in Urine</div>. */
-	OPIATES_MASSVOLUME_IN_URINE("8220-6", "Opiates [Mass/?volume] in Urine", "18729-4", "20150101", ""),
+	OPIATES_MASSVOLUME_IN_URINE("8220-6", "Opiates [Mass/?volume] in Urine", "18729-4", "20150101",
+			""),
 
 	/** <div class="en">Opiates [Moles/?volume] in Urine</div>. */
-	OPIATES_MOLESVOLUME_IN_URINE("52952-9", "Opiates [Moles/?volume] in Urine", "18729-4", "20150101", ""),
+	OPIATES_MOLESVOLUME_IN_URINE("52952-9", "Opiates [Moles/?volume] in Urine", "18729-4",
+			"20150101", ""),
 
 	/** <div class="en">Opiates [Presence] in Urine</div>. */
 	OPIATES_PRESENCE_IN_URINE("3879-4", "Opiates [Presence] in Urine", "18729-4", "20150101", ""),
 
 	/** <div class="en">Opiates [Presence] in Urine by Screen method</div>. */
-	OPIATES_PRESENCE_IN_URINE_BY_SCREEN_METHOD("19295-5", "Opiates [Presence] in Urine by Screen method", "18729-4", "20150101", ""),
+	OPIATES_PRESENCE_IN_URINE_BY_SCREEN_METHOD("19295-5",
+			"Opiates [Presence] in Urine by Screen method", "18729-4", "20150101", ""),
 
 	/** <div class="en">Osmolality of Serum or Plasma</div>. */
-	OSMOLALITY_OF_SERUM_OR_PLASMA("2692-2", "Osmolality of Serum or Plasma", "18719-5", "20150101", ""),
+	OSMOLALITY_OF_SERUM_OR_PLASMA("2692-2", "Osmolality of Serum or Plasma", "18719-5", "20150101",
+			""),
 
 	/** <div class="en">Osmolality of Urine</div>. */
 	OSMOLALITY_OF_URINE("2695-5", "Osmolality of Urine", "18729-4", "20150101", ""),
@@ -1885,45 +2424,58 @@ public enum LabObsList {
 	 * <div class="en">Ova and parasites identified in Unspecified specimen by
 	 * Light microscopy</div>.
 	 */
-	OVA_AND_PARASITES_IDENTIFIED_IN_UNSPECIFIED_SPECIMEN_BY_LIGHT_MICROSCOPY("673-4", "Ova and parasites identified in Unspecified specimen by Light microscopy", "18725-2", "20150101", ""),
+	OVA_AND_PARASITES_IDENTIFIED_IN_UNSPECIFIED_SPECIMEN_BY_LIGHT_MICROSCOPY("673-4",
+			"Ova and parasites identified in Unspecified specimen by Light microscopy", "18725-2",
+			"20150101", ""),
 
 	/** <div class="en">Oxygen [Partial pressure] in Blood</div>. */
-	OXYGEN_PARTIAL_PRESSURE_IN_BLOOD("11556-8", "Oxygen [Partial pressure] in Blood", "18767-4", "20150101", ""),
+	OXYGEN_PARTIAL_PRESSURE_IN_BLOOD("11556-8", "Oxygen [Partial pressure] in Blood", "18767-4",
+			"20150101", ""),
 
 	/** <div class="en">Oxygen [Partial pressure] in Venous blood</div>. */
-	OXYGEN_PARTIAL_PRESSURE_IN_VENOUS_BLOOD("2705-2", "Oxygen [Partial pressure] in Venous blood", "18767-4", "20150101", ""),
+	OXYGEN_PARTIAL_PRESSURE_IN_VENOUS_BLOOD("2705-2", "Oxygen [Partial pressure] in Venous blood",
+			"18767-4", "20150101", ""),
 
 	/** <div class="en">P Ab [Presence] in Serum or Plasma</div>. */
-	P_AB_PRESENCE_IN_SERUM_OR_PLASMA("1279-9", "P Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	P_AB_PRESENCE_IN_SERUM_OR_PLASMA("1279-9", "P Ab [Presence] in Serum or Plasma", "18717-9",
+			"20150101", ""),
 
 	/** <div class="en">P1 Ab [Presence] in Serum or Plasma</div>. */
-	P1_AB_PRESENCE_IN_SERUM_OR_PLASMA("1288-0", "P1 Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	P1_AB_PRESENCE_IN_SERUM_OR_PLASMA("1288-0", "P1 Ab [Presence] in Serum or Plasma", "18717-9",
+			"20150101", ""),
 	/**
 	 * <div class="en">Parathyrin.intact [Mass/volume] in Serum or Plasma</div>
 	 */
-	PARATHYRIN_INTACT_MASSVOLUME_IN_SERUM_OR_PLASMA("2731-8", "Parathyrin.intact [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	PARATHYRIN_INTACT_MASSVOLUME_IN_SERUM_OR_PLASMA("2731-8",
+			"Parathyrin.intact [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Parathyrin.intact [Moles/volume] in Serum or Plasma</div>
 	 */
-	PARATHYRIN_INTACT_MOLESVOLUME_IN_SERUM_OR_PLASMA("14866-8", "Parathyrin.intact [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	PARATHYRIN_INTACT_MOLESVOLUME_IN_SERUM_OR_PLASMA("14866-8",
+			"Parathyrin.intact [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Paroxetine [Mass/volume] in Serum or Plasma</div>. */
-	PAROXETINE_MASSVOLUME_IN_SERUM_OR_PLASMA("9699-0", "Paroxetine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	PAROXETINE_MASSVOLUME_IN_SERUM_OR_PLASMA("9699-0",
+			"Paroxetine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Paroxetine [Moles/volume] in Serum or Plasma</div>. */
-	PAROXETINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14867-6", "Paroxetine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	PAROXETINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14867-6",
+			"Paroxetine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Peanut IgE Ab RAST class [Presence] in Serum</div>. */
-	PEANUT_IGE_AB_RAST_CLASS_PRESENCE_IN_SERUM("15917-8", "Peanut IgE Ab RAST class [Presence] in Serum", "18719-5", "20150101", ""),
+	PEANUT_IGE_AB_RAST_CLASS_PRESENCE_IN_SERUM("15917-8",
+			"Peanut IgE Ab RAST class [Presence] in Serum", "18719-5", "20150101", ""),
 
 	/** <div class="en">Peanut IgE Ab [Units/volume] in Serum</div>. */
-	PEANUT_IGE_AB_UNITSVOLUME_IN_SERUM("6206-7", "Peanut IgE Ab [Units/volume] in Serum", "18719-5", "20150101", ""),
+	PEANUT_IGE_AB_UNITSVOLUME_IN_SERUM("6206-7", "Peanut IgE Ab [Units/volume] in Serum", "18719-5",
+			"20150101", ""),
 
 	/** <div class="en">pH of Blood</div>. */
 	PH_OF_BLOOD("11558-4", "pH of Blood", "18767-4", "20150101", ""),
 
 	/** <div class="en">pH of Urine by Automated test strip</div>. */
-	PH_OF_URINE_BY_AUTOMATED_TEST_STRIP("50560-2", "pH of Urine by Automated test strip", "18729-4", "20150101", ""),
+	PH_OF_URINE_BY_AUTOMATED_TEST_STRIP("50560-2", "pH of Urine by Automated test strip", "18729-4",
+			"20150101", ""),
 
 	/** <div class="en">pH of Urine by Test strip</div>. */
 	PH_OF_URINE_BY_TEST_STRIP("5803-2", "pH of Urine by Test strip", "18729-4", "20150101", ""),
@@ -1935,639 +2487,831 @@ public enum LabObsList {
 	 * <div class="en">Phosphate crystals amorphous [#/?volume] in Urine
 	 * sediment</div>.
 	 */
-	PHOSPHATE_CRYSTALS_AMORPHOUS_VOLUME_IN_URINE_SEDIMENT("13656-4", "Phosphate crystals amorphous [#/?volume] in Urine sediment", "18729-4", "20150101", ""),
+	PHOSPHATE_CRYSTALS_AMORPHOUS_VOLUME_IN_URINE_SEDIMENT("13656-4",
+			"Phosphate crystals amorphous [#/?volume] in Urine sediment", "18729-4", "20150101",
+			""),
 
 	/** <div class="en">Phosphate [Mass/volume] in Serum or Plasma</div>. */
-	PHOSPHATE_MASSVOLUME_IN_SERUM_OR_PLASMA("2777-1", "Phosphate [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	PHOSPHATE_MASSVOLUME_IN_SERUM_OR_PLASMA("2777-1", "Phosphate [Mass/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/** <div class="en">Phosphate [Moles/volume] in Serum or Plasma</div>. */
-	PHOSPHATE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14879-1", "Phosphate [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	PHOSPHATE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14879-1",
+			"Phosphate [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Plasmodium sp identified in Blood by Light
 	 * microscopy</div> .
 	 */
-	PLASMODIUM_SP_IDENTIFIED_IN_BLOOD_BY_LIGHT_MICROSCOPY("32206-5", "Plasmodium sp identified in Blood by Light microscopy", "18725-2", "20150101", ""),
+	PLASMODIUM_SP_IDENTIFIED_IN_BLOOD_BY_LIGHT_MICROSCOPY("32206-5",
+			"Plasmodium sp identified in Blood by Light microscopy", "18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Plasmodium sp [Presence] in Blood by Light
 	 * microscopy</div> .
 	 */
-	PLASMODIUM_SP_PRESENCE_IN_BLOOD_BY_LIGHT_MICROSCOPY("51587-4", "Plasmodium sp [Presence] in Blood by Light microscopy", "18725-2", "20150101", ""),
+	PLASMODIUM_SP_PRESENCE_IN_BLOOD_BY_LIGHT_MICROSCOPY("51587-4",
+			"Plasmodium sp [Presence] in Blood by Light microscopy", "18725-2", "20150101", ""),
 
 	/** <div class="en">Platelets [#/?volume] in Blood</div>. */
-	PLATELETS_VOLUME_IN_BLOOD("26515-7", "Platelets [#/?volume] in Blood", "18723-7", "20150101", ""),
+	PLATELETS_VOLUME_IN_BLOOD("26515-7", "Platelets [#/?volume] in Blood", "18723-7", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Platelets [#/?volume] in Blood by Automated count</div>.
 	 */
-	PLATELETS_VOLUME_IN_BLOOD_BY_AUTOMATED_COUNT("777-3", "Platelets [#/?volume] in Blood by Automated count", "18723-7", "20150101", ""),
+	PLATELETS_VOLUME_IN_BLOOD_BY_AUTOMATED_COUNT("777-3",
+			"Platelets [#/?volume] in Blood by Automated count", "18723-7", "20150101", ""),
 
 	/** <div class="en">Platelets [#/volume] in Blood by Manual count</div>. */
-	PLATELETS_VOLUME_IN_BLOOD_BY_MANUAL_COUNT("778-1", "Platelets [#/volume] in Blood by Manual count", "18723-7", "20150101", ""),
+	PLATELETS_VOLUME_IN_BLOOD_BY_MANUAL_COUNT("778-1",
+			"Platelets [#/volume] in Blood by Manual count", "18723-7", "20150101", ""),
 
 	/** <div class="en">Posaconazole [Susceptibility]</div>. */
-	POSACONAZOLE_SUSCEPTIBILITY("54188-8", "Posaconazole [Susceptibility]", "18769-0", "20150101", ""),
+	POSACONAZOLE_SUSCEPTIBILITY("54188-8", "Posaconazole [Susceptibility]", "18769-0", "20150101",
+			""),
 
 	/** <div class="en">Potassium [Moles/volume] in Serum or Plasma</div>. */
-	POTASSIUM_MOLESVOLUME_IN_SERUM_OR_PLASMA("2823-3", "Potassium [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	POTASSIUM_MOLESVOLUME_IN_SERUM_OR_PLASMA("2823-3",
+			"Potassium [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Procalcitonin [Mass/volume] in Serum or Plasma</div>. */
-	PROCALCITONIN_MASSVOLUME_IN_SERUM_OR_PLASMA("33959-8", "Procalcitonin [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	PROCALCITONIN_MASSVOLUME_IN_SERUM_OR_PLASMA("33959-8",
+			"Procalcitonin [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Procalcitonin [Mass/volume] in Serum or Plasma by
 	 * Immunoassay</div>.
 	 */
-	PROCALCITONIN_MASSVOLUME_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY("75241-0", "Procalcitonin [Mass/volume] in Serum or Plasma by Immunoassay", "18719-5", "20150101", ""),
+	PROCALCITONIN_MASSVOLUME_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY("75241-0",
+			"Procalcitonin [Mass/volume] in Serum or Plasma by Immunoassay", "18719-5", "20150101",
+			""),
 
 	/** <div class="en">Prolactin [Mass/volume] in Serum or Plasma</div>. */
-	PROLACTIN_MASSVOLUME_IN_SERUM_OR_PLASMA("2842-3", "Prolactin [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	PROLACTIN_MASSVOLUME_IN_SERUM_OR_PLASMA("2842-3", "Prolactin [Mass/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Prolactin [Mass/volume] in Serum or Plasma by
 	 * Immunoassay</div>.
 	 */
-	PROLACTIN_MASSVOLUME_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY("20568-2", "Prolactin [Mass/volume] in Serum or Plasma by Immunoassay", "18719-5", "20150101", ""),
+	PROLACTIN_MASSVOLUME_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY("20568-2",
+			"Prolactin [Mass/volume] in Serum or Plasma by Immunoassay", "18719-5", "20150101", ""),
 
 	/** <div class="en">Prolactin [Units/volume] in Serum or Plasma</div>. */
-	PROLACTIN_UNITSVOLUME_IN_SERUM_OR_PLASMA("15081-3", "Prolactin [Units/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	PROLACTIN_UNITSVOLUME_IN_SERUM_OR_PLASMA("15081-3",
+			"Prolactin [Units/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Promyelocytes/?100 leukocytes in Blood by Manual
 	 * count</div>.
 	 */
-	PROMYELOCYTES100_LEUKOCYTES_IN_BLOOD_BY_MANUAL_COUNT("783-1", "Promyelocytes/?100 leukocytes in Blood by Manual count", "18768-2", "20150101", ""),
+	PROMYELOCYTES100_LEUKOCYTES_IN_BLOOD_BY_MANUAL_COUNT("783-1",
+			"Promyelocytes/?100 leukocytes in Blood by Manual count", "18768-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Prostate Specific Ag Free [Mass/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	PROSTATE_SPECIFIC_AG_FREE_MASSVOLUME_IN_SERUM_OR_PLASMA("10886-0", "Prostate Specific Ag Free [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	PROSTATE_SPECIFIC_AG_FREE_MASSVOLUME_IN_SERUM_OR_PLASMA("10886-0",
+			"Prostate Specific Ag Free [Mass/volume] in Serum or Plasma", "18719-5", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Prostate specific Ag [Mass/volume] in Serum or
 	 * Plasma</div> .
 	 */
-	PROSTATE_SPECIFIC_AG_MASSVOLUME_IN_SERUM_OR_PLASMA("2857-1", "Prostate specific Ag [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	PROSTATE_SPECIFIC_AG_MASSVOLUME_IN_SERUM_OR_PLASMA("2857-1",
+			"Prostate specific Ag [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Protein [Mass/volume] in Serum or Plasma</div>. */
-	PROTEIN_MASSVOLUME_IN_SERUM_OR_PLASMA("2885-2", "Protein [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	PROTEIN_MASSVOLUME_IN_SERUM_OR_PLASMA("2885-2", "Protein [Mass/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Protein [Presence] in Urine by Automated test strip</div>
 	 * .
 	 */
-	PROTEIN_PRESENCE_IN_URINE_BY_AUTOMATED_TEST_STRIP("57735-3", "Protein [Presence] in Urine by Automated test strip", "18729-4", "20150101", ""),
+	PROTEIN_PRESENCE_IN_URINE_BY_AUTOMATED_TEST_STRIP("57735-3",
+			"Protein [Presence] in Urine by Automated test strip", "18729-4", "20150101", ""),
 
 	/** <div class="en">Protein [Presence] in Urine by Test strip</div>. */
-	PROTEIN_PRESENCE_IN_URINE_BY_TEST_STRIP("20454-5", "Protein [Presence] in Urine by Test strip", "18729-4", "20150101", ""),
+	PROTEIN_PRESENCE_IN_URINE_BY_TEST_STRIP("20454-5", "Protein [Presence] in Urine by Test strip",
+			"18729-4", "20150101", ""),
 
 	/** <div class="en">Prothrombin time (PT) actual/?Normal</div>. */
-	PROTHROMBIN_TIME_PT_ACTUALNORMAL("5894-1", "Prothrombin time (PT) actual/?Normal", "18720-3", "20150101", ""),
+	PROTHROMBIN_TIME_PT_ACTUALNORMAL("5894-1", "Prothrombin time (PT) actual/?Normal", "18720-3",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Pyrazinamide 100 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	PYRAZINAMIDE_100_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25229-6", "Pyrazinamide 100 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	PYRAZINAMIDE_100_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25229-6",
+			"Pyrazinamide 100 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria",
+			"18769-0", "20150101", ""),
 
 	/**
 	 * <div class="en">Pyrazinamide 200 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	PYRAZINAMIDE_200_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("55711-6", "Pyrazinamide 200 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	PYRAZINAMIDE_200_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("55711-6",
+			"Pyrazinamide 200 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria",
+			"18769-0", "20150101", ""),
 
 	/**
 	 * <div class="en">Pyrazinamide 25 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	PYRAZINAMIDE_25_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25186-8", "Pyrazinamide 25 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	PYRAZINAMIDE_25_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25186-8",
+			"Pyrazinamide 25 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria",
+			"18769-0", "20150101", ""),
 
 	/**
 	 * <div class="en">Pyrazinamide 300 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	PYRAZINAMIDE_300_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("56026-8", "Pyrazinamide 300 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	PYRAZINAMIDE_300_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("56026-8",
+			"Pyrazinamide 300 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria",
+			"18769-0", "20150101", ""),
 
 	/**
 	 * <div class="en">Pyrazinamide [Susceptibility] by Method for Slow-growing
 	 * mycobacteria</div>.
 	 */
-	PYRAZINAMIDE_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("20461-0", "Pyrazinamide [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	PYRAZINAMIDE_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("20461-0",
+			"Pyrazinamide [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">RBC casts [Presence] in Urine sediment by Light
 	 * microscopy</div>.
 	 */
-	RBC_CASTS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("33804-6", "RBC casts [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101", ""),
+	RBC_CASTS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("33804-6",
+			"RBC casts [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101",
+			""),
 
 	/** <div class="en">Reagin Ab [Titer] in Serum</div>. */
 	REAGIN_AB_TITER_IN_SERUM("11084-1", "Reagin Ab [Titer] in Serum", "18727-8", "20150101", ""),
 
 	/** <div class="en">Reagin Ab [Titer] in Serum by RPR</div>. */
-	REAGIN_AB_TITER_IN_SERUM_BY_RPR("31147-2", "Reagin Ab [Titer] in Serum by RPR", "18727-8", "20150101", ""),
+	REAGIN_AB_TITER_IN_SERUM_BY_RPR("31147-2", "Reagin Ab [Titer] in Serum by RPR", "18727-8",
+			"20150101", ""),
 
 	/** <div class="en">Reagin Ab [Titer] in Serum by VDRL</div>. */
-	REAGIN_AB_TITER_IN_SERUM_BY_VDRL("50690-7", "Reagin Ab [Titer] in Serum by VDRL", "18727-8", "20150101", ""),
+	REAGIN_AB_TITER_IN_SERUM_BY_VDRL("50690-7", "Reagin Ab [Titer] in Serum by VDRL", "18727-8",
+			"20150101", ""),
 
 	/** <div class="en">Reagin Ab [Units/?volume] in Serum</div>. */
-	REAGIN_AB_UNITSVOLUME_IN_SERUM("22462-6", "Reagin Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	REAGIN_AB_UNITSVOLUME_IN_SERUM("22462-6", "Reagin Ab [Units/?volume] in Serum", "18727-8",
+			"20150101", ""),
 
 	/** <div class="en">Reagin Ab [Units/?volume] in Serum by RPR</div>. */
-	REAGIN_AB_UNITSVOLUME_IN_SERUM_BY_RPR("20508-8", "Reagin Ab [Units/?volume] in Serum by RPR", "18727-8", "20150101", ""),
+	REAGIN_AB_UNITSVOLUME_IN_SERUM_BY_RPR("20508-8", "Reagin Ab [Units/?volume] in Serum by RPR",
+			"18727-8", "20150101", ""),
 
 	/** <div class="en">Reagin Ab [Units/volume] in Serum by VDRL</div>. */
-	REAGIN_AB_UNITSVOLUME_IN_SERUM_BY_VDRL("5291-0", "Reagin Ab [Units/volume] in Serum by VDRL", "18727-8", "20150101", ""),
+	REAGIN_AB_UNITSVOLUME_IN_SERUM_BY_VDRL("5291-0", "Reagin Ab [Units/volume] in Serum by VDRL",
+			"18727-8", "20150101", ""),
 
 	/** <div class="en">Reboxetine [Moles/volume] in Serum or Plasma</div>. */
-	REBOXETINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("48352-9", "Reboxetine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	REBOXETINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("48352-9",
+			"Reboxetine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Rifampin 1 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	RIFAMPIN_1_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25202-3", "Rifampin 1 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	RIFAMPIN_1_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25202-3",
+			"Rifampin 1 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Rifampin 14 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	RIFAMPIN_14_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25184-3", "Rifampin 14 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	RIFAMPIN_14_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25184-3",
+			"Rifampin 14 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Rifampin 2 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	RIFAMPIN_2_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25203-1", "Rifampin 2 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	RIFAMPIN_2_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25203-1",
+			"Rifampin 2 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Rifampin 40 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	RIFAMPIN_40_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("55712-4", "Rifampin 40 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	RIFAMPIN_40_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("55712-4",
+			"Rifampin 40 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Rifampin 5 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	RIFAMPIN_5_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25204-9", "Rifampin 5 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	RIFAMPIN_5_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25204-9",
+			"Rifampin 5 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Rifampin [Susceptibility] by Method for Slow-growing
 	 * mycobacteria</div>.
 	 */
-	RIFAMPIN_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("20385-1", "Rifampin [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	RIFAMPIN_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("20385-1",
+			"Rifampin [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0",
+			"20150101", ""),
 
 	/** <div class="en">Rubella virus IgG Ab [Units/volume] in Serum</div>. */
-	RUBELLA_VIRUS_IGG_AB_UNITSVOLUME_IN_SERUM("8014-3", "Rubella virus IgG Ab [Units/volume] in Serum", "18727-8", "20150101", ""),
+	RUBELLA_VIRUS_IGG_AB_UNITSVOLUME_IN_SERUM("8014-3",
+			"Rubella virus IgG Ab [Units/volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Rubella virus IgG Ab [Units/volume] in Serum by
 	 * Immunoassay</div>.
 	 */
-	RUBELLA_VIRUS_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5334-8", "Rubella virus IgG Ab [Units/volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	RUBELLA_VIRUS_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5334-8",
+			"Rubella virus IgG Ab [Units/volume] in Serum by Immunoassay", "18727-8", "20150101",
+			""),
 
 	/** <div class="en">Rubella virus IgM Ab [Presence] in Serum</div>. */
-	RUBELLA_VIRUS_IGM_AB_PRESENCE_IN_SERUM("31616-6", "Rubella virus IgM Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	RUBELLA_VIRUS_IGM_AB_PRESENCE_IN_SERUM("31616-6", "Rubella virus IgM Ab [Presence] in Serum",
+			"18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Rubella virus IgM Ab [Presence] in Serum by
 	 * Immunoassay</div>.
 	 */
-	RUBELLA_VIRUS_IGM_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("24116-6", "Rubella virus IgM Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	RUBELLA_VIRUS_IGM_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("24116-6",
+			"Rubella virus IgM Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
 
 	/** <div class="en">Rubella virus IgM Ab [Units/?volume] in Serum</div>. */
-	RUBELLA_VIRUS_IGM_AB_UNITSVOLUME_IN_SERUM("8015-0", "Rubella virus IgM Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	RUBELLA_VIRUS_IGM_AB_UNITSVOLUME_IN_SERUM("8015-0",
+			"Rubella virus IgM Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Rubella virus IgM Ab [Units/?volume] in Serum by
 	 * Immunoassay</div>.
 	 */
-	RUBELLA_VIRUS_IGM_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5335-5", "Rubella virus IgM Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	RUBELLA_VIRUS_IGM_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5335-5",
+			"Rubella virus IgM Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101",
+			""),
 
 	/** <div class="en">S Ab [Presence] in Serum or Plasma</div>. */
-	S_AB_PRESENCE_IN_SERUM_OR_PLASMA("1317-7", "S Ab [Presence] in Serum or Plasma", "18717-9", "20150101", ""),
+	S_AB_PRESENCE_IN_SERUM_OR_PLASMA("1317-7", "S Ab [Presence] in Serum or Plasma", "18717-9",
+			"20150101", ""),
 
 	/** <div class="en">Sertraline [Mass/volume] in Serum or Plasma</div>. */
-	SERTRALINE_MASSVOLUME_IN_SERUM_OR_PLASMA("6906-2", "Sertraline [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	SERTRALINE_MASSVOLUME_IN_SERUM_OR_PLASMA("6906-2",
+			"Sertraline [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Sertraline [Moles/volume] in Serum or Plasma</div>. */
-	SERTRALINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14911-2", "Sertraline [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	SERTRALINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14911-2",
+			"Sertraline [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Silver Birch IgE Ab RAST class [Presence] in Serum</div>.
 	 */
-	SILVER_BIRCH_IGE_AB_RAST_CLASS_PRESENCE_IN_SERUM("15579-6", "Silver Birch IgE Ab RAST class [Presence] in Serum", "18719-5", "20150101", ""),
+	SILVER_BIRCH_IGE_AB_RAST_CLASS_PRESENCE_IN_SERUM("15579-6",
+			"Silver Birch IgE Ab RAST class [Presence] in Serum", "18719-5", "20150101", ""),
 
 	/** <div class="en">Silver Birch IgE Ab [Units/volume] in Serum</div>. */
-	SILVER_BIRCH_IGE_AB_UNITSVOLUME_IN_SERUM("15283-5", "Silver Birch IgE Ab [Units/volume] in Serum", "18719-5", "20150101", ""),
+	SILVER_BIRCH_IGE_AB_UNITSVOLUME_IN_SERUM("15283-5",
+			"Silver Birch IgE Ab [Units/volume] in Serum", "18719-5", "20150101", ""),
 
 	/** <div class="en">Sodium [Moles/volume] in Serum or Plasma</div>. */
-	SODIUM_MOLESVOLUME_IN_SERUM_OR_PLASMA("2951-2", "Sodium [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	SODIUM_MOLESVOLUME_IN_SERUM_OR_PLASMA("2951-2", "Sodium [Moles/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Specific gravity of Urine by Automated test strip</div>.
 	 */
-	SPECIFIC_GRAVITY_OF_URINE_BY_AUTOMATED_TEST_STRIP("53326-5", "Specific gravity of Urine by Automated test strip", "18729-4", "20150101", ""),
+	SPECIFIC_GRAVITY_OF_URINE_BY_AUTOMATED_TEST_STRIP("53326-5",
+			"Specific gravity of Urine by Automated test strip", "18729-4", "20150101", ""),
 
 	/** <div class="en">Specific gravity of Urine by Test strip</div>. */
-	SPECIFIC_GRAVITY_OF_URINE_BY_TEST_STRIP("5811-5", "Specific gravity of Urine by Test strip", "18729-4", "20150101", ""),
+	SPECIFIC_GRAVITY_OF_URINE_BY_TEST_STRIP("5811-5", "Specific gravity of Urine by Test strip",
+			"18729-4", "20150101", ""),
 
 	/** <div class="en">Streptococcus pyogenes Ag [Presence] in Throat</div>. */
-	STREPTOCOCCUS_PYOGENES_AG_PRESENCE_IN_THROAT("18481-2", "Streptococcus pyogenes Ag [Presence] in Throat", "18725-2", "20150101", ""),
+	STREPTOCOCCUS_PYOGENES_AG_PRESENCE_IN_THROAT("18481-2",
+			"Streptococcus pyogenes Ag [Presence] in Throat", "18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Streptomycin 1 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	STREPTOMYCIN_1_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("48177-0", "Streptomycin 1 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	STREPTOMYCIN_1_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("48177-0",
+			"Streptomycin 1 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria",
+			"18769-0", "20150101", ""),
 
 	/**
 	 * <div class="en">Streptomycin 10 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	STREPTOMYCIN_10_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25206-4", "Streptomycin 10 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	STREPTOMYCIN_10_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25206-4",
+			"Streptomycin 10 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria",
+			"18769-0", "20150101", ""),
 
 	/**
 	 * <div class="en">Streptomycin 2 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	STREPTOMYCIN_2_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25205-6", "Streptomycin 2 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	STREPTOMYCIN_2_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25205-6",
+			"Streptomycin 2 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria",
+			"18769-0", "20150101", ""),
 
 	/**
 	 * <div class="en">Streptomycin 4 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	STREPTOMYCIN_4_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("46719-1", "Streptomycin 4 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	STREPTOMYCIN_4_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("46719-1",
+			"Streptomycin 4 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria",
+			"18769-0", "20150101", ""),
 
 	/**
 	 * <div class="en">Streptomycin 6 ug/mL [Susceptibility] by Method for
 	 * Slow-growing mycobacteria</div>.
 	 */
-	STREPTOMYCIN_6_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25185-0", "Streptomycin 6 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	STREPTOMYCIN_6_UGML_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("25185-0",
+			"Streptomycin 6 ug/mL [Susceptibility] by Method for Slow-growing mycobacteria",
+			"18769-0", "20150101", ""),
 
 	/**
 	 * <div class="en">Streptomycin [Susceptibility] by Method for Slow-growing
 	 * mycobacteria</div>.
 	 */
-	STREPTOMYCIN_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("20462-8", "Streptomycin [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0", "20150101", ""),
+	STREPTOMYCIN_SUSCEPTIBILITY_BY_METHOD_FOR_SLOW_GROWING_MYCOBACTERIA("20462-8",
+			"Streptomycin [Susceptibility] by Method for Slow-growing mycobacteria", "18769-0",
+			"20150101", ""),
 
 	/** <div class="en">Testosterone [Mass/volume] in Serum or Plasma</div>. */
-	TESTOSTERONE_MASSVOLUME_IN_SERUM_OR_PLASMA("2986-8", "Testosterone [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	TESTOSTERONE_MASSVOLUME_IN_SERUM_OR_PLASMA("2986-8",
+			"Testosterone [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Testosterone [Moles/volume] in Serum or Plasma</div>. */
-	TESTOSTERONE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14913-8", "Testosterone [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	TESTOSTERONE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14913-8",
+			"Testosterone [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Thyroperoxidase Ab [Titer] in Serum or Plasma</div>. */
-	THYROPEROXIDASE_AB_TITER_IN_SERUM_OR_PLASMA("32786-6", "Thyroperoxidase Ab [Titer] in Serum or Plasma", "18727-8", "20150101", ""),
+	THYROPEROXIDASE_AB_TITER_IN_SERUM_OR_PLASMA("32786-6",
+			"Thyroperoxidase Ab [Titer] in Serum or Plasma", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Thyroperoxidase Ab [Units/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	THYROPEROXIDASE_AB_UNITSVOLUME_IN_SERUM_OR_PLASMA("8099-4", "Thyroperoxidase Ab [Units/volume] in Serum or Plasma", "18727-8", "20150101", ""),
+	THYROPEROXIDASE_AB_UNITSVOLUME_IN_SERUM_OR_PLASMA("8099-4",
+			"Thyroperoxidase Ab [Units/volume] in Serum or Plasma", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Thyroperoxidase Ab [Units/volume] in Serum or Plasma by
 	 * Immunoassay</div>.
 	 */
-	THYROPEROXIDASE_AB_UNITSVOLUME_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY("56477-3", "Thyroperoxidase Ab [Units/volume] in Serum or Plasma by Immunoassay", "18727-8", "20150101", ""),
+	THYROPEROXIDASE_AB_UNITSVOLUME_IN_SERUM_OR_PLASMA_BY_IMMUNOASSAY("56477-3",
+			"Thyroperoxidase Ab [Units/volume] in Serum or Plasma by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Thyroperoxidase IgG Ab [Units/?volume] in Serum or
 	 * Plasma</div>.
 	 */
-	THYROPEROXIDASE_IGG_AB_UNITSVOLUME_IN_SERUM_OR_PLASMA("18332-7", "Thyroperoxidase IgG Ab [Units/?volume] in Serum or Plasma", "18727-8", "20150101", ""),
+	THYROPEROXIDASE_IGG_AB_UNITSVOLUME_IN_SERUM_OR_PLASMA("18332-7",
+			"Thyroperoxidase IgG Ab [Units/?volume] in Serum or Plasma", "18727-8", "20150101", ""),
 
 	/** <div class="en">Thyrotropin [Units/volume] in Serum or Plasma</div>. */
-	THYROTROPIN_UNITSVOLUME_IN_SERUM_OR_PLASMA("3016-3", "Thyrotropin [Units/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	THYROTROPIN_UNITSVOLUME_IN_SERUM_OR_PLASMA("3016-3",
+			"Thyrotropin [Units/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Thyroxine (T4) free [Mass/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	THYROXINE_T4_FREE_MASSVOLUME_IN_SERUM_OR_PLASMA("3024-7", "Thyroxine (T4) free [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	THYROXINE_T4_FREE_MASSVOLUME_IN_SERUM_OR_PLASMA("3024-7",
+			"Thyroxine (T4) free [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Thyroxine (T4) free [Moles/volume] in Serum or
 	 * Plasma</div> .
 	 */
-	THYROXINE_T4_FREE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14920-3", "Thyroxine (T4) free [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	THYROXINE_T4_FREE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14920-3",
+			"Thyroxine (T4) free [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Tissue transglutaminase IgA Ab [Units/?volume] in
 	 * Serum</div>.
 	 */
-	TISSUE_TRANSGLUTAMINASE_IGA_AB_UNITSVOLUME_IN_SERUM("31017-7", "Tissue transglutaminase IgA Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	TISSUE_TRANSGLUTAMINASE_IGA_AB_UNITSVOLUME_IN_SERUM("31017-7",
+			"Tissue transglutaminase IgA Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Tissue transglutaminase IgA Ab [Units/?volume] in Serum
 	 * by Immunoassay</div>.
 	 */
-	TISSUE_TRANSGLUTAMINASE_IGA_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("46128-5", "Tissue transglutaminase IgA Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	TISSUE_TRANSGLUTAMINASE_IGA_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("46128-5",
+			"Tissue transglutaminase IgA Ab [Units/?volume] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/** <div class="en">Toxoplasma gondii Ab [Units/volume] in Serum</div>. */
-	TOXOPLASMA_GONDII_AB_UNITSVOLUME_IN_SERUM("11598-0", "Toxoplasma gondii Ab [Units/volume] in Serum", "18727-8", "20150101", ""),
+	TOXOPLASMA_GONDII_AB_UNITSVOLUME_IN_SERUM("11598-0",
+			"Toxoplasma gondii Ab [Units/volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Toxoplasma gondii DNA [Presence] in Unspecified specimen
 	 * by Probe and target amplification method</div>.
 	 */
-	TOXOPLASMA_GONDII_DNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("29904-0", "Toxoplasma gondii DNA [Presence] in Unspecified specimen by Probe and target amplification method", "18725-2", "20150101", ""),
+	TOXOPLASMA_GONDII_DNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"29904-0",
+			"Toxoplasma gondii DNA [Presence] in Unspecified specimen by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Toxoplasma gondii IgG Ab [Units/volume] in Serum</div>.
 	 */
-	TOXOPLASMA_GONDII_IGG_AB_UNITSVOLUME_IN_SERUM("8039-0", "Toxoplasma gondii IgG Ab [Units/volume] in Serum", "18727-8", "20150101", ""),
+	TOXOPLASMA_GONDII_IGG_AB_UNITSVOLUME_IN_SERUM("8039-0",
+			"Toxoplasma gondii IgG Ab [Units/volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Toxoplasma gondii IgG Ab [Units/volume] in Serum by
 	 * Immunoassay</div>.
 	 */
-	TOXOPLASMA_GONDII_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5388-4", "Toxoplasma gondii IgG Ab [Units/volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	TOXOPLASMA_GONDII_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5388-4",
+			"Toxoplasma gondii IgG Ab [Units/volume] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/** <div class="en">Toxoplasma gondii IgM Ab [Presence] in Serum</div>. */
-	TOXOPLASMA_GONDII_IGM_AB_PRESENCE_IN_SERUM("25542-2", "Toxoplasma gondii IgM Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	TOXOPLASMA_GONDII_IGM_AB_PRESENCE_IN_SERUM("25542-2",
+			"Toxoplasma gondii IgM Ab [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Toxoplasma gondii IgM Ab [Presence] in Serum by
 	 * Immunoassay</div>.
 	 */
-	TOXOPLASMA_GONDII_IGM_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("40678-5", "Toxoplasma gondii IgM Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	TOXOPLASMA_GONDII_IGM_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("40678-5",
+			"Toxoplasma gondii IgM Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Toxoplasma gondii IgM Ab [Units/?volume] in Serum</div>.
 	 */
-	TOXOPLASMA_GONDII_IGM_AB_UNITSVOLUME_IN_SERUM("8040-8", "Toxoplasma gondii IgM Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	TOXOPLASMA_GONDII_IGM_AB_UNITSVOLUME_IN_SERUM("8040-8",
+			"Toxoplasma gondii IgM Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Toxoplasma gondii IgM Ab [Units/?volume] in Serum by
 	 * Immunoassay</div>.
 	 */
-	TOXOPLASMA_GONDII_IGM_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5390-0", "Toxoplasma gondii IgM Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	TOXOPLASMA_GONDII_IGM_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5390-0",
+			"Toxoplasma gondii IgM Ab [Units/?volume] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/** <div class="en">Trazodone [Mass/volume] in Serum or Plasma</div>. */
-	TRAZODONE_MASSVOLUME_IN_SERUM_OR_PLASMA("4064-2", "Trazodone [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	TRAZODONE_MASSVOLUME_IN_SERUM_OR_PLASMA("4064-2", "Trazodone [Mass/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/** <div class="en">Trazodone [Moles/volume] in Serum or Plasma</div>. */
-	TRAZODONE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14925-2", "Trazodone [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	TRAZODONE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14925-2",
+			"Trazodone [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Treponema pallidum Ab [Titer] in Serum by
 	 * Hemagglutination</div>.
 	 */
-	TREPONEMA_PALLIDUM_AB_TITER_IN_SERUM_BY_HEMAGGLUTINATION("26009-1", "Treponema pallidum Ab [Titer] in Serum by Hemagglutination", "18727-8", "20150101", ""),
+	TREPONEMA_PALLIDUM_AB_TITER_IN_SERUM_BY_HEMAGGLUTINATION("26009-1",
+			"Treponema pallidum Ab [Titer] in Serum by Hemagglutination", "18727-8", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Treponema pallidum Ab [Titer] in Serum by
 	 * Immunofluorescence</div>.
 	 */
-	TREPONEMA_PALLIDUM_AB_TITER_IN_SERUM_BY_IMMUNOFLUORESCENCE("34382-2", "Treponema pallidum Ab [Titer] in Serum by Immunofluorescence", "18727-8", "20150101", ""),
+	TREPONEMA_PALLIDUM_AB_TITER_IN_SERUM_BY_IMMUNOFLUORESCENCE("34382-2",
+			"Treponema pallidum Ab [Titer] in Serum by Immunofluorescence", "18727-8", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Treponema pallidum Ab [Titer] in Serum by Latex
 	 * agglutination</div>.
 	 */
-	TREPONEMA_PALLIDUM_AB_TITER_IN_SERUM_BY_LATEX_AGGLUTINATION("5394-2", "Treponema pallidum Ab [Titer] in Serum by Latex agglutination", "18727-8", "20150101", ""),
+	TREPONEMA_PALLIDUM_AB_TITER_IN_SERUM_BY_LATEX_AGGLUTINATION("5394-2",
+			"Treponema pallidum Ab [Titer] in Serum by Latex agglutination", "18727-8", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Treponema pallidum Ab [Titer] in Serum or Plasma by
 	 * Agglutination</div>.
 	 */
-	TREPONEMA_PALLIDUM_AB_TITER_IN_SERUM_OR_PLASMA_BY_AGGLUTINATION("71793-4", "Treponema pallidum Ab [Titer] in Serum or Plasma by Agglutination", "18727-8", "20150101", ""),
+	TREPONEMA_PALLIDUM_AB_TITER_IN_SERUM_OR_PLASMA_BY_AGGLUTINATION("71793-4",
+			"Treponema pallidum Ab [Titer] in Serum or Plasma by Agglutination", "18727-8",
+			"20150101", ""),
 
 	/** <div class="en">Treponema pallidum Ab [Units/volume] in Serum</div>. */
-	TREPONEMA_PALLIDUM_AB_UNITSVOLUME_IN_SERUM("11597-2", "Treponema pallidum Ab [Units/volume] in Serum", "18727-8", "20150101", ""),
+	TREPONEMA_PALLIDUM_AB_UNITSVOLUME_IN_SERUM("11597-2",
+			"Treponema pallidum Ab [Units/volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Treponema pallidum Ab [Units/volume] in Serum by
 	 * Immunoassay</div>.
 	 */
-	TREPONEMA_PALLIDUM_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("63464-2", "Treponema pallidum Ab [Units/volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	TREPONEMA_PALLIDUM_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("63464-2",
+			"Treponema pallidum Ab [Units/volume] in Serum by Immunoassay", "18727-8", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Treponema pallidum Ab [Units/?volume] in Serum by Latex
 	 * agglutination</div>.
 	 */
-	TREPONEMA_PALLIDUM_AB_UNITSVOLUME_IN_SERUM_BY_LATEX_AGGLUTINATION("17725-3", "Treponema pallidum Ab [Units/?volume] in Serum by Latex agglutination", "18727-8", "20150101", ""),
+	TREPONEMA_PALLIDUM_AB_UNITSVOLUME_IN_SERUM_BY_LATEX_AGGLUTINATION("17725-3",
+			"Treponema pallidum Ab [Units/?volume] in Serum by Latex agglutination", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Treponema pallidum IgG Ab [Units/volume] in Serum</div>.
 	 */
-	TREPONEMA_PALLIDUM_IGG_AB_UNITSVOLUME_IN_SERUM("22592-0", "Treponema pallidum IgG Ab [Units/volume] in Serum", "18727-8", "20150101", ""),
+	TREPONEMA_PALLIDUM_IGG_AB_UNITSVOLUME_IN_SERUM("22592-0",
+			"Treponema pallidum IgG Ab [Units/volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Treponema pallidum IgG Ab [Units/volume] in Serum by
 	 * Immunoassay</div>.
 	 */
-	TREPONEMA_PALLIDUM_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("51838-1", "Treponema pallidum IgG Ab [Units/volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	TREPONEMA_PALLIDUM_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("51838-1",
+			"Treponema pallidum IgG Ab [Units/volume] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Treponema pallidum IgG Ab [Units/volume] in Serum by
 	 * Immunofluorescence</div>.
 	 */
-	TREPONEMA_PALLIDUM_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOFLUORESCENCE("17727-9", "Treponema pallidum IgG Ab [Units/volume] in Serum by Immunofluorescence", "18727-8", "20150101", ""),
+	TREPONEMA_PALLIDUM_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOFLUORESCENCE("17727-9",
+			"Treponema pallidum IgG Ab [Units/volume] in Serum by Immunofluorescence", "18727-8",
+			"20150101", ""),
 
 	/** <div class="en">Treponema pallidum IgM Ab [Presence] in Serum</div>. */
-	TREPONEMA_PALLIDUM_IGM_AB_PRESENCE_IN_SERUM("6562-3", "Treponema pallidum IgM Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	TREPONEMA_PALLIDUM_IGM_AB_PRESENCE_IN_SERUM("6562-3",
+			"Treponema pallidum IgM Ab [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Treponema pallidum IgM Ab [Presence] in Serum by
 	 * Immunoassay</div>.
 	 */
-	TREPONEMA_PALLIDUM_IGM_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("47237-3", "Treponema pallidum IgM Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	TREPONEMA_PALLIDUM_IGM_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("47237-3",
+			"Treponema pallidum IgM Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Treponema pallidum IgM Ab [Presence] in Serum by
 	 * Immunoblot (IB)</div>.
 	 */
-	TREPONEMA_PALLIDUM_IGM_AB_PRESENCE_IN_SERUM_BY_IMMUNOBLOT_IB("40680-1", "Treponema pallidum IgM Ab [Presence] in Serum by Immunoblot (IB)", "18727-8", "20150101", ""),
+	TREPONEMA_PALLIDUM_IGM_AB_PRESENCE_IN_SERUM_BY_IMMUNOBLOT_IB("40680-1",
+			"Treponema pallidum IgM Ab [Presence] in Serum by Immunoblot (IB)", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Treponema pallidum IgM Ab [Presence] in Serum by
 	 * Immunofluorescence</div>.
 	 */
-	TREPONEMA_PALLIDUM_IGM_AB_PRESENCE_IN_SERUM_BY_IMMUNOFLUORESCENCE("17729-5", "Treponema pallidum IgM Ab [Presence] in Serum by Immunofluorescence", "18727-8", "20150101", ""),
+	TREPONEMA_PALLIDUM_IGM_AB_PRESENCE_IN_SERUM_BY_IMMUNOFLUORESCENCE("17729-5",
+			"Treponema pallidum IgM Ab [Presence] in Serum by Immunofluorescence", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Treponema pallidum IgM Ab [Units/?volume] in Serum</div>.
 	 */
-	TREPONEMA_PALLIDUM_IGM_AB_UNITSVOLUME_IN_SERUM("22594-6", "Treponema pallidum IgM Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	TREPONEMA_PALLIDUM_IGM_AB_UNITSVOLUME_IN_SERUM("22594-6",
+			"Treponema pallidum IgM Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Treponema pallidum IgM Ab [Units/?volume] in Serum by
 	 * Immunoassay</div>.
 	 */
-	TREPONEMA_PALLIDUM_IGM_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("51839-9", "Treponema pallidum IgM Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	TREPONEMA_PALLIDUM_IGM_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("51839-9",
+			"Treponema pallidum IgM Ab [Units/?volume] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Treponema pallidum IgM Ab [Units/?volume] in Serum by
 	 * Immunofluorescence</div>.
 	 */
-	TREPONEMA_PALLIDUM_IGM_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOFLUORESCENCE("17728-7", "Treponema pallidum IgM Ab [Units/?volume] in Serum by Immunofluorescence", "18727-8", "20150101", ""),
+	TREPONEMA_PALLIDUM_IGM_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOFLUORESCENCE("17728-7",
+			"Treponema pallidum IgM Ab [Units/?volume] in Serum by Immunofluorescence", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Tricyclic antidepressants [Presence] in Serum or
 	 * Plasma</div>.
 	 */
-	TRICYCLIC_ANTIDEPRESSANTS_PRESENCE_IN_SERUM_OR_PLASMA("4073-3", "Tricyclic antidepressants [Presence] in Serum or Plasma", "18719-5", "20150101", ""),
+	TRICYCLIC_ANTIDEPRESSANTS_PRESENCE_IN_SERUM_OR_PLASMA("4073-3",
+			"Tricyclic antidepressants [Presence] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Tricyclic antidepressants [Presence] in Urine</div>. */
-	TRICYCLIC_ANTIDEPRESSANTS_PRESENCE_IN_URINE("11004-9", "Tricyclic antidepressants [Presence] in Urine", "18729-4", "20150101", ""),
+	TRICYCLIC_ANTIDEPRESSANTS_PRESENCE_IN_URINE("11004-9",
+			"Tricyclic antidepressants [Presence] in Urine", "18729-4", "20150101", ""),
 
 	/**
 	 * <div class="en">Tricyclic antidepressants [Presence] in Urine by
 	 * Immunoassay</div>.
 	 */
-	TRICYCLIC_ANTIDEPRESSANTS_PRESENCE_IN_URINE_BY_IMMUNOASSAY("6799-1", "Tricyclic antidepressants [Presence] in Urine by Immunoassay", "18729-4", "20150101", ""),
+	TRICYCLIC_ANTIDEPRESSANTS_PRESENCE_IN_URINE_BY_IMMUNOASSAY("6799-1",
+			"Tricyclic antidepressants [Presence] in Urine by Immunoassay", "18729-4", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Tricyclic antidepressants [Presence] in Urine by Screen
 	 * method</div>.
 	 */
-	TRICYCLIC_ANTIDEPRESSANTS_PRESENCE_IN_URINE_BY_SCREEN_METHOD("19312-8", "Tricyclic antidepressants [Presence] in Urine by Screen method", "18729-4", "20150101", ""),
+	TRICYCLIC_ANTIDEPRESSANTS_PRESENCE_IN_URINE_BY_SCREEN_METHOD("19312-8",
+			"Tricyclic antidepressants [Presence] in Urine by Screen method", "18729-4", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Tricyclic antidepressants screen method [Identifier] in
 	 * Urine</div>.
 	 */
-	TRICYCLIC_ANTIDEPRESSANTS_SCREEN_METHOD_IDENTIFIER_IN_URINE("19319-3", "Tricyclic antidepressants screen method [Identifier] in Urine", "18729-4", "20150101", ""),
+	TRICYCLIC_ANTIDEPRESSANTS_SCREEN_METHOD_IDENTIFIER_IN_URINE("19319-3",
+			"Tricyclic antidepressants screen method [Identifier] in Urine", "18729-4", "20150101",
+			""),
 
 	/** <div class="en">Triglyceride [Mass/volume] in Serum or Plasma</div>. */
-	TRIGLYCERIDE_MASSVOLUME_IN_SERUM_OR_PLASMA("2571-8", "Triglyceride [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	TRIGLYCERIDE_MASSVOLUME_IN_SERUM_OR_PLASMA("2571-8",
+			"Triglyceride [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Triglyceride [Moles/volume] in Serum or Plasma</div>. */
-	TRIGLYCERIDE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14927-8", "Triglyceride [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	TRIGLYCERIDE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14927-8",
+			"Triglyceride [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Trimipramine [Mass/volume] in Serum or Plasma</div>. */
-	TRIMIPRAMINE_MASSVOLUME_IN_SERUM_OR_PLASMA("4083-2", "Trimipramine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	TRIMIPRAMINE_MASSVOLUME_IN_SERUM_OR_PLASMA("4083-2",
+			"Trimipramine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Trimipramine [Moles/volume] in Serum or Plasma</div>. */
-	TRIMIPRAMINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14931-0", "Trimipramine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	TRIMIPRAMINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14931-0",
+			"Trimipramine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Trimipramine+Nortrimipramine [Moles/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	TRIMIPRAMINE_NORTRIMIPRAMINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("25812-9", "Trimipramine+Nortrimipramine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	TRIMIPRAMINE_NORTRIMIPRAMINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("25812-9",
+			"Trimipramine+Nortrimipramine [Moles/volume] in Serum or Plasma", "18719-5", "20150101",
+			""),
 	/**
 	 * <div class="en">Troponin I.cardiac [Mass/volume] in Serum or Plasma</div>
 	 */
-	TROPONIN_I_CARDIAC_MASSVOLUME_IN_SERUM_OR_PLASMA("10839-9", "Troponin I.cardiac [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	TROPONIN_I_CARDIAC_MASSVOLUME_IN_SERUM_OR_PLASMA("10839-9",
+			"Troponin I.cardiac [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Troponin T.cardiac [Mass/?volume] in Serum or
 	 * Plasma</div>
 	 */
-	TROPONIN_T_CARDIAC_MASSVOLUME_IN_SERUM_OR_PLASMA("6598-7", "Troponin T.cardiac [Mass/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	TROPONIN_T_CARDIAC_MASSVOLUME_IN_SERUM_OR_PLASMA("6598-7",
+			"Troponin T.cardiac [Mass/?volume] in Serum or Plasma", "18719-5", "20150101", ""),
 	/**
 	 * <div class="en">Troponin T.cardiac [Presence] in Serum or Plasma</div>
 	 */
-	TROPONIN_T_CARDIAC_PRESENCE_IN_SERUM_OR_PLASMA("33204-9", "Troponin T.cardiac [Presence] in Serum or Plasma", "18719-5", "20150101", ""),
+	TROPONIN_T_CARDIAC_PRESENCE_IN_SERUM_OR_PLASMA("33204-9",
+			"Troponin T.cardiac [Presence] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Unidentified crystals [Presence] in Urine sediment by
 	 * Light microscopy</div>.
 	 */
-	UNIDENTIFIED_CRYSTALS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("5783-6", "Unidentified crystals [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101", ""),
+	UNIDENTIFIED_CRYSTALS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("5783-6",
+			"Unidentified crystals [Presence] in Urine sediment by Light microscopy", "18729-4",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Urate crystals amorphous [#/?volume] in Urine
 	 * sediment</div>.
 	 */
-	URATE_CRYSTALS_AMORPHOUS_VOLUME_IN_URINE_SEDIMENT("13657-2", "Urate crystals amorphous [#/?volume] in Urine sediment", "18729-4", "20150101", ""),
+	URATE_CRYSTALS_AMORPHOUS_VOLUME_IN_URINE_SEDIMENT("13657-2",
+			"Urate crystals amorphous [#/?volume] in Urine sediment", "18729-4", "20150101", ""),
 
 	/** <div class="en">Urate [Mass/volume] in Serum or Plasma</div>. */
-	URATE_MASSVOLUME_IN_SERUM_OR_PLASMA("3084-1", "Urate [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	URATE_MASSVOLUME_IN_SERUM_OR_PLASMA("3084-1", "Urate [Mass/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/** <div class="en">Urate [Moles/volume] in Serum or Plasma</div>. */
-	URATE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14933-6", "Urate [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	URATE_MOLESVOLUME_IN_SERUM_OR_PLASMA("14933-6", "Urate [Moles/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/** <div class="en">Urea [Mass/volume] in Serum or Plasma</div>. */
-	UREA_MASSVOLUME_IN_SERUM_OR_PLASMA("3091-6", "Urea [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	UREA_MASSVOLUME_IN_SERUM_OR_PLASMA("3091-6", "Urea [Mass/volume] in Serum or Plasma", "18719-5",
+			"20150101", ""),
 
 	/** <div class="en">Urea [Moles/volume] in Serum or Plasma</div>. */
-	UREA_MOLESVOLUME_IN_SERUM_OR_PLASMA("22664-7", "Urea [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	UREA_MOLESVOLUME_IN_SERUM_OR_PLASMA("22664-7", "Urea [Moles/volume] in Serum or Plasma",
+			"18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Urobilinogen [Presence] in Urine by Automated test
 	 * strip</div>.
 	 */
-	UROBILINOGEN_PRESENCE_IN_URINE_BY_AUTOMATED_TEST_STRIP("62487-4", "Urobilinogen [Presence] in Urine by Automated test strip", "18729-4", "20150101", ""),
+	UROBILINOGEN_PRESENCE_IN_URINE_BY_AUTOMATED_TEST_STRIP("62487-4",
+			"Urobilinogen [Presence] in Urine by Automated test strip", "18729-4", "20150101", ""),
 
 	/**
 	 * <div class="en">Varicella zoster virus DNA [Presence] in Unspecified
 	 * specimen by Probe and target amplification method</div>.
 	 */
-	VARICELLA_ZOSTER_VIRUS_DNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("11483-5", "Varicella zoster virus DNA [Presence] in Unspecified specimen by Probe and target amplification method", "18725-2", "20150101", ""),
+	VARICELLA_ZOSTER_VIRUS_DNA_PRESENCE_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"11483-5",
+			"Varicella zoster virus DNA [Presence] in Unspecified specimen by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Varicella zoster virus DNA [#/?volume] (viral load) in
 	 * Unspecified specimen by Probe and target amplification method</div>.
 	 */
-	VARICELLA_ZOSTER_VIRUS_DNA_VOLUME_VIRAL_LOAD_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD("49451-8", "Varicella zoster virus DNA [#/?volume] (viral load) in Unspecified specimen by Probe and target amplification method", "18725-2", "20150101", ""),
+	VARICELLA_ZOSTER_VIRUS_DNA_VOLUME_VIRAL_LOAD_IN_UNSPECIFIED_SPECIMEN_BY_PROBE_AND_TARGET_AMPLIFICATION_METHOD(
+			"49451-8",
+			"Varicella zoster virus DNA [#/?volume] (viral load) in Unspecified specimen by Probe and target amplification method",
+			"18725-2", "20150101", ""),
 
 	/**
 	 * <div class="en">Varicella zoster virus IgG Ab [Presence] in Serum</div>.
 	 */
-	VARICELLA_ZOSTER_VIRUS_IGG_AB_PRESENCE_IN_SERUM("19162-7", "Varicella zoster virus IgG Ab [Presence] in Serum", "18727-8", "20150101", ""),
+	VARICELLA_ZOSTER_VIRUS_IGG_AB_PRESENCE_IN_SERUM("19162-7",
+			"Varicella zoster virus IgG Ab [Presence] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Varicella zoster virus IgG Ab [Presence] in Serum by
 	 * Immunoassay</div>.
 	 */
-	VARICELLA_ZOSTER_VIRUS_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("15410-4", "Varicella zoster virus IgG Ab [Presence] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	VARICELLA_ZOSTER_VIRUS_IGG_AB_PRESENCE_IN_SERUM_BY_IMMUNOASSAY("15410-4",
+			"Varicella zoster virus IgG Ab [Presence] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/**
 	 * <div class="en">Varicella zoster virus IgG Ab [Units/?volume] in
 	 * Serum</div>.
 	 */
-	VARICELLA_ZOSTER_VIRUS_IGG_AB_UNITSVOLUME_IN_SERUM("8047-3", "Varicella zoster virus IgG Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
+	VARICELLA_ZOSTER_VIRUS_IGG_AB_UNITSVOLUME_IN_SERUM("8047-3",
+			"Varicella zoster virus IgG Ab [Units/?volume] in Serum", "18727-8", "20150101", ""),
 
 	/**
 	 * <div class="en">Varicella zoster virus IgG Ab [Units/?volume] in Serum by
 	 * Immunoassay</div>.
 	 */
-	VARICELLA_ZOSTER_VIRUS_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5403-1", "Varicella zoster virus IgG Ab [Units/?volume] in Serum by Immunoassay", "18727-8", "20150101", ""),
+	VARICELLA_ZOSTER_VIRUS_IGG_AB_UNITSVOLUME_IN_SERUM_BY_IMMUNOASSAY("5403-1",
+			"Varicella zoster virus IgG Ab [Units/?volume] in Serum by Immunoassay", "18727-8",
+			"20150101", ""),
 
 	/** <div class="en">Venlafaxine [Mass/volume] in Serum or Plasma</div>. */
-	VENLAFAXINE_MASSVOLUME_IN_SERUM_OR_PLASMA("9630-5", "Venlafaxine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	VENLAFAXINE_MASSVOLUME_IN_SERUM_OR_PLASMA("9630-5",
+			"Venlafaxine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/** <div class="en">Venlafaxine [Moles/volume] in Serum or Plasma</div>. */
-	VENLAFAXINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("34386-3", "Venlafaxine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	VENLAFAXINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("34386-3",
+			"Venlafaxine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
 
 	/**
 	 * <div class="en">Venlafaxine+Norvenlafaxine [Mass/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	VENLAFAXINE_NORVENLAFAXINE_MASSVOLUME_IN_SERUM_OR_PLASMA("62849-5", "Venlafaxine+Norvenlafaxine [Mass/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	VENLAFAXINE_NORVENLAFAXINE_MASSVOLUME_IN_SERUM_OR_PLASMA("62849-5",
+			"Venlafaxine+Norvenlafaxine [Mass/volume] in Serum or Plasma", "18719-5", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Venlafaxine+Norvenlafaxine [Moles/volume] in Serum or
 	 * Plasma</div>.
 	 */
-	VENLAFAXINE_NORVENLAFAXINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("48350-3", "Venlafaxine+Norvenlafaxine [Moles/volume] in Serum or Plasma", "18719-5", "20150101", ""),
+	VENLAFAXINE_NORVENLAFAXINE_MOLESVOLUME_IN_SERUM_OR_PLASMA("48350-3",
+			"Venlafaxine+Norvenlafaxine [Moles/volume] in Serum or Plasma", "18719-5", "20150101",
+			""),
 
 	/** <div class="en">Voriconazole [Susceptibility]</div>. */
-	VORICONAZOLE_SUSCEPTIBILITY("32379-0", "Voriconazole [Susceptibility]", "18769-0", "20150101", ""),
+	VORICONAZOLE_SUSCEPTIBILITY("32379-0", "Voriconazole [Susceptibility]", "18769-0", "20150101",
+			""),
 
 	/**
 	 * <div class="en">Waxy casts [Presence] in Urine sediment by Light
 	 * microscopy</div>.
 	 */
-	WAXY_CASTS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("33862-4", "Waxy casts [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101", ""),
+	WAXY_CASTS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("33862-4",
+			"Waxy casts [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101",
+			""),
 
 	/** <div class="en">Waxy casts [#/?volume] in Urine sediment</div>. */
-	WAXY_CASTS_VOLUME_IN_URINE_SEDIMENT("41187-6", "Waxy casts [#/?volume] in Urine sediment", "18729-4", "20150101", ""),
+	WAXY_CASTS_VOLUME_IN_URINE_SEDIMENT("41187-6", "Waxy casts [#/?volume] in Urine sediment",
+			"18729-4", "20150101", ""),
 
 	/**
 	 * <div class="en">WBC casts [Presence] in Urine sediment by Light
 	 * microscopy</div>.
 	 */
-	WBC_CASTS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("33825-1", "WBC casts [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101", ""),
+	WBC_CASTS_PRESENCE_IN_URINE_SEDIMENT_BY_LIGHT_MICROSCOPY("33825-1",
+			"WBC casts [Presence] in Urine sediment by Light microscopy", "18729-4", "20150101",
+			""),
 
 	/** <div class="en">Xg sup(a) Ab [Presence] in Serum or Plasma</div>. */
-	XG_SUPA_AB_PRESENCE_IN_SERUM_OR_PLASMA("1338-3", "Xg sup(a) Ab [Presence] in Serum or Plasma", "18717-9", "20150101", "");
+	XG_SUPA_AB_PRESENCE_IN_SERUM_OR_PLASMA("1338-3", "Xg sup(a) Ab [Presence] in Serum or Plasma",
+			"18717-9", "20150101", "");
 
 	/** <div class="en">Code for 5-Fluorocytosine [Susceptibility]</div>. */
 	public static final String _5_FLUOROCYTOSINE_SUSCEPTIBILITY_CODE = "18855-7";

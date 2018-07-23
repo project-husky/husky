@@ -34,7 +34,8 @@ public enum LrtpSections {
 	 * <div class="en">Relevant diagnostic tests/laboratory data</div>
 	 * <div class="de">Blutgruppe</div>.
 	 */
-	RELEVANT_DIAGNOSTIC_TESTSLABORATORY_DATA("30954-2", "Relevant diagnostic tests/laboratory data"),
+	RELEVANT_DIAGNOSTIC_TESTSLABORATORY_DATA("30954-2",
+			"Relevant diagnostic tests/laboratory data"),
 
 	/** <div class="en">Vital signs</div> <div class="de">Vitalzeichen</div>. */
 	VITAL_SIGNS("8716-3", "Vital signs");

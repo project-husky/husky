@@ -107,8 +107,7 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 		}
 		ret.sort(new Comparator<BaseVitalSignObservation>() {
 			@Override
-			public int compare(BaseVitalSignObservation left,
-					BaseVitalSignObservation right) {
+			public int compare(BaseVitalSignObservation left, BaseVitalSignObservation right) {
 				return right.getEffectiveTime().compareTo(left.getEffectiveTime());
 			}
 		});

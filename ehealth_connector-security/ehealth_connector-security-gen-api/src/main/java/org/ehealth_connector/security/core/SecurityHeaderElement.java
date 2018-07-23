@@ -28,7 +28,7 @@ package org.ehealth_connector.security.core;
 public interface SecurityHeaderElement {
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the wrapped object.</div>
 	 * <div class="de">Methode um das gewrappte Objekt zu erhalten.</div>

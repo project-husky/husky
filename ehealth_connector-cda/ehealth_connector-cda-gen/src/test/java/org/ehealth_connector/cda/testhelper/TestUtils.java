@@ -62,6 +62,18 @@ public class TestUtils {
 		return new String(text);
 	}
 
+	public static boolean isEqual(Author a1, Author a2) {
+		if (a1.getGln() != null) {
+			if (!a1.getGln().equals(a2.getGln()))
+				return false;
+		}
+		for (int i = 0; i < a1.getIds().size(); i++) {
+			if (!isEqual(a1.getIds().get(i), a2.getIds().get(i)))
+				return false;
+		}
+		return true;
+	}
+
 	public static boolean isEqual(BaseAllergyProblem p1, BaseAllergyProblem p2) {
 		if (!isEqual(p1.getCode(), p2.getCode()))
 			return false;
@@ -83,18 +95,6 @@ public class TestUtils {
 			return false;
 		}
 		return p1.equals(p2);
-	}
-
-	public static boolean isEqual(Author a1, Author a2) {
-		if (a1.getGln() != null) {
-			if (!a1.getGln().equals(a2.getGln()))
-				return false;
-		}
-		for (int i = 0; i < a1.getIds().size(); i++) {
-			if (!isEqual(a1.getIds().get(i), a2.getIds().get(i)))
-				return false;
-		}
-		return true;
 	}
 
 	public static boolean isEqual(Code c1, Code c2) {

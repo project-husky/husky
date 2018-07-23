@@ -25,13 +25,38 @@ import org.hl7.fhir.dstu3.model.Identifier;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /**
- * 
+ *
  * @author roeland
  * @version 1.0
  * @since Sep 18, 2017 8:31:23 AM
  *
  */
 public class FhirUtilities {
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Instantiates a new code from FHIR CodeableConcept.</div>
+	 * <div class="de">Instantiiert ein neues Code Objekt von FHIR7 CodeableConcept</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param aCodeableConcept <br>
+	 * <div class="en">the CodeableConcept to be converted</div>
+	 * <div class="de">Das CodeableConcept zum konvertieren</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return <br>
+	 * <div class="en">new instance of type Code</div>
+	 * <div class="de">Neue Instanz vom Typ Code</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	public static Code toCode(CodeableConcept aCodeableConcept) {
+		return new Code(aCodeableConcept.getCodingFirstRep().getSystem().replace("urn:oid:", ""),
+				aCodeableConcept.getCodingFirstRep().getCode(), aCodeableConcept.getText());
+	}
 
 	/**
 	 * <!-- @formatter:off -->
@@ -57,38 +82,13 @@ public class FhirUtilities {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Instantiates a new code from FHIR CodeableConcept.</div>
-	 * <div class="de">Instantiiert ein neues Code Objekt von FHIR7 CodeableConcept</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>
-	 *
-	 * @param aCodeableConcept <br>
-	 * <div class="en">the CodeableConcept to be converted</div>
-	 * <div class="de">Das CodeableConcept zum konvertieren</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>
-	 * 
-	 * @return <br>
-	 * <div class="en">new instance of type Code</div>
-	 * <div class="de">Neue Instanz vom Typ Code</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>
-	 * <!-- @formatter:on -->
-	 */
-	public static Code toCode(CodeableConcept aCodeableConcept) {
-		return new Code(aCodeableConcept.getCodingFirstRep().getSystem().replace("urn:oid:", ""),
-				aCodeableConcept.getCodingFirstRep().getCode(), aCodeableConcept.getText());
-	}
-
-	/**
-	 * <!-- @formatter:off -->
 	 * <div class="en">Creates a new Identificator</div>
 	 * <div class="de">Erstellt einen neuen Identifikator.</div>
 	 *
 	 * @param identifier <br>
 	 * <div class="en">the identifier to be used</div>
 	 * <div class="de">der identifier der zum convertieren ist.</div>
-	 * 
+	 *
 	 * @return <br>
 	 * <div class="en">the Identificator initialized</div>
 	 * <div class="de">der initialisierte Identificator</div>

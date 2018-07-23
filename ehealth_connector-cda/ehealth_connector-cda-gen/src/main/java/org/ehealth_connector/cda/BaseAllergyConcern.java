@@ -79,8 +79,7 @@ public class BaseAllergyConcern extends AbstractConcern {
 	 * @param mdht
 	 *            allergy concern
 	 **/
-	public BaseAllergyConcern(
-			org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern mdht) {
+	public BaseAllergyConcern(org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern mdht) {
 		super(mdht);
 		mAllergyConcern = (org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern) super.getMdhtConcern();
 	}
@@ -96,8 +95,7 @@ public class BaseAllergyConcern extends AbstractConcern {
 	 * @param lang
 	 *            the language
 	 */
-	public BaseAllergyConcern(
-			org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern mdht,
+	public BaseAllergyConcern(org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern mdht,
 			LanguageCode lang) {
 		super(mdht);
 		myLang = lang;
@@ -166,8 +164,8 @@ public class BaseAllergyConcern extends AbstractConcern {
 	 *            (active/suspended/aborted/completed)</div> <div class="fr">Le
 	 *            statut du problème (active/suspended/aborted/completed)</div>
 	 */
-	public BaseAllergyConcern(String concern, Date begin, Date end,
-			BaseAllergyProblem problemEntry, ProblemConcernStatusCode concernStatus) {
+	public BaseAllergyConcern(String concern, Date begin, Date end, BaseAllergyProblem problemEntry,
+			ProblemConcernStatusCode concernStatus) {
 		this(concern, problemEntry, concernStatus);
 		if (end != null) {
 			setEffectiveTime(begin, end);

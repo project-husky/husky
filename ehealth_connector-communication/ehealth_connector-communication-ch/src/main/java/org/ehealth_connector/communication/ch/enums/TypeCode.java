@@ -19,10 +19,12 @@ package org.ehealth_connector.communication.ch.enums;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.annotation.Generated;
+
+import org.ehealth_connector.common.ch.enums.ValueSetEnumInterface;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.ch.enums.ValueSetEnumInterface;
 
 /**
  *<!-- @formatter:off -->
@@ -51,7 +53,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Rapporto di ammissione</div>
 	 *<!-- @formatter:on -->
 	 */
-	ADMISSION_REPORT("371542009", "2.16.840.1.113883.6.96", "Admission history and physical report (record artifact)", "Admission report", "Eintrittsbericht", "Rapport d'admission", "Rapporto di ammissione"),
+	ADMISSION_REPORT("371542009", "2.16.840.1.113883.6.96",
+			"Admission history and physical report (record artifact)", "Admission report",
+			"Eintrittsbericht", "Rapport d'admission", "Rapporto di ammissione"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Admission request</div>
@@ -60,7 +64,10 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Richiesta di ricovero/ammissione</div>
 	 *<!-- @formatter:on -->
 	 */
-	ADMISSION_REQUEST("721915006", "2.16.840.1.113883.6.96", "Admission request document (record artifact)", "Admission request", "Zuweisungsschreiben/Einweisungsschreiben", "Demande d'admission", "Richiesta di ricovero/ammissione"),
+	ADMISSION_REQUEST("721915006", "2.16.840.1.113883.6.96",
+			"Admission request document (record artifact)", "Admission request",
+			"Zuweisungsschreiben/Einweisungsschreiben", "Demande d'admission",
+			"Richiesta di ricovero/ammissione"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Advance directive report</div>
@@ -69,7 +76,10 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Direttive anticipate del paziente</div>
 	 *<!-- @formatter:on -->
 	 */
-	ADVANCE_DIRECTIVE_REPORT("371538006", "2.16.840.1.113883.6.96", "Advance directive report (record artifact)", "Advance directive report", "Patientenverfügung", "Directives anticipées du patient", "Direttive anticipate del paziente"),
+	ADVANCE_DIRECTIVE_REPORT("371538006", "2.16.840.1.113883.6.96",
+			"Advance directive report (record artifact)", "Advance directive report",
+			"Patientenverfügung", "Directives anticipées du patient",
+			"Direttive anticipate del paziente"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Anaesthesiology report</div>
@@ -78,7 +88,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Referto anestesiologico</div>
 	 *<!-- @formatter:on -->
 	 */
-	ANAESTHESIOLOGY_REPORT("416779005", "2.16.840.1.113883.6.96", "Anesthesia record (record artifact)", "Anaesthesiology report", "Anästhesie-Befund", "Rapport de l'anésthésie", "Referto anestesiologico"),
+	ANAESTHESIOLOGY_REPORT("416779005", "2.16.840.1.113883.6.96",
+			"Anesthesia record (record artifact)", "Anaesthesiology report", "Anästhesie-Befund",
+			"Rapport de l'anésthésie", "Referto anestesiologico"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Audit trail</div>
@@ -87,7 +99,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Audit trail</div>
 	 *<!-- @formatter:on -->
 	 */
-	AUDIT_TRAIL("722160009", "2.16.840.1.113883.6.96", "Audit trail report (record artifact) ", "Audit trail", "Audit trail", "Journal d'audit", "Audit trail"),
+	AUDIT_TRAIL("722160009", "2.16.840.1.113883.6.96", "Audit trail report (record artifact) ",
+			"Audit trail", "Audit trail", "Journal d'audit", "Audit trail"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Birth certificate</div>
@@ -96,7 +109,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Cerificato di nascita</div>
 	 *<!-- @formatter:on -->
 	 */
-	BIRTH_CERTIFICATE("444561001", "2.16.840.1.113883.6.96", "Birth certificate (record artifact)", "Birth certificate", "Geburtsurkunde", "Certificat de naissance", "Cerificato di nascita"),
+	BIRTH_CERTIFICATE("444561001", "2.16.840.1.113883.6.96", "Birth certificate (record artifact)",
+			"Birth certificate", "Geburtsurkunde", "Certificat de naissance",
+			"Cerificato di nascita"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Bone marrow Pathology biopsy report</div>
@@ -105,7 +120,10 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Referto di biopsia del midollo osseo</div>
 	 *<!-- @formatter:on -->
 	 */
-	BONE_MARROW_PATHOLOGY_BIOPSY_REPORT("721631001", "2.16.840.1.113883.6.96", "Bone marrow pathology biopsy report (record artifact)", "Bone marrow Pathology biopsy report", "Knochenmark-Biopsie-Befund", "Rapport de la biopsie de la moelle osseuse", "Referto di biopsia del midollo osseo"),
+	BONE_MARROW_PATHOLOGY_BIOPSY_REPORT("721631001", "2.16.840.1.113883.6.96",
+			"Bone marrow pathology biopsy report (record artifact)",
+			"Bone marrow Pathology biopsy report", "Knochenmark-Biopsie-Befund",
+			"Rapport de la biopsie de la moelle osseuse", "Referto di biopsia del midollo osseo"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Cardiac catheterization report</div>
@@ -114,7 +132,10 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Referto di cateterismo cardiaco</div>
 	 *<!-- @formatter:on -->
 	 */
-	CARDIAC_CATHETERIZATION_REPORT("721968000", "2.16.840.1.113883.6.96", "Cardiac catheterization report (record artifact)", "Cardiac catheterization report", "Herzkatheter-Befund", "Rapport du cathétérisme cardiaque", "Referto di cateterismo cardiaco"),
+	CARDIAC_CATHETERIZATION_REPORT("721968000", "2.16.840.1.113883.6.96",
+			"Cardiac catheterization report (record artifact)", "Cardiac catheterization report",
+			"Herzkatheter-Befund", "Rapport du cathétérisme cardiaque",
+			"Referto di cateterismo cardiaco"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Care plan</div>
@@ -123,7 +144,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Piano di cura</div>
 	 *<!-- @formatter:on -->
 	 */
-	CARE_PLAN("278448002", "2.16.840.1.113883.6.96", "Care plan (qualifier value)", "Care plan", "Pflegeplan (allgemein)", "Plan de soins", "Piano di cura"),
+	CARE_PLAN("278448002", "2.16.840.1.113883.6.96", "Care plan (qualifier value)", "Care plan",
+			"Pflegeplan (allgemein)", "Plan de soins", "Piano di cura"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Clinical procedure report</div>
@@ -132,7 +154,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Risultato d'esame (generale)</div>
 	 *<!-- @formatter:on -->
 	 */
-	CLINICAL_PROCEDURE_REPORT("371525003", "2.16.840.1.113883.6.96", "Clinical procedure report (record artifact)", "Clinical procedure report", "Untersuchungsbefund (allgemein)", "Rapport d'examen", "Risultato d'esame (generale)"),
+	CLINICAL_PROCEDURE_REPORT("371525003", "2.16.840.1.113883.6.96",
+			"Clinical procedure report (record artifact)", "Clinical procedure report",
+			"Untersuchungsbefund (allgemein)", "Rapport d'examen", "Risultato d'esame (generale)"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Conclusion interpretation document</div>
@@ -141,7 +165,10 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Rapporto decisionale</div>
 	 *<!-- @formatter:on -->
 	 */
-	CONCLUSION_INTERPRETATION_DOCUMENT("722091001", "2.16.840.1.113883.6.96", "Conclusion interpretation document (record artifact)", "Conclusion interpretation document", "Beschlussprotokoll", "Rapport de décision", "Rapporto decisionale"),
+	CONCLUSION_INTERPRETATION_DOCUMENT("722091001", "2.16.840.1.113883.6.96",
+			"Conclusion interpretation document (record artifact)",
+			"Conclusion interpretation document", "Beschlussprotokoll", "Rapport de décision",
+			"Rapporto decisionale"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Consultation report</div>
@@ -150,7 +177,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Rapporto di consultazione</div>
 	 *<!-- @formatter:on -->
 	 */
-	CONSULTATION_REPORT("371530004", "2.16.840.1.113883.6.96", "Clinical consultation report (record artifact)", "Consultation report", "Konsultationsbericht", "Rapport de consultation", "Rapporto di consultazione"),
+	CONSULTATION_REPORT("371530004", "2.16.840.1.113883.6.96",
+			"Clinical consultation report (record artifact)", "Consultation report",
+			"Konsultationsbericht", "Rapport de consultation", "Rapporto di consultazione"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Death certificate</div>
@@ -159,7 +188,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Certificato di morte</div>
 	 *<!-- @formatter:on -->
 	 */
-	DEATH_CERTIFICATE("307930005", "2.16.840.1.113883.6.96", "Death certificate (record artifact)", "Death certificate", "Todesbescheinigung", "Certificat de décès", "Certificato di morte"),
+	DEATH_CERTIFICATE("307930005", "2.16.840.1.113883.6.96", "Death certificate (record artifact)",
+			"Death certificate", "Todesbescheinigung", "Certificat de décès",
+			"Certificato di morte"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Discharge summary</div>
@@ -168,7 +199,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Rapporto/lettera d'uscita</div>
 	 *<!-- @formatter:on -->
 	 */
-	DISCHARGE_SUMMARY("373942005", "2.16.840.1.113883.6.96", "Discharge summary (record artifact)", "Discharge summary", "Austrittsbericht", "Lettre de sortie", "Rapporto/lettera d'uscita"),
+	DISCHARGE_SUMMARY("373942005", "2.16.840.1.113883.6.96", "Discharge summary (record artifact)",
+			"Discharge summary", "Austrittsbericht", "Lettre de sortie",
+			"Rapporto/lettera d'uscita"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Drug prescription</div>
@@ -177,7 +210,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Ricetta medica</div>
 	 *<!-- @formatter:on -->
 	 */
-	DRUG_PRESCRIPTION("440545006", "2.16.840.1.113883.6.96", "Prescription record (record artifact)", "Drug prescription", "Rezept", "Ordonnance", "Ricetta medica"),
+	DRUG_PRESCRIPTION("440545006", "2.16.840.1.113883.6.96",
+			"Prescription record (record artifact)", "Drug prescription", "Rezept", "Ordonnance",
+			"Ricetta medica"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Echocardiography procedure report</div>
@@ -186,7 +221,10 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Referto di ecocardiografia </div>
 	 *<!-- @formatter:on -->
 	 */
-	ECHOCARDIOGRAPHY_PROCEDURE_REPORT("399345000", "2.16.840.1.113883.6.96", "Adult echocardiography procedure report (record artifact)", "Echocardiography procedure report", "Echokardiographie Befund", "Rapport d'échocardiographie", "Referto di ecocardiografia "),
+	ECHOCARDIOGRAPHY_PROCEDURE_REPORT("399345000", "2.16.840.1.113883.6.96",
+			"Adult echocardiography procedure report (record artifact)",
+			"Echocardiography procedure report", "Echokardiographie Befund",
+			"Rapport d'échocardiographie", "Referto di ecocardiografia "),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en"> Emergency medical identification record</div>
@@ -195,7 +233,10 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Passaporto d'emergenza</div>
 	 *<!-- @formatter:on -->
 	 */
-	EMERGENCY_MEDICAL_IDENTIFICATION_RECORD("722216001", "2.16.840.1.113883.6.96", "Emergency medical identification record (record artifact)", " Emergency medical identification record", "Notfallpass", "Passeport d'urgence", "Passaporto d'emergenza"),
+	EMERGENCY_MEDICAL_IDENTIFICATION_RECORD("722216001", "2.16.840.1.113883.6.96",
+			"Emergency medical identification record (record artifact)",
+			" Emergency medical identification record", "Notfallpass", "Passeport d'urgence",
+			"Passaporto d'emergenza"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Image reference</div>
@@ -204,7 +245,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Referenza nei dati immagine</div>
 	 *<!-- @formatter:on -->
 	 */
-	IMAGE_REFERENCE("900000000000471000", "2.16.840.1.113883.6.96", "Image reference (foundation metadata concept)", "Image reference", "Referenz auf Bilddaten", "Référence d'Image", "Referenza nei dati immagine"),
+	IMAGE_REFERENCE("900000000000471000", "2.16.840.1.113883.6.96",
+			"Image reference (foundation metadata concept)", "Image reference",
+			"Referenz auf Bilddaten", "Référence d'Image", "Referenza nei dati immagine"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Immunization record</div>
@@ -213,7 +256,10 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Certificato/libretto di vaccinazione</div>
 	 *<!-- @formatter:on -->
 	 */
-	IMMUNIZATION_RECORD("41000179103", "2.16.840.1.113883.6.96", "Immunization record (record artifact)", "Immunization record", "Impfausweis/Impfdossier", "Certificat / carnet de vaccination", "Certificato/libretto di vaccinazione"),
+	IMMUNIZATION_RECORD("41000179103", "2.16.840.1.113883.6.96",
+			"Immunization record (record artifact)", "Immunization record",
+			"Impfausweis/Impfdossier", "Certificat / carnet de vaccination",
+			"Certificato/libretto di vaccinazione"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Laboratory report</div>
@@ -222,7 +268,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Referto di laboratorio</div>
 	 *<!-- @formatter:on -->
 	 */
-	LABORATORY_REPORT("4241000179101", "2.16.840.1.113883.6.96", "Laboratory report (record artifact)", "Laboratory report", "Labor-Befund", "Résultat de laboratoire", "Referto di laboratorio"),
+	LABORATORY_REPORT("4241000179101", "2.16.840.1.113883.6.96",
+			"Laboratory report (record artifact)", "Laboratory report", "Labor-Befund",
+			"Résultat de laboratoire", "Referto di laboratorio"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Medication Comment</div>
@@ -231,7 +279,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Commento alla terapia farmacologica</div>
 	 *<!-- @formatter:on -->
 	 */
-	MEDICATION_COMMENT("1221000195109", "2.16.840.1.113883.6.96", "Medication Comment (record artifact)", "Medication Comment", "Kommentar zu Medikation", "Commentaire sur la médication", "Commento alla terapia farmacologica"),
+	MEDICATION_COMMENT("1221000195109", "2.16.840.1.113883.6.96",
+			"Medication Comment (record artifact)", "Medication Comment", "Kommentar zu Medikation",
+			"Commentaire sur la médication", "Commento alla terapia farmacologica"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Medication Dispensation </div>
@@ -240,7 +290,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Dispensazione</div>
 	 *<!-- @formatter:on -->
 	 */
-	MEDICATION_DISPENSATION("275670009", "2.16.840.1.113883.6.96", "Prescription exemption certificate (record artifact)", "Medication Dispensation ", "Dispensation", "Dispensation", "Dispensazione"),
+	MEDICATION_DISPENSATION("275670009", "2.16.840.1.113883.6.96",
+			"Prescription exemption certificate (record artifact)", "Medication Dispensation ",
+			"Dispensation", "Dispensation", "Dispensazione"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Medication summary</div>
@@ -249,7 +301,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Elenco dei medicamenti</div>
 	 *<!-- @formatter:on -->
 	 */
-	MEDICATION_SUMMARY("721912009", "2.16.840.1.113883.6.96", "Medication summary document (record artifact)", "Medication summary", "Medikamentenliste (aktuell)", "Liste des médicaments", "Elenco dei medicamenti"),
+	MEDICATION_SUMMARY("721912009", "2.16.840.1.113883.6.96",
+			"Medication summary document (record artifact)", "Medication summary",
+			"Medikamentenliste (aktuell)", "Liste des médicaments", "Elenco dei medicamenti"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Medication Treatment Plan</div>
@@ -258,7 +312,10 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Programma di trattamento farmacologico</div>
 	 *<!-- @formatter:on -->
 	 */
-	MEDICATION_TREATMENT_PLAN("761931002", "2.16.840.1.113883.6.96", "Medication treatment plan report (record artifact)", "Medication Treatment Plan", "Therapieentscheid ", "Plan de traitement pharmacologique", "Programma di trattamento farmacologico"),
+	MEDICATION_TREATMENT_PLAN("761931002", "2.16.840.1.113883.6.96",
+			"Medication treatment plan report (record artifact)", "Medication Treatment Plan",
+			"Therapieentscheid ", "Plan de traitement pharmacologique",
+			"Programma di trattamento farmacologico"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Non-drug prescription</div>
@@ -267,7 +324,10 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Richiesta di prestazione sanitaria</div>
 	 *<!-- @formatter:on -->
 	 */
-	NON_DRUG_PRESCRIPTION("1371000195104", "2.16.840.1.113883.6.96", "Non-drug prescription record (record artifact)", "Non-drug prescription", "Nicht-Arzneimittelbezogene Verordnung", "Ordonnance nonmédicamenteuse", "Richiesta di prestazione sanitaria"),
+	NON_DRUG_PRESCRIPTION("1371000195104", "2.16.840.1.113883.6.96",
+			"Non-drug prescription record (record artifact)", "Non-drug prescription",
+			"Nicht-Arzneimittelbezogene Verordnung", "Ordonnance nonmédicamenteuse",
+			"Richiesta di prestazione sanitaria"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Nursing report</div>
@@ -276,7 +336,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Rapporto infermieristico</div>
 	 *<!-- @formatter:on -->
 	 */
-	NURSING_REPORT("5531000179105", "2.16.840.1.113883.6.96", "Nursing report (record artifact)", "Nursing report", "Pflegebericht", "Rapport de soins infirmiers", "Rapporto infermieristico"),
+	NURSING_REPORT("5531000179105", "2.16.840.1.113883.6.96", "Nursing report (record artifact)",
+			"Nursing report", "Pflegebericht", "Rapport de soins infirmiers",
+			"Rapporto infermieristico"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Operative report</div>
@@ -285,7 +347,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Referto operatorio</div>
 	 *<!-- @formatter:on -->
 	 */
-	OPERATIVE_REPORT("371526002", "2.16.840.1.113883.6.96", "Operative report (record artifact)", "Operative report", "OP-Bericht", "Protocole opératoire", "Referto operatorio"),
+	OPERATIVE_REPORT("371526002", "2.16.840.1.113883.6.96", "Operative report (record artifact)",
+			"Operative report", "OP-Bericht", "Protocole opératoire", "Referto operatorio"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Order</div>
@@ -294,7 +357,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Ordine</div>
 	 *<!-- @formatter:on -->
 	 */
-	ORDER("721963009", "2.16.840.1.113883.6.96", "Order (record artifact)", "Order", "Auftrag", "Demande", "Ordine"),
+	ORDER("721963009", "2.16.840.1.113883.6.96", "Order (record artifact)", "Order", "Auftrag",
+			"Demande", "Ordine"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Organ donor card</div>
@@ -303,7 +367,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Volontà di donare organi </div>
 	 *<!-- @formatter:on -->
 	 */
-	ORGAN_DONOR_CARD("772790007", "2.16.840.1.113883.6.96", "Organ donor card (record artifact)", "Organ donor card", "Willensäusserung zur Organspende", "Volonté sur le don d'organes", "Volontà di donare organi "),
+	ORGAN_DONOR_CARD("772790007", "2.16.840.1.113883.6.96", "Organ donor card (record artifact)",
+			"Organ donor card", "Willensäusserung zur Organspende", "Volonté sur le don d'organes",
+			"Volontà di donare organi "),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Other EPD-document type</div>
@@ -312,7 +378,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Altri tipi di documento CIP</div>
 	 *<!-- @formatter:on -->
 	 */
-	OTHER_EPD_DOCUMENT_TYPE("424975005", "2.16.840.1.113883.6.96", "Record entry (record artifact)", "Other EPD-document type", "Anderer EPD Dokumenten-Typ", "Autre type de document DEP", "Altri tipi di documento CIP"),
+	OTHER_EPD_DOCUMENT_TYPE("424975005", "2.16.840.1.113883.6.96", "Record entry (record artifact)",
+			"Other EPD-document type", "Anderer EPD Dokumenten-Typ", "Autre type de document DEP",
+			"Altri tipi di documento CIP"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Pathology report</div>
@@ -321,7 +389,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Referto di patologia</div>
 	 *<!-- @formatter:on -->
 	 */
-	PATHOLOGY_REPORT("371528001", "2.16.840.1.113883.6.96", "Pathology report (record artifact)", "Pathology report", "Pathologie-Befund", "Rapport de pathologie", "Referto di patologia"),
+	PATHOLOGY_REPORT("371528001", "2.16.840.1.113883.6.96", "Pathology report (record artifact)",
+			"Pathology report", "Pathologie-Befund", "Rapport de pathologie",
+			"Referto di patologia"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Patient Consent</div>
@@ -330,7 +400,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Consenso del paziente</div>
 	 *<!-- @formatter:on -->
 	 */
-	PATIENT_CONSENT("371537001", "2.16.840.1.113883.6.96", "Consent report (record artifact)", "Patient Consent", "Patienteneinwilligung", "Consentement du patient", "Consenso del paziente"),
+	PATIENT_CONSENT("371537001", "2.16.840.1.113883.6.96", "Consent report (record artifact)",
+			"Patient Consent", "Patienteneinwilligung", "Consentement du patient",
+			"Consenso del paziente"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Patient Summary</div>
@@ -339,7 +411,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Patient Summary (riassunto medico)</div>
 	 *<!-- @formatter:on -->
 	 */
-	PATIENT_SUMMARY("371534008", "2.16.840.1.113883.6.96", "Summary report (record artifact)", "Patient Summary", "Patient Summary (medizinische Zusammenfassung)", "Résumé du dossier médical", "Patient Summary (riassunto medico)"),
+	PATIENT_SUMMARY("371534008", "2.16.840.1.113883.6.96", "Summary report (record artifact)",
+			"Patient Summary", "Patient Summary (medizinische Zusammenfassung)",
+			"Résumé du dossier médical", "Patient Summary (riassunto medico)"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Progress note</div>
@@ -348,7 +422,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Diario clinico</div>
 	 *<!-- @formatter:on -->
 	 */
-	PROGRESS_NOTE("371532007", "2.16.840.1.113883.6.96", "Progress report (record artifact)", "Progress note", "Klinisches Verlaufsblatt", "Note de suite", "Diario clinico"),
+	PROGRESS_NOTE("371532007", "2.16.840.1.113883.6.96", "Progress report (record artifact)",
+			"Progress note", "Klinisches Verlaufsblatt", "Note de suite", "Diario clinico"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Radiology report</div>
@@ -357,7 +432,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Referto radiologico</div>
 	 *<!-- @formatter:on -->
 	 */
-	RADIOLOGY_REPORT("371527006", "2.16.840.1.113883.6.96", "Radiology report (record artifact)", "Radiology report", "Radiologie-Befund", "Rapport de l'examen radiologique", "Referto radiologico"),
+	RADIOLOGY_REPORT("371527006", "2.16.840.1.113883.6.96", "Radiology report (record artifact)",
+			"Radiology report", "Radiologie-Befund", "Rapport de l'examen radiologique",
+			"Referto radiologico"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Referral request</div>
@@ -366,7 +443,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Richiesta di consulto</div>
 	 *<!-- @formatter:on -->
 	 */
-	REFERRAL_REQUEST("721927009", "2.16.840.1.113883.6.96", "Referral note (record artifact)", "Referral request", "Konsilauftrag (allgemein)", "Demande de consultation", "Richiesta di consulto"),
+	REFERRAL_REQUEST("721927009", "2.16.840.1.113883.6.96", "Referral note (record artifact)",
+			"Referral request", "Konsilauftrag (allgemein)", "Demande de consultation",
+			"Richiesta di consulto"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Transfer summary report</div>
@@ -375,7 +454,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Rapporto di trasferimento</div>
 	 *<!-- @formatter:on -->
 	 */
-	TRANSFER_SUMMARY_REPORT("371535009", "2.16.840.1.113883.6.96", "Transfer summary report (record artifact)", "Transfer summary report", "Verlegungsbericht", "Rapport de transfert", "Rapporto di trasferimento"),
+	TRANSFER_SUMMARY_REPORT("371535009", "2.16.840.1.113883.6.96",
+			"Transfer summary report (record artifact)", "Transfer summary report",
+			"Verlegungsbericht", "Rapport de transfert", "Rapporto di trasferimento"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Ultrasound imaging report</div>
@@ -384,7 +465,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Referto ecografico</div>
 	 *<!-- @formatter:on -->
 	 */
-	ULTRASOUND_IMAGING_REPORT("4221000179107", "2.16.840.1.113883.6.96", "Ultrasound imaging report (record artifact)", "Ultrasound imaging report", "Ultraschall-Befund", "Rapport de l'ultrason", "Referto ecografico"),
+	ULTRASOUND_IMAGING_REPORT("4221000179107", "2.16.840.1.113883.6.96",
+			"Ultrasound imaging report (record artifact)", "Ultrasound imaging report",
+			"Ultraschall-Befund", "Rapport de l'ultrason", "Referto ecografico"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Wound report</div>
@@ -393,7 +476,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Rapporto sulle ferite</div>
 	 *<!-- @formatter:on -->
 	 */
-	WOUND_REPORT("721599005", "2.16.840.1.113883.6.96", "Wound care management note (record artifact)", "Wound report", "Wund-Befund", "Rapport sur les blessures", "Rapporto sulle ferite");
+	WOUND_REPORT("721599005", "2.16.840.1.113883.6.96",
+			"Wound care management note (record artifact)", "Wound report", "Wund-Befund",
+			"Rapport sur les blessures", "Rapporto sulle ferite");
 
 	/**
 	 *<!-- @formatter:off -->
@@ -782,8 +867,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.27";
 
 	/**
-	 * <div class="en">Name of the value set</div>
-	 * <div class="de">Name des Value Sets</div>
+	 * <div class="en">Name of the value set</div> <div class="de">Name des
+	 * Value Sets</div>
 	 */
 	public static final String VALUE_SET_NAME = "EprDocumentTypeCode";
 
@@ -855,9 +940,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
-	 * code</div>
-	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse)
-	 * eindeutiger Code</div>
+	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
+	 * dieser Klasse) eindeutiger Code</div>
 	 */
 	private String code;
 
@@ -874,9 +958,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div>
-	 * <div class="de">Instanziiert dieses Enum Object mittels eines Codes
-	 * und einem Display Name</div>.
+	 * Display Name</div> <div class="de">Instanziiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>.
 	 *
 	 * @param code
 	 *            code
@@ -893,7 +976,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	TypeCode(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	TypeCode(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
@@ -943,15 +1027,17 @@ public enum TypeCode implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Gets the display name defined by the language param. If
-	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
-	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
+	 * there is no english translation, the default display name is
+	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
+	 * falls es keine Englische Übersetzung gibt, wird der default-Name
+	 * zurückgegeben.</div>
 	 *
 	 * @param languageCode
 	 *            the language code to get the display name for
 	 * @return returns the display name in the desired language. if language not
 	 *         found, display name in german will returned
 	 */
+	@Override
 	public String getDisplayName(LanguageCode languageCode) {
 		String displayName = displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
@@ -961,8 +1047,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the value set identifier.</div> <div class="de">Liefert
-	 * den Value Set Identifikator.</div>
+	 * <div class="en">Gets the value set identifier.</div>
+	 * <div class="de">Liefert den Value Set Identifikator.</div>
 	 *
 	 * @return <div class="en">the value set identifier</div>
 	 */

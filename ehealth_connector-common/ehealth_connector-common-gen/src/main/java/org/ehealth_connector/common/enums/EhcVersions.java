@@ -30,7 +30,8 @@ public enum EhcVersions {
 	/**
 	 * OID eHealthConnector Proof of Concept
 	 */
-	EHealthConnectorR201402("2.16.756.5.30.1.139.1.1.1", "eHealthConnector Proof of Concept", "20140211"),
+	EHealthConnectorR201402("2.16.756.5.30.1.139.1.1.1", "eHealthConnector Proof of Concept",
+			"20140211"),
 
 	/**
 	 * OID eHealthConnector R201503
@@ -61,7 +62,8 @@ public enum EhcVersions {
 	 * OID eHealthConnector Rxxxxxx
 	 */
 	// This is preparation for next release, only
-	EHealthConnectorRxxxxxx("2.16.756.5.30.1.139.1.1.8", "eHealthConnector Rxxxxxx", "todo release date");
+	EHealthConnectorRxxxxxx("2.16.756.5.30.1.139.1.1.8", "eHealthConnector Rxxxxxx",
+			"todo release date");
 
 	public static EhcVersions getCurrentVersion() {
 		return EhcVersions.EHealthConnectorDev;

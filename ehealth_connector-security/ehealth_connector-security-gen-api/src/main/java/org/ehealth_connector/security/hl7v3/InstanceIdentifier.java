@@ -47,7 +47,7 @@ public interface InstanceIdentifier {
 	public static final QName TYPE_NAME = new QName("urn:hl7-org:v3", TYPE_LOCAL_NAME, "hl7");
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the value of the extension.</div>
 	 * <div class="de">Methode um den Wert der extension zu erhalten.</div>
@@ -64,7 +64,7 @@ public interface InstanceIdentifier {
 	String getExtension();
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the value of the root.</div>
 	 * <div class="de">Methode um den Wert von Root zu erhalten.</div>
@@ -81,7 +81,7 @@ public interface InstanceIdentifier {
 	String getRoot();
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the extension.</div>
 	 * <div class="de">Methode um die Extension zu setzten.</div>
@@ -98,7 +98,7 @@ public interface InstanceIdentifier {
 	void setExtension(String value);
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the root.</div>
 	 * <div class="de">Methode um die Root zu setzten.</div>

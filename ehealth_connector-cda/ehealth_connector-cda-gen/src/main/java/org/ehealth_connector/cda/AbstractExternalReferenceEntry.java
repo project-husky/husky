@@ -100,7 +100,8 @@ public abstract class AbstractExternalReferenceEntry
 		int result = 1;
 
 		result = (prime * result) + (this.getExternalDocumentEntry() != null
-				? this.getExternalDocumentEntry().hashCode() : 0);
+				? this.getExternalDocumentEntry().hashCode()
+				: 0);
 
 		return result;
 	}

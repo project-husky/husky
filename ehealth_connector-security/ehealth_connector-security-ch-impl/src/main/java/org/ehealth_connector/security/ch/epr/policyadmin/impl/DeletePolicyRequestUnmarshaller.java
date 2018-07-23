@@ -35,12 +35,6 @@ import org.w3c.dom.Element;
 public class DeletePolicyRequestUnmarshaller extends AbstractXMLObjectUnmarshaller {
 
 	@Override
-	public OpenSamlDeletePolicyRequest unmarshall(Element domElement)
-			throws UnmarshallingException {
-		return (OpenSamlDeletePolicyRequest) super.unmarshall(domElement);
-	}
-
-	@Override
 	protected void processChildElement(XMLObject parentXMLObject, XMLObject childXMLObject)
 			throws UnmarshallingException {
 		if (childXMLObject instanceof org.opensaml.saml.saml2.core.Assertion) {
@@ -50,6 +44,12 @@ public class DeletePolicyRequestUnmarshaller extends AbstractXMLObjectUnmarshall
 		} else {
 			super.processChildElement(parentXMLObject, childXMLObject);
 		}
+	}
+
+	@Override
+	public OpenSamlDeletePolicyRequest unmarshall(Element domElement)
+			throws UnmarshallingException {
+		return (OpenSamlDeletePolicyRequest) super.unmarshall(domElement);
 	}
 
 }

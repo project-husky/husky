@@ -105,7 +105,7 @@ public class DispenseItemEntryTest {
 
 		entry.setMedicationFullfillmentInstructions("#abcnew");
 		assertEquals("#abcnew", entry.getMedicationFullfillmentInstructions().getTextReference());
-		
+
 		MedicationFullfillmentInstructionsEntry medicalFullfillmentInstructionDisrupt = new MedicationFullfillmentInstructionsEntry();
 		medicalFullfillmentInstructionDisrupt.setTextReference("#ghi");
 		entry.setMedicationFullfillmentInstructions(medicalFullfillmentInstructionDisrupt);

@@ -127,7 +127,8 @@ public class AuthorChTest {
 		assertTrue(isEqual(testIdentificator1, b.getIds().get(0)));
 
 		b.setRoleFunction(AuthorRole.HEALTHCARE_PROFESSIONAL);
-		assertEquals(AuthorRole.HEALTHCARE_PROFESSIONAL.getCode().getCode(), b.getRoleFunction().getCode());
+		assertEquals(AuthorRole.HEALTHCARE_PROFESSIONAL.getCode().getCode(),
+				b.getRoleFunction().getCode());
 
 		b.setSpeciality(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG);
 		assertEquals(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG,
@@ -143,7 +144,8 @@ public class AuthorChTest {
 		b1.setSpeciality(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG);
 
 		assertTrue(AbstractTestHelper.isEqual(testIdentificator2, b1.getIds().get(0)));
-		assertEquals(AuthorRole.HEALTHCARE_PROFESSIONAL.getCode().getCode(), b1.getRoleFunction().getCode());
+		assertEquals(AuthorRole.HEALTHCARE_PROFESSIONAL.getCode().getCode(),
+				b1.getRoleFunction().getCode());
 		assertEquals(AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG,
 				b1.getSpecialityEnum());
 

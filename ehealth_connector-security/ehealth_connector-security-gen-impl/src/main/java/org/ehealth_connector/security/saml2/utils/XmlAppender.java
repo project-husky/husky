@@ -33,7 +33,7 @@ import org.w3c.dom.Element;
 public final class XmlAppender {
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to attach a xml fragment to an other xml element.</div>
 	 * <div class="de">Method um ein xml Fragment an eine anderes xml element anzuhängen.</div>

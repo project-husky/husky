@@ -46,6 +46,31 @@ public class MedicationTreatmentPlanItemReferenceEntry extends MedicationTreatme
 	/**
 	 * Instantiates a new medication treatment plan item reference entry.
 	 *
+	 * @param itemId
+	 *            IF of referenced item
+	 */
+	public MedicationTreatmentPlanItemReferenceEntry(Identificator itemId) {
+
+		this(PHARMFactory.eINSTANCE.createMedicationTreatmentPlanItemReferenceEntry().init());
+
+		final CD cd = DatatypesFactory.eINSTANCE.createCD();
+
+		cd.setCode(PharmacyItemTypeList.MTPItem.getCode().getCode());
+		cd.setCodeSystem(PharmacyItemTypeList.CODE_SYSTEM_OID);
+		cd.setCodeSystemName(PharmacyItemTypeList.CODE_SYSTEM_NAME);
+		cd.setDisplayName(PharmacyItemTypeList.MTPItem.getCode().getDisplayName());
+
+		this.getMdht().setCode(cd);
+
+		this.getMdht().setRouteCode(null);
+		this.getMdht().setMoodCode(x_DocumentSubstanceMood.INT);
+		this.getMdht().setClassCode(ActClass.SBADM);
+		this.getMdht().getIds().add(itemId.getIi());
+	}
+
+	/**
+	 * Instantiates a new medication treatment plan item reference entry.
+	 *
 	 * @param mdht
 	 *            the mdht
 	 */
@@ -72,31 +97,5 @@ public class MedicationTreatmentPlanItemReferenceEntry extends MedicationTreatme
 		consumable.setManufacturedProduct(manufacturedProduct);
 		this.getMdht().setConsumable(consumable);
 	}
-
-	/**
-	 * Instantiates a new medication treatment plan item reference entry.
-	 *
-	 * @param itemId
-	 *            IF of referenced item
-	 */
-	public MedicationTreatmentPlanItemReferenceEntry(Identificator itemId) {
-
-		this(PHARMFactory.eINSTANCE.createMedicationTreatmentPlanItemReferenceEntry().init());
-
-		final CD cd = DatatypesFactory.eINSTANCE.createCD();
-
-		cd.setCode(PharmacyItemTypeList.MTPItem.getCode().getCode());
-		cd.setCodeSystem(PharmacyItemTypeList.CODE_SYSTEM_OID);
-		cd.setCodeSystemName(PharmacyItemTypeList.CODE_SYSTEM_NAME);
-		cd.setDisplayName(PharmacyItemTypeList.MTPItem.getCode().getDisplayName());
-
-		this.getMdht().setCode(cd);
-
-		this.getMdht().setRouteCode(null);
-		this.getMdht().setMoodCode(x_DocumentSubstanceMood.INT);
-		this.getMdht().setClassCode(ActClass.SBADM);
-		this.getMdht().getIds().add(itemId.getIi());
-	}
-
 
 }

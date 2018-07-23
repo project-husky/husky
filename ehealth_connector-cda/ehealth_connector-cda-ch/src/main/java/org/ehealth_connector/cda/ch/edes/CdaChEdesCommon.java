@@ -25,13 +25,13 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.cda.BaseAllergyProblem;
 import org.ehealth_connector.cda.AbstractCda;
+import org.ehealth_connector.cda.AllergyConcern;
+import org.ehealth_connector.cda.BaseAllergyProblem;
 import org.ehealth_connector.cda.BaseObservation;
 import org.ehealth_connector.cda.BaseOrganizer;
 import org.ehealth_connector.cda.BaseProblemConcern;
 import org.ehealth_connector.cda.BaseProblemEntry;
-import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.ch.ActiveProblemConcern;
 import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.ProblemConcern;

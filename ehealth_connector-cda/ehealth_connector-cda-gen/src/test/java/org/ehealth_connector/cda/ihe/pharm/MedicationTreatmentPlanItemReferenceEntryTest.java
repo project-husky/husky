@@ -38,22 +38,10 @@ public class MedicationTreatmentPlanItemReferenceEntryTest {
 	private XPath xpath = PharmXPath.getXPath();
 
 	@Test
-	public void testIdentifier() throws Exception {
-
-		final MedicationTreatmentPlanItemReferenceEntry entry = new MedicationTreatmentPlanItemReferenceEntry();
-
-		entry.setId(new Identificator("oid", "id"));
-		final Document document = entry.getDocument();
-
-		XPathExpression expr = xpath.compile("//id[@root='oid' and @extension='id']");
-		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
-		assertEquals(1, nodes.getLength());
-	}
-
-	@Test
 	public void testCreation() throws Exception {
 
-		final MedicationTreatmentPlanItemReferenceEntry entry = new MedicationTreatmentPlanItemReferenceEntry(new Identificator("oid", "id"));
+		final MedicationTreatmentPlanItemReferenceEntry entry = new MedicationTreatmentPlanItemReferenceEntry(
+				new Identificator("oid", "id"));
 		final Document document = entry.getDocument();
 
 		XPathExpression expr = xpath.compile("//id[@root='oid' and @extension='id']");
@@ -72,6 +60,19 @@ public class MedicationTreatmentPlanItemReferenceEntryTest {
 		expr = xpath
 				.compile("//consumable/manufacturedProduct/manufacturedMaterial[@nullFlavor='NA']");
 		nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
+		assertEquals(1, nodes.getLength());
+	}
+
+	@Test
+	public void testIdentifier() throws Exception {
+
+		final MedicationTreatmentPlanItemReferenceEntry entry = new MedicationTreatmentPlanItemReferenceEntry();
+
+		entry.setId(new Identificator("oid", "id"));
+		final Document document = entry.getDocument();
+
+		XPathExpression expr = xpath.compile("//id[@root='oid' and @extension='id']");
+		NodeList nodes = (NodeList) expr.evaluate(document, XPathConstants.NODESET);
 		assertEquals(1, nodes.getLength());
 	}
 

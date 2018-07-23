@@ -148,8 +148,8 @@ public class ActiveProblemConcern extends ProblemConcern {
 	 *            problem concern status</div> <div class="it"> problem concern
 	 *            status</div>
 	 */
-	public ActiveProblemConcern(String concern, Date begin, Date end,
-			BaseProblemEntry problemEntry, ProblemConcernStatusCode problemConcernStatus) {
+	public ActiveProblemConcern(String concern, Date begin, Date end, BaseProblemEntry problemEntry,
+			ProblemConcernStatusCode problemConcernStatus) {
 		super(concern, problemEntry, problemConcernStatus, begin, end);
 	}
 }

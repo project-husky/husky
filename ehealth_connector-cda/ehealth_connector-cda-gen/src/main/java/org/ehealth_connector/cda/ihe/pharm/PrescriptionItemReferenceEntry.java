@@ -46,6 +46,31 @@ public class PrescriptionItemReferenceEntry extends PrescriptionItemEntry {
 	/**
 	 * Instantiates a new prescription item reference entry.
 	 *
+	 * @param itemId
+	 *            ID of the referenced item
+	 */
+	public PrescriptionItemReferenceEntry(Identificator itemId) {
+
+		this(PHARMFactory.eINSTANCE.createPrescriptionItemReferenceEntry().init());
+
+		final CD cd = DatatypesFactory.eINSTANCE.createCD();
+
+		cd.setCode(PharmacyItemTypeList.PREItem.getCode().getCode());
+		cd.setCodeSystem(PharmacyItemTypeList.CODE_SYSTEM_OID);
+		cd.setCodeSystemName(PharmacyItemTypeList.CODE_SYSTEM_NAME);
+		cd.setDisplayName(PharmacyItemTypeList.PREItem.getCode().getDisplayName());
+
+		this.getMdht().setCode(cd);
+
+		this.getMdht().setRouteCode(null);
+		this.getMdht().setMoodCode(x_DocumentSubstanceMood.INT);
+		this.getMdht().setClassCode(ActClass.SBADM);
+		this.getMdht().getIds().add(itemId.getIi());
+	}
+
+	/**
+	 * Instantiates a new prescription item reference entry.
+	 *
 	 * @param mdht
 	 *            the mdht
 	 */
@@ -72,31 +97,5 @@ public class PrescriptionItemReferenceEntry extends PrescriptionItemEntry {
 		consumable.setManufacturedProduct(manufacturedProduct);
 		this.getMdht().setConsumable(consumable);
 	}
-
-	/**
-	 * Instantiates a new prescription item reference entry.
-	 *
-	 * @param itemId
-	 *            ID of the referenced item
-	 */
-	public PrescriptionItemReferenceEntry(Identificator itemId) {
-
-		this(PHARMFactory.eINSTANCE.createPrescriptionItemReferenceEntry().init());
-
-		final CD cd = DatatypesFactory.eINSTANCE.createCD();
-
-		cd.setCode(PharmacyItemTypeList.PREItem.getCode().getCode());
-		cd.setCodeSystem(PharmacyItemTypeList.CODE_SYSTEM_OID);
-		cd.setCodeSystemName(PharmacyItemTypeList.CODE_SYSTEM_NAME);
-		cd.setDisplayName(PharmacyItemTypeList.PREItem.getCode().getDisplayName());
-
-		this.getMdht().setCode(cd);
-
-		this.getMdht().setRouteCode(null);
-		this.getMdht().setMoodCode(x_DocumentSubstanceMood.INT);
-		this.getMdht().setClassCode(ActClass.SBADM);
-		this.getMdht().getIds().add(itemId.getIi());
-	}
-
 
 }

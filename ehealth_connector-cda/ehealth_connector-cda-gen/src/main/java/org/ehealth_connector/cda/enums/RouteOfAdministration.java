@@ -56,7 +56,8 @@ public enum RouteOfAdministration {
 	 * <div class="de">Inhalation, Vernebelung, nasal</div>
 	 * <div class="fr">Inhalation par nébulisation nasale</div>
 	 */
-	INHALATION_NEBULIZATION_NASAL("NASNEB", "Inhalation, nebulization, nasal", "Inhalation, nébulisation, nasal"),
+	INHALATION_NEBULIZATION_NASAL("NASNEB", "Inhalation, nebulization, nasal",
+			"Inhalation, nébulisation, nasal"),
 
 	/**
 	 * <div class="en"> injection, intra-abdominal</div><div class="fr">intra
@@ -122,7 +123,8 @@ public enum RouteOfAdministration {
 	 * <div class="en"> instillation, nasogastric</div><div class="fr">par sonde
 	 * naso gastrique</div>
 	 */
-	INSTILLATION_NASOGASTRIC("NASOGASINSTIL", "instillation, nasogastric", "par sonde naso gastrique"),
+	INSTILLATION_NASOGASTRIC("NASOGASINSTIL", "instillation, nasogastric",
+			"par sonde naso gastrique"),
 
 	/**
 	 * <div class="en"> instillation, otic</div><div class="fr">dans
@@ -170,7 +172,7 @@ public enum RouteOfAdministration {
 
 	public static final String CODE_SYSTEM_NAME = "RouteOfAdministration";
 	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.112";
-	
+
 	public static final String DIFFUSION_TRANSDERMAL_CODE = "TRNSDERMD";
 	public static final String INHALATION_NEBULIZATION_NASAL_CODE = "NASNEB";
 	public static final String INJECTION_INTRADERMAL_CODE = "IDINJ";
@@ -233,7 +235,7 @@ public enum RouteOfAdministration {
 		}
 		return false;
 	}
-	
+
 	/** The code. */
 	private String code;
 
@@ -290,8 +292,8 @@ public enum RouteOfAdministration {
 				displayName = displayNameEn;
 				break;
 			}
-		}
-		else displayName = displayNameEn;
+		} else
+			displayName = displayNameEn;
 		ce.setDisplayName(displayName);
 		return ce;
 	}
@@ -324,9 +326,9 @@ public enum RouteOfAdministration {
 				displayName = displayNameEn;
 				break;
 			}
-		}
-		else displayName = displayNameEn;
-		
+		} else
+			displayName = displayNameEn;
+
 		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, CODE_SYSTEM_NAME, displayName);
 		return ehcCode;
 	}

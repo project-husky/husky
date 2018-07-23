@@ -35,13 +35,16 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 public enum QualabQcc {
 
 	/** <div class="en">Centre Suisse de Contrôle de Qualité CSCQ</div>. */
-	CENTRE_SUISSE_DE_CONTRÔLE_DE_QUALITÉ_CSCQ("7601001326507", "Centre Suisse de Contrôle de Qualité CSCQ", "20150101", ""),
+	CENTRE_SUISSE_DE_CONTRÔLE_DE_QUALITÉ_CSCQ("7601001326507",
+			"Centre Suisse de Contrôle de Qualité CSCQ", "20150101", ""),
 
 	/** <div class="en">Interregionale Blutspende SRK AG</div>. */
-	INTERREGIONALE_BLUTSPENDE_SRK_AG("7601001363540", "Interregionale Blutspende SRK AG", "20150101", ""),
+	INTERREGIONALE_BLUTSPENDE_SRK_AG("7601001363540", "Interregionale Blutspende SRK AG",
+			"20150101", ""),
 
 	/** <div class="en">Verein für medizinische Qualitätskontrolle</div>. */
-	VEREIN_FÜR_MEDIZINISCHE_QUALITÄTSKONTROLLE("7601001402805", "Verein für medizinische Qualitätskontrolle", "20150101", "");
+	VEREIN_FÜR_MEDIZINISCHE_QUALITÄTSKONTROLLE("7601001402805",
+			"Verein für medizinische Qualitätskontrolle", "20150101", "");
 
 	/**
 	 * <div class="en">Code for Centre Suisse de Contrôle de Qualité CSCQ</div>.

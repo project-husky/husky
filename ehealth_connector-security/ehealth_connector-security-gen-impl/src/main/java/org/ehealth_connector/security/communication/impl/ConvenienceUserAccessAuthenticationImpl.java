@@ -49,7 +49,7 @@ public class ConvenienceUserAccessAuthenticationImpl
 
 	/**
 	 * Instantiates a new instance and initializes the OpenSaml Libraries.
-	 * 
+	 *
 	 * @throws InitializationException
 	 */
 	public ConvenienceUserAccessAuthenticationImpl() throws InitializationException {

@@ -46,30 +46,8 @@ public class DispenseItemReferenceEntry extends DispenseItemEntry {
 	/**
 	 * Instantiates a new dispense item reference entry.
 	 *
-	 * @param mdht
-	 *            the mdht
-	 */
-	public DispenseItemReferenceEntry(
-			org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemReferenceEntry mdht) {
-		super(mdht);
-		final String templateId = this.getTemplateId();
-		this.getMdht().getTemplateIds().clear();
-		this.getMdht().getTemplateIds().add(new Identificator(templateId, null).getIi());
-		final Product product = CDAFactory.eINSTANCE.createProduct();
-		final ManufacturedProduct manufacturedProduct = CDAFactory.eINSTANCE
-				.createManufacturedProduct();
-		final Material material = CDAFactory.eINSTANCE.createMaterial();
-		material.setNullFlavor(NullFlavor.NA);
-		manufacturedProduct.setManufacturedMaterial(material);
-		product.setManufacturedProduct(manufacturedProduct);
-		this.getMdht().setProduct(product);
-	}
-	
-	/**
-	 * Instantiates a new dispense item reference entry.
-	 *
 	 * @param itemId
-	 * 				ID of referenced item
+	 *            ID of referenced item
 	 */
 	public DispenseItemReferenceEntry(Identificator itemId) {
 
@@ -89,6 +67,26 @@ public class DispenseItemReferenceEntry extends DispenseItemEntry {
 		this.getMdht().getIds().add(itemId.getIi());
 	}
 
-
+	/**
+	 * Instantiates a new dispense item reference entry.
+	 *
+	 * @param mdht
+	 *            the mdht
+	 */
+	public DispenseItemReferenceEntry(
+			org.openhealthtools.mdht.uml.cda.ihe.pharm.DispenseItemReferenceEntry mdht) {
+		super(mdht);
+		final String templateId = this.getTemplateId();
+		this.getMdht().getTemplateIds().clear();
+		this.getMdht().getTemplateIds().add(new Identificator(templateId, null).getIi());
+		final Product product = CDAFactory.eINSTANCE.createProduct();
+		final ManufacturedProduct manufacturedProduct = CDAFactory.eINSTANCE
+				.createManufacturedProduct();
+		final Material material = CDAFactory.eINSTANCE.createMaterial();
+		material.setNullFlavor(NullFlavor.NA);
+		manufacturedProduct.setManufacturedMaterial(material);
+		product.setManufacturedProduct(manufacturedProduct);
+		this.getMdht().setProduct(product);
+	}
 
 }

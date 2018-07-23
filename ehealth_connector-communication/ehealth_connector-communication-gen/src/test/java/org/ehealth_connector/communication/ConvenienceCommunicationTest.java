@@ -114,6 +114,13 @@ public class ConvenienceCommunicationTest {
 		testAssertion = new AssertionDeserializerImpl().fromXmlByteArray(aByteArray);
 	}
 
+	private byte[] readInputFile(URL url) throws IOException, URISyntaxException {
+
+		final File file = new File(url.toURI());
+		final Path path = Paths.get(file.getParent(), file.getName());
+		return Files.readAllBytes(path);
+	}
+
 	@Test
 	@Ignore
 	public void testAddDocument() {
@@ -124,15 +131,6 @@ public class ConvenienceCommunicationTest {
 		} catch (final Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	@Test
-	public void testCreateXUAAssertion() throws SerializeException {
-		final Element assertionElement = new AssertionSerializerImpl().toXmlElement(testAssertion);
-		final XUAAssertion ohtAssertion = new XUAAssertion(assertionElement);
-		final String atnaUserName = ohtAssertion.getAtnaUsername();
-		assertNotNull(atnaUserName);
-		assertEquals("<7601000080776@https://ehealthsuisse.ihe-europe.net/STS>", atnaUserName);
 	}
 
 	@Test
@@ -151,10 +149,12 @@ public class ConvenienceCommunicationTest {
 
 	}
 
-	private byte[] readInputFile(URL url) throws IOException, URISyntaxException {
-
-		final File file = new File(url.toURI());
-		final Path path = Paths.get(file.getParent(), file.getName());
-		return Files.readAllBytes(path);
+	@Test
+	public void testCreateXUAAssertion() throws SerializeException {
+		final Element assertionElement = new AssertionSerializerImpl().toXmlElement(testAssertion);
+		final XUAAssertion ohtAssertion = new XUAAssertion(assertionElement);
+		final String atnaUserName = ohtAssertion.getAtnaUsername();
+		assertNotNull(atnaUserName);
+		assertEquals("<7601000080776@https://ehealthsuisse.ihe-europe.net/STS>", atnaUserName);
 	}
 }

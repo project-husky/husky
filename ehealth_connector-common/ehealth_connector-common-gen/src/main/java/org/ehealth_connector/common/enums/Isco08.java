@@ -36,7 +36,8 @@ public enum Isco08 {
 	 * <div class="en">Medical doctors</div> <div class="de"></div>
 	 * <div class="fr"></div> <div class="it"></div>
 	 */
-	MEDICAL_AND_PATHOLOGY_LABORATORY_TECHNICIANS("3212", "Medical and pathology laboratory technicians");
+	MEDICAL_AND_PATHOLOGY_LABORATORY_TECHNICIANS("3212",
+			"Medical and pathology laboratory technicians");
 
 	public static final String CODE_SYSTEM_NAME = "ISCO-08";
 

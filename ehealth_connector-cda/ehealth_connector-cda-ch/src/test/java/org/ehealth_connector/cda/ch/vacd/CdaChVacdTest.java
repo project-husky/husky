@@ -32,11 +32,11 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
 
-import org.ehealth_connector.cda.BaseAllergyConcern;
-import org.ehealth_connector.cda.BaseAllergyProblem;
 import org.ehealth_connector.cda.AbstractPregnancyHistory;
 import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.AllergyProblem;
+import org.ehealth_connector.cda.BaseAllergyConcern;
+import org.ehealth_connector.cda.BaseAllergyProblem;
 import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.Problem;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;

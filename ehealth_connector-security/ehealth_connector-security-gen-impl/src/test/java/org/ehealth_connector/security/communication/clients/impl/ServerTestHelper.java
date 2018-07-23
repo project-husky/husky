@@ -52,6 +52,18 @@ public abstract class ServerTestHelper extends InitializerTestHelper {
 
 	private static ServerBootstrap bootstrap;
 
+	protected static int getHttpPort() {
+		return httpPort;
+	}
+
+	protected static HttpServer getServer() {
+		return server;
+	}
+
+	public static HttpRequestHandler registerHandler() {
+		return null;
+	}
+
 	@BeforeClass
 	public static void setUpBefore() throws IOException {
 		final SocketConfig socketConfig = SocketConfig.custom().setSoTimeout(15000)
@@ -79,18 +91,6 @@ public abstract class ServerTestHelper extends InitializerTestHelper {
 	@AfterClass
 	public static void tearDownAfter() {
 		server.stop();
-	}
-
-	protected static int getHttpPort() {
-		return httpPort;
-	}
-
-	protected static HttpServer getServer() {
-		return server;
-	}
-
-	public static HttpRequestHandler registerHandler() {
-		return null;
 	}
 
 }

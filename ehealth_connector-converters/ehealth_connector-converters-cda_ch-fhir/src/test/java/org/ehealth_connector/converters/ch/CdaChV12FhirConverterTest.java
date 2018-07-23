@@ -28,7 +28,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * 
+ *
  * @author roeland
  * @version 1.0
  * @since Jan 2, 2018 11:56:26 AM
@@ -36,8 +36,13 @@ import org.junit.Test;
  */
 public class CdaChV12FhirConverterTest {
 
+	public class MyCdaChFhirConverter extends AbstractCdaChV12FhirConverter {
+
+	}
+
 	private AbstractCdaChV12FhirConverter converter;
 	private String testComment;
+
 	private String testText;
 
 	/**
@@ -293,10 +298,6 @@ public class CdaChV12FhirConverterTest {
 	@Ignore
 	public void testIsDocType() {
 		fail("Not yet implemented");
-	}
-
-	public class MyCdaChFhirConverter extends AbstractCdaChV12FhirConverter {
-
 	}
 
 }

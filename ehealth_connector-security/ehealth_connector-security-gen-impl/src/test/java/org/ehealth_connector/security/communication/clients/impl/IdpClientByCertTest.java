@@ -137,7 +137,7 @@ public class IdpClientByCertTest extends InitializerTestHelper {
 	/**
 	 * Test method for
 	 * {@link org.ehealth_connector.security.communication.clients.impl.IdpClientByCert#getHttpClient()}.
-	 * 
+	 *
 	 * @throws ClientSendException
 	 */
 	@Test
@@ -161,7 +161,7 @@ public class IdpClientByCertTest extends InitializerTestHelper {
 	/**
 	 * Test method for
 	 * {@link org.ehealth_connector.security.communication.clients.impl.IdpClientByCert#send(org.ehealth_connector.security.authentication.AuthnRequest)}.
-	 * 
+	 *
 	 * @throws ClientSendException
 	 */
 	@Test

@@ -20,7 +20,7 @@ package org.ehealth_connector.converters.ch;
 import java.net.URL;
 
 /**
- * 
+ *
  * @author roeland
  * @version 1.0
  * @since Jan 2, 2018 1:25:16 PM

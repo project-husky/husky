@@ -35,18 +35,18 @@ import org.w3c.dom.Element;
 public class EprPolicyRepositoryResponseUnmarshaller extends AbstractXMLObjectUnmarshaller {
 
 	@Override
-	public OpenSamlEprPolicyRepositoryResponse unmarshall(Element domElement)
-			throws UnmarshallingException {
-		return (OpenSamlEprPolicyRepositoryResponse) super.unmarshall(domElement);
-	}
-
-	@Override
 	protected void processAttribute(XMLObject xmlObject, Attr attribute)
 			throws UnmarshallingException {
 		final OpenSamlEprPolicyRepositoryResponse reponse = (OpenSamlEprPolicyRepositoryResponse) xmlObject;
 		if ("status".equalsIgnoreCase(attribute.getName())) {
 			reponse.setStatus(attribute.getValue());
 		}
+	}
+
+	@Override
+	public OpenSamlEprPolicyRepositoryResponse unmarshall(Element domElement)
+			throws UnmarshallingException {
+		return (OpenSamlEprPolicyRepositoryResponse) super.unmarshall(domElement);
 	}
 
 }

@@ -19,10 +19,11 @@ package org.ehealth_connector.common.ch.enums;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.annotation.Generated;
+
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.ch.enums.ValueSetEnumInterface;
 
 /**
  *<!-- @formatter:off -->
@@ -47,7 +48,9 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Consulente per l'allattamento</div>
 	 *<!-- @formatter:on -->
 	 */
-	BREAST_FEEDING_CONSULTANT("225726006", "2.16.840.1.113883.6.96", "Lactation consultant (occupation)", "Breast Feeding Consultant", "Stillberaterin", "Consultante en lactation", "Consulente per l'allattamento"),
+	BREAST_FEEDING_CONSULTANT("225726006", "2.16.840.1.113883.6.96",
+			"Lactation consultant (occupation)", "Breast Feeding Consultant", "Stillberaterin",
+			"Consultante en lactation", "Consulente per l'allattamento"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Chiropractor</div>
@@ -56,7 +59,8 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Chiropratico</div>
 	 *<!-- @formatter:on -->
 	 */
-	CHIROPRACTOR("3842006", "2.16.840.1.113883.6.96", "Chiropractor (occupation)", "Chiropractor", "Chiropraktiker", "Chiropracteur", "Chiropratico"),
+	CHIROPRACTOR("3842006", "2.16.840.1.113883.6.96", "Chiropractor (occupation)", "Chiropractor",
+			"Chiropraktiker", "Chiropracteur", "Chiropratico"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Complementary therapist</div>
@@ -65,7 +69,10 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Terapista complementare</div>
 	 *<!-- @formatter:on -->
 	 */
-	COMPLEMENTARY_THERAPIST("224609002", "2.16.840.1.113883.6.96", "Complementary health worker (occupation)", "Complementary therapist", "Komplementärmediziner", "Thérapeute en médecine alternative et complémentaire", "Terapista complementare"),
+	COMPLEMENTARY_THERAPIST("224609002", "2.16.840.1.113883.6.96",
+			"Complementary health worker (occupation)", "Complementary therapist",
+			"Komplementärmediziner", "Thérapeute en médecine alternative et complémentaire",
+			"Terapista complementare"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Dentist</div>
@@ -74,7 +81,8 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Dentista</div>
 	 *<!-- @formatter:on -->
 	 */
-	DENTIST("106289002", "2.16.840.1.113883.6.96", "Dentist (occupation)", "Dentist", "Zahnarzt", "Dentiste", "Dentista"),
+	DENTIST("106289002", "2.16.840.1.113883.6.96", "Dentist (occupation)", "Dentist", "Zahnarzt",
+			"Dentiste", "Dentista"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Dietitian</div>
@@ -83,7 +91,8 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Nutrizionista</div>
 	 *<!-- @formatter:on -->
 	 */
-	DIETITIAN("159033005", "2.16.840.1.113883.6.96", "Dietitian (occupation)", "Dietitian", "Ernährungsberater", "Diététicien", "Nutrizionista"),
+	DIETITIAN("159033005", "2.16.840.1.113883.6.96", "Dietitian (occupation)", "Dietitian",
+			"Ernährungsberater", "Diététicien", "Nutrizionista"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Healthcare professional</div>
@@ -92,7 +101,10 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Altri professionisti della salute</div>
 	 *<!-- @formatter:on -->
 	 */
-	HEALTHCARE_PROFESSIONAL("223366009", "2.16.840.1.113883.6.96", "Healthcare professional (occupation)", "Healthcare professional", "Andere Gesundheitsfachperson", "Autre professionnel de la santé", "Altri professionisti della salute"),
+	HEALTHCARE_PROFESSIONAL("223366009", "2.16.840.1.113883.6.96",
+			"Healthcare professional (occupation)", "Healthcare professional",
+			"Andere Gesundheitsfachperson", "Autre professionnel de la santé",
+			"Altri professionisti della salute"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Laboratory technician</div>
@@ -101,7 +113,9 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Specialista di laboratorio</div>
 	 *<!-- @formatter:on -->
 	 */
-	LABORATORY_TECHNICIAN("159282002", "2.16.840.1.113883.6.96", " Laboratory technician (occupation)", "Laboratory technician", "Laborfachperson", "Spécialiste laboratoire", "Specialista di laboratorio"),
+	LABORATORY_TECHNICIAN("159282002", "2.16.840.1.113883.6.96",
+			" Laboratory technician (occupation)", "Laboratory technician", "Laborfachperson",
+			"Spécialiste laboratoire", "Specialista di laboratorio"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Midwife</div>
@@ -110,7 +124,8 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Ostetrica</div>
 	 *<!-- @formatter:on -->
 	 */
-	MIDWIFE("309453006", "2.16.840.1.113883.6.96", "Registered midwife (occupation)", "Midwife", "Hebamme", "Sage-femme", "Ostetrica"),
+	MIDWIFE("309453006", "2.16.840.1.113883.6.96", "Registered midwife (occupation)", "Midwife",
+			"Hebamme", "Sage-femme", "Ostetrica"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Occupational therapist</div>
@@ -119,7 +134,9 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Ergoterapista</div>
 	 *<!-- @formatter:on -->
 	 */
-	OCCUPATIONAL_THERAPIST("80546007", "2.16.840.1.113883.6.96", "Occupational therapist (occupation)", "Occupational therapist", "Ergotherapeut", "Ergothérapeute", "Ergoterapista"),
+	OCCUPATIONAL_THERAPIST("80546007", "2.16.840.1.113883.6.96",
+			"Occupational therapist (occupation)", "Occupational therapist", "Ergotherapeut",
+			"Ergothérapeute", "Ergoterapista"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Patient</div>
@@ -128,7 +145,8 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Paziente</div>
 	 *<!-- @formatter:on -->
 	 */
-	PATIENT("116154003", "2.16.840.1.113883.6.96", "Patient (person)", "Patient", "Patient", "Patient", "Paziente"),
+	PATIENT("116154003", "2.16.840.1.113883.6.96", "Patient (person)", "Patient", "Patient",
+			"Patient", "Paziente"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Pharmacist</div>
@@ -137,7 +155,8 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Farmacista</div>
 	 *<!-- @formatter:on -->
 	 */
-	PHARMACIST("46255001", "2.16.840.1.113883.6.96", "Pharmacist (occupation)", "Pharmacist", "Apotheker", "Pharmacien", "Farmacista"),
+	PHARMACIST("46255001", "2.16.840.1.113883.6.96", "Pharmacist (occupation)", "Pharmacist",
+			"Apotheker", "Pharmacien", "Farmacista"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Physician </div>
@@ -146,7 +165,8 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Medico</div>
 	 *<!-- @formatter:on -->
 	 */
-	PHYSICIAN("309343006", "2.16.840.1.113883.6.96", "Physician (occupation)", "Physician ", "Arzt", "Médecin", "Medico"),
+	PHYSICIAN("309343006", "2.16.840.1.113883.6.96", "Physician (occupation)", "Physician ", "Arzt",
+			"Médecin", "Medico"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Physiotherapist</div>
@@ -155,7 +175,8 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Fisioterapista</div>
 	 *<!-- @formatter:on -->
 	 */
-	PHYSIOTHERAPIST("36682004", "2.16.840.1.113883.6.96", "Physiotherapist (occupation)", "Physiotherapist", "Physiotherapeut", "Physiothérapeute", "Fisioterapista"),
+	PHYSIOTHERAPIST("36682004", "2.16.840.1.113883.6.96", "Physiotherapist (occupation)",
+			"Physiotherapist", "Physiotherapeut", "Physiothérapeute", "Fisioterapista"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Professional nurse</div>
@@ -164,7 +185,8 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Infermiere professionale</div>
 	 *<!-- @formatter:on -->
 	 */
-	PROFESSIONAL_NURSE("106292003", "2.16.840.1.113883.6.96", "Professional nurse (occupation)", "Professional nurse", "Pflegefachperson", "Infirmier", "Infermiere professionale"),
+	PROFESSIONAL_NURSE("106292003", "2.16.840.1.113883.6.96", "Professional nurse (occupation)",
+			"Professional nurse", "Pflegefachperson", "Infirmier", "Infermiere professionale"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Psychologist </div>
@@ -173,7 +195,8 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Psicologo</div>
 	 *<!-- @formatter:on -->
 	 */
-	PSYCHOLOGIST("59944000", "2.16.840.1.113883.6.96", "Psychologist (occupation)", "Psychologist ", "Psychologe", "Psychologue", "Psicologo"),
+	PSYCHOLOGIST("59944000", "2.16.840.1.113883.6.96", "Psychologist (occupation)", "Psychologist ",
+			"Psychologe", "Psychologue", "Psicologo"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Radiologist</div>
@@ -182,7 +205,8 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Radiologo</div>
 	 *<!-- @formatter:on -->
 	 */
-	RADIOLOGIST("66862007", "2.16.840.1.113883.6.96", "Radiologist (occupation)", "Radiologist", "Radiologe", "Radiologue", "Radiologo"),
+	RADIOLOGIST("66862007", "2.16.840.1.113883.6.96", "Radiologist (occupation)", "Radiologist",
+			"Radiologe", "Radiologue", "Radiologo"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Social worker</div>
@@ -191,7 +215,8 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Assistente sociale</div>
 	 *<!-- @formatter:on -->
 	 */
-	SOCIAL_WORKER("158933003", "2.16.840.1.113883.6.96", "Social caseworker (general) (occupation)", "Social worker", "Sozialdienstmitarbeiter", "Assistant social", "Assistente sociale"),
+	SOCIAL_WORKER("158933003", "2.16.840.1.113883.6.96", "Social caseworker (general) (occupation)",
+			"Social worker", "Sozialdienstmitarbeiter", "Assistant social", "Assistente sociale"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Speech therapist</div>
@@ -200,7 +225,9 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Logopedista</div>
 	 *<!-- @formatter:on -->
 	 */
-	SPEECH_THERAPIST("159026005", "2.16.840.1.113883.6.96", "Speech/language therapist (occupation)", "Speech therapist", "Logopäde", "Logopédiste", "Logopedista");
+	SPEECH_THERAPIST("159026005", "2.16.840.1.113883.6.96",
+			"Speech/language therapist (occupation)", "Speech therapist", "Logopäde", "Logopédiste",
+			"Logopedista");
 
 	/**
 	 *<!-- @formatter:off -->
@@ -389,8 +416,8 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.1.3";
 
 	/**
-	 * <div class="en">Name of the value set</div>
-	 * <div class="de">Name des Value Sets</div>
+	 * <div class="en">Name of the value set</div> <div class="de">Name des
+	 * Value Sets</div>
 	 */
 	public static final String VALUE_SET_NAME = "EprAuthorRole";
 
@@ -452,9 +479,8 @@ public enum AuthorRole implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
-	 * code</div>
-	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse)
-	 * eindeutiger Code</div>
+	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
+	 * dieser Klasse) eindeutiger Code</div>
 	 */
 	private String code;
 
@@ -471,9 +497,8 @@ public enum AuthorRole implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div>
-	 * <div class="de">Instanziiert dieses Enum Object mittels eines Codes
-	 * und einem Display Name</div>.
+	 * Display Name</div> <div class="de">Instanziiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>.
 	 *
 	 * @param code
 	 *            code
@@ -490,7 +515,8 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	AuthorRole(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	AuthorRole(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
@@ -540,15 +566,17 @@ public enum AuthorRole implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Gets the display name defined by the language param. If
-	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
-	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
+	 * there is no english translation, the default display name is
+	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
+	 * falls es keine Englische Übersetzung gibt, wird der default-Name
+	 * zurückgegeben.</div>
 	 *
 	 * @param languageCode
 	 *            the language code to get the display name for
 	 * @return returns the display name in the desired language. if language not
 	 *         found, display name in german will returned
 	 */
+	@Override
 	public String getDisplayName(LanguageCode languageCode) {
 		String displayName = displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
@@ -558,8 +586,8 @@ public enum AuthorRole implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the value set identifier.</div> <div class="de">Liefert
-	 * den Value Set Identifikator.</div>
+	 * <div class="en">Gets the value set identifier.</div>
+	 * <div class="de">Liefert den Value Set Identifikator.</div>
 	 *
 	 * @return <div class="en">the value set identifier</div>
 	 */

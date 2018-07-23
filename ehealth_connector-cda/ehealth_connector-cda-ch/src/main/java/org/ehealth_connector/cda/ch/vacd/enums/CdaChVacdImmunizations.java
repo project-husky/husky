@@ -38,7 +38,8 @@ public enum CdaChVacdImmunizations {
 	DIPHTHERIA("76668005", "Diphtheria vaccination (procedure)", "20130101", "", 1),
 
 	/** Haemophilus influenzae type b vaccination (procedure) */
-	HAEMOPHILUS("127787002", "Haemophilus influenzae type b vaccination (procedure)", "20130101", "", 5),
+	HAEMOPHILUS("127787002", "Haemophilus influenzae type b vaccination (procedure)", "20130101",
+			"", 5),
 
 	/** Hepatitis A immunization (procedure) */
 	HEPA("243789007", "Hepatitis A immunization (procedure)", "20130101", "", 7),
@@ -62,7 +63,8 @@ public enum CdaChVacdImmunizations {
 	MUMPS("50583002", "Mumps vaccination (procedure)", "20130101", "", 9),
 
 	/** Vaccination for human papillomavirus (procedure) */
-	PAPILLOMAVIRUS("428570002", "Vaccination for human papillomavirus (procedure)", "20130101", "", 12),
+	PAPILLOMAVIRUS("428570002", "Vaccination for human papillomavirus (procedure)", "20130101", "",
+			12),
 
 	/** Pertussis vaccination (procedure) */
 	PERTUSSIS("39343008", "Pertussis vaccination (procedure)", "20130101", "", 3),
@@ -83,7 +85,8 @@ public enum CdaChVacdImmunizations {
 	TETANUS("127786006", "Tetanus vaccination (procedure)", "20130101", "", 2),
 
 	/** Tick-borne encephalitis vaccination (procedure) */
-	TICKBORNENCEPHALITIS("281658005", "Tick-borne encephalitis vaccination (procedure)", "20130101", "", 24),
+	TICKBORNENCEPHALITIS("281658005", "Tick-borne encephalitis vaccination (procedure)", "20130101",
+			"", 24),
 
 	/** Typhus vaccination (procedure) */
 	TYPHUS("30338008", "Typhus vaccination (procedure)", "20130101", "", 34),

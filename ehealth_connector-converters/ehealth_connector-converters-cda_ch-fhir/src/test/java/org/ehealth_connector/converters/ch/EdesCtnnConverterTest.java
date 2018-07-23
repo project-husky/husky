@@ -26,7 +26,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 /**
- * 
+ *
  * @author roeland
  * @version 1.0
  * @since Jan 2, 2018 12:08:14 PM

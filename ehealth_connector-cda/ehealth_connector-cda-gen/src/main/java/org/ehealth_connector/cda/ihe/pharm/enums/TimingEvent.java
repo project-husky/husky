@@ -80,19 +80,22 @@ public enum TimingEvent {
 	 * <div class="en"> Between breakfast and lunch</div><div class="fr">Entre
 	 * le petit-déjeuner et le repas de midi</div>
 	 */
-	BETWEEN_BREAKFAST_AND_LUNCH("ICM", "Between breakfast and lunch", "Entre le petit-déjeuner et le repas de midi"),
+	BETWEEN_BREAKFAST_AND_LUNCH("ICM", "Between breakfast and lunch",
+			"Entre le petit-déjeuner et le repas de midi"),
 
 	/**
 	 * <div class="en"> Between dinner and sleep</div><div class="fr">Entre le
 	 * repas du soir et l’heure du coucher</div>
 	 */
-	BETWEEN_DINNER_AND_SLEEP("ICV", "Between dinner and sleep", "Entre le repas du soir et l’heure du coucher"),
+	BETWEEN_DINNER_AND_SLEEP("ICV", "Between dinner and sleep",
+			"Entre le repas du soir et l’heure du coucher"),
 
 	/**
 	 * <div class="en"> Between lunch and dinner</div><div class="fr">Entre le
 	 * repas de midi et le repas du soir</div>
 	 */
-	BETWEEN_LUNCH_AND_DINNER("ICD", "Between lunch and dinner", "Entre le repas de midi et le repas du soir"),
+	BETWEEN_LUNCH_AND_DINNER("ICD", "Between lunch and dinner",
+			"Entre le repas de midi et le repas du soir"),
 
 	/**
 	 * <div class="en"> Between meals</div><div class="fr">Entre les repas</div>

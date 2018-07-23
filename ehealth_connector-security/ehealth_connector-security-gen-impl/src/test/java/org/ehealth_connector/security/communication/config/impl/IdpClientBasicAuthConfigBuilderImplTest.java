@@ -29,7 +29,7 @@ import org.junit.Test;
  * <div class="de">Testklasse um den IdpClientBasicAuthConfigBuilder zu testen.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
- * 
+ *
  * <!-- @formatter:on -->
  */
 public class IdpClientBasicAuthConfigBuilderImplTest {

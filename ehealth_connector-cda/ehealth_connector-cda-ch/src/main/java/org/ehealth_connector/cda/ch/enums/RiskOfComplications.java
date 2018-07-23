@@ -36,12 +36,15 @@ public enum RiskOfComplications {
 	 * <div class="fr">Asplénie anatomique ou fonctionnelle</div>
 	 * <div class="it">Asplenia anatomica o funzionale</div>
 	 */
-	ANATOMISCHE_ODER_FUNKTIONELLE_ASPLENIE("113001", "Anatomische oder funktionelle Asplenie", "Asplénie anatomique ou fonctionnelle", "Asplenia anatomica o funzionale", "20130101", ""),
+	ANATOMISCHE_ODER_FUNKTIONELLE_ASPLENIE("113001", "Anatomische oder funktionelle Asplenie",
+			"Asplénie anatomique ou fonctionnelle", "Asplenia anatomica o funzionale", "20130101",
+			""),
 	/**
 	 * <div class="de"> andere Lebererkrankung</div> <div class="fr">autre
 	 * maladie hépatique</div> <div class="it">altra malattia epatica</div>
 	 */
-	ANDERE_LEBERERKRANKUNG("114036", "andere Lebererkrankung", "autre maladie hépatique", "altra malattia epatica", "20150101", ""),
+	ANDERE_LEBERERKRANKUNG("114036", "andere Lebererkrankung", "autre maladie hépatique",
+			"altra malattia epatica", "20150101", ""),
 	/**
 	 * <div class="de">Andere Lungenerkrankungen (z.B. Mukoviszidose, Asthma
 	 * bronchiale, etc.)</div> <div class="fr">Autres maladies pulmonaires (ex :
@@ -49,12 +52,17 @@ public enum RiskOfComplications {
 	 * <div class="it">Altre malattie polmonari (p.es. mucoviscidosi, asma
 	 * trattata con aerosol, ecc.)</div>
 	 */
-	ANDERE_LUNGENERKRANKUNGEN_ZB_MUKOVISZIDOSE_ASTHMA_BRONCHIALE_ETC("114006", "Andere Lungenerkrankungen (z.B. Mukoviszidose, Asthma bronchiale, etc.)", "Autres maladies pulmonaires (ex : mucoviscidose, asthme traité par aérosols, etc)", "Altre malattie polmonari (p.es. mucoviscidosi, asma trattata con aerosol, ecc.)", "20140101", ""),
+	ANDERE_LUNGENERKRANKUNGEN_ZB_MUKOVISZIDOSE_ASTHMA_BRONCHIALE_ETC("114006",
+			"Andere Lungenerkrankungen (z.B. Mukoviszidose, Asthma bronchiale, etc.)",
+			"Autres maladies pulmonaires (ex : mucoviscidose, asthme traité par aérosols, etc)",
+			"Altre malattie polmonari (p.es. mucoviscidosi, asma trattata con aerosol, ecc.)",
+			"20140101", ""),
 	/**
 	 * <div class="de">Andere Nierenerkrankung</div> <div class="fr">autre
 	 * maladie des reins</div> <div class="it">altra malattia renale</div>
 	 */
-	ANDERE_NIERENERKRANKUNG("114033", "andere Nierenerkrankung", "autre maladie des reins", "altra malattia renale", "20150101", ""),
+	ANDERE_NIERENERKRANKUNG("114033", "andere Nierenerkrankung", "autre maladie des reins",
+			"altra malattia renale", "20150101", ""),
 	/**
 	 * <div class="de"> Anderer Krebs</div> <div class="fr">autre cancer</div>
 	 * <div class="it">altro cancro</div>
@@ -68,56 +76,79 @@ public enum RiskOfComplications {
 	 * <div class="it">Immunodeficienza congenita, immunodeficienza comune
 	 * variabile, deficit di risposta ai polisaccaridi</div>
 	 */
-	ANGEBORENE_IMMUNDEFIZIENZ_VARIABLES_IMMUNDEFEKTSYNDROM_DEFIZITAERE_ANTWORT_AUF_POLYSACCHARIDE("114025", "Angeborene Immundefizienz, variables Immundefektsyndrom, defizitäre Antwort auf Polysaccharide", "Immunodéficience congénitale, immunodéficience commune variable, déficit réponse aux polysaccharidiques", "Immunodeficienza congenita, immunodeficienza comune variabile, deficit di risposta ai polisaccaridi", "20140101", ""),
+	ANGEBORENE_IMMUNDEFIZIENZ_VARIABLES_IMMUNDEFEKTSYNDROM_DEFIZITAERE_ANTWORT_AUF_POLYSACCHARIDE(
+			"114025",
+			"Angeborene Immundefizienz, variables Immundefektsyndrom, defizitäre Antwort auf Polysaccharide",
+			"Immunodéficience congénitale, immunodéficience commune variable, déficit réponse aux polysaccharidiques",
+			"Immunodeficienza congenita, immunodeficienza comune variabile, deficit di risposta ai polisaccaridi",
+			"20140101", ""),
 	/**
 	 * <div class="de">Autoimmunkrankheit, welche eine Immunsuppression
 	 * erfordert</div> <div class="fr">Maladie auto-immune exigeant
 	 * vraisemblablement une immunosuppression</div> <div class="it">Malattia
 	 * autoimmune che richiede probabilmente una immunosoppressione</div>
 	 */
-	AUTOIMMUNKRANKHEIT_WELCHE_EINE_IMMUNSUPPRESSION_ERFORDERT("114021", "Autoimmunkrankheit, welche eine Immunsuppression erfordert", "Maladie auto-immune exigeant vraisemblablement une immunosuppression", "Malattia autoimmune che richiede probabilmente una immunosoppressione", "20140101", ""),
+	AUTOIMMUNKRANKHEIT_WELCHE_EINE_IMMUNSUPPRESSION_ERFORDERT("114021",
+			"Autoimmunkrankheit, welche eine Immunsuppression erfordert",
+			"Maladie auto-immune exigeant vraisemblablement une immunosuppression",
+			"Malattia autoimmune che richiede probabilmente una immunosoppressione", "20140101",
+			""),
 	/**
 	 * <div class="de">Bronchiektasen durch Antikörpermangel</div>
 	 * <div class="fr">Bronchiectasies sur carence en anticorps</div>
 	 * <div class="it">Bronchiettasie su carenza in anticorpi</div>
 	 */
-	BRONCHIEKTASEN_DURCH_ANTIKOERPERMANGEL("114005", "Bronchiektasen durch Antikörpermangel", "Bronchiectasies sur carence en anticorps", "Bronchiettasie su carenza in anticorpi", "20140101", ""),
+	BRONCHIEKTASEN_DURCH_ANTIKOERPERMANGEL("114005", "Bronchiektasen durch Antikörpermangel",
+			"Bronchiectasies sur carence en anticorps", "Bronchiettasie su carenza in anticorpi",
+			"20140101", ""),
 	/**
 	 * <div class="de">Chronisch obstruktive Pneumopathie</div>
 	 * <div class="fr">Pneumopathie chronique obstructive</div>
 	 * <div class="it">Pneumopatia cronica ostruttiva</div>
 	 */
-	CHRONISCH_OBSTRUKTIVE_PNEUMOPATHIE("114003", "Chronisch obstruktive Pneumopathie", "Pneumopathie chronique obstructive", "Pneumopatia cronica ostruttiva", "20140101", ""),
+	CHRONISCH_OBSTRUKTIVE_PNEUMOPATHIE("114003", "Chronisch obstruktive Pneumopathie",
+			"Pneumopathie chronique obstructive", "Pneumopatia cronica ostruttiva", "20140101", ""),
 	/**
 	 * <div class="de">Chronische Lebererkrankung</div> <div class="fr">Maladie
 	 * hépatique chronique</div> <div class="it">Malattia epatica cronica</div>
 	 */
-	CHRONISCHE_LEBERERKRANKUNG("114007", "Chronische Lebererkrankung", "Maladie hépatique chronique", "Malattia epatica cronica", "20140101", ""),
+	CHRONISCHE_LEBERERKRANKUNG("114007", "Chronische Lebererkrankung",
+			"Maladie hépatique chronique", "Malattia epatica cronica", "20140101", ""),
 	/**
 	 * <div class="de">Cochleaimplantat, in situ oder geplant</div>
 	 * <div class="fr">Implant cochléaire, in situ ou planifié</div>
 	 * <div class="it">Impianto cocleare, in situ o pianificato</div>
 	 */
-	COCHLEAIMPLANTAT_IN_SITU_ODER_GEPLANT("113002", "Cochleaimplantat, in situ oder geplant", "Implant cochléaire, in situ ou planifié", "Impianto cocleare, in situ o pianificato", "20130101", ""),
+	COCHLEAIMPLANTAT_IN_SITU_ODER_GEPLANT("113002", "Cochleaimplantat, in situ oder geplant",
+			"Implant cochléaire, in situ ou planifié", "Impianto cocleare, in situ o pianificato",
+			"20130101", ""),
 	/**
 	 * <div class="de">Diabetes mit Auswirkung auf die Funktion von Herz, Lungen
 	 * oder Nieren</div> <div class="fr">Diabète avec répercussion sur la
 	 * fonction cardiaque, pulmonaire ou rénale</div> <div class="it">Diabete
 	 * con ripercussioni sulla funzione cardiopolmonare o renale</div>
 	 */
-	DIABETES_MIT_AUSWIRKUNG_AUF_DIE_FUNKTION_VON_HERZ_LUNGEN_ODER_NIEREN("114015", "Diabetes mit Auswirkung auf die Funktion von Herz, Lungen oder Nieren", "Diabète avec répercussion sur la fonction cardiaque, pulmonaire ou rénale", "Diabete con ripercussioni sulla funzione cardiopolmonare o renale", "20140101", ""),
+	DIABETES_MIT_AUSWIRKUNG_AUF_DIE_FUNKTION_VON_HERZ_LUNGEN_ODER_NIEREN("114015",
+			"Diabetes mit Auswirkung auf die Funktion von Herz, Lungen oder Nieren",
+			"Diabète avec répercussion sur la fonction cardiaque, pulmonaire ou rénale",
+			"Diabete con ripercussioni sulla funzione cardiopolmonare o renale", "20140101", ""),
 	/**
 	 * <div class="de">Empfänger einer Solidorgantransplantation</div>
 	 * <div class="fr">Receveurs d'une transplantation d'organe solide</div>
 	 * <div class="it">Riceventi di un trapianto d'organo solido</div>
 	 */
-	EMPFAENGER_EINER_SOLIDORGANTRANSPLANTATION("114019", "Empfänger einer Solidorgantransplantation", "Receveurs d'une transplantation d'organe solide", "Riceventi di un trapianto d'organo solido", "20140101", ""),
+	EMPFAENGER_EINER_SOLIDORGANTRANSPLANTATION("114019",
+			"Empfänger einer Solidorgantransplantation",
+			"Receveurs d'une transplantation d'organe solide",
+			"Riceventi di un trapianto d'organo solido", "20140101", ""),
 	/**
 	 * <div class="de">Empfänger einer Stammzelltransplantation</div>
 	 * <div class="fr">Receveurs de cellules souches hématopoïétiques</div>
 	 * <div class="it">Riceventi di cellule staminali ematopoietiche</div>
 	 */
-	EMPFAENGER_EINER_STAMMZELLTRANSPLANTATION("114020", "Empfänger einer Stammzelltransplantation", "Receveurs de cellules souches hématopoïétiques", "Riceventi di cellule staminali ematopoietiche", "20140101", ""),
+	EMPFAENGER_EINER_STAMMZELLTRANSPLANTATION("114020", "Empfänger einer Stammzelltransplantation",
+			"Receveurs de cellules souches hématopoïétiques",
+			"Riceventi di cellule staminali ematopoietiche", "20140101", ""),
 	/**
 	 * <div class="de">Geburt vor der 33. Schwangerschaftswoche oder
 	 * Geburtsgewicht &lt; 1500g</div> <div class="fr">Naissance avant la 33e
@@ -125,65 +156,88 @@ public enum RiskOfComplications {
 	 * <div class="it">Nascita prima della 33a settimana di gravidanza o peso
 	 * alla nascita &lt;1500g</div>
 	 */
-	GEBURT_VOR_DER_33_SCHWANGERSCHAFTSWOCHE_ODER_GEBURTSGEWICHT_GROESSER_1500G("113004", "Geburt vor der 33. Schwangerschaftswoche oder Geburtsgewicht &lt; 1500g", "Naissance avant la 33e semaine de grossesse ou poids de naissance &lt;1500 g", "Nascita prima della 33a settimana di gravidanza o peso alla nascita &lt;1500 g", "20130101", ""),
+	GEBURT_VOR_DER_33_SCHWANGERSCHAFTSWOCHE_ODER_GEBURTSGEWICHT_GROESSER_1500G("113004",
+			"Geburt vor der 33. Schwangerschaftswoche oder Geburtsgewicht &lt; 1500g",
+			"Naissance avant la 33e semaine de grossesse ou poids de naissance &lt;1500 g",
+			"Nascita prima della 33a settimana di gravidanza o peso alla nascita &lt;1500 g",
+			"20130101", ""),
 	/**
 	 * <div class="de">Hämodialysepatient</div> <div class="fr">Personnes
 	 * dialysées</div> <div class="it">Persone in dialisi</div>
 	 */
-	HAEMODIALYSEPATIENT("114037", "Hämodialysepatient", "Personnes dialysées", "Persone in dialisi", "20150101", ""),
+	HAEMODIALYSEPATIENT("114037", "Hämodialysepatient", "Personnes dialysées", "Persone in dialisi",
+			"20150101", ""),
 	/**
 	 * <div class="de"> Hämophilie Patient</div> <div class="fr">Personnes
 	 * hémophiles</div> <div class="it">Persone affette da emofilia</div>
 	 */
-	HAEMOPHILIE_PATIENT("114038", "hämophilie Patient", "Personnes hémophiles", "Persone affette da emofilia", "20150101", ""),
+	HAEMOPHILIE_PATIENT("114038", "hämophilie Patient", "Personnes hémophiles",
+			"Persone affette da emofilia", "20150101", ""),
 	/**
 	 * <div class="de">Herzinsuffizienz</div> <div class="fr">Insuffisance
 	 * cardiaque</div> <div class="it">Insufficienza cardiaca</div>
 	 */
-	HERZINSUFFIZIENZ("114001", "Herzinsuffizienz", "Insuffisance cardiaque", "Insufficienza cardiaca", "20140101", ""),
+	HERZINSUFFIZIENZ("114001", "Herzinsuffizienz", "Insuffisance cardiaque",
+			"Insufficienza cardiaca", "20140101", ""),
 	/**
 	 * <div class="de">Herzkrankheiten (chronische, kongenitale
 	 * Missbildungen)</div> <div class="fr">Cardiopathies chroniques,
 	 * malformations congénitales</div> <div class="it">Cardiopatie croniche,
 	 * malformazioni congenite</div>
 	 */
-	HERZKRANKHEITEN_CHRONISCHE_KONGENITALE_MISSBILDUNGEN("113007", "Herzkrankheiten (chronische, kongenitale Missbildungen)", "Cardiopathies chroniques, malformations congénitales", "Cardiopatie croniche, malformazioni congenite", "20130101", ""),
+	HERZKRANKHEITEN_CHRONISCHE_KONGENITALE_MISSBILDUNGEN("113007",
+			"Herzkrankheiten (chronische, kongenitale Missbildungen)",
+			"Cardiopathies chroniques, malformations congénitales",
+			"Cardiopatie croniche, malformazioni congenite", "20130101", ""),
 	/**
 	 * <div class="de">HIV Infektion mit CD4-Zellen &gt;= 15 % (Erwachsene:
 	 * &gt;= 200 / µl)</div> <div class="fr"> Infection à VIH avec CD4 &gt;= 15%
 	 * (Adultes : &gt;= 200 / µl)</div> <div class="it">Infezione HIV con CD4
 	 * &gt;= 15% (Adulti : &gt;= 200 / µl)</div>
 	 */
-	HIV_INFEKTION_MIT_CD4_ZELLEN_GROESSER_GLEICH_15_PROZENT_ERWACHSENE_GROESSER_GLEICH_200_PRO_UL("113008", "HIV Infektion mit CD4-Zellen &gt;= 15 % (Erwachsene: &gt;= 200 / µl)", " Infection à VIH avec CD4 &gt;= 15% (Adultes : &gt;= 200 / µl)", "Infezione HIV con CD4 &gt;= 15% (Adulti : &gt;= 200 / µl)", "20130101", ""),
+	HIV_INFEKTION_MIT_CD4_ZELLEN_GROESSER_GLEICH_15_PROZENT_ERWACHSENE_GROESSER_GLEICH_200_PRO_UL(
+			"113008", "HIV Infektion mit CD4-Zellen &gt;= 15 % (Erwachsene: &gt;= 200 / µl)",
+			" Infection à VIH avec CD4 &gt;= 15% (Adultes : &gt;= 200 / µl)",
+			"Infezione HIV con CD4 &gt;= 15% (Adulti : &gt;= 200 / µl)", "20130101", ""),
 	/**
 	 * <div class="de">HIV Infektion mit CD4-Zellen &lt; 15 % (Erwachsene: &lt;
 	 * 200 / µl)</div> <div class="fr">Infection à VIH avec CD4 &lt; 15%
 	 * (Adultes : &lt; 200 / µl)</div> <div class="it">Infezione HIV con CD4
 	 * &lt; 15% (Adulti : &lt; 200 / µl)</div>
 	 */
-	HIV_INFEKTION_MIT_CD4_ZELLEN_KLEINER_15_PROZENT_ERWACHSENE_KLEINER_200_PRO_UL("113009", "HIV Infektion mit CD4-Zellen &lt; 15 % (Erwachsene: &lt; 200 / µl)", "Infection à VIH avec CD4 &lt; 15% (Adultes : &lt; 200 / µl)", "Infezione HIV con CD4 &lt; 15% (Adulti : &lt; 200 / µl)", "20130101", ""),
+	HIV_INFEKTION_MIT_CD4_ZELLEN_KLEINER_15_PROZENT_ERWACHSENE_KLEINER_200_PRO_UL("113009",
+			"HIV Infektion mit CD4-Zellen &lt; 15 % (Erwachsene: &lt; 200 / µl)",
+			"Infection à VIH avec CD4 &lt; 15% (Adultes : &lt; 200 / µl)",
+			"Infezione HIV con CD4 &lt; 15% (Adulti : &lt; 200 / µl)", "20130101", ""),
 	/**
 	 * <div class="de">Kandidaten für eine Solidorgantransplantation</div>
 	 * <div class="fr">Candidats à une transplantation d'organe solide</div>
 	 * <div class="it">Candidati a un trapianto d'organo solido</div>
 	 */
-	KANDIDATEN_FUER_EINE_SOLIDORGANTRANSPLANTATION("114018", "Kandidaten für eine Solidorgantransplantation", "Candidats à une transplantation d'organe solide", "Candidati a un trapianto d'organo solido", "20140101", ""),
+	KANDIDATEN_FUER_EINE_SOLIDORGANTRANSPLANTATION("114018",
+			"Kandidaten für eine Solidorgantransplantation",
+			"Candidats à une transplantation d'organe solide",
+			"Candidati a un trapianto d'organo solido", "20140101", ""),
 	/**
 	 * <div class="de">Kardiopathie, angeborene Fehlbildung</div>
 	 * <div class="fr">Cardiopathie, malformation congénitale</div>
 	 * <div class="it">Cardiopatia, malformazione congenita</div>
 	 */
-	KARDIOPATHIE("114002", "Kardiopathie, angeborene Fehlbildung", "Cardiopathie, malformation congénitale", "Cardiopatia, malformazione congenita", "20140101", ""),
+	KARDIOPATHIE("114002", "Kardiopathie, angeborene Fehlbildung",
+			"Cardiopathie, malformation congénitale", "Cardiopatia, malformazione congenita",
+			"20140101", ""),
 	/**
 	 * <div class="de">Leberzirrhose</div> <div class="fr">Cirrhose
 	 * hépatique</div> <div class="it">Cirrosi epatica</div>
 	 */
-	LEBERZIRRHOSE("114008", "Leberzirrhose", "Cirrhose hépatique", "Cirrosi epatica", "20140101", ""),
+	LEBERZIRRHOSE("114008", "Leberzirrhose", "Cirrhose hépatique", "Cirrosi epatica", "20140101",
+			""),
 	/**
 	 * <div class="de">Lymphom, Leukämie, Myelom</div> <div class="fr">Lymphome,
 	 * leucémie, myélome</div> <div class="it">Linfoma, leucemia, mieloma</div>
 	 */
-	LYMPHOM_LEUKAEMIE_MYELOM("113012", "Lymphom, Leukämie, Myelom", "Lymphome, leucémie, myélome", "Linfoma, leucemia, mieloma", "20130101", ""),
+	LYMPHOM_LEUKAEMIE_MYELOM("113012", "Lymphom, Leukämie, Myelom", "Lymphome, leucémie, myélome",
+			"Linfoma, leucemia, mieloma", "20130101", ""),
 
 	/**
 	 * <div class="de">Lymphom, Leukämie, Myelom während klinischer
@@ -191,21 +245,29 @@ public enum RiskOfComplications {
 	 * rémission clinique</div> <div class="it">Linfoma, leucemia, mieloma
 	 * durante una remissione clinica</div>
 	 */
-	LYMPHOM_LEUKAEMIE_MYELOM_WAEHREND_KLINISCHER_REMISSION("118001", "Lymphom, Leukämie, Myelom während klinischer Remission", "Lymphome, leucémie, myélome durant une rémission clinique", "Linfoma, leucemia, mieloma durante una remissione clinica", "20180101", ""),
+	LYMPHOM_LEUKAEMIE_MYELOM_WAEHREND_KLINISCHER_REMISSION("118001",
+			"Lymphom, Leukämie, Myelom während klinischer Remission",
+			"Lymphome, leucémie, myélome durant une rémission clinique",
+			"Linfoma, leucemia, mieloma durante una remissione clinica", "20180101", ""),
 
 	/**
 	 * <div class="de">Mangel an Mannose-bindendem Lektin</div>
 	 * <div class="fr">Déficit en lectine liant le mannose</div>
 	 * <div class="it">Deficit di lectina legante il mannosio</div>
 	 */
-	MANGEL_AN_MANNOSE_BINDENDEM_LEKTIN("113014", "Mangel an Mannose-bindendem Lektin", "Déficit en lectine liant le mannose", "Deficit di lectina legante il mannosio", "20130101", ""),
+	MANGEL_AN_MANNOSE_BINDENDEM_LEKTIN("113014", "Mangel an Mannose-bindendem Lektin",
+			"Déficit en lectine liant le mannose", "Deficit di lectina legante il mannosio",
+			"20130101", ""),
 	/**
 	 * <div class="de">Mangel im klassischen oder alternativen Weg der
 	 * Komplementaktivierung</div> <div class="fr">Déficit en facteurs de la
 	 * voie alterne ou terminale du complément</div> <div class="it">Deficit in
 	 * fattori della via alterna o terminale del complemento</div>
 	 */
-	MANGEL_IM_KLASSISCHEN_ODER_ALTERNATIVEN_WEG_DER_KOMPLEMENTAKTIVIERUNG("114026", "Mangel im klassischen oder alternativen Weg der Komplementaktivierung", "Déficit en facteurs de la voie alterne ou terminale du complément", "Deficit in fattori della via alterna o terminale del complemento", "20140101", ""),
+	MANGEL_IM_KLASSISCHEN_ODER_ALTERNATIVEN_WEG_DER_KOMPLEMENTAKTIVIERUNG("114026",
+			"Mangel im klassischen oder alternativen Weg der Komplementaktivierung",
+			"Déficit en facteurs de la voie alterne ou terminale du complément",
+			"Deficit in fattori della via alterna o terminale del complemento", "20140101", ""),
 	/**
 	 * <div class="de">Medikamentöse Immunosuppression (inkl. systemische
 	 * Langzeitkortikoidtherapie und Radiotherapie)</div>
@@ -214,18 +276,25 @@ public enum RiskOfComplications {
 	 * <div class="it">Immunosoppressione medicamentosa (compresa una
 	 * corticoterapia di lunga durata per via generale e una radioterapia)</div>
 	 */
-	MEDIKAMENTOESE_IMMUNOSUPPRESSION_INKL_SYSTEMISCHE_LANGZEITKORTIKOIDTHERAPIE_UND_RADIOTHERAPIE("114022", "Medikamentöse Immunosuppression (inkl. systemische Langzeitkortikoidtherapie und Radiotherapie)", "Immunosuppression médicamenteuse (y c. corticothérapie de longue durée par voie générale et radiothérapie)", "Immunosoppressione medicamentosa (compresa una corticoterapia di lunga durata per via generale e una radioterapia)", "20140101", ""),
+	MEDIKAMENTOESE_IMMUNOSUPPRESSION_INKL_SYSTEMISCHE_LANGZEITKORTIKOIDTHERAPIE_UND_RADIOTHERAPIE(
+			"114022",
+			"Medikamentöse Immunosuppression (inkl. systemische Langzeitkortikoidtherapie und Radiotherapie)",
+			"Immunosuppression médicamenteuse (y c. corticothérapie de longue durée par voie générale et radiothérapie)",
+			"Immunosoppressione medicamentosa (compresa una corticoterapia di lunga durata per via generale e una radioterapia)",
+			"20140101", ""),
 	/**
 	 * <div class="de">Morbide Adipositas (BMI &gt;= 40)</div>
 	 * <div class="fr">Obésité morbide (IMC &gt;= 40)</div>
 	 * <div class="it">Obesità patologica (IMC &gt;= 40)</div>
 	 */
-	MORBIDE_ADIPOSITAS_BMI_GROESSER_40("114016", "Morbide Adipositas (BMI &gt;= 40)", "Obésité morbide (IMC &gt;= 40)", "Obesità patologica (IMC &gt;= 40)", "20140101", ""),
+	MORBIDE_ADIPOSITAS_BMI_GROESSER_40("114016", "Morbide Adipositas (BMI &gt;= 40)",
+			"Obésité morbide (IMC &gt;= 40)", "Obesità patologica (IMC &gt;= 40)", "20140101", ""),
 	/**
 	 * <div class="de">Nephrotisches Syndrom</div> <div class="fr">Syndrome
 	 * néphrotique</div> <div class="it">Sindrome nefrosica</div>
 	 */
-	NEPHROTISCHES_SYNDROM("113018", "Nephrotisches Syndrom", "Syndrome néphrotique", "Sindrome nefrosica", "20130101", ""),
+	NEPHROTISCHES_SYNDROM("113018", "Nephrotisches Syndrom", "Syndrome néphrotique",
+			"Sindrome nefrosica", "20130101", ""),
 	/**
 	 * <div class="de">Neuromuskuläre Krankheit (Falls Auswirkungen auf Herz-,
 	 * Lungen- oder Nierenfunktion)</div> <div class="fr">Maladie
@@ -233,18 +302,25 @@ public enum RiskOfComplications {
 	 * rénale)</div> <div class="it">Malattia neuromuscolare (Se ripercussione
 	 * sulla funzione cardiaca, polmonare o renale)</div>
 	 */
-	NEUROMUSKULAERE_KRANKHEIT_FALLS_AUSWIRKUNGEN_AUF_HERZ__LUNGEN_ODER_NIERENFUNKTION("114012", "Neuromuskuläre Krankheit (Falls Auswirkungen auf Herz-, Lungen- oder Nierenfunktion)", "Maladie neuromusculaire (Si répercussion sur la fonction cardiaque, pulmonaire ou rénale)", "Malattia neuromuscolare (Se ripercussione sulla funzione cardiaca, polmonare o renale)", "20140101", ""),
+	NEUROMUSKULAERE_KRANKHEIT_FALLS_AUSWIRKUNGEN_AUF_HERZ__LUNGEN_ODER_NIERENFUNKTION("114012",
+			"Neuromuskuläre Krankheit (Falls Auswirkungen auf Herz-, Lungen- oder Nierenfunktion)",
+			"Maladie neuromusculaire (Si répercussion sur la fonction cardiaque, pulmonaire ou rénale)",
+			"Malattia neuromuscolare (Se ripercussione sulla funzione cardiaca, polmonare o renale)",
+			"20140101", ""),
 	/**
 	 * <div class="de">Niereninsuffizienz</div> <div class="fr">Insuffisance
 	 * rénale</div> <div class="it">Insufficienza renale</div>
 	 */
-	NIERENINSUFFIZIENZ("113023", "Niereninsuffizienz", "Insuffisance rénale", "Insufficienza renale", "20130101", ""),
+	NIERENINSUFFIZIENZ("113023", "Niereninsuffizienz", "Insuffisance rénale",
+			"Insufficienza renale", "20130101", ""),
 	/**
 	 * <div class="de">Protein-S oder Protein-C Defizit</div>
 	 * <div class="fr">déficit en protéine S et protéine C </div>
 	 * <div class="it">deficit di proteina S e proteina C</div>
 	 */
-	PROTEIN_S_ODER_PROTEIN_C_DEFIZIT("114035", "Protein-S oder Protein-C Defizit", "déficit en protéine S et protéine C ", "deficit di proteina S e proteina C", "20150101", ""),
+	PROTEIN_S_ODER_PROTEIN_C_DEFIZIT("114035", "Protein-S oder Protein-C Defizit",
+			"déficit en protéine S et protéine C ", "deficit di proteina S e proteina C",
+			"20150101", ""),
 	/**
 	 * <div class="de">Schädelbasisfraktur /-Missbildung, zerebrospinale
 	 * Liquorfistel</div> <div class="fr">Fracture ou malformation de la base du
@@ -252,19 +328,25 @@ public enum RiskOfComplications {
 	 * <div class="it">Frattura o malformazione della base del cranio, fistola
 	 * di liquido cerebrospinale</div>
 	 */
-	SCHAEDELBASISFRAKTUR_MISSBILDUNG_ZEREBROSPINALE_LIQUORFISTEL("114032", "Schädelbasisfraktur / -Missbildung, zerebrospinale Liquorfistel", "Fracture ou malformation de la base du crâne, fistule de liquide céphalo-rachidien", "Frattura o malformazione della base del cranio, fistola di liquido cerebrospinale", "20140101", ""),
+	SCHAEDELBASISFRAKTUR_MISSBILDUNG_ZEREBROSPINALE_LIQUORFISTEL("114032",
+			"Schädelbasisfraktur / -Missbildung, zerebrospinale Liquorfistel",
+			"Fracture ou malformation de la base du crâne, fistule de liquide céphalo-rachidien",
+			"Frattura o malformazione della base del cranio, fistola di liquido cerebrospinale",
+			"20140101", ""),
 	/**
 	 * <div class="de">Schwangerschaft und post-partum Periode</div>
 	 * <div class="fr">Grossesse et post-partum</div> <div class="it">Gravidanza
 	 * e post-parto</div>
 	 */
-	SCHWANGERSCHAFT_UND_POST_PARTUM_PERIODE("114028", "Schwangerschaft und post-partum Periode", "Grossesse et post-partum", "Gravidanza e post-parto", "20140101", ""),
+	SCHWANGERSCHAFT_UND_POST_PARTUM_PERIODE("114028", "Schwangerschaft und post-partum Periode",
+			"Grossesse et post-partum", "Gravidanza e post-parto", "20140101", ""),
 	/**
 	 * <div class="de">Schwere Neurodermitis beim Kind</div>
 	 * <div class="fr">Eczema sévère chez l’enfant</div> <div class="it">Eczema
 	 * severo nel bambino</div>
 	 */
-	SCHWERE_NEURODERMITIS_BEIM_KIND("113021", "Schwere Neurodermitis beim Kind", "Eczema sévère chez l’enfant", "Eczema severo nel bambino", "20130101", ""),
+	SCHWERE_NEURODERMITIS_BEIM_KIND("113021", "Schwere Neurodermitis beim Kind",
+			"Eczema sévère chez l’enfant", "Eczema severo nel bambino", "20130101", ""),
 	/**
 	 * <div class="de">Schweres Asthma: bei verlängerter oder häufiger
 	 * Behandlung mit oralen Steroiden</div> <div class="fr">Asthme sévère : si
@@ -272,12 +354,17 @@ public enum RiskOfComplications {
 	 * <div class="it">Asma severa : se trattamento prolungato o frequente con
 	 * corticoidi orali</div>
 	 */
-	SCHWERES_ASTHMA_BEI_VERLAENGERTER_ODER_HAEUFIGER_BEHANDLUNG_MIT_ORALEN_STEROIDEN("114004", "Schweres Asthma: bei verlängerter oder häufiger Behandlung mit oralen Steroiden", "Asthme sévère : si traitement prolongé ou fréquent par des corticoïdes oraux", "Asma severa : se trattamento prolungato o frequente con corticoidi orali", "20140101", ""),
+	SCHWERES_ASTHMA_BEI_VERLAENGERTER_ODER_HAEUFIGER_BEHANDLUNG_MIT_ORALEN_STEROIDEN("114004",
+			"Schweres Asthma: bei verlängerter oder häufiger Behandlung mit oralen Steroiden",
+			"Asthme sévère : si traitement prolongé ou fréquent par des corticoïdes oraux",
+			"Asma severa : se trattamento prolungato o frequente con corticoidi orali", "20140101",
+			""),
 	/**
 	 * <div class="de">Sichelzellanämie</div> <div class="fr">Anémie
 	 * falciforme</div> <div class="it">Anemia falciforme</div>
 	 */
-	SICHELZELLANAEMIE("114014", "Sichelzellanämie", "Anémie falciforme", "Anemia falciforme", "20140101", "");
+	SICHELZELLANAEMIE("114014", "Sichelzellanämie", "Anémie falciforme", "Anemia falciforme",
+			"20140101", "");
 
 	/** The Constant CODE_SYSTEM_NAME. */
 	public static final String CODE_SYSTEM_NAME = "CDA-CH-VACD compl-risks";

@@ -29,11 +29,8 @@ public enum TokenType {
 	OASIS_WSS_SAML_PROFILE_11_SAMLV20(
 			"http://docs.oasis-open.org/wss/oasis-wss-saml-token-profile-1.1#SAMLV2.0");
 
-	/** the code representing the enum value as string */
-	private String code;
-
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the correct enum value by string.</div>
 	 * <div class="de">Methode um den korrekte enum Wert zum String zu erhalten.</div>
@@ -61,14 +58,17 @@ public enum TokenType {
 		return null;
 	}
 
+	/** the code representing the enum value as string */
+	private String code;
+
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Default constructor to instanciate the object.</div>
 	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
-	 * 
+	 *
 	 * @param aCode
 	 * <div class="en">The enum as string.</div>
 	 * <div class="de">Der enum wert als String.</div>
@@ -81,7 +81,7 @@ public enum TokenType {
 	}
 
 	/**
-	 * 
+	 *
 	 * {@inheritDoc}
 	 *
 	 * @see java.lang.Enum#toString()

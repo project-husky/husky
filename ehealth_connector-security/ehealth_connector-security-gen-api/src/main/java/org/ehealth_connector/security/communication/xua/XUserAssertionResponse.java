@@ -30,7 +30,7 @@ import org.ehealth_connector.security.saml2.Assertion;
 public interface XUserAssertionResponse {
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the assertion.</div>
 	 * <div class="de">Methode um die Assertion zu erhalten.</div>
@@ -45,7 +45,7 @@ public interface XUserAssertionResponse {
 	Assertion getAssertion();
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the context.</div>
 	 * <div class="de">Methode um den Context zu erhalten.</div>
@@ -62,7 +62,7 @@ public interface XUserAssertionResponse {
 	String getContext();
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the status.</div>
 	 * <div class="de">Methode um den Status zu erhalten.</div>

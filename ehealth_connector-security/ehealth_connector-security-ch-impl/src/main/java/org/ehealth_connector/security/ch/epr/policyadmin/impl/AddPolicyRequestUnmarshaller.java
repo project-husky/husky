@@ -35,11 +35,6 @@ import org.w3c.dom.Element;
 public class AddPolicyRequestUnmarshaller extends AbstractXMLObjectUnmarshaller {
 
 	@Override
-	public OpenSamlAddPolicyRequest unmarshall(Element domElement) throws UnmarshallingException {
-		return (OpenSamlAddPolicyRequest) super.unmarshall(domElement);
-	}
-
-	@Override
 	protected void processChildElement(XMLObject parentXMLObject, XMLObject childXMLObject)
 			throws UnmarshallingException {
 		if (childXMLObject instanceof org.opensaml.saml.saml2.core.Assertion) {
@@ -49,6 +44,11 @@ public class AddPolicyRequestUnmarshaller extends AbstractXMLObjectUnmarshaller 
 		} else {
 			super.processChildElement(parentXMLObject, childXMLObject);
 		}
+	}
+
+	@Override
+	public OpenSamlAddPolicyRequest unmarshall(Element domElement) throws UnmarshallingException {
+		return (OpenSamlAddPolicyRequest) super.unmarshall(domElement);
 	}
 
 }

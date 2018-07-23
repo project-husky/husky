@@ -334,6 +334,7 @@ public class Patient extends Person {
 	 *
 	 * @return <div class="en">the complete name</div>
 	 */
+	@Override
 	public String getCompleteName() {
 		String retVal = "";
 		if (mPatient.getNames() != null) {

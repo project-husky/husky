@@ -134,16 +134,6 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 	}
 
 	/**
-	 * Gets the OHT StoredQuery object, which is being wrapped by this class
-	 *
-	 * @return the OHT StoredQuery
-	 */
-	@Override
-	public StoredQuery getOhtStoredQuery() {
-		return ohtStoredQuery;
-	}
-
-	/**
 	 * <div class="en">Gets the AvailabilityStatus as OHT AvailabilityStatusType
 	 * Object.</div> <div class="de">Liefert AvailabilityStatus als OHT
 	 * AvailabilityStatusType Objekt.</div>
@@ -160,5 +150,15 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 		default:
 			return AvailabilityStatusType.APPROVED_LITERAL;
 		}
+	}
+
+	/**
+	 * Gets the OHT StoredQuery object, which is being wrapped by this class
+	 *
+	 * @return the OHT StoredQuery
+	 */
+	@Override
+	public StoredQuery getOhtStoredQuery() {
+		return ohtStoredQuery;
 	}
 }

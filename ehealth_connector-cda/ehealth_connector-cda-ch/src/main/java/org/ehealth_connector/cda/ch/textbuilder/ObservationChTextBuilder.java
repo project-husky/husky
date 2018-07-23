@@ -123,9 +123,8 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 * @param lang
 	 *            the language.
 	 */
-	public ObservationChTextBuilder(ClinicalDocument doc,
-			BaseLaboratorySpecialtySection section, int sectionIndex,
-			ContentIdPrefix contentIdPrefix, LanguageCode lang) {
+	public ObservationChTextBuilder(ClinicalDocument doc, BaseLaboratorySpecialtySection section,
+			int sectionIndex, ContentIdPrefix contentIdPrefix, LanguageCode lang) {
 		this(doc, section, sectionIndex, contentIdPrefix.getContentIdPrefix(), lang, null);
 	}
 
@@ -146,9 +145,9 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *            the oid of the code system to be used as position (e.g.
 	 *            2.16.756.5.30.1.129.1.3 for the Swiss Analysis List)
 	 */
-	public ObservationChTextBuilder(ClinicalDocument doc,
-			BaseLaboratorySpecialtySection section, int sectionIndex,
-			ContentIdPrefix contentIdPrefix, LanguageCode lang, String posCodeSystemOid) {
+	public ObservationChTextBuilder(ClinicalDocument doc, BaseLaboratorySpecialtySection section,
+			int sectionIndex, ContentIdPrefix contentIdPrefix, LanguageCode lang,
+			String posCodeSystemOid) {
 		this(doc, section, sectionIndex, contentIdPrefix.getContentIdPrefix(), lang,
 				posCodeSystemOid);
 	}
@@ -171,9 +170,8 @@ public class ObservationChTextBuilder extends TextBuilder {
 	 *            as position (e.g. 2.16.756.5.30.1.129.1.3 for the Swiss
 	 *            Analysis List)
 	 */
-	public ObservationChTextBuilder(ClinicalDocument doc,
-			BaseLaboratorySpecialtySection section, int sectionIndex, String contentIdPrefix,
-			LanguageCode lang, String posCodeSystemOid) {
+	public ObservationChTextBuilder(ClinicalDocument doc, BaseLaboratorySpecialtySection section,
+			int sectionIndex, String contentIdPrefix, LanguageCode lang, String posCodeSystemOid) {
 		this.doc = doc;
 		this.sectionIndex = sectionIndex;
 		this.codedVitalSignsSection = null;

@@ -34,7 +34,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 /**
- * 
+ *
  * @version 1.0
  * @since Jan 2, 2018 11:32:48 AM
  *
@@ -280,21 +280,21 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getAuthor(org.hl7.fhir.dstu3.model.Reference)}.
-	 */
-	@Test
-	@Ignore
-	public void testGetAuthorReference() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getAuthor(org.hl7.fhir.dstu3.model.Practitioner)}.
 	 */
 	@Test
 	@Ignore
 	public void testGetAuthorPractitioner() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getAuthor(org.hl7.fhir.dstu3.model.Reference)}.
+	 */
+	@Test
+	@Ignore
+	public void testGetAuthorReference() {
 		fail("Not yet implemented");
 	}
 
@@ -380,16 +380,6 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getPatient(org.hl7.fhir.instance.model.api.IBaseResource)}.
-	 */
-	@Test
-	@Ignore
-	public void testGetPatientIBaseResource() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getPatient(org.hl7.fhir.dstu3.model.Bundle)}.
 	 */
 	@Test
@@ -405,6 +395,16 @@ public class FhirCommonTest {
 	@Test
 	@Ignore
 	public void testGetPatientDocumentManifest() {
+		fail("Not yet implemented");
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getPatient(org.hl7.fhir.instance.model.api.IBaseResource)}.
+	 */
+	@Test
+	@Ignore
+	public void testGetPatientIBaseResource() {
 		fail("Not yet implemented");
 	}
 

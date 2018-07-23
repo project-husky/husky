@@ -72,8 +72,7 @@ public class EdDiagnosisChTextBuilder extends TextBuilder {
 		append("</thead>");
 	}
 
-	private void addRow(org.ehealth_connector.cda.BaseProblemConcern problemConcerns,
-			int index) {
+	private void addRow(org.ehealth_connector.cda.BaseProblemConcern problemConcerns, int index) {
 		// Currently only German available. Translation contributions are
 		// welcome
 		int i = 0;

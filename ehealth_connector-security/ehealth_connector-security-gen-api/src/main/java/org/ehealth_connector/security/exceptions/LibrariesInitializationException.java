@@ -30,13 +30,13 @@ public class LibrariesInitializationException extends Exception {
 	private static final long serialVersionUID = -558241448346503409L;
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Default constructor to instanciate the object.</div>
 	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
-	 * 
+	 *
 	 * @param message
 	 * <div class="en">The message of the exception.</div>
 	 * <div class="de">Die Nachricht des Fehlers.</div>
@@ -49,13 +49,13 @@ public class LibrariesInitializationException extends Exception {
 	}
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Default constructor to instanciate the object.</div>
 	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
-	 * 
+	 *
 	 * @param message
 	 * <div class="en">The message of the exception.</div>
 	 * <div class="de">Die Nachricht des Fehlers.</div>
@@ -73,13 +73,13 @@ public class LibrariesInitializationException extends Exception {
 	}
 
 	/**
-	 * 
+	 *
 	 * <!-- @formatter:off -->
 	 * <div class="en">Default constructor to instanciate the object.</div>
 	 * <div class="de">Default Konstruktor für die instanziierung des objects.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
-	 * 
+	 *
 	 * @param cause
 	 * <div class="en">The cause of the exception.</div>
 	 * <div class="de">Der Grund des Fehlers.</div>

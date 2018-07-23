@@ -56,7 +56,8 @@ public enum SpecialtySections {
 	HLA_STUDIES("18724-5", "HLA studies", "20150101", ""),
 
 	/** <div class="en">Microbial susceptibility tests Set</div>. */
-	MICROBIAL_SUSCEPTIBILITY_TESTS_SET("18769-0", "Microbial susceptibility tests Set", "20150101", ""),
+	MICROBIAL_SUSCEPTIBILITY_TESTS_SET("18769-0", "Microbial susceptibility tests Set", "20150101",
+			""),
 
 	/** <div class="en">Microbiology studies</div>. */
 	MICROBIOLOGY_STUDIES("18725-2", "Microbiology studies", "20150101", ""),

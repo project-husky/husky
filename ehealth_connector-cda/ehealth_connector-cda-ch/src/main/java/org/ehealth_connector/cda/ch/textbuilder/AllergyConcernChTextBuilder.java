@@ -21,10 +21,10 @@ package org.ehealth_connector.cda.ch.textbuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.BaseAllergyConcern;
 import org.ehealth_connector.cda.BaseAllergyProblem;
 import org.ehealth_connector.cda.BaseAllergyProblemComparator;
-import org.ehealth_connector.cda.AllergyConcern;
 import org.ehealth_connector.cda.enums.ContentIdPrefix;
 import org.ehealth_connector.cda.textbuilder.AllergyConcernTextBuilder;
 import org.ehealth_connector.common.Value;

@@ -19,10 +19,12 @@ package org.ehealth_connector.communication.ch.enums;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.annotation.Generated;
+
+import org.ehealth_connector.common.ch.enums.ValueSetEnumInterface;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.ch.enums.ValueSetEnumInterface;
 
 /**
  *<!-- @formatter:off -->
@@ -49,7 +51,8 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <div class="it">Avvertenze</div>
 	 *<!-- @formatter:on -->
 	 */
-	ALERTS("1331000195101", "2.16.840.1.113883.6.96", "Alert (record artifact)", "Alerts", "Warnungen/Risiken", "Alertes", "Avvertenze"),
+	ALERTS("1331000195101", "2.16.840.1.113883.6.96", "Alert (record artifact)", "Alerts",
+			"Warnungen/Risiken", "Alertes", "Avvertenze"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Care Plans</div>
@@ -58,7 +61,9 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <div class="it">Piani di cura</div>
 	 *<!-- @formatter:on -->
 	 */
-	CARE_PLANS("1321000195103", "2.16.840.1.113883.6.96", "Care Plan (record artifact)", "Care Plans", "Behandlungspläne/Behandlungsschemata", "Plans de soins", "Piani di cura"),
+	CARE_PLANS("1321000195103", "2.16.840.1.113883.6.96", "Care Plan (record artifact)",
+			"Care Plans", "Behandlungspläne/Behandlungsschemata", "Plans de soins",
+			"Piani di cura"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Certificate</div>
@@ -67,7 +72,8 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <div class="it">Certificato</div>
 	 *<!-- @formatter:on -->
 	 */
-	CERTIFICATE("308707006", "2.16.840.1.113883.6.96", "Certificate (record artifact)", "Certificate", "Zeugnis", "Certificat", "Certificato"),
+	CERTIFICATE("308707006", "2.16.840.1.113883.6.96", "Certificate (record artifact)",
+			"Certificate", "Zeugnis", "Certificat", "Certificato"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Clinical Care Referrals</div>
@@ -76,7 +82,10 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <div class="it">Richieste di presa a carico</div>
 	 *<!-- @formatter:on -->
 	 */
-	CLINICAL_CARE_REFERRALS("1261000195102", "2.16.840.1.113883.6.96", "Clinical Care Referral (record artifact)", "Clinical Care Referrals", "Zuweisungen/Überweisungen", "Demandes de prise en charge", "Richieste di presa a carico"),
+	CLINICAL_CARE_REFERRALS("1261000195102", "2.16.840.1.113883.6.96",
+			"Clinical Care Referral (record artifact)", "Clinical Care Referrals",
+			"Zuweisungen/Überweisungen", "Demandes de prise en charge",
+			"Richieste di presa a carico"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Data from Patient</div>
@@ -85,7 +94,10 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <div class="it">Documenti inseriti dal paziente</div>
 	 *<!-- @formatter:on -->
 	 */
-	DATA_FROM_PATIENT("1351000195107", "2.16.840.1.113883.6.96", "Data from Patient (record artifact)", "Data from Patient", "Eigene Daten des Patienten", "Documents introduits par le patient", "Documenti inseriti dal paziente"),
+	DATA_FROM_PATIENT("1351000195107", "2.16.840.1.113883.6.96",
+			"Data from Patient (record artifact)", "Data from Patient",
+			"Eigene Daten des Patienten", "Documents introduits par le patient",
+			"Documenti inseriti dal paziente"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Diagnostic Test Results</div>
@@ -94,7 +106,10 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <div class="it">Risultati di esame diagnostico</div>
 	 *<!-- @formatter:on -->
 	 */
-	DIAGNOSTIC_TEST_RESULTS("1291000195107", "2.16.840.1.113883.6.96", "Diagnostic Test Result (record artifact)", "Diagnostic Test Results", "Diagnostische Untersuchungsbefunde", "Résultats d'examen diagnostic", "Risultati di esame diagnostico"),
+	DIAGNOSTIC_TEST_RESULTS("1291000195107", "2.16.840.1.113883.6.96",
+			"Diagnostic Test Result (record artifact)", "Diagnostic Test Results",
+			"Diagnostische Untersuchungsbefunde", "Résultats d'examen diagnostic",
+			"Risultati di esame diagnostico"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Episode Summary Reports</div>
@@ -103,7 +118,9 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <div class="it">Riassunti di episodio</div>
 	 *<!-- @formatter:on -->
 	 */
-	EPISODE_SUMMARY_REPORTS("1271000195108", "2.16.840.1.113883.6.96", "Episode Summary Report (record artifact)", "Episode Summary Reports", "Zusammenfassende Berichte", "Résumés d'épisode", "Riassunti di episodio"),
+	EPISODE_SUMMARY_REPORTS("1271000195108", "2.16.840.1.113883.6.96",
+			"Episode Summary Report (record artifact)", "Episode Summary Reports",
+			"Zusammenfassende Berichte", "Résumés d'épisode", "Riassunti di episodio"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Historic Overviews</div>
@@ -112,7 +129,10 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <div class="it">Riassunti della storia clinica</div>
 	 *<!-- @formatter:on -->
 	 */
-	HISTORIC_OVERVIEWS("1281000195105", "2.16.840.1.113883.6.96", "Historic Overview (record artifact)", "Historic Overviews", "Medizinische Vorgeschichte", "Résumés d'antécédents", "Riassunti della storia clinica"),
+	HISTORIC_OVERVIEWS("1281000195105", "2.16.840.1.113883.6.96",
+			"Historic Overview (record artifact)", "Historic Overviews",
+			"Medizinische Vorgeschichte", "Résumés d'antécédents",
+			"Riassunti della storia clinica"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Notes on Consultations</div>
@@ -121,7 +141,10 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <div class="it">Rapporti e note di consultazione</div>
 	 *<!-- @formatter:on -->
 	 */
-	NOTES_ON_CONSULTATIONS("1211000195104", "2.16.840.1.113883.6.96", "Note on Consultation (record artifact)", "Notes on Consultations", "Konsultationseinträge/-notizen", "Notes de consultation", "Rapporti e note di consultazione"),
+	NOTES_ON_CONSULTATIONS("1211000195104", "2.16.840.1.113883.6.96",
+			"Note on Consultation (record artifact)", "Notes on Consultations",
+			"Konsultationseinträge/-notizen", "Notes de consultation",
+			"Rapporti e note di consultazione"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Notes on Procedures</div>
@@ -130,7 +153,10 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <div class="it">Rapporti e note d'intervento</div>
 	 *<!-- @formatter:on -->
 	 */
-	NOTES_ON_PROCEDURES("1241000195103", "2.16.840.1.113883.6.96", "Note on Procedure (record artifact)", "Notes on Procedures", "Interventionseinträge/-notizen", "Notes d'intervention", "Rapporti e note d'intervento"),
+	NOTES_ON_PROCEDURES("1241000195103", "2.16.840.1.113883.6.96",
+			"Note on Procedure (record artifact)", "Notes on Procedures",
+			"Interventionseinträge/-notizen", "Notes d'intervention",
+			"Rapporti e note d'intervento"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Notifications</div>
@@ -139,7 +165,9 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <div class="it">Notifiche / dichiarazioni</div>
 	 *<!-- @formatter:on -->
 	 */
-	NOTIFICATIONS("1301000195106", "2.16.840.1.113883.6.96", "Notification (record artifact)", "Notifications", "Meldungen", "Notifications / déclarations", "Notifiche / dichiarazioni"),
+	NOTIFICATIONS("1301000195106", "2.16.840.1.113883.6.96", "Notification (record artifact)",
+			"Notifications", "Meldungen", "Notifications / déclarations",
+			"Notifiche / dichiarazioni"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Other Composition</div>
@@ -148,7 +176,8 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <div class="it">Altro</div>
 	 *<!-- @formatter:on -->
 	 */
-	OTHER_COMPOSITION("419891008", "2.16.840.1.113883.6.96", "Other Composition", "Other Composition", "Anderweitige Dokumente", "Autre", "Altro"),
+	OTHER_COMPOSITION("419891008", "2.16.840.1.113883.6.96", "Other Composition",
+			"Other Composition", "Anderweitige Dokumente", "Autre", "Altro"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Present State Summaries</div>
@@ -157,7 +186,9 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <div class="it">Riassunti dello stato attuale</div>
 	 *<!-- @formatter:on -->
 	 */
-	PRESENT_STATE_SUMMARIES("1311000195108", "2.16.840.1.113883.6.96", "Present State Summary (record artifact)", "Present State Summaries", "Aktueller Zustand", "Résumés de l'état actuel", "Riassunti dello stato attuale"),
+	PRESENT_STATE_SUMMARIES("1311000195108", "2.16.840.1.113883.6.96",
+			"Present State Summary (record artifact)", "Present State Summaries",
+			"Aktueller Zustand", "Résumés de l'état actuel", "Riassunti dello stato attuale"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Progress Notes</div>
@@ -166,7 +197,8 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <div class="it">Diario clinico</div>
 	 *<!-- @formatter:on -->
 	 */
-	PROGRESS_NOTES("1231000195106", "2.16.840.1.113883.6.96", "Progress Note (record artifact)", "Progress Notes", "Verlaufseinträge/-notizen", "Notes de suivi", "Diario clinico"),
+	PROGRESS_NOTES("1231000195106", "2.16.840.1.113883.6.96", "Progress Note (record artifact)",
+			"Progress Notes", "Verlaufseinträge/-notizen", "Notes de suivi", "Diario clinico"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Progress Reports</div>
@@ -175,7 +207,9 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <div class="it">Rapporti di evoluzione</div>
 	 *<!-- @formatter:on -->
 	 */
-	PROGRESS_REPORTS("371532007", "2.16.840.1.113883.6.96", "Progress report (qualifier value)", "Progress Reports", "Verlaufsberichte", "Rapports d'évolution", "Rapporti di evoluzione"),
+	PROGRESS_REPORTS("371532007", "2.16.840.1.113883.6.96", "Progress report (qualifier value)",
+			"Progress Reports", "Verlaufsberichte", "Rapports d'évolution",
+			"Rapporti di evoluzione"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Tests/Procedure Requests</div>
@@ -184,7 +218,10 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <div class="it">Richieste d'esame</div>
 	 *<!-- @formatter:on -->
 	 */
-	TESTS_PROCEDURE_REQUESTS("1251000195100", "2.16.840.1.113883.6.96", "Test or Procedure Request (record artifact)", "Tests/Procedure Requests", "Untersuchungs-/Prozeduranforderungen", "Demandes d'examen / procédure", "Richieste d'esame");
+	TESTS_PROCEDURE_REQUESTS("1251000195100", "2.16.840.1.113883.6.96",
+			"Test or Procedure Request (record artifact)", "Tests/Procedure Requests",
+			"Untersuchungs-/Prozeduranforderungen", "Demandes d'examen / procédure",
+			"Richieste d'esame");
 
 	/**
 	 *<!-- @formatter:off -->
@@ -353,8 +390,8 @@ public enum ClassCode implements ValueSetEnumInterface {
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.3";
 
 	/**
-	 * <div class="en">Name of the value set</div>
-	 * <div class="de">Name des Value Sets</div>
+	 * <div class="en">Name of the value set</div> <div class="de">Name des
+	 * Value Sets</div>
 	 */
 	public static final String VALUE_SET_NAME = "EprDocumentClassCode";
 
@@ -416,9 +453,8 @@ public enum ClassCode implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
-	 * code</div>
-	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse)
-	 * eindeutiger Code</div>
+	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
+	 * dieser Klasse) eindeutiger Code</div>
 	 */
 	private String code;
 
@@ -435,9 +471,8 @@ public enum ClassCode implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div>
-	 * <div class="de">Instanziiert dieses Enum Object mittels eines Codes
-	 * und einem Display Name</div>.
+	 * Display Name</div> <div class="de">Instanziiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>.
 	 *
 	 * @param code
 	 *            code
@@ -454,7 +489,8 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	ClassCode(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	ClassCode(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
@@ -504,15 +540,17 @@ public enum ClassCode implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Gets the display name defined by the language param. If
-	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
-	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
+	 * there is no english translation, the default display name is
+	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
+	 * falls es keine Englische Übersetzung gibt, wird der default-Name
+	 * zurückgegeben.</div>
 	 *
 	 * @param languageCode
 	 *            the language code to get the display name for
 	 * @return returns the display name in the desired language. if language not
 	 *         found, display name in german will returned
 	 */
+	@Override
 	public String getDisplayName(LanguageCode languageCode) {
 		String displayName = displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
@@ -522,8 +560,8 @@ public enum ClassCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the value set identifier.</div> <div class="de">Liefert
-	 * den Value Set Identifikator.</div>
+	 * <div class="en">Gets the value set identifier.</div>
+	 * <div class="de">Liefert den Value Set Identifikator.</div>
 	 *
 	 * @return <div class="en">the value set identifier</div>
 	 */
