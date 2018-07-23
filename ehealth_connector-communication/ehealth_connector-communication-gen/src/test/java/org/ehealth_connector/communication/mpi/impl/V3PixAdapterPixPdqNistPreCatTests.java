@@ -44,7 +44,7 @@ import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.context.FhirVersionEnum;
 
 /**
- * See http://pixpdqtests.nist.gov/pixpdqtool/ IHE PIX and PDQ Pre-Connectathon
+ * See https://pixpdqtests.nist.gov/pixpdqtool/ IHE PIX and PDQ Pre-Connectathon
  * Test Tool
  *
  * Configuration for 2015 Europe
