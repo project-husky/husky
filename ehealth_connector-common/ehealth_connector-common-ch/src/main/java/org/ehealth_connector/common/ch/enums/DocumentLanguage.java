@@ -37,13 +37,13 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">German</div>
-	 * <div class="de">Deutsch</div>
-	 * <div class="fr">Allemand</div>
-	 * <div class="it">Tedesco</div>
+	 * <div class="en">English</div>
+	 * <div class="de">Englisch</div>
+	 * <div class="fr">Anglais</div>
+	 * <div class="it">Inglese</div>
 	 *<!-- @formatter:on -->
 	 */
-	GERMAN("de-CH", "2.16.840.1.113883.6.316", "German ", "German", "Deutsch", "Allemand", "Tedesco"),
+	ENGLISH("en-US", "2.16.840.1.113883.6.316", "English language (qualifier value)", "English", "Englisch", "Anglais", "Inglese"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">French</div>
@@ -53,6 +53,15 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	 *<!-- @formatter:on -->
 	 */
 	FRENCH("fr-CH", "2.16.840.1.113883.6.316", "French", "French", "Französisch", "Français ", "Francese"),
+	/**
+	 *<!-- @formatter:off -->
+	 * <div class="en">German</div>
+	 * <div class="de">Deutsch</div>
+	 * <div class="fr">Allemand</div>
+	 * <div class="it">Tedesco</div>
+	 *<!-- @formatter:on -->
+	 */
+	GERMAN("de-CH", "2.16.840.1.113883.6.316", "German ", "German", "Deutsch", "Allemand", "Tedesco"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Italian</div>
@@ -70,26 +79,17 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	 * <div class="it">Romancio</div>
 	 *<!-- @formatter:on -->
 	 */
-	RHAETO_ROMANIC("rm", "2.16.840.1.113883.6.316", "Rhaeto-Romanic", "Rhaeto-Romanic ", "Rätoromanisch", "Rhéto-roman", "Romancio"),
-	/**
-	 *<!-- @formatter:off -->
-	 * <div class="en">English</div>
-	 * <div class="de">Englisch</div>
-	 * <div class="fr">Anglais</div>
-	 * <div class="it">Inglese</div>
-	 *<!-- @formatter:on -->
-	 */
-	ENGLISH("en-US", "2.16.840.1.113883.6.316", "English language (qualifier value)", "English", "Englisch", "Anglais", "Inglese");
+	RHAETO_ROMANIC("rm", "2.16.840.1.113883.6.316", "Rhaeto-Romanic", "Rhaeto-Romanic ", "Rätoromanisch", "Rhéto-roman", "Romancio");
 
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">Code for German</div>
-	 * <div class="de">Code für Deutsch</div>
-	 * <div class="fr">Code de Allemand</div>
-	 * <div class="it">Code per Tedesco</div>
+	 * <div class="en">Code for English</div>
+	 * <div class="de">Code für Englisch</div>
+	 * <div class="fr">Code de Anglais</div>
+	 * <div class="it">Code per Inglese</div>
 	 *<!-- @formatter:on -->
 	 */
-	public static final String GERMAN_CODE = "de-CH";
+	public static final String ENGLISH_CODE = "en-US";
 
 	/**
 	 *<!-- @formatter:off -->
@@ -100,6 +100,16 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	 *<!-- @formatter:on -->
 	 */
 	public static final String FRENCH_CODE = "fr-CH";
+
+	/**
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for German</div>
+	 * <div class="de">Code für Deutsch</div>
+	 * <div class="fr">Code de Allemand</div>
+	 * <div class="it">Code per Tedesco</div>
+	 *<!-- @formatter:on -->
+	 */
+	public static final String GERMAN_CODE = "de-CH";
 
 	/**
 	 *<!-- @formatter:off -->
@@ -122,26 +132,16 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	public static final String RHAETO_ROMANIC_CODE = "rm";
 
 	/**
-	 *<!-- @formatter:off -->
-	 * <div class="en">Code for English</div>
-	 * <div class="de">Code für Englisch</div>
-	 * <div class="fr">Code de Anglais</div>
-	 * <div class="it">Code per Inglese</div>
-	 *<!-- @formatter:on -->
+	 * <div class="en">Identifier of the value set</div>
+	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
 	 */
-	public static final String ENGLISH_CODE = "en-US";
+	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.13";
 
 	/**
 	 * <div class="en">Name of the value set</div>
 	 * <div class="de">Name des Value Sets</div>
 	 */
 	public static final String VALUE_SET_NAME = "EprDocumentLanguage";
-
-	/**
-	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
-	 */
-	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.13";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -200,11 +200,6 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * The display names per language
-	 */
-	private Map<LanguageCode, String> displayNames;
-
-	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
 	 * code</div>
 	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse)
@@ -217,6 +212,11 @@ public enum DocumentLanguage implements ValueSetEnumInterface {
 	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
 	 */
 	private String codeSystem;
+
+	/**
+	 * The display names per language
+	 */
+	private Map<LanguageCode, String> displayNames;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and

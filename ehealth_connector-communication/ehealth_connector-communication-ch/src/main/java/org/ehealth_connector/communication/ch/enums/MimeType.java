@@ -37,6 +37,15 @@ public enum MimeType implements ValueSetEnumInterface {
 
 	/**
 	 *<!-- @formatter:off -->
+	 * <div class="en">CDA Level 1 Multipart</div>
+	 * <div class="de">CDA Level 1 Multipart</div>
+	 * <div class="fr">CDA Level 1 Multipart</div>
+	 * <div class="it">CDA Level 1 Multipart</div>
+	 *<!-- @formatter:on -->
+	 */
+	CDA_LEVEL_1_MULTIPART("multipart/x-hl7-cda-level1", "2.16.840.1.113883.5.79", "CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart"),
+	/**
+	 *<!-- @formatter:off -->
 	 * <div class="en">DICOM</div>
 	 * <div class="de">DICOM</div>
 	 * <div class="fr">DICOM</div>
@@ -46,22 +55,22 @@ public enum MimeType implements ValueSetEnumInterface {
 	DICOM("application/dicom", "2.16.840.1.113883.5.79", "DICOM", "DICOM", "DICOM", "DICOM", "DICOM"),
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">PDF</div>
-	 * <div class="de">PDF</div>
-	 * <div class="fr">PDF</div>
-	 * <div class="it">PDF</div>
+	 * <div class="en">FHIR (JSON)</div>
+	 * <div class="de">FHIR (JSON)</div>
+	 * <div class="fr">FHIR (JSON)</div>
+	 * <div class="it">FHIR (JSON)</div>
 	 *<!-- @formatter:on -->
 	 */
-	PDF("application/pdf", "2.16.840.1.113883.5.79", "PDF", "PDF", "PDF", "PDF", "PDF"),
+	FHIR__JSON_("application/fhir+json", "2.16.840.1.113883.5.79", "FHIR (JSON)", "FHIR (JSON)", "FHIR (JSON)", "FHIR (JSON)", "FHIR (JSON)"),
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">MPEG audio layer 3</div>
-	 * <div class="de">MPEG audio layer 3</div>
-	 * <div class="fr">MPEG audio layer 3</div>
-	 * <div class="it">MPEG audio layer 3</div>
+	 * <div class="en">FHIR (XML)</div>
+	 * <div class="de">FHIR (XML)</div>
+	 * <div class="fr">FHIR (XML)</div>
+	 * <div class="it">FHIR (XML)</div>
 	 *<!-- @formatter:on -->
 	 */
-	MPEG_AUDIO_LAYER_3("audio/mpeg", "2.16.840.1.113883.5.79", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3"),
+	FHIR__XML_("application/fhir+xml", "2.16.840.1.113883.5.79", "FHIR (XML)", "FHIR (XML)", "FHIR (XML)", "FHIR (XML)", "FHIR (XML)"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">GIF Graphics Interchange Format</div>
@@ -82,6 +91,42 @@ public enum MimeType implements ValueSetEnumInterface {
 	JPEG_IMAGE("image/jpeg", "2.16.840.1.113883.5.79", "JPEG Image", "JPEG Image", "JPEG Image", "JPEG Image", "JPEG Image"),
 	/**
 	 *<!-- @formatter:off -->
+	 * <div class="en">MPEG audio layer 3</div>
+	 * <div class="de">MPEG audio layer 3</div>
+	 * <div class="fr">MPEG audio layer 3</div>
+	 * <div class="it">MPEG audio layer 3</div>
+	 *<!-- @formatter:on -->
+	 */
+	MPEG_AUDIO_LAYER_3("audio/mpeg", "2.16.840.1.113883.5.79", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3"),
+	/**
+	 *<!-- @formatter:off -->
+	 * <div class="en">MPEG Video</div>
+	 * <div class="de">MPEG Video</div>
+	 * <div class="fr">MPEG Video</div>
+	 * <div class="it">MPEG Video</div>
+	 *<!-- @formatter:on -->
+	 */
+	MPEG_VIDEO("video/mpeg", "2.16.840.1.113883.5.79", "MPEG Video", "MPEG Video", "MPEG Video", "MPEG Video", "MPEG Video"),
+	/**
+	 *<!-- @formatter:off -->
+	 * <div class="en">PDF</div>
+	 * <div class="de">PDF</div>
+	 * <div class="fr">PDF</div>
+	 * <div class="it">PDF</div>
+	 *<!-- @formatter:on -->
+	 */
+	PDF("application/pdf", "2.16.840.1.113883.5.79", "PDF", "PDF", "PDF", "PDF", "PDF"),
+	/**
+	 *<!-- @formatter:off -->
+	 * <div class="en">Plain Text</div>
+	 * <div class="de">Plain Text</div>
+	 * <div class="fr">Plain Text</div>
+	 * <div class="it">Plain Text</div>
+	 *<!-- @formatter:on -->
+	 */
+	PLAIN_TEXT("text/plain", "2.16.840.1.113883.5.79", "Plain Text", "Plain Text", "Plain Text", "Plain Text", "Plain Text"),
+	/**
+	 *<!-- @formatter:off -->
 	 * <div class="en">PNG Portable Network Graphics</div>
 	 * <div class="de">PNG Portable Network Graphics</div>
 	 * <div class="fr">PNG Portable Network Graphics</div>
@@ -100,58 +145,23 @@ public enum MimeType implements ValueSetEnumInterface {
 	TIFF_IMAGE("image/tiff", "2.16.840.1.113883.5.79", "TIFF Image", "TIFF Image", "TIFF Image", "TIFF Image", "TIFF Image"),
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">CDA Level 1 Multipart</div>
-	 * <div class="de">CDA Level 1 Multipart</div>
-	 * <div class="fr">CDA Level 1 Multipart</div>
-	 * <div class="it">CDA Level 1 Multipart</div>
-	 *<!-- @formatter:on -->
-	 */
-	CDA_LEVEL_1_MULTIPART("multipart/x-hl7-cda-level1", "2.16.840.1.113883.5.79", "CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart"),
-	/**
-	 *<!-- @formatter:off -->
-	 * <div class="en">Plain Text</div>
-	 * <div class="de">Plain Text</div>
-	 * <div class="fr">Plain Text</div>
-	 * <div class="it">Plain Text</div>
-	 *<!-- @formatter:on -->
-	 */
-	PLAIN_TEXT("text/plain", "2.16.840.1.113883.5.79", "Plain Text", "Plain Text", "Plain Text", "Plain Text", "Plain Text"),
-	/**
-	 *<!-- @formatter:off -->
 	 * <div class="en">XML-Text</div>
 	 * <div class="de">XML-Text</div>
 	 * <div class="fr">XML-Text</div>
 	 * <div class="it">XML-Text</div>
 	 *<!-- @formatter:on -->
 	 */
-	XML_TEXT("text/xml", "2.16.840.1.113883.5.79", "XML-Text", "XML-Text", "XML-Text", "XML-Text", "XML-Text"),
+	XML_TEXT("text/xml", "2.16.840.1.113883.5.79", "XML-Text", "XML-Text", "XML-Text", "XML-Text", "XML-Text");
+
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">MPEG Video</div>
-	 * <div class="de">MPEG Video</div>
-	 * <div class="fr">MPEG Video</div>
-	 * <div class="it">MPEG Video</div>
+	 * <div class="en">Code for CDA Level 1 Multipart</div>
+	 * <div class="de">Code für CDA Level 1 Multipart</div>
+	 * <div class="fr">Code de CDA Level 1 Multipart</div>
+	 * <div class="it">Code per CDA Level 1 Multipart</div>
 	 *<!-- @formatter:on -->
 	 */
-	MPEG_VIDEO("video/mpeg", "2.16.840.1.113883.5.79", "MPEG Video", "MPEG Video", "MPEG Video", "MPEG Video", "MPEG Video"),
-	/**
-	 *<!-- @formatter:off -->
-	 * <div class="en">FHIR (XML)</div>
-	 * <div class="de">FHIR (XML)</div>
-	 * <div class="fr">FHIR (XML)</div>
-	 * <div class="it">FHIR (XML)</div>
-	 *<!-- @formatter:on -->
-	 */
-	FHIR__XML_("application/fhir+xml", "2.16.840.1.113883.5.79", "FHIR (XML)", "FHIR (XML)", "FHIR (XML)", "FHIR (XML)", "FHIR (XML)"),
-	/**
-	 *<!-- @formatter:off -->
-	 * <div class="en">FHIR (JSON)</div>
-	 * <div class="de">FHIR (JSON)</div>
-	 * <div class="fr">FHIR (JSON)</div>
-	 * <div class="it">FHIR (JSON)</div>
-	 *<!-- @formatter:on -->
-	 */
-	FHIR__JSON_("application/fhir+json", "2.16.840.1.113883.5.79", "FHIR (JSON)", "FHIR (JSON)", "FHIR (JSON)", "FHIR (JSON)", "FHIR (JSON)");
+	public static final String CDA_LEVEL_1_MULTIPART_CODE = "multipart/x-hl7-cda-level1";
 
 	/**
 	 *<!-- @formatter:off -->
@@ -165,23 +175,23 @@ public enum MimeType implements ValueSetEnumInterface {
 
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">Code for PDF</div>
-	 * <div class="de">Code für PDF</div>
-	 * <div class="fr">Code de PDF</div>
-	 * <div class="it">Code per PDF</div>
+	 * <div class="en">Code for FHIR (JSON)</div>
+	 * <div class="de">Code für FHIR (JSON)</div>
+	 * <div class="fr">Code de FHIR (JSON)</div>
+	 * <div class="it">Code per FHIR (JSON)</div>
 	 *<!-- @formatter:on -->
 	 */
-	public static final String PDF_CODE = "application/pdf";
+	public static final String FHIR__JSON__CODE = "application/fhir+json";
 
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">Code for MPEG audio layer 3</div>
-	 * <div class="de">Code für MPEG audio layer 3</div>
-	 * <div class="fr">Code de MPEG audio layer 3</div>
-	 * <div class="it">Code per MPEG audio layer 3</div>
+	 * <div class="en">Code for FHIR (XML)</div>
+	 * <div class="de">Code für FHIR (XML)</div>
+	 * <div class="fr">Code de FHIR (XML)</div>
+	 * <div class="it">Code per FHIR (XML)</div>
 	 *<!-- @formatter:on -->
 	 */
-	public static final String MPEG_AUDIO_LAYER_3_CODE = "audio/mpeg";
+	public static final String FHIR__XML__CODE = "application/fhir+xml";
 
 	/**
 	 *<!-- @formatter:off -->
@@ -205,6 +215,46 @@ public enum MimeType implements ValueSetEnumInterface {
 
 	/**
 	 *<!-- @formatter:off -->
+	 * <div class="en">Code for MPEG audio layer 3</div>
+	 * <div class="de">Code für MPEG audio layer 3</div>
+	 * <div class="fr">Code de MPEG audio layer 3</div>
+	 * <div class="it">Code per MPEG audio layer 3</div>
+	 *<!-- @formatter:on -->
+	 */
+	public static final String MPEG_AUDIO_LAYER_3_CODE = "audio/mpeg";
+
+	/**
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for MPEG Video</div>
+	 * <div class="de">Code für MPEG Video</div>
+	 * <div class="fr">Code de MPEG Video</div>
+	 * <div class="it">Code per MPEG Video</div>
+	 *<!-- @formatter:on -->
+	 */
+	public static final String MPEG_VIDEO_CODE = "video/mpeg";
+
+	/**
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for PDF</div>
+	 * <div class="de">Code für PDF</div>
+	 * <div class="fr">Code de PDF</div>
+	 * <div class="it">Code per PDF</div>
+	 *<!-- @formatter:on -->
+	 */
+	public static final String PDF_CODE = "application/pdf";
+
+	/**
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for Plain Text</div>
+	 * <div class="de">Code für Plain Text</div>
+	 * <div class="fr">Code de Plain Text</div>
+	 * <div class="it">Code per Plain Text</div>
+	 *<!-- @formatter:on -->
+	 */
+	public static final String PLAIN_TEXT_CODE = "text/plain";
+
+	/**
+	 *<!-- @formatter:off -->
 	 * <div class="en">Code for PNG Portable Network Graphics</div>
 	 * <div class="de">Code für PNG Portable Network Graphics</div>
 	 * <div class="fr">Code de PNG Portable Network Graphics</div>
@@ -224,24 +274,16 @@ public enum MimeType implements ValueSetEnumInterface {
 	public static final String TIFF_IMAGE_CODE = "image/tiff";
 
 	/**
-	 *<!-- @formatter:off -->
-	 * <div class="en">Code for CDA Level 1 Multipart</div>
-	 * <div class="de">Code für CDA Level 1 Multipart</div>
-	 * <div class="fr">Code de CDA Level 1 Multipart</div>
-	 * <div class="it">Code per CDA Level 1 Multipart</div>
-	 *<!-- @formatter:on -->
+	 * <div class="en">Identifier of the value set</div>
+	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
 	 */
-	public static final String CDA_LEVEL_1_MULTIPART_CODE = "multipart/x-hl7-cda-level1";
+	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.16";
 
 	/**
-	 *<!-- @formatter:off -->
-	 * <div class="en">Code for Plain Text</div>
-	 * <div class="de">Code für Plain Text</div>
-	 * <div class="fr">Code de Plain Text</div>
-	 * <div class="it">Code per Plain Text</div>
-	 *<!-- @formatter:on -->
+	 * <div class="en">Name of the value set</div>
+	 * <div class="de">Name des Value Sets</div>
 	 */
-	public static final String PLAIN_TEXT_CODE = "text/plain";
+	public static final String VALUE_SET_NAME = "EprDocumentMimeType";
 
 	/**
 	 *<!-- @formatter:off -->
@@ -252,48 +294,6 @@ public enum MimeType implements ValueSetEnumInterface {
 	 *<!-- @formatter:on -->
 	 */
 	public static final String XML_TEXT_CODE = "text/xml";
-
-	/**
-	 *<!-- @formatter:off -->
-	 * <div class="en">Code for MPEG Video</div>
-	 * <div class="de">Code für MPEG Video</div>
-	 * <div class="fr">Code de MPEG Video</div>
-	 * <div class="it">Code per MPEG Video</div>
-	 *<!-- @formatter:on -->
-	 */
-	public static final String MPEG_VIDEO_CODE = "video/mpeg";
-
-	/**
-	 *<!-- @formatter:off -->
-	 * <div class="en">Code for FHIR (XML)</div>
-	 * <div class="de">Code für FHIR (XML)</div>
-	 * <div class="fr">Code de FHIR (XML)</div>
-	 * <div class="it">Code per FHIR (XML)</div>
-	 *<!-- @formatter:on -->
-	 */
-	public static final String FHIR__XML__CODE = "application/fhir+xml";
-
-	/**
-	 *<!-- @formatter:off -->
-	 * <div class="en">Code for FHIR (JSON)</div>
-	 * <div class="de">Code für FHIR (JSON)</div>
-	 * <div class="fr">Code de FHIR (JSON)</div>
-	 * <div class="it">Code per FHIR (JSON)</div>
-	 *<!-- @formatter:on -->
-	 */
-	public static final String FHIR__JSON__CODE = "application/fhir+json";
-
-	/**
-	 * <div class="en">Name of the value set</div>
-	 * <div class="de">Name des Value Sets</div>
-	 */
-	public static final String VALUE_SET_NAME = "EprDocumentMimeType";
-
-	/**
-	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
-	 */
-	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.16";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -352,11 +352,6 @@ public enum MimeType implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * The display names per language
-	 */
-	private Map<LanguageCode, String> displayNames;
-
-	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
 	 * code</div>
 	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse)
@@ -369,6 +364,11 @@ public enum MimeType implements ValueSetEnumInterface {
 	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
 	 */
 	private String codeSystem;
+
+	/**
+	 * The display names per language
+	 */
+	private Map<LanguageCode, String> displayNames;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and

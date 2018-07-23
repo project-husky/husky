@@ -45,15 +45,6 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">Diagnostic institution</div>
-	 * <div class="de">Institution für medizinische Diagnostik</div>
-	 * <div class="fr">Institut d’aide au diagnostic</div>
-	 * <div class="it">Istituto di diagnostica medica</div>
-	 *<!-- @formatter:on -->
-	 */
-	DIAGNOSTIC_INSTITUTION("722171005", "2.16.840.1.113883.6.96", "Diagnostic institution (environment)", "Diagnostic institution", "Institution für medizinische Diagnostik", "Institut d’aide au diagnostic", "Istituto di diagnostica medica"),
-	/**
-	 *<!-- @formatter:off -->
 	 * <div class="en">Accident and Emergency department</div>
 	 * <div class="de">Notfall-/Rettungsdienste</div>
 	 * <div class="fr">Service d'urgence et de sauvetage</div>
@@ -63,6 +54,51 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	ACCIDENT_AND_EMERGENCY_DEPARTMENT("225728007", "2.16.840.1.113883.6.96", "Accident and Emergency department (environment)", "Accident and Emergency department", "Notfall-/Rettungsdienste", "Service d'urgence et de sauvetage", "Servizio di pronto soccorso e di salvataggio"),
 	/**
 	 *<!-- @formatter:off -->
+	 * <div class="en">Ambulatory care site</div>
+	 * <div class="de">Ambulante Einrichtung/Ambulatorium</div>
+	 * <div class="fr">Etablissement ambulatoire</div>
+	 * <div class="it">Struttura ambulatoriale, incl. gli studi medici</div>
+	 *<!-- @formatter:on -->
+	 */
+	AMBULATORY_CARE_SITE("35971002", "2.16.840.1.113883.6.96", "Ambulatory care site (environment)", "Ambulatory care site", "Ambulante Einrichtung/Ambulatorium", "Etablissement ambulatoire", "Struttura ambulatoriale, incl. gli studi medici"),
+	/**
+	 *<!-- @formatter:off -->
+	 * <div class="en">Client's or patient's home</div>
+	 * <div class="de">Domizil des Patienten</div>
+	 * <div class="fr">Domicile du patient</div>
+	 * <div class="it">Domicilio del paziente</div>
+	 *<!-- @formatter:on -->
+	 */
+	CLIENT_OR_PATIENT_HOME("394778007", "2.16.840.1.113883.6.96", "Client's or patient's home (environment)", "Client's or patient's home", "Domizil des Patienten", "Domicile du patient", "Domicilio del paziente"),
+	/**
+	 *<!-- @formatter:off -->
+	 * <div class="en">Diagnostic institution</div>
+	 * <div class="de">Institution für medizinische Diagnostik</div>
+	 * <div class="fr">Institut d’aide au diagnostic</div>
+	 * <div class="it">Istituto di diagnostica medica</div>
+	 *<!-- @formatter:on -->
+	 */
+	DIAGNOSTIC_INSTITUTION("722171005", "2.16.840.1.113883.6.96", "Diagnostic institution (environment)", "Diagnostic institution", "Institution für medizinische Diagnostik", "Institut d’aide au diagnostic", "Istituto di diagnostica medica"),
+	/**
+	 *<!-- @formatter:off -->
+	 * <div class="en">Free-standing birthing center</div>
+	 * <div class="de">Geburtshaus</div>
+	 * <div class="fr">Maison de naissance</div>
+	 * <div class="it">Luoghi natale</div>
+	 *<!-- @formatter:on -->
+	 */
+	FREE_STANDING_BIRTHING_CENTER("91154008", "2.16.840.1.113883.6.96", "Free-standing birthing center (environment)", "Free-standing birthing center", "Geburtshaus", "Maison de naissance", "Luoghi natale"),
+	/**
+	 *<!-- @formatter:off -->
+	 * <div class="en">General practice premises</div>
+	 * <div class="de">Arztpraxis</div>
+	 * <div class="fr">Cabinet médical</div>
+	 * <div class="it">Studio medico</div>
+	 *<!-- @formatter:on -->
+	 */
+	GENERAL_PRACTICE_PREMISES("264358009", "2.16.840.1.113883.6.96", "General practice premises (environement)", "General practice premises", "Arztpraxis", "Cabinet médical", "Studio medico"),
+	/**
+	 *<!-- @formatter:off -->
 	 * <div class="en">Health Authority</div>
 	 * <div class="de">Gesundheitsbehörde</div>
 	 * <div class="fr">Autorité sanitaire</div>
@@ -70,15 +106,6 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 *<!-- @formatter:on -->
 	 */
 	HEALTH_AUTHORITY("394747008", "2.16.840.1.113883.6.96", "Health Authority (qualifier value)", "Health Authority", "Gesundheitsbehörde", "Autorité sanitaire", "Autorità sanitaria"),
-	/**
-	 *<!-- @formatter:off -->
-	 * <div class="en">Private home-based care</div>
-	 * <div class="de">Organisation für Pflege zu Hause</div>
-	 * <div class="fr">Soins à domicile</div>
-	 * <div class="it">Servizio di assistenza e cura a domicilio</div>
-	 *<!-- @formatter:on -->
-	 */
-	PRIVATE_HOME_BASED_CARE("66280005", "2.16.840.1.113883.6.96", "Private home-based care (environment)", "Private home-based care", "Organisation für Pflege zu Hause", "Soins à domicile", "Servizio di assistenza e cura a domicilio"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Hospital</div>
@@ -99,15 +126,6 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	MILITARY_HEALTH_INSTITUTION("722172003", "2.16.840.1.113883.6.96", "Military health institution (environment)", "Military health institution", "Armeeärztliche Dienste", "Service sanitaire de l'armée", "Servizio di medicina militare"),
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">Prison based care site</div>
-	 * <div class="de">Gesundheitseinrichtung in der Haftanstalt</div>
-	 * <div class="fr">Service de santé en milieu carcéral</div>
-	 * <div class="it">Struttura sanitaria in uno stabilimento carcerario</div>
-	 *<!-- @formatter:on -->
-	 */
-	PRISON_BASED_CARE_SITE("722173008", "2.16.840.1.113883.6.96", "Prison based care site (environment)", "Prison based care site", "Gesundheitseinrichtung in der Haftanstalt", "Service de santé en milieu carcéral", "Struttura sanitaria in uno stabilimento carcerario"),
-	/**
-	 *<!-- @formatter:off -->
 	 * <div class="en">Nursing home</div>
 	 * <div class="de">Pflegeheim</div>
 	 * <div class="fr">Etablissement médico-social</div>
@@ -117,13 +135,13 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	NURSING_HOME("42665001", "2.16.840.1.113883.6.96", "Nursing home (environment)", "Nursing home", "Pflegeheim", "Etablissement médico-social", "Casa di cura"),
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">Free-standing birthing center</div>
-	 * <div class="de">Geburtshaus</div>
-	 * <div class="fr">Maison de naissance</div>
-	 * <div class="it">Luoghi natale</div>
+	 * <div class="en">Other Site of Care</div>
+	 * <div class="de">Andere Gesundheitsorganisation</div>
+	 * <div class="fr">Autres prestataires de soins</div>
+	 * <div class="it">Altre organizzazioni sanitarie</div>
 	 *<!-- @formatter:on -->
 	 */
-	FREE_STANDING_BIRTHING_CENTER("91154008", "2.16.840.1.113883.6.96", "Free-standing birthing center (environment)", "Free-standing birthing center", "Geburtshaus", "Maison de naissance", "Luoghi natale"),
+	OTHER_SITE_OF_CARE("43741000", "2.16.840.1.113883.6.96", "Site of care (social concept)", "Other Site of Care", "Andere Gesundheitsorganisation", "Autres prestataires de soins", "Altre organizzazioni sanitarie"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Pharmacy</div>
@@ -135,13 +153,22 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	PHARMACY("264372000", "2.16.840.1.113883.6.96", "Pharmacy (environment)", "Pharmacy", "Apotheke", "Pharmacie", "Farmacia"),
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">Ambulatory care site</div>
-	 * <div class="de">Ambulante Einrichtung/Ambulatorium</div>
-	 * <div class="fr">Etablissement ambulatoire</div>
-	 * <div class="it">Struttura ambulatoriale, incl. gli studi medici</div>
+	 * <div class="en">Prison based care site</div>
+	 * <div class="de">Gesundheitseinrichtung in der Haftanstalt</div>
+	 * <div class="fr">Service de santé en milieu carcéral</div>
+	 * <div class="it">Struttura sanitaria in uno stabilimento carcerario</div>
 	 *<!-- @formatter:on -->
 	 */
-	AMBULATORY_CARE_SITE("35971002", "2.16.840.1.113883.6.96", "Ambulatory care site (environment)", "Ambulatory care site", "Ambulante Einrichtung/Ambulatorium", "Etablissement ambulatoire", "Struttura ambulatoriale, incl. gli studi medici"),
+	PRISON_BASED_CARE_SITE("722173008", "2.16.840.1.113883.6.96", "Prison based care site (environment)", "Prison based care site", "Gesundheitseinrichtung in der Haftanstalt", "Service de santé en milieu carcéral", "Struttura sanitaria in uno stabilimento carcerario"),
+	/**
+	 *<!-- @formatter:off -->
+	 * <div class="en">Private home-based care</div>
+	 * <div class="de">Organisation für Pflege zu Hause</div>
+	 * <div class="fr">Soins à domicile</div>
+	 * <div class="it">Servizio di assistenza e cura a domicilio</div>
+	 *<!-- @formatter:on -->
+	 */
+	PRIVATE_HOME_BASED_CARE("66280005", "2.16.840.1.113883.6.96", "Private home-based care (environment)", "Private home-based care", "Organisation für Pflege zu Hause", "Soins à domicile", "Servizio di assistenza e cura a domicilio"),
 	/**
 	 *<!-- @formatter:off -->
 	 * <div class="en">Rehabilitation hospital</div>
@@ -153,50 +180,13 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	REHABILITATION_HOSPITAL("80522000", "2.16.840.1.113883.6.96", "Rehabilitation hospital (environment)", "Rehabilitation hospital", "Organisation für stationäre Rehabilitation", "Réadaptation stationnaire", "Istituto di riabilitazione stazionaria"),
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">Client's or patient's home</div>
-	 * <div class="de">Domizil des Patienten</div>
-	 * <div class="fr">Domicile du patient</div>
-	 * <div class="it">Domicilio del paziente</div>
-	 *<!-- @formatter:on -->
-	 */
-	CLIENT_OR_PATIENT_HOME("394778007", "2.16.840.1.113883.6.96", "Client's or patient's home (environment)", "Client's or patient's home", "Domizil des Patienten", "Domicile du patient", "Domicilio del paziente"),
-	/**
-	 *<!-- @formatter:off -->
 	 * <div class="en">Telemedicine institution</div>
 	 * <div class="de">Telemedizinische Einrichtung</div>
 	 * <div class="fr">Institut de télémédecine</div>
 	 * <div class="it">Centro di telemedicina</div>
 	 *<!-- @formatter:on -->
 	 */
-	TELEMEDICINE_INSTITUTION("288565001", "2.16.840.1.113883.6.96", "Medical center (environment)", "Telemedicine institution", "Telemedizinische Einrichtung", "Institut de télémédecine", "Centro di telemedicina"),
-	/**
-	 *<!-- @formatter:off -->
-	 * <div class="en">General practice premises</div>
-	 * <div class="de">Arztpraxis</div>
-	 * <div class="fr">Cabinet médical</div>
-	 * <div class="it">Studio medico</div>
-	 *<!-- @formatter:on -->
-	 */
-	GENERAL_PRACTICE_PREMISES("264358009", "2.16.840.1.113883.6.96", "General practice premises (environement)", "General practice premises", "Arztpraxis", "Cabinet médical", "Studio medico"),
-	/**
-	 *<!-- @formatter:off -->
-	 * <div class="en">Other Site of Care</div>
-	 * <div class="de">Andere Gesundheitsorganisation</div>
-	 * <div class="fr">Autres prestataires de soins</div>
-	 * <div class="it">Altre organizzazioni sanitarie</div>
-	 *<!-- @formatter:on -->
-	 */
-	OTHER_SITE_OF_CARE("43741000", "2.16.840.1.113883.6.96", "Site of care (social concept)", "Other Site of Care", "Andere Gesundheitsorganisation", "Autres prestataires de soins", "Altre organizzazioni sanitarie");
-
-	/**
-	 *<!-- @formatter:off -->
-	 * <div class="en">Code for Diagnostic institution</div>
-	 * <div class="de">Code für Institution für medizinische Diagnostik</div>
-	 * <div class="fr">Code de Institut d’aide au diagnostic</div>
-	 * <div class="it">Code per Istituto di diagnostica medica</div>
-	 *<!-- @formatter:on -->
-	 */
-	public static final String DIAGNOSTIC_INSTITUTION_CODE = "722171005";
+	TELEMEDICINE_INSTITUTION("288565001", "2.16.840.1.113883.6.96", "Medical center (environment)", "Telemedicine institution", "Telemedizinische Einrichtung", "Institut de télémédecine", "Centro di telemedicina");
 
 	/**
 	 *<!-- @formatter:off -->
@@ -210,6 +200,56 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 
 	/**
 	 *<!-- @formatter:off -->
+	 * <div class="en">Code for Ambulatory care site</div>
+	 * <div class="de">Code für Ambulante Einrichtung/Ambulatorium</div>
+	 * <div class="fr">Code de Etablissement ambulatoire</div>
+	 * <div class="it">Code per Struttura ambulatoriale, incl. gli studi medici</div>
+	 *<!-- @formatter:on -->
+	 */
+	public static final String AMBULATORY_CARE_SITE_CODE = "35971002";
+
+	/**
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for Client's or patient's home</div>
+	 * <div class="de">Code für Domizil des Patienten</div>
+	 * <div class="fr">Code de Domicile du patient</div>
+	 * <div class="it">Code per Domicilio del paziente</div>
+	 *<!-- @formatter:on -->
+	 */
+	public static final String CLIENT_OR_PATIENT_HOME_CODE = "394778007";
+
+	/**
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for Diagnostic institution</div>
+	 * <div class="de">Code für Institution für medizinische Diagnostik</div>
+	 * <div class="fr">Code de Institut d’aide au diagnostic</div>
+	 * <div class="it">Code per Istituto di diagnostica medica</div>
+	 *<!-- @formatter:on -->
+	 */
+	public static final String DIAGNOSTIC_INSTITUTION_CODE = "722171005";
+
+	/**
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for Free-standing birthing center</div>
+	 * <div class="de">Code für Geburtshaus</div>
+	 * <div class="fr">Code de Maison de naissance</div>
+	 * <div class="it">Code per Luoghi natale</div>
+	 *<!-- @formatter:on -->
+	 */
+	public static final String FREE_STANDING_BIRTHING_CENTER_CODE = "91154008";
+
+	/**
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for General practice premises</div>
+	 * <div class="de">Code für Arztpraxis</div>
+	 * <div class="fr">Code de Cabinet médical</div>
+	 * <div class="it">Code per Studio medico</div>
+	 *<!-- @formatter:on -->
+	 */
+	public static final String GENERAL_PRACTICE_PREMISES_CODE = "264358009";
+
+	/**
+	 *<!-- @formatter:off -->
 	 * <div class="en">Code for Health Authority</div>
 	 * <div class="de">Code für Gesundheitsbehörde</div>
 	 * <div class="fr">Code de Autorité sanitaire</div>
@@ -217,16 +257,6 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 *<!-- @formatter:on -->
 	 */
 	public static final String HEALTH_AUTHORITY_CODE = "394747008";
-
-	/**
-	 *<!-- @formatter:off -->
-	 * <div class="en">Code for Private home-based care</div>
-	 * <div class="de">Code für Organisation für Pflege zu Hause</div>
-	 * <div class="fr">Code de Soins à domicile</div>
-	 * <div class="it">Code per Servizio di assistenza e cura a domicilio</div>
-	 *<!-- @formatter:on -->
-	 */
-	public static final String PRIVATE_HOME_BASED_CARE_CODE = "66280005";
 
 	/**
 	 *<!-- @formatter:off -->
@@ -250,16 +280,6 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">Code for Prison based care site</div>
-	 * <div class="de">Code für Gesundheitseinrichtung in der Haftanstalt</div>
-	 * <div class="fr">Code de Service de santé en milieu carcéral</div>
-	 * <div class="it">Code per Struttura sanitaria in uno stabilimento carcerario</div>
-	 *<!-- @formatter:on -->
-	 */
-	public static final String PRISON_BASED_CARE_SITE_CODE = "722173008";
-
-	/**
-	 *<!-- @formatter:off -->
 	 * <div class="en">Code for Nursing home</div>
 	 * <div class="de">Code für Pflegeheim</div>
 	 * <div class="fr">Code de Etablissement médico-social</div>
@@ -270,13 +290,13 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">Code for Free-standing birthing center</div>
-	 * <div class="de">Code für Geburtshaus</div>
-	 * <div class="fr">Code de Maison de naissance</div>
-	 * <div class="it">Code per Luoghi natale</div>
+	 * <div class="en">Code for Other Site of Care</div>
+	 * <div class="de">Code für Andere Gesundheitsorganisation</div>
+	 * <div class="fr">Code de Autres prestataires de soins</div>
+	 * <div class="it">Code per Altre organizzazioni sanitarie</div>
 	 *<!-- @formatter:on -->
 	 */
-	public static final String FREE_STANDING_BIRTHING_CENTER_CODE = "91154008";
+	public static final String OTHER_SITE_OF_CARE_CODE = "43741000";
 
 	/**
 	 *<!-- @formatter:off -->
@@ -290,13 +310,23 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">Code for Ambulatory care site</div>
-	 * <div class="de">Code für Ambulante Einrichtung/Ambulatorium</div>
-	 * <div class="fr">Code de Etablissement ambulatoire</div>
-	 * <div class="it">Code per Struttura ambulatoriale, incl. gli studi medici</div>
+	 * <div class="en">Code for Prison based care site</div>
+	 * <div class="de">Code für Gesundheitseinrichtung in der Haftanstalt</div>
+	 * <div class="fr">Code de Service de santé en milieu carcéral</div>
+	 * <div class="it">Code per Struttura sanitaria in uno stabilimento carcerario</div>
 	 *<!-- @formatter:on -->
 	 */
-	public static final String AMBULATORY_CARE_SITE_CODE = "35971002";
+	public static final String PRISON_BASED_CARE_SITE_CODE = "722173008";
+
+	/**
+	 *<!-- @formatter:off -->
+	 * <div class="en">Code for Private home-based care</div>
+	 * <div class="de">Code für Organisation für Pflege zu Hause</div>
+	 * <div class="fr">Code de Soins à domicile</div>
+	 * <div class="it">Code per Servizio di assistenza e cura a domicilio</div>
+	 *<!-- @formatter:on -->
+	 */
+	public static final String PRIVATE_HOME_BASED_CARE_CODE = "66280005";
 
 	/**
 	 *<!-- @formatter:off -->
@@ -310,16 +340,6 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 
 	/**
 	 *<!-- @formatter:off -->
-	 * <div class="en">Code for Client's or patient's home</div>
-	 * <div class="de">Code für Domizil des Patienten</div>
-	 * <div class="fr">Code de Domicile du patient</div>
-	 * <div class="it">Code per Domicilio del paziente</div>
-	 *<!-- @formatter:on -->
-	 */
-	public static final String CLIENT_OR_PATIENT_HOME_CODE = "394778007";
-
-	/**
-	 *<!-- @formatter:off -->
 	 * <div class="en">Code for Telemedicine institution</div>
 	 * <div class="de">Code für Telemedizinische Einrichtung</div>
 	 * <div class="fr">Code de Institut de télémédecine</div>
@@ -329,36 +349,16 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	public static final String TELEMEDICINE_INSTITUTION_CODE = "288565001";
 
 	/**
-	 *<!-- @formatter:off -->
-	 * <div class="en">Code for General practice premises</div>
-	 * <div class="de">Code für Arztpraxis</div>
-	 * <div class="fr">Code de Cabinet médical</div>
-	 * <div class="it">Code per Studio medico</div>
-	 *<!-- @formatter:on -->
+	 * <div class="en">Identifier of the value set</div>
+	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
 	 */
-	public static final String GENERAL_PRACTICE_PREMISES_CODE = "264358009";
-
-	/**
-	 *<!-- @formatter:off -->
-	 * <div class="en">Code for Other Site of Care</div>
-	 * <div class="de">Code für Andere Gesundheitsorganisation</div>
-	 * <div class="fr">Code de Autres prestataires de soins</div>
-	 * <div class="it">Code per Altre organizzazioni sanitarie</div>
-	 *<!-- @formatter:on -->
-	 */
-	public static final String OTHER_SITE_OF_CARE_CODE = "43741000";
+	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.11";
 
 	/**
 	 * <div class="en">Name of the value set</div>
 	 * <div class="de">Name des Value Sets</div>
 	 */
 	public static final String VALUE_SET_NAME = "EprHealthcareFacilityTypeCode";
-
-	/**
-	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
-	 */
-	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.11";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -417,11 +417,6 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * The display names per language
-	 */
-	private Map<LanguageCode, String> displayNames;
-
-	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
 	 * code</div>
 	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse)
@@ -434,6 +429,11 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
 	 */
 	private String codeSystem;
+
+	/**
+	 * The display names per language
+	 */
+	private Map<LanguageCode, String> displayNames;
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
