@@ -67,8 +67,7 @@ public abstract class CdaChUtil extends CdaUtil {
 			throws Exception {
 		FileInputStream fs = new FileInputStream(filePath);
 		CdaChLrepV1GeneralReport retVal = loadCdaChLrepV1GeneralReportFromStream(
-				IOUtils.toInputStream(IOUtils.toString(new InputStreamReader(fs, "UTF-8")),
-						Charsets.UTF_8));
+				Util.getUtf8InputStream(fs));
 		fs.close();
 		return retVal;
 	}
@@ -98,8 +97,7 @@ public abstract class CdaChUtil extends CdaUtil {
 			String filePath) throws Exception {
 		FileInputStream fs = new FileInputStream(filePath);
 		CdaChV2StructuredBody<org.openhealthtools.mdht.uml.cda.ch.CdaChV2StructuredBody> retVal = loadCdaChV2FromStream(
-				IOUtils.toInputStream(IOUtils.toString(new InputStreamReader(fs, "UTF-8")),
-						Charsets.UTF_8));
+				Util.getUtf8InputStream(fs));
 		fs.close();
 		return retVal;
 	}

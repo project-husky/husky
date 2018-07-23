@@ -26,6 +26,7 @@ import java.io.InputStream;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.ch.AuthorCh;
 import org.ehealth_connector.common.ch.enums.AuthorRole;
+import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.communication.AffinityDomain;
 import org.ehealth_connector.communication.AtnaConfig.AtnaConfigMode;
 import org.ehealth_connector.communication.ConvenienceCommunication;
@@ -95,6 +96,23 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	 * @return the document metadata (which have to be completed)</div>
 	 */
 	public DocumentMetadataCh addChDocument(DocumentDescriptor desc, InputStream inputStream) {
+		return addChDocument(desc, inputStream, null);
+	}
+
+	/**
+	 * <div class="en">Adds a document to the XDS Submission set.
+	 *
+	 * @param desc
+	 *            the document descriptor (which kind of document do you want to
+	 *            transfer? e.g. PDF, CDA,...)
+	 * @param inputStream
+	 *            the input stream to the document
+	 * @param inputStream4Metadata
+	 *            the input stream 4 metadata
+	 * @return the document metadata (which have to be completed)</div>
+	 */
+	public DocumentMetadataCh addChDocument(DocumentDescriptor desc, InputStream inputStream,
+			InputStream inputStream4Metadata) {
 		DocumentMetadataCh retVal = null;
 		if (inputStream == null)
 			try {
@@ -104,8 +122,13 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 			}
 		XDSDocument doc;
 		try {
+			XDSDocument doc4Metadata = null;
+			if (inputStream4Metadata != null) {
+				doc4Metadata = new XDSDocumentFromStream(desc,
+						Util.convertNonAsciiText2Unicode(inputStream4Metadata));
+			}
 			doc = new XDSDocumentFromStream(desc, inputStream);
-			retVal = new DocumentMetadataCh(addXdsDocument(doc, desc));
+			retVal = new DocumentMetadataCh(addXdsDocument(doc, desc, doc4Metadata));
 		} catch (final IOException e) {
 			e.printStackTrace();
 		}

@@ -201,12 +201,35 @@ public class ConvenienceCommunication {
 	 * @return the document metadata (which have to be completed)</div>
 	 */
 	public DocumentMetadata addDocument(DocumentDescriptor desc, InputStream inputStream) {
+		return addDocument(desc, inputStream, null);
+	}
+
+	/**
+	 * <div class="en">Adds a document to the XDS Submission set.
+	 *
+	 * @param desc
+	 *            the document descriptor (which kind of document do you want to
+	 *            transfer? e.g. PDF, CDA,...)
+	 * @param inputStream
+	 *            The input stream to the document
+	 * @param inputStream4Metadata
+	 *            the input stream that is only used to get the metadata from
+	 *            (it's texts will be ascii conform for registry purposes)
+	 * @return the document metadata (which have to be completed)</div>
+	 */
+	public DocumentMetadata addDocument(DocumentDescriptor desc, InputStream inputStream,
+			InputStream inputStream4Metadata) {
 		lastError = "";
 		DocumentMetadata retVal = null;
 		XDSDocument doc;
 		try {
+			XDSDocument doc4Metadata = null;
+			if (inputStream4Metadata != null) {
+				doc4Metadata = new XDSDocumentFromStream(desc,
+						Util.convertNonAsciiText2Unicode(inputStream4Metadata));
+			}
 			doc = new XDSDocumentFromStream(desc, inputStream);
-			retVal = addXdsDocument(doc, desc);
+			retVal = addXdsDocument(doc, desc, doc4Metadata);
 		} catch (final IOException e) {
 			log.error("Error adding document from inputstream.", e);
 			String message = e.getMessage();
@@ -235,6 +258,25 @@ public class ConvenienceCommunication {
 	 */
 	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath)
 			throws FileNotFoundException {
+		return addDocument(desc, filePath, null);
+	}
+
+	/**
+	 * <div class="en"> Adds a document to the XDS Submission set.
+	 *
+	 * @param desc
+	 *            the document descriptor (which kind of document do you want to
+	 *            transfer? e.g. PDF, CDA,...)
+	 * @param filePath
+	 *            the file path
+	 * @param filePathMetadata
+	 *            the file path metadata
+	 * @return the document metadata (which have to be completed) </div>
+	 * @throws FileNotFoundException
+	 *             exception
+	 */
+	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath,
+			String filePathMetadata) throws FileNotFoundException {
 		return addDocument(desc, new FileInputStream(new File(filePath)));
 	}
 
@@ -288,6 +330,22 @@ public class ConvenienceCommunication {
 	 * @return the DocumentMetadata
 	 */
 	protected DocumentMetadata addXdsDocument(XDSDocument doc, DocumentDescriptor desc) {
+		return addXdsDocument(doc, desc, null);
+	}
+
+	/**
+	 * <div class="en">Adds an XDSDocument to the Transaction data</div>.
+	 *
+	 * @param doc
+	 *            the document
+	 * @param desc
+	 *            the Document descriptor
+	 * @param metadataDoc
+	 *            the metadata doc
+	 * @return the doc to get the metadata from
+	 */
+	protected DocumentMetadata addXdsDocument(XDSDocument doc, DocumentDescriptor desc,
+			XDSDocument metadataDoc) {
 		lastError = "";
 		if (txnData == null) {
 			txnData = new SubmitTransactionData();
@@ -297,14 +355,23 @@ public class ConvenienceCommunication {
 		String docEntryUUID;
 		try {
 
+			DocumentMetadata docMetadata = null;
 			docEntryUUID = txnData.addDocument(doc);
-
-			final DocumentMetadata docMetadata = new DocumentMetadata(
-					txnData.getDocumentEntry(docEntryUUID));
+			if (metadataDoc != null) {
+				docMetadata = new DocumentMetadata(txnData.getDocumentEntry(docEntryUUID));
+				docMetadata.setEntryUUID("toreplace");
+				String metadataDocUUID = txnData.addDocument(metadataDoc);
+				docMetadata = new DocumentMetadata(txnData.getDocumentEntry(metadataDocUUID));
+				txnData.getDocList().remove(txnData.getDocList().size() - 1);
+				txnData.getMetadata().getSubmissionSet().getAssociatedDocuments()
+						.remove(metadataDocUUID);
+				docMetadata.setEntryUUID(docEntryUUID);
+				txnData.deleteDocument("toreplace");
+			}
+			docMetadata = new DocumentMetadata(txnData.getDocumentEntry(docEntryUUID));
 
 			if (documentMetadataExtractionMode == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
 				if (DocumentDescriptor.CDA_R2.equals(desc)) {
-					// extractDocMetadataFromCda(docMetadata);
 					cdaExtractionFixes(docMetadata);
 				}
 				generateDefaultDocEntryAttributes(doc.getDocumentEntryUUID());

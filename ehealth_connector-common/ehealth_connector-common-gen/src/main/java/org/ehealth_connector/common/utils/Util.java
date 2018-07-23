@@ -18,10 +18,13 @@
 package org.ehealth_connector.common.utils;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -33,8 +36,22 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Stack;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Result;
+import javax.xml.transform.Source;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.apache.commons.lang3.SystemUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -84,6 +101,10 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 import org.openhealthtools.mdht.uml.hl7.vocab.EntityNameUse;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 /**
  * Helper methods for the eHealth Connector and CDA
@@ -141,6 +162,57 @@ public class Util {
 			il.add(id);
 		}
 		return il;
+	}
+
+	/**
+	 * Escapes all non java character in the inputsream that is expected as XML
+	 *
+	 * @param inputStream
+	 *            the input stream to be escaped
+	 * @return the input stream
+	 */
+	public static InputStream convertNonAsciiText2Unicode(InputStream inputStream) {
+		InputStream retVal = null;
+		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder docBuilder;
+		try {
+			docBuilder = docBuilderFactory.newDocumentBuilder();
+			Document document = docBuilder.parse(inputStream);
+			convertNonAsciiText2Unicode(document.getDocumentElement());
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+			Source xmlSource = new DOMSource(document);
+			Result outputTarget = new StreamResult(outputStream);
+			TransformerFactory.newInstance().newTransformer().transform(xmlSource, outputTarget);
+			retVal = new ByteArrayInputStream(outputStream.toByteArray());
+		} catch (ParserConfigurationException | SAXException | IOException | TransformerException
+				| TransformerFactoryConfigurationError e) {
+			// Do nothing
+		}
+		return retVal;
+	}
+
+	/**
+	 * Escapes all non java character in the node text.
+	 *
+	 * @param node
+	 *            the node to be escaped
+	 */
+	public static void convertNonAsciiText2Unicode(Node node) {
+		if (node.getFirstChild() != null) {
+			String nodeValue = node.getFirstChild().getNodeValue();
+			if (nodeValue != null) {
+				nodeValue = nodeValue.replace("\n", "").replace("\t", "");
+				node.getFirstChild().setNodeValue(StringEscapeUtils.escapeJava(nodeValue));
+			}
+		}
+		NodeList nodeList = node.getChildNodes();
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			Node currentNode = nodeList.item(i);
+			if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
+				// calls this method for all the children which is Element
+				convertNonAsciiText2Unicode(currentNode);
+			}
+		}
 	}
 
 	/**
@@ -1139,6 +1211,64 @@ public class Util {
 
 		return hint + ": Used VM memory: " + Long.toString(getVmMemoryUsedInMegaBytes()) + " MB\n";
 
+	}
+
+	/**
+	 * Gets the utf 8 input stream from file.
+	 *
+	 * @param file
+	 *            the file
+	 * @return the utf 8 input stream from file
+	 */
+	public static InputStream getUtf8InputStream(File file) {
+		try {
+			return getUtf8InputStream(new FileInputStream(file));
+		} catch (IOException e) {
+			return null;
+		}
+	}
+
+	/**
+	 * Gets the utf 8 input stream from file.
+	 *
+	 * @param fis
+	 *            the fis
+	 * @return the utf 8 input stream from file
+	 */
+	public static InputStream getUtf8InputStream(FileInputStream fis) {
+		try {
+			return IOUtils.toInputStream(IOUtils.toString(new InputStreamReader(fis, "UTF-8")),
+					Charsets.UTF_8);
+		} catch (IOException e) {
+			return null;
+		}
+	}
+
+	/**
+	 * Gets the utf 8 input stream from file.
+	 *
+	 * @param is
+	 *            the is
+	 * @return the utf 8 input stream from file
+	 */
+	public static InputStream getUtf8InputStream(InputStream is) {
+		try {
+			return IOUtils.toInputStream(IOUtils.toString(new InputStreamReader(is, "UTF-8")),
+					Charsets.UTF_8);
+		} catch (IOException e) {
+			return null;
+		}
+	}
+
+	/**
+	 * Gets the utf 8 input stream from file.
+	 *
+	 * @param fileName
+	 *            the file name
+	 * @return the utf 8 input stream from file
+	 */
+	public static InputStream getUtf8InputStream(String fileName) {
+		return getUtf8InputStream(new File(fileName));
 	}
 
 	/**
