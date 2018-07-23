@@ -10,7 +10,7 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 	<parent>
 		<groupId>org.ehealth_connector</groupId>
 		<artifactId>ehealth_connector-parent</artifactId>
-		<version>1.6.0-201807</version>
+		<version>1.7-SNAPSHOT</version>
 	</parent>
 
 	<modules>
@@ -172,7 +172,7 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 					<dependency>
 						<artifactId>ehealth_connector-codeformat</artifactId>
 						<groupId>org.ehealth_connector</groupId>
-						<version>1.6.0-201807</version>
+						<version>1.7-SNAPSHOT</version>
 					</dependency>
 				</dependencies>
 			</plugin>
