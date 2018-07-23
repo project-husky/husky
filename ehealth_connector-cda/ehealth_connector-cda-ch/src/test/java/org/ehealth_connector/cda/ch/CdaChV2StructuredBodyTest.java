@@ -370,7 +370,9 @@ public class CdaChV2StructuredBodyTest {
 
 		// cleanup
 		File file = new File(fn);
-		file.delete();
+		if (!file.delete())
+			file.deleteOnExit();
+
 	}
 
 	/**

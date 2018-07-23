@@ -227,7 +227,8 @@ public class CdaChLrepV1GeneralReportTest {
 
 		// cleanup
 		File file = new File(fn);
-		file.delete();
+		if (!file.delete())
+			file.deleteOnExit();
 	}
 
 	/**

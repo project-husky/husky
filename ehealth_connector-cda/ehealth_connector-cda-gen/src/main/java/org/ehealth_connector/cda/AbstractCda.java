@@ -21,6 +21,7 @@ package org.ehealth_connector.cda;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,6 +29,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.io.Charsets;
 import org.apache.commons.lang3.NotImplementedException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -978,7 +980,8 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		if (!yourFile.exists()) {
 			yourFile.createNewFile();
 		}
-		final FileOutputStream oFile = new FileOutputStream(yourFile, false);
+		OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(yourFile),
+				Charsets.UTF_8);
 
 		// create emf resource
 		final CDAResource resource = (CDAResource) CDAResource.Factory.INSTANCE
@@ -989,8 +992,8 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		resource.getContents().add(docRoot);
 
 		// save resource to file
-		resource.save(oFile, null);
-		oFile.close();
+		resource.save(writer, null);
+		writer.close();
 	}
 
 	/**
