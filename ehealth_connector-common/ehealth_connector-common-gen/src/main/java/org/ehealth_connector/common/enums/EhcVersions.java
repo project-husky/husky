@@ -71,7 +71,7 @@ public enum EhcVersions {
 			"todo release date");
 
 	public static EhcVersions getCurrentVersion() {
-		return EhcVersions.EHealthConnectorR201807;
+		return EhcVersions.EHealthConnectorDev;
 	}
 
 	private String oid;
