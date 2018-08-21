@@ -1399,9 +1399,9 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 		// Gender
 		if (patient.getGender() != null) {
 			String gender = "";
-			if ("male".equals(patient.getGender())) {
+			if (patient.getGender() == AdministrativeGender.MALE) {
 				gender = "M";
-			} else if ("female".equals(patient.getGender())) {
+			} else if (patient.getGender() == AdministrativeGender.FEMALE) {
 				gender = "F";
 			} else {
 				gender = "U";
