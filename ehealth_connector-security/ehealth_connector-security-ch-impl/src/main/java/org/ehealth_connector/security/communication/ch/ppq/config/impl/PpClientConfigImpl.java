@@ -18,7 +18,7 @@
 package org.ehealth_connector.security.communication.ch.ppq.config.impl;
 
 import org.ehealth_connector.security.communication.ch.ppq.config.PpClientConfig;
-import org.ehealth_connector.security.communication.config.impl.BaseSoapClientConfig;
+import org.ehealth_connector.security.communication.config.impl.BaseSoapClientConfigImpl;
 
 /**
  * <!-- @formatter:off -->
@@ -28,9 +28,12 @@ import org.ehealth_connector.security.communication.config.impl.BaseSoapClientCo
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class PpqClientConfigImpl extends BaseSoapClientConfig implements PpClientConfig {
+public class PpClientConfigImpl extends BaseSoapClientConfigImpl implements PpClientConfig {
 
 	// There are no special methods defined, but the interface has to be
 	// declared for selection reasons.
+	protected PpClientConfigImpl() {
+		setSoapVersion(SoapVersion.SOAP_12);
+	}
 
 }

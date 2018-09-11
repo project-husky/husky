@@ -66,6 +66,7 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContexts;
 import org.apache.http.util.EntityUtils;
 import org.ehealth_connector.security.communication.config.SoapClientConfig;
+import org.ehealth_connector.security.communication.config.SoapClientConfig.SoapVersion;
 import org.ehealth_connector.security.communication.soap.impl.WsaHeaderValue;
 import org.ehealth_connector.security.exceptions.ClientSendException;
 import org.ehealth_connector.security.exceptions.SerializeException;
@@ -97,8 +98,8 @@ public abstract class AbstractSoapClient<T> {
 	protected void createBody(Element aBodyElement, Element envelopElement)
 			throws SerializeException {
 		// create soap body
-		final Element soapBody = envelopElement.getOwnerDocument()
-				.createElementNS("http://schemas.xmlsoap.org/soap/envelope/", "Body");
+		final Element soapBody = envelopElement.getOwnerDocument().createElementNS(getSoapNs(),
+				"Body");
 		envelopElement.appendChild(soapBody);
 
 		// add authnrequest to soap body
@@ -114,18 +115,29 @@ public abstract class AbstractSoapClient<T> {
 		final Document soapDoc = docBuilder.newDocument();
 
 		// create soap envelope
-		final Element envelopElement = soapDoc
-				.createElementNS("http://schemas.xmlsoap.org/soap/envelope/", "Envelope");
+
+		final String soapNs = getSoapNs();
+		final Element envelopElement = soapDoc.createElementNS(soapNs, "Envelope");
+
 		soapDoc.appendChild(envelopElement);
 		return envelopElement;
+	}
+
+	private String getSoapNs() {
+		if (SoapVersion.SOAP_12.equals(config.getSoapVersion())) {
+			return "http://www.w3.org/2003/05/soap-envelope";
+		} else {
+			return "http://schemas.xmlsoap.org/soap/envelope/";
+		}
+
 	}
 
 	protected void createHeader(Element aSecurityHeaderElement, WsaHeaderValue wsHeaders,
 			Element envelopElement) throws SerializeException {
 
 		// create soap header
-		final Element headerElement = envelopElement.getOwnerDocument()
-				.createElementNS("http://schemas.xmlsoap.org/soap/envelope/", "Header");
+		final Element headerElement = envelopElement.getOwnerDocument().createElementNS(getSoapNs(),
+				"Header");
 		envelopElement.appendChild(headerElement);
 
 		final Element headerWsaAction = envelopElement.getOwnerDocument()

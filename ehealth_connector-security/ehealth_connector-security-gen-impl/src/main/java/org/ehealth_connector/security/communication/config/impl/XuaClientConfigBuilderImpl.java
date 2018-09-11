@@ -17,6 +17,7 @@
  */
 package org.ehealth_connector.security.communication.config.impl;
 
+import org.ehealth_connector.security.communication.config.SoapClientConfig.SoapVersion;
 import org.ehealth_connector.security.communication.config.XuaClientConfig;
 import org.ehealth_connector.security.communication.config.XuaClientConfigBuilder;
 
@@ -34,6 +35,7 @@ public class XuaClientConfigBuilderImpl implements XuaClientConfigBuilder {
 
 	public XuaClientConfigBuilderImpl() {
 		config = new XuaClientConfigImpl();
+		config.setSoapVersion(SoapVersion.SOAP_12);
 	}
 
 	@Override
@@ -122,6 +124,12 @@ public class XuaClientConfigBuilderImpl implements XuaClientConfigBuilder {
 	@Override
 	public XuaClientConfigBuilder url(String aEndpointUri) {
 		config.setUrl(aEndpointUri);
+		return this;
+	}
+
+	@Override
+	public XuaClientConfigBuilder soapVersion(SoapVersion soapVersion) {
+		config.setSoapVersion(soapVersion);
 		return this;
 	}
 

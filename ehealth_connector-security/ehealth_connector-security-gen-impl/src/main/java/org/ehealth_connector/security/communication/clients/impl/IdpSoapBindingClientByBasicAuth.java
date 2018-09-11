@@ -154,13 +154,14 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 		final Document soapDoc = docBuilder.newDocument();
 
 		// create soap envelope
-		final Element envelopElement = soapDoc
-				.createElementNS("http://schemas.xmlsoap.org/soap/envelope/", "Envelope");
+		final Element envelopElement = soapDoc.createElementNS(getSoapNs(), "Envelope");
 		soapDoc.appendChild(envelopElement);
 
+		final Element soapHeader = soapDoc.createElementNS(getSoapNs(), "Header");
+		envelopElement.appendChild(soapHeader);
+
 		// create soap body
-		final Element soapBody = soapDoc
-				.createElementNS("http://schemas.xmlsoap.org/soap/envelope/", "Body");
+		final Element soapBody = soapDoc.createElementNS(getSoapNs(), "Body");
 		envelopElement.appendChild(soapBody);
 
 		// add authnrequest to soap body
@@ -179,6 +180,10 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 		final StringEntity stringEntity = new StringEntity(body, "UTF-8");
 		stringEntity.setChunked(true);
 		return stringEntity;
+	}
+
+	private String getSoapNs() {
+		return "http://schemas.xmlsoap.org/soap/envelope/";
 	}
 
 	/**

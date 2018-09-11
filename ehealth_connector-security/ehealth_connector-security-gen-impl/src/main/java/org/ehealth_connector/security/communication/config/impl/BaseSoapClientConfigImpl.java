@@ -27,7 +27,7 @@ import org.ehealth_connector.security.communication.config.SoapClientConfig;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class BaseSoapClientConfig extends AbstractClientConfig implements SoapClientConfig {
+public class BaseSoapClientConfigImpl extends AbstractClientConfig implements SoapClientConfig {
 	public String keyStoreFile;
 	public String keyStorePassword;
 	public String keyStoreType;
@@ -38,6 +38,11 @@ public class BaseSoapClientConfig extends AbstractClientConfig implements SoapCl
 	public String serviceNamespace;
 
 	private boolean simple;
+	private SoapVersion version;
+
+	protected BaseSoapClientConfigImpl() {
+		version = SoapVersion.SOAP_12;
+	}
 
 	@Override
 	public String getKeyStore() {
@@ -116,5 +121,15 @@ public class BaseSoapClientConfig extends AbstractClientConfig implements SoapCl
 
 	public void setSimple(boolean aSimple) {
 		simple = aSimple;
+	}
+
+	@Override
+	public void setSoapVersion(SoapVersion aVersion) {
+		version = aVersion;
+	}
+
+	@Override
+	public SoapVersion getSoapVersion() {
+		return version;
 	}
 }

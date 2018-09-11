@@ -52,5 +52,4 @@ public class IdpClientBasicAuthConfigImpl extends AbstractClientConfig implement
 	public void setBasicAuthUsername(String basicAuthUsername) {
 		this.basicAuthUsername = basicAuthUsername;
 	}
-
 }

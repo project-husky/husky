@@ -22,7 +22,7 @@ import static org.junit.Assert.assertNotNull;
 import org.ehealth_connector.security.communication.ch.clients.PpfClient;
 import org.ehealth_connector.security.communication.ch.clients.PpqClient;
 import org.ehealth_connector.security.communication.ch.ppq.config.PpClientConfig;
-import org.ehealth_connector.security.communication.ch.ppq.config.impl.PpqClientConfigBuilderImpl;
+import org.ehealth_connector.security.communication.ch.ppq.config.impl.PpClientConfigBuilderImpl;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -40,7 +40,7 @@ public class ClientFactoryChTest {
 	@Before
 	public void setUp() throws Exception {
 		testPortName = "My Port Name";
-		testPpClientConfiguration = new PpqClientConfigBuilderImpl().portName(testPortName)
+		testPpClientConfiguration = new PpClientConfigBuilderImpl().portName(testPortName)
 				.create();
 	}
 

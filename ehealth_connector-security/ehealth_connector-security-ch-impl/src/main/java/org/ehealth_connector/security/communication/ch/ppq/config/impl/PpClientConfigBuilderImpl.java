@@ -19,6 +19,7 @@ package org.ehealth_connector.security.communication.ch.ppq.config.impl;
 
 import org.ehealth_connector.security.communication.ch.ppq.config.PpClientConfig;
 import org.ehealth_connector.security.communication.ch.ppq.config.PpClientConfigBuilder;
+import org.ehealth_connector.security.communication.config.SoapClientConfig.SoapVersion;
 import org.ehealth_connector.security.communication.config.SoapClientConfigBuilder;
 
 /**
@@ -29,12 +30,13 @@ import org.ehealth_connector.security.communication.config.SoapClientConfigBuild
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class PpqClientConfigBuilderImpl implements PpClientConfigBuilder {
+public class PpClientConfigBuilderImpl implements PpClientConfigBuilder {
 
-	private PpqClientConfigImpl config;
+	private PpClientConfigImpl config;
 
-	public PpqClientConfigBuilderImpl() {
-		config = new PpqClientConfigImpl();
+	public PpClientConfigBuilderImpl() {
+		config = new PpClientConfigImpl();
+		config.setSoapVersion(SoapVersion.SOAP_12);
 	}
 
 	@Override
@@ -93,6 +95,12 @@ public class PpqClientConfigBuilderImpl implements PpClientConfigBuilder {
 	@Override
 	public PpClientConfigBuilder url(String aEndpointUrl) {
 		config.setUrl(aEndpointUrl);
+		return this;
+	}
+
+	@Override
+	public SoapClientConfigBuilder soapVersion(SoapVersion soapVersion) {
+		config.setSoapVersion(soapVersion);
 		return this;
 	}
 

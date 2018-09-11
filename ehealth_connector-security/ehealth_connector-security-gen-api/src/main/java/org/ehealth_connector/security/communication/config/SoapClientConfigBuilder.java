@@ -17,6 +17,8 @@
  */
 package org.ehealth_connector.security.communication.config;
 
+import org.ehealth_connector.security.communication.config.SoapClientConfig.SoapVersion;
+
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the ClientConfigBuilder methods.</div>
@@ -198,5 +200,27 @@ public interface SoapClientConfigBuilder extends ClientConfigBuilder {
 	 * <!-- @formatter:on -->
 	 */
 	SoapClientConfigBuilder simple(boolean aSimple);
+
+	/**
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the SOAP version.</div>
+	 * <div class="de">Method um die SOAP version zu setzen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param soapVersion
+	 * <div class="en">SoapVersion value to be set</div>
+	 * <div class="de">SoapVersion Wert, der gesetzt werden soll</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * @return
+	 * <div class="en">the actual instance of this builder</div>
+	 * <div class="de">die aktuelle Instanz des Builders</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	SoapClientConfigBuilder soapVersion(SoapVersion soapVersion);
 
 }

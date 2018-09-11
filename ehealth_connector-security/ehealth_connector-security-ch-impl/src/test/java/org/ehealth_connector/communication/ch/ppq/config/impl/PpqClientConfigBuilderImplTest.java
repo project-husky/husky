@@ -21,13 +21,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.ehealth_connector.security.communication.ch.ppq.config.PpClientConfig;
-import org.ehealth_connector.security.communication.ch.ppq.config.impl.PpqClientConfigBuilderImpl;
+import org.ehealth_connector.security.communication.ch.ppq.config.impl.PpClientConfigBuilderImpl;
 import org.junit.Before;
 import org.junit.Test;
 
 public class PpqClientConfigBuilderImplTest {
 
-	private PpqClientConfigBuilderImpl builder;
+	private PpClientConfigBuilderImpl builder;
 	private String testEnpointUrl;
 	private String testPortName;
 	private String testPortNamespace;
@@ -36,7 +36,7 @@ public class PpqClientConfigBuilderImplTest {
 
 	@Before
 	public void setUp() throws Exception {
-		builder = new PpqClientConfigBuilderImpl();
+		builder = new PpClientConfigBuilderImpl();
 		testEnpointUrl = "https://guguseli.ch/not/a/very/endpoint";
 		testPortName = "myPortName";
 		testPortNamespace = "urn:this.ist.my.namspace";
@@ -46,7 +46,7 @@ public class PpqClientConfigBuilderImplTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.communication.ch.ppq.config.impl.PpqClientConfigBuilderImpl#portName(java.lang.String)}.
+	 * {@link org.ehealth_connector.security.communication.ch.ppq.config.impl.PpClientConfigBuilderImpl#portName(java.lang.String)}.
 	 */
 	@Test
 	public void testPortName() {
@@ -57,7 +57,7 @@ public class PpqClientConfigBuilderImplTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.communication.ch.ppq.config.impl.PpqClientConfigBuilderImpl#portNamespace(java.lang.String)}.
+	 * {@link org.ehealth_connector.security.communication.ch.ppq.config.impl.PpClientConfigBuilderImpl#portNamespace(java.lang.String)}.
 	 */
 	@Test
 	public void testPortNamespace() {
@@ -68,7 +68,7 @@ public class PpqClientConfigBuilderImplTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.communication.ch.ppq.config.impl.PpqClientConfigBuilderImpl#serviceName(java.lang.String)}.
+	 * {@link org.ehealth_connector.security.communication.ch.ppq.config.impl.PpClientConfigBuilderImpl#serviceName(java.lang.String)}.
 	 */
 	@Test
 	public void testServiceName() {
@@ -79,7 +79,7 @@ public class PpqClientConfigBuilderImplTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.communication.ch.ppq.config.impl.PpqClientConfigBuilderImpl#serviceNamespace(java.lang.String)}.
+	 * {@link org.ehealth_connector.security.communication.ch.ppq.config.impl.PpClientConfigBuilderImpl#serviceNamespace(java.lang.String)}.
 	 */
 	@Test
 	public void testServiceNamespace() {
@@ -90,7 +90,7 @@ public class PpqClientConfigBuilderImplTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.communication.ch.ppq.config.impl.PpqClientConfigBuilderImpl#url(java.lang.String)}.
+	 * {@link org.ehealth_connector.security.communication.ch.ppq.config.impl.PpClientConfigBuilderImpl#url(java.lang.String)}.
 	 */
 	@Test
 	public void testUrl() {

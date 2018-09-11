@@ -27,6 +27,11 @@ package org.ehealth_connector.security.communication.config;
  */
 public interface SoapClientConfig extends ClientConfig {
 
+	public enum SoapVersion {
+		SOAP_11, // http://schemas.xmlsoap.org/soap/envelope/
+		SOAP_12 // http://www.w3.org/2003/05/soap-envelope
+	}
+
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the client keystore.</div>
@@ -256,4 +261,22 @@ public interface SoapClientConfig extends ClientConfig {
 	 */
 	void setServiceNamespace(String serviceNamespace);
 
+	/**
+	 * 
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to set the soap version of the webservice.</div>
+	 * <div class="de">Methode um die SOAP Version des Webservices zu setzen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param version 
+	 * <div class="en">The version of the soap message to be set. Has influence on the namespace of the SOAP:ENV.</div>
+	 * <div class="de">Die version die für die soap message gesetzt werden muss. Hat einen einfluss auf den Namespace des SOAP:ENV.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	void setSoapVersion(SoapVersion version);
+
+	SoapVersion getSoapVersion();
 }
