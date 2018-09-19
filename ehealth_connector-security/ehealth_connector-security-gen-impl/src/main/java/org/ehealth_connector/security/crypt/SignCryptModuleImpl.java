@@ -29,6 +29,8 @@ import java.security.cert.X509Certificate;
 import org.ehealth_connector.security.authentication.AuthnRequest;
 import org.ehealth_connector.security.authentication.impl.AuthnRequestImpl;
 import org.ehealth_connector.security.exceptions.SigningException;
+import org.ehealth_connector.security.saml2.ArtifactResolve;
+import org.ehealth_connector.security.saml2.impl.ArtifactResolveImpl;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.opensaml.core.xml.io.MarshallingException;
 import org.opensaml.security.SecurityException;
@@ -36,6 +38,7 @@ import org.opensaml.security.x509.BasicX509Credential;
 import org.opensaml.xmlsec.keyinfo.KeyInfoGenerator;
 import org.opensaml.xmlsec.keyinfo.impl.X509KeyInfoGeneratorFactory;
 import org.opensaml.xmlsec.signature.KeyInfo;
+import org.opensaml.xmlsec.signature.SignableXMLObject;
 import org.opensaml.xmlsec.signature.Signature;
 import org.opensaml.xmlsec.signature.impl.SignatureBuilder;
 import org.opensaml.xmlsec.signature.support.SignatureConstants;
@@ -93,8 +96,8 @@ public class SignCryptModuleImpl implements SignCryptModule {
 	 */
 	private BasicX509Credential getSigningCredential(String aSigningAlias) throws SigningException {
 		try {
-			final PrivateKeyEntry privateKeyEntry = (PrivateKeyEntry) keyStore.getEntry(
-					aSigningAlias, new PasswordProtection(keyStorePassword.toCharArray()));
+			final PrivateKeyEntry privateKeyEntry = (PrivateKeyEntry) keyStore.getEntry(aSigningAlias,
+					new PasswordProtection(keyStorePassword.toCharArray()));
 			final PrivateKey privateKey = privateKeyEntry.getPrivateKey();
 			final X509Certificate certificate = (X509Certificate) privateKeyEntry.getCertificate();
 
@@ -114,12 +117,11 @@ public class SignCryptModuleImpl implements SignCryptModule {
 	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.crypt.SignCryptModule#setPki(java.security.KeyStore,
-	 *      java.lang.String, java.security.KeyStore, java.lang.String)
+	 * @see org.ehealth_connector.security.crypt.SignCryptModule#setPki(java.security.KeyStore, java.lang.String, java.security.KeyStore,
+	 *      java.lang.String)
 	 */
 	@Override
-	public void setPki(KeyStore aKeyStore, String aKeyStorePassword, KeyStore aTrustStore,
-			String aTrustStorePassword) {
+	public void setPki(KeyStore aKeyStore, String aKeyStorePassword, KeyStore aTrustStore, String aTrustStorePassword) {
 		keyStore = aKeyStore;
 		keyStorePassword = aKeyStorePassword;
 		trustStore = aTrustStore;
@@ -134,25 +136,31 @@ public class SignCryptModuleImpl implements SignCryptModule {
 	 *      java.lang.String)
 	 */
 	@Override
-	public void signAuthnRequest(AuthnRequest aAuthnRequest, String aSigningAlias)
-			throws SigningException {
-		try {
-			final AuthnRequestImpl concrete = (AuthnRequestImpl) aAuthnRequest;
+	public void signAuthnRequest(AuthnRequest aAuthnRequest, String aSigningAlias) throws SigningException {
+		final AuthnRequestImpl concrete = (AuthnRequestImpl) aAuthnRequest;
+		sign(concrete.getWrappedObject(), aSigningAlias);
+	}
 
-			final Signature signature = new SignatureBuilder()
-					.buildObject(Signature.DEFAULT_ELEMENT_NAME);
+	@Override
+	public void signArtifactResolve(ArtifactResolve artifactResolve, String aSigningAlias) throws SigningException {
+		final ArtifactResolveImpl concrete = (ArtifactResolveImpl) artifactResolve;
+		sign(concrete.getWrappedObject(), aSigningAlias);
+	}
+
+	private void sign(SignableXMLObject singningobject, String aSigningAlias) throws SigningException {
+		try {
+
+			final Signature signature = new SignatureBuilder().buildObject(Signature.DEFAULT_ELEMENT_NAME);
 
 			final BasicX509Credential signingCredential = getSigningCredential(aSigningAlias);
 
 			signature.setSigningCredential(signingCredential);
 			signature.setSignatureAlgorithm(SignatureConstants.ALGO_ID_SIGNATURE_RSA_SHA512);
-			signature.setCanonicalizationAlgorithm(
-					SignatureConstants.ALGO_ID_C14N_EXCL_OMIT_COMMENTS);
+			signature.setCanonicalizationAlgorithm(SignatureConstants.ALGO_ID_C14N_EXCL_OMIT_COMMENTS);
 
 			final X509KeyInfoGeneratorFactory keyInfoGeneratorFactory = new X509KeyInfoGeneratorFactory();
 			keyInfoGeneratorFactory.setEmitEntityCertificate(true);
-			keyInfoGeneratorFactory
-					.setX509DigestAlgorithmURI(SignatureConstants.ALGO_ID_DIGEST_SHA1);
+			keyInfoGeneratorFactory.setX509DigestAlgorithmURI(SignatureConstants.ALGO_ID_DIGEST_SHA1);
 
 			if (keyInfoGeneratorFactory.handles(signingCredential)) {
 				final KeyInfoGenerator keyInfoGenerator = keyInfoGeneratorFactory.newInstance();
@@ -160,11 +168,10 @@ public class SignCryptModuleImpl implements SignCryptModule {
 
 				signature.setKeyInfo(keyInfo);
 
-				concrete.getWrappedObject().setSignature(signature);
+				singningobject.setSignature(signature);
 
-				XMLObjectProviderRegistrySupport.getMarshallerFactory()
-						.getMarshaller(concrete.getWrappedObject())
-						.marshall(concrete.getWrappedObject());
+				XMLObjectProviderRegistrySupport.getMarshallerFactory().getMarshaller(singningobject)
+						.marshall(singningobject);
 
 				Signer.signObject(signature);
 

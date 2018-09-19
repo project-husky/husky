@@ -57,8 +57,7 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
-	public IdpClientByBrowserAndProtocolHandler(
-			IdpClientByBrowserAndProtocolHandlerConfigImpl clientConfiguration) {
+	public IdpClientByBrowserAndProtocolHandler(IdpClientByBrowserAndProtocolHandlerConfigImpl clientConfiguration) {
 		config = clientConfiguration;
 	}
 
@@ -70,7 +69,10 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 		String template = readFromJARFile("/template/authnsubmitform.html");
 
 		template = template.replaceAll("@base64samlrequest@", samlRequest);
+		template = template.replaceAll("@bsamlrequesttype@", "SAMLRequest");// config.getSamlRequestType().toString());
 		template = template.replaceAll("@idpurl@", config.getUrl());
+
+		logger.debug("html to send to browser: " + template);
 
 		final File tempFile = File.createTempFile("saml_", ".html");
 		tempFile.deleteOnExit();
@@ -78,11 +80,11 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 		final FileOutputStream os = new FileOutputStream(tempFile);
 		os.write(template.getBytes());
 		os.close();
+
 		return tempFile;
 	}
 
-	private Response getResponse(String samlReponse)
-			throws DeserializeException, UnsupportedEncodingException {
+	private Response getResponse(String samlReponse) throws DeserializeException, UnsupportedEncodingException {
 		final byte[] samlReponseBytes = Base64.getDecoder().decode(samlReponse);
 		final ResponseDeserializerImpl deserializer = new ResponseDeserializerImpl();
 		return deserializer.fromXmlByteArray(samlReponseBytes);
@@ -135,7 +137,7 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 	 * @see org.ehealth_connector.security.communication.clients.IdpClient#send(org.ehealth_connector.security.authentication.AuthnRequest)
 	 */
 	@Override
-	public Response send(AuthnRequest aAuthnRequest) throws ClientSendException {
+	public Object send(AuthnRequest aAuthnRequest) throws ClientSendException {
 		try {
 
 			final File htmlFile = getHtmlFormPage(aAuthnRequest);
@@ -163,23 +165,20 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 		}
 	}
 
-	private Response startWaitForResponse()
-			throws IOException, ClientSendException, DeserializeException {
+	private Object startWaitForResponse() throws IOException, ClientSendException, DeserializeException {
 		final Calendar end = Calendar.getInstance();
 
 		// This is the timeout to wait for the SAML response
-		end.add(Calendar.MINUTE, 1);
+		end.add(Calendar.MINUTE, 2);
 
-		final File tempFile = new File(System.getProperty("java.io.tmpdir"),
-				config.getProtocolHandlerName() + ".io");
+		final File tempFile = new File(System.getProperty("java.io.tmpdir"), config.getProtocolHandlerName() + ".io");
 		if (tempFile.exists()) {
 			tempFile.delete();
 		}
 		tempFile.createNewFile();
 		final BufferedReader in = new BufferedReader(new FileReader(tempFile));
 		String line = in.readLine();
-		while ((line == null) || line.isEmpty()
-				|| !line.startsWith(config.getProtocolHandlerName())) {
+		while ((line == null) || line.isEmpty() || !line.startsWith(config.getProtocolHandlerName())) {
 			line = in.readLine();
 			if (Calendar.getInstance().after(end)) {
 				break;
@@ -194,9 +193,19 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 			throw new ClientSendException("No SAML response found");
 		}
 		line = java.net.URLDecoder.decode(line, "UTF-8");
-		final String[] urlSplit = line.split("SAMLResponse");
-		final String samlReponse = urlSplit[1].substring(1);
+		logger.debug("Response: " + line);
 
-		return getResponse(samlReponse);
+		if (IdpClientByBrowserAndProtocolHandlerConfigImpl.SamlRequestType.SAMLart
+				.equals(config.getSamlRequestType())) {
+			final String[] urlSplit = line.split("SAMLart");
+			final String artReponse = urlSplit[1].substring(1);
+
+			return artReponse;
+		} else {
+			final String[] urlSplit = line.split("SAMLResponse");
+			final String samlReponse = urlSplit[1].substring(1);
+			return getResponse(samlReponse);
+		}
 	}
+
 }

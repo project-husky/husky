@@ -17,34 +17,35 @@
  */
 package org.ehealth_connector.security.communication.clients;
 
-import org.ehealth_connector.security.authentication.AuthnRequest;
 import org.ehealth_connector.security.exceptions.ClientSendException;
+import org.ehealth_connector.security.saml2.ArtifactResolve;
+import org.ehealth_connector.security.saml2.ArtifactResponse;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Interface describing the methods for the identity provider client.</div>
- * <div class="de">Interface welches die Methoden für den Identity Provider Client beschreibt.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
+ * <div class="en">HEREISENGLISH</div>
+ * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="fr">VOICIFRANCAIS</div>
+ * <div class="it">ITALIANO</div>
+ * 
  * <!-- @formatter:on -->
  */
-public interface IdpClient {
-
+public interface ArtifactResolveClient {
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to send an AuthnRequest.</div>
-	 * <div class="de">Methode um einen AuthnRequest zu senden.</div>
+	 * <div class="en">Method to send an  ArtifactResolve.</div>
+	 * <div class="de">Methode um einen  ArtifactResolve zu senden.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
-	 * @param aAuthnRequest
+	 * @param aArtifactResolve
 	 * <div class="en">the AuthnRequest to be sent.</div>
 	 * <div class="de">Der AuthnRequest welcher geschickt werden soll.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @return
-	 * <div class="en">the idp response</div>
-	 * <div class="de">Die IdP Response.</div>
+	 * <div class="en">the ArtifactResponse</div>
+	 * <div class="de">Die ArtifactResponse.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * @throws ClientSendException
@@ -54,5 +55,5 @@ public interface IdpClient {
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	Object send(AuthnRequest aAuthnRequest) throws ClientSendException;
+	ArtifactResponse send(ArtifactResolve aArtifactResolve) throws ClientSendException;
 }

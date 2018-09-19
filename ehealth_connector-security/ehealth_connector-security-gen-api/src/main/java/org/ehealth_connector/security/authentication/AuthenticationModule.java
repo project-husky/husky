@@ -19,7 +19,6 @@ package org.ehealth_connector.security.authentication;
 
 import org.ehealth_connector.security.communication.config.IdpClientConfig;
 import org.ehealth_connector.security.exceptions.ClientSendException;
-import org.ehealth_connector.security.saml2.Response;
 
 /**
  * <!-- @formatter:off -->
@@ -52,14 +51,14 @@ public interface AuthenticationModule {
 	 * <div class="it"></div>
 	 *
 	 * @return
-	 * <div class="en">The response to the AuthnRequest from IdP service.</div>
+	 * <div class="en">The response to the AuthnRequest from IdP service. Response or Artifact String</div>
 	 * <div class="de">Die Antwort auf eine AuthnRequest des IdP Services.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 * @throws ClientSendException
 	 */
-	Response invokeUserAuthentication(AuthnRequest aAuthnRequest,
-			IdpClientConfig clientConfiguration) throws ClientSendException;
+	Object invokeUserAuthentication(AuthnRequest aAuthnRequest, IdpClientConfig clientConfiguration)
+			throws ClientSendException;
 
 }

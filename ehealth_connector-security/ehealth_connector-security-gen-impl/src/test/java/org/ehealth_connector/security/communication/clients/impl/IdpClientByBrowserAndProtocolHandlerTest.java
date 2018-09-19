@@ -35,7 +35,6 @@ import org.ehealth_connector.security.authentication.AuthnRequest;
 import org.ehealth_connector.security.communication.config.impl.IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl;
 import org.ehealth_connector.security.deserialization.impl.AuthnRequestDeserializerImpl;
 import org.ehealth_connector.security.exceptions.ClientSendException;
-import org.ehealth_connector.security.saml2.Response;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -47,8 +46,7 @@ import org.w3c.dom.Element;
 
 public class IdpClientByBrowserAndProtocolHandlerTest extends ServerTestHelper {
 
-	private static Logger logger = LoggerFactory
-			.getLogger(IdpClientByBrowserAndProtocolHandlerTest.class);
+	private static Logger logger = LoggerFactory.getLogger(IdpClientByBrowserAndProtocolHandlerTest.class);
 
 	private static HttpServer server;
 
@@ -57,15 +55,14 @@ public class IdpClientByBrowserAndProtocolHandlerTest extends ServerTestHelper {
 
 	@BeforeClass
 	public static void setUpBefore() throws IOException {
-		final SocketConfig socketConfig = SocketConfig.custom().setSoTimeout(15000)
-				.setTcpNoDelay(true).build();
+		final SocketConfig socketConfig = SocketConfig.custom().setSoTimeout(15000).setTcpNoDelay(true).build();
 
 		server = ServerBootstrap.bootstrap().setServerInfo("Test/1.1").setSocketConfig(socketConfig)
 				.registerHandler("*", new HttpRequestHandler() {
 
 					@Override
-					public void handle(HttpRequest request, HttpResponse response,
-							HttpContext context) throws HttpException, IOException {
+					public void handle(HttpRequest request, HttpResponse response, HttpContext context)
+							throws HttpException, IOException {
 						logger.debug("The request %s", request.getRequestLine());
 						response.setStatusCode(500);
 						response.setEntity(new StringEntity("Hello this is a testserver"));
@@ -96,9 +93,8 @@ public class IdpClientByBrowserAndProtocolHandlerTest extends ServerTestHelper {
 
 		testFilename = "/credential-criteria-registry.properties";
 
-		client = new IdpClientByBrowserAndProtocolHandler(
-				new IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl()
-						.url("http://localhost:" + getHttpPort() + "/testit").create());
+		client = new IdpClientByBrowserAndProtocolHandler(new IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl()
+				.url("http://localhost:" + getHttpPort() + "/testit").create());
 		final Element xmlElement = loadXmlDokument("/saml2/AuthnRequest.xml");
 		testAuthnRequest = new AuthnRequestDeserializerImpl().fromXmlElement(xmlElement);
 	}
@@ -126,7 +122,7 @@ public class IdpClientByBrowserAndProtocolHandlerTest extends ServerTestHelper {
 	@Ignore("This test is not executable in this way.")
 	public void testSend() throws ClientSendException {
 
-		final Response ref = client.send(testAuthnRequest);
+		final Object ref = client.send(testAuthnRequest);
 		assertNotNull(ref);
 
 	}

@@ -32,7 +32,6 @@ import org.ehealth_connector.security.communication.xua.XUserAssertionRequest;
 import org.ehealth_connector.security.communication.xua.XUserAssertionResponse;
 import org.ehealth_connector.security.core.SecurityHeaderElement;
 import org.ehealth_connector.security.exceptions.ClientSendException;
-import org.ehealth_connector.security.saml2.Response;
 import org.opensaml.core.config.InitializationException;
 import org.opensaml.core.config.Initializer;
 
@@ -44,8 +43,7 @@ import org.opensaml.core.config.Initializer;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class ConvenienceUserAccessAuthenticationImpl
-		implements AuthenticationModule, XUserAssertionModule {
+public class ConvenienceUserAccessAuthenticationImpl implements AuthenticationModule, XUserAssertionModule {
 
 	/**
 	 * Instantiates a new instance and initializes the OpenSaml Libraries.
@@ -57,16 +55,14 @@ public class ConvenienceUserAccessAuthenticationImpl
 		// This makes sure the Marshallers are loaded for serialisation!
 		// Note: the initial implementation did not work under .net. It has been
 		// therefore changed as follows:
-		List<Initializer> initializers = new ArrayList<Initializer>();
-		initializers.add(
-				new org.ehealth_connector.security.hl7v3.config.XmlObjectProviderInitializer());
+		final List<Initializer> initializers = new ArrayList<>();
+		initializers.add(new org.ehealth_connector.security.hl7v3.config.XmlObjectProviderInitializer());
 		initializers.add(new org.opensaml.core.metrics.impl.MetricRegistryInitializer());
 		initializers.add(new org.opensaml.core.xml.config.GlobalParserPoolInitializer());
 		initializers.add(new org.opensaml.core.xml.config.XMLObjectProviderInitializer());
 		initializers.add(new org.opensaml.saml.config.SAMLConfigurationInitializer());
 		initializers.add(new org.opensaml.saml.config.XMLObjectProviderInitializer());
-		initializers
-				.add(new org.opensaml.security.config.ClientTLSValidationConfiguratonInitializer());
+		initializers.add(new org.opensaml.security.config.ClientTLSValidationConfiguratonInitializer());
 		initializers.add(new org.opensaml.soap.config.XMLObjectProviderInitializer());
 		initializers.add(new org.opensaml.xmlsec.config.ApacheXMLSecurityInitializer());
 		initializers.add(new org.opensaml.xmlsec.config.GlobalAlgorithmRegistryInitializer());
@@ -74,7 +70,7 @@ public class ConvenienceUserAccessAuthenticationImpl
 		initializers.add(new org.opensaml.xmlsec.config.JavaCryptoValidationInitializer());
 		initializers.add(new org.opensaml.xmlsec.config.XMLObjectProviderInitializer());
 
-		for (Initializer initializer : initializers) {
+		for (final Initializer initializer : initializers) {
 			initializer.init();
 		}
 	}
@@ -88,9 +84,8 @@ public class ConvenienceUserAccessAuthenticationImpl
 	 *      org.ehealth_connector.security.communication.config.XuaClientConfig)
 	 */
 	@Override
-	public List<XUserAssertionResponse> invokeGetXUserAssertion(
-			SecurityHeaderElement aSecurityHeaderElement, XUserAssertionRequest aRequest,
-			XuaClientConfig clientConfiguration) throws ClientSendException {
+	public List<XUserAssertionResponse> invokeGetXUserAssertion(SecurityHeaderElement aSecurityHeaderElement,
+			XUserAssertionRequest aRequest, XuaClientConfig clientConfiguration) throws ClientSendException {
 		final XuaClient client = ClientFactory.getXuaClient(clientConfiguration);
 		return client.send(aSecurityHeaderElement, aRequest);
 	}
@@ -103,8 +98,8 @@ public class ConvenienceUserAccessAuthenticationImpl
 	 *      org.ehealth_connector.security.communication.config.IdpClientConfig)
 	 */
 	@Override
-	public Response invokeUserAuthentication(AuthnRequest aAuthnRequest,
-			IdpClientConfig clientConfiguration) throws ClientSendException {
+	public Object invokeUserAuthentication(AuthnRequest aAuthnRequest, IdpClientConfig clientConfiguration)
+			throws ClientSendException {
 		final IdpClient client = ClientFactory.getIdpClient(clientConfiguration);
 		return client.send(aAuthnRequest);
 	}

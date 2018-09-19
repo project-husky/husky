@@ -15,21 +15,6 @@
 			<artifactId>ehealth_connector-fhir-structures-gen</artifactId>
 			<version>1.7-SNAPSHOT</version>
 		</dependency>
-		<!-- 
-		<dependency>
-			<groupId>org.ehealth_connector.cda.ch</groupId>
-			<artifactId>ehealth_connector-cda-ch</artifactId>
-			<version>1.6-SNAPSHOT</version>
-		</dependency>
- -->
-		<!-- open health tools mdht cda-ch -->
-		<!-- 
-		<dependency>
-			<groupId>org.openhealthtools.mdht.uml.cda.ch</groupId>
-			<artifactId>org.openhealthtools.mdht.uml.cda.ch</artifactId>
-			<version>1.6-SNAPSHOT</version>
-		</dependency>
- -->
 		<!-- test stuff -->
 		<dependency>
 			<groupId>junit</groupId>

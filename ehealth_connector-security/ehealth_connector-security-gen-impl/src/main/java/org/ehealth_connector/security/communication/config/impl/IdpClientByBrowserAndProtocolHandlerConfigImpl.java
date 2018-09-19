@@ -27,10 +27,15 @@ import org.ehealth_connector.security.communication.config.IdpClientConfig;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class IdpClientByBrowserAndProtocolHandlerConfigImpl extends AbstractClientConfig
-		implements IdpClientConfig {
+public class IdpClientByBrowserAndProtocolHandlerConfigImpl extends AbstractClientConfig implements IdpClientConfig {
+
+	public enum SamlRequestType {
+		SAMLRequest, SAMLart
+	}
 
 	private String protocolHandlerName;
+
+	private SamlRequestType samlRequestType;
 
 	protected IdpClientByBrowserAndProtocolHandlerConfigImpl() {
 
@@ -42,6 +47,14 @@ public class IdpClientByBrowserAndProtocolHandlerConfigImpl extends AbstractClie
 
 	public void setProtocolHandlerName(String protocolHandlerName) {
 		this.protocolHandlerName = protocolHandlerName;
+	}
+
+	public SamlRequestType getSamlRequestType() {
+		return samlRequestType;
+	}
+
+	public void setSamlRequestType(SamlRequestType samlRequestType) {
+		this.samlRequestType = samlRequestType;
 	}
 
 }

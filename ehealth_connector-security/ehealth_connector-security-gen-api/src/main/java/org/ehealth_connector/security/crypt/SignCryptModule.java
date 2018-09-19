@@ -21,6 +21,7 @@ import java.security.KeyStore;
 
 import org.ehealth_connector.security.authentication.AuthnRequest;
 import org.ehealth_connector.security.exceptions.SigningException;
+import org.ehealth_connector.security.saml2.ArtifactResolve;
 
 /**
  *
@@ -64,8 +65,7 @@ public interface SignCryptModule {
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	void setPki(KeyStore keyStore, String aKeyStorePassword, KeyStore trustStore,
-			String aTrustStorePassword);
+	void setPki(KeyStore keyStore, String aKeyStorePassword, KeyStore trustStore, String aTrustStorePassword);
 
 	/**
 	 *
@@ -93,5 +93,7 @@ public interface SignCryptModule {
 	 *  <div class="it"></div>
 	 */
 	void signAuthnRequest(AuthnRequest aAuthnRequest, String aSigningAlias) throws SigningException;
+
+	void signArtifactResolve(ArtifactResolve artifactResolve, String aSigningAlias) throws SigningException;
 
 }
