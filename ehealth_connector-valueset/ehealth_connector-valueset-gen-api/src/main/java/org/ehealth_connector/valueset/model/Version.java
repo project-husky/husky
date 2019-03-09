@@ -16,12 +16,21 @@
  */
 package org.ehealth_connector.valueset.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
 
 /**
  * Java Prototype for Value Set Management Concept.
+ *
+ * Mit Java8 wurde ein neues Date-/Time-API eingeführt. Anstelle von
+ * java.util.Date soll ja-va.time.LocalDateTime verwendet werden: LocalDateTime
+ * represents a date-time without a time-zone in the ISO-8601 calendar system,
+ * such as 2007-12-03T10:15:30
+ *
+ * Siehe auch
+ * https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html
+ *
  */
 public interface Version {
 
@@ -29,16 +38,16 @@ public interface Version {
 
 	public OrganizationBaseType getPublishingAuthority();
 
-	public Date getValidFrom();
+	public LocalDateTime getValidFrom();
 
-	public Date getValidTo();
+	public LocalDateTime getValidTo();
 
 	public void setLabel(String value);
 
 	public void setPublishingAuthority(OrganizationBaseType value);
 
-	public void setValidFrom(Date value);
+	public void setValidFrom(LocalDateTime value);
 
-	public void setValidTo(Date value);
+	public void setValidTo(LocalDateTime value);
 
 }

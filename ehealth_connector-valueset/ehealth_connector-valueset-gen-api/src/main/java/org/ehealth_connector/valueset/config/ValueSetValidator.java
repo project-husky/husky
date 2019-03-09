@@ -21,6 +21,11 @@ import java.io.InputStream;
 
 /**
  * Java Prototype for Value Set Management Concept.
+ *
+ * Die Validierungs-Methoden sollen nicht nur die Struktur prüfen, sondern auch
+ * ob die zu lesenden Daten in die Datenstruktur aus ValueSet und ValueSetEntry
+ * Klassen überführt werden können.
+ *
  */
 public interface ValueSetValidator {
 

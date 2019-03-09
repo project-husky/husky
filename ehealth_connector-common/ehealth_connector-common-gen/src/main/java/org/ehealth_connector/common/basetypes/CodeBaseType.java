@@ -17,6 +17,8 @@
 package org.ehealth_connector.common.basetypes;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import org.ehealth_connector.common.utils.LangText;
 
@@ -48,6 +50,8 @@ public interface CodeBaseType {
 
 	public void addDisplayNameTranslation(LangText value);
 
+	public void addDisplayNameTranslation(Locale lang, String text);
+
 	public String getCode();
 
 	public String getCodeSystem();
@@ -55,6 +59,8 @@ public interface CodeBaseType {
 	public String getCodeSystemName();
 
 	public String getDisplayName();
+
+	public Map<Locale, String> getDisplayNameTranslations();
 
 	public String getOriginalText();
 

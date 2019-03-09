@@ -25,10 +25,22 @@ import org.ehealth_connector.valueset.model.ValueSet;
 
 /**
  * Java Prototype for Value Set Management Concept.
+ *
+ * Die Methode dowloadValueSet(..) soll immer ein JSON der gleichen Struktur
+ * zurückliefern. Die Konvertierung der verschiedenen Quellformate und
+ * abweichenden Strukturen ist im Download- anstelle Load-Teil zu lösen. Eine
+ * zu-sätzliche Download-Methode bietet die Option das ValueSet im RAW-Format
+ * des Quellsystems 1:1 herunterzula-den. Diese Methode wird jedoch vom
+ * ValueSetPackageManager nicht direkt genutzt jedoch intern in der Methode
+ * downloadValueSet(..) verwendet.
+ *
+ *
  */
 public interface ValueSetManager {
 
-	public OutputStream downloadValueSet(ValueSetConfig valueSetConfig);
+	public OutputStream downloadValueSetAsJson(ValueSetConfig valueSetConfig);
+
+	public OutputStream downloadValueSetRaw(ValueSetConfig valueSetConfig);
 
 	public ValueSetConfig loadValueSetConfig(File config);
 

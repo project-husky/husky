@@ -20,5 +20,11 @@ package org.ehealth_connector.valueset.enums;
  * Java Prototype for Value Set Management Concept.
  */
 public enum SourceFormatTypeEnum {
-	JSON, IHESVS;
+
+	// Mime type: application/fhir+json
+	JSON,
+	// Mime type: application/fhir+xml
+	XML,
+	// Mime type tbd
+	IHESVS;
 }

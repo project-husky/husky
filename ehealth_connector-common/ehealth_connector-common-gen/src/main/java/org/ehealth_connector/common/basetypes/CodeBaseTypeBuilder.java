@@ -16,6 +16,8 @@
  */
 package org.ehealth_connector.common.basetypes;
 
+import java.util.Locale;
+
 import org.ehealth_connector.common.utils.LangText;
 
 /**
@@ -26,6 +28,8 @@ public interface CodeBaseTypeBuilder {
 	public CodeBaseTypeBuilder addCodeTranslation(CodeBaseType value);
 
 	public CodeBaseTypeBuilder addDisplayNameTranslation(LangText value);
+
+	public CodeBaseTypeBuilder addDisplayNameTranslation(Locale lang, String text);
 
 	public CodeBaseTypeBuilder code(String value);
 
