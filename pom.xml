@@ -20,6 +20,13 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
 	</properties>
 
+	<scm>
+		<connection>scm:git:https://gitlab.com/ehealth-connector/api-java.git</connection>
+		<developerConnection>scm:git:git@gitlab.com:ehealth-connector/api-java.git</developerConnection>
+		<url>https://gitlab.com/ehealth-connector/api-java/tree/master</url>
+		<tag>HEAD</tag>
+	</scm>
+
 	<modules>
 		<module>ehealth_connector-common</module>
 		<module>ehealth_connector-cda</module>
