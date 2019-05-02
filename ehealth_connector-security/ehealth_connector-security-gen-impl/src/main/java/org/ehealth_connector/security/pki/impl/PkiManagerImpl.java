@@ -72,15 +72,15 @@ public class PkiManagerImpl implements PkiManager {
 
 			final URI keyUri = privateKeyPemPath.toURI();
 
-			String privateKeyContent = new String(Files.readAllBytes(Paths.get(keyUri)));
+			String privateKeyContent = new String(Files.readAllBytes(Paths.get(keyUri)), "UTF-8");
 
-			privateKeyContent = privateKeyContent.replaceAll("\\n", "")
+			privateKeyContent = privateKeyContent.replaceAll("\\n", "").replaceAll("\\r", "")
 					.replace("-----BEGIN PRIVATE KEY-----", "")
 					.replace("-----END PRIVATE KEY-----", "");
 
 			final KeyFactory kf = KeyFactory.getInstance("RSA");
-			final PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(
-					Base64.getDecoder().decode(privateKeyContent));
+			byte[] temp = Base64.getDecoder().decode(privateKeyContent);
+			final PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(temp);
 			final PrivateKey privKey = kf.generatePrivate(keySpecPKCS8);
 
 			keyStore.setKeyEntry(alias.toLowerCase(), privKey, aKeyPassword.toCharArray(), chain);
