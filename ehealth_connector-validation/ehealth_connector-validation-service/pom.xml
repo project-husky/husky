@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ehealth_connector.validation.service</groupId>
 	<artifactId>ehealth_connector-validation-service</artifactId>
-	<name>eHealthConnector Validation Service</name>
+	<name>eHealth Connector Validation Service</name>
 
 	<parent>
 		<groupId>org.ehealth_connector.validation</groupId>

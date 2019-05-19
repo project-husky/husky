@@ -38,7 +38,7 @@ import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.ObservationInterpretation;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
-import org.ehealth_connector.valueset.enums.IdentityDomain;
+import org.ehealth_connector.common.IdentityDomain;
 import org.openhealthtools.mdht.uml.cda.AssignedEntity;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;

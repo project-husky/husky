@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>ehealth_connector-converters-cda_ch-fhir</artifactId>
-	<name>eHealthConnector Converters CDA_CH FHIR</name>
+	<name>eHealth Connector Converters CDA_CH FHIR</name>
 
 	<parent>
 		<groupId>org.ehealth_connector.converters</groupId>

@@ -2,13 +2,13 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.ehealth_connector</groupId>
-    <artifactId>ehealth_connector-main</artifactId>
+    <artifactId>ehealth_connector-api</artifactId>
     <version>1.7-SNAPSHOT</version>
   </parent>
   <groupId>org.ehealth_connector.communication</groupId>
   <artifactId>ehealth_connector-communication</artifactId>
   <packaging>pom</packaging>
-  <name>eHealthConnector Communication</name>
+  <name>eHealth Connector Communication</name>
   <modules>
   	<module>ehealth_connector-communication-gen</module>
   	<module>ehealth_connector-communication-ch</module>

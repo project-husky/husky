@@ -40,7 +40,7 @@ import org.ehealth_connector.common.Value;
 import org.ehealth_connector.common.enums.StatusCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
-import org.ehealth_connector.valueset.enums.IdentityDomain;
+import org.ehealth_connector.common.IdentityDomain;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Performer2;

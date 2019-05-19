@@ -1,16 +1,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>ehealth_connector-main</artifactId>
-	<url>http://sourceforge.net/p/ehealthconnector/wiki/Home/</url>
-	<name>eHealthConnector</name>
+	<groupId>org.ehealth_connector</groupId>
+	<artifactId>ehealth_connector-api-java</artifactId>
+	<url>https://gitlab.com/ehealth-connector/api/wikis/Home</url>
+	<name>eHealth Connector Git project Api-Java</name>
 	<packaging>pom</packaging>
-	<description>The eHealthConnector (eHC) is a convenience API for IHE transactions and CDA-CH documents. It supports functionalities for cross-enterprise sharing of documents and master patient index (MPI) connection using IHE transactions and also supports CDA-CH content profiles.It allows easy access and conformity to the Swiss eHealth trust space.
-The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IHE profiles.</description>
+	<description>eHealth Connector Java Convenience API</description>
 
 	<parent>
 		<groupId>org.ehealth_connector</groupId>
-		<artifactId>ehealth_connector-parent</artifactId>
+		<artifactId>ehealth_connector-api</artifactId>
 		<version>1.7-SNAPSHOT</version>
 	</parent>
 
@@ -28,7 +28,7 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 	</scm>
 
 	<modules>
-		<module>ehealth_connector-common</module>
+		<module>ehealth_connector-valueset</module>
 		<module>ehealth_connector-cda</module>
 		<module>ehealth_connector-communication</module>
 		<module>ehealth_connector-validation</module>
@@ -37,8 +37,6 @@ The eHC is built on the basis of the MDHT HITSP runtime libraries and the OHT IH
 		<module>ehealth_connector-converters</module>
 		<module>ehealth_connector-security</module>
 		<module>ehealth_connector-valueset-api</module>
-		<module>ehealth_connector-valueset</module>
-		<module>ehealth_connector-codegenerator</module>
 	</modules>
 
 	<repositories>

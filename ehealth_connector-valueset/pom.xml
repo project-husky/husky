@@ -2,12 +2,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ehealth_connector.valueset</groupId>
 	<artifactId>ehealth_connector-valueset</artifactId>
-	<name>eHealthConnector Value Set Handling</name>
+	<name>eHealth Connector Value Set Handling</name>
 	<packaging>pom</packaging>
 
 	<parent>
 		<groupId>org.ehealth_connector</groupId>
-		<artifactId>ehealth_connector-main</artifactId>
+		<artifactId>ehealth_connector-api</artifactId>
 		<version>1.7-SNAPSHOT</version>
 	</parent>
 

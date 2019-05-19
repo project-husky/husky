@@ -2,12 +2,12 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ehealth_connector.cda</groupId>
 	<artifactId>ehealth_connector-cda</artifactId>
-	<name>eHealthConnector CDA</name>
+	<name>eHealth Connector CDA</name>
 	<packaging>pom</packaging>
 
 	<parent>
 		<groupId>org.ehealth_connector</groupId>
-		<artifactId>ehealth_connector-main</artifactId>
+		<artifactId>ehealth_connector-api</artifactId>
 		<version>1.7-SNAPSHOT</version>
 	</parent>
 

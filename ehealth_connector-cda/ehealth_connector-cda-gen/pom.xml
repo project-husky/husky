@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>ehealth_connector-cda-gen</artifactId>
-	<name>eHealthConnector CDA Generic</name>
+	<name>eHealth Connector CDA Generic</name>
 
 	<parent>
 		<groupId>org.ehealth_connector.cda</groupId>
@@ -20,6 +20,23 @@
 		<dependency>
 			<groupId>org.openhealthtools.mdht.uml.cda.ch</groupId>
 			<artifactId>org.openhealthtools.mdht.uml.cda.ch</artifactId>
+			<version>1.7-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openhealthtools.mdht.cda</groupId>
+			<artifactId>org.openhealthtools.mdht.uml.cda</artifactId>
+			<version>1.7-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openhealthtools.mdht.uml</groupId>
+			<artifactId>cda</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openhealthtools.mdht.cda</groupId>
+			<artifactId>org.openhealthtools.mdht.uml.cda.ihe.pharm</artifactId>
 			<version>1.7-SNAPSHOT</version>
 		</dependency>
 

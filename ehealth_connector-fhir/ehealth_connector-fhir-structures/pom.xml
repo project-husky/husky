@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ehealth_connector.fhir.structures</groupId>
 	<artifactId>ehealth_connector-fhir-structures</artifactId>
-	<name>eHealthConnector FHIR Structures</name>
+	<name>eHealth Connector FHIR Structures</name>
 
 	<parent>
 		<groupId>org.ehealth_connector.fhir</groupId>

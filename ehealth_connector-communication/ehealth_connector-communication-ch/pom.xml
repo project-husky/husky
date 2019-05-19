@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ehealth_connector.communication.ch</groupId>
 	<artifactId>ehealth_connector-communication-ch</artifactId>
-	<name>eHealthConnector Communication CH</name>
+	<name>eHealth Connector Communication CH</name>
 
 	<parent>
 		<groupId>org.ehealth_connector.communication</groupId>

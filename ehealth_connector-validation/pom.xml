@@ -3,11 +3,11 @@
 	<groupId>org.ehealth_connector.validation</groupId>
 	<artifactId>ehealth_connector-validation</artifactId>
 	<packaging>pom</packaging>
-	<name>eHealthConnector Validation</name>
+	<name>eHealth Connector Validation</name>
 
 	<parent>
 		<groupId>org.ehealth_connector</groupId>
-		<artifactId>ehealth_connector-main</artifactId>
+		<artifactId>ehealth_connector-api</artifactId>
 		<version>1.7-SNAPSHOT</version>
 	</parent>
 

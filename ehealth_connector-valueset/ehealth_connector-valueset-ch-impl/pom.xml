@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ehealth_connector.valueset.ch</groupId>
 	<artifactId>ehealth_connector-valueset-ch-impl</artifactId>
-	<name>eHealthConnector Value Set Handling Impl CH</name>
+	<name>eHealth Connector Value Set Handling Impl CH</name>
 
 	<parent>
 		<groupId>org.ehealth_connector.valueset</groupId>
