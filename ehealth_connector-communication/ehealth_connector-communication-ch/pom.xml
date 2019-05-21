@@ -3,6 +3,7 @@
 	<groupId>org.ehealth_connector.communication.ch</groupId>
 	<artifactId>ehealth_connector-communication-ch</artifactId>
 	<name>eHealth Connector Communication CH</name>
+	<version>1.7-SNAPSHOT</version>
 
 	<parent>
 		<groupId>org.ehealth_connector.communication</groupId>
