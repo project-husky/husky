@@ -50,7 +50,7 @@
 
 		<dependency>
 			<groupId>org.openhealthtools.ihe.atna</groupId>
-			<artifactId>org.openhealthtools.ihe.atna.auditor</artifactId>
+			<artifactId>oht-atna-auditor</artifactId>
 		</dependency>
 
 		<!-- test stuff -->

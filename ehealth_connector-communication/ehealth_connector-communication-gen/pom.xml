@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>ehealth_connector-communication-gen</artifactId>
 	<name>eHealth Connector Communication Generic</name>
@@ -11,13 +12,13 @@
 
 
 	<dependencies>
-	
-	<!-- hl7 -->
+
+		<!-- hl7 -->
 		<dependency>
 			<groupId>org.hl7.v3</groupId>
 			<artifactId>hl7v3-core</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.ehealth_connector.cda</groupId>
 			<artifactId>ehealth_connector-cda-gen</artifactId>
@@ -37,44 +38,32 @@
 		<!-- open health tools ihe xds -->
 		<dependency>
 			<groupId>org.openhealthtools.ihe.xds</groupId>
-			<artifactId>org.openhealthtools.ihe.xds</artifactId>
+			<artifactId>oht-xds-source</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.openhealthtools.ihe.xds</groupId>
-			<artifactId>org.openhealthtools.ihe.xds.source</artifactId>
+			<artifactId>oht-xds-consumer</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.openhealthtools.ihe.xds</groupId>
-			<artifactId>org.openhealthtools.ihe.xds.consumer</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.xds</groupId>
-			<artifactId>org.openhealthtools.ihe.xds.soap</artifactId>
+			<artifactId>oht-xds-soap</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.openhealthtools.ihe.xds.metadata</groupId>
-			<artifactId>org.openhealthtools.ihe.xds.metadata</artifactId>
+			<artifactId>oht-xds-metadata-transform</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.openhealthtools.ihe.xds.metadata</groupId>
-			<artifactId>org.openhealthtools.ihe.xds.metadata.transform</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.xds.metadata</groupId>
-			<artifactId>org.openhealthtools.ihe.xds.metadata.extract</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.xds.metadata</groupId>
-			<artifactId>org.openhealthtools.ihe.xds.metadata.extract.cdar2</artifactId>
+			<artifactId>oht-xds-metadata-extract-cdar2</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>org.openhealthtools.ihe.xdm</groupId>
-			<artifactId>org.openhealthtools.ihe.xdm</artifactId>
+			<groupId>org.openhealthtools.ihe</groupId>
+			<artifactId>oht-xdm</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.openhealthtools.ihe.xua</groupId>
-			<artifactId>org.openhealthtools.ihe.xua</artifactId>
+			<artifactId>oht-xua</artifactId>
 		</dependency>
 
 		<!-- eclipse libs -->
@@ -88,80 +77,80 @@
 		<!-- open health tools ihe atna -->
 		<dependency>
 			<groupId>org.openhealthtools.ihe.atna</groupId>
-			<artifactId>org.openhealthtools.ihe.atna.auditor</artifactId>
+			<artifactId>oht-atna-auditor</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.openhealthtools.ihe.atna</groupId>
-			<artifactId>org.openhealthtools.ihe.atna.context</artifactId>
+			<artifactId>oht-atna-context</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.openhealthtools.ihe.atna</groupId>
-			<artifactId>org.openhealthtools.ihe.atna.nodeauth</artifactId>
+			<artifactId>oht-atna-nodeauth</artifactId>
 		</dependency>
 
 		<!-- open health tools ihe ebXML -->
 		<dependency>
-			<groupId>org.openhealthtools.ihe.common.ebXML</groupId>
-			<artifactId>org.openhealthtools.ihe.common.ebXML._2._1</artifactId>
+			<groupId>org.openhealthtools.ihe.common</groupId>
+			<artifactId>oht-common-ebXML._2._1</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.openhealthtools.ihe.common.ebXML</groupId>
-			<artifactId>org.openhealthtools.ihe.common.ebXML._3._0</artifactId>
+			<groupId>org.openhealthtools.ihe.common</groupId>
+			<artifactId>oht-common-ebXML._3._0</artifactId>
 		</dependency>
 
 		<!-- open health tools ihe hl7v2 -->
 		<dependency>
 			<groupId>org.openhealthtools.ihe.common.hl7v2</groupId>
-			<artifactId>org.openhealthtools.ihe.common.hl7v2</artifactId>
+			<artifactId>oht-common-hl7v2</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.openhealthtools.ihe.common.hl7v2</groupId>
-			<artifactId>org.openhealthtools.ihe.common.hl7v2.client</artifactId>
+			<artifactId>oht-common-hl7v2-client</artifactId>
 		</dependency>
 
 		<!-- open health tools ihe hl7v3 -->
 		<dependency>
 			<groupId>org.openhealthtools.ihe.common.hl7v3</groupId>
-			<artifactId>org.openhealthtools.ihe.common.hl7v3</artifactId>
+			<artifactId>oht-common-hl7v3</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.openhealthtools.ihe.common.hl7v3</groupId>
-			<artifactId>org.openhealthtools.ihe.common.hl7v3.client</artifactId>
+			<artifactId>oht-common-hl7v3-client</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.openhealthtools.ihe.common.hl7v3</groupId>
-			<artifactId>org.openhealthtools.ihe.common.hl7v3.soap</artifactId>
+			<artifactId>oht-common-hl7v3-soap</artifactId>
 		</dependency>
 
 		<dependency>
 			<groupId>org.openhealthtools.ihe.common.ws</groupId>
-			<artifactId>org.openhealthtools.ihe.common.ws.axis2</artifactId>
+			<artifactId>oht-common-ws-axis2</artifactId>
 		</dependency>
 
 		<!-- open health tools ihe pix -->
 		<dependency>
 			<groupId>org.openhealthtools.ihe.pix</groupId>
-			<artifactId>org.openhealthtools.ihe.pix.consumer.v3</artifactId>
+			<artifactId>oht-pix-consumer-v3</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.openhealthtools.ihe.pix</groupId>
-			<artifactId>org.openhealthtools.ihe.pix.consumer</artifactId>
+			<artifactId>oht-pix-consumer</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.openhealthtools.ihe.pix</groupId>
-			<artifactId>org.openhealthtools.ihe.pix.source</artifactId>
+			<artifactId>oht-pix-source</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.openhealthtools.ihe.pix</groupId>
-			<artifactId>org.openhealthtools.ihe.pix.source.v3</artifactId>
+			<artifactId>oht-pix-source-v3</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.openhealthtools.ihe.pdq</groupId>
-			<artifactId>org.openhealthtools.ihe.pdq.consumer</artifactId>
+			<artifactId>oht-pdq-consumer</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.openhealthtools.ihe.pdq</groupId>
-			<artifactId>org.openhealthtools.ihe.pdq.consumer.v3</artifactId>
+			<artifactId>oht-pdq-consumer-v3</artifactId>
 		</dependency>
 
 		<!-- axis2 -->
@@ -184,7 +173,7 @@
 		<dependency>
 			<groupId>org.apache.axis2</groupId>
 			<artifactId>addressing</artifactId>
-			<!--type>mar</type-->
+			<!--type>mar</type -->
 		</dependency>
 
 		<dependency>
@@ -271,16 +260,12 @@
 			</plugin>
 		</plugins>
 	</build>
-	
-	
+
+
 	<profiles>
 		<profile>
 			<id>ehc4dotnet-disabled</id>
-			<!-- activation>
-				<os>
-					<family>Windows</family>
-				</os>
-			</activation -->
+			<!-- activation> <os> <family>Windows</family> </os> </activation -->
 			<!-- Converts the ehealthconnector library to a .net version using IKVMC -->
 			<build>
 				<plugins>
@@ -300,7 +285,7 @@
 						</configuration>
 						<executions>
 							<execution>
-							<phase>package</phase>
+								<phase>package</phase>
 								<goals>
 									<goal>run</goal>
 								</goals>

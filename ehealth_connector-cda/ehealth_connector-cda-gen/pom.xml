@@ -14,6 +14,16 @@
 			<groupId>org.ehealth_connector.common</groupId>
 			<artifactId>ehealth_connector-common-gen</artifactId>
 			<version>1.7-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.openhealthtools.mdht.uml</groupId>
+					<artifactId>cda</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.openhealthtools.mdht.uml.hl7</groupId>
+					<artifactId>datatypes</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- open health tools mdht cda-ch -->
@@ -27,23 +37,6 @@
 			<groupId>org.openhealthtools.mdht.cda</groupId>
 			<artifactId>org.openhealthtools.mdht.uml.cda</artifactId>
 			<version>1.7-SNAPSHOT</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openhealthtools.mdht.uml</groupId>
-			<artifactId>cda</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openhealthtools.mdht.cda</groupId>
-			<artifactId>org.openhealthtools.mdht.uml.cda.ihe.pharm</artifactId>
-			<version>1.7-SNAPSHOT</version>
-		</dependency>
-
-		<!-- open health tools ihe utils -->
-		<dependency>
-			<groupId>org.openhealthtools.ihe.utils</groupId>
-			<artifactId>org.openhealthtools.ihe.utils</artifactId>
 		</dependency>
 
 		<!-- test stuff -->
@@ -72,6 +65,21 @@
 		</dependency>
 
 
+		<dependency>
+			<groupId>org.ehealth_connector.common.ch</groupId>
+			<artifactId>ehealth_connector-common-ch</artifactId>
+			<version>1.7-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.openhealthtools.mdht.uml</groupId>
+					<artifactId>cda</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.openhealthtools.mdht.uml.hl7</groupId>
+					<artifactId>datatypes</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
 	</dependencies>
 
 
