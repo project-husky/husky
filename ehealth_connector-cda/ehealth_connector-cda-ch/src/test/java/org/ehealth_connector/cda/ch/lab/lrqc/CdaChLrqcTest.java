@@ -44,8 +44,9 @@ import org.ehealth_connector.common.AuthoringDevice;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Telecoms;
-import org.ehealth_connector.common.enums.AddressUse;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.enums.PostalAddressUse;
+import org.ehealth_connector.common.enums.TelecomAddressUse;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.ChPackage;
@@ -321,10 +322,10 @@ public class CdaChLrqcTest extends CdaChV12LaboratoryReportTest {
 				"Medical and pathology laboratory technicians"));
 		author.setTime(super.endDate);
 		author.setGln("987");
-		author.addAddress(
-				new Address("Baurat-Gerber-Str.", "18", "37073", "Göttingen", AddressUse.PUBLIC));
+		author.addAddress(new Address("Baurat-Gerber-Str.", "18", "37073", "Göttingen",
+				PostalAddressUse.PUBLIC));
 		Telecoms t = new Telecoms();
-		t.addPhone("+491794783239", AddressUse.PUBLIC);
+		t.addPhone("+491794783239", TelecomAddressUse.PUBLIC);
 		author.setTelecoms(t);
 		cda.addAuthor(author);
 		assertTrue(isEqual(author, cda.getAuthor()));

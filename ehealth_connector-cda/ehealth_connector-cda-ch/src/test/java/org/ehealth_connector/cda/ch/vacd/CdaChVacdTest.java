@@ -59,10 +59,11 @@ import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.Telecoms;
 import org.ehealth_connector.common.Value;
-import org.ehealth_connector.common.enums.AddressUse;
 import org.ehealth_connector.common.enums.AdministrativeGender;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.enums.PostalAddressUse;
+import org.ehealth_connector.common.enums.TelecomAddressUse;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -89,8 +90,8 @@ public class CdaChVacdTest extends TestUtils {
 		final Name arztName = new Name("Allzeit", "Bereit", "Dr. med.");
 		final Author arzt = new Author(arztName, "7608888888888");
 		final Telecoms arztTelecoms = new Telecoms();
-		arztTelecoms.addPhone("+41322345566", AddressUse.PRIVATE);
-		arztTelecoms.addFax("+41322345567", AddressUse.BUSINESS);
+		arztTelecoms.addPhone("+41322345566", TelecomAddressUse.PRIVATE);
+		arztTelecoms.addFax("+41322345567", TelecomAddressUse.BUSINESS);
 		arzt.setTelecoms(arztTelecoms);
 		return arzt;
 	}
@@ -253,7 +254,7 @@ public class CdaChVacdTest extends TestUtils {
 
 		final Organization arztPraxis = new Organization("Gruppenpraxis CH", "7608888888888");
 		final Address arztPraxisAdresse = new Address("Doktorgasse", "2", "8888", "Musterhausen",
-				AddressUse.BUSINESS);
+				PostalAddressUse.BUSINESS);
 		arztPraxis.addAddress(arztPraxisAdresse);
 		arztPraxis.setTelecoms(arzt.getTelecoms());
 
@@ -262,9 +263,9 @@ public class CdaChVacdTest extends TestUtils {
 		final Patient patient = new Patient(patientName, AdministrativeGender.FEMALE,
 				DateUtil.date("10.02.1967"));
 		final Address patientAdresse = new Address("Leidensweg", "10", "9876", "Specimendorf",
-				AddressUse.PRIVATE);
+				PostalAddressUse.PRIVATE);
 		final Telecoms patientTelecoms = new Telecoms();
-		patientTelecoms.addPhone("+41326851234", AddressUse.PRIVATE);
+		patientTelecoms.addPhone("+41326851234", TelecomAddressUse.PRIVATE);
 		patient.setTelecoms(patientTelecoms);
 
 		// Adding an id using an OID that is already known by the convenience

@@ -40,9 +40,10 @@ import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.Performer;
 import org.ehealth_connector.common.Telecoms;
 import org.ehealth_connector.common.Value;
-import org.ehealth_connector.common.enums.AddressUse;
 import org.ehealth_connector.common.enums.AdministrativeGender;
 import org.ehealth_connector.common.enums.CodeSystems;
+import org.ehealth_connector.common.enums.PostalAddressUse;
+import org.ehealth_connector.common.enums.TelecomAddressUse;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -281,7 +282,7 @@ public class TestUtils {
 
 	public Address createAddress1() {
 		final Address a = new Address("Baurat-Gerber-Str.", "18", "37073", "Göttingen",
-				AddressUse.BUSINESS);
+				PostalAddressUse.BUSINESS);
 		return a;
 	}
 
@@ -334,8 +335,8 @@ public class TestUtils {
 	public Organization createOrganization1() {
 		final Organization o = new Organization(ts1, numS1);
 		o.setTelecoms(telecoms1);
-		telecoms1.addEMail("testMail", AddressUse.BUSINESS);
-		telecoms1.addPhone(numS1, AddressUse.PRIVATE);
+		telecoms1.addEMail("testMail", TelecomAddressUse.BUSINESS);
+		telecoms1.addPhone(numS1, TelecomAddressUse.PRIVATE);
 		return o;
 	}
 
@@ -364,12 +365,12 @@ public class TestUtils {
 
 	public Telecoms createTelecoms1() {
 		final Telecoms t = new Telecoms();
-		t.addEMail(telS1, AddressUse.BUSINESS);
-		t.addEMail(telS2, AddressUse.PRIVATE);
-		t.addFax(telS1, AddressUse.BUSINESS);
-		t.addFax(telS2, AddressUse.PRIVATE);
-		t.addPhone(telS1, AddressUse.BUSINESS);
-		t.addPhone(telS2, AddressUse.PRIVATE);
+		t.addEMail(telS1, TelecomAddressUse.BUSINESS);
+		t.addEMail(telS2, TelecomAddressUse.PRIVATE);
+		t.addFax(telS1, TelecomAddressUse.BUSINESS);
+		t.addFax(telS2, TelecomAddressUse.PRIVATE);
+		t.addPhone(telS1, TelecomAddressUse.BUSINESS);
+		t.addPhone(telS2, TelecomAddressUse.PRIVATE);
 		return t;
 	}
 

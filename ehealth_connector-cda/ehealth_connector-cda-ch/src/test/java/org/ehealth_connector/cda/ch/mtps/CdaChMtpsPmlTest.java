@@ -59,11 +59,12 @@ import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.Telecoms;
 import org.ehealth_connector.common.Value;
-import org.ehealth_connector.common.enums.AddressUse;
 import org.ehealth_connector.common.enums.AdministrativeGender;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.enums.PostalAddressUse;
 import org.ehealth_connector.common.enums.StatusCode;
+import org.ehealth_connector.common.enums.TelecomAddressUse;
 import org.ehealth_connector.common.enums.Ucum;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
@@ -158,8 +159,8 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		assignedAuthor.setCode(assignedAuthorCodefunctionCode.getCE());
 		author.setAsAuthor(assignedAuthor);
 		final Telecoms telecoms = new Telecoms();
-		telecoms.addPhone("+41322345567", AddressUse.BUSINESS);
-		telecoms.addEMail("medecin.famille@hin.ch", AddressUse.BUSINESS);
+		telecoms.addPhone("+41322345567", TelecomAddressUse.BUSINESS);
+		telecoms.addEMail("medecin.famille@hin.ch", TelecomAddressUse.BUSINESS);
 		final Organization representedOrganization = new Organization(name.getCompleteName());
 		representedOrganization.setTelecoms(telecoms);
 		representedOrganization.addId(new Identificator(authorID));
@@ -189,8 +190,8 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		assignedAuthor.setCode(assignedAuthorCodefunctionCode.getCE());
 		author.setAsAuthor(assignedAuthor);
 		final Telecoms telecoms = new Telecoms();
-		telecoms.addPhone("+41322345567", AddressUse.BUSINESS);
-		telecoms.addEMail("medecin.famille@hin.ch", AddressUse.BUSINESS);
+		telecoms.addPhone("+41322345567", TelecomAddressUse.BUSINESS);
+		telecoms.addEMail("medecin.famille@hin.ch", TelecomAddressUse.BUSINESS);
 		final Organization representedOrganization = new Organization(name.getCompleteName());
 		representedOrganization.setTelecoms(telecoms);
 		representedOrganization.addId(new Identificator(authorID));
@@ -220,8 +221,8 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		assignedAuthor.setCode(assignedAuthorCodefunctionCode.getCE());
 		author.setAsAuthor(assignedAuthor);
 		final Telecoms telecoms = new Telecoms();
-		telecoms.addPhone("+41322345567", AddressUse.BUSINESS);
-		telecoms.addEMail("medecin.famille@hin.ch", AddressUse.BUSINESS);
+		telecoms.addPhone("+41322345567", TelecomAddressUse.BUSINESS);
+		telecoms.addEMail("medecin.famille@hin.ch", TelecomAddressUse.BUSINESS);
 		final Organization representedOrganization = new Organization(name.getCompleteName());
 		representedOrganization.setTelecoms(telecoms);
 		representedOrganization.addId(new Identificator(authorID));
@@ -250,8 +251,8 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		assignedAuthor.setCode(assignedAuthorCodefunctionCode.getCE());
 		author.setAsAuthor(assignedAuthor);
 		final Telecoms telecoms = new Telecoms();
-		telecoms.addPhone("+41322345567", AddressUse.BUSINESS);
-		telecoms.addEMail("medecin.famille@hin.ch", AddressUse.BUSINESS);
+		telecoms.addPhone("+41322345567", TelecomAddressUse.BUSINESS);
+		telecoms.addEMail("medecin.famille@hin.ch", TelecomAddressUse.BUSINESS);
 		final Organization representedOrganization = new Organization(name.getCompleteName());
 		representedOrganization.setTelecoms(telecoms);
 		representedOrganization.addId(new Identificator(authorID));
@@ -281,8 +282,8 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		assignedAuthor.setCode(assignedAuthorCodefunctionCode.getCE());
 		author.setAsAuthor(assignedAuthor);
 		final Telecoms telecoms = new Telecoms();
-		telecoms.addPhone("+41322345567", AddressUse.BUSINESS);
-		telecoms.addEMail("medecin.famille@hin.ch", AddressUse.BUSINESS);
+		telecoms.addPhone("+41322345567", TelecomAddressUse.BUSINESS);
+		telecoms.addEMail("medecin.famille@hin.ch", TelecomAddressUse.BUSINESS);
 		final Organization representedOrganization = new Organization(name.getCompleteName());
 		representedOrganization.setTelecoms(telecoms);
 		representedOrganization.addId(new Identificator(authorID));
@@ -298,8 +299,8 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		final Name authenticatorName = new Name("Albus", "Dumbledore", "Prof.");
 		final Author authenticator = new Author(authenticatorName, "7601002116763"); //
 		final Telecoms telecoms = new Telecoms();
-		telecoms.addPhone("+41223724567", AddressUse.BUSINESS);
-		telecoms.addEMail("albus.dumbledore@hcuge.ch", AddressUse.BUSINESS);
+		telecoms.addPhone("+41223724567", TelecomAddressUse.BUSINESS);
+		telecoms.addEMail("albus.dumbledore@hcuge.ch", TelecomAddressUse.BUSINESS);
 		authenticator.setTelecoms(telecoms);
 		return authenticator;
 	}
@@ -311,13 +312,13 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		final Name docName = new Name("John", "Doe", "Prof.");
 		final Author doc = new Author(docName, "7608888888888");
 		final Telecoms docTelecoms = new Telecoms();
-		docTelecoms.addPhone("+41322345566", AddressUse.PRIVATE);
-		docTelecoms.addFax("+41322345567", AddressUse.BUSINESS);
+		docTelecoms.addPhone("+41322345566", TelecomAddressUse.PRIVATE);
+		docTelecoms.addFax("+41322345567", TelecomAddressUse.BUSINESS);
 		doc.setTelecoms(docTelecoms);
 		doc.setOrganization(new Organization("HUG", "7608888888888"));
 
 		final Address addr = new Address("rue Gabrielle-Perret-Gentil, 4", "1205", "Geneva",
-				AddressUse.BUSINESS);
+				PostalAddressUse.BUSINESS);
 		addr.setCountry("CH");
 		doc.addAddress(addr);
 		return doc;
@@ -502,8 +503,8 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		assignedAuthor.setCode(assignedAuthorCodefunctionCode.getCE());
 		author.setAsAuthor(assignedAuthor);
 		final Telecoms telecoms = new Telecoms();
-		telecoms.addPhone("+41322345567", AddressUse.BUSINESS);
-		telecoms.addEMail("medecin.famille@hin.ch", AddressUse.BUSINESS);
+		telecoms.addPhone("+41322345567", TelecomAddressUse.BUSINESS);
+		telecoms.addEMail("medecin.famille@hin.ch", TelecomAddressUse.BUSINESS);
 		final Organization representedOrganization = new Organization(name.getCompleteName());
 		representedOrganization.setTelecoms(telecoms);
 		representedOrganization.addId(new Identificator(authorID));
@@ -736,7 +737,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 		final Author legalAuthenticator = getLegalAuthenticatorInfo();
 		final Organization mdOrganization = new Organization("HUG", "7608888888888");
 		final Address mdAddress = new Address("rue Gabrielle-Perret-Gentil, 4", "1205", "Geneva",
-				AddressUse.BUSINESS);
+				PostalAddressUse.BUSINESS);
 		mdAddress.setCountry("CH");
 
 		mdOrganization.addAddress(mdAddress);
@@ -916,7 +917,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 						 * , AddressUse.PRIVATE
 						 */);
 		final Telecoms patientTelecoms = new Telecoms();
-		patientTelecoms.addPhone("+41763064535", AddressUse.PRIVATE);
+		patientTelecoms.addPhone("+41763064535", TelecomAddressUse.PRIVATE);
 		patient.setTelecoms(patientTelecoms); // Patient (recordTarget)
 
 		// Adding an id using an OID that is already known by the convenience

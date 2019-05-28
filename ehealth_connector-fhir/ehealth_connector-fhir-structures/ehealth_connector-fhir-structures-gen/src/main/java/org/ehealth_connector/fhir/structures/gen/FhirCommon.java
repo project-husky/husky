@@ -989,14 +989,14 @@ public class FhirCommon {
 
 		// Add Addresses
 		for (final org.hl7.fhir.dstu3.model.Address addr : fhirObject.getAddress()) {
-			org.ehealth_connector.common.enums.AddressUse usage = org.ehealth_connector.common.enums.AddressUse.BUSINESS;
+			org.ehealth_connector.common.enums.PostalAddressUse usage = org.ehealth_connector.common.enums.PostalAddressUse.BUSINESS;
 			if (addr.getUseElement()
 					.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.HOME) {
-				usage = org.ehealth_connector.common.enums.AddressUse.PRIVATE;
+				usage = org.ehealth_connector.common.enums.PostalAddressUse.PRIVATE;
 			}
 			if (addr.getUseElement()
 					.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.TEMP) {
-				usage = org.ehealth_connector.common.enums.AddressUse.PUBLIC;
+				usage = org.ehealth_connector.common.enums.PostalAddressUse.PUBLIC;
 			}
 			final Address eHCAddr = new Address(addr.getLine().get(0).toString(),
 					addr.getPostalCode(), addr.getCity(), usage);
@@ -1050,14 +1050,14 @@ public class FhirCommon {
 
 		// Add Addresses
 		for (final org.hl7.fhir.dstu3.model.Address addr : fhirObject.getAddress()) {
-			org.ehealth_connector.common.enums.AddressUse usage = org.ehealth_connector.common.enums.AddressUse.BUSINESS;
+			org.ehealth_connector.common.enums.PostalAddressUse usage = org.ehealth_connector.common.enums.PostalAddressUse.BUSINESS;
 			if (addr.getUseElement()
 					.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.HOME) {
-				usage = org.ehealth_connector.common.enums.AddressUse.PRIVATE;
+				usage = org.ehealth_connector.common.enums.PostalAddressUse.PRIVATE;
 			}
 			if (addr.getUseElement()
 					.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.TEMP) {
-				usage = org.ehealth_connector.common.enums.AddressUse.PUBLIC;
+				usage = org.ehealth_connector.common.enums.PostalAddressUse.PUBLIC;
 			}
 			final Address eHCAddr = new Address(addr.getLine().get(0).toString(),
 					addr.getPostalCode(), addr.getCity(), usage);
@@ -1120,10 +1120,10 @@ public class FhirCommon {
 
 		// Add Addresses
 		for (final org.hl7.fhir.dstu3.model.Address addr : fhirObject.getAddress()) {
-			org.ehealth_connector.common.enums.AddressUse usage = org.ehealth_connector.common.enums.AddressUse.BUSINESS;
+			org.ehealth_connector.common.enums.PostalAddressUse usage = org.ehealth_connector.common.enums.PostalAddressUse.BUSINESS;
 			if (addr.getUseElement()
 					.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.HOME) {
-				usage = org.ehealth_connector.common.enums.AddressUse.PRIVATE;
+				usage = org.ehealth_connector.common.enums.PostalAddressUse.PRIVATE;
 			}
 			final Address eHCAddr = new Address(addr.getLine().get(0).toString(),
 					addr.getPostalCode(), addr.getCity(), usage);
@@ -1655,14 +1655,14 @@ public class FhirCommon {
 
 			// Add Addresses
 			for (final org.hl7.fhir.dstu3.model.Address addr : fhirOrganization.getAddress()) {
-				org.ehealth_connector.common.enums.AddressUse usage = org.ehealth_connector.common.enums.AddressUse.BUSINESS;
+				org.ehealth_connector.common.enums.PostalAddressUse usage = org.ehealth_connector.common.enums.PostalAddressUse.BUSINESS;
 				if (addr.getUseElement()
 						.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.HOME) {
-					usage = org.ehealth_connector.common.enums.AddressUse.PRIVATE;
+					usage = org.ehealth_connector.common.enums.PostalAddressUse.PRIVATE;
 				}
 				if (addr.getUseElement()
 						.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.TEMP) {
-					usage = org.ehealth_connector.common.enums.AddressUse.PUBLIC;
+					usage = org.ehealth_connector.common.enums.PostalAddressUse.PUBLIC;
 				}
 				final Address eHCAddr = new Address();
 				eHCAddr.setAddressline1(addr.getLine().get(0).toString());
@@ -1793,10 +1793,10 @@ public class FhirCommon {
 
 			// Add Addresses
 			for (final org.hl7.fhir.dstu3.model.Address addr : fhirPatient.getAddress()) {
-				org.ehealth_connector.common.enums.AddressUse usage = org.ehealth_connector.common.enums.AddressUse.BUSINESS;
+				org.ehealth_connector.common.enums.PostalAddressUse usage = org.ehealth_connector.common.enums.PostalAddressUse.BUSINESS;
 				if (addr.getUseElement()
 						.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.HOME) {
-					usage = org.ehealth_connector.common.enums.AddressUse.PRIVATE;
+					usage = org.ehealth_connector.common.enums.PostalAddressUse.PRIVATE;
 				}
 				String addrLine = null;
 				if (addr.getLine().size() > 0)
@@ -1861,12 +1861,12 @@ public class FhirCommon {
 	public static Telecoms getTelecoms(List<ContactPoint> fhirContactPoints) {
 		final Telecoms eHCTelecoms = new Telecoms();
 		for (final ContactPoint telco : fhirContactPoints) {
-			org.ehealth_connector.common.enums.AddressUse usage = org.ehealth_connector.common.enums.AddressUse.BUSINESS;
+			org.ehealth_connector.common.enums.TelecomAddressUse usage = org.ehealth_connector.common.enums.TelecomAddressUse.BUSINESS;
 			if (telco.getUseElement().getValue() == ContactPointUse.HOME) {
-				usage = org.ehealth_connector.common.enums.AddressUse.PRIVATE;
+				usage = org.ehealth_connector.common.enums.TelecomAddressUse.PRIVATE;
 			}
 			if (telco.getUseElement().getValue() == ContactPointUse.TEMP) {
-				usage = org.ehealth_connector.common.enums.AddressUse.PUBLIC;
+				usage = org.ehealth_connector.common.enums.TelecomAddressUse.PUBLIC;
 			}
 			final String value = telco.getValue();
 			if (value.toLowerCase().startsWith("tel:")) {

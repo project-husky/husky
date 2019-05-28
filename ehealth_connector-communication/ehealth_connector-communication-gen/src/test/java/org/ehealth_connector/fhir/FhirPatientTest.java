@@ -25,8 +25,9 @@ import java.util.Map;
 
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Patient;
-import org.ehealth_connector.common.enums.AddressUse;
 import org.ehealth_connector.common.enums.CountryCode;
+import org.ehealth_connector.common.enums.PostalAddressUse;
+import org.ehealth_connector.common.enums.TelecomAddressUse;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
@@ -389,14 +390,14 @@ public class FhirPatientTest {
 
 		final Patient patient = fhirPatient.getPatient();
 
-		final Map<String, AddressUse> phones = patient.getTelecoms().getPhones();
+		final Map<String, TelecomAddressUse> phones = patient.getTelecoms().getPhones();
 
-		assertEquals(AddressUse.PRIVATE, phones.get("tel:+4144000000000"));
-		assertEquals(AddressUse.BUSINESS, phones.get("tel:+4188000000000"));
-		assertEquals(AddressUse.MOBILE, phones.get("tel:+4176000000000"));
+		assertEquals(TelecomAddressUse.PRIVATE, phones.get("tel:+4144000000000"));
+		assertEquals(TelecomAddressUse.BUSINESS, phones.get("tel:+4188000000000"));
+		assertEquals(TelecomAddressUse.MOBILE, phones.get("tel:+4176000000000"));
 
-		final Map<String, AddressUse> emails = patient.getTelecoms().getEMails();
-		assertEquals(AddressUse.BUSINESS, emails.get("mailto:xyz@abc.ch"));
+		final Map<String, TelecomAddressUse> emails = patient.getTelecoms().getEMails();
+		assertEquals(TelecomAddressUse.BUSINESS, emails.get("mailto:xyz@abc.ch"));
 
 		final FhirPatient fhirPatient2 = new FhirPatient(patient);
 
@@ -432,7 +433,8 @@ public class FhirPatientTest {
 				name, org.ehealth_connector.common.enums.AdministrativeGender.MALE, new Date());
 
 		final org.ehealth_connector.common.Address address = new org.ehealth_connector.common.Address(
-				"addressline1", "addressline2", "addressline3", "zip", "city", AddressUse.PRIVATE);
+				"addressline1", "addressline2", "addressline3", "zip", "city",
+				PostalAddressUse.PRIVATE);
 
 		address.getMdhtAdress().addCountry("cty");
 		address.getMdhtAdress().addState("state");
