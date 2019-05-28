@@ -36,7 +36,6 @@
 		<module>ehealth_connector-fhir</module>
 		<module>ehealth_connector-converters</module>
 		<module>ehealth_connector-security</module>
-		<module>ehealth_connector-valueset-api</module>
 	</modules>
 
 	<repositories>
