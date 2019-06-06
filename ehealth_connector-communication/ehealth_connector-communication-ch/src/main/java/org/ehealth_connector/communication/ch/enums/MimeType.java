@@ -22,9 +22,9 @@ import java.util.Map;
 
 import javax.annotation.Generated;
 
-import org.ehealth_connector.common.ch.enums.ValueSetEnumInterface;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.enums.ValueSetEnumInterface;
 
 /**
  *<!-- @formatter:off -->
@@ -440,7 +440,7 @@ public enum MimeType implements ValueSetEnumInterface {
 	@Override
 	public String getCodeSystemName() {
 		String retVal = "";
-		CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
+		final CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
 		if (cs != null)
 			retVal = cs.getCodeSystemName();
 		return retVal;
@@ -471,7 +471,7 @@ public enum MimeType implements ValueSetEnumInterface {
 	 */
 	@Override
 	public String getDisplayName(LanguageCode languageCode) {
-		String displayName = displayNames.get(languageCode);
+		final String displayName = displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
 			return displayNames.get(null);
 		}
