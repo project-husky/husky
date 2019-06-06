@@ -12,10 +12,8 @@
 	</parent>
 
 	<modules>
-		<module>ehealth_connector-valueset-gen-api</module>
-		<module>ehealth_connector-valueset-gen-impl</module>
-		<module>ehealth_connector-valueset-ch-impl</module>
-		<module>ehealth_connector-valueset-ch-api</module>
+		<module>ehealth_connector-valueset-gen</module>
+		<module>ehealth_connector-valueset-ch</module>
 	</modules>
 
 </project>
