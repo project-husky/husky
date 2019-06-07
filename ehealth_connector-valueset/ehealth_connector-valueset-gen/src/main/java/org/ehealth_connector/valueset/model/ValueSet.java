@@ -24,7 +24,7 @@ import javax.annotation.Generated;
 
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
-import org.ehealth_connector.valueset.enums.ValueSetStatusEnum;
+import org.ehealth_connector.valueset.enums.ValueSetStatus;
 
 /**
  * The Class ValueSet.
@@ -62,7 +62,7 @@ public class ValueSet {
 		private String name;
 
 		/** The status. */
-		private ValueSetStatusEnum status;
+		private ValueSetStatus status;
 
 		/** The version. */
 		private Version version;
@@ -174,7 +174,7 @@ public class ValueSet {
 		 *            the status
 		 * @return the builder
 		 */
-		public Builder withStatus(ValueSetStatusEnum status) {
+		public Builder withStatus(ValueSetStatus status) {
 			this.status = status;
 			return this;
 		}
@@ -239,7 +239,7 @@ public class ValueSet {
 	private String name;
 
 	/** The status. */
-	private ValueSetStatusEnum status;
+	private ValueSetStatus status;
 
 	/** The version. */
 	private Version version;
@@ -353,7 +353,7 @@ public class ValueSet {
 	 *
 	 * @return the status
 	 */
-	public ValueSetStatusEnum getStatus() {
+	public ValueSetStatus getStatus() {
 		return status;
 	}
 
@@ -497,7 +497,7 @@ public class ValueSet {
 	 * @param status
 	 *            the new status
 	 */
-	public void setStatus(ValueSetStatusEnum status) {
+	public void setStatus(ValueSetStatus status) {
 		this.status = status;
 	}
 

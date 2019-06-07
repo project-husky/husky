@@ -26,9 +26,9 @@ import java.util.Date;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.ehealth_connector.valueset.enums.ValueSetEntryTypeEnum;
-import org.ehealth_connector.valueset.enums.ValueSetPackageStatusEnum;
-import org.ehealth_connector.valueset.enums.ValueSetStatusEnum;
+import org.ehealth_connector.valueset.enums.ValueSetEntryType;
+import org.ehealth_connector.valueset.enums.ValueSetPackageStatus;
+import org.ehealth_connector.valueset.enums.ValueSetStatus;
 import org.junit.Test;
 
 /**
@@ -53,7 +53,7 @@ public class ValueSetPackageTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		ValueSetPackageStatusEnum status = ValueSetPackageStatusEnum.ACTIVE;
+		ValueSetPackageStatus status = ValueSetPackageStatus.ACTIVE;
 		Version version = Version.builder().withLabel("1.0")
 				.withValidFrom(DateUtil.localDateTime("03.06.2019 00:00:00")).build();
 
@@ -82,7 +82,7 @@ public class ValueSetPackageTest {
 		IdentificatorBaseType vsidentificator1 = IdentificatorBaseType.builder().withRoot("2.999")
 				.withExtension("1").build();
 		String vsname1 = "myValueSetName1";
-		ValueSetStatusEnum vsstatus1 = ValueSetStatusEnum.ACTIVE;
+		ValueSetStatus vsstatus1 = ValueSetStatus.ACTIVE;
 		Version vsversion1 = Version.builder().withLabel("1.0")
 				.withValidFrom(DateUtil.localDateTime("03.06.2019 00:00:00")).build();
 
@@ -92,7 +92,7 @@ public class ValueSetPackageTest {
 		IdentificatorBaseType vsidentificator2 = IdentificatorBaseType.builder().withRoot("2.999")
 				.withExtension("2").build();
 		String vsname2 = "myValueSetName2";
-		ValueSetStatusEnum vsstatus2 = ValueSetStatusEnum.DRAFT;
+		ValueSetStatus vsstatus2 = ValueSetStatus.DRAFT;
 		Version vsversion2 = Version.builder().withLabel("2.0")
 				.withValidFrom(DateUtil.localDateTime("03.06.2019 00:00:00")).build();
 
@@ -110,19 +110,19 @@ public class ValueSetPackageTest {
 				.withCodeSystem("2.999").build();
 		String defaultMappingName1 = "defaultMappingNameAbstract";
 		int level1 = 1;
-		ValueSetEntryTypeEnum valueSetEntryType1 = ValueSetEntryTypeEnum.ABSTRACT;
+		ValueSetEntryType valueSetEntryType1 = ValueSetEntryType.ABSTRACT;
 
 		CodeBaseType codeBaseType2 = CodeBaseType.builder().withCode("leafcode2")
 				.withCodeSystem("2.999").build();
 		String defaultMappingName2 = "defaultMappingNameLeaf2";
 		int level2 = 2;
-		ValueSetEntryTypeEnum valueSetEntryType2 = ValueSetEntryTypeEnum.LEAF;
+		ValueSetEntryType valueSetEntryType2 = ValueSetEntryType.LEAF;
 
 		CodeBaseType codeBaseType3 = CodeBaseType.builder().withCode("leafcode3")
 				.withCodeSystem("2.999").build();
 		String defaultMappingName3 = "defaultMappingNameLeaf3";
 		int level3 = 2;
-		ValueSetEntryTypeEnum valueSetEntryType3 = ValueSetEntryTypeEnum.LEAF;
+		ValueSetEntryType valueSetEntryType3 = ValueSetEntryType.LEAF;
 
 		ValueSetEntry valueSetEntry1 = ValueSetEntry.builder().withCodeBaseType(codeBaseType1)
 				.withDefaultMappingName(defaultMappingName1).withLevel(level1)

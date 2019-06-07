@@ -24,7 +24,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
-import org.ehealth_connector.valueset.enums.ValueSetPackageStatusEnum;
+import org.ehealth_connector.valueset.enums.ValueSetPackageStatus;
 
 /**
  * The Class ValueSetPackage.
@@ -42,7 +42,7 @@ public class ValueSetPackage {
 		private String description;
 		private IdentificatorBaseType identificator;
 		private URL sourceUrl;
-		private ValueSetPackageStatusEnum status;
+		private ValueSetPackageStatus status;
 		private Version version;
 
 		private Builder() {
@@ -78,7 +78,7 @@ public class ValueSetPackage {
 			return this;
 		}
 
-		public Builder withStatus(ValueSetPackageStatusEnum status) {
+		public Builder withStatus(ValueSetPackageStatus status) {
 			this.status = status;
 			return this;
 		}
@@ -116,7 +116,7 @@ public class ValueSetPackage {
 
 	private URL sourceUrl;
 
-	private ValueSetPackageStatusEnum status;
+	private ValueSetPackageStatus status;
 
 	private Version version;
 
@@ -169,7 +169,7 @@ public class ValueSetPackage {
 		return sourceUrl.toString();
 	}
 
-	public ValueSetPackageStatusEnum getStatus() {
+	public ValueSetPackageStatus getStatus() {
 		return status;
 	}
 
@@ -214,7 +214,7 @@ public class ValueSetPackage {
 		this.sourceUrl = url;
 	}
 
-	public void setStatus(ValueSetPackageStatusEnum status) {
+	public void setStatus(ValueSetPackageStatus status) {
 		this.status = status;
 	}
 

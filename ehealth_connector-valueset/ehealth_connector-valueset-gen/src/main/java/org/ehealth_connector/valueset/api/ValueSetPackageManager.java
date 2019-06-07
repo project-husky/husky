@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.valueset.config.ValueSetPackageConfig;
-import org.ehealth_connector.valueset.enums.ValueSetPackageStatusEnum;
+import org.ehealth_connector.valueset.enums.ValueSetPackageStatus;
 import org.ehealth_connector.valueset.model.ValueSetPackage;
 
 /**
@@ -38,10 +38,10 @@ public interface ValueSetPackageManager {
 	public ValueSetPackageConfig getLatestValueSetPackageConfig();
 
 	public ValueSetPackageConfig getLatestValueSetPackageConfigByStatus(
-			ValueSetPackageStatusEnum value);
+			ValueSetPackageStatus value);
 
 	public ValueSetPackageConfig getValueSetPackageConfigByStatusAndDate(
-			ValueSetPackageStatusEnum status, Date date);
+			ValueSetPackageStatus status, Date date);
 
 	public List<ValueSetPackageConfig> listValueSetPackageConfig();
 

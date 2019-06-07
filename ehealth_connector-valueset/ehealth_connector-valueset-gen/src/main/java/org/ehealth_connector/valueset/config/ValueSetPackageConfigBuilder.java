@@ -17,7 +17,7 @@
 package org.ehealth_connector.valueset.config;
 
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
-import org.ehealth_connector.valueset.enums.ValueSetPackageStatusEnum;
+import org.ehealth_connector.valueset.enums.ValueSetPackageStatus;
 import org.ehealth_connector.valueset.model.Version;
 
 /**
@@ -35,7 +35,7 @@ public interface ValueSetPackageConfigBuilder {
 
 	public ValueSetPackageConfigBuilder sourceUrl(String value);
 
-	public ValueSetPackageConfigBuilder status(ValueSetPackageStatusEnum value);
+	public ValueSetPackageConfigBuilder status(ValueSetPackageStatus value);
 
 	public ValueSetPackageConfigBuilder version(Version value);
 

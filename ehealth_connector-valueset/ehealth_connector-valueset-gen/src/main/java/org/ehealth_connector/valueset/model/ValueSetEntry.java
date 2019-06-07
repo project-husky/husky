@@ -22,7 +22,7 @@ import java.util.List;
 import javax.annotation.Generated;
 
 import org.ehealth_connector.common.basetypes.CodeBaseType;
-import org.ehealth_connector.valueset.enums.ValueSetEntryTypeEnum;
+import org.ehealth_connector.valueset.enums.ValueSetEntryType;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -55,7 +55,7 @@ public class ValueSetEntry {
 		private int level;
 
 		/** The value set entry type. */
-		private ValueSetEntryTypeEnum valueSetEntryType;
+		private ValueSetEntryType valueSetEntryType;
 
 		/**
 		 * Instantiates a new builder.
@@ -151,7 +151,7 @@ public class ValueSetEntry {
 		 *            the value set entry type
 		 * @return the builder
 		 */
-		public Builder withValueSetEntryType(ValueSetEntryTypeEnum valueSetEntryType) {
+		public Builder withValueSetEntryType(ValueSetEntryType valueSetEntryType) {
 			this.valueSetEntryType = valueSetEntryType;
 			return this;
 		}
@@ -186,7 +186,7 @@ public class ValueSetEntry {
 	private int level;
 
 	/** The value set entry type. */
-	private ValueSetEntryTypeEnum valueSetEntryType;
+	private ValueSetEntryType valueSetEntryType;
 
 	/**
 	 * Instantiates a new value set entry.
@@ -276,7 +276,7 @@ public class ValueSetEntry {
 	 *
 	 * @return the value set entry type
 	 */
-	public ValueSetEntryTypeEnum getValueSetEntryType() {
+	public ValueSetEntryType getValueSetEntryType() {
 		return valueSetEntryType;
 	}
 
@@ -352,7 +352,7 @@ public class ValueSetEntry {
 	 * @param valueSetEntryType
 	 *            the new value set entry type
 	 */
-	public void setValueSetEntryType(ValueSetEntryTypeEnum valueSetEntryType) {
+	public void setValueSetEntryType(ValueSetEntryType valueSetEntryType) {
 		this.valueSetEntryType = valueSetEntryType;
 	}
 

@@ -16,8 +16,8 @@
  */
 package org.ehealth_connector.valueset.config;
 
-import org.ehealth_connector.valueset.enums.SourceFormatTypeEnum;
-import org.ehealth_connector.valueset.enums.SourceSystemTypeEnum;
+import org.ehealth_connector.valueset.enums.SourceFormatType;
+import org.ehealth_connector.valueset.enums.SourceSystemType;
 
 /**
  * Java Prototype for Value Set Management Concept.
@@ -30,9 +30,9 @@ public interface ValueSetConfigBuilder {
 
 	public ValueSetConfigBuilder projectFolder(String value);
 
-	public ValueSetConfigBuilder sourceFormatType(SourceFormatTypeEnum value);
+	public ValueSetConfigBuilder sourceFormatType(SourceFormatType value);
 
-	public ValueSetConfigBuilder sourceSystemType(SourceSystemTypeEnum value);
+	public ValueSetConfigBuilder sourceSystemType(SourceSystemType value);
 
 	public ValueSetConfigBuilder sourceUrl(String value);
 }

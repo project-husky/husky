@@ -23,8 +23,8 @@ import java.util.Date;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.ehealth_connector.valueset.enums.ValueSetEntryTypeEnum;
-import org.ehealth_connector.valueset.enums.ValueSetStatusEnum;
+import org.ehealth_connector.valueset.enums.ValueSetEntryType;
+import org.ehealth_connector.valueset.enums.ValueSetStatus;
 import org.junit.Test;
 
 /**
@@ -45,7 +45,7 @@ public class ValueSetTest {
 		IdentificatorBaseType identificator = IdentificatorBaseType.builder().withRoot("2.999")
 				.withExtension("1").build();
 		String name = "myValueSetName";
-		ValueSetStatusEnum status = ValueSetStatusEnum.ACTIVE;
+		ValueSetStatus status = ValueSetStatus.ACTIVE;
 		Version version = Version.builder().withLabel("1.0")
 				.withValidFrom(DateUtil.localDateTime("03.06.2019 00:00:00")).build();
 
@@ -67,19 +67,19 @@ public class ValueSetTest {
 				.withCodeSystem("2.999").build();
 		String defaultMappingName1 = "defaultMappingNameAbstract";
 		int level1 = 1;
-		ValueSetEntryTypeEnum valueSetEntryType1 = ValueSetEntryTypeEnum.ABSTRACT;
+		ValueSetEntryType valueSetEntryType1 = ValueSetEntryType.ABSTRACT;
 
 		CodeBaseType codeBaseType2 = CodeBaseType.builder().withCode("leafcode2")
 				.withCodeSystem("2.999").build();
 		String defaultMappingName2 = "defaultMappingNameLeaf2";
 		int level2 = 2;
-		ValueSetEntryTypeEnum valueSetEntryType2 = ValueSetEntryTypeEnum.LEAF;
+		ValueSetEntryType valueSetEntryType2 = ValueSetEntryType.LEAF;
 
 		CodeBaseType codeBaseType3 = CodeBaseType.builder().withCode("leafcode3")
 				.withCodeSystem("2.999").build();
 		String defaultMappingName3 = "defaultMappingNameLeaf3";
 		int level3 = 2;
-		ValueSetEntryTypeEnum valueSetEntryType3 = ValueSetEntryTypeEnum.LEAF;
+		ValueSetEntryType valueSetEntryType3 = ValueSetEntryType.LEAF;
 
 		ValueSetEntry valueSetEntry1 = ValueSetEntry.builder().withCodeBaseType(codeBaseType1)
 				.withDefaultMappingName(defaultMappingName1).withLevel(level1)

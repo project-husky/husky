@@ -19,7 +19,7 @@ package org.ehealth_connector.valueset.model;
 import static org.junit.Assert.assertEquals;
 
 import org.ehealth_connector.common.basetypes.CodeBaseType;
-import org.ehealth_connector.valueset.enums.ValueSetEntryTypeEnum;
+import org.ehealth_connector.valueset.enums.ValueSetEntryType;
 import org.junit.Test;
 
 /**
@@ -38,7 +38,7 @@ public class ValueSetEntryTest {
 				.withCodeSystem("2.999").build();
 		String defaultMappingName1 = "defaultMappingNameAbstract";
 		int level1 = 1;
-		ValueSetEntryTypeEnum valueSetEntryType1 = ValueSetEntryTypeEnum.ABSTRACT;
+		ValueSetEntryType valueSetEntryType1 = ValueSetEntryType.ABSTRACT;
 
 		ValueSetEntry valueSetEntry1 = ValueSetEntry.builder().withCodeBaseType(codeBaseType1)
 				.withDefaultMappingName(defaultMappingName1).withLevel(level1)
@@ -54,13 +54,13 @@ public class ValueSetEntryTest {
 				.withCodeSystem("2.999").build();
 		String defaultMappingName2 = "defaultMappingNameLeaf2";
 		int level2 = 2;
-		ValueSetEntryTypeEnum valueSetEntryType2 = ValueSetEntryTypeEnum.LEAF;
+		ValueSetEntryType valueSetEntryType2 = ValueSetEntryType.LEAF;
 
 		CodeBaseType codeBaseType3 = CodeBaseType.builder().withCode("leafcode3")
 				.withCodeSystem("2.999").build();
 		String defaultMappingName3 = "defaultMappingNameLeaf3";
 		int level3 = 2;
-		ValueSetEntryTypeEnum valueSetEntryType3 = ValueSetEntryTypeEnum.LEAF;
+		ValueSetEntryType valueSetEntryType3 = ValueSetEntryType.LEAF;
 
 		ValueSetEntry valueSetEntry2 = ValueSetEntry.builder().withCodeBaseType(codeBaseType2)
 				.withDefaultMappingName(defaultMappingName2).withLevel(level2)

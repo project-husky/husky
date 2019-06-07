@@ -19,7 +19,7 @@ package org.ehealth_connector.valueset.config;
 import java.util.List;
 
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
-import org.ehealth_connector.valueset.enums.ValueSetPackageStatusEnum;
+import org.ehealth_connector.valueset.enums.ValueSetPackageStatus;
 import org.ehealth_connector.valueset.model.Version;
 
 /**
@@ -35,7 +35,7 @@ public interface ValueSetPackageConfig {
 
 	public String getSourceUrl();
 
-	public ValueSetPackageStatusEnum getStatus();
+	public ValueSetPackageStatus getStatus();
 
 	public Version getVersion();
 
@@ -47,7 +47,7 @@ public interface ValueSetPackageConfig {
 
 	public void setSourceUrl(String value);
 
-	public void setStatus(ValueSetPackageStatusEnum value);
+	public void setStatus(ValueSetPackageStatus value);
 
 	public void setVersion(Version value);
 }
