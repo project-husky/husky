@@ -17,12 +17,21 @@
 package org.ehealth_connector.valueset.exceptions;
 
 /**
- * Java Prototype for Value Set Management Concept.
+ * <div class="en">Exception in case the value set mapping does not exist.</div>
  */
 public class MappingException extends Exception {
 
+	/** The generated constant serialVersionUID. */
+	private static final long serialVersionUID = -1454634787837958402L;
+
+	/**
+	 * Default constructor to instantiate the object.
+	 *
+	 * @param message
+	 *            the message
+	 */
 	public MappingException(String message) {
-		super(message);
+		super("The requested mapping does not exist.");
 	}
 
 }

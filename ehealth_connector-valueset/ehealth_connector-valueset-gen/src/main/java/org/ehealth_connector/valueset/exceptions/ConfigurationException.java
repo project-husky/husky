@@ -17,11 +17,21 @@
 package org.ehealth_connector.valueset.exceptions;
 
 /**
- * Java Prototype for Value Set Management Concept.
+ * <div class="en">Exception in case the value set configuration is
+ * invalid.</div>
  */
 public class ConfigurationException extends Exception {
 
+	/** The generated constant serialVersionUID. */
+	private static final long serialVersionUID = 5998358174203522368L;
+
+	/**
+	 * Default constructor to instantiate the object.
+	 *
+	 * @param message
+	 *            the message
+	 */
 	public ConfigurationException(String message) {
-		super(message);
+		super("The value set configuration cannot be loaded. Please check the config file/stream.");
 	}
 }

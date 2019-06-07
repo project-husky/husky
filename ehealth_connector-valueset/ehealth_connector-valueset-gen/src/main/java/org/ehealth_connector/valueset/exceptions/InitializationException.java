@@ -17,11 +17,20 @@
 package org.ehealth_connector.valueset.exceptions;
 
 /**
- * Java Prototype for Value Set Management Concept.
+ * <div class="en">Exception in case the value set initialization fails.</div>
  */
 public class InitializationException extends Exception {
 
+	/** The generated constant serialVersionUID. */
+	private static final long serialVersionUID = 1057252687989322065L;
+
+	/**
+	 * Default constructor to instantiate the object.
+	 *
+	 * @param message
+	 *            the message
+	 */
 	public InitializationException(String message) {
-		super(message);
+		super("The value set cannot be loaded. Please check the content of the file/stream.");
 	}
 }
