@@ -15,6 +15,10 @@
 			<artifactId>ehealth_connector-common-gen</artifactId>
 			<version>1.7-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>org.yaml</groupId>
+			<artifactId>snakeyaml</artifactId>
+		</dependency>
 
 		<!-- test stuff -->
 		<dependency>
