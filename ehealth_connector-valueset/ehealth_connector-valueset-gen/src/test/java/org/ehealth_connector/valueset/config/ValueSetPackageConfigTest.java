@@ -17,11 +17,8 @@
 package org.ehealth_connector.valueset.config;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.utils.DateUtil;
@@ -43,20 +40,14 @@ public class ValueSetPackageConfigTest {
 	public void doAllTests() {
 
 		// Basic ValueSetPackageConfig elements tests
-		LocalDateTime validFrom = DateUtil.localDateTime("03.06.2019 00:00:00");
+		Date validFrom = DateUtil.date("03.06.2019 00:00:00");
 
 		String description = "description";
 		IdentificatorBaseType identificator = IdentificatorBaseType.builder().withRoot("2.999")
 				.withExtension("myExt").build();
 		ValueSetPackageStatus status = ValueSetPackageStatus.ACTIVE;
 		Version version = Version.builder().withLabel("1.0").withValidFrom(validFrom).build();
-		URL sourceUrl = null;
-		try {
-			sourceUrl = new URL("http://foo.bar");
-		} catch (MalformedURLException e) {
-			fail("sourceUrl: MalformedURLException");
-		}
-		String sourceUrlString = "http://foo.bar/string";
+		String sourceUrl = "http://foo.bar";
 
 		ValueSetPackageConfig valueSetPackageConfig = ValueSetPackageConfig.builder()
 				.withDescription(description).withIdentificator(identificator)
@@ -68,24 +59,12 @@ public class ValueSetPackageConfigTest {
 		assertEquals(version, valueSetPackageConfig.getVersion());
 		assertEquals(sourceUrl, valueSetPackageConfig.getSourceUrl());
 
-		try {
-			valueSetPackageConfig.setSourceUrlString(sourceUrlString);
-		} catch (MalformedURLException e) {
-			fail("sourceUrl: MalformedURLException");
-		}
-		assertEquals(sourceUrlString, valueSetPackageConfig.getSourceUrlString());
-
 		// Testing List of ValueSetConfigs
 		String className1 = "className1";
 		String projectFolder1 = "//projectFolder1";
 		SourceFormatType sourceFormatType1 = SourceFormatType.JSON;
 		SourceSystemType sourceSystemType1 = SourceSystemType.ARTDECOR_FHIR;
-		URL sourceUrl1 = null;
-		try {
-			sourceUrl1 = new URL("http://foo.bar1");
-		} catch (MalformedURLException e) {
-			fail("sourceUrl1: MalformedURLException");
-		}
+		String sourceUrl1 = "http://foo.bar1";
 
 		ValueSetConfig valueSetConfig1 = ValueSetConfig.builder().withClassName(className1)
 				.withProjectFolder(projectFolder1).withSourceFormatType(sourceFormatType1)
@@ -95,12 +74,7 @@ public class ValueSetPackageConfigTest {
 		String projectFolder2 = "//projectFolder2";
 		SourceFormatType sourceFormatType2 = SourceFormatType.IHESVS;
 		SourceSystemType sourceSystemType2 = SourceSystemType.ARTDECOR_FHIR;
-		URL sourceUrl2 = null;
-		try {
-			sourceUrl2 = new URL("http://foo.bar2");
-		} catch (MalformedURLException e) {
-			fail("sourceUrl2: MalformedURLException");
-		}
+		String sourceUrl2 = "http://foo.bar2";
 
 		ValueSetConfig valueSetConfig2 = ValueSetConfig.builder().withClassName(className2)
 				.withProjectFolder(projectFolder2).withSourceFormatType(sourceFormatType2)
@@ -109,15 +83,14 @@ public class ValueSetPackageConfigTest {
 		valueSetPackageConfig.addValueSetConfig(valueSetConfig1);
 		valueSetPackageConfig.addValueSetConfig(valueSetConfig2);
 
-		assertEquals(2, valueSetPackageConfig.listValueSetConfigs().size());
-		assertEquals(className2, valueSetPackageConfig.listValueSetConfigs().get(1).getClassName());
+		assertEquals(2, valueSetPackageConfig.listValueSetConfig().size());
+		assertEquals(className2, valueSetPackageConfig.listValueSetConfig().get(1).getClassName());
 		assertEquals(projectFolder2,
-				valueSetPackageConfig.listValueSetConfigs().get(1).getProjectFolder());
+				valueSetPackageConfig.listValueSetConfig().get(1).getProjectFolder());
 		assertEquals(sourceFormatType2,
-				valueSetPackageConfig.listValueSetConfigs().get(1).getSourceFormatType());
+				valueSetPackageConfig.listValueSetConfig().get(1).getSourceFormatType());
 		assertEquals(sourceSystemType2,
-				valueSetPackageConfig.listValueSetConfigs().get(1).getSourceSystemType());
-		assertEquals(sourceUrl2, valueSetPackageConfig.listValueSetConfigs().get(1).getSourceUrl());
+				valueSetPackageConfig.listValueSetConfig().get(1).getSourceSystemType());
 
 	}
 }

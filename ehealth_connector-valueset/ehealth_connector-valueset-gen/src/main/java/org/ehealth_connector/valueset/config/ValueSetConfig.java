@@ -16,9 +16,6 @@
  */
 package org.ehealth_connector.valueset.config;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import javax.annotation.Generated;
 
 import org.ehealth_connector.valueset.enums.SourceFormatType;
@@ -35,93 +32,40 @@ public class ValueSetConfig {
 	 */
 	@Generated("SparkTools")
 	public static final class Builder {
-
-		/** The class name. */
 		private String className;
-
-		/** The project folder. */
 		private String projectFolder;
-
-		/** The source format type. */
 		private SourceFormatType sourceFormatType;
-
-		/** The source system type. */
 		private SourceSystemType sourceSystemType;
+		private String sourceUrl;
 
-		/** The source url. */
-		private URL sourceUrl;
-
-		/**
-		 * Instantiates a new builder.
-		 */
 		private Builder() {
 		}
 
-		/**
-		 * Builds the.
-		 *
-		 * @return the value set config
-		 */
 		public ValueSetConfig build() {
 			return new ValueSetConfig(this);
 		}
 
-		/**
-		 * With class name.
-		 *
-		 * @param className
-		 *            the class name
-		 * @return the builder
-		 */
 		public Builder withClassName(String className) {
 			this.className = className;
 			return this;
 		}
 
-		/**
-		 * With project folder.
-		 *
-		 * @param projectFolder
-		 *            the project folder
-		 * @return the builder
-		 */
 		public Builder withProjectFolder(String projectFolder) {
 			this.projectFolder = projectFolder;
 			return this;
 		}
 
-		/**
-		 * With source format type.
-		 *
-		 * @param sourceFormatType
-		 *            the source format type
-		 * @return the builder
-		 */
 		public Builder withSourceFormatType(SourceFormatType sourceFormatType) {
 			this.sourceFormatType = sourceFormatType;
 			return this;
 		}
 
-		/**
-		 * With source system type.
-		 *
-		 * @param sourceSystemType
-		 *            the source system type
-		 * @return the builder
-		 */
 		public Builder withSourceSystemType(SourceSystemType sourceSystemType) {
 			this.sourceSystemType = sourceSystemType;
 			return this;
 		}
 
-		/**
-		 * With source url.
-		 *
-		 * @param sourceUrl
-		 *            the source url
-		 * @return the builder
-		 */
-		public Builder withSourceUrl(URL sourceUrl) {
+		public Builder withSourceUrl(String sourceUrl) {
 			this.sourceUrl = sourceUrl;
 			return this;
 		}
@@ -129,7 +73,7 @@ public class ValueSetConfig {
 
 	/**
 	 * Creates builder to build {@link ValueSetConfig}.
-	 *
+	 * 
 	 * @return created builder
 	 */
 	@Generated("SparkTools")
@@ -150,14 +94,8 @@ public class ValueSetConfig {
 	private SourceSystemType sourceSystemType;
 
 	/** The source url. */
-	private URL sourceUrl;
+	private String sourceUrl;
 
-	/**
-	 * Instantiates a new value set config.
-	 *
-	 * @param builder
-	 *            the builder
-	 */
 	@Generated("SparkTools")
 	private ValueSetConfig(Builder builder) {
 		this.className = builder.className;
@@ -208,17 +146,8 @@ public class ValueSetConfig {
 	 *
 	 * @return the source url
 	 */
-	public URL getSourceUrl() {
+	public String getSourceUrl() {
 		return sourceUrl;
-	}
-
-	/**
-	 * Gets the source url string.
-	 *
-	 * @return the source url string
-	 */
-	public String getSourceUrlString() {
-		return sourceUrl.toString();
 	}
 
 	/**
@@ -267,21 +196,8 @@ public class ValueSetConfig {
 	 * @param sourceUrl
 	 *            the new source url
 	 */
-	public void setSourceUrl(URL sourceUrl) {
+	public void setSourceUrl(String sourceUrl) {
 		this.sourceUrl = sourceUrl;
-	}
-
-	/**
-	 * Sets the source url string.
-	 *
-	 * @param sourceUrl
-	 *            the new source url string
-	 * @throws MalformedURLException
-	 *             the malformed URL exception
-	 */
-	public void setSourceUrlString(String sourceUrl) throws MalformedURLException {
-		URL url = new URL(sourceUrl);
-		this.sourceUrl = url;
 	}
 
 }

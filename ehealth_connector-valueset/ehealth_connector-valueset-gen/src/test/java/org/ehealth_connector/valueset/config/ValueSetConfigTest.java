@@ -17,10 +17,6 @@
 package org.ehealth_connector.valueset.config;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
-
-import java.net.MalformedURLException;
-import java.net.URL;
 
 import org.ehealth_connector.valueset.enums.SourceFormatType;
 import org.ehealth_connector.valueset.enums.SourceSystemType;
@@ -42,13 +38,7 @@ public class ValueSetConfigTest {
 		String projectFolder = "//projectFolder";
 		SourceFormatType sourceFormatType = SourceFormatType.JSON;
 		SourceSystemType sourceSystemType = SourceSystemType.ARTDECOR_FHIR;
-		URL sourceUrl = null;
-		try {
-			sourceUrl = new URL("http://foo.bar");
-		} catch (MalformedURLException e) {
-			fail("sourceUrl: MalformedURLException");
-		}
-		String sourceUrlString = "http://foo.bar/string";
+		String sourceUrl = "http://foo.bar";
 
 		ValueSetConfig valueSetConfig = ValueSetConfig.builder().withClassName(className)
 				.withProjectFolder(projectFolder).withSourceFormatType(sourceFormatType)
@@ -59,13 +49,6 @@ public class ValueSetConfigTest {
 		assertEquals(sourceFormatType, valueSetConfig.getSourceFormatType());
 		assertEquals(sourceSystemType, valueSetConfig.getSourceSystemType());
 		assertEquals(sourceUrl, valueSetConfig.getSourceUrl());
-
-		try {
-			valueSetConfig.setSourceUrlString(sourceUrlString);
-		} catch (MalformedURLException e) {
-			fail("sourceUrl: MalformedURLException");
-		}
-		assertEquals(sourceUrlString, valueSetConfig.getSourceUrlString());
 
 	}
 }

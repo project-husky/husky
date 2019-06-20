@@ -18,7 +18,7 @@ package org.ehealth_connector.valueset.model;
 
 import static org.junit.Assert.assertEquals;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
 import org.ehealth_connector.common.utils.DateUtil;
@@ -38,8 +38,8 @@ public class VersionTest {
 		String label = "1.0";
 		OrganizationBaseType publishingAuthority = OrganizationBaseType.builder()
 				.withPrimaryName("eHC").build();
-		LocalDateTime validFrom = DateUtil.localDateTime("03.06.2019 00:00:00");
-		LocalDateTime validTo = DateUtil.localDateTime("31.12.2019 23:59:59");
+		Date validFrom = DateUtil.date("03.06.2019 00:00:00");
+		Date validTo = DateUtil.date("31.12.2019 23:59:59");
 
 		Version version = Version.builder().withLabel(label)
 				.withPublishingAuthority(publishingAuthority).withValidFrom(validFrom)

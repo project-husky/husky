@@ -16,8 +16,6 @@
  */
 package org.ehealth_connector.valueset.config;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,107 +37,45 @@ public class ValueSetPackageConfig {
 	 */
 	@Generated("SparkTools")
 	public static final class Builder {
-
-		/** The description. */
 		private String description;
-
-		/** The identificator. */
 		private IdentificatorBaseType identificator;
-
-		/** The status. */
 		private ValueSetPackageStatus status;
-
-		/** The version. */
 		private Version version;
-
-		/** The source url. */
-		private URL sourceUrl;
-
-		/** The value set config list. */
+		private String sourceUrl;
 		private ArrayList<ValueSetConfig> valueSetConfigList;
 
-		/**
-		 * Instantiates a new builder.
-		 */
 		private Builder() {
 		}
 
-		/**
-		 * Builds the.
-		 *
-		 * @return the value set package config
-		 */
 		public ValueSetPackageConfig build() {
 			return new ValueSetPackageConfig(this);
 		}
 
-		/**
-		 * With description.
-		 *
-		 * @param description
-		 *            the description
-		 * @return the builder
-		 */
 		public Builder withDescription(String description) {
 			this.description = description;
 			return this;
 		}
 
-		/**
-		 * With identificator.
-		 *
-		 * @param identificator
-		 *            the identificator
-		 * @return the builder
-		 */
 		public Builder withIdentificator(IdentificatorBaseType identificator) {
 			this.identificator = identificator;
 			return this;
 		}
 
-		/**
-		 * With source url.
-		 *
-		 * @param sourceUrl
-		 *            the source url
-		 * @return the builder
-		 */
-		public Builder withSourceUrl(URL sourceUrl) {
+		public Builder withSourceUrl(String sourceUrl) {
 			this.sourceUrl = sourceUrl;
 			return this;
 		}
 
-		/**
-		 * With status.
-		 *
-		 * @param status
-		 *            the status
-		 * @return the builder
-		 */
 		public Builder withStatus(ValueSetPackageStatus status) {
 			this.status = status;
 			return this;
 		}
 
-		/**
-		 * With value set config list.
-		 *
-		 * @param valueSetConfigList
-		 *            the value set config list
-		 * @return the builder
-		 */
 		public Builder withValueSetConfigList(ArrayList<ValueSetConfig> valueSetConfigList) {
 			this.valueSetConfigList = valueSetConfigList;
 			return this;
 		}
 
-		/**
-		 * With version.
-		 *
-		 * @param version
-		 *            the version
-		 * @return the builder
-		 */
 		public Builder withVersion(Version version) {
 			this.version = version;
 			return this;
@@ -148,7 +84,7 @@ public class ValueSetPackageConfig {
 
 	/**
 	 * Creates builder to build {@link ValueSetPackageConfig}.
-	 *
+	 * 
 	 * @return created builder
 	 */
 	@Generated("SparkTools")
@@ -169,17 +105,14 @@ public class ValueSetPackageConfig {
 	private Version version;
 
 	/** The source url. */
-	private URL sourceUrl;
+	private String sourceUrl;
 
 	/** The value set config list. */
 	private ArrayList<ValueSetConfig> valueSetConfigList;
 
-	/**
-	 * Instantiates a new value set package config.
-	 *
-	 * @param builder
-	 *            the builder
-	 */
+	public ValueSetPackageConfig() {
+	}
+
 	@Generated("SparkTools")
 	private ValueSetPackageConfig(Builder builder) {
 		this.description = builder.description;
@@ -222,22 +155,8 @@ public class ValueSetPackageConfig {
 		return identificator;
 	}
 
-	/**
-	 * Gets the source url.
-	 *
-	 * @return the source url
-	 */
-	public URL getSourceUrl() {
+	public String getSourceUrl() {
 		return sourceUrl;
-	}
-
-	/**
-	 * Gets the source url string.
-	 *
-	 * @return the source url string
-	 */
-	public String getSourceUrlString() {
-		return sourceUrl.toString();
 	}
 
 	/**
@@ -263,7 +182,7 @@ public class ValueSetPackageConfig {
 	 *
 	 * @return the list
 	 */
-	public List<ValueSetConfig> listValueSetConfigs() {
+	public List<ValueSetConfig> listValueSetConfig() {
 		if (this.valueSetConfigList == null) {
 			this.valueSetConfigList = new ArrayList<ValueSetConfig>();
 		}
@@ -291,27 +210,8 @@ public class ValueSetPackageConfig {
 		this.identificator = identificator;
 	}
 
-	/**
-	 * Sets the source url.
-	 *
-	 * @param sourceUrl
-	 *            the new source url
-	 */
-	public void setSourceUrl(URL sourceUrl) {
+	public void setSourceUrl(String sourceUrl) {
 		this.sourceUrl = sourceUrl;
-	}
-
-	/**
-	 * Sets the source url string.
-	 *
-	 * @param sourceUrl
-	 *            the new source url string
-	 * @throws MalformedURLException
-	 *             the malformed URL exception
-	 */
-	public void setSourceUrlString(String sourceUrl) throws MalformedURLException {
-		URL url = new URL(sourceUrl);
-		this.sourceUrl = url;
 	}
 
 	/**

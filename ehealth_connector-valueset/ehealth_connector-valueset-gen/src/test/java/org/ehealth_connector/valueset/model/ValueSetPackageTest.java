@@ -55,7 +55,7 @@ public class ValueSetPackageTest {
 		}
 		ValueSetPackageStatus status = ValueSetPackageStatus.ACTIVE;
 		Version version = Version.builder().withLabel("1.0")
-				.withValidFrom(DateUtil.localDateTime("03.06.2019 00:00:00")).build();
+				.withValidFrom(DateUtil.date("03.06.2019 00:00:00")).build();
 
 		ValueSetPackage valueSetPackage = ValueSetPackage.builder().withDescription(description)
 				.withIdentificator(identificator).withSourceUrl(sourceUrl).withStatus(status)
@@ -84,7 +84,7 @@ public class ValueSetPackageTest {
 		String vsname1 = "myValueSetName1";
 		ValueSetStatus vsstatus1 = ValueSetStatus.ACTIVE;
 		Version vsversion1 = Version.builder().withLabel("1.0")
-				.withValidFrom(DateUtil.localDateTime("03.06.2019 00:00:00")).build();
+				.withValidFrom(DateUtil.date("03.06.2019 00:00:00")).build();
 
 		String vsdescription2 = "vsdescription2";
 		String vsdisplayName2 = "vsdisplayName2";
@@ -94,7 +94,7 @@ public class ValueSetPackageTest {
 		String vsname2 = "myValueSetName2";
 		ValueSetStatus vsstatus2 = ValueSetStatus.DRAFT;
 		Version vsversion2 = Version.builder().withLabel("2.0")
-				.withValidFrom(DateUtil.localDateTime("03.06.2019 00:00:00")).build();
+				.withValidFrom(DateUtil.date("03.06.2019 00:00:00")).build();
 
 		ValueSet valueSet1 = ValueSet.builder().withDescription(vsdescription1)
 				.withDisplayName(vsdisplayName1).withEffectiveDate(vseffectiveDate1)

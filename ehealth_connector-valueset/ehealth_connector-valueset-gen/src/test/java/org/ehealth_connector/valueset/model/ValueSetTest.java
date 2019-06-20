@@ -47,7 +47,7 @@ public class ValueSetTest {
 		String name = "myValueSetName";
 		ValueSetStatus status = ValueSetStatus.ACTIVE;
 		Version version = Version.builder().withLabel("1.0")
-				.withValidFrom(DateUtil.localDateTime("03.06.2019 00:00:00")).build();
+				.withValidFrom(DateUtil.date("03.06.2019 00:00:00")).build();
 
 		ValueSet valueSet = ValueSet.builder().withDescription(description)
 				.withDisplayName(displayName).withEffectiveDate(effectiveDate)

@@ -21,6 +21,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -106,10 +107,16 @@ public class ValueSetPackageManager {
 		return yaml.loadAs(config, ValueSetPackageConfig.class);
 	}
 
+	public ValueSetPackageConfig loadValueSetPackageConfig(InputStreamReader reader) {
+		Yaml yaml = new Yaml();
+		return yaml.loadAs(reader, ValueSetPackageConfig.class);
+	}
+
 	public ValueSetPackageConfig loadValueSetPackageConfig(String fileName)
 			throws FileNotFoundException {
-		InputStream inputStream = new FileInputStream(new File(fileName));
-		return loadValueSetPackageConfig(inputStream);
+		InputStreamReader reader = new InputStreamReader(new FileInputStream(fileName),
+				Charsets.UTF_8);
+		return loadValueSetPackageConfig(reader);
 
 	}
 

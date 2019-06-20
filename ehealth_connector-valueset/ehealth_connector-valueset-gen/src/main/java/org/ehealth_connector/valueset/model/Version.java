@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.valueset.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.annotation.Generated;
 
@@ -41,10 +41,10 @@ public class Version {
 		private OrganizationBaseType publishingAuthority;
 
 		/** The valid from. */
-		private LocalDateTime validFrom;
+		private Date validFrom;
 
 		/** The valid to. */
-		private LocalDateTime validTo;
+		private Date validTo;
 
 		/**
 		 * Instantiates a new builder.
@@ -92,7 +92,7 @@ public class Version {
 		 *            the valid from
 		 * @return the builder
 		 */
-		public Builder withValidFrom(LocalDateTime validFrom) {
+		public Builder withValidFrom(Date validFrom) {
 			this.validFrom = validFrom;
 			return this;
 		}
@@ -104,7 +104,7 @@ public class Version {
 		 *            the valid to
 		 * @return the builder
 		 */
-		public Builder withValidTo(LocalDateTime validTo) {
+		public Builder withValidTo(Date validTo) {
 			this.validTo = validTo;
 			return this;
 		}
@@ -127,10 +127,13 @@ public class Version {
 	private OrganizationBaseType publishingAuthority;
 
 	/** The valid from. */
-	private LocalDateTime validFrom;
+	private Date validFrom;
 
 	/** The valid to. */
-	private LocalDateTime validTo;
+	private Date validTo;
+
+	public Version() {
+	}
 
 	/**
 	 * Instantiates a new version.
@@ -172,7 +175,7 @@ public class Version {
 	 * @return the valid from
 	 */
 
-	public LocalDateTime getValidFrom() {
+	public Date getValidFrom() {
 		return validFrom;
 	}
 
@@ -182,7 +185,7 @@ public class Version {
 	 * @return the valid to
 	 */
 
-	public LocalDateTime getValidTo() {
+	public Date getValidTo() {
 		return validTo;
 	}
 
@@ -215,7 +218,7 @@ public class Version {
 	 *            the new valid from
 	 */
 
-	public void setValidFrom(LocalDateTime validFrom) {
+	public void setValidFrom(Date validFrom) {
 		this.validFrom = validFrom;
 	}
 
@@ -226,7 +229,7 @@ public class Version {
 	 *            the new valid to
 	 */
 
-	public void setValidTo(LocalDateTime validTo) {
+	public void setValidTo(Date validTo) {
 		this.validTo = validTo;
 	}
 
