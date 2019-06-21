@@ -304,6 +304,82 @@ public class ValueSet {
 	}
 
 	/**
+	 * Checks whether the to objects are equal (based on their content).
+	 *
+	 * @param obj
+	 *            the obj to compare
+	 * @return true, if equal
+	 */
+	public boolean equals(ValueSet obj) {
+		boolean retVal = true;
+		if (retVal) {
+			for (int i = 0; i < this.mappingIdentificatorList.size(); i++) {
+				retVal = (this.mappingIdentificatorList.get(i)
+						.equals(obj.listMappingIdentificators().get(i)));
+				if (!retVal)
+					break;
+			}
+		}
+		if (retVal) {
+			for (int i = 0; i < this.mappingNameList.size(); i++) {
+				retVal = (this.mappingNameList.get(i).equals(obj.listMappingNames().get(i)));
+				if (!retVal)
+					break;
+			}
+		}
+		if (retVal) {
+			for (int i = 0; i < this.valueSetEntryList.size(); i++) {
+				retVal = (this.valueSetEntryList.get(i).equals(obj.listValueSetEntries().get(i)));
+				if (!retVal)
+					break;
+			}
+		}
+		if (retVal) {
+			if (this.description == null)
+				retVal = (obj.getDescription() == null);
+			else
+				retVal = this.description.equals(obj.getDescription());
+		}
+		if (retVal) {
+			if (this.displayName == null)
+				retVal = (obj.getDisplayName() == null);
+			else
+				retVal = this.displayName.equals(obj.getDisplayName());
+		}
+		if (retVal) {
+			if (this.effectiveDate == null)
+				retVal = (obj.getEffectiveDate() == null);
+			else
+				retVal = this.effectiveDate.equals(obj.getEffectiveDate());
+		}
+		if (retVal) {
+			if (this.identificator == null)
+				retVal = (obj.getIdentificator() == null);
+			else
+				retVal = this.identificator.equals(obj.getIdentificator());
+		}
+		if (retVal) {
+			if (this.name == null)
+				retVal = (obj.getName() == null);
+			else
+				retVal = this.name.equals(obj.getName());
+		}
+		if (retVal) {
+			if (this.status == null)
+				retVal = (obj.getStatus() == null);
+			else
+				retVal = this.status.equals(obj.getStatus());
+		}
+		if (retVal) {
+			if (this.version == null)
+				retVal = (obj.getVersion() == null);
+			else
+				retVal = this.version.equals(obj.getVersion());
+		}
+		return retVal;
+	}
+
+	/**
 	 * Gets the description.
 	 *
 	 * @return the description
@@ -337,6 +413,24 @@ public class ValueSet {
 	 */
 	public IdentificatorBaseType getIdentificator() {
 		return identificator;
+	}
+
+	/**
+	 * Gets the mapping identificator list.
+	 *
+	 * @return the mapping identificator list
+	 */
+	public ArrayList<IdentificatorBaseType> getMappingIdentificatorList() {
+		return mappingIdentificatorList;
+	}
+
+	/**
+	 * Gets the mapping name list.
+	 *
+	 * @return the mapping name list
+	 */
+	public ArrayList<String> getMappingNameList() {
+		return mappingNameList;
 	}
 
 	/**
@@ -395,6 +489,15 @@ public class ValueSet {
 	public ValueSetEntry getValueSetEntryByMappingName(String value) {
 		// TODO
 		return null;
+	}
+
+	/**
+	 * Gets the value set entry list.
+	 *
+	 * @return the value set entry list
+	 */
+	public ArrayList<ValueSetEntry> getValueSetEntryList() {
+		return valueSetEntryList;
 	}
 
 	/**
@@ -482,6 +585,27 @@ public class ValueSet {
 	}
 
 	/**
+	 * Sets the mapping identificator list.
+	 *
+	 * @param mappingIdentificatorList
+	 *            the new mapping identificator list
+	 */
+	public void setMappingIdentificatorList(
+			ArrayList<IdentificatorBaseType> mappingIdentificatorList) {
+		this.mappingIdentificatorList = mappingIdentificatorList;
+	}
+
+	/**
+	 * Sets the mapping name list.
+	 *
+	 * @param mappingNameList
+	 *            the new mapping name list
+	 */
+	public void setMappingNameList(ArrayList<String> mappingNameList) {
+		this.mappingNameList = mappingNameList;
+	}
+
+	/**
 	 * Sets the name.
 	 *
 	 * @param name
@@ -499,6 +623,16 @@ public class ValueSet {
 	 */
 	public void setStatus(ValueSetStatus status) {
 		this.status = status;
+	}
+
+	/**
+	 * Sets the value set entry list.
+	 *
+	 * @param valueSetEntryList
+	 *            the new value set entry list
+	 */
+	public void setValueSetEntryList(ArrayList<ValueSetEntry> valueSetEntryList) {
+		this.valueSetEntryList = valueSetEntryList;
 	}
 
 	/**

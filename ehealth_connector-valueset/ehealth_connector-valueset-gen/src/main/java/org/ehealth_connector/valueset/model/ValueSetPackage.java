@@ -16,8 +16,6 @@
  */
 package org.ehealth_connector.valueset.model;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,58 +34,138 @@ public class ValueSetPackage {
 	 */
 	@Generated("SparkTools")
 	public static final class Builder {
+
+		/** The mapping identificator list. */
 		private ArrayList<IdentificatorBaseType> mappingIdentificatorList;
+
+		/** The mapping name list. */
 		private ArrayList<String> mappingNameList;
+
+		/** The value set list. */
 		private ArrayList<ValueSet> valueSetList;
+
+		/** The description. */
 		private String description;
+
+		/** The identificator. */
 		private IdentificatorBaseType identificator;
-		private URL sourceUrl;
+
+		/** The source url. */
+		private String sourceUrl;
+
+		/** The status. */
 		private ValueSetPackageStatus status;
+
+		/** The version. */
 		private Version version;
 
+		/**
+		 * Instantiates a new builder.
+		 */
 		private Builder() {
 		}
 
+		/**
+		 * Builds the.
+		 *
+		 * @return the value set package
+		 */
 		public ValueSetPackage build() {
 			return new ValueSetPackage(this);
 		}
 
+		/**
+		 * With description.
+		 *
+		 * @param description
+		 *            the description
+		 * @return the builder
+		 */
 		public Builder withDescription(String description) {
 			this.description = description;
 			return this;
 		}
 
+		/**
+		 * With identificator.
+		 *
+		 * @param identificator
+		 *            the identificator
+		 * @return the builder
+		 */
 		public Builder withIdentificator(IdentificatorBaseType identificator) {
 			this.identificator = identificator;
 			return this;
 		}
 
+		/**
+		 * With mapping identificator list.
+		 *
+		 * @param mappingIdentificatorList
+		 *            the mapping identificator list
+		 * @return the builder
+		 */
 		public Builder withMappingIdentificatorList(
 				ArrayList<IdentificatorBaseType> mappingIdentificatorList) {
 			this.mappingIdentificatorList = mappingIdentificatorList;
 			return this;
 		}
 
+		/**
+		 * With mapping name list.
+		 *
+		 * @param mappingNameList
+		 *            the mapping name list
+		 * @return the builder
+		 */
 		public Builder withMappingNameList(ArrayList<String> mappingNameList) {
 			this.mappingNameList = mappingNameList;
 			return this;
 		}
 
-		public Builder withSourceUrl(URL sourceUrl) {
+		/**
+		 * With source url.
+		 *
+		 * @param sourceUrl
+		 *            the source url
+		 * @return the builder
+		 */
+		public Builder withSourceUrl(String sourceUrl) {
 			this.sourceUrl = sourceUrl;
 			return this;
 		}
 
+		/**
+		 * With status.
+		 *
+		 * @param status
+		 *            the status
+		 * @return the builder
+		 */
 		public Builder withStatus(ValueSetPackageStatus status) {
 			this.status = status;
 			return this;
 		}
 
+		/**
+		 * With value set list.
+		 *
+		 * @param valueSetList
+		 *            the value set list
+		 * @return the builder
+		 */
 		public Builder withValueSetList(ArrayList<ValueSet> valueSetList) {
 			this.valueSetList = valueSetList;
 			return this;
 		}
 
+		/**
+		 * With version.
+		 *
+		 * @param version
+		 *            the version
+		 * @return the builder
+		 */
 		public Builder withVersion(Version version) {
 			this.version = version;
 			return this;
@@ -104,22 +182,36 @@ public class ValueSetPackage {
 		return new Builder();
 	}
 
+	/** The mapping identificator list. */
 	private ArrayList<IdentificatorBaseType> mappingIdentificatorList;
 
+	/** The mapping name list. */
 	private ArrayList<String> mappingNameList;
 
+	/** The value set list. */
 	private ArrayList<ValueSet> valueSetList;
 
+	/** The description. */
 	private String description;
 
+	/** The identificator. */
 	private IdentificatorBaseType identificator;
 
-	private URL sourceUrl;
+	/** The source url. */
+	private String sourceUrl;
 
+	/** The status. */
 	private ValueSetPackageStatus status;
 
+	/** The version. */
 	private Version version;
 
+	/**
+	 * Instantiates a new value set package.
+	 *
+	 * @param builder
+	 *            the builder
+	 */
 	@Generated("SparkTools")
 	private ValueSetPackage(Builder builder) {
 		this.mappingIdentificatorList = builder.mappingIdentificatorList;
@@ -132,6 +224,12 @@ public class ValueSetPackage {
 		this.version = builder.version;
 	}
 
+	/**
+	 * Adds the mapping identificator.
+	 *
+	 * @param value
+	 *            the value
+	 */
 	public void addMappingIdentificator(IdentificatorBaseType value) {
 		if (this.mappingIdentificatorList == null) {
 			this.mappingIdentificatorList = new ArrayList<IdentificatorBaseType>();
@@ -139,6 +237,12 @@ public class ValueSetPackage {
 		this.mappingIdentificatorList.add(value);
 	}
 
+	/**
+	 * Adds the mapping name.
+	 *
+	 * @param value
+	 *            the value
+	 */
 	public void addMappingName(String value) {
 		if (this.mappingNameList == null) {
 			this.mappingNameList = new ArrayList<String>();
@@ -146,6 +250,12 @@ public class ValueSetPackage {
 		this.mappingNameList.add(value);
 	}
 
+	/**
+	 * Adds the value set.
+	 *
+	 * @param value
+	 *            the value
+	 */
 	public void addValueSet(ValueSet value) {
 		if (this.valueSetList == null) {
 			this.valueSetList = new ArrayList<ValueSet>();
@@ -153,36 +263,167 @@ public class ValueSetPackage {
 		this.valueSetList.add(value);
 	}
 
+	/**
+	 * Checks whether the to objects are equal (based on their content).
+	 *
+	 * @param obj
+	 *            the obj to compare
+	 * @return true, if equal
+	 */
+	public boolean equals(ValueSetPackage obj) {
+		boolean retVal = true;
+		if (retVal) {
+			for (int i = 0; i < this.mappingIdentificatorList.size(); i++) {
+				retVal = (this.mappingIdentificatorList.get(i)
+						.equals(obj.listMappingIdentificators().get(i)));
+				if (!retVal)
+					break;
+			}
+		}
+		if (retVal) {
+			for (int i = 0; i < this.mappingNameList.size(); i++) {
+				retVal = (this.mappingNameList.get(i).equals(obj.listMappingNames().get(i)));
+				if (!retVal)
+					break;
+			}
+		}
+		if (retVal) {
+			for (int i = 0; i < this.valueSetList.size(); i++) {
+				retVal = (this.valueSetList.get(i).equals(obj.listValueSets().get(i)));
+				if (!retVal)
+					break;
+			}
+		}
+		if (retVal) {
+			if (this.description == null)
+				retVal = (obj.getDescription() == null);
+			else
+				retVal = this.description.equals(obj.getDescription());
+		}
+		if (retVal) {
+			if (this.identificator == null)
+				retVal = (obj.getIdentificator() == null);
+			else
+				retVal = this.identificator.equals(obj.getIdentificator());
+		}
+		if (retVal) {
+			if (this.sourceUrl == null)
+				retVal = (obj.getSourceUrl() == null);
+			else
+				retVal = this.sourceUrl.equals(obj.getSourceUrl());
+		}
+		if (retVal) {
+			if (this.status == null)
+				retVal = (obj.getStatus() == null);
+			else
+				retVal = this.status.equals(obj.getStatus());
+		}
+		if (retVal) {
+			if (this.version == null)
+				retVal = (obj.getVersion() == null);
+			else
+				retVal = this.version.equals(obj.getVersion());
+		}
+		return retVal;
+	}
+
+	/**
+	 * Gets the description.
+	 *
+	 * @return the description
+	 */
 	public String getDescription() {
 		return description;
 	}
 
+	/**
+	 * Gets the identificator.
+	 *
+	 * @return the identificator
+	 */
 	public IdentificatorBaseType getIdentificator() {
 		return identificator;
 	}
 
-	public URL getSourceUrl() {
+	/**
+	 * Gets the mapping identificator list.
+	 *
+	 * @return the mapping identificator list
+	 */
+	public ArrayList<IdentificatorBaseType> getMappingIdentificatorList() {
+		return mappingIdentificatorList;
+	}
+
+	/**
+	 * Gets the mapping name list.
+	 *
+	 * @return the mapping name list
+	 */
+	public ArrayList<String> getMappingNameList() {
+		return mappingNameList;
+	}
+
+	/**
+	 * Gets the source url.
+	 *
+	 * @return the source url
+	 */
+	public String getSourceUrl() {
 		return sourceUrl;
 	}
 
+	/**
+	 * Gets the source url string.
+	 *
+	 * @return the source url string
+	 */
 	public String getSourceUrlString() {
 		return sourceUrl.toString();
 	}
 
+	/**
+	 * Gets the status.
+	 *
+	 * @return the status
+	 */
 	public ValueSetPackageStatus getStatus() {
 		return status;
 	}
 
+	/**
+	 * Gets the value set list.
+	 *
+	 * @return the value set list
+	 */
+	public ArrayList<ValueSet> getValueSetList() {
+		return valueSetList;
+	}
+
+	/**
+	 * Gets the version.
+	 *
+	 * @return the version
+	 */
 	public Version getVersion() {
 		return version;
 	}
 
+	/**
+	 * List mapping identificators.
+	 *
+	 * @return the list
+	 */
 	public List<IdentificatorBaseType> listMappingIdentificators() {
 		if (this.mappingIdentificatorList == null)
 			this.mappingIdentificatorList = new ArrayList<IdentificatorBaseType>();
 		return mappingIdentificatorList;
 	}
 
+	/**
+	 * List mapping names.
+	 *
+	 * @return the list
+	 */
 	public List<String> listMappingNames() {
 		if (this.mappingNameList == null) {
 			this.mappingNameList = new ArrayList<String>();
@@ -190,6 +431,11 @@ public class ValueSetPackage {
 		return this.mappingNameList;
 	}
 
+	/**
+	 * List value sets.
+	 *
+	 * @return the list
+	 */
 	public List<ValueSet> listValueSets() {
 		if (this.valueSetList == null) {
 			this.valueSetList = new ArrayList<ValueSet>();
@@ -197,27 +443,93 @@ public class ValueSetPackage {
 		return this.valueSetList;
 	}
 
+	/**
+	 * Sets the description.
+	 *
+	 * @param description
+	 *            the new description
+	 */
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
+	/**
+	 * Sets the identificator.
+	 *
+	 * @param identificator
+	 *            the new identificator
+	 */
 	public void setIdentificator(IdentificatorBaseType identificator) {
 		this.identificator = identificator;
 	}
 
-	public void setSourceUrl(URL sourceUrl) {
+	/**
+	 * Sets the mapping identificator list.
+	 *
+	 * @param mappingIdentificatorList
+	 *            the new mapping identificator list
+	 */
+	public void setMappingIdentificatorList(
+			ArrayList<IdentificatorBaseType> mappingIdentificatorList) {
+		this.mappingIdentificatorList = mappingIdentificatorList;
+	}
+
+	/**
+	 * Sets the mapping name list.
+	 *
+	 * @param mappingNameList
+	 *            the new mapping name list
+	 */
+	public void setMappingNameList(ArrayList<String> mappingNameList) {
+		this.mappingNameList = mappingNameList;
+	}
+
+	/**
+	 * Sets the source url.
+	 *
+	 * @param sourceUrl
+	 *            the new source url
+	 */
+	public void setSourceUrl(String sourceUrl) {
 		this.sourceUrl = sourceUrl;
 	}
 
-	public void setSourceUrlString(String sourceUrl) throws MalformedURLException {
-		URL url = new URL(sourceUrl);
-		this.sourceUrl = url;
+	/**
+	 * Sets the source url string.
+	 *
+	 * @param sourceUrl
+	 *            the new source url string
+	 */
+	public void setSourceUrlString(String sourceUrl) {
+		this.sourceUrl = sourceUrl;
 	}
 
+	/**
+	 * Sets the status.
+	 *
+	 * @param status
+	 *            the new status
+	 */
 	public void setStatus(ValueSetPackageStatus status) {
 		this.status = status;
 	}
 
+	/**
+	 * Sets the value set list.
+	 *
+	 * @param valueSetList
+	 *            the new value set list
+	 */
+	public void setValueSetList(ArrayList<ValueSet> valueSetList) {
+		this.valueSetList = valueSetList;
+	}
+
+	/**
+	 * Sets the version.
+	 *
+	 * @param version
+	 *            the new version
+	 */
 	public void setVersion(Version version) {
 		this.version = version;
 	}

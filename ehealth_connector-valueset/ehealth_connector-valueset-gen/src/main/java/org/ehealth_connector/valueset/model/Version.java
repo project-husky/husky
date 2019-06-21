@@ -132,6 +132,9 @@ public class Version {
 	/** The valid to. */
 	private Date validTo;
 
+	/**
+	 * Instantiates a new version.
+	 */
 	public Version() {
 	}
 
@@ -147,6 +150,42 @@ public class Version {
 		this.publishingAuthority = builder.publishingAuthority;
 		this.validFrom = builder.validFrom;
 		this.validTo = builder.validTo;
+	}
+
+	/**
+	 * Checks whether the to objects are equal (based on their content).
+	 *
+	 * @param obj
+	 *            the obj to compare
+	 * @return true, if equal
+	 */
+	public boolean equals(Version obj) {
+		boolean retVal = true;
+		if (retVal) {
+			if (this.label == null)
+				retVal = (obj.getLabel() == null);
+			else
+				retVal = this.label.equals(obj.getLabel());
+		}
+		if (retVal) {
+			if (this.publishingAuthority == null)
+				retVal = (obj.getPublishingAuthority() == null);
+			else
+				retVal = this.publishingAuthority.equals(obj.getPublishingAuthority());
+		}
+		if (retVal) {
+			if (this.validFrom == null)
+				retVal = (obj.getValidFrom() == null);
+			else
+				retVal = this.validFrom.equals(obj.getValidFrom());
+		}
+		if (retVal) {
+			if (this.validTo == null)
+				retVal = (obj.getValidTo() == null);
+			else
+				retVal = this.validTo.equals(obj.getValidTo());
+		}
+		return retVal;
 	}
 
 	/**
@@ -232,5 +271,4 @@ public class Version {
 	public void setValidTo(Date validTo) {
 		this.validTo = validTo;
 	}
-
 }

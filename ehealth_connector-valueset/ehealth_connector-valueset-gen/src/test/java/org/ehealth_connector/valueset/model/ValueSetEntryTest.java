@@ -73,12 +73,12 @@ public class ValueSetEntryTest {
 		valueSetEntry1.addChild(valueSetEntry2);
 		valueSetEntry1.addChild(valueSetEntry3);
 
-		assertEquals(codeBaseType3, valueSetEntry1.listChildren().get(1).getCodeBaseType());
+		assertEquals(codeBaseType3, valueSetEntry1.listChilds().get(1).getCodeBaseType());
 		assertEquals(defaultMappingName3,
-				valueSetEntry1.listChildren().get(1).getDefaultMappingName());
-		assertEquals(level3, valueSetEntry1.listChildren().get(1).getLevel());
+				valueSetEntry1.listChilds().get(1).getDefaultMappingName());
+		assertEquals(level3, valueSetEntry1.listChilds().get(1).getLevel());
 		assertEquals(valueSetEntryType3,
-				valueSetEntry1.listChildren().get(1).getValueSetEntryType());
+				valueSetEntry1.listChilds().get(1).getValueSetEntryType());
 
 		// ValueSetEntry mapping codes tests
 		CodeBaseType mappingCode1 = CodeBaseType.builder().withCode("mappingcode1")

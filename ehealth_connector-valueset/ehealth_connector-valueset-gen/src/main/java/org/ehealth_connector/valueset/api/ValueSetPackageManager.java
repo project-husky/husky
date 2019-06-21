@@ -56,8 +56,63 @@ public class ValueSetPackageManager {
 	}
 
 	public ValueSetPackageConfig getLatestValueSetPackageConfig() {
-		// TODO NYI
-		return null;
+		ValueSetPackageConfig retVal = null;
+		boolean isCandidate = false;
+		Date latestFrom = null;
+		Date latestTo = null;
+		if (valueSetPackageConfigList != null) {
+			for (ValueSetPackageConfig valueSetPackageConfig : valueSetPackageConfigList) {
+				if (retVal == null)
+					retVal = valueSetPackageConfig;
+				Date from = valueSetPackageConfig.getVersion().getValidFrom();
+				Date to = valueSetPackageConfig.getVersion().getValidTo();
+
+				if (from != null) {
+					if (latestFrom == null)
+						latestFrom = from;
+				} else
+					isCandidate = true;
+
+				if (to != null) {
+					if (latestTo == null)
+						latestTo = to;
+				} else {
+					// from null and to null => this always valid
+					// -> the first entry makes it
+					if (isCandidate)
+						retVal = valueSetPackageConfig;
+					isCandidate = true;
+				}
+
+				if (from != null) {
+					if (from.after(latestFrom)) {
+						latestFrom = from;
+						// in this case, a from candidate with a later from date
+						// will
+						// get the new choice
+						if (isCandidate)
+							retVal = valueSetPackageConfig;
+						isCandidate = true;
+					}
+				}
+
+				if (to != null) {
+					if (to.after(latestTo)) {
+						latestTo = to;
+						// in this case, a from candidate with a later to date
+						// will
+						// get the new choice
+						if (isCandidate)
+							retVal = valueSetPackageConfig;
+						isCandidate = true;
+					}
+				} else if (isCandidate)
+					// in this case, a from candidate with a null to date will
+					// get the new choice
+					retVal = valueSetPackageConfig;
+			}
+		}
+		return retVal;
 
 	}
 
@@ -114,16 +169,22 @@ public class ValueSetPackageManager {
 
 	public ValueSetPackageConfig loadValueSetPackageConfig(String fileName)
 			throws FileNotFoundException {
+		if (this.valueSetPackageConfigList == null) {
+			this.valueSetPackageConfigList = new ArrayList<ValueSetPackageConfig>();
+		}
+
 		InputStreamReader reader = new InputStreamReader(new FileInputStream(fileName),
 				Charsets.UTF_8);
-		return loadValueSetPackageConfig(reader);
+		ValueSetPackageConfig valueSetPackageConfig = loadValueSetPackageConfig(reader);
+		valueSetPackageConfigList.add(valueSetPackageConfig);
+		return valueSetPackageConfig;
 
 	}
 
 	public void saveValueSetPackageConfig(ValueSetPackageConfig config, File file)
 			throws IOException {
 		Yaml yaml = new Yaml();
-		FileUtils.writeByteArrayToFile(file, yaml.dump(config).getBytes(Charsets.UTF_8));
+		FileUtils.writeByteArrayToFile(file, yaml.dumpAsMap(config).getBytes(Charsets.UTF_8));
 	}
 
 	public void saveValueSetPackageConfig(ValueSetPackageConfig config, String fileName)

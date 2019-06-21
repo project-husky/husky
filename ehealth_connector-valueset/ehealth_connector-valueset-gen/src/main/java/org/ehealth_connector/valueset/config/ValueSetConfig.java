@@ -32,39 +32,92 @@ public class ValueSetConfig {
 	 */
 	@Generated("SparkTools")
 	public static final class Builder {
+
+		/** The class name. */
 		private String className;
+
+		/** The project folder. */
 		private String projectFolder;
+
+		/** The source format type. */
 		private SourceFormatType sourceFormatType;
+
+		/** The source system type. */
 		private SourceSystemType sourceSystemType;
+
+		/** The source url. */
 		private String sourceUrl;
 
+		/**
+		 * Instantiates a new builder.
+		 */
 		private Builder() {
 		}
 
+		/**
+		 * Builds the.
+		 *
+		 * @return the value set config
+		 */
 		public ValueSetConfig build() {
 			return new ValueSetConfig(this);
 		}
 
+		/**
+		 * With class name.
+		 *
+		 * @param className
+		 *            the class name
+		 * @return the builder
+		 */
 		public Builder withClassName(String className) {
 			this.className = className;
 			return this;
 		}
 
+		/**
+		 * With project folder.
+		 *
+		 * @param projectFolder
+		 *            the project folder
+		 * @return the builder
+		 */
 		public Builder withProjectFolder(String projectFolder) {
 			this.projectFolder = projectFolder;
 			return this;
 		}
 
+		/**
+		 * With source format type.
+		 *
+		 * @param sourceFormatType
+		 *            the source format type
+		 * @return the builder
+		 */
 		public Builder withSourceFormatType(SourceFormatType sourceFormatType) {
 			this.sourceFormatType = sourceFormatType;
 			return this;
 		}
 
+		/**
+		 * With source system type.
+		 *
+		 * @param sourceSystemType
+		 *            the source system type
+		 * @return the builder
+		 */
 		public Builder withSourceSystemType(SourceSystemType sourceSystemType) {
 			this.sourceSystemType = sourceSystemType;
 			return this;
 		}
 
+		/**
+		 * With source url.
+		 *
+		 * @param sourceUrl
+		 *            the source url
+		 * @return the builder
+		 */
 		public Builder withSourceUrl(String sourceUrl) {
 			this.sourceUrl = sourceUrl;
 			return this;
@@ -73,7 +126,7 @@ public class ValueSetConfig {
 
 	/**
 	 * Creates builder to build {@link ValueSetConfig}.
-	 * 
+	 *
 	 * @return created builder
 	 */
 	@Generated("SparkTools")
@@ -96,6 +149,18 @@ public class ValueSetConfig {
 	/** The source url. */
 	private String sourceUrl;
 
+	/**
+	 * Instantiates a new value set config. Default constructor.
+	 */
+	public ValueSetConfig() {
+	}
+
+	/**
+	 * Instantiates a new value set config.
+	 *
+	 * @param builder
+	 *            the builder
+	 */
 	@Generated("SparkTools")
 	private ValueSetConfig(Builder builder) {
 		this.className = builder.className;

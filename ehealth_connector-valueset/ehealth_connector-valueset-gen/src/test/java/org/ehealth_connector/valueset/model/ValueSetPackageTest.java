@@ -17,10 +17,7 @@
 package org.ehealth_connector.valueset.model;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Date;
 
 import org.ehealth_connector.common.basetypes.CodeBaseType;
@@ -46,13 +43,7 @@ public class ValueSetPackageTest {
 		String description = "description";
 		IdentificatorBaseType identificator = IdentificatorBaseType.builder().withRoot("2.999")
 				.withExtension("myPackageId").build();
-		URL sourceUrl = null;
-		try {
-			sourceUrl = new URL("http://foo.bar");
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		String sourceUrl = "http://foo.bar";
 		ValueSetPackageStatus status = ValueSetPackageStatus.ACTIVE;
 		Version version = Version.builder().withLabel("1.0")
 				.withValidFrom(DateUtil.date("03.06.2019 00:00:00")).build();
@@ -66,14 +57,6 @@ public class ValueSetPackageTest {
 		assertEquals(sourceUrl, valueSetPackage.getSourceUrl());
 		assertEquals(status, valueSetPackage.getStatus());
 		assertEquals(version, valueSetPackage.getVersion());
-
-		String sourceUrlInvalid = "sourceUrl";
-		try {
-			valueSetPackage.setSourceUrlString(sourceUrlInvalid);
-			fail("Invalid URL must not pass");
-		} catch (MalformedURLException e) {
-			// Do nothing, all OK for this test, when the exception is raised!
-		}
 
 		// ValueSet tests
 		String vsdescription1 = "vsdescription1";

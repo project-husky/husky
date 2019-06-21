@@ -36,8 +36,8 @@ public class ValueSetEntry {
 	@Generated("SparkTools")
 	public static final class Builder {
 
-		/** The children. */
-		private ArrayList<ValueSetEntry> children;
+		/** The child list. */
+		private ArrayList<ValueSetEntry> childList;
 
 		/** The mapping code list. */
 		private ArrayList<CodeBaseType> mappingCodeList;
@@ -73,14 +73,14 @@ public class ValueSetEntry {
 		}
 
 		/**
-		 * With children.
+		 * With child list.
 		 *
-		 * @param children
-		 *            the children
+		 * @param childList
+		 *            the child list
 		 * @return the builder
 		 */
-		public Builder withChildren(ArrayList<ValueSetEntry> children) {
-			this.children = children;
+		public Builder withChildList(ArrayList<ValueSetEntry> childList) {
+			this.childList = childList;
 			return this;
 		}
 
@@ -168,7 +168,7 @@ public class ValueSetEntry {
 	}
 
 	/** The children. */
-	private ArrayList<ValueSetEntry> children;
+	private ArrayList<ValueSetEntry> childList;
 
 	/** The mapping code list. */
 	private ArrayList<CodeBaseType> mappingCodeList;
@@ -183,7 +183,7 @@ public class ValueSetEntry {
 	private String defaultMappingName;
 
 	/** The level. */
-	private int level;
+	private int level = 0;
 
 	/** The value set entry type. */
 	private ValueSetEntryType valueSetEntryType;
@@ -196,7 +196,7 @@ public class ValueSetEntry {
 	 */
 	@Generated("SparkTools")
 	private ValueSetEntry(Builder builder) {
-		this.children = builder.children;
+		this.childList = builder.childList;
 		this.mappingCodeList = builder.mappingCodeList;
 		this.mappingNameList = builder.mappingNameList;
 		this.codeBaseType = builder.codeBaseType;
@@ -212,10 +212,10 @@ public class ValueSetEntry {
 	 *            the value
 	 */
 	public void addChild(ValueSetEntry value) {
-		if (this.children == null) {
-			this.children = new ArrayList<ValueSetEntry>();
+		if (this.childList == null) {
+			this.childList = new ArrayList<ValueSetEntry>();
 		}
-		this.children.add(value);
+		this.childList.add(value);
 	}
 
 	/**
@@ -242,6 +242,69 @@ public class ValueSetEntry {
 			this.mappingNameList = new ArrayList<String>();
 		}
 		this.mappingNameList.add(value);
+	}
+
+	/**
+	 * Checks whether the to objects are equal (based on their content).
+	 *
+	 * @param obj
+	 *            the obj to compare
+	 * @return true, if equal
+	 */
+	public boolean equals(ValueSetEntry obj) {
+		boolean retVal = true;
+		if (retVal) {
+			for (int i = 0; i < this.childList.size(); i++) {
+				retVal = (this.childList.get(i).equals(obj.listChilds().get(i)));
+				if (!retVal)
+					break;
+			}
+		}
+		if (retVal) {
+			for (int i = 0; i < this.mappingCodeList.size(); i++) {
+				retVal = (this.mappingCodeList.get(i).equals(obj.listMappingCodes().get(i)));
+				if (!retVal)
+					break;
+			}
+		}
+		if (retVal) {
+			for (int i = 0; i < this.mappingNameList.size(); i++) {
+				retVal = (this.mappingNameList.get(i).equals(obj.listMappingNames().get(i)));
+				if (!retVal)
+					break;
+			}
+		}
+		if (retVal) {
+			if (this.codeBaseType == null)
+				retVal = (obj.getCodeBaseType() == null);
+			else
+				retVal = this.codeBaseType.equals(obj.getCodeBaseType());
+		}
+		if (retVal) {
+			if (this.defaultMappingName == null)
+				retVal = (obj.getDefaultMappingName() == null);
+			else
+				retVal = this.defaultMappingName.equals(obj.getDefaultMappingName());
+		}
+		if (retVal) {
+			retVal = (this.level == obj.getLevel());
+		}
+		if (retVal) {
+			if (this.valueSetEntryType == null)
+				retVal = (obj.getValueSetEntryType() == null);
+			else
+				retVal = this.valueSetEntryType.equals(obj.getValueSetEntryType());
+		}
+		return retVal;
+	}
+
+	/**
+	 * Gets the child list.
+	 *
+	 * @return the child list
+	 */
+	public ArrayList<ValueSetEntry> getChildList() {
+		return childList;
 	}
 
 	/**
@@ -272,6 +335,24 @@ public class ValueSetEntry {
 	}
 
 	/**
+	 * Gets the mapping code list.
+	 *
+	 * @return the mapping code list
+	 */
+	public ArrayList<CodeBaseType> getMappingCodeList() {
+		return mappingCodeList;
+	}
+
+	/**
+	 * Gets the mapping name list.
+	 *
+	 * @return the mapping name list
+	 */
+	public ArrayList<String> getMappingNameList() {
+		return mappingNameList;
+	}
+
+	/**
 	 * Gets the value set entry type.
 	 *
 	 * @return the value set entry type
@@ -285,11 +366,11 @@ public class ValueSetEntry {
 	 *
 	 * @return the list
 	 */
-	public List<ValueSetEntry> listChildren() {
-		if (this.children == null) {
-			this.children = new ArrayList<ValueSetEntry>();
+	public List<ValueSetEntry> listChilds() {
+		if (this.childList == null) {
+			this.childList = new ArrayList<ValueSetEntry>();
 		}
-		return this.children;
+		return this.childList;
 	}
 
 	/**
@@ -314,6 +395,16 @@ public class ValueSetEntry {
 			this.mappingNameList = new ArrayList<String>();
 		}
 		return this.mappingNameList;
+	}
+
+	/**
+	 * Sets the child list.
+	 *
+	 * @param childList
+	 *            the new child list
+	 */
+	public void setChildList(ArrayList<ValueSetEntry> childList) {
+		this.childList = childList;
 	}
 
 	/**
@@ -344,6 +435,26 @@ public class ValueSetEntry {
 	 */
 	public void setLevel(int level) {
 		this.level = level;
+	}
+
+	/**
+	 * Sets the mapping code list.
+	 *
+	 * @param mappingCodeList
+	 *            the new mapping code list
+	 */
+	public void setMappingCodeList(ArrayList<CodeBaseType> mappingCodeList) {
+		this.mappingCodeList = mappingCodeList;
+	}
+
+	/**
+	 * Sets the mapping name list.
+	 *
+	 * @param mappingNameList
+	 *            the new mapping name list
+	 */
+	public void setMappingNameList(ArrayList<String> mappingNameList) {
+		this.mappingNameList = mappingNameList;
 	}
 
 	/**
