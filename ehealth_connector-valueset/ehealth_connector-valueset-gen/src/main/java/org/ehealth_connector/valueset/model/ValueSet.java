@@ -245,6 +245,12 @@ public class ValueSet {
 	private Version version;
 
 	/**
+	 * Instantiates a new value set. Default constructor.
+	 */
+	public ValueSet() {
+	}
+
+	/**
 	 * Instantiates a new value set.
 	 *
 	 * @param builder
@@ -301,6 +307,27 @@ public class ValueSet {
 			this.valueSetEntryList = new ArrayList<ValueSetEntry>();
 		}
 		this.valueSetEntryList.add(value);
+	}
+
+	/**
+	 * Clear mapping identificator list.
+	 */
+	public void clearMappingIdentificatorList() {
+		this.mappingIdentificatorList = new ArrayList<IdentificatorBaseType>();
+	}
+
+	/**
+	 * Clear mapping name list.
+	 */
+	public void clearMappingNameList() {
+		this.mappingNameList = new ArrayList<String>();
+	}
+
+	/**
+	 * Clear value set entry list.
+	 */
+	public void clearValueSetEntryList() {
+		this.valueSetEntryList = new ArrayList<ValueSetEntry>();
 	}
 
 	/**

@@ -17,41 +17,168 @@
 package org.ehealth_connector.valueset.api;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.Calendar;
 
+import org.apache.commons.io.Charsets;
+import org.apache.commons.io.FileUtils;
 import org.ehealth_connector.valueset.config.ValueSetConfig;
 import org.ehealth_connector.valueset.model.ValueSet;
+import org.yaml.snakeyaml.DumperOptions;
+import org.yaml.snakeyaml.Yaml;
 
 /**
- * Java Prototype for Value Set Management Concept.
  *
- * Die Methode dowloadValueSet(..) soll immer ein JSON der gleichen Struktur
- * zurückliefern. Die Konvertierung der verschiedenen Quellformate und
- * abweichenden Strukturen ist im Download- anstelle Load-Teil zu lösen. Eine
- * zu-sätzliche Download-Methode bietet die Option das ValueSet im RAW-Format
- * des Quellsystems 1:1 herunterzula-den. Diese Methode wird jedoch vom
+ * <div class="en">TODO</div> <div class="de">TODO: Die Methode
+ * dowloadValueSet(..) soll immer ein JSON der gleichen Struktur zurückliefern.
+ * Die Konvertierung der verschiedenen Quellformate und abweichenden Strukturen
+ * ist im Download- anstelle Load-Teil zu lösen. Eine zusätzliche
+ * Download-Methode bietet die Option das ValueSet im RAW-Format des
+ * Quellsystems 1:1 herunterzuladen. Diese Methode wird jedoch vom
  * ValueSetPackageManager nicht direkt genutzt jedoch intern in der Methode
- * downloadValueSet(..) verwendet.
- *
- *
+ * downloadValueSet(..) verwendet.</div>
  */
-public interface ValueSetManager {
+public class ValueSetManager {
 
-	public OutputStream downloadValueSetAsJson(ValueSetConfig valueSetConfig);
+	public OutputStream downloadValueSetAsJson(ValueSetConfig valueSetConfig) {
+		// TODO
+		return null;
+	}
 
-	public OutputStream downloadValueSetRaw(ValueSetConfig valueSetConfig);
+	public OutputStream downloadValueSetRaw(ValueSetConfig valueSetConfig) {
+		// TODO
+		return null;
+	}
 
-	public ValueSetConfig loadValueSetConfig(File config);
+	public ValueSetConfig loadValueSetConfig(File config) throws FileNotFoundException {
+		return loadValueSetConfig(new FileInputStream(config));
+	}
 
-	public ValueSetConfig loadValueSetConfig(InputStream config);
+	public ValueSetConfig loadValueSetConfig(InputStream config) {
+		return loadValueSetConfig(new InputStreamReader(config, Charsets.UTF_8));
+	}
 
-	public ValueSet loadValueSetIheSvs(File valueSet);
+	public ValueSetConfig loadValueSetConfig(InputStreamReader reader) {
+		DumperOptions options = new DumperOptions();
+		options.setTimeZone(Calendar.getInstance().getTimeZone());
+		Yaml yaml = new Yaml(options);
 
-	public ValueSet loadValueSetIheSvs(InputStream valueSet);
+		ValueSetConfig valueSetConfig = yaml.loadAs(reader, ValueSetConfig.class);
 
-	public ValueSet loadValueSetJson(File valueSet);
+		return valueSetConfig;
+	}
 
-	public ValueSet loadValueSetJson(InputStream valueSet);
+	public ValueSetConfig loadValueSetConfig(String fileName) throws FileNotFoundException {
+		return loadValueSetConfig(new File(fileName));
+	}
+
+	public ValueSet loadValueSetIheSvs(File valueSet) throws FileNotFoundException {
+		return loadValueSetIheSvs(new FileInputStream(valueSet));
+	}
+
+	public ValueSet loadValueSetIheSvs(InputStream valueSet) {
+		return loadValueSetIheSvs(new InputStreamReader(valueSet, Charsets.UTF_8));
+	}
+
+	public ValueSet loadValueSetIheSvs(InputStreamReader reader) {
+		ValueSet valueSet = null;
+		// TODO
+		return valueSet;
+	}
+
+	public ValueSet loadValueSetIheSvs(String fileName) throws FileNotFoundException {
+		return loadValueSetIheSvs(new File(fileName));
+	}
+
+	public ValueSet loadValueSetJson(File valueSet) throws FileNotFoundException {
+		return loadValueSetJson(new FileInputStream(valueSet));
+	}
+
+	public ValueSet loadValueSetJson(InputStream valueSet) {
+		return loadValueSetJson(new InputStreamReader(valueSet, Charsets.UTF_8));
+	}
+
+	public ValueSet loadValueSetJson(InputStreamReader reader) {
+		ValueSet valueSet = null;
+		// TODO
+		return valueSet;
+	}
+
+	public ValueSet loadValueSetJson(String fileName) throws FileNotFoundException {
+		return loadValueSetJson(new File(fileName));
+	}
+
+	public ValueSet loadValueSetYaml(File valueSet) throws FileNotFoundException {
+		return loadValueSetYaml(new FileInputStream(valueSet));
+	}
+
+	public ValueSet loadValueSetYaml(InputStream valueSet) {
+		return loadValueSetYaml(new InputStreamReader(valueSet, Charsets.UTF_8));
+	}
+
+	public ValueSet loadValueSetYaml(InputStreamReader reader) {
+
+		DumperOptions options = new DumperOptions();
+		options.setTimeZone(Calendar.getInstance().getTimeZone());
+		Yaml yaml = new Yaml(options);
+
+		ValueSet valueSet = yaml.loadAs(reader, ValueSet.class);
+
+		return valueSet;
+
+	}
+
+	public ValueSet loadValueSetYaml(String fileName) throws FileNotFoundException {
+		return loadValueSetYaml(new File(fileName));
+	}
+
+	/**
+	 * Save value set.
+	 *
+	 * @param valueSet
+	 *            the value set
+	 * @param file
+	 *            the file
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public void saveValueSet(ValueSet valueSet, File file) throws IOException {
+		DumperOptions options = new DumperOptions();
+		options.setTimeZone(Calendar.getInstance().getTimeZone());
+		Yaml yaml = new Yaml(options);
+		FileUtils.writeByteArrayToFile(file, yaml.dumpAsMap(valueSet).getBytes(Charsets.UTF_8));
+	}
+
+	/**
+	 * Save value set.
+	 *
+	 * @param valueSet
+	 *            the value set
+	 * @param fileName
+	 *            the file name
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public void saveValueSet(ValueSet valueSet, String fileName) throws IOException {
+		saveValueSet(valueSet, new File(fileName));
+	}
+
+	public void saveValueSetConfig(ValueSetConfig valueSetConfig, File file) throws IOException {
+		DumperOptions options = new DumperOptions();
+		options.setTimeZone(Calendar.getInstance().getTimeZone());
+		Yaml yaml = new Yaml(options);
+		FileUtils.writeByteArrayToFile(file,
+				yaml.dumpAsMap(valueSetConfig).getBytes(Charsets.UTF_8));
+	}
+
+	public void saveValueSetConfig(ValueSetConfig valueSetConfig, String fileName)
+			throws IOException {
+		saveValueSetConfig(valueSetConfig, new File(fileName));
+	}
 
 }

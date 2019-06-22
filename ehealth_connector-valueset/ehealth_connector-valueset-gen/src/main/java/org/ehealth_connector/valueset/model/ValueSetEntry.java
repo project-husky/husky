@@ -189,6 +189,12 @@ public class ValueSetEntry {
 	private ValueSetEntryType valueSetEntryType;
 
 	/**
+	 * Instantiates a new value set entry. Default constructor.
+	 */
+	public ValueSetEntry() {
+	}
+
+	/**
 	 * Instantiates a new value set entry.
 	 *
 	 * @param builder
@@ -242,6 +248,27 @@ public class ValueSetEntry {
 			this.mappingNameList = new ArrayList<String>();
 		}
 		this.mappingNameList.add(value);
+	}
+
+	/**
+	 * Clear child list.
+	 */
+	public void clearChildList() {
+		this.childList = new ArrayList<ValueSetEntry>();
+	}
+
+	/**
+	 * Clear mapping code list.
+	 */
+	public void clearMappingCodeList() {
+		this.mappingCodeList = new ArrayList<CodeBaseType>();
+	}
+
+	/**
+	 * Clear mapping name list.
+	 */
+	public void clearMappingNameList() {
+		this.mappingNameList = new ArrayList<String>();
 	}
 
 	/**

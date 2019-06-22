@@ -207,6 +207,12 @@ public class ValueSetPackage {
 	private Version version;
 
 	/**
+	 * Instantiates a new value set package. Default constructor.
+	 */
+	public ValueSetPackage() {
+	}
+
+	/**
 	 * Instantiates a new value set package.
 	 *
 	 * @param builder
@@ -261,6 +267,27 @@ public class ValueSetPackage {
 			this.valueSetList = new ArrayList<ValueSet>();
 		}
 		this.valueSetList.add(value);
+	}
+
+	/**
+	 * Clear mapping identificator list.
+	 */
+	public void clearMappingIdentificatorList() {
+		this.mappingIdentificatorList = new ArrayList<IdentificatorBaseType>();
+	}
+
+	/**
+	 * Clear mapping name list.
+	 */
+	public void clearMappingNameList() {
+		this.mappingNameList = new ArrayList<String>();
+	}
+
+	/**
+	 * Clear value set list.
+	 */
+	public void clearValueSetList() {
+		this.valueSetList = new ArrayList<ValueSet>();
 	}
 
 	/**
@@ -370,15 +397,6 @@ public class ValueSetPackage {
 	 */
 	public String getSourceUrl() {
 		return sourceUrl;
-	}
-
-	/**
-	 * Gets the source url string.
-	 *
-	 * @return the source url string
-	 */
-	public String getSourceUrlString() {
-		return sourceUrl.toString();
 	}
 
 	/**

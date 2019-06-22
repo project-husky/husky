@@ -21,7 +21,11 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
+import java.net.URLDecoder;
 import java.util.Date;
 
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
@@ -33,6 +37,10 @@ import org.ehealth_connector.valueset.config.ValueSetPackageConfig;
 import org.ehealth_connector.valueset.enums.SourceFormatType;
 import org.ehealth_connector.valueset.enums.SourceSystemType;
 import org.ehealth_connector.valueset.enums.ValueSetPackageStatus;
+import org.ehealth_connector.valueset.enums.ValueSetStatus;
+import org.ehealth_connector.valueset.exceptions.ConfigurationException;
+import org.ehealth_connector.valueset.model.ValueSet;
+import org.ehealth_connector.valueset.model.ValueSetPackage;
 import org.ehealth_connector.valueset.model.Version;
 import org.junit.Test;
 
@@ -43,8 +51,10 @@ public class ValueSetPackageManagerTest {
 
 	private String testValueSetPackageConfigFileName = Util.getTempDirectory()
 			+ FileUtil.getPlatformSpecificPathSeparator() + "testValueSetPackageConfig.yaml";
+	private String testValueSetPackageFileName = Util.getTempDirectory()
+			+ FileUtil.getPlatformSpecificPathSeparator() + "testValueSetPackage.yaml";
 
-	private ValueSetPackageConfig createValueSetPackageConfig() {
+	private ValueSetPackageConfig createValueSetPackageConfig1() {
 		ValueSetPackageConfig retVal = null;
 		String sourceUrl;
 		sourceUrl = "file://" + testValueSetPackageConfigFileName;
@@ -86,22 +96,120 @@ public class ValueSetPackageManagerTest {
 
 	@Test
 	public void dateMissingTest() {
-		// TODO: Timestamp in validFrom nicht vorhanden -> ungültig
+		// Timestamp in validFrom does not exist -> invalid
+		ValueSetPackageManager valueSetPackageManager = new ValueSetPackageManager();
+		try {
+
+			// load the prepared config
+			final URL test1Url = new URL(this.getClass()
+					.getResource("/ValueSetPackageConfig_FromDateMissing.yaml").toString());
+			final File testFile = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
+			valueSetPackageManager.loadValueSetPackageConfig(testFile);
+			fail("dateMissingTest: This configuration must not load, because it does not contaion a validFrom timestamp");
+		} catch (IOException e) {
+			fail("dateMissingTest: IOException");
+		} catch (ConfigurationException e) {
+			// All ok here.
+			// This configuration must not load, because it does
+			// not contain a validFrom timestamp
+		}
 	}
 
 	@Test
-	public void dateOnlyTest() {
-		// TODO: Timestamp in validFrom/To nur tagesganau
+	public void getLatestValueSetPackageConfigByStatusTest() {
+		ValueSetPackageManager valueSetPackageManager = loadPackageConfigs();
+		ValueSetPackageConfig valueSetPackageConfig;
+
+		valueSetPackageConfig = valueSetPackageManager
+				.getLatestValueSetPackageConfigByStatus(ValueSetPackageStatus.ACTIVE);
+		assertEquals("0.7-active", valueSetPackageConfig.getVersion().getLabel());
+
+		valueSetPackageConfig = valueSetPackageManager
+				.getLatestValueSetPackageConfigByStatus(ValueSetPackageStatus.RETIRED);
+		assertEquals("0.6-retired", valueSetPackageConfig.getVersion().getLabel());
+
+		valueSetPackageConfig = valueSetPackageManager
+				.getLatestValueSetPackageConfigByStatus(ValueSetPackageStatus.DRAFT);
+		assertEquals("0.9-draft", valueSetPackageConfig.getVersion().getLabel());
+
+		valueSetPackageConfig = valueSetPackageManager
+				.getLatestValueSetPackageConfigByStatus(ValueSetPackageStatus.UNKNOWN);
+		assertEquals("0.10-unknown", valueSetPackageConfig.getVersion().getLabel());
 	}
 
 	@Test
-	public void saveLoadTest() {
+	public void getLatestValueSetPackageConfigTest() {
+		ValueSetPackageManager valueSetPackageManager = loadPackageConfigs();
+		ValueSetPackageConfig valueSetPackageConfig = valueSetPackageManager
+				.getLatestValueSetPackageConfig();
+
+		assertEquals("0.7-active", valueSetPackageConfig.getVersion().getLabel());
+	}
+
+	@Test
+	public void getValueSetPackageConfigByStatusAndDateTest() {
+		ValueSetPackageManager valueSetPackageManager = loadPackageConfigs();
+		ValueSetPackageConfig valueSetPackageConfig;
+
+		valueSetPackageConfig = valueSetPackageManager.getValueSetPackageConfigByStatusAndDate(
+				ValueSetPackageStatus.ACTIVE, DateUtil.date("11.06.2019"));
+		assertEquals("0.8-active", valueSetPackageConfig.getVersion().getLabel());
+
+		valueSetPackageConfig = valueSetPackageManager.getValueSetPackageConfigByStatusAndDate(
+				ValueSetPackageStatus.ACTIVE, DateUtil.date("31.12.2021"));
+		assertEquals("0.7-active", valueSetPackageConfig.getVersion().getLabel());
+
+	}
+
+	public ValueSetPackageManager loadPackageConfigs() {
+		ValueSetPackageManager valueSetPackageManager = new ValueSetPackageManager();
+
+		try {
+
+			// load the prepared config
+			final URL test1Url = new URL(
+					this.getClass().getResource("/ValueSetPackageConfig1.yaml").toString());
+			final File testFile1 = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
+			valueSetPackageManager.loadValueSetPackageConfig(testFile1);
+
+			final URL test2Url = new URL(
+					this.getClass().getResource("/ValueSetPackageConfig2.yaml").toString());
+			final File testFile2 = new File(URLDecoder.decode(test2Url.getPath(), "UTF-8"));
+			valueSetPackageManager.loadValueSetPackageConfig(testFile2);
+
+			final URL test3Url = new URL(
+					this.getClass().getResource("/ValueSetPackageConfig3.yaml").toString());
+			final File testFile3 = new File(URLDecoder.decode(test3Url.getPath(), "UTF-8"));
+			valueSetPackageManager.loadValueSetPackageConfig(testFile3);
+
+			final URL test4Url = new URL(
+					this.getClass().getResource("/ValueSetPackageConfig4.yaml").toString());
+			final File testFile4 = new File(URLDecoder.decode(test4Url.getPath(), "UTF-8"));
+			valueSetPackageManager.loadValueSetPackageConfig(testFile4);
+
+			final URL test5Url = new URL(
+					this.getClass().getResource("/ValueSetPackageConfig5.yaml").toString());
+			final File testFile5 = new File(URLDecoder.decode(test5Url.getPath(), "UTF-8"));
+			valueSetPackageManager.loadValueSetPackageConfig(testFile5);
+
+		} catch (IOException e) {
+			fail("saveLoadTest: IOException");
+		} catch (ConfigurationException e) {
+			fail("ConfigurationException: IOException");
+		}
+
+		return valueSetPackageManager;
+
+	}
+
+	@Test
+	public void saveLoadTestConfig() {
 
 		ValueSetPackageManager valueSetPackageManager = new ValueSetPackageManager();
 		try {
 
 			// Save a config
-			ValueSetPackageConfig valueSetPackageConfig1 = createValueSetPackageConfig();
+			ValueSetPackageConfig valueSetPackageConfig1 = createValueSetPackageConfig1();
 			assertNotNull(valueSetPackageConfig1);
 			valueSetPackageManager.saveValueSetPackageConfig(valueSetPackageConfig1,
 					testValueSetPackageConfigFileName);
@@ -124,9 +232,121 @@ public class ValueSetPackageManagerTest {
 
 		} catch (IOException e) {
 			fail("saveLoadTest: IOException");
+		} catch (ConfigurationException e) {
+			fail("saveLoadTest: ConfigurationException");
 		}
 
 		// TODO delete file in order to clean up the building system
 	}
 
+	@Test
+	public void saveLoadTestPackage() {
+		ValueSetPackageManager valueSetPackageManager = new ValueSetPackageManager();
+
+		// Save a package
+		String description = "descriptionTest";
+		IdentificatorBaseType identificator = IdentificatorBaseType.builder().withRoot("2.999")
+				.withExtension("myPackageId").build();
+		String sourceUrl = "http://foo.bar";
+		ValueSetPackageStatus status = ValueSetPackageStatus.ACTIVE;
+		Version version = Version.builder().withLabel("1.0")
+				.withValidFrom(DateUtil.date("03.06.2019 00:00:00")).build();
+
+		ValueSetPackage valueSetPackage = ValueSetPackage.builder().withDescription(description)
+				.withIdentificator(identificator).withSourceUrl(sourceUrl).withStatus(status)
+				.withVersion(version).build();
+
+		String description1 = "description1";
+		String displayName1 = "displayName1";
+		Date effectiveDate1 = DateUtil.date("11.06.2019");
+		IdentificatorBaseType identificator1 = IdentificatorBaseType.builder().withRoot("2.999.1")
+				.withExtension("1").build();
+		String name1 = "myValueSetName1";
+		ValueSetStatus status1 = ValueSetStatus.ACTIVE;
+		Version version1 = Version.builder().withLabel("1.1")
+				.withValidFrom(DateUtil.date("01.06.2019 00:00:00")).build();
+
+		ValueSet valueSet1 = ValueSet.builder().withDescription(description1)
+				.withDisplayName(displayName1).withEffectiveDate(effectiveDate1)
+				.withIdentificator(identificator1).withName(name1).withStatus(status1)
+				.withVersion(version1).build();
+
+		String description2 = "description2";
+		String displayName2 = "displayName2";
+		Date effectiveDate2 = DateUtil.date("12.06.2019");
+		IdentificatorBaseType identificator2 = IdentificatorBaseType.builder().withRoot("2.999.2")
+				.withExtension("2").build();
+		String name2 = "myValueSetName2";
+		ValueSetStatus status2 = ValueSetStatus.ACTIVE;
+		Version version2 = Version.builder().withLabel("1.2")
+				.withValidFrom(DateUtil.date("02.06.2019 00:00:00")).build();
+
+		ValueSet valueSet2 = ValueSet.builder().withDescription(description2)
+				.withDisplayName(displayName2).withEffectiveDate(effectiveDate2)
+				.withIdentificator(identificator2).withName(name2).withStatus(status2)
+				.withVersion(version2).build();
+
+		valueSetPackage.addValueSet(valueSet1);
+		valueSetPackage.addValueSet(valueSet2);
+
+		IdentificatorBaseType mappingId1 = IdentificatorBaseType.builder().withRoot("2.999")
+				.withExtension("AAA").build();
+		IdentificatorBaseType mappingId2 = IdentificatorBaseType.builder().withRoot("2.999")
+				.withExtension("BBB").build();
+
+		valueSetPackage.addMappingIdentificator(mappingId1);
+		valueSetPackage.addMappingIdentificator(mappingId2);
+
+		String mappingName1 = "mappingName1";
+		String mappingName2 = "mappingName2";
+
+		valueSetPackage.addMappingName(mappingName1);
+		valueSetPackage.addMappingName(mappingName2);
+
+		try {
+			valueSetPackageManager.saveValueSetPackage(valueSetPackage,
+					testValueSetPackageFileName);
+		} catch (IOException e) {
+			fail("saveLoadTestPackage: IOException");
+		}
+
+		// load the saved package
+		ValueSetPackageManager valueSetPackageManager2 = new ValueSetPackageManager();
+		try {
+			ValueSetPackage valueSetPackage2 = valueSetPackageManager2
+					.loadValueSetPackage(testValueSetPackageFileName);
+
+			assertEquals(description, valueSetPackage2.getDescription());
+			assertEquals(valueSet2.getName(), valueSetPackage2.listValueSets().get(1).getName());
+			assertEquals("BBB", valueSetPackage2.listMappingIdentificators().get(1).getExtension());
+			assertEquals(mappingName1, valueSetPackage2.listMappingNames().get(0));
+
+		} catch (FileNotFoundException e) {
+			fail("saveLoadTestPackage: FileNotFoundException");
+		} catch (ConfigurationException e) {
+			fail("saveLoadTestPackage: ConfigurationException");
+		}
+
+	}
+
+	@Test
+	public void versionMissingTest() {
+		// Timestamp in validFrom nicht vorhanden -> ungültig
+		ValueSetPackageManager valueSetPackageManager = new ValueSetPackageManager();
+		try {
+
+			// load the prepared config
+			final URL test1Url = new URL(this.getClass()
+					.getResource("/ValueSetPackageConfig_VersionMissing.yaml").toString());
+			final File testFile = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
+			valueSetPackageManager.loadValueSetPackageConfig(testFile);
+			fail("dateMissingTest: This configuration must not load, because it does not contain a version element");
+		} catch (IOException e) {
+			fail("versionMissingTest: IOException");
+		} catch (ConfigurationException e) {
+			// All ok here.
+			// This configuration must not load, because it does
+			// not contain a version element
+		}
+	}
 }

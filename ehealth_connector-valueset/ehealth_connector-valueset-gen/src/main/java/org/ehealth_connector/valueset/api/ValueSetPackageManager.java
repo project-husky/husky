@@ -24,6 +24,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -31,12 +32,25 @@ import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
 import org.ehealth_connector.valueset.config.ValueSetPackageConfig;
 import org.ehealth_connector.valueset.enums.ValueSetPackageStatus;
+import org.ehealth_connector.valueset.exceptions.ConfigurationException;
 import org.ehealth_connector.valueset.model.ValueSetPackage;
+import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
+/**
+ * The Class ValueSetPackageManager.
+ */
 public class ValueSetPackageManager {
+
+	/** The value set package config list. */
 	private ArrayList<ValueSetPackageConfig> valueSetPackageConfigList;
 
+	/**
+	 * Adds a value set package config.
+	 *
+	 * @param value
+	 *            the value
+	 */
 	public void addValueSetPackageConfig(ValueSetPackageConfig value) {
 		if (this.valueSetPackageConfigList == null) {
 			this.valueSetPackageConfigList = new ArrayList<ValueSetPackageConfig>();
@@ -45,91 +59,174 @@ public class ValueSetPackageManager {
 
 	}
 
-	public void downloadAndSaveValueSetPackage(ValueSetPackageConfig valueSetPackageConfig,
-			String fileName) {
-
+	/**
+	 * Clear value set package config list.
+	 */
+	public void clearValueSetPackageConfigList() {
+		this.valueSetPackageConfigList = new ArrayList<ValueSetPackageConfig>();
 	}
 
+	/**
+	 * Download and save value set package.
+	 *
+	 * @param valueSetPackageConfig
+	 *            the value set package config
+	 * @param fileName
+	 *            the file name
+	 */
+	public void downloadAndSaveValueSetPackage(ValueSetPackageConfig valueSetPackageConfig,
+			String fileName) {
+		// TODO NYI
+	}
+
+	/**
+	 * Download value set package.
+	 *
+	 * @param valueSetPackageConfig
+	 *            the value set package config
+	 * @return the output stream
+	 */
 	public OutputStream downloadValueSetPackage(ValueSetPackageConfig valueSetPackageConfig) {
 		// TODO NYI
 		return null;
 	}
 
+	/**
+	 * Gets the latest value set package config. The timestamps validFrom and
+	 * validTo are taken in charge for the selection. If multiple entries have
+	 * the same conditions, one of them will be returned without further checks.
+	 *
+	 * @return the latest value set package config
+	 */
 	public ValueSetPackageConfig getLatestValueSetPackageConfig() {
+		return getLatestValueSetPackageConfigByStatus(null);
+	}
+
+	/**
+	 * Gets the latest value set package config by status. The timestamps
+	 * validFrom and validTo are taken in charge for the selection and elements
+	 * not having the given status will be ignored. If multiple entries have the
+	 * same conditions, one of them will be returned without further checks.
+	 *
+	 *
+	 * @param status
+	 *            the status to be verified
+	 * @return the latest value set package config by status
+	 */
+	public ValueSetPackageConfig getLatestValueSetPackageConfigByStatus(
+			ValueSetPackageStatus status) {
+		return getValueSetPackageConfigByStatusAndDate(status, null);
+	}
+
+	/**
+	 * Gets the value set package config by status and date. Elements not having
+	 * the given status and elements that are not valid at the given time will
+	 * be ignored. From the remaining elements, the latest one will be returned
+	 * (If multiple entries have the same conditions, one of them will be
+	 * returned without further checks.)
+	 *
+	 * @param status
+	 *            the status
+	 * @param date
+	 *            the date
+	 * @return the value set package config by status and date
+	 */
+	public ValueSetPackageConfig getValueSetPackageConfigByStatusAndDate(
+			ValueSetPackageStatus status, Date date) {
 		ValueSetPackageConfig retVal = null;
 		boolean isCandidate = false;
 		Date latestFrom = null;
 		Date latestTo = null;
 		if (valueSetPackageConfigList != null) {
 			for (ValueSetPackageConfig valueSetPackageConfig : valueSetPackageConfigList) {
-				if (retVal == null)
-					retVal = valueSetPackageConfig;
-				Date from = valueSetPackageConfig.getVersion().getValidFrom();
-				Date to = valueSetPackageConfig.getVersion().getValidTo();
+				isCandidate = false;
+				boolean ignoreStatus = (status == null);
+				boolean ignoreDate = (date == null);
 
-				if (from != null) {
-					if (latestFrom == null)
-						latestFrom = from;
-				} else
-					isCandidate = true;
+				if ((ignoreStatus) || (status == valueSetPackageConfig.getStatus())) {
+					Date from = valueSetPackageConfig.getVersion().getValidFrom();
+					Date to = valueSetPackageConfig.getVersion().getValidTo();
+					System.out.println(valueSetPackageConfig.getVersion().getLabel());
 
-				if (to != null) {
-					if (latestTo == null)
-						latestTo = to;
-				} else {
-					// from null and to null => this always valid
-					// -> the first entry makes it
-					if (isCandidate)
-						retVal = valueSetPackageConfig;
-					isCandidate = true;
-				}
+					boolean dateFits = (date == null);
+					if (!dateFits) {
+						if (from != null)
+							dateFits = ((date.equals(from)) || (date.after(from)));
+						if (dateFits) {
+							if (to != null)
+								dateFits = ((date.equals(to)) || (date.before(to)));
+						}
+					}
 
-				if (from != null) {
-					if (from.after(latestFrom)) {
-						latestFrom = from;
-						// in this case, a from candidate with a later from date
-						// will
-						// get the new choice
-						if (isCandidate)
+					if (ignoreDate || dateFits) {
+
+						if (retVal == null)
 							retVal = valueSetPackageConfig;
-						isCandidate = true;
+
+						if (from != null) {
+							if (latestFrom == null)
+								latestFrom = from;
+						} else
+							isCandidate = true;
+
+						if (to != null) {
+							if (latestTo == null)
+								latestTo = to;
+						} else {
+							// from null and to null => this always valid
+							// -> the first entry makes it
+							if (isCandidate)
+								retVal = valueSetPackageConfig;
+							isCandidate = true;
+						}
+
+						if (from != null) {
+							if (from.after(latestFrom)) {
+								latestFrom = from;
+								// in this case, a from candidate with a later
+								// from
+								// date
+								// will
+								// get the new choice
+								if (isCandidate)
+									retVal = valueSetPackageConfig;
+								isCandidate = true;
+							} else
+								isCandidate = false;
+						}
+
+						if (to != null) {
+							if (to.after(latestTo)) {
+								latestTo = to;
+								// in this case, a from candidate with a later
+								// to
+								// date
+								// will
+								// get the new choice
+								if (isCandidate)
+									retVal = valueSetPackageConfig;
+								isCandidate = true;
+							}
+						} else if (isCandidate)
+							// in this case, a from candidate with a null to
+							// date
+							// will
+							// get the new choice
+							retVal = valueSetPackageConfig;
 					}
 				}
-
-				if (to != null) {
-					if (to.after(latestTo)) {
-						latestTo = to;
-						// in this case, a from candidate with a later to date
-						// will
-						// get the new choice
-						if (isCandidate)
-							retVal = valueSetPackageConfig;
-						isCandidate = true;
-					}
-				} else if (isCandidate)
-					// in this case, a from candidate with a null to date will
-					// get the new choice
-					retVal = valueSetPackageConfig;
 			}
 		}
+
 		return retVal;
 
 	}
 
-	public ValueSetPackageConfig getLatestValueSetPackageConfigByStatus(
-			ValueSetPackageStatus value) {
-		// TODO NYI
-		return null;
-
-	}
-
-	public ValueSetPackageConfig getValueSetPackageConfigByStatusAndDate(
-			ValueSetPackageStatus status, Date date) {
-		// TODO NYI
-		return null;
-
-	}
-
+	/**
+	 * List value set package config.
+	 *
+	 * @return the list
+	 */
 	public List<ValueSetPackageConfig> listValueSetPackageConfig() {
 		if (this.valueSetPackageConfigList == null) {
 			this.valueSetPackageConfigList = new ArrayList<ValueSetPackageConfig>();
@@ -138,57 +235,212 @@ public class ValueSetPackageManager {
 
 	}
 
-	public ValueSetPackage loadValueSetPackage(File valueSetPackage) {
-		// TODO NYI
-		return null;
-
+	/**
+	 * Load value set package.
+	 *
+	 * @param valueSetPackage
+	 *            the value set package
+	 * @return the value set package
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 */
+	public ValueSetPackage loadValueSetPackage(File valueSetPackage) throws FileNotFoundException {
+		return loadValueSetPackage(new FileInputStream(valueSetPackage));
 	}
 
+	/**
+	 * Load value set package.
+	 *
+	 * @param valueSetPackage
+	 *            the value set package
+	 * @return the value set package
+	 */
 	public ValueSetPackage loadValueSetPackage(InputStream valueSetPackage) {
-		// TODO NYI
-		return null;
+		return loadValueSetPackage(new InputStreamReader(valueSetPackage, Charsets.UTF_8));
+	}
+
+	/**
+	 * Load value set package.
+	 *
+	 * @param reader
+	 *            the reader
+	 * @return the value set package
+	 */
+	public ValueSetPackage loadValueSetPackage(InputStreamReader reader) {
+
+		DumperOptions options = new DumperOptions();
+		options.setTimeZone(Calendar.getInstance().getTimeZone());
+		Yaml yaml = new Yaml(options);
+
+		ValueSetPackage valueSetPackage = yaml.loadAs(reader, ValueSetPackage.class);
+
+		return valueSetPackage;
 
 	}
 
+	/**
+	 * Load value set package.
+	 *
+	 * @param fileName
+	 *            the file name
+	 * @return the value set package
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 * @throws ConfigurationException
+	 *             the configuration exception
+	 */
+	public ValueSetPackage loadValueSetPackage(String fileName)
+			throws FileNotFoundException, ConfigurationException {
+		return loadValueSetPackage(new File(fileName));
+
+	}
+
+	/**
+	 * Load value set package config.
+	 *
+	 * @param config
+	 *            the config
+	 * @return the value set package config
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 * @throws ConfigurationException
+	 *             the configuration exception
+	 */
 	public ValueSetPackageConfig loadValueSetPackageConfig(File config)
-			throws FileNotFoundException {
-		InputStream inputStream = new FileInputStream(config);
-		return loadValueSetPackageConfig(inputStream);
-
+			throws FileNotFoundException, ConfigurationException {
+		return loadValueSetPackageConfig(new FileInputStream(config));
 	}
 
-	public ValueSetPackageConfig loadValueSetPackageConfig(InputStream config) {
-		Yaml yaml = new Yaml();
-		return yaml.loadAs(config, ValueSetPackageConfig.class);
+	/**
+	 * Load value set package config.
+	 *
+	 * @param config
+	 *            the config
+	 * @return the value set package config
+	 * @throws ConfigurationException
+	 *             the configuration exception
+	 */
+	public ValueSetPackageConfig loadValueSetPackageConfig(InputStream config)
+			throws ConfigurationException {
+		return loadValueSetPackageConfig(new InputStreamReader(config, Charsets.UTF_8));
 	}
 
-	public ValueSetPackageConfig loadValueSetPackageConfig(InputStreamReader reader) {
-		Yaml yaml = new Yaml();
-		return yaml.loadAs(reader, ValueSetPackageConfig.class);
-	}
+	/**
+	 * Load value set package config.
+	 *
+	 * @param reader
+	 *            the reader
+	 * @return the value set package config
+	 * @throws ConfigurationException
+	 *             the configuration exception
+	 */
+	public ValueSetPackageConfig loadValueSetPackageConfig(InputStreamReader reader)
+			throws ConfigurationException {
 
-	public ValueSetPackageConfig loadValueSetPackageConfig(String fileName)
-			throws FileNotFoundException {
 		if (this.valueSetPackageConfigList == null) {
 			this.valueSetPackageConfigList = new ArrayList<ValueSetPackageConfig>();
 		}
 
-		InputStreamReader reader = new InputStreamReader(new FileInputStream(fileName),
-				Charsets.UTF_8);
-		ValueSetPackageConfig valueSetPackageConfig = loadValueSetPackageConfig(reader);
+		DumperOptions options = new DumperOptions();
+		options.setTimeZone(Calendar.getInstance().getTimeZone());
+		Yaml yaml = new Yaml(options);
+
+		ValueSetPackageConfig valueSetPackageConfig = yaml.loadAs(reader,
+				ValueSetPackageConfig.class);
+
+		if (valueSetPackageConfig.getVersion() == null)
+			throw new ConfigurationException(
+					"ValueSetPackageConfig must contain a version element");
+		else if (valueSetPackageConfig.getVersion().getValidFrom() == null)
+			throw new ConfigurationException(
+					"ValueSetPackageConfig must contain a version element, having a validFrom timestamp");
+
 		valueSetPackageConfigList.add(valueSetPackageConfig);
 		return valueSetPackageConfig;
 
 	}
 
+	/**
+	 * Load value set package config.
+	 *
+	 * @param fileName
+	 *            the file name
+	 * @return the value set package config
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 * @throws ConfigurationException
+	 *             the configuration exception
+	 */
+	public ValueSetPackageConfig loadValueSetPackageConfig(String fileName)
+			throws FileNotFoundException, ConfigurationException {
+		return loadValueSetPackageConfig(new File(fileName));
+
+	}
+
+	/**
+	 * Save value set package.
+	 *
+	 * @param valueSetPackage
+	 *            the value set package
+	 * @param file
+	 *            the file
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public void saveValueSetPackage(ValueSetPackage valueSetPackage, File file) throws IOException {
+		DumperOptions options = new DumperOptions();
+		options.setTimeZone(Calendar.getInstance().getTimeZone());
+		Yaml yaml = new Yaml(options);
+		FileUtils.writeByteArrayToFile(file,
+				yaml.dumpAsMap(valueSetPackage).getBytes(Charsets.UTF_8));
+	}
+
+	/**
+	 * Save value set package.
+	 *
+	 * @param valueSetPackage
+	 *            the value set package
+	 * @param fileName
+	 *            the file name
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
+	public void saveValueSetPackage(ValueSetPackage valueSetPackage, String fileName)
+			throws IOException {
+		saveValueSetPackage(valueSetPackage, new File(fileName));
+	}
+
+	/**
+	 * Save value set package config.
+	 *
+	 * @param config
+	 *            the config
+	 * @param file
+	 *            the file
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	public void saveValueSetPackageConfig(ValueSetPackageConfig config, File file)
 			throws IOException {
-		Yaml yaml = new Yaml();
+		DumperOptions options = new DumperOptions();
+		options.setTimeZone(Calendar.getInstance().getTimeZone());
+		Yaml yaml = new Yaml(options);
 		FileUtils.writeByteArrayToFile(file, yaml.dumpAsMap(config).getBytes(Charsets.UTF_8));
 	}
 
+	/**
+	 * Save value set package config.
+	 *
+	 * @param config
+	 *            the config
+	 * @param fileName
+	 *            the file name
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 */
 	public void saveValueSetPackageConfig(ValueSetPackageConfig config, String fileName)
 			throws IOException {
 		saveValueSetPackageConfig(config, new File(fileName));
 	}
+
 }
