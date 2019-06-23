@@ -23,14 +23,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.util.Calendar;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
+import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
+import org.ehealth_connector.valueset.config.CustomizedYaml;
 import org.ehealth_connector.valueset.config.ValueSetConfig;
 import org.ehealth_connector.valueset.model.ValueSet;
-import org.yaml.snakeyaml.DumperOptions;
-import org.yaml.snakeyaml.Yaml;
 
 /**
  *
@@ -44,6 +49,36 @@ import org.yaml.snakeyaml.Yaml;
  * downloadValueSet(..) verwendet.</div>
  */
 public class ValueSetManager {
+
+	/**
+	 * <div class="en">The default encoding used to encode URL parameter.</div>
+	 */
+	private static final String UTF8_ENCODING = "UTF-8";
+
+	/**
+	 * <div class="en">Build the complete URL to retrieve a value set JSON
+	 * configuration from ART-DECOR.</div>
+	 *
+	 * @param baseUrl
+	 *            The base URL that includes host, path and prefix.
+	 * @param valueSet
+	 *            The parsed value set configuration containing the ID and date
+	 *            to use.
+	 * @return The complete URL to download a value set in JSON format.
+	 * @throws MalformedURLException
+	 *             When the provided baseUrl is invalid.
+	 */
+	public static URL buildValueSetArtDecorUrl(String baseUrl, IdentificatorBaseType id,
+			Date effectiveDate) throws MalformedURLException {
+		try {
+			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+			return new URL(baseUrl + "&id="
+					+ java.net.URLEncoder.encode(id.getRoot(), UTF8_ENCODING) + "&effectiveDate="
+					+ java.net.URLEncoder.encode(dateFormat.format(effectiveDate), UTF8_ENCODING));
+		} catch (UnsupportedEncodingException unsupportedEncodingException) {
+			throw new MalformedURLException(unsupportedEncodingException.getMessage());
+		}
+	}
 
 	public OutputStream downloadValueSetAsJson(ValueSetConfig valueSetConfig) {
 		// TODO
@@ -64,12 +99,8 @@ public class ValueSetManager {
 	}
 
 	public ValueSetConfig loadValueSetConfig(InputStreamReader reader) {
-		DumperOptions options = new DumperOptions();
-		options.setTimeZone(Calendar.getInstance().getTimeZone());
-		Yaml yaml = new Yaml(options);
-
-		ValueSetConfig valueSetConfig = yaml.loadAs(reader, ValueSetConfig.class);
-
+		ValueSetConfig valueSetConfig = CustomizedYaml.getCustomizedYaml().loadAs(reader,
+				ValueSetConfig.class);
 		return valueSetConfig;
 	}
 
@@ -122,15 +153,8 @@ public class ValueSetManager {
 	}
 
 	public ValueSet loadValueSetYaml(InputStreamReader reader) {
-
-		DumperOptions options = new DumperOptions();
-		options.setTimeZone(Calendar.getInstance().getTimeZone());
-		Yaml yaml = new Yaml(options);
-
-		ValueSet valueSet = yaml.loadAs(reader, ValueSet.class);
-
+		ValueSet valueSet = CustomizedYaml.getCustomizedYaml().loadAs(reader, ValueSet.class);
 		return valueSet;
-
 	}
 
 	public ValueSet loadValueSetYaml(String fileName) throws FileNotFoundException {
@@ -148,10 +172,8 @@ public class ValueSetManager {
 	 *             Signals that an I/O exception has occurred.
 	 */
 	public void saveValueSet(ValueSet valueSet, File file) throws IOException {
-		DumperOptions options = new DumperOptions();
-		options.setTimeZone(Calendar.getInstance().getTimeZone());
-		Yaml yaml = new Yaml(options);
-		FileUtils.writeByteArrayToFile(file, yaml.dumpAsMap(valueSet).getBytes(Charsets.UTF_8));
+		FileUtils.writeByteArrayToFile(file,
+				CustomizedYaml.getCustomizedYaml().dumpAsMap(valueSet).getBytes(Charsets.UTF_8));
 	}
 
 	/**
@@ -169,11 +191,8 @@ public class ValueSetManager {
 	}
 
 	public void saveValueSetConfig(ValueSetConfig valueSetConfig, File file) throws IOException {
-		DumperOptions options = new DumperOptions();
-		options.setTimeZone(Calendar.getInstance().getTimeZone());
-		Yaml yaml = new Yaml(options);
-		FileUtils.writeByteArrayToFile(file,
-				yaml.dumpAsMap(valueSetConfig).getBytes(Charsets.UTF_8));
+		FileUtils.writeByteArrayToFile(file, CustomizedYaml.getCustomizedYaml()
+				.dumpAsMap(valueSetConfig).getBytes(Charsets.UTF_8));
 	}
 
 	public void saveValueSetConfig(ValueSetConfig valueSetConfig, String fileName)

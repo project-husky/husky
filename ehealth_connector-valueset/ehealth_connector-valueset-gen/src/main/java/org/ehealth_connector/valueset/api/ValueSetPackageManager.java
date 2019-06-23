@@ -24,18 +24,16 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
+import org.ehealth_connector.valueset.config.CustomizedYaml;
 import org.ehealth_connector.valueset.config.ValueSetPackageConfig;
 import org.ehealth_connector.valueset.enums.ValueSetPackageStatus;
 import org.ehealth_connector.valueset.exceptions.ConfigurationException;
 import org.ehealth_connector.valueset.model.ValueSetPackage;
-import org.yaml.snakeyaml.DumperOptions;
-import org.yaml.snakeyaml.Yaml;
 
 /**
  * The Class ValueSetPackageManager.
@@ -146,7 +144,6 @@ public class ValueSetPackageManager {
 				if ((ignoreStatus) || (status == valueSetPackageConfig.getStatus())) {
 					Date from = valueSetPackageConfig.getVersion().getValidFrom();
 					Date to = valueSetPackageConfig.getVersion().getValidTo();
-					System.out.println(valueSetPackageConfig.getVersion().getLabel());
 
 					boolean dateFits = (date == null);
 					if (!dateFits) {
@@ -267,13 +264,8 @@ public class ValueSetPackageManager {
 	 * @return the value set package
 	 */
 	public ValueSetPackage loadValueSetPackage(InputStreamReader reader) {
-
-		DumperOptions options = new DumperOptions();
-		options.setTimeZone(Calendar.getInstance().getTimeZone());
-		Yaml yaml = new Yaml(options);
-
-		ValueSetPackage valueSetPackage = yaml.loadAs(reader, ValueSetPackage.class);
-
+		ValueSetPackage valueSetPackage = CustomizedYaml.getCustomizedYaml().loadAs(reader,
+				ValueSetPackage.class);
 		return valueSetPackage;
 
 	}
@@ -341,12 +333,8 @@ public class ValueSetPackageManager {
 			this.valueSetPackageConfigList = new ArrayList<ValueSetPackageConfig>();
 		}
 
-		DumperOptions options = new DumperOptions();
-		options.setTimeZone(Calendar.getInstance().getTimeZone());
-		Yaml yaml = new Yaml(options);
-
-		ValueSetPackageConfig valueSetPackageConfig = yaml.loadAs(reader,
-				ValueSetPackageConfig.class);
+		ValueSetPackageConfig valueSetPackageConfig = CustomizedYaml.getCustomizedYaml()
+				.loadAs(reader, ValueSetPackageConfig.class);
 
 		if (valueSetPackageConfig.getVersion() == null)
 			throw new ConfigurationException(
@@ -388,11 +376,8 @@ public class ValueSetPackageManager {
 	 *             Signals that an I/O exception has occurred.
 	 */
 	public void saveValueSetPackage(ValueSetPackage valueSetPackage, File file) throws IOException {
-		DumperOptions options = new DumperOptions();
-		options.setTimeZone(Calendar.getInstance().getTimeZone());
-		Yaml yaml = new Yaml(options);
-		FileUtils.writeByteArrayToFile(file,
-				yaml.dumpAsMap(valueSetPackage).getBytes(Charsets.UTF_8));
+		FileUtils.writeByteArrayToFile(file, CustomizedYaml.getCustomizedYaml()
+				.dumpAsMap(valueSetPackage).getBytes(Charsets.UTF_8));
 	}
 
 	/**
@@ -422,10 +407,8 @@ public class ValueSetPackageManager {
 	 */
 	public void saveValueSetPackageConfig(ValueSetPackageConfig config, File file)
 			throws IOException {
-		DumperOptions options = new DumperOptions();
-		options.setTimeZone(Calendar.getInstance().getTimeZone());
-		Yaml yaml = new Yaml(options);
-		FileUtils.writeByteArrayToFile(file, yaml.dumpAsMap(config).getBytes(Charsets.UTF_8));
+		FileUtils.writeByteArrayToFile(file,
+				CustomizedYaml.getCustomizedYaml().dumpAsMap(config).getBytes(Charsets.UTF_8));
 	}
 
 	/**

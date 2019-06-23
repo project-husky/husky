@@ -24,11 +24,14 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.Date;
 
+import org.apache.commons.io.IOUtils;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
+import org.ehealth_connector.common.basetypes.OrganizationBaseType;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.FileUtil;
 import org.ehealth_connector.common.utils.Util;
@@ -49,6 +52,12 @@ import org.junit.Test;
  */
 public class ValueSetPackageManagerTest {
 
+	/**
+	 * <div class="en">The default encoding used to encode URL parameter.</div>
+	 */
+	private static final String UTF8_ENCODING = "UTF-8";
+
+	private String testValueSetPackageConfigOnTheWeb = "https://medshare.net/fileadmin/downloads/ehc/testValueSetPackageConfig.yaml";
 	private String testValueSetPackageConfigFileName = Util.getTempDirectory()
 			+ FileUtil.getPlatformSpecificPathSeparator() + "testValueSetPackageConfig.yaml";
 	private String testValueSetPackageFileName = Util.getTempDirectory()
@@ -94,6 +103,85 @@ public class ValueSetPackageManagerTest {
 		return retVal;
 	}
 
+	/**
+	 * Creates the value set package config 2. This is for debug purposes, only.
+	 * Run this method in downloadSaveLoadTestConfig and upload it to the
+	 * desired web server, in case you need to have a new version oof the file
+	 * or to have it on another server.
+	 *
+	 * @return the value set package config
+	 */
+	@SuppressWarnings("unused")
+	private ValueSetPackageConfig createValueSetPackageConfig2() {
+		ValueSetPackageConfig retVal = null;
+		String sourceUrl;
+		String baseUrl = "http://art-decor.org/decor/services/RetrieveValueSet?prefix=ch-epr-&format=json";
+		OrganizationBaseType org = new OrganizationBaseType();
+		org.setPrimaryName("eHealthConnector Unit Test");
+
+		sourceUrl = testValueSetPackageConfigOnTheWeb;
+		Date validFrom = DateUtil.date("23.06.2019 00:00:00");
+
+		Version version = Version.builder().withLabel("1.0").withValidFrom(validFrom)
+				.withPublishingAuthority(org).build();
+		IdentificatorBaseType identificator = IdentificatorBaseType.builder().withRoot("2.999")
+				.build();
+		retVal = ValueSetPackageConfig.builder()
+				.withDescription("This is a test package configuration, hosted on the web")
+				.withIdentificator(identificator).withSourceUrl(sourceUrl)
+				.withStatus(ValueSetPackageStatus.ACTIVE).withVersion(version).build();
+
+		String projectFolder = "file://"
+				+ "C:\\src\\git\\eHC_VS\\common\\ehealth_connector-common-ch\\src\\main\\java\\org\\ehealth_connector\\common\\ch\\enums";
+		SourceFormatType sourceFormatType = SourceFormatType.JSON;
+		SourceSystemType sourceSystemType = SourceSystemType.ARTDECOR_FHIR;
+
+		String className1 = "AuthorRole";
+		IdentificatorBaseType authorRoleId = IdentificatorBaseType.builder()
+				.withRoot("2.16.756.5.30.1.127.3.10.1").build();
+		Date authorRoleTimeStamp = DateUtil.parseDateyyyyMMddTHHmmss("2017-04-15T17:10:29");
+		URL authorRoleSourceUrl;
+		String authorRoleSourceUrlString = "";
+		try {
+			authorRoleSourceUrl = ValueSetManager.buildValueSetArtDecorUrl(baseUrl, authorRoleId,
+					authorRoleTimeStamp);
+			authorRoleSourceUrlString = authorRoleSourceUrl.toString();
+		} catch (MalformedURLException e) {
+			fail("createValueSetPackageConfig2: sourceUrl1String: MalformedURLException");
+		}
+
+		ValueSetConfig valueSetConfig1 = ValueSetConfig.builder().withClassName(className1)
+				.withProjectFolder(projectFolder).withSourceFormatType(sourceFormatType)
+				.withSourceSystemType(sourceSystemType).withSourceUrl(authorRoleSourceUrlString)
+				.build();
+
+		String className2 = "EprDocumentAvailabilityStatus";
+		IdentificatorBaseType documentAvailabilityStatusId = IdentificatorBaseType.builder()
+				.withRoot("2.16.756.5.30.1.127.3.10.1.2").build();
+		Date documentAvailabilityStatusTimeStamp = DateUtil
+				.parseDateyyyyMMddTHHmmss("2018-06-13T07:48:02");
+		URL documentAvailabilityStatusSourceUrl;
+		String documentAvailabilityStatusSourceUrlString = "";
+		try {
+			documentAvailabilityStatusSourceUrl = ValueSetManager.buildValueSetArtDecorUrl(baseUrl,
+					documentAvailabilityStatusId, documentAvailabilityStatusTimeStamp);
+			documentAvailabilityStatusSourceUrlString = documentAvailabilityStatusSourceUrl
+					.toString();
+		} catch (MalformedURLException e) {
+			fail("createValueSetPackageConfig2: sourceUrl1String: MalformedURLException");
+		}
+
+		ValueSetConfig valueSetConfig2 = ValueSetConfig.builder().withClassName(className2)
+				.withProjectFolder(projectFolder).withSourceFormatType(sourceFormatType)
+				.withSourceSystemType(sourceSystemType)
+				.withSourceUrl(documentAvailabilityStatusSourceUrlString).build();
+
+		retVal.addValueSetConfig(valueSetConfig1);
+		retVal.addValueSetConfig(valueSetConfig2);
+
+		return retVal;
+	}
+
 	@Test
 	public void dateMissingTest() {
 		// Timestamp in validFrom does not exist -> invalid
@@ -112,6 +200,32 @@ public class ValueSetPackageManagerTest {
 			// All ok here.
 			// This configuration must not load, because it does
 			// not contain a validFrom timestamp
+		}
+	}
+
+	@Test
+	public void downloadAndLoadPackageConfigTest() {
+
+		ValueSetPackageManager valueSetPackageManager = new ValueSetPackageManager();
+		try {
+
+			// Debug only: This is to save a config for upload to a web server:
+			// ValueSetPackageConfig valueSetPackageConfig2 =
+			// createValueSetPackageConfig2();
+			// assertNotNull(valueSetPackageConfig2);
+			// valueSetPackageManager.saveValueSetPackageConfig(valueSetPackageConfig2,
+			// testValueSetPackageConfigFileName);
+
+			// download and save a package config
+			String downloadedString = IOUtils.toString(new URL(testValueSetPackageConfigOnTheWeb),
+					UTF8_ENCODING);
+			valueSetPackageManager
+					.loadValueSetPackageConfig(IOUtils.toInputStream(downloadedString));
+
+		} catch (IOException e) {
+			fail("saveLoadTest: IOException");
+		} catch (ConfigurationException e) {
+			fail("saveLoadTest: ConfigurationException");
 		}
 	}
 
