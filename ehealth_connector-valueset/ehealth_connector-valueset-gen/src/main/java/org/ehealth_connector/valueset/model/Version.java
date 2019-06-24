@@ -193,7 +193,6 @@ public class Version {
 	 *
 	 * @return the label
 	 */
-
 	public String getLabel() {
 		return label;
 	}
@@ -203,7 +202,6 @@ public class Version {
 	 *
 	 * @return the publishing authority
 	 */
-
 	public OrganizationBaseType getPublishingAuthority() {
 		return publishingAuthority;
 	}
@@ -213,7 +211,6 @@ public class Version {
 	 *
 	 * @return the valid from
 	 */
-
 	public Date getValidFrom() {
 		return validFrom;
 	}
@@ -223,7 +220,6 @@ public class Version {
 	 *
 	 * @return the valid to
 	 */
-
 	public Date getValidTo() {
 		return validTo;
 	}
@@ -234,7 +230,6 @@ public class Version {
 	 * @param label
 	 *            the new label
 	 */
-
 	public void setLabel(String label) {
 		this.label = label;
 	}
@@ -245,7 +240,6 @@ public class Version {
 	 * @param publishingAuthority
 	 *            the new publishing authority
 	 */
-
 	public void setPublishingAuthority(OrganizationBaseType publishingAuthority) {
 		this.publishingAuthority = publishingAuthority;
 	}
@@ -256,7 +250,6 @@ public class Version {
 	 * @param validFrom
 	 *            the new valid from
 	 */
-
 	public void setValidFrom(Date validFrom) {
 		this.validFrom = validFrom;
 	}
@@ -267,7 +260,6 @@ public class Version {
 	 * @param validTo
 	 *            the new valid to
 	 */
-
 	public void setValidTo(Date validTo) {
 		this.validTo = validTo;
 	}

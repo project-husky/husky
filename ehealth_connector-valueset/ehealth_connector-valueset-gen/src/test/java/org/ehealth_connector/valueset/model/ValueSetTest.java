@@ -45,7 +45,7 @@ public class ValueSetTest {
 		IdentificatorBaseType identificator = IdentificatorBaseType.builder().withRoot("2.999")
 				.withExtension("1").build();
 		String name = "myValueSetName";
-		ValueSetStatus status = ValueSetStatus.ACTIVE;
+		ValueSetStatus status = ValueSetStatus.FINAL;
 		Version version = Version.builder().withLabel("1.0")
 				.withValidFrom(DateUtil.date("03.06.2019 00:00:00")).build();
 

@@ -17,7 +17,6 @@
 package org.ehealth_connector.valueset.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.annotation.Generated;
 
@@ -427,22 +426,22 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * List mapping identificators.
+	 * ArrayList mapping identificators.
 	 *
 	 * @return the list
 	 */
-	public List<IdentificatorBaseType> listMappingIdentificators() {
+	public ArrayList<IdentificatorBaseType> listMappingIdentificators() {
 		if (this.mappingIdentificatorList == null)
 			this.mappingIdentificatorList = new ArrayList<IdentificatorBaseType>();
 		return mappingIdentificatorList;
 	}
 
 	/**
-	 * List mapping names.
+	 * ArrayList mapping names.
 	 *
 	 * @return the list
 	 */
-	public List<String> listMappingNames() {
+	public ArrayList<String> listMappingNames() {
 		if (this.mappingNameList == null) {
 			this.mappingNameList = new ArrayList<String>();
 		}
@@ -450,11 +449,11 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * List value sets.
+	 * ArrayList value sets.
 	 *
 	 * @return the list
 	 */
-	public List<ValueSet> listValueSets() {
+	public ArrayList<ValueSet> listValueSets() {
 		if (this.valueSetList == null) {
 			this.valueSetList = new ArrayList<ValueSet>();
 		}

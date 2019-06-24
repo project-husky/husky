@@ -17,14 +17,12 @@
 package org.ehealth_connector.valueset.model;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.annotation.Generated;
 
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.valueset.enums.ValueSetEntryType;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class ValueSetEntry.
  */
@@ -56,6 +54,9 @@ public class ValueSetEntry {
 
 		/** The value set entry type. */
 		private ValueSetEntryType valueSetEntryType;
+
+		/** The designation list. */
+		private ArrayList<Designation> designationList;
 
 		/**
 		 * Instantiates a new builder.
@@ -105,6 +106,18 @@ public class ValueSetEntry {
 		 */
 		public Builder withDefaultMappingName(String defaultMappingName) {
 			this.defaultMappingName = defaultMappingName;
+			return this;
+		}
+
+		/**
+		 * With designation list.
+		 *
+		 * @param designationList
+		 *            the designation list
+		 * @return the builder
+		 */
+		public Builder withDesignationList(ArrayList<Designation> designationList) {
+			this.designationList = designationList;
 			return this;
 		}
 
@@ -188,6 +201,9 @@ public class ValueSetEntry {
 	/** The value set entry type. */
 	private ValueSetEntryType valueSetEntryType;
 
+	/** The designation list. */
+	private ArrayList<Designation> designationList;
+
 	/**
 	 * Instantiates a new value set entry. Default constructor.
 	 */
@@ -209,6 +225,7 @@ public class ValueSetEntry {
 		this.defaultMappingName = builder.defaultMappingName;
 		this.level = builder.level;
 		this.valueSetEntryType = builder.valueSetEntryType;
+		this.designationList = builder.designationList;
 	}
 
 	/**
@@ -222,6 +239,19 @@ public class ValueSetEntry {
 			this.childList = new ArrayList<ValueSetEntry>();
 		}
 		this.childList.add(value);
+	}
+
+	/**
+	 * Adds the designation.
+	 *
+	 * @param value
+	 *            the value
+	 */
+	public void addDesignation(Designation value) {
+		if (this.designationList == null) {
+			this.designationList = new ArrayList<Designation>();
+		}
+		this.designationList.add(value);
 	}
 
 	/**
@@ -255,6 +285,13 @@ public class ValueSetEntry {
 	 */
 	public void clearChildList() {
 		this.childList = new ArrayList<ValueSetEntry>();
+	}
+
+	/**
+	 * Clear designation list.
+	 */
+	public void clearDesignationList() {
+		this.designationList = new ArrayList<Designation>();
 	}
 
 	/**
@@ -353,6 +390,15 @@ public class ValueSetEntry {
 	}
 
 	/**
+	 * Gets the designation list.
+	 *
+	 * @return the designation list
+	 */
+	public ArrayList<Designation> getDesignationList() {
+		return designationList;
+	}
+
+	/**
 	 * Gets the level.
 	 *
 	 * @return the level
@@ -389,11 +435,11 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * List children.
+	 * ArrayList children.
 	 *
 	 * @return the list
 	 */
-	public List<ValueSetEntry> listChilds() {
+	public ArrayList<ValueSetEntry> listChilds() {
 		if (this.childList == null) {
 			this.childList = new ArrayList<ValueSetEntry>();
 		}
@@ -401,11 +447,23 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * List mapping codes.
+	 * ArrayList designations.
 	 *
 	 * @return the list
 	 */
-	public List<CodeBaseType> listMappingCodes() {
+	public ArrayList<Designation> listDesignations() {
+		if (this.designationList == null) {
+			this.designationList = new ArrayList<Designation>();
+		}
+		return this.designationList;
+	}
+
+	/**
+	 * ArrayList mapping codes.
+	 *
+	 * @return the list
+	 */
+	public ArrayList<CodeBaseType> listMappingCodes() {
 		if (this.mappingCodeList == null) {
 			this.mappingCodeList = new ArrayList<CodeBaseType>();
 		}
@@ -413,11 +471,11 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * List mapping names.
+	 * ArrayList mapping names.
 	 *
 	 * @return the list
 	 */
-	public List<String> listMappingNames() {
+	public ArrayList<String> listMappingNames() {
 		if (this.mappingNameList == null) {
 			this.mappingNameList = new ArrayList<String>();
 		}
@@ -452,6 +510,16 @@ public class ValueSetEntry {
 	 */
 	public void setDefaultMappingName(String defaultMappingName) {
 		this.defaultMappingName = defaultMappingName;
+	}
+
+	/**
+	 * Sets the designation list.
+	 *
+	 * @param designationList
+	 *            the new designation list
+	 */
+	public void setDesignationList(ArrayList<Designation> designationList) {
+		this.designationList = designationList;
 	}
 
 	/**

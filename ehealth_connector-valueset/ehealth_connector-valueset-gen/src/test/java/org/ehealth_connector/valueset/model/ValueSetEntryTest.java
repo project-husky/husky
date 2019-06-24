@@ -19,6 +19,8 @@ package org.ehealth_connector.valueset.model;
 import static org.junit.Assert.assertEquals;
 
 import org.ehealth_connector.common.basetypes.CodeBaseType;
+import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.valueset.enums.DesignationType;
 import org.ehealth_connector.valueset.enums.ValueSetEntryType;
 import org.junit.Test;
 
@@ -77,8 +79,30 @@ public class ValueSetEntryTest {
 		assertEquals(defaultMappingName3,
 				valueSetEntry1.listChilds().get(1).getDefaultMappingName());
 		assertEquals(level3, valueSetEntry1.listChilds().get(1).getLevel());
-		assertEquals(valueSetEntryType3,
-				valueSetEntry1.listChilds().get(1).getValueSetEntryType());
+		assertEquals(valueSetEntryType3, valueSetEntry1.listChilds().get(1).getValueSetEntryType());
+
+		// Designation tests
+
+		LanguageCode languageCode1 = LanguageCode.GERMAN;
+		DesignationType type1 = DesignationType.FULLY_SPECIFIED_NAME;
+		String displayName1 = "displayName1";
+
+		Designation designation1 = Designation.builder().withDisplayName(displayName1)
+				.withLanguageCode(languageCode1).withType(type1).build();
+
+		LanguageCode languageCode2 = LanguageCode.FRENCH;
+		DesignationType type2 = DesignationType.PREFERRED;
+		String displayName2 = "displayName2";
+
+		Designation designation2 = Designation.builder().withDisplayName(displayName2)
+				.withLanguageCode(languageCode2).withType(type2).build();
+
+		valueSetEntry1.addDesignation(designation1);
+		valueSetEntry1.addDesignation(designation2);
+
+		assertEquals(languageCode2, valueSetEntry1.listDesignations().get(1).getLanguageCode());
+		assertEquals(type2, valueSetEntry1.listDesignations().get(1).getType());
+		assertEquals(displayName2, valueSetEntry1.listDesignations().get(1).getDisplayName());
 
 		// ValueSetEntry mapping codes tests
 		CodeBaseType mappingCode1 = CodeBaseType.builder().withCode("mappingcode1")

@@ -65,7 +65,7 @@ public class ValueSetPackageTest {
 		IdentificatorBaseType vsidentificator1 = IdentificatorBaseType.builder().withRoot("2.999")
 				.withExtension("1").build();
 		String vsname1 = "myValueSetName1";
-		ValueSetStatus vsstatus1 = ValueSetStatus.ACTIVE;
+		ValueSetStatus vsstatus1 = ValueSetStatus.FINAL;
 		Version vsversion1 = Version.builder().withLabel("1.0")
 				.withValidFrom(DateUtil.date("03.06.2019 00:00:00")).build();
 

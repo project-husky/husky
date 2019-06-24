@@ -22,23 +22,32 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.ehealth_connector.valueset.config.CustomizedYaml;
+import org.ehealth_connector.valueset.config.ValueSetConfig;
 import org.ehealth_connector.valueset.config.ValueSetPackageConfig;
 import org.ehealth_connector.valueset.enums.ValueSetPackageStatus;
 import org.ehealth_connector.valueset.exceptions.ConfigurationException;
+import org.ehealth_connector.valueset.model.ValueSet;
 import org.ehealth_connector.valueset.model.ValueSetPackage;
 
 /**
  * The Class ValueSetPackageManager.
  */
 public class ValueSetPackageManager {
+
+	/**
+	 * <div class="en">The default encoding used to encode URL parameter.</div>
+	 */
+	private static final String UTF8_ENCODING = "UTF-8";
 
 	/** The value set package config list. */
 	private ArrayList<ValueSetPackageConfig> valueSetPackageConfigList;
@@ -64,29 +73,60 @@ public class ValueSetPackageManager {
 		this.valueSetPackageConfigList = new ArrayList<ValueSetPackageConfig>();
 	}
 
-	/**
-	 * Download and save value set package.
-	 *
-	 * @param valueSetPackageConfig
-	 *            the value set package config
-	 * @param fileName
-	 *            the file name
-	 */
-	public void downloadAndSaveValueSetPackage(ValueSetPackageConfig valueSetPackageConfig,
-			String fileName) {
-		// TODO NYI
+	public ValueSetPackage downloadValueSetPackage(ValueSetPackageConfig valueSetPackageConfig,
+			String pathName) throws MalformedURLException, IOException {
+		ValueSetPackage retVal = ValueSetPackage.builder()
+				.withDescription(valueSetPackageConfig.getDescription())
+				.withIdentificator(valueSetPackageConfig.getIdentificator())
+				.withSourceUrl(valueSetPackageConfig.getSourceUrl())
+				.withStatus(valueSetPackageConfig.getStatus())
+				.withVersion(valueSetPackageConfig.getVersion()).build();
+
+		ValueSetManager valueSetManager = new ValueSetManager();
+
+		for (ValueSetConfig valueSetConfig : valueSetPackageConfig.listValueSetConfig()) {
+			ValueSet valueSet = valueSetManager.downloadValueSet(valueSetConfig);
+			retVal.addValueSet(valueSet);
+		}
+		return retVal;
 	}
 
 	/**
-	 * Download value set package.
+	 * Download value set package config.
 	 *
-	 * @param valueSetPackageConfig
-	 *            the value set package config
-	 * @return the output stream
+	 * @param sourceUrl
+	 *            the source url
+	 * @return the value set package config
+	 * @throws MalformedURLException
+	 *             the malformed URL exception
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws ConfigurationException
+	 *             the configuration exception
 	 */
-	public OutputStream downloadValueSetPackage(ValueSetPackageConfig valueSetPackageConfig) {
-		// TODO NYI
-		return null;
+	public ValueSetPackageConfig downloadValueSetPackageConfig(String sourceUrl)
+			throws MalformedURLException, IOException, ConfigurationException {
+		return downloadValueSetPackageConfig(new URL(sourceUrl));
+	}
+
+	/**
+	 * Download value set package config.
+	 *
+	 * @param sourceUrl
+	 *            the source url
+	 * @return the value set package config
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws ConfigurationException
+	 *             the configuration exception
+	 */
+	public ValueSetPackageConfig downloadValueSetPackageConfig(URL sourceUrl)
+			throws IOException, ConfigurationException {
+		ValueSetPackageConfig retVal = null;
+		// download a package config
+		String downloadedString = IOUtils.toString(sourceUrl, UTF8_ENCODING);
+		retVal = loadValueSetPackageConfig(IOUtils.toInputStream(downloadedString));
+		return retVal;
 	}
 
 	/**

@@ -21,6 +21,8 @@ import static org.junit.Assert.fail;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Date;
 
 import org.ehealth_connector.common.basetypes.CodeBaseType;
@@ -50,6 +52,45 @@ public class ValueSetManagerTest {
 	/** The test value set yaml file name. */
 	private String testValueSetYamlFileName = Util.getTempDirectory()
 			+ FileUtil.getPlatformSpecificPathSeparator() + "testValueSet.yaml";
+
+	@Test
+	public void downloadValueSetJsonTest() {
+		String baseUrl = "http://art-decor.org/decor/services/RetrieveValueSet?prefix=ch-epr-&format=json";
+
+		String projectFolder = "file://"
+				+ "C:\\src\\git\\eHC_VS\\common\\ehealth_connector-common-ch\\src\\main\\java\\org\\ehealth_connector\\common\\ch\\enums";
+		SourceFormatType sourceFormatType = SourceFormatType.JSON;
+		SourceSystemType sourceSystemType = SourceSystemType.ARTDECOR_FHIR;
+
+		String className1 = "AuthorRole";
+		IdentificatorBaseType authorRoleId = IdentificatorBaseType.builder()
+				.withRoot("2.16.756.5.30.1.127.3.10.1.1.3").build();
+		Date authorRoleTimeStamp = DateUtil.parseDateyyyyMMddTHHmmss("2018-06-13T07:40:11");
+		URL authorRoleSourceUrl;
+		String authorRoleSourceUrlString = "";
+		try {
+			authorRoleSourceUrl = ValueSetManager.buildValueSetArtDecorUrl(baseUrl, authorRoleId,
+					authorRoleTimeStamp);
+			authorRoleSourceUrlString = authorRoleSourceUrl.toString();
+		} catch (MalformedURLException e) {
+			fail("createValueSetPackageConfig2: sourceUrl1String: MalformedURLException");
+		}
+
+		ValueSetConfig valueSetConfig = ValueSetConfig.builder().withClassName(className1)
+				.withProjectFolder(projectFolder).withSourceFormatType(sourceFormatType)
+				.withSourceSystemType(sourceSystemType).withSourceUrl(authorRoleSourceUrlString)
+				.build();
+
+		ValueSetManager valueSetManager = new ValueSetManager();
+		try {
+			ValueSet valueSet = valueSetManager.downloadValueSet(valueSetConfig);
+
+			// fail("please implement tests :-)");
+		} catch (IOException e) {
+			fail("downloadValueSetJsonTest :IOException");
+		}
+
+	}
 
 	/**
 	 * Save load value set config test.
@@ -91,11 +132,6 @@ public class ValueSetManagerTest {
 
 	}
 
-	@Test
-	public void saveLoadValueSetJsonTest() {
-		// TODO
-	}
-
 	/**
 	 * Save load value set yaml test.
 	 */
@@ -110,7 +146,7 @@ public class ValueSetManagerTest {
 		IdentificatorBaseType identificator = IdentificatorBaseType.builder().withRoot("2.999.1")
 				.withExtension("1").build();
 		String name = "myValueSetName";
-		ValueSetStatus status = ValueSetStatus.ACTIVE;
+		ValueSetStatus status = ValueSetStatus.FINAL;
 		Version version = Version.builder().withLabel("1.0")
 				.withValidFrom(DateUtil.date("22.06.2019 00:00:00")).build();
 

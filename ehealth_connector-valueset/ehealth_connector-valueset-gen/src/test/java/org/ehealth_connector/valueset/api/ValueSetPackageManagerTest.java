@@ -29,7 +29,6 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.util.Date;
 
-import org.apache.commons.io.IOUtils;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
 import org.ehealth_connector.common.utils.DateUtil;
@@ -51,11 +50,6 @@ import org.junit.Test;
  * The Test Class for ValueSetPackageManager.
  */
 public class ValueSetPackageManagerTest {
-
-	/**
-	 * <div class="en">The default encoding used to encode URL parameter.</div>
-	 */
-	private static final String UTF8_ENCODING = "UTF-8";
 
 	private String testValueSetPackageConfigOnTheWeb = "https://medshare.net/fileadmin/downloads/ehc/testValueSetPackageConfig.yaml";
 	private String testValueSetPackageConfigFileName = Util.getTempDirectory()
@@ -138,8 +132,8 @@ public class ValueSetPackageManagerTest {
 
 		String className1 = "AuthorRole";
 		IdentificatorBaseType authorRoleId = IdentificatorBaseType.builder()
-				.withRoot("2.16.756.5.30.1.127.3.10.1").build();
-		Date authorRoleTimeStamp = DateUtil.parseDateyyyyMMddTHHmmss("2017-04-15T17:10:29");
+				.withRoot("2.16.756.5.30.1.127.3.10.1.1.3").build();
+		Date authorRoleTimeStamp = DateUtil.parseDateyyyyMMddTHHmmss("2018-06-13T07:40:11");
 		URL authorRoleSourceUrl;
 		String authorRoleSourceUrlString = "";
 		try {
@@ -204,7 +198,7 @@ public class ValueSetPackageManagerTest {
 	}
 
 	@Test
-	public void downloadAndLoadPackageConfigTest() {
+	public void downloadSaveLoadPackageConfigTest() {
 
 		ValueSetPackageManager valueSetPackageManager = new ValueSetPackageManager();
 		try {
@@ -217,10 +211,22 @@ public class ValueSetPackageManagerTest {
 			// testValueSetPackageConfigFileName);
 
 			// download and save a package config
-			String downloadedString = IOUtils.toString(new URL(testValueSetPackageConfigOnTheWeb),
-					UTF8_ENCODING);
-			valueSetPackageManager
-					.loadValueSetPackageConfig(IOUtils.toInputStream(downloadedString));
+			ValueSetPackageConfig valueSetPackageConfig1 = valueSetPackageManager
+					.downloadValueSetPackageConfig(testValueSetPackageConfigOnTheWeb);
+
+			assertEquals(testValueSetPackageConfigOnTheWeb, valueSetPackageConfig1.getSourceUrl());
+
+			valueSetPackageManager.saveValueSetPackageConfig(valueSetPackageConfig1,
+					testValueSetPackageConfigFileName);
+			ValueSetPackageConfig valueSetPackageConfig2 = valueSetPackageManager
+					.loadValueSetPackageConfig(testValueSetPackageConfigFileName);
+
+			assertEquals(valueSetPackageConfig1.getDescription(),
+					valueSetPackageConfig2.getDescription());
+			assertEquals(valueSetPackageConfig1.getVersion().getLabel(),
+					valueSetPackageConfig2.getVersion().getLabel());
+			assertEquals(valueSetPackageConfig1.getValueSetConfigList().size(),
+					valueSetPackageConfig2.getValueSetConfigList().size());
 
 		} catch (IOException e) {
 			fail("saveLoadTest: IOException");
@@ -376,7 +382,7 @@ public class ValueSetPackageManagerTest {
 		IdentificatorBaseType identificator1 = IdentificatorBaseType.builder().withRoot("2.999.1")
 				.withExtension("1").build();
 		String name1 = "myValueSetName1";
-		ValueSetStatus status1 = ValueSetStatus.ACTIVE;
+		ValueSetStatus status1 = ValueSetStatus.FINAL;
 		Version version1 = Version.builder().withLabel("1.1")
 				.withValidFrom(DateUtil.date("01.06.2019 00:00:00")).build();
 
@@ -391,7 +397,7 @@ public class ValueSetPackageManagerTest {
 		IdentificatorBaseType identificator2 = IdentificatorBaseType.builder().withRoot("2.999.2")
 				.withExtension("2").build();
 		String name2 = "myValueSetName2";
-		ValueSetStatus status2 = ValueSetStatus.ACTIVE;
+		ValueSetStatus status2 = ValueSetStatus.FINAL;
 		Version version2 = Version.builder().withLabel("1.2")
 				.withValidFrom(DateUtil.date("02.06.2019 00:00:00")).build();
 
