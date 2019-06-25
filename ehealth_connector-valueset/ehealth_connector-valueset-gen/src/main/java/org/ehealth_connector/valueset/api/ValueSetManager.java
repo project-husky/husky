@@ -461,8 +461,8 @@ public class ValueSetManager {
 						String subKey = subEntry.getKey();
 						if ("concept".contentEquals(subKey) && (subEntry.getValue() != null)) {
 							JSONArray contents = (JSONArray) subEntry.getValue();
-							ValueSetEntry valueSetEntry = new ValueSetEntry();
 							for (Object object2 : contents) {
+								ValueSetEntry valueSetEntry = new ValueSetEntry();
 								@SuppressWarnings("unchecked")
 								Map<String, Object> subMap2 = (Map<String, Object>) object2;
 								String entryCode = null;
@@ -490,10 +490,10 @@ public class ValueSetManager {
 									if ("designation".contentEquals(subKey2)
 											&& (subEntry2.getValue() != null)) {
 										JSONArray designations = (JSONArray) subEntry2.getValue();
-										Designation designation = new Designation();
 										for (Object object3 : designations) {
 											@SuppressWarnings("unchecked")
 											Map<String, Object> subMap3 = (Map<String, Object>) object3;
+											Designation designation = new Designation();
 											for (Entry<String, Object> subEntry3 : subMap3
 													.entrySet()) {
 												String subKey3 = subEntry3.getKey();
@@ -533,7 +533,7 @@ public class ValueSetManager {
 													designation.setDisplayName(
 															subEntry3.getValue().toString());
 											}
-											// valueSetEntry.addDesignation(designation);
+											valueSetEntry.addDesignation(designation);
 										}
 									}
 								}
