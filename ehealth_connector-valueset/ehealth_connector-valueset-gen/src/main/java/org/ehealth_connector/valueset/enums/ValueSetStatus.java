@@ -84,4 +84,13 @@ public enum ValueSetStatus {
 	 */
 	CANCELLED;
 
+	public static ValueSetStatus getCodeIheSvs(String iheSvsStatus) {
+		ValueSetStatus retVal = null;
+		if ("active".equals(iheSvsStatus.toLowerCase()))
+			retVal = FINAL;
+		if ("inactive".equals(iheSvsStatus.toLowerCase()))
+			retVal = DEPRECATED;
+		return retVal;
+	}
+
 }

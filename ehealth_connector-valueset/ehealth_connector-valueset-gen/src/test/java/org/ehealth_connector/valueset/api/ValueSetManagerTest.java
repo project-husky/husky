@@ -25,6 +25,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Date;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.apache.commons.io.Charsets;
+import org.apache.commons.io.IOUtils;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.utils.DateUtil;
@@ -39,6 +43,7 @@ import org.ehealth_connector.valueset.model.ValueSet;
 import org.ehealth_connector.valueset.model.ValueSetEntry;
 import org.ehealth_connector.valueset.model.Version;
 import org.junit.Test;
+import org.xml.sax.SAXException;
 
 /**
  * The Test Class for ValueSetManager.
@@ -54,40 +59,107 @@ public class ValueSetManagerTest {
 			+ FileUtil.getPlatformSpecificPathSeparator() + "testValueSet.yaml";
 
 	@Test
-	public void downloadValueSetJsonTest() {
-		String baseUrl = "http://art-decor.org/decor/services/RetrieveValueSet?prefix=ch-epr-&format=json";
+	public void downloadRawTest() {
+		String testUrl = "http://art-decor.org/decor/services/RetrieveValueSet?prefix=ch-epr-&format=json&id=2.16.756.5.30.1.127.3.10.1";
+		try {
+			String downloadedString = IOUtils.toString(new URL(testUrl),
+					ValueSetManager.UTF8_ENCODING);
+			ValueSetManager valueSetManager = new ValueSetManager();
+			ValueSetConfig valueSetConfig = ValueSetConfig.builder()
+					.withSourceSystemType(SourceSystemType.ARTDECOR_FHIR).withSourceUrl(testUrl)
+					.build();
+			byte[] downloadedByteArray = valueSetManager.downloadValueSetRaw(valueSetConfig);
+			String byteArrayString = new String(downloadedByteArray, Charsets.UTF_8);
+			assertEquals(downloadedString, byteArrayString);
+
+		} catch (MalformedURLException e) {
+			fail("downloadRawTest: MalformedURLException");
+		} catch (IOException e) {
+			fail("downloadRawTest: IOException");
+		}
+	}
+
+	@Test
+	public void downloadValueSetTest() {
+		String baseUrlJson = "http://art-decor.org/decor/services/RetrieveValueSet?prefix=ch-epr-&format=json";
+		String baseUrlIheSvs = "http://art-decor.org/decor/services/RetrieveValueSet?prefix=ch-epr-&format=svs";
+		String baseUrlXml = "http://art-decor.org/decor/services/RetrieveValueSet?prefix=ch-epr-&format=xml";
 
 		String projectFolder = "file://"
 				+ "C:\\src\\git\\eHC_VS\\common\\ehealth_connector-common-ch\\src\\main\\java\\org\\ehealth_connector\\common\\ch\\enums";
-		SourceFormatType sourceFormatType = SourceFormatType.JSON;
+
 		SourceSystemType sourceSystemType = SourceSystemType.ARTDECOR_FHIR;
 
 		String className1 = "AuthorRole";
 		IdentificatorBaseType authorRoleId = IdentificatorBaseType.builder()
 				.withRoot("2.16.756.5.30.1.127.3.10.1.1.3").build();
 		Date authorRoleTimeStamp = DateUtil.parseDateyyyyMMddTHHmmss("2018-06-13T07:40:11");
-		URL authorRoleSourceUrl;
-		String authorRoleSourceUrlString = "";
+		URL authorRoleSourceUrlJson;
+		String authorRoleSourceUrlJsonString = "";
 		try {
-			authorRoleSourceUrl = ValueSetManager.buildValueSetArtDecorUrl(baseUrl, authorRoleId,
-					authorRoleTimeStamp);
-			authorRoleSourceUrlString = authorRoleSourceUrl.toString();
+			authorRoleSourceUrlJson = ValueSetManager.buildValueSetArtDecorUrl(baseUrlJson,
+					authorRoleId, authorRoleTimeStamp);
+			authorRoleSourceUrlJsonString = authorRoleSourceUrlJson.toString();
 		} catch (MalformedURLException e) {
-			fail("createValueSetPackageConfig2: sourceUrl1String: MalformedURLException");
+			fail("createValueSetPackageConfig2: authorRoleSourceUrlJson: MalformedURLException");
 		}
 
-		ValueSetConfig valueSetConfig = ValueSetConfig.builder().withClassName(className1)
-				.withProjectFolder(projectFolder).withSourceFormatType(sourceFormatType)
-				.withSourceSystemType(sourceSystemType).withSourceUrl(authorRoleSourceUrlString)
+		ValueSetConfig valueSetConfigJson = ValueSetConfig.builder().withClassName(className1)
+				.withProjectFolder(projectFolder).withSourceFormatType(SourceFormatType.JSON)
+				.withSourceSystemType(sourceSystemType).withSourceUrl(authorRoleSourceUrlJsonString)
+				.build();
+
+		URL authorRoleSourceUrlIheSvs;
+		String authorRoleSourceUrlIheSvsString = "";
+		try {
+			authorRoleSourceUrlIheSvs = ValueSetManager.buildValueSetArtDecorUrl(baseUrlIheSvs,
+					authorRoleId, authorRoleTimeStamp);
+			authorRoleSourceUrlIheSvsString = authorRoleSourceUrlIheSvs.toString();
+		} catch (MalformedURLException e) {
+			fail("createValueSetPackageConfig2: authorRoleSourceUrlIheSvs: MalformedURLException");
+		}
+
+		// System.out.println("authorRoleSourceUrlIheSvsString = " +
+		// authorRoleSourceUrlIheSvsString);
+
+		ValueSetConfig valueSetConfigIheSvs = ValueSetConfig.builder().withClassName(className1)
+				.withProjectFolder(projectFolder).withSourceFormatType(SourceFormatType.IHESVS)
+				.withSourceSystemType(sourceSystemType)
+				.withSourceUrl(authorRoleSourceUrlIheSvsString).build();
+
+		URL authorRoleSourceUrlXml;
+		String authorRoleSourceUrlXmlString = "";
+		try {
+			authorRoleSourceUrlXml = ValueSetManager.buildValueSetArtDecorUrl(baseUrlXml,
+					authorRoleId, authorRoleTimeStamp);
+			authorRoleSourceUrlXmlString = authorRoleSourceUrlXml.toString();
+		} catch (MalformedURLException e) {
+			fail("createValueSetPackageConfig2: authorRoleSourceUrlXml: MalformedURLException");
+		}
+
+		// System.out.println("authorRoleSourceUrlXmlString = " +
+		// authorRoleSourceUrlXmlString);
+
+		ValueSetConfig valueSetConfigXml = ValueSetConfig.builder().withClassName(className1)
+				.withProjectFolder(projectFolder).withSourceFormatType(SourceFormatType.XML)
+				.withSourceSystemType(sourceSystemType).withSourceUrl(authorRoleSourceUrlXmlString)
 				.build();
 
 		ValueSetManager valueSetManager = new ValueSetManager();
 		try {
-			ValueSet valueSet = valueSetManager.downloadValueSet(valueSetConfig);
+			ValueSet valueSetJson = valueSetManager.downloadValueSet(valueSetConfigJson);
+			ValueSet valueSetIheSvs = valueSetManager.downloadValueSet(valueSetConfigIheSvs);
+			ValueSet valueSetXml = valueSetManager.downloadValueSet(valueSetConfigXml);
 
-			// fail("please implement tests :-)");
+			// assertTrue(valueSetJson.equals(valueSetIheSvs));
+			// assertTrue(valueSetJson.equals(valueSetXml));
+
 		} catch (IOException e) {
-			fail("downloadValueSetJsonTest :IOException");
+			fail("downloadValueSetJsonTest: IOException");
+		} catch (ParserConfigurationException e) {
+			fail("downloadValueSetJsonTest: ParserConfigurationException");
+		} catch (SAXException e) {
+			fail("downloadValueSetJsonTest: SAXException");
 		}
 
 	}

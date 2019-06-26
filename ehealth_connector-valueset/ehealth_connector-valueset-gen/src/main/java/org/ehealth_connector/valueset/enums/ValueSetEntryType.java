@@ -56,6 +56,24 @@ public enum ValueSetEntryType {
 	//@formatter:on
 
 	/**
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 *
+	 * @param code
+	 *            <br>
+	 *            <div class="de"> code</div>
+	 * @return <div class="en">the enum</div>
+	 */
+	public static ValueSetEntryType getEnum(String code) {
+		for (final ValueSetEntryType x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return x;
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
 	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
 	 * dieser Klasse) eindeutiger Code</div>.

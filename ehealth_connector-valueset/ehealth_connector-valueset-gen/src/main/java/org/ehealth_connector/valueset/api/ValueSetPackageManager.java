@@ -28,6 +28,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
@@ -38,6 +40,7 @@ import org.ehealth_connector.valueset.enums.ValueSetPackageStatus;
 import org.ehealth_connector.valueset.exceptions.ConfigurationException;
 import org.ehealth_connector.valueset.model.ValueSet;
 import org.ehealth_connector.valueset.model.ValueSetPackage;
+import org.xml.sax.SAXException;
 
 /**
  * The Class ValueSetPackageManager.
@@ -74,7 +77,8 @@ public class ValueSetPackageManager {
 	}
 
 	public ValueSetPackage downloadValueSetPackage(ValueSetPackageConfig valueSetPackageConfig,
-			String pathName) throws MalformedURLException, IOException {
+			String pathName)
+			throws MalformedURLException, IOException, ParserConfigurationException, SAXException {
 		ValueSetPackage retVal = ValueSetPackage.builder()
 				.withDescription(valueSetPackageConfig.getDescription())
 				.withIdentificator(valueSetPackageConfig.getIdentificator())

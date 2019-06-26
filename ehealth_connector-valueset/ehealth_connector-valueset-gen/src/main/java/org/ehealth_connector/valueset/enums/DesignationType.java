@@ -32,4 +32,26 @@ public enum DesignationType {
 
 	FULLY_SPECIFIED_NAME;
 
+	/**
+	 * <div class="en">Gets the Enum with a given code</div>
+	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 *
+	 * @param code
+	 *            <br>
+	 *            <div class="de"> code</div>
+	 * @return <div class="en">the enum</div>
+	 */
+	public static DesignationType getEnum(String code) {
+		DesignationType retVal = null;
+		if ("abbreviation".equals(code))
+			retVal = ABBREVIATION;
+		if ("preferred".equals(code))
+			retVal = PREFERRED;
+		if ("synonym".equals(code))
+			retVal = SYNONYM;
+		if ("fsn".equals(code))
+			retVal = FULLY_SPECIFIED_NAME;
+		return retVal;
+	}
+
 }
