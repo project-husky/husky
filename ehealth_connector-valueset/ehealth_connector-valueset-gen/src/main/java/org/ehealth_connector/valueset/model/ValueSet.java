@@ -501,8 +501,12 @@ public class ValueSet {
 	 * @return the value set entry by mapping code
 	 */
 	public ValueSetEntry getValueSetEntryByMappingCode(CodeBaseType value) {
-		// TODO
-		return null;
+		ValueSetEntry retVal = null;
+		for (ValueSetEntry valueSetEntry : listValueSetEntries()) {
+			if (valueSetEntry.listMappingCodes().contains(value))
+				retVal = valueSetEntry;
+		}
+		return retVal;
 	}
 
 	/**
@@ -513,8 +517,12 @@ public class ValueSet {
 	 * @return the value set entry by mapping name
 	 */
 	public ValueSetEntry getValueSetEntryByMappingName(String value) {
-		// TODO
-		return null;
+		ValueSetEntry retVal = null;
+		for (ValueSetEntry valueSetEntry : listValueSetEntries()) {
+			if (valueSetEntry.listMappingNames().contains(value))
+				retVal = valueSetEntry;
+		}
+		return retVal;
 	}
 
 	/**

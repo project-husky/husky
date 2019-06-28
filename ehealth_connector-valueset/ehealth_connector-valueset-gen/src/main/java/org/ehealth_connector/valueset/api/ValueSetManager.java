@@ -237,6 +237,31 @@ public class ValueSetManager {
 		return retVal;
 	}
 
+	public ValueSet loadValueSet(ValueSetConfig valueSetConfig, String cachePath) {
+		ValueSet retVal = null;
+		if (valueSetConfig != null) {
+			switch (valueSetConfig.getSourceSystemType()) {
+			// case ARTDECOR_FHIR:
+			// switch (valueSetConfig.getSourceFormatType()) {
+			// case JSON:
+			// retVal = loadValueSetJson(cachePath xxx);
+			// break;
+			// case XML:
+			// retVal =
+			// loadValueSetXml(IOUtils.toInputStream(downloadedString));
+			// break;
+			// case IHESVS:
+			// retVal =
+			// loadValueSetIheSvs(IOUtils.toInputStream(downloadedString));
+			// break;
+			// }
+			// break;
+			// }
+			}
+		}
+		return retVal;
+	}
+
 	/**
 	 * Load value set config.
 	 *

@@ -268,7 +268,7 @@ public class ValueSetPackageManager {
 	 *
 	 * @return the list
 	 */
-	public List<ValueSetPackageConfig> listValueSetPackageConfig() {
+	public List<ValueSetPackageConfig> listValueSetPackageConfigs() {
 		if (this.valueSetPackageConfigList == null) {
 			this.valueSetPackageConfigList = new ArrayList<ValueSetPackageConfig>();
 		}

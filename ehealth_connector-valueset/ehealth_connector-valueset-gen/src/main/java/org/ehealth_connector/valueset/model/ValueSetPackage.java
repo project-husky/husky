@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import javax.annotation.Generated;
 
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
+import org.ehealth_connector.valueset.config.ValueSetPackageConfig;
 import org.ehealth_connector.valueset.enums.ValueSetPackageStatus;
 
 /**
@@ -230,6 +231,23 @@ public class ValueSetPackage {
 	}
 
 	/**
+	 * Instantiates a new value set package from its config.
+	 */
+	public ValueSetPackage(ValueSetPackageConfig valueSetPackageConfig) {
+
+		// initialize the ValueSet List, but it can't actually be filled from
+		// the config
+		if (valueSetPackageConfig.getValueSetConfigList().size() > 0)
+			this.valueSetList = new ArrayList<ValueSet>();
+
+		this.description = valueSetPackageConfig.getDescription();
+		this.identificator = valueSetPackageConfig.getIdentificator();
+		this.sourceUrl = valueSetPackageConfig.getSourceUrl();
+		this.status = valueSetPackageConfig.getStatus();
+		this.version = valueSetPackageConfig.getVersion();
+	}
+
+	/**
 	 * Adds the mapping identificator.
 	 *
 	 * @param value
@@ -414,6 +432,38 @@ public class ValueSetPackage {
 	 */
 	public ArrayList<ValueSet> getValueSetList() {
 		return valueSetList;
+	}
+
+	/**
+	 * Gets the value set by mapping identificator.
+	 *
+	 * @param value
+	 *            the value
+	 * @return the value sety by mapping identificator
+	 */
+	public ValueSet getValueSetyByMappingIdentificator(IdentificatorBaseType value) {
+		ValueSet retVal = null;
+		for (ValueSet valueSet : listValueSets()) {
+			if (valueSet.listMappingIdentificators().contains(value))
+				retVal = valueSet;
+		}
+		return retVal;
+	}
+
+	/**
+	 * Gets the value set by mapping name.
+	 *
+	 * @param value
+	 *            the value
+	 * @return the value sety by mapping name
+	 */
+	public ValueSet getValueSetyByMappingName(String value) {
+		ValueSet retVal = null;
+		for (ValueSet valueSet : listValueSets()) {
+			if (valueSet.listMappingNames().contains(value))
+				retVal = valueSet;
+		}
+		return retVal;
 	}
 
 	/**
