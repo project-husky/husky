@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import javax.annotation.Generated;
 
 import org.ehealth_connector.common.basetypes.CodeBaseType;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.valueset.enums.ValueSetEntryType;
 
 /**
@@ -387,6 +388,22 @@ public class ValueSetEntry {
 	 */
 	public String getDefaultMappingName() {
 		return defaultMappingName;
+	}
+
+	/**
+	 * Gets the designation of the given language.
+	 *
+	 * @param language
+	 *            the language
+	 * @return the designation
+	 */
+	public String getDesignation(LanguageCode language) {
+		String retVal = null;
+		for (Designation designation : listDesignations()) {
+			if (language.equals(designation.getLanguageCode()))
+				retVal = designation.getDisplayName();
+		}
+		return retVal;
 	}
 
 	/**
