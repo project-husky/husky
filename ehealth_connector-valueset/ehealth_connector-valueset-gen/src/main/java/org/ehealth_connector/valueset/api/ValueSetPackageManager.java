@@ -88,7 +88,7 @@ public class ValueSetPackageManager {
 
 		ValueSetManager valueSetManager = new ValueSetManager();
 
-		for (ValueSetConfig valueSetConfig : valueSetPackageConfig.listValueSetConfig()) {
+		for (ValueSetConfig valueSetConfig : valueSetPackageConfig.listValueSetConfigs()) {
 			ValueSet valueSet = valueSetManager.downloadValueSet(valueSetConfig);
 			retVal.addValueSet(valueSet);
 		}

@@ -266,7 +266,7 @@ public class ValueSetPackageConfig {
 	 *
 	 * @return the list
 	 */
-	public List<ValueSetConfig> listValueSetConfig() {
+	public List<ValueSetConfig> listValueSetConfigs() {
 		if (this.valueSetConfigList == null) {
 			this.valueSetConfigList = new ArrayList<ValueSetConfig>();
 		}

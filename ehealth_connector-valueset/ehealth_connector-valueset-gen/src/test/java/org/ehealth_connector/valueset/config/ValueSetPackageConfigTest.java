@@ -83,14 +83,14 @@ public class ValueSetPackageConfigTest {
 		valueSetPackageConfig.addValueSetConfig(valueSetConfig1);
 		valueSetPackageConfig.addValueSetConfig(valueSetConfig2);
 
-		assertEquals(2, valueSetPackageConfig.listValueSetConfig().size());
-		assertEquals(className2, valueSetPackageConfig.listValueSetConfig().get(1).getClassName());
+		assertEquals(2, valueSetPackageConfig.listValueSetConfigs().size());
+		assertEquals(className2, valueSetPackageConfig.listValueSetConfigs().get(1).getClassName());
 		assertEquals(projectFolder2,
-				valueSetPackageConfig.listValueSetConfig().get(1).getProjectFolder());
+				valueSetPackageConfig.listValueSetConfigs().get(1).getProjectFolder());
 		assertEquals(sourceFormatType2,
-				valueSetPackageConfig.listValueSetConfig().get(1).getSourceFormatType());
+				valueSetPackageConfig.listValueSetConfigs().get(1).getSourceFormatType());
 		assertEquals(sourceSystemType2,
-				valueSetPackageConfig.listValueSetConfig().get(1).getSourceSystemType());
+				valueSetPackageConfig.listValueSetConfigs().get(1).getSourceSystemType());
 
 	}
 }
