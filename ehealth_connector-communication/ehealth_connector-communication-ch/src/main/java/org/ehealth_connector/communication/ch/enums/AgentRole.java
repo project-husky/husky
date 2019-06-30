@@ -41,7 +41,7 @@ public enum AgentRole implements ValueSetEnumInterface {
 	 * <div class="en">Group</div>
 	 * <!-- @formatter:on -->
 	 */
-	GROUP("GRP", "2.16.756.5.30.1.127.3.10.14", "Group", "Group");
+	GROUP("GRP", "2.16.756.5.30.1.127.3.10.14", "Group", "Group", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->

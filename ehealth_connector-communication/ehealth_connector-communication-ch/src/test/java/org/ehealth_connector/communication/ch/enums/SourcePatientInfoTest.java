@@ -26,7 +26,7 @@ public class SourcePatientInfoTest {
 	@Test
 	public void testSourcePatientInfo() {
 
-		assertEquals("2.16.756.5.30.1.127.3.10.1.25", SourcePatientInfo.VALUE_SET_ID);
+		assertEquals("2.16.840.1.113883.4.642.3.1", SourcePatientInfo.VALUE_SET_ID);
 		assertValueSetEnumEntries(SourcePatientInfo.values());
 
 	}

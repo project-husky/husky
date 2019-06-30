@@ -43,7 +43,7 @@ public enum ContentTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Procedura</div>
 	 * <!-- @formatter:on -->
 	 */
-	PROCEDURE_PROCEDURE_("71388002", "2.16.840.1.113883.6.96", "Procedure (procedure)", "Procedure (procedure)", "Prozedur", "Procédure", "Procedura");
+	PROCEDURE_PROCEDURE("71388002", "2.16.840.1.113883.6.96", "Procedure (procedure)", "Procedure (procedure)", "Prozedur", "Procédure", "Procedura");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -53,7 +53,7 @@ public enum ContentTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Code per Procedura</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String PROCEDURE_PROCEDURE__CODE = "71388002";
+	public static final String PROCEDURE_PROCEDURE_CODE = "71388002";
 
 	/**
 	 * <div class="en">Identifier of the value set</div>

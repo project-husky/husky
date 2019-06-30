@@ -70,7 +70,7 @@ public enum MimeType implements ValueSetEnumInterface {
 	 * <div class="it">Extensible 3D Graphics (VRML)</div>
 	 * <!-- @formatter:on -->
 	 */
-	EXTENSIBLE_3D_GRAPHICS_VRML_("model/x3d-vrml", "2.16.840.1.113883.5.79", "Extensible 3D Graphics (VRML)", "Extensible 3D Graphics (VRML)", "Extensible 3D Graphics (VRML)", "Extensible 3D Graphics (VRML)", "Extensible 3D Graphics (VRML)"),
+	EXTENSIBLE_3D_GRAPHICS_VRML("model/x3d-vrml", "2.16.840.1.113883.5.79", "Extensible 3D Graphics (VRML)", "Extensible 3D Graphics (VRML)", "Extensible 3D Graphics (VRML)", "Extensible 3D Graphics (VRML)", "Extensible 3D Graphics (VRML)"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Extensible 3D Graphics (XML)</div>
@@ -79,7 +79,7 @@ public enum MimeType implements ValueSetEnumInterface {
 	 * <div class="it">Extensible 3D Graphics (XML)</div>
 	 * <!-- @formatter:on -->
 	 */
-	EXTENSIBLE_3D_GRAPHICS_XML_("model/x3d+xml", "2.16.840.1.113883.5.79", "Extensible 3D Graphics (XML)", "Extensible 3D Graphics (XML)", "Extensible 3D Graphics (XML)", "Extensible 3D Graphics (XML)", "Extensible 3D Graphics (XML)"),
+	EXTENSIBLE_3D_GRAPHICS_XML("model/x3d+xml", "2.16.840.1.113883.5.79", "Extensible 3D Graphics (XML)", "Extensible 3D Graphics (XML)", "Extensible 3D Graphics (XML)", "Extensible 3D Graphics (XML)", "Extensible 3D Graphics (XML)"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">FHIR (JSON)</div>
@@ -88,7 +88,7 @@ public enum MimeType implements ValueSetEnumInterface {
 	 * <div class="it">FHIR (JSON)</div>
 	 * <!-- @formatter:on -->
 	 */
-	FHIR_JSON_("application/fhir+json", "2.16.840.1.113883.5.79", "FHIR (JSON)", "FHIR (JSON)", "FHIR (JSON)", "FHIR (JSON)", "FHIR (JSON)"),
+	FHIR_JSON("application/fhir+json", "2.16.840.1.113883.5.79", "FHIR (JSON)", "FHIR (JSON)", "FHIR (JSON)", "FHIR (JSON)", "FHIR (JSON)"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">FHIR (XML)</div>
@@ -97,7 +97,7 @@ public enum MimeType implements ValueSetEnumInterface {
 	 * <div class="it">FHIR (XML)</div>
 	 * <!-- @formatter:on -->
 	 */
-	FHIR_XML_("application/fhir+xml", "2.16.840.1.113883.5.79", "FHIR (XML)", "FHIR (XML)", "FHIR (XML)", "FHIR (XML)", "FHIR (XML)"),
+	FHIR_XML("application/fhir+xml", "2.16.840.1.113883.5.79", "FHIR (XML)", "FHIR (XML)", "FHIR (XML)", "FHIR (XML)", "FHIR (XML)"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">GIF Graphics Interchange Format</div>
@@ -299,7 +299,7 @@ public enum MimeType implements ValueSetEnumInterface {
 	 * <div class="it">Code per Extensible 3D Graphics (VRML)</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String EXTENSIBLE_3D_GRAPHICS_VRML__CODE = "model/x3d-vrml";
+	public static final String EXTENSIBLE_3D_GRAPHICS_VRML_CODE = "model/x3d-vrml";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -309,7 +309,7 @@ public enum MimeType implements ValueSetEnumInterface {
 	 * <div class="it">Code per Extensible 3D Graphics (XML)</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String EXTENSIBLE_3D_GRAPHICS_XML__CODE = "model/x3d+xml";
+	public static final String EXTENSIBLE_3D_GRAPHICS_XML_CODE = "model/x3d+xml";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -319,7 +319,7 @@ public enum MimeType implements ValueSetEnumInterface {
 	 * <div class="it">Code per FHIR (JSON)</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String FHIR_JSON__CODE = "application/fhir+json";
+	public static final String FHIR_JSON_CODE = "application/fhir+json";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -329,7 +329,7 @@ public enum MimeType implements ValueSetEnumInterface {
 	 * <div class="it">Code per FHIR (XML)</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String FHIR_XML__CODE = "application/fhir+xml";
+	public static final String FHIR_XML_CODE = "application/fhir+xml";
 
 	/**
 	 * <!-- @formatter:off -->

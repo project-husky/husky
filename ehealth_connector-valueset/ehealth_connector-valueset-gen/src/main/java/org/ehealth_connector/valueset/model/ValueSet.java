@@ -285,6 +285,9 @@ public class ValueSet {
 		while (enumName.contains("__"))
 			enumName = enumName.replaceAll("__", "_");
 
+		while (enumName.endsWith("_"))
+			enumName = enumName.substring(0, enumName.length() - 1);
+
 		return enumName;
 	}
 
