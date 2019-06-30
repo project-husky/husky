@@ -51,6 +51,7 @@ import org.ehealth_connector.common.basetypes.OrganizationBaseType;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.FileUtil;
+import org.ehealth_connector.common.utils.LangText;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.valueset.config.CustomizedYaml;
 import org.ehealth_connector.valueset.config.ValueSetConfig;
@@ -116,28 +117,9 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * The language code. According to its value the descriptions from the
-	 * ART-DECOR Value-Set will be loaded
-	 */
-	private LanguageCode languageCode;
-
-	/**
-	 * Instantiates a new value set manager. Default constructor (loads
-	 * descriptions in English).
+	 * Instantiates a new value set manager. Default constructor.
 	 */
 	public ValueSetManager() {
-		this.languageCode = LanguageCode.ENGLISH;
-	}
-
-	/**
-	 * Instantiates a new value set manager (loads descriptions in the given
-	 * language).
-	 *
-	 * @param languageCode
-	 *            the language code
-	 */
-	public ValueSetManager(LanguageCode languageCode) {
-		this.languageCode = languageCode;
 	}
 
 	/**
@@ -229,6 +211,21 @@ public class ValueSetManager {
 				retVal = nodes.item(0).getTextContent().trim();
 
 		return retVal;
+	}
+
+	/**
+	 * Gets the language code from a given textContent out of JSON or XML
+	 * (including IHE SVS).
+	 *
+	 * @param textContent
+	 *            the text content
+	 * @return the language code
+	 */
+	private LanguageCode getLanguageCode(String textContent) {
+		LanguageCode languageCode = LanguageCode.getEnum(textContent);
+		if (languageCode == null)
+			languageCode = LanguageCode.getEnum(textContent.substring(0, 2));
+		return languageCode;
 	}
 
 	public Map<String, Object> getValueSetJsonMap(InputStreamReader reader) throws IOException {
@@ -371,7 +368,7 @@ public class ValueSetManager {
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//ValueSet/Purpose/text()");
 		if (textContent != null)
-			valueSet.setDescription(textContent);
+			valueSet.addDescription(new LangText(LanguageCode.ENGLISH, textContent));
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//ValueSet/@displayName");
 		if (textContent != null)
@@ -389,10 +386,7 @@ public class ValueSetManager {
 		NodeList nodeList;
 		nodeList = evaluateXpathExprAsNodeList(xmlDoc, "//ValueSet/ConceptList/@lang");
 		for (int i = 0; i < nodeList.getLength(); i++) {
-			textContent = nodeList.item(i).getTextContent().trim();
-			LanguageCode languageCode = LanguageCode.getEnum(textContent);
-			if (languageCode == null)
-				languageCode = LanguageCode.getEnum(textContent.substring(0, 2));
+			LanguageCode languageCode = getLanguageCode(nodeList.item(i).getTextContent().trim());
 			if (languageCode != null)
 				langCodes.add(languageCode);
 		}
@@ -561,23 +555,18 @@ public class ValueSetManager {
 				for (Object object : descs) {
 					@SuppressWarnings("unchecked")
 					Map<String, Object> subMap = (Map<String, Object>) object;
-					boolean thisIsTheSelection = false;
 					String content = "";
+					LanguageCode languageCode = null;
 					for (Entry<String, Object> subEntry : subMap.entrySet()) {
 						String subKey = subEntry.getKey();
 						if ("language".contentEquals(subKey) && (subEntry.getValue() != null)) {
 							String lang = subEntry.getValue().toString();
-							if (this.languageCode.getCodeValue().equals(lang))
-								thisIsTheSelection = true;
-							else if (this.languageCode.getCodeValue().substring(0, 2)
-									.equals(lang.substring(0, 2)))
-								thisIsTheSelection = true;
+							languageCode = getLanguageCode(lang);
 						}
 						if ("content".contentEquals(subKey) && (subEntry.getValue() != null))
 							content = subEntry.getValue().toString();
 					}
-					if (thisIsTheSelection)
-						valueSet.setDescription(content);
+					valueSet.addDescription(new LangText(languageCode, content));
 				}
 			}
 			if ("publishingAuthority".contentEquals(key) && (entry.getValue() != null)
@@ -823,11 +812,24 @@ public class ValueSetManager {
 			valueSet.setIdentificator(
 					IdentificatorBaseType.builder().withRoot(textContent).build());
 
-		textContent = evaluateXpathExprAsString(xmlDoc,
-				"//valueSets/project/valueSet/desc[@language='" + languageCode.getCodeValue()
-						+ "' or starts-with(@language,'" + languageCode.getCodeValue() + "')]");
-		if (textContent != null)
-			valueSet.setDescription(textContent);
+		ArrayList<LanguageCode> langCodes = new ArrayList<LanguageCode>();
+		NodeList nodeList = evaluateXpathExprAsNodeList(xmlDoc,
+				"//valueSets/project/valueSet/desc/@language");
+		for (int i = 0; i < nodeList.getLength(); i++) {
+			LanguageCode languageCode = getLanguageCode(nodeList.item(i).getTextContent().trim());
+			if (languageCode != null)
+				langCodes.add(languageCode);
+		}
+
+		for (LanguageCode languageCode : langCodes) {
+			textContent = evaluateXpathExprAsString(xmlDoc,
+					"//valueSets/project/valueSet/desc[@language='" + languageCode.getCodeValue()
+							+ "' or starts-with(@language,'" + languageCode.getCodeValue()
+							+ "')]/text()");
+			if (textContent != null)
+				valueSet.addDescription(new LangText(languageCode, textContent));
+
+		}
 
 		textContent = evaluateXpathExprAsString(xmlDoc,
 				"//valueSets/project/valueSet/@displayName");
@@ -844,7 +846,6 @@ public class ValueSetManager {
 		if (textContent != null)
 			version.setLabel(textContent);
 
-		NodeList nodeList;
 		nodeList = evaluateXpathExprAsNodeList(xmlDoc,
 				"/valueSets/project/valueSet/conceptList/concept");
 		for (int i = 0; i < nodeList.getLength(); i++) {

@@ -25,6 +25,7 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.utils.LangText;
 import org.ehealth_connector.valueset.enums.DesignationType;
 import org.ehealth_connector.valueset.enums.ValueSetStatus;
 
@@ -48,8 +49,8 @@ public class ValueSet {
 		/** The value set entry list. */
 		private ArrayList<ValueSetEntry> valueSetEntryList;
 
-		/** The description. */
-		private String description;
+		/** The description list. */
+		private ArrayList<LangText> descriptionList;
 
 		/** The display name. */
 		private String displayName;
@@ -85,14 +86,14 @@ public class ValueSet {
 		}
 
 		/**
-		 * With description.
+		 * With description list.
 		 *
-		 * @param description
-		 *            the description
+		 * @param descriptionList
+		 *            the description list
 		 * @return the builder
 		 */
-		public Builder withDescription(String description) {
-			this.description = description;
+		public Builder withDescriptionList(ArrayList<LangText> descriptionList) {
+			this.descriptionList = descriptionList;
 			return this;
 		}
 
@@ -206,6 +207,9 @@ public class ValueSet {
 		}
 	}
 
+	/**
+	 * The Class ValueSetEntryPreferredEnglishDesignationComparator.
+	 */
 	private class ValueSetEntryPreferredEnglishDesignationComparator
 			implements Comparator<ValueSetEntry> {
 
@@ -261,8 +265,8 @@ public class ValueSet {
 	/** The value set entry list. */
 	private ArrayList<ValueSetEntry> valueSetEntryList;
 
-	/** The description. */
-	private String description;
+	/** The description list. */
+	private ArrayList<LangText> descriptionList;
 
 	/** The display name. */
 	private String displayName;
@@ -299,13 +303,26 @@ public class ValueSet {
 		this.mappingIdentificatorList = builder.mappingIdentificatorList;
 		this.mappingNameList = builder.mappingNameList;
 		this.valueSetEntryList = builder.valueSetEntryList;
-		this.description = builder.description;
+		this.descriptionList = builder.descriptionList;
 		this.displayName = builder.displayName;
 		this.effectiveDate = builder.effectiveDate;
 		this.identificator = builder.identificator;
 		this.name = builder.name;
 		this.status = builder.status;
 		this.version = builder.version;
+	}
+
+	/**
+	 * Adds the description.
+	 *
+	 * @param value
+	 *            the value
+	 */
+	public void addDescription(LangText value) {
+		if (this.descriptionList == null) {
+			this.descriptionList = new ArrayList<LangText>();
+		}
+		this.descriptionList.add(value);
 	}
 
 	/**
@@ -345,6 +362,13 @@ public class ValueSet {
 			this.valueSetEntryList = new ArrayList<ValueSetEntry>();
 		}
 		this.valueSetEntryList.add(value);
+	}
+
+	/**
+	 * Clear description list.
+	 */
+	public void clearDescriptionList() {
+		this.valueSetEntryList = new ArrayList<ValueSetEntry>();
 	}
 
 	/**
@@ -400,10 +424,11 @@ public class ValueSet {
 			}
 		}
 		if (retVal) {
-			if (this.description == null)
-				retVal = (obj.getDescription() == null);
-			else
-				retVal = this.description.equals(obj.getDescription());
+			for (int i = 0; i < this.descriptionList.size(); i++) {
+				retVal = (this.descriptionList.get(i).equals(obj.listDescriptions().get(i)));
+				if (!retVal)
+					break;
+			}
 		}
 		if (retVal) {
 			if (this.displayName == null)
@@ -444,13 +469,25 @@ public class ValueSet {
 		return retVal;
 	}
 
+	public String getDescription(LanguageCode language) {
+		String retVal = null;
+		for (int i = 0; i < this.descriptionList.size(); i++) {
+			LangText langText = this.descriptionList.get(i);
+			if (language.equals(langText.getLangCode())) {
+				retVal = langText.getLangText();
+				break;
+			}
+		}
+		return retVal;
+	}
+
 	/**
-	 * Gets the description.
+	 * Gets the description list.
 	 *
-	 * @return the description
+	 * @return the description list
 	 */
-	public String getDescription() {
-		return description;
+	public ArrayList<LangText> getDescriptionList() {
+		return descriptionList;
 	}
 
 	/**
@@ -583,6 +620,18 @@ public class ValueSet {
 	}
 
 	/**
+	 * List descriptions.
+	 *
+	 * @return the array list
+	 */
+	public ArrayList<LangText> listDescriptions() {
+		if (this.descriptionList == null) {
+			this.descriptionList = new ArrayList<LangText>();
+		}
+		return this.descriptionList;
+	}
+
+	/**
 	 * ArrayList mapping identificators.
 	 *
 	 * @return the list
@@ -618,13 +667,13 @@ public class ValueSet {
 	}
 
 	/**
-	 * Sets the description.
+	 * Sets the description list.
 	 *
-	 * @param description
-	 *            the new description
+	 * @param descriptionList
+	 *            the new description list
 	 */
-	public void setDescription(String description) {
-		this.description = description;
+	public void setDescriptionList(ArrayList<LangText> descriptionList) {
+		this.descriptionList = descriptionList;
 	}
 
 	/**

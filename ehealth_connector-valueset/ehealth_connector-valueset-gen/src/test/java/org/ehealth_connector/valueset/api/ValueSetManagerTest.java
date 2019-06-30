@@ -31,8 +31,10 @@ import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.FileUtil;
+import org.ehealth_connector.common.utils.LangText;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.valueset.config.ValueSetConfig;
 import org.ehealth_connector.valueset.enums.SourceFormatType;
@@ -222,10 +224,10 @@ public class ValueSetManagerTest {
 		Version version = Version.builder().withLabel("1.0")
 				.withValidFrom(DateUtil.date("22.06.2019 00:00:00")).build();
 
-		ValueSet valueSet = ValueSet.builder().withDescription(description)
-				.withDisplayName(displayName).withEffectiveDate(effectiveDate)
-				.withIdentificator(identificator).withName(name).withStatus(status)
-				.withVersion(version).build();
+		ValueSet valueSet = ValueSet.builder().withDisplayName(displayName)
+				.withEffectiveDate(effectiveDate).withIdentificator(identificator).withName(name)
+				.withStatus(status).withVersion(version).build();
+		valueSet.addDescription(new LangText(LanguageCode.ENGLISH, description));
 
 		CodeBaseType codeBaseType1 = CodeBaseType.builder().withCode("abstractcode1")
 				.withCodeSystem("2.999.1").build();
@@ -275,7 +277,7 @@ public class ValueSetManagerTest {
 		try {
 			ValueSet valueSet2 = valueSetManager2.loadValueSetYaml(testValueSetYamlFileName);
 
-			assertEquals(description, valueSet2.getDescription());
+			assertEquals(description, valueSet2.getDescription(LanguageCode.ENGLISH));
 			assertEquals(valueSetEntry1.getCodeBaseType().getCode(),
 					valueSet2.listValueSetEntries().get(0).getCodeBaseType().getCode());
 			assertEquals("bbb", valueSet2.listMappingIdentificators().get(1).getExtension());

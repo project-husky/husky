@@ -22,7 +22,9 @@ import java.util.Date;
 
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.LangText;
 import org.ehealth_connector.valueset.enums.ValueSetEntryType;
 import org.ehealth_connector.valueset.enums.ValueSetPackageStatus;
 import org.ehealth_connector.valueset.enums.ValueSetStatus;
@@ -79,15 +81,15 @@ public class ValueSetPackageTest {
 		Version vsversion2 = Version.builder().withLabel("2.0")
 				.withValidFrom(DateUtil.date("03.06.2019 00:00:00")).build();
 
-		ValueSet valueSet1 = ValueSet.builder().withDescription(vsdescription1)
-				.withDisplayName(vsdisplayName1).withEffectiveDate(vseffectiveDate1)
-				.withIdentificator(vsidentificator1).withName(vsname1).withStatus(vsstatus1)
-				.withVersion(vsversion1).build();
+		ValueSet valueSet1 = ValueSet.builder().withDisplayName(vsdisplayName1)
+				.withEffectiveDate(vseffectiveDate1).withIdentificator(vsidentificator1)
+				.withName(vsname1).withStatus(vsstatus1).withVersion(vsversion1).build();
+		valueSet1.addDescription(new LangText(LanguageCode.ENGLISH, vsdescription1));
 
-		ValueSet valueSet2 = ValueSet.builder().withDescription(vsdescription2)
-				.withDisplayName(vsdisplayName2).withEffectiveDate(vseffectiveDate2)
-				.withIdentificator(vsidentificator2).withName(vsname2).withStatus(vsstatus2)
-				.withVersion(vsversion2).build();
+		ValueSet valueSet2 = ValueSet.builder().withDisplayName(vsdisplayName2)
+				.withEffectiveDate(vseffectiveDate2).withIdentificator(vsidentificator2)
+				.withName(vsname2).withStatus(vsstatus2).withVersion(vsversion2).build();
+		valueSet2.addDescription(new LangText(LanguageCode.ENGLISH, vsdescription2));
 
 		CodeBaseType codeBaseType1 = CodeBaseType.builder().withCode("abstractcode1")
 				.withCodeSystem("2.999").build();

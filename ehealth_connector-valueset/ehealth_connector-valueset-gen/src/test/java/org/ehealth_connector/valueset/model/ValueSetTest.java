@@ -22,7 +22,9 @@ import java.util.Date;
 
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.LangText;
 import org.ehealth_connector.valueset.enums.ValueSetEntryType;
 import org.ehealth_connector.valueset.enums.ValueSetStatus;
 import org.junit.Test;
@@ -49,12 +51,12 @@ public class ValueSetTest {
 		Version version = Version.builder().withLabel("1.0")
 				.withValidFrom(DateUtil.date("03.06.2019 00:00:00")).build();
 
-		ValueSet valueSet = ValueSet.builder().withDescription(description)
-				.withDisplayName(displayName).withEffectiveDate(effectiveDate)
-				.withIdentificator(identificator).withName(name).withStatus(status)
-				.withVersion(version).build();
+		ValueSet valueSet = ValueSet.builder().withDisplayName(displayName)
+				.withEffectiveDate(effectiveDate).withIdentificator(identificator).withName(name)
+				.withStatus(status).withVersion(version).build();
+		valueSet.addDescription(new LangText(LanguageCode.ENGLISH, description));
 
-		assertEquals(description, valueSet.getDescription());
+		assertEquals(description, valueSet.getDescription(LanguageCode.ENGLISH));
 		assertEquals(displayName, valueSet.getDisplayName());
 		assertEquals(effectiveDate, valueSet.getEffectiveDate());
 		assertEquals(identificator, valueSet.getIdentificator());

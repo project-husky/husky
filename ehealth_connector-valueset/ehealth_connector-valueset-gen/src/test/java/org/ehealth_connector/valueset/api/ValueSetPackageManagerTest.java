@@ -31,8 +31,10 @@ import java.util.Date;
 
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.FileUtil;
+import org.ehealth_connector.common.utils.LangText;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.valueset.config.ValueSetConfig;
 import org.ehealth_connector.valueset.config.ValueSetPackageConfig;
@@ -386,10 +388,10 @@ public class ValueSetPackageManagerTest {
 		Version version1 = Version.builder().withLabel("1.1")
 				.withValidFrom(DateUtil.date("01.06.2019 00:00:00")).build();
 
-		ValueSet valueSet1 = ValueSet.builder().withDescription(description1)
-				.withDisplayName(displayName1).withEffectiveDate(effectiveDate1)
-				.withIdentificator(identificator1).withName(name1).withStatus(status1)
-				.withVersion(version1).build();
+		ValueSet valueSet1 = ValueSet.builder().withDisplayName(displayName1)
+				.withEffectiveDate(effectiveDate1).withIdentificator(identificator1).withName(name1)
+				.withStatus(status1).withVersion(version1).build();
+		valueSet1.addDescription(new LangText(LanguageCode.ENGLISH, description1));
 
 		String description2 = "description2";
 		String displayName2 = "displayName2";
@@ -401,10 +403,10 @@ public class ValueSetPackageManagerTest {
 		Version version2 = Version.builder().withLabel("1.2")
 				.withValidFrom(DateUtil.date("02.06.2019 00:00:00")).build();
 
-		ValueSet valueSet2 = ValueSet.builder().withDescription(description2)
-				.withDisplayName(displayName2).withEffectiveDate(effectiveDate2)
-				.withIdentificator(identificator2).withName(name2).withStatus(status2)
-				.withVersion(version2).build();
+		ValueSet valueSet2 = ValueSet.builder().withDisplayName(displayName2)
+				.withEffectiveDate(effectiveDate2).withIdentificator(identificator2).withName(name2)
+				.withStatus(status2).withVersion(version2).build();
+		valueSet2.addDescription(new LangText(LanguageCode.ENGLISH, description2));
 
 		valueSetPackage.addValueSet(valueSet1);
 		valueSetPackage.addValueSet(valueSet2);
