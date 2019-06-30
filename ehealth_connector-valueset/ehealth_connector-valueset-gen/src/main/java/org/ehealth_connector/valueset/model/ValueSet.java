@@ -17,12 +17,15 @@
 package org.ehealth_connector.valueset.model;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Date;
 
 import javax.annotation.Generated;
 
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
+import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.valueset.enums.DesignationType;
 import org.ehealth_connector.valueset.enums.ValueSetStatus;
 
 /**
@@ -200,6 +203,42 @@ public class ValueSet {
 		public Builder withVersion(Version version) {
 			this.version = version;
 			return this;
+		}
+	}
+
+	private class ValueSetEntryPreferredEnglishDesignationComparator
+			implements Comparator<ValueSetEntry> {
+
+		/**
+		 *
+		 * Compares two observations on their date descending.
+		 *
+		 * {@inheritDoc}
+		 *
+		 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+		 */
+		@Override
+		public int compare(ValueSetEntry a, ValueSetEntry b) {
+			if ((a == null) && (b == null))
+				return 0;
+			else if ((a == null) && (b != null))
+				return -1;
+			else if ((a != null) && (b == null))
+				return 1;
+			else {
+				String preferredDesignation_a = a.getDesignation(LanguageCode.ENGLISH,
+						DesignationType.PREFERRED);
+				String preferredDesignation_b = b.getDesignation(LanguageCode.ENGLISH,
+						DesignationType.PREFERRED);
+				if ((preferredDesignation_a == null) && (preferredDesignation_b == null))
+					return 0;
+				else if ((preferredDesignation_a == null) && (preferredDesignation_b != null))
+					return -1;
+				else if ((preferredDesignation_a != null) && (preferredDesignation_b == null))
+					return 1;
+				else
+					return preferredDesignation_a.compareTo(preferredDesignation_b);
+			}
 		}
 	}
 
@@ -677,6 +716,19 @@ public class ValueSet {
 	 */
 	public void setVersion(Version version) {
 		this.version = version;
+	}
+
+	/**
+	 * Sort value set entries by preferred English designation.
+	 *
+	 * @return the array list
+	 */
+	public ArrayList<ValueSetEntry> sortValueSetEntriesByPreferredEnglishDesignation() {
+		if (this.valueSetEntryList == null) {
+			this.valueSetEntryList = new ArrayList<ValueSetEntry>();
+		}
+		this.valueSetEntryList.sort(new ValueSetEntryPreferredEnglishDesignationComparator());
+		return this.valueSetEntryList;
 	}
 
 }

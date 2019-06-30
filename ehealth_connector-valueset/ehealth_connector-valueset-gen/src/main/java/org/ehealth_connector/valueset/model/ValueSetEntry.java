@@ -22,6 +22,7 @@ import javax.annotation.Generated;
 
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.valueset.enums.DesignationType;
 import org.ehealth_connector.valueset.enums.ValueSetEntryType;
 
 /**
@@ -397,10 +398,13 @@ public class ValueSetEntry {
 	 *            the language
 	 * @return the designation
 	 */
-	public String getDesignation(LanguageCode language) {
+	public String getDesignation(LanguageCode language, DesignationType designationType) {
 		String retVal = null;
 		for (Designation designation : listDesignations()) {
-			if (language.equals(designation.getLanguageCode()))
+			if (language.equals(designation.getLanguageCode()) && (designationType == null))
+				retVal = designation.getDisplayName();
+			else if (language.equals(designation.getLanguageCode())
+					&& (designationType.equals(designation.getType())))
 				retVal = designation.getDisplayName();
 		}
 		return retVal;
