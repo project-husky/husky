@@ -36,8 +36,8 @@ public class DocumentMetadataChTest extends DocumentMetadataTest {
 
 	@Test
 	public void testClassCodeEnum() {
-		m.setClassCode(ClassCode.ALERTS);
-		assertTrue(isEqual(ClassCode.ALERTS.getCode(), m.getClassCodeEnum().getCode()));
+		m.setClassCode(ClassCode.CARE_PLAN);
+		assertTrue(isEqual(ClassCode.CARE_PLAN.getCode(), m.getClassCodeEnum().getCode()));
 	}
 
 	@Test
@@ -48,8 +48,8 @@ public class DocumentMetadataChTest extends DocumentMetadataTest {
 
 	@Test
 	public void testConfidentialityCodeEnum() {
-		m.addConfidentialityCode(ConfidentialityCode.NORMAL);
-		assertTrue(isEqual(ConfidentialityCode.NORMAL.getCode(),
+		m.addConfidentialityCode(ConfidentialityCode.NORMALLY_ACCESSIBLE);
+		assertTrue(isEqual(ConfidentialityCode.NORMALLY_ACCESSIBLE.getCode(),
 				m.getConfidentialityCodesEnum().get(0).getCode()));
 	}
 
@@ -75,7 +75,7 @@ public class DocumentMetadataChTest extends DocumentMetadataTest {
 
 	@Test
 	public void testTypeCodeEnum() {
-		m.setTypeCode(TypeCode.OTHER_EPD_DOCUMENT_TYPE);
-		assertEquals(TypeCode.OTHER_EPD_DOCUMENT_TYPE, m.getTypeCodeEnum());
+		m.setTypeCode(TypeCode.DISCHARGE_SUMMARY);
+		assertEquals(TypeCode.DISCHARGE_SUMMARY, m.getTypeCodeEnum());
 	}
 }

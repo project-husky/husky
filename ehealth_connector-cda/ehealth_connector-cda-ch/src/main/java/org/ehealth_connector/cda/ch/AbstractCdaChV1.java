@@ -293,7 +293,8 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 		setVersion(null, 1);
 
 		// Set default Swiss EPR confidentiality code of the document (normal)
-		setConfidentialityCode(org.ehealth_connector.common.ch.enums.ConfidentialityCode.NORMAL);
+		setConfidentialityCode(
+				org.ehealth_connector.common.ch.enums.ConfidentialityCode.NORMALLY_ACCESSIBLE);
 
 		// Set creation time of the document
 		setTimestamp(DateUtil.nowAsDate());
@@ -312,7 +313,7 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 			org.ehealth_connector.common.ch.enums.ConfidentialityCode code) {
 		CE confidentialityCode;
 		if (code == null) {
-			confidentialityCode = org.ehealth_connector.common.ch.enums.ConfidentialityCode.NORMAL
+			confidentialityCode = org.ehealth_connector.common.ch.enums.ConfidentialityCode.NORMALLY_ACCESSIBLE
 					.getCE();
 		} else {
 			confidentialityCode = code.getCE();

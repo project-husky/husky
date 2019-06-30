@@ -35,15 +35,14 @@ public class XdsChTestUtils extends XdsTestUtils {
 
 	// Initialize Example CH Enum Vectors
 	public static AuthorRole[] authorRoles = new AuthorRole[] { AuthorRole.HEALTHCARE_PROFESSIONAL,
-			AuthorRole.PHARMACIST };
+			AuthorRole.HEALTHCARE_PROFESSIONAL };
 	public static AuthorSpeciality[] authorSpecialities = new AuthorSpeciality[] {
-			AuthorSpeciality.ANDERE_GESUNDHEITSBEZOGENE_FACHRICHTUNG,
-			AuthorSpeciality.APOTHEKERINAPOTHEKER_IN_OFFIZINPHARMAZIE };
+			AuthorSpeciality.ANAESTHESIOLOGY, AuthorSpeciality.BIOMEDICAL_ANALYSIS };
 	public static AvailabilityStatus avaiabilityStatus = AvailabilityStatus.APPROVED;
-	public static ClassCode[] classCodes = new ClassCode[] { ClassCode.ALERTS,
-			ClassCode.CARE_PLANS };
+	public static ClassCode[] classCodes = new ClassCode[] { ClassCode.CARE_PLAN,
+			ClassCode.AUDIT_TRAIL };
 	public static ConfidentialityCode[] confidentialityCodes = new ConfidentialityCode[] {
-			ConfidentialityCode.NORMAL, ConfidentialityCode.SECRET };
+			ConfidentialityCode.NORMALLY_ACCESSIBLE, ConfidentialityCode.SECRET };
 	public static FormatCode[] formatCodes = new FormatCode[] { FormatCode.IMMUNIZATION_CONTENT,
 			FormatCode.UNSTRUCTURED_EPR_DOCUMENT };
 	public static HealthcareFacilityTypeCode[] healthCareFacilityCodes = new HealthcareFacilityTypeCode[] {
@@ -57,8 +56,8 @@ public class XdsChTestUtils extends XdsTestUtils {
 			PracticeSettingCode.CLINICAL_IMMUNOLOGY_ALLERGY, PracticeSettingCode.GENERAL_MEDICINE };
 	public static SourcePatientInfo[] sourcePatientInfos = new SourcePatientInfo[] {
 			SourcePatientInfo.OTHER, SourcePatientInfo.FEMALE };
-	public static TypeCode[] typeCodes = new TypeCode[] { TypeCode.OTHER_EPD_DOCUMENT_TYPE,
-			TypeCode.ANAESTHESIOLOGY_REPORT };
+	public static TypeCode[] typeCodes = new TypeCode[] { TypeCode.ALLERGY_RECORD,
+			TypeCode.NURSING_CARE_PLAN };
 
 	public XdsChTestUtils() {
 		super();

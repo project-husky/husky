@@ -283,7 +283,8 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		setTypeId();
 
 		// Set default Swiss EPR confidentiality code of the document (normal)
-		setConfidentialityCode(org.ehealth_connector.common.ch.enums.ConfidentialityCode.NORMAL);
+		setConfidentialityCode(
+				org.ehealth_connector.common.ch.enums.ConfidentialityCode.NORMALLY_ACCESSIBLE);
 
 		// Set the basic elements of the document as default values
 		Identificator id = new Identificator(org.openhealthtools.ihe.utils.UUID.generate());
@@ -381,7 +382,7 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 			org.ehealth_connector.common.ch.enums.ConfidentialityCode code) {
 		CE confidentialityCode;
 		if (code == null) {
-			confidentialityCode = org.ehealth_connector.common.ch.enums.ConfidentialityCode.NORMAL
+			confidentialityCode = org.ehealth_connector.common.ch.enums.ConfidentialityCode.NORMALLY_ACCESSIBLE
 					.getCE();
 		} else {
 			confidentialityCode = code.getCE();
