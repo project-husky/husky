@@ -27,63 +27,83 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.ValueSetEnumInterface;
 
 /**
- *<!-- @formatter:off -->
+ * <!-- @formatter:off -->
  * <div class="en">&lt;span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;"&gt;Purpose Of Use as per Annex 5 EPRO-FDHA, Extension 1.&lt;/span&gt;
- *&lt;br clear="none" style="font-family: Verdana, Arial, sans-serif; font-size: 12px; color: rgb(51, 51, 51);"/&gt;</div>
+ * &lt;br clear="none" style="font-family: Verdana, Arial, sans-serif; font-size: 12px; color: rgb(51, 51, 51);"/&gt;</div>
  * <div class="de">no designation found for language GERMAN</div>
  * <div class="fr">no designation found for language FRENCH</div>
  * <div class="it">no designation found for language ITALIAN</div>
- *<!-- @formatter:on -->
+ * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
 public enum PurposeOfUse implements ValueSetEnumInterface {
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
+	 * <div class="en">Automatic Upload</div>
+	 * <div class="de">Automatischer Upload</div>
+	 * <div class="fr">Upload automatique</div>
+	 * <div class="it">Upload automatico</div>
+	 * <!-- @formatter:on -->
+	 */
+	AUTOMATIC_UPLOAD("AUTO", "2.16.756.5.30.1.127.3.10.5", "Automatic Upload", "Automatic Upload",
+			"Automatischer Upload", "Upload automatique", "Upload automatico"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Emergency Access</div>
-	 * <div class="de">Emergency Access</div>
-	 * <div class="fr">Emergency Access</div>
-	 * <div class="it">Emergency Access</div>
-	 *<!-- @formatter:on -->
+	 * <div class="de">Notfallzugriff</div>
+	 * <div class="fr">Accès d’urgence</div>
+	 * <div class="it">Accesso di emergenza</div>
+	 * <!-- @formatter:on -->
 	 */
 	EMERGENCY_ACCESS("EMER", "2.16.756.5.30.1.127.3.10.5", "Emergency Access", "Emergency Access",
-			"Emergency Access", "Emergency Access", "Emergency Access"),
+			"Notfallzugriff", "Accès d’urgence", "Accesso di emergenza"),
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Normal Access</div>
-	 * <div class="de">Normal Access</div>
-	 * <div class="fr">Normal Access</div>
-	 * <div class="it">Normal Access</div>
-	 *<!-- @formatter:on -->
+	 * <div class="de">Normaler Zugriff</div>
+	 * <div class="fr">Accès normal</div>
+	 * <div class="it">Accesso normale</div>
+	 * <!-- @formatter:on -->
 	 */
 	NORMAL_ACCESS("NORM", "2.16.756.5.30.1.127.3.10.5", "Normal Access", "Normal Access",
-			"Normal Access", "Normal Access", "Normal Access");
+			"Normaler Zugriff", "Accès normal", "Accesso normale");
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Automatic Upload</div>
+	 * <div class="de">Code für Automatischer Upload</div>
+	 * <div class="fr">Code de Upload automatique</div>
+	 * <div class="it">Code per Upload automatico</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String AUTOMATIC_UPLOAD_CODE = "AUTO";
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Emergency Access</div>
-	 * <div class="de">Code für Emergency Access</div>
-	 * <div class="fr">Code de Emergency Access</div>
-	 * <div class="it">Code per Emergency Access</div>
-	 *<!-- @formatter:on -->
+	 * <div class="de">Code für Notfallzugriff</div>
+	 * <div class="fr">Code de Accès d’urgence</div>
+	 * <div class="it">Code per Accesso di emergenza</div>
+	 * <!-- @formatter:on -->
 	 */
 	public static final String EMERGENCY_ACCESS_CODE = "EMER";
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Normal Access</div>
-	 * <div class="de">Code für Normal Access</div>
-	 * <div class="fr">Code de Normal Access</div>
-	 * <div class="it">Code per Normal Access</div>
-	 *<!-- @formatter:on -->
+	 * <div class="de">Code für Normaler Zugriff</div>
+	 * <div class="fr">Code de Accès normal</div>
+	 * <div class="it">Code per Accesso normale</div>
+	 * <!-- @formatter:on -->
 	 */
 	public static final String NORMAL_ACCESS_CODE = "NORM";
 
 	/**
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
+	 * <div class="de">Identifikator für das Value Set</div>
 	 */
-	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.77.10.11.5";
+	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.15.2";
 
 	/**
 	 * <div class="en">Name of the value set</div> <div class="de">Name des
@@ -217,7 +237,7 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
 	@Override
 	public String getCodeSystemName() {
 		String retVal = "";
-		final CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
+		CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
 		if (cs != null)
 			retVal = cs.getCodeSystemName();
 		return retVal;
@@ -248,7 +268,7 @@ public enum PurposeOfUse implements ValueSetEnumInterface {
 	 */
 	@Override
 	public String getDisplayName(LanguageCode languageCode) {
-		final String displayName = displayNames.get(languageCode);
+		String displayName = displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
 			return displayNames.get(null);
 		}

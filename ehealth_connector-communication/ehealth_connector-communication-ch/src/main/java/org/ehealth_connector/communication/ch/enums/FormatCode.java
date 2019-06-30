@@ -27,31 +27,28 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.ValueSetEnumInterface;
 
 /**
- *<!-- @formatter:off -->
+ * <!-- @formatter:off -->
  * <div class="en">Document format as per Annex 3&amp;#160; EPRO-FDHA, Chapter 2.5. &lt;br clear="none"/&gt;
- *      &lt;br clear="none"/&gt;This unambiguous code defines the format of the XDS document. Together with the mimetype, this should provide the potential consumer with sufficient information as to whether they are in a position to process the document.&lt;br clear="none"/&gt;
- *    </div>
+ * &lt;br clear="none"/&gt;This unambiguous code defines the format of the XDS document. Together with the mimetype, this should provide the potential consumer with sufficient information as to whether they are in a position to process the document.&lt;br clear="none"/&gt;</div>
  * <div class="de">Format des Dokumentes gemäss Anhang 3 EPDV-EDI, Kapitel 2.5. &lt;br clear="none"/&gt;
- *      &lt;br clear="none"/&gt;Dieser eindeutige Code definiert das Format des XDS Dokumentes. Zusammen mit dem mimeType, sollte es dem potentiellen Konsumenten genügend Informationen liefern, ob er in der Lage ist, das Dokument zu verarbeiten.</div>
+ * &lt;br clear="none"/&gt;Dieser eindeutige Code definiert das Format des XDS Dokumentes. Zusammen mit dem mimeType, sollte es dem potentiellen Konsumenten genügend Informationen liefern, ob er in der Lage ist, das Dokument zu verarbeiten.</div>
  * <div class="fr">Format du document selon l'annexe 3 ODEP-DFI, chapitre 2.5&lt;br clear="none"/&gt;
- *      &lt;br clear="none"/&gt;Ce code univoque définit le format du document XDS. Combiné au mimeType, il doit fournir à l'utilisateur suffisamment d'informations pour savoir s'il est en mesure de traiter le document.&lt;br clear="none"/&gt;
- *      &lt;br clear="none"/&gt;
- *    </div>
+ * &lt;br clear="none"/&gt;Ce code univoque définit le format du document XDS. Combiné au mimeType, il doit fournir à l'utilisateur suffisamment d'informations pour savoir s'il est en mesure de traiter le document.&lt;br clear="none"/&gt;
+ * &lt;br clear="none"/&gt;</div>
  * <div class="it">Formato del documento secondo l'allegato 3 OCIP-DFI, capitolo 2.5. &lt;br clear="none"/&gt;
- *      &lt;br clear="none"/&gt;Questo codice univoco definisce il formato del documento XDS. Insieme al tipo MIME, intende fornire al potenziale consumatore sufficienti informazioni per capire se è in grado o meno di elaborare il documento.&lt;br clear="none"/&gt;
- *    </div>
- *<!-- @formatter:on -->
+ * &lt;br clear="none"/&gt;Questo codice univoco definisce il formato del documento XDS. Insieme al tipo MIME, intende fornire al potenziale consumatore sufficienti informazioni per capire se è in grado o meno di elaborare il documento.&lt;br clear="none"/&gt;</div>
+ * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
 public enum FormatCode implements ValueSetEnumInterface {
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">CDA Imaging Report with Structured Headings</div>
 	 * <div class="de">CDA Imaging Report with Structured Headings</div>
 	 * <div class="fr">CDA Imaging Report with Structured Headings</div>
 	 * <div class="it">CDA Imaging Report with Structured Headings</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	CDA_IMAGING_REPORT_WITH_STRUCTURED_HEADINGS(
 			"urn:ihe:rad:CDA:ImagingReportStructuredHeadings:2013", "1.3.6.1.4.1.19376.1.2.3",
@@ -61,317 +58,317 @@ public enum FormatCode implements ValueSetEnumInterface {
 			"CDA Imaging Report with Structured Headings",
 			"CDA Imaging Report with Structured Headings"),
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">CDA Laboratory Report</div>
 	 * <div class="de">CDA Laboratory Report</div>
 	 * <div class="fr">CDA Laboratory Report</div>
 	 * <div class="it">CDA Laboratory Report</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	CDA_LABORATORY_REPORT("urn:ihe:lab:xd-lab:2008", "1.3.6.1.4.1.19376.1.2.3",
 			"CDA Laboratory Report", "CDA Laboratory Report", "CDA Laboratory Report",
 			"CDA Laboratory Report", "CDA Laboratory Report"),
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">CDA Wrapped Text Report</div>
 	 * <div class="de">CDA Wrapped Text Report</div>
 	 * <div class="fr">CDA Wrapped Text Report</div>
 	 * <div class="it">CDA Wrapped Text Report</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	CDA_WRAPPED_TEXT_REPORT("urn:ihe:rad:TEXT", "1.3.6.1.4.1.19376.1.2.3",
 			"XDS-I CDA Wrapped Text Report (XDS-I)", "CDA Wrapped Text Report",
 			"CDA Wrapped Text Report", "CDA Wrapped Text Report", "CDA Wrapped Text Report"),
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Community Dispense</div>
 	 * <div class="de">Community Dispense</div>
 	 * <div class="fr">Community Dispense</div>
 	 * <div class="it">Community Dispense</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	COMMUNITY_DISPENSE("urn:ihe:pharm:dis:2010", "1.3.6.1.4.1.19376.1.2.3", "Community Dispense",
 			"Community Dispense", "Community Dispense", "Community Dispense", "Community Dispense"),
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Community Medication List</div>
 	 * <div class="de">Community Medication List</div>
 	 * <div class="fr">Community Medication List</div>
 	 * <div class="it">Community Medication List</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	COMMUNITY_MEDICATION_LIST("urn:ihe:pharm:pml:2013", "1.3.6.1.4.1.19376.1.2.3",
 			"Community Medication List", "Community Medication List", "Community Medication List",
 			"Community Medication List", "Community Medication List"),
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Community Medication Treatment Plan</div>
 	 * <div class="de">Community Medication Treatment Plan</div>
 	 * <div class="fr">Community Medication Treatment Plan</div>
 	 * <div class="it">Community Medication Treatment Plan</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	COMMUNITY_MEDICATION_TREATMENT_PLAN("urn:ihe:pharm:mtp:2015", "1.3.6.1.4.1.19376.1.2.3",
 			"Community Medication Treatment Plan", "Community Medication Treatment Plan",
 			"Community Medication Treatment Plan", "Community Medication Treatment Plan",
 			"Community Medication Treatment Plan"),
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Community Pharmaceutical Advice</div>
 	 * <div class="de">Community Pharmaceutical Advice</div>
 	 * <div class="fr">Community Pharmaceutical Advice</div>
 	 * <div class="it">Community Pharmaceutical Advice</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	COMMUNITY_PHARMACEUTICAL_ADVICE("urn:ihe:pharm:padv:2010", "1.3.6.1.4.1.19376.1.2.3",
 			"Community Pharmaceutical Advice", "Community Pharmaceutical Advice",
 			"Community Pharmaceutical Advice", "Community Pharmaceutical Advice",
 			"Community Pharmaceutical Advice"),
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Community Prescription</div>
 	 * <div class="de">Community Prescription</div>
 	 * <div class="fr">Community Prescription</div>
 	 * <div class="it">Community Prescription</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	COMMUNITY_PRESCRIPTION("urn:ihe:pharm:pre:2010", "1.3.6.1.4.1.19376.1.2.3",
 			"Community Prescription", "Community Prescription", "Community Prescription",
 			"Community Prescription", "Community Prescription"),
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">IHE KOS document</div>
 	 * <div class="de">KOS Dokument</div>
 	 * <div class="fr">Document KOS</div>
 	 * <div class="it">Documento KOS </div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	IHE_KOS_DOCUMENT("1.2.840.10008.5.1.4.1.1.88.59", "1.2.840.10008.2.6.1",
 			"DICOM Manifest (DICOM KOS SOP Class UID)", "IHE KOS document", "KOS Dokument",
 			"Document KOS", "Documento KOS "),
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Immunization Content (IC)</div>
 	 * <div class="de">Immunization Content (IC)</div>
 	 * <div class="fr">Immunization Content (IC)</div>
 	 * <div class="it">Immunization Content (IC)</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	IMMUNIZATION_CONTENT("urn:ihe:pcc:ic:2009", "1.3.6.1.4.1.19376.1.2.3",
 			"Immunization Content (IC)", "Immunization Content (IC)", "Immunization Content (IC)",
 			"Immunization Content (IC)", "Immunization Content (IC)"),
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">MimeType sufficient</div>
 	 * <div class="de">MimeType sufficient</div>
 	 * <div class="fr">MimeType sufficient</div>
 	 * <div class="it">MimeType sufficient</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	MIMETYPE_SUFFICIENT("urn:ihe:iti:xds:2017:mimeTypeSufficient", "2.16.756.5.30.1.127.77.10.5.2",
 			"MimeType sufficient", "MimeType sufficient", "MimeType sufficient",
 			"MimeType sufficient", "MimeType sufficient"),
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">PDF embedded in CDA per XDS-SD profile</div>
 	 * <div class="de">PDF embedded in CDA per XDS-SD profile</div>
 	 * <div class="fr">PDF embedded in CDA per XDS-SD profile</div>
 	 * <div class="it">PDF embedded in CDA per XDS-SD profile</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	PDF_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE("urn:ihe:iti:xds-sd:pdf:2008", "1.3.6.1.4.1.19376.1.2.3",
 			"Scanned Documents (PDF)", "PDF embedded in CDA per XDS-SD profile",
 			"PDF embedded in CDA per XDS-SD profile", "PDF embedded in CDA per XDS-SD profile",
 			"PDF embedded in CDA per XDS-SD profile"),
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">PDF Radiology Report</div>
 	 * <div class="de">PDF Radiology Report</div>
 	 * <div class="fr">PDF Radiology Report</div>
 	 * <div class="it">PDF Radiology Report</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	PDF_RADIOLOGY_REPORT("urn:ihe:rad:PDF", "1.3.6.1.4.1.19376.1.2.3", "XDS-I PDF (XDS-I)",
 			"PDF Radiology Report", "PDF Radiology Report", "PDF Radiology Report",
 			"PDF Radiology Report"),
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Text embedded in CDA per XDS-SD profile</div>
 	 * <div class="de">Text embedded in CDA per XDS-SD profile</div>
 	 * <div class="fr">Text embedded in CDA per XDS-SD profile</div>
 	 * <div class="it">Text embedded in CDA per XDS-SD profile</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	TEXT_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE("urn:ihe:iti:xds-sd:text:2008",
 			"1.3.6.1.4.1.19376.1.2.3", "Scanned Documents (text)",
 			"Text embedded in CDA per XDS-SD profile", "Text embedded in CDA per XDS-SD profile",
 			"Text embedded in CDA per XDS-SD profile", "Text embedded in CDA per XDS-SD profile"),
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Unstructured EPR document</div>
 	 * <div class="de">Unstrukturiertes EPD Dokument</div>
 	 * <div class="fr">Document DEP non structuré</div>
 	 * <div class="it">Documento CIP non strutturato</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	UNSTRUCTURED_EPR_DOCUMENT("urn:che:epr:EPR_Unstructured_Document",
-			"2.16.756.5.30.1.127.77.10.5.2", "Unstructured EPD document",
+			"2.16.756.5.30.1.127.77.10.5.2", "Unstructured EPR document",
 			"Unstructured EPR document", "Unstrukturiertes EPD Dokument",
 			"Document DEP non structuré", "Documento CIP non strutturato");
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for CDA Imaging Report with Structured Headings</div>
 	 * <div class="de">Code für CDA Imaging Report with Structured Headings</div>
 	 * <div class="fr">Code de CDA Imaging Report with Structured Headings</div>
 	 * <div class="it">Code per CDA Imaging Report with Structured Headings</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	public static final String CDA_IMAGING_REPORT_WITH_STRUCTURED_HEADINGS_CODE = "urn:ihe:rad:CDA:ImagingReportStructuredHeadings:2013";
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for CDA Laboratory Report</div>
 	 * <div class="de">Code für CDA Laboratory Report</div>
 	 * <div class="fr">Code de CDA Laboratory Report</div>
 	 * <div class="it">Code per CDA Laboratory Report</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	public static final String CDA_LABORATORY_REPORT_CODE = "urn:ihe:lab:xd-lab:2008";
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for CDA Wrapped Text Report</div>
 	 * <div class="de">Code für CDA Wrapped Text Report</div>
 	 * <div class="fr">Code de CDA Wrapped Text Report</div>
 	 * <div class="it">Code per CDA Wrapped Text Report</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	public static final String CDA_WRAPPED_TEXT_REPORT_CODE = "urn:ihe:rad:TEXT";
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Community Dispense</div>
 	 * <div class="de">Code für Community Dispense</div>
 	 * <div class="fr">Code de Community Dispense</div>
 	 * <div class="it">Code per Community Dispense</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	public static final String COMMUNITY_DISPENSE_CODE = "urn:ihe:pharm:dis:2010";
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Community Medication List</div>
 	 * <div class="de">Code für Community Medication List</div>
 	 * <div class="fr">Code de Community Medication List</div>
 	 * <div class="it">Code per Community Medication List</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	public static final String COMMUNITY_MEDICATION_LIST_CODE = "urn:ihe:pharm:pml:2013";
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Community Medication Treatment Plan</div>
 	 * <div class="de">Code für Community Medication Treatment Plan</div>
 	 * <div class="fr">Code de Community Medication Treatment Plan</div>
 	 * <div class="it">Code per Community Medication Treatment Plan</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	public static final String COMMUNITY_MEDICATION_TREATMENT_PLAN_CODE = "urn:ihe:pharm:mtp:2015";
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Community Pharmaceutical Advice</div>
 	 * <div class="de">Code für Community Pharmaceutical Advice</div>
 	 * <div class="fr">Code de Community Pharmaceutical Advice</div>
 	 * <div class="it">Code per Community Pharmaceutical Advice</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	public static final String COMMUNITY_PHARMACEUTICAL_ADVICE_CODE = "urn:ihe:pharm:padv:2010";
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Community Prescription</div>
 	 * <div class="de">Code für Community Prescription</div>
 	 * <div class="fr">Code de Community Prescription</div>
 	 * <div class="it">Code per Community Prescription</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	public static final String COMMUNITY_PRESCRIPTION_CODE = "urn:ihe:pharm:pre:2010";
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for IHE KOS document</div>
 	 * <div class="de">Code für KOS Dokument</div>
 	 * <div class="fr">Code de Document KOS</div>
 	 * <div class="it">Code per Documento KOS </div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	public static final String IHE_KOS_DOCUMENT_CODE = "1.2.840.10008.5.1.4.1.1.88.59";
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Immunization Content (IC)</div>
 	 * <div class="de">Code für Immunization Content (IC)</div>
 	 * <div class="fr">Code de Immunization Content (IC)</div>
 	 * <div class="it">Code per Immunization Content (IC)</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	public static final String IMMUNIZATION_CONTENT_CODE = "urn:ihe:pcc:ic:2009";
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for MimeType sufficient</div>
 	 * <div class="de">Code für MimeType sufficient</div>
 	 * <div class="fr">Code de MimeType sufficient</div>
 	 * <div class="it">Code per MimeType sufficient</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	public static final String MIMETYPE_SUFFICIENT_CODE = "urn:ihe:iti:xds:2017:mimeTypeSufficient";
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for PDF embedded in CDA per XDS-SD profile</div>
 	 * <div class="de">Code für PDF embedded in CDA per XDS-SD profile</div>
 	 * <div class="fr">Code de PDF embedded in CDA per XDS-SD profile</div>
 	 * <div class="it">Code per PDF embedded in CDA per XDS-SD profile</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	public static final String PDF_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE_CODE = "urn:ihe:iti:xds-sd:pdf:2008";
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for PDF Radiology Report</div>
 	 * <div class="de">Code für PDF Radiology Report</div>
 	 * <div class="fr">Code de PDF Radiology Report</div>
 	 * <div class="it">Code per PDF Radiology Report</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	public static final String PDF_RADIOLOGY_REPORT_CODE = "urn:ihe:rad:PDF";
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Text embedded in CDA per XDS-SD profile</div>
 	 * <div class="de">Code für Text embedded in CDA per XDS-SD profile</div>
 	 * <div class="fr">Code de Text embedded in CDA per XDS-SD profile</div>
 	 * <div class="it">Code per Text embedded in CDA per XDS-SD profile</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	public static final String TEXT_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE_CODE = "urn:ihe:iti:xds-sd:text:2008";
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Unstructured EPR document</div>
 	 * <div class="de">Code für Unstrukturiertes EPD Dokument</div>
 	 * <div class="fr">Code de Document DEP non structuré</div>
 	 * <div class="it">Code per Documento CIP non strutturato</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	public static final String UNSTRUCTURED_EPR_DOCUMENT_CODE = "urn:che:epr:EPR_Unstructured_Document";
 
 	/**
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
+	 * <div class="de">Identifikator für das Value Set</div>
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.9";
 
@@ -379,7 +376,7 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="en">Name of the value set</div> <div class="de">Name des
 	 * Value Sets</div>
 	 */
-	public static final String VALUE_SET_NAME = "EprDocumentFormatCode";
+	public static final String VALUE_SET_NAME = "xds-formCo";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -507,7 +504,7 @@ public enum FormatCode implements ValueSetEnumInterface {
 	@Override
 	public String getCodeSystemName() {
 		String retVal = "";
-		final CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
+		CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
 		if (cs != null)
 			retVal = cs.getCodeSystemName();
 		return retVal;
@@ -538,7 +535,7 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 */
 	@Override
 	public String getDisplayName(LanguageCode languageCode) {
-		final String displayName = displayNames.get(languageCode);
+		String displayName = displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
 			return displayNames.get(null);
 		}

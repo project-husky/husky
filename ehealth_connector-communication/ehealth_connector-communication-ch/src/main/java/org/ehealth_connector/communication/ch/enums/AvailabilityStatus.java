@@ -27,61 +27,61 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.ValueSetEnumInterface;
 
 /**
- *<!-- @formatter:off -->
+ * <!-- @formatter:off -->
  * <div class="en">Document availability status as per Annex 3&amp;#160; EPRO-FDHA, Chapter 2.2.&lt;br clear="none"/&gt;</div>
  * <div class="de">Verfügbarkeitsstatus des Dokumentes gemäss Anhang 3 EPDV-EDI, Kapitel 2.2.&lt;br clear="none"/&gt;</div>
  * <div class="fr">Statut de disponibilité du document selon l'annexe 3 ODEP-DFI, chapitre 2.2.&lt;br clear="none"/&gt;</div>
  * <div class="it">Stato di disponibilità del documento secondo l'allegato 3 OCIP-DFI, capitolo 2.2. &lt;br clear="none"/&gt;</div>
- *<!-- @formatter:on -->
+ * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
 public enum AvailabilityStatus implements ValueSetEnumInterface {
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Approved</div>
 	 * <div class="de">genehmigt</div>
 	 * <div class="fr">approuvé</div>
 	 * <div class="it">approvato</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	APPROVED("urn:oasis:names:tc:ebxml-regrep:StatusType:Approved", "2.16.756.5.30.1.127.77.10.5.1",
 			"Approved", "Approved", "genehmigt", "approuvé", "approvato"),
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Deprecated</div>
 	 * <div class="de">veraltet</div>
 	 * <div class="fr">caduc</div>
 	 * <div class="it">obsoleto</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	DEPRECATED("urn:oasis:names:tc:ebxml-regrep:StatusType:Deprecated",
 			"2.16.756.5.30.1.127.77.10.5.1", "Deprecated", "Deprecated", "veraltet", "caduc",
 			"obsoleto");
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Approved</div>
 	 * <div class="de">Code für genehmigt</div>
 	 * <div class="fr">Code de approuvé</div>
 	 * <div class="it">Code per approvato</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	public static final String APPROVED_CODE = "urn:oasis:names:tc:ebxml-regrep:StatusType:Approved";
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Deprecated</div>
 	 * <div class="de">Code für veraltet</div>
 	 * <div class="fr">Code de caduc</div>
 	 * <div class="it">Code per obsoleto</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	public static final String DEPRECATED_CODE = "urn:oasis:names:tc:ebxml-regrep:StatusType:Deprecated";
 
 	/**
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
+	 * <div class="de">Identifikator für das Value Set</div>
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.2";
 
@@ -89,7 +89,7 @@ public enum AvailabilityStatus implements ValueSetEnumInterface {
 	 * <div class="en">Name of the value set</div> <div class="de">Name des
 	 * Value Sets</div>
 	 */
-	public static final String VALUE_SET_NAME = "EprDocumentAvailabilityStatus";
+	public static final String VALUE_SET_NAME = "xds-avStat";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -217,7 +217,7 @@ public enum AvailabilityStatus implements ValueSetEnumInterface {
 	@Override
 	public String getCodeSystemName() {
 		String retVal = "";
-		final CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
+		CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
 		if (cs != null)
 			retVal = cs.getCodeSystemName();
 		return retVal;
@@ -248,7 +248,7 @@ public enum AvailabilityStatus implements ValueSetEnumInterface {
 	 */
 	@Override
 	public String getDisplayName(LanguageCode languageCode) {
-		final String displayName = displayNames.get(languageCode);
+		String displayName = displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
 			return displayNames.get(null);
 		}

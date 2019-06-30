@@ -27,77 +27,77 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.ValueSetEnumInterface;
 
 /**
- *<!-- @formatter:off -->
+ * <!-- @formatter:off -->
  * <div class="en">Patient’s gender as per Annex 3&amp;#160; EPRO-FDHA, Chapter 2.10.&lt;br clear="none"/&gt;</div>
  * <div class="de">Geschlecht der Patientin oder des Patienten gemäss Anhang 3 EPDV-EDI, Kapitel 2.10.&lt;br clear="none"/&gt;</div>
  * <div class="fr">Sexe du patient selon l'annexe 3 ODEP-DFI, chapitre 2.10.&lt;br clear="none"/&gt;</div>
  * <div class="it">Sesso del paziente secondo l'allegato 3 OCIP-DFI, capitolo 2.10.&lt;br clear="none"/&gt;</div>
- *<!-- @formatter:on -->
+ * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
 public enum SourcePatientInfo implements ValueSetEnumInterface {
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Female</div>
 	 * <div class="de">Weiblich</div>
 	 * <div class="fr">Féminin</div>
 	 * <div class="it">Femminile</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	FEMALE("F", "2.16.840.1.113883.5.1", "Female", "Female", "Weiblich", "Féminin", "Femminile"),
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Male</div>
 	 * <div class="de">Männlich</div>
 	 * <div class="fr">Masculin</div>
 	 * <div class="it">Maschile</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	MALE("M", "2.16.840.1.113883.5.1", "Male", "Male", "Männlich", "Masculin", "Maschile"),
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Other</div>
 	 * <div class="de">Andere</div>
 	 * <div class="fr">Autre</div>
 	 * <div class="it">Altro</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	OTHER("UN", "2.16.840.1.113883.5.1", "Undifferentiated", "Other", "Andere", "Autre", "Altro");
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Female</div>
 	 * <div class="de">Code für Weiblich</div>
 	 * <div class="fr">Code de Féminin</div>
 	 * <div class="it">Code per Femminile</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	public static final String FEMALE_CODE = "F";
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Male</div>
 	 * <div class="de">Code für Männlich</div>
 	 * <div class="fr">Code de Masculin</div>
 	 * <div class="it">Code per Maschile</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	public static final String MALE_CODE = "M";
 
 	/**
-	 *<!-- @formatter:off -->
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Other</div>
 	 * <div class="de">Code für Andere</div>
 	 * <div class="fr">Code de Autre</div>
 	 * <div class="it">Code per Altro</div>
-	 *<!-- @formatter:on -->
+	 * <!-- @formatter:on -->
 	 */
 	public static final String OTHER_CODE = "UN";
 
 	/**
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
+	 * <div class="de">Identifikator für das Value Set</div>
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.25";
 
@@ -105,7 +105,7 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 	 * <div class="en">Name of the value set</div> <div class="de">Name des
 	 * Value Sets</div>
 	 */
-	public static final String VALUE_SET_NAME = "EprGender";
+	public static final String VALUE_SET_NAME = "xds-sourPatInf";
 
 	/**
 	 * <div class="en">Gets the Enum with a given code</div>
@@ -233,7 +233,7 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 	@Override
 	public String getCodeSystemName() {
 		String retVal = "";
-		final CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
+		CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
 		if (cs != null)
 			retVal = cs.getCodeSystemName();
 		return retVal;
@@ -264,7 +264,7 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 	 */
 	@Override
 	public String getDisplayName(LanguageCode languageCode) {
-		final String displayName = displayNames.get(languageCode);
+		String displayName = displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
 			return displayNames.get(null);
 		}
