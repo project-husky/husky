@@ -19,19 +19,17 @@ package org.ehealth_connector.communication.ch.enums;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import javax.annotation.Generated;
-
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Patient’s gender as per Annex 3&amp;#160; EPRO-FDHA, Chapter 2.10.&lt;br clear="none"/&gt;</div>
- * <div class="de">Geschlecht der Patientin oder des Patienten gemäss Anhang 3 EPDV-EDI, Kapitel 2.10.&lt;br clear="none"/&gt;</div>
- * <div class="fr">Sexe du patient selon l'annexe 3 ODEP-DFI, chapitre 2.10.&lt;br clear="none"/&gt;</div>
- * <div class="it">Sesso del paziente secondo l'allegato 3 OCIP-DFI, capitolo 2.10.&lt;br clear="none"/&gt;</div>
+ * <div class="en">Patient’s gender as per Annex 3&amp;#160; EPRO-FDHA.&lt;br clear="none"/&gt;</div>
+ * <div class="de">Geschlecht der Patientin oder des Patienten gemäss Anhang 3 EPDV-EDI.&lt;br clear="none"/&gt;</div>
+ * <div class="fr">Sexe du patient selon l'annexe 3 ODEP-DFI.&lt;br clear="none"/&gt;</div>
+ * <div class="it">Sesso del paziente secondo l'allegato 3 OCIP-DFI.&lt;br clear="none"/&gt;</div>
  * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
@@ -45,7 +43,7 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 	 * <div class="it">Femminile</div>
 	 * <!-- @formatter:on -->
 	 */
-	FEMALE("F", "2.16.840.1.113883.5.1", "Female", "Female", "Weiblich", "Féminin", "Femminile"),
+	FEMALE("female", "2.16.840.1.113883.4.642.1.2", "Female", "Female", "Weiblich", "Féminin", "Femminile"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Male</div>
@@ -54,16 +52,25 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 	 * <div class="it">Maschile</div>
 	 * <!-- @formatter:on -->
 	 */
-	MALE("M", "2.16.840.1.113883.5.1", "Male", "Male", "Männlich", "Masculin", "Maschile"),
+	MALE("male", "2.16.840.1.113883.4.642.1.2", "Male", "Male", "Männlich", "Masculin", "Maschile"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Other</div>
-	 * <div class="de">Andere</div>
+	 * <div class="de">Anderes</div>
 	 * <div class="fr">Autre</div>
 	 * <div class="it">Altro</div>
 	 * <!-- @formatter:on -->
 	 */
-	OTHER("UN", "2.16.840.1.113883.5.1", "Undifferentiated", "Other", "Andere", "Autre", "Altro");
+	OTHER("other", "2.16.840.1.113883.4.642.1.2", "Other", "Other", "Anderes", "Autre", "Altro"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Unknown</div>
+	 * <div class="de">Unbekannt</div>
+	 * <div class="fr">Inconnu</div>
+	 * <div class="it">Sconosciuto</div>
+	 * <!-- @formatter:on -->
+	 */
+	UNKNOWN("unknown", "2.16.840.1.113883.4.642.1.2", "Unknown", "Unknown", "Unbekannt", "Inconnu", "Sconosciuto");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -73,7 +80,7 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 	 * <div class="it">Code per Femminile</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String FEMALE_CODE = "F";
+	public static final String FEMALE_CODE = "female";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -83,27 +90,37 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 	 * <div class="it">Code per Maschile</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String MALE_CODE = "M";
+	public static final String MALE_CODE = "male";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Other</div>
-	 * <div class="de">Code für Andere</div>
+	 * <div class="de">Code für Anderes</div>
 	 * <div class="fr">Code de Autre</div>
 	 * <div class="it">Code per Altro</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String OTHER_CODE = "UN";
+	public static final String OTHER_CODE = "other";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Unknown</div>
+	 * <div class="de">Code für Unbekannt</div>
+	 * <div class="fr">Code de Inconnu</div>
+	 * <div class="it">Code per Sconosciuto</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String UNKNOWN_CODE = "unknown";
 
 	/**
 	 * <div class="en">Identifier of the value set</div>
 	 * <div class="de">Identifikator für das Value Set</div>
 	 */
-	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.25";
+	public static final String VALUE_SET_ID = "2.16.840.1.113883.4.642.3.1";
 
 	/**
-	 * <div class="en">Name of the value set</div> <div class="de">Name des
-	 * Value Sets</div>
+	 * <div class="en">Name of the value set</div>
+	 * <div class="de">Name des Value Sets</div>
 	 */
 	public static final String VALUE_SET_NAME = "xds-sourPatInf";
 
@@ -165,8 +182,9 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
-	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
-	 * dieser Klasse) eindeutiger Code</div>
+	 * code</div>
+	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse)
+	 * eindeutiger Code</div>
 	 */
 	private String code;
 
@@ -183,8 +201,9 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div> <div class="de">Instanziiert dieses Enum Object
-	 * mittels eines Codes und einem Display Name</div>.
+	 * Display Name</div>
+	 * <div class="de">Instanziiert dieses Enum Object mittels eines Codes
+	 * und einem Display Name</div>.
 	 *
 	 * @param code
 	 *            code
@@ -201,8 +220,7 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	SourcePatientInfo(String code, String codeSystem, String displayName, String displayNameEn,
-			String displayNameDe, String displayNameFr, String displayNameIt) {
+	SourcePatientInfo(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
@@ -252,17 +270,15 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Gets the display name defined by the language param. If
-	 * there is no english translation, the default display name is
-	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
-	 * falls es keine Englische Übersetzung gibt, wird der default-Name
-	 * zurückgegeben.</div>
+	 * there is no english translation, the default display name is returned.</div>
+	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
+	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
 	 *
 	 * @param languageCode
 	 *            the language code to get the display name for
 	 * @return returns the display name in the desired language. if language not
 	 *         found, display name in german will returned
 	 */
-	@Override
 	public String getDisplayName(LanguageCode languageCode) {
 		String displayName = displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
@@ -272,8 +288,8 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the value set identifier.</div>
-	 * <div class="de">Liefert den Value Set Identifikator.</div>
+	 * <div class="en">Gets the value set identifier.</div> <div class="de">Liefert
+	 * den Value Set Identifikator.</div>
 	 *
 	 * @return <div class="en">the value set identifier</div>
 	 */

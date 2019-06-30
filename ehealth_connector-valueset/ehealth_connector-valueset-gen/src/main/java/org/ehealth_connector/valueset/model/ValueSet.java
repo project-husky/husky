@@ -511,13 +511,22 @@ public class ValueSet {
 		return retVal;
 	}
 
+	/**
+	 * Gets the description in the given language.
+	 *
+	 * @param language
+	 *            the language
+	 * @return the description
+	 */
 	public String getDescription(LanguageCode language) {
 		String retVal = null;
-		for (int i = 0; i < this.descriptionList.size(); i++) {
-			LangText langText = this.descriptionList.get(i);
-			if (language.equals(langText.getLangCode())) {
-				retVal = langText.getLangText();
-				break;
+		if (descriptionList != null) {
+			for (int i = 0; i < this.descriptionList.size(); i++) {
+				LangText langText = this.descriptionList.get(i);
+				if (language.equals(langText.getLangCode())) {
+					retVal = langText.getLangText();
+					break;
+				}
 			}
 		}
 		return retVal;
