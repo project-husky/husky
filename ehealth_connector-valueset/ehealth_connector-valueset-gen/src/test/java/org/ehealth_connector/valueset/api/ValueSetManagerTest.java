@@ -41,6 +41,7 @@ import org.ehealth_connector.valueset.enums.SourceFormatType;
 import org.ehealth_connector.valueset.enums.SourceSystemType;
 import org.ehealth_connector.valueset.enums.ValueSetEntryType;
 import org.ehealth_connector.valueset.enums.ValueSetStatus;
+import org.ehealth_connector.valueset.exceptions.InitializationException;
 import org.ehealth_connector.valueset.model.ValueSet;
 import org.ehealth_connector.valueset.model.ValueSetEntry;
 import org.ehealth_connector.valueset.model.Version;
@@ -162,6 +163,8 @@ public class ValueSetManagerTest {
 			fail("downloadValueSetJsonTest: ParserConfigurationException");
 		} catch (SAXException e) {
 			fail("downloadValueSetJsonTest: SAXException");
+		} catch (InitializationException e) {
+			fail("downloadValueSetJsonTest: InitializationException");
 		}
 
 	}

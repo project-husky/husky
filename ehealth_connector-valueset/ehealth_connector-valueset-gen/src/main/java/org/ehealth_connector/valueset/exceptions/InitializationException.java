@@ -30,7 +30,17 @@ public class InitializationException extends Exception {
 	 * @param message
 	 *            the message
 	 */
-	public InitializationException(String message) {
+	public InitializationException() {
 		super("The value set cannot be loaded. Please check the content of the file/stream.");
+	}
+
+	/**
+	 * Instantiates a new initialization exception.
+	 *
+	 * @param message
+	 *            the message
+	 */
+	public InitializationException(String message) {
+		super(message);
 	}
 }

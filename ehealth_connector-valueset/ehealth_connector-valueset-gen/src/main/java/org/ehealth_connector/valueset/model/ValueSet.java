@@ -210,8 +210,7 @@ public class ValueSet {
 	/**
 	 * The Class ValueSetEntryPreferredEnglishDesignationComparator.
 	 */
-	private class ValueSetEntryPreferredEnglishDesignationComparator
-			implements Comparator<ValueSetEntry> {
+	private class ValueSetEntryEnumNameComparator implements Comparator<ValueSetEntry> {
 
 		/**
 		 *
@@ -230,20 +229,63 @@ public class ValueSet {
 			else if ((a != null) && (b == null))
 				return 1;
 			else {
+
+				String enumConstantName_a = ValueSet
+						.buildEnumName(a.getCodeBaseType().getDisplayName());
 				String preferredDesignation_a = a.getDesignation(LanguageCode.ENGLISH,
 						DesignationType.PREFERRED);
+				if (preferredDesignation_a != null)
+					enumConstantName_a = ValueSet.buildEnumName(preferredDesignation_a);
+
+				String enumConstantName_b = ValueSet
+						.buildEnumName(b.getCodeBaseType().getDisplayName());
 				String preferredDesignation_b = b.getDesignation(LanguageCode.ENGLISH,
 						DesignationType.PREFERRED);
-				if ((preferredDesignation_a == null) && (preferredDesignation_b == null))
+				if (preferredDesignation_b != null)
+					enumConstantName_b = ValueSet.buildEnumName(preferredDesignation_b);
+
+				if ((enumConstantName_a == null) && (enumConstantName_b == null))
 					return 0;
-				else if ((preferredDesignation_a == null) && (preferredDesignation_b != null))
+				else if ((enumConstantName_a == null) && (enumConstantName_b != null))
 					return -1;
-				else if ((preferredDesignation_a != null) && (preferredDesignation_b == null))
+				else if ((enumConstantName_a != null) && (enumConstantName_b == null))
 					return 1;
 				else
-					return preferredDesignation_a.compareTo(preferredDesignation_b);
+					return enumConstantName_a.compareTo(enumConstantName_b);
 			}
 		}
+	}
+
+	/**
+	 * <div class="en">Builds a Java compatible enum element name from a
+	 * string.</div>
+	 *
+	 * @param displayName
+	 *            The string to build the enum name from.
+	 * @return An all upper case string with every non-word character replaced
+	 *         with an underscore.
+	 * @throws IllegalArgumentException
+	 *             When the provided displayName is null or empty.
+	 */
+	public static String buildEnumName(String displayName) throws IllegalArgumentException {
+		if (displayName == null || displayName.trim().isEmpty()) {
+			throw new IllegalArgumentException("displayName cannot be null or empty");
+		}
+
+		String enumName = displayName.trim().toUpperCase();
+
+		enumName = enumName.replaceAll("CLIENT'S", "CLIENT");
+		enumName = enumName.replaceAll("PATIENT'S", "PATIENT");
+		enumName = enumName.replaceAll(" \\(IC\\)", "");
+
+		enumName = enumName.replaceAll("&AMP;", "AND");
+
+		enumName = enumName.replaceAll("\\W", "_");
+
+		while (enumName.contains("__"))
+			enumName = enumName.replaceAll("__", "_");
+
+		return enumName;
 	}
 
 	/**
@@ -772,11 +814,11 @@ public class ValueSet {
 	 *
 	 * @return the array list
 	 */
-	public ArrayList<ValueSetEntry> sortValueSetEntriesByPreferredEnglishDesignation() {
+	public ArrayList<ValueSetEntry> sortValueSetEntriesByEnumName() {
 		if (this.valueSetEntryList == null) {
 			this.valueSetEntryList = new ArrayList<ValueSetEntry>();
 		}
-		this.valueSetEntryList.sort(new ValueSetEntryPreferredEnglishDesignationComparator());
+		this.valueSetEntryList.sort(new ValueSetEntryEnumNameComparator());
 		return this.valueSetEntryList;
 	}
 

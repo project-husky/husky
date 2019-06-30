@@ -38,6 +38,7 @@ import org.ehealth_connector.valueset.config.ValueSetConfig;
 import org.ehealth_connector.valueset.config.ValueSetPackageConfig;
 import org.ehealth_connector.valueset.enums.ValueSetPackageStatus;
 import org.ehealth_connector.valueset.exceptions.ConfigurationException;
+import org.ehealth_connector.valueset.exceptions.InitializationException;
 import org.ehealth_connector.valueset.model.ValueSet;
 import org.ehealth_connector.valueset.model.ValueSetPackage;
 import org.xml.sax.SAXException;
@@ -77,8 +78,8 @@ public class ValueSetPackageManager {
 	}
 
 	public ValueSetPackage downloadValueSetPackage(ValueSetPackageConfig valueSetPackageConfig,
-			String pathName)
-			throws MalformedURLException, IOException, ParserConfigurationException, SAXException {
+			String pathName) throws MalformedURLException, IOException,
+			ParserConfigurationException, SAXException, InitializationException {
 		ValueSetPackage retVal = ValueSetPackage.builder()
 				.withDescription(valueSetPackageConfig.getDescription())
 				.withIdentificator(valueSetPackageConfig.getIdentificator())

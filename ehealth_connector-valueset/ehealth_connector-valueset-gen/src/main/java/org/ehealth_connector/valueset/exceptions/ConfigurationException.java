@@ -31,7 +31,17 @@ public class ConfigurationException extends Exception {
 	 * @param message
 	 *            the message
 	 */
-	public ConfigurationException(String message) {
+	public ConfigurationException() {
 		super("The value set configuration cannot be loaded. Please check the config file/stream.");
+	}
+
+	/**
+	 * Instantiates a new configuration exception.
+	 *
+	 * @param message
+	 *            the message
+	 */
+	public ConfigurationException(String message) {
+		super(message);
 	}
 }

@@ -58,6 +58,7 @@ import org.ehealth_connector.valueset.config.ValueSetConfig;
 import org.ehealth_connector.valueset.enums.DesignationType;
 import org.ehealth_connector.valueset.enums.ValueSetEntryType;
 import org.ehealth_connector.valueset.enums.ValueSetStatus;
+import org.ehealth_connector.valueset.exceptions.InitializationException;
 import org.ehealth_connector.valueset.model.Designation;
 import org.ehealth_connector.valueset.model.ValueSet;
 import org.ehealth_connector.valueset.model.ValueSetEntry;
@@ -134,25 +135,32 @@ public class ValueSetManager {
 	 *             Signals that an I/O exception has occurred.
 	 * @throws SAXException
 	 * @throws ParserConfigurationException
+	 * @throws InitializationException
 	 */
-	public ValueSet downloadValueSet(ValueSetConfig valueSetConfig)
-			throws MalformedURLException, IOException, ParserConfigurationException, SAXException {
+	public ValueSet downloadValueSet(ValueSetConfig valueSetConfig) throws MalformedURLException,
+			IOException, ParserConfigurationException, SAXException, InitializationException {
 		ValueSet retVal = null;
 		if (valueSetConfig != null) {
 			switch (valueSetConfig.getSourceSystemType()) {
 			case ARTDECOR_FHIR:
 				String downloadedString = IOUtils.toString(new URL(valueSetConfig.getSourceUrl()),
 						UTF8_ENCODING);
-				switch (valueSetConfig.getSourceFormatType()) {
-				case JSON:
-					retVal = loadValueSetJson(IOUtils.toInputStream(downloadedString));
-					break;
-				case XML:
-					retVal = loadValueSetXml(IOUtils.toInputStream(downloadedString));
-					break;
-				case IHESVS:
-					retVal = loadValueSetIheSvs(IOUtils.toInputStream(downloadedString));
-					break;
+				try {
+					switch (valueSetConfig.getSourceFormatType()) {
+					case JSON:
+						retVal = loadValueSetJson(IOUtils.toInputStream(downloadedString));
+						break;
+					case XML:
+						retVal = loadValueSetXml(IOUtils.toInputStream(downloadedString));
+						break;
+					case IHESVS:
+						retVal = loadValueSetIheSvs(IOUtils.toInputStream(downloadedString));
+						break;
+					}
+				} catch (RuntimeException e) {
+					throw new InitializationException(
+							"The value set cannot be loaded. Please check the content of the file/stream. (downloadedString is: '"
+									+ downloadedString + "')");
 				}
 				break;
 			}

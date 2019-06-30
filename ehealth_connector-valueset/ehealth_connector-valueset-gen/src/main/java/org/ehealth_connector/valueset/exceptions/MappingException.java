@@ -30,8 +30,18 @@ public class MappingException extends Exception {
 	 * @param message
 	 *            the message
 	 */
-	public MappingException(String message) {
+	public MappingException() {
 		super("The requested mapping does not exist.");
+	}
+
+	/**
+	 * Instantiates a new mapping exception.
+	 *
+	 * @param message
+	 *            the message
+	 */
+	public MappingException(String message) {
+		super(message);
 	}
 
 }
