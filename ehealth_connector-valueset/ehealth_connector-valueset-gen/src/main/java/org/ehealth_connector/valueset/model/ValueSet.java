@@ -30,24 +30,25 @@ import org.ehealth_connector.valueset.enums.DesignationType;
 import org.ehealth_connector.valueset.enums.ValueSetStatus;
 
 /**
- * The Class ValueSet.
+ * <div class="en">The Class ValueSet is intended to collect all metadata of a
+ * value set (such as id, name, version, date ...) and all Entries (codes) of
+ * the value set.</div>
+ *
+ * <div class="de">Die Klasse ValueSet dient zum Sammeln aller Metadaten eines
+ * Wertesatzes (wie ID, Name, Version, Datum ...) und aller Einträge (Codes) des
+ * Wertesatzes.</div>
  */
 public class ValueSet {
+
+	/**
+	 * See getter/setter for more details to the class members.
+	 */
 
 	/**
 	 * Builder to build {@link ValueSet}.
 	 */
 	@Generated("SparkTools")
 	public static final class Builder {
-
-		/** The mapping identificator list. */
-		private ArrayList<IdentificatorBaseType> mappingIdentificatorList;
-
-		/** The mapping name list. */
-		private ArrayList<String> mappingNameList;
-
-		/** The value set entry list. */
-		private ArrayList<ValueSetEntry> valueSetEntryList;
 
 		/** The description list. */
 		private ArrayList<LangText> descriptionList;
@@ -61,11 +62,20 @@ public class ValueSet {
 		/** The identificator. */
 		private IdentificatorBaseType identificator;
 
+		/** The mapping identificator list. */
+		private ArrayList<IdentificatorBaseType> mappingIdentificatorList;
+
+		/** The mapping name list. */
+		private ArrayList<String> mappingNameList;
+
 		/** The name. */
 		private String name;
 
 		/** The status. */
 		private ValueSetStatus status;
+
+		/** The value set entry list. */
+		private ArrayList<ValueSetEntry> valueSetEntryList;
 
 		/** The version. */
 		private Version version;
@@ -208,7 +218,10 @@ public class ValueSet {
 	}
 
 	/**
-	 * The Class ValueSetEntryPreferredEnglishDesignationComparator.
+	 * <div class="en">The Class
+	 * ValueSetEntryPreferredEnglishDesignationComparator is intended to sort
+	 * the value set entries in the same order as the Eclipse source code sorter
+	 * will do. This is just to optimize the generated Java code.
 	 */
 	private class ValueSetEntryEnumNameComparator implements Comparator<ValueSetEntry> {
 
@@ -260,6 +273,9 @@ public class ValueSet {
 	 * <div class="en">Builds a Java compatible enum element name from a
 	 * string.</div>
 	 *
+	 * <div class="de">Erstellt einen Java-kompatiblen Enum-Elementnamen aus
+	 * einer Zeichenfolge.</div>
+	 *
 	 * @param displayName
 	 *            The string to build the enum name from.
 	 * @return An all upper case string with every non-word character replaced
@@ -301,15 +317,6 @@ public class ValueSet {
 		return new Builder();
 	}
 
-	/** The mapping identificator list. */
-	private ArrayList<IdentificatorBaseType> mappingIdentificatorList;
-
-	/** The mapping name list. */
-	private ArrayList<String> mappingNameList;
-
-	/** The value set entry list. */
-	private ArrayList<ValueSetEntry> valueSetEntryList;
-
 	/** The description list. */
 	private ArrayList<LangText> descriptionList;
 
@@ -322,17 +329,29 @@ public class ValueSet {
 	/** The identificator. */
 	private IdentificatorBaseType identificator;
 
+	/** The mapping identificator list. */
+	private ArrayList<IdentificatorBaseType> mappingIdentificatorList;
+
+	/** The mapping name list. */
+	private ArrayList<String> mappingNameList;
+
 	/** The name. */
 	private String name;
 
 	/** The status. */
 	private ValueSetStatus status;
 
+	/** The value set entry list. */
+	private ArrayList<ValueSetEntry> valueSetEntryList;
+
 	/** The version. */
 	private Version version;
 
 	/**
-	 * Instantiates a new value set. Default constructor.
+	 * <div class="en">Instantiates a new ValueSet. Default constructor.</div>
+	 *
+	 * <div class="de">Instanziiert ein neues ValueSet.
+	 * Standardkonstruktor.</div>
 	 */
 	public ValueSet() {
 	}
@@ -358,7 +377,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Adds the description.
+	 * <div class="en">Adds a description.</div>
+	 *
+	 * <div class="de">Fügt eine Beschreibung hinzu.</div>
 	 *
 	 * @param value
 	 *            the value
@@ -371,7 +392,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Adds the mapping identificator.
+	 * <div class="en">Adds a mapping identificator.</div>
+	 *
+	 * <div class="de">Fügt einen Zuordnungsidentifikator hinzu.</div>
 	 *
 	 * @param value
 	 *            the value
@@ -384,7 +407,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Adds the mapping name.
+	 * <div class="en">Adds a mapping name.</div>
+	 *
+	 * <div class="de">Fügt einen Zuordnungsnamen hinzu.</div>
 	 *
 	 * @param value
 	 *            the value
@@ -397,7 +422,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Adds the value set entry.
+	 * <div class="en">Adds a value set entry.</div>
+	 *
+	 * <div class="de">Fügt einen Wertesatzeintrag hinzu.</div>
 	 *
 	 * @param value
 	 *            the value
@@ -410,39 +437,51 @@ public class ValueSet {
 	}
 
 	/**
-	 * Clear description list.
+	 * <div class="en">Clears the description list.</div>
+	 *
+	 * <div class="de">Löscht die Beschreibungsliste.</div>
 	 */
 	public void clearDescriptionList() {
 		this.valueSetEntryList = new ArrayList<ValueSetEntry>();
 	}
 
 	/**
-	 * Clear mapping identificator list.
+	 * <div class="en">Clears the mapping identificator list.</div>
+	 *
+	 * <div class="de">Löscht die Liste der Zuordnungsidentifikatoren.</div>
 	 */
 	public void clearMappingIdentificatorList() {
 		this.mappingIdentificatorList = new ArrayList<IdentificatorBaseType>();
 	}
 
 	/**
-	 * Clear mapping name list.
+	 * <div class="en">Clears the mapping name list.</div>
+	 *
+	 * <div class="de">Löscht die Liste der Zuordnungsnamen.</div>
 	 */
 	public void clearMappingNameList() {
 		this.mappingNameList = new ArrayList<String>();
 	}
 
 	/**
-	 * Clear value set entry list.
+	 * <div class="en">Clears the value set entry list.</div>
+	 *
+	 * <div class="de">Löscht die Wertesatz-Eintragsliste.</div>
 	 */
 	public void clearValueSetEntryList() {
 		this.valueSetEntryList = new ArrayList<ValueSetEntry>();
 	}
 
 	/**
-	 * Checks whether the to objects are equal (based on their content).
+	 * <div class="en">Checks whether the two objects are equal (based on their
+	 * content).</div>
+	 *
+	 * <div class="de">Prüft, ob die beiden Objekte gleich sind (basierend auf
+	 * ihrem Inhalt).</div>
 	 *
 	 * @param obj
-	 *            the obj to compare
-	 * @return true, if equal
+	 *            the ValueSet to compare
+	 * @return true, if equal; false otherwise.
 	 */
 	public boolean equals(ValueSet obj) {
 		boolean retVal = true;
@@ -515,7 +554,10 @@ public class ValueSet {
 	}
 
 	/**
-	 * Gets the description in the given language.
+	 * <div class="en">Gets the description in the given language.</div>
+	 *
+	 * <div class="de">Ruft die Beschreibung in der angegebenen Sprache
+	 * ab.</div>
 	 *
 	 * @param language
 	 *            the language
@@ -536,7 +578,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Gets the description list.
+	 * <div class="en">Gets the description list.</div>
+	 *
+	 * <div class="de">Ruft die Beschreibungsliste ab.</div>
 	 *
 	 * @return the description list
 	 */
@@ -545,7 +589,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Gets the display name.
+	 * <div class="en">Gets the display name.</div>
+	 *
+	 * <div class="de">Ruft den Anzeigenamen ab.</div>
 	 *
 	 * @return the display name
 	 */
@@ -554,7 +600,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Gets the effective date.
+	 * <div class="en">Gets the effective date.</div>
+	 *
+	 * <div class="de">Ruft das Datum des Inkrafttretens ab.</div>
 	 *
 	 * @return the effective date
 	 */
@@ -563,7 +611,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Gets the identificator.
+	 * <div class="en">Gets the identificator.</div>
+	 *
+	 * <div class="de">Ruft den Identifikator ab.</div>
 	 *
 	 * @return the identificator
 	 */
@@ -572,7 +622,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Gets the mapping identificator list.
+	 * <div class="en">Gets the mapping identificator list.</div>
+	 *
+	 * <div class="de">Ruft die Liste der Zuordnungsidentifikatoren ab.</div>
 	 *
 	 * @return the mapping identificator list
 	 */
@@ -581,7 +633,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Gets the mapping name list.
+	 * <div class="en">Gets the mapping name list.</div>
+	 *
+	 * <div class="de">Ruft die Liste der Zuordnungsnamen ab.</div>
 	 *
 	 * @return the mapping name list
 	 */
@@ -590,7 +644,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Gets the name.
+	 * <div class="en">Gets the name.</div>
+	 *
+	 * <div class="de">Ruft den Namen ab.</div>
 	 *
 	 * @return the name
 	 */
@@ -599,7 +655,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Gets the status.
+	 * <div class="en">Gets the status.</div>
+	 *
+	 * <div class="de">Ruft den Status ab.</div>
 	 *
 	 * @return the status
 	 */
@@ -608,7 +666,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Gets the value set entry by code.
+	 * <div class="en">Gets the value set entry by code.</div>
+	 *
+	 * <div class="de">Ruft den Wertesatz-Eintrag anhand seines Codes ab.</div>
 	 *
 	 * @param value
 	 *            the value
@@ -624,7 +684,10 @@ public class ValueSet {
 	}
 
 	/**
-	 * Gets the value set entry by mapping code.
+	 * <div class="en">Gets the value set entry by mapping code.</div>
+	 *
+	 * <div class="de">Ruft den Wertesatz-Eintrag anhand des angegebenen
+	 * Zuordnungscodes ab.</div>
 	 *
 	 * @param value
 	 *            the value
@@ -640,7 +703,10 @@ public class ValueSet {
 	}
 
 	/**
-	 * Gets the value set entry by mapping name.
+	 * <div class="en">Gets the value set entry by mapping name.</div>
+	 *
+	 * <div class="de">Ruft den Wertesatz-Eintrag anhand des angegebenen
+	 * Zuordnungsnamenss ab.</div>
 	 *
 	 * @param value
 	 *            the value
@@ -656,7 +722,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Gets the value set entry list.
+	 * <div class="en">Gets the value set entry list.</div>
+	 *
+	 * <div class="de">Ruft die Liste der Wertesatz-Einträge ab.</div>
 	 *
 	 * @return the value set entry list
 	 */
@@ -665,7 +733,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Gets the version.
+	 * <div class="en">Gets the version.</div>
+	 *
+	 * <div class="de">Ruft die Version ab.</div>
 	 *
 	 * @return the version
 	 */
@@ -674,7 +744,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * List descriptions.
+	 * <div class="en">Gets the list of descriptions.</div>
+	 *
+	 * <div class="de">Ruft die Liste der Beschreibungen ab.</div>
 	 *
 	 * @return the array list
 	 */
@@ -686,7 +758,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * ArrayList mapping identificators.
+	 * <div class="en">Gets the list of mapping identificators.</div>
+	 *
+	 * <div class="de">Ruft die Liste der Zuordnungskennungen ab.</div>
 	 *
 	 * @return the list
 	 */
@@ -697,7 +771,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * ArrayList mapping names.
+	 * <div class="en">Gets the list of mapping names.</div>
+	 *
+	 * <div class="de">Ruft die Liste der Zuordnungsnamen ab.</div>
 	 *
 	 * @return the list
 	 */
@@ -709,7 +785,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * ArrayList value set entries.
+	 * <div class="en">Gets the list of value set entries.</div>
+	 *
+	 * <div class="de">Ruft die Liste der Wertesatz-Einträge ab.</div>
 	 *
 	 * @return the list
 	 */
@@ -721,7 +799,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Sets the description list.
+	 * <div class="en">Sets the description list.</div>
+	 *
+	 * <div class="de">Legt die Liste der Wertesatz-Einträge fest.</div>
 	 *
 	 * @param descriptionList
 	 *            the new description list
@@ -731,7 +811,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Sets the display name.
+	 * <div class="en">Sets the display name.</div>
+	 *
+	 * <div class="de">Legt den Anzeigenamen fest.</div>
 	 *
 	 * @param displayName
 	 *            the new display name
@@ -741,7 +823,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Sets the effective date.
+	 * <div class="en">Sets the effective date.</div>
+	 *
+	 * <div class="de">Legt den Anzeigenamen fest.</div>
 	 *
 	 * @param effectiveDate
 	 *            the new effective date
@@ -751,7 +835,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Sets the identificator.
+	 * <div class="en">Sets the identificator.</div>
+	 *
+	 * <div class="de">Legt den Identifikator fest.</div>
 	 *
 	 * @param identificator
 	 *            the new identificator
@@ -761,7 +847,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Sets the mapping identificator list.
+	 * <div class="en">Sets the mapping identificator list.</div>
+	 *
+	 * <div class="de">Legt die Liste der Zuordnungsidentifikatoren fest.</div>
 	 *
 	 * @param mappingIdentificatorList
 	 *            the new mapping identificator list
@@ -772,7 +860,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Sets the mapping name list.
+	 * <div class="en">Sets the mapping name list.</div>
+	 *
+	 * <div class="de">Legt die Liste der Zuordnungsnamen fest.</div>
 	 *
 	 * @param mappingNameList
 	 *            the new mapping name list
@@ -782,7 +872,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Sets the name.
+	 * <div class="en">Sets the name.</div>
+	 *
+	 * <div class="de">Legt den Namen fest.</div>
 	 *
 	 * @param name
 	 *            the new name
@@ -792,7 +884,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Sets the status.
+	 * <div class="en">Sets the status.</div>
+	 *
+	 * <div class="de">Setzt den Status.</div>
 	 *
 	 * @param status
 	 *            the new status
@@ -802,7 +896,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Sets the value set entry list.
+	 * <div class="en">Sets the value set entry list.</div>
+	 *
+	 * <div class="de">Legt die Liste der Ertesatz-Einträge fest.</div>
 	 *
 	 * @param valueSetEntryList
 	 *            the new value set entry list
@@ -812,7 +908,9 @@ public class ValueSet {
 	}
 
 	/**
-	 * Sets the version.
+	 * <div class="en">Sets the version.</div>
+	 *
+	 * <div class="de">Legt die Version fest.</div>
 	 *
 	 * @param version
 	 *            the new version
@@ -822,7 +920,11 @@ public class ValueSet {
 	}
 
 	/**
-	 * Sort value set entries by preferred English designation.
+	 * <div class="en">Sorts the value set entries by their Java Enum
+	 * name.</div>
+	 *
+	 * <div class="de">Sortiert die Wertemengeneinträge nach ihrem
+	 * Java-Enum-Namen.</div>
 	 *
 	 * @return the array list
 	 */

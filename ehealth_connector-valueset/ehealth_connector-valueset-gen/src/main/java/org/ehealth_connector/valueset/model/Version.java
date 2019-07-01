@@ -23,10 +23,14 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
 
 /**
- * The Class Version contains all information describing a specific version of a
- * value set.
+ * <div class="en">The Class Version contains all information describing a
+ * specific version of a value set.
  */
 public class Version {
+
+	/**
+	 * See getter/setter for more details to the class members.
+	 */
 
 	/**
 	 * Builder to build {@link Version}.
@@ -133,7 +137,10 @@ public class Version {
 	private Date validTo;
 
 	/**
-	 * Instantiates a new version.
+	 * <div class="en">Instantiates a new Version. Default constructor.</div>
+	 *
+	 * <div class="de">Instanziiert eine neue Version.
+	 * Standardkonstruktor.</div>
 	 */
 	public Version() {
 	}
@@ -153,11 +160,15 @@ public class Version {
 	}
 
 	/**
-	 * Checks whether the to objects are equal (based on their content).
+	 * <div class="en">Checks whether the two objects are equal (based on their
+	 * content).</div>
+	 *
+	 * <div class="de">Prüft, ob die beiden Objekte gleich sind (basierend auf
+	 * ihrem Inhalt).</div>
 	 *
 	 * @param obj
-	 *            the obj to compare
-	 * @return true, if equal
+	 *            the Version to compare
+	 * @return true, if equal; false otherwise.
 	 */
 	public boolean equals(Version obj) {
 		boolean retVal = true;
@@ -189,7 +200,9 @@ public class Version {
 	}
 
 	/**
-	 * Gets the label.
+	 * <div class="en">Gets the version label (e.g. '1.0').</div>
+	 *
+	 * <div class="de">Ruft die Versionsbezeichnung ab (z. B. '1.0').</div>
 	 *
 	 * @return the label
 	 */
@@ -198,7 +211,11 @@ public class Version {
 	}
 
 	/**
-	 * Gets the publishing authority.
+	 * <div class="en">Gets the publishing authority (responsible
+	 * organization).</div>
+	 *
+	 * <div class="de">Ruft die Veröffentlichungsbehörde (verantwortliche
+	 * Organisation) ab.</div>
 	 *
 	 * @return the publishing authority
 	 */
@@ -207,7 +224,9 @@ public class Version {
 	}
 
 	/**
-	 * Gets the valid from.
+	 * <div class="en">Gets the valid from date.</div>
+	 *
+	 * <div class="de">Ruft das 'Gültig ab' Datum ab.</div>
 	 *
 	 * @return the valid from
 	 */
@@ -216,7 +235,9 @@ public class Version {
 	}
 
 	/**
-	 * Gets the valid to.
+	 * <div class="en">Gets the valid to date.</div>
+	 *
+	 * <div class="de">Ruft das 'Gültig bis' Datum ab.</div>
 	 *
 	 * @return the valid to
 	 */
@@ -225,7 +246,9 @@ public class Version {
 	}
 
 	/**
-	 * Sets the label.
+	 * <div class="en">Sets the version label (e.g. '1.0').</div>
+	 *
+	 * <div class="de">Legt die Versionsbezeichnung fest (z. B. '1.0').</div>
 	 *
 	 * @param label
 	 *            the new label
@@ -235,7 +258,11 @@ public class Version {
 	}
 
 	/**
-	 * Sets the publishing authority.
+	 * <div class="en">Sets the publishing authority (responsible
+	 * organization).</div>
+	 *
+	 * <div class="de">Legt die Veröffentlichungsbehörde (verantwortliche
+	 * Organisation) fest.</div>
 	 *
 	 * @param publishingAuthority
 	 *            the new publishing authority
@@ -245,7 +272,9 @@ public class Version {
 	}
 
 	/**
-	 * Sets the valid from.
+	 * <div class="en">Sets the valid from date.</div>
+	 *
+	 * <div class="de">Legt das 'Gültig ab' Datum fest.</div>
 	 *
 	 * @param validFrom
 	 *            the new valid from
@@ -255,7 +284,9 @@ public class Version {
 	}
 
 	/**
-	 * Sets the valid to.
+	 * <div class="en">Sets the valid to date.</div>
+	 *
+	 * <div class="de">Legt das 'Gültig bis' Datum fest.</div>
 	 *
 	 * @param validTo
 	 *            the new valid to

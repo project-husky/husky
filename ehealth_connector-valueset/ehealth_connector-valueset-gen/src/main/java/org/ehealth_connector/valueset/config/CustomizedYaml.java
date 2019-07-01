@@ -25,8 +25,17 @@ import org.yaml.snakeyaml.nodes.NodeTuple;
 import org.yaml.snakeyaml.nodes.Tag;
 import org.yaml.snakeyaml.representer.Representer;
 
+/**
+ * The Class CustomizedYaml is just used internally in order to simplify and
+ * harmonize YAML dumps and loads.
+ */
 public class CustomizedYaml extends Yaml {
 
+	/**
+	 * Gets the customized yaml.
+	 *
+	 * @return the customized yaml
+	 */
 	public static Yaml getCustomizedYaml() {
 
 		DumperOptions options = new DumperOptions();

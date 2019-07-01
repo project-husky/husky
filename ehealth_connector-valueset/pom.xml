@@ -13,7 +13,6 @@
 
 	<modules>
 		<module>ehealth_connector-valueset-gen</module>
-		<module>ehealth_connector-valueset-ch</module>
 	</modules>
 
 </project>

@@ -36,14 +36,19 @@ package org.ehealth_connector.valueset.enums;
 public enum ValueSetStatus {
 
 	/**
-	 * <div class="en">Value set just created and is new and work in progress to
-	 * become a draft/finalized value set. Beyond the author, nobody should look
-	 * at this value set unless it's status code is draft or finalized..</div>
-	 * <div class="de">ValueSet, das gerade erstellt wurde und neu und in Arbeit
-	 * ist. Ausser dem Autor des ValueSets sollte sich niemand mit diesem
-	 * ValueSet befassen.</div>
+	 * <div class="en">Value set is withdrawn. Don't use it.</div>
+	 * <div class="de">Die Entwicklung am ValueSet wurde abgebrochen. Nicht
+	 * verwenden.</div>
 	 */
-	NEW,
+	CANCELLED,
+
+	/**
+	 * <div class="en">Value set retired: No longer fit for use. Information
+	 * available for historical reference.</div> <div class="de">Veraltetes
+	 * ValueSet: Nicht mehr einsatzbereit. Informationen nur als historische
+	 * Referenz verfügbar.</div>
+	 */
+	DEPRECATED,
 
 	/**
 	 * <div class="en">Value set under development (nascent). Metadata and value
@@ -64,26 +69,30 @@ public enum ValueSetStatus {
 	FINAL,
 
 	/**
-	 * <div class="en">Value set retired: No longer fit for use. Information
-	 * available for historical reference.</div> <div class="de">Veraltetes
-	 * ValueSet: Nicht mehr einsatzbereit. Informationen nur als historische
-	 * Referenz verfügbar.</div>
+	 * <div class="en">Value set just created and is new and work in progress to
+	 * become a draft/finalized value set. Beyond the author, nobody should look
+	 * at this value set unless it's status code is draft or finalized..</div>
+	 * <div class="de">ValueSet, das gerade erstellt wurde und neu und in Arbeit
+	 * ist. Ausser dem Autor des ValueSets sollte sich niemand mit diesem
+	 * ValueSet befassen.</div>
 	 */
-	DEPRECATED,
+	NEW,
 
 	/**
 	 * <div class="en">Value set is rejected. Don't use it.</div>
 	 * <div class="de">Das ValueSet wurde verworfen. Nicht verwenden.</div>
 	 */
-	REJECTED,
+	REJECTED;
 
 	/**
-	 * <div class="en">Value set is withdrawn. Don't use it.</div>
-	 * <div class="de">Die Entwicklung am ValueSet wurde abgebrochen. Nicht
-	 * verwenden.</div>
+	 * <div class="en">Gets the Enum by the given String as it appears in IHE
+	 * SVS.</div> <div class="de">Ruft die Aufzählung nach der angegebenen
+	 * Zeichenfolge ab, wie sie in IHE SVS verwendet wird.</div>
+	 *
+	 * @param iheSvsStatus
+	 *            the ihe svs status
+	 * @return the code ihe svs
 	 */
-	CANCELLED;
-
 	public static ValueSetStatus getCodeIheSvs(String iheSvsStatus) {
 		ValueSetStatus retVal = null;
 		if ("active".equals(iheSvsStatus.toLowerCase()))

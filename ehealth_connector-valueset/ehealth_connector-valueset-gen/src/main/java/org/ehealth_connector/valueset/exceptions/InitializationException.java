@@ -17,7 +17,8 @@
 package org.ehealth_connector.valueset.exceptions;
 
 /**
- * <div class="en">Exception in case the value set initialization fails.</div>
+ * <div class="en">Exception in case the value set initialization
+ * fails.</div><div class="de">todo<div>
  */
 public class InitializationException extends Exception {
 
@@ -25,17 +26,20 @@ public class InitializationException extends Exception {
 	private static final long serialVersionUID = 1057252687989322065L;
 
 	/**
-	 * Default constructor to instantiate the object.
-	 *
-	 * @param message
-	 *            the message
+	 * div class="en">Default constructor to instantiate the object. A
+	 * predefined text message will be
+	 * used.</div><div class="de">Standardkonstruktor zum Instanziieren des
+	 * Objekts. Eine vordefinierte Textnachricht wird verwendet.<div>
 	 */
 	public InitializationException() {
 		super("The value set cannot be loaded. Please check the content of the file/stream.");
 	}
 
 	/**
-	 * Instantiates a new initialization exception.
+	 * div class="en">Instantiates a new initialization exception by using the
+	 * given text message.</div><div class="de">Instanziiert eine neue
+	 * Initialisierungsausnahme unter Verwendung der angegebenen
+	 * Textnachricht.<div>
 	 *
 	 * @param message
 	 *            the message

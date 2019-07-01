@@ -25,9 +25,17 @@ import org.ehealth_connector.valueset.config.ValueSetPackageConfig;
 import org.ehealth_connector.valueset.enums.ValueSetPackageStatus;
 
 /**
- * The Class ValueSetPackage.
+ * <div class="en">The Class ValueSetPackage is intended to contain all
+ * information about a package of multiple value sets.</div>
+ *
+ * <div class="de">Die Klasse ValueSetPackage dient zum Sammeln aller
+ * Informationen zu einem Paket mit mehreren Wertesätzen.</div>
  */
 public class ValueSetPackage {
+
+	/**
+	 * See getter/setter for more details to the class members.
+	 */
 
 	/**
 	 * Builder to build {@link ValueSetPackage}.
@@ -35,26 +43,26 @@ public class ValueSetPackage {
 	@Generated("SparkTools")
 	public static final class Builder {
 
-		/** The mapping identificator list. */
-		private ArrayList<IdentificatorBaseType> mappingIdentificatorList;
-
-		/** The mapping name list. */
-		private ArrayList<String> mappingNameList;
-
-		/** The value set list. */
-		private ArrayList<ValueSet> valueSetList;
-
 		/** The description. */
 		private String description;
 
 		/** The identificator. */
 		private IdentificatorBaseType identificator;
 
+		/** The mapping identificator list. */
+		private ArrayList<IdentificatorBaseType> mappingIdentificatorList;
+
+		/** The mapping name list. */
+		private ArrayList<String> mappingNameList;
+
 		/** The source url. */
 		private String sourceUrl;
 
 		/** The status. */
 		private ValueSetPackageStatus status;
+
+		/** The value set list. */
+		private ArrayList<ValueSet> valueSetList;
 
 		/** The version. */
 		private Version version;
@@ -182,20 +190,17 @@ public class ValueSetPackage {
 		return new Builder();
 	}
 
-	/** The mapping identificator list. */
-	private ArrayList<IdentificatorBaseType> mappingIdentificatorList;
-
-	/** The mapping name list. */
-	private ArrayList<String> mappingNameList;
-
-	/** The value set list. */
-	private ArrayList<ValueSet> valueSetList;
-
 	/** The description. */
 	private String description;
 
 	/** The identificator. */
 	private IdentificatorBaseType identificator;
+
+	/** The mapping identificator list. */
+	private ArrayList<IdentificatorBaseType> mappingIdentificatorList;
+
+	/** The mapping name list. */
+	private ArrayList<String> mappingNameList;
 
 	/** The source url. */
 	private String sourceUrl;
@@ -203,11 +208,18 @@ public class ValueSetPackage {
 	/** The status. */
 	private ValueSetPackageStatus status;
 
+	/** The value set list. */
+	private ArrayList<ValueSet> valueSetList;
+
 	/** The version. */
 	private Version version;
 
 	/**
-	 * Instantiates a new value set package. Default constructor.
+	 * <div class="en">Instantiates a new ValueSetPackage. Default
+	 * constructor.</div>
+	 *
+	 * <div class="de">Instanziiert ein neues ValueSetPackage.
+	 * Standardkonstruktor.</div>
 	 */
 	public ValueSetPackage() {
 	}
@@ -231,7 +243,11 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Instantiates a new value set package from its config.
+	 * <div class="en">Instantiates a new value set package from its
+	 * config.</div>
+	 *
+	 * <div class="de">Instanziiert ein neues Wertesatzpaket aus seiner
+	 * Konfiguration.</div>
 	 */
 	public ValueSetPackage(ValueSetPackageConfig valueSetPackageConfig) {
 
@@ -248,7 +264,9 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Adds the mapping identificator.
+	 * <div class="en">Adds a mapping identificator.</div>
+	 *
+	 * <div class="de">Fügt einen Zuordnungsidentifikator hinzu.</div>
 	 *
 	 * @param value
 	 *            the value
@@ -261,7 +279,9 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Adds the mapping name.
+	 * <div class="en">Adds a mapping name.</div>
+	 *
+	 * <div class="de">Fügt einen Zuordnungsnamen hinzu.</div>
 	 *
 	 * @param value
 	 *            the value
@@ -274,7 +294,9 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Adds the value set.
+	 * <div class="en">Adds a value set.</div>
+	 *
+	 * <div class="de">Fügt einen Wertesatz hinzu.</div>
 	 *
 	 * @param value
 	 *            the value
@@ -287,32 +309,42 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Clear mapping identificator list.
+	 * <div class="en">Clears the mapping identificator list.</div>
+	 *
+	 * <div class="de">Löscht die Liste der Zuordnungsidentifikatoren.</div>
 	 */
 	public void clearMappingIdentificatorList() {
 		this.mappingIdentificatorList = new ArrayList<IdentificatorBaseType>();
 	}
 
 	/**
-	 * Clear mapping name list.
+	 * <div class="en">Clears the mapping name list.</div>
+	 *
+	 * <div class="de">Löscht die Liste der Zuordnungsnamen.</div>
 	 */
 	public void clearMappingNameList() {
 		this.mappingNameList = new ArrayList<String>();
 	}
 
 	/**
-	 * Clear value set list.
+	 * <div class="en">Clears the value set list.</div>
+	 *
+	 * <div class="de">Löscht die Wertesatzliste.</div>
 	 */
 	public void clearValueSetList() {
 		this.valueSetList = new ArrayList<ValueSet>();
 	}
 
 	/**
-	 * Checks whether the to objects are equal (based on their content).
+	 * <div class="en">Checks whether the two objects are equal (based on their
+	 * content).</div>
+	 *
+	 * <div class="de">Prüft, ob die beiden Objekte gleich sind (basierend auf
+	 * ihrem Inhalt).</div>
 	 *
 	 * @param obj
-	 *            the obj to compare
-	 * @return true, if equal
+	 *            the ValueSetPackage to compare
+	 * @return true, if equal; false otherwise.
 	 */
 	public boolean equals(ValueSetPackage obj) {
 		boolean retVal = true;
@@ -372,7 +404,9 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Gets the description.
+	 * <div class="en">Gets the description.</div>
+	 *
+	 * <div class="de">Ruft die Beschreibung ab.</div>
 	 *
 	 * @return the description
 	 */
@@ -381,7 +415,9 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Gets the identificator.
+	 * <div class="en">Gets the identificator.</div>
+	 *
+	 * <div class="de">Ruft den Identifikator ab.</div>
 	 *
 	 * @return the identificator
 	 */
@@ -390,7 +426,9 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Gets the mapping identificator list.
+	 * <div class="en">Gets the mapping identificator list.</div>
+	 *
+	 * <div class="de">Ruft die Liste der Zuordnungskennungen ab.</div>
 	 *
 	 * @return the mapping identificator list
 	 */
@@ -399,7 +437,9 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Gets the mapping name list.
+	 * <div class="en">Gets the mapping name list.</div>
+	 *
+	 * <div class="de">Ruft die Liste der Zuordnungsnamen ab.</div>
 	 *
 	 * @return the mapping name list
 	 */
@@ -408,7 +448,9 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Gets the source url.
+	 * <div class="en">Gets the source url (where to get the package).</div>
+	 *
+	 * <div class="de">Ruft die Quell-URL ab (woher das Paket stammt)</div>
 	 *
 	 * @return the source url
 	 */
@@ -417,7 +459,9 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Gets the status.
+	 * <div class="en">Gets the status.</div>
+	 *
+	 * <div class="de">Ruft den Status ab.</div>
 	 *
 	 * @return the status
 	 */
@@ -426,7 +470,9 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Gets the value set list.
+	 * <div class="en">Gets the value set list.</div>
+	 *
+	 * <div class="de">Ruft die Wertesatzliste ab.</div>
 	 *
 	 * @return the value set list
 	 */
@@ -435,7 +481,10 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Gets the value set by mapping identificator.
+	 * <div class="en">Gets a value set by mapping identificator.</div>
+	 *
+	 * <div class="de">Ruft einen Wertesatz anhand des angegebenen
+	 * Zuordnungscodes ab.</div>
 	 *
 	 * @param value
 	 *            the value
@@ -451,7 +500,10 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Gets the value set by mapping name.
+	 * <div class="en">Gets the value set by mapping name.</div>
+	 *
+	 * <div class="de">Ruft einen Wertesatz anhand des angegebenen
+	 * Zuordnungsnamens ab.</div>
 	 *
 	 * @param value
 	 *            the value
@@ -467,7 +519,9 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Gets the version.
+	 * <div class="en">Gets the version.</div>
+	 *
+	 * <div class="de">Ruft die Version ab.</div>
 	 *
 	 * @return the version
 	 */
@@ -476,7 +530,9 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * ArrayList mapping identificators.
+	 * <div class="en">Gets the list of mapping identificators.</div>
+	 *
+	 * <div class="de">Ruft die Liste der Zuordnungsidentifikatoren ab.</div>
 	 *
 	 * @return the list
 	 */
@@ -487,7 +543,9 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * ArrayList mapping names.
+	 * <div class="en">Gets the list of mapping names.</div>
+	 *
+	 * <div class="de">Ruft die Liste der Zuordnungsnamen ab.</div>
 	 *
 	 * @return the list
 	 */
@@ -499,7 +557,9 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * ArrayList value sets.
+	 * <div class="en">Gets the list of value sets.</div>
+	 *
+	 * <div class="de">Ruft die Liste der Wertesätze ab.</div>
 	 *
 	 * @return the list
 	 */
@@ -511,7 +571,9 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Sets the description.
+	 * <div class="en">Sets the description.</div>
+	 *
+	 * <div class="de">Legt die Beschreibung fest.</div>
 	 *
 	 * @param description
 	 *            the new description
@@ -521,7 +583,9 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Sets the identificator.
+	 * <div class="en">Sets the identificator.</div>
+	 *
+	 * <div class="de">Legt den Identifikator fest.</div>
 	 *
 	 * @param identificator
 	 *            the new identificator
@@ -531,7 +595,9 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Sets the mapping identificator list.
+	 * <div class="en">Sets the mapping identificator list.</div>
+	 *
+	 * <div class="de">Legt die Liste der Zuordnungsidentifikatoren fest.</div>
 	 *
 	 * @param mappingIdentificatorList
 	 *            the new mapping identificator list
@@ -542,7 +608,9 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Sets the mapping name list.
+	 * <div class="en">Sets the mapping name list.</div>
+	 *
+	 * <div class="de">Legt die Liste der Zuordnungsnamen fest.</div>
 	 *
 	 * @param mappingNameList
 	 *            the new mapping name list
@@ -552,7 +620,10 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Sets the source url.
+	 * <div class="en">Sets the source url (where to get the package).</div>
+	 *
+	 * <div class="de">Legt die Quell-URL fest (wo das Paket abgeholt werden
+	 * kann).</div>
 	 *
 	 * @param sourceUrl
 	 *            the new source url
@@ -562,17 +633,9 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Sets the source url string.
+	 * <div class="en">Sets the status.</div>
 	 *
-	 * @param sourceUrl
-	 *            the new source url string
-	 */
-	public void setSourceUrlString(String sourceUrl) {
-		this.sourceUrl = sourceUrl;
-	}
-
-	/**
-	 * Sets the status.
+	 * <div class="de">Setzt den Status.</div>
 	 *
 	 * @param status
 	 *            the new status
@@ -582,7 +645,9 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Sets the value set list.
+	 * <div class="en">Sets the value set list.</div>
+	 *
+	 * <div class="de">Legt die Wertesatzliste fest.</div>
 	 *
 	 * @param valueSetList
 	 *            the new value set list
@@ -592,7 +657,9 @@ public class ValueSetPackage {
 	}
 
 	/**
-	 * Sets the version.
+	 * <div class="en">Sets the version.</div>
+	 *
+	 * <div class="de">Legt die Version fest.</div>
 	 *
 	 * @param version
 	 *            the new version

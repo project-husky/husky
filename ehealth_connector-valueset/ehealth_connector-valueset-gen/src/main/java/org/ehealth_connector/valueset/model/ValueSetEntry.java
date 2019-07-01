@@ -26,9 +26,19 @@ import org.ehealth_connector.valueset.enums.DesignationType;
 import org.ehealth_connector.valueset.enums.ValueSetEntryType;
 
 /**
- * The Class ValueSetEntry.
+ * <div class="en">The Class ValueSetEntry is intended to collect all
+ * information of a single entry of a value set (such as code, codesystem,
+ * display names in multiple languages...).</div>
+ *
+ * <div class="de">Die Klasse ValueSetEntry dient zum Sammeln aller
+ * Informationen eines einzelnen Wertesatz-Eintrags (z. B. Code, Codesystem,
+ * Anzeigenamen in mehreren Sprachen ...).</div>
  */
 public class ValueSetEntry {
+
+	/**
+	 * See getter/setter for more details to the class members.
+	 */
 
 	/**
 	 * Builder to build {@link ValueSetEntry}.
@@ -39,26 +49,26 @@ public class ValueSetEntry {
 		/** The child list. */
 		private ArrayList<ValueSetEntry> childList;
 
-		/** The mapping code list. */
-		private ArrayList<CodeBaseType> mappingCodeList;
-
-		/** The mapping name list. */
-		private ArrayList<String> mappingNameList;
-
 		/** The code base type. */
 		private CodeBaseType codeBaseType;
 
 		/** The default mapping name. */
 		private String defaultMappingName;
 
+		/** The designation list. */
+		private ArrayList<Designation> designationList;
+
 		/** The level. */
 		private int level;
 
+		/** The mapping code list. */
+		private ArrayList<CodeBaseType> mappingCodeList;
+
+		/** The mapping name list. */
+		private ArrayList<String> mappingNameList;
+
 		/** The value set entry type. */
 		private ValueSetEntryType valueSetEntryType;
-
-		/** The designation list. */
-		private ArrayList<Designation> designationList;
 
 		/**
 		 * Instantiates a new builder.
@@ -185,29 +195,33 @@ public class ValueSetEntry {
 	/** The children. */
 	private ArrayList<ValueSetEntry> childList;
 
-	/** The mapping code list. */
-	private ArrayList<CodeBaseType> mappingCodeList;
-
-	/** The mapping name list. */
-	private ArrayList<String> mappingNameList;
-
 	/** The code base type. */
 	private CodeBaseType codeBaseType;
 
 	/** The default mapping name. */
 	private String defaultMappingName;
 
+	/** The designation list. */
+	private ArrayList<Designation> designationList;
+
 	/** The level. */
 	private int level = 0;
+
+	/** The mapping code list. */
+	private ArrayList<CodeBaseType> mappingCodeList;
+
+	/** The mapping name list. */
+	private ArrayList<String> mappingNameList;
 
 	/** The value set entry type. */
 	private ValueSetEntryType valueSetEntryType;
 
-	/** The designation list. */
-	private ArrayList<Designation> designationList;
-
 	/**
-	 * Instantiates a new value set entry. Default constructor.
+	 * <div class="en">Instantiates a new ValueSetEntry. Default
+	 * constructor.</div>
+	 *
+	 * <div class="de">Instanziiert ein neues ValueSetEntry.
+	 * Standardkonstruktor.</div>
 	 */
 	public ValueSetEntry() {
 	}
@@ -231,7 +245,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * Adds the child.
+	 * <div class="en">Adds a child value set.</div>
+	 *
+	 * <div class="de">Fügt einen untergeordneten Wertesatz hinzu.</div>
 	 *
 	 * @param value
 	 *            the value
@@ -244,7 +260,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * Adds the designation.
+	 * <div class="en">Adds a designation.</div>
+	 *
+	 * <div class="de">Fügt eine Bezeichnung hinzu.</div>
 	 *
 	 * @param value
 	 *            the value
@@ -257,7 +275,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * Adds the mapping code.
+	 * <div class="en">Adds a mapping code.</div>
+	 *
+	 * <div class="de">Fügt einen Zuordnungscode hinzu.</div>
 	 *
 	 * @param value
 	 *            the value
@@ -270,7 +290,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * Adds the mapping name.
+	 * <div class="en">Adds a mapping name.</div>
+	 *
+	 * <div class="de">Fügt einen Zuordnungsnamen hinzu.</div>
 	 *
 	 * @param value
 	 *            the value
@@ -283,39 +305,51 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * Clear child list.
+	 * <div class="en">Clears the child list.</div>
+	 *
+	 * <div class="de">Löscht die Liste untergeordneter ValueSets.</div>
 	 */
 	public void clearChildList() {
 		this.childList = new ArrayList<ValueSetEntry>();
 	}
 
 	/**
-	 * Clear designation list.
+	 * <div class="en">Clears the designation list.</div>
+	 *
+	 * <div class="de">Löscht die Bezeichnungsliste.</div>
 	 */
 	public void clearDesignationList() {
 		this.designationList = new ArrayList<Designation>();
 	}
 
 	/**
-	 * Clear mapping code list.
+	 * <div class="en">Clears the mapping code list.</div>
+	 *
+	 * <div class="de">Löscht die Mapping-Code-Liste.</div>
 	 */
 	public void clearMappingCodeList() {
 		this.mappingCodeList = new ArrayList<CodeBaseType>();
 	}
 
 	/**
-	 * Clear mapping name list.
+	 * <div class="en">Clears the mapping name list.</div>
+	 *
+	 * <div class="de">Löscht die Mapping-Namensliste.</div>
 	 */
 	public void clearMappingNameList() {
 		this.mappingNameList = new ArrayList<String>();
 	}
 
 	/**
-	 * Checks whether the to objects are equal (based on their content).
+	 * <div class="en">Checks whether the two objects are equal (based on their
+	 * content).</div>
+	 *
+	 * <div class="de">Prüft, ob die beiden Objekte gleich sind (basierend auf
+	 * ihrem Inhalt).</div>
 	 *
 	 * @param obj
-	 *            the obj to compare
-	 * @return true, if equal
+	 *            the ValueSetEntry to compare
+	 * @return true, if equal; false otherwise.
 	 */
 	public boolean equals(ValueSetEntry obj) {
 		boolean retVal = true;
@@ -365,7 +399,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * Gets the child list.
+	 * <div class="en">Gets the child list.</div>
+	 *
+	 * <div class="de">Ruft die Liste untergeordnetes ValueSets ab.</div>
 	 *
 	 * @return the child list
 	 */
@@ -374,7 +410,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * Gets the code base type.
+	 * <div class="en">Gets the code.</div>
+	 *
+	 * <div class="de">Ruft den Code ab.</div>
 	 *
 	 * @return the code base type
 	 */
@@ -383,7 +421,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * Gets the default mapping name.
+	 * <div class="en">Gets the default mapping name.</div>
+	 *
+	 * <div class="de">Ruft den Standardzuordnungsnamen ab.</div>
 	 *
 	 * @return the default mapping name
 	 */
@@ -392,7 +432,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * Gets the designation of the given language.
+	 * <div class="en">Gets the designation in the given language.</div>
+	 *
+	 * <div class="de">Ruft die Bezeichnung in der angegebenen Sprache ab.</div>
 	 *
 	 * @param language
 	 *            the language
@@ -411,7 +453,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * Gets the designation list.
+	 * <div class="en">Gets the designation list.</div>
+	 *
+	 * <div class="de">Ruft die Bezeichnungsliste ab.</div>
 	 *
 	 * @return the designation list
 	 */
@@ -420,7 +464,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * Gets the level.
+	 * <div class="en">Gets the level.</div>
+	 *
+	 * <div class="de">Ruft das Level ab.</div>
 	 *
 	 * @return the level
 	 */
@@ -429,7 +475,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * Gets the mapping code list.
+	 * <div class="en">Gets the mapping code list.</div>
+	 *
+	 * <div class="de">Ruft die Zuordnungscodeliste ab.</div>
 	 *
 	 * @return the mapping code list
 	 */
@@ -438,7 +486,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * Gets the mapping name list.
+	 * <div class="en">Gets the mapping name list.</div>
+	 *
+	 * <div class="de">Ruft die Zuordnungsnamensliste ab.</div>
 	 *
 	 * @return the mapping name list
 	 */
@@ -447,7 +497,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * Gets the value set entry type.
+	 * <div class="en">Gets the value set entry type.</div>
+	 *
+	 * <div class="de">Ruft den Typ des Eintrags ab.</div>
 	 *
 	 * @return the value set entry type
 	 */
@@ -456,7 +508,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * ArrayList children.
+	 * <div class="en">Gets the list of children.</div>
+	 *
+	 * <div class="de">Ruft die Liste untergeordnetes ValueSets ab.</div>
 	 *
 	 * @return the list
 	 */
@@ -468,7 +522,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * ArrayList designations.
+	 * <div class="en">Gets the list of designations.</div>
+	 *
+	 * <div class="de">Ruft die Liste der Bezeichnungen ab.</div>
 	 *
 	 * @return the list
 	 */
@@ -480,7 +536,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * ArrayList mapping codes.
+	 * <div class="en">Gets the list of mapping codes.</div>
+	 *
+	 * <div class="de">Ruft die Liste der Zuordnungscodes ab.</div>
 	 *
 	 * @return the list
 	 */
@@ -492,7 +550,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * ArrayList mapping names.
+	 * <div class="en">Gets the list of mapping names.</div>
+	 *
+	 * <div class="de">Ruft die Liste der Zuordnungsnamen ab.</div>
 	 *
 	 * @return the list
 	 */
@@ -504,7 +564,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * Sets the child list.
+	 * <div class="en">Sets the child list.</div>
+	 *
+	 * <div class="de">Legt die Liste untergeordnetes ValueSets fest.</div>
 	 *
 	 * @param childList
 	 *            the new child list
@@ -514,7 +576,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * Sets the code base type.
+	 * <div class="en">Sets the code.</div>
+	 *
+	 * <div class="de">Legt den Code fest.</div>
 	 *
 	 * @param codeBaseType
 	 *            the new code base type
@@ -524,7 +588,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * Sets the default mapping name.
+	 * <div class="en">Sets the default mapping name.</div>
+	 *
+	 * <div class="de">Legt den Standard-Zuordnungsnamen fest.</div>
 	 *
 	 * @param defaultMappingName
 	 *            the new default mapping name
@@ -534,7 +600,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * Sets the designation list.
+	 * <div class="en">Sets the designation list.</div>
+	 *
+	 * <div class="de">Legt die Bezeichnungsliste fest.</div>
 	 *
 	 * @param designationList
 	 *            the new designation list
@@ -544,7 +612,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * Sets the level.
+	 * <div class="en">Sets the level.</div>
+	 *
+	 * <div class="de">Legt den Level fest</div>
 	 *
 	 * @param level
 	 *            the new level
@@ -554,7 +624,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * Sets the mapping code list.
+	 * <div class="en">Sets the mapping code list.</div>
+	 *
+	 * <div class="de">Legt die Liste der Zuordnungscodes fest.</div>
 	 *
 	 * @param mappingCodeList
 	 *            the new mapping code list
@@ -564,7 +636,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * Sets the mapping name list.
+	 * <div class="en">Sets the mapping name list.</div>
+	 *
+	 * <div class="de">Legt die Liste der Zuordnungsnamen fest.</div>
 	 *
 	 * @param mappingNameList
 	 *            the new mapping name list
@@ -574,7 +648,9 @@ public class ValueSetEntry {
 	}
 
 	/**
-	 * Sets the value set entry type.
+	 * <div class="en">Sets the value set entry type.</div>
+	 *
+	 * <div class="de">Legt den Typ des Eintrags fest.</div>
 	 *
 	 * @param valueSetEntryType
 	 *            the new value set entry type

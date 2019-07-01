@@ -44,12 +44,17 @@ import org.ehealth_connector.valueset.model.ValueSetPackage;
 import org.xml.sax.SAXException;
 
 /**
- * The Class ValueSetPackageManager.
+ * <div class="en">The Class ValueSetPackageManager is intended to provide all
+ * necessary functions to fill, use, download and save value set packages.</div>
+ *
+ * <div class="de">Der Class ValueSetPackageManager dient dazu alle notwendigen
+ * Funktionen zum Befüllen, Verwenden, Herunterladen und Speichern von
+ * ValueSet-Paketen bereitzustellen.</div>
  */
 public class ValueSetPackageManager {
 
 	/**
-	 * <div class="en">The default encoding used to encode URL parameter.</div>
+	 * The default encoding used to encode URL parameter.
 	 */
 	private static final String UTF8_ENCODING = "UTF-8";
 
@@ -57,7 +62,9 @@ public class ValueSetPackageManager {
 	private ArrayList<ValueSetPackageConfig> valueSetPackageConfigList;
 
 	/**
-	 * Adds a value set package config.
+	 * <div class="en">Adds a value set package config.</div>
+	 *
+	 * <div class="de">Fügt eine Wertesatz-Paket-Konfiguration hinzu.</div>
 	 *
 	 * @param value
 	 *            the value
@@ -71,7 +78,9 @@ public class ValueSetPackageManager {
 	}
 
 	/**
-	 * Clear value set package config list.
+	 * <div class="en">Clears the value set package config list.</div>
+	 *
+	 * <div class="de">Löscht die Konfigurationsliste des Wertesatzpakets.</div>
 	 */
 	public void clearValueSetPackageConfigList() {
 		this.valueSetPackageConfigList = new ArrayList<ValueSetPackageConfig>();
@@ -97,7 +106,11 @@ public class ValueSetPackageManager {
 	}
 
 	/**
-	 * Download value set package config.
+	 * <div class="en">Downloads a value set package configuration from the
+	 * given URL.</div>
+	 *
+	 * <div class="de">Lädt eine Value-Set-Paketkonfiguration von der
+	 * angegebenen URL herunter.</div>
 	 *
 	 * @param sourceUrl
 	 *            the source url
@@ -115,7 +128,11 @@ public class ValueSetPackageManager {
 	}
 
 	/**
-	 * Download value set package config.
+	 * <div class="en">Downloads a value set package configuration from the
+	 * given URL.</div>
+	 *
+	 * <div class="de">Lädt eine Value-Set-Paketkonfiguration von der
+	 * angegebenen URL herunter.</div>
 	 *
 	 * @param sourceUrl
 	 *            the source url
@@ -135,9 +152,15 @@ public class ValueSetPackageManager {
 	}
 
 	/**
-	 * Gets the latest value set package config. The timestamps validFrom and
-	 * validTo are taken in charge for the selection. If multiple entries have
-	 * the same conditions, one of them will be returned without further checks.
+	 * <div class="en">Gets the latest value set package config. The timestamps
+	 * validFrom and validTo are taken in charge for the selection. If multiple
+	 * entries have the same conditions, one of them will be returned without
+	 * further checks.</div>
+	 *
+	 * <div class="de">Ruft die Konfiguration des neuesten Wertesatzpakets ab.
+	 * Für die Auswahl werden die Zeitstempel validFrom und validTo verwendet.
+	 * Wenn mehrere Einträge dieselben Bedingungen haben, wird einer von ihnen
+	 * ohne weitere Prüfung zurückgegeben.</div>
 	 *
 	 * @return the latest value set package config
 	 */
@@ -146,11 +169,17 @@ public class ValueSetPackageManager {
 	}
 
 	/**
-	 * Gets the latest value set package config by status. The timestamps
-	 * validFrom and validTo are taken in charge for the selection and elements
-	 * not having the given status will be ignored. If multiple entries have the
-	 * same conditions, one of them will be returned without further checks.
+	 * <div class="en">Gets the latest value set package config by status. The
+	 * timestamps validFrom and validTo are taken in charge for the selection
+	 * and elements not having the given status will be ignored. If multiple
+	 * entries have the same conditions, one of them will be returned without
+	 * further checks.</div>
 	 *
+	 * <div class="de">Ruft die Konfiguration des neuesten Wertesatzpakets nach
+	 * Status ab. Die Zeitstempel validFrom und validTo werden für die Auswahl
+	 * verwendet und Elemente, die nicht den angegebenen Status haben, werden
+	 * ignoriert. Wenn mehrere Einträge dieselben Bedingungen haben, wird einer
+	 * von ihnen ohne weitere Prüfung zurückgegeben.</div>
 	 *
 	 * @param status
 	 *            the status to be verified
@@ -162,11 +191,18 @@ public class ValueSetPackageManager {
 	}
 
 	/**
-	 * Gets the value set package config by status and date. Elements not having
-	 * the given status and elements that are not valid at the given time will
-	 * be ignored. From the remaining elements, the latest one will be returned
-	 * (If multiple entries have the same conditions, one of them will be
-	 * returned without further checks.)
+	 * <div class="en">Gets the value set package config by status and date.
+	 * Elements not having the given status and elements that are not valid at
+	 * the given time will be ignored. From the remaining elements, the latest
+	 * one will be returned. If multiple entries have the same conditions, one
+	 * of them will be returned without further checks.</div>
+	 *
+	 * <div class="de">Ruft die Wertesatz-Paketkonfiguration nach Status und
+	 * Datum ab. Elemente, die nicht den angegebenen Status haben, und Elemente,
+	 * die zum angegebenen Zeitpunkt nicht gültig sind, werden ignoriert. Von
+	 * den übrigen Elementen wird das letzte zurückgegeben. Wenn mehrere
+	 * Einträge dieselben Bedingungen haben, wird einer von ihnen ohne weitere
+	 * Prüfung zurückgegeben.</div>
 	 *
 	 * @param status
 	 *            the status
@@ -265,7 +301,10 @@ public class ValueSetPackageManager {
 	}
 
 	/**
-	 * List value set package config.
+	 * <div class="en">Gets the value set package config list.</div>
+	 *
+	 * <div class="de">Ruft die Liste der Wertesatzpaket-Konfigurationen
+	 * ab.</div>
 	 *
 	 * @return the list
 	 */
@@ -278,7 +317,9 @@ public class ValueSetPackageManager {
 	}
 
 	/**
-	 * Load value set package.
+	 * <div class="en">Loads a value set package from the given file.</div>
+	 *
+	 * <div class="de">Lädt ein Wertesatz-Paket aus der angegebenen Datei.</div>
 	 *
 	 * @param valueSetPackage
 	 *            the value set package
@@ -291,7 +332,10 @@ public class ValueSetPackageManager {
 	}
 
 	/**
-	 * Load value set package.
+	 * <div class="en">Loads a value set package from the given stream.</div>
+	 *
+	 * <div class="de">Lädt ein Wertesatz-Paket aus dem angegebenen
+	 * Stream.</div>
 	 *
 	 * @param valueSetPackage
 	 *            the value set package
@@ -302,7 +346,11 @@ public class ValueSetPackageManager {
 	}
 
 	/**
-	 * Load value set package.
+	 * <div class="en">Loads a value set package from the given stream
+	 * reader.</div>
+	 *
+	 * <div class="de">Lädt ein Wertesatz-Paket aus dem angegebenen Stream
+	 * Reader.</div>
 	 *
 	 * @param reader
 	 *            the reader
@@ -316,7 +364,13 @@ public class ValueSetPackageManager {
 	}
 
 	/**
-	 * Load value set package.
+	 * <div class="en">Loads a value set package from the given file (the given
+	 * filename must contain the relative or full path to access the
+	 * file).</div>
+	 *
+	 * <div class="de">Lädt ein Wertesatz-Paket aus der angegebenen Datei (der
+	 * angegebene Dateiname muss den relativen oder vollständigen Pfad
+	 * enthalten, um auf die Datei zuzugreifen).</div>
 	 *
 	 * @param fileName
 	 *            the file name
@@ -333,7 +387,11 @@ public class ValueSetPackageManager {
 	}
 
 	/**
-	 * Load value set package config.
+	 * <div class="en">Loads a value set package configuration from the given
+	 * file.</div>
+	 *
+	 * <div class="de">Lädt eine Wertesatz-Paket-Konfigurationaus der
+	 * angegebenen Datei.</div>
 	 *
 	 * @param config
 	 *            the config
@@ -349,7 +407,11 @@ public class ValueSetPackageManager {
 	}
 
 	/**
-	 * Load value set package config.
+	 * <div class="en">Loads a value set package configuration from the given
+	 * stream.</div>
+	 *
+	 * <div class="de">Lädt eine Wertesatz-Paket-Konfigurationaus dem
+	 * angegebenen Stream.</div>
 	 *
 	 * @param config
 	 *            the config
@@ -363,7 +425,11 @@ public class ValueSetPackageManager {
 	}
 
 	/**
-	 * Load value set package config.
+	 * <div class="en">Loads a value set package configuration from the given
+	 * stream reader.</div>
+	 *
+	 * <div class="de">Lädt eine Wertesatz-Paket-Konfigurationaus dem
+	 * angegebenen Stream-Reader.</div>
 	 *
 	 * @param reader
 	 *            the reader
@@ -394,7 +460,13 @@ public class ValueSetPackageManager {
 	}
 
 	/**
-	 * Load value set package config.
+	 * <div class="en">Loads a value set package configuration from the given
+	 * file (the given filename must contain the relative or full path to access
+	 * the file).</div>
+	 *
+	 * <div class="de">Lädt eine Wertesatz-Paket-Konfigurationaus der
+	 * angegebenen Datei (der angegebene Dateiname muss den relativen oder
+	 * vollständigen Pfad enthalten, um auf die Datei zuzugreifen).</div>
 	 *
 	 * @param fileName
 	 *            the file name
@@ -411,7 +483,11 @@ public class ValueSetPackageManager {
 	}
 
 	/**
-	 * Save value set package.
+	 * <div class="en">Saves a value set package in YAML format into the given
+	 * File.</div>
+	 *
+	 * <div class="de">Speichert ein Wertesatz-Paket im YAML-Format in der
+	 * angegebenen Datei.</div>
 	 *
 	 * @param valueSetPackage
 	 *            the value set package
@@ -426,7 +502,13 @@ public class ValueSetPackageManager {
 	}
 
 	/**
-	 * Save value set package.
+	 * <div class="en">Saves a value set package in YAML format into the given
+	 * File (the given filename must contain the relative or full path to access
+	 * the file).</div>
+	 *
+	 * <div class="de">Speichert ein Wertesatz-Paket im YAML-Format in der
+	 * angegebenen Datei (der angegebene Dateiname muss den relativen oder
+	 * vollständigen Pfad enthalten, um auf die Datei zuzugreifen).</div>
 	 *
 	 * @param valueSetPackage
 	 *            the value set package
@@ -441,7 +523,11 @@ public class ValueSetPackageManager {
 	}
 
 	/**
-	 * Save value set package config.
+	 * <div class="en">Saves a value set package configuration in YAML format
+	 * into the given File.</div>
+	 *
+	 * <div class="de">Speichert eine Wertesatz-Paket Konfiguration im
+	 * YAML-Format in der angegebenen Datei.</div>
 	 *
 	 * @param config
 	 *            the config
@@ -457,7 +543,14 @@ public class ValueSetPackageManager {
 	}
 
 	/**
-	 * Save value set package config.
+	 * <div class="en">Saves a value set package configuration in YAML format
+	 * into the given File (the given filename must contain the relative or full
+	 * path to access the file).</div>
+	 *
+	 * <div class="de">Speichert eine Wertesatz-Paket Konfiguration im
+	 * YAML-Format in der angegebenen Datei (der angegebene Dateiname muss den
+	 * relativen oder vollständigen Pfad enthalten, um auf die Datei
+	 * zuzugreifen).</div>
 	 *
 	 * @param config
 	 *            the config

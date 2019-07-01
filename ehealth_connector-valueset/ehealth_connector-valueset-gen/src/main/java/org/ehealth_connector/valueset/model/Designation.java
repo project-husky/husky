@@ -22,10 +22,19 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.valueset.enums.DesignationType;
 
 /**
- * The Class Designation. See also
- * https://art-decor.org/mediawiki/index.php?title=DECOR-terminology
+ * <div class="en">Designations are language dependent display names for the
+ * code. For any language there might be multiple, each specifying the type
+ * (fully specified name, preferred, synonym, ...).<div>
+ *
+ * <div class="de">Bezeichnungen sind sprachabhängige Anzeigenamen für den Code.
+ * Für jede Sprache kann es mehrere geben, die jeweils den Typ angeben
+ * (vollständiger Name, bevorzugter Name, Synonym, ...).<div>
  */
 public class Designation {
+
+	/**
+	 * See getter/setter for more details to the class members.
+	 */
 
 	/**
 	 * Builder to build {@link Designation}.
@@ -33,14 +42,14 @@ public class Designation {
 	@Generated("SparkTools")
 	public static final class Builder {
 
+		/** The display name. */
+		private String displayName;
+
 		/** The language code. */
 		private LanguageCode languageCode;
 
 		/** The type. */
 		private DesignationType type;
-
-		/** The display name. */
-		private String displayName;
 
 		/**
 		 * Instantiates a new builder.
@@ -104,17 +113,21 @@ public class Designation {
 		return new Builder();
 	}
 
+	/** The display name. */
+	private String displayName;
+
 	/** The language code. */
 	private LanguageCode languageCode;
 
 	/** The type. */
 	private DesignationType type;
 
-	/** The display name. */
-	private String displayName;
-
 	/**
-	 * Instantiates a new designation. Default constructor.
+	 * <div class="en">Instantiates a new Designation. Default
+	 * constructor.</div>
+	 *
+	 * <div class="de">Instanziiert eine neue Designation.
+	 * Standardkonstruktor.</div>
 	 */
 	public Designation() {
 	}
@@ -133,11 +146,15 @@ public class Designation {
 	}
 
 	/**
-	 * Checks whether the to objects are equal (based on their content).
+	 * <div class="en">Checks whether the two objects are equal (based on their
+	 * content).</div>
+	 *
+	 * <div class="de">Prüft, ob die beiden Objekte gleich sind (basierend auf
+	 * ihrem Inhalt).</div>
 	 *
 	 * @param obj
-	 *            the obj to compare
-	 * @return true, if equal
+	 *            the Designation to compare
+	 * @return true, if equal; false otherwise.
 	 */
 	public boolean equals(Designation obj) {
 		boolean retVal = true;
@@ -163,7 +180,9 @@ public class Designation {
 	}
 
 	/**
-	 * Gets the display name.
+	 * <div class="en">Gets the display name.</div>
+	 *
+	 * <div class="de">Ruft den Anzeigenamen ab.</div>
 	 *
 	 * @return the display name
 	 */
@@ -172,7 +191,9 @@ public class Designation {
 	}
 
 	/**
-	 * Gets the language code.
+	 * <div class="en">Gets the language code.</div>
+	 *
+	 * <div class="de">Ruft den Sprachcode ab.</div>
 	 *
 	 * @return the language code
 	 */
@@ -181,7 +202,11 @@ public class Designation {
 	}
 
 	/**
-	 * Gets the type.
+	 * <div class="en">Gets the designations type (fully specified name,
+	 * preferred, synonym, ...).</div>
+	 *
+	 * <div class="de">Ruft den Bezeichnungstyp ab (vollständig angegebener
+	 * Name, bevorzugt, synonym, ...).</div>
 	 *
 	 * @return the type
 	 */
@@ -190,7 +215,9 @@ public class Designation {
 	}
 
 	/**
-	 * Sets the display name.
+	 * <div class="en">Sets the display name.</div>
+	 *
+	 * <div class="de">Legt den Anzeigenamen fest.</div>
 	 *
 	 * @param displayName
 	 *            the new display name
@@ -200,7 +227,9 @@ public class Designation {
 	}
 
 	/**
-	 * Sets the language code.
+	 * <div class="en">Sets the language code.</div>
+	 *
+	 * <div class="de">Legt den Sprachcode fest.</div>
 	 *
 	 * @param languageCode
 	 *            the new language code
@@ -210,7 +239,11 @@ public class Designation {
 	}
 
 	/**
-	 * Sets the type.
+	 * <div class="en">Sets the designations type (fully specified name,
+	 * preferred, synonym, ...).</div>
+	 *
+	 * <div class="de">Legt den Bezeichnungstyp fest (vollständiger Name,
+	 * bevorzugt, synonym, ...).</div>
 	 *
 	 * @param type
 	 *            the new type

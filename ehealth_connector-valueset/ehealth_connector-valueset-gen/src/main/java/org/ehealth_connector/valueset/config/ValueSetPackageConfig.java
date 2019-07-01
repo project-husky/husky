@@ -26,10 +26,17 @@ import org.ehealth_connector.valueset.enums.ValueSetPackageStatus;
 import org.ehealth_connector.valueset.model.Version;
 
 /**
- * The Class ValueSetPackageConfig contains all relevant information (the
- * configuration) for the ValueSetPackageManager.
+ * <div class="en">The Class ValueSetPackageConfig contains all relevant
+ * information (the configuration) for the ValueSetPackageManager.</div>
+ *
+ * <div class="de">Die Klasse ValueSetPackageConfig enthält alle relevanten
+ * Informationen (die Konfiguration) für den ValueSetPackageManager.</div>
  */
 public class ValueSetPackageConfig {
+
+	/**
+	 * See getter/setter for more details to the class members.
+	 */
 
 	/**
 	 * Builder to build {@link ValueSetPackageConfig}.
@@ -43,17 +50,17 @@ public class ValueSetPackageConfig {
 		/** The identificator. */
 		private IdentificatorBaseType identificator;
 
-		/** The status. */
-		private ValueSetPackageStatus status;
-
-		/** The version. */
-		private Version version;
-
 		/** The source url. */
 		private String sourceUrl;
 
+		/** The status. */
+		private ValueSetPackageStatus status;
+
 		/** The value set config list. */
 		private ArrayList<ValueSetConfig> valueSetConfigList;
+
+		/** The version. */
+		private Version version;
 
 		/**
 		 * Instantiates a new builder.
@@ -159,20 +166,24 @@ public class ValueSetPackageConfig {
 	/** The identificator. */
 	private IdentificatorBaseType identificator;
 
-	/** The status. */
-	private ValueSetPackageStatus status;
-
-	/** The version. */
-	private Version version;
-
 	/** The source url. */
 	private String sourceUrl;
+
+	/** The status. */
+	private ValueSetPackageStatus status;
 
 	/** The value set config list. */
 	private ArrayList<ValueSetConfig> valueSetConfigList;
 
+	/** The version. */
+	private Version version;
+
 	/**
-	 * Instantiates a new value set package config.
+	 * <div class="en">Instantiates a new ValueSetPackageConfig. Default
+	 * constructor.</div>
+	 *
+	 * <div class="de">Instanziiert eine neue ValueSetPackageConfig.
+	 * Standardkonstruktor.</div>
 	 */
 	public ValueSetPackageConfig() {
 	}
@@ -194,7 +205,9 @@ public class ValueSetPackageConfig {
 	}
 
 	/**
-	 * Adds the value set config.
+	 * <div class="en">Adds a value set configuration.</div>
+	 *
+	 * <div class="de">Fügt eine Wertesatzkonfiguration hinzu.</div>
 	 *
 	 * @param value
 	 *            the value
@@ -208,7 +221,9 @@ public class ValueSetPackageConfig {
 	}
 
 	/**
-	 * Gets the description.
+	 * <div class="en">Gets the description.</div>
+	 *
+	 * <div class="de">Ruft die Beschreibung ab.</div>
 	 *
 	 * @return the description
 	 */
@@ -217,7 +232,9 @@ public class ValueSetPackageConfig {
 	}
 
 	/**
-	 * Gets the identificator.
+	 * <div class="en">Gets the identificator.</div>
+	 *
+	 * <div class="de">Ruft den Identifikator ab.</div>
 	 *
 	 * @return the identificator
 	 */
@@ -226,7 +243,11 @@ public class ValueSetPackageConfig {
 	}
 
 	/**
-	 * Gets the source url.
+	 * <div class="en">Gets the source url, where to download the
+	 * ValueSetPackage configuration.</div>
+	 *
+	 * <div class="de">Ruft die Quell-URL ab, wo die
+	 * ValueSetPackage-Konfiguration heruntergeladen werden kann.</div>
 	 *
 	 * @return the source url
 	 */
@@ -235,7 +256,9 @@ public class ValueSetPackageConfig {
 	}
 
 	/**
-	 * Gets the status.
+	 * <div class="en">Gets the status.</div>
+	 *
+	 * <div class="de">Ruft den Status ab.</div>
 	 *
 	 * @return the status
 	 */
@@ -244,7 +267,9 @@ public class ValueSetPackageConfig {
 	}
 
 	/**
-	 * Gets the value set config list.
+	 * <div class="en">Gets the value set config list.</div>
+	 *
+	 * <div class="de">Ruft die Wertesatz-Konfigurationsliste ab.</div>
 	 *
 	 * @return the value set config list
 	 */
@@ -253,7 +278,9 @@ public class ValueSetPackageConfig {
 	}
 
 	/**
-	 * Gets the version.
+	 * <div class="en">Gets the version.</div>
+	 *
+	 * <div class="de">Ruft die Version ab.</div>
 	 *
 	 * @return the version
 	 */
@@ -262,7 +289,9 @@ public class ValueSetPackageConfig {
 	}
 
 	/**
-	 * List value set configs.
+	 * <div class="en">Gets the list of value set configs.</div>
+	 *
+	 * <div class="de">Ruft die Liste der Wertesatzkonfigurationen ab.</div>
 	 *
 	 * @return the list
 	 */
@@ -275,7 +304,9 @@ public class ValueSetPackageConfig {
 	}
 
 	/**
-	 * Sets the description.
+	 * <div class="en">Sets the description.</div>
+	 *
+	 * <div class="de">Legt die Beschreibung fest.</div>
 	 *
 	 * @param description
 	 *            the new description
@@ -285,7 +316,9 @@ public class ValueSetPackageConfig {
 	}
 
 	/**
-	 * Sets the identificator.
+	 * <div class="en">Sets the identificator.</div>
+	 *
+	 * <div class="de">Legt den Identifikator fest.</div>
 	 *
 	 * @param identificator
 	 *            the new identificator
@@ -295,7 +328,11 @@ public class ValueSetPackageConfig {
 	}
 
 	/**
-	 * Sets the source url.
+	 * <div class="en">Sets the source url, where the ValueSetPackage
+	 * configuration can be downloaded.</div>
+	 *
+	 * <div class="de">Legt die Quell-URL fest, wo die
+	 * ValueSetPackage-Konfiguration heruntergeladen werden kann.</div>
 	 *
 	 * @param sourceUrl
 	 *            the new source url
@@ -305,7 +342,9 @@ public class ValueSetPackageConfig {
 	}
 
 	/**
-	 * Sets the status.
+	 * <div class="en">Sets the Status.</div>
+	 *
+	 * <div class="de">Legt den Status fest.</div>
 	 *
 	 * @param status
 	 *            the new status
@@ -315,7 +354,9 @@ public class ValueSetPackageConfig {
 	}
 
 	/**
-	 * Sets the value set config list.
+	 * <div class="en">Sets the value set config list.</div>
+	 *
+	 * <div class="de">Legt die Liste der Wertesatz-Konfigurationen fest.</div>
 	 *
 	 * @param valueSetConfigList
 	 *            the new value set config list
@@ -325,7 +366,9 @@ public class ValueSetPackageConfig {
 	}
 
 	/**
-	 * Sets the version.
+	 * <div class="en">Sets the version.</div>
+	 *
+	 * <div class="de">Legt die Version fest.</div>
 	 *
 	 * @param version
 	 *            the new version

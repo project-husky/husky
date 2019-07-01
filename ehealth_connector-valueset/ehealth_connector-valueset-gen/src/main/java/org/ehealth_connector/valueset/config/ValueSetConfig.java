@@ -22,10 +22,17 @@ import org.ehealth_connector.valueset.enums.SourceFormatType;
 import org.ehealth_connector.valueset.enums.SourceSystemType;
 
 /**
- * ValueSetConfig is used by ValueSetPackageConfig for each ValueSet that is
- * part of the package.
+ * <div class="en">ValueSetConfig is used by ValueSetPackageConfig for each
+ * ValueSet that is part of the package.</div>
+ *
+ * <div class="de">Die ValueSetConfig wird von ValueSetPackageConfig für jeden
+ * Wertesatz verwendet, der Teil des Pakets ist.</div>
  */
 public class ValueSetConfig {
+
+	/**
+	 * See getter/setter for more details to the class members.
+	 */
 
 	/**
 	 * Builder to build {@link ValueSetConfig}.
@@ -150,7 +157,11 @@ public class ValueSetConfig {
 	private String sourceUrl;
 
 	/**
-	 * Instantiates a new value set config. Default constructor.
+	 * <div class="en">Instantiates a new ValueSetConfig. Default
+	 * constructor.</div>
+	 *
+	 * <div class="de">Instanziiert eine neue ValueSetConfig.
+	 * Standardkonstruktor.</div>
 	 */
 	public ValueSetConfig() {
 	}
@@ -171,7 +182,11 @@ public class ValueSetConfig {
 	}
 
 	/**
-	 * Gets the class name.
+	 * <div class="en">Gets the fully qualified class name of the desired Enum
+	 * to be created.</div>
+	 *
+	 * <div class="de">Ruft den vollständig qualifizierten Klassennamen der
+	 * gewünschten, zu erstellenden Enumeration ab.</div>
 	 *
 	 * @return the class name
 	 */
@@ -180,7 +195,12 @@ public class ValueSetConfig {
 	}
 
 	/**
-	 * Gets the project folder.
+	 * <div class="en">Gets the project folder, where to save the enum. The
+	 * folder is expected to be relative to the execution directory.</div>
+	 *
+	 * <div class="de">Ruft den Projektordner ab, in dem die Enumeration
+	 * gespeichert werden soll. Es wird erwartet, dass der Ordner relativ zum
+	 * Ausführungsverzeichnis ist.</div>
 	 *
 	 * @return the project folder
 	 */
@@ -189,7 +209,11 @@ public class ValueSetConfig {
 	}
 
 	/**
-	 * Gets the source format type.
+	 * <div class="en">Gets the source format type (format, in which the
+	 * ValueSet is provided by the publishing authority).</div>
+	 *
+	 * <div class="de">Ruft den Quellformattyp ab (Format, in dem das ValueSet
+	 * von der Veröffentlichungsbehörde bereitgestellt wird).</div>
 	 *
 	 * @return the source format type
 	 */
@@ -198,7 +222,12 @@ public class ValueSetConfig {
 	}
 
 	/**
-	 * Gets the source system type.
+	 * <div class="en">Gets the source system type (type of the system, that is
+	 * maintained by the publishing authority for ValueSet publications).</div>
+	 *
+	 * <div class="de">Ruft den Quellsystemtyp ab (Typ des Systems, der von der
+	 * Veröffentlichungsbehörde für die ValueSet-Veröffentlichungen unterhalten
+	 * wird).</div>
 	 *
 	 * @return the source system type
 	 */
@@ -207,7 +236,11 @@ public class ValueSetConfig {
 	}
 
 	/**
-	 * Gets the source url.
+	 * <div class="en">Gets the source url, where the ValueSet can be
+	 * downloaded, from.</div>
+	 *
+	 * <div class="de">Ruft die Quell-URL ab, von der das ValueSet
+	 * heruntergeladen werden kann.</div>
 	 *
 	 * @return the source url
 	 */
@@ -216,7 +249,11 @@ public class ValueSetConfig {
 	}
 
 	/**
-	 * Sets the class name.
+	 * <div class="en">Sets the class name. See getter
+	 * {@link ValueSetConfig#getClassName} for more details.</div>
+	 *
+	 * <div class="de">Legt den Klassennamen fest. Siehe Getter
+	 * {@link ValueSetConfig#getClassName} für weitere Details.</div>
 	 *
 	 * @param className
 	 *            the new class name
@@ -226,7 +263,11 @@ public class ValueSetConfig {
 	}
 
 	/**
-	 * Sets the project folder.
+	 * <div class="en">Sets the project folder. See getter
+	 * {@link ValueSetConfig#getProjectFolder} for more details.</div>
+	 *
+	 * <div class="de">Legt den Projektordner fest. Siehe Getter
+	 * {@link ValueSetConfig#getProjectFolder} für weitere Details.</div>
 	 *
 	 * @param projectFolder
 	 *            the new project folder
@@ -236,7 +277,11 @@ public class ValueSetConfig {
 	}
 
 	/**
-	 * Sets the source format type.
+	 * <div class="en">Sets the source format type. See getter
+	 * {@link ValueSetConfig#getSourceFormatType} for more details.</div>
+	 *
+	 * <div class="de">Legt den Quellformattyp fest. Siehe Getter
+	 * {@link ValueSetConfig#getSourceFormatType} für weitere Details.</div>
 	 *
 	 * @param sourceFormatType
 	 *            the new source format type
@@ -246,7 +291,11 @@ public class ValueSetConfig {
 	}
 
 	/**
-	 * Sets the source system type.
+	 * <div class="en">Sets the source system type. See getter
+	 * {@link ValueSetConfig#getSourceSystemType} for more details.</div>
+	 *
+	 * <div class="de">Legt den Quellsystemtyp fest. Siehe Getter
+	 * {@link ValueSetConfig#getSourceSystemType} für weitere Details.</div>
 	 *
 	 * @param sourceSystemType
 	 *            the new source system type
@@ -256,7 +305,11 @@ public class ValueSetConfig {
 	}
 
 	/**
-	 * Sets the source url.
+	 * <div class="en">Sets the source url. See getter
+	 * {@link ValueSetConfig#getSourceUrl} for more details.</div>
+	 *
+	 * <div class="de">Legt die Quell-URL fest. Siehe Getter
+	 * {@link ValueSetConfig#getSourceUrl} für weitere Details.</div>
 	 *
 	 * @param sourceUrl
 	 *            the new source url

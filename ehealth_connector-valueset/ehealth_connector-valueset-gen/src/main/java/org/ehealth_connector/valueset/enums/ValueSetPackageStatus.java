@@ -25,16 +25,16 @@ package org.ehealth_connector.valueset.enums;
 public enum ValueSetPackageStatus {
 	//@formatter:off
 	/**
-	 * <div class="en">Available Value Set package, which can be used for testing and further development. May be valid or not.</div>
-	 * <div class="de">Verfügbares Value Set Paket, welches für Tests und Weiterentwicklung verwendet werden kann. Kann Gültig sein oder nicht.</div>
-	 */
-	DRAFT,
-
-	/**
 	 * <div class="en">Active Value Set Package. Is always valid.</div>
 	 * <div class="de">Aktives Value Set Paket. Ist immer gültig.</div>
 	 */
 	ACTIVE,
+
+	/**
+	 * <div class="en">Available Value Set package, which can be used for testing and further development. May be valid or not.</div>
+	 * <div class="de">Verfügbares Value Set Paket, welches für Tests und Weiterentwicklung verwendet werden kann. Kann Gültig sein oder nicht.</div>
+	 */
+	DRAFT,
 
 	/**
 	 * <div class="en">Outdated Value Set package which should not be used anymore.</div>

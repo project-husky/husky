@@ -17,7 +17,8 @@
 package org.ehealth_connector.valueset.exceptions;
 
 /**
- * <div class="en">Exception in case the value set mapping does not exist.</div>
+ * <div class="en">Exception in case the value set mapping does not
+ * exist.</div><div class="de">todo<div>
  */
 public class MappingException extends Exception {
 
@@ -25,17 +26,19 @@ public class MappingException extends Exception {
 	private static final long serialVersionUID = -1454634787837958402L;
 
 	/**
-	 * Default constructor to instantiate the object.
-	 *
-	 * @param message
-	 *            the message
+	 * div class="en">Default constructor to instantiate the object. A
+	 * predefined text message will be
+	 * used.</div><div class="de">Standardkonstruktor zum Instanziieren des
+	 * Objekts. Eine vordefinierte Textnachricht wird verwendet.<div>
 	 */
 	public MappingException() {
 		super("The requested mapping does not exist.");
 	}
 
 	/**
-	 * Instantiates a new mapping exception.
+	 * div class="en">Instantiates a new mapping exception by using the given
+	 * text message.</div><div class="de">Instanziiert eine neue
+	 * Zuordnungsausnahme mithilfe der angegebenen Textnachricht.<div>
 	 *
 	 * @param message
 	 *            the message

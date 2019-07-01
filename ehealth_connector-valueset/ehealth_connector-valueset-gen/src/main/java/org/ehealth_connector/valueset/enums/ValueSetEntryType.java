@@ -31,18 +31,6 @@ public enum ValueSetEntryType {
 
 	//@formatter:off
 	/**
-	 * <div class="en">Leaf node as given by ART-DECOR.</div>
-	 * <div class="de">Endknoten gemäss ART-DECOR.</div>
-	 */
-	LEAF("L", "leaf"),
-
-	/**
-	 * <div class="en">Specializable node as given by ART-DECOR.</div>
-	 * <div class="de">Spezialisierbarer Knoten gemäss ART-DECOR.</div>
-	 */
-	SPECIALIZABLE("S", "specializable"),
-
-	/**
 	 * <div class="en">Abstract node as given by ART-DECOR.</div>
 	 * <div class="de">Abstrakter Knoten gemäss ART-DECOR.</div>
 	 */
@@ -52,7 +40,19 @@ public enum ValueSetEntryType {
 	 * <div class="en">Deprecated node as given by ART-DECOR.</div>
 	 * <div class="de">Veralteter Knoten gemäss ART-DECOR.</div>
 	 */
-	DEPRECATED("D", "deprecated");
+	DEPRECATED("D", "deprecated"),
+
+	/**
+	 * <div class="en">Leaf node as given by ART-DECOR.</div>
+	 * <div class="de">Endknoten gemäss ART-DECOR.</div>
+	 */
+	LEAF("L", "leaf"),
+
+	/**
+	 * <div class="en">Specializable node as given by ART-DECOR.</div>
+	 * <div class="de">Spezialisierbarer Knoten gemäss ART-DECOR.</div>
+	 */
+	SPECIALIZABLE("S", "specializable");
 	//@formatter:on
 
 	/**
@@ -104,7 +104,8 @@ public enum ValueSetEntryType {
 	}
 
 	/**
-	 * Gets the code value.
+	 * <div class="en">Gets the code value.</div> <div class="de">Ruft den Wert
+	 * des Codes ab.</div>
 	 *
 	 * @return the code value
 	 */
@@ -113,7 +114,8 @@ public enum ValueSetEntryType {
 	}
 
 	/**
-	 * Gets the display name.
+	 * <div class="en">Gets the display name.</div> <div class="de">Ruft den
+	 * Anzeigenamen ab.</div>
 	 *
 	 * @return the display name
 	 */

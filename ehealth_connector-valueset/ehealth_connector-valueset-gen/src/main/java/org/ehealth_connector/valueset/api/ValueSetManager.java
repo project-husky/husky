@@ -50,9 +50,7 @@ import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.ehealth_connector.common.utils.FileUtil;
 import org.ehealth_connector.common.utils.LangText;
-import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.valueset.config.CustomizedYaml;
 import org.ehealth_connector.valueset.config.ValueSetConfig;
 import org.ehealth_connector.valueset.enums.DesignationType;
@@ -82,18 +80,21 @@ import net.minidev.json.JSONArray;
 public class ValueSetManager {
 
 	/**
-	 * <div class="en">The default encoding used to encode URL parameter.</div>
-	 */
-	static final String UTF8_ENCODING = "UTF-8";
-	/**
 	 * <div class="en">The JSONPath path to extract a value set from the JSON
 	 * definition file</div>
 	 */
 	public static final String JSON_VALUE_SET_BASE_PATH = "$.valueSets[0].valueSet[0]";
+	/**
+	 * The default encoding used to encode URL parameter.
+	 */
+	static final String UTF8_ENCODING = "UTF-8";
 
 	/**
-	 * <div class="en">Build the complete URL to retrieve a value set JSON
-	 * configuration from ART-DECOR.</div>
+	 * <div class="en">Build the complete URL to retrieve a value set from
+	 * ART-DECOR.</div>
+	 *
+	 * <div class="de">Erstellt die vollständige URL, um einen Wertesatz von
+	 * ART-DECOR abzurufen.</div>
 	 *
 	 * @param baseUrl
 	 *            The base URL that includes host, path and prefix.
@@ -118,13 +119,21 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Instantiates a new value set manager. Default constructor.
+	 * <div class="en">Instantiates a ValueSetManager. Default
+	 * constructor.</div>
+	 *
+	 * <div class="de">Instanziiert einen ValueSetManager.
+	 * Standardkonstruktor.</div>
 	 */
 	public ValueSetManager() {
 	}
 
 	/**
-	 * Download value set.
+	 * <div class="en">Downloads a value set as defined in the given
+	 * configuration.</div>
+	 *
+	 * <div class="de">Lädt einen Wertesatz herunter wie in der angegebenen
+	 * Konfiguration definiert.</div>
 	 *
 	 * @param valueSetConfig
 	 *            the value set config
@@ -169,7 +178,13 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Download value set raw.
+	 * <div class="en">Downloads a value set as defined in the given
+	 * configuration. It will be returned in raw dformat exactly as
+	 * downloaded.</div>
+	 *
+	 * <div class="de">Lädt einen Wertesatz herunter wie in der angegebenen
+	 * Konfiguration definiert. Es wird im Roh-Format genau wie heruntergeladen
+	 * zurückgegeben.</div>
 	 *
 	 * @param valueSetConfig
 	 *            the value set config
@@ -190,6 +205,15 @@ public class ValueSetManager {
 		return retVal;
 	}
 
+	/**
+	 * Evaluates the given XPath expression into a node list.
+	 *
+	 * @param xmlDoc
+	 *            the xml doc
+	 * @param xpathExpr
+	 *            the xpath expr
+	 * @return the node list
+	 */
 	private NodeList evaluateXpathExprAsNodeList(Document xmlDoc, String xpathExpr) {
 		NodeList retVal = null;
 
@@ -209,6 +233,15 @@ public class ValueSetManager {
 
 	}
 
+	/**
+	 * Evaluates the given XPath expression as string.
+	 *
+	 * @param xmlDoc
+	 *            the xml doc
+	 * @param xpathExpr
+	 *            the xpath expr
+	 * @return the string
+	 */
 	private String evaluateXpathExprAsString(Document xmlDoc, String xpathExpr) {
 		String retVal = null;
 
@@ -242,33 +275,11 @@ public class ValueSetManager {
 		return retVal;
 	}
 
-	public ValueSet loadValueSet(ValueSetConfig valueSetConfig, String cachePath) {
-		ValueSet retVal = null;
-		if (valueSetConfig != null) {
-			switch (valueSetConfig.getSourceSystemType()) {
-			// case ARTDECOR_FHIR:
-			// switch (valueSetConfig.getSourceFormatType()) {
-			// case JSON:
-			// retVal = loadValueSetJson(cachePath xxx);
-			// break;
-			// case XML:
-			// retVal =
-			// loadValueSetXml(IOUtils.toInputStream(downloadedString));
-			// break;
-			// case IHESVS:
-			// retVal =
-			// loadValueSetIheSvs(IOUtils.toInputStream(downloadedString));
-			// break;
-			// }
-			// break;
-			// }
-			}
-		}
-		return retVal;
-	}
-
 	/**
-	 * Load value set config.
+	 * <div class="en">Loads a value set config from the given file.</div>
+	 *
+	 * <div class="de">Lädt eine Wertesatzkonfiguration aus der angegebenen
+	 * Datei</div>
 	 *
 	 * @param config
 	 *            the config
@@ -281,7 +292,10 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Load value set config.
+	 * <div class="en">Loads a value set config from the given stream.</div>
+	 *
+	 * <div class="de">Lädt eine Wertesatzkonfiguration aus dem angegebenen
+	 * Stream</div>
 	 *
 	 * @param config
 	 *            the config
@@ -292,7 +306,11 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Load value set config.
+	 * <div class="en">Loads a value set config from the given stream
+	 * reader.</div>
+	 *
+	 * <div class="de">Lädt eine Wertesatzkonfiguration aus dem angegebenen
+	 * Streamreader</div>
 	 *
 	 * @param reader
 	 *            the reader
@@ -305,7 +323,13 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Load value set config.
+	 * <div class="en">Loads a value set config from the given file (the given
+	 * filename must contain the relative or full path to access the
+	 * file).</div>
+	 *
+	 * <div class="de">Lädt eine Wertesatzkonfiguration aus der angegebenen
+	 * Datei (der angegebene Dateiname muss den relativen oder vollständigen
+	 * Pfad enthalten, um auf die Datei zuzugreifen)</div>
 	 *
 	 * @param fileName
 	 *            the file name
@@ -318,7 +342,11 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Load value set ihe svs.
+	 * <div class="en">Loads a value set from the given file, which is provided
+	 * in IHE SVS format.</div>
+	 *
+	 * <div class="de">Lädt einen Wertesatz aus der angegebenen Datei, die im
+	 * IHE SVS-Format bereitgestellt wird.</div>
 	 *
 	 * @param valueSet
 	 *            the value set
@@ -333,7 +361,11 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Load value set ihe svs.
+	 * <div class="en">Loads a value set from the given stream, which is
+	 * provided in IHE SVS format.</div>
+	 *
+	 * <div class="de">Lädt einen Wertesatz aus dem angegebenen Stream, der im
+	 * IHE-SVS-Format bereitgestellt wird.</div>
 	 *
 	 * @param valueSet
 	 *            the value set
@@ -348,7 +380,11 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Load value set ihe svs.
+	 * <div class="en">Loads a value set from the given stream reader, which is
+	 * provided in IHE SVS format.</div>
+	 *
+	 * <div class="de">Lädt einen Wertesatz aus dem angegebenen Stream-Reader,
+	 * der im IHE-SVS-Format bereitgestellt wird.</div>
 	 *
 	 * @param reader
 	 *            the reader
@@ -442,22 +478,29 @@ public class ValueSetManager {
 
 		// Name is not available in IHE SVS format
 		// valueSet.setName(name);
+
 		textContent = evaluateXpathExprAsString(xmlDoc, "//ValueSet/Status/text()");
 		if (textContent != null)
 			valueSet.setStatus(ValueSetStatus.getCodeIheSvs(textContent));
 
-		// TODO remove following lines (debug only)
-		ValueSetManager mgr = new ValueSetManager();
-
-		mgr.saveValueSet(valueSet,
-				Util.getTempDirectory() + FileUtil.getPlatformSpecificPathSeparator()
-						+ "testDownloadedValueSetIheSvs.yaml");
+		// This is for debugging purposes, only:
+		// ValueSetManager mgr = new ValueSetManager();
+		// mgr.saveValueSet(valueSet,
+		// Util.getTempDirectory() + FileUtil.getPlatformSpecificPathSeparator()
+		// + "testDownloadedValueSetIheSvs.yaml");
 
 		return valueSet;
 	}
 
 	/**
-	 * Load value set ihe svs.
+	 * <div class="en">Loads a value set from the given file, which is provided
+	 * in IHE SVS format (the given filename must contain the relative or full
+	 * path to access the file).</div>
+	 *
+	 * <div class="de">Lädt einen Wertesatz aus der angegebenen Datei, die im
+	 * IHE SVS-Format bereitgestellt wird (der angegebene Dateiname muss den
+	 * relativen oder vollständigen Pfad enthalten, um auf die Datei
+	 * zuzugreifen).</div>
 	 *
 	 * @param fileName
 	 *            the file name
@@ -472,7 +515,11 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Load value set json.
+	 * <div class="en">Loads a value set from the given file, which is provided
+	 * in JSON format.</div>
+	 *
+	 * <div class="de">Lädt einen Wertesatz aus der angegebenen Datei, die im
+	 * JSON bereitgestellt wird.</div>
 	 *
 	 * @param valueSet
 	 *            the value set
@@ -484,7 +531,11 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Load value set json.
+	 * <div class="en">Loads a value set from the given stream, which is
+	 * provided in JSON format.</div>
+	 *
+	 * <div class="de">Lädt einen Wertesatz aus dem angegebenen Stream, der im
+	 * JSON bereitgestellt wird.</div>
 	 *
 	 * @param valueSet
 	 *            the value set
@@ -496,7 +547,11 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Load value set json.
+	 * <div class="en">Loads a value set from the given stream reader, which is
+	 * provided in JSON format.</div>
+	 *
+	 * <div class="de">Lädt einen Wertesatz aus dem angegebenen Stream-Reader,
+	 * der im JSON bereitgestellt wird.</div>
 	 *
 	 * @param reader
 	 *            the reader
@@ -744,17 +799,24 @@ public class ValueSetManager {
 		}
 		valueSet.setVersion(version);
 
-		// TODO remove following lines (debug only)
-		ValueSetManager mgr = new ValueSetManager();
-
-		mgr.saveValueSet(valueSet, Util.getTempDirectory()
-				+ FileUtil.getPlatformSpecificPathSeparator() + "testDownloadedValueSetJson.yaml");
+		// This is for debugging purposes, only:
+		// ValueSetManager mgr = new ValueSetManager();
+		// mgr.saveValueSet(valueSet, Util.getTempDirectory()
+		// + FileUtil.getPlatformSpecificPathSeparator() +
+		// "testDownloadedValueSetJson.yaml");
 
 		return valueSet;
 	}
 
 	/**
-	 * Load value set json.
+	 * <div class="en">Loads a value set from the given file, which is provided
+	 * in JSON format (the given filename must contain the relative or full path
+	 * to access the file).</div>
+	 *
+	 * <div class="de">Lädt einen Wertesatz aus der angegebenen Datei, die im
+	 * JSON-Format bereitgestellt wird (der angegebene Dateiname muss den
+	 * relativen oder vollständigen Pfad enthalten, um auf die Datei
+	 * zuzugreifen).</div>
 	 *
 	 * @param fileName
 	 *            the file name
@@ -766,7 +828,11 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Load value set xml.
+	 * <div class="en">Loads a value set from the given file, which is provided
+	 * in XML format.</div>
+	 *
+	 * <div class="de">Lädt einen Wertesatz aus der angegebenen Datei, die im
+	 * XML-Format bereitgestellt wird.</div>
 	 *
 	 * @param valueSet
 	 *            the value set
@@ -781,7 +847,11 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Load value set xml.
+	 * <div class="en">Loads a value set from the given stream, which is
+	 * provided in XML format.</div>
+	 *
+	 * <div class="de">Lädt einen Wertesatz aus dem angegebenen Stream, der im
+	 * XML-Format bereitgestellt wird.</div>
 	 *
 	 * @param valueSet
 	 *            the value set
@@ -796,7 +866,11 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Load value set xml.
+	 * <div class="en">Loads a value set from the given stream reader, which is
+	 * provided in XML format.</div>
+	 *
+	 * <div class="de">Lädt einen Wertesatz aus dem angegebenen Stream-Reader,
+	 * der im XML-Format bereitgestellt wird.</div>
 	 *
 	 * @param reader
 	 *            the reader
@@ -924,17 +998,24 @@ public class ValueSetManager {
 		if (textContent != null)
 			valueSet.setStatus(ValueSetStatus.getCodeIheSvs(textContent));
 
-		// TODO remove following lines (debug only)
-		ValueSetManager mgr = new ValueSetManager();
-
-		mgr.saveValueSet(valueSet, Util.getTempDirectory()
-				+ FileUtil.getPlatformSpecificPathSeparator() + "testDownloadedValueSetXml.yaml");
+		// This is for debugging purposes, only:
+		// ValueSetManager mgr = new ValueSetManager();
+		// mgr.saveValueSet(valueSet, Util.getTempDirectory()
+		// + FileUtil.getPlatformSpecificPathSeparator() +
+		// "testDownloadedValueSetXml.yaml");
 
 		return valueSet;
 	}
 
 	/**
-	 * Load value set xml.
+	 * <div class="en">Loads a value set from the given file, which is provided
+	 * in XML format (the given filename must contain the relative or full path
+	 * to access the file).</div>
+	 *
+	 * <div class="de">Lädt einen Wertesatz aus der angegebenen Datei, die im
+	 * XML-Format bereitgestellt wird (der angegebene Dateiname muss den
+	 * relativen oder vollständigen Pfad enthalten, um auf die Datei
+	 * zuzugreifen).</div>
 	 *
 	 * @param fileName
 	 *            the file name
@@ -949,7 +1030,11 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Load value set yaml.
+	 * <div class="en">Loads a value set from the given file, which is provided
+	 * in YAML format.</div>
+	 *
+	 * <div class="de">Lädt einen Wertesatz aus der angegebenen Datei, die im
+	 * YAML-Format bereitgestellt wird.</div>
 	 *
 	 * @param valueSet
 	 *            the value set
@@ -962,7 +1047,11 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Load value set yaml.
+	 * <div class="en">Loads a value set from the given stream, which is
+	 * provided in YAML format.</div>
+	 *
+	 * <div class="de">Lädt einen Wertesatz aus dem angegebenen Stream, der im
+	 * YAML-Format bereitgestellt wird.</div>
 	 *
 	 * @param valueSet
 	 *            the value set
@@ -973,7 +1062,11 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Load value set yaml.
+	 * <div class="en">Loads a value set from the given stream reader, which is
+	 * provided in YAML format.</div>
+	 *
+	 * <div class="de">Lädt einen Wertesatz aus dem angegebenen Stream-Reader,
+	 * der im YAML-Format bereitgestellt wird.</div>
 	 *
 	 * @param reader
 	 *            the reader
@@ -985,7 +1078,14 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Load value set yaml.
+	 * <div class="en">Loads a value set from the given file, which is provided
+	 * in YAML format (the given filename must contain the relative or full path
+	 * to access the file).</div>
+	 *
+	 * <div class="de">Lädt einen Wertesatz aus der angegebenen Datei, die im
+	 * YAML-Format bereitgestellt wird (der angegebene Dateiname muss den
+	 * relativen oder vollständigen Pfad enthalten, um auf die Datei
+	 * zuzugreifen).</div>
 	 *
 	 * @param fileName
 	 *            the file name
@@ -998,7 +1098,11 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Save value set.
+	 * <div class="en">Saves the given value set in YAML format to the given
+	 * file.</div>
+	 *
+	 * <div class="de">Speichert den angegebenen Wertesatz im YAML-Format in der
+	 * angegebenen Datei.</div>
 	 *
 	 * @param valueSet
 	 *            the value set
@@ -1013,7 +1117,13 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Save value set.
+	 * <div class="en">Saves the given value set in YAML format to the given
+	 * file (the given filename must contain the relative or full path to access
+	 * the file).</div>
+	 *
+	 * <div class="de">Speichert den angegebenen Wertesatz im YAML-Format in der
+	 * angegebenen Datei (der angegebene Dateiname muss den relativen oder
+	 * vollständigen Pfad enthalten, um auf die Datei zuzugreifen).</div>
 	 *
 	 * @param valueSet
 	 *            the value set
@@ -1027,7 +1137,11 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Save value set config.
+	 * <div class="en">Saves the given value set configuration in YAML format to
+	 * the given file.</div>
+	 *
+	 * <div class="de">Speichert die angegebene Wertesatz-Konfiguration im
+	 * YAML-Format in der angegebenen Datei.</div>
 	 *
 	 * @param valueSetConfig
 	 *            the value set config
@@ -1042,7 +1156,14 @@ public class ValueSetManager {
 	}
 
 	/**
-	 * Save value set config.
+	 * <div class="en">Saves the given value set configuration in YAML format to
+	 * the given file (the given filename must contain the relative or full path
+	 * to access the file).</div>
+	 *
+	 * <div class="de">Speichert die angegebene Wertesatz-Konfiguration im
+	 * YAML-Format in der angegebenen Datei (der angegebene Dateiname muss den
+	 * relativen oder vollständigen Pfad enthalten, um auf die Datei
+	 * zuzugreifen).</div>
 	 *
 	 * @param valueSetConfig
 	 *            the value set config

@@ -29,6 +29,13 @@ public enum SourceFormatType {
 
 	//@formatter:off
 	/**
+	 * <div class="en">The ValueSet is available in IHE SVS XML format.</div>
+	 * <div class="de">Das ValueSet ist im IHE SVS Format verfügbar.</div>
+	 * Mime type: application/xml
+	 */
+	IHESVS,
+
+	/**
 	 * <div class="en">The ValueSet is available in JSON format.</div>
 	 * <div class="de">Das ValueSet ist im JSON Format verfügbar.</div>
 	 * Mime type: application/fhir+json
@@ -40,13 +47,6 @@ public enum SourceFormatType {
 	 * <div class="de">Das ValueSet ist im XML Format verfügbar.</div>
 	 * Mime type: application/fhir+xml
 	 */
-	XML,
-
-	/**
-	 * <div class="en">The ValueSet is available in IHE SVS XML format.</div>
-	 * <div class="de">Das ValueSet ist im IHE SVS Format verfügbar.</div>
-	 * Mime type: application/xml
-	 */
-	IHESVS;
+	XML;
 	//@formatter:on
 }

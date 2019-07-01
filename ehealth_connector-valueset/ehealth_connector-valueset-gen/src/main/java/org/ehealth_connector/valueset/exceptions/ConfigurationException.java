@@ -18,7 +18,7 @@ package org.ehealth_connector.valueset.exceptions;
 
 /**
  * <div class="en">Exception in case the value set configuration is
- * invalid.</div>
+ * invalid.</div><div class="de">todo<div>
  */
 public class ConfigurationException extends Exception {
 
@@ -26,17 +26,20 @@ public class ConfigurationException extends Exception {
 	private static final long serialVersionUID = 5998358174203522368L;
 
 	/**
-	 * Default constructor to instantiate the object.
-	 *
-	 * @param message
-	 *            the message
+	 * <div class="en">Default constructor to instantiate the object. A
+	 * predefined text message will be
+	 * used.</div><div class="de">Standardkonstruktor zum Instanziieren des
+	 * Objekts. Eine vordefinierte Textnachricht wird verwendet.<div>
 	 */
 	public ConfigurationException() {
 		super("The value set configuration cannot be loaded. Please check the config file/stream.");
 	}
 
 	/**
-	 * Instantiates a new configuration exception.
+	 * <div class="en">Instantiates a new configuration exception by using the
+	 * given text message.</div><div class="de">Instanziiert eine neue
+	 * Konfigurationsausnahme unter Verwendung der angegebenen
+	 * Textnachricht.<div>
 	 *
 	 * @param message
 	 *            the message
