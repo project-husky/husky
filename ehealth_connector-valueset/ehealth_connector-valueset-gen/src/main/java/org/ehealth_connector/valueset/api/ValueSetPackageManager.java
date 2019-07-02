@@ -444,8 +444,13 @@ public class ValueSetPackageManager {
 			this.valueSetPackageConfigList = new ArrayList<ValueSetPackageConfig>();
 		}
 
-		ValueSetPackageConfig valueSetPackageConfig = CustomizedYaml.getCustomizedYaml()
-				.loadAs(reader, ValueSetPackageConfig.class);
+		ValueSetPackageConfig valueSetPackageConfig;
+		try {
+			valueSetPackageConfig = CustomizedYaml.getCustomizedYaml().loadAs(reader,
+					ValueSetPackageConfig.class);
+		} catch (RuntimeException e) {
+			throw new ConfigurationException(e.getMessage());
+		}
 
 		if (valueSetPackageConfig.getVersion() == null)
 			throw new ConfigurationException(

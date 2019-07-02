@@ -152,9 +152,10 @@ public class ValueSetManager {
 		if (valueSetConfig != null) {
 			switch (valueSetConfig.getSourceSystemType()) {
 			case ARTDECOR_FHIR:
-				String downloadedString = IOUtils.toString(new URL(valueSetConfig.getSourceUrl()),
-						UTF8_ENCODING);
+				String sourceUrlString = valueSetConfig.getSourceUrl();
+				String downloadedString = "";
 				try {
+					downloadedString = IOUtils.toString(new URL(sourceUrlString), UTF8_ENCODING);
 					switch (valueSetConfig.getSourceFormatType()) {
 					case JSON:
 						retVal = loadValueSetJson(IOUtils.toInputStream(downloadedString));
@@ -170,7 +171,13 @@ public class ValueSetManager {
 					throw new InitializationException(
 							"The value set cannot be loaded. Please check the content of the file/stream. (downloadedString is: '"
 									+ downloadedString + "')");
+				} catch (IOException e) {
+					throw new InitializationException(
+							"The value set cannot be loaded. Please check the location. (downloadedString is: '"
+									+ sourceUrlString + "')");
+
 				}
+
 				break;
 			}
 		}
