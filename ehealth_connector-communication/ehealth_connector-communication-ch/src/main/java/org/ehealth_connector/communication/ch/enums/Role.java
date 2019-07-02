@@ -19,7 +19,9 @@ package org.ehealth_connector.communication.ch.enums;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.annotation.Generated;
+
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.ValueSetEnumInterface;
@@ -44,7 +46,8 @@ public enum Role implements ValueSetEnumInterface {
 	 * <div class="it">Assistente</div>
 	 * <!-- @formatter:on -->
 	 */
-	ASSISTANT("ASS", "2.16.756.5.30.1.127.3.10.6", "Assistant", "Assistant", "Hilfsperson", "Assistant", "Assistente"),
+	ASSISTANT("ASS", "2.16.756.5.30.1.127.3.10.6", "Assistant", "Assistant", "Hilfsperson",
+			"Assistant", "Assistente"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Document Administrator</div>
@@ -53,7 +56,8 @@ public enum Role implements ValueSetEnumInterface {
 	 * <div class="it">TODO</div>
 	 * <!-- @formatter:on -->
 	 */
-	DOCUMENT_ADMINISTRATOR("DADM", "2.16.756.5.30.1.127.3.10.6", "Document Administrator", "Document Administrator", "TODO", "TODO", "TODO"),
+	DOCUMENT_ADMINISTRATOR("DADM", "2.16.756.5.30.1.127.3.10.6", "Document Administrator",
+			"Document Administrator", "TODO", "TODO", "TODO"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Healthcare professional</div>
@@ -62,7 +66,9 @@ public enum Role implements ValueSetEnumInterface {
 	 * <div class="it">Professionista della salute</div>
 	 * <!-- @formatter:on -->
 	 */
-	HEALTHCARE_PROFESSIONAL("HCP", "2.16.756.5.30.1.127.3.10.6", "Healthcare professional", "Healthcare professional", "Gesundheitsfachperson", "Professionnel de la santé", "Professionista della salute"),
+	HEALTHCARE_PROFESSIONAL("HCP", "2.16.756.5.30.1.127.3.10.6", "Healthcare professional",
+			"Healthcare professional", "Gesundheitsfachperson", "Professionnel de la santé",
+			"Professionista della salute"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Patient</div>
@@ -71,7 +77,8 @@ public enum Role implements ValueSetEnumInterface {
 	 * <div class="it">Paziente</div>
 	 * <!-- @formatter:on -->
 	 */
-	PATIENT("PAT", "2.16.756.5.30.1.127.3.10.6", "Patient", "Patient", "Patient", "Patient", "Paziente"),
+	PATIENT("PAT", "2.16.756.5.30.1.127.3.10.6", "Patient", "Patient", "Patient", "Patient",
+			"Paziente"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Policy Administrator</div>
@@ -80,7 +87,8 @@ public enum Role implements ValueSetEnumInterface {
 	 * <div class="it">TODO</div>
 	 * <!-- @formatter:on -->
 	 */
-	POLICY_ADMINISTRATOR("PADM", "2.16.756.5.30.1.127.3.10.6", "Policy Administrator", "Policy Administrator", "TODO", "TODO", "TODO"),
+	POLICY_ADMINISTRATOR("PADM", "2.16.756.5.30.1.127.3.10.6", "Policy Administrator",
+			"Policy Administrator", "TODO", "TODO", "TODO"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Representative</div>
@@ -89,7 +97,8 @@ public enum Role implements ValueSetEnumInterface {
 	 * <div class="it">Rappresentante</div>
 	 * <!-- @formatter:on -->
 	 */
-	REPRESENTATIVE("REP", "2.16.756.5.30.1.127.3.10.6", "Representative", "Representative", "Stellvertretung", "Représentant", "Rappresentante"),
+	REPRESENTATIVE("REP", "2.16.756.5.30.1.127.3.10.6", "Representative", "Representative",
+			"Stellvertretung", "Représentant", "Rappresentante"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Technical user</div>
@@ -98,7 +107,8 @@ public enum Role implements ValueSetEnumInterface {
 	 * <div class="it">Utente tecnico</div>
 	 * <!-- @formatter:on -->
 	 */
-	TECHNICAL_USER("TCU", "2.16.756.5.30.1.127.3.10.6", "Technical user", "Technical user", "Technischer Nutzer", "Utilisateur technique", "Utente tecnico");
+	TECHNICAL_USER("TCU", "2.16.756.5.30.1.127.3.10.6", "Technical user", "Technical user",
+			"Technischer Nutzer", "Utilisateur technique", "Utente tecnico");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -174,11 +184,11 @@ public enum Role implements ValueSetEnumInterface {
 	 * <div class="en">Identifier of the value set</div>
 	 * <div class="de">Identifikator für das Value Set</div>
 	 */
-	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.77.10.11.6";
+	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.15.1";
 
 	/**
-	 * <div class="en">Name of the value set</div>
-	 * <div class="de">Name des Value Sets</div>
+	 * <div class="en">Name of the value set</div> <div class="de">Name des
+	 * Value Sets</div>
 	 */
 	public static final String VALUE_SET_NAME = "EprRole";
 
@@ -240,9 +250,8 @@ public enum Role implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
-	 * code</div>
-	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse)
-	 * eindeutiger Code</div>
+	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
+	 * dieser Klasse) eindeutiger Code</div>
 	 */
 	private String code;
 
@@ -259,9 +268,8 @@ public enum Role implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div>
-	 * <div class="de">Instanziiert dieses Enum Object mittels eines Codes
-	 * und einem Display Name</div>.
+	 * Display Name</div> <div class="de">Instanziiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>.
 	 *
 	 * @param code
 	 *            code
@@ -278,7 +286,8 @@ public enum Role implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	Role(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	Role(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
@@ -328,15 +337,17 @@ public enum Role implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Gets the display name defined by the language param. If
-	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
-	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
+	 * there is no english translation, the default display name is
+	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
+	 * falls es keine Englische Übersetzung gibt, wird der default-Name
+	 * zurückgegeben.</div>
 	 *
 	 * @param languageCode
 	 *            the language code to get the display name for
 	 * @return returns the display name in the desired language. if language not
 	 *         found, display name in german will returned
 	 */
+	@Override
 	public String getDisplayName(LanguageCode languageCode) {
 		String displayName = displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
@@ -346,8 +357,8 @@ public enum Role implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the value set identifier.</div> <div class="de">Liefert
-	 * den Value Set Identifikator.</div>
+	 * <div class="en">Gets the value set identifier.</div>
+	 * <div class="de">Liefert den Value Set Identifikator.</div>
 	 *
 	 * @return <div class="en">the value set identifier</div>
 	 */

@@ -19,7 +19,9 @@ package org.ehealth_connector.communication.ch.enums;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.annotation.Generated;
+
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.ValueSetEnumInterface;
@@ -43,7 +45,12 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
 	 * <div class="it">Accesso all'Audit Record Repository del paziente</div>
 	 * <!-- @formatter:on -->
 	 */
-	ACCESSING_THE_PATIENT_AUDIT_RECORD_REPOSITORY("ATC_LOG_READ", "2.16.756.5.30.1.127.3.10.7", "Accessing the Patient Audit Record Repository", "Accessing the Patient Audit Record Repository", "Auf die patientenbezogene Auditprotokoll-Ablage zugreifen", "En cours d’accès au dépôt de contrôle des dossiers de patients", "Accesso all'Audit Record Repository del paziente"),
+	ACCESSING_THE_PATIENT_AUDIT_RECORD_REPOSITORY("ATC_LOG_READ", "2.16.756.5.30.1.127.3.10.7",
+			"Accessing the Patient Audit Record Repository",
+			"Accessing the Patient Audit Record Repository",
+			"Auf die patientenbezogene Auditprotokoll-Ablage zugreifen",
+			"En cours d’accès au dépôt de contrôle des dossiers de patients",
+			"Accesso all'Audit Record Repository del paziente"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Assign a Healthcare Professional to Blacklist</div>
@@ -52,7 +59,12 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
 	 * <div class="it">Aggiungere un professionista della salute alla lista nera</div>
 	 * <!-- @formatter:on -->
 	 */
-	ASSIGN_A_HEALTHCARE_PROFESSIONAL_TO_BLACKLIST("ATC_POL_INCL_BLACKLIST", "2.16.756.5.30.1.127.3.10.7", "Assign a Healthcare Professional to Blacklist", "Assign a Healthcare Professional to Blacklist", "Gesundheitsfachperson auf die schwarze Liste setzen", "Ajouter un professionnel de la santé à la liste noire", "Aggiungere un professionista della salute alla lista nera"),
+	ASSIGN_A_HEALTHCARE_PROFESSIONAL_TO_BLACKLIST("ATC_POL_INCL_BLACKLIST",
+			"2.16.756.5.30.1.127.3.10.7", "Assign a Healthcare Professional to Blacklist",
+			"Assign a Healthcare Professional to Blacklist",
+			"Gesundheitsfachperson auf die schwarze Liste setzen",
+			"Ajouter un professionnel de la santé à la liste noire",
+			"Aggiungere un professionista della salute alla lista nera"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Authorize participants to access level/date</div>
@@ -61,7 +73,12 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
 	 * <div class="it">Autorizzare i partecipanti ad accedere a un livello/una data</div>
 	 * <!-- @formatter:on -->
 	 */
-	AUTHORIZE_PARTICIPANTS_TO_ACCESS_LEVEL_DATE("ATC_POL_CREATE_AUT_PART_AL", "2.16.756.5.30.1.127.3.10.7", "Authorize participants to access level/date", "Authorize participants to access level/date", "Teilnehmende für Zugriffsstufe/Datum autorisieren", "Autoriser les participants pour ce niveau d’accès / à cette date", "Autorizzare i partecipanti ad accedere a un livello/una data"),
+	AUTHORIZE_PARTICIPANTS_TO_ACCESS_LEVEL_DATE("ATC_POL_CREATE_AUT_PART_AL",
+			"2.16.756.5.30.1.127.3.10.7", "Authorize participants to access level/date",
+			"Authorize participants to access level/date",
+			"Teilnehmende für Zugriffsstufe/Datum autorisieren",
+			"Autoriser les participants pour ce niveau d’accès / à cette date",
+			"Autorizzare i partecipanti ad accedere a un livello/una data"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Disabling Emergency Access</div>
@@ -70,7 +87,10 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
 	 * <div class="it">Disabilitare l'accesso di emergenza</div>
 	 * <!-- @formatter:on -->
 	 */
-	DISABLING_EMERGENCY_ACCESS("ATC_POL_DIS_EMER_USE", "2.16.756.5.30.1.127.3.10.7", "Disabling Emergency Access", "Disabling Emergency Access", "Notfall-Zugriff deaktivieren", "Désactiver l’accès d’urgence", "Disabilitare l'accesso di emergenza"),
+	DISABLING_EMERGENCY_ACCESS("ATC_POL_DIS_EMER_USE", "2.16.756.5.30.1.127.3.10.7",
+			"Disabling Emergency Access", "Disabling Emergency Access",
+			"Notfall-Zugriff deaktivieren", "Désactiver l’accès d’urgence",
+			"Disabilitare l'accesso di emergenza"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Document or Document Metadata update</div>
@@ -79,7 +99,11 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
 	 * <div class="it">Aggiornamento di un documento o dei metadati di un documento</div>
 	 * <!-- @formatter:on -->
 	 */
-	DOCUMENT_OR_DOCUMENT_METADATA_UPDATE("ATC_DOC_UPDATE", "2.16.756.5.30.1.127.3.10.7", "Document or Document Metadata update", "Document or Document Metadata update", "Dokument- oder Dokument-Metadaten-Aktualisierung", "Mise à jour de documents ou de métadonnées de documents", "Aggiornamento di un documento o dei metadati di un documento"),
+	DOCUMENT_OR_DOCUMENT_METADATA_UPDATE("ATC_DOC_UPDATE", "2.16.756.5.30.1.127.3.10.7",
+			"Document or Document Metadata update", "Document or Document Metadata update",
+			"Dokument- oder Dokument-Metadaten-Aktualisierung",
+			"Mise à jour de documents ou de métadonnées de documents",
+			"Aggiornamento di un documento o dei metadati di un documento"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Document removal</div>
@@ -88,7 +112,9 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
 	 * <div class="it">Rimozione di un documento</div>
 	 * <!-- @formatter:on -->
 	 */
-	DOCUMENT_REMOVAL("ATC_DOC_DELETE", "2.16.756.5.30.1.127.3.10.7", "Document removal", "Document removal", "Dokumentlöschung", "Suppression de documents", "Rimozione di un documento"),
+	DOCUMENT_REMOVAL("ATC_DOC_DELETE", "2.16.756.5.30.1.127.3.10.7", "Document removal",
+			"Document removal", "Dokumentlöschung", "Suppression de documents",
+			"Rimozione di un documento"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Document retrieval</div>
@@ -97,7 +123,9 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
 	 * <div class="it">Ricerca di un documento</div>
 	 * <!-- @formatter:on -->
 	 */
-	DOCUMENT_RETRIEVAL("ATC_DOC_READ", "2.16.756.5.30.1.127.3.10.7", "Document retrieval", "Document retrieval", "Dokumentabruf", "Récupération de documents", "Ricerca di un documento"),
+	DOCUMENT_RETRIEVAL("ATC_DOC_READ", "2.16.756.5.30.1.127.3.10.7", "Document retrieval",
+			"Document retrieval", "Dokumentabruf", "Récupération de documents",
+			"Ricerca di un documento"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Document upload</div>
@@ -106,7 +134,9 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
 	 * <div class="it">Upload di un documento</div>
 	 * <!-- @formatter:on -->
 	 */
-	DOCUMENT_UPLOAD("ATC_DOC_CREATE", "2.16.756.5.30.1.127.3.10.7", "Document upload", "Document upload", "Dokument-Upload", "Chargement de documents", "Upload di un documento"),
+	DOCUMENT_UPLOAD("ATC_DOC_CREATE", "2.16.756.5.30.1.127.3.10.7", "Document upload",
+			"Document upload", "Dokument-Upload", "Chargement de documents",
+			"Upload di un documento"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Enabling Emergency Access</div>
@@ -115,7 +145,9 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
 	 * <div class="it">Abilitare l'accesso di emergenza</div>
 	 * <!-- @formatter:on -->
 	 */
-	ENABLING_EMERGENCY_ACCESS("ATC_POL_ENA_EMER_USE", "2.16.756.5.30.1.127.3.10.7", "Enabling Emergency Access", "Enabling Emergency Access", "Notfall-Zugriff aktivieren", "Autoriser l’accès d’urgence", "Abilitare l'accesso di emergenza"),
+	ENABLING_EMERGENCY_ACCESS("ATC_POL_ENA_EMER_USE", "2.16.756.5.30.1.127.3.10.7",
+			"Enabling Emergency Access", "Enabling Emergency Access", "Notfall-Zugriff aktivieren",
+			"Autoriser l’accès d’urgence", "Abilitare l'accesso di emergenza"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Exclude a Healthcare Professional from Blacklist</div>
@@ -124,7 +156,12 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
 	 * <div class="it">Rimuovere un professionista della salute dalla lista nera</div>
 	 * <!-- @formatter:on -->
 	 */
-	EXCLUDE_A_HEALTHCARE_PROFESSIONAL_FROM_BLACKLIST("ATC_POL_EXL_BLACKLIST", "2.16.756.5.30.1.127.3.10.7", "Exclude a Healthcare Professional from Blacklist", "Exclude a Healthcare Professional from Blacklist", "Gesundheitsfachperson von der schwarzen Liste streichen", "Retirer un professionnel de la santé de la liste noire", "Rimuovere un professionista della salute dalla lista nera"),
+	EXCLUDE_A_HEALTHCARE_PROFESSIONAL_FROM_BLACKLIST("ATC_POL_EXL_BLACKLIST",
+			"2.16.756.5.30.1.127.3.10.7", "Exclude a Healthcare Professional from Blacklist",
+			"Exclude a Healthcare Professional from Blacklist",
+			"Gesundheitsfachperson von der schwarzen Liste streichen",
+			"Retirer un professionnel de la santé de la liste noire",
+			"Rimuovere un professionista della salute dalla lista nera"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Remove authorization for participants to access level/date</div>
@@ -133,7 +170,13 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
 	 * <div class="it">Rimuovere l'autorizzazione di accesso dei partecipanti al livello/alla data</div>
 	 * <!-- @formatter:on -->
 	 */
-	REMOVE_AUTHORIZATION_FOR_PARTICIPANTS_TO_ACCESS_LEVEL_DATE("ATC_POL_REMOVE_AUT_PART_AL", "2.16.756.5.30.1.127.3.10.7", "Remove authorization for participants to access level/date", "Remove authorization for participants to access level/date", "Autorisierung von Teilnehmenden für Zugriffsstufe/Datum aufheben", "Supprimer l’autorisation des participants à ce niveau d’accès / à cette date", "Rimuovere l'autorizzazione di accesso dei partecipanti al livello/alla data"),
+	REMOVE_AUTHORIZATION_FOR_PARTICIPANTS_TO_ACCESS_LEVEL_DATE("ATC_POL_REMOVE_AUT_PART_AL",
+			"2.16.756.5.30.1.127.3.10.7",
+			"Remove authorization for participants to access level/date",
+			"Remove authorization for participants to access level/date",
+			"Autorisierung von Teilnehmenden für Zugriffsstufe/Datum aufheben",
+			"Supprimer l’autorisation des participants à ce niveau d’accès / à cette date",
+			"Rimuovere l'autorizzazione di accesso dei partecipanti al livello/alla data"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Set or update the default Confidentiality Level for new documents</div>
@@ -142,7 +185,13 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
 	 * <div class="it">Impostare o aggiornare il livello di confidenzialità di default per i documenti nuovi</div>
 	 * <!-- @formatter:on -->
 	 */
-	SET_OR_UPDATE_THE_DEFAULT_CONFIDENTIALITY_LEVEL_FOR_NEW_DOCUMENTS("ATC_POL_DEF_CONFLEVEL", "2.16.756.5.30.1.127.3.10.7", "Set or update the default Confidentiality Level for new documents", "Set or update the default Confidentiality Level for new documents", "Standard-Vertraulichkeitsstufe für neue Dokumente setzen oder aktualisieren", "Définir ou mettre à jour le niveau de confidentialité pour les nouveaux documents", "Impostare o aggiornare il livello di confidenzialità di default per i documenti nuovi"),
+	SET_OR_UPDATE_THE_DEFAULT_CONFIDENTIALITY_LEVEL_FOR_NEW_DOCUMENTS("ATC_POL_DEF_CONFLEVEL",
+			"2.16.756.5.30.1.127.3.10.7",
+			"Set or update the default Confidentiality Level for new documents",
+			"Set or update the default Confidentiality Level for new documents",
+			"Standard-Vertraulichkeitsstufe für neue Dokumente setzen oder aktualisieren",
+			"Définir ou mettre à jour le niveau de confidentialité pour les nouveaux documents",
+			"Impostare o aggiornare il livello di confidenzialità di default per i documenti nuovi"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Update access level/date of authorized participants</div>
@@ -151,7 +200,12 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
 	 * <div class="it">Aggiornare il livello/la data di accesso dei partecipanti autorizzati</div>
 	 * <!-- @formatter:on -->
 	 */
-	UPDATE_ACCESS_LEVEL_DATE_OF_AUTHORIZED_PARTICIPANTS("ATC_POL_UPDATE_AUT_PART_AL", "2.16.756.5.30.1.127.3.10.7", "Update access level/date of authorized participants", "Update access level/date of authorized participants", "Zugriffsstufe/Datum autorisierter Teilnehmender aktualisieren", "Mettre à jour le niveau d’accès / la date des participants autorisés", "Aggiornare il livello/la data di accesso dei partecipanti autorizzati");
+	UPDATE_ACCESS_LEVEL_DATE_OF_AUTHORIZED_PARTICIPANTS("ATC_POL_UPDATE_AUT_PART_AL",
+			"2.16.756.5.30.1.127.3.10.7", "Update access level/date of authorized participants",
+			"Update access level/date of authorized participants",
+			"Zugriffsstufe/Datum autorisierter Teilnehmender aktualisieren",
+			"Mettre à jour le niveau d’accès / la date des participants autorisés",
+			"Aggiornare il livello/la data di accesso dei partecipanti autorizzati");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -290,8 +344,8 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.13.2";
 
 	/**
-	 * <div class="en">Name of the value set</div>
-	 * <div class="de">Name des Value Sets</div>
+	 * <div class="en">Name of the value set</div> <div class="de">Name des
+	 * Value Sets</div>
 	 */
 	public static final String VALUE_SET_NAME = "EprAuditTrailConsumptionEventType";
 
@@ -353,9 +407,8 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
-	 * code</div>
-	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse)
-	 * eindeutiger Code</div>
+	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
+	 * dieser Klasse) eindeutiger Code</div>
 	 */
 	private String code;
 
@@ -372,9 +425,8 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div>
-	 * <div class="de">Instanziiert dieses Enum Object mittels eines Codes
-	 * und einem Display Name</div>.
+	 * Display Name</div> <div class="de">Instanziiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>.
 	 *
 	 * @param code
 	 *            code
@@ -391,7 +443,9 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	AuditTrailConsumptionEventType(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	AuditTrailConsumptionEventType(String code, String codeSystem, String displayName,
+			String displayNameEn, String displayNameDe, String displayNameFr,
+			String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
@@ -441,15 +495,17 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Gets the display name defined by the language param. If
-	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
-	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
+	 * there is no english translation, the default display name is
+	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
+	 * falls es keine Englische Übersetzung gibt, wird der default-Name
+	 * zurückgegeben.</div>
 	 *
 	 * @param languageCode
 	 *            the language code to get the display name for
 	 * @return returns the display name in the desired language. if language not
 	 *         found, display name in german will returned
 	 */
+	@Override
 	public String getDisplayName(LanguageCode languageCode) {
 		String displayName = displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
@@ -459,8 +515,8 @@ public enum AuditTrailConsumptionEventType implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the value set identifier.</div> <div class="de">Liefert
-	 * den Value Set Identifikator.</div>
+	 * <div class="en">Gets the value set identifier.</div>
+	 * <div class="de">Liefert den Value Set Identifikator.</div>
 	 *
 	 * @return <div class="en">the value set identifier</div>
 	 */

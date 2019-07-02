@@ -19,7 +19,9 @@ package org.ehealth_connector.communication.ch.enums;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.annotation.Generated;
+
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.ValueSetEnumInterface;
@@ -48,7 +50,13 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="it">CDA Imaging Report with Structured Headings</div>
 	 * <!-- @formatter:on -->
 	 */
-	CDA_IMAGING_REPORT_WITH_STRUCTURED_HEADINGS("urn:ihe:rad:CDA:ImagingReportStructuredHeadings:2013", "1.3.6.1.4.1.19376.1.2.3", "XDS-I Imaging Report with Structured Headings (XDS-I)", "CDA Imaging Report with Structured Headings", "CDA Imaging Report with Structured Headings", "CDA Imaging Report with Structured Headings", "CDA Imaging Report with Structured Headings"),
+	CDA_IMAGING_REPORT_WITH_STRUCTURED_HEADINGS(
+			"urn:ihe:rad:CDA:ImagingReportStructuredHeadings:2013", "1.3.6.1.4.1.19376.1.2.3",
+			"XDS-I Imaging Report with Structured Headings (XDS-I)",
+			"CDA Imaging Report with Structured Headings",
+			"CDA Imaging Report with Structured Headings",
+			"CDA Imaging Report with Structured Headings",
+			"CDA Imaging Report with Structured Headings"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">CDA Laboratory Report</div>
@@ -57,7 +65,9 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="it">CDA Laboratory Report</div>
 	 * <!-- @formatter:on -->
 	 */
-	CDA_LABORATORY_REPORT("urn:ihe:lab:xd-lab:2008", "1.3.6.1.4.1.19376.1.2.3", "CDA Laboratory Report", "CDA Laboratory Report", "CDA Laboratory Report", "CDA Laboratory Report", "CDA Laboratory Report"),
+	CDA_LABORATORY_REPORT("urn:ihe:lab:xd-lab:2008", "1.3.6.1.4.1.19376.1.2.3",
+			"CDA Laboratory Report", "CDA Laboratory Report", "CDA Laboratory Report",
+			"CDA Laboratory Report", "CDA Laboratory Report"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">CDA Wrapped Text Report</div>
@@ -66,7 +76,9 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="it">CDA Wrapped Text Report</div>
 	 * <!-- @formatter:on -->
 	 */
-	CDA_WRAPPED_TEXT_REPORT("urn:ihe:rad:TEXT", "1.3.6.1.4.1.19376.1.2.3", "XDS-I CDA Wrapped Text Report (XDS-I)", "CDA Wrapped Text Report", "CDA Wrapped Text Report", "CDA Wrapped Text Report", "CDA Wrapped Text Report"),
+	CDA_WRAPPED_TEXT_REPORT("urn:ihe:rad:TEXT", "1.3.6.1.4.1.19376.1.2.3",
+			"XDS-I CDA Wrapped Text Report (XDS-I)", "CDA Wrapped Text Report",
+			"CDA Wrapped Text Report", "CDA Wrapped Text Report", "CDA Wrapped Text Report"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Community Dispense</div>
@@ -75,7 +87,8 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="it">Community Dispense</div>
 	 * <!-- @formatter:on -->
 	 */
-	COMMUNITY_DISPENSE("urn:ihe:pharm:dis:2010", "1.3.6.1.4.1.19376.1.2.3", "Community Dispense", "Community Dispense", "Community Dispense", "Community Dispense", "Community Dispense"),
+	COMMUNITY_DISPENSE("urn:ihe:pharm:dis:2010", "1.3.6.1.4.1.19376.1.2.3", "Community Dispense",
+			"Community Dispense", "Community Dispense", "Community Dispense", "Community Dispense"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Community Medication List</div>
@@ -84,7 +97,9 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="it">Community Medication List</div>
 	 * <!-- @formatter:on -->
 	 */
-	COMMUNITY_MEDICATION_LIST("urn:ihe:pharm:pml:2013", "1.3.6.1.4.1.19376.1.2.3", "Community Medication List", "Community Medication List", "Community Medication List", "Community Medication List", "Community Medication List"),
+	COMMUNITY_MEDICATION_LIST("urn:ihe:pharm:pml:2013", "1.3.6.1.4.1.19376.1.2.3",
+			"Community Medication List", "Community Medication List", "Community Medication List",
+			"Community Medication List", "Community Medication List"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Community Medication Treatment Plan</div>
@@ -93,7 +108,10 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="it">Community Medication Treatment Plan</div>
 	 * <!-- @formatter:on -->
 	 */
-	COMMUNITY_MEDICATION_TREATMENT_PLAN("urn:ihe:pharm:mtp:2015", "1.3.6.1.4.1.19376.1.2.3", "Community Medication Treatment Plan", "Community Medication Treatment Plan", "Community Medication Treatment Plan", "Community Medication Treatment Plan", "Community Medication Treatment Plan"),
+	COMMUNITY_MEDICATION_TREATMENT_PLAN("urn:ihe:pharm:mtp:2015", "1.3.6.1.4.1.19376.1.2.3",
+			"Community Medication Treatment Plan", "Community Medication Treatment Plan",
+			"Community Medication Treatment Plan", "Community Medication Treatment Plan",
+			"Community Medication Treatment Plan"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Community Pharmaceutical Advice</div>
@@ -102,7 +120,10 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="it">Community Pharmaceutical Advice</div>
 	 * <!-- @formatter:on -->
 	 */
-	COMMUNITY_PHARMACEUTICAL_ADVICE("urn:ihe:pharm:padv:2010", "1.3.6.1.4.1.19376.1.2.3", "Community Pharmaceutical Advice", "Community Pharmaceutical Advice", "Community Pharmaceutical Advice", "Community Pharmaceutical Advice", "Community Pharmaceutical Advice"),
+	COMMUNITY_PHARMACEUTICAL_ADVICE("urn:ihe:pharm:padv:2010", "1.3.6.1.4.1.19376.1.2.3",
+			"Community Pharmaceutical Advice", "Community Pharmaceutical Advice",
+			"Community Pharmaceutical Advice", "Community Pharmaceutical Advice",
+			"Community Pharmaceutical Advice"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Community Prescription</div>
@@ -111,7 +132,9 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="it">Community Prescription</div>
 	 * <!-- @formatter:on -->
 	 */
-	COMMUNITY_PRESCRIPTION("urn:ihe:pharm:pre:2010", "1.3.6.1.4.1.19376.1.2.3", "Community Prescription", "Community Prescription", "Community Prescription", "Community Prescription", "Community Prescription"),
+	COMMUNITY_PRESCRIPTION("urn:ihe:pharm:pre:2010", "1.3.6.1.4.1.19376.1.2.3",
+			"Community Prescription", "Community Prescription", "Community Prescription",
+			"Community Prescription", "Community Prescription"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">IHE KOS document</div>
@@ -120,7 +143,9 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="it">Documento KOS </div>
 	 * <!-- @formatter:on -->
 	 */
-	IHE_KOS_DOCUMENT("1.2.840.10008.5.1.4.1.1.88.59", "1.2.840.10008.2.6.1", "DICOM Manifest (DICOM KOS SOP Class UID)", "IHE KOS document", "KOS Dokument", "Document KOS", "Documento KOS "),
+	IHE_KOS_DOCUMENT("1.2.840.10008.5.1.4.1.1.88.59", "1.2.840.10008.2.6.1",
+			"DICOM Manifest (DICOM KOS SOP Class UID)", "IHE KOS document", "KOS Dokument",
+			"Document KOS", "Documento KOS "),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Immunization Content (IC)</div>
@@ -129,7 +154,9 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="it">Immunization Content (IC)</div>
 	 * <!-- @formatter:on -->
 	 */
-	IMMUNIZATION_CONTENT("urn:ihe:pcc:ic:2009", "1.3.6.1.4.1.19376.1.2.3", "Immunization Content (IC)", "Immunization Content (IC)", "Immunization Content (IC)", "Immunization Content (IC)", "Immunization Content (IC)"),
+	IMMUNIZATION_CONTENT("urn:ihe:pcc:ic:2009", "1.3.6.1.4.1.19376.1.2.3",
+			"Immunization Content (IC)", "Immunization Content (IC)", "Immunization Content (IC)",
+			"Immunization Content (IC)", "Immunization Content (IC)"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">MimeType sufficient</div>
@@ -138,7 +165,9 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="it">MimeType sufficient</div>
 	 * <!-- @formatter:on -->
 	 */
-	MIMETYPE_SUFFICIENT("urn:ihe:iti:xds:2017:mimeTypeSufficient", "1.3.6.1.4.1.19376.1.2.3", "MimeType sufficient", "MimeType sufficient", "MimeType sufficient", "MimeType sufficient", "MimeType sufficient"),
+	MIMETYPE_SUFFICIENT("urn:ihe:iti:xds:2017:mimeTypeSufficient", "1.3.6.1.4.1.19376.1.2.3",
+			"MimeType sufficient", "MimeType sufficient", "MimeType sufficient",
+			"MimeType sufficient", "MimeType sufficient"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">PDF embedded in CDA per XDS-SD profile</div>
@@ -147,7 +176,10 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="it">PDF embedded in CDA per XDS-SD profile</div>
 	 * <!-- @formatter:on -->
 	 */
-	PDF_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE("urn:ihe:iti:xds-sd:pdf:2008", "1.3.6.1.4.1.19376.1.2.3", "Scanned Documents (PDF)", "PDF embedded in CDA per XDS-SD profile", "PDF embedded in CDA per XDS-SD profile", "PDF embedded in CDA per XDS-SD profile", "PDF embedded in CDA per XDS-SD profile"),
+	PDF_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE("urn:ihe:iti:xds-sd:pdf:2008", "1.3.6.1.4.1.19376.1.2.3",
+			"Scanned Documents (PDF)", "PDF embedded in CDA per XDS-SD profile",
+			"PDF embedded in CDA per XDS-SD profile", "PDF embedded in CDA per XDS-SD profile",
+			"PDF embedded in CDA per XDS-SD profile"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">PDF Radiology Report</div>
@@ -156,7 +188,9 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="it">PDF Radiology Report</div>
 	 * <!-- @formatter:on -->
 	 */
-	PDF_RADIOLOGY_REPORT("urn:ihe:rad:PDF", "1.3.6.1.4.1.19376.1.2.3", "XDS-I PDF (XDS-I)", "PDF Radiology Report", "PDF Radiology Report", "PDF Radiology Report", "PDF Radiology Report"),
+	PDF_RADIOLOGY_REPORT("urn:ihe:rad:PDF", "1.3.6.1.4.1.19376.1.2.3", "XDS-I PDF (XDS-I)",
+			"PDF Radiology Report", "PDF Radiology Report", "PDF Radiology Report",
+			"PDF Radiology Report"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Text embedded in CDA per XDS-SD profile</div>
@@ -165,7 +199,10 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="it">Text embedded in CDA per XDS-SD profile</div>
 	 * <!-- @formatter:on -->
 	 */
-	TEXT_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE("urn:ihe:iti:xds-sd:text:2008", "1.3.6.1.4.1.19376.1.2.3", "Scanned Documents (text)", "Text embedded in CDA per XDS-SD profile", "Text embedded in CDA per XDS-SD profile", "Text embedded in CDA per XDS-SD profile", "Text embedded in CDA per XDS-SD profile"),
+	TEXT_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE("urn:ihe:iti:xds-sd:text:2008",
+			"1.3.6.1.4.1.19376.1.2.3", "Scanned Documents (text)",
+			"Text embedded in CDA per XDS-SD profile", "Text embedded in CDA per XDS-SD profile",
+			"Text embedded in CDA per XDS-SD profile", "Text embedded in CDA per XDS-SD profile"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Unstructured EPR document</div>
@@ -174,7 +211,10 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="it">Documento CIP non strutturato</div>
 	 * <!-- @formatter:on -->
 	 */
-	UNSTRUCTURED_EPR_DOCUMENT("urn:che:epr:EPR_Unstructured_Document", "2.16.756.5.30.1.127.3.10.10", "Unstructured EPR document", "Unstructured EPR document", "Unstrukturiertes EPD Dokument", "Document DEP non structuré", "Documento CIP non strutturato");
+	UNSTRUCTURED_EPR_DOCUMENT("urn:che:epr:EPR_Unstructured_Document",
+			"2.16.756.5.30.1.127.3.10.10", "Unstructured EPR document", "Unstructured EPR document",
+			"Unstrukturiertes EPD Dokument", "Document DEP non structuré",
+			"Documento CIP non strutturato");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -333,8 +373,8 @@ public enum FormatCode implements ValueSetEnumInterface {
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.9";
 
 	/**
-	 * <div class="en">Name of the value set</div>
-	 * <div class="de">Name des Value Sets</div>
+	 * <div class="en">Name of the value set</div> <div class="de">Name des
+	 * Value Sets</div>
 	 */
 	public static final String VALUE_SET_NAME = "xds-formCo";
 
@@ -396,9 +436,8 @@ public enum FormatCode implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
-	 * code</div>
-	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse)
-	 * eindeutiger Code</div>
+	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
+	 * dieser Klasse) eindeutiger Code</div>
 	 */
 	private String code;
 
@@ -415,9 +454,8 @@ public enum FormatCode implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div>
-	 * <div class="de">Instanziiert dieses Enum Object mittels eines Codes
-	 * und einem Display Name</div>.
+	 * Display Name</div> <div class="de">Instanziiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>.
 	 *
 	 * @param code
 	 *            code
@@ -434,7 +472,8 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	FormatCode(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	FormatCode(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
@@ -484,15 +523,17 @@ public enum FormatCode implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Gets the display name defined by the language param. If
-	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
-	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
+	 * there is no english translation, the default display name is
+	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
+	 * falls es keine Englische Übersetzung gibt, wird der default-Name
+	 * zurückgegeben.</div>
 	 *
 	 * @param languageCode
 	 *            the language code to get the display name for
 	 * @return returns the display name in the desired language. if language not
 	 *         found, display name in german will returned
 	 */
+	@Override
 	public String getDisplayName(LanguageCode languageCode) {
 		String displayName = displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
@@ -502,8 +543,8 @@ public enum FormatCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the value set identifier.</div> <div class="de">Liefert
-	 * den Value Set Identifikator.</div>
+	 * <div class="en">Gets the value set identifier.</div>
+	 * <div class="de">Liefert den Value Set Identifikator.</div>
 	 *
 	 * @return <div class="en">the value set identifier</div>
 	 */

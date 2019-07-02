@@ -19,7 +19,9 @@ package org.ehealth_connector.communication.ch.enums;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.annotation.Generated;
+
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.ValueSetEnumInterface;
@@ -43,7 +45,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Autorifrazione</div>
 	 * <!-- @formatter:on -->
 	 */
-	AUTOREFRACTION("AR", "1.2.840.10008.2.16.4", "Autorefraction", "Autorefraction", "Autorefraktion", "Autoréfraction", "Autorifrazione"),
+	AUTOREFRACTION("AR", "1.2.840.10008.2.16.4", "Autorefraction", "Autorefraction",
+			"Autorefraktion", "Autoréfraction", "Autorifrazione"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Bone Mineral Densitometry</div>
@@ -52,7 +55,9 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Mineralometria ossea computerizzata</div>
 	 * <!-- @formatter:on -->
 	 */
-	BONE_MINERAL_DENSITOMETRY("BMD", "1.2.840.10008.2.16.4", "Bone Mineral Densitometry", "Bone Mineral Densitometry", "Knochenmineraldensitometrie", "Densitométrie minérale osseuse", "Mineralometria ossea computerizzata"),
+	BONE_MINERAL_DENSITOMETRY("BMD", "1.2.840.10008.2.16.4", "Bone Mineral Densitometry",
+			"Bone Mineral Densitometry", "Knochenmineraldensitometrie",
+			"Densitométrie minérale osseuse", "Mineralometria ossea computerizzata"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Cardiac Electrophysiology</div>
@@ -61,7 +66,9 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Elettrofisiologia cardiaca</div>
 	 * <!-- @formatter:on -->
 	 */
-	CARDIAC_ELECTROPHYSIOLOGY("EPS", "1.2.840.10008.2.16.4", "Cardiac Electrophysiology", "Cardiac Electrophysiology", "Herz-Elektrophysiologie", "Électrophysiologie cardiaque", "Elettrofisiologia cardiaca"),
+	CARDIAC_ELECTROPHYSIOLOGY("EPS", "1.2.840.10008.2.16.4", "Cardiac Electrophysiology",
+			"Cardiac Electrophysiology", "Herz-Elektrophysiologie", "Électrophysiologie cardiaque",
+			"Elettrofisiologia cardiaca"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Computed Radiography</div>
@@ -70,7 +77,9 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Radiografia computerizzata</div>
 	 * <!-- @formatter:on -->
 	 */
-	COMPUTED_RADIOGRAPHY("CR", "1.2.840.10008.2.16.4", "Computed Radiography", "Computed Radiography", "Computerradiografie", "Radiographie numérique", "Radiografia computerizzata"),
+	COMPUTED_RADIOGRAPHY("CR", "1.2.840.10008.2.16.4", "Computed Radiography",
+			"Computed Radiography", "Computerradiografie", "Radiographie numérique",
+			"Radiografia computerizzata"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Computed Tomography</div>
@@ -79,7 +88,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Tomografia computerizzata</div>
 	 * <!-- @formatter:on -->
 	 */
-	COMPUTED_TOMOGRAPHY("CT", "1.2.840.10008.2.16.4", "Computed Tomography", "Computed Tomography", "Computertomografie", "Tomographie numérique", "Tomografia computerizzata"),
+	COMPUTED_TOMOGRAPHY("CT", "1.2.840.10008.2.16.4", "Computed Tomography", "Computed Tomography",
+			"Computertomografie", "Tomographie numérique", "Tomografia computerizzata"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Digital Radiography</div>
@@ -88,7 +98,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Radiografia digitale</div>
 	 * <!-- @formatter:on -->
 	 */
-	DIGITAL_RADIOGRAPHY("DX", "1.2.840.10008.2.16.4", "Digital Radiography", "Digital Radiography", "Digitales Röntgen", "Radiologie numérique", "Radiografia digitale"),
+	DIGITAL_RADIOGRAPHY("DX", "1.2.840.10008.2.16.4", "Digital Radiography", "Digital Radiography",
+			"Digitales Röntgen", "Radiologie numérique", "Radiografia digitale"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Electrocardiography</div>
@@ -97,7 +108,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Elettrocardiografia</div>
 	 * <!-- @formatter:on -->
 	 */
-	ELECTROCARDIOGRAPHY("ECG", "1.2.840.10008.2.16.4", "Electrocardiography", "Electrocardiography", "Elektrokardiografie", "Électrocardiographie", "Elettrocardiografia"),
+	ELECTROCARDIOGRAPHY("ECG", "1.2.840.10008.2.16.4", "Electrocardiography", "Electrocardiography",
+			"Elektrokardiografie", "Électrocardiographie", "Elettrocardiografia"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Endoscopy</div>
@@ -106,7 +118,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Endoscopia</div>
 	 * <!-- @formatter:on -->
 	 */
-	ENDOSCOPY("ES", "1.2.840.10008.2.16.4", "Endoscopy", "Endoscopy", "Endoskopie", "Endoscopie", "Endoscopia"),
+	ENDOSCOPY("ES", "1.2.840.10008.2.16.4", "Endoscopy", "Endoscopy", "Endoskopie", "Endoscopie",
+			"Endoscopia"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">External-camera Photography</div>
@@ -115,7 +128,9 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Fotografia con fotocamera esterna</div>
 	 * <!-- @formatter:on -->
 	 */
-	EXTERNAL_CAMERA_PHOTOGRAPHY("XC", "1.2.840.10008.2.16.4", "External-camera Photography", "External-camera Photography", "Fotografie mit externer Kamera", "Photographie par appareil externe", "Fotografia con fotocamera esterna"),
+	EXTERNAL_CAMERA_PHOTOGRAPHY("XC", "1.2.840.10008.2.16.4", "External-camera Photography",
+			"External-camera Photography", "Fotografie mit externer Kamera",
+			"Photographie par appareil externe", "Fotografia con fotocamera esterna"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">General Microscopy</div>
@@ -124,7 +139,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Microscopia generale</div>
 	 * <!-- @formatter:on -->
 	 */
-	GENERAL_MICROSCOPY("GM", "1.2.840.10008.2.16.4", "General Microscopy", "General Microscopy", "Allgemeine Mikroskopie", "Microscopie générale", "Microscopia generale"),
+	GENERAL_MICROSCOPY("GM", "1.2.840.10008.2.16.4", "General Microscopy", "General Microscopy",
+			"Allgemeine Mikroskopie", "Microscopie générale", "Microscopia generale"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Hemodynamic Waveform</div>
@@ -133,7 +149,9 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Monitoraggio emodinamico</div>
 	 * <!-- @formatter:on -->
 	 */
-	HEMODYNAMIC_WAVEFORM("HD", "1.2.840.10008.2.16.4", "Hemodynamic Waveform", "Hemodynamic Waveform", "Hämodynamische Druckkurve", "Courbe hémodynamique", "Monitoraggio emodinamico"),
+	HEMODYNAMIC_WAVEFORM("HD", "1.2.840.10008.2.16.4", "Hemodynamic Waveform",
+			"Hemodynamic Waveform", "Hämodynamische Druckkurve", "Courbe hémodynamique",
+			"Monitoraggio emodinamico"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Intravascular Optical Coherence Tomography</div>
@@ -142,7 +160,12 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Tomografia intravascolare a coerenza ottica</div>
 	 * <!-- @formatter:on -->
 	 */
-	INTRAVASCULAR_OPTICAL_COHERENCE_TOMOGRAPHY("IVOCT", "1.2.840.10008.2.16.4", "Intravascular Optical Coherence Tomography", "Intravascular Optical Coherence Tomography", "Intravaskuläre optische Kohärenztomografie", "Tomographie en cohérence optique intravasculaire", "Tomografia intravascolare a coerenza ottica"),
+	INTRAVASCULAR_OPTICAL_COHERENCE_TOMOGRAPHY("IVOCT", "1.2.840.10008.2.16.4",
+			"Intravascular Optical Coherence Tomography",
+			"Intravascular Optical Coherence Tomography",
+			"Intravaskuläre optische Kohärenztomografie",
+			"Tomographie en cohérence optique intravasculaire",
+			"Tomografia intravascolare a coerenza ottica"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Intravascular Ultrasound</div>
@@ -151,7 +174,9 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Ecografia intravascolare</div>
 	 * <!-- @formatter:on -->
 	 */
-	INTRAVASCULAR_ULTRASOUND("IVUS", "1.2.840.10008.2.16.4", "Intravascular Ultrasound", "Intravascular Ultrasound", "Intravaskulärer Ultraschall", "Ultrason intravasculaire", "Ecografia intravascolare"),
+	INTRAVASCULAR_ULTRASOUND("IVUS", "1.2.840.10008.2.16.4", "Intravascular Ultrasound",
+			"Intravascular Ultrasound", "Intravaskulärer Ultraschall", "Ultrason intravasculaire",
+			"Ecografia intravascolare"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Intra-oral Radiography</div>
@@ -160,7 +185,9 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Radiografia intraorale</div>
 	 * <!-- @formatter:on -->
 	 */
-	INTRA_ORAL_RADIOGRAPHY("IO", "1.2.840.10008.2.16.4", "Intra-oral Radiography", "Intra-oral Radiography", "Intraorales Röntgen", "Radiographie intra-orale", "Radiografia intraorale"),
+	INTRA_ORAL_RADIOGRAPHY("IO", "1.2.840.10008.2.16.4", "Intra-oral Radiography",
+			"Intra-oral Radiography", "Intraorales Röntgen", "Radiographie intra-orale",
+			"Radiografia intraorale"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Keratometry</div>
@@ -169,7 +196,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Cheratometria</div>
 	 * <!-- @formatter:on -->
 	 */
-	KERATOMETRY("KER", "1.2.840.10008.2.16.4", "Keratometry", "Keratometry", "Keratometrie", "Kératométrie", "Cheratometria"),
+	KERATOMETRY("KER", "1.2.840.10008.2.16.4", "Keratometry", "Keratometry", "Keratometrie",
+			"Kératométrie", "Cheratometria"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Lensometry</div>
@@ -178,7 +206,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Focometria</div>
 	 * <!-- @formatter:on -->
 	 */
-	LENSOMETRY("LEN", "1.2.840.10008.2.16.4", "Lensometry", "Lensometry", "Linsenmessung", "Lensométrie", "Focometria"),
+	LENSOMETRY("LEN", "1.2.840.10008.2.16.4", "Lensometry", "Lensometry", "Linsenmessung",
+			"Lensométrie", "Focometria"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Magnetic Resonance</div>
@@ -187,7 +216,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Risonanza magnetica</div>
 	 * <!-- @formatter:on -->
 	 */
-	MAGNETIC_RESONANCE("MR", "1.2.840.10008.2.16.4", "Magnetic Resonance", "Magnetic Resonance", "Magnetresonanz", "Résonance magnétique", "Risonanza magnetica"),
+	MAGNETIC_RESONANCE("MR", "1.2.840.10008.2.16.4", "Magnetic Resonance", "Magnetic Resonance",
+			"Magnetresonanz", "Résonance magnétique", "Risonanza magnetica"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Mammography</div>
@@ -196,7 +226,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Mammografia</div>
 	 * <!-- @formatter:on -->
 	 */
-	MAMMOGRAPHY("MG", "1.2.840.10008.2.16.4", "Mammography", "Mammography", "Mammografie", "Mammographie", "Mammografia"),
+	MAMMOGRAPHY("MG", "1.2.840.10008.2.16.4", "Mammography", "Mammography", "Mammografie",
+			"Mammographie", "Mammografia"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Nuclear Medicine</div>
@@ -205,7 +236,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Medicina nucleare</div>
 	 * <!-- @formatter:on -->
 	 */
-	NUCLEAR_MEDICINE("NM", "1.2.840.10008.2.16.4", "Nuclear Medicine", "Nuclear Medicine", "Nuklearmedizin", "Médecine nucléaire", "Medicina nucleare"),
+	NUCLEAR_MEDICINE("NM", "1.2.840.10008.2.16.4", "Nuclear Medicine", "Nuclear Medicine",
+			"Nuklearmedizin", "Médecine nucléaire", "Medicina nucleare"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Ophthalmic Axial Measurements</div>
@@ -214,7 +246,9 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Misurazioni oftalmiche assiali</div>
 	 * <!-- @formatter:on -->
 	 */
-	OPHTHALMIC_AXIAL_MEASUREMENTS("OAM", "1.2.840.10008.2.16.4", "Ophthalmic Axial Measurements", "Ophthalmic Axial Measurements", "Augenachsenmessungen", "Mesures axiales ophtalmiques", "Misurazioni oftalmiche assiali"),
+	OPHTHALMIC_AXIAL_MEASUREMENTS("OAM", "1.2.840.10008.2.16.4", "Ophthalmic Axial Measurements",
+			"Ophthalmic Axial Measurements", "Augenachsenmessungen", "Mesures axiales ophtalmiques",
+			"Misurazioni oftalmiche assiali"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Ophthalmic Mapping</div>
@@ -223,7 +257,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Mappatura oftalmica</div>
 	 * <!-- @formatter:on -->
 	 */
-	OPHTHALMIC_MAPPING("OPM", "1.2.840.10008.2.16.4", "Ophthalmic Mapping", "Ophthalmic Mapping", "Augenkartierung", "Cartographie ophtalmique", "Mappatura oftalmica"),
+	OPHTHALMIC_MAPPING("OPM", "1.2.840.10008.2.16.4", "Ophthalmic Mapping", "Ophthalmic Mapping",
+			"Augenkartierung", "Cartographie ophtalmique", "Mappatura oftalmica"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Ophthalmic Photography</div>
@@ -232,7 +267,9 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Fotografia oftalmica</div>
 	 * <!-- @formatter:on -->
 	 */
-	OPHTHALMIC_PHOTOGRAPHY("OP", "1.2.840.10008.2.16.4", "Ophthalmic Photography", "Ophthalmic Photography", "Augenfotografie", "Photographie ophtalmique", "Fotografia oftalmica"),
+	OPHTHALMIC_PHOTOGRAPHY("OP", "1.2.840.10008.2.16.4", "Ophthalmic Photography",
+			"Ophthalmic Photography", "Augenfotografie", "Photographie ophtalmique",
+			"Fotografia oftalmica"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Ophthalmic Refraction</div>
@@ -241,7 +278,9 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Rifrazione oggettiva</div>
 	 * <!-- @formatter:on -->
 	 */
-	OPHTHALMIC_REFRACTION("OPR", "1.2.840.10008.2.16.4", "Ophthalmic Refraction", "Ophthalmic Refraction", "Augenrefraktion", "Réfraction ophtalmique", "Rifrazione oggettiva"),
+	OPHTHALMIC_REFRACTION("OPR", "1.2.840.10008.2.16.4", "Ophthalmic Refraction",
+			"Ophthalmic Refraction", "Augenrefraktion", "Réfraction ophtalmique",
+			"Rifrazione oggettiva"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Ophthalmic Tomography</div>
@@ -250,7 +289,9 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Tomografia ottica computerizzata</div>
 	 * <!-- @formatter:on -->
 	 */
-	OPHTHALMIC_TOMOGRAPHY("OPT", "1.2.840.10008.2.16.4", "Ophthalmic Tomography", "Ophthalmic Tomography", "Augentomografie", "Tomographie ophtalmique", "Tomografia ottica computerizzata"),
+	OPHTHALMIC_TOMOGRAPHY("OPT", "1.2.840.10008.2.16.4", "Ophthalmic Tomography",
+			"Ophthalmic Tomography", "Augentomografie", "Tomographie ophtalmique",
+			"Tomografia ottica computerizzata"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Ophthalmic Tomography B-scan Volume Analysis</div>
@@ -259,7 +300,9 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">TODO</div>
 	 * <!-- @formatter:on -->
 	 */
-	OPHTHALMIC_TOMOGRAPHY_B_SCAN_VOLUME_ANALYSIS("OPTBSV", "1.2.840.10008.2.16.4", "Ophthalmic Tomography B-scan Volume Analysis", "Ophthalmic Tomography B-scan Volume Analysis", "TODO", "TODO", "TODO"),
+	OPHTHALMIC_TOMOGRAPHY_B_SCAN_VOLUME_ANALYSIS("OPTBSV", "1.2.840.10008.2.16.4",
+			"Ophthalmic Tomography B-scan Volume Analysis",
+			"Ophthalmic Tomography B-scan Volume Analysis", "TODO", "TODO", "TODO"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Ophthalmic Tomography En Face</div>
@@ -268,7 +311,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">TODO</div>
 	 * <!-- @formatter:on -->
 	 */
-	OPHTHALMIC_TOMOGRAPHY_EN_FACE("OPTENF", "1.2.840.10008.2.16.4", "Ophthalmic Tomography En Face", "Ophthalmic Tomography En Face", "TODO", "TODO", "TODO"),
+	OPHTHALMIC_TOMOGRAPHY_EN_FACE("OPTENF", "1.2.840.10008.2.16.4", "Ophthalmic Tomography En Face",
+			"Ophthalmic Tomography En Face", "TODO", "TODO", "TODO"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Ophthalmic Visual Field</div>
@@ -277,7 +321,9 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Perimetria computerizzata</div>
 	 * <!-- @formatter:on -->
 	 */
-	OPHTHALMIC_VISUAL_FIELD("OPV", "1.2.840.10008.2.16.4", "Ophthalmic Visual Field", "Ophthalmic Visual Field", "Gesichtsfeld der Augen", "Champ visuel ophtalmique", "Perimetria computerizzata"),
+	OPHTHALMIC_VISUAL_FIELD("OPV", "1.2.840.10008.2.16.4", "Ophthalmic Visual Field",
+			"Ophthalmic Visual Field", "Gesichtsfeld der Augen", "Champ visuel ophtalmique",
+			"Perimetria computerizzata"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Optical Coherence Tomography</div>
@@ -286,7 +332,9 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Tomografia a coerenza ottica</div>
 	 * <!-- @formatter:on -->
 	 */
-	OPTICAL_COHERENCE_TOMOGRAPHY("OCT", "1.2.840.10008.2.16.4", "Optical Coherence Tomography", "Optical Coherence Tomography", "Optische Kohärenztomografie", "Tomographie en cohérence optique", "Tomografia a coerenza ottica"),
+	OPTICAL_COHERENCE_TOMOGRAPHY("OCT", "1.2.840.10008.2.16.4", "Optical Coherence Tomography",
+			"Optical Coherence Tomography", "Optische Kohärenztomografie",
+			"Tomographie en cohérence optique", "Tomografia a coerenza ottica"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Optical Surface Scanner</div>
@@ -295,7 +343,9 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Scanner ottico per superfici</div>
 	 * <!-- @formatter:on -->
 	 */
-	OPTICAL_SURFACE_SCANNER("OSS", "1.2.840.10008.2.16.4", "Optical Surface Scanner", "Optical Surface Scanner", "Optischer Oberflächenscanner", "Scanneur optique de surface", "Scanner ottico per superfici"),
+	OPTICAL_SURFACE_SCANNER("OSS", "1.2.840.10008.2.16.4", "Optical Surface Scanner",
+			"Optical Surface Scanner", "Optischer Oberflächenscanner",
+			"Scanneur optique de surface", "Scanner ottico per superfici"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Panoramic X-Ray</div>
@@ -304,7 +354,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Radiografia panoramica</div>
 	 * <!-- @formatter:on -->
 	 */
-	PANORAMIC_X_RAY("PX", "1.2.840.10008.2.16.4", "Panoramic X-Ray", "Panoramic X-Ray", "Panoramaröntgen", "Radiographie panoramique", "Radiografia panoramica"),
+	PANORAMIC_X_RAY("PX", "1.2.840.10008.2.16.4", "Panoramic X-Ray", "Panoramic X-Ray",
+			"Panoramaröntgen", "Radiographie panoramique", "Radiografia panoramica"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Positron emission tomography</div>
@@ -313,7 +364,9 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Tomografia a emissione di positroni</div>
 	 * <!-- @formatter:on -->
 	 */
-	POSITRON_EMISSION_TOMOGRAPHY("PT", "1.2.840.10008.2.16.4", "Positron emission tomography", "Positron emission tomography", "Positronen-Emissions-Tomografie", "Tomographie par émission de positons", "Tomografia a emissione di positroni"),
+	POSITRON_EMISSION_TOMOGRAPHY("PT", "1.2.840.10008.2.16.4", "Positron emission tomography",
+			"Positron emission tomography", "Positronen-Emissions-Tomografie",
+			"Tomographie par émission de positons", "Tomografia a emissione di positroni"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Radiofluoroscopy</div>
@@ -322,7 +375,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Radiofluoroscopia</div>
 	 * <!-- @formatter:on -->
 	 */
-	RADIOFLUOROSCOPY("RF", "1.2.840.10008.2.16.4", "Radiofluoroscopy", "Radiofluoroscopy", "Radio-Fluoroskopie", "Radio-fluoroscopie", "Radiofluoroscopia"),
+	RADIOFLUOROSCOPY("RF", "1.2.840.10008.2.16.4", "Radiofluoroscopy", "Radiofluoroscopy",
+			"Radio-Fluoroskopie", "Radio-fluoroscopie", "Radiofluoroscopia"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Radiographic imaging</div>
@@ -331,7 +385,9 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Imaging radiografico</div>
 	 * <!-- @formatter:on -->
 	 */
-	RADIOGRAPHIC_IMAGING("RG", "1.2.840.10008.2.16.4", "Radiographic imaging", "Radiographic imaging", "Röntgenbildgebung", "Imagerie radiographique", "Imaging radiografico"),
+	RADIOGRAPHIC_IMAGING("RG", "1.2.840.10008.2.16.4", "Radiographic imaging",
+			"Radiographic imaging", "Röntgenbildgebung", "Imagerie radiographique",
+			"Imaging radiografico"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Slide Microscopy</div>
@@ -340,7 +396,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Microscopia a vetrini</div>
 	 * <!-- @formatter:on -->
 	 */
-	SLIDE_MICROSCOPY("SM", "1.2.840.10008.2.16.4", "Slide Microscopy", "Slide Microscopy", "Objektträger Mikroskopie", "Microscopie avec lamelles", "Microscopia a vetrini"),
+	SLIDE_MICROSCOPY("SM", "1.2.840.10008.2.16.4", "Slide Microscopy", "Slide Microscopy",
+			"Objektträger Mikroskopie", "Microscopie avec lamelles", "Microscopia a vetrini"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Subjective Refraction</div>
@@ -349,7 +406,9 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Rifrazione soggettiva</div>
 	 * <!-- @formatter:on -->
 	 */
-	SUBJECTIVE_REFRACTION("SRF", "1.2.840.10008.2.16.4", "Subjective Refraction", "Subjective Refraction", "Subjektive Refraktion", "Réfraction subjective", "Rifrazione soggettiva"),
+	SUBJECTIVE_REFRACTION("SRF", "1.2.840.10008.2.16.4", "Subjective Refraction",
+			"Subjective Refraction", "Subjektive Refraktion", "Réfraction subjective",
+			"Rifrazione soggettiva"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Ultrasound</div>
@@ -358,7 +417,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Ecografia</div>
 	 * <!-- @formatter:on -->
 	 */
-	ULTRASOUND("US", "1.2.840.10008.2.16.4", "Ultrasound", "Ultrasound", "Ultraschall", "Ultrason", "Ecografia"),
+	ULTRASOUND("US", "1.2.840.10008.2.16.4", "Ultrasound", "Ultrasound", "Ultraschall", "Ultrason",
+			"Ecografia"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Ultrasound Bone Densitometry</div>
@@ -367,7 +427,9 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Densitometria ossea a ultrasuoni</div>
 	 * <!-- @formatter:on -->
 	 */
-	ULTRASOUND_BONE_DENSITOMETRY("BDUS", "1.2.840.10008.2.16.4", "Ultrasound Bone Densitometry", "Ultrasound Bone Densitometry", "Ultraschall-Knochendichtemessung", "Densitométrie osseuse par ultrasons", "Densitometria ossea a ultrasuoni"),
+	ULTRASOUND_BONE_DENSITOMETRY("BDUS", "1.2.840.10008.2.16.4", "Ultrasound Bone Densitometry",
+			"Ultrasound Bone Densitometry", "Ultraschall-Knochendichtemessung",
+			"Densitométrie osseuse par ultrasons", "Densitometria ossea a ultrasuoni"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Visual Acuity</div>
@@ -376,7 +438,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Acutezza visiva</div>
 	 * <!-- @formatter:on -->
 	 */
-	VISUAL_ACUITY("VA", "1.2.840.10008.2.16.4", "Visual Acuity", "Visual Acuity", "Sehschärfe", "Acuité visuelle", "Acutezza visiva"),
+	VISUAL_ACUITY("VA", "1.2.840.10008.2.16.4", "Visual Acuity", "Visual Acuity", "Sehschärfe",
+			"Acuité visuelle", "Acutezza visiva"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">X-Ray Angiography</div>
@@ -385,7 +448,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="it">Angiografia a raggi X</div>
 	 * <!-- @formatter:on -->
 	 */
-	X_RAY_ANGIOGRAPHY("XA", "1.2.840.10008.2.16.4", "X-Ray Angiography", "X-Ray Angiography", "Röntgen-Angiografie", "Angiographie par rayons X", "Angiografia a raggi X");
+	X_RAY_ANGIOGRAPHY("XA", "1.2.840.10008.2.16.4", "X-Ray Angiography", "X-Ray Angiography",
+			"Röntgen-Angiografie", "Angiographie par rayons X", "Angiografia a raggi X");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -784,8 +848,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.8";
 
 	/**
-	 * <div class="en">Name of the value set</div>
-	 * <div class="de">Name des Value Sets</div>
+	 * <div class="en">Name of the value set</div> <div class="de">Name des
+	 * Value Sets</div>
 	 */
 	public static final String VALUE_SET_NAME = "xds-evCoLi";
 
@@ -847,9 +911,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Machine interpretable and (inside this class) unique
-	 * code</div>
-	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse)
-	 * eindeutiger Code</div>
+	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
+	 * dieser Klasse) eindeutiger Code</div>
 	 */
 	private String code;
 
@@ -866,9 +929,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div>
-	 * <div class="de">Instanziiert dieses Enum Object mittels eines Codes
-	 * und einem Display Name</div>.
+	 * Display Name</div> <div class="de">Instanziiert dieses Enum Object
+	 * mittels eines Codes und einem Display Name</div>.
 	 *
 	 * @param code
 	 *            code
@@ -885,7 +947,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	EventCodeList(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	EventCodeList(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
@@ -935,15 +998,17 @@ public enum EventCodeList implements ValueSetEnumInterface {
 
 	/**
 	 * <div class="en">Gets the display name defined by the language param. If
-	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
-	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
+	 * there is no english translation, the default display name is
+	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
+	 * falls es keine Englische Übersetzung gibt, wird der default-Name
+	 * zurückgegeben.</div>
 	 *
 	 * @param languageCode
 	 *            the language code to get the display name for
 	 * @return returns the display name in the desired language. if language not
 	 *         found, display name in german will returned
 	 */
+	@Override
 	public String getDisplayName(LanguageCode languageCode) {
 		String displayName = displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
@@ -953,8 +1018,8 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the value set identifier.</div> <div class="de">Liefert
-	 * den Value Set Identifikator.</div>
+	 * <div class="en">Gets the value set identifier.</div>
+	 * <div class="de">Liefert den Value Set Identifikator.</div>
 	 *
 	 * @return <div class="en">the value set identifier</div>
 	 */
