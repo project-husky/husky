@@ -25,7 +25,9 @@ import org.ehealth_connector.security.communication.xua.XUserAssertionRequest;
 import org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder;
 import org.ehealth_connector.security.core.SecurityObjectBuilder;
 import org.ehealth_connector.security.hl7v3.OpenSamlPurposeOfUse;
+import org.ehealth_connector.security.hl7v3.OpenSamlRole;
 import org.ehealth_connector.security.hl7v3.PurposeOfUse;
+import org.ehealth_connector.security.hl7v3.Role;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.core.xml.schema.XSAny;
 import org.opensaml.core.xml.schema.XSString;
@@ -120,7 +122,7 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 		return new XUserAssertionRequestImpl(aInternalObject);
 	}
 
-	private XMLObject createObjectAttribute(String aName, OpenSamlPurposeOfUse hl7PurposeOfUse) {
+	private XMLObject createObjectAttribute(String aName, XMLObject hl7PurposeOfUse) {
 		final Attribute attribute = new AttributeBuilder().buildObject();
 		attribute.setName(aName);
 		final XSAnyBuilder anyBuilder = new XSAnyBuilder();
@@ -269,9 +271,10 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#subjectRole(java.lang.String)
 	 */
 	@Override
-	public XUserAssertionRequestBuilder subjectRole(String roleId) {
-		if (roleId != null) {
-			addXMLObject(createStringAttribute(XUserAssertionConstants.OASIS_XACML_ROLE, roleId));
+	public XUserAssertionRequestBuilder subjectRole(Role aRole) {
+		if (aRole != null) {
+			addXMLObjectToClaims(createObjectAttribute(XUserAssertionConstants.OASIS_XACML_ROLE,
+					(OpenSamlRole) aRole));
 		}
 		return this;
 	}

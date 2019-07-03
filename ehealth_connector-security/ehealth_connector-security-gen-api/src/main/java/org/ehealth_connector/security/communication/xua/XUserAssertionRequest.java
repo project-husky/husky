@@ -18,6 +18,7 @@
 package org.ehealth_connector.security.communication.xua;
 
 import org.ehealth_connector.security.hl7v3.PurposeOfUse;
+import org.ehealth_connector.security.hl7v3.Role;
 
 /**
  * <!-- @formatter:off -->
@@ -213,7 +214,7 @@ public interface XUserAssertionRequest {
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	String getSubjectRole();
+	Role getSubjectRole();
 
 	/**
 	 *

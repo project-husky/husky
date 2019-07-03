@@ -627,6 +627,10 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 					PDQConsumerAuditor.getAuditor().getConfig()
 							.setAuditSourceId(adapterCfg.getAuditSourceId());
 				}
+				if (adapterCfg.getAuditEnterpriseSiteId() != null) {
+					PDQConsumerAuditor.getAuditor().getConfig()
+							.setAuditEnterpriseSiteId(adapterCfg.getAuditEnterpriseSiteId());
+				}
 				if (adapterCfg.getAuditRepositoryUri() != null) {
 					PDQConsumerAuditor.getAuditor().getConfig()
 							.setAuditRepositoryUri(adapterCfg.getAuditRepositoryUri());
@@ -661,6 +665,10 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 					PIXSourceAuditor.getAuditor().getConfig()
 							.setAuditSourceId(adapterCfg.getAuditSourceId());
 				}
+				if (adapterCfg.getAuditEnterpriseSiteId() != null) {
+					PIXSourceAuditor.getAuditor().getConfig()
+							.setAuditEnterpriseSiteId(adapterCfg.getAuditEnterpriseSiteId());
+				}
 				if (adapterCfg.getAuditRepositoryUri() != null) {
 					PIXSourceAuditor.getAuditor().getConfig()
 							.setAuditRepositoryUri(adapterCfg.getAuditRepositoryUri());
@@ -674,6 +682,10 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 				if (adapterCfg.getAuditSourceId() != null) {
 					PIXConsumerAuditor.getAuditor().getConfig()
 							.setAuditSourceId(adapterCfg.getAuditSourceId());
+				}
+				if (adapterCfg.getAuditEnterpriseSiteId() != null) {
+					PIXConsumerAuditor.getAuditor().getConfig()
+							.setAuditEnterpriseSiteId(adapterCfg.getAuditEnterpriseSiteId());
 				}
 				if (adapterCfg.getAuditRepositoryUri() != null) {
 					PIXConsumerAuditor.getAuditor().getConfig()
@@ -695,9 +707,9 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 	private void fixV3Package() {
 		// OHT SAGE HACK!! Save the loaded EPackage off
-		EPackage eOrigPackage = EPackage.Registry.INSTANCE.getEPackage("urn:hl7-org:v3");
+		final EPackage eOrigPackage = EPackage.Registry.INSTANCE.getEPackage("urn:hl7-org:v3");
 		if (eOrigPackage != null) {
-			String name = eOrigPackage.getClass().getName();
+			final String name = eOrigPackage.getClass().getName();
 			if (!"org.hl7.v3.impl.V3PackageImpl".equals(name)) {
 				log.debug("fixV3Package class loaded, removing here:" + name);
 				EPackage.Registry.INSTANCE.remove("urn:hl7-org:v3");

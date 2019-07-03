@@ -94,6 +94,7 @@ public class ConvenienceMasterPatientIndexV3 {
 				(pixSource != null ? pixSource.getReceiverFacilityOid() : null), homeCommunityOid,
 				null, null, null, (atna != null ? atna.getAuditRepositoryUri() : null),
 				(atna != null ? atna.getAuditSourceId() : null),
+				(atna != null ? atna.getAuditEnterpriseSiteID() : null),
 				affinityDomain.getOtherIdsOidSet().toArray(new String[0]));
 		log.debug("addPatientDemographics, creating V3PixAdapter");
 		final V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
@@ -154,6 +155,7 @@ public class ConvenienceMasterPatientIndexV3 {
 				(pixSource != null ? pixSource.getReceiverFacilityOid() : null), homeCommunityOid,
 				null, null, null, (atna != null ? atna.getAuditRepositoryUri() : null),
 				(atna != null ? atna.getAuditSourceId() : null),
+				(atna != null ? atna.getAuditEnterpriseSiteID() : null),
 				affinityDomain.getOtherIdsOidSet().toArray(new String[0]));
 		final V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
 		if (mergeObsoleteId == null) {
@@ -194,6 +196,7 @@ public class ConvenienceMasterPatientIndexV3 {
 				(pdqQuery != null ? pdqQuery.getReceiverFacilityOid() : null), null, null, null,
 				null, (atna != null ? atna.getAuditRepositoryUri() : null),
 				(atna != null ? atna.getAuditSourceId() : null),
+				(atna != null ? atna.getAuditEnterpriseSiteID() : null),
 				affinityDomain.getOtherIdsOidSet().toArray(new String[0]));
 		final V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
 		final V3PdqQueryResponse pdqQueryRespones = v3PixAdapter
@@ -249,6 +252,7 @@ public class ConvenienceMasterPatientIndexV3 {
 				(pixQuery != null ? pixQuery.getReceiverFacilityOid() : null), homeCommunityOid,
 				null, null, null, (atna != null ? atna.getAuditRepositoryUri() : null),
 				(atna != null ? atna.getAuditSourceId() : null),
+				(atna != null ? atna.getAuditEnterpriseSiteID() : null),
 				affinityDomain.getOtherIdsOidSet().toArray(new String[0]));
 		final V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
 		final String[] ids = v3PixAdapter.queryPatientId(new FhirPatient(patient),
@@ -310,6 +314,7 @@ public class ConvenienceMasterPatientIndexV3 {
 				(pixSource != null ? pixSource.getReceiverFacilityOid() : null), homeCommunityOid,
 				null, null, null, (atna != null ? atna.getAuditRepositoryUri() : null),
 				(atna != null ? atna.getAuditSourceId() : null),
+				(atna != null ? atna.getAuditEnterpriseSiteID() : null),
 				affinityDomain.getOtherIdsOidSet().toArray(new String[0]));
 		final V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
 		final boolean ret = v3PixAdapter.updatePatient(new FhirPatient(patient));

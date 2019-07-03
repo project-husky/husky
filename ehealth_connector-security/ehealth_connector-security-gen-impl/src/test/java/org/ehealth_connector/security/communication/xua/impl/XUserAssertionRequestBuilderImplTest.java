@@ -27,7 +27,9 @@ import org.ehealth_connector.security.communication.xua.RequestType;
 import org.ehealth_connector.security.communication.xua.TokenType;
 import org.ehealth_connector.security.communication.xua.XUserAssertionRequest;
 import org.ehealth_connector.security.hl7v3.PurposeOfUse;
+import org.ehealth_connector.security.hl7v3.Role;
 import org.ehealth_connector.security.hl7v3.impl.PurposeOfUseBuilder;
+import org.ehealth_connector.security.hl7v3.impl.RoleBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.opensaml.soap.wstrust.RequestSecurityToken;
@@ -49,9 +51,13 @@ public class XUserAssertionRequestBuilderImplTest {
 	private String testPoUDisplayName;
 	private PurposeOfUse testPurposeOfUse;
 	private String testResourceId;
-	private String testRoleId;
+	private Role testRole;
 	private String testSubjectId;
 	private String testSubjectName;
+	private String testRoleCode;
+	private String testRoleCodeSystem;
+	private String testRoleCodeSystemName;
+	private String testRoleDisplayName;
 
 	@Before
 	public void setUp() throws Exception {
@@ -63,7 +69,17 @@ public class XUserAssertionRequestBuilderImplTest {
 		testOrganizationId = UUID.randomUUID().toString();
 		testOrganizationName = "My Best organisation";
 		testResourceId = UUID.randomUUID().toString();
-		testRoleId = "HCP";
+
+		testRole = new RoleBuilder().buildObject();
+
+		testRoleCode = "HCP";
+		testRoleCodeSystem = "2.16.756.5.30.1.127.3.10.6";
+		testRoleCodeSystemName = "eHealth Suisse EPR Akteure";
+		testRoleDisplayName = "Behandelnde(r)";
+		testRole.setCode(testRoleCode);
+		testRole.setCodeSystem(testRoleCodeSystem);
+		testRole.setCodeSystemName(testRoleCodeSystemName);
+		testRole.setDisplayName(testRoleDisplayName);
 
 		testInternalFromOutside = new RequestSecurityTokenBuilder().buildObject();
 		testInternalFromOutside.setContext(testContext);
@@ -163,9 +179,9 @@ public class XUserAssertionRequestBuilderImplTest {
 
 	@Test
 	public void testSubjectRole() {
-		final XUserAssertionRequest ref = builder.subjectRole(testRoleId).create();
+		final XUserAssertionRequest ref = builder.subjectRole(testRole).create();
 		assertNotNull(ref);
-		assertEquals(testRoleId, ref.getSubjectRole());
+		assertEquals(testRole, ref.getSubjectRole());
 	}
 
 	@Test

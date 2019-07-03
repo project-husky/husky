@@ -25,6 +25,9 @@ import java.net.URI;
  */
 public class V3PixPdqAdapterConfig {
 
+	/** The ATNA audit enterprise site id. */
+	final private String auditEnterpriseSiteId;
+
 	/** The ATNA audit repository uri. */
 	final private String auditRepositoryUri;
 
@@ -107,7 +110,7 @@ public class V3PixPdqAdapterConfig {
 			String senderApplicationOid, String senderFacilityOid, String receiverApplicationOid,
 			String receiverFacilityOid, String homeCommunityOid, String homeCommunityNamespace,
 			String domainToReturnOid, String domainToReturnNamespace, String auditRepositoryUri,
-			String auditSourceId, String[] otherOidIds) {
+			String auditSourceId, String auditEnterpriseSiteId, String[] otherOidIds) {
 		super();
 		this.pixQueryUri = pixQueryUri;
 		this.pixSourceUri = pixSourceUri;
@@ -122,7 +125,18 @@ public class V3PixPdqAdapterConfig {
 		this.domainToReturnNamespace = domainToReturnNamespace;
 		this.auditRepositoryUri = auditRepositoryUri;
 		this.auditSourceId = auditSourceId;
+		this.auditEnterpriseSiteId = auditEnterpriseSiteId;
 		this.otherOidIds = otherOidIds;
+
+	}
+
+	/**
+	 * Method to get
+	 *
+	 * @return the auditEnterpriseSiteId
+	 */
+	public String getAuditEnterpriseSiteId() {
+		return auditEnterpriseSiteId;
 	}
 
 	/**

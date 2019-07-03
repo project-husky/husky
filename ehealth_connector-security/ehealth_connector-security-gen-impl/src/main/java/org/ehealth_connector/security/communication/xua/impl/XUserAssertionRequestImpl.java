@@ -27,6 +27,7 @@ import org.ehealth_connector.security.communication.xua.XUserAssertionRequest;
 import org.ehealth_connector.security.core.SecurityObject;
 import org.ehealth_connector.security.helpers.ListXmlObjectHelper;
 import org.ehealth_connector.security.hl7v3.PurposeOfUse;
+import org.ehealth_connector.security.hl7v3.Role;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.core.xml.schema.XSAny;
 import org.opensaml.core.xml.schema.XSString;
@@ -178,9 +179,14 @@ public class XUserAssertionRequestImpl implements XUserAssertionRequest,
 	}
 
 	@Override
-	public String getSubjectRole() {
-		return getAttributeValueByName(requestSecurityToken.getUnknownXMLObjects(),
-				XUserAssertionConstants.OASIS_XACML_ROLE);
+	public Role getSubjectRole() {
+		final Claims claimes = new ListXmlObjectHelper<Claims>().getComponent(ClaimsImpl.class,
+				requestSecurityToken.getUnknownXMLObjects());
+		if (claimes != null) {
+			return (Role) getAttributeValueAsXmlObjectByName(claimes.getUnknownXMLObjects(),
+					XUserAssertionConstants.OASIS_XACML_ROLE);
+		}
+		return null;
 	}
 
 	@Override

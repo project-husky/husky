@@ -19,18 +19,19 @@ package org.ehealth_connector.security.hl7v3.impl;
 
 import java.util.List;
 
-import org.ehealth_connector.security.hl7v3.OpenSamlPurposeOfUse;
+import org.opensaml.core.xml.AbstractXMLObject;
 import org.opensaml.core.xml.XMLObject;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Implementation class of Interface OpenSaml PurposeOfUse.</div>
- * <div class="de">Implementations Klasse des Interfaces OpenSaml PurposeOfUse.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
+ * <div class="en">HEREISENGLISH</div>
+ * <div class="de">HIERISTDEUTSCH</div>
+ * <div class="fr">VOICIFRANCAIS</div>
+ * <div class="it">ITALIANO</div>
+ * 
  * <!-- @formatter:on -->
  */
-public class PurposeOfUseImpl extends AbstractImpl implements OpenSamlPurposeOfUse {
+public abstract class AbstractImpl extends AbstractXMLObject {
 
 	protected String code;
 	protected String codeSystem;
@@ -38,32 +39,26 @@ public class PurposeOfUseImpl extends AbstractImpl implements OpenSamlPurposeOfU
 	protected String codeSystemVersion;
 	protected String displayName;
 
-	protected PurposeOfUseImpl(String namespaceURI, String elementLocalName,
-			String namespacePrefix) {
+	protected AbstractImpl(String namespaceURI, String elementLocalName, String namespacePrefix) {
 		super(namespaceURI, elementLocalName, namespacePrefix);
 	}
 
-	@Override
 	public String getCode() {
 		return code;
 	}
 
-	@Override
 	public String getCodeSystem() {
 		return codeSystem;
 	}
 
-	@Override
 	public String getCodeSystemName() {
 		return codeSystemName;
 	}
 
-	@Override
 	public String getCodeSystemVersion() {
 		return codeSystemVersion;
 	}
 
-	@Override
 	public String getDisplayName() {
 		return displayName;
 	}
@@ -73,27 +68,22 @@ public class PurposeOfUseImpl extends AbstractImpl implements OpenSamlPurposeOfU
 		return null;
 	}
 
-	@Override
 	public void setCode(String value) {
 		code = value;
 	}
 
-	@Override
 	public void setCodeSystem(String value) {
 		codeSystem = value;
 	}
 
-	@Override
 	public void setCodeSystemName(String value) {
 		codeSystemName = value;
 	}
 
-	@Override
 	public void setCodeSystemVersion(String value) {
 		codeSystemVersion = value;
 	}
 
-	@Override
 	public void setDisplayName(String value) {
 		displayName = value;
 	}

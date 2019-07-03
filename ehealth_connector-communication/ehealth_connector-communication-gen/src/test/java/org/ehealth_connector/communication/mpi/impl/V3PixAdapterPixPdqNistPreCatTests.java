@@ -106,7 +106,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 		v3PixPdqAdapterCfg = new V3PixPdqAdapterConfig(null,
 				URI.create("http://" + ipAddress + ":9090"), null, senderApplicationOid, null,
 				applicationName, facilityName, homeCommunityOid, homeCommunityNamespace, null, null,
-				null, null, null);
+				null, null, null, null);
 		v3PixPdqAdapter = new V3PixPdqAdapter(v3PixPdqAdapterCfg);
 
 		// ALPHA ALAN
@@ -148,7 +148,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 		v3PixPdqAdapterCfg = new V3PixPdqAdapterConfig(null,
 				URI.create("http://" + ipAddress + ":9090"), null, senderApplicationOid, null,
 				applicationName, facilityName, homeCommunityOid, homeCommunityNamespace, null, null,
-				null, null, null);
+				null, null, null, null);
 		v3PixPdqAdapter = new V3PixPdqAdapter(v3PixPdqAdapterCfg);
 
 		// LINCOLN MARY
@@ -240,7 +240,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 		v3PixPdqAdapterCfg = new V3PixPdqAdapterConfig(null,
 				URI.create("http://" + ipAddress + ":9090"), null, senderApplicationOid, null,
 				applicationName, facilityName, homeCommunityOid, homeCommunityNamespace, null, null,
-				null, null, null);
+				null, null, null, null);
 		v3PixPdqAdapter = new V3PixPdqAdapter(v3PixPdqAdapterCfg);
 
 		// TAU TERI
@@ -340,7 +340,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 		v3PixPdqAdapterCfg = new V3PixPdqAdapterConfig(URI.create("http://" + ipAddress + ":9090"),
 				null, null, senderApplicationOid, null, applicationName, facilityName,
 				homeCommunityOid, homeCommunityNamespace, domainToReturnOid,
-				domainToReturnNamespace, null, null, null);
+				domainToReturnNamespace, null, null, null, null);
 		v3PixPdqAdapter = new V3PixPdqAdapter(v3PixPdqAdapterCfg);
 
 		final FhirPatient patient = new FhirPatient();
@@ -430,7 +430,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 		log.debug("ITI45ConsumperStep2Test with ipAdress Target " + ipAddress);
 		v3PixPdqAdapterCfg = new V3PixPdqAdapterConfig(URI.create("http://" + ipAddress + ":9090"),
 				null, null, senderApplicationOid, null, applicationName, facilityName,
-				homeCommunityOid, homeCommunityNamespace, null, null, null, null, null);
+				homeCommunityOid, homeCommunityNamespace, null, null, null, null, null, null);
 		v3PixPdqAdapter = new V3PixPdqAdapter(v3PixPdqAdapterCfg);
 
 		final FhirPatient patient = new FhirPatient();
@@ -625,7 +625,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 				affinityDomain.getPdqDestination());
 		final Identificator identificator = new Identificator("2.16.840.1.113883.3.72.5.9.1",
 				"HJ-361");
-		MasterPatientIndexQueryResponse response = ConvenienceMasterPatientIndexV3
+		final MasterPatientIndexQueryResponse response = ConvenienceMasterPatientIndexV3
 				.queryPatientDemographics(mpiQuery.addPatientIdentificator(identificator)
 						.addDomainToReturn("2.16.840.1.113883.3.72.5.9.1"), affinityDomain);
 		assertTrue(response.getSuccess());
@@ -654,7 +654,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 				affinityDomain.getPdqDestination());
 		final Identificator identificator = new Identificator("2.16.840.1.113883.3.72.5.9.1",
 				"HJ-361");
-		MasterPatientIndexQueryResponse response = ConvenienceMasterPatientIndexV3
+		final MasterPatientIndexQueryResponse response = ConvenienceMasterPatientIndexV3
 				.queryPatientDemographics(mpiQuery.addPatientIdentificator(identificator)
 						.addDomainToReturn("2.16.840.1.113883.3.72.5.9.1"), affinityDomain);
 		assertTrue(response.getSuccess());

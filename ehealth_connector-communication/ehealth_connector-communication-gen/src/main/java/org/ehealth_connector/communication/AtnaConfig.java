@@ -38,11 +38,23 @@ public class AtnaConfig {
 		UNSECURE
 	}
 
+	/** The audit enterprise site id. */
+	private String auditEnterpriseSiteID;
+
 	/** The audit repository uri. */
 	private String auditRepositoryUri;
 
 	/** The audit source id. */
 	private String auditSourceId;
+
+	/**
+	 * Gets the audit repository uri.
+	 *
+	 * @return the audit enterprise site id
+	 */
+	public String getAuditEnterpriseSiteID() {
+		return auditEnterpriseSiteID;
+	}
 
 	/**
 	 * Gets the audit repository uri.
@@ -60,6 +72,15 @@ public class AtnaConfig {
 	 */
 	public String getAuditSourceId() {
 		return auditSourceId;
+	}
+
+	/**
+	 * Sets the audit audit enterprise site id.
+	 *
+	 * @param auditEnterpriseSiteID
+	 */
+	public void setAuditEnterpriseSiteID(String auditEnterpriseSiteID) {
+		this.auditEnterpriseSiteID = auditEnterpriseSiteID;
 	}
 
 	/**
