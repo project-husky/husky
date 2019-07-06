@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.valueset.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
@@ -26,6 +27,7 @@ import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.LangText;
+import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.valueset.enums.DesignationType;
 import org.ehealth_connector.valueset.enums.ValueSetStatus;
 
@@ -38,7 +40,7 @@ import org.ehealth_connector.valueset.enums.ValueSetStatus;
  * Wertesatzes (wie ID, Name, Version, Datum ...) und aller Einträge (Codes) des
  * Wertesatzes.</div>
  */
-public class ValueSet {
+public class ValueSet implements Serializable {
 
 	/**
 	 * See getter/setter for more details to the class members.
@@ -270,6 +272,11 @@ public class ValueSet {
 	}
 
 	/**
+	 *
+	 */
+	private static final long serialVersionUID = 3651683518612813256L;
+
+	/**
 	 * <div class="en">Builds a Java compatible enum element name from a
 	 * string.</div>
 	 *
@@ -385,9 +392,9 @@ public class ValueSet {
 	 *            the value
 	 */
 	public void addDescription(LangText value) {
-		if (this.descriptionList == null) {
+		if (this.descriptionList == null)
 			this.descriptionList = new ArrayList<LangText>();
-		}
+
 		this.descriptionList.add(value);
 	}
 
@@ -400,9 +407,9 @@ public class ValueSet {
 	 *            the value
 	 */
 	public void addMappingIdentificator(IdentificatorBaseType value) {
-		if (this.mappingIdentificatorList == null) {
+		if (this.mappingIdentificatorList == null)
 			this.mappingIdentificatorList = new ArrayList<IdentificatorBaseType>();
-		}
+
 		this.mappingIdentificatorList.add(value);
 	}
 
@@ -415,9 +422,9 @@ public class ValueSet {
 	 *            the value
 	 */
 	public void addMappingName(String value) {
-		if (this.mappingNameList == null) {
+		if (this.mappingNameList == null)
 			this.mappingNameList = new ArrayList<String>();
-		}
+
 		this.mappingNameList.add(value);
 	}
 
@@ -430,9 +437,9 @@ public class ValueSet {
 	 *            the value
 	 */
 	public void addValueSetEntry(ValueSetEntry value) {
-		if (this.valueSetEntryList == null) {
+		if (this.valueSetEntryList == null)
 			this.valueSetEntryList = new ArrayList<ValueSetEntry>();
-		}
+
 		this.valueSetEntryList.add(value);
 	}
 
@@ -486,30 +493,38 @@ public class ValueSet {
 	public boolean equals(ValueSet obj) {
 		boolean retVal = true;
 		if (retVal) {
-			for (int i = 0; i < this.mappingIdentificatorList.size(); i++) {
-				retVal = (this.mappingIdentificatorList.get(i)
-						.equals(obj.listMappingIdentificators().get(i)));
-				if (!retVal)
-					break;
-			}
-		}
-		if (retVal) {
-			for (int i = 0; i < this.mappingNameList.size(); i++) {
-				retVal = (this.mappingNameList.get(i).equals(obj.listMappingNames().get(i)));
-				if (!retVal)
-					break;
-			}
-		}
-		if (retVal) {
-			for (int i = 0; i < this.valueSetEntryList.size(); i++) {
-				retVal = (this.valueSetEntryList.get(i).equals(obj.listValueSetEntries().get(i)));
-				if (!retVal)
-					break;
-			}
-		}
-		if (retVal) {
+			if (this.descriptionList == null)
+				this.descriptionList = new ArrayList<LangText>();
 			for (int i = 0; i < this.descriptionList.size(); i++) {
-				retVal = (this.descriptionList.get(i).equals(obj.listDescriptions().get(i)));
+				retVal = obj.listDescriptions().contains(this.descriptionList.get(i));
+				if (!retVal)
+					break;
+			}
+		}
+		if (retVal) {
+			if (this.mappingIdentificatorList == null)
+				this.mappingIdentificatorList = new ArrayList<IdentificatorBaseType>();
+			for (int i = 0; i < this.mappingIdentificatorList.size(); i++) {
+				retVal = obj.listMappingIdentificators()
+						.contains(this.mappingIdentificatorList.get(i));
+				if (!retVal)
+					break;
+			}
+		}
+		if (retVal) {
+			if (this.mappingNameList == null)
+				this.mappingNameList = new ArrayList<String>();
+			for (int i = 0; i < this.mappingNameList.size(); i++) {
+				retVal = obj.listMappingNames().contains(this.mappingNameList.get(i));
+				if (!retVal)
+					break;
+			}
+		}
+		if (retVal) {
+			if (this.valueSetEntryList == null)
+				this.valueSetEntryList = new ArrayList<ValueSetEntry>();
+			for (int i = 0; i < this.valueSetEntryList.size(); i++) {
+				retVal = obj.listValueSetEntries().contains(this.valueSetEntryList.get(i));
 				if (!retVal)
 					break;
 			}
@@ -743,6 +758,16 @@ public class ValueSet {
 		return version;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return Util.getChecksum(this);
+	}
+
 	/**
 	 * <div class="en">Gets the list of descriptions.</div>
 	 *
@@ -935,5 +960,4 @@ public class ValueSet {
 		this.valueSetEntryList.sort(new ValueSetEntryEnumNameComparator());
 		return this.valueSetEntryList;
 	}
-
 }

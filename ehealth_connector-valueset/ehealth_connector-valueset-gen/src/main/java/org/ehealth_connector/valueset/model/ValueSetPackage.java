@@ -16,11 +16,13 @@
  */
 package org.ehealth_connector.valueset.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.annotation.Generated;
 
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
+import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.valueset.config.ValueSetPackageConfig;
 import org.ehealth_connector.valueset.enums.ValueSetPackageStatus;
 
@@ -31,11 +33,7 @@ import org.ehealth_connector.valueset.enums.ValueSetPackageStatus;
  * <div class="de">Die Klasse ValueSetPackage dient zum Sammeln aller
  * Informationen zu einem Paket mit mehreren Wertesätzen.</div>
  */
-public class ValueSetPackage {
-
-	/**
-	 * See getter/setter for more details to the class members.
-	 */
+public class ValueSetPackage implements Serializable {
 
 	/**
 	 * Builder to build {@link ValueSetPackage}.
@@ -181,6 +179,15 @@ public class ValueSetPackage {
 	}
 
 	/**
+	 * See getter/setter for more details to the class members.
+	 */
+
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = -3720393996655001381L;
+
+	/**
 	 * Creates builder to build {@link ValueSetPackage}.
 	 *
 	 * @return created builder
@@ -272,9 +279,9 @@ public class ValueSetPackage {
 	 *            the value
 	 */
 	public void addMappingIdentificator(IdentificatorBaseType value) {
-		if (this.mappingIdentificatorList == null) {
+		if (this.mappingIdentificatorList == null)
 			this.mappingIdentificatorList = new ArrayList<IdentificatorBaseType>();
-		}
+
 		this.mappingIdentificatorList.add(value);
 	}
 
@@ -287,9 +294,9 @@ public class ValueSetPackage {
 	 *            the value
 	 */
 	public void addMappingName(String value) {
-		if (this.mappingNameList == null) {
+		if (this.mappingNameList == null)
 			this.mappingNameList = new ArrayList<String>();
-		}
+
 		this.mappingNameList.add(value);
 	}
 
@@ -302,9 +309,9 @@ public class ValueSetPackage {
 	 *            the value
 	 */
 	public void addValueSet(ValueSet value) {
-		if (this.valueSetList == null) {
+		if (this.valueSetList == null)
 			this.valueSetList = new ArrayList<ValueSet>();
-		}
+
 		this.valueSetList.add(value);
 	}
 
@@ -349,23 +356,29 @@ public class ValueSetPackage {
 	public boolean equals(ValueSetPackage obj) {
 		boolean retVal = true;
 		if (retVal) {
+			if (this.mappingIdentificatorList == null)
+				this.mappingIdentificatorList = new ArrayList<IdentificatorBaseType>();
 			for (int i = 0; i < this.mappingIdentificatorList.size(); i++) {
-				retVal = (this.mappingIdentificatorList.get(i)
-						.equals(obj.listMappingIdentificators().get(i)));
+				retVal = obj.listMappingIdentificators()
+						.contains(this.mappingIdentificatorList.get(i));
 				if (!retVal)
 					break;
 			}
 		}
 		if (retVal) {
+			if (this.mappingNameList == null)
+				this.mappingNameList = new ArrayList<String>();
 			for (int i = 0; i < this.mappingNameList.size(); i++) {
-				retVal = (this.mappingNameList.get(i).equals(obj.listMappingNames().get(i)));
+				retVal = obj.listMappingNames().contains(this.mappingNameList.get(i));
 				if (!retVal)
 					break;
 			}
 		}
 		if (retVal) {
+			if (this.valueSetList == null)
+				this.valueSetList = new ArrayList<ValueSet>();
 			for (int i = 0; i < this.valueSetList.size(); i++) {
-				retVal = (this.valueSetList.get(i).equals(obj.listValueSets().get(i)));
+				retVal = obj.listValueSets().contains(this.valueSetList.get(i));
 				if (!retVal)
 					break;
 			}
@@ -529,6 +542,16 @@ public class ValueSetPackage {
 		return version;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return Util.getChecksum(this);
+	}
+
 	/**
 	 * <div class="en">Gets the list of mapping identificators.</div>
 	 *
@@ -667,5 +690,4 @@ public class ValueSetPackage {
 	public void setVersion(Version version) {
 		this.version = version;
 	}
-
 }

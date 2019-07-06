@@ -16,17 +16,19 @@
  */
 package org.ehealth_connector.valueset.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.annotation.Generated;
 
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
+import org.ehealth_connector.common.utils.Util;
 
 /**
  * <div class="en">The Class Version contains all information describing a
  * specific version of a value set.
  */
-public class Version {
+public class Version implements Serializable {
 
 	/**
 	 * See getter/setter for more details to the class members.
@@ -113,6 +115,11 @@ public class Version {
 			return this;
 		}
 	}
+
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = -9119362988623580841L;
 
 	/**
 	 * Creates builder to build {@link Version}.
@@ -245,6 +252,16 @@ public class Version {
 		return validTo;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return Util.getChecksum(this);
+	}
+
 	/**
 	 * <div class="en">Sets the version label (e.g. '1.0').</div>
 	 *
@@ -293,5 +310,17 @@ public class Version {
 	 */
 	public void setValidTo(Date validTo) {
 		this.validTo = validTo;
+	}
+
+	/**
+	 * <div class="en">Builds a string of the version.</div>
+	 *
+	 * <div class="de">Erstellt einen String der Version.</div>
+	 *
+	 * @return the string
+	 */
+	@Override
+	public String toString() {
+		return getLabel();
 	}
 }

@@ -16,12 +16,14 @@
  */
 package org.ehealth_connector.valueset.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.annotation.Generated;
 
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.valueset.enums.DesignationType;
 import org.ehealth_connector.valueset.enums.ValueSetEntryType;
 
@@ -34,7 +36,7 @@ import org.ehealth_connector.valueset.enums.ValueSetEntryType;
  * Informationen eines einzelnen Wertesatz-Eintrags (z. B. Code, Codesystem,
  * Anzeigenamen in mehreren Sprachen ...).</div>
  */
-public class ValueSetEntry {
+public class ValueSetEntry implements Serializable {
 
 	/**
 	 * See getter/setter for more details to the class members.
@@ -183,6 +185,11 @@ public class ValueSetEntry {
 	}
 
 	/**
+	 *
+	 */
+	private static final long serialVersionUID = 20533928572823276L;
+
+	/**
 	 * Creates builder to build {@link ValueSetEntry}.
 	 *
 	 * @return created builder
@@ -253,9 +260,9 @@ public class ValueSetEntry {
 	 *            the value
 	 */
 	public void addChild(ValueSetEntry value) {
-		if (this.childList == null) {
+		if (this.childList == null)
 			this.childList = new ArrayList<ValueSetEntry>();
-		}
+
 		this.childList.add(value);
 	}
 
@@ -268,9 +275,9 @@ public class ValueSetEntry {
 	 *            the value
 	 */
 	public void addDesignation(Designation value) {
-		if (this.designationList == null) {
+		if (this.designationList == null)
 			this.designationList = new ArrayList<Designation>();
-		}
+
 		this.designationList.add(value);
 	}
 
@@ -283,9 +290,9 @@ public class ValueSetEntry {
 	 *            the value
 	 */
 	public void addMappingCode(CodeBaseType value) {
-		if (this.mappingCodeList == null) {
+		if (this.mappingCodeList == null)
 			this.mappingCodeList = new ArrayList<CodeBaseType>();
-		}
+
 		this.mappingCodeList.add(value);
 	}
 
@@ -298,9 +305,9 @@ public class ValueSetEntry {
 	 *            the value
 	 */
 	public void addMappingName(String value) {
-		if (this.mappingNameList == null) {
+		if (this.mappingNameList == null)
 			this.mappingNameList = new ArrayList<String>();
-		}
+
 		this.mappingNameList.add(value);
 	}
 
@@ -354,22 +361,37 @@ public class ValueSetEntry {
 	public boolean equals(ValueSetEntry obj) {
 		boolean retVal = true;
 		if (retVal) {
+			if (this.childList == null)
+				this.childList = new ArrayList<ValueSetEntry>();
 			for (int i = 0; i < this.childList.size(); i++) {
-				retVal = (this.childList.get(i).equals(obj.listChilds().get(i)));
+				retVal = obj.listChilds().contains(this.childList.get(i));
 				if (!retVal)
 					break;
 			}
 		}
 		if (retVal) {
+			if (this.designationList == null)
+				this.designationList = new ArrayList<Designation>();
+			for (int i = 0; i < this.designationList.size(); i++) {
+				retVal = obj.listDesignations().contains(this.designationList.get(i));
+				if (!retVal)
+					break;
+			}
+		}
+		if (retVal) {
+			if (this.mappingCodeList == null)
+				this.mappingCodeList = new ArrayList<CodeBaseType>();
 			for (int i = 0; i < this.mappingCodeList.size(); i++) {
-				retVal = (this.mappingCodeList.get(i).equals(obj.listMappingCodes().get(i)));
+				retVal = obj.listMappingCodes().contains(this.mappingCodeList.get(i));
 				if (!retVal)
 					break;
 			}
 		}
 		if (retVal) {
+			if (this.mappingNameList == null)
+				this.mappingNameList = new ArrayList<String>();
 			for (int i = 0; i < this.mappingNameList.size(); i++) {
-				retVal = (this.mappingNameList.get(i).equals(obj.listMappingNames().get(i)));
+				retVal = obj.listMappingNames().contains(this.mappingNameList.get(i));
 				if (!retVal)
 					break;
 			}
@@ -505,6 +527,16 @@ public class ValueSetEntry {
 	 */
 	public ValueSetEntryType getValueSetEntryType() {
 		return valueSetEntryType;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return Util.getChecksum(this);
 	}
 
 	/**

@@ -17,6 +17,7 @@
 package org.ehealth_connector.valueset.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
@@ -51,18 +52,25 @@ public class ValueSetTest {
 		Version version = Version.builder().withLabel("1.0")
 				.withValidFrom(DateUtil.date("03.06.2019 00:00:00")).build();
 
-		ValueSet valueSet = ValueSet.builder().withDisplayName(displayName)
+		ValueSet valueSet1 = ValueSet.builder().withDisplayName(displayName)
 				.withEffectiveDate(effectiveDate).withIdentificator(identificator).withName(name)
 				.withStatus(status).withVersion(version).build();
-		valueSet.addDescription(new LangText(LanguageCode.ENGLISH, description));
+		ValueSet valueSet2 = ValueSet.builder().withDisplayName(displayName)
+				.withEffectiveDate(effectiveDate).withIdentificator(identificator).withName(name)
+				.withStatus(status).withVersion(version).build();
 
-		assertEquals(description, valueSet.getDescription(LanguageCode.ENGLISH));
-		assertEquals(displayName, valueSet.getDisplayName());
-		assertEquals(effectiveDate, valueSet.getEffectiveDate());
-		assertEquals(identificator, valueSet.getIdentificator());
-		assertEquals(name, valueSet.getName());
-		assertEquals(status, valueSet.getStatus());
-		assertEquals(version, valueSet.getVersion());
+		assertEquals(valueSet1.hashCode(), valueSet2.hashCode());
+		assertTrue(valueSet1.equals(valueSet2));
+
+		valueSet1.addDescription(new LangText(LanguageCode.ENGLISH, description));
+		assertEquals(description, valueSet1.getDescription(LanguageCode.ENGLISH));
+
+		assertEquals(displayName, valueSet1.getDisplayName());
+		assertEquals(effectiveDate, valueSet1.getEffectiveDate());
+		assertEquals(identificator, valueSet1.getIdentificator());
+		assertEquals(name, valueSet1.getName());
+		assertEquals(status, valueSet1.getStatus());
+		assertEquals(version, valueSet1.getVersion());
 
 		// ValueSetEntry tests
 		CodeBaseType codeBaseType1 = CodeBaseType.builder().withCode("abstractcode1")
@@ -95,12 +103,12 @@ public class ValueSetTest {
 				.withDefaultMappingName(defaultMappingName3).withLevel(level3)
 				.withValueSetEntryType(valueSetEntryType3).build();
 
-		valueSet.addValueSetEntry(valueSetEntry1);
-		valueSet.addValueSetEntry(valueSetEntry2);
-		valueSet.addValueSetEntry(valueSetEntry3);
+		valueSet1.addValueSetEntry(valueSetEntry1);
+		valueSet1.addValueSetEntry(valueSetEntry2);
+		valueSet1.addValueSetEntry(valueSetEntry3);
 
-		assertEquals(valueSetEntry2, valueSet.listValueSetEntries().get(1));
-		assertEquals(3, valueSet.listValueSetEntries().size());
+		assertEquals(valueSetEntry2, valueSet1.listValueSetEntries().get(1));
+		assertEquals(3, valueSet1.listValueSetEntries().size());
 
 		// ValueSet mapping Identificator tests
 		IdentificatorBaseType mappingId1 = IdentificatorBaseType.builder().withRoot("2.999")
@@ -108,11 +116,11 @@ public class ValueSetTest {
 		IdentificatorBaseType mappingId2 = IdentificatorBaseType.builder().withRoot("2.999")
 				.withExtension("myId2").build();
 
-		valueSet.addMappingIdentificator(mappingId1);
-		valueSet.addMappingIdentificator(mappingId2);
+		valueSet1.addMappingIdentificator(mappingId1);
+		valueSet1.addMappingIdentificator(mappingId2);
 
-		assertEquals(mappingId1, valueSet.listMappingIdentificators().get(0));
-		assertEquals(2, valueSet.listMappingIdentificators().size());
+		assertEquals(mappingId1, valueSet1.listMappingIdentificators().get(0));
+		assertEquals(2, valueSet1.listMappingIdentificators().size());
 
 		// ValueSet mapping names tests
 		String mappingName1 = "mappingName1";
@@ -120,13 +128,13 @@ public class ValueSetTest {
 		String mappingName3 = "mappingName3";
 		String mappingName4 = "mappingName4";
 
-		valueSet.addMappingName(mappingName1);
-		valueSet.addMappingName(mappingName2);
-		valueSet.addMappingName(mappingName3);
-		valueSet.addMappingName(mappingName4);
+		valueSet1.addMappingName(mappingName1);
+		valueSet1.addMappingName(mappingName2);
+		valueSet1.addMappingName(mappingName3);
+		valueSet1.addMappingName(mappingName4);
 
-		assertEquals(mappingName2, valueSet.listMappingNames().get(1));
-		assertEquals(4, valueSet.listMappingNames().size());
+		assertEquals(mappingName2, valueSet1.listMappingNames().get(1));
+		assertEquals(4, valueSet1.listMappingNames().size());
 
 	}
 

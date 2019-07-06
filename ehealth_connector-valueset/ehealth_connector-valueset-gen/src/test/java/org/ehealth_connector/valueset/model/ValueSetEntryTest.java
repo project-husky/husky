@@ -17,6 +17,7 @@
 package org.ehealth_connector.valueset.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.enums.LanguageCode;
@@ -45,6 +46,13 @@ public class ValueSetEntryTest {
 		ValueSetEntry valueSetEntry1 = ValueSetEntry.builder().withCodeBaseType(codeBaseType1)
 				.withDefaultMappingName(defaultMappingName1).withLevel(level1)
 				.withValueSetEntryType(valueSetEntryType1).build();
+
+		ValueSetEntry valueSetEntryA = ValueSetEntry.builder().withCodeBaseType(codeBaseType1)
+				.withDefaultMappingName(defaultMappingName1).withLevel(level1)
+				.withValueSetEntryType(valueSetEntryType1).build();
+
+		assertEquals(valueSetEntry1.hashCode(), valueSetEntryA.hashCode());
+		assertTrue(valueSetEntry1.equals(valueSetEntryA));
 
 		assertEquals(codeBaseType1, valueSetEntry1.getCodeBaseType());
 		assertEquals(defaultMappingName1, valueSetEntry1.getDefaultMappingName());

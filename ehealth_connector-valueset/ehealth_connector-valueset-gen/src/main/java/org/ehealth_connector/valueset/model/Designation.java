@@ -16,9 +16,12 @@
  */
 package org.ehealth_connector.valueset.model;
 
+import java.io.Serializable;
+
 import javax.annotation.Generated;
 
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.valueset.enums.DesignationType;
 
 /**
@@ -30,7 +33,7 @@ import org.ehealth_connector.valueset.enums.DesignationType;
  * Für jede Sprache kann es mehrere geben, die jeweils den Typ angeben
  * (vollständiger Name, bevorzugter Name, Synonym, ...).<div>
  */
-public class Designation {
+public class Designation implements Serializable {
 
 	/**
 	 * See getter/setter for more details to the class members.
@@ -102,6 +105,11 @@ public class Designation {
 			return this;
 		}
 	}
+
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = -2551878616152131257L;
 
 	/**
 	 * Creates builder to build {@link Designation}.
@@ -214,6 +222,16 @@ public class Designation {
 		return type;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		return Util.getChecksum(this);
+	}
+
 	/**
 	 * <div class="en">Sets the display name.</div>
 	 *
@@ -251,5 +269,4 @@ public class Designation {
 	public void setType(DesignationType type) {
 		this.type = type;
 	}
-
 }

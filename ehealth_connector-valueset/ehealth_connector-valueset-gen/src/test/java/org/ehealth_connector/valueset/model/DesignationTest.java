@@ -17,6 +17,7 @@
 package org.ehealth_connector.valueset.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.valueset.enums.DesignationType;
@@ -36,12 +37,17 @@ public class DesignationTest {
 		DesignationType type = DesignationType.FULLY_SPECIFIED_NAME;
 		String displayName = "displayName";
 
-		Designation designation = Designation.builder().withDisplayName(displayName)
+		Designation designation1 = Designation.builder().withDisplayName(displayName)
+				.withLanguageCode(languageCode).withType(type).build();
+		Designation designation2 = Designation.builder().withDisplayName(displayName)
 				.withLanguageCode(languageCode).withType(type).build();
 
-		assertEquals(languageCode, designation.getLanguageCode());
-		assertEquals(type, designation.getType());
-		assertEquals(displayName, designation.getDisplayName());
+		assertEquals(designation1.hashCode(), designation2.hashCode());
+		assertTrue(designation1.equals(designation2));
+
+		assertEquals(languageCode, designation1.getLanguageCode());
+		assertEquals(type, designation1.getType());
+		assertEquals(displayName, designation1.getDisplayName());
 
 	}
 

@@ -17,6 +17,7 @@
 package org.ehealth_connector.valueset.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
@@ -41,14 +42,20 @@ public class VersionTest {
 		Date validFrom = DateUtil.date("03.06.2019 00:00:00");
 		Date validTo = DateUtil.date("31.12.2019 23:59:59");
 
-		Version version = Version.builder().withLabel(label)
+		Version version1 = Version.builder().withLabel(label)
+				.withPublishingAuthority(publishingAuthority).withValidFrom(validFrom)
+				.withValidTo(validTo).build();
+		Version version2 = Version.builder().withLabel(label)
 				.withPublishingAuthority(publishingAuthority).withValidFrom(validFrom)
 				.withValidTo(validTo).build();
 
-		assertEquals(label, version.getLabel());
-		assertEquals(publishingAuthority, version.getPublishingAuthority());
-		assertEquals(validFrom, version.getValidFrom());
-		assertEquals(validTo, version.getValidTo());
+		assertEquals(version1.hashCode(), version2.hashCode());
+		assertTrue(version1.equals(version2));
+
+		assertEquals(label, version1.getLabel());
+		assertEquals(publishingAuthority, version1.getPublishingAuthority());
+		assertEquals(validFrom, version1.getValidFrom());
+		assertEquals(validTo, version1.getValidTo());
 	}
 
 }

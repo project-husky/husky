@@ -17,6 +17,7 @@
 package org.ehealth_connector.valueset.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
@@ -50,15 +51,21 @@ public class ValueSetPackageTest {
 		Version version = Version.builder().withLabel("1.0")
 				.withValidFrom(DateUtil.date("03.06.2019 00:00:00")).build();
 
-		ValueSetPackage valueSetPackage = ValueSetPackage.builder().withDescription(description)
+		ValueSetPackage valueSetPackage1 = ValueSetPackage.builder().withDescription(description)
+				.withIdentificator(identificator).withSourceUrl(sourceUrl).withStatus(status)
+				.withVersion(version).build();
+		ValueSetPackage valueSetPackage2 = ValueSetPackage.builder().withDescription(description)
 				.withIdentificator(identificator).withSourceUrl(sourceUrl).withStatus(status)
 				.withVersion(version).build();
 
-		assertEquals(description, valueSetPackage.getDescription());
-		assertEquals(identificator, valueSetPackage.getIdentificator());
-		assertEquals(sourceUrl, valueSetPackage.getSourceUrl());
-		assertEquals(status, valueSetPackage.getStatus());
-		assertEquals(version, valueSetPackage.getVersion());
+		assertEquals(valueSetPackage1.hashCode(), valueSetPackage2.hashCode());
+		assertTrue(valueSetPackage1.equals(valueSetPackage2));
+
+		assertEquals(description, valueSetPackage1.getDescription());
+		assertEquals(identificator, valueSetPackage1.getIdentificator());
+		assertEquals(sourceUrl, valueSetPackage1.getSourceUrl());
+		assertEquals(status, valueSetPackage1.getStatus());
+		assertEquals(version, valueSetPackage1.getVersion());
 
 		// ValueSet tests
 		String vsdescription1 = "vsdescription1";
@@ -125,11 +132,11 @@ public class ValueSetPackageTest {
 		valueSet2.addValueSetEntry(valueSetEntry2);
 		valueSet2.addValueSetEntry(valueSetEntry3);
 
-		valueSetPackage.addValueSet(valueSet1);
-		valueSetPackage.addValueSet(valueSet2);
+		valueSetPackage1.addValueSet(valueSet1);
+		valueSetPackage1.addValueSet(valueSet2);
 
-		assertEquals(valueSet1, valueSetPackage.listValueSets().get(0));
-		assertEquals(2, valueSetPackage.listValueSets().size());
+		assertEquals(valueSet1, valueSetPackage1.listValueSets().get(0));
+		assertEquals(2, valueSetPackage1.listValueSets().size());
 
 		// ValueSetPackage mapping Identificator tests
 		IdentificatorBaseType mappingId1 = IdentificatorBaseType.builder().withRoot("2.999")
@@ -137,19 +144,19 @@ public class ValueSetPackageTest {
 		IdentificatorBaseType mappingId2 = IdentificatorBaseType.builder().withRoot("2.999")
 				.withExtension("myId2").build();
 
-		valueSetPackage.addMappingIdentificator(mappingId1);
-		valueSetPackage.addMappingIdentificator(mappingId2);
+		valueSetPackage1.addMappingIdentificator(mappingId1);
+		valueSetPackage1.addMappingIdentificator(mappingId2);
 
-		assertEquals(mappingId1, valueSetPackage.listMappingIdentificators().get(0));
-		assertEquals(2, valueSetPackage.listMappingIdentificators().size());
+		assertEquals(mappingId1, valueSetPackage1.listMappingIdentificators().get(0));
+		assertEquals(2, valueSetPackage1.listMappingIdentificators().size());
 
 		// ValueSetPackage mapping names tests
 		String mappingName1 = "mappingName1";
 
-		valueSetPackage.addMappingName(mappingName1);
+		valueSetPackage1.addMappingName(mappingName1);
 
-		assertEquals(mappingName1, valueSetPackage.listMappingNames().get(0));
-		assertEquals(1, valueSetPackage.listMappingNames().size());
+		assertEquals(mappingName1, valueSetPackage1.listMappingNames().get(0));
+		assertEquals(1, valueSetPackage1.listMappingNames().size());
 
 	}
 
