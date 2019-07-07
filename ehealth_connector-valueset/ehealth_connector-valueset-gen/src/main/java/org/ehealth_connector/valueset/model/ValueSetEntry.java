@@ -39,14 +39,13 @@ import org.ehealth_connector.valueset.enums.ValueSetEntryType;
 public class ValueSetEntry implements Serializable {
 
 	/**
-	 * See getter/setter for more details to the class members.
-	 */
-
-	/**
 	 * Builder to build {@link ValueSetEntry}.
 	 */
 	@Generated("SparkTools")
 	public static final class Builder {
+
+		/** The parent. */
+		private ValueSetEntry parent;
 
 		/** The child list. */
 		private ArrayList<ValueSetEntry> childList;
@@ -172,6 +171,18 @@ public class ValueSetEntry implements Serializable {
 		}
 
 		/**
+		 * With parent.
+		 *
+		 * @param parent
+		 *            the parent
+		 * @return the builder
+		 */
+		public Builder withParent(ValueSetEntry parent) {
+			this.parent = parent;
+			return this;
+		}
+
+		/**
 		 * With value set entry type.
 		 *
 		 * @param valueSetEntryType
@@ -185,19 +196,23 @@ public class ValueSetEntry implements Serializable {
 	}
 
 	/**
-	 *
+	 * See getter/setter for more details to the class members.
 	 */
+
 	private static final long serialVersionUID = 20533928572823276L;
 
 	/**
 	 * Creates builder to build {@link ValueSetEntry}.
-	 *
+	 * 
 	 * @return created builder
 	 */
 	@Generated("SparkTools")
 	public static Builder builder() {
 		return new Builder();
 	}
+
+	/** The parent. */
+	ValueSetEntry parent;
 
 	/** The children. */
 	private ArrayList<ValueSetEntry> childList;
@@ -241,14 +256,15 @@ public class ValueSetEntry implements Serializable {
 	 */
 	@Generated("SparkTools")
 	private ValueSetEntry(Builder builder) {
+		this.parent = builder.parent;
 		this.childList = builder.childList;
-		this.mappingCodeList = builder.mappingCodeList;
-		this.mappingNameList = builder.mappingNameList;
 		this.codeBaseType = builder.codeBaseType;
 		this.defaultMappingName = builder.defaultMappingName;
-		this.level = builder.level;
-		this.valueSetEntryType = builder.valueSetEntryType;
 		this.designationList = builder.designationList;
+		this.level = builder.level;
+		this.mappingCodeList = builder.mappingCodeList;
+		this.mappingNameList = builder.mappingNameList;
+		this.valueSetEntryType = builder.valueSetEntryType;
 	}
 
 	/**
@@ -460,6 +476,8 @@ public class ValueSetEntry implements Serializable {
 	 *
 	 * @param language
 	 *            the language
+	 * @param designationType
+	 *            the designation type
 	 * @return the designation
 	 */
 	public String getDesignation(LanguageCode language, DesignationType designationType) {
@@ -516,6 +534,15 @@ public class ValueSetEntry implements Serializable {
 	 */
 	public ArrayList<String> getMappingNameList() {
 		return mappingNameList;
+	}
+
+	/**
+	 * Gets the parent.
+	 *
+	 * @return the parent
+	 */
+	public ValueSetEntry getParent() {
+		return parent;
 	}
 
 	/**
@@ -677,6 +704,16 @@ public class ValueSetEntry implements Serializable {
 	 */
 	public void setMappingNameList(ArrayList<String> mappingNameList) {
 		this.mappingNameList = mappingNameList;
+	}
+
+	/**
+	 * Sets the parent.
+	 *
+	 * @param parent
+	 *            the new parent
+	 */
+	public void setParent(ValueSetEntry parent) {
+		this.parent = parent;
 	}
 
 	/**

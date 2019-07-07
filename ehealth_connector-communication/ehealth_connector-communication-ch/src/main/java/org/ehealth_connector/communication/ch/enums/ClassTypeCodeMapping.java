@@ -54,6 +54,128 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 	ADVANCE_DIRECTIVE_REPORT_RECORD_ARTIFACT("371538006", "2.16.840.1.113883.6.96",
 			"Advance directive report (record artifact)",
 			"Advance directive report (record artifact)", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Audit trail report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	AUDIT_TRAIL_REPORT_RECORD_ARTIFACT("722160009", "2.16.840.1.113883.6.96",
+			"Audit trail report (record artifact)", "Audit trail report (record artifact)",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Care Plan (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	CARE_PLAN_RECORD_ARTIFACT("734163000", "2.16.840.1.113883.6.96", "Care Plan (record artifact)",
+			"Care Plan (record artifact)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Clinical procedure report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	CLINICAL_PROCEDURE_REPORT_RECORD_ARTIFACT("371525003", "2.16.840.1.113883.6.96",
+			"Clinical procedure report (record artifact)",
+			"Clinical procedure report (record artifact)", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Consent report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	CONSENT_REPORT_RECORD_ARTIFACT("371537001", "2.16.840.1.113883.6.96",
+			"Consent report (record artifact)", "Consent report (record artifact)", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Emergency medical identification record (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	EMERGENCY_MEDICAL_IDENTIFICATION_RECORD_RECORD_ARTIFACT("722216001", "2.16.840.1.113883.6.96",
+			"Emergency medical identification record (record artifact)",
+			"Emergency medical identification record (record artifact)", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Obstetrical Record (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	OBSTETRICAL_RECORD_RECORD_ARTIFACT("2171000195109", "2.16.756.5.30.1.127.3.4",
+			"Obstetrical Record (record artifact)", "Obstetrical Record (record artifact)",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Order (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	ORDER_RECORD_ARTIFACT("721963009", "2.16.840.1.113883.6.96", "Order (record artifact)",
+			"Order (record artifact)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Organ donor card (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	ORGAN_DONOR_CARD_RECORD_ARTIFACT("772790007", "2.16.840.1.113883.6.96",
+			"Organ donor card (record artifact)", "Organ donor card (record artifact)",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Patient record type (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	PATIENT_RECORD_TYPE_RECORD_ARTIFACT("184216000", "2.16.840.1.113883.6.96",
+			"Patient record type (record artifact)", "Patient record type (record artifact)",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Prescription record (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	PRESCRIPTION_RECORD_RECORD_ARTIFACT("440545006", "2.16.840.1.113883.6.96",
+			"Prescription record (record artifact)", "Prescription record (record artifact)",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Record artifact (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	RECORD_ARTIFACT_RECORD_ARTIFACT("419891008", "2.16.840.1.113883.6.96",
+			"Record artifact (record artifact)", "Record artifact (record artifact)", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Record of health event (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	RECORD_OF_HEALTH_EVENT_RECORD_ARTIFACT("417319006", "2.16.840.1.113883.6.96",
+			"Record of health event (record artifact)", "Record of health event (record artifact)",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Referral note (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	REFERRAL_NOTE_RECORD_ARTIFACT("721927009", "2.16.840.1.113883.6.96",
+			"Referral note (record artifact)", "Referral note (record artifact)", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Report of clinical encounter (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	REPORT_OF_CLINICAL_ENCOUNTER_RECORD_ARTIFACT("371531000", "2.16.840.1.113883.6.96",
+			"Report of clinical encounter (record artifact)",
+			"Report of clinical encounter (record artifact)", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Summary clinical document (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	SUMMARY_CLINICAL_DOCUMENT_RECORD_ARTIFACT("422735006", "2.16.840.1.113883.6.96",
+			"Summary clinical document (record artifact)",
+			"Summary clinical document (record artifact)", "TOTRANSLATE", "TOTRANSLATE",
 			"TOTRANSLATE");
 
 	/**
@@ -69,6 +191,111 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	public static final String ADVANCE_DIRECTIVE_REPORT_RECORD_ARTIFACT_CODE = "371538006";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Audit trail report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String AUDIT_TRAIL_REPORT_RECORD_ARTIFACT_CODE = "722160009";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Care Plan (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String CARE_PLAN_RECORD_ARTIFACT_CODE = "734163000";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Clinical procedure report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String CLINICAL_PROCEDURE_REPORT_RECORD_ARTIFACT_CODE = "371525003";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Consent report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String CONSENT_REPORT_RECORD_ARTIFACT_CODE = "371537001";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Emergency medical identification record (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String EMERGENCY_MEDICAL_IDENTIFICATION_RECORD_RECORD_ARTIFACT_CODE = "722216001";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Obstetrical Record (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String OBSTETRICAL_RECORD_RECORD_ARTIFACT_CODE = "2171000195109";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Order (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String ORDER_RECORD_ARTIFACT_CODE = "721963009";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Organ donor card (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String ORGAN_DONOR_CARD_RECORD_ARTIFACT_CODE = "772790007";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Patient record type (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String PATIENT_RECORD_TYPE_RECORD_ARTIFACT_CODE = "184216000";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Prescription record (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String PRESCRIPTION_RECORD_RECORD_ARTIFACT_CODE = "440545006";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Record artifact (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String RECORD_ARTIFACT_RECORD_ARTIFACT_CODE = "419891008";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Record of health event (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String RECORD_OF_HEALTH_EVENT_RECORD_ARTIFACT_CODE = "417319006";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Referral note (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String REFERRAL_NOTE_RECORD_ARTIFACT_CODE = "721927009";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Report of clinical encounter (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String REPORT_OF_CLINICAL_ENCOUNTER_RECORD_ARTIFACT_CODE = "371531000";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Summary clinical document (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String SUMMARY_CLINICAL_DOCUMENT_RECORD_ARTIFACT_CODE = "422735006";
 
 	/**
 	 * <div class="en">Identifier of the value set</div>

@@ -736,6 +736,7 @@ public class ValueSetManager {
 			if ("conceptList".contentEquals(key) && (entry.getValue() != null)
 					&& (entry.getValue().getClass() == JSONArray.class)) {
 				JSONArray concepts = (JSONArray) entry.getValue();
+				ValueSetEntry lastValueSetEntry = null;
 				for (Object object : concepts) {
 					@SuppressWarnings("unchecked")
 					Map<String, Object> subMap = (Map<String, Object>) object;
@@ -834,7 +835,65 @@ public class ValueSetManager {
 								valueSetEntry.setCodeBaseType(code);
 								valueSetEntry.setLevel(level);
 								valueSetEntry.setValueSetEntryType(valueSetEntryType);
-								valueSet.addValueSetEntry(valueSetEntry);
+
+								if (lastValueSetEntry == null)
+									// it is the very first entry. Thus it will
+									// be added to the main list
+									valueSet.addValueSetEntry(valueSetEntry);
+								else {
+									// note for developers:
+									// This code was tested with this value Set:
+									// http://ehealthsuisse.art-decor.org/ch-epr-html-20190701T210605/voc-2.16.756.5.30.1.127.3.10.1.30-2018-03-06T135538.html
+									// This value Set has 2 hierarchy levels,
+									// only. If you get into trouble with
+									// valueSets having 3 and more hierarchy
+									// levels, feel free to contribute bug fixes
+									// if needed.
+									if (lastValueSetEntry.getLevel() == valueSetEntry.getLevel()) {
+										// the new entry is a sibling of the
+										// last one. Therefore it will be added
+										// to the same parent
+										if (lastValueSetEntry.getParent() == null)
+											// there is no parent. The entry is
+											// added to the main list
+											valueSet.addValueSetEntry(valueSetEntry);
+										else {
+											// there is a parent. The entry is
+											// added to the parent
+											valueSetEntry.setParent(lastValueSetEntry.getParent());
+											lastValueSetEntry.getParent().addChild(valueSetEntry);
+										}
+									}
+
+									if (lastValueSetEntry.getLevel() < valueSetEntry.getLevel()) {
+										// the new entry has a deeper level as
+										// the last one. It becomes a child of
+										// the last one and the last one becomes
+										// his parent
+										valueSetEntry.setParent(lastValueSetEntry);
+										lastValueSetEntry.addChild(valueSetEntry);
+									}
+
+									if (lastValueSetEntry.getLevel() > valueSetEntry.getLevel()) {
+										// the new entry has a higher level as
+										// the last one. It gets added to the
+										// parent list.
+										if (lastValueSetEntry.getParent().getParent() == null)
+											// there is no parent. The entry is
+											// added to the main list
+											valueSet.addValueSetEntry(valueSetEntry);
+										else {
+											// there is a parent. The entry is
+											// added to the parent
+											valueSetEntry.setParent(
+													lastValueSetEntry.getParent().getParent());
+											lastValueSetEntry.getParent().getParent()
+													.addChild(valueSetEntry);
+										}
+									}
+
+								}
+								lastValueSetEntry = valueSetEntry;
 							}
 						}
 					}
@@ -851,6 +910,7 @@ public class ValueSetManager {
 		// "testDownloadedValueSetJson.yaml");
 
 		return valueSet;
+
 	}
 
 	/**
