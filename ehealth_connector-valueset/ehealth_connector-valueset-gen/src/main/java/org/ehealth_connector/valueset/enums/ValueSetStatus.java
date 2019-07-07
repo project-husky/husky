@@ -84,22 +84,4 @@ public enum ValueSetStatus {
 	 */
 	REJECTED;
 
-	/**
-	 * <div class="en">Gets the Enum by the given String as it appears in IHE
-	 * SVS.</div> <div class="de">Ruft die Aufzählung nach der angegebenen
-	 * Zeichenfolge ab, wie sie in IHE SVS verwendet wird.</div>
-	 *
-	 * @param iheSvsStatus
-	 *            the ihe svs status
-	 * @return the code ihe svs
-	 */
-	public static ValueSetStatus getCodeIheSvs(String iheSvsStatus) {
-		ValueSetStatus retVal = null;
-		if ("active".equals(iheSvsStatus.toLowerCase()))
-			retVal = FINAL;
-		if ("inactive".equals(iheSvsStatus.toLowerCase()))
-			retVal = DEPRECATED;
-		return retVal;
-	}
-
 }

@@ -22,6 +22,7 @@ import java.util.Date;
 import javax.annotation.Generated;
 
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 
 /**
@@ -179,29 +180,43 @@ public class Version implements Serializable {
 	 */
 	public boolean equals(Version obj) {
 		boolean retVal = true;
+		if (obj == null)
+			return false;
 		if (retVal) {
 			if (this.label == null)
 				retVal = (obj.getLabel() == null);
 			else
 				retVal = this.label.equals(obj.getLabel());
 		}
-		if (retVal) {
-			if (this.publishingAuthority == null)
-				retVal = (obj.getPublishingAuthority() == null);
-			else
-				retVal = this.publishingAuthority.equals(obj.getPublishingAuthority());
-		}
+		// only business rules are applied, here. Rest was initially implemented
+		// and stays here for future use. If you use it, you need to implement
+		// another method and not change the current method.
+		// if (retVal) {
+		// if (this.publishingAuthority == null)
+		// retVal = (obj.getPublishingAuthority() == null);
+		// else
+		// retVal =
+		// this.publishingAuthority.equals(obj.getPublishingAuthority());
+		// }
 		if (retVal) {
 			if (this.validFrom == null)
 				retVal = (obj.getValidFrom() == null);
-			else
+			else {
 				retVal = this.validFrom.equals(obj.getValidFrom());
+				if (!retVal) {
+					retVal = DateUtil.equalsDateOnly(this.validFrom, obj.getValidFrom());
+				}
+			}
 		}
 		if (retVal) {
 			if (this.validTo == null)
 				retVal = (obj.getValidTo() == null);
-			else
+			else {
 				retVal = this.validTo.equals(obj.getValidTo());
+				if (!retVal) {
+					retVal = DateUtil.equalsDateOnly(this.validTo, obj.getValidTo());
+				}
+			}
 		}
 		return retVal;
 	}

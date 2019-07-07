@@ -28,14 +28,10 @@ import org.ehealth_connector.common.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Type of document as per Annex 3&amp;#160; EPRO-FDHA.&lt;br clear="none"/&gt;
- * &lt;br clear="none"/&gt;The code defines a document’s type (e.g. discharge report, laboratory report). Each document type should be assigned to precisely one document class.&lt;br clear="none"/&gt;</div>
- * <div class="de">Typ des Dokumentes (2.16.756.5.30.1.127.3.10.1.27) gemäss Anhang 3 der Verordnungen zum EPDG.&lt;br clear="none"/&gt;
- * &lt;br clear="none"/&gt;Der Code definiert den Typ eines Dokuments (z.B.&amp;#160; Austrittsbericht, Labor-Bericht). Jeder Dokumenten-Typ sollte genau einer Dokumentenklasse zugeordnet sein.&lt;br clear="none"/&gt;</div>
- * <div class="fr">Type du document selon l'annexe 3 ODEP-DFI.&lt;br clear="none"/&gt;
- * &lt;br clear="none"/&gt;Le code définit le type de document (p. ex. rapport de sortie, rapport de laboratoire). Chaque type de document doit être&amp;#160; associé à une seule classification.&lt;br clear="none"/&gt;</div>
- * <div class="it">Tipo di documento secondo l'allegato 3 OCIP-DFI.&lt;br clear="none"/&gt;
- * &lt;br clear="none"/&gt;Il codice definisce il tipo di documento (p. es. rapporto di dimissione, rapporto di laboratorio). Ciascun tipo di documento dovrebbe essere associato a una sola classe di documenti.&lt;br clear="none"/&gt;</div>
+ * <div class="en">Type of document as per Annex 3  EPRO-FDHA.<br clear="none"/><br clear="none"/>The code defines a document’s type (e.g. discharge report, laboratory report). Each document type should be assigned to precisely one document class.<br clear="none"/></div>
+ * <div class="de">Typ des Dokumentes (2.16.756.5.30.1.127.3.10.1.27) gemäss Anhang 3 der Verordnungen zum EPDG.<br clear="none"/><br clear="none"/>Der Code definiert den Typ eines Dokuments (z.B.  Austrittsbericht, Labor-Bericht). Jeder Dokumenten-Typ sollte genau einer Dokumentenklasse zugeordnet sein.<br clear="none"/></div>
+ * <div class="fr">Type du document selon l'annexe 3 ODEP-DFI.<br clear="none"/><br clear="none"/>Le code définit le type de document (p. ex. rapport de sortie, rapport de laboratoire). Chaque type de document doit être  associé à une seule classification.<br clear="none"/></div>
+ * <div class="it">Tipo di documento secondo l'allegato 3 OCIP-DFI.<br clear="none"/><br clear="none"/>Il codice definisce il tipo di documento (p. es. rapporto di dimissione, rapporto di laboratorio). Ciascun tipo di documento dovrebbe essere associato a una sola classe di documenti.<br clear="none"/></div>
  * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")

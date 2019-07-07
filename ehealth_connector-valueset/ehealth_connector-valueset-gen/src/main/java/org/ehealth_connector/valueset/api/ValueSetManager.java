@@ -22,6 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -35,6 +36,13 @@ import java.util.Map.Entry;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -156,6 +164,12 @@ public class ValueSetManager {
 				String downloadedString = "";
 				try {
 					downloadedString = IOUtils.toString(new URL(sourceUrlString), UTF8_ENCODING);
+					downloadedString = downloadedString.replaceAll("&lt;", "<");
+					downloadedString = downloadedString.replaceAll("&gt;", ">");
+					downloadedString = downloadedString.replaceAll("&amp;", "&");
+					downloadedString = downloadedString.replaceAll("&#160;", "&nbsp;");
+					downloadedString = downloadedString.replaceAll("&nbsp;", " ");
+					downloadedString = downloadedString.replaceAll("\r\n", "\n");
 					switch (valueSetConfig.getSourceFormatType()) {
 					case JSON:
 						retVal = loadValueSetJson(IOUtils.toInputStream(downloadedString));
@@ -254,11 +268,27 @@ public class ValueSetManager {
 
 		NodeList nodes = evaluateXpathExprAsNodeList(xmlDoc, xpathExpr);
 
-		if (nodes != null)
-			if (nodes.getLength() > 0)
-				retVal = nodes.item(0).getTextContent().trim();
-
-		return retVal;
+		if (nodes != null) {
+			retVal = "";
+			for (int i = 0; i < nodes.getLength(); i++) {
+				if (i == 0)
+					retVal = retVal + nodes.item(i).getTextContent().trim();
+				else {
+					StringWriter writer = new StringWriter();
+					Transformer transformer;
+					try {
+						transformer = TransformerFactory.newInstance().newTransformer();
+						transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+						transformer.transform(new DOMSource(nodes.item(i)),
+								new StreamResult(writer));
+						retVal = retVal + writer.toString();
+					} catch (TransformerFactoryConfigurationError | TransformerException e) {
+						// Do nothing
+					}
+				}
+			}
+		}
+		return retVal.replaceAll("\r\n", "\n").replaceAll("\n", "");
 	}
 
 	/**
@@ -417,7 +447,7 @@ public class ValueSetManager {
 			valueSet.setIdentificator(
 					IdentificatorBaseType.builder().withRoot(textContent).build());
 
-		textContent = evaluateXpathExprAsString(xmlDoc, "//ValueSet/Purpose/text()");
+		textContent = evaluateXpathExprAsString(xmlDoc, "//ValueSet/Purpose//node()");
 		if (textContent != null)
 			valueSet.addDescription(new LangText(LanguageCode.ENGLISH, textContent));
 
@@ -427,7 +457,7 @@ public class ValueSetManager {
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//ValueSet/EffectiveDate/text()");
 		if (textContent != null)
-			version.setValidFrom(DateUtil.parseDateyyyyMMdd(textContent));
+			version.setValidFrom(DateUtil.parseDateyyyyMMdd2(textContent));
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//ValueSet/@version");
 		if (textContent != null)
@@ -487,8 +517,15 @@ public class ValueSetManager {
 		// valueSet.setName(name);
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//ValueSet/Status/text()");
-		if (textContent != null)
-			valueSet.setStatus(ValueSetStatus.getCodeIheSvs(textContent));
+		if (textContent != null) {
+			String status = textContent;
+
+			if ("active".equals(status.toLowerCase()))
+				valueSet.setStatus(ValueSetStatus.FINAL);
+			if ("inactive".equals(status.toLowerCase()))
+				valueSet.setStatus(ValueSetStatus.DEPRECATED);
+
+		}
 
 		// This is for debugging purposes, only:
 		// ValueSetManager mgr = new ValueSetManager();
@@ -636,7 +673,8 @@ public class ValueSetManager {
 						if ("content".contentEquals(subKey) && (subEntry.getValue() != null))
 							content = subEntry.getValue().toString();
 					}
-					valueSet.addDescription(new LangText(languageCode, content));
+					valueSet.addDescription(new LangText(languageCode,
+							content.replaceAll("\r\n", "\n").replaceAll("\n", "")));
 				}
 			}
 			if ("publishingAuthority".contentEquals(key) && (entry.getValue() != null)
@@ -914,7 +952,7 @@ public class ValueSetManager {
 			textContent = evaluateXpathExprAsString(xmlDoc,
 					"//valueSets/project/valueSet/desc[@language='" + languageCode.getCodeValue()
 							+ "' or starts-with(@language,'" + languageCode.getCodeValue()
-							+ "')]/text()");
+							+ "')]/node()");
 			if (textContent != null)
 				valueSet.addDescription(new LangText(languageCode, textContent));
 
@@ -928,7 +966,7 @@ public class ValueSetManager {
 		textContent = evaluateXpathExprAsString(xmlDoc,
 				"//valueSets/project/valueSet/@effectiveDate");
 		if (textContent != null)
-			version.setValidFrom(DateUtil.parseDateyyyyMMdd(textContent));
+			version.setValidFrom(DateUtil.parseDateyyyyMMddTHHmmss(textContent));
 
 		textContent = evaluateXpathExprAsString(xmlDoc,
 				"//valueSets/project/valueSet/@versionLabel");
@@ -999,12 +1037,46 @@ public class ValueSetManager {
 
 		valueSet.setVersion(version);
 
-		// Name is not available in IHE SVS format
-		// valueSet.setName(name);
-		textContent = evaluateXpathExprAsString(xmlDoc, "//ValueSet/Status/text()");
+		textContent = evaluateXpathExprAsString(xmlDoc, "//valueSets/project/valueSet/@name");
 		if (textContent != null)
-			valueSet.setStatus(ValueSetStatus.getCodeIheSvs(textContent));
+			valueSet.setName(textContent);
 
+		textContent = evaluateXpathExprAsString(xmlDoc, "//valueSets/project/valueSet/@statusCode");
+		if (textContent != null) {
+			String status = textContent;
+
+			// new: Value set just created and is new and work in progress
+			// to become a draft/finalized value set. Beyond the author,
+			// nobody should look at this value set unless it's status code
+			// is draft or finalized.
+			if ("new".equals(status.toLowerCase()))
+				valueSet.setStatus(ValueSetStatus.NEW);
+			// draft: Value set under development (nascent). Metadata and
+			// value set may be incomplete. Entered primarily to encourage
+			// other users to be aware of ongoing process.
+			if ("draft".equals(status.toLowerCase()))
+				valueSet.setStatus(ValueSetStatus.DRAFT);
+
+			// final: Value set has been published by the custodian
+			// organization and deemed fit for use. May have associated
+			// adoption and annotation metadata
+			if ("final".equals(status.toLowerCase()))
+				valueSet.setStatus(ValueSetStatus.FINAL);
+
+			// deprecated: Value set retired: No longer fit for use.
+			// Information available for historical reference.
+			if ("deprecated".equals(status.toLowerCase()))
+				valueSet.setStatus(ValueSetStatus.DEPRECATED);
+
+			// rejected: Value set is rejected
+			if ("rejected".equals(status.toLowerCase()))
+				valueSet.setStatus(ValueSetStatus.REJECTED);
+
+			// cancelled: Value set is withdrawn
+			if ("cancelled".equals(status.toLowerCase()))
+				valueSet.setStatus(ValueSetStatus.CANCELLED);
+
+		}
 		// This is for debugging purposes, only:
 		// ValueSetManager mgr = new ValueSetManager();
 		// mgr.saveValueSet(valueSet, Util.getTempDirectory()

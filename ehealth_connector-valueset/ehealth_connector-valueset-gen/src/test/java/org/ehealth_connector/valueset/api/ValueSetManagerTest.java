@@ -17,6 +17,7 @@
 package org.ehealth_connector.valueset.api;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.io.FileNotFoundException;
@@ -154,8 +155,62 @@ public class ValueSetManagerTest {
 			ValueSet valueSetIheSvs = valueSetManager.downloadValueSet(valueSetConfigIheSvs);
 			ValueSet valueSetXml = valueSetManager.downloadValueSet(valueSetConfigXml);
 
-			// assertTrue(valueSetJson.equals(valueSetIheSvs));
-			// assertTrue(valueSetJson.equals(valueSetXml));
+			// 1. Compare Json and IHE SVS
+
+			// This is for debugging purposes, only:
+			// valueSetManager.saveValueSet(valueSetJson,
+			// "/temp/valueSetJson.json");
+			// valueSetManager.saveValueSet(valueSetIheSvs,
+			// "/temp/valueSetIheSvs.xml");
+			// valueSetManager.saveValueSet(valueSetXml,
+			// "/temp/valueSetXml.xml");
+
+			assertTrue(valueSetJson.getIdentificator().equals(valueSetIheSvs.getIdentificator()));
+			assertEquals(valueSetJson.getDisplayName(), valueSetIheSvs.getDisplayName());
+			// cannot be tested, as this information is not available in the
+			// IHE SVS format:
+			// assertEquals(valueSetJson.getName(), valueSetIheSvs.getName());
+			assertEquals(valueSetJson.getStatus(), valueSetIheSvs.getStatus());
+			assertTrue(valueSetJson.getVersion().equals(valueSetIheSvs.getVersion()));
+
+			// IHE SVS does only provide Purpose (which is loaded as English
+			// description)
+			assertTrue(valueSetJson.getDescription(LanguageCode.ENGLISH)
+					.equals(valueSetIheSvs.getDescription(LanguageCode.ENGLISH)));
+
+			for (ValueSetEntry vse : valueSetJson.listValueSetEntries()) {
+				ValueSetEntry obj = valueSetIheSvs.getValueSetEntryByCode(vse.getCodeBaseType());
+				assertEquals(vse.getDesignationList().size(), obj.getDesignationList().size());
+				assertEquals(vse.getLevel(), obj.getLevel());
+				// cannot be tested, as this information is not available in the
+				// IHE SVS format:
+				// assertEquals(vse.getValueSetEntryType(),
+				// obj.getValueSetEntryType());
+			}
+
+			// 2. Compare Json and XML
+
+			assertTrue(valueSetJson.getIdentificator().equals(valueSetXml.getIdentificator()));
+			assertEquals(valueSetJson.getDisplayName(), valueSetXml.getDisplayName());
+			// cannot be tested, as this information is not available in the
+			// XML format:
+			assertEquals(valueSetJson.getName(), valueSetXml.getName());
+			assertEquals(valueSetJson.getStatus(), valueSetXml.getStatus());
+			assertTrue(valueSetJson.getVersion().equals(valueSetXml.getVersion()));
+
+			for (LangText jsonDesc : valueSetJson.listDescriptions()) {
+				String xmlDesc = valueSetXml.getDescription(jsonDesc.getLangCode());
+				assertTrue(jsonDesc.getLangText().equals(xmlDesc));
+			}
+
+			for (ValueSetEntry vse : valueSetJson.listValueSetEntries()) {
+				ValueSetEntry obj = valueSetXml.getValueSetEntryByCode(vse.getCodeBaseType());
+				assertEquals(vse.getDesignationList().size(), obj.getDesignationList().size());
+				assertEquals(vse.getLevel(), obj.getLevel());
+				// cannot be tested, as this information is not available in the
+				// XML format:
+				assertEquals(vse.getValueSetEntryType(), obj.getValueSetEntryType());
+			}
 
 		} catch (IOException e) {
 			fail("downloadValueSetJsonTest: IOException");

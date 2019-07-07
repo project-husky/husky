@@ -28,8 +28,7 @@ import org.ehealth_connector.common.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">
- *       Role codes as per Annex 5 EPRO-FDHA, Draft June 2018 version&lt;br clear="none"/&gt;</div>
+ * <div class="en">      Role codes as per Annex 5 EPRO-FDHA, Draft June 2018 version<br clear="none"/></div>
  * <div class="de">no designation found for language GERMAN</div>
  * <div class="fr">no designation found for language FRENCH</div>
  * <div class="it">no designation found for language ITALIAN</div>

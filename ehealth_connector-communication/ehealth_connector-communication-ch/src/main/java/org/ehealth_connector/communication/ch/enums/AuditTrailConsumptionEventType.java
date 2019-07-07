@@ -28,7 +28,7 @@ import org.ehealth_connector.common.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Audit Trail Consumption Event Types for CH:ATC&lt;br clear="none"/&gt;</div>
+ * <div class="en">Audit Trail Consumption Event Types for CH:ATC<br clear="none"/></div>
  * <div class="de">no designation found for language GERMAN</div>
  * <div class="fr">no designation found for language FRENCH</div>
  * <div class="it">no designation found for language ITALIAN</div>

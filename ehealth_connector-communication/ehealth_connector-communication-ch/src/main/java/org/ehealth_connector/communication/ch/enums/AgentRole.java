@@ -28,8 +28,7 @@ import org.ehealth_connector.common.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">&lt;span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;"&gt;Role codes as per Annex 5 EPRO-FDHA, CH:ATC, Draft June 2018 version&lt;/span&gt;
- * &lt;br clear="none"/&gt;</div>
+ * <div class="en"><span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;">Role codes as per Annex 5 EPRO-FDHA, CH:ATC, Draft June 2018 version</span><br clear="none"/></div>
  * <div class="de">no designation found for language GERMAN</div>
  * <div class="fr">no designation found for language FRENCH</div>
  * <div class="it">no designation found for language ITALIAN</div>

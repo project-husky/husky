@@ -28,8 +28,7 @@ import org.ehealth_connector.common.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">&lt;span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;"&gt;Purpose Of Use as per Annex 5 EPRO-FDHA, Extension 1.&lt;/span&gt;
- * &lt;br clear="none" style="font-family: Verdana, Arial, sans-serif; font-size: 12px; color: rgb(51, 51, 51);"/&gt;</div>
+ * <div class="en"><span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;">Purpose Of Use as per Annex 5 EPRO-FDHA, Extension 1.</span><br clear="none" style="font-family: Verdana, Arial, sans-serif; font-size: 12px; color: rgb(51, 51, 51);"/></div>
  * <div class="de">no designation found for language GERMAN</div>
  * <div class="fr">no designation found for language FRENCH</div>
  * <div class="it">no designation found for language ITALIAN</div>

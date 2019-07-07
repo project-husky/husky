@@ -29,12 +29,7 @@ import org.ehealth_connector.common.enums.ValueSetEnumInterface;
 /**
  * <!-- @formatter:off -->
  * <div class="en">no designation found for language ENGLISH</div>
- * <div class="de">Das folgende Valueset zeigt das Mapping zwischen den Dokumentklassen und Dokumenttypen (gemäss Kapitel 2.11 Anhang 3 EPDV). Das Valueset dient als Hilfestellung bei der Implementierung. Für die konkreten Werte in documentTypeCode und documentClassCode dienen weiterhin die beiden definierten Valuesets (&lt;span class="xforms-control xforms-select1 xforms-incremental xforms-select1-appearance-xxforms-tree xforms-visited" id="valueSetNavigation"&gt;
- *     &lt;span class="ygtvlabel node-sdraft xforms-tree-label-selected" id="ygtvlabelel10"&gt;EprDocumentTypeCode resp. &lt;/span&gt;
- * &lt;/span&gt;
- * &lt;span class="xforms-control xforms-select1 xforms-incremental xforms-select1-appearance-xxforms-tree xforms-visited" id="valueSetNavigation"&gt;
- *     &lt;span class="ygtvlabel node-sdraft xforms-tree-label-selected" id="ygtvlabelel10"&gt;EprDocumentClassCode)&lt;/span&gt;
- * &lt;/span&gt;. &lt;br clear="none"/&gt;</div>
+ * <div class="de">Das folgende Valueset zeigt das Mapping zwischen den Dokumentklassen und Dokumenttypen (gemäss Kapitel 2.11 Anhang 3 EPDV). Das Valueset dient als Hilfestellung bei der Implementierung. Für die konkreten Werte in documentTypeCode und documentClassCode dienen weiterhin die beiden definierten Valuesets (<span class="xforms-control xforms-select1 xforms-incremental xforms-select1-appearance-xxforms-tree xforms-visited" id="valueSetNavigation">    <span class="ygtvlabel node-sdraft xforms-tree-label-selected" id="ygtvlabelel10">EprDocumentTypeCode resp. </span></span><span class="xforms-control xforms-select1 xforms-incremental xforms-select1-appearance-xxforms-tree xforms-visited" id="valueSetNavigation">    <span class="ygtvlabel node-sdraft xforms-tree-label-selected" id="ygtvlabelel10">EprDocumentClassCode)</span></span>. <br clear="none"/></div>
  * <div class="fr">no designation found for language FRENCH</div>
  * <div class="it">no designation found for language ITALIAN</div>
  * <!-- @formatter:on -->

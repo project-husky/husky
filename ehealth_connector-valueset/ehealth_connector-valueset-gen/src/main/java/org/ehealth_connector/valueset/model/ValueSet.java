@@ -692,7 +692,7 @@ public class ValueSet implements Serializable {
 	public ValueSetEntry getValueSetEntryByCode(CodeBaseType value) {
 		ValueSetEntry retVal = null;
 		for (ValueSetEntry valueSetEntry : valueSetEntryList) {
-			if (valueSetEntry.getCodeBaseType() == value)
+			if (valueSetEntry.getCodeBaseType().equals(value))
 				retVal = valueSetEntry;
 		}
 		return retVal;

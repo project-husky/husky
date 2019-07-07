@@ -28,10 +28,10 @@ import org.ehealth_connector.common.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Patient’s gender as per Annex 3&amp;#160; EPRO-FDHA.&lt;br clear="none"/&gt;</div>
- * <div class="de">Geschlecht der Patientin oder des Patienten gemäss Anhang 3 EPDV-EDI.&lt;br clear="none"/&gt;</div>
- * <div class="fr">Sexe du patient selon l'annexe 3 ODEP-DFI.&lt;br clear="none"/&gt;</div>
- * <div class="it">Sesso del paziente secondo l'allegato 3 OCIP-DFI.&lt;br clear="none"/&gt;</div>
+ * <div class="en">Patient’s gender as per Annex 3  EPRO-FDHA.<br clear="none"/></div>
+ * <div class="de">Geschlecht der Patientin oder des Patienten gemäss Anhang 3 EPDV-EDI.<br clear="none"/></div>
+ * <div class="fr">Sexe du patient selon l'annexe 3 ODEP-DFI.<br clear="none"/></div>
+ * <div class="it">Sesso del paziente secondo l'allegato 3 OCIP-DFI.<br clear="none"/></div>
  * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")

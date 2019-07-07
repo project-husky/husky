@@ -28,14 +28,10 @@ import org.ehealth_connector.common.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Medical specialisation of the data captured in the document as per Annex 3&amp;#160; EPRO-FDHA. &lt;br clear="none"/&gt;
- * &lt;br clear="none"/&gt;This attribute assigns the contents of a document to a medical specialisation. It is conceivable that this information will assist the patient with setting or changing the confidentiality level of documents, which is relevant for controlling access. &lt;br clear="none"/&gt;</div>
- * <div class="de">Medizinische Fachrichtung der in dem Dokument erfassten Daten gemäss Anhang 3 EPDV-EDI.&lt;br clear="none"/&gt;
- * &lt;br clear="none"/&gt;Dieses Attribut soll den Inhalt eines Dokumentes einer medizinischen Fachrichtung zuordnen. Es ist denkbar, dass der Patient mit dieser Information eine Hilfestellung erhält zum Setzen oder Verändern der Vertraulichkeitsstufe von Dokumenten, welche relevant ist für die Zugriffssteuerung. &lt;br clear="none"/&gt;</div>
- * <div class="fr">Discipline médicale des données saisies dans le document selon l'annexe 3 ODEP-DFI. &lt;br clear="none"/&gt;
- * &lt;br clear="none"/&gt;Cet attribut permet d'indiquer la discipline médicale dont relève le contenu d'un document. Cette information peut guider le patient et l'aider à choisir ou à changer le niveau de confidentialité attribué à ses documents et qui détermine les droits d'accès. &lt;br clear="none"/&gt;</div>
- * <div class="it">Specialità medica dei dati inseriti nel documento secondo l'allegato 3 OCIP-DFI. &lt;br clear="none"/&gt;
- * &lt;br clear="none"/&gt;Questo attributo intende associare il contenuto di un documento a una specialità medica. È ipotizzabile che questa informazione fornisca un aiuto al paziente per impostare o modificare il grado di riservatezza dei documenti, rilevante per il controllo degli accessi. &lt;br clear="none"/&gt;</div>
+ * <div class="en">Medical specialisation of the data captured in the document as per Annex 3  EPRO-FDHA. <br clear="none"/><br clear="none"/>This attribute assigns the contents of a document to a medical specialisation. It is conceivable that this information will assist the patient with setting or changing the confidentiality level of documents, which is relevant for controlling access. <br clear="none"/></div>
+ * <div class="de">Medizinische Fachrichtung der in dem Dokument erfassten Daten gemäss Anhang 3 EPDV-EDI.<br clear="none"/><br clear="none"/>Dieses Attribut soll den Inhalt eines Dokumentes einer medizinischen Fachrichtung zuordnen. Es ist denkbar, dass der Patient mit dieser Information eine Hilfestellung erhält zum Setzen oder Verändern der Vertraulichkeitsstufe von Dokumenten, welche relevant ist für die Zugriffssteuerung. <br clear="none"/></div>
+ * <div class="fr">Discipline médicale des données saisies dans le document selon l'annexe 3 ODEP-DFI. <br clear="none"/><br clear="none"/>Cet attribut permet d'indiquer la discipline médicale dont relève le contenu d'un document. Cette information peut guider le patient et l'aider à choisir ou à changer le niveau de confidentialité attribué à ses documents et qui détermine les droits d'accès. <br clear="none"/></div>
+ * <div class="it">Specialità medica dei dati inseriti nel documento secondo l'allegato 3 OCIP-DFI. <br clear="none"/><br clear="none"/>Questo attributo intende associare il contenuto di un documento a una specialità medica. È ipotizzabile che questa informazione fornisca un aiuto al paziente per impostare o modificare il grado di riservatezza dei documenti, rilevante per il controllo degli accessi. <br clear="none"/></div>
  * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
@@ -43,14 +39,14 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Accident &amp; emergency</div>
+	 * <div class="en">Accident & emergency</div>
 	 * <div class="de">Notfall- und Rettungsmedizin</div>
 	 * <div class="fr">Médecine d'urgence et de sauvetage</div>
 	 * <div class="it">Medicina d'urgenza e di salvataggio</div>
 	 * <!-- @formatter:on -->
 	 */
-	ACCIDENT_AND_EMERGENCY("394576009", "2.16.840.1.113883.6.96",
-			"Accident &amp; emergency (qualifier value)", "Accident &amp; emergency",
+	ACCIDENT_EMERGENCY("394576009", "2.16.840.1.113883.6.96",
+			"Accident & emergency (qualifier value)", "Accident & emergency",
 			"Notfall- und Rettungsmedizin", "Médecine d'urgence et de sauvetage",
 			"Medicina d'urgenza e di salvataggio"),
 	/**
@@ -584,13 +580,13 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Radiation oncology</div>
 	 * <div class="de">Radio-Onkologie/Strahlentherapie</div>
-	 * <div class="fr">Radio-oncologie&#160;/&#160;radiothérapie</div>
+	 * <div class="fr">Radio-oncologie / radiothérapie</div>
 	 * <div class="it">Radio-oncologia / radioterapia</div>
 	 * <!-- @formatter:on -->
 	 */
 	RADIATION_ONCOLOGY("419815003", "2.16.840.1.113883.6.96",
 			"Radiation oncology (qualifier value)", "Radiation oncology",
-			"Radio-Onkologie/Strahlentherapie", "Radio-oncologie&#160;/&#160;radiothérapie",
+			"Radio-Onkologie/Strahlentherapie", "Radio-oncologie / radiothérapie",
 			"Radio-oncologia / radioterapia"),
 	/**
 	 * <!-- @formatter:off -->
@@ -713,13 +709,13 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Accident &amp; emergency</div>
+	 * <div class="en">Code for Accident & emergency</div>
 	 * <div class="de">Code für Notfall- und Rettungsmedizin</div>
 	 * <div class="fr">Code de Médecine d'urgence et de sauvetage</div>
 	 * <div class="it">Code per Medicina d'urgenza e di salvataggio</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String ACCIDENT_AND_EMERGENCY_CODE = "394576009";
+	public static final String ACCIDENT_EMERGENCY_CODE = "394576009";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -1215,7 +1211,7 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Radiation oncology</div>
 	 * <div class="de">Code für Radio-Onkologie/Strahlentherapie</div>
-	 * <div class="fr">Code de Radio-oncologie&#160;/&#160;radiothérapie</div>
+	 * <div class="fr">Code de Radio-oncologie / radiothérapie</div>
 	 * <div class="it">Code per Radio-oncologia / radioterapia</div>
 	 * <!-- @formatter:on -->
 	 */

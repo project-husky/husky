@@ -28,12 +28,10 @@ import org.ehealth_connector.common.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Document class as per EPRO-FDHA Annex 3&lt;br clear="none"/&gt;</div>
- * <div class="de">Dokumentenklasse gemäss EPDV-EDI Anhang 3&lt;span style="text-decoration: none;"&gt;
- *     &lt;br clear="none"/&gt;
- * &lt;/span&gt;</div>
- * <div class="fr">Classification du document selon l'annexe 3 ODEP-DFI&lt;br clear="none"/&gt;</div>
- * <div class="it">Classe del documento secondo l'allegato 3 OCIP-DFI&lt;br clear="none"/&gt;</div>
+ * <div class="en">Document class as per EPRO-FDHA Annex 3<br clear="none"/></div>
+ * <div class="de">Dokumentenklasse gemäss EPDV-EDI Anhang 3<span style="text-decoration: none;">    <br clear="none"/></span></div>
+ * <div class="fr">Classification du document selon l'annexe 3 ODEP-DFI<br clear="none"/></div>
+ * <div class="it">Classe del documento secondo l'allegato 3 OCIP-DFI<br clear="none"/></div>
  * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
