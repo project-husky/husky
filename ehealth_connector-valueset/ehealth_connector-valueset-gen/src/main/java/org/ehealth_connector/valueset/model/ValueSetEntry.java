@@ -203,7 +203,7 @@ public class ValueSetEntry implements Serializable {
 
 	/**
 	 * Creates builder to build {@link ValueSetEntry}.
-	 * 
+	 *
 	 * @return created builder
 	 */
 	@Generated("SparkTools")
@@ -364,6 +364,94 @@ public class ValueSetEntry implements Serializable {
 	}
 
 	/**
+	 * <div class="en">Checks whether the list member contains the given
+	 * value.</div>
+	 *
+	 * <div class="de">Überprüft, ob die Liste den angegebenen Wert
+	 * enthält.</div> Contains.
+	 *
+	 * @param value
+	 *            the value
+	 * @return true, if successful
+	 */
+	public boolean contains(CodeBaseType value) {
+		if (mappingCodeList != null) {
+			for (CodeBaseType entry : mappingCodeList) {
+				if (entry.equals(value)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * <div class="en">Checks whether the list member contains the given
+	 * value.</div>
+	 *
+	 * <div class="de">Überprüft, ob die Liste den angegebenen Wert
+	 * enthält.</div> Contains.
+	 *
+	 * @param value
+	 *            the value
+	 * @return true, if successful
+	 */
+	public boolean contains(Designation value) {
+		if (designationList != null) {
+			for (Designation entry : designationList) {
+				if (entry.equals(value)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * <div class="en">Checks whether the list member contains the given
+	 * value.</div>
+	 *
+	 * <div class="de">Überprüft, ob die Liste den angegebenen Wert
+	 * enthält.</div> Contains.
+	 *
+	 * @param value
+	 *            the value
+	 * @return true, if successful
+	 */
+	public boolean contains(String value) {
+		if (mappingNameList != null) {
+			for (String entry : mappingNameList) {
+				if (entry.equals(value)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * <div class="en">Checks whether the list member contains the given
+	 * value.</div>
+	 *
+	 * <div class="de">Überprüft, ob die Liste den angegebenen Wert
+	 * enthält.</div> Contains.
+	 *
+	 * @param value
+	 *            the value
+	 * @return true, if successful
+	 */
+	public boolean contains(ValueSetEntry value) {
+		if (childList != null) {
+			for (ValueSetEntry entry : childList) {
+				if (entry.equals(value)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * <div class="en">Checks whether the two objects are equal (based on their
 	 * content).</div>
 	 *
@@ -376,11 +464,13 @@ public class ValueSetEntry implements Serializable {
 	 */
 	public boolean equals(ValueSetEntry obj) {
 		boolean retVal = true;
+		if (obj == null)
+			return false;
 		if (retVal) {
 			if (this.childList == null)
 				this.childList = new ArrayList<ValueSetEntry>();
 			for (int i = 0; i < this.childList.size(); i++) {
-				retVal = obj.listChilds().contains(this.childList.get(i));
+				retVal = obj.contains(this.childList.get(i));
 				if (!retVal)
 					break;
 			}
@@ -389,7 +479,7 @@ public class ValueSetEntry implements Serializable {
 			if (this.designationList == null)
 				this.designationList = new ArrayList<Designation>();
 			for (int i = 0; i < this.designationList.size(); i++) {
-				retVal = obj.listDesignations().contains(this.designationList.get(i));
+				retVal = obj.contains(this.designationList.get(i));
 				if (!retVal)
 					break;
 			}
@@ -398,7 +488,7 @@ public class ValueSetEntry implements Serializable {
 			if (this.mappingCodeList == null)
 				this.mappingCodeList = new ArrayList<CodeBaseType>();
 			for (int i = 0; i < this.mappingCodeList.size(); i++) {
-				retVal = obj.listMappingCodes().contains(this.mappingCodeList.get(i));
+				retVal = obj.contains(this.mappingCodeList.get(i));
 				if (!retVal)
 					break;
 			}
@@ -407,7 +497,7 @@ public class ValueSetEntry implements Serializable {
 			if (this.mappingNameList == null)
 				this.mappingNameList = new ArrayList<String>();
 			for (int i = 0; i < this.mappingNameList.size(); i++) {
-				retVal = obj.listMappingNames().contains(this.mappingNameList.get(i));
+				retVal = obj.contains(this.mappingNameList.get(i));
 				if (!retVal)
 					break;
 			}
@@ -727,5 +817,4 @@ public class ValueSetEntry implements Serializable {
 	public void setValueSetEntryType(ValueSetEntryType valueSetEntryType) {
 		this.valueSetEntryType = valueSetEntryType;
 	}
-
 }

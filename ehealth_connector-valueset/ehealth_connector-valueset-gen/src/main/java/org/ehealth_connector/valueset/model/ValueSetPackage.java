@@ -343,6 +343,72 @@ public class ValueSetPackage implements Serializable {
 	}
 
 	/**
+	 * <div class="en">Checks whether the list member contains the given
+	 * value.</div>
+	 *
+	 * <div class="de">Überprüft, ob die Liste den angegebenen Wert
+	 * enthält.</div> Contains.
+	 *
+	 * @param value
+	 *            the value
+	 * @return true, if successful
+	 */
+	public boolean contains(IdentificatorBaseType value) {
+		if (mappingIdentificatorList != null) {
+			for (IdentificatorBaseType entry : mappingIdentificatorList) {
+				if (entry.equals(value)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * <div class="en">Checks whether the list member contains the given
+	 * value.</div>
+	 *
+	 * <div class="de">Überprüft, ob die Liste den angegebenen Wert
+	 * enthält.</div> Contains.
+	 *
+	 * @param value
+	 *            the value
+	 * @return true, if successful
+	 */
+	public boolean contains(String value) {
+		if (mappingNameList != null) {
+			for (String entry : mappingNameList) {
+				if (entry.equals(value)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * <div class="en">Checks whether the list member contains the given
+	 * value.</div>
+	 *
+	 * <div class="de">Überprüft, ob die Liste den angegebenen Wert
+	 * enthält.</div> Contains.
+	 *
+	 * @param value
+	 *            the value
+	 * @return true, if successful
+	 */
+	public boolean contains(ValueSet value) {
+		if (valueSetList != null) {
+			for (ValueSet entry : valueSetList) {
+				if (entry.equals(value)) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
 	 * <div class="en">Checks whether the two objects are equal (based on their
 	 * content).</div>
 	 *
@@ -355,12 +421,13 @@ public class ValueSetPackage implements Serializable {
 	 */
 	public boolean equals(ValueSetPackage obj) {
 		boolean retVal = true;
+		if (obj == null)
+			return false;
 		if (retVal) {
 			if (this.mappingIdentificatorList == null)
 				this.mappingIdentificatorList = new ArrayList<IdentificatorBaseType>();
 			for (int i = 0; i < this.mappingIdentificatorList.size(); i++) {
-				retVal = obj.listMappingIdentificators()
-						.contains(this.mappingIdentificatorList.get(i));
+				retVal = obj.contains(this.mappingIdentificatorList.get(i));
 				if (!retVal)
 					break;
 			}
@@ -369,7 +436,7 @@ public class ValueSetPackage implements Serializable {
 			if (this.mappingNameList == null)
 				this.mappingNameList = new ArrayList<String>();
 			for (int i = 0; i < this.mappingNameList.size(); i++) {
-				retVal = obj.listMappingNames().contains(this.mappingNameList.get(i));
+				retVal = obj.contains(this.mappingNameList.get(i));
 				if (!retVal)
 					break;
 			}
@@ -378,7 +445,7 @@ public class ValueSetPackage implements Serializable {
 			if (this.valueSetList == null)
 				this.valueSetList = new ArrayList<ValueSet>();
 			for (int i = 0; i < this.valueSetList.size(); i++) {
-				retVal = obj.listValueSets().contains(this.valueSetList.get(i));
+				retVal = obj.contains(this.valueSetList.get(i));
 				if (!retVal)
 					break;
 			}

@@ -166,6 +166,8 @@ public class Designation implements Serializable {
 	 */
 	public boolean equals(Designation obj) {
 		boolean retVal = true;
+		if (obj == null)
+			return false;
 		if (retVal) {
 			if (this.languageCode == null)
 				retVal = (obj.getLanguageCode() == null);
