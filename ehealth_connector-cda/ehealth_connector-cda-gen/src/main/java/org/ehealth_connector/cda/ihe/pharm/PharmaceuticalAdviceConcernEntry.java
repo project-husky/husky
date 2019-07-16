@@ -24,7 +24,7 @@ import java.util.List;
 
 import org.ehealth_connector.cda.BaseProblemConcern;
 import org.ehealth_connector.cda.MdhtFacade;
-import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;

@@ -18,9 +18,9 @@
 
 package org.ehealth_connector.cda.enums;
 
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.enums.CodeSystems;
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.enums.CodeSystems;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.ehealth_connector.common.utils.LangText;
 import org.ehealth_connector.common.utils.LangTexts;
 

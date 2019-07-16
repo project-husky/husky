@@ -19,8 +19,8 @@ package org.ehealth_connector.cda.ch.lab.lrqc;
 
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.LabObsList;
-import org.ehealth_connector.common.Value;
-import org.ehealth_connector.common.enums.ObservationInterpretation;
+import org.ehealth_connector.common.mdht.Value;
+import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;

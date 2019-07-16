@@ -21,7 +21,7 @@ import java.net.URL;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.vacd.MedicationTargetEntry;
-import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ExternalDocument;

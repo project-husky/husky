@@ -30,9 +30,9 @@ import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Value;
-import org.ehealth_connector.common.enums.Ucum;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Value;
+import org.ehealth_connector.common.mdht.enums.Ucum;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;

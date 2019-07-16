@@ -25,7 +25,7 @@ import org.ehealth_connector.cda.BaseProblemConcern;
 import org.ehealth_connector.cda.BaseProblemEntry;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
-import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.mdht.Identificator;
 import org.openhealthtools.mdht.uml.cda.ihe.ProblemConcernEntry;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
@@ -88,7 +88,7 @@ public class ProblemConcern extends BaseProblemConcern {
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.cda.AbstractConcern#addId(org.ehealth_connector.common.Identificator)
+	 * @see org.ehealth_connector.cda.AbstractConcern#addId(org.ehealth_connector.common.mdht.Identificator)
 	 */
 	@Override
 	public void addId(Identificator id) {

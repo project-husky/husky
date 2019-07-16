@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.MdhtEntryActFacade;
-import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;

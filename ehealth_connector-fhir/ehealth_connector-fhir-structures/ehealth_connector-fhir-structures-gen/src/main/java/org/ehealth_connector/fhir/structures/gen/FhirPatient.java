@@ -20,11 +20,11 @@ package org.ehealth_connector.fhir.structures.gen;
 import java.util.Date;
 
 import org.eclipse.emf.common.util.EList;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Name;
-import org.ehealth_connector.common.Patient;
-import org.ehealth_connector.common.Telecoms;
-import org.ehealth_connector.common.enums.AdministrativeGender;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.Name;
+import org.ehealth_connector.common.mdht.Patient;
+import org.ehealth_connector.common.mdht.Telecoms;
+import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
 import org.ehealth_connector.common.utils.Util;
 import org.hl7.fhir.dstu3.model.Address;
 import org.hl7.fhir.dstu3.model.BooleanType;
@@ -282,7 +282,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 		}
 
 		if ((patient.getAddresses() != null) && (patient.getAddresses().size() > 0)) {
-			for (final org.ehealth_connector.common.Address address : patient.getAddresses()) {
+			for (final org.ehealth_connector.common.mdht.Address address : patient.getAddresses()) {
 				getAddress().add(convertAddress(address.getMdhtAdress()));
 			}
 		}
@@ -413,7 +413,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 	 * @param address
 	 * @return fhir address
 	 */
-	private org.ehealth_connector.common.Address convertAddress(
+	private org.ehealth_connector.common.mdht.Address convertAddress(
 			org.hl7.fhir.dstu3.model.Address fhirAddress) {
 		if (fhirAddress == null) {
 			return null;
@@ -442,21 +442,21 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 			zip = fhirAddress.getPostalCode();
 		}
 
-		org.ehealth_connector.common.enums.PostalAddressUse addressUse = null;
+		org.ehealth_connector.common.mdht.enums.PostalAddressUse addressUse = null;
 		if ((fhirAddress.getUseElement() != null)
 				&& (fhirAddress.getUseElement().getValue() != null)) {
 			switch (fhirAddress.getUseElement().getValue()) {
 			case HOME:
-				addressUse = org.ehealth_connector.common.enums.PostalAddressUse.PRIVATE;
+				addressUse = org.ehealth_connector.common.mdht.enums.PostalAddressUse.PRIVATE;
 				break;
 			case WORK:
-				addressUse = org.ehealth_connector.common.enums.PostalAddressUse.BUSINESS;
+				addressUse = org.ehealth_connector.common.mdht.enums.PostalAddressUse.BUSINESS;
 				break;
 			default:
 				break;
 			}
 		}
-		final org.ehealth_connector.common.Address patientAddress = new org.ehealth_connector.common.Address(
+		final org.ehealth_connector.common.mdht.Address patientAddress = new org.ehealth_connector.common.mdht.Address(
 				addressline1, addressline2, addressline3, zip, city, addressUse);
 		if (fhirAddress.getState() != null) {
 			patientAddress.getMdhtAdress().addState(fhirAddress.getState());
@@ -581,7 +581,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 		if (getManagingOrganization() != null) {
 			final PatientRole patientRole = patient.getMdhtPatientRole();
 			final Organization organization = CDAFactory.eINSTANCE.createOrganization();
-			final org.ehealth_connector.common.Organization convenienceOrganization = new org.ehealth_connector.common.Organization(
+			final org.ehealth_connector.common.mdht.Organization convenienceOrganization = new org.ehealth_connector.common.mdht.Organization(
 					organization);
 
 			patientRole.setProviderOrganization(organization);
@@ -614,25 +614,25 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 			final Telecoms telecoms = new Telecoms();
 			for (final ContactPoint ContactPoint : getTelecom()) {
 				if (ContactPointSystem.PHONE.equals(ContactPoint.getSystemElement().getValue())) {
-					org.ehealth_connector.common.enums.TelecomAddressUse addressUse = null;
+					org.ehealth_connector.common.mdht.enums.TelecomAddressUse addressUse = null;
 					if (ContactPointUse.HOME.equals(ContactPoint.getUseElement().getValue())) {
-						addressUse = org.ehealth_connector.common.enums.TelecomAddressUse.PRIVATE;
+						addressUse = org.ehealth_connector.common.mdht.enums.TelecomAddressUse.PRIVATE;
 					} else if (ContactPointUse.WORK
 							.equals(ContactPoint.getUseElement().getValue())) {
-						addressUse = org.ehealth_connector.common.enums.TelecomAddressUse.BUSINESS;
+						addressUse = org.ehealth_connector.common.mdht.enums.TelecomAddressUse.BUSINESS;
 					} else if (ContactPointUse.MOBILE
 							.equals(ContactPoint.getUseElement().getValue())) {
-						addressUse = org.ehealth_connector.common.enums.TelecomAddressUse.MOBILE;
+						addressUse = org.ehealth_connector.common.mdht.enums.TelecomAddressUse.MOBILE;
 					}
 					telecoms.addPhone(ContactPoint.getValue(), addressUse);
 				}
 				if (ContactPointSystem.EMAIL.equals(ContactPoint.getSystemElement().getValue())) {
-					org.ehealth_connector.common.enums.TelecomAddressUse addressUse = null;
+					org.ehealth_connector.common.mdht.enums.TelecomAddressUse addressUse = null;
 					if (ContactPointUse.HOME.equals(ContactPoint.getUseElement().getValue())) {
-						addressUse = org.ehealth_connector.common.enums.TelecomAddressUse.PRIVATE;
+						addressUse = org.ehealth_connector.common.mdht.enums.TelecomAddressUse.PRIVATE;
 					} else if (ContactPointUse.WORK
 							.equals(ContactPoint.getUseElement().getValue())) {
-						addressUse = org.ehealth_connector.common.enums.TelecomAddressUse.BUSINESS;
+						addressUse = org.ehealth_connector.common.mdht.enums.TelecomAddressUse.BUSINESS;
 					}
 					telecoms.addEMail(ContactPoint.getValue(), addressUse);
 				}

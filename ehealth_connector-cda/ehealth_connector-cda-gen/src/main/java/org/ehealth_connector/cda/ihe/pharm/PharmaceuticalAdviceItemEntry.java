@@ -23,10 +23,10 @@ import java.util.List;
 import org.ehealth_connector.cda.ExternalDocumentEntry;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ihe.pharm.enums.PharmaceuticalAdviceStatusList;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.enums.StatusCode;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.enums.StatusCode;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Author;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
@@ -89,7 +89,7 @@ public class PharmaceuticalAdviceItemEntry extends
 	 *            Author to add to the list
 	 *
 	 */
-	public void addAuthor(org.ehealth_connector.common.Author author) {
+	public void addAuthor(org.ehealth_connector.common.mdht.Author author) {
 
 		this.getMdht().getAuthors().add(author.getAuthorMdht());
 
@@ -237,12 +237,12 @@ public class PharmaceuticalAdviceItemEntry extends
 	 * @return authors list
 	 *
 	 */
-	public ArrayList<org.ehealth_connector.common.Author> getAuthors() {
+	public ArrayList<org.ehealth_connector.common.mdht.Author> getAuthors() {
 
-		ArrayList<org.ehealth_connector.common.Author> authors = new ArrayList<org.ehealth_connector.common.Author>();
+		ArrayList<org.ehealth_connector.common.mdht.Author> authors = new ArrayList<org.ehealth_connector.common.mdht.Author>();
 
 		for (final Author mdhtAuthor : this.getMdht().getAuthors()) {
-			authors.add(new org.ehealth_connector.common.Author(mdhtAuthor));
+			authors.add(new org.ehealth_connector.common.mdht.Author(mdhtAuthor));
 		}
 
 		return authors;

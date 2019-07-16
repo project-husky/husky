@@ -23,9 +23,9 @@ import java.util.Date;
 import org.ehealth_connector.cda.enums.AllergiesSpecialConditions;
 import org.ehealth_connector.cda.enums.ProblemType;
 import org.ehealth_connector.cda.enums.ProblemsSpecialConditions;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
@@ -131,8 +131,8 @@ public class BaseProblemEntry
 	 *
 	 * @return the codedProblem object
 	 */
-	public org.ehealth_connector.common.Code getCode() {
-		final org.ehealth_connector.common.Code code = new org.ehealth_connector.common.Code(
+	public org.ehealth_connector.common.mdht.Code getCode() {
+		final org.ehealth_connector.common.mdht.Code code = new org.ehealth_connector.common.mdht.Code(
 				getMdht().getCode());
 		return code;
 	}
@@ -205,7 +205,7 @@ public class BaseProblemEntry
 	 * @return the codedProblem object
 	 */
 	public ProblemType getProblemType() {
-		final org.ehealth_connector.common.Code code = new org.ehealth_connector.common.Code(
+		final org.ehealth_connector.common.mdht.Code code = new org.ehealth_connector.common.mdht.Code(
 				getMdht().getCode());
 		if ((code != null) && ProblemType.CODE_SYSTEM_OID.equals(code.getCodeSystem())) {
 			return ProblemType.getEnum(code.getCode());
@@ -288,7 +288,7 @@ public class BaseProblemEntry
 	 * @param codedProblem
 	 *            the codedProblem Object which will be set
 	 */
-	public void setCode(org.ehealth_connector.common.Code codedProblem) {
+	public void setCode(org.ehealth_connector.common.mdht.Code codedProblem) {
 		getMdht().setCode(codedProblem.getCD());
 	}
 

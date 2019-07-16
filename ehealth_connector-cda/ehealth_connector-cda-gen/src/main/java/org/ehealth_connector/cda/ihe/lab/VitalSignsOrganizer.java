@@ -20,8 +20,8 @@ package org.ehealth_connector.cda.ihe.lab;
 import org.ehealth_connector.cda.BaseVitalSignObservation;
 import org.ehealth_connector.cda.MdhtOrganizerFacade;
 import org.ehealth_connector.cda.utils.CdaUtil;
-import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.mdht.Identificator;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
 
@@ -65,7 +65,7 @@ public class VitalSignsOrganizer
 	 * @param id
 	 *            the id. If null, an ID with the CdaChLrtp root and a generated
 	 *            extension will be created
-	 * @see org.ehealth_connector.cda.BaseVitalSignsOrganizer#addId(org.ehealth_connector.common.Identificator)
+	 * @see org.ehealth_connector.cda.BaseVitalSignsOrganizer#addId(org.ehealth_connector.common.mdht.Identificator)
 	 */
 	public void addId(Identificator id) {
 		if (id == null) {

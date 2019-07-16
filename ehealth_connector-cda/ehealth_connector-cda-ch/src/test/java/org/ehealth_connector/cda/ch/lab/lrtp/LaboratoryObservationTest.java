@@ -28,9 +28,9 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsList;
 import org.ehealth_connector.cda.testhelper.TestUtils;
-import org.ehealth_connector.common.ReferenceRange;
-import org.ehealth_connector.common.Value;
-import org.ehealth_connector.common.enums.ObservationInterpretation;
+import org.ehealth_connector.common.mdht.ReferenceRange;
+import org.ehealth_connector.common.mdht.Value;
+import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
 import org.junit.Test;
 import org.w3c.dom.Document;
 

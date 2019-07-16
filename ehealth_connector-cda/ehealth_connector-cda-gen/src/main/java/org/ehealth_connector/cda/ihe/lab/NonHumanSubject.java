@@ -18,8 +18,8 @@
 package org.ehealth_connector.cda.ihe.lab;
 
 import org.ehealth_connector.cda.MdhtFacade;
-import org.ehealth_connector.common.Address;
-import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.mdht.Address;
+import org.ehealth_connector.common.mdht.Code;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;

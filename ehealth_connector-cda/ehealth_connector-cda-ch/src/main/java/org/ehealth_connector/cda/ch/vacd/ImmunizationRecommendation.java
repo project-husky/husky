@@ -33,11 +33,11 @@ import org.ehealth_connector.cda.ch.ExternalReferenceEntry;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.enums.MedicationsSpecialConditions;
 import org.ehealth_connector.cda.enums.RouteOfAdministration;
-import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Value;
-import org.ehealth_connector.common.enums.StatusCode;
+import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.Value;
+import org.ehealth_connector.common.mdht.enums.StatusCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
@@ -99,7 +99,7 @@ public class ImmunizationRecommendation
 	 *            if immunization is intended and or proposed
 	 */
 	public ImmunizationRecommendation(Consumable consumable,
-			org.ehealth_connector.common.Author author, Date startOfPossibleAppliance,
+			org.ehealth_connector.common.mdht.Author author, Date startOfPossibleAppliance,
 			Date endOfPossibleAppliance, boolean intendedOrProposed) {
 
 		this();
@@ -175,7 +175,7 @@ public class ImmunizationRecommendation
 	 *
 	 * @return the author
 	 */
-	public org.ehealth_connector.common.Author getAuthor() {
+	public org.ehealth_connector.common.mdht.Author getAuthor() {
 		if (getMdht().getAuthors().size() > 0) {
 			return new Author(this.getMdht().getAuthors().get(0));
 		}
@@ -459,7 +459,7 @@ public class ImmunizationRecommendation
 	 * @param author
 	 *            the new author
 	 */
-	public void setAuthor(org.ehealth_connector.common.Author author) {
+	public void setAuthor(org.ehealth_connector.common.mdht.Author author) {
 		getMdht().getAuthors().clear();
 		if (author != null)
 			getMdht().getAuthors().add(EcoreUtil.copy(author.getAuthorMdht()));

@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
-import org.ehealth_connector.common.enums.DateTimeRangeAttributes;
+import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.junit.Before;
 import org.junit.Test;

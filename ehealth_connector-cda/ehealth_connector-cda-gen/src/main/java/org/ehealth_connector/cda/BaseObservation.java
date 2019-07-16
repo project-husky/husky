@@ -26,12 +26,12 @@ import java.util.List;
 
 import org.ehealth_connector.cda.enums.ActSite;
 import org.ehealth_connector.cda.enums.VitalSignCodes;
-import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Performer;
-import org.ehealth_connector.common.ReferenceRange;
-import org.ehealth_connector.common.Value;
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Performer;
+import org.ehealth_connector.common.mdht.ReferenceRange;
+import org.ehealth_connector.common.mdht.Value;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.LangTexts;
 import org.ehealth_connector.common.utils.Util;

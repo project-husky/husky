@@ -18,8 +18,8 @@
 package org.ehealth_connector.cda.ch.lab.lrep;
 
 import org.ehealth_connector.cda.utils.CdaUtil;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.enums.ObservationInterpretation;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;

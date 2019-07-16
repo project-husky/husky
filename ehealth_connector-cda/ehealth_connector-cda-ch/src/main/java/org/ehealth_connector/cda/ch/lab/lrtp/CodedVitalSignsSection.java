@@ -21,8 +21,8 @@ import org.ehealth_connector.cda.AbstractCodedVitalSigns;
 import org.ehealth_connector.cda.BaseVitalSignObservation;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEdes;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 

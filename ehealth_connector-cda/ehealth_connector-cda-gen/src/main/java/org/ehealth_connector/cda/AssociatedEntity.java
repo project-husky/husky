@@ -21,12 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.common.Address;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Name;
-import org.ehealth_connector.common.Organization;
-import org.ehealth_connector.common.Person;
-import org.ehealth_connector.common.Telecoms;
+import org.ehealth_connector.common.mdht.Address;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.Name;
+import org.ehealth_connector.common.mdht.Organization;
+import org.ehealth_connector.common.mdht.Person;
+import org.ehealth_connector.common.mdht.Telecoms;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;

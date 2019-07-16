@@ -20,7 +20,7 @@ package org.ehealth_connector.cda.ch.mtps;
 
 import org.ehealth_connector.cda.ch.AbstractCdaChV1;
 import org.ehealth_connector.cda.ihe.pharm.MedicationTreatmentPlanSection;
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 
 /**

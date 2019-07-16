@@ -25,7 +25,7 @@ import javax.annotation.Generated;
 
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.ehealth_connector.common.utils.LangText;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.valueset.enums.DesignationType;

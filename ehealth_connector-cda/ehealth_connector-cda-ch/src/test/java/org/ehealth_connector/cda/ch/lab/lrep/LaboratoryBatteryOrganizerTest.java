@@ -25,11 +25,11 @@ import java.util.List;
 
 import org.ehealth_connector.cda.BaseObservation;
 import org.ehealth_connector.cda.ObservationMediaEntry;
-import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Name;
-import org.ehealth_connector.common.Performer;
-import org.ehealth_connector.common.enums.StatusCode;
+import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.Name;
+import org.ehealth_connector.common.mdht.Performer;
+import org.ehealth_connector.common.mdht.enums.StatusCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.junit.Test;
 
@@ -42,7 +42,7 @@ public class LaboratoryBatteryOrganizerTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.lab.lrep.LaboratoryBatteryOrganizer#addAuthor(org.ehealth_connector.common.Author)}.
+	 * {@link org.ehealth_connector.cda.ch.lab.lrep.LaboratoryBatteryOrganizer#addAuthor(org.ehealth_connector.common.mdht.Author)}.
 	 */
 	@Test
 	public void testAddGetAuthor() {
@@ -112,7 +112,7 @@ public class LaboratoryBatteryOrganizerTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.lab.lrep.LaboratoryBatteryOrganizer#addPerformer(org.ehealth_connector.common.Performer)}.
+	 * {@link org.ehealth_connector.cda.ch.lab.lrep.LaboratoryBatteryOrganizer#addPerformer(org.ehealth_connector.common.mdht.Performer)}.
 	 */
 	@Test
 	public void testAddGetPerformer() {
@@ -179,7 +179,7 @@ public class LaboratoryBatteryOrganizerTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.MdhtOrganizerFacade#setStatusCode(org.ehealth_connector.common.enums.StatusCode)}
+	 * {@link org.ehealth_connector.cda.MdhtOrganizerFacade#setStatusCode(org.ehealth_connector.common.mdht.enums.StatusCode)}
 	 * and
 	 * {@link org.ehealth_connector.cda.MdhtOrganizerFacade#getStatusCode()}.
 	 */

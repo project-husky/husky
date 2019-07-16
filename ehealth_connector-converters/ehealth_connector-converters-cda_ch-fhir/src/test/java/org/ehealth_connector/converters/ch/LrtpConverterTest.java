@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.ehealth_connector.cda.ch.lab.lrtp.CdaChLrtp;
-import org.ehealth_connector.common.enums.AdministrativeGender;
+import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
 import org.ehealth_connector.fhir.structures.ch.FhirCdaChLrtp.LrtpDocument;
 import org.junit.Before;
 import org.junit.Test;

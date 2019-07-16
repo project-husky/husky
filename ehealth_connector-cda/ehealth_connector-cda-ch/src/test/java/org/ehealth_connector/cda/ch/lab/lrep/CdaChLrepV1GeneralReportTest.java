@@ -25,14 +25,14 @@ import java.util.List;
 
 import org.ehealth_connector.cda.Section;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
-import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Name;
-import org.ehealth_connector.common.Organization;
-import org.ehealth_connector.common.Patient;
-import org.ehealth_connector.common.enums.AdministrativeGender;
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.Name;
+import org.ehealth_connector.common.mdht.Organization;
+import org.ehealth_connector.common.mdht.Patient;
+import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.junit.Before;
@@ -53,7 +53,7 @@ public class CdaChLrepV1GeneralReportTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport#addAuthor(org.ehealth_connector.common.Author)}.
+	 * {@link org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport#addAuthor(org.ehealth_connector.common.mdht.Author)}.
 	 */
 	@Test
 	public void testAddGetAuthor() {
@@ -76,7 +76,7 @@ public class CdaChLrepV1GeneralReportTest {
 	 * Test method for
 	 * {@link org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport#addLaboratorySpecialtySection(org.ehealth_connector.cda.ch.lab.lrep.LaboratorySpecialtySection)}
 	 * and
-	 * {@link org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport#addLaboratoryBatteryOrganizerInNewSection(org.ehealth_connector.cda.ch.lab.lrep.LaboratoryBatteryOrganizer, org.ehealth_connector.common.Code, org.ehealth_connector.cda.ch.lab.lrep.SpecimenCollectionEntry)}.
+	 * {@link org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport#addLaboratoryBatteryOrganizerInNewSection(org.ehealth_connector.cda.ch.lab.lrep.LaboratoryBatteryOrganizer, org.ehealth_connector.common.mdht.Code, org.ehealth_connector.cda.ch.lab.lrep.SpecimenCollectionEntry)}.
 	 */
 	@Test
 	public void testAddGetLaboratorySpecialtySection() {
@@ -101,7 +101,7 @@ public class CdaChLrepV1GeneralReportTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport#addOtherRecipient(org.ehealth_connector.common.Organization)}.
+	 * {@link org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport#addOtherRecipient(org.ehealth_connector.common.mdht.Organization)}.
 	 */
 	@Test
 	public void testAddGetOtherRecipient() {
@@ -233,7 +233,7 @@ public class CdaChLrepV1GeneralReportTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport#setCustodian(org.ehealth_connector.common.Organization)}.
+	 * {@link org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport#setCustodian(org.ehealth_connector.common.mdht.Organization)}.
 	 */
 	@Test
 	public void testSetGetCustodian() {
@@ -248,7 +248,7 @@ public class CdaChLrepV1GeneralReportTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport#setPatient(org.ehealth_connector.common.Patient)}.
+	 * {@link org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport#setPatient(org.ehealth_connector.common.mdht.Patient)}.
 	 */
 	@Test
 	public void testSetGetPatient() {
@@ -265,7 +265,7 @@ public class CdaChLrepV1GeneralReportTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport#setPrimaryRecipient(org.ehealth_connector.common.Organization)}.
+	 * {@link org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport#setPrimaryRecipient(org.ehealth_connector.common.mdht.Organization)}.
 	 */
 	@Test
 	public void testSetGetPrimaryRecipient() {

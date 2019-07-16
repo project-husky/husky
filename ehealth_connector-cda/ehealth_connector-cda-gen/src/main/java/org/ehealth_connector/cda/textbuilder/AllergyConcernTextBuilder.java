@@ -24,7 +24,7 @@ import java.util.List;
 import org.ehealth_connector.cda.BaseAllergyConcern;
 import org.ehealth_connector.cda.BaseAllergyConcernComparator;
 import org.ehealth_connector.cda.enums.ContentIdPrefix;
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 
 /**
  * Builds the &lt;text&gt; part of the Immunization recommendations.

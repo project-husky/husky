@@ -26,13 +26,13 @@ import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
 import org.ehealth_connector.cda.ch.lab.SpecimenCollectionEntry;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.QualabQcc;
 import org.ehealth_connector.cda.utils.CdaUtil;
-import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Organization;
-import org.ehealth_connector.common.enums.CodeSystems;
-import org.ehealth_connector.common.enums.CountryCode;
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.Organization;
+import org.ehealth_connector.common.mdht.enums.CodeSystems;
+import org.ehealth_connector.common.mdht.enums.CountryCode;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.InformationRecipient;
 import org.openhealthtools.mdht.uml.cda.Participant1;
@@ -276,7 +276,7 @@ public class CdaChLrqc
 	 *            informationRecipient/name
 	 */
 	public void addIntendedRecipient(QualabQcc qkz) {
-		final org.ehealth_connector.common.IntendedRecipient ir = new org.ehealth_connector.common.IntendedRecipient();
+		final org.ehealth_connector.common.mdht.IntendedRecipient ir = new org.ehealth_connector.common.mdht.IntendedRecipient();
 
 		// ID
 		ir.getMdhtIntendedRecipient().getIntendedRecipient().getIds()

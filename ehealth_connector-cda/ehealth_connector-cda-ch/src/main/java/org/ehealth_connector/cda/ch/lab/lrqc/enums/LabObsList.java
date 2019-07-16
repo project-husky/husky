@@ -19,7 +19,7 @@ package org.ehealth_connector.cda.ch.lab.lrqc.enums;
 
 import java.util.Date;
 
-import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;

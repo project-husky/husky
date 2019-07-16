@@ -24,8 +24,8 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.ehealth_connector.cda.enums.NullFlavor;
 import org.ehealth_connector.cda.testhelper.TestUtils;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Value;
 import org.junit.Test;
 import org.w3c.dom.Document;
 

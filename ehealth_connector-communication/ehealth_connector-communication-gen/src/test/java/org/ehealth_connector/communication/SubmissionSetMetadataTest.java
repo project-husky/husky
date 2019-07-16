@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.ehealth_connector.cda.testhelper.TestUtils;
-import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.mdht.Code;
 import org.junit.Before;
 import org.junit.Test;
 import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;

@@ -21,8 +21,8 @@ import java.util.ArrayList;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.enums.EhcVersions;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.enums.EhcVersions;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.Authenticator;

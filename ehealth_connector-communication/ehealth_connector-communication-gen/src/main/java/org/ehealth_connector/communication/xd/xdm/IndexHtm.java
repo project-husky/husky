@@ -22,7 +22,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.MessageFormat;
 
-import org.ehealth_connector.common.VendorInformation;
+import org.ehealth_connector.common.mdht.VendorInformation;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.ehealth_connector.communication.utils.XdsUtil;
 import org.openhealthtools.ihe.xds.document.XDSDocument;

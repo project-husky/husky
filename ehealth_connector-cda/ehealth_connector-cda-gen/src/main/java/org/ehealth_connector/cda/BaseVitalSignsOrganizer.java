@@ -20,8 +20,8 @@ package org.ehealth_connector.cda;
 
 import java.util.List;
 
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.enums.NullFlavor;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.enums.NullFlavor;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.VitalSignsOrganizer;

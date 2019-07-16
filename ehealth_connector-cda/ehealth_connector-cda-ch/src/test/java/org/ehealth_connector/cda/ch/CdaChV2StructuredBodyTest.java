@@ -28,16 +28,16 @@ import org.ehealth_connector.cda.DataEnterer;
 import org.ehealth_connector.cda.Section;
 import org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
-import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Name;
-import org.ehealth_connector.common.Organization;
-import org.ehealth_connector.common.Patient;
-import org.ehealth_connector.common.Person;
 import org.ehealth_connector.common.ch.enums.ConfidentialityCode;
-import org.ehealth_connector.common.enums.AdministrativeGender;
-import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.enums.ParticipantType;
+import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.Name;
+import org.ehealth_connector.common.mdht.Organization;
+import org.ehealth_connector.common.mdht.Patient;
+import org.ehealth_connector.common.mdht.Person;
+import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.enums.ParticipantType;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.junit.Test;
@@ -55,9 +55,9 @@ public class CdaChV2StructuredBodyTest {
 	 * Test method for
 	 * {@link org.ehealth_connector.cda.AbstractCda#addAuthenticator(org.openhealthtools.mdht.uml.cda.Authenticator)}
 	 * and {@link org.ehealth_connector.cda.AbstractCda#getAuthenticators()} and
-	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#addAuthenticator(org.ehealth_connector.common.Author)}
+	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#addAuthenticator(org.ehealth_connector.common.mdht.Author)}
 	 * and
-	 * {@link org.ehealth_connector.cda.AbstractCda#addAuthenticator(org.ehealth_connector.common.Person, java.util.Date)}
+	 * {@link org.ehealth_connector.cda.AbstractCda#addAuthenticator(org.ehealth_connector.common.mdht.Person, java.util.Date)}
 	 * and
 	 * {@link org.ehealth_connector.cda.AbstractCda#getAuthenticatorsAsAuthor()}.
 	 *
@@ -86,7 +86,7 @@ public class CdaChV2StructuredBodyTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#addAuthor(org.ehealth_connector.common.Author)}
+	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#addAuthor(org.ehealth_connector.common.mdht.Author)}
 	 * and {@link org.ehealth_connector.cda.AbstractCda#getAuthor()} and
 	 * {@link org.ehealth_connector.cda.AbstractCda#getAuthors()}.
 	 */
@@ -129,7 +129,7 @@ public class CdaChV2StructuredBodyTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.AbstractCda#addEmployer(org.ehealth_connector.common.Organization, org.ehealth_connector.common.Identificator)}
+	 * {@link org.ehealth_connector.cda.AbstractCda#addEmployer(org.ehealth_connector.common.mdht.Organization, org.ehealth_connector.common.mdht.Identificator)}
 	 * and {@link org.ehealth_connector.cda.AbstractCda#getEmployers()}.
 	 */
 	@Test
@@ -154,7 +154,7 @@ public class CdaChV2StructuredBodyTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.AbstractCda#addInFulfillmentOfOrder(org.ehealth_connector.common.Identificator)}
+	 * {@link org.ehealth_connector.cda.AbstractCda#addInFulfillmentOfOrder(org.ehealth_connector.common.mdht.Identificator)}
 	 * and
 	 * {@link org.ehealth_connector.cda.AbstractCda#getInFulfillmentOfOrders()}.
 	 */
@@ -179,7 +179,7 @@ public class CdaChV2StructuredBodyTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.AbstractCda#addInsurance(org.ehealth_connector.common.Organization, org.ehealth_connector.common.Identificator)}
+	 * {@link org.ehealth_connector.cda.AbstractCda#addInsurance(org.ehealth_connector.common.mdht.Organization, org.ehealth_connector.common.mdht.Identificator)}
 	 * and {@link org.ehealth_connector.cda.AbstractCda#getInsurances()} and
 	 * {@link org.ehealth_connector.cda.AbstractCda#getParticipants()}.
 	 */
@@ -205,7 +205,7 @@ public class CdaChV2StructuredBodyTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.AbstractCda#addOtherRecipient(org.ehealth_connector.common.Organization)}
+	 * {@link org.ehealth_connector.cda.AbstractCda#addOtherRecipient(org.ehealth_connector.common.mdht.Organization)}
 	 * and {@link org.ehealth_connector.cda.AbstractCda#getOtherRecipients()}.
 	 */
 	@Test
@@ -226,9 +226,9 @@ public class CdaChV2StructuredBodyTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.AbstractCda#addParticipant(org.ehealth_connector.common.Organization, org.ehealth_connector.common.Identificator, org.ehealth_connector.common.enums.ParticipantType)}
+	 * {@link org.ehealth_connector.cda.AbstractCda#addParticipant(org.ehealth_connector.common.mdht.Organization, org.ehealth_connector.common.mdht.Identificator, org.ehealth_connector.common.mdht.enums.ParticipantType)}
 	 * and
-	 * {@link org.ehealth_connector.cda.AbstractCda#addParticipant(org.ehealth_connector.common.Organization, org.ehealth_connector.common.Identificator, org.ehealth_connector.common.enums.ParticipantType, org.ehealth_connector.common.Code)}
+	 * {@link org.ehealth_connector.cda.AbstractCda#addParticipant(org.ehealth_connector.common.mdht.Organization, org.ehealth_connector.common.mdht.Identificator, org.ehealth_connector.common.mdht.enums.ParticipantType, org.ehealth_connector.common.mdht.Code)}
 	 * end TODO.
 	 */
 	@Test
@@ -277,7 +277,7 @@ public class CdaChV2StructuredBodyTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.MdhtFacade#addTemplateIdOnce(org.ehealth_connector.common.Identificator)}
+	 * {@link org.ehealth_connector.cda.MdhtFacade#addTemplateIdOnce(org.ehealth_connector.common.mdht.Identificator)}
 	 * and {@link org.ehealth_connector.cda.MdhtFacade#getTemplateIds()}.
 	 */
 	@Test
@@ -381,7 +381,7 @@ public class CdaChV2StructuredBodyTest {
 	 * and
 	 * {@link org.ehealth_connector.cda.AbstractCda#getConfidentialityCode()}
 	 * and
-	 * {@link org.ehealth_connector.cda.AbstractCda#setConfidentialityCode(org.ehealth_connector.common.enums.ConfidentialityCode)}.
+	 * {@link org.ehealth_connector.cda.AbstractCda#setConfidentialityCode(org.ehealth_connector.common.mdht.enums.ConfidentialityCode)}.
 	 */
 	@Test
 	public void testSetGetConfidentialityCode() {
@@ -395,7 +395,7 @@ public class CdaChV2StructuredBodyTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#setCustodian(org.ehealth_connector.common.Organization)}
+	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#setCustodian(org.ehealth_connector.common.mdht.Organization)}
 	 * and {@link org.ehealth_connector.cda.AbstractCda#getCustodian()} and
 	 * {@link org.ehealth_connector.cda.AbstractCda#getCustodianAsOrganization()}.
 	 */
@@ -415,7 +415,7 @@ public class CdaChV2StructuredBodyTest {
 	 * Test method for
 	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#setDataEnterer(org.ehealth_connector.cda.DataEnterer)}
 	 * and
-	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#setDataEnterer(org.ehealth_connector.common.Person)}
+	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#setDataEnterer(org.ehealth_connector.common.mdht.Person)}
 	 * and {@link org.ehealth_connector.cda.AbstractCda#getDataEnterer()} and
 	 * {@link org.ehealth_connector.cda.AbstractCda#getDataEntererPerson()}.
 	 */
@@ -432,7 +432,7 @@ public class CdaChV2StructuredBodyTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#setId(org.ehealth_connector.common.Identificator)}
+	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#setId(org.ehealth_connector.common.mdht.Identificator)}
 	 * and {@link org.ehealth_connector.cda.AbstractCda#getId()}.
 	 */
 	@Test
@@ -449,7 +449,7 @@ public class CdaChV2StructuredBodyTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.AbstractCda#setLanguageCode(org.ehealth_connector.common.enums.LanguageCode)}
+	 * {@link org.ehealth_connector.cda.AbstractCda#setLanguageCode(org.ehealth_connector.common.mdht.enums.LanguageCode)}
 	 * and {@link org.ehealth_connector.cda.AbstractCda#getLanguageCode()}.
 	 */
 	@Test
@@ -464,7 +464,7 @@ public class CdaChV2StructuredBodyTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#setLegalAuthenticator(org.ehealth_connector.common.Author)}
+	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#setLegalAuthenticator(org.ehealth_connector.common.mdht.Author)}
 	 * and {@link org.ehealth_connector.cda.AbstractCda#getLegalAuthenticator()}
 	 * and
 	 * {@link org.ehealth_connector.cda.AbstractCda#getLegalAuthenticatorAsAuthor()}.
@@ -481,7 +481,7 @@ public class CdaChV2StructuredBodyTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#setPatient(org.ehealth_connector.common.Patient)}
+	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#setPatient(org.ehealth_connector.common.mdht.Patient)}
 	 * and {@link org.ehealth_connector.cda.AbstractCda#getPatient()}.
 	 */
 	@Test
@@ -500,7 +500,7 @@ public class CdaChV2StructuredBodyTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#setPrimaryRecipient(org.ehealth_connector.common.Organization)}
+	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#setPrimaryRecipient(org.ehealth_connector.common.mdht.Organization)}
 	 * and {@link org.ehealth_connector.cda.AbstractCda#getPrimaryRecipient()}.
 	 */
 	@Test
@@ -518,7 +518,7 @@ public class CdaChV2StructuredBodyTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.AbstractCda#setSetId(org.ehealth_connector.common.Identificator)}
+	 * {@link org.ehealth_connector.cda.AbstractCda#setSetId(org.ehealth_connector.common.mdht.Identificator)}
 	 * and {@link org.ehealth_connector.cda.AbstractCda#getSetId()}.
 	 */
 	@Test

@@ -23,9 +23,9 @@ import static org.junit.Assert.assertTrue;
 import java.util.Date;
 import java.util.List;
 
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.junit.Test;
 
@@ -39,7 +39,7 @@ public class LaboratorySpecialtySectionTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.lab.lrep.LaboratorySpecialtySection#addLaboratoryBatteryOrganizer(org.ehealth_connector.common.Code, org.ehealth_connector.cda.ch.lab.lrep.LaboratoryBatteryOrganizer, org.ehealth_connector.common.enums.LanguageCode)}.
+	 * {@link org.ehealth_connector.cda.ch.lab.lrep.LaboratorySpecialtySection#addLaboratoryBatteryOrganizer(org.ehealth_connector.common.mdht.Code, org.ehealth_connector.cda.ch.lab.lrep.LaboratoryBatteryOrganizer, org.ehealth_connector.common.mdht.enums.LanguageCode)}.
 	 */
 	@Test
 	public void testAddGetLaboratoryBatteryOrganizer() {

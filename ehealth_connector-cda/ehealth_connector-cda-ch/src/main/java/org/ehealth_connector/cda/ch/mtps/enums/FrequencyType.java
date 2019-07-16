@@ -18,8 +18,8 @@
 
 package org.ehealth_connector.cda.ch.mtps.enums;
 
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 
 /**
  * The possible frequencies types. See MTPS 7.5.10 and CDA Time intervals.

@@ -23,7 +23,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ehealth_connector.common.Patient;
+import org.ehealth_connector.common.mdht.Patient;
 import org.ehealth_connector.communication.AffinityDomain;
 import org.ehealth_connector.communication.DocumentMetadata;
 import org.ehealth_connector.communication.SubmissionSetMetadata;
@@ -140,7 +140,7 @@ public class FhirXdTransaction {
 	 * @return eHC author object </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public org.ehealth_connector.common.Author getAuthor(DocumentManifest fhirObject) {
+	public org.ehealth_connector.common.mdht.Author getAuthor(DocumentManifest fhirObject) {
 		if (!fhirObject.getAuthor().isEmpty())
 			return FhirCommon.getAuthor(fhirObject.getAuthor().get(0));
 		else
@@ -156,7 +156,7 @@ public class FhirXdTransaction {
 	 * @return eHC author object </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public org.ehealth_connector.common.Author getAuthor(DocumentReference fhirObject) {
+	public org.ehealth_connector.common.mdht.Author getAuthor(DocumentReference fhirObject) {
 		if (!fhirObject.getAuthor().isEmpty())
 			return FhirCommon.getAuthor(fhirObject.getAuthor().get(0));
 		else

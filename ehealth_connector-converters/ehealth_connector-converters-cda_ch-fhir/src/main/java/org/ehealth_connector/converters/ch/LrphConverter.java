@@ -30,15 +30,15 @@ import org.ehealth_connector.cda.ch.lab.lrph.LaboratoryIsolateOrganizer;
 import org.ehealth_connector.cda.ch.lab.lrph.LaboratoryObservation;
 import org.ehealth_connector.cda.ch.lab.lrph.LaboratorySpecialtySection;
 import org.ehealth_connector.cda.ch.lab.lrph.OutbreakIdentificationObservation;
-import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.IntendedRecipient;
-import org.ehealth_connector.common.Value;
-import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.enums.ObservationInterpretation;
-import org.ehealth_connector.common.enums.StatusCode;
-import org.ehealth_connector.common.enums.Ucum;
+import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.IntendedRecipient;
+import org.ehealth_connector.common.mdht.Value;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
+import org.ehealth_connector.common.mdht.enums.StatusCode;
+import org.ehealth_connector.common.mdht.enums.Ucum;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.fhir.structures.ch.FhirCdaChLrph.DocTypeCode;
@@ -552,7 +552,7 @@ public class LrphConverter extends AbstractCdaChV12FhirConverter {
 
 		// ReferenceRange
 		if (!fhirObservation.getReferenceRange().isEmpty()) {
-			final org.ehealth_connector.common.ReferenceRange rr = new org.ehealth_connector.common.ReferenceRange();
+			final org.ehealth_connector.common.mdht.ReferenceRange rr = new org.ehealth_connector.common.mdht.ReferenceRange();
 			// Value
 			if ((fhirObservation.getReferenceRangeFirstRep().getLow().getUnit() != null)
 					&& (fhirObservation.getReferenceRangeFirstRep().getHigh().getUnit() != null)) {

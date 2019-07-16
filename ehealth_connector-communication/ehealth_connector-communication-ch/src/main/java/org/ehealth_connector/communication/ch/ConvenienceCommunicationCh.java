@@ -23,9 +23,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.ch.AuthorCh;
 import org.ehealth_connector.common.ch.enums.AuthorRole;
+import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.communication.AffinityDomain;
 import org.ehealth_connector.communication.AtnaConfig.AtnaConfigMode;

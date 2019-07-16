@@ -19,7 +19,7 @@
 package org.ehealth_connector.cda.ch.edes.enums;
 
 import org.ehealth_connector.cda.enums.ContentIdPrefix;
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.ch.CdaChEdesV1;
 import org.openhealthtools.mdht.uml.cda.ch.ChFactory;

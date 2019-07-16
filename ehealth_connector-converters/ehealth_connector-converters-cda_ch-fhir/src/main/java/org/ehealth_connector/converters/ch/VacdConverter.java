@@ -34,12 +34,12 @@ import org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation;
 import org.ehealth_connector.cda.ch.vacd.LaboratoryObservation;
 import org.ehealth_connector.cda.ch.vacd.MedicationTargetEntry;
 import org.ehealth_connector.cda.enums.MedicationsSpecialConditions;
-import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Value;
-import org.ehealth_connector.common.enums.ObservationInterpretation;
-import org.ehealth_connector.common.enums.Ucum;
+import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.Value;
+import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
+import org.ehealth_connector.common.mdht.enums.Ucum;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.fhir.structures.ch.FhirCdaChVacd.DocTypeCode;
@@ -186,9 +186,9 @@ public class VacdConverter extends AbstractCdaChV12FhirConverter {
 	 * @return eHC Author object </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public org.ehealth_connector.common.Author getAuthor(
+	public org.ehealth_connector.common.mdht.Author getAuthor(
 			MedicationStatement fhirMedicationStatement) {
-		org.ehealth_connector.common.Author retVal = null;
+		org.ehealth_connector.common.mdht.Author retVal = null;
 		for (final Reference ref : fhirMedicationStatement.getDerivedFrom()) {
 			final List<org.hl7.fhir.dstu3.model.Extension> extensions = ref
 					.getExtensionsByUrl(FhirCommon.urnUseAsAuthor);
@@ -247,7 +247,7 @@ public class VacdConverter extends AbstractCdaChV12FhirConverter {
 			if (!fhirMedi.getExtensionsByUrl(FhirCommon.urnUseAsIdentifier).isEmpty()) {
 				final Identifier id = (Identifier) fhirMedi
 						.getExtensionsByUrl(FhirCommon.urnUseAsIdentifier).get(0).getValue();
-				retVal.setManufacturedProductId(new org.ehealth_connector.common.Identificator(
+				retVal.setManufacturedProductId(new org.ehealth_connector.common.mdht.Identificator(
 						FhirCommon.removeUrnOidPrefix(id.getSystem()), id.getValue()));
 			}
 
@@ -723,7 +723,7 @@ public class VacdConverter extends AbstractCdaChV12FhirConverter {
 
 		// ReferenceRange
 		if (!fhirObservation.getReferenceRange().isEmpty()) {
-			final org.ehealth_connector.common.ReferenceRange rr = new org.ehealth_connector.common.ReferenceRange();
+			final org.ehealth_connector.common.mdht.ReferenceRange rr = new org.ehealth_connector.common.mdht.ReferenceRange();
 			// Value
 			if ((fhirObservation.getReferenceRangeFirstRep().getLow().getUnit() != null)
 					&& (fhirObservation.getReferenceRangeFirstRep().getHigh().getUnit() != null)) {

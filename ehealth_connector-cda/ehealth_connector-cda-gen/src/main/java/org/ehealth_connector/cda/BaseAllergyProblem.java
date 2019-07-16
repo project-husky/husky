@@ -26,13 +26,13 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.enums.AllergiesAndIntolerances;
 import org.ehealth_connector.cda.enums.VitalSignCodes;
 import org.ehealth_connector.cda.utils.CdaUtil;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Value;
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.IdentityDomain;
+import org.ehealth_connector.common.mdht.Value;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
-import org.ehealth_connector.common.IdentityDomain;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance;
 import org.openhealthtools.mdht.uml.cda.ihe.Comment;
@@ -114,7 +114,7 @@ public class BaseAllergyProblem {
 	 *            Problems</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public BaseAllergyProblem(AllergiesAndIntolerances kindOfAllergy,
-			org.ehealth_connector.common.Code problem, Date startOfProblem, Date endOfProblem) {
+			org.ehealth_connector.common.mdht.Code problem, Date startOfProblem, Date endOfProblem) {
 		this(kindOfAllergy, problem, startOfProblem, endOfProblem, null);
 
 	}
@@ -154,7 +154,7 @@ public class BaseAllergyProblem {
 	 *            generiert.</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public BaseAllergyProblem(AllergiesAndIntolerances kindOfAllergy,
-			org.ehealth_connector.common.Code problem, Date startOfProblem, Date endOfProblem,
+			org.ehealth_connector.common.mdht.Code problem, Date startOfProblem, Date endOfProblem,
 			Identificator internalProblemId) {
 		setAllergyProblem(IHEFactory.eINSTANCE.createAllergyIntolerance().init());
 		setNotOccured(false);
@@ -259,8 +259,8 @@ public class BaseAllergyProblem {
 	 *
 	 * @return das codedProblem Objekt
 	 */
-	public org.ehealth_connector.common.Code getCode() {
-		final org.ehealth_connector.common.Code code = new org.ehealth_connector.common.Code(
+	public org.ehealth_connector.common.mdht.Code getCode() {
+		final org.ehealth_connector.common.mdht.Code code = new org.ehealth_connector.common.mdht.Code(
 				getAllergyProblem().getCode());
 		return code;
 	}

@@ -19,9 +19,9 @@ package org.ehealth_connector.cda.ch.lab;
 
 import org.ehealth_connector.cda.MdhtObservationFacade;
 import org.ehealth_connector.cda.enums.NullFlavor;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Value;
-import org.ehealth_connector.common.enums.StatusCode;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Value;
+import org.ehealth_connector.common.mdht.enums.StatusCode;
 import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.BL;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;

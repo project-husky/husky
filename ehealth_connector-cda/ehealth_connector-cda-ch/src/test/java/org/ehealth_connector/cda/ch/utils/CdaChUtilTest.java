@@ -33,7 +33,7 @@ import org.ehealth_connector.cda.ch.lab.lrtp.CdaChLrtp;
 import org.ehealth_connector.cda.ch.vacd.CdaChVacd;
 import org.ehealth_connector.cda.ch.vacd.enums.SectionsVacd;
 import org.ehealth_connector.cda.utils.CdaUtilTest;
-import org.ehealth_connector.common.enums.CodeSystems;
+import org.ehealth_connector.common.mdht.enums.CodeSystems;
 import org.junit.Before;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
@@ -71,7 +71,7 @@ public class CdaChUtilTest extends CdaUtilTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.utils.CdaUtil#createUniqueIiFromString(org.ehealth_connector.common.Identificator)}
+	 * {@link org.ehealth_connector.cda.utils.CdaUtil#createUniqueIiFromString(org.ehealth_connector.common.mdht.Identificator)}
 	 * .
 	 */
 	@Test

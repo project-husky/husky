@@ -20,7 +20,7 @@ package org.ehealth_connector.cda.ch;
 
 import org.ehealth_connector.cda.AbstractConcern;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
-import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.mdht.Identificator;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
 /**
@@ -41,7 +41,7 @@ public class Concern extends AbstractConcern {
 	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.cda.AbstractConcern#addId(org.ehealth_connector.common.Identificator)
+	 * @see org.ehealth_connector.cda.AbstractConcern#addId(org.ehealth_connector.common.mdht.Identificator)
 	 */
 	@Override
 	public void addId(Identificator id) {

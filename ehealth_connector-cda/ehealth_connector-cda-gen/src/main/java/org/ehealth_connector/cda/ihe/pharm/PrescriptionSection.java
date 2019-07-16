@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.cda.MdhtFacade;
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 

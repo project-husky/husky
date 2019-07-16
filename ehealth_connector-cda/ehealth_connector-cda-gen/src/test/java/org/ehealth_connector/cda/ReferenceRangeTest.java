@@ -23,9 +23,9 @@ import static org.junit.Assert.assertTrue;
 import java.math.BigDecimal;
 
 import org.ehealth_connector.cda.testhelper.TestUtils;
-import org.ehealth_connector.common.ReferenceRange;
-import org.ehealth_connector.common.Value;
-import org.ehealth_connector.common.enums.ObservationInterpretation;
+import org.ehealth_connector.common.mdht.ReferenceRange;
+import org.ehealth_connector.common.mdht.Value;
+import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
 import org.junit.Test;
 
 public class ReferenceRangeTest extends TestUtils {

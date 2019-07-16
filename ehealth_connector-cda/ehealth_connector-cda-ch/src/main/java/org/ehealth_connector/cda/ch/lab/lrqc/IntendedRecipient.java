@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.QualabQcc;
-import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.mdht.Identificator;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -33,7 +33,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
  * Quality Control Center (QKZ)</div> <div class="de">Als Empfänger MUSS das QKZ
  * deklariert werden.</div>
  */
-public class IntendedRecipient extends org.ehealth_connector.common.IntendedRecipient {
+public class IntendedRecipient extends org.ehealth_connector.common.mdht.IntendedRecipient {
 
 	/**
 	 * Instantiates a new intended recipient.

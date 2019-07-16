@@ -20,8 +20,8 @@ package org.ehealth_connector.cda;
 import java.util.Date;
 
 import org.ehealth_connector.cda.enums.AllergiesAndIntolerances;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Identificator;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance;
 
 /**

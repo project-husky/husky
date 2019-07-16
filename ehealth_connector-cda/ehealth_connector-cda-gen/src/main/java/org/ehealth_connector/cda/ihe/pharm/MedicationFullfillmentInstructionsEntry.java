@@ -19,7 +19,7 @@
 package org.ehealth_connector.cda.ihe.pharm;
 
 import org.ehealth_connector.cda.MdhtEntryActFacade;
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.MedicationFullfillmentInstructions;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;

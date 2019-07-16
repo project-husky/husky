@@ -21,8 +21,8 @@ import java.util.Date;
 
 import org.ehealth_connector.cda.ch.enums.StandardCdaBodySelections;
 import org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListSnomed;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.enums.ObservationInterpretation;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
 
 /**
  * The Class LaboratoryObservation. <div class="en">Each laboratory observation

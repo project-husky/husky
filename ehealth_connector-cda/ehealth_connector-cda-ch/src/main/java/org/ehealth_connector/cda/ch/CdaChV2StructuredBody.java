@@ -31,13 +31,13 @@ import org.ehealth_connector.cda.ObservationMediaEntry;
 import org.ehealth_connector.cda.ch.textbuilder.ObservationChTextBuilder;
 import org.ehealth_connector.cda.ihe.lab.BaseLaboratorySpecialtySection;
 import org.ehealth_connector.cda.utils.CdaUtil;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Organization;
-import org.ehealth_connector.common.Patient;
-import org.ehealth_connector.common.Person;
 import org.ehealth_connector.common.ch.enums.ConfidentialityCode;
-import org.ehealth_connector.common.enums.CountryCode;
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.Organization;
+import org.ehealth_connector.common.mdht.Patient;
+import org.ehealth_connector.common.mdht.Person;
+import org.ehealth_connector.common.mdht.enums.CountryCode;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.AssignedEntity;
@@ -149,7 +149,7 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	 *            the author
 	 */
 	@Override
-	public void addAuthenticator(org.ehealth_connector.common.Author author) {
+	public void addAuthenticator(org.ehealth_connector.common.mdht.Author author) {
 		Authenticator authenticator = Util.createAuthenticatorFromAuthor(author);
 		authenticator.setTime(EcoreUtil.copy(author.getAuthorMdht().getTime()));
 		CdaUtil.addTemplateIdOnce(authenticator, new Identificator("2.16.756.5.30.1.1.10.2.6"));
@@ -165,7 +165,7 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	 * @return the author
 	 */
 	@Override
-	public Author addAuthor(org.ehealth_connector.common.Author author) {
+	public Author addAuthor(org.ehealth_connector.common.mdht.Author author) {
 		final Author docAuthor = author.copyMdhtAuthor();
 		CdaUtil.addTemplateIdOnce(docAuthor, new Identificator("2.16.756.5.30.1.1.10.9.23"));
 		getDoc().getAuthors().add(docAuthor);
@@ -469,7 +469,7 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	 *            <div class="de">rechtsgültiger Unterzeichner</div>
 	 */
 	@Override
-	public void setLegalAuthenticator(org.ehealth_connector.common.Author legalAuthenticator) {
+	public void setLegalAuthenticator(org.ehealth_connector.common.mdht.Author legalAuthenticator) {
 		getDoc().setLegalAuthenticator(Util.createLegalAuthenticatorFromAuthor(legalAuthenticator));
 		getDoc().getLegalAuthenticator()
 				.setTime(EcoreUtil.copy(legalAuthenticator.getAuthorMdht().getTime()));

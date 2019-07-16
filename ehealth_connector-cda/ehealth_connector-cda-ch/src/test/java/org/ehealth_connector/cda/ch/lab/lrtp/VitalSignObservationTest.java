@@ -25,8 +25,8 @@ import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationForVitalSign;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.VitalSignList;
 import org.ehealth_connector.cda.testhelper.TestUtils;
-import org.ehealth_connector.common.Value;
-import org.ehealth_connector.common.enums.Ucum;
+import org.ehealth_connector.common.mdht.Value;
+import org.ehealth_connector.common.mdht.enums.Ucum;
 import org.junit.Test;
 
 public class VitalSignObservationTest extends TestUtils {

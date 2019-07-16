@@ -22,10 +22,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.ihe.lab.LaboratoryBatteryOrganizer;
-import org.ehealth_connector.common.Organization;
-import org.ehealth_connector.common.Participant;
-import org.ehealth_connector.common.Specimen;
-import org.ehealth_connector.common.enums.StatusCode;
+import org.ehealth_connector.common.mdht.Organization;
+import org.ehealth_connector.common.mdht.Participant;
+import org.ehealth_connector.common.mdht.Specimen;
+import org.ehealth_connector.common.mdht.enums.StatusCode;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Organizer;
 import org.openhealthtools.mdht.uml.cda.Participant2;

@@ -30,11 +30,11 @@ import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport;
 import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.cda.utils.CdaUtil;
-import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.IntendedRecipient;
-import org.ehealth_connector.common.enums.CountryCode;
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.IntendedRecipient;
+import org.ehealth_connector.common.mdht.enums.CountryCode;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Patient;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
@@ -97,7 +97,7 @@ public class CdaChLrph
 	 */
 	public CdaChLrph(LanguageCode languageCode, Author author,
 			ReferralOrderingPhysician refOrderingPhysician,
-			org.ehealth_connector.common.Patient patient, IntendedRecipient recipient) {
+			org.ehealth_connector.common.mdht.Patient patient, IntendedRecipient recipient) {
 		this(languageCode);
 		setPatient(patient);
 		setEmtpyCustodian();
@@ -149,7 +149,7 @@ public class CdaChLrph
 	 */
 	public CdaChLrph(LanguageCode languageCode, String styleSheet, String css, Author author,
 			ReferralOrderingPhysician refOrderingPhysician,
-			org.ehealth_connector.common.Patient patient, IntendedRecipient recipient) {
+			org.ehealth_connector.common.mdht.Patient patient, IntendedRecipient recipient) {
 		this(languageCode, styleSheet, css);
 		setPatient(patient);
 		setEmtpyCustodian();

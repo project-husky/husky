@@ -18,7 +18,7 @@
 package org.ehealth_connector.cda.ch.enums;
 
 import org.apache.commons.lang3.EnumUtils;
-import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.mdht.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 

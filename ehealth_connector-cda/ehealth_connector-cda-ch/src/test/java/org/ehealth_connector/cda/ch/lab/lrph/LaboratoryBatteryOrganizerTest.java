@@ -26,7 +26,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.ehealth_connector.cda.testhelper.TestUtils;
-import org.ehealth_connector.common.enums.StatusCode;
+import org.ehealth_connector.common.mdht.enums.StatusCode;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;

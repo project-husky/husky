@@ -29,8 +29,8 @@ import java.util.HashMap;
 import java.util.zip.ZipFile;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.enums.EhcVersions;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.enums.EhcVersions;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;

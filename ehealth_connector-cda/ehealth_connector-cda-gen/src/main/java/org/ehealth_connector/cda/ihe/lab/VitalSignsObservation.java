@@ -21,8 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.cda.MdhtObservationFacade;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Value;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.VitalSignObservation;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
@@ -65,7 +65,7 @@ public class VitalSignsObservation
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.cda.MdhtObservationFacade#addValue(org.ehealth_connector.common.Value)
+	 * @see org.ehealth_connector.cda.MdhtObservationFacade#addValue(org.ehealth_connector.common.mdht.Value)
 	 */
 	@Override
 	public void addValue(Value value) {

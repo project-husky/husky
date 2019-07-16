@@ -19,7 +19,7 @@ package org.ehealth_connector.cda.ch.vacd.enums;
 
 import java.util.Arrays;
 
-import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.mdht.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 

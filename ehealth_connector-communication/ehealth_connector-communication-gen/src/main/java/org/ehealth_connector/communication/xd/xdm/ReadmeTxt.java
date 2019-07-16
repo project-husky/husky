@@ -22,8 +22,8 @@ import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.Date;
 
-import org.ehealth_connector.common.VendorInformation;
-import org.ehealth_connector.common.enums.EhcVersions;
+import org.ehealth_connector.common.mdht.VendorInformation;
+import org.ehealth_connector.common.mdht.enums.EhcVersions;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

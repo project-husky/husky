@@ -25,11 +25,11 @@ import static org.junit.Assert.assertTrue;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.ehealth_connector.cda.testhelper.TestUtils;
-import org.ehealth_connector.common.Organization;
-import org.ehealth_connector.common.Participant;
-import org.ehealth_connector.common.ParticipantRole;
-import org.ehealth_connector.common.PlayingEntity;
-import org.ehealth_connector.common.Specimen;
+import org.ehealth_connector.common.mdht.Organization;
+import org.ehealth_connector.common.mdht.Participant;
+import org.ehealth_connector.common.mdht.ParticipantRole;
+import org.ehealth_connector.common.mdht.PlayingEntity;
+import org.ehealth_connector.common.mdht.Specimen;
 import org.junit.Test;
 import org.w3c.dom.Document;
 

@@ -17,8 +17,8 @@
  */
 package org.ehealth_connector.communication.xd.storedquery;
 
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.ehealth_connector.communication.utils.XdsUtil;
 import org.openhealthtools.ihe.common.hl7v2.XCN;

@@ -23,7 +23,7 @@ import java.util.List;
 import org.ehealth_connector.cda.AssociatedEntity;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ch.lab.lrqc.CdaChLrqc;
-import org.ehealth_connector.common.enums.CodeSystems;
+import org.ehealth_connector.common.mdht.enums.CodeSystems;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Participant1;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;

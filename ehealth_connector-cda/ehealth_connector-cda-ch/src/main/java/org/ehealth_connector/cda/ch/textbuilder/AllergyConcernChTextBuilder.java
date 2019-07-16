@@ -27,8 +27,8 @@ import org.ehealth_connector.cda.BaseAllergyProblem;
 import org.ehealth_connector.cda.BaseAllergyProblemComparator;
 import org.ehealth_connector.cda.enums.ContentIdPrefix;
 import org.ehealth_connector.cda.textbuilder.AllergyConcernTextBuilder;
-import org.ehealth_connector.common.Value;
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.Value;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 
 /**

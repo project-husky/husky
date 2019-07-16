@@ -20,7 +20,7 @@ package org.ehealth_connector.cda.ch;
 
 import org.ehealth_connector.cda.AbstractCodedResults;
 import org.ehealth_connector.cda.utils.CdaUtil;
-import org.ehealth_connector.common.enums.StatusCode;
+import org.ehealth_connector.common.mdht.enums.StatusCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ch.ChFactory;

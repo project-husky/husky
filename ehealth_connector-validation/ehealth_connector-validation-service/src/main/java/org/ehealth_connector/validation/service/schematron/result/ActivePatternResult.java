@@ -25,7 +25,7 @@ import java.util.List;
 
 import javax.xml.bind.JAXBElement;
 
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.ehealth_connector.validation.service.schematron.bind.ActivePattern;
 import org.ehealth_connector.validation.service.schematron.bind.FailedAssert;
 import org.ehealth_connector.validation.service.schematron.bind.FiredRule;

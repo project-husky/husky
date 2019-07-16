@@ -19,8 +19,8 @@ package org.ehealth_connector.cda.ch.lab.lrep;
 import java.util.Date;
 
 import org.ehealth_connector.cda.utils.CdaUtil;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Participant;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.Participant;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection;
 
 /**

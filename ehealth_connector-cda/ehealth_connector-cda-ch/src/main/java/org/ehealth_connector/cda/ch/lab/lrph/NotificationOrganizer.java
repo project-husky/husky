@@ -17,7 +17,7 @@
  */
 package org.ehealth_connector.cda.ch.lab.lrph;
 
-import org.ehealth_connector.common.enums.StatusCode;
+import org.ehealth_connector.common.mdht.enums.StatusCode;
 
 /**
  * The Class NotificationOrganizer. <div class="en">A specimen act MAY contain

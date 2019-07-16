@@ -24,8 +24,8 @@ import java.util.List;
 
 import org.ehealth_connector.cda.ihe.lab.LaboratoryObservation;
 import org.ehealth_connector.cda.ihe.lab.LaboratoryObservationComparator;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;

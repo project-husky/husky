@@ -21,7 +21,7 @@ package org.ehealth_connector.fhir.structures.ch;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ehealth_connector.common.enums.CodeSystems;
+import org.ehealth_connector.common.mdht.enums.CodeSystems;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.hl7.fhir.dstu3.model.Basic;
 import org.hl7.fhir.dstu3.model.Coding;

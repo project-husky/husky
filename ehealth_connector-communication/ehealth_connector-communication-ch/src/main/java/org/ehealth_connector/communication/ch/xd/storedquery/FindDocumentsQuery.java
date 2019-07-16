@@ -17,8 +17,8 @@
  */
 package org.ehealth_connector.communication.ch.xd.storedquery;
 
-import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.ch.enums.ConfidentialityCode;
+import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.ehealth_connector.communication.ch.enums.AvailabilityStatus;
 import org.ehealth_connector.communication.ch.enums.HealthcareFacilityTypeCode;

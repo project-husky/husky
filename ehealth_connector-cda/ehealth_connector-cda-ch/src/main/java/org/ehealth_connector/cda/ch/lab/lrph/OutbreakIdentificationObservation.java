@@ -18,7 +18,7 @@
 package org.ehealth_connector.cda.ch.lab.lrph;
 
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
-import org.ehealth_connector.common.enums.StatusCode;
+import org.ehealth_connector.common.mdht.enums.StatusCode;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.OutbreakIdentification;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;

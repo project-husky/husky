@@ -18,8 +18,8 @@
 
 package org.ehealth_connector.cda.ihe.pharm.enums;
 
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 
 /**
  * The Enum SeverityObservation HL7 ObservationValue (OID

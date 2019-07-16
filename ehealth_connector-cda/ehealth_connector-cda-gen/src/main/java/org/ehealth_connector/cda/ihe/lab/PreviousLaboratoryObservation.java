@@ -19,8 +19,8 @@ package org.ehealth_connector.cda.ihe.lab;
 import java.util.Date;
 
 import org.ehealth_connector.cda.MdhtObservationFacade;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Value;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 
 /**

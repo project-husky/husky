@@ -18,7 +18,7 @@
 
 package org.ehealth_connector.cda.ihe.pharm.enums;
 
-import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.mdht.Code;
 
 /**
  * The Enum OrderableDrugFrom MaterialForm (OID 2.16.840.1.113883.5.85)

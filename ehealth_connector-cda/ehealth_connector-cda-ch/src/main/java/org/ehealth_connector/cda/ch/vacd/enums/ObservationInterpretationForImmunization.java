@@ -17,8 +17,8 @@
  */
 package org.ehealth_connector.cda.ch.vacd.enums;
 
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.enums.ObservationInterpretation;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 
 /*

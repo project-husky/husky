@@ -22,7 +22,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.ehealth_connector.cda.testhelper.TestUtils;
-import org.ehealth_connector.common.Person;
+import org.ehealth_connector.common.mdht.Person;
 import org.junit.Test;
 
 public class AssociatedEntityTest extends TestUtils {

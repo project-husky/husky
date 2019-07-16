@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.communication.AffinityDomain;
 import org.ehealth_connector.communication.ConvenienceMasterPatientIndexV3;

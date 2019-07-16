@@ -23,8 +23,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;
 import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;

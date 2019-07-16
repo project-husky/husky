@@ -48,20 +48,20 @@ import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.cda.ihe.lab.SpecimenAct;
 import org.ehealth_connector.cda.ihe.lab.SpecimenReceivedEntry;
 import org.ehealth_connector.cda.ihe.lab.VitalSignsOrganizer;
-import org.ehealth_connector.common.Address;
-import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.IntendedRecipient;
-import org.ehealth_connector.common.Name;
-import org.ehealth_connector.common.Telecoms;
-import org.ehealth_connector.common.Value;
-import org.ehealth_connector.common.enums.CodeSystems;
-import org.ehealth_connector.common.enums.ConfidentialityCode;
-import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.enums.ObservationInterpretation;
-import org.ehealth_connector.common.enums.StatusCode;
-import org.ehealth_connector.common.enums.Ucum;
+import org.ehealth_connector.common.mdht.Address;
+import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.IntendedRecipient;
+import org.ehealth_connector.common.mdht.Name;
+import org.ehealth_connector.common.mdht.Telecoms;
+import org.ehealth_connector.common.mdht.Value;
+import org.ehealth_connector.common.mdht.enums.CodeSystems;
+import org.ehealth_connector.common.mdht.enums.ConfidentialityCode;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
+import org.ehealth_connector.common.mdht.enums.StatusCode;
+import org.ehealth_connector.common.mdht.enums.Ucum;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
@@ -323,12 +323,12 @@ public abstract class AbstractCdaChV12FhirConverter {
 	 * @return list of eHC Authors </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public List<org.ehealth_connector.common.Author> getAuthors(DocumentManifest docManifest) {
-		final List<org.ehealth_connector.common.Author> retVal = new ArrayList<>();
+	public List<org.ehealth_connector.common.mdht.Author> getAuthors(DocumentManifest docManifest) {
+		final List<org.ehealth_connector.common.mdht.Author> retVal = new ArrayList<>();
 		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
 			final List<Extension> extensions = entry.getExtensionsByUrl(FhirCommon.urnUseAsAuthor);
 			if (!extensions.isEmpty()) {
-				org.ehealth_connector.common.Author author = null;
+				org.ehealth_connector.common.mdht.Author author = null;
 				Reference ref = null;
 				try {
 					ref = entry.getPReference();
@@ -479,7 +479,7 @@ public abstract class AbstractCdaChV12FhirConverter {
 									.getExtensionsByUrl(FhirCommon.urnUseAsAuthor);
 							if (!extensions2.isEmpty()
 									&& (listEntry.getItem().getResource() instanceof Person)) {
-								final org.ehealth_connector.common.Author author = FhirCommon
+								final org.ehealth_connector.common.mdht.Author author = FhirCommon
 										.getAuthor((Person) listEntry.getItem().getResource());
 								final TimeType timeStamp2 = ((TimeType) extensions2.get(0)
 										.getValue());
@@ -655,8 +655,8 @@ public abstract class AbstractCdaChV12FhirConverter {
 	 *            the FHIR resource
 	 * @return eHC Custodian</div> <div class="de"></div> <div class="fr"></div>
 	 */
-	public org.ehealth_connector.common.Organization getCustodian(DocumentManifest docManifest) {
-		org.ehealth_connector.common.Organization retVal = null;
+	public org.ehealth_connector.common.mdht.Organization getCustodian(DocumentManifest docManifest) {
+		org.ehealth_connector.common.mdht.Organization retVal = null;
 
 		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
 			if (!entry.getExtensionsByUrl(FhirCommon.urnUseAsCustodian).isEmpty()) {
@@ -964,7 +964,7 @@ public abstract class AbstractCdaChV12FhirConverter {
 				}
 				if (ref != null) {
 					final Organization physician = (Organization) ref.getResource();
-					final org.ehealth_connector.common.Organization o = FhirCommon
+					final org.ehealth_connector.common.mdht.Organization o = FhirCommon
 							.getOrganization(physician);
 					retVal = new IntendedRecipient(o);
 				}
@@ -1273,7 +1273,7 @@ public abstract class AbstractCdaChV12FhirConverter {
 
 		// ReferenceRange
 		if (!fhirObservation.getReferenceRange().isEmpty()) {
-			final org.ehealth_connector.common.ReferenceRange rr = new org.ehealth_connector.common.ReferenceRange();
+			final org.ehealth_connector.common.mdht.ReferenceRange rr = new org.ehealth_connector.common.mdht.ReferenceRange();
 			// Value
 			if ((fhirObservation.getReferenceRangeFirstRep().getLow().getUnit() != null)
 					&& (fhirObservation.getReferenceRangeFirstRep().getHigh().getUnit() != null)) {
@@ -1428,8 +1428,8 @@ public abstract class AbstractCdaChV12FhirConverter {
 	 *            the FHIR resource
 	 * @return eHC Author object containing the legal authenticator
 	 */
-	public org.ehealth_connector.common.Author getLegalAuthenticator(DocumentManifest docManifest) {
-		org.ehealth_connector.common.Author retVal = null;
+	public org.ehealth_connector.common.mdht.Author getLegalAuthenticator(DocumentManifest docManifest) {
+		org.ehealth_connector.common.mdht.Author retVal = null;
 		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
 			final List<org.hl7.fhir.dstu3.model.Extension> extensions = entry
 					.getExtensionsByUrl(FhirCommon.urnUseAsLegalAuthenticator);
@@ -1615,9 +1615,9 @@ public abstract class AbstractCdaChV12FhirConverter {
 	 *            the FHIR resource
 	 * @return eHC Author object containing the performer
 	 */
-	public org.ehealth_connector.common.Author getPerformer(
+	public org.ehealth_connector.common.mdht.Author getPerformer(
 			MedicationStatement fhirMedicationStatement) {
-		org.ehealth_connector.common.Author retVal = null;
+		org.ehealth_connector.common.mdht.Author retVal = null;
 		for (final Reference ref : fhirMedicationStatement.getDerivedFrom()) {
 			final List<org.hl7.fhir.dstu3.model.Extension> extensions = ref
 					.getExtensionsByUrl(FhirCommon.urnUseAsPerformer);

@@ -21,11 +21,11 @@ import java.util.Date;
 
 import org.ehealth_connector.cda.ihe.lab.SpecimenReceivedEntry;
 import org.ehealth_connector.cda.utils.CdaUtil;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Participant;
-import org.ehealth_connector.common.ParticipantRole;
-import org.ehealth_connector.common.PlayingEntity;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.Participant;
+import org.ehealth_connector.common.mdht.ParticipantRole;
+import org.ehealth_connector.common.mdht.PlayingEntity;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection;
@@ -244,7 +244,7 @@ public class SpecimenCollectionEntry
 			code = new Code(cd);
 			code.setOriginalText(originalText, textReference);
 		} else {
-			code = new Code(org.ehealth_connector.common.enums.NullFlavor.ASKED_BUT_UNKNOWN);
+			code = new Code(org.ehealth_connector.common.mdht.enums.NullFlavor.ASKED_BUT_UNKNOWN);
 			code.setOriginalText(originalText, textReference);
 			this.getMdht().getApproachSiteCodes().add(code.getCD());
 		}

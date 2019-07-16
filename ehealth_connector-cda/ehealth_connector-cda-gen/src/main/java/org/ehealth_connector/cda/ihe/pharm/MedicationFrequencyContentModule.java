@@ -20,8 +20,8 @@ package org.ehealth_connector.cda.ihe.pharm;
 
 import org.eclipse.emf.common.util.EList;
 import org.ehealth_connector.cda.ihe.pharm.enums.TimingEvent;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.enums.Ucum;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.enums.Ucum;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.EIVL_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.EIVL_event;

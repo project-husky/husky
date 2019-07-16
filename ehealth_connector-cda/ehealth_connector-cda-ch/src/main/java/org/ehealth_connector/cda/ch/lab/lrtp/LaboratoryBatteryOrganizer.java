@@ -25,7 +25,7 @@ import java.util.List;
 import org.ehealth_connector.cda.BaseObservation;
 import org.ehealth_connector.cda.BaseObservationComparator;
 import org.ehealth_connector.cda.ihe.lab.BaseLaboratoryBatteryOrganizer;
-import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.mdht.Author;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 

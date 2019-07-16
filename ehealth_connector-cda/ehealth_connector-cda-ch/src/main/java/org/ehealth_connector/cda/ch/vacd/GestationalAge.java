@@ -21,7 +21,7 @@ package org.ehealth_connector.cda.ch.vacd;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.CodedResults;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
-import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 import org.openhealthtools.mdht.uml.cda.ch.CodedResultsSection;

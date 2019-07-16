@@ -23,11 +23,11 @@ import static org.junit.Assert.assertTrue;
 import java.util.Date;
 import java.util.Map;
 
-import org.ehealth_connector.common.Name;
-import org.ehealth_connector.common.Patient;
-import org.ehealth_connector.common.enums.CountryCode;
-import org.ehealth_connector.common.enums.PostalAddressUse;
-import org.ehealth_connector.common.enums.TelecomAddressUse;
+import org.ehealth_connector.common.mdht.Name;
+import org.ehealth_connector.common.mdht.Patient;
+import org.ehealth_connector.common.mdht.enums.CountryCode;
+import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
+import org.ehealth_connector.common.mdht.enums.TelecomAddressUse;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
@@ -70,13 +70,13 @@ public class FhirPatientTest {
 
 	private Patient getPatient(TestPatient patientMueller) {
 		final Name name = new Name(patientMueller.given, patientMueller.family);
-		org.ehealth_connector.common.enums.AdministrativeGender gender;
+		org.ehealth_connector.common.mdht.enums.AdministrativeGender gender;
 		if ("male".equals(patientMueller.gender.toLowerCase())) {
-			gender = org.ehealth_connector.common.enums.AdministrativeGender.MALE;
+			gender = org.ehealth_connector.common.mdht.enums.AdministrativeGender.MALE;
 		} else if ("female".equals(patientMueller.gender.toLowerCase())) {
-			gender = org.ehealth_connector.common.enums.AdministrativeGender.FEMALE;
+			gender = org.ehealth_connector.common.mdht.enums.AdministrativeGender.FEMALE;
 		} else {
-			gender = org.ehealth_connector.common.enums.AdministrativeGender.UNDIFFERENTIATED;
+			gender = org.ehealth_connector.common.mdht.enums.AdministrativeGender.UNDIFFERENTIATED;
 		}
 		final Patient conveniencePatient = new Patient(name, gender, patientMueller.getBirthDate());
 		return conveniencePatient;
@@ -429,10 +429,10 @@ public class FhirPatientTest {
 	@Test
 	public void testFhirPatientAddress() {
 		final Name name = new Name("given", "family", "prefix", "suffix");
-		final org.ehealth_connector.common.Patient conveniencePatient = new org.ehealth_connector.common.Patient(
-				name, org.ehealth_connector.common.enums.AdministrativeGender.MALE, new Date());
+		final org.ehealth_connector.common.mdht.Patient conveniencePatient = new org.ehealth_connector.common.mdht.Patient(
+				name, org.ehealth_connector.common.mdht.enums.AdministrativeGender.MALE, new Date());
 
-		final org.ehealth_connector.common.Address address = new org.ehealth_connector.common.Address(
+		final org.ehealth_connector.common.mdht.Address address = new org.ehealth_connector.common.mdht.Address(
 				"addressline1", "addressline2", "addressline3", "zip", "city",
 				PostalAddressUse.PRIVATE);
 
@@ -484,7 +484,7 @@ public class FhirPatientTest {
 		name.getMdhtPn().addPrefix("prefix2");
 		name.getMdhtPn().addSuffix("suffix2");
 		final Patient conveniencePatient = new Patient(name,
-				org.ehealth_connector.common.enums.AdministrativeGender.MALE, new Date());
+				org.ehealth_connector.common.mdht.enums.AdministrativeGender.MALE, new Date());
 		final FhirPatient fhirPatient = new FhirPatient(conveniencePatient);
 		assertEquals("given middle", fhirPatient.getNameFirstRep().getGivenAsSingleString());
 
@@ -500,7 +500,7 @@ public class FhirPatientTest {
 	public void testFhirPatientNames() {
 		final Name name = new Name("given", "family", "prefix", "suffix");
 		final Patient conveniencePatient = new Patient(name,
-				org.ehealth_connector.common.enums.AdministrativeGender.MALE, new Date());
+				org.ehealth_connector.common.mdht.enums.AdministrativeGender.MALE, new Date());
 		final FhirPatient fhirPatient = new FhirPatient(conveniencePatient);
 		assertEquals("given", fhirPatient.getNameFirstRep().getGivenAsSingleString());
 		assertEquals("family", fhirPatient.getNameFirstRep().getFamily());

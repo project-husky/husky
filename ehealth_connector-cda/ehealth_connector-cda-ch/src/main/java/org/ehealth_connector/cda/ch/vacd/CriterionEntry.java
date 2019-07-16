@@ -20,9 +20,9 @@ package org.ehealth_connector.cda.ch.vacd;
 
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdRecCategories;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Criterion;
 import org.openhealthtools.mdht.uml.cda.ch.ChFactory;

@@ -24,8 +24,8 @@ import java.util.List;
 
 import org.ehealth_connector.cda.enums.ProblemType;
 import org.ehealth_connector.cda.enums.ProblemsSpecialConditions;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;

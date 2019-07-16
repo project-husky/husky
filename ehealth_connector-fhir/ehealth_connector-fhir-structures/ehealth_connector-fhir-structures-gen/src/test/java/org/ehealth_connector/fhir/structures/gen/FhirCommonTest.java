@@ -24,8 +24,8 @@ import static org.junit.Assert.fail;
 
 import java.util.UUID;
 
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Identificator;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Identifier;
@@ -154,7 +154,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#createIdentifier(org.ehealth_connector.common.Identificator)}.
+	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#createIdentifier(org.ehealth_connector.common.mdht.Identificator)}.
 	 */
 	@Test
 	public void testCreateIdentifierIdentificator() {
@@ -198,7 +198,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#ehcCodeToFhirCode(org.ehealth_connector.common.Code)}.
+	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#ehcCodeToFhirCode(org.ehealth_connector.common.mdht.Code)}.
 	 */
 	@Test
 	public void testEhcCodeToFhirCode() {
@@ -300,7 +300,7 @@ public class FhirCommonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getCommunityPatientId(org.ehealth_connector.common.Patient, java.lang.String)}.
+	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getCommunityPatientId(org.ehealth_connector.common.mdht.Patient, java.lang.String)}.
 	 */
 	@Test
 	@Ignore

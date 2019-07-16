@@ -23,13 +23,13 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.CdaChV2StructuredBody;
 import org.ehealth_connector.cda.utils.CdaUtil;
-import org.ehealth_connector.common.Address;
-import org.ehealth_connector.common.Code;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Organization;
-import org.ehealth_connector.common.Patient;
-import org.ehealth_connector.common.enums.CodeSystems;
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.Address;
+import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.Organization;
+import org.ehealth_connector.common.mdht.Patient;
+import org.ehealth_connector.common.mdht.enums.CodeSystems;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.Author;
 import org.openhealthtools.mdht.uml.cda.Custodian;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
@@ -115,7 +115,7 @@ public class CdaChLrepV1GeneralReport extends
 	 * @return the author
 	 */
 	@Override
-	public Author addAuthor(org.ehealth_connector.common.Author author) {
+	public Author addAuthor(org.ehealth_connector.common.mdht.Author author) {
 		Author mdht = super.addAuthor(author);
 		CdaUtil.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.2.59"));
 		return mdht;
@@ -249,7 +249,7 @@ public class CdaChLrepV1GeneralReport extends
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.cda.ch.CdaChV2StructuredBody#setPrimaryRecipient(
-	 *      org.ehealth_connector.common.Organization)
+	 *      org.ehealth_connector.common.mdht.Organization)
 	 */
 	@Override
 	public InformationRecipient setPrimaryRecipient(Organization recipient) {

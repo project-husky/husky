@@ -24,8 +24,8 @@ import static org.junit.Assert.assertTrue;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.ehealth_connector.cda.testhelper.TestUtils;
-import org.ehealth_connector.common.Participant;
-import org.ehealth_connector.common.ParticipantRole;
+import org.ehealth_connector.common.mdht.Participant;
+import org.ehealth_connector.common.mdht.ParticipantRole;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassRoot;

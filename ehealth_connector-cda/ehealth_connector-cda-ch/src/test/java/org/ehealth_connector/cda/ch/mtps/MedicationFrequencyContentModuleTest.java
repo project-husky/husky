@@ -25,7 +25,7 @@ import org.ehealth_connector.cda.ch.mtps.enums.PosologyType;
 import org.ehealth_connector.cda.ihe.pharm.PrescriptionItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.enums.DosageType;
 import org.ehealth_connector.cda.ihe.pharm.enums.TimingEvent;
-import org.ehealth_connector.common.Value;
+import org.ehealth_connector.common.mdht.Value;
 import org.junit.Test;
 
 /**

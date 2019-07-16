@@ -19,7 +19,7 @@ package org.ehealth_connector.cda;
 
 import java.util.Date;
 
-import org.ehealth_connector.common.enums.StatusCode;
+import org.ehealth_connector.common.mdht.enums.StatusCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.openhealthtools.mdht.uml.cda.Organizer;
 

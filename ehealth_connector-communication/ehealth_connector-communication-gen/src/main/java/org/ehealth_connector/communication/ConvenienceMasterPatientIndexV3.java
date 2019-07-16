@@ -20,8 +20,8 @@ package org.ehealth_connector.communication;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Patient;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.Patient;
 import org.ehealth_connector.communication.mpi.impl.V3PdqQueryResponse;
 import org.ehealth_connector.communication.mpi.impl.V3PixPdqAdapter;
 import org.ehealth_connector.communication.mpi.impl.V3PixPdqAdapterConfig;

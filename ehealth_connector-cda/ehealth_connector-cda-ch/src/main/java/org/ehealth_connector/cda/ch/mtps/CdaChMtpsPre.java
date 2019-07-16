@@ -25,11 +25,11 @@ import java.util.List;
 import org.ehealth_connector.cda.ch.AbstractCdaChV1;
 import org.ehealth_connector.cda.ihe.pharm.PrescriptionItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.PrescriptionSection;
-import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Organization;
-import org.ehealth_connector.common.Patient;
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.Organization;
+import org.ehealth_connector.common.mdht.Patient;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 
 /**

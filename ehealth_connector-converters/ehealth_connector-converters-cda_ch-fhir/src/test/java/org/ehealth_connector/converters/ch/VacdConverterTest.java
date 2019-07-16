@@ -22,7 +22,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.ehealth_connector.cda.ch.vacd.CdaChVacd;
-import org.ehealth_connector.common.enums.AdministrativeGender;
+import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
 import org.ehealth_connector.fhir.structures.ch.FhirCdaChVacd.VacdDocument;
 import org.junit.Before;
 import org.junit.Test;

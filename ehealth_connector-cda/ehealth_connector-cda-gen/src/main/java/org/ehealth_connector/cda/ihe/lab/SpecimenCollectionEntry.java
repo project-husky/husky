@@ -23,7 +23,7 @@ import java.util.List;
 
 import org.ehealth_connector.cda.MdhtProcedureFacade;
 import org.ehealth_connector.cda.utils.CdaUtil;
-import org.ehealth_connector.common.Participant;
+import org.ehealth_connector.common.mdht.Participant;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.Participant2;

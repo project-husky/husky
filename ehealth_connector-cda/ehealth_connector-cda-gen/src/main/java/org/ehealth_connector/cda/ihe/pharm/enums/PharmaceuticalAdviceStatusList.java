@@ -18,7 +18,7 @@
 
 package org.ehealth_connector.cda.ihe.pharm.enums;
 
-import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.mdht.Code;
 
 /**
  * The Enum PharmaceuticalAdviceStatusList see IHE PHARM PADV 6.5.1 IHE

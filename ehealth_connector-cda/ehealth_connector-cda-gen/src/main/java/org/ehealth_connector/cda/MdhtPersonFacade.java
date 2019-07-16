@@ -20,7 +20,7 @@ package org.ehealth_connector.cda;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.mdht.Name;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 
 /**

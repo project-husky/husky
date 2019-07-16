@@ -22,9 +22,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.Value;
-import org.ehealth_connector.common.enums.ObservationInterpretation;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.Value;
+import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
 import org.junit.Test;
 
 /**
@@ -37,7 +37,7 @@ public class LaboratoryObservationTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.lab.lrep.LaboratoryObservation#addInterpretationCode(org.ehealth_connector.common.enums.ObservationInterpretation)}.
+	 * {@link org.ehealth_connector.cda.ch.lab.lrep.LaboratoryObservation#addInterpretationCode(org.ehealth_connector.common.mdht.enums.ObservationInterpretation)}.
 	 */
 	@Test
 	public void testAddGetInterpretationCode() {

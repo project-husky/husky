@@ -17,7 +17,7 @@
  */
 package org.ehealth_connector.cda.ihe.lab;
 
-import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.mdht.Code;
 
 /**
  * The Class SpecimenAct.
@@ -77,7 +77,7 @@ public class SpecimenAct extends BaseLaboratoryAct {
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.cda.ihe.lab.BaseLaboratoryAct#setStatusCode(org.ehealth_connector.common.Code)
+	 * @see org.ehealth_connector.cda.ihe.lab.BaseLaboratoryAct#setStatusCode(org.ehealth_connector.common.mdht.Code)
 	 */
 	@Override
 	public void setStatusCode(Code code) {

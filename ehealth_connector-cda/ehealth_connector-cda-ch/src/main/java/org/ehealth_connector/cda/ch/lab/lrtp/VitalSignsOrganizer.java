@@ -23,9 +23,9 @@ import java.util.List;
 
 import org.ehealth_connector.cda.BaseVitalSignsOrganizer;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
-import org.ehealth_connector.common.Author;
-import org.ehealth_connector.common.Identificator;
-import org.ehealth_connector.common.enums.NullFlavor;
+import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.enums.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 
@@ -110,7 +110,7 @@ public class VitalSignsOrganizer extends BaseVitalSignsOrganizer {
 	 * @param id
 	 *            the id. If null, an ID with the CdaChLrtp root and a generated
 	 *            extension will be created
-	 * @see org.ehealth_connector.cda.BaseVitalSignsOrganizer#addId(org.ehealth_connector.common.Identificator)
+	 * @see org.ehealth_connector.cda.BaseVitalSignsOrganizer#addId(org.ehealth_connector.common.mdht.Identificator)
 	 */
 	@Override
 	public void addId(Identificator id) {

@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import javax.annotation.Generated;
 
 import org.ehealth_connector.common.basetypes.CodeBaseType;
-import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.valueset.enums.DesignationType;
 import org.ehealth_connector.valueset.enums.ValueSetEntryType;

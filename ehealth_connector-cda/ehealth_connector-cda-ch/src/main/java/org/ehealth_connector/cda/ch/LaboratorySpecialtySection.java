@@ -23,7 +23,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.ehealth_connector.cda.Section;
 import org.ehealth_connector.cda.ch.lab.lrep.LaboratoryBatteryOrganizer;
-import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.mdht.Code;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.impl.LaboratoryBatteryOrganizerImpl;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.impl.LaboratorySpecialtySectionImpl;

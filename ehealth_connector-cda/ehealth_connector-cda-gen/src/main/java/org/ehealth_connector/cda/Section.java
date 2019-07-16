@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.cda;
 
-import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.mdht.Code;
 
 /**
  * The Class Section.
