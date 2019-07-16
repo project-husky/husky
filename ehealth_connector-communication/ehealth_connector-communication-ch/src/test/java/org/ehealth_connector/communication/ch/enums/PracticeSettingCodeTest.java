@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.communication.ch.enums;
 
-import static org.ehealth_connector.common.ValueSetEnumInterfaceTest.assertValueSetEnumEntries;
+import static org.ehealth_connector.common.mdht.ValueSetEnumInterfaceTest.assertValueSetEnumEntries;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
