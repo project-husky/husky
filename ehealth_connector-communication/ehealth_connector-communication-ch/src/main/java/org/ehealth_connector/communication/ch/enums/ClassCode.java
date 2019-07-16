@@ -143,8 +143,8 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	ORGAN_DONOR_CARD("772790007", "2.16.840.1.113883.6.96", "Organ donor card (record artifact)",
-			"Organ donor card", "Willensäusserung zur Organspende", "Volonté sur le don d'organes",
-			"Volontà di donare organi "),
+			"Organ donor card", "Willensäusserung zur Organspende",
+			"Volonté sur le don d'organes", "Volontà di donare organi "),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Patient consent</div>
@@ -391,20 +391,26 @@ public enum ClassCode implements ValueSetEnumInterface {
 	public static final String SUMMARY_CLINICAL_DOCUMENT_CODE = "422735006";
 
 	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Identifier of the value set</div>
 	 * <div class="de">Identifikator für das Value Set</div>
+	 * <!-- @formatter:on -->
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.3";
 
 	/**
-	 * <div class="en">Name of the value set</div> <div class="de">Name des
-	 * Value Sets</div>
+	 * <!-- @formatter:off -->
+	 * <div class="en">Name of the value set</div>
+	 * <div class="de">Name des Value Sets</div>
+	 * <!-- @formatter:on -->
 	 */
 	public static final String VALUE_SET_NAME = "xds-clasCod";
 
 	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Gets the Enum with a given code</div>
 	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
+	 * <!-- @formatter:on -->
 	 *
 	 * @param code
 	 *            <div class="de"> code</div>
@@ -420,9 +426,10 @@ public enum ClassCode implements ValueSetEnumInterface {
 	}
 
 	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene enum Teil dieses Value Sets
-	 * ist.</div>
+	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
+	 * <!-- @formatter:on -->
 	 *
 	 * @param enumName
 	 *            <div class="de"> enumName</div>
@@ -441,9 +448,10 @@ public enum ClassCode implements ValueSetEnumInterface {
 	}
 
 	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der gegebene code in diesem Value Set vorhanden
-	 * ist.</div>
+	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
+	 * <!-- @formatter:on -->
 	 *
 	 * @param codeValue
 	 *            <div class="de"> code</div>
@@ -459,15 +467,18 @@ public enum ClassCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Machine interpretable and (inside this class) unique
-	 * code</div> <div class="de">Maschinen interpretierbarer und (innerhalb
-	 * dieser Klasse) eindeutiger Code</div>
+	 * <!-- @formatter:off -->
+	 * <div class="en">Machine interpretable and (inside this class) unique code</div>
+	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse) eindeutiger Code</div>
+	 * <!-- @formatter:on -->
 	 */
 	private String code;
 
 	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Identifier of the referencing code system.</div>
 	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
+	 * <!-- @formatter:on -->
 	 */
 	private String codeSystem;
 
@@ -477,9 +488,10 @@ public enum ClassCode implements ValueSetEnumInterface {
 	private Map<LanguageCode, String> displayNames;
 
 	/**
-	 * <div class="en">Instantiates this Enum Object with a given Code and
-	 * Display Name</div> <div class="de">Instanziiert dieses Enum Object
-	 * mittels eines Codes und einem Display Name</div>.
+	 * <!-- @formatter:off -->
+	 * <div class="en">Instantiates this Enum Object with a given Code and Display Name</div>
+	 * <div class="de">Instanziiert dieses Enum Object mittels eines Codes und einem Display Name</div>.
+	 * <!-- @formatter:on -->
 	 *
 	 * @param code
 	 *            code
@@ -509,8 +521,10 @@ public enum ClassCode implements ValueSetEnumInterface {
 	}
 
 	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Gets the code system identifier.</div>
 	 * <div class="de">Liefert den Code System Identifikator.</div>
+	 * <!-- @formatter:on -->
 	 *
 	 * @return <div class="en">the code system identifier</div>
 	 */
@@ -520,8 +534,10 @@ public enum ClassCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the code system name.</div> <div class="de">Liefert
-	 * den Code System Namen.</div>
+	 * <!-- @formatter:off -->
+	 * <div class="en">Gets the code system name.</div>
+	 * <div class="de">Liefert den Code System Namen.</div>
+	 * <!-- @formatter:on -->
 	 *
 	 * @return <div class="en">the code system identifier</div>
 	 */
@@ -535,8 +551,10 @@ public enum ClassCode implements ValueSetEnumInterface {
 	}
 
 	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Gets the actual Code as string</div>
 	 * <div class="de">Liefert den eigentlichen Code als String</div>
+	 * <!-- @formatter:on -->
 	 *
 	 * @return <div class="en">the code</div>
 	 */
@@ -546,11 +564,12 @@ public enum ClassCode implements ValueSetEnumInterface {
 	}
 
 	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Gets the display name defined by the language param. If
-	 * there is no english translation, the default display name is
-	 * returned.</div> <div class="de">Liefert display name gemäss Parameter,
-	 * falls es keine Englische Übersetzung gibt, wird der default-Name
-	 * zurückgegeben.</div>
+	 * there is no english translation, the default display name is returned.</div>
+	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
+	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
+	 * <!-- @formatter:on -->
 	 *
 	 * @param languageCode
 	 *            the language code to get the display name for
@@ -567,8 +586,10 @@ public enum ClassCode implements ValueSetEnumInterface {
 	}
 
 	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Gets the value set identifier.</div>
 	 * <div class="de">Liefert den Value Set Identifikator.</div>
+	 * <!-- @formatter:on -->
 	 *
 	 * @return <div class="en">the value set identifier</div>
 	 */
@@ -578,8 +599,10 @@ public enum ClassCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <div class="en">Gets the value set name.</div> <div class="de">Liefert
-	 * den Value Set Namen.</div>
+	 * <!-- @formatter:off -->
+	 * <div class="en">Gets the value set name.</div>
+	 * <div class="de">Liefert den Value Set Namen.</div>
+	 * <!-- @formatter:on -->
 	 *
 	 * @return <div class="en">the value set name</div>
 	 */
