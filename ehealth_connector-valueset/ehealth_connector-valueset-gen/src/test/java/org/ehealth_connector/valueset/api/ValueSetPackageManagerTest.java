@@ -358,7 +358,7 @@ public class ValueSetPackageManagerTest {
 			fail("saveLoadTest: ConfigurationException");
 		}
 
-		// TODO delete file in order to clean up the building system
+		new File(testValueSetPackageConfigFileName).delete();
 	}
 
 	@Test

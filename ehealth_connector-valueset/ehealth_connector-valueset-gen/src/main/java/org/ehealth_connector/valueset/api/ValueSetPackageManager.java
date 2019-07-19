@@ -33,7 +33,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.apache.commons.io.Charsets;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.ehealth_connector.valueset.config.CustomizedYaml;
+import org.ehealth_connector.common.utils.CustomizedYaml;
 import org.ehealth_connector.valueset.config.ValueSetConfig;
 import org.ehealth_connector.valueset.config.ValueSetPackageConfig;
 import org.ehealth_connector.valueset.enums.ValueSetPackageStatus;
