@@ -33,6 +33,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.sf.saxon.s9api.Destination;
+import net.sf.saxon.s9api.Processor;
 import net.sf.saxon.s9api.QName;
 import net.sf.saxon.s9api.SaxonApiException;
 import net.sf.saxon.s9api.Serializer;
@@ -111,6 +112,8 @@ public class Transformation {
 	/** The underlying <cite>Saxon</cite> XSLT transformer. */
 	private final XsltTransformer transformer;
 
+	private final Processor processor;
+
 	/**
 	 * Creates a new transformation using the specified XSLT stylesheet.
 	 *
@@ -120,10 +123,12 @@ public class Transformation {
 	 * @throws NullPointerException
 	 *             if the specified executable is <tt>null</tt>.
 	 */
-	public Transformation(XsltExecutable stylesheet) {
+	public Transformation(XsltExecutable stylesheet, Processor processor) {
 		if (stylesheet == null) {
 			throw new NullPointerException("Stylesheet is null.");
 		}
+
+		this.processor = processor;
 		this.transformer = stylesheet.load();
 	}
 
@@ -280,23 +285,33 @@ public class Transformation {
 	 * @see #getOutputFile()
 	 */
 	protected void setDestination(Destination finalDestination) {
-		Destination destination;
+		Destination destination = null;
 		if (isLastStep() && (finalDestination != null)) {
 			// Specified destination has precedence
 			destination = finalDestination;
+			getTransformer().setDestination(destination);
 		} else {
-			final File out = getOutputFile();
-			if (isLastStep() && (out == null)) {
+			final File outFile = getOutputFile();
+			if (isLastStep() && (outFile == null)) {
 				throw new IllegalStateException("Missing final destination.");
-			} else if (out != null) {
-				destination = new Serializer(out);
+			} else if (outFile != null) {
+				Serializer out = processor.newSerializer();
+				out.setOutputFile(outFile);
+				out.setOutputProperty(Serializer.Property.METHOD, "xml");
+				out.setOutputProperty(Serializer.Property.ENCODING, "UTF-8");
+				out.setOutputProperty(Serializer.Property.OMIT_XML_DECLARATION, "yes");
+				out.setOutputProperty(Serializer.Property.INDENT, "no");
+
+				getTransformer().setDestination(out);
+
 			} else {
 				// Pipe to next transformation
 				destination = getNextStep().getTransformer();
+				getTransformer().setDestination(destination);
+
 			}
 		}
-		getTransformer().setDestination(destination);
-		log.debug("Destination: " + describeDestination(destination));
+		log.debug("Destination: " + describeDestination(getTransformer().getDestination()));
 	}
 
 	/**
@@ -368,12 +383,8 @@ public class Transformation {
 	 *             transformation.
 	 */
 	protected void setSource(Source source) throws TransformationException {
-		try {
-			getTransformer().setSource(source);
-			log.debug("Source: " + describeSource(source));
-		} catch (final SaxonApiException e) {
-			throw new TransformationException("Failed to set the source document.", e);
-		}
+		getTransformer().setSource(source);
+		log.debug("Source: " + describeSource(source));
 	}
 
 	/**
@@ -392,19 +403,32 @@ public class Transformation {
 	 * Transforms the specified XML input file and writes the results to the
 	 * given output file.
 	 *
-	 * @param in
+	 * @param inFile
 	 *            the input XML file.
-	 * @param out
+	 * @param outFile
 	 *            the output file to which the result is written. if an error
 	 *            occurs when setting the source for the transformation, or if
 	 *            any dynamic error occurs during the transformation.
 	 * @throws NullPointerException
 	 *             if the specified input file is <tt>null</tt>.
 	 */
-	public void transform(File in, File out) throws TransformationException {
-		if (in == null)
+	public void transform(File inFile, File outFile) throws TransformationException {
+		if (inFile == null)
 			throw new NullPointerException("Input file is null.");
-		transform(new StreamSource(in), (out != null ? new Serializer(out) : null));
+
+		Serializer out = null;
+
+		if (outFile != null) {
+			out = processor.newSerializer();
+			out.setOutputFile(outFile);
+			out.setOutputProperty(Serializer.Property.METHOD, "xml");
+			out.setOutputProperty(Serializer.Property.ENCODING, "UTF-8");
+			out.setOutputProperty(Serializer.Property.OMIT_XML_DECLARATION, "yes");
+			out.setOutputProperty(Serializer.Property.INDENT, "no");
+			// getTransformer().setDestination(out);
+		}
+
+		transform(new StreamSource(inFile), out);
 	}
 
 	/**
@@ -415,9 +439,9 @@ public class Transformation {
 	 * streams after use.
 	 * </p>
 	 *
-	 * @param in
+	 * @param inStream
 	 *            a reference to an XML input stream.
-	 * @param out
+	 * @param outStream
 	 *            the output stream to which the result is written.
 	 * @throws TransformationException
 	 *             if an error occurs when setting the source for the
@@ -426,10 +450,23 @@ public class Transformation {
 	 * @throws NullPointerException
 	 *             if the specified input stream is <tt>null</tt>.
 	 */
-	public void transform(InputStream in, OutputStream out) throws TransformationException {
-		if (in == null)
+	public void transform(InputStream inStream, OutputStream outStream)
+			throws TransformationException {
+		if (inStream == null)
 			throw new NullPointerException("Input stream is null.");
-		transform(new StreamSource(in), (out != null ? new Serializer(out) : null));
+		Serializer out = null;
+
+		if (outStream != null) {
+			out = processor.newSerializer();
+			out.setOutputStream(outStream);
+			out.setOutputProperty(Serializer.Property.METHOD, "xml");
+			out.setOutputProperty(Serializer.Property.ENCODING, "UTF-8");
+			out.setOutputProperty(Serializer.Property.OMIT_XML_DECLARATION, "yes");
+			out.setOutputProperty(Serializer.Property.INDENT, "no");
+			// getTransformer().setDestination(out);
+		}
+
+		transform(new StreamSource(inStream), out);
 	}
 
 	/**

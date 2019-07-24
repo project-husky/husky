@@ -32,7 +32,6 @@ import org.ehealth_connector.validation.service.transform.TransformationExceptio
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import net.sf.saxon.s9api.Destination;
 import net.sf.saxon.s9api.Serializer;
 import net.sf.saxon.s9api.XsltExecutable;
 
@@ -126,9 +125,17 @@ public class ValidatorBuilder implements Callable<XsltExecutable> {
 	 */
 	private XsltExecutable buildTransientValidator(Source source) throws TransformationException {
 		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		final Destination destination = new Serializer(baos);
+
+		final Serializer out = factory.getProcessor().newSerializer();
+		out.setOutputStream(baos);
+		out.setOutputProperty(Serializer.Property.METHOD, "xml");
+		out.setOutputProperty(Serializer.Property.ENCODING, "UTF-8");
+		out.setOutputProperty(Serializer.Property.OMIT_XML_DECLARATION, "yes");
+		out.setOutputProperty(Serializer.Property.INDENT, "no");
+		// getTransformer().setDestination(out);
+
 		final Transformation transformer = getFactory().createTransformer();
-		transformer.transform(source, destination);
+		transformer.transform(source, out);
 
 		final InputStream inputStream = new ByteArrayInputStream(baos.toByteArray());
 		return getFactory().getStylesheet(new StreamSource(inputStream), false);
@@ -174,9 +181,9 @@ public class ValidatorBuilder implements Callable<XsltExecutable> {
 	 * the compilation of the resulting stylesheet is entirely done in memory.
 	 * </p>
 	 *
-	 * @param in
+	 * @param inFile
 	 *            the input <cite>Schematron</cite> file.
-	 * @param out
+	 * @param outFile
 	 *            output file for the validator (<tt>null</tt> allowed).
 	 * @return a compiled XSL stylesheet that can be used as validator.
 	 * @throws TransformationException
@@ -184,24 +191,31 @@ public class ValidatorBuilder implements Callable<XsltExecutable> {
 	 *             if the resulting stylesheet contains static errors or cannot
 	 *             be read.
 	 */
-	protected XsltExecutable createValidator(File in, File out) throws TransformationException {
+	protected XsltExecutable createValidator(File inFile, File outFile)
+			throws TransformationException {
 		XsltExecutable stylesheet;
-		final Source source = new StreamSource(in);
-		if (out == null) {
-			log.info(">>> Creating transient validator from file '{}'", in.getAbsolutePath());
+		final Source source = new StreamSource(inFile);
+		if (outFile == null) {
+			log.info(">>> Creating transient validator from file '{}'", inFile.getAbsolutePath());
 			stylesheet = buildTransientValidator(source);
 		} else {
-			if (!out.exists() || (in.lastModified() > out.lastModified())) {
+			if (!outFile.exists() || (inFile.lastModified() > outFile.lastModified())) {
 				log.info(">>> Creating new persitent validator from '{}' to '{}'",
-						in.getAbsolutePath(), out.getAbsolutePath());
-				final Destination destination = new Serializer(out);
+						inFile.getAbsolutePath(), outFile.getAbsolutePath());
+				final Serializer out = factory.getProcessor().newSerializer();
+				out.setOutputFile(outFile);
+				out.setOutputProperty(Serializer.Property.METHOD, "xml");
+				out.setOutputProperty(Serializer.Property.ENCODING, "UTF-8");
+				out.setOutputProperty(Serializer.Property.OMIT_XML_DECLARATION, "yes");
+				out.setOutputProperty(Serializer.Property.INDENT, "no");
+				// getTransformer().setDestination(out);
 				final Transformation transformer = getFactory().createTransformer();
-				transformer.transform(source, destination);
+				transformer.transform(source, out);
 			} else {
 				log.info(">>> Reusing persistent validator file '{}' (master file: '{}')",
-						out.getAbsolutePath(), in.getAbsolutePath());
+						outFile.getAbsolutePath(), inFile.getAbsolutePath());
 			}
-			stylesheet = getFactory().getStylesheet(out, false);
+			stylesheet = getFactory().getStylesheet(outFile, false);
 		}
 		return stylesheet;
 	}

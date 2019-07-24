@@ -265,7 +265,7 @@ public class ReportBuilder {
 			Properties parameters) throws TransformationException, InterruptedException {
 		final ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		final XsltExecutable styleSheet = getValidator(ruleSet, workDir);
-		final Transformation t1 = new Transformation(styleSheet);
+		final Transformation t1 = new Transformation(styleSheet, getProcessor());
 		t1.setURIResolver(new StylesheetURIResolver(ruleSet.getPath().getParentFile()));
 		t1.transform(in, baos);
 		final byte[] svrl = baos.toByteArray();
@@ -276,7 +276,8 @@ public class ReportBuilder {
 		// baos.toString() });
 		// end of debugging only
 
-		final Transformation t2 = new Transformation(factory.getStylesheet(SVRL_TO_HTML, false));
+		final Transformation t2 = new Transformation(factory.getStylesheet(SVRL_TO_HTML, false),
+				getProcessor());
 		t2.setURIResolver(this.resolver);
 		t2.setParameters(parameters);
 		t2.transform(new ByteArrayInputStream(svrl), out);
@@ -298,9 +299,9 @@ public class ReportBuilder {
 	 * @param workDir
 	 *            the work directory where to put/read precompiled Schematron
 	 *            stylesheets
-	 * @param in
+	 * @param inStreamSource
 	 *            the XML input to be validated.
-	 * @param out
+	 * @param outStreamSource
 	 *            the output stream, where the validation results are written.
 	 * @param parameters
 	 *            XSLT parameters
@@ -316,16 +317,17 @@ public class ReportBuilder {
 	 *             if the construction of the validator stylesheet was
 	 *             interrupted.
 	 */
-	public byte[] createSvrlReport(RuleSet ruleSet, File workDir, StreamSource in, OutputStream out,
-			Properties parameters) throws TransformationException, InterruptedException {
+	public byte[] createSvrlReport(RuleSet ruleSet, File workDir, StreamSource inStreamSource,
+			OutputStream outStreamSource, Properties parameters)
+			throws TransformationException, InterruptedException {
 
 		byte[] retVal = null;
 		final XsltExecutable styleSheet1 = getValidator(ruleSet, workDir);
 		if (styleSheet1 != null) {
-			final Transformation t1 = new Transformation(styleSheet1);
+			final Transformation t1 = new Transformation(styleSheet1, getProcessor());
 			t1.setURIResolver(new StylesheetURIResolver(ruleSet.getPath().getParentFile()));
 			XdmDestination destination = new XdmDestination();
-			t1.transform(in, destination);
+			t1.transform(inStreamSource, destination);
 
 			// for debugging only - comment these lines for productive releases
 			// OutputStream outputStream1 = null;
@@ -361,7 +363,7 @@ public class ReportBuilder {
 				XdmDestination destination2 = new XdmDestination();
 				XsltExecutable styleSheet2 = factory.getStylesheet(SVRL_TO_XML, false);
 				if (styleSheet2 != null) {
-					final Transformation t2 = new Transformation(styleSheet2);
+					final Transformation t2 = new Transformation(styleSheet2, getProcessor());
 					t2.setURIResolver(this.resolver);
 					t2.setParameters(parameters);
 					t2.transform(destination.getXdmNode().asSource(), destination2);
@@ -388,10 +390,16 @@ public class ReportBuilder {
 			}
 
 			if (returnNode != null) {
-				Serializer serializer = new Serializer();
-				serializer.setOutputStream(baos);
+				Serializer out = factory.getProcessor().newSerializer();
+				out.setOutputStream(baos);
+				out.setOutputProperty(Serializer.Property.METHOD, "xml");
+				out.setOutputProperty(Serializer.Property.ENCODING, "UTF-8");
+				out.setOutputProperty(Serializer.Property.OMIT_XML_DECLARATION, "yes");
+				out.setOutputProperty(Serializer.Property.INDENT, "no");
+				// getTransformer().setDestination(out);
+
 				try {
-					getProcessor().writeXdmValue(returnNode, serializer);
+					getProcessor().writeXdmValue(returnNode, out);
 					baos.close();
 				} catch (SaxonApiException | IOException e) {
 					// Do nothing

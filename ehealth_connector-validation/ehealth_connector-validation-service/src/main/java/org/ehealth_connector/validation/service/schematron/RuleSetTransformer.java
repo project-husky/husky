@@ -105,7 +105,7 @@ public class RuleSetTransformer extends StylesheetFactory {
 		log.debug("Creating transformation based on '{}'",
 				JarUtils.getRelativeUri(uri, getClass()));
 		final XsltExecutable stylesheet = getStylesheet(uri, false);
-		final Transformation transformation = new Transformation(stylesheet);
+		final Transformation transformation = new Transformation(stylesheet, getProcessor());
 		if (ISO_SVRL_FOR_XSLT2.equals(uri)) {
 			transformation.setParameter("allow-foreign", "true");
 			transformation.setParameter("full-path-notation", "2");
