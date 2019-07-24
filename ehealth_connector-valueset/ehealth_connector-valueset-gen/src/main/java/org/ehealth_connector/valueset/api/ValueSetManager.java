@@ -325,7 +325,14 @@ public class ValueSetManager {
 	 *             the file not found exception
 	 */
 	public ValueSetConfig loadValueSetConfig(File config) throws FileNotFoundException {
-		return loadValueSetConfig(new FileInputStream(config));
+		FileInputStream is = new FileInputStream(config);
+		ValueSetConfig retVal = loadValueSetConfig(is);
+		try {
+			is.close();
+		} catch (IOException e) {
+			// Do nothing
+		}
+		return retVal;
 	}
 
 	/**
@@ -394,7 +401,14 @@ public class ValueSetManager {
 	 */
 	public ValueSet loadValueSetIheSvs(File valueSet)
 			throws IOException, ParserConfigurationException, SAXException {
-		return loadValueSetIheSvs(new FileInputStream(valueSet));
+		FileInputStream is = new FileInputStream(valueSet);
+		ValueSet retVal = loadValueSetIheSvs(is);
+		try {
+			is.close();
+		} catch (IOException e) {
+			// Do nothing
+		}
+		return retVal;
 	}
 
 	/**
@@ -571,7 +585,14 @@ public class ValueSetManager {
 	 * @throws IOException
 	 */
 	public ValueSet loadValueSetJson(File valueSet) throws IOException {
-		return loadValueSetJson(new FileInputStream(valueSet));
+		FileInputStream is = new FileInputStream(valueSet);
+		ValueSet retVal = loadValueSetJson(is);
+		try {
+			is.close();
+		} catch (IOException e) {
+			// Do nothing
+		}
+		return retVal;
 	}
 
 	/**
@@ -948,7 +969,14 @@ public class ValueSetManager {
 	 */
 	public ValueSet loadValueSetXml(File valueSet)
 			throws IOException, ParserConfigurationException, SAXException {
-		return loadValueSetXml(new FileInputStream(valueSet));
+		FileInputStream is = new FileInputStream(valueSet);
+		ValueSet retVal = loadValueSetXml(is);
+		try {
+			is.close();
+		} catch (IOException e) {
+			// Do nothing
+		}
+		return retVal;
 	}
 
 	/**
@@ -1182,7 +1210,14 @@ public class ValueSetManager {
 	 *             the file not found exception
 	 */
 	public ValueSet loadValueSetYaml(File valueSet) throws FileNotFoundException {
-		return loadValueSetYaml(new FileInputStream(valueSet));
+		FileInputStream is = new FileInputStream(valueSet);
+		ValueSet retVal = loadValueSetYaml(is);
+		try {
+			is.close();
+		} catch (IOException e) {
+			// Do nothing
+		}
+		return retVal;
 	}
 
 	/**

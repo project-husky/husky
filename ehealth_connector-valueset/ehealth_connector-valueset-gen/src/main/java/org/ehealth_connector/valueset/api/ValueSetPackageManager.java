@@ -328,7 +328,14 @@ public class ValueSetPackageManager {
 	 *             the file not found exception
 	 */
 	public ValueSetPackage loadValueSetPackage(File valueSetPackage) throws FileNotFoundException {
-		return loadValueSetPackage(new FileInputStream(valueSetPackage));
+		FileInputStream is = new FileInputStream(valueSetPackage);
+		ValueSetPackage retVal = loadValueSetPackage(is);
+		try {
+			is.close();
+		} catch (IOException e) {
+			// Do nothing
+		}
+		return retVal;
 	}
 
 	/**
@@ -403,7 +410,14 @@ public class ValueSetPackageManager {
 	 */
 	public ValueSetPackageConfig loadValueSetPackageConfig(File config)
 			throws FileNotFoundException, ConfigurationException {
-		return loadValueSetPackageConfig(new FileInputStream(config));
+		FileInputStream is = new FileInputStream(config);
+		ValueSetPackageConfig retVal = loadValueSetPackageConfig(is);
+		try {
+			is.close();
+		} catch (IOException e) {
+			// Do nothing
+		}
+		return retVal;
 	}
 
 	/**
