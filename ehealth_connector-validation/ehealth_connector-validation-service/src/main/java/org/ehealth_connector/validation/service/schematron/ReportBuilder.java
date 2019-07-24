@@ -392,12 +392,6 @@ public class ReportBuilder {
 			if (returnNode != null) {
 				Serializer out = factory.getProcessor().newSerializer();
 				out.setOutputStream(baos);
-				out.setOutputProperty(Serializer.Property.METHOD, "xml");
-				out.setOutputProperty(Serializer.Property.ENCODING, "UTF-8");
-				out.setOutputProperty(Serializer.Property.OMIT_XML_DECLARATION, "yes");
-				out.setOutputProperty(Serializer.Property.INDENT, "no");
-				// getTransformer().setDestination(out);
-
 				try {
 					getProcessor().writeXdmValue(returnNode, out);
 					baos.close();

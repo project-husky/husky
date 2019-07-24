@@ -297,11 +297,6 @@ public class Transformation {
 			} else if (outFile != null) {
 				Serializer out = processor.newSerializer();
 				out.setOutputFile(outFile);
-				out.setOutputProperty(Serializer.Property.METHOD, "xml");
-				out.setOutputProperty(Serializer.Property.ENCODING, "UTF-8");
-				out.setOutputProperty(Serializer.Property.OMIT_XML_DECLARATION, "yes");
-				out.setOutputProperty(Serializer.Property.INDENT, "no");
-
 				getTransformer().setDestination(out);
 
 			} else {
@@ -421,11 +416,6 @@ public class Transformation {
 		if (outFile != null) {
 			out = processor.newSerializer();
 			out.setOutputFile(outFile);
-			out.setOutputProperty(Serializer.Property.METHOD, "xml");
-			out.setOutputProperty(Serializer.Property.ENCODING, "UTF-8");
-			out.setOutputProperty(Serializer.Property.OMIT_XML_DECLARATION, "yes");
-			out.setOutputProperty(Serializer.Property.INDENT, "no");
-			// getTransformer().setDestination(out);
 		}
 
 		transform(new StreamSource(inFile), out);
@@ -459,11 +449,6 @@ public class Transformation {
 		if (outStream != null) {
 			out = processor.newSerializer();
 			out.setOutputStream(outStream);
-			out.setOutputProperty(Serializer.Property.METHOD, "xml");
-			out.setOutputProperty(Serializer.Property.ENCODING, "UTF-8");
-			out.setOutputProperty(Serializer.Property.OMIT_XML_DECLARATION, "yes");
-			out.setOutputProperty(Serializer.Property.INDENT, "no");
-			// getTransformer().setDestination(out);
 		}
 
 		transform(new StreamSource(inStream), out);

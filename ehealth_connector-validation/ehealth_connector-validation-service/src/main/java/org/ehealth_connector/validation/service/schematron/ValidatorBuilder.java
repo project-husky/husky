@@ -128,11 +128,6 @@ public class ValidatorBuilder implements Callable<XsltExecutable> {
 
 		final Serializer out = factory.getProcessor().newSerializer();
 		out.setOutputStream(baos);
-		out.setOutputProperty(Serializer.Property.METHOD, "xml");
-		out.setOutputProperty(Serializer.Property.ENCODING, "UTF-8");
-		out.setOutputProperty(Serializer.Property.OMIT_XML_DECLARATION, "yes");
-		out.setOutputProperty(Serializer.Property.INDENT, "no");
-		// getTransformer().setDestination(out);
 
 		final Transformation transformer = getFactory().createTransformer();
 		transformer.transform(source, out);
@@ -204,11 +199,6 @@ public class ValidatorBuilder implements Callable<XsltExecutable> {
 						inFile.getAbsolutePath(), outFile.getAbsolutePath());
 				final Serializer out = factory.getProcessor().newSerializer();
 				out.setOutputFile(outFile);
-				out.setOutputProperty(Serializer.Property.METHOD, "xml");
-				out.setOutputProperty(Serializer.Property.ENCODING, "UTF-8");
-				out.setOutputProperty(Serializer.Property.OMIT_XML_DECLARATION, "yes");
-				out.setOutputProperty(Serializer.Property.INDENT, "no");
-				// getTransformer().setDestination(out);
 				final Transformation transformer = getFactory().createTransformer();
 				transformer.transform(source, out);
 			} else {
