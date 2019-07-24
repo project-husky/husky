@@ -24,6 +24,7 @@ import static org.junit.Assert.fail;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
@@ -54,15 +55,15 @@ import org.junit.Test;
 public class ValueSetPackageManagerTest {
 
 	private String testValueSetPackageConfigOnTheWeb = "https://medshare.net/fileadmin/downloads/ehc/testValueSetPackageConfig.yaml";
-	private String testValueSetPackageConfigFileName = Util.getTempDirectory()
-			+ FileUtil.getPlatformSpecificPathSeparator() + "testValueSetPackageConfig.yaml";
-	private String testValueSetPackageFileName = Util.getTempDirectory()
-			+ FileUtil.getPlatformSpecificPathSeparator() + "testValueSetPackage.yaml";
+	private File testValueSetPackageConfigFile = new File(Util.getTempDirectory()
+			+ FileUtil.getPlatformSpecificPathSeparator() + "testValueSetPackageConfig.yaml");
+	private File testValueSetPackageFile = new File(Util.getTempDirectory()
+			+ FileUtil.getPlatformSpecificPathSeparator() + "testValueSetPackage.yaml");
 
 	private ValueSetPackageConfig createValueSetPackageConfig1() {
 		ValueSetPackageConfig retVal = null;
 		String sourceUrl;
-		sourceUrl = "file://" + testValueSetPackageConfigFileName;
+		sourceUrl = "file://" + testValueSetPackageConfigFile;
 		Date validFrom = DateUtil.date("11.06.2019 00:00:00");
 
 		Version version = Version.builder().withLabel("0.9").withValidFrom(validFrom).build();
@@ -106,9 +107,10 @@ public class ValueSetPackageManagerTest {
 	 * or to have it on another server.
 	 *
 	 * @return the value set package config
+	 * @throws MalformedURLException
 	 */
 	@SuppressWarnings("unused")
-	private ValueSetPackageConfig createValueSetPackageConfig2() {
+	private ValueSetPackageConfig createValueSetPackageConfig2() throws MalformedURLException {
 		ValueSetPackageConfig retVal = null;
 		String sourceUrl;
 		String baseUrl = "http://art-decor.org/decor/services/RetrieveValueSet?prefix=ch-epr-&format=json";
@@ -138,13 +140,10 @@ public class ValueSetPackageManagerTest {
 		Date authorRoleTimeStamp = DateUtil.parseDateyyyyMMddTHHmmss("2018-06-13T07:40:11");
 		URL authorRoleSourceUrl;
 		String authorRoleSourceUrlString = "";
-		try {
-			authorRoleSourceUrl = ValueSetManager.buildValueSetArtDecorUrl(baseUrl, authorRoleId,
-					authorRoleTimeStamp);
-			authorRoleSourceUrlString = authorRoleSourceUrl.toString();
-		} catch (MalformedURLException e) {
-			fail("createValueSetPackageConfig2: sourceUrl1String: MalformedURLException");
-		}
+
+		authorRoleSourceUrl = ValueSetManager.buildValueSetArtDecorUrl(baseUrl, authorRoleId,
+				authorRoleTimeStamp);
+		authorRoleSourceUrlString = authorRoleSourceUrl.toString();
 
 		ValueSetConfig valueSetConfig1 = ValueSetConfig.builder().withClassName(className1)
 				.withProjectFolder(projectFolder).withSourceFormatType(sourceFormatType)
@@ -158,14 +157,10 @@ public class ValueSetPackageManagerTest {
 				.parseDateyyyyMMddTHHmmss("2018-06-13T07:48:02");
 		URL documentAvailabilityStatusSourceUrl;
 		String documentAvailabilityStatusSourceUrlString = "";
-		try {
-			documentAvailabilityStatusSourceUrl = ValueSetManager.buildValueSetArtDecorUrl(baseUrl,
-					documentAvailabilityStatusId, documentAvailabilityStatusTimeStamp);
-			documentAvailabilityStatusSourceUrlString = documentAvailabilityStatusSourceUrl
-					.toString();
-		} catch (MalformedURLException e) {
-			fail("createValueSetPackageConfig2: sourceUrl1String: MalformedURLException");
-		}
+
+		documentAvailabilityStatusSourceUrl = ValueSetManager.buildValueSetArtDecorUrl(baseUrl,
+				documentAvailabilityStatusId, documentAvailabilityStatusTimeStamp);
+		documentAvailabilityStatusSourceUrlString = documentAvailabilityStatusSourceUrl.toString();
 
 		ValueSetConfig valueSetConfig2 = ValueSetConfig.builder().withClassName(className2)
 				.withProjectFolder(projectFolder).withSourceFormatType(sourceFormatType)
@@ -200,45 +195,44 @@ public class ValueSetPackageManagerTest {
 	}
 
 	@Test
-	public void downloadSaveLoadPackageConfigTest() {
+	public void downloadSaveLoadPackageConfigTest()
+			throws MalformedURLException, IOException, ConfigurationException {
 
 		ValueSetPackageManager valueSetPackageManager = new ValueSetPackageManager();
-		try {
 
-			// Debug only: This is to save a config for upload to a web server:
-			// ValueSetPackageConfig valueSetPackageConfig2 =
-			// createValueSetPackageConfig2();
-			// assertNotNull(valueSetPackageConfig2);
-			// valueSetPackageManager.saveValueSetPackageConfig(valueSetPackageConfig2,
-			// testValueSetPackageConfigFileName);
+		// Debug only: This is to save a config for upload to a web server:
+		// ValueSetPackageConfig valueSetPackageConfig2 =
+		// createValueSetPackageConfig2();
+		// assertNotNull(valueSetPackageConfig2);
+		// valueSetPackageManager.saveValueSetPackageConfig(valueSetPackageConfig2,
+		// testValueSetPackageConfigFileName);
 
-			// download and save a package config
-			ValueSetPackageConfig valueSetPackageConfig1 = valueSetPackageManager
-					.downloadValueSetPackageConfig(testValueSetPackageConfigOnTheWeb);
+		// download and save a package config
+		ValueSetPackageConfig valueSetPackageConfig1 = valueSetPackageManager
+				.downloadValueSetPackageConfig(testValueSetPackageConfigOnTheWeb);
 
-			assertEquals(testValueSetPackageConfigOnTheWeb, valueSetPackageConfig1.getSourceUrl());
+		assertEquals(testValueSetPackageConfigOnTheWeb, valueSetPackageConfig1.getSourceUrl());
 
-			valueSetPackageManager.saveValueSetPackageConfig(valueSetPackageConfig1,
-					testValueSetPackageConfigFileName);
-			ValueSetPackageConfig valueSetPackageConfig2 = valueSetPackageManager
-					.loadValueSetPackageConfig(testValueSetPackageConfigFileName);
+		// Prepare cleanup
+		testValueSetPackageConfigFile.deleteOnExit();
 
-			assertEquals(valueSetPackageConfig1.getDescription(),
-					valueSetPackageConfig2.getDescription());
-			assertEquals(valueSetPackageConfig1.getVersion().getLabel(),
-					valueSetPackageConfig2.getVersion().getLabel());
-			assertEquals(valueSetPackageConfig1.getValueSetConfigList().size(),
-					valueSetPackageConfig2.getValueSetConfigList().size());
+		valueSetPackageManager.saveValueSetPackageConfig(valueSetPackageConfig1,
+				testValueSetPackageConfigFile);
+		ValueSetPackageConfig valueSetPackageConfig2 = valueSetPackageManager
+				.loadValueSetPackageConfig(testValueSetPackageConfigFile);
 
-		} catch (IOException e) {
-			fail("saveLoadTest: IOException");
-		} catch (ConfigurationException e) {
-			fail("saveLoadTest: ConfigurationException");
-		}
+		assertEquals(valueSetPackageConfig1.getDescription(),
+				valueSetPackageConfig2.getDescription());
+		assertEquals(valueSetPackageConfig1.getVersion().getLabel(),
+				valueSetPackageConfig2.getVersion().getLabel());
+		assertEquals(valueSetPackageConfig1.getValueSetConfigList().size(),
+				valueSetPackageConfig2.getValueSetConfigList().size());
+
 	}
 
 	@Test
-	public void getLatestValueSetPackageConfigByStatusTest() {
+	public void getLatestValueSetPackageConfigByStatusTest() throws MalformedURLException,
+			UnsupportedEncodingException, FileNotFoundException, ConfigurationException {
 		ValueSetPackageManager valueSetPackageManager = loadPackageConfigs();
 		ValueSetPackageConfig valueSetPackageConfig;
 
@@ -260,7 +254,8 @@ public class ValueSetPackageManagerTest {
 	}
 
 	@Test
-	public void getLatestValueSetPackageConfigTest() {
+	public void getLatestValueSetPackageConfigTest() throws MalformedURLException,
+			UnsupportedEncodingException, FileNotFoundException, ConfigurationException {
 		ValueSetPackageManager valueSetPackageManager = loadPackageConfigs();
 		ValueSetPackageConfig valueSetPackageConfig = valueSetPackageManager
 				.getLatestValueSetPackageConfig();
@@ -269,7 +264,8 @@ public class ValueSetPackageManagerTest {
 	}
 
 	@Test
-	public void getValueSetPackageConfigByStatusAndDateTest() {
+	public void getValueSetPackageConfigByStatusAndDateTest() throws MalformedURLException,
+			UnsupportedEncodingException, FileNotFoundException, ConfigurationException {
 		ValueSetPackageManager valueSetPackageManager = loadPackageConfigs();
 		ValueSetPackageConfig valueSetPackageConfig;
 
@@ -283,86 +279,73 @@ public class ValueSetPackageManagerTest {
 
 	}
 
-	public ValueSetPackageManager loadPackageConfigs() {
+	public ValueSetPackageManager loadPackageConfigs() throws MalformedURLException,
+			UnsupportedEncodingException, FileNotFoundException, ConfigurationException {
 		ValueSetPackageManager valueSetPackageManager = new ValueSetPackageManager();
 
-		try {
+		// load the prepared config
+		final URL test1Url = new URL(
+				this.getClass().getResource("/ValueSetPackageConfig1.yaml").toString());
+		final File testFile1 = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
+		valueSetPackageManager.loadValueSetPackageConfig(testFile1);
 
-			// load the prepared config
-			final URL test1Url = new URL(
-					this.getClass().getResource("/ValueSetPackageConfig1.yaml").toString());
-			final File testFile1 = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
-			valueSetPackageManager.loadValueSetPackageConfig(testFile1);
+		final URL test2Url = new URL(
+				this.getClass().getResource("/ValueSetPackageConfig2.yaml").toString());
+		final File testFile2 = new File(URLDecoder.decode(test2Url.getPath(), "UTF-8"));
+		valueSetPackageManager.loadValueSetPackageConfig(testFile2);
 
-			final URL test2Url = new URL(
-					this.getClass().getResource("/ValueSetPackageConfig2.yaml").toString());
-			final File testFile2 = new File(URLDecoder.decode(test2Url.getPath(), "UTF-8"));
-			valueSetPackageManager.loadValueSetPackageConfig(testFile2);
+		final URL test3Url = new URL(
+				this.getClass().getResource("/ValueSetPackageConfig3.yaml").toString());
+		final File testFile3 = new File(URLDecoder.decode(test3Url.getPath(), "UTF-8"));
+		valueSetPackageManager.loadValueSetPackageConfig(testFile3);
 
-			final URL test3Url = new URL(
-					this.getClass().getResource("/ValueSetPackageConfig3.yaml").toString());
-			final File testFile3 = new File(URLDecoder.decode(test3Url.getPath(), "UTF-8"));
-			valueSetPackageManager.loadValueSetPackageConfig(testFile3);
+		final URL test4Url = new URL(
+				this.getClass().getResource("/ValueSetPackageConfig4.yaml").toString());
+		final File testFile4 = new File(URLDecoder.decode(test4Url.getPath(), "UTF-8"));
+		valueSetPackageManager.loadValueSetPackageConfig(testFile4);
 
-			final URL test4Url = new URL(
-					this.getClass().getResource("/ValueSetPackageConfig4.yaml").toString());
-			final File testFile4 = new File(URLDecoder.decode(test4Url.getPath(), "UTF-8"));
-			valueSetPackageManager.loadValueSetPackageConfig(testFile4);
-
-			final URL test5Url = new URL(
-					this.getClass().getResource("/ValueSetPackageConfig5.yaml").toString());
-			final File testFile5 = new File(URLDecoder.decode(test5Url.getPath(), "UTF-8"));
-			valueSetPackageManager.loadValueSetPackageConfig(testFile5);
-
-		} catch (IOException e) {
-			fail("saveLoadTest: IOException");
-		} catch (ConfigurationException e) {
-			fail("ConfigurationException: IOException");
-		}
+		final URL test5Url = new URL(
+				this.getClass().getResource("/ValueSetPackageConfig5.yaml").toString());
+		final File testFile5 = new File(URLDecoder.decode(test5Url.getPath(), "UTF-8"));
+		valueSetPackageManager.loadValueSetPackageConfig(testFile5);
 
 		return valueSetPackageManager;
 
 	}
 
 	@Test
-	public void saveLoadTestConfig() {
+	public void saveLoadTestConfig() throws IOException, ConfigurationException {
 
 		ValueSetPackageManager valueSetPackageManager = new ValueSetPackageManager();
-		try {
 
-			// Save a config
-			ValueSetPackageConfig valueSetPackageConfig1 = createValueSetPackageConfig1();
-			assertNotNull(valueSetPackageConfig1);
-			valueSetPackageManager.saveValueSetPackageConfig(valueSetPackageConfig1,
-					testValueSetPackageConfigFileName);
+		// Save a config
+		ValueSetPackageConfig valueSetPackageConfig1 = createValueSetPackageConfig1();
+		assertNotNull(valueSetPackageConfig1);
+		valueSetPackageManager.saveValueSetPackageConfig(valueSetPackageConfig1,
+				testValueSetPackageConfigFile);
 
-			// load the saved config
-			ValueSetPackageManager valueSetPackageManager2 = new ValueSetPackageManager();
-			valueSetPackageManager2.loadValueSetPackageConfig(testValueSetPackageConfigFileName);
-			ValueSetPackageConfig valueSetPackageConfig2 = valueSetPackageManager2
-					.getLatestValueSetPackageConfig();
+		// Prepare cleanup
+		testValueSetPackageConfigFile.deleteOnExit();
 
-			assertEquals(valueSetPackageConfig1.getDescription(),
-					valueSetPackageConfig2.getDescription());
-			assertTrue(valueSetPackageConfig1.getIdentificator()
-					.equals(valueSetPackageConfig2.getIdentificator()));
-			assertTrue(valueSetPackageConfig1.getSourceUrl()
-					.equals(valueSetPackageConfig2.getSourceUrl()));
-			assertEquals(valueSetPackageConfig1.getStatus(), valueSetPackageConfig2.getStatus());
-			assertTrue(valueSetPackageConfig1.getVersion()
-					.equals(valueSetPackageConfig2.getVersion()));
+		// load the saved config
+		ValueSetPackageManager valueSetPackageManager2 = new ValueSetPackageManager();
+		valueSetPackageManager2.loadValueSetPackageConfig(testValueSetPackageConfigFile);
+		ValueSetPackageConfig valueSetPackageConfig2 = valueSetPackageManager2
+				.getLatestValueSetPackageConfig();
 
-		} catch (IOException e) {
-			fail("saveLoadTest: IOException");
-		} catch (ConfigurationException e) {
-			fail("saveLoadTest: ConfigurationException");
-		}
+		assertEquals(valueSetPackageConfig1.getDescription(),
+				valueSetPackageConfig2.getDescription());
+		assertTrue(valueSetPackageConfig1.getIdentificator()
+				.equals(valueSetPackageConfig2.getIdentificator()));
+		assertTrue(valueSetPackageConfig1.getSourceUrl()
+				.equals(valueSetPackageConfig2.getSourceUrl()));
+		assertEquals(valueSetPackageConfig1.getStatus(), valueSetPackageConfig2.getStatus());
+		assertTrue(valueSetPackageConfig1.getVersion().equals(valueSetPackageConfig2.getVersion()));
 
-		new File(testValueSetPackageConfigFileName).delete();
 	}
 
 	@Test
-	public void saveLoadTestPackage() {
+	public void saveLoadTestPackage() throws IOException {
 		ValueSetPackageManager valueSetPackageManager = new ValueSetPackageManager();
 
 		// Save a package
@@ -425,29 +408,20 @@ public class ValueSetPackageManagerTest {
 		valueSetPackage.addMappingName(mappingName1);
 		valueSetPackage.addMappingName(mappingName2);
 
-		try {
-			valueSetPackageManager.saveValueSetPackage(valueSetPackage,
-					testValueSetPackageFileName);
-		} catch (IOException e) {
-			fail("saveLoadTestPackage: IOException");
-		}
+		// Prepare cleanup
+		testValueSetPackageFile.deleteOnExit();
+
+		valueSetPackageManager.saveValueSetPackage(valueSetPackage, testValueSetPackageFile);
 
 		// load the saved package
 		ValueSetPackageManager valueSetPackageManager2 = new ValueSetPackageManager();
-		try {
-			ValueSetPackage valueSetPackage2 = valueSetPackageManager2
-					.loadValueSetPackage(testValueSetPackageFileName);
+		ValueSetPackage valueSetPackage2 = valueSetPackageManager2
+				.loadValueSetPackage(testValueSetPackageFile);
 
-			assertEquals(description, valueSetPackage2.getDescription());
-			assertEquals(valueSet2.getName(), valueSetPackage2.listValueSets().get(1).getName());
-			assertEquals("BBB", valueSetPackage2.listMappingIdentificators().get(1).getExtension());
-			assertEquals(mappingName1, valueSetPackage2.listMappingNames().get(0));
-
-		} catch (FileNotFoundException e) {
-			fail("saveLoadTestPackage: FileNotFoundException");
-		} catch (ConfigurationException e) {
-			fail("saveLoadTestPackage: ConfigurationException");
-		}
+		assertEquals(description, valueSetPackage2.getDescription());
+		assertEquals(valueSet2.getName(), valueSetPackage2.listValueSets().get(1).getName());
+		assertEquals("BBB", valueSetPackage2.listMappingIdentificators().get(1).getExtension());
+		assertEquals(mappingName1, valueSetPackage2.listMappingNames().get(0));
 
 	}
 

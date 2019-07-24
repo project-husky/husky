@@ -20,6 +20,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -54,13 +55,13 @@ import org.xml.sax.SAXException;
  */
 public class ValueSetManagerTest {
 
-	/** The test value set config file name. */
-	private String testValueSetConfigFileName = Util.getTempDirectory()
-			+ FileUtil.getPlatformSpecificPathSeparator() + "testValueSetConfig.yaml";
+	/** The test value set config file. */
+	private File testValueSetConfigFile = new File(Util.getTempDirectory()
+			+ FileUtil.getPlatformSpecificPathSeparator() + "testValueSetConfig.yaml");
 
-	/** The test value set yaml file name. */
-	private String testValueSetYamlFileName = Util.getTempDirectory()
-			+ FileUtil.getPlatformSpecificPathSeparator() + "testValueSet.yaml";
+	/** The test value set yaml file. */
+	private File testValueSetYamlFile = new File(Util.getTempDirectory()
+			+ FileUtil.getPlatformSpecificPathSeparator() + "testValueSet.yaml");
 
 	@Test
 	public void downloadRawTest() {
@@ -240,8 +241,12 @@ public class ValueSetManagerTest {
 		ValueSetConfig valueSetConfig = ValueSetConfig.builder().withClassName(className)
 				.withProjectFolder(projectFolder).withSourceFormatType(sourceFormatType)
 				.withSourceSystemType(sourceSystemType).withSourceUrl(sourceUrl).build();
+
+		// Prepare cleanup after test
+		testValueSetConfigFile.deleteOnExit();
+
 		try {
-			valueSetManager.saveValueSetConfig(valueSetConfig, testValueSetConfigFileName);
+			valueSetManager.saveValueSetConfig(valueSetConfig, testValueSetConfigFile);
 		} catch (IOException e) {
 			fail("saveLoadTest: IOException");
 		}
@@ -250,7 +255,7 @@ public class ValueSetManagerTest {
 		ValueSetManager valueSetManager2 = new ValueSetManager();
 		try {
 			ValueSetConfig valueSetConfig2 = valueSetManager2
-					.loadValueSetConfig(testValueSetConfigFileName);
+					.loadValueSetConfig(testValueSetConfigFile);
 
 			assertEquals(className, valueSetConfig2.getClassName());
 			assertEquals(projectFolder, valueSetConfig2.getProjectFolder());
@@ -324,8 +329,11 @@ public class ValueSetManagerTest {
 		valueSet.addMappingName(mappingName1);
 		valueSet.addMappingName(mappingName2);
 
+		// Prepare cleanup after test
+		testValueSetYamlFile.deleteOnExit();
+
 		try {
-			valueSetManager.saveValueSet(valueSet, testValueSetYamlFileName);
+			valueSetManager.saveValueSet(valueSet, testValueSetYamlFile);
 		} catch (IOException e) {
 			fail("saveLoadTest: IOException");
 		}
@@ -333,7 +341,7 @@ public class ValueSetManagerTest {
 		// load the saved Value Set
 		ValueSetManager valueSetManager2 = new ValueSetManager();
 		try {
-			ValueSet valueSet2 = valueSetManager2.loadValueSetYaml(testValueSetYamlFileName);
+			ValueSet valueSet2 = valueSetManager2.loadValueSetYaml(testValueSetYamlFile);
 
 			assertEquals(description, valueSet2.getDescription(LanguageCode.ENGLISH));
 			assertEquals(valueSetEntry1.getCodeBaseType().getCode(),
