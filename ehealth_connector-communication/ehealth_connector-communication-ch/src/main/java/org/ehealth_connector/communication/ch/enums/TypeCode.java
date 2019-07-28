@@ -110,7 +110,7 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Referenza nei dati immagine</div>
 	 * <!-- @formatter:on -->
 	 */
-	IMAGE_REFERENCE("900000000000471000", "2.16.840.1.113883.6.96",
+	IMAGE_REFERENCE("900000000000471006", "2.16.840.1.113883.6.96",
 			"Image reference (foundation metadata concept)", "Image reference",
 			"Referenz auf Bilddaten", "Référence d'Image", "Referenza nei dati immagine"),
 	/**
@@ -372,7 +372,7 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Code per Referenza nei dati immagine</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String IMAGE_REFERENCE_CODE = "900000000000471000";
+	public static final String IMAGE_REFERENCE_CODE = "900000000000471006";
 
 	/**
 	 * <!-- @formatter:off -->

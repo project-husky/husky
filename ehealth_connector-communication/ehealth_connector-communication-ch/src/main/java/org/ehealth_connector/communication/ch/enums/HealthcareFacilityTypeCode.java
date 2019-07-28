@@ -85,17 +85,6 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 			"Istituto di diagnostica medica"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Free-standing birthing center</div>
-	 * <div class="de">Geburtshaus</div>
-	 * <div class="fr">Maison de naissance</div>
-	 * <div class="it">Luoghi natale</div>
-	 * <!-- @formatter:on -->
-	 */
-	FREE_STANDING_BIRTHING_CENTER("91154008", "2.16.840.1.113883.6.96",
-			"Free-standing birthing center (environment)", "Free-standing birthing center",
-			"Geburtshaus", "Maison de naissance", "Luoghi natale"),
-	/**
-	 * <!-- @formatter:off -->
 	 * <div class="en">General practice premises</div>
 	 * <div class="de">Arztpraxis</div>
 	 * <div class="fr">Cabinet médical</div>
@@ -256,16 +245,6 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	public static final String DIAGNOSTIC_INSTITUTION_CODE = "722171005";
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Free-standing birthing center</div>
-	 * <div class="de">Code für Geburtshaus</div>
-	 * <div class="fr">Code de Maison de naissance</div>
-	 * <div class="it">Code per Luoghi natale</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String FREE_STANDING_BIRTHING_CENTER_CODE = "91154008";
 
 	/**
 	 * <!-- @formatter:off -->

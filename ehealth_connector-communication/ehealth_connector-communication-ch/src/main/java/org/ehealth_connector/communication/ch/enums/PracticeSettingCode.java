@@ -372,17 +372,6 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 			"Soins", "Cure infermieristiche"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Occupational medicine</div>
-	 * <div class="de">Arbeitsmedizin</div>
-	 * <div class="fr">Médecine du travail</div>
-	 * <div class="it">Medicina del lavoro</div>
-	 * <!-- @formatter:on -->
-	 */
-	OCCUPATIONAL_MEDICINE("394821009", "2.16.840.1.113883.6.96",
-			"Occupational medicine (qualifier value)", "Occupational medicine", "Arbeitsmedizin",
-			"Médecine du travail", "Medicina del lavoro"),
-	/**
-	 * <!-- @formatter:off -->
 	 * <div class="en">Occupational therapy service</div>
 	 * <div class="de">Ergotherapie</div>
 	 * <div class="fr">Ergothérapie</div>
@@ -1017,16 +1006,6 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	public static final String NURSING_CODE = "722165004";
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Occupational medicine</div>
-	 * <div class="de">Code für Arbeitsmedizin</div>
-	 * <div class="fr">Code de Médecine du travail</div>
-	 * <div class="it">Code per Medicina del lavoro</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String OCCUPATIONAL_MEDICINE_CODE = "394821009";
 
 	/**
 	 * <!-- @formatter:off -->
