@@ -164,27 +164,32 @@ public class Designation implements Serializable {
 	 *            the Designation to compare
 	 * @return true, if equal; false otherwise.
 	 */
-	public boolean equals(Designation obj) {
+	@Override
+	public boolean equals(Object obj) {
 		boolean retVal = true;
 		if (obj == null)
 			return false;
+
+		if (!(obj instanceof Designation))
+			return false;
+
 		if (retVal) {
 			if (this.languageCode == null)
-				retVal = (obj.getLanguageCode() == null);
+				retVal = (((Designation) obj).getLanguageCode() == null);
 			else
-				retVal = (this.languageCode == obj.getLanguageCode());
+				retVal = (this.languageCode == ((Designation) obj).getLanguageCode());
 		}
 		if (retVal) {
 			if (this.type == null)
-				retVal = (obj.getType() == null);
+				retVal = (((Designation) obj).getType() == null);
 			else
-				retVal = (this.type == obj.getType());
+				retVal = (this.type == ((Designation) obj).getType());
 		}
 		if (retVal) {
 			if (this.displayName == null)
-				retVal = (obj.getDisplayName() == null);
+				retVal = (((Designation) obj).getDisplayName() == null);
 			else
-				retVal = this.displayName.equals(obj.getDisplayName());
+				retVal = this.displayName.equals(((Designation) obj).getDisplayName());
 		}
 		return retVal;
 	}

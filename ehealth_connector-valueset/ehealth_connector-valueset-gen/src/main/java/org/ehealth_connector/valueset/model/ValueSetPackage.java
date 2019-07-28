@@ -419,15 +419,20 @@ public class ValueSetPackage implements Serializable {
 	 *            the ValueSetPackage to compare
 	 * @return true, if equal; false otherwise.
 	 */
-	public boolean equals(ValueSetPackage obj) {
+	@Override
+	public boolean equals(Object obj) {
 		boolean retVal = true;
 		if (obj == null)
 			return false;
+
+		if (!(obj instanceof ValueSetPackage))
+			return false;
+
 		if (retVal) {
 			if (this.mappingIdentificatorList == null)
 				this.mappingIdentificatorList = new ArrayList<IdentificatorBaseType>();
 			for (int i = 0; i < this.mappingIdentificatorList.size(); i++) {
-				retVal = obj.contains(this.mappingIdentificatorList.get(i));
+				retVal = ((ValueSetPackage) obj).contains(this.mappingIdentificatorList.get(i));
 				if (!retVal)
 					break;
 			}
@@ -436,7 +441,7 @@ public class ValueSetPackage implements Serializable {
 			if (this.mappingNameList == null)
 				this.mappingNameList = new ArrayList<String>();
 			for (int i = 0; i < this.mappingNameList.size(); i++) {
-				retVal = obj.contains(this.mappingNameList.get(i));
+				retVal = ((ValueSetPackage) obj).contains(this.mappingNameList.get(i));
 				if (!retVal)
 					break;
 			}
@@ -445,40 +450,40 @@ public class ValueSetPackage implements Serializable {
 			if (this.valueSetList == null)
 				this.valueSetList = new ArrayList<ValueSet>();
 			for (int i = 0; i < this.valueSetList.size(); i++) {
-				retVal = obj.contains(this.valueSetList.get(i));
+				retVal = ((ValueSetPackage) obj).contains(this.valueSetList.get(i));
 				if (!retVal)
 					break;
 			}
 		}
 		if (retVal) {
 			if (this.description == null)
-				retVal = (obj.getDescription() == null);
+				retVal = (((ValueSetPackage) obj).getDescription() == null);
 			else
-				retVal = this.description.equals(obj.getDescription());
+				retVal = this.description.equals(((ValueSetPackage) obj).getDescription());
 		}
 		if (retVal) {
 			if (this.identificator == null)
-				retVal = (obj.getIdentificator() == null);
+				retVal = (((ValueSetPackage) obj).getIdentificator() == null);
 			else
-				retVal = this.identificator.equals(obj.getIdentificator());
+				retVal = this.identificator.equals(((ValueSetPackage) obj).getIdentificator());
 		}
 		if (retVal) {
 			if (this.sourceUrl == null)
-				retVal = (obj.getSourceUrl() == null);
+				retVal = (((ValueSetPackage) obj).getSourceUrl() == null);
 			else
-				retVal = this.sourceUrl.equals(obj.getSourceUrl());
+				retVal = this.sourceUrl.equals(((ValueSetPackage) obj).getSourceUrl());
 		}
 		if (retVal) {
 			if (this.status == null)
-				retVal = (obj.getStatus() == null);
+				retVal = (((ValueSetPackage) obj).getStatus() == null);
 			else
-				retVal = this.status.equals(obj.getStatus());
+				retVal = this.status.equals(((ValueSetPackage) obj).getStatus());
 		}
 		if (retVal) {
 			if (this.version == null)
-				retVal = (obj.getVersion() == null);
+				retVal = (((ValueSetPackage) obj).getVersion() == null);
 			else
-				retVal = this.version.equals(obj.getVersion());
+				retVal = this.version.equals(((ValueSetPackage) obj).getVersion());
 		}
 		return retVal;
 	}

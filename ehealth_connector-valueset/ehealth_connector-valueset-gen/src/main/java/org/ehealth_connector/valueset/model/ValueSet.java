@@ -578,15 +578,20 @@ public class ValueSet implements Serializable {
 	 *            the ValueSet to compare
 	 * @return true, if equal; false otherwise.
 	 */
-	public boolean equals(ValueSet obj) {
+	@Override
+	public boolean equals(Object obj) {
 		boolean retVal = true;
 		if (obj == null)
 			return false;
+
+		if (!(obj instanceof ValueSet))
+			return false;
+
 		if (retVal) {
 			if (this.descriptionList == null)
 				this.descriptionList = new ArrayList<LangText>();
 			for (int i = 0; i < this.descriptionList.size(); i++) {
-				retVal = obj.contains(this.descriptionList.get(i));
+				retVal = ((ValueSet) obj).contains(this.descriptionList.get(i));
 				if (!retVal)
 					break;
 			}
@@ -595,7 +600,7 @@ public class ValueSet implements Serializable {
 			if (this.mappingIdentificatorList == null)
 				this.mappingIdentificatorList = new ArrayList<IdentificatorBaseType>();
 			for (int i = 0; i < this.mappingIdentificatorList.size(); i++) {
-				retVal = obj.contains(this.mappingIdentificatorList.get(i));
+				retVal = ((ValueSet) obj).contains(this.mappingIdentificatorList.get(i));
 				if (!retVal)
 					break;
 			}
@@ -604,7 +609,7 @@ public class ValueSet implements Serializable {
 			if (this.mappingNameList == null)
 				this.mappingNameList = new ArrayList<String>();
 			for (int i = 0; i < this.mappingNameList.size(); i++) {
-				retVal = obj.contains(this.mappingNameList.get(i));
+				retVal = ((ValueSet) obj).contains(this.mappingNameList.get(i));
 				if (!retVal)
 					break;
 			}
@@ -613,46 +618,46 @@ public class ValueSet implements Serializable {
 			if (this.valueSetEntryList == null)
 				this.valueSetEntryList = new ArrayList<ValueSetEntry>();
 			for (int i = 0; i < this.valueSetEntryList.size(); i++) {
-				retVal = obj.contains(this.valueSetEntryList.get(i));
+				retVal = ((ValueSet) obj).contains(this.valueSetEntryList.get(i));
 				if (!retVal)
 					break;
 			}
 		}
 		if (retVal) {
 			if (this.displayName == null)
-				retVal = (obj.getDisplayName() == null);
+				retVal = (((ValueSet) obj).getDisplayName() == null);
 			else
-				retVal = this.displayName.equals(obj.getDisplayName());
+				retVal = this.displayName.equals(((ValueSet) obj).getDisplayName());
 		}
 		if (retVal) {
 			if (this.effectiveDate == null)
-				retVal = (obj.getEffectiveDate() == null);
+				retVal = (((ValueSet) obj).getEffectiveDate() == null);
 			else
-				retVal = this.effectiveDate.equals(obj.getEffectiveDate());
+				retVal = this.effectiveDate.equals(((ValueSet) obj).getEffectiveDate());
 		}
 		if (retVal) {
 			if (this.identificator == null)
-				retVal = (obj.getIdentificator() == null);
+				retVal = (((ValueSet) obj).getIdentificator() == null);
 			else
-				retVal = this.identificator.equals(obj.getIdentificator());
+				retVal = this.identificator.equals(((ValueSet) obj).getIdentificator());
 		}
 		if (retVal) {
 			if (this.name == null)
-				retVal = (obj.getName() == null);
+				retVal = (((ValueSet) obj).getName() == null);
 			else
-				retVal = this.name.equals(obj.getName());
+				retVal = this.name.equals(((ValueSet) obj).getName());
 		}
 		if (retVal) {
 			if (this.status == null)
-				retVal = (obj.getStatus() == null);
+				retVal = (((ValueSet) obj).getStatus() == null);
 			else
-				retVal = this.status.equals(obj.getStatus());
+				retVal = this.status.equals(((ValueSet) obj).getStatus());
 		}
 		if (retVal) {
 			if (this.version == null)
-				retVal = (obj.getVersion() == null);
+				retVal = (((ValueSet) obj).getVersion() == null);
 			else
-				retVal = this.version.equals(obj.getVersion());
+				retVal = this.version.equals(((ValueSet) obj).getVersion());
 		}
 		return retVal;
 	}

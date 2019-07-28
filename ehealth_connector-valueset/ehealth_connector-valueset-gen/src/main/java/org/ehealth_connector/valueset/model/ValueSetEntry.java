@@ -462,15 +462,20 @@ public class ValueSetEntry implements Serializable {
 	 *            the ValueSetEntry to compare
 	 * @return true, if equal; false otherwise.
 	 */
-	public boolean equals(ValueSetEntry obj) {
+	@Override
+	public boolean equals(Object obj) {
 		boolean retVal = true;
 		if (obj == null)
 			return false;
+
+		if (!(obj instanceof ValueSetEntry))
+			return false;
+
 		if (retVal) {
 			if (this.childList == null)
 				this.childList = new ArrayList<ValueSetEntry>();
 			for (int i = 0; i < this.childList.size(); i++) {
-				retVal = obj.contains(this.childList.get(i));
+				retVal = ((ValueSetEntry) obj).contains(this.childList.get(i));
 				if (!retVal)
 					break;
 			}
@@ -479,7 +484,7 @@ public class ValueSetEntry implements Serializable {
 			if (this.designationList == null)
 				this.designationList = new ArrayList<Designation>();
 			for (int i = 0; i < this.designationList.size(); i++) {
-				retVal = obj.contains(this.designationList.get(i));
+				retVal = ((ValueSetEntry) obj).contains(this.designationList.get(i));
 				if (!retVal)
 					break;
 			}
@@ -488,7 +493,7 @@ public class ValueSetEntry implements Serializable {
 			if (this.mappingCodeList == null)
 				this.mappingCodeList = new ArrayList<CodeBaseType>();
 			for (int i = 0; i < this.mappingCodeList.size(); i++) {
-				retVal = obj.contains(this.mappingCodeList.get(i));
+				retVal = ((ValueSetEntry) obj).contains(this.mappingCodeList.get(i));
 				if (!retVal)
 					break;
 			}
@@ -497,31 +502,33 @@ public class ValueSetEntry implements Serializable {
 			if (this.mappingNameList == null)
 				this.mappingNameList = new ArrayList<String>();
 			for (int i = 0; i < this.mappingNameList.size(); i++) {
-				retVal = obj.contains(this.mappingNameList.get(i));
+				retVal = ((ValueSetEntry) obj).contains(this.mappingNameList.get(i));
 				if (!retVal)
 					break;
 			}
 		}
 		if (retVal) {
 			if (this.codeBaseType == null)
-				retVal = (obj.getCodeBaseType() == null);
+				retVal = (((ValueSetEntry) obj).getCodeBaseType() == null);
 			else
-				retVal = this.codeBaseType.equals(obj.getCodeBaseType());
+				retVal = this.codeBaseType.equals(((ValueSetEntry) obj).getCodeBaseType());
 		}
 		if (retVal) {
 			if (this.defaultMappingName == null)
-				retVal = (obj.getDefaultMappingName() == null);
+				retVal = (((ValueSetEntry) obj).getDefaultMappingName() == null);
 			else
-				retVal = this.defaultMappingName.equals(obj.getDefaultMappingName());
+				retVal = this.defaultMappingName
+						.equals(((ValueSetEntry) obj).getDefaultMappingName());
 		}
 		if (retVal) {
-			retVal = (this.level == obj.getLevel());
+			retVal = (this.level == ((ValueSetEntry) obj).getLevel());
 		}
 		if (retVal) {
 			if (this.valueSetEntryType == null)
-				retVal = (obj.getValueSetEntryType() == null);
+				retVal = (((ValueSetEntry) obj).getValueSetEntryType() == null);
 			else
-				retVal = this.valueSetEntryType.equals(obj.getValueSetEntryType());
+				retVal = this.valueSetEntryType
+						.equals(((ValueSetEntry) obj).getValueSetEntryType());
 		}
 		return retVal;
 	}

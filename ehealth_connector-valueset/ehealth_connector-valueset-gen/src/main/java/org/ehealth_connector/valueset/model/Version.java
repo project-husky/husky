@@ -178,15 +178,20 @@ public class Version implements Serializable {
 	 *            the Version to compare
 	 * @return true, if equal; false otherwise.
 	 */
-	public boolean equals(Version obj) {
+	@Override
+	public boolean equals(Object obj) {
 		boolean retVal = true;
 		if (obj == null)
 			return false;
+
+		if (!(obj instanceof Version))
+			return false;
+
 		if (retVal) {
 			if (this.label == null)
-				retVal = (obj.getLabel() == null);
+				retVal = (((Version) obj).getLabel() == null);
 			else
-				retVal = this.label.equals(obj.getLabel());
+				retVal = this.label.equals(((Version) obj).getLabel());
 		}
 		// only business rules are applied, here. Rest was initially implemented
 		// and stays here for future use. If you use it, you need to implement
@@ -200,21 +205,22 @@ public class Version implements Serializable {
 		// }
 		if (retVal) {
 			if (this.validFrom == null)
-				retVal = (obj.getValidFrom() == null);
+				retVal = (((Version) obj).getValidFrom() == null);
 			else {
-				retVal = this.validFrom.equals(obj.getValidFrom());
+				retVal = this.validFrom.equals(((Version) obj).getValidFrom());
 				if (!retVal) {
-					retVal = DateUtil.equalsDateOnly(this.validFrom, obj.getValidFrom());
+					retVal = DateUtil.equalsDateOnly(this.validFrom,
+							((Version) obj).getValidFrom());
 				}
 			}
 		}
 		if (retVal) {
 			if (this.validTo == null)
-				retVal = (obj.getValidTo() == null);
+				retVal = (((Version) obj).getValidTo() == null);
 			else {
-				retVal = this.validTo.equals(obj.getValidTo());
+				retVal = this.validTo.equals(((Version) obj).getValidTo());
 				if (!retVal) {
-					retVal = DateUtil.equalsDateOnly(this.validTo, obj.getValidTo());
+					retVal = DateUtil.equalsDateOnly(this.validTo, ((Version) obj).getValidTo());
 				}
 			}
 		}
