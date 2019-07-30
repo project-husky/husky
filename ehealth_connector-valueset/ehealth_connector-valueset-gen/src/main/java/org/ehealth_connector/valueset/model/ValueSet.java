@@ -398,6 +398,42 @@ public class ValueSet implements Serializable {
 		this.descriptionList.add(value);
 	}
 
+	private void addEntryList(ArrayList<ValueSetEntry> globalList,
+			ArrayList<ValueSetEntry> valueSetEntryList) {
+		for (ValueSetEntry valueSetEntry : valueSetEntryList) {
+			globalList.add(valueSetEntry);
+		}
+	}
+
+	private void addEntryListRecursive(ArrayList<ValueSetEntry> globalList,
+			ArrayList<ValueSetEntry> valueSetEntryList) {
+		for (ValueSetEntry valueSetEntry : valueSetEntryList) {
+			String entryName = ValueSet
+					.buildEnumName(valueSetEntry.getCodeBaseType().getDisplayName());
+
+			boolean isAlreadyThere = false;
+			boolean isEqual = false;
+			for (ValueSetEntry temp : globalList) {
+				String tempName = ValueSet.buildEnumName(temp.getCodeBaseType().getDisplayName());
+				isAlreadyThere = (tempName.contentEquals(entryName));
+				isEqual = (temp.equals(valueSetEntry));
+			}
+			if (!isAlreadyThere) {
+				globalList.add(valueSetEntry);
+			} else {
+				if (!isEqual) {
+					valueSetEntry.getCodeBaseType()
+							.setDisplayName(valueSetEntry.getCodeBaseType().getDisplayName() + "_"
+									+ valueSetEntry.getCodeBaseType().getCode());
+					globalList.add(valueSetEntry);
+				}
+			}
+			ArrayList<ValueSetEntry> children = valueSetEntry.getChildList();
+			if (children != null)
+				addEntryListRecursive(globalList, children);
+		}
+	}
+
 	/**
 	 * <div class="en">Adds a mapping identificator.</div>
 	 *
@@ -761,6 +797,36 @@ public class ValueSet implements Serializable {
 	 */
 	public String getName() {
 		return name;
+	}
+
+	/**
+	 * <div class="en">Gets the sorted entry list.</div>
+	 *
+	 * <div class="de">Ruft die sortierte Eintragsliste ab.</div>
+	 *
+	 * @return the sorted entry list
+	 */
+	public ArrayList<ValueSetEntry> getSortedEntryList() {
+		ArrayList<ValueSetEntry> retVal = new ArrayList<ValueSetEntry>();
+		addEntryList(retVal, valueSetEntryList);
+		retVal.sort(new ValueSetEntryEnumNameComparator());
+		return retVal;
+	}
+
+	/**
+	 * <div class="en">Gets the sorted entry list. Contains also value set
+	 * entries from children.</div>
+	 *
+	 * <div class="de">Ruft die sortierte Eintragsliste ab. Enthält auch
+	 * Werteeinträge von untergeordneten Elementen.</div>
+	 *
+	 * @return the sorted entry list
+	 */
+	public ArrayList<ValueSetEntry> getSortedEntryListRecursive() {
+		ArrayList<ValueSetEntry> retVal = new ArrayList<ValueSetEntry>();
+		addEntryListRecursive(retVal, valueSetEntryList);
+		retVal.sort(new ValueSetEntryEnumNameComparator());
+		return retVal;
 	}
 
 	/**
