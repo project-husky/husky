@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.34
- * Template description: Person name information (with required family and given name) according to the eCH-0011 V8.1 nameData data type. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.See https://www.ech.ch/vechweb/page?p=dossier&amp;documentNumber=eCH-0011&amp;documentVersion=8.1, section 3.3.2 nameData â€“ Namensangaben for more information.
+ * Template description: Person name information (with required family and given name) according to the eCH-0011 V8.1 nameData data type. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.See https://www.ech.ch/vechweb/page?p=dossier&amp;documentNumber=eCH-0011&amp;documentVersion=8.1, section 3.3.2 nameData – Namensangaben for more information.
  *
  * Element description: The person's legal name (with required family and given name).
  */
@@ -32,12 +32,12 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends org.eheal
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP> hl7Family;
 
 	/**
-	 * The person's maiden name ([ge]: Ledigname; [fr]: nom de cÃ©libataire).
+	 * The person's maiden name ([ge]: Ledigname; [fr]: nom de célibataire).
 	 */
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP> hl7Family1;
 
 	/**
-	 * The person's given name ([ge]: Vorname; [fr]: prÃ©nom).
+	 * The person's given name ([ge]: Vorname; [fr]: prénom).
 	 */
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP> hl7Given;
 
@@ -61,7 +61,7 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends org.eheal
 
 	/**
 	 * Adds a hl7Family1
-	 * The person's maiden name ([ge]: Ledigname; [fr]: nom de cÃ©libataire).
+	 * The person's maiden name ([ge]: Ledigname; [fr]: nom de célibataire).
 	 */
 	public void addHl7Family1(org.ehealth_connector.common.hl7cdar2.ENXP value) {
 		hl7Family1.add(value);
@@ -69,7 +69,7 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends org.eheal
 
 	/**
 	 * Adds a hl7Given
-	 * The person's given name ([ge]: Vorname; [fr]: prÃ©nom).
+	 * The person's given name ([ge]: Vorname; [fr]: prénom).
 	 */
 	public void addHl7Given(org.ehealth_connector.common.hl7cdar2.ENXP value) {
 		hl7Given.add(value);
@@ -101,7 +101,7 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends org.eheal
 
 	/**
 	 * Adds a hl7Family1
-	 * The person's maiden name ([ge]: Ledigname; [fr]: nom de cÃ©libataire).
+	 * The person's maiden name ([ge]: Ledigname; [fr]: nom de célibataire).
 	 */
 	public void clearHl7Family1() {
 		hl7Family1.clear();
@@ -109,7 +109,7 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends org.eheal
 
 	/**
 	 * Adds a hl7Given
-	 * The person's given name ([ge]: Vorname; [fr]: prÃ©nom).
+	 * The person's given name ([ge]: Vorname; [fr]: prénom).
 	 */
 	public void clearHl7Given() {
 		hl7Given.clear();

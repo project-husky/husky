@@ -23,11 +23,11 @@ import static org.junit.Assert.assertTrue;
 import java.util.Date;
 import java.util.Map;
 
+import org.ehealth_connector.common.enums.TelecomAddressUse;
 import org.ehealth_connector.common.mdht.Name;
 import org.ehealth_connector.common.mdht.Patient;
 import org.ehealth_connector.common.mdht.enums.CountryCode;
 import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
-import org.ehealth_connector.common.mdht.enums.TelecomAddressUse;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.fhir.structures.testhelper.TestPatient;
 import org.hl7.fhir.dstu3.model.Address;

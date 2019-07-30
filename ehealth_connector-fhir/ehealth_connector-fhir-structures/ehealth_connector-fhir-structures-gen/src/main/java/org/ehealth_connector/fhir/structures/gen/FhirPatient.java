@@ -614,25 +614,25 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 			final Telecoms telecoms = new Telecoms();
 			for (final ContactPoint ContactPoint : getTelecom()) {
 				if (ContactPointSystem.PHONE.equals(ContactPoint.getSystemElement().getValue())) {
-					org.ehealth_connector.common.mdht.enums.TelecomAddressUse addressUse = null;
+					org.ehealth_connector.common.enums.TelecomAddressUse addressUse = null;
 					if (ContactPointUse.HOME.equals(ContactPoint.getUseElement().getValue())) {
-						addressUse = org.ehealth_connector.common.mdht.enums.TelecomAddressUse.PRIVATE;
+						addressUse = org.ehealth_connector.common.enums.TelecomAddressUse.PRIVATE;
 					} else if (ContactPointUse.WORK
 							.equals(ContactPoint.getUseElement().getValue())) {
-						addressUse = org.ehealth_connector.common.mdht.enums.TelecomAddressUse.BUSINESS;
+						addressUse = org.ehealth_connector.common.enums.TelecomAddressUse.BUSINESS;
 					} else if (ContactPointUse.MOBILE
 							.equals(ContactPoint.getUseElement().getValue())) {
-						addressUse = org.ehealth_connector.common.mdht.enums.TelecomAddressUse.MOBILE;
+						addressUse = org.ehealth_connector.common.enums.TelecomAddressUse.MOBILE;
 					}
 					telecoms.addPhone(ContactPoint.getValue(), addressUse);
 				}
 				if (ContactPointSystem.EMAIL.equals(ContactPoint.getSystemElement().getValue())) {
-					org.ehealth_connector.common.mdht.enums.TelecomAddressUse addressUse = null;
+					org.ehealth_connector.common.enums.TelecomAddressUse addressUse = null;
 					if (ContactPointUse.HOME.equals(ContactPoint.getUseElement().getValue())) {
-						addressUse = org.ehealth_connector.common.mdht.enums.TelecomAddressUse.PRIVATE;
+						addressUse = org.ehealth_connector.common.enums.TelecomAddressUse.PRIVATE;
 					} else if (ContactPointUse.WORK
 							.equals(ContactPoint.getUseElement().getValue())) {
-						addressUse = org.ehealth_connector.common.mdht.enums.TelecomAddressUse.BUSINESS;
+						addressUse = org.ehealth_connector.common.enums.TelecomAddressUse.BUSINESS;
 					}
 					telecoms.addEMail(ContactPoint.getValue(), addressUse);
 				}

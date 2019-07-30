@@ -47,7 +47,7 @@ public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connect
 	/**
 	 * Fixed human readable title of this section.
 	 * - [ge]: 'Original Darstellung'
-	 * - [fr]: 'ReprÃ©sentation originale'
+	 * - [fr]: 'Représentation originale'
 	 * - [it]: 'Rappresentazione originale'
 	 * - [en]: 'Original representation'
 	 */
@@ -94,7 +94,7 @@ public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connect
 	 * Gets the hl7Title
 	 * Fixed human readable title of this section.
 	 * - [ge]: 'Original Darstellung'
-	 * - [fr]: 'ReprÃ©sentation originale'
+	 * - [fr]: 'Représentation originale'
 	 * - [it]: 'Rappresentazione originale'
 	 * - [en]: 'Original representation'
 	 */
@@ -143,7 +143,7 @@ public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connect
 	 * Sets the hl7Title
 	 * Fixed human readable title of this section.
 	 * - [ge]: 'Original Darstellung'
-	 * - [fr]: 'ReprÃ©sentation originale'
+	 * - [fr]: 'Représentation originale'
 	 * - [it]: 'Rappresentazione originale'
 	 * - [en]: 'Original representation'
 	 */

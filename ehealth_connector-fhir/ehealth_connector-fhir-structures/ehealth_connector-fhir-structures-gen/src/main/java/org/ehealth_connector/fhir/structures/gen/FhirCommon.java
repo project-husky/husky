@@ -1861,12 +1861,12 @@ public class FhirCommon {
 	public static Telecoms getTelecoms(List<ContactPoint> fhirContactPoints) {
 		final Telecoms eHCTelecoms = new Telecoms();
 		for (final ContactPoint telco : fhirContactPoints) {
-			org.ehealth_connector.common.mdht.enums.TelecomAddressUse usage = org.ehealth_connector.common.mdht.enums.TelecomAddressUse.BUSINESS;
+			org.ehealth_connector.common.enums.TelecomAddressUse usage = org.ehealth_connector.common.enums.TelecomAddressUse.BUSINESS;
 			if (telco.getUseElement().getValue() == ContactPointUse.HOME) {
-				usage = org.ehealth_connector.common.mdht.enums.TelecomAddressUse.PRIVATE;
+				usage = org.ehealth_connector.common.enums.TelecomAddressUse.PRIVATE;
 			}
 			if (telco.getUseElement().getValue() == ContactPointUse.TEMP) {
-				usage = org.ehealth_connector.common.mdht.enums.TelecomAddressUse.PUBLIC;
+				usage = org.ehealth_connector.common.enums.TelecomAddressUse.PUBLIC;
 			}
 			final String value = telco.getValue();
 			if (value.toLowerCase().startsWith("tel:")) {
