@@ -27,7 +27,7 @@ import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdRecCategories;
 import org.ehealth_connector.cda.ch.vacd.enums.SectionsVacd;
-import org.ehealth_connector.common.mdht.enums.LanguageCode;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ch.ChFactory;

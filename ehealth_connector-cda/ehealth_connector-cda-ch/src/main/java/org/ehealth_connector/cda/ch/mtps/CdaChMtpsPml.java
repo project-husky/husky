@@ -28,11 +28,11 @@ import org.ehealth_connector.cda.ihe.pharm.MedicationListSection;
 import org.ehealth_connector.cda.ihe.pharm.MedicationTreatmentPlanItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.PharmaceuticalAdviceItemEntry;
 import org.ehealth_connector.cda.ihe.pharm.PrescriptionItemEntry;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Organization;
 import org.ehealth_connector.common.mdht.Patient;
-import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 
 /**

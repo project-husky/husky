@@ -30,6 +30,7 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.List;
 
+import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.mdht.Address;
 import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.AuthoringDevice;
@@ -37,7 +38,6 @@ import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Name;
 import org.ehealth_connector.common.mdht.Telecoms;
-import org.ehealth_connector.common.mdht.enums.CodeSystems;
 import org.ehealth_connector.common.mdht.enums.ConfidentialityCode;
 import org.ehealth_connector.common.mdht.enums.Isco08;
 import org.ehealth_connector.common.utils.FileUtil;

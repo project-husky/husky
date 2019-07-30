@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.common.ch.enums.ConfidentialityCode;
-import org.ehealth_connector.common.mdht.enums.LanguageCode;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.communication.DocumentMetadata;
 import org.ehealth_connector.communication.ch.enums.ClassCode;
 import org.ehealth_connector.communication.ch.enums.FormatCode;

@@ -20,7 +20,7 @@ import java.io.Serializable;
 
 import javax.annotation.Generated;
 
-import org.ehealth_connector.common.mdht.enums.LanguageCode;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.valueset.enums.DesignationType;
 

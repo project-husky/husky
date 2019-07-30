@@ -22,8 +22,8 @@ import java.util.Map;
 
 import javax.annotation.Generated;
 
-import org.ehealth_connector.common.mdht.enums.CodeSystems;
-import org.ehealth_connector.common.mdht.enums.LanguageCode;
+import org.ehealth_connector.common.enums.CodeSystems;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**

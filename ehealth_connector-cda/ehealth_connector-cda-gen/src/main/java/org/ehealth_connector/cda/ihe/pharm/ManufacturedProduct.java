@@ -20,10 +20,10 @@ package org.ehealth_connector.cda.ihe.pharm;
 
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.common.enums.CodeSystems;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Organization;
-import org.ehealth_connector.common.mdht.enums.CodeSystems;
-import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.Material;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -69,7 +69,7 @@ public class ManufacturedProduct
 	 * Adds the manufactured product id. This ID HAS TO BE a GTIN, GLN, or Swiss
 	 * Index Code
 	 *
-	 * @see org.ehealth_connector.common.mdht.enums.CodeSystems
+	 * @see org.ehealth_connector.common.enums.CodeSystems
 	 *
 	 *      2017/05/02 According to CDA-CH-II Medications-template, two IDs can
 	 *      be present: root 1.3.88 --> Product GLN HAS TO BE PRESENT root

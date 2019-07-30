@@ -20,8 +20,8 @@ package org.ehealth_connector.cda.ch.enums;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -49,7 +49,7 @@ public class RiskOfExposureTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.enums.RiskOfExposure#getCode(org.ehealth_connector.common.mdht.enums.LanguageCode)}
+	 * {@link org.ehealth_connector.cda.ch.enums.RiskOfExposure#getCode(org.ehealth_connector.common.enums.LanguageCode)}
 	 * .
 	 */
 	@Test
@@ -64,7 +64,7 @@ public class RiskOfExposureTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.enums.RiskOfExposure#getDisplayName(org.ehealth_connector.common.mdht.enums.LanguageCode)}
+	 * {@link org.ehealth_connector.cda.ch.enums.RiskOfExposure#getDisplayName(org.ehealth_connector.common.enums.LanguageCode)}
 	 * .
 	 */
 	@Test

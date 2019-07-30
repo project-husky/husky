@@ -19,8 +19,8 @@ package org.ehealth_connector.cda.ch.lab.lrqc;
 
 import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
 import org.ehealth_connector.cda.ihe.lab.BaseLaboratorySpecialtySection;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.mdht.enums.LanguageCode;
 
 /**
  * The Class LaboratorySpecialtySection.

@@ -21,11 +21,11 @@ import org.ehealth_connector.cda.BaseProblemEntry;
 import org.ehealth_connector.cda.ch.enums.RiskOfComplications;
 import org.ehealth_connector.cda.ch.enums.RiskOfExposure;
 import org.ehealth_connector.cda.enums.ProblemType;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.mdht.enums.EhcVersions;
-import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.openhealthtools.ihe.utils.UUID;
 
 /**

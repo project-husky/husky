@@ -20,7 +20,7 @@ package org.ehealth_connector.cda;
 
 import java.util.Comparator;
 
-import org.ehealth_connector.common.mdht.enums.LanguageCode;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.Organizer;
 
 /**

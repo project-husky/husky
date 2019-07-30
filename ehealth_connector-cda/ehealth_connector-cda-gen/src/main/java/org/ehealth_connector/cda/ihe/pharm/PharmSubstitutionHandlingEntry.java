@@ -20,7 +20,7 @@ package org.ehealth_connector.cda.ihe.pharm;
 
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ihe.pharm.enums.SubstanceAdminSubstitution;
-import org.ehealth_connector.common.mdht.enums.LanguageCode;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.PharmSubjectOf4;
 import org.openhealthtools.mdht.uml.cda.PharmSubstitutionPermission;

@@ -29,6 +29,7 @@ import org.ehealth_connector.cda.Section;
 import org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.common.ch.enums.ConfidentialityCode;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Name;
@@ -36,7 +37,6 @@ import org.ehealth_connector.common.mdht.Organization;
 import org.ehealth_connector.common.mdht.Patient;
 import org.ehealth_connector.common.mdht.Person;
 import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
-import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.enums.ParticipantType;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
@@ -449,7 +449,7 @@ public class CdaChV2StructuredBodyTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.AbstractCda#setLanguageCode(org.ehealth_connector.common.mdht.enums.LanguageCode)}
+	 * {@link org.ehealth_connector.cda.AbstractCda#setLanguageCode(org.ehealth_connector.common.enums.LanguageCode)}
 	 * and {@link org.ehealth_connector.cda.AbstractCda#getLanguageCode()}.
 	 */
 	@Test

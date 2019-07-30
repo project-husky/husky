@@ -25,6 +25,7 @@ import java.util.List;
 
 import org.ehealth_connector.cda.Section;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
@@ -32,7 +33,6 @@ import org.ehealth_connector.common.mdht.Name;
 import org.ehealth_connector.common.mdht.Organization;
 import org.ehealth_connector.common.mdht.Patient;
 import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
-import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.junit.Before;

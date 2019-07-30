@@ -30,7 +30,7 @@ import org.ehealth_connector.cda.ch.ProblemEntry;
 import org.ehealth_connector.cda.ch.enums.RiskOfExposure;
 import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
 import org.ehealth_connector.cda.ihe.pharm.PharmaceuticalAdviceConcernEntry;
-import org.ehealth_connector.common.mdht.enums.LanguageCode;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.junit.Test;
 import org.w3c.dom.Document;

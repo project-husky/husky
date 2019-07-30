@@ -17,8 +17,8 @@
  */
 package org.ehealth_connector.cda.ihe.lab;
 
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.mdht.enums.LanguageCode;
 
 /**
  * The Class LaboratorySpecialtySection. Every Laboratory Report SHALL contain

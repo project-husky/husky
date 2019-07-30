@@ -19,7 +19,7 @@
 package org.ehealth_connector.cda.ihe.pharm;
 
 import org.ehealth_connector.cda.ihe.pharm.enums.PharmacyItemTypeList;
-import org.ehealth_connector.common.mdht.enums.LanguageCode;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;

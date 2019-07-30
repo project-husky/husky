@@ -17,8 +17,8 @@
  */
 package org.ehealth_connector.cda.utils;
 
+import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.mdht.Identificator;
-import org.ehealth_connector.common.mdht.enums.CodeSystems;
 import org.junit.Before;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.Act;

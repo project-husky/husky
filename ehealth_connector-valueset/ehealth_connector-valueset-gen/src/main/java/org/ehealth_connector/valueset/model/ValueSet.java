@@ -25,7 +25,7 @@ import javax.annotation.Generated;
 
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
-import org.ehealth_connector.common.mdht.enums.LanguageCode;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.LangText;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.valueset.enums.DesignationType;
@@ -411,23 +411,19 @@ public class ValueSet implements Serializable {
 			String entryName = ValueSet
 					.buildEnumName(valueSetEntry.getCodeBaseType().getDisplayName());
 
+			if ("TEMPORARILY_UNAVAILABLE".equals(entryName))
+				System.out.println("Stop here");
+
 			boolean isAlreadyThere = false;
-			boolean isEqual = false;
 			for (ValueSetEntry temp : globalList) {
-				String tempName = ValueSet.buildEnumName(temp.getCodeBaseType().getDisplayName());
-				isAlreadyThere = (tempName.contentEquals(entryName));
-				isEqual = (temp.equals(valueSetEntry));
+				isAlreadyThere = (temp.equals(valueSetEntry));
+				if (isAlreadyThere)
+					break;
 			}
-			if (!isAlreadyThere) {
+
+			if (!isAlreadyThere)
 				globalList.add(valueSetEntry);
-			} else {
-				if (!isEqual) {
-					valueSetEntry.getCodeBaseType()
-							.setDisplayName(valueSetEntry.getCodeBaseType().getDisplayName() + "_"
-									+ valueSetEntry.getCodeBaseType().getCode());
-					globalList.add(valueSetEntry);
-				}
-			}
+
 			ArrayList<ValueSetEntry> children = valueSetEntry.getChildList();
 			if (children != null)
 				addEntryListRecursive(globalList, children);

@@ -22,6 +22,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.mdht.Address;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
@@ -30,7 +31,6 @@ import org.ehealth_connector.common.mdht.Organization;
 import org.ehealth_connector.common.mdht.Patient;
 import org.ehealth_connector.common.mdht.Person;
 import org.ehealth_connector.common.mdht.Telecoms;
-import org.ehealth_connector.common.mdht.enums.CodeSystems;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;

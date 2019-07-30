@@ -22,10 +22,10 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 import org.ehealth_connector.cda.MdhtFacade;
+import org.ehealth_connector.common.enums.CodeSystems;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Value;
-import org.ehealth_connector.common.mdht.enums.CodeSystems;
-import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.enums.Ucum;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;

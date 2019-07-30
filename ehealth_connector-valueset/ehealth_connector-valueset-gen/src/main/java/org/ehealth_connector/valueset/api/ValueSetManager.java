@@ -56,7 +56,7 @@ import org.ehealth_connector.common.basetypes.AddressBaseType;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
-import org.ehealth_connector.common.mdht.enums.LanguageCode;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.CustomizedYaml;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.LangText;

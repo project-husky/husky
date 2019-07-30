@@ -20,10 +20,10 @@ package org.ehealth_connector.cda;
 
 import org.eclipse.emf.common.util.EList;
 import org.ehealth_connector.cda.ihe.pharm.ManufacturedMaterial;
+import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Organization;
-import org.ehealth_connector.common.mdht.enums.CodeSystems;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.ManufacturedProduct;
@@ -91,7 +91,7 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	 *            <div class="de">Packungs-GTIN, GLN oder swissINDEX. Diese ID
 	 *            MUSS ein GTIN, GLN, oder Swiss Index Code sein.</div>
 	 *
-	 * @see org.ehealth_connector.common.mdht.enums.CodeSystems
+	 * @see org.ehealth_connector.common.enums.CodeSystems
 	 */
 	public Consumable(String tradeNameOfVaccine, Code gtin) {
 		this(tradeNameOfVaccine, gtin, null);
@@ -352,7 +352,7 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	 * Sets the manufactured product id. This ID HAS TO BE a GTIN, GLN, or Swiss
 	 * Index Code
 	 *
-	 * @see org.ehealth_connector.common.mdht.enums.CodeSystems
+	 * @see org.ehealth_connector.common.enums.CodeSystems
 	 *
 	 * @param gtinOrPharmacodeOrGln
 	 *            the new manufactured product id. If null, a NullFlavor.UNK

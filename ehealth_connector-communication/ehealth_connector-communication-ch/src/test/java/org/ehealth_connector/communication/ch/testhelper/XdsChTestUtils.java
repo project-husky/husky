@@ -20,7 +20,7 @@ package org.ehealth_connector.communication.ch.testhelper;
 import org.ehealth_connector.common.ch.enums.AuthorRole;
 import org.ehealth_connector.common.ch.enums.AuthorSpeciality;
 import org.ehealth_connector.common.ch.enums.ConfidentialityCode;
-import org.ehealth_connector.common.mdht.enums.LanguageCode;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.communication.ch.enums.AvailabilityStatus;
 import org.ehealth_connector.communication.ch.enums.ClassCode;
 import org.ehealth_connector.communication.ch.enums.FormatCode;

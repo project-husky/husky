@@ -23,9 +23,9 @@ import java.util.List;
 import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
 import org.ehealth_connector.cda.ihe.lab.BaseLaboratorySpecialtySection;
 import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
-import org.ehealth_connector.common.mdht.enums.LanguageCode;
 import org.openhealthtools.mdht.uml.cda.Entry;
 
 /**
