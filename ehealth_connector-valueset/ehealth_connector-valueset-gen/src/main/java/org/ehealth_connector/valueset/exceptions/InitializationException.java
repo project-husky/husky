@@ -17,8 +17,10 @@
 package org.ehealth_connector.valueset.exceptions;
 
 /**
- * <div class="en">Exception in case the value set initialization
- * fails.</div><div class="de">todo<div>
+ * <div class="en">Exception in case the value set initialization fails.</div>
+ *
+ * <div class="de">Ausnahme für den Fall, dass die Initialisierung der
+ * Wertemenge fehlschlägt.<div>
  */
 public class InitializationException extends Exception {
 
@@ -27,9 +29,10 @@ public class InitializationException extends Exception {
 
 	/**
 	 * div class="en">Default constructor to instantiate the object. A
-	 * predefined text message will be
-	 * used.</div><div class="de">Standardkonstruktor zum Instanziieren des
-	 * Objekts. Eine vordefinierte Textnachricht wird verwendet.<div>
+	 * predefined text message will be used.</div>
+	 *
+	 * <div class="de">Standardkonstruktor zum Instanziieren des Objekts. Eine
+	 * vordefinierte Textnachricht wird verwendet.<div>
 	 */
 	public InitializationException() {
 		super("The value set cannot be loaded. Please check the content of the file/stream.");
@@ -37,9 +40,10 @@ public class InitializationException extends Exception {
 
 	/**
 	 * div class="en">Instantiates a new initialization exception by using the
-	 * given text message.</div><div class="de">Instanziiert eine neue
-	 * Initialisierungsausnahme unter Verwendung der angegebenen
-	 * Textnachricht.<div>
+	 * given text message.</div>
+	 *
+	 * <div class="de">Instanziiert eine neue Initialisierungsausnahme unter
+	 * Verwendung der angegebenen Textnachricht.<div>
 	 *
 	 * @param message
 	 *            the message

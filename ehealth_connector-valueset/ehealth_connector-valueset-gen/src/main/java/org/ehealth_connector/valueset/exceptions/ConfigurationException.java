@@ -18,7 +18,10 @@ package org.ehealth_connector.valueset.exceptions;
 
 /**
  * <div class="en">Exception in case the value set configuration is
- * invalid.</div><div class="de">todo<div>
+ * invalid.</div>
+ *
+ * <div class="de">Ausnahme für den Fall, dass die Wertemenegenkonfiguration
+ * ungültig ist.<div>
  */
 public class ConfigurationException extends Exception {
 
@@ -27,9 +30,10 @@ public class ConfigurationException extends Exception {
 
 	/**
 	 * <div class="en">Default constructor to instantiate the object. A
-	 * predefined text message will be
-	 * used.</div><div class="de">Standardkonstruktor zum Instanziieren des
-	 * Objekts. Eine vordefinierte Textnachricht wird verwendet.<div>
+	 * predefined text message will be used.</div>
+	 *
+	 * <div class="de">Standardkonstruktor zum Instanziieren des Objekts. Eine
+	 * vordefinierte Textnachricht wird verwendet.<div>
 	 */
 	public ConfigurationException() {
 		super("The value set configuration cannot be loaded. Please check the config file/stream.");
@@ -37,9 +41,10 @@ public class ConfigurationException extends Exception {
 
 	/**
 	 * <div class="en">Instantiates a new configuration exception by using the
-	 * given text message.</div><div class="de">Instanziiert eine neue
-	 * Konfigurationsausnahme unter Verwendung der angegebenen
-	 * Textnachricht.<div>
+	 * given text message.</div>
+	 *
+	 * <div class="de">Instanziiert eine neue Konfigurationsausnahme unter
+	 * Verwendung der angegebenen Textnachricht.<div>
 	 *
 	 * @param message
 	 *            the message

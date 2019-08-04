@@ -17,10 +17,18 @@
 package org.ehealth_connector.valueset.enums;
 
 /**
- * The Class DesignationType. Designations are language dependent display names
- * for the code. For any language there might be multiple, each specifying the
- * type (fully specified name, preferred, synonym, ...). See also
- * https://art-decor.org/mediawiki/index.php?title=DECOR-terminology
+ * <div class="en">The Class DesignationType. Designations are language
+ * dependent display names for the code. For any language there might be
+ * multiple, each specifying the type (fully specified name, preferred, synonym,
+ * ...). See also:
+ * https://art-decor.org/mediawiki/index.php?title=DECOR-terminology</div>
+ *
+ * <div class="de">Die Klasse DesignationType enthält Bezeichnungen in Form von
+ * sprachabhängigen Anzeigenamen für den Code. Für jede Sprache kann es mehrere
+ * geben, die jeweils den Typ angeben (vollständiger Name, bevorzugter Name,
+ * Synonym, ...). Siehe auch:
+ * https://art-decor.org/mediawiki/index.php?title=DECOR-terminology</div>
+ *
  */
 public enum DesignationType {
 

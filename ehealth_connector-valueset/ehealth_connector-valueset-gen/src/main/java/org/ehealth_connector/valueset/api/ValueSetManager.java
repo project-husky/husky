@@ -81,9 +81,10 @@ import net.minidev.json.JSONArray;
 /**
  *
  * <div class="en">Manages the handling of ValueSets such as download from an
- * URL, save to and load from a file.</div> <div class="de">Verwaltet die
- * Verarbeitung von ValueSets, z. B. Herunterladen von einer URL, Speichern in
- * und Laden aus einer Datei.</div>
+ * URL, save to and load from a file.</div>
+ *
+ * <div class="de">Verwaltet die Verarbeitung von ValueSets, z. B. Herunterladen
+ * von einer URL, Speichern in und Laden aus einer Datei.</div>
  */
 public class ValueSetManager {
 

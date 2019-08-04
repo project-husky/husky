@@ -21,34 +21,51 @@ package org.ehealth_connector.valueset.enums;
  * ValueSet. This information is used to apply the interface corresponding to
  * the source system. Note: TERMINOLOGIESERVER_SOAP and SWISS_MDI_SOAP are
  * foreseen, but are not going to be implemented in the first release of dynamic
- * value set handling.</div> <div class="de">Dieses Enum dient dazu, dass die
- * Art der Quelle eines ValueSets konfiguriert werden kann. Anhand dieser
- * Fallunterscheidung wird die, dem Quellsystem entsprechende Schnittstelle
- * angewendet. Hinweis: TERMINOLOGIESERVER_SOAP und SWISS_MDI_SOAP sind
- * vorgesehen, werden jedoch in der ersten Version dynamischen Value Set
- * handlings nicht implementiert.</div>.
+ * value set handling.</div>
+ *
+ * <div class="de">Dieses Enum dient dazu, dass die Art der Quelle eines
+ * ValueSets konfiguriert werden kann. Anhand dieser Fallunterscheidung wird
+ * die, dem Quellsystem entsprechende Schnittstelle angewendet. Hinweis:
+ * TERMINOLOGIESERVER_SOAP und SWISS_MDI_SOAP sind vorgesehen, werden jedoch in
+ * der ersten Version dynamischen Value Set handlings nicht
+ * implementiert.</div>.
  */
 public enum SourceSystemType {
 
-	//@formatter:off
 	/**
-	 * <div class="en">Using this source type, the HL7 FHIR interface to ART-DECOR will be used (e.g. http://art-decor.org/fhir/3.0/ch-epr-/valueset).</div>
-	 * <div class="de">Bei Verwendung dieses Quellentyps wird die HL7 FHIR Schnittstelle zu ART-DECOR verwendet (z.B. http://art-decor.org/fhir/3.0/ch-epr-/valueset).</div>
+	 * <div class="en">Using this source type, the HL7 FHIR interface to
+	 * ART-DECOR will be used (e.g.
+	 * http://art-decor.org/fhir/3.0/ch-epr-/valueset).</div>
+	 *
+	 * <div class="de">Bei Verwendung dieses Quellentyps wird die HL7 FHIR
+	 * Schnittstelle zu ART-DECOR verwendet (z.B.
+	 * http://art-decor.org/fhir/3.0/ch-epr-/valueset).</div>
 	 */
 	ARTDECOR_FHIR;
 
-//TODO: These interfaces are not going to be implemented in the first release of dynamic value set handling.
-//	/**
-//	 * <div class="en">Using this source type, the SOAP interface to terminology server will be used (e.g. https://termpub.gesundheit.gv.at/TermBrowser/gui/main/main.zul).</div>
-//	 * <div class="de">Bei Verwendung dieses Quellentyps wird die SOAP Schnittstelle zu Terminologoie-Server verwendet (z.B. https://termpub.gesundheit.gv.at/TermBrowser/gui/main/main.zul).</div>
-//	 */
-//	TERMINOLOGIESERVER_SOAP,
-//
-//	/**
-//	 * <div class="en">Using this source type, the SOAP interface to the Swiss Metadata Index will be used (e.g. https://ws.epd-ad-a.bag.admin.ch/Mdi/ValueSetRepository.svc).</div>
-//	 * <div class="de">Bei Verwendung dieses Quellentyps wird die SOAP Schnittstelle zu Schweizerischen Metadaten Index verwendet (z.B. https://ws.epd-ad-a.bag.admin.ch/Mdi/ValueSetRepository.svc).</div>
-//	 */
-//	SWISS_MDI_SOAP;
-	//@formatter:on
+	// TODO: These interfaces are not going to be implemented in the first
+	// release of dynamic value set handling.
+	// /**
+	// * <div class="en">Using this source type, the SOAP interface to
+	// terminology
+	// * server will be used (e.g.
+	// * https://termpub.gesundheit.gv.at/TermBrowser/gui/main/main.zul).</div>
+	// *
+	// * <div class="de">Bei Verwendung dieses Quellentyps wird die SOAP
+	// * Schnittstelle zu Terminologoie-Server verwendet (z.B.
+	// * https://termpub.gesundheit.gv.at/TermBrowser/gui/main/main.zul).</div>
+	// */
+	// TERMINOLOGIESERVER_SOAP,
+	//
+	// /**
+	// * <div class="en">Using this source type, the SOAP interface to the Swiss
+	// * Metadata Index will be used (e.g.
+	// * https://ws.epd-ad-a.bag.admin.ch/Mdi/ValueSetRepository.svc).</div>
+	// *
+	// * <div class="de">Bei Verwendung dieses Quellentyps wird die SOAP
+	// * Schnittstelle zu Schweizerischen Metadaten Index verwendet (z.B.
+	// * https://ws.epd-ad-a.bag.admin.ch/Mdi/ValueSetRepository.svc).</div>
+	// */
+	// SWISS_MDI_SOAP;
 
 }

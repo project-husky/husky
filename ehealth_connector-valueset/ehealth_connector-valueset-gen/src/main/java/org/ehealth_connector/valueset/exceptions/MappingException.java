@@ -17,8 +17,10 @@
 package org.ehealth_connector.valueset.exceptions;
 
 /**
- * <div class="en">Exception in case the value set mapping does not
- * exist.</div><div class="de">todo<div>
+ * <div class="en">Exception in case the value set mapping does not exist.</div>
+ *
+ * <div class="de">Ausnahme für den Fall, dass die Wertemengenzuordnung nicht
+ * existiert.<div>
  */
 public class MappingException extends Exception {
 
@@ -27,9 +29,10 @@ public class MappingException extends Exception {
 
 	/**
 	 * div class="en">Default constructor to instantiate the object. A
-	 * predefined text message will be
-	 * used.</div><div class="de">Standardkonstruktor zum Instanziieren des
-	 * Objekts. Eine vordefinierte Textnachricht wird verwendet.<div>
+	 * predefined text message will be used.</div>
+	 *
+	 * <div class="de">Standardkonstruktor zum Instanziieren des Objekts. Eine
+	 * vordefinierte Textnachricht wird verwendet.<div>
 	 */
 	public MappingException() {
 		super("The requested mapping does not exist.");
@@ -37,8 +40,10 @@ public class MappingException extends Exception {
 
 	/**
 	 * div class="en">Instantiates a new mapping exception by using the given
-	 * text message.</div><div class="de">Instanziiert eine neue
-	 * Zuordnungsausnahme mithilfe der angegebenen Textnachricht.<div>
+	 * text message.</div>
+	 *
+	 * <div class="de">Instanziiert eine neue Zuordnungsausnahme mithilfe der
+	 * angegebenen Textnachricht.<div>
 	 *
 	 * @param message
 	 *            the message

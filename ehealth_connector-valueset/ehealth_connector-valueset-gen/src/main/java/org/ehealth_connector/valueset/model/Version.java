@@ -27,7 +27,10 @@ import org.ehealth_connector.common.utils.Util;
 
 /**
  * <div class="en">The Class Version contains all information describing a
- * specific version of a value set.
+ * specific version of a value set.</div>
+ *
+ * <div class="de">Die Klasse Version enthält alle Informationen, die eine
+ * bestimmte Version eines Wertesatzes beschreiben.</div>
  */
 public class Version implements Serializable {
 
