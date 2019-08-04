@@ -78,30 +78,39 @@ public class ValueSetTest {
 		String defaultMappingName1 = "defaultMappingNameAbstract";
 		int level1 = 1;
 		ValueSetEntryType valueSetEntryType1 = ValueSetEntryType.ABSTRACT;
+		CodeBaseType mappingCode1 = CodeBaseType.builder().withCode("mappingCodeAbstract1")
+				.withCodeSystem("2.999.999.1").build();
 
 		CodeBaseType codeBaseType2 = CodeBaseType.builder().withCode("leafcode2")
 				.withCodeSystem("2.999").build();
 		String defaultMappingName2 = "defaultMappingNameLeaf2";
 		int level2 = 2;
 		ValueSetEntryType valueSetEntryType2 = ValueSetEntryType.LEAF;
+		CodeBaseType mappingCode2 = CodeBaseType.builder().withCode("mappingCodeAbstract2")
+				.withCodeSystem("2.999.999.2").build();
 
 		CodeBaseType codeBaseType3 = CodeBaseType.builder().withCode("leafcode3")
 				.withCodeSystem("2.999").build();
-		String defaultMappingName3 = "defaultMappingNameLeaf3";
+		String defaultMappingName3 = "mappingNameLeaf3";
 		int level3 = 2;
 		ValueSetEntryType valueSetEntryType3 = ValueSetEntryType.LEAF;
+		CodeBaseType mappingCode3 = CodeBaseType.builder().withCode("defaultMappingCodeAbstract3")
+				.withCodeSystem("2.999.999.3").build();
 
 		ValueSetEntry valueSetEntry1 = ValueSetEntry.builder().withCodeBaseType(codeBaseType1)
 				.withDefaultMappingName(defaultMappingName1).withLevel(level1)
 				.withValueSetEntryType(valueSetEntryType1).build();
+		valueSetEntry1.addMappingCode(mappingCode1);
 
 		ValueSetEntry valueSetEntry2 = ValueSetEntry.builder().withCodeBaseType(codeBaseType2)
 				.withDefaultMappingName(defaultMappingName2).withLevel(level2)
 				.withValueSetEntryType(valueSetEntryType2).build();
+		valueSetEntry2.addMappingCode(mappingCode2);
 
 		ValueSetEntry valueSetEntry3 = ValueSetEntry.builder().withCodeBaseType(codeBaseType3)
 				.withDefaultMappingName(defaultMappingName3).withLevel(level3)
 				.withValueSetEntryType(valueSetEntryType3).build();
+		valueSetEntry3.addMappingCode(mappingCode3);
 
 		valueSet1.addValueSetEntry(valueSetEntry1);
 		valueSet1.addValueSetEntry(valueSetEntry2);
@@ -136,6 +145,9 @@ public class ValueSetTest {
 		assertEquals(mappingName2, valueSet1.listMappingNames().get(1));
 		assertEquals(4, valueSet1.listMappingNames().size());
 
+		assertTrue(valueSetEntry1
+				.equals(valueSet1.getValueSetEntryByMappingName(defaultMappingName1)));
+		assertTrue(valueSetEntry2.equals(valueSet1.getValueSetEntryByMappingCode(mappingCode2)));
 	}
 
 }

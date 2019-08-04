@@ -867,8 +867,14 @@ public class ValueSet implements Serializable {
 	public ValueSetEntry getValueSetEntryByMappingCode(CodeBaseType value) {
 		ValueSetEntry retVal = null;
 		for (ValueSetEntry valueSetEntry : listValueSetEntries()) {
-			if (valueSetEntry.listMappingCodes().contains(value))
-				retVal = valueSetEntry;
+			for (CodeBaseType mapping : valueSetEntry.listMappingCodes()) {
+				if (mapping.equals(value))
+					retVal = valueSetEntry;
+				if (retVal != null)
+					break;
+			}
+			if (retVal != null)
+				break;
 		}
 		return retVal;
 	}
@@ -886,8 +892,19 @@ public class ValueSet implements Serializable {
 	public ValueSetEntry getValueSetEntryByMappingName(String value) {
 		ValueSetEntry retVal = null;
 		for (ValueSetEntry valueSetEntry : listValueSetEntries()) {
-			if (valueSetEntry.listMappingNames().contains(value))
-				retVal = valueSetEntry;
+			if (value != null)
+				if (value.equals(valueSetEntry.getDefaultMappingName()))
+					retVal = valueSetEntry;
+			if (retVal == null) {
+				for (String mapping : valueSetEntry.listMappingNames()) {
+					if (mapping.equals(value))
+						retVal = valueSetEntry;
+					if (retVal != null)
+						break;
+				}
+			}
+			if (retVal != null)
+				break;
 		}
 		return retVal;
 	}
