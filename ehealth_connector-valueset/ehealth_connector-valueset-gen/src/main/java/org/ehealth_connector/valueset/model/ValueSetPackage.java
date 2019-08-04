@@ -578,8 +578,16 @@ public class ValueSetPackage implements Serializable {
 	public ValueSet getValueSetyByMappingIdentificator(IdentificatorBaseType value) {
 		ValueSet retVal = null;
 		for (ValueSet valueSet : listValueSets()) {
-			if (valueSet.listMappingIdentificators().contains(value))
-				retVal = valueSet;
+			if (retVal == null) {
+				for (IdentificatorBaseType mapping : valueSet.listMappingIdentificators()) {
+					if (mapping.equals(value))
+						retVal = valueSet;
+					if (retVal != null)
+						break;
+				}
+			}
+			if (retVal != null)
+				break;
 		}
 		return retVal;
 	}
@@ -597,8 +605,16 @@ public class ValueSetPackage implements Serializable {
 	public ValueSet getValueSetyByMappingName(String value) {
 		ValueSet retVal = null;
 		for (ValueSet valueSet : listValueSets()) {
-			if (valueSet.listMappingNames().contains(value))
-				retVal = valueSet;
+			if (retVal == null) {
+				for (String mapping : valueSet.listMappingNames()) {
+					if (mapping.equals(value))
+						retVal = valueSet;
+					if (retVal != null)
+						break;
+				}
+			}
+			if (retVal != null)
+				break;
 		}
 		return retVal;
 	}

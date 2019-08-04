@@ -77,6 +77,9 @@ public class ValueSetPackageTest {
 		ValueSetStatus vsstatus1 = ValueSetStatus.FINAL;
 		Version vsversion1 = Version.builder().withLabel("1.0")
 				.withValidFrom(DateUtil.date("03.06.2019 00:00:00")).build();
+		String mappingNameVs1 = "mappingNameVs1";
+		IdentificatorBaseType mappingIdVs1 = IdentificatorBaseType.builder().withRoot("2.999.9991")
+				.withExtension("myValueSet1").build();
 
 		String vsdescription2 = "vsdescription2";
 		String vsdisplayName2 = "vsdisplayName2";
@@ -87,16 +90,23 @@ public class ValueSetPackageTest {
 		ValueSetStatus vsstatus2 = ValueSetStatus.DRAFT;
 		Version vsversion2 = Version.builder().withLabel("2.0")
 				.withValidFrom(DateUtil.date("03.06.2019 00:00:00")).build();
+		String mappingNameVs2 = "mappingNameVs2";
+		IdentificatorBaseType mappingIdVs2 = IdentificatorBaseType.builder().withRoot("2.999.9992")
+				.withExtension("myValueSet2").build();
 
 		ValueSet valueSet1 = ValueSet.builder().withDisplayName(vsdisplayName1)
 				.withEffectiveDate(vseffectiveDate1).withIdentificator(vsidentificator1)
 				.withName(vsname1).withStatus(vsstatus1).withVersion(vsversion1).build();
 		valueSet1.addDescription(new LangText(LanguageCode.ENGLISH, vsdescription1));
+		valueSet1.addMappingName(mappingNameVs1);
+		valueSet1.addMappingIdentificator(mappingIdVs1);
 
 		ValueSet valueSet2 = ValueSet.builder().withDisplayName(vsdisplayName2)
 				.withEffectiveDate(vseffectiveDate2).withIdentificator(vsidentificator2)
 				.withName(vsname2).withStatus(vsstatus2).withVersion(vsversion2).build();
 		valueSet2.addDescription(new LangText(LanguageCode.ENGLISH, vsdescription2));
+		valueSet2.addMappingName(mappingNameVs2);
+		valueSet2.addMappingIdentificator(mappingIdVs2);
 
 		CodeBaseType codeBaseType1 = CodeBaseType.builder().withCode("abstractcode1")
 				.withCodeSystem("2.999").build();
@@ -157,6 +167,10 @@ public class ValueSetPackageTest {
 
 		assertEquals(mappingName1, valueSetPackage1.listMappingNames().get(0));
 		assertEquals(1, valueSetPackage1.listMappingNames().size());
+
+		assertTrue(valueSet1.equals(valueSetPackage1.getValueSetyByMappingName(mappingNameVs1)));
+		assertTrue(valueSet2
+				.equals(valueSetPackage1.getValueSetyByMappingIdentificator(mappingIdVs2)));
 
 	}
 
