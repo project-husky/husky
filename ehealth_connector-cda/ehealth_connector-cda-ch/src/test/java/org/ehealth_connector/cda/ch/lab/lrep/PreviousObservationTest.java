@@ -24,7 +24,7 @@ import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Value;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.junit.Test;
 
 /**
@@ -49,7 +49,7 @@ public class PreviousObservationTest {
 		Code obsIntCode = new Code(CodeSystems.HL7ObservationInterpretation.getCodeSystemId(), "L",
 				CodeSystems.HL7ObservationInterpretation.getCodeSystemName(), "Low");
 		PreviousObservation prevObs = new PreviousObservation(obs,
-				DateUtil.parseDateyyyyMMddHHmmZZZZ("201505021003+0200"), value, obsIntCode);
+				DateUtilOld.parseDateyyyyMMddHHmmZZZZ("201505021003+0200"), value, obsIntCode);
 
 		for (Identificator id : prevObs.getTemplateIds()) {
 			assertNull("Extensions not allowd for template ids", id.getExtension());

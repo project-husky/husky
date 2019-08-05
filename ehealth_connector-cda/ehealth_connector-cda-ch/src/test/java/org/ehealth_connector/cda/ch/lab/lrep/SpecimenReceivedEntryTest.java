@@ -21,7 +21,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.ehealth_connector.common.mdht.Identificator;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.junit.Test;
 
 /**
@@ -43,7 +43,7 @@ public class SpecimenReceivedEntryTest {
 		boolean idFoundChPalm = false;
 
 		final SpecimenReceivedEntry sre = new SpecimenReceivedEntry(
-				DateUtil.dateAndTime("22.02.2018 12:02"), null);
+				DateUtilOld.dateAndTime("22.02.2018 12:02"), null);
 		for (Identificator id : sre.getTemplateIds()) {
 			assertNull("Extensions not allowd for template ids", id.getExtension());
 			if (idIhe.equals(id.getRoot()))

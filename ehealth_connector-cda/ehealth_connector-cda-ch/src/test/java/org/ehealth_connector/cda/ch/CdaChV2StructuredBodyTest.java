@@ -38,7 +38,7 @@ import org.ehealth_connector.common.mdht.Patient;
 import org.ehealth_connector.common.mdht.Person;
 import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
 import org.ehealth_connector.common.mdht.enums.ParticipantType;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.Util;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
@@ -490,7 +490,7 @@ public class CdaChV2StructuredBodyTest {
 				ChFactory.eINSTANCE.createCdaChV2StructuredBody().init(), LanguageCode.GERMAN,
 				"dummy", "dummy");
 		Name name = new Name("John", "Doe");
-		Date date = DateUtil.parseDateyyyyMMdd("20180722");
+		Date date = DateUtilOld.parseDateyyyyMMdd("20180722");
 		cda.setPatient(new Patient(name, AdministrativeGender.MALE, date));
 		Patient patient = cda.getPatient();
 		assertTrue(patient.getCompleteName().equals(name.getCompleteName()));
@@ -541,7 +541,7 @@ public class CdaChV2StructuredBodyTest {
 		final CdaChV2StructuredBody<org.openhealthtools.mdht.uml.cda.ch.CdaChV2StructuredBody> cda = new CdaChV2StructuredBody<org.openhealthtools.mdht.uml.cda.ch.CdaChV2StructuredBody>(
 				ChFactory.eINSTANCE.createCdaChV2StructuredBody().init(), LanguageCode.GERMAN,
 				"dummy", "dummy");
-		Date date = DateUtil.parseDateyyyyMMdd("20180722");
+		Date date = DateUtilOld.parseDateyyyyMMdd("20180722");
 		cda.setTimestamp(date);
 		assertTrue(cda.getTimestamp().equals(date));
 	}

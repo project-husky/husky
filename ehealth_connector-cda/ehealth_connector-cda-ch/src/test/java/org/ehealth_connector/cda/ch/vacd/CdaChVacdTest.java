@@ -64,7 +64,7 @@ import org.ehealth_connector.common.mdht.Telecoms;
 import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
 import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -261,7 +261,7 @@ public class CdaChVacdTest extends TestUtils {
 		// Patient
 		final Name patientName = new Name("Franzine", "Muster");
 		final Patient patient = new Patient(patientName, AdministrativeGender.FEMALE,
-				DateUtil.date("10.02.1967"));
+				DateUtilOld.date("10.02.1967"));
 		final Address patientAdresse = new Address("Leidensweg", "10", "9876", "Specimendorf",
 				PostalAddressUse.PRIVATE);
 		final Telecoms patientTelecoms = new Telecoms();
@@ -426,8 +426,8 @@ public class CdaChVacdTest extends TestUtils {
 		startDateString = "28.02.2015";
 		endDateString = "28.02.2018";
 
-		startDate = DateUtil.date("28.02.2015");
-		endDate = DateUtil.date("28.02.2018");
+		startDate = DateUtilOld.date("28.02.2015");
+		endDate = DateUtilOld.date("28.02.2018");
 
 		// Test String with German, French and Italic special characters
 		ts1 = TestUtils.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);

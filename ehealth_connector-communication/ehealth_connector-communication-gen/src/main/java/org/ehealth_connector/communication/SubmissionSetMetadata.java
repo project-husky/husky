@@ -22,7 +22,7 @@ import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.enums.EhcVersions;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.openhealthtools.ihe.utils.OID;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
@@ -341,7 +341,7 @@ public class SubmissionSetMetadata {
 		ohtSubmissionSetType.getIntendedRecipient().clear();
 		ohtSubmissionSetType.getIntendedRecipient().addAll(s.getIntendedRecipient());
 		if (ohtSubmissionSetType.getSubmissionTime() == null) {
-			ohtSubmissionSetType.setSubmissionTime(DateUtil.nowAsTS().getValue());
+			ohtSubmissionSetType.setSubmissionTime(DateUtilOld.nowAsTS().getValue());
 		}
 		if ((ohtSubmissionSetType.getUniqueId() == null)
 				|| (ohtSubmissionSetType.getSourceId() == null)) {

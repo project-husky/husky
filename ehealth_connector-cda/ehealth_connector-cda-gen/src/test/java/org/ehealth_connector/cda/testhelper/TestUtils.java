@@ -44,7 +44,7 @@ import org.ehealth_connector.common.mdht.Telecoms;
 import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
 import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
@@ -360,7 +360,7 @@ public class TestUtils {
 	}
 
 	public Date createStartDate() {
-		return DateUtil.date("15.12.2014");
+		return DateUtilOld.date("15.12.2014");
 	}
 
 	public Telecoms createTelecoms1() {
@@ -403,8 +403,8 @@ public class TestUtils {
 		startDateString = "28.02.2015";
 		endDateString = "28.02.2018";
 
-		startDate = DateUtil.date("28.02.2015");
-		endDate = DateUtil.date("28.02.2018");
+		startDate = DateUtilOld.date("28.02.2015");
+		endDate = DateUtilOld.date("28.02.2018");
 
 		// Test String with German, French and Italic special characters
 		ts1 = TestUtils.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);

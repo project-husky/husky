@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.Date;
 
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.valueset.enums.SourceFormatType;
 import org.ehealth_connector.valueset.enums.SourceSystemType;
 import org.ehealth_connector.valueset.enums.ValueSetPackageStatus;
@@ -40,7 +40,7 @@ public class ValueSetPackageConfigTest {
 	public void doAllTests() {
 
 		// Basic ValueSetPackageConfig elements tests
-		Date validFrom = DateUtil.date("03.06.2019 00:00:00");
+		Date validFrom = DateUtilOld.date("03.06.2019 00:00:00");
 
 		String description = "description";
 		IdentificatorBaseType identificator = IdentificatorBaseType.builder().withRoot("2.999")

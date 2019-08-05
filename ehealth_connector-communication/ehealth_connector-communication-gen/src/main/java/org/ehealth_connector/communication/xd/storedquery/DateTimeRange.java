@@ -20,7 +20,7 @@ package org.ehealth_connector.communication.xd.storedquery;
 import java.util.Date;
 
 import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.openhealthtools.ihe.xds.consumer.query.MalformedQueryException;
 
 /**
@@ -45,7 +45,7 @@ public class DateTimeRange {
 	public DateTimeRange(DateTimeRangeAttributes name, Date from, Date to) {
 		try {
 			ohtDtr = new org.openhealthtools.ihe.xds.consumer.query.DateTimeRange(name.getName(),
-					DateUtil.format(from), DateUtil.format(to));
+					DateUtilOld.format(from), DateUtilOld.format(to));
 		} catch (final MalformedQueryException e) {
 			e.printStackTrace();
 		}
@@ -57,7 +57,7 @@ public class DateTimeRange {
 	 * @return the starting point
 	 */
 	public Date getFrom() {
-		return DateUtil.parseDateyyyyMMddHHmmss(ohtDtr.getFrom());
+		return DateUtilOld.parseDateyyyyMMddHHmmss(ohtDtr.getFrom());
 	}
 
 	/**
@@ -84,7 +84,7 @@ public class DateTimeRange {
 	 * @return the end point
 	 */
 	public Date getTo() {
-		return DateUtil.parseDateyyyyMMddHHmmss(ohtDtr.getTo());
+		return DateUtilOld.parseDateyyyyMMddHHmmss(ohtDtr.getTo());
 	}
 
 	/**
@@ -103,7 +103,7 @@ public class DateTimeRange {
 	 *            the starting point
 	 */
 	public void setFrom(Date from) {
-		ohtDtr.setFrom(DateUtil.format(from));
+		ohtDtr.setFrom(DateUtilOld.format(from));
 	}
 
 	/**
@@ -113,6 +113,6 @@ public class DateTimeRange {
 	 *            the end point
 	 */
 	public void setTo(Date to) {
-		ohtDtr.setTo(DateUtil.format(to));
+		ohtDtr.setTo(DateUtilOld.format(to));
 	}
 }

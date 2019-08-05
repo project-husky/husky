@@ -44,7 +44,7 @@ import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.mdht.enums.Ucum;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.ChPackage;
@@ -74,7 +74,7 @@ public class CdaChEdesEdpnTest extends TestUtils {
 		cda.setLanguageCode(LanguageCode.GERMAN);
 		VitalSignsOrganizer organizer = new VitalSignsOrganizer();
 
-		Date effectiveTime = DateUtil.dateAndTime("01.01.2001 10:00");
+		Date effectiveTime = DateUtilOld.dateAndTime("01.01.2001 10:00");
 
 		cda.addCodedVitalSign(organizer, new VitalSignObservation(VitalSignCodes.BODY_HEIGHT,
 				effectiveTime, new Value("180", Ucum.CentiMeter)), null);
@@ -397,7 +397,7 @@ public class CdaChEdesEdpnTest extends TestUtils {
 		cda.setLanguageCode(LanguageCode.GERMAN);
 		VitalSignsOrganizer organizer = new VitalSignsOrganizer();
 
-		Date effectiveTime = DateUtil.dateAndTime("01.01.2001 10:00");
+		Date effectiveTime = DateUtilOld.dateAndTime("01.01.2001 10:00");
 
 		cda.addCodedVitalSign(organizer, new VitalSignObservation(VitalSignCodes.BODY_HEIGHT,
 				effectiveTime, new Value("180", Ucum.CentiMeter)), null);

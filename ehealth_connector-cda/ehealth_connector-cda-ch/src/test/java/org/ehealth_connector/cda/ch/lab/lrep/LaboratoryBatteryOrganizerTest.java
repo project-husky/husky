@@ -30,7 +30,7 @@ import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Name;
 import org.ehealth_connector.common.mdht.Performer;
 import org.ehealth_connector.common.mdht.enums.StatusCode;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.junit.Test;
 
 /**
@@ -165,8 +165,8 @@ public class LaboratoryBatteryOrganizerTest {
 	 */
 	@Test
 	public void testSetGetEffectiveTimeDate() {
-		Date date1 = DateUtil.parseDateyyyyMMdd("20180721");
-		Date date2 = DateUtil.parseDateyyyyMMdd("20180722");
+		Date date1 = DateUtilOld.parseDateyyyyMMdd("20180721");
+		Date date2 = DateUtilOld.parseDateyyyyMMdd("20180722");
 
 		LaboratoryBatteryOrganizer lbo = new LaboratoryBatteryOrganizer();
 

@@ -28,7 +28,7 @@ import org.ehealth_connector.common.mdht.Name;
 import org.ehealth_connector.common.mdht.Patient;
 import org.ehealth_connector.common.mdht.enums.CountryCode;
 import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.fhir.structures.testhelper.TestPatient;
 import org.hl7.fhir.dstu3.model.Address;
 import org.hl7.fhir.dstu3.model.BooleanType;
@@ -114,7 +114,7 @@ public class FhirPatientTest {
 		identifier.setValue("PIX");
 		identifier.setSystem(FhirCommon.addUrnOid("2.16.840.1.113883.3.72.5.9.1"));
 		fhirPatient.getIdentifier().add(identifier);
-		fhirPatient.setBirthDate(DateUtil.parseDateyyyyMMdd("19380224"));
+		fhirPatient.setBirthDate(DateUtilOld.parseDateyyyyMMdd("19380224"));
 		fhirPatient.getAddress().add(address);
 		fhirPatient.setGender(AdministrativeGender.MALE);
 		fhirPatient.getManagingOrganization().setResource(getScopingOrganization());

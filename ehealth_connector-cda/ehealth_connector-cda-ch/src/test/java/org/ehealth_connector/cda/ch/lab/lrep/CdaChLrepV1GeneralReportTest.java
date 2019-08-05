@@ -33,7 +33,7 @@ import org.ehealth_connector.common.mdht.Name;
 import org.ehealth_connector.common.mdht.Organization;
 import org.ehealth_connector.common.mdht.Patient;
 import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.Util;
 import org.junit.Before;
 import org.junit.Test;
@@ -191,8 +191,8 @@ public class CdaChLrepV1GeneralReportTest {
 	public void testGetLaboratoryBatteries() {
 		CdaChLrepV1GeneralReport cda = new CdaChLrepV1GeneralReport(LanguageCode.GERMAN, "dummy",
 				"dummy");
-		Date timeStamp1 = DateUtil.parseDateyyyyMMdd("20180721");
-		Date timeStamp2 = DateUtil.parseDateyyyyMMdd("20180722");
+		Date timeStamp1 = DateUtilOld.parseDateyyyyMMdd("20180721");
+		Date timeStamp2 = DateUtilOld.parseDateyyyyMMdd("20180722");
 		LaboratorySpecialtySection section = new LaboratorySpecialtySection();
 		LaboratoryBatteryOrganizer lbo1 = new LaboratoryBatteryOrganizer();
 		LaboratoryBatteryOrganizer lbo2 = new LaboratoryBatteryOrganizer();
@@ -255,7 +255,7 @@ public class CdaChLrepV1GeneralReportTest {
 		CdaChLrepV1GeneralReport cda = new CdaChLrepV1GeneralReport(LanguageCode.GERMAN, "dummy",
 				"dummy");
 		Name name = new Name("John", "Doe");
-		Date date = DateUtil.parseDateyyyyMMdd("20180722");
+		Date date = DateUtilOld.parseDateyyyyMMdd("20180722");
 		cda.setPatient(new Patient(name, AdministrativeGender.MALE, date));
 		Patient patient = cda.getPatient();
 		assertTrue(patient.getCompleteName().equals(name.getCompleteName()));

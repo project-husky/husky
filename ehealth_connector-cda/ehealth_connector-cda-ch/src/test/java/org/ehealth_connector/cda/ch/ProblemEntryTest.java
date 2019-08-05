@@ -33,7 +33,7 @@ import org.ehealth_connector.cda.ch.enums.RiskOfExposure;
 import org.ehealth_connector.cda.enums.AllergiesSpecialConditions;
 import org.ehealth_connector.cda.enums.ProblemType;
 import org.ehealth_connector.cda.enums.ProblemsSpecialConditions;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -97,7 +97,7 @@ public class ProblemEntryTest {
 		final ProblemEntry entry = new ProblemEntry();
 
 		assertEquals(null, entry.getEndDate());
-		final Date date = DateUtil.parseDateyyyyMMdd("20161019");
+		final Date date = DateUtilOld.parseDateyyyyMMdd("20161019");
 		entry.setEndDate(date);
 		assertEquals(date, entry.getEndDate());
 
@@ -238,7 +238,7 @@ public class ProblemEntryTest {
 		final ProblemEntry entry = new ProblemEntry();
 
 		assertEquals(null, entry.getStartDate());
-		final Date date = DateUtil.parseDateyyyyMMdd("20151019");
+		final Date date = DateUtilOld.parseDateyyyyMMdd("20151019");
 		entry.setStartDate(date);
 		assertEquals(date, entry.getStartDate());
 

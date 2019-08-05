@@ -30,7 +30,7 @@ import org.ehealth_connector.cda.enums.VitalSignCodes;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Value;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.LangTexts;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -211,7 +211,7 @@ public class VitalSignObservation extends BaseVitalSignObservation {
 	 */
 	@Override
 	public Date getEffectiveTime() {
-		return DateUtil.parseIVL_TSVDateTimeValue(getVitalSignObservation().getEffectiveTime());
+		return DateUtilOld.parseIVL_TSVDateTimeValue(getVitalSignObservation().getEffectiveTime());
 	}
 
 	@Override
@@ -232,7 +232,7 @@ public class VitalSignObservation extends BaseVitalSignObservation {
 	public void setEffectiveTime(Date dateTimeOfResult) {
 		try {
 			getVitalSignObservation()
-					.setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(dateTimeOfResult));
+					.setEffectiveTime(DateUtilOld.createIVL_TSFromEuroDateTime(dateTimeOfResult));
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}

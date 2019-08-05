@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.CodedResults;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.common.mdht.Identificator;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 import org.openhealthtools.mdht.uml.cda.ch.CodedResultsSection;
 import org.openhealthtools.mdht.uml.cda.ch.GestationalAgeDaysSimpleObservation;
@@ -248,7 +248,7 @@ public class GestationalAge extends CodedResults {
 		final PQ mDaysValue = DatatypesFactory.eINSTANCE.createPQ(days, "d");
 		mDays.getValues().add(mDaysValue);
 		mDays.getIds().add(EcoreUtil.copy(mIi));
-		mDays.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
+		mDays.setEffectiveTime(DateUtilOld.createUnknownTime(NullFlavor.NA));
 	}
 
 	/**
@@ -324,7 +324,7 @@ public class GestationalAge extends CodedResults {
 		final PQ mWeeksValue = DatatypesFactory.eINSTANCE.createPQ(weeks, "wk");
 		mWeeks.getValues().add(mWeeksValue);
 		mWeeks.getIds().add(EcoreUtil.copy(mIi));
-		mWeeks.setEffectiveTime(DateUtil.createUnknownTime(NullFlavor.NA));
+		mWeeks.setEffectiveTime(DateUtilOld.createUnknownTime(NullFlavor.NA));
 	}
 
 }

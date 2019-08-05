@@ -27,7 +27,7 @@ import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
 import org.ehealth_connector.cda.enums.VitalSignCodes;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
@@ -171,7 +171,7 @@ public class BaseAllergyConcern extends AbstractConcern {
 			setEffectiveTime(begin, end);
 		} else {
 			final IVL_TS ivlts = DatatypesFactory.eINSTANCE.createIVL_TS();
-			ivlts.setLow(DateUtil.createIVXB_TSFromDate(begin));
+			ivlts.setLow(DateUtilOld.createIVXB_TSFromDate(begin));
 			mAllergyConcern.setEffectiveTime(ivlts);
 		}
 	}
@@ -236,7 +236,7 @@ public class BaseAllergyConcern extends AbstractConcern {
 		if (getMdht() != null) {
 			if (getMdht().getEffectiveTime() != null) {
 				if (getMdht().getEffectiveTime().getValue() != null)
-					return DateUtil.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
+					return DateUtilOld.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
 			}
 		}
 		return null;

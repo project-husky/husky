@@ -27,7 +27,7 @@ import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdRecCategories;
 import org.ehealth_connector.cda.ch.vacd.enums.SectionsVacd;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 
@@ -154,7 +154,7 @@ public class ImmunizationSection
 		stringBuffer.append("</td><td>");
 		// Datum
 		if (immunization.getApplyDate() != null) {
-			stringBuffer.append(DateUtil.formatDateCH(immunization.getApplyDate()));
+			stringBuffer.append(DateUtilOld.formatDateCH(immunization.getApplyDate()));
 		}
 		stringBuffer.append("</td><td>");
 		// Impfung gegen

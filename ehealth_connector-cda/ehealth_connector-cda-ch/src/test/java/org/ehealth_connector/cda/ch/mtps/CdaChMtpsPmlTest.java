@@ -66,7 +66,7 @@ import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
 import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
 import org.ehealth_connector.common.mdht.enums.StatusCode;
 import org.ehealth_connector.common.mdht.enums.Ucum;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.Util;
 import org.junit.Before;
 import org.junit.Test;
@@ -724,7 +724,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 	private SXCM_TS createEndTime() {
 
 		final SXCM_TS endTime = DatatypesFactory.eINSTANCE.createSXCM_TS();
-		endTime.setValue(DateUtil.formatDate(DateUtil.date("27.10.2017")));
+		endTime.setValue(DateUtilOld.formatDate(DateUtilOld.date("27.10.2017")));
 		return endTime;
 	}
 
@@ -911,7 +911,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 
 		final Name patientName = new Name(firstName, lastName);
 		final Patient patient = new Patient(patientName, AdministrativeGender.MALE,
-				DateUtil.date("27.10.1987"));
+				DateUtilOld.date("27.10.1987"));
 		final Address patientAdresse = new Address("rue Le-Corbusier", "13A", "1208",
 				"Genève"/*
 						 * , AddressUse.PRIVATE
@@ -1048,7 +1048,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 	private SXCM_TS createStartTime() {
 
 		final SXCM_TS startTime = DatatypesFactory.eINSTANCE.createSXCM_TS();
-		startTime.setValue(DateUtil.formatDate(DateUtil.nowAsDate()));
+		startTime.setValue(DateUtilOld.formatDate(DateUtilOld.nowAsDate()));
 		return startTime;
 	}
 
@@ -1231,7 +1231,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 	private SXCM_TS createTime(String dateMMDDYYYY) {
 
 		final SXCM_TS startTime = DatatypesFactory.eINSTANCE.createSXCM_TS();
-		startTime.setValue(DateUtil.formatDate(DateUtil.date(dateMMDDYYYY)));
+		startTime.setValue(DateUtilOld.formatDate(DateUtilOld.date(dateMMDDYYYY)));
 		return startTime;
 	}
 
@@ -1248,7 +1248,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 
 		final SXCM_TS uniqueDosage = DatatypesFactory.eINSTANCE.createSXCM_TS();
 		final EIVL_TS tS = DatatypesFactory.eINSTANCE.createEIVL_TS();
-		tS.setValue(DateUtil.formatDate(DateUtil.date(dateMMDDYYYY)));
+		tS.setValue(DateUtilOld.formatDate(DateUtilOld.date(dateMMDDYYYY)));
 		uniqueDosage.setValue(tS.getValue());
 		uniqueDosage.setOperator(SetOperator.A);
 		final EIVL_event eventEIVL = DatatypesFactory.eINSTANCE.createEIVL_event();

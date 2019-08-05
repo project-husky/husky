@@ -29,7 +29,7 @@ import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.IdentityDomain;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Observation;
@@ -336,7 +336,7 @@ public class BaseProblemConcern
 
 	protected void setEffectiveTime(Date begin, Date end) {
 		try {
-			getConcernEntry().setEffectiveTime(DateUtil.createIVL_TSFromEuroDate(begin, end));
+			getConcernEntry().setEffectiveTime(DateUtilOld.createIVL_TSFromEuroDate(begin, end));
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
@@ -354,10 +354,10 @@ public class BaseProblemConcern
 		try {
 			if (getConcernEntry().getEffectiveTime() == null) {
 				getConcernEntry()
-						.setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(endOfConcern));
+						.setEffectiveTime(DateUtilOld.createIVL_TSFromEuroDateTime(endOfConcern));
 			}
 			getConcernEntry().getEffectiveTime()
-					.setHigh(DateUtil.createIVXB_TSFromDate(endOfConcern));
+					.setHigh(DateUtilOld.createIVXB_TSFromDate(endOfConcern));
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
@@ -388,10 +388,10 @@ public class BaseProblemConcern
 		try {
 			if (getConcernEntry().getEffectiveTime() == null) {
 				getConcernEntry()
-						.setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(startOfConcern));
+						.setEffectiveTime(DateUtilOld.createIVL_TSFromEuroDateTime(startOfConcern));
 			}
 			getConcernEntry().getEffectiveTime()
-					.setLow(DateUtil.createIVXB_TSFromDate(startOfConcern));
+					.setLow(DateUtilOld.createIVXB_TSFromDate(startOfConcern));
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}

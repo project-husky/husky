@@ -52,7 +52,7 @@ import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Performer;
 import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
@@ -1185,11 +1185,11 @@ public class ObservationChTextBuilder extends TextBuilder {
 	private String parseDate(String value) {
 		String retVal = "";
 		if (value.length() > 17)
-			retVal = formatDate(DateUtil.parseDateyyyyMMddHHmmssZZZZ(value));
+			retVal = formatDate(DateUtilOld.parseDateyyyyMMddHHmmssZZZZ(value));
 		else if (value.length() == 17)
-			retVal = formatDate(DateUtil.parseDateyyyyMMddHHmmZZZZ(value));
+			retVal = formatDate(DateUtilOld.parseDateyyyyMMddHHmmZZZZ(value));
 		else if (value.length() == 8)
-			retVal = formatDate(DateUtil.parseDateyyyyMMdd(value));
+			retVal = formatDate(DateUtilOld.parseDateyyyyMMdd(value));
 		else
 			retVal = "Not yet implemented";
 		return retVal;

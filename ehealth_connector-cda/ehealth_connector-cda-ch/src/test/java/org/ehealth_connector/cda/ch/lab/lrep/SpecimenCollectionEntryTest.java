@@ -21,7 +21,7 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.ehealth_connector.common.mdht.Identificator;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.junit.Test;
 
 /**
@@ -43,7 +43,7 @@ public class SpecimenCollectionEntryTest {
 		boolean idFoundChPalm = false;
 
 		final SpecimenCollectionEntry sce = new SpecimenCollectionEntry();
-		sce.setEffectiveTime(DateUtil.dateAndTime("22.07.2018 12:02"));
+		sce.setEffectiveTime(DateUtilOld.dateAndTime("22.07.2018 12:02"));
 		sce.setSpecimenMaterialOriginalText("Testmaterial");
 		sce.setSpecimenCollectionApproachSiteCodeOriginalText("Test site");
 

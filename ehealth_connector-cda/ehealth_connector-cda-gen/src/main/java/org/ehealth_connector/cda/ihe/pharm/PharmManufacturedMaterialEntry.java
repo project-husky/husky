@@ -27,7 +27,7 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.mdht.enums.Ucum;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.PharmAsContent;
@@ -90,7 +90,7 @@ public class PharmManufacturedMaterialEntry extends
 	 */
 	public Date getExpirationTime() {
 		if (this.getMdht().getExpirationTime() != null) {
-			return DateUtil.parseDateyyyyMMddHHmm(this.getMdht().getExpirationTime().getValue());
+			return DateUtilOld.parseDateyyyyMMddHHmm(this.getMdht().getExpirationTime().getValue());
 		}
 		return null;
 	}
@@ -310,7 +310,7 @@ public class PharmManufacturedMaterialEntry extends
 	public void setExpirationTime(Date ts) {
 
 		if (ts != null) {
-			this.getMdht().setExpirationTime(DateUtil.convertDate(ts));
+			this.getMdht().setExpirationTime(DateUtilOld.convertDate(ts));
 		} else {
 			this.getMdht().setExpirationTime(null);
 		}

@@ -31,7 +31,7 @@ import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.IdentityDomain;
 import org.ehealth_connector.common.mdht.Value;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntolerance;
@@ -295,7 +295,7 @@ public class BaseAllergyProblem {
 		if (getAllergyProblem().getEffectiveTime() != null) {
 			if (getAllergyProblem().getEffectiveTime().getHigh() != null) {
 				try {
-					retVal = DateUtil.parseDate(getAllergyProblem().getEffectiveTime().getHigh());
+					retVal = DateUtilOld.parseDate(getAllergyProblem().getEffectiveTime().getHigh());
 				} catch (Exception e) {
 				}
 			}
@@ -383,7 +383,7 @@ public class BaseAllergyProblem {
 		if (getAllergyProblem().getEffectiveTime() != null) {
 			if (getAllergyProblem().getEffectiveTime().getLow() != null) {
 				try {
-					retVal = DateUtil.parseDate(getAllergyProblem().getEffectiveTime().getLow());
+					retVal = DateUtilOld.parseDate(getAllergyProblem().getEffectiveTime().getLow());
 				} catch (Exception e) {
 				}
 			}
@@ -488,7 +488,7 @@ public class BaseAllergyProblem {
 			getAllergyProblem().setEffectiveTime(interval);
 		}
 		getAllergyProblem().getEffectiveTime()
-				.setHigh(DateUtil.createIVXB_TSFromDate(endOfProblem));
+				.setHigh(DateUtilOld.createIVXB_TSFromDate(endOfProblem));
 	}
 
 	/**
@@ -525,6 +525,6 @@ public class BaseAllergyProblem {
 			getAllergyProblem().setEffectiveTime(interval);
 		}
 		getAllergyProblem().getEffectiveTime()
-				.setLow(DateUtil.createIVXB_TSFromDate(startOfProblem));
+				.setLow(DateUtilOld.createIVXB_TSFromDate(startOfProblem));
 	}
 }

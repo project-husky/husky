@@ -39,7 +39,7 @@ import org.ehealth_connector.common.mdht.IdentityDomain;
 import org.ehealth_connector.common.mdht.Performer;
 import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.mdht.enums.StatusCode;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
@@ -237,7 +237,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	 */
 	private SXCM_TS convertDate(Date appliedAt) {
 		final SXCM_TS timestamp = DatatypesFactory.eINSTANCE.createSXCM_TS();
-		timestamp.setValue(DateUtil.formatDate(appliedAt));
+		timestamp.setValue(DateUtilOld.formatDate(appliedAt));
 		return timestamp;
 	}
 
@@ -260,7 +260,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	public Date getApplyDate() {
 		if ((getMdht().getEffectiveTimes() != null) && (getMdht().getEffectiveTimes().size() > 0)) {
 			final SXCM_TS date = getMdht().getEffectiveTimes().get(0);
-			return DateUtil.parseDateyyyyMMdd(date.getValue());
+			return DateUtilOld.parseDateyyyyMMdd(date.getValue());
 		} else {
 			return null;
 		}
@@ -539,7 +539,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 		ce.setNullFlavor(NullFlavor.UNK);
 		getMdht().setPriorityCode(ce);
 		getMdht().setDoseQuantity(Util.createIVL_PQNullFlavorUNK());
-		getMdht().getEffectiveTimes().add(DateUtil.createSTCM_TS(new Date()));
+		getMdht().getEffectiveTimes().add(DateUtilOld.createSTCM_TS(new Date()));
 		if (getMdht().getIds().size() == 0)
 			getMdht().getIds().add(CdaChUtil.createUniqueIiFromString(null));
 		final Consumable c = new Consumable(false);

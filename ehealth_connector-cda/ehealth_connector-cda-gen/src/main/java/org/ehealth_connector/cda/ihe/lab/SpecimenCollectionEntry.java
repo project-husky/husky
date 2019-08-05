@@ -24,7 +24,7 @@ import java.util.List;
 import org.ehealth_connector.cda.MdhtProcedureFacade;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.mdht.Participant;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.Participant2;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
@@ -64,7 +64,7 @@ public class SpecimenCollectionEntry
 	 * @return the effective time
 	 */
 	public Date getEffectiveTime() {
-		return DateUtil.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
+		return DateUtilOld.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
 	}
 
 	/**
@@ -98,7 +98,7 @@ public class SpecimenCollectionEntry
 	 *            the new effective time
 	 */
 	public void setEffectiveTime(Date date) {
-		getMdht().setEffectiveTime(DateUtil.convertDateToIvlTsyyyyMMddHHmmssZZZZ(date));
+		getMdht().setEffectiveTime(DateUtilOld.convertDateToIvlTsyyyyMMddHHmmssZZZZ(date));
 	}
 
 	/**
@@ -110,7 +110,7 @@ public class SpecimenCollectionEntry
 	 *            the high value
 	 */
 	public void setEffectiveTime(Date low, Date high) {
-		getMdht().setEffectiveTime(DateUtil.convertDateToIvlTsyyyyMMddHHmmssZZZZ(low, high));
+		getMdht().setEffectiveTime(DateUtilOld.convertDateToIvlTsyyyyMMddHHmmssZZZZ(low, high));
 	}
 
 	/**

@@ -21,7 +21,7 @@ import java.util.Date;
 
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 
 /**
  * These enum contains the recommendation category for immunization in
@@ -169,10 +169,10 @@ public enum CdaChVacdRecCategories {
 		this.displayNameFr = displayNameFr;
 		this.displayNameIt = displayNameIt;
 		if ((validFrom != null) && !"".equals(validFrom)) {
-			this.validFrom = DateUtil.parseDateyyyyMMdd(validFrom);
+			this.validFrom = DateUtilOld.parseDateyyyyMMdd(validFrom);
 		}
 		if ((validTo != null) && !"".equals(validTo)) {
-			this.validTo = DateUtil.parseDateyyyyMMdd(validTo);
+			this.validTo = DateUtilOld.parseDateyyyyMMdd(validTo);
 		}
 	}
 

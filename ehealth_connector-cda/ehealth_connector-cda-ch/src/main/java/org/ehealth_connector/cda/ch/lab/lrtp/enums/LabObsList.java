@@ -20,7 +20,7 @@ package org.ehealth_connector.cda.ch.lab.lrtp.enums;
 import java.util.Date;
 
 import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
@@ -2383,10 +2383,10 @@ public enum LabObsList {
 		this.displayName = displayName;
 		this.sectionCode = sectionCode;
 		if ((validFrom != null) && !"".equals(validFrom)) {
-			this.validFrom = DateUtil.parseDateyyyyMMdd(validFrom);
+			this.validFrom = DateUtilOld.parseDateyyyyMMdd(validFrom);
 		}
 		if ((validTo != null) && !"".equals(validTo)) {
-			this.validTo = DateUtil.parseDateyyyyMMdd(validTo);
+			this.validTo = DateUtilOld.parseDateyyyyMMdd(validTo);
 		}
 	}
 

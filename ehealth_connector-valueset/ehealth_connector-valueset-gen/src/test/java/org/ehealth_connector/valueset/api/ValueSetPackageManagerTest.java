@@ -33,7 +33,7 @@ import java.util.Date;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.FileUtil;
 import org.ehealth_connector.common.utils.LangText;
 import org.ehealth_connector.common.utils.Util;
@@ -64,7 +64,7 @@ public class ValueSetPackageManagerTest {
 		ValueSetPackageConfig retVal = null;
 		String sourceUrl;
 		sourceUrl = "file://" + testValueSetPackageConfigFile;
-		Date validFrom = DateUtil.date("11.06.2019 00:00:00");
+		Date validFrom = DateUtilOld.date("11.06.2019 00:00:00");
 
 		Version version = Version.builder().withLabel("0.9").withValidFrom(validFrom).build();
 		IdentificatorBaseType identificator = IdentificatorBaseType.builder().withRoot("2.999")
@@ -118,7 +118,7 @@ public class ValueSetPackageManagerTest {
 		org.setPrimaryName("eHealthConnector Unit Test");
 
 		sourceUrl = testValueSetPackageConfigOnTheWeb;
-		Date validFrom = DateUtil.date("23.06.2019 00:00:00");
+		Date validFrom = DateUtilOld.date("23.06.2019 00:00:00");
 
 		Version version = Version.builder().withLabel("1.0").withValidFrom(validFrom)
 				.withPublishingAuthority(org).build();
@@ -137,7 +137,7 @@ public class ValueSetPackageManagerTest {
 		String className1 = "AuthorRole";
 		IdentificatorBaseType authorRoleId = IdentificatorBaseType.builder()
 				.withRoot("2.16.756.5.30.1.127.3.10.1.1.3").build();
-		Date authorRoleTimeStamp = DateUtil.parseDateyyyyMMddTHHmmss("2018-06-13T07:40:11");
+		Date authorRoleTimeStamp = DateUtilOld.parseDateyyyyMMddTHHmmss("2018-06-13T07:40:11");
 		URL authorRoleSourceUrl;
 		String authorRoleSourceUrlString = "";
 
@@ -153,7 +153,7 @@ public class ValueSetPackageManagerTest {
 		String className2 = "EprDocumentAvailabilityStatus";
 		IdentificatorBaseType documentAvailabilityStatusId = IdentificatorBaseType.builder()
 				.withRoot("2.16.756.5.30.1.127.3.10.1.2").build();
-		Date documentAvailabilityStatusTimeStamp = DateUtil
+		Date documentAvailabilityStatusTimeStamp = DateUtilOld
 				.parseDateyyyyMMddTHHmmss("2018-06-13T07:48:02");
 		URL documentAvailabilityStatusSourceUrl;
 		String documentAvailabilityStatusSourceUrlString = "";
@@ -270,11 +270,11 @@ public class ValueSetPackageManagerTest {
 		ValueSetPackageConfig valueSetPackageConfig;
 
 		valueSetPackageConfig = valueSetPackageManager.getValueSetPackageConfigByStatusAndDate(
-				ValueSetPackageStatus.ACTIVE, DateUtil.date("11.06.2019"));
+				ValueSetPackageStatus.ACTIVE, DateUtilOld.date("11.06.2019"));
 		assertEquals("0.8-active", valueSetPackageConfig.getVersion().getLabel());
 
 		valueSetPackageConfig = valueSetPackageManager.getValueSetPackageConfigByStatusAndDate(
-				ValueSetPackageStatus.ACTIVE, DateUtil.date("31.12.2021"));
+				ValueSetPackageStatus.ACTIVE, DateUtilOld.date("31.12.2021"));
 		assertEquals("0.7-active", valueSetPackageConfig.getVersion().getLabel());
 
 	}
@@ -355,7 +355,7 @@ public class ValueSetPackageManagerTest {
 		String sourceUrl = "http://foo.bar";
 		ValueSetPackageStatus status = ValueSetPackageStatus.ACTIVE;
 		Version version = Version.builder().withLabel("1.0")
-				.withValidFrom(DateUtil.date("03.06.2019 00:00:00")).build();
+				.withValidFrom(DateUtilOld.date("03.06.2019 00:00:00")).build();
 
 		ValueSetPackage valueSetPackage = ValueSetPackage.builder().withDescription(description)
 				.withIdentificator(identificator).withSourceUrl(sourceUrl).withStatus(status)
@@ -363,13 +363,13 @@ public class ValueSetPackageManagerTest {
 
 		String description1 = "description1";
 		String displayName1 = "displayName1";
-		Date effectiveDate1 = DateUtil.date("11.06.2019");
+		Date effectiveDate1 = DateUtilOld.date("11.06.2019");
 		IdentificatorBaseType identificator1 = IdentificatorBaseType.builder().withRoot("2.999.1")
 				.withExtension("1").build();
 		String name1 = "myValueSetName1";
 		ValueSetStatus status1 = ValueSetStatus.FINAL;
 		Version version1 = Version.builder().withLabel("1.1")
-				.withValidFrom(DateUtil.date("01.06.2019 00:00:00")).build();
+				.withValidFrom(DateUtilOld.date("01.06.2019 00:00:00")).build();
 
 		ValueSet valueSet1 = ValueSet.builder().withDisplayName(displayName1)
 				.withEffectiveDate(effectiveDate1).withIdentificator(identificator1).withName(name1)
@@ -378,13 +378,13 @@ public class ValueSetPackageManagerTest {
 
 		String description2 = "description2";
 		String displayName2 = "displayName2";
-		Date effectiveDate2 = DateUtil.date("12.06.2019");
+		Date effectiveDate2 = DateUtilOld.date("12.06.2019");
 		IdentificatorBaseType identificator2 = IdentificatorBaseType.builder().withRoot("2.999.2")
 				.withExtension("2").build();
 		String name2 = "myValueSetName2";
 		ValueSetStatus status2 = ValueSetStatus.FINAL;
 		Version version2 = Version.builder().withLabel("1.2")
-				.withValidFrom(DateUtil.date("02.06.2019 00:00:00")).build();
+				.withValidFrom(DateUtilOld.date("02.06.2019 00:00:00")).build();
 
 		ValueSet valueSet2 = ValueSet.builder().withDisplayName(displayName2)
 				.withEffectiveDate(effectiveDate2).withIdentificator(identificator2).withName(name2)

@@ -23,7 +23,7 @@ import java.util.Map;
 
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 
 /**
  * Value Set valid from 20160101 Value-Set: CDA-CH-VACD copml-risks (OID:
@@ -470,10 +470,10 @@ public enum RiskOfComplications {
 		displayNames.put(LanguageCode.FRENCH, displayNameFr);
 		displayNames.put(LanguageCode.ITALIAN, displayNameIt);
 		if (validFrom != null && !"".equals(validFrom)) {
-			this.validFrom = DateUtil.parseDateyyyyMMdd(validFrom);
+			this.validFrom = DateUtilOld.parseDateyyyyMMdd(validFrom);
 		}
 		if (validTo != null && !"".equals(validTo)) {
-			this.validTo = DateUtil.parseDateyyyyMMdd(validTo);
+			this.validTo = DateUtilOld.parseDateyyyyMMdd(validTo);
 		}
 	}
 

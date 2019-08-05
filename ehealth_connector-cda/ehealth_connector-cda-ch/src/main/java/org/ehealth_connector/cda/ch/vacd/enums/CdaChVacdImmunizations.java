@@ -20,7 +20,7 @@ package org.ehealth_connector.cda.ch.vacd.enums;
 import java.util.Date;
 
 import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 
 /**
  * This subset contains immunization for which an vaccine can be given in
@@ -193,10 +193,10 @@ public enum CdaChVacdImmunizations {
 		this.code = code;
 		this.displayName = displayName;
 		if ((validFrom != null) && !"".equals(validFrom)) {
-			this.validFrom = DateUtil.parseDateyyyyMMdd(validFrom);
+			this.validFrom = DateUtilOld.parseDateyyyyMMdd(validFrom);
 		}
 		if ((validTo != null) && !"".equals(validTo)) {
-			this.validTo = DateUtil.parseDateyyyyMMdd(validTo);
+			this.validTo = DateUtilOld.parseDateyyyyMMdd(validTo);
 		}
 		this.sortOrder = sortOrder;
 	}

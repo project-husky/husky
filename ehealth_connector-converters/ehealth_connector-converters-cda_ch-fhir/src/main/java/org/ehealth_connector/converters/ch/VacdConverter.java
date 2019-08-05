@@ -40,7 +40,7 @@ import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
 import org.ehealth_connector.common.mdht.enums.Ucum;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.fhir.structures.ch.FhirCdaChVacd.DocTypeCode;
 import org.ehealth_connector.fhir.structures.ch.FhirCdaChVacd.VacdDocument;
@@ -115,7 +115,7 @@ public class VacdConverter extends AbstractCdaChV12FhirConverter {
 			doc.pseudonymization();
 
 		for (final Author author : getAuthors(docManifest)) {
-			author.setTime(DateUtil.date("15.12.2014"));
+			author.setTime(DateUtilOld.date("15.12.2014"));
 			doc.addAuthor(author);
 		}
 		doc.setCustodian(getCustodian(docManifest));
@@ -197,10 +197,10 @@ public class VacdConverter extends AbstractCdaChV12FhirConverter {
 				if (extensions.get(0).getValue() instanceof TimeType) {
 					final TimeType timeStamp = ((TimeType) extensions.get(0).getValue());
 					if (timeStamp.getValue().length() > 8)
-						retVal.setTime(DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
+						retVal.setTime(DateUtilOld.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
 
 					else
-						retVal.setTime(DateUtil.parseDateyyyyMMdd(timeStamp.getValue()));
+						retVal.setTime(DateUtilOld.parseDateyyyyMMdd(timeStamp.getValue()));
 					break;
 				}
 			}

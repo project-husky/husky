@@ -23,7 +23,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Date;
 
 import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.junit.Before;
 import org.junit.Test;
 import org.openhealthtools.ihe.xds.consumer.query.MalformedQueryException;
@@ -47,14 +47,14 @@ public class DateTimeRangeTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		testDate1 = DateUtil.parseDateyyyyMMddHHmmss("19800521022211");
-		testDate2 = DateUtil.parseDateyyyyMMddHHmmss("20150521133459");
+		testDate1 = DateUtilOld.parseDateyyyyMMddHHmmss("19800521022211");
+		testDate2 = DateUtilOld.parseDateyyyyMMddHHmmss("20150521133459");
 
 		testDateToStr1 = "20381231235959";
-		testDateTo1 = DateUtil.parseDateyyyyMMddHHmmss(testDateToStr1);
+		testDateTo1 = DateUtilOld.parseDateyyyyMMddHHmmss(testDateToStr1);
 
 		testDateToStr2 = "20270110003102";
-		testDateTo2 = DateUtil.parseDateyyyyMMddHHmmss(testDateToStr2);
+		testDateTo2 = DateUtilOld.parseDateyyyyMMddHHmmss(testDateToStr2);
 	}
 
 	@Test
@@ -65,8 +65,8 @@ public class DateTimeRangeTest {
 		assertTrue(d.getFrom().getTime() == testDate1.getTime());
 		assertTrue(d.getTo().getTime() == testDate2.getTime());// 201401012300
 
-		assertTrue(DateUtil.format(d.getFrom()).equals("19800521022211"));
-		assertTrue(DateUtil.format(d.getTo()).equals("20150521133459"));
+		assertTrue(DateUtilOld.format(d.getFrom()).equals("19800521022211"));
+		assertTrue(DateUtilOld.format(d.getTo()).equals("20150521133459"));
 
 		assertEquals("19800521022211", d.getOhtDateTimeRange().getFrom());
 		assertEquals("20150521133459", d.getOhtDateTimeRange().getTo());

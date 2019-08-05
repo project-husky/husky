@@ -22,7 +22,7 @@ import java.util.Date;
 import javax.annotation.Generated;
 
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.Util;
 
 /**
@@ -212,7 +212,7 @@ public class Version implements Serializable {
 			else {
 				retVal = this.validFrom.equals(((Version) obj).getValidFrom());
 				if (!retVal) {
-					retVal = DateUtil.equalsDateOnly(this.validFrom,
+					retVal = DateUtilOld.equalsDateOnly(this.validFrom,
 							((Version) obj).getValidFrom());
 				}
 			}
@@ -223,7 +223,7 @@ public class Version implements Serializable {
 			else {
 				retVal = this.validTo.equals(((Version) obj).getValidTo());
 				if (!retVal) {
-					retVal = DateUtil.equalsDateOnly(this.validTo, ((Version) obj).getValidTo());
+					retVal = DateUtilOld.equalsDateOnly(this.validTo, ((Version) obj).getValidTo());
 				}
 			}
 		}

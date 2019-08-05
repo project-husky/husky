@@ -25,7 +25,7 @@ import java.util.regex.Pattern;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.openhealthtools.ihe.common.hl7v2.Hl7v2Factory;
 import org.openhealthtools.ihe.common.hl7v2.XCN;
 import org.openhealthtools.ihe.xds.consumer.query.DateTimeRange;
@@ -86,8 +86,8 @@ public class XdsTestUtils {
 					"201502010400");
 			dateTimeRanges = new DateTimeRange[] { dateTimeRange1, dateTimeRange2 };
 
-			d1 = DateUtil.parseDateyyyyMMddHHmmss("19800521022211");
-			d2 = DateUtil.parseDateyyyyMMddHHmmss("20150521133459");
+			d1 = DateUtilOld.parseDateyyyyMMddHHmmss("19800521022211");
+			d2 = DateUtilOld.parseDateyyyyMMddHHmmss("20150521133459");
 			eDateTimeRange1 = new org.ehealth_connector.communication.xd.storedquery.DateTimeRange(
 					DateTimeRangeAttributes.CREATION_TIME, d1, d2);
 			eDateTimeRange2 = new org.ehealth_connector.communication.xd.storedquery.DateTimeRange(

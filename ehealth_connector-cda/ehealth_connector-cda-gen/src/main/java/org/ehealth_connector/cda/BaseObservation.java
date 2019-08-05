@@ -32,7 +32,7 @@ import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Performer;
 import org.ehealth_connector.common.mdht.ReferenceRange;
 import org.ehealth_connector.common.mdht.Value;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.LangTexts;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Observation;
@@ -110,7 +110,7 @@ public class BaseObservation
 		final org.openhealthtools.mdht.uml.cda.Author mAuthor = author.copyMdhtAuthor();
 		// mAuthor.setTypeCode(ParticipationPhysicalPerformer.PRF);
 		try {
-			mAuthor.setTime(DateUtil.createIVL_TSFromEuroDate(dateTimeOfDocumentation));
+			mAuthor.setTime(DateUtilOld.createIVL_TSFromEuroDate(dateTimeOfDocumentation));
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
@@ -155,7 +155,7 @@ public class BaseObservation
 		final Performer2 mPerformer = performer.copyMdhtPerfomer();
 		mPerformer.setTypeCode(ParticipationPhysicalPerformer.PRF);
 		try {
-			mPerformer.setTime(DateUtil.createIVL_TSFromEuroDate(dateTimeOfPerformance));
+			mPerformer.setTime(DateUtilOld.createIVL_TSFromEuroDate(dateTimeOfPerformance));
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
@@ -227,7 +227,7 @@ public class BaseObservation
 	 */
 	@Override
 	public Date getEffectiveTime() {
-		return DateUtil.parseIVL_TSVDateTimeValue(mObservation.getEffectiveTime());
+		return DateUtilOld.parseIVL_TSVDateTimeValue(mObservation.getEffectiveTime());
 	}
 
 	/**
@@ -479,7 +479,7 @@ public class BaseObservation
 	public void setEffectiveTime(Date dateTimeOfResult) {
 		try {
 			getObservation()
-					.setEffectiveTime(DateUtil.createIVL_TSFromEuroDateTime(dateTimeOfResult));
+					.setEffectiveTime(DateUtilOld.createIVL_TSFromEuroDateTime(dateTimeOfResult));
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}

@@ -34,7 +34,7 @@ import org.apache.commons.io.IOUtils;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.FileUtil;
 import org.ehealth_connector.common.utils.LangText;
 import org.ehealth_connector.common.utils.Util;
@@ -98,7 +98,7 @@ public class ValueSetManagerTest {
 		String className1 = "AuthorRole";
 		IdentificatorBaseType authorRoleId = IdentificatorBaseType.builder()
 				.withRoot("2.16.756.5.30.1.127.3.10.1.1.3").build();
-		Date authorRoleTimeStamp = DateUtil.parseDateyyyyMMddTHHmmss("2018-06-13T07:40:11");
+		Date authorRoleTimeStamp = DateUtilOld.parseDateyyyyMMddTHHmmss("2018-06-13T07:40:11");
 		URL authorRoleSourceUrlJson;
 		String authorRoleSourceUrlJsonString = "";
 		try {
@@ -279,13 +279,13 @@ public class ValueSetManagerTest {
 		// Save a ValueSet
 		String description = "description";
 		String displayName = "displayName";
-		Date effectiveDate = DateUtil.date("11.06.2019");
+		Date effectiveDate = DateUtilOld.date("11.06.2019");
 		IdentificatorBaseType identificator = IdentificatorBaseType.builder().withRoot("2.999.1")
 				.withExtension("1").build();
 		String name = "myValueSetName";
 		ValueSetStatus status = ValueSetStatus.FINAL;
 		Version version = Version.builder().withLabel("1.0")
-				.withValidFrom(DateUtil.date("22.06.2019 00:00:00")).build();
+				.withValidFrom(DateUtilOld.date("22.06.2019 00:00:00")).build();
 
 		ValueSet valueSet = ValueSet.builder().withDisplayName(displayName)
 				.withEffectiveDate(effectiveDate).withIdentificator(identificator).withName(name)

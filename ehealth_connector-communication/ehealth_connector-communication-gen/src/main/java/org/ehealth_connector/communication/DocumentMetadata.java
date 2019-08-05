@@ -29,7 +29,7 @@ import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Patient;
 import org.ehealth_connector.common.mdht.enums.ConfidentialityCode;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.openhealthtools.ihe.common.hl7v2.SourcePatientInfoType;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
@@ -535,7 +535,7 @@ public class DocumentMetadata {
 	 * @return creationTime as Date
 	 */
 	public Date getCreationTime() {
-		return DateUtil.parseDates(xDoc.getCreationTime());
+		return DateUtilOld.parseDates(xDoc.getCreationTime());
 	}
 
 	/**

@@ -40,7 +40,7 @@ import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Name;
 import org.ehealth_connector.common.mdht.Organization;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -246,7 +246,7 @@ public class ImmunizationTest {
 	public void testEffectiveTime() throws XPathExpressionException {
 		final Immunization entry = new Immunization();
 
-		final Date appliedAt = DateUtil.parseDateyyyyMMdd("20151019");
+		final Date appliedAt = DateUtilOld.parseDateyyyyMMdd("20151019");
 		entry.setApplyDate(appliedAt);
 
 		assertEquals(appliedAt, entry.getApplyDate());

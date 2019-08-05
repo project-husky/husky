@@ -23,7 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.ehealth_connector.common.mdht.enums.CountryCode;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.hl7.fhir.dstu3.model.Address.AddressUse;
@@ -62,7 +62,7 @@ public class TestPatient {
 
 		patient.getIdentifier().add(identifier);
 
-		patient.setBirthDate(DateUtil.parseDateyyyyMMdd2(testPatient.birthDate));
+		patient.setBirthDate(DateUtilOld.parseDateyyyyMMdd2(testPatient.birthDate));
 
 		patient.getAddress().add(address);
 		patient.setGender(AdministrativeGender.valueOf(testPatient.gender.toUpperCase()));
@@ -91,7 +91,7 @@ public class TestPatient {
 
 		patient.getIdentifier().add(identifier);
 
-		patient.setBirthDate(DateUtil.parseDateyyyyMMdd2(testPatient.birthDate));
+		patient.setBirthDate(DateUtilOld.parseDateyyyyMMdd2(testPatient.birthDate));
 
 		patient.getAddress().add(address);
 		patient.setGender(AdministrativeGender.valueOf(testPatient.gender.toUpperCase()));

@@ -38,7 +38,7 @@ import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.mdht.enums.StatusCode;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Precondition;
@@ -333,11 +333,11 @@ public class ImmunizationRecommendation
 				final IVL_TS effectiveTimeInterval = (IVL_TS) effectiveTime;
 				if ((effectiveTimeInterval.getHigh() != null)
 						&& (effectiveTimeInterval.getHigh().getValue() != null)) {
-					retVal = DateUtil.parseDateyyyyMMdd(effectiveTimeInterval.getHigh().getValue());
+					retVal = DateUtilOld.parseDateyyyyMMdd(effectiveTimeInterval.getHigh().getValue());
 				}
 			} else {
 				if (effectiveTime instanceof TS) {
-					retVal = DateUtil.parseDateyyyyMMdd(effectiveTime.getValue());
+					retVal = DateUtilOld.parseDateyyyyMMdd(effectiveTime.getValue());
 				}
 			}
 		}
@@ -355,10 +355,10 @@ public class ImmunizationRecommendation
 			final SXCM_TS effectiveTime = getMdht().getEffectiveTimes().get(0);
 			if (effectiveTime instanceof IVL_TS) {
 				final IVL_TS effectiveTimeInterval = (IVL_TS) effectiveTime;
-				retVal = DateUtil.parseDateyyyyMMdd(effectiveTimeInterval.getLow().getValue());
+				retVal = DateUtilOld.parseDateyyyyMMdd(effectiveTimeInterval.getLow().getValue());
 			} else {
 				if (effectiveTime instanceof TS) {
-					retVal = DateUtil.parseDateyyyyMMdd(effectiveTime.getValue());
+					retVal = DateUtilOld.parseDateyyyyMMdd(effectiveTime.getValue());
 				}
 			}
 		}
@@ -378,7 +378,7 @@ public class ImmunizationRecommendation
 	 */
 	public String getPossibleApplianceString() {
 		final List<SXCM_TS> effectiveTimes = getMdht().getEffectiveTimes();
-		return DateUtil.convertSXCM_TSToEurString(effectiveTimes);
+		return DateUtilOld.convertSXCM_TSToEurString(effectiveTimes);
 	}
 
 	/**
@@ -600,7 +600,7 @@ public class ImmunizationRecommendation
 	public void setPossibleAppliance(Date startOfPossibleAppliance) {
 		getMdht().getEffectiveTimes().clear();
 		final SXCM_TS timestamp = DatatypesFactory.eINSTANCE.createSXCM_TS();
-		timestamp.setValue(DateUtil.formatDate(startOfPossibleAppliance));
+		timestamp.setValue(DateUtilOld.formatDate(startOfPossibleAppliance));
 		getMdht().getEffectiveTimes().add(timestamp);
 	}
 
@@ -621,7 +621,7 @@ public class ImmunizationRecommendation
 	public void setPossibleAppliance(Date startOfPossibleAppliance, Date endOfPossibleAppliance) {
 		getMdht().getEffectiveTimes().clear();
 		this.getMdht().getEffectiveTimes().add(0,
-				DateUtil.createSTCM_TS(startOfPossibleAppliance, endOfPossibleAppliance));
+				DateUtilOld.createSTCM_TS(startOfPossibleAppliance, endOfPossibleAppliance));
 	}
 
 	/**

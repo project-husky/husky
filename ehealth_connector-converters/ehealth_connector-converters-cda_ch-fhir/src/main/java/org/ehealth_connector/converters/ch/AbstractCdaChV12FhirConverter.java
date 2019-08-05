@@ -62,7 +62,7 @@ import org.ehealth_connector.common.mdht.enums.ConfidentialityCode;
 import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
 import org.ehealth_connector.common.mdht.enums.StatusCode;
 import org.ehealth_connector.common.mdht.enums.Ucum;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.ehealth_connector.fhir.structures.utils.FhirUtilities;
@@ -344,7 +344,7 @@ public abstract class AbstractCdaChV12FhirConverter {
 				}
 
 				final TimeType timeStamp = ((TimeType) extensions.get(0).getValueAsPrimitive());
-				author.setTime(DateUtil.parseDates(timeStamp.getValue()));
+				author.setTime(DateUtilOld.parseDates(timeStamp.getValue()));
 				retVal.add(author);
 			}
 		}
@@ -472,7 +472,7 @@ public abstract class AbstractCdaChV12FhirConverter {
 						id.setSystem(FhirCommon.removeUrnOidPrefix(id.getSystem()));
 						final TimeType timeStamp = ((TimeType) extensions.get(0).getValue());
 						retVal.setEffectiveTime(
-								DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
+								DateUtilOld.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
 						retVal.addId(new Identificator(id.getSystem(), id.getValue()));
 						for (final ListEntryComponent listEntry : list.getEntry()) {
 							final List<org.hl7.fhir.dstu3.model.Extension> extensions2 = listEntry
@@ -483,7 +483,7 @@ public abstract class AbstractCdaChV12FhirConverter {
 										.getAuthor((Person) listEntry.getItem().getResource());
 								final TimeType timeStamp2 = ((TimeType) extensions2.get(0)
 										.getValue());
-								author.setTime(DateUtil
+								author.setTime(DateUtilOld
 										.parseDateyyyyMMddHHmmssZZZZ(timeStamp2.getValue()));
 								retVal.addAuthor(author);
 							}
@@ -1028,7 +1028,7 @@ public abstract class AbstractCdaChV12FhirConverter {
 								.getExtensionsByUrl(FhirCommon.urnUseAsAuthor);
 						if (!extensions.isEmpty()) {
 							final TimeType t = (TimeType) extensions.get(0).getValue();
-							author.setTime(DateUtil.parseDates(t.getValue()));
+							author.setTime(DateUtilOld.parseDates(t.getValue()));
 						}
 						lbo.addAuthor(author);
 					}
@@ -1080,7 +1080,7 @@ public abstract class AbstractCdaChV12FhirConverter {
 					.getExtensionsByUrl(FhirCommon.urnUseAsAuthor);
 			if (!extensions.isEmpty()) {
 				final TimeType t = (TimeType) extensions.get(0).getValue();
-				author.setTime(DateUtil.parseDates(t.getValue()));
+				author.setTime(DateUtilOld.parseDates(t.getValue()));
 			}
 			lbo.addAuthor(author);
 		}
@@ -1140,7 +1140,7 @@ public abstract class AbstractCdaChV12FhirConverter {
 								.getExtensionsByUrl(FhirCommon.urnUseAsAuthor);
 						if (!extensions.isEmpty()) {
 							final TimeType t = (TimeType) extensions.get(0).getValue();
-							author.setTime(DateUtil.parseDates(t.getValue()));
+							author.setTime(DateUtilOld.parseDates(t.getValue()));
 						}
 						sce.addAuthor(author);
 					}
@@ -1446,10 +1446,10 @@ public abstract class AbstractCdaChV12FhirConverter {
 								.getValueAsPrimitive());
 						if (timeStamp.getValue().length() > 8)
 							retVal.setTime(
-									DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
+									DateUtilOld.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
 
 						else
-							retVal.setTime(DateUtil.parseDateyyyyMMdd(timeStamp.getValue()));
+							retVal.setTime(DateUtilOld.parseDateyyyyMMdd(timeStamp.getValue()));
 					}
 				}
 			}
@@ -1626,10 +1626,10 @@ public abstract class AbstractCdaChV12FhirConverter {
 				if (extensions.get(0).getValue() instanceof TimeType) {
 					final TimeType timeStamp = ((TimeType) extensions.get(0).getValue());
 					if (timeStamp.getValue().length() > 8)
-						retVal.setTime(DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
+						retVal.setTime(DateUtilOld.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
 
 					else
-						retVal.setTime(DateUtil.parseDateyyyyMMdd(timeStamp.getValue()));
+						retVal.setTime(DateUtilOld.parseDateyyyyMMdd(timeStamp.getValue()));
 				}
 			}
 		}

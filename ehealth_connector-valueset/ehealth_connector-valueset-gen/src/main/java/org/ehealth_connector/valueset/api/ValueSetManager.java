@@ -58,7 +58,7 @@ import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.CustomizedYaml;
-import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.LangText;
 import org.ehealth_connector.valueset.config.ValueSetConfig;
 import org.ehealth_connector.valueset.enums.DesignationType;
@@ -472,7 +472,7 @@ public class ValueSetManager {
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//ValueSet/EffectiveDate/text()");
 		if (textContent != null)
-			version.setValidFrom(DateUtil.parseDateyyyyMMdd2(textContent));
+			version.setValidFrom(DateUtilOld.parseDateyyyyMMdd2(textContent));
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//ValueSet/@version");
 		if (textContent != null)
@@ -642,7 +642,7 @@ public class ValueSetManager {
 				version.setLabel(entry.getValue().toString());
 			if ("effectiveDate".contentEquals(key) && (entry.getValue() != null))
 				version.setValidFrom(
-						DateUtil.parseDateyyyyMMddTHHmmss(entry.getValue().toString()));
+						DateUtilOld.parseDateyyyyMMddTHHmmss(entry.getValue().toString()));
 			if ("statusCode".contentEquals(key) && (entry.getValue() != null)) {
 				String status = entry.getValue().toString();
 
@@ -1055,7 +1055,7 @@ public class ValueSetManager {
 		textContent = evaluateXpathExprAsString(xmlDoc,
 				"//valueSets/project/valueSet/@effectiveDate");
 		if (textContent != null)
-			version.setValidFrom(DateUtil.parseDateyyyyMMddTHHmmss(textContent));
+			version.setValidFrom(DateUtilOld.parseDateyyyyMMddTHHmmss(textContent));
 
 		textContent = evaluateXpathExprAsString(xmlDoc,
 				"//valueSets/project/valueSet/@versionLabel");
