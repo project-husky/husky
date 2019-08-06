@@ -16,9 +16,38 @@
  */
 package org.ehealth_connector.cda.ch.lrep;
 
+import java.io.File;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.6
  * Template description: If, in a part of the document, certain laboratory observations for a human patient base on a sample of a non-human material (e.g., food eaten by the patient or an animal that has bitten the patient), it MUST be declared using this element in the CDA body. Other parts of the document may contain laboratory observations that base on other samples (including samples taken from the patient). In addition, the IHE template 1.3.6.1.4.1.19376.1.3.3.1.3 - Human Patient with Non-Human Subject (recordTarget) MUST be used in the CDA header.
  */
 public class ChpalmEntryHumanPatientWithNonHumanSubject extends org.ehealth_connector.common.hl7cdar2.II {
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(File outputFile) throws JAXBException {
+		JAXBContext context = JAXBContext.newInstance(this.getClass());
+		Marshaller mar = context.createMarshaller();
+		mar.setProperty("com.sun.xml.bind.namespacePrefixMapper", new CdaNamespacePrefixMapper());
+		mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		mar.marshal(this, outputFile);
+	}
 }

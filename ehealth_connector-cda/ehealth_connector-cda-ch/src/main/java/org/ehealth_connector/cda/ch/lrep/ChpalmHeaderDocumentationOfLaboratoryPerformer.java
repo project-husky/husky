@@ -16,6 +16,13 @@
  */
 package org.ehealth_connector.cda.ch.lrep;
 
+import java.io.File;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.28
  * Template description: Laboratory Performer template in the CDA header (ClinicalDocument/documentationOf/serviceEvent)ClinicalDocument/documentationOf(s) MAY be present. The documentationOf/serviceEvent represents the main Act being documented, that is an act of reporting Result Event(s) produced by a laboratory.Use of sub element documentationOf/serviceEvent/effectiveTime to document the time boundaries of events in the document is appropriate.This laboratory report content module adds the optional sub element documentationOf/serviceEvent/statusCode to enable the sharing of non-final reports. A report is considered as non-final (e.g., a preliminary report) if and only if it documents an Act, which is still in the status “active” (i.e., serviceEvent/statusCode@code=”active”).The statusCode sub element is an extension to the CDA R2 schema. This sub-element is optional. When it is not there, the documented Act is assumed to be completed and the report is assumed to be a final report.
@@ -38,6 +45,28 @@ public class ChpalmHeaderDocumentationOfLaboratoryPerformer extends org.ehealth_
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
 		return hl7TemplateId;
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(File outputFile) throws JAXBException {
+		JAXBContext context = JAXBContext.newInstance(this.getClass());
+		Marshaller mar = context.createMarshaller();
+		mar.setProperty("com.sun.xml.bind.namespacePrefixMapper", new CdaNamespacePrefixMapper());
+		mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		mar.marshal(this, outputFile);
 	}
 
 	/**

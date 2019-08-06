@@ -16,6 +16,13 @@
  */
 package org.ehealth_connector.cda.ch.lrep;
 
+import java.io.File;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.62
  * Template description: The document MUST contain a title. The following translations of the LOINC codes specified in XD-LAB MUST be used:Multidisciplinary reports<table><tbody><tr><th>LOINC Code</th><th>Text</th></tr><tr><td>11502-2</td><td>[ge]: Multidisziplinäre Befunde[fr]: Résultats multidisciplinaires[it]: Risultati multidisciplinari</td></tr></tbody></table>Findings of a particular disciplineThe same translations as for Laboratory Speciality Section are to be used.
@@ -27,4 +34,26 @@ package org.ehealth_connector.cda.ch.lrep;
  * - [en]: 'Laboratory report - &lt;human readable code&gt;'
  */
 public class CdachlrepHeaderDocumentTitle extends org.ehealth_connector.common.hl7cdar2.ST {
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(File outputFile) throws JAXBException {
+		JAXBContext context = JAXBContext.newInstance(this.getClass());
+		Marshaller mar = context.createMarshaller();
+		mar.setProperty("com.sun.xml.bind.namespacePrefixMapper", new CdaNamespacePrefixMapper());
+		mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		mar.marshal(this, outputFile);
+	}
 }

@@ -16,7 +16,14 @@
  */
 package org.ehealth_connector.cda.ch.lrep;
 
+import java.io.File;
 import java.util.ArrayList;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.XmlRootElement;
+import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.1.10
@@ -26,6 +33,7 @@ import java.util.ArrayList;
  * - XML encodingUTF-8 encoding is required. All CDA-CH V2 documents MUST start with this line:&lt;?xml version="1.0" encoding="UTF-8"?&gt;
  * - Phone numbersPhone numbers MUST be declared in the international format.Dots (.) MUST be used as separators for grouping of number blocks.The minus sign (-) MUST be used as a separator between public and internal telephone numbers. Purpose: Some telephone exchanges - especially in the US, allow direct dial-up of an internal telephone number after the actual connection has been established over the public telephone network.Examples:&lt;telecom value="tel:+41.33.123.45.67"/&gt;&lt;telecom value="tel:+1.987.654.3210-999"/&gt;
  */
+@XmlRootElement(name = "ClinicalDocument")
 public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
 
 	/**
@@ -195,6 +203,8 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 * Information about an authenticator of a CDA document. An authenticator MUST be a person.
 	 */
 	public void addHl7Authenticator(org.ehealth_connector.common.hl7cdar2.POCDMT000040Authenticator value) {
+		if (hl7Authenticator == null)
+			hl7Authenticator = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Authenticator>();
 		hl7Authenticator.add(value);
 	}
 
@@ -203,6 +213,8 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 * Information about the author of the document. The author MAY be a person or a device. At least one author MUST be declared.
 	 */
 	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
+		if (hl7Author == null)
+			hl7Author = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Author>();
 		hl7Author.add(value);
 	}
 
@@ -211,6 +223,8 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 * Information about a health service describing the context of this CDA document.
 	 */
 	public void addHl7DocumentationOf(org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf value) {
+		if (hl7DocumentationOf == null)
+			hl7DocumentationOf = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf>();
 		hl7DocumentationOf.add(value);
 	}
 
@@ -218,6 +232,8 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 * Adds a hl7DocumentationOf1
 	 */
 	public void addHl7DocumentationOf1(org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf value) {
+		if (hl7DocumentationOf1 == null)
+			hl7DocumentationOf1 = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf>();
 		hl7DocumentationOf1.add(value);
 	}
 
@@ -226,6 +242,8 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 * Reference to one or more orders which led to the creation of this CDA document. It SHALL be declared, when the order reference is relevant for some reason.
 	 */
 	public void addHl7InFulfillmentOf(org.ehealth_connector.common.hl7cdar2.POCDMT000040InFulfillmentOf value) {
+		if (hl7InFulfillmentOf == null)
+			hl7InFulfillmentOf = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040InFulfillmentOf>();
 		hl7InFulfillmentOf.add(value);
 	}
 
@@ -234,6 +252,8 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 * The laboratory report MUST contain at least one receiver.
 	 */
 	public void addHl7InformationRecipient(org.ehealth_connector.common.hl7cdar2.POCDMT000040InformationRecipient value) {
+		if (hl7InformationRecipient == null)
+			hl7InformationRecipient = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040InformationRecipient>();
 		hl7InformationRecipient.add(value);
 	}
 
@@ -242,6 +262,8 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 * Information on a patient's insurance card.
 	 */
 	public void addHl7Participant(org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 value) {
+		if (hl7Participant == null)
+			hl7Participant = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1>();
 		hl7Participant.add(value);
 	}
 
@@ -250,6 +272,8 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 * Information on a patient's insurance.
 	 */
 	public void addHl7Participant1(org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 value) {
+		if (hl7Participant1 == null)
+			hl7Participant1 = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1>();
 		hl7Participant1.add(value);
 	}
 
@@ -258,6 +282,8 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 * Patient (Human Patient).
 	 */
 	public void addHl7RecordTarget(org.ehealth_connector.common.hl7cdar2.POCDMT000040RecordTarget value) {
+		if (hl7RecordTarget == null)
+			hl7RecordTarget = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040RecordTarget>();
 		hl7RecordTarget.add(value);
 	}
 
@@ -266,6 +292,8 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 * Non-Human Subject.
 	 */
 	public void addHl7RecordTarget1(org.ehealth_connector.common.hl7cdar2.POCDMT000040RecordTarget value) {
+		if (hl7RecordTarget1 == null)
+			hl7RecordTarget1 = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040RecordTarget>();
 		hl7RecordTarget1.add(value);
 	}
 
@@ -274,6 +302,8 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 * Human Patient with Non-Human Subject.
 	 */
 	public void addHl7RecordTarget2(org.ehealth_connector.common.hl7cdar2.POCDMT000040RecordTarget value) {
+		if (hl7RecordTarget2 == null)
+			hl7RecordTarget2 = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040RecordTarget>();
 		hl7RecordTarget2.add(value);
 	}
 
@@ -285,6 +315,8 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 * - Values that are only contained in the new document are to be added.
 	 */
 	public void addHl7RelatedDocument(org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedDocument value) {
+		if (hl7RelatedDocument == null)
+			hl7RelatedDocument = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedDocument>();
 		hl7RelatedDocument.add(value);
 	}
 
@@ -555,6 +587,28 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 */
 	public org.ehealth_connector.common.hl7cdar2.INT getHl7VersionNumber() {
 		return hl7VersionNumber;
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(File outputFile) throws JAXBException {
+		JAXBContext context = JAXBContext.newInstance(this.getClass());
+		Marshaller mar = context.createMarshaller();
+		mar.setProperty("com.sun.xml.bind.namespacePrefixMapper", new CdaNamespacePrefixMapper());
+		mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		mar.marshal(this, outputFile);
 	}
 
 	/**

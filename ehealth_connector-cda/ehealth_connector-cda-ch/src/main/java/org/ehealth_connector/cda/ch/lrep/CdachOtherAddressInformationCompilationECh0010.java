@@ -16,6 +16,13 @@
  */
 package org.ehealth_connector.cda.ch.lrep;
 
+import java.io.File;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.35
  * Template description: Address information according to the eCH-0010 V7.0 addressInformation data type. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.See https://www.ech.ch/vechweb/page?p=dossier&amp;documentNumber=eCH-0010&amp;documentVersion=7.0 for more information.
@@ -23,4 +30,26 @@ package org.ehealth_connector.cda.ch.lrep;
  * Element description: Free additional lines for additional address information which can not be used in the other address fields (e.g. for c/o entries, etc.), with a maximum length of 150 characters.addressLine1 should be used for personalized addressing (e.g., c/o-Address).
  */
 public class CdachOtherAddressInformationCompilationECh0010 extends org.ehealth_connector.common.hl7cdar2.ADXP {
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(File outputFile) throws JAXBException {
+		JAXBContext context = JAXBContext.newInstance(this.getClass());
+		Marshaller mar = context.createMarshaller();
+		mar.setProperty("com.sun.xml.bind.namespacePrefixMapper", new CdaNamespacePrefixMapper());
+		mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		mar.marshal(this, outputFile);
+	}
 }

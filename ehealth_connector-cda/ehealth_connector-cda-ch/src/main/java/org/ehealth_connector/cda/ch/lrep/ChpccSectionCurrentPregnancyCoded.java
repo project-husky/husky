@@ -16,7 +16,13 @@
  */
 package org.ehealth_connector.cda.ch.lrep;
 
+import java.io.File;
 import java.util.ArrayList;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.53
@@ -61,6 +67,8 @@ public class ChpccSectionCurrentPregnancyCoded extends org.ehealth_connector.com
 	 * The narrative text in the text element of the section MUST be generated automatically from the information in this entry.
 	 */
 	public void addHl7Entry1(org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry value) {
+		if (hl7Entry1 == null)
+			hl7Entry1 = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry>();
 		hl7Entry1.add(value);
 	}
 
@@ -69,6 +77,8 @@ public class ChpccSectionCurrentPregnancyCoded extends org.ehealth_connector.com
 	 * An ID for this section MAY be filled for traceability.
 	 */
 	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
+		if (hl7Id == null)
+			hl7Id = new ArrayList<org.ehealth_connector.common.hl7cdar2.II>();
 		hl7Id.add(value);
 	}
 
@@ -137,6 +147,28 @@ public class ChpccSectionCurrentPregnancyCoded extends org.ehealth_connector.com
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ST getHl7Title() {
 		return hl7Title;
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(File outputFile) throws JAXBException {
+		JAXBContext context = JAXBContext.newInstance(this.getClass());
+		Marshaller mar = context.createMarshaller();
+		mar.setProperty("com.sun.xml.bind.namespacePrefixMapper", new CdaNamespacePrefixMapper());
+		mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		mar.marshal(this, outputFile);
 	}
 
 	/**

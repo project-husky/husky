@@ -16,7 +16,13 @@
  */
 package org.ehealth_connector.cda.ch.lrep;
 
+import java.io.File;
 import java.util.ArrayList;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.34
@@ -56,6 +62,8 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends org.eheal
 	 * The person's family name ([ge]: Nachname; [fr]: nom de famille).
 	 */
 	public void addHl7Family(org.ehealth_connector.common.hl7cdar2.ENXP value) {
+		if (hl7Family == null)
+			hl7Family = new ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP>();
 		hl7Family.add(value);
 	}
 
@@ -64,6 +72,8 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends org.eheal
 	 * The person's maiden name ([ge]: Ledigname; [fr]: nom de célibataire).
 	 */
 	public void addHl7Family1(org.ehealth_connector.common.hl7cdar2.ENXP value) {
+		if (hl7Family1 == null)
+			hl7Family1 = new ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP>();
 		hl7Family1.add(value);
 	}
 
@@ -72,6 +82,8 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends org.eheal
 	 * The person's given name ([ge]: Vorname; [fr]: prénom).
 	 */
 	public void addHl7Given(org.ehealth_connector.common.hl7cdar2.ENXP value) {
+		if (hl7Given == null)
+			hl7Given = new ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP>();
 		hl7Given.add(value);
 	}
 
@@ -80,6 +92,8 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends org.eheal
 	 * The person's call name ([ge]: Rufname; [fr]: nom usuel).
 	 */
 	public void addHl7Given1(org.ehealth_connector.common.hl7cdar2.ENXP value) {
+		if (hl7Given1 == null)
+			hl7Given1 = new ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP>();
 		hl7Given1.add(value);
 	}
 
@@ -88,6 +102,8 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends org.eheal
 	 * The person's academic title (such as Dr. med. or Prof.).
 	 */
 	public void addHl7Prefix(org.ehealth_connector.common.hl7cdar2.ENXP value) {
+		if (hl7Prefix == null)
+			hl7Prefix = new ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP>();
 		hl7Prefix.add(value);
 	}
 
@@ -129,5 +145,27 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends org.eheal
 	 */
 	public void clearHl7Prefix() {
 		hl7Prefix.clear();
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(File outputFile) throws JAXBException {
+		JAXBContext context = JAXBContext.newInstance(this.getClass());
+		Marshaller mar = context.createMarshaller();
+		mar.setProperty("com.sun.xml.bind.namespacePrefixMapper", new CdaNamespacePrefixMapper());
+		mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		mar.marshal(this, outputFile);
 	}
 }

@@ -16,7 +16,13 @@
  */
 package org.ehealth_connector.cda.ch.lrep;
 
+import java.io.File;
 import java.util.ArrayList;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.21
@@ -64,6 +70,8 @@ public class ChpccEntryVitalSignsObservation extends org.ehealth_connector.commo
 	 * Adds a hl7InterpretationCode
 	 */
 	public void addHl7InterpretationCode(org.ehealth_connector.common.hl7cdar2.CE value) {
+		if (hl7InterpretationCode == null)
+			hl7InterpretationCode = new ArrayList<org.ehealth_connector.common.hl7cdar2.CE>();
 		hl7InterpretationCode.add(value);
 	}
 
@@ -71,6 +79,8 @@ public class ChpccEntryVitalSignsObservation extends org.ehealth_connector.commo
 	 * Adds a hl7MethodCode
 	 */
 	public void addHl7MethodCode(org.ehealth_connector.common.hl7cdar2.CE value) {
+		if (hl7MethodCode == null)
+			hl7MethodCode = new ArrayList<org.ehealth_connector.common.hl7cdar2.CE>();
 		hl7MethodCode.add(value);
 	}
 
@@ -78,6 +88,8 @@ public class ChpccEntryVitalSignsObservation extends org.ehealth_connector.commo
 	 * Adds a hl7TargetSiteCode
 	 */
 	public void addHl7TargetSiteCode(org.ehealth_connector.common.hl7cdar2.CD value) {
+		if (hl7TargetSiteCode == null)
+			hl7TargetSiteCode = new ArrayList<org.ehealth_connector.common.hl7cdar2.CD>();
 		hl7TargetSiteCode.add(value);
 	}
 
@@ -167,6 +179,28 @@ public class ChpccEntryVitalSignsObservation extends org.ehealth_connector.commo
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ANY getHl7Value() {
 		return hl7Value;
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(File outputFile) throws JAXBException {
+		JAXBContext context = JAXBContext.newInstance(this.getClass());
+		Marshaller mar = context.createMarshaller();
+		mar.setProperty("com.sun.xml.bind.namespacePrefixMapper", new CdaNamespacePrefixMapper());
+		mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		mar.marshal(this, outputFile);
 	}
 
 	/**

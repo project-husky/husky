@@ -16,7 +16,13 @@
  */
 package org.ehealth_connector.cda.ch.lrep;
 
+import java.io.File;
 import java.util.ArrayList;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.3
@@ -153,6 +159,8 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	 * - Which device (analyzer) was used to determine the result (DEV).
 	 */
 	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
+		if (hl7Author == null)
+			hl7Author = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Author>();
 		hl7Author.add(value);
 	}
 
@@ -161,6 +169,8 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	 * Information on specimen collection for this Observation. This information supersedes any information recorded at higher level.
 	 */
 	public void addHl7EntryRelationship(org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship value) {
+		if (hl7EntryRelationship == null)
+			hl7EntryRelationship = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship>();
 		hl7EntryRelationship.add(value);
 	}
 
@@ -169,6 +179,8 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	 * Comment on this Observation.
 	 */
 	public void addHl7EntryRelationship1(org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship value) {
+		if (hl7EntryRelationship1 == null)
+			hl7EntryRelationship1 = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship>();
 		hl7EntryRelationship1.add(value);
 	}
 
@@ -177,6 +189,8 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	 * This CAN be used to indicate previous observation for the same test code on a previous specimen.
 	 */
 	public void addHl7EntryRelationship2(org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship value) {
+		if (hl7EntryRelationship2 == null)
+			hl7EntryRelationship2 = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship>();
 		hl7EntryRelationship2.add(value);
 	}
 
@@ -185,6 +199,8 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	 * Who has verified the result (AUTHEN). This information supersedes any information recorded at higher level.
 	 */
 	public void addHl7Participant(org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 value) {
+		if (hl7Participant == null)
+			hl7Participant = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2>();
 		hl7Participant.add(value);
 	}
 
@@ -193,6 +209,8 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	 * Which external laboratory has delivered the result (RESP). This information supersedes any information recorded at higher level.
 	 */
 	public void addHl7Participant1(org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 value) {
+		if (hl7Participant1 == null)
+			hl7Participant1 = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2>();
 		hl7Participant1.add(value);
 	}
 
@@ -201,6 +219,8 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	 * Which device (analyzer) was used to determine the result (DEV). This information supersedes any information recorded at higher level.
 	 */
 	public void addHl7Participant2(org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 value) {
+		if (hl7Participant2 == null)
+			hl7Participant2 = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2>();
 		hl7Participant2.add(value);
 	}
 
@@ -209,6 +229,8 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	 * This CAN be used to indicate who has performed the test. This information supersedes any information recorded at higher level.
 	 */
 	public void addHl7Performer(org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer2 value) {
+		if (hl7Performer == null)
+			hl7Performer = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer2>();
 		hl7Performer.add(value);
 	}
 
@@ -217,6 +239,8 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	 * This CAN be used to make reference to an external document.
 	 */
 	public void addHl7Reference(org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference value) {
+		if (hl7Reference == null)
+			hl7Reference = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference>();
 		hl7Reference.add(value);
 	}
 
@@ -412,6 +436,28 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	 */
 	public org.ehealth_connector.common.hl7cdar2.RTO getHl7Value4() {
 		return hl7Value4;
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(File outputFile) throws JAXBException {
+		JAXBContext context = JAXBContext.newInstance(this.getClass());
+		Marshaller mar = context.createMarshaller();
+		mar.setProperty("com.sun.xml.bind.namespacePrefixMapper", new CdaNamespacePrefixMapper());
+		mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+		mar.marshal(this, outputFile);
 	}
 
 	/**
