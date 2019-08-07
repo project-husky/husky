@@ -17,9 +17,13 @@
 package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
+import java.io.IOException;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
@@ -60,6 +64,30 @@ public class CdachHeaderInsurance extends org.ehealth_connector.common.hl7cdar2.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.IVLTS getHl7Time() {
 		return hl7Time;
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFileName the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachHeaderInsurance loadFromFile(String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFile the source file.
+	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachHeaderInsurance loadFromFile(File inputFile) throws JAXBException, IOException {
+		CdachHeaderInsurance retVal;
+		JAXBContext context = JAXBContext.newInstance(CdachHeaderInsurance.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<CdachHeaderInsurance> root = mar.unmarshal(source, CdachHeaderInsurance.class);
+		retVal = root.getValue();
+		return retVal;
 	}
 
 	/**

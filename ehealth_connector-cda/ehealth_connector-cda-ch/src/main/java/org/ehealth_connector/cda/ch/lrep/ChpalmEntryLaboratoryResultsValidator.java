@@ -17,9 +17,13 @@
 package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
+import java.io.IOException;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
@@ -31,6 +35,30 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
  * - All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
  */
 public class ChpalmEntryLaboratoryResultsValidator extends org.ehealth_connector.common.hl7cdar2.II {
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFileName the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static ChpalmEntryLaboratoryResultsValidator loadFromFile(String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFile the source file.
+	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static ChpalmEntryLaboratoryResultsValidator loadFromFile(File inputFile) throws JAXBException, IOException {
+		ChpalmEntryLaboratoryResultsValidator retVal;
+		JAXBContext context = JAXBContext.newInstance(ChpalmEntryLaboratoryResultsValidator.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<ChpalmEntryLaboratoryResultsValidator> root = mar.unmarshal(source, ChpalmEntryLaboratoryResultsValidator.class);
+		retVal = root.getValue();
+		return retVal;
+	}
 
 	/**
 	 * Saves the current CDA document to file.

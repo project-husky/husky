@@ -17,11 +17,15 @@
 package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
@@ -33,7 +37,7 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
  * - XML encodingUTF-8 encoding is required. All CDA-CH V2 documents MUST start with this line:&lt;?xml version="1.0" encoding="UTF-8"?&gt;
  * - Phone numbersPhone numbers MUST be declared in the international format.Dots (.) MUST be used as separators for grouping of number blocks.The minus sign (-) MUST be used as a separator between public and internal telephone numbers. Purpose: Some telephone exchanges - especially in the US, allow direct dial-up of an internal telephone number after the actual connection has been established over the public telephone network.Examples:&lt;telecom value="tel:+41.33.123.45.67"/&gt;&lt;telecom value="tel:+1.987.654.3210-999"/&gt;
  */
-@XmlRootElement(name = "ClinicalDocument")
+@XmlRootElement(name = "hl7:ClinicalDocument")
 public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
 
 	/**
@@ -587,6 +591,30 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 */
 	public org.ehealth_connector.common.hl7cdar2.INT getHl7VersionNumber() {
 		return hl7VersionNumber;
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFileName the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdaChLrepGrV1 loadFromFile(String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFile the source file.
+	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdaChLrepGrV1 loadFromFile(File inputFile) throws JAXBException, IOException {
+		CdaChLrepGrV1 retVal;
+		JAXBContext context = JAXBContext.newInstance(CdaChLrepGrV1.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<CdaChLrepGrV1> root = mar.unmarshal(source, CdaChLrepGrV1.class);
+		retVal = root.getValue();
+		return retVal;
 	}
 
 	/**

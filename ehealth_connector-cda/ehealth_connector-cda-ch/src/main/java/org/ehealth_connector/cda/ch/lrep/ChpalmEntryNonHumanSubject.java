@@ -17,9 +17,13 @@
 package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
+import java.io.IOException;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
@@ -28,6 +32,30 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
  * Template description: If, in a part of the document, laboratory obseravtions base exclusively on a sample of a non-human material (e.g., animal, water, soil, etc.) without reference to a patient, it MUST be declared using this element in the CDA body.Other parts of the document may contain laboratory observations that base on other samples (including samples taken from the patient).In addition, the IHE template 1.3.6.1.4.1.19376.1.3.3.1.2 - Non-Human Subject (recordTarget) MUST be used in the CDA header.
  */
 public class ChpalmEntryNonHumanSubject extends org.ehealth_connector.common.hl7cdar2.II {
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFileName the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static ChpalmEntryNonHumanSubject loadFromFile(String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFile the source file.
+	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static ChpalmEntryNonHumanSubject loadFromFile(File inputFile) throws JAXBException, IOException {
+		ChpalmEntryNonHumanSubject retVal;
+		JAXBContext context = JAXBContext.newInstance(ChpalmEntryNonHumanSubject.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<ChpalmEntryNonHumanSubject> root = mar.unmarshal(source, ChpalmEntryNonHumanSubject.class);
+		retVal = root.getValue();
+		return retVal;
+	}
 
 	/**
 	 * Saves the current CDA document to file.

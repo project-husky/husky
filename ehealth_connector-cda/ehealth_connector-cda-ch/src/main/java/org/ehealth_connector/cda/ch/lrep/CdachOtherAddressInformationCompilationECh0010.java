@@ -17,9 +17,13 @@
 package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
+import java.io.IOException;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
@@ -30,6 +34,30 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
  * Element description: Free additional lines for additional address information which can not be used in the other address fields (e.g. for c/o entries, etc.), with a maximum length of 150 characters.addressLine1 should be used for personalized addressing (e.g., c/o-Address).
  */
 public class CdachOtherAddressInformationCompilationECh0010 extends org.ehealth_connector.common.hl7cdar2.ADXP {
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFileName the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachOtherAddressInformationCompilationECh0010 loadFromFile(String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFile the source file.
+	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachOtherAddressInformationCompilationECh0010 loadFromFile(File inputFile) throws JAXBException, IOException {
+		CdachOtherAddressInformationCompilationECh0010 retVal;
+		JAXBContext context = JAXBContext.newInstance(CdachOtherAddressInformationCompilationECh0010.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<CdachOtherAddressInformationCompilationECh0010> root = mar.unmarshal(source, CdachOtherAddressInformationCompilationECh0010.class);
+		retVal = root.getValue();
+		return retVal;
+	}
 
 	/**
 	 * Saves the current CDA document to file.

@@ -17,9 +17,13 @@
 package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
+import java.io.IOException;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
@@ -30,6 +34,30 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
  * Element description: The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the narrative texts in this CDA document instance are written.
  */
 public class CdachHeaderDocumentLanguage extends org.ehealth_connector.common.hl7cdar2.CS {
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFileName the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachHeaderDocumentLanguage loadFromFile(String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFile the source file.
+	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachHeaderDocumentLanguage loadFromFile(File inputFile) throws JAXBException, IOException {
+		CdachHeaderDocumentLanguage retVal;
+		JAXBContext context = JAXBContext.newInstance(CdachHeaderDocumentLanguage.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<CdachHeaderDocumentLanguage> root = mar.unmarshal(source, CdachHeaderDocumentLanguage.class);
+		retVal = root.getValue();
+		return retVal;
+	}
 
 	/**
 	 * Saves the current CDA document to file.
