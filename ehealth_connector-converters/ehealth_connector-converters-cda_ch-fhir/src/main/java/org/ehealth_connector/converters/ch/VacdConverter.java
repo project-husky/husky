@@ -41,7 +41,7 @@ import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
 import org.ehealth_connector.common.mdht.enums.Ucum;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.fhir.structures.ch.FhirCdaChVacd.DocTypeCode;
 import org.ehealth_connector.fhir.structures.ch.FhirCdaChVacd.VacdDocument;
@@ -116,7 +116,7 @@ public class VacdConverter extends AbstractCdaChV12FhirConverter {
 			doc.pseudonymization();
 
 		for (final Author author : getAuthors(docManifest)) {
-			author.setTime(DateUtilOld.date("15.12.2014"));
+			author.setTime(DateUtilMdht.date("15.12.2014"));
 			doc.addAuthor(author);
 		}
 		doc.setCustodian(getCustodian(docManifest));

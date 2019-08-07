@@ -39,7 +39,7 @@ import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.mdht.enums.StatusCode;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Precondition;
@@ -379,7 +379,7 @@ public class ImmunizationRecommendation
 	 */
 	public String getPossibleApplianceString() {
 		final List<SXCM_TS> effectiveTimes = getMdht().getEffectiveTimes();
-		return DateUtilOld.convertSXCM_TSToEurString(effectiveTimes);
+		return DateUtilMdht.convertSXCM_TSToEurString(effectiveTimes);
 	}
 
 	/**
@@ -601,7 +601,7 @@ public class ImmunizationRecommendation
 	public void setPossibleAppliance(Date startOfPossibleAppliance) {
 		getMdht().getEffectiveTimes().clear();
 		final SXCM_TS timestamp = DatatypesFactory.eINSTANCE.createSXCM_TS();
-		timestamp.setValue(DateUtilOld.formatDate(startOfPossibleAppliance));
+		timestamp.setValue(DateUtilMdht.formatDate(startOfPossibleAppliance));
 		getMdht().getEffectiveTimes().add(timestamp);
 	}
 
@@ -622,7 +622,7 @@ public class ImmunizationRecommendation
 	public void setPossibleAppliance(Date startOfPossibleAppliance, Date endOfPossibleAppliance) {
 		getMdht().getEffectiveTimes().clear();
 		this.getMdht().getEffectiveTimes().add(0,
-				DateUtilOld.createSTCM_TS(startOfPossibleAppliance, endOfPossibleAppliance));
+				DateUtilMdht.createSTCM_TS(startOfPossibleAppliance, endOfPossibleAppliance));
 	}
 
 	/**

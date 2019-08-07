@@ -30,7 +30,7 @@ import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Performer;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.openhealthtools.mdht.uml.cda.ObservationMedia;
 import org.openhealthtools.mdht.uml.cda.Performer2;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;
@@ -111,7 +111,7 @@ public class LaboratoryBatteryOrganizer extends BaseLaboratoryBatteryOrganizer {
 		final org.openhealthtools.mdht.uml.cda.Author mAuthor = author.copyMdhtAuthor();
 		mAuthor.setTypeCode(ParticipationType.AUT);
 		try {
-			mAuthor.setTime(DateUtilOld.createIVL_TSFromEuroDate(dateTimeOfDocumentation));
+			mAuthor.setTime(DateUtilMdht.createIVL_TSFromEuroDate(dateTimeOfDocumentation));
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
@@ -169,7 +169,7 @@ public class LaboratoryBatteryOrganizer extends BaseLaboratoryBatteryOrganizer {
 		final Performer2 mPerformer = performer.copyMdhtPerfomer();
 		mPerformer.setTypeCode(ParticipationPhysicalPerformer.PRF);
 		try {
-			mPerformer.setTime(DateUtilOld.createIVL_TSFromEuroDate(dateTimeOfPerformance));
+			mPerformer.setTime(DateUtilMdht.createIVL_TSFromEuroDate(dateTimeOfPerformance));
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
@@ -254,7 +254,7 @@ public class LaboratoryBatteryOrganizer extends BaseLaboratoryBatteryOrganizer {
 	 *            the high value
 	 */
 	public void setEffectiveTime(Date low, Date high) {
-		getMdht().setEffectiveTime(DateUtilOld.convertDateToIvlTsyyyyMMddHHmmssZZZZ(low, high));
+		getMdht().setEffectiveTime(DateUtilMdht.convertDateToIvlTsyyyyMMddHHmmssZZZZ(low, high));
 	}
 
 }

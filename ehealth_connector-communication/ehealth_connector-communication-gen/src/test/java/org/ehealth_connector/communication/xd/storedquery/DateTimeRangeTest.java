@@ -24,7 +24,7 @@ import java.util.Date;
 
 import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.junit.Before;
 import org.junit.Test;
 import org.openhealthtools.ihe.xds.consumer.query.MalformedQueryException;
@@ -66,8 +66,8 @@ public class DateTimeRangeTest {
 		assertTrue(d.getFrom().getTime() == testDate1.getTime());
 		assertTrue(d.getTo().getTime() == testDate2.getTime());// 201401012300
 
-		assertTrue(DateUtilOld.format(d.getFrom()).equals("19800521022211"));
-		assertTrue(DateUtilOld.format(d.getTo()).equals("20150521133459"));
+		assertTrue(DateUtilMdht.format(d.getFrom()).equals("19800521022211"));
+		assertTrue(DateUtilMdht.format(d.getTo()).equals("20150521133459"));
 
 		assertEquals("19800521022211", d.getOhtDateTimeRange().getFrom());
 		assertEquals("20150521133459", d.getOhtDateTimeRange().getTo());

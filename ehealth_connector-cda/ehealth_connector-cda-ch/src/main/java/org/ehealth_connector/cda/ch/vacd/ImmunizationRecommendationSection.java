@@ -28,7 +28,7 @@ import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdRecCategories;
 import org.ehealth_connector.cda.ch.vacd.enums.SectionsVacd;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 
@@ -194,7 +194,7 @@ public class ImmunizationRecommendationSection
 		if ((immunizationRecommendation.getAuthor() != null)
 				&& (immunizationRecommendation.getAuthor().getTimeAsDate() != null)) {
 			stringBuffer.append(
-					DateUtilOld.formatDateCH(immunizationRecommendation.getAuthor().getTimeAsDate()));
+					DateUtilMdht.formatDateCH(immunizationRecommendation.getAuthor().getTimeAsDate()));
 		}
 		stringBuffer.append("</td><td>");
 		// Impfempfehlung dokumentiert durch

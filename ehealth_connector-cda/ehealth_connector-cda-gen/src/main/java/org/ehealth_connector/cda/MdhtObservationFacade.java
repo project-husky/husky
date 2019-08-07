@@ -26,7 +26,7 @@ import org.ehealth_connector.cda.ihe.lab.LaboratoryObservation;
 import org.ehealth_connector.cda.ihe.lab.LaboratoryObservationComparator;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Value;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.Observation;
@@ -107,7 +107,7 @@ public class MdhtObservationFacade<E extends Observation> extends MdhtFacade<E> 
 	 * @return the effective time as date
 	 */
 	public Date getEffectiveTime() {
-		return DateUtilOld.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
+		return DateUtilMdht.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
 	}
 
 	/**
@@ -192,7 +192,7 @@ public class MdhtObservationFacade<E extends Observation> extends MdhtFacade<E> 
 	public void setEffectiveTime(Date dateTimeOfResult) {
 		if (dateTimeOfResult != null) {
 			try {
-				getMdht().setEffectiveTime(DateUtilOld.createIVL_TSFromEuroDateTime(dateTimeOfResult));
+				getMdht().setEffectiveTime(DateUtilMdht.createIVL_TSFromEuroDateTime(dateTimeOfResult));
 			} catch (final ParseException e) {
 				e.printStackTrace();
 			}

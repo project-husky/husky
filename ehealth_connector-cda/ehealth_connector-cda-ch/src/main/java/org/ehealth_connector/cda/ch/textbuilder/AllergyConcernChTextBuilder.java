@@ -29,7 +29,7 @@ import org.ehealth_connector.cda.enums.ContentIdPrefix;
 import org.ehealth_connector.cda.textbuilder.AllergyConcernTextBuilder;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Value;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 
 /**
  * Builds the &lt;text&gt; part of the Immunization recommendations.
@@ -99,8 +99,8 @@ public class AllergyConcernChTextBuilder extends AllergyConcernTextBuilder {
 			else
 				addCell("");
 
-			addCell(DateUtilOld.formatDateCH(problem.getStartDate()));
-			addCell(DateUtilOld.formatDateCH(problem.getEndDate()));
+			addCell(DateUtilMdht.formatDateCH(problem.getStartDate()));
+			addCell(DateUtilMdht.formatDateCH(problem.getEndDate()));
 
 			String commentText = problem.getCommentText();
 			if (commentText != null)

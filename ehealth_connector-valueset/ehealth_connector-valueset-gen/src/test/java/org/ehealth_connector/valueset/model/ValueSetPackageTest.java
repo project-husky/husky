@@ -24,7 +24,7 @@ import java.util.Date;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.LangText;
 import org.ehealth_connector.valueset.enums.ValueSetEntryType;
 import org.ehealth_connector.valueset.enums.ValueSetPackageStatus;
@@ -49,7 +49,7 @@ public class ValueSetPackageTest {
 		String sourceUrl = "http://foo.bar";
 		ValueSetPackageStatus status = ValueSetPackageStatus.ACTIVE;
 		Version version = Version.builder().withLabel("1.0")
-				.withValidFrom(DateUtilOld.date("03.06.2019 00:00:00")).build();
+				.withValidFrom(DateUtilMdht.date("03.06.2019 00:00:00")).build();
 
 		ValueSetPackage valueSetPackage1 = ValueSetPackage.builder().withDescription(description)
 				.withIdentificator(identificator).withSourceUrl(sourceUrl).withStatus(status)
@@ -70,26 +70,26 @@ public class ValueSetPackageTest {
 		// ValueSet tests
 		String vsdescription1 = "vsdescription1";
 		String vsdisplayName1 = "vsdisplayName1";
-		Date vseffectiveDate1 = DateUtilOld.date("06.06.2019");
+		Date vseffectiveDate1 = DateUtilMdht.date("06.06.2019");
 		IdentificatorBaseType vsidentificator1 = IdentificatorBaseType.builder().withRoot("2.999")
 				.withExtension("1").build();
 		String vsname1 = "myValueSetName1";
 		ValueSetStatus vsstatus1 = ValueSetStatus.FINAL;
 		Version vsversion1 = Version.builder().withLabel("1.0")
-				.withValidFrom(DateUtilOld.date("03.06.2019 00:00:00")).build();
+				.withValidFrom(DateUtilMdht.date("03.06.2019 00:00:00")).build();
 		String mappingNameVs1 = "mappingNameVs1";
 		IdentificatorBaseType mappingIdVs1 = IdentificatorBaseType.builder().withRoot("2.999.9991")
 				.withExtension("myValueSet1").build();
 
 		String vsdescription2 = "vsdescription2";
 		String vsdisplayName2 = "vsdisplayName2";
-		Date vseffectiveDate2 = DateUtilOld.date("05.06.2019");
+		Date vseffectiveDate2 = DateUtilMdht.date("05.06.2019");
 		IdentificatorBaseType vsidentificator2 = IdentificatorBaseType.builder().withRoot("2.999")
 				.withExtension("2").build();
 		String vsname2 = "myValueSetName2";
 		ValueSetStatus vsstatus2 = ValueSetStatus.DRAFT;
 		Version vsversion2 = Version.builder().withLabel("2.0")
-				.withValidFrom(DateUtilOld.date("03.06.2019 00:00:00")).build();
+				.withValidFrom(DateUtilMdht.date("03.06.2019 00:00:00")).build();
 		String mappingNameVs2 = "mappingNameVs2";
 		IdentificatorBaseType mappingIdVs2 = IdentificatorBaseType.builder().withRoot("2.999.9992")
 				.withExtension("myValueSet2").build();

@@ -31,7 +31,7 @@ import org.ehealth_connector.cda.ch.enums.RiskOfExposure;
 import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
 import org.ehealth_connector.cda.ihe.pharm.PharmaceuticalAdviceConcernEntry;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -56,12 +56,12 @@ public class PharmaceuticalAdviceConcernEntryTest {
 		final ProblemEntry pastProblem = new ProblemEntry();
 		pastProblem.setExposureRisk(RiskOfExposure.BESCHAEFTIGTE_IM_GESUNDHEITSWESEN,
 				LanguageCode.ENGLISH);
-		pastProblem.setStartDate(DateUtilOld.date("08.10.2014"));
-		pastProblem.setEndDate(DateUtilOld.date("31.12.2014"));
+		pastProblem.setStartDate(DateUtilMdht.date("08.10.2014"));
+		pastProblem.setEndDate(DateUtilMdht.date("31.12.2014"));
 
 		final PastProblemConcern leiden = new PastProblemConcern("Ehemalige GFP", pastProblem,
-				ProblemConcernStatusCode.COMPLETED, DateUtilOld.date("15.12.1999"),
-				DateUtilOld.date("20.06.2002"));
+				ProblemConcernStatusCode.COMPLETED, DateUtilMdht.date("15.12.1999"),
+				DateUtilMdht.date("20.06.2002"));
 
 		entry.addProblemConcernEntry(leiden);
 

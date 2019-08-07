@@ -47,7 +47,7 @@ import org.ehealth_connector.common.mdht.enums.EhcVersions;
 import org.ehealth_connector.common.mdht.enums.ParticipantType;
 import org.ehealth_connector.common.mdht.enums.Signature;
 import org.ehealth_connector.common.mdht.enums.StatusCode;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.AssignedCustodian;
 import org.openhealthtools.mdht.uml.cda.AssignedEntity;
@@ -228,7 +228,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 		final AssignedEntity entity = CDAFactory.eINSTANCE.createAssignedEntity();
 
 		// Set time
-		auth.setTime(DateUtilOld.ts(authenticationTime));
+		auth.setTime(DateUtilMdht.ts(authenticationTime));
 
 		// Set signature Code to 's'
 		final CS cs = Signature.SIGNED.getCS();
@@ -913,7 +913,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 */
 	public Date getTimestamp() {
 		if (getDoc().getEffectiveTime() != null) {
-			return DateUtilOld.parseDate(getDoc().getEffectiveTime());
+			return DateUtilMdht.parseDate(getDoc().getEffectiveTime());
 		}
 		return null;
 	}
@@ -1312,13 +1312,13 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 */
 	public void setTimestamp(Date date) {
 		if (date == null) {
-			getDoc().setEffectiveTime(DateUtilOld.nowAsTS());
+			getDoc().setEffectiveTime(DateUtilMdht.nowAsTS());
 		} else {
 			try {
-				if ("000000".equals(DateUtilOld.createTimeTSFromEuroDate(date).getValue()))
-					getDoc().setEffectiveTime(DateUtilOld.createDateTSFromEuroDate(date));
+				if ("000000".equals(DateUtilMdht.createTimeTSFromEuroDate(date).getValue()))
+					getDoc().setEffectiveTime(DateUtilMdht.createDateTSFromEuroDate(date));
 				else
-					getDoc().setEffectiveTime(DateUtilOld.createFullTSFromEuroDate(date));
+					getDoc().setEffectiveTime(DateUtilMdht.createFullTSFromEuroDate(date));
 			} catch (final ParseException e) {
 				e.printStackTrace();
 			}

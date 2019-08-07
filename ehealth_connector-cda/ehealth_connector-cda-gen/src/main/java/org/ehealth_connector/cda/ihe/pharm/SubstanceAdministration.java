@@ -31,7 +31,7 @@ import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.enums.StatusCode;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Author;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
@@ -543,8 +543,8 @@ public class SubstanceAdministration
 	public void setStartEndDate(Date startingDate, Date endingDate) {
 
 		final IVL_TS time = CdaUtil.getMdhtDatatypesFactoryInstance().createIVL_TS();
-		time.setLow(DateUtilOld.createIVXB_TSFromDate(startingDate));
-		time.setHigh(DateUtilOld.createIVXB_TSFromDate(endingDate));
+		time.setLow(DateUtilMdht.createIVXB_TSFromDate(startingDate));
+		time.setHigh(DateUtilMdht.createIVXB_TSFromDate(endingDate));
 
 		this.getMdht().getEffectiveTimes().clear();
 		this.getMdht().getEffectiveTimes().add(time);
@@ -564,13 +564,13 @@ public class SubstanceAdministration
 
 		final IVL_TS time = CdaUtil.getMdhtDatatypesFactoryInstance().createIVL_TS();
 		if (effectiveTime.getLow() != null && effectiveTime.getLow().getValue() != null)
-			time.setLow(DateUtilOld.createIVXB_TSFromDate(
+			time.setLow(DateUtilMdht.createIVXB_TSFromDate(
 					DateUtil.parseDateyyyyMMdd(effectiveTime.getLow().getValue())));
 		else
 			time.setLow(null);
 
 		if (effectiveTime.getHigh() != null && effectiveTime.getHigh().getValue() != null)
-			time.setHigh(DateUtilOld.createIVXB_TSFromDate(
+			time.setHigh(DateUtilMdht.createIVXB_TSFromDate(
 					DateUtil.parseDateyyyyMMdd(effectiveTime.getHigh().getValue())));
 		else
 			time.setHigh(null);

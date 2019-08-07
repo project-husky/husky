@@ -20,7 +20,7 @@ package org.ehealth_connector.cda;
 import java.util.Date;
 
 import org.ehealth_connector.common.mdht.enums.StatusCode;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.openhealthtools.mdht.uml.cda.Organizer;
 
 /**
@@ -48,7 +48,7 @@ public class MdhtOrganizerFacade<E extends Organizer> extends MdhtFacade<E> {
 	 */
 	public Date getEffectiveTime() {
 		if (getMdht() != null && getMdht().getEffectiveTime() != null) {
-			return DateUtilOld.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
+			return DateUtilMdht.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
 		}
 		return null;
 	}
@@ -73,7 +73,7 @@ public class MdhtOrganizerFacade<E extends Organizer> extends MdhtFacade<E> {
 	 */
 	public void setEffectiveTime(Date date) {
 		if (date != null)
-			getMdht().setEffectiveTime(DateUtilOld.convertDateToIvlTsyyyyMMddHHmmssZZZZ(date));
+			getMdht().setEffectiveTime(DateUtilMdht.convertDateToIvlTsyyyyMMddHHmmssZZZZ(date));
 	}
 
 	/**

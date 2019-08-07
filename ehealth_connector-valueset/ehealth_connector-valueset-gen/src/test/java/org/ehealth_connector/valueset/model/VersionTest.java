@@ -23,7 +23,7 @@ import java.util.Date;
 
 import org.ehealth_connector.common.basetypes.NameBaseType;
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.junit.Test;
 
 /**
@@ -42,8 +42,8 @@ public class VersionTest {
 
 		OrganizationBaseType publishingAuthority = OrganizationBaseType.builder()
 				.withPrimaryName(name).build();
-		Date validFrom = DateUtilOld.date("03.06.2019 00:00:00");
-		Date validTo = DateUtilOld.date("31.12.2019 23:59:59");
+		Date validFrom = DateUtilMdht.date("03.06.2019 00:00:00");
+		Date validTo = DateUtilMdht.date("31.12.2019 23:59:59");
 
 		Version version1 = Version.builder().withLabel(label)
 				.withPublishingAuthority(publishingAuthority).withValidFrom(validFrom)

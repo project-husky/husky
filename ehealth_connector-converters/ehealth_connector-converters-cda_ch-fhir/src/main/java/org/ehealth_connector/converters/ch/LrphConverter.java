@@ -39,7 +39,7 @@ import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
 import org.ehealth_connector.common.mdht.enums.StatusCode;
 import org.ehealth_connector.common.mdht.enums.Ucum;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.fhir.structures.ch.FhirCdaChLrph.DocTypeCode;
 import org.ehealth_connector.fhir.structures.ch.FhirCdaChLrph.LrphDocument;
@@ -294,7 +294,7 @@ public class LrphConverter extends AbstractCdaChV12FhirConverter {
 								.getExtensionsByUrl(FhirCommon.urnUseAsAuthor);
 						if (!extensions.isEmpty()) {
 							final TimeType t = (TimeType) extensions.get(0).getValue();
-							author.setTime(DateUtilOld.parseDates(t.getValue()));
+							author.setTime(DateUtilMdht.parseDates(t.getValue()));
 						}
 						lbo.addAuthor(author);
 					}
@@ -348,7 +348,7 @@ public class LrphConverter extends AbstractCdaChV12FhirConverter {
 					.getExtensionsByUrl(FhirCommon.urnUseAsAuthor);
 			if (!extensions.isEmpty()) {
 				final TimeType t = (TimeType) extensions.get(0).getValue();
-				author.setTime(DateUtilOld.parseDates(t.getValue()));
+				author.setTime(DateUtilMdht.parseDates(t.getValue()));
 			}
 			lbo.addAuthor(author);
 		}
@@ -412,7 +412,7 @@ public class LrphConverter extends AbstractCdaChV12FhirConverter {
 								.getExtensionsByUrl(FhirCommon.urnUseAsAuthor);
 						if (!extensions.isEmpty()) {
 							final TimeType t = (TimeType) extensions.get(0).getValue();
-							author.setTime(DateUtilOld.parseDates(t.getValue()));
+							author.setTime(DateUtilMdht.parseDates(t.getValue()));
 						}
 						sce.addAuthor(author);
 					}

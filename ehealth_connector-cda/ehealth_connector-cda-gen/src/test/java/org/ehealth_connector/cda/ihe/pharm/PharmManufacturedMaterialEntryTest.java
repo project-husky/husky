@@ -33,7 +33,7 @@ import javax.xml.xpath.XPathExpressionException;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.mdht.enums.Ucum;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.util.CDAUtil;
 import org.w3c.dom.Document;
@@ -77,7 +77,7 @@ public class PharmManufacturedMaterialEntryTest {
 		Code formCode = new Code("2.16.840.1.113883.5.85", "TAB", "Tablet");
 		entry.setFormCode(formCode);
 
-		Date expirationTime = DateUtilOld.dateAndTime("04.12.2021 12:00");
+		Date expirationTime = DateUtilMdht.dateAndTime("04.12.2021 12:00");
 		entry.setExpirationTime(expirationTime);
 
 		assertEquals(formCode, entry.getFormCode());

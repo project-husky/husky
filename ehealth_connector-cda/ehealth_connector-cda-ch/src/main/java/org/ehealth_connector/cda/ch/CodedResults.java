@@ -21,7 +21,7 @@ package org.ehealth_connector.cda.ch;
 import org.ehealth_connector.cda.AbstractCodedResults;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.mdht.enums.StatusCode;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.CodedResultsSection;
@@ -93,7 +93,7 @@ public class CodedResults extends AbstractCodedResults {
 		text.setReference(tel);
 
 		pe.setText(text);
-		pe.setEffectiveTime(DateUtilOld.createUnknownTime(NullFlavor.NA));
+		pe.setEffectiveTime(DateUtilMdht.createUnknownTime(NullFlavor.NA));
 		pe.setStatusCode(StatusCode.COMPLETED.getCS());
 		return pe;
 	}

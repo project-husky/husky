@@ -26,7 +26,7 @@ import org.ehealth_connector.cda.enums.ProblemsSpecialConditions;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Value;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -147,7 +147,7 @@ public class BaseProblemEntry
 	public Date getEndDate() {
 		if (getMdht().getEffectiveTime() != null) {
 			if (getMdht().getEffectiveTime().getHigh() != null) {
-				return DateUtilOld.parseDate(getMdht().getEffectiveTime().getHigh());
+				return DateUtilMdht.parseDate(getMdht().getEffectiveTime().getHigh());
 			}
 		}
 		return null;
@@ -224,7 +224,7 @@ public class BaseProblemEntry
 		if (getMdht() != null) {
 			if (getMdht().getEffectiveTime() != null) {
 				if (getMdht().getEffectiveTime().getLow() != null) {
-					return DateUtilOld.parseDate(getMdht().getEffectiveTime().getLow());
+					return DateUtilMdht.parseDate(getMdht().getEffectiveTime().getLow());
 				}
 			}
 		}
@@ -305,7 +305,7 @@ public class BaseProblemEntry
 			final IVL_TS interval = DatatypesFactory.eINSTANCE.createIVL_TS();
 			this.getMdht().setEffectiveTime(interval);
 		}
-		getMdht().getEffectiveTime().setHigh(DateUtilOld.createIVXB_TSFromDate(endOfProblem));
+		getMdht().getEffectiveTime().setHigh(DateUtilMdht.createIVXB_TSFromDate(endOfProblem));
 	}
 
 	/**
@@ -370,7 +370,7 @@ public class BaseProblemEntry
 			final IVL_TS interval = DatatypesFactory.eINSTANCE.createIVL_TS();
 			this.getMdht().setEffectiveTime(interval);
 		}
-		this.getMdht().getEffectiveTime().setLow(DateUtilOld.createIVXB_TSFromDate(startOfProblem));
+		this.getMdht().getEffectiveTime().setLow(DateUtilMdht.createIVXB_TSFromDate(startOfProblem));
 	}
 
 	/**

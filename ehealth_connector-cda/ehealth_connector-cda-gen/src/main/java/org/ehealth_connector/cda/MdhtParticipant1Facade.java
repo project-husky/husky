@@ -19,7 +19,7 @@ package org.ehealth_connector.cda;
 
 import java.util.Date;
 
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.openhealthtools.mdht.uml.cda.Participant1;
 import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassAssociative;
 
@@ -59,7 +59,7 @@ public class MdhtParticipant1Facade<E extends Participant1> extends MdhtFacade<E
 	 */
 	public Date getTime() {
 		if (getMdht().getTime() != null) {
-			return DateUtilOld.parseIVL_TSVDateTimeValue(getMdht().getTime());
+			return DateUtilMdht.parseIVL_TSVDateTimeValue(getMdht().getTime());
 		}
 		return null;
 	}
@@ -76,6 +76,6 @@ public class MdhtParticipant1Facade<E extends Participant1> extends MdhtFacade<E
 	 *            the date
 	 */
 	public void setTime(Date date) {
-		getMdht().setTime(DateUtilOld.convertDateToIvlTsyyyyMMddHHmmssZZZZ(date));
+		getMdht().setTime(DateUtilMdht.convertDateToIvlTsyyyyMMddHHmmssZZZZ(date));
 	}
 }

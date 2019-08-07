@@ -32,7 +32,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.enums.EhcVersions;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.ehealth_connector.communication.AtnaConfig.AtnaConfigMode;
@@ -630,7 +630,7 @@ public class ConvenienceCommunication {
 
 			// set submission time
 			if (subSet.getSubmissionTime() == null) {
-				subSet.setSubmissionTime(DateUtilOld.nowAsTS().getValue());
+				subSet.setSubmissionTime(DateUtilMdht.nowAsTS().getValue());
 			}
 			// txnData.saveMetadataToFile("C:/temp/metadata.xml");
 
@@ -677,7 +677,7 @@ public class ConvenienceCommunication {
 
 			// set submission time
 			if (subSet.getSubmissionTime() == null) {
-				subSet.setSubmissionTime(DateUtilOld.nowAsTS().getValue());
+				subSet.setSubmissionTime(DateUtilMdht.nowAsTS().getValue());
 			}
 			// txnData.saveMetadataToFile("C:/temp/metadata.xml");
 

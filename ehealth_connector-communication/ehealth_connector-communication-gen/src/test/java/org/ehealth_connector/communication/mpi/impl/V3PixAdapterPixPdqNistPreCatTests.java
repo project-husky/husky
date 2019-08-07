@@ -23,7 +23,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import org.ehealth_connector.common.mdht.Identificator;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.communication.AffinityDomain;
 import org.ehealth_connector.communication.ConvenienceMasterPatientIndexV3;
 import org.ehealth_connector.communication.Destination;
@@ -119,7 +119,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 		identifier.setValue("PIX");
 		identifier.setSystem(FhirCommon.addUrnOid(homeCommunityOid));
 		patient.getIdentifier().add(identifier);
-		patient.setBirthDate(DateUtilOld.date("19380224"));
+		patient.setBirthDate(DateUtilMdht.date("19380224"));
 		patient.getAddress().add(address);
 		patient.setGender(AdministrativeGender.MALE);
 		patient.getManagingOrganization().setResource(getScopingOrganization());
@@ -161,7 +161,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 		identifier.setValue("PIXL");
 		identifier.setSystem(FhirCommon.addUrnOid(homeCommunityOid));
 		patient.getIdentifier().add(identifier);
-		patient.setBirthDate(DateUtilOld.date("19771208"));
+		patient.setBirthDate(DateUtilMdht.date("19771208"));
 		patient.getAddress().add(address);
 		patient.setGender(AdministrativeGender.FEMALE);
 		patient.getManagingOrganization().setResource(getScopingOrganization());
@@ -254,7 +254,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 		identifier.setValue("PIX");
 		identifier.setSystem(FhirCommon.addUrnOid(homeCommunityOid));
 		patient.getIdentifier().add(identifier);
-		patient.setBirthDate(DateUtilOld.date("19780510"));
+		patient.setBirthDate(DateUtilMdht.date("19780510"));
 		patient.getAddress().add(address);
 		patient.setGender(AdministrativeGender.FEMALE);
 		patient.getManagingOrganization().setResource(getScopingOrganization());

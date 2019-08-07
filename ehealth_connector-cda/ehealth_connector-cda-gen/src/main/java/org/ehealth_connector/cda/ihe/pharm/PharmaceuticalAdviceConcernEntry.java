@@ -26,7 +26,7 @@ import org.ehealth_connector.cda.BaseProblemConcern;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
@@ -199,7 +199,7 @@ public class PharmaceuticalAdviceConcernEntry extends
 	 */
 	public void setEffectiveTime(Date date) {
 		final IVL_TS ivlts = DatatypesFactory.eINSTANCE.createIVL_TS();
-		ivlts.setLow(DateUtilOld.createIVXB_TSFromDateTime(date));
+		ivlts.setLow(DateUtilMdht.createIVXB_TSFromDateTime(date));
 		this.getMdht().setEffectiveTime(ivlts);
 	}
 

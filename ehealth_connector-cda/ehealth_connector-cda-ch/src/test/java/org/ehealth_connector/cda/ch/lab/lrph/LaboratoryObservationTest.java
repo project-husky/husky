@@ -30,7 +30,7 @@ import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Performer;
 import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -85,7 +85,7 @@ public class LaboratoryObservationTest extends TestUtils {
 				observation.getInterpretationCodesAsEnum().get(0));
 		observation.setLaboratory(organization1, endDate);
 		assertTrue(isEqual(organization1, observation.getLaboratory()));
-		assertEquals(endDate, DateUtilOld.parseIVL_TSVDateTimeValue(
+		assertEquals(endDate, DateUtilMdht.parseIVL_TSVDateTimeValue(
 				observation.getPerformers().get(0).getPerformerMdht().getTime()));
 
 		// code with translation

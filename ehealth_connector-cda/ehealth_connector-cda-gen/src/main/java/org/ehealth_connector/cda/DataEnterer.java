@@ -31,7 +31,7 @@ import org.ehealth_connector.common.mdht.Organization;
 import org.ehealth_connector.common.mdht.Patient;
 import org.ehealth_connector.common.mdht.Person;
 import org.ehealth_connector.common.mdht.Telecoms;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
@@ -487,7 +487,7 @@ public class DataEnterer {
 	 */
 	public Date getTimeAsDate() {
 		if (mDataEnterer.getTime() != null) {
-			return DateUtilOld.parseDates(mDataEnterer.getTime().getValue());
+			return DateUtilMdht.parseDates(mDataEnterer.getTime().getValue());
 		}
 		return null;
 	}
@@ -509,7 +509,7 @@ public class DataEnterer {
 		IVL_TS retVal = null;
 		if (mDataEnterer.getTime() != null) {
 			try {
-				retVal = DateUtilOld.createIVL_TSFromHL7Date(mDataEnterer.getTime().getValue());
+				retVal = DateUtilMdht.createIVL_TSFromHL7Date(mDataEnterer.getTime().getValue());
 			} catch (final ParseException e) {
 			}
 		}
@@ -531,7 +531,7 @@ public class DataEnterer {
 	 */
 	public String getTimeAsString() {
 		if (mDataEnterer.getTime() != null) {
-			return DateUtilOld.parseDateToStr(mDataEnterer.getTime());
+			return DateUtilMdht.parseDateToStr(mDataEnterer.getTime());
 		}
 		return null;
 	}
@@ -656,9 +656,9 @@ public class DataEnterer {
 	 */
 	public void setTime(Date date) {
 		if (date != null) {
-			mDataEnterer.setTime(DateUtilOld.convertDateToTsyyyyMMddHHmmssZZZZ(date));
+			mDataEnterer.setTime(DateUtilMdht.convertDateToTsyyyyMMddHHmmssZZZZ(date));
 		} else {
-			mDataEnterer.setTime(DateUtilOld.convertDateToTsyyyyMMddHHmmssZZZZ(new Date()));
+			mDataEnterer.setTime(DateUtilMdht.convertDateToTsyyyyMMddHHmmssZZZZ(new Date()));
 		}
 	}
 

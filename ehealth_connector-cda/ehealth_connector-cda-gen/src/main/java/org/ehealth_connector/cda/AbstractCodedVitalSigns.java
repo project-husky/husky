@@ -28,7 +28,7 @@ import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.Identificator;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.Component4;
 import org.openhealthtools.mdht.uml.cda.Observation;
@@ -133,7 +133,7 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 			}
 		}
 		for (final VitalSignsOrganizer organizer : organizers) {
-			final Date organizerDate = DateUtilOld
+			final Date organizerDate = DateUtilMdht
 					.parseIVL_TSVDateTimeValue(organizer.getEffectiveTime());
 			if (organizerDate.equals(effectiveTime)) {
 				return organizer;
@@ -142,7 +142,7 @@ public abstract class AbstractCodedVitalSigns extends MdhtFacade<VitalSignsSecti
 		final VitalSignsOrganizer organizer = IHEFactory.eINSTANCE.createVitalSignsOrganizer()
 				.init();
 		try {
-			organizer.setEffectiveTime(DateUtilOld.createIVL_TSFromEuroDateTime(effectiveTime));
+			organizer.setEffectiveTime(DateUtilMdht.createIVL_TSFromEuroDateTime(effectiveTime));
 			organizer.getIds().add(getUuid().getIi());
 			final org.openhealthtools.mdht.uml.cda.Author mdhtAuthor = author.copyMdhtAuthor();
 			mdhtAuthor.setTypeCode(ParticipationType.AUT);

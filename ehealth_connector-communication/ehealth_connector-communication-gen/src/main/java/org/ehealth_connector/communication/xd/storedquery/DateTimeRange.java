@@ -21,7 +21,7 @@ import java.util.Date;
 
 import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.openhealthtools.ihe.xds.consumer.query.MalformedQueryException;
 
 /**
@@ -46,7 +46,7 @@ public class DateTimeRange {
 	public DateTimeRange(DateTimeRangeAttributes name, Date from, Date to) {
 		try {
 			ohtDtr = new org.openhealthtools.ihe.xds.consumer.query.DateTimeRange(name.getName(),
-					DateUtilOld.format(from), DateUtilOld.format(to));
+					DateUtilMdht.format(from), DateUtilMdht.format(to));
 		} catch (final MalformedQueryException e) {
 			e.printStackTrace();
 		}
@@ -104,7 +104,7 @@ public class DateTimeRange {
 	 *            the starting point
 	 */
 	public void setFrom(Date from) {
-		ohtDtr.setFrom(DateUtilOld.format(from));
+		ohtDtr.setFrom(DateUtilMdht.format(from));
 	}
 
 	/**
@@ -114,6 +114,6 @@ public class DateTimeRange {
 	 *            the end point
 	 */
 	public void setTo(Date to) {
-		ohtDtr.setTo(DateUtilOld.format(to));
+		ohtDtr.setTo(DateUtilMdht.format(to));
 	}
 }

@@ -47,7 +47,7 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Value;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
@@ -512,9 +512,9 @@ public class CdaChEdesCommon {
 					String strDescription = "-";
 					try {
 						if (AllergyProblem.getStartDate() != null)
-							strStartDateTime = DateUtilOld.formatDateCH(AllergyProblem.getStartDate());
+							strStartDateTime = DateUtilMdht.formatDateCH(AllergyProblem.getStartDate());
 						if (AllergyProblem.getEndDate() != null)
-							strEndDateTime = DateUtilOld.formatDateCH(AllergyProblem.getEndDate());
+							strEndDateTime = DateUtilMdht.formatDateCH(AllergyProblem.getEndDate());
 					} catch (final NullPointerException npe) {
 					}
 					if (AllergyProblem.getValue().getCode().getCode() != null)
@@ -651,10 +651,10 @@ public class CdaChEdesCommon {
 					String strDescription = "-";
 					try {
 						if (Problementry.getStartDate() != null)
-							strStartDateTime = DateUtilOld
+							strStartDateTime = DateUtilMdht
 									.formatDateTimeCh(Problementry.getStartDate());
 						if (Problementry.getEndDate() != null)
-							strEndDateTime = DateUtilOld.formatDateTimeCh(Problementry.getEndDate());
+							strEndDateTime = DateUtilMdht.formatDateTimeCh(Problementry.getEndDate());
 					} catch (final NullPointerException npe) {
 					}
 					final Value value = Problementry.getValue();

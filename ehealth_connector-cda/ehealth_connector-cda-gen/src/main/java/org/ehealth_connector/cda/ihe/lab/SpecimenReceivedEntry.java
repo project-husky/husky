@@ -22,7 +22,7 @@ import java.util.List;
 
 import org.ehealth_connector.cda.MdhtEntryActFacade;
 import org.ehealth_connector.common.mdht.Identificator;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenReceived;
@@ -91,7 +91,7 @@ public class SpecimenReceivedEntry
 	 * @return the effective time
 	 */
 	public Date getEffectiveTime() {
-		return DateUtilOld.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
+		return DateUtilMdht.parseIVL_TSVDateTimeValue(getMdht().getEffectiveTime());
 	}
 
 	/**
@@ -110,6 +110,6 @@ public class SpecimenReceivedEntry
 	 *            the new effective time
 	 */
 	public void setEffectiveTime(Date effectiveTime) {
-		getMdht().setEffectiveTime(DateUtilOld.convertDateToIvlTsyyyyMMddHHmmssZZZZ(effectiveTime));
+		getMdht().setEffectiveTime(DateUtilMdht.convertDateToIvlTsyyyyMMddHHmmssZZZZ(effectiveTime));
 	}
 }

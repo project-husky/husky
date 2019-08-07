@@ -63,7 +63,7 @@ import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
 import org.ehealth_connector.common.mdht.enums.StatusCode;
 import org.ehealth_connector.common.mdht.enums.Ucum;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.ehealth_connector.fhir.structures.utils.FhirUtilities;
@@ -345,7 +345,7 @@ public abstract class AbstractCdaChV12FhirConverter {
 				}
 
 				final TimeType timeStamp = ((TimeType) extensions.get(0).getValueAsPrimitive());
-				author.setTime(DateUtilOld.parseDates(timeStamp.getValue()));
+				author.setTime(DateUtilMdht.parseDates(timeStamp.getValue()));
 				retVal.add(author);
 			}
 		}
@@ -1030,7 +1030,7 @@ public abstract class AbstractCdaChV12FhirConverter {
 								.getExtensionsByUrl(FhirCommon.urnUseAsAuthor);
 						if (!extensions.isEmpty()) {
 							final TimeType t = (TimeType) extensions.get(0).getValue();
-							author.setTime(DateUtilOld.parseDates(t.getValue()));
+							author.setTime(DateUtilMdht.parseDates(t.getValue()));
 						}
 						lbo.addAuthor(author);
 					}
@@ -1082,7 +1082,7 @@ public abstract class AbstractCdaChV12FhirConverter {
 					.getExtensionsByUrl(FhirCommon.urnUseAsAuthor);
 			if (!extensions.isEmpty()) {
 				final TimeType t = (TimeType) extensions.get(0).getValue();
-				author.setTime(DateUtilOld.parseDates(t.getValue()));
+				author.setTime(DateUtilMdht.parseDates(t.getValue()));
 			}
 			lbo.addAuthor(author);
 		}
@@ -1142,7 +1142,7 @@ public abstract class AbstractCdaChV12FhirConverter {
 								.getExtensionsByUrl(FhirCommon.urnUseAsAuthor);
 						if (!extensions.isEmpty()) {
 							final TimeType t = (TimeType) extensions.get(0).getValue();
-							author.setTime(DateUtilOld.parseDates(t.getValue()));
+							author.setTime(DateUtilMdht.parseDates(t.getValue()));
 						}
 						sce.addAuthor(author);
 					}

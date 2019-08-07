@@ -22,7 +22,7 @@ import java.util.Date;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.enums.Pregnancies;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.cda.ihe.PregnancyObservation;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TS;
@@ -49,7 +49,7 @@ public abstract class AbstractPregnancyHistory {
 		mPregnancy.setClassCode(ActClassObservation.OBS);
 		mPregnancy.setMoodCode(x_ActMoodDocumentObservation.EVN);
 		mPregnancy.setCode(Pregnancies.DELIVERY_DATE_CLINICAL_ESTIMATE.getCD());
-		mPregnancy.setEffectiveTime(DateUtilOld.createUnknownTime(null));
+		mPregnancy.setEffectiveTime(DateUtilMdht.createUnknownTime(null));
 		setInternalId(null);
 	}
 
@@ -100,7 +100,7 @@ public abstract class AbstractPregnancyHistory {
 
 		if (mPregnancy.getValues().size() > 0) {
 			final TS ts = (TS) copyMdhtPregnancy().getValues().get(0);
-			return DateUtilOld.parseDateToStr(ts);
+			return DateUtilMdht.parseDateToStr(ts);
 		} else
 			return null;
 	}
@@ -122,7 +122,7 @@ public abstract class AbstractPregnancyHistory {
 	 *            the new estimated birth date
 	 */
 	public void setEstimatedBirthDate(Date estimatedBirdDate) {
-		final TS ts = DateUtilOld.ts(estimatedBirdDate);
+		final TS ts = DateUtilMdht.ts(estimatedBirdDate);
 		mPregnancy.getValues().add(ts);
 	}
 

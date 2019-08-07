@@ -38,7 +38,7 @@ import org.ehealth_connector.common.mdht.Performer;
 import org.ehealth_connector.common.mdht.ReferenceRange;
 import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.mdht.enums.StatusCode;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.AssignedEntity;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
@@ -313,10 +313,10 @@ public class LaboratoryObservation extends BaseObservation {
 	 */
 	public Date getDateTimeOfResult() {
 		if (mLaboratoryObservation.getPerformers().size() > 0) {
-			return DateUtilOld.parseIVL_TSVDateTimeValue(
+			return DateUtilMdht.parseIVL_TSVDateTimeValue(
 					mLaboratoryObservation.getPerformers().get(0).getTime());
 		} else {
-			return DateUtilOld.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getEffectiveTime());
+			return DateUtilMdht.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getEffectiveTime());
 		}
 	}
 
@@ -330,11 +330,11 @@ public class LaboratoryObservation extends BaseObservation {
 	 */
 	public String getDateTimeOfResultStr() {
 		if (mLaboratoryObservation.getPerformers().size() > 0) {
-			return DateUtilOld.formatDateTimeCh(DateUtilOld.parseIVL_TSVDateTimeValue(
+			return DateUtilMdht.formatDateTimeCh(DateUtilMdht.parseIVL_TSVDateTimeValue(
 					mLaboratoryObservation.getPerformers().get(0).getTime()));
 		} else {
-			return DateUtilOld.formatDateTimeCh(
-					DateUtilOld.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getEffectiveTime()));
+			return DateUtilMdht.formatDateTimeCh(
+					DateUtilMdht.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getEffectiveTime()));
 		}
 	}
 
@@ -345,7 +345,7 @@ public class LaboratoryObservation extends BaseObservation {
 	 */
 	@Override
 	public Date getEffectiveTime() {
-		return DateUtilOld.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getEffectiveTime());
+		return DateUtilMdht.parseIVL_TSVDateTimeValue(mLaboratoryObservation.getEffectiveTime());
 	}
 
 	/**
@@ -478,7 +478,7 @@ public class LaboratoryObservation extends BaseObservation {
 	public void setEffectiveTime(Date dateTimeOfResult) {
 		try {
 			mLaboratoryObservation
-					.setEffectiveTime(DateUtilOld.createIVL_TSFromEuroDateTime(dateTimeOfResult));
+					.setEffectiveTime(DateUtilMdht.createIVL_TSFromEuroDateTime(dateTimeOfResult));
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
@@ -523,7 +523,7 @@ public class LaboratoryObservation extends BaseObservation {
 		perf.setAssignedEntity(asEnt);
 		perf.setTypeCode(ParticipationPhysicalPerformer.PRF);
 		try {
-			perf.setTime(DateUtilOld.createIVL_TSFromEuroDateTime(dateTimeOfResult));
+			perf.setTime(DateUtilMdht.createIVL_TSFromEuroDateTime(dateTimeOfResult));
 		} catch (final ParseException e) {
 			e.printStackTrace();
 		}
