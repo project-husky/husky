@@ -28,7 +28,6 @@
 	</scm>
 
 	<modules>
-		<module>ehealth_connector-valueset</module>
 		<module>ehealth_connector-cda</module>
 		<module>ehealth_connector-communication</module>
 		<module>ehealth_connector-validation</module>

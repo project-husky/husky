@@ -33,12 +33,6 @@
 			<version>1.7-SNAPSHOT</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.openhealthtools.mdht.cda</groupId>
-			<artifactId>org.openhealthtools.mdht.uml.cda</artifactId>
-			<version>1.7-SNAPSHOT</version>
-		</dependency>
-
 		<!-- test stuff -->
 		<dependency>
 			<groupId>junit</groupId>
