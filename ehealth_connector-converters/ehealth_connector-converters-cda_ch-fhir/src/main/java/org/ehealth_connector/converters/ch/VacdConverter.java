@@ -40,6 +40,7 @@ import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
 import org.ehealth_connector.common.mdht.enums.Ucum;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.fhir.structures.ch.FhirCdaChVacd.DocTypeCode;
@@ -197,10 +198,10 @@ public class VacdConverter extends AbstractCdaChV12FhirConverter {
 				if (extensions.get(0).getValue() instanceof TimeType) {
 					final TimeType timeStamp = ((TimeType) extensions.get(0).getValue());
 					if (timeStamp.getValue().length() > 8)
-						retVal.setTime(DateUtilOld.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
+						retVal.setTime(DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
 
 					else
-						retVal.setTime(DateUtilOld.parseDateyyyyMMdd(timeStamp.getValue()));
+						retVal.setTime(DateUtil.parseDateyyyyMMdd(timeStamp.getValue()));
 					break;
 				}
 			}

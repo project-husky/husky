@@ -23,7 +23,7 @@ import java.util.Map;
 
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtil;
 
 /**
  * Risk of Expsoure Enumerations for immunizations Value Set valid from 20150101
@@ -423,10 +423,10 @@ public enum RiskOfExposure {
 		displayNames.put(LanguageCode.ITALIAN, displayNameIt);
 
 		if (validFrom != null && !"".equals(validFrom)) {
-			this.validFrom = DateUtilOld.parseDateyyyyMMdd(validFrom);
+			this.validFrom = DateUtil.parseDateyyyyMMdd(validFrom);
 		}
 		if (validTo != null && !"".equals(validTo)) {
-			this.validTo = DateUtilOld.parseDateyyyyMMdd(validTo);
+			this.validTo = DateUtil.parseDateyyyyMMdd(validTo);
 		}
 	}
 

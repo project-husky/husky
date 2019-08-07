@@ -20,7 +20,7 @@ package org.ehealth_connector.cda.ch.lab.lrqc.enums;
 import java.util.Date;
 
 import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
@@ -226,10 +226,10 @@ public enum SpecialtySections {
 		this.code = code;
 		this.displayName = displayName;
 		if ((validFrom != null) && !"".equals(validFrom)) {
-			this.validFrom = DateUtilOld.parseDateyyyyMMdd(validFrom);
+			this.validFrom = DateUtil.parseDateyyyyMMdd(validFrom);
 		}
 		if ((validTo != null) && !"".equals(validTo)) {
-			this.validTo = DateUtilOld.parseDateyyyyMMdd(validTo);
+			this.validTo = DateUtil.parseDateyyyyMMdd(validTo);
 		}
 	}
 

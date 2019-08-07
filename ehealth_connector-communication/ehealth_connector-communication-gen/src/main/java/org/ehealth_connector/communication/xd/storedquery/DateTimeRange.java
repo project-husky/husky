@@ -20,6 +20,7 @@ package org.ehealth_connector.communication.xd.storedquery;
 import java.util.Date;
 
 import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.DateUtilOld;
 import org.openhealthtools.ihe.xds.consumer.query.MalformedQueryException;
 
@@ -57,7 +58,7 @@ public class DateTimeRange {
 	 * @return the starting point
 	 */
 	public Date getFrom() {
-		return DateUtilOld.parseDateyyyyMMddHHmmss(ohtDtr.getFrom());
+		return DateUtil.parseDateyyyyMMddHHmmss(ohtDtr.getFrom());
 	}
 
 	/**
@@ -84,7 +85,7 @@ public class DateTimeRange {
 	 * @return the end point
 	 */
 	public Date getTo() {
-		return DateUtilOld.parseDateyyyyMMddHHmmss(ohtDtr.getTo());
+		return DateUtil.parseDateyyyyMMddHHmmss(ohtDtr.getTo());
 	}
 
 	/**

@@ -21,6 +21,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
+import org.ehealth_connector.common.basetypes.NameBaseType;
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
 import org.ehealth_connector.common.utils.DateUtilOld;
 import org.junit.Test;
@@ -37,8 +38,10 @@ public class VersionTest {
 	public void doAllTests() {
 
 		String label = "1.0";
+		NameBaseType name = NameBaseType.builder().withName("eHC").build();
+
 		OrganizationBaseType publishingAuthority = OrganizationBaseType.builder()
-				.withPrimaryName("eHC").build();
+				.withPrimaryName(name).build();
 		Date validFrom = DateUtilOld.date("03.06.2019 00:00:00");
 		Date validTo = DateUtilOld.date("31.12.2019 23:59:59");
 

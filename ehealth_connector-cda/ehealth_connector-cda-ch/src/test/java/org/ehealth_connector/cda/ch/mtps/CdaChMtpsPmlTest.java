@@ -66,6 +66,7 @@ import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
 import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
 import org.ehealth_connector.common.mdht.enums.StatusCode;
 import org.ehealth_connector.common.mdht.enums.Ucum;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.Util;
 import org.junit.Before;
@@ -1048,7 +1049,7 @@ public class CdaChMtpsPmlTest extends TestUtils {
 	private SXCM_TS createStartTime() {
 
 		final SXCM_TS startTime = DatatypesFactory.eINSTANCE.createSXCM_TS();
-		startTime.setValue(DateUtilOld.formatDate(DateUtilOld.nowAsDate()));
+		startTime.setValue(DateUtilOld.formatDate(DateUtil.nowAsDate()));
 		return startTime;
 	}
 

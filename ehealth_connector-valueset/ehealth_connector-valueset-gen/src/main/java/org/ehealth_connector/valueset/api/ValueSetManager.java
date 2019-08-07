@@ -55,10 +55,11 @@ import org.apache.commons.io.IOUtils;
 import org.ehealth_connector.common.basetypes.AddressBaseType;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
+import org.ehealth_connector.common.basetypes.NameBaseType;
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.CustomizedYaml;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.LangText;
 import org.ehealth_connector.valueset.config.ValueSetConfig;
 import org.ehealth_connector.valueset.enums.DesignationType;
@@ -472,7 +473,7 @@ public class ValueSetManager {
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//ValueSet/EffectiveDate/text()");
 		if (textContent != null)
-			version.setValidFrom(DateUtilOld.parseDateyyyyMMdd2(textContent));
+			version.setValidFrom(DateUtil.parseDateyyyyMMdd2(textContent));
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//ValueSet/@version");
 		if (textContent != null)
@@ -642,7 +643,7 @@ public class ValueSetManager {
 				version.setLabel(entry.getValue().toString());
 			if ("effectiveDate".contentEquals(key) && (entry.getValue() != null))
 				version.setValidFrom(
-						DateUtilOld.parseDateyyyyMMddTHHmmss(entry.getValue().toString()));
+						DateUtil.parseDateyyyyMMddTHHmmss(entry.getValue().toString()));
 			if ("statusCode".contentEquals(key) && (entry.getValue() != null)) {
 				String status = entry.getValue().toString();
 
@@ -710,7 +711,8 @@ public class ValueSetManager {
 					for (Entry<String, Object> subEntry : subMap.entrySet()) {
 						String subKey = subEntry.getKey();
 						if ("name".contentEquals(subKey) && (subEntry.getValue() != null)) {
-							org.addName(subEntry.getValue().toString());
+							org.addName(NameBaseType.builder()
+									.withName(subEntry.getValue().toString()).build());
 						}
 						if ("addrLine".contentEquals(subKey) && (subEntry.getValue() != null)) {
 							JSONArray contents = (JSONArray) subEntry.getValue();
@@ -1055,7 +1057,7 @@ public class ValueSetManager {
 		textContent = evaluateXpathExprAsString(xmlDoc,
 				"//valueSets/project/valueSet/@effectiveDate");
 		if (textContent != null)
-			version.setValidFrom(DateUtilOld.parseDateyyyyMMddTHHmmss(textContent));
+			version.setValidFrom(DateUtil.parseDateyyyyMMddTHHmmss(textContent));
 
 		textContent = evaluateXpathExprAsString(xmlDoc,
 				"//valueSets/project/valueSet/@versionLabel");

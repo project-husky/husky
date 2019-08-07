@@ -25,7 +25,7 @@ import org.ehealth_connector.cda.ch.textbuilder.ObservationChTextBuilder;
 import org.ehealth_connector.cda.ihe.lab.BaseLaboratorySpecialtySection;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.enums.CountryCode;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.Section;
 import org.openhealthtools.mdht.uml.cda.ihe.CodedVitalSignsSection;
@@ -297,7 +297,7 @@ public abstract class AbstractCdaChV1<EClinicalDocument extends ClinicalDocument
 				org.ehealth_connector.common.ch.enums.ConfidentialityCode.NORMALLY_ACCESSIBLE);
 
 		// Set creation time of the document
-		setTimestamp(DateUtilOld.nowAsDate());
+		setTimestamp(DateUtil.nowAsDate());
 
 	}
 

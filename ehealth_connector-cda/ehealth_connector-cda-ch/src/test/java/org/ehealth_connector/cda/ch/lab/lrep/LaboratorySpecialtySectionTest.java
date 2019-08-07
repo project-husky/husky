@@ -26,7 +26,7 @@ import java.util.List;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.junit.Test;
 
 /**
@@ -44,8 +44,8 @@ public class LaboratorySpecialtySectionTest {
 	@Test
 	public void testAddGetLaboratoryBatteryOrganizer() {
 
-		Date timeStamp1 = DateUtilOld.parseDateyyyyMMdd("20180721");
-		Date timeStamp2 = DateUtilOld.parseDateyyyyMMdd("20180722");
+		Date timeStamp1 = DateUtil.parseDateyyyyMMdd("20180721");
+		Date timeStamp2 = DateUtil.parseDateyyyyMMdd("20180722");
 		LaboratorySpecialtySection section = new LaboratorySpecialtySection();
 		LaboratoryBatteryOrganizer lbo1 = new LaboratoryBatteryOrganizer();
 		LaboratoryBatteryOrganizer lbo2 = new LaboratoryBatteryOrganizer();

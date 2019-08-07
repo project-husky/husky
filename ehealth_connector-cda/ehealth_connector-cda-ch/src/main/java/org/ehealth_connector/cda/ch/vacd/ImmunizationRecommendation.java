@@ -38,6 +38,7 @@ import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.mdht.enums.StatusCode;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
@@ -333,11 +334,11 @@ public class ImmunizationRecommendation
 				final IVL_TS effectiveTimeInterval = (IVL_TS) effectiveTime;
 				if ((effectiveTimeInterval.getHigh() != null)
 						&& (effectiveTimeInterval.getHigh().getValue() != null)) {
-					retVal = DateUtilOld.parseDateyyyyMMdd(effectiveTimeInterval.getHigh().getValue());
+					retVal = DateUtil.parseDateyyyyMMdd(effectiveTimeInterval.getHigh().getValue());
 				}
 			} else {
 				if (effectiveTime instanceof TS) {
-					retVal = DateUtilOld.parseDateyyyyMMdd(effectiveTime.getValue());
+					retVal = DateUtil.parseDateyyyyMMdd(effectiveTime.getValue());
 				}
 			}
 		}
@@ -355,10 +356,10 @@ public class ImmunizationRecommendation
 			final SXCM_TS effectiveTime = getMdht().getEffectiveTimes().get(0);
 			if (effectiveTime instanceof IVL_TS) {
 				final IVL_TS effectiveTimeInterval = (IVL_TS) effectiveTime;
-				retVal = DateUtilOld.parseDateyyyyMMdd(effectiveTimeInterval.getLow().getValue());
+				retVal = DateUtil.parseDateyyyyMMdd(effectiveTimeInterval.getLow().getValue());
 			} else {
 				if (effectiveTime instanceof TS) {
-					retVal = DateUtilOld.parseDateyyyyMMdd(effectiveTime.getValue());
+					retVal = DateUtil.parseDateyyyyMMdd(effectiveTime.getValue());
 				}
 			}
 		}

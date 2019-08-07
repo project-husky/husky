@@ -39,6 +39,7 @@ import org.ehealth_connector.common.mdht.IdentityDomain;
 import org.ehealth_connector.common.mdht.Performer;
 import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.mdht.enums.StatusCode;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
@@ -260,7 +261,7 @@ public class Immunization extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ch
 	public Date getApplyDate() {
 		if ((getMdht().getEffectiveTimes() != null) && (getMdht().getEffectiveTimes().size() > 0)) {
 			final SXCM_TS date = getMdht().getEffectiveTimes().get(0);
-			return DateUtilOld.parseDateyyyyMMdd(date.getValue());
+			return DateUtil.parseDateyyyyMMdd(date.getValue());
 		} else {
 			return null;
 		}

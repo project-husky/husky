@@ -29,7 +29,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.ehealth_connector.cda.BaseProblemConcern;
 import org.ehealth_connector.common.mdht.Identificator;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -44,7 +44,7 @@ public class PharmaceuticalAdviceConcernEntryTest {
 	@Test
 	public void testEffectiveTime() throws Exception {
 
-		Date date = DateUtilOld.parseDateyyyyMMddHHmmss("20160824123926");
+		Date date = DateUtil.parseDateyyyyMMddHHmmss("20160824123926");
 		final PharmaceuticalAdviceConcernEntry entry = new PharmaceuticalAdviceConcernEntry();
 		entry.setEffectiveTime(date);
 

@@ -41,7 +41,7 @@ import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Name;
 import org.ehealth_connector.common.mdht.Organization;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.junit.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -254,7 +254,7 @@ public class ImmunizationRecommendationTest {
 	public void testPossibleAppliance() throws XPathExpressionException {
 		final ImmunizationRecommendation entry = new ImmunizationRecommendation();
 
-		final Date appliedAt = DateUtilOld.parseDateyyyyMMdd("20151019");
+		final Date appliedAt = DateUtil.parseDateyyyyMMdd("20151019");
 
 		entry.setPossibleAppliance(appliedAt);
 
@@ -273,8 +273,8 @@ public class ImmunizationRecommendationTest {
 	public void testPossibleApplianceStartEndDate() throws XPathExpressionException {
 		final ImmunizationRecommendation entry = new ImmunizationRecommendation();
 
-		final Date appliedStartAt = DateUtilOld.parseDateyyyyMMdd("20151019");
-		final Date appliedEndAt = DateUtilOld.parseDateyyyyMMdd("20161019");
+		final Date appliedStartAt = DateUtil.parseDateyyyyMMdd("20151019");
+		final Date appliedEndAt = DateUtil.parseDateyyyyMMdd("20161019");
 
 		entry.setPossibleAppliance(appliedStartAt, appliedEndAt);
 

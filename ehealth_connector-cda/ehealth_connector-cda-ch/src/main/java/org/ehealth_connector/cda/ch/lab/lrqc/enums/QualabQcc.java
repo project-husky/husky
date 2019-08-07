@@ -21,7 +21,7 @@ import java.util.Date;
 
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
@@ -179,10 +179,10 @@ public enum QualabQcc {
 		this.code = code;
 		this.displayName = displayName;
 		if ((validFrom != null) && !"".equals(validFrom)) {
-			this.validFrom = DateUtilOld.parseDateyyyyMMdd(validFrom);
+			this.validFrom = DateUtil.parseDateyyyyMMdd(validFrom);
 		}
 		if ((validTo != null) && !"".equals(validTo)) {
-			this.validTo = DateUtilOld.parseDateyyyyMMdd(validTo);
+			this.validTo = DateUtil.parseDateyyyyMMdd(validTo);
 		}
 	}
 

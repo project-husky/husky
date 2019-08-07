@@ -31,6 +31,7 @@ import java.util.zip.ZipFile;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.enums.EhcVersions;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
@@ -583,7 +584,7 @@ public class ConvenienceCommunication {
 
 		// Generate Creation Time with the current time
 		if (docMetadata.getMdhtDocumentEntryType().getCreationTime() == null) {
-			docMetadata.setCreationTime(DateUtilOld.nowAsDate());
+			docMetadata.setCreationTime(DateUtil.nowAsDate());
 		}
 	}
 

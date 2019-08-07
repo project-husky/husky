@@ -31,8 +31,10 @@ import java.net.URLDecoder;
 import java.util.Date;
 
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
+import org.ehealth_connector.common.basetypes.NameBaseType;
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.FileUtil;
 import org.ehealth_connector.common.utils.LangText;
@@ -115,7 +117,7 @@ public class ValueSetPackageManagerTest {
 		String sourceUrl;
 		String baseUrl = "http://art-decor.org/decor/services/RetrieveValueSet?prefix=ch-epr-&format=json";
 		OrganizationBaseType org = new OrganizationBaseType();
-		org.setPrimaryName("eHealthConnector Unit Test");
+		org.setPrimaryName(NameBaseType.builder().withName("eHealthConnector Unit Test").build());
 
 		sourceUrl = testValueSetPackageConfigOnTheWeb;
 		Date validFrom = DateUtilOld.date("23.06.2019 00:00:00");
@@ -137,7 +139,7 @@ public class ValueSetPackageManagerTest {
 		String className1 = "AuthorRole";
 		IdentificatorBaseType authorRoleId = IdentificatorBaseType.builder()
 				.withRoot("2.16.756.5.30.1.127.3.10.1.1.3").build();
-		Date authorRoleTimeStamp = DateUtilOld.parseDateyyyyMMddTHHmmss("2018-06-13T07:40:11");
+		Date authorRoleTimeStamp = DateUtil.parseDateyyyyMMddTHHmmss("2018-06-13T07:40:11");
 		URL authorRoleSourceUrl;
 		String authorRoleSourceUrlString = "";
 
@@ -153,7 +155,7 @@ public class ValueSetPackageManagerTest {
 		String className2 = "EprDocumentAvailabilityStatus";
 		IdentificatorBaseType documentAvailabilityStatusId = IdentificatorBaseType.builder()
 				.withRoot("2.16.756.5.30.1.127.3.10.1.2").build();
-		Date documentAvailabilityStatusTimeStamp = DateUtilOld
+		Date documentAvailabilityStatusTimeStamp = DateUtil
 				.parseDateyyyyMMddTHHmmss("2018-06-13T07:48:02");
 		URL documentAvailabilityStatusSourceUrl;
 		String documentAvailabilityStatusSourceUrlString = "";

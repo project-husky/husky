@@ -38,7 +38,7 @@ import org.ehealth_connector.common.mdht.Organization;
 import org.ehealth_connector.common.mdht.Patient;
 import org.ehealth_connector.common.mdht.Person;
 import org.ehealth_connector.common.mdht.enums.CountryCode;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.AssignedEntity;
 import org.openhealthtools.mdht.uml.cda.Authenticator;
@@ -290,7 +290,7 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		Identificator id = new Identificator(org.openhealthtools.ihe.utils.UUID.generate());
 		setId(id);
 		setVersion(id, 1);
-		setTimestamp(DateUtilOld.nowAsDate());
+		setTimestamp(DateUtil.nowAsDate());
 	}
 
 	/**

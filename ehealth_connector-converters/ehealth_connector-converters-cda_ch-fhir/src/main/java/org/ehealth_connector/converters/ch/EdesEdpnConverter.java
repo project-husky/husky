@@ -32,7 +32,7 @@ import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Value;
-import org.ehealth_connector.common.utils.DateUtilOld;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.fhir.structures.ch.FhirCdaChEdesEdpn.EdesEdpnDocument;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.hl7.fhir.dstu3.model.Coding;
@@ -226,7 +226,7 @@ public class EdesEdpnConverter extends AbstractCdaChV12FhirConverter {
 						id.setSystem(FhirCommon.removeUrnOidPrefix(id.getSystem()));
 						final TimeType timeStamp = ((TimeType) extensions.get(0).getValue());
 						retVal.setEffectiveTime(
-								DateUtilOld.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
+								DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
 						retVal.addId(new Identificator(id.getSystem(), id.getValue()));
 						for (final ListEntryComponent listEntry : list.getEntry()) {
 							final List<org.hl7.fhir.dstu3.model.Extension> extensions2 = listEntry
@@ -237,7 +237,7 @@ public class EdesEdpnConverter extends AbstractCdaChV12FhirConverter {
 										.getAuthor((Person) listEntry.getItem().getResource());
 								final TimeType timeStamp2 = ((TimeType) extensions2.get(0)
 										.getValue());
-								author.setTime(DateUtilOld
+								author.setTime(DateUtil
 										.parseDateyyyyMMddHHmmssZZZZ(timeStamp2.getValue()));
 								retVal.addAuthor(author);
 							}

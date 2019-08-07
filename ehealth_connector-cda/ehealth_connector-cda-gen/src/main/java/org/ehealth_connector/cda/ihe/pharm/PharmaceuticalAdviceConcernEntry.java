@@ -25,6 +25,7 @@ import java.util.List;
 import org.ehealth_connector.cda.BaseProblemConcern;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
@@ -92,7 +93,7 @@ public class PharmaceuticalAdviceConcernEntry extends
 	public Date getEffectiveTime() {
 		if ((this.getMdht().getEffectiveTime() != null)
 				&& (this.getMdht().getEffectiveTime().getLow() != null)) {
-			return DateUtilOld
+			return DateUtil
 					.parseDateyyyyMMddHHmmss(this.getMdht().getEffectiveTime().getLow().getValue());
 		}
 		return null;

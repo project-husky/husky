@@ -32,6 +32,7 @@ import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.Author;
@@ -1016,13 +1017,13 @@ public class MedicationItemEntry
 		final IVL_TS time = CdaUtil.getMdhtDatatypesFactoryInstance().createIVL_TS();
 		if (effectiveTime.getLow() != null && effectiveTime.getLow().getValue() != null)
 			time.setLow(DateUtilOld.createIVXB_TSFromDate(
-					DateUtilOld.parseDateyyyyMMdd(effectiveTime.getLow().getValue())));
+					DateUtil.parseDateyyyyMMdd(effectiveTime.getLow().getValue())));
 		else
 			time.setLow(null);
 
 		if (effectiveTime.getHigh() != null && effectiveTime.getHigh().getValue() != null)
 			time.setHigh(DateUtilOld.createIVXB_TSFromDate(
-					DateUtilOld.parseDateyyyyMMdd(effectiveTime.getHigh().getValue())));
+					DateUtil.parseDateyyyyMMdd(effectiveTime.getHigh().getValue())));
 		else
 			time.setHigh(null);
 

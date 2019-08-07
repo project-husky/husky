@@ -62,6 +62,7 @@ import org.ehealth_connector.common.mdht.enums.ConfidentialityCode;
 import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
 import org.ehealth_connector.common.mdht.enums.StatusCode;
 import org.ehealth_connector.common.mdht.enums.Ucum;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.DateUtilOld;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
@@ -472,7 +473,7 @@ public abstract class AbstractCdaChV12FhirConverter {
 						id.setSystem(FhirCommon.removeUrnOidPrefix(id.getSystem()));
 						final TimeType timeStamp = ((TimeType) extensions.get(0).getValue());
 						retVal.setEffectiveTime(
-								DateUtilOld.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
+								DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
 						retVal.addId(new Identificator(id.getSystem(), id.getValue()));
 						for (final ListEntryComponent listEntry : list.getEntry()) {
 							final List<org.hl7.fhir.dstu3.model.Extension> extensions2 = listEntry
@@ -483,7 +484,7 @@ public abstract class AbstractCdaChV12FhirConverter {
 										.getAuthor((Person) listEntry.getItem().getResource());
 								final TimeType timeStamp2 = ((TimeType) extensions2.get(0)
 										.getValue());
-								author.setTime(DateUtilOld
+								author.setTime(DateUtil
 										.parseDateyyyyMMddHHmmssZZZZ(timeStamp2.getValue()));
 								retVal.addAuthor(author);
 							}
@@ -655,7 +656,8 @@ public abstract class AbstractCdaChV12FhirConverter {
 	 *            the FHIR resource
 	 * @return eHC Custodian</div> <div class="de"></div> <div class="fr"></div>
 	 */
-	public org.ehealth_connector.common.mdht.Organization getCustodian(DocumentManifest docManifest) {
+	public org.ehealth_connector.common.mdht.Organization getCustodian(
+			DocumentManifest docManifest) {
 		org.ehealth_connector.common.mdht.Organization retVal = null;
 
 		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
@@ -1428,7 +1430,8 @@ public abstract class AbstractCdaChV12FhirConverter {
 	 *            the FHIR resource
 	 * @return eHC Author object containing the legal authenticator
 	 */
-	public org.ehealth_connector.common.mdht.Author getLegalAuthenticator(DocumentManifest docManifest) {
+	public org.ehealth_connector.common.mdht.Author getLegalAuthenticator(
+			DocumentManifest docManifest) {
 		org.ehealth_connector.common.mdht.Author retVal = null;
 		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
 			final List<org.hl7.fhir.dstu3.model.Extension> extensions = entry
@@ -1446,10 +1449,10 @@ public abstract class AbstractCdaChV12FhirConverter {
 								.getValueAsPrimitive());
 						if (timeStamp.getValue().length() > 8)
 							retVal.setTime(
-									DateUtilOld.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
+									DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
 
 						else
-							retVal.setTime(DateUtilOld.parseDateyyyyMMdd(timeStamp.getValue()));
+							retVal.setTime(DateUtil.parseDateyyyyMMdd(timeStamp.getValue()));
 					}
 				}
 			}
@@ -1626,10 +1629,10 @@ public abstract class AbstractCdaChV12FhirConverter {
 				if (extensions.get(0).getValue() instanceof TimeType) {
 					final TimeType timeStamp = ((TimeType) extensions.get(0).getValue());
 					if (timeStamp.getValue().length() > 8)
-						retVal.setTime(DateUtilOld.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
+						retVal.setTime(DateUtil.parseDateyyyyMMddHHmmssZZZZ(timeStamp.getValue()));
 
 					else
-						retVal.setTime(DateUtilOld.parseDateyyyyMMdd(timeStamp.getValue()));
+						retVal.setTime(DateUtil.parseDateyyyyMMdd(timeStamp.getValue()));
 				}
 			}
 		}

@@ -23,6 +23,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Date;
 
 import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.DateUtilOld;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,14 +48,14 @@ public class DateTimeRangeTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		testDate1 = DateUtilOld.parseDateyyyyMMddHHmmss("19800521022211");
-		testDate2 = DateUtilOld.parseDateyyyyMMddHHmmss("20150521133459");
+		testDate1 = DateUtil.parseDateyyyyMMddHHmmss("19800521022211");
+		testDate2 = DateUtil.parseDateyyyyMMddHHmmss("20150521133459");
 
 		testDateToStr1 = "20381231235959";
-		testDateTo1 = DateUtilOld.parseDateyyyyMMddHHmmss(testDateToStr1);
+		testDateTo1 = DateUtil.parseDateyyyyMMddHHmmss(testDateToStr1);
 
 		testDateToStr2 = "20270110003102";
-		testDateTo2 = DateUtilOld.parseDateyyyyMMddHHmmss(testDateToStr2);
+		testDateTo2 = DateUtil.parseDateyyyyMMddHHmmss(testDateToStr2);
 	}
 
 	@Test
