@@ -18,6 +18,7 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -25,12 +26,19 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.16
  * Template description: If an examination falls under the category "accumulation of observations" or "specific epidemiologically relevant event", this CAN be declared in the CDA body using this element.Precise specification on the usage of this element is documented in the specification "Laboratory reports for public health (CDA-CH-LRPH)"
  */
 public class ChpalmEntryOutbreakIdentification extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
+
+	public ChpalmEntryOutbreakIdentification() {
+		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.1.3");
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.16");
+		setHl7ValueFixedValue("NA");
+	}
 
 	/**
 	 * Adds a hl7Id
@@ -158,11 +166,38 @@ public class ChpalmEntryOutbreakIdentification extends org.ehealth_connector.com
 	}
 
 	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public void setHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
+		member.setRoot(root);
+		// setting the fixed value
+		super.getTemplateId().add(member);
+	}
+
+	/**
 	 * Sets the hl7Value
 	 * A code that defines the 'outbreak' condition MUST be specified. If no code is known, nullFlavor='NA' MUST be used.Note:For reportable laboratory findings in Switzerland, nullFlavor = 'NA' MUST MUST be used.
 	 */
 	public void setHl7Value(org.ehealth_connector.common.hl7cdar2.CE value) {
 		super.getValue().clear();
 		super.getValue().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7Value
+	 *
+	 * @param nullFlavor the desired fixed value for this argument.
+	 */
+	public void setHl7ValueFixedValue(String nullFlavor) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CE member = factory.createCE();
+		member.nullFlavor = new ArrayList<String>();
+		member.nullFlavor.add(nullFlavor);
+		// setting the fixed value
+		super.getValue().add(member);
 	}
 }

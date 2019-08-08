@@ -18,6 +18,7 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -25,12 +26,17 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.24
  * Template description: Specimen Information.
  */
 public class ChpalmEntryParticipantBodySpecimenCollection extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole {
+
+	public ChpalmEntryParticipantBodySpecimenCollection() {
+		setHl7IdFixedValue("NA");
+	}
 
 	/**
 	 * Gets the hl7Id
@@ -104,6 +110,20 @@ public class ChpalmEntryParticipantBodySpecimenCollection extends org.ehealth_co
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getId().clear();
 		super.getId().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7Id
+	 *
+	 * @param nullFlavor the desired fixed value for this argument.
+	 */
+	public void setHl7IdFixedValue(String nullFlavor) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
+		member.nullFlavor = new ArrayList<String>();
+		member.nullFlavor.add(nullFlavor);
+		// setting the fixed value
+		super.getId().add(member);
 	}
 
 	/**

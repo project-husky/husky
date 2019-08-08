@@ -25,6 +25,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.57
@@ -33,6 +34,12 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
  * Element description: The laboratory report MUST contain at least one receiver.
  */
 public class CdachlrepHeaderRecipient extends org.ehealth_connector.common.hl7cdar2.POCDMT000040InformationRecipient {
+
+	public CdachlrepHeaderRecipient() {
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.4");
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.57");
+		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.1.4");
+	}
 
 	/**
 	 * Gets the hl7IntendedRecipient
@@ -113,5 +120,18 @@ public class CdachlrepHeaderRecipient extends org.ehealth_connector.common.hl7cd
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getTemplateId().clear();
 		super.getTemplateId().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public void setHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
+		member.setRoot(root);
+		// setting the fixed value
+		super.getTemplateId().add(member);
 	}
 }

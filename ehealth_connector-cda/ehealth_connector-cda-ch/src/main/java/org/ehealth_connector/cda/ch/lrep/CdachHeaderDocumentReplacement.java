@@ -25,6 +25,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.13
@@ -36,6 +37,10 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
  * - Values that are only contained in the new document are to be added.
  */
 public class CdachHeaderDocumentReplacement extends org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedDocument {
+
+	public CdachHeaderDocumentReplacement() {
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.13");
+	}
 
 	/**
 	 * Gets the hl7ParentDocument
@@ -116,5 +121,18 @@ public class CdachHeaderDocumentReplacement extends org.ehealth_connector.common
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getTemplateId().clear();
 		super.getTemplateId().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public void setHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
+		member.setRoot(root);
+		// setting the fixed value
+		super.getTemplateId().add(member);
 	}
 }

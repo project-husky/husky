@@ -18,6 +18,7 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -25,12 +26,24 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+import org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.11
  * Template description: Laboratory reports MAY contain information on the specimen. If there are more than one specimen associated to the order, then this item occurs multiple times.
  */
 public class ChpalmEntrySpecimenCollection extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Procedure {
+
+	public ChpalmEntrySpecimenCollection() {
+		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.2");
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.11");
+		setHl7CodeFixedValue("33882-2", "2.16.840.1.113883.6.1", "LOINC", "Collection date of Unspecified specimen");
+		setHl7EffectiveTimeFixedValue("UNK");
+		setHl7TargetSiteCodeFixedValue("2.16.840.1.113883.5.1052", "ActSite");
+		setHl7EntryRelationshipFixedValue("COMP", null);
+		setHl7EntryRelationshipFixedValue("COMP", null);
+	}
 
 	/**
 	 * Gets the hl7Code
@@ -183,6 +196,25 @@ public class ChpalmEntrySpecimenCollection extends org.ehealth_connector.common.
 	}
 
 	/**
+	 * Creates fixed contents for hl7Code
+	 *
+	 * @param code the desired fixed value for this argument.
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 * @param displayName the desired fixed value for this argument.
+	 */
+	public void setHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CD member = factory.createCD();
+		member.setCode(code);
+		member.setCodeSystem(codeSystem);
+		member.setCodeSystemName(codeSystemName);
+		member.setDisplayName(displayName);
+		// setting the fixed value
+		super.setCode(member);
+	}
+
+	/**
 	 * Sets the hl7EffectiveTime
 	 * Timestamp (e.g., for simple blood sampling) or period (e.g., 24 hour urine test) of the specimen collection or specimen creation.
 	 * - Timestamp: Is declared using @value. Minimum accuracy of the value: Date (the time of the day is OPTIONAL).
@@ -193,12 +225,41 @@ public class ChpalmEntrySpecimenCollection extends org.ehealth_connector.common.
 	}
 
 	/**
+	 * Creates fixed contents for hl7EffectiveTime
+	 *
+	 * @param nullFlavor the desired fixed value for this argument.
+	 */
+	public void setHl7EffectiveTimeFixedValue(String nullFlavor) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.IVLTS member = factory.createIVLTS();
+		member.nullFlavor = new ArrayList<String>();
+		member.nullFlavor.add(nullFlavor);
+		// setting the fixed value
+		super.setEffectiveTime(member);
+	}
+
+	/**
 	 * Sets the hl7EntryRelationship
 	 * This MAY be used to indicate when the sample has arrived at the laboratory.
 	 */
 	public void setHl7EntryRelationship(org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship value) {
 		super.getEntryRelationship().clear();
 		super.getEntryRelationship().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7EntryRelationship
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 * @param inversionInd the desired fixed value for this argument.
+	 */
+	public void setHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship member = factory.createPOCDMT000040EntryRelationship();
+		member.setTypeCode(XActRelationshipEntryRelationship.fromValue(typeCode));
+		member.setInversionInd(Boolean.parseBoolean(inversionInd));
+		// setting the fixed value
+		super.getEntryRelationship().add(member);
 	}
 
 	/**
@@ -238,11 +299,39 @@ public class ChpalmEntrySpecimenCollection extends org.ehealth_connector.common.
 	}
 
 	/**
+	 * Creates fixed contents for hl7TargetSiteCode
+	 *
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 */
+	public void setHl7TargetSiteCodeFixedValue(String codeSystem, String codeSystemName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CD member = factory.createCD();
+		member.setCodeSystem(codeSystem);
+		member.setCodeSystemName(codeSystemName);
+		// setting the fixed value
+		super.getTargetSiteCode().add(member);
+	}
+
+	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getTemplateId().clear();
 		super.getTemplateId().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public void setHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
+		member.setRoot(root);
+		// setting the fixed value
+		super.getTemplateId().add(member);
 	}
 
 	/**

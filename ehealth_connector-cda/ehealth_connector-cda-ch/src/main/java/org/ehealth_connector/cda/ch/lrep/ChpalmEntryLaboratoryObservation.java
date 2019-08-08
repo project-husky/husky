@@ -18,6 +18,7 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -25,6 +26,9 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+import org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship;
+import org.ehealth_connector.common.hl7cdar2.XActRelationshipExternalReference;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.3
@@ -38,6 +42,21 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
  * Element description: Laboratory result with interpretation, related previous results, reference range, participants (persons and devices) as well as comments.
  */
 public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
+
+	public ChpalmEntryLaboratoryObservation() {
+		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.6");
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.3");
+		setHl7CodeFixedValue("NAV");
+		setHl7ValueFixedValue("NA");
+		setHl7ValueFixedValue("NA");
+		setHl7ValueFixedValue("NA");
+		setHl7ValueFixedValue("NA");
+		setHl7EntryRelationshipFixedValue("COMP", null);
+		setHl7EntryRelationshipFixedValue("SUBJ", "true");
+		setHl7EntryRelationshipFixedValue("REFR", null);
+		setHl7ReferenceFixedValue("REFR");
+		setHl7ReferenceRangeFixedValue("REFV");
+	}
 
 	/**
 	 * Adds a hl7Author
@@ -273,11 +292,40 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	}
 
 	/**
+	 * Creates fixed contents for hl7Code
+	 *
+	 * @param nullFlavor the desired fixed value for this argument.
+	 */
+	public void setHl7CodeFixedValue(String nullFlavor) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CD member = factory.createCD();
+		member.nullFlavor = new ArrayList<String>();
+		member.nullFlavor.add(nullFlavor);
+		// setting the fixed value
+		super.setCode(member);
+	}
+
+	/**
 	 * Sets the hl7EffectiveTime
 	 * The result of the examination MUST be specified for all elements with status 'completed'. One of the following data types MUST be used. For elements with status 'aborted', the result of the test is NOT ALLOWED.In the case of microbiological or infection-serological detection of pathogens, NO value element is PERMITTED. Instead, declare using the interpretationCode whether the pathogen was detected in the sample (POS) or not (NEG).
 	 */
 	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
 		super.effectiveTime = value;
+	}
+
+	/**
+	 * Creates fixed contents for hl7EntryRelationship
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 * @param inversionInd the desired fixed value for this argument.
+	 */
+	public void setHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship member = factory.createPOCDMT000040EntryRelationship();
+		member.setTypeCode(XActRelationshipEntryRelationship.fromValue(typeCode));
+		member.setInversionInd(Boolean.parseBoolean(inversionInd));
+		// setting the fixed value
+		super.getEntryRelationship().add(member);
 	}
 
 	/**
@@ -299,6 +347,19 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	}
 
 	/**
+	 * Creates fixed contents for hl7Reference
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public void setHl7ReferenceFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference member = factory.createPOCDMT000040Reference();
+		member.setTypeCode(XActRelationshipExternalReference.fromValue(typeCode));
+		// setting the fixed value
+		super.getReference().add(member);
+	}
+
+	/**
 	 * Sets the hl7ReferenceRange
 	 * The reference range SHALL be specified for the range of normal values for the data types PQ and INT. The following applies:
 	 * - Upper limit: [R]
@@ -308,6 +369,19 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	public void setHl7ReferenceRange(org.ehealth_connector.common.hl7cdar2.POCDMT000040ReferenceRange value) {
 		super.getReferenceRange().clear();
 		super.getReferenceRange().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7ReferenceRange
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public void setHl7ReferenceRangeFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040ReferenceRange member = factory.createPOCDMT000040ReferenceRange();
+		member.getTypeCode().add(typeCode);
+		// setting the fixed value
+		super.getReferenceRange().add(member);
 	}
 
 	/**
@@ -334,11 +408,38 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	}
 
 	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public void setHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
+		member.setRoot(root);
+		// setting the fixed value
+		super.getTemplateId().add(member);
+	}
+
+	/**
 	 * Sets the hl7Value
 	 * True / False or Yes / No Result. If the observation value can not be determined, @value is NOT ALLOWED. Instead, @nullFlavor='NA' MUST be used in combination with interpretationCode that declares whether the result is below (Low of scale) or above (High of scale) of the reference range.
 	 */
 	public void setHl7Value(org.ehealth_connector.common.hl7cdar2.BL value) {
 		super.getValue().clear();
 		super.getValue().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7Value
+	 *
+	 * @param nullFlavor the desired fixed value for this argument.
+	 */
+	public void setHl7ValueFixedValue(String nullFlavor) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.BL member = factory.createBL();
+		member.nullFlavor = new ArrayList<String>();
+		member.nullFlavor.add(nullFlavor);
+		// setting the fixed value
+		super.getValue().add(member);
 	}
 }

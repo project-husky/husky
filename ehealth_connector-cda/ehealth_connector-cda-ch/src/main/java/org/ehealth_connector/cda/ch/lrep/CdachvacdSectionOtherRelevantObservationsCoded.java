@@ -25,6 +25,8 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+import org.ehealth_connector.common.hl7cdar2.XActRelationshipEntry;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.46
@@ -34,12 +36,12 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
  */
 public class CdachvacdSectionOtherRelevantObservationsCoded extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 
-	/**
-	 * Adds a hl7Id
-	 * An ID for this section MAY be filled for traceability.
-	 */
-	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		super.id = value;
+	public CdachvacdSectionOtherRelevantObservationsCoded() {
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.46");
+		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.3.27");
+		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.3.28");
+		setHl7CodeFixedValue("30954-2", "2.16.840.1.113883.6.1", "LOINC", "Relevant diagnostic tests/laboratory data");
+		setHl7EntryFixedValue("DRIV");
 	}
 
 	/**
@@ -59,6 +61,14 @@ public class CdachvacdSectionOtherRelevantObservationsCoded extends org.ehealth_
 			if (super.getEntry().size() > 0)
 				retVal = super.getEntry().get(0);
 		return retVal;
+	}
+
+	/**
+	 * Gets the hl7Id
+	 * An ID for this section MAY be filled for traceability.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
+		return super.id;
 	}
 
 	/**
@@ -141,6 +151,25 @@ public class CdachvacdSectionOtherRelevantObservationsCoded extends org.ehealth_
 	}
 
 	/**
+	 * Creates fixed contents for hl7Code
+	 *
+	 * @param code the desired fixed value for this argument.
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 * @param displayName the desired fixed value for this argument.
+	 */
+	public void setHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CE member = factory.createCE();
+		member.setCode(code);
+		member.setCodeSystem(codeSystem);
+		member.setCodeSystemName(codeSystemName);
+		member.setDisplayName(displayName);
+		// setting the fixed value
+		super.setCode(member);
+	}
+
+	/**
 	 * Sets the hl7Entry
 	 * The narrative text in the text element of the section MUST be generated automatically from the information in this entry.
 	 */
@@ -150,11 +179,45 @@ public class CdachvacdSectionOtherRelevantObservationsCoded extends org.ehealth_
 	}
 
 	/**
+	 * Creates fixed contents for hl7Entry
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public void setHl7EntryFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry member = factory.createPOCDMT000040Entry();
+		member.setTypeCode(XActRelationshipEntry.valueOf(typeCode));
+		// setting the fixed value
+		super.getEntry().add(member);
+	}
+
+	/**
+	 * Sets the hl7Id
+	 * An ID for this section MAY be filled for traceability.
+	 */
+	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
+		super.id = value;
+	}
+
+	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getTemplateId().clear();
 		super.getTemplateId().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public void setHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
+		member.setRoot(root);
+		// setting the fixed value
+		super.getTemplateId().add(member);
 	}
 
 	/**

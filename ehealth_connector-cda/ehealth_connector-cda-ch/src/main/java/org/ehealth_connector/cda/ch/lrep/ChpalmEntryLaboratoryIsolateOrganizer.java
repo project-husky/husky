@@ -25,12 +25,26 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.ActRelationshipHasComponent;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+import org.ehealth_connector.common.hl7cdar2.XActRelationshipExternalReference;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.17
  * Template description: The Laboratory Isolate Organizer MUST ONLY be used if it is a microbiological specimen with which isolates/germs were examined.
  */
 public class ChpalmEntryLaboratoryIsolateOrganizer extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
+
+	public ChpalmEntryLaboratoryIsolateOrganizer() {
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.17");
+		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.5");
+		setHl7SpecimenFixedValue("SPC");
+		setHl7ComponentFixedValue("COMP");
+		setHl7ComponentFixedValue("COMP");
+		setHl7ComponentFixedValue("COMP");
+		setHl7ComponentFixedValue("COMP");
+		setHl7ReferenceFixedValue("REFR");
+	}
 
 	/**
 	 * Adds a hl7Author
@@ -237,6 +251,19 @@ public class ChpalmEntryLaboratoryIsolateOrganizer extends org.ehealth_connector
 	}
 
 	/**
+	 * Creates fixed contents for hl7Component
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public void setHl7ComponentFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 member = factory.createPOCDMT000040Component4();
+		member.setTypeCode(ActRelationshipHasComponent.fromValue(typeCode));
+		// setting the fixed value
+		super.getComponent().add(member);
+	}
+
+	/**
 	 * Sets the hl7EffectiveTime
 	 * Timestamp or period of findings (physiologically relevant period) for all results in this result group.
 	 */
@@ -254,12 +281,38 @@ public class ChpalmEntryLaboratoryIsolateOrganizer extends org.ehealth_connector
 	}
 
 	/**
+	 * Creates fixed contents for hl7Reference
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public void setHl7ReferenceFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference member = factory.createPOCDMT000040Reference();
+		member.setTypeCode(XActRelationshipExternalReference.fromValue(typeCode));
+		// setting the fixed value
+		super.getReference().add(member);
+	}
+
+	/**
 	 * Sets the hl7Specimen
 	 * The specific sub-specimen on which a microorganism was isolated and cultivated.
 	 */
 	public void setHl7Specimen(org.ehealth_connector.common.hl7cdar2.POCDMT000040Specimen value) {
 		super.getSpecimen().clear();
 		super.getSpecimen().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7Specimen
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public void setHl7SpecimenFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Specimen member = factory.createPOCDMT000040Specimen();
+		member.getTypeCode().add(typeCode);
+		// setting the fixed value
+		super.getSpecimen().add(member);
 	}
 
 	/**
@@ -283,5 +336,18 @@ public class ChpalmEntryLaboratoryIsolateOrganizer extends org.ehealth_connector
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getTemplateId().clear();
 		super.getTemplateId().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public void setHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
+		member.setRoot(root);
+		// setting the fixed value
+		super.getTemplateId().add(member);
 	}
 }

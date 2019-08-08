@@ -25,12 +25,18 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.15
  * Template description: If an examination belongs to a specific case, this CAN be documented with this element (in the Notification Organizer).
  */
 public class ChpalmEntryCaseIdentification extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
+
+	public ChpalmEntryCaseIdentification() {
+		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.1.2");
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.15");
+	}
 
 	/**
 	 * Adds a hl7Id
@@ -171,6 +177,19 @@ public class ChpalmEntryCaseIdentification extends org.ehealth_connector.common.
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getTemplateId().clear();
 		super.getTemplateId().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public void setHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
+		member.setRoot(root);
+		// setting the fixed value
+		super.getTemplateId().add(member);
 	}
 
 	/**

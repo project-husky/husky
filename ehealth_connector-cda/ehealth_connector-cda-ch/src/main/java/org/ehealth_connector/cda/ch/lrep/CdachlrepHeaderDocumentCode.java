@@ -25,6 +25,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.56
@@ -37,6 +38,10 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
  * - Laboratory reports of a single laboratory discipline:The LOINC code of the document MUST be taken from the value-set 'Laboratory Specialties'
  */
 public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl7cdar2.CE {
+
+	public CdachlrepHeaderDocumentCode() {
+		setHl7TranslationFixedValue("4241000179101", "2.16.840.1.113883.6.96", "SNOMED CT", "Laboratory report");
+	}
 
 	/**
 	 * Gets the hl7Translation
@@ -103,5 +108,24 @@ public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl
 	public void setHl7Translation(org.ehealth_connector.common.hl7cdar2.CD value) {
 		super.getTranslation().clear();
 		super.getTranslation().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7Translation
+	 *
+	 * @param code the desired fixed value for this argument.
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 * @param displayName the desired fixed value for this argument.
+	 */
+	public void setHl7TranslationFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CD member = factory.createCD();
+		member.setCode(code);
+		member.setCodeSystem(codeSystem);
+		member.setCodeSystemName(codeSystemName);
+		member.setDisplayName(displayName);
+		// setting the fixed value
+		super.getTranslation().add(member);
 	}
 }

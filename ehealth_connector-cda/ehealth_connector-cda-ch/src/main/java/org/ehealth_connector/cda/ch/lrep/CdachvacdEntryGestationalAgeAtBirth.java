@@ -36,6 +36,12 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class CdachvacdEntryGestationalAgeAtBirth extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
+	public CdachvacdEntryGestationalAgeAtBirth() {
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.84");
+		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13");
+		setHl7CodeFixedValue("49052-4", "2.16.840.1.113883.6.1", "LOINC", "Gestational age in days");
+	}
+
 	/**
 	 * Adds a hl7Author
 	 * This MAY be used to indicate who has documented the observation. This information supersedes any information recorded at higher level.
@@ -168,6 +174,25 @@ public class CdachvacdEntryGestationalAgeAtBirth extends org.ehealth_connector.c
 	}
 
 	/**
+	 * Creates fixed contents for hl7Code
+	 *
+	 * @param code the desired fixed value for this argument.
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 * @param displayName the desired fixed value for this argument.
+	 */
+	public void setHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CD member = factory.createCD();
+		member.setCode(code);
+		member.setCodeSystem(codeSystem);
+		member.setCodeSystemName(codeSystemName);
+		member.setDisplayName(displayName);
+		// setting the fixed value
+		super.setCode(member);
+	}
+
+	/**
 	 * Sets the hl7EffectiveTime
 	 * Date or timestamp of the finding (physiologically relevant time of this observation).
 	 */
@@ -201,6 +226,19 @@ public class CdachvacdEntryGestationalAgeAtBirth extends org.ehealth_connector.c
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getTemplateId().clear();
 		super.getTemplateId().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public void setHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
+		member.setRoot(root);
+		// setting the fixed value
+		super.getTemplateId().add(member);
 	}
 
 	/**

@@ -25,12 +25,19 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.BinaryDataEncoding;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.83
  * Template description: Multimedia objects (e.g., PDF representations of the CDA document, pictures, Reiber diagrams, electrophoresis, etc.) MAY be integrated into a CDA document, either by reference to external multimedia objects or by means of XML embedding.This template defines only the embedding of multimedia objects in the CDA document. References to external documents can be created with the ExternalDocument template.For embedding in XML, the multimedia objects Base-64 must be encoded.Due to the amount of data, only light objects should be embedded.Heavy objects should be integrated using links to external documents.
  */
 public class CdachEntryObservationMedia extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ObservationMedia {
+
+	public CdachEntryObservationMedia() {
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.83");
+		setHl7ValueFixedValue("B64");
+	}
 
 	/**
 	 * Adds a hl7Id
@@ -180,10 +187,36 @@ public class CdachEntryObservationMedia extends org.ehealth_connector.common.hl7
 	}
 
 	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public void setHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
+		member.setRoot(root);
+		// setting the fixed value
+		super.getTemplateId().add(member);
+	}
+
+	/**
 	 * Sets the hl7Value
 	 * The Base-64 encoded multimedia object.
 	 */
 	public void setHl7Value(org.ehealth_connector.common.hl7cdar2.ED value) {
 		super.value = value;
+	}
+
+	/**
+	 * Creates fixed contents for hl7Value
+	 *
+	 * @param representation the desired fixed value for this argument.
+	 */
+	public void setHl7ValueFixedValue(String representation) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.ED member = factory.createED();
+		member.setRepresentation(BinaryDataEncoding.fromValue(representation));
+		// setting the fixed value
+		super.setValue(member);
 	}
 }

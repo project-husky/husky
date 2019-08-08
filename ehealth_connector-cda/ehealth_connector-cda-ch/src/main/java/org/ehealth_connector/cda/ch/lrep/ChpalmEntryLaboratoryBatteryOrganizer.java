@@ -25,12 +25,25 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.ActRelationshipHasComponent;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+import org.ehealth_connector.common.hl7cdar2.XActRelationshipExternalReference;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.19
  * Template description: According to IHE XD-LAB, the Laboratory Battery Organizer allows the grouping of results.Laboratory reports MUST contain at least one result group with at least one result.The grouping of multiple results (Observations) into multiple result groups (Laboratory Battery Organizers) is permitted.
  */
 public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
+
+	public ChpalmEntryLaboratoryBatteryOrganizer() {
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.19");
+		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.4");
+		setHl7ComponentFixedValue("COMP");
+		setHl7ComponentFixedValue("COMP");
+		setHl7ComponentFixedValue("COMP");
+		setHl7ComponentFixedValue("COMP");
+		setHl7ReferenceFixedValue("REFR");
+	}
 
 	/**
 	 * Adds a hl7Author
@@ -225,6 +238,19 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	}
 
 	/**
+	 * Creates fixed contents for hl7Component
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public void setHl7ComponentFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 member = factory.createPOCDMT000040Component4();
+		member.setTypeCode(ActRelationshipHasComponent.fromValue(typeCode));
+		// setting the fixed value
+		super.getComponent().add(member);
+	}
+
+	/**
 	 * Sets the hl7EffectiveTime
 	 * Timestamp or period of findings (physiologically relevant period) for all results in this result group.
 	 */
@@ -239,6 +265,19 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getId().clear();
 		super.getId().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7Reference
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public void setHl7ReferenceFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference member = factory.createPOCDMT000040Reference();
+		member.setTypeCode(XActRelationshipExternalReference.fromValue(typeCode));
+		// setting the fixed value
+		super.getReference().add(member);
 	}
 
 	/**
@@ -262,5 +301,18 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getTemplateId().clear();
 		super.getTemplateId().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public void setHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
+		member.setRoot(root);
+		// setting the fixed value
+		super.getTemplateId().add(member);
 	}
 }

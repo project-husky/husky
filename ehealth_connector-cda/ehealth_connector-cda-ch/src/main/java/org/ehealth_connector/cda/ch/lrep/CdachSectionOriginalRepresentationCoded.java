@@ -25,6 +25,8 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+import org.ehealth_connector.common.hl7cdar2.XActRelationshipEntry;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.45
@@ -37,6 +39,11 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
  * Element description: Contains the original representation of the current CDA document as it has been seen by the legal authenticator while signing.
  */
 public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
+
+	public CdachSectionOriginalRepresentationCoded() {
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.45");
+		setHl7EntryFixedValue("DRIV");
+	}
 
 	/**
 	 * Gets the hl7Code
@@ -157,6 +164,19 @@ public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connect
 	}
 
 	/**
+	 * Creates fixed contents for hl7Entry
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public void setHl7EntryFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry member = factory.createPOCDMT000040Entry();
+		member.setTypeCode(XActRelationshipEntry.valueOf(typeCode));
+		// setting the fixed value
+		super.getEntry().add(member);
+	}
+
+	/**
 	 * Sets the hl7Id
 	 * An ID for this section MAY be filled for traceability.
 	 */
@@ -170,6 +190,19 @@ public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connect
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getTemplateId().clear();
 		super.getTemplateId().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public void setHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
+		member.setRoot(root);
+		// setting the fixed value
+		super.getTemplateId().add(member);
 	}
 
 	/**

@@ -25,6 +25,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.88
@@ -36,6 +37,13 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
  * Element description: Information about an authenticator of a CDA document. An authenticator MUST be a person.
  */
 public class ChpalmHeaderLaboratoryResultsValidator extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Authenticator {
+
+	public ChpalmHeaderLaboratoryResultsValidator() {
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.88");
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.6");
+		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.1.5");
+		setHl7SignatureCodeFixedValue("S");
+	}
 
 	/**
 	 * Gets the hl7AssignedEntity
@@ -131,11 +139,37 @@ public class ChpalmHeaderLaboratoryResultsValidator extends org.ehealth_connecto
 	}
 
 	/**
+	 * Creates fixed contents for hl7SignatureCode
+	 *
+	 * @param code the desired fixed value for this argument.
+	 */
+	public void setHl7SignatureCodeFixedValue(String code) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CS member = factory.createCS();
+		member.setCode(code);
+		// setting the fixed value
+		super.setSignatureCode(member);
+	}
+
+	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getTemplateId().clear();
 		super.getTemplateId().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public void setHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
+		member.setRoot(root);
+		// setting the fixed value
+		super.getTemplateId().add(member);
 	}
 
 	/**

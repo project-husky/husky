@@ -26,6 +26,8 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+import org.ehealth_connector.common.hl7cdar2.XActRelationshipDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.1.10
@@ -37,6 +39,23 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
  */
 @XmlRootElement(name = "ClinicalDocument", namespace = "urn:hl7-org:v3")
 public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
+
+	public CdaChLrepGrV1() {
+		setHl7TypeIdFixedValue("2.16.840.1.113883.1.3", "POCD_HD000040");
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.4");
+		setHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.2");
+		setHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.1");
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.3.9.1");
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.127.1.4");
+		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3");
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.1.10");
+		setHl7CodeFixedValue("2.16.840.1.113883.6.1", "LOINC");
+		setHl7ConfidentialityCodeFixedValue("2.16.840.1.113883.6.96", "SNOMED CT");
+		setHl7DocumentationOfFixedValue("DOC");
+		setHl7ParticipantFixedValue("HLD");
+		setHl7ParticipantFixedValue("COV");
+		setHl7RelatedDocumentFixedValue("RPLC");
+	}
 
 	/**
 	 * Adds a hl7Authenticator
@@ -360,6 +379,21 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	}
 
 	/**
+	 * Creates fixed contents for hl7Code
+	 *
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 */
+	public void setHl7CodeFixedValue(String codeSystem, String codeSystemName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CE member = factory.createCE();
+		member.setCodeSystem(codeSystem);
+		member.setCodeSystemName(codeSystemName);
+		// setting the fixed value
+		super.setCode(member);
+	}
+
+	/**
 	 * Sets the hl7Component
 	 */
 	public void setHl7Component(org.ehealth_connector.common.hl7cdar2.POCDMT000040Component2 value) {
@@ -375,6 +409,21 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	}
 
 	/**
+	 * Creates fixed contents for hl7ConfidentialityCode
+	 *
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 */
+	public void setHl7ConfidentialityCodeFixedValue(String codeSystem, String codeSystemName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CE member = factory.createCE();
+		member.setCodeSystem(codeSystem);
+		member.setCodeSystemName(codeSystemName);
+		// setting the fixed value
+		super.setConfidentialityCode(member);
+	}
+
+	/**
 	 * Sets the hl7Custodian
 	 */
 	public void setHl7Custodian(org.ehealth_connector.common.hl7cdar2.POCDMT000040Custodian value) {
@@ -387,6 +436,19 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 */
 	public void setHl7DataEnterer(org.ehealth_connector.common.hl7cdar2.POCDMT000040DataEnterer value) {
 		super.dataEnterer = value;
+	}
+
+	/**
+	 * Creates fixed contents for hl7DocumentationOf
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public void setHl7DocumentationOfFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf member = factory.createPOCDMT000040DocumentationOf();
+		member.getTypeCode().add(typeCode);
+		// setting the fixed value
+		super.getDocumentationOf().add(member);
 	}
 
 	/**
@@ -422,12 +484,38 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	}
 
 	/**
+	 * Creates fixed contents for hl7Participant
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public void setHl7ParticipantFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 member = factory.createPOCDMT000040Participant1();
+		member.getTypeCode().add(typeCode);
+		// setting the fixed value
+		super.getParticipant().add(member);
+	}
+
+	/**
 	 * Sets the hl7RealmCode
 	 * Swiss Realm (CHE) of HL7 CDA.
 	 */
 	public void setHl7RealmCode(org.ehealth_connector.common.hl7cdar2.CS value) {
 		super.getRealmCode().clear();
 		super.getRealmCode().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7RelatedDocument
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public void setHl7RelatedDocumentFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedDocument member = factory.createPOCDMT000040RelatedDocument();
+		member.setTypeCode(XActRelationshipDocument.fromValue(typeCode));
+		// setting the fixed value
+		super.getRelatedDocument().add(member);
 	}
 
 	/**
@@ -448,6 +536,19 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	}
 
 	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public void setHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
+		member.setRoot(root);
+		// setting the fixed value
+		super.getTemplateId().add(member);
+	}
+
+	/**
 	 * Sets the hl7Title
 	 * The document title must follow the following text format where &lt;human readable code&gt; is the local translation of the document LOINC code:
 	 * - [de]: 'Laborbefund - &lt;human readable code&gt;'
@@ -462,8 +563,23 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	/**
 	 * Sets the hl7TypeId
 	 */
-	public void setHl7TypeId(org.ehealth_connector.common.hl7cdar2.II value) {
-		super.typeId = (org.ehealth_connector.common.hl7cdar2.POCDMT000040InfrastructureRootTypeId) value;
+	public void setHl7TypeId(org.ehealth_connector.common.hl7cdar2.POCDMT000040InfrastructureRootTypeId value) {
+		super.typeId = value;
+	}
+
+	/**
+	 * Creates fixed contents for hl7TypeId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 * @param extension the desired fixed value for this argument.
+	 */
+	public void setHl7TypeIdFixedValue(String root, String extension) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040InfrastructureRootTypeId member = factory.createPOCDMT000040InfrastructureRootTypeId();
+		member.setRoot(root);
+		member.setExtension(extension);
+		// setting the fixed value
+		super.setTypeId(member);
 	}
 
 	/**

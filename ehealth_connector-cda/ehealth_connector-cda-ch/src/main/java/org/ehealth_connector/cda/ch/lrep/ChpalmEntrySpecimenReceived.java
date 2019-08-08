@@ -18,6 +18,7 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -25,12 +26,20 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.12
  * Template description: A laboratory report MAY contain information on the reception of the specimen at the laboratory.
  */
 public class ChpalmEntrySpecimenReceived extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
+
+	public ChpalmEntrySpecimenReceived() {
+		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.3");
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.12");
+		setHl7IdFixedValue("ASKU");
+		setHl7CodeFixedValue("SPRECEIVE", "1.3.5.1.4.1.19376.1.5.3.2", "IHEActCode", "Receive Time");
+	}
 
 	/**
 	 * Gets the hl7Code
@@ -126,6 +135,25 @@ public class ChpalmEntrySpecimenReceived extends org.ehealth_connector.common.hl
 	}
 
 	/**
+	 * Creates fixed contents for hl7Code
+	 *
+	 * @param code the desired fixed value for this argument.
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 * @param displayName the desired fixed value for this argument.
+	 */
+	public void setHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CD member = factory.createCD();
+		member.setCode(code);
+		member.setCodeSystem(codeSystem);
+		member.setCodeSystemName(codeSystemName);
+		member.setDisplayName(displayName);
+		// setting the fixed value
+		super.setCode(member);
+	}
+
+	/**
 	 * Sets the hl7EffectiveTime
 	 * Timestamp of the specimen reception at the laboratory. Minimum accuracy of the value: Date and time with hour and minute.
 	 */
@@ -143,10 +171,37 @@ public class ChpalmEntrySpecimenReceived extends org.ehealth_connector.common.hl
 	}
 
 	/**
+	 * Creates fixed contents for hl7Id
+	 *
+	 * @param nullFlavor the desired fixed value for this argument.
+	 */
+	public void setHl7IdFixedValue(String nullFlavor) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
+		member.nullFlavor = new ArrayList<String>();
+		member.nullFlavor.add(nullFlavor);
+		// setting the fixed value
+		super.getId().add(member);
+	}
+
+	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getTemplateId().clear();
 		super.getTemplateId().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public void setHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
+		member.setRoot(root);
+		// setting the fixed value
+		super.getTemplateId().add(member);
 	}
 }

@@ -25,12 +25,23 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.ActRelationshipHasComponent;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.20
  * Template description: Coded vital sign organizer according to [IHE PCC TF-2], 6.3.4.21.
  */
 public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
+
+	public ChpccEntryVitalSignsOrganizer() {
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.20");
+		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13.1");
+		setHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.32");
+		setHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.35");
+		setHl7CodeFixedValue("46680005", "2.16.840.1.113883.6.96", "SNOMED CT", "VITAL SIGNS");
+		setHl7ComponentFixedValue("COMP");
+	}
 
 	/**
 	 * Adds a hl7Component
@@ -148,6 +159,38 @@ public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.
 	}
 
 	/**
+	 * Creates fixed contents for hl7Code
+	 *
+	 * @param code the desired fixed value for this argument.
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 * @param displayName the desired fixed value for this argument.
+	 */
+	public void setHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CE member = factory.createCE();
+		member.setCode(code);
+		member.setCodeSystem(codeSystem);
+		member.setCodeSystemName(codeSystemName);
+		member.setDisplayName(displayName);
+		// setting the fixed value
+		super.setCode(member);
+	}
+
+	/**
+	 * Creates fixed contents for hl7Component
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public void setHl7ComponentFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 member = factory.createPOCDMT000040Component4();
+		member.setTypeCode(ActRelationshipHasComponent.fromValue(typeCode));
+		// setting the fixed value
+		super.getComponent().add(member);
+	}
+
+	/**
 	 * Sets the hl7EffectiveTime
 	 */
 	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
@@ -167,5 +210,18 @@ public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getTemplateId().clear();
 		super.getTemplateId().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public void setHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
+		member.setRoot(root);
+		// setting the fixed value
+		super.getTemplateId().add(member);
 	}
 }

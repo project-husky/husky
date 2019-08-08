@@ -25,6 +25,8 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+import org.ehealth_connector.common.hl7cdar2.XActRelationshipEntry;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.3
@@ -33,6 +35,13 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
  * - Choice 2: Text and EntryWith this option, the examination results MUST be documented in the text element of the section and the corresponding entry element (Laboratory Data Processing Entry).The human-readable text MUST be generated automatically from the entry and its sub-elements.For this purpose the presentation options according to the CDA Narrative Block schema (NarrativeBlock.xsd) may be used: tables, lists, paragraphs, hyperlinks, footnotes, references to attached or embedded multimedia objects.If a document contains multiple Laboratory Specialty Sections, Choice 1 or Choice 2 can be selected for each individual chapter.
  */
 public class ChpalmSectionLaboratorySpecialtyCoded extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
+
+	public ChpalmSectionLaboratorySpecialtyCoded() {
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.3");
+		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.2.1");
+		setHl7CodeFixedValue("2.16.840.1.113883.6.1", "LOINC");
+		setHl7EntryFixedValue("DRIV");
+	}
 
 	/**
 	 * Adds a hl7Component
@@ -166,6 +175,34 @@ public class ChpalmSectionLaboratorySpecialtyCoded extends org.ehealth_connector
 	}
 
 	/**
+	 * Creates fixed contents for hl7Code
+	 *
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 */
+	public void setHl7CodeFixedValue(String codeSystem, String codeSystemName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CE member = factory.createCE();
+		member.setCodeSystem(codeSystem);
+		member.setCodeSystemName(codeSystemName);
+		// setting the fixed value
+		super.setCode(member);
+	}
+
+	/**
+	 * Creates fixed contents for hl7Entry
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public void setHl7EntryFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry member = factory.createPOCDMT000040Entry();
+		member.setTypeCode(XActRelationshipEntry.valueOf(typeCode));
+		// setting the fixed value
+		super.getEntry().add(member);
+	}
+
+	/**
 	 * Sets the hl7Id
 	 * An ID for this section MAY be filled for traceability.
 	 */
@@ -179,6 +216,19 @@ public class ChpalmSectionLaboratorySpecialtyCoded extends org.ehealth_connector
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getTemplateId().clear();
 		super.getTemplateId().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public void setHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
+		member.setRoot(root);
+		// setting the fixed value
+		super.getTemplateId().add(member);
 	}
 
 	/**

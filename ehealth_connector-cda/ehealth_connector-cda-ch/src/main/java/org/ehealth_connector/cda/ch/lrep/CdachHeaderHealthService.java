@@ -25,6 +25,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.46
@@ -33,6 +34,11 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
  * Element description: Information about a health service describing the context of this CDA document.
  */
 public class CdachHeaderHealthService extends org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf {
+
+	public CdachHeaderHealthService() {
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.46");
+		setHl7ServiceEventFixedValue("ACT", "EVN");
+	}
 
 	/**
 	 * Gets the hl7ServiceEvent
@@ -106,10 +112,38 @@ public class CdachHeaderHealthService extends org.ehealth_connector.common.hl7cd
 	}
 
 	/**
+	 * Creates fixed contents for hl7ServiceEvent
+	 *
+	 * @param classCode the desired fixed value for this argument.
+	 * @param moodCode the desired fixed value for this argument.
+	 */
+	public void setHl7ServiceEventFixedValue(String classCode, String moodCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040ServiceEvent member = factory.createPOCDMT000040ServiceEvent();
+		member.getClassCode().add(classCode);
+		member.getMoodCode().add(moodCode);
+		// setting the fixed value
+		super.setServiceEvent(member);
+	}
+
+	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getTemplateId().clear();
 		super.getTemplateId().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public void setHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
+		member.setRoot(root);
+		// setting the fixed value
+		super.getTemplateId().add(member);
 	}
 }

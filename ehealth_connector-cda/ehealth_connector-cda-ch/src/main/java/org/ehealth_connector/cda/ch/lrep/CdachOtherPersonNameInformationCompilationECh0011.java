@@ -29,6 +29,7 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.EnFamily;
 import org.ehealth_connector.common.hl7cdar2.EnGiven;
 import org.ehealth_connector.common.hl7cdar2.EnPrefix;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.34
@@ -37,6 +38,12 @@ import org.ehealth_connector.common.hl7cdar2.EnPrefix;
  * Element description: The person's legal name (with required family and given name).
  */
 public class CdachOtherPersonNameInformationCompilationECh0011 extends org.ehealth_connector.common.hl7cdar2.PN {
+
+	public CdachOtherPersonNameInformationCompilationECh0011() {
+		setHl7PrefixFixedValue("AC");
+		setHl7FamilyFixedValue("BR");
+		setHl7GivenFixedValue("CL");
+	}
 
 	/**
 	 * Adds a hl7Family
@@ -112,5 +119,32 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends org.eheal
 		mar.setProperty("com.sun.xml.bind.namespacePrefixMapper", new CdaNamespacePrefixMapper());
 		mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		mar.marshal(this, outputFile);
+	}
+
+	/**
+	 * Creates fixed contents for hl7Family
+	 *
+	 * @param qualifier the desired fixed value for this argument.
+	 */
+	public void setHl7FamilyFixedValue(String qualifier) {
+		ObjectFactory factory = new ObjectFactory();
+	}
+
+	/**
+	 * Creates fixed contents for hl7Given
+	 *
+	 * @param qualifier the desired fixed value for this argument.
+	 */
+	public void setHl7GivenFixedValue(String qualifier) {
+		ObjectFactory factory = new ObjectFactory();
+	}
+
+	/**
+	 * Creates fixed contents for hl7Prefix
+	 *
+	 * @param qualifier the desired fixed value for this argument.
+	 */
+	public void setHl7PrefixFixedValue(String qualifier) {
+		ObjectFactory factory = new ObjectFactory();
 	}
 }

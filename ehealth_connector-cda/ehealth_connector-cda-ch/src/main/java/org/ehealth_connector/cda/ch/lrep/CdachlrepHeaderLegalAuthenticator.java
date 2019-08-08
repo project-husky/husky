@@ -25,6 +25,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.61
@@ -33,6 +34,12 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
  * Element description: Legal authenticator.
  */
 public class CdachlrepHeaderLegalAuthenticator extends org.ehealth_connector.common.hl7cdar2.POCDMT000040LegalAuthenticator {
+
+	public CdachlrepHeaderLegalAuthenticator() {
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.61");
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.5");
+		setHl7SignatureCodeFixedValue("S", "2.16.840.1.113883.1.11.10282", "ParticipationSignature", "signed");
+	}
 
 	/**
 	 * Gets the hl7AssignedEntity
@@ -130,11 +137,43 @@ public class CdachlrepHeaderLegalAuthenticator extends org.ehealth_connector.com
 	}
 
 	/**
+	 * Creates fixed contents for hl7SignatureCode
+	 *
+	 * @param code the desired fixed value for this argument.
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 * @param displayName the desired fixed value for this argument.
+	 */
+	public void setHl7SignatureCodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CS member = factory.createCS();
+		member.setCode(code);
+		member.setCodeSystem(codeSystem);
+		member.setCodeSystemName(codeSystemName);
+		member.setDisplayName(displayName);
+		// setting the fixed value
+		super.setSignatureCode(member);
+	}
+
+	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getTemplateId().clear();
 		super.getTemplateId().add(value);
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public void setHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
+		member.setRoot(root);
+		// setting the fixed value
+		super.getTemplateId().add(member);
 	}
 
 	/**
