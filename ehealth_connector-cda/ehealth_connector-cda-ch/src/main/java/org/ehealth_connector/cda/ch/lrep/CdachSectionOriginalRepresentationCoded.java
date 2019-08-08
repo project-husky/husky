@@ -23,9 +23,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.45
@@ -39,20 +39,25 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
  */
 public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 
+	@XmlElement(name = "hl7:code")
 	private org.ehealth_connector.common.hl7cdar2.CE hl7Code;
 
+	@XmlElement(name = "hl7:entry")
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry hl7Entry;
 
 	/**
 	 * An ID for this section MAY be filled for traceability.
 	 */
+	@XmlElement(name = "hl7:id")
 	private org.ehealth_connector.common.hl7cdar2.II hl7Id;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
 
 	/**
 	 * MUST contain the reference (renderMultiMedia/@referencedObject) to the corrsponding observationMedia (embedded PDF) that shows the original representation signed by the legal authenticator.
 	 */
+	@XmlElement(name = "hl7:text")
 	private org.ehealth_connector.common.hl7cdar2.StrucDocText hl7Text;
 
 	/**
@@ -62,6 +67,7 @@ public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connect
 	 * - [it]: 'Rappresentazione originale'
 	 * - [en]: 'Original representation'
 	 */
+	@XmlElement(name = "hl7:title")
 	private org.ehealth_connector.common.hl7cdar2.ST hl7Title;
 
 	/**

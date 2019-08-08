@@ -23,9 +23,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.27
@@ -46,10 +46,13 @@ public class ChpalmHeaderRecordTargetHumanPatientWithNonHumanSubject extends org
 	/**
 	 * Exactly one patient MUST be declared.
 	 */
+	@XmlElement(name = "hl7:patientRole")
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040PatientRole hl7PatientRole;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
 
 	/**

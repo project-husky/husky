@@ -23,9 +23,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.61
@@ -38,17 +38,22 @@ public class CdachlrepHeaderLegalAuthenticator extends org.ehealth_connector.com
 	/**
 	 * The GLN MUST be used to identify the legal authenticator (e.g., laboratory manager or responsible physician). All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
 	 */
+	@XmlElement(name = "hl7:assignedEntity")
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity hl7AssignedEntity;
 
+	@XmlElement(name = "hl7:signatureCode")
 	private org.ehealth_connector.common.hl7cdar2.CS hl7SignatureCode;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
 
 	/**
 	 * Date of the signature.
 	 */
+	@XmlElement(name = "hl7:time")
 	private org.ehealth_connector.common.hl7cdar2.TS hl7Time;
 
 	/**

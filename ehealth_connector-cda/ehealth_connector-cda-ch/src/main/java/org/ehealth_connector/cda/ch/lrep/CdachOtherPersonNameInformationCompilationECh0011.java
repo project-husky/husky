@@ -24,9 +24,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.34
@@ -39,26 +39,31 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends org.eheal
 	/**
 	 * The person's family name ([ge]: Nachname; [fr]: nom de famille).
 	 */
+	@XmlElement(name = "hl7:family")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP> hl7Family;
 
 	/**
 	 * The person's maiden name ([ge]: Ledigname; [fr]: nom de célibataire).
 	 */
+	@XmlElement(name = "hl7:family")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP> hl7Family1;
 
 	/**
 	 * The person's given name ([ge]: Vorname; [fr]: prénom).
 	 */
+	@XmlElement(name = "hl7:given")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP> hl7Given;
 
 	/**
 	 * The person's call name ([ge]: Rufname; [fr]: nom usuel).
 	 */
+	@XmlElement(name = "hl7:given")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP> hl7Given1;
 
 	/**
 	 * The person's academic title (such as Dr. med. or Prof.).
 	 */
+	@XmlElement(name = "hl7:prefix")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP> hl7Prefix;
 
 	/**

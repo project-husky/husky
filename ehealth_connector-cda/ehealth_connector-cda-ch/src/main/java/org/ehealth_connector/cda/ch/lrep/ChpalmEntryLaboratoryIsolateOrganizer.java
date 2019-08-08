@@ -24,9 +24,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.17
@@ -40,72 +40,91 @@ public class ChpalmEntryLaboratoryIsolateOrganizer extends org.ehealth_connector
 	 * - Which external laboratory has delivered the result (RESP).
 	 * - Which device (analyzer) was used to determine the result (DEV).
 	 */
+	@XmlElement(name = "hl7:author")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Author> hl7Author;
 
 	/**
 	 * The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
 	 */
+	@XmlElement(name = "hl7:code")
 	private org.ehealth_connector.common.hl7cdar2.CE hl7Code;
 
+	@XmlElement(name = "hl7:component")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4> hl7Component;
 
+	@XmlElement(name = "hl7:component")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4> hl7Component1;
 
+	@XmlElement(name = "hl7:component")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4> hl7Component2;
 
+	@XmlElement(name = "hl7:component")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4> hl7Component3;
 
 	/**
 	 * Timestamp or period of findings (physiologically relevant period) for all results in this result group.
 	 */
+	@XmlElement(name = "hl7:effectiveTime")
 	private org.ehealth_connector.common.hl7cdar2.IVLTS hl7EffectiveTime;
 
 	/**
 	 * An ID for this item MAY be filled for traceability.
 	 */
+	@XmlElement(name = "hl7:id")
 	private org.ehealth_connector.common.hl7cdar2.II hl7Id;
 
 	/**
 	 * Who has verified the result (AUTHEN). This information supersedes any information recorded at higher level.
 	 */
+	@XmlElement(name = "hl7:participant")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2> hl7Participant;
 
 	/**
 	 * Which external laboratory has delivered the result (RESP). This information supersedes any information recorded at higher level.
 	 */
+	@XmlElement(name = "hl7:participant")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2> hl7Participant1;
 
 	/**
 	 * Which device (analyzer) was used to determine the result (DEV). This information supersedes any information recorded at higher level.
 	 */
+	@XmlElement(name = "hl7:participant")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2> hl7Participant2;
 
 	/**
 	 * This CAN be used to indicate who has performed the test. This information supersedes any information recorded at higher level.
 	 */
+	@XmlElement(name = "hl7:performer")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer2> hl7Performer;
 
 	/**
 	 * This CAN be used to make reference to an external document.
 	 */
+	@XmlElement(name = "hl7:reference")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference> hl7Reference;
 
 	/**
 	 * The specific sub-specimen on which a microorganism was isolated and cultivated.
 	 */
+	@XmlElement(name = "hl7:specimen")
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Specimen hl7Specimen;
 
 	/**
 	 * The status 'completed' means that all expected results for this isolate are present and in a final state.The status 'active' means that the examinations are still running. Some results are still pending.The status 'aborted' means that the examinations had to be aborted. Some results MAY be available.
 	 */
+	@XmlElement(name = "hl7:statusCode")
 	private org.ehealth_connector.common.hl7cdar2.CS hl7StatusCode;
 
+	@XmlElement(name = "hl7:subject")
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Subject hl7Subject;
 
+	@XmlElement(name = "hl7:subject")
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Subject hl7Subject1;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
 
 	/**

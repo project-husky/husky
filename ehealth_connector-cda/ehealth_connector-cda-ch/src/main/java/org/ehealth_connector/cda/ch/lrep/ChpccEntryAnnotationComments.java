@@ -24,9 +24,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.2
@@ -39,27 +39,34 @@ public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.h
 	/**
 	 * The author of the comment MAY be specified.
 	 */
+	@XmlElement(name = "hl7:author")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Author> hl7Author;
 
 	/**
 	 * The reference to the text in the narrative section of the section MUST be specified.
 	 */
+	@XmlElement(name = "hl7:code")
 	private org.ehealth_connector.common.hl7cdar2.CD hl7Code;
 
 	/**
 	 * An ID for this item MAY be filled for traceability.
 	 */
+	@XmlElement(name = "hl7:id")
 	private org.ehealth_connector.common.hl7cdar2.II hl7Id;
 
 	/**
 	 * The status 'completed' indicates that the comment is final.
 	 */
+	@XmlElement(name = "hl7:statusCode")
 	private org.ehealth_connector.common.hl7cdar2.CS hl7StatusCode;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId2;
 
 	/**

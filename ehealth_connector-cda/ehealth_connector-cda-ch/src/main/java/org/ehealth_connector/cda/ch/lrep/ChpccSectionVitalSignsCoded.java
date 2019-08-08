@@ -24,9 +24,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.4
@@ -36,26 +36,34 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
  */
 public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 
+	@XmlElement(name = "hl7:code")
 	private org.ehealth_connector.common.hl7cdar2.CE hl7Code;
 
+	@XmlElement(name = "hl7:entry")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry> hl7Entry;
 
 	/**
 	 * An ID for this section MAY be filled for traceability.
 	 */
+	@XmlElement(name = "hl7:id")
 	private org.ehealth_connector.common.hl7cdar2.II hl7Id;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId2;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId3;
 
 	/**
 	 * Human readable text of this section.
 	 */
+	@XmlElement(name = "hl7:text")
 	private org.ehealth_connector.common.hl7cdar2.StrucDocText hl7Text;
 
 	/**
@@ -65,6 +73,7 @@ public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl
 	 * - [it]: 'Segni vitali'
 	 * - [en]: 'Vital Signs'
 	 */
+	@XmlElement(name = "hl7:title")
 	private org.ehealth_connector.common.hl7cdar2.ST hl7Title;
 
 	/**

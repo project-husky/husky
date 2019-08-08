@@ -24,9 +24,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.9
@@ -39,16 +39,19 @@ public class ChpalmEntryParticipantBodyResponsibleParty extends org.ehealth_conn
 	/**
 	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
 	 */
+	@XmlElement(name = "hl7:addr")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.AD> hl7Addr;
 
 	/**
 	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
 	 */
+	@XmlElement(name = "hl7:playingEntity")
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040PlayingEntity hl7PlayingEntity;
 
 	/**
 	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
 	 */
+	@XmlElement(name = "hl7:telecom")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.TEL> hl7Telecom;
 
 	/**

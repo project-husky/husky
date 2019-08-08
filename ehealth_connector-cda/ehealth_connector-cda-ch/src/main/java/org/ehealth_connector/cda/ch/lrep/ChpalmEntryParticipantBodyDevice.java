@@ -23,9 +23,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.10
@@ -36,11 +36,13 @@ public class ChpalmEntryParticipantBodyDevice extends org.ehealth_connector.comm
 	/**
 	 * Analyzer used to determine the result.
 	 */
+	@XmlElement(name = "hl7:playingDevice")
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Device hl7PlayingDevice;
 
 	/**
 	 * The test kit and its manufacturer CAN be specified.
 	 */
+	@XmlElement(name = "hl7:scopingEntity")
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Entity hl7ScopingEntity;
 
 	/**

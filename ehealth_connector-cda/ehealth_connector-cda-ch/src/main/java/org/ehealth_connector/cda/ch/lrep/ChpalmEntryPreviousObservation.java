@@ -23,9 +23,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.22
@@ -36,23 +36,28 @@ public class ChpalmEntryPreviousObservation extends org.ehealth_connector.common
 	/**
 	 * MUST contain the same code as the current laboratory result.
 	 */
+	@XmlElement(name = "hl7:code")
 	private org.ehealth_connector.common.hl7cdar2.CD hl7Code;
 
 	/**
 	 * Timestamp of the findings (physiologically relevant time) of this previous result. Accuracy of the value: Date and time with hour and minute.
 	 */
+	@XmlElement(name = "hl7:effectiveTime")
 	private org.ehealth_connector.common.hl7cdar2.IVLTS hl7EffectiveTime;
 
 	/**
 	 * MUST be set to 'completed'.
 	 */
+	@XmlElement(name = "hl7:statusCode")
 	private org.ehealth_connector.common.hl7cdar2.CS hl7StatusCode;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
 
 	/**
 	 * The previous result obtained for this test.
 	 */
+	@XmlElement(name = "hl7:value")
 	private org.ehealth_connector.common.hl7cdar2.ANY hl7Value;
 
 	/**

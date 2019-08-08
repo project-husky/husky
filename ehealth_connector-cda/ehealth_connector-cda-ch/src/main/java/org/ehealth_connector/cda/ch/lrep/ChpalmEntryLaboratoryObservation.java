@@ -24,9 +24,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.3
@@ -47,66 +47,79 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	 * - Which external laboratory has delivered the result (RESP).
 	 * - Which device (analyzer) was used to determine the result (DEV).
 	 */
+	@XmlElement(name = "hl7:author")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Author> hl7Author;
 
 	/**
 	 * A unique code for this result MUST be specified.
 	 */
+	@XmlElement(name = "hl7:code")
 	private org.ehealth_connector.common.hl7cdar2.CD hl7Code;
 
 	/**
 	 * The result of the examination MUST be specified for all elements with status 'completed'. One of the following data types MUST be used. For elements with status 'aborted', the result of the test is NOT ALLOWED.In the case of microbiological or infection-serological detection of pathogens, NO value element is PERMITTED. Instead, declare using the interpretationCode whether the pathogen was detected in the sample (POS) or not (NEG).
 	 */
+	@XmlElement(name = "hl7:effectiveTime")
 	private org.ehealth_connector.common.hl7cdar2.IVLTS hl7EffectiveTime;
 
 	/**
 	 * Information on specimen collection for this Observation. This information supersedes any information recorded at higher level.
 	 */
+	@XmlElement(name = "hl7:entryRelationship")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship> hl7EntryRelationship;
 
 	/**
 	 * Comment on this Observation.
 	 */
+	@XmlElement(name = "hl7:entryRelationship")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship> hl7EntryRelationship1;
 
 	/**
 	 * This CAN be used to indicate previous observation for the same test code on a previous specimen.
 	 */
+	@XmlElement(name = "hl7:entryRelationship")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship> hl7EntryRelationship2;
 
 	/**
 	 * An ID for this item MAY be filled for traceability.
 	 */
+	@XmlElement(name = "hl7:id")
 	private org.ehealth_connector.common.hl7cdar2.II hl7Id;
 
 	/**
 	 * IF this result is based on a specimen of a non-human material, this MUST be declared with the subject element.
 	 */
+	@XmlElement(name = "hl7:interpretationCode")
 	private org.ehealth_connector.common.hl7cdar2.CE hl7InterpretationCode;
 
 	/**
 	 * Who has verified the result (AUTHEN). This information supersedes any information recorded at higher level.
 	 */
+	@XmlElement(name = "hl7:participant")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2> hl7Participant;
 
 	/**
 	 * Which external laboratory has delivered the result (RESP). This information supersedes any information recorded at higher level.
 	 */
+	@XmlElement(name = "hl7:participant")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2> hl7Participant1;
 
 	/**
 	 * Which device (analyzer) was used to determine the result (DEV). This information supersedes any information recorded at higher level.
 	 */
+	@XmlElement(name = "hl7:participant")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2> hl7Participant2;
 
 	/**
 	 * This CAN be used to indicate who has performed the test. This information supersedes any information recorded at higher level.
 	 */
+	@XmlElement(name = "hl7:performer")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer2> hl7Performer;
 
 	/**
 	 * This CAN be used to make reference to an external document.
 	 */
+	@XmlElement(name = "hl7:reference")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference> hl7Reference;
 
 	/**
@@ -115,44 +128,55 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	 * - Lower limit: [R]
 	 * - interpretationCode containing code=N: [M]The reference range CAN be omitted for other data types. If only an upper or lower limit is meaningful, the unused limit MUST be declared using nullFlavor.
 	 */
+	@XmlElement(name = "hl7:referenceRange")
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040ReferenceRange hl7ReferenceRange;
 
 	/**
 	 * The status 'completed' means that the result is final.The status 'aborted' means that the examination could not be performed.
 	 */
+	@XmlElement(name = "hl7:statusCode")
 	private org.ehealth_connector.common.hl7cdar2.CS hl7StatusCode;
 
+	@XmlElement(name = "hl7:subject")
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Subject hl7Subject;
 
+	@XmlElement(name = "hl7:subject")
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Subject hl7Subject1;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
 
 	/**
 	 * True / False or Yes / No Result. If the observation value can not be determined, @value is NOT ALLOWED. Instead, @nullFlavor='NA' MUST be used in combination with interpretationCode that declares whether the result is below (Low of scale) or above (High of scale) of the reference range.
 	 */
+	@XmlElement(name = "hl7:value")
 	private org.ehealth_connector.common.hl7cdar2.BL hl7Value;
 
 	/**
 	 * Coded result. If the observation value can not be determined, @code, @codeSystem, @codeSystemName and @displayName are NOT ALLOWED. Instead, @nullFlavor='NA' MUST be used in combination with interpretationCode that declares whether the result is below (Low of scale) or above (High of scale) of the reference range.
 	 */
+	@XmlElement(name = "hl7:value")
 	private org.ehealth_connector.common.hl7cdar2.CD hl7Value1;
 
 	/**
 	 * Text result.
 	 */
+	@XmlElement(name = "hl7:value")
 	private org.ehealth_connector.common.hl7cdar2.ED hl7Value2;
 
 	/**
 	 * Numeric result with unit. If the observation value can not be determined, @value and @unit are NOT ALLOWED. Instead, @nullFlavor='NA' MUST be used in combination with interpretationCode that declares whether the result is below (Low of scale) or above (High of scale) of the reference range.
 	 */
+	@XmlElement(name = "hl7:value")
 	private org.ehealth_connector.common.hl7cdar2.PQ hl7Value3;
 
 	/**
 	 * Ratio results. If the observation value can not be determined, numerator and denominator are NOT ALLOWED. Instead, @nullFlavor='NA' MUST be used in combination with interpretationCode that declares whether the result is below (Low of scale) or above (High of scale) of the reference range.
 	 */
+	@XmlElement(name = "hl7:value")
 	private org.ehealth_connector.common.hl7cdar2.RTO hl7Value4;
 
 	/**

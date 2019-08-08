@@ -24,9 +24,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.29
@@ -36,18 +36,22 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
  */
 public class CdachEntryExternalDocument extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ExternalDocument {
 
+	@XmlElement(name = "hl7:code")
 	private org.ehealth_connector.common.hl7cdar2.CD hl7Code;
 
 	/**
 	 * MUST contain the id of the external document.
 	 */
+	@XmlElement(name = "hl7:id")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> hl7Id;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
 
 	/**
 	 * The external document MUST be declared as a link.The link MUST be declared as an URL, which points to the referenced document.The same link MUST be used in the human readable part (narrative text) using the &lt;linkHTML&gt; element.
 	 */
+	@XmlElement(name = "hl7:text")
 	private org.ehealth_connector.common.hl7cdar2.ED hl7Text;
 
 	/**

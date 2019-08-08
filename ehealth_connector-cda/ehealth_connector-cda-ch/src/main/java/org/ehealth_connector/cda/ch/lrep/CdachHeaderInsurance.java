@@ -23,9 +23,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.15
@@ -35,13 +35,16 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
  */
 public class CdachHeaderInsurance extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 {
 
+	@XmlElement(name = "hl7:associatedEntity")
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity hl7AssociatedEntity;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
 
 	/**
 	 * Validity period of the contract.
 	 */
+	@XmlElement(name = "hl7:time")
 	private org.ehealth_connector.common.hl7cdar2.IVLTS hl7Time;
 
 	/**

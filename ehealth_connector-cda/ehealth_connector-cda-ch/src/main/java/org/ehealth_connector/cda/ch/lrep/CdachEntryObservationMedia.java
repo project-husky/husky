@@ -24,9 +24,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.83
@@ -37,28 +37,34 @@ public class CdachEntryObservationMedia extends org.ehealth_connector.common.hl7
 	/**
 	 * This template defines only the embedding of multimedia objects in the CDA document.
 	 */
+	@XmlElement(name = "hl7:entryRelationship")
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship hl7EntryRelationship;
 
 	/**
 	 * IDs for this item MAY be filled for traceability.
 	 */
+	@XmlElement(name = "hl7:id")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> hl7Id;
 
 	/**
 	 * The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the multimedia object is written. If it isn't known or not available (e.g. for pictures), use nullFlavor instead.
 	 */
+	@XmlElement(name = "hl7:languageCode")
 	private org.ehealth_connector.common.hl7cdar2.CS hl7LanguageCode;
 
 	/**
 	 * This template defines only the embedding of multimedia objects in the CDA document.
 	 */
+	@XmlElement(name = "hl7:reference")
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference hl7Reference;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
 
 	/**
 	 * The Base-64 encoded multimedia object.
 	 */
+	@XmlElement(name = "hl7:value")
 	private org.ehealth_connector.common.hl7cdar2.ED hl7Value;
 
 	/**

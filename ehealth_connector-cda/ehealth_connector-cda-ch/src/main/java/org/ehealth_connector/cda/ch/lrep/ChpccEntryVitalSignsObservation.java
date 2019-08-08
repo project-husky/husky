@@ -24,9 +24,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.21
@@ -37,37 +37,49 @@ public class ChpccEntryVitalSignsObservation extends org.ehealth_connector.commo
 	/**
 	 * The reference to the text in the narrative section of the section MUST be specified.
 	 */
+	@XmlElement(name = "hl7:code")
 	private org.ehealth_connector.common.hl7cdar2.CD hl7Code;
 
+	@XmlElement(name = "hl7:effectiveTime")
 	private org.ehealth_connector.common.hl7cdar2.IVLTS hl7EffectiveTime;
 
 	/**
 	 * An ID for this item MAY be filled for traceability.
 	 */
+	@XmlElement(name = "hl7:id")
 	private org.ehealth_connector.common.hl7cdar2.II hl7Id;
 
+	@XmlElement(name = "hl7:interpretationCode")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.CE> hl7InterpretationCode;
 
+	@XmlElement(name = "hl7:methodCode")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.CE> hl7MethodCode;
 
 	/**
 	 * The status 'completed' indicates that the observation is final.
 	 */
+	@XmlElement(name = "hl7:statusCode")
 	private org.ehealth_connector.common.hl7cdar2.CS hl7StatusCode;
 
+	@XmlElement(name = "hl7:targetSiteCode")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.CD> hl7TargetSiteCode;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId2;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId3;
 
 	/**
 	 * According to table in [IHE PCC TF-2], 6.3.4.22.3
 	 */
+	@XmlElement(name = "hl7:value")
 	private org.ehealth_connector.common.hl7cdar2.ANY hl7Value;
 
 	/**

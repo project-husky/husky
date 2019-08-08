@@ -23,9 +23,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.59
@@ -35,20 +35,25 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
  */
 public class CdachlrepHeaderAuthor extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Author {
 
+	@XmlElement(name = "hl7:assignedAuthor")
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedAuthor hl7AssignedAuthor;
 
 	/**
 	 * The functionCode MUST be taken from the Swiss EPR Value-Set for author roles. See FDHA Ordinance on the Electronic Patient Record (EPRO-FDHA), Appendix 3: Metadata, Section 2.1.If the desired functionCode is not available in the Swiss EPR Value-Set for author roles, nullFlavor='NAV' MUST be used. In this case, the originalText element MUST contain the description of the role.Translations to other vocabularies are allowed.
 	 */
+	@XmlElement(name = "hl7:functionCode")
 	private org.ehealth_connector.common.hl7cdar2.CE hl7FunctionCode;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
 
 	/**
 	 * Date and time of the laboratory report creation.
 	 */
+	@XmlElement(name = "hl7:time")
 	private org.ehealth_connector.common.hl7cdar2.TS hl7Time;
 
 	/**

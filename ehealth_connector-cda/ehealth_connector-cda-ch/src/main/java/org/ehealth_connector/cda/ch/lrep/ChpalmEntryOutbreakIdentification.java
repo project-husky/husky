@@ -24,9 +24,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.16
@@ -37,25 +37,31 @@ public class ChpalmEntryOutbreakIdentification extends org.ehealth_connector.com
 	/**
 	 * A code that defines the 'outbreak' MUST be specified.Note:The SNOMED-CT code 416534008 (Outbreak) has been defined for reportable laboratory findings in Switzerland.
 	 */
+	@XmlElement(name = "hl7:code")
 	private org.ehealth_connector.common.hl7cdar2.CD hl7Code;
 
 	/**
 	 * An ID for this item CAN be filled for traceability.
 	 */
+	@XmlElement(name = "hl7:id")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> hl7Id;
 
 	/**
 	 * The status 'completed' means the patient has been associated with the given outbreak.
 	 */
+	@XmlElement(name = "hl7:statusCode")
 	private org.ehealth_connector.common.hl7cdar2.CS hl7StatusCode;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
 
 	/**
 	 * A code that defines the 'outbreak' condition MUST be specified. If no code is known, nullFlavor='NA' MUST be used.Note:For reportable laboratory findings in Switzerland, nullFlavor = 'NA' MUST MUST be used.
 	 */
+	@XmlElement(name = "hl7:value")
 	private org.ehealth_connector.common.hl7cdar2.CE hl7Value;
 
 	/**

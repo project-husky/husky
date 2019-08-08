@@ -23,9 +23,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.14
@@ -36,6 +36,7 @@ public class CdachOtherTextElementWithReferenceToNarrativeText extends org.eheal
 	/**
 	 * The reference to the corresponding text in the human readable part must be specified by reference to content[@ID]: reference[@value='#xxx']
 	 */
+	@XmlElement(name = "hl7:reference")
 	private org.ehealth_connector.common.hl7cdar2.TEL hl7Reference;
 
 	/**

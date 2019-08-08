@@ -24,9 +24,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.15
@@ -37,30 +37,37 @@ public class ChpalmEntryCaseIdentification extends org.ehealth_connector.common.
 	/**
 	 * The type of the case MUST be declared with a code. LOINC (2.16.840.1.113883.6.1) or SNOMED CT (2.16.840.1.113883.6.96) codes or values from the HL7 vocabulary ObservationType (2.16.840.1.113883.1.11.16226) SHOULD be used.
 	 */
+	@XmlElement(name = "hl7:code")
 	private org.ehealth_connector.common.hl7cdar2.CE hl7Code;
 
 	/**
 	 * MAY contain the period of validity of the case.
 	 */
+	@XmlElement(name = "hl7:effectiveTime")
 	private org.ehealth_connector.common.hl7cdar2.IVLTS hl7EffectiveTime;
 
 	/**
 	 * The number of the case to which the examinations belong in this section MUST be declared. Multiple case numbers CAN be specified.
 	 */
+	@XmlElement(name = "hl7:id")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> hl7Id;
 
 	/**
 	 * The status 'completed' means the patient has been associated with the given case number.The status 'aborted' means the patient was associated with the case number in error.
 	 */
+	@XmlElement(name = "hl7:statusCode")
 	private org.ehealth_connector.common.hl7cdar2.CS hl7StatusCode;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
 
 	/**
 	 * A not further specified precision of the case MUST be declared according to XD-LAB with data type 'CE'. If no further precision is known, nullFavor='UNK' MUST be used.
 	 */
+	@XmlElement(name = "hl7:value")
 	private org.ehealth_connector.common.hl7cdar2.CE hl7Value;
 
 	/**

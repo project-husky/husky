@@ -24,9 +24,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.11
@@ -37,6 +37,7 @@ public class ChpalmEntrySpecimenCollection extends org.ehealth_connector.common.
 	/**
 	 * The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
 	 */
+	@XmlElement(name = "hl7:code")
 	private org.ehealth_connector.common.hl7cdar2.CD hl7Code;
 
 	/**
@@ -44,11 +45,13 @@ public class ChpalmEntrySpecimenCollection extends org.ehealth_connector.common.
 	 * - Timestamp: Is declared using @value. Minimum accuracy of the value: Date (the time of the day is OPTIONAL).
 	 * - Period: Is declared using low/@value and high/@value. Accuracy of the value: Date and time with hour and minute.
 	 */
+	@XmlElement(name = "hl7:effectiveTime")
 	private org.ehealth_connector.common.hl7cdar2.IVLTS hl7EffectiveTime;
 
 	/**
 	 * This MAY be used to indicate when the sample has arrived at the laboratory.
 	 */
+	@XmlElement(name = "hl7:entryRelationship")
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship hl7EntryRelationship;
 
 	/**
@@ -56,32 +59,40 @@ public class ChpalmEntrySpecimenCollection extends org.ehealth_connector.common.
 	 * - Collection period for 24 hour urine test: @code='13362-9' (Collection duration of Urine), @value='24', @unit='h'
 	 * - Collected volume (urine quantity): @code='19153-6' (Volume in Urine collected for unspecified duration), @value: urine quantity, @unit: UCUM unit of urine quantity (e.g. ml, dl or l)
 	 */
+	@XmlElement(name = "hl7:entryRelationship")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship> hl7EntryRelationship1;
 
 	/**
 	 * An ID for this item MAY be filled for traceability.
 	 */
+	@XmlElement(name = "hl7:id")
 	private org.ehealth_connector.common.hl7cdar2.II hl7Id;
 
 	/**
 	 * The information on the specimen MUST be declared.
 	 */
+	@XmlElement(name = "hl7:participant")
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 hl7Participant;
 
 	/**
 	 * This can be used to specify who performed the specimen collection.
 	 */
+	@XmlElement(name = "hl7:performer")
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer2 hl7Performer;
 
 	/**
 	 * This CAN be used to indicate the anatomical position of the specimen collection. This is particularly relevant in microbiology (e.g., when the sample was removed with a swab from the left foot). The HL7 vocabulary ActSite contains anatomical locations of organisms that may be at the center of the action.
 	 */
+	@XmlElement(name = "hl7:targetSiteCode")
 	private org.ehealth_connector.common.hl7cdar2.CD hl7TargetSiteCode;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
 
+	@XmlElement(name = "hl7:templateId")
 	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
 
+	@XmlElement(name = "hl7:text")
 	private org.ehealth_connector.common.hl7cdar2.ED hl7Text;
 
 	/**

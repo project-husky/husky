@@ -24,9 +24,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.48
@@ -39,6 +39,7 @@ public class CdachOtherAuthorCompilationWithName extends org.ehealth_connector.c
 	/**
 	 * A translation of the code to another coding system (e.g. ISCO-08: 2.16.840.1.113883.2.9.6.2.7)
 	 */
+	@XmlElement(name = "hl7:translation")
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.CD> hl7Translation;
 
 	/**
