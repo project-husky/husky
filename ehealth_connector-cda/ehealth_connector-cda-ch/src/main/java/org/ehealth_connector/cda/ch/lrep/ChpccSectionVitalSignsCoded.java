@@ -18,13 +18,11 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -36,67 +34,25 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
  */
 public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 
-	@XmlElement(name = "hl7:code")
-	private org.ehealth_connector.common.hl7cdar2.CE hl7Code;
-
-	@XmlElement(name = "hl7:entry")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry> hl7Entry;
-
-	/**
-	 * An ID for this section MAY be filled for traceability.
-	 */
-	@XmlElement(name = "hl7:id")
-	private org.ehealth_connector.common.hl7cdar2.II hl7Id;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId2;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId3;
-
-	/**
-	 * Human readable text of this section.
-	 */
-	@XmlElement(name = "hl7:text")
-	private org.ehealth_connector.common.hl7cdar2.StrucDocText hl7Text;
-
-	/**
-	 * Fixed human readable title of this section.
-	 * - [ge]: 'Vitalzeichen'
-	 * - [fr]: 'Signes vitaux'
-	 * - [it]: 'Segni vitali'
-	 * - [en]: 'Vital Signs'
-	 */
-	@XmlElement(name = "hl7:title")
-	private org.ehealth_connector.common.hl7cdar2.ST hl7Title;
-
 	/**
 	 * Adds a hl7Entry
 	 */
 	public void addHl7Entry(org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry value) {
-		if (hl7Entry == null)
-			hl7Entry = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry>();
-		hl7Entry.add(value);
+		getEntry().add(value);
 	}
 
 	/**
 	 * Adds a hl7Entry
 	 */
 	public void clearHl7Entry() {
-		hl7Entry.clear();
+		getEntry().clear();
 	}
 
 	/**
 	 * Gets the hl7Code
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7Code() {
-		return hl7Code;
+		return super.code;
 	}
 
 	/**
@@ -104,35 +60,18 @@ public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl
 	 * An ID for this section MAY be filled for traceability.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
-		return hl7Id;
+		return super.id;
 	}
 
 	/**
 	 * Gets the hl7TemplateId
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		return hl7TemplateId;
-	}
-
-	/**
-	 * Gets the hl7TemplateId1
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId1() {
-		return hl7TemplateId1;
-	}
-
-	/**
-	 * Gets the hl7TemplateId2
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId2() {
-		return hl7TemplateId2;
-	}
-
-	/**
-	 * Gets the hl7TemplateId3
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId3() {
-		return hl7TemplateId3;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getTemplateId() != null)
+			if (super.getTemplateId().size() > 0)
+				retVal = super.getTemplateId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -140,7 +79,7 @@ public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl
 	 * Human readable text of this section.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.StrucDocText getHl7Text() {
-		return hl7Text;
+		return super.text;
 	}
 
 	/**
@@ -152,7 +91,7 @@ public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl
 	 * - [en]: 'Vital Signs'
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ST getHl7Title() {
-		return hl7Title;
+		return super.title;
 	}
 
 	/**
@@ -205,7 +144,7 @@ public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl
 	 * Sets the hl7Code
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CE value) {
-		hl7Code = value;
+		super.code = value;
 	}
 
 	/**
@@ -213,35 +152,15 @@ public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl
 	 * An ID for this section MAY be filled for traceability.
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7Id = value;
+		super.id = value;
 	}
 
 	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId1
-	 */
-	public void setHl7TemplateId1(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId1 = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId2
-	 */
-	public void setHl7TemplateId2(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId2 = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId3
-	 */
-	public void setHl7TemplateId3(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId3 = value;
+		super.getTemplateId().clear();
+		super.getTemplateId().add(value);
 	}
 
 	/**
@@ -249,7 +168,7 @@ public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl
 	 * Human readable text of this section.
 	 */
 	public void setHl7Text(org.ehealth_connector.common.hl7cdar2.StrucDocText value) {
-		hl7Text = value;
+		super.text = value;
 	}
 
 	/**
@@ -261,6 +180,6 @@ public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl
 	 * - [en]: 'Vital Signs'
 	 */
 	public void setHl7Title(org.ehealth_connector.common.hl7cdar2.ST value) {
-		hl7Title = value;
+		super.title = value;
 	}
 }

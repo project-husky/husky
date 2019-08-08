@@ -18,13 +18,11 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -36,86 +34,19 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
  */
 public class ChpccSectionCurrentPregnancyCoded extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 
-	@XmlElement(name = "hl7:code")
-	private org.ehealth_connector.common.hl7cdar2.CE hl7Code;
-
-	/**
-	 * The narrative text in the text element of the section MUST be generated automatically from the information in this entry.
-	 */
-	@XmlElement(name = "hl7:entry")
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry hl7Entry;
-
-	/**
-	 * The narrative text in the text element of the section MUST be generated automatically from the information in this entry.
-	 */
-	@XmlElement(name = "hl7:entry")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry> hl7Entry1;
-
-	/**
-	 * An ID for this section MAY be filled for traceability.
-	 */
-	@XmlElement(name = "hl7:id")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> hl7Id;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId2;
-
-	/**
-	 * The narrative text for this section.
-	 */
-	@XmlElement(name = "hl7:text")
-	private org.ehealth_connector.common.hl7cdar2.StrucDocText hl7Text;
-
-	@XmlElement(name = "hl7:title")
-	private org.ehealth_connector.common.hl7cdar2.ST hl7Title;
-
-	/**
-	 * Adds a hl7Entry1
-	 * The narrative text in the text element of the section MUST be generated automatically from the information in this entry.
-	 */
-	public void addHl7Entry1(org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry value) {
-		if (hl7Entry1 == null)
-			hl7Entry1 = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry>();
-		hl7Entry1.add(value);
-	}
-
 	/**
 	 * Adds a hl7Id
 	 * An ID for this section MAY be filled for traceability.
 	 */
 	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		if (hl7Id == null)
-			hl7Id = new ArrayList<org.ehealth_connector.common.hl7cdar2.II>();
-		hl7Id.add(value);
-	}
-
-	/**
-	 * Adds a hl7Entry1
-	 * The narrative text in the text element of the section MUST be generated automatically from the information in this entry.
-	 */
-	public void clearHl7Entry1() {
-		hl7Entry1.clear();
-	}
-
-	/**
-	 * Adds a hl7Id
-	 * An ID for this section MAY be filled for traceability.
-	 */
-	public void clearHl7Id() {
-		hl7Id.clear();
+		super.id = value;
 	}
 
 	/**
 	 * Gets the hl7Code
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7Code() {
-		return hl7Code;
+		return super.code;
 	}
 
 	/**
@@ -123,28 +54,22 @@ public class ChpccSectionCurrentPregnancyCoded extends org.ehealth_connector.com
 	 * The narrative text in the text element of the section MUST be generated automatically from the information in this entry.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry getHl7Entry() {
-		return hl7Entry;
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry retVal = null;
+		if (super.getEntry() != null)
+			if (super.getEntry().size() > 0)
+				retVal = super.getEntry().get(0);
+		return retVal;
 	}
 
 	/**
 	 * Gets the hl7TemplateId
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		return hl7TemplateId;
-	}
-
-	/**
-	 * Gets the hl7TemplateId1
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId1() {
-		return hl7TemplateId1;
-	}
-
-	/**
-	 * Gets the hl7TemplateId2
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId2() {
-		return hl7TemplateId2;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getTemplateId() != null)
+			if (super.getTemplateId().size() > 0)
+				retVal = super.getTemplateId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -152,14 +77,14 @@ public class ChpccSectionCurrentPregnancyCoded extends org.ehealth_connector.com
 	 * The narrative text for this section.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.StrucDocText getHl7Text() {
-		return hl7Text;
+		return super.text;
 	}
 
 	/**
 	 * Gets the hl7Title
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ST getHl7Title() {
-		return hl7Title;
+		return super.title;
 	}
 
 	/**
@@ -212,7 +137,7 @@ public class ChpccSectionCurrentPregnancyCoded extends org.ehealth_connector.com
 	 * Sets the hl7Code
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CE value) {
-		hl7Code = value;
+		super.code = value;
 	}
 
 	/**
@@ -220,28 +145,16 @@ public class ChpccSectionCurrentPregnancyCoded extends org.ehealth_connector.com
 	 * The narrative text in the text element of the section MUST be generated automatically from the information in this entry.
 	 */
 	public void setHl7Entry(org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry value) {
-		hl7Entry = value;
+		super.getEntry().clear();
+		super.getEntry().add(value);
 	}
 
 	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId1
-	 */
-	public void setHl7TemplateId1(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId1 = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId2
-	 */
-	public void setHl7TemplateId2(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId2 = value;
+		super.getTemplateId().clear();
+		super.getTemplateId().add(value);
 	}
 
 	/**
@@ -249,13 +162,13 @@ public class ChpccSectionCurrentPregnancyCoded extends org.ehealth_connector.com
 	 * The narrative text for this section.
 	 */
 	public void setHl7Text(org.ehealth_connector.common.hl7cdar2.StrucDocText value) {
-		hl7Text = value;
+		super.text = value;
 	}
 
 	/**
 	 * Sets the hl7Title
 	 */
 	public void setHl7Title(org.ehealth_connector.common.hl7cdar2.ST value) {
-		hl7Title = value;
+		super.title = value;
 	}
 }

@@ -18,13 +18,11 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -35,49 +33,11 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 public class ChpalmEntryCaseIdentification extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
 	/**
-	 * The type of the case MUST be declared with a code. LOINC (2.16.840.1.113883.6.1) or SNOMED CT (2.16.840.1.113883.6.96) codes or values from the HL7 vocabulary ObservationType (2.16.840.1.113883.1.11.16226) SHOULD be used.
-	 */
-	@XmlElement(name = "hl7:code")
-	private org.ehealth_connector.common.hl7cdar2.CE hl7Code;
-
-	/**
-	 * MAY contain the period of validity of the case.
-	 */
-	@XmlElement(name = "hl7:effectiveTime")
-	private org.ehealth_connector.common.hl7cdar2.IVLTS hl7EffectiveTime;
-
-	/**
-	 * The number of the case to which the examinations belong in this section MUST be declared. Multiple case numbers CAN be specified.
-	 */
-	@XmlElement(name = "hl7:id")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> hl7Id;
-
-	/**
-	 * The status 'completed' means the patient has been associated with the given case number.The status 'aborted' means the patient was associated with the case number in error.
-	 */
-	@XmlElement(name = "hl7:statusCode")
-	private org.ehealth_connector.common.hl7cdar2.CS hl7StatusCode;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
-
-	/**
-	 * A not further specified precision of the case MUST be declared according to XD-LAB with data type 'CE'. If no further precision is known, nullFavor='UNK' MUST be used.
-	 */
-	@XmlElement(name = "hl7:value")
-	private org.ehealth_connector.common.hl7cdar2.CE hl7Value;
-
-	/**
 	 * Adds a hl7Id
 	 * The number of the case to which the examinations belong in this section MUST be declared. Multiple case numbers CAN be specified.
 	 */
 	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		if (hl7Id == null)
-			hl7Id = new ArrayList<org.ehealth_connector.common.hl7cdar2.II>();
-		hl7Id.add(value);
+		getId().add(value);
 	}
 
 	/**
@@ -85,7 +45,7 @@ public class ChpalmEntryCaseIdentification extends org.ehealth_connector.common.
 	 * The number of the case to which the examinations belong in this section MUST be declared. Multiple case numbers CAN be specified.
 	 */
 	public void clearHl7Id() {
-		hl7Id.clear();
+		getId().clear();
 	}
 
 	/**
@@ -93,7 +53,7 @@ public class ChpalmEntryCaseIdentification extends org.ehealth_connector.common.
 	 * The type of the case MUST be declared with a code. LOINC (2.16.840.1.113883.6.1) or SNOMED CT (2.16.840.1.113883.6.96) codes or values from the HL7 vocabulary ObservationType (2.16.840.1.113883.1.11.16226) SHOULD be used.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7Code() {
-		return hl7Code;
+		return (org.ehealth_connector.common.hl7cdar2.CE) super.code;
 	}
 
 	/**
@@ -101,7 +61,7 @@ public class ChpalmEntryCaseIdentification extends org.ehealth_connector.common.
 	 * MAY contain the period of validity of the case.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.IVLTS getHl7EffectiveTime() {
-		return hl7EffectiveTime;
+		return super.effectiveTime;
 	}
 
 	/**
@@ -109,21 +69,18 @@ public class ChpalmEntryCaseIdentification extends org.ehealth_connector.common.
 	 * The status 'completed' means the patient has been associated with the given case number.The status 'aborted' means the patient was associated with the case number in error.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
-		return hl7StatusCode;
+		return super.statusCode;
 	}
 
 	/**
 	 * Gets the hl7TemplateId
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		return hl7TemplateId;
-	}
-
-	/**
-	 * Gets the hl7TemplateId1
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId1() {
-		return hl7TemplateId1;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getTemplateId() != null)
+			if (super.getTemplateId().size() > 0)
+				retVal = super.getTemplateId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -131,7 +88,11 @@ public class ChpalmEntryCaseIdentification extends org.ehealth_connector.common.
 	 * A not further specified precision of the case MUST be declared according to XD-LAB with data type 'CE'. If no further precision is known, nullFavor='UNK' MUST be used.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7Value() {
-		return hl7Value;
+		org.ehealth_connector.common.hl7cdar2.CE retVal = null;
+		if (super.getValue() != null)
+			if (super.getValue().size() > 0)
+				retVal = (org.ehealth_connector.common.hl7cdar2.CE) super.getValue().get(0);
+		return retVal;
 	}
 
 	/**
@@ -185,7 +146,7 @@ public class ChpalmEntryCaseIdentification extends org.ehealth_connector.common.
 	 * The type of the case MUST be declared with a code. LOINC (2.16.840.1.113883.6.1) or SNOMED CT (2.16.840.1.113883.6.96) codes or values from the HL7 vocabulary ObservationType (2.16.840.1.113883.1.11.16226) SHOULD be used.
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CE value) {
-		hl7Code = value;
+		super.code = value;
 	}
 
 	/**
@@ -193,7 +154,7 @@ public class ChpalmEntryCaseIdentification extends org.ehealth_connector.common.
 	 * MAY contain the period of validity of the case.
 	 */
 	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
-		hl7EffectiveTime = value;
+		super.effectiveTime = value;
 	}
 
 	/**
@@ -201,21 +162,15 @@ public class ChpalmEntryCaseIdentification extends org.ehealth_connector.common.
 	 * The status 'completed' means the patient has been associated with the given case number.The status 'aborted' means the patient was associated with the case number in error.
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
-		hl7StatusCode = value;
+		super.statusCode = value;
 	}
 
 	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId1
-	 */
-	public void setHl7TemplateId1(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId1 = value;
+		super.getTemplateId().clear();
+		super.getTemplateId().add(value);
 	}
 
 	/**
@@ -223,6 +178,7 @@ public class ChpalmEntryCaseIdentification extends org.ehealth_connector.common.
 	 * A not further specified precision of the case MUST be declared according to XD-LAB with data type 'CE'. If no further precision is known, nullFavor='UNK' MUST be used.
 	 */
 	public void setHl7Value(org.ehealth_connector.common.hl7cdar2.CE value) {
-		hl7Value = value;
+		super.getValue().clear();
+		super.getValue().add(value);
 	}
 }

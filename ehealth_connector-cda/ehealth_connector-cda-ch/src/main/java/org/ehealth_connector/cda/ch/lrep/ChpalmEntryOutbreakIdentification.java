@@ -18,13 +18,11 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -35,43 +33,11 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 public class ChpalmEntryOutbreakIdentification extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
 	/**
-	 * A code that defines the 'outbreak' MUST be specified.Note:The SNOMED-CT code 416534008 (Outbreak) has been defined for reportable laboratory findings in Switzerland.
-	 */
-	@XmlElement(name = "hl7:code")
-	private org.ehealth_connector.common.hl7cdar2.CD hl7Code;
-
-	/**
-	 * An ID for this item CAN be filled for traceability.
-	 */
-	@XmlElement(name = "hl7:id")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> hl7Id;
-
-	/**
-	 * The status 'completed' means the patient has been associated with the given outbreak.
-	 */
-	@XmlElement(name = "hl7:statusCode")
-	private org.ehealth_connector.common.hl7cdar2.CS hl7StatusCode;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
-
-	/**
-	 * A code that defines the 'outbreak' condition MUST be specified. If no code is known, nullFlavor='NA' MUST be used.Note:For reportable laboratory findings in Switzerland, nullFlavor = 'NA' MUST MUST be used.
-	 */
-	@XmlElement(name = "hl7:value")
-	private org.ehealth_connector.common.hl7cdar2.CE hl7Value;
-
-	/**
 	 * Adds a hl7Id
 	 * An ID for this item CAN be filled for traceability.
 	 */
 	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		if (hl7Id == null)
-			hl7Id = new ArrayList<org.ehealth_connector.common.hl7cdar2.II>();
-		hl7Id.add(value);
+		getId().add(value);
 	}
 
 	/**
@@ -79,7 +45,7 @@ public class ChpalmEntryOutbreakIdentification extends org.ehealth_connector.com
 	 * An ID for this item CAN be filled for traceability.
 	 */
 	public void clearHl7Id() {
-		hl7Id.clear();
+		getId().clear();
 	}
 
 	/**
@@ -87,7 +53,7 @@ public class ChpalmEntryOutbreakIdentification extends org.ehealth_connector.com
 	 * A code that defines the 'outbreak' MUST be specified.Note:The SNOMED-CT code 416534008 (Outbreak) has been defined for reportable laboratory findings in Switzerland.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
-		return hl7Code;
+		return super.code;
 	}
 
 	/**
@@ -95,21 +61,18 @@ public class ChpalmEntryOutbreakIdentification extends org.ehealth_connector.com
 	 * The status 'completed' means the patient has been associated with the given outbreak.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
-		return hl7StatusCode;
+		return super.statusCode;
 	}
 
 	/**
 	 * Gets the hl7TemplateId
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		return hl7TemplateId;
-	}
-
-	/**
-	 * Gets the hl7TemplateId1
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId1() {
-		return hl7TemplateId1;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getTemplateId() != null)
+			if (super.getTemplateId().size() > 0)
+				retVal = super.getTemplateId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -117,7 +80,11 @@ public class ChpalmEntryOutbreakIdentification extends org.ehealth_connector.com
 	 * A code that defines the 'outbreak' condition MUST be specified. If no code is known, nullFlavor='NA' MUST be used.Note:For reportable laboratory findings in Switzerland, nullFlavor = 'NA' MUST MUST be used.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7Value() {
-		return hl7Value;
+		org.ehealth_connector.common.hl7cdar2.CE retVal = null;
+		if (super.getValue() != null)
+			if (super.getValue().size() > 0)
+				retVal = (org.ehealth_connector.common.hl7cdar2.CE) super.getValue().get(0);
+		return retVal;
 	}
 
 	/**
@@ -171,7 +138,7 @@ public class ChpalmEntryOutbreakIdentification extends org.ehealth_connector.com
 	 * A code that defines the 'outbreak' MUST be specified.Note:The SNOMED-CT code 416534008 (Outbreak) has been defined for reportable laboratory findings in Switzerland.
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CD value) {
-		hl7Code = value;
+		super.code = value;
 	}
 
 	/**
@@ -179,21 +146,15 @@ public class ChpalmEntryOutbreakIdentification extends org.ehealth_connector.com
 	 * The status 'completed' means the patient has been associated with the given outbreak.
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
-		hl7StatusCode = value;
+		super.statusCode = value;
 	}
 
 	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId1
-	 */
-	public void setHl7TemplateId1(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId1 = value;
+		super.getTemplateId().clear();
+		super.getTemplateId().add(value);
 	}
 
 	/**
@@ -201,6 +162,7 @@ public class ChpalmEntryOutbreakIdentification extends org.ehealth_connector.com
 	 * A code that defines the 'outbreak' condition MUST be specified. If no code is known, nullFlavor='NA' MUST be used.Note:For reportable laboratory findings in Switzerland, nullFlavor = 'NA' MUST MUST be used.
 	 */
 	public void setHl7Value(org.ehealth_connector.common.hl7cdar2.CE value) {
-		hl7Value = value;
+		super.getValue().clear();
+		super.getValue().add(value);
 	}
 }

@@ -23,7 +23,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -34,23 +33,11 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 public class ChpalmEntryParticipantBodyDevice extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole {
 
 	/**
-	 * Analyzer used to determine the result.
-	 */
-	@XmlElement(name = "hl7:playingDevice")
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Device hl7PlayingDevice;
-
-	/**
-	 * The test kit and its manufacturer CAN be specified.
-	 */
-	@XmlElement(name = "hl7:scopingEntity")
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Entity hl7ScopingEntity;
-
-	/**
 	 * Gets the hl7PlayingDevice
 	 * Analyzer used to determine the result.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Device getHl7PlayingDevice() {
-		return hl7PlayingDevice;
+		return super.playingDevice;
 	}
 
 	/**
@@ -58,7 +45,7 @@ public class ChpalmEntryParticipantBodyDevice extends org.ehealth_connector.comm
 	 * The test kit and its manufacturer CAN be specified.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Entity getHl7ScopingEntity() {
-		return hl7ScopingEntity;
+		return super.scopingEntity;
 	}
 
 	/**
@@ -112,7 +99,7 @@ public class ChpalmEntryParticipantBodyDevice extends org.ehealth_connector.comm
 	 * Analyzer used to determine the result.
 	 */
 	public void setHl7PlayingDevice(org.ehealth_connector.common.hl7cdar2.POCDMT000040Device value) {
-		hl7PlayingDevice = value;
+		super.playingDevice = value;
 	}
 
 	/**
@@ -120,6 +107,6 @@ public class ChpalmEntryParticipantBodyDevice extends org.ehealth_connector.comm
 	 * The test kit and its manufacturer CAN be specified.
 	 */
 	public void setHl7ScopingEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040Entity value) {
-		hl7ScopingEntity = value;
+		super.scopingEntity = value;
 	}
 }

@@ -18,13 +18,11 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -36,32 +34,12 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
  */
 public class CdachEntryExternalDocument extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ExternalDocument {
 
-	@XmlElement(name = "hl7:code")
-	private org.ehealth_connector.common.hl7cdar2.CD hl7Code;
-
-	/**
-	 * MUST contain the id of the external document.
-	 */
-	@XmlElement(name = "hl7:id")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> hl7Id;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
-
-	/**
-	 * The external document MUST be declared as a link.The link MUST be declared as an URL, which points to the referenced document.The same link MUST be used in the human readable part (narrative text) using the &lt;linkHTML&gt; element.
-	 */
-	@XmlElement(name = "hl7:text")
-	private org.ehealth_connector.common.hl7cdar2.ED hl7Text;
-
 	/**
 	 * Adds a hl7Id
 	 * MUST contain the id of the external document.
 	 */
 	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		if (hl7Id == null)
-			hl7Id = new ArrayList<org.ehealth_connector.common.hl7cdar2.II>();
-		hl7Id.add(value);
+		getId().add(value);
 	}
 
 	/**
@@ -69,21 +47,25 @@ public class CdachEntryExternalDocument extends org.ehealth_connector.common.hl7
 	 * MUST contain the id of the external document.
 	 */
 	public void clearHl7Id() {
-		hl7Id.clear();
+		getId().clear();
 	}
 
 	/**
 	 * Gets the hl7Code
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
-		return hl7Code;
+		return super.code;
 	}
 
 	/**
 	 * Gets the hl7TemplateId
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		return hl7TemplateId;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getTemplateId() != null)
+			if (super.getTemplateId().size() > 0)
+				retVal = super.getTemplateId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -91,7 +73,7 @@ public class CdachEntryExternalDocument extends org.ehealth_connector.common.hl7
 	 * The external document MUST be declared as a link.The link MUST be declared as an URL, which points to the referenced document.The same link MUST be used in the human readable part (narrative text) using the &lt;linkHTML&gt; element.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ED getHl7Text() {
-		return hl7Text;
+		return super.text;
 	}
 
 	/**
@@ -144,14 +126,15 @@ public class CdachEntryExternalDocument extends org.ehealth_connector.common.hl7
 	 * Sets the hl7Code
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CD value) {
-		hl7Code = value;
+		super.code = value;
 	}
 
 	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId = value;
+		super.getTemplateId().clear();
+		super.getTemplateId().add(value);
 	}
 
 	/**
@@ -159,6 +142,6 @@ public class CdachEntryExternalDocument extends org.ehealth_connector.common.hl7
 	 * The external document MUST be declared as a link.The link MUST be declared as an URL, which points to the referenced document.The same link MUST be used in the human readable part (narrative text) using the &lt;linkHTML&gt; element.
 	 */
 	public void setHl7Text(org.ehealth_connector.common.hl7cdar2.ED value) {
-		hl7Text = value;
+		super.text = value;
 	}
 }

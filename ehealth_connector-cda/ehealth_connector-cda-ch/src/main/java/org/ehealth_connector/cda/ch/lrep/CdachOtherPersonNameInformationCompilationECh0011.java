@@ -18,15 +18,17 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.namespace.QName;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.common.hl7cdar2.EnFamily;
+import org.ehealth_connector.common.hl7cdar2.EnGiven;
+import org.ehealth_connector.common.hl7cdar2.EnPrefix;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.34
@@ -37,53 +39,13 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 public class CdachOtherPersonNameInformationCompilationECh0011 extends org.ehealth_connector.common.hl7cdar2.PN {
 
 	/**
-	 * The person's family name ([ge]: Nachname; [fr]: nom de famille).
-	 */
-	@XmlElement(name = "hl7:family")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP> hl7Family;
-
-	/**
-	 * The person's maiden name ([ge]: Ledigname; [fr]: nom de célibataire).
-	 */
-	@XmlElement(name = "hl7:family")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP> hl7Family1;
-
-	/**
-	 * The person's given name ([ge]: Vorname; [fr]: prénom).
-	 */
-	@XmlElement(name = "hl7:given")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP> hl7Given;
-
-	/**
-	 * The person's call name ([ge]: Rufname; [fr]: nom usuel).
-	 */
-	@XmlElement(name = "hl7:given")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP> hl7Given1;
-
-	/**
-	 * The person's academic title (such as Dr. med. or Prof.).
-	 */
-	@XmlElement(name = "hl7:prefix")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP> hl7Prefix;
-
-	/**
 	 * Adds a hl7Family
 	 * The person's family name ([ge]: Nachname; [fr]: nom de famille).
 	 */
 	public void addHl7Family(org.ehealth_connector.common.hl7cdar2.ENXP value) {
-		if (hl7Family == null)
-			hl7Family = new ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP>();
-		hl7Family.add(value);
-	}
-
-	/**
-	 * Adds a hl7Family1
-	 * The person's maiden name ([ge]: Ledigname; [fr]: nom de célibataire).
-	 */
-	public void addHl7Family1(org.ehealth_connector.common.hl7cdar2.ENXP value) {
-		if (hl7Family1 == null)
-			hl7Family1 = new ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP>();
-		hl7Family1.add(value);
+		EnFamily obj = new EnFamily();
+		obj.xmlContent = value.xmlContent;
+		getContent().add(new JAXBElement<EnFamily>(new QName("hl7:family"), EnFamily.class, obj));
 	}
 
 	/**
@@ -91,19 +53,9 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends org.eheal
 	 * The person's given name ([ge]: Vorname; [fr]: prénom).
 	 */
 	public void addHl7Given(org.ehealth_connector.common.hl7cdar2.ENXP value) {
-		if (hl7Given == null)
-			hl7Given = new ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP>();
-		hl7Given.add(value);
-	}
-
-	/**
-	 * Adds a hl7Given1
-	 * The person's call name ([ge]: Rufname; [fr]: nom usuel).
-	 */
-	public void addHl7Given1(org.ehealth_connector.common.hl7cdar2.ENXP value) {
-		if (hl7Given1 == null)
-			hl7Given1 = new ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP>();
-		hl7Given1.add(value);
+		EnGiven obj = new EnGiven();
+		obj.xmlContent = value.xmlContent;
+		getContent().add(new JAXBElement<EnGiven>(new QName("hl7:given"), EnGiven.class, obj));
 	}
 
 	/**
@@ -111,49 +63,9 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends org.eheal
 	 * The person's academic title (such as Dr. med. or Prof.).
 	 */
 	public void addHl7Prefix(org.ehealth_connector.common.hl7cdar2.ENXP value) {
-		if (hl7Prefix == null)
-			hl7Prefix = new ArrayList<org.ehealth_connector.common.hl7cdar2.ENXP>();
-		hl7Prefix.add(value);
-	}
-
-	/**
-	 * Adds a hl7Family
-	 * The person's family name ([ge]: Nachname; [fr]: nom de famille).
-	 */
-	public void clearHl7Family() {
-		hl7Family.clear();
-	}
-
-	/**
-	 * Adds a hl7Family1
-	 * The person's maiden name ([ge]: Ledigname; [fr]: nom de célibataire).
-	 */
-	public void clearHl7Family1() {
-		hl7Family1.clear();
-	}
-
-	/**
-	 * Adds a hl7Given
-	 * The person's given name ([ge]: Vorname; [fr]: prénom).
-	 */
-	public void clearHl7Given() {
-		hl7Given.clear();
-	}
-
-	/**
-	 * Adds a hl7Given1
-	 * The person's call name ([ge]: Rufname; [fr]: nom usuel).
-	 */
-	public void clearHl7Given1() {
-		hl7Given1.clear();
-	}
-
-	/**
-	 * Adds a hl7Prefix
-	 * The person's academic title (such as Dr. med. or Prof.).
-	 */
-	public void clearHl7Prefix() {
-		hl7Prefix.clear();
+		EnPrefix obj = new EnPrefix();
+		obj.xmlContent = value.xmlContent;
+		getContent().add(new JAXBElement<EnPrefix>(new QName("hl7:prefix"), EnPrefix.class, obj));
 	}
 
 	/**

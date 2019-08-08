@@ -23,7 +23,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -35,30 +34,22 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
  */
 public class CdachHeaderInsuranceCard extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 {
 
-	@XmlElement(name = "hl7:associatedEntity")
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity hl7AssociatedEntity;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
-
-	/**
-	 * Validity period of the insurance card.
-	 */
-	@XmlElement(name = "hl7:time")
-	private org.ehealth_connector.common.hl7cdar2.IVLTS hl7Time;
-
 	/**
 	 * Gets the hl7AssociatedEntity
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity getHl7AssociatedEntity() {
-		return hl7AssociatedEntity;
+		return super.associatedEntity;
 	}
 
 	/**
 	 * Gets the hl7TemplateId
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		return hl7TemplateId;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getTemplateId() != null)
+			if (super.getTemplateId().size() > 0)
+				retVal = super.getTemplateId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -66,7 +57,7 @@ public class CdachHeaderInsuranceCard extends org.ehealth_connector.common.hl7cd
 	 * Validity period of the insurance card.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.IVLTS getHl7Time() {
-		return hl7Time;
+		return super.time;
 	}
 
 	/**
@@ -119,14 +110,15 @@ public class CdachHeaderInsuranceCard extends org.ehealth_connector.common.hl7cd
 	 * Sets the hl7AssociatedEntity
 	 */
 	public void setHl7AssociatedEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity value) {
-		hl7AssociatedEntity = value;
+		super.associatedEntity = value;
 	}
 
 	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId = value;
+		super.getTemplateId().clear();
+		super.getTemplateId().add(value);
 	}
 
 	/**
@@ -134,6 +126,6 @@ public class CdachHeaderInsuranceCard extends org.ehealth_connector.common.hl7cd
 	 * Validity period of the insurance card.
 	 */
 	public void setHl7Time(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
-		hl7Time = value;
+		super.time = value;
 	}
 }

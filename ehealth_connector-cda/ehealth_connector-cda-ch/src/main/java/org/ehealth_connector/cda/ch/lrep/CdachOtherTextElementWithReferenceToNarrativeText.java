@@ -23,7 +23,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -34,17 +33,11 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 public class CdachOtherTextElementWithReferenceToNarrativeText extends org.ehealth_connector.common.hl7cdar2.ED {
 
 	/**
-	 * The reference to the corresponding text in the human readable part must be specified by reference to content[@ID]: reference[@value='#xxx']
-	 */
-	@XmlElement(name = "hl7:reference")
-	private org.ehealth_connector.common.hl7cdar2.TEL hl7Reference;
-
-	/**
 	 * Gets the hl7Reference
 	 * The reference to the corresponding text in the human readable part must be specified by reference to content[@ID]: reference[@value='#xxx']
 	 */
 	public org.ehealth_connector.common.hl7cdar2.TEL getHl7Reference() {
-		return hl7Reference;
+		return super.reference;
 	}
 
 	/**
@@ -98,6 +91,6 @@ public class CdachOtherTextElementWithReferenceToNarrativeText extends org.eheal
 	 * The reference to the corresponding text in the human readable part must be specified by reference to content[@ID]: reference[@value='#xxx']
 	 */
 	public void setHl7Reference(org.ehealth_connector.common.hl7cdar2.TEL value) {
-		hl7Reference = value;
+		super.reference = value;
 	}
 }

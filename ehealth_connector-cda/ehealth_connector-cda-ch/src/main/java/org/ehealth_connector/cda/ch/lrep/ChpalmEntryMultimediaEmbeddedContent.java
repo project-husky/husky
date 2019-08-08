@@ -18,13 +18,11 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -35,49 +33,11 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 public class ChpalmEntryMultimediaEmbeddedContent extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ObservationMedia {
 
 	/**
-	 * This template defines only the embedding of multimedia objects in the CDA document.
-	 */
-	@XmlElement(name = "hl7:entryRelationship")
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship hl7EntryRelationship;
-
-	/**
-	 * IDs for this item CAN be filled for traceability.
-	 */
-	@XmlElement(name = "hl7:id")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> hl7Id;
-
-	/**
-	 * The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the multimedia object is written. If it isn't known or not available (e.g. for pictures), use nullFlavor instead.
-	 */
-	@XmlElement(name = "hl7:languageCode")
-	private org.ehealth_connector.common.hl7cdar2.CS hl7LanguageCode;
-
-	/**
-	 * This template defines only the embedding of multimedia objects in the CDA document.
-	 */
-	@XmlElement(name = "hl7:reference")
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference hl7Reference;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
-
-	/**
-	 * The Base-64 encoded multimedia object.
-	 */
-	@XmlElement(name = "hl7:value")
-	private org.ehealth_connector.common.hl7cdar2.ED hl7Value;
-
-	/**
 	 * Adds a hl7Id
 	 * IDs for this item CAN be filled for traceability.
 	 */
 	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		if (hl7Id == null)
-			hl7Id = new ArrayList<org.ehealth_connector.common.hl7cdar2.II>();
-		hl7Id.add(value);
+		getId().add(value);
 	}
 
 	/**
@@ -85,7 +45,7 @@ public class ChpalmEntryMultimediaEmbeddedContent extends org.ehealth_connector.
 	 * IDs for this item CAN be filled for traceability.
 	 */
 	public void clearHl7Id() {
-		hl7Id.clear();
+		getId().clear();
 	}
 
 	/**
@@ -93,7 +53,11 @@ public class ChpalmEntryMultimediaEmbeddedContent extends org.ehealth_connector.
 	 * This template defines only the embedding of multimedia objects in the CDA document.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getHl7EntryRelationship() {
-		return hl7EntryRelationship;
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship retVal = null;
+		if (super.getEntryRelationship() != null)
+			if (super.getEntryRelationship().size() > 0)
+				retVal = super.getEntryRelationship().get(0);
+		return retVal;
 	}
 
 	/**
@@ -101,7 +65,7 @@ public class ChpalmEntryMultimediaEmbeddedContent extends org.ehealth_connector.
 	 * The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the multimedia object is written. If it isn't known or not available (e.g. for pictures), use nullFlavor instead.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7LanguageCode() {
-		return hl7LanguageCode;
+		return super.languageCode;
 	}
 
 	/**
@@ -109,21 +73,22 @@ public class ChpalmEntryMultimediaEmbeddedContent extends org.ehealth_connector.
 	 * This template defines only the embedding of multimedia objects in the CDA document.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference getHl7Reference() {
-		return hl7Reference;
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference retVal = null;
+		if (super.getReference() != null)
+			if (super.getReference().size() > 0)
+				retVal = super.getReference().get(0);
+		return retVal;
 	}
 
 	/**
 	 * Gets the hl7TemplateId
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		return hl7TemplateId;
-	}
-
-	/**
-	 * Gets the hl7TemplateId1
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId1() {
-		return hl7TemplateId1;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getTemplateId() != null)
+			if (super.getTemplateId().size() > 0)
+				retVal = super.getTemplateId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -131,7 +96,7 @@ public class ChpalmEntryMultimediaEmbeddedContent extends org.ehealth_connector.
 	 * The Base-64 encoded multimedia object.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ED getHl7Value() {
-		return hl7Value;
+		return super.value;
 	}
 
 	/**
@@ -185,7 +150,8 @@ public class ChpalmEntryMultimediaEmbeddedContent extends org.ehealth_connector.
 	 * This template defines only the embedding of multimedia objects in the CDA document.
 	 */
 	public void setHl7EntryRelationship(org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship value) {
-		hl7EntryRelationship = value;
+		super.getEntryRelationship().clear();
+		super.getEntryRelationship().add(value);
 	}
 
 	/**
@@ -193,7 +159,7 @@ public class ChpalmEntryMultimediaEmbeddedContent extends org.ehealth_connector.
 	 * The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the multimedia object is written. If it isn't known or not available (e.g. for pictures), use nullFlavor instead.
 	 */
 	public void setHl7LanguageCode(org.ehealth_connector.common.hl7cdar2.CS value) {
-		hl7LanguageCode = value;
+		super.languageCode = value;
 	}
 
 	/**
@@ -201,21 +167,16 @@ public class ChpalmEntryMultimediaEmbeddedContent extends org.ehealth_connector.
 	 * This template defines only the embedding of multimedia objects in the CDA document.
 	 */
 	public void setHl7Reference(org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference value) {
-		hl7Reference = value;
+		super.getReference().clear();
+		super.getReference().add(value);
 	}
 
 	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId1
-	 */
-	public void setHl7TemplateId1(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId1 = value;
+		super.getTemplateId().clear();
+		super.getTemplateId().add(value);
 	}
 
 	/**
@@ -223,6 +184,6 @@ public class ChpalmEntryMultimediaEmbeddedContent extends org.ehealth_connector.
 	 * The Base-64 encoded multimedia object.
 	 */
 	public void setHl7Value(org.ehealth_connector.common.hl7cdar2.ED value) {
-		hl7Value = value;
+		super.value = value;
 	}
 }

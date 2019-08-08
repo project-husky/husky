@@ -23,7 +23,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -33,34 +32,22 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
  */
 public class CdachlrepHeaderCustodian extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Custodian {
 
-	@XmlElement(name = "hl7:assignedCustodian")
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedCustodian hl7AssignedCustodian;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
-
 	/**
 	 * Gets the hl7AssignedCustodian
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedCustodian getHl7AssignedCustodian() {
-		return hl7AssignedCustodian;
+		return super.assignedCustodian;
 	}
 
 	/**
 	 * Gets the hl7TemplateId
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		return hl7TemplateId;
-	}
-
-	/**
-	 * Gets the hl7TemplateId1
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId1() {
-		return hl7TemplateId1;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getTemplateId() != null)
+			if (super.getTemplateId().size() > 0)
+				retVal = super.getTemplateId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -113,20 +100,14 @@ public class CdachlrepHeaderCustodian extends org.ehealth_connector.common.hl7cd
 	 * Sets the hl7AssignedCustodian
 	 */
 	public void setHl7AssignedCustodian(org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedCustodian value) {
-		hl7AssignedCustodian = value;
+		super.assignedCustodian = value;
 	}
 
 	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId1
-	 */
-	public void setHl7TemplateId1(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId1 = value;
+		super.getTemplateId().clear();
+		super.getTemplateId().add(value);
 	}
 }

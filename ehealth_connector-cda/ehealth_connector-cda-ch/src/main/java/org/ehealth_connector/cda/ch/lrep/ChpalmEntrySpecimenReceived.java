@@ -23,7 +23,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -34,35 +33,11 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 public class ChpalmEntrySpecimenReceived extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
 
 	/**
-	 * The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
-	 */
-	@XmlElement(name = "hl7:code")
-	private org.ehealth_connector.common.hl7cdar2.CD hl7Code;
-
-	/**
-	 * Timestamp of the specimen reception at the laboratory. Minimum accuracy of the value: Date and time with hour and minute.
-	 */
-	@XmlElement(name = "hl7:effectiveTime")
-	private org.ehealth_connector.common.hl7cdar2.IVLTS hl7EffectiveTime;
-
-	/**
-	 * The delivered identification of specimen at the customer MUST be declared. If specimen identification is not available, nullFlavor='ASKU' MUST be used. In this case @root and @extension are NOT ALLOWED.
-	 */
-	@XmlElement(name = "hl7:id")
-	private org.ehealth_connector.common.hl7cdar2.II hl7Id;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
-
-	/**
 	 * Gets the hl7Code
 	 * The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
-		return hl7Code;
+		return super.code;
 	}
 
 	/**
@@ -70,7 +45,7 @@ public class ChpalmEntrySpecimenReceived extends org.ehealth_connector.common.hl
 	 * Timestamp of the specimen reception at the laboratory. Minimum accuracy of the value: Date and time with hour and minute.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.IVLTS getHl7EffectiveTime() {
-		return hl7EffectiveTime;
+		return super.effectiveTime;
 	}
 
 	/**
@@ -78,21 +53,22 @@ public class ChpalmEntrySpecimenReceived extends org.ehealth_connector.common.hl
 	 * The delivered identification of specimen at the customer MUST be declared. If specimen identification is not available, nullFlavor='ASKU' MUST be used. In this case @root and @extension are NOT ALLOWED.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
-		return hl7Id;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getId() != null)
+			if (super.getId().size() > 0)
+				retVal = super.getId().get(0);
+		return retVal;
 	}
 
 	/**
 	 * Gets the hl7TemplateId
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		return hl7TemplateId;
-	}
-
-	/**
-	 * Gets the hl7TemplateId1
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId1() {
-		return hl7TemplateId1;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getTemplateId() != null)
+			if (super.getTemplateId().size() > 0)
+				retVal = super.getTemplateId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -146,7 +122,7 @@ public class ChpalmEntrySpecimenReceived extends org.ehealth_connector.common.hl
 	 * The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CD value) {
-		hl7Code = value;
+		super.code = value;
 	}
 
 	/**
@@ -154,7 +130,7 @@ public class ChpalmEntrySpecimenReceived extends org.ehealth_connector.common.hl
 	 * Timestamp of the specimen reception at the laboratory. Minimum accuracy of the value: Date and time with hour and minute.
 	 */
 	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
-		hl7EffectiveTime = value;
+		super.effectiveTime = value;
 	}
 
 	/**
@@ -162,20 +138,15 @@ public class ChpalmEntrySpecimenReceived extends org.ehealth_connector.common.hl
 	 * The delivered identification of specimen at the customer MUST be declared. If specimen identification is not available, nullFlavor='ASKU' MUST be used. In this case @root and @extension are NOT ALLOWED.
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7Id = value;
+		super.getId().clear();
+		super.getId().add(value);
 	}
 
 	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId1
-	 */
-	public void setHl7TemplateId1(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId1 = value;
+		super.getTemplateId().clear();
+		super.getTemplateId().add(value);
 	}
 }

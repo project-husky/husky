@@ -23,7 +23,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -34,51 +33,11 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 public class ChpalmSectionLaboratoryReportItemCoded extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 
 	/**
-	 * This declares the laboratory discipline of the section.
-	 */
-	@XmlElement(name = "hl7:code")
-	private org.ehealth_connector.common.hl7cdar2.CE hl7Code;
-
-	/**
-	 * The narrative text in the text element of the section MUST be generated automatically from the information in this entry.
-	 */
-	@XmlElement(name = "hl7:entry")
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry hl7Entry;
-
-	/**
-	 * An ID for this section MAY be filled for traceability.
-	 */
-	@XmlElement(name = "hl7:id")
-	private org.ehealth_connector.common.hl7cdar2.II hl7Id;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
-
-	/**
-	 * The laboratory results MUST be automatically generated readable for humans in the text element of the section from the information in the Laboratory Data Processing Entry.
-	 */
-	@XmlElement(name = "hl7:text")
-	private org.ehealth_connector.common.hl7cdar2.StrucDocText hl7Text;
-
-	/**
-	 * The title of the chapter MUST be specified and correspond to the following text format, where &lt;human readable code&gt; contains the corresponding translation of the document LOINC code:
-	 * - [ge]: 'Laborbefund - &lt;human readable code&gt;'
-	 * - [fr]: 'Rapport de laboratoire - &lt;human readable code&gt;'
-	 * - [it]: 'Referto di laboratorio - &lt;human readable code&gt;'
-	 * - [en]: 'Laboratory Specialty - &lt;human readable code&gt;'The following translations of the LOINC codes given in XD-LAB MUST be used:<table><tbody><tr><th>LOINC Code</th><th>Text</th></tr><tr><td>18717-9</td><td>[ge]: Immunhämatologie[fr]: Immunohématologie[it]: Immunoematologia</td></tr><tr><td>18718-7</td><td>[ge]: Molekularbiologie[fr]: Biologie moléculaire[it]: Biologia molecolare</td></tr><tr><td>18719-5</td><td>[ge]: Chemie[fr]: Chimie[it]: Chimica</td></tr><tr><td>18720-3</td><td>[ge]: Gerinnung[fr]: Coagulation[it]: Coagulazione</td></tr><tr><td>18721-1</td><td>[ge]: Medikamente[fr]: Médicaments[it]: Medicamenti</td></tr><tr><td>18722-9</td><td>[ge]: Fertilität[fr]: Fertilité[it]: Fertilità</td></tr><tr><td>18723-7</td><td>[ge]: Hämatologie[fr]: Hématologie[it]: Ematologia</td></tr><tr><td>18724-5</td><td>[ge]: HLA[fr]: HLA[it]: HLA</td></tr><tr><td>18725-2</td><td>[ge]: Mikrobiologie[fr]: Microbiologie[it]: Microbiologia</td></tr><tr><td>18727-8</td><td>[ge]: Serologie[fr]: Sérologie[it]: Sierologia</td></tr><tr><td>18728-6</td><td>[ge]: Toxikologie[fr]: Toxicologie[it]: Tessicologia</td></tr><tr><td>18729-4</td><td>[ge]: Urin Untersuchungen[fr]: Analyses dans l'urine[it]: Analisi nelle urine</td></tr><tr><td>18767-4</td><td>[ge]: Blutgase[fr]: Gazométrie[it]: Gasometria</td></tr><tr><td>18768-2</td><td>[ge]: Differenzialblutbild[fr]: Répartition leucocytaire[it]: Differenziazione leucocitaria</td></tr><tr><td>18769-0</td><td>[ge]: Antibiogramme[fr]: Antibiogramme[it]: Antibiogramma</td></tr><tr><td>26435-8</td><td>[ge]: Molekulare Pathologie[fr]: Pathologie moleculaire[it]: Patologia moleculare</td></tr><tr><td>26436-6</td><td>[ge]: Laboruntersuchungen[fr]: Études de laboratoire[it]: Esami di laboratorio</td></tr><tr><td>26437-4</td><td>[ge]: Stimulationen[fr]: Stimulation[it]: Stimolazione</td></tr><tr><td>26438-2</td><td>[ge]: Zytologie[fr]: Cytologie[it]: Citologia</td></tr></tbody></table>
-	 */
-	@XmlElement(name = "hl7:title")
-	private org.ehealth_connector.common.hl7cdar2.ST hl7Title;
-
-	/**
 	 * Gets the hl7Code
 	 * This declares the laboratory discipline of the section.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7Code() {
-		return hl7Code;
+		return super.code;
 	}
 
 	/**
@@ -86,7 +45,11 @@ public class ChpalmSectionLaboratoryReportItemCoded extends org.ehealth_connecto
 	 * The narrative text in the text element of the section MUST be generated automatically from the information in this entry.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry getHl7Entry() {
-		return hl7Entry;
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry retVal = null;
+		if (super.getEntry() != null)
+			if (super.getEntry().size() > 0)
+				retVal = super.getEntry().get(0);
+		return retVal;
 	}
 
 	/**
@@ -94,21 +57,18 @@ public class ChpalmSectionLaboratoryReportItemCoded extends org.ehealth_connecto
 	 * An ID for this section MAY be filled for traceability.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
-		return hl7Id;
+		return super.id;
 	}
 
 	/**
 	 * Gets the hl7TemplateId
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		return hl7TemplateId;
-	}
-
-	/**
-	 * Gets the hl7TemplateId1
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId1() {
-		return hl7TemplateId1;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getTemplateId() != null)
+			if (super.getTemplateId().size() > 0)
+				retVal = super.getTemplateId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -116,7 +76,7 @@ public class ChpalmSectionLaboratoryReportItemCoded extends org.ehealth_connecto
 	 * The laboratory results MUST be automatically generated readable for humans in the text element of the section from the information in the Laboratory Data Processing Entry.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.StrucDocText getHl7Text() {
-		return hl7Text;
+		return super.text;
 	}
 
 	/**
@@ -128,7 +88,7 @@ public class ChpalmSectionLaboratoryReportItemCoded extends org.ehealth_connecto
 	 * - [en]: 'Laboratory Specialty - &lt;human readable code&gt;'The following translations of the LOINC codes given in XD-LAB MUST be used:<table><tbody><tr><th>LOINC Code</th><th>Text</th></tr><tr><td>18717-9</td><td>[ge]: Immunhämatologie[fr]: Immunohématologie[it]: Immunoematologia</td></tr><tr><td>18718-7</td><td>[ge]: Molekularbiologie[fr]: Biologie moléculaire[it]: Biologia molecolare</td></tr><tr><td>18719-5</td><td>[ge]: Chemie[fr]: Chimie[it]: Chimica</td></tr><tr><td>18720-3</td><td>[ge]: Gerinnung[fr]: Coagulation[it]: Coagulazione</td></tr><tr><td>18721-1</td><td>[ge]: Medikamente[fr]: Médicaments[it]: Medicamenti</td></tr><tr><td>18722-9</td><td>[ge]: Fertilität[fr]: Fertilité[it]: Fertilità</td></tr><tr><td>18723-7</td><td>[ge]: Hämatologie[fr]: Hématologie[it]: Ematologia</td></tr><tr><td>18724-5</td><td>[ge]: HLA[fr]: HLA[it]: HLA</td></tr><tr><td>18725-2</td><td>[ge]: Mikrobiologie[fr]: Microbiologie[it]: Microbiologia</td></tr><tr><td>18727-8</td><td>[ge]: Serologie[fr]: Sérologie[it]: Sierologia</td></tr><tr><td>18728-6</td><td>[ge]: Toxikologie[fr]: Toxicologie[it]: Tessicologia</td></tr><tr><td>18729-4</td><td>[ge]: Urin Untersuchungen[fr]: Analyses dans l'urine[it]: Analisi nelle urine</td></tr><tr><td>18767-4</td><td>[ge]: Blutgase[fr]: Gazométrie[it]: Gasometria</td></tr><tr><td>18768-2</td><td>[ge]: Differenzialblutbild[fr]: Répartition leucocytaire[it]: Differenziazione leucocitaria</td></tr><tr><td>18769-0</td><td>[ge]: Antibiogramme[fr]: Antibiogramme[it]: Antibiogramma</td></tr><tr><td>26435-8</td><td>[ge]: Molekulare Pathologie[fr]: Pathologie moleculaire[it]: Patologia moleculare</td></tr><tr><td>26436-6</td><td>[ge]: Laboruntersuchungen[fr]: Études de laboratoire[it]: Esami di laboratorio</td></tr><tr><td>26437-4</td><td>[ge]: Stimulationen[fr]: Stimulation[it]: Stimolazione</td></tr><tr><td>26438-2</td><td>[ge]: Zytologie[fr]: Cytologie[it]: Citologia</td></tr></tbody></table>
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ST getHl7Title() {
-		return hl7Title;
+		return super.title;
 	}
 
 	/**
@@ -182,7 +142,7 @@ public class ChpalmSectionLaboratoryReportItemCoded extends org.ehealth_connecto
 	 * This declares the laboratory discipline of the section.
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CE value) {
-		hl7Code = value;
+		super.code = value;
 	}
 
 	/**
@@ -190,7 +150,8 @@ public class ChpalmSectionLaboratoryReportItemCoded extends org.ehealth_connecto
 	 * The narrative text in the text element of the section MUST be generated automatically from the information in this entry.
 	 */
 	public void setHl7Entry(org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry value) {
-		hl7Entry = value;
+		super.getEntry().clear();
+		super.getEntry().add(value);
 	}
 
 	/**
@@ -198,21 +159,15 @@ public class ChpalmSectionLaboratoryReportItemCoded extends org.ehealth_connecto
 	 * An ID for this section MAY be filled for traceability.
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7Id = value;
+		super.id = value;
 	}
 
 	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId1
-	 */
-	public void setHl7TemplateId1(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId1 = value;
+		super.getTemplateId().clear();
+		super.getTemplateId().add(value);
 	}
 
 	/**
@@ -220,7 +175,7 @@ public class ChpalmSectionLaboratoryReportItemCoded extends org.ehealth_connecto
 	 * The laboratory results MUST be automatically generated readable for humans in the text element of the section from the information in the Laboratory Data Processing Entry.
 	 */
 	public void setHl7Text(org.ehealth_connector.common.hl7cdar2.StrucDocText value) {
-		hl7Text = value;
+		super.text = value;
 	}
 
 	/**
@@ -232,6 +187,6 @@ public class ChpalmSectionLaboratoryReportItemCoded extends org.ehealth_connecto
 	 * - [en]: 'Laboratory Specialty - &lt;human readable code&gt;'The following translations of the LOINC codes given in XD-LAB MUST be used:<table><tbody><tr><th>LOINC Code</th><th>Text</th></tr><tr><td>18717-9</td><td>[ge]: Immunhämatologie[fr]: Immunohématologie[it]: Immunoematologia</td></tr><tr><td>18718-7</td><td>[ge]: Molekularbiologie[fr]: Biologie moléculaire[it]: Biologia molecolare</td></tr><tr><td>18719-5</td><td>[ge]: Chemie[fr]: Chimie[it]: Chimica</td></tr><tr><td>18720-3</td><td>[ge]: Gerinnung[fr]: Coagulation[it]: Coagulazione</td></tr><tr><td>18721-1</td><td>[ge]: Medikamente[fr]: Médicaments[it]: Medicamenti</td></tr><tr><td>18722-9</td><td>[ge]: Fertilität[fr]: Fertilité[it]: Fertilità</td></tr><tr><td>18723-7</td><td>[ge]: Hämatologie[fr]: Hématologie[it]: Ematologia</td></tr><tr><td>18724-5</td><td>[ge]: HLA[fr]: HLA[it]: HLA</td></tr><tr><td>18725-2</td><td>[ge]: Mikrobiologie[fr]: Microbiologie[it]: Microbiologia</td></tr><tr><td>18727-8</td><td>[ge]: Serologie[fr]: Sérologie[it]: Sierologia</td></tr><tr><td>18728-6</td><td>[ge]: Toxikologie[fr]: Toxicologie[it]: Tessicologia</td></tr><tr><td>18729-4</td><td>[ge]: Urin Untersuchungen[fr]: Analyses dans l'urine[it]: Analisi nelle urine</td></tr><tr><td>18767-4</td><td>[ge]: Blutgase[fr]: Gazométrie[it]: Gasometria</td></tr><tr><td>18768-2</td><td>[ge]: Differenzialblutbild[fr]: Répartition leucocytaire[it]: Differenziazione leucocitaria</td></tr><tr><td>18769-0</td><td>[ge]: Antibiogramme[fr]: Antibiogramme[it]: Antibiogramma</td></tr><tr><td>26435-8</td><td>[ge]: Molekulare Pathologie[fr]: Pathologie moleculaire[it]: Patologia moleculare</td></tr><tr><td>26436-6</td><td>[ge]: Laboruntersuchungen[fr]: Études de laboratoire[it]: Esami di laboratorio</td></tr><tr><td>26437-4</td><td>[ge]: Stimulationen[fr]: Stimulation[it]: Stimolazione</td></tr><tr><td>26438-2</td><td>[ge]: Zytologie[fr]: Cytologie[it]: Citologia</td></tr></tbody></table>
 	 */
 	public void setHl7Title(org.ehealth_connector.common.hl7cdar2.ST value) {
-		hl7Title = value;
+		super.title = value;
 	}
 }

@@ -23,7 +23,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -34,27 +33,22 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 public class ChpalmEntryParticipantBodySpecimenCollection extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole {
 
 	/**
-	 * The specimen identification MUST be declared. If no specimen identification is available, nullFlavor='NA' MUST be used. In this case @root and @extension are NOT ALLOWED.
-	 */
-	@XmlElement(name = "hl7:id")
-	private org.ehealth_connector.common.hl7cdar2.II hl7Id;
-
-	@XmlElement(name = "hl7:playingEntity")
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040PlayingEntity hl7PlayingEntity;
-
-	/**
 	 * Gets the hl7Id
 	 * The specimen identification MUST be declared. If no specimen identification is available, nullFlavor='NA' MUST be used. In this case @root and @extension are NOT ALLOWED.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
-		return hl7Id;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getId() != null)
+			if (super.getId().size() > 0)
+				retVal = super.getId().get(0);
+		return retVal;
 	}
 
 	/**
 	 * Gets the hl7PlayingEntity
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040PlayingEntity getHl7PlayingEntity() {
-		return hl7PlayingEntity;
+		return super.playingEntity;
 	}
 
 	/**
@@ -108,13 +102,14 @@ public class ChpalmEntryParticipantBodySpecimenCollection extends org.ehealth_co
 	 * The specimen identification MUST be declared. If no specimen identification is available, nullFlavor='NA' MUST be used. In this case @root and @extension are NOT ALLOWED.
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7Id = value;
+		super.getId().clear();
+		super.getId().add(value);
 	}
 
 	/**
 	 * Sets the hl7PlayingEntity
 	 */
 	public void setHl7PlayingEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040PlayingEntity value) {
-		hl7PlayingEntity = value;
+		super.playingEntity = value;
 	}
 }

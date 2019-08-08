@@ -23,7 +23,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -35,24 +34,22 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
  */
 public class CdachHeaderOrderReference extends org.ehealth_connector.common.hl7cdar2.POCDMT000040InFulfillmentOf {
 
-	@XmlElement(name = "hl7:order")
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Order hl7Order;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
-
 	/**
 	 * Gets the hl7Order
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Order getHl7Order() {
-		return hl7Order;
+		return super.order;
 	}
 
 	/**
 	 * Gets the hl7TemplateId
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		return hl7TemplateId;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getTemplateId() != null)
+			if (super.getTemplateId().size() > 0)
+				retVal = super.getTemplateId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -105,13 +102,14 @@ public class CdachHeaderOrderReference extends org.ehealth_connector.common.hl7c
 	 * Sets the hl7Order
 	 */
 	public void setHl7Order(org.ehealth_connector.common.hl7cdar2.POCDMT000040Order value) {
-		hl7Order = value;
+		super.order = value;
 	}
 
 	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId = value;
+		super.getTemplateId().clear();
+		super.getTemplateId().add(value);
 	}
 }

@@ -18,13 +18,11 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -34,43 +32,11 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
  */
 public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
 
-	@XmlElement(name = "hl7:code")
-	private org.ehealth_connector.common.hl7cdar2.CE hl7Code;
-
-	@XmlElement(name = "hl7:component")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4> hl7Component;
-
-	@XmlElement(name = "hl7:effectiveTime")
-	private org.ehealth_connector.common.hl7cdar2.IVLTS hl7EffectiveTime;
-
-	/**
-	 * The ID for this item.
-	 */
-	@XmlElement(name = "hl7:id")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> hl7Id;
-
-	@XmlElement(name = "hl7:statusCode")
-	private org.ehealth_connector.common.hl7cdar2.CS hl7StatusCode;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId2;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId3;
-
 	/**
 	 * Adds a hl7Component
 	 */
 	public void addHl7Component(org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
-		if (hl7Component == null)
-			hl7Component = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4>();
-		hl7Component.add(value);
+		getComponent().add(value);
 	}
 
 	/**
@@ -78,16 +44,14 @@ public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.
 	 * The ID for this item.
 	 */
 	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		if (hl7Id == null)
-			hl7Id = new ArrayList<org.ehealth_connector.common.hl7cdar2.II>();
-		hl7Id.add(value);
+		getId().add(value);
 	}
 
 	/**
 	 * Adds a hl7Component
 	 */
 	public void clearHl7Component() {
-		hl7Component.clear();
+		getComponent().clear();
 	}
 
 	/**
@@ -95,56 +59,39 @@ public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.
 	 * The ID for this item.
 	 */
 	public void clearHl7Id() {
-		hl7Id.clear();
+		getId().clear();
 	}
 
 	/**
 	 * Gets the hl7Code
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7Code() {
-		return hl7Code;
+		return (org.ehealth_connector.common.hl7cdar2.CE) super.code;
 	}
 
 	/**
 	 * Gets the hl7EffectiveTime
 	 */
 	public org.ehealth_connector.common.hl7cdar2.IVLTS getHl7EffectiveTime() {
-		return hl7EffectiveTime;
+		return super.effectiveTime;
 	}
 
 	/**
 	 * Gets the hl7StatusCode
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
-		return hl7StatusCode;
+		return super.statusCode;
 	}
 
 	/**
 	 * Gets the hl7TemplateId
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		return hl7TemplateId;
-	}
-
-	/**
-	 * Gets the hl7TemplateId1
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId1() {
-		return hl7TemplateId1;
-	}
-
-	/**
-	 * Gets the hl7TemplateId2
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId2() {
-		return hl7TemplateId2;
-	}
-
-	/**
-	 * Gets the hl7TemplateId3
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId3() {
-		return hl7TemplateId3;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getTemplateId() != null)
+			if (super.getTemplateId().size() > 0)
+				retVal = super.getTemplateId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -197,48 +144,28 @@ public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.
 	 * Sets the hl7Code
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CE value) {
-		hl7Code = value;
+		super.code = value;
 	}
 
 	/**
 	 * Sets the hl7EffectiveTime
 	 */
 	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
-		hl7EffectiveTime = value;
+		super.effectiveTime = value;
 	}
 
 	/**
 	 * Sets the hl7StatusCode
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
-		hl7StatusCode = value;
+		super.statusCode = value;
 	}
 
 	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId1
-	 */
-	public void setHl7TemplateId1(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId1 = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId2
-	 */
-	public void setHl7TemplateId2(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId2 = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId3
-	 */
-	public void setHl7TemplateId3(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId3 = value;
+		super.getTemplateId().clear();
+		super.getTemplateId().add(value);
 	}
 }

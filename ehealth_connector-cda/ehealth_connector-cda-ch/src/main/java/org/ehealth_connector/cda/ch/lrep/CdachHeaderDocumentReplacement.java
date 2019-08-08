@@ -23,7 +23,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -39,27 +38,22 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 public class CdachHeaderDocumentReplacement extends org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedDocument {
 
 	/**
-	 * Relationship to the document that needs to be replaced.
-	 */
-	@XmlElement(name = "hl7:parentDocument")
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040ParentDocument hl7ParentDocument;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
-
-	/**
 	 * Gets the hl7ParentDocument
 	 * Relationship to the document that needs to be replaced.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040ParentDocument getHl7ParentDocument() {
-		return hl7ParentDocument;
+		return super.parentDocument;
 	}
 
 	/**
 	 * Gets the hl7TemplateId
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		return hl7TemplateId;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getTemplateId() != null)
+			if (super.getTemplateId().size() > 0)
+				retVal = super.getTemplateId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -113,13 +107,14 @@ public class CdachHeaderDocumentReplacement extends org.ehealth_connector.common
 	 * Relationship to the document that needs to be replaced.
 	 */
 	public void setHl7ParentDocument(org.ehealth_connector.common.hl7cdar2.POCDMT000040ParentDocument value) {
-		hl7ParentDocument = value;
+		super.parentDocument = value;
 	}
 
 	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId = value;
+		super.getTemplateId().clear();
+		super.getTemplateId().add(value);
 	}
 }

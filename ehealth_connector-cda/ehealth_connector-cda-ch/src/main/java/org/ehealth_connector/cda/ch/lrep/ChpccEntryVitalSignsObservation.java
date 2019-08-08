@@ -18,13 +18,11 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -35,99 +33,45 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 public class ChpccEntryVitalSignsObservation extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
 	/**
-	 * The reference to the text in the narrative section of the section MUST be specified.
-	 */
-	@XmlElement(name = "hl7:code")
-	private org.ehealth_connector.common.hl7cdar2.CD hl7Code;
-
-	@XmlElement(name = "hl7:effectiveTime")
-	private org.ehealth_connector.common.hl7cdar2.IVLTS hl7EffectiveTime;
-
-	/**
-	 * An ID for this item MAY be filled for traceability.
-	 */
-	@XmlElement(name = "hl7:id")
-	private org.ehealth_connector.common.hl7cdar2.II hl7Id;
-
-	@XmlElement(name = "hl7:interpretationCode")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.CE> hl7InterpretationCode;
-
-	@XmlElement(name = "hl7:methodCode")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.CE> hl7MethodCode;
-
-	/**
-	 * The status 'completed' indicates that the observation is final.
-	 */
-	@XmlElement(name = "hl7:statusCode")
-	private org.ehealth_connector.common.hl7cdar2.CS hl7StatusCode;
-
-	@XmlElement(name = "hl7:targetSiteCode")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.CD> hl7TargetSiteCode;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId2;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId3;
-
-	/**
-	 * According to table in [IHE PCC TF-2], 6.3.4.22.3
-	 */
-	@XmlElement(name = "hl7:value")
-	private org.ehealth_connector.common.hl7cdar2.ANY hl7Value;
-
-	/**
 	 * Adds a hl7InterpretationCode
 	 */
 	public void addHl7InterpretationCode(org.ehealth_connector.common.hl7cdar2.CE value) {
-		if (hl7InterpretationCode == null)
-			hl7InterpretationCode = new ArrayList<org.ehealth_connector.common.hl7cdar2.CE>();
-		hl7InterpretationCode.add(value);
+		getInterpretationCode().add(value);
 	}
 
 	/**
 	 * Adds a hl7MethodCode
 	 */
 	public void addHl7MethodCode(org.ehealth_connector.common.hl7cdar2.CE value) {
-		if (hl7MethodCode == null)
-			hl7MethodCode = new ArrayList<org.ehealth_connector.common.hl7cdar2.CE>();
-		hl7MethodCode.add(value);
+		getMethodCode().add(value);
 	}
 
 	/**
 	 * Adds a hl7TargetSiteCode
 	 */
 	public void addHl7TargetSiteCode(org.ehealth_connector.common.hl7cdar2.CD value) {
-		if (hl7TargetSiteCode == null)
-			hl7TargetSiteCode = new ArrayList<org.ehealth_connector.common.hl7cdar2.CD>();
-		hl7TargetSiteCode.add(value);
+		getTargetSiteCode().add(value);
 	}
 
 	/**
 	 * Adds a hl7InterpretationCode
 	 */
 	public void clearHl7InterpretationCode() {
-		hl7InterpretationCode.clear();
+		getInterpretationCode().clear();
 	}
 
 	/**
 	 * Adds a hl7MethodCode
 	 */
 	public void clearHl7MethodCode() {
-		hl7MethodCode.clear();
+		getMethodCode().clear();
 	}
 
 	/**
 	 * Adds a hl7TargetSiteCode
 	 */
 	public void clearHl7TargetSiteCode() {
-		hl7TargetSiteCode.clear();
+		getTargetSiteCode().clear();
 	}
 
 	/**
@@ -135,14 +79,14 @@ public class ChpccEntryVitalSignsObservation extends org.ehealth_connector.commo
 	 * The reference to the text in the narrative section of the section MUST be specified.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
-		return hl7Code;
+		return super.code;
 	}
 
 	/**
 	 * Gets the hl7EffectiveTime
 	 */
 	public org.ehealth_connector.common.hl7cdar2.IVLTS getHl7EffectiveTime() {
-		return hl7EffectiveTime;
+		return super.effectiveTime;
 	}
 
 	/**
@@ -150,7 +94,11 @@ public class ChpccEntryVitalSignsObservation extends org.ehealth_connector.commo
 	 * An ID for this item MAY be filled for traceability.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
-		return hl7Id;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getId() != null)
+			if (super.getId().size() > 0)
+				retVal = super.getId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -158,35 +106,18 @@ public class ChpccEntryVitalSignsObservation extends org.ehealth_connector.commo
 	 * The status 'completed' indicates that the observation is final.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
-		return hl7StatusCode;
+		return super.statusCode;
 	}
 
 	/**
 	 * Gets the hl7TemplateId
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		return hl7TemplateId;
-	}
-
-	/**
-	 * Gets the hl7TemplateId1
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId1() {
-		return hl7TemplateId1;
-	}
-
-	/**
-	 * Gets the hl7TemplateId2
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId2() {
-		return hl7TemplateId2;
-	}
-
-	/**
-	 * Gets the hl7TemplateId3
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId3() {
-		return hl7TemplateId3;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getTemplateId() != null)
+			if (super.getTemplateId().size() > 0)
+				retVal = super.getTemplateId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -194,7 +125,11 @@ public class ChpccEntryVitalSignsObservation extends org.ehealth_connector.commo
 	 * According to table in [IHE PCC TF-2], 6.3.4.22.3
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ANY getHl7Value() {
-		return hl7Value;
+		org.ehealth_connector.common.hl7cdar2.ANY retVal = null;
+		if (super.getValue() != null)
+			if (super.getValue().size() > 0)
+				retVal = (org.ehealth_connector.common.hl7cdar2.ANY) super.getValue().get(0);
+		return retVal;
 	}
 
 	/**
@@ -248,14 +183,14 @@ public class ChpccEntryVitalSignsObservation extends org.ehealth_connector.commo
 	 * The reference to the text in the narrative section of the section MUST be specified.
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CD value) {
-		hl7Code = value;
+		super.code = value;
 	}
 
 	/**
 	 * Sets the hl7EffectiveTime
 	 */
 	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
-		hl7EffectiveTime = value;
+		super.effectiveTime = value;
 	}
 
 	/**
@@ -263,7 +198,8 @@ public class ChpccEntryVitalSignsObservation extends org.ehealth_connector.commo
 	 * An ID for this item MAY be filled for traceability.
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7Id = value;
+		super.getId().clear();
+		super.getId().add(value);
 	}
 
 	/**
@@ -271,35 +207,15 @@ public class ChpccEntryVitalSignsObservation extends org.ehealth_connector.commo
 	 * The status 'completed' indicates that the observation is final.
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
-		hl7StatusCode = value;
+		super.statusCode = value;
 	}
 
 	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId1
-	 */
-	public void setHl7TemplateId1(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId1 = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId2
-	 */
-	public void setHl7TemplateId2(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId2 = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId3
-	 */
-	public void setHl7TemplateId3(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId3 = value;
+		super.getTemplateId().clear();
+		super.getTemplateId().add(value);
 	}
 
 	/**
@@ -307,6 +223,7 @@ public class ChpccEntryVitalSignsObservation extends org.ehealth_connector.commo
 	 * According to table in [IHE PCC TF-2], 6.3.4.22.3
 	 */
 	public void setHl7Value(org.ehealth_connector.common.hl7cdar2.ANY value) {
-		hl7Value = value;
+		super.getValue().clear();
+		super.getValue().add(value);
 	}
 }

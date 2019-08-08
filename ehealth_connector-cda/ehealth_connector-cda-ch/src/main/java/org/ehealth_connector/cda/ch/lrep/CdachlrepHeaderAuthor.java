@@ -23,7 +23,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -35,32 +34,11 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
  */
 public class CdachlrepHeaderAuthor extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Author {
 
-	@XmlElement(name = "hl7:assignedAuthor")
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedAuthor hl7AssignedAuthor;
-
-	/**
-	 * The functionCode MUST be taken from the Swiss EPR Value-Set for author roles. See FDHA Ordinance on the Electronic Patient Record (EPRO-FDHA), Appendix 3: Metadata, Section 2.1.If the desired functionCode is not available in the Swiss EPR Value-Set for author roles, nullFlavor='NAV' MUST be used. In this case, the originalText element MUST contain the description of the role.Translations to other vocabularies are allowed.
-	 */
-	@XmlElement(name = "hl7:functionCode")
-	private org.ehealth_connector.common.hl7cdar2.CE hl7FunctionCode;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
-
-	/**
-	 * Date and time of the laboratory report creation.
-	 */
-	@XmlElement(name = "hl7:time")
-	private org.ehealth_connector.common.hl7cdar2.TS hl7Time;
-
 	/**
 	 * Gets the hl7AssignedAuthor
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedAuthor getHl7AssignedAuthor() {
-		return hl7AssignedAuthor;
+		return super.assignedAuthor;
 	}
 
 	/**
@@ -68,21 +46,18 @@ public class CdachlrepHeaderAuthor extends org.ehealth_connector.common.hl7cdar2
 	 * The functionCode MUST be taken from the Swiss EPR Value-Set for author roles. See FDHA Ordinance on the Electronic Patient Record (EPRO-FDHA), Appendix 3: Metadata, Section 2.1.If the desired functionCode is not available in the Swiss EPR Value-Set for author roles, nullFlavor='NAV' MUST be used. In this case, the originalText element MUST contain the description of the role.Translations to other vocabularies are allowed.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7FunctionCode() {
-		return hl7FunctionCode;
+		return super.functionCode;
 	}
 
 	/**
 	 * Gets the hl7TemplateId
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		return hl7TemplateId;
-	}
-
-	/**
-	 * Gets the hl7TemplateId1
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId1() {
-		return hl7TemplateId1;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getTemplateId() != null)
+			if (super.getTemplateId().size() > 0)
+				retVal = super.getTemplateId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -90,7 +65,7 @@ public class CdachlrepHeaderAuthor extends org.ehealth_connector.common.hl7cdar2
 	 * Date and time of the laboratory report creation.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.TS getHl7Time() {
-		return hl7Time;
+		return super.time;
 	}
 
 	/**
@@ -143,7 +118,7 @@ public class CdachlrepHeaderAuthor extends org.ehealth_connector.common.hl7cdar2
 	 * Sets the hl7AssignedAuthor
 	 */
 	public void setHl7AssignedAuthor(org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedAuthor value) {
-		hl7AssignedAuthor = value;
+		super.assignedAuthor = value;
 	}
 
 	/**
@@ -151,21 +126,15 @@ public class CdachlrepHeaderAuthor extends org.ehealth_connector.common.hl7cdar2
 	 * The functionCode MUST be taken from the Swiss EPR Value-Set for author roles. See FDHA Ordinance on the Electronic Patient Record (EPRO-FDHA), Appendix 3: Metadata, Section 2.1.If the desired functionCode is not available in the Swiss EPR Value-Set for author roles, nullFlavor='NAV' MUST be used. In this case, the originalText element MUST contain the description of the role.Translations to other vocabularies are allowed.
 	 */
 	public void setHl7FunctionCode(org.ehealth_connector.common.hl7cdar2.CE value) {
-		hl7FunctionCode = value;
+		super.functionCode = value;
 	}
 
 	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId1
-	 */
-	public void setHl7TemplateId1(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId1 = value;
+		super.getTemplateId().clear();
+		super.getTemplateId().add(value);
 	}
 
 	/**
@@ -173,6 +142,6 @@ public class CdachlrepHeaderAuthor extends org.ehealth_connector.common.hl7cdar2
 	 * Date and time of the laboratory report creation.
 	 */
 	public void setHl7Time(org.ehealth_connector.common.hl7cdar2.TS value) {
-		hl7Time = value;
+		super.time = value;
 	}
 }

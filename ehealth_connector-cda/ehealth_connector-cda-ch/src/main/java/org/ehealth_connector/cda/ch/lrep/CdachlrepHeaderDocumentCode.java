@@ -23,7 +23,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -40,17 +39,15 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl7cdar2.CE {
 
 	/**
-	 * The translation to the Swiss EPR XDS.b metadata attribute typeCode.
-	 */
-	@XmlElement(name = "hl7:translation")
-	private org.ehealth_connector.common.hl7cdar2.CD hl7Translation;
-
-	/**
 	 * Gets the hl7Translation
 	 * The translation to the Swiss EPR XDS.b metadata attribute typeCode.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Translation() {
-		return hl7Translation;
+		org.ehealth_connector.common.hl7cdar2.CD retVal = null;
+		if (super.getTranslation() != null)
+			if (super.getTranslation().size() > 0)
+				retVal = super.getTranslation().get(0);
+		return retVal;
 	}
 
 	/**
@@ -104,6 +101,7 @@ public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl
 	 * The translation to the Swiss EPR XDS.b metadata attribute typeCode.
 	 */
 	public void setHl7Translation(org.ehealth_connector.common.hl7cdar2.CD value) {
-		hl7Translation = value;
+		super.getTranslation().clear();
+		super.getTranslation().add(value);
 	}
 }

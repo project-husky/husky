@@ -23,7 +23,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -34,38 +33,11 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 public class ChpalmEntryPreviousObservation extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
 	/**
-	 * MUST contain the same code as the current laboratory result.
-	 */
-	@XmlElement(name = "hl7:code")
-	private org.ehealth_connector.common.hl7cdar2.CD hl7Code;
-
-	/**
-	 * Timestamp of the findings (physiologically relevant time) of this previous result. Accuracy of the value: Date and time with hour and minute.
-	 */
-	@XmlElement(name = "hl7:effectiveTime")
-	private org.ehealth_connector.common.hl7cdar2.IVLTS hl7EffectiveTime;
-
-	/**
-	 * MUST be set to 'completed'.
-	 */
-	@XmlElement(name = "hl7:statusCode")
-	private org.ehealth_connector.common.hl7cdar2.CS hl7StatusCode;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
-
-	/**
-	 * The previous result obtained for this test.
-	 */
-	@XmlElement(name = "hl7:value")
-	private org.ehealth_connector.common.hl7cdar2.ANY hl7Value;
-
-	/**
 	 * Gets the hl7Code
 	 * MUST contain the same code as the current laboratory result.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
-		return hl7Code;
+		return super.code;
 	}
 
 	/**
@@ -73,7 +45,7 @@ public class ChpalmEntryPreviousObservation extends org.ehealth_connector.common
 	 * Timestamp of the findings (physiologically relevant time) of this previous result. Accuracy of the value: Date and time with hour and minute.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.IVLTS getHl7EffectiveTime() {
-		return hl7EffectiveTime;
+		return super.effectiveTime;
 	}
 
 	/**
@@ -81,14 +53,18 @@ public class ChpalmEntryPreviousObservation extends org.ehealth_connector.common
 	 * MUST be set to 'completed'.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
-		return hl7StatusCode;
+		return super.statusCode;
 	}
 
 	/**
 	 * Gets the hl7TemplateId
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		return hl7TemplateId;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getTemplateId() != null)
+			if (super.getTemplateId().size() > 0)
+				retVal = super.getTemplateId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -96,7 +72,11 @@ public class ChpalmEntryPreviousObservation extends org.ehealth_connector.common
 	 * The previous result obtained for this test.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ANY getHl7Value() {
-		return hl7Value;
+		org.ehealth_connector.common.hl7cdar2.ANY retVal = null;
+		if (super.getValue() != null)
+			if (super.getValue().size() > 0)
+				retVal = (org.ehealth_connector.common.hl7cdar2.ANY) super.getValue().get(0);
+		return retVal;
 	}
 
 	/**
@@ -150,7 +130,7 @@ public class ChpalmEntryPreviousObservation extends org.ehealth_connector.common
 	 * MUST contain the same code as the current laboratory result.
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CD value) {
-		hl7Code = value;
+		super.code = value;
 	}
 
 	/**
@@ -158,7 +138,7 @@ public class ChpalmEntryPreviousObservation extends org.ehealth_connector.common
 	 * Timestamp of the findings (physiologically relevant time) of this previous result. Accuracy of the value: Date and time with hour and minute.
 	 */
 	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
-		hl7EffectiveTime = value;
+		super.effectiveTime = value;
 	}
 
 	/**
@@ -166,14 +146,15 @@ public class ChpalmEntryPreviousObservation extends org.ehealth_connector.common
 	 * MUST be set to 'completed'.
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
-		hl7StatusCode = value;
+		super.statusCode = value;
 	}
 
 	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId = value;
+		super.getTemplateId().clear();
+		super.getTemplateId().add(value);
 	}
 
 	/**
@@ -181,6 +162,7 @@ public class ChpalmEntryPreviousObservation extends org.ehealth_connector.common
 	 * The previous result obtained for this test.
 	 */
 	public void setHl7Value(org.ehealth_connector.common.hl7cdar2.ANY value) {
-		hl7Value = value;
+		super.getValue().clear();
+		super.getValue().add(value);
 	}
 }

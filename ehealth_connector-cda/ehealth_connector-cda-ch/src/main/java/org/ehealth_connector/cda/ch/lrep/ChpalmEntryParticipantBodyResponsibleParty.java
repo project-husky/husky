@@ -18,13 +18,11 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -37,31 +35,11 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 public class ChpalmEntryParticipantBodyResponsibleParty extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole {
 
 	/**
-	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
-	 */
-	@XmlElement(name = "hl7:addr")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.AD> hl7Addr;
-
-	/**
-	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
-	 */
-	@XmlElement(name = "hl7:playingEntity")
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040PlayingEntity hl7PlayingEntity;
-
-	/**
-	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
-	 */
-	@XmlElement(name = "hl7:telecom")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.TEL> hl7Telecom;
-
-	/**
 	 * Adds a hl7Addr
 	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
 	 */
 	public void addHl7Addr(org.ehealth_connector.common.hl7cdar2.AD value) {
-		if (hl7Addr == null)
-			hl7Addr = new ArrayList<org.ehealth_connector.common.hl7cdar2.AD>();
-		hl7Addr.add(value);
+		getAddr().add(value);
 	}
 
 	/**
@@ -69,9 +47,7 @@ public class ChpalmEntryParticipantBodyResponsibleParty extends org.ehealth_conn
 	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
 	 */
 	public void addHl7Telecom(org.ehealth_connector.common.hl7cdar2.TEL value) {
-		if (hl7Telecom == null)
-			hl7Telecom = new ArrayList<org.ehealth_connector.common.hl7cdar2.TEL>();
-		hl7Telecom.add(value);
+		getTelecom().add(value);
 	}
 
 	/**
@@ -79,7 +55,7 @@ public class ChpalmEntryParticipantBodyResponsibleParty extends org.ehealth_conn
 	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
 	 */
 	public void clearHl7Addr() {
-		hl7Addr.clear();
+		getAddr().clear();
 	}
 
 	/**
@@ -87,7 +63,7 @@ public class ChpalmEntryParticipantBodyResponsibleParty extends org.ehealth_conn
 	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
 	 */
 	public void clearHl7Telecom() {
-		hl7Telecom.clear();
+		getTelecom().clear();
 	}
 
 	/**
@@ -95,7 +71,7 @@ public class ChpalmEntryParticipantBodyResponsibleParty extends org.ehealth_conn
 	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040PlayingEntity getHl7PlayingEntity() {
-		return hl7PlayingEntity;
+		return super.playingEntity;
 	}
 
 	/**
@@ -149,6 +125,6 @@ public class ChpalmEntryParticipantBodyResponsibleParty extends org.ehealth_conn
 	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
 	 */
 	public void setHl7PlayingEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040PlayingEntity value) {
-		hl7PlayingEntity = value;
+		super.playingEntity = value;
 	}
 }

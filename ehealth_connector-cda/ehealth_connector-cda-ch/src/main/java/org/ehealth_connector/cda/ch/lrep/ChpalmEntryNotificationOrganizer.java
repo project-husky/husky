@@ -18,13 +18,11 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -34,73 +32,18 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
  */
 public class ChpalmEntryNotificationOrganizer extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
 
-	@XmlElement(name = "hl7:component")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4> hl7Component;
-
-	@XmlElement(name = "hl7:component")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4> hl7Component1;
-
-	@XmlElement(name = "hl7:component")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4> hl7Component2;
-
-	/**
-	 * Contains at least one notification.
-	 */
-	@XmlElement(name = "hl7:statusCode")
-	private org.ehealth_connector.common.hl7cdar2.CS hl7StatusCode;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
-
 	/**
 	 * Adds a hl7Component
 	 */
 	public void addHl7Component(org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
-		if (hl7Component == null)
-			hl7Component = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4>();
-		hl7Component.add(value);
-	}
-
-	/**
-	 * Adds a hl7Component1
-	 */
-	public void addHl7Component1(org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
-		if (hl7Component1 == null)
-			hl7Component1 = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4>();
-		hl7Component1.add(value);
-	}
-
-	/**
-	 * Adds a hl7Component2
-	 */
-	public void addHl7Component2(org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
-		if (hl7Component2 == null)
-			hl7Component2 = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4>();
-		hl7Component2.add(value);
+		getComponent().add(value);
 	}
 
 	/**
 	 * Adds a hl7Component
 	 */
 	public void clearHl7Component() {
-		hl7Component.clear();
-	}
-
-	/**
-	 * Adds a hl7Component1
-	 */
-	public void clearHl7Component1() {
-		hl7Component1.clear();
-	}
-
-	/**
-	 * Adds a hl7Component2
-	 */
-	public void clearHl7Component2() {
-		hl7Component2.clear();
+		getComponent().clear();
 	}
 
 	/**
@@ -108,21 +51,18 @@ public class ChpalmEntryNotificationOrganizer extends org.ehealth_connector.comm
 	 * Contains at least one notification.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
-		return hl7StatusCode;
+		return super.statusCode;
 	}
 
 	/**
 	 * Gets the hl7TemplateId
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		return hl7TemplateId;
-	}
-
-	/**
-	 * Gets the hl7TemplateId1
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId1() {
-		return hl7TemplateId1;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getTemplateId() != null)
+			if (super.getTemplateId().size() > 0)
+				retVal = super.getTemplateId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -176,20 +116,14 @@ public class ChpalmEntryNotificationOrganizer extends org.ehealth_connector.comm
 	 * Contains at least one notification.
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
-		hl7StatusCode = value;
+		super.statusCode = value;
 	}
 
 	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId1
-	 */
-	public void setHl7TemplateId1(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId1 = value;
+		super.getTemplateId().clear();
+		super.getTemplateId().add(value);
 	}
 }

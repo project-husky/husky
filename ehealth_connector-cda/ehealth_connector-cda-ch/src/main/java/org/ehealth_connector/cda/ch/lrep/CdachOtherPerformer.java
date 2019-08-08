@@ -23,7 +23,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -35,40 +34,22 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
  */
 public class CdachOtherPerformer extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer1 {
 
-	@XmlElement(name = "hl7:assignedEntity")
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity hl7AssignedEntity;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
-
-	/**
-	 * Duration of the performance.
-	 */
-	@XmlElement(name = "hl7:time")
-	private org.ehealth_connector.common.hl7cdar2.IVLTS hl7Time;
-
 	/**
 	 * Gets the hl7AssignedEntity
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity getHl7AssignedEntity() {
-		return hl7AssignedEntity;
+		return super.assignedEntity;
 	}
 
 	/**
 	 * Gets the hl7TemplateId
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		return hl7TemplateId;
-	}
-
-	/**
-	 * Gets the hl7TemplateId1
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId1() {
-		return hl7TemplateId1;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getTemplateId() != null)
+			if (super.getTemplateId().size() > 0)
+				retVal = super.getTemplateId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -76,7 +57,7 @@ public class CdachOtherPerformer extends org.ehealth_connector.common.hl7cdar2.P
 	 * Duration of the performance.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.IVLTS getHl7Time() {
-		return hl7Time;
+		return super.time;
 	}
 
 	/**
@@ -129,21 +110,15 @@ public class CdachOtherPerformer extends org.ehealth_connector.common.hl7cdar2.P
 	 * Sets the hl7AssignedEntity
 	 */
 	public void setHl7AssignedEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity value) {
-		hl7AssignedEntity = value;
+		super.assignedEntity = value;
 	}
 
 	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId1
-	 */
-	public void setHl7TemplateId1(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId1 = value;
+		super.getTemplateId().clear();
+		super.getTemplateId().add(value);
 	}
 
 	/**
@@ -151,6 +126,6 @@ public class CdachOtherPerformer extends org.ehealth_connector.common.hl7cdar2.P
 	 * Duration of the performance.
 	 */
 	public void setHl7Time(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
-		hl7Time = value;
+		super.time = value;
 	}
 }

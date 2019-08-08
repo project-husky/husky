@@ -18,13 +18,11 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -35,93 +33,6 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
 
 	/**
-	 * This CAN be used to identify other parties:
-	 * - Who has verified the result (AUTHEN).
-	 * - Which external laboratory has delivered the result (RESP).
-	 * - Which device (analyzer) was used to determine the result (DEV).
-	 */
-	@XmlElement(name = "hl7:author")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Author> hl7Author;
-
-	/**
-	 * IF the results in this result group are associated to a codable group (e.g., LOINC Code 55429-5 for 'short blood count panel'), then the code SHOULD be specified. The code system is not further specified. LOINC (2.16.840.1.113883.6.1) or SNOMED CT (2.16.840.1.113883.6.96) codes or values from the HL7 vocabulary ObservationType (2.16.840.1.113883.1.11.16226) SHOULD be used.IF this result group contains any other results, then the code SHOULD be omitted.
-	 */
-	@XmlElement(name = "hl7:code")
-	private org.ehealth_connector.common.hl7cdar2.CD hl7Code;
-
-	@XmlElement(name = "hl7:component")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4> hl7Component;
-
-	@XmlElement(name = "hl7:component")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4> hl7Component1;
-
-	@XmlElement(name = "hl7:component")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4> hl7Component2;
-
-	@XmlElement(name = "hl7:component")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4> hl7Component3;
-
-	/**
-	 * Timestamp or period of findings (physiologically relevant period) for all results in this result group.
-	 */
-	@XmlElement(name = "hl7:effectiveTime")
-	private org.ehealth_connector.common.hl7cdar2.IVLTS hl7EffectiveTime;
-
-	/**
-	 * An ID for this item MAY be filled for traceability.
-	 */
-	@XmlElement(name = "hl7:id")
-	private org.ehealth_connector.common.hl7cdar2.II hl7Id;
-
-	/**
-	 * Who has verified the result (AUTHEN). This information supersedes any information recorded at higher level.
-	 */
-	@XmlElement(name = "hl7:participant")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2> hl7Participant;
-
-	/**
-	 * Which external laboratory has delivered the result (RESP). This information supersedes any information recorded at higher level.
-	 */
-	@XmlElement(name = "hl7:participant")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2> hl7Participant1;
-
-	/**
-	 * Which device (analyzer) was used to determine the result (DEV). This information supersedes any information recorded at higher level.
-	 */
-	@XmlElement(name = "hl7:participant")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2> hl7Participant2;
-
-	/**
-	 * This CAN be used to indicate who has performed the test. This information supersedes any information recorded at higher level.
-	 */
-	@XmlElement(name = "hl7:performer")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer2> hl7Performer;
-
-	/**
-	 * This CAN be used to make reference to an external document.
-	 */
-	@XmlElement(name = "hl7:reference")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference> hl7Reference;
-
-	/**
-	 * The status 'completed' means that all expected results for this results group are present and in a final state.The status 'aborted' means that the examinations had to be aborted. Some results MAY be available.
-	 */
-	@XmlElement(name = "hl7:statusCode")
-	private org.ehealth_connector.common.hl7cdar2.CS hl7StatusCode;
-
-	@XmlElement(name = "hl7:subject")
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Subject hl7Subject;
-
-	@XmlElement(name = "hl7:subject")
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Subject hl7Subject1;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
-
-	/**
 	 * Adds a hl7Author
 	 * This CAN be used to identify other parties:
 	 * - Who has verified the result (AUTHEN).
@@ -129,45 +40,14 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	 * - Which device (analyzer) was used to determine the result (DEV).
 	 */
 	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
-		if (hl7Author == null)
-			hl7Author = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Author>();
-		hl7Author.add(value);
+		getAuthor().add(value);
 	}
 
 	/**
 	 * Adds a hl7Component
 	 */
 	public void addHl7Component(org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
-		if (hl7Component == null)
-			hl7Component = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4>();
-		hl7Component.add(value);
-	}
-
-	/**
-	 * Adds a hl7Component1
-	 */
-	public void addHl7Component1(org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
-		if (hl7Component1 == null)
-			hl7Component1 = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4>();
-		hl7Component1.add(value);
-	}
-
-	/**
-	 * Adds a hl7Component2
-	 */
-	public void addHl7Component2(org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
-		if (hl7Component2 == null)
-			hl7Component2 = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4>();
-		hl7Component2.add(value);
-	}
-
-	/**
-	 * Adds a hl7Component3
-	 */
-	public void addHl7Component3(org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
-		if (hl7Component3 == null)
-			hl7Component3 = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4>();
-		hl7Component3.add(value);
+		getComponent().add(value);
 	}
 
 	/**
@@ -175,29 +55,7 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	 * Who has verified the result (AUTHEN). This information supersedes any information recorded at higher level.
 	 */
 	public void addHl7Participant(org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 value) {
-		if (hl7Participant == null)
-			hl7Participant = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2>();
-		hl7Participant.add(value);
-	}
-
-	/**
-	 * Adds a hl7Participant1
-	 * Which external laboratory has delivered the result (RESP). This information supersedes any information recorded at higher level.
-	 */
-	public void addHl7Participant1(org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 value) {
-		if (hl7Participant1 == null)
-			hl7Participant1 = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2>();
-		hl7Participant1.add(value);
-	}
-
-	/**
-	 * Adds a hl7Participant2
-	 * Which device (analyzer) was used to determine the result (DEV). This information supersedes any information recorded at higher level.
-	 */
-	public void addHl7Participant2(org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 value) {
-		if (hl7Participant2 == null)
-			hl7Participant2 = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2>();
-		hl7Participant2.add(value);
+		getParticipant().add(value);
 	}
 
 	/**
@@ -205,9 +63,7 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	 * This CAN be used to indicate who has performed the test. This information supersedes any information recorded at higher level.
 	 */
 	public void addHl7Performer(org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer2 value) {
-		if (hl7Performer == null)
-			hl7Performer = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer2>();
-		hl7Performer.add(value);
+		getPerformer().add(value);
 	}
 
 	/**
@@ -215,9 +71,7 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	 * This CAN be used to make reference to an external document.
 	 */
 	public void addHl7Reference(org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference value) {
-		if (hl7Reference == null)
-			hl7Reference = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference>();
-		hl7Reference.add(value);
+		getReference().add(value);
 	}
 
 	/**
@@ -228,35 +82,14 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	 * - Which device (analyzer) was used to determine the result (DEV).
 	 */
 	public void clearHl7Author() {
-		hl7Author.clear();
+		getAuthor().clear();
 	}
 
 	/**
 	 * Adds a hl7Component
 	 */
 	public void clearHl7Component() {
-		hl7Component.clear();
-	}
-
-	/**
-	 * Adds a hl7Component1
-	 */
-	public void clearHl7Component1() {
-		hl7Component1.clear();
-	}
-
-	/**
-	 * Adds a hl7Component2
-	 */
-	public void clearHl7Component2() {
-		hl7Component2.clear();
-	}
-
-	/**
-	 * Adds a hl7Component3
-	 */
-	public void clearHl7Component3() {
-		hl7Component3.clear();
+		getComponent().clear();
 	}
 
 	/**
@@ -264,23 +97,7 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	 * Who has verified the result (AUTHEN). This information supersedes any information recorded at higher level.
 	 */
 	public void clearHl7Participant() {
-		hl7Participant.clear();
-	}
-
-	/**
-	 * Adds a hl7Participant1
-	 * Which external laboratory has delivered the result (RESP). This information supersedes any information recorded at higher level.
-	 */
-	public void clearHl7Participant1() {
-		hl7Participant1.clear();
-	}
-
-	/**
-	 * Adds a hl7Participant2
-	 * Which device (analyzer) was used to determine the result (DEV). This information supersedes any information recorded at higher level.
-	 */
-	public void clearHl7Participant2() {
-		hl7Participant2.clear();
+		getParticipant().clear();
 	}
 
 	/**
@@ -288,7 +105,7 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	 * This CAN be used to indicate who has performed the test. This information supersedes any information recorded at higher level.
 	 */
 	public void clearHl7Performer() {
-		hl7Performer.clear();
+		getPerformer().clear();
 	}
 
 	/**
@@ -296,7 +113,7 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	 * This CAN be used to make reference to an external document.
 	 */
 	public void clearHl7Reference() {
-		hl7Reference.clear();
+		getReference().clear();
 	}
 
 	/**
@@ -304,7 +121,7 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	 * IF the results in this result group are associated to a codable group (e.g., LOINC Code 55429-5 for 'short blood count panel'), then the code SHOULD be specified. The code system is not further specified. LOINC (2.16.840.1.113883.6.1) or SNOMED CT (2.16.840.1.113883.6.96) codes or values from the HL7 vocabulary ObservationType (2.16.840.1.113883.1.11.16226) SHOULD be used.IF this result group contains any other results, then the code SHOULD be omitted.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
-		return hl7Code;
+		return super.code;
 	}
 
 	/**
@@ -312,7 +129,7 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	 * Timestamp or period of findings (physiologically relevant period) for all results in this result group.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.IVLTS getHl7EffectiveTime() {
-		return hl7EffectiveTime;
+		return super.effectiveTime;
 	}
 
 	/**
@@ -320,7 +137,11 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	 * An ID for this item MAY be filled for traceability.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
-		return hl7Id;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getId() != null)
+			if (super.getId().size() > 0)
+				retVal = super.getId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -328,35 +149,25 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	 * The status 'completed' means that all expected results for this results group are present and in a final state.The status 'aborted' means that the examinations had to be aborted. Some results MAY be available.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
-		return hl7StatusCode;
+		return super.statusCode;
 	}
 
 	/**
 	 * Gets the hl7Subject
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Subject getHl7Subject() {
-		return hl7Subject;
-	}
-
-	/**
-	 * Gets the hl7Subject1
-	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Subject getHl7Subject1() {
-		return hl7Subject1;
+		return super.subject;
 	}
 
 	/**
 	 * Gets the hl7TemplateId
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		return hl7TemplateId;
-	}
-
-	/**
-	 * Gets the hl7TemplateId1
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId1() {
-		return hl7TemplateId1;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getTemplateId() != null)
+			if (super.getTemplateId().size() > 0)
+				retVal = super.getTemplateId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -410,7 +221,7 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	 * IF the results in this result group are associated to a codable group (e.g., LOINC Code 55429-5 for 'short blood count panel'), then the code SHOULD be specified. The code system is not further specified. LOINC (2.16.840.1.113883.6.1) or SNOMED CT (2.16.840.1.113883.6.96) codes or values from the HL7 vocabulary ObservationType (2.16.840.1.113883.1.11.16226) SHOULD be used.IF this result group contains any other results, then the code SHOULD be omitted.
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CD value) {
-		hl7Code = value;
+		super.code = value;
 	}
 
 	/**
@@ -418,7 +229,7 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	 * Timestamp or period of findings (physiologically relevant period) for all results in this result group.
 	 */
 	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
-		hl7EffectiveTime = value;
+		super.effectiveTime = value;
 	}
 
 	/**
@@ -426,7 +237,8 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	 * An ID for this item MAY be filled for traceability.
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7Id = value;
+		super.getId().clear();
+		super.getId().add(value);
 	}
 
 	/**
@@ -434,34 +246,21 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	 * The status 'completed' means that all expected results for this results group are present and in a final state.The status 'aborted' means that the examinations had to be aborted. Some results MAY be available.
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
-		hl7StatusCode = value;
+		super.statusCode = value;
 	}
 
 	/**
 	 * Sets the hl7Subject
 	 */
 	public void setHl7Subject(org.ehealth_connector.common.hl7cdar2.POCDMT000040Subject value) {
-		hl7Subject = value;
-	}
-
-	/**
-	 * Sets the hl7Subject1
-	 */
-	public void setHl7Subject1(org.ehealth_connector.common.hl7cdar2.POCDMT000040Subject value) {
-		hl7Subject1 = value;
+		super.subject = value;
 	}
 
 	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId1
-	 */
-	public void setHl7TemplateId1(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId1 = value;
+		super.getTemplateId().clear();
+		super.getTemplateId().add(value);
 	}
 }

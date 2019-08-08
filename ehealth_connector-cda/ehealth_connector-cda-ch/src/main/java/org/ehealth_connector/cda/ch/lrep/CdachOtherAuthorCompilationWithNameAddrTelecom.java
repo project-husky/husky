@@ -18,13 +18,11 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -37,19 +35,11 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 public class CdachOtherAuthorCompilationWithNameAddrTelecom extends org.ehealth_connector.common.hl7cdar2.CE {
 
 	/**
-	 * A translation of the code to another coding system (e.g. ISCO-08: 2.16.840.1.113883.2.9.6.2.7)
-	 */
-	@XmlElement(name = "hl7:translation")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.CD> hl7Translation;
-
-	/**
 	 * Adds a hl7Translation
 	 * A translation of the code to another coding system (e.g. ISCO-08: 2.16.840.1.113883.2.9.6.2.7)
 	 */
 	public void addHl7Translation(org.ehealth_connector.common.hl7cdar2.CD value) {
-		if (hl7Translation == null)
-			hl7Translation = new ArrayList<org.ehealth_connector.common.hl7cdar2.CD>();
-		hl7Translation.add(value);
+		getTranslation().add(value);
 	}
 
 	/**
@@ -57,7 +47,7 @@ public class CdachOtherAuthorCompilationWithNameAddrTelecom extends org.ehealth_
 	 * A translation of the code to another coding system (e.g. ISCO-08: 2.16.840.1.113883.2.9.6.2.7)
 	 */
 	public void clearHl7Translation() {
-		hl7Translation.clear();
+		getTranslation().clear();
 	}
 
 	/**

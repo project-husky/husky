@@ -18,13 +18,11 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
@@ -37,46 +35,11 @@ import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
 
 	/**
-	 * The author of the comment MAY be specified.
-	 */
-	@XmlElement(name = "hl7:author")
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Author> hl7Author;
-
-	/**
-	 * The reference to the text in the narrative section of the section MUST be specified.
-	 */
-	@XmlElement(name = "hl7:code")
-	private org.ehealth_connector.common.hl7cdar2.CD hl7Code;
-
-	/**
-	 * An ID for this item MAY be filled for traceability.
-	 */
-	@XmlElement(name = "hl7:id")
-	private org.ehealth_connector.common.hl7cdar2.II hl7Id;
-
-	/**
-	 * The status 'completed' indicates that the comment is final.
-	 */
-	@XmlElement(name = "hl7:statusCode")
-	private org.ehealth_connector.common.hl7cdar2.CS hl7StatusCode;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId1;
-
-	@XmlElement(name = "hl7:templateId")
-	private org.ehealth_connector.common.hl7cdar2.II hl7TemplateId2;
-
-	/**
 	 * Adds a hl7Author
 	 * The author of the comment MAY be specified.
 	 */
 	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
-		if (hl7Author == null)
-			hl7Author = new ArrayList<org.ehealth_connector.common.hl7cdar2.POCDMT000040Author>();
-		hl7Author.add(value);
+		getAuthor().add(value);
 	}
 
 	/**
@@ -84,7 +47,7 @@ public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.h
 	 * The author of the comment MAY be specified.
 	 */
 	public void clearHl7Author() {
-		hl7Author.clear();
+		getAuthor().clear();
 	}
 
 	/**
@@ -92,7 +55,7 @@ public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.h
 	 * The reference to the text in the narrative section of the section MUST be specified.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
-		return hl7Code;
+		return super.code;
 	}
 
 	/**
@@ -100,7 +63,11 @@ public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.h
 	 * An ID for this item MAY be filled for traceability.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
-		return hl7Id;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getId() != null)
+			if (super.getId().size() > 0)
+				retVal = super.getId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -108,28 +75,18 @@ public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.h
 	 * The status 'completed' indicates that the comment is final.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
-		return hl7StatusCode;
+		return super.statusCode;
 	}
 
 	/**
 	 * Gets the hl7TemplateId
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		return hl7TemplateId;
-	}
-
-	/**
-	 * Gets the hl7TemplateId1
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId1() {
-		return hl7TemplateId1;
-	}
-
-	/**
-	 * Gets the hl7TemplateId2
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId2() {
-		return hl7TemplateId2;
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (super.getTemplateId() != null)
+			if (super.getTemplateId().size() > 0)
+				retVal = super.getTemplateId().get(0);
+		return retVal;
 	}
 
 	/**
@@ -183,7 +140,7 @@ public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.h
 	 * The reference to the text in the narrative section of the section MUST be specified.
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CD value) {
-		hl7Code = value;
+		super.code = value;
 	}
 
 	/**
@@ -191,7 +148,8 @@ public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.h
 	 * An ID for this item MAY be filled for traceability.
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7Id = value;
+		super.getId().clear();
+		super.getId().add(value);
 	}
 
 	/**
@@ -199,27 +157,14 @@ public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.h
 	 * The status 'completed' indicates that the comment is final.
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
-		hl7StatusCode = value;
+		super.statusCode = value;
 	}
 
 	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId1
-	 */
-	public void setHl7TemplateId1(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId1 = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId2
-	 */
-	public void setHl7TemplateId2(org.ehealth_connector.common.hl7cdar2.II value) {
-		hl7TemplateId2 = value;
+		super.getTemplateId().clear();
+		super.getTemplateId().add(value);
 	}
 }
