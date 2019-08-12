@@ -27,17 +27,17 @@ import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.4
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.118
  * Template description: Each chapter (Laboratory Speciality Section and Laboratory Report Item Section) MUST contain exactly one findings group (CDA Body Laboratory Report Data Processing Entry).
  */
-public class ChpalmEntryLaboratoryReportDataProcessingEntry extends org.ehealth_connector.common.hl7cdar2.II {
+public class CdachlrepEntryLaboratoryReportDataProcessingEntry extends org.ehealth_connector.common.hl7cdar2.II {
 
 	/**
 	 * Loads the CDA document from file.
 	 * @param inputFileName the full path and filename of the sourcefile.
 	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
 	 */
-	public static ChpalmEntryLaboratoryReportDataProcessingEntry loadFromFile(String inputFileName) throws JAXBException, IOException {
+	public static CdachlrepEntryLaboratoryReportDataProcessingEntry loadFromFile(String inputFileName) throws JAXBException, IOException {
 		return loadFromFile(new File(inputFileName));
 	}
 
@@ -46,12 +46,12 @@ public class ChpalmEntryLaboratoryReportDataProcessingEntry extends org.ehealth_
 	 * @param inputFile the source file.
 	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
 	 */
-	public static ChpalmEntryLaboratoryReportDataProcessingEntry loadFromFile(File inputFile) throws JAXBException, IOException {
-		ChpalmEntryLaboratoryReportDataProcessingEntry retVal;
-		JAXBContext context = JAXBContext.newInstance(ChpalmEntryLaboratoryReportDataProcessingEntry.class);
+	public static CdachlrepEntryLaboratoryReportDataProcessingEntry loadFromFile(File inputFile) throws JAXBException, IOException {
+		CdachlrepEntryLaboratoryReportDataProcessingEntry retVal;
+		JAXBContext context = JAXBContext.newInstance(CdachlrepEntryLaboratoryReportDataProcessingEntry.class);
 		Unmarshaller mar = context.createUnmarshaller();
 		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<ChpalmEntryLaboratoryReportDataProcessingEntry> root = mar.unmarshal(source, ChpalmEntryLaboratoryReportDataProcessingEntry.class);
+		JAXBElement<CdachlrepEntryLaboratoryReportDataProcessingEntry> root = mar.unmarshal(source, CdachlrepEntryLaboratoryReportDataProcessingEntry.class);
 		retVal = root.getValue();
 		return retVal;
 	}

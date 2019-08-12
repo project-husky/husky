@@ -29,16 +29,17 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 import org.ehealth_connector.common.hl7cdar2.XActRelationshipEntry;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.3
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.77
  * Template description: Chapter (CDA Body Section) with laboratory results according to Sharing Laboratory Reports (XD-LAB) Content Module, IHE PaLM Technical Framework Revision 8.0 - June 21, 2017.Each Laboratory Specialty Section contains laboratory tests of a particular discipline (e.g., microbiology or serology).The Laboratory Specialty Section uses LOINC codes to define the appropriate discipline. Laboratory Specialty Sections MUST NOT be nested.A Laboratory Specialty Section SHALL contain EITHER a list of Laboratory Report Item Section(s) OR a single text and entry element to represent the Report Items:
  * - Choice 1: Laboratory Report Item SectionWith this option, this Laboratory Specialty Section SHALL contain NEITHER a top level text NOR entry elements. Each Report Item is contained in a corresponding Laboratory Report Item Section which contains the Lab Report Data Processing Entry.
  * - Choice 2: Text and EntryWith this option, the examination results MUST be documented in the text element of the section and the corresponding entry element (Laboratory Data Processing Entry).The human-readable text MUST be generated automatically from the entry and its sub-elements.For this purpose the presentation options according to the CDA Narrative Block schema (NarrativeBlock.xsd) may be used: tables, lists, paragraphs, hyperlinks, footnotes, references to attached or embedded multimedia objects.If a document contains multiple Laboratory Specialty Sections, Choice 1 or Choice 2 can be selected for each individual chapter.
  */
-public class ChpalmSectionLaboratorySpecialtyCoded extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
+public class CdachlrepSectionLaboratorySpecialtyCoded extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 
-	public ChpalmSectionLaboratorySpecialtyCoded() {
+	public CdachlrepSectionLaboratorySpecialtyCoded() {
 		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.3");
 		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.2.1");
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.77");
 		setHl7CodeFixedValue("2.16.840.1.113883.6.1", "LOINC");
 		setHl7EntryFixedValue("DRIV");
 	}
@@ -125,7 +126,7 @@ public class ChpalmSectionLaboratorySpecialtyCoded extends org.ehealth_connector
 	 * @param inputFileName the full path and filename of the sourcefile.
 	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
 	 */
-	public static ChpalmSectionLaboratorySpecialtyCoded loadFromFile(String inputFileName) throws JAXBException, IOException {
+	public static CdachlrepSectionLaboratorySpecialtyCoded loadFromFile(String inputFileName) throws JAXBException, IOException {
 		return loadFromFile(new File(inputFileName));
 	}
 
@@ -134,12 +135,12 @@ public class ChpalmSectionLaboratorySpecialtyCoded extends org.ehealth_connector
 	 * @param inputFile the source file.
 	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
 	 */
-	public static ChpalmSectionLaboratorySpecialtyCoded loadFromFile(File inputFile) throws JAXBException, IOException {
-		ChpalmSectionLaboratorySpecialtyCoded retVal;
-		JAXBContext context = JAXBContext.newInstance(ChpalmSectionLaboratorySpecialtyCoded.class);
+	public static CdachlrepSectionLaboratorySpecialtyCoded loadFromFile(File inputFile) throws JAXBException, IOException {
+		CdachlrepSectionLaboratorySpecialtyCoded retVal;
+		JAXBContext context = JAXBContext.newInstance(CdachlrepSectionLaboratorySpecialtyCoded.class);
 		Unmarshaller mar = context.createUnmarshaller();
 		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<ChpalmSectionLaboratorySpecialtyCoded> root = mar.unmarshal(source, ChpalmSectionLaboratorySpecialtyCoded.class);
+		JAXBElement<CdachlrepSectionLaboratorySpecialtyCoded> root = mar.unmarshal(source, CdachlrepSectionLaboratorySpecialtyCoded.class);
 		retVal = root.getValue();
 		return retVal;
 	}

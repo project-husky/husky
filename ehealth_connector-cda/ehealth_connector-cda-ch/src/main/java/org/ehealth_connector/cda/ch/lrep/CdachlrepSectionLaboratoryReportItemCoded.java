@@ -29,14 +29,15 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 import org.ehealth_connector.common.hl7cdar2.XActRelationshipEntry;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.5
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.76
  * Template description: A Laboratory Specialty Section SHALL contain EITHER a list of Laboratory Report Item Section(s) OR a single text and entry element to represent the Report Items.Choice 1: Use of sub-sections (Laboratory Report Item Sections):With this option, the results of the examination MUST be documented in the subsections, and the main section (Laboratory Specialty Section) MUST NOT contain any text OR entry elements.
  */
-public class ChpalmSectionLaboratoryReportItemCoded extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
+public class CdachlrepSectionLaboratoryReportItemCoded extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 
-	public ChpalmSectionLaboratoryReportItemCoded() {
+	public CdachlrepSectionLaboratoryReportItemCoded() {
 		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.2.2");
 		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.5");
+		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.76");
 		setHl7CodeFixedValue("2.16.840.1.113883.6.1", "LOINC");
 		setHl7EntryFixedValue("DRIV");
 	}
@@ -105,7 +106,7 @@ public class ChpalmSectionLaboratoryReportItemCoded extends org.ehealth_connecto
 	 * @param inputFileName the full path and filename of the sourcefile.
 	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
 	 */
-	public static ChpalmSectionLaboratoryReportItemCoded loadFromFile(String inputFileName) throws JAXBException, IOException {
+	public static CdachlrepSectionLaboratoryReportItemCoded loadFromFile(String inputFileName) throws JAXBException, IOException {
 		return loadFromFile(new File(inputFileName));
 	}
 
@@ -114,12 +115,12 @@ public class ChpalmSectionLaboratoryReportItemCoded extends org.ehealth_connecto
 	 * @param inputFile the source file.
 	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
 	 */
-	public static ChpalmSectionLaboratoryReportItemCoded loadFromFile(File inputFile) throws JAXBException, IOException {
-		ChpalmSectionLaboratoryReportItemCoded retVal;
-		JAXBContext context = JAXBContext.newInstance(ChpalmSectionLaboratoryReportItemCoded.class);
+	public static CdachlrepSectionLaboratoryReportItemCoded loadFromFile(File inputFile) throws JAXBException, IOException {
+		CdachlrepSectionLaboratoryReportItemCoded retVal;
+		JAXBContext context = JAXBContext.newInstance(CdachlrepSectionLaboratoryReportItemCoded.class);
 		Unmarshaller mar = context.createUnmarshaller();
 		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<ChpalmSectionLaboratoryReportItemCoded> root = mar.unmarshal(source, ChpalmSectionLaboratoryReportItemCoded.class);
+		JAXBElement<CdachlrepSectionLaboratoryReportItemCoded> root = mar.unmarshal(source, CdachlrepSectionLaboratoryReportItemCoded.class);
 		retVal = root.getValue();
 		return retVal;
 	}
