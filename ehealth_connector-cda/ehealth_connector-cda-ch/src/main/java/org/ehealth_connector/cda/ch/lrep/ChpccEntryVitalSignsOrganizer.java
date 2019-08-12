@@ -3,7 +3,7 @@
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -18,21 +18,58 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
+
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.ActRelationshipHasComponent;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.20
- * Template description: Coded vital sign organizer according to [IHE PCC TF-2], 6.3.4.21.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.20 Template
+ * description: Coded vital sign organizer according to [IHE PCC TF-2],
+ * 6.3.4.21.
  */
-public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
+public class ChpccEntryVitalSignsOrganizer
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
+
+	/**
+	 * Loads the CDA document from file.
+	 *
+	 * @param inputFile
+	 *            the source file. n@return the CDA document\n@throws
+	 *            JAXBException\n@throws IOException Signals that an I/O
+	 *            exception has occurred.
+	 */
+	public static ChpccEntryVitalSignsOrganizer loadFromFile(File inputFile)
+			throws JAXBException, IOException {
+		ChpccEntryVitalSignsOrganizer retVal;
+		JAXBContext context = JAXBContext.newInstance(ChpccEntryVitalSignsOrganizer.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<ChpccEntryVitalSignsOrganizer> root = mar.unmarshal(source,
+				ChpccEntryVitalSignsOrganizer.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 *
+	 * @param inputFileName
+	 *            the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException
+	 *         Signals that an I/O exception has occurred.
+	 */
+	public static ChpccEntryVitalSignsOrganizer loadFromFile(String inputFileName)
+			throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
 
 	public ChpccEntryVitalSignsOrganizer() {
 		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.20");
@@ -46,13 +83,13 @@ public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.
 	/**
 	 * Adds a hl7Component
 	 */
-	public void addHl7Component(org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
+	public void addHl7Component(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
 		getComponent().add(value);
 	}
 
 	/**
-	 * Adds a hl7Id
-	 * The ID for this item.
+	 * Adds a hl7Id The ID for this item.
 	 */
 	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		getId().add(value);
@@ -66,8 +103,7 @@ public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.
 	}
 
 	/**
-	 * Adds a hl7Id
-	 * The ID for this item.
+	 * Adds a hl7Id The ID for this item.
 	 */
 	public void clearHl7Id() {
 		getId().clear();
@@ -106,41 +142,10 @@ public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.
 	}
 
 	/**
-	 * Loads the CDA document from file.
-	 * @param inputFileName the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
-	 */
-	public static ChpccEntryVitalSignsOrganizer loadFromFile(String inputFileName) throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
-	}
-
-	/**
-	 * Loads the CDA document from file.
-	 * @param inputFile the source file.
-	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
-	 */
-	public static ChpccEntryVitalSignsOrganizer loadFromFile(File inputFile) throws JAXBException, IOException {
-		ChpccEntryVitalSignsOrganizer retVal;
-		JAXBContext context = JAXBContext.newInstance(ChpccEntryVitalSignsOrganizer.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<ChpccEntryVitalSignsOrganizer> root = mar.unmarshal(source, ChpccEntryVitalSignsOrganizer.class);
-		retVal = root.getValue();
-		return retVal;
-	}
-
-	/**
 	 * Saves the current CDA document to file.
-	 * @param outputFileName the full path and filename of the destination file.
-	 * @throws JAXBException
-	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
-	}
-
-	/**
-	 * Saves the current CDA document to file.
-	 * @param outputFile the destination file.
+	 *
+	 * @param outputFile
+	 *            the destination file.
 	 * @throws JAXBException
 	 */
 	public void saveToFile(File outputFile) throws JAXBException {
@@ -149,6 +154,17 @@ public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.
 		mar.setProperty("com.sun.xml.bind.namespacePrefixMapper", new CdaNamespacePrefixMapper());
 		mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		mar.marshal(this, outputFile);
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 *
+	 * @param outputFileName
+	 *            the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
 	}
 
 	/**
@@ -161,12 +177,17 @@ public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.
 	/**
 	 * Creates fixed contents for hl7Code
 	 *
-	 * @param code the desired fixed value for this argument.
-	 * @param codeSystem the desired fixed value for this argument.
-	 * @param codeSystemName the desired fixed value for this argument.
-	 * @param displayName the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
+	 * @param codeSystem
+	 *            the desired fixed value for this argument.
+	 * @param codeSystemName
+	 *            the desired fixed value for this argument.
+	 * @param displayName
+	 *            the desired fixed value for this argument.
 	 */
-	public void setHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+	public void setHl7CodeFixedValue(String code, String codeSystem, String codeSystemName,
+			String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE member = factory.createCE();
 		member.setCode(code);
@@ -180,11 +201,13 @@ public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.
 	/**
 	 * Creates fixed contents for hl7Component
 	 *
-	 * @param typeCode the desired fixed value for this argument.
+	 * @param typeCode
+	 *            the desired fixed value for this argument.
 	 */
 	public void setHl7ComponentFixedValue(String typeCode) {
 		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 member = factory.createPOCDMT000040Component4();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 member = factory
+				.createPOCDMT000040Component4();
 		member.setTypeCode(ActRelationshipHasComponent.fromValue(typeCode));
 		// setting the fixed value
 		super.getComponent().add(member);
@@ -215,7 +238,8 @@ public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.
 	/**
 	 * Creates fixed contents for hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
 	public void setHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();

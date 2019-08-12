@@ -1,10 +1,9 @@
 /*
- *
  * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -43,7 +42,8 @@ public class ArtifactResolveBuilderImpl implements ArtifactResolveBuilder,
 	private org.opensaml.saml.saml2.core.Artifact artifact;
 
 	public ArtifactResolveBuilderImpl() {
-		wrappedObject = new org.opensaml.saml.saml2.core.impl.ArtifactResolveBuilder().buildObject();
+		wrappedObject = new org.opensaml.saml.saml2.core.impl.ArtifactResolveBuilder()
+				.buildObject();
 
 		final IssuerBuilder issueBuilder = new IssuerBuilder();
 		issuer = issueBuilder.buildObject(Issuer.DEFAULT_ELEMENT_NAME);
@@ -51,6 +51,23 @@ public class ArtifactResolveBuilderImpl implements ArtifactResolveBuilder,
 
 		artifact = new org.opensaml.saml.saml2.core.impl.ArtifactBuilder().buildObject();
 		wrappedObject.setArtifact(artifact);
+	}
+
+	@Override
+	public ArtifactResolveBuilderImpl artifact(String aArtifact) {
+		if (aArtifact != null) {
+			artifact.setArtifact(aArtifact);
+		}
+		return this;
+	}
+
+	public ArtifactResolve create() {
+		return new ArtifactResolveImpl(wrappedObject);
+	}
+
+	@Override
+	public ArtifactResolve create(org.opensaml.saml.saml2.core.ArtifactResolve aInternalObject) {
+		return new ArtifactResolveImpl(aInternalObject);
 	}
 
 	@Override
@@ -80,23 +97,6 @@ public class ArtifactResolveBuilderImpl implements ArtifactResolveBuilder,
 	public ArtifactResolveBuilderImpl version(String aVersion) {
 		if (aVersion != null) {
 			wrappedObject.setVersion(SAMLVersion.valueOf(aVersion));
-		}
-		return this;
-	}
-
-	public ArtifactResolve create() {
-		return new ArtifactResolveImpl(wrappedObject);
-	}
-
-	@Override
-	public ArtifactResolve create(org.opensaml.saml.saml2.core.ArtifactResolve aInternalObject) {
-		return new ArtifactResolveImpl(aInternalObject);
-	}
-
-	@Override
-	public ArtifactResolveBuilderImpl artifact(String aArtifact) {
-		if (aArtifact != null) {
-			artifact.setArtifact(aArtifact);
 		}
 		return this;
 	}

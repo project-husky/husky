@@ -1,10 +1,9 @@
 /*
- *
  * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -34,7 +33,7 @@ import org.opensaml.core.xml.XMLObject;
  * <div class="de">HIERISTDEUTSCH</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
- * 
+ *
  * <!-- @formatter:on -->
  */
 public class ArtifactResponseImpl
@@ -44,19 +43,6 @@ public class ArtifactResponseImpl
 
 	protected ArtifactResponseImpl(org.opensaml.saml.saml2.core.ArtifactResponse artifactResponse) {
 		wrappedObject = artifactResponse;
-	}
-
-	@Override
-	public List<Response> getResponses() {
-		final List<Response> retVal = new ArrayList<>();
-
-		final List<XMLObject> orderedChildren = wrappedObject.getOrderedChildren();
-		orderedChildren.forEach(c -> {
-			if (c instanceof org.opensaml.saml.saml2.core.Response) {
-				retVal.add(new ResponseBuilderImpl().create((org.opensaml.saml.saml2.core.Response) c));
-			}
-		});
-		return retVal;
 	}
 
 	@Override
@@ -71,18 +57,13 @@ public class ArtifactResponseImpl
 	}
 
 	@Override
-	public String getInResponseTo() {
-		return wrappedObject.getInResponseTo();
-	}
-
-	@Override
-	public Status getStatus() {
-		return new StatusImpl(wrappedObject.getStatus());
-	}
-
-	@Override
 	public String getId() {
 		return wrappedObject.getID();
+	}
+
+	@Override
+	public String getInResponseTo() {
+		return wrappedObject.getInResponseTo();
 	}
 
 	@Override
@@ -99,6 +80,25 @@ public class ArtifactResponseImpl
 			return wrappedObject.getIssuer().getValue();
 		}
 		return "";
+	}
+
+	@Override
+	public List<Response> getResponses() {
+		final List<Response> retVal = new ArrayList<>();
+
+		final List<XMLObject> orderedChildren = wrappedObject.getOrderedChildren();
+		orderedChildren.forEach(c -> {
+			if (c instanceof org.opensaml.saml.saml2.core.Response) {
+				retVal.add(new ResponseBuilderImpl()
+						.create((org.opensaml.saml.saml2.core.Response) c));
+			}
+		});
+		return retVal;
+	}
+
+	@Override
+	public Status getStatus() {
+		return new StatusImpl(wrappedObject.getStatus());
 	}
 
 	@Override

@@ -1,10 +1,9 @@
 /*
- *
  * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -193,8 +192,8 @@ public class ImmunizationRecommendationSection
 		// Impfempfehlung vom
 		if ((immunizationRecommendation.getAuthor() != null)
 				&& (immunizationRecommendation.getAuthor().getTimeAsDate() != null)) {
-			stringBuffer.append(
-					DateUtilMdht.formatDateCH(immunizationRecommendation.getAuthor().getTimeAsDate()));
+			stringBuffer.append(DateUtilMdht
+					.formatDateCH(immunizationRecommendation.getAuthor().getTimeAsDate()));
 		}
 		stringBuffer.append("</td><td>");
 		// Impfempfehlung dokumentiert durch

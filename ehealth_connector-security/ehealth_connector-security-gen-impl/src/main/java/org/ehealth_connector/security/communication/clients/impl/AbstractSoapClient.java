@@ -1,10 +1,9 @@
 /*
- *
  * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -95,9 +94,11 @@ public abstract class AbstractSoapClient<T> {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
-	protected void createBody(Element aBodyElement, Element envelopElement) throws SerializeException {
+	protected void createBody(Element aBodyElement, Element envelopElement)
+			throws SerializeException {
 		// create soap body
-		final Element soapBody = envelopElement.getOwnerDocument().createElementNS(getSoapNs(), "Body");
+		final Element soapBody = envelopElement.getOwnerDocument().createElementNS(getSoapNs(),
+				"Body");
 		envelopElement.appendChild(soapBody);
 
 		// add authnrequest to soap body
@@ -121,20 +122,12 @@ public abstract class AbstractSoapClient<T> {
 		return envelopElement;
 	}
 
-	private String getSoapNs() {
-		if (SoapVersion.SOAP_12.equals(config.getSoapVersion())) {
-			return "http://www.w3.org/2003/05/soap-envelope";
-		} else {
-			return "http://schemas.xmlsoap.org/soap/envelope/";
-		}
-
-	}
-
-	protected void createHeader(Element aSecurityHeaderElement, WsaHeaderValue wsHeaders, Element envelopElement)
-			throws SerializeException {
+	protected void createHeader(Element aSecurityHeaderElement, WsaHeaderValue wsHeaders,
+			Element envelopElement) throws SerializeException {
 
 		// create soap header
-		final Element headerElement = envelopElement.getOwnerDocument().createElementNS(getSoapNs(), "Header");
+		final Element headerElement = envelopElement.getOwnerDocument().createElementNS(getSoapNs(),
+				"Header");
 		envelopElement.appendChild(headerElement);
 
 		final Element headerWsaAction = envelopElement.getOwnerDocument()
@@ -148,12 +141,14 @@ public abstract class AbstractSoapClient<T> {
 		headerElement.appendChild(headerWsaMessageID);
 
 		final Element headerSecurityElement = envelopElement.getOwnerDocument().createElementNS(
-				"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd", "Security");
+				"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd",
+				"Security");
 		headerElement.appendChild(headerSecurityElement);
 
 		// add security header element (assertion) to the headers
 		if (aSecurityHeaderElement != null) {
-			final Node importedHeaderNode = envelopElement.getOwnerDocument().importNode(aSecurityHeaderElement, true);
+			final Node importedHeaderNode = envelopElement.getOwnerDocument()
+					.importNode(aSecurityHeaderElement, true);
 			headerSecurityElement.appendChild(importedHeaderNode);
 		}
 	}
@@ -165,19 +160,22 @@ public abstract class AbstractSoapClient<T> {
 		final Transformer transformer = tf.newTransformer();
 		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
 		final StringWriter writer = new StringWriter();
-		transformer.transform(new DOMSource(aEnvelope.getOwnerDocument()), new StreamResult(writer));
+		transformer.transform(new DOMSource(aEnvelope.getOwnerDocument()),
+				new StreamResult(writer));
 		return writer.toString();
 
 	}
 
-	protected T execute(HttpPost post) throws ClientSendException, ClientProtocolException, IOException {
+	protected T execute(HttpPost post)
+			throws ClientSendException, ClientProtocolException, IOException {
 		final CloseableHttpClient httpclient = getHttpClient();
 
 		final CloseableHttpResponse response = httpclient.execute(post);
 		final HttpEntity errorEntity = response.getEntity();
 		final String content = EntityUtils.toString(errorEntity);
 		logger.debug("SOAP Message\n" + content);
-		if ((response.getStatusLine() != null) && (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)) {
+		if ((response.getStatusLine() != null)
+				&& (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)) {
 			return parseResponse(content);
 		} else {
 
@@ -196,14 +194,15 @@ public abstract class AbstractSoapClient<T> {
 				final KeyStore keyStore = pki.loadStore(new FileInputStream(config.getKeyStore()),
 						config.getKeyStorePassword(), config.getKeyStoreType());
 
-				final TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain, String authType) -> true;
+				final TrustStrategy acceptingTrustStrategy = (X509Certificate[] chain,
+						String authType) -> true;
 				final SSLContext sslcontext = SSLContexts.custom()//
 						.loadKeyMaterial(keyStore, config.getKeyStorePassword().toCharArray())//
 						.loadTrustMaterial(keyStore, acceptingTrustStrategy)//
 						.build();
 				return HttpClients.custom().setSslcontext(sslcontext).build();
-			} catch (KeyStoreException | KeyManagementException | UnrecoverableKeyException | NoSuchAlgorithmException
-					| IOException e) {
+			} catch (KeyStoreException | KeyManagementException | UnrecoverableKeyException
+					| NoSuchAlgorithmException | IOException e) {
 				throw new ClientSendException(e);
 			}
 		}
@@ -223,7 +222,8 @@ public abstract class AbstractSoapClient<T> {
 		return logger;
 	}
 
-	protected Node getNode(Element element, String xPathExpression) throws XPathExpressionException {
+	protected Node getNode(Element element, String xPathExpression)
+			throws XPathExpressionException {
 		final XPath xPath = XPathFactory.newInstance().newXPath();
 		xPath.setNamespaceContext(new NamespaceContext() {
 
@@ -262,19 +262,21 @@ public abstract class AbstractSoapClient<T> {
 	}
 
 	protected Element getResponseElement(String content, String nameSpaceUri, String localName)
-			throws ParserConfigurationException, UnsupportedOperationException, SAXException, IOException,
-			XPathExpressionException {
+			throws ParserConfigurationException, UnsupportedOperationException, SAXException,
+			IOException, XPathExpressionException {
 
 		final DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 		docFactory.setNamespaceAware(true);
 		final DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-		final Document soapDocument = docBuilder.parse(new ByteArrayInputStream(content.getBytes()));
+		final Document soapDocument = docBuilder
+				.parse(new ByteArrayInputStream(content.getBytes()));
 
 		String prefix = soapDocument.getDocumentElement().getPrefix();
 		if (!StringUtils.isEmpty(prefix)) {
 			prefix += ":";
 		}
-		final Node bodyNode = getNode(soapDocument.getDocumentElement(), "/" + prefix + "Envelope/" + prefix + "Body");
+		final Node bodyNode = getNode(soapDocument.getDocumentElement(),
+				"/" + prefix + "Envelope/" + prefix + "Body");
 
 		NodeList reponseNodes = ((Element) bodyNode).getElementsByTagNameNS("*", localName);
 		if ((reponseNodes == null) || (reponseNodes.getLength() < 1)) {
@@ -320,6 +322,15 @@ public abstract class AbstractSoapClient<T> {
 		}
 	}
 
+	private String getSoapNs() {
+		if (SoapVersion.SOAP_12.equals(config.getSoapVersion())) {
+			return "http://www.w3.org/2003/05/soap-envelope";
+		} else {
+			return "http://schemas.xmlsoap.org/soap/envelope/";
+		}
+
+	}
+
 	protected abstract T parseResponse(String content) throws ClientSendException;
 
 	protected T parseResponseError(String content) throws ClientSendException {
@@ -341,16 +352,18 @@ public abstract class AbstractSoapClient<T> {
 			if (retVal != null) {
 				paserSoapFault(retVal);
 			}
-			throw new ClientSendException("Error occurred. No detailed error information available");
-		} catch (UnsupportedOperationException | TransformerFactoryConfigurationError | ParseException | IOException
-				| ParserConfigurationException | SAXException | XPathExpressionException e) {
+			throw new ClientSendException(
+					"Error occurred. No detailed error information available");
+		} catch (UnsupportedOperationException | TransformerFactoryConfigurationError
+				| ParseException | IOException | ParserConfigurationException | SAXException
+				| XPathExpressionException e) {
 			throw new ClientSendException(e);
 		}
 
 	}
 
-	private void paserSoapFault(String retVal)
-			throws ParserConfigurationException, SAXException, IOException, XPathExpressionException, SoapException {
+	private void paserSoapFault(String retVal) throws ParserConfigurationException, SAXException,
+			IOException, XPathExpressionException, SoapException {
 		final DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 		docFactory.setNamespaceAware(true);
 		final DocumentBuilder docBuilder = docFactory.newDocumentBuilder();

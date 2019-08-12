@@ -3,7 +3,7 @@
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -18,22 +18,58 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
+
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.2
- * Template description: This entry allows for a comment to be supplied with each entry.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.2 Template
+ * description: This entry allows for a comment to be supplied with each entry.
  *
  * Element description: A comment to the parent entry.
  */
-public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
+public class ChpccEntryAnnotationComments
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
+
+	/**
+	 * Loads the CDA document from file.
+	 *
+	 * @param inputFile
+	 *            the source file. n@return the CDA document\n@throws
+	 *            JAXBException\n@throws IOException Signals that an I/O
+	 *            exception has occurred.
+	 */
+	public static ChpccEntryAnnotationComments loadFromFile(File inputFile)
+			throws JAXBException, IOException {
+		ChpccEntryAnnotationComments retVal;
+		JAXBContext context = JAXBContext.newInstance(ChpccEntryAnnotationComments.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<ChpccEntryAnnotationComments> root = mar.unmarshal(source,
+				ChpccEntryAnnotationComments.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 *
+	 * @param inputFileName
+	 *            the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException
+	 *         Signals that an I/O exception has occurred.
+	 */
+	public static ChpccEntryAnnotationComments loadFromFile(String inputFileName)
+			throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
 
 	public ChpccEntryAnnotationComments() {
 		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.2");
@@ -44,32 +80,29 @@ public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.h
 	}
 
 	/**
-	 * Adds a hl7Author
-	 * The author of the comment MAY be specified.
+	 * Adds a hl7Author The author of the comment MAY be specified.
 	 */
 	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
 		getAuthor().add(value);
 	}
 
 	/**
-	 * Adds a hl7Author
-	 * The author of the comment MAY be specified.
+	 * Adds a hl7Author The author of the comment MAY be specified.
 	 */
 	public void clearHl7Author() {
 		getAuthor().clear();
 	}
 
 	/**
-	 * Gets the hl7Code
-	 * The reference to the text in the narrative section of the section MUST be specified.
+	 * Gets the hl7Code The reference to the text in the narrative section of
+	 * the section MUST be specified.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
 		return super.code;
 	}
 
 	/**
-	 * Gets the hl7Id
-	 * An ID for this item MAY be filled for traceability.
+	 * Gets the hl7Id An ID for this item MAY be filled for traceability.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
 		org.ehealth_connector.common.hl7cdar2.II retVal = null;
@@ -80,8 +113,8 @@ public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.h
 	}
 
 	/**
-	 * Gets the hl7StatusCode
-	 * The status 'completed' indicates that the comment is final.
+	 * Gets the hl7StatusCode The status 'completed' indicates that the comment
+	 * is final.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
 		return super.statusCode;
@@ -99,41 +132,10 @@ public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.h
 	}
 
 	/**
-	 * Loads the CDA document from file.
-	 * @param inputFileName the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
-	 */
-	public static ChpccEntryAnnotationComments loadFromFile(String inputFileName) throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
-	}
-
-	/**
-	 * Loads the CDA document from file.
-	 * @param inputFile the source file.
-	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
-	 */
-	public static ChpccEntryAnnotationComments loadFromFile(File inputFile) throws JAXBException, IOException {
-		ChpccEntryAnnotationComments retVal;
-		JAXBContext context = JAXBContext.newInstance(ChpccEntryAnnotationComments.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<ChpccEntryAnnotationComments> root = mar.unmarshal(source, ChpccEntryAnnotationComments.class);
-		retVal = root.getValue();
-		return retVal;
-	}
-
-	/**
 	 * Saves the current CDA document to file.
-	 * @param outputFileName the full path and filename of the destination file.
-	 * @throws JAXBException
-	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
-	}
-
-	/**
-	 * Saves the current CDA document to file.
-	 * @param outputFile the destination file.
+	 *
+	 * @param outputFile
+	 *            the destination file.
 	 * @throws JAXBException
 	 */
 	public void saveToFile(File outputFile) throws JAXBException {
@@ -145,8 +147,19 @@ public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.h
 	}
 
 	/**
-	 * Sets the hl7Code
-	 * The reference to the text in the narrative section of the section MUST be specified.
+	 * Saves the current CDA document to file.
+	 *
+	 * @param outputFileName
+	 *            the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Sets the hl7Code The reference to the text in the narrative section of
+	 * the section MUST be specified.
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CD value) {
 		super.code = value;
@@ -155,12 +168,17 @@ public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.h
 	/**
 	 * Creates fixed contents for hl7Code
 	 *
-	 * @param code the desired fixed value for this argument.
-	 * @param codeSystem the desired fixed value for this argument.
-	 * @param codeSystemName the desired fixed value for this argument.
-	 * @param displayName the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
+	 * @param codeSystem
+	 *            the desired fixed value for this argument.
+	 * @param codeSystemName
+	 *            the desired fixed value for this argument.
+	 * @param displayName
+	 *            the desired fixed value for this argument.
 	 */
-	public void setHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+	public void setHl7CodeFixedValue(String code, String codeSystem, String codeSystemName,
+			String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD member = factory.createCD();
 		member.setCode(code);
@@ -172,8 +190,7 @@ public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.h
 	}
 
 	/**
-	 * Sets the hl7Id
-	 * An ID for this item MAY be filled for traceability.
+	 * Sets the hl7Id An ID for this item MAY be filled for traceability.
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getId().clear();
@@ -181,8 +198,8 @@ public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.h
 	}
 
 	/**
-	 * Sets the hl7StatusCode
-	 * The status 'completed' indicates that the comment is final.
+	 * Sets the hl7StatusCode The status 'completed' indicates that the comment
+	 * is final.
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
 		super.statusCode = value;
@@ -191,7 +208,8 @@ public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.h
 	/**
 	 * Creates fixed contents for hl7StatusCode
 	 *
-	 * @param code the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
 	 */
 	public void setHl7StatusCodeFixedValue(String code) {
 		ObjectFactory factory = new ObjectFactory();
@@ -212,7 +230,8 @@ public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.h
 	/**
 	 * Creates fixed contents for hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
 	public void setHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();

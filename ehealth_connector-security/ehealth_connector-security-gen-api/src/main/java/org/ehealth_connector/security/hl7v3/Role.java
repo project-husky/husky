@@ -1,10 +1,9 @@
 /*
- *
  * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -25,7 +24,7 @@ import javax.xml.namespace.QName;
  * <div class="de">HIERISTDEUTSCH</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
- * 
+ *
  * <!-- @formatter:on -->
  */
 public interface Role {
@@ -37,7 +36,8 @@ public interface Role {
 	public static final String DEFAULT_PREFIX = "hl7";
 
 	/** Default element name. */
-	public static final QName ELEMENT_NAME = new QName(DEFAULT_NS_URI, DEFAULT_ELEMENT_LOCAL_NAME, DEFAULT_PREFIX);
+	public static final QName ELEMENT_NAME = new QName(DEFAULT_NS_URI, DEFAULT_ELEMENT_LOCAL_NAME,
+			DEFAULT_PREFIX);
 
 	/** Local name of the XSI type. */
 	public static final String TYPE_LOCAL_NAME = "Role";

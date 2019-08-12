@@ -1,10 +1,9 @@
 /*
- *
  * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -33,14 +32,16 @@ public class IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl implements Cl
 
 	public IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl() {
 		clientConfig = new IdpClientByBrowserAndProtocolHandlerConfigImpl();
-		clientConfig.setSamlRequestType(IdpClientByBrowserAndProtocolHandlerConfigImpl.SamlRequestType.SAMLart);
+		clientConfig.setSamlRequestType(
+				IdpClientByBrowserAndProtocolHandlerConfigImpl.SamlRequestType.SAMLart);
 	}
 
 	public IdpClientByBrowserAndProtocolHandlerConfigImpl create() {
 		return clientConfig;
 	}
 
-	public IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl protocolHandlerName(String aProtocolHandlerName) {
+	public IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl protocolHandlerName(
+			String aProtocolHandlerName) {
 		clientConfig.setProtocolHandlerName(aProtocolHandlerName);
 		return this;
 	}

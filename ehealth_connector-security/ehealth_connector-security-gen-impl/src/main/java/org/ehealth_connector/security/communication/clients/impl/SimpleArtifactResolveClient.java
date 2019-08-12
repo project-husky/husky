@@ -1,10 +1,9 @@
 /*
- *
  * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -56,13 +55,49 @@ import org.xml.sax.SAXException;
  * <div class="de">HIERISTDEUTSCH</div>
  * <div class="fr">VOICIFRANCAIS</div>
  * <div class="it">ITALIANO</div>
- * 
+ *
  * <!-- @formatter:on -->
  */
-public class SimpleArtifactResolveClient extends AbstractSoapClient<ArtifactResponse> implements ArtifactResolveClient {
+public class SimpleArtifactResolveClient extends AbstractSoapClient<ArtifactResponse>
+		implements ArtifactResolveClient {
 
 	public SimpleArtifactResolveClient(SoapClientConfig config) {
 		setConfig(config);
+	}
+
+	private HttpEntity getSoapEntity(ArtifactResolve aArtifactResolve) throws SerializeException,
+			ParserConfigurationException, TransformerException, MarshallingException {
+
+		final Element envelopElement = createEnvelope();
+
+		// final Element headerAssertionElement = new
+		// ArtifactResolveSerializerImpl().toXmlElement(aArtifactResolve);
+
+		final WsaHeaderValue wsHeaders = new WsaHeaderValue(
+				"urn:uuid:" + UUID.randomUUID().toString(), null, null);
+
+		createHeader(null, wsHeaders, envelopElement);
+
+		// serialize the authnrequest to xml element
+		final MarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport
+				.getMarshallerFactory();
+		final Marshaller marshaller = marshallerFactory
+				.getMarshaller(((ArtifactResolveImpl) aArtifactResolve).getWrappedObject());
+
+		final Element policyElement = marshaller
+				.marshall(((ArtifactResolveImpl) aArtifactResolve).getWrappedObject());
+
+		createBody(policyElement, envelopElement);
+
+		final String body = createXmlString(envelopElement);
+
+		getLogger().debug("SOAP Message\n" + body);
+
+		// add string as body to httpentity
+		final StringEntity stringEntity = new StringEntity(body, "UTF-8");
+		stringEntity.setChunked(false);
+
+		return stringEntity;
 	}
 
 	@Override
@@ -71,7 +106,8 @@ public class SimpleArtifactResolveClient extends AbstractSoapClient<ArtifactResp
 			final DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			docFactory.setNamespaceAware(true);
 			final DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-			final Document soapDocument = docBuilder.parse(new ByteArrayInputStream(content.getBytes()));
+			final Document soapDocument = docBuilder
+					.parse(new ByteArrayInputStream(content.getBytes()));
 
 			// get the xml response node
 			final Node responseNode = soapDocument.getFirstChild().getLastChild().getFirstChild();
@@ -84,7 +120,8 @@ public class SimpleArtifactResolveClient extends AbstractSoapClient<ArtifactResp
 			final ArtifactResponseDeserializerImpl deserializer = new ArtifactResponseDeserializerImpl();
 			return deserializer.fromXmlElement(doc.getDocumentElement());
 		} catch (UnsupportedOperationException | IOException | DeserializeException
-				| TransformerFactoryConfigurationError | ParserConfigurationException | SAXException e) {
+				| TransformerFactoryConfigurationError | ParserConfigurationException
+				| SAXException e) {
 			throw new ClientSendException(e);
 		}
 	}
@@ -101,37 +138,6 @@ public class SimpleArtifactResolveClient extends AbstractSoapClient<ArtifactResp
 		} catch (final Throwable t) {
 			throw new ClientSendException(t);
 		}
-	}
-
-	private HttpEntity getSoapEntity(ArtifactResolve aArtifactResolve)
-			throws SerializeException, ParserConfigurationException, TransformerException, MarshallingException {
-
-		final Element envelopElement = createEnvelope();
-
-		// final Element headerAssertionElement = new ArtifactResolveSerializerImpl().toXmlElement(aArtifactResolve);
-
-		final WsaHeaderValue wsHeaders = new WsaHeaderValue("urn:uuid:" + UUID.randomUUID().toString(), null, null);
-
-		createHeader(null, wsHeaders, envelopElement);
-
-		// serialize the authnrequest to xml element
-		final MarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport.getMarshallerFactory();
-		final Marshaller marshaller = marshallerFactory
-				.getMarshaller(((ArtifactResolveImpl) aArtifactResolve).getWrappedObject());
-
-		final Element policyElement = marshaller.marshall(((ArtifactResolveImpl) aArtifactResolve).getWrappedObject());
-
-		createBody(policyElement, envelopElement);
-
-		final String body = createXmlString(envelopElement);
-
-		getLogger().debug("SOAP Message\n" + body);
-
-		// add string as body to httpentity
-		final StringEntity stringEntity = new StringEntity(body, "UTF-8");
-		stringEntity.setChunked(false);
-
-		return stringEntity;
 	}
 
 }

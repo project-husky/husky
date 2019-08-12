@@ -1,10 +1,9 @@
 /*
- *
  * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -82,23 +81,6 @@ public interface ArtifactResponse extends Base {
 	/**
 	 *
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to get the Status.</div>
-	 * <div class="de">Methode um den Status zu holen.</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>
-	 *
-	 * @return
-	 * <div class="en">the Status value as {@link org.ehealth_connector.security.saml2.Status}.</div>
-	 * <div class="de">der Status als {@link org.ehealth_connector.security.saml2.Status}.</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>
-	 * <!-- @formatter:on -->
-	 */
-	Status getStatus();
-
-	/**
-	 *
-	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get a list of Response.</div>
 	 * <div class="de">Methode um die Liste von Responses zu holen.</div>
 	 * <div class="fr"></div>
@@ -112,5 +94,22 @@ public interface ArtifactResponse extends Base {
 	 * <!-- @formatter:on -->
 	 */
 	List<Response> getResponses();
+
+	/**
+	 *
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the Status.</div>
+	 * <div class="de">Methode um den Status zu holen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return
+	 * <div class="en">the Status value as {@link org.ehealth_connector.security.saml2.Status}.</div>
+	 * <div class="de">der Status als {@link org.ehealth_connector.security.saml2.Status}.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	Status getStatus();
 
 }

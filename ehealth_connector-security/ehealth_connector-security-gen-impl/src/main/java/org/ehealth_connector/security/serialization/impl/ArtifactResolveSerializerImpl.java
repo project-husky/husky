@@ -1,10 +1,9 @@
 /*
- *
  * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -31,13 +30,14 @@ import org.w3c.dom.Element;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class ArtifactResolveSerializerImpl extends AbstractSerializerImpl implements Serializer<ArtifactResolve> {
+public class ArtifactResolveSerializerImpl extends AbstractSerializerImpl
+		implements Serializer<ArtifactResolve> {
 
 	@Override
 	public byte[] toXmlByteArray(ArtifactResolve aSecurityObject) throws SerializeException {
 		try {
-			return getOpenSamlSerializer()
-					.serializeToByteArray(((ArtifactResolveImpl) aSecurityObject).getWrappedObject());
+			return getOpenSamlSerializer().serializeToByteArray(
+					((ArtifactResolveImpl) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}
@@ -46,7 +46,8 @@ public class ArtifactResolveSerializerImpl extends AbstractSerializerImpl implem
 	@Override
 	public Element toXmlElement(ArtifactResolve aSecurityObject) throws SerializeException {
 		try {
-			return getOpenSamlSerializer().serializeToXml(((ArtifactResolveImpl) aSecurityObject).getWrappedObject());
+			return getOpenSamlSerializer()
+					.serializeToXml(((ArtifactResolveImpl) aSecurityObject).getWrappedObject());
 		} catch (final Exception e) {
 			throw new SerializeException(e);
 		}

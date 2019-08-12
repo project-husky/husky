@@ -1,10 +1,9 @@
 /*
- *
  * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -43,7 +42,8 @@ import org.opensaml.core.config.Initializer;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class ConvenienceUserAccessAuthenticationImpl implements AuthenticationModule, XUserAssertionModule {
+public class ConvenienceUserAccessAuthenticationImpl
+		implements AuthenticationModule, XUserAssertionModule {
 
 	/**
 	 * Instantiates a new instance and initializes the OpenSaml Libraries.
@@ -56,13 +56,15 @@ public class ConvenienceUserAccessAuthenticationImpl implements AuthenticationMo
 		// Note: the initial implementation did not work under .net. It has been
 		// therefore changed as follows:
 		final List<Initializer> initializers = new ArrayList<>();
-		initializers.add(new org.ehealth_connector.security.hl7v3.config.XmlObjectProviderInitializer());
+		initializers.add(
+				new org.ehealth_connector.security.hl7v3.config.XmlObjectProviderInitializer());
 		initializers.add(new org.opensaml.core.metrics.impl.MetricRegistryInitializer());
 		initializers.add(new org.opensaml.core.xml.config.GlobalParserPoolInitializer());
 		initializers.add(new org.opensaml.core.xml.config.XMLObjectProviderInitializer());
 		initializers.add(new org.opensaml.saml.config.SAMLConfigurationInitializer());
 		initializers.add(new org.opensaml.saml.config.XMLObjectProviderInitializer());
-		initializers.add(new org.opensaml.security.config.ClientTLSValidationConfiguratonInitializer());
+		initializers
+				.add(new org.opensaml.security.config.ClientTLSValidationConfiguratonInitializer());
 		initializers.add(new org.opensaml.soap.config.XMLObjectProviderInitializer());
 		initializers.add(new org.opensaml.xmlsec.config.ApacheXMLSecurityInitializer());
 		initializers.add(new org.opensaml.xmlsec.config.GlobalAlgorithmRegistryInitializer());
@@ -84,8 +86,9 @@ public class ConvenienceUserAccessAuthenticationImpl implements AuthenticationMo
 	 *      org.ehealth_connector.security.communication.config.XuaClientConfig)
 	 */
 	@Override
-	public List<XUserAssertionResponse> invokeGetXUserAssertion(SecurityHeaderElement aSecurityHeaderElement,
-			XUserAssertionRequest aRequest, XuaClientConfig clientConfiguration) throws ClientSendException {
+	public List<XUserAssertionResponse> invokeGetXUserAssertion(
+			SecurityHeaderElement aSecurityHeaderElement, XUserAssertionRequest aRequest,
+			XuaClientConfig clientConfiguration) throws ClientSendException {
 		final XuaClient client = ClientFactory.getXuaClient(clientConfiguration);
 		return client.send(aSecurityHeaderElement, aRequest);
 	}
@@ -98,8 +101,8 @@ public class ConvenienceUserAccessAuthenticationImpl implements AuthenticationMo
 	 *      org.ehealth_connector.security.communication.config.IdpClientConfig)
 	 */
 	@Override
-	public Object invokeUserAuthentication(AuthnRequest aAuthnRequest, IdpClientConfig clientConfiguration)
-			throws ClientSendException {
+	public Object invokeUserAuthentication(AuthnRequest aAuthnRequest,
+			IdpClientConfig clientConfiguration) throws ClientSendException {
 		final IdpClient client = ClientFactory.getIdpClient(clientConfiguration);
 		return client.send(aAuthnRequest);
 	}

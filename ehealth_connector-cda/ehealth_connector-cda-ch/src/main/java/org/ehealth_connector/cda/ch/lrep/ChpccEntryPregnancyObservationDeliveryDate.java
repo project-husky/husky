@@ -3,7 +3,7 @@
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -18,67 +18,110 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
+
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.IVLTS;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.102
- * Template description: This element contains structured information about the delivery date of a pregnancy.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.102 Template
+ * description: This element contains structured information about the delivery
+ * date of a pregnancy.
  *
- * Element description: This element contains structured information about the delivery date of a pregnancy.
+ * Element description: This element contains structured information about the
+ * delivery date of a pregnancy.
  */
-public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
+public class ChpccEntryPregnancyObservationDeliveryDate
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
+
+	/**
+	 * Loads the CDA document from file.
+	 *
+	 * @param inputFile
+	 *            the source file. n@return the CDA document\n@throws
+	 *            JAXBException\n@throws IOException Signals that an I/O
+	 *            exception has occurred.
+	 */
+	public static ChpccEntryPregnancyObservationDeliveryDate loadFromFile(File inputFile)
+			throws JAXBException, IOException {
+		ChpccEntryPregnancyObservationDeliveryDate retVal;
+		JAXBContext context = JAXBContext
+				.newInstance(ChpccEntryPregnancyObservationDeliveryDate.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<ChpccEntryPregnancyObservationDeliveryDate> root = mar.unmarshal(source,
+				ChpccEntryPregnancyObservationDeliveryDate.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 *
+	 * @param inputFileName
+	 *            the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException
+	 *         Signals that an I/O exception has occurred.
+	 */
+	public static ChpccEntryPregnancyObservationDeliveryDate loadFromFile(String inputFileName)
+			throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
 
 	public ChpccEntryPregnancyObservationDeliveryDate() {
 		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.102");
 		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.92");
 		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13.5");
 		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13");
-		setHl7CodeFixedValue("11778-8", "2.16.840.1.113883.6.1", "LOINC", "DELIVERY DATE (CLINICAL ESTIMATE)");
+		setHl7CodeFixedValue("11778-8", "2.16.840.1.113883.6.1", "LOINC",
+				"DELIVERY DATE (CLINICAL ESTIMATE)");
 	}
 
 	/**
-	 * Adds a hl7Author
-	 * This MAY be used to indicate who has documented the observation. This information supersedes any information recorded at higher level.
+	 * Adds a hl7Author This MAY be used to indicate who has documented the
+	 * observation. This information supersedes any information recorded at
+	 * higher level.
 	 */
 	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
 		getAuthor().add(value);
 	}
 
 	/**
-	 * Adds a hl7Author
-	 * This MAY be used to indicate who has documented the observation. This information supersedes any information recorded at higher level.
+	 * Adds a hl7Author This MAY be used to indicate who has documented the
+	 * observation. This information supersedes any information recorded at
+	 * higher level.
 	 */
 	public void clearHl7Author() {
 		getAuthor().clear();
 	}
 
 	/**
-	 * Gets the hl7Code
-	 * The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
+	 * Gets the hl7Code The human-readable text MUST be generated automatically
+	 * from the structured information of this element. The text element MUST
+	 * contain the reference to the corresponding text in the human readable
+	 * part, ONLY.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
 		return super.code;
 	}
 
 	/**
-	 * Gets the hl7EffectiveTime
-	 * Date or timestamp of the finding (physiologically relevant time of this observation).
+	 * Gets the hl7EffectiveTime Date or timestamp of the finding
+	 * (physiologically relevant time of this observation).
 	 */
 	public org.ehealth_connector.common.hl7cdar2.TS getHl7EffectiveTime() {
 		return super.effectiveTime;
 	}
 
 	/**
-	 * Gets the hl7Id
-	 * Each observation SHALL have an identifier.
+	 * Gets the hl7Id Each observation SHALL have an identifier.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
 		org.ehealth_connector.common.hl7cdar2.II retVal = null;
@@ -89,8 +132,8 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 	}
 
 	/**
-	 * Gets the hl7StatusCode
-	 * The statusCode shall be set to 'completed' for all observations.
+	 * Gets the hl7StatusCode The statusCode shall be set to 'completed' for all
+	 * observations.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
 		return super.statusCode;
@@ -108,8 +151,7 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 	}
 
 	/**
-	 * Gets the hl7Value
-	 * The delivery date (clinical estimate)
+	 * Gets the hl7Value The delivery date (clinical estimate)
 	 */
 	public org.ehealth_connector.common.hl7cdar2.TS getHl7Value() {
 		org.ehealth_connector.common.hl7cdar2.TS retVal = null;
@@ -120,41 +162,10 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 	}
 
 	/**
-	 * Loads the CDA document from file.
-	 * @param inputFileName the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
-	 */
-	public static ChpccEntryPregnancyObservationDeliveryDate loadFromFile(String inputFileName) throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
-	}
-
-	/**
-	 * Loads the CDA document from file.
-	 * @param inputFile the source file.
-	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
-	 */
-	public static ChpccEntryPregnancyObservationDeliveryDate loadFromFile(File inputFile) throws JAXBException, IOException {
-		ChpccEntryPregnancyObservationDeliveryDate retVal;
-		JAXBContext context = JAXBContext.newInstance(ChpccEntryPregnancyObservationDeliveryDate.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<ChpccEntryPregnancyObservationDeliveryDate> root = mar.unmarshal(source, ChpccEntryPregnancyObservationDeliveryDate.class);
-		retVal = root.getValue();
-		return retVal;
-	}
-
-	/**
 	 * Saves the current CDA document to file.
-	 * @param outputFileName the full path and filename of the destination file.
-	 * @throws JAXBException
-	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
-	}
-
-	/**
-	 * Saves the current CDA document to file.
-	 * @param outputFile the destination file.
+	 *
+	 * @param outputFile
+	 *            the destination file.
 	 * @throws JAXBException
 	 */
 	public void saveToFile(File outputFile) throws JAXBException {
@@ -166,8 +177,21 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 	}
 
 	/**
-	 * Sets the hl7Code
-	 * The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
+	 * Saves the current CDA document to file.
+	 *
+	 * @param outputFileName
+	 *            the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Sets the hl7Code The human-readable text MUST be generated automatically
+	 * from the structured information of this element. The text element MUST
+	 * contain the reference to the corresponding text in the human readable
+	 * part, ONLY.
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CD value) {
 		super.code = value;
@@ -176,12 +200,17 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 	/**
 	 * Creates fixed contents for hl7Code
 	 *
-	 * @param code the desired fixed value for this argument.
-	 * @param codeSystem the desired fixed value for this argument.
-	 * @param codeSystemName the desired fixed value for this argument.
-	 * @param displayName the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
+	 * @param codeSystem
+	 *            the desired fixed value for this argument.
+	 * @param codeSystemName
+	 *            the desired fixed value for this argument.
+	 * @param displayName
+	 *            the desired fixed value for this argument.
 	 */
-	public void setHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+	public void setHl7CodeFixedValue(String code, String codeSystem, String codeSystemName,
+			String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD member = factory.createCD();
 		member.setCode(code);
@@ -193,8 +222,8 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 	}
 
 	/**
-	 * Sets the hl7EffectiveTime
-	 * Date or timestamp of the finding (physiologically relevant time of this observation).
+	 * Sets the hl7EffectiveTime Date or timestamp of the finding
+	 * (physiologically relevant time of this observation).
 	 */
 	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.TS value) {
 		ObjectFactory factory = new ObjectFactory();
@@ -204,8 +233,7 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 	}
 
 	/**
-	 * Sets the hl7Id
-	 * Each observation SHALL have an identifier.
+	 * Sets the hl7Id Each observation SHALL have an identifier.
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getId().clear();
@@ -213,8 +241,8 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 	}
 
 	/**
-	 * Sets the hl7StatusCode
-	 * The statusCode shall be set to 'completed' for all observations.
+	 * Sets the hl7StatusCode The statusCode shall be set to 'completed' for all
+	 * observations.
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
 		super.statusCode = value;
@@ -231,7 +259,8 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 	/**
 	 * Creates fixed contents for hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
 	public void setHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
@@ -242,8 +271,7 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 	}
 
 	/**
-	 * Sets the hl7Value
-	 * The delivery date (clinical estimate)
+	 * Sets the hl7Value The delivery date (clinical estimate)
 	 */
 	public void setHl7Value(org.ehealth_connector.common.hl7cdar2.TS value) {
 		super.getValue().clear();

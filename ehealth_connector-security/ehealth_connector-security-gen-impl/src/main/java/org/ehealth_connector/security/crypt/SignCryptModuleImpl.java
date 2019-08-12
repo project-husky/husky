@@ -1,10 +1,9 @@
 /*
- *
  * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -96,8 +95,8 @@ public class SignCryptModuleImpl implements SignCryptModule {
 	 */
 	private BasicX509Credential getSigningCredential(String aSigningAlias) throws SigningException {
 		try {
-			final PrivateKeyEntry privateKeyEntry = (PrivateKeyEntry) keyStore.getEntry(aSigningAlias,
-					new PasswordProtection(keyStorePassword.toCharArray()));
+			final PrivateKeyEntry privateKeyEntry = (PrivateKeyEntry) keyStore.getEntry(
+					aSigningAlias, new PasswordProtection(keyStorePassword.toCharArray()));
 			final PrivateKey privateKey = privateKeyEntry.getPrivateKey();
 			final X509Certificate certificate = (X509Certificate) privateKeyEntry.getCertificate();
 
@@ -117,15 +116,61 @@ public class SignCryptModuleImpl implements SignCryptModule {
 	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.crypt.SignCryptModule#setPki(java.security.KeyStore, java.lang.String, java.security.KeyStore,
-	 *      java.lang.String)
+	 * @see org.ehealth_connector.security.crypt.SignCryptModule#setPki(java.security.KeyStore,
+	 *      java.lang.String, java.security.KeyStore, java.lang.String)
 	 */
 	@Override
-	public void setPki(KeyStore aKeyStore, String aKeyStorePassword, KeyStore aTrustStore, String aTrustStorePassword) {
+	public void setPki(KeyStore aKeyStore, String aKeyStorePassword, KeyStore aTrustStore,
+			String aTrustStorePassword) {
 		keyStore = aKeyStore;
 		keyStorePassword = aKeyStorePassword;
 		trustStore = aTrustStore;
 		trustStorePassword = aTrustStorePassword;
+	}
+
+	private void sign(SignableXMLObject singningobject, String aSigningAlias)
+			throws SigningException {
+		try {
+
+			final Signature signature = new SignatureBuilder()
+					.buildObject(Signature.DEFAULT_ELEMENT_NAME);
+
+			final BasicX509Credential signingCredential = getSigningCredential(aSigningAlias);
+
+			signature.setSigningCredential(signingCredential);
+			signature.setSignatureAlgorithm(SignatureConstants.ALGO_ID_SIGNATURE_RSA_SHA512);
+			signature.setCanonicalizationAlgorithm(
+					SignatureConstants.ALGO_ID_C14N_EXCL_OMIT_COMMENTS);
+
+			final X509KeyInfoGeneratorFactory keyInfoGeneratorFactory = new X509KeyInfoGeneratorFactory();
+			keyInfoGeneratorFactory.setEmitEntityCertificate(true);
+			keyInfoGeneratorFactory
+					.setX509DigestAlgorithmURI(SignatureConstants.ALGO_ID_DIGEST_SHA1);
+
+			if (keyInfoGeneratorFactory.handles(signingCredential)) {
+				final KeyInfoGenerator keyInfoGenerator = keyInfoGeneratorFactory.newInstance();
+				final KeyInfo keyInfo = keyInfoGenerator.generate(signingCredential);
+
+				signature.setKeyInfo(keyInfo);
+
+				singningobject.setSignature(signature);
+
+				XMLObjectProviderRegistrySupport.getMarshallerFactory()
+						.getMarshaller(singningobject).marshall(singningobject);
+
+				Signer.signObject(signature);
+
+			}
+		} catch (SecurityException | MarshallingException | SignatureException e) {
+			throw new SigningException(e);
+		}
+	}
+
+	@Override
+	public void signArtifactResolve(ArtifactResolve artifactResolve, String aSigningAlias)
+			throws SigningException {
+		final ArtifactResolveImpl concrete = (ArtifactResolveImpl) artifactResolve;
+		sign(concrete.getWrappedObject(), aSigningAlias);
 	}
 
 	/**
@@ -136,49 +181,10 @@ public class SignCryptModuleImpl implements SignCryptModule {
 	 *      java.lang.String)
 	 */
 	@Override
-	public void signAuthnRequest(AuthnRequest aAuthnRequest, String aSigningAlias) throws SigningException {
+	public void signAuthnRequest(AuthnRequest aAuthnRequest, String aSigningAlias)
+			throws SigningException {
 		final AuthnRequestImpl concrete = (AuthnRequestImpl) aAuthnRequest;
 		sign(concrete.getWrappedObject(), aSigningAlias);
-	}
-
-	@Override
-	public void signArtifactResolve(ArtifactResolve artifactResolve, String aSigningAlias) throws SigningException {
-		final ArtifactResolveImpl concrete = (ArtifactResolveImpl) artifactResolve;
-		sign(concrete.getWrappedObject(), aSigningAlias);
-	}
-
-	private void sign(SignableXMLObject singningobject, String aSigningAlias) throws SigningException {
-		try {
-
-			final Signature signature = new SignatureBuilder().buildObject(Signature.DEFAULT_ELEMENT_NAME);
-
-			final BasicX509Credential signingCredential = getSigningCredential(aSigningAlias);
-
-			signature.setSigningCredential(signingCredential);
-			signature.setSignatureAlgorithm(SignatureConstants.ALGO_ID_SIGNATURE_RSA_SHA512);
-			signature.setCanonicalizationAlgorithm(SignatureConstants.ALGO_ID_C14N_EXCL_OMIT_COMMENTS);
-
-			final X509KeyInfoGeneratorFactory keyInfoGeneratorFactory = new X509KeyInfoGeneratorFactory();
-			keyInfoGeneratorFactory.setEmitEntityCertificate(true);
-			keyInfoGeneratorFactory.setX509DigestAlgorithmURI(SignatureConstants.ALGO_ID_DIGEST_SHA1);
-
-			if (keyInfoGeneratorFactory.handles(signingCredential)) {
-				final KeyInfoGenerator keyInfoGenerator = keyInfoGeneratorFactory.newInstance();
-				final KeyInfo keyInfo = keyInfoGenerator.generate(signingCredential);
-
-				signature.setKeyInfo(keyInfo);
-
-				singningobject.setSignature(signature);
-
-				XMLObjectProviderRegistrySupport.getMarshallerFactory().getMarshaller(singningobject)
-						.marshall(singningobject);
-
-				Signer.signObject(signature);
-
-			}
-		} catch (SecurityException | MarshallingException | SignatureException e) {
-			throw new SigningException(e);
-		}
 	}
 
 }

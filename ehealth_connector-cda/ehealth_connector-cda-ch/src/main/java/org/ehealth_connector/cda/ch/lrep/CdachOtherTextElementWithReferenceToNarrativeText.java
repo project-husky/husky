@@ -3,7 +3,7 @@
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -18,64 +18,74 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
+
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.14
- * Template description: Reusable template wherever a text reference to the corresponding text in the human readable part (narrative text) is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.14 Template
+ * description: Reusable template wherever a text reference to the corresponding
+ * text in the human readable part (narrative text) is used in a CDA-CH V2
+ * document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this
+ * template by either reference or specialisation.
  */
-public class CdachOtherTextElementWithReferenceToNarrativeText extends org.ehealth_connector.common.hl7cdar2.ED {
+public class CdachOtherTextElementWithReferenceToNarrativeText
+		extends org.ehealth_connector.common.hl7cdar2.ED {
 
 	/**
-	 * Gets the hl7Reference
-	 * The reference to the corresponding text in the human readable part must be specified by reference to content[@ID]: reference[@value='#xxx']
+	 * Loads the CDA document from file.
+	 *
+	 * @param inputFile
+	 *            the source file. n@return the CDA document\n@throws
+	 *            JAXBException\n@throws IOException Signals that an I/O
+	 *            exception has occurred.
+	 */
+	public static CdachOtherTextElementWithReferenceToNarrativeText loadFromFile(File inputFile)
+			throws JAXBException, IOException {
+		CdachOtherTextElementWithReferenceToNarrativeText retVal;
+		JAXBContext context = JAXBContext
+				.newInstance(CdachOtherTextElementWithReferenceToNarrativeText.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<CdachOtherTextElementWithReferenceToNarrativeText> root = mar.unmarshal(source,
+				CdachOtherTextElementWithReferenceToNarrativeText.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 *
+	 * @param inputFileName
+	 *            the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException
+	 *         Signals that an I/O exception has occurred.
+	 */
+	public static CdachOtherTextElementWithReferenceToNarrativeText loadFromFile(
+			String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Gets the hl7Reference The reference to the corresponding text in the
+	 * human readable part must be specified by reference to content[@ID]:
+	 * reference[@value='#xxx']
 	 */
 	public org.ehealth_connector.common.hl7cdar2.TEL getHl7Reference() {
 		return super.reference;
 	}
 
 	/**
-	 * Loads the CDA document from file.
-	 * @param inputFileName the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
-	 */
-	public static CdachOtherTextElementWithReferenceToNarrativeText loadFromFile(String inputFileName) throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
-	}
-
-	/**
-	 * Loads the CDA document from file.
-	 * @param inputFile the source file.
-	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
-	 */
-	public static CdachOtherTextElementWithReferenceToNarrativeText loadFromFile(File inputFile) throws JAXBException, IOException {
-		CdachOtherTextElementWithReferenceToNarrativeText retVal;
-		JAXBContext context = JAXBContext.newInstance(CdachOtherTextElementWithReferenceToNarrativeText.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<CdachOtherTextElementWithReferenceToNarrativeText> root = mar.unmarshal(source, CdachOtherTextElementWithReferenceToNarrativeText.class);
-		retVal = root.getValue();
-		return retVal;
-	}
-
-	/**
 	 * Saves the current CDA document to file.
-	 * @param outputFileName the full path and filename of the destination file.
-	 * @throws JAXBException
-	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
-	}
-
-	/**
-	 * Saves the current CDA document to file.
-	 * @param outputFile the destination file.
+	 *
+	 * @param outputFile
+	 *            the destination file.
 	 * @throws JAXBException
 	 */
 	public void saveToFile(File outputFile) throws JAXBException {
@@ -87,8 +97,20 @@ public class CdachOtherTextElementWithReferenceToNarrativeText extends org.eheal
 	}
 
 	/**
-	 * Sets the hl7Reference
-	 * The reference to the corresponding text in the human readable part must be specified by reference to content[@ID]: reference[@value='#xxx']
+	 * Saves the current CDA document to file.
+	 *
+	 * @param outputFileName
+	 *            the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Sets the hl7Reference The reference to the corresponding text in the
+	 * human readable part must be specified by reference to content[@ID]:
+	 * reference[@value='#xxx']
 	 */
 	public void setHl7Reference(org.ehealth_connector.common.hl7cdar2.TEL value) {
 		super.reference = value;

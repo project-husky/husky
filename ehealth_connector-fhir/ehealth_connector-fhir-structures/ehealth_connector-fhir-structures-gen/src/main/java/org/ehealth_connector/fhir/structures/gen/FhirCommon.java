@@ -1,10 +1,9 @@
 /*
- *
  * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -1015,7 +1014,8 @@ public class FhirCommon {
 			final String name = contact.getName().getFamily();
 			if (name != null)
 				if (!"".equals(name))
-					retVal.setOrganization(new org.ehealth_connector.common.mdht.Organization(name));
+					retVal.setOrganization(
+							new org.ehealth_connector.common.mdht.Organization(name));
 		}
 
 		return retVal;
@@ -1150,8 +1150,8 @@ public class FhirCommon {
 	 *            the community oid
 	 * @return the community patient id
 	 */
-	public static Identificator getCommunityPatientId(org.ehealth_connector.common.mdht.Patient patient,
-			String communityOid) {
+	public static Identificator getCommunityPatientId(
+			org.ehealth_connector.common.mdht.Patient patient, String communityOid) {
 		Identificator retVal = null;
 		if (communityOid != null) {
 			for (final Identificator item : patient.getIds()) {
@@ -1622,7 +1622,8 @@ public class FhirCommon {
 	 * @return the eHC Organization </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Organization getOrganization(IBaseResource res) {
+	public static org.ehealth_connector.common.mdht.Organization getOrganization(
+			IBaseResource res) {
 		org.ehealth_connector.common.mdht.Organization retVal = null;
 		if (res instanceof org.hl7.fhir.dstu3.model.Organization) {
 			retVal = FhirCommon.getOrganization((org.hl7.fhir.dstu3.model.Organization) res);

@@ -3,7 +3,7 @@
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -18,20 +18,57 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
+
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.88
- * Template description: Coding of significant pathogens.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.88 Template
+ * description: Coding of significant pathogens.
  */
-public class CdachlrepEntryNotificationOrganizerSignificantPathogens extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
+public class CdachlrepEntryNotificationOrganizerSignificantPathogens
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
+
+	/**
+	 * Loads the CDA document from file.
+	 *
+	 * @param inputFile
+	 *            the source file. n@return the CDA document\n@throws
+	 *            JAXBException\n@throws IOException Signals that an I/O
+	 *            exception has occurred.
+	 */
+	public static CdachlrepEntryNotificationOrganizerSignificantPathogens loadFromFile(
+			File inputFile) throws JAXBException, IOException {
+		CdachlrepEntryNotificationOrganizerSignificantPathogens retVal;
+		JAXBContext context = JAXBContext
+				.newInstance(CdachlrepEntryNotificationOrganizerSignificantPathogens.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<CdachlrepEntryNotificationOrganizerSignificantPathogens> root = mar
+				.unmarshal(source, CdachlrepEntryNotificationOrganizerSignificantPathogens.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 *
+	 * @param inputFileName
+	 *            the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException
+	 *         Signals that an I/O exception has occurred.
+	 */
+	public static CdachlrepEntryNotificationOrganizerSignificantPathogens loadFromFile(
+			String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
 
 	public CdachlrepEntryNotificationOrganizerSignificantPathogens() {
 		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.88");
@@ -43,7 +80,8 @@ public class CdachlrepEntryNotificationOrganizerSignificantPathogens extends org
 	/**
 	 * Adds a hl7Component
 	 */
-	public void addHl7Component(org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
+	public void addHl7Component(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
 		getComponent().add(value);
 	}
 
@@ -55,8 +93,8 @@ public class CdachlrepEntryNotificationOrganizerSignificantPathogens extends org
 	}
 
 	/**
-	 * Gets the hl7StatusCode
-	 * The status 'completed' means that the patient is assigned to the notification.
+	 * Gets the hl7StatusCode The status 'completed' means that the patient is
+	 * assigned to the notification.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
 		return super.statusCode;
@@ -74,41 +112,10 @@ public class CdachlrepEntryNotificationOrganizerSignificantPathogens extends org
 	}
 
 	/**
-	 * Loads the CDA document from file.
-	 * @param inputFileName the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
-	 */
-	public static CdachlrepEntryNotificationOrganizerSignificantPathogens loadFromFile(String inputFileName) throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
-	}
-
-	/**
-	 * Loads the CDA document from file.
-	 * @param inputFile the source file.
-	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
-	 */
-	public static CdachlrepEntryNotificationOrganizerSignificantPathogens loadFromFile(File inputFile) throws JAXBException, IOException {
-		CdachlrepEntryNotificationOrganizerSignificantPathogens retVal;
-		JAXBContext context = JAXBContext.newInstance(CdachlrepEntryNotificationOrganizerSignificantPathogens.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<CdachlrepEntryNotificationOrganizerSignificantPathogens> root = mar.unmarshal(source, CdachlrepEntryNotificationOrganizerSignificantPathogens.class);
-		retVal = root.getValue();
-		return retVal;
-	}
-
-	/**
 	 * Saves the current CDA document to file.
-	 * @param outputFileName the full path and filename of the destination file.
-	 * @throws JAXBException
-	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
-	}
-
-	/**
-	 * Saves the current CDA document to file.
-	 * @param outputFile the destination file.
+	 *
+	 * @param outputFile
+	 *            the destination file.
 	 * @throws JAXBException
 	 */
 	public void saveToFile(File outputFile) throws JAXBException {
@@ -120,8 +127,19 @@ public class CdachlrepEntryNotificationOrganizerSignificantPathogens extends org
 	}
 
 	/**
-	 * Sets the hl7StatusCode
-	 * The status 'completed' means that the patient is assigned to the notification.
+	 * Saves the current CDA document to file.
+	 *
+	 * @param outputFileName
+	 *            the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Sets the hl7StatusCode The status 'completed' means that the patient is
+	 * assigned to the notification.
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
 		super.statusCode = value;
@@ -130,7 +148,8 @@ public class CdachlrepEntryNotificationOrganizerSignificantPathogens extends org
 	/**
 	 * Creates fixed contents for hl7StatusCode
 	 *
-	 * @param code the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
 	 */
 	public void setHl7StatusCodeFixedValue(String code) {
 		ObjectFactory factory = new ObjectFactory();
@@ -151,7 +170,8 @@ public class CdachlrepEntryNotificationOrganizerSignificantPathogens extends org
 	/**
 	 * Creates fixed contents for hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
 	public void setHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();

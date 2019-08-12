@@ -1,10 +1,9 @@
 /*
- *
  * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -57,7 +56,8 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
-	public IdpClientByBrowserAndProtocolHandler(IdpClientByBrowserAndProtocolHandlerConfigImpl clientConfiguration) {
+	public IdpClientByBrowserAndProtocolHandler(
+			IdpClientByBrowserAndProtocolHandlerConfigImpl clientConfiguration) {
 		config = clientConfiguration;
 	}
 
@@ -84,7 +84,8 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 		return tempFile;
 	}
 
-	private Response getResponse(String samlReponse) throws DeserializeException, UnsupportedEncodingException {
+	private Response getResponse(String samlReponse)
+			throws DeserializeException, UnsupportedEncodingException {
 		final byte[] samlReponseBytes = Base64.getDecoder().decode(samlReponse);
 		final ResponseDeserializerImpl deserializer = new ResponseDeserializerImpl();
 		return deserializer.fromXmlByteArray(samlReponseBytes);
@@ -165,20 +166,23 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 		}
 	}
 
-	private Object startWaitForResponse() throws IOException, ClientSendException, DeserializeException {
+	private Object startWaitForResponse()
+			throws IOException, ClientSendException, DeserializeException {
 		final Calendar end = Calendar.getInstance();
 
 		// This is the timeout to wait for the SAML response
 		end.add(Calendar.MINUTE, 2);
 
-		final File tempFile = new File(System.getProperty("java.io.tmpdir"), config.getProtocolHandlerName() + ".io");
+		final File tempFile = new File(System.getProperty("java.io.tmpdir"),
+				config.getProtocolHandlerName() + ".io");
 		if (tempFile.exists()) {
 			tempFile.delete();
 		}
 		tempFile.createNewFile();
 		final BufferedReader in = new BufferedReader(new FileReader(tempFile));
 		String line = in.readLine();
-		while ((line == null) || line.isEmpty() || !line.startsWith(config.getProtocolHandlerName())) {
+		while ((line == null) || line.isEmpty()
+				|| !line.startsWith(config.getProtocolHandlerName())) {
 			line = in.readLine();
 			if (Calendar.getInstance().after(end)) {
 				break;

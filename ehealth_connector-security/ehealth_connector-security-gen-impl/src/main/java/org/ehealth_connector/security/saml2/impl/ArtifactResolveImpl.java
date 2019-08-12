@@ -1,10 +1,9 @@
 /*
- *
  * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -41,13 +40,24 @@ public class ArtifactResolveImpl
 	}
 
 	@Override
-	public org.opensaml.saml.saml2.core.ArtifactResolve getWrappedObject() {
-		return wrappedObject;
+	public String getArtifact() {
+		if (wrappedObject.getArtifact() != null) {
+			return wrappedObject.getArtifact().getArtifact();
+		}
+		return "";
 	}
 
 	@Override
 	public String getId() {
 		return wrappedObject.getID();
+	}
+
+	@Override
+	public Calendar getIssueInstant() {
+		final DateTime instant = wrappedObject.getIssueInstant();
+		final Calendar retVal = Calendar.getInstance();
+		retVal.setTimeInMillis(instant.getMillis());
+		return retVal;
 	}
 
 	@Override
@@ -67,19 +77,8 @@ public class ArtifactResolveImpl
 	}
 
 	@Override
-	public String getArtifact() {
-		if (wrappedObject.getArtifact() != null) {
-			return wrappedObject.getArtifact().getArtifact();
-		}
-		return "";
-	}
-
-	@Override
-	public Calendar getIssueInstant() {
-		final DateTime instant = wrappedObject.getIssueInstant();
-		final Calendar retVal = Calendar.getInstance();
-		retVal.setTimeInMillis(instant.getMillis());
-		return retVal;
+	public org.opensaml.saml.saml2.core.ArtifactResolve getWrappedObject() {
+		return wrappedObject;
 	}
 
 }

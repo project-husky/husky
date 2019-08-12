@@ -1,10 +1,9 @@
 /*
- *
  * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -100,8 +99,7 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	CLINICAL_GENETICS("394580004", "2.16.840.1.113883.6.96", "Clinical genetics (qualifier value)",
-			"Clinical genetics", "Medizinische Genetik", "Génétique médicale",
-			"Genetica medica"),
+			"Clinical genetics", "Medizinische Genetik", "Génétique médicale", "Genetica medica"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Clinical haematology</div>

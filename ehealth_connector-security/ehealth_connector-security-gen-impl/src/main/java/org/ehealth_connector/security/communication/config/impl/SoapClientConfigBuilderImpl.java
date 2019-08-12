@@ -1,10 +1,9 @@
 /*
- *
  * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -37,21 +36,6 @@ public class SoapClientConfigBuilderImpl implements SoapClientConfigBuilder {
 		config = new BaseSoapClientConfigImpl();
 	}
 
-	public SoapClientConfig create() {
-		return config;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.communication.config.ClientConfigBuilder#url(java.lang.String)
-	 */
-	@Override
-	public SoapClientConfigBuilderImpl url(String aEndpointUrl) {
-		config.setUrl(aEndpointUrl);
-		return this;
-	}
-
 	@Override
 	public SoapClientConfigBuilderImpl clientKeyStore(String clientKeyStore) {
 		config.setKeyStore(clientKeyStore);
@@ -68,6 +52,10 @@ public class SoapClientConfigBuilderImpl implements SoapClientConfigBuilder {
 	public SoapClientConfigBuilderImpl clientKeyStoreType(String clientKeyStoreType) {
 		config.setKeyStoreType(clientKeyStoreType);
 		return this;
+	}
+
+	public SoapClientConfig create() {
+		return config;
 	}
 
 	@Override
@@ -95,14 +83,25 @@ public class SoapClientConfigBuilderImpl implements SoapClientConfigBuilder {
 	}
 
 	@Override
+	public SoapClientConfigBuilder simple(boolean aSimple) {
+
+		return this;
+	}
+
+	@Override
 	public SoapClientConfigBuilderImpl soapVersion(SoapVersion soapVersion) {
 		config.setSoapVersion(soapVersion);
 		return this;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.communication.config.ClientConfigBuilder#url(java.lang.String)
+	 */
 	@Override
-	public SoapClientConfigBuilder simple(boolean aSimple) {
-
+	public SoapClientConfigBuilderImpl url(String aEndpointUrl) {
+		config.setUrl(aEndpointUrl);
 		return this;
 	}
 

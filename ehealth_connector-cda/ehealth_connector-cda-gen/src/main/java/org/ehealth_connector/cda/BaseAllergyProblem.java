@@ -1,10 +1,9 @@
 /*
- *
  * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -114,7 +113,8 @@ public class BaseAllergyProblem {
 	 *            Problems</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public BaseAllergyProblem(AllergiesAndIntolerances kindOfAllergy,
-			org.ehealth_connector.common.mdht.Code problem, Date startOfProblem, Date endOfProblem) {
+			org.ehealth_connector.common.mdht.Code problem, Date startOfProblem,
+			Date endOfProblem) {
 		this(kindOfAllergy, problem, startOfProblem, endOfProblem, null);
 
 	}
@@ -295,7 +295,8 @@ public class BaseAllergyProblem {
 		if (getAllergyProblem().getEffectiveTime() != null) {
 			if (getAllergyProblem().getEffectiveTime().getHigh() != null) {
 				try {
-					retVal = DateUtilMdht.parseDate(getAllergyProblem().getEffectiveTime().getHigh());
+					retVal = DateUtilMdht
+							.parseDate(getAllergyProblem().getEffectiveTime().getHigh());
 				} catch (Exception e) {
 				}
 			}
@@ -383,7 +384,8 @@ public class BaseAllergyProblem {
 		if (getAllergyProblem().getEffectiveTime() != null) {
 			if (getAllergyProblem().getEffectiveTime().getLow() != null) {
 				try {
-					retVal = DateUtilMdht.parseDate(getAllergyProblem().getEffectiveTime().getLow());
+					retVal = DateUtilMdht
+							.parseDate(getAllergyProblem().getEffectiveTime().getLow());
 				} catch (Exception e) {
 				}
 			}
