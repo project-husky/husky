@@ -18,65 +18,28 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
-
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.4 Template
- * description: This section contains a list of measured / observed vital signs.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.4
+ * Template description: This section contains a list of measured / observed vital signs.
  *
- * Element description: This section contains a list of measured / observed
- * vital signs.
+ * Element description: This section contains a list of measured / observed vital signs.
  */
-public class ChpccSectionVitalSignsCoded
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
-
-	/**
-	 * Loads the CDA document from file.
-	 *
-	 * @param inputFile
-	 *            the source file. n@return the CDA document\n@throws
-	 *            JAXBException\n@throws IOException Signals that an I/O
-	 *            exception has occurred.
-	 */
-	public static ChpccSectionVitalSignsCoded loadFromFile(File inputFile)
-			throws JAXBException, IOException {
-		ChpccSectionVitalSignsCoded retVal;
-		JAXBContext context = JAXBContext.newInstance(ChpccSectionVitalSignsCoded.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<ChpccSectionVitalSignsCoded> root = mar.unmarshal(source,
-				ChpccSectionVitalSignsCoded.class);
-		retVal = root.getValue();
-		return retVal;
-	}
-
-	/**
-	 * Loads the CDA document from file.
-	 *
-	 * @param inputFileName
-	 *            the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException
-	 *         Signals that an I/O exception has occurred.
-	 */
-	public static ChpccSectionVitalSignsCoded loadFromFile(String inputFileName)
-			throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
-	}
+public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 
 	public ChpccSectionVitalSignsCoded() {
-		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.4");
-		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.5.3.2");
-		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.3.25");
-		setHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.16");
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.4"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.5.3.2"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.3.25"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.16"));
 	}
 
 	/**
@@ -94,6 +57,18 @@ public class ChpccSectionVitalSignsCoded
 	}
 
 	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
+	/**
 	 * Gets the hl7Code
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7Code() {
@@ -101,7 +76,8 @@ public class ChpccSectionVitalSignsCoded
 	}
 
 	/**
-	 * Gets the hl7Id An ID for this section MAY be filled for traceability.
+	 * Gets the hl7Id
+	 * An ID for this section MAY be filled for traceability.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
 		return super.id;
@@ -119,26 +95,61 @@ public class ChpccSectionVitalSignsCoded
 	}
 
 	/**
-	 * Gets the hl7Text Human readable text of this section.
+	 * Gets the hl7Text
+	 * Human readable text of this section.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.StrucDocText getHl7Text() {
 		return super.text;
 	}
 
 	/**
-	 * Gets the hl7Title Fixed human readable title of this section. - [ge]:
-	 * 'Vitalzeichen' - [fr]: 'Signes vitaux' - [it]: 'Segni vitali' - [en]:
-	 * 'Vital Signs'
+	 * Gets the hl7Title
+	 * Fixed human readable title of this section.
+	 * - [ge]: 'Vitalzeichen'
+	 * - [fr]: 'Signes vitaux'
+	 * - [it]: 'Segni vitali'
+	 * - [en]: 'Vital Signs'
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ST getHl7Title() {
 		return super.title;
 	}
 
 	/**
+	 * Loads the CDA document from file.
+	 * @param inputFileName the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static ChpccSectionVitalSignsCoded loadFromFile(String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFile the source file.
+	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static ChpccSectionVitalSignsCoded loadFromFile(File inputFile) throws JAXBException, IOException {
+		ChpccSectionVitalSignsCoded retVal;
+		JAXBContext context = JAXBContext.newInstance(ChpccSectionVitalSignsCoded.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<ChpccSectionVitalSignsCoded> root = mar.unmarshal(source, ChpccSectionVitalSignsCoded.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
 	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFile
-	 *            the destination file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
 	 * @throws JAXBException
 	 */
 	public void saveToFile(File outputFile) throws JAXBException {
@@ -150,17 +161,6 @@ public class ChpccSectionVitalSignsCoded
 	}
 
 	/**
-	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFileName
-	 *            the full path and filename of the destination file.
-	 * @throws JAXBException
-	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
-	}
-
-	/**
 	 * Sets the hl7Code
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CE value) {
@@ -168,7 +168,8 @@ public class ChpccSectionVitalSignsCoded
 	}
 
 	/**
-	 * Sets the hl7Id An ID for this section MAY be filled for traceability.
+	 * Sets the hl7Id
+	 * An ID for this section MAY be filled for traceability.
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.id = value;
@@ -183,30 +184,20 @@ public class ChpccSectionVitalSignsCoded
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7TemplateIdFixedValue(String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
-		member.setRoot(root);
-		// setting the fixed value
-		super.getTemplateId().add(member);
-	}
-
-	/**
-	 * Sets the hl7Text Human readable text of this section.
+	 * Sets the hl7Text
+	 * Human readable text of this section.
 	 */
 	public void setHl7Text(org.ehealth_connector.common.hl7cdar2.StrucDocText value) {
 		super.text = value;
 	}
 
 	/**
-	 * Sets the hl7Title Fixed human readable title of this section. - [ge]:
-	 * 'Vitalzeichen' - [fr]: 'Signes vitaux' - [it]: 'Segni vitali' - [en]:
-	 * 'Vital Signs'
+	 * Sets the hl7Title
+	 * Fixed human readable title of this section.
+	 * - [ge]: 'Vitalzeichen'
+	 * - [fr]: 'Signes vitaux'
+	 * - [it]: 'Segni vitali'
+	 * - [en]: 'Vital Signs'
 	 */
 	public void setHl7Title(org.ehealth_connector.common.hl7cdar2.ST value) {
 		super.title = value;

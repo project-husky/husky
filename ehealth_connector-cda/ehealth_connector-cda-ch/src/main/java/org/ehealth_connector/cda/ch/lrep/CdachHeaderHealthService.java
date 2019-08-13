@@ -18,65 +18,51 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
-
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.46 Template
- * description: Information about a health service describing the context of
- * this CDA document. All CDA-CH V2 derivatives, i.e. Swiss exchange formats
- * MUST use this template by either reference or specialisation.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.46
+ * Template description: Information about a health service describing the context of this CDA document. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST use this template by either reference or specialisation.
  *
- * Element description: Information about a health service describing the
- * context of this CDA document.
+ * Element description: Information about a health service describing the context of this CDA document.
  */
-public class CdachHeaderHealthService
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf {
+public class CdachHeaderHealthService extends org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf {
+
+	public CdachHeaderHealthService() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.46"));
+	}
 
 	/**
-	 * Loads the CDA document from file.
+	 * Creates fixed contents for hl7ServiceEvent
 	 *
-	 * @param inputFile
-	 *            the source file. n@return the CDA document\n@throws
-	 *            JAXBException\n@throws IOException Signals that an I/O
-	 *            exception has occurred.
+	 * @param classCode the desired fixed value for this argument.
+	 * @param moodCode the desired fixed value for this argument.
 	 */
-	public static CdachHeaderHealthService loadFromFile(File inputFile)
-			throws JAXBException, IOException {
-		CdachHeaderHealthService retVal;
-		JAXBContext context = JAXBContext.newInstance(CdachHeaderHealthService.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<CdachHeaderHealthService> root = mar.unmarshal(source,
-				CdachHeaderHealthService.class);
-		retVal = root.getValue();
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040ServiceEvent createHl7ServiceEventFixedValue(String classCode, String moodCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040ServiceEvent retVal = factory.createPOCDMT000040ServiceEvent();
+		retVal.getClassCode().add(classCode);
+		retVal.getMoodCode().add(moodCode);
 		return retVal;
 	}
 
 	/**
-	 * Loads the CDA document from file.
+	 * Creates fixed contents for hl7TemplateId
 	 *
-	 * @param inputFileName
-	 *            the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException
-	 *         Signals that an I/O exception has occurred.
+	 * @param root the desired fixed value for this argument.
 	 */
-	public static CdachHeaderHealthService loadFromFile(String inputFileName)
-			throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
-	}
-
-	public CdachHeaderHealthService() {
-		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.46");
-		setHl7ServiceEventFixedValue("ACT", "EVN");
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
 	}
 
 	/**
@@ -98,10 +84,41 @@ public class CdachHeaderHealthService
 	}
 
 	/**
+	 * Loads the CDA document from file.
+	 * @param inputFileName the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachHeaderHealthService loadFromFile(String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFile the source file.
+	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachHeaderHealthService loadFromFile(File inputFile) throws JAXBException, IOException {
+		CdachHeaderHealthService retVal;
+		JAXBContext context = JAXBContext.newInstance(CdachHeaderHealthService.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<CdachHeaderHealthService> root = mar.unmarshal(source, CdachHeaderHealthService.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
 	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFile
-	 *            the destination file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
 	 * @throws JAXBException
 	 */
 	public void saveToFile(File outputFile) throws JAXBException {
@@ -113,40 +130,10 @@ public class CdachHeaderHealthService
 	}
 
 	/**
-	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFileName
-	 *            the full path and filename of the destination file.
-	 * @throws JAXBException
-	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
-	}
-
-	/**
 	 * Sets the hl7ServiceEvent
 	 */
-	public void setHl7ServiceEvent(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040ServiceEvent value) {
+	public void setHl7ServiceEvent(org.ehealth_connector.common.hl7cdar2.POCDMT000040ServiceEvent value) {
 		super.serviceEvent = value;
-	}
-
-	/**
-	 * Creates fixed contents for hl7ServiceEvent
-	 *
-	 * @param classCode
-	 *            the desired fixed value for this argument.
-	 * @param moodCode
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7ServiceEventFixedValue(String classCode, String moodCode) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040ServiceEvent member = factory
-				.createPOCDMT000040ServiceEvent();
-		member.getClassCode().add(classCode);
-		member.getMoodCode().add(moodCode);
-		// setting the fixed value
-		super.setServiceEvent(member);
 	}
 
 	/**
@@ -155,19 +142,5 @@ public class CdachHeaderHealthService
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getTemplateId().clear();
 		super.getTemplateId().add(value);
-	}
-
-	/**
-	 * Creates fixed contents for hl7TemplateId
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7TemplateIdFixedValue(String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
-		member.setRoot(root);
-		// setting the fixed value
-		super.getTemplateId().add(member);
 	}
 }

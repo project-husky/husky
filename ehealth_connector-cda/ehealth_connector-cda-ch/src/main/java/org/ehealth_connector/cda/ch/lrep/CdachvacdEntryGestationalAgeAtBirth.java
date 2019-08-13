@@ -18,109 +18,104 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
-
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.IVLTS;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.84 Template
- * description: The coded gestational age in days of gestation at birth of a
- * patient. This item is intended to be applied for the child but not for the
- * mother.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.84
+ * Template description: The coded gestational age in days of gestation at birth of a patient. This item is intended to be applied for the child but not for the mother.
  *
- * Element description: The coded gestational age in days of gestation at birth
- * of a patient. This item is intended to be applied for the child but not for
- * the mother.
+ * Element description: The coded gestational age in days of gestation at birth of a patient. This item is intended to be applied for the child but not for the mother.
  */
-public class CdachvacdEntryGestationalAgeAtBirth
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
-
-	/**
-	 * Loads the CDA document from file.
-	 *
-	 * @param inputFile
-	 *            the source file. n@return the CDA document\n@throws
-	 *            JAXBException\n@throws IOException Signals that an I/O
-	 *            exception has occurred.
-	 */
-	public static CdachvacdEntryGestationalAgeAtBirth loadFromFile(File inputFile)
-			throws JAXBException, IOException {
-		CdachvacdEntryGestationalAgeAtBirth retVal;
-		JAXBContext context = JAXBContext.newInstance(CdachvacdEntryGestationalAgeAtBirth.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<CdachvacdEntryGestationalAgeAtBirth> root = mar.unmarshal(source,
-				CdachvacdEntryGestationalAgeAtBirth.class);
-		retVal = root.getValue();
-		return retVal;
-	}
-
-	/**
-	 * Loads the CDA document from file.
-	 *
-	 * @param inputFileName
-	 *            the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException
-	 *         Signals that an I/O exception has occurred.
-	 */
-	public static CdachvacdEntryGestationalAgeAtBirth loadFromFile(String inputFileName)
-			throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
-	}
+public class CdachvacdEntryGestationalAgeAtBirth extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
 	public CdachvacdEntryGestationalAgeAtBirth() {
-		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.84");
-		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13");
-		setHl7CodeFixedValue("49052-4", "2.16.840.1.113883.6.1", "LOINC",
-				"Gestational age in days");
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.84"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13"));
+		codeFixedValue = createHl7CodeFixedValue("49052-4", "2.16.840.1.113883.6.1", "LOINC", "Gestational age in days");
 	}
 
+	private org.ehealth_connector.common.hl7cdar2.CD codeFixedValue;
+
 	/**
-	 * Adds a hl7Author This MAY be used to indicate who has documented the
-	 * observation. This information supersedes any information recorded at
-	 * higher level.
+	 * Adds a hl7Author
+	 * This MAY be used to indicate who has documented the observation. This information supersedes any information recorded at higher level.
 	 */
 	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
 		getAuthor().add(value);
 	}
 
 	/**
-	 * Adds a hl7Author This MAY be used to indicate who has documented the
-	 * observation. This information supersedes any information recorded at
-	 * higher level.
+	 * Adds a hl7Author
+	 * This MAY be used to indicate who has documented the observation. This information supersedes any information recorded at higher level.
 	 */
 	public void clearHl7Author() {
 		getAuthor().clear();
 	}
 
 	/**
-	 * Gets the hl7Code The human-readable text MUST be generated automatically
-	 * from the structured information of this element. The text element MUST
-	 * contain the reference to the corresponding text in the human readable
-	 * part, ONLY.
+	 * Creates fixed contents for hl7Code
+	 *
+	 * @param code the desired fixed value for this argument.
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 * @param displayName the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
+		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
+	/**
+	 * Gets the member codeFixedValue
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CD getCodeFixedValue() {
+		return codeFixedValue;
+	}
+
+	/**
+	 * Gets the hl7Code
+	 * The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
 		return super.code;
 	}
 
 	/**
-	 * Gets the hl7EffectiveTime Date or timestamp of the finding
-	 * (physiologically relevant time of this observation).
+	 * Gets the hl7EffectiveTime
+	 * Date or timestamp of the finding (physiologically relevant time of this observation).
 	 */
 	public org.ehealth_connector.common.hl7cdar2.TS getHl7EffectiveTime() {
 		return super.effectiveTime;
 	}
 
 	/**
-	 * Gets the hl7Id Each observation SHALL have an identifier.
+	 * Gets the hl7Id
+	 * Each observation SHALL have an identifier.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
 		org.ehealth_connector.common.hl7cdar2.II retVal = null;
@@ -131,8 +126,8 @@ public class CdachvacdEntryGestationalAgeAtBirth
 	}
 
 	/**
-	 * Gets the hl7StatusCode The statusCode SHALL be set to 'completed' for all
-	 * observations.
+	 * Gets the hl7StatusCode
+	 * The statusCode SHALL be set to 'completed' for all observations.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
 		return super.statusCode;
@@ -150,11 +145,10 @@ public class CdachvacdEntryGestationalAgeAtBirth
 	}
 
 	/**
-	 * Gets the hl7Value The gestational age, recorded in days. Therefore weeks
-	 * have to be converted to days and back to weeks by the
-	 * applications.Examples: - Application --&gt; CDA:37th week and 4th day =
-	 * 37 * 7 + 4 days = 263 days - CDA --&gt; application:178 d = 25 weeks and
-	 * 3 days
+	 * Gets the hl7Value
+	 * The gestational age, recorded in days. Therefore weeks have to be converted to days and back to weeks by the applications.Examples:
+	 * - Application --&gt; CDA:37th week and 4th day = 37 * 7 + 4 days = 263 days
+	 * - CDA --&gt; application:178 d = 25 weeks and 3 days
 	 */
 	public org.ehealth_connector.common.hl7cdar2.PQ getHl7Value() {
 		org.ehealth_connector.common.hl7cdar2.PQ retVal = null;
@@ -165,10 +159,41 @@ public class CdachvacdEntryGestationalAgeAtBirth
 	}
 
 	/**
+	 * Loads the CDA document from file.
+	 * @param inputFileName the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachvacdEntryGestationalAgeAtBirth loadFromFile(String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFile the source file.
+	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachvacdEntryGestationalAgeAtBirth loadFromFile(File inputFile) throws JAXBException, IOException {
+		CdachvacdEntryGestationalAgeAtBirth retVal;
+		JAXBContext context = JAXBContext.newInstance(CdachvacdEntryGestationalAgeAtBirth.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<CdachvacdEntryGestationalAgeAtBirth> root = mar.unmarshal(source, CdachvacdEntryGestationalAgeAtBirth.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
 	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFile
-	 *            the destination file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
 	 * @throws JAXBException
 	 */
 	public void saveToFile(File outputFile) throws JAXBException {
@@ -180,53 +205,16 @@ public class CdachvacdEntryGestationalAgeAtBirth
 	}
 
 	/**
-	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFileName
-	 *            the full path and filename of the destination file.
-	 * @throws JAXBException
-	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
-	}
-
-	/**
-	 * Sets the hl7Code The human-readable text MUST be generated automatically
-	 * from the structured information of this element. The text element MUST
-	 * contain the reference to the corresponding text in the human readable
-	 * part, ONLY.
+	 * Sets the hl7Code
+	 * The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CD value) {
 		super.code = value;
 	}
 
 	/**
-	 * Creates fixed contents for hl7Code
-	 *
-	 * @param code
-	 *            the desired fixed value for this argument.
-	 * @param codeSystem
-	 *            the desired fixed value for this argument.
-	 * @param codeSystemName
-	 *            the desired fixed value for this argument.
-	 * @param displayName
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7CodeFixedValue(String code, String codeSystem, String codeSystemName,
-			String displayName) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CD member = factory.createCD();
-		member.setCode(code);
-		member.setCodeSystem(codeSystem);
-		member.setCodeSystemName(codeSystemName);
-		member.setDisplayName(displayName);
-		// setting the fixed value
-		super.setCode(member);
-	}
-
-	/**
-	 * Sets the hl7EffectiveTime Date or timestamp of the finding
-	 * (physiologically relevant time of this observation).
+	 * Sets the hl7EffectiveTime
+	 * Date or timestamp of the finding (physiologically relevant time of this observation).
 	 */
 	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.TS value) {
 		ObjectFactory factory = new ObjectFactory();
@@ -236,7 +224,8 @@ public class CdachvacdEntryGestationalAgeAtBirth
 	}
 
 	/**
-	 * Sets the hl7Id Each observation SHALL have an identifier.
+	 * Sets the hl7Id
+	 * Each observation SHALL have an identifier.
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getId().clear();
@@ -244,8 +233,8 @@ public class CdachvacdEntryGestationalAgeAtBirth
 	}
 
 	/**
-	 * Sets the hl7StatusCode The statusCode SHALL be set to 'completed' for all
-	 * observations.
+	 * Sets the hl7StatusCode
+	 * The statusCode SHALL be set to 'completed' for all observations.
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
 		super.statusCode = value;
@@ -260,25 +249,10 @@ public class CdachvacdEntryGestationalAgeAtBirth
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7TemplateIdFixedValue(String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
-		member.setRoot(root);
-		// setting the fixed value
-		super.getTemplateId().add(member);
-	}
-
-	/**
-	 * Sets the hl7Value The gestational age, recorded in days. Therefore weeks
-	 * have to be converted to days and back to weeks by the
-	 * applications.Examples: - Application --&gt; CDA:37th week and 4th day =
-	 * 37 * 7 + 4 days = 263 days - CDA --&gt; application:178 d = 25 weeks and
-	 * 3 days
+	 * Sets the hl7Value
+	 * The gestational age, recorded in days. Therefore weeks have to be converted to days and back to weeks by the applications.Examples:
+	 * - Application --&gt; CDA:37th week and 4th day = 37 * 7 + 4 days = 263 days
+	 * - CDA --&gt; application:178 d = 25 weeks and 3 days
 	 */
 	public void setHl7Value(org.ehealth_connector.common.hl7cdar2.PQ value) {
 		super.getValue().clear();

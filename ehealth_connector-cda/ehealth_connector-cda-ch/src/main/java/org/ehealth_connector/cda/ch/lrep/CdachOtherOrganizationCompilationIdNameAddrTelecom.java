@@ -18,67 +18,58 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
-
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.33 Template
- * description: Reusable template wherever an organization with required id,
- * name, address and communication means is used in a CDA-CH V2 document. CDA-CH
- * V2 derivatives, i.e. Swiss exchange formats MAY use this template by either
- * reference or specialisation.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.33
+ * Template description: Reusable template wherever an organization with required id, name, address and communication means is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.
  *
  * Element description: The organization's id.
  */
-public class CdachOtherOrganizationCompilationIdNameAddrTelecom
-		extends org.ehealth_connector.common.hl7cdar2.II {
+public class CdachOtherOrganizationCompilationIdNameAddrTelecom extends org.ehealth_connector.common.hl7cdar2.II {
 
 	/**
 	 * Loads the CDA document from file.
-	 *
-	 * @param inputFile
-	 *            the source file. n@return the CDA document\n@throws
-	 *            JAXBException\n@throws IOException Signals that an I/O
-	 *            exception has occurred.
+	 * @param inputFileName the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
 	 */
-	public static CdachOtherOrganizationCompilationIdNameAddrTelecom loadFromFile(File inputFile)
-			throws JAXBException, IOException {
+	public static CdachOtherOrganizationCompilationIdNameAddrTelecom loadFromFile(String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFile the source file.
+	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachOtherOrganizationCompilationIdNameAddrTelecom loadFromFile(File inputFile) throws JAXBException, IOException {
 		CdachOtherOrganizationCompilationIdNameAddrTelecom retVal;
-		JAXBContext context = JAXBContext
-				.newInstance(CdachOtherOrganizationCompilationIdNameAddrTelecom.class);
+		JAXBContext context = JAXBContext.newInstance(CdachOtherOrganizationCompilationIdNameAddrTelecom.class);
 		Unmarshaller mar = context.createUnmarshaller();
 		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<CdachOtherOrganizationCompilationIdNameAddrTelecom> root = mar.unmarshal(source,
-				CdachOtherOrganizationCompilationIdNameAddrTelecom.class);
+		JAXBElement<CdachOtherOrganizationCompilationIdNameAddrTelecom> root = mar.unmarshal(source, CdachOtherOrganizationCompilationIdNameAddrTelecom.class);
 		retVal = root.getValue();
 		return retVal;
 	}
 
 	/**
-	 * Loads the CDA document from file.
-	 *
-	 * @param inputFileName
-	 *            the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException
-	 *         Signals that an I/O exception has occurred.
+	 * Saves the current CDA document to file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
 	 */
-	public static CdachOtherOrganizationCompilationIdNameAddrTelecom loadFromFile(
-			String inputFileName) throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
 	}
 
 	/**
 	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFile
-	 *            the destination file.
+	 * @param outputFile the destination file.
 	 * @throws JAXBException
 	 */
 	public void saveToFile(File outputFile) throws JAXBException {
@@ -87,16 +78,5 @@ public class CdachOtherOrganizationCompilationIdNameAddrTelecom
 		mar.setProperty("com.sun.xml.bind.namespacePrefixMapper", new CdaNamespacePrefixMapper());
 		mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 		mar.marshal(this, outputFile);
-	}
-
-	/**
-	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFileName
-	 *            the full path and filename of the destination file.
-	 * @throws JAXBException
-	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
 	}
 }

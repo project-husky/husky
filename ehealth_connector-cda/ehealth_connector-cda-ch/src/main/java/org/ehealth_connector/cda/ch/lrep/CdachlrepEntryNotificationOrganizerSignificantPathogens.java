@@ -18,70 +18,31 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
-
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.88 Template
- * description: Coding of significant pathogens.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.88
+ * Template description: Coding of significant pathogens.
  */
-public class CdachlrepEntryNotificationOrganizerSignificantPathogens
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
-
-	/**
-	 * Loads the CDA document from file.
-	 *
-	 * @param inputFile
-	 *            the source file. n@return the CDA document\n@throws
-	 *            JAXBException\n@throws IOException Signals that an I/O
-	 *            exception has occurred.
-	 */
-	public static CdachlrepEntryNotificationOrganizerSignificantPathogens loadFromFile(
-			File inputFile) throws JAXBException, IOException {
-		CdachlrepEntryNotificationOrganizerSignificantPathogens retVal;
-		JAXBContext context = JAXBContext
-				.newInstance(CdachlrepEntryNotificationOrganizerSignificantPathogens.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<CdachlrepEntryNotificationOrganizerSignificantPathogens> root = mar
-				.unmarshal(source, CdachlrepEntryNotificationOrganizerSignificantPathogens.class);
-		retVal = root.getValue();
-		return retVal;
-	}
-
-	/**
-	 * Loads the CDA document from file.
-	 *
-	 * @param inputFileName
-	 *            the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException
-	 *         Signals that an I/O exception has occurred.
-	 */
-	public static CdachlrepEntryNotificationOrganizerSignificantPathogens loadFromFile(
-			String inputFileName) throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
-	}
+public class CdachlrepEntryNotificationOrganizerSignificantPathogens extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
 
 	public CdachlrepEntryNotificationOrganizerSignificantPathogens() {
-		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.88");
-		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.13");
-		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.1");
-		setHl7StatusCodeFixedValue("completed");
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.88"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.13"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.1"));
 	}
 
 	/**
 	 * Adds a hl7Component
 	 */
-	public void addHl7Component(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
+	public void addHl7Component(org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
 		getComponent().add(value);
 	}
 
@@ -93,8 +54,32 @@ public class CdachlrepEntryNotificationOrganizerSignificantPathogens
 	}
 
 	/**
-	 * Gets the hl7StatusCode The status 'completed' means that the patient is
-	 * assigned to the notification.
+	 * Creates fixed contents for hl7StatusCode
+	 *
+	 * @param code the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
+		retVal.setCode(code);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
+	/**
+	 * Gets the hl7StatusCode
+	 * The status 'completed' means that the patient is assigned to the notification.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
 		return super.statusCode;
@@ -112,10 +97,41 @@ public class CdachlrepEntryNotificationOrganizerSignificantPathogens
 	}
 
 	/**
+	 * Loads the CDA document from file.
+	 * @param inputFileName the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachlrepEntryNotificationOrganizerSignificantPathogens loadFromFile(String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFile the source file.
+	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachlrepEntryNotificationOrganizerSignificantPathogens loadFromFile(File inputFile) throws JAXBException, IOException {
+		CdachlrepEntryNotificationOrganizerSignificantPathogens retVal;
+		JAXBContext context = JAXBContext.newInstance(CdachlrepEntryNotificationOrganizerSignificantPathogens.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<CdachlrepEntryNotificationOrganizerSignificantPathogens> root = mar.unmarshal(source, CdachlrepEntryNotificationOrganizerSignificantPathogens.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
 	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFile
-	 *            the destination file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
 	 * @throws JAXBException
 	 */
 	public void saveToFile(File outputFile) throws JAXBException {
@@ -127,36 +143,11 @@ public class CdachlrepEntryNotificationOrganizerSignificantPathogens
 	}
 
 	/**
-	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFileName
-	 *            the full path and filename of the destination file.
-	 * @throws JAXBException
-	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
-	}
-
-	/**
-	 * Sets the hl7StatusCode The status 'completed' means that the patient is
-	 * assigned to the notification.
+	 * Sets the hl7StatusCode
+	 * The status 'completed' means that the patient is assigned to the notification.
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
 		super.statusCode = value;
-	}
-
-	/**
-	 * Creates fixed contents for hl7StatusCode
-	 *
-	 * @param code
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7StatusCodeFixedValue(String code) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CS member = factory.createCS();
-		member.setCode(code);
-		// setting the fixed value
-		super.setStatusCode(member);
 	}
 
 	/**
@@ -165,19 +156,5 @@ public class CdachlrepEntryNotificationOrganizerSignificantPathogens
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getTemplateId().clear();
 		super.getTemplateId().add(value);
-	}
-
-	/**
-	 * Creates fixed contents for hl7TemplateId
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7TemplateIdFixedValue(String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
-		member.setRoot(root);
-		// setting the fixed value
-		super.getTemplateId().add(member);
 	}
 }

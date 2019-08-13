@@ -18,79 +18,80 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
-
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 import org.ehealth_connector.common.hl7cdar2.XActRelationshipEntry;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.53 Template
- * description: Chapter (CDA Body Section) containing the information about a
- * current pregnancy. This section is specialisation of the Pregnancy Hostory
- * section according to IHE PCC Technical Framework Revision 11.0 - November 11,
- * 2016.The section MUST contain at least one Pregnancy Observation entry. In
- * case of no pregnancy, one of the 'special case' codes MUST be used.This
- * section SHALL not be present for male patients.For eVACDOC, this section MUST
- * only contain the estimated delivery date.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.53
+ * Template description: Chapter (CDA Body Section) containing the information about a current pregnancy. This section is specialisation of the Pregnancy Hostory section according to IHE PCC Technical Framework Revision 11.0 - November 11, 2016.The section MUST contain at least one Pregnancy Observation entry. In case of no pregnancy, one of the 'special case' codes MUST be used.This section SHALL not be present for male patients.For eVACDOC, this section MUST only contain the estimated delivery date.
  *
- * Element description: Chapter (CDA Body Section) containing the information
- * about a current pregnancy. This section is specialisation of the Pregnancy
- * Hostory section according to IHE PCC Technical Framework Revision 11.0 -
- * November 11, 2016.The section MUST contain at least one Pregnancy Observation
- * entry. In case of no pregnancy, one of the 'special case' codes MUST be
- * used.This section SHALL not be present for male patients.For eVACDOC, this
- * section MUST only contain the estimated delivery date.
+ * Element description: Chapter (CDA Body Section) containing the information about a current pregnancy. This section is specialisation of the Pregnancy Hostory section according to IHE PCC Technical Framework Revision 11.0 - November 11, 2016.The section MUST contain at least one Pregnancy Observation entry. In case of no pregnancy, one of the 'special case' codes MUST be used.This section SHALL not be present for male patients.For eVACDOC, this section MUST only contain the estimated delivery date.
  */
-public class ChpccSectionCurrentPregnancyCoded
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
+public class ChpccSectionCurrentPregnancyCoded extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
+
+	public ChpccSectionCurrentPregnancyCoded() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.53"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.5.3.4"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.127.77.1.10.1"));
+		codeFixedValue = createHl7CodeFixedValue("10162-6", "2.16.840.1.113883.6.1", "LOINC", "HISTORY OF PREGNANCIES");
+	}
+
+	private org.ehealth_connector.common.hl7cdar2.CE codeFixedValue;
 
 	/**
-	 * Loads the CDA document from file.
+	 * Creates fixed contents for hl7Code
 	 *
-	 * @param inputFile
-	 *            the source file. n@return the CDA document\n@throws
-	 *            JAXBException\n@throws IOException Signals that an I/O
-	 *            exception has occurred.
+	 * @param code the desired fixed value for this argument.
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 * @param displayName the desired fixed value for this argument.
 	 */
-	public static ChpccSectionCurrentPregnancyCoded loadFromFile(File inputFile)
-			throws JAXBException, IOException {
-		ChpccSectionCurrentPregnancyCoded retVal;
-		JAXBContext context = JAXBContext.newInstance(ChpccSectionCurrentPregnancyCoded.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<ChpccSectionCurrentPregnancyCoded> root = mar.unmarshal(source,
-				ChpccSectionCurrentPregnancyCoded.class);
-		retVal = root.getValue();
+	public org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
+		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
 		return retVal;
 	}
 
 	/**
-	 * Loads the CDA document from file.
+	 * Creates fixed contents for hl7Entry
 	 *
-	 * @param inputFileName
-	 *            the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException
-	 *         Signals that an I/O exception has occurred.
+	 * @param typeCode the desired fixed value for this argument.
 	 */
-	public static ChpccSectionCurrentPregnancyCoded loadFromFile(String inputFileName)
-			throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry createHl7EntryFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry retVal = factory.createPOCDMT000040Entry();
+		retVal.setTypeCode(XActRelationshipEntry.valueOf(typeCode));
+		return retVal;
 	}
 
-	public ChpccSectionCurrentPregnancyCoded() {
-		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.53");
-		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.5.3.4");
-		setHl7TemplateIdFixedValue("2.16.756.5.30.1.127.77.1.10.1");
-		setHl7CodeFixedValue("10162-6", "2.16.840.1.113883.6.1", "LOINC", "HISTORY OF PREGNANCIES");
-		setHl7EntryFixedValue("DRIV");
-		setHl7EntryFixedValue("DRIV");
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
+	/**
+	 * Gets the member codeFixedValue
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CE getCodeFixedValue() {
+		return codeFixedValue;
 	}
 
 	/**
@@ -101,8 +102,8 @@ public class ChpccSectionCurrentPregnancyCoded
 	}
 
 	/**
-	 * Gets the hl7Entry The narrative text in the text element of the section
-	 * MUST be generated automatically from the information in this entry.
+	 * Gets the hl7Entry
+	 * The narrative text in the text element of the section MUST be generated automatically from the information in this entry.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry getHl7Entry() {
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry retVal = null;
@@ -113,7 +114,8 @@ public class ChpccSectionCurrentPregnancyCoded
 	}
 
 	/**
-	 * Gets the hl7Id An ID for this section MAY be filled for traceability.
+	 * Gets the hl7Id
+	 * An ID for this section MAY be filled for traceability.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
 		return super.id;
@@ -131,7 +133,8 @@ public class ChpccSectionCurrentPregnancyCoded
 	}
 
 	/**
-	 * Gets the hl7Text The narrative text for this section.
+	 * Gets the hl7Text
+	 * The narrative text for this section.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.StrucDocText getHl7Text() {
 		return super.text;
@@ -145,10 +148,41 @@ public class ChpccSectionCurrentPregnancyCoded
 	}
 
 	/**
+	 * Loads the CDA document from file.
+	 * @param inputFileName the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static ChpccSectionCurrentPregnancyCoded loadFromFile(String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFile the source file.
+	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static ChpccSectionCurrentPregnancyCoded loadFromFile(File inputFile) throws JAXBException, IOException {
+		ChpccSectionCurrentPregnancyCoded retVal;
+		JAXBContext context = JAXBContext.newInstance(ChpccSectionCurrentPregnancyCoded.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<ChpccSectionCurrentPregnancyCoded> root = mar.unmarshal(source, ChpccSectionCurrentPregnancyCoded.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
 	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFile
-	 *            the destination file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
 	 * @throws JAXBException
 	 */
 	public void saveToFile(File outputFile) throws JAXBException {
@@ -160,17 +194,6 @@ public class ChpccSectionCurrentPregnancyCoded
 	}
 
 	/**
-	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFileName
-	 *            the full path and filename of the destination file.
-	 * @throws JAXBException
-	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
-	}
-
-	/**
 	 * Sets the hl7Code
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CE value) {
@@ -178,32 +201,8 @@ public class ChpccSectionCurrentPregnancyCoded
 	}
 
 	/**
-	 * Creates fixed contents for hl7Code
-	 *
-	 * @param code
-	 *            the desired fixed value for this argument.
-	 * @param codeSystem
-	 *            the desired fixed value for this argument.
-	 * @param codeSystemName
-	 *            the desired fixed value for this argument.
-	 * @param displayName
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7CodeFixedValue(String code, String codeSystem, String codeSystemName,
-			String displayName) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CE member = factory.createCE();
-		member.setCode(code);
-		member.setCodeSystem(codeSystem);
-		member.setCodeSystemName(codeSystemName);
-		member.setDisplayName(displayName);
-		// setting the fixed value
-		super.setCode(member);
-	}
-
-	/**
-	 * Sets the hl7Entry The narrative text in the text element of the section
-	 * MUST be generated automatically from the information in this entry.
+	 * Sets the hl7Entry
+	 * The narrative text in the text element of the section MUST be generated automatically from the information in this entry.
 	 */
 	public void setHl7Entry(org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry value) {
 		super.getEntry().clear();
@@ -211,22 +210,8 @@ public class ChpccSectionCurrentPregnancyCoded
 	}
 
 	/**
-	 * Creates fixed contents for hl7Entry
-	 *
-	 * @param typeCode
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7EntryFixedValue(String typeCode) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry member = factory
-				.createPOCDMT000040Entry();
-		member.setTypeCode(XActRelationshipEntry.valueOf(typeCode));
-		// setting the fixed value
-		super.getEntry().add(member);
-	}
-
-	/**
-	 * Sets the hl7Id An ID for this section MAY be filled for traceability.
+	 * Sets the hl7Id
+	 * An ID for this section MAY be filled for traceability.
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.id = value;
@@ -241,21 +226,8 @@ public class ChpccSectionCurrentPregnancyCoded
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7TemplateIdFixedValue(String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
-		member.setRoot(root);
-		// setting the fixed value
-		super.getTemplateId().add(member);
-	}
-
-	/**
-	 * Sets the hl7Text The narrative text for this section.
+	 * Sets the hl7Text
+	 * The narrative text for this section.
 	 */
 	public void setHl7Text(org.ehealth_connector.common.hl7cdar2.StrucDocText value) {
 		super.text = value;

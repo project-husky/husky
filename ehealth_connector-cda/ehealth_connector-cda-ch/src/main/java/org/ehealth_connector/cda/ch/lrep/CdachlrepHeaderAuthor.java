@@ -19,65 +19,55 @@ package org.ehealth_connector.cda.ch.lrep;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
-
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.59 Template
- * description: Information about the author of the document. The author MAY be
- * a person or a device. At least one author MUST be declared.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.59
+ * Template description: Information about the author of the document. The author MAY be a person or a device. At least one author MUST be declared.
  *
- * Element description: Information about the author of the document. The author
- * MAY be a person or a device. At least one author MUST be declared.
+ * Element description: Information about the author of the document. The author MAY be a person or a device. At least one author MUST be declared.
  */
-public class CdachlrepHeaderAuthor
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Author {
+public class CdachlrepHeaderAuthor extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Author {
+
+	public CdachlrepHeaderAuthor() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.59"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.9.23"));
+	}
 
 	/**
-	 * Loads the CDA document from file.
+	 * Creates fixed contents for hl7FunctionCode
 	 *
-	 * @param inputFile
-	 *            the source file. n@return the CDA document\n@throws
-	 *            JAXBException\n@throws IOException Signals that an I/O
-	 *            exception has occurred.
+	 * @param nullFlavor the desired fixed value for this argument.
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
 	 */
-	public static CdachlrepHeaderAuthor loadFromFile(File inputFile)
-			throws JAXBException, IOException {
-		CdachlrepHeaderAuthor retVal;
-		JAXBContext context = JAXBContext.newInstance(CdachlrepHeaderAuthor.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<CdachlrepHeaderAuthor> root = mar.unmarshal(source,
-				CdachlrepHeaderAuthor.class);
-		retVal = root.getValue();
+	public org.ehealth_connector.common.hl7cdar2.CE createHl7FunctionCodeFixedValue(String nullFlavor, String codeSystem, String codeSystemName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
+		retVal.nullFlavor = new ArrayList<String>();
+		retVal.nullFlavor.add(nullFlavor);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
 		return retVal;
 	}
 
 	/**
-	 * Loads the CDA document from file.
+	 * Creates fixed contents for hl7TemplateId
 	 *
-	 * @param inputFileName
-	 *            the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException
-	 *         Signals that an I/O exception has occurred.
+	 * @param root the desired fixed value for this argument.
 	 */
-	public static CdachlrepHeaderAuthor loadFromFile(String inputFileName)
-			throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
-	}
-
-	public CdachlrepHeaderAuthor() {
-		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.59");
-		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.9.23");
-		setHl7FunctionCodeFixedValue("NAV", "2.16.840.1.113883.6.96", "SNOMED CT");
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
 	}
 
 	/**
@@ -88,13 +78,8 @@ public class CdachlrepHeaderAuthor
 	}
 
 	/**
-	 * Gets the hl7FunctionCode The functionCode MUST be taken from the Swiss
-	 * EPR Value-Set for author roles. See FDHA Ordinance on the Electronic
-	 * Patient Record (EPRO-FDHA), Appendix 3: Metadata, Section 2.1.If the
-	 * desired functionCode is not available in the Swiss EPR Value-Set for
-	 * author roles, nullFlavor='NAV' MUST be used. In this case, the
-	 * originalText element MUST contain the description of the
-	 * role.Translations to other vocabularies are allowed.
+	 * Gets the hl7FunctionCode
+	 * The functionCode MUST be taken from the Swiss EPR Value-Set for author roles. See FDHA Ordinance on the Electronic Patient Record (EPRO-FDHA), Appendix 3: Metadata, Section 2.1.If the desired functionCode is not available in the Swiss EPR Value-Set for author roles, nullFlavor='NAV' MUST be used. In this case, the originalText element MUST contain the description of the role.Translations to other vocabularies are allowed.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7FunctionCode() {
 		return super.functionCode;
@@ -112,17 +97,49 @@ public class CdachlrepHeaderAuthor
 	}
 
 	/**
-	 * Gets the hl7Time Date and time of the laboratory report creation.
+	 * Gets the hl7Time
+	 * Date and time of the laboratory report creation.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.TS getHl7Time() {
 		return super.time;
 	}
 
 	/**
+	 * Loads the CDA document from file.
+	 * @param inputFileName the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachlrepHeaderAuthor loadFromFile(String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFile the source file.
+	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachlrepHeaderAuthor loadFromFile(File inputFile) throws JAXBException, IOException {
+		CdachlrepHeaderAuthor retVal;
+		JAXBContext context = JAXBContext.newInstance(CdachlrepHeaderAuthor.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<CdachlrepHeaderAuthor> root = mar.unmarshal(source, CdachlrepHeaderAuthor.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
 	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFile
-	 *            the destination file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
 	 * @throws JAXBException
 	 */
 	public void saveToFile(File outputFile) throws JAXBException {
@@ -134,57 +151,18 @@ public class CdachlrepHeaderAuthor
 	}
 
 	/**
-	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFileName
-	 *            the full path and filename of the destination file.
-	 * @throws JAXBException
-	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
-	}
-
-	/**
 	 * Sets the hl7AssignedAuthor
 	 */
-	public void setHl7AssignedAuthor(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedAuthor value) {
+	public void setHl7AssignedAuthor(org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedAuthor value) {
 		super.assignedAuthor = value;
 	}
 
 	/**
-	 * Sets the hl7FunctionCode The functionCode MUST be taken from the Swiss
-	 * EPR Value-Set for author roles. See FDHA Ordinance on the Electronic
-	 * Patient Record (EPRO-FDHA), Appendix 3: Metadata, Section 2.1.If the
-	 * desired functionCode is not available in the Swiss EPR Value-Set for
-	 * author roles, nullFlavor='NAV' MUST be used. In this case, the
-	 * originalText element MUST contain the description of the
-	 * role.Translations to other vocabularies are allowed.
+	 * Sets the hl7FunctionCode
+	 * The functionCode MUST be taken from the Swiss EPR Value-Set for author roles. See FDHA Ordinance on the Electronic Patient Record (EPRO-FDHA), Appendix 3: Metadata, Section 2.1.If the desired functionCode is not available in the Swiss EPR Value-Set for author roles, nullFlavor='NAV' MUST be used. In this case, the originalText element MUST contain the description of the role.Translations to other vocabularies are allowed.
 	 */
 	public void setHl7FunctionCode(org.ehealth_connector.common.hl7cdar2.CE value) {
 		super.functionCode = value;
-	}
-
-	/**
-	 * Creates fixed contents for hl7FunctionCode
-	 *
-	 * @param nullFlavor
-	 *            the desired fixed value for this argument.
-	 * @param codeSystem
-	 *            the desired fixed value for this argument.
-	 * @param codeSystemName
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7FunctionCodeFixedValue(String nullFlavor, String codeSystem,
-			String codeSystemName) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CE member = factory.createCE();
-		member.nullFlavor = new ArrayList<String>();
-		member.nullFlavor.add(nullFlavor);
-		member.setCodeSystem(codeSystem);
-		member.setCodeSystemName(codeSystemName);
-		// setting the fixed value
-		super.setFunctionCode(member);
 	}
 
 	/**
@@ -196,21 +174,8 @@ public class CdachlrepHeaderAuthor
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7TemplateIdFixedValue(String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
-		member.setRoot(root);
-		// setting the fixed value
-		super.getTemplateId().add(member);
-	}
-
-	/**
-	 * Sets the hl7Time Date and time of the laboratory report creation.
+	 * Sets the hl7Time
+	 * Date and time of the laboratory report creation.
 	 */
 	public void setHl7Time(org.ehealth_connector.common.hl7cdar2.TS value) {
 		super.time = value;

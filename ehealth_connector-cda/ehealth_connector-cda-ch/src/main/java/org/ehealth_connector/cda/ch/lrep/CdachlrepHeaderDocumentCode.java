@@ -18,76 +18,54 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
-
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.56 Template
- * description: A LOINC based document type of a CDA document instance including
- * a translation to the Swiss EPR XDS.b metadata. - Multidisciplinary laboratory
- * findings:The LOINC code of the document MUST read: 11502-2 (LABORATORY
- * REPORT.TOTAL) - Laboratory reports of a single laboratory discipline:The
- * LOINC code of the document MUST be taken from the value set 'Laboratory
- * Specialties'
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.56
+ * Template description: A LOINC based document type of a CDA document instance including a translation to the Swiss EPR XDS.b metadata.
+ * - Multidisciplinary laboratory findings:The LOINC code of the document MUST read: 11502-2 (LABORATORY REPORT.TOTAL)
+ * - Laboratory reports of a single laboratory discipline:The LOINC code of the document MUST be taken from the value set 'Laboratory Specialties'
  *
- * Element description: A LOINC based document type of a CDA document instance
- * including a translation to the Swiss EPR XDS.b metadata. - Multidisciplinary
- * laboratory findings:The LOINC code of the document MUST read: 11502-2
- * (LABORATORY REPORT.TOTAL) - Laboratory reports of a single laboratory
- * discipline:The LOINC code of the document MUST be taken from the value-set
- * 'Laboratory Specialties'
+ * Element description: A LOINC based document type of a CDA document instance including a translation to the Swiss EPR XDS.b metadata.
+ * - Multidisciplinary laboratory findings:The LOINC code of the document MUST read: 11502-2 (LABORATORY REPORT.TOTAL)
+ * - Laboratory reports of a single laboratory discipline:The LOINC code of the document MUST be taken from the value-set 'Laboratory Specialties'
  */
 public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl7cdar2.CE {
 
+	public CdachlrepHeaderDocumentCode() {
+		translationFixedValue = createHl7TranslationFixedValue("4241000179101", "2.16.840.1.113883.6.96", "SNOMED CT", "Laboratory report");
+	}
+
+	private org.ehealth_connector.common.hl7cdar2.CD translationFixedValue;
+
 	/**
-	 * Loads the CDA document from file.
+	 * Creates fixed contents for hl7Translation
 	 *
-	 * @param inputFile
-	 *            the source file. n@return the CDA document\n@throws
-	 *            JAXBException\n@throws IOException Signals that an I/O
-	 *            exception has occurred.
+	 * @param code the desired fixed value for this argument.
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 * @param displayName the desired fixed value for this argument.
 	 */
-	public static CdachlrepHeaderDocumentCode loadFromFile(File inputFile)
-			throws JAXBException, IOException {
-		CdachlrepHeaderDocumentCode retVal;
-		JAXBContext context = JAXBContext.newInstance(CdachlrepHeaderDocumentCode.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<CdachlrepHeaderDocumentCode> root = mar.unmarshal(source,
-				CdachlrepHeaderDocumentCode.class);
-		retVal = root.getValue();
+	public org.ehealth_connector.common.hl7cdar2.CD createHl7TranslationFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
+		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
 		return retVal;
 	}
 
 	/**
-	 * Loads the CDA document from file.
-	 *
-	 * @param inputFileName
-	 *            the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException
-	 *         Signals that an I/O exception has occurred.
-	 */
-	public static CdachlrepHeaderDocumentCode loadFromFile(String inputFileName)
-			throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
-	}
-
-	public CdachlrepHeaderDocumentCode() {
-		setHl7TranslationFixedValue("4241000179101", "2.16.840.1.113883.6.96", "SNOMED CT",
-				"Laboratory report");
-	}
-
-	/**
-	 * Gets the hl7Translation The translation to the Swiss EPR XDS.b metadata
-	 * attribute typeCode.
+	 * Gets the hl7Translation
+	 * The translation to the Swiss EPR XDS.b metadata attribute typeCode.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Translation() {
 		org.ehealth_connector.common.hl7cdar2.CD retVal = null;
@@ -98,10 +76,48 @@ public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl
 	}
 
 	/**
+	 * Gets the member translationFixedValue
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CD getTranslationFixedValue() {
+		return translationFixedValue;
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFileName the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachlrepHeaderDocumentCode loadFromFile(String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFile the source file.
+	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachlrepHeaderDocumentCode loadFromFile(File inputFile) throws JAXBException, IOException {
+		CdachlrepHeaderDocumentCode retVal;
+		JAXBContext context = JAXBContext.newInstance(CdachlrepHeaderDocumentCode.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<CdachlrepHeaderDocumentCode> root = mar.unmarshal(source, CdachlrepHeaderDocumentCode.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
 	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFile
-	 *            the destination file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
 	 * @throws JAXBException
 	 */
 	public void saveToFile(File outputFile) throws JAXBException {
@@ -113,46 +129,11 @@ public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl
 	}
 
 	/**
-	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFileName
-	 *            the full path and filename of the destination file.
-	 * @throws JAXBException
-	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
-	}
-
-	/**
-	 * Sets the hl7Translation The translation to the Swiss EPR XDS.b metadata
-	 * attribute typeCode.
+	 * Sets the hl7Translation
+	 * The translation to the Swiss EPR XDS.b metadata attribute typeCode.
 	 */
 	public void setHl7Translation(org.ehealth_connector.common.hl7cdar2.CD value) {
 		super.getTranslation().clear();
 		super.getTranslation().add(value);
-	}
-
-	/**
-	 * Creates fixed contents for hl7Translation
-	 *
-	 * @param code
-	 *            the desired fixed value for this argument.
-	 * @param codeSystem
-	 *            the desired fixed value for this argument.
-	 * @param codeSystemName
-	 *            the desired fixed value for this argument.
-	 * @param displayName
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7TranslationFixedValue(String code, String codeSystem, String codeSystemName,
-			String displayName) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CD member = factory.createCD();
-		member.setCode(code);
-		member.setCodeSystem(codeSystem);
-		member.setCodeSystemName(codeSystemName);
-		member.setDisplayName(displayName);
-		// setting the fixed value
-		super.getTranslation().add(member);
 	}
 }

@@ -19,66 +19,40 @@ package org.ehealth_connector.cda.ch.lrep;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
-
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.24 Template
- * description: Specimen Information.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.24
+ * Template description: Specimen Information.
  */
-public class ChpalmEntryParticipantBodySpecimenCollection
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole {
+public class ChpalmEntryParticipantBodySpecimenCollection extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole {
+
+	public ChpalmEntryParticipantBodySpecimenCollection() {
+	}
 
 	/**
-	 * Loads the CDA document from file.
+	 * Creates fixed contents for hl7Id
 	 *
-	 * @param inputFile
-	 *            the source file. n@return the CDA document\n@throws
-	 *            JAXBException\n@throws IOException Signals that an I/O
-	 *            exception has occurred.
+	 * @param nullFlavor the desired fixed value for this argument.
 	 */
-	public static ChpalmEntryParticipantBodySpecimenCollection loadFromFile(File inputFile)
-			throws JAXBException, IOException {
-		ChpalmEntryParticipantBodySpecimenCollection retVal;
-		JAXBContext context = JAXBContext
-				.newInstance(ChpalmEntryParticipantBodySpecimenCollection.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<ChpalmEntryParticipantBodySpecimenCollection> root = mar.unmarshal(source,
-				ChpalmEntryParticipantBodySpecimenCollection.class);
-		retVal = root.getValue();
+	public org.ehealth_connector.common.hl7cdar2.II createHl7IdFixedValue(String nullFlavor) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.nullFlavor = new ArrayList<String>();
+		retVal.nullFlavor.add(nullFlavor);
 		return retVal;
 	}
 
 	/**
-	 * Loads the CDA document from file.
-	 *
-	 * @param inputFileName
-	 *            the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException
-	 *         Signals that an I/O exception has occurred.
-	 */
-	public static ChpalmEntryParticipantBodySpecimenCollection loadFromFile(String inputFileName)
-			throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
-	}
-
-	public ChpalmEntryParticipantBodySpecimenCollection() {
-		setHl7IdFixedValue("NA");
-	}
-
-	/**
-	 * Gets the hl7Id The specimen identification MUST be declared. If no
-	 * specimen identification is available, nullFlavor='NA' MUST be used. In
-	 * this case @root and @extension are NOT ALLOWED.
+	 * Gets the hl7Id
+	 * The specimen identification MUST be declared. If no specimen identification is available, nullFlavor='NA' MUST be used. In this case @root and @extension are NOT ALLOWED.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
 		org.ehealth_connector.common.hl7cdar2.II retVal = null;
@@ -96,10 +70,41 @@ public class ChpalmEntryParticipantBodySpecimenCollection
 	}
 
 	/**
+	 * Loads the CDA document from file.
+	 * @param inputFileName the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static ChpalmEntryParticipantBodySpecimenCollection loadFromFile(String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFile the source file.
+	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static ChpalmEntryParticipantBodySpecimenCollection loadFromFile(File inputFile) throws JAXBException, IOException {
+		ChpalmEntryParticipantBodySpecimenCollection retVal;
+		JAXBContext context = JAXBContext.newInstance(ChpalmEntryParticipantBodySpecimenCollection.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<ChpalmEntryParticipantBodySpecimenCollection> root = mar.unmarshal(source, ChpalmEntryParticipantBodySpecimenCollection.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
 	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFile
-	 *            the destination file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
 	 * @throws JAXBException
 	 */
 	public void saveToFile(File outputFile) throws JAXBException {
@@ -111,20 +116,8 @@ public class ChpalmEntryParticipantBodySpecimenCollection
 	}
 
 	/**
-	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFileName
-	 *            the full path and filename of the destination file.
-	 * @throws JAXBException
-	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
-	}
-
-	/**
-	 * Sets the hl7Id The specimen identification MUST be declared. If no
-	 * specimen identification is available, nullFlavor='NA' MUST be used. In
-	 * this case @root and @extension are NOT ALLOWED.
+	 * Sets the hl7Id
+	 * The specimen identification MUST be declared. If no specimen identification is available, nullFlavor='NA' MUST be used. In this case @root and @extension are NOT ALLOWED.
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getId().clear();
@@ -132,25 +125,9 @@ public class ChpalmEntryParticipantBodySpecimenCollection
 	}
 
 	/**
-	 * Creates fixed contents for hl7Id
-	 *
-	 * @param nullFlavor
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7IdFixedValue(String nullFlavor) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
-		member.nullFlavor = new ArrayList<String>();
-		member.nullFlavor.add(nullFlavor);
-		// setting the fixed value
-		super.getId().add(member);
-	}
-
-	/**
 	 * Sets the hl7PlayingEntity
 	 */
-	public void setHl7PlayingEntity(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040PlayingEntity value) {
+	public void setHl7PlayingEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040PlayingEntity value) {
 		super.playingEntity = value;
 	}
 }

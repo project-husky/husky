@@ -18,65 +18,30 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
-
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.21 Template
- * description: Structured notation of a measured value resp. an observation of
- * a single vital sign (such as body height, weight, blood pressure).
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.21
+ * Template description: Structured notation of a measured value resp. an observation of a single vital sign (such as body height, weight, blood pressure).
  */
-public class ChpccEntryVitalSignsObservation
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
-
-	/**
-	 * Loads the CDA document from file.
-	 *
-	 * @param inputFile
-	 *            the source file. n@return the CDA document\n@throws
-	 *            JAXBException\n@throws IOException Signals that an I/O
-	 *            exception has occurred.
-	 */
-	public static ChpccEntryVitalSignsObservation loadFromFile(File inputFile)
-			throws JAXBException, IOException {
-		ChpccEntryVitalSignsObservation retVal;
-		JAXBContext context = JAXBContext.newInstance(ChpccEntryVitalSignsObservation.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<ChpccEntryVitalSignsObservation> root = mar.unmarshal(source,
-				ChpccEntryVitalSignsObservation.class);
-		retVal = root.getValue();
-		return retVal;
-	}
-
-	/**
-	 * Loads the CDA document from file.
-	 *
-	 * @param inputFileName
-	 *            the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException
-	 *         Signals that an I/O exception has occurred.
-	 */
-	public static ChpccEntryVitalSignsObservation loadFromFile(String inputFileName)
-			throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
-	}
+public class ChpccEntryVitalSignsObservation extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
 	public ChpccEntryVitalSignsObservation() {
-		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13");
-		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13.2");
-		setHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.31");
-		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.21");
-		setHl7CodeFixedValue("2.16.840.1.113883.6.1", "LOINC");
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13.2"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.31"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.21"));
+		codeFixedValue = createHl7CodeFixedValue("2.16.840.1.113883.6.1", "LOINC");
 	}
+
+	private org.ehealth_connector.common.hl7cdar2.CD codeFixedValue;
 
 	/**
 	 * Adds a hl7InterpretationCode
@@ -121,8 +86,41 @@ public class ChpccEntryVitalSignsObservation
 	}
 
 	/**
-	 * Gets the hl7Code The reference to the text in the narrative section of
-	 * the section MUST be specified.
+	 * Creates fixed contents for hl7Code
+	 *
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String codeSystem, String codeSystemName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
+	/**
+	 * Gets the member codeFixedValue
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CD getCodeFixedValue() {
+		return codeFixedValue;
+	}
+
+	/**
+	 * Gets the hl7Code
+	 * The reference to the text in the narrative section of the section MUST be specified.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
 		return super.code;
@@ -136,7 +134,8 @@ public class ChpccEntryVitalSignsObservation
 	}
 
 	/**
-	 * Gets the hl7Id An ID for this item MAY be filled for traceability.
+	 * Gets the hl7Id
+	 * An ID for this item MAY be filled for traceability.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
 		org.ehealth_connector.common.hl7cdar2.II retVal = null;
@@ -147,8 +146,8 @@ public class ChpccEntryVitalSignsObservation
 	}
 
 	/**
-	 * Gets the hl7StatusCode The status 'completed' indicates that the
-	 * observation is final.
+	 * Gets the hl7StatusCode
+	 * The status 'completed' indicates that the observation is final.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
 		return super.statusCode;
@@ -166,7 +165,8 @@ public class ChpccEntryVitalSignsObservation
 	}
 
 	/**
-	 * Gets the hl7Value According to table in [IHE PCC TF-2], 6.3.4.22.3
+	 * Gets the hl7Value
+	 * According to table in [IHE PCC TF-2], 6.3.4.22.3
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ANY getHl7Value() {
 		org.ehealth_connector.common.hl7cdar2.ANY retVal = null;
@@ -177,10 +177,41 @@ public class ChpccEntryVitalSignsObservation
 	}
 
 	/**
+	 * Loads the CDA document from file.
+	 * @param inputFileName the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static ChpccEntryVitalSignsObservation loadFromFile(String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFile the source file.
+	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static ChpccEntryVitalSignsObservation loadFromFile(File inputFile) throws JAXBException, IOException {
+		ChpccEntryVitalSignsObservation retVal;
+		JAXBContext context = JAXBContext.newInstance(ChpccEntryVitalSignsObservation.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<ChpccEntryVitalSignsObservation> root = mar.unmarshal(source, ChpccEntryVitalSignsObservation.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
 	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFile
-	 *            the destination file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
 	 * @throws JAXBException
 	 */
 	public void saveToFile(File outputFile) throws JAXBException {
@@ -192,39 +223,11 @@ public class ChpccEntryVitalSignsObservation
 	}
 
 	/**
-	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFileName
-	 *            the full path and filename of the destination file.
-	 * @throws JAXBException
-	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
-	}
-
-	/**
-	 * Sets the hl7Code The reference to the text in the narrative section of
-	 * the section MUST be specified.
+	 * Sets the hl7Code
+	 * The reference to the text in the narrative section of the section MUST be specified.
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CD value) {
 		super.code = value;
-	}
-
-	/**
-	 * Creates fixed contents for hl7Code
-	 *
-	 * @param codeSystem
-	 *            the desired fixed value for this argument.
-	 * @param codeSystemName
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7CodeFixedValue(String codeSystem, String codeSystemName) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CD member = factory.createCD();
-		member.setCodeSystem(codeSystem);
-		member.setCodeSystemName(codeSystemName);
-		// setting the fixed value
-		super.setCode(member);
 	}
 
 	/**
@@ -235,7 +238,8 @@ public class ChpccEntryVitalSignsObservation
 	}
 
 	/**
-	 * Sets the hl7Id An ID for this item MAY be filled for traceability.
+	 * Sets the hl7Id
+	 * An ID for this item MAY be filled for traceability.
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getId().clear();
@@ -243,8 +247,8 @@ public class ChpccEntryVitalSignsObservation
 	}
 
 	/**
-	 * Sets the hl7StatusCode The status 'completed' indicates that the
-	 * observation is final.
+	 * Sets the hl7StatusCode
+	 * The status 'completed' indicates that the observation is final.
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
 		super.statusCode = value;
@@ -259,21 +263,8 @@ public class ChpccEntryVitalSignsObservation
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7TemplateIdFixedValue(String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
-		member.setRoot(root);
-		// setting the fixed value
-		super.getTemplateId().add(member);
-	}
-
-	/**
-	 * Sets the hl7Value According to table in [IHE PCC TF-2], 6.3.4.22.3
+	 * Sets the hl7Value
+	 * According to table in [IHE PCC TF-2], 6.3.4.22.3
 	 */
 	public void setHl7Value(org.ehealth_connector.common.hl7cdar2.ANY value) {
 		super.getValue().clear();

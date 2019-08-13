@@ -18,63 +18,49 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
-
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.15 Template
- * description: Information on a patient's insurance. CDA-CH V2 derivatives,
- * i.e. Swiss exchange formats MAY use this template by either reference or
- * specialisation.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.15
+ * Template description: Information on a patient's insurance. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.
  *
  * Element description: Information on a patient's insurance.
  */
-public class CdachHeaderInsurance
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 {
+public class CdachHeaderInsurance extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 {
+
+	public CdachHeaderInsurance() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.15"));
+	}
 
 	/**
-	 * Loads the CDA document from file.
+	 * Creates fixed contents for hl7AssociatedEntity
 	 *
-	 * @param inputFile
-	 *            the source file. n@return the CDA document\n@throws
-	 *            JAXBException\n@throws IOException Signals that an I/O
-	 *            exception has occurred.
+	 * @param classCode the desired fixed value for this argument.
 	 */
-	public static CdachHeaderInsurance loadFromFile(File inputFile)
-			throws JAXBException, IOException {
-		CdachHeaderInsurance retVal;
-		JAXBContext context = JAXBContext.newInstance(CdachHeaderInsurance.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<CdachHeaderInsurance> root = mar.unmarshal(source, CdachHeaderInsurance.class);
-		retVal = root.getValue();
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity createHl7AssociatedEntityFixedValue(String classCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity retVal = factory.createPOCDMT000040AssociatedEntity();
+		retVal.getClassCode().add(classCode);
 		return retVal;
 	}
 
 	/**
-	 * Loads the CDA document from file.
+	 * Creates fixed contents for hl7TemplateId
 	 *
-	 * @param inputFileName
-	 *            the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException
-	 *         Signals that an I/O exception has occurred.
+	 * @param root the desired fixed value for this argument.
 	 */
-	public static CdachHeaderInsurance loadFromFile(String inputFileName)
-			throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
-	}
-
-	public CdachHeaderInsurance() {
-		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.15");
-		setHl7AssociatedEntityFixedValue("PAYOR");
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
 	}
 
 	/**
@@ -96,17 +82,49 @@ public class CdachHeaderInsurance
 	}
 
 	/**
-	 * Gets the hl7Time Validity period of the contract.
+	 * Gets the hl7Time
+	 * Validity period of the contract.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.IVLTS getHl7Time() {
 		return super.time;
 	}
 
 	/**
+	 * Loads the CDA document from file.
+	 * @param inputFileName the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachHeaderInsurance loadFromFile(String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFile the source file.
+	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachHeaderInsurance loadFromFile(File inputFile) throws JAXBException, IOException {
+		CdachHeaderInsurance retVal;
+		JAXBContext context = JAXBContext.newInstance(CdachHeaderInsurance.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<CdachHeaderInsurance> root = mar.unmarshal(source, CdachHeaderInsurance.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
 	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFile
-	 *            the destination file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
 	 * @throws JAXBException
 	 */
 	public void saveToFile(File outputFile) throws JAXBException {
@@ -118,37 +136,10 @@ public class CdachHeaderInsurance
 	}
 
 	/**
-	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFileName
-	 *            the full path and filename of the destination file.
-	 * @throws JAXBException
-	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
-	}
-
-	/**
 	 * Sets the hl7AssociatedEntity
 	 */
-	public void setHl7AssociatedEntity(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity value) {
+	public void setHl7AssociatedEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity value) {
 		super.associatedEntity = value;
-	}
-
-	/**
-	 * Creates fixed contents for hl7AssociatedEntity
-	 *
-	 * @param classCode
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7AssociatedEntityFixedValue(String classCode) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity member = factory
-				.createPOCDMT000040AssociatedEntity();
-		member.getClassCode().add(classCode);
-		// setting the fixed value
-		super.setAssociatedEntity(member);
 	}
 
 	/**
@@ -160,21 +151,8 @@ public class CdachHeaderInsurance
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7TemplateIdFixedValue(String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
-		member.setRoot(root);
-		// setting the fixed value
-		super.getTemplateId().add(member);
-	}
-
-	/**
-	 * Sets the hl7Time Validity period of the contract.
+	 * Sets the hl7Time
+	 * Validity period of the contract.
 	 */
 	public void setHl7Time(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
 		super.time = value;

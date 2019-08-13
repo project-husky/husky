@@ -18,76 +18,34 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
-
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.ActRelationshipHasComponent;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 import org.ehealth_connector.common.hl7cdar2.XActRelationshipExternalReference;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.17 Template
- * description: The Laboratory Isolate Organizer MUST ONLY be used if it is a
- * microbiological specimen with which isolates/germs were examined.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.17
+ * Template description: The Laboratory Isolate Organizer MUST ONLY be used if it is a microbiological specimen with which isolates/germs were examined.
  */
-public class ChpalmEntryLaboratoryIsolateOrganizer
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
-
-	/**
-	 * Loads the CDA document from file.
-	 *
-	 * @param inputFile
-	 *            the source file. n@return the CDA document\n@throws
-	 *            JAXBException\n@throws IOException Signals that an I/O
-	 *            exception has occurred.
-	 */
-	public static ChpalmEntryLaboratoryIsolateOrganizer loadFromFile(File inputFile)
-			throws JAXBException, IOException {
-		ChpalmEntryLaboratoryIsolateOrganizer retVal;
-		JAXBContext context = JAXBContext.newInstance(ChpalmEntryLaboratoryIsolateOrganizer.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<ChpalmEntryLaboratoryIsolateOrganizer> root = mar.unmarshal(source,
-				ChpalmEntryLaboratoryIsolateOrganizer.class);
-		retVal = root.getValue();
-		return retVal;
-	}
-
-	/**
-	 * Loads the CDA document from file.
-	 *
-	 * @param inputFileName
-	 *            the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException
-	 *         Signals that an I/O exception has occurred.
-	 */
-	public static ChpalmEntryLaboratoryIsolateOrganizer loadFromFile(String inputFileName)
-			throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
-	}
+public class ChpalmEntryLaboratoryIsolateOrganizer extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
 
 	public ChpalmEntryLaboratoryIsolateOrganizer() {
-		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.17");
-		setHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.5");
-		setHl7SpecimenFixedValue("SPC");
-		setHl7ComponentFixedValue("COMP");
-		setHl7ComponentFixedValue("COMP");
-		setHl7ComponentFixedValue("COMP");
-		setHl7ComponentFixedValue("COMP");
-		setHl7ReferenceFixedValue("REFR");
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.17"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.5"));
 	}
 
 	/**
-	 * Adds a hl7Author This CAN be used to identify other parties: - Who has
-	 * verified the result (AUTHEN). - Which external laboratory has delivered
-	 * the result (RESP). - Which device (analyzer) was used to determine the
-	 * result (DEV).
+	 * Adds a hl7Author
+	 * This CAN be used to identify other parties:
+	 * - Who has verified the result (AUTHEN).
+	 * - Which external laboratory has delivered the result (RESP).
+	 * - Which device (analyzer) was used to determine the result (DEV).
 	 */
 	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
 		getAuthor().add(value);
@@ -96,43 +54,40 @@ public class ChpalmEntryLaboratoryIsolateOrganizer
 	/**
 	 * Adds a hl7Component
 	 */
-	public void addHl7Component(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
+	public void addHl7Component(org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
 		getComponent().add(value);
 	}
 
 	/**
-	 * Adds a hl7Participant Who has verified the result (AUTHEN). This
-	 * information supersedes any information recorded at higher level.
+	 * Adds a hl7Participant
+	 * Who has verified the result (AUTHEN). This information supersedes any information recorded at higher level.
 	 */
-	public void addHl7Participant(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 value) {
+	public void addHl7Participant(org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 value) {
 		getParticipant().add(value);
 	}
 
 	/**
-	 * Adds a hl7Performer This CAN be used to indicate who has performed the
-	 * test. This information supersedes any information recorded at higher
-	 * level.
+	 * Adds a hl7Performer
+	 * This CAN be used to indicate who has performed the test. This information supersedes any information recorded at higher level.
 	 */
-	public void addHl7Performer(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer2 value) {
+	public void addHl7Performer(org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer2 value) {
 		getPerformer().add(value);
 	}
 
 	/**
-	 * Adds a hl7Reference This CAN be used to make reference to an external
-	 * document.
+	 * Adds a hl7Reference
+	 * This CAN be used to make reference to an external document.
 	 */
 	public void addHl7Reference(org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference value) {
 		getReference().add(value);
 	}
 
 	/**
-	 * Adds a hl7Author This CAN be used to identify other parties: - Who has
-	 * verified the result (AUTHEN). - Which external laboratory has delivered
-	 * the result (RESP). - Which device (analyzer) was used to determine the
-	 * result (DEV).
+	 * Adds a hl7Author
+	 * This CAN be used to identify other parties:
+	 * - Who has verified the result (AUTHEN).
+	 * - Which external laboratory has delivered the result (RESP).
+	 * - Which device (analyzer) was used to determine the result (DEV).
 	 */
 	public void clearHl7Author() {
 		getAuthor().clear();
@@ -146,50 +101,96 @@ public class ChpalmEntryLaboratoryIsolateOrganizer
 	}
 
 	/**
-	 * Adds a hl7Participant Who has verified the result (AUTHEN). This
-	 * information supersedes any information recorded at higher level.
+	 * Adds a hl7Participant
+	 * Who has verified the result (AUTHEN). This information supersedes any information recorded at higher level.
 	 */
 	public void clearHl7Participant() {
 		getParticipant().clear();
 	}
 
 	/**
-	 * Adds a hl7Performer This CAN be used to indicate who has performed the
-	 * test. This information supersedes any information recorded at higher
-	 * level.
+	 * Adds a hl7Performer
+	 * This CAN be used to indicate who has performed the test. This information supersedes any information recorded at higher level.
 	 */
 	public void clearHl7Performer() {
 		getPerformer().clear();
 	}
 
 	/**
-	 * Adds a hl7Reference This CAN be used to make reference to an external
-	 * document.
+	 * Adds a hl7Reference
+	 * This CAN be used to make reference to an external document.
 	 */
 	public void clearHl7Reference() {
 		getReference().clear();
 	}
 
 	/**
-	 * Gets the hl7Code The human-readable text MUST be generated automatically
-	 * from the structured information of this element. The text element MUST
-	 * contain the reference to the corresponding text in the human readable
-	 * part, ONLY.
+	 * Creates fixed contents for hl7Component
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 createHl7ComponentFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 retVal = factory.createPOCDMT000040Component4();
+		retVal.setTypeCode(ActRelationshipHasComponent.fromValue(typeCode));
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7Reference
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference retVal = factory.createPOCDMT000040Reference();
+		retVal.setTypeCode(XActRelationshipExternalReference.fromValue(typeCode));
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7Specimen
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Specimen createHl7SpecimenFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Specimen retVal = factory.createPOCDMT000040Specimen();
+		retVal.getTypeCode().add(typeCode);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
+	/**
+	 * Gets the hl7Code
+	 * The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7Code() {
 		return (org.ehealth_connector.common.hl7cdar2.CE) super.code;
 	}
 
 	/**
-	 * Gets the hl7EffectiveTime Timestamp or period of findings
-	 * (physiologically relevant period) for all results in this result group.
+	 * Gets the hl7EffectiveTime
+	 * Timestamp or period of findings (physiologically relevant period) for all results in this result group.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.IVLTS getHl7EffectiveTime() {
 		return super.effectiveTime;
 	}
 
 	/**
-	 * Gets the hl7Id An ID for this item MAY be filled for traceability.
+	 * Gets the hl7Id
+	 * An ID for this item MAY be filled for traceability.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
 		org.ehealth_connector.common.hl7cdar2.II retVal = null;
@@ -200,8 +201,8 @@ public class ChpalmEntryLaboratoryIsolateOrganizer
 	}
 
 	/**
-	 * Gets the hl7Specimen The specific sub-specimen on which a microorganism
-	 * was isolated and cultivated.
+	 * Gets the hl7Specimen
+	 * The specific sub-specimen on which a microorganism was isolated and cultivated.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Specimen getHl7Specimen() {
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040Specimen retVal = null;
@@ -212,11 +213,8 @@ public class ChpalmEntryLaboratoryIsolateOrganizer
 	}
 
 	/**
-	 * Gets the hl7StatusCode The status 'completed' means that all expected
-	 * results for this isolate are present and in a final state.The status
-	 * 'active' means that the examinations are still running. Some results are
-	 * still pending.The status 'aborted' means that the examinations had to be
-	 * aborted. Some results MAY be available.
+	 * Gets the hl7StatusCode
+	 * The status 'completed' means that all expected results for this isolate are present and in a final state.The status 'active' means that the examinations are still running. Some results are still pending.The status 'aborted' means that the examinations had to be aborted. Some results MAY be available.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
 		return super.statusCode;
@@ -241,10 +239,41 @@ public class ChpalmEntryLaboratoryIsolateOrganizer
 	}
 
 	/**
+	 * Loads the CDA document from file.
+	 * @param inputFileName the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static ChpalmEntryLaboratoryIsolateOrganizer loadFromFile(String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFile the source file.
+	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static ChpalmEntryLaboratoryIsolateOrganizer loadFromFile(File inputFile) throws JAXBException, IOException {
+		ChpalmEntryLaboratoryIsolateOrganizer retVal;
+		JAXBContext context = JAXBContext.newInstance(ChpalmEntryLaboratoryIsolateOrganizer.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<ChpalmEntryLaboratoryIsolateOrganizer> root = mar.unmarshal(source, ChpalmEntryLaboratoryIsolateOrganizer.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
 	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFile
-	 *            the destination file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
 	 * @throws JAXBException
 	 */
 	public void saveToFile(File outputFile) throws JAXBException {
@@ -256,51 +285,24 @@ public class ChpalmEntryLaboratoryIsolateOrganizer
 	}
 
 	/**
-	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFileName
-	 *            the full path and filename of the destination file.
-	 * @throws JAXBException
-	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
-	}
-
-	/**
-	 * Sets the hl7Code The human-readable text MUST be generated automatically
-	 * from the structured information of this element. The text element MUST
-	 * contain the reference to the corresponding text in the human readable
-	 * part, ONLY.
+	 * Sets the hl7Code
+	 * The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CE value) {
 		super.code = value;
 	}
 
 	/**
-	 * Creates fixed contents for hl7Component
-	 *
-	 * @param typeCode
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7ComponentFixedValue(String typeCode) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 member = factory
-				.createPOCDMT000040Component4();
-		member.setTypeCode(ActRelationshipHasComponent.fromValue(typeCode));
-		// setting the fixed value
-		super.getComponent().add(member);
-	}
-
-	/**
-	 * Sets the hl7EffectiveTime Timestamp or period of findings
-	 * (physiologically relevant period) for all results in this result group.
+	 * Sets the hl7EffectiveTime
+	 * Timestamp or period of findings (physiologically relevant period) for all results in this result group.
 	 */
 	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
 		super.effectiveTime = value;
 	}
 
 	/**
-	 * Sets the hl7Id An ID for this item MAY be filled for traceability.
+	 * Sets the hl7Id
+	 * An ID for this item MAY be filled for traceability.
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getId().clear();
@@ -308,23 +310,8 @@ public class ChpalmEntryLaboratoryIsolateOrganizer
 	}
 
 	/**
-	 * Creates fixed contents for hl7Reference
-	 *
-	 * @param typeCode
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7ReferenceFixedValue(String typeCode) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference member = factory
-				.createPOCDMT000040Reference();
-		member.setTypeCode(XActRelationshipExternalReference.fromValue(typeCode));
-		// setting the fixed value
-		super.getReference().add(member);
-	}
-
-	/**
-	 * Sets the hl7Specimen The specific sub-specimen on which a microorganism
-	 * was isolated and cultivated.
+	 * Sets the hl7Specimen
+	 * The specific sub-specimen on which a microorganism was isolated and cultivated.
 	 */
 	public void setHl7Specimen(org.ehealth_connector.common.hl7cdar2.POCDMT000040Specimen value) {
 		super.getSpecimen().clear();
@@ -332,26 +319,8 @@ public class ChpalmEntryLaboratoryIsolateOrganizer
 	}
 
 	/**
-	 * Creates fixed contents for hl7Specimen
-	 *
-	 * @param typeCode
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7SpecimenFixedValue(String typeCode) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Specimen member = factory
-				.createPOCDMT000040Specimen();
-		member.getTypeCode().add(typeCode);
-		// setting the fixed value
-		super.getSpecimen().add(member);
-	}
-
-	/**
-	 * Sets the hl7StatusCode The status 'completed' means that all expected
-	 * results for this isolate are present and in a final state.The status
-	 * 'active' means that the examinations are still running. Some results are
-	 * still pending.The status 'aborted' means that the examinations had to be
-	 * aborted. Some results MAY be available.
+	 * Sets the hl7StatusCode
+	 * The status 'completed' means that all expected results for this isolate are present and in a final state.The status 'active' means that the examinations are still running. Some results are still pending.The status 'aborted' means that the examinations had to be aborted. Some results MAY be available.
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
 		super.statusCode = value;
@@ -370,19 +339,5 @@ public class ChpalmEntryLaboratoryIsolateOrganizer
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getTemplateId().clear();
 		super.getTemplateId().add(value);
-	}
-
-	/**
-	 * Creates fixed contents for hl7TemplateId
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7TemplateIdFixedValue(String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
-		member.setRoot(root);
-		// setting the fixed value
-		super.getTemplateId().add(member);
 	}
 }

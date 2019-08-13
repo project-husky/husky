@@ -18,80 +18,45 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
-
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.13 Template
- * description: Relationship to another CDA-CH V2 based document that is
- * replaced by the current one. All CDA-CH V2 derivatives, i.e. Swiss exchange
- * formats MUST reference this template.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.13
+ * Template description: Relationship to another CDA-CH V2 based document that is replaced by the current one. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.
  *
- * Element description: Relationship to another CDA-CH V2 based document that is
- * replaced by the current one.Notes:For correction of wrong information, a new
- * document that replaces the earlier document MUST be created. The new document
- * corrects previously incorrect information. This also applies to the case
- * where information in the CDA header has been corrected (e.g., if the original
- * document has been issued to the wrong patient). While processing the new
- * document at the recipient, all values from the previous document MUST be
- * interpreted as deprecated (deleted/marked as deleted/deprecated) and all
- * values in the new document MUST be marked as valid: - Values that were only
- * contained in the previous document have to be treated as deleted. - Values
- * that are present in both documents are overwritten with the contents of the
- * new document. - Values that are only contained in the new document are to be
- * added.
+ * Element description: Relationship to another CDA-CH V2 based document that is replaced by the current one.Notes:For correction of wrong information, a new document that replaces the earlier document MUST be created. The new document corrects previously incorrect information. This also applies to the case where information in the CDA header has been corrected (e.g., if the original document has been issued to the wrong patient). While processing the new document at the recipient, all values from the previous document MUST be interpreted as deprecated (deleted/marked as deleted/deprecated) and all values in the new document MUST be marked as valid:
+ * - Values that were only contained in the previous document have to be treated as deleted.
+ * - Values that are present in both documents are overwritten with the contents of the new document.
+ * - Values that are only contained in the new document are to be added.
  */
-public class CdachHeaderDocumentReplacement
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedDocument {
+public class CdachHeaderDocumentReplacement extends org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedDocument {
+
+	public CdachHeaderDocumentReplacement() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.13"));
+	}
 
 	/**
-	 * Loads the CDA document from file.
+	 * Creates fixed contents for hl7TemplateId
 	 *
-	 * @param inputFile
-	 *            the source file. n@return the CDA document\n@throws
-	 *            JAXBException\n@throws IOException Signals that an I/O
-	 *            exception has occurred.
+	 * @param root the desired fixed value for this argument.
 	 */
-	public static CdachHeaderDocumentReplacement loadFromFile(File inputFile)
-			throws JAXBException, IOException {
-		CdachHeaderDocumentReplacement retVal;
-		JAXBContext context = JAXBContext.newInstance(CdachHeaderDocumentReplacement.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<CdachHeaderDocumentReplacement> root = mar.unmarshal(source,
-				CdachHeaderDocumentReplacement.class);
-		retVal = root.getValue();
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
 		return retVal;
 	}
 
 	/**
-	 * Loads the CDA document from file.
-	 *
-	 * @param inputFileName
-	 *            the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException
-	 *         Signals that an I/O exception has occurred.
-	 */
-	public static CdachHeaderDocumentReplacement loadFromFile(String inputFileName)
-			throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
-	}
-
-	public CdachHeaderDocumentReplacement() {
-		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.13");
-	}
-
-	/**
-	 * Gets the hl7ParentDocument Relationship to the document that needs to be
-	 * replaced.
+	 * Gets the hl7ParentDocument
+	 * Relationship to the document that needs to be replaced.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040ParentDocument getHl7ParentDocument() {
 		return super.parentDocument;
@@ -109,10 +74,41 @@ public class CdachHeaderDocumentReplacement
 	}
 
 	/**
+	 * Loads the CDA document from file.
+	 * @param inputFileName the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachHeaderDocumentReplacement loadFromFile(String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFile the source file.
+	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachHeaderDocumentReplacement loadFromFile(File inputFile) throws JAXBException, IOException {
+		CdachHeaderDocumentReplacement retVal;
+		JAXBContext context = JAXBContext.newInstance(CdachHeaderDocumentReplacement.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<CdachHeaderDocumentReplacement> root = mar.unmarshal(source, CdachHeaderDocumentReplacement.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
 	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFile
-	 *            the destination file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
 	 * @throws JAXBException
 	 */
 	public void saveToFile(File outputFile) throws JAXBException {
@@ -124,22 +120,10 @@ public class CdachHeaderDocumentReplacement
 	}
 
 	/**
-	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFileName
-	 *            the full path and filename of the destination file.
-	 * @throws JAXBException
+	 * Sets the hl7ParentDocument
+	 * Relationship to the document that needs to be replaced.
 	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
-	}
-
-	/**
-	 * Sets the hl7ParentDocument Relationship to the document that needs to be
-	 * replaced.
-	 */
-	public void setHl7ParentDocument(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040ParentDocument value) {
+	public void setHl7ParentDocument(org.ehealth_connector.common.hl7cdar2.POCDMT000040ParentDocument value) {
 		super.parentDocument = value;
 	}
 
@@ -149,19 +133,5 @@ public class CdachHeaderDocumentReplacement
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		super.getTemplateId().clear();
 		super.getTemplateId().add(value);
-	}
-
-	/**
-	 * Creates fixed contents for hl7TemplateId
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7TemplateIdFixedValue(String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
-		member.setRoot(root);
-		// setting the fixed value
-		super.getTemplateId().add(member);
 	}
 }

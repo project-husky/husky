@@ -18,68 +18,37 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
-
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.7 Template
- * description: Information about the person that entered information in this
- * CDA document. It SHALL be declared, when data recorded in this document has
- * been entered by a person other than the author but only when this is relevant
- * for some reason. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST
- * reference this template.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.7
+ * Template description: Information about the person that entered information in this CDA document. It SHALL be declared, when data recorded in this document has been entered by a person other than the author but only when this is relevant for some reason. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.
  *
- * Element description: Information about the person that entered information in
- * this CDA document. It SHALL be declared, when data recorded in this document
- * has been entered by a person other than the author but only when this is
- * relevant for some reason.
+ * Element description: Information about the person that entered information in this CDA document. It SHALL be declared, when data recorded in this document has been entered by a person other than the author but only when this is relevant for some reason.
  */
-public class CdachHeaderDataEnterer
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040DataEnterer {
-
-	/**
-	 * Loads the CDA document from file.
-	 *
-	 * @param inputFile
-	 *            the source file. n@return the CDA document\n@throws
-	 *            JAXBException\n@throws IOException Signals that an I/O
-	 *            exception has occurred.
-	 */
-	public static CdachHeaderDataEnterer loadFromFile(File inputFile)
-			throws JAXBException, IOException {
-		CdachHeaderDataEnterer retVal;
-		JAXBContext context = JAXBContext.newInstance(CdachHeaderDataEnterer.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<CdachHeaderDataEnterer> root = mar.unmarshal(source,
-				CdachHeaderDataEnterer.class);
-		retVal = root.getValue();
-		return retVal;
-	}
-
-	/**
-	 * Loads the CDA document from file.
-	 *
-	 * @param inputFileName
-	 *            the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException
-	 *         Signals that an I/O exception has occurred.
-	 */
-	public static CdachHeaderDataEnterer loadFromFile(String inputFileName)
-			throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
-	}
+public class CdachHeaderDataEnterer extends org.ehealth_connector.common.hl7cdar2.POCDMT000040DataEnterer {
 
 	public CdachHeaderDataEnterer() {
-		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.7");
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.7"));
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
 	}
 
 	/**
@@ -101,17 +70,49 @@ public class CdachHeaderDataEnterer
 	}
 
 	/**
-	 * Gets the hl7Time Timestamp of the data input.
+	 * Gets the hl7Time
+	 * Timestamp of the data input.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.TS getHl7Time() {
 		return super.time;
 	}
 
 	/**
+	 * Loads the CDA document from file.
+	 * @param inputFileName the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachHeaderDataEnterer loadFromFile(String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFile the source file.
+	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachHeaderDataEnterer loadFromFile(File inputFile) throws JAXBException, IOException {
+		CdachHeaderDataEnterer retVal;
+		JAXBContext context = JAXBContext.newInstance(CdachHeaderDataEnterer.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<CdachHeaderDataEnterer> root = mar.unmarshal(source, CdachHeaderDataEnterer.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
 	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFile
-	 *            the destination file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
 	 * @throws JAXBException
 	 */
 	public void saveToFile(File outputFile) throws JAXBException {
@@ -123,21 +124,9 @@ public class CdachHeaderDataEnterer
 	}
 
 	/**
-	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFileName
-	 *            the full path and filename of the destination file.
-	 * @throws JAXBException
-	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
-	}
-
-	/**
 	 * Sets the hl7AssignedEntity
 	 */
-	public void setHl7AssignedEntity(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity value) {
+	public void setHl7AssignedEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity value) {
 		super.assignedEntity = value;
 	}
 
@@ -150,21 +139,8 @@ public class CdachHeaderDataEnterer
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7TemplateIdFixedValue(String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
-		member.setRoot(root);
-		// setting the fixed value
-		super.getTemplateId().add(member);
-	}
-
-	/**
-	 * Sets the hl7Time Timestamp of the data input.
+	 * Sets the hl7Time
+	 * Timestamp of the data input.
 	 */
 	public void setHl7Time(org.ehealth_connector.common.hl7cdar2.TS value) {
 		super.time = value;

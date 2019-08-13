@@ -18,78 +18,72 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
-
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.10 Template
- * description: Declaration of analyzer, test kit and manufacturer used to
- * determine the result.All participating elements (including devices), MUST
- * according to XD-LAB contain name, addr and telecom.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.10
+ * Template description: Declaration of analyzer, test kit and manufacturer used to determine the result.All participating elements (including devices), MUST according to XD-LAB contain name, addr and telecom.
  */
-public class ChpalmEntryParticipantBodyDevice
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole {
+public class ChpalmEntryParticipantBodyDevice extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole {
 
 	/**
-	 * Loads the CDA document from file.
-	 *
-	 * @param inputFile
-	 *            the source file. n@return the CDA document\n@throws
-	 *            JAXBException\n@throws IOException Signals that an I/O
-	 *            exception has occurred.
-	 */
-	public static ChpalmEntryParticipantBodyDevice loadFromFile(File inputFile)
-			throws JAXBException, IOException {
-		ChpalmEntryParticipantBodyDevice retVal;
-		JAXBContext context = JAXBContext.newInstance(ChpalmEntryParticipantBodyDevice.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<ChpalmEntryParticipantBodyDevice> root = mar.unmarshal(source,
-				ChpalmEntryParticipantBodyDevice.class);
-		retVal = root.getValue();
-		return retVal;
-	}
-
-	/**
-	 * Loads the CDA document from file.
-	 *
-	 * @param inputFileName
-	 *            the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException
-	 *         Signals that an I/O exception has occurred.
-	 */
-	public static ChpalmEntryParticipantBodyDevice loadFromFile(String inputFileName)
-			throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
-	}
-
-	/**
-	 * Gets the hl7PlayingDevice Analyzer used to determine the result.
+	 * Gets the hl7PlayingDevice
+	 * Analyzer used to determine the result.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Device getHl7PlayingDevice() {
 		return super.playingDevice;
 	}
 
 	/**
-	 * Gets the hl7ScopingEntity The test kit and its manufacturer CAN be
-	 * specified.
+	 * Gets the hl7ScopingEntity
+	 * The test kit and its manufacturer CAN be specified.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Entity getHl7ScopingEntity() {
 		return super.scopingEntity;
 	}
 
 	/**
+	 * Loads the CDA document from file.
+	 * @param inputFileName the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static ChpalmEntryParticipantBodyDevice loadFromFile(String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFile the source file.
+	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static ChpalmEntryParticipantBodyDevice loadFromFile(File inputFile) throws JAXBException, IOException {
+		ChpalmEntryParticipantBodyDevice retVal;
+		JAXBContext context = JAXBContext.newInstance(ChpalmEntryParticipantBodyDevice.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<ChpalmEntryParticipantBodyDevice> root = mar.unmarshal(source, ChpalmEntryParticipantBodyDevice.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
 	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFile
-	 *            the destination file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
 	 * @throws JAXBException
 	 */
 	public void saveToFile(File outputFile) throws JAXBException {
@@ -101,30 +95,18 @@ public class ChpalmEntryParticipantBodyDevice
 	}
 
 	/**
-	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFileName
-	 *            the full path and filename of the destination file.
-	 * @throws JAXBException
+	 * Sets the hl7PlayingDevice
+	 * Analyzer used to determine the result.
 	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
-	}
-
-	/**
-	 * Sets the hl7PlayingDevice Analyzer used to determine the result.
-	 */
-	public void setHl7PlayingDevice(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040Device value) {
+	public void setHl7PlayingDevice(org.ehealth_connector.common.hl7cdar2.POCDMT000040Device value) {
 		super.playingDevice = value;
 	}
 
 	/**
-	 * Sets the hl7ScopingEntity The test kit and its manufacturer CAN be
-	 * specified.
+	 * Sets the hl7ScopingEntity
+	 * The test kit and its manufacturer CAN be specified.
 	 */
-	public void setHl7ScopingEntity(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040Entity value) {
+	public void setHl7ScopingEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040Entity value) {
 		super.scopingEntity = value;
 	}
 }

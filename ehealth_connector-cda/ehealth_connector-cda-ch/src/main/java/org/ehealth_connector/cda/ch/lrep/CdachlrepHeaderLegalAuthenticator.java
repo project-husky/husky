@@ -18,71 +18,61 @@ package org.ehealth_connector.cda.ch.lrep;
 
 import java.io.File;
 import java.io.IOException;
-
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.transform.stream.StreamSource;
-
 import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.61 Template
- * description: Legal authenticator.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.61
+ * Template description: Legal authenticator.
  *
  * Element description: Legal authenticator.
  */
-public class CdachlrepHeaderLegalAuthenticator
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040LegalAuthenticator {
+public class CdachlrepHeaderLegalAuthenticator extends org.ehealth_connector.common.hl7cdar2.POCDMT000040LegalAuthenticator {
+
+	public CdachlrepHeaderLegalAuthenticator() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.61"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.5"));
+	}
 
 	/**
-	 * Loads the CDA document from file.
+	 * Creates fixed contents for hl7SignatureCode
 	 *
-	 * @param inputFile
-	 *            the source file. n@return the CDA document\n@throws
-	 *            JAXBException\n@throws IOException Signals that an I/O
-	 *            exception has occurred.
+	 * @param code the desired fixed value for this argument.
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 * @param displayName the desired fixed value for this argument.
 	 */
-	public static CdachlrepHeaderLegalAuthenticator loadFromFile(File inputFile)
-			throws JAXBException, IOException {
-		CdachlrepHeaderLegalAuthenticator retVal;
-		JAXBContext context = JAXBContext.newInstance(CdachlrepHeaderLegalAuthenticator.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<CdachlrepHeaderLegalAuthenticator> root = mar.unmarshal(source,
-				CdachlrepHeaderLegalAuthenticator.class);
-		retVal = root.getValue();
+	public org.ehealth_connector.common.hl7cdar2.CS createHl7SignatureCodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
+		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
 		return retVal;
 	}
 
 	/**
-	 * Loads the CDA document from file.
+	 * Creates fixed contents for hl7TemplateId
 	 *
-	 * @param inputFileName
-	 *            the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException
-	 *         Signals that an I/O exception has occurred.
+	 * @param root the desired fixed value for this argument.
 	 */
-	public static CdachlrepHeaderLegalAuthenticator loadFromFile(String inputFileName)
-			throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
-	}
-
-	public CdachlrepHeaderLegalAuthenticator() {
-		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.61");
-		setHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.5");
-		setHl7SignatureCodeFixedValue("S", "2.16.840.1.113883.1.11.10282", "ParticipationSignature",
-				"signed");
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
 	}
 
 	/**
-	 * Gets the hl7AssignedEntity The GLN MUST be used to identify the legal
-	 * authenticator (e.g., laboratory manager or responsible physician). All
-	 * persons and organizations, MUST according to XD-LAB contain name, addr
-	 * and telecom.
+	 * Gets the hl7AssignedEntity
+	 * The GLN MUST be used to identify the legal authenticator (e.g., laboratory manager or responsible physician). All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity getHl7AssignedEntity() {
 		return super.assignedEntity;
@@ -107,17 +97,49 @@ public class CdachlrepHeaderLegalAuthenticator
 	}
 
 	/**
-	 * Gets the hl7Time Date of the signature.
+	 * Gets the hl7Time
+	 * Date of the signature.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.TS getHl7Time() {
 		return super.time;
 	}
 
 	/**
+	 * Loads the CDA document from file.
+	 * @param inputFileName the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachlrepHeaderLegalAuthenticator loadFromFile(String inputFileName) throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 * @param inputFile the source file.
+	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 */
+	public static CdachlrepHeaderLegalAuthenticator loadFromFile(File inputFile) throws JAXBException, IOException {
+		CdachlrepHeaderLegalAuthenticator retVal;
+		JAXBContext context = JAXBContext.newInstance(CdachlrepHeaderLegalAuthenticator.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<CdachlrepHeaderLegalAuthenticator> root = mar.unmarshal(source, CdachlrepHeaderLegalAuthenticator.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
 	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFile
-	 *            the destination file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @throws JAXBException
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException {
+		saveToFile(new File(outputFileName));
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
 	 * @throws JAXBException
 	 */
 	public void saveToFile(File outputFile) throws JAXBException {
@@ -129,24 +151,10 @@ public class CdachlrepHeaderLegalAuthenticator
 	}
 
 	/**
-	 * Saves the current CDA document to file.
-	 *
-	 * @param outputFileName
-	 *            the full path and filename of the destination file.
-	 * @throws JAXBException
+	 * Sets the hl7AssignedEntity
+	 * The GLN MUST be used to identify the legal authenticator (e.g., laboratory manager or responsible physician). All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
 	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
-	}
-
-	/**
-	 * Sets the hl7AssignedEntity The GLN MUST be used to identify the legal
-	 * authenticator (e.g., laboratory manager or responsible physician). All
-	 * persons and organizations, MUST according to XD-LAB contain name, addr
-	 * and telecom.
-	 */
-	public void setHl7AssignedEntity(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity value) {
+	public void setHl7AssignedEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity value) {
 		super.assignedEntity = value;
 	}
 
@@ -158,30 +166,6 @@ public class CdachlrepHeaderLegalAuthenticator
 	}
 
 	/**
-	 * Creates fixed contents for hl7SignatureCode
-	 *
-	 * @param code
-	 *            the desired fixed value for this argument.
-	 * @param codeSystem
-	 *            the desired fixed value for this argument.
-	 * @param codeSystemName
-	 *            the desired fixed value for this argument.
-	 * @param displayName
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7SignatureCodeFixedValue(String code, String codeSystem, String codeSystemName,
-			String displayName) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CS member = factory.createCS();
-		member.setCode(code);
-		member.setCodeSystem(codeSystem);
-		member.setCodeSystemName(codeSystemName);
-		member.setDisplayName(displayName);
-		// setting the fixed value
-		super.setSignatureCode(member);
-	}
-
-	/**
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
@@ -190,21 +174,8 @@ public class CdachlrepHeaderLegalAuthenticator
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	public void setHl7TemplateIdFixedValue(String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II member = factory.createII();
-		member.setRoot(root);
-		// setting the fixed value
-		super.getTemplateId().add(member);
-	}
-
-	/**
-	 * Sets the hl7Time Date of the signature.
+	 * Sets the hl7Time
+	 * Date of the signature.
 	 */
 	public void setHl7Time(org.ehealth_connector.common.hl7cdar2.TS value) {
 		super.time = value;
