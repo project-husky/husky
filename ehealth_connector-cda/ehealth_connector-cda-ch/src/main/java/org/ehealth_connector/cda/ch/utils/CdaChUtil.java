@@ -37,7 +37,7 @@ import org.ehealth_connector.cda.ch.mtps.CdaChMtpsPml;
 import org.ehealth_connector.cda.ch.mtps.CdaChMtpsPre;
 import org.ehealth_connector.cda.ch.vacd.CdaChVacd;
 import org.ehealth_connector.cda.ch.vacd.enums.SectionsVacd;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -49,7 +49,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  * <div class="en">A util class with helper functions.</div>
  * <div class="de">Eine Klasse mit Hilfsfunktionen.</div>
  */
-public abstract class CdaChUtil extends CdaUtil {
+public abstract class CdaChUtil extends CdaUtilMdht {
 
 	/**
 	 * <div class="en">Loads a CdaChLrepV1GeneralReport document from a given

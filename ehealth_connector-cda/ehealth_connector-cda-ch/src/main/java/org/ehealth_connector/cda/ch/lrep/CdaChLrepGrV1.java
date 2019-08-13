@@ -11,7 +11,7 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
  *
  */
 package org.ehealth_connector.cda.ch.lrep;
@@ -21,13 +21,16 @@ import java.io.IOException;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamSource;
-import org.ehealth_connector.common.CdaNamespacePrefixMapper;
+import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 import org.ehealth_connector.common.hl7cdar2.XActRelationshipDocument;
+import org.ehealth_connector.common.utils.Hl7CdaR2Util;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.1.10
@@ -41,6 +44,7 @@ import org.ehealth_connector.common.hl7cdar2.XActRelationshipDocument;
 public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
 
 	public CdaChLrepGrV1() {
+		realmCodeFixedValue = createHl7RealmCodeFixedValue("CHE");
 		super.setTypeId(createHl7TypeIdFixedValue("2.16.840.1.113883.1.3", "POCD_HD000040"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.4"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.2"));
@@ -53,6 +57,8 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	}
 
 	private org.ehealth_connector.common.hl7cdar2.CE codeFixedValue;
+
+	private org.ehealth_connector.common.hl7cdar2.CS realmCodeFixedValue;
 
 	/**
 	 * Adds a hl7Authenticator
@@ -241,6 +247,18 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	}
 
 	/**
+	 * Creates fixed contents for hl7RealmCode
+	 *
+	 * @param code the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CS createHl7RealmCodeFixedValue(String code) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
+		retVal.setCode(code);
+		return retVal;
+	}
+
+	/**
 	 * Creates fixed contents for hl7RelatedDocument
 	 *
 	 * @param typeCode the desired fixed value for this argument.
@@ -417,9 +435,28 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	}
 
 	/**
+	 * Gets the member realmCodeFixedValue
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CS getRealmCodeFixedValue() {
+		return realmCodeFixedValue;
+	}
+
+	/**
+	 * Sets the version number to 1 and makes sure the setId is the same as the document id.
+	 * @param newDocId the new doc id
+	 */
+	public void initFirstVersion(Identificator newDocId) {
+		Identificator docId = newDocId;
+		if (docId == null)
+			docId = new Identificator(Identificator.builder().withRoot(org.openhealthtools.ihe.utils.UUID.generate()).build());
+		super.setId(docId.getHl7CdaR2Ii());
+		setVersion(docId, 1);
+	}
+
+	/**
 	 * Loads the CDA document from file.
 	 * @param inputFileName the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 * @return the CDA document\n@throws JAXBException the JAXB exception\n@throws IOException Signals that an I/O exception has occurred.
 	 */
 	public static CdaChLrepGrV1 loadFromFile(String inputFileName) throws JAXBException, IOException {
 		return loadFromFile(new File(inputFileName));
@@ -428,7 +465,7 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	/**
 	 * Loads the CDA document from file.
 	 * @param inputFile the source file.
-	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
+	 * n@return the CDA document\n@throws JAXBException the JAXB exception\n@throws IOException Signals that an I/O exception has occurred.
 	 */
 	public static CdaChLrepGrV1 loadFromFile(File inputFile) throws JAXBException, IOException {
 		CdaChLrepGrV1 retVal;
@@ -443,23 +480,49 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	/**
 	 * Saves the current CDA document to file.
 	 * @param outputFileName the full path and filename of the destination file.
-	 * @throws JAXBException
+	 * @throws JAXBException the JAXB exception
+	 * @throws ParserConfigurationException the parser configuration exception
+	 * @throws TransformerException the transformer exception
 	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
+	public void saveToFile(String outputFileName) throws JAXBException, ParserConfigurationException, TransformerException {
+		saveToFile(new File(outputFileName), null, null);
 	}
 
 	/**
 	 * Saves the current CDA document to file.
 	 * @param outputFile the destination file.
-	 * @throws JAXBException
+	 * @throws JAXBException the JAXB exception
+	 * @throws ParserConfigurationException the parser configuration exception
+	 * @throws TransformerException the transformer exception
 	 */
-	public void saveToFile(File outputFile) throws JAXBException {
-		JAXBContext context = JAXBContext.newInstance(this.getClass());
-		Marshaller mar = context.createMarshaller();
-		mar.setProperty("com.sun.xml.bind.namespacePrefixMapper", new CdaNamespacePrefixMapper());
-		mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-		mar.marshal(this, outputFile);
+	public void saveToFile(File outputFile) throws JAXBException, ParserConfigurationException, TransformerException {
+		saveToFile(outputFile, null, null);
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @param xsl the path and filename or url to the rendering stylesheet
+	 * @param css the path and filename or url to the rendering css
+	 * @throws JAXBException the JAXB exception
+	 * @throws ParserConfigurationException the parser configuration exception
+	 * @throws TransformerException the transformer exception
+	 */
+	public void saveToFile(String outputFileName, String xsl, String css) throws JAXBException, ParserConfigurationException, TransformerException {
+		saveToFile(new File(outputFileName), xsl, css);
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 * @param outputFile the destination file.
+	 * @param xsl the path and filename or url to the rendering stylesheet
+	 * @param css the path and filename or url to the rendering css
+	 * @throws JAXBException the JAXB exception
+	 * @throws ParserConfigurationException the parser configuration exception
+	 * @throws TransformerException the transformer exception
+	 */
+	public void saveToFile(File outputFile, String xsl, String css) throws JAXBException, ParserConfigurationException, TransformerException {
+		CdaUtil.saveJaxbObjectToFile(this, outputFile, xsl, css);
 	}
 
 	/**
@@ -585,5 +648,17 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 */
 	public void setHl7VersionNumber(org.ehealth_connector.common.hl7cdar2.INT value) {
 		super.versionNumber = value;
+	}
+
+	/**
+	 * <div class="en">Sets the document set Id and version number.</div>
+	 *
+	 * <div class="de">Weist dem Dokument eine Set Id und eine Versionsnummer zu.</div>
+	 * @param idVersion1 the set Id (if null, the document ID will be used)
+	 * @param version the version of the document
+	 */
+	public void setVersion(Identificator idVersion1, int version) {
+		super.setSetId(idVersion1.getHl7CdaR2Ii());
+		super.setVersionNumber(Hl7CdaR2Util.createHl7CdaR2Int(version));
 	}
 }

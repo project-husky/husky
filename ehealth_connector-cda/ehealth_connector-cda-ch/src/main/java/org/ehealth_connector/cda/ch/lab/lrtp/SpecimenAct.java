@@ -21,7 +21,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.SpecialtySections;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.Organizer;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
@@ -119,7 +119,7 @@ public class SpecimenAct extends org.ehealth_connector.cda.ch.lab.BaseChSpecimen
 			LaboratoryBatteryOrganizer laboratoryBatteryOrganizer) {
 		getMdht().addOrganizer(laboratoryBatteryOrganizer.copy());
 		// Set the right type for the entryRelationship
-		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+		CdaUtilMdht.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
 				x_ActRelationshipEntryRelationship.COMP);
 	}
 

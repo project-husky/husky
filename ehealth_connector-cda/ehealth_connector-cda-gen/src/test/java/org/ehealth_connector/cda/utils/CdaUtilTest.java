@@ -88,12 +88,12 @@ public class CdaUtilTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.utils.CdaUtil#addSectionToStructuredBodyAsCopy(org.openhealthtools.mdht.uml.cda.StructuredBody, org.openhealthtools.mdht.uml.cda.Section)}
+	 * {@link org.ehealth_connector.cda.utils.CdaUtilMdht#addSectionToStructuredBodyAsCopy(org.openhealthtools.mdht.uml.cda.StructuredBody, org.openhealthtools.mdht.uml.cda.Section)}
 	 * .
 	 */
 	@Test
 	public void testAddSectionToStructuredBodyAsCopy() {
-		CdaUtil.addSectionToStructuredBodyAsCopy(testSb, testS);
+		CdaUtilMdht.addSectionToStructuredBodyAsCopy(testSb, testS);
 	}
 
 }

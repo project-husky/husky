@@ -19,7 +19,7 @@ package org.ehealth_connector.cda.ihe.pharm;
 
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ihe.pharm.enums.OrderableDrugForm;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
@@ -272,18 +272,18 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 	public void setBoxDescription(String packageName, String packageGtin,
 			OrderableDrugForm formCode, Double packageSize, Ucum packageUnits) {
 
-		final PharmAsContent boxDescription = CdaUtil.getMdhtCdaFactoryInstance()
+		final PharmAsContent boxDescription = CdaUtilMdht.getMdhtCdaFactoryInstance()
 				.createPharmAsContent();
 		boxDescription.setClassCode(EntityClassManufacturedMaterial.CONT);
 
-		final PharmPackagedMedicine packagedMedicine = CdaUtil.getMdhtCdaFactoryInstance()
+		final PharmPackagedMedicine packagedMedicine = CdaUtilMdht.getMdhtCdaFactoryInstance()
 				.createPharmPackagedMedicine();
 
 		packagedMedicine.setClassCode(EntityClassManufacturedMaterial.CONT);
 		packagedMedicine.setDeterminerCode(EntityDeterminer.INSTANCE);
 
 		if (packageGtin != null && packageGtin.length() > 0) {
-			final CE codeAsContent = CdaUtil.getMdhtDatatypesFactoryInstance().createCE();
+			final CE codeAsContent = CdaUtilMdht.getMdhtDatatypesFactoryInstance().createCE();
 			codeAsContent.setCode(new String(packageGtin));
 			codeAsContent.setCodeSystem(CodeSystems.GTIN.getCodeSystemId());
 			codeAsContent.setCodeSystemName(CodeSystems.GTIN.getCodeSystemName());
@@ -294,7 +294,7 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 
 		if (formCode != null) {
 			final Code formCodeCode = formCode.getCode();
-			final CE newFormCode = CdaUtil.getMdhtDatatypesFactoryInstance().createCE(
+			final CE newFormCode = CdaUtilMdht.getMdhtDatatypesFactoryInstance().createCE(
 					formCodeCode.getCode(), formCodeCode.getCodeSystem(),
 					formCodeCode.getCodeSystemName(), formCodeCode.getDisplayName());
 			packagedMedicine.setFormCode(newFormCode);
@@ -302,11 +302,11 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 
 		if (packageSize != null)
 			packagedMedicine.setCapacityQuantity(
-					CdaUtil.getMdhtDatatypesFactoryInstance().createPQ(packageSize.doubleValue(),
+					CdaUtilMdht.getMdhtDatatypesFactoryInstance().createPQ(packageSize.doubleValue(),
 							(packageUnits != null ? packageUnits.getCodeValue() : null)));
 
 		if (packageName != null) {
-			final EN mMname = CdaUtil.getMdhtDatatypesFactoryInstance().createEN();
+			final EN mMname = CdaUtilMdht.getMdhtDatatypesFactoryInstance().createEN();
 			mMname.addText(new String(packageName));
 			packagedMedicine.setName(mMname);
 		}
@@ -328,7 +328,7 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 	public void setManufacturedMaterialAtcCode(String atcCode, String atcName) {
 		if (atcCode != null) {
 
-			final CE codeMaterial = CdaUtil.getMdhtDatatypesFactoryInstance().createCE();
+			final CE codeMaterial = CdaUtilMdht.getMdhtDatatypesFactoryInstance().createCE();
 			codeMaterial.setCodeSystem(CodeSystems.WHOATCCode.getCodeSystemId());
 			codeMaterial.setCodeSystemName(CodeSystems.WHOATCCode.getCodeSystemName());
 			codeMaterial.setCode(new String(atcCode));
@@ -349,7 +349,7 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 	public void setManufacturedMaterialFormCode(OrderableDrugForm formCode) {
 		if (formCode != null) {
 			final Code formCodeCode = formCode.getCode();
-			final CE newFormCode = CdaUtil.getMdhtDatatypesFactoryInstance().createCE(
+			final CE newFormCode = CdaUtilMdht.getMdhtDatatypesFactoryInstance().createCE(
 					formCodeCode.getCode(), formCodeCode.getCodeSystem(),
 					formCodeCode.getCodeSystemName(), formCodeCode.getDisplayName());
 			this.getMdht().setFormCode(newFormCode);
@@ -367,7 +367,7 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 
 		if (lotNumber != null)
 			this.getMdht().setLotNumberText(
-					CdaUtil.getMdhtDatatypesFactoryInstance().createST(lotNumber));
+					CdaUtilMdht.getMdhtDatatypesFactoryInstance().createST(lotNumber));
 	}
 
 	/**
@@ -380,7 +380,7 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 	public void setManufacturedMaterialName(String name) {
 		if (name != null)
 			this.getMdht().setName(
-					CdaUtil.getMdhtDatatypesFactoryInstance().createEN().addText(new String(name)));
+					CdaUtilMdht.getMdhtDatatypesFactoryInstance().createEN().addText(new String(name)));
 	}
 
 	/**

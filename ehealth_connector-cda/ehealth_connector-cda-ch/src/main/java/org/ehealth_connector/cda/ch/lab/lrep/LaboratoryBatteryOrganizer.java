@@ -25,7 +25,7 @@ import org.ehealth_connector.cda.BaseObservation;
 import org.ehealth_connector.cda.BaseObservationComparator;
 import org.ehealth_connector.cda.ObservationMediaEntry;
 import org.ehealth_connector.cda.ihe.lab.BaseLaboratoryBatteryOrganizer;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Performer;
@@ -50,7 +50,7 @@ public class LaboratoryBatteryOrganizer extends BaseLaboratoryBatteryOrganizer {
 	 */
 	public LaboratoryBatteryOrganizer() {
 		super();
-		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.19"));
+		CdaUtilMdht.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.19"));
 	}
 
 	/**
@@ -83,7 +83,7 @@ public class LaboratoryBatteryOrganizer extends BaseLaboratoryBatteryOrganizer {
 	public LaboratoryBatteryOrganizer(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryBatteryOrganizer mdht) {
 		super(mdht);
-		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.19"));
+		CdaUtilMdht.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.19"));
 	}
 
 	/**

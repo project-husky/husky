@@ -22,7 +22,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.CdaChV2StructuredBody;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Address;
@@ -90,8 +90,8 @@ public class CdaChLrepV1GeneralReport extends
 		}
 
 		// Make sure the document contains all necessary templateIds
-		CdaUtil.addTemplateIdOnce(getDoc(), new Identificator("2.16.756.5.30.1.1.1.1.3.9.1"));
-		CdaUtil.addTemplateIdOnce(getDoc(), new Identificator("1.3.6.1.4.1.19376.1.3.3"));
+		CdaUtilMdht.addTemplateIdOnce(getDoc(), new Identificator("2.16.756.5.30.1.1.1.1.3.9.1"));
+		CdaUtilMdht.addTemplateIdOnce(getDoc(), new Identificator("1.3.6.1.4.1.19376.1.3.3"));
 
 	}
 
@@ -117,7 +117,7 @@ public class CdaChLrepV1GeneralReport extends
 	@Override
 	public Author addAuthor(org.ehealth_connector.common.mdht.Author author) {
 		Author mdht = super.addAuthor(author);
-		CdaUtil.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.2.59"));
+		CdaUtilMdht.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.2.59"));
 		return mdht;
 	}
 
@@ -185,7 +185,7 @@ public class CdaChLrepV1GeneralReport extends
 	@Override
 	public InformationRecipient addOtherRecipient(Organization recipient) {
 		InformationRecipient mdht = super.addOtherRecipient(recipient);
-		CdaUtil.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.2.57"));
+		CdaUtilMdht.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.2.57"));
 		return mdht;
 	}
 
@@ -225,7 +225,7 @@ public class CdaChLrepV1GeneralReport extends
 	@Override
 	public Custodian setCustodian(Organization organization) {
 		Custodian mdht = super.setCustodian(organization);
-		CdaUtil.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.2.60"));
+		CdaUtilMdht.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.2.60"));
 		return mdht;
 	}
 
@@ -240,8 +240,8 @@ public class CdaChLrepV1GeneralReport extends
 	@Override
 	public RecordTarget setPatient(Patient patient) {
 		RecordTarget mdht = super.setPatient(patient);
-		CdaUtil.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.2.58"));
-		CdaUtil.addTemplateIdOnce(mdht, new Identificator("1.3.6.1.4.1.19376.1.3.3.1.4"));
+		CdaUtilMdht.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.2.58"));
+		CdaUtilMdht.addTemplateIdOnce(mdht, new Identificator("1.3.6.1.4.1.19376.1.3.3.1.4"));
 		return mdht;
 	}
 
@@ -263,8 +263,8 @@ public class CdaChLrepV1GeneralReport extends
 			mdht.getIntendedRecipient().getTelecoms().add(EcoreUtil.copy(item));
 		}
 
-		CdaUtil.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.2.57"));
-		CdaUtil.addTemplateIdOnce(mdht, new Identificator("1.3.6.1.4.1.19376.1.3.3.1.4"));
+		CdaUtilMdht.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.2.57"));
+		CdaUtilMdht.addTemplateIdOnce(mdht, new Identificator("1.3.6.1.4.1.19376.1.3.3.1.4"));
 		return mdht;
 	}
 }

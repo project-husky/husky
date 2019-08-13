@@ -23,7 +23,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.enums.ActSite;
 import org.ehealth_connector.cda.enums.VitalSignCodes;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
@@ -96,7 +96,7 @@ public class BaseVitalSignObservation extends BaseObservation {
 	 *            the new id
 	 */
 	public void addId(Identificator id) {
-		final II ii = CdaUtil.createUniqueIiFromIdentificator(id);
+		final II ii = CdaUtilMdht.createUniqueIiFromIdentificator(id);
 		mVitalSignObservation.getIds().add(ii);
 	}
 

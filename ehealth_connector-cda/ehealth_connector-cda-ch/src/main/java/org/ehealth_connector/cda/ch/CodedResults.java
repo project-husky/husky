@@ -18,7 +18,7 @@
 package org.ehealth_connector.cda.ch;
 
 import org.ehealth_connector.cda.AbstractCodedResults;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.mdht.enums.StatusCode;
 import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.Util;
@@ -68,7 +68,7 @@ public class CodedResults extends AbstractCodedResults {
 		super(so);
 
 		// Create Id
-		setIi(CdaUtil.createUniqueIi());
+		setIi(CdaUtilMdht.createUniqueIi());
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class CodedResults extends AbstractCodedResults {
 		// Create and add an empty procedureEntry
 		final ProcedureEntryProcedureActivityProcedure pe = IHEFactory.eINSTANCE
 				.createProcedureEntryProcedureActivityProcedure().init();
-		pe.getIds().add(CdaUtil.createUniqueIi());
+		pe.getIds().add(CdaUtilMdht.createUniqueIi());
 		pe.setCode(Util.createCodeNullFlavorNA());
 
 		// Create NullFlavor Reference

@@ -26,7 +26,7 @@ import org.ehealth_connector.cda.ihe.pharm.enums.DispenseCodeList;
 import org.ehealth_connector.cda.ihe.pharm.enums.MedicationsSpecialConditions;
 import org.ehealth_connector.cda.ihe.pharm.enums.PharmacyItemTypeList;
 import org.ehealth_connector.cda.ihe.pharm.enums.SubstanceAdminSubstitution;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
@@ -438,7 +438,7 @@ public class DispenseItemEntry
 	 *            the dispensed product
 	 */
 	public void setDispensedProduct(ManufacturedProduct manufacturedProduct) {
-		final Product product = CdaUtil.getMdhtCdaFactoryInstance().createProduct();
+		final Product product = CdaUtilMdht.getMdhtCdaFactoryInstance().createProduct();
 		product.setManufacturedProduct(manufacturedProduct.getMdht());
 		this.getMdht().setProduct(product);
 	}

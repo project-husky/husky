@@ -18,7 +18,7 @@ package org.ehealth_connector.cda.ch.lab.lrep;
 
 import java.util.Date;
 
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Participant;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenCollection;
@@ -35,7 +35,7 @@ public class SpecimenCollectionEntry
 	 */
 	public SpecimenCollectionEntry() {
 		super();
-		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.11"));
+		CdaUtilMdht.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.11"));
 		getMdht().getCode().setDisplayName("Collection date of Unspecified specimen");
 	}
 
@@ -51,7 +51,7 @@ public class SpecimenCollectionEntry
 	 */
 	public SpecimenCollectionEntry(Date effectiveTime, Identificator id, String textReference) {
 		super(effectiveTime, id, textReference);
-		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.11"));
+		CdaUtilMdht.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.11"));
 		getMdht().getCode().setDisplayName("Collection date of Unspecified specimen");
 	}
 
@@ -68,7 +68,7 @@ public class SpecimenCollectionEntry
 	public SpecimenCollectionEntry(Date effectiveTime, Participant participant,
 			String textReference) {
 		super(effectiveTime, participant, textReference);
-		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.11"));
+		CdaUtilMdht.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.11"));
 		getMdht().getCode().setDisplayName("Collection date of Unspecified specimen");
 	}
 
@@ -82,7 +82,7 @@ public class SpecimenCollectionEntry
 	 */
 	public SpecimenCollectionEntry(Identificator id, String textReference) {
 		super(id, textReference);
-		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.11"));
+		CdaUtilMdht.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.11"));
 		getMdht().getCode().setDisplayName("Collection date of Unspecified specimen");
 	}
 

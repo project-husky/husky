@@ -24,7 +24,7 @@ import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.enums.RouteOfAdministration;
 import org.ehealth_connector.cda.ihe.pharm.enums.SubstanceAdminSubstitution;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
@@ -80,7 +80,7 @@ public class SubstanceAdministration
 	 * class
 	 */
 	public SubstanceAdministration(LanguageCode languageCode) {
-		super(CdaUtil.getMdhtCdaFactoryInstance().createSubstanceAdministration());
+		super(CdaUtilMdht.getMdhtCdaFactoryInstance().createSubstanceAdministration());
 		this.getMdht().getTemplateIds()
 				.add(new Identificator("1.3.6.1.4.1.19376.1.9.1.3.2", "IHE PHARM").getIi());
 		this.getMdht().getTemplateIds()
@@ -141,7 +141,7 @@ public class SubstanceAdministration
 		if (id == null) {
 			this.getMdht().getIds().clear();
 			this.getMdht().getIds()
-					.add(CdaUtil.getMdhtDatatypesFactoryInstance().createII(NullFlavor.NA));
+					.add(CdaUtilMdht.getMdhtDatatypesFactoryInstance().createII(NullFlavor.NA));
 		} else {
 			this.getMdht().getIds().add(DatatypesFactory.eINSTANCE.createII(id));
 		}
@@ -352,7 +352,7 @@ public class SubstanceAdministration
 	 */
 	public void setApproachSiteCode(String reference) {
 
-		final CD approachSiteCode = CdaUtil.getMdhtDatatypesFactoryInstance().createCD();
+		final CD approachSiteCode = CdaUtilMdht.getMdhtDatatypesFactoryInstance().createCD();
 		approachSiteCode.setNullFlavor(NullFlavor.UNK);
 		approachSiteCode.setCodeSystem(APPROACH_SITE_CODE_SYSTEM_OID);
 		approachSiteCode.setCodeSystemName(APPROACH_SITE_CODE_SYSTEM_NAME);
@@ -378,7 +378,7 @@ public class SubstanceAdministration
 	 */
 	public void setApproachSiteCode(String code, String displayName, String codeSystem,
 			String codeSystemName, String reference) {
-		final CD approachCode = CdaUtil.getMdhtDatatypesFactoryInstance().createCD();
+		final CD approachCode = CdaUtilMdht.getMdhtDatatypesFactoryInstance().createCD();
 		if (codeSystem != null)
 			approachCode.setCodeSystem(codeSystem);
 		if (codeSystemName != null)
@@ -413,7 +413,7 @@ public class SubstanceAdministration
 	 */
 	public void setDoseQuantity(IVL_PQ doseQuantity) {
 		if (doseQuantity == null) {
-			final IVL_PQ ivl = CdaUtil.getMdhtDatatypesFactoryInstance().createIVL_PQ();
+			final IVL_PQ ivl = CdaUtilMdht.getMdhtDatatypesFactoryInstance().createIVL_PQ();
 			ivl.setNullFlavor(NullFlavor.UNK);
 			this.getMdht().setDoseQuantity(ivl);
 		} else
@@ -434,29 +434,29 @@ public class SubstanceAdministration
 	public void setQuantity(Double quantity, String quantityUnit, String textQuantityUnit,
 			boolean isPackageAmount) {
 
-		final EntryRelationship prescribedQty = CdaUtil.getMdhtCdaFactoryInstance()
+		final EntryRelationship prescribedQty = CdaUtilMdht.getMdhtCdaFactoryInstance()
 				.createEntryRelationship();
 		prescribedQty.setTypeCode(x_ActRelationshipEntryRelationship.COMP);
 
-		final Supply prescribedQuantity = CdaUtil.getMdhtCdaFactoryInstance().createSupply();
+		final Supply prescribedQuantity = CdaUtilMdht.getMdhtCdaFactoryInstance().createSupply();
 		prescribedQuantity.setClassCode(ActClassSupply.SPLY);
 		prescribedQuantity.setMoodCode(x_DocumentSubstanceMood.RQO);
 		prescribedQuantity.setIndependentInd(
-				CdaUtil.getMdhtDatatypesFactoryInstance().createBL(java.lang.Boolean.FALSE));
+				CdaUtilMdht.getMdhtDatatypesFactoryInstance().createBL(java.lang.Boolean.FALSE));
 
 		if (quantity == null) {
-			PQ quantityPq = CdaUtil.getMdhtDatatypesFactoryInstance().createPQ();
+			PQ quantityPq = CdaUtilMdht.getMdhtDatatypesFactoryInstance().createPQ();
 			quantityPq.setNullFlavor(NullFlavor.NA);
 			prescribedQuantity.setQuantity(quantityPq);
 		} else {
 			if (isPackageAmount || quantityUnit == null) {
-				prescribedQuantity.setQuantity(CdaUtil.getMdhtDatatypesFactoryInstance()
+				prescribedQuantity.setQuantity(CdaUtilMdht.getMdhtDatatypesFactoryInstance()
 						.createPQ(quantity.doubleValue(), null));
 			} else {
-				prescribedQuantity.setQuantity(CdaUtil.getMdhtDatatypesFactoryInstance()
+				prescribedQuantity.setQuantity(CdaUtilMdht.getMdhtDatatypesFactoryInstance()
 						.createPQ(quantity.doubleValue(), quantityUnit));
 			}
-			prescribedQuantity.setText(CdaUtil.getMdhtDatatypesFactoryInstance().createED(
+			prescribedQuantity.setText(CdaUtilMdht.getMdhtDatatypesFactoryInstance().createED(
 					quantity + (textQuantityUnit == null || textQuantityUnit.length() == 0 ? ""
 							: " " + textQuantityUnit)));
 		}
@@ -473,7 +473,7 @@ public class SubstanceAdministration
 	 */
 	public void setRateQuantity(IVL_PQ rateQuantity) {
 		if (rateQuantity == null) {
-			final IVL_PQ ivl = CdaUtil.getMdhtDatatypesFactoryInstance().createIVL_PQ();
+			final IVL_PQ ivl = CdaUtilMdht.getMdhtDatatypesFactoryInstance().createIVL_PQ();
 			ivl.setNullFlavor(NullFlavor.UNK);
 			this.getMdht().setRateQuantity(ivl);
 		} else
@@ -491,7 +491,7 @@ public class SubstanceAdministration
 	 */
 	public void setReasonOfTreatment(String reasonRootId, String reasonExtensionId) {
 
-		final org.openhealthtools.mdht.uml.cda.Act reasonOfTreatment = CdaUtil
+		final org.openhealthtools.mdht.uml.cda.Act reasonOfTreatment = CdaUtilMdht
 				.getMdhtCdaFactoryInstance().createAct();
 		reasonOfTreatment.setClassCode(x_ActClassDocumentEntryAct.ACT);
 		reasonOfTreatment.setMoodCode(x_DocumentActMood.EVN);
@@ -501,13 +501,13 @@ public class SubstanceAdministration
 		final Identificator reasonId = new Identificator(reasonRootId, reasonExtensionId);
 		reasonOfTreatment.getIds().add(reasonId.getIi());
 
-		final CD nullFlavorCode = CdaUtil.getMdhtDatatypesFactoryInstance().createCD();
+		final CD nullFlavorCode = CdaUtilMdht.getMdhtDatatypesFactoryInstance().createCD();
 		nullFlavorCode.setNullFlavor(NullFlavor.NA);
 		reasonOfTreatment.setCode(nullFlavorCode);
 
 		reasonOfTreatment.getEntryRelationships().clear();
 
-		final EntryRelationship reasonEntryRelationship = CdaUtil.getMdhtCdaFactoryInstance()
+		final EntryRelationship reasonEntryRelationship = CdaUtilMdht.getMdhtCdaFactoryInstance()
 				.createEntryRelationship();
 		reasonEntryRelationship.unsetInversionInd();
 		reasonEntryRelationship.setAct(reasonOfTreatment);
@@ -541,7 +541,7 @@ public class SubstanceAdministration
 	 */
 	public void setStartEndDate(Date startingDate, Date endingDate) {
 
-		final IVL_TS time = CdaUtil.getMdhtDatatypesFactoryInstance().createIVL_TS();
+		final IVL_TS time = CdaUtilMdht.getMdhtDatatypesFactoryInstance().createIVL_TS();
 		time.setLow(DateUtilMdht.createIVXB_TSFromDate(startingDate));
 		time.setHigh(DateUtilMdht.createIVXB_TSFromDate(endingDate));
 
@@ -561,7 +561,7 @@ public class SubstanceAdministration
 	public void setStartEndDate(IVL_TS effectiveTime) {
 		this.getMdht().getEffectiveTimes().clear();
 
-		final IVL_TS time = CdaUtil.getMdhtDatatypesFactoryInstance().createIVL_TS();
+		final IVL_TS time = CdaUtilMdht.getMdhtDatatypesFactoryInstance().createIVL_TS();
 		if (effectiveTime.getLow() != null && effectiveTime.getLow().getValue() != null)
 			time.setLow(DateUtilMdht.createIVXB_TSFromDate(
 					DateUtil.parseDateyyyyMMdd(effectiveTime.getLow().getValue())));

@@ -59,7 +59,7 @@ public class CdaChUtilTest extends CdaUtilTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.utils.CdaUtil#createUniqueIiFromString(java.lang.String)}
+	 * {@link org.ehealth_connector.cda.utils.CdaUtilMdht#createUniqueIiFromString(java.lang.String)}
 	 * .
 	 */
 	@Test
@@ -71,7 +71,7 @@ public class CdaChUtilTest extends CdaUtilTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.utils.CdaUtil#createUniqueIiFromString(org.ehealth_connector.common.mdht.Identificator)}
+	 * {@link org.ehealth_connector.cda.utils.CdaUtilMdht#createUniqueIiFromString(org.ehealth_connector.common.mdht.Identificator)}
 	 * .
 	 */
 	@Test
@@ -252,7 +252,7 @@ public class CdaChUtilTest extends CdaUtilTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.utils.CdaUtil#updateRefIfComment(org.openhealthtools.mdht.uml.cda.EntryRelationship, int, int, org.ehealth_connector.cda.ch.enums.SectionsVacd)}
+	 * {@link org.ehealth_connector.cda.utils.CdaUtilMdht#updateRefIfComment(org.openhealthtools.mdht.uml.cda.EntryRelationship, int, int, org.ehealth_connector.cda.ch.enums.SectionsVacd)}
 	 * .
 	 */
 	@Test
@@ -274,7 +274,7 @@ public class CdaChUtilTest extends CdaUtilTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.utils.CdaUtil#updateRefIfComment(org.openhealthtools.mdht.uml.cda.EntryRelationship, java.lang.String, org.ehealth_connector.cda.ch.enums.SectionsVacd)}
+	 * {@link org.ehealth_connector.cda.utils.CdaUtilMdht#updateRefIfComment(org.openhealthtools.mdht.uml.cda.EntryRelationship, java.lang.String, org.ehealth_connector.cda.ch.enums.SectionsVacd)}
 	 * .
 	 */
 	@Test

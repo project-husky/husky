@@ -22,7 +22,7 @@ import java.util.List;
 import org.ehealth_connector.cda.MdhtObservationFacade;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.enums.epsos.BloodGroup;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
@@ -180,7 +180,7 @@ public class BloodGroupObservation
 		getMdht().addAct(commentEntry.copy());
 		// need to add the the Subj and setInversionInd, cannot do this
 		// automatically with mdht
-		CdaUtil.setEntryRelationshipCommentInversionIdAndTypeCode(
+		CdaUtilMdht.setEntryRelationshipCommentInversionIdAndTypeCode(
 				getMdht().getEntryRelationships());
 	}
 

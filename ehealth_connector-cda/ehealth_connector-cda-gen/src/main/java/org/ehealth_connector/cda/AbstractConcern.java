@@ -23,7 +23,7 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.IdentityDomain;
 import org.ehealth_connector.common.utils.DateUtilMdht;
@@ -69,7 +69,7 @@ public abstract class AbstractConcern
 	 *            the new id
 	 */
 	public void addId(Identificator id) {
-		final II ii = CdaUtil.createUniqueIiFromIdentificator(id);
+		final II ii = CdaUtilMdht.createUniqueIiFromIdentificator(id);
 		mConcernEntry.getIds().add(ii);
 	}
 

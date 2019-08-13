@@ -21,7 +21,7 @@ package org.ehealth_connector.cda.ch.mtps;
 import static org.junit.Assert.assertEquals;
 
 import org.ehealth_connector.cda.ch.mtps.enums.PosologyType;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PIVL_TS;
 import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
@@ -39,9 +39,9 @@ public class MedicationFrequencyTest {
 	@Test
 	public void testMedicationFrequency() throws Exception {
 
-		final PIVL_TS period = CdaUtil.getMdhtDatatypesFactoryInstance().createPIVL_TS();
+		final PIVL_TS period = CdaUtilMdht.getMdhtDatatypesFactoryInstance().createPIVL_TS();
 		period.setInstitutionSpecified(false);
-		final PQ periodQuantity = CdaUtil.getMdhtDatatypesFactoryInstance().createPQ();
+		final PQ periodQuantity = CdaUtilMdht.getMdhtDatatypesFactoryInstance().createPQ();
 		periodQuantity.setValue((double) 2);
 		periodQuantity.setUnit("h");
 		period.setPeriod(periodQuantity);

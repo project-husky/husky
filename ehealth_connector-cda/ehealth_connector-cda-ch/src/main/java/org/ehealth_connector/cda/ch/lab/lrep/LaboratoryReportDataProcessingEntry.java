@@ -21,7 +21,7 @@ import java.util.List;
 
 import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
 import org.ehealth_connector.cda.ihe.lab.AbstractLaboratoryReportDataProcessingEntry;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
@@ -43,7 +43,7 @@ public class LaboratoryReportDataProcessingEntry
 	 */
 	public LaboratoryReportDataProcessingEntry() {
 		super();
-		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.4"));
+		CdaUtilMdht.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.4"));
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class LaboratoryReportDataProcessingEntry
 	public LaboratoryReportDataProcessingEntry(
 			org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryReportDataProcessingEntry mdht) {
 		super(mdht);
-		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.4"));
+		CdaUtilMdht.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.4"));
 	}
 
 	/**

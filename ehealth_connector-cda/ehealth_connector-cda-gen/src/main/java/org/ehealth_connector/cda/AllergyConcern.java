@@ -19,7 +19,7 @@ package org.ehealth_connector.cda;
 import java.util.Date;
 
 import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.openhealthtools.mdht.uml.cda.ihe.AllergyIntoleranceConcern;
 import org.openhealthtools.mdht.uml.hl7.datatypes.II;
@@ -88,7 +88,7 @@ public class AllergyConcern extends BaseAllergyConcern {
 	 */
 	@Override
 	public void addId(Identificator id) {
-		final II ii = CdaUtil.createUniqueIiFromIdentificator(id);
+		final II ii = CdaUtilMdht.createUniqueIiFromIdentificator(id);
 		getConcernEntry().getIds().add(ii);
 	}
 

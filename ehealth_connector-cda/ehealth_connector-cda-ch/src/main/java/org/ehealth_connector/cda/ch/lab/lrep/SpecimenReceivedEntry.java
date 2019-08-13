@@ -18,7 +18,7 @@ package org.ehealth_connector.cda.ch.lab.lrep;
 
 import java.util.Date;
 
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.SpecimenReceived;
 
@@ -33,7 +33,7 @@ public class SpecimenReceivedEntry extends org.ehealth_connector.cda.ihe.lab.Spe
 	 */
 	public SpecimenReceivedEntry() {
 		super();
-		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.12"));
+		CdaUtilMdht.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.12"));
 	}
 
 	/**
@@ -46,7 +46,7 @@ public class SpecimenReceivedEntry extends org.ehealth_connector.cda.ihe.lab.Spe
 	 */
 	public SpecimenReceivedEntry(Date effectiveTime, Identificator id) {
 		super(effectiveTime, id);
-		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.12"));
+		CdaUtilMdht.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.12"));
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class SpecimenReceivedEntry extends org.ehealth_connector.cda.ihe.lab.Spe
 	 */
 	public SpecimenReceivedEntry(SpecimenReceived mdht) {
 		super(mdht);
-		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.12"));
+		CdaUtilMdht.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.12"));
 	}
 
 }

@@ -21,7 +21,7 @@ import java.util.List;
 
 import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
 import org.ehealth_connector.cda.ihe.lab.BaseLaboratorySpecialtySection;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
@@ -44,7 +44,7 @@ public class LaboratorySpecialtySection extends BaseLaboratorySpecialtySection {
 	 */
 	public LaboratorySpecialtySection() {
 		super();
-		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.3.3"));
+		CdaUtilMdht.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.3.3"));
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class LaboratorySpecialtySection extends BaseLaboratorySpecialtySection {
 	 */
 	public LaboratorySpecialtySection(Code code) {
 		super(code);
-		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.3.3"));
+		CdaUtilMdht.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.3.3"));
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class LaboratorySpecialtySection extends BaseLaboratorySpecialtySection {
 	 */
 	public LaboratorySpecialtySection(Code code, LanguageCode languageCode) {
 		super(code, languageCode);
-		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.3.3"));
+		CdaUtilMdht.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.3.3"));
 	}
 
 	/**
@@ -132,7 +132,7 @@ public class LaboratorySpecialtySection extends BaseLaboratorySpecialtySection {
 			newLrdpe = true;
 			lrdpe = new LaboratoryReportDataProcessingEntry();
 		}
-		CdaUtil.addTemplateIdOnce(lrdpe.getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.4"));
+		CdaUtilMdht.addTemplateIdOnce(lrdpe.getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.4"));
 
 		BaseChSpecimenAct sa;
 		if (lrdpe.getSpecimenAct() == null) {

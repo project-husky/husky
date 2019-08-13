@@ -11,20 +11,11 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
  *
  */
 package org.ehealth_connector.cda.ch.lrep;
 
-import java.io.File;
-import java.io.IOException;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.stream.StreamSource;
-import org.ehealth_connector.common.CdaNamespacePrefixMapper;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 import org.ehealth_connector.common.hl7cdar2.XActRelationshipEntry;
 
@@ -42,6 +33,21 @@ public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connect
 
 	public CdachSectionOriginalRepresentationCoded() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.45"));
+		codeFixedValue = createHl7CodeFixedValue("55108-5");
+	}
+
+	private org.ehealth_connector.common.hl7cdar2.CE codeFixedValue;
+
+	/**
+	 * Creates fixed contents for hl7Code
+	 *
+	 * @param code the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
+		retVal.setCode(code);
+		return retVal;
 	}
 
 	/**
@@ -66,6 +72,13 @@ public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connect
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	/**
+	 * Gets the member codeFixedValue
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CE getCodeFixedValue() {
+		return codeFixedValue;
 	}
 
 	/**
@@ -123,52 +136,6 @@ public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connect
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ST getHl7Title() {
 		return super.title;
-	}
-
-	/**
-	 * Loads the CDA document from file.
-	 * @param inputFileName the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
-	 */
-	public static CdachSectionOriginalRepresentationCoded loadFromFile(String inputFileName) throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
-	}
-
-	/**
-	 * Loads the CDA document from file.
-	 * @param inputFile the source file.
-	 * n@return the CDA document\n@throws JAXBException\n@throws IOException Signals that an I/O exception has occurred.
-	 */
-	public static CdachSectionOriginalRepresentationCoded loadFromFile(File inputFile) throws JAXBException, IOException {
-		CdachSectionOriginalRepresentationCoded retVal;
-		JAXBContext context = JAXBContext.newInstance(CdachSectionOriginalRepresentationCoded.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<CdachSectionOriginalRepresentationCoded> root = mar.unmarshal(source, CdachSectionOriginalRepresentationCoded.class);
-		retVal = root.getValue();
-		return retVal;
-	}
-
-	/**
-	 * Saves the current CDA document to file.
-	 * @param outputFileName the full path and filename of the destination file.
-	 * @throws JAXBException
-	 */
-	public void saveToFile(String outputFileName) throws JAXBException {
-		saveToFile(new File(outputFileName));
-	}
-
-	/**
-	 * Saves the current CDA document to file.
-	 * @param outputFile the destination file.
-	 * @throws JAXBException
-	 */
-	public void saveToFile(File outputFile) throws JAXBException {
-		JAXBContext context = JAXBContext.newInstance(this.getClass());
-		Marshaller mar = context.createMarshaller();
-		mar.setProperty("com.sun.xml.bind.namespacePrefixMapper", new CdaNamespacePrefixMapper());
-		mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-		mar.marshal(this, outputFile);
 	}
 
 	/**

@@ -17,7 +17,7 @@
 package org.ehealth_connector.cda.ihe.lab;
 
 import org.ehealth_connector.cda.MdhtActFacade;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.mdht.Code;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
@@ -55,7 +55,7 @@ public class BaseLaboratoryAct extends MdhtActFacade<Act> {
 			LaboratoryBatteryOrganizer laboratoryBatteryOrganizer) {
 		getMdht().addOrganizer(laboratoryBatteryOrganizer.copy());
 		// Set the right type for the entryRelationship
-		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+		CdaUtilMdht.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
 				x_ActRelationshipEntryRelationship.COMP);
 	}
 

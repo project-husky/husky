@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
 
 import org.ehealth_connector.cda.MdhtObservationFacade;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.Code;
@@ -223,7 +223,7 @@ public class LaboratoryObservation extends
 	 */
 	@Override
 	public void addPreviousObservation(LaboratoryObservation laboratoryObservation) {
-		CdaUtil.removeTemplateId(laboratoryObservation.getMdht(),
+		CdaUtilMdht.removeTemplateId(laboratoryObservation.getMdht(),
 				new Identificator("2.16.756.5.30.1.1.10.4.3"));
 		super.addPreviousObservation(laboratoryObservation);
 	}

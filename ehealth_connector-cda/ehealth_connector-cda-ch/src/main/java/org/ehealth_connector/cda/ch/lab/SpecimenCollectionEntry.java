@@ -19,7 +19,7 @@ package org.ehealth_connector.cda.ch.lab;
 import java.util.Date;
 
 import org.ehealth_connector.cda.ihe.lab.SpecimenReceivedEntry;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Participant;
@@ -306,7 +306,7 @@ public class SpecimenCollectionEntry
 			if (added == false) {
 				getMdht().addAct(entry.copy());
 			}
-			CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+			CdaUtilMdht.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
 					x_ActRelationshipEntryRelationship.COMP);
 		}
 	}

@@ -18,7 +18,7 @@ package org.ehealth_connector.cda.ihe.lab;
 
 import org.ehealth_connector.cda.BaseVitalSignObservation;
 import org.ehealth_connector.cda.MdhtOrganizerFacade;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
@@ -68,7 +68,7 @@ public class VitalSignsOrganizer
 	 */
 	public void addId(Identificator id) {
 		if (id == null) {
-			id = CdaUtil.createUniqueIdentificator();
+			id = CdaUtilMdht.createUniqueIdentificator();
 		}
 		getMdht().getIds().add(id.getIi());
 	}

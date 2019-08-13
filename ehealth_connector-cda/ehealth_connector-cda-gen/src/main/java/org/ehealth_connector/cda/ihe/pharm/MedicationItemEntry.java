@@ -27,7 +27,7 @@ import org.ehealth_connector.cda.ExternalDocumentEntry;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.ihe.pharm.enums.MedicationsSpecialConditions;
 import org.ehealth_connector.cda.ihe.pharm.enums.SubstanceAdminSubstitution;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
@@ -602,7 +602,7 @@ public class MedicationItemEntry
 	 */
 	public void setApproachSiteCode(String reference) {
 
-		final CD approachSiteCode = CdaUtil.getMdhtDatatypesFactoryInstance().createCD();
+		final CD approachSiteCode = CdaUtilMdht.getMdhtDatatypesFactoryInstance().createCD();
 		approachSiteCode.setNullFlavor(NullFlavor.UNK);
 		approachSiteCode.setCodeSystem(APPROACH_SITE_CODE_SYSTEM_OID);
 		approachSiteCode.setCodeSystemName(APPROACH_SITE_CODE_SYSTEM_NAME);
@@ -628,7 +628,7 @@ public class MedicationItemEntry
 	 */
 	public void setApproachSiteCode(String code, String displayName, String codeSystem,
 			String codeSystemName, String reference) {
-		final CD approachCode = CdaUtil.getMdhtDatatypesFactoryInstance().createCD();
+		final CD approachCode = CdaUtilMdht.getMdhtDatatypesFactoryInstance().createCD();
 		if (codeSystem != null)
 			approachCode.setCodeSystem(codeSystem);
 		if (codeSystemName != null)
@@ -992,7 +992,7 @@ public class MedicationItemEntry
 	 */
 	public void setStartEndDate(Date startingDate, Date endingDate) {
 
-		final IVL_TS time = CdaUtil.getMdhtDatatypesFactoryInstance().createIVL_TS();
+		final IVL_TS time = CdaUtilMdht.getMdhtDatatypesFactoryInstance().createIVL_TS();
 		time.setLow(DateUtilMdht.createIVXB_TSFromDate(startingDate));
 		time.setHigh(DateUtilMdht.createIVXB_TSFromDate(endingDate));
 
@@ -1013,7 +1013,7 @@ public class MedicationItemEntry
 
 		this.getMdht().getEffectiveTimes().clear();
 
-		final IVL_TS time = CdaUtil.getMdhtDatatypesFactoryInstance().createIVL_TS();
+		final IVL_TS time = CdaUtilMdht.getMdhtDatatypesFactoryInstance().createIVL_TS();
 		if (effectiveTime.getLow() != null && effectiveTime.getLow().getValue() != null)
 			time.setLow(DateUtilMdht.createIVXB_TSFromDate(
 					DateUtil.parseDateyyyyMMdd(effectiveTime.getLow().getValue())));

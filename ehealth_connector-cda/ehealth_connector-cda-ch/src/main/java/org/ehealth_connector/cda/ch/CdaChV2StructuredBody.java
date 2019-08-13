@@ -30,7 +30,7 @@ import org.ehealth_connector.cda.DataEnterer;
 import org.ehealth_connector.cda.ObservationMediaEntry;
 import org.ehealth_connector.cda.ch.textbuilder.ObservationChTextBuilder;
 import org.ehealth_connector.cda.ihe.lab.BaseLaboratorySpecialtySection;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.ch.enums.ConfidentialityCode;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Identificator;
@@ -152,7 +152,7 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	public void addAuthenticator(org.ehealth_connector.common.mdht.Author author) {
 		Authenticator authenticator = Util.createAuthenticatorFromAuthor(author);
 		authenticator.setTime(EcoreUtil.copy(author.getAuthorMdht().getTime()));
-		CdaUtil.addTemplateIdOnce(authenticator, new Identificator("2.16.756.5.30.1.1.10.2.6"));
+		CdaUtilMdht.addTemplateIdOnce(authenticator, new Identificator("2.16.756.5.30.1.1.10.2.6"));
 		super.addAuthenticator(authenticator);
 	}
 
@@ -167,7 +167,7 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	@Override
 	public Author addAuthor(org.ehealth_connector.common.mdht.Author author) {
 		final Author docAuthor = author.copyMdhtAuthor();
-		CdaUtil.addTemplateIdOnce(docAuthor, new Identificator("2.16.756.5.30.1.1.10.9.23"));
+		CdaUtilMdht.addTemplateIdOnce(docAuthor, new Identificator("2.16.756.5.30.1.1.10.9.23"));
 		getDoc().getAuthors().add(docAuthor);
 		return docAuthor;
 	}
@@ -275,9 +275,9 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		getDoc().getRealmCodes().add(cs);
 
 		// Make sure the document contains all necessary templateIds
-		CdaUtil.addTemplateIdOnce(getDoc(), new Identificator("2.16.840.1.113883.10.12.1"));
-		CdaUtil.addTemplateIdOnce(getDoc(), new Identificator("2.16.840.1.113883.10.12.2"));
-		CdaUtil.addTemplateIdOnce(getDoc(), new Identificator("2.16.756.5.30.1.1.1.1.4"));
+		CdaUtilMdht.addTemplateIdOnce(getDoc(), new Identificator("2.16.840.1.113883.10.12.1"));
+		CdaUtilMdht.addTemplateIdOnce(getDoc(), new Identificator("2.16.840.1.113883.10.12.2"));
+		CdaUtilMdht.addTemplateIdOnce(getDoc(), new Identificator("2.16.756.5.30.1.1.1.1.4"));
 
 		// Type ID
 		setTypeId();
@@ -403,7 +403,7 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	@Override
 	public Custodian setCustodian(Organization organization) {
 		Custodian mdht = super.setCustodian(organization);
-		CdaUtil.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.2.3"));
+		CdaUtilMdht.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.2.3"));
 		return mdht;
 	}
 
@@ -419,7 +419,7 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	 */
 	@Override
 	public void setDataEnterer(DataEnterer dataEnterer) {
-		CdaUtil.addTemplateIdOnce(dataEnterer.getMdht(),
+		CdaUtilMdht.addTemplateIdOnce(dataEnterer.getMdht(),
 				new Identificator("2.16.756.5.30.1.1.10.2.7"));
 		getDoc().setDataEnterer(dataEnterer.getMdht());
 	}
@@ -442,7 +442,7 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 
 		entity.setAssignedPerson(dataEnterer.copyMdhtPerson());
 		enterer.setAssignedEntity(entity);
-		CdaUtil.addTemplateIdOnce(enterer, new Identificator("2.16.756.5.30.1.1.10.2.7"));
+		CdaUtilMdht.addTemplateIdOnce(enterer, new Identificator("2.16.756.5.30.1.1.10.2.7"));
 		getDoc().setDataEnterer(enterer);
 	}
 
@@ -473,7 +473,7 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 		getDoc().setLegalAuthenticator(Util.createLegalAuthenticatorFromAuthor(legalAuthenticator));
 		getDoc().getLegalAuthenticator()
 				.setTime(EcoreUtil.copy(legalAuthenticator.getAuthorMdht().getTime()));
-		CdaUtil.addTemplateIdOnce(getDoc().getLegalAuthenticator(),
+		CdaUtilMdht.addTemplateIdOnce(getDoc().getLegalAuthenticator(),
 				new Identificator("2.16.756.5.30.1.1.10.2.5"));
 	}
 
@@ -533,7 +533,7 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	@Override
 	public RecordTarget setPatient(Patient patient) {
 		RecordTarget mdhtPatient = patient.getMdhtRecordTarget();
-		CdaUtil.addTemplateIdOnce(mdhtPatient, new Identificator("2.16.756.5.30.1.1.10.2.1"));
+		CdaUtilMdht.addTemplateIdOnce(mdhtPatient, new Identificator("2.16.756.5.30.1.1.10.2.1"));
 		getDoc().getRecordTargets().add(mdhtPatient);
 		return mdhtPatient;
 	}
@@ -549,7 +549,7 @@ public class CdaChV2StructuredBody<EClinicalDocument extends ClinicalDocument>
 	public InformationRecipient setPrimaryRecipient(Organization recipient) {
 		super.setPrimaryRecipient(recipient);
 		InformationRecipient mdhtRecipient = getMdhtPrimaryRecipient();
-		CdaUtil.addTemplateIdOnce(mdhtRecipient, new Identificator("2.16.756.5.30.1.1.10.2.4"));
+		CdaUtilMdht.addTemplateIdOnce(mdhtRecipient, new Identificator("2.16.756.5.30.1.1.10.2.4"));
 		return mdhtRecipient;
 	}
 }

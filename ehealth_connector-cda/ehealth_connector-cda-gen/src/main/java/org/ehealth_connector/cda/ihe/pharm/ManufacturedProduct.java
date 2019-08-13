@@ -18,7 +18,7 @@
 package org.ehealth_connector.cda.ihe.pharm;
 
 import org.ehealth_connector.cda.MdhtFacade;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Identificator;
@@ -85,7 +85,7 @@ public class ManufacturedProduct
 		} else {
 			this.getMdht().getIds().clear();
 			this.getMdht().getIds()
-					.add(CdaUtil.getMdhtDatatypesFactoryInstance().createII(NullFlavor.NA));
+					.add(CdaUtilMdht.getMdhtDatatypesFactoryInstance().createII(NullFlavor.NA));
 		}
 	}
 
@@ -183,7 +183,7 @@ public class ManufacturedProduct
 					manufacturedMaterial.getMdht());
 			this.getMdht().setManufacturedMaterial(material.getMdht());
 		} else {
-			final Material material = CdaUtil.getMdhtCdaFactoryInstance().createMaterial();
+			final Material material = CdaUtilMdht.getMdhtCdaFactoryInstance().createMaterial();
 			material.setNullFlavor(NullFlavor.NA);
 			material.getTemplateIds().clear();
 			this.getMdht().setManufacturedMaterial(material);

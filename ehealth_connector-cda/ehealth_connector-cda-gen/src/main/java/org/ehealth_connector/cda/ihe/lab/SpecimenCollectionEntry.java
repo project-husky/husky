@@ -21,7 +21,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.ehealth_connector.cda.MdhtProcedureFacade;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.mdht.Participant;
 import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.openhealthtools.mdht.uml.cda.Act;
@@ -147,7 +147,7 @@ public class SpecimenCollectionEntry
 			if (added == false) {
 				getMdht().addAct(entry.copy());
 			}
-			CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+			CdaUtilMdht.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
 					x_ActRelationshipEntryRelationship.COMP);
 		}
 	}

@@ -21,7 +21,7 @@ import java.util.List;
 
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.enums.VitalSignCodes;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.ReferenceRange;
@@ -98,7 +98,7 @@ public abstract class AbstractLaboratoryObservation
 	public void addCommentEntry(SectionAnnotationCommentEntry commentEntry) {
 		if (commentEntry != null) {
 			this.getMdht().addAct(commentEntry.copy());
-			CdaUtil.setEntryRelationshipCommentInversionIdAndTypeCode(
+			CdaUtilMdht.setEntryRelationshipCommentInversionIdAndTypeCode(
 					getMdht().getEntryRelationships());
 		}
 	}

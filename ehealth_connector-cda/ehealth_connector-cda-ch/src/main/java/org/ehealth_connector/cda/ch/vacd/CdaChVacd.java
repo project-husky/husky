@@ -43,7 +43,7 @@ import org.ehealth_connector.cda.ch.vacd.enums.SectionsVacd;
 import org.ehealth_connector.cda.ch.vacd.enums.SerologieForVacd;
 import org.ehealth_connector.cda.enums.ProblemsSpecialConditions;
 import org.ehealth_connector.cda.textbuilder.SimpleTextBuilder;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Performer;
@@ -592,18 +592,18 @@ public class CdaChVacd extends AbstractCdaChV1<CdaChVacdV1> {
 
 		// Copy all sections from the original document in the right order
 		final CdaChVacdV1 oldVacd = getMdht();
-		CdaUtil.addSectionToStructuredBodyAsCopy(sb, oldVacd.getImmunizationsSection());
-		CdaUtil.addSectionToStructuredBodyAsCopy(sb, oldVacd.getActiveProblemsSection());
-		CdaUtil.addSectionToStructuredBodyAsCopy(sb, oldVacd.getHistoryOfPastIllnessSection());
-		CdaUtil.addSectionToStructuredBodyAsCopy(sb, oldVacd.getAllergiesReactionsSection());
-		CdaUtil.addSectionToStructuredBodyAsCopy(sb, oldVacd.getCodedResultsSection());
-		CdaUtil.addSectionToStructuredBodyAsCopy(sb, oldVacd.getLaboratorySpecialtySection());
-		CdaUtil.addSectionToStructuredBodyAsCopy(sb, oldVacd.getPregnancyHistorySection());
-		CdaUtil.addSectionToStructuredBodyAsCopy(sb,
+		CdaUtilMdht.addSectionToStructuredBodyAsCopy(sb, oldVacd.getImmunizationsSection());
+		CdaUtilMdht.addSectionToStructuredBodyAsCopy(sb, oldVacd.getActiveProblemsSection());
+		CdaUtilMdht.addSectionToStructuredBodyAsCopy(sb, oldVacd.getHistoryOfPastIllnessSection());
+		CdaUtilMdht.addSectionToStructuredBodyAsCopy(sb, oldVacd.getAllergiesReactionsSection());
+		CdaUtilMdht.addSectionToStructuredBodyAsCopy(sb, oldVacd.getCodedResultsSection());
+		CdaUtilMdht.addSectionToStructuredBodyAsCopy(sb, oldVacd.getLaboratorySpecialtySection());
+		CdaUtilMdht.addSectionToStructuredBodyAsCopy(sb, oldVacd.getPregnancyHistorySection());
+		CdaUtilMdht.addSectionToStructuredBodyAsCopy(sb,
 				oldVacd.getImmunizationRecommendationSection());
 		// Workaround for the MDHT bug (?), which causes the domain specific
 		// getter to not find the remarks section
-		CdaUtil.addSectionToStructuredBodyAsCopy(sb, this.findRemarksSection());
+		CdaUtilMdht.addSectionToStructuredBodyAsCopy(sb, this.findRemarksSection());
 
 		newVacd.getComponent().setStructuredBody(sb);
 		return newVacd;

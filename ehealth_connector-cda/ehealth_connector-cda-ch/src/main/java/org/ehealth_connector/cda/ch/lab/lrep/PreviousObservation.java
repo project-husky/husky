@@ -19,7 +19,7 @@ package org.ehealth_connector.cda.ch.lab.lrep;
 import java.util.Date;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Value;
@@ -35,8 +35,8 @@ public class PreviousObservation
 	 */
 	public PreviousObservation() {
 		super();
-		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.22"));
-		CdaUtil.removeTemplateId(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.3"));
+		CdaUtilMdht.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.22"));
+		CdaUtilMdht.removeTemplateId(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.3"));
 	}
 
 	/**
@@ -54,7 +54,7 @@ public class PreviousObservation
 	public PreviousObservation(LaboratoryObservation currentObservation, Date timestamp,
 			Value value, Code interpretationCode) {
 		super(EcoreUtil.copy(currentObservation.getMdht()), timestamp, value, interpretationCode);
-		CdaUtil.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.22"));
-		CdaUtil.removeTemplateId(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.3"));
+		CdaUtilMdht.addTemplateIdOnce(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.22"));
+		CdaUtilMdht.removeTemplateId(getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.3"));
 	}
 }

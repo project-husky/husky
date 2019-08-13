@@ -24,7 +24,7 @@ import org.ehealth_connector.cda.ch.lab.AbstractLaboratoryReport;
 import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
 import org.ehealth_connector.cda.ch.lab.SpecimenCollectionEntry;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.QualabQcc;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Author;
@@ -562,7 +562,7 @@ public class CdaChLrqc
 			// list is
 			// not modifiable
 			final StructuredBody sb = CDAFactory.eINSTANCE.createStructuredBody();
-			CdaUtil.addSectionToStructuredBodyAsCopy(sb, laboratorySpecialtySection.copy());
+			CdaUtilMdht.addSectionToStructuredBodyAsCopy(sb, laboratorySpecialtySection.copy());
 			getMdht().setStructuredBody(sb);
 		}
 	}

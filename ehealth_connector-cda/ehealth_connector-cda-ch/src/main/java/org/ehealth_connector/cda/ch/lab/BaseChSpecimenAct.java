@@ -22,7 +22,7 @@ import java.util.List;
 import org.ehealth_connector.cda.ihe.lab.NonHumanSubject;
 import org.ehealth_connector.cda.ihe.lab.NotificationOrganizer;
 import org.ehealth_connector.cda.ihe.lab.OutbreakIdentificationObservation;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.enums.StatusCode;
 import org.openhealthtools.mdht.uml.cda.Act;
@@ -111,7 +111,7 @@ public class BaseChSpecimenAct extends org.ehealth_connector.cda.ihe.lab.BaseLab
 		Organizer organizer = laboratoryBatteryOrganizer.copy();
 		getMdht().addOrganizer(organizer);
 		// Set the right type for the entryRelationship
-		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+		CdaUtilMdht.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
 				x_ActRelationshipEntryRelationship.COMP);
 	}
 
@@ -125,7 +125,7 @@ public class BaseChSpecimenAct extends org.ehealth_connector.cda.ihe.lab.BaseLab
 			org.ehealth_connector.cda.ch.lab.lrph.LaboratoryBatteryOrganizer laboratoryBatteryOrganizer) {
 		getMdht().addOrganizer(laboratoryBatteryOrganizer.copy());
 		// Set the right type for the entryRelationship
-		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+		CdaUtilMdht.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
 				x_ActRelationshipEntryRelationship.COMP);
 	}
 
@@ -139,7 +139,7 @@ public class BaseChSpecimenAct extends org.ehealth_connector.cda.ihe.lab.BaseLab
 			org.ehealth_connector.cda.ch.lab.lrqc.LaboratoryBatteryOrganizer laboratoryBatteryOrganizer) {
 		getMdht().addOrganizer(laboratoryBatteryOrganizer.copy());
 		// Set the right type for the entryRelationship
-		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+		CdaUtilMdht.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
 				x_ActRelationshipEntryRelationship.COMP);
 	}
 
@@ -153,7 +153,7 @@ public class BaseChSpecimenAct extends org.ehealth_connector.cda.ihe.lab.BaseLab
 			org.ehealth_connector.cda.ch.lab.lrtp.LaboratoryBatteryOrganizer laboratoryBatteryOrganizer) {
 		getMdht().addOrganizer(laboratoryBatteryOrganizer.copy());
 		// Set the right type for the entryRelationship
-		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+		CdaUtilMdht.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
 				x_ActRelationshipEntryRelationship.COMP);
 	}
 
@@ -167,7 +167,7 @@ public class BaseChSpecimenAct extends org.ehealth_connector.cda.ihe.lab.BaseLab
 			org.ehealth_connector.cda.ch.lab.lrph.LaboratoryIsolateOrganizer labIsolateOrganizer) {
 		if (labIsolateOrganizer != null) {
 			getMdht().addOrganizer(labIsolateOrganizer.copy());
-			CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+			CdaUtilMdht.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
 					x_ActRelationshipEntryRelationship.COMP);
 		}
 	}
@@ -180,7 +180,7 @@ public class BaseChSpecimenAct extends org.ehealth_connector.cda.ihe.lab.BaseLab
 	 */
 	public void addSpecimenCollectionEntry(SpecimenCollectionEntry entry) {
 		getMdht().addProcedure(entry.copy());
-		CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+		CdaUtilMdht.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
 				x_ActRelationshipEntryRelationship.COMP);
 	}
 
@@ -447,7 +447,7 @@ public class BaseChSpecimenAct extends org.ehealth_connector.cda.ihe.lab.BaseLab
 		if (entry != null) {
 			if (getSpecimenCollectionEntry() == null) {
 				getMdht().addProcedure(entry.copy());
-				CdaUtil.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
+				CdaUtilMdht.setEntryRelationshipTypeCode(getMdht().getEntryRelationships(),
 						x_ActRelationshipEntryRelationship.COMP);
 			} else {
 				for (final EntryRelationship er : getMdht().getEntryRelationships()) {

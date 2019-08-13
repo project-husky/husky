@@ -25,7 +25,7 @@ import java.util.List;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
-import org.ehealth_connector.cda.utils.CdaUtil;
+import org.ehealth_connector.cda.utils.CdaUtilMdht;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.IdentityDomain;
 import org.ehealth_connector.common.utils.DateUtilMdht;
@@ -166,7 +166,7 @@ public class BaseProblemConcern
 		this.getMdht().addObservation(problemEntry.copy());
 		for (Observation obs : this.getMdht().getObservations()) {
 			if (obs.getIds().isEmpty())
-				obs.getIds().add(CdaUtil.createUniqueIi());
+				obs.getIds().add(CdaUtilMdht.createUniqueIi());
 		}
 		final EList<EntryRelationship> entryRel = this.getMdht().getEntryRelationships();
 		// Set the Attributes of the last added element
