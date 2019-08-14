@@ -142,8 +142,8 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	ORGAN_DONOR_CARD("772790007", "2.16.840.1.113883.6.96", "Organ donor card (record artifact)",
-			"Organ donor card", "Willensäusserung zur Organspende", "Volonté sur le don d'organes",
-			"Volontà di donare organi "),
+			"Organ donor card", "Willensäusserung zur Organspende",
+			"Volonté sur le don d'organes", "Volontà di donare organi "),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Patient consent</div>
