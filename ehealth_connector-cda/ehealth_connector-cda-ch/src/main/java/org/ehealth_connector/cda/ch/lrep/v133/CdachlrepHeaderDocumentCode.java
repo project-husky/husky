@@ -27,4 +27,25 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * - Laboratory reports of a single laboratory discipline:The LOINC code of the document MUST be taken from the value-set 'Laboratory Specialties'
  */
 public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl7cdar2.CE {
+
+	/**
+	 * Gets the hl7Translation
+	 * The translation to the Swiss EPR XDS.b metadata attribute typeCode.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CD getHl7Translation() {
+		org.ehealth_connector.common.hl7cdar2.CD retVal = null;
+		if (getTranslation() != null)
+			if (getTranslation().size() > 0)
+				retVal = getTranslation().get(0);
+		return retVal;
+	}
+
+	/**
+	 * Sets the hl7Translation
+	 * The translation to the Swiss EPR XDS.b metadata attribute typeCode.
+	 */
+	public void setHl7Translation(org.ehealth_connector.common.hl7cdar2.CD value) {
+		getTranslation().clear();
+		getTranslation().add(value);
+	}
 }

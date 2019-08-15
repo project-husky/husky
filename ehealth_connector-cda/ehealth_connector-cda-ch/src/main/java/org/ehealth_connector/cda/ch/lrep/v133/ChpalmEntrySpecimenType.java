@@ -22,5 +22,26 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  *
  * Element description: IF the coding of the specimen with LOINC's 'System' axis is insufficient, a precise code CAN be used. The use of SNOMED-CT is recommended.
  */
-public class ChpalmEntrySpecimenType extends org.ehealth_connector.common.hl7cdar2.CE {
+public class ChpalmEntrySpecimenType {
+
+	/**
+	 * IHE XD-LAB requires coding of the specimen. However, since the laboratory results have to be coded with LOINC, the specimen is already defined via the 'System' axis of LOINC. Therefore the following, fixed code CAN be used for laboratory reports in Switzerland.
+	 */
+	private org.ehealth_connector.common.hl7cdar2.CE code;
+
+	/**
+	 * Gets the hl7Code
+	 * IHE XD-LAB requires coding of the specimen. However, since the laboratory results have to be coded with LOINC, the specimen is already defined via the 'System' axis of LOINC. Therefore the following, fixed code CAN be used for laboratory reports in Switzerland.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CE getHl7Code() {
+		return code;
+	}
+
+	/**
+	 * Sets the hl7Code
+	 * IHE XD-LAB requires coding of the specimen. However, since the laboratory results have to be coded with LOINC, the specimen is already defined via the 'System' axis of LOINC. Therefore the following, fixed code CAN be used for laboratory reports in Switzerland.
+	 */
+	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CE value) {
+		this.code = value;
+	}
 }

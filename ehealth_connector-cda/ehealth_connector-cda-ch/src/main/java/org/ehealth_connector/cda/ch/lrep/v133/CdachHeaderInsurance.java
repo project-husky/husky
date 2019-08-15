@@ -23,4 +23,53 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Element description: Information on a patient's insurance.
  */
 public class CdachHeaderInsurance extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 {
+
+	/**
+	 * Gets the hl7AssociatedEntity
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity getHl7AssociatedEntity() {
+		return associatedEntity;
+	}
+
+	/**
+	 * Gets the hl7TemplateId
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (getTemplateId() != null)
+			if (getTemplateId().size() > 0)
+				retVal = getTemplateId().get(0);
+		return retVal;
+	}
+
+	/**
+	 * Gets the hl7Time
+	 * Validity period of the contract.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.IVLTS getHl7Time() {
+		return time;
+	}
+
+	/**
+	 * Sets the hl7AssociatedEntity
+	 */
+	public void setHl7AssociatedEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity value) {
+		this.associatedEntity = value;
+	}
+
+	/**
+	 * Sets the hl7TemplateId
+	 */
+	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
+		getTemplateId().clear();
+		getTemplateId().add(value);
+	}
+
+	/**
+	 * Sets the hl7Time
+	 * Validity period of the contract.
+	 */
+	public void setHl7Time(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
+		this.time = value;
+	}
 }

@@ -16,11 +16,97 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import java.util.ArrayList;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.24
  * Template description: Reusable template wherever an organization with required name is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.
  *
  * Element description: The organization's address.
  */
-public class CdachOtherOrganizationCompilationWithName extends org.ehealth_connector.common.hl7cdar2.II {
+public class CdachOtherOrganizationCompilationWithName {
+
+	/**
+	 * The organization's address.
+	 */
+	private ArrayList<org.ehealth_connector.common.hl7cdar2.AD> addr = new ArrayList<org.ehealth_connector.common.hl7cdar2.AD>();
+
+	/**
+	 * The organization's id.
+	 */
+	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> id = new ArrayList<org.ehealth_connector.common.hl7cdar2.II>();
+
+	/**
+	 * The organization's name.
+	 */
+	private ArrayList<org.ehealth_connector.common.hl7cdar2.ON> name = new ArrayList<org.ehealth_connector.common.hl7cdar2.ON>();
+
+	/**
+	 * The organization's means of communication (phone, eMail, ...).
+	 */
+	private ArrayList<org.ehealth_connector.common.hl7cdar2.TEL> telecom = new ArrayList<org.ehealth_connector.common.hl7cdar2.TEL>();
+
+	/**
+	 * Adds a hl7Addr
+	 * The organization's address.
+	 */
+	public void addHl7Addr(org.ehealth_connector.common.hl7cdar2.AD value) {
+		addr.add(value);
+	}
+
+	/**
+	 * Adds a hl7Id
+	 * The organization's id.
+	 */
+	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
+		id.add(value);
+	}
+
+	/**
+	 * Adds a hl7Name
+	 * The organization's name.
+	 */
+	public void addHl7Name(org.ehealth_connector.common.hl7cdar2.ON value) {
+		name.add(value);
+	}
+
+	/**
+	 * Adds a hl7Telecom
+	 * The organization's means of communication (phone, eMail, ...).
+	 */
+	public void addHl7Telecom(org.ehealth_connector.common.hl7cdar2.TEL value) {
+		telecom.add(value);
+	}
+
+	/**
+	 * Adds a hl7Addr
+	 * The organization's address.
+	 */
+	public void clearHl7Addr() {
+		addr.clear();
+	}
+
+	/**
+	 * Adds a hl7Id
+	 * The organization's id.
+	 */
+	public void clearHl7Id() {
+		id.clear();
+	}
+
+	/**
+	 * Adds a hl7Name
+	 * The organization's name.
+	 */
+	public void clearHl7Name() {
+		name.clear();
+	}
+
+	/**
+	 * Adds a hl7Telecom
+	 * The organization's means of communication (phone, eMail, ...).
+	 */
+	public void clearHl7Telecom() {
+		telecom.clear();
+	}
 }

@@ -23,4 +23,55 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Element description: Reference to an external document.
  */
 public class CdachEntryExternalDocument extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ExternalDocument {
+
+	/**
+	 * Adds a hl7Id
+	 * MUST contain the id of the external document.
+	 */
+	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
+		getId().add(value);
+	}
+
+	/**
+	 * Adds a hl7Id
+	 * MUST contain the id of the external document.
+	 */
+	public void clearHl7Id() {
+		getId().clear();
+	}
+
+	/**
+	 * Gets the hl7TemplateId
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (getTemplateId() != null)
+			if (getTemplateId().size() > 0)
+				retVal = getTemplateId().get(0);
+		return retVal;
+	}
+
+	/**
+	 * Gets the hl7Text
+	 * The external document MUST be declared as a link.The link MUST be declared as an URL, which points to the referenced document.The same link MUST be used in the human readable part (narrative text) using the &lt;linkHTML&gt; element.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.ED getHl7Text() {
+		return text;
+	}
+
+	/**
+	 * Sets the hl7TemplateId
+	 */
+	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
+		getTemplateId().clear();
+		getTemplateId().add(value);
+	}
+
+	/**
+	 * Sets the hl7Text
+	 * The external document MUST be declared as a link.The link MUST be declared as an URL, which points to the referenced document.The same link MUST be used in the human readable part (narrative text) using the &lt;linkHTML&gt; element.
+	 */
+	public void setHl7Text(org.ehealth_connector.common.hl7cdar2.ED value) {
+		this.text = value;
+	}
 }

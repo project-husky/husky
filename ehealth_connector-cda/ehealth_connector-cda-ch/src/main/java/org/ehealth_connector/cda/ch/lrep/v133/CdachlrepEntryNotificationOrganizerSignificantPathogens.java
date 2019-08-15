@@ -21,4 +21,53 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Template description: Coding of significant pathogens.
  */
 public class CdachlrepEntryNotificationOrganizerSignificantPathogens extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
+
+	/**
+	 * Adds a hl7Component
+	 */
+	public void addHl7Component(org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
+		getComponent().add(value);
+	}
+
+	/**
+	 * Adds a hl7Component
+	 */
+	public void clearHl7Component() {
+		getComponent().clear();
+	}
+
+	/**
+	 * Gets the hl7StatusCode
+	 * The status 'completed' means that the patient is assigned to the notification.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
+		return statusCode;
+	}
+
+	/**
+	 * Gets the hl7TemplateId
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (getTemplateId() != null)
+			if (getTemplateId().size() > 0)
+				retVal = getTemplateId().get(0);
+		return retVal;
+	}
+
+	/**
+	 * Sets the hl7StatusCode
+	 * The status 'completed' means that the patient is assigned to the notification.
+	 */
+	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
+		this.statusCode = value;
+	}
+
+	/**
+	 * Sets the hl7TemplateId
+	 */
+	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
+		getTemplateId().clear();
+		getTemplateId().add(value);
+	}
 }

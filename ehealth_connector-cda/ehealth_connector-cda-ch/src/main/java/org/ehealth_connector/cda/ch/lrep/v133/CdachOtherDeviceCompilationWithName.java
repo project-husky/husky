@@ -22,5 +22,47 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  *
  * Element description: The name of the device MUST be declared.Note:Altough this element is called softwareName, it contains also the name of physical devices (e.g. laboratory analyzer).
  */
-public class CdachOtherDeviceCompilationWithName extends org.ehealth_connector.common.hl7cdar2.SC {
+public class CdachOtherDeviceCompilationWithName {
+
+	/**
+	 * The model name of the device MAY be declared.
+	 */
+	private org.ehealth_connector.common.hl7cdar2.SC manufacturerModelName;
+
+	/**
+	 * The name of the device MUST be declared.Note:Altough this element is called softwareName, it contains also the name of physical devices (e.g. laboratory analyzer).
+	 */
+	private org.ehealth_connector.common.hl7cdar2.SC softwareName;
+
+	/**
+	 * Gets the hl7ManufacturerModelName
+	 * The model name of the device MAY be declared.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.SC getHl7ManufacturerModelName() {
+		return manufacturerModelName;
+	}
+
+	/**
+	 * Gets the hl7SoftwareName
+	 * The name of the device MUST be declared.Note:Altough this element is called softwareName, it contains also the name of physical devices (e.g. laboratory analyzer).
+	 */
+	public org.ehealth_connector.common.hl7cdar2.SC getHl7SoftwareName() {
+		return softwareName;
+	}
+
+	/**
+	 * Sets the hl7ManufacturerModelName
+	 * The model name of the device MAY be declared.
+	 */
+	public void setHl7ManufacturerModelName(org.ehealth_connector.common.hl7cdar2.SC value) {
+		this.manufacturerModelName = value;
+	}
+
+	/**
+	 * Sets the hl7SoftwareName
+	 * The name of the device MUST be declared.Note:Altough this element is called softwareName, it contains also the name of physical devices (e.g. laboratory analyzer).
+	 */
+	public void setHl7SoftwareName(org.ehealth_connector.common.hl7cdar2.SC value) {
+		this.softwareName = value;
+	}
 }

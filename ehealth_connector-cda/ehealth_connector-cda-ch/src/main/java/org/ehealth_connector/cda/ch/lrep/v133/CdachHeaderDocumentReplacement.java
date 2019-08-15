@@ -26,4 +26,39 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * - Values that are only contained in the new document are to be added.
  */
 public class CdachHeaderDocumentReplacement extends org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedDocument {
+
+	/**
+	 * Gets the hl7ParentDocument
+	 * Relationship to the document that needs to be replaced.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040ParentDocument getHl7ParentDocument() {
+		return parentDocument;
+	}
+
+	/**
+	 * Gets the hl7TemplateId
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (getTemplateId() != null)
+			if (getTemplateId().size() > 0)
+				retVal = getTemplateId().get(0);
+		return retVal;
+	}
+
+	/**
+	 * Sets the hl7ParentDocument
+	 * Relationship to the document that needs to be replaced.
+	 */
+	public void setHl7ParentDocument(org.ehealth_connector.common.hl7cdar2.POCDMT000040ParentDocument value) {
+		this.parentDocument = value;
+	}
+
+	/**
+	 * Sets the hl7TemplateId
+	 */
+	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
+		getTemplateId().clear();
+		getTemplateId().add(value);
+	}
 }

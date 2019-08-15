@@ -16,9 +16,54 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import java.util.ArrayList;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.6
  * Template description: If, in a part of the document, certain laboratory observations for a human patient base on a sample of a non-human material (e.g., food eaten by the patient or an animal that has bitten the patient), it MUST be declared using this element in the CDA body. Other parts of the document may contain laboratory observations that base on other samples (including samples taken from the patient). In addition, the IHE template 1.3.6.1.4.1.19376.1.3.3.1.3 - Human Patient with Non-Human Subject (recordTarget) MUST be used in the CDA header.
  */
-public class ChpalmEntryHumanPatientWithNonHumanSubject extends org.ehealth_connector.common.hl7cdar2.II {
+public class ChpalmEntryHumanPatientWithNonHumanSubject {
+
+	/**
+	 * No description available in the ART-DECOR model for this field.
+	 */
+	private org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedSubject relatedSubject;
+
+	/**
+	 * No description available in the ART-DECOR model for this field.
+	 */
+	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> templateId = new ArrayList<org.ehealth_connector.common.hl7cdar2.II>();
+
+	/**
+	 * Gets the hl7RelatedSubject
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedSubject getHl7RelatedSubject() {
+		return relatedSubject;
+	}
+
+	/**
+	 * Gets the hl7TemplateId
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (templateId != null)
+			if (templateId.size() > 0)
+				retVal = templateId.get(0);
+		return retVal;
+	}
+
+	/**
+	 * Sets the hl7RelatedSubject
+	 */
+	public void setHl7RelatedSubject(org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedSubject value) {
+		this.relatedSubject = value;
+	}
+
+	/**
+	 * Sets the hl7TemplateId
+	 */
+	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
+		templateId.clear();
+		templateId.add(value);
+	}
 }

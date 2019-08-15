@@ -16,6 +16,10 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import java.util.ArrayList;
+import org.ehealth_connector.common.hl7cdar2.IVLTS;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.7
  * Template description: This CAN be used to indicate another executing laboratory in the CDA body. When executing laboratories are specified, the following applies:
@@ -25,5 +29,74 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  *
  * Element description: All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
  */
-public class ChpalmEntryLaboratoryPerformer extends org.ehealth_connector.common.hl7cdar2.II {
+public class ChpalmEntryLaboratoryPerformer {
+
+	/**
+	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+	 */
+	private org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity assignedEntity;
+
+	/**
+	 * No description available in the ART-DECOR model for this field.
+	 */
+	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> templateId = new ArrayList<org.ehealth_connector.common.hl7cdar2.II>();
+
+	/**
+	 * Timestamp of the last delivery of this laboratory to the document.
+	 */
+	private org.ehealth_connector.common.hl7cdar2.TS time;
+
+	/**
+	 * Gets the hl7AssignedEntity
+	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity getHl7AssignedEntity() {
+		return assignedEntity;
+	}
+
+	/**
+	 * Gets the hl7TemplateId
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (templateId != null)
+			if (templateId.size() > 0)
+				retVal = templateId.get(0);
+		return retVal;
+	}
+
+	/**
+	 * Gets the hl7Time
+	 * Timestamp of the last delivery of this laboratory to the document.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.TS getHl7Time() {
+		return time;
+	}
+
+	/**
+	 * Sets the hl7AssignedEntity
+	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+	 */
+	public void setHl7AssignedEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity value) {
+		this.assignedEntity = value;
+	}
+
+	/**
+	 * Sets the hl7TemplateId
+	 */
+	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
+		templateId.clear();
+		templateId.add(value);
+	}
+
+	/**
+	 * Sets the hl7Time
+	 * Timestamp of the last delivery of this laboratory to the document.
+	 */
+	public void setHl7Time(org.ehealth_connector.common.hl7cdar2.TS value) {
+		ObjectFactory factory = new ObjectFactory();
+		IVLTS ivlts = factory.createIVLTS();
+		ivlts.setValue(value.getValue());
+		this.time = ivlts;
+	}
 }

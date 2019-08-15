@@ -22,5 +22,47 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  *
  * Element description: The versionNumber element MUST contain the value 1 for the very first version of that document. For later versions, the version number MUST be increased by 1 each.
  */
-public class CdachHeaderDocumentSetIdAndVersionNumber extends org.ehealth_connector.common.hl7cdar2.II {
+public class CdachHeaderDocumentSetIdAndVersionNumber {
+
+	/**
+	 * The setId element MUST match the document id of the very first version of that document. It MUST remain the same for all document versions.
+	 */
+	private org.ehealth_connector.common.hl7cdar2.II setId;
+
+	/**
+	 * The versionNumber element MUST contain the value 1 for the very first version of that document. For later versions, the version number MUST be increased by 1 each.
+	 */
+	private org.ehealth_connector.common.hl7cdar2.INT versionNumber;
+
+	/**
+	 * Gets the hl7SetId
+	 * The setId element MUST match the document id of the very first version of that document. It MUST remain the same for all document versions.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II getHl7SetId() {
+		return setId;
+	}
+
+	/**
+	 * Gets the hl7VersionNumber
+	 * The versionNumber element MUST contain the value 1 for the very first version of that document. For later versions, the version number MUST be increased by 1 each.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.INT getHl7VersionNumber() {
+		return versionNumber;
+	}
+
+	/**
+	 * Sets the hl7SetId
+	 * The setId element MUST match the document id of the very first version of that document. It MUST remain the same for all document versions.
+	 */
+	public void setHl7SetId(org.ehealth_connector.common.hl7cdar2.II value) {
+		this.setId = value;
+	}
+
+	/**
+	 * Sets the hl7VersionNumber
+	 * The versionNumber element MUST contain the value 1 for the very first version of that document. For later versions, the version number MUST be increased by 1 each.
+	 */
+	public void setHl7VersionNumber(org.ehealth_connector.common.hl7cdar2.INT value) {
+		this.versionNumber = value;
+	}
 }

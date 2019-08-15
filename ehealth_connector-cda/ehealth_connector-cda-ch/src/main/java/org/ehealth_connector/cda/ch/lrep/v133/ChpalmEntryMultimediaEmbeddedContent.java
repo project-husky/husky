@@ -21,4 +21,71 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Template description: Multimedia objects (e.g., PDF representations of the CDA document, pictures, Reiber diagrams, electrophoresis, etc.) MAY be integrated into a CDA document, either by reference to external multimedia objects or by means of XML embedding.This template defines only the embedding of multimedia objects in the CDA document. References to external documents can be created with the ExternalDocument template.For embedding in XML, the multimedia objects Base-64 must be encoded.Due to the amount of data, only light objects should be embedded.Heavy objects should be integrated using links to external documents.
  */
 public class ChpalmEntryMultimediaEmbeddedContent extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ObservationMedia {
+
+	/**
+	 * Adds a hl7Id
+	 * IDs for this item CAN be filled for traceability.
+	 */
+	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
+		getId().add(value);
+	}
+
+	/**
+	 * Adds a hl7Id
+	 * IDs for this item CAN be filled for traceability.
+	 */
+	public void clearHl7Id() {
+		getId().clear();
+	}
+
+	/**
+	 * Gets the hl7LanguageCode
+	 * The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the multimedia object is written. If it isn't known or not available (e.g. for pictures), use nullFlavor instead.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CS getHl7LanguageCode() {
+		return languageCode;
+	}
+
+	/**
+	 * Gets the hl7TemplateId
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (getTemplateId() != null)
+			if (getTemplateId().size() > 0)
+				retVal = getTemplateId().get(0);
+		return retVal;
+	}
+
+	/**
+	 * Gets the hl7Value
+	 * This template defines only the embedding of multimedia objects in the CDA document.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.ED getHl7Value() {
+		return value;
+	}
+
+	/**
+	 * Sets the hl7LanguageCode
+	 * The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the multimedia object is written. If it isn't known or not available (e.g. for pictures), use nullFlavor instead.
+	 */
+	public void setHl7LanguageCode(org.ehealth_connector.common.hl7cdar2.CS value) {
+		this.languageCode = value;
+	}
+
+	/**
+	 * Sets the hl7TemplateId
+	 */
+	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
+		getTemplateId().clear();
+		getTemplateId().add(value);
+	}
+
+	/**
+	 * Sets the hl7Value
+	 * This template defines only the embedding of multimedia objects in the CDA document.
+	 */
+	public void setHl7Value(org.ehealth_connector.common.hl7cdar2.ED value) {
+		this.value = value;
+	}
 }

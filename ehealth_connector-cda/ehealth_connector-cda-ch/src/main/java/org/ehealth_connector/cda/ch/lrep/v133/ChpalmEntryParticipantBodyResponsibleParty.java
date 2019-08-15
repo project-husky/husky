@@ -23,4 +23,52 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * - All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
  */
 public class ChpalmEntryParticipantBodyResponsibleParty extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole {
+
+	/**
+	 * Adds a hl7Addr
+	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+	 */
+	public void addHl7Addr(org.ehealth_connector.common.hl7cdar2.AD value) {
+		getAddr().add(value);
+	}
+
+	/**
+	 * Adds a hl7Telecom
+	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+	 */
+	public void addHl7Telecom(org.ehealth_connector.common.hl7cdar2.TEL value) {
+		getTelecom().add(value);
+	}
+
+	/**
+	 * Adds a hl7Addr
+	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+	 */
+	public void clearHl7Addr() {
+		getAddr().clear();
+	}
+
+	/**
+	 * Adds a hl7Telecom
+	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+	 */
+	public void clearHl7Telecom() {
+		getTelecom().clear();
+	}
+
+	/**
+	 * Gets the hl7PlayingEntity
+	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040PlayingEntity getHl7PlayingEntity() {
+		return playingEntity;
+	}
+
+	/**
+	 * Sets the hl7PlayingEntity
+	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+	 */
+	public void setHl7PlayingEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040PlayingEntity value) {
+		this.playingEntity = value;
+	}
 }

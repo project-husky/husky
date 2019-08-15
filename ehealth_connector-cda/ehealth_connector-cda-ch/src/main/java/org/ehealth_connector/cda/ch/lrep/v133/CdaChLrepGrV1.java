@@ -42,6 +42,271 @@ import org.ehealth_connector.common.utils.Hl7CdaR2Util;
 public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
 
 	/**
+	 * Adds a hl7Authenticator
+	 * Information about an authenticator of a CDA document. An authenticator MUST be a person.
+	 */
+	public void addHl7Authenticator(org.ehealth_connector.common.hl7cdar2.POCDMT000040Authenticator value) {
+		getAuthenticator().add(value);
+	}
+
+	/**
+	 * Adds a hl7Author
+	 * Information about the author of the document. The author MAY be a person or a device. At least one author MUST be declared.
+	 */
+	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
+		getAuthor().add(value);
+	}
+
+	/**
+	 * Adds a hl7DocumentationOf
+	 * Information about a health service describing the context of this CDA document.
+	 */
+	public void addHl7DocumentationOf(org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf value) {
+		getDocumentationOf().add(value);
+	}
+
+	/**
+	 * Adds a hl7InFulfillmentOf
+	 * Reference to one or more orders which led to the creation of this CDA document. It SHALL be declared, when the order reference is relevant for some reason.
+	 */
+	public void addHl7InFulfillmentOf(org.ehealth_connector.common.hl7cdar2.POCDMT000040InFulfillmentOf value) {
+		getInFulfillmentOf().add(value);
+	}
+
+	/**
+	 * Adds a hl7InformationRecipient
+	 * The laboratory report MUST contain at least one receiver.
+	 */
+	public void addHl7InformationRecipient(org.ehealth_connector.common.hl7cdar2.POCDMT000040InformationRecipient value) {
+		getInformationRecipient().add(value);
+	}
+
+	/**
+	 * Adds a hl7Participant
+	 * Information on a patient's insurance card.
+	 */
+	public void addHl7Participant(org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 value) {
+		getParticipant().add(value);
+	}
+
+	/**
+	 * Adds a hl7RecordTarget
+	 * Patient (Human Patient).
+	 */
+	public void addHl7RecordTarget(org.ehealth_connector.common.hl7cdar2.POCDMT000040RecordTarget value) {
+		getRecordTarget().add(value);
+	}
+
+	/**
+	 * Adds a hl7RelatedDocument
+	 * Relationship to another CDA-CH V2 based document that is replaced by the current one.Notes:For correction of wrong information, a new document that replaces the earlier document MUST be created. The new document corrects previously incorrect information. This also applies to the case where information in the CDA header has been corrected (e.g., if the original document has been issued to the wrong patient). While processing the new document at the recipient, all values from the previous document MUST be interpreted as deprecated (deleted/marked as deleted/deprecated) and all values in the new document MUST be marked as valid:
+	 * - Values that were only contained in the previous document have to be treated as deleted.
+	 * - Values that are present in both documents are overwritten with the contents of the new document.
+	 * - Values that are only contained in the new document are to be added.
+	 */
+	public void addHl7RelatedDocument(org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedDocument value) {
+		getRelatedDocument().add(value);
+	}
+
+	/**
+	 * Adds a hl7Authenticator
+	 * Information about an authenticator of a CDA document. An authenticator MUST be a person.
+	 */
+	public void clearHl7Authenticator() {
+		getAuthenticator().clear();
+	}
+
+	/**
+	 * Adds a hl7Author
+	 * Information about the author of the document. The author MAY be a person or a device. At least one author MUST be declared.
+	 */
+	public void clearHl7Author() {
+		getAuthor().clear();
+	}
+
+	/**
+	 * Adds a hl7DocumentationOf
+	 * Information about a health service describing the context of this CDA document.
+	 */
+	public void clearHl7DocumentationOf() {
+		getDocumentationOf().clear();
+	}
+
+	/**
+	 * Adds a hl7InFulfillmentOf
+	 * Reference to one or more orders which led to the creation of this CDA document. It SHALL be declared, when the order reference is relevant for some reason.
+	 */
+	public void clearHl7InFulfillmentOf() {
+		getInFulfillmentOf().clear();
+	}
+
+	/**
+	 * Adds a hl7InformationRecipient
+	 * The laboratory report MUST contain at least one receiver.
+	 */
+	public void clearHl7InformationRecipient() {
+		getInformationRecipient().clear();
+	}
+
+	/**
+	 * Adds a hl7Participant
+	 * Information on a patient's insurance card.
+	 */
+	public void clearHl7Participant() {
+		getParticipant().clear();
+	}
+
+	/**
+	 * Adds a hl7RecordTarget
+	 * Patient (Human Patient).
+	 */
+	public void clearHl7RecordTarget() {
+		getRecordTarget().clear();
+	}
+
+	/**
+	 * Adds a hl7RelatedDocument
+	 * Relationship to another CDA-CH V2 based document that is replaced by the current one.Notes:For correction of wrong information, a new document that replaces the earlier document MUST be created. The new document corrects previously incorrect information. This also applies to the case where information in the CDA header has been corrected (e.g., if the original document has been issued to the wrong patient). While processing the new document at the recipient, all values from the previous document MUST be interpreted as deprecated (deleted/marked as deleted/deprecated) and all values in the new document MUST be marked as valid:
+	 * - Values that were only contained in the previous document have to be treated as deleted.
+	 * - Values that are present in both documents are overwritten with the contents of the new document.
+	 * - Values that are only contained in the new document are to be added.
+	 */
+	public void clearHl7RelatedDocument() {
+		getRelatedDocument().clear();
+	}
+
+	/**
+	 * Gets the hl7Code
+	 * A LOINC based document type of a CDA document instance including a translation to the Swiss EPR XDS.b metadata.
+	 * - Multidisciplinary laboratory findings:The LOINC code of the document MUST read: 11502-2 (LABORATORY REPORT.TOTAL)
+	 * - Laboratory reports of a single laboratory discipline:The LOINC code of the document MUST be taken from the value-set 'Laboratory Specialties'
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CE getHl7Code() {
+		return code;
+	}
+
+	/**
+	 * Gets the hl7Component
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Component2 getHl7Component() {
+		return component;
+	}
+
+	/**
+	 * Gets the hl7ConfidentialityCode
+	 * Swiss Realm of Confidentiality Code according to the Swiss EPR regulation.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CE getHl7ConfidentialityCode() {
+		return confidentialityCode;
+	}
+
+	/**
+	 * Gets the hl7Custodian
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Custodian getHl7Custodian() {
+		return custodian;
+	}
+
+	/**
+	 * Gets the hl7DataEnterer
+	 * Information about the person that entered information in this CDA document. It SHALL be declared, when data recorded in this document has been entered by a person other than the author but only when this is relevant for some reason.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040DataEnterer getHl7DataEnterer() {
+		return dataEnterer;
+	}
+
+	/**
+	 * Gets the hl7EffectiveTime
+	 * Human Patient with Non-Human Subject: The laboratory report contains test results from samples taken from a non-human material that is related to a human patient (e.g., food eaten by the patient or animal that has bitten the patient).
+	 */
+	public org.ehealth_connector.common.hl7cdar2.TS getHl7EffectiveTime() {
+		return effectiveTime;
+	}
+
+	/**
+	 * Gets the hl7Id
+	 * A unique identifier for each CDA document instance.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
+		return id;
+	}
+
+	/**
+	 * Gets the hl7LanguageCode
+	 * The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the narrative texts in this CDA document instance are written.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CS getHl7LanguageCode() {
+		return languageCode;
+	}
+
+	/**
+	 * Gets the hl7LegalAuthenticator
+	 * Legal authenticator.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040LegalAuthenticator getHl7LegalAuthenticator() {
+		return legalAuthenticator;
+	}
+
+	/**
+	 * Gets the hl7RealmCode
+	 * Swiss Realm (CHE) of HL7 CDA.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CS getHl7RealmCode() {
+		org.ehealth_connector.common.hl7cdar2.CS retVal = null;
+		if (getRealmCode() != null)
+			if (getRealmCode().size() > 0)
+				retVal = getRealmCode().get(0);
+		return retVal;
+	}
+
+	/**
+	 * Gets the hl7SetId
+	 * The setId element MUST match the document id of the very first version of that document. It MUST remain the same for all document versions.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II getHl7SetId() {
+		return setId;
+	}
+
+	/**
+	 * Gets the hl7TemplateId
+	 * CDA-CH-LREP / Laboratory Reports V1 ART-DECOR model for General Report.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (getTemplateId() != null)
+			if (getTemplateId().size() > 0)
+				retVal = getTemplateId().get(0);
+		return retVal;
+	}
+
+	/**
+	 * Gets the hl7Title
+	 * The document title must follow the following text format where &lt;human readable code&gt; is the local translation of the document LOINC code:
+	 * - [de]: 'Laborbefund - &lt;human readable code&gt;'
+	 * - [fr]: 'Rapport de laboratoire - &lt;human readable code&gt;'
+	 * - [it]: 'Referto di laboratorio - &lt;human readable code&gt;'
+	 * - [en]: 'Laboratory report - &lt;human readable code&gt;'
+	 */
+	public org.ehealth_connector.common.hl7cdar2.ST getHl7Title() {
+		return title;
+	}
+
+	/**
+	 * Gets the hl7TypeId
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040InfrastructureRootTypeId getHl7TypeId() {
+		return typeId;
+	}
+
+	/**
+	 * Gets the hl7VersionNumber
+	 * The versionNumber element MUST contain the value 1 for the very first version of that document. For later versions, the version number MUST be increased by 1 each.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.INT getHl7VersionNumber() {
+		return versionNumber;
+	}
+
+	/**
 	 * Sets the version number to 1 and makes sure the setId is the same as the document id.
 	 * @param newDocId the new doc id
 	 */
@@ -123,6 +388,131 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 */
 	public void saveToFile(File outputFile, String xsl, String css) throws JAXBException, ParserConfigurationException, TransformerException {
 		CdaUtil.saveJaxbObjectToFile(this, outputFile, xsl, css);
+	}
+
+	/**
+	 * Sets the hl7Code
+	 * A LOINC based document type of a CDA document instance including a translation to the Swiss EPR XDS.b metadata.
+	 * - Multidisciplinary laboratory findings:The LOINC code of the document MUST read: 11502-2 (LABORATORY REPORT.TOTAL)
+	 * - Laboratory reports of a single laboratory discipline:The LOINC code of the document MUST be taken from the value-set 'Laboratory Specialties'
+	 */
+	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CE value) {
+		this.code = value;
+	}
+
+	/**
+	 * Sets the hl7Component
+	 */
+	public void setHl7Component(org.ehealth_connector.common.hl7cdar2.POCDMT000040Component2 value) {
+		this.component = value;
+	}
+
+	/**
+	 * Sets the hl7ConfidentialityCode
+	 * Swiss Realm of Confidentiality Code according to the Swiss EPR regulation.
+	 */
+	public void setHl7ConfidentialityCode(org.ehealth_connector.common.hl7cdar2.CE value) {
+		this.confidentialityCode = value;
+	}
+
+	/**
+	 * Sets the hl7Custodian
+	 */
+	public void setHl7Custodian(org.ehealth_connector.common.hl7cdar2.POCDMT000040Custodian value) {
+		this.custodian = value;
+	}
+
+	/**
+	 * Sets the hl7DataEnterer
+	 * Information about the person that entered information in this CDA document. It SHALL be declared, when data recorded in this document has been entered by a person other than the author but only when this is relevant for some reason.
+	 */
+	public void setHl7DataEnterer(org.ehealth_connector.common.hl7cdar2.POCDMT000040DataEnterer value) {
+		this.dataEnterer = value;
+	}
+
+	/**
+	 * Sets the hl7EffectiveTime
+	 * Human Patient with Non-Human Subject: The laboratory report contains test results from samples taken from a non-human material that is related to a human patient (e.g., food eaten by the patient or animal that has bitten the patient).
+	 */
+	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.TS value) {
+		this.effectiveTime = value;
+	}
+
+	/**
+	 * Sets the hl7Id
+	 * A unique identifier for each CDA document instance.
+	 */
+	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
+		this.id = value;
+	}
+
+	/**
+	 * Sets the hl7LanguageCode
+	 * The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the narrative texts in this CDA document instance are written.
+	 */
+	public void setHl7LanguageCode(org.ehealth_connector.common.hl7cdar2.CS value) {
+		this.languageCode = value;
+	}
+
+	/**
+	 * Sets the hl7LegalAuthenticator
+	 * Legal authenticator.
+	 */
+	public void setHl7LegalAuthenticator(org.ehealth_connector.common.hl7cdar2.POCDMT000040LegalAuthenticator value) {
+		this.legalAuthenticator = value;
+	}
+
+	/**
+	 * Sets the hl7RealmCode
+	 * Swiss Realm (CHE) of HL7 CDA.
+	 */
+	public void setHl7RealmCode(org.ehealth_connector.common.hl7cdar2.CS value) {
+		getRealmCode().clear();
+		getRealmCode().add(value);
+	}
+
+	/**
+	 * Sets the hl7SetId
+	 * The setId element MUST match the document id of the very first version of that document. It MUST remain the same for all document versions.
+	 */
+	public void setHl7SetId(org.ehealth_connector.common.hl7cdar2.II value) {
+		this.setId = value;
+	}
+
+	/**
+	 * Sets the hl7TemplateId
+	 * CDA-CH-LREP / Laboratory Reports V1 ART-DECOR model for General Report.
+	 */
+	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
+		getTemplateId().clear();
+		getTemplateId().add(value);
+	}
+
+	/**
+	 * Sets the hl7Title
+	 * The document title must follow the following text format where &lt;human readable code&gt; is the local translation of the document LOINC code:
+	 * - [de]: 'Laborbefund - &lt;human readable code&gt;'
+	 * - [fr]: 'Rapport de laboratoire - &lt;human readable code&gt;'
+	 * - [it]: 'Referto di laboratorio - &lt;human readable code&gt;'
+	 * - [en]: 'Laboratory report - &lt;human readable code&gt;'
+	 */
+	public void setHl7Title(org.ehealth_connector.common.hl7cdar2.ST value) {
+		this.title = value;
+	}
+
+	/**
+	 * Sets the hl7TypeId
+	 */
+	public void setHl7TypeId(org.ehealth_connector.common.hl7cdar2.POCDMT000040InfrastructureRootTypeId value) {
+		this.typeId = value;
+	}
+
+	/**
+	 * Sets the hl7VersionNumber
+	 * The versionNumber element MUST contain the value 1 for the very first version of that document. For later versions, the version number MUST be increased by 1 each.
+	 */
+	public void setHl7VersionNumber(org.ehealth_connector.common.hl7cdar2.INT value) {
+		this.versionNumber = value;
 	}
 
 	/**

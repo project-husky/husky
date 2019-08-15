@@ -27,4 +27,112 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Element description: Contains the original representation of the current CDA document as it has been seen by the legal authenticator while signing.
  */
 public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
+
+	/**
+	 * Gets the hl7Code
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CE getHl7Code() {
+		return code;
+	}
+
+	/**
+	 * Gets the hl7Entry
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry getHl7Entry() {
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry retVal = null;
+		if (getEntry() != null)
+			if (getEntry().size() > 0)
+				retVal = getEntry().get(0);
+		return retVal;
+	}
+
+	/**
+	 * Gets the hl7Id
+	 * An ID for this section MAY be filled for traceability.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
+		return id;
+	}
+
+	/**
+	 * Gets the hl7TemplateId
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (getTemplateId() != null)
+			if (getTemplateId().size() > 0)
+				retVal = getTemplateId().get(0);
+		return retVal;
+	}
+
+	/**
+	 * Gets the hl7Text
+	 * MUST contain the reference (renderMultiMedia/@referencedObject) to the corrsponding observationMedia (embedded PDF) that shows the original representation signed by the legal authenticator.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.StrucDocText getHl7Text() {
+		return text;
+	}
+
+	/**
+	 * Gets the hl7Title
+	 * Fixed human readable title of this section.
+	 * - [ge]: 'Original Darstellung'
+	 * - [fr]: 'Représentation originale'
+	 * - [it]: 'Rappresentazione originale'
+	 * - [en]: 'Original representation'
+	 */
+	public org.ehealth_connector.common.hl7cdar2.ST getHl7Title() {
+		return title;
+	}
+
+	/**
+	 * Sets the hl7Code
+	 */
+	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CE value) {
+		this.code = value;
+	}
+
+	/**
+	 * Sets the hl7Entry
+	 */
+	public void setHl7Entry(org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry value) {
+		getEntry().clear();
+		getEntry().add(value);
+	}
+
+	/**
+	 * Sets the hl7Id
+	 * An ID for this section MAY be filled for traceability.
+	 */
+	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
+		this.id = value;
+	}
+
+	/**
+	 * Sets the hl7TemplateId
+	 */
+	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
+		getTemplateId().clear();
+		getTemplateId().add(value);
+	}
+
+	/**
+	 * Sets the hl7Text
+	 * MUST contain the reference (renderMultiMedia/@referencedObject) to the corrsponding observationMedia (embedded PDF) that shows the original representation signed by the legal authenticator.
+	 */
+	public void setHl7Text(org.ehealth_connector.common.hl7cdar2.StrucDocText value) {
+		this.text = value;
+	}
+
+	/**
+	 * Sets the hl7Title
+	 * Fixed human readable title of this section.
+	 * - [ge]: 'Original Darstellung'
+	 * - [fr]: 'Représentation originale'
+	 * - [it]: 'Rappresentazione originale'
+	 * - [en]: 'Original representation'
+	 */
+	public void setHl7Title(org.ehealth_connector.common.hl7cdar2.ST value) {
+		this.title = value;
+	}
 }

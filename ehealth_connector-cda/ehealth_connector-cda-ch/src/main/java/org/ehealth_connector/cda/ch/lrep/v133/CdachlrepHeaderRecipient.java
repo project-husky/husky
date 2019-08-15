@@ -23,4 +23,39 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Element description: The laboratory report MUST contain at least one receiver.
  */
 public class CdachlrepHeaderRecipient extends org.ehealth_connector.common.hl7cdar2.POCDMT000040InformationRecipient {
+
+	/**
+	 * Gets the hl7IntendedRecipient
+	 * The laboratory report MUST contain at least one receiver.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040IntendedRecipient getHl7IntendedRecipient() {
+		return intendedRecipient;
+	}
+
+	/**
+	 * Gets the hl7TemplateId
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (getTemplateId() != null)
+			if (getTemplateId().size() > 0)
+				retVal = getTemplateId().get(0);
+		return retVal;
+	}
+
+	/**
+	 * Sets the hl7IntendedRecipient
+	 * The laboratory report MUST contain at least one receiver.
+	 */
+	public void setHl7IntendedRecipient(org.ehealth_connector.common.hl7cdar2.POCDMT000040IntendedRecipient value) {
+		this.intendedRecipient = value;
+	}
+
+	/**
+	 * Sets the hl7TemplateId
+	 */
+	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
+		getTemplateId().clear();
+		getTemplateId().add(value);
+	}
 }

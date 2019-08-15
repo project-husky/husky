@@ -23,4 +23,53 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Element description: Information about the person that entered information in this CDA document. It SHALL be declared, when data recorded in this document has been entered by a person other than the author but only when this is relevant for some reason.
  */
 public class CdachHeaderDataEnterer extends org.ehealth_connector.common.hl7cdar2.POCDMT000040DataEnterer {
+
+	/**
+	 * Gets the hl7AssignedEntity
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity getHl7AssignedEntity() {
+		return assignedEntity;
+	}
+
+	/**
+	 * Gets the hl7TemplateId
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (getTemplateId() != null)
+			if (getTemplateId().size() > 0)
+				retVal = getTemplateId().get(0);
+		return retVal;
+	}
+
+	/**
+	 * Gets the hl7Time
+	 * Timestamp of the data input.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.TS getHl7Time() {
+		return time;
+	}
+
+	/**
+	 * Sets the hl7AssignedEntity
+	 */
+	public void setHl7AssignedEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity value) {
+		this.assignedEntity = value;
+	}
+
+	/**
+	 * Sets the hl7TemplateId
+	 */
+	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
+		getTemplateId().clear();
+		getTemplateId().add(value);
+	}
+
+	/**
+	 * Sets the hl7Time
+	 * Timestamp of the data input.
+	 */
+	public void setHl7Time(org.ehealth_connector.common.hl7cdar2.TS value) {
+		this.time = value;
+	}
 }

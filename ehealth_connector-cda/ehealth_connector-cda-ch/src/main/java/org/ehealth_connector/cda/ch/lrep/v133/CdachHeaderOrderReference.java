@@ -23,4 +23,37 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Element description: Reference to one or more orders which led to the creation of this CDA document. It SHALL be declared, when the order reference is relevant for some reason.
  */
 public class CdachHeaderOrderReference extends org.ehealth_connector.common.hl7cdar2.POCDMT000040InFulfillmentOf {
+
+	/**
+	 * Gets the hl7Order
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Order getHl7Order() {
+		return order;
+	}
+
+	/**
+	 * Gets the hl7TemplateId
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (getTemplateId() != null)
+			if (getTemplateId().size() > 0)
+				retVal = getTemplateId().get(0);
+		return retVal;
+	}
+
+	/**
+	 * Sets the hl7Order
+	 */
+	public void setHl7Order(org.ehealth_connector.common.hl7cdar2.POCDMT000040Order value) {
+		this.order = value;
+	}
+
+	/**
+	 * Sets the hl7TemplateId
+	 */
+	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
+		getTemplateId().clear();
+		getTemplateId().add(value);
+	}
 }

@@ -16,6 +16,8 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import java.util.ArrayList;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.8
  * Template description: The document MAY contain further signatures (besides the legal authenticator). A Laboratory Results Validator is such an authenticator. It is a laboratory specialist who has performed the clinical validation of the entire document or a subset of the laboratory results. If this element is specified, the following applies:
@@ -23,5 +25,48 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * - If multiple laboratory specialists were involved in the clinical validation of the document, all must be specified in the header and body (at entry, organizer or observation level, depending on the scope of the results that the corresponding person has validated).
  * - All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
  */
-public class ChpalmEntryLaboratoryResultsValidator extends org.ehealth_connector.common.hl7cdar2.II {
+public class ChpalmEntryLaboratoryResultsValidator {
+
+	/**
+	 * No description available in the ART-DECOR model for this field.
+	 */
+	private org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole participantRole;
+
+	/**
+	 * No description available in the ART-DECOR model for this field.
+	 */
+	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> templateId = new ArrayList<org.ehealth_connector.common.hl7cdar2.II>();
+
+	/**
+	 * Gets the hl7ParticipantRole
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole getHl7ParticipantRole() {
+		return participantRole;
+	}
+
+	/**
+	 * Gets the hl7TemplateId
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (templateId != null)
+			if (templateId.size() > 0)
+				retVal = templateId.get(0);
+		return retVal;
+	}
+
+	/**
+	 * Sets the hl7ParticipantRole
+	 */
+	public void setHl7ParticipantRole(org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole value) {
+		this.participantRole = value;
+	}
+
+	/**
+	 * Sets the hl7TemplateId
+	 */
+	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
+		templateId.clear();
+		templateId.add(value);
+	}
 }

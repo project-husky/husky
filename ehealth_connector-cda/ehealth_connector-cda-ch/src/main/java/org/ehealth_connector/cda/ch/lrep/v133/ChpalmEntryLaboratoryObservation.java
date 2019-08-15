@@ -28,4 +28,261 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Element description: Laboratory result with interpretation, related previous results, reference range, participants (persons and devices) as well as comments.
  */
 public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
+
+	/**
+	 * Adds a hl7Author
+	 * This CAN be used to identify other parties:
+	 * - Who has verified the result (AUTHEN).
+	 * - Which external laboratory has delivered the result (RESP).
+	 * - Which device (analyzer) was used to determine the result (DEV).
+	 */
+	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
+		getAuthor().add(value);
+	}
+
+	/**
+	 * Adds a hl7EntryRelationship
+	 * Information on specimen collection for this Observation. This information supersedes any information recorded at higher level.
+	 */
+	public void addHl7EntryRelationship(org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship value) {
+		getEntryRelationship().add(value);
+	}
+
+	/**
+	 * Adds a hl7Participant
+	 * Who has verified the result (AUTHEN). This information supersedes any information recorded at higher level.
+	 */
+	public void addHl7Participant(org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 value) {
+		getParticipant().add(value);
+	}
+
+	/**
+	 * Adds a hl7Performer
+	 * This CAN be used to indicate who has performed the test. This information supersedes any information recorded at higher level.
+	 */
+	public void addHl7Performer(org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer2 value) {
+		getPerformer().add(value);
+	}
+
+	/**
+	 * Adds a hl7Reference
+	 * This CAN be used to make reference to an external document.
+	 */
+	public void addHl7Reference(org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference value) {
+		getReference().add(value);
+	}
+
+	/**
+	 * Adds a hl7Author
+	 * This CAN be used to identify other parties:
+	 * - Who has verified the result (AUTHEN).
+	 * - Which external laboratory has delivered the result (RESP).
+	 * - Which device (analyzer) was used to determine the result (DEV).
+	 */
+	public void clearHl7Author() {
+		getAuthor().clear();
+	}
+
+	/**
+	 * Adds a hl7EntryRelationship
+	 * Information on specimen collection for this Observation. This information supersedes any information recorded at higher level.
+	 */
+	public void clearHl7EntryRelationship() {
+		getEntryRelationship().clear();
+	}
+
+	/**
+	 * Adds a hl7Participant
+	 * Who has verified the result (AUTHEN). This information supersedes any information recorded at higher level.
+	 */
+	public void clearHl7Participant() {
+		getParticipant().clear();
+	}
+
+	/**
+	 * Adds a hl7Performer
+	 * This CAN be used to indicate who has performed the test. This information supersedes any information recorded at higher level.
+	 */
+	public void clearHl7Performer() {
+		getPerformer().clear();
+	}
+
+	/**
+	 * Adds a hl7Reference
+	 * This CAN be used to make reference to an external document.
+	 */
+	public void clearHl7Reference() {
+		getReference().clear();
+	}
+
+	/**
+	 * Gets the hl7Code
+	 * A unique code for this result MUST be specified.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
+		return code;
+	}
+
+	/**
+	 * Gets the hl7EffectiveTime
+	 * The result of the examination MUST be specified for all elements with status 'completed'. One of the following data types MUST be used. For elements with status 'aborted', the result of the test is NOT ALLOWED.In the case of microbiological or infection-serological detection of pathogens, NO value element is PERMITTED. Instead, declare using the interpretationCode whether the pathogen was detected in the sample (POS) or not (NEG).
+	 */
+	public org.ehealth_connector.common.hl7cdar2.IVLTS getHl7EffectiveTime() {
+		return effectiveTime;
+	}
+
+	/**
+	 * Gets the hl7Id
+	 * An ID for this item MAY be filled for traceability.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (getId() != null)
+			if (getId().size() > 0)
+				retVal = getId().get(0);
+		return retVal;
+	}
+
+	/**
+	 * Gets the hl7InterpretationCode
+	 * IF this result is based on a specimen of a non-human material, this MUST be declared with the subject element.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CE getHl7InterpretationCode() {
+		org.ehealth_connector.common.hl7cdar2.CE retVal = null;
+		if (getInterpretationCode() != null)
+			if (getInterpretationCode().size() > 0)
+				retVal = getInterpretationCode().get(0);
+		return retVal;
+	}
+
+	/**
+	 * Gets the hl7ReferenceRange
+	 * The reference range SHALL be specified for the range of normal values for the data types PQ and INT. The following applies:
+	 * - Upper limit: [R]
+	 * - Lower limit: [R]
+	 * - interpretationCode containing code=N: [M]The reference range CAN be omitted for other data types. If only an upper or lower limit is meaningful, the unused limit MUST be declared using nullFlavor.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040ReferenceRange getHl7ReferenceRange() {
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040ReferenceRange retVal = null;
+		if (getReferenceRange() != null)
+			if (getReferenceRange().size() > 0)
+				retVal = getReferenceRange().get(0);
+		return retVal;
+	}
+
+	/**
+	 * Gets the hl7StatusCode
+	 * The status 'completed' means that the result is final.The status 'aborted' means that the examination could not be performed.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
+		return statusCode;
+	}
+
+	/**
+	 * Gets the hl7Subject
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Subject getHl7Subject() {
+		return subject;
+	}
+
+	/**
+	 * Gets the hl7TemplateId
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
+		org.ehealth_connector.common.hl7cdar2.II retVal = null;
+		if (getTemplateId() != null)
+			if (getTemplateId().size() > 0)
+				retVal = getTemplateId().get(0);
+		return retVal;
+	}
+
+	/**
+	 * Gets the hl7Value
+	 * True / False or Yes / No Result. If the observation value can not be determined, @value is NOT ALLOWED. Instead, @nullFlavor='NA' MUST be used in combination with interpretationCode that declares whether the result is below (Low of scale) or above (High of scale) of the reference range.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.BL getHl7Value() {
+		org.ehealth_connector.common.hl7cdar2.BL retVal = null;
+		if (getValue() != null)
+			if (getValue().size() > 0)
+				retVal = (org.ehealth_connector.common.hl7cdar2.BL) getValue().get(0);
+		return retVal;
+	}
+
+	/**
+	 * Sets the hl7Code
+	 * A unique code for this result MUST be specified.
+	 */
+	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CD value) {
+		this.code = value;
+	}
+
+	/**
+	 * Sets the hl7EffectiveTime
+	 * The result of the examination MUST be specified for all elements with status 'completed'. One of the following data types MUST be used. For elements with status 'aborted', the result of the test is NOT ALLOWED.In the case of microbiological or infection-serological detection of pathogens, NO value element is PERMITTED. Instead, declare using the interpretationCode whether the pathogen was detected in the sample (POS) or not (NEG).
+	 */
+	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
+		this.effectiveTime = value;
+	}
+
+	/**
+	 * Sets the hl7Id
+	 * An ID for this item MAY be filled for traceability.
+	 */
+	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
+		getId().clear();
+		getId().add(value);
+	}
+
+	/**
+	 * Sets the hl7InterpretationCode
+	 * IF this result is based on a specimen of a non-human material, this MUST be declared with the subject element.
+	 */
+	public void setHl7InterpretationCode(org.ehealth_connector.common.hl7cdar2.CE value) {
+		getInterpretationCode().clear();
+		getInterpretationCode().add(value);
+	}
+
+	/**
+	 * Sets the hl7ReferenceRange
+	 * The reference range SHALL be specified for the range of normal values for the data types PQ and INT. The following applies:
+	 * - Upper limit: [R]
+	 * - Lower limit: [R]
+	 * - interpretationCode containing code=N: [M]The reference range CAN be omitted for other data types. If only an upper or lower limit is meaningful, the unused limit MUST be declared using nullFlavor.
+	 */
+	public void setHl7ReferenceRange(org.ehealth_connector.common.hl7cdar2.POCDMT000040ReferenceRange value) {
+		getReferenceRange().clear();
+		getReferenceRange().add(value);
+	}
+
+	/**
+	 * Sets the hl7StatusCode
+	 * The status 'completed' means that the result is final.The status 'aborted' means that the examination could not be performed.
+	 */
+	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
+		this.statusCode = value;
+	}
+
+	/**
+	 * Sets the hl7Subject
+	 */
+	public void setHl7Subject(org.ehealth_connector.common.hl7cdar2.POCDMT000040Subject value) {
+		this.subject = value;
+	}
+
+	/**
+	 * Sets the hl7TemplateId
+	 */
+	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
+		getTemplateId().clear();
+		getTemplateId().add(value);
+	}
+
+	/**
+	 * Sets the hl7Value
+	 * True / False or Yes / No Result. If the observation value can not be determined, @value is NOT ALLOWED. Instead, @nullFlavor='NA' MUST be used in combination with interpretationCode that declares whether the result is below (Low of scale) or above (High of scale) of the reference range.
+	 */
+	public void setHl7Value(org.ehealth_connector.common.hl7cdar2.BL value) {
+		getValue().clear();
+		getValue().add(value);
+	}
 }
