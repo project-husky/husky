@@ -16,60 +16,9 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
-
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.28
- * Template description: Laboratory Performer template in the CDA header (ClinicalDocument/documentationOf/serviceEvent)ClinicalDocument/documentationOf(s) MAY be present. The documentationOf/serviceEvent represents the main Act being documented, that is an act of reporting Result Event(s) produced by a laboratory.Use of sub element documentationOf/serviceEvent/effectiveTime to document the time boundaries of events in the document is appropriate.This laboratory report content module adds the optional sub element documentationOf/serviceEvent/statusCode to enable the sharing of non-final reports. A report is considered as non-final (e.g., a preliminary report) if and only if it documents an Act, which is still in the status “active” (i.e., serviceEvent/statusCode@code=”active”).The statusCode sub element is an extension to the CDA R2 schema. This sub-element is optional. When it is not there, the documented Act is assumed to be completed and the report is assumed to be a final report.
+ * Template description: Laboratory Performer template in the CDA header (ClinicalDocument/documentationOf/serviceEvent)ClinicalDocument/documentationOf(s) MAY be present. The documentationOf/serviceEvent represents the main Act being documented, that is an act of reporting Result Event(s) produced by a laboratory.Use of sub element documentationOf/serviceEvent/effectiveTime to document the time boundaries of events in the document is appropriate.This laboratory report content module adds the optional sub element documentationOf/serviceEvent/statusCode to enable the sharing of non-final reports. A report is considered as non-final (e.g., a preliminary report) if and only if it documents an Act, which is still in the status â€œactiveâ€� (i.e., serviceEvent/statusCode@code=â€�activeâ€�).The statusCode sub element is an extension to the CDA R2 schema. This sub-element is optional. When it is not there, the documented Act is assumed to be completed and the report is assumed to be a final report.
  */
 public class ChpalmHeaderDocumentationOfLaboratoryPerformer extends org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf {
-
-	public ChpalmHeaderDocumentationOfLaboratoryPerformer() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.28"));
-	}
-
-	/**
-	 * Creates fixed contents for hl7TemplateId
-	 *
-	 * @param root the desired fixed value for this argument.
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
-		retVal.setRoot(root);
-		return retVal;
-	}
-
-	/**
-	 * Gets the hl7ServiceEvent
-	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040ServiceEvent getHl7ServiceEvent() {
-		return super.serviceEvent;
-	}
-
-	/**
-	 * Gets the hl7TemplateId
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		org.ehealth_connector.common.hl7cdar2.II retVal = null;
-		if (super.getTemplateId() != null)
-			if (super.getTemplateId().size() > 0)
-				retVal = super.getTemplateId().get(0);
-		return retVal;
-	}
-
-	/**
-	 * Sets the hl7ServiceEvent
-	 */
-	public void setHl7ServiceEvent(org.ehealth_connector.common.hl7cdar2.POCDMT000040ServiceEvent value) {
-		super.serviceEvent = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId
-	 */
-	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		super.getTemplateId().clear();
-		super.getTemplateId().add(value);
-	}
 }

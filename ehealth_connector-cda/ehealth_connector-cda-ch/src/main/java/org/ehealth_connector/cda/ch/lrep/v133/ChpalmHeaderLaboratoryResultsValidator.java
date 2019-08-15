@@ -16,8 +16,6 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
-
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.88
  * Template description: The document MAY contain further signatures (besides the legal authenticator). A Laboratory Results Validator is such an authenticator. It is a laboratory specialist who has performed the clinical validation of the entire document or a subset of the laboratory results. If this element is specified, the following applies:
@@ -28,97 +26,4 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * Element description: Information about an authenticator of a CDA document. An authenticator MUST be a person.
  */
 public class ChpalmHeaderLaboratoryResultsValidator extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Authenticator {
-
-	public ChpalmHeaderLaboratoryResultsValidator() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.88"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.6"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.1.5"));
-	}
-
-	/**
-	 * Creates fixed contents for hl7SignatureCode
-	 *
-	 * @param code the desired fixed value for this argument.
-	 */
-	public org.ehealth_connector.common.hl7cdar2.CS createHl7SignatureCodeFixedValue(String code) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
-		retVal.setCode(code);
-		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for hl7TemplateId
-	 *
-	 * @param root the desired fixed value for this argument.
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
-		retVal.setRoot(root);
-		return retVal;
-	}
-
-	/**
-	 * Gets the hl7AssignedEntity
-	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity getHl7AssignedEntity() {
-		return super.assignedEntity;
-	}
-
-	/**
-	 * Gets the hl7SignatureCode
-	 */
-	public org.ehealth_connector.common.hl7cdar2.CS getHl7SignatureCode() {
-		return super.signatureCode;
-	}
-
-	/**
-	 * Gets the hl7TemplateId
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		org.ehealth_connector.common.hl7cdar2.II retVal = null;
-		if (super.getTemplateId() != null)
-			if (super.getTemplateId().size() > 0)
-				retVal = super.getTemplateId().get(0);
-		return retVal;
-	}
-
-	/**
-	 * Gets the hl7Time
-	 * Timestamp of the signature.
-	 */
-	public org.ehealth_connector.common.hl7cdar2.TS getHl7Time() {
-		return super.time;
-	}
-
-	/**
-	 * Sets the hl7AssignedEntity
-	 */
-	public void setHl7AssignedEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity value) {
-		super.assignedEntity = value;
-	}
-
-	/**
-	 * Sets the hl7SignatureCode
-	 */
-	public void setHl7SignatureCode(org.ehealth_connector.common.hl7cdar2.CS value) {
-		super.signatureCode = value;
-	}
-
-	/**
-	 * Sets the hl7TemplateId
-	 */
-	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		super.getTemplateId().clear();
-		super.getTemplateId().add(value);
-	}
-
-	/**
-	 * Sets the hl7Time
-	 * Timestamp of the signature.
-	 */
-	public void setHl7Time(org.ehealth_connector.common.hl7cdar2.TS value) {
-		super.time = value;
-	}
 }

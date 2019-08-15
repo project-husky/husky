@@ -20,7 +20,7 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.12
  * Template description: Reusable template wherever an assigned entity with a required id is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.
  *
- * Element description: The assigned entity's id (including the assigned person's id).
+ * Element description: The assigned organization.
  */
 public class CdachOtherAssignedEntityCompilationId extends org.ehealth_connector.common.hl7cdar2.II {
 }

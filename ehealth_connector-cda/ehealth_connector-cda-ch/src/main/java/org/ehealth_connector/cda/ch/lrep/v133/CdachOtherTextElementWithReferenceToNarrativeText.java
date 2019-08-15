@@ -21,20 +21,4 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Template description: Reusable template wherever a text reference to the corresponding text in the human readable part (narrative text) is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.
  */
 public class CdachOtherTextElementWithReferenceToNarrativeText extends org.ehealth_connector.common.hl7cdar2.ED {
-
-	/**
-	 * Gets the hl7Reference
-	 * The reference to the corresponding text in the human readable part must be specified by reference to content[@ID]: reference[@value='#xxx']
-	 */
-	public org.ehealth_connector.common.hl7cdar2.TEL getHl7Reference() {
-		return super.reference;
-	}
-
-	/**
-	 * Sets the hl7Reference
-	 * The reference to the corresponding text in the human readable part must be specified by reference to content[@ID]: reference[@value='#xxx']
-	 */
-	public void setHl7Reference(org.ehealth_connector.common.hl7cdar2.TEL value) {
-		super.reference = value;
-	}
 }

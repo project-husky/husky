@@ -20,7 +20,7 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.47
  * Template description: Reusable template for assigned entities a CDA-CH-LREP document.
  *
- * Element description: A GS1 GLN is required. If it is not (yet) known, this MUST be declared using nullFlavor.
+ * Element description: All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
  */
 public class CdachlrepHeaderAssignedEntityForLaboratory extends org.ehealth_connector.common.hl7cdar2.II {
 }

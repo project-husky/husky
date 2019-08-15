@@ -20,7 +20,7 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.26
  * Template description: Reusable template wherever an organization with required GLN as id, name, address and communication means is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.
  *
- * Element description: The organization's id (GLN).
+ * Element description: The organization's address.
  */
 public class CdachOtherOrganizationCompilationGlnNameAddrTelecom extends org.ehealth_connector.common.hl7cdar2.II {
 }

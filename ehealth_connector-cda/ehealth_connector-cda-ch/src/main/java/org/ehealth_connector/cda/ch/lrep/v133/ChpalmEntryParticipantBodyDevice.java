@@ -21,36 +21,4 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Template description: Declaration of analyzer, test kit and manufacturer used to determine the result.All participating elements (including devices), MUST according to XD-LAB contain name, addr and telecom.
  */
 public class ChpalmEntryParticipantBodyDevice extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole {
-
-	/**
-	 * Gets the hl7PlayingDevice
-	 * Analyzer used to determine the result.
-	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Device getHl7PlayingDevice() {
-		return super.playingDevice;
-	}
-
-	/**
-	 * Gets the hl7ScopingEntity
-	 * The test kit and its manufacturer CAN be specified.
-	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Entity getHl7ScopingEntity() {
-		return super.scopingEntity;
-	}
-
-	/**
-	 * Sets the hl7PlayingDevice
-	 * Analyzer used to determine the result.
-	 */
-	public void setHl7PlayingDevice(org.ehealth_connector.common.hl7cdar2.POCDMT000040Device value) {
-		super.playingDevice = value;
-	}
-
-	/**
-	 * Sets the hl7ScopingEntity
-	 * The test kit and its manufacturer CAN be specified.
-	 */
-	public void setHl7ScopingEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040Entity value) {
-		super.scopingEntity = value;
-	}
 }

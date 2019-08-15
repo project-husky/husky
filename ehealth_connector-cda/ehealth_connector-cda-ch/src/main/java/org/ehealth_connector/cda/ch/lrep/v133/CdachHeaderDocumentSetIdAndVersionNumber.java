@@ -20,7 +20,7 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.20
  * Template description: Unity of document versions. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.
  *
- * Element description: The setId element MUST match the document id of the very first version of that document. It MUST remain the same for all document versions.
+ * Element description: The versionNumber element MUST contain the value 1 for the very first version of that document. For later versions, the version number MUST be increased by 1 each.
  */
 public class CdachHeaderDocumentSetIdAndVersionNumber extends org.ehealth_connector.common.hl7cdar2.II {
 }

@@ -22,6 +22,8 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * - If all tests have been performed by the same laboratory, this element MUST be specified in the header using the Laboratory Performer (documentationOf).
  * - If multple laboratories have provided results for this document, they must be specified in the body using this element (at entry, organizer or observation level, depending on the extent of the results delivered by the appropriate laboratory).
  * - All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+ *
+ * Element description: All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
  */
 public class ChpalmEntryLaboratoryPerformer extends org.ehealth_connector.common.hl7cdar2.II {
 }

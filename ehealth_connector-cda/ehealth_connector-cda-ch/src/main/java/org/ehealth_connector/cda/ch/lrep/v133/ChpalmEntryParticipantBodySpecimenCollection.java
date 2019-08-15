@@ -16,63 +16,9 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import java.util.ArrayList;
-import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
-
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.24
  * Template description: Specimen Information.
  */
 public class ChpalmEntryParticipantBodySpecimenCollection extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole {
-
-	public ChpalmEntryParticipantBodySpecimenCollection() {
-	}
-
-	/**
-	 * Creates fixed contents for hl7Id
-	 *
-	 * @param nullFlavor the desired fixed value for this argument.
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7IdFixedValue(String nullFlavor) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
-		retVal.nullFlavor = new ArrayList<String>();
-		retVal.nullFlavor.add(nullFlavor);
-		return retVal;
-	}
-
-	/**
-	 * Gets the hl7Id
-	 * The specimen identification MUST be declared. If no specimen identification is available, nullFlavor='NA' MUST be used. In this case @root and @extension are NOT ALLOWED.
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
-		org.ehealth_connector.common.hl7cdar2.II retVal = null;
-		if (super.getId() != null)
-			if (super.getId().size() > 0)
-				retVal = super.getId().get(0);
-		return retVal;
-	}
-
-	/**
-	 * Gets the hl7PlayingEntity
-	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040PlayingEntity getHl7PlayingEntity() {
-		return super.playingEntity;
-	}
-
-	/**
-	 * Sets the hl7Id
-	 * The specimen identification MUST be declared. If no specimen identification is available, nullFlavor='NA' MUST be used. In this case @root and @extension are NOT ALLOWED.
-	 */
-	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		super.getId().clear();
-		super.getId().add(value);
-	}
-
-	/**
-	 * Sets the hl7PlayingEntity
-	 */
-	public void setHl7PlayingEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040PlayingEntity value) {
-		super.playingEntity = value;
-	}
 }
