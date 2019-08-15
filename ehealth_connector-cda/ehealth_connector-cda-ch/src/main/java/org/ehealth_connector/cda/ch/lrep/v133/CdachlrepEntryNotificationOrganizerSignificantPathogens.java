@@ -16,11 +16,24 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.88
  * Template description: Coding of significant pathogens.
  */
 public class CdachlrepEntryNotificationOrganizerSignificantPathogens extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
+
+	public CdachlrepEntryNotificationOrganizerSignificantPathogens() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.88"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.13"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.1"));
+	// cdachlrep_entry_NotificationOrganizerSignificantPathogens/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.88";
+	// cdachlrep_entry_NotificationOrganizerSignificantPathogens/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.13";
+	// cdachlrep_entry_NotificationOrganizerSignificantPathogens/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.1";
+	// cdachlrep_entry_NotificationOrganizerSignificantPathogens/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025");
+	// cdachlrep_entry_NotificationOrganizerSignificantPathogens/hl7:statusCode:st code = "completed";
+	}
 
 	/**
 	 * Adds a hl7Component
@@ -34,6 +47,30 @@ public class CdachlrepEntryNotificationOrganizerSignificantPathogens extends org
 	 */
 	public void clearHl7Component() {
 		getComponent().clear();
+	}
+
+	/**
+	 * Creates fixed contents for hl7StatusCode
+	 *
+	 * @param code the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
+		retVal.setCode(code);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
 	}
 
 	/**

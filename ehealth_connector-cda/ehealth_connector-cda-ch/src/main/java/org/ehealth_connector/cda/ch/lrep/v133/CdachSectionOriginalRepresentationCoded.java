@@ -16,6 +16,9 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import javax.xml.bind.annotation.XmlTransient;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.45
  * Template description: This section MAY be used to provide the original representation of the current CDA document as it has been seen by the legal authenticator while signing.Notes:
@@ -27,6 +30,60 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Element description: Contains the original representation of the current CDA document as it has been seen by the legal authenticator while signing.
  */
 public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
+
+	public CdachSectionOriginalRepresentationCoded() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.45"));
+		codeFixedValue = createHl7CodeFixedValue("55108-5");
+	// cdach_section_OriginalRepresentationCoded/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.3.45";
+	// cdach_section_OriginalRepresentationCoded/hl7:code:cs code = "55108-5";
+	// cdach_section_OriginalRepresentationCoded/hl7:entry:st typeCode = "DRIV";
+	}
+
+	@XmlTransient()
+	private org.ehealth_connector.common.hl7cdar2.CE codeFixedValue;
+
+	/**
+	 * Creates fixed contents for hl7Code
+	 *
+	 * @param code the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
+		retVal.setCode(code);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7Entry
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry createHl7EntryFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry retVal = factory.createPOCDMT000040Entry();
+		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntry.fromValue(typeCode));
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
+	/**
+	 * Gets the member codeFixedValue
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CE getCodeFixedValue() {
+		return codeFixedValue;
+	}
 
 	/**
 	 * Gets the hl7Code

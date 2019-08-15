@@ -16,11 +16,27 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.17
  * Template description: The Laboratory Isolate Organizer MUST ONLY be used if it is a microbiological specimen with which isolates/germs were examined.
  */
 public class ChpalmEntryLaboratoryIsolateOrganizer extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
+
+	public ChpalmEntryLaboratoryIsolateOrganizer() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.17"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.5"));
+	// chpalm_entry_LaboratoryIsolateOrganizer/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.17";
+	// chpalm_entry_LaboratoryIsolateOrganizer/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.5";
+	// chpalm_entry_LaboratoryIsolateOrganizer/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20309");
+	// chpalm_entry_LaboratoryIsolateOrganizer/hl7:specimen:cs typeCode = "SPC";
+	// chpalm_entry_LaboratoryIsolateOrganizer/hl7:component:cs typeCode = "COMP";
+	// chpalm_entry_LaboratoryIsolateOrganizer/hl7:component:cs typeCode = "COMP";
+	// chpalm_entry_LaboratoryIsolateOrganizer/hl7:component:cs typeCode = "COMP";
+	// chpalm_entry_LaboratoryIsolateOrganizer/hl7:component:cs typeCode = "COMP";
+	// chpalm_entry_LaboratoryIsolateOrganizer/hl7:reference:cs typeCode = "REFR";
+	}
 
 	/**
 	 * Adds a hl7Author
@@ -104,6 +120,54 @@ public class ChpalmEntryLaboratoryIsolateOrganizer extends org.ehealth_connector
 	 */
 	public void clearHl7Reference() {
 		getReference().clear();
+	}
+
+	/**
+	 * Creates fixed contents for hl7Component
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 createHl7ComponentFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 retVal = factory.createPOCDMT000040Component4();
+		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.ActRelationshipHasComponent.fromValue(typeCode));
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7Reference
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference retVal = factory.createPOCDMT000040Reference();
+		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipExternalReference.fromValue(typeCode));
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7Specimen
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Specimen createHl7SpecimenFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Specimen retVal = factory.createPOCDMT000040Specimen();
+		retVal.getTypeCode().add(typeCode);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
 	}
 
 	/**

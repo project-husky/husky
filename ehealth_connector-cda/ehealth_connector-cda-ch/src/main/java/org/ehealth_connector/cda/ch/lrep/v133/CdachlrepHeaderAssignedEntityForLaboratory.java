@@ -17,6 +17,8 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.ArrayList;
+import javax.xml.bind.annotation.XmlTransient;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.47
@@ -26,29 +28,39 @@ import java.util.ArrayList;
  */
 public class CdachlrepHeaderAssignedEntityForLaboratory {
 
+	public CdachlrepHeaderAssignedEntityForLaboratory() {
+	// cdachlrep_header_AssignedEntityForLaboratory/hl7:id:cs nullFlavor = "NAV";
+	// cdachlrep_header_AssignedEntityForLaboratory/hl7:id:cs root = "2.51.1.3";
+	}
+
 	/**
 	 * Address of the laboratory.
 	 */
+	@XmlTransient()
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.AD> addr = new ArrayList<org.ehealth_connector.common.hl7cdar2.AD>();
 
 	/**
 	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
 	 */
+	@XmlTransient()
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Person assignedPerson;
 
 	/**
 	 * A GS1 GLN is required. If it is not (yet) known, this MUST be declared using nullFlavor.
 	 */
+	@XmlTransient()
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> id = new ArrayList<org.ehealth_connector.common.hl7cdar2.II>();
 
 	/**
 	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
 	 */
+	@XmlTransient()
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Organization representedOrganization;
 
 	/**
 	 * Phone and eMail of the laboratory.
 	 */
+	@XmlTransient()
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.TEL> telecom = new ArrayList<org.ehealth_connector.common.hl7cdar2.TEL>();
 
 	/**
@@ -97,6 +109,21 @@ public class CdachlrepHeaderAssignedEntityForLaboratory {
 	 */
 	public void clearHl7Telecom() {
 		telecom.clear();
+	}
+
+	/**
+	 * Creates fixed contents for hl7Id
+	 *
+	 * @param nullFlavor the desired fixed value for this argument.
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7IdFixedValue(String nullFlavor, String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.nullFlavor = new ArrayList<String>();
+		retVal.nullFlavor.add(nullFlavor);
+		retVal.setRoot(root);
+		return retVal;
 	}
 
 	/**

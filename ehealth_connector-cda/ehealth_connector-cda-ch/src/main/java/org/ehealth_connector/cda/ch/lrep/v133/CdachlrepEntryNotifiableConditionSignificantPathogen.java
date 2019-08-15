@@ -16,11 +16,34 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import java.util.ArrayList;
+import javax.xml.bind.annotation.XmlTransient;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.86
  * Template description: Coding of a significant pathogen.
  */
 public class CdachlrepEntryNotifiableConditionSignificantPathogen extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
+
+	public CdachlrepEntryNotifiableConditionSignificantPathogen() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.86"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.14"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.1.1"));
+		codeFixedValue = createHl7CodeFixedValue("170516003", "2.16.840.1.113883.6.96", "SNOMED CT", "Notification of disease");
+	// cdachlrep_entry_NotifiableConditionSignificantPathogen/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.86";
+	// cdachlrep_entry_NotifiableConditionSignificantPathogen/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.14";
+	// cdachlrep_entry_NotifiableConditionSignificantPathogen/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.1.1";
+	// cdachlrep_entry_NotifiableConditionSignificantPathogen/hl7:code:cs code = "170516003";
+	// cdachlrep_entry_NotifiableConditionSignificantPathogen/hl7:code:oid codeSystem = "2.16.840.1.113883.6.96";
+	// cdachlrep_entry_NotifiableConditionSignificantPathogen/hl7:code:st codeSystemName = "SNOMED CT";
+	// cdachlrep_entry_NotifiableConditionSignificantPathogen/hl7:code:st displayName = "Notification of disease";
+	// cdachlrep_entry_NotifiableConditionSignificantPathogen/hl7:statusCode:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.2");
+	// cdachlrep_entry_NotifiableConditionSignificantPathogen/hl7:value:cs nullFlavor = "NA";
+	}
+
+	@XmlTransient()
+	private org.ehealth_connector.common.hl7cdar2.CD codeFixedValue;
 
 	/**
 	 * Adds a hl7Id
@@ -36,6 +59,56 @@ public class CdachlrepEntryNotifiableConditionSignificantPathogen extends org.eh
 	 */
 	public void clearHl7Id() {
 		getId().clear();
+	}
+
+	/**
+	 * Creates fixed contents for hl7Code
+	 *
+	 * @param code the desired fixed value for this argument.
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 * @param displayName the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
+		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7Value
+	 *
+	 * @param nullFlavor the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CE createHl7ValueFixedValue(String nullFlavor) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
+		retVal.nullFlavor = new ArrayList<String>();
+		retVal.nullFlavor.add(nullFlavor);
+		return retVal;
+	}
+
+	/**
+	 * Gets the member codeFixedValue
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CD getCodeFixedValue() {
+		return codeFixedValue;
 	}
 
 	/**

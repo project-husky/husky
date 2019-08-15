@@ -16,6 +16,9 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import javax.xml.bind.annotation.XmlTransient;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.56
  * Template description: A LOINC based document type of a CDA document instance including a translation to the Swiss EPR XDS.b metadata.
@@ -28,6 +31,36 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  */
 public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl7cdar2.CE {
 
+	public CdachlrepHeaderDocumentCode() {
+		translationFixedValue = createHl7TranslationFixedValue("4241000179101", "2.16.840.1.113883.6.96", "SNOMED CT", "Laboratory report");
+	// cdachlrep_header_DocumentCode/hl7:translation:st displayName = valueSet("2.16.756.5.30.1.127.3.10.1.27");
+	// cdachlrep_header_DocumentCode/hl7:translation:cs code = "4241000179101";
+	// cdachlrep_header_DocumentCode/hl7:translation:oid codeSystem = "2.16.840.1.113883.6.96";
+	// cdachlrep_header_DocumentCode/hl7:translation:st codeSystemName = "SNOMED CT";
+	// cdachlrep_header_DocumentCode/hl7:translation:st displayName = "Laboratory report";
+	}
+
+	@XmlTransient()
+	private org.ehealth_connector.common.hl7cdar2.CD translationFixedValue;
+
+	/**
+	 * Creates fixed contents for hl7Translation
+	 *
+	 * @param code the desired fixed value for this argument.
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 * @param displayName the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CD createHl7TranslationFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
+		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
+		return retVal;
+	}
+
 	/**
 	 * Gets the hl7Translation
 	 * The translation to the Swiss EPR XDS.b metadata attribute typeCode.
@@ -38,6 +71,13 @@ public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl
 			if (getTranslation().size() > 0)
 				retVal = getTranslation().get(0);
 		return retVal;
+	}
+
+	/**
+	 * Gets the member translationFixedValue
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CD getTranslationFixedValue() {
+		return translationFixedValue;
 	}
 
 	/**

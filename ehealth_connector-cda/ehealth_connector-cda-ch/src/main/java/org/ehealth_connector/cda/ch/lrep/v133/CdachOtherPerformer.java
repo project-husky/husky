@@ -16,6 +16,8 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.31
  * Template description: Reusable template wherever a healthcare provider who was the primary performer of an act is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.
@@ -23,6 +25,25 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Element description: Information about a healthcare provider who was the primary performer of the act.
  */
 public class CdachOtherPerformer extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer1 {
+
+	public CdachOtherPerformer() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.9.31"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.24.3.5"));
+	// cdach_other_Performer/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.9.31";
+	// cdach_other_Performer/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.1.24.3.5";
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
 
 	/**
 	 * Gets the hl7AssignedEntity

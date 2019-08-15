@@ -16,6 +16,9 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import javax.xml.bind.annotation.XmlTransient;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.77
  * Template description: Chapter (CDA Body Section) with laboratory results according to Sharing Laboratory Reports (XD-LAB) Content Module, IHE PaLM Technical Framework Revision 8.0 - June 21, 2017.Each Laboratory Specialty Section contains laboratory tests of a particular discipline (e.g., microbiology or serology).The Laboratory Specialty Section uses LOINC codes to define the appropriate discipline. Laboratory Specialty Sections MUST NOT be nested.A Laboratory Specialty Section SHALL contain EITHER a list of Laboratory Report Item Section(s) OR a single text and entry element to represent the Report Items:
@@ -23,6 +26,23 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * - Choice 2: Text and EntryWith this option, the examination results MUST be documented in the text element of the section and the corresponding entry element (Laboratory Data Processing Entry).The human-readable text MUST be generated automatically from the entry and its sub-elements.For this purpose the presentation options according to the CDA Narrative Block schema (NarrativeBlock.xsd) may be used: tables, lists, paragraphs, hyperlinks, footnotes, references to attached or embedded multimedia objects.If a document contains multiple Laboratory Specialty Sections, Choice 1 or Choice 2 can be selected for each individual chapter.
  */
 public class CdachlrepSectionLaboratorySpecialtyCoded extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
+
+	public CdachlrepSectionLaboratorySpecialtyCoded() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.3"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.2.1"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.77"));
+		codeFixedValue = createHl7CodeFixedValue("2.16.840.1.113883.6.1", "LOINC");
+	// cdachlrep_section_LaboratorySpecialtyCoded/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.3.3";
+	// cdachlrep_section_LaboratorySpecialtyCoded/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.3.2.1";
+	// cdachlrep_section_LaboratorySpecialtyCoded/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.3.77";
+	// cdachlrep_section_LaboratorySpecialtyCoded/hl7:code:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.1");
+	// cdachlrep_section_LaboratorySpecialtyCoded/hl7:code:oid codeSystem = "2.16.840.1.113883.6.1";
+	// cdachlrep_section_LaboratorySpecialtyCoded/hl7:code:st codeSystemName = "LOINC";
+	// cdachlrep_section_LaboratorySpecialtyCoded/hl7:entry:cs typeCode = "DRIV";
+	}
+
+	@XmlTransient()
+	private org.ehealth_connector.common.hl7cdar2.CE codeFixedValue;
 
 	/**
 	 * Adds a hl7Component
@@ -52,6 +72,51 @@ public class CdachlrepSectionLaboratorySpecialtyCoded extends org.ehealth_connec
 	 */
 	public void clearHl7Entry() {
 		getEntry().clear();
+	}
+
+	/**
+	 * Creates fixed contents for hl7Code
+	 *
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String codeSystem, String codeSystemName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7Entry
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry createHl7EntryFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry retVal = factory.createPOCDMT000040Entry();
+		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntry.fromValue(typeCode));
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
+	/**
+	 * Gets the member codeFixedValue
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CE getCodeFixedValue() {
+		return codeFixedValue;
 	}
 
 	/**

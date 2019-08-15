@@ -17,6 +17,8 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.ArrayList;
+import javax.xml.bind.annotation.XmlTransient;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.118
@@ -24,15 +26,54 @@ import java.util.ArrayList;
  */
 public class CdachlrepEntryLaboratoryReportDataProcessingEntry {
 
+	public CdachlrepEntryLaboratoryReportDataProcessingEntry() {
+		templateId.add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.118"));
+		templateId.add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1"));
+		templateId.add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.4"));
+	// cdachlrep_entry_LaboratoryReportDataProcessingEntry/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.118";
+	// cdachlrep_entry_LaboratoryReportDataProcessingEntry/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1";
+	// cdachlrep_entry_LaboratoryReportDataProcessingEntry/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.4";
+	// cdachlrep_entry_LaboratoryReportDataProcessingEntry/hl7:act:cs classCode = "ACT";
+	// cdachlrep_entry_LaboratoryReportDataProcessingEntry/hl7:act:cs moodCode = "EVN";
+	}
+
 	/**
 	 * No description available in the ART-DECOR model for this field.
 	 */
+	@XmlTransient()
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Act act;
 
 	/**
 	 * No description available in the ART-DECOR model for this field.
 	 */
+	@XmlTransient()
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> templateId = new ArrayList<org.ehealth_connector.common.hl7cdar2.II>();
+
+	/**
+	 * Creates fixed contents for hl7Act
+	 *
+	 * @param classCode the desired fixed value for this argument.
+	 * @param moodCode the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Act createHl7ActFixedValue(String classCode, String moodCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Act retVal = factory.createPOCDMT000040Act();
+		retVal.setClassCode(org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue(classCode));
+		retVal.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue(moodCode));
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
 
 	/**
 	 * Gets the hl7Act

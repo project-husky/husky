@@ -16,11 +16,35 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import javax.xml.bind.annotation.XmlTransient;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.20
  * Template description: Coded vital sign organizer according to [IHE PCC TF-2], 6.3.4.21.
  */
 public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
+
+	public ChpccEntryVitalSignsOrganizer() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.20"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13.1"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.32"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.35"));
+		codeFixedValue = createHl7CodeFixedValue("46680005", "2.16.840.1.113883.6.96", "SNOMED CT", "VITAL SIGNS");
+	// chpcc_entry_VitalSignsOrganizer/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.20";
+	// chpcc_entry_VitalSignsOrganizer/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.4.13.1";
+	// chpcc_entry_VitalSignsOrganizer/hl7:templateId:uid root = "2.16.840.1.113883.10.20.1.32";
+	// chpcc_entry_VitalSignsOrganizer/hl7:templateId:uid root = "2.16.840.1.113883.10.20.1.35";
+	// chpcc_entry_VitalSignsOrganizer/hl7:code:cs code = "46680005";
+	// chpcc_entry_VitalSignsOrganizer/hl7:code:oid codeSystem = "2.16.840.1.113883.6.96";
+	// chpcc_entry_VitalSignsOrganizer/hl7:code:st codeSystemName = "SNOMED CT";
+	// chpcc_entry_VitalSignsOrganizer/hl7:code:st displayName = "VITAL SIGNS";
+	// chpcc_entry_VitalSignsOrganizer/hl7:statusCode:cs code = "completed";
+	// chpcc_entry_VitalSignsOrganizer/hl7:component:cs typeCode = "COMP";
+	}
+
+	@XmlTransient()
+	private org.ehealth_connector.common.hl7cdar2.CE codeFixedValue;
 
 	/**
 	 * Adds a hl7Component
@@ -50,6 +74,67 @@ public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.
 	 */
 	public void clearHl7Id() {
 		getId().clear();
+	}
+
+	/**
+	 * Creates fixed contents for hl7Code
+	 *
+	 * @param code the desired fixed value for this argument.
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 * @param displayName the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
+		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7Component
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 createHl7ComponentFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 retVal = factory.createPOCDMT000040Component4();
+		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.ActRelationshipHasComponent.fromValue(typeCode));
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7StatusCode
+	 *
+	 * @param code the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
+		retVal.setCode(code);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
+	/**
+	 * Gets the member codeFixedValue
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CE getCodeFixedValue() {
+		return codeFixedValue;
 	}
 
 	/**

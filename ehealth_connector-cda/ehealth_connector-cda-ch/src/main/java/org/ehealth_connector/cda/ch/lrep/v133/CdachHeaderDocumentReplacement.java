@@ -16,6 +16,8 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.13
  * Template description: Relationship to another CDA-CH V2 based document that is replaced by the current one. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.
@@ -26,6 +28,23 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * - Values that are only contained in the new document are to be added.
  */
 public class CdachHeaderDocumentReplacement extends org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedDocument {
+
+	public CdachHeaderDocumentReplacement() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.13"));
+	// cdach_header_DocumentReplacement/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.13";
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
 
 	/**
 	 * Gets the hl7ParentDocument

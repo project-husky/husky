@@ -16,6 +16,10 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import java.util.ArrayList;
+import javax.xml.bind.annotation.XmlTransient;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.3
  * Template description: Laboratory reports MUST contain at least one laboratory result which is declared using this element. Each laboratory result consists of code, value and interpretation of the result.CodeFor laboratory reports in Switzerland, primarly LOINC and where necessary, additional SNOMED CT codes MUST be used. At least one laboratory result for a specimen MUST thus contain a LOINC code.Certain microbiology pathogen detection can not be uniquely identified with LOINC (e.g., Campylobacter coli). Such pathogen detection must be specified in a second observation in the same Laboratory Battery Organizer with a corresponding code from another code system (e.g., SNOMED CT).For examinations according to the Swiss analysis list (AL), a translation element CAN be specified to establish the reference to the corresponding AL position.Further translation elements may be added to make reference to other codes, e.g. the locally used code in the laboratory.ValueThe concrete values measured MUST be specified in observation elements as follows (data types according to HL7 CDA):
@@ -28,6 +32,30 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Element description: Laboratory result with interpretation, related previous results, reference range, participants (persons and devices) as well as comments.
  */
 public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
+
+	public ChpalmEntryLaboratoryObservation() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.6"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.3"));
+		codeFixedValue = createHl7CodeFixedValue("NAV");
+	// chpalm_entry_LaboratoryObservation/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.6";
+	// chpalm_entry_LaboratoryObservation/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.3";
+	// chpalm_entry_LaboratoryObservation/hl7:code:st nullFlavor = "NAV";
+	// chpalm_entry_LaboratoryObservation/hl7:statusCode:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.2");
+	// chpalm_entry_LaboratoryObservation/hl7:value:cs nullFlavor = "NA";
+	// chpalm_entry_LaboratoryObservation/hl7:value:cs nullFlavor = "NA";
+	// chpalm_entry_LaboratoryObservation/hl7:value:cs nullFlavor = "NA";
+	// chpalm_entry_LaboratoryObservation/hl7:value:cs nullFlavor = "NA";
+	// chpalm_entry_LaboratoryObservation/hl7:interpretationCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.78");
+	// chpalm_entry_LaboratoryObservation/hl7:entryRelationship:cs typeCode = "COMP";
+	// chpalm_entry_LaboratoryObservation/hl7:entryRelationship:cs typeCode = "SUBJ";
+	// chpalm_entry_LaboratoryObservation/hl7:entryRelationship:bl inversionInd = "true";
+	// chpalm_entry_LaboratoryObservation/hl7:entryRelationship:cs typeCode = "REFR";
+	// chpalm_entry_LaboratoryObservation/hl7:reference:cs typeCode = "REFR";
+	// chpalm_entry_LaboratoryObservation/hl7:referenceRange:cs typeCode = "REFV";
+	}
+
+	@XmlTransient()
+	private org.ehealth_connector.common.hl7cdar2.CD codeFixedValue;
 
 	/**
 	 * Adds a hl7Author
@@ -116,6 +144,89 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	}
 
 	/**
+	 * Creates fixed contents for hl7Code
+	 *
+	 * @param nullFlavor the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String nullFlavor) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
+		retVal.nullFlavor = new ArrayList<String>();
+		retVal.nullFlavor.add(nullFlavor);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7EntryRelationship
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 * @param inversionInd the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
+		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship.fromValue(typeCode));
+		retVal.setInversionInd(Boolean.parseBoolean(inversionInd));
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7Reference
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference retVal = factory.createPOCDMT000040Reference();
+		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipExternalReference.fromValue(typeCode));
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7ReferenceRange
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040ReferenceRange createHl7ReferenceRangeFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040ReferenceRange retVal = factory.createPOCDMT000040ReferenceRange();
+		retVal.getTypeCode().add(typeCode);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7Value
+	 *
+	 * @param nullFlavor the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.BL createHl7ValueFixedValue(String nullFlavor) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.BL retVal = factory.createBL();
+		retVal.nullFlavor = new ArrayList<String>();
+		retVal.nullFlavor.add(nullFlavor);
+		return retVal;
+	}
+
+	/**
+	 * Gets the member codeFixedValue
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CD getCodeFixedValue() {
+		return codeFixedValue;
+	}
+
+	/**
 	 * Gets the hl7Code
 	 * A unique code for this result MUST be specified.
 	 */
@@ -197,6 +308,13 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	}
 
 	/**
+	 * Gets the hl7Text
+	 */
+	public org.ehealth_connector.common.hl7cdar2.ED getHl7Text() {
+		return text;
+	}
+
+	/**
 	 * Gets the hl7Value
 	 * True / False or Yes / No Result. If the observation value can not be determined, @value is NOT ALLOWED. Instead, @nullFlavor='NA' MUST be used in combination with interpretationCode that declares whether the result is below (Low of scale) or above (High of scale) of the reference range.
 	 */
@@ -275,6 +393,13 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		getTemplateId().clear();
 		getTemplateId().add(value);
+	}
+
+	/**
+	 * Sets the hl7Text
+	 */
+	public void setHl7Text(org.ehealth_connector.common.hl7cdar2.ED value) {
+		this.text = value;
 	}
 
 	/**

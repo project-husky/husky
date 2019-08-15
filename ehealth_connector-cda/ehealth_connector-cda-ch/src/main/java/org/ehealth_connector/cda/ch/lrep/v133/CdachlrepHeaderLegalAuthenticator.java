@@ -16,6 +16,8 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.61
  * Template description: Legal authenticator.
@@ -23,6 +25,48 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Element description: Legal authenticator.
  */
 public class CdachlrepHeaderLegalAuthenticator extends org.ehealth_connector.common.hl7cdar2.POCDMT000040LegalAuthenticator {
+
+	public CdachlrepHeaderLegalAuthenticator() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.61"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.5"));
+	// cdachlrep_header_LegalAuthenticator/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.61";
+	// cdachlrep_header_LegalAuthenticator/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.5";
+	// cdachlrep_header_LegalAuthenticator/hl7:signatureCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.10282");
+	// cdachlrep_header_LegalAuthenticator/hl7:signatureCode:cs code = "S";
+	// cdachlrep_header_LegalAuthenticator/hl7:signatureCode:oid codeSystem = "2.16.840.1.113883.1.11.10282";
+	// cdachlrep_header_LegalAuthenticator/hl7:signatureCode:st codeSystemName = "ParticipationSignature";
+	// cdachlrep_header_LegalAuthenticator/hl7:signatureCode:st displayName = "signed";
+	}
+
+	/**
+	 * Creates fixed contents for hl7SignatureCode
+	 *
+	 * @param code the desired fixed value for this argument.
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 * @param displayName the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CS createHl7SignatureCodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
+		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
 
 	/**
 	 * Gets the hl7AssignedEntity

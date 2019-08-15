@@ -16,6 +16,8 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.29
  * Template description: External documents can be included in a CDA document, either by means of references or by means of XML embedding.This template defines a reference to an external document, only.Embedded documents can be created with the template Observation Media (or derived templates).
@@ -23,6 +25,11 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Element description: Reference to an external document.
  */
 public class CdachEntryExternalDocument extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ExternalDocument {
+
+	public CdachEntryExternalDocument() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.29"));
+	// cdach_entry_ExternalDocument/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.29";
+	}
 
 	/**
 	 * Adds a hl7Id
@@ -38,6 +45,18 @@ public class CdachEntryExternalDocument extends org.ehealth_connector.common.hl7
 	 */
 	public void clearHl7Id() {
 		getId().clear();
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
 	}
 
 	/**

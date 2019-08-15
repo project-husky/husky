@@ -23,11 +23,13 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamSource;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 import org.ehealth_connector.common.utils.Hl7CdaR2Util;
 
 /**
@@ -40,6 +42,28 @@ import org.ehealth_connector.common.utils.Hl7CdaR2Util;
  */
 @XmlRootElement(name = "ClinicalDocument", namespace = "urn:hl7-org:v3")
 public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
+
+	public CdaChLrepGrV1() {
+		super.setTypeId(createHl7TypeIdFixedValue("2.16.840.1.113883.1.3", "POCD_HD000040"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.1.10"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.4"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.2"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.1"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.3.9.1"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.127.1.4"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3"));
+		realmCodeFixedValue = createHl7RealmCodeFixedValue("CHE");
+		codeFixedValue = createHl7CodeFixedValue("2.16.840.1.113883.6.1", "LOINC");
+	// CDA-CH-LREP-GR-V1/hl7:typeId:uid root = "2.16.840.1.113883.1.3";
+	// CDA-CH-LREP-GR-V1/hl7:typeId:st extension = "POCD_HD000040";
+	// CDA-CH-LREP-GR-V1/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.1.10";
+	}
+
+	@XmlTransient()
+	private org.ehealth_connector.common.hl7cdar2.CE codeFixedValue;
+
+	@XmlTransient()
+	private org.ehealth_connector.common.hl7cdar2.CS realmCodeFixedValue;
 
 	/**
 	 * Adds a hl7Authenticator
@@ -59,7 +83,6 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 
 	/**
 	 * Adds a hl7DocumentationOf
-	 * Information about a health service describing the context of this CDA document.
 	 */
 	public void addHl7DocumentationOf(org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf value) {
 		getDocumentationOf().add(value);
@@ -91,7 +114,7 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 
 	/**
 	 * Adds a hl7RecordTarget
-	 * Patient (Human Patient).
+	 * Non-Human Subject.
 	 */
 	public void addHl7RecordTarget(org.ehealth_connector.common.hl7cdar2.POCDMT000040RecordTarget value) {
 		getRecordTarget().add(value);
@@ -126,7 +149,6 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 
 	/**
 	 * Adds a hl7DocumentationOf
-	 * Information about a health service describing the context of this CDA document.
 	 */
 	public void clearHl7DocumentationOf() {
 		getDocumentationOf().clear();
@@ -158,7 +180,7 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 
 	/**
 	 * Adds a hl7RecordTarget
-	 * Patient (Human Patient).
+	 * Non-Human Subject.
 	 */
 	public void clearHl7RecordTarget() {
 		getRecordTarget().clear();
@@ -173,6 +195,115 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 */
 	public void clearHl7RelatedDocument() {
 		getRelatedDocument().clear();
+	}
+
+	/**
+	 * Creates fixed contents for hl7Code
+	 *
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String codeSystem, String codeSystemName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7ConfidentialityCode
+	 *
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CE createHl7ConfidentialityCodeFixedValue(String codeSystem, String codeSystemName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7DocumentationOf
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf createHl7DocumentationOfFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf retVal = factory.createPOCDMT000040DocumentationOf();
+		retVal.getTypeCode().add(typeCode);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7Participant
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 createHl7ParticipantFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 retVal = factory.createPOCDMT000040Participant1();
+		retVal.getTypeCode().add(typeCode);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7RealmCode
+	 *
+	 * @param code the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CS createHl7RealmCodeFixedValue(String code) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
+		retVal.setCode(code);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7RelatedDocument
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedDocument createHl7RelatedDocumentFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedDocument retVal = factory.createPOCDMT000040RelatedDocument();
+		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipDocument.fromValue(typeCode));
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7TypeId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 * @param extension the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040InfrastructureRootTypeId createHl7TypeIdFixedValue(String root, String extension) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040InfrastructureRootTypeId retVal = factory.createPOCDMT000040InfrastructureRootTypeId();
+		retVal.setRoot(root);
+		retVal.setExtension(extension);
+		return retVal;
+	}
+
+	/**
+	 * Gets the member codeFixedValue
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CE getCodeFixedValue() {
+		return codeFixedValue;
 	}
 
 	/**
@@ -304,6 +435,13 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 */
 	public org.ehealth_connector.common.hl7cdar2.INT getHl7VersionNumber() {
 		return versionNumber;
+	}
+
+	/**
+	 * Gets the member realmCodeFixedValue
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CS getRealmCodeFixedValue() {
+		return realmCodeFixedValue;
 	}
 
 	/**

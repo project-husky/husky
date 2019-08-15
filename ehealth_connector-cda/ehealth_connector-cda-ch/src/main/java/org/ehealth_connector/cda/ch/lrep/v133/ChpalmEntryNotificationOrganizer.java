@@ -16,11 +16,21 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.13
  * Template description: A laboratory report MAY contain information on the obligation to report pathogen detection, on accumulation of observations or specific epidemiologically relevant events.Precise specification on the usage of this element is documented in the specification "Laboratory reports for public health (CDA-CH-LRPH)".
  */
 public class ChpalmEntryNotificationOrganizer extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
+
+	public ChpalmEntryNotificationOrganizer() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.13"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.1"));
+	// chpalm_entry_NotificationOrganizer/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.13";
+	// chpalm_entry_NotificationOrganizer/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.1";
+	// chpalm_entry_NotificationOrganizer/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025");
+	}
 
 	/**
 	 * Adds a hl7Component
@@ -34,6 +44,18 @@ public class ChpalmEntryNotificationOrganizer extends org.ehealth_connector.comm
 	 */
 	public void clearHl7Component() {
 		getComponent().clear();
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
 	}
 
 	/**

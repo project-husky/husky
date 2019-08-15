@@ -16,11 +16,21 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.15
  * Template description: If an examination belongs to a specific case, this CAN be documented with this element (in the Notification Organizer).
  */
 public class ChpalmEntryCaseIdentification extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
+
+	public ChpalmEntryCaseIdentification() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.1.2"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.15"));
+	// chpalm_entry_CaseIdentification/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.1.2";
+	// chpalm_entry_CaseIdentification/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.15";
+	// chpalm_entry_CaseIdentification/hl7:statusCode:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.2");
+	}
 
 	/**
 	 * Adds a hl7Id
@@ -36,6 +46,18 @@ public class ChpalmEntryCaseIdentification extends org.ehealth_connector.common.
 	 */
 	public void clearHl7Id() {
 		getId().clear();
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
 	}
 
 	/**

@@ -16,6 +16,9 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import javax.xml.bind.annotation.XmlTransient;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.2
  * Template description: This entry allows for a comment to be supplied with each entry.
@@ -23,6 +26,25 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Element description: A comment to the parent entry.
  */
 public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
+
+	public ChpccEntryAnnotationComments() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.2"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.40"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.2"));
+		codeFixedValue = createHl7CodeFixedValue("48767-8", "2.16.840.1.113883.6.1", "LOINC", "Annotation comment");
+	// chpcc_entry_AnnotationComments/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.2";
+	// chpcc_entry_AnnotationComments/hl7:templateId:uid root = "2.16.840.1.113883.10.20.1.40";
+	// chpcc_entry_AnnotationComments/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.4.2";
+	// chpcc_entry_AnnotationComments/hl7:code:cs code = "48767-8";
+	// chpcc_entry_AnnotationComments/hl7:code:oid codeSystem = "2.16.840.1.113883.6.1";
+	// chpcc_entry_AnnotationComments/hl7:code:st codeSystemName = "LOINC";
+	// chpcc_entry_AnnotationComments/hl7:code:st displayName = "Annotation comment";
+	// chpcc_entry_AnnotationComments/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025");
+	// chpcc_entry_AnnotationComments/hl7:statusCode:cs code = "completed";
+	}
+
+	@XmlTransient()
+	private org.ehealth_connector.common.hl7cdar2.CD codeFixedValue;
 
 	/**
 	 * Adds a hl7Author
@@ -38,6 +60,55 @@ public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.h
 	 */
 	public void clearHl7Author() {
 		getAuthor().clear();
+	}
+
+	/**
+	 * Creates fixed contents for hl7Code
+	 *
+	 * @param code the desired fixed value for this argument.
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 * @param displayName the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
+		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7StatusCode
+	 *
+	 * @param code the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
+		retVal.setCode(code);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
+	/**
+	 * Gets the member codeFixedValue
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CD getCodeFixedValue() {
+		return codeFixedValue;
 	}
 
 	/**

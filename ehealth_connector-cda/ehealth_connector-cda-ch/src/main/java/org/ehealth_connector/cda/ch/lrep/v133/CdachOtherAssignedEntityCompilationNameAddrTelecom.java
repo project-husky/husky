@@ -17,6 +17,8 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.ArrayList;
+import javax.xml.bind.annotation.XmlTransient;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.17
@@ -26,29 +28,44 @@ import java.util.ArrayList;
  */
 public class CdachOtherAssignedEntityCompilationNameAddrTelecom {
 
+	public CdachOtherAssignedEntityCompilationNameAddrTelecom() {
+		codeFixedValue = createHl7CodeFixedValue("2.16.840.1.113883.6.96", "SNOMED CT");
+	// cdach_other_AssignedEntityCompilationNameAddrTelecom/hl7:code:cs valueSet = valueSet("2.16.756.5.30.1.127.3.10.1.1.3");
+	// cdach_other_AssignedEntityCompilationNameAddrTelecom/hl7:code:oid codeSystem = "2.16.840.1.113883.6.96";
+	// cdach_other_AssignedEntityCompilationNameAddrTelecom/hl7:code:st codeSystemName = "SNOMED CT";
+	}
+
 	/**
 	 * The assigned entity's address.
 	 */
+	@XmlTransient()
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.AD> addr = new ArrayList<org.ehealth_connector.common.hl7cdar2.AD>();
 
 	/**
 	 * The assigned person.
 	 */
+	@XmlTransient()
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Person assignedPerson;
 
 	/**
 	 * The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
 	 */
+	@XmlTransient()
 	private org.ehealth_connector.common.hl7cdar2.CE code;
+
+	@XmlTransient()
+	private org.ehealth_connector.common.hl7cdar2.CE codeFixedValue;
 
 	/**
 	 * The assigned organization.
 	 */
+	@XmlTransient()
 	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Organization representedOrganization;
 
 	/**
 	 * The assigned entity's means of communication (phone, eMail, ...).
 	 */
+	@XmlTransient()
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.TEL> telecom = new ArrayList<org.ehealth_connector.common.hl7cdar2.TEL>();
 
 	/**
@@ -81,6 +98,27 @@ public class CdachOtherAssignedEntityCompilationNameAddrTelecom {
 	 */
 	public void clearHl7Telecom() {
 		telecom.clear();
+	}
+
+	/**
+	 * Creates fixed contents for hl7Code
+	 *
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String codeSystem, String codeSystemName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		return retVal;
+	}
+
+	/**
+	 * Gets the member codeFixedValue
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CE getCodeFixedValue() {
+		return codeFixedValue;
 	}
 
 	/**

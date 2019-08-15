@@ -16,11 +16,24 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.18
  * Template description: Multimedia objects (e.g., PDF representations of the CDA document, pictures, Reiber diagrams, electrophoresis, etc.) MAY be integrated into a CDA document, either by reference to external multimedia objects or by means of XML embedding.This template defines only the embedding of multimedia objects in the CDA document. References to external documents can be created with the ExternalDocument template.For embedding in XML, the multimedia objects Base-64 must be encoded.Due to the amount of data, only light objects should be embedded.Heavy objects should be integrated using links to external documents.
  */
 public class ChpalmEntryMultimediaEmbeddedContent extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ObservationMedia {
+
+	public ChpalmEntryMultimediaEmbeddedContent() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.18"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.83"));
+	// chpalm_entry_MultimediaEmbeddedContent/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.18";
+	// chpalm_entry_MultimediaEmbeddedContent/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.83";
+	// chpalm_entry_MultimediaEmbeddedContent/hl7:languageCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.11526");
+	// chpalm_entry_MultimediaEmbeddedContent/hl7:value:cs representation = "B64";
+	// chpalm_entry_MultimediaEmbeddedContent/hl7:value:cs mediaType = valueSet("1.3.6.1.4.1.19376.1.3.11.5");
+	// chpalm_entry_MultimediaEmbeddedContent/hl7:value:cs mediaType = valueSet("1.3.6.1.4.1.19376.1.3.11.5");
+	}
 
 	/**
 	 * Adds a hl7Id
@@ -36,6 +49,30 @@ public class ChpalmEntryMultimediaEmbeddedContent extends org.ehealth_connector.
 	 */
 	public void clearHl7Id() {
 		getId().clear();
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7Value
+	 *
+	 * @param representation the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.ED createHl7ValueFixedValue(String representation) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.ED retVal = factory.createED();
+		retVal.setRepresentation(org.ehealth_connector.common.hl7cdar2.BinaryDataEncoding.fromValue(representation));
+		return retVal;
 	}
 
 	/**

@@ -16,6 +16,8 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.88
  * Template description: The document MAY contain further signatures (besides the legal authenticator). A Laboratory Results Validator is such an authenticator. It is a laboratory specialist who has performed the clinical validation of the entire document or a subset of the laboratory results. If this element is specified, the following applies:
@@ -26,6 +28,41 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Element description: Information about an authenticator of a CDA document. An authenticator MUST be a person.
  */
 public class ChpalmHeaderLaboratoryResultsValidator extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Authenticator {
+
+	public ChpalmHeaderLaboratoryResultsValidator() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.88"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.6"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.1.5"));
+	// chpalm_header_LaboratoryResultsValidator/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.88";
+	// chpalm_header_LaboratoryResultsValidator/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.6";
+	// chpalm_header_LaboratoryResultsValidator/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.3.1.5";
+	// chpalm_header_LaboratoryResultsValidator/hl7:signatureCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.10282");
+	// chpalm_header_LaboratoryResultsValidator/hl7:signatureCode:cs code = "S";
+	}
+
+	/**
+	 * Creates fixed contents for hl7SignatureCode
+	 *
+	 * @param code the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CS createHl7SignatureCodeFixedValue(String code) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
+		retVal.setCode(code);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
 
 	/**
 	 * Gets the hl7AssignedEntity

@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.ArrayList;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.24
@@ -26,24 +27,31 @@ import java.util.ArrayList;
  */
 public class CdachOtherOrganizationCompilationWithName {
 
+	public CdachOtherOrganizationCompilationWithName() {
+	}
+
 	/**
 	 * The organization's address.
 	 */
+	@XmlTransient()
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.AD> addr = new ArrayList<org.ehealth_connector.common.hl7cdar2.AD>();
 
 	/**
 	 * The organization's id.
 	 */
+	@XmlTransient()
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> id = new ArrayList<org.ehealth_connector.common.hl7cdar2.II>();
 
 	/**
 	 * The organization's name.
 	 */
+	@XmlTransient()
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.ON> name = new ArrayList<org.ehealth_connector.common.hl7cdar2.ON>();
 
 	/**
 	 * The organization's means of communication (phone, eMail, ...).
 	 */
+	@XmlTransient()
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.TEL> telecom = new ArrayList<org.ehealth_connector.common.hl7cdar2.TEL>();
 
 	/**

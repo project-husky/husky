@@ -16,6 +16,9 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import java.util.ArrayList;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.59
  * Template description: Information about the author of the document. The author MAY be a person or a device. At least one author MUST be declared.
@@ -23,6 +26,46 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Element description: Information about the author of the document. The author MAY be a person or a device. At least one author MUST be declared.
  */
 public class CdachlrepHeaderAuthor extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Author {
+
+	public CdachlrepHeaderAuthor() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.59"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.9.23"));
+	// cdachlrep_header_Author/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.59";
+	// cdachlrep_header_Author/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.9.23";
+	// cdachlrep_header_Author/hl7:functionCode:cs valueSet = valueSet("2.16.756.5.30.1.127.3.10.1.1.3");
+	// cdachlrep_header_Author/hl7:functionCode:st nullFlavor = "NAV";
+	// cdachlrep_header_Author/hl7:functionCode:oid codeSystem = "2.16.840.1.113883.6.96";
+	// cdachlrep_header_Author/hl7:functionCode:st codeSystemName = "SNOMED CT";
+	}
+
+	/**
+	 * Creates fixed contents for hl7FunctionCode
+	 *
+	 * @param nullFlavor the desired fixed value for this argument.
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CE createHl7FunctionCodeFixedValue(String nullFlavor, String codeSystem, String codeSystemName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
+		retVal.nullFlavor = new ArrayList<String>();
+		retVal.nullFlavor.add(nullFlavor);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
 
 	/**
 	 * Gets the hl7AssignedAuthor

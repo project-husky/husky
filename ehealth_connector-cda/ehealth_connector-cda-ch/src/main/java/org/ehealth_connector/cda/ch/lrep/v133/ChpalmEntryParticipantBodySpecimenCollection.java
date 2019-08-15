@@ -16,11 +16,31 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import java.util.ArrayList;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.24
  * Template description: Specimen Information.
  */
 public class ChpalmEntryParticipantBodySpecimenCollection extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole {
+
+	public ChpalmEntryParticipantBodySpecimenCollection() {
+	// chpalm_entry_ParticipantBodySpecimenCollection/hl7:id:cs nullFlavor = "NA";
+	}
+
+	/**
+	 * Creates fixed contents for hl7Id
+	 *
+	 * @param nullFlavor the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7IdFixedValue(String nullFlavor) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.nullFlavor = new ArrayList<String>();
+		retVal.nullFlavor.add(nullFlavor);
+		return retVal;
+	}
 
 	/**
 	 * Gets the hl7Id

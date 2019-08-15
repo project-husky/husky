@@ -16,11 +16,26 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.19
  * Template description: According to IHE XD-LAB, the Laboratory Battery Organizer allows the grouping of results.Laboratory reports MUST contain at least one result group with at least one result.The grouping of multiple results (Observations) into multiple result groups (Laboratory Battery Organizers) is permitted.
  */
 public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
+
+	public ChpalmEntryLaboratoryBatteryOrganizer() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.19"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.4"));
+	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.19";
+	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.4";
+	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:statusCode:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.2");
+	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:component:cs typeCode = "COMP";
+	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:component:cs typeCode = "COMP";
+	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:component:cs typeCode = "COMP";
+	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:component:cs typeCode = "COMP";
+	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:reference:cs typeCode = "REFR";
+	}
 
 	/**
 	 * Adds a hl7Author
@@ -104,6 +119,42 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	 */
 	public void clearHl7Reference() {
 		getReference().clear();
+	}
+
+	/**
+	 * Creates fixed contents for hl7Component
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 createHl7ComponentFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 retVal = factory.createPOCDMT000040Component4();
+		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.ActRelationshipHasComponent.fromValue(typeCode));
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7Reference
+	 *
+	 * @param typeCode the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference retVal = factory.createPOCDMT000040Reference();
+		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipExternalReference.fromValue(typeCode));
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
 	}
 
 	/**

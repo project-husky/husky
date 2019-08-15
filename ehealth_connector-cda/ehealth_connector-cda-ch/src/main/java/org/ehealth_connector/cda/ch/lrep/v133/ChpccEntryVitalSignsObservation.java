@@ -16,11 +16,33 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import javax.xml.bind.annotation.XmlTransient;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.21
  * Template description: Structured notation of a measured value resp. an observation of a single vital sign (such as body height, weight, blood pressure).
  */
 public class ChpccEntryVitalSignsObservation extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
+
+	public ChpccEntryVitalSignsObservation() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13.2"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.31"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.21"));
+		codeFixedValue = createHl7CodeFixedValue("2.16.840.1.113883.6.1", "LOINC");
+	// chpcc_entry_VitalSignsObservation/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.4.13";
+	// chpcc_entry_VitalSignsObservation/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.4.13.2";
+	// chpcc_entry_VitalSignsObservation/hl7:templateId:uid root = "2.16.840.1.113883.10.20.1.31";
+	// chpcc_entry_VitalSignsObservation/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.21";
+	// chpcc_entry_VitalSignsObservation/hl7:code:cs valueSet = valueSet("2.16.756.5.30.1.1.11.5");
+	// chpcc_entry_VitalSignsObservation/hl7:code:oid codeSystem = "2.16.840.1.113883.6.1";
+	// chpcc_entry_VitalSignsObservation/hl7:code:st codeSystemName = "LOINC";
+	// chpcc_entry_VitalSignsObservation/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025");
+	}
+
+	@XmlTransient()
+	private org.ehealth_connector.common.hl7cdar2.CD codeFixedValue;
 
 	/**
 	 * Adds a hl7InterpretationCode
@@ -62,6 +84,39 @@ public class ChpccEntryVitalSignsObservation extends org.ehealth_connector.commo
 	 */
 	public void clearHl7TargetSiteCode() {
 		getTargetSiteCode().clear();
+	}
+
+	/**
+	 * Creates fixed contents for hl7Code
+	 *
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String codeSystem, String codeSystemName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
+	/**
+	 * Gets the member codeFixedValue
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CD getCodeFixedValue() {
+		return codeFixedValue;
 	}
 
 	/**

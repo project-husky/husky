@@ -22,6 +22,9 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  */
 public class CdachOtherOriginalTextElementWithReferenceToNarrativeText extends org.ehealth_connector.common.hl7cdar2.ED {
 
+	public CdachOtherOriginalTextElementWithReferenceToNarrativeText() {
+	}
+
 	/**
 	 * Gets the hl7Reference
 	 * The reference to the corresponding text in the human readable part must be specified by reference to content[@ID]: reference[@value='#xxx']

@@ -16,6 +16,8 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.46
  * Template description: Information about a health service describing the context of this CDA document. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST use this template by either reference or specialisation.
@@ -23,6 +25,39 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Element description: Information about a health service describing the context of this CDA document.
  */
 public class CdachHeaderHealthService extends org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf {
+
+	public CdachHeaderHealthService() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.46"));
+	// cdach_header_HealthService/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.46";
+	// cdach_header_HealthService/hl7:serviceEvent:cs classCode = "ACT";
+	// cdach_header_HealthService/hl7:serviceEvent:cs moodCode = "EVN";
+	}
+
+	/**
+	 * Creates fixed contents for hl7ServiceEvent
+	 *
+	 * @param classCode the desired fixed value for this argument.
+	 * @param moodCode the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040ServiceEvent createHl7ServiceEventFixedValue(String classCode, String moodCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040ServiceEvent retVal = factory.createPOCDMT000040ServiceEvent();
+		retVal.getClassCode().add(classCode);
+		retVal.getMoodCode().add(moodCode);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for hl7TemplateId
+	 *
+	 * @param root the desired fixed value for this argument.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
 
 	/**
 	 * Gets the hl7ServiceEvent
