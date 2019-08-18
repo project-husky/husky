@@ -20,7 +20,6 @@
 		<dependency>
 			<groupId>org.ehealth_connector.common.ch</groupId>
 			<artifactId>ehealth_connector-common-ch</artifactId>
-			<version>1.7-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>

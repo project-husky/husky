@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>ehealth_connector-cda-gen</artifactId>
 	<name>eHealth Connector CDA Generic</name>
@@ -10,10 +11,23 @@
 	</parent>
 
 	<dependencies>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.ehealth_connector.common</groupId>
 			<artifactId>ehealth_connector-common-gen</artifactId>
-			<version>1.7-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>org.openhealthtools.mdht.uml</groupId>
+					<artifactId>cda</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.openhealthtools.mdht.uml.hl7</groupId>
+					<artifactId>datatypes</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency> -->
+		<dependency>
+			<groupId>org.ehealth_connector.common.ch</groupId>
+			<artifactId>ehealth_connector-common-ch</artifactId>
 			<exclusions>
 				<exclusion>
 					<groupId>org.openhealthtools.mdht.uml</groupId>
@@ -30,7 +44,6 @@
 		<dependency>
 			<groupId>org.openhealthtools.mdht.uml.cda.ch</groupId>
 			<artifactId>org.openhealthtools.mdht.uml.cda.ch</artifactId>
-			<version>1.7-SNAPSHOT</version>
 		</dependency>
 
 		<!-- test stuff -->
@@ -59,21 +72,7 @@
 		</dependency>
 
 
-		<dependency>
-			<groupId>org.ehealth_connector.common.ch</groupId>
-			<artifactId>ehealth_connector-common-ch</artifactId>
-			<version>1.7-SNAPSHOT</version>
-			<exclusions>
-				<exclusion>
-					<groupId>org.openhealthtools.mdht.uml</groupId>
-					<artifactId>cda</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.openhealthtools.mdht.uml.hl7</groupId>
-					<artifactId>datatypes</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+
 	</dependencies>
 
 
@@ -105,40 +104,36 @@
 	<profiles>
 		<profile>
 			<id>ehc4dotnet-disabled</id>
-			<!-- activation>
-			<os>
-			<family>Windows</family>
-			</os>
-		</activation -->
-		<!-- Converts the ehealthconnector library to a .net version using IKVMC -->
-		<build>
-			<plugins>
+			<!-- activation> <os> <family>Windows</family> </os> </activation -->
+			<!-- Converts the ehealthconnector library to a .net version using IKVMC -->
+			<build>
+				<plugins>
 
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-antrun-plugin</artifactId>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-antrun-plugin</artifactId>
 
-					<configuration>
-						<target>
-							<exec executable="ikvmc">
-								<arg value="-target:library" />
-								<arg value="-out:${project.build.directory}/${project.artifactId}-${project.version}.dll" />
-								<arg value="${project.build.directory}/${project.artifactId}-${project.version}.jar" />
-							</exec>
-						</target>
-					</configuration>
-					<executions>
-						<execution>
-							<phase>package</phase>
-							<goals>
-								<goal>run</goal>
-							</goals>
-						</execution>
-					</executions>
-				</plugin>
-			</plugins>
-		</build>
-	</profile>
-</profiles>
+						<configuration>
+							<target>
+								<exec executable="ikvmc">
+									<arg value="-target:library" />
+									<arg value="-out:${project.build.directory}/${project.artifactId}-${project.version}.dll" />
+									<arg value="${project.build.directory}/${project.artifactId}-${project.version}.jar" />
+								</exec>
+							</target>
+						</configuration>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>run</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 
 </project>

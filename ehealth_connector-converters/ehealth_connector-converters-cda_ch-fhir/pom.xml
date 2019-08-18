@@ -17,14 +17,15 @@
 			<version>1.7-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>org.openhealthtools.mdht.uml.cda.ch</groupId>
-			<artifactId>org.openhealthtools.mdht.uml.cda.ch</artifactId>
-			<version>1.7-SNAPSHOT</version>
-		</dependency>
-		<dependency>
 			<groupId>org.ehealth_connector.fhir.structures</groupId>
 			<artifactId>ehealth_connector-fhir-structures-ch</artifactId>
 			<version>1.7-SNAPSHOT</version>
+		</dependency>
+		
+		<!-- model -->
+		<dependency>
+			<groupId>org.openhealthtools.mdht.uml.cda.ch</groupId>
+			<artifactId>org.openhealthtools.mdht.uml.cda.ch</artifactId>
 		</dependency>
 		
 		<!-- test stuff -->
