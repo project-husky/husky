@@ -182,6 +182,7 @@
 					<failOnError>false</failOnError>
 				</configuration>
 			</plugin>
+			<!-- 
 			<plugin>
 				<groupId>com.googlecode.maven-java-formatter-plugin</groupId>
 				<artifactId>maven-java-formatter-plugin</artifactId>
@@ -206,6 +207,7 @@
 					</dependency>
 				</dependencies>
 			</plugin>
+			 -->
 		</plugins>
 
 	</build>

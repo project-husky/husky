@@ -16,10 +16,4 @@
 		<module>ehealth_connector-cda-ch</module>
 	</modules>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.ehealth_connector.common.ch</groupId>
-			<artifactId>ehealth_connector-common-ch</artifactId>
-		</dependency>
-	</dependencies>
 </project>
