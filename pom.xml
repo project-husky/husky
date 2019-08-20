@@ -54,6 +54,14 @@
 				<artifactId>org.openhealthtools.mdht.uml.cda.ch</artifactId>
 				<version>1.7-SNAPSHOT</version>
 			</dependency>
+
+			<dependency>
+				<groupId>org.ehealth_connector.common</groupId>
+				<artifactId>ehealth_connector-common-gen</artifactId>
+				<version>1.7-SNAPSHOT</version>
+				<type>test-jar</type>
+				<scope>test</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
