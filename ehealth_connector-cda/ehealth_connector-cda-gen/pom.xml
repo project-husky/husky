@@ -11,20 +11,6 @@
 	</parent>
 
 	<dependencies>
-		<!-- <dependency>
-			<groupId>org.ehealth_connector.common</groupId>
-			<artifactId>ehealth_connector-common-gen</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.openhealthtools.mdht.uml</groupId>
-					<artifactId>cda</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.openhealthtools.mdht.uml.hl7</groupId>
-					<artifactId>datatypes</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency> -->
 		<dependency>
 			<groupId>org.ehealth_connector.common.ch</groupId>
 			<artifactId>ehealth_connector-common-ch</artifactId>

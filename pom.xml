@@ -19,7 +19,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 		<maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
-		<ehc.version>1.7-SNAPSHOT</ehc.version>
 	</properties>
 
 	<scm>
@@ -43,17 +42,17 @@
 			<dependency>
 				<groupId>org.ehealth_connector.common</groupId>
 				<artifactId>ehealth_connector-common-gen</artifactId>
-				<version>${ehc.version}</version>
+				<version>1.7-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.ehealth_connector.common.ch</groupId>
 				<artifactId>ehealth_connector-common-ch</artifactId>
-				<version>${ehc.version}</version>
+				<version>1.7-SNAPSHOT</version>
 			</dependency>
 			<dependency>
 				<groupId>org.openhealthtools.mdht.uml.cda.ch</groupId>
 				<artifactId>org.openhealthtools.mdht.uml.cda.ch</artifactId>
-				<version>${ehc.version}</version>
+				<version>1.7-SNAPSHOT</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -78,6 +77,48 @@
 	</repositories>
 
 	<build>
+		<plugins>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<useDefaultManifestFile>true</useDefaultManifestFile>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+						</manifest>
+						<manifestEntries>
+							<Build-Time>${maven.build.timestamp}</Build-Time>
+						</manifestEntries>
+						<manifestSections>
+							<manifestSection>
+								<name>ProjektInfos</name>
+								<manifestEntries>
+									<Projekt>${project.name}</Projekt>
+									<Version>${project.version}</Version>
+									<GroupId>${project.groupId}</GroupId>
+									<ArtifactId>${project.artifactId}</ArtifactId>
+									<Url>https://sourceforge.net/projects/ehealthconnector/</Url>
+								</manifestEntries>
+							</manifestSection>
+						</manifestSections>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<additionalparam>-Xdoclint:none</additionalparam>
+					<failOnError>false</failOnError>
+				</configuration>
+			</plugin>
+		</plugins>
+
+	</build>
+
+	<reporting>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -148,68 +189,7 @@
 					</reportPlugins>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<useDefaultManifestFile>true</useDefaultManifestFile>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-						</manifest>
-						<manifestEntries>
-							<Build-Time>${maven.build.timestamp}</Build-Time>
-						</manifestEntries>
-						<manifestSections>
-							<manifestSection>
-								<name>ProjektInfos</name>
-								<manifestEntries>
-									<Projekt>${project.name}</Projekt>
-									<Version>${project.version}</Version>
-									<GroupId>${project.groupId}</GroupId>
-									<ArtifactId>${project.artifactId}</ArtifactId>
-									<Url>https://sourceforge.net/projects/ehealthconnector/</Url>
-								</manifestEntries>
-							</manifestSection>
-						</manifestSections>
-					</archive>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<configuration>
-					<additionalparam>-Xdoclint:none</additionalparam>
-					<failOnError>false</failOnError>
-				</configuration>
-			</plugin>
-			<!-- 
-			<plugin>
-				<groupId>com.googlecode.maven-java-formatter-plugin</groupId>
-				<artifactId>maven-java-formatter-plugin</artifactId>
-				<configuration>
-					<compilerSource>${java.version}</compilerSource>
-					<compilerCompliance>${java.version}</compilerCompliance>
-					<compilerTargetPlatform>${java.version}</compilerTargetPlatform>
-					<configFile>format/eHC_code_format.xml</configFile>
-					<includes>
-						<include>org/ehealth_connector/**</include>
-					</includes>
-					<excludes>
-						<exclude>**/*Test.java</exclude>
-					</excludes>
-				</configuration>
-
-				<dependencies>
-					<dependency>
-						<artifactId>ehealth_connector-codeformat</artifactId>
-						<groupId>org.ehealth_connector</groupId>
-						<version>1.7-SNAPSHOT</version>
-					</dependency>
-				</dependencies>
-			</plugin>
-			 -->
 		</plugins>
 
-	</build>
+	</reporting>
 </project>
