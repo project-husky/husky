@@ -32,7 +32,7 @@ public class CdachHeaderOrderReference extends org.ehealth_connector.common.hl7c
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
+	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */

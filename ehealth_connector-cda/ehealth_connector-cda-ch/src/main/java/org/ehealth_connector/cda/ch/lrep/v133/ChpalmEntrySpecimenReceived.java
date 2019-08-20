@@ -27,9 +27,14 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class ChpalmEntrySpecimenReceived extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
 
 	public ChpalmEntrySpecimenReceived() {
+		super.setClassCode(org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
+		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue("EVN"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.3"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.12"));
-		codeFixedValue = createHl7CodeFixedValue("SPRECEIVE", "1.3.5.1.4.1.19376.1.5.3.2", "IHEActCode", "Receive Time");
+		super.getId().add(createHl7IdFixedValue("ASKU"));
+		super.setCode(createHl7CodeFixedValue("SPRECEIVE", "1.3.5.1.4.1.19376.1.5.3.2", "IHEActCode", "Receive Time"));
+	// chpalm_entry_SpecimenReceived/hl7:act:cs classCode = "ACT";
+	// chpalm_entry_SpecimenReceived/hl7:act:cs moodCode = "EVN";
 	// chpalm_entry_SpecimenReceived/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.3";
 	// chpalm_entry_SpecimenReceived/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.12";
 	// chpalm_entry_SpecimenReceived/hl7:id:cs nullFlavor = "ASKU";
@@ -40,10 +45,20 @@ public class ChpalmEntrySpecimenReceived extends org.ehealth_connector.common.hl
 	}
 
 	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.CD codeFixedValue;
+	private String myClassCode;
+
+	@XmlTransient()
+	private String myMoodCode;
 
 	/**
-	 * Creates fixed contents for hl7Code
+	 * Creates fixed contents for CDA Attribute classCode
+	 */
+	private void createClassCodeFixedValue(String value) {
+		this.myClassCode = value;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7Code
 	 *
 	 * @param code the desired fixed value for this argument.
 	 * @param codeSystem the desired fixed value for this argument.
@@ -61,7 +76,7 @@ public class ChpalmEntrySpecimenReceived extends org.ehealth_connector.common.hl
 	}
 
 	/**
-	 * Creates fixed contents for hl7Id
+	 * Creates fixed contents for CDA Element hl7Id
 	 *
 	 * @param nullFlavor the desired fixed value for this argument.
 	 */
@@ -74,7 +89,7 @@ public class ChpalmEntrySpecimenReceived extends org.ehealth_connector.common.hl
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
+	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
@@ -86,10 +101,10 @@ public class ChpalmEntrySpecimenReceived extends org.ehealth_connector.common.hl
 	}
 
 	/**
-	 * Gets the member codeFixedValue
+	 * Creates fixed contents for CDA Attribute moodCode
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CD getCodeFixedValue() {
-		return codeFixedValue;
+	private void createMoodCodeFixedValue(String value) {
+		this.myMoodCode = value;
 	}
 
 	/**
@@ -136,6 +151,20 @@ public class ChpalmEntrySpecimenReceived extends org.ehealth_connector.common.hl
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ED getHl7Text() {
 		return text;
+	}
+
+	/**
+	 * Gets the member myClassCode
+	 */
+	public String getPredefinedClassCode() {
+		return myClassCode;
+	}
+
+	/**
+	 * Gets the member myMoodCode
+	 */
+	public String getPredefinedMoodCode() {
+		return myMoodCode;
 	}
 
 	/**

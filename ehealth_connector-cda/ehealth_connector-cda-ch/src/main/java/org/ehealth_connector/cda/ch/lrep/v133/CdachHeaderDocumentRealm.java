@@ -16,6 +16,8 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import javax.xml.bind.annotation.XmlTransient;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.25
  * Template description: Swiss Realm (CHE) of HL7 CDA. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.
@@ -23,4 +25,26 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Element description: Swiss Realm (CHE) of HL7 CDA.
  */
 public class CdachHeaderDocumentRealm extends org.ehealth_connector.common.hl7cdar2.CS {
+
+	public CdachHeaderDocumentRealm() {
+		super.setCode("CHE");
+	// cdach_header_DocumentRealm/hl7:realmCode:cs code = "CHE";
+	}
+
+	@XmlTransient()
+	private String myCode;
+
+	/**
+	 * Creates fixed contents for CDA Attribute code
+	 */
+	private void createCodeFixedValue(String value) {
+		this.myCode = value;
+	}
+
+	/**
+	 * Gets the member myCode
+	 */
+	public String getPredefinedCode() {
+		return myCode;
+	}
 }

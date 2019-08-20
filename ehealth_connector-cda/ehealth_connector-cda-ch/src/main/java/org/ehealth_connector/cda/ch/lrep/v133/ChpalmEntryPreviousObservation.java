@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -25,13 +26,40 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class ChpalmEntryPreviousObservation extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
 	public ChpalmEntryPreviousObservation() {
+		super.getClassCode().add("OBS");
+		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.22"));
+		super.setStatusCode(createHl7StatusCodeFixedValue());
+	// chpalm_entry_PreviousObservation/hl7:observation:cs classCode = "OBS";
+	// chpalm_entry_PreviousObservation/hl7:observation:cs moodCode = "EVN";
 	// chpalm_entry_PreviousObservation/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.22";
 	// chpalm_entry_PreviousObservation/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025");
 	}
 
+	@XmlTransient()
+	private String myClassCode;
+
+	@XmlTransient()
+	private String myMoodCode;
+
 	/**
-	 * Creates fixed contents for hl7TemplateId
+	 * Creates fixed contents for CDA Attribute classCode
+	 */
+	private void createClassCodeFixedValue(String value) {
+		this.myClassCode = value;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7StatusCode
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
@@ -40,6 +68,13 @@ public class ChpalmEntryPreviousObservation extends org.ehealth_connector.common
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Attribute moodCode
+	 */
+	private void createMoodCodeFixedValue(String value) {
+		this.myMoodCode = value;
 	}
 
 	/**
@@ -87,6 +122,20 @@ public class ChpalmEntryPreviousObservation extends org.ehealth_connector.common
 			if (getValue().size() > 0)
 				retVal = (org.ehealth_connector.common.hl7cdar2.ANY) getValue().get(0);
 		return retVal;
+	}
+
+	/**
+	 * Gets the member myClassCode
+	 */
+	public String getPredefinedClassCode() {
+		return myClassCode;
+	}
+
+	/**
+	 * Gets the member myMoodCode
+	 */
+	public String getPredefinedMoodCode() {
+		return myMoodCode;
 	}
 
 	/**

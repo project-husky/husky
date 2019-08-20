@@ -28,7 +28,7 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class ChpalmEntrySpecimenType {
 
 	public ChpalmEntrySpecimenType() {
-		codeFixedValue = createHl7CodeFixedValue("LOINC", "2.16.756.5.30.2.1.1.10", "CDA-CH Material");
+		this.code = createHl7CodeFixedValue("LOINC", "2.16.756.5.30.2.1.1.10", "CDA-CH Material");
 	// chpalm_entry_SpecimenType/hl7:code:cs code = "LOINC";
 	// chpalm_entry_SpecimenType/hl7:code:oid codeSystem = "2.16.756.5.30.2.1.1.10";
 	// chpalm_entry_SpecimenType/hl7:code:st codeSystemName = "CDA-CH Material";
@@ -40,11 +40,8 @@ public class ChpalmEntrySpecimenType {
 	@XmlTransient()
 	private org.ehealth_connector.common.hl7cdar2.CE code;
 
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.CE codeFixedValue;
-
 	/**
-	 * Creates fixed contents for hl7Code
+	 * Creates fixed contents for CDA Element hl7Code
 	 *
 	 * @param code the desired fixed value for this argument.
 	 * @param codeSystem the desired fixed value for this argument.
@@ -57,13 +54,6 @@ public class ChpalmEntrySpecimenType {
 		retVal.setCodeSystem(codeSystem);
 		retVal.setCodeSystemName(codeSystemName);
 		return retVal;
-	}
-
-	/**
-	 * Gets the member codeFixedValue
-	 */
-	public org.ehealth_connector.common.hl7cdar2.CE getCodeFixedValue() {
-		return codeFixedValue;
 	}
 
 	/**

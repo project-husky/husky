@@ -29,7 +29,7 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganization {
 
 	public CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganization() {
-		codeFixedValue = createHl7CodeFixedValue("2.16.840.1.113883.6.96", "SNOMED CT");
+		this.code = createHl7CodeFixedValue("2.16.840.1.113883.6.96", "SNOMED CT");
 	// cdach_other_AssignedEntityCompilationIdNameAddrTelecomPersonOrganization/hl7:code:cs valueSet = valueSet("2.16.756.5.30.1.127.3.10.1.1.3");
 	// cdach_other_AssignedEntityCompilationIdNameAddrTelecomPersonOrganization/hl7:code:oid codeSystem = "2.16.840.1.113883.6.96";
 	// cdach_other_AssignedEntityCompilationIdNameAddrTelecomPersonOrganization/hl7:code:st codeSystemName = "SNOMED CT";
@@ -52,9 +52,6 @@ public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganizat
 	 */
 	@XmlTransient()
 	private org.ehealth_connector.common.hl7cdar2.CE code;
-
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.CE codeFixedValue;
 
 	/**
 	 * The assigned entity's id (including the assigned person's id).
@@ -123,7 +120,7 @@ public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganizat
 	}
 
 	/**
-	 * Creates fixed contents for hl7Code
+	 * Creates fixed contents for CDA Element hl7Code
 	 *
 	 * @param codeSystem the desired fixed value for this argument.
 	 * @param codeSystemName the desired fixed value for this argument.
@@ -134,13 +131,6 @@ public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganizat
 		retVal.setCodeSystem(codeSystem);
 		retVal.setCodeSystemName(codeSystemName);
 		return retVal;
-	}
-
-	/**
-	 * Gets the member codeFixedValue
-	 */
-	public org.ehealth_connector.common.hl7cdar2.CE getCodeFixedValue() {
-		return codeFixedValue;
 	}
 
 	/**

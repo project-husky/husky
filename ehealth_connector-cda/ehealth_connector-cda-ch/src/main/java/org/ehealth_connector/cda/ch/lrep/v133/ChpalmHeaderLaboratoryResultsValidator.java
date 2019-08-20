@@ -33,6 +33,7 @@ public class ChpalmHeaderLaboratoryResultsValidator extends org.ehealth_connecto
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.88"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.6"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.1.5"));
+		super.setSignatureCode(createHl7SignatureCodeFixedValue("S"));
 	// chpalm_header_LaboratoryResultsValidator/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.88";
 	// chpalm_header_LaboratoryResultsValidator/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.6";
 	// chpalm_header_LaboratoryResultsValidator/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.3.1.5";
@@ -41,7 +42,7 @@ public class ChpalmHeaderLaboratoryResultsValidator extends org.ehealth_connecto
 	}
 
 	/**
-	 * Creates fixed contents for hl7SignatureCode
+	 * Creates fixed contents for CDA Element hl7SignatureCode
 	 *
 	 * @param code the desired fixed value for this argument.
 	 */
@@ -53,7 +54,7 @@ public class ChpalmHeaderLaboratoryResultsValidator extends org.ehealth_connecto
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
+	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */

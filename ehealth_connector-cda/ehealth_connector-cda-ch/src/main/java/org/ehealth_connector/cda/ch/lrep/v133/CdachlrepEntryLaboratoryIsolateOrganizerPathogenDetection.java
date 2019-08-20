@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -27,9 +28,21 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachlrepEntryLaboratoryIsolateOrganizerPathogenDetection extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
 
 	public CdachlrepEntryLaboratoryIsolateOrganizerPathogenDetection() {
+		super.setClassCode(org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryOrganizer.fromValue("CLUSTER"));
+		super.getMoodCode().add("EVN");
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.85"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.17"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.5"));
+		super.setStatusCode(createHl7StatusCodeFixedValue("completed"));
+		super.getSpecimen().add(createHl7SpecimenFixedValue("SPC"));
+		super.getComponent().add(createHl7ComponentFixedValue("COMP"));
+		super.getComponent().add(createHl7ComponentFixedValue("COMP"));
+		super.getComponent().add(createHl7ComponentFixedValue("COMP"));
+		super.getComponent().add(createHl7ComponentFixedValue("COMP"));
+		super.getComponent().add(createHl7ComponentFixedValue("COMP"));
+		super.getReference().add(createHl7ReferenceFixedValue("REFR"));
+	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:organizer:cs classCode = "CLUSTER";
+	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:organizer:cs moodCode = "EVN";
 	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.85";
 	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.17";
 	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.5";
@@ -43,6 +56,12 @@ public class CdachlrepEntryLaboratoryIsolateOrganizerPathogenDetection extends o
 	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:component:cs typeCode = "COMP";
 	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:reference:cs typeCode = "REFR";
 	}
+
+	@XmlTransient()
+	private String myClassCode;
+
+	@XmlTransient()
+	private String myMoodCode;
 
 	/**
 	 * Adds a hl7Author
@@ -131,7 +150,14 @@ public class CdachlrepEntryLaboratoryIsolateOrganizerPathogenDetection extends o
 	}
 
 	/**
-	 * Creates fixed contents for hl7Component
+	 * Creates fixed contents for CDA Attribute classCode
+	 */
+	private void createClassCodeFixedValue(String value) {
+		this.myClassCode = value;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7Component
 	 *
 	 * @param typeCode the desired fixed value for this argument.
 	 */
@@ -143,7 +169,7 @@ public class CdachlrepEntryLaboratoryIsolateOrganizerPathogenDetection extends o
 	}
 
 	/**
-	 * Creates fixed contents for hl7Reference
+	 * Creates fixed contents for CDA Element hl7Reference
 	 *
 	 * @param typeCode the desired fixed value for this argument.
 	 */
@@ -155,7 +181,7 @@ public class CdachlrepEntryLaboratoryIsolateOrganizerPathogenDetection extends o
 	}
 
 	/**
-	 * Creates fixed contents for hl7Specimen
+	 * Creates fixed contents for CDA Element hl7Specimen
 	 *
 	 * @param typeCode the desired fixed value for this argument.
 	 */
@@ -167,7 +193,7 @@ public class CdachlrepEntryLaboratoryIsolateOrganizerPathogenDetection extends o
 	}
 
 	/**
-	 * Creates fixed contents for hl7StatusCode
+	 * Creates fixed contents for CDA Element hl7StatusCode
 	 *
 	 * @param code the desired fixed value for this argument.
 	 */
@@ -179,7 +205,7 @@ public class CdachlrepEntryLaboratoryIsolateOrganizerPathogenDetection extends o
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
+	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
@@ -188,6 +214,13 @@ public class CdachlrepEntryLaboratoryIsolateOrganizerPathogenDetection extends o
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Attribute moodCode
+	 */
+	private void createMoodCodeFixedValue(String value) {
+		this.myMoodCode = value;
 	}
 
 	/**
@@ -254,6 +287,20 @@ public class CdachlrepEntryLaboratoryIsolateOrganizerPathogenDetection extends o
 			if (getTemplateId().size() > 0)
 				retVal = getTemplateId().get(0);
 		return retVal;
+	}
+
+	/**
+	 * Gets the member myClassCode
+	 */
+	public String getPredefinedClassCode() {
+		return myClassCode;
+	}
+
+	/**
+	 * Gets the member myMoodCode
+	 */
+	public String getPredefinedMoodCode() {
+		return myMoodCode;
 	}
 
 	/**

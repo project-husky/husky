@@ -30,6 +30,7 @@ public class CdachlrepHeaderAuthor extends org.ehealth_connector.common.hl7cdar2
 	public CdachlrepHeaderAuthor() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.59"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.9.23"));
+		super.setFunctionCode(createHl7FunctionCodeFixedValue("NAV", "2.16.840.1.113883.6.96", "SNOMED CT"));
 	// cdachlrep_header_Author/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.59";
 	// cdachlrep_header_Author/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.9.23";
 	// cdachlrep_header_Author/hl7:functionCode:cs valueSet = valueSet("2.16.756.5.30.1.127.3.10.1.1.3");
@@ -39,7 +40,7 @@ public class CdachlrepHeaderAuthor extends org.ehealth_connector.common.hl7cdar2
 	}
 
 	/**
-	 * Creates fixed contents for hl7FunctionCode
+	 * Creates fixed contents for CDA Element hl7FunctionCode
 	 *
 	 * @param nullFlavor the desired fixed value for this argument.
 	 * @param codeSystem the desired fixed value for this argument.
@@ -56,7 +57,7 @@ public class CdachlrepHeaderAuthor extends org.ehealth_connector.common.hl7cdar2
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
+	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */

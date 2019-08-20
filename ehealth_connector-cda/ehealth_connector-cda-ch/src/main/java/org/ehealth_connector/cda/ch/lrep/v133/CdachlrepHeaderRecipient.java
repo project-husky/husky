@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -30,13 +31,18 @@ public class CdachlrepHeaderRecipient extends org.ehealth_connector.common.hl7cd
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.4"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.57"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.1.4"));
+	// cdachlrep_header_Recipient/hl7:informationRecipient:cs typeCode = valueSet("2.16.840.1.113883.1.11.19366");
+	// cdachlrep_header_Recipient/hl7:informationRecipient:cs typeCode = valueSet("2.16.840.1.113883.1.11.19366");
 	// cdachlrep_header_Recipient/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.4";
 	// cdachlrep_header_Recipient/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.57";
 	// cdachlrep_header_Recipient/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.3.1.4";
 	}
 
+	@XmlTransient()
+	private org.ehealth_connector.cda.ch.lrep.v133.enums.XInformationRecipient myTypeCode;
+
 	/**
-	 * Creates fixed contents for hl7TemplateId
+	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
@@ -45,6 +51,13 @@ public class CdachlrepHeaderRecipient extends org.ehealth_connector.common.hl7cd
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Attribute typeCode
+	 */
+	private void createTypeCodeFixedValue(org.ehealth_connector.cda.ch.lrep.v133.enums.XInformationRecipient value) {
+		this.myTypeCode = value;
 	}
 
 	/**
@@ -64,6 +77,13 @@ public class CdachlrepHeaderRecipient extends org.ehealth_connector.common.hl7cd
 			if (getTemplateId().size() > 0)
 				retVal = getTemplateId().get(0);
 		return retVal;
+	}
+
+	/**
+	 * Gets the member myTypeCode
+	 */
+	public org.ehealth_connector.cda.ch.lrep.v133.enums.XInformationRecipient getPredefinedTypeCode() {
+		return myTypeCode;
 	}
 
 	/**

@@ -46,24 +46,34 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	public CdaChLrepGrV1() {
 		super.setTypeId(createHl7TypeIdFixedValue("2.16.840.1.113883.1.3", "POCD_HD000040"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.1.10"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.4"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.2"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.1"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.3.9.1"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.127.1.4"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3"));
-		realmCodeFixedValue = createHl7RealmCodeFixedValue("CHE");
-		codeFixedValue = createHl7CodeFixedValue("2.16.840.1.113883.6.1", "LOINC");
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.4"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.2"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.1"));
 	// CDA-CH-LREP-GR-V1/hl7:typeId:uid root = "2.16.840.1.113883.1.3";
 	// CDA-CH-LREP-GR-V1/hl7:typeId:st extension = "POCD_HD000040";
 	// CDA-CH-LREP-GR-V1/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.1.10";
 	}
 
 	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.CE codeFixedValue;
+	private String myCode;
 
 	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.CS realmCodeFixedValue;
+	private String myCodeSystem;
+
+	@XmlTransient()
+	private String myCodeSystemName;
+
+	@XmlTransient()
+	private org.ehealth_connector.cda.ch.lrep.v133.enums.XdsTypeCo myDisplayName;
+
+	@XmlTransient()
+	private org.ehealth_connector.cda.ch.lrep.v133.enums.XInformationRecipient myTypeCode;
+
+	@XmlTransient()
+	private org.ehealth_connector.cda.ch.lrep.v133.enums.HumanLanguage myValueSet;
 
 	/**
 	 * Adds a hl7Authenticator
@@ -83,6 +93,7 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 
 	/**
 	 * Adds a hl7DocumentationOf
+	 * Information about a health service describing the context of this CDA document.
 	 */
 	public void addHl7DocumentationOf(org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf value) {
 		getDocumentationOf().add(value);
@@ -106,7 +117,7 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 
 	/**
 	 * Adds a hl7Participant
-	 * Information on a patient's insurance card.
+	 * Information on a patient's insurance.
 	 */
 	public void addHl7Participant(org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 value) {
 		getParticipant().add(value);
@@ -149,6 +160,7 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 
 	/**
 	 * Adds a hl7DocumentationOf
+	 * Information about a health service describing the context of this CDA document.
 	 */
 	public void clearHl7DocumentationOf() {
 		getDocumentationOf().clear();
@@ -172,7 +184,7 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 
 	/**
 	 * Adds a hl7Participant
-	 * Information on a patient's insurance card.
+	 * Information on a patient's insurance.
 	 */
 	public void clearHl7Participant() {
 		getParticipant().clear();
@@ -198,83 +210,35 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	}
 
 	/**
-	 * Creates fixed contents for hl7Code
-	 *
-	 * @param codeSystem the desired fixed value for this argument.
-	 * @param codeSystemName the desired fixed value for this argument.
+	 * Creates fixed contents for CDA Attribute code
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String codeSystem, String codeSystemName) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
-		retVal.setCodeSystem(codeSystem);
-		retVal.setCodeSystemName(codeSystemName);
-		return retVal;
+	private void createCodeFixedValue(String value) {
+		this.myCode = value;
 	}
 
 	/**
-	 * Creates fixed contents for hl7ConfidentialityCode
-	 *
-	 * @param codeSystem the desired fixed value for this argument.
-	 * @param codeSystemName the desired fixed value for this argument.
+	 * Creates fixed contents for CDA Attribute codeSystem
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CE createHl7ConfidentialityCodeFixedValue(String codeSystem, String codeSystemName) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
-		retVal.setCodeSystem(codeSystem);
-		retVal.setCodeSystemName(codeSystemName);
-		return retVal;
+	private void createCodeSystemFixedValue(String value) {
+		this.myCodeSystem = value;
 	}
 
 	/**
-	 * Creates fixed contents for hl7DocumentationOf
-	 *
-	 * @param typeCode the desired fixed value for this argument.
+	 * Creates fixed contents for CDA Attribute codeSystemName
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf createHl7DocumentationOfFixedValue(String typeCode) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf retVal = factory.createPOCDMT000040DocumentationOf();
-		retVal.getTypeCode().add(typeCode);
-		return retVal;
+	private void createCodeSystemNameFixedValue(String value) {
+		this.myCodeSystemName = value;
 	}
 
 	/**
-	 * Creates fixed contents for hl7Participant
-	 *
-	 * @param typeCode the desired fixed value for this argument.
+	 * Creates fixed contents for CDA Attribute displayName
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 createHl7ParticipantFixedValue(String typeCode) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 retVal = factory.createPOCDMT000040Participant1();
-		retVal.getTypeCode().add(typeCode);
-		return retVal;
+	private void createDisplayNameFixedValue(org.ehealth_connector.cda.ch.lrep.v133.enums.XdsTypeCo value) {
+		this.myDisplayName = value;
 	}
 
 	/**
-	 * Creates fixed contents for hl7RealmCode
-	 *
-	 * @param code the desired fixed value for this argument.
-	 */
-	public org.ehealth_connector.common.hl7cdar2.CS createHl7RealmCodeFixedValue(String code) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
-		retVal.setCode(code);
-		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for hl7RelatedDocument
-	 *
-	 * @param typeCode the desired fixed value for this argument.
-	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedDocument createHl7RelatedDocumentFixedValue(String typeCode) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedDocument retVal = factory.createPOCDMT000040RelatedDocument();
-		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipDocument.fromValue(typeCode));
-		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for hl7TemplateId
+	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
@@ -286,7 +250,7 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	}
 
 	/**
-	 * Creates fixed contents for hl7TypeId
+	 * Creates fixed contents for CDA Element hl7TypeId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 * @param extension the desired fixed value for this argument.
@@ -300,10 +264,17 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	}
 
 	/**
-	 * Gets the member codeFixedValue
+	 * Creates fixed contents for CDA Attribute typeCode
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CE getCodeFixedValue() {
-		return codeFixedValue;
+	private void createTypeCodeFixedValue(org.ehealth_connector.cda.ch.lrep.v133.enums.XInformationRecipient value) {
+		this.myTypeCode = value;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Attribute valueSet
+	 */
+	private void createValueSetFixedValue(org.ehealth_connector.cda.ch.lrep.v133.enums.HumanLanguage value) {
+		this.myValueSet = value;
 	}
 
 	/**
@@ -438,10 +409,45 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	}
 
 	/**
-	 * Gets the member realmCodeFixedValue
+	 * Gets the member myCode
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CS getRealmCodeFixedValue() {
-		return realmCodeFixedValue;
+	public String getPredefinedCode() {
+		return myCode;
+	}
+
+	/**
+	 * Gets the member myCodeSystem
+	 */
+	public String getPredefinedCodeSystem() {
+		return myCodeSystem;
+	}
+
+	/**
+	 * Gets the member myCodeSystemName
+	 */
+	public String getPredefinedCodeSystemName() {
+		return myCodeSystemName;
+	}
+
+	/**
+	 * Gets the member myDisplayName
+	 */
+	public org.ehealth_connector.cda.ch.lrep.v133.enums.XdsTypeCo getPredefinedDisplayName() {
+		return myDisplayName;
+	}
+
+	/**
+	 * Gets the member myTypeCode
+	 */
+	public org.ehealth_connector.cda.ch.lrep.v133.enums.XInformationRecipient getPredefinedTypeCode() {
+		return myTypeCode;
+	}
+
+	/**
+	 * Gets the member myValueSet
+	 */
+	public org.ehealth_connector.cda.ch.lrep.v133.enums.HumanLanguage getPredefinedValueSet() {
+		return myValueSet;
 	}
 
 	/**

@@ -16,7 +16,6 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -33,17 +32,15 @@ public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connect
 
 	public CdachSectionOriginalRepresentationCoded() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.45"));
-		codeFixedValue = createHl7CodeFixedValue("55108-5");
+		super.setCode(createHl7CodeFixedValue("55108-5"));
+		super.getEntry().add(createHl7EntryFixedValue("DRIV"));
 	// cdach_section_OriginalRepresentationCoded/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.3.45";
 	// cdach_section_OriginalRepresentationCoded/hl7:code:cs code = "55108-5";
 	// cdach_section_OriginalRepresentationCoded/hl7:entry:st typeCode = "DRIV";
 	}
 
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.CE codeFixedValue;
-
 	/**
-	 * Creates fixed contents for hl7Code
+	 * Creates fixed contents for CDA Element hl7Code
 	 *
 	 * @param code the desired fixed value for this argument.
 	 */
@@ -55,7 +52,7 @@ public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connect
 	}
 
 	/**
-	 * Creates fixed contents for hl7Entry
+	 * Creates fixed contents for CDA Element hl7Entry
 	 *
 	 * @param typeCode the desired fixed value for this argument.
 	 */
@@ -67,7 +64,7 @@ public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connect
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
+	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
@@ -76,13 +73,6 @@ public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connect
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
-	}
-
-	/**
-	 * Gets the member codeFixedValue
-	 */
-	public org.ehealth_connector.common.hl7cdar2.CE getCodeFixedValue() {
-		return codeFixedValue;
 	}
 
 	/**
@@ -134,7 +124,7 @@ public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connect
 	 * Gets the hl7Title
 	 * Fixed human readable title of this section.
 	 * - [ge]: 'Original Darstellung'
-	 * - [fr]: 'Représentation originale'
+	 * - [fr]: 'ReprÃ©sentation originale'
 	 * - [it]: 'Rappresentazione originale'
 	 * - [en]: 'Original representation'
 	 */
@@ -185,7 +175,7 @@ public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connect
 	 * Sets the hl7Title
 	 * Fixed human readable title of this section.
 	 * - [ge]: 'Original Darstellung'
-	 * - [fr]: 'Représentation originale'
+	 * - [fr]: 'ReprÃ©sentation originale'
 	 * - [it]: 'Rappresentazione originale'
 	 * - [en]: 'Original representation'
 	 */

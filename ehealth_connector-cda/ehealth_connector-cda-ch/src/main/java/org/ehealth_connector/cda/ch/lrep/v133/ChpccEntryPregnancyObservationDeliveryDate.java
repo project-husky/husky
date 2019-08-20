@@ -29,11 +29,16 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
 	public ChpccEntryPregnancyObservationDeliveryDate() {
+		super.getClassCode().add("OBS");
+		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.102"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.92"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13.5"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13"));
-		codeFixedValue = createHl7CodeFixedValue("11778-8", "2.16.840.1.113883.6.1", "LOINC", "DELIVERY DATE (CLINICAL ESTIMATE)");
+		super.setCode(createHl7CodeFixedValue("11778-8", "2.16.840.1.113883.6.1", "LOINC", "DELIVERY DATE (CLINICAL ESTIMATE)"));
+		super.setStatusCode(createHl7StatusCodeFixedValue());
+	// chpcc_entry_PregnancyObservationDeliveryDate/hl7:observation:cs classCode = "OBS";
+	// chpcc_entry_PregnancyObservationDeliveryDate/hl7:observation:cs moodCode = "EVN";
 	// chpcc_entry_PregnancyObservationDeliveryDate/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.102";
 	// chpcc_entry_PregnancyObservationDeliveryDate/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.92";
 	// chpcc_entry_PregnancyObservationDeliveryDate/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.4.13.5";
@@ -46,7 +51,10 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 	}
 
 	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.CD codeFixedValue;
+	private String myClassCode;
+
+	@XmlTransient()
+	private String myMoodCode;
 
 	/**
 	 * Adds a hl7Author
@@ -65,7 +73,14 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 	}
 
 	/**
-	 * Creates fixed contents for hl7Code
+	 * Creates fixed contents for CDA Attribute classCode
+	 */
+	private void createClassCodeFixedValue(String value) {
+		this.myClassCode = value;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7Code
 	 *
 	 * @param code the desired fixed value for this argument.
 	 * @param codeSystem the desired fixed value for this argument.
@@ -83,7 +98,16 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
+	 * Creates fixed contents for CDA Element hl7StatusCode
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
@@ -95,10 +119,10 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 	}
 
 	/**
-	 * Gets the member codeFixedValue
+	 * Creates fixed contents for CDA Attribute moodCode
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CD getCodeFixedValue() {
-		return codeFixedValue;
+	private void createMoodCodeFixedValue(String value) {
+		this.myMoodCode = value;
 	}
 
 	/**
@@ -165,6 +189,20 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 			if (getValue().size() > 0)
 				retVal = (org.ehealth_connector.common.hl7cdar2.TS) getValue().get(0);
 		return retVal;
+	}
+
+	/**
+	 * Gets the member myClassCode
+	 */
+	public String getPredefinedClassCode() {
+		return myClassCode;
+	}
+
+	/**
+	 * Gets the member myMoodCode
+	 */
+	public String getPredefinedMoodCode() {
+		return myMoodCode;
 	}
 
 	/**

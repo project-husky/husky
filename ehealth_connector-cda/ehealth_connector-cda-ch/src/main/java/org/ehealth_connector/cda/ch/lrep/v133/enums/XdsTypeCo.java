@@ -27,9 +27,9 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Type of document as per Annex 3  EPRO-FDHA.<br clear="none"/>      <br clear="none"/>The code defines a document’s type (e.g. discharge report, laboratory report). Each document type should be assigned to precisely one document class.<br clear="none"/>    </div>
- * <div class="de">Typ des Dokumentes (2.16.756.5.30.1.127.3.10.1.27) gemäss Anhang 3 der Verordnungen zum EPDG.<br clear="none"/>      <br clear="none"/>Der Code definiert den Typ eines Dokuments (z.B.  Austrittsbericht, Labor-Bericht). Jeder Dokumenten-Typ sollte genau einer Dokumentenklasse zugeordnet sein.<br clear="none"/>    </div>
- * <div class="fr">Type du document selon l'annexe 3 ODEP-DFI.<br clear="none"/>      <br clear="none"/>Le code définit le type de document (p. ex. rapport de sortie, rapport de laboratoire). Chaque type de document doit être  associé à une seule classification.<br clear="none"/>    </div>
+ * <div class="en">Type of document as per Annex 3  EPRO-FDHA.<br clear="none"/>      <br clear="none"/>The code defines a document�s type (e.g. discharge report, laboratory report). Each document type should be assigned to precisely one document class.<br clear="none"/>    </div>
+ * <div class="de">Typ des Dokumentes (2.16.756.5.30.1.127.3.10.1.27) gem�ss Anhang 3 der Verordnungen zum EPDG.<br clear="none"/>      <br clear="none"/>Der Code definiert den Typ eines Dokuments (z.B.  Austrittsbericht, Labor-Bericht). Jeder Dokumenten-Typ sollte genau einer Dokumentenklasse zugeordnet sein.<br clear="none"/>    </div>
+ * <div class="fr">Type du document selon l'annexe 3 ODEP-DFI.<br clear="none"/>      <br clear="none"/>Le code d�finit le type de document (p. ex. rapport de sortie, rapport de laboratoire). Chaque type de document doit �tre  associ� � une seule classification.<br clear="none"/>    </div>
  * <div class="it">Tipo di documento secondo l'allegato 3 OCIP-DFI.<br clear="none"/>      <br clear="none"/>Il codice definisce il tipo di documento (p. es. rapporto di dimissione, rapporto di laboratorio). Ciascun tipo di documento dovrebbe essere associato a una sola classe di documenti.<br clear="none"/>    </div>
  * <!-- @formatter:on -->
  */
@@ -94,11 +94,11 @@ public enum XdsTypeCo implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Image reference</div>
 	 * <div class="de">Referenz auf Bilddaten</div>
-	 * <div class="fr">Référence d'Image</div>
+	 * <div class="fr">R�f�rence d'Image</div>
 	 * <div class="it">Referenza nei dati immagine</div>
 	 * <!-- @formatter:on -->
 	 */
-	IMAGE_REFERENCE("900000000000471006", "2.16.840.1.113883.6.96", "Image reference (foundation metadata concept)", "Image reference", "Referenz auf Bilddaten", "Référence d'Image", "Referenza nei dati immagine"),
+	IMAGE_REFERENCE("900000000000471006", "2.16.840.1.113883.6.96", "Image reference (foundation metadata concept)", "Image reference", "Referenz auf Bilddaten", "R�f�rence d'Image", "Referenza nei dati immagine"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Imaging Order</div>
@@ -139,11 +139,11 @@ public enum XdsTypeCo implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Laboratory report</div>
 	 * <div class="de">Labor-Befund</div>
-	 * <div class="fr">Résultat de laboratoire</div>
+	 * <div class="fr">R�sultat de laboratoire</div>
 	 * <div class="it">Referto di laboratorio</div>
 	 * <!-- @formatter:on -->
 	 */
-	LABORATORY_REPORT("4241000179101", "2.16.840.1.113883.6.96", "Laboratory report (record artifact)", "Laboratory report", "Labor-Befund", "Résultat de laboratoire", "Referto di laboratorio"),
+	LABORATORY_REPORT("4241000179101", "2.16.840.1.113883.6.96", "Laboratory report (record artifact)", "Laboratory report", "Labor-Befund", "R�sultat de laboratoire", "Referto di laboratorio"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Medical certificate</div>
@@ -175,11 +175,11 @@ public enum XdsTypeCo implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Non-drug prescription</div>
 	 * <div class="de">Nicht-Arzneimittelbezogene Verordnung</div>
-	 * <div class="fr">Ordonnance nonmédicamenteuse</div>
+	 * <div class="fr">Ordonnance nonm�dicamenteuse</div>
 	 * <div class="it">Richiesta di prestazione sanitaria</div>
 	 * <!-- @formatter:on -->
 	 */
-	NON_DRUG_PRESCRIPTION("765492005", "2.16.840.1.113883.6.96", "Non-drug prescription record (record artifact)", "Non-drug prescription", "Nicht-Arzneimittelbezogene Verordnung", "Ordonnance nonmédicamenteuse", "Richiesta di prestazione sanitaria"),
+	NON_DRUG_PRESCRIPTION("765492005", "2.16.840.1.113883.6.96", "Non-drug prescription record (record artifact)", "Non-drug prescription", "Nicht-Arzneimittelbezogene Verordnung", "Ordonnance nonm�dicamenteuse", "Richiesta di prestazione sanitaria"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Nursing care plan</div>
@@ -193,11 +193,11 @@ public enum XdsTypeCo implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Operative report</div>
 	 * <div class="de">OP-Bericht</div>
-	 * <div class="fr">Protocole opératoire</div>
+	 * <div class="fr">Protocole op�ratoire</div>
 	 * <div class="it">Referto operatorio</div>
 	 * <!-- @formatter:on -->
 	 */
-	OPERATIVE_REPORT("371526002", "2.16.840.1.113883.6.96", "Operative report (record artifact)", "Operative report", "OP-Bericht", "Protocole opératoire", "Referto operatorio"),
+	OPERATIVE_REPORT("371526002", "2.16.840.1.113883.6.96", "Operative report (record artifact)", "Operative report", "OP-Bericht", "Protocole op�ratoire", "Referto operatorio"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Pathology order</div>
@@ -326,7 +326,7 @@ public enum XdsTypeCo implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Image reference</div>
 	 * <div class="de">Code für Referenz auf Bilddaten</div>
-	 * <div class="fr">Code de Référence d'Image</div>
+	 * <div class="fr">Code de R�f�rence d'Image</div>
 	 * <div class="it">Code per Referenza nei dati immagine</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -376,7 +376,7 @@ public enum XdsTypeCo implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Laboratory report</div>
 	 * <div class="de">Code für Labor-Befund</div>
-	 * <div class="fr">Code de Résultat de laboratoire</div>
+	 * <div class="fr">Code de R�sultat de laboratoire</div>
 	 * <div class="it">Code per Referto di laboratorio</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -416,7 +416,7 @@ public enum XdsTypeCo implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Non-drug prescription</div>
 	 * <div class="de">Code für Nicht-Arzneimittelbezogene Verordnung</div>
-	 * <div class="fr">Code de Ordonnance nonmédicamenteuse</div>
+	 * <div class="fr">Code de Ordonnance nonm�dicamenteuse</div>
 	 * <div class="it">Code per Richiesta di prestazione sanitaria</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -436,7 +436,7 @@ public enum XdsTypeCo implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Operative report</div>
 	 * <div class="de">Code für OP-Bericht</div>
-	 * <div class="fr">Code de Protocole opératoire</div>
+	 * <div class="fr">Code de Protocole op�ratoire</div>
 	 * <div class="it">Code per Referto operatorio</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -515,7 +515,7 @@ public enum XdsTypeCo implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
+	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.27";
@@ -550,7 +550,7 @@ public enum XdsTypeCo implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
+	 * <div class="de">PrÃ¼ft, ob der angegebene enum Teil dieses Value Sets ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param enumName
@@ -572,7 +572,7 @@ public enum XdsTypeCo implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
+	 * <div class="de">PrÃ¼ft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param codeValue
@@ -688,8 +688,8 @@ public enum XdsTypeCo implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Gets the display name defined by the language param. If
 	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
-	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
+	 * <div class="de">Liefert display name gemÃ¤ss Parameter, falls es keine
+	 * Englische Ãœbersetzung gibt, wird der default-Name zurÃ¼ckgegeben.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param languageCode

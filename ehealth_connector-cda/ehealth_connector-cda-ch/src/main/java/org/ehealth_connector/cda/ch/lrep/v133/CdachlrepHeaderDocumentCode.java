@@ -32,7 +32,14 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl7cdar2.CE {
 
 	public CdachlrepHeaderDocumentCode() {
-		translationFixedValue = createHl7TranslationFixedValue("4241000179101", "2.16.840.1.113883.6.96", "SNOMED CT", "Laboratory report");
+		super.setCodeSystem("2.16.840.1.113883.6.1");
+		super.setCodeSystemName("LOINC");
+		super.getTranslation().add(createHl7TranslationFixedValue("4241000179101", "2.16.840.1.113883.6.96", "SNOMED CT", "Laboratory report"));
+	// cdachlrep_header_DocumentCode/hl7:code:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.1");
+	// cdachlrep_header_DocumentCode/hl7:code:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.1");
+	// cdachlrep_header_DocumentCode/hl7:code:oid codeSystem = "2.16.840.1.113883.6.1";
+	// cdachlrep_header_DocumentCode/hl7:code:st codeSystemName = "LOINC";
+	// cdachlrep_header_DocumentCode/hl7:code:st displayName = valueSet("2.16.756.5.30.1.127.3.10.1.27");
 	// cdachlrep_header_DocumentCode/hl7:translation:st displayName = valueSet("2.16.756.5.30.1.127.3.10.1.27");
 	// cdachlrep_header_DocumentCode/hl7:translation:cs code = "4241000179101";
 	// cdachlrep_header_DocumentCode/hl7:translation:oid codeSystem = "2.16.840.1.113883.6.96";
@@ -41,10 +48,40 @@ public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl
 	}
 
 	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.CD translationFixedValue;
+	private String myCodeSystem;
+
+	@XmlTransient()
+	private String myCodeSystemName;
+
+	@XmlTransient()
+	private org.ehealth_connector.cda.ch.lrep.v133.enums.XdsTypeCo myDisplayName;
+
+	@XmlTransient()
+	private org.ehealth_connector.cda.ch.lrep.v133.enums.LaboratorySpecialties myValueSet;
 
 	/**
-	 * Creates fixed contents for hl7Translation
+	 * Creates fixed contents for CDA Attribute codeSystem
+	 */
+	private void createCodeSystemFixedValue(String value) {
+		this.myCodeSystem = value;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Attribute codeSystemName
+	 */
+	private void createCodeSystemNameFixedValue(String value) {
+		this.myCodeSystemName = value;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Attribute displayName
+	 */
+	private void createDisplayNameFixedValue(org.ehealth_connector.cda.ch.lrep.v133.enums.XdsTypeCo value) {
+		this.myDisplayName = value;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7Translation
 	 *
 	 * @param code the desired fixed value for this argument.
 	 * @param codeSystem the desired fixed value for this argument.
@@ -62,6 +99,13 @@ public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl
 	}
 
 	/**
+	 * Creates fixed contents for CDA Attribute valueSet
+	 */
+	private void createValueSetFixedValue(org.ehealth_connector.cda.ch.lrep.v133.enums.LaboratorySpecialties value) {
+		this.myValueSet = value;
+	}
+
+	/**
 	 * Gets the hl7Translation
 	 * The translation to the Swiss EPR XDS.b metadata attribute typeCode.
 	 */
@@ -74,10 +118,31 @@ public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl
 	}
 
 	/**
-	 * Gets the member translationFixedValue
+	 * Gets the member myCodeSystem
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CD getTranslationFixedValue() {
-		return translationFixedValue;
+	public String getPredefinedCodeSystem() {
+		return myCodeSystem;
+	}
+
+	/**
+	 * Gets the member myCodeSystemName
+	 */
+	public String getPredefinedCodeSystemName() {
+		return myCodeSystemName;
+	}
+
+	/**
+	 * Gets the member myDisplayName
+	 */
+	public org.ehealth_connector.cda.ch.lrep.v133.enums.XdsTypeCo getPredefinedDisplayName() {
+		return myDisplayName;
+	}
+
+	/**
+	 * Gets the member myValueSet
+	 */
+	public org.ehealth_connector.cda.ch.lrep.v133.enums.LaboratorySpecialties getPredefinedValueSet() {
+		return myValueSet;
 	}
 
 	/**

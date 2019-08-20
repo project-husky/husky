@@ -22,13 +22,16 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.34
- * Template description: Person name information (with required family and given name) according to the eCH-0011 V8.1 nameData data type. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.See https://www.ech.ch/vechweb/page?p=dossier&amp;documentNumber=eCH-0011&amp;documentVersion=8.1, section 3.3.2 nameData – Namensangaben for more information.
+ * Template description: Person name information (with required family and given name) according to the eCH-0011 V8.1 nameData data type. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.See https://www.ech.ch/vechweb/page?p=dossier&amp;documentNumber=eCH-0011&amp;documentVersion=8.1, section 3.3.2 nameData â€“ Namensangaben for more information.
  *
  * Element description: Other person's name.
  */
 public class CdachOtherPersonNameInformationCompilationECh0011 {
 
 	public CdachOtherPersonNameInformationCompilationECh0011() {
+		name.add(createHl7NameFixedValue("L"));
+		name.add(createHl7NameFixedValue("P"));
+		name.add(createHl7NameFixedValue("ASGN"));
 	// cdach_other_PersonNameInformationCompilation-eCH-0011/hl7:name:set_cs use = "L";
 	// cdach_other_PersonNameInformationCompilation-eCH-0011/hl7:name:set_cs use = "P";
 	// cdach_other_PersonNameInformationCompilation-eCH-0011/hl7:name:set_cs use = "ASGN";
@@ -41,7 +44,7 @@ public class CdachOtherPersonNameInformationCompilationECh0011 {
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.PN> name = new ArrayList<org.ehealth_connector.common.hl7cdar2.PN>();
 
 	/**
-	 * Creates fixed contents for hl7Name
+	 * Creates fixed contents for CDA Element hl7Name
 	 *
 	 * @param use the desired fixed value for this argument.
 	 */

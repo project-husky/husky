@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -30,12 +31,17 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachHeaderDocumentReplacement extends org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedDocument {
 
 	public CdachHeaderDocumentReplacement() {
+		super.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipDocument.fromValue("RPLC"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.13"));
+	// cdach_header_DocumentReplacement/hl7:relatedDocument:cs typeCode = "RPLC";
 	// cdach_header_DocumentReplacement/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.13";
 	}
 
+	@XmlTransient()
+	private String myTypeCode;
+
 	/**
-	 * Creates fixed contents for hl7TemplateId
+	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
@@ -44,6 +50,13 @@ public class CdachHeaderDocumentReplacement extends org.ehealth_connector.common
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Attribute typeCode
+	 */
+	private void createTypeCodeFixedValue(String value) {
+		this.myTypeCode = value;
 	}
 
 	/**
@@ -63,6 +76,13 @@ public class CdachHeaderDocumentReplacement extends org.ehealth_connector.common
 			if (getTemplateId().size() > 0)
 				retVal = getTemplateId().get(0);
 		return retVal;
+	}
+
+	/**
+	 * Gets the member myTypeCode
+	 */
+	public String getPredefinedTypeCode() {
+		return myTypeCode;
 	}
 
 	/**

@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.ArrayList;
+import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -26,11 +27,24 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class ChpalmEntryParticipantBodySpecimenCollection extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole {
 
 	public ChpalmEntryParticipantBodySpecimenCollection() {
+		super.getClassCode().add("SPEC");
+		super.getId().add(createHl7IdFixedValue("NA"));
+	// chpalm_entry_ParticipantBodySpecimenCollection/hl7:participantRole:cs classCode = "SPEC";
 	// chpalm_entry_ParticipantBodySpecimenCollection/hl7:id:cs nullFlavor = "NA";
 	}
 
+	@XmlTransient()
+	private String myClassCode;
+
 	/**
-	 * Creates fixed contents for hl7Id
+	 * Creates fixed contents for CDA Attribute classCode
+	 */
+	private void createClassCodeFixedValue(String value) {
+		this.myClassCode = value;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7Id
 	 *
 	 * @param nullFlavor the desired fixed value for this argument.
 	 */
@@ -59,6 +73,13 @@ public class ChpalmEntryParticipantBodySpecimenCollection extends org.ehealth_co
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040PlayingEntity getHl7PlayingEntity() {
 		return playingEntity;
+	}
+
+	/**
+	 * Gets the member myClassCode
+	 */
+	public String getPredefinedClassCode() {
+		return myClassCode;
 	}
 
 	/**

@@ -23,4 +23,7 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * Element description: A unique identifier for each CDA document instance.
  */
 public class CdachHeaderDocumentId extends org.ehealth_connector.common.hl7cdar2.II {
+
+	public CdachHeaderDocumentId() {
+	}
 }

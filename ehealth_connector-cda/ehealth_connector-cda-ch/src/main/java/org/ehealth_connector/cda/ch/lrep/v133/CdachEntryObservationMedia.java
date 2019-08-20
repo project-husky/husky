@@ -26,6 +26,8 @@ public class CdachEntryObservationMedia extends org.ehealth_connector.common.hl7
 
 	public CdachEntryObservationMedia() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.83"));
+		super.setLanguageCode(createHl7LanguageCodeFixedValue());
+		super.setValue(createHl7ValueFixedValue("B64"));
 	// cdach_entry_ObservationMedia/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.83";
 	// cdach_entry_ObservationMedia/hl7:languageCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.11526");
 	// cdach_entry_ObservationMedia/hl7:value:cs representation = "B64";
@@ -56,7 +58,16 @@ public class CdachEntryObservationMedia extends org.ehealth_connector.common.hl7
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
+	 * Creates fixed contents for CDA Element hl7LanguageCode
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CS createHl7LanguageCodeFixedValue() {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
@@ -68,15 +79,15 @@ public class CdachEntryObservationMedia extends org.ehealth_connector.common.hl7
 	}
 
 	/**
-	 * Creates fixed contents for hl7Value
+	 * Creates fixed contents for CDA Element hl7Value
 	 *
 	 * @param representation the desired fixed value for this argument.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ED createHl7ValueFixedValue(String representation) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.ED retVal = factory.createED();
-		retVal.setRepresentation(org.ehealth_connector.common.hl7cdar2.BinaryDataEncoding.fromValue(representation));
 		return retVal;
+	// TODO: Contents shall be taken from enum: org.ehealth_connector.cda.ch.lrep.v133.enums.VideoMediaType
 	}
 
 	/**

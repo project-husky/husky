@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -25,12 +26,23 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class ChpalmEntryCaseIdentification extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
 	public ChpalmEntryCaseIdentification() {
+		super.getClassCode().add("CASE");
+		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.1.2"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.15"));
+		super.setStatusCode(createHl7StatusCodeFixedValue());
+	// chpalm_entry_CaseIdentification/hl7:observation:cs classCode = "CASE";
+	// chpalm_entry_CaseIdentification/hl7:observation:cs moodCode = "EVN";
 	// chpalm_entry_CaseIdentification/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.1.2";
 	// chpalm_entry_CaseIdentification/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.15";
 	// chpalm_entry_CaseIdentification/hl7:statusCode:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.2");
 	}
+
+	@XmlTransient()
+	private String myClassCode;
+
+	@XmlTransient()
+	private String myMoodCode;
 
 	/**
 	 * Adds a hl7Id
@@ -49,7 +61,23 @@ public class ChpalmEntryCaseIdentification extends org.ehealth_connector.common.
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
+	 * Creates fixed contents for CDA Attribute classCode
+	 */
+	private void createClassCodeFixedValue(String value) {
+		this.myClassCode = value;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7StatusCode
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
@@ -58,6 +86,13 @@ public class ChpalmEntryCaseIdentification extends org.ehealth_connector.common.
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Attribute moodCode
+	 */
+	private void createMoodCodeFixedValue(String value) {
+		this.myMoodCode = value;
 	}
 
 	/**
@@ -105,6 +140,20 @@ public class ChpalmEntryCaseIdentification extends org.ehealth_connector.common.
 			if (getValue().size() > 0)
 				retVal = (org.ehealth_connector.common.hl7cdar2.CE) getValue().get(0);
 		return retVal;
+	}
+
+	/**
+	 * Gets the member myClassCode
+	 */
+	public String getPredefinedClassCode() {
+		return myClassCode;
+	}
+
+	/**
+	 * Gets the member myMoodCode
+	 */
+	public String getPredefinedMoodCode() {
+		return myMoodCode;
 	}
 
 	/**

@@ -16,7 +16,6 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -31,7 +30,9 @@ public class ChpccSectionCurrentPregnancyCoded extends org.ehealth_connector.com
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.53"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.5.3.4"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.127.77.1.10.1"));
-		codeFixedValue = createHl7CodeFixedValue("10162-6", "2.16.840.1.113883.6.1", "LOINC", "HISTORY OF PREGNANCIES");
+		super.setCode(createHl7CodeFixedValue("10162-6", "2.16.840.1.113883.6.1", "LOINC", "HISTORY OF PREGNANCIES"));
+		super.getEntry().add(createHl7EntryFixedValue("DRIV"));
+		super.getEntry().add(createHl7EntryFixedValue("DRIV"));
 	// chpcc_section_CurrentPregnancyCoded/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.3.53";
 	// chpcc_section_CurrentPregnancyCoded/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.1.5.3.4";
 	// chpcc_section_CurrentPregnancyCoded/hl7:templateId:uid root = "2.16.756.5.30.1.127.77.1.10.1";
@@ -43,11 +44,8 @@ public class ChpccSectionCurrentPregnancyCoded extends org.ehealth_connector.com
 	// chpcc_section_CurrentPregnancyCoded/hl7:entry:cs typeCode = "DRIV";
 	}
 
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.CE codeFixedValue;
-
 	/**
-	 * Creates fixed contents for hl7Code
+	 * Creates fixed contents for CDA Element hl7Code
 	 *
 	 * @param code the desired fixed value for this argument.
 	 * @param codeSystem the desired fixed value for this argument.
@@ -65,7 +63,7 @@ public class ChpccSectionCurrentPregnancyCoded extends org.ehealth_connector.com
 	}
 
 	/**
-	 * Creates fixed contents for hl7Entry
+	 * Creates fixed contents for CDA Element hl7Entry
 	 *
 	 * @param typeCode the desired fixed value for this argument.
 	 */
@@ -77,7 +75,7 @@ public class ChpccSectionCurrentPregnancyCoded extends org.ehealth_connector.com
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
+	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
@@ -86,13 +84,6 @@ public class ChpccSectionCurrentPregnancyCoded extends org.ehealth_connector.com
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
-	}
-
-	/**
-	 * Gets the member codeFixedValue
-	 */
-	public org.ehealth_connector.common.hl7cdar2.CE getCodeFixedValue() {
-		return codeFixedValue;
 	}
 
 	/**

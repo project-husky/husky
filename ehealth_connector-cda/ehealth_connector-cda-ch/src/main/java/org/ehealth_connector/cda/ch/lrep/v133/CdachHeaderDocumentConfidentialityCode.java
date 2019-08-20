@@ -16,15 +16,76 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import javax.xml.bind.annotation.XmlTransient;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.19
  * Template description: A confidentiality level of a CDA document instance according to the Swiss EPR regulation. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.Language dependent references to the Swiss EPR regulation:
  * - en: Federal Act on the Electronic Patient Record (EPRA), FDHA Ordinance on the Electronic Patient Record (EPRO-FDHA), Appendix 3 (Metadata)
- * - de: Bundesgesetz über das elektronische Patientendossier (EPDG), Verordnung des EDI über das elektronische Patientendossier (EPDV-EDI), Anhang 3 (Metadaten)
- * - fr: Loi fédérale sur le dossier électronique du patient (LDEP), Ordonnance du DFI sur le dossier électronique du patient (ODEP-DFI), Annexe 3 (Métadonnées)
+ * - de: Bundesgesetz Ã¼ber das elektronische Patientendossier (EPDG), Verordnung des EDI Ã¼ber das elektronische Patientendossier (EPDV-EDI), Anhang 3 (Metadaten)
+ * - fr: Loi fÃ©dÃ©rale sur le dossier Ã©lectronique du patient (LDEP), Ordonnance du DFI sur le dossier Ã©lectronique du patient (ODEP-DFI), Annexe 3 (MÃ©tadonnÃ©es)
  * - it: Legge federale sulla cartella informatizzata del paziente (LCIP), Ordinanza del DFI sulla cartella informatizzata del paziente (OCIP-DFI), Allegato 3 (Metadati)
  *
  * Element description: Swiss Realm of Confidentiality Code according to the Swiss EPR regulation.
  */
 public class CdachHeaderDocumentConfidentialityCode extends org.ehealth_connector.common.hl7cdar2.CE {
+
+	public CdachHeaderDocumentConfidentialityCode() {
+		super.setCodeSystem("2.16.840.1.113883.6.96");
+		super.setCodeSystemName("SNOMED CT");
+	// cdach_header_DocumentConfidentialityCode/hl7:confidentialityCode:cs valueSet = valueSet("2.16.756.5.30.1.127.3.10.1.5");
+	// cdach_header_DocumentConfidentialityCode/hl7:confidentialityCode:oid codeSystem = "2.16.840.1.113883.6.96";
+	// cdach_header_DocumentConfidentialityCode/hl7:confidentialityCode:st codeSystemName = "SNOMED CT";
+	}
+
+	@XmlTransient()
+	private String myCodeSystem;
+
+	@XmlTransient()
+	private String myCodeSystemName;
+
+	@XmlTransient()
+	private org.ehealth_connector.cda.ch.lrep.v133.enums.XdsConfCod myValueSet;
+
+	/**
+	 * Creates fixed contents for CDA Attribute codeSystem
+	 */
+	private void createCodeSystemFixedValue(String value) {
+		this.myCodeSystem = value;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Attribute codeSystemName
+	 */
+	private void createCodeSystemNameFixedValue(String value) {
+		this.myCodeSystemName = value;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Attribute valueSet
+	 */
+	private void createValueSetFixedValue(org.ehealth_connector.cda.ch.lrep.v133.enums.XdsConfCod value) {
+		this.myValueSet = value;
+	}
+
+	/**
+	 * Gets the member myCodeSystem
+	 */
+	public String getPredefinedCodeSystem() {
+		return myCodeSystem;
+	}
+
+	/**
+	 * Gets the member myCodeSystemName
+	 */
+	public String getPredefinedCodeSystemName() {
+		return myCodeSystemName;
+	}
+
+	/**
+	 * Gets the member myValueSet
+	 */
+	public org.ehealth_connector.cda.ch.lrep.v133.enums.XdsConfCod getPredefinedValueSet() {
+		return myValueSet;
+	}
 }

@@ -27,10 +27,16 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachlrepEntryNotifiableConditionSignificantPathogen extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
 	public CdachlrepEntryNotifiableConditionSignificantPathogen() {
+		super.getClassCode().add("COND");
+		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.86"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.14"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.1.1"));
-		codeFixedValue = createHl7CodeFixedValue("170516003", "2.16.840.1.113883.6.96", "SNOMED CT", "Notification of disease");
+		super.setCode(createHl7CodeFixedValue("170516003", "2.16.840.1.113883.6.96", "SNOMED CT", "Notification of disease"));
+		super.setStatusCode(createHl7StatusCodeFixedValue());
+		super.getValue().add(createHl7ValueFixedValue("NA"));
+	// cdachlrep_entry_NotifiableConditionSignificantPathogen/hl7:observation:cs classCode = "COND";
+	// cdachlrep_entry_NotifiableConditionSignificantPathogen/hl7:observation:cs moodCode = "EVN";
 	// cdachlrep_entry_NotifiableConditionSignificantPathogen/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.86";
 	// cdachlrep_entry_NotifiableConditionSignificantPathogen/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.14";
 	// cdachlrep_entry_NotifiableConditionSignificantPathogen/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.1.1";
@@ -43,7 +49,10 @@ public class CdachlrepEntryNotifiableConditionSignificantPathogen extends org.eh
 	}
 
 	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.CD codeFixedValue;
+	private String myClassCode;
+
+	@XmlTransient()
+	private String myMoodCode;
 
 	/**
 	 * Adds a hl7Id
@@ -62,7 +71,14 @@ public class CdachlrepEntryNotifiableConditionSignificantPathogen extends org.eh
 	}
 
 	/**
-	 * Creates fixed contents for hl7Code
+	 * Creates fixed contents for CDA Attribute classCode
+	 */
+	private void createClassCodeFixedValue(String value) {
+		this.myClassCode = value;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7Code
 	 *
 	 * @param code the desired fixed value for this argument.
 	 * @param codeSystem the desired fixed value for this argument.
@@ -80,7 +96,16 @@ public class CdachlrepEntryNotifiableConditionSignificantPathogen extends org.eh
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
+	 * Creates fixed contents for CDA Element hl7StatusCode
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
@@ -92,7 +117,7 @@ public class CdachlrepEntryNotifiableConditionSignificantPathogen extends org.eh
 	}
 
 	/**
-	 * Creates fixed contents for hl7Value
+	 * Creates fixed contents for CDA Element hl7Value
 	 *
 	 * @param nullFlavor the desired fixed value for this argument.
 	 */
@@ -105,10 +130,10 @@ public class CdachlrepEntryNotifiableConditionSignificantPathogen extends org.eh
 	}
 
 	/**
-	 * Gets the member codeFixedValue
+	 * Creates fixed contents for CDA Attribute moodCode
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CD getCodeFixedValue() {
-		return codeFixedValue;
+	private void createMoodCodeFixedValue(String value) {
+		this.myMoodCode = value;
 	}
 
 	/**
@@ -155,6 +180,20 @@ public class CdachlrepEntryNotifiableConditionSignificantPathogen extends org.eh
 			if (getValue().size() > 0)
 				retVal = (org.ehealth_connector.common.hl7cdar2.CE) getValue().get(0);
 		return retVal;
+	}
+
+	/**
+	 * Gets the member myClassCode
+	 */
+	public String getPredefinedClassCode() {
+		return myClassCode;
+	}
+
+	/**
+	 * Gets the member myMoodCode
+	 */
+	public String getPredefinedMoodCode() {
+		return myMoodCode;
 	}
 
 	/**

@@ -22,7 +22,7 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.26
  * Template description: ClinicalDocument/recordTarget SHALL be present and SHALL conform to the Human Patient, Non-Human Subject or Human Patient with Non-Human Subject templates defined below. There are three varieties of laboratory reports:
  * - Human (patient): The document reports laboratory observations produced on specimens collected exclusively from the patient.
- * - Non-Human Subject: The document reports laboratory observations produced on specimens collected from a non-human material (e.g. water, milk…) or living subject (e.g. animal).
+ * - Non-Human Subject: The document reports laboratory observations produced on specimens collected from a non-human material (e.g. water, milkâ€¦) or living subject (e.g. animal).
  * - Human (patient) paired with Non-Human Subject: The document reports laboratory observations produced on a non-human specimen with a relationship to a human patient, (e.g. peanut butter eaten by a patient, a ferret that bit a patient).Non-Human SubjectWhen the subject of the observations in the report is a sample exclusively taken from a non-human subject, such as an animal, a lake, soil or other environmental element, the following SHALL be present.
  * - &lt;templateId root="1.3.6.1.4.1.19376.1.3.3.1.2"/&gt; - The templateId element identifies this recordTarget as a non-human subject of laboratory testing. The templateId SHALL have root="1.3.6.1.4.1.19376.1.3.3.1.2".
  * - &lt;id/&gt; - /patientRole/id SHALL be present and SHALL represent the id of the non-human subject.
@@ -41,7 +41,7 @@ public class ChpalmHeaderRecordTargetNonHumanSubject extends org.ehealth_connect
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
+	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */

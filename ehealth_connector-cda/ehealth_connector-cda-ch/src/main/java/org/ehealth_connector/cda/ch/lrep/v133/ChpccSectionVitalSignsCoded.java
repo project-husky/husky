@@ -16,7 +16,6 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -32,16 +31,13 @@ public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.5.3.2"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.3.25"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.16"));
-		codeFixedValue = createHl7CodeFixedValue("8716-3");
+		super.setCode(createHl7CodeFixedValue("8716-3"));
 	// chpcc_section_VitalSignsCoded/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.3.4";
 	// chpcc_section_VitalSignsCoded/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.1.5.3.2";
 	// chpcc_section_VitalSignsCoded/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.3.25";
 	// chpcc_section_VitalSignsCoded/hl7:templateId:uid root = "2.16.840.1.113883.10.20.1.16";
 	// chpcc_section_VitalSignsCoded/hl7:code:cs code = "8716-3";
 	}
-
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.CE codeFixedValue;
 
 	/**
 	 * Adds a hl7Entry
@@ -58,7 +54,7 @@ public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl
 	}
 
 	/**
-	 * Creates fixed contents for hl7Code
+	 * Creates fixed contents for CDA Element hl7Code
 	 *
 	 * @param code the desired fixed value for this argument.
 	 */
@@ -70,7 +66,7 @@ public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
+	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
@@ -79,13 +75,6 @@ public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
-	}
-
-	/**
-	 * Gets the member codeFixedValue
-	 */
-	public org.ehealth_connector.common.hl7cdar2.CE getCodeFixedValue() {
-		return codeFixedValue;
 	}
 
 	/**

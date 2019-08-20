@@ -27,6 +27,7 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachOtherAuthorCompilationWithNameAddrTelecom {
 
 	public CdachOtherAuthorCompilationWithNameAddrTelecom() {
+		this.functionCode = createHl7FunctionCodeFixedValue("NAV", "2.16.840.1.113883.6.96", "SNOMED CT");
 	// cdach_other_AuthorCompilationWithNameAddrTelecom/hl7:functionCode:cs valueSet = valueSet("2.16.756.5.30.1.127.3.10.1.1.3");
 	// cdach_other_AuthorCompilationWithNameAddrTelecom/hl7:functionCode:st nullFlavor = "NAV";
 	// cdach_other_AuthorCompilationWithNameAddrTelecom/hl7:functionCode:oid codeSystem = "2.16.840.1.113883.6.96";
@@ -52,7 +53,7 @@ public class CdachOtherAuthorCompilationWithNameAddrTelecom {
 	private org.ehealth_connector.common.hl7cdar2.TS time;
 
 	/**
-	 * Creates fixed contents for hl7FunctionCode
+	 * Creates fixed contents for CDA Element hl7FunctionCode
 	 *
 	 * @param nullFlavor the desired fixed value for this argument.
 	 * @param codeSystem the desired fixed value for this argument.

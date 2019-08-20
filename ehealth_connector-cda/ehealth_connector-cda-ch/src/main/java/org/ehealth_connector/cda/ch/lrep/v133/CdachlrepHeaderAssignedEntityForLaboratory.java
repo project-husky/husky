@@ -29,6 +29,7 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachlrepHeaderAssignedEntityForLaboratory {
 
 	public CdachlrepHeaderAssignedEntityForLaboratory() {
+		id.add(createHl7IdFixedValue("NAV", "2.51.1.3"));
 	// cdachlrep_header_AssignedEntityForLaboratory/hl7:id:cs nullFlavor = "NAV";
 	// cdachlrep_header_AssignedEntityForLaboratory/hl7:id:cs root = "2.51.1.3";
 	}
@@ -112,7 +113,7 @@ public class CdachlrepHeaderAssignedEntityForLaboratory {
 	}
 
 	/**
-	 * Creates fixed contents for hl7Id
+	 * Creates fixed contents for CDA Element hl7Id
 	 *
 	 * @param nullFlavor the desired fixed value for this argument.
 	 * @param root the desired fixed value for this argument.

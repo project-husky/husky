@@ -29,6 +29,7 @@ public class CdachlrepHeaderLegalAuthenticator extends org.ehealth_connector.com
 	public CdachlrepHeaderLegalAuthenticator() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.61"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.5"));
+		super.setSignatureCode(createHl7SignatureCodeFixedValue("S", "2.16.840.1.113883.1.11.10282", "ParticipationSignature", "signed"));
 	// cdachlrep_header_LegalAuthenticator/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.61";
 	// cdachlrep_header_LegalAuthenticator/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.5";
 	// cdachlrep_header_LegalAuthenticator/hl7:signatureCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.10282");
@@ -39,7 +40,7 @@ public class CdachlrepHeaderLegalAuthenticator extends org.ehealth_connector.com
 	}
 
 	/**
-	 * Creates fixed contents for hl7SignatureCode
+	 * Creates fixed contents for CDA Element hl7SignatureCode
 	 *
 	 * @param code the desired fixed value for this argument.
 	 * @param codeSystem the desired fixed value for this argument.
@@ -57,7 +58,7 @@ public class CdachlrepHeaderLegalAuthenticator extends org.ehealth_connector.com
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
+	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */

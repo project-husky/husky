@@ -58,7 +58,7 @@ public class ChpalmEntryLaboratoryPerformer {
 	private org.ehealth_connector.common.hl7cdar2.TS time;
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
+	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */

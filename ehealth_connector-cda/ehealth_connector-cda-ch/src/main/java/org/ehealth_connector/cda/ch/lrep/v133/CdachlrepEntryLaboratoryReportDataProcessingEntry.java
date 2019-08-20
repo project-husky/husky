@@ -30,6 +30,7 @@ public class CdachlrepEntryLaboratoryReportDataProcessingEntry {
 		templateId.add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.118"));
 		templateId.add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1"));
 		templateId.add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.4"));
+		this.act = createHl7ActFixedValue("ACT", "EVN");
 	// cdachlrep_entry_LaboratoryReportDataProcessingEntry/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.118";
 	// cdachlrep_entry_LaboratoryReportDataProcessingEntry/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1";
 	// cdachlrep_entry_LaboratoryReportDataProcessingEntry/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.4";
@@ -50,7 +51,7 @@ public class CdachlrepEntryLaboratoryReportDataProcessingEntry {
 	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> templateId = new ArrayList<org.ehealth_connector.common.hl7cdar2.II>();
 
 	/**
-	 * Creates fixed contents for hl7Act
+	 * Creates fixed contents for CDA Element hl7Act
 	 *
 	 * @param classCode the desired fixed value for this argument.
 	 * @param moodCode the desired fixed value for this argument.
@@ -64,7 +65,7 @@ public class CdachlrepEntryLaboratoryReportDataProcessingEntry {
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
+	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */

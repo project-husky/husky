@@ -29,6 +29,7 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachOtherOrganizationCompilationGlnNameAddrTelecom {
 
 	public CdachOtherOrganizationCompilationGlnNameAddrTelecom() {
+		id.add(createHl7IdFixedValue("2.51.1.3"));
 	// cdach_other_OrganizationCompilationGlnNameAddrTelecom/hl7:id:uid root = "2.51.1.3";
 	}
 
@@ -105,7 +106,7 @@ public class CdachOtherOrganizationCompilationGlnNameAddrTelecom {
 	}
 
 	/**
-	 * Creates fixed contents for hl7Id
+	 * Creates fixed contents for CDA Element hl7Id
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */

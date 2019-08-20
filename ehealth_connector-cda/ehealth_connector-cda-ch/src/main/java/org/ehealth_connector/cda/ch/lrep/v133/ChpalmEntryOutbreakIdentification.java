@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.ArrayList;
+import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -26,13 +27,25 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class ChpalmEntryOutbreakIdentification extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
 	public ChpalmEntryOutbreakIdentification() {
+		super.getClassCode().add("OUTB");
+		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.1.3"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.16"));
+		super.setStatusCode(createHl7StatusCodeFixedValue());
+		super.getValue().add(createHl7ValueFixedValue("NA"));
+	// chpalm_entry_OutbreakIdentification/hl7:observation:cs classCode = "OUTB";
+	// chpalm_entry_OutbreakIdentification/hl7:observation:cs moodCode = "EVN";
 	// chpalm_entry_OutbreakIdentification/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.1.3";
 	// chpalm_entry_OutbreakIdentification/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.16";
 	// chpalm_entry_OutbreakIdentification/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025");
 	// chpalm_entry_OutbreakIdentification/hl7:value:cs nullFlavor = "NA";
 	}
+
+	@XmlTransient()
+	private String myClassCode;
+
+	@XmlTransient()
+	private String myMoodCode;
 
 	/**
 	 * Adds a hl7Id
@@ -51,7 +64,23 @@ public class ChpalmEntryOutbreakIdentification extends org.ehealth_connector.com
 	}
 
 	/**
-	 * Creates fixed contents for hl7TemplateId
+	 * Creates fixed contents for CDA Attribute classCode
+	 */
+	private void createClassCodeFixedValue(String value) {
+		this.myClassCode = value;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7StatusCode
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
@@ -63,7 +92,7 @@ public class ChpalmEntryOutbreakIdentification extends org.ehealth_connector.com
 	}
 
 	/**
-	 * Creates fixed contents for hl7Value
+	 * Creates fixed contents for CDA Element hl7Value
 	 *
 	 * @param nullFlavor the desired fixed value for this argument.
 	 */
@@ -73,6 +102,13 @@ public class ChpalmEntryOutbreakIdentification extends org.ehealth_connector.com
 		retVal.nullFlavor = new ArrayList<String>();
 		retVal.nullFlavor.add(nullFlavor);
 		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Attribute moodCode
+	 */
+	private void createMoodCodeFixedValue(String value) {
+		this.myMoodCode = value;
 	}
 
 	/**
@@ -112,6 +148,20 @@ public class ChpalmEntryOutbreakIdentification extends org.ehealth_connector.com
 			if (getValue().size() > 0)
 				retVal = (org.ehealth_connector.common.hl7cdar2.CE) getValue().get(0);
 		return retVal;
+	}
+
+	/**
+	 * Gets the member myClassCode
+	 */
+	public String getPredefinedClassCode() {
+		return myClassCode;
+	}
+
+	/**
+	 * Gets the member myMoodCode
+	 */
+	public String getPredefinedMoodCode() {
+		return myMoodCode;
 	}
 
 	/**
