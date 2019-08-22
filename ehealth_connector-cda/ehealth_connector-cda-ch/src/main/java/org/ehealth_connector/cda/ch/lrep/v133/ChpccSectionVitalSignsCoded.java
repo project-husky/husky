@@ -36,7 +36,8 @@ public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl
 	// chpcc_section_VitalSignsCoded/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.1.5.3.2";
 	// chpcc_section_VitalSignsCoded/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.3.25";
 	// chpcc_section_VitalSignsCoded/hl7:templateId:uid root = "2.16.840.1.113883.10.20.1.16";
-	// chpcc_section_VitalSignsCoded/hl7:code:cs code = "8716-3";
+	// Vocab not supported, yet. Should add a code:8716-3 / 2.16.840.1.113883.6.1
+	// chpcc_section_VitalSignsCoded/hl7:code:cs code = "8716-3"; (isVocab)
 	}
 
 	/**

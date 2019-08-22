@@ -54,7 +54,7 @@ public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl
 	private String myCodeSystemName;
 
 	@XmlTransient()
-	private org.ehealth_connector.cda.ch.lrep.v133.enums.XdsTypeCo myDisplayName;
+	private org.ehealth_connector.cda.ch.lrep.v133.enums.DocumentEntryTypeCode myDisplayName;
 
 	@XmlTransient()
 	private org.ehealth_connector.cda.ch.lrep.v133.enums.LaboratorySpecialties myValueSet;
@@ -76,7 +76,7 @@ public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl
 	/**
 	 * Creates fixed contents for CDA Attribute displayName
 	 */
-	private void createDisplayNameFixedValue(org.ehealth_connector.cda.ch.lrep.v133.enums.XdsTypeCo value) {
+	private void createDisplayNameFixedValue(org.ehealth_connector.cda.ch.lrep.v133.enums.DocumentEntryTypeCode value) {
 		this.myDisplayName = value;
 	}
 
@@ -134,7 +134,7 @@ public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl
 	/**
 	 * Gets the member myDisplayName
 	 */
-	public org.ehealth_connector.cda.ch.lrep.v133.enums.XdsTypeCo getPredefinedDisplayName() {
+	public org.ehealth_connector.cda.ch.lrep.v133.enums.DocumentEntryTypeCode getPredefinedDisplayName() {
 		return myDisplayName;
 	}
 

@@ -35,7 +35,8 @@ public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connect
 		super.setCode(createHl7CodeFixedValue("55108-5"));
 		super.getEntry().add(createHl7EntryFixedValue("DRIV"));
 	// cdach_section_OriginalRepresentationCoded/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.3.45";
-	// cdach_section_OriginalRepresentationCoded/hl7:code:cs code = "55108-5";
+	// Vocab not supported, yet. Should add a code:55108-5 / 2.16.840.1.113883.6.1
+	// cdach_section_OriginalRepresentationCoded/hl7:code:cs code = "55108-5"; (isVocab)
 	// cdach_section_OriginalRepresentationCoded/hl7:entry:st typeCode = "DRIV";
 	}
 
@@ -124,7 +125,7 @@ public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connect
 	 * Gets the hl7Title
 	 * Fixed human readable title of this section.
 	 * - [ge]: 'Original Darstellung'
-	 * - [fr]: 'ReprÃ©sentation originale'
+	 * - [fr]: 'Représentation originale'
 	 * - [it]: 'Rappresentazione originale'
 	 * - [en]: 'Original representation'
 	 */
@@ -175,7 +176,7 @@ public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connect
 	 * Sets the hl7Title
 	 * Fixed human readable title of this section.
 	 * - [ge]: 'Original Darstellung'
-	 * - [fr]: 'ReprÃ©sentation originale'
+	 * - [fr]: 'Représentation originale'
 	 * - [it]: 'Rappresentazione originale'
 	 * - [en]: 'Original representation'
 	 */

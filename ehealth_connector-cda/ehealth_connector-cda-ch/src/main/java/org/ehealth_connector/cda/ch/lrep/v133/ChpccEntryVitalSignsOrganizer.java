@@ -45,7 +45,8 @@ public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.
 	// chpcc_entry_VitalSignsOrganizer/hl7:code:oid codeSystem = "2.16.840.1.113883.6.96";
 	// chpcc_entry_VitalSignsOrganizer/hl7:code:st codeSystemName = "SNOMED CT";
 	// chpcc_entry_VitalSignsOrganizer/hl7:code:st displayName = "VITAL SIGNS";
-	// chpcc_entry_VitalSignsOrganizer/hl7:statusCode:cs code = "completed";
+	// Vocab not supported, yet. Should add a code:completed / no code system !!
+	// chpcc_entry_VitalSignsOrganizer/hl7:statusCode:cs code = "completed"; (isVocab)
 	// chpcc_entry_VitalSignsOrganizer/hl7:component:cs typeCode = "COMP";
 	}
 

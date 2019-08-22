@@ -27,7 +27,7 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Laboratory Specialties.<br/>Notes:<ul>    <li>Note 1:26436-6 (LABORATORY STUDIES) enables issuing a report putting together observations from multiple specialties (disciplines) in the same text block, allowing delivery of a global interpretation comment at the end of the text block that will be rendered at the end of the report.</li>    <li>Note 2:18721-1 (THERAPEUTIC DRUG MONITORING STUDIES) will be used for a section carrying pharmacology observations on a patient.</li>    <li>Note 3:Mycology and parasitology, as well as bacteriology, are part of the 18725-2 (MICROBIOLOGY STUDIES) specialty.</li>    <li>Note 4:Virology MAY be included in 18725-2 (MICROBIOLOGY STUDIES) specialty or 18727-8 (SEROLOGY STUDIES) or split between both specialties, depending upon the Content Creator Actor�s choice.</li></ul></div>
+ * <div class="en">Laboratory Specialties.<br/>Notes:<ul>    <li>Note 1:26436-6 (LABORATORY STUDIES) enables issuing a report putting together observations from multiple specialties (disciplines) in the same text block, allowing delivery of a global interpretation comment at the end of the text block that will be rendered at the end of the report.</li>    <li>Note 2:18721-1 (THERAPEUTIC DRUG MONITORING STUDIES) will be used for a section carrying pharmacology observations on a patient.</li>    <li>Note 3:Mycology and parasitology, as well as bacteriology, are part of the 18725-2 (MICROBIOLOGY STUDIES) specialty.</li>    <li>Note 4:Virology MAY be included in 18725-2 (MICROBIOLOGY STUDIES) specialty or 18727-8 (SEROLOGY STUDIES) or split between both specialties, depending upon the Content Creator Actor’s choice.</li></ul></div>
  * <div class="de">no designation found for language GERMAN</div>
  * <div class="fr">no designation found for language FRENCH</div>
  * <div class="it">no designation found for language ITALIAN</div>
@@ -287,7 +287,7 @@ public enum LaboratorySpecialties implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
+	 * <div class="de">Identifikator für das Value Set</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String VALUE_SET_ID = "1.3.6.1.4.1.19376.1.3.11.1";
@@ -322,7 +322,7 @@ public enum LaboratorySpecialties implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">PrÃ¼ft, ob der angegebene enum Teil dieses Value Sets ist.</div>
+	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param enumName
@@ -344,7 +344,7 @@ public enum LaboratorySpecialties implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">PrÃ¼ft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
+	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param codeValue
@@ -460,8 +460,8 @@ public enum LaboratorySpecialties implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Gets the display name defined by the language param. If
 	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemÃ¤ss Parameter, falls es keine
-	 * Englische Ãœbersetzung gibt, wird der default-Name zurÃ¼ckgegeben.</div>
+	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
+	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param languageCode
