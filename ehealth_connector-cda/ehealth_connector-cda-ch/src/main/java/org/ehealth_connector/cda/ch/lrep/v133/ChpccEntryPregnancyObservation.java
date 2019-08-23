@@ -41,10 +41,10 @@ public class ChpccEntryPregnancyObservation extends org.ehealth_connector.common
 	// chpcc_entry_PregnancyObservation/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.92";
 	// chpcc_entry_PregnancyObservation/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.4.13.5";
 	// chpcc_entry_PregnancyObservation/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.4.13";
-	// chpcc_entry_PregnancyObservation/hl7:code:cs valueSet = valueSet("2.16.756.5.30.1.1.11.78");
+	// chpcc_entry_PregnancyObservation/hl7:code:cs valueSet = valueSet("2.16.756.5.30.1.1.11.78"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.PregnancyObservationCodes
 	// chpcc_entry_PregnancyObservation/hl7:code:oid codeSystem = "2.16.840.1.113883.6.1";
 	// chpcc_entry_PregnancyObservation/hl7:code:st codeSystemName = "LOINC";
-	// chpcc_entry_PregnancyObservation/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025");
+	// chpcc_entry_PregnancyObservation/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusCompleted
 	}
 
 	@XmlTransient()

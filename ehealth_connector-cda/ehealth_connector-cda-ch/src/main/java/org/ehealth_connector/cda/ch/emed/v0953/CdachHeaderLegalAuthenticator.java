@@ -30,7 +30,7 @@ public class CdachHeaderLegalAuthenticator extends org.ehealth_connector.common.
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.5"));
 		super.setSignatureCode(createHl7SignatureCodeFixedValue("S"));
 	// cdach_header_LegalAuthenticator/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.5";
-	// cdach_header_LegalAuthenticator/hl7:signatureCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.10282");
+	// cdach_header_LegalAuthenticator/hl7:signatureCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.10282"); --> org.ehealth_connector.cda.ch.emed.v0953.enums.ParticipationSignature
 	// cdach_header_LegalAuthenticator/hl7:signatureCode:cs code = "S";
 	}
 

@@ -37,7 +37,7 @@ public class ChpalmHeaderLaboratoryResultsValidator extends org.ehealth_connecto
 	// chpalm_header_LaboratoryResultsValidator/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.88";
 	// chpalm_header_LaboratoryResultsValidator/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.6";
 	// chpalm_header_LaboratoryResultsValidator/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.3.1.5";
-	// chpalm_header_LaboratoryResultsValidator/hl7:signatureCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.10282");
+	// chpalm_header_LaboratoryResultsValidator/hl7:signatureCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.10282"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ParticipationSignature
 	// chpalm_header_LaboratoryResultsValidator/hl7:signatureCode:cs code = "S";
 	}
 

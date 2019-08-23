@@ -43,7 +43,7 @@ public class ManufacturedMaterialEntryContentModule extends org.ehealth_connecto
 	// ManufacturedMaterialEntryContentModule/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.9.1.3.1";
 	// ManufacturedMaterialEntryContentModule/hl7:code:oid codeSystem = "2.16.840.1.113883.6.73";
 	// ManufacturedMaterialEntryContentModule/hl7:name:cs nullFlavor = "NA";
-	// ManufacturedMaterialEntryContentModule/pharm:formCode:cs valueSet = valueSet("2.16.756.5.30.1.1.11.3");
+	// ManufacturedMaterialEntryContentModule/pharm:formCode:cs valueSet = valueSet("2.16.756.5.30.1.1.11.3"); --> org.ehealth_connector.cda.ch.emed.v0953.enums.PharmaceuticalDoseFormEdqm
 	// ManufacturedMaterialEntryContentModule/pharm:asContent:cs classCode = "CONT";
 	// ManufacturedMaterialEntryContentModule/pharm:ingredient:cs classCode = "ACTI";
 	}

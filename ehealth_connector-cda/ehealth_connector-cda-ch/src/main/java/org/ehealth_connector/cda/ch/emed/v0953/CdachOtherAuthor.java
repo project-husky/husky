@@ -31,7 +31,7 @@ public class CdachOtherAuthor extends org.ehealth_connector.common.hl7cdar2.POCD
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.9.23"));
 		super.setFunctionCode(createHl7FunctionCodeFixedValue("NAV", "2.16.840.1.113883.6.96", "SNOMED CT"));
 	// cdach_other_Author/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.9.23";
-	// cdach_other_Author/hl7:functionCode:cs valueSet = valueSet("2.16.756.5.30.1.127.3.10.1.1.3");
+	// cdach_other_Author/hl7:functionCode:cs valueSet = valueSet("2.16.756.5.30.1.127.3.10.1.1.3"); --> org.ehealth_connector.cda.ch.emed.v0953.enums.DocumentEntryAuthorRole
 	// cdach_other_Author/hl7:functionCode:st nullFlavor = "NAV";
 	// cdach_other_Author/hl7:functionCode:oid codeSystem = "2.16.840.1.113883.6.96";
 	// cdach_other_Author/hl7:functionCode:st codeSystemName = "SNOMED CT";

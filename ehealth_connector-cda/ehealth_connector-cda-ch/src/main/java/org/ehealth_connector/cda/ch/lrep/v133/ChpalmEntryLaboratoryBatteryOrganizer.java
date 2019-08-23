@@ -40,7 +40,7 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:organizer:cs moodCode = "EVN";
 	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.19";
 	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.4";
-	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:statusCode:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.2");
+	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:statusCode:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.2"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusAbortedCompleted
 	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:component:cs typeCode = "COMP";
 	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:component:cs typeCode = "COMP";
 	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:component:cs typeCode = "COMP";

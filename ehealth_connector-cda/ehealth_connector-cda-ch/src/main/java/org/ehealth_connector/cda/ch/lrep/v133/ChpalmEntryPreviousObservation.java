@@ -33,7 +33,7 @@ public class ChpalmEntryPreviousObservation extends org.ehealth_connector.common
 	// chpalm_entry_PreviousObservation/hl7:observation:cs classCode = "OBS";
 	// chpalm_entry_PreviousObservation/hl7:observation:cs moodCode = "EVN";
 	// chpalm_entry_PreviousObservation/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.22";
-	// chpalm_entry_PreviousObservation/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025");
+	// chpalm_entry_PreviousObservation/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusCompleted
 	}
 
 	@XmlTransient()

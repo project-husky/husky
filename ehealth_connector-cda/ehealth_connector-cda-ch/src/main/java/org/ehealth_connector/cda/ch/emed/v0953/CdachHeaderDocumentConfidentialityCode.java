@@ -33,7 +33,7 @@ public class CdachHeaderDocumentConfidentialityCode extends org.ehealth_connecto
 	public CdachHeaderDocumentConfidentialityCode() {
 		super.setCodeSystem("2.16.840.1.113883.6.96");
 		super.setCodeSystemName("SNOMED CT");
-	// cdach_header_DocumentConfidentialityCode/hl7:confidentialityCode:cs valueSet = valueSet("2.16.756.5.30.1.127.3.10.1.5");
+	// cdach_header_DocumentConfidentialityCode/hl7:confidentialityCode:cs valueSet = valueSet("2.16.756.5.30.1.127.3.10.1.5"); --> org.ehealth_connector.cda.ch.emed.v0953.enums.DocumentEntryConfidentialityCode
 	// cdach_header_DocumentConfidentialityCode/hl7:confidentialityCode:oid codeSystem = "2.16.840.1.113883.6.96";
 	// cdach_header_DocumentConfidentialityCode/hl7:confidentialityCode:st codeSystemName = "SNOMED CT";
 	}

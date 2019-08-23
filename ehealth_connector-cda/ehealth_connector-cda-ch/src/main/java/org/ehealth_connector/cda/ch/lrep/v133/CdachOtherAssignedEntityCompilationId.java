@@ -30,7 +30,7 @@ public class CdachOtherAssignedEntityCompilationId {
 
 	public CdachOtherAssignedEntityCompilationId() {
 		this.code = createHl7CodeFixedValue("2.16.840.1.113883.6.96", "SNOMED CT");
-	// cdach_other_AssignedEntityCompilationId/hl7:code:cs valueSet = valueSet("2.16.756.5.30.1.127.3.10.1.1.3");
+	// cdach_other_AssignedEntityCompilationId/hl7:code:cs valueSet = valueSet("2.16.756.5.30.1.127.3.10.1.1.3"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.DocumentEntryAuthorRole
 	// cdach_other_AssignedEntityCompilationId/hl7:code:oid codeSystem = "2.16.840.1.113883.6.96";
 	// cdach_other_AssignedEntityCompilationId/hl7:code:st codeSystemName = "SNOMED CT";
 	}

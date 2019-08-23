@@ -35,12 +35,12 @@ public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl
 		super.setCodeSystem("2.16.840.1.113883.6.1");
 		super.setCodeSystemName("LOINC");
 		super.getTranslation().add(createHl7TranslationFixedValue("4241000179101", "2.16.840.1.113883.6.96", "SNOMED CT", "Laboratory report"));
-	// cdachlrep_header_DocumentCode/hl7:code:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.1");
-	// cdachlrep_header_DocumentCode/hl7:code:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.1");
+	// cdachlrep_header_DocumentCode/hl7:code:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.1"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.LaboratorySpecialties
+	// cdachlrep_header_DocumentCode/hl7:code:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.1"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.LaboratorySpecialties
 	// cdachlrep_header_DocumentCode/hl7:code:oid codeSystem = "2.16.840.1.113883.6.1";
 	// cdachlrep_header_DocumentCode/hl7:code:st codeSystemName = "LOINC";
-	// cdachlrep_header_DocumentCode/hl7:code:st displayName = valueSet("2.16.756.5.30.1.127.3.10.1.27");
-	// cdachlrep_header_DocumentCode/hl7:translation:st displayName = valueSet("2.16.756.5.30.1.127.3.10.1.27");
+	// cdachlrep_header_DocumentCode/hl7:code:st displayName = valueSet("2.16.756.5.30.1.127.3.10.1.27"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.DocumentEntryTypeCode
+	// cdachlrep_header_DocumentCode/hl7:translation:st displayName = valueSet("2.16.756.5.30.1.127.3.10.1.27"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.DocumentEntryTypeCode
 	// cdachlrep_header_DocumentCode/hl7:translation:cs code = "4241000179101";
 	// cdachlrep_header_DocumentCode/hl7:translation:oid codeSystem = "2.16.840.1.113883.6.96";
 	// cdachlrep_header_DocumentCode/hl7:translation:st codeSystemName = "SNOMED CT";

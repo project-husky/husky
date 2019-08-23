@@ -29,16 +29,16 @@ public class CdachEntryObservationMedia extends org.ehealth_connector.common.hl7
 		super.setLanguageCode(createHl7LanguageCodeFixedValue());
 		super.setValue(createHl7ValueFixedValue("B64"));
 	// cdach_entry_ObservationMedia/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.83";
-	// cdach_entry_ObservationMedia/hl7:languageCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.11526");
+	// cdach_entry_ObservationMedia/hl7:languageCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.11526"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.HumanLanguage
 	// cdach_entry_ObservationMedia/hl7:value:cs representation = "B64";
-	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845");
-	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845");
-	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845");
-	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845");
-	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845");
-	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845");
-	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845");
-	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845");
+	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845"); --> org.ehealth_connector.common.hl7cdar2.VideoMediaType
+	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845"); --> org.ehealth_connector.common.hl7cdar2.VideoMediaType
+	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845"); --> org.ehealth_connector.common.hl7cdar2.VideoMediaType
+	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845"); --> org.ehealth_connector.common.hl7cdar2.VideoMediaType
+	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845"); --> org.ehealth_connector.common.hl7cdar2.VideoMediaType
+	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845"); --> org.ehealth_connector.common.hl7cdar2.VideoMediaType
+	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845"); --> org.ehealth_connector.common.hl7cdar2.VideoMediaType
+	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845"); --> org.ehealth_connector.common.hl7cdar2.VideoMediaType
 	}
 
 	/**
@@ -87,7 +87,7 @@ public class CdachEntryObservationMedia extends org.ehealth_connector.common.hl7
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.ED retVal = factory.createED();
 		return retVal;
-	// TODO: Contents shall be taken from enum: org.ehealth_connector.cda.ch.lrep.v133.enums.VideoMediaType
+	// TODO: Contents shall be taken from enum: org.ehealth_connector.common.hl7cdar2.VideoMediaType
 	}
 
 	/**

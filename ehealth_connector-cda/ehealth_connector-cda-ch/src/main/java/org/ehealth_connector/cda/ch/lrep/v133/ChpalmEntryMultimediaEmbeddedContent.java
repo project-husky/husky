@@ -31,10 +31,10 @@ public class ChpalmEntryMultimediaEmbeddedContent extends org.ehealth_connector.
 		super.setValue(createHl7ValueFixedValue("B64"));
 	// chpalm_entry_MultimediaEmbeddedContent/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.18";
 	// chpalm_entry_MultimediaEmbeddedContent/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.83";
-	// chpalm_entry_MultimediaEmbeddedContent/hl7:languageCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.11526");
+	// chpalm_entry_MultimediaEmbeddedContent/hl7:languageCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.11526"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.HumanLanguage
 	// chpalm_entry_MultimediaEmbeddedContent/hl7:value:cs representation = "B64";
-	// chpalm_entry_MultimediaEmbeddedContent/hl7:value:cs mediaType = valueSet("1.3.6.1.4.1.19376.1.3.11.5");
-	// chpalm_entry_MultimediaEmbeddedContent/hl7:value:cs mediaType = valueSet("1.3.6.1.4.1.19376.1.3.11.5");
+	// chpalm_entry_MultimediaEmbeddedContent/hl7:value:cs mediaType = valueSet("1.3.6.1.4.1.19376.1.3.11.5"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.MultimediaEmbeddedMediaTypes
+	// chpalm_entry_MultimediaEmbeddedContent/hl7:value:cs mediaType = valueSet("1.3.6.1.4.1.19376.1.3.11.5"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.MultimediaEmbeddedMediaTypes
 	}
 
 	/**

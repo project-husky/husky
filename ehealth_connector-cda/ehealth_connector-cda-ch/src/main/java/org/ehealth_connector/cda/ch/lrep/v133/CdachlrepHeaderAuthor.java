@@ -33,7 +33,7 @@ public class CdachlrepHeaderAuthor extends org.ehealth_connector.common.hl7cdar2
 		super.setFunctionCode(createHl7FunctionCodeFixedValue("NAV", "2.16.840.1.113883.6.96", "SNOMED CT"));
 	// cdachlrep_header_Author/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.59";
 	// cdachlrep_header_Author/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.9.23";
-	// cdachlrep_header_Author/hl7:functionCode:cs valueSet = valueSet("2.16.756.5.30.1.127.3.10.1.1.3");
+	// cdachlrep_header_Author/hl7:functionCode:cs valueSet = valueSet("2.16.756.5.30.1.127.3.10.1.1.3"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.DocumentEntryAuthorRole
 	// cdachlrep_header_Author/hl7:functionCode:st nullFlavor = "NAV";
 	// cdachlrep_header_Author/hl7:functionCode:oid codeSystem = "2.16.840.1.113883.6.96";
 	// cdachlrep_header_Author/hl7:functionCode:st codeSystemName = "SNOMED CT";

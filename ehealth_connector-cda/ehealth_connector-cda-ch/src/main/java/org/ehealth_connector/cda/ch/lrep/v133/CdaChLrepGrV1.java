@@ -71,7 +71,7 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	private org.ehealth_connector.cda.ch.lrep.v133.enums.DocumentEntryTypeCode myDisplayName;
 
 	@XmlTransient()
-	private org.ehealth_connector.cda.ch.lrep.v133.enums.XInformationRecipient myTypeCode;
+	private org.ehealth_connector.common.hl7cdar2.XInformationRecipient myTypeCode;
 
 	@XmlTransient()
 	private org.ehealth_connector.cda.ch.lrep.v133.enums.HumanLanguage myValueSet;
@@ -267,7 +267,7 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	/**
 	 * Creates fixed contents for CDA Attribute typeCode
 	 */
-	private void createTypeCodeFixedValue(org.ehealth_connector.cda.ch.lrep.v133.enums.XInformationRecipient value) {
+	private void createTypeCodeFixedValue(org.ehealth_connector.common.hl7cdar2.XInformationRecipient value) {
 		this.myTypeCode = value;
 	}
 
@@ -440,7 +440,7 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	/**
 	 * Gets the member myTypeCode
 	 */
-	public org.ehealth_connector.cda.ch.lrep.v133.enums.XInformationRecipient getPredefinedTypeCode() {
+	public org.ehealth_connector.common.hl7cdar2.XInformationRecipient getPredefinedTypeCode() {
 		return myTypeCode;
 	}
 

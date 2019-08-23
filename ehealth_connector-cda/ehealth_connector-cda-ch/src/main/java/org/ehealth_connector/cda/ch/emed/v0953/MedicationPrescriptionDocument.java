@@ -54,8 +54,8 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	// MedicationPrescriptionDocument/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.1.1";
 	// MedicationPrescriptionDocument/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.1.4";
 	// MedicationPrescriptionDocument/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.9.1.1.1";
-	// Vocab not supported, yet. Should add a code:CHE / no code system !!
 	// Vocab not supported, yet. Should add a code:440545006 / 2.16.840.1.113883.6.96
+	// Vocab not supported, yet. Should add a code:CHE / no code system !!
 	}
 
 	@XmlTransient()
@@ -74,7 +74,7 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	private String myTypeCode;
 
 	@XmlTransient()
-	private org.ehealth_connector.cda.ch.emed.v0953.enums.HumanLanguage myValueSet;
+	private org.ehealth_connector.cda.ch.emed.v0953.enums.DocumentEntryConfidentialityCode myValueSet;
 
 	/**
 	 * Adds a hl7Authenticator
@@ -254,7 +254,7 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	/**
 	 * Creates fixed contents for CDA Attribute valueSet
 	 */
-	private void createValueSetFixedValue(org.ehealth_connector.cda.ch.emed.v0953.enums.HumanLanguage value) {
+	private void createValueSetFixedValue(org.ehealth_connector.cda.ch.emed.v0953.enums.DocumentEntryConfidentialityCode value) {
 		this.myValueSet = value;
 	}
 
@@ -437,7 +437,7 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	/**
 	 * Gets the member myValueSet
 	 */
-	public org.ehealth_connector.cda.ch.emed.v0953.enums.HumanLanguage getPredefinedValueSet() {
+	public org.ehealth_connector.cda.ch.emed.v0953.enums.DocumentEntryConfidentialityCode getPredefinedValueSet() {
 		return myValueSet;
 	}
 

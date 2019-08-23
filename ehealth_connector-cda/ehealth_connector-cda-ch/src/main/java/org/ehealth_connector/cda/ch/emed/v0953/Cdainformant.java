@@ -31,7 +31,7 @@ public class Cdainformant extends org.ehealth_connector.common.hl7cdar2.POCDMT00
 		super.setRelatedEntity(createHl7RelatedEntityFixedValue());
 	// CDAinformant/hl7:informant:null typeCode = "INF";
 	// CDAinformant/hl7:informant:null contextControlCode = "OP";
-	// CDAinformant/hl7:relatedEntity:cs classCode = valueSet("2.16.840.1.113883.1.11.19563");
+	// CDAinformant/hl7:relatedEntity:cs classCode = valueSet("2.16.840.1.113883.1.11.19563"); --> org.ehealth_connector.cda.ch.emed.v0953.enums.PersonalRelationshipRoleType
 	}
 
 	@XmlTransient()

@@ -32,7 +32,7 @@ public class CdachlrepHeaderLegalAuthenticator extends org.ehealth_connector.com
 		super.setSignatureCode(createHl7SignatureCodeFixedValue("S", "2.16.840.1.113883.1.11.10282", "ParticipationSignature", "signed"));
 	// cdachlrep_header_LegalAuthenticator/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.61";
 	// cdachlrep_header_LegalAuthenticator/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.5";
-	// cdachlrep_header_LegalAuthenticator/hl7:signatureCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.10282");
+	// cdachlrep_header_LegalAuthenticator/hl7:signatureCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.10282"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ParticipationSignature
 	// cdachlrep_header_LegalAuthenticator/hl7:signatureCode:cs code = "S";
 	// cdachlrep_header_LegalAuthenticator/hl7:signatureCode:oid codeSystem = "2.16.840.1.113883.1.11.10282";
 	// cdachlrep_header_LegalAuthenticator/hl7:signatureCode:st codeSystemName = "ParticipationSignature";

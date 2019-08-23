@@ -49,7 +49,7 @@ public class CdachlrepEntryLaboratoryBatteryOrganizerAntibiogram extends org.ehe
 	// cdachlrep_entry_LaboratoryBatteryOrganizerAntibiogram/hl7:code:oid codeSystem = "2.16.840.1.113883.6.1";
 	// cdachlrep_entry_LaboratoryBatteryOrganizerAntibiogram/hl7:code:st codeSystemName = "LOINC";
 	// cdachlrep_entry_LaboratoryBatteryOrganizerAntibiogram/hl7:code:st displayName = "Bacterial susceptibility panel";
-	// cdachlrep_entry_LaboratoryBatteryOrganizerAntibiogram/hl7:statusCode:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.2");
+	// cdachlrep_entry_LaboratoryBatteryOrganizerAntibiogram/hl7:statusCode:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.2"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusAbortedCompleted
 	// cdachlrep_entry_LaboratoryBatteryOrganizerAntibiogram/hl7:component:cs typeCode = "COMP";
 	// cdachlrep_entry_LaboratoryBatteryOrganizerAntibiogram/hl7:component:cs typeCode = "COMP";
 	// cdachlrep_entry_LaboratoryBatteryOrganizerAntibiogram/hl7:component:cs typeCode = "COMP";

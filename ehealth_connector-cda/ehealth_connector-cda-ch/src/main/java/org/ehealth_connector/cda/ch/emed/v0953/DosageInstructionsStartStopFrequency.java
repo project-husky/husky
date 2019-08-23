@@ -33,7 +33,7 @@ public class DosageInstructionsStartStopFrequency {
 	// DosageInstructionsStartStopFrequency/hl7:effectiveTime:cs operator = "A";
 	// DosageInstructionsStartStopFrequency/hl7:effectiveTime:cs operator = "A";
 	// DosageInstructionsStartStopFrequency/hl7:effectiveTime:cs type = "SXPR_TS";
-	// DosageInstructionsStartStopFrequency/hl7:routeCode:cs valueSet = valueSet("2.16.756.5.30.1.1.11.2");
+	// DosageInstructionsStartStopFrequency/hl7:routeCode:cs valueSet = valueSet("2.16.756.5.30.1.1.11.2"); --> org.ehealth_connector.cda.ch.emed.v0953.enums.RouteOfAdministrationEdqm
 	}
 
 	/**

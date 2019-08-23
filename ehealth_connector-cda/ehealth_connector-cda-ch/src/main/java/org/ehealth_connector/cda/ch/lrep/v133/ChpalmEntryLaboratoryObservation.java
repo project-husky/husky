@@ -55,12 +55,12 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	// chpalm_entry_LaboratoryObservation/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.6";
 	// chpalm_entry_LaboratoryObservation/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.3";
 	// chpalm_entry_LaboratoryObservation/hl7:code:st nullFlavor = "NAV";
-	// chpalm_entry_LaboratoryObservation/hl7:statusCode:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.2");
+	// chpalm_entry_LaboratoryObservation/hl7:statusCode:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.2"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusAbortedCompleted
 	// chpalm_entry_LaboratoryObservation/hl7:value:cs nullFlavor = "NA";
 	// chpalm_entry_LaboratoryObservation/hl7:value:cs nullFlavor = "NA";
 	// chpalm_entry_LaboratoryObservation/hl7:value:cs nullFlavor = "NA";
 	// chpalm_entry_LaboratoryObservation/hl7:value:cs nullFlavor = "NA";
-	// chpalm_entry_LaboratoryObservation/hl7:interpretationCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.78");
+	// chpalm_entry_LaboratoryObservation/hl7:interpretationCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.78"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ObservationInterpretation
 	// chpalm_entry_LaboratoryObservation/hl7:entryRelationship:cs typeCode = "COMP";
 	// chpalm_entry_LaboratoryObservation/hl7:entryRelationship:cs typeCode = "SUBJ";
 	// chpalm_entry_LaboratoryObservation/hl7:entryRelationship:bl inversionInd = "true";

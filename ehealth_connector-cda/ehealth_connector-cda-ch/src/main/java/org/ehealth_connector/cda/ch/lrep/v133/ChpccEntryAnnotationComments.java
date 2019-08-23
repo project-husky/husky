@@ -44,7 +44,7 @@ public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.h
 	// chpcc_entry_AnnotationComments/hl7:code:oid codeSystem = "2.16.840.1.113883.6.1";
 	// chpcc_entry_AnnotationComments/hl7:code:st codeSystemName = "LOINC";
 	// chpcc_entry_AnnotationComments/hl7:code:st displayName = "Annotation comment";
-	// chpcc_entry_AnnotationComments/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025");
+	// chpcc_entry_AnnotationComments/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusCompleted
 	// chpcc_entry_AnnotationComments/hl7:statusCode:cs code = "completed";
 	}
 

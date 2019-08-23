@@ -47,7 +47,7 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 	// chpcc_entry_PregnancyObservationDeliveryDate/hl7:code:oid codeSystem = "2.16.840.1.113883.6.1";
 	// chpcc_entry_PregnancyObservationDeliveryDate/hl7:code:st codeSystemName = "LOINC";
 	// chpcc_entry_PregnancyObservationDeliveryDate/hl7:code:st displayName = "DELIVERY DATE (CLINICAL ESTIMATE)";
-	// chpcc_entry_PregnancyObservationDeliveryDate/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025");
+	// chpcc_entry_PregnancyObservationDeliveryDate/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusCompleted
 	}
 
 	@XmlTransient()

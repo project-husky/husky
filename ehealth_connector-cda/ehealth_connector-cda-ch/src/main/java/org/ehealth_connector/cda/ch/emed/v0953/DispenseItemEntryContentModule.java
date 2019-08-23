@@ -44,7 +44,7 @@ public class DispenseItemEntryContentModule extends org.ehealth_connector.common
 	// DispenseItemEntryContentModule/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.9.1.3.4";
 	// DispenseItemEntryContentModule/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.4.7.3";
 	// DispenseItemEntryContentModule/hl7:templateId:uid root = "2.16.840.1.113883.10.20.1.34";
-	// DispenseItemEntryContentModule/hl7:code:cs valueSet = valueSet("2.16.756.5.30.1.127.77.4.11.7");
+	// DispenseItemEntryContentModule/hl7:code:cs valueSet = valueSet("2.16.756.5.30.1.127.77.4.11.7"); --> org.ehealth_connector.cda.ch.emed.v0953.enums.DispenseSupplyType
 	// DispenseItemEntryContentModule/hl7:entryRelationship:cs typeCode = "REFR";
 	// DispenseItemEntryContentModule/hl7:entryRelationship:cs typeCode = "REFR";
 	// DispenseItemEntryContentModule/hl7:entryRelationship:null typeCode = "REFR";

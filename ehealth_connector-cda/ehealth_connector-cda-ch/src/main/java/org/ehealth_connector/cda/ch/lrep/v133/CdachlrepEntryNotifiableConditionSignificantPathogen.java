@@ -44,7 +44,7 @@ public class CdachlrepEntryNotifiableConditionSignificantPathogen extends org.eh
 	// cdachlrep_entry_NotifiableConditionSignificantPathogen/hl7:code:oid codeSystem = "2.16.840.1.113883.6.96";
 	// cdachlrep_entry_NotifiableConditionSignificantPathogen/hl7:code:st codeSystemName = "SNOMED CT";
 	// cdachlrep_entry_NotifiableConditionSignificantPathogen/hl7:code:st displayName = "Notification of disease";
-	// cdachlrep_entry_NotifiableConditionSignificantPathogen/hl7:statusCode:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.2");
+	// cdachlrep_entry_NotifiableConditionSignificantPathogen/hl7:statusCode:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.2"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusAbortedCompleted
 	// cdachlrep_entry_NotifiableConditionSignificantPathogen/hl7:value:cs nullFlavor = "NA";
 	}
 

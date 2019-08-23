@@ -43,7 +43,7 @@ public class CdachvacdEntryGestationalAgeAtBirth extends org.ehealth_connector.c
 	// cdachvacd_entry_GestationalAgeAtBirth/hl7:code:oid codeSystem = "2.16.840.1.113883.6.1";
 	// cdachvacd_entry_GestationalAgeAtBirth/hl7:code:st codeSystemName = "LOINC";
 	// cdachvacd_entry_GestationalAgeAtBirth/hl7:code:st displayName = "Gestational age in days";
-	// cdachvacd_entry_GestationalAgeAtBirth/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025");
+	// cdachvacd_entry_GestationalAgeAtBirth/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusCompleted
 	}
 
 	@XmlTransient()

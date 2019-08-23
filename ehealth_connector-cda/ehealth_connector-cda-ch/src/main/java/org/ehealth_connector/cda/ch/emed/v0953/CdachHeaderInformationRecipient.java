@@ -31,13 +31,13 @@ public class CdachHeaderInformationRecipient extends org.ehealth_connector.commo
 
 	public CdachHeaderInformationRecipient() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.4"));
-	// cdach_header_InformationRecipient/hl7:informationRecipient:cs typeCode = valueSet("2.16.840.1.113883.1.11.19366");
-	// cdach_header_InformationRecipient/hl7:informationRecipient:cs typeCode = valueSet("2.16.840.1.113883.1.11.19366");
+	// cdach_header_InformationRecipient/hl7:informationRecipient:cs typeCode = valueSet("2.16.840.1.113883.1.11.19366"); --> org.ehealth_connector.common.hl7cdar2.XInformationRecipient
+	// cdach_header_InformationRecipient/hl7:informationRecipient:cs typeCode = valueSet("2.16.840.1.113883.1.11.19366"); --> org.ehealth_connector.common.hl7cdar2.XInformationRecipient
 	// cdach_header_InformationRecipient/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.4";
 	}
 
 	@XmlTransient()
-	private org.ehealth_connector.cda.ch.emed.v0953.enums.XInformationRecipient myTypeCode;
+	private org.ehealth_connector.common.hl7cdar2.XInformationRecipient myTypeCode;
 
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
@@ -54,7 +54,7 @@ public class CdachHeaderInformationRecipient extends org.ehealth_connector.commo
 	/**
 	 * Creates fixed contents for CDA Attribute typeCode
 	 */
-	private void createTypeCodeFixedValue(org.ehealth_connector.cda.ch.emed.v0953.enums.XInformationRecipient value) {
+	private void createTypeCodeFixedValue(org.ehealth_connector.common.hl7cdar2.XInformationRecipient value) {
 		this.myTypeCode = value;
 	}
 
@@ -79,7 +79,7 @@ public class CdachHeaderInformationRecipient extends org.ehealth_connector.commo
 	/**
 	 * Gets the member myTypeCode
 	 */
-	public org.ehealth_connector.cda.ch.emed.v0953.enums.XInformationRecipient getPredefinedTypeCode() {
+	public org.ehealth_connector.common.hl7cdar2.XInformationRecipient getPredefinedTypeCode() {
 		return myTypeCode;
 	}
 

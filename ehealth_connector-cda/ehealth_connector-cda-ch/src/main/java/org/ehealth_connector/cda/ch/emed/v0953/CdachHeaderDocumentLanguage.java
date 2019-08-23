@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class CdachHeaderDocumentLanguage extends org.ehealth_connector.common.hl7cdar2.CS {
 
 	public CdachHeaderDocumentLanguage() {
-	// cdach_header_DocumentLanguage/hl7:languageCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.11526");
+	// cdach_header_DocumentLanguage/hl7:languageCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.11526"); --> org.ehealth_connector.cda.ch.emed.v0953.enums.HumanLanguage
 	}
 
 	@XmlTransient()

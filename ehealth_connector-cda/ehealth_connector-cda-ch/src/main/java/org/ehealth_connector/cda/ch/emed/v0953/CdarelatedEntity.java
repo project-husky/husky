@@ -28,7 +28,7 @@ public class CdarelatedEntity {
 
 	public CdarelatedEntity() {
 		this.code = createHl7CodeFixedValue();
-	// CDARelatedEntity/hl7:code:cs classCode = valueSet("2.16.840.1.113883.1.11.19563");
+	// CDARelatedEntity/hl7:code:cs classCode = valueSet("2.16.840.1.113883.1.11.19563"); --> org.ehealth_connector.cda.ch.emed.v0953.enums.PersonalRelationshipRoleType
 	}
 
 	/**

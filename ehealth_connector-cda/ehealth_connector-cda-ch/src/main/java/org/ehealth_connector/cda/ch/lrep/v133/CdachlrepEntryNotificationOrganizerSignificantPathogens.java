@@ -37,7 +37,7 @@ public class CdachlrepEntryNotificationOrganizerSignificantPathogens extends org
 	// cdachlrep_entry_NotificationOrganizerSignificantPathogens/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.88";
 	// cdachlrep_entry_NotificationOrganizerSignificantPathogens/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.13";
 	// cdachlrep_entry_NotificationOrganizerSignificantPathogens/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.1";
-	// cdachlrep_entry_NotificationOrganizerSignificantPathogens/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025");
+	// cdachlrep_entry_NotificationOrganizerSignificantPathogens/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusCompleted
 	// cdachlrep_entry_NotificationOrganizerSignificantPathogens/hl7:statusCode:st code = "completed";
 	}
 

@@ -46,7 +46,7 @@ public class CdachlrepEntryLaboratoryIsolateOrganizerPathogenDetection extends o
 	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.85";
 	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.17";
 	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.5";
-	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20309");
+	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20309"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusAbortedCancelledCompleted
 	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:statusCode:cs code = "completed";
 	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:specimen:cs typeCode = "SPC";
 	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:component:cs typeCode = "COMP";

@@ -33,7 +33,7 @@ public class CdachlrepSectionLaboratoryReportItemCoded extends org.ehealth_conne
 	// cdachlrep_section_LaboratoryReportItemCoded/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.3.2.2";
 	// cdachlrep_section_LaboratoryReportItemCoded/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.3.5";
 	// cdachlrep_section_LaboratoryReportItemCoded/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.3.76";
-	// cdachlrep_section_LaboratoryReportItemCoded/hl7:code:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.1");
+	// cdachlrep_section_LaboratoryReportItemCoded/hl7:code:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.1"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.LaboratorySpecialties
 	// cdachlrep_section_LaboratoryReportItemCoded/hl7:code:oid codeSystem = "2.16.840.1.113883.6.1";
 	// cdachlrep_section_LaboratoryReportItemCoded/hl7:code:st codeSystemName = "LOINC";
 	// cdachlrep_section_LaboratoryReportItemCoded/hl7:entry:cs typeCode = "DRIV";

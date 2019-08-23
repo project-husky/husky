@@ -41,7 +41,7 @@ public class ChpalmEntryLaboratoryIsolateOrganizer extends org.ehealth_connector
 	// chpalm_entry_LaboratoryIsolateOrganizer/hl7:organizer:cs moodCode = "EVN";
 	// chpalm_entry_LaboratoryIsolateOrganizer/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.17";
 	// chpalm_entry_LaboratoryIsolateOrganizer/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.5";
-	// chpalm_entry_LaboratoryIsolateOrganizer/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20309");
+	// chpalm_entry_LaboratoryIsolateOrganizer/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20309"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusAbortedCancelledCompleted
 	// chpalm_entry_LaboratoryIsolateOrganizer/hl7:specimen:cs typeCode = "SPC";
 	// chpalm_entry_LaboratoryIsolateOrganizer/hl7:component:cs typeCode = "COMP";
 	// chpalm_entry_LaboratoryIsolateOrganizer/hl7:component:cs typeCode = "COMP";

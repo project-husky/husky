@@ -74,7 +74,7 @@ public class MedicationDispenseDocument extends org.ehealth_connector.common.hl7
 	private String myTypeCode;
 
 	@XmlTransient()
-	private org.ehealth_connector.cda.ch.emed.v0953.enums.HumanLanguage myValueSet;
+	private org.ehealth_connector.cda.ch.emed.v0953.enums.DocumentEntryConfidentialityCode myValueSet;
 
 	/**
 	 * Adds a hl7Authenticator
@@ -290,7 +290,7 @@ public class MedicationDispenseDocument extends org.ehealth_connector.common.hl7
 	/**
 	 * Creates fixed contents for CDA Attribute valueSet
 	 */
-	private void createValueSetFixedValue(org.ehealth_connector.cda.ch.emed.v0953.enums.HumanLanguage value) {
+	private void createValueSetFixedValue(org.ehealth_connector.cda.ch.emed.v0953.enums.DocumentEntryConfidentialityCode value) {
 		this.myValueSet = value;
 	}
 
@@ -481,7 +481,7 @@ public class MedicationDispenseDocument extends org.ehealth_connector.common.hl7
 	/**
 	 * Gets the member myValueSet
 	 */
-	public org.ehealth_connector.cda.ch.emed.v0953.enums.HumanLanguage getPredefinedValueSet() {
+	public org.ehealth_connector.cda.ch.emed.v0953.enums.DocumentEntryConfidentialityCode getPredefinedValueSet() {
 		return myValueSet;
 	}
 

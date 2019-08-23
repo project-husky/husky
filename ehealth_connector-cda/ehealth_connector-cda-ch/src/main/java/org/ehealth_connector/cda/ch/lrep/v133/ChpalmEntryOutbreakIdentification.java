@@ -37,7 +37,7 @@ public class ChpalmEntryOutbreakIdentification extends org.ehealth_connector.com
 	// chpalm_entry_OutbreakIdentification/hl7:observation:cs moodCode = "EVN";
 	// chpalm_entry_OutbreakIdentification/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.1.3";
 	// chpalm_entry_OutbreakIdentification/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.16";
-	// chpalm_entry_OutbreakIdentification/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025");
+	// chpalm_entry_OutbreakIdentification/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusCompleted
 	// chpalm_entry_OutbreakIdentification/hl7:value:cs nullFlavor = "NA";
 	}
 
