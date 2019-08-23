@@ -30,9 +30,7 @@ public class DocumentCodeMedicationTreatmentPlan extends org.ehealth_connector.c
 	public DocumentCodeMedicationTreatmentPlan() {
 		super.setCode("761931002");
 		super.getTranslation().add(createHl7TranslationFixedValue("761931002"));
-	// Vocab not supported, yet. Should add a code:761931002 / 2.16.840.1.113883.6.96
 	// DocumentCodeMedicationTreatmentPlan/hl7:code:cs code = "761931002"; (isVocab)
-	// Vocab not supported, yet. Should add a code:761931002 / 2.16.840.1.113883.6.96
 	// DocumentCodeMedicationTreatmentPlan/hl7:translation:cs code = "761931002"; (isVocab)
 	}
 

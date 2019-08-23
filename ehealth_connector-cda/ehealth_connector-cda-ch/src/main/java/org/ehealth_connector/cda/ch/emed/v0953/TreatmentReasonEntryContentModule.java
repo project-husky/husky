@@ -34,9 +34,7 @@ public class TreatmentReasonEntryContentModule extends org.ehealth_connector.com
 	// TreatmentReasonEntryContentModule/hl7:observation:cs classCode = "OBS";
 	// TreatmentReasonEntryContentModule/hl7:observation:cs moodCode = "EVN";
 	// TreatmentReasonEntryContentModule/hl7:templateId:null root = "2.16.756.5.30.1.1.10.4.41";
-	// Vocab not supported, yet. Should add a code:75326-9 / 2.16.840.1.113883.6.1
 	// TreatmentReasonEntryContentModule/hl7:code:cs code = "75326-9"; (isVocab)
-	// Vocab not supported, yet. Should add a code:completed / no code system !!
 	// TreatmentReasonEntryContentModule/hl7:statusCode:cs code = "completed"; (isVocab)
 	}
 

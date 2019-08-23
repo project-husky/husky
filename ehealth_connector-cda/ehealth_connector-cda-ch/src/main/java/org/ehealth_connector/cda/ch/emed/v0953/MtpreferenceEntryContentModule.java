@@ -38,7 +38,6 @@ public class MtpreferenceEntryContentModule extends org.ehealth_connector.common
 	// MTPReferenceEntryContentModule/hl7:substanceAdministration:cs moodCode = "INT";
 	// MTPReferenceEntryContentModule/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.9.1.3.10";
 	// MTPReferenceEntryContentModule/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.45";
-	// Vocab not supported, yet. Should add a code:MTPItem / 1.3.6.1.4.1.19376.1.9.2.2
 	// MTPReferenceEntryContentModule/hl7:code:cs code = "MTPItem"; (isVocab)
 	// MTPReferenceEntryContentModule/hl7:reference:cs typeCode = "XCRPT";
 	}

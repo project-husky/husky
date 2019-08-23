@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.emed.v0953;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -54,8 +55,6 @@ public class MedicationListDocument extends org.ehealth_connector.common.hl7cdar
 	// MedicationListDocument/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.1.1";
 	// MedicationListDocument/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.9.1.1.5";
 	// MedicationListDocument/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.1.13";
-	// Vocab not supported, yet. Should add a code:721912009 / 2.16.840.1.113883.6.96
-	// Vocab not supported, yet. Should add a code:CHE / no code system !!
 	}
 
 	@XmlTransient()
@@ -71,7 +70,7 @@ public class MedicationListDocument extends org.ehealth_connector.common.hl7cdar
 	private String myContextControlCode;
 
 	@XmlTransient()
-	private String myTypeCode;
+	private org.ehealth_connector.common.hl7cdar2.XInformationRecipient myTypeCode;
 
 	@XmlTransient()
 	private org.ehealth_connector.cda.ch.emed.v0953.enums.DocumentEntryConfidentialityCode myValueSet;
@@ -283,7 +282,7 @@ public class MedicationListDocument extends org.ehealth_connector.common.hl7cdar
 	/**
 	 * Creates fixed contents for CDA Attribute typeCode
 	 */
-	private void createTypeCodeFixedValue(String value) {
+	private void createTypeCodeFixedValue(org.ehealth_connector.common.hl7cdar2.XInformationRecipient value) {
 		this.myTypeCode = value;
 	}
 
@@ -473,7 +472,7 @@ public class MedicationListDocument extends org.ehealth_connector.common.hl7cdar
 	/**
 	 * Gets the member myTypeCode
 	 */
-	public String getPredefinedTypeCode() {
+	public org.ehealth_connector.common.hl7cdar2.XInformationRecipient getPredefinedTypeCode() {
 		return myTypeCode;
 	}
 
@@ -494,6 +493,21 @@ public class MedicationListDocument extends org.ehealth_connector.common.hl7cdar
 			docId = new Identificator(Identificator.builder().withRoot(org.openhealthtools.ihe.utils.UUID.generate()).build());
 		super.setId(docId.getHl7CdaR2Ii());
 		setVersion(docId, 1);
+	}
+
+	/**
+	 * Increases the version number by one and makes sure the setId remains the same as previously.
+	 * @param newDocId the new doc id
+	 */
+	public void initNextVersion(Identificator newDocId) {
+		org.ehealth_connector.common.hl7cdar2.II setId = getSetId();
+		if (setId == null)
+			setId = getId();
+		if (setId == null)
+			setId = newDocId.getHl7CdaR2Ii();
+		Integer version = CdaUtil.getInt(getVersionNumber());
+		setId(newDocId.getHl7CdaR2Ii());
+		setVersion(new Identificator(setId), version + 1);
 	}
 
 	/**
@@ -526,8 +540,9 @@ public class MedicationListDocument extends org.ehealth_connector.common.hl7cdar
 	 * @throws JAXBException the JAXB exception
 	 * @throws ParserConfigurationException the parser configuration exception
 	 * @throws TransformerException the transformer exception
+	 * @throws FileNotFoundException the file not found exception
 	 */
-	public void saveToFile(String outputFileName) throws JAXBException, ParserConfigurationException, TransformerException {
+	public void saveToFile(String outputFileName) throws JAXBException, ParserConfigurationException, TransformerException, FileNotFoundException {
 		saveToFile(new File(outputFileName), null, null);
 	}
 
@@ -537,8 +552,9 @@ public class MedicationListDocument extends org.ehealth_connector.common.hl7cdar
 	 * @throws JAXBException the JAXB exception
 	 * @throws ParserConfigurationException the parser configuration exception
 	 * @throws TransformerException the transformer exception
+	 * @throws FileNotFoundException the file not found exception
 	 */
-	public void saveToFile(File outputFile) throws JAXBException, ParserConfigurationException, TransformerException {
+	public void saveToFile(File outputFile) throws JAXBException, ParserConfigurationException, TransformerException, FileNotFoundException {
 		saveToFile(outputFile, null, null);
 	}
 
@@ -549,9 +565,9 @@ public class MedicationListDocument extends org.ehealth_connector.common.hl7cdar
 	 * @param css the path and filename or url to the rendering css
 	 * @throws JAXBException the JAXB exception
 	 * @throws ParserConfigurationException the parser configuration exception
-	 * @throws TransformerException the transformer exception
+	 * @throws TransformerException the transformer exception\n@throws FileNotFoundException the file not found exception
 	 */
-	public void saveToFile(String outputFileName, String xsl, String css) throws JAXBException, ParserConfigurationException, TransformerException {
+	public void saveToFile(String outputFileName, String xsl, String css) throws JAXBException, ParserConfigurationException, TransformerException, FileNotFoundException {
 		saveToFile(new File(outputFileName), xsl, css);
 	}
 
@@ -562,9 +578,9 @@ public class MedicationListDocument extends org.ehealth_connector.common.hl7cdar
 	 * @param css the path and filename or url to the rendering css
 	 * @throws JAXBException the JAXB exception
 	 * @throws ParserConfigurationException the parser configuration exception
-	 * @throws TransformerException the transformer exception
+	 * @throws TransformerException the transformer exception\n@throws FileNotFoundException the file not found exception
 	 */
-	public void saveToFile(File outputFile, String xsl, String css) throws JAXBException, ParserConfigurationException, TransformerException {
+	public void saveToFile(File outputFile, String xsl, String css) throws JAXBException, ParserConfigurationException, TransformerException, FileNotFoundException {
 		CdaUtil.saveJaxbObjectToFile(this, outputFile, xsl, css);
 	}
 

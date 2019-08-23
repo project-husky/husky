@@ -38,7 +38,6 @@ public class PadvreferenceEntryContentModule extends org.ehealth_connector.commo
 	// PADVReferenceEntryContentModule/hl7:observation:cs moodCode = "EVN";
 	// PADVReferenceEntryContentModule/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.9.1.3.13";
 	// PADVReferenceEntryContentModule/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.53";
-	// Vocab not supported, yet. Should add a code:PADVItem / 1.3.6.1.4.1.19376.1.9.2.2
 	// PADVReferenceEntryContentModule/hl7:code:cs code = "PADVItem"; (isVocab)
 	// PADVReferenceEntryContentModule/hl7:reference:cs typeCode = "XCRPT";
 	}

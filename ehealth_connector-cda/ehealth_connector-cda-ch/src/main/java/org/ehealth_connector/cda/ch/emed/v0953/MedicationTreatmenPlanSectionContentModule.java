@@ -30,7 +30,6 @@ public class MedicationTreatmenPlanSectionContentModule extends org.ehealth_conn
 		super.setCode(createHl7CodeFixedValue("77604-7"));
 	// MedicationTreatmenPlanSectionContentModule/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.3.13";
 	// MedicationTreatmenPlanSectionContentModule/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.9.1.2.6";
-	// Vocab not supported, yet. Should add a code:77604-7 / 2.16.840.1.113883.6.1
 	// MedicationTreatmenPlanSectionContentModule/hl7:code:cs code = "77604-7"; (isVocab)
 	}
 

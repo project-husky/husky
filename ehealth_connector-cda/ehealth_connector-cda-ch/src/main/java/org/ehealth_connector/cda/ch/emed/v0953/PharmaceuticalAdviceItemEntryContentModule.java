@@ -43,21 +43,13 @@ public class PharmaceuticalAdviceItemEntryContentModule extends org.ehealth_conn
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:observation:cs moodCode = "EVN";
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.44";
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.9.1.3.3";
-	// Vocab not supported, yet. Should add a code:COMMENT / 1.3.6.1.4.1.19376.1.9.2.1
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:code:cs code = "COMMENT"; (isVocab)
-	// Vocab not supported, yet. Should add a code:COMMENT / 1.3.6.1.4.1.19376.1.9.2.1
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:code:cs code = "COMMENT"; (isVocab)
-	// Vocab not supported, yet. Should add a code:COMMENT / 1.3.6.1.4.1.19376.1.9.2.1
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:code:cs code = "COMMENT"; (isVocab)
-	// Vocab not supported, yet. Should add a code:COMMENT / 1.3.6.1.4.1.19376.1.9.2.1
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:code:cs code = "COMMENT"; (isVocab)
-	// Vocab not supported, yet. Should add a code:COMMENT / 1.3.6.1.4.1.19376.1.9.2.1
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:code:cs code = "COMMENT"; (isVocab)
-	// Vocab not supported, yet. Should add a code:COMMENT / 1.3.6.1.4.1.19376.1.9.2.1
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:code:cs code = "COMMENT"; (isVocab)
-	// Vocab not supported, yet. Should add a code:completed / no code system !!
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:statusCode:cs code = "completed"; (isVocab)
-	// Vocab not supported, yet. Should add a code:completed / no code system !!
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:statusCode:cs code = "completed"; (isVocab)
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:entryRelationship:cs typeCode = "REFR";
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:entryRelationship:cs typeCode = "REFR";

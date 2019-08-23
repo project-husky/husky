@@ -30,7 +30,6 @@ public class DispenseSectionContentModule extends org.ehealth_connector.common.h
 		super.setCode(createHl7CodeFixedValue("60590-7"));
 	// DispenseSectionContentModule/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.9.1.2.3";
 	// DispenseSectionContentModule/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.3.11";
-	// Vocab not supported, yet. Should add a code:60590-7 / 2.16.840.1.113883.6.1
 	// DispenseSectionContentModule/hl7:code:cs code = "60590-7"; (isVocab)
 	}
 

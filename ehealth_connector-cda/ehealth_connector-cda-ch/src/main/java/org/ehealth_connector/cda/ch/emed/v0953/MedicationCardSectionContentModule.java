@@ -30,7 +30,6 @@ public class MedicationCardSectionContentModule extends org.ehealth_connector.co
 		super.setCode(createHl7CodeFixedValue("10160-0"));
 	// MedicationCardSectionContentModule/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.3.9";
 	// MedicationCardSectionContentModule/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.9.1.2.5";
-	// Vocab not supported, yet. Should add a code:10160-0 / 2.16.840.1.113883.6.1
 	// MedicationCardSectionContentModule/hl7:code:cs code = "10160-0"; (isVocab)
 	}
 

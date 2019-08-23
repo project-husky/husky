@@ -17,6 +17,9 @@
 package org.ehealth_connector.cda.utils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 
 import javax.xml.bind.Binder;
 import javax.xml.bind.JAXBContext;
@@ -31,6 +34,11 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.basetypes.NameBaseType;
+import org.ehealth_connector.common.hl7cdar2.EN;
+import org.ehealth_connector.common.hl7cdar2.INT;
+import org.ehealth_connector.common.hl7cdar2.SC;
 import org.ehealth_connector.common.mdht.enums.EhcVersions;
 import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
@@ -49,18 +57,51 @@ public class CdaUtil {
 				+ EhcVersions.getCurrentVersion().getReleaseDate();
 	}
 
-	public static void saveJaxbObjectToFile(Object jaxbObject, File outputFile, String xsl,
-			String css) throws JAXBException, ParserConfigurationException, TransformerException {
-		// JAXBContext context = JAXBContext.newInstance(jaxbObject.getClass());
-		// Marshaller mar = context.createMarshaller();
-		// mar.setProperty("com.sun.xml.bind.namespacePrefixMapper", new
-		// CdaNamespacePrefixMapper());
-		// mar.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-		// mar.setProperty("com.sun.xml.bind.xmlDeclaration", Boolean.FALSE);
-		// mar.setProperty("com.sun.xml.bind.xmlHeaders",
-		// "<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-		// mar.marshal(jaxbObject, outputFile);
+	public static String getFullName(EN en) {
+		NameBaseType nameBt = Name.createNameBaseType(en);
+		return nameBt.getFullName();
+	}
 
+	public static String getFullName(SC value) {
+		return value.xmlContent;
+	}
+
+	public static Integer getInt(INT value) {
+		return value.getValue().intValue();
+	}
+
+	/**
+	 * <div class="en">prints the XML representation of the document to the
+	 * console</div> <div class="de">Gibt die XML-Repräsentation des Dokuments
+	 * auf der Konsole aus</div>.
+	 *
+	 * @throws TransformerException
+	 * @throws ParserConfigurationException
+	 * @throws JAXBException
+	 */
+	public static void printCdaToConsole(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument cdaDoc)
+			throws JAXBException, ParserConfigurationException, TransformerException {
+		org.ehealth_connector.cda.utils.CdaUtil.saveJaxbObjectToStream(cdaDoc, System.out, null,
+				null);
+	}
+
+	public static void saveJaxbObjectToFile(Object jaxbObject, File outputFile, String xsl,
+			String css) throws JAXBException, ParserConfigurationException, TransformerException,
+			FileNotFoundException {
+		saveJaxbObjectToStream(jaxbObject, new FileOutputStream(outputFile), xsl, css);
+
+	}
+
+	public static void saveJaxbObjectToFile(Object jaxbObject, String outputFileName, String xsl,
+			String css) throws JAXBException, ParserConfigurationException, TransformerException,
+			FileNotFoundException {
+		saveJaxbObjectToFile(jaxbObject, new File(outputFileName), xsl, css);
+	}
+
+	public static void saveJaxbObjectToStream(Object jaxbObject, OutputStream outputStream,
+			String xsl, String css)
+			throws JAXBException, ParserConfigurationException, TransformerException {
 		final JAXBContext context = JAXBContext.newInstance(jaxbObject.getClass());
 		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		final DocumentBuilder builder = factory.newDocumentBuilder();
@@ -77,7 +118,7 @@ public class CdaUtil {
 		binder.marshal(jaxbObject, doc);
 
 		final DOMSource domSource = new DOMSource(doc);
-		final StreamResult streamResult = new StreamResult(outputFile);
+		final StreamResult streamResult = new StreamResult(outputStream);
 		final TransformerFactory tf = TransformerFactory.newInstance();
 		final Transformer transformer = tf.newTransformer();
 		transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
@@ -85,11 +126,6 @@ public class CdaUtil {
 		transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 		transformer.transform(domSource, streamResult);
 
-	}
-
-	public static void saveJaxbObjectToFile(Object jaxbObject, String outputFileName, String xsl,
-			String css) throws JAXBException, ParserConfigurationException, TransformerException {
-		saveJaxbObjectToFile(jaxbObject, new File(outputFileName), xsl, css);
 	}
 
 }

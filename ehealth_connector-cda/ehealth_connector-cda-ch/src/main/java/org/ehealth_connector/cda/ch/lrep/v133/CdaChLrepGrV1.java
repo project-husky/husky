@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -55,7 +56,6 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	// CDA-CH-LREP-GR-V1/hl7:typeId:uid root = "2.16.840.1.113883.1.3";
 	// CDA-CH-LREP-GR-V1/hl7:typeId:st extension = "POCD_HD000040";
 	// CDA-CH-LREP-GR-V1/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.1.10";
-	// Vocab not supported, yet. Should add a code:CHE / no code system !!
 	}
 
 	@XmlTransient()
@@ -71,10 +71,10 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	private org.ehealth_connector.cda.ch.lrep.v133.enums.DocumentEntryTypeCode myDisplayName;
 
 	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.XInformationRecipient myTypeCode;
+	private String myTypeCode;
 
 	@XmlTransient()
-	private org.ehealth_connector.cda.ch.lrep.v133.enums.HumanLanguage myValueSet;
+	private org.ehealth_connector.cda.ch.lrep.v133.enums.DocumentEntryConfidentialityCode myValueSet;
 
 	/**
 	 * Adds a hl7Authenticator
@@ -118,7 +118,7 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 
 	/**
 	 * Adds a hl7Participant
-	 * Information on a patient's insurance card.
+	 * Information on a patient's insurance.
 	 */
 	public void addHl7Participant(org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 value) {
 		getParticipant().add(value);
@@ -126,7 +126,7 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 
 	/**
 	 * Adds a hl7RecordTarget
-	 * Patient (Human Patient).
+	 * Non-Human Subject.
 	 */
 	public void addHl7RecordTarget(org.ehealth_connector.common.hl7cdar2.POCDMT000040RecordTarget value) {
 		getRecordTarget().add(value);
@@ -185,7 +185,7 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 
 	/**
 	 * Adds a hl7Participant
-	 * Information on a patient's insurance card.
+	 * Information on a patient's insurance.
 	 */
 	public void clearHl7Participant() {
 		getParticipant().clear();
@@ -193,7 +193,7 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 
 	/**
 	 * Adds a hl7RecordTarget
-	 * Patient (Human Patient).
+	 * Non-Human Subject.
 	 */
 	public void clearHl7RecordTarget() {
 		getRecordTarget().clear();
@@ -267,14 +267,14 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	/**
 	 * Creates fixed contents for CDA Attribute typeCode
 	 */
-	private void createTypeCodeFixedValue(org.ehealth_connector.common.hl7cdar2.XInformationRecipient value) {
+	private void createTypeCodeFixedValue(String value) {
 		this.myTypeCode = value;
 	}
 
 	/**
 	 * Creates fixed contents for CDA Attribute valueSet
 	 */
-	private void createValueSetFixedValue(org.ehealth_connector.cda.ch.lrep.v133.enums.HumanLanguage value) {
+	private void createValueSetFixedValue(org.ehealth_connector.cda.ch.lrep.v133.enums.DocumentEntryConfidentialityCode value) {
 		this.myValueSet = value;
 	}
 
@@ -440,14 +440,14 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	/**
 	 * Gets the member myTypeCode
 	 */
-	public org.ehealth_connector.common.hl7cdar2.XInformationRecipient getPredefinedTypeCode() {
+	public String getPredefinedTypeCode() {
 		return myTypeCode;
 	}
 
 	/**
 	 * Gets the member myValueSet
 	 */
-	public org.ehealth_connector.cda.ch.lrep.v133.enums.HumanLanguage getPredefinedValueSet() {
+	public org.ehealth_connector.cda.ch.lrep.v133.enums.DocumentEntryConfidentialityCode getPredefinedValueSet() {
 		return myValueSet;
 	}
 
@@ -461,6 +461,21 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 			docId = new Identificator(Identificator.builder().withRoot(org.openhealthtools.ihe.utils.UUID.generate()).build());
 		super.setId(docId.getHl7CdaR2Ii());
 		setVersion(docId, 1);
+	}
+
+	/**
+	 * Increases the version number by one and makes sure the setId remains the same as previously.
+	 * @param newDocId the new doc id
+	 */
+	public void initNextVersion(Identificator newDocId) {
+		org.ehealth_connector.common.hl7cdar2.II setId = getSetId();
+		if (setId == null)
+			setId = getId();
+		if (setId == null)
+			setId = newDocId.getHl7CdaR2Ii();
+		Integer version = CdaUtil.getInt(getVersionNumber());
+		setId(newDocId.getHl7CdaR2Ii());
+		setVersion(new Identificator(setId), version + 1);
 	}
 
 	/**
@@ -493,8 +508,9 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 * @throws JAXBException the JAXB exception
 	 * @throws ParserConfigurationException the parser configuration exception
 	 * @throws TransformerException the transformer exception
+	 * @throws FileNotFoundException the file not found exception
 	 */
-	public void saveToFile(String outputFileName) throws JAXBException, ParserConfigurationException, TransformerException {
+	public void saveToFile(String outputFileName) throws JAXBException, ParserConfigurationException, TransformerException, FileNotFoundException {
 		saveToFile(new File(outputFileName), null, null);
 	}
 
@@ -504,8 +520,9 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 * @throws JAXBException the JAXB exception
 	 * @throws ParserConfigurationException the parser configuration exception
 	 * @throws TransformerException the transformer exception
+	 * @throws FileNotFoundException the file not found exception
 	 */
-	public void saveToFile(File outputFile) throws JAXBException, ParserConfigurationException, TransformerException {
+	public void saveToFile(File outputFile) throws JAXBException, ParserConfigurationException, TransformerException, FileNotFoundException {
 		saveToFile(outputFile, null, null);
 	}
 
@@ -516,9 +533,9 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 * @param css the path and filename or url to the rendering css
 	 * @throws JAXBException the JAXB exception
 	 * @throws ParserConfigurationException the parser configuration exception
-	 * @throws TransformerException the transformer exception
+	 * @throws TransformerException the transformer exception\n@throws FileNotFoundException the file not found exception
 	 */
-	public void saveToFile(String outputFileName, String xsl, String css) throws JAXBException, ParserConfigurationException, TransformerException {
+	public void saveToFile(String outputFileName, String xsl, String css) throws JAXBException, ParserConfigurationException, TransformerException, FileNotFoundException {
 		saveToFile(new File(outputFileName), xsl, css);
 	}
 
@@ -529,9 +546,9 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 * @param css the path and filename or url to the rendering css
 	 * @throws JAXBException the JAXB exception
 	 * @throws ParserConfigurationException the parser configuration exception
-	 * @throws TransformerException the transformer exception
+	 * @throws TransformerException the transformer exception\n@throws FileNotFoundException the file not found exception
 	 */
-	public void saveToFile(File outputFile, String xsl, String css) throws JAXBException, ParserConfigurationException, TransformerException {
+	public void saveToFile(File outputFile, String xsl, String css) throws JAXBException, ParserConfigurationException, TransformerException, FileNotFoundException {
 		CdaUtil.saveJaxbObjectToFile(this, outputFile, xsl, css);
 	}
 

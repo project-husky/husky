@@ -30,9 +30,7 @@ public class DocumentCodeMedicationDispense extends org.ehealth_connector.common
 	public DocumentCodeMedicationDispense() {
 		super.setCode("275670009");
 		super.getTranslation().add(createHl7TranslationFixedValue("275670009"));
-	// Vocab not supported, yet. Should add a code:275670009 / 2.16.840.1.113883.6.96
 	// DocumentCodeMedicationDispense/hl7:code:cs code = "275670009"; (isVocab)
-	// Vocab not supported, yet. Should add a code:275670009 / 2.16.840.1.113883.6.96
 	// DocumentCodeMedicationDispense/hl7:translation:cs code = "275670009"; (isVocab)
 	}
 

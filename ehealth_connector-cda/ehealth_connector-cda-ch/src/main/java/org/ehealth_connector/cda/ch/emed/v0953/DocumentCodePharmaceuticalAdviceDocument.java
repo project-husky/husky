@@ -30,9 +30,7 @@ public class DocumentCodePharmaceuticalAdviceDocument extends org.ehealth_connec
 	public DocumentCodePharmaceuticalAdviceDocument() {
 		super.setCode("1221000195109");
 		super.getTranslation().add(createHl7TranslationFixedValue("1221000195109"));
-	// Vocab not supported, yet. Should add a code:1221000195109 / 2.16.840.1.113883.6.96
 	// DocumentCodePharmaceuticalAdviceDocument/hl7:code:cs code = "1221000195109"; (isVocab)
-	// Vocab not supported, yet. Should add a code:1221000195109 / 2.16.840.1.113883.6.96
 	// DocumentCodePharmaceuticalAdviceDocument/hl7:translation:cs code = "1221000195109"; (isVocab)
 	}
 

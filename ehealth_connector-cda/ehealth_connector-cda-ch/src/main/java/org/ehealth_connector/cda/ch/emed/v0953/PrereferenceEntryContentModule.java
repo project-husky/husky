@@ -38,7 +38,6 @@ public class PrereferenceEntryContentModule extends org.ehealth_connector.common
 	// PREReferenceEntryContentModule/hl7:substanceAdministration:cs moodCode = "INT";
 	// PREReferenceEntryContentModule/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.9.1.3.11";
 	// PREReferenceEntryContentModule/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.47";
-	// Vocab not supported, yet. Should add a code:PREItem / 1.3.6.1.4.1.19376.1.9.2.2
 	// PREReferenceEntryContentModule/hl7:code:cs code = "PREItem"; (isVocab)
 	// PREReferenceEntryContentModule/hl7:reference:cs typeCode = "XCRPT";
 	}

@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.emed.v0953;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
@@ -54,8 +55,6 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	// MedicationPrescriptionDocument/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.1.1";
 	// MedicationPrescriptionDocument/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.1.4";
 	// MedicationPrescriptionDocument/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.9.1.1.1";
-	// Vocab not supported, yet. Should add a code:440545006 / 2.16.840.1.113883.6.96
-	// Vocab not supported, yet. Should add a code:CHE / no code system !!
 	}
 
 	@XmlTransient()
@@ -71,7 +70,7 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	private String myContextControlCode;
 
 	@XmlTransient()
-	private String myTypeCode;
+	private org.ehealth_connector.common.hl7cdar2.XInformationRecipient myTypeCode;
 
 	@XmlTransient()
 	private org.ehealth_connector.cda.ch.emed.v0953.enums.DocumentEntryConfidentialityCode myValueSet;
@@ -90,14 +89,6 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	 */
 	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
 		getAuthor().add(value);
-	}
-
-	/**
-	 * Adds a hl7DocumentationOf
-	 * Information about a health service describing the context of this CDA document.
-	 */
-	public void addHl7DocumentationOf(org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf value) {
-		getDocumentationOf().add(value);
 	}
 
 	/**
@@ -147,14 +138,6 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	 */
 	public void clearHl7Author() {
 		getAuthor().clear();
-	}
-
-	/**
-	 * Adds a hl7DocumentationOf
-	 * Information about a health service describing the context of this CDA document.
-	 */
-	public void clearHl7DocumentationOf() {
-		getDocumentationOf().clear();
 	}
 
 	/**
@@ -247,7 +230,7 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	/**
 	 * Creates fixed contents for CDA Attribute typeCode
 	 */
-	private void createTypeCodeFixedValue(String value) {
+	private void createTypeCodeFixedValue(org.ehealth_connector.common.hl7cdar2.XInformationRecipient value) {
 		this.myTypeCode = value;
 	}
 
@@ -295,6 +278,18 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040DataEnterer getHl7DataEnterer() {
 		return dataEnterer;
+	}
+
+	/**
+	 * Gets the hl7DocumentationOf
+	 * Validity of document
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf getHl7DocumentationOf() {
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf retVal = null;
+		if (getDocumentationOf() != null)
+			if (getDocumentationOf().size() > 0)
+				retVal = getDocumentationOf().get(0);
+		return retVal;
 	}
 
 	/**
@@ -430,7 +425,7 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	/**
 	 * Gets the member myTypeCode
 	 */
-	public String getPredefinedTypeCode() {
+	public org.ehealth_connector.common.hl7cdar2.XInformationRecipient getPredefinedTypeCode() {
 		return myTypeCode;
 	}
 
@@ -451,6 +446,21 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 			docId = new Identificator(Identificator.builder().withRoot(org.openhealthtools.ihe.utils.UUID.generate()).build());
 		super.setId(docId.getHl7CdaR2Ii());
 		setVersion(docId, 1);
+	}
+
+	/**
+	 * Increases the version number by one and makes sure the setId remains the same as previously.
+	 * @param newDocId the new doc id
+	 */
+	public void initNextVersion(Identificator newDocId) {
+		org.ehealth_connector.common.hl7cdar2.II setId = getSetId();
+		if (setId == null)
+			setId = getId();
+		if (setId == null)
+			setId = newDocId.getHl7CdaR2Ii();
+		Integer version = CdaUtil.getInt(getVersionNumber());
+		setId(newDocId.getHl7CdaR2Ii());
+		setVersion(new Identificator(setId), version + 1);
 	}
 
 	/**
@@ -483,8 +493,9 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	 * @throws JAXBException the JAXB exception
 	 * @throws ParserConfigurationException the parser configuration exception
 	 * @throws TransformerException the transformer exception
+	 * @throws FileNotFoundException the file not found exception
 	 */
-	public void saveToFile(String outputFileName) throws JAXBException, ParserConfigurationException, TransformerException {
+	public void saveToFile(String outputFileName) throws JAXBException, ParserConfigurationException, TransformerException, FileNotFoundException {
 		saveToFile(new File(outputFileName), null, null);
 	}
 
@@ -494,8 +505,9 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	 * @throws JAXBException the JAXB exception
 	 * @throws ParserConfigurationException the parser configuration exception
 	 * @throws TransformerException the transformer exception
+	 * @throws FileNotFoundException the file not found exception
 	 */
-	public void saveToFile(File outputFile) throws JAXBException, ParserConfigurationException, TransformerException {
+	public void saveToFile(File outputFile) throws JAXBException, ParserConfigurationException, TransformerException, FileNotFoundException {
 		saveToFile(outputFile, null, null);
 	}
 
@@ -506,9 +518,9 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	 * @param css the path and filename or url to the rendering css
 	 * @throws JAXBException the JAXB exception
 	 * @throws ParserConfigurationException the parser configuration exception
-	 * @throws TransformerException the transformer exception
+	 * @throws TransformerException the transformer exception\n@throws FileNotFoundException the file not found exception
 	 */
-	public void saveToFile(String outputFileName, String xsl, String css) throws JAXBException, ParserConfigurationException, TransformerException {
+	public void saveToFile(String outputFileName, String xsl, String css) throws JAXBException, ParserConfigurationException, TransformerException, FileNotFoundException {
 		saveToFile(new File(outputFileName), xsl, css);
 	}
 
@@ -519,9 +531,9 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	 * @param css the path and filename or url to the rendering css
 	 * @throws JAXBException the JAXB exception
 	 * @throws ParserConfigurationException the parser configuration exception
-	 * @throws TransformerException the transformer exception
+	 * @throws TransformerException the transformer exception\n@throws FileNotFoundException the file not found exception
 	 */
-	public void saveToFile(File outputFile, String xsl, String css) throws JAXBException, ParserConfigurationException, TransformerException {
+	public void saveToFile(File outputFile, String xsl, String css) throws JAXBException, ParserConfigurationException, TransformerException, FileNotFoundException {
 		CdaUtil.saveJaxbObjectToFile(this, outputFile, xsl, css);
 	}
 
@@ -562,6 +574,15 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	 */
 	public void setHl7DataEnterer(org.ehealth_connector.common.hl7cdar2.POCDMT000040DataEnterer value) {
 		this.dataEnterer = value;
+	}
+
+	/**
+	 * Sets the hl7DocumentationOf
+	 * Validity of document
+	 */
+	public void setHl7DocumentationOf(org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf value) {
+		getDocumentationOf().clear();
+		getDocumentationOf().add(value);
 	}
 
 	/**

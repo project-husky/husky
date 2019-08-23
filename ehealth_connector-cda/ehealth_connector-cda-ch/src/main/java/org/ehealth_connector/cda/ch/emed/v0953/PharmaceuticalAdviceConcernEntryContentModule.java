@@ -46,7 +46,6 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends org.ehealth_c
 	// PharmaceuticalAdviceConcernEntryContentModule/hl7:templateId:null root = "1.3.6.1.4.1.19376.1.5.3.1.4.5.1";
 	// PharmaceuticalAdviceConcernEntryContentModule/hl7:templateId:null root = "1.3.6.1.4.1.19376.1.9.1.3.5";
 	// PharmaceuticalAdviceConcernEntryContentModule/hl7:code:null nullFlavor = "NA";
-	// Vocab not supported, yet. Should add a code:active / no code system !!
 	// PharmaceuticalAdviceConcernEntryContentModule/hl7:statusCode:cs code = "active"; (isVocab)
 	// PharmaceuticalAdviceConcernEntryContentModule/hl7:entryRelationship:null typeCode = "SUBJ";
 	// PharmaceuticalAdviceConcernEntryContentModule/hl7:entryRelationship:null typeCode = "SUBJ";

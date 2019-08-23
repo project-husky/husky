@@ -28,7 +28,6 @@ public class CdachHeaderDocumentRealm extends org.ehealth_connector.common.hl7cd
 
 	public CdachHeaderDocumentRealm() {
 		super.setCode("CHE");
-	// Vocab not supported, yet. Should add a code:CHE / no code system !!
 	// cdach_header_DocumentRealm/hl7:realmCode:cs code = "CHE"; (isVocab)
 	}
 

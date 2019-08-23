@@ -38,7 +38,6 @@ public class DisreferenceEntryContentModule extends org.ehealth_connector.common
 	// DISReferenceEntryContentModule/hl7:supply:cs moodCode = "EVN";
 	// DISReferenceEntryContentModule/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.46";
 	// DISReferenceEntryContentModule/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.9.1.3.12";
-	// Vocab not supported, yet. Should add a code:DISItem / 1.3.6.1.4.1.19376.1.9.2.2
 	// DISReferenceEntryContentModule/hl7:code:cs code = "DISItem"; (isVocab)
 	// DISReferenceEntryContentModule/hl7:reference:cs typeCode = "XCRPT";
 	}

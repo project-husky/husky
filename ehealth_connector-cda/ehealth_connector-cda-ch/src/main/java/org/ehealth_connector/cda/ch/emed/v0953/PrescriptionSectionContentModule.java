@@ -30,7 +30,6 @@ public class PrescriptionSectionContentModule extends org.ehealth_connector.comm
 		super.setCode(createHl7CodeFixedValue("57828-6"));
 	// PrescriptionSectionContentModule/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.9.1.2.1";
 	// PrescriptionSectionContentModule/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.3.10";
-	// Vocab not supported, yet. Should add a code:57828-6 / 2.16.840.1.113883.6.1
 	// PrescriptionSectionContentModule/hl7:code:cs code = "57828-6"; (isVocab)
 	}
 

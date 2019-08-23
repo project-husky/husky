@@ -30,7 +30,6 @@ public class PharmaceuticalAdviceSectionContentModule extends org.ehealth_connec
 		super.setCode(createHl7CodeFixedValue("61357-0"));
 	// PharmaceuticalAdviceSectionContentModule/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.9.1.2.2";
 	// PharmaceuticalAdviceSectionContentModule/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.3.12";
-	// Vocab not supported, yet. Should add a code:61357-0 / 2.16.840.1.113883.6.1
 	// PharmaceuticalAdviceSectionContentModule/hl7:code:cs code = "61357-0"; (isVocab)
 	}
 
