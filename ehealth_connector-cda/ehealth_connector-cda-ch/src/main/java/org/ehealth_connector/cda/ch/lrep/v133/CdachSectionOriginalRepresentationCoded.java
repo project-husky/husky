@@ -45,7 +45,7 @@ public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connect
 	 *
 	 * @param code the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		retVal.setCode(code);
@@ -57,7 +57,7 @@ public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connect
 	 *
 	 * @param typeCode the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry createHl7EntryFixedValue(String typeCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry createHl7EntryFixedValue(String typeCode) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry retVal = factory.createPOCDMT000040Entry();
 		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntry.fromValue(typeCode));
@@ -69,7 +69,7 @@ public class CdachSectionOriginalRepresentationCoded extends org.ehealth_connect
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);

@@ -17,7 +17,6 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.IVLTS;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -47,12 +46,6 @@ public class CdachvacdEntryGestationalAgeAtBirth extends org.ehealth_connector.c
 	// cdachvacd_entry_GestationalAgeAtBirth/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusCompleted
 	}
 
-	@XmlTransient()
-	private String myClassCode;
-
-	@XmlTransient()
-	private String myMoodCode;
-
 	/**
 	 * Adds a hl7Author
 	 * This MAY be used to indicate who has documented the observation. This information supersedes any information recorded at higher level.
@@ -70,13 +63,6 @@ public class CdachvacdEntryGestationalAgeAtBirth extends org.ehealth_connector.c
 	}
 
 	/**
-	 * Creates fixed contents for CDA Attribute classCode
-	 */
-	private void createClassCodeFixedValue(String value) {
-		this.myClassCode = value;
-	}
-
-	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
 	 * @param code the desired fixed value for this argument.
@@ -84,7 +70,7 @@ public class CdachvacdEntryGestationalAgeAtBirth extends org.ehealth_connector.c
 	 * @param codeSystemName the desired fixed value for this argument.
 	 * @param displayName the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.setCode(code);
@@ -97,7 +83,7 @@ public class CdachvacdEntryGestationalAgeAtBirth extends org.ehealth_connector.c
 	/**
 	 * Creates fixed contents for CDA Element hl7StatusCode
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		return retVal;
@@ -108,18 +94,11 @@ public class CdachvacdEntryGestationalAgeAtBirth extends org.ehealth_connector.c
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute moodCode
-	 */
-	private void createMoodCodeFixedValue(String value) {
-		this.myMoodCode = value;
 	}
 
 	/**
@@ -176,20 +155,6 @@ public class CdachvacdEntryGestationalAgeAtBirth extends org.ehealth_connector.c
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.ANY> getHl7Value() {
 		return value;
-	}
-
-	/**
-	 * Gets the member myClassCode
-	 */
-	public String getPredefinedClassCode() {
-		return myClassCode;
-	}
-
-	/**
-	 * Gets the member myMoodCode
-	 */
-	public String getPredefinedMoodCode() {
-		return myMoodCode;
 	}
 
 	/**

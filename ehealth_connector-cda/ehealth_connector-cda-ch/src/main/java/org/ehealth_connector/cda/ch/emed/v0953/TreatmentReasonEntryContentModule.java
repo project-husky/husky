@@ -17,7 +17,6 @@
 package org.ehealth_connector.cda.ch.emed.v0953;
 
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -39,25 +38,12 @@ public class TreatmentReasonEntryContentModule extends org.ehealth_connector.com
 	// TreatmentReasonEntryContentModule/hl7:statusCode:cs code = "completed"; (isVocab)
 	}
 
-	@XmlTransient()
-	private String myClassCode;
-
-	@XmlTransient()
-	private String myMoodCode;
-
-	/**
-	 * Creates fixed contents for CDA Attribute classCode
-	 */
-	private void createClassCodeFixedValue(String value) {
-		this.myClassCode = value;
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
 	 * @param code the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.setCode(code);
@@ -69,7 +55,7 @@ public class TreatmentReasonEntryContentModule extends org.ehealth_connector.com
 	 *
 	 * @param code the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		retVal.setCode(code);
@@ -81,18 +67,11 @@ public class TreatmentReasonEntryContentModule extends org.ehealth_connector.com
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute moodCode
-	 */
-	private void createMoodCodeFixedValue(String value) {
-		this.myMoodCode = value;
 	}
 
 	/**
@@ -122,20 +101,6 @@ public class TreatmentReasonEntryContentModule extends org.ehealth_connector.com
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ED getHl7Text() {
 		return text;
-	}
-
-	/**
-	 * Gets the member myClassCode
-	 */
-	public String getPredefinedClassCode() {
-		return myClassCode;
-	}
-
-	/**
-	 * Gets the member myMoodCode
-	 */
-	public String getPredefinedMoodCode() {
-		return myMoodCode;
 	}
 
 	/**

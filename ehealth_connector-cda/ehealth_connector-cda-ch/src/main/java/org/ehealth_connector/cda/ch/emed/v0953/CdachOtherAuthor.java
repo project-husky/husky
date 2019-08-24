@@ -45,7 +45,7 @@ public class CdachOtherAuthor extends org.ehealth_connector.common.hl7cdar2.POCD
 	 * @param codeSystem the desired fixed value for this argument.
 	 * @param codeSystemName the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CE createHl7FunctionCodeFixedValue(String nullFlavor, String codeSystem, String codeSystemName) {
+	private static org.ehealth_connector.common.hl7cdar2.CE createHl7FunctionCodeFixedValue(String nullFlavor, String codeSystem, String codeSystemName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		retVal.nullFlavor = new ArrayList<String>();
@@ -60,7 +60,7 @@ public class CdachOtherAuthor extends org.ehealth_connector.common.hl7cdar2.POCD
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);

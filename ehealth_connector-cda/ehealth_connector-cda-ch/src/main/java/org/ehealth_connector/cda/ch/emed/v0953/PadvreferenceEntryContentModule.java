@@ -17,7 +17,6 @@
 package org.ehealth_connector.cda.ch.emed.v0953;
 
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -34,26 +33,13 @@ public class PadvreferenceEntryContentModule extends org.ehealth_connector.commo
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.13"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.53"));
 		super.setCode(createHl7CodeFixedValue("PADVItem"));
-		super.getReference().add(createHl7ReferenceFixedValue("XCRPT"));
 	// PADVReferenceEntryContentModule/hl7:observation:cs classCode = "OBS";
 	// PADVReferenceEntryContentModule/hl7:observation:cs moodCode = "EVN";
 	// PADVReferenceEntryContentModule/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.9.1.3.13";
 	// PADVReferenceEntryContentModule/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.53";
 	// PADVReferenceEntryContentModule/hl7:code:cs code = "PADVItem"; (isVocab)
 	// PADVReferenceEntryContentModule/hl7:reference:cs typeCode = "XCRPT";
-	}
-
-	@XmlTransient()
-	private String myClassCode;
-
-	@XmlTransient()
-	private String myMoodCode;
-
-	/**
-	 * Creates fixed contents for CDA Attribute classCode
-	 */
-	private void createClassCodeFixedValue(String value) {
-		this.myClassCode = value;
+	// This is fixed content for an optional element: createHl7ReferenceFixedValue("XCRPT") --> Creating getPredefinedReferenceXcrpt();
 	}
 
 	/**
@@ -61,7 +47,7 @@ public class PadvreferenceEntryContentModule extends org.ehealth_connector.commo
 	 *
 	 * @param code the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.setCode(code);
@@ -73,7 +59,7 @@ public class PadvreferenceEntryContentModule extends org.ehealth_connector.commo
 	 *
 	 * @param typeCode the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference retVal = factory.createPOCDMT000040Reference();
 		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipExternalReference.fromValue(typeCode));
@@ -85,18 +71,11 @@ public class PadvreferenceEntryContentModule extends org.ehealth_connector.commo
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute moodCode
-	 */
-	private void createMoodCodeFixedValue(String value) {
-		this.myMoodCode = value;
 	}
 
 	/**
@@ -140,17 +119,11 @@ public class PadvreferenceEntryContentModule extends org.ehealth_connector.commo
 	}
 
 	/**
-	 * Gets the member myClassCode
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference, filled by: "XCRPT"
+	 * @return the predefined element.
 	 */
-	public String getPredefinedClassCode() {
-		return myClassCode;
-	}
-
-	/**
-	 * Gets the member myMoodCode
-	 */
-	public String getPredefinedMoodCode() {
-		return myMoodCode;
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference getPredefinedReferenceXcrpt() {
+		return createHl7ReferenceFixedValue("XCRPT");
 	}
 
 	/**

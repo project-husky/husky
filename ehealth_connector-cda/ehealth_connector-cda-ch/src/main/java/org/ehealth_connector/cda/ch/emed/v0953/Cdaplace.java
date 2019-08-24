@@ -16,25 +16,11 @@
  */
 package org.ehealth_connector.cda.ch.emed.v0953;
 
-import javax.xml.bind.annotation.XmlTransient;
-
 /**
  * Original ART-DECOR template id: 2.16.840.1.113883.10.12.317
  * Template description: Template CDA Place (prototype, directly derived from POCD_RM000040 MIF)
  */
-public class Cdaplace {
-
-	/**
-	 * No description available in the ART-DECOR model for this field.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.AD addr;
-
-	/**
-	 * No description available in the ART-DECOR model for this field.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.EN name;
+public class Cdaplace extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Place {
 
 	/**
 	 * Gets the hl7Addr

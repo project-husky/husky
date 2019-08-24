@@ -36,12 +36,16 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.basetypes.NameBaseType;
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.hl7cdar2.CS;
+import org.ehealth_connector.common.hl7cdar2.ED;
 import org.ehealth_connector.common.hl7cdar2.EN;
 import org.ehealth_connector.common.hl7cdar2.INT;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040StructuredBody;
 import org.ehealth_connector.common.hl7cdar2.SC;
 import org.ehealth_connector.common.hl7cdar2.ST;
+import org.ehealth_connector.common.hl7cdar2.StrucDocText;
 import org.ehealth_connector.common.mdht.enums.EhcVersions;
 import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
@@ -56,10 +60,34 @@ public class CdaUtil {
 		return retVal;
 	}
 
+	public static ED createEd(String value) {
+		ObjectFactory factory = new ObjectFactory();
+		ED retVal = factory.createED();
+		retVal.xmlContent = value;
+		return retVal;
+	}
+
 	public static ST createSt(String value) {
 		ObjectFactory factory = new ObjectFactory();
 		ST retVal = factory.createST();
 		retVal.xmlContent = value;
+		return retVal;
+	}
+
+	public static StrucDocText createStrucDocText(String value) {
+		return createStrucDocText(null, null, value);
+	}
+
+	public static StrucDocText createStrucDocText(String id, LanguageCode languageCode,
+			String value) {
+		ObjectFactory factory = new ObjectFactory();
+		StrucDocText retVal = factory.createStrucDocText();
+		if (id != null)
+			retVal.setID(id);
+		if (languageCode != null)
+			retVal.setLanguage(languageCode.getCodeValue());
+		if (value != null)
+			retVal.xmlContent = value;
 		return retVal;
 	}
 
@@ -85,6 +113,11 @@ public class CdaUtil {
 
 	public static Integer getInt(INT value) {
 		return value.getValue().intValue();
+	}
+
+	public static int getSectionCount(POCDMT000040StructuredBody structuredBody) {
+		int retVal = structuredBody.getComponent().size();
+		return retVal;
 	}
 
 	/**

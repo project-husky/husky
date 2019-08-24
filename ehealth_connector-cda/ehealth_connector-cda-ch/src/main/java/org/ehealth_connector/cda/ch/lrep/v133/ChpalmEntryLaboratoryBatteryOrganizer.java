@@ -17,7 +17,6 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -32,28 +31,19 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.19"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.4"));
 		super.setStatusCode(createHl7StatusCodeFixedValue());
-		super.getComponent().add(createHl7ComponentFixedValue("COMP"));
-		super.getComponent().add(createHl7ComponentFixedValue("COMP"));
-		super.getComponent().add(createHl7ComponentFixedValue("COMP"));
-		super.getComponent().add(createHl7ComponentFixedValue("COMP"));
-		super.getReference().add(createHl7ReferenceFixedValue("REFR"));
 	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:organizer:cs classCode = "BATTERY";
 	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:organizer:cs moodCode = "EVN";
 	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.19";
 	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.4";
 	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:statusCode:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.2"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusAbortedCompleted
 	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:component:cs typeCode = "COMP";
+	// This is fixed content for an optional element: createHl7ComponentFixedValue("COMP") --> Creating getPredefinedComponentComp();
 	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:component:cs typeCode = "COMP";
 	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:component:cs typeCode = "COMP";
 	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:component:cs typeCode = "COMP";
 	// chpalm_entry_LaboratoryBatteryOrganizer/hl7:reference:cs typeCode = "REFR";
+	// This is fixed content for an optional element: createHl7ReferenceFixedValue("REFR") --> Creating getPredefinedReferenceRefr();
 	}
-
-	@XmlTransient()
-	private String myClassCode;
-
-	@XmlTransient()
-	private String myMoodCode;
 
 	/**
 	 * Adds a hl7Author
@@ -140,18 +130,11 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	}
 
 	/**
-	 * Creates fixed contents for CDA Attribute classCode
-	 */
-	private void createClassCodeFixedValue(String value) {
-		this.myClassCode = value;
-	}
-
-	/**
 	 * Creates fixed contents for CDA Element hl7Component
 	 *
 	 * @param typeCode the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 createHl7ComponentFixedValue(String typeCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 createHl7ComponentFixedValue(String typeCode) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 retVal = factory.createPOCDMT000040Component4();
 		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.ActRelationshipHasComponent.fromValue(typeCode));
@@ -163,7 +146,7 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	 *
 	 * @param typeCode the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference retVal = factory.createPOCDMT000040Reference();
 		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipExternalReference.fromValue(typeCode));
@@ -173,7 +156,7 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	/**
 	 * Creates fixed contents for CDA Element hl7StatusCode
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		return retVal;
@@ -184,18 +167,11 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute moodCode
-	 */
-	private void createMoodCodeFixedValue(String value) {
-		this.myMoodCode = value;
 	}
 
 	/**
@@ -245,17 +221,19 @@ public class ChpalmEntryLaboratoryBatteryOrganizer extends org.ehealth_connector
 	}
 
 	/**
-	 * Gets the member myClassCode
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4, filled by: "COMP"
+	 * @return the predefined element.
 	 */
-	public String getPredefinedClassCode() {
-		return myClassCode;
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 getPredefinedComponentComp() {
+		return createHl7ComponentFixedValue("COMP");
 	}
 
 	/**
-	 * Gets the member myMoodCode
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference, filled by: "REFR"
+	 * @return the predefined element.
 	 */
-	public String getPredefinedMoodCode() {
-		return myMoodCode;
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference getPredefinedReferenceRefr() {
+		return createHl7ReferenceFixedValue("REFR");
 	}
 
 	/**

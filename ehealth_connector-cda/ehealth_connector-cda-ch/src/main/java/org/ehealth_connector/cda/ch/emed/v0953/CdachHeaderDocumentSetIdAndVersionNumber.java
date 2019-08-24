@@ -16,30 +16,16 @@
  */
 package org.ehealth_connector.cda.ch.emed.v0953;
 
-import javax.xml.bind.annotation.XmlTransient;
-
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.20
  * Template description: Unity of document versions. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.
  *
  * Element description: The versionNumber element MUST contain the value 1 for the very first version of that document. For later versions, the version number MUST be increased by 1 each.
  */
-public class CdachHeaderDocumentSetIdAndVersionNumber {
+public class CdachHeaderDocumentSetIdAndVersionNumber extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
 
 	public CdachHeaderDocumentSetIdAndVersionNumber() {
 	}
-
-	/**
-	 * The setId element MUST match the document id of the very first version of that document. It MUST remain the same for all document versions.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.II setId;
-
-	/**
-	 * The versionNumber element MUST contain the value 1 for the very first version of that document. For later versions, the version number MUST be increased by 1 each.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.INT versionNumber;
 
 	/**
 	 * Gets the hl7SetId

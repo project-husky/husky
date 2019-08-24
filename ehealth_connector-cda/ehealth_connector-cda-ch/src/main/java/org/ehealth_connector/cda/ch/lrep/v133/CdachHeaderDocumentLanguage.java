@@ -16,8 +16,6 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import javax.xml.bind.annotation.XmlTransient;
-
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.22
  * Template description: The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the narrative texts in this CDA document instance are written. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.
@@ -28,22 +26,5 @@ public class CdachHeaderDocumentLanguage extends org.ehealth_connector.common.hl
 
 	public CdachHeaderDocumentLanguage() {
 	// cdach_header_DocumentLanguage/hl7:languageCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.11526"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.HumanLanguage
-	}
-
-	@XmlTransient()
-	private org.ehealth_connector.cda.ch.lrep.v133.enums.HumanLanguage myValueSet;
-
-	/**
-	 * Creates fixed contents for CDA Attribute valueSet
-	 */
-	private void createValueSetFixedValue(org.ehealth_connector.cda.ch.lrep.v133.enums.HumanLanguage value) {
-		this.myValueSet = value;
-	}
-
-	/**
-	 * Gets the member myValueSet
-	 */
-	public org.ehealth_connector.cda.ch.lrep.v133.enums.HumanLanguage getPredefinedValueSet() {
-		return myValueSet;
 	}
 }

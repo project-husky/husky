@@ -17,7 +17,6 @@
 package org.ehealth_connector.cda.ch.emed.v0953;
 
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -39,25 +38,12 @@ public class PrescribedQuantityEntryContentModule extends org.ehealth_connector.
 	// PrescribedQuantityEntryContentModule/hl7:quantity:cs unit = "1";
 	}
 
-	@XmlTransient()
-	private String myClassCode;
-
-	@XmlTransient()
-	private String myMoodCode;
-
-	/**
-	 * Creates fixed contents for CDA Attribute classCode
-	 */
-	private void createClassCodeFixedValue(String value) {
-		this.myClassCode = value;
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7IndependentInd
 	 *
 	 * @param value the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.BL createHl7IndependentIndFixedValue(String value) {
+	private static org.ehealth_connector.common.hl7cdar2.BL createHl7IndependentIndFixedValue(String value) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.BL retVal = factory.createBL();
 		retVal.setValue(Boolean.parseBoolean(value));
@@ -69,7 +55,7 @@ public class PrescribedQuantityEntryContentModule extends org.ehealth_connector.
 	 *
 	 * @param unit the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.PQ createHl7QuantityFixedValue(String unit) {
+	private static org.ehealth_connector.common.hl7cdar2.PQ createHl7QuantityFixedValue(String unit) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.PQ retVal = factory.createPQ();
 		retVal.setUnit(unit);
@@ -81,18 +67,11 @@ public class PrescribedQuantityEntryContentModule extends org.ehealth_connector.
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute moodCode
-	 */
-	private void createMoodCodeFixedValue(String value) {
-		this.myMoodCode = value;
 	}
 
 	/**
@@ -114,20 +93,6 @@ public class PrescribedQuantityEntryContentModule extends org.ehealth_connector.
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
 		return templateId;
-	}
-
-	/**
-	 * Gets the member myClassCode
-	 */
-	public String getPredefinedClassCode() {
-		return myClassCode;
-	}
-
-	/**
-	 * Gets the member myMoodCode
-	 */
-	public String getPredefinedMoodCode() {
-		return myMoodCode;
 	}
 
 	/**

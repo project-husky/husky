@@ -32,8 +32,6 @@ public class ChpccSectionCurrentPregnancyCoded extends org.ehealth_connector.com
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.5.3.4"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.127.77.1.10.1"));
 		super.setCode(createHl7CodeFixedValue("10162-6", "2.16.840.1.113883.6.1", "LOINC", "HISTORY OF PREGNANCIES"));
-		super.getEntry().add(createHl7EntryFixedValue("DRIV"));
-		super.getEntry().add(createHl7EntryFixedValue("DRIV"));
 	// chpcc_section_CurrentPregnancyCoded/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.3.53";
 	// chpcc_section_CurrentPregnancyCoded/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.1.5.3.4";
 	// chpcc_section_CurrentPregnancyCoded/hl7:templateId:uid root = "2.16.756.5.30.1.127.77.1.10.1";
@@ -42,6 +40,7 @@ public class ChpccSectionCurrentPregnancyCoded extends org.ehealth_connector.com
 	// chpcc_section_CurrentPregnancyCoded/hl7:code:st codeSystemName = "LOINC";
 	// chpcc_section_CurrentPregnancyCoded/hl7:code:st displayName = "HISTORY OF PREGNANCIES";
 	// chpcc_section_CurrentPregnancyCoded/hl7:entry:cs typeCode = "DRIV";
+	// This is fixed content for an optional element: createHl7EntryFixedValue("DRIV") --> Creating getPredefinedEntryDriv();
 	// chpcc_section_CurrentPregnancyCoded/hl7:entry:cs typeCode = "DRIV";
 	}
 
@@ -53,7 +52,7 @@ public class ChpccSectionCurrentPregnancyCoded extends org.ehealth_connector.com
 	 * @param codeSystemName the desired fixed value for this argument.
 	 * @param displayName the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		retVal.setCode(code);
@@ -68,7 +67,7 @@ public class ChpccSectionCurrentPregnancyCoded extends org.ehealth_connector.com
 	 *
 	 * @param typeCode the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry createHl7EntryFixedValue(String typeCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry createHl7EntryFixedValue(String typeCode) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry retVal = factory.createPOCDMT000040Entry();
 		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntry.fromValue(typeCode));
@@ -80,7 +79,7 @@ public class ChpccSectionCurrentPregnancyCoded extends org.ehealth_connector.com
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -130,6 +129,14 @@ public class ChpccSectionCurrentPregnancyCoded extends org.ehealth_connector.com
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ST getHl7Title() {
 		return title;
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry, filled by: "DRIV"
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry getPredefinedEntryDriv() {
+		return createHl7EntryFixedValue("DRIV");
 	}
 
 	/**

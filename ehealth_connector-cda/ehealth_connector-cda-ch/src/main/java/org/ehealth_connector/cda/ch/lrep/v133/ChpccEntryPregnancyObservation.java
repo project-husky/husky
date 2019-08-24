@@ -17,7 +17,6 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.IVLTS;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -48,12 +47,6 @@ public class ChpccEntryPregnancyObservation extends org.ehealth_connector.common
 	// chpcc_entry_PregnancyObservation/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusCompleted
 	}
 
-	@XmlTransient()
-	private String myClassCode;
-
-	@XmlTransient()
-	private String myMoodCode;
-
 	/**
 	 * Adds a hl7Author
 	 * This MAY be used to indicate who has documented the observation. This information supersedes any information recorded at higher level.
@@ -71,19 +64,12 @@ public class ChpccEntryPregnancyObservation extends org.ehealth_connector.common
 	}
 
 	/**
-	 * Creates fixed contents for CDA Attribute classCode
-	 */
-	private void createClassCodeFixedValue(String value) {
-		this.myClassCode = value;
-	}
-
-	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
 	 * @param codeSystem the desired fixed value for this argument.
 	 * @param codeSystemName the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String codeSystem, String codeSystemName) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String codeSystem, String codeSystemName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.setCodeSystem(codeSystem);
@@ -94,7 +80,7 @@ public class ChpccEntryPregnancyObservation extends org.ehealth_connector.common
 	/**
 	 * Creates fixed contents for CDA Element hl7StatusCode
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		return retVal;
@@ -105,18 +91,11 @@ public class ChpccEntryPregnancyObservation extends org.ehealth_connector.common
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute moodCode
-	 */
-	private void createMoodCodeFixedValue(String value) {
-		this.myMoodCode = value;
 	}
 
 	/**
@@ -131,7 +110,7 @@ public class ChpccEntryPregnancyObservation extends org.ehealth_connector.common
 	 * Gets the hl7EffectiveTime
 	 * Date or timestamp of the finding (physiologically relevant time of this observation).
 	 */
-	public org.ehealth_connector.common.hl7cdar2.TS getHl7EffectiveTime() {
+	public org.ehealth_connector.common.hl7cdar2.TS getHl7EffectiveTimeTs() {
 		return effectiveTime;
 	}
 
@@ -171,20 +150,6 @@ public class ChpccEntryPregnancyObservation extends org.ehealth_connector.common
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.ANY> getHl7Value() {
 		return value;
-	}
-
-	/**
-	 * Gets the member myClassCode
-	 */
-	public String getPredefinedClassCode() {
-		return myClassCode;
-	}
-
-	/**
-	 * Gets the member myMoodCode
-	 */
-	public String getPredefinedMoodCode() {
-		return myMoodCode;
 	}
 
 	/**

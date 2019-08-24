@@ -17,7 +17,6 @@
 package org.ehealth_connector.cda.ch.emed.v0953;
 
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -35,22 +34,12 @@ public class DocumentCodeMedicationList extends org.ehealth_connector.common.hl7
 	// DocumentCodeMedicationList/hl7:translation:cs code = "721912009"; (isVocab)
 	}
 
-	@XmlTransient()
-	private String myCode;
-
-	/**
-	 * Creates fixed contents for CDA Attribute code
-	 */
-	private void createCodeFixedValue(String value) {
-		this.myCode = value;
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7Translation
 	 *
 	 * @param code the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CD createHl7TranslationFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7TranslationFixedValue(String code) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.setCode(code);
@@ -63,13 +52,6 @@ public class DocumentCodeMedicationList extends org.ehealth_connector.common.hl7
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.CD> getHl7Translation() {
 		return translation;
-	}
-
-	/**
-	 * Gets the member myCode
-	 */
-	public String getPredefinedCode() {
-		return myCode;
 	}
 
 	/**

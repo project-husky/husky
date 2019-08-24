@@ -16,9 +16,7 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -27,29 +25,23 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  *
  * Element description: Sharing Laboratory Reports (XD-LAB) Content Module, IHE PaLM Technical Framework Revision Revision 8.0 - June 21, 2017.
  */
-public class CdachlrepHeaderTemplateIdsCdaChLrepV1 {
+public class CdachlrepHeaderTemplateIdsCdaChLrepV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
 
 	public CdachlrepHeaderTemplateIdsCdaChLrepV1() {
-		templateId.add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.3.9.1"));
-		templateId.add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.127.1.4"));
-		templateId.add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.127.1.4"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3"));
 	// cdachlrep_header_TemplateIdsCdaChLrepV1/hl7:templateId:uid root = "2.16.756.5.30.1.1.1.1.3.9.1";
+	// This is fixed content for an optional element: createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.3.9.1") --> Creating getPredefinedTemplateId2167565301111391();
 	// cdachlrep_header_TemplateIdsCdaChLrepV1/hl7:templateId:uid root = "2.16.756.5.30.1.127.1.4";
 	// cdachlrep_header_TemplateIdsCdaChLrepV1/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.3";
 	}
-
-	/**
-	 * CDA-CH-LREP / Laboratory Reports V1 specification. This is an informational reference, only.
-	 */
-	@XmlTransient()
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> templateId = new ArrayList<org.ehealth_connector.common.hl7cdar2.II>();
 
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -65,11 +57,19 @@ public class CdachlrepHeaderTemplateIdsCdaChLrepV1 {
 	}
 
 	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by: "2.16.756.5.30.1.1.1.1.3.9.1"
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId2167565301111391() {
+		return createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.3.9.1");
+	}
+
+	/**
 	 * Sets the hl7TemplateId
 	 * CDA-CH-LREP / Laboratory Reports V1 specification. This is an informational reference, only.
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		templateId.clear();
-		templateId.add(value);
+		getTemplateId().clear();
+		getTemplateId().add(value);
 	}
 }

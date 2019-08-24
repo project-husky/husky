@@ -16,9 +16,7 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.IVLTS;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -31,39 +29,21 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  *
  * Element description: All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
  */
-public class ChpalmEntryLaboratoryPerformer {
+public class ChpalmEntryLaboratoryPerformer extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer1 {
 
 	public ChpalmEntryLaboratoryPerformer() {
-		templateId.add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.7"));
-		templateId.add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.1.7"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.7"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.1.7"));
 	// chpalm_entry_LaboratoryPerformer/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.7";
 	// chpalm_entry_LaboratoryPerformer/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.3.1.7";
 	}
-
-	/**
-	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity assignedEntity;
-
-	/**
-	 * No description available in the ART-DECOR model for this field.
-	 */
-	@XmlTransient()
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> templateId = new ArrayList<org.ehealth_connector.common.hl7cdar2.II>();
-
-	/**
-	 * Timestamp of the last delivery of this laboratory to the document.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.TS time;
 
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -105,8 +85,8 @@ public class ChpalmEntryLaboratoryPerformer {
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		templateId.clear();
-		templateId.add(value);
+		getTemplateId().clear();
+		getTemplateId().add(value);
 	}
 
 	/**

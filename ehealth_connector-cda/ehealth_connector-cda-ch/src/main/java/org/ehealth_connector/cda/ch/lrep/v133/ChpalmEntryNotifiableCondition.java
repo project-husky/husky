@@ -18,7 +18,6 @@ package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -42,12 +41,6 @@ public class ChpalmEntryNotifiableCondition extends org.ehealth_connector.common
 	// chpalm_entry_NotifiableCondition/hl7:value:cs nullFlavor = "NA";
 	}
 
-	@XmlTransient()
-	private String myClassCode;
-
-	@XmlTransient()
-	private String myMoodCode;
-
 	/**
 	 * Adds a hl7Id
 	 * An ID for this item CAN be filled for traceability.
@@ -65,16 +58,9 @@ public class ChpalmEntryNotifiableCondition extends org.ehealth_connector.common
 	}
 
 	/**
-	 * Creates fixed contents for CDA Attribute classCode
-	 */
-	private void createClassCodeFixedValue(String value) {
-		this.myClassCode = value;
-	}
-
-	/**
 	 * Creates fixed contents for CDA Element hl7StatusCode
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		return retVal;
@@ -85,7 +71,7 @@ public class ChpalmEntryNotifiableCondition extends org.ehealth_connector.common
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -97,19 +83,12 @@ public class ChpalmEntryNotifiableCondition extends org.ehealth_connector.common
 	 *
 	 * @param nullFlavor the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CE createHl7ValueFixedValue(String nullFlavor) {
+	private static org.ehealth_connector.common.hl7cdar2.CE createHl7ValueFixedValue(String nullFlavor) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		retVal.nullFlavor = new ArrayList<String>();
 		retVal.nullFlavor.add(nullFlavor);
 		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute moodCode
-	 */
-	private void createMoodCodeFixedValue(String value) {
-		this.myMoodCode = value;
 	}
 
 	/**
@@ -141,20 +120,6 @@ public class ChpalmEntryNotifiableCondition extends org.ehealth_connector.common
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.ANY> getHl7Value() {
 		return value;
-	}
-
-	/**
-	 * Gets the member myClassCode
-	 */
-	public String getPredefinedClassCode() {
-		return myClassCode;
-	}
-
-	/**
-	 * Gets the member myMoodCode
-	 */
-	public String getPredefinedMoodCode() {
-		return myMoodCode;
 	}
 
 	/**

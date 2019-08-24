@@ -28,10 +28,10 @@ public class MedicationCardSectionContentModule extends org.ehealth_connector.co
 	public MedicationCardSectionContentModule() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.9"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.2.5"));
-		super.setCode(createHl7CodeFixedValue("10160-0"));
 	// MedicationCardSectionContentModule/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.3.9";
 	// MedicationCardSectionContentModule/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.9.1.2.5";
 	// MedicationCardSectionContentModule/hl7:code:cs code = "10160-0"; (isVocab)
+	// This is fixed content for an optional element: createHl7CodeFixedValue("10160-0") --> Creating getPredefinedCode101600();
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class MedicationCardSectionContentModule extends org.ehealth_connector.co
 	 *
 	 * @param code the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		retVal.setCode(code);
@@ -81,7 +81,7 @@ public class MedicationCardSectionContentModule extends org.ehealth_connector.co
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -122,6 +122,14 @@ public class MedicationCardSectionContentModule extends org.ehealth_connector.co
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ST getHl7Title() {
 		return title;
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by: "10160-0"
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedCode101600() {
+		return createHl7CodeFixedValue("10160-0");
 	}
 
 	/**

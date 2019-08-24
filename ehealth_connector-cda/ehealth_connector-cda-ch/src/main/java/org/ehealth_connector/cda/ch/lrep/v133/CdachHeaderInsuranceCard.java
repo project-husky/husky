@@ -17,7 +17,6 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -37,15 +36,12 @@ public class CdachHeaderInsuranceCard extends org.ehealth_connector.common.hl7cd
 	// cdach_header_InsuranceCard/hl7:associatedEntity:cs classCode = "POLHOLD";
 	}
 
-	@XmlTransient()
-	private String myTypeCode;
-
 	/**
 	 * Creates fixed contents for CDA Element hl7AssociatedEntity
 	 *
 	 * @param classCode the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity createHl7AssociatedEntityFixedValue(String classCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity createHl7AssociatedEntityFixedValue(String classCode) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity retVal = factory.createPOCDMT000040AssociatedEntity();
 		retVal.getClassCode().add(classCode);
@@ -57,18 +53,11 @@ public class CdachHeaderInsuranceCard extends org.ehealth_connector.common.hl7cd
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute typeCode
-	 */
-	private void createTypeCodeFixedValue(String value) {
-		this.myTypeCode = value;
 	}
 
 	/**
@@ -91,13 +80,6 @@ public class CdachHeaderInsuranceCard extends org.ehealth_connector.common.hl7cd
 	 */
 	public org.ehealth_connector.common.hl7cdar2.IVLTS getHl7Time() {
 		return time;
-	}
-
-	/**
-	 * Gets the member myTypeCode
-	 */
-	public String getPredefinedTypeCode() {
-		return myTypeCode;
 	}
 
 	/**

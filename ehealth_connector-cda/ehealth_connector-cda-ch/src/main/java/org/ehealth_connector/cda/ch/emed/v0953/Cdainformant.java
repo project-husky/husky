@@ -16,7 +16,6 @@
  */
 package org.ehealth_connector.cda.ch.emed.v0953;
 
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -28,39 +27,19 @@ public class Cdainformant extends org.ehealth_connector.common.hl7cdar2.POCDMT00
 	public Cdainformant() {
 		super.getTypeCode().add("INF");
 		super.setContextControlCode("OP");
-		super.setRelatedEntity(createHl7RelatedEntityFixedValue());
 	// CDAinformant/hl7:informant:null typeCode = "INF";
 	// CDAinformant/hl7:informant:null contextControlCode = "OP";
 	// CDAinformant/hl7:relatedEntity:cs classCode = valueSet("2.16.840.1.113883.1.11.19563"); --> org.ehealth_connector.cda.ch.emed.v0953.enums.PersonalRelationshipRoleType
-	}
-
-	@XmlTransient()
-	private String myContextControlCode;
-
-	@XmlTransient()
-	private String myTypeCode;
-
-	/**
-	 * Creates fixed contents for CDA Attribute contextControlCode
-	 */
-	private void createContextControlCodeFixedValue(String value) {
-		this.myContextControlCode = value;
+	// This is fixed content for an optional element: createHl7RelatedEntityFixedValue() --> Creating getPredefinedRelatedEntity();
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7RelatedEntity
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity createHl7RelatedEntityFixedValue() {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity createHl7RelatedEntityFixedValue() {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity retVal = factory.createPOCDMT000040RelatedEntity();
 		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute typeCode
-	 */
-	private void createTypeCodeFixedValue(String value) {
-		this.myTypeCode = value;
 	}
 
 	/**
@@ -78,17 +57,11 @@ public class Cdainformant extends org.ehealth_connector.common.hl7cdar2.POCDMT00
 	}
 
 	/**
-	 * Gets the member myContextControlCode
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity, filled by:
+	 * @return the predefined element.
 	 */
-	public String getPredefinedContextControlCode() {
-		return myContextControlCode;
-	}
-
-	/**
-	 * Gets the member myTypeCode
-	 */
-	public String getPredefinedTypeCode() {
-		return myTypeCode;
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity getPredefinedRelatedEntity() {
+		return createHl7RelatedEntityFixedValue();
 	}
 
 	/**

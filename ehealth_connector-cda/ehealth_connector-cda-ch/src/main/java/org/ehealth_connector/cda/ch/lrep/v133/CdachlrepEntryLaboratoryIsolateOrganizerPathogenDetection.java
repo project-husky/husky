@@ -17,7 +17,6 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -36,12 +35,6 @@ public class CdachlrepEntryLaboratoryIsolateOrganizerPathogenDetection extends o
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.5"));
 		super.setStatusCode(createHl7StatusCodeFixedValue("completed"));
 		super.getSpecimen().add(createHl7SpecimenFixedValue("SPC"));
-		super.getComponent().add(createHl7ComponentFixedValue("COMP"));
-		super.getComponent().add(createHl7ComponentFixedValue("COMP"));
-		super.getComponent().add(createHl7ComponentFixedValue("COMP"));
-		super.getComponent().add(createHl7ComponentFixedValue("COMP"));
-		super.getComponent().add(createHl7ComponentFixedValue("COMP"));
-		super.getReference().add(createHl7ReferenceFixedValue("REFR"));
 	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:organizer:cs classCode = "CLUSTER";
 	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:organizer:cs moodCode = "EVN";
 	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.85";
@@ -51,18 +44,14 @@ public class CdachlrepEntryLaboratoryIsolateOrganizerPathogenDetection extends o
 	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:statusCode:cs code = "completed";
 	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:specimen:cs typeCode = "SPC";
 	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:component:cs typeCode = "COMP";
+	// This is fixed content for an optional element: createHl7ComponentFixedValue("COMP") --> Creating getPredefinedComponentComp();
 	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:component:cs typeCode = "COMP";
 	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:component:cs typeCode = "COMP";
 	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:component:cs typeCode = "COMP";
 	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:component:cs typeCode = "COMP";
 	// cdachlrep_entry_LaboratoryIsolateOrganizerPathogenDetection/hl7:reference:cs typeCode = "REFR";
+	// This is fixed content for an optional element: createHl7ReferenceFixedValue("REFR") --> Creating getPredefinedReferenceRefr();
 	}
-
-	@XmlTransient()
-	private String myClassCode;
-
-	@XmlTransient()
-	private String myMoodCode;
 
 	/**
 	 * Adds a hl7Author
@@ -151,18 +140,11 @@ public class CdachlrepEntryLaboratoryIsolateOrganizerPathogenDetection extends o
 	}
 
 	/**
-	 * Creates fixed contents for CDA Attribute classCode
-	 */
-	private void createClassCodeFixedValue(String value) {
-		this.myClassCode = value;
-	}
-
-	/**
 	 * Creates fixed contents for CDA Element hl7Component
 	 *
 	 * @param typeCode the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 createHl7ComponentFixedValue(String typeCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 createHl7ComponentFixedValue(String typeCode) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 retVal = factory.createPOCDMT000040Component4();
 		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.ActRelationshipHasComponent.fromValue(typeCode));
@@ -174,7 +156,7 @@ public class CdachlrepEntryLaboratoryIsolateOrganizerPathogenDetection extends o
 	 *
 	 * @param typeCode the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference retVal = factory.createPOCDMT000040Reference();
 		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipExternalReference.fromValue(typeCode));
@@ -186,7 +168,7 @@ public class CdachlrepEntryLaboratoryIsolateOrganizerPathogenDetection extends o
 	 *
 	 * @param typeCode the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Specimen createHl7SpecimenFixedValue(String typeCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Specimen createHl7SpecimenFixedValue(String typeCode) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040Specimen retVal = factory.createPOCDMT000040Specimen();
 		retVal.getTypeCode().add(typeCode);
@@ -198,7 +180,7 @@ public class CdachlrepEntryLaboratoryIsolateOrganizerPathogenDetection extends o
 	 *
 	 * @param code the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		retVal.setCode(code);
@@ -210,18 +192,11 @@ public class CdachlrepEntryLaboratoryIsolateOrganizerPathogenDetection extends o
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute moodCode
-	 */
-	private void createMoodCodeFixedValue(String value) {
-		this.myMoodCode = value;
 	}
 
 	/**
@@ -279,17 +254,19 @@ public class CdachlrepEntryLaboratoryIsolateOrganizerPathogenDetection extends o
 	}
 
 	/**
-	 * Gets the member myClassCode
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4, filled by: "COMP"
+	 * @return the predefined element.
 	 */
-	public String getPredefinedClassCode() {
-		return myClassCode;
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 getPredefinedComponentComp() {
+		return createHl7ComponentFixedValue("COMP");
 	}
 
 	/**
-	 * Gets the member myMoodCode
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference, filled by: "REFR"
+	 * @return the predefined element.
 	 */
-	public String getPredefinedMoodCode() {
-		return myMoodCode;
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference getPredefinedReferenceRefr() {
+		return createHl7ReferenceFixedValue("REFR");
 	}
 
 	/**

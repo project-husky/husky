@@ -16,7 +16,6 @@
  */
 package org.ehealth_connector.cda.ch.emed.v0953;
 
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -33,16 +32,13 @@ public class Cdaauthorization extends org.ehealth_connector.common.hl7cdar2.POCD
 	// CDAauthorization/hl7:consent:null moodCode = "EVN";
 	}
 
-	@XmlTransient()
-	private String myTypeCode;
-
 	/**
 	 * Creates fixed contents for CDA Element hl7Consent
 	 *
 	 * @param classCode the desired fixed value for this argument.
 	 * @param moodCode the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Consent createHl7ConsentFixedValue(String classCode, String moodCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Consent createHl7ConsentFixedValue(String classCode, String moodCode) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040Consent retVal = factory.createPOCDMT000040Consent();
 		retVal.getClassCode().add(classCode);
@@ -51,24 +47,10 @@ public class Cdaauthorization extends org.ehealth_connector.common.hl7cdar2.POCD
 	}
 
 	/**
-	 * Creates fixed contents for CDA Attribute typeCode
-	 */
-	private void createTypeCodeFixedValue(String value) {
-		this.myTypeCode = value;
-	}
-
-	/**
 	 * Gets the hl7Consent
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Consent getHl7Consent() {
 		return consent;
-	}
-
-	/**
-	 * Gets the member myTypeCode
-	 */
-	public String getPredefinedTypeCode() {
-		return myTypeCode;
 	}
 
 	/**

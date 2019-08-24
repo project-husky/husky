@@ -18,7 +18,6 @@ package org.ehealth_connector.cda.ch.emed.v0953;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.IVLTS;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -35,9 +34,6 @@ public class ManufacturedMaterialEntryContentModule extends org.ehealth_connecto
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.1"));
 		super.setCode(createHl7CodeFixedValue("2.16.840.1.113883.6.73"));
 		super.setName(createHl7NameFixedValue("NA"));
-		super.setFormCode(createPharmFormCodeFixedValue());
-		super.setAsContent(createPharmAsContentFixedValue("CONT"));
-		super.getIngredient().add(createPharmIngredientFixedValue("ACTI"));
 	// ManufacturedMaterialEntryContentModule/hl7:manufacturedMaterial:cs classCode = "MMAT";
 	// ManufacturedMaterialEntryContentModule/hl7:manufacturedMaterial:cs determinerCode = "KIND";
 	// ManufacturedMaterialEntryContentModule/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.33";
@@ -45,15 +41,12 @@ public class ManufacturedMaterialEntryContentModule extends org.ehealth_connecto
 	// ManufacturedMaterialEntryContentModule/hl7:code:oid codeSystem = "2.16.840.1.113883.6.73";
 	// ManufacturedMaterialEntryContentModule/hl7:name:cs nullFlavor = "NA";
 	// ManufacturedMaterialEntryContentModule/pharm:formCode:cs valueSet = valueSet("2.16.756.5.30.1.1.11.3"); --> org.ehealth_connector.cda.ch.emed.v0953.enums.PharmaceuticalDoseFormEdqm
+	// This is fixed content for an optional element: createPharmFormCodeFixedValue() --> Creating getPredefinedFormCode();
 	// ManufacturedMaterialEntryContentModule/pharm:asContent:cs classCode = "CONT";
+	// This is fixed content for an optional element: createPharmAsContentFixedValue("CONT") --> Creating getPredefinedAsContentCont();
 	// ManufacturedMaterialEntryContentModule/pharm:ingredient:cs classCode = "ACTI";
+	// This is fixed content for an optional element: createPharmIngredientFixedValue("ACTI") --> Creating getPredefinedIngredientActi();
 	}
-
-	@XmlTransient()
-	private String myClassCode;
-
-	@XmlTransient()
-	private String myDeterminerCode;
 
 	/**
 	 * Adds a pharmAsContent
@@ -79,25 +72,11 @@ public class ManufacturedMaterialEntryContentModule extends org.ehealth_connecto
 	}
 
 	/**
-	 * Creates fixed contents for CDA Attribute classCode
-	 */
-	private void createClassCodeFixedValue(String value) {
-		this.myClassCode = value;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute determinerCode
-	 */
-	private void createDeterminerCodeFixedValue(String value) {
-		this.myDeterminerCode = value;
-	}
-
-	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
 	 * @param codeSystem the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String codeSystem) {
+	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String codeSystem) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		retVal.setCodeSystem(codeSystem);
@@ -109,7 +88,7 @@ public class ManufacturedMaterialEntryContentModule extends org.ehealth_connecto
 	 *
 	 * @param nullFlavor the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.EN createHl7NameFixedValue(String nullFlavor) {
+	private static org.ehealth_connector.common.hl7cdar2.EN createHl7NameFixedValue(String nullFlavor) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.EN retVal = factory.createEN();
 		retVal.nullFlavor = new ArrayList<String>();
@@ -122,7 +101,7 @@ public class ManufacturedMaterialEntryContentModule extends org.ehealth_connecto
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -134,7 +113,7 @@ public class ManufacturedMaterialEntryContentModule extends org.ehealth_connecto
 	 *
 	 * @param classCode the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.COCTMT230100UVContent createPharmAsContentFixedValue(String classCode) {
+	private static org.ehealth_connector.common.hl7cdar2.COCTMT230100UVContent createPharmAsContentFixedValue(String classCode) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.COCTMT230100UVContent retVal = factory.createCOCTMT230100UVContent();
 		retVal.setClassCode(org.ehealth_connector.common.hl7cdar2.RoleClassContent.fromValue(classCode));
@@ -144,7 +123,7 @@ public class ManufacturedMaterialEntryContentModule extends org.ehealth_connecto
 	/**
 	 * Creates fixed contents for CDA Element pharmFormCode
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CE createPharmFormCodeFixedValue() {
+	private static org.ehealth_connector.common.hl7cdar2.CE createPharmFormCodeFixedValue() {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		return retVal;
@@ -155,7 +134,7 @@ public class ManufacturedMaterialEntryContentModule extends org.ehealth_connecto
 	 *
 	 * @param classCode the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.COCTMT230100UVIngredient createPharmIngredientFixedValue(String classCode) {
+	private static org.ehealth_connector.common.hl7cdar2.COCTMT230100UVIngredient createPharmIngredientFixedValue(String classCode) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.COCTMT230100UVIngredient retVal = factory.createCOCTMT230100UVIngredient();
 		retVal.setClassCode(classCode);
@@ -209,17 +188,27 @@ public class ManufacturedMaterialEntryContentModule extends org.ehealth_connecto
 	}
 
 	/**
-	 * Gets the member myClassCode
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.COCTMT230100UVContent, filled by: "CONT"
+	 * @return the predefined element.
 	 */
-	public String getPredefinedClassCode() {
-		return myClassCode;
+	public static org.ehealth_connector.common.hl7cdar2.COCTMT230100UVContent getPredefinedAsContentCont() {
+		return createPharmAsContentFixedValue("CONT");
 	}
 
 	/**
-	 * Gets the member myDeterminerCode
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
+	 * @return the predefined element.
 	 */
-	public String getPredefinedDeterminerCode() {
-		return myDeterminerCode;
+	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedFormCode() {
+		return createPharmFormCodeFixedValue();
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.COCTMT230100UVIngredient, filled by: "ACTI"
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.COCTMT230100UVIngredient getPredefinedIngredientActi() {
+		return createPharmIngredientFixedValue("ACTI");
 	}
 
 	/**

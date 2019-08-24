@@ -25,7 +25,6 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamSource;
@@ -47,7 +46,6 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.1"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.1.4"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.1.1"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.4"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.2"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.1"));
 	// MedicationPrescriptionDocument/hl7:typeId:uid root = "2.16.840.1.113883.1.3";
@@ -56,25 +54,8 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	// MedicationPrescriptionDocument/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.1.1";
 	// MedicationPrescriptionDocument/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.1.4";
 	// MedicationPrescriptionDocument/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.9.1.1.1";
+	// This is fixed content for an optional element: createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.4") --> Creating getPredefinedTemplateId21675653011114();
 	}
-
-	@XmlTransient()
-	private String myCode;
-
-	@XmlTransient()
-	private String myCodeSystem;
-
-	@XmlTransient()
-	private String myCodeSystemName;
-
-	@XmlTransient()
-	private String myContextControlCode;
-
-	@XmlTransient()
-	private String myTypeCode;
-
-	@XmlTransient()
-	private org.ehealth_connector.cda.ch.emed.v0953.enums.DocumentEntryConfidentialityCode myValueSet;
 
 	/**
 	 * Adds a hl7Authenticator
@@ -90,14 +71,6 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	 */
 	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
 		getAuthor().add(value);
-	}
-
-	/**
-	 * Adds a hl7DocumentationOf
-	 * Information about a health service describing the context of this CDA document.
-	 */
-	public void addHl7DocumentationOf(org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf value) {
-		getDocumentationOf().add(value);
 	}
 
 	/**
@@ -150,14 +123,6 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	}
 
 	/**
-	 * Adds a hl7DocumentationOf
-	 * Information about a health service describing the context of this CDA document.
-	 */
-	public void clearHl7DocumentationOf() {
-		getDocumentationOf().clear();
-	}
-
-	/**
 	 * Adds a hl7InFulfillmentOf
 	 * Reference to one or more orders which led to the creation of this CDA document. It SHALL be declared, when the order reference is relevant for some reason.
 	 */
@@ -191,39 +156,11 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	}
 
 	/**
-	 * Creates fixed contents for CDA Attribute code
-	 */
-	private void createCodeFixedValue(String value) {
-		this.myCode = value;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute codeSystem
-	 */
-	private void createCodeSystemFixedValue(String value) {
-		this.myCodeSystem = value;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute codeSystemName
-	 */
-	private void createCodeSystemNameFixedValue(String value) {
-		this.myCodeSystemName = value;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute contextControlCode
-	 */
-	private void createContextControlCodeFixedValue(String value) {
-		this.myContextControlCode = value;
-	}
-
-	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -236,26 +173,12 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	 * @param root the desired fixed value for this argument.
 	 * @param extension the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040InfrastructureRootTypeId createHl7TypeIdFixedValue(String root, String extension) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040InfrastructureRootTypeId createHl7TypeIdFixedValue(String root, String extension) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040InfrastructureRootTypeId retVal = factory.createPOCDMT000040InfrastructureRootTypeId();
 		retVal.setRoot(root);
 		retVal.setExtension(extension);
 		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute typeCode
-	 */
-	private void createTypeCodeFixedValue(String value) {
-		this.myTypeCode = value;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute valueSet
-	 */
-	private void createValueSetFixedValue(org.ehealth_connector.cda.ch.emed.v0953.enums.DocumentEntryConfidentialityCode value) {
-		this.myValueSet = value;
 	}
 
 	/**
@@ -295,6 +218,14 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040DataEnterer getHl7DataEnterer() {
 		return dataEnterer;
+	}
+
+	/**
+	 * Gets the hl7DocumentationOf
+	 * Validity of document
+	 */
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf> getHl7DocumentationOf() {
+		return documentationOf;
 	}
 
 	/**
@@ -388,45 +319,11 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	}
 
 	/**
-	 * Gets the member myCode
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by: "2.16.756.5.30.1.1.1.1.4"
+	 * @return the predefined element.
 	 */
-	public String getPredefinedCode() {
-		return myCode;
-	}
-
-	/**
-	 * Gets the member myCodeSystem
-	 */
-	public String getPredefinedCodeSystem() {
-		return myCodeSystem;
-	}
-
-	/**
-	 * Gets the member myCodeSystemName
-	 */
-	public String getPredefinedCodeSystemName() {
-		return myCodeSystemName;
-	}
-
-	/**
-	 * Gets the member myContextControlCode
-	 */
-	public String getPredefinedContextControlCode() {
-		return myContextControlCode;
-	}
-
-	/**
-	 * Gets the member myTypeCode
-	 */
-	public String getPredefinedTypeCode() {
-		return myTypeCode;
-	}
-
-	/**
-	 * Gets the member myValueSet
-	 */
-	public org.ehealth_connector.cda.ch.emed.v0953.enums.DocumentEntryConfidentialityCode getPredefinedValueSet() {
-		return myValueSet;
+	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId21675653011114() {
+		return createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.4");
 	}
 
 	/**
@@ -567,6 +464,15 @@ public class MedicationPrescriptionDocument extends org.ehealth_connector.common
 	 */
 	public void setHl7DataEnterer(org.ehealth_connector.common.hl7cdar2.POCDMT000040DataEnterer value) {
 		this.dataEnterer = value;
+	}
+
+	/**
+	 * Sets the hl7DocumentationOf
+	 * Validity of document
+	 */
+	public void setHl7DocumentationOf(org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf value) {
+		getDocumentationOf().clear();
+		getDocumentationOf().add(value);
 	}
 
 	/**

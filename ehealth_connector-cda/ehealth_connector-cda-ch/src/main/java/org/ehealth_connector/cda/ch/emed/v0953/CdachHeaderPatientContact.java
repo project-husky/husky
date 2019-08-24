@@ -17,7 +17,6 @@
 package org.ehealth_connector.cda.ch.emed.v0953;
 
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -37,26 +36,16 @@ public class CdachHeaderPatientContact extends org.ehealth_connector.common.hl7c
 	// cdach_header_PatientContact/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.2.4";
 	}
 
-	@XmlTransient()
-	private String myTypeCode;
-
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute typeCode
-	 */
-	private void createTypeCodeFixedValue(String value) {
-		this.myTypeCode = value;
 	}
 
 	/**
@@ -80,13 +69,6 @@ public class CdachHeaderPatientContact extends org.ehealth_connector.common.hl7c
 	 */
 	public org.ehealth_connector.common.hl7cdar2.IVLTS getHl7Time() {
 		return time;
-	}
-
-	/**
-	 * Gets the member myTypeCode
-	 */
-	public String getPredefinedTypeCode() {
-		return myTypeCode;
 	}
 
 	/**

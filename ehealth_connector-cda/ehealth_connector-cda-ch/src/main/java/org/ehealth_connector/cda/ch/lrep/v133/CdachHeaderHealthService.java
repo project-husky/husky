@@ -17,7 +17,6 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -38,16 +37,13 @@ public class CdachHeaderHealthService extends org.ehealth_connector.common.hl7cd
 	// cdach_header_HealthService/hl7:serviceEvent:cs moodCode = "EVN";
 	}
 
-	@XmlTransient()
-	private String myTypeCode;
-
 	/**
 	 * Creates fixed contents for CDA Element hl7ServiceEvent
 	 *
 	 * @param classCode the desired fixed value for this argument.
 	 * @param moodCode the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040ServiceEvent createHl7ServiceEventFixedValue(String classCode, String moodCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040ServiceEvent createHl7ServiceEventFixedValue(String classCode, String moodCode) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040ServiceEvent retVal = factory.createPOCDMT000040ServiceEvent();
 		retVal.getClassCode().add(classCode);
@@ -60,18 +56,11 @@ public class CdachHeaderHealthService extends org.ehealth_connector.common.hl7cd
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute typeCode
-	 */
-	private void createTypeCodeFixedValue(String value) {
-		this.myTypeCode = value;
 	}
 
 	/**
@@ -86,13 +75,6 @@ public class CdachHeaderHealthService extends org.ehealth_connector.common.hl7cd
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
 		return templateId;
-	}
-
-	/**
-	 * Gets the member myTypeCode
-	 */
-	public String getPredefinedTypeCode() {
-		return myTypeCode;
 	}
 
 	/**

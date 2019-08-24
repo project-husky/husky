@@ -18,7 +18,6 @@ package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -34,9 +33,6 @@ public class ChpalmEntrySpecimenCollection extends org.ehealth_connector.common.
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.11"));
 		super.setCode(createHl7CodeFixedValue("33882-2", "2.16.840.1.113883.6.1", "LOINC", "Collection date of Unspecified specimen"));
 		super.setEffectiveTime(createHl7EffectiveTimeFixedValue("UNK"));
-		super.getTargetSiteCode().add(createHl7TargetSiteCodeFixedValue("2.16.840.1.113883.5.1052", "ActSite"));
-		super.getEntryRelationship().add(createHl7EntryRelationshipFixedValue("COMP", null));
-		super.getEntryRelationship().add(createHl7EntryRelationshipFixedValue("COMP", null));
 	// chpalm_entry_SpecimenCollection/hl7:procedure:cs classCode = "PROC";
 	// chpalm_entry_SpecimenCollection/hl7:procedure:cs moodCode = "EVN";
 	// chpalm_entry_SpecimenCollection/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.2";
@@ -48,21 +44,10 @@ public class ChpalmEntrySpecimenCollection extends org.ehealth_connector.common.
 	// chpalm_entry_SpecimenCollection/hl7:effectiveTime:cs nullFlavor = "UNK";
 	// chpalm_entry_SpecimenCollection/hl7:targetSiteCode:oid codeSystem = "2.16.840.1.113883.5.1052";
 	// chpalm_entry_SpecimenCollection/hl7:targetSiteCode:st codeSystemName = "ActSite";
+	// This is fixed content for an optional element: createHl7TargetSiteCodeFixedValue("2.16.840.1.113883.5.1052", "ActSite") --> Creating getPredefinedTargetSiteCode216840111388351052ActSite();
 	// chpalm_entry_SpecimenCollection/hl7:entryRelationship:cs typeCode = "COMP";
+	// This is fixed content for an optional element: createHl7EntryRelationshipFixedValue("COMP", null) --> Creating getPredefinedEntryRelationshipCompNull();
 	// chpalm_entry_SpecimenCollection/hl7:entryRelationship:cs typeCode = "COMP";
-	}
-
-	@XmlTransient()
-	private String myClassCode;
-
-	@XmlTransient()
-	private String myMoodCode;
-
-	/**
-	 * Creates fixed contents for CDA Attribute classCode
-	 */
-	private void createClassCodeFixedValue(String value) {
-		this.myClassCode = value;
 	}
 
 	/**
@@ -73,7 +58,7 @@ public class ChpalmEntrySpecimenCollection extends org.ehealth_connector.common.
 	 * @param codeSystemName the desired fixed value for this argument.
 	 * @param displayName the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.setCode(code);
@@ -88,7 +73,7 @@ public class ChpalmEntrySpecimenCollection extends org.ehealth_connector.common.
 	 *
 	 * @param nullFlavor the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.IVLTS createHl7EffectiveTimeFixedValue(String nullFlavor) {
+	private static org.ehealth_connector.common.hl7cdar2.IVLTS createHl7EffectiveTimeFixedValue(String nullFlavor) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.IVLTS retVal = factory.createIVLTS();
 		retVal.nullFlavor = new ArrayList<String>();
@@ -102,7 +87,7 @@ public class ChpalmEntrySpecimenCollection extends org.ehealth_connector.common.
 	 * @param typeCode the desired fixed value for this argument.
 	 * @param inversionInd the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
 		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship.fromValue(typeCode));
@@ -116,7 +101,7 @@ public class ChpalmEntrySpecimenCollection extends org.ehealth_connector.common.
 	 * @param codeSystem the desired fixed value for this argument.
 	 * @param codeSystemName the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CD createHl7TargetSiteCodeFixedValue(String codeSystem, String codeSystemName) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7TargetSiteCodeFixedValue(String codeSystem, String codeSystemName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.setCodeSystem(codeSystem);
@@ -129,18 +114,11 @@ public class ChpalmEntrySpecimenCollection extends org.ehealth_connector.common.
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute moodCode
-	 */
-	private void createMoodCodeFixedValue(String value) {
-		this.myMoodCode = value;
 	}
 
 	/**
@@ -216,17 +194,19 @@ public class ChpalmEntrySpecimenCollection extends org.ehealth_connector.common.
 	}
 
 	/**
-	 * Gets the member myClassCode
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "COMP", null
+	 * @return the predefined element.
 	 */
-	public String getPredefinedClassCode() {
-		return myClassCode;
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipCompNull() {
+		return createHl7EntryRelationshipFixedValue("COMP", null);
 	}
 
 	/**
-	 * Gets the member myMoodCode
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by: "2.16.840.1.113883.5.1052", "ActSite"
+	 * @return the predefined element.
 	 */
-	public String getPredefinedMoodCode() {
-		return myMoodCode;
+	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedTargetSiteCode216840111388351052ActSite() {
+		return createHl7TargetSiteCodeFixedValue("2.16.840.1.113883.5.1052", "ActSite");
 	}
 
 	/**

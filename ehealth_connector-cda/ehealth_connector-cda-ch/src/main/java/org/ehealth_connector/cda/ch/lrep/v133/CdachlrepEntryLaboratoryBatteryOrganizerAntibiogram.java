@@ -17,7 +17,6 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -34,13 +33,7 @@ public class CdachlrepEntryLaboratoryBatteryOrganizerAntibiogram extends org.ehe
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.87"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.19"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.4"));
-		super.setCode(createHl7CodeFixedValue("29576-6", "2.16.840.1.113883.6.1", "LOINC", "Bacterial susceptibility panel"));
 		super.setStatusCode(createHl7StatusCodeFixedValue());
-		super.getComponent().add(createHl7ComponentFixedValue("COMP"));
-		super.getComponent().add(createHl7ComponentFixedValue("COMP"));
-		super.getComponent().add(createHl7ComponentFixedValue("COMP"));
-		super.getComponent().add(createHl7ComponentFixedValue("COMP"));
-		super.getReference().add(createHl7ReferenceFixedValue("REFR"));
 	// cdachlrep_entry_LaboratoryBatteryOrganizerAntibiogram/hl7:organizer:cs classCode = "BATTERY";
 	// cdachlrep_entry_LaboratoryBatteryOrganizerAntibiogram/hl7:organizer:cs moodCode = "EVN";
 	// cdachlrep_entry_LaboratoryBatteryOrganizerAntibiogram/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.87";
@@ -50,19 +43,16 @@ public class CdachlrepEntryLaboratoryBatteryOrganizerAntibiogram extends org.ehe
 	// cdachlrep_entry_LaboratoryBatteryOrganizerAntibiogram/hl7:code:oid codeSystem = "2.16.840.1.113883.6.1";
 	// cdachlrep_entry_LaboratoryBatteryOrganizerAntibiogram/hl7:code:st codeSystemName = "LOINC";
 	// cdachlrep_entry_LaboratoryBatteryOrganizerAntibiogram/hl7:code:st displayName = "Bacterial susceptibility panel";
+	// This is fixed content for an optional element: createHl7CodeFixedValue("29576-6", "2.16.840.1.113883.6.1", "LOINC", "Bacterial susceptibility panel") --> Creating getPredefinedCode295766216840111388361LoincBacterialSusceptibilityPanel();
 	// cdachlrep_entry_LaboratoryBatteryOrganizerAntibiogram/hl7:statusCode:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.2"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusAbortedCompleted
 	// cdachlrep_entry_LaboratoryBatteryOrganizerAntibiogram/hl7:component:cs typeCode = "COMP";
+	// This is fixed content for an optional element: createHl7ComponentFixedValue("COMP") --> Creating getPredefinedComponentComp();
 	// cdachlrep_entry_LaboratoryBatteryOrganizerAntibiogram/hl7:component:cs typeCode = "COMP";
 	// cdachlrep_entry_LaboratoryBatteryOrganizerAntibiogram/hl7:component:cs typeCode = "COMP";
 	// cdachlrep_entry_LaboratoryBatteryOrganizerAntibiogram/hl7:component:cs typeCode = "COMP";
 	// cdachlrep_entry_LaboratoryBatteryOrganizerAntibiogram/hl7:reference:cs typeCode = "REFR";
+	// This is fixed content for an optional element: createHl7ReferenceFixedValue("REFR") --> Creating getPredefinedReferenceRefr();
 	}
-
-	@XmlTransient()
-	private String myClassCode;
-
-	@XmlTransient()
-	private String myMoodCode;
 
 	/**
 	 * Adds a hl7Author
@@ -151,13 +141,6 @@ public class CdachlrepEntryLaboratoryBatteryOrganizerAntibiogram extends org.ehe
 	}
 
 	/**
-	 * Creates fixed contents for CDA Attribute classCode
-	 */
-	private void createClassCodeFixedValue(String value) {
-		this.myClassCode = value;
-	}
-
-	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
 	 * @param code the desired fixed value for this argument.
@@ -165,7 +148,7 @@ public class CdachlrepEntryLaboratoryBatteryOrganizerAntibiogram extends org.ehe
 	 * @param codeSystemName the desired fixed value for this argument.
 	 * @param displayName the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.setCode(code);
@@ -180,7 +163,7 @@ public class CdachlrepEntryLaboratoryBatteryOrganizerAntibiogram extends org.ehe
 	 *
 	 * @param typeCode the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 createHl7ComponentFixedValue(String typeCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 createHl7ComponentFixedValue(String typeCode) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 retVal = factory.createPOCDMT000040Component4();
 		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.ActRelationshipHasComponent.fromValue(typeCode));
@@ -192,7 +175,7 @@ public class CdachlrepEntryLaboratoryBatteryOrganizerAntibiogram extends org.ehe
 	 *
 	 * @param typeCode the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference retVal = factory.createPOCDMT000040Reference();
 		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipExternalReference.fromValue(typeCode));
@@ -202,7 +185,7 @@ public class CdachlrepEntryLaboratoryBatteryOrganizerAntibiogram extends org.ehe
 	/**
 	 * Creates fixed contents for CDA Element hl7StatusCode
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		return retVal;
@@ -213,18 +196,11 @@ public class CdachlrepEntryLaboratoryBatteryOrganizerAntibiogram extends org.ehe
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute moodCode
-	 */
-	private void createMoodCodeFixedValue(String value) {
-		this.myMoodCode = value;
 	}
 
 	/**
@@ -274,17 +250,27 @@ public class CdachlrepEntryLaboratoryBatteryOrganizerAntibiogram extends org.ehe
 	}
 
 	/**
-	 * Gets the member myClassCode
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by: "29576-6", "2.16.840.1.113883.6.1", "LOINC", "Bacterial susceptibility panel"
+	 * @return the predefined element.
 	 */
-	public String getPredefinedClassCode() {
-		return myClassCode;
+	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedCode295766216840111388361LoincBacterialSusceptibilityPanel() {
+		return createHl7CodeFixedValue("29576-6", "2.16.840.1.113883.6.1", "LOINC", "Bacterial susceptibility panel");
 	}
 
 	/**
-	 * Gets the member myMoodCode
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4, filled by: "COMP"
+	 * @return the predefined element.
 	 */
-	public String getPredefinedMoodCode() {
-		return myMoodCode;
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 getPredefinedComponentComp() {
+		return createHl7ComponentFixedValue("COMP");
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference, filled by: "REFR"
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference getPredefinedReferenceRefr() {
+		return createHl7ReferenceFixedValue("REFR");
 	}
 
 	/**

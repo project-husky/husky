@@ -16,40 +16,26 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.118
  * Template description: Each chapter (Laboratory Speciality Section and Laboratory Report Item Section) MUST contain exactly one findings group (CDA Body Laboratory Report Data Processing Entry).
  */
-public class CdachlrepEntryLaboratoryReportDataProcessingEntry {
+public class CdachlrepEntryLaboratoryReportDataProcessingEntry extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry {
 
 	public CdachlrepEntryLaboratoryReportDataProcessingEntry() {
-		templateId.add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.118"));
-		templateId.add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1"));
-		templateId.add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.4"));
-		this.act = createHl7ActFixedValue("ACT", "EVN");
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.118"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.4"));
 	// cdachlrep_entry_LaboratoryReportDataProcessingEntry/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.118";
 	// cdachlrep_entry_LaboratoryReportDataProcessingEntry/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1";
 	// cdachlrep_entry_LaboratoryReportDataProcessingEntry/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.4";
 	// cdachlrep_entry_LaboratoryReportDataProcessingEntry/hl7:act:cs classCode = "ACT";
 	// cdachlrep_entry_LaboratoryReportDataProcessingEntry/hl7:act:cs moodCode = "EVN";
+	// This is fixed content for an optional element: createHl7ActFixedValue("ACT", "EVN") --> Creating getPredefinedActActEvn();
 	}
-
-	/**
-	 * No description available in the ART-DECOR model for this field.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Act act;
-
-	/**
-	 * No description available in the ART-DECOR model for this field.
-	 */
-	@XmlTransient()
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> templateId = new ArrayList<org.ehealth_connector.common.hl7cdar2.II>();
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Act
@@ -57,7 +43,7 @@ public class CdachlrepEntryLaboratoryReportDataProcessingEntry {
 	 * @param classCode the desired fixed value for this argument.
 	 * @param moodCode the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Act createHl7ActFixedValue(String classCode, String moodCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Act createHl7ActFixedValue(String classCode, String moodCode) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040Act retVal = factory.createPOCDMT000040Act();
 		retVal.setClassCode(org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue(classCode));
@@ -70,7 +56,7 @@ public class CdachlrepEntryLaboratoryReportDataProcessingEntry {
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -92,6 +78,14 @@ public class CdachlrepEntryLaboratoryReportDataProcessingEntry {
 	}
 
 	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040Act, filled by: "ACT", "EVN"
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Act getPredefinedActActEvn() {
+		return createHl7ActFixedValue("ACT", "EVN");
+	}
+
+	/**
 	 * Sets the hl7Act
 	 */
 	public void setHl7Act(org.ehealth_connector.common.hl7cdar2.POCDMT000040Act value) {
@@ -102,7 +96,7 @@ public class CdachlrepEntryLaboratoryReportDataProcessingEntry {
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		templateId.clear();
-		templateId.add(value);
+		getTemplateId().clear();
+		getTemplateId().add(value);
 	}
 }

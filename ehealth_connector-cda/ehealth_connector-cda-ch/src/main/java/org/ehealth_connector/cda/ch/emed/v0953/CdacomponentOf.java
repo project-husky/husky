@@ -16,7 +16,6 @@
  */
 package org.ehealth_connector.cda.ch.emed.v0953;
 
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -33,16 +32,13 @@ public class CdacomponentOf extends org.ehealth_connector.common.hl7cdar2.POCDMT
 	// CDAcomponentOf/hl7:encompassingEncounter:null moodCode = "EVN";
 	}
 
-	@XmlTransient()
-	private String myTypeCode;
-
 	/**
 	 * Creates fixed contents for CDA Element hl7EncompassingEncounter
 	 *
 	 * @param classCode the desired fixed value for this argument.
 	 * @param moodCode the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040EncompassingEncounter createHl7EncompassingEncounterFixedValue(String classCode, String moodCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040EncompassingEncounter createHl7EncompassingEncounterFixedValue(String classCode, String moodCode) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040EncompassingEncounter retVal = factory.createPOCDMT000040EncompassingEncounter();
 		retVal.getClassCode().add(classCode);
@@ -51,24 +47,10 @@ public class CdacomponentOf extends org.ehealth_connector.common.hl7cdar2.POCDMT
 	}
 
 	/**
-	 * Creates fixed contents for CDA Attribute typeCode
-	 */
-	private void createTypeCodeFixedValue(String value) {
-		this.myTypeCode = value;
-	}
-
-	/**
 	 * Gets the hl7EncompassingEncounter
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040EncompassingEncounter getHl7EncompassingEncounter() {
 		return encompassingEncounter;
-	}
-
-	/**
-	 * Gets the member myTypeCode
-	 */
-	public String getPredefinedTypeCode() {
-		return myTypeCode;
 	}
 
 	/**

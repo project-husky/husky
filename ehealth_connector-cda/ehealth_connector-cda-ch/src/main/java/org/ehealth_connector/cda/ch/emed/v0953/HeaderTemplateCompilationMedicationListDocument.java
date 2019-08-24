@@ -16,27 +16,13 @@
  */
 package org.ehealth_connector.cda.ch.emed.v0953;
 
-import javax.xml.bind.annotation.XmlTransient;
-
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.46
  * Template description: Header Templates for Medication List document.
  *
  * Element description: The document's creation date and time. If this document replaces a previous version (linked via parentDocument), this is the date and time of the new version.
  */
-public class HeaderTemplateCompilationMedicationListDocument {
-
-	/**
-	 * The document's creation date and time. If this document replaces a previous version (linked via parentDocument), this is the date and time of the new version.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.TS effectiveTime;
-
-	/**
-	 * No description available in the ART-DECOR model for this field.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.ST title;
+public class HeaderTemplateCompilationMedicationListDocument extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
 
 	/**
 	 * Gets the hl7EffectiveTime

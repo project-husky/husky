@@ -17,7 +17,6 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -48,39 +47,6 @@ public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl
 	// cdachlrep_header_DocumentCode/hl7:translation:st displayName = "Laboratory report";
 	}
 
-	@XmlTransient()
-	private String myCodeSystem;
-
-	@XmlTransient()
-	private String myCodeSystemName;
-
-	@XmlTransient()
-	private org.ehealth_connector.cda.ch.lrep.v133.enums.DocumentEntryTypeCode myDisplayName;
-
-	@XmlTransient()
-	private org.ehealth_connector.cda.ch.lrep.v133.enums.LaboratorySpecialties myValueSet;
-
-	/**
-	 * Creates fixed contents for CDA Attribute codeSystem
-	 */
-	private void createCodeSystemFixedValue(String value) {
-		this.myCodeSystem = value;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute codeSystemName
-	 */
-	private void createCodeSystemNameFixedValue(String value) {
-		this.myCodeSystemName = value;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute displayName
-	 */
-	private void createDisplayNameFixedValue(org.ehealth_connector.cda.ch.lrep.v133.enums.DocumentEntryTypeCode value) {
-		this.myDisplayName = value;
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7Translation
 	 *
@@ -89,7 +55,7 @@ public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl
 	 * @param codeSystemName the desired fixed value for this argument.
 	 * @param displayName the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CD createHl7TranslationFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7TranslationFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.setCode(code);
@@ -100,46 +66,11 @@ public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl
 	}
 
 	/**
-	 * Creates fixed contents for CDA Attribute valueSet
-	 */
-	private void createValueSetFixedValue(org.ehealth_connector.cda.ch.lrep.v133.enums.LaboratorySpecialties value) {
-		this.myValueSet = value;
-	}
-
-	/**
 	 * Gets the hl7Translation
 	 * The translation to the Swiss EPR XDS.b metadata attribute typeCode.
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.CD> getHl7Translation() {
 		return translation;
-	}
-
-	/**
-	 * Gets the member myCodeSystem
-	 */
-	public String getPredefinedCodeSystem() {
-		return myCodeSystem;
-	}
-
-	/**
-	 * Gets the member myCodeSystemName
-	 */
-	public String getPredefinedCodeSystemName() {
-		return myCodeSystemName;
-	}
-
-	/**
-	 * Gets the member myDisplayName
-	 */
-	public org.ehealth_connector.cda.ch.lrep.v133.enums.DocumentEntryTypeCode getPredefinedDisplayName() {
-		return myDisplayName;
-	}
-
-	/**
-	 * Gets the member myValueSet
-	 */
-	public org.ehealth_connector.cda.ch.lrep.v133.enums.LaboratorySpecialties getPredefinedValueSet() {
-		return myValueSet;
 	}
 
 	/**

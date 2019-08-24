@@ -32,7 +32,6 @@ public class CdachlrepSectionLaboratorySpecialtyCoded extends org.ehealth_connec
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.2.1"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.77"));
 		super.setCode(createHl7CodeFixedValue("2.16.840.1.113883.6.1", "LOINC"));
-		super.getEntry().add(createHl7EntryFixedValue("DRIV"));
 	// cdachlrep_section_LaboratorySpecialtyCoded/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.3.3";
 	// cdachlrep_section_LaboratorySpecialtyCoded/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.3.2.1";
 	// cdachlrep_section_LaboratorySpecialtyCoded/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.3.77";
@@ -40,6 +39,7 @@ public class CdachlrepSectionLaboratorySpecialtyCoded extends org.ehealth_connec
 	// cdachlrep_section_LaboratorySpecialtyCoded/hl7:code:oid codeSystem = "2.16.840.1.113883.6.1";
 	// cdachlrep_section_LaboratorySpecialtyCoded/hl7:code:st codeSystemName = "LOINC";
 	// cdachlrep_section_LaboratorySpecialtyCoded/hl7:entry:cs typeCode = "DRIV";
+	// This is fixed content for an optional element: createHl7EntryFixedValue("DRIV") --> Creating getPredefinedEntryDriv();
 	}
 
 	/**
@@ -78,7 +78,7 @@ public class CdachlrepSectionLaboratorySpecialtyCoded extends org.ehealth_connec
 	 * @param codeSystem the desired fixed value for this argument.
 	 * @param codeSystemName the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String codeSystem, String codeSystemName) {
+	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String codeSystem, String codeSystemName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		retVal.setCodeSystem(codeSystem);
@@ -91,7 +91,7 @@ public class CdachlrepSectionLaboratorySpecialtyCoded extends org.ehealth_connec
 	 *
 	 * @param typeCode the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry createHl7EntryFixedValue(String typeCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry createHl7EntryFixedValue(String typeCode) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry retVal = factory.createPOCDMT000040Entry();
 		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntry.fromValue(typeCode));
@@ -103,7 +103,7 @@ public class CdachlrepSectionLaboratorySpecialtyCoded extends org.ehealth_connec
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -151,6 +151,14 @@ public class CdachlrepSectionLaboratorySpecialtyCoded extends org.ehealth_connec
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ST getHl7Title() {
 		return title;
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry, filled by: "DRIV"
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry getPredefinedEntryDriv() {
+		return createHl7EntryFixedValue("DRIV");
 	}
 
 	/**

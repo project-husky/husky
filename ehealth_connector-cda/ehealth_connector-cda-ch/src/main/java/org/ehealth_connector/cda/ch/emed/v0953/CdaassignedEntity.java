@@ -16,91 +16,52 @@
  */
 package org.ehealth_connector.cda.ch.emed.v0953;
 
-import java.util.ArrayList;
-import javax.xml.bind.annotation.XmlTransient;
-
 /**
  * Original ART-DECOR template id: 2.16.840.1.113883.10.12.153
  * Template description: Template CDA AssignedEntity (prototype, directly derived from POCD_RM000040 MIF)
  */
-public class CdaassignedEntity {
-
-	/**
-	 * No description available in the ART-DECOR model for this field.
-	 */
-	@XmlTransient()
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.AD> addr = new ArrayList<org.ehealth_connector.common.hl7cdar2.AD>();
-
-	/**
-	 * No description available in the ART-DECOR model for this field.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Person assignedPerson;
-
-	/**
-	 * No description available in the ART-DECOR model for this field.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.CE code;
-
-	/**
-	 * No description available in the ART-DECOR model for this field.
-	 */
-	@XmlTransient()
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> id = new ArrayList<org.ehealth_connector.common.hl7cdar2.II>();
-
-	/**
-	 * No description available in the ART-DECOR model for this field.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Organization representedOrganization;
-
-	/**
-	 * No description available in the ART-DECOR model for this field.
-	 */
-	@XmlTransient()
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.TEL> telecom = new ArrayList<org.ehealth_connector.common.hl7cdar2.TEL>();
+public class CdaassignedEntity extends org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity {
 
 	/**
 	 * Adds a hl7Addr
 	 */
 	public void addHl7Addr(org.ehealth_connector.common.hl7cdar2.AD value) {
-		addr.add(value);
+		getAddr().add(value);
 	}
 
 	/**
 	 * Adds a hl7Id
 	 */
 	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		id.add(value);
+		getId().add(value);
 	}
 
 	/**
 	 * Adds a hl7Telecom
 	 */
 	public void addHl7Telecom(org.ehealth_connector.common.hl7cdar2.TEL value) {
-		telecom.add(value);
+		getTelecom().add(value);
 	}
 
 	/**
 	 * Adds a hl7Addr
 	 */
 	public void clearHl7Addr() {
-		addr.clear();
+		getAddr().clear();
 	}
 
 	/**
 	 * Adds a hl7Id
 	 */
 	public void clearHl7Id() {
-		id.clear();
+		getId().clear();
 	}
 
 	/**
 	 * Adds a hl7Telecom
 	 */
 	public void clearHl7Telecom() {
-		telecom.clear();
+		getTelecom().clear();
 	}
 
 	/**

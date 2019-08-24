@@ -17,40 +17,21 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.ArrayList;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.16
  * Template description: Reusable template wherever an author with required name, addr and telecom is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.
  */
-public class CdachOtherAuthorCompilationWithNameAddrTelecom {
+public class CdachOtherAuthorCompilationWithNameAddrTelecom extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Author {
 
 	public CdachOtherAuthorCompilationWithNameAddrTelecom() {
-		this.functionCode = createHl7FunctionCodeFixedValue("NAV", "2.16.840.1.113883.6.96", "SNOMED CT");
+		super.setFunctionCode(createHl7FunctionCodeFixedValue("NAV", "2.16.840.1.113883.6.96", "SNOMED CT"));
 	// cdach_other_AuthorCompilationWithNameAddrTelecom/hl7:functionCode:cs valueSet = valueSet("2.16.756.5.30.1.127.3.10.1.1.3"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.DocumentEntryAuthorRole
 	// cdach_other_AuthorCompilationWithNameAddrTelecom/hl7:functionCode:st nullFlavor = "NAV";
 	// cdach_other_AuthorCompilationWithNameAddrTelecom/hl7:functionCode:oid codeSystem = "2.16.840.1.113883.6.96";
 	// cdach_other_AuthorCompilationWithNameAddrTelecom/hl7:functionCode:st codeSystemName = "SNOMED CT";
 	}
-
-	/**
-	 * No description available in the ART-DECOR model for this field.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedAuthor assignedAuthor;
-
-	/**
-	 * The functionCode MUST be taken from the Swiss EPR Value-Set for author roles. See FDHA Ordinance on the Electronic Patient Record (EPRO-FDHA), Appendix 3: Metadata, Section 2.1.If the desired functionCode is not available in the Swiss EPR Value-Set for author roles, nullFlavor='NAV' MUST be used. In this case, the originalText element MUST contain the description of the role.Translations to other vocabularies are allowed.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.CE functionCode;
-
-	/**
-	 * Timestamp of the authorship.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.TS time;
 
 	/**
 	 * Creates fixed contents for CDA Element hl7FunctionCode
@@ -59,7 +40,7 @@ public class CdachOtherAuthorCompilationWithNameAddrTelecom {
 	 * @param codeSystem the desired fixed value for this argument.
 	 * @param codeSystemName the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CE createHl7FunctionCodeFixedValue(String nullFlavor, String codeSystem, String codeSystemName) {
+	private static org.ehealth_connector.common.hl7cdar2.CE createHl7FunctionCodeFixedValue(String nullFlavor, String codeSystem, String codeSystemName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		retVal.nullFlavor = new ArrayList<String>();

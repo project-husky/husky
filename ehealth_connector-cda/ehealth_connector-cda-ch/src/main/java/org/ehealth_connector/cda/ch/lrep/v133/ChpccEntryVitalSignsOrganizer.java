@@ -17,7 +17,6 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -35,7 +34,6 @@ public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.35"));
 		super.setCode(createHl7CodeFixedValue("46680005", "2.16.840.1.113883.6.96", "SNOMED CT", "VITAL SIGNS"));
 		super.setStatusCode(createHl7StatusCodeFixedValue("completed"));
-		super.getComponent().add(createHl7ComponentFixedValue("COMP"));
 	// chpcc_entry_VitalSignsOrganizer/hl7:organizer:cs classCode = "CLUSTER";
 	// chpcc_entry_VitalSignsOrganizer/hl7:organizer:cs moodCode = "EVN";
 	// chpcc_entry_VitalSignsOrganizer/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.20";
@@ -48,13 +46,8 @@ public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.
 	// chpcc_entry_VitalSignsOrganizer/hl7:code:st displayName = "VITAL SIGNS";
 	// chpcc_entry_VitalSignsOrganizer/hl7:statusCode:cs code = "completed"; (isVocab)
 	// chpcc_entry_VitalSignsOrganizer/hl7:component:cs typeCode = "COMP";
+	// This is fixed content for an optional element: createHl7ComponentFixedValue("COMP") --> Creating getPredefinedComponentComp();
 	}
-
-	@XmlTransient()
-	private String myClassCode;
-
-	@XmlTransient()
-	private String myMoodCode;
 
 	/**
 	 * Adds a hl7Component
@@ -87,13 +80,6 @@ public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.
 	}
 
 	/**
-	 * Creates fixed contents for CDA Attribute classCode
-	 */
-	private void createClassCodeFixedValue(String value) {
-		this.myClassCode = value;
-	}
-
-	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
 	 * @param code the desired fixed value for this argument.
@@ -101,7 +87,7 @@ public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.
 	 * @param codeSystemName the desired fixed value for this argument.
 	 * @param displayName the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		retVal.setCode(code);
@@ -116,7 +102,7 @@ public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.
 	 *
 	 * @param typeCode the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 createHl7ComponentFixedValue(String typeCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 createHl7ComponentFixedValue(String typeCode) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 retVal = factory.createPOCDMT000040Component4();
 		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.ActRelationshipHasComponent.fromValue(typeCode));
@@ -128,7 +114,7 @@ public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.
 	 *
 	 * @param code the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		retVal.setCode(code);
@@ -140,18 +126,11 @@ public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute moodCode
-	 */
-	private void createMoodCodeFixedValue(String value) {
-		this.myMoodCode = value;
 	}
 
 	/**
@@ -183,17 +162,11 @@ public class ChpccEntryVitalSignsOrganizer extends org.ehealth_connector.common.
 	}
 
 	/**
-	 * Gets the member myClassCode
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4, filled by: "COMP"
+	 * @return the predefined element.
 	 */
-	public String getPredefinedClassCode() {
-		return myClassCode;
-	}
-
-	/**
-	 * Gets the member myMoodCode
-	 */
-	public String getPredefinedMoodCode() {
-		return myMoodCode;
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 getPredefinedComponentComp() {
+		return createHl7ComponentFixedValue("COMP");
 	}
 
 	/**

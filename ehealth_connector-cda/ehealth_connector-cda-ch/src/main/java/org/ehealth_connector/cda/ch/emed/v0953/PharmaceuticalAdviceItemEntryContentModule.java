@@ -17,7 +17,6 @@
 package org.ehealth_connector.cda.ch.emed.v0953;
 
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -32,15 +31,6 @@ public class PharmaceuticalAdviceItemEntryContentModule extends org.ehealth_conn
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.3"));
 		super.setCode(createHl7CodeFixedValue("COMMENT"));
 		super.setStatusCode(createHl7StatusCodeFixedValue("completed"));
-		super.getEntryRelationship().add(createHl7EntryRelationshipFixedValue("REFR", null));
-		super.getEntryRelationship().add(createHl7EntryRelationshipFixedValue("REFR", null));
-		super.getEntryRelationship().add(createHl7EntryRelationshipFixedValue("REFR", null));
-		super.getEntryRelationship().add(createHl7EntryRelationshipFixedValue("REFR", "false"));
-		super.getEntryRelationship().add(createHl7EntryRelationshipFixedValue("REFR", "false"));
-		super.getEntryRelationship().add(createHl7EntryRelationshipFixedValue("REFR", "false"));
-		super.getEntryRelationship().add(createHl7EntryRelationshipFixedValue("REFR", "false"));
-		super.getEntryRelationship().add(createHl7EntryRelationshipFixedValue("COMP", null));
-		super.getReference().add(createHl7ReferenceFixedValue("XCRPT"));
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:observation:cs moodCode = "EVN";
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.44";
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.9.1.3.3";
@@ -53,10 +43,12 @@ public class PharmaceuticalAdviceItemEntryContentModule extends org.ehealth_conn
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:statusCode:cs code = "completed"; (isVocab)
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:statusCode:cs code = "completed"; (isVocab)
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:entryRelationship:cs typeCode = "REFR";
+	// This is fixed content for an optional element: createHl7EntryRelationshipFixedValue("REFR", null) --> Creating getPredefinedEntryRelationshipRefrNull();
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:entryRelationship:cs typeCode = "REFR";
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:entryRelationship:cs typeCode = "REFR";
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:entryRelationship:cs typeCode = "REFR";
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:entryRelationship:bl inversionInd = "false";
+	// This is fixed content for an optional element: createHl7EntryRelationshipFixedValue("REFR", "false") --> Creating getPredefinedEntryRelationshipRefrFalse();
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:entryRelationship:null typeCode = "REFR";
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:entryRelationship:null inversionInd = "false";
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:entryRelationship:null typeCode = "REFR";
@@ -64,11 +56,10 @@ public class PharmaceuticalAdviceItemEntryContentModule extends org.ehealth_conn
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:entryRelationship:cs typeCode = "REFR";
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:entryRelationship:bl inversionInd = "false";
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:entryRelationship:cs typeCode = "COMP";
+	// This is fixed content for an optional element: createHl7EntryRelationshipFixedValue("COMP", null) --> Creating getPredefinedEntryRelationshipCompNull();
 	// PharmaceuticalAdviceItemEntryContentModule/hl7:reference:null typeCode = "XCRPT";
+	// This is fixed content for an optional element: createHl7ReferenceFixedValue("XCRPT") --> Creating getPredefinedReferenceXcrpt();
 	}
-
-	@XmlTransient()
-	private String myMoodCode;
 
 	/**
 	 * Adds a hl7Id
@@ -107,7 +98,7 @@ public class PharmaceuticalAdviceItemEntryContentModule extends org.ehealth_conn
 	 *
 	 * @param code the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.setCode(code);
@@ -120,7 +111,7 @@ public class PharmaceuticalAdviceItemEntryContentModule extends org.ehealth_conn
 	 * @param typeCode the desired fixed value for this argument.
 	 * @param inversionInd the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
 		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship.fromValue(typeCode));
@@ -133,7 +124,7 @@ public class PharmaceuticalAdviceItemEntryContentModule extends org.ehealth_conn
 	 *
 	 * @param typeCode the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference retVal = factory.createPOCDMT000040Reference();
 		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipExternalReference.fromValue(typeCode));
@@ -145,7 +136,7 @@ public class PharmaceuticalAdviceItemEntryContentModule extends org.ehealth_conn
 	 *
 	 * @param code the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		retVal.setCode(code);
@@ -157,18 +148,11 @@ public class PharmaceuticalAdviceItemEntryContentModule extends org.ehealth_conn
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute moodCode
-	 */
-	private void createMoodCodeFixedValue(String value) {
-		this.myMoodCode = value;
 	}
 
 	/**
@@ -225,10 +209,35 @@ public class PharmaceuticalAdviceItemEntryContentModule extends org.ehealth_conn
 	}
 
 	/**
-	 * Gets the member myMoodCode
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "COMP", null
+	 * @return the predefined element.
 	 */
-	public String getPredefinedMoodCode() {
-		return myMoodCode;
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipCompNull() {
+		return createHl7EntryRelationshipFixedValue("COMP", null);
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "REFR", "false"
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrFalse() {
+		return createHl7EntryRelationshipFixedValue("REFR", "false");
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "REFR", null
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrNull() {
+		return createHl7EntryRelationshipFixedValue("REFR", null);
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference, filled by: "XCRPT"
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference getPredefinedReferenceXcrpt() {
+		return createHl7ReferenceFixedValue("XCRPT");
 	}
 
 	/**

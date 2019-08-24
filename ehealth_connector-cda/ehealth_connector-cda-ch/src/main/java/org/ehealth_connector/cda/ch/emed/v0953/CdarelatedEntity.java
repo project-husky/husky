@@ -16,83 +16,51 @@
  */
 package org.ehealth_connector.cda.ch.emed.v0953;
 
-import java.util.ArrayList;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.840.1.113883.10.12.316
  * Template description: Template CDA RelatedEntity (prototype, directly derived from POCD_RM000040 MIF)
  */
-public class CdarelatedEntity {
+public class CdarelatedEntity extends org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity {
 
 	public CdarelatedEntity() {
-		this.code = createHl7CodeFixedValue();
 	// CDARelatedEntity/hl7:code:cs classCode = valueSet("2.16.840.1.113883.1.11.19563"); --> org.ehealth_connector.cda.ch.emed.v0953.enums.PersonalRelationshipRoleType
+	// This is fixed content for an optional element: createHl7CodeFixedValue() --> Creating getPredefinedCode();
 	}
-
-	/**
-	 * No description available in the ART-DECOR model for this field.
-	 */
-	@XmlTransient()
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.AD> addr = new ArrayList<org.ehealth_connector.common.hl7cdar2.AD>();
-
-	/**
-	 * No description available in the ART-DECOR model for this field.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.CE code;
-
-	/**
-	 * No description available in the ART-DECOR model for this field.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.IVLTS effectiveTime;
-
-	/**
-	 * No description available in the ART-DECOR model for this field.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Person relatedPerson;
-
-	/**
-	 * No description available in the ART-DECOR model for this field.
-	 */
-	@XmlTransient()
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.TEL> telecom = new ArrayList<org.ehealth_connector.common.hl7cdar2.TEL>();
 
 	/**
 	 * Adds a hl7Addr
 	 */
 	public void addHl7Addr(org.ehealth_connector.common.hl7cdar2.AD value) {
-		addr.add(value);
+		getAddr().add(value);
 	}
 
 	/**
 	 * Adds a hl7Telecom
 	 */
 	public void addHl7Telecom(org.ehealth_connector.common.hl7cdar2.TEL value) {
-		telecom.add(value);
+		getTelecom().add(value);
 	}
 
 	/**
 	 * Adds a hl7Addr
 	 */
 	public void clearHl7Addr() {
-		addr.clear();
+		getAddr().clear();
 	}
 
 	/**
 	 * Adds a hl7Telecom
 	 */
 	public void clearHl7Telecom() {
-		telecom.clear();
+		getTelecom().clear();
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue() {
+	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue() {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		return retVal;
@@ -117,6 +85,14 @@ public class CdarelatedEntity {
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Person getHl7RelatedPerson() {
 		return relatedPerson;
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedCode() {
+		return createHl7CodeFixedValue();
 	}
 
 	/**

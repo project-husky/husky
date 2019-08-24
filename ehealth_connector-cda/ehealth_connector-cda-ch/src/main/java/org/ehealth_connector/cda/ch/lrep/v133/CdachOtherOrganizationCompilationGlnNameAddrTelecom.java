@@ -16,9 +16,7 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -27,43 +25,19 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  *
  * Element description: The organization's address.
  */
-public class CdachOtherOrganizationCompilationGlnNameAddrTelecom {
+public class CdachOtherOrganizationCompilationGlnNameAddrTelecom extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organization {
 
 	public CdachOtherOrganizationCompilationGlnNameAddrTelecom() {
-		id.add(createHl7IdFixedValue("2.51.1.3"));
+		super.getId().add(createHl7IdFixedValue("2.51.1.3"));
 	// cdach_other_OrganizationCompilationGlnNameAddrTelecom/hl7:id:uid root = "2.51.1.3";
 	}
-
-	/**
-	 * The organization's address.
-	 */
-	@XmlTransient()
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.AD> addr = new ArrayList<org.ehealth_connector.common.hl7cdar2.AD>();
-
-	/**
-	 * The organization's id (GLN).
-	 */
-	@XmlTransient()
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> id = new ArrayList<org.ehealth_connector.common.hl7cdar2.II>();
-
-	/**
-	 * The organization's name.
-	 */
-	@XmlTransient()
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.ON> name = new ArrayList<org.ehealth_connector.common.hl7cdar2.ON>();
-
-	/**
-	 * The organization's means of communication (phone, eMail, ...).
-	 */
-	@XmlTransient()
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.TEL> telecom = new ArrayList<org.ehealth_connector.common.hl7cdar2.TEL>();
 
 	/**
 	 * Adds a hl7Addr
 	 * The organization's address.
 	 */
 	public void addHl7Addr(org.ehealth_connector.common.hl7cdar2.AD value) {
-		addr.add(value);
+		getAddr().add(value);
 	}
 
 	/**
@@ -71,7 +45,7 @@ public class CdachOtherOrganizationCompilationGlnNameAddrTelecom {
 	 * The organization's name.
 	 */
 	public void addHl7Name(org.ehealth_connector.common.hl7cdar2.ON value) {
-		name.add(value);
+		getName().add(value);
 	}
 
 	/**
@@ -79,7 +53,7 @@ public class CdachOtherOrganizationCompilationGlnNameAddrTelecom {
 	 * The organization's means of communication (phone, eMail, ...).
 	 */
 	public void addHl7Telecom(org.ehealth_connector.common.hl7cdar2.TEL value) {
-		telecom.add(value);
+		getTelecom().add(value);
 	}
 
 	/**
@@ -87,7 +61,7 @@ public class CdachOtherOrganizationCompilationGlnNameAddrTelecom {
 	 * The organization's address.
 	 */
 	public void clearHl7Addr() {
-		addr.clear();
+		getAddr().clear();
 	}
 
 	/**
@@ -95,7 +69,7 @@ public class CdachOtherOrganizationCompilationGlnNameAddrTelecom {
 	 * The organization's name.
 	 */
 	public void clearHl7Name() {
-		name.clear();
+		getName().clear();
 	}
 
 	/**
@@ -103,7 +77,7 @@ public class CdachOtherOrganizationCompilationGlnNameAddrTelecom {
 	 * The organization's means of communication (phone, eMail, ...).
 	 */
 	public void clearHl7Telecom() {
-		telecom.clear();
+		getTelecom().clear();
 	}
 
 	/**
@@ -111,7 +85,7 @@ public class CdachOtherOrganizationCompilationGlnNameAddrTelecom {
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7IdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7IdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -131,7 +105,7 @@ public class CdachOtherOrganizationCompilationGlnNameAddrTelecom {
 	 * The organization's id (GLN).
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		id.clear();
-		id.add(value);
+		getId().clear();
+		getId().add(value);
 	}
 }

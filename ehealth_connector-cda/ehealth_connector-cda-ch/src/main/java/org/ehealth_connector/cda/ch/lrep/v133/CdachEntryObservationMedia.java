@@ -61,7 +61,7 @@ public class CdachEntryObservationMedia extends org.ehealth_connector.common.hl7
 	/**
 	 * Creates fixed contents for CDA Element hl7LanguageCode
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CS createHl7LanguageCodeFixedValue() {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7LanguageCodeFixedValue() {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		return retVal;
@@ -72,7 +72,7 @@ public class CdachEntryObservationMedia extends org.ehealth_connector.common.hl7
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -84,7 +84,7 @@ public class CdachEntryObservationMedia extends org.ehealth_connector.common.hl7
 	 *
 	 * @param representation the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.ED createHl7ValueFixedValue(String representation) {
+	private static org.ehealth_connector.common.hl7cdar2.ED createHl7ValueFixedValue(String representation) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.ED retVal = factory.createED();
 		return retVal;

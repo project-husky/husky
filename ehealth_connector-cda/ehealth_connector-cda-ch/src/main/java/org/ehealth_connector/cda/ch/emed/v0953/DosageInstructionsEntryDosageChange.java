@@ -16,8 +16,6 @@
  */
 package org.ehealth_connector.cda.ch.emed.v0953;
 
-import javax.xml.bind.annotation.XmlTransient;
-
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.36
  * Template description: Dosage Instructions are a set of data elements which together represent the dosage instructions to a medication such as duration of treatment, medication frequency, dose quantity, route of administration, etc. Dosage Instructions may be provided structured and/or narrative. This entry describes structured dosage instructions.
@@ -29,16 +27,6 @@ public class DosageInstructionsEntryDosageChange extends org.ehealth_connector.c
 	public DosageInstructionsEntryDosageChange() {
 		super.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship.fromValue("COMP"));
 	// DosageInstructionsEntryDosageChange/hl7:entryRelationship:cs typeCode = "COMP";
-	}
-
-	@XmlTransient()
-	private String myTypeCode;
-
-	/**
-	 * Creates fixed contents for CDA Attribute typeCode
-	 */
-	private void createTypeCodeFixedValue(String value) {
-		this.myTypeCode = value;
 	}
 
 	/**
@@ -53,13 +41,6 @@ public class DosageInstructionsEntryDosageChange extends org.ehealth_connector.c
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration getHl7SubstanceAdministration() {
 		return substanceAdministration;
-	}
-
-	/**
-	 * Gets the member myTypeCode
-	 */
-	public String getPredefinedTypeCode() {
-		return myTypeCode;
 	}
 
 	/**

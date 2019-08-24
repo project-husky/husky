@@ -17,7 +17,6 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -39,26 +38,16 @@ public class CdachlrepHeaderRecipient extends org.ehealth_connector.common.hl7cd
 	// cdachlrep_header_Recipient/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.3.1.4";
 	}
 
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.XInformationRecipient myTypeCode;
-
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute typeCode
-	 */
-	private void createTypeCodeFixedValue(org.ehealth_connector.common.hl7cdar2.XInformationRecipient value) {
-		this.myTypeCode = value;
 	}
 
 	/**
@@ -74,13 +63,6 @@ public class CdachlrepHeaderRecipient extends org.ehealth_connector.common.hl7cd
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
 		return templateId;
-	}
-
-	/**
-	 * Gets the member myTypeCode
-	 */
-	public org.ehealth_connector.common.hl7cdar2.XInformationRecipient getPredefinedTypeCode() {
-		return myTypeCode;
 	}
 
 	/**

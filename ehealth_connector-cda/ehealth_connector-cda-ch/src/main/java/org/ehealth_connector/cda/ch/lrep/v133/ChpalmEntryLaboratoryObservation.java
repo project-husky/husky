@@ -18,7 +18,6 @@ package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -41,16 +40,6 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.3"));
 		super.setCode(createHl7CodeFixedValue("NAV"));
 		super.setStatusCode(createHl7StatusCodeFixedValue());
-		super.getValue().add(createHl7ValueFixedValue("NA"));
-		super.getValue().add(createHl7ValueFixedValue("NA"));
-		super.getValue().add(createHl7ValueFixedValue("NA"));
-		super.getValue().add(createHl7ValueFixedValue("NA"));
-		super.getInterpretationCode().add(createHl7InterpretationCodeFixedValue());
-		super.getEntryRelationship().add(createHl7EntryRelationshipFixedValue("COMP", null));
-		super.getEntryRelationship().add(createHl7EntryRelationshipFixedValue("SUBJ", "true"));
-		super.getEntryRelationship().add(createHl7EntryRelationshipFixedValue("REFR", null));
-		super.getReference().add(createHl7ReferenceFixedValue("REFR"));
-		super.getReferenceRange().add(createHl7ReferenceRangeFixedValue("REFV"));
 	// chpalm_entry_LaboratoryObservation/hl7:observation:cs classCode = "OBS";
 	// chpalm_entry_LaboratoryObservation/hl7:observation:cs moodCode = "EVN";
 	// chpalm_entry_LaboratoryObservation/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.6";
@@ -58,23 +47,24 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	// chpalm_entry_LaboratoryObservation/hl7:code:st nullFlavor = "NAV";
 	// chpalm_entry_LaboratoryObservation/hl7:statusCode:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.2"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusAbortedCompleted
 	// chpalm_entry_LaboratoryObservation/hl7:value:cs nullFlavor = "NA";
+	// This is fixed content for an optional element: createHl7ValueFixedValue("NA") --> Creating getPredefinedValueNa();
 	// chpalm_entry_LaboratoryObservation/hl7:value:cs nullFlavor = "NA";
 	// chpalm_entry_LaboratoryObservation/hl7:value:cs nullFlavor = "NA";
 	// chpalm_entry_LaboratoryObservation/hl7:value:cs nullFlavor = "NA";
 	// chpalm_entry_LaboratoryObservation/hl7:interpretationCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.78"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ObservationInterpretation
+	// This is fixed content for an optional element: createHl7InterpretationCodeFixedValue() --> Creating getPredefinedInterpretationCode();
 	// chpalm_entry_LaboratoryObservation/hl7:entryRelationship:cs typeCode = "COMP";
+	// This is fixed content for an optional element: createHl7EntryRelationshipFixedValue("COMP", null) --> Creating getPredefinedEntryRelationshipCompNull();
 	// chpalm_entry_LaboratoryObservation/hl7:entryRelationship:cs typeCode = "SUBJ";
 	// chpalm_entry_LaboratoryObservation/hl7:entryRelationship:bl inversionInd = "true";
+	// This is fixed content for an optional element: createHl7EntryRelationshipFixedValue("SUBJ", "true") --> Creating getPredefinedEntryRelationshipSubjTrue();
 	// chpalm_entry_LaboratoryObservation/hl7:entryRelationship:cs typeCode = "REFR";
+	// This is fixed content for an optional element: createHl7EntryRelationshipFixedValue("REFR", null) --> Creating getPredefinedEntryRelationshipRefrNull();
 	// chpalm_entry_LaboratoryObservation/hl7:reference:cs typeCode = "REFR";
+	// This is fixed content for an optional element: createHl7ReferenceFixedValue("REFR") --> Creating getPredefinedReferenceRefr();
 	// chpalm_entry_LaboratoryObservation/hl7:referenceRange:cs typeCode = "REFV";
+	// This is fixed content for an optional element: createHl7ReferenceRangeFixedValue("REFV") --> Creating getPredefinedReferenceRangeRefv();
 	}
-
-	@XmlTransient()
-	private String myClassCode;
-
-	@XmlTransient()
-	private String myMoodCode;
 
 	/**
 	 * Adds a hl7Author
@@ -163,18 +153,11 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	}
 
 	/**
-	 * Creates fixed contents for CDA Attribute classCode
-	 */
-	private void createClassCodeFixedValue(String value) {
-		this.myClassCode = value;
-	}
-
-	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
 	 * @param nullFlavor the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String nullFlavor) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String nullFlavor) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.nullFlavor = new ArrayList<String>();
@@ -188,7 +171,7 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	 * @param typeCode the desired fixed value for this argument.
 	 * @param inversionInd the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
 		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship.fromValue(typeCode));
@@ -199,7 +182,7 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	/**
 	 * Creates fixed contents for CDA Element hl7InterpretationCode
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CE createHl7InterpretationCodeFixedValue() {
+	private static org.ehealth_connector.common.hl7cdar2.CE createHl7InterpretationCodeFixedValue() {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		return retVal;
@@ -210,7 +193,7 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	 *
 	 * @param typeCode the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference retVal = factory.createPOCDMT000040Reference();
 		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipExternalReference.fromValue(typeCode));
@@ -222,7 +205,7 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	 *
 	 * @param typeCode the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040ReferenceRange createHl7ReferenceRangeFixedValue(String typeCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040ReferenceRange createHl7ReferenceRangeFixedValue(String typeCode) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040ReferenceRange retVal = factory.createPOCDMT000040ReferenceRange();
 		retVal.getTypeCode().add(typeCode);
@@ -232,7 +215,7 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	/**
 	 * Creates fixed contents for CDA Element hl7StatusCode
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		return retVal;
@@ -243,7 +226,7 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -255,19 +238,12 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	 *
 	 * @param nullFlavor the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.BL createHl7ValueFixedValue(String nullFlavor) {
+	private static org.ehealth_connector.common.hl7cdar2.BL createHl7ValueFixedValue(String nullFlavor) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.BL retVal = factory.createBL();
 		retVal.nullFlavor = new ArrayList<String>();
 		retVal.nullFlavor.add(nullFlavor);
 		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Attribute moodCode
-	 */
-	private void createMoodCodeFixedValue(String value) {
-		this.myMoodCode = value;
 	}
 
 	/**
@@ -346,22 +322,64 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	 * Gets the hl7Value
 	 * True / False or Yes / No Result. If the observation value can not be determined, @value is NOT ALLOWED. Instead, @nullFlavor='NA' MUST be used in combination with interpretationCode that declares whether the result is below (Low of scale) or above (High of scale) of the reference range.
 	 */
-	public java.util.List<org.ehealth_connector.common.hl7cdar2.ANY> getHl7Value() {
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.ANY> getHl7ValueAny() {
 		return value;
 	}
 
 	/**
-	 * Gets the member myClassCode
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "COMP", null
+	 * @return the predefined element.
 	 */
-	public String getPredefinedClassCode() {
-		return myClassCode;
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipCompNull() {
+		return createHl7EntryRelationshipFixedValue("COMP", null);
 	}
 
 	/**
-	 * Gets the member myMoodCode
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "REFR", null
+	 * @return the predefined element.
 	 */
-	public String getPredefinedMoodCode() {
-		return myMoodCode;
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrNull() {
+		return createHl7EntryRelationshipFixedValue("REFR", null);
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "SUBJ", "true"
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjTrue() {
+		return createHl7EntryRelationshipFixedValue("SUBJ", "true");
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedInterpretationCode() {
+		return createHl7InterpretationCodeFixedValue();
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040ReferenceRange, filled by: "REFV"
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040ReferenceRange getPredefinedReferenceRangeRefv() {
+		return createHl7ReferenceRangeFixedValue("REFV");
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference, filled by: "REFR"
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference getPredefinedReferenceRefr() {
+		return createHl7ReferenceFixedValue("REFR");
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.BL, filled by: "NA"
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.BL getPredefinedValueNa() {
+		return createHl7ValueFixedValue("NA");
 	}
 
 	/**

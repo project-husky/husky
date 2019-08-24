@@ -16,40 +16,26 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.6
  * Template description: If, in a part of the document, certain laboratory observations for a human patient base on a sample of a non-human material (e.g., food eaten by the patient or an animal that has bitten the patient), it MUST be declared using this element in the CDA body. Other parts of the document may contain laboratory observations that base on other samples (including samples taken from the patient). In addition, the IHE template 1.3.6.1.4.1.19376.1.3.3.1.3 - Human Patient with Non-Human Subject (recordTarget) MUST be used in the CDA header.
  */
-public class ChpalmEntryHumanPatientWithNonHumanSubject {
+public class ChpalmEntryHumanPatientWithNonHumanSubject extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Subject {
 
 	public ChpalmEntryHumanPatientWithNonHumanSubject() {
-		templateId.add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.1.3.1"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.1.3.1"));
 	// chpalm_entry_HumanPatientWithNonHumanSubject/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.3.1.3.1";
 	}
-
-	/**
-	 * No description available in the ART-DECOR model for this field.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedSubject relatedSubject;
-
-	/**
-	 * No description available in the ART-DECOR model for this field.
-	 */
-	@XmlTransient()
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> templateId = new ArrayList<org.ehealth_connector.common.hl7cdar2.II>();
 
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -81,7 +67,7 @@ public class ChpalmEntryHumanPatientWithNonHumanSubject {
 	 * Sets the hl7TemplateId
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
-		templateId.clear();
-		templateId.add(value);
+		getTemplateId().clear();
+		getTemplateId().add(value);
 	}
 }

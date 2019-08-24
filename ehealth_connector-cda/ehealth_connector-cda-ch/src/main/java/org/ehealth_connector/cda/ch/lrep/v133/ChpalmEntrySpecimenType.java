@@ -16,7 +16,6 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -25,20 +24,14 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  *
  * Element description: IF the coding of the specimen with LOINC's 'System' axis is insufficient, a precise code CAN be used. The use of SNOMED-CT is recommended.
  */
-public class ChpalmEntrySpecimenType {
+public class ChpalmEntrySpecimenType extends org.ehealth_connector.common.hl7cdar2.POCDMT000040PlayingEntity {
 
 	public ChpalmEntrySpecimenType() {
-		this.code = createHl7CodeFixedValue("LOINC", "2.16.756.5.30.2.1.1.10", "CDA-CH Material");
 	// chpalm_entry_SpecimenType/hl7:code:cs code = "LOINC";
 	// chpalm_entry_SpecimenType/hl7:code:oid codeSystem = "2.16.756.5.30.2.1.1.10";
 	// chpalm_entry_SpecimenType/hl7:code:st codeSystemName = "CDA-CH Material";
+	// This is fixed content for an optional element: createHl7CodeFixedValue("LOINC", "2.16.756.5.30.2.1.1.10", "CDA-CH Material") --> Creating getPredefinedCodeLoinc21675653021110CdaChMaterial();
 	}
-
-	/**
-	 * IHE XD-LAB requires coding of the specimen. However, since the laboratory results have to be coded with LOINC, the specimen is already defined via the 'System' axis of LOINC. Therefore the following, fixed code CAN be used for laboratory reports in Switzerland.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.CE code;
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -47,7 +40,7 @@ public class ChpalmEntrySpecimenType {
 	 * @param codeSystem the desired fixed value for this argument.
 	 * @param codeSystemName the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName) {
+	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		retVal.setCode(code);
@@ -62,6 +55,14 @@ public class ChpalmEntrySpecimenType {
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7Code() {
 		return code;
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by: "LOINC", "2.16.756.5.30.2.1.1.10", "CDA-CH Material"
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedCodeLoinc21675653021110CdaChMaterial() {
+		return createHl7CodeFixedValue("LOINC", "2.16.756.5.30.2.1.1.10", "CDA-CH Material");
 	}
 
 	/**

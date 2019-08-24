@@ -16,9 +16,7 @@
  */
 package org.ehealth_connector.cda.ch.emed.v0953;
 
-import java.util.ArrayList;
 import java.util.List;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -27,29 +25,23 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  *
  * Element description: Other person's name.
  */
-public class CdachOtherPersonNameInformationCompilationECh0011 {
+public class CdachOtherPersonNameInformationCompilationECh0011 extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Patient {
 
 	public CdachOtherPersonNameInformationCompilationECh0011() {
-		name.add(createHl7NameFixedValue("L"));
-		name.add(createHl7NameFixedValue("P"));
-		name.add(createHl7NameFixedValue("ASGN"));
+		super.getName().add(createHl7NameFixedValue("L"));
 	// cdach_other_PersonNameInformationCompilation-eCH-0011/hl7:name:set_cs use = "L";
 	// cdach_other_PersonNameInformationCompilation-eCH-0011/hl7:name:set_cs use = "P";
+	// This is fixed content for an optional element: createHl7NameFixedValue("P") --> Creating getPredefinedNameP();
 	// cdach_other_PersonNameInformationCompilation-eCH-0011/hl7:name:set_cs use = "ASGN";
+	// This is fixed content for an optional element: createHl7NameFixedValue("ASGN") --> Creating getPredefinedNameAsgn();
 	}
-
-	/**
-	 * The person's legal name (with required family and given name).
-	 */
-	@XmlTransient()
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.PN> name = new ArrayList<org.ehealth_connector.common.hl7cdar2.PN>();
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Name
 	 *
 	 * @param use the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.PN createHl7NameFixedValue(String use) {
+	private static org.ehealth_connector.common.hl7cdar2.PN createHl7NameFixedValue(String use) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.PN retVal = factory.createPN();
 		retVal.getUse().add(use);
@@ -65,11 +57,27 @@ public class CdachOtherPersonNameInformationCompilationECh0011 {
 	}
 
 	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.PN, filled by: "ASGN"
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.PN getPredefinedNameAsgn() {
+		return createHl7NameFixedValue("ASGN");
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.PN, filled by: "P"
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.PN getPredefinedNameP() {
+		return createHl7NameFixedValue("P");
+	}
+
+	/**
 	 * Sets the hl7Name
 	 * The person's legal name (with required family and given name).
 	 */
 	public void setHl7Name(org.ehealth_connector.common.hl7cdar2.PN value) {
-		name.clear();
-		name.add(value);
+		getName().clear();
+		getName().add(value);
 	}
 }

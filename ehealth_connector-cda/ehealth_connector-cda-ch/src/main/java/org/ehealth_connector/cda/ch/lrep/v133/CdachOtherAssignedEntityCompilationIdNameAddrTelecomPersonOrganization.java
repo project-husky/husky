@@ -16,8 +16,6 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import java.util.ArrayList;
-import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -26,57 +24,21 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  *
  * Element description: The assigned organization.
  */
-public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganization {
+public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganization extends org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity {
 
 	public CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganization() {
-		this.code = createHl7CodeFixedValue("2.16.840.1.113883.6.96", "SNOMED CT");
 	// cdach_other_AssignedEntityCompilationIdNameAddrTelecomPersonOrganization/hl7:code:cs valueSet = valueSet("2.16.756.5.30.1.127.3.10.1.1.3"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.DocumentEntryAuthorRole
 	// cdach_other_AssignedEntityCompilationIdNameAddrTelecomPersonOrganization/hl7:code:oid codeSystem = "2.16.840.1.113883.6.96";
 	// cdach_other_AssignedEntityCompilationIdNameAddrTelecomPersonOrganization/hl7:code:st codeSystemName = "SNOMED CT";
+	// This is fixed content for an optional element: createHl7CodeFixedValue("2.16.840.1.113883.6.96", "SNOMED CT") --> Creating getPredefinedCode2168401113883696SnomedCt();
 	}
-
-	/**
-	 * The assigned entity's address.
-	 */
-	@XmlTransient()
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.AD> addr = new ArrayList<org.ehealth_connector.common.hl7cdar2.AD>();
-
-	/**
-	 * The assigned person.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Person assignedPerson;
-
-	/**
-	 * The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.CE code;
-
-	/**
-	 * The assigned entity's id (including the assigned person's id).
-	 */
-	@XmlTransient()
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.II> id = new ArrayList<org.ehealth_connector.common.hl7cdar2.II>();
-
-	/**
-	 * The assigned organization.
-	 */
-	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.POCDMT000040Organization representedOrganization;
-
-	/**
-	 * The assigned entity's means of communication (phone, eMail, ...).
-	 */
-	@XmlTransient()
-	private ArrayList<org.ehealth_connector.common.hl7cdar2.TEL> telecom = new ArrayList<org.ehealth_connector.common.hl7cdar2.TEL>();
 
 	/**
 	 * Adds a hl7Addr
 	 * The assigned entity's address.
 	 */
 	public void addHl7Addr(org.ehealth_connector.common.hl7cdar2.AD value) {
-		addr.add(value);
+		getAddr().add(value);
 	}
 
 	/**
@@ -84,7 +46,7 @@ public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganizat
 	 * The assigned entity's id (including the assigned person's id).
 	 */
 	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		id.add(value);
+		getId().add(value);
 	}
 
 	/**
@@ -92,7 +54,7 @@ public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganizat
 	 * The assigned entity's means of communication (phone, eMail, ...).
 	 */
 	public void addHl7Telecom(org.ehealth_connector.common.hl7cdar2.TEL value) {
-		telecom.add(value);
+		getTelecom().add(value);
 	}
 
 	/**
@@ -100,7 +62,7 @@ public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganizat
 	 * The assigned entity's address.
 	 */
 	public void clearHl7Addr() {
-		addr.clear();
+		getAddr().clear();
 	}
 
 	/**
@@ -108,7 +70,7 @@ public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganizat
 	 * The assigned entity's id (including the assigned person's id).
 	 */
 	public void clearHl7Id() {
-		id.clear();
+		getId().clear();
 	}
 
 	/**
@@ -116,7 +78,7 @@ public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganizat
 	 * The assigned entity's means of communication (phone, eMail, ...).
 	 */
 	public void clearHl7Telecom() {
-		telecom.clear();
+		getTelecom().clear();
 	}
 
 	/**
@@ -125,7 +87,7 @@ public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganizat
 	 * @param codeSystem the desired fixed value for this argument.
 	 * @param codeSystemName the desired fixed value for this argument.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String codeSystem, String codeSystemName) {
+	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String codeSystem, String codeSystemName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		retVal.setCodeSystem(codeSystem);
@@ -155,6 +117,14 @@ public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganizat
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Organization getHl7RepresentedOrganization() {
 		return representedOrganization;
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by: "2.16.840.1.113883.6.96", "SNOMED CT"
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedCode2168401113883696SnomedCt() {
+		return createHl7CodeFixedValue("2.16.840.1.113883.6.96", "SNOMED CT");
 	}
 
 	/**
