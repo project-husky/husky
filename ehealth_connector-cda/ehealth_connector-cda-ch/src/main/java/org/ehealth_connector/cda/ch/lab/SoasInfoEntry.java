@@ -17,7 +17,7 @@
 package org.ehealth_connector.cda.ch.lab;
 
 import org.ehealth_connector.cda.MdhtObservationFacade;
-import org.ehealth_connector.cda.enums.NullFlavor;
+import org.ehealth_connector.common.enums.NullFlavor;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.mdht.enums.StatusCode;
