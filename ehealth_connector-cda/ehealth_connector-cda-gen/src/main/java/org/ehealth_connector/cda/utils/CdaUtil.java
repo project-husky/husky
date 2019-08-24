@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 import javax.xml.bind.Binder;
 import javax.xml.bind.JAXBContext;
@@ -37,12 +38,22 @@ import javax.xml.transform.stream.StreamResult;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.basetypes.NameBaseType;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.hl7cdar2.ANY;
 import org.ehealth_connector.common.hl7cdar2.CS;
 import org.ehealth_connector.common.hl7cdar2.ED;
 import org.ehealth_connector.common.hl7cdar2.EN;
 import org.ehealth_connector.common.hl7cdar2.INT;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Component2;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Component3;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Section;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040StructuredBody;
+import org.ehealth_connector.common.hl7cdar2.PQ;
 import org.ehealth_connector.common.hl7cdar2.SC;
 import org.ehealth_connector.common.hl7cdar2.ST;
 import org.ehealth_connector.common.hl7cdar2.StrucDocText;
@@ -115,8 +126,107 @@ public class CdaUtil {
 		return value.getValue().intValue();
 	}
 
+	public static ArrayList<POCDMT000040Organizer> getLaboratoryBatteries(
+			POCDMT000040Section section) {
+		ArrayList<POCDMT000040Organizer> retVal = new ArrayList<POCDMT000040Organizer>();
+		for (POCDMT000040Entry entry : section.getEntry()) {
+			if (entry.getAct() != null) {
+				for (POCDMT000040EntryRelationship er : entry.getAct().getEntryRelationship()) {
+					if (er.getOrganizer() != null)
+						retVal.add(er.getOrganizer());
+				}
+			}
+		}
+		return retVal;
+	}
+
+	/**
+	 * Gets the result.
+	 *
+	 * @return the result
+	 */
+	public static String getLaboratoryObservationResult(POCDMT000040Observation obs) {
+		String retVal = "";
+		for (ANY value : obs.getValue()) {
+			String tempOneValue = "";
+			String tempOneUnit = "";
+			if (value != null) {
+				if (value instanceof PQ) {
+					tempOneValue = ((PQ) value).getValue();
+					if ("-1".equals(tempOneValue))
+						tempOneValue = "-";
+					tempOneUnit = ((PQ) value).getUnit();
+					// TODO weitere:
+					// } else if (value.isRto()) {
+					// tempOneValue = value.getRtoValueText();
+					// tempOneUnit = value.getRtoUnitText();
+					// } else if (value.isBl()) {
+					// if (value.getValue() != null) {
+					// String temp = value.getBlText();
+					// if (temp != null) {
+					// tempOneValue = temp;
+					// }
+					// }
+					// } else if (value.isEd()) {
+					// tempOneValue = value.toString();
+					// tempOneValue = tempOneValue.replace("<", "&lt;");
+					// tempOneValue = tempOneValue.replace(">", "&gt;");
+				} else
+					tempOneValue = value.toString();
+			}
+			if (!"".equals(retVal))
+				retVal = retVal + "<br />";
+			if (!"".equals(tempOneValue) && !"".equals(tempOneUnit))
+				retVal = tempOneValue + " " + tempOneUnit;
+			else
+				retVal = tempOneValue + tempOneUnit;
+		}
+		return retVal;
+	}
+
+	public static ArrayList<POCDMT000040Observation> getLaboratoryObservations(
+			POCDMT000040Organizer battery) {
+		ArrayList<POCDMT000040Observation> retVal = new ArrayList<POCDMT000040Observation>();
+		for (POCDMT000040Component4 comp : battery.getComponent()) {
+			if (comp.getObservation() != null)
+				retVal.add(comp.getObservation());
+		}
+		return retVal;
+	}
+
 	public static int getSectionCount(POCDMT000040StructuredBody structuredBody) {
-		int retVal = structuredBody.getComponent().size();
+		int retVal = 0;
+		if (structuredBody != null)
+			if (structuredBody.getComponent() != null)
+				retVal = structuredBody.getComponent().size();
+		return retVal;
+	}
+
+	public static ArrayList<POCDMT000040Section> getSections(
+			POCDMT000040StructuredBody structuredBody) {
+		ArrayList<POCDMT000040Section> retVal = new ArrayList<POCDMT000040Section>();
+		for (POCDMT000040Component3 comp3 : structuredBody.getComponent()) {
+			retVal.add(comp3.getSection());
+		}
+		return retVal;
+	}
+
+	public static POCDMT000040StructuredBody getStructuredBody(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument doc) {
+		POCDMT000040StructuredBody retVal = null;
+
+		if (doc != null)
+			if (doc.getComponent() != null)
+				retVal = doc.getComponent().getStructuredBody();
+
+		if (retVal == null) {
+			ObjectFactory factory = new ObjectFactory();
+			POCDMT000040Component2 comp2 = factory.createPOCDMT000040Component2();
+			retVal = factory.createPOCDMT000040StructuredBody();
+			comp2.setStructuredBody(retVal);
+			doc.setComponent(comp2);
+		}
+
 		return retVal;
 	}
 
@@ -177,5 +287,4 @@ public class CdaUtil {
 		transformer.transform(domSource, streamResult);
 
 	}
-
 }
