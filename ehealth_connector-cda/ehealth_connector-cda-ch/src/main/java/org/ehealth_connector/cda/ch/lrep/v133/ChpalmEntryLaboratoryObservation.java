@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -289,24 +290,16 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	 * Gets the hl7Id
 	 * An ID for this item MAY be filled for traceability.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
-		org.ehealth_connector.common.hl7cdar2.II retVal = null;
-		if (getId() != null)
-			if (getId().size() > 0)
-				retVal = getId().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7Id() {
+		return id;
 	}
 
 	/**
 	 * Gets the hl7InterpretationCode
 	 * IF this result is based on a specimen of a non-human material, this MUST be declared with the subject element.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CE getHl7InterpretationCode() {
-		org.ehealth_connector.common.hl7cdar2.CE retVal = null;
-		if (getInterpretationCode() != null)
-			if (getInterpretationCode().size() > 0)
-				retVal = getInterpretationCode().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.CE> getHl7InterpretationCode() {
+		return interpretationCode;
 	}
 
 	/**
@@ -316,12 +309,8 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	 * - Lower limit: [R]
 	 * - interpretationCode containing code=N: [M]The reference range CAN be omitted for other data types. If only an upper or lower limit is meaningful, the unused limit MUST be declared using nullFlavor.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040ReferenceRange getHl7ReferenceRange() {
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040ReferenceRange retVal = null;
-		if (getReferenceRange() != null)
-			if (getReferenceRange().size() > 0)
-				retVal = getReferenceRange().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040ReferenceRange> getHl7ReferenceRange() {
+		return referenceRange;
 	}
 
 	/**
@@ -342,12 +331,8 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	/**
 	 * Gets the hl7TemplateId
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		org.ehealth_connector.common.hl7cdar2.II retVal = null;
-		if (getTemplateId() != null)
-			if (getTemplateId().size() > 0)
-				retVal = getTemplateId().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
+		return templateId;
 	}
 
 	/**
@@ -361,12 +346,8 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	 * Gets the hl7Value
 	 * True / False or Yes / No Result. If the observation value can not be determined, @value is NOT ALLOWED. Instead, @nullFlavor='NA' MUST be used in combination with interpretationCode that declares whether the result is below (Low of scale) or above (High of scale) of the reference range.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.BL getHl7Value() {
-		org.ehealth_connector.common.hl7cdar2.BL retVal = null;
-		if (getValue() != null)
-			if (getValue().size() > 0)
-				retVal = (org.ehealth_connector.common.hl7cdar2.BL) getValue().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.ANY> getHl7Value() {
+		return value;
 	}
 
 	/**
@@ -464,6 +445,42 @@ public class ChpalmEntryLaboratoryObservation extends org.ehealth_connector.comm
 	 * True / False or Yes / No Result. If the observation value can not be determined, @value is NOT ALLOWED. Instead, @nullFlavor='NA' MUST be used in combination with interpretationCode that declares whether the result is below (Low of scale) or above (High of scale) of the reference range.
 	 */
 	public void setHl7Value(org.ehealth_connector.common.hl7cdar2.BL value) {
+		getValue().clear();
+		getValue().add(value);
+	}
+
+	/**
+	 * Sets the hl7Value
+	 * Coded result. If the observation value can not be determined, @code, @codeSystem, @codeSystemName and @displayName are NOT ALLOWED. Instead, @nullFlavor='NA' MUST be used in combination with interpretationCode that declares whether the result is below (Low of scale) or above (High of scale) of the reference range.
+	 */
+	public void setHl7Value(org.ehealth_connector.common.hl7cdar2.CD value) {
+		getValue().clear();
+		getValue().add(value);
+	}
+
+	/**
+	 * Sets the hl7Value
+	 * Text result.
+	 */
+	public void setHl7Value(org.ehealth_connector.common.hl7cdar2.ED value) {
+		getValue().clear();
+		getValue().add(value);
+	}
+
+	/**
+	 * Sets the hl7Value
+	 * Numeric result with unit. If the observation value can not be determined, @value and @unit are NOT ALLOWED. Instead, @nullFlavor='NA' MUST be used in combination with interpretationCode that declares whether the result is below (Low of scale) or above (High of scale) of the reference range.
+	 */
+	public void setHl7Value(org.ehealth_connector.common.hl7cdar2.PQ value) {
+		getValue().clear();
+		getValue().add(value);
+	}
+
+	/**
+	 * Sets the hl7Value
+	 * Ratio results. If the observation value can not be determined, numerator and denominator are NOT ALLOWED. Instead, @nullFlavor='NA' MUST be used in combination with interpretationCode that declares whether the result is below (Low of scale) or above (High of scale) of the reference range.
+	 */
+	public void setHl7Value(org.ehealth_connector.common.hl7cdar2.RTO value) {
 		getValue().clear();
 		getValue().add(value);
 	}

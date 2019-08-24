@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -59,12 +60,8 @@ public class CdachHeaderDocumentTemplateIdsCdaChv20StructuredBody {
 	 * Gets the hl7TemplateId
 	 * CDA-CH v2.0 specification. This is an informational reference, only.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		org.ehealth_connector.common.hl7cdar2.II retVal = null;
-		if (templateId != null)
-			if (templateId.size() > 0)
-				retVal = templateId.get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
+		return templateId;
 	}
 
 	/**

@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.emed.v0953;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -59,12 +60,8 @@ public class CdachOtherPersonNameInformationCompilationECh0011 {
 	 * Gets the hl7Name
 	 * The person's legal name (with required family and given name).
 	 */
-	public org.ehealth_connector.common.hl7cdar2.PN getHl7Name() {
-		org.ehealth_connector.common.hl7cdar2.PN retVal = null;
-		if (name != null)
-			if (name.size() > 0)
-				retVal = name.get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.PN> getHl7Name() {
+		return name;
 	}
 
 	/**

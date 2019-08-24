@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.cda.ch.emed.v0953;
 
+import java.util.List;
 import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -102,12 +103,8 @@ public class PadvreferenceEntryContentModule extends org.ehealth_connector.commo
 	 * Gets the hl7Author
 	 * Author of the referenced item
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Author getHl7Author() {
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Author retVal = null;
-		if (getAuthor() != null)
-			if (getAuthor().size() > 0)
-				retVal = getAuthor().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040Author> getHl7Author() {
+		return author;
 	}
 
 	/**
@@ -122,36 +119,24 @@ public class PadvreferenceEntryContentModule extends org.ehealth_connector.commo
 	 * Gets the hl7Id
 	 * Reference to Pharmaceutical Advice Item ID
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
-		org.ehealth_connector.common.hl7cdar2.II retVal = null;
-		if (getId() != null)
-			if (getId().size() > 0)
-				retVal = getId().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7Id() {
+		return id;
 	}
 
 	/**
 	 * Gets the hl7Reference
 	 * ID of parent container of referenced item
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference getHl7Reference() {
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference retVal = null;
-		if (getReference() != null)
-			if (getReference().size() > 0)
-				retVal = getReference().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference> getHl7Reference() {
+		return reference;
 	}
 
 	/**
 	 * Gets the hl7TemplateId
 	 * Reference to Pharmaceutical Advice Item Template ID
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		org.ehealth_connector.common.hl7cdar2.II retVal = null;
-		if (getTemplateId() != null)
-			if (getTemplateId().size() > 0)
-				retVal = getTemplateId().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
+		return templateId;
 	}
 
 	/**

@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.cda.ch.emed.v0953;
 
+import java.util.List;
 import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -209,12 +210,8 @@ public class PrescriptionItemEntryContentModule extends org.ehealth_connector.co
 	 * Gets the hl7Author
 	 * Prescriber
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Author getHl7Author() {
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Author retVal = null;
-		if (getAuthor() != null)
-			if (getAuthor().size() > 0)
-				retVal = getAuthor().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040Author> getHl7Author() {
+		return author;
 	}
 
 	/**
@@ -235,48 +232,32 @@ public class PrescriptionItemEntryContentModule extends org.ehealth_connector.co
 	 * Gets the hl7EffectiveTime
 	 * Dosage Instructions PCC 6.3.4.16.10 - Start and Stop
 	 */
-	public org.ehealth_connector.common.hl7cdar2.IVLTS getHl7EffectiveTime() {
-		org.ehealth_connector.common.hl7cdar2.IVLTS retVal = null;
-		if (getEffectiveTime() != null)
-			if (getEffectiveTime().size() > 0)
-				retVal = (org.ehealth_connector.common.hl7cdar2.IVLTS) getEffectiveTime().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.SXCMTS> getHl7EffectiveTime() {
+		return effectiveTime;
 	}
 
 	/**
 	 * Gets the hl7EntryRelationship
 	 * Treatment Reason as text
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getHl7EntryRelationship() {
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship retVal = null;
-		if (getEntryRelationship() != null)
-			if (getEntryRelationship().size() > 0)
-				retVal = getEntryRelationship().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship> getHl7EntryRelationship() {
+		return entryRelationship;
 	}
 
 	/**
 	 * Gets the hl7Id
 	 * This ID represents the Prescription Item ID and SHALL be present.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
-		org.ehealth_connector.common.hl7cdar2.II retVal = null;
-		if (getId() != null)
-			if (getId().size() > 0)
-				retVal = getId().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7Id() {
+		return id;
 	}
 
 	/**
 	 * Gets the hl7Precondition
 	 * Precondition Criterion
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Precondition getHl7Precondition() {
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Precondition retVal = null;
-		if (getPrecondition() != null)
-			if (getPrecondition().size() > 0)
-				retVal = getPrecondition().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040Precondition> getHl7Precondition() {
+		return precondition;
 	}
 
 	/**
@@ -312,12 +293,8 @@ public class PrescriptionItemEntryContentModule extends org.ehealth_connector.co
 	 * Gets the hl7TemplateId
 	 * CH-PHARM Prescription Item Entry Content Module
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		org.ehealth_connector.common.hl7cdar2.II retVal = null;
-		if (getTemplateId() != null)
-			if (getTemplateId().size() > 0)
-				retVal = getTemplateId().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
+		return templateId;
 	}
 
 	/**

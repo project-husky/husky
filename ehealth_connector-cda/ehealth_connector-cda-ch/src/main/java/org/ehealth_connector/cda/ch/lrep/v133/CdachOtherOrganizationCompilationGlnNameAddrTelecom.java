@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -121,12 +122,8 @@ public class CdachOtherOrganizationCompilationGlnNameAddrTelecom {
 	 * Gets the hl7Id
 	 * The organization's id (GLN).
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
-		org.ehealth_connector.common.hl7cdar2.II retVal = null;
-		if (id != null)
-			if (id.size() > 0)
-				retVal = id.get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7Id() {
+		return id;
 	}
 
 	/**

@@ -19,6 +19,7 @@ package org.ehealth_connector.cda.ch.lrep.v133;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -47,12 +48,12 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	public CdaChLrepGrV1() {
 		super.setTypeId(createHl7TypeIdFixedValue("2.16.840.1.113883.1.3", "POCD_HD000040"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.1.10"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.4"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.2"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.1"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.3.9.1"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.127.1.4"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.4"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.2"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.1"));
 	// CDA-CH-LREP-GR-V1/hl7:typeId:uid root = "2.16.840.1.113883.1.3";
 	// CDA-CH-LREP-GR-V1/hl7:typeId:st extension = "POCD_HD000040";
 	// CDA-CH-LREP-GR-V1/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.1.10";
@@ -71,7 +72,7 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	private org.ehealth_connector.cda.ch.lrep.v133.enums.DocumentEntryTypeCode myDisplayName;
 
 	@XmlTransient()
-	private String myTypeCode;
+	private org.ehealth_connector.common.hl7cdar2.XInformationRecipient myTypeCode;
 
 	@XmlTransient()
 	private org.ehealth_connector.cda.ch.lrep.v133.enums.DocumentEntryConfidentialityCode myValueSet;
@@ -94,7 +95,6 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 
 	/**
 	 * Adds a hl7DocumentationOf
-	 * Information about a health service describing the context of this CDA document.
 	 */
 	public void addHl7DocumentationOf(org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf value) {
 		getDocumentationOf().add(value);
@@ -161,7 +161,6 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 
 	/**
 	 * Adds a hl7DocumentationOf
-	 * Information about a health service describing the context of this CDA document.
 	 */
 	public void clearHl7DocumentationOf() {
 		getDocumentationOf().clear();
@@ -267,7 +266,7 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	/**
 	 * Creates fixed contents for CDA Attribute typeCode
 	 */
-	private void createTypeCodeFixedValue(String value) {
+	private void createTypeCodeFixedValue(org.ehealth_connector.common.hl7cdar2.XInformationRecipient value) {
 		this.myTypeCode = value;
 	}
 
@@ -354,12 +353,8 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 * Gets the hl7RealmCode
 	 * Swiss Realm (CHE) of HL7 CDA.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CS getHl7RealmCode() {
-		org.ehealth_connector.common.hl7cdar2.CS retVal = null;
-		if (getRealmCode() != null)
-			if (getRealmCode().size() > 0)
-				retVal = getRealmCode().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.CS> getHl7RealmCode() {
+		return realmCode;
 	}
 
 	/**
@@ -374,12 +369,8 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	 * Gets the hl7TemplateId
 	 * CDA-CH-LREP / Laboratory Reports V1 ART-DECOR model for General Report.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		org.ehealth_connector.common.hl7cdar2.II retVal = null;
-		if (getTemplateId() != null)
-			if (getTemplateId().size() > 0)
-				retVal = getTemplateId().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
+		return templateId;
 	}
 
 	/**
@@ -440,7 +431,7 @@ public class CdaChLrepGrV1 extends org.ehealth_connector.common.hl7cdar2.POCDMT0
 	/**
 	 * Gets the member myTypeCode
 	 */
-	public String getPredefinedTypeCode() {
+	public org.ehealth_connector.common.hl7cdar2.XInformationRecipient getPredefinedTypeCode() {
 		return myTypeCode;
 	}
 

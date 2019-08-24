@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.cda.ch.emed.v0953;
 
+import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -126,12 +127,8 @@ public class DispenseItemEntryContentModule extends org.ehealth_connector.common
 	 * Gets the hl7Author
 	 * Dispenser
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Author getHl7Author() {
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Author retVal = null;
-		if (getAuthor() != null)
-			if (getAuthor().size() > 0)
-				retVal = getAuthor().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040Author> getHl7Author() {
+		return author;
 	}
 
 	/**
@@ -146,24 +143,16 @@ public class DispenseItemEntryContentModule extends org.ehealth_connector.common
 	 * Gets the hl7EntryRelationship
 	 * If the dispense is related to a Medication Treatment Plan Item, the reference to it SHALL be present.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getHl7EntryRelationship() {
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship retVal = null;
-		if (getEntryRelationship() != null)
-			if (getEntryRelationship().size() > 0)
-				retVal = getEntryRelationship().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship> getHl7EntryRelationship() {
+		return entryRelationship;
 	}
 
 	/**
 	 * Gets the hl7Id
 	 * Dispense Item ID
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
-		org.ehealth_connector.common.hl7cdar2.II retVal = null;
-		if (getId() != null)
-			if (getId().size() > 0)
-				retVal = getId().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7Id() {
+		return id;
 	}
 
 	/**
@@ -185,12 +174,8 @@ public class DispenseItemEntryContentModule extends org.ehealth_connector.common
 	/**
 	 * Gets the hl7TemplateId
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		org.ehealth_connector.common.hl7cdar2.II retVal = null;
-		if (getTemplateId() != null)
-			if (getTemplateId().size() > 0)
-				retVal = getTemplateId().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
+		return templateId;
 	}
 
 	/**

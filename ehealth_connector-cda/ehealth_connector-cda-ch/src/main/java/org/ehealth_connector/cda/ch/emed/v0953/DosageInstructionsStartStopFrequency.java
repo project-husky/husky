@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.emed.v0953;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -112,12 +113,8 @@ public class DosageInstructionsStartStopFrequency {
 	 * Gets the hl7EffectiveTime
 	 * Dosage Instructions PCC 6.3.4.16.10 - Start and Stop
 	 */
-	public org.ehealth_connector.common.hl7cdar2.IVLTS getHl7EffectiveTime() {
-		org.ehealth_connector.common.hl7cdar2.IVLTS retVal = null;
-		if (effectiveTime != null)
-			if (effectiveTime.size() > 0)
-				retVal = (org.ehealth_connector.common.hl7cdar2.IVLTS) effectiveTime.get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.IVLTS> getHl7EffectiveTime() {
+		return effectiveTime;
 	}
 
 	/**

@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -164,71 +165,47 @@ public class ChpalmEntrySpecimenCollection extends org.ehealth_connector.common.
 	 * Gets the hl7EntryRelationship
 	 * This MAY be used to indicate when the sample has arrived at the laboratory.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getHl7EntryRelationship() {
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship retVal = null;
-		if (getEntryRelationship() != null)
-			if (getEntryRelationship().size() > 0)
-				retVal = getEntryRelationship().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship> getHl7EntryRelationship() {
+		return entryRelationship;
 	}
 
 	/**
 	 * Gets the hl7Id
 	 * An ID for this item MAY be filled for traceability.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
-		org.ehealth_connector.common.hl7cdar2.II retVal = null;
-		if (getId() != null)
-			if (getId().size() > 0)
-				retVal = getId().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7Id() {
+		return id;
 	}
 
 	/**
 	 * Gets the hl7Participant
 	 * The information on the specimen MUST be declared.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 getHl7Participant() {
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 retVal = null;
-		if (getParticipant() != null)
-			if (getParticipant().size() > 0)
-				retVal = getParticipant().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2> getHl7Participant() {
+		return participant;
 	}
 
 	/**
 	 * Gets the hl7Performer
 	 * This can be used to specify who performed the specimen collection.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer2 getHl7Performer() {
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer2 retVal = null;
-		if (getPerformer() != null)
-			if (getPerformer().size() > 0)
-				retVal = getPerformer().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer2> getHl7Performer() {
+		return performer;
 	}
 
 	/**
 	 * Gets the hl7TargetSiteCode
 	 * This CAN be used to indicate the anatomical position of the specimen collection. This is particularly relevant in microbiology (e.g., when the sample was removed with a swab from the left foot). The HL7 vocabulary ActSite contains anatomical locations of organisms that may be at the center of the action.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CD getHl7TargetSiteCode() {
-		org.ehealth_connector.common.hl7cdar2.CD retVal = null;
-		if (getTargetSiteCode() != null)
-			if (getTargetSiteCode().size() > 0)
-				retVal = getTargetSiteCode().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.CD> getHl7TargetSiteCode() {
+		return targetSiteCode;
 	}
 
 	/**
 	 * Gets the hl7TemplateId
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		org.ehealth_connector.common.hl7cdar2.II retVal = null;
-		if (getTemplateId() != null)
-			if (getTemplateId().size() > 0)
-				retVal = getTemplateId().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
+		return templateId;
 	}
 
 	/**

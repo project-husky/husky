@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -130,24 +131,16 @@ public class ChpalmEntryOutbreakIdentification extends org.ehealth_connector.com
 	/**
 	 * Gets the hl7TemplateId
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		org.ehealth_connector.common.hl7cdar2.II retVal = null;
-		if (getTemplateId() != null)
-			if (getTemplateId().size() > 0)
-				retVal = getTemplateId().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
+		return templateId;
 	}
 
 	/**
 	 * Gets the hl7Value
 	 * A code that defines the 'outbreak' condition MUST be specified. If no code is known, nullFlavor='NA' MUST be used.Note:For reportable laboratory findings in Switzerland, nullFlavor = 'NA' MUST MUST be used.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CE getHl7Value() {
-		org.ehealth_connector.common.hl7cdar2.CE retVal = null;
-		if (getValue() != null)
-			if (getValue().size() > 0)
-				retVal = (org.ehealth_connector.common.hl7cdar2.CE) getValue().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.ANY> getHl7Value() {
+		return value;
 	}
 
 	/**

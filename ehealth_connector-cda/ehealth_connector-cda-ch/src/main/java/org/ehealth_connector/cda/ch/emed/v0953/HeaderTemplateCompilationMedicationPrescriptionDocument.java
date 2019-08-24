@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.emed.v0953;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
@@ -49,12 +50,8 @@ public class HeaderTemplateCompilationMedicationPrescriptionDocument {
 	 * Gets the hl7DocumentationOf
 	 * Validity of document
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf getHl7DocumentationOf() {
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf retVal = null;
-		if (documentationOf != null)
-			if (documentationOf.size() > 0)
-				retVal = documentationOf.get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf> getHl7DocumentationOf() {
+		return documentationOf;
 	}
 
 	/**

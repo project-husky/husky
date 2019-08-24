@@ -36,15 +36,32 @@ import javax.xml.transform.stream.StreamResult;
 
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.basetypes.NameBaseType;
+import org.ehealth_connector.common.hl7cdar2.CS;
 import org.ehealth_connector.common.hl7cdar2.EN;
 import org.ehealth_connector.common.hl7cdar2.INT;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 import org.ehealth_connector.common.hl7cdar2.SC;
+import org.ehealth_connector.common.hl7cdar2.ST;
 import org.ehealth_connector.common.mdht.enums.EhcVersions;
 import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
 public class CdaUtil {
+
+	public static CS createCs(String value) {
+		ObjectFactory factory = new ObjectFactory();
+		CS retVal = factory.createCS();
+		retVal.setCode(value);
+		return retVal;
+	}
+
+	public static ST createSt(String value) {
+		ObjectFactory factory = new ObjectFactory();
+		ST retVal = factory.createST();
+		retVal.xmlContent = value;
+		return retVal;
+	}
 
 	/**
 	 * Generate comment.

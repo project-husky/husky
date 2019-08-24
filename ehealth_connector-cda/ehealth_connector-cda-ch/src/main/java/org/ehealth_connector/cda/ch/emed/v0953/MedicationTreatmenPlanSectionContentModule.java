@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.cda.ch.emed.v0953;
 
+import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -83,12 +84,8 @@ public class MedicationTreatmenPlanSectionContentModule extends org.ehealth_conn
 	/**
 	 * Gets the hl7Entry
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry getHl7Entry() {
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry retVal = null;
-		if (getEntry() != null)
-			if (getEntry().size() > 0)
-				retVal = getEntry().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry> getHl7Entry() {
+		return entry;
 	}
 
 	/**
@@ -101,12 +98,8 @@ public class MedicationTreatmenPlanSectionContentModule extends org.ehealth_conn
 	/**
 	 * Gets the hl7TemplateId
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		org.ehealth_connector.common.hl7cdar2.II retVal = null;
-		if (getTemplateId() != null)
-			if (getTemplateId().size() > 0)
-				retVal = getTemplateId().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
+		return templateId;
 	}
 
 	/**

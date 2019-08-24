@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.emed.v0953;
 
 import java.util.ArrayList;
+import java.util.List;
 import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -145,24 +146,16 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends org.ehealth_c
 	/**
 	 * Gets the hl7EntryRelationship
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getHl7EntryRelationship() {
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship retVal = null;
-		if (getEntryRelationship() != null)
-			if (getEntryRelationship().size() > 0)
-				retVal = getEntryRelationship().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship> getHl7EntryRelationship() {
+		return entryRelationship;
 	}
 
 	/**
 	 * Gets the hl7Id
 	 * Pharmaceutical Advice Concern ID
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
-		org.ehealth_connector.common.hl7cdar2.II retVal = null;
-		if (getId() != null)
-			if (getId().size() > 0)
-				retVal = getId().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7Id() {
+		return id;
 	}
 
 	/**
@@ -177,12 +170,8 @@ public class PharmaceuticalAdviceConcernEntryContentModule extends org.ehealth_c
 	 * Gets the hl7TemplateId
 	 * CH-PHARM Pharmaceutical Advice Concern Entry TemplateID
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		org.ehealth_connector.common.hl7cdar2.II retVal = null;
-		if (getTemplateId() != null)
-			if (getTemplateId().size() > 0)
-				retVal = getTemplateId().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
+		return templateId;
 	}
 
 	/**

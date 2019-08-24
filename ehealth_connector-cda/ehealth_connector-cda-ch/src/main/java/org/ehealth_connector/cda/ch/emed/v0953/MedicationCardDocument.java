@@ -19,6 +19,7 @@ package org.ehealth_connector.cda.ch.emed.v0953;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -70,7 +71,7 @@ public class MedicationCardDocument extends org.ehealth_connector.common.hl7cdar
 	private String myContextControlCode;
 
 	@XmlTransient()
-	private org.ehealth_connector.common.hl7cdar2.XInformationRecipient myTypeCode;
+	private String myTypeCode;
 
 	@XmlTransient()
 	private org.ehealth_connector.cda.ch.emed.v0953.enums.DocumentEntryConfidentialityCode myValueSet;
@@ -282,7 +283,7 @@ public class MedicationCardDocument extends org.ehealth_connector.common.hl7cdar
 	/**
 	 * Creates fixed contents for CDA Attribute typeCode
 	 */
-	private void createTypeCodeFixedValue(org.ehealth_connector.common.hl7cdar2.XInformationRecipient value) {
+	private void createTypeCodeFixedValue(String value) {
 		this.myTypeCode = value;
 	}
 
@@ -375,12 +376,8 @@ public class MedicationCardDocument extends org.ehealth_connector.common.hl7cdar
 	 * Gets the hl7RealmCode
 	 * Swiss Realm (CHE) of HL7 CDA.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CS getHl7RealmCode() {
-		org.ehealth_connector.common.hl7cdar2.CS retVal = null;
-		if (getRealmCode() != null)
-			if (getRealmCode().size() > 0)
-				retVal = getRealmCode().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.CS> getHl7RealmCode() {
+		return realmCode;
 	}
 
 	/**
@@ -390,12 +387,8 @@ public class MedicationCardDocument extends org.ehealth_connector.common.hl7cdar
 	 * - Patient identifiersMultiple ids (patient identification number) MAY be declared.If multiple ids are known, it is highly recommended to declare all known ids. Especially in cases where the CDA document instance is kind of an answer to a preceding order (independent of its data format), all ids specified by the ordering system SHALL be declared in the CDA document instance. This allows the receiver to assign its internal patient identification.The patient identification number MUST be grouped with the OID of its assigning system. The patient identification number MUST be unique within the system identified by the OID.The declared OID MUST be found in one of the public OID registries, such as oid.refdata.ch (preferred), oid-info.com, hl7.org/oid, www.dimdi.de/static/de/klassi/oid/, gesundheit.gv.at/OID_Frontend/ etc.OIDs that can't be found in a public OID registry are NOT ALLOWED.
 	 * - PseudonymizingIn special cases, the demographic data of the patient are not allowed to be transmitted or they have to be pseudonymized.While HL7 CDA or its derivatives like CDA-CH or Swiss exchange formats nevertheless require these elements in the XML structure, the affected values MUST be replaced by a nullFlavor of type "MSK" (masked), in order to support the required data format structure and simultaneously to shield the real data.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040RecordTarget getHl7RecordTarget() {
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040RecordTarget retVal = null;
-		if (getRecordTarget() != null)
-			if (getRecordTarget().size() > 0)
-				retVal = getRecordTarget().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040RecordTarget> getHl7RecordTarget() {
+		return recordTarget;
 	}
 
 	/**
@@ -410,12 +403,8 @@ public class MedicationCardDocument extends org.ehealth_connector.common.hl7cdar
 	 * Gets the hl7TemplateId
 	 * Exchange format according to the Swiss EPR
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		org.ehealth_connector.common.hl7cdar2.II retVal = null;
-		if (getTemplateId() != null)
-			if (getTemplateId().size() > 0)
-				retVal = getTemplateId().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
+		return templateId;
 	}
 
 	/**
@@ -473,7 +462,7 @@ public class MedicationCardDocument extends org.ehealth_connector.common.hl7cdar
 	/**
 	 * Gets the member myTypeCode
 	 */
-	public org.ehealth_connector.common.hl7cdar2.XInformationRecipient getPredefinedTypeCode() {
+	public String getPredefinedTypeCode() {
 		return myTypeCode;
 	}
 

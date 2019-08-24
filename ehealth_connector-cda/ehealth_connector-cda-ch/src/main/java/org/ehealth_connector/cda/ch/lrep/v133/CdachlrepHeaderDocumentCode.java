@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
+import java.util.List;
 import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -109,12 +110,8 @@ public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl
 	 * Gets the hl7Translation
 	 * The translation to the Swiss EPR XDS.b metadata attribute typeCode.
 	 */
-	public org.ehealth_connector.common.hl7cdar2.CD getHl7Translation() {
-		org.ehealth_connector.common.hl7cdar2.CD retVal = null;
-		if (getTranslation() != null)
-			if (getTranslation().size() > 0)
-				retVal = getTranslation().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.CD> getHl7Translation() {
+		return translation;
 	}
 
 	/**

@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.cda.ch.emed.v0953;
 
+import java.util.List;
 import javax.xml.bind.annotation.XmlTransient;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -174,12 +175,8 @@ public class PharmaceuticalAdviceItemEntryContentModule extends org.ehealth_conn
 	 * Gets the hl7Author
 	 * Pharmaceutical Adviser
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Author getHl7Author() {
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Author retVal = null;
-		if (getAuthor() != null)
-			if (getAuthor().size() > 0)
-				retVal = getAuthor().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040Author> getHl7Author() {
+		return author;
 	}
 
 	/**
@@ -201,12 +198,8 @@ public class PharmaceuticalAdviceItemEntryContentModule extends org.ehealth_conn
 	/**
 	 * Gets the hl7EntryRelationship
 	 */
-	public org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getHl7EntryRelationship() {
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship retVal = null;
-		if (getEntryRelationship() != null)
-			if (getEntryRelationship().size() > 0)
-				retVal = getEntryRelationship().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship> getHl7EntryRelationship() {
+		return entryRelationship;
 	}
 
 	/**
@@ -220,12 +213,8 @@ public class PharmaceuticalAdviceItemEntryContentModule extends org.ehealth_conn
 	 * Gets the hl7TemplateId
 	 * CH-PHARM-PharmaceuticalAdviceItemEntryContentModule
 	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7TemplateId() {
-		org.ehealth_connector.common.hl7cdar2.II retVal = null;
-		if (getTemplateId() != null)
-			if (getTemplateId().size() > 0)
-				retVal = getTemplateId().get(0);
-		return retVal;
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
+		return templateId;
 	}
 
 	/**
