@@ -20,11 +20,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 import javax.xml.bind.Binder;
 import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
+import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -38,11 +41,20 @@ import javax.xml.transform.stream.StreamResult;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.basetypes.NameBaseType;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.enums.NullFlavor;
+import org.ehealth_connector.common.hl7cdar2.AD;
 import org.ehealth_connector.common.hl7cdar2.ANY;
+import org.ehealth_connector.common.hl7cdar2.AdxpCity;
+import org.ehealth_connector.common.hl7cdar2.AdxpCountry;
+import org.ehealth_connector.common.hl7cdar2.AdxpPostalCode;
+import org.ehealth_connector.common.hl7cdar2.BL;
+import org.ehealth_connector.common.hl7cdar2.CE;
 import org.ehealth_connector.common.hl7cdar2.CS;
 import org.ehealth_connector.common.hl7cdar2.ED;
 import org.ehealth_connector.common.hl7cdar2.EN;
 import org.ehealth_connector.common.hl7cdar2.INT;
+import org.ehealth_connector.common.hl7cdar2.IVLINT;
+import org.ehealth_connector.common.hl7cdar2.IVLPQ;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Component2;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Component3;
@@ -64,6 +76,37 @@ import org.w3c.dom.Node;
 
 public class CdaUtil {
 
+	public static void addNarrativeTextSection(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument doc, String title,
+			String text) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Section section = factory
+				.createPOCDMT000040Section();
+		section.setTitle(CdaUtil.createSt(title));
+		section.setText(CdaUtil.createStrucDocText(text));
+		POCDMT000040StructuredBody structuredBody = CdaUtil.getStructuredBody(doc);
+		POCDMT000040Component3 comp3 = factory.createPOCDMT000040Component3();
+
+		// complete section
+		comp3.setSection(section);
+		structuredBody.getComponent().add(comp3);
+	}
+
+	public static BL createBl(boolean value) {
+		ObjectFactory factory = new ObjectFactory();
+		BL retVal = factory.createBL();
+		retVal.setValue(value);
+		return retVal;
+	}
+
+	public static CE createCe(String code, String codeSystem) {
+		ObjectFactory factory = new ObjectFactory();
+		CE retVal = factory.createCE();
+		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		return retVal;
+	}
+
 	public static CS createCs(String value) {
 		ObjectFactory factory = new ObjectFactory();
 		CS retVal = factory.createCS();
@@ -76,6 +119,84 @@ public class CdaUtil {
 		ED retVal = factory.createED();
 		retVal.xmlContent = value;
 		return retVal;
+	}
+
+	public static INT createIntUnknown(NullFlavor value) {
+		ObjectFactory factory = new ObjectFactory();
+		final INT i = factory.createINT();
+		if (value == null) {
+			i.nullFlavor.add(NullFlavor.UNKNOWN.getCodeValue());
+		} else {
+			i.nullFlavor.add(value.getCodeValue());
+		}
+		return i;
+	}
+
+	public static IVLINT createIvlint(String lowValue, String highValue) {
+		ObjectFactory factory = new ObjectFactory();
+		IVLINT retVal = factory.createIVLINT();
+
+		INT intLow = null;
+		if (lowValue == null) {
+			intLow = createIntUnknown(null);
+		} else {
+			intLow = factory.createINT();
+			intLow.setValue(BigInteger.valueOf(Integer.parseInt(lowValue)));
+		}
+
+		INT intHigh = null;
+		if (highValue == null) {
+			intHigh = createIntUnknown(null);
+		} else {
+			intHigh = factory.createINT();
+			intHigh.setValue(BigInteger.valueOf(Integer.parseInt(highValue)));
+		}
+
+		retVal.getRest()
+				.add(new JAXBElement<INT>(new QName("urn:hl7-org:v3", "low"), INT.class, intLow));
+		retVal.getRest()
+				.add(new JAXBElement<INT>(new QName("urn:hl7-org:v3", "high"), INT.class, intHigh));
+		return retVal;
+	}
+
+	public static IVLPQ createIvlpq(String lowValue, String highValue, String unit) {
+		ObjectFactory factory = new ObjectFactory();
+		IVLPQ retVal = factory.createIVLPQ();
+		if (unit != null)
+			retVal.setUnit(unit);
+
+		PQ pqLow = null;
+		if (lowValue == null) {
+			pqLow = createPqUnknown(null);
+		} else {
+			pqLow = factory.createPQ();
+			pqLow.setValue(lowValue);
+		}
+
+		PQ pqHigh = null;
+		if (highValue == null) {
+			pqHigh = createPqUnknown(null);
+		} else {
+			pqHigh = factory.createPQ();
+			pqHigh.setValue(highValue);
+		}
+
+		retVal.getRest()
+				.add(new JAXBElement<PQ>(new QName("urn:hl7-org:v3", "low"), PQ.class, pqLow));
+		retVal.getRest()
+				.add(new JAXBElement<PQ>(new QName("urn:hl7-org:v3", "high"), PQ.class, pqHigh));
+		return retVal;
+	}
+
+	public static PQ createPqUnknown(NullFlavor value) {
+		ObjectFactory factory = new ObjectFactory();
+		final PQ pq = factory.createPQ();
+		if (value == null) {
+			pq.nullFlavor.add(NullFlavor.UNKNOWN.getCodeValue());
+		} else {
+			pq.nullFlavor.add(value.getCodeValue());
+		}
+		return pq;
 	}
 
 	public static ST createSt(String value) {
@@ -156,23 +277,14 @@ public class CdaUtil {
 					if ("-1".equals(tempOneValue))
 						tempOneValue = "-";
 					tempOneUnit = ((PQ) value).getUnit();
-					// TODO weitere:
-					// } else if (value.isRto()) {
-					// tempOneValue = value.getRtoValueText();
-					// tempOneUnit = value.getRtoUnitText();
-					// } else if (value.isBl()) {
-					// if (value.getValue() != null) {
-					// String temp = value.getBlText();
-					// if (temp != null) {
-					// tempOneValue = temp;
-					// }
-					// }
-					// } else if (value.isEd()) {
-					// tempOneValue = value.toString();
-					// tempOneValue = tempOneValue.replace("<", "&lt;");
-					// tempOneValue = tempOneValue.replace(">", "&gt;");
+				} else if (value instanceof BL) {
+					tempOneValue = ((BL) value).isValue().toString();
+				} else if (value instanceof ED) {
+					tempOneValue = ((ED) value).xmlContent;
+					tempOneValue = tempOneValue.replace("<", "&lt;");
+					tempOneValue = tempOneValue.replace(">", "&gt;");
 				} else
-					tempOneValue = value.toString();
+					tempOneValue = value.getClass().getName() + " not supported yet for printing";
 			}
 			if (!"".equals(retVal))
 				retVal = retVal + "<br />";
@@ -192,6 +304,35 @@ public class CdaUtil {
 				retVal.add(comp.getObservation());
 		}
 		return retVal;
+	}
+
+	public static AD getNullflaveredAddress() {
+
+		ObjectFactory factory = new ObjectFactory();
+		AD addr = factory.createAD();
+		addr.nullFlavor = new ArrayList<String>();
+		addr.nullFlavor.add(NullFlavor.UNKNOWN.getCodeValue());
+
+		AdxpPostalCode postalCode = factory.createAdxpPostalCode();
+		postalCode.nullFlavor = new ArrayList<String>();
+		postalCode.nullFlavor.add(NullFlavor.UNKNOWN.getCodeValue());
+		addr.getContent().add(new JAXBElement<AdxpPostalCode>(
+				new QName("urn:hl7-org:v3", "postalCode"), AdxpPostalCode.class, postalCode));
+
+		AdxpCity city = factory.createAdxpCity();
+		city.nullFlavor = new ArrayList<String>();
+		city.nullFlavor.add(NullFlavor.UNKNOWN.getCodeValue());
+		addr.getContent().add(new JAXBElement<AdxpCity>(new QName("urn:hl7-org:v3", "city"),
+				AdxpCity.class, city));
+
+		AdxpCountry country = factory.createAdxpCountry();
+		country.nullFlavor = new ArrayList<String>();
+		country.nullFlavor.add(NullFlavor.UNKNOWN.getCodeValue());
+		addr.getContent().add(new JAXBElement<AdxpCountry>(new QName("urn:hl7-org:v3", "country"),
+				AdxpCountry.class, country));
+
+		return addr;
+
 	}
 
 	public static int getSectionCount(POCDMT000040StructuredBody structuredBody) {
@@ -287,4 +428,5 @@ public class CdaUtil {
 		transformer.transform(domSource, streamResult);
 
 	}
+
 }
