@@ -21,42 +21,42 @@ import org.ehealth_connector.common.hl7cdar2.IVLTS;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.84
- * Template description: The coded gestational age in days of gestation at birth of a patient. This item is intended to be applied for the child but not for the mother.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.84 Template
+ * description: The coded gestational age in days of gestation at birth of a
+ * patient. This item is intended to be applied for the child but not for the
+ * mother.
  *
- * Element description: The coded gestational age in days of gestation at birth of a patient. This item is intended to be applied for the child but not for the mother.
+ * Element description: The coded gestational age in days of gestation at birth
+ * of a patient. This item is intended to be applied for the child but not for
+ * the mother.
  */
-public class CdachvacdEntryGestationalAgeAtBirth extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
+public class CdachvacdEntryGestationalAgeAtBirth
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
 	public CdachvacdEntryGestationalAgeAtBirth() {
 		super.getClassCode().add("OBS");
-		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.84"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13"));
-		super.setCode(createHl7CodeFixedValue("49052-4", "2.16.840.1.113883.6.1", "LOINC", "Gestational age in days"));
+		super.setCode(createHl7CodeFixedValue("49052-4", "2.16.840.1.113883.6.1", "LOINC",
+				"Gestational age in days"));
 		super.setStatusCode(createHl7StatusCodeFixedValue());
-	// cdachvacd_entry_GestationalAgeAtBirth/hl7:observation:cs classCode = "OBS";
-	// cdachvacd_entry_GestationalAgeAtBirth/hl7:observation:cs moodCode = "EVN";
-	// cdachvacd_entry_GestationalAgeAtBirth/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.84";
-	// cdachvacd_entry_GestationalAgeAtBirth/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.4.13";
-	// cdachvacd_entry_GestationalAgeAtBirth/hl7:code:cs code = "49052-4";
-	// cdachvacd_entry_GestationalAgeAtBirth/hl7:code:oid codeSystem = "2.16.840.1.113883.6.1";
-	// cdachvacd_entry_GestationalAgeAtBirth/hl7:code:st codeSystemName = "LOINC";
-	// cdachvacd_entry_GestationalAgeAtBirth/hl7:code:st displayName = "Gestational age in days";
-	// cdachvacd_entry_GestationalAgeAtBirth/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusCompleted
 	}
 
 	/**
-	 * Adds a hl7Author
-	 * This MAY be used to indicate who has documented the observation. This information supersedes any information recorded at higher level.
+	 * Adds a hl7Author This MAY be used to indicate who has documented the
+	 * observation. This information supersedes any information recorded at
+	 * higher level.
 	 */
 	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
 		getAuthor().add(value);
 	}
 
 	/**
-	 * Adds a hl7Author
-	 * This MAY be used to indicate who has documented the observation. This information supersedes any information recorded at higher level.
+	 * Adds a hl7Author This MAY be used to indicate who has documented the
+	 * observation. This information supersedes any information recorded at
+	 * higher level.
 	 */
 	public void clearHl7Author() {
 		getAuthor().clear();
@@ -65,12 +65,17 @@ public class CdachvacdEntryGestationalAgeAtBirth extends org.ehealth_connector.c
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
-	 * @param code the desired fixed value for this argument.
-	 * @param codeSystem the desired fixed value for this argument.
-	 * @param codeSystemName the desired fixed value for this argument.
-	 * @param displayName the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
+	 * @param codeSystem
+	 *            the desired fixed value for this argument.
+	 * @param codeSystemName
+	 *            the desired fixed value for this argument.
+	 * @param displayName
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code,
+			String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.setCode(code);
@@ -92,9 +97,11 @@ public class CdachvacdEntryGestationalAgeAtBirth extends org.ehealth_connector.c
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -102,32 +109,33 @@ public class CdachvacdEntryGestationalAgeAtBirth extends org.ehealth_connector.c
 	}
 
 	/**
-	 * Gets the hl7Code
-	 * The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
+	 * Gets the hl7Code The human-readable text MUST be generated automatically
+	 * from the structured information of this element. The text element MUST
+	 * contain the reference to the corresponding text in the human readable
+	 * part, ONLY.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
 		return code;
 	}
 
 	/**
-	 * Gets the hl7EffectiveTime
-	 * Date or timestamp of the finding (physiologically relevant time of this observation).
+	 * Gets the hl7EffectiveTime Date or timestamp of the finding
+	 * (physiologically relevant time of this observation).
 	 */
 	public org.ehealth_connector.common.hl7cdar2.TS getHl7EffectiveTime() {
 		return effectiveTime;
 	}
 
 	/**
-	 * Gets the hl7Id
-	 * Each observation SHALL have an identifier.
+	 * Gets the hl7Id Each observation SHALL have an identifier.
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7Id() {
 		return id;
 	}
 
 	/**
-	 * Gets the hl7StatusCode
-	 * The statusCode SHALL be set to 'completed' for all observations.
+	 * Gets the hl7StatusCode The statusCode SHALL be set to 'completed' for all
+	 * observations.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
 		return statusCode;
@@ -148,26 +156,29 @@ public class CdachvacdEntryGestationalAgeAtBirth extends org.ehealth_connector.c
 	}
 
 	/**
-	 * Gets the hl7Value
-	 * The gestational age, recorded in days. Therefore weeks have to be converted to days and back to weeks by the applications.Examples:
-	 * - Application --&gt; CDA:37th week and 4th day = 37 * 7 + 4 days = 263 days
-	 * - CDA --&gt; application:178 d = 25 weeks and 3 days
+	 * Gets the hl7Value The gestational age, recorded in days. Therefore weeks
+	 * have to be converted to days and back to weeks by the
+	 * applications.Examples: - Application --&gt; CDA:37th week and 4th day =
+	 * 37 * 7 + 4 days = 263 days - CDA --&gt; application:178 d = 25 weeks and
+	 * 3 days
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.ANY> getHl7Value() {
 		return value;
 	}
 
 	/**
-	 * Sets the hl7Code
-	 * The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
+	 * Sets the hl7Code The human-readable text MUST be generated automatically
+	 * from the structured information of this element. The text element MUST
+	 * contain the reference to the corresponding text in the human readable
+	 * part, ONLY.
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CD value) {
 		this.code = value;
 	}
 
 	/**
-	 * Sets the hl7EffectiveTime
-	 * Date or timestamp of the finding (physiologically relevant time of this observation).
+	 * Sets the hl7EffectiveTime Date or timestamp of the finding
+	 * (physiologically relevant time of this observation).
 	 */
 	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.TS value) {
 		ObjectFactory factory = new ObjectFactory();
@@ -177,8 +188,7 @@ public class CdachvacdEntryGestationalAgeAtBirth extends org.ehealth_connector.c
 	}
 
 	/**
-	 * Sets the hl7Id
-	 * Each observation SHALL have an identifier.
+	 * Sets the hl7Id Each observation SHALL have an identifier.
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		getId().clear();
@@ -186,8 +196,8 @@ public class CdachvacdEntryGestationalAgeAtBirth extends org.ehealth_connector.c
 	}
 
 	/**
-	 * Sets the hl7StatusCode
-	 * The statusCode SHALL be set to 'completed' for all observations.
+	 * Sets the hl7StatusCode The statusCode SHALL be set to 'completed' for all
+	 * observations.
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
 		this.statusCode = value;
@@ -209,10 +219,11 @@ public class CdachvacdEntryGestationalAgeAtBirth extends org.ehealth_connector.c
 	}
 
 	/**
-	 * Sets the hl7Value
-	 * The gestational age, recorded in days. Therefore weeks have to be converted to days and back to weeks by the applications.Examples:
-	 * - Application --&gt; CDA:37th week and 4th day = 37 * 7 + 4 days = 263 days
-	 * - CDA --&gt; application:178 d = 25 weeks and 3 days
+	 * Sets the hl7Value The gestational age, recorded in days. Therefore weeks
+	 * have to be converted to days and back to weeks by the
+	 * applications.Examples: - Application --&gt; CDA:37th week and 4th day =
+	 * 37 * 7 + 4 days = 263 days - CDA --&gt; application:178 d = 25 weeks and
+	 * 3 days
 	 */
 	public void setHl7Value(org.ehealth_connector.common.hl7cdar2.PQ value) {
 		getValue().clear();

@@ -20,26 +20,32 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.34
- * Template description: Person name information (with required family and given name) according to the eCH-0011 V8.1 nameData data type. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.See https://www.ech.ch/vechweb/page?p=dossier&amp;documentNumber=eCH-0011&amp;documentVersion=8.1, section 3.3.2 nameData – Namensangaben for more information.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.34 Template
+ * description: Person name information (with required family and given name)
+ * according to the eCH-0011 V8.1 nameData data type. CDA-CH V2 derivatives,
+ * i.e. Swiss exchange formats MAY use this template by either reference or
+ * specialisation.See
+ * https://www.ech.ch/vechweb/page?p=dossier&amp;documentNumber=eCH-0011&amp;documentVersion=8.1,
+ * section 3.3.2 nameData – Namensangaben for more information.
  *
  * Element description: Other person's name.
  */
-public class CdachOtherPersonNameInformationCompilationECh0011 extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Person {
+public class CdachOtherPersonNameInformationCompilationECh0011
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Person {
 
 	public CdachOtherPersonNameInformationCompilationECh0011() {
 		super.getName().add(createHl7NameFixedValue("L"));
-	// cdach_other_PersonNameInformationCompilation-eCH-0011/hl7:name:set_cs use = "L";
-	// cdach_other_PersonNameInformationCompilation-eCH-0011/hl7:name:set_cs use = "P";
-	// This is fixed content for an optional element: createHl7NameFixedValue("P") --> Creating getPredefinedNameP();
-	// cdach_other_PersonNameInformationCompilation-eCH-0011/hl7:name:set_cs use = "ASGN";
-	// This is fixed content for an optional element: createHl7NameFixedValue("ASGN") --> Creating getPredefinedNameAsgn();
+		// This is fixed content for an optional element:
+		// createHl7NameFixedValue("P") --> Creating getPredefinedNameP();
+		// This is fixed content for an optional element:
+		// createHl7NameFixedValue("ASGN") --> Creating getPredefinedNameAsgn();
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Name
 	 *
-	 * @param use the desired fixed value for this argument.
+	 * @param use
+	 *            the desired fixed value for this argument.
 	 */
 	private static org.ehealth_connector.common.hl7cdar2.PN createHl7NameFixedValue(String use) {
 		ObjectFactory factory = new ObjectFactory();
@@ -49,15 +55,17 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends org.eheal
 	}
 
 	/**
-	 * Gets the hl7Name
-	 * The person's legal name (with required family and given name).
+	 * Gets the hl7Name The person's legal name (with required family and given
+	 * name).
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.PN> getHl7Name() {
 		return name;
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.PN, filled by: "ASGN"
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.PN, filled by:
+	 * "ASGN"
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.PN getPredefinedNameAsgn() {
@@ -65,7 +73,9 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends org.eheal
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.PN, filled by: "P"
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.PN, filled by:
+	 * "P"
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.PN getPredefinedNameP() {
@@ -73,8 +83,8 @@ public class CdachOtherPersonNameInformationCompilationECh0011 extends org.eheal
 	}
 
 	/**
-	 * Sets the hl7Name
-	 * The person's legal name (with required family and given name).
+	 * Sets the hl7Name The person's legal name (with required family and given
+	 * name).
 	 */
 	public void setHl7Name(org.ehealth_connector.common.hl7cdar2.PN value) {
 		getName().clear();

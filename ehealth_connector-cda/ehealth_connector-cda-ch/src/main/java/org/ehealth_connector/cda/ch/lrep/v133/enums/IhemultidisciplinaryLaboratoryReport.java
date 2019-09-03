@@ -41,7 +41,8 @@ public enum IhemultidisciplinaryLaboratoryReport implements ValueSetEnumInterfac
 	 * <div class="en">LABORATORY REPORT.TOTAL</div>
 	 * <!-- @formatter:on -->
 	 */
-	LABORATORY_REPORT_TOTAL("11502-2", "2.16.840.1.113883.6.1", "LABORATORY REPORT.TOTAL", "LABORATORY REPORT.TOTAL", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	LABORATORY_REPORT_TOTAL("11502-2", "2.16.840.1.113883.6.1", "LABORATORY REPORT.TOTAL",
+			"LABORATORY REPORT.TOTAL", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -168,7 +169,9 @@ public enum IhemultidisciplinaryLaboratoryReport implements ValueSetEnumInterfac
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	IhemultidisciplinaryLaboratoryReport(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	IhemultidisciplinaryLaboratoryReport(String code, String codeSystem, String displayName,
+			String displayNameEn, String displayNameDe, String displayNameFr,
+			String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();

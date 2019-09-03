@@ -41,13 +41,15 @@ public enum XInformationRecipient implements ValueSetEnumInterface {
 	 * <div class="en">primary information recipient</div>
 	 * <!-- @formatter:on -->
 	 */
-	PRIMARY_INFORMATION_RECIPIENT("PRCP", "2.16.840.1.113883.5.90", "primary information recipient", "primary information recipient", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	PRIMARY_INFORMATION_RECIPIENT("PRCP", "2.16.840.1.113883.5.90", "primary information recipient",
+			"primary information recipient", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">tracker</div>
 	 * <!-- @formatter:on -->
 	 */
-	TRACKER("TRC", "2.16.840.1.113883.5.90", "tracker", "tracker", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	TRACKER("TRC", "2.16.840.1.113883.5.90", "tracker", "tracker", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -181,7 +183,8 @@ public enum XInformationRecipient implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	XInformationRecipient(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	XInformationRecipient(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();

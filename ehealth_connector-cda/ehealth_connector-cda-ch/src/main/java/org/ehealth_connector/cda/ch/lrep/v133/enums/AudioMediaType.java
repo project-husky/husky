@@ -41,19 +41,23 @@ public enum AudioMediaType implements ValueSetEnumInterface {
 	 * <div class="en">Basic Audio</div>
 	 * <!-- @formatter:on -->
 	 */
-	BASIC_AUDIO("audio/basic", "2.16.840.1.113883.5.79", "Basic Audio", "Basic Audio", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BASIC_AUDIO("audio/basic", "2.16.840.1.113883.5.79", "Basic Audio", "Basic Audio",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">K32ADPCM Audio</div>
 	 * <!-- @formatter:on -->
 	 */
-	K32ADPCM_AUDIO("audio/k32adpcm", "2.16.840.1.113883.5.79", "K32ADPCM Audio", "K32ADPCM Audio", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	K32ADPCM_AUDIO("audio/k32adpcm", "2.16.840.1.113883.5.79", "K32ADPCM Audio", "K32ADPCM Audio",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">MPEG audio layer 3 MP3 Audio</div>
 	 * <!-- @formatter:on -->
 	 */
-	MPEG_AUDIO_LAYER_3_MP3_AUDIO("audio/mpeg", "2.16.840.1.113883.5.79", "MPEG audio layer 3 MP3 Audio", "MPEG audio layer 3 MP3 Audio", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	MPEG_AUDIO_LAYER_3_MP3_AUDIO("audio/mpeg", "2.16.840.1.113883.5.79",
+			"MPEG audio layer 3 MP3 Audio", "MPEG audio layer 3 MP3 Audio", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -194,7 +198,8 @@ public enum AudioMediaType implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	AudioMediaType(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	AudioMediaType(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();

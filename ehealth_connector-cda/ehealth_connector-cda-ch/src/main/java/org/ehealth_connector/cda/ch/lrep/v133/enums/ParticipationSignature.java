@@ -41,19 +41,22 @@ public enum ParticipationSignature implements ValueSetEnumInterface {
 	 * <div class="en">intended</div>
 	 * <!-- @formatter:on -->
 	 */
-	INTENDED("I", "2.16.840.1.113883.5.89", "intended", "intended", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	INTENDED("I", "2.16.840.1.113883.5.89", "intended", "intended", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">required</div>
 	 * <!-- @formatter:on -->
 	 */
-	REQUIRED("X", "2.16.840.1.113883.5.89", "required", "required", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	REQUIRED("X", "2.16.840.1.113883.5.89", "required", "required", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">signed</div>
 	 * <!-- @formatter:on -->
 	 */
-	SIGNED("S", "2.16.840.1.113883.5.89", "signed", "signed", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	SIGNED("S", "2.16.840.1.113883.5.89", "signed", "signed", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -194,7 +197,8 @@ public enum ParticipationSignature implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	ParticipationSignature(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	ParticipationSignature(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();

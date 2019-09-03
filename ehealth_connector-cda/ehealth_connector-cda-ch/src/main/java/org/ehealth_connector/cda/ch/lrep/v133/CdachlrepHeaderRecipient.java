@@ -20,30 +20,33 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.57
- * Template description: The laboratory report MUST contain at least one receiver. This can be a person or an institution. If the document is created for internal use, the recipient can include the same information as author or custodian. In case of health care professionals the declaration is as for custodian. For patients or other persons, the declaration is as for recordTarget or author.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.57 Template
+ * description: The laboratory report MUST contain at least one receiver. This
+ * can be a person or an institution. If the document is created for internal
+ * use, the recipient can include the same information as author or custodian.
+ * In case of health care professionals the declaration is as for custodian. For
+ * patients or other persons, the declaration is as for recordTarget or author.
  *
- * Element description: The laboratory report MUST contain at least one receiver.
+ * Element description: The laboratory report MUST contain at least one
+ * receiver.
  */
-public class CdachlrepHeaderRecipient extends org.ehealth_connector.common.hl7cdar2.POCDMT000040InformationRecipient {
+public class CdachlrepHeaderRecipient
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040InformationRecipient {
 
 	public CdachlrepHeaderRecipient() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.4"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.57"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.1.4"));
-	// cdachlrep_header_Recipient/hl7:informationRecipient:cs typeCode = valueSet("2.16.840.1.113883.1.11.19366"); --> org.ehealth_connector.common.hl7cdar2.XInformationRecipient
-	// cdachlrep_header_Recipient/hl7:informationRecipient:cs typeCode = valueSet("2.16.840.1.113883.1.11.19366"); --> org.ehealth_connector.common.hl7cdar2.XInformationRecipient
-	// cdachlrep_header_Recipient/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.4";
-	// cdachlrep_header_Recipient/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.57";
-	// cdachlrep_header_Recipient/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.3.1.4";
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -51,8 +54,8 @@ public class CdachlrepHeaderRecipient extends org.ehealth_connector.common.hl7cd
 	}
 
 	/**
-	 * Gets the hl7IntendedRecipient
-	 * The laboratory report MUST contain at least one receiver.
+	 * Gets the hl7IntendedRecipient The laboratory report MUST contain at least
+	 * one receiver.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040IntendedRecipient getHl7IntendedRecipient() {
 		return intendedRecipient;
@@ -66,10 +69,11 @@ public class CdachlrepHeaderRecipient extends org.ehealth_connector.common.hl7cd
 	}
 
 	/**
-	 * Sets the hl7IntendedRecipient
-	 * The laboratory report MUST contain at least one receiver.
+	 * Sets the hl7IntendedRecipient The laboratory report MUST contain at least
+	 * one receiver.
 	 */
-	public void setHl7IntendedRecipient(org.ehealth_connector.common.hl7cdar2.POCDMT000040IntendedRecipient value) {
+	public void setHl7IntendedRecipient(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040IntendedRecipient value) {
 		this.intendedRecipient = value;
 	}
 

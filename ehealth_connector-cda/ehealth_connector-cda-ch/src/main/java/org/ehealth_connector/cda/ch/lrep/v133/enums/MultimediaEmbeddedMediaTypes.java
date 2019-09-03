@@ -41,25 +41,29 @@ public enum MultimediaEmbeddedMediaTypes implements ValueSetEnumInterface {
 	 * <div class="en">BMP Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	BMP_IMAGE("image/bmp", "2.16.840.1.113883.5.79", "BMP Image", "BMP Image", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BMP_IMAGE("image/bmp", "2.16.840.1.113883.5.79", "BMP Image", "BMP Image", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">GIF Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	GIF_IMAGE("image/gif", "2.16.840.1.113883.5.79", "GIF Image", "GIF Image", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	GIF_IMAGE("image/gif", "2.16.840.1.113883.5.79", "GIF Image", "GIF Image", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">JPEG Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	JPEG_IMAGE("image/jpeg", "2.16.840.1.113883.5.79", "JPEG Image", "JPEG Image", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	JPEG_IMAGE("image/jpeg", "2.16.840.1.113883.5.79", "JPEG Image", "JPEG Image", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">PNG Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	PNG_IMAGE("image/png", "2.16.840.1.113883.5.79", "PNG Image", "PNG Image", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	PNG_IMAGE("image/png", "2.16.840.1.113883.5.79", "PNG Image", "PNG Image", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -207,7 +211,9 @@ public enum MultimediaEmbeddedMediaTypes implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	MultimediaEmbeddedMediaTypes(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	MultimediaEmbeddedMediaTypes(String code, String codeSystem, String displayName,
+			String displayNameEn, String displayNameDe, String displayNameFr,
+			String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();

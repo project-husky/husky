@@ -20,35 +20,35 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.61
- * Template description: Legal authenticator.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.61 Template
+ * description: Legal authenticator.
  *
  * Element description: Legal authenticator.
  */
-public class CdachlrepHeaderLegalAuthenticator extends org.ehealth_connector.common.hl7cdar2.POCDMT000040LegalAuthenticator {
+public class CdachlrepHeaderLegalAuthenticator
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040LegalAuthenticator {
 
 	public CdachlrepHeaderLegalAuthenticator() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.61"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.5"));
-		super.setSignatureCode(createHl7SignatureCodeFixedValue("S", "2.16.840.1.113883.1.11.10282", "ParticipationSignature", "signed"));
-	// cdachlrep_header_LegalAuthenticator/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.61";
-	// cdachlrep_header_LegalAuthenticator/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.5";
-	// cdachlrep_header_LegalAuthenticator/hl7:signatureCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.10282"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ParticipationSignature
-	// cdachlrep_header_LegalAuthenticator/hl7:signatureCode:cs code = "S";
-	// cdachlrep_header_LegalAuthenticator/hl7:signatureCode:oid codeSystem = "2.16.840.1.113883.1.11.10282";
-	// cdachlrep_header_LegalAuthenticator/hl7:signatureCode:st codeSystemName = "ParticipationSignature";
-	// cdachlrep_header_LegalAuthenticator/hl7:signatureCode:st displayName = "signed";
+		super.setSignatureCode(createHl7SignatureCodeFixedValue("S", "2.16.840.1.113883.1.11.10282",
+				"ParticipationSignature", "signed"));
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7SignatureCode
 	 *
-	 * @param code the desired fixed value for this argument.
-	 * @param codeSystem the desired fixed value for this argument.
-	 * @param codeSystemName the desired fixed value for this argument.
-	 * @param displayName the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
+	 * @param codeSystem
+	 *            the desired fixed value for this argument.
+	 * @param codeSystemName
+	 *            the desired fixed value for this argument.
+	 * @param displayName
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CS createHl7SignatureCodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7SignatureCodeFixedValue(
+			String code, String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		retVal.setCode(code);
@@ -61,9 +61,11 @@ public class CdachlrepHeaderLegalAuthenticator extends org.ehealth_connector.com
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -71,8 +73,10 @@ public class CdachlrepHeaderLegalAuthenticator extends org.ehealth_connector.com
 	}
 
 	/**
-	 * Gets the hl7AssignedEntity
-	 * The GLN MUST be used to identify the legal authenticator (e.g., laboratory manager or responsible physician). All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+	 * Gets the hl7AssignedEntity The GLN MUST be used to identify the legal
+	 * authenticator (e.g., laboratory manager or responsible physician). All
+	 * persons and organizations, MUST according to XD-LAB contain name, addr
+	 * and telecom.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity getHl7AssignedEntity() {
 		return assignedEntity;
@@ -93,18 +97,20 @@ public class CdachlrepHeaderLegalAuthenticator extends org.ehealth_connector.com
 	}
 
 	/**
-	 * Gets the hl7Time
-	 * Date of the signature.
+	 * Gets the hl7Time Date of the signature.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.TS getHl7Time() {
 		return time;
 	}
 
 	/**
-	 * Sets the hl7AssignedEntity
-	 * The GLN MUST be used to identify the legal authenticator (e.g., laboratory manager or responsible physician). All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+	 * Sets the hl7AssignedEntity The GLN MUST be used to identify the legal
+	 * authenticator (e.g., laboratory manager or responsible physician). All
+	 * persons and organizations, MUST according to XD-LAB contain name, addr
+	 * and telecom.
 	 */
-	public void setHl7AssignedEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity value) {
+	public void setHl7AssignedEntity(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity value) {
 		this.assignedEntity = value;
 	}
 
@@ -124,8 +130,7 @@ public class CdachlrepHeaderLegalAuthenticator extends org.ehealth_connector.com
 	}
 
 	/**
-	 * Sets the hl7Time
-	 * Date of the signature.
+	 * Sets the hl7Time Date of the signature.
 	 */
 	public void setHl7Time(org.ehealth_connector.common.hl7cdar2.TS value) {
 		this.time = value;

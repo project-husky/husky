@@ -21,46 +21,43 @@ import org.ehealth_connector.common.hl7cdar2.IVLTS;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.102
- * Template description: This element contains structured information about the delivery date of a pregnancy.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.102 Template
+ * description: This element contains structured information about the delivery
+ * date of a pregnancy.
  *
- * Element description: This element contains structured information about the delivery date of a pregnancy.
+ * Element description: This element contains structured information about the
+ * delivery date of a pregnancy.
  */
-public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
+public class ChpccEntryPregnancyObservationDeliveryDate
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
 	public ChpccEntryPregnancyObservationDeliveryDate() {
 		super.getClassCode().add("OBS");
-		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.102"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.92"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13.5"));
+		super.getTemplateId()
+				.add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13.5"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13"));
-		super.setCode(createHl7CodeFixedValue("11778-8", "2.16.840.1.113883.6.1", "LOINC", "DELIVERY DATE (CLINICAL ESTIMATE)"));
+		super.setCode(createHl7CodeFixedValue("11778-8", "2.16.840.1.113883.6.1", "LOINC",
+				"DELIVERY DATE (CLINICAL ESTIMATE)"));
 		super.setStatusCode(createHl7StatusCodeFixedValue());
-	// chpcc_entry_PregnancyObservationDeliveryDate/hl7:observation:cs classCode = "OBS";
-	// chpcc_entry_PregnancyObservationDeliveryDate/hl7:observation:cs moodCode = "EVN";
-	// chpcc_entry_PregnancyObservationDeliveryDate/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.102";
-	// chpcc_entry_PregnancyObservationDeliveryDate/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.92";
-	// chpcc_entry_PregnancyObservationDeliveryDate/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.4.13.5";
-	// chpcc_entry_PregnancyObservationDeliveryDate/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.4.13";
-	// chpcc_entry_PregnancyObservationDeliveryDate/hl7:code:cs code = "11778-8";
-	// chpcc_entry_PregnancyObservationDeliveryDate/hl7:code:oid codeSystem = "2.16.840.1.113883.6.1";
-	// chpcc_entry_PregnancyObservationDeliveryDate/hl7:code:st codeSystemName = "LOINC";
-	// chpcc_entry_PregnancyObservationDeliveryDate/hl7:code:st displayName = "DELIVERY DATE (CLINICAL ESTIMATE)";
-	// chpcc_entry_PregnancyObservationDeliveryDate/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusCompleted
 	}
 
 	/**
-	 * Adds a hl7Author
-	 * This MAY be used to indicate who has documented the observation. This information supersedes any information recorded at higher level.
+	 * Adds a hl7Author This MAY be used to indicate who has documented the
+	 * observation. This information supersedes any information recorded at
+	 * higher level.
 	 */
 	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
 		getAuthor().add(value);
 	}
 
 	/**
-	 * Adds a hl7Author
-	 * This MAY be used to indicate who has documented the observation. This information supersedes any information recorded at higher level.
+	 * Adds a hl7Author This MAY be used to indicate who has documented the
+	 * observation. This information supersedes any information recorded at
+	 * higher level.
 	 */
 	public void clearHl7Author() {
 		getAuthor().clear();
@@ -69,12 +66,17 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
-	 * @param code the desired fixed value for this argument.
-	 * @param codeSystem the desired fixed value for this argument.
-	 * @param codeSystemName the desired fixed value for this argument.
-	 * @param displayName the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
+	 * @param codeSystem
+	 *            the desired fixed value for this argument.
+	 * @param codeSystemName
+	 *            the desired fixed value for this argument.
+	 * @param displayName
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code,
+			String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.setCode(code);
@@ -96,9 +98,11 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -106,32 +110,33 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 	}
 
 	/**
-	 * Gets the hl7Code
-	 * The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
+	 * Gets the hl7Code The human-readable text MUST be generated automatically
+	 * from the structured information of this element. The text element MUST
+	 * contain the reference to the corresponding text in the human readable
+	 * part, ONLY.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
 		return code;
 	}
 
 	/**
-	 * Gets the hl7EffectiveTime
-	 * Date or timestamp of the finding (physiologically relevant time of this observation).
+	 * Gets the hl7EffectiveTime Date or timestamp of the finding
+	 * (physiologically relevant time of this observation).
 	 */
 	public org.ehealth_connector.common.hl7cdar2.TS getHl7EffectiveTime() {
 		return effectiveTime;
 	}
 
 	/**
-	 * Gets the hl7Id
-	 * Each observation SHALL have an identifier.
+	 * Gets the hl7Id Each observation SHALL have an identifier.
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7Id() {
 		return id;
 	}
 
 	/**
-	 * Gets the hl7StatusCode
-	 * The statusCode shall be set to 'completed' for all observations.
+	 * Gets the hl7StatusCode The statusCode shall be set to 'completed' for all
+	 * observations.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
 		return statusCode;
@@ -152,24 +157,25 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 	}
 
 	/**
-	 * Gets the hl7Value
-	 * The delivery date (clinical estimate)
+	 * Gets the hl7Value The delivery date (clinical estimate)
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.ANY> getHl7Value() {
 		return value;
 	}
 
 	/**
-	 * Sets the hl7Code
-	 * The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
+	 * Sets the hl7Code The human-readable text MUST be generated automatically
+	 * from the structured information of this element. The text element MUST
+	 * contain the reference to the corresponding text in the human readable
+	 * part, ONLY.
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CD value) {
 		this.code = value;
 	}
 
 	/**
-	 * Sets the hl7EffectiveTime
-	 * Date or timestamp of the finding (physiologically relevant time of this observation).
+	 * Sets the hl7EffectiveTime Date or timestamp of the finding
+	 * (physiologically relevant time of this observation).
 	 */
 	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.TS value) {
 		ObjectFactory factory = new ObjectFactory();
@@ -179,8 +185,7 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 	}
 
 	/**
-	 * Sets the hl7Id
-	 * Each observation SHALL have an identifier.
+	 * Sets the hl7Id Each observation SHALL have an identifier.
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		getId().clear();
@@ -188,8 +193,8 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 	}
 
 	/**
-	 * Sets the hl7StatusCode
-	 * The statusCode shall be set to 'completed' for all observations.
+	 * Sets the hl7StatusCode The statusCode shall be set to 'completed' for all
+	 * observations.
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
 		this.statusCode = value;
@@ -211,8 +216,7 @@ public class ChpccEntryPregnancyObservationDeliveryDate extends org.ehealth_conn
 	}
 
 	/**
-	 * Sets the hl7Value
-	 * The delivery date (clinical estimate)
+	 * Sets the hl7Value The delivery date (clinical estimate)
 	 */
 	public void setHl7Value(org.ehealth_connector.common.hl7cdar2.TS value) {
 		getValue().clear();

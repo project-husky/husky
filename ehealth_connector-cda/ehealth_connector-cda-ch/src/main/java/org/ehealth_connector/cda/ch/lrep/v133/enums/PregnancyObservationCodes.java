@@ -41,193 +41,241 @@ public enum PregnancyObservationCodes implements ValueSetEnumInterface {
 	 * <div class="en">ABORTIONSINDUCED (REPORTED)</div>
 	 * <!-- @formatter:on -->
 	 */
-	ABORTIONSINDUCED_REPORTED("11613-7", "2.16.840.1.113883.6.1", "ABORTIONSINDUCED (REPORTED)", "ABORTIONSINDUCED (REPORTED)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	ABORTIONSINDUCED_REPORTED("11613-7", "2.16.840.1.113883.6.1", "ABORTIONSINDUCED (REPORTED)",
+			"ABORTIONSINDUCED (REPORTED)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">ABORTIONSSPONTANEOUS(REPORTED)</div>
 	 * <!-- @formatter:on -->
 	 */
-	ABORTIONSSPONTANEOUS_REPORTED("11614-5", "2.16.840.1.113883.6.1", "ABORTIONSSPONTANEOUS(REPORTED)", "ABORTIONSSPONTANEOUS(REPORTED)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	ABORTIONSSPONTANEOUS_REPORTED("11614-5", "2.16.840.1.113883.6.1",
+			"ABORTIONSSPONTANEOUS(REPORTED)", "ABORTIONSSPONTANEOUS(REPORTED)", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">ABORTIONS(REPORTED)</div>
 	 * <!-- @formatter:on -->
 	 */
-	ABORTIONS_REPORTED("11612-9", "2.16.840.1.113883.6.1", "ABORTIONS(REPORTED)", "ABORTIONS(REPORTED)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	ABORTIONS_REPORTED("11612-9", "2.16.840.1.113883.6.1", "ABORTIONS(REPORTED)",
+			"ABORTIONS(REPORTED)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">BIRTHS LIVE (REPORTED)</div>
 	 * <!-- @formatter:on -->
 	 */
-	BIRTHS_LIVE_REPORTED("11636-8", "2.16.840.1.113883.6.1", "BIRTHS LIVE (REPORTED)", "BIRTHS LIVE (REPORTED)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BIRTHS_LIVE_REPORTED("11636-8", "2.16.840.1.113883.6.1", "BIRTHS LIVE (REPORTED)",
+			"BIRTHS LIVE (REPORTED)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Births.Preterm</div>
 	 * <!-- @formatter:on -->
 	 */
-	BIRTHS_PRETERM("11637-6", "2.16.840.1.113883.6.1", "Births.Preterm", "Births.Preterm", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BIRTHS_PRETERM("11637-6", "2.16.840.1.113883.6.1", "Births.Preterm", "Births.Preterm",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">BIRTHS PRETERM (REPORTED)</div>
 	 * <!-- @formatter:on -->
 	 */
-	BIRTHS_PRETERM_REPORTED("11637-6", "2.16.840.1.113883.6.1", "BIRTHS PRETERM (REPORTED)", "BIRTHS PRETERM (REPORTED)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BIRTHS_PRETERM_REPORTED("11637-6", "2.16.840.1.113883.6.1", "BIRTHS PRETERM (REPORTED)",
+			"BIRTHS PRETERM (REPORTED)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Births.stillborn</div>
 	 * <!-- @formatter:on -->
 	 */
-	BIRTHS_STILLBORN("57062-2", "2.16.840.1.113883.6.1", "Births.stillborn", "Births.stillborn", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BIRTHS_STILLBORN("57062-2", "2.16.840.1.113883.6.1", "Births.stillborn", "Births.stillborn",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">BIRTHS STILL LIVING (REPORTED)</div>
 	 * <!-- @formatter:on -->
 	 */
-	BIRTHS_STILL_LIVING_REPORTED("11638-4", "2.16.840.1.113883.6.1", "BIRTHS STILL LIVING (REPORTED)", "BIRTHS STILL LIVING (REPORTED)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BIRTHS_STILL_LIVING_REPORTED("11638-4", "2.16.840.1.113883.6.1",
+			"BIRTHS STILL LIVING (REPORTED)", "BIRTHS STILL LIVING (REPORTED)", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Births.Term</div>
 	 * <!-- @formatter:on -->
 	 */
-	BIRTHS_TERM("11639-2", "2.16.840.1.113883.6.1", "Births.Term", "Births.Term", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BIRTHS_TERM("11639-2", "2.16.840.1.113883.6.1", "Births.Term", "Births.Term", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">BIRTHS TERM (REPORTED)</div>
 	 * <!-- @formatter:on -->
 	 */
-	BIRTHS_TERM_REPORTED("11639-2", "2.16.840.1.113883.6.1", "BIRTHS TERM (REPORTED)", "BIRTHS TERM (REPORTED)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BIRTHS_TERM_REPORTED("11639-2", "2.16.840.1.113883.6.1", "BIRTHS TERM (REPORTED)",
+			"BIRTHS TERM (REPORTED)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">BIRTHS TOTAL (REPORTED)</div>
 	 * <!-- @formatter:on -->
 	 */
-	BIRTHS_TOTAL_REPORTED("11640-0", "2.16.840.1.113883.6.1", "BIRTHS TOTAL (REPORTED)", "BIRTHS TOTAL (REPORTED)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BIRTHS_TOTAL_REPORTED("11640-0", "2.16.840.1.113883.6.1", "BIRTHS TOTAL (REPORTED)",
+			"BIRTHS TOTAL (REPORTED)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Body weight at birth</div>
 	 * <!-- @formatter:on -->
 	 */
-	BODY_WEIGHT_AT_BIRTH("8339-4", "2.16.840.1.113883.6.1", "Body weight at birth", "Body weight at birth", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BODY_WEIGHT_AT_BIRTH("8339-4", "2.16.840.1.113883.6.1", "Body weight at birth",
+			"Body weight at birth", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">DATE LAST MENSTRUAL PERIOD</div>
 	 * <!-- @formatter:on -->
 	 */
-	DATE_LAST_MENSTRUAL_PERIOD("8665-2", "2.16.840.1.113883.6.1", "DATE LAST MENSTRUAL PERIOD", "DATE LAST MENSTRUAL PERIOD", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	DATE_LAST_MENSTRUAL_PERIOD("8665-2", "2.16.840.1.113883.6.1", "DATE LAST MENSTRUAL PERIOD",
+			"DATE LAST MENSTRUAL PERIOD", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">DELIVERY DATE (CLINICAL ESTIMATE)</div>
 	 * <!-- @formatter:on -->
 	 */
-	DELIVERY_DATE_CLINICAL_ESTIMATE("11778-8", "2.16.840.1.113883.6.1", "DELIVERY DATE (CLINICAL ESTIMATE)", "DELIVERY DATE (CLINICAL ESTIMATE)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	DELIVERY_DATE_CLINICAL_ESTIMATE("11778-8", "2.16.840.1.113883.6.1",
+			"DELIVERY DATE (CLINICAL ESTIMATE)", "DELIVERY DATE (CLINICAL ESTIMATE)", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">DELIVERY DATE (ESTIMATED FROM LAST MENSTRUAL PERIOD)</div>
 	 * <!-- @formatter:on -->
 	 */
-	DELIVERY_DATE_ESTIMATED_FROM_LAST_MENSTRUAL_PERIOD("11779-6", "2.16.840.1.113883.6.1", "DELIVERY DATE (ESTIMATED FROM LAST MENSTRUAL PERIOD)", "DELIVERY DATE (ESTIMATED FROM LAST MENSTRUAL PERIOD)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	DELIVERY_DATE_ESTIMATED_FROM_LAST_MENSTRUAL_PERIOD("11779-6", "2.16.840.1.113883.6.1",
+			"DELIVERY DATE (ESTIMATED FROM LAST MENSTRUAL PERIOD)",
+			"DELIVERY DATE (ESTIMATED FROM LAST MENSTRUAL PERIOD)", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">DELIVERY DATE (ESTIMATED FROM OVULATION DATE)</div>
 	 * <!-- @formatter:on -->
 	 */
-	DELIVERY_DATE_ESTIMATED_FROM_OVULATION_DATE("11780-4", "2.16.840.1.113883.6.1", "DELIVERY DATE (ESTIMATED FROM OVULATION DATE)", "DELIVERY DATE (ESTIMATED FROM OVULATION DATE)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	DELIVERY_DATE_ESTIMATED_FROM_OVULATION_DATE("11780-4", "2.16.840.1.113883.6.1",
+			"DELIVERY DATE (ESTIMATED FROM OVULATION DATE)",
+			"DELIVERY DATE (ESTIMATED FROM OVULATION DATE)", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Delivery risk</div>
 	 * <!-- @formatter:on -->
 	 */
-	DELIVERY_RISK("42840-9", "2.16.840.1.113883.6.1", "Delivery risk", "Delivery risk", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	DELIVERY_RISK("42840-9", "2.16.840.1.113883.6.1", "Delivery risk", "Delivery risk",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">ECTOPIC PREGNANCY(REPORTED)</div>
 	 * <!-- @formatter:on -->
 	 */
-	ECTOPIC_PREGNANCY_REPORTED("33065-4", "2.16.840.1.113883.6.1", "ECTOPIC PREGNANCY(REPORTED)", "ECTOPIC PREGNANCY(REPORTED)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	ECTOPIC_PREGNANCY_REPORTED("33065-4", "2.16.840.1.113883.6.1", "ECTOPIC PREGNANCY(REPORTED)",
+			"ECTOPIC PREGNANCY(REPORTED)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">FETUS, GESTATIONAL AGE (CLINICAL ESTIMATE)</div>
 	 * <!-- @formatter:on -->
 	 */
-	FETUS_GESTATIONAL_AGE_CLINICAL_ESTIMATE("11884-4", "2.16.840.1.113883.6.1", "FETUS, GESTATIONAL AGE (CLINICAL ESTIMATE)", "FETUS, GESTATIONAL AGE (CLINICAL ESTIMATE)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	FETUS_GESTATIONAL_AGE_CLINICAL_ESTIMATE("11884-4", "2.16.840.1.113883.6.1",
+			"FETUS, GESTATIONAL AGE (CLINICAL ESTIMATE)",
+			"FETUS, GESTATIONAL AGE (CLINICAL ESTIMATE)", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">FETUS, GESTATIONAL AGE (ESTIMATED FROM LAST MENSTRUAL PERIOD)</div>
 	 * <!-- @formatter:on -->
 	 */
-	FETUS_GESTATIONAL_AGE_ESTIMATED_FROM_LAST_MENSTRUAL_PERIOD("11885-1", "2.16.840.1.113883.6.1", "FETUS, GESTATIONAL AGE (ESTIMATED FROM LAST MENSTRUAL PERIOD)", "FETUS, GESTATIONAL AGE (ESTIMATED FROM LAST MENSTRUAL PERIOD)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	FETUS_GESTATIONAL_AGE_ESTIMATED_FROM_LAST_MENSTRUAL_PERIOD("11885-1", "2.16.840.1.113883.6.1",
+			"FETUS, GESTATIONAL AGE (ESTIMATED FROM LAST MENSTRUAL PERIOD)",
+			"FETUS, GESTATIONAL AGE (ESTIMATED FROM LAST MENSTRUAL PERIOD)", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">FETUS, GESTATIONAL AGE (ESTIMATED FROM OVULATION DATE)</div>
 	 * <!-- @formatter:on -->
 	 */
-	FETUS_GESTATIONAL_AGE_ESTIMATED_FROM_OVULATION_DATE("11886-9", "2.16.840.1.113883.6.1", "FETUS, GESTATIONAL AGE (ESTIMATED FROM OVULATION DATE)", "FETUS, GESTATIONAL AGE (ESTIMATED FROM OVULATION DATE)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	FETUS_GESTATIONAL_AGE_ESTIMATED_FROM_OVULATION_DATE("11886-9", "2.16.840.1.113883.6.1",
+			"FETUS, GESTATIONAL AGE (ESTIMATED FROM OVULATION DATE)",
+			"FETUS, GESTATIONAL AGE (ESTIMATED FROM OVULATION DATE)", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">FETUS, GESTATIONAL AGE (ESTIMATED FROM SELECTED DELIVERY DATE)</div>
 	 * <!-- @formatter:on -->
 	 */
-	FETUS_GESTATIONAL_AGE_ESTIMATED_FROM_SELECTED_DELIVERY_DATE("11887-7", "2.16.840.1.113883.6.1", "FETUS, GESTATIONAL AGE (ESTIMATED FROM SELECTED DELIVERY DATE)", "FETUS, GESTATIONAL AGE (ESTIMATED FROM SELECTED DELIVERY DATE)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	FETUS_GESTATIONAL_AGE_ESTIMATED_FROM_SELECTED_DELIVERY_DATE("11887-7", "2.16.840.1.113883.6.1",
+			"FETUS, GESTATIONAL AGE (ESTIMATED FROM SELECTED DELIVERY DATE)",
+			"FETUS, GESTATIONAL AGE (ESTIMATED FROM SELECTED DELIVERY DATE)", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Gestational age</div>
 	 * <!-- @formatter:on -->
 	 */
-	GESTATIONAL_AGE("49051-6", "2.16.840.1.113883.6.1", "Gestational age", "Gestational age", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	GESTATIONAL_AGE("49051-6", "2.16.840.1.113883.6.1", "Gestational age", "Gestational age",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Labor duration</div>
 	 * <!-- @formatter:on -->
 	 */
-	LABOR_DURATION("32396-4", "2.16.840.1.113883.6.1", "Labor duration", "Labor duration", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	LABOR_DURATION("32396-4", "2.16.840.1.113883.6.1", "Labor duration", "Labor duration",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Labor risk</div>
 	 * <!-- @formatter:on -->
 	 */
-	LABOR_RISK("42839-1", "2.16.840.1.113883.6.1", "Labor risk", "Labor risk", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	LABOR_RISK("42839-1", "2.16.840.1.113883.6.1", "Labor risk", "Labor risk", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">MENSTRUAL STATUS</div>
 	 * <!-- @formatter:on -->
 	 */
-	MENSTRUAL_STATUS("8678-5", "2.16.840.1.113883.6.1", "MENSTRUAL STATUS", "MENSTRUAL STATUS", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	MENSTRUAL_STATUS("8678-5", "2.16.840.1.113883.6.1", "MENSTRUAL STATUS", "MENSTRUAL STATUS",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Multiple pregnancy</div>
 	 * <!-- @formatter:on -->
 	 */
-	MULTIPLE_PREGNANCY("45371-2", "2.16.840.1.113883.6.1", "Multiple pregnancy", "Multiple pregnancy", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	MULTIPLE_PREGNANCY("45371-2", "2.16.840.1.113883.6.1", "Multiple pregnancy",
+			"Multiple pregnancy", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Place of service</div>
 	 * <!-- @formatter:on -->
 	 */
-	PLACE_OF_SERVICE("52829-9", "2.16.840.1.113883.6.1", "Place of service", "Place of service", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	PLACE_OF_SERVICE("52829-9", "2.16.840.1.113883.6.1", "Place of service", "Place of service",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Pregnancies</div>
 	 * <!-- @formatter:on -->
 	 */
-	PREGNANCIES("11996-6", "2.16.840.1.113883.6.1", "Pregnancies", "Pregnancies", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	PREGNANCIES("11996-6", "2.16.840.1.113883.6.1", "Pregnancies", "Pregnancies", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">PREGNANCYSTATUS</div>
 	 * <!-- @formatter:on -->
 	 */
-	PREGNANCYSTATUS("11449-6", "2.16.840.1.113883.6.1", "PREGNANCYSTATUS", "PREGNANCYSTATUS", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	PREGNANCYSTATUS("11449-6", "2.16.840.1.113883.6.1", "PREGNANCYSTATUS", "PREGNANCYSTATUS",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Procedure9</div>
 	 * <!-- @formatter:on -->
 	 */
-	PROCEDURE9("29300-1", "2.16.840.1.113883.6.1", "Procedure9", "Procedure9", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	PROCEDURE9("29300-1", "2.16.840.1.113883.6.1", "Procedure9", "Procedure9", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Surgical operation note anesthesia</div>
 	 * <!-- @formatter:on -->
 	 */
-	SURGICAL_OPERATION_NOTE_ANESTHESIA("8722-1", "2.16.840.1.113883.6.1", "Surgical operation note anesthesia", "Surgical operation note anesthesia", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	SURGICAL_OPERATION_NOTE_ANESTHESIA("8722-1", "2.16.840.1.113883.6.1",
+			"Surgical operation note anesthesia", "Surgical operation note anesthesia",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -571,7 +619,9 @@ public enum PregnancyObservationCodes implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	PregnancyObservationCodes(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	PregnancyObservationCodes(String code, String codeSystem, String displayName,
+			String displayNameEn, String displayNameDe, String displayNameFr,
+			String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();

@@ -41,79 +41,99 @@ public enum VitalSignsObservation implements ValueSetEnumInterface {
 	 * <div class="en">Body height</div>
 	 * <!-- @formatter:on -->
 	 */
-	BODY_HEIGHT("8302-2", "2.16.840.1.113883.6.1", "Body height", "Body height", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BODY_HEIGHT("8302-2", "2.16.840.1.113883.6.1", "Body height", "Body height", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Body height --lying</div>
 	 * <!-- @formatter:on -->
 	 */
-	BODY_HEIGHT_LYING("8306-3", "2.16.840.1.113883.6.1", "Body height --lying", "Body height --lying", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BODY_HEIGHT_LYING("8306-3", "2.16.840.1.113883.6.1", "Body height --lying",
+			"Body height --lying", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Body temperature</div>
 	 * <!-- @formatter:on -->
 	 */
-	BODY_TEMPERATURE("8310-5", "2.16.840.1.113883.6.1", "Body temperature", "Body temperature", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BODY_TEMPERATURE("8310-5", "2.16.840.1.113883.6.1", "Body temperature", "Body temperature",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Body weight Measured</div>
 	 * <!-- @formatter:on -->
 	 */
-	BODY_WEIGHT_MEASURED("3141-9", "2.16.840.1.113883.6.1", "Body weight Measured", "Body weight Measured", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BODY_WEIGHT_MEASURED("3141-9", "2.16.840.1.113883.6.1", "Body weight Measured",
+			"Body weight Measured", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Diastolic blood pressure</div>
 	 * <!-- @formatter:on -->
 	 */
-	DIASTOLIC_BLOOD_PRESSURE("8462-4", "2.16.840.1.113883.6.1", "Diastolic blood pressure", "Diastolic blood pressure", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	DIASTOLIC_BLOOD_PRESSURE("8462-4", "2.16.840.1.113883.6.1", "Diastolic blood pressure",
+			"Diastolic blood pressure", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Head Occipital-frontal circumference by Tape measure</div>
 	 * <!-- @formatter:on -->
 	 */
-	HEAD_OCCIPITAL_FRONTAL_CIRCUMFERENCE_BY_TAPE_MEASURE("8287-5", "2.16.840.1.113883.6.1", "Head Occipital-frontal circumference by Tape measure", "Head Occipital-frontal circumference by Tape measure", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	HEAD_OCCIPITAL_FRONTAL_CIRCUMFERENCE_BY_TAPE_MEASURE("8287-5", "2.16.840.1.113883.6.1",
+			"Head Occipital-frontal circumference by Tape measure",
+			"Head Occipital-frontal circumference by Tape measure", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Heart rate</div>
 	 * <!-- @formatter:on -->
 	 */
-	HEART_RATE("8867-4", "2.16.840.1.113883.6.1", "Heart rate", "Heart rate", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	HEART_RATE("8867-4", "2.16.840.1.113883.6.1", "Heart rate", "Heart rate", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Oxygen/Inspired gas Respiratory system --on ventilator</div>
 	 * <!-- @formatter:on -->
 	 */
-	OXYGEN_INSPIRED_GAS_RESPIRATORY_SYSTEM_ON_VENTILATOR("19996-8", "2.16.840.1.113883.6.1", "Oxygen/Inspired gas Respiratory system --on ventilator", "Oxygen/Inspired gas Respiratory system --on ventilator", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	OXYGEN_INSPIRED_GAS_RESPIRATORY_SYSTEM_ON_VENTILATOR("19996-8", "2.16.840.1.113883.6.1",
+			"Oxygen/Inspired gas Respiratory system --on ventilator",
+			"Oxygen/Inspired gas Respiratory system --on ventilator", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Oxygen/Inspired gas setting</div>
 	 * <!-- @formatter:on -->
 	 */
-	OXYGEN_INSPIRED_GAS_SETTING("19994-3", "2.16.840.1.113883.6.1", "Oxygen/Inspired gas setting", "Oxygen/Inspired gas setting", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	OXYGEN_INSPIRED_GAS_SETTING("19994-3", "2.16.840.1.113883.6.1", "Oxygen/Inspired gas setting",
+			"Oxygen/Inspired gas setting", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Oxygen saturation (deprecated)</div>
 	 * <!-- @formatter:on -->
 	 */
-	OXYGEN_SATURATION_DEPRECATED("2710-2", "2.16.840.1.113883.6.1", "Oxygen saturation (deprecated)", "Oxygen saturation (deprecated)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	OXYGEN_SATURATION_DEPRECATED("2710-2", "2.16.840.1.113883.6.1",
+			"Oxygen saturation (deprecated)", "Oxygen saturation (deprecated)", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Oxygen saturation in Arterial blood by Pulse oximetry</div>
 	 * <!-- @formatter:on -->
 	 */
-	OXYGEN_SATURATION_IN_ARTERIAL_BLOOD_BY_PULSE_OXIMETRY("59408-5", "2.16.840.1.113883.6.1", "Oxygen saturation in Arterial blood by Pulse oximetry", "Oxygen saturation in Arterial blood by Pulse oximetry", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	OXYGEN_SATURATION_IN_ARTERIAL_BLOOD_BY_PULSE_OXIMETRY("59408-5", "2.16.840.1.113883.6.1",
+			"Oxygen saturation in Arterial blood by Pulse oximetry",
+			"Oxygen saturation in Arterial blood by Pulse oximetry", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Respiratory rate</div>
 	 * <!-- @formatter:on -->
 	 */
-	RESPIRATORY_RATE("9279-1", "2.16.840.1.113883.6.1", "Respiratory rate", "Respiratory rate", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	RESPIRATORY_RATE("9279-1", "2.16.840.1.113883.6.1", "Respiratory rate", "Respiratory rate",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Systolic blood pressure</div>
 	 * <!-- @formatter:on -->
 	 */
-	SYSTOLIC_BLOOD_PRESSURE("8480-6", "2.16.840.1.113883.6.1", "Systolic blood pressure", "Systolic blood pressure", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	SYSTOLIC_BLOOD_PRESSURE("8480-6", "2.16.840.1.113883.6.1", "Systolic blood pressure",
+			"Systolic blood pressure", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -324,7 +344,8 @@ public enum VitalSignsObservation implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	VitalSignsObservation(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	VitalSignsObservation(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();

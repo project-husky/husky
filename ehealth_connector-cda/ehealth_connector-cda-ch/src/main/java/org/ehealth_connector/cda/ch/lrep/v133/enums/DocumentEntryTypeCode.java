@@ -27,10 +27,10 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Type of document as per Annex 3  EPRO-FDHA.<br clear="none"/>      <br clear="none"/>The code defines a document’s type (e.g. discharge report, laboratory report). Each document type should be assigned to precisely one document class.<br clear="none"/>    </div>
- * <div class="de">Typ des Dokumentes (2.16.756.5.30.1.127.3.10.1.27) gemäss Anhang 3 der Verordnungen zum EPDG.<br clear="none"/>      <br clear="none"/>Der Code definiert den Typ eines Dokuments (z.B.  Austrittsbericht, Labor-Bericht). Jeder Dokumenten-Typ sollte genau einer Dokumentenklasse zugeordnet sein.<br clear="none"/>    </div>
- * <div class="fr">Type du document selon l'annexe 3 ODEP-DFI.<br clear="none"/>      <br clear="none"/>Le code définit le type de document (p. ex. rapport de sortie, rapport de laboratoire). Chaque type de document doit être  associé à une seule classification.<br clear="none"/>    </div>
- * <div class="it">Tipo di documento secondo l'allegato 3 OCIP-DFI.<br clear="none"/>      <br clear="none"/>Il codice definisce il tipo di documento (p. es. rapporto di dimissione, rapporto di laboratorio). Ciascun tipo di documento dovrebbe essere associato a una sola classe di documenti.<br clear="none"/>    </div>
+ * <div class="en">Type of document as per Annex 3  EPRO-FDHA.<br clear="none"/><br clear="none"/>The code defines a document’s type (e.g. discharge report, laboratory report). Each document type should be assigned to precisely one document class.<br clear="none"/></div>
+ * <div class="de">Typ des Dokumentes (2.16.756.5.30.1.127.3.10.1.27) gemäss Anhang 3 der Verordnungen zum EPDG.<br clear="none"/><br clear="none"/>Der Code definiert den Typ eines Dokuments (z.B.  Austrittsbericht, Labor-Bericht). Jeder Dokumenten-Typ sollte genau einer Dokumentenklasse zugeordnet sein.<br clear="none"/></div>
+ * <div class="fr">Type du document selon l'annexe 3 ODEP-DFI.<br clear="none"/><br clear="none"/>Le code définit le type de document (p. ex. rapport de sortie, rapport de laboratoire). Chaque type de document doit être  associé à une seule classification.<br clear="none"/></div>
+ * <div class="it">Tipo di documento secondo l'allegato 3 OCIP-DFI.<br clear="none"/><br clear="none"/>Il codice definisce il tipo di documento (p. es. rapporto di dimissione, rapporto di laboratorio). Ciascun tipo di documento dovrebbe essere associato a una sola classe di documenti.<br clear="none"/></div>
  * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
@@ -44,7 +44,8 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">TODO</div>
 	 * <!-- @formatter:on -->
 	 */
-	ALLERGY_RECORD("722446000", "2.16.840.1.113883.6.96", "Allergy record (record artifact)", "Allergy record", "TODO", "TODO", "TODO"),
+	ALLERGY_RECORD("722446000", "2.16.840.1.113883.6.96", "Allergy record (record artifact)",
+			"Allergy record", "TODO", "TODO", "TODO"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Clinical Management plan</div>
@@ -53,7 +54,9 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">TODO</div>
 	 * <!-- @formatter:on -->
 	 */
-	CLINICAL_MANAGEMENT_PLAN("737427001", "2.16.840.1.113883.6.96", "Clinical Management plan (record artifact)", "Clinical Management plan", "TODO", "TODO", "TODO"),
+	CLINICAL_MANAGEMENT_PLAN("737427001", "2.16.840.1.113883.6.96",
+			"Clinical Management plan (record artifact)", "Clinical Management plan", "TODO",
+			"TODO", "TODO"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Consultation report</div>
@@ -62,7 +65,9 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Rapporto di consultazione</div>
 	 * <!-- @formatter:on -->
 	 */
-	CONSULTATION_REPORT("371530004", "2.16.840.1.113883.6.96", "Clinical consultation report (record artifact)", "Consultation report", "Konsultationsbericht", "Rapport de consultation", "Rapporto di consultazione"),
+	CONSULTATION_REPORT("371530004", "2.16.840.1.113883.6.96",
+			"Clinical consultation report (record artifact)", "Consultation report",
+			"Konsultationsbericht", "Rapport de consultation", "Rapporto di consultazione"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Discharge summary</div>
@@ -71,7 +76,9 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Rapporto/lettera d'uscita</div>
 	 * <!-- @formatter:on -->
 	 */
-	DISCHARGE_SUMMARY("373942005", "2.16.840.1.113883.6.96", "Discharge summary (record artifact)", "Discharge summary", "Austrittsbericht", "Lettre de sortie", "Rapporto/lettera d'uscita"),
+	DISCHARGE_SUMMARY("373942005", "2.16.840.1.113883.6.96", "Discharge summary (record artifact)",
+			"Discharge summary", "Austrittsbericht", "Lettre de sortie",
+			"Rapporto/lettera d'uscita"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Emergency department record</div>
@@ -80,7 +87,9 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">TODO</div>
 	 * <!-- @formatter:on -->
 	 */
-	EMERGENCY_DEPARTMENT_RECORD("445300006", "2.16.840.1.113883.6.96", "Emergency department record (record artifact)", "Emergency department record", "TODO", "TODO", "TODO"),
+	EMERGENCY_DEPARTMENT_RECORD("445300006", "2.16.840.1.113883.6.96",
+			"Emergency department record (record artifact)", "Emergency department record", "TODO",
+			"TODO", "TODO"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">History and physical report</div>
@@ -89,7 +98,9 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">TODO</div>
 	 * <!-- @formatter:on -->
 	 */
-	HISTORY_AND_PHYSICAL_REPORT("371529009", "2.16.840.1.113883.6.96", "History and physical report (record artifact)", "History and physical report", "TODO", "TODO", "TODO"),
+	HISTORY_AND_PHYSICAL_REPORT("371529009", "2.16.840.1.113883.6.96",
+			"History and physical report (record artifact)", "History and physical report", "TODO",
+			"TODO", "TODO"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Image reference</div>
@@ -98,7 +109,9 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Referenza nei dati immagine</div>
 	 * <!-- @formatter:on -->
 	 */
-	IMAGE_REFERENCE("900000000000471006", "2.16.840.1.113883.6.96", "Image reference (foundation metadata concept)", "Image reference", "Referenz auf Bilddaten", "Référence d'Image", "Referenza nei dati immagine"),
+	IMAGE_REFERENCE("900000000000471006", "2.16.840.1.113883.6.96",
+			"Image reference (foundation metadata concept)", "Image reference",
+			"Referenz auf Bilddaten", "Référence d'Image", "Referenza nei dati immagine"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Imaging Order</div>
@@ -107,7 +120,8 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">TODO</div>
 	 * <!-- @formatter:on -->
 	 */
-	IMAGING_ORDER("2161000195103", "2.16.756.5.30.1.127.3.4", "Imaging order (record articact)", "Imaging Order", "TODO", "TODO", "TODO"),
+	IMAGING_ORDER("2161000195103", "2.16.756.5.30.1.127.3.4", "Imaging order (record articact)",
+			"Imaging Order", "TODO", "TODO", "TODO"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Imaging report</div>
@@ -116,7 +130,8 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">TODO</div>
 	 * <!-- @formatter:on -->
 	 */
-	IMAGING_REPORT("4201000179104", "2.16.840.1.113883.6.96", "Imaging report (record artifact)", "Imaging report", "TODO", "TODO", "TODO"),
+	IMAGING_REPORT("4201000179104", "2.16.840.1.113883.6.96", "Imaging report (record artifact)",
+			"Imaging report", "TODO", "TODO", "TODO"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Immunization record</div>
@@ -125,7 +140,10 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Certificato/libretto di vaccinazione</div>
 	 * <!-- @formatter:on -->
 	 */
-	IMMUNIZATION_RECORD("41000179103", "2.16.840.1.113883.6.96", "Immunization record (record artifact)", "Immunization record", "Impfausweis/Impfdossier", "Certificat / carnet de vaccination", "Certificato/libretto di vaccinazione"),
+	IMMUNIZATION_RECORD("41000179103", "2.16.840.1.113883.6.96",
+			"Immunization record (record artifact)", "Immunization record",
+			"Impfausweis/Impfdossier", "Certificat / carnet de vaccination",
+			"Certificato/libretto di vaccinazione"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Laboratory Order</div>
@@ -134,7 +152,8 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">TODO</div>
 	 * <!-- @formatter:on -->
 	 */
-	LABORATORY_ORDER("721965002", "2.16.840.1.113883.6.96", "Laboratory Order (record artifact)", "Laboratory Order", "TODO", "TODO", "TODO"),
+	LABORATORY_ORDER("721965002", "2.16.840.1.113883.6.96", "Laboratory Order (record artifact)",
+			"Laboratory Order", "TODO", "TODO", "TODO"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Laboratory report</div>
@@ -143,7 +162,9 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Referto di laboratorio</div>
 	 * <!-- @formatter:on -->
 	 */
-	LABORATORY_REPORT("4241000179101", "2.16.840.1.113883.6.96", "Laboratory report (record artifact)", "Laboratory report", "Labor-Befund", "Résultat de laboratoire", "Referto di laboratorio"),
+	LABORATORY_REPORT("4241000179101", "2.16.840.1.113883.6.96",
+			"Laboratory report (record artifact)", "Laboratory report", "Labor-Befund",
+			"Résultat de laboratoire", "Referto di laboratorio"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Medical certificate</div>
@@ -152,7 +173,8 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">TODO</div>
 	 * <!-- @formatter:on -->
 	 */
-	MEDICAL_CERTIFICATE("772786005", "2.16.840.1.113883.6.96", "Medical certificate (record artifact)", "Medical certificate", "TODO", "TODO", "TODO"),
+	MEDICAL_CERTIFICATE("772786005", "2.16.840.1.113883.6.96",
+			"Medical certificate (record artifact)", "Medical certificate", "TODO", "TODO", "TODO"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Medical Prescription record</div>
@@ -161,7 +183,9 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">TODO</div>
 	 * <!-- @formatter:on -->
 	 */
-	MEDICAL_PRESCRIPTION_RECORD("761938008", "2.16.840.1.113883.6.96", "Medical Prescription record (record artifact)", "Medical Prescription record", "TODO", "TODO", "TODO"),
+	MEDICAL_PRESCRIPTION_RECORD("761938008", "2.16.840.1.113883.6.96",
+			"Medical Prescription record (record artifact)", "Medical Prescription record", "TODO",
+			"TODO", "TODO"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Medication summary document</div>
@@ -170,7 +194,9 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">TODO</div>
 	 * <!-- @formatter:on -->
 	 */
-	MEDICATION_SUMMARY_DOCUMENT("721912009", "2.16.840.1.113883.6.96", "Medication summary document (record artifact)", "Medication summary document", "TODO", "TODO", "TODO"),
+	MEDICATION_SUMMARY_DOCUMENT("721912009", "2.16.840.1.113883.6.96",
+			"Medication summary document (record artifact)", "Medication summary document", "TODO",
+			"TODO", "TODO"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Non-drug prescription</div>
@@ -179,7 +205,10 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Richiesta di prestazione sanitaria</div>
 	 * <!-- @formatter:on -->
 	 */
-	NON_DRUG_PRESCRIPTION("765492005", "2.16.840.1.113883.6.96", "Non-drug prescription record (record artifact)", "Non-drug prescription", "Nicht-Arzneimittelbezogene Verordnung", "Ordonnance nonmédicamenteuse", "Richiesta di prestazione sanitaria"),
+	NON_DRUG_PRESCRIPTION("765492005", "2.16.840.1.113883.6.96",
+			"Non-drug prescription record (record artifact)", "Non-drug prescription",
+			"Nicht-Arzneimittelbezogene Verordnung", "Ordonnance nonmédicamenteuse",
+			"Richiesta di prestazione sanitaria"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Nursing care plan</div>
@@ -188,7 +217,8 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">TODO</div>
 	 * <!-- @formatter:on -->
 	 */
-	NURSING_CARE_PLAN("773130005", "2.16.840.1.113883.6.96", "Nursing care plan (record artifact)", "Nursing care plan", "TODO", "TODO", "TODO"),
+	NURSING_CARE_PLAN("773130005", "2.16.840.1.113883.6.96", "Nursing care plan (record artifact)",
+			"Nursing care plan", "TODO", "TODO", "TODO"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Operative report</div>
@@ -197,7 +227,8 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Referto operatorio</div>
 	 * <!-- @formatter:on -->
 	 */
-	OPERATIVE_REPORT("371526002", "2.16.840.1.113883.6.96", "Operative report (record artifact)", "Operative report", "OP-Bericht", "Protocole opératoire", "Referto operatorio"),
+	OPERATIVE_REPORT("371526002", "2.16.840.1.113883.6.96", "Operative report (record artifact)",
+			"Operative report", "OP-Bericht", "Protocole opératoire", "Referto operatorio"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Pathology order</div>
@@ -206,7 +237,8 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">TODO</div>
 	 * <!-- @formatter:on -->
 	 */
-	PATHOLOGY_ORDER("721966001", "2.16.840.1.113883.6.96", "Pathology order (record artifact", "Pathology order", "TODO", "TODO", "TODO"),
+	PATHOLOGY_ORDER("721966001", "2.16.840.1.113883.6.96", "Pathology order (record artifact",
+			"Pathology order", "TODO", "TODO", "TODO"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Pathology report</div>
@@ -215,7 +247,8 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">TODO</div>
 	 * <!-- @formatter:on -->
 	 */
-	PATHOLOGY_REPORT("371528001", "2.16.840.1.113883.6.96", "Pathology report (record artifact)", "Pathology report", "TODO", "TODO", "TODO"),
+	PATHOLOGY_REPORT("371528001", "2.16.840.1.113883.6.96", "Pathology report (record artifact)",
+			"Pathology report", "TODO", "TODO", "TODO"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Professional allied to medicine clinical report</div>
@@ -224,7 +257,9 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">TODO</div>
 	 * <!-- @formatter:on -->
 	 */
-	PROFESSIONAL_ALLIED_TO_MEDICINE_CLINICAL_REPORT("445418005", "2.16.840.1.113883.6.96", "Professional allied to medicine clinical report (record artifact)", "Professional allied to medicine clinical report", "TODO", "TODO", "TODO"),
+	PROFESSIONAL_ALLIED_TO_MEDICINE_CLINICAL_REPORT("445418005", "2.16.840.1.113883.6.96",
+			"Professional allied to medicine clinical report (record artifact)",
+			"Professional allied to medicine clinical report", "TODO", "TODO", "TODO"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Progress note</div>
@@ -233,7 +268,8 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Diario clinico</div>
 	 * <!-- @formatter:on -->
 	 */
-	PROGRESS_NOTE("371532007", "2.16.840.1.113883.6.96", "Progress report (record artifact)", "Progress note", "Klinisches Verlaufsblatt", "Note de suite", "Diario clinico"),
+	PROGRESS_NOTE("371532007", "2.16.840.1.113883.6.96", "Progress report (record artifact)",
+			"Progress note", "Klinisches Verlaufsblatt", "Note de suite", "Diario clinico"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Record artifact</div>
@@ -242,7 +278,8 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">TODO</div>
 	 * <!-- @formatter:on -->
 	 */
-	RECORD_ARTIFACT("419891008", "2.16.840.1.113883.6.96", "Record artifact (record artifact)", "Record artifact", "TODO", "TODO", "TODO"),
+	RECORD_ARTIFACT("419891008", "2.16.840.1.113883.6.96", "Record artifact (record artifact)",
+			"Record artifact", "TODO", "TODO", "TODO"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Rehabilitation care plan</div>
@@ -251,7 +288,9 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">TODO</div>
 	 * <!-- @formatter:on -->
 	 */
-	REHABILITATION_CARE_PLAN("736055001", "2.16.840.1.113883.6.96", "Rehabilitation care plan (record articact)", "Rehabilitation care plan", "TODO", "TODO", "TODO"),
+	REHABILITATION_CARE_PLAN("736055001", "2.16.840.1.113883.6.96",
+			"Rehabilitation care plan (record articact)", "Rehabilitation care plan", "TODO",
+			"TODO", "TODO"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Transfer summary report</div>
@@ -260,7 +299,9 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Rapporto di trasferimento</div>
 	 * <!-- @formatter:on -->
 	 */
-	TRANSFER_SUMMARY_REPORT("371535009", "2.16.840.1.113883.6.96", "Transfer summary report (record artifact)", "Transfer summary report", "Verlegungsbericht", "Rapport de transfert", "Rapporto di trasferimento");
+	TRANSFER_SUMMARY_REPORT("371535009", "2.16.840.1.113883.6.96",
+			"Transfer summary report (record artifact)", "Transfer summary report",
+			"Verlegungsbericht", "Rapport de transfert", "Rapporto di trasferimento");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -630,7 +671,8 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	DocumentEntryTypeCode(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	DocumentEntryTypeCode(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();

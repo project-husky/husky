@@ -20,20 +20,21 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.22
- * Template description: A laboratory result can be supplemented with any number of previous results, if this information is important. Previous laboratory results MUST be associated to the same patient, the same test, the same procedure, and the same test kit, otherwise they are NOT ALLOWED, here.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.22 Template
+ * description: A laboratory result can be supplemented with any number of
+ * previous results, if this information is important. Previous laboratory
+ * results MUST be associated to the same patient, the same test, the same
+ * procedure, and the same test kit, otherwise they are NOT ALLOWED, here.
  */
-public class ChpalmEntryPreviousObservation extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
+public class ChpalmEntryPreviousObservation
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
 	public ChpalmEntryPreviousObservation() {
 		super.getClassCode().add("OBS");
-		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.22"));
 		super.setStatusCode(createHl7StatusCodeFixedValue());
-	// chpalm_entry_PreviousObservation/hl7:observation:cs classCode = "OBS";
-	// chpalm_entry_PreviousObservation/hl7:observation:cs moodCode = "EVN";
-	// chpalm_entry_PreviousObservation/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.22";
-	// chpalm_entry_PreviousObservation/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusCompleted
 	}
 
 	/**
@@ -48,9 +49,11 @@ public class ChpalmEntryPreviousObservation extends org.ehealth_connector.common
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -58,24 +61,24 @@ public class ChpalmEntryPreviousObservation extends org.ehealth_connector.common
 	}
 
 	/**
-	 * Gets the hl7Code
-	 * MUST contain the same code as the current laboratory result.
+	 * Gets the hl7Code MUST contain the same code as the current laboratory
+	 * result.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
 		return code;
 	}
 
 	/**
-	 * Gets the hl7EffectiveTime
-	 * Timestamp of the findings (physiologically relevant time) of this previous result. Accuracy of the value: Date and time with hour and minute.
+	 * Gets the hl7EffectiveTime Timestamp of the findings (physiologically
+	 * relevant time) of this previous result. Accuracy of the value: Date and
+	 * time with hour and minute.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.IVLTS getHl7EffectiveTime() {
 		return effectiveTime;
 	}
 
 	/**
-	 * Gets the hl7StatusCode
-	 * MUST be set to 'completed'.
+	 * Gets the hl7StatusCode MUST be set to 'completed'.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
 		return statusCode;
@@ -89,32 +92,31 @@ public class ChpalmEntryPreviousObservation extends org.ehealth_connector.common
 	}
 
 	/**
-	 * Gets the hl7Value
-	 * The previous result obtained for this test.
+	 * Gets the hl7Value The previous result obtained for this test.
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.ANY> getHl7Value() {
 		return value;
 	}
 
 	/**
-	 * Sets the hl7Code
-	 * MUST contain the same code as the current laboratory result.
+	 * Sets the hl7Code MUST contain the same code as the current laboratory
+	 * result.
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CD value) {
 		this.code = value;
 	}
 
 	/**
-	 * Sets the hl7EffectiveTime
-	 * Timestamp of the findings (physiologically relevant time) of this previous result. Accuracy of the value: Date and time with hour and minute.
+	 * Sets the hl7EffectiveTime Timestamp of the findings (physiologically
+	 * relevant time) of this previous result. Accuracy of the value: Date and
+	 * time with hour and minute.
 	 */
 	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
 		this.effectiveTime = value;
 	}
 
 	/**
-	 * Sets the hl7StatusCode
-	 * MUST be set to 'completed'.
+	 * Sets the hl7StatusCode MUST be set to 'completed'.
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
 		this.statusCode = value;
@@ -129,8 +131,7 @@ public class ChpalmEntryPreviousObservation extends org.ehealth_connector.common
 	}
 
 	/**
-	 * Sets the hl7Value
-	 * The previous result obtained for this test.
+	 * Sets the hl7Value The previous result obtained for this test.
 	 */
 	public void setHl7Value(org.ehealth_connector.common.hl7cdar2.ANY value) {
 		getValue().clear();

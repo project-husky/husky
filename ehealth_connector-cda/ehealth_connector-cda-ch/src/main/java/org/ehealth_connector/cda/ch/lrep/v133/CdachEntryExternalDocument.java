@@ -20,33 +20,32 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.29
- * Template description: External documents can be included in a CDA document, either by means of references or by means of XML embedding.This template defines a reference to an external document, only.Embedded documents can be created with the template Observation Media (or derived templates).
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.29 Template
+ * description: External documents can be included in a CDA document, either by
+ * means of references or by means of XML embedding.This template defines a
+ * reference to an external document, only.Embedded documents can be created
+ * with the template Observation Media (or derived templates).
  *
  * Element description: Reference to an external document.
  */
-public class CdachEntryExternalDocument extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ExternalDocument {
+public class CdachEntryExternalDocument
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ExternalDocument {
 
 	public CdachEntryExternalDocument() {
 		super.setClassCode("DOC");
 		super.getMoodCode().add("EVN");
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.29"));
-	// cdach_entry_ExternalDocument/hl7:externalDocument:cs classCode = "DOC";
-	// cdach_entry_ExternalDocument/hl7:externalDocument:cs moodCode = "EVN";
-	// cdach_entry_ExternalDocument/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.29";
 	}
 
 	/**
-	 * Adds a hl7Id
-	 * MUST contain the id of the external document.
+	 * Adds a hl7Id MUST contain the id of the external document.
 	 */
 	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		getId().add(value);
 	}
 
 	/**
-	 * Adds a hl7Id
-	 * MUST contain the id of the external document.
+	 * Adds a hl7Id MUST contain the id of the external document.
 	 */
 	public void clearHl7Id() {
 		getId().clear();
@@ -55,9 +54,11 @@ public class CdachEntryExternalDocument extends org.ehealth_connector.common.hl7
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -72,8 +73,10 @@ public class CdachEntryExternalDocument extends org.ehealth_connector.common.hl7
 	}
 
 	/**
-	 * Gets the hl7Text
-	 * The external document MUST be declared as a link.The link MUST be declared as an URL, which points to the referenced document.The same link MUST be used in the human readable part (narrative text) using the &lt;linkHTML&gt; element.
+	 * Gets the hl7Text The external document MUST be declared as a link.The
+	 * link MUST be declared as an URL, which points to the referenced
+	 * document.The same link MUST be used in the human readable part (narrative
+	 * text) using the &lt;linkHTML&gt; element.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ED getHl7Text() {
 		return text;
@@ -88,8 +91,10 @@ public class CdachEntryExternalDocument extends org.ehealth_connector.common.hl7
 	}
 
 	/**
-	 * Sets the hl7Text
-	 * The external document MUST be declared as a link.The link MUST be declared as an URL, which points to the referenced document.The same link MUST be used in the human readable part (narrative text) using the &lt;linkHTML&gt; element.
+	 * Sets the hl7Text The external document MUST be declared as a link.The
+	 * link MUST be declared as an URL, which points to the referenced
+	 * document.The same link MUST be used in the human readable part (narrative
+	 * text) using the &lt;linkHTML&gt; element.
 	 */
 	public void setHl7Text(org.ehealth_connector.common.hl7cdar2.ED value) {
 		this.text = value;

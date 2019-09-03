@@ -41,13 +41,15 @@ public enum ActStatusAbortedCompleted implements ValueSetEnumInterface {
 	 * <div class="en">aborted</div>
 	 * <!-- @formatter:on -->
 	 */
-	ABORTED("aborted", "2.16.840.1.113883.5.14", "aborted", "aborted", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	ABORTED("aborted", "2.16.840.1.113883.5.14", "aborted", "aborted", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">completed</div>
 	 * <!-- @formatter:on -->
 	 */
-	COMPLETED("completed", "2.16.840.1.113883.5.14", "completed", "completed", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	COMPLETED("completed", "2.16.840.1.113883.5.14", "completed", "completed", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -181,7 +183,9 @@ public enum ActStatusAbortedCompleted implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	ActStatusAbortedCompleted(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	ActStatusAbortedCompleted(String code, String codeSystem, String displayName,
+			String displayNameEn, String displayNameDe, String displayNameFr,
+			String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();

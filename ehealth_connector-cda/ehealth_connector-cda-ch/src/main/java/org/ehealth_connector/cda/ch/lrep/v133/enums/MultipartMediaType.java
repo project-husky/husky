@@ -41,7 +41,9 @@ public enum MultipartMediaType implements ValueSetEnumInterface {
 	 * <div class="en">CDA Level 1 Multipart</div>
 	 * <!-- @formatter:on -->
 	 */
-	CDA_LEVEL_1_MULTIPART("multipart/x-hl7-cda-level-one", "2.16.840.1.113883.5.79", "CDA Level 1 Multipart", "CDA Level 1 Multipart", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	CDA_LEVEL_1_MULTIPART("multipart/x-hl7-cda-level-one", "2.16.840.1.113883.5.79",
+			"CDA Level 1 Multipart", "CDA Level 1 Multipart", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -168,7 +170,8 @@ public enum MultipartMediaType implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	MultipartMediaType(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	MultipartMediaType(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();

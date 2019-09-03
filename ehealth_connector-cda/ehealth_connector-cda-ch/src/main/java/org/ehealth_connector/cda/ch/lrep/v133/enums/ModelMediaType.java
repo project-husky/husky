@@ -41,7 +41,8 @@ public enum ModelMediaType implements ValueSetEnumInterface {
 	 * <div class="en">VRML Model</div>
 	 * <!-- @formatter:on -->
 	 */
-	VRML_MODEL("model/vrml", "2.16.840.1.113883.5.79", "VRML Model", "VRML Model", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	VRML_MODEL("model/vrml", "2.16.840.1.113883.5.79", "VRML Model", "VRML Model", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -168,7 +169,8 @@ public enum ModelMediaType implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	ModelMediaType(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	ModelMediaType(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();

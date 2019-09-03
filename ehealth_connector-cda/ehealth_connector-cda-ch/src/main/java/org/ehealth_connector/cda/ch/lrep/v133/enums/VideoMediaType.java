@@ -41,13 +41,15 @@ public enum VideoMediaType implements ValueSetEnumInterface {
 	 * <div class="en">MPEG Video</div>
 	 * <!-- @formatter:on -->
 	 */
-	MPEG_VIDEO("video/mpeg", "2.16.840.1.113883.5.79", "MPEG Video", "MPEG Video", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	MPEG_VIDEO("video/mpeg", "2.16.840.1.113883.5.79", "MPEG Video", "MPEG Video", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">X-AVI Video</div>
 	 * <!-- @formatter:on -->
 	 */
-	X_AVI_VIDEO("video/x-avi", "2.16.840.1.113883.5.79", "X-AVI Video", "X-AVI Video", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	X_AVI_VIDEO("video/x-avi", "2.16.840.1.113883.5.79", "X-AVI Video", "X-AVI Video",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -181,7 +183,8 @@ public enum VideoMediaType implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	VideoMediaType(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	VideoMediaType(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();

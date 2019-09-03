@@ -20,42 +20,44 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.56
- * Template description: A LOINC based document type of a CDA document instance including a translation to the Swiss EPR XDS.b metadata.
- * - Multidisciplinary laboratory findings:The LOINC code of the document MUST read: 11502-2 (LABORATORY REPORT.TOTAL)
- * - Laboratory reports of a single laboratory discipline:The LOINC code of the document MUST be taken from the value set 'Laboratory Specialties'
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.56 Template
+ * description: A LOINC based document type of a CDA document instance including
+ * a translation to the Swiss EPR XDS.b metadata. - Multidisciplinary laboratory
+ * findings:The LOINC code of the document MUST read: 11502-2 (LABORATORY
+ * REPORT.TOTAL) - Laboratory reports of a single laboratory discipline:The
+ * LOINC code of the document MUST be taken from the value set 'Laboratory
+ * Specialties'
  *
- * Element description: A LOINC based document type of a CDA document instance including a translation to the Swiss EPR XDS.b metadata.
- * - Multidisciplinary laboratory findings:The LOINC code of the document MUST read: 11502-2 (LABORATORY REPORT.TOTAL)
- * - Laboratory reports of a single laboratory discipline:The LOINC code of the document MUST be taken from the value-set 'Laboratory Specialties'
+ * Element description: A LOINC based document type of a CDA document instance
+ * including a translation to the Swiss EPR XDS.b metadata. - Multidisciplinary
+ * laboratory findings:The LOINC code of the document MUST read: 11502-2
+ * (LABORATORY REPORT.TOTAL) - Laboratory reports of a single laboratory
+ * discipline:The LOINC code of the document MUST be taken from the value-set
+ * 'Laboratory Specialties'
  */
 public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl7cdar2.CE {
 
 	public CdachlrepHeaderDocumentCode() {
 		super.setCodeSystem("2.16.840.1.113883.6.1");
 		super.setCodeSystemName("LOINC");
-		super.getTranslation().add(createHl7TranslationFixedValue("4241000179101", "2.16.840.1.113883.6.96", "SNOMED CT", "Laboratory report"));
-	// cdachlrep_header_DocumentCode/hl7:code:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.1"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.LaboratorySpecialties
-	// cdachlrep_header_DocumentCode/hl7:code:cs valueSet = valueSet("1.3.6.1.4.1.19376.1.3.11.1"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.LaboratorySpecialties
-	// cdachlrep_header_DocumentCode/hl7:code:oid codeSystem = "2.16.840.1.113883.6.1";
-	// cdachlrep_header_DocumentCode/hl7:code:st codeSystemName = "LOINC";
-	// cdachlrep_header_DocumentCode/hl7:code:st displayName = valueSet("2.16.756.5.30.1.127.3.10.1.27"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.DocumentEntryTypeCode
-	// cdachlrep_header_DocumentCode/hl7:translation:st displayName = valueSet("2.16.756.5.30.1.127.3.10.1.27"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.DocumentEntryTypeCode
-	// cdachlrep_header_DocumentCode/hl7:translation:cs code = "4241000179101";
-	// cdachlrep_header_DocumentCode/hl7:translation:oid codeSystem = "2.16.840.1.113883.6.96";
-	// cdachlrep_header_DocumentCode/hl7:translation:st codeSystemName = "SNOMED CT";
-	// cdachlrep_header_DocumentCode/hl7:translation:st displayName = "Laboratory report";
+		super.getTranslation().add(createHl7TranslationFixedValue("4241000179101",
+				"2.16.840.1.113883.6.96", "SNOMED CT", "Laboratory report"));
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Translation
 	 *
-	 * @param code the desired fixed value for this argument.
-	 * @param codeSystem the desired fixed value for this argument.
-	 * @param codeSystemName the desired fixed value for this argument.
-	 * @param displayName the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
+	 * @param codeSystem
+	 *            the desired fixed value for this argument.
+	 * @param codeSystemName
+	 *            the desired fixed value for this argument.
+	 * @param displayName
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CD createHl7TranslationFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7TranslationFixedValue(
+			String code, String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.setCode(code);
@@ -66,16 +68,16 @@ public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl
 	}
 
 	/**
-	 * Gets the hl7Translation
-	 * The translation to the Swiss EPR XDS.b metadata attribute typeCode.
+	 * Gets the hl7Translation The translation to the Swiss EPR XDS.b metadata
+	 * attribute typeCode.
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.CD> getHl7Translation() {
 		return translation;
 	}
 
 	/**
-	 * Sets the hl7Translation
-	 * The translation to the Swiss EPR XDS.b metadata attribute typeCode.
+	 * Sets the hl7Translation The translation to the Swiss EPR XDS.b metadata
+	 * attribute typeCode.
 	 */
 	public void setHl7Translation(org.ehealth_connector.common.hl7cdar2.CD value) {
 		getTranslation().clear();

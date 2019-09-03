@@ -27,10 +27,10 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Document confidentiality as per Annex 3  EPRO-FDHA.<br clear="none"/>    </div>
- * <div class="de">Vertraulichkeitsstufe gemäss Anhang 3 EPDV-EDI.<br clear="none"/>    </div>
- * <div class="fr">Niveau de confidentialité selon l'annexe 3 ODEP-DFI.<br clear="none"/>    </div>
- * <div class="it">Grado di riservatezza secondo l'allegato 3 OCIP-DFI.<br clear="none"/>    </div>
+ * <div class="en">Document confidentiality as per Annex 3  EPRO-FDHA.<br clear="none"/></div>
+ * <div class="de">Vertraulichkeitsstufe gemäss Anhang 3 EPDV-EDI.<br clear="none"/></div>
+ * <div class="fr">Niveau de confidentialité selon l'annexe 3 ODEP-DFI.<br clear="none"/></div>
+ * <div class="it">Grado di riservatezza secondo l'allegato 3 OCIP-DFI.<br clear="none"/></div>
  * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
@@ -44,7 +44,9 @@ public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
 	 * <div class="it">Normalmente accessibile</div>
 	 * <!-- @formatter:on -->
 	 */
-	NORMALLY_ACCESSIBLE("17621005", "2.16.840.1.113883.6.96", "Normal (qualifier value)", "Normally accessible", "Normal zugänglich", "Normalement accessible", "Normalmente accessibile"),
+	NORMALLY_ACCESSIBLE("17621005", "2.16.840.1.113883.6.96", "Normal (qualifier value)",
+			"Normally accessible", "Normal zugänglich", "Normalement accessible",
+			"Normalmente accessibile"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Restricted accessible</div>
@@ -53,7 +55,9 @@ public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
 	 * <div class="it">Accessibile limitato</div>
 	 * <!-- @formatter:on -->
 	 */
-	RESTRICTED_ACCESSIBLE("263856008", "2.16.840.1.113883.6.96", "Restricted (qualifier value)", "Restricted accessible", "Eingeschränkt zugänglich", "Restreint accessible", "Accessibile limitato"),
+	RESTRICTED_ACCESSIBLE("263856008", "2.16.840.1.113883.6.96", "Restricted (qualifier value)",
+			"Restricted accessible", "Eingeschränkt zugänglich", "Restreint accessible",
+			"Accessibile limitato"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Secret</div>
@@ -62,7 +66,8 @@ public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
 	 * <div class="it">Segreto</div>
 	 * <!-- @formatter:on -->
 	 */
-	SECRET("1141000195107", "2.16.756.5.30.1.127.3.4", "Secret (qualifier value)", "Secret", "Geheim", "Confidentiel", "Segreto");
+	SECRET("1141000195107", "2.16.756.5.30.1.127.3.4", "Secret (qualifier value)", "Secret",
+			"Geheim", "Confidentiel", "Segreto");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -212,7 +217,9 @@ public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	DocumentEntryConfidentialityCode(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	DocumentEntryConfidentialityCode(String code, String codeSystem, String displayName,
+			String displayNameEn, String displayNameDe, String displayNameFr,
+			String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();

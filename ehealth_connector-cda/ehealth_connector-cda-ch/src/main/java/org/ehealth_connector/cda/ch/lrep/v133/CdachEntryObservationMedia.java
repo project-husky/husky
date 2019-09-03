@@ -20,39 +20,35 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.83
- * Template description: Multimedia objects (e.g., PDF representations of the CDA document, pictures, Reiber diagrams, electrophoresis, etc.) MAY be integrated into a CDA document, either by reference to external multimedia objects or by means of XML embedding.This template defines only the embedding of multimedia objects in the CDA document. References to external documents can be created with the ExternalDocument template.For embedding in XML, the multimedia objects Base-64 must be encoded.Due to the amount of data, only light objects should be embedded.Heavy objects should be integrated using links to external documents.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.83 Template
+ * description: Multimedia objects (e.g., PDF representations of the CDA
+ * document, pictures, Reiber diagrams, electrophoresis, etc.) MAY be integrated
+ * into a CDA document, either by reference to external multimedia objects or by
+ * means of XML embedding.This template defines only the embedding of multimedia
+ * objects in the CDA document. References to external documents can be created
+ * with the ExternalDocument template.For embedding in XML, the multimedia
+ * objects Base-64 must be encoded.Due to the amount of data, only light objects
+ * should be embedded.Heavy objects should be integrated using links to external
+ * documents.
  */
-public class CdachEntryObservationMedia extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ObservationMedia {
+public class CdachEntryObservationMedia
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ObservationMedia {
 
 	public CdachEntryObservationMedia() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.83"));
 		super.setLanguageCode(createHl7LanguageCodeFixedValue());
 		super.setValue(createHl7ValueFixedValue("B64"));
-	// cdach_entry_ObservationMedia/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.83";
-	// cdach_entry_ObservationMedia/hl7:languageCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.11526"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.HumanLanguage
-	// cdach_entry_ObservationMedia/hl7:value:cs representation = "B64";
-	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845"); --> org.ehealth_connector.common.hl7cdar2.VideoMediaType
-	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845"); --> org.ehealth_connector.common.hl7cdar2.VideoMediaType
-	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845"); --> org.ehealth_connector.common.hl7cdar2.VideoMediaType
-	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845"); --> org.ehealth_connector.common.hl7cdar2.VideoMediaType
-	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845"); --> org.ehealth_connector.common.hl7cdar2.VideoMediaType
-	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845"); --> org.ehealth_connector.common.hl7cdar2.VideoMediaType
-	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845"); --> org.ehealth_connector.common.hl7cdar2.VideoMediaType
-	// cdach_entry_ObservationMedia/hl7:value:cs mediaType = valueSet("2.16.840.1.113883.1.11.14845"); --> org.ehealth_connector.common.hl7cdar2.VideoMediaType
 	}
 
 	/**
-	 * Adds a hl7Id
-	 * IDs for this item MAY be filled for traceability.
+	 * Adds a hl7Id IDs for this item MAY be filled for traceability.
 	 */
 	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		getId().add(value);
 	}
 
 	/**
-	 * Adds a hl7Id
-	 * IDs for this item MAY be filled for traceability.
+	 * Adds a hl7Id IDs for this item MAY be filled for traceability.
 	 */
 	public void clearHl7Id() {
 		getId().clear();
@@ -70,9 +66,11 @@ public class CdachEntryObservationMedia extends org.ehealth_connector.common.hl7
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -82,18 +80,22 @@ public class CdachEntryObservationMedia extends org.ehealth_connector.common.hl7
 	/**
 	 * Creates fixed contents for CDA Element hl7Value
 	 *
-	 * @param representation the desired fixed value for this argument.
+	 * @param representation
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.ED createHl7ValueFixedValue(String representation) {
+	private static org.ehealth_connector.common.hl7cdar2.ED createHl7ValueFixedValue(
+			String representation) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.ED retVal = factory.createED();
 		return retVal;
-	// TODO: Contents shall be taken from enum: org.ehealth_connector.common.hl7cdar2.VideoMediaType
+		// TODO: Contents shall be taken from enum:
+		// org.ehealth_connector.common.hl7cdar2.VideoMediaType
 	}
 
 	/**
-	 * Gets the hl7LanguageCode
-	 * The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the multimedia object is written. If it isn't known or not available (e.g. for pictures), use nullFlavor instead.
+	 * Gets the hl7LanguageCode The RFC 1766 (ISO-639-1 and ISO 3166) based
+	 * language in which the multimedia object is written. If it isn't known or
+	 * not available (e.g. for pictures), use nullFlavor instead.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7LanguageCode() {
 		return languageCode;
@@ -107,16 +109,17 @@ public class CdachEntryObservationMedia extends org.ehealth_connector.common.hl7
 	}
 
 	/**
-	 * Gets the hl7Value
-	 * This template defines only the embedding of multimedia objects in the CDA document.
+	 * Gets the hl7Value This template defines only the embedding of multimedia
+	 * objects in the CDA document.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ED getHl7Value() {
 		return value;
 	}
 
 	/**
-	 * Sets the hl7LanguageCode
-	 * The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the multimedia object is written. If it isn't known or not available (e.g. for pictures), use nullFlavor instead.
+	 * Sets the hl7LanguageCode The RFC 1766 (ISO-639-1 and ISO 3166) based
+	 * language in which the multimedia object is written. If it isn't known or
+	 * not available (e.g. for pictures), use nullFlavor instead.
 	 */
 	public void setHl7LanguageCode(org.ehealth_connector.common.hl7cdar2.CS value) {
 		this.languageCode = value;
@@ -131,8 +134,8 @@ public class CdachEntryObservationMedia extends org.ehealth_connector.common.hl7
 	}
 
 	/**
-	 * Sets the hl7Value
-	 * This template defines only the embedding of multimedia objects in the CDA document.
+	 * Sets the hl7Value This template defines only the embedding of multimedia
+	 * objects in the CDA document.
 	 */
 	public void setHl7Value(org.ehealth_connector.common.hl7cdar2.ED value) {
 		this.value = value;

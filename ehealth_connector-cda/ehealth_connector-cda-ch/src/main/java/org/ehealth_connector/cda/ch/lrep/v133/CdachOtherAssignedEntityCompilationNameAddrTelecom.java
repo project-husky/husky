@@ -19,47 +19,48 @@ package org.ehealth_connector.cda.ch.lrep.v133;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.17
- * Template description: Reusable template wherever an assigned entity with required name, addr and telecom is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.17 Template
+ * description: Reusable template wherever an assigned entity with required
+ * name, addr and telecom is used in a CDA-CH V2 document. CDA-CH V2
+ * derivatives, i.e. Swiss exchange formats MAY use this template by either
+ * reference or specialisation.
  *
  * Element description: The assigned organization.
  */
-public class CdachOtherAssignedEntityCompilationNameAddrTelecom extends org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity {
+public class CdachOtherAssignedEntityCompilationNameAddrTelecom
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity {
 
 	public CdachOtherAssignedEntityCompilationNameAddrTelecom() {
-	// cdach_other_AssignedEntityCompilationNameAddrTelecom/hl7:code:cs valueSet = valueSet("2.16.756.5.30.1.127.3.10.1.1.3"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.DocumentEntryAuthorRole
-	// cdach_other_AssignedEntityCompilationNameAddrTelecom/hl7:code:oid codeSystem = "2.16.840.1.113883.6.96";
-	// cdach_other_AssignedEntityCompilationNameAddrTelecom/hl7:code:st codeSystemName = "SNOMED CT";
-	// This is fixed content for an optional element: createHl7CodeFixedValue("2.16.840.1.113883.6.96", "SNOMED CT") --> Creating getPredefinedCode2168401113883696SnomedCt();
+		// This is fixed content for an optional element:
+		// createHl7CodeFixedValue("2.16.840.1.113883.6.96", "SNOMED CT") -->
+		// Creating getPredefinedCode2168401113883696SnomedCt();
 	}
 
 	/**
-	 * Adds a hl7Addr
-	 * The assigned entity's address.
+	 * Adds a hl7Addr The assigned entity's address.
 	 */
 	public void addHl7Addr(org.ehealth_connector.common.hl7cdar2.AD value) {
 		getAddr().add(value);
 	}
 
 	/**
-	 * Adds a hl7Telecom
-	 * The assigned entity's means of communication (phone, eMail, ...).
+	 * Adds a hl7Telecom The assigned entity's means of communication (phone,
+	 * eMail, ...).
 	 */
 	public void addHl7Telecom(org.ehealth_connector.common.hl7cdar2.TEL value) {
 		getTelecom().add(value);
 	}
 
 	/**
-	 * Adds a hl7Addr
-	 * The assigned entity's address.
+	 * Adds a hl7Addr The assigned entity's address.
 	 */
 	public void clearHl7Addr() {
 		getAddr().clear();
 	}
 
 	/**
-	 * Adds a hl7Telecom
-	 * The assigned entity's means of communication (phone, eMail, ...).
+	 * Adds a hl7Telecom The assigned entity's means of communication (phone,
+	 * eMail, ...).
 	 */
 	public void clearHl7Telecom() {
 		getTelecom().clear();
@@ -68,10 +69,13 @@ public class CdachOtherAssignedEntityCompilationNameAddrTelecom extends org.ehea
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
-	 * @param codeSystem the desired fixed value for this argument.
-	 * @param codeSystemName the desired fixed value for this argument.
+	 * @param codeSystem
+	 *            the desired fixed value for this argument.
+	 * @param codeSystemName
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String codeSystem, String codeSystemName) {
+	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(
+			String codeSystem, String codeSystemName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		retVal.setCodeSystem(codeSystem);
@@ -80,31 +84,33 @@ public class CdachOtherAssignedEntityCompilationNameAddrTelecom extends org.ehea
 	}
 
 	/**
-	 * Gets the hl7AssignedPerson
-	 * The assigned person.
+	 * Gets the hl7AssignedPerson The assigned person.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Person getHl7AssignedPerson() {
 		return assignedPerson;
 	}
 
 	/**
-	 * Gets the hl7Code
-	 * The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
+	 * Gets the hl7Code The human-readable text MUST be generated automatically
+	 * from the structured information of this element. The text element MUST
+	 * contain the reference to the corresponding text in the human readable
+	 * part, ONLY.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7Code() {
 		return code;
 	}
 
 	/**
-	 * Gets the hl7RepresentedOrganization
-	 * The assigned organization.
+	 * Gets the hl7RepresentedOrganization The assigned organization.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Organization getHl7RepresentedOrganization() {
 		return representedOrganization;
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by: "2.16.840.1.113883.6.96", "SNOMED CT"
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
+	 * "2.16.840.1.113883.6.96", "SNOMED CT"
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedCode2168401113883696SnomedCt() {
@@ -112,26 +118,28 @@ public class CdachOtherAssignedEntityCompilationNameAddrTelecom extends org.ehea
 	}
 
 	/**
-	 * Sets the hl7AssignedPerson
-	 * The assigned person.
+	 * Sets the hl7AssignedPerson The assigned person.
 	 */
-	public void setHl7AssignedPerson(org.ehealth_connector.common.hl7cdar2.POCDMT000040Person value) {
+	public void setHl7AssignedPerson(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Person value) {
 		this.assignedPerson = value;
 	}
 
 	/**
-	 * Sets the hl7Code
-	 * The human-readable text MUST be generated automatically from the structured information of this element. The text element MUST contain the reference to the corresponding text in the human readable part, ONLY.
+	 * Sets the hl7Code The human-readable text MUST be generated automatically
+	 * from the structured information of this element. The text element MUST
+	 * contain the reference to the corresponding text in the human readable
+	 * part, ONLY.
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CE value) {
 		this.code = value;
 	}
 
 	/**
-	 * Sets the hl7RepresentedOrganization
-	 * The assigned organization.
+	 * Sets the hl7RepresentedOrganization The assigned organization.
 	 */
-	public void setHl7RepresentedOrganization(org.ehealth_connector.common.hl7cdar2.POCDMT000040Organization value) {
+	public void setHl7RepresentedOrganization(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Organization value) {
 		this.representedOrganization = value;
 	}
 }

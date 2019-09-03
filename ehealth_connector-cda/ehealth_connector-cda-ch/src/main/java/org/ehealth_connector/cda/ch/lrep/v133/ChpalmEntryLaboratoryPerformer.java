@@ -21,29 +21,36 @@ import org.ehealth_connector.common.hl7cdar2.IVLTS;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.7
- * Template description: This CAN be used to indicate another executing laboratory in the CDA body. When executing laboratories are specified, the following applies:
- * - If all tests have been performed by the same laboratory, this element MUST be specified in the header using the Laboratory Performer (documentationOf).
- * - If multple laboratories have provided results for this document, they must be specified in the body using this element (at entry, organizer or observation level, depending on the extent of the results delivered by the appropriate laboratory).
- * - All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.7 Template
+ * description: This CAN be used to indicate another executing laboratory in the
+ * CDA body. When executing laboratories are specified, the following applies: -
+ * If all tests have been performed by the same laboratory, this element MUST be
+ * specified in the header using the Laboratory Performer (documentationOf). -
+ * If multple laboratories have provided results for this document, they must be
+ * specified in the body using this element (at entry, organizer or observation
+ * level, depending on the extent of the results delivered by the appropriate
+ * laboratory). - All persons and organizations, MUST according to XD-LAB
+ * contain name, addr and telecom.
  *
- * Element description: All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+ * Element description: All persons and organizations, MUST according to XD-LAB
+ * contain name, addr and telecom.
  */
-public class ChpalmEntryLaboratoryPerformer extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer1 {
+public class ChpalmEntryLaboratoryPerformer
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer1 {
 
 	public ChpalmEntryLaboratoryPerformer() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.7"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.1.7"));
-	// chpalm_entry_LaboratoryPerformer/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.7";
-	// chpalm_entry_LaboratoryPerformer/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.3.1.7";
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -51,8 +58,8 @@ public class ChpalmEntryLaboratoryPerformer extends org.ehealth_connector.common
 	}
 
 	/**
-	 * Gets the hl7AssignedEntity
-	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+	 * Gets the hl7AssignedEntity All persons and organizations, MUST according
+	 * to XD-LAB contain name, addr and telecom.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity getHl7AssignedEntity() {
 		return assignedEntity;
@@ -66,18 +73,19 @@ public class ChpalmEntryLaboratoryPerformer extends org.ehealth_connector.common
 	}
 
 	/**
-	 * Gets the hl7Time
-	 * Timestamp of the last delivery of this laboratory to the document.
+	 * Gets the hl7Time Timestamp of the last delivery of this laboratory to the
+	 * document.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.TS getHl7Time() {
 		return time;
 	}
 
 	/**
-	 * Sets the hl7AssignedEntity
-	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+	 * Sets the hl7AssignedEntity All persons and organizations, MUST according
+	 * to XD-LAB contain name, addr and telecom.
 	 */
-	public void setHl7AssignedEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity value) {
+	public void setHl7AssignedEntity(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity value) {
 		this.assignedEntity = value;
 	}
 
@@ -90,8 +98,8 @@ public class ChpalmEntryLaboratoryPerformer extends org.ehealth_connector.common
 	}
 
 	/**
-	 * Sets the hl7Time
-	 * Timestamp of the last delivery of this laboratory to the document.
+	 * Sets the hl7Time Timestamp of the last delivery of this laboratory to the
+	 * document.
 	 */
 	public void setHl7Time(org.ehealth_connector.common.hl7cdar2.TS value) {
 		ObjectFactory factory = new ObjectFactory();

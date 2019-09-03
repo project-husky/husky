@@ -21,24 +21,25 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.24
- * Template description: Specimen Information.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.24 Template
+ * description: Specimen Information.
  */
-public class ChpalmEntryParticipantBodySpecimenCollection extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole {
+public class ChpalmEntryParticipantBodySpecimenCollection
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole {
 
 	public ChpalmEntryParticipantBodySpecimenCollection() {
 		super.getClassCode().add("SPEC");
 		super.getId().add(createHl7IdFixedValue("NA"));
-	// chpalm_entry_ParticipantBodySpecimenCollection/hl7:participantRole:cs classCode = "SPEC";
-	// chpalm_entry_ParticipantBodySpecimenCollection/hl7:id:cs nullFlavor = "NA";
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Id
 	 *
-	 * @param nullFlavor the desired fixed value for this argument.
+	 * @param nullFlavor
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7IdFixedValue(String nullFlavor) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7IdFixedValue(
+			String nullFlavor) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.nullFlavor = new ArrayList<String>();
@@ -47,8 +48,9 @@ public class ChpalmEntryParticipantBodySpecimenCollection extends org.ehealth_co
 	}
 
 	/**
-	 * Gets the hl7Id
-	 * The specimen identification MUST be declared. If no specimen identification is available, nullFlavor='NA' MUST be used. In this case @root and @extension are NOT ALLOWED.
+	 * Gets the hl7Id The specimen identification MUST be declared. If no
+	 * specimen identification is available, nullFlavor='NA' MUST be used. In
+	 * this case @root and @extension are NOT ALLOWED.
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7Id() {
 		return id;
@@ -62,8 +64,9 @@ public class ChpalmEntryParticipantBodySpecimenCollection extends org.ehealth_co
 	}
 
 	/**
-	 * Sets the hl7Id
-	 * The specimen identification MUST be declared. If no specimen identification is available, nullFlavor='NA' MUST be used. In this case @root and @extension are NOT ALLOWED.
+	 * Sets the hl7Id The specimen identification MUST be declared. If no
+	 * specimen identification is available, nullFlavor='NA' MUST be used. In
+	 * this case @root and @extension are NOT ALLOWED.
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		getId().clear();
@@ -73,7 +76,8 @@ public class ChpalmEntryParticipantBodySpecimenCollection extends org.ehealth_co
 	/**
 	 * Sets the hl7PlayingEntity
 	 */
-	public void setHl7PlayingEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040PlayingEntity value) {
+	public void setHl7PlayingEntity(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040PlayingEntity value) {
 		this.playingEntity = value;
 	}
 }

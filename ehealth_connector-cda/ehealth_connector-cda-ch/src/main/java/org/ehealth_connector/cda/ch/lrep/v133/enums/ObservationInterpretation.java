@@ -41,25 +41,33 @@ public enum ObservationInterpretation implements ValueSetEnumInterface {
 	 * <div class="en">GeneticObservationInterpretation</div>
 	 * <!-- @formatter:on -->
 	 */
-	GENETICOBSERVATIONINTERPRETATION("_GeneticObservationInterpretation", "2.16.840.1.113883.5.83", "GeneticObservationInterpretation", "GeneticObservationInterpretation", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	GENETICOBSERVATIONINTERPRETATION("_GeneticObservationInterpretation", "2.16.840.1.113883.5.83",
+			"GeneticObservationInterpretation", "GeneticObservationInterpretation", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">ObservationInterpretationChange</div>
 	 * <!-- @formatter:on -->
 	 */
-	OBSERVATIONINTERPRETATIONCHANGE("_ObservationInterpretationChange", "2.16.840.1.113883.5.83", "ObservationInterpretationChange", "ObservationInterpretationChange", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	OBSERVATIONINTERPRETATIONCHANGE("_ObservationInterpretationChange", "2.16.840.1.113883.5.83",
+			"ObservationInterpretationChange", "ObservationInterpretationChange", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">ObservationInterpretationExceptions</div>
 	 * <!-- @formatter:on -->
 	 */
-	OBSERVATIONINTERPRETATIONEXCEPTIONS("_ObservationInterpretationExceptions", "2.16.840.1.113883.5.83", "ObservationInterpretationExceptions", "ObservationInterpretationExceptions", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	OBSERVATIONINTERPRETATIONEXCEPTIONS("_ObservationInterpretationExceptions",
+			"2.16.840.1.113883.5.83", "ObservationInterpretationExceptions",
+			"ObservationInterpretationExceptions", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">ObservationInterpretationNormality</div>
 	 * <!-- @formatter:on -->
 	 */
-	OBSERVATIONINTERPRETATIONNORMALITY("_ObservationInterpretationNormality", "2.16.840.1.113883.5.83", "ObservationInterpretationNormality", "ObservationInterpretationNormality", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	OBSERVATIONINTERPRETATIONNORMALITY("_ObservationInterpretationNormality",
+			"2.16.840.1.113883.5.83", "ObservationInterpretationNormality",
+			"ObservationInterpretationNormality", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -207,7 +215,9 @@ public enum ObservationInterpretation implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	ObservationInterpretation(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	ObservationInterpretation(String code, String codeSystem, String displayName,
+			String displayNameEn, String displayNameDe, String displayNameFr,
+			String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();

@@ -20,38 +20,53 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.46
- * Template description: Chapter (CDA Body Section) containing the coded results according to IHE PCC Technical Framework Revision 11.0 - November 11, 2016.This section MAY contain relevant coded results of a patient for the given document context. The section MUST contain at least one Problem entry. In case of no relevant results, one of the 'special case' codes MUST be used.In the context of immunizations, this section may indicate the gestational age of a child if relevant for immunization of the child.In the context of lab reports, this section may indicate the gestational age of a child if relevant for the observation interpretation.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.46 Template
+ * description: Chapter (CDA Body Section) containing the coded results
+ * according to IHE PCC Technical Framework Revision 11.0 - November 11,
+ * 2016.This section MAY contain relevant coded results of a patient for the
+ * given document context. The section MUST contain at least one Problem entry.
+ * In case of no relevant results, one of the 'special case' codes MUST be
+ * used.In the context of immunizations, this section may indicate the
+ * gestational age of a child if relevant for immunization of the child.In the
+ * context of lab reports, this section may indicate the gestational age of a
+ * child if relevant for the observation interpretation.
  *
- * Element description: Chapter (CDA Body Section) containing the coded results according to IHE PCC Technical Framework Revision 11.0 - November 11, 2016.This section MAY contain relevant coded results of a patient for the given document context. The section MUST contain at least one Problem entry. In case of no relevant results, one of the 'special case' codes MUST be used.In the context of immunizations, this section may indicate the gestational age of a child if relevant for immunization of the child.In the context of lab reports, this section may indicate the gestational age of a child if relevant for the observation interpretation.
+ * Element description: Chapter (CDA Body Section) containing the coded results
+ * according to IHE PCC Technical Framework Revision 11.0 - November 11,
+ * 2016.This section MAY contain relevant coded results of a patient for the
+ * given document context. The section MUST contain at least one Problem entry.
+ * In case of no relevant results, one of the 'special case' codes MUST be
+ * used.In the context of immunizations, this section may indicate the
+ * gestational age of a child if relevant for immunization of the child.In the
+ * context of lab reports, this section may indicate the gestational age of a
+ * child if relevant for the observation interpretation.
  */
-public class CdachvacdSectionOtherRelevantObservationsCoded extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
+public class CdachvacdSectionOtherRelevantObservationsCoded
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 
 	public CdachvacdSectionOtherRelevantObservationsCoded() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.46"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.3.27"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.3.28"));
-		super.setCode(createHl7CodeFixedValue("30954-2", "2.16.840.1.113883.6.1", "LOINC", "Relevant diagnostic tests/laboratory data"));
+		super.setCode(createHl7CodeFixedValue("30954-2", "2.16.840.1.113883.6.1", "LOINC",
+				"Relevant diagnostic tests/laboratory data"));
 		super.getEntry().add(createHl7EntryFixedValue("DRIV"));
-	// cdachvacd_section_OtherRelevantObservationsCoded/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.3.46";
-	// cdachvacd_section_OtherRelevantObservationsCoded/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.3.27";
-	// cdachvacd_section_OtherRelevantObservationsCoded/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.3.28";
-	// cdachvacd_section_OtherRelevantObservationsCoded/hl7:code:st code = "30954-2";
-	// cdachvacd_section_OtherRelevantObservationsCoded/hl7:code:oid codeSystem = "2.16.840.1.113883.6.1";
-	// cdachvacd_section_OtherRelevantObservationsCoded/hl7:code:st codeSystemName = "LOINC";
-	// cdachvacd_section_OtherRelevantObservationsCoded/hl7:code:st displayName = "Relevant diagnostic tests/laboratory data";
-	// cdachvacd_section_OtherRelevantObservationsCoded/hl7:entry:cs typeCode = "DRIV";
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
-	 * @param code the desired fixed value for this argument.
-	 * @param codeSystem the desired fixed value for this argument.
-	 * @param codeSystemName the desired fixed value for this argument.
-	 * @param displayName the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
+	 * @param codeSystem
+	 *            the desired fixed value for this argument.
+	 * @param codeSystemName
+	 *            the desired fixed value for this argument.
+	 * @param displayName
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
+	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code,
+			String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		retVal.setCode(code);
@@ -64,21 +79,27 @@ public class CdachvacdSectionOtherRelevantObservationsCoded extends org.ehealth_
 	/**
 	 * Creates fixed contents for CDA Element hl7Entry
 	 *
-	 * @param typeCode the desired fixed value for this argument.
+	 * @param typeCode
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry createHl7EntryFixedValue(String typeCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry createHl7EntryFixedValue(
+			String typeCode) {
 		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry retVal = factory.createPOCDMT000040Entry();
-		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntry.fromValue(typeCode));
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry retVal = factory
+				.createPOCDMT000040Entry();
+		retVal.setTypeCode(
+				org.ehealth_connector.common.hl7cdar2.XActRelationshipEntry.fromValue(typeCode));
 		return retVal;
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -93,16 +114,15 @@ public class CdachvacdSectionOtherRelevantObservationsCoded extends org.ehealth_
 	}
 
 	/**
-	 * Gets the hl7Entry
-	 * The narrative text in the text element of the section MUST be generated automatically from the information in this entry.
+	 * Gets the hl7Entry The narrative text in the text element of the section
+	 * MUST be generated automatically from the information in this entry.
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry> getHl7Entry() {
 		return entry;
 	}
 
 	/**
-	 * Gets the hl7Id
-	 * An ID for this section MAY be filled for traceability.
+	 * Gets the hl7Id An ID for this section MAY be filled for traceability.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
 		return id;
@@ -116,8 +136,7 @@ public class CdachvacdSectionOtherRelevantObservationsCoded extends org.ehealth_
 	}
 
 	/**
-	 * Gets the hl7Text
-	 * The narrative text for this section.
+	 * Gets the hl7Text The narrative text for this section.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.StrucDocText getHl7Text() {
 		return text;
@@ -138,8 +157,8 @@ public class CdachvacdSectionOtherRelevantObservationsCoded extends org.ehealth_
 	}
 
 	/**
-	 * Sets the hl7Entry
-	 * The narrative text in the text element of the section MUST be generated automatically from the information in this entry.
+	 * Sets the hl7Entry The narrative text in the text element of the section
+	 * MUST be generated automatically from the information in this entry.
 	 */
 	public void setHl7Entry(org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry value) {
 		getEntry().clear();
@@ -147,8 +166,7 @@ public class CdachvacdSectionOtherRelevantObservationsCoded extends org.ehealth_
 	}
 
 	/**
-	 * Sets the hl7Id
-	 * An ID for this section MAY be filled for traceability.
+	 * Sets the hl7Id An ID for this section MAY be filled for traceability.
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		this.id = value;
@@ -163,8 +181,7 @@ public class CdachvacdSectionOtherRelevantObservationsCoded extends org.ehealth_
 	}
 
 	/**
-	 * Sets the hl7Text
-	 * The narrative text for this section.
+	 * Sets the hl7Text The narrative text for this section.
 	 */
 	public void setHl7Text(org.ehealth_connector.common.hl7cdar2.StrucDocText value) {
 		this.text = value;

@@ -20,24 +20,22 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.4
- * Template description: This section contains a list of measured / observed vital signs.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.4 Template
+ * description: This section contains a list of measured / observed vital signs.
  *
- * Element description: This section contains a list of measured / observed vital signs.
+ * Element description: This section contains a list of measured / observed
+ * vital signs.
  */
-public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
+public class ChpccSectionVitalSignsCoded
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 
 	public ChpccSectionVitalSignsCoded() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.4"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.5.3.2"));
+		super.getTemplateId()
+				.add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.5.3.2"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.3.25"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.16"));
 		super.setCode(createHl7CodeFixedValue("8716-3"));
-	// chpcc_section_VitalSignsCoded/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.3.4";
-	// chpcc_section_VitalSignsCoded/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.1.5.3.2";
-	// chpcc_section_VitalSignsCoded/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.5.3.1.3.25";
-	// chpcc_section_VitalSignsCoded/hl7:templateId:uid root = "2.16.840.1.113883.10.20.1.16";
-	// chpcc_section_VitalSignsCoded/hl7:code:cs code = "8716-3"; (isVocab)
 	}
 
 	/**
@@ -57,7 +55,8 @@ public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
-	 * @param code the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
 	 */
 	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code) {
 		ObjectFactory factory = new ObjectFactory();
@@ -69,9 +68,11 @@ public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -86,8 +87,7 @@ public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl
 	}
 
 	/**
-	 * Gets the hl7Id
-	 * An ID for this section MAY be filled for traceability.
+	 * Gets the hl7Id An ID for this section MAY be filled for traceability.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
 		return id;
@@ -101,20 +101,16 @@ public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl
 	}
 
 	/**
-	 * Gets the hl7Text
-	 * Human readable text of this section.
+	 * Gets the hl7Text Human readable text of this section.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.StrucDocText getHl7Text() {
 		return text;
 	}
 
 	/**
-	 * Gets the hl7Title
-	 * Fixed human readable title of this section.
-	 * - [ge]: 'Vitalzeichen'
-	 * - [fr]: 'Signes vitaux'
-	 * - [it]: 'Segni vitali'
-	 * - [en]: 'Vital Signs'
+	 * Gets the hl7Title Fixed human readable title of this section. - [ge]:
+	 * 'Vitalzeichen' - [fr]: 'Signes vitaux' - [it]: 'Segni vitali' - [en]:
+	 * 'Vital Signs'
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ST getHl7Title() {
 		return title;
@@ -128,8 +124,7 @@ public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl
 	}
 
 	/**
-	 * Sets the hl7Id
-	 * An ID for this section MAY be filled for traceability.
+	 * Sets the hl7Id An ID for this section MAY be filled for traceability.
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		this.id = value;
@@ -144,20 +139,16 @@ public class ChpccSectionVitalSignsCoded extends org.ehealth_connector.common.hl
 	}
 
 	/**
-	 * Sets the hl7Text
-	 * Human readable text of this section.
+	 * Sets the hl7Text Human readable text of this section.
 	 */
 	public void setHl7Text(org.ehealth_connector.common.hl7cdar2.StrucDocText value) {
 		this.text = value;
 	}
 
 	/**
-	 * Sets the hl7Title
-	 * Fixed human readable title of this section.
-	 * - [ge]: 'Vitalzeichen'
-	 * - [fr]: 'Signes vitaux'
-	 * - [it]: 'Segni vitali'
-	 * - [en]: 'Vital Signs'
+	 * Sets the hl7Title Fixed human readable title of this section. - [ge]:
+	 * 'Vitalzeichen' - [fr]: 'Signes vitaux' - [it]: 'Segni vitali' - [en]:
+	 * 'Vital Signs'
 	 */
 	public void setHl7Title(org.ehealth_connector.common.hl7cdar2.ST value) {
 		this.title = value;

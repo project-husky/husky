@@ -20,34 +20,40 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.88
- * Template description: The document MAY contain further signatures (besides the legal authenticator). A Laboratory Results Validator is such an authenticator. It is a laboratory specialist who has performed the clinical validation of the entire document or a subset of the laboratory results. If this element is specified, the following applies:
- * - If only one laboratory specialist has carried out the clinical validation of the document, it should be specified in the header, only.
- * - If multiple laboratory specialists were involved in the clinical validation of the document, all must be specified in the header and body (at entry, organizer or observation level, depending on the scope of the results that the corresponding person has validated).
- * - All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.88 Template
+ * description: The document MAY contain further signatures (besides the legal
+ * authenticator). A Laboratory Results Validator is such an authenticator. It
+ * is a laboratory specialist who has performed the clinical validation of the
+ * entire document or a subset of the laboratory results. If this element is
+ * specified, the following applies: - If only one laboratory specialist has
+ * carried out the clinical validation of the document, it should be specified
+ * in the header, only. - If multiple laboratory specialists were involved in
+ * the clinical validation of the document, all must be specified in the header
+ * and body (at entry, organizer or observation level, depending on the scope of
+ * the results that the corresponding person has validated). - All persons and
+ * organizations, MUST according to XD-LAB contain name, addr and telecom.
  *
- * Element description: Information about an authenticator of a CDA document. An authenticator MUST be a person.
+ * Element description: Information about an authenticator of a CDA document. An
+ * authenticator MUST be a person.
  */
-public class ChpalmHeaderLaboratoryResultsValidator extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Authenticator {
+public class ChpalmHeaderLaboratoryResultsValidator
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Authenticator {
 
 	public ChpalmHeaderLaboratoryResultsValidator() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.88"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.6"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.1.5"));
 		super.setSignatureCode(createHl7SignatureCodeFixedValue("S"));
-	// chpalm_header_LaboratoryResultsValidator/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.88";
-	// chpalm_header_LaboratoryResultsValidator/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.6";
-	// chpalm_header_LaboratoryResultsValidator/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.3.1.5";
-	// chpalm_header_LaboratoryResultsValidator/hl7:signatureCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.10282"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ParticipationSignature
-	// chpalm_header_LaboratoryResultsValidator/hl7:signatureCode:cs code = "S";
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7SignatureCode
 	 *
-	 * @param code the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CS createHl7SignatureCodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7SignatureCodeFixedValue(
+			String code) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		retVal.setCode(code);
@@ -57,9 +63,11 @@ public class ChpalmHeaderLaboratoryResultsValidator extends org.ehealth_connecto
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -88,8 +96,7 @@ public class ChpalmHeaderLaboratoryResultsValidator extends org.ehealth_connecto
 	}
 
 	/**
-	 * Gets the hl7Time
-	 * Timestamp of the signature.
+	 * Gets the hl7Time Timestamp of the signature.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.TS getHl7Time() {
 		return time;
@@ -98,7 +105,8 @@ public class ChpalmHeaderLaboratoryResultsValidator extends org.ehealth_connecto
 	/**
 	 * Sets the hl7AssignedEntity
 	 */
-	public void setHl7AssignedEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity value) {
+	public void setHl7AssignedEntity(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity value) {
 		this.assignedEntity = value;
 	}
 
@@ -118,8 +126,7 @@ public class ChpalmHeaderLaboratoryResultsValidator extends org.ehealth_connecto
 	}
 
 	/**
-	 * Sets the hl7Time
-	 * Timestamp of the signature.
+	 * Sets the hl7Time Timestamp of the signature.
 	 */
 	public void setHl7Time(org.ehealth_connector.common.hl7cdar2.TS value) {
 		this.time = value;

@@ -20,43 +20,51 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.118
- * Template description: Each chapter (Laboratory Speciality Section and Laboratory Report Item Section) MUST contain exactly one findings group (CDA Body Laboratory Report Data Processing Entry).
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.118 Template
+ * description: Each chapter (Laboratory Speciality Section and Laboratory
+ * Report Item Section) MUST contain exactly one findings group (CDA Body
+ * Laboratory Report Data Processing Entry).
  */
-public class CdachlrepEntryLaboratoryReportDataProcessingEntry extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry {
+public class CdachlrepEntryLaboratoryReportDataProcessingEntry
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry {
 
 	public CdachlrepEntryLaboratoryReportDataProcessingEntry() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.118"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.4"));
-	// cdachlrep_entry_LaboratoryReportDataProcessingEntry/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.118";
-	// cdachlrep_entry_LaboratoryReportDataProcessingEntry/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1";
-	// cdachlrep_entry_LaboratoryReportDataProcessingEntry/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.4";
-	// cdachlrep_entry_LaboratoryReportDataProcessingEntry/hl7:act:cs classCode = "ACT";
-	// cdachlrep_entry_LaboratoryReportDataProcessingEntry/hl7:act:cs moodCode = "EVN";
-	// This is fixed content for an optional element: createHl7ActFixedValue("ACT", "EVN") --> Creating getPredefinedActActEvn();
+		// This is fixed content for an optional element:
+		// createHl7ActFixedValue("ACT", "EVN") --> Creating
+		// getPredefinedActActEvn();
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Act
 	 *
-	 * @param classCode the desired fixed value for this argument.
-	 * @param moodCode the desired fixed value for this argument.
+	 * @param classCode
+	 *            the desired fixed value for this argument.
+	 * @param moodCode
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Act createHl7ActFixedValue(String classCode, String moodCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Act createHl7ActFixedValue(
+			String classCode, String moodCode) {
 		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Act retVal = factory.createPOCDMT000040Act();
-		retVal.setClassCode(org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue(classCode));
-		retVal.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue(moodCode));
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Act retVal = factory
+				.createPOCDMT000040Act();
+		retVal.setClassCode(org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct
+				.fromValue(classCode));
+		retVal.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue(moodCode));
 		return retVal;
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -78,7 +86,9 @@ public class CdachlrepEntryLaboratoryReportDataProcessingEntry extends org.eheal
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040Act, filled by: "ACT", "EVN"
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040Act,
+	 * filled by: "ACT", "EVN"
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Act getPredefinedActActEvn() {

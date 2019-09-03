@@ -20,62 +20,58 @@ import java.util.ArrayList;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.47
- * Template description: Reusable template for assigned entities a CDA-CH-LREP document.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.47 Template
+ * description: Reusable template for assigned entities a CDA-CH-LREP document.
  *
- * Element description: All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+ * Element description: All persons and organizations, MUST according to XD-LAB
+ * contain name, addr and telecom.
  */
-public class CdachlrepHeaderAssignedEntityForLaboratory extends org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity {
+public class CdachlrepHeaderAssignedEntityForLaboratory
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity {
 
 	public CdachlrepHeaderAssignedEntityForLaboratory() {
 		super.getId().add(createHl7IdFixedValue("NAV", "2.51.1.3"));
-	// cdachlrep_header_AssignedEntityForLaboratory/hl7:id:cs nullFlavor = "NAV";
-	// cdachlrep_header_AssignedEntityForLaboratory/hl7:id:cs root = "2.51.1.3";
 	}
 
 	/**
-	 * Adds a hl7Addr
-	 * Address of the laboratory.
+	 * Adds a hl7Addr Address of the laboratory.
 	 */
 	public void addHl7Addr(org.ehealth_connector.common.hl7cdar2.AD value) {
 		getAddr().add(value);
 	}
 
 	/**
-	 * Adds a hl7Id
-	 * A GS1 GLN is required. If it is not (yet) known, this MUST be declared using nullFlavor.
+	 * Adds a hl7Id A GS1 GLN is required. If it is not (yet) known, this MUST
+	 * be declared using nullFlavor.
 	 */
 	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		getId().add(value);
 	}
 
 	/**
-	 * Adds a hl7Telecom
-	 * Phone and eMail of the laboratory.
+	 * Adds a hl7Telecom Phone and eMail of the laboratory.
 	 */
 	public void addHl7Telecom(org.ehealth_connector.common.hl7cdar2.TEL value) {
 		getTelecom().add(value);
 	}
 
 	/**
-	 * Adds a hl7Addr
-	 * Address of the laboratory.
+	 * Adds a hl7Addr Address of the laboratory.
 	 */
 	public void clearHl7Addr() {
 		getAddr().clear();
 	}
 
 	/**
-	 * Adds a hl7Id
-	 * A GS1 GLN is required. If it is not (yet) known, this MUST be declared using nullFlavor.
+	 * Adds a hl7Id A GS1 GLN is required. If it is not (yet) known, this MUST
+	 * be declared using nullFlavor.
 	 */
 	public void clearHl7Id() {
 		getId().clear();
 	}
 
 	/**
-	 * Adds a hl7Telecom
-	 * Phone and eMail of the laboratory.
+	 * Adds a hl7Telecom Phone and eMail of the laboratory.
 	 */
 	public void clearHl7Telecom() {
 		getTelecom().clear();
@@ -84,10 +80,13 @@ public class CdachlrepHeaderAssignedEntityForLaboratory extends org.ehealth_conn
 	/**
 	 * Creates fixed contents for CDA Element hl7Id
 	 *
-	 * @param nullFlavor the desired fixed value for this argument.
-	 * @param root the desired fixed value for this argument.
+	 * @param nullFlavor
+	 *            the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7IdFixedValue(String nullFlavor, String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7IdFixedValue(String nullFlavor,
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.nullFlavor = new ArrayList<String>();
@@ -97,34 +96,36 @@ public class CdachlrepHeaderAssignedEntityForLaboratory extends org.ehealth_conn
 	}
 
 	/**
-	 * Gets the hl7AssignedPerson
-	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+	 * Gets the hl7AssignedPerson All persons and organizations, MUST according
+	 * to XD-LAB contain name, addr and telecom.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Person getHl7AssignedPerson() {
 		return assignedPerson;
 	}
 
 	/**
-	 * Gets the hl7RepresentedOrganization
-	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+	 * Gets the hl7RepresentedOrganization All persons and organizations, MUST
+	 * according to XD-LAB contain name, addr and telecom.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Organization getHl7RepresentedOrganization() {
 		return representedOrganization;
 	}
 
 	/**
-	 * Sets the hl7AssignedPerson
-	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+	 * Sets the hl7AssignedPerson All persons and organizations, MUST according
+	 * to XD-LAB contain name, addr and telecom.
 	 */
-	public void setHl7AssignedPerson(org.ehealth_connector.common.hl7cdar2.POCDMT000040Person value) {
+	public void setHl7AssignedPerson(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Person value) {
 		this.assignedPerson = value;
 	}
 
 	/**
-	 * Sets the hl7RepresentedOrganization
-	 * All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+	 * Sets the hl7RepresentedOrganization All persons and organizations, MUST
+	 * according to XD-LAB contain name, addr and telecom.
 	 */
-	public void setHl7RepresentedOrganization(org.ehealth_connector.common.hl7cdar2.POCDMT000040Organization value) {
+	public void setHl7RepresentedOrganization(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Organization value) {
 		this.representedOrganization = value;
 	}
 }

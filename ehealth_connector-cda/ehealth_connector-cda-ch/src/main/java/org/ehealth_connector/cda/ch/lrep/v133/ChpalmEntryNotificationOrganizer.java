@@ -20,28 +20,30 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.13
- * Template description: A laboratory report MAY contain information on the obligation to report pathogen detection, on accumulation of observations or specific epidemiologically relevant events.Precise specification on the usage of this element is documented in the specification "Laboratory reports for public health (CDA-CH-LRPH)".
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.13 Template
+ * description: A laboratory report MAY contain information on the obligation to
+ * report pathogen detection, on accumulation of observations or specific
+ * epidemiologically relevant events.Precise specification on the usage of this
+ * element is documented in the specification "Laboratory reports for public
+ * health (CDA-CH-LRPH)".
  */
-public class ChpalmEntryNotificationOrganizer extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
+public class ChpalmEntryNotificationOrganizer
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
 
 	public ChpalmEntryNotificationOrganizer() {
-		super.setClassCode(org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryOrganizer.fromValue("CLUSTER"));
+		super.setClassCode(org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryOrganizer
+				.fromValue("CLUSTER"));
 		super.getMoodCode().add("EVN");
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.13"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.1"));
 		super.setStatusCode(createHl7StatusCodeFixedValue());
-	// chpalm_entry_NotificationOrganizer/hl7:organizer:cs classCode = "CLUSTER";
-	// chpalm_entry_NotificationOrganizer/hl7:organizer:cs moodCode = "EVN";
-	// chpalm_entry_NotificationOrganizer/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.13";
-	// chpalm_entry_NotificationOrganizer/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.1";
-	// chpalm_entry_NotificationOrganizer/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusCompleted
 	}
 
 	/**
 	 * Adds a hl7Component
 	 */
-	public void addHl7Component(org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
+	public void addHl7Component(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
 		getComponent().add(value);
 	}
 
@@ -64,9 +66,11 @@ public class ChpalmEntryNotificationOrganizer extends org.ehealth_connector.comm
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -74,8 +78,7 @@ public class ChpalmEntryNotificationOrganizer extends org.ehealth_connector.comm
 	}
 
 	/**
-	 * Gets the hl7StatusCode
-	 * Contains at least one notification.
+	 * Gets the hl7StatusCode Contains at least one notification.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
 		return statusCode;
@@ -89,8 +92,7 @@ public class ChpalmEntryNotificationOrganizer extends org.ehealth_connector.comm
 	}
 
 	/**
-	 * Sets the hl7StatusCode
-	 * Contains at least one notification.
+	 * Sets the hl7StatusCode Contains at least one notification.
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
 		this.statusCode = value;

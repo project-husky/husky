@@ -20,31 +20,27 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.88
- * Template description: Coding of significant pathogens.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.88 Template
+ * description: Coding of significant pathogens.
  */
-public class CdachlrepEntryNotificationOrganizerSignificantPathogens extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
+public class CdachlrepEntryNotificationOrganizerSignificantPathogens
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
 
 	public CdachlrepEntryNotificationOrganizerSignificantPathogens() {
-		super.setClassCode(org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryOrganizer.fromValue("CLUSTER"));
+		super.setClassCode(org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryOrganizer
+				.fromValue("CLUSTER"));
 		super.getMoodCode().add("EVN");
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.88"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.13"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.1"));
 		super.setStatusCode(createHl7StatusCodeFixedValue("completed"));
-	// cdachlrep_entry_NotificationOrganizerSignificantPathogens/hl7:organizer:cs classCode = "CLUSTER";
-	// cdachlrep_entry_NotificationOrganizerSignificantPathogens/hl7:organizer:cs moodCode = "EVN";
-	// cdachlrep_entry_NotificationOrganizerSignificantPathogens/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.88";
-	// cdachlrep_entry_NotificationOrganizerSignificantPathogens/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.13";
-	// cdachlrep_entry_NotificationOrganizerSignificantPathogens/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.1.1";
-	// cdachlrep_entry_NotificationOrganizerSignificantPathogens/hl7:statusCode:cs valueSet = valueSet("2.16.840.1.113883.1.11.20025"); --> org.ehealth_connector.cda.ch.lrep.v133.enums.ActStatusCompleted
-	// cdachlrep_entry_NotificationOrganizerSignificantPathogens/hl7:statusCode:st code = "completed";
 	}
 
 	/**
 	 * Adds a hl7Component
 	 */
-	public void addHl7Component(org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
+	public void addHl7Component(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
 		getComponent().add(value);
 	}
 
@@ -58,9 +54,11 @@ public class CdachlrepEntryNotificationOrganizerSignificantPathogens extends org
 	/**
 	 * Creates fixed contents for CDA Element hl7StatusCode
 	 *
-	 * @param code the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(
+			String code) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		retVal.setCode(code);
@@ -70,9 +68,11 @@ public class CdachlrepEntryNotificationOrganizerSignificantPathogens extends org
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -80,8 +80,8 @@ public class CdachlrepEntryNotificationOrganizerSignificantPathogens extends org
 	}
 
 	/**
-	 * Gets the hl7StatusCode
-	 * The status 'completed' means that the patient is assigned to the notification.
+	 * Gets the hl7StatusCode The status 'completed' means that the patient is
+	 * assigned to the notification.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
 		return statusCode;
@@ -95,8 +95,8 @@ public class CdachlrepEntryNotificationOrganizerSignificantPathogens extends org
 	}
 
 	/**
-	 * Sets the hl7StatusCode
-	 * The status 'completed' means that the patient is assigned to the notification.
+	 * Sets the hl7StatusCode The status 'completed' means that the patient is
+	 * assigned to the notification.
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
 		this.statusCode = value;

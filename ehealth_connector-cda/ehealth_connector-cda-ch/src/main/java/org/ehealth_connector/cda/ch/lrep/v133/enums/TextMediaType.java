@@ -41,43 +41,51 @@ public enum TextMediaType implements ValueSetEnumInterface {
 	 * <div class="en">HL7 Structured Narrative</div>
 	 * <!-- @formatter:on -->
 	 */
-	HL7_STRUCTURED_NARRATIVE("text/x-hl7-text+xml", "2.16.840.1.113883.5.79", "HL7 Structured Narrative", "HL7 Structured Narrative", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	HL7_STRUCTURED_NARRATIVE("text/x-hl7-text+xml", "2.16.840.1.113883.5.79",
+			"HL7 Structured Narrative", "HL7 Structured Narrative", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">HL7 Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	HL7_TEXT("text/x-hl7-ft", "2.16.840.1.113883.5.79", "HL7 Text", "HL7 Text", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	HL7_TEXT("text/x-hl7-ft", "2.16.840.1.113883.5.79", "HL7 Text", "HL7 Text", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">HTML Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	HTML_TEXT("text/html", "2.16.840.1.113883.5.79", "HTML Text", "HTML Text", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	HTML_TEXT("text/html", "2.16.840.1.113883.5.79", "HTML Text", "HTML Text", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Plain Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	PLAIN_TEXT("text/plain", "2.16.840.1.113883.5.79", "Plain Text", "Plain Text", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	PLAIN_TEXT("text/plain", "2.16.840.1.113883.5.79", "Plain Text", "Plain Text", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">RTF Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	RTF_TEXT("text/rtf", "2.16.840.1.113883.5.79", "RTF Text", "RTF Text", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	RTF_TEXT("text/rtf", "2.16.840.1.113883.5.79", "RTF Text", "RTF Text", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">SGML Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	SGML_TEXT("text/sgml", "2.16.840.1.113883.5.79", "SGML Text", "SGML Text", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	SGML_TEXT("text/sgml", "2.16.840.1.113883.5.79", "SGML Text", "SGML Text", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">XML Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	XML_TEXT("text/xml", "2.16.840.1.113883.5.79", "XML Text", "XML Text", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	XML_TEXT("text/xml", "2.16.840.1.113883.5.79", "XML Text", "XML Text", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -246,7 +254,8 @@ public enum TextMediaType implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	TextMediaType(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	TextMediaType(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();

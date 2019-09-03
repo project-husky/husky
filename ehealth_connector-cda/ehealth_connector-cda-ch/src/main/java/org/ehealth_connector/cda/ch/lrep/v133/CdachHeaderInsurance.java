@@ -20,30 +20,33 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.15
- * Template description: Information on a patient's insurance. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.15 Template
+ * description: Information on a patient's insurance. CDA-CH V2 derivatives,
+ * i.e. Swiss exchange formats MAY use this template by either reference or
+ * specialisation.
  *
  * Element description: Information on a patient's insurance.
  */
-public class CdachHeaderInsurance extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 {
+public class CdachHeaderInsurance
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 {
 
 	public CdachHeaderInsurance() {
 		super.getTypeCode().add("COV");
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.15"));
 		super.setAssociatedEntity(createHl7AssociatedEntityFixedValue("PAYOR"));
-	// cdach_header_Insurance/hl7:participant:cs typeCode = "COV";
-	// cdach_header_Insurance/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.2.15";
-	// cdach_header_Insurance/hl7:associatedEntity:cs classCode = "PAYOR";
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7AssociatedEntity
 	 *
-	 * @param classCode the desired fixed value for this argument.
+	 * @param classCode
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity createHl7AssociatedEntityFixedValue(String classCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity createHl7AssociatedEntityFixedValue(
+			String classCode) {
 		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity retVal = factory.createPOCDMT000040AssociatedEntity();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity retVal = factory
+				.createPOCDMT000040AssociatedEntity();
 		retVal.getClassCode().add(classCode);
 		return retVal;
 	}
@@ -51,9 +54,11 @@ public class CdachHeaderInsurance extends org.ehealth_connector.common.hl7cdar2.
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -75,8 +80,7 @@ public class CdachHeaderInsurance extends org.ehealth_connector.common.hl7cdar2.
 	}
 
 	/**
-	 * Gets the hl7Time
-	 * Validity period of the contract.
+	 * Gets the hl7Time Validity period of the contract.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.IVLTS getHl7Time() {
 		return time;
@@ -85,7 +89,8 @@ public class CdachHeaderInsurance extends org.ehealth_connector.common.hl7cdar2.
 	/**
 	 * Sets the hl7AssociatedEntity
 	 */
-	public void setHl7AssociatedEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity value) {
+	public void setHl7AssociatedEntity(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity value) {
 		this.associatedEntity = value;
 	}
 
@@ -98,8 +103,7 @@ public class CdachHeaderInsurance extends org.ehealth_connector.common.hl7cdar2.
 	}
 
 	/**
-	 * Sets the hl7Time
-	 * Validity period of the contract.
+	 * Sets the hl7Time Validity period of the contract.
 	 */
 	public void setHl7Time(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
 		this.time = value;

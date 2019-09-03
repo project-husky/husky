@@ -27,10 +27,10 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Role of the author.<br clear="none"/>      <br clear="none"/>This code defines the role of the author of the document. This is a sub-attribute of epd_xds_author.<br clear="none"/>    </div>
- * <div class="de">Rolle des Autors.<br clear="none"/>      <br clear="none"/>Dieser Code definiert die Rolle des Authors vom Dokument. Dies ist ein Sub-Attribut von epd_xds_author.<br clear="none"/>    </div>
- * <div class="fr">Rôle de l'auteur.<br clear="none"/>      <br clear="none"/>Ce code définit le rôle de l'auteur du document. Il s'agit d'un sous-attribut de epd_xds_author.<br clear="none"/>    </div>
- * <div class="it">Ruolo dell'autore.<br clear="none"/>      <br clear="none"/>Questo codice definisce il ruolo dell'autore <span style="display: inline !important; float: none; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-family: arial,helvetica,clean,sans-serif; font-size: 13px; font-size-adjust: none; font-stretch: 100%; font-style: normal; font-variant: normal; font-weight: 400; letter-spacing: normal; line-height: 15.86px; orphans: 2; text-align: left; text-decoration: none; text-indent: 0px; text-transform: none; -webkit-text-stroke-width: 0px; white-space: normal; word-spacing: 0px;">del documento</span>. È un sottoattributo di epd_xds_author.<br clear="none"/>    </div>
+ * <div class="en">Role of the author.<br clear="none"/><br clear="none"/>This code defines the role of the author of the document. This is a sub-attribute of epd_xds_author.<br clear="none"/></div>
+ * <div class="de">Rolle des Autors.<br clear="none"/><br clear="none"/>Dieser Code definiert die Rolle des Authors vom Dokument. Dies ist ein Sub-Attribut von epd_xds_author.<br clear="none"/></div>
+ * <div class="fr">Rôle de l'auteur.<br clear="none"/><br clear="none"/>Ce code définit le rôle de l'auteur du document. Il s'agit d'un sous-attribut de epd_xds_author.<br clear="none"/></div>
+ * <div class="it">Ruolo dell'autore.<br clear="none"/><br clear="none"/>Questo codice definisce il ruolo dell'autore <span style="display: inline !important; float: none; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-family: arial,helvetica,clean,sans-serif; font-size: 13px; font-size-adjust: none; font-stretch: 100%; font-style: normal; font-variant: normal; font-weight: 400; letter-spacing: normal; line-height: 15.86px; orphans: 2; text-align: left; text-decoration: none; text-indent: 0px; text-transform: none; -webkit-text-stroke-width: 0px; white-space: normal; word-spacing: 0px;">del documento</span>. È un sottoattributo di epd_xds_author.<br clear="none"/></div>
  * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
@@ -44,7 +44,8 @@ public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Assistente</div>
 	 * <!-- @formatter:on -->
 	 */
-	ASSISTANT("ASS", "2.16.756.5.30.1.127.3.10.6", "Assistant", "Assistant", "Hilfsperson", "Assistant", "Assistente"),
+	ASSISTANT("ASS", "2.16.756.5.30.1.127.3.10.6", "Assistant", "Assistant", "Hilfsperson",
+			"Assistant", "Assistente"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Healthcare professional</div>
@@ -53,7 +54,9 @@ public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Professionista della salute</div>
 	 * <!-- @formatter:on -->
 	 */
-	HEALTHCARE_PROFESSIONAL("HCP", "2.16.756.5.30.1.127.3.10.6", "Healthcare professional", "Healthcare professional", "Gesundheitsfachperson", "Professionnel de la santé", "Professionista della salute"),
+	HEALTHCARE_PROFESSIONAL("HCP", "2.16.756.5.30.1.127.3.10.6", "Healthcare professional",
+			"Healthcare professional", "Gesundheitsfachperson", "Professionnel de la santé",
+			"Professionista della salute"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Patient</div>
@@ -62,7 +65,8 @@ public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Paziente</div>
 	 * <!-- @formatter:on -->
 	 */
-	PATIENT("PAT", "2.16.756.5.30.1.127.3.10.6", "Patient", "Patient", "Patient", "Patient", "Paziente"),
+	PATIENT("PAT", "2.16.756.5.30.1.127.3.10.6", "Patient", "Patient", "Patient", "Patient",
+			"Paziente"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Representative</div>
@@ -71,7 +75,8 @@ public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Rappresentante</div>
 	 * <!-- @formatter:on -->
 	 */
-	REPRESENTATIVE("REP", "2.16.756.5.30.1.127.3.10.6", "Representative", "Representative", "Stellvertretung", "Représentant", "Rappresentante"),
+	REPRESENTATIVE("REP", "2.16.756.5.30.1.127.3.10.6", "Representative", "Representative",
+			"Stellvertretung", "Représentant", "Rappresentante"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Technical user</div>
@@ -80,7 +85,8 @@ public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Utente tecnico</div>
 	 * <!-- @formatter:on -->
 	 */
-	TECHNICAL_USER("TCU", "2.16.756.5.30.1.127.3.10.6", "Technical user", "Technical user", "Technischer Nutzer", "Utilisateur technique", "Utente tecnico");
+	TECHNICAL_USER("TCU", "2.16.756.5.30.1.127.3.10.6", "Technical user", "Technical user",
+			"Technischer Nutzer", "Utilisateur technique", "Utente tecnico");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -250,7 +256,9 @@ public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	DocumentEntryAuthorRole(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	DocumentEntryAuthorRole(String code, String codeSystem, String displayName,
+			String displayNameEn, String displayNameDe, String displayNameFr,
+			String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();

@@ -17,40 +17,43 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.10
- * Template description: Declaration of analyzer, test kit and manufacturer used to determine the result.All participating elements (including devices), MUST according to XD-LAB contain name, addr and telecom.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.10 Template
+ * description: Declaration of analyzer, test kit and manufacturer used to
+ * determine the result.All participating elements (including devices), MUST
+ * according to XD-LAB contain name, addr and telecom.
  */
-public class ChpalmEntryParticipantBodyDevice extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole {
+public class ChpalmEntryParticipantBodyDevice
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole {
 
 	/**
-	 * Gets the hl7PlayingDevice
-	 * Analyzer used to determine the result.
+	 * Gets the hl7PlayingDevice Analyzer used to determine the result.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Device getHl7PlayingDevice() {
 		return playingDevice;
 	}
 
 	/**
-	 * Gets the hl7ScopingEntity
-	 * The test kit and its manufacturer CAN be specified.
+	 * Gets the hl7ScopingEntity The test kit and its manufacturer CAN be
+	 * specified.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Entity getHl7ScopingEntity() {
 		return scopingEntity;
 	}
 
 	/**
-	 * Sets the hl7PlayingDevice
-	 * Analyzer used to determine the result.
+	 * Sets the hl7PlayingDevice Analyzer used to determine the result.
 	 */
-	public void setHl7PlayingDevice(org.ehealth_connector.common.hl7cdar2.POCDMT000040Device value) {
+	public void setHl7PlayingDevice(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Device value) {
 		this.playingDevice = value;
 	}
 
 	/**
-	 * Sets the hl7ScopingEntity
-	 * The test kit and its manufacturer CAN be specified.
+	 * Sets the hl7ScopingEntity The test kit and its manufacturer CAN be
+	 * specified.
 	 */
-	public void setHl7ScopingEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040Entity value) {
+	public void setHl7ScopingEntity(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Entity value) {
 		this.scopingEntity = value;
 	}
 }

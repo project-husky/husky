@@ -20,27 +20,35 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.8
- * Template description: The document MAY contain further signatures (besides the legal authenticator). A Laboratory Results Validator is such an authenticator. It is a laboratory specialist who has performed the clinical validation of the entire document or a subset of the laboratory results. If this element is specified, the following applies:
- * - If only one laboratory specialist has carried out the clinical validation of the document, it should be specified in the header, only.
- * - If multiple laboratory specialists were involved in the clinical validation of the document, all must be specified in the header and body (at entry, organizer or observation level, depending on the scope of the results that the corresponding person has validated).
- * - All persons and organizations, MUST according to XD-LAB contain name, addr and telecom.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.8 Template
+ * description: The document MAY contain further signatures (besides the legal
+ * authenticator). A Laboratory Results Validator is such an authenticator. It
+ * is a laboratory specialist who has performed the clinical validation of the
+ * entire document or a subset of the laboratory results. If this element is
+ * specified, the following applies: - If only one laboratory specialist has
+ * carried out the clinical validation of the document, it should be specified
+ * in the header, only. - If multiple laboratory specialists were involved in
+ * the clinical validation of the document, all must be specified in the header
+ * and body (at entry, organizer or observation level, depending on the scope of
+ * the results that the corresponding person has validated). - All persons and
+ * organizations, MUST according to XD-LAB contain name, addr and telecom.
  */
-public class ChpalmEntryLaboratoryResultsValidator extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 {
+public class ChpalmEntryLaboratoryResultsValidator
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 {
 
 	public ChpalmEntryLaboratoryResultsValidator() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.8"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.1.5"));
-	// chpalm_entry_LaboratoryResultsValidator/hl7:templateId:uid root = "2.16.756.5.30.1.1.10.4.8";
-	// chpalm_entry_LaboratoryResultsValidator/hl7:templateId:uid root = "1.3.6.1.4.1.19376.1.3.3.1.5";
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -64,7 +72,8 @@ public class ChpalmEntryLaboratoryResultsValidator extends org.ehealth_connector
 	/**
 	 * Sets the hl7ParticipantRole
 	 */
-	public void setHl7ParticipantRole(org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole value) {
+	public void setHl7ParticipantRole(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole value) {
 		this.participantRole = value;
 	}
 

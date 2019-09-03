@@ -17,10 +17,13 @@
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.20
- * Template description: Reusable template wherever a playing entity with a required name is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.20 Template
+ * description: Reusable template wherever a playing entity with a required name
+ * is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange
+ * formats MAY use this template by either reference or specialisation.
  *
  * Element description: The playing entity's name.
  */
-public class CdachOtherPlayingEntityCompilationWithName extends org.ehealth_connector.common.hl7cdar2.PN {
+public class CdachOtherPlayingEntityCompilationWithName
+		extends org.ehealth_connector.common.hl7cdar2.PN {
 }

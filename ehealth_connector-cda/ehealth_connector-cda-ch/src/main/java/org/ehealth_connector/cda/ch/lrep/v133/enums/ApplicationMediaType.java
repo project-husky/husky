@@ -41,19 +41,22 @@ public enum ApplicationMediaType implements ValueSetEnumInterface {
 	 * <div class="en">DICOM</div>
 	 * <!-- @formatter:on -->
 	 */
-	DICOM("application/dicom", "2.16.840.1.113883.5.79", "DICOM", "DICOM", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	DICOM("application/dicom", "2.16.840.1.113883.5.79", "DICOM", "DICOM", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">MSWORD</div>
 	 * <!-- @formatter:on -->
 	 */
-	MSWORD("application/msword", "2.16.840.1.113883.5.79", "MSWORD", "MSWORD", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	MSWORD("application/msword", "2.16.840.1.113883.5.79", "MSWORD", "MSWORD", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">PDF</div>
 	 * <!-- @formatter:on -->
 	 */
-	PDF("application/pdf", "2.16.840.1.113883.5.79", "PDF", "PDF", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	PDF("application/pdf", "2.16.840.1.113883.5.79", "PDF", "PDF", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -194,7 +197,8 @@ public enum ApplicationMediaType implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	ApplicationMediaType(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	ApplicationMediaType(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();

@@ -41,7 +41,8 @@ public enum AdministrativeGender implements ValueSetEnumInterface {
 	 * <div class="en">Female</div>
 	 * <!-- @formatter:on -->
 	 */
-	FEMALE("F", "2.16.840.1.113883.5.1", "Female", "Female", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	FEMALE("F", "2.16.840.1.113883.5.1", "Female", "Female", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Male</div>
@@ -53,7 +54,8 @@ public enum AdministrativeGender implements ValueSetEnumInterface {
 	 * <div class="en">Undifferentiated</div>
 	 * <!-- @formatter:on -->
 	 */
-	UNDIFFERENTIATED("UN", "2.16.840.1.113883.5.1", "Undifferentiated", "Undifferentiated", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	UNDIFFERENTIATED("UN", "2.16.840.1.113883.5.1", "Undifferentiated", "Undifferentiated",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -194,7 +196,8 @@ public enum AdministrativeGender implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	AdministrativeGender(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	AdministrativeGender(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
