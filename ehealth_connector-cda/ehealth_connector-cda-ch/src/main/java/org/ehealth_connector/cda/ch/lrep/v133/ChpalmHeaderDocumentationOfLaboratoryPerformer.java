@@ -30,10 +30,10 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * laboratory report content module adds the optional sub element
  * documentationOf/serviceEvent/statusCode to enable the sharing of non-final
  * reports. A report is considered as non-final (e.g., a preliminary report) if
- * and only if it documents an Act, which is still in the status â€œactiveâ€?
- * (i.e., serviceEvent/statusCode@code=â€?activeâ€?).The statusCode sub element
- * is an extension to the CDA R2 schema. This sub-element is optional. When it
- * is not there, the documented Act is assumed to be completed and the report is
+ * and only if it documents an Act, which is still in the status "active" (i.e.,
+ * serviceEvent/statusCode@code="active").The statusCode sub element is an
+ * extension to the CDA R2 schema. This sub-element is optional. When it is not
+ * there, the documented Act is assumed to be completed and the report is
  * assumed to be a final report.
  */
 public class ChpalmHeaderDocumentationOfLaboratoryPerformer
