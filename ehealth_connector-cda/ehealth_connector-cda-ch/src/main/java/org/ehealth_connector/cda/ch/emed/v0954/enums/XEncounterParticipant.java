@@ -41,36 +41,31 @@ public enum XEncounterParticipant implements ValueSetEnumInterface {
 	 * <div class="en">admitter</div>
 	 * <!-- @formatter:on -->
 	 */
-	ADMITTER("ADM", "2.16.840.1.113883.5.90", "admitter", "admitter", "TOTRANSLATE", "TOTRANSLATE",
-			"TOTRANSLATE"),
+	ADMITTER("ADM", "2.16.840.1.113883.5.90", "admitter", "admitter", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">attender</div>
 	 * <!-- @formatter:on -->
 	 */
-	ATTENDER("ATND", "2.16.840.1.113883.5.90", "attender", "attender", "TOTRANSLATE", "TOTRANSLATE",
-			"TOTRANSLATE"),
+	ATTENDER("ATND", "2.16.840.1.113883.5.90", "attender", "attender", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">consultant</div>
 	 * <!-- @formatter:on -->
 	 */
-	CONSULTANT("CON", "2.16.840.1.113883.5.90", "consultant", "consultant", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	CONSULTANT("CON", "2.16.840.1.113883.5.90", "consultant", "consultant", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">discharger</div>
 	 * <!-- @formatter:on -->
 	 */
-	DISCHARGER("DIS", "2.16.840.1.113883.5.90", "discharger", "discharger", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	DISCHARGER("DIS", "2.16.840.1.113883.5.90", "discharger", "discharger", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">referrer</div>
 	 * <!-- @formatter:on -->
 	 */
-	REFERRER("REF", "2.16.840.1.113883.5.90", "referrer", "referrer", "TOTRANSLATE", "TOTRANSLATE",
-			"TOTRANSLATE");
+	REFERRER("REF", "2.16.840.1.113883.5.90", "referrer", "referrer", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -110,7 +105,7 @@ public enum XEncounterParticipant implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
+	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String VALUE_SET_ID = "2.16.840.1.113883.1.11.19600";
@@ -145,7 +140,7 @@ public enum XEncounterParticipant implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
+	 * <div class="de">PrÃ¼ft, ob der angegebene enum Teil dieses Value Sets ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param enumName
@@ -167,7 +162,7 @@ public enum XEncounterParticipant implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
+	 * <div class="de">PrÃ¼ft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param codeValue
@@ -225,8 +220,7 @@ public enum XEncounterParticipant implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	XEncounterParticipant(String code, String codeSystem, String displayName, String displayNameEn,
-			String displayNameDe, String displayNameFr, String displayNameIt) {
+	XEncounterParticipant(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
@@ -284,8 +278,8 @@ public enum XEncounterParticipant implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Gets the display name defined by the language param. If
 	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
-	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
+	 * <div class="de">Liefert display name gemÃ¤ss Parameter, falls es keine
+	 * Englische Ãœbersetzung gibt, wird der default-Name zurÃ¼ckgegeben.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param languageCode

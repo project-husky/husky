@@ -41,22 +41,19 @@ public enum ParticipationSignature implements ValueSetEnumInterface {
 	 * <div class="en">intended</div>
 	 * <!-- @formatter:on -->
 	 */
-	INTENDED("I", "2.16.840.1.113883.5.89", "intended", "intended", "TOTRANSLATE", "TOTRANSLATE",
-			"TOTRANSLATE"),
+	INTENDED("I", "2.16.840.1.113883.5.89", "intended", "intended", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">required</div>
 	 * <!-- @formatter:on -->
 	 */
-	REQUIRED("X", "2.16.840.1.113883.5.89", "required", "required", "TOTRANSLATE", "TOTRANSLATE",
-			"TOTRANSLATE"),
+	REQUIRED("X", "2.16.840.1.113883.5.89", "required", "required", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">signed</div>
 	 * <!-- @formatter:on -->
 	 */
-	SIGNED("S", "2.16.840.1.113883.5.89", "signed", "signed", "TOTRANSLATE", "TOTRANSLATE",
-			"TOTRANSLATE");
+	SIGNED("S", "2.16.840.1.113883.5.89", "signed", "signed", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -82,7 +79,7 @@ public enum ParticipationSignature implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
+	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String VALUE_SET_ID = "2.16.840.1.113883.1.11.10282";
@@ -117,7 +114,7 @@ public enum ParticipationSignature implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
+	 * <div class="de">PrÃ¼ft, ob der angegebene enum Teil dieses Value Sets ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param enumName
@@ -139,7 +136,7 @@ public enum ParticipationSignature implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
+	 * <div class="de">PrÃ¼ft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param codeValue
@@ -197,8 +194,7 @@ public enum ParticipationSignature implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	ParticipationSignature(String code, String codeSystem, String displayName, String displayNameEn,
-			String displayNameDe, String displayNameFr, String displayNameIt) {
+	ParticipationSignature(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
@@ -256,8 +252,8 @@ public enum ParticipationSignature implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Gets the display name defined by the language param. If
 	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
-	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
+	 * <div class="de">Liefert display name gemÃ¤ss Parameter, falls es keine
+	 * Englische Ãœbersetzung gibt, wird der default-Name zurÃ¼ckgegeben.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param languageCode

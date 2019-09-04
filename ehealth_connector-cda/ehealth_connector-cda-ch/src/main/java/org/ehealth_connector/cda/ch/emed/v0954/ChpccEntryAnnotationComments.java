@@ -20,35 +20,34 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.2 Template
- * description: This entry allows for a comment to be supplied with each entry.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.2
+ * Template description: This entry allows for a comment to be supplied with each entry.
  *
  * Element description: A comment to the parent entry.
  */
-public class ChpccEntryAnnotationComments
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
+public class ChpccEntryAnnotationComments extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
 
 	public ChpccEntryAnnotationComments() {
-		super.setClassCode(
-				org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
+		super.setClassCode(org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
 		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue("EVN"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.2"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.40"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.2"));
-		super.setCode(createHl7CodeFixedValue("48767-8", "2.16.840.1.113883.6.1", "LOINC",
-				"Annotation comment"));
+		super.setCode(createHl7CodeFixedValue("48767-8", "2.16.840.1.113883.6.1", "LOINC", "Annotation comment"));
 		super.setStatusCode(createHl7StatusCodeFixedValue("completed"));
 	}
 
 	/**
-	 * Adds a hl7Author The author of the comment MAY be specified.
+	 * Adds a hl7Author
+	 * The author of the comment MAY be specified.
 	 */
 	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
 		getAuthor().add(value);
 	}
 
 	/**
-	 * Adds a hl7Author The author of the comment MAY be specified.
+	 * Adds a hl7Author
+	 * The author of the comment MAY be specified.
 	 */
 	public void clearHl7Author() {
 		getAuthor().clear();
@@ -57,17 +56,12 @@ public class ChpccEntryAnnotationComments
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
-	 * @param code
-	 *            the desired fixed value for this argument.
-	 * @param codeSystem
-	 *            the desired fixed value for this argument.
-	 * @param codeSystemName
-	 *            the desired fixed value for this argument.
-	 * @param displayName
-	 *            the desired fixed value for this argument.
+	 * @param code the desired fixed value for this argument.
+	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName the desired fixed value for this argument.
+	 * @param displayName the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code,
-			String codeSystem, String codeSystemName, String displayName) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code, String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.setCode(code);
@@ -80,11 +74,9 @@ public class ChpccEntryAnnotationComments
 	/**
 	 * Creates fixed contents for CDA Element hl7StatusCode
 	 *
-	 * @param code
-	 *            the desired fixed value for this argument.
+	 * @param code the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(
-			String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		retVal.setCode(code);
@@ -94,11 +86,9 @@ public class ChpccEntryAnnotationComments
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
+	 * @param root the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
-			String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -106,23 +96,24 @@ public class ChpccEntryAnnotationComments
 	}
 
 	/**
-	 * Gets the hl7Code The reference to the text in the narrative section of
-	 * the section MUST be specified.
+	 * Gets the hl7Code
+	 * The reference to the text in the narrative section of the section MUST be specified.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
 		return code;
 	}
 
 	/**
-	 * Gets the hl7Id An ID for this item MAY be filled for traceability.
+	 * Gets the hl7Id
+	 * An ID for this item MAY be filled for traceability.
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7Id() {
 		return id;
 	}
 
 	/**
-	 * Gets the hl7StatusCode The status 'completed' indicates that the comment
-	 * is final.
+	 * Gets the hl7StatusCode
+	 * The status 'completed' indicates that the comment is final.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
 		return statusCode;
@@ -143,15 +134,16 @@ public class ChpccEntryAnnotationComments
 	}
 
 	/**
-	 * Sets the hl7Code The reference to the text in the narrative section of
-	 * the section MUST be specified.
+	 * Sets the hl7Code
+	 * The reference to the text in the narrative section of the section MUST be specified.
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CD value) {
 		this.code = value;
 	}
 
 	/**
-	 * Sets the hl7Id An ID for this item MAY be filled for traceability.
+	 * Sets the hl7Id
+	 * An ID for this item MAY be filled for traceability.
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		getId().clear();
@@ -159,8 +151,8 @@ public class ChpccEntryAnnotationComments
 	}
 
 	/**
-	 * Sets the hl7StatusCode The status 'completed' indicates that the comment
-	 * is final.
+	 * Sets the hl7StatusCode
+	 * The status 'completed' indicates that the comment is final.
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
 		this.statusCode = value;

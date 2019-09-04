@@ -20,15 +20,12 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.43 Template
- * description: Information on a patient contact. CDA-CH V2 derivatives, i.e.
- * Swiss exchange formats MAY use this template by either reference or
- * specialisation.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.43
+ * Template description: Information on a patient contact. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.
  *
  * Element description: Information on a patient contact.
  */
-public class CdachHeaderPatientContact
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 {
+public class CdachHeaderPatientContact extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 {
 
 	public CdachHeaderPatientContact() {
 		super.getTypeCode().add("IND");
@@ -39,11 +36,9 @@ public class CdachHeaderPatientContact
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
+	 * @param root the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
-			String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -51,8 +46,8 @@ public class CdachHeaderPatientContact
 	}
 
 	/**
-	 * Gets the hl7AssociatedEntity Either the contact person or the contact's
-	 * organization SHALL be present.
+	 * Gets the hl7AssociatedEntity
+	 * Either the contact person or the contact's organization SHALL be present.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity getHl7AssociatedEntity() {
 		return associatedEntity;
@@ -66,18 +61,18 @@ public class CdachHeaderPatientContact
 	}
 
 	/**
-	 * Gets the hl7Time Validity period of the participation.
+	 * Gets the hl7Time
+	 * Validity period of the participation.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.IVLTS getHl7Time() {
 		return time;
 	}
 
 	/**
-	 * Sets the hl7AssociatedEntity Either the contact person or the contact's
-	 * organization SHALL be present.
+	 * Sets the hl7AssociatedEntity
+	 * Either the contact person or the contact's organization SHALL be present.
 	 */
-	public void setHl7AssociatedEntity(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity value) {
+	public void setHl7AssociatedEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040AssociatedEntity value) {
 		this.associatedEntity = value;
 	}
 
@@ -90,7 +85,8 @@ public class CdachHeaderPatientContact
 	}
 
 	/**
-	 * Sets the hl7Time Validity period of the participation.
+	 * Sets the hl7Time
+	 * Validity period of the participation.
 	 */
 	public void setHl7Time(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
 		this.time = value;

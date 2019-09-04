@@ -20,17 +20,12 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.6 Template
- * description: Information about an authenticator of a CDA document. An
- * authenticator MUST be a person. All CDA-CH V2 derivatives, i.e. Swiss
- * exchange formats MUST use this template by either reference or
- * specialisation.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.6
+ * Template description: Information about an authenticator of a CDA document. An authenticator MUST be a person. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST use this template by either reference or specialisation.
  *
- * Element description: Information about an authenticator of a CDA document. An
- * authenticator MUST be a person.
+ * Element description: Information about an authenticator of a CDA document. An authenticator MUST be a person.
  */
-public class CdachHeaderAuthenticator
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Authenticator {
+public class CdachHeaderAuthenticator extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Authenticator {
 
 	public CdachHeaderAuthenticator() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.6"));
@@ -40,11 +35,9 @@ public class CdachHeaderAuthenticator
 	/**
 	 * Creates fixed contents for CDA Element hl7SignatureCode
 	 *
-	 * @param code
-	 *            the desired fixed value for this argument.
+	 * @param code the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CS createHl7SignatureCodeFixedValue(
-			String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7SignatureCodeFixedValue(String code) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		retVal.setCode(code);
@@ -54,11 +47,9 @@ public class CdachHeaderAuthenticator
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
+	 * @param root the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
-			String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -87,7 +78,8 @@ public class CdachHeaderAuthenticator
 	}
 
 	/**
-	 * Gets the hl7Time Timestamp of the signature.
+	 * Gets the hl7Time
+	 * Timestamp of the signature.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.TS getHl7Time() {
 		return time;
@@ -96,8 +88,7 @@ public class CdachHeaderAuthenticator
 	/**
 	 * Sets the hl7AssignedEntity
 	 */
-	public void setHl7AssignedEntity(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity value) {
+	public void setHl7AssignedEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity value) {
 		this.assignedEntity = value;
 	}
 
@@ -117,7 +108,8 @@ public class CdachHeaderAuthenticator
 	}
 
 	/**
-	 * Sets the hl7Time Timestamp of the signature.
+	 * Sets the hl7Time
+	 * Timestamp of the signature.
 	 */
 	public void setHl7Time(org.ehealth_connector.common.hl7cdar2.TS value) {
 		this.time = value;

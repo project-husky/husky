@@ -17,13 +17,10 @@
 package org.ehealth_connector.cda.ch.emed.v0954;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.22 Template
- * description: The RFC 1766 (ISO-639-1 and ISO 3166) based language in which
- * the narrative texts in this CDA document instance are written. All CDA-CH V2
- * derivatives, i.e. Swiss exchange formats MUST reference this template.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.22
+ * Template description: The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the narrative texts in this CDA document instance are written. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.
  *
- * Element description: The RFC 1766 (ISO-639-1 and ISO 3166) based language in
- * which the narrative texts in this CDA document instance are written.
+ * Element description: The RFC 1766 (ISO-639-1 and ISO 3166) based language in which the narrative texts in this CDA document instance are written.
  */
 public class CdachHeaderDocumentLanguage extends org.ehealth_connector.common.hl7cdar2.CS {
 

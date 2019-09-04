@@ -20,30 +20,20 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.44 Template
- * description: The Medication List section shall contain a description of the
- * Medication Treatment Plan-, Prescription-, Dispense- and Medication
- * Administration Items assembled to a medication list. It shall include zero to
- * many Medication Treatment Plan items and/or Prescription items and/or
- * Dispense items and/or Medication Administration Items altogether with related
- * Pharmaceutical Advice Items. See<a class="" href=
- * "http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PML.pdf"
- * target="" title="">IHE Pharmacy PML Suppl</a>.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.44
+ * Template description: The Medication List section shall contain a description of the Medication Treatment Plan-, Prescription-, Dispense- and Medication Administration Items assembled to a medication list. It shall include zero to many Medication Treatment Plan items and/or Prescription items and/or Dispense items and/or Medication Administration Items altogether with related Pharmaceutical Advice Items. See<a class="" href="http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PML.pdf" target="" title="">IHE Pharmacy PML Suppl</a>.
  */
-public class MedicationListSectionContentModule
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
+public class MedicationListSectionContentModule extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 
 	public MedicationListSectionContentModule() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.44"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.2.5"));
-		// This is fixed content for an optional element:
-		// createHl7CodeFixedValue("10160-0") --> Creating
-		// getPredefinedCode101600();
+	// This is fixed content for an optional element: createHl7CodeFixedValue("10160-0") --> Creating getPredefinedCode101600();
 	}
 
 	/**
-	 * Adds a hl7Author Information about the author of a CDA document, section
-	 * or entry. An author MAY be a person or a device.
+	 * Adds a hl7Author
+	 * Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
 	 */
 	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
 		getAuthor().add(value);
@@ -57,8 +47,8 @@ public class MedicationListSectionContentModule
 	}
 
 	/**
-	 * Adds a hl7Author Information about the author of a CDA document, section
-	 * or entry. An author MAY be a person or a device.
+	 * Adds a hl7Author
+	 * Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
 	 */
 	public void clearHl7Author() {
 		getAuthor().clear();
@@ -74,8 +64,7 @@ public class MedicationListSectionContentModule
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
-	 * @param code
-	 *            the desired fixed value for this argument.
+	 * @param code the desired fixed value for this argument.
 	 */
 	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code) {
 		ObjectFactory factory = new ObjectFactory();
@@ -87,11 +76,9 @@ public class MedicationListSectionContentModule
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
+	 * @param root the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
-			String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -134,9 +121,7 @@ public class MedicationListSectionContentModule
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
-	 * "10160-0"
-	 * 
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by: "10160-0"
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedCode101600() {

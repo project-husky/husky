@@ -17,9 +17,8 @@
 package org.ehealth_connector.cda.ch.emed.v0954;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.25 Template
- * description: Swiss Realm (CHE) of HL7 CDA. All CDA-CH V2 derivatives, i.e.
- * Swiss exchange formats MUST reference this template.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.25
+ * Template description: Swiss Realm (CHE) of HL7 CDA. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.
  *
  * Element description: Swiss Realm (CHE) of HL7 CDA.
  */

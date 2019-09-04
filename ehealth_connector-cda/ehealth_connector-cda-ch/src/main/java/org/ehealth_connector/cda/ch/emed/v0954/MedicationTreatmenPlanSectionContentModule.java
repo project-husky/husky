@@ -20,13 +20,10 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.13 Template
- * description: The Medication Treatment Plan Section contains a description of
- * the patient. It includes entries for Medication Treatment Plan Items as
- * described in the Medication Treatment Plan Item Entry Content Module.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.13
+ * Template description: The Medication Treatment Plan Section contains a description of the patient. It includes entries for Medication Treatment Plan Items as described in the Medication Treatment Plan Item Entry Content Module.
  */
-public class MedicationTreatmenPlanSectionContentModule
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
+public class MedicationTreatmenPlanSectionContentModule extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 
 	public MedicationTreatmenPlanSectionContentModule() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.13"));
@@ -35,16 +32,16 @@ public class MedicationTreatmenPlanSectionContentModule
 	}
 
 	/**
-	 * Adds a hl7Author Information about the author of a CDA document, section
-	 * or entry. An author MAY be a person or a device.
+	 * Adds a hl7Author
+	 * Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
 	 */
 	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
 		getAuthor().add(value);
 	}
 
 	/**
-	 * Adds a hl7Author Information about the author of a CDA document, section
-	 * or entry. An author MAY be a person or a device.
+	 * Adds a hl7Author
+	 * Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
 	 */
 	public void clearHl7Author() {
 		getAuthor().clear();
@@ -53,8 +50,7 @@ public class MedicationTreatmenPlanSectionContentModule
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
-	 * @param code
-	 *            the desired fixed value for this argument.
+	 * @param code the desired fixed value for this argument.
 	 */
 	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code) {
 		ObjectFactory factory = new ObjectFactory();
@@ -66,11 +62,9 @@ public class MedicationTreatmenPlanSectionContentModule
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
+	 * @param root the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
-			String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);

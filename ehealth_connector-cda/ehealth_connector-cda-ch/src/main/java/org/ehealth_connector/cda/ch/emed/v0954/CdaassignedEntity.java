@@ -17,12 +17,10 @@
 package org.ehealth_connector.cda.ch.emed.v0954;
 
 /**
- * Original ART-DECOR template id: 2.16.840.1.113883.10.12.153 Template
- * description: Template CDA AssignedEntity (prototype, directly derived from
- * POCD_RM000040 MIF)
+ * Original ART-DECOR template id: 2.16.840.1.113883.10.12.153
+ * Template description: Template CDA AssignedEntity (prototype, directly derived from POCD_RM000040 MIF)
  */
-public class CdaassignedEntity
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity {
+public class CdaassignedEntity extends org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity {
 
 	/**
 	 * Adds a hl7Addr
@@ -90,8 +88,7 @@ public class CdaassignedEntity
 	/**
 	 * Sets the hl7AssignedPerson
 	 */
-	public void setHl7AssignedPerson(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040Person value) {
+	public void setHl7AssignedPerson(org.ehealth_connector.common.hl7cdar2.POCDMT000040Person value) {
 		this.assignedPerson = value;
 	}
 
@@ -105,8 +102,7 @@ public class CdaassignedEntity
 	/**
 	 * Sets the hl7RepresentedOrganization
 	 */
-	public void setHl7RepresentedOrganization(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040Organization value) {
+	public void setHl7RepresentedOrganization(org.ehealth_connector.common.hl7cdar2.POCDMT000040Organization value) {
 		this.representedOrganization = value;
 	}
 }

@@ -19,12 +19,10 @@ package org.ehealth_connector.cda.ch.emed.v0954;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.840.1.113883.10.12.114 Template
- * description: Template CDA Authorization (prototype, directly derived from
- * POCD_RM000040 MIF)
+ * Original ART-DECOR template id: 2.16.840.1.113883.10.12.114
+ * Template description: Template CDA Authorization (prototype, directly derived from POCD_RM000040 MIF)
  */
-public class Cdaauthorization
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Authorization {
+public class Cdaauthorization extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Authorization {
 
 	public Cdaauthorization() {
 		super.getTypeCode().add("AUTH");
@@ -34,16 +32,12 @@ public class Cdaauthorization
 	/**
 	 * Creates fixed contents for CDA Element hl7Consent
 	 *
-	 * @param classCode
-	 *            the desired fixed value for this argument.
-	 * @param moodCode
-	 *            the desired fixed value for this argument.
+	 * @param classCode the desired fixed value for this argument.
+	 * @param moodCode the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Consent createHl7ConsentFixedValue(
-			String classCode, String moodCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Consent createHl7ConsentFixedValue(String classCode, String moodCode) {
 		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Consent retVal = factory
-				.createPOCDMT000040Consent();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Consent retVal = factory.createPOCDMT000040Consent();
 		retVal.getClassCode().add(classCode);
 		retVal.getMoodCode().add(moodCode);
 		return retVal;

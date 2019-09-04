@@ -20,17 +20,12 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.3 Template
- * description: The organization in whose name this CDA document has been
- * created (corresponds to the sender of a letter). All CDA-CH V2 derivatives,
- * i.e. Swiss exchange formats MUST use this template by either reference or
- * specialisation.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.3
+ * Template description: The organization in whose name this CDA document has been created (corresponds to the sender of a letter). All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST use this template by either reference or specialisation.
  *
- * Element description: The organization in whose name this CDA document has
- * been created (corresponds to the sender of a letter).
+ * Element description: The organization in whose name this CDA document has been created (corresponds to the sender of a letter).
  */
-public class CdachHeaderCustodian
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Custodian {
+public class CdachHeaderCustodian extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Custodian {
 
 	public CdachHeaderCustodian() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.3"));
@@ -39,11 +34,9 @@ public class CdachHeaderCustodian
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
+	 * @param root the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
-			String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -67,8 +60,7 @@ public class CdachHeaderCustodian
 	/**
 	 * Sets the hl7AssignedCustodian
 	 */
-	public void setHl7AssignedCustodian(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedCustodian value) {
+	public void setHl7AssignedCustodian(org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedCustodian value) {
 		this.assignedCustodian = value;
 	}
 

@@ -17,9 +17,8 @@
 package org.ehealth_connector.cda.ch.emed.v0954;
 
 /**
- * Original ART-DECOR template id: 2.16.840.1.113883.10.12.152 Template
- * description: Template CDA Person (prototype, directly derived from
- * POCD_RM000040 MIF)
+ * Original ART-DECOR template id: 2.16.840.1.113883.10.12.152
+ * Template description: Template CDA Person (prototype, directly derived from POCD_RM000040 MIF)
  */
 public class Cdaperson extends org.ehealth_connector.common.hl7cdar2.PN {
 }

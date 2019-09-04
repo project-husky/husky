@@ -20,22 +20,14 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.35 Template
- * description: Dosage Instructions are a set of data elements which together
- * represent the dosage instructions to a medication such as duration of
- * treatment, medication frequency, dose quantity, route of administration, etc.
- * Dosage Instructions may be provided structured and/or narrative. This entry
- * describes structured dosage instructions.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.35
+ * Template description: Dosage Instructions are a set of data elements which together represent the dosage instructions to a medication such as duration of treatment, medication frequency, dose quantity, route of administration, etc. Dosage Instructions may be provided structured and/or narrative. This entry describes structured dosage instructions.
  */
-public class DosageInstructionsStartStopFrequency
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
+public class DosageInstructionsStartStopFrequency extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
 
 	public DosageInstructionsStartStopFrequency() {
-		// This is fixed content for an optional element:
-		// createHl7EffectiveTimeFixedValue("A") --> Creating
-		// getPredefinedEffectiveTimeA();
-		// This is fixed content for an optional element:
-		// createHl7RouteCodeFixedValue() --> Creating getPredefinedRouteCode();
+	// This is fixed content for an optional element: createHl7EffectiveTimeFixedValue("A") --> Creating getPredefinedEffectiveTimeA();
+	// This is fixed content for an optional element: createHl7RouteCodeFixedValue() --> Creating getPredefinedRouteCode();
 	}
 
 	/**
@@ -55,11 +47,9 @@ public class DosageInstructionsStartStopFrequency
 	/**
 	 * Creates fixed contents for CDA Element hl7EffectiveTime
 	 *
-	 * @param operator
-	 *            the desired fixed value for this argument.
+	 * @param operator the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.IVLTS createHl7EffectiveTimeFixedValue(
-			String operator) {
+	private static org.ehealth_connector.common.hl7cdar2.IVLTS createHl7EffectiveTimeFixedValue(String operator) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.IVLTS retVal = factory.createIVLTS();
 		retVal.setOperator(org.ehealth_connector.common.hl7cdar2.SetOperator.fromValue(operator));
@@ -83,8 +73,8 @@ public class DosageInstructionsStartStopFrequency
 	}
 
 	/**
-	 * Gets the hl7EffectiveTime Dosage Instructions PCC 6.3.4.16.10 - Start and
-	 * Stop
+	 * Gets the hl7EffectiveTime
+	 * Dosage Instructions PCC 6.3.4.16.10 - Start and Stop
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.SXCMTS> getHl7EffectiveTime() {
 		return effectiveTime;
@@ -105,9 +95,7 @@ public class DosageInstructionsStartStopFrequency
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.IVLTS, filled by:
-	 * "A"
-	 * 
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.IVLTS, filled by: "A"
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.IVLTS getPredefinedEffectiveTimeA() {
@@ -116,7 +104,6 @@ public class DosageInstructionsStartStopFrequency
 
 	/**
 	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
-	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedRouteCode() {
@@ -131,8 +118,8 @@ public class DosageInstructionsStartStopFrequency
 	}
 
 	/**
-	 * Sets the hl7EffectiveTime Dosage Instructions PCC 6.3.4.16.10 - Start and
-	 * Stop
+	 * Sets the hl7EffectiveTime
+	 * Dosage Instructions PCC 6.3.4.16.10 - Start and Stop
 	 */
 	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
 		getEffectiveTime().clear();

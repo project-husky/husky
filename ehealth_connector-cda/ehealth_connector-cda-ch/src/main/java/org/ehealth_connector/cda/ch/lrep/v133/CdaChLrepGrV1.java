@@ -87,8 +87,7 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Adds a hl7DocumentationOf Information about a health service describing
-	 * the context of this CDA document.
+	 * Adds a hl7DocumentationOf
 	 */
 	public void addHl7DocumentationOf(
 			org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf value) {
@@ -115,7 +114,7 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Adds a hl7Participant Information on a patient's insurance.
+	 * Adds a hl7Participant Information on a patient's insurance card.
 	 */
 	public void addHl7Participant(
 			org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 value) {
@@ -168,8 +167,7 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Adds a hl7DocumentationOf Information about a health service describing
-	 * the context of this CDA document.
+	 * Adds a hl7DocumentationOf
 	 */
 	public void clearHl7DocumentationOf() {
 		getDocumentationOf().clear();
@@ -193,7 +191,7 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Adds a hl7Participant Information on a patient's insurance.
+	 * Adds a hl7Participant Information on a patient's insurance card.
 	 */
 	public void clearHl7Participant() {
 		getParticipant().clear();

@@ -21,19 +21,13 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.81 Template
- * description: A Pharmaceutical Advice Concern Item belongs to one
- * Pharmaceutical Advice Item and represents the information to concerns (e.g.,
- * problems, allergies, etc.) which the Medication Treatment Plan-,
- * Prescription-, Dispense- or Administration Item referenced by the underlying
- * Pharmaceutical Advice Item causes.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.81
+ * Template description: A Pharmaceutical Advice Concern Item belongs to one Pharmaceutical Advice Item and represents the information to concerns (e.g., problems, allergies, etc.) which the Medication Treatment Plan-, Prescription-, Dispense- or Administration Item referenced by the underlying Pharmaceutical Advice Item causes.
  */
-public class PharmaceuticalAdviceConcernEntryContentModule
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
+public class PharmaceuticalAdviceConcernEntryContentModule extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
 
 	public PharmaceuticalAdviceConcernEntryContentModule() {
-		super.setClassCode(
-				org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
+		super.setClassCode(org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
 		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue("EVN"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.81"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.27"));
@@ -41,25 +35,17 @@ public class PharmaceuticalAdviceConcernEntryContentModule
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.5"));
 		super.setCode(createHl7CodeFixedValue("NA"));
 		super.setStatusCode(createHl7StatusCodeFixedValue("active"));
-		// This is fixed content for an optional element:
-		// createHl7EntryRelationshipFixedValue("SUBJ", null) --> Creating
-		// getPredefinedEntryRelationshipSubjNull();
-		// This is fixed content for an optional element:
-		// createHl7EntryRelationshipFixedValue("REFR", "false") --> Creating
-		// getPredefinedEntryRelationshipRefrFalse();
-		// This is fixed content for an optional element:
-		// createHl7EntryRelationshipFixedValue("SUBJ", "true") --> Creating
-		// getPredefinedEntryRelationshipSubjTrue();
+	// This is fixed content for an optional element: createHl7EntryRelationshipFixedValue("SUBJ", null) --> Creating getPredefinedEntryRelationshipSubjNull();
+	// This is fixed content for an optional element: createHl7EntryRelationshipFixedValue("REFR", "false") --> Creating getPredefinedEntryRelationshipRefrFalse();
+	// This is fixed content for an optional element: createHl7EntryRelationshipFixedValue("SUBJ", "true") --> Creating getPredefinedEntryRelationshipSubjTrue();
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
-	 * @param nullFlavor
-	 *            the desired fixed value for this argument.
+	 * @param nullFlavor the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(
-			String nullFlavor) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String nullFlavor) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.nullFlavor = new ArrayList<String>();
@@ -70,18 +56,13 @@ public class PharmaceuticalAdviceConcernEntryContentModule
 	/**
 	 * Creates fixed contents for CDA Element hl7EntryRelationship
 	 *
-	 * @param typeCode
-	 *            the desired fixed value for this argument.
-	 * @param inversionInd
-	 *            the desired fixed value for this argument.
+	 * @param typeCode the desired fixed value for this argument.
+	 * @param inversionInd the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(
-			String typeCode, String inversionInd) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
 		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship retVal = factory
-				.createPOCDMT000040EntryRelationship();
-		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship
-				.fromValue(typeCode));
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
+		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship.fromValue(typeCode));
 		retVal.setInversionInd(Boolean.parseBoolean(inversionInd));
 		return retVal;
 	}
@@ -89,11 +70,9 @@ public class PharmaceuticalAdviceConcernEntryContentModule
 	/**
 	 * Creates fixed contents for CDA Element hl7StatusCode
 	 *
-	 * @param code
-	 *            the desired fixed value for this argument.
+	 * @param code the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(
-			String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		retVal.setCode(code);
@@ -103,11 +82,9 @@ public class PharmaceuticalAdviceConcernEntryContentModule
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
+	 * @param root the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
-			String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -115,14 +92,16 @@ public class PharmaceuticalAdviceConcernEntryContentModule
 	}
 
 	/**
-	 * Gets the hl7Code Code
+	 * Gets the hl7Code
+	 * Code
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
 		return code;
 	}
 
 	/**
-	 * Gets the hl7EffectiveTime Problems determined
+	 * Gets the hl7EffectiveTime
+	 * Problems determined
 	 */
 	public org.ehealth_connector.common.hl7cdar2.IVLTS getHl7EffectiveTime() {
 		return effectiveTime;
@@ -136,39 +115,39 @@ public class PharmaceuticalAdviceConcernEntryContentModule
 	}
 
 	/**
-	 * Gets the hl7Id Pharmaceutical Advice Concern ID
+	 * Gets the hl7Id
+	 * Pharmaceutical Advice Concern ID
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7Id() {
 		return id;
 	}
 
 	/**
-	 * Gets the hl7StatusCode Status Code
+	 * Gets the hl7StatusCode
+	 * Status Code
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
 		return statusCode;
 	}
 
 	/**
-	 * Gets the hl7TemplateId CH-PHARM Pharmaceutical Advice Concern Entry
-	 * TemplateID
+	 * Gets the hl7TemplateId
+	 * CH-PHARM Pharmaceutical Advice Concern Entry TemplateID
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
 		return templateId;
 	}
 
 	/**
-	 * Gets the hl7Text Narrative description of the concern
+	 * Gets the hl7Text
+	 * Narrative description of the concern
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ED getHl7Text() {
 		return text;
 	}
 
 	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "REFR", "false"
-	 * 
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "REFR", "false"
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrFalse() {
@@ -176,10 +155,7 @@ public class PharmaceuticalAdviceConcernEntryContentModule
 	}
 
 	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "SUBJ", null
-	 * 
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "SUBJ", null
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjNull() {
@@ -187,10 +163,7 @@ public class PharmaceuticalAdviceConcernEntryContentModule
 	}
 
 	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "SUBJ", "true"
-	 * 
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "SUBJ", "true"
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjTrue() {
@@ -198,14 +171,16 @@ public class PharmaceuticalAdviceConcernEntryContentModule
 	}
 
 	/**
-	 * Sets the hl7Code Code
+	 * Sets the hl7Code
+	 * Code
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CD value) {
 		this.code = value;
 	}
 
 	/**
-	 * Sets the hl7EffectiveTime Problems determined
+	 * Sets the hl7EffectiveTime
+	 * Problems determined
 	 */
 	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
 		this.effectiveTime = value;
@@ -214,14 +189,14 @@ public class PharmaceuticalAdviceConcernEntryContentModule
 	/**
 	 * Sets the hl7EntryRelationship
 	 */
-	public void setHl7EntryRelationship(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship value) {
+	public void setHl7EntryRelationship(org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship value) {
 		getEntryRelationship().clear();
 		getEntryRelationship().add(value);
 	}
 
 	/**
-	 * Sets the hl7Id Pharmaceutical Advice Concern ID
+	 * Sets the hl7Id
+	 * Pharmaceutical Advice Concern ID
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		getId().clear();
@@ -229,15 +204,16 @@ public class PharmaceuticalAdviceConcernEntryContentModule
 	}
 
 	/**
-	 * Sets the hl7StatusCode Status Code
+	 * Sets the hl7StatusCode
+	 * Status Code
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
 		this.statusCode = value;
 	}
 
 	/**
-	 * Sets the hl7TemplateId CH-PHARM Pharmaceutical Advice Concern Entry
-	 * TemplateID
+	 * Sets the hl7TemplateId
+	 * CH-PHARM Pharmaceutical Advice Concern Entry TemplateID
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		getTemplateId().clear();
@@ -245,7 +221,8 @@ public class PharmaceuticalAdviceConcernEntryContentModule
 	}
 
 	/**
-	 * Sets the hl7Text Narrative description of the concern
+	 * Sets the hl7Text
+	 * Narrative description of the concern
 	 */
 	public void setHl7Text(org.ehealth_connector.common.hl7cdar2.ED value) {
 		this.text = value;

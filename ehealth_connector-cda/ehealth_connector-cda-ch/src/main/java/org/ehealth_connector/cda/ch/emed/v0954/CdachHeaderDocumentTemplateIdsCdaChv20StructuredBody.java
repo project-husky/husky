@@ -20,33 +20,25 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.18 Template
- * description: CDA-CH V2 bases on HL7 CDA R2 (2005) and - by using this
- * template - require a structured body. All CDA-CH V2 derivatives, i.e. Swiss
- * exchange formats SHALL reference this template. These SHALL define further
- * template ids in their own separate templates.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.18
+ * Template description: CDA-CH V2 bases on HL7 CDA R2 (2005) and - by using this template - require a structured body. All CDA-CH V2 derivatives, i.e. Swiss exchange formats SHALL reference this template. These SHALL define further template ids in their own separate templates.
  *
  * Element description: HL7 CDA R2 (2005).
  */
-public class CdachHeaderDocumentTemplateIdsCdaChv20StructuredBody
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
+public class CdachHeaderDocumentTemplateIdsCdaChv20StructuredBody extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
 
 	public CdachHeaderDocumentTemplateIdsCdaChv20StructuredBody() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.2"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.1"));
-		// This is fixed content for an optional element:
-		// createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.4") --> Creating
-		// getPredefinedTemplateId21675653011114();
+	// This is fixed content for an optional element: createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.4") --> Creating getPredefinedTemplateId21675653011114();
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
+	 * @param root the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
-			String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -54,17 +46,15 @@ public class CdachHeaderDocumentTemplateIdsCdaChv20StructuredBody
 	}
 
 	/**
-	 * Gets the hl7TemplateId CDA-CH v2.0 specification. This is an
-	 * informational reference, only.
+	 * Gets the hl7TemplateId
+	 * CDA-CH v2.0 specification. This is an informational reference, only.
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
 		return templateId;
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
-	 * "2.16.756.5.30.1.1.1.1.4"
-	 * 
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by: "2.16.756.5.30.1.1.1.1.4"
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId21675653011114() {
@@ -72,8 +62,8 @@ public class CdachHeaderDocumentTemplateIdsCdaChv20StructuredBody
 	}
 
 	/**
-	 * Sets the hl7TemplateId CDA-CH v2.0 specification. This is an
-	 * informational reference, only.
+	 * Sets the hl7TemplateId
+	 * CDA-CH v2.0 specification. This is an informational reference, only.
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		getTemplateId().clear();

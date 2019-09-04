@@ -17,50 +17,40 @@
 package org.ehealth_connector.cda.ch.emed.v0954;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.21 Template
- * description: Reusable template wherever a device with required name is used
- * in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats
- * MAY use this template by either reference or specialisation.A device is
- * either a physical device (e.g. analyzer with which laboratory results are
- * determined) or a software (e.g. laboratory information system, in which
- * laboratory results are documented).
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.21
+ * Template description: Reusable template wherever a device with required name is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.A device is either a physical device (e.g. analyzer with which laboratory results are determined) or a software (e.g. laboratory information system, in which laboratory results are documented).
  *
- * Element description: The name of the device MUST be declared.Note:Altough
- * this element is called softwareName, it contains also the name of physical
- * devices (e.g. laboratory analyzer).
+ * Element description: The name of the device MUST be declared.Note:Altough this element is called softwareName, it contains also the name of physical devices (e.g. laboratory analyzer).
  */
-public class CdachOtherDeviceCompilationWithName
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040AuthoringDevice {
+public class CdachOtherDeviceCompilationWithName extends org.ehealth_connector.common.hl7cdar2.POCDMT000040AuthoringDevice {
 
 	/**
-	 * Gets the hl7ManufacturerModelName The model name of the device MAY be
-	 * declared.
+	 * Gets the hl7ManufacturerModelName
+	 * The model name of the device MAY be declared.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.SC getHl7ManufacturerModelName() {
 		return manufacturerModelName;
 	}
 
 	/**
-	 * Gets the hl7SoftwareName The name of the device MUST be
-	 * declared.Note:Altough this element is called softwareName, it contains
-	 * also the name of physical devices (e.g. laboratory analyzer).
+	 * Gets the hl7SoftwareName
+	 * The name of the device MUST be declared.Note:Altough this element is called softwareName, it contains also the name of physical devices (e.g. laboratory analyzer).
 	 */
 	public org.ehealth_connector.common.hl7cdar2.SC getHl7SoftwareName() {
 		return softwareName;
 	}
 
 	/**
-	 * Sets the hl7ManufacturerModelName The model name of the device MAY be
-	 * declared.
+	 * Sets the hl7ManufacturerModelName
+	 * The model name of the device MAY be declared.
 	 */
 	public void setHl7ManufacturerModelName(org.ehealth_connector.common.hl7cdar2.SC value) {
 		this.manufacturerModelName = value;
 	}
 
 	/**
-	 * Sets the hl7SoftwareName The name of the device MUST be
-	 * declared.Note:Altough this element is called softwareName, it contains
-	 * also the name of physical devices (e.g. laboratory analyzer).
+	 * Sets the hl7SoftwareName
+	 * The name of the device MUST be declared.Note:Altough this element is called softwareName, it contains also the name of physical devices (e.g. laboratory analyzer).
 	 */
 	public void setHl7SoftwareName(org.ehealth_connector.common.hl7cdar2.SC value) {
 		this.softwareName = value;

@@ -20,18 +20,12 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.16 Template
- * description: Reference to one or more orders which led to the creation of
- * this CDA document. It SHALL be declared, when the order reference is relevant
- * for some reason. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST
- * reference this template.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.16
+ * Template description: Reference to one or more orders which led to the creation of this CDA document. It SHALL be declared, when the order reference is relevant for some reason. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.
  *
- * Element description: Reference to one or more orders which led to the
- * creation of this CDA document. It SHALL be declared, when the order reference
- * is relevant for some reason.
+ * Element description: Reference to one or more orders which led to the creation of this CDA document. It SHALL be declared, when the order reference is relevant for some reason.
  */
-public class CdachHeaderOrderReference
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040InFulfillmentOf {
+public class CdachHeaderOrderReference extends org.ehealth_connector.common.hl7cdar2.POCDMT000040InFulfillmentOf {
 
 	public CdachHeaderOrderReference() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.16"));
@@ -40,11 +34,9 @@ public class CdachHeaderOrderReference
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
+	 * @param root the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
-			String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
