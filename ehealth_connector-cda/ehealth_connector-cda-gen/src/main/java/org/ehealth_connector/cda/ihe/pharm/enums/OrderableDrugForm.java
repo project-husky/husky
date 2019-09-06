@@ -17,12 +17,14 @@
 
 package org.ehealth_connector.cda.ihe.pharm.enums;
 
+import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * The Enum OrderableDrugFrom MaterialForm (OID 2.16.840.1.113883.5.85)
  */
-public enum OrderableDrugForm {
+public enum OrderableDrugForm implements ValueSetEnumInterface {
 
 	/** <div class="en"> Aerosol</div> */
 	AER("AER", "Aerosol"),
@@ -528,9 +530,40 @@ public enum OrderableDrugForm {
 	 *
 	 * @return the code
 	 */
+	@Override
 	public Code getCode() {
 		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, CODE_SYSTEM_NAME, displayNameEn);
 		return ehcCode;
+	}
+
+	@Override
+	public String getCodeSystemId() {
+		return CODE_SYSTEM_OID;
+	}
+
+	@Override
+	public String getCodeSystemName() {
+		return CODE_SYSTEM_NAME;
+	}
+
+	@Override
+	public String getCodeValue() {
+		return code;
+	}
+
+	@Override
+	public String getDisplayName(LanguageCode languageCode) {
+		return displayNameEn;
+	}
+
+	@Override
+	public String getValueSetId() {
+		return null;
+	}
+
+	@Override
+	public String getValueSetName() {
+		return null;
 	}
 
 }
