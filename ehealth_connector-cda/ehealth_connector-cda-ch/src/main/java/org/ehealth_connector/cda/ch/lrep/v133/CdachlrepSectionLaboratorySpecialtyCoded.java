@@ -51,9 +51,6 @@ public class CdachlrepSectionLaboratorySpecialtyCoded
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.2.1"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.77"));
 		super.setCode(createHl7CodeFixedValue("2.16.840.1.113883.6.1", "LOINC"));
-		// This is fixed content for an optional element:
-		// createHl7EntryFixedValue("DRIV") --> Creating
-		// getPredefinedEntryDriv();
 	}
 
 	/**

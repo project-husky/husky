@@ -35,10 +35,6 @@ public class CdachOtherPersonNameInformationCompilationECh0011
 
 	public CdachOtherPersonNameInformationCompilationECh0011() {
 		super.getName().add(createHl7NameFixedValue("L"));
-		// This is fixed content for an optional element:
-		// createHl7NameFixedValue("P") --> Creating getPredefinedNameP();
-		// This is fixed content for an optional element:
-		// createHl7NameFixedValue("ASGN") --> Creating getPredefinedNameAsgn();
 	}
 
 	/**

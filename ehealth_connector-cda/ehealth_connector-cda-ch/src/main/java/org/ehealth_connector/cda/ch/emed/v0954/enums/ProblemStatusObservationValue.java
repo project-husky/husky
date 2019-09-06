@@ -41,49 +41,57 @@ public enum ProblemStatusObservationValue implements ValueSetEnumInterface {
 	 * <div class="en">Active</div>
 	 * <!-- @formatter:on -->
 	 */
-	ACTIVE("55561003", "2.16.840.1.113883.6.96", "Active", "Active", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	ACTIVE("55561003", "2.16.840.1.113883.6.96", "Active", "Active", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Chronic</div>
 	 * <!-- @formatter:on -->
 	 */
-	CHRONIC("90734009", "2.16.840.1.113883.6.96", "Chronic", "Chronic", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	CHRONIC("90734009", "2.16.840.1.113883.6.96", "Chronic", "Chronic", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Inactive</div>
 	 * <!-- @formatter:on -->
 	 */
-	INACTIVE("73425007", "2.16.840.1.113883.6.96", "Inactive", "Inactive", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	INACTIVE("73425007", "2.16.840.1.113883.6.96", "Inactive", "Inactive", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Intermittent</div>
 	 * <!-- @formatter:on -->
 	 */
-	INTERMITTENT("7087005", "2.16.840.1.113883.6.96", "Intermittent", "Intermittent", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	INTERMITTENT("7087005", "2.16.840.1.113883.6.96", "Intermittent", "Intermittent", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Recurrent</div>
 	 * <!-- @formatter:on -->
 	 */
-	RECURRENT("255227004", "2.16.840.1.113883.6.96", "Recurrent", "Recurrent", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	RECURRENT("255227004", "2.16.840.1.113883.6.96", "Recurrent", "Recurrent", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Resolved</div>
 	 * <!-- @formatter:on -->
 	 */
-	RESOLVED("413322009", "2.16.840.1.113883.6.96", "Resolved", "Resolved", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	RESOLVED("413322009", "2.16.840.1.113883.6.96", "Resolved", "Resolved", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Ruled out</div>
 	 * <!-- @formatter:on -->
 	 */
-	RULED_OUT("410516002", "2.16.840.1.113883.6.96", "Ruled out", "Ruled out", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	RULED_OUT("410516002", "2.16.840.1.113883.6.96", "Ruled out", "Ruled out", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Rule out</div>
 	 * <!-- @formatter:on -->
 	 */
-	RULE_OUT("415684004", "2.16.840.1.113883.6.96", "Rule out", "Rule out", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	RULE_OUT("415684004", "2.16.840.1.113883.6.96", "Rule out", "Rule out", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -144,7 +152,7 @@ public enum ProblemStatusObservationValue implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
+	 * <div class="de">Identifikator für das Value Set</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String VALUE_SET_ID = "1.3.6.1.4.1.19376.1.5.3.1.11.2";
@@ -179,7 +187,7 @@ public enum ProblemStatusObservationValue implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">PrÃ¼ft, ob der angegebene enum Teil dieses Value Sets ist.</div>
+	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param enumName
@@ -201,7 +209,7 @@ public enum ProblemStatusObservationValue implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">PrÃ¼ft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
+	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param codeValue
@@ -259,7 +267,9 @@ public enum ProblemStatusObservationValue implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	ProblemStatusObservationValue(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	ProblemStatusObservationValue(String code, String codeSystem, String displayName,
+			String displayNameEn, String displayNameDe, String displayNameFr,
+			String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
@@ -317,8 +327,8 @@ public enum ProblemStatusObservationValue implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Gets the display name defined by the language param. If
 	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemÃ¤ss Parameter, falls es keine
-	 * Englische Ãœbersetzung gibt, wird der default-Name zurÃ¼ckgegeben.</div>
+	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
+	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param languageCode

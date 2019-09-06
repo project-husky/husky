@@ -41,91 +41,107 @@ public enum ChEmedTimingEvent implements ValueSetEnumInterface {
 	 * <div class="en">After breakfast</div>
 	 * <!-- @formatter:on -->
 	 */
-	AFTER_BREAKFAST("PCM", "2.16.840.1.113883.5.139", "After breakfast", "After breakfast", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	AFTER_BREAKFAST("PCM", "2.16.840.1.113883.5.139", "After breakfast", "After breakfast",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">After dinner</div>
 	 * <!-- @formatter:on -->
 	 */
-	AFTER_DINNER("PCV", "2.16.840.1.113883.5.139", "After dinner", "After dinner", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	AFTER_DINNER("PCV", "2.16.840.1.113883.5.139", "After dinner", "After dinner", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">After lunch</div>
 	 * <!-- @formatter:on -->
 	 */
-	AFTER_LUNCH("PCD", "2.16.840.1.113883.5.139", "After lunch", "After lunch", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	AFTER_LUNCH("PCD", "2.16.840.1.113883.5.139", "After lunch", "After lunch", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">After meal</div>
 	 * <!-- @formatter:on -->
 	 */
-	AFTER_MEAL("PC", "2.16.840.1.113883.5.139", "After meal", "After meal", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	AFTER_MEAL("PC", "2.16.840.1.113883.5.139", "After meal", "After meal", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Before breakfast</div>
 	 * <!-- @formatter:on -->
 	 */
-	BEFORE_BREAKFAST("ACM", "2.16.840.1.113883.5.139", "Before breakfast", "Before breakfast", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BEFORE_BREAKFAST("ACM", "2.16.840.1.113883.5.139", "Before breakfast", "Before breakfast",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Before dinner</div>
 	 * <!-- @formatter:on -->
 	 */
-	BEFORE_DINNER("ACV", "2.16.840.1.113883.5.139", "Before dinner", "Before dinner", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BEFORE_DINNER("ACV", "2.16.840.1.113883.5.139", "Before dinner", "Before dinner", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Before lunch</div>
 	 * <!-- @formatter:on -->
 	 */
-	BEFORE_LUNCH("ACD", "2.16.840.1.113883.5.139", "Before lunch", "Before lunch", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BEFORE_LUNCH("ACD", "2.16.840.1.113883.5.139", "Before lunch", "Before lunch", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Before meal</div>
 	 * <!-- @formatter:on -->
 	 */
-	BEFORE_MEAL("AC", "2.16.840.1.113883.5.139", "Before meal", "Before meal", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BEFORE_MEAL("AC", "2.16.840.1.113883.5.139", "Before meal", "Before meal", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Before sleep</div>
 	 * <!-- @formatter:on -->
 	 */
-	BEFORE_SLEEP("HS", "2.16.840.1.113883.5.139", "Before sleep", "Before sleep", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BEFORE_SLEEP("HS", "2.16.840.1.113883.5.139", "Before sleep", "Before sleep", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Between breakfast and lunch</div>
 	 * <!-- @formatter:on -->
 	 */
-	BETWEEN_BREAKFAST_AND_LUNCH("ICM", "2.16.840.1.113883.5.139", "Between breakfast and lunch", "Between breakfast and lunch", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BETWEEN_BREAKFAST_AND_LUNCH("ICM", "2.16.840.1.113883.5.139", "Between breakfast and lunch",
+			"Between breakfast and lunch", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Between dinner and the hour of sleep</div>
 	 * <!-- @formatter:on -->
 	 */
-	BETWEEN_DINNER_AND_THE_HOUR_OF_SLEEP("ICV", "2.16.840.1.113883.5.139", "Between dinner and the hour of sleep", "Between dinner and the hour of sleep", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BETWEEN_DINNER_AND_THE_HOUR_OF_SLEEP("ICV", "2.16.840.1.113883.5.139",
+			"Between dinner and the hour of sleep", "Between dinner and the hour of sleep",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Between lunch and dinner</div>
 	 * <!-- @formatter:on -->
 	 */
-	BETWEEN_LUNCH_AND_DINNER("ICD", "2.16.840.1.113883.5.139", "Between lunch and dinner", "Between lunch and dinner", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BETWEEN_LUNCH_AND_DINNER("ICD", "2.16.840.1.113883.5.139", "Between lunch and dinner",
+			"Between lunch and dinner", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Between meals</div>
 	 * <!-- @formatter:on -->
 	 */
-	BETWEEN_MEALS("IC", "2.16.840.1.113883.5.139", "Between meals", "Between meals", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	BETWEEN_MEALS("IC", "2.16.840.1.113883.5.139", "Between meals", "Between meals", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">During meals</div>
 	 * <!-- @formatter:on -->
 	 */
-	DURING_MEALS("C", "2.16.840.1.113883.5.139", "During meals", "During meals", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	DURING_MEALS("C", "2.16.840.1.113883.5.139", "During meals", "During meals", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Waking up</div>
 	 * <!-- @formatter:on -->
 	 */
-	WAKING_UP("WAKE", "2.16.840.1.113883.5.139", "Waking up", "Waking up", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	WAKING_UP("WAKE", "2.16.840.1.113883.5.139", "Waking up", "Waking up", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -235,7 +251,7 @@ public enum ChEmedTimingEvent implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
+	 * <div class="de">Identifikator für das Value Set</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.77.4.11.2";
@@ -270,7 +286,7 @@ public enum ChEmedTimingEvent implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">PrÃ¼ft, ob der angegebene enum Teil dieses Value Sets ist.</div>
+	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param enumName
@@ -292,7 +308,7 @@ public enum ChEmedTimingEvent implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">PrÃ¼ft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
+	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param codeValue
@@ -350,7 +366,8 @@ public enum ChEmedTimingEvent implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	ChEmedTimingEvent(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	ChEmedTimingEvent(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
@@ -408,8 +425,8 @@ public enum ChEmedTimingEvent implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Gets the display name defined by the language param. If
 	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemÃ¤ss Parameter, falls es keine
-	 * Englische Ãœbersetzung gibt, wird der default-Name zurÃ¼ckgegeben.</div>
+	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
+	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param languageCode

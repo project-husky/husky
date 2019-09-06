@@ -20,14 +20,16 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.38
- * Template description: Amount of units of the consumable to dispense
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.38 Template
+ * description: Amount of units of the consumable to dispense
  */
-public class PrescribedQuantityEntryContentModule extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Supply {
+public class PrescribedQuantityEntryContentModule
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Supply {
 
 	public PrescribedQuantityEntryContentModule() {
 		super.setClassCode(org.ehealth_connector.common.hl7cdar2.ActClassSupply.fromValue("SPLY"));
-		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("RQO"));
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("RQO"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.8"));
 		super.setIndependentInd(createHl7IndependentIndFixedValue("false"));
 		super.setQuantity(createHl7QuantityFixedValue("1"));
@@ -36,9 +38,11 @@ public class PrescribedQuantityEntryContentModule extends org.ehealth_connector.
 	/**
 	 * Creates fixed contents for CDA Element hl7IndependentInd
 	 *
-	 * @param value the desired fixed value for this argument.
+	 * @param value
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.BL createHl7IndependentIndFixedValue(String value) {
+	private static org.ehealth_connector.common.hl7cdar2.BL createHl7IndependentIndFixedValue(
+			String value) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.BL retVal = factory.createBL();
 		retVal.setValue(Boolean.parseBoolean(value));
@@ -48,9 +52,11 @@ public class PrescribedQuantityEntryContentModule extends org.ehealth_connector.
 	/**
 	 * Creates fixed contents for CDA Element hl7Quantity
 	 *
-	 * @param unit the desired fixed value for this argument.
+	 * @param unit
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.PQ createHl7QuantityFixedValue(String unit) {
+	private static org.ehealth_connector.common.hl7cdar2.PQ createHl7QuantityFixedValue(
+			String unit) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.PQ retVal = factory.createPQ();
 		retVal.setUnit(unit);
@@ -60,9 +66,11 @@ public class PrescribedQuantityEntryContentModule extends org.ehealth_connector.
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);

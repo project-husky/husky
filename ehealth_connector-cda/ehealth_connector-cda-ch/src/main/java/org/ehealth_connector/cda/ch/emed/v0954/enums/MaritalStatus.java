@@ -41,55 +41,64 @@ public enum MaritalStatus implements ValueSetEnumInterface {
 	 * <div class="en">Annulled</div>
 	 * <!-- @formatter:on -->
 	 */
-	ANNULLED("A", "2.16.840.1.113883.5.2", "Annulled", "Annulled", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	ANNULLED("A", "2.16.840.1.113883.5.2", "Annulled", "Annulled", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Divorced</div>
 	 * <!-- @formatter:on -->
 	 */
-	DIVORCED("D", "2.16.840.1.113883.5.2", "Divorced", "Divorced", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	DIVORCED("D", "2.16.840.1.113883.5.2", "Divorced", "Divorced", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Domestic partner</div>
 	 * <!-- @formatter:on -->
 	 */
-	DOMESTIC_PARTNER("T", "2.16.840.1.113883.5.2", "Domestic partner", "Domestic partner", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	DOMESTIC_PARTNER("T", "2.16.840.1.113883.5.2", "Domestic partner", "Domestic partner",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Interlocutory</div>
 	 * <!-- @formatter:on -->
 	 */
-	INTERLOCUTORY("I", "2.16.840.1.113883.5.2", "Interlocutory", "Interlocutory", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	INTERLOCUTORY("I", "2.16.840.1.113883.5.2", "Interlocutory", "Interlocutory", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Legally Separated</div>
 	 * <!-- @formatter:on -->
 	 */
-	LEGALLY_SEPARATED("L", "2.16.840.1.113883.5.2", "Legally Separated", "Legally Separated", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	LEGALLY_SEPARATED("L", "2.16.840.1.113883.5.2", "Legally Separated", "Legally Separated",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Married</div>
 	 * <!-- @formatter:on -->
 	 */
-	MARRIED("M", "2.16.840.1.113883.5.2", "Married", "Married", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	MARRIED("M", "2.16.840.1.113883.5.2", "Married", "Married", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Never Married</div>
 	 * <!-- @formatter:on -->
 	 */
-	NEVER_MARRIED("S", "2.16.840.1.113883.5.2", "Never Married", "Never Married", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	NEVER_MARRIED("S", "2.16.840.1.113883.5.2", "Never Married", "Never Married", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Polygamous</div>
 	 * <!-- @formatter:on -->
 	 */
-	POLYGAMOUS("P", "2.16.840.1.113883.5.2", "Polygamous", "Polygamous", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	POLYGAMOUS("P", "2.16.840.1.113883.5.2", "Polygamous", "Polygamous", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Widowed</div>
 	 * <!-- @formatter:on -->
 	 */
-	WIDOWED("W", "2.16.840.1.113883.5.2", "Widowed", "Widowed", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	WIDOWED("W", "2.16.840.1.113883.5.2", "Widowed", "Widowed", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -157,7 +166,7 @@ public enum MaritalStatus implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
+	 * <div class="de">Identifikator für das Value Set</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String VALUE_SET_ID = "2.16.840.1.113883.1.11.12212";
@@ -192,7 +201,7 @@ public enum MaritalStatus implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">PrÃ¼ft, ob der angegebene enum Teil dieses Value Sets ist.</div>
+	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param enumName
@@ -214,7 +223,7 @@ public enum MaritalStatus implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">PrÃ¼ft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
+	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param codeValue
@@ -272,7 +281,8 @@ public enum MaritalStatus implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	MaritalStatus(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	MaritalStatus(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
@@ -330,8 +340,8 @@ public enum MaritalStatus implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Gets the display name defined by the language param. If
 	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemÃ¤ss Parameter, falls es keine
-	 * Englische Ãœbersetzung gibt, wird der default-Name zurÃ¼ckgegeben.</div>
+	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
+	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param languageCode

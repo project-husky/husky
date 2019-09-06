@@ -19,13 +19,14 @@ package org.ehealth_connector.cda.ch.emed.v0954;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.840.1.113883.10.12.151
- * Template description: Template CDA Organization (prototype, directly derived from POCD_RM000040 MIF)
+ * Original ART-DECOR template id: 2.16.840.1.113883.10.12.151 Template
+ * description: Template CDA Organization (prototype, directly derived from
+ * POCD_RM000040 MIF)
  */
-public class Cdaorganization extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organization {
+public class Cdaorganization
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organization {
 
 	public Cdaorganization() {
-	// This is fixed content for an optional element: createHl7AsOrganizationPartOfFixedValue("PART") --> Creating getPredefinedAsOrganizationPartOfPart();
 	}
 
 	/**
@@ -87,11 +88,14 @@ public class Cdaorganization extends org.ehealth_connector.common.hl7cdar2.POCDM
 	/**
 	 * Creates fixed contents for CDA Element hl7AsOrganizationPartOf
 	 *
-	 * @param classCode the desired fixed value for this argument.
+	 * @param classCode
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040OrganizationPartOf createHl7AsOrganizationPartOfFixedValue(String classCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040OrganizationPartOf createHl7AsOrganizationPartOfFixedValue(
+			String classCode) {
 		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040OrganizationPartOf retVal = factory.createPOCDMT000040OrganizationPartOf();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040OrganizationPartOf retVal = factory
+				.createPOCDMT000040OrganizationPartOf();
 		retVal.getClassCode().add(classCode);
 		return retVal;
 	}
@@ -104,15 +108,18 @@ public class Cdaorganization extends org.ehealth_connector.common.hl7cdar2.POCDM
 	}
 
 	/**
-	 * Gets the hl7StandardIndustryClassCode
-	 * SHALL be chosen from domain OrganizationIndustryClass
+	 * Gets the hl7StandardIndustryClassCode SHALL be chosen from domain
+	 * OrganizationIndustryClass
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7StandardIndustryClassCode() {
 		return standardIndustryClassCode;
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040OrganizationPartOf, filled by: "PART"
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040OrganizationPartOf,
+	 * filled by: "PART"
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040OrganizationPartOf getPredefinedAsOrganizationPartOfPart() {
@@ -122,13 +129,14 @@ public class Cdaorganization extends org.ehealth_connector.common.hl7cdar2.POCDM
 	/**
 	 * Sets the hl7AsOrganizationPartOf
 	 */
-	public void setHl7AsOrganizationPartOf(org.ehealth_connector.common.hl7cdar2.POCDMT000040OrganizationPartOf value) {
+	public void setHl7AsOrganizationPartOf(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040OrganizationPartOf value) {
 		this.asOrganizationPartOf = value;
 	}
 
 	/**
-	 * Sets the hl7StandardIndustryClassCode
-	 * SHALL be chosen from domain OrganizationIndustryClass
+	 * Sets the hl7StandardIndustryClassCode SHALL be chosen from domain
+	 * OrganizationIndustryClass
 	 */
 	public void setHl7StandardIndustryClassCode(org.ehealth_connector.common.hl7cdar2.CE value) {
 		this.standardIndustryClassCode = value;

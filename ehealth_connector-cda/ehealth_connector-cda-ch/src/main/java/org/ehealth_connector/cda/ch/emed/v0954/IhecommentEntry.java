@@ -20,18 +20,27 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.5.3.1.4.2
- * Template description: This entry allows for a comment to be supplied with each entry. For CDA this structure is usually included in the target act using the &lt;entryRelationship&gt; element defined in the CDA Schema, but can also be used in the &lt;component&gt; element when the comment appears within an &lt;organizer&gt;. The example below shows recording a comment for an &lt;entry&gt;, and is used as context for the following sections. For HL7 Version 3 Messages, this relationship is represented with the element &lt;sourceOf&gt;, although the remainder of the typecodes and semantics are unchanged.Any condition or allergy may be the subject of a comment.
+ * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.5.3.1.4.2 Template
+ * description: This entry allows for a comment to be supplied with each entry.
+ * For CDA this structure is usually included in the target act using the
+ * &lt;entryRelationship&gt; element defined in the CDA Schema, but can also be
+ * used in the &lt;component&gt; element when the comment appears within an
+ * &lt;organizer&gt;. The example below shows recording a comment for an
+ * &lt;entry&gt;, and is used as context for the following sections. For HL7
+ * Version 3 Messages, this relationship is represented with the element
+ * &lt;sourceOf&gt;, although the remainder of the typecodes and semantics are
+ * unchanged.Any condition or allergy may be the subject of a comment.
  */
 public class IhecommentEntry extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
 
 	public IhecommentEntry() {
-		super.setClassCode(org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
+		super.setClassCode(
+				org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
 		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue("EVN"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.40"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.2"));
-		super.setCode(createHl7CodeFixedValue("48767-8"));
-		super.setStatusCode(createHl7StatusCodeFixedValue("completed"));
+		super.setCode(createHl7CodeFixedValue("48767-8", "2.16.840.1.113883.6.1", null, null));
+		super.setStatusCode(createHl7StatusCodeFixedValue("completed", null, null, null));
 	}
 
 	/**
@@ -51,33 +60,45 @@ public class IhecommentEntry extends org.ehealth_connector.common.hl7cdar2.POCDM
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
-	 * @param code the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code,
+			String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
 		return retVal;
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7StatusCode
 	 *
-	 * @param code the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(
+			String code, String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
 		return retVal;
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);

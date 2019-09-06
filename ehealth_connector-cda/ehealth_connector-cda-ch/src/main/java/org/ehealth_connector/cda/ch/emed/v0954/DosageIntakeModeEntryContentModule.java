@@ -20,23 +20,28 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.37
- * Template description: Dosage intake mode reference to free text (non structured) in narrative part.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.37 Template
+ * description: Dosage intake mode reference to free text (non structured) in
+ * narrative part.
  */
-public class DosageIntakeModeEntryContentModule extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
+public class DosageIntakeModeEntryContentModule
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
 
 	public DosageIntakeModeEntryContentModule() {
 		super.getClassCode().add("SBADM");
-		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("INT"));
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("INT"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.37"));
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -58,8 +63,10 @@ public class DosageIntakeModeEntryContentModule extends org.ehealth_connector.co
 	}
 
 	/**
-	 * Gets the hl7Text
-	 * This element SHALL be present. The URI given in the value attribute of the &lt;reference&gt; element points to an element in the narrative content that contains the complete text describing the dosage intake mode.
+	 * Gets the hl7Text This element SHALL be present. The URI given in the
+	 * value attribute of the &lt;reference&gt; element points to an element in
+	 * the narrative content that contains the complete text describing the
+	 * dosage intake mode.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ED getHl7Text() {
 		return text;
@@ -68,7 +75,8 @@ public class DosageIntakeModeEntryContentModule extends org.ehealth_connector.co
 	/**
 	 * Sets the hl7Consumable
 	 */
-	public void setHl7Consumable(org.ehealth_connector.common.hl7cdar2.POCDMT000040Consumable value) {
+	public void setHl7Consumable(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Consumable value) {
 		this.consumable = value;
 	}
 
@@ -81,8 +89,10 @@ public class DosageIntakeModeEntryContentModule extends org.ehealth_connector.co
 	}
 
 	/**
-	 * Sets the hl7Text
-	 * This element SHALL be present. The URI given in the value attribute of the &lt;reference&gt; element points to an element in the narrative content that contains the complete text describing the dosage intake mode.
+	 * Sets the hl7Text This element SHALL be present. The URI given in the
+	 * value attribute of the &lt;reference&gt; element points to an element in
+	 * the narrative content that contains the complete text describing the
+	 * dosage intake mode.
 	 */
 	public void setHl7Text(org.ehealth_connector.common.hl7cdar2.ED value) {
 		this.text = value;

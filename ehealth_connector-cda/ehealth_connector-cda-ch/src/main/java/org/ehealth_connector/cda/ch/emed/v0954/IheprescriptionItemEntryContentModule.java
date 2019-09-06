@@ -20,42 +20,34 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.9.1.3.2
- * Template description: 6.3.4.2 Prescription Item Entry Content Module
+ * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.9.1.3.2 Template
+ * description: 6.3.4.2 Prescription Item Entry Content Module
  */
-public class IheprescriptionItemEntryContentModule extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
+public class IheprescriptionItemEntryContentModule
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
 
 	public IheprescriptionItemEntryContentModule() {
 		super.getClassCode().add("SBADM");
-		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("INT"));
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("INT"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.2"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.7"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.24"));
 		super.setStatusCode(createHl7StatusCodeFixedValue("completed"));
-	// This is fixed content for an optional element: createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.7.1") --> Creating getPredefinedTemplateId136141193761531471();
-	// This is fixed content for an optional element: createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.8") --> Creating getPredefinedTemplateId13614119376153148();
-	// This is fixed content for an optional element: createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.9") --> Creating getPredefinedTemplateId13614119376153149();
-	// This is fixed content for an optional element: createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.10") --> Creating getPredefinedTemplateId136141193761531410();
-	// This is fixed content for an optional element: createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.11") --> Creating getPredefinedTemplateId136141193761531411();
-	// This is fixed content for an optional element: createHl7EffectiveTimeFixedValue("A") --> Creating getPredefinedEffectiveTimeA();
-	// This is fixed content for an optional element: createHl7EntryRelationshipFixedValue("COMP", null) --> Creating getPredefinedEntryRelationshipCompNull();
-	// This is fixed content for an optional element: createHl7EntryRelationshipFixedValue("RSON", null) --> Creating getPredefinedEntryRelationshipRsonNull();
-	// This is fixed content for an optional element: createHl7EntryRelationshipFixedValue("REFR", null) --> Creating getPredefinedEntryRelationshipRefrNull();
-	// This is fixed content for an optional element: createHl7EntryRelationshipFixedValue("SUBJ", "true") --> Creating getPredefinedEntryRelationshipSubjTrue();
-	// This is fixed content for an optional element: createHl7ReferenceFixedValue("XCRPT") --> Creating getPredefinedReferenceXcrpt();
 	}
 
 	/**
-	 * Adds a hl7EntryRelationship
-	 * IHE PCC medications VOL 2 for changes in dosage
+	 * Adds a hl7EntryRelationship IHE PCC medications VOL 2 for changes in
+	 * dosage
 	 */
-	public void addHl7EntryRelationship(org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship value) {
+	public void addHl7EntryRelationship(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship value) {
 		getEntryRelationship().add(value);
 	}
 
 	/**
-	 * Adds a hl7EntryRelationship
-	 * IHE PCC medications VOL 2 for changes in dosage
+	 * Adds a hl7EntryRelationship IHE PCC medications VOL 2 for changes in
+	 * dosage
 	 */
 	public void clearHl7EntryRelationship() {
 		getEntryRelationship().clear();
@@ -64,9 +56,11 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	/**
 	 * Creates fixed contents for CDA Element hl7EffectiveTime
 	 *
-	 * @param operator the desired fixed value for this argument.
+	 * @param operator
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.SXCMTS createHl7EffectiveTimeFixedValue(String operator) {
+	private static org.ehealth_connector.common.hl7cdar2.SXCMTS createHl7EffectiveTimeFixedValue(
+			String operator) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.SXCMTS retVal = factory.createSXCMTS();
 		retVal.setOperator(org.ehealth_connector.common.hl7cdar2.SetOperator.fromValue(operator));
@@ -76,13 +70,18 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	/**
 	 * Creates fixed contents for CDA Element hl7EntryRelationship
 	 *
-	 * @param typeCode the desired fixed value for this argument.
-	 * @param inversionInd the desired fixed value for this argument.
+	 * @param typeCode
+	 *            the desired fixed value for this argument.
+	 * @param inversionInd
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(
+			String typeCode, String inversionInd) {
 		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
-		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship.fromValue(typeCode));
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship retVal = factory
+				.createPOCDMT000040EntryRelationship();
+		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship
+				.fromValue(typeCode));
 		retVal.setInversionInd(Boolean.parseBoolean(inversionInd));
 		return retVal;
 	}
@@ -90,21 +89,27 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	/**
 	 * Creates fixed contents for CDA Element hl7Reference
 	 *
-	 * @param typeCode the desired fixed value for this argument.
+	 * @param typeCode
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(
+			String typeCode) {
 		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference retVal = factory.createPOCDMT000040Reference();
-		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipExternalReference.fromValue(typeCode));
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference retVal = factory
+				.createPOCDMT000040Reference();
+		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipExternalReference
+				.fromValue(typeCode));
 		return retVal;
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7StatusCode
 	 *
-	 * @param code the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(
+			String code) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		retVal.setCode(code);
@@ -114,9 +119,11 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -124,64 +131,58 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	}
 
 	/**
-	 * Gets the hl7Author
-	 * Prescriber
+	 * Gets the hl7Author Prescriber
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040Author> getHl7Author() {
 		return author;
 	}
 
 	/**
-	 * Gets the hl7Code
-	 * Code
+	 * Gets the hl7Code Code
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
 		return code;
 	}
 
 	/**
-	 * Gets the hl7Consumable
-	 * Consumable
+	 * Gets the hl7Consumable Consumable
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Consumable getHl7Consumable() {
 		return consumable;
 	}
 
 	/**
-	 * Gets the hl7EffectiveTime
-	 * Dosage Instructions PCC 6.3.4.16.10 - Start and Stop
+	 * Gets the hl7EffectiveTime Dosage Instructions PCC 6.3.4.16.10 - Start and
+	 * Stop
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.SXCMTS> getHl7EffectiveTime() {
 		return effectiveTime;
 	}
 
 	/**
-	 * Gets the hl7Id
-	 * Prescription Treatment Plan Item ID
+	 * Gets the hl7Id Prescription Treatment Plan Item ID
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7Id() {
 		return id;
 	}
 
 	/**
-	 * Gets the hl7Precondition
-	 * Precondition Criterion
+	 * Gets the hl7Precondition Precondition Criterion
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040Precondition> getHl7Precondition() {
 		return precondition;
 	}
 
 	/**
-	 * Gets the hl7Reference
-	 * ID of parent container (Community Prescription document)
+	 * Gets the hl7Reference ID of parent container (Community Prescription
+	 * document)
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference> getHl7Reference() {
 		return reference;
 	}
 
 	/**
-	 * Gets the hl7RepeatNumber
-	 * Number of repeats/refills
+	 * Gets the hl7RepeatNumber Number of repeats/refills
 	 */
 	public org.ehealth_connector.common.hl7cdar2.IVLINT getHl7RepeatNumber() {
 		return repeatNumber;
@@ -202,23 +203,23 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	}
 
 	/**
-	 * Gets the hl7TemplateId
-	 * Prescription Item Entry TemplateID
+	 * Gets the hl7TemplateId Prescription Item Entry TemplateID
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
 		return templateId;
 	}
 
 	/**
-	 * Gets the hl7Text
-	 * Narrative Text
+	 * Gets the hl7Text Narrative Text
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ED getHl7Text() {
 		return text;
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.SXCMTS, filled by: "A"
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.SXCMTS, filled
+	 * by: "A"
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.SXCMTS getPredefinedEffectiveTimeA() {
@@ -226,7 +227,10 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "COMP", null
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "COMP", null
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipCompNull() {
@@ -234,7 +238,10 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "REFR", null
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "REFR", null
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrNull() {
@@ -242,7 +249,10 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "RSON", null
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "RSON", null
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRsonNull() {
@@ -250,7 +260,10 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "SUBJ", "true"
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "SUBJ", "true"
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjTrue() {
@@ -258,7 +271,10 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference, filled by: "XCRPT"
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference, filled by:
+	 * "XCRPT"
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference getPredefinedReferenceXcrpt() {
@@ -266,7 +282,9 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by: "1.3.6.1.4.1.19376.1.5.3.1.4.10"
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
+	 * "1.3.6.1.4.1.19376.1.5.3.1.4.10"
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId136141193761531410() {
@@ -274,7 +292,9 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by: "1.3.6.1.4.1.19376.1.5.3.1.4.11"
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
+	 * "1.3.6.1.4.1.19376.1.5.3.1.4.11"
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId136141193761531411() {
@@ -282,7 +302,9 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by: "1.3.6.1.4.1.19376.1.5.3.1.4.7.1"
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
+	 * "1.3.6.1.4.1.19376.1.5.3.1.4.7.1"
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId136141193761531471() {
@@ -290,7 +312,9 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by: "1.3.6.1.4.1.19376.1.5.3.1.4.8"
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
+	 * "1.3.6.1.4.1.19376.1.5.3.1.4.8"
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId13614119376153148() {
@@ -298,7 +322,9 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by: "1.3.6.1.4.1.19376.1.5.3.1.4.9"
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
+	 * "1.3.6.1.4.1.19376.1.5.3.1.4.9"
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId13614119376153149() {
@@ -306,8 +332,7 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	}
 
 	/**
-	 * Sets the hl7Author
-	 * Prescriber
+	 * Sets the hl7Author Prescriber
 	 */
 	public void setHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
 		getAuthor().clear();
@@ -315,24 +340,23 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	}
 
 	/**
-	 * Sets the hl7Code
-	 * Code
+	 * Sets the hl7Code Code
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CD value) {
 		this.code = value;
 	}
 
 	/**
-	 * Sets the hl7Consumable
-	 * Consumable
+	 * Sets the hl7Consumable Consumable
 	 */
-	public void setHl7Consumable(org.ehealth_connector.common.hl7cdar2.POCDMT000040Consumable value) {
+	public void setHl7Consumable(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Consumable value) {
 		this.consumable = value;
 	}
 
 	/**
-	 * Sets the hl7EffectiveTime
-	 * Dosage Instructions PCC 6.3.4.16.10 - Start and Stop
+	 * Sets the hl7EffectiveTime Dosage Instructions PCC 6.3.4.16.10 - Start and
+	 * Stop
 	 */
 	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
 		getEffectiveTime().clear();
@@ -340,8 +364,7 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	}
 
 	/**
-	 * Sets the hl7Id
-	 * Prescription Treatment Plan Item ID
+	 * Sets the hl7Id Prescription Treatment Plan Item ID
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		getId().clear();
@@ -349,17 +372,17 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	}
 
 	/**
-	 * Sets the hl7Precondition
-	 * Precondition Criterion
+	 * Sets the hl7Precondition Precondition Criterion
 	 */
-	public void setHl7Precondition(org.ehealth_connector.common.hl7cdar2.POCDMT000040Precondition value) {
+	public void setHl7Precondition(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Precondition value) {
 		getPrecondition().clear();
 		getPrecondition().add(value);
 	}
 
 	/**
-	 * Sets the hl7Reference
-	 * ID of parent container (Community Prescription document)
+	 * Sets the hl7Reference ID of parent container (Community Prescription
+	 * document)
 	 */
 	public void setHl7Reference(org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference value) {
 		getReference().clear();
@@ -367,8 +390,7 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	}
 
 	/**
-	 * Sets the hl7RepeatNumber
-	 * Number of repeats/refills
+	 * Sets the hl7RepeatNumber Number of repeats/refills
 	 */
 	public void setHl7RepeatNumber(org.ehealth_connector.common.hl7cdar2.IVLINT value) {
 		this.repeatNumber = value;
@@ -389,8 +411,7 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	}
 
 	/**
-	 * Sets the hl7TemplateId
-	 * Prescription Item Entry TemplateID
+	 * Sets the hl7TemplateId Prescription Item Entry TemplateID
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		getTemplateId().clear();
@@ -398,8 +419,7 @@ public class IheprescriptionItemEntryContentModule extends org.ehealth_connector
 	}
 
 	/**
-	 * Sets the hl7Text
-	 * Narrative Text
+	 * Sets the hl7Text Narrative Text
 	 */
 	public void setHl7Text(org.ehealth_connector.common.hl7cdar2.ED value) {
 		this.text = value;

@@ -37,12 +37,6 @@ public class CdachlrepEntryLaboratoryIsolateOrganizerPathogenDetection
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.5"));
 		super.setStatusCode(createHl7StatusCodeFixedValue("completed"));
 		super.getSpecimen().add(createHl7SpecimenFixedValue("SPC"));
-		// This is fixed content for an optional element:
-		// createHl7ComponentFixedValue("COMP") --> Creating
-		// getPredefinedComponentComp();
-		// This is fixed content for an optional element:
-		// createHl7ReferenceFixedValue("REFR") --> Creating
-		// getPredefinedReferenceRefr();
 	}
 
 	/**

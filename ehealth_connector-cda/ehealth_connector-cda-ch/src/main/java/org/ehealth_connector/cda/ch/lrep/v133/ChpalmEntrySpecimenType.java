@@ -30,10 +30,6 @@ public class ChpalmEntrySpecimenType
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040PlayingEntity {
 
 	public ChpalmEntrySpecimenType() {
-		// This is fixed content for an optional element:
-		// createHl7CodeFixedValue("LOINC", "2.16.756.5.30.2.1.1.10", "CDA-CH
-		// Material") --> Creating
-		// getPredefinedCodeLoinc21675653021110CdaChMaterial();
 	}
 
 	/**

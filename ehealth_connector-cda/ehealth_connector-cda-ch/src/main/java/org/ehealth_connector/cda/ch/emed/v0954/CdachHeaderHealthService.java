@@ -20,12 +20,16 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.46
- * Template description: Information about a health service describing the context of this CDA document. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST use this template by either reference or specialisation.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.46 Template
+ * description: Information about a health service describing the context of
+ * this CDA document. All CDA-CH V2 derivatives, i.e. Swiss exchange formats
+ * MUST use this template by either reference or specialisation.
  *
- * Element description: Information about a health service describing the context of this CDA document.
+ * Element description: Information about a health service describing the
+ * context of this CDA document.
  */
-public class CdachHeaderHealthService extends org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf {
+public class CdachHeaderHealthService
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf {
 
 	public CdachHeaderHealthService() {
 		super.getTypeCode().add("DOC");
@@ -36,12 +40,16 @@ public class CdachHeaderHealthService extends org.ehealth_connector.common.hl7cd
 	/**
 	 * Creates fixed contents for CDA Element hl7ServiceEvent
 	 *
-	 * @param classCode the desired fixed value for this argument.
-	 * @param moodCode the desired fixed value for this argument.
+	 * @param classCode
+	 *            the desired fixed value for this argument.
+	 * @param moodCode
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040ServiceEvent createHl7ServiceEventFixedValue(String classCode, String moodCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040ServiceEvent createHl7ServiceEventFixedValue(
+			String classCode, String moodCode) {
 		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040ServiceEvent retVal = factory.createPOCDMT000040ServiceEvent();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040ServiceEvent retVal = factory
+				.createPOCDMT000040ServiceEvent();
 		retVal.getClassCode().add(classCode);
 		retVal.getMoodCode().add(moodCode);
 		return retVal;
@@ -50,9 +58,11 @@ public class CdachHeaderHealthService extends org.ehealth_connector.common.hl7cd
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -76,7 +86,8 @@ public class CdachHeaderHealthService extends org.ehealth_connector.common.hl7cd
 	/**
 	 * Sets the hl7ServiceEvent
 	 */
-	public void setHl7ServiceEvent(org.ehealth_connector.common.hl7cdar2.POCDMT000040ServiceEvent value) {
+	public void setHl7ServiceEvent(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040ServiceEvent value) {
 		this.serviceEvent = value;
 	}
 

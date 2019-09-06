@@ -19,15 +19,15 @@ package org.ehealth_connector.cda.ch.emed.v0954;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.840.1.113883.10.12.154
- * Template description: Template CDA Informant (prototype, directly derived from POCD_RM000040 MIF)
+ * Original ART-DECOR template id: 2.16.840.1.113883.10.12.154 Template
+ * description: Template CDA Informant (prototype, directly derived from
+ * POCD_RM000040 MIF)
  */
 public class Cdainformant extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Informant12 {
 
 	public Cdainformant() {
 		super.getTypeCode().add("INF");
 		super.setContextControlCode("OP");
-	// This is fixed content for an optional element: createHl7RelatedEntityFixedValue() --> Creating getPredefinedRelatedEntity();
 	}
 
 	/**
@@ -35,7 +35,8 @@ public class Cdainformant extends org.ehealth_connector.common.hl7cdar2.POCDMT00
 	 */
 	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity createHl7RelatedEntityFixedValue() {
 		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity retVal = factory.createPOCDMT000040RelatedEntity();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity retVal = factory
+				.createPOCDMT000040RelatedEntity();
 		return retVal;
 	}
 
@@ -54,7 +55,10 @@ public class Cdainformant extends org.ehealth_connector.common.hl7cdar2.POCDMT00
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity, filled by:
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity, filled
+	 * by:
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity getPredefinedRelatedEntity() {
@@ -64,14 +68,16 @@ public class Cdainformant extends org.ehealth_connector.common.hl7cdar2.POCDMT00
 	/**
 	 * Sets the hl7AssignedEntity
 	 */
-	public void setHl7AssignedEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity value) {
+	public void setHl7AssignedEntity(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity value) {
 		this.assignedEntity = value;
 	}
 
 	/**
 	 * Sets the hl7RelatedEntity
 	 */
-	public void setHl7RelatedEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity value) {
+	public void setHl7RelatedEntity(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity value) {
 		this.relatedEntity = value;
 	}
 }

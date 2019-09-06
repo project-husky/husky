@@ -20,28 +20,35 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.9.1.3.9.2
- * Template description: <div>At most one substitution act element MAY be present to inform that a substitution occurred..</div>
+ * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.9.1.3.9.2 Template
+ * description: <div>At most one substitution act element MAY be present to
+ * inform that a substitution occurred..</div>
  *
  * Element description: Substitution Act Content Module
  */
-public class IhesubstitutionActContentModule extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
+public class IhesubstitutionActContentModule
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
 
 	public IhesubstitutionActContentModule() {
-		super.setClassCode(org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
+		super.setClassCode(
+				org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
 		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue("EVN"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.9.2"));
-		super.setCode(createHl7CodeFixedValue("HL7 Substance Admin Substitution", "2.16.840.1.113883.5.1070"));
-		super.setStatusCode(createHl7StatusCodeFixedValue("completed"));
+		super.setCode(createHl7CodeFixedValue("HL7 Substance Admin Substitution",
+				"2.16.840.1.113883.5.1070"));
+		super.setStatusCode(createHl7StatusCodeFixedValue("completed", null, null, null));
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
-	 * @param codeSystemName the desired fixed value for this argument.
-	 * @param codeSystem the desired fixed value for this argument.
+	 * @param codeSystemName
+	 *            the desired fixed value for this argument.
+	 * @param codeSystem
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String codeSystemName, String codeSystem) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(
+			String codeSystemName, String codeSystem) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.setCodeSystemName(codeSystemName);
@@ -52,21 +59,28 @@ public class IhesubstitutionActContentModule extends org.ehealth_connector.commo
 	/**
 	 * Creates fixed contents for CDA Element hl7StatusCode
 	 *
-	 * @param code the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(
+			String code, String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
 		return retVal;
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);

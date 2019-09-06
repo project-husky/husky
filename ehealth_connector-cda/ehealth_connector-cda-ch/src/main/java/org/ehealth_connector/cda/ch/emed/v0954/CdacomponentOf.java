@@ -19,25 +19,31 @@ package org.ehealth_connector.cda.ch.emed.v0954;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.840.1.113883.10.12.113
- * Template description: Template CDA componentOf (prototype, directly derived from POCD_RM000040 MIF)
+ * Original ART-DECOR template id: 2.16.840.1.113883.10.12.113 Template
+ * description: Template CDA componentOf (prototype, directly derived from
+ * POCD_RM000040 MIF)
  */
 public class CdacomponentOf extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Component1 {
 
 	public CdacomponentOf() {
-		super.setTypeCode(org.ehealth_connector.common.hl7cdar2.ActRelationshipHasComponent.fromValue("COMP"));
+		super.setTypeCode(org.ehealth_connector.common.hl7cdar2.ActRelationshipHasComponent
+				.fromValue("COMP"));
 		super.setEncompassingEncounter(createHl7EncompassingEncounterFixedValue("ENC", "EVN"));
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7EncompassingEncounter
 	 *
-	 * @param classCode the desired fixed value for this argument.
-	 * @param moodCode the desired fixed value for this argument.
+	 * @param classCode
+	 *            the desired fixed value for this argument.
+	 * @param moodCode
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040EncompassingEncounter createHl7EncompassingEncounterFixedValue(String classCode, String moodCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040EncompassingEncounter createHl7EncompassingEncounterFixedValue(
+			String classCode, String moodCode) {
 		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040EncompassingEncounter retVal = factory.createPOCDMT000040EncompassingEncounter();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040EncompassingEncounter retVal = factory
+				.createPOCDMT000040EncompassingEncounter();
 		retVal.getClassCode().add(classCode);
 		retVal.getMoodCode().add(moodCode);
 		return retVal;
@@ -53,7 +59,8 @@ public class CdacomponentOf extends org.ehealth_connector.common.hl7cdar2.POCDMT
 	/**
 	 * Sets the hl7EncompassingEncounter
 	 */
-	public void setHl7EncompassingEncounter(org.ehealth_connector.common.hl7cdar2.POCDMT000040EncompassingEncounter value) {
+	public void setHl7EncompassingEncounter(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040EncompassingEncounter value) {
 		this.encompassingEncounter = value;
 	}
 }

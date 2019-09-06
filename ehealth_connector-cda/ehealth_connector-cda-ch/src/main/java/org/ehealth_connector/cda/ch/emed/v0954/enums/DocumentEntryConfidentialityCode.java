@@ -28,8 +28,8 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 /**
  * <!-- @formatter:off -->
  * <div class="en">Document confidentiality as per Annex 3  EPRO-FDHA.<br clear="none"/></div>
- * <div class="de">Vertraulichkeitsstufe gem�ss Anhang 3 EPDV-EDI.<br clear="none"/></div>
- * <div class="fr">Niveau de confidentialit� selon l'annexe 3 ODEP-DFI.<br clear="none"/></div>
+ * <div class="de">Vertraulichkeitsstufe gemäss Anhang 3 EPDV-EDI.<br clear="none"/></div>
+ * <div class="fr">Niveau de confidentialité selon l'annexe 3 ODEP-DFI.<br clear="none"/></div>
  * <div class="it">Grado di riservatezza secondo l'allegato 3 OCIP-DFI.<br clear="none"/></div>
  * <!-- @formatter:on -->
  */
@@ -39,21 +39,25 @@ public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Normally accessible</div>
-	 * <div class="de">Normal zug�nglich</div>
+	 * <div class="de">Normal zugänglich</div>
 	 * <div class="fr">Normalement accessible</div>
 	 * <div class="it">Normalmente accessibile</div>
 	 * <!-- @formatter:on -->
 	 */
-	NORMALLY_ACCESSIBLE("17621005", "2.16.840.1.113883.6.96", "Normal (qualifier value)", "Normally accessible", "Normal zug�nglich", "Normalement accessible", "Normalmente accessibile"),
+	NORMALLY_ACCESSIBLE("17621005", "2.16.840.1.113883.6.96", "Normal (qualifier value)",
+			"Normally accessible", "Normal zugänglich", "Normalement accessible",
+			"Normalmente accessibile"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Restricted accessible</div>
-	 * <div class="de">Eingeschr�nkt zug�nglich</div>
+	 * <div class="de">Eingeschränkt zugänglich</div>
 	 * <div class="fr">Restreint accessible</div>
 	 * <div class="it">Accessibile limitato</div>
 	 * <!-- @formatter:on -->
 	 */
-	RESTRICTED_ACCESSIBLE("263856008", "2.16.840.1.113883.6.96", "Restricted (qualifier value)", "Restricted accessible", "Eingeschr�nkt zug�nglich", "Restreint accessible", "Accessibile limitato"),
+	RESTRICTED_ACCESSIBLE("263856008", "2.16.840.1.113883.6.96", "Restricted (qualifier value)",
+			"Restricted accessible", "Eingeschränkt zugänglich", "Restreint accessible",
+			"Accessibile limitato"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Secret</div>
@@ -62,12 +66,13 @@ public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
 	 * <div class="it">Segreto</div>
 	 * <!-- @formatter:on -->
 	 */
-	SECRET("1141000195107", "2.16.756.5.30.1.127.3.4", "Secret (qualifier value)", "Secret", "Geheim", "Confidentiel", "Segreto");
+	SECRET("1141000195107", "2.16.756.5.30.1.127.3.4", "Secret (qualifier value)", "Secret",
+			"Geheim", "Confidentiel", "Segreto");
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Normally accessible</div>
-	 * <div class="de">Code für Normal zug�nglich</div>
+	 * <div class="de">Code für Normal zugänglich</div>
 	 * <div class="fr">Code de Normalement accessible</div>
 	 * <div class="it">Code per Normalmente accessibile</div>
 	 * <!-- @formatter:on -->
@@ -77,7 +82,7 @@ public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Restricted accessible</div>
-	 * <div class="de">Code für Eingeschr�nkt zug�nglich</div>
+	 * <div class="de">Code für Eingeschränkt zugänglich</div>
 	 * <div class="fr">Code de Restreint accessible</div>
 	 * <div class="it">Code per Accessibile limitato</div>
 	 * <!-- @formatter:on -->
@@ -97,7 +102,7 @@ public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
+	 * <div class="de">Identifikator für das Value Set</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.5";
@@ -132,7 +137,7 @@ public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">PrÃ¼ft, ob der angegebene enum Teil dieses Value Sets ist.</div>
+	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param enumName
@@ -154,7 +159,7 @@ public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">PrÃ¼ft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
+	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param codeValue
@@ -212,7 +217,9 @@ public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	DocumentEntryConfidentialityCode(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	DocumentEntryConfidentialityCode(String code, String codeSystem, String displayName,
+			String displayNameEn, String displayNameDe, String displayNameFr,
+			String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
@@ -270,8 +277,8 @@ public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Gets the display name defined by the language param. If
 	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemÃ¤ss Parameter, falls es keine
-	 * Englische Ãœbersetzung gibt, wird der default-Name zurÃ¼ckgegeben.</div>
+	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
+	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param languageCode

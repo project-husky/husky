@@ -30,9 +30,6 @@ public class CdachOtherAssignedEntityCompilationId
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity {
 
 	public CdachOtherAssignedEntityCompilationId() {
-		// This is fixed content for an optional element:
-		// createHl7CodeFixedValue("2.16.840.1.113883.6.96", "SNOMED CT") -->
-		// Creating getPredefinedCode2168401113883696SnomedCt();
 	}
 
 	/**

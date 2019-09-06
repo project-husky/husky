@@ -62,26 +62,6 @@ public class ChpalmEntryLaboratoryObservation
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.3"));
 		super.setCode(createHl7CodeFixedValue("NAV"));
 		super.setStatusCode(createHl7StatusCodeFixedValue());
-		// This is fixed content for an optional element:
-		// createHl7ValueFixedValue("NA") --> Creating getPredefinedValueNa();
-		// This is fixed content for an optional element:
-		// createHl7InterpretationCodeFixedValue() --> Creating
-		// getPredefinedInterpretationCode();
-		// This is fixed content for an optional element:
-		// createHl7EntryRelationshipFixedValue("COMP", null) --> Creating
-		// getPredefinedEntryRelationshipCompNull();
-		// This is fixed content for an optional element:
-		// createHl7EntryRelationshipFixedValue("SUBJ", "true") --> Creating
-		// getPredefinedEntryRelationshipSubjTrue();
-		// This is fixed content for an optional element:
-		// createHl7EntryRelationshipFixedValue("REFR", null) --> Creating
-		// getPredefinedEntryRelationshipRefrNull();
-		// This is fixed content for an optional element:
-		// createHl7ReferenceFixedValue("REFR") --> Creating
-		// getPredefinedReferenceRefr();
-		// This is fixed content for an optional element:
-		// createHl7ReferenceRangeFixedValue("REFV") --> Creating
-		// getPredefinedReferenceRangeRefv();
 	}
 
 	/**

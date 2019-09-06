@@ -21,10 +21,14 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.5.3.1.4.4.1
- * Template description: <div>CDA and HL7 Version 3 Entries may reference (point to) information contained in other entriesÂ <span style="line-height: 1.22;">within the same documentÂ </span></div>
+ * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.5.3.1.4.4.1 Template
+ * description: <div>CDA and HL7 Version 3 Entries may reference (point to)
+ * information contained in other
+ * entries <span style="line-height: 1.22;">within the same
+ * document </span></div>
  */
-public class IheinternalReferenceEntry extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
+public class IheinternalReferenceEntry
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
 
 	public IheinternalReferenceEntry() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.4.1"));
@@ -34,9 +38,11 @@ public class IheinternalReferenceEntry extends org.ehealth_connector.common.hl7c
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
-	 * @param nullFlavor the desired fixed value for this argument.
+	 * @param nullFlavor
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String nullFlavor) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(
+			String nullFlavor) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.nullFlavor = new ArrayList<String>();
@@ -47,9 +53,11 @@ public class IheinternalReferenceEntry extends org.ehealth_connector.common.hl7c
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);

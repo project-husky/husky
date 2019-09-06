@@ -38,10 +38,7 @@ public class ChpccEntryVitalSignsOrganizer
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.35"));
 		super.setCode(createHl7CodeFixedValue("46680005", "2.16.840.1.113883.6.96", "SNOMED CT",
 				"VITAL SIGNS"));
-		super.setStatusCode(createHl7StatusCodeFixedValue("completed"));
-		// This is fixed content for an optional element:
-		// createHl7ComponentFixedValue("COMP") --> Creating
-		// getPredefinedComponentComp();
+		super.setStatusCode(createHl7StatusCodeFixedValue("completed", null, null, null));
 	}
 
 	/**
@@ -119,10 +116,13 @@ public class ChpccEntryVitalSignsOrganizer
 	 *            the desired fixed value for this argument.
 	 */
 	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(
-			String code) {
+			String code, String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
 		return retVal;
 	}
 

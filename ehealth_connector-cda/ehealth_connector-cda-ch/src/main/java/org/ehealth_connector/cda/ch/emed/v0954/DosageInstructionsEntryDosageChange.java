@@ -17,15 +17,21 @@
 package org.ehealth_connector.cda.ch.emed.v0954;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.36
- * Template description: Dosage Instructions are a set of data elements which together represent the dosage instructions to a medication such as duration of treatment, medication frequency, dose quantity, route of administration, etc. Dosage Instructions may be provided structured and/or narrative. This entry describes structured dosage instructions.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.36 Template
+ * description: Dosage Instructions are a set of data elements which together
+ * represent the dosage instructions to a medication such as duration of
+ * treatment, medication frequency, dose quantity, route of administration, etc.
+ * Dosage Instructions may be provided structured and/or narrative. This entry
+ * describes structured dosage instructions.
  *
  * Element description: Dosage Instructions PCC 6.3.4.16.12 - Dosage change
  */
-public class DosageInstructionsEntryDosageChange extends org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship {
+public class DosageInstructionsEntryDosageChange
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship {
 
 	public DosageInstructionsEntryDosageChange() {
-		super.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship.fromValue("COMP"));
+		super.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship
+				.fromValue("COMP"));
 	}
 
 	/**
@@ -52,7 +58,8 @@ public class DosageInstructionsEntryDosageChange extends org.ehealth_connector.c
 	/**
 	 * Sets the hl7SubstanceAdministration
 	 */
-	public void setHl7SubstanceAdministration(org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration value) {
+	public void setHl7SubstanceAdministration(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration value) {
 		this.substanceAdministration = value;
 	}
 }

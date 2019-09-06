@@ -27,8 +27,8 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Patient�s gender as per Annex 3  EPRO-FDHA, Chapter 2.10.<br clear="none"/></div>
- * <div class="de">Geschlecht der Patientin oder des Patienten gem�ss Anhang 3 EPDV-EDI, Kapitel 2.10.<br clear="none"/></div>
+ * <div class="en">Patient’s gender as per Annex 3  EPRO-FDHA, Chapter 2.10.<br clear="none"/></div>
+ * <div class="de">Geschlecht der Patientin oder des Patienten gemäss Anhang 3 EPDV-EDI, Kapitel 2.10.<br clear="none"/></div>
  * <div class="fr">Sexe du patient selon l'annexe 3 ODEP-DFI, chapitre 2.10.<br clear="none"/></div>
  * <div class="it">Sesso del paziente secondo l'allegato 3 OCIP-DFI, capitolo 2.10.<br clear="none"/></div>
  * <!-- @formatter:on -->
@@ -40,20 +40,20 @@ public enum XdsSourPatInf implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Female</div>
 	 * <div class="de">Weiblich</div>
-	 * <div class="fr">F�minin</div>
+	 * <div class="fr">Féminin</div>
 	 * <div class="it">Femminile</div>
 	 * <!-- @formatter:on -->
 	 */
-	FEMALE("F", "2.16.840.1.113883.5.1", "Female", "Female", "Weiblich", "F�minin", "Femminile"),
+	FEMALE("F", "2.16.840.1.113883.5.1", "Female", "Female", "Weiblich", "Féminin", "Femminile"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Male</div>
-	 * <div class="de">M�nnlich</div>
+	 * <div class="de">Männlich</div>
 	 * <div class="fr">Masculin</div>
 	 * <div class="it">Maschile</div>
 	 * <!-- @formatter:on -->
 	 */
-	MALE("M", "2.16.840.1.113883.5.1", "Male", "Male", "M�nnlich", "Masculin", "Maschile"),
+	MALE("M", "2.16.840.1.113883.5.1", "Male", "Male", "Männlich", "Masculin", "Maschile"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Other</div>
@@ -68,7 +68,7 @@ public enum XdsSourPatInf implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Female</div>
 	 * <div class="de">Code für Weiblich</div>
-	 * <div class="fr">Code de F�minin</div>
+	 * <div class="fr">Code de Féminin</div>
 	 * <div class="it">Code per Femminile</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -77,7 +77,7 @@ public enum XdsSourPatInf implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Male</div>
-	 * <div class="de">Code für M�nnlich</div>
+	 * <div class="de">Code für Männlich</div>
 	 * <div class="fr">Code de Masculin</div>
 	 * <div class="it">Code per Maschile</div>
 	 * <!-- @formatter:on -->
@@ -97,7 +97,7 @@ public enum XdsSourPatInf implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
+	 * <div class="de">Identifikator für das Value Set</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.25";
@@ -132,7 +132,7 @@ public enum XdsSourPatInf implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">PrÃ¼ft, ob der angegebene enum Teil dieses Value Sets ist.</div>
+	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param enumName
@@ -154,7 +154,7 @@ public enum XdsSourPatInf implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">PrÃ¼ft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
+	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param codeValue
@@ -212,7 +212,8 @@ public enum XdsSourPatInf implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	XdsSourPatInf(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	XdsSourPatInf(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
@@ -270,8 +271,8 @@ public enum XdsSourPatInf implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Gets the display name defined by the language param. If
 	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemÃ¤ss Parameter, falls es keine
-	 * Englische Ãœbersetzung gibt, wird der default-Name zurÃ¼ckgegeben.</div>
+	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
+	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param languageCode

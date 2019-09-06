@@ -20,20 +20,29 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.9
- * Template description: The Meciation Card Section includes the current and planned medication of a patient. See<a class="" href="http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PML.pdf" target="" title="">IHE Pharmacy PML Suppl</a>. It includes entries for Medication Treatment Plan Items as described in the Medication Treatment Plan Item Entry Content Module. See also<a class="" href="http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_MTP.pdf" target="" title="">IHE Pharmacy MTP Suppl</a>. Other entries like Prescription, Dispense and Pharmaceutical Advise entries which are allowd in a PML section are not allowed in the eCurrentMedication section.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.9 Template
+ * description: The Meciation Card Section includes the current and planned
+ * medication of a patient. See<a class="" href=
+ * "http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PML.pdf"
+ * target="" title="">IHE Pharmacy PML Suppl</a>. It includes entries for
+ * Medication Treatment Plan Items as described in the Medication Treatment Plan
+ * Item Entry Content Module. See also<a class="" href=
+ * "http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_MTP.pdf"
+ * target="" title="">IHE Pharmacy MTP Suppl</a>. Other entries like
+ * Prescription, Dispense and Pharmaceutical Advise entries which are allowd in
+ * a PML section are not allowed in the eCurrentMedication section.
  */
-public class MedicationCardSectionContentModule extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
+public class MedicationCardSectionContentModule
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 
 	public MedicationCardSectionContentModule() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.9"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.2.5"));
-	// This is fixed content for an optional element: createHl7CodeFixedValue("10160-0") --> Creating getPredefinedCode101600();
 	}
 
 	/**
-	 * Adds a hl7Author
-	 * Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
+	 * Adds a hl7Author Information about the author of a CDA document, section
+	 * or entry. An author MAY be a person or a device.
 	 */
 	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
 		getAuthor().add(value);
@@ -47,8 +56,8 @@ public class MedicationCardSectionContentModule extends org.ehealth_connector.co
 	}
 
 	/**
-	 * Adds a hl7Author
-	 * Information about the author of a CDA document, section or entry. An author MAY be a person or a device.
+	 * Adds a hl7Author Information about the author of a CDA document, section
+	 * or entry. An author MAY be a person or a device.
 	 */
 	public void clearHl7Author() {
 		getAuthor().clear();
@@ -64,21 +73,28 @@ public class MedicationCardSectionContentModule extends org.ehealth_connector.co
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
-	 * @param code the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code,
+			String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
 		return retVal;
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -100,8 +116,7 @@ public class MedicationCardSectionContentModule extends org.ehealth_connector.co
 	}
 
 	/**
-	 * Gets the hl7TemplateId
-	 * CH-PHARM Medication Card Section Content Module
+	 * Gets the hl7TemplateId CH-PHARM Medication Card Section Content Module
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
 		return templateId;
@@ -122,11 +137,14 @@ public class MedicationCardSectionContentModule extends org.ehealth_connector.co
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by: "10160-0"
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
+	 * "10160-0", "2.16.840.1.113883.6.1", "LOINC", "History of medication use"
+	 * 
 	 * @return the predefined element.
 	 */
-	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedCode101600() {
-		return createHl7CodeFixedValue("10160-0");
+	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedCode101600216840111388361LoincHistoryOfMedicationUse() {
+		return createHl7CodeFixedValue("10160-0", "2.16.840.1.113883.6.1", "LOINC",
+				"History of medication use");
 	}
 
 	/**
@@ -144,8 +162,7 @@ public class MedicationCardSectionContentModule extends org.ehealth_connector.co
 	}
 
 	/**
-	 * Sets the hl7TemplateId
-	 * CH-PHARM Medication Card Section Content Module
+	 * Sets the hl7TemplateId CH-PHARM Medication Card Section Content Module
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		getTemplateId().clear();

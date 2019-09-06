@@ -41,25 +41,29 @@ public enum LanguageAbilityProficiency implements ValueSetEnumInterface {
 	 * <div class="en">Excellent</div>
 	 * <!-- @formatter:on -->
 	 */
-	EXCELLENT("E", "2.16.840.1.113883.5.61", "Excellent", "Excellent", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	EXCELLENT("E", "2.16.840.1.113883.5.61", "Excellent", "Excellent", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Fair</div>
 	 * <!-- @formatter:on -->
 	 */
-	FAIR("F", "2.16.840.1.113883.5.61", "Fair", "Fair", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	FAIR("F", "2.16.840.1.113883.5.61", "Fair", "Fair", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Good</div>
 	 * <!-- @formatter:on -->
 	 */
-	GOOD("G", "2.16.840.1.113883.5.61", "Good", "Good", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	GOOD("G", "2.16.840.1.113883.5.61", "Good", "Good", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Poor</div>
 	 * <!-- @formatter:on -->
 	 */
-	POOR("P", "2.16.840.1.113883.5.61", "Poor", "Poor", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	POOR("P", "2.16.840.1.113883.5.61", "Poor", "Poor", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -92,7 +96,7 @@ public enum LanguageAbilityProficiency implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
+	 * <div class="de">Identifikator für das Value Set</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String VALUE_SET_ID = "2.16.840.1.113883.1.11.12199";
@@ -127,7 +131,7 @@ public enum LanguageAbilityProficiency implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">PrÃ¼ft, ob der angegebene enum Teil dieses Value Sets ist.</div>
+	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param enumName
@@ -149,7 +153,7 @@ public enum LanguageAbilityProficiency implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">PrÃ¼ft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
+	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param codeValue
@@ -207,7 +211,9 @@ public enum LanguageAbilityProficiency implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	LanguageAbilityProficiency(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	LanguageAbilityProficiency(String code, String codeSystem, String displayName,
+			String displayNameEn, String displayNameDe, String displayNameFr,
+			String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
@@ -265,8 +271,8 @@ public enum LanguageAbilityProficiency implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Gets the display name defined by the language param. If
 	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemÃ¤ss Parameter, falls es keine
-	 * Englische Ãœbersetzung gibt, wird der default-Name zurÃ¼ckgegeben.</div>
+	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
+	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param languageCode

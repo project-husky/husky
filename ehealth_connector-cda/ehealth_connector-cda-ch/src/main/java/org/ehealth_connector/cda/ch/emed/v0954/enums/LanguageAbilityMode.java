@@ -41,37 +41,43 @@ public enum LanguageAbilityMode implements ValueSetEnumInterface {
 	 * <div class="en">Expressed signed</div>
 	 * <!-- @formatter:on -->
 	 */
-	EXPRESSED_SIGNED("ESGN", "2.16.840.1.113883.5.60", "Expressed signed", "Expressed signed", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	EXPRESSED_SIGNED("ESGN", "2.16.840.1.113883.5.60", "Expressed signed", "Expressed signed",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Expressed spoken</div>
 	 * <!-- @formatter:on -->
 	 */
-	EXPRESSED_SPOKEN("ESP", "2.16.840.1.113883.5.60", "Expressed spoken", "Expressed spoken", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	EXPRESSED_SPOKEN("ESP", "2.16.840.1.113883.5.60", "Expressed spoken", "Expressed spoken",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Expressed written</div>
 	 * <!-- @formatter:on -->
 	 */
-	EXPRESSED_WRITTEN("EWR", "2.16.840.1.113883.5.60", "Expressed written", "Expressed written", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	EXPRESSED_WRITTEN("EWR", "2.16.840.1.113883.5.60", "Expressed written", "Expressed written",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Received signed</div>
 	 * <!-- @formatter:on -->
 	 */
-	RECEIVED_SIGNED("RSGN", "2.16.840.1.113883.5.60", "Received signed", "Received signed", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	RECEIVED_SIGNED("RSGN", "2.16.840.1.113883.5.60", "Received signed", "Received signed",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Received spoken</div>
 	 * <!-- @formatter:on -->
 	 */
-	RECEIVED_SPOKEN("RSP", "2.16.840.1.113883.5.60", "Received spoken", "Received spoken", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	RECEIVED_SPOKEN("RSP", "2.16.840.1.113883.5.60", "Received spoken", "Received spoken",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Received written</div>
 	 * <!-- @formatter:on -->
 	 */
-	RECEIVED_WRITTEN("RWR", "2.16.840.1.113883.5.60", "Received written", "Received written", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	RECEIVED_WRITTEN("RWR", "2.16.840.1.113883.5.60", "Received written", "Received written",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -118,7 +124,7 @@ public enum LanguageAbilityMode implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
+	 * <div class="de">Identifikator für das Value Set</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String VALUE_SET_ID = "2.16.840.1.113883.1.11.12249";
@@ -153,7 +159,7 @@ public enum LanguageAbilityMode implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">PrÃ¼ft, ob der angegebene enum Teil dieses Value Sets ist.</div>
+	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param enumName
@@ -175,7 +181,7 @@ public enum LanguageAbilityMode implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">PrÃ¼ft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
+	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param codeValue
@@ -233,7 +239,8 @@ public enum LanguageAbilityMode implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	LanguageAbilityMode(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	LanguageAbilityMode(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
@@ -291,8 +298,8 @@ public enum LanguageAbilityMode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Gets the display name defined by the language param. If
 	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemÃ¤ss Parameter, falls es keine
-	 * Englische Ãœbersetzung gibt, wird der default-Name zurÃ¼ckgegeben.</div>
+	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
+	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param languageCode

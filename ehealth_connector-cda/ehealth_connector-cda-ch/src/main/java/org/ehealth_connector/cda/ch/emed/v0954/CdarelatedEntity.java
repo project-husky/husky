@@ -19,13 +19,14 @@ package org.ehealth_connector.cda.ch.emed.v0954;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.840.1.113883.10.12.316
- * Template description: Template CDA RelatedEntity (prototype, directly derived from POCD_RM000040 MIF)
+ * Original ART-DECOR template id: 2.16.840.1.113883.10.12.316 Template
+ * description: Template CDA RelatedEntity (prototype, directly derived from
+ * POCD_RM000040 MIF)
  */
-public class CdarelatedEntity extends org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity {
+public class CdarelatedEntity
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity {
 
 	public CdarelatedEntity() {
-	// This is fixed content for an optional element: createHl7CodeFixedValue() --> Creating getPredefinedCode();
 	}
 
 	/**
@@ -88,6 +89,7 @@ public class CdarelatedEntity extends org.ehealth_connector.common.hl7cdar2.POCD
 
 	/**
 	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedCode() {
@@ -111,7 +113,8 @@ public class CdarelatedEntity extends org.ehealth_connector.common.hl7cdar2.POCD
 	/**
 	 * Sets the hl7RelatedPerson
 	 */
-	public void setHl7RelatedPerson(org.ehealth_connector.common.hl7cdar2.POCDMT000040Person value) {
+	public void setHl7RelatedPerson(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Person value) {
 		this.relatedPerson = value;
 	}
 }

@@ -20,49 +20,64 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.41
- * Template description: Treatment reason
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.41 Template
+ * description: Treatment reason
  */
-public class TreatmentReasonEntryContentModule extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
+public class TreatmentReasonEntryContentModule
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
 	public TreatmentReasonEntryContentModule() {
 		super.getClassCode().add("OBS");
-		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.41"));
-		super.setCode(createHl7CodeFixedValue("75326-9"));
-		super.setStatusCode(createHl7StatusCodeFixedValue("completed"));
+		super.setCode(
+				createHl7CodeFixedValue("75326-9", "2.16.840.1.113883.6.1", "LOINC", "Problem"));
+		super.setStatusCode(createHl7StatusCodeFixedValue("completed", null, null, null));
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
-	 * @param code the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code,
+			String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
 		return retVal;
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7StatusCode
 	 *
-	 * @param code the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(
+			String code, String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
 		return retVal;
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -91,8 +106,9 @@ public class TreatmentReasonEntryContentModule extends org.ehealth_connector.com
 	}
 
 	/**
-	 * Gets the hl7Text
-	 * The URI given in the value attribute of the &lt;reference&gt; element points to an element in the narrative content that contains the complete text describing the treatment reason.
+	 * Gets the hl7Text The URI given in the value attribute of the
+	 * &lt;reference&gt; element points to an element in the narrative content
+	 * that contains the complete text describing the treatment reason.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ED getHl7Text() {
 		return text;
@@ -121,8 +137,9 @@ public class TreatmentReasonEntryContentModule extends org.ehealth_connector.com
 	}
 
 	/**
-	 * Sets the hl7Text
-	 * The URI given in the value attribute of the &lt;reference&gt; element points to an element in the narrative content that contains the complete text describing the treatment reason.
+	 * Sets the hl7Text The URI given in the value attribute of the
+	 * &lt;reference&gt; element points to an element in the narrative content
+	 * that contains the complete text describing the treatment reason.
 	 */
 	public void setHl7Text(org.ehealth_connector.common.hl7cdar2.ED value) {
 		this.text = value;

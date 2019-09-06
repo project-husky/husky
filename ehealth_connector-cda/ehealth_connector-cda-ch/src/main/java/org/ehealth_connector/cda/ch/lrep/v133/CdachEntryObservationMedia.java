@@ -89,7 +89,7 @@ public class CdachEntryObservationMedia
 		org.ehealth_connector.common.hl7cdar2.ED retVal = factory.createED();
 		return retVal;
 		// TODO: Contents shall be taken from enum:
-		// org.ehealth_connector.common.hl7cdar2.VideoMediaType
+		// org.ehealth_connector.common.hl7cdar2.ApplicationMediaType
 	}
 
 	/**

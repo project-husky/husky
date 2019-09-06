@@ -33,9 +33,6 @@ public class CdachlrepHeaderTemplateIdsCdaChLrepV1
 	public CdachlrepHeaderTemplateIdsCdaChLrepV1() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.127.1.4"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3"));
-		// This is fixed content for an optional element:
-		// createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.3.9.1") -->
-		// Creating getPredefinedTemplateId2167565301111391();
 	}
 
 	/**

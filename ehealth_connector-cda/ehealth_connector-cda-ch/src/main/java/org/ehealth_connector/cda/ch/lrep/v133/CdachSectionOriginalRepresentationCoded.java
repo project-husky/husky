@@ -40,7 +40,8 @@ public class CdachSectionOriginalRepresentationCoded
 
 	public CdachSectionOriginalRepresentationCoded() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.45"));
-		super.setCode(createHl7CodeFixedValue("55108-5"));
+		super.setCode(createHl7CodeFixedValue("55108-5", "2.16.840.1.113883.6.1", "LOINC",
+				"Clinical presentation"));
 		super.getEntry().add(createHl7EntryFixedValue("DRIV"));
 	}
 
@@ -50,10 +51,14 @@ public class CdachSectionOriginalRepresentationCoded
 	 * @param code
 	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code,
+			String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
 		return retVal;
 	}
 

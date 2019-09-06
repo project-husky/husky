@@ -34,9 +34,6 @@ public class CdachHeaderDocumentTemplateIdsCdaChv20StructuredBody
 	public CdachHeaderDocumentTemplateIdsCdaChv20StructuredBody() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.2"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.1"));
-		// This is fixed content for an optional element:
-		// createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.4") --> Creating
-		// getPredefinedTemplateId21675653011114();
 	}
 
 	/**

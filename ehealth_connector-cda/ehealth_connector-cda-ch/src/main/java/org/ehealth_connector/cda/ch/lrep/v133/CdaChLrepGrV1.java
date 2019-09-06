@@ -57,16 +57,10 @@ public class CdaChLrepGrV1
 	public CdaChLrepGrV1() {
 		super.setTypeId(createHl7TypeIdFixedValue("2.16.840.1.113883.1.3", "POCD_HD000040"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.1.10"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.2"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.1"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.127.1.4"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3"));
-		// This is fixed content for an optional element:
-		// createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.4") --> Creating
-		// getPredefinedTemplateId21675653011114();
-		// This is fixed content for an optional element:
-		// createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.3.9.1") -->
-		// Creating getPredefinedTemplateId2167565301111391();
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.2"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.1"));
 	}
 
 	/**
@@ -114,7 +108,7 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Adds a hl7Participant Information on a patient's insurance card.
+	 * Adds a hl7Participant Information on a patient's insurance.
 	 */
 	public void addHl7Participant(
 			org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 value) {
@@ -191,7 +185,7 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Adds a hl7Participant Information on a patient's insurance card.
+	 * Adds a hl7Participant Information on a patient's insurance.
 	 */
 	public void clearHl7Participant() {
 		getParticipant().clear();

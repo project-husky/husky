@@ -38,13 +38,6 @@ public class ChpalmEntrySpecimenCollection
 		super.setCode(createHl7CodeFixedValue("33882-2", "2.16.840.1.113883.6.1", "LOINC",
 				"Collection date of Unspecified specimen"));
 		super.setEffectiveTime(createHl7EffectiveTimeFixedValue("UNK"));
-		// This is fixed content for an optional element:
-		// createHl7TargetSiteCodeFixedValue("2.16.840.1.113883.5.1052",
-		// "ActSite") --> Creating
-		// getPredefinedTargetSiteCode216840111388351052ActSite();
-		// This is fixed content for an optional element:
-		// createHl7EntryRelationshipFixedValue("COMP", null) --> Creating
-		// getPredefinedEntryRelationshipCompNull();
 	}
 
 	/**

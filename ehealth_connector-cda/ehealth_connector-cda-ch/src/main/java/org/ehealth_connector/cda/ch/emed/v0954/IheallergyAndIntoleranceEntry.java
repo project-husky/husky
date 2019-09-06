@@ -20,28 +20,33 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.5.3.1.4.6
- * Template description: Allergies and intolerances are special kinds of problems, and so are also recorded in the CDA &lt;observation&gt; element, with classCode='OBS'. They follow the same pattern as the problem entry, with exceptions noted below.Parent TemplateThis is a specialization of the IHE PCC Problem Entry 1.3.6.1.4.1.19376.1.5.3.1.4.5 and of the CCD alert observation template 2.16.840.1.113883.10.20.1.18
+ * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.5.3.1.4.6 Template
+ * description: Allergies and intolerances are special kinds of problems, and so
+ * are also recorded in the CDA &lt;observation&gt; element, with
+ * classCode='OBS'. They follow the same pattern as the problem entry, with
+ * exceptions noted below.Parent TemplateThis is a specialization of the IHE PCC
+ * Problem Entry 1.3.6.1.4.1.19376.1.5.3.1.4.5 and of the CCD alert observation
+ * template 2.16.840.1.113883.10.20.1.18
  */
-public class IheallergyAndIntoleranceEntry extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
+public class IheallergyAndIntoleranceEntry
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
 	public IheallergyAndIntoleranceEntry() {
 		super.getClassCode().add("OBS");
-		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.5"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.28"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.6"));
-		super.setStatusCode(createHl7StatusCodeFixedValue("completed"));
-	// This is fixed content for an optional element: createHl7ParticipantFixedValue("CSM") --> Creating getPredefinedParticipantCsm();
-	// This is fixed content for an optional element: createHl7EntryRelationshipFixedValue("MFST", null) --> Creating getPredefinedEntryRelationshipMfstNull();
-	// This is fixed content for an optional element: createHl7EntryRelationshipFixedValue("true", "SUBJ") --> Creating getPredefinedEntryRelationshipTrueSubj();
-	// This is fixed content for an optional element: createHl7EntryRelationshipFixedValue("false", "REFR") --> Creating getPredefinedEntryRelationshipFalseRefr();
+		super.setStatusCode(
+				createHl7StatusCodeFixedValue("completed", "2.16.840.1.113883.5.14", null, null));
 	}
 
 	/**
 	 * Adds a hl7EntryRelationship
 	 */
-	public void addHl7EntryRelationship(org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship value) {
+	public void addHl7EntryRelationship(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship value) {
 		getEntryRelationship().add(value);
 	}
 
@@ -53,8 +58,7 @@ public class IheallergyAndIntoleranceEntry extends org.ehealth_connector.common.
 	}
 
 	/**
-	 * Adds a hl7Value
-	 * <br clear="none"/>
+	 * Adds a hl7Value <br clear="none"/>
 	 */
 	public void addHl7Value(org.ehealth_connector.common.hl7cdar2.CD value) {
 		getValue().add(value);
@@ -75,8 +79,7 @@ public class IheallergyAndIntoleranceEntry extends org.ehealth_connector.common.
 	}
 
 	/**
-	 * Adds a hl7Value
-	 * <br clear="none"/>
+	 * Adds a hl7Value <br clear="none"/>
 	 */
 	public void clearHl7Value() {
 		getValue().clear();
@@ -85,13 +88,18 @@ public class IheallergyAndIntoleranceEntry extends org.ehealth_connector.common.
 	/**
 	 * Creates fixed contents for CDA Element hl7EntryRelationship
 	 *
-	 * @param typeCode the desired fixed value for this argument.
-	 * @param inversionInd the desired fixed value for this argument.
+	 * @param typeCode
+	 *            the desired fixed value for this argument.
+	 * @param inversionInd
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(String typeCode, String inversionInd) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship createHl7EntryRelationshipFixedValue(
+			String typeCode, String inversionInd) {
 		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship retVal = factory.createPOCDMT000040EntryRelationship();
-		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship.fromValue(typeCode));
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship retVal = factory
+				.createPOCDMT000040EntryRelationship();
+		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship
+				.fromValue(typeCode));
 		retVal.setInversionInd(Boolean.parseBoolean(inversionInd));
 		return retVal;
 	}
@@ -99,11 +107,14 @@ public class IheallergyAndIntoleranceEntry extends org.ehealth_connector.common.
 	/**
 	 * Creates fixed contents for CDA Element hl7Participant
 	 *
-	 * @param typeCode the desired fixed value for this argument.
+	 * @param typeCode
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 createHl7ParticipantFixedValue(String typeCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 createHl7ParticipantFixedValue(
+			String typeCode) {
 		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 retVal = factory.createPOCDMT000040Participant2();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 retVal = factory
+				.createPOCDMT000040Participant2();
 		retVal.getTypeCode().add(typeCode);
 		return retVal;
 	}
@@ -111,21 +122,28 @@ public class IheallergyAndIntoleranceEntry extends org.ehealth_connector.common.
 	/**
 	 * Creates fixed contents for CDA Element hl7StatusCode
 	 *
-	 * @param code the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(
+			String code, String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
 		return retVal;
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -147,8 +165,7 @@ public class IheallergyAndIntoleranceEntry extends org.ehealth_connector.common.
 	}
 
 	/**
-	 * Gets the hl7Participant
-	 * <br clear="none"/>
+	 * Gets the hl7Participant <br clear="none"/>
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2> getHl7Participant() {
 		return participant;
@@ -176,7 +193,10 @@ public class IheallergyAndIntoleranceEntry extends org.ehealth_connector.common.
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "false", "REFR"
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "false", "REFR"
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipFalseRefr() {
@@ -184,7 +204,10 @@ public class IheallergyAndIntoleranceEntry extends org.ehealth_connector.common.
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "MFST", null
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "MFST", null
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipMfstNull() {
@@ -192,7 +215,10 @@ public class IheallergyAndIntoleranceEntry extends org.ehealth_connector.common.
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship, filled by: "true", "SUBJ"
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "true", "SUBJ"
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipTrueSubj() {
@@ -200,7 +226,10 @@ public class IheallergyAndIntoleranceEntry extends org.ehealth_connector.common.
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2, filled by: "CSM"
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2, filled
+	 * by: "CSM"
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 getPredefinedParticipantCsm() {
@@ -222,10 +251,10 @@ public class IheallergyAndIntoleranceEntry extends org.ehealth_connector.common.
 	}
 
 	/**
-	 * Sets the hl7Participant
-	 * <br clear="none"/>
+	 * Sets the hl7Participant <br clear="none"/>
 	 */
-	public void setHl7Participant(org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 value) {
+	public void setHl7Participant(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 value) {
 		getParticipant().clear();
 		getParticipant().add(value);
 	}

@@ -20,19 +20,24 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.5.3.1.4.1
- * Template description: Any condition or allergy may be the subject of a severity observation. This structure is includedÂ <span style="line-height: 1.22;">in the target act using the &lt;entryRelationship&gt; element defined in the CDA Schema.</span>
+ * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.5.3.1.4.1 Template
+ * description: Any condition or allergy may be the subject of a severity
+ * observation. This structure is included <span style="line-height: 1.22;">in
+ * the target act using the &lt;entryRelationship&gt; element defined in the CDA
+ * Schema.</span>
  */
-public class IheseverityEntry extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
+public class IheseverityEntry
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
 	public IheseverityEntry() {
 		super.getClassCode().add("OBS");
-		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.1"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.55"));
-		super.setCode(createHl7CodeFixedValue("SEV"));
-		super.setStatusCode(createHl7StatusCodeFixedValue("completed"));
-	// This is fixed content for an optional element: createHl7ValueFixedValue("M") --> Creating getPredefinedValueM();
+		super.setCode(createHl7CodeFixedValue("SEV", "2.16.840.1.113883.5.4", null, null));
+		super.setStatusCode(
+				createHl7StatusCodeFixedValue("completed", "2.16.840.1.113883.5.14", null, null));
 	}
 
 	/**
@@ -52,33 +57,45 @@ public class IheseverityEntry extends org.ehealth_connector.common.hl7cdar2.POCD
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
-	 * @param code the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code,
+			String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
 		return retVal;
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7StatusCode
 	 *
-	 * @param code the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(
+			String code, String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
 		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
 		return retVal;
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -88,26 +105,33 @@ public class IheseverityEntry extends org.ehealth_connector.common.hl7cdar2.POCD
 	/**
 	 * Creates fixed contents for CDA Element hl7Value
 	 *
-	 * @param code the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CD createHl7ValueFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7ValueFixedValue(String code,
+			String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
 		return retVal;
 	}
 
 	/**
-	 * Gets the hl7Code
-	 * This observation is of severity, as indicated by the &lt;code&gt; element listed above. This element is required.
+	 * Gets the hl7Code This observation is of severity, as indicated by the
+	 * &lt;code&gt; element listed above. This element is required.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
 		return code;
 	}
 
 	/**
-	 * Gets the hl7StatusCode
-	 * The code attribute of &lt;statusCode&gt; for all severity observations shall be completed. While the &lt;statusCode&gt; element is required in all acts to record the status of the act, the only sensible value of this element in this context is completed.
+	 * Gets the hl7StatusCode The code attribute of &lt;statusCode&gt; for all
+	 * severity observations shall be completed. While the &lt;statusCode&gt;
+	 * element is required in all acts to record the status of the act, the only
+	 * sensible value of this element in this context is completed.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CS getHl7StatusCode() {
 		return statusCode;
@@ -121,32 +145,58 @@ public class IheseverityEntry extends org.ehealth_connector.common.hl7cdar2.POCD
 	}
 
 	/**
-	 * Gets the hl7Text
-	 * The &lt;observation&gt; element shall contain a &lt;text&gt; element. The &lt;text&gt; element shall contain a &lt;reference&gt; element pointing to the narrative where the severity is recorded,
+	 * Gets the hl7Text The &lt;observation&gt; element shall contain a
+	 * &lt;text&gt; element. The &lt;text&gt; element shall contain a
+	 * &lt;reference&gt; element pointing to the narrative where the severity is
+	 * recorded,
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ED getHl7Text() {
 		return text;
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by: "M"
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
+	 * "H", "2.16.840.1.113883.5.1063", null, null
+	 * 
 	 * @return the predefined element.
 	 */
-	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedValueM() {
-		return createHl7ValueFixedValue("M");
+	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedValueH216840111388351063NullNull() {
+		return createHl7ValueFixedValue("H", "2.16.840.1.113883.5.1063", null, null);
 	}
 
 	/**
-	 * Sets the hl7Code
-	 * This observation is of severity, as indicated by the &lt;code&gt; element listed above. This element is required.
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
+	 * "L", "2.16.840.1.113883.5.1063", null, null
+	 * 
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedValueL216840111388351063NullNull() {
+		return createHl7ValueFixedValue("L", "2.16.840.1.113883.5.1063", null, null);
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
+	 * "M", "2.16.840.1.113883.5.1063", null, null
+	 * 
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedValueM216840111388351063NullNull() {
+		return createHl7ValueFixedValue("M", "2.16.840.1.113883.5.1063", null, null);
+	}
+
+	/**
+	 * Sets the hl7Code This observation is of severity, as indicated by the
+	 * &lt;code&gt; element listed above. This element is required.
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CD value) {
 		this.code = value;
 	}
 
 	/**
-	 * Sets the hl7StatusCode
-	 * The code attribute of &lt;statusCode&gt; for all severity observations shall be completed. While the &lt;statusCode&gt; element is required in all acts to record the status of the act, the only sensible value of this element in this context is completed.
+	 * Sets the hl7StatusCode The code attribute of &lt;statusCode&gt; for all
+	 * severity observations shall be completed. While the &lt;statusCode&gt;
+	 * element is required in all acts to record the status of the act, the only
+	 * sensible value of this element in this context is completed.
 	 */
 	public void setHl7StatusCode(org.ehealth_connector.common.hl7cdar2.CS value) {
 		this.statusCode = value;
@@ -161,8 +211,10 @@ public class IheseverityEntry extends org.ehealth_connector.common.hl7cdar2.POCD
 	}
 
 	/**
-	 * Sets the hl7Text
-	 * The &lt;observation&gt; element shall contain a &lt;text&gt; element. The &lt;text&gt; element shall contain a &lt;reference&gt; element pointing to the narrative where the severity is recorded,
+	 * Sets the hl7Text The &lt;observation&gt; element shall contain a
+	 * &lt;text&gt; element. The &lt;text&gt; element shall contain a
+	 * &lt;reference&gt; element pointing to the narrative where the severity is
+	 * recorded,
 	 */
 	public void setHl7Text(org.ehealth_connector.common.hl7cdar2.ED value) {
 		this.text = value;

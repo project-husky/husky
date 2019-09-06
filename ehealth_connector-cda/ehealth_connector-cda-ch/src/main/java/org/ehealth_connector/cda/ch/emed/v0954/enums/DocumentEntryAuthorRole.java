@@ -29,8 +29,8 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
  * <!-- @formatter:off -->
  * <div class="en">Role of the author.<br clear="none"/><br clear="none"/>This code defines the role of the author of the document. This is a sub-attribute of epd_xds_author.<br clear="none"/></div>
  * <div class="de">Rolle des Autors.<br clear="none"/><br clear="none"/>Dieser Code definiert die Rolle des Authors vom Dokument. Dies ist ein Sub-Attribut von epd_xds_author.<br clear="none"/></div>
- * <div class="fr">R�le de l'auteur.<br clear="none"/><br clear="none"/>Ce code d�finit le r�le de l'auteur du document. Il s'agit d'un sous-attribut de epd_xds_author.<br clear="none"/></div>
- * <div class="it">Ruolo dell'autore.<br clear="none"/><br clear="none"/>Questo codice definisce il ruolo dell'autore <span style="display: inline !important; float: none; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-family: arial,helvetica,clean,sans-serif; font-size: 13px; font-size-adjust: none; font-stretch: 100%; font-style: normal; font-variant: normal; font-weight: 400; letter-spacing: normal; line-height: 15.86px; orphans: 2; text-align: left; text-decoration: none; text-indent: 0px; text-transform: none; -webkit-text-stroke-width: 0px; white-space: normal; word-spacing: 0px;">del documento</span>. � un sottoattributo di epd_xds_author.<br clear="none"/></div>
+ * <div class="fr">Rôle de l'auteur.<br clear="none"/><br clear="none"/>Ce code définit le rôle de l'auteur du document. Il s'agit d'un sous-attribut de epd_xds_author.<br clear="none"/></div>
+ * <div class="it">Ruolo dell'autore.<br clear="none"/><br clear="none"/>Questo codice definisce il ruolo dell'autore <span style="display: inline !important; float: none; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-family: arial,helvetica,clean,sans-serif; font-size: 13px; font-size-adjust: none; font-stretch: 100%; font-style: normal; font-variant: normal; font-weight: 400; letter-spacing: normal; line-height: 15.86px; orphans: 2; text-align: left; text-decoration: none; text-indent: 0px; text-transform: none; -webkit-text-stroke-width: 0px; white-space: normal; word-spacing: 0px;">del documento</span>. È un sottoattributo di epd_xds_author.<br clear="none"/></div>
  * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
@@ -44,16 +44,19 @@ public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Assistente</div>
 	 * <!-- @formatter:on -->
 	 */
-	ASSISTANT("ASS", "2.16.756.5.30.1.127.3.10.6", "Assistant", "Assistant", "Hilfsperson", "Assistant", "Assistente"),
+	ASSISTANT("ASS", "2.16.756.5.30.1.127.3.10.6", "Assistant", "Assistant", "Hilfsperson",
+			"Assistant", "Assistente"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Healthcare professional</div>
 	 * <div class="de">Gesundheitsfachperson</div>
-	 * <div class="fr">Professionnel de la sant�</div>
+	 * <div class="fr">Professionnel de la santé</div>
 	 * <div class="it">Professionista della salute</div>
 	 * <!-- @formatter:on -->
 	 */
-	HEALTHCARE_PROFESSIONAL("HCP", "2.16.756.5.30.1.127.3.10.6", "Healthcare professional", "Healthcare professional", "Gesundheitsfachperson", "Professionnel de la sant�", "Professionista della salute"),
+	HEALTHCARE_PROFESSIONAL("HCP", "2.16.756.5.30.1.127.3.10.6", "Healthcare professional",
+			"Healthcare professional", "Gesundheitsfachperson", "Professionnel de la santé",
+			"Professionista della salute"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Patient</div>
@@ -62,16 +65,18 @@ public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Paziente</div>
 	 * <!-- @formatter:on -->
 	 */
-	PATIENT("PAT", "2.16.756.5.30.1.127.3.10.6", "Patient", "Patient", "Patient", "Patient", "Paziente"),
+	PATIENT("PAT", "2.16.756.5.30.1.127.3.10.6", "Patient", "Patient", "Patient", "Patient",
+			"Paziente"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Representative</div>
 	 * <div class="de">Stellvertretung</div>
-	 * <div class="fr">Repr�sentant</div>
+	 * <div class="fr">Représentant</div>
 	 * <div class="it">Rappresentante</div>
 	 * <!-- @formatter:on -->
 	 */
-	REPRESENTATIVE("REP", "2.16.756.5.30.1.127.3.10.6", "Representative", "Representative", "Stellvertretung", "Repr�sentant", "Rappresentante"),
+	REPRESENTATIVE("REP", "2.16.756.5.30.1.127.3.10.6", "Representative", "Representative",
+			"Stellvertretung", "Représentant", "Rappresentante"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Technical user</div>
@@ -80,7 +85,8 @@ public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
 	 * <div class="it">Utente tecnico</div>
 	 * <!-- @formatter:on -->
 	 */
-	TECHNICAL_USER("TCU", "2.16.756.5.30.1.127.3.10.6", "Technical user", "Technical user", "Technischer Nutzer", "Utilisateur technique", "Utente tecnico");
+	TECHNICAL_USER("TCU", "2.16.756.5.30.1.127.3.10.6", "Technical user", "Technical user",
+			"Technischer Nutzer", "Utilisateur technique", "Utente tecnico");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -96,7 +102,7 @@ public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Healthcare professional</div>
 	 * <div class="de">Code für Gesundheitsfachperson</div>
-	 * <div class="fr">Code de Professionnel de la sant�</div>
+	 * <div class="fr">Code de Professionnel de la santé</div>
 	 * <div class="it">Code per Professionista della salute</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -116,7 +122,7 @@ public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Representative</div>
 	 * <div class="de">Code für Stellvertretung</div>
-	 * <div class="fr">Code de Repr�sentant</div>
+	 * <div class="fr">Code de Représentant</div>
 	 * <div class="it">Code per Rappresentante</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -135,7 +141,7 @@ public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator fÃ¼r das Value Set</div>
+	 * <div class="de">Identifikator für das Value Set</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.1.3";
@@ -170,7 +176,7 @@ public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">PrÃ¼ft, ob der angegebene enum Teil dieses Value Sets ist.</div>
+	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param enumName
@@ -192,7 +198,7 @@ public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">PrÃ¼ft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
+	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param codeValue
@@ -250,7 +256,9 @@ public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	DocumentEntryAuthorRole(String code, String codeSystem, String displayName, String displayNameEn, String displayNameDe, String displayNameFr, String displayNameIt) {
+	DocumentEntryAuthorRole(String code, String codeSystem, String displayName,
+			String displayNameEn, String displayNameDe, String displayNameFr,
+			String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();
@@ -308,8 +316,8 @@ public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Gets the display name defined by the language param. If
 	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemÃ¤ss Parameter, falls es keine
-	 * Englische Ãœbersetzung gibt, wird der default-Name zurÃ¼ckgegeben.</div>
+	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
+	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
 	 * <!-- @formatter:on -->
 	 *
 	 * @param languageCode

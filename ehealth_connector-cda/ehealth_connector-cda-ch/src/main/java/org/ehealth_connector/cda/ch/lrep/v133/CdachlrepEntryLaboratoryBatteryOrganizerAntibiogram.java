@@ -37,16 +37,6 @@ public class CdachlrepEntryLaboratoryBatteryOrganizerAntibiogram
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.19"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.4"));
 		super.setStatusCode(createHl7StatusCodeFixedValue());
-		// This is fixed content for an optional element:
-		// createHl7CodeFixedValue("29576-6", "2.16.840.1.113883.6.1", "LOINC",
-		// "Bacterial susceptibility panel") --> Creating
-		// getPredefinedCode295766216840111388361LoincBacterialSusceptibilityPanel();
-		// This is fixed content for an optional element:
-		// createHl7ComponentFixedValue("COMP") --> Creating
-		// getPredefinedComponentComp();
-		// This is fixed content for an optional element:
-		// createHl7ReferenceFixedValue("REFR") --> Creating
-		// getPredefinedReferenceRefr();
 	}
 
 	/**

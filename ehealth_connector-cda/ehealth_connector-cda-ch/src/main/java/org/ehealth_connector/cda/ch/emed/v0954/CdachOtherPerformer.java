@@ -20,25 +20,34 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.31
- * Template description: Reusable template wherever a healthcare provider who was the primary performer of an act is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.31 Template
+ * description: Reusable template wherever a healthcare provider who was the
+ * primary performer of an act is used in a CDA-CH V2 document. CDA-CH V2
+ * derivatives, i.e. Swiss exchange formats MAY use this template by either
+ * reference or specialisation.
  *
- * Element description: Information about a healthcare provider who was the primary performer of the act.
+ * Element description: Information about a healthcare provider who was the
+ * primary performer of the act.
  */
-public class CdachOtherPerformer extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer1 {
+public class CdachOtherPerformer
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer1 {
 
 	public CdachOtherPerformer() {
-		super.setTypeCode(org.ehealth_connector.common.hl7cdar2.XServiceEventPerformer.fromValue("PRF"));
+		super.setTypeCode(
+				org.ehealth_connector.common.hl7cdar2.XServiceEventPerformer.fromValue("PRF"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.9.31"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.24.3.5"));
+		super.getTemplateId()
+				.add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.24.3.5"));
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -60,8 +69,7 @@ public class CdachOtherPerformer extends org.ehealth_connector.common.hl7cdar2.P
 	}
 
 	/**
-	 * Gets the hl7Time
-	 * Duration of the performance.
+	 * Gets the hl7Time Duration of the performance.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.IVLTS getHl7Time() {
 		return time;
@@ -70,7 +78,8 @@ public class CdachOtherPerformer extends org.ehealth_connector.common.hl7cdar2.P
 	/**
 	 * Sets the hl7AssignedEntity
 	 */
-	public void setHl7AssignedEntity(org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity value) {
+	public void setHl7AssignedEntity(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity value) {
 		this.assignedEntity = value;
 	}
 
@@ -83,8 +92,7 @@ public class CdachOtherPerformer extends org.ehealth_connector.common.hl7cdar2.P
 	}
 
 	/**
-	 * Sets the hl7Time
-	 * Duration of the performance.
+	 * Sets the hl7Time Duration of the performance.
 	 */
 	public void setHl7Time(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
 		this.time = value;

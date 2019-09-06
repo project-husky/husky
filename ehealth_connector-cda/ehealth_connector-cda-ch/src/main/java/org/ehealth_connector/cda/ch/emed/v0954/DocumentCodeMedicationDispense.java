@@ -20,41 +20,49 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.51
- * Template description: A LOINC based document type of a CDA document instance including a translation to the Swiss EPR XDS.b metadata.
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.51 Template
+ * description: A LOINC based document type of a CDA document instance including
+ * a translation to the Swiss EPR XDS.b metadata.
  *
  * Element description: IHE PHARM DIS document code
  */
 public class DocumentCodeMedicationDispense extends org.ehealth_connector.common.hl7cdar2.CE {
 
 	public DocumentCodeMedicationDispense() {
-		super.setCode("275670009");
-		super.getTranslation().add(createHl7TranslationFixedValue("275670009"));
+		super.setCode("60593-1");
+		super.setCodeSystem("2.16.840.1.113883.6.1");
+		super.setCodeSystemName("LOINC");
+		super.setDisplayName("Medication dispensed.extended");
+		super.getTranslation().add(createHl7TranslationFixedValue("275670009",
+				"2.16.840.1.113883.6.96", "SNOMED CT", "Medication Dispensation"));
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Translation
 	 *
-	 * @param code the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CD createHl7TranslationFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7TranslationFixedValue(
+			String code, String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
 		return retVal;
 	}
 
 	/**
-	 * Gets the hl7Translation
-	 * Translation to the Swiss EPR XDS.b metadata.
+	 * Gets the hl7Translation Translation to the Swiss EPR XDS.b metadata.
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.CD> getHl7Translation() {
 		return translation;
 	}
 
 	/**
-	 * Sets the hl7Translation
-	 * Translation to the Swiss EPR XDS.b metadata.
+	 * Sets the hl7Translation Translation to the Swiss EPR XDS.b metadata.
 	 */
 	public void setHl7Translation(org.ehealth_connector.common.hl7cdar2.CD value) {
 		getTranslation().clear();

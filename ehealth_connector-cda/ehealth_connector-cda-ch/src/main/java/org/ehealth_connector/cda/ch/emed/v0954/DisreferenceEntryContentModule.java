@@ -20,52 +20,64 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.46
- * Template description: Reference to Dispense Item
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.46 Template
+ * description: Reference to Dispense Item
  *
  * Element description: Reference to Dispense Item General Specification
  */
-public class DisreferenceEntryContentModule extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Supply {
+public class DisreferenceEntryContentModule
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Supply {
 
 	public DisreferenceEntryContentModule() {
 		super.setClassCode(org.ehealth_connector.common.hl7cdar2.ActClassSupply.fromValue("SPLY"));
-		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("EVN"));
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("EVN"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.46"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.12"));
-		super.setCode(createHl7CodeFixedValue("DISItem"));
-	// This is fixed content for an optional element: createHl7ReferenceFixedValue("XCRPT") --> Creating getPredefinedReferenceXcrpt();
+		super.setCode(createHl7CodeFixedValue("DISItem", "1.3.6.1.4.1.19376.1.9.2.2", null, null));
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
-	 * @param code the desired fixed value for this argument.
+	 * @param code
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code,
+			String codeSystem, String codeSystemName, String displayName) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
 		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
 		return retVal;
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Reference
 	 *
-	 * @param typeCode the desired fixed value for this argument.
+	 * @param typeCode
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(String typeCode) {
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(
+			String typeCode) {
 		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference retVal = factory.createPOCDMT000040Reference();
-		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipExternalReference.fromValue(typeCode));
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference retVal = factory
+				.createPOCDMT000040Reference();
+		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipExternalReference
+				.fromValue(typeCode));
 		return retVal;
 	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
-	 * @param root the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(String root) {
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
@@ -73,32 +85,28 @@ public class DisreferenceEntryContentModule extends org.ehealth_connector.common
 	}
 
 	/**
-	 * Gets the hl7Author
-	 * Author of the referenced item
+	 * Gets the hl7Author Author of the referenced item
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040Author> getHl7Author() {
 		return author;
 	}
 
 	/**
-	 * Gets the hl7Code
-	 * Reference to Dispense Item code
+	 * Gets the hl7Code Reference to Dispense Item code
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
 		return code;
 	}
 
 	/**
-	 * Gets the hl7Id
-	 * Reference to Dispense Item ID
+	 * Gets the hl7Id Reference to Dispense Item ID
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7Id() {
 		return id;
 	}
 
 	/**
-	 * Gets the hl7Reference
-	 * ID of parent container of referenced item
+	 * Gets the hl7Reference ID of parent container of referenced item
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference> getHl7Reference() {
 		return reference;
@@ -112,7 +120,10 @@ public class DisreferenceEntryContentModule extends org.ehealth_connector.common
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference, filled by: "XCRPT"
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference, filled by:
+	 * "XCRPT"
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference getPredefinedReferenceXcrpt() {
@@ -120,8 +131,7 @@ public class DisreferenceEntryContentModule extends org.ehealth_connector.common
 	}
 
 	/**
-	 * Sets the hl7Author
-	 * Author of the referenced item
+	 * Sets the hl7Author Author of the referenced item
 	 */
 	public void setHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
 		getAuthor().clear();
@@ -129,16 +139,14 @@ public class DisreferenceEntryContentModule extends org.ehealth_connector.common
 	}
 
 	/**
-	 * Sets the hl7Code
-	 * Reference to Dispense Item code
+	 * Sets the hl7Code Reference to Dispense Item code
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CD value) {
 		this.code = value;
 	}
 
 	/**
-	 * Sets the hl7Id
-	 * Reference to Dispense Item ID
+	 * Sets the hl7Id Reference to Dispense Item ID
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		getId().clear();
@@ -146,8 +154,7 @@ public class DisreferenceEntryContentModule extends org.ehealth_connector.common
 	}
 
 	/**
-	 * Sets the hl7Reference
-	 * ID of parent container of referenced item
+	 * Sets the hl7Reference ID of parent container of referenced item
 	 */
 	public void setHl7Reference(org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference value) {
 		getReference().clear();

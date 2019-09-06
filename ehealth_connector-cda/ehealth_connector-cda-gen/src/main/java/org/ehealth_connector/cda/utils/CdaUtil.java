@@ -19,6 +19,7 @@ package org.ehealth_connector.cda.utils;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ import javax.xml.bind.Binder;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -37,7 +39,9 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.transform.stream.StreamSource;
 
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.basetypes.NameBaseType;
 import org.ehealth_connector.common.enums.LanguageCode;
@@ -56,6 +60,7 @@ import org.ehealth_connector.common.hl7cdar2.INT;
 import org.ehealth_connector.common.hl7cdar2.IVLINT;
 import org.ehealth_connector.common.hl7cdar2.IVLPQ;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Component2;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Component3;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4;
@@ -69,7 +74,9 @@ import org.ehealth_connector.common.hl7cdar2.PQ;
 import org.ehealth_connector.common.hl7cdar2.SC;
 import org.ehealth_connector.common.hl7cdar2.ST;
 import org.ehealth_connector.common.hl7cdar2.StrucDocText;
+import org.ehealth_connector.common.hl7cdar2.TS;
 import org.ehealth_connector.common.mdht.enums.EhcVersions;
+import org.ehealth_connector.common.utils.Hl7CdaR2Util;
 import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -132,7 +139,7 @@ public class CdaUtil {
 		return i;
 	}
 
-	public static IVLINT createIvlint(String lowValue, String highValue) {
+	public static IVLINT createIvlInt(String lowValue, String highValue) {
 		ObjectFactory factory = new ObjectFactory();
 		IVLINT retVal = factory.createIVLINT();
 
@@ -156,6 +163,25 @@ public class CdaUtil {
 				.add(new JAXBElement<INT>(new QName("urn:hl7-org:v3", "low"), INT.class, intLow));
 		retVal.getRest()
 				.add(new JAXBElement<INT>(new QName("urn:hl7-org:v3", "high"), INT.class, intHigh));
+		return retVal;
+	}
+
+	public static IVLPQ createIvlpq(String centerValue, String unit) {
+		ObjectFactory factory = new ObjectFactory();
+		IVLPQ retVal = factory.createIVLPQ();
+		if (unit != null)
+			retVal.setUnit(unit);
+
+		PQ pqCenter = null;
+		if (centerValue == null) {
+			pqCenter = createPqUnknown(null);
+		} else {
+			pqCenter = factory.createPQ();
+			pqCenter.setValue(centerValue);
+		}
+
+		retVal.getRest().add(
+				new JAXBElement<PQ>(new QName("urn:hl7-org:v3", "center"), PQ.class, pqCenter));
 		return retVal;
 	}
 
@@ -221,6 +247,17 @@ public class CdaUtil {
 		if (value != null)
 			retVal.xmlContent = value;
 		return retVal;
+	}
+
+	public static TS createTsUnknown(NullFlavor value) {
+		ObjectFactory factory = new ObjectFactory();
+		final TS ts = factory.createTS();
+		if (value == null) {
+			ts.nullFlavor.add(NullFlavor.UNKNOWN.getCodeValue());
+		} else {
+			ts.nullFlavor.add(value.getCodeValue());
+		}
+		return ts;
 	}
 
 	/**
@@ -372,6 +409,78 @@ public class CdaUtil {
 	}
 
 	/**
+	 * Sets the version number to 1 and makes sure the setId is the same as the
+	 * document id.
+	 *
+	 * @param doc
+	 *            the doc
+	 * @param newDocId
+	 *            the new doc id
+	 */
+	public static void initFirstVersion(POCDMT000040ClinicalDocument doc, Identificator newDocId) {
+		Identificator docId = newDocId;
+		if (docId == null)
+			docId = new Identificator(Identificator.builder()
+					.withRoot(org.openhealthtools.ihe.utils.UUID.generate()).build());
+		doc.setId(docId.getHl7CdaR2Ii());
+		setVersion(doc, docId, 1);
+	}
+
+	/**
+	 * Increases the version number by one and makes sure the setId remains the
+	 * same as previously.
+	 *
+	 * @param doc
+	 *            the doc
+	 * @param newDocId
+	 *            the new doc id
+	 */
+	public static void initNextVersion(POCDMT000040ClinicalDocument doc, Identificator newDocId) {
+		org.ehealth_connector.common.hl7cdar2.II setId = doc.getSetId();
+		if (setId == null)
+			setId = doc.getId();
+		if (setId == null)
+			setId = newDocId.getHl7CdaR2Ii();
+		Integer version = CdaUtil.getInt(doc.getVersionNumber());
+		doc.setId(newDocId.getHl7CdaR2Ii());
+		setVersion(doc, new Identificator(setId), version + 1);
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 *
+	 * @param inputFile
+	 *            the source file. n@return the CDA document\n@throws
+	 *            JAXBException the JAXB exception\n@throws IOException Signals
+	 *            that an I/O exception has occurred.
+	 */
+	public static POCDMT000040ClinicalDocument loadFromFile(File inputFile)
+			throws JAXBException, IOException {
+		POCDMT000040ClinicalDocument retVal;
+		JAXBContext context = JAXBContext.newInstance(POCDMT000040ClinicalDocument.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<POCDMT000040ClinicalDocument> root = mar.unmarshal(source,
+				POCDMT000040ClinicalDocument.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 *
+	 * @param inputFileName
+	 *            the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException the JAXB
+	 *         exception\n@throws IOException Signals that an I/O exception has
+	 *         occurred.
+	 */
+	public static POCDMT000040ClinicalDocument loadFromFile(String inputFileName)
+			throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	/**
 	 * <div class="en">prints the XML representation of the document to the
 	 * console</div> <div class="de">Gibt die XML-Repräsentation des Dokuments
 	 * auf der Konsole aus</div>.
@@ -429,4 +538,76 @@ public class CdaUtil {
 
 	}
 
+	/**
+	 * Saves the given CDA document to file.
+	 *
+	 * @param doc
+	 *            the doc
+	 * @param outputFile
+	 *            the destination file.
+	 * @param xsl
+	 *            the path and filename or url to the rendering stylesheet
+	 * @param css
+	 *            the path and filename or url to the rendering css
+	 * @throws JAXBException
+	 *             the JAXB exception
+	 * @throws ParserConfigurationException
+	 *             the parser configuration exception
+	 * @throws TransformerException
+	 *             the transformer exception\n@throws FileNotFoundException the
+	 *             file not found exception
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 */
+	public static void saveToFile(POCDMT000040ClinicalDocument doc, File outputFile, String xsl,
+			String css) throws JAXBException, ParserConfigurationException, TransformerException,
+			FileNotFoundException {
+		CdaUtil.saveJaxbObjectToFile(doc, outputFile, xsl, css);
+	}
+
+	/**
+	 * Saves the given CDA document to file.
+	 *
+	 * @param doc
+	 *            the doc
+	 * @param outputFileName
+	 *            the full path and filename of the destination file.
+	 * @param xsl
+	 *            the path and filename or url to the rendering stylesheet
+	 * @param css
+	 *            the path and filename or url to the rendering css
+	 * @throws JAXBException
+	 *             the JAXB exception
+	 * @throws ParserConfigurationException
+	 *             the parser configuration exception
+	 * @throws TransformerException
+	 *             the transformer exception\n@throws FileNotFoundException the
+	 *             file not found exception
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 */
+	public static void saveToFile(POCDMT000040ClinicalDocument doc, String outputFileName,
+			String xsl, String css) throws JAXBException, ParserConfigurationException,
+			TransformerException, FileNotFoundException {
+		saveToFile(doc, new File(outputFileName), xsl, css);
+	}
+
+	/**
+	 * <div class="en">Sets the document set Id and version number.</div>
+	 *
+	 * <div class="de">Weist dem Dokument eine Set Id und eine Versionsnummer
+	 * zu.</div>
+	 *
+	 * @param doc
+	 *            the doc
+	 * @param idVersion1
+	 *            the set Id (if null, the document ID will be used)
+	 * @param version
+	 *            the version of the document
+	 */
+	public static void setVersion(POCDMT000040ClinicalDocument doc, Identificator idVersion1,
+			int version) {
+		doc.setSetId(idVersion1.getHl7CdaR2Ii());
+		doc.setVersionNumber(Hl7CdaR2Util.createHl7CdaR2Int(version));
+	}
 }

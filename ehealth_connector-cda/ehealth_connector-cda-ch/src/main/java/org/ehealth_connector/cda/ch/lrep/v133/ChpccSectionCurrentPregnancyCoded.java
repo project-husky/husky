@@ -47,9 +47,6 @@ public class ChpccSectionCurrentPregnancyCoded
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.127.77.1.10.1"));
 		super.setCode(createHl7CodeFixedValue("10162-6", "2.16.840.1.113883.6.1", "LOINC",
 				"HISTORY OF PREGNANCIES"));
-		// This is fixed content for an optional element:
-		// createHl7EntryFixedValue("DRIV") --> Creating
-		// getPredefinedEntryDriv();
 	}
 
 	/**
