@@ -14,7 +14,7 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
  *
  */
-package org.ehealth_connector.cda.ch.lrep.v133;
+package org.ehealth_connector.cda.ch.emed.v096;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -34,31 +34,26 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 import org.ehealth_connector.common.utils.Hl7CdaR2Util;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.1.10 Template
- * description: Swiss Laboratory Report - General Report
- *
- * Element description: Swiss Laboratory Report - General ReportConformity rules
- * that are not further modelled in ART-DECOR: - XML encodingUTF-8 encoding is
- * required. All CDA-CH V2 documents MUST start with this line:&lt;?xml
- * version="1.0" encoding="UTF-8"?&gt; - Phone numbersPhone numbers MUST be
- * declared in the international format.Dots (.) MUST be used as separators for
- * grouping of number blocks.The minus sign (-) MUST be used as a separator
- * between public and internal telephone numbers. Purpose: Some telephone
- * exchanges - especially in the US, allow direct dial-up of an internal
- * telephone number after the actual connection has been established over the
- * public telephone network.Examples:&lt;telecom
- * value="tel:+41.33.123.45.67"/&gt;&lt;telecom
- * value="tel:+1.987.654.3210-999"/&gt;
+ * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.1.7 Template
+ * description: <br clear="none"/>
+ * TheMedication Treatment Plan document(IPAG report: eMedicationTreatmentPlan)
+ * describes one medication of a patient, a (1) medication that has been, is or
+ * will be taken by the patient.<br clear="none"/>
+ * Relation to IHE Pharmacy<br clear="none"/>
+ * The Medication Treatment Plan document it derived from the<a class="" href=
+ * "http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_MTP.pdf">IHE
+ * Pharmacy MTP Supplement</a>(Medication Treatment Plan).
  */
 @XmlRootElement(name = "ClinicalDocument", namespace = "urn:hl7-org:v3")
-public class CdaChLrepGrV1
+public class MedicationTreatmentPlanDocument
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
 
-	public CdaChLrepGrV1() {
+	public MedicationTreatmentPlanDocument() {
 		super.setTypeId(createHl7TypeIdFixedValue("2.16.840.1.113883.1.3", "POCD_HD000040"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.1.10"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.127.1.4"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.1"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.1.6"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.1.7"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.2"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.1"));
 	}
@@ -73,11 +68,19 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Adds a hl7Author Information about the author of the document. The author
-	 * MAY be a person or a device. At least one author MUST be declared.
+	 * Adds a hl7Author Information about the author of a CDA document, section
+	 * or entry. An author MAY be a person or a device.
 	 */
 	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
 		getAuthor().add(value);
+	}
+
+	/**
+	 * Adds a hl7Authorization
+	 */
+	public void addHl7Authorization(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Authorization value) {
+		getAuthorization().add(value);
 	}
 
 	/**
@@ -100,8 +103,23 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Adds a hl7InformationRecipient The laboratory report MUST contain at
-	 * least one receiver.
+	 * Adds a hl7Informant
+	 */
+	public void addHl7Informant(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Informant12 value) {
+		getInformant().add(value);
+	}
+
+	/**
+	 * Adds a hl7InformationRecipient A recipient of this CDA document
+	 * (corresponds to the addressee of a letter - person or
+	 * organization).Recipient types: - The main recipient of the document is
+	 * indicated by typeCode 'PRCP' (primary recipient).Note: Since it makes no
+	 * sense to create a CDA document without doing it for someone, in
+	 * Switzerland at least one recipient MUST be declared. If the document is
+	 * created for the user's own needs, the user itself or its organization
+	 * will be the primary recipient. - Other recipients (copy to; Cc) are
+	 * indicated with typeCode, TRC '(secondary recipient).
 	 */
 	public void addHl7InformationRecipient(
 			org.ehealth_connector.common.hl7cdar2.POCDMT000040InformationRecipient value) {
@@ -109,19 +127,11 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Adds a hl7Participant Information on a patient's insurance card.
+	 * Adds a hl7Participant Information on a patient contact.
 	 */
 	public void addHl7Participant(
 			org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 value) {
 		getParticipant().add(value);
-	}
-
-	/**
-	 * Adds a hl7RecordTarget Non-Human Subject.
-	 */
-	public void addHl7RecordTarget(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040RecordTarget value) {
-		getRecordTarget().add(value);
 	}
 
 	/**
@@ -154,11 +164,18 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Adds a hl7Author Information about the author of the document. The author
-	 * MAY be a person or a device. At least one author MUST be declared.
+	 * Adds a hl7Author Information about the author of a CDA document, section
+	 * or entry. An author MAY be a person or a device.
 	 */
 	public void clearHl7Author() {
 		getAuthor().clear();
+	}
+
+	/**
+	 * Adds a hl7Authorization
+	 */
+	public void clearHl7Authorization() {
+		getAuthorization().clear();
 	}
 
 	/**
@@ -179,25 +196,32 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Adds a hl7InformationRecipient The laboratory report MUST contain at
-	 * least one receiver.
+	 * Adds a hl7Informant
+	 */
+	public void clearHl7Informant() {
+		getInformant().clear();
+	}
+
+	/**
+	 * Adds a hl7InformationRecipient A recipient of this CDA document
+	 * (corresponds to the addressee of a letter - person or
+	 * organization).Recipient types: - The main recipient of the document is
+	 * indicated by typeCode 'PRCP' (primary recipient).Note: Since it makes no
+	 * sense to create a CDA document without doing it for someone, in
+	 * Switzerland at least one recipient MUST be declared. If the document is
+	 * created for the user's own needs, the user itself or its organization
+	 * will be the primary recipient. - Other recipients (copy to; Cc) are
+	 * indicated with typeCode, TRC '(secondary recipient).
 	 */
 	public void clearHl7InformationRecipient() {
 		getInformationRecipient().clear();
 	}
 
 	/**
-	 * Adds a hl7Participant Information on a patient's insurance card.
+	 * Adds a hl7Participant Information on a patient contact.
 	 */
 	public void clearHl7Participant() {
 		getParticipant().clear();
-	}
-
-	/**
-	 * Adds a hl7RecordTarget Non-Human Subject.
-	 */
-	public void clearHl7RecordTarget() {
-		getRecordTarget().clear();
 	}
 
 	/**
@@ -253,12 +277,7 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Gets the hl7Code A LOINC based document type of a CDA document instance
-	 * including a translation to the Swiss EPR XDS.b metadata. -
-	 * Multidisciplinary laboratory findings:The LOINC code of the document MUST
-	 * read: 11502-2 (LABORATORY REPORT.TOTAL) - Laboratory reports of a single
-	 * laboratory discipline:The LOINC code of the document MUST be taken from
-	 * the value-set 'Laboratory Specialties'
+	 * Gets the hl7Code IHE PHARM MTP document code
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7Code() {
 		return code;
@@ -272,6 +291,13 @@ public class CdaChLrepGrV1
 	}
 
 	/**
+	 * Gets the hl7ComponentOf
+	 */
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Component1 getHl7ComponentOf() {
+		return componentOf;
+	}
+
+	/**
 	 * Gets the hl7ConfidentialityCode Swiss Realm of Confidentiality Code
 	 * according to the Swiss EPR regulation.
 	 */
@@ -280,7 +306,8 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Gets the hl7Custodian
+	 * Gets the hl7Custodian The organization in whose name this CDA document
+	 * has been created (corresponds to the sender of a letter).
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Custodian getHl7Custodian() {
 		return custodian;
@@ -297,10 +324,9 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Gets the hl7EffectiveTime Human Patient with Non-Human Subject: The
-	 * laboratory report contains test results from samples taken from a
-	 * non-human material that is related to a human patient (e.g., food eaten
-	 * by the patient or animal that has bitten the patient).
+	 * Gets the hl7EffectiveTime The document's creation date and time. If this
+	 * document replaces a previous version (linked via parentDocument), this is
+	 * the date and time of the new version.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.TS getHl7EffectiveTime() {
 		return effectiveTime;
@@ -323,7 +349,8 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Gets the hl7LegalAuthenticator Legal authenticator.
+	 * Gets the hl7LegalAuthenticator Information about the legal authenticator
+	 * of a CDA document. A legal authenticator MUST be a person.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040LegalAuthenticator getHl7LegalAuthenticator() {
 		return legalAuthenticator;
@@ -337,6 +364,39 @@ public class CdaChLrepGrV1
 	}
 
 	/**
+	 * Gets the hl7RecordTarget A human patient for whom this CDA document
+	 * instance was created. - Target patientThe HL7 CDA R2 (2005) standard
+	 * allows multiple patients.In order to ensure that the information in a CDA
+	 * document is unambiguously assigned to one and only patient, a CDA-CH V2
+	 * based document MUST contain exactly one patient.Special cases: In
+	 * exceptional cases (e.g., new-born twins, both having jaundice), multiple
+	 * documents MUST be created (all of the same content, but each with a
+	 * unique patient). - Patient identifiersMultiple ids (patient
+	 * identification number) MAY be declared.If multiple ids are known, it is
+	 * highly recommended to declare all known ids. Especially in cases where
+	 * the CDA document instance is kind of an answer to a preceding order
+	 * (independent of its data format), all ids specified by the ordering
+	 * system SHALL be declared in the CDA document instance. This allows the
+	 * receiver to assign its internal patient identification.The patient
+	 * identification number MUST be grouped with the OID of its assigning
+	 * system. The patient identification number MUST be unique within the
+	 * system identified by the OID.The declared OID MUST be found in one of the
+	 * public OID registries, such as oid.refdata.ch (preferred), oid-info.com,
+	 * hl7.org/oid, www.dimdi.de/static/de/klassi/oid/,
+	 * gesundheit.gv.at/OID_Frontend/ etc.OIDs that can't be found in a public
+	 * OID registry are NOT ALLOWED. - PseudonymizingIn special cases, the
+	 * demographic data of the patient are not allowed to be transmitted or they
+	 * have to be pseudonymized.While HL7 CDA or its derivatives like CDA-CH or
+	 * Swiss exchange formats nevertheless require these elements in the XML
+	 * structure, the affected values MUST be replaced by a nullFlavor of type
+	 * "MSK" (masked), in order to support the required data format structure
+	 * and simultaneously to shield the real data.
+	 */
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040RecordTarget> getHl7RecordTarget() {
+		return recordTarget;
+	}
+
+	/**
 	 * Gets the hl7SetId The setId element MUST match the document id of the
 	 * very first version of that document. It MUST remain the same for all
 	 * document versions.
@@ -346,27 +406,21 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Gets the hl7TemplateId CDA-CH-LREP / Laboratory Reports V1 ART-DECOR
-	 * model for General Report.
+	 * Gets the hl7TemplateId Exchange format according to the Swiss EPR
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
 		return templateId;
 	}
 
 	/**
-	 * Gets the hl7Title The document title must follow the following text
-	 * format where &lt;human readable code&gt; is the local translation of the
-	 * document LOINC code: - [de]: 'Laborbefund - &lt;human readable code&gt;'
-	 * - [fr]: 'Rapport de laboratoire - &lt;human readable code&gt;' - [it]:
-	 * 'Referto di laboratorio - &lt;human readable code&gt;' - [en]:
-	 * 'Laboratory report - &lt;human readable code&gt;'
+	 * Gets the hl7Title
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ST getHl7Title() {
 		return title;
 	}
 
 	/**
-	 * Gets the hl7TypeId
+	 * Gets the hl7TypeId HL7 CDA R2, 2005
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040InfrastructureRootTypeId getHl7TypeId() {
 		return typeId;
@@ -379,16 +433,6 @@ public class CdaChLrepGrV1
 	 */
 	public org.ehealth_connector.common.hl7cdar2.INT getHl7VersionNumber() {
 		return versionNumber;
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
-	 * "2.16.756.5.30.1.1.1.1.3.9.1"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId2167565301111391() {
-		return createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.3.9.1");
 	}
 
 	/**
@@ -444,7 +488,7 @@ public class CdaChLrepGrV1
 	 *         exception\n@throws IOException Signals that an I/O exception has
 	 *         occurred.
 	 */
-	public static CdaChLrepGrV1 loadFromFile(String inputFileName)
+	public static MedicationTreatmentPlanDocument loadFromFile(String inputFileName)
 			throws JAXBException, IOException {
 		return loadFromFile(new File(inputFileName));
 	}
@@ -457,12 +501,14 @@ public class CdaChLrepGrV1
 	 *            JAXBException the JAXB exception\n@throws IOException Signals
 	 *            that an I/O exception has occurred.
 	 */
-	public static CdaChLrepGrV1 loadFromFile(File inputFile) throws JAXBException, IOException {
-		CdaChLrepGrV1 retVal;
-		JAXBContext context = JAXBContext.newInstance(CdaChLrepGrV1.class);
+	public static MedicationTreatmentPlanDocument loadFromFile(File inputFile)
+			throws JAXBException, IOException {
+		MedicationTreatmentPlanDocument retVal;
+		JAXBContext context = JAXBContext.newInstance(MedicationTreatmentPlanDocument.class);
 		Unmarshaller mar = context.createUnmarshaller();
 		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<CdaChLrepGrV1> root = mar.unmarshal(source, CdaChLrepGrV1.class);
+		JAXBElement<MedicationTreatmentPlanDocument> root = mar.unmarshal(source,
+				MedicationTreatmentPlanDocument.class);
 		retVal = root.getValue();
 		return retVal;
 	}
@@ -550,12 +596,7 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Sets the hl7Code A LOINC based document type of a CDA document instance
-	 * including a translation to the Swiss EPR XDS.b metadata. -
-	 * Multidisciplinary laboratory findings:The LOINC code of the document MUST
-	 * read: 11502-2 (LABORATORY REPORT.TOTAL) - Laboratory reports of a single
-	 * laboratory discipline:The LOINC code of the document MUST be taken from
-	 * the value-set 'Laboratory Specialties'
+	 * Sets the hl7Code IHE PHARM MTP document code
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CE value) {
 		this.code = value;
@@ -570,6 +611,14 @@ public class CdaChLrepGrV1
 	}
 
 	/**
+	 * Sets the hl7ComponentOf
+	 */
+	public void setHl7ComponentOf(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Component1 value) {
+		this.componentOf = value;
+	}
+
+	/**
 	 * Sets the hl7ConfidentialityCode Swiss Realm of Confidentiality Code
 	 * according to the Swiss EPR regulation.
 	 */
@@ -578,7 +627,8 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Sets the hl7Custodian
+	 * Sets the hl7Custodian The organization in whose name this CDA document
+	 * has been created (corresponds to the sender of a letter).
 	 */
 	public void setHl7Custodian(org.ehealth_connector.common.hl7cdar2.POCDMT000040Custodian value) {
 		this.custodian = value;
@@ -596,10 +646,9 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Sets the hl7EffectiveTime Human Patient with Non-Human Subject: The
-	 * laboratory report contains test results from samples taken from a
-	 * non-human material that is related to a human patient (e.g., food eaten
-	 * by the patient or animal that has bitten the patient).
+	 * Sets the hl7EffectiveTime The document's creation date and time. If this
+	 * document replaces a previous version (linked via parentDocument), this is
+	 * the date and time of the new version.
 	 */
 	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.TS value) {
 		this.effectiveTime = value;
@@ -622,7 +671,8 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Sets the hl7LegalAuthenticator Legal authenticator.
+	 * Sets the hl7LegalAuthenticator Information about the legal authenticator
+	 * of a CDA document. A legal authenticator MUST be a person.
 	 */
 	public void setHl7LegalAuthenticator(
 			org.ehealth_connector.common.hl7cdar2.POCDMT000040LegalAuthenticator value) {
@@ -638,6 +688,41 @@ public class CdaChLrepGrV1
 	}
 
 	/**
+	 * Sets the hl7RecordTarget A human patient for whom this CDA document
+	 * instance was created. - Target patientThe HL7 CDA R2 (2005) standard
+	 * allows multiple patients.In order to ensure that the information in a CDA
+	 * document is unambiguously assigned to one and only patient, a CDA-CH V2
+	 * based document MUST contain exactly one patient.Special cases: In
+	 * exceptional cases (e.g., new-born twins, both having jaundice), multiple
+	 * documents MUST be created (all of the same content, but each with a
+	 * unique patient). - Patient identifiersMultiple ids (patient
+	 * identification number) MAY be declared.If multiple ids are known, it is
+	 * highly recommended to declare all known ids. Especially in cases where
+	 * the CDA document instance is kind of an answer to a preceding order
+	 * (independent of its data format), all ids specified by the ordering
+	 * system SHALL be declared in the CDA document instance. This allows the
+	 * receiver to assign its internal patient identification.The patient
+	 * identification number MUST be grouped with the OID of its assigning
+	 * system. The patient identification number MUST be unique within the
+	 * system identified by the OID.The declared OID MUST be found in one of the
+	 * public OID registries, such as oid.refdata.ch (preferred), oid-info.com,
+	 * hl7.org/oid, www.dimdi.de/static/de/klassi/oid/,
+	 * gesundheit.gv.at/OID_Frontend/ etc.OIDs that can't be found in a public
+	 * OID registry are NOT ALLOWED. - PseudonymizingIn special cases, the
+	 * demographic data of the patient are not allowed to be transmitted or they
+	 * have to be pseudonymized.While HL7 CDA or its derivatives like CDA-CH or
+	 * Swiss exchange formats nevertheless require these elements in the XML
+	 * structure, the affected values MUST be replaced by a nullFlavor of type
+	 * "MSK" (masked), in order to support the required data format structure
+	 * and simultaneously to shield the real data.
+	 */
+	public void setHl7RecordTarget(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040RecordTarget value) {
+		getRecordTarget().clear();
+		getRecordTarget().add(value);
+	}
+
+	/**
 	 * Sets the hl7SetId The setId element MUST match the document id of the
 	 * very first version of that document. It MUST remain the same for all
 	 * document versions.
@@ -647,8 +732,7 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Sets the hl7TemplateId CDA-CH-LREP / Laboratory Reports V1 ART-DECOR
-	 * model for General Report.
+	 * Sets the hl7TemplateId Exchange format according to the Swiss EPR
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		getTemplateId().clear();
@@ -656,19 +740,14 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Sets the hl7Title The document title must follow the following text
-	 * format where &lt;human readable code&gt; is the local translation of the
-	 * document LOINC code: - [de]: 'Laborbefund - &lt;human readable code&gt;'
-	 * - [fr]: 'Rapport de laboratoire - &lt;human readable code&gt;' - [it]:
-	 * 'Referto di laboratorio - &lt;human readable code&gt;' - [en]:
-	 * 'Laboratory report - &lt;human readable code&gt;'
+	 * Sets the hl7Title
 	 */
 	public void setHl7Title(org.ehealth_connector.common.hl7cdar2.ST value) {
 		this.title = value;
 	}
 
 	/**
-	 * Sets the hl7TypeId
+	 * Sets the hl7TypeId HL7 CDA R2, 2005
 	 */
 	public void setHl7TypeId(
 			org.ehealth_connector.common.hl7cdar2.POCDMT000040InfrastructureRootTypeId value) {
