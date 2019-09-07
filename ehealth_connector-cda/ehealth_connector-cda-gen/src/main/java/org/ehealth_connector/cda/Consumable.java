@@ -233,7 +233,8 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 						|| ((id.getRoot() != null)
 								&& id.getRoot().equals(CodeSystems.SwissINDEX.getCodeSystemId()))
 						|| ((id.getRoot() != null)
-								&& id.getRoot().equals(CodeSystems.GLN.getCodeSystemId()))) {
+								&& id.getRoot().equals(CodeSystems.GLN.getCodeSystemId()))
+						|| ((id.getRoot() != null) && id.getRoot().equals("1.3.160"))) {
 					final Identificator ide = new Identificator(id);
 					return ide;
 				}
