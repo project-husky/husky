@@ -128,6 +128,13 @@ public class CdaUtil {
 		return retVal;
 	}
 
+	public static INT createInt(int i) {
+		ObjectFactory factory = new ObjectFactory();
+		INT retVal = factory.createINT();
+		retVal.setValue(BigInteger.valueOf(i));
+		return retVal;
+	}
+
 	public static INT createIntUnknown(NullFlavor value) {
 		ObjectFactory factory = new ObjectFactory();
 		final INT i = factory.createINT();
