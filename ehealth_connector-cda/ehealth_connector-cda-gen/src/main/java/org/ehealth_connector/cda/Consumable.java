@@ -249,7 +249,8 @@ public class Consumable extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Cons
 	 */
 	public Identificator getManufacturedProductPackageId() {
 		for (final II id : getManufacturedProduct().getIds()) {
-			if ((id.getRoot() != null) && id.getRoot().equals(CodeSystems.GTIN.getCodeSystemId())) {
+			if ((id.getRoot() != null) && (id.getRoot().equals(CodeSystems.GTIN.getCodeSystemId())
+					|| id.getRoot().equals("1.3.160"))) {
 				final Identificator ide = new Identificator(id);
 				return ide;
 			}
