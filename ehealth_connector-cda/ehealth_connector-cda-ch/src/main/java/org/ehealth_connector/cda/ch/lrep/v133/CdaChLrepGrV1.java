@@ -57,10 +57,10 @@ public class CdaChLrepGrV1
 	public CdaChLrepGrV1() {
 		super.setTypeId(createHl7TypeIdFixedValue("2.16.840.1.113883.1.3", "POCD_HD000040"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.1.10"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.127.1.4"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.2"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.1"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.127.1.4"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3"));
 	}
 
 	/**
@@ -81,7 +81,8 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Adds a hl7DocumentationOf
+	 * Adds a hl7DocumentationOf Information about a health service describing
+	 * the context of this CDA document.
 	 */
 	public void addHl7DocumentationOf(
 			org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf value) {
@@ -116,7 +117,7 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Adds a hl7RecordTarget Human Patient with Non-Human Subject.
+	 * Adds a hl7RecordTarget Non-Human Subject.
 	 */
 	public void addHl7RecordTarget(
 			org.ehealth_connector.common.hl7cdar2.POCDMT000040RecordTarget value) {
@@ -161,7 +162,8 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Adds a hl7DocumentationOf
+	 * Adds a hl7DocumentationOf Information about a health service describing
+	 * the context of this CDA document.
 	 */
 	public void clearHl7DocumentationOf() {
 		getDocumentationOf().clear();
@@ -192,7 +194,7 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Adds a hl7RecordTarget Human Patient with Non-Human Subject.
+	 * Adds a hl7RecordTarget Non-Human Subject.
 	 */
 	public void clearHl7RecordTarget() {
 		getRecordTarget().clear();
