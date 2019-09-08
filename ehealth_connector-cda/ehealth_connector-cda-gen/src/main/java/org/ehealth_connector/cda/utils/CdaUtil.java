@@ -138,6 +138,7 @@ public class CdaUtil {
 	public static INT createIntUnknown(NullFlavor value) {
 		ObjectFactory factory = new ObjectFactory();
 		final INT i = factory.createINT();
+		i.nullFlavor = new ArrayList<String>();
 		if (value == null) {
 			i.nullFlavor.add(NullFlavor.UNKNOWN.getCodeValue());
 		} else {
@@ -146,7 +147,7 @@ public class CdaUtil {
 		return i;
 	}
 
-	public static IVLINT createIvlInt(String lowValue, String highValue) {
+	public static IVLINT createIvlInt(Integer lowValue, Integer highValue) {
 		ObjectFactory factory = new ObjectFactory();
 		IVLINT retVal = factory.createIVLINT();
 
@@ -155,7 +156,7 @@ public class CdaUtil {
 			intLow = createIntUnknown(null);
 		} else {
 			intLow = factory.createINT();
-			intLow.setValue(BigInteger.valueOf(Integer.parseInt(lowValue)));
+			intLow.setValue(BigInteger.valueOf(lowValue));
 		}
 
 		INT intHigh = null;
@@ -163,7 +164,7 @@ public class CdaUtil {
 			intHigh = createIntUnknown(null);
 		} else {
 			intHigh = factory.createINT();
-			intHigh.setValue(BigInteger.valueOf(Integer.parseInt(highValue)));
+			intHigh.setValue(BigInteger.valueOf(highValue));
 		}
 
 		retVal.getRest()
@@ -171,6 +172,16 @@ public class CdaUtil {
 		retVal.getRest()
 				.add(new JAXBElement<INT>(new QName("urn:hl7-org:v3", "high"), INT.class, intHigh));
 		return retVal;
+	}
+
+	public static IVLINT createIvlInt(String lowValue, String highValue) {
+		Integer low = null;
+		Integer high = null;
+		if (lowValue != null)
+			low = Integer.parseInt(lowValue);
+		if (highValue != null)
+			high = Integer.parseInt(highValue);
+		return createIvlInt(low, high);
 	}
 
 	public static IVLPQ createIvlpq(String centerValue, String unit) {
@@ -224,6 +235,7 @@ public class CdaUtil {
 	public static PQ createPqUnknown(NullFlavor value) {
 		ObjectFactory factory = new ObjectFactory();
 		final PQ pq = factory.createPQ();
+		pq.nullFlavor = new ArrayList<String>();
 		if (value == null) {
 			pq.nullFlavor.add(NullFlavor.UNKNOWN.getCodeValue());
 		} else {
@@ -259,6 +271,7 @@ public class CdaUtil {
 	public static TS createTsUnknown(NullFlavor value) {
 		ObjectFactory factory = new ObjectFactory();
 		final TS ts = factory.createTS();
+		ts.nullFlavor = new ArrayList<String>();
 		if (value == null) {
 			ts.nullFlavor.add(NullFlavor.UNKNOWN.getCodeValue());
 		} else {
