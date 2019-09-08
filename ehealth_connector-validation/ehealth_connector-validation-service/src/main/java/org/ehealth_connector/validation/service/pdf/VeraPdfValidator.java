@@ -187,6 +187,7 @@ public class VeraPdfValidator {
 			throws ConfigurationException, SaxonApiException, IOException {
 
 		initialize();
+		pdfValidationResult = new VeraPdfValidationResult();
 
 		final Processor proc = new Processor(false);
 
