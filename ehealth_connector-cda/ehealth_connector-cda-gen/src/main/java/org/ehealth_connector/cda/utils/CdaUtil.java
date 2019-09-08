@@ -41,6 +41,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.basetypes.NameBaseType;
@@ -52,6 +53,7 @@ import org.ehealth_connector.common.hl7cdar2.AdxpCity;
 import org.ehealth_connector.common.hl7cdar2.AdxpCountry;
 import org.ehealth_connector.common.hl7cdar2.AdxpPostalCode;
 import org.ehealth_connector.common.hl7cdar2.BL;
+import org.ehealth_connector.common.hl7cdar2.CD;
 import org.ehealth_connector.common.hl7cdar2.CE;
 import org.ehealth_connector.common.hl7cdar2.CS;
 import org.ehealth_connector.common.hl7cdar2.ED;
@@ -334,12 +336,27 @@ public class CdaUtil {
 					if ("-1".equals(tempOneValue))
 						tempOneValue = "-";
 					tempOneUnit = ((PQ) value).getUnit();
+				} else if (value instanceof INT) {
+					tempOneValue = ((INT) value).getValue().toString();
 				} else if (value instanceof BL) {
 					tempOneValue = ((BL) value).isValue().toString();
+				} else if (value instanceof CD) {
+					tempOneValue = new Code(((CD) value)).toString();
 				} else if (value instanceof ED) {
 					tempOneValue = ((ED) value).xmlContent;
 					tempOneValue = tempOneValue.replace("<", "&lt;");
 					tempOneValue = tempOneValue.replace(">", "&gt;");
+					tempOneValue = tempOneValue.trim();
+					if (tempOneValue.replace("\n", "").equals(""))
+						tempOneValue = "";
+					if ("".equals(tempOneValue))
+						tempOneValue = "empty String";
+					if (((ED) value).getReference() != null) {
+						String ref = ((ED) value).getReference().getValue();
+						if (ref != null)
+							tempOneValue += " (reference: " + ref + ")";
+					}
+
 				} else
 					tempOneValue = value.getClass().getName() + " not supported yet for printing";
 			}
