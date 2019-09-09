@@ -17,10 +17,10 @@
 package org.ehealth_connector.communication;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
-import org.ehealth_connector.common.mdht.enums.EhcVersions;
 import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.openhealthtools.ihe.utils.OID;

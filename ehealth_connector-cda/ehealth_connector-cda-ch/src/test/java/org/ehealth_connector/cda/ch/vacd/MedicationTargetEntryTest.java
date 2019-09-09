@@ -27,8 +27,8 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
 import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdImmunizations;
+import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.mdht.Identificator;
-import org.ehealth_connector.common.mdht.enums.EhcVersions;
 import org.junit.Test;
 import org.openhealthtools.ihe.utils.UUID;
 import org.w3c.dom.Document;

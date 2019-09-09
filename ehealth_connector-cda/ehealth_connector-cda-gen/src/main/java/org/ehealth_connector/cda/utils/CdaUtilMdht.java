@@ -20,8 +20,8 @@ import java.util.ArrayList;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.mdht.Identificator;
-import org.ehealth_connector.common.mdht.enums.EhcVersions;
 import org.openhealthtools.ihe.utils.UUID;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.Authenticator;
@@ -48,8 +48,9 @@ import org.openhealthtools.mdht.uml.hl7.rim.InfrastructureRoot;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 
 /**
- * <div class="en">A util class with helper functions.</div>
- * <div class="de">Eine Klasse mit Hilfsfunktionen.</div>
+ * <div class="en">A util class with helper functions for CDA based on
+ * MDHT.</div> <div class="de">Eine Klasse mit Hilfsfunktionen für CDA basierend
+ * auf MDHT.</div>
  */
 public abstract class CdaUtilMdht {
 
