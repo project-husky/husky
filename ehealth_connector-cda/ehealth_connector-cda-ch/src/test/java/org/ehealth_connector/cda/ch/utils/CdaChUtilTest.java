@@ -1,10 +1,9 @@
 /*
- *
  * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -32,7 +31,7 @@ import org.ehealth_connector.cda.ch.lab.lrqc.CdaChLrqc;
 import org.ehealth_connector.cda.ch.lab.lrtp.CdaChLrtp;
 import org.ehealth_connector.cda.ch.vacd.CdaChVacd;
 import org.ehealth_connector.cda.ch.vacd.enums.SectionsVacd;
-import org.ehealth_connector.cda.utils.CdaUtilTest;
+import org.ehealth_connector.cda.utils.CdaUtilMdhtTest;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,7 +46,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
  * Test of CdaChUtil
  *
  */
-public class CdaChUtilTest extends CdaUtilTest {
+public class CdaChUtilTest extends CdaUtilMdhtTest {
 	private SectionsVacd testPrefix;
 
 	@Override
