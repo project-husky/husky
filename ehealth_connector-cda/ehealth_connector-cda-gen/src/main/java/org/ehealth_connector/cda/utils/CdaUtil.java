@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.cda.utils;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -25,6 +26,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 
 import javax.xml.bind.Binder;
+import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -41,6 +43,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.commons.io.IOUtils;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
@@ -54,8 +57,11 @@ import org.ehealth_connector.common.hl7cdar2.AdxpCity;
 import org.ehealth_connector.common.hl7cdar2.AdxpCountry;
 import org.ehealth_connector.common.hl7cdar2.AdxpPostalCode;
 import org.ehealth_connector.common.hl7cdar2.BL;
+import org.ehealth_connector.common.hl7cdar2.BinaryDataEncoding;
 import org.ehealth_connector.common.hl7cdar2.CD;
 import org.ehealth_connector.common.hl7cdar2.CE;
+import org.ehealth_connector.common.hl7cdar2.COCTMT230100UVIngredient;
+import org.ehealth_connector.common.hl7cdar2.COCTMT230100UVSubstance;
 import org.ehealth_connector.common.hl7cdar2.CS;
 import org.ehealth_connector.common.hl7cdar2.ED;
 import org.ehealth_connector.common.hl7cdar2.EN;
@@ -70,12 +76,15 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040ObservationMedia;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Section;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040StructuredBody;
 import org.ehealth_connector.common.hl7cdar2.PQ;
 import org.ehealth_connector.common.hl7cdar2.SC;
 import org.ehealth_connector.common.hl7cdar2.ST;
+import org.ehealth_connector.common.hl7cdar2.StrucDocContent;
+import org.ehealth_connector.common.hl7cdar2.StrucDocRenderMultiMedia;
 import org.ehealth_connector.common.hl7cdar2.StrucDocText;
 import org.ehealth_connector.common.hl7cdar2.TS;
 import org.ehealth_connector.common.utils.Hl7CdaR2Util;
@@ -91,6 +100,69 @@ import org.w3c.dom.Node;
  * ART-DECOR.</div>
  */
 public class CdaUtil {
+
+	/**
+	 * <div class="en">Completes the given original representation section with
+	 * the PDF as observation media.</div>
+	 *
+	 * <div class="de">Vervollständigt die angegebene original representation
+	 * section mit dem PDF als observation media.</div>
+	 *
+	 * @param doc
+	 *            the doc
+	 * @param section
+	 *            the section
+	 * @param pdf
+	 *            the pdf
+	 */
+	public static void completeOriginalRepresentationSection(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument doc,
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Section section, byte[] pdf) {
+
+		final String id = "originalrepresentationpdf";
+		ObjectFactory factory = new ObjectFactory();
+
+		section.setTitle(CdaUtil.createHl7CdaR2St("Original representation"));
+
+		POCDMT000040ObservationMedia obsMedia = factory.createPOCDMT000040ObservationMedia();
+		obsMedia.getClassCode().add("OBS");
+		obsMedia.getMoodCode().add("EVN");
+		obsMedia.setIDAttr(id);
+		obsMedia.getTemplateId()
+				.add(new Identificator("2.16.756.5.30.1.1.10.4.83").getHl7CdaR2Ii());
+		obsMedia.setLanguageCode(doc.getLanguageCode());
+
+		String valueString = null;
+		try {
+			valueString = new String(IOUtils.toByteArray(
+					new ByteArrayInputStream(DatatypeConverter.printBase64Binary(pdf).getBytes())));
+		} catch (IOException e) {
+			// DO nothing
+		}
+		ED value = CdaUtil.createHl7CdaR2Ed(valueString);
+		value.setMediaType("application/pdf");
+		value.setRepresentation(BinaryDataEncoding.B_64);
+		obsMedia.setValue(value);
+
+		StrucDocText strucDocText = CdaUtil.createHl7CdaR2StrucDocText(
+				"Representation of the original view which has been signed by the legal authenticator:\n");
+		StrucDocRenderMultiMedia renderMultimedia = factory.createStrucDocRenderMultiMedia();
+		renderMultimedia.getReferencedObject().add(obsMedia);
+		strucDocText.getContent()
+				.add(new JAXBElement<StrucDocRenderMultiMedia>(
+						new QName("urn:hl7-org:v3", "renderMultiMedia"),
+						StrucDocRenderMultiMedia.class, renderMultimedia));
+
+		section.getEntry().get(0).setObservationMedia(obsMedia);
+		section.setText(strucDocText);
+
+		POCDMT000040StructuredBody structuredBody = CdaUtil.getHl7CdaR2StructuredBody(doc);
+		POCDMT000040Component3 comp3 = factory.createPOCDMT000040Component3();
+
+		// complete section
+		comp3.setSection(section);
+		structuredBody.getComponent().add(comp3);
+	}
 
 	/**
 	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
@@ -1053,6 +1125,63 @@ public class CdaUtil {
 	}
 
 	/**
+	 * <div class="en">Sets given substance as ingredient to the given
+	 * ingredient.</div>
+	 *
+	 * <div class="de">Setzt die angegebene substance als ingredient auf den
+	 * angegebenen ingredient.</div>
+	 *
+	 * @param ingredient
+	 *            the ingredient
+	 * @param substance
+	 *            the substance
+	 */
+	public static void setIngredientSubstance(COCTMT230100UVIngredient ingredient,
+			COCTMT230100UVSubstance substance) {
+
+		ingredient.setIngredient(
+				new JAXBElement<COCTMT230100UVSubstance>(new QName("urn:ihe:pharm", "ingredient"),
+						COCTMT230100UVSubstance.class, substance));
+	}
+
+	/**
+	 * <div class="en">Sets the given text to the given section.</div>
+	 *
+	 * <div class="de">Setzt den angegebenen Text im angegebenen
+	 * Abschnitt.</div>
+	 *
+	 * Sets the section text.
+	 *
+	 * @param structuredBody
+	 *            the structured body
+	 * @param section
+	 *            the section
+	 * @param languageCode
+	 *            the language code
+	 * @param value
+	 *            the value
+	 * @param contentIdCounter
+	 *            the content id counter
+	 */
+	public static void setSectionText(POCDMT000040StructuredBody structuredBody,
+			POCDMT000040Section section, LanguageCode languageCode, String value,
+			int contentIdCounter) {
+		String temp = "section"
+				+ ("000" + Integer.toString(CdaUtil.getSectionCount(structuredBody) + 1)).substring(
+						Integer.toString(CdaUtil.getSectionCount(structuredBody) + 1).length());
+		StrucDocText strucDocText = CdaUtil.createHl7CdaR2StrucDocText(temp, languageCode, value);
+		ObjectFactory factory = new ObjectFactory();
+		StrucDocContent contentId = factory.createStrucDocContent();
+		String contentIdStr = "dummy";
+		if (contentIdCounter > 0)
+			contentIdStr += Integer.toString(contentIdCounter);
+		contentId.setID(contentIdStr);
+		strucDocText.getContent().add(new JAXBElement<StrucDocContent>(
+				new QName("urn:hl7-org:v3", "content"), StrucDocContent.class, contentId));
+		section.setText(strucDocText);
+	}
+
+	/**
 	 * <div class="en">Sets the given text and title to the given section.</div>
 	 *
 	 * <div class="de">Setzt den angegebenen Text und Titel im angegebenen
@@ -1080,4 +1209,5 @@ public class CdaUtil {
 		comp3.setSection(section);
 		structuredBody.getComponent().add(comp3);
 	}
+
 }
