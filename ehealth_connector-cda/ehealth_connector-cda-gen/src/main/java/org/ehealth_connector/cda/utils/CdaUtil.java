@@ -42,6 +42,10 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
 import org.apache.commons.io.IOUtils;
 import org.ehealth_connector.common.Code;
@@ -91,6 +95,7 @@ import org.ehealth_connector.common.utils.Hl7CdaR2Util;
 import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  * <div class="en">A util class with helper functions for CDA based on
@@ -1093,6 +1098,23 @@ public class CdaUtil {
 				"type=\"text/xsl\" href=\"" + xsl + "\""));
 
 		binder.marshal(jaxbObject, doc);
+
+		// Remove empty text nodes in order to well format the serialized output
+		XPathFactory xpathFactory = XPathFactory.newInstance();
+		// XPath to find empty text nodes.
+		XPathExpression xpathExp;
+		try {
+			xpathExp = xpathFactory.newXPath().compile("//text()[normalize-space(.) = '']");
+			NodeList emptyTextNodes = (NodeList) xpathExp.evaluate(doc, XPathConstants.NODESET);
+
+			// Remove each empty text node from document.
+			for (int i = 0; i < emptyTextNodes.getLength(); i++) {
+				Node emptyTextNode = emptyTextNodes.item(i);
+				emptyTextNode.getParentNode().removeChild(emptyTextNode);
+			}
+		} catch (XPathExpressionException e) {
+			// Do nothing
+		}
 
 		final DOMSource domSource = new DOMSource(doc);
 		final StreamResult streamResult = new StreamResult(outputStream);
