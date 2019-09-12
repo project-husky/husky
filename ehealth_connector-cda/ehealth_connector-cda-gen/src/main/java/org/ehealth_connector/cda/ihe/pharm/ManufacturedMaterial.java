@@ -38,7 +38,7 @@ import org.openhealthtools.mdht.uml.hl7.vocab.EntityDeterminerDetermined;
 import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 /**
- * The Class ManufacturedMaterial. see also CDA CH MTPS 7.4.2.3
+ * The Class ManufacturedMaterial.
  */
 public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.uml.cda.Material> {
 
@@ -81,8 +81,7 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 	 */
 	public void addIngredient(PharmManufacturedMaterialEntry ingredient) {
 
-		// TODO: Modelling problem should be n ingredients! (MTPS 7.5.12.1
-		// cardinality is wrong)
+		// TODO: Modelling problem should be n ingredients!
 		this.getMdht().setIngredient(ingredient.getMdht().getIngredient());
 
 	}
@@ -301,8 +300,8 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 		}
 
 		if (packageSize != null)
-			packagedMedicine.setCapacityQuantity(
-					CdaUtilMdht.getMdhtDatatypesFactoryInstance().createPQ(packageSize.doubleValue(),
+			packagedMedicine.setCapacityQuantity(CdaUtilMdht.getMdhtDatatypesFactoryInstance()
+					.createPQ(packageSize.doubleValue(),
 							(packageUnits != null ? packageUnits.getCodeValue() : null)));
 
 		if (packageName != null) {
@@ -379,8 +378,8 @@ public class ManufacturedMaterial extends MdhtFacade<org.openhealthtools.mdht.um
 	 */
 	public void setManufacturedMaterialName(String name) {
 		if (name != null)
-			this.getMdht().setName(
-					CdaUtilMdht.getMdhtDatatypesFactoryInstance().createEN().addText(new String(name)));
+			this.getMdht().setName(CdaUtilMdht.getMdhtDatatypesFactoryInstance().createEN()
+					.addText(new String(name)));
 	}
 
 	/**

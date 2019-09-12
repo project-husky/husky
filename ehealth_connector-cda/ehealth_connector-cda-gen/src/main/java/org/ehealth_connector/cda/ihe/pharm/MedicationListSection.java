@@ -26,8 +26,7 @@ import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.ihe.pharm.PHARMFactory;
 
 /**
- * Implements the Medication List Section Content Module (see also CDA-CH MTPS
- * 7.3.5)
+ * Implements the Medication List Section Content Module
  */
 public class MedicationListSection
 		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationListSection> {

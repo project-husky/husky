@@ -20,7 +20,7 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
 
 /**
- * The DispenseCodeList. MTPS 7.6.6
+ * The DispenseCodeList.
  */
 public enum DispenseCodeList {
 

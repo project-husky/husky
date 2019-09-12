@@ -30,13 +30,13 @@ import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassManufacturedProduct;
 
 /**
- * The Class CdaChMtpsMtp. see also CDA CH MTPS 7.4.2.3
+ * The Class ManufacturedProduct.
  */
 public class ManufacturedProduct
 		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ManufacturedProduct> {
 
 	/**
-	 * Instantiates a new cda ch mtps mtp.
+	 * Instantiates a new manufactured product.
 	 */
 	public ManufacturedProduct() {
 		this(LanguageCode.ENGLISH);
@@ -58,7 +58,7 @@ public class ManufacturedProduct
 	/**
 	 * Instantiates a new manufactured product item entry.
 	 *
-	 * @param mdht
+	 * @param mdht the mdht
 	 */
 	public ManufacturedProduct(org.openhealthtools.mdht.uml.cda.ManufacturedProduct mdht) {
 		super(mdht);
@@ -68,16 +68,14 @@ public class ManufacturedProduct
 	 * Adds the manufactured product id. This ID HAS TO BE a GTIN, GLN, or Swiss
 	 * Index Code
 	 *
+	 * @param gtinOrPharmacodeOrGln            the new manufactured product id. If null, a NullFlavor.NA will
+	 *            be set instead and all others will be removed
 	 * @see org.ehealth_connector.common.enums.CodeSystems
-	 *
+	 * 
 	 *      2017/05/02 According to CDA-CH-II Medications-template, two IDs can
 	 *      be present: root 1.3.88 --> Product GLN HAS TO BE PRESENT root
 	 *      1.3.160 --> Package GTIN HAS TO BE PRESENT IF KNOWN --> several ids
 	 *      may be present
-	 *
-	 * @param gtinOrPharmacodeOrGln
-	 *            the new manufactured product id. If null, a NullFlavor.NA will
-	 *            be set instead and all others will be removed
 	 */
 	public void addManufacturedProductId(Identificator gtinOrPharmacodeOrGln) {
 		if (gtinOrPharmacodeOrGln != null) {
@@ -91,8 +89,7 @@ public class ManufacturedProduct
 
 	/**
 	 * Clears the Manufactured Product in order to make a null flavored
-	 * manufactured product (required for references to MTP and PRE items)
-	 *
+	 * manufactured product (required for references to MTP and PRE items).
 	 */
 	public void emptyManufacturedProduct() {
 		this.getMdht().getTemplateIds().clear();
@@ -128,7 +125,7 @@ public class ManufacturedProduct
 	}
 
 	/**
-	 * Gets the pharmacode (SwissInedx) id from the ManufacturedProduct
+	 * Gets the pharmacode (SwissInedx) id from the ManufacturedProduct.
 	 *
 	 * @return the swiss index GTIN, null otherwise
 	 */
@@ -144,7 +141,7 @@ public class ManufacturedProduct
 	}
 
 	/**
-	 * Gets the product id from the ManufacturedProduct
+	 * Gets the product id from the ManufacturedProduct.
 	 *
 	 * @return the swiss index GLN, null otherwise
 	 */
@@ -170,12 +167,10 @@ public class ManufacturedProduct
 	}
 
 	/**
-	 * Sets the manufactured material
+	 * Sets the manufactured material.
 	 *
-	 * @param manufacturedMaterial
-	 *            Manufactured material - if null, a NullFlavor.NA material is
+	 * @param manufacturedMaterial            Manufactured material - if null, a NullFlavor.NA material is
 	 *            generated
-	 *
 	 */
 	public void setManufacturedMaterial(ManufacturedMaterial manufacturedMaterial) {
 		if (manufacturedMaterial != null) {
@@ -191,11 +186,9 @@ public class ManufacturedProduct
 	}
 
 	/**
-	 * Sets the manufacturer organization
+	 * Sets the manufacturer organization.
 	 *
-	 * @param manufacturerOrganization
-	 *            Manufacturer organization
-	 *
+	 * @param manufacturerOrganization            Manufacturer organization
 	 */
 	public void setManufacturerOrganization(Organization manufacturerOrganization) {
 		if (manufacturerOrganization != null) {

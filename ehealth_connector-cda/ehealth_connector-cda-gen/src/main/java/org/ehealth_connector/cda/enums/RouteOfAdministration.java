@@ -23,7 +23,7 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /**
- * The RouteOfAdministration. MTPS 7.6.4
+ * The RouteOfAdministration.
  */
 public enum RouteOfAdministration {
 
