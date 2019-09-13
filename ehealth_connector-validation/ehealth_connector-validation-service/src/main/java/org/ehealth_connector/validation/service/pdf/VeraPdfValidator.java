@@ -19,6 +19,7 @@ package org.ehealth_connector.validation.service.pdf;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Iterator;
 import java.util.Set;
@@ -136,21 +137,6 @@ public class VeraPdfValidator {
 	}
 
 	/**
-	 * Initializes the PDF validator
-	 */
-	private void initialize() {
-		if (pdfValidator == null) {
-			log.info("Trying to initialize veraPdfValidator...");
-			pdfValidationResult = new VeraPdfValidationResult();
-			flavour = PDFAFlavour.fromString(pdfConformanceLevel);
-			pdfValidationResult.setPdfConformanceLevel(pdfConformanceLevel);
-			VeraGreenfieldFoundryProvider.initialise();
-			pdfValidator = Foundries.defaultInstance().createValidator(flavour, false);
-		} else
-			log.info("PdfValidatorAPI already initialized...");
-	}
-
-	/**
 	 * Sets the given PDF validation results
 	 *
 	 * @param pdfValidationResults
@@ -214,6 +200,21 @@ public class VeraPdfValidator {
 	}
 
 	/**
+	 * Initializes the PDF validator
+	 */
+	private void initialize() {
+		if (pdfValidator == null) {
+			log.info("Trying to initialize veraPdfValidator...");
+			pdfValidationResult = new VeraPdfValidationResult();
+			flavour = PDFAFlavour.fromString(pdfConformanceLevel);
+			pdfValidationResult.setPdfConformanceLevel(pdfConformanceLevel);
+			VeraGreenfieldFoundryProvider.initialise();
+			pdfValidator = Foundries.defaultInstance().createValidator(flavour, false);
+		} else
+			log.info("PdfValidatorAPI already initialized...");
+	}
+
+	/**
 	 * Validates the given PDF
 	 *
 	 * @param pdfStrB64
@@ -265,7 +266,24 @@ public class VeraPdfValidator {
 					ByteArrayInputStream is = new ByteArrayInputStream(decodedBytes);
 					parser = Foundries.defaultInstance().createParser(is, flavour);
 					is.reset();
+
+					// Switch off veraPDF Warnings
+					java.util.logging.Logger globalLogger = java.util.logging.Logger.getLogger("");
+					java.util.logging.Handler[] handlers = globalLogger.getHandlers();
+					ArrayList<java.util.logging.Handler> handlerList = new ArrayList<java.util.logging.Handler>();
+					for (java.util.logging.Handler handler : handlers) {
+						handlerList.add(handler);
+						globalLogger.removeHandler(handler);
+					}
+
+					// Perform veraPDF validation
 					result = pdfValidator.validate(parser);
+
+					// Reset Logger to default behaviour
+					for (java.util.logging.Handler handler : handlerList) {
+						globalLogger.addHandler(handler);
+					}
+
 				} catch (ModelParsingException | EncryptedPdfException | ValidationException e) {
 					aborted = true;
 					VeraPdfValidationResultEntry failure = new VeraPdfValidationResultEntry();
@@ -275,7 +293,7 @@ public class VeraPdfValidator {
 							errMsg = errMsg + " (" + e.getCause().getMessage() + ")";
 					}
 					errMsg = errMsg
-							+ "*** Note: veraPDF seems still not to be fully thread save with version 1.12.1";
+							+ "*** Note: veraPDF seems still not to be fully thread save with version 1.14.102";
 					if (Util.isDebug()) {
 						errMsg = errMsg + debugString;
 					}
