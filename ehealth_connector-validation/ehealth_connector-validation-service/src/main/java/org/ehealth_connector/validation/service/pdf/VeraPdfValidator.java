@@ -174,6 +174,7 @@ public class VeraPdfValidator {
 
 		initialize();
 		pdfValidationResult = new VeraPdfValidationResult();
+		pdfValidationResult.setPdfConformanceLevel(pdfConformanceLevel);
 
 		final Processor proc = new Processor(false);
 
