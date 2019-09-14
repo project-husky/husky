@@ -374,7 +374,7 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * <div class="de">Name des Value Sets</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String VALUE_SET_NAME = "xds-formCo";
+	public static final String VALUE_SET_NAME = "DocumentEntry.formatCode";
 
 	/**
 	 * <!-- @formatter:off -->

@@ -369,7 +369,7 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 * <div class="de">Name des Value Sets</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String VALUE_SET_NAME = "xds-hcFacTyCo";
+	public static final String VALUE_SET_NAME = "DocumentEntry.healthcareFacilityTypeCode";
 
 	/**
 	 * <!-- @formatter:off -->

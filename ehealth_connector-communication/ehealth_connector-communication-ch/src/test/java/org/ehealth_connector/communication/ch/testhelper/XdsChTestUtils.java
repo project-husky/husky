@@ -1,10 +1,9 @@
 /*
- *
  * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -40,7 +39,7 @@ public class XdsChTestUtils extends XdsTestUtils {
 			AuthorSpeciality.ANAESTHESIOLOGY, AuthorSpeciality.BIOMEDICAL_ANALYSIS };
 	public static AvailabilityStatus avaiabilityStatus = AvailabilityStatus.APPROVED;
 	public static ClassCode[] classCodes = new ClassCode[] { ClassCode.CARE_PLAN,
-			ClassCode.AUDIT_TRAIL };
+			ClassCode.AUDIT_TRAIL_REPORT };
 	public static ConfidentialityCode[] confidentialityCodes = new ConfidentialityCode[] {
 			ConfidentialityCode.NORMALLY_ACCESSIBLE, ConfidentialityCode.SECRET };
 	public static FormatCode[] formatCodes = new FormatCode[] { FormatCode.IMMUNIZATION_CONTENT,

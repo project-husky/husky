@@ -415,15 +415,15 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 			"Osteopathic manipulative medicine", "Osteopathie", "Ostéopathie", "Osteopatia"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">other Clinical specialty</div>
-	 * <div class="de">Andere nicht näher spezifizierte medzinische Fachrichtung</div>
+	 * <div class="en">Other clinical specialty</div>
+	 * <div class="de">Andere nicht näher spezifizierte medizinische Fachrichtung</div>
 	 * <div class="fr">Autres spécialisations non spécifiées</div>
 	 * <div class="it">Altre specialità mediche non meglio precisate</div>
 	 * <!-- @formatter:on -->
 	 */
 	OTHER_CLINICAL_SPECIALTY("394658006", "2.16.840.1.113883.6.96",
-			"Clinical specialty (qualifier value)", "other Clinical specialty",
-			"Andere nicht näher spezifizierte medzinische Fachrichtung",
+			"Clinical specialty (qualifier value)", "Other clinical specialty",
+			"Andere nicht näher spezifizierte medizinische Fachrichtung",
 			"Autres spécialisations non spécifiées",
 			"Altre specialità mediche non meglio precisate"),
 	/**
@@ -1048,8 +1048,8 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for other Clinical specialty</div>
-	 * <div class="de">Code für Andere nicht näher spezifizierte medzinische Fachrichtung</div>
+	 * <div class="en">Code for Other clinical specialty</div>
+	 * <div class="de">Code für Andere nicht näher spezifizierte medizinische Fachrichtung</div>
 	 * <div class="fr">Code de Autres spécialisations non spécifiées</div>
 	 * <div class="it">Code per Altre specialità mediche non meglio precisate</div>
 	 * <!-- @formatter:on -->
@@ -1320,7 +1320,7 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 * <div class="de">Name des Value Sets</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String VALUE_SET_NAME = "xds-pracSetCo";
+	public static final String VALUE_SET_NAME = "DocumentEntry.practiceSettingCode";
 
 	/**
 	 * <!-- @formatter:off -->

@@ -152,7 +152,7 @@ public enum SubmissionSetAuthorRole implements ValueSetEnumInterface {
 	 * <div class="de">Name des Value Sets</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String VALUE_SET_NAME = "SubmissionSetAuthorRole";
+	public static final String VALUE_SET_NAME = "SubmissionSet.Author.AuthorRole";
 
 	/**
 	 * <!-- @formatter:off -->

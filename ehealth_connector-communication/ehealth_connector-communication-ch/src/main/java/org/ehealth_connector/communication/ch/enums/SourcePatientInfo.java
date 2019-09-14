@@ -130,7 +130,7 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 	 * <div class="de">Name des Value Sets</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String VALUE_SET_NAME = "xds-sourPatInf";
+	public static final String VALUE_SET_NAME = "DocumentEntry.sourcePatientInfo.PID-8";
 
 	/**
 	 * <!-- @formatter:off -->

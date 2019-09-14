@@ -38,24 +38,24 @@ public enum ContentTypeCode implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Procedure (procedure)</div>
+	 * <div class="en">Procedure</div>
 	 * <div class="de">Prozedur</div>
 	 * <div class="fr">Procédure</div>
 	 * <div class="it">Procedura</div>
 	 * <!-- @formatter:on -->
 	 */
-	PROCEDURE_PROCEDURE("71388002", "2.16.840.1.113883.6.96", "Procedure (procedure)",
-			"Procedure (procedure)", "Prozedur", "Procédure", "Procedura");
+	PROCEDURE("71388002", "2.16.840.1.113883.6.96", "Procedure (procedure)", "Procedure",
+			"Prozedur", "Procédure", "Procedura");
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Procedure (procedure)</div>
+	 * <div class="en">Code for Procedure</div>
 	 * <div class="de">Code für Prozedur</div>
 	 * <div class="fr">Code de Procédure</div>
 	 * <div class="it">Code per Procedura</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String PROCEDURE_PROCEDURE_CODE = "71388002";
+	public static final String PROCEDURE_CODE = "71388002";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -71,7 +71,7 @@ public enum ContentTypeCode implements ValueSetEnumInterface {
 	 * <div class="de">Name des Value Sets</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String VALUE_SET_NAME = "EprContentTypeCode";
+	public static final String VALUE_SET_NAME = "SubmissionSet.contentTypeCode";
 
 	/**
 	 * <!-- @formatter:off -->

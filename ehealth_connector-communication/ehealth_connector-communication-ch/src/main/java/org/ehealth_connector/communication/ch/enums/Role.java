@@ -27,7 +27,7 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">      Role codes as per Annex 5 EPRO-FDHA, Draft June 2018 version<br clear="none"/></div>
+ * <div class="en">      Role codes as per Annex 5 EPRO-FDHA, version July 2019<br clear="none"/></div>
  * <div class="de">no designation found for language GERMAN</div>
  * <div class="fr">no designation found for language FRENCH</div>
  * <div class="it">no designation found for language ITALIAN</div>
@@ -49,13 +49,13 @@ public enum Role implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Document Administrator</div>
-	 * <div class="de">TODO</div>
+	 * <div class="de">Dokumentenadministrator</div>
 	 * <div class="fr">TODO</div>
 	 * <div class="it">TODO</div>
 	 * <!-- @formatter:on -->
 	 */
 	DOCUMENT_ADMINISTRATOR("DADM", "2.16.756.5.30.1.127.3.10.6", "Document Administrator",
-			"Document Administrator", "TODO", "TODO", "TODO"),
+			"Document Administrator", "Dokumentenadministrator", "TODO", "TODO"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Healthcare professional</div>
@@ -121,7 +121,7 @@ public enum Role implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Document Administrator</div>
-	 * <div class="de">Code für TODO</div>
+	 * <div class="de">Code für Dokumentenadministrator</div>
 	 * <div class="fr">Code de TODO</div>
 	 * <div class="it">Code per TODO</div>
 	 * <!-- @formatter:on -->

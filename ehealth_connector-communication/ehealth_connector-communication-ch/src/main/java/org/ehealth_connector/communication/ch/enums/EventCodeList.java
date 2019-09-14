@@ -854,7 +854,7 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	 * <div class="de">Name des Value Sets</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String VALUE_SET_NAME = "xds-evCoLi";
+	public static final String VALUE_SET_NAME = "DocumentEntry.eventCodeList";
 
 	/**
 	 * <!-- @formatter:off -->
