@@ -35,8 +35,7 @@ import org.joda.time.DateTime;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class ResponseImpl
-		implements Response, SecurityObject<org.opensaml.saml.saml2.core.Response> {
+public class ResponseImpl implements Response, SecurityObject<org.opensaml.saml.saml2.core.Response> {
 
 	/** The response. */
 	private org.opensaml.saml.saml2.core.Response response;
@@ -93,8 +92,7 @@ public class ResponseImpl
 	 */
 	@Override
 	public List<EncryptedAssertion> getEncryptedAssertions() {
-		final List<org.opensaml.saml.saml2.core.EncryptedAssertion> internal = response
-				.getEncryptedAssertions();
+		final List<org.opensaml.saml.saml2.core.EncryptedAssertion> internal = response.getEncryptedAssertions();
 		final List<EncryptedAssertion> retVal = new ArrayList<>();
 		internal.forEach(c -> {
 			retVal.add(new EncryptedAssertionBuilderImpl().create(c));
@@ -186,5 +184,15 @@ public class ResponseImpl
 	@Override
 	public org.opensaml.saml.saml2.core.Response getWrappedObject() {
 		return response;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.Response#hasSignature()
+	 */
+	@Override
+	public boolean hasSignature() {
+		return (response.getSignature() != null);
 	}
 }

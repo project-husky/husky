@@ -170,10 +170,11 @@ public class SimplePpfClient extends AbstractSoapClient<PrivacyPolicyFeedRespons
 					.status(response.getStatus()).create();
 
 			try {
-				final Element faultElement = getResponseElement(httpResponse,
-						"http://www.w3.org/2003/05/soap-envelope", "Fault");
-				if (faultElement != null) {
-					final SoapException exception = getSoapException(faultElement);
+				final Element reasonElement = getResponseElement(httpResponse,
+						"http://www.w3.org/2003/05/soap-envelope", "Reason");
+				if (reasonElement != null) {
+					final SoapException exception = getSoapException(reasonElement);
+
 					ppfResponse.getExceptions().add(exception);
 				}
 
