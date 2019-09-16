@@ -178,7 +178,7 @@ public class CdaUtil {
 	 *
 	 * @param value
 	 *            the value
-	 * @return the bl
+	 * @return an instance of the HL7 CDA R2 data type BL
 	 */
 	public static BL createHl7CdaR2Bl(boolean value) {
 		ObjectFactory factory = new ObjectFactory();
@@ -198,7 +198,7 @@ public class CdaUtil {
 	 *            the code
 	 * @param codeSystem
 	 *            the code system
-	 * @return the ce
+	 * @return an instance of the HL7 CDA R2 data type CE
 	 */
 	public static CE createHl7CdaR2Ce(String code, String codeSystem) {
 		ObjectFactory factory = new ObjectFactory();
@@ -217,7 +217,7 @@ public class CdaUtil {
 	 *
 	 * @param value
 	 *            the value
-	 * @return the cs
+	 * @return an instance of the HL7 CDA R2 data type CE
 	 */
 	public static CS createHl7CdaR2Cs(String value) {
 		ObjectFactory factory = new ObjectFactory();
@@ -235,7 +235,7 @@ public class CdaUtil {
 	 *
 	 * @param value
 	 *            the value
-	 * @return the ed
+	 * @return an instance of the HL7 CDA R2 data type ED
 	 */
 	public static ED createHl7CdaR2Ed(String value) {
 		ObjectFactory factory = new ObjectFactory();
@@ -253,7 +253,7 @@ public class CdaUtil {
 	 *
 	 * @param i
 	 *            the i
-	 * @return the int
+	 * @return an instance of the HL7 CDA R2 data type INT
 	 */
 	public static INT createHl7CdaR2Int(int i) {
 		ObjectFactory factory = new ObjectFactory();
@@ -470,7 +470,7 @@ public class CdaUtil {
 	 *
 	 * @param nullFlavor
 	 *            the desired nullFlavor value
-	 * @return the int
+	 * @return an instance of the HL7 CDA R2 data type INT
 	 */
 	public static INT createHl7CdaR2NullFlavorInt(NullFlavor nullFlavor) {
 		ObjectFactory factory = new ObjectFactory();
@@ -752,7 +752,7 @@ public class CdaUtil {
 	 *
 	 * @param value
 	 *            the value
-	 * @return the int
+	 * @return an instance of the HL7 CDA R2 data type INT
 	 */
 	public static Integer getInt(INT value) {
 		return value.getValue().intValue();
@@ -766,8 +766,8 @@ public class CdaUtil {
 	 * R2-Beobachtung als String ab.</div>
 	 *
 	 * @param obs
-	 *            the obs
-	 * @return the result
+	 *            the HL7 CDA R2 observation
+	 * @return the observation result as String
 	 */
 	public static String getLaboratoryObservationResult(POCDMT000040Observation obs) {
 		String retVal = "";
@@ -884,7 +884,7 @@ public class CdaUtil {
 	 *
 	 * @param inputFile
 	 *            the source file.
-	 * @return the POCDMT 000040 clinical document
+	 * @return an instance of the HL7 CDA R2 data type ClinicalDocument
 	 * @throws JAXBException
 	 *             the JAXB exception
 	 * @throws IOException
@@ -928,7 +928,7 @@ public class CdaUtil {
 	 * aus</div>.
 	 *
 	 * @param cdaDoc
-	 *            the cda doc
+	 *            the CDA document
 	 * @throws JAXBException
 	 *             the JAXB exception
 	 * @throws ParserConfigurationException
@@ -950,7 +950,7 @@ public class CdaUtil {
 	 * Datei.</div>
 	 *
 	 * @param doc
-	 *            the doc
+	 *            the CDA document
 	 * @param outputFile
 	 *            the destination file.
 	 * @param xsl
@@ -1134,7 +1134,7 @@ public class CdaUtil {
 	 * zu.</div>
 	 *
 	 * @param doc
-	 *            the doc
+	 *            the CDA document
 	 * @param idVersion1
 	 *            the set Id (if null, the document ID will be used)
 	 * @param version
