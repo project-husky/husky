@@ -46,21 +46,15 @@ public class MedicationTreatmentPlanSection extends
 	 */
 	public MedicationTreatmentPlanSection(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createMedicationTreatmentPlanSection().init());
-		this.languageCode = languageCode;
-		switch (this.languageCode) {
-		case GERMAN:
-			this.getMdht().setTitle(Util.st("Medikamentöser Behandlungsplan"));
-			break;
-		case FRENCH:
+		this.setLanguageCode(languageCode);
+		if (languageCode == LanguageCode.FRENCH)
 			this.getMdht().setTitle(Util.st("Plan de traitement médicamenteux"));
-			break;
-		case ITALIAN:
+		if (languageCode == LanguageCode.GERMAN)
+			this.getMdht().setTitle(Util.st("Medikamentöser Behandlungsplan"));
+		if (languageCode == LanguageCode.ITALIAN)
 			this.getMdht().setTitle(Util.st("Piano terapeutico farmacologico"));
-			break;
-		case ENGLISH:
+		if (languageCode == LanguageCode.ENGLISH)
 			this.getMdht().setTitle(Util.st("Medication Treatment Plan"));
-			break;
-		}
 	}
 
 	/**
@@ -84,6 +78,14 @@ public class MedicationTreatmentPlanSection extends
 			return this.getMdht().getTitle().getText();
 		}
 		return null;
+	}
+
+	public LanguageCode getLanguageCode() {
+		return languageCode;
+	}
+
+	public void setLanguageCode(LanguageCode languageCode) {
+		this.languageCode = languageCode;
 	}
 
 }

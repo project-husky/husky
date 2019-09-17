@@ -49,7 +49,7 @@ public class PrescriptionSection
 	 */
 	public PrescriptionSection(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createPrescriptionSection().init());
-		this.languageCode = languageCode;
+		this.setLanguageCode(languageCode);
 
 		// mdht bug? prescription sections defines own code but is not honored
 		// in
@@ -60,20 +60,14 @@ public class PrescriptionSection
 			getMdht().getCode().setCode("57828-6");
 			getMdht().getCode().setDisplayName("PRESCRIPTIONS");
 		}
-		switch (this.languageCode) {
-		case GERMAN:
-			this.getMdht().setTitle(Util.st("Arzneimittelverordnung"));
-			break;
-		case FRENCH:
+		if (languageCode == LanguageCode.FRENCH)
 			this.getMdht().setTitle(Util.st("Prescription médicamenteuse"));
-			break;
-		case ITALIAN:
+		if (languageCode == LanguageCode.GERMAN)
+			this.getMdht().setTitle(Util.st("Arzneimittelverordnung"));
+		if (languageCode == LanguageCode.ITALIAN)
 			this.getMdht().setTitle(Util.st("Prescrizione di droga"));
-			break;
-		case ENGLISH:
+		if (languageCode == LanguageCode.ENGLISH)
 			this.getMdht().setTitle(Util.st("Prescription for medication"));
-			break;
-		}
 	}
 
 	/**
@@ -121,6 +115,14 @@ public class PrescriptionSection
 			return this.getMdht().getTitle().getText();
 		}
 		return null;
+	}
+
+	public LanguageCode getLanguageCode() {
+		return languageCode;
+	}
+
+	public void setLanguageCode(LanguageCode languageCode) {
+		this.languageCode = languageCode;
 	}
 
 }

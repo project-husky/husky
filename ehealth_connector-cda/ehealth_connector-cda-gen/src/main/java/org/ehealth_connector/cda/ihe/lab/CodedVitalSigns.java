@@ -57,20 +57,14 @@ public class CodedVitalSigns
 	public CodedVitalSigns(LanguageCode languageCode) {
 		super(IHEFactory.eINSTANCE.createCodedVitalSignsSection().init());
 
-		switch (languageCode) {
-		case FRENCH:
+		if (languageCode == LanguageCode.FRENCH)
 			setTitle("Signes vitaux codés");
-			break;
-		case GERMAN:
+		if (languageCode == LanguageCode.GERMAN)
 			this.setTitle("Codierte Vitalzeichenliste");
-			break;
-		case ITALIAN:
+		if (languageCode == LanguageCode.ITALIAN)
 			setTitle("Elenco codificato dei segni vitali");
-			break;
-		case ENGLISH:
+		if (languageCode == LanguageCode.ENGLISH)
 			setTitle("Coded Vital Signs");
-			break;
-		}
 	}
 
 	/**

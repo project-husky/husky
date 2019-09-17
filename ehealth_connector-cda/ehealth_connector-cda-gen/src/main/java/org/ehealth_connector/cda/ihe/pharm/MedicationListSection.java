@@ -49,22 +49,16 @@ public class MedicationListSection
 	 */
 	public MedicationListSection(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createMedicationListSection().init());
-		this.languageCode = languageCode;
+		this.setLanguageCode(languageCode);
 
-		switch (this.languageCode) {
-		case GERMAN:
-			this.getMdht().setTitle(Util.st("Medikamentenliste"));
-			break;
-		case FRENCH:
+		if (languageCode == LanguageCode.FRENCH)
 			this.getMdht().setTitle(Util.st("Liste de médicaments"));
-			break;
-		case ITALIAN:
+		if (languageCode == LanguageCode.GERMAN)
+			this.getMdht().setTitle(Util.st("Medikamentenliste"));
+		if (languageCode == LanguageCode.ITALIAN)
 			this.getMdht().setTitle(Util.st("Lista farmaci"));
-			break;
-		case ENGLISH:
+		if (languageCode == LanguageCode.ENGLISH)
 			this.getMdht().setTitle(Util.st("Medication List"));
-			break;
-		}
 	}
 
 	/**
@@ -184,6 +178,14 @@ public class MedicationListSection
 			return this.getMdht().getTitle().getText();
 		}
 		return null;
+	}
+
+	public LanguageCode getLanguageCode() {
+		return languageCode;
+	}
+
+	public void setLanguageCode(LanguageCode languageCode) {
+		this.languageCode = languageCode;
 	}
 
 }

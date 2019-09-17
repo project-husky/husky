@@ -48,7 +48,7 @@ public class PharmaceuticalAdviceSection
 	 */
 	public PharmaceuticalAdviceSection(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createPharmaceuticalAdviceSection().init());
-		this.languageCode = languageCode;
+		this.setLanguageCode(languageCode);
 
 		// mdht bug? dispense sections defines own code but is not honored in
 		// modelling
@@ -58,20 +58,14 @@ public class PharmaceuticalAdviceSection
 			getMdht().getCode().setCode("61357-0");
 			getMdht().getCode().setDisplayName("MEDICATION PHARMACEUTICAL ADVICE.BRIEF");
 		}
-		switch (this.languageCode) {
-		case GERMAN:
-			this.getMdht().setTitle(Util.st("Pharmazeutische Beratung"));
-			break;
-		case FRENCH:
+		if (languageCode == LanguageCode.FRENCH)
 			this.getMdht().setTitle(Util.st("Conseil pharmaceutique"));
-			break;
-		case ITALIAN:
+		if (languageCode == LanguageCode.GERMAN)
+			this.getMdht().setTitle(Util.st("Pharmazeutische Beratung"));
+		if (languageCode == LanguageCode.ITALIAN)
 			this.getMdht().setTitle(Util.st("Consiglio farmaceutica"));
-			break;
-		case ENGLISH:
+		if (languageCode == LanguageCode.ENGLISH)
 			this.getMdht().setTitle(Util.st("Pharmaceutical Advice"));
-			break;
-		}
 	}
 
 	/**
@@ -124,6 +118,14 @@ public class PharmaceuticalAdviceSection
 			}
 		}
 		this.getMdht().addObservation(entry.getMdht());
+	}
+
+	public LanguageCode getLanguageCode() {
+		return languageCode;
+	}
+
+	public void setLanguageCode(LanguageCode languageCode) {
+		this.languageCode = languageCode;
 	}
 
 }

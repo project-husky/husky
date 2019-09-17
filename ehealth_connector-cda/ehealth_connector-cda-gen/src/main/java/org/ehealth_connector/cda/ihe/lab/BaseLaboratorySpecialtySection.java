@@ -141,19 +141,13 @@ public class BaseLaboratorySpecialtySection extends
 	 *            the new title
 	 */
 	public void setTitle(LanguageCode languageCode) {
-		switch (languageCode) {
-		case FRENCH:
+		if (languageCode == LanguageCode.FRENCH)
 			setTitle("Rapport de laboratoire");
-			break;
-		case GERMAN:
+		if (languageCode == LanguageCode.GERMAN)
 			this.setTitle("Laborbefund");
-			break;
-		case ITALIAN:
+		if (languageCode == LanguageCode.ITALIAN)
 			setTitle("Rapporto di laboratorio");
-			break;
-		case ENGLISH:
+		if (languageCode == LanguageCode.ENGLISH)
 			setTitle("Laboratory report");
-			break;
-		}
 	}
 }

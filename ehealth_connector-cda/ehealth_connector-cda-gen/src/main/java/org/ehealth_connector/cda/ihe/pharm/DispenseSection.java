@@ -48,7 +48,7 @@ public class DispenseSection
 	 */
 	public DispenseSection(LanguageCode languageCode) {
 		super(PHARMFactory.eINSTANCE.createDispenseSection().init());
-		this.languageCode = languageCode;
+		this.setLanguageCode(languageCode);
 
 		// mdht bug? dispense sections defines own code but is not honored in
 		// modelling
@@ -58,20 +58,14 @@ public class DispenseSection
 			getMdht().getCode().setCode("60590-7");
 			getMdht().getCode().setDisplayName("MEDICATION DISPENSED.BRIEF");
 		}
-		switch (this.languageCode) {
-		case FRENCH:
+		if (languageCode == LanguageCode.FRENCH)
 			this.getMdht().setTitle(Util.st("Dispensation des médicaments"));
-			break;
-		case GERMAN:
+		if (languageCode == LanguageCode.GERMAN)
 			this.getMdht().setTitle(Util.st("Abgabe von Medikamenten"));
-			break;
-		case ITALIAN:
+		if (languageCode == LanguageCode.ITALIAN)
 			this.getMdht().setTitle(Util.st("Dispensazioni di farmaci"));
-			break;
-		case ENGLISH:
+		if (languageCode == LanguageCode.ENGLISH)
 			this.getMdht().setTitle(Util.st("Pharmacy Dispense"));
-			break;
-		}
 	}
 
 	/**
@@ -123,6 +117,14 @@ public class DispenseSection
 			}
 		}
 		this.getMdht().addSupply(entry.getMdht());
+	}
+
+	public LanguageCode getLanguageCode() {
+		return languageCode;
+	}
+
+	public void setLanguageCode(LanguageCode languageCode) {
+		this.languageCode = languageCode;
 	}
 
 }
