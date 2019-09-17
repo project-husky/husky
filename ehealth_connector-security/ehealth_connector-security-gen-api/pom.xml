@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.ehealth_connector.security</groupId>
 		<artifactId>ehealth_connector-security</artifactId>
-		<version>1.7-SNAPSHOT</version>
+		<version>1.7.0-201909</version>
 	</parent>
 
 	<dependencies>

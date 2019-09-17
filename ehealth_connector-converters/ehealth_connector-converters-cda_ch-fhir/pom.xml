@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.ehealth_connector.converters</groupId>
 		<artifactId>ehealth_connector-converters</artifactId>
-		<version>1.7-SNAPSHOT</version>
+		<version>1.7.0-201909</version>
 	</parent>
 
 
@@ -14,12 +14,12 @@
 		<dependency>
 			<groupId>org.ehealth_connector.cda.ch</groupId>
 			<artifactId>ehealth_connector-cda-ch</artifactId>
-			<version>1.7-SNAPSHOT</version>
+			<version>1.7.0-201909</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ehealth_connector.fhir.structures</groupId>
 			<artifactId>ehealth_connector-fhir-structures-ch</artifactId>
-			<version>1.7-SNAPSHOT</version>
+			<version>1.7.0-201909</version>
 		</dependency>
 		
 		<!-- model -->

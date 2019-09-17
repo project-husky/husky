@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>ehealth_connector-communication-gen</artifactId>
 	<name>eHealth Connector Communication Generic</name>
@@ -7,7 +6,7 @@
 	<parent>
 		<groupId>org.ehealth_connector.communication</groupId>
 		<artifactId>ehealth_connector-communication</artifactId>
-		<version>1.7-SNAPSHOT</version>
+		<version>1.7.0-201909</version>
 	</parent>
 
 
@@ -22,17 +21,17 @@
 		<dependency>
 			<groupId>org.ehealth_connector.cda</groupId>
 			<artifactId>ehealth_connector-cda-gen</artifactId>
-			<version>1.7-SNAPSHOT</version>
+			<version>1.7.0-201909</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ehealth_connector.fhir.structures</groupId>
 			<artifactId>ehealth_connector-fhir-structures-gen</artifactId>
-			<version>1.7-SNAPSHOT</version>
+			<version>1.7.0-201909</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ehealth_connector.security</groupId>
 			<artifactId>ehealth_connector-security-gen-impl</artifactId>
-			<version>1.7-SNAPSHOT</version>
+			<version>1.7.0-201909</version>
 		</dependency>
 
 		<!-- open health tools ihe xds -->
@@ -220,7 +219,7 @@
 		<dependency>
 			<groupId>org.ehealth_connector.cda</groupId>
 			<artifactId>ehealth_connector-cda-gen</artifactId>
-			<version>1.7-SNAPSHOT</version>
+			<version>1.7.0-201909</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>

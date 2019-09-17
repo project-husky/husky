@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.ehealth_connector.fhir</groupId>
 		<artifactId>ehealth_connector-fhir</artifactId>
-		<version>1.7-SNAPSHOT</version>
+		<version>1.7.0-201909</version>
 	</parent>
 	
 		<packaging>pom</packaging>
