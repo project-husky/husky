@@ -11,7 +11,7 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
@@ -26,10 +26,10 @@ package org.ehealth_connector.cda.ch.lrep.v133;
  * 3 (Metadata) - de: Bundesgesetz über das elektronische Patientendossier
  * (EPDG), Verordnung des EDI über das elektronische Patientendossier
  * (EPDV-EDI), Anhang 3 (Metadaten) - fr: Loi fédérale sur le dossier
- * électronique du patient (LDEP), Ordonnance du DFI sur le dossier
- * électronique du patient (ODEP-DFI), Annexe 3 (Métadonnées) - it: Legge
- * federale sulla cartella informatizzata del paziente (LCIP), Ordinanza del DFI
- * sulla cartella informatizzata del paziente (OCIP-DFI), Allegato 3 (Metadati)
+ * électronique du patient (LDEP), Ordonnance du DFI sur le dossier électronique
+ * du patient (ODEP-DFI), Annexe 3 (Métadonnées) - it: Legge federale sulla
+ * cartella informatizzata del paziente (LCIP), Ordinanza del DFI sulla cartella
+ * informatizzata del paziente (OCIP-DFI), Allegato 3 (Metadati)
  *
  * Element description: Swiss Realm of Confidentiality Code according to the
  * Swiss EPR regulation.

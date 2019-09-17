@@ -137,6 +137,21 @@ public class VeraPdfValidator {
 	}
 
 	/**
+	 * Initializes the PDF validator
+	 */
+	private void initialize() {
+		if (pdfValidator == null) {
+			log.info("Trying to initialize veraPdfValidator...");
+			pdfValidationResult = new VeraPdfValidationResult();
+			flavour = PDFAFlavour.fromString(pdfConformanceLevel);
+			pdfValidationResult.setPdfConformanceLevel(pdfConformanceLevel);
+			VeraGreenfieldFoundryProvider.initialise();
+			pdfValidator = Foundries.defaultInstance().createValidator(flavour, false);
+		} else
+			log.info("PdfValidatorAPI already initialized...");
+	}
+
+	/**
 	 * Sets the given PDF validation results
 	 *
 	 * @param pdfValidationResults
@@ -198,21 +213,6 @@ public class VeraPdfValidator {
 				validatePdf(pdf, String.valueOf(nonXMLBodyNode.getLineNumber()));
 			}
 		}
-	}
-
-	/**
-	 * Initializes the PDF validator
-	 */
-	private void initialize() {
-		if (pdfValidator == null) {
-			log.info("Trying to initialize veraPdfValidator...");
-			pdfValidationResult = new VeraPdfValidationResult();
-			flavour = PDFAFlavour.fromString(pdfConformanceLevel);
-			pdfValidationResult.setPdfConformanceLevel(pdfConformanceLevel);
-			VeraGreenfieldFoundryProvider.initialise();
-			pdfValidator = Foundries.defaultInstance().createValidator(flavour, false);
-		} else
-			log.info("PdfValidatorAPI already initialized...");
 	}
 
 	/**

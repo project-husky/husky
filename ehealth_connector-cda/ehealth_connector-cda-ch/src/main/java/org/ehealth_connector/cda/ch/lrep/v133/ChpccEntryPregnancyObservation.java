@@ -11,12 +11,11 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.IVLTS;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -29,36 +28,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class ChpccEntryPregnancyObservation
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
-
-	public ChpccEntryPregnancyObservation() {
-		super.getClassCode().add("OBS");
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.92"));
-		super.getTemplateId()
-				.add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13.5"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13"));
-		super.setCode(createHl7CodeFixedValue("2.16.840.1.113883.6.1", "LOINC"));
-		super.setStatusCode(createHl7StatusCodeFixedValue());
-	}
-
-	/**
-	 * Adds a hl7Author This MAY be used to indicate who has documented the
-	 * observation. This information supersedes any information recorded at
-	 * higher level.
-	 */
-	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
-		getAuthor().add(value);
-	}
-
-	/**
-	 * Adds a hl7Author This MAY be used to indicate who has documented the
-	 * observation. This information supersedes any information recorded at
-	 * higher level.
-	 */
-	public void clearHl7Author() {
-		getAuthor().clear();
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -98,6 +67,36 @@ public class ChpccEntryPregnancyObservation
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public ChpccEntryPregnancyObservation() {
+		super.getClassCode().add("OBS");
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.92"));
+		super.getTemplateId()
+				.add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13.5"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13"));
+		super.setCode(createHl7CodeFixedValue("2.16.840.1.113883.6.1", "LOINC"));
+		super.setStatusCode(createHl7StatusCodeFixedValue());
+	}
+
+	/**
+	 * Adds a hl7Author This MAY be used to indicate who has documented the
+	 * observation. This information supersedes any information recorded at
+	 * higher level.
+	 */
+	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
+		getAuthor().add(value);
+	}
+
+	/**
+	 * Adds a hl7Author This MAY be used to indicate who has documented the
+	 * observation. This information supersedes any information recorded at
+	 * higher level.
+	 */
+	public void clearHl7Author() {
+		getAuthor().clear();
 	}
 
 	/**
@@ -166,6 +165,14 @@ public class ChpccEntryPregnancyObservation
 	}
 
 	/**
+	 * Sets the hl7EffectiveTime Period of the finding (physiologically relevant
+	 * time span of this observation).
+	 */
+	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
+		this.effectiveTime = value;
+	}
+
+	/**
 	 * Sets the hl7EffectiveTime Date or timestamp of the finding
 	 * (physiologically relevant time of this observation).
 	 */
@@ -174,14 +181,6 @@ public class ChpccEntryPregnancyObservation
 		IVLTS ivlts = factory.createIVLTS();
 		ivlts.setValue(value.getValue());
 		this.effectiveTime = ivlts;
-	}
-
-	/**
-	 * Sets the hl7EffectiveTime Period of the finding (physiologically relevant
-	 * time span of this observation).
-	 */
-	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
-		this.effectiveTime = value;
 	}
 
 	/**

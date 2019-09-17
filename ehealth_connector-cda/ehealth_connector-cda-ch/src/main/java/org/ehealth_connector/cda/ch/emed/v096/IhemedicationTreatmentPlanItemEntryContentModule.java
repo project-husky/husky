@@ -11,12 +11,11 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
-import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -32,60 +31,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class IhemedicationTreatmentPlanItemEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
-
-	public IhemedicationTreatmentPlanItemEntryContentModule() {
-		super.getClassCode().add("SBADM");
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("INT"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.7"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.24"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.7"));
-	}
-
-	/**
-	 * Adds a hl7ApproachSiteCode
-	 */
-	public void addHl7ApproachSiteCode(org.ehealth_connector.common.hl7cdar2.CD value) {
-		getApproachSiteCode().add(value);
-	}
-
-	/**
-	 * Adds a hl7EffectiveTime Dosage Instructions
-	 */
-	public void addHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.SXCMTS value) {
-		getEffectiveTime().add(value);
-	}
-
-	/**
-	 * Adds a hl7EntryRelationship IHE PCC medications VOL 2 for changes in
-	 * dosage
-	 */
-	public void addHl7EntryRelationship(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship value) {
-		getEntryRelationship().add(value);
-	}
-
-	/**
-	 * Adds a hl7ApproachSiteCode
-	 */
-	public void clearHl7ApproachSiteCode() {
-		getApproachSiteCode().clear();
-	}
-
-	/**
-	 * Adds a hl7EffectiveTime Dosage Instructions
-	 */
-	public void clearHl7EffectiveTime() {
-		getEffectiveTime().clear();
-	}
-
-	/**
-	 * Adds a hl7EntryRelationship IHE PCC medications VOL 2 for changes in
-	 * dosage
-	 */
-	public void clearHl7EntryRelationship() {
-		getEntryRelationship().clear();
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7EffectiveTime
@@ -165,6 +110,174 @@ public class IhemedicationTreatmentPlanItemEntryContentModule
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.SXCMTS, filled
+	 * by: "A"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.SXCMTS getPredefinedEffectiveTimeA() {
+		return createHl7EffectiveTimeFixedValue("A");
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "COMP", null
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipCompNull() {
+		return createHl7EntryRelationshipFixedValue("COMP", null);
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "RSON", null
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRsonNull() {
+		return createHl7EntryRelationshipFixedValue("RSON", null);
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "SUBJ", "true"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjTrue() {
+		return createHl7EntryRelationshipFixedValue("SUBJ", "true");
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference, filled by:
+	 * "XCRPT"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference getPredefinedReferenceXcrpt() {
+		return createHl7ReferenceFixedValue("XCRPT");
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CS, filled by:
+	 * "completed", null, null, null
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CS getPredefinedStatusCodeCompletedNullNullNull() {
+		return createHl7StatusCodeFixedValue("completed", null, null, null);
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
+	 * "1.3.6.1.4.1.19376.1.5.3.1.4.10"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId136141193761531410() {
+		return createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.10");
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
+	 * "1.3.6.1.4.1.19376.1.5.3.1.4.11"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId136141193761531411() {
+		return createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.11");
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
+	 * "1.3.6.1.4.1.19376.1.5.3.1.4.7.1"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId136141193761531471() {
+		return createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.7.1");
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
+	 * "1.3.6.1.4.1.19376.1.5.3.1.4.8"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId13614119376153148() {
+		return createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.8");
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
+	 * "1.3.6.1.4.1.19376.1.5.3.1.4.9"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId13614119376153149() {
+		return createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.9");
+	}
+
+	public IhemedicationTreatmentPlanItemEntryContentModule() {
+		super.getClassCode().add("SBADM");
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("INT"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.7"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.24"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.7"));
+	}
+
+	/**
+	 * Adds a hl7ApproachSiteCode
+	 */
+	public void addHl7ApproachSiteCode(org.ehealth_connector.common.hl7cdar2.CD value) {
+		getApproachSiteCode().add(value);
+	}
+
+	/**
+	 * Adds a hl7EffectiveTime Dosage Instructions
+	 */
+	public void addHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.SXCMTS value) {
+		getEffectiveTime().add(value);
+	}
+
+	/**
+	 * Adds a hl7EntryRelationship IHE PCC medications VOL 2 for changes in
+	 * dosage
+	 */
+	public void addHl7EntryRelationship(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship value) {
+		getEntryRelationship().add(value);
+	}
+
+	/**
+	 * Adds a hl7ApproachSiteCode
+	 */
+	public void clearHl7ApproachSiteCode() {
+		getApproachSiteCode().clear();
+	}
+
+	/**
+	 * Adds a hl7EffectiveTime Dosage Instructions
+	 */
+	public void clearHl7EffectiveTime() {
+		getEffectiveTime().clear();
+	}
+
+	/**
+	 * Adds a hl7EntryRelationship IHE PCC medications VOL 2 for changes in
+	 * dosage
+	 */
+	public void clearHl7EntryRelationship() {
+		getEntryRelationship().clear();
 	}
 
 	/**
@@ -258,120 +371,6 @@ public class IhemedicationTreatmentPlanItemEntryContentModule
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ED getHl7Text() {
 		return text;
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.SXCMTS, filled
-	 * by: "A"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.SXCMTS getPredefinedEffectiveTimeA() {
-		return createHl7EffectiveTimeFixedValue("A");
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "COMP", null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipCompNull() {
-		return createHl7EntryRelationshipFixedValue("COMP", null);
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "RSON", null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRsonNull() {
-		return createHl7EntryRelationshipFixedValue("RSON", null);
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "SUBJ", "true"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjTrue() {
-		return createHl7EntryRelationshipFixedValue("SUBJ", "true");
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference, filled by:
-	 * "XCRPT"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference getPredefinedReferenceXcrpt() {
-		return createHl7ReferenceFixedValue("XCRPT");
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CS, filled by:
-	 * "completed", null, null, null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CS getPredefinedStatusCodeCompletedNullNullNull() {
-		return createHl7StatusCodeFixedValue("completed", null, null, null);
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
-	 * "1.3.6.1.4.1.19376.1.5.3.1.4.10"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId136141193761531410() {
-		return createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.10");
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
-	 * "1.3.6.1.4.1.19376.1.5.3.1.4.11"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId136141193761531411() {
-		return createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.11");
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
-	 * "1.3.6.1.4.1.19376.1.5.3.1.4.7.1"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId136141193761531471() {
-		return createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.7.1");
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
-	 * "1.3.6.1.4.1.19376.1.5.3.1.4.8"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId13614119376153148() {
-		return createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.8");
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
-	 * "1.3.6.1.4.1.19376.1.5.3.1.4.9"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId13614119376153149() {
-		return createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.9");
 	}
 
 	/**

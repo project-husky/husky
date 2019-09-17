@@ -126,6 +126,10 @@ public class MedicationListSection
 		return entries;
 	}
 
+	public LanguageCode getLanguageCode() {
+		return languageCode;
+	}
+
 	/**
 	 * Gets the medication treatment plan item entries.
 	 *
@@ -178,10 +182,6 @@ public class MedicationListSection
 			return this.getMdht().getTitle().getText();
 		}
 		return null;
-	}
-
-	public LanguageCode getLanguageCode() {
-		return languageCode;
 	}
 
 	public void setLanguageCode(LanguageCode languageCode) {

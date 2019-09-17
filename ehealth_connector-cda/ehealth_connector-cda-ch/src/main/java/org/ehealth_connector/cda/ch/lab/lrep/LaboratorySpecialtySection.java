@@ -132,7 +132,8 @@ public class LaboratorySpecialtySection extends BaseLaboratorySpecialtySection {
 			newLrdpe = true;
 			lrdpe = new LaboratoryReportDataProcessingEntry();
 		}
-		CdaUtilMdht.addTemplateIdOnce(lrdpe.getMdht(), new Identificator("2.16.756.5.30.1.1.10.4.4"));
+		CdaUtilMdht.addTemplateIdOnce(lrdpe.getMdht(),
+				new Identificator("2.16.756.5.30.1.1.10.4.4"));
 
 		BaseChSpecimenAct sa;
 		if (lrdpe.getSpecimenAct() == null) {

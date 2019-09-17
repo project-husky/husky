@@ -68,6 +68,10 @@ public class MedicationTreatmentPlanSection extends
 		super(section);
 	}
 
+	public LanguageCode getLanguageCode() {
+		return languageCode;
+	}
+
 	/**
 	 * Gets the title.
 	 *
@@ -78,10 +82,6 @@ public class MedicationTreatmentPlanSection extends
 			return this.getMdht().getTitle().getText();
 		}
 		return null;
-	}
-
-	public LanguageCode getLanguageCode() {
-		return languageCode;
 	}
 
 	public void setLanguageCode(LanguageCode languageCode) {

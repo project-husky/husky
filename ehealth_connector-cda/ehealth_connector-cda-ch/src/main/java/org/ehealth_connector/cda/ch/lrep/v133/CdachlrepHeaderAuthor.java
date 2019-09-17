@@ -11,13 +11,13 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.ArrayList;
-import java.util.List;
+
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -30,13 +30,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class CdachlrepHeaderAuthor
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Author {
-
-	public CdachlrepHeaderAuthor() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.59"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.9.23"));
-		super.setFunctionCode(
-				createHl7FunctionCodeFixedValue("NAV", "2.16.840.1.113883.6.96", "SNOMED CT"));
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7FunctionCode
@@ -71,6 +64,13 @@ public class CdachlrepHeaderAuthor
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public CdachlrepHeaderAuthor() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.59"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.9.23"));
+		super.setFunctionCode(
+				createHl7FunctionCodeFixedValue("NAV", "2.16.840.1.113883.6.96", "SNOMED CT"));
 	}
 
 	/**

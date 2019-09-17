@@ -11,12 +11,11 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -27,12 +26,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class CdachlrepEntryLaboratoryReportDataProcessingEntry
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry {
-
-	public CdachlrepEntryLaboratoryReportDataProcessingEntry() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.118"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.4"));
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Act
@@ -69,6 +62,22 @@ public class CdachlrepEntryLaboratoryReportDataProcessingEntry
 	}
 
 	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040Act,
+	 * filled by: "ACT", "EVN"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Act getPredefinedActActEvn() {
+		return createHl7ActFixedValue("ACT", "EVN");
+	}
+
+	public CdachlrepEntryLaboratoryReportDataProcessingEntry() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.118"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.4"));
+	}
+
+	/**
 	 * Gets the hl7Act
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Act getHl7Act() {
@@ -80,16 +89,6 @@ public class CdachlrepEntryLaboratoryReportDataProcessingEntry
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
 		return templateId;
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.POCDMT000040Act,
-	 * filled by: "ACT", "EVN"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Act getPredefinedActActEvn() {
-		return createHl7ActFixedValue("ACT", "EVN");
 	}
 
 	/**

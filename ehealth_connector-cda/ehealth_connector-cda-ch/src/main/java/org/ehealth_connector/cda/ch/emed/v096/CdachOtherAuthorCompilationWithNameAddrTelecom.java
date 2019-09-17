@@ -11,12 +11,13 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
 import java.util.ArrayList;
+
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -28,11 +29,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class CdachOtherAuthorCompilationWithNameAddrTelecom
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Author {
-
-	public CdachOtherAuthorCompilationWithNameAddrTelecom() {
-		super.setFunctionCode(
-				createHl7FunctionCodeFixedValue("NAV", "2.16.840.1.113883.6.96", "SNOMED CT"));
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7FunctionCode
@@ -53,6 +49,11 @@ public class CdachOtherAuthorCompilationWithNameAddrTelecom
 		retVal.setCodeSystem(codeSystem);
 		retVal.setCodeSystemName(codeSystemName);
 		return retVal;
+	}
+
+	public CdachOtherAuthorCompilationWithNameAddrTelecom() {
+		super.setFunctionCode(
+				createHl7FunctionCodeFixedValue("NAV", "2.16.840.1.113883.6.96", "SNOMED CT"));
 	}
 
 	/**

@@ -62,6 +62,36 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 		config = clientConfiguration;
 	}
 
+	private File getHtmlFormPage(AuthnRequest aAuthnRequest)
+			throws SerializeException, IOException, URISyntaxException {
+		final AuthnRequestSerializerImpl serializer = new AuthnRequestSerializerImpl();
+		final byte[] authnByteArray = serializer.toXmlByteArray(aAuthnRequest);
+		final String samlRequest = Base64.getEncoder().encodeToString(authnByteArray);
+		String template = readFromJARFile("/template/authnsubmitform.html");
+
+		template = template.replaceAll("@base64samlrequest@", samlRequest);
+		template = template.replaceAll("@bsamlrequesttype@", "SAMLRequest");// config.getSamlRequestType().toString());
+		template = template.replaceAll("@idpurl@", config.getUrl());
+
+		logger.debug("html to send to browser: " + template);
+
+		final File tempFile = File.createTempFile("saml_", ".html");
+		tempFile.deleteOnExit();
+
+		final FileOutputStream os = new FileOutputStream(tempFile);
+		os.write(template.getBytes());
+		os.close();
+
+		return tempFile;
+	}
+
+	private Response getResponse(String samlReponse)
+			throws DeserializeException, UnsupportedEncodingException {
+		final byte[] samlReponseBytes = Base64.getDecoder().decode(samlReponse);
+		final ResponseDeserializerImpl deserializer = new ResponseDeserializerImpl();
+		return deserializer.fromXmlByteArray(samlReponseBytes);
+	}
+
 	/**
 	 *
 	 * <!-- @formatter:off -->
@@ -127,36 +157,6 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 			logger.error("An error occured sending authnrequest.", t);
 			throw new ClientSendException(t);
 		}
-	}
-
-	private File getHtmlFormPage(AuthnRequest aAuthnRequest)
-			throws SerializeException, IOException, URISyntaxException {
-		final AuthnRequestSerializerImpl serializer = new AuthnRequestSerializerImpl();
-		final byte[] authnByteArray = serializer.toXmlByteArray(aAuthnRequest);
-		final String samlRequest = Base64.getEncoder().encodeToString(authnByteArray);
-		String template = readFromJARFile("/template/authnsubmitform.html");
-
-		template = template.replaceAll("@base64samlrequest@", samlRequest);
-		template = template.replaceAll("@bsamlrequesttype@", "SAMLRequest");// config.getSamlRequestType().toString());
-		template = template.replaceAll("@idpurl@", config.getUrl());
-
-		logger.debug("html to send to browser: " + template);
-
-		final File tempFile = File.createTempFile("saml_", ".html");
-		tempFile.deleteOnExit();
-
-		final FileOutputStream os = new FileOutputStream(tempFile);
-		os.write(template.getBytes());
-		os.close();
-
-		return tempFile;
-	}
-
-	private Response getResponse(String samlReponse)
-			throws DeserializeException, UnsupportedEncodingException {
-		final byte[] samlReponseBytes = Base64.getDecoder().decode(samlReponse);
-		final ResponseDeserializerImpl deserializer = new ResponseDeserializerImpl();
-		return deserializer.fromXmlByteArray(samlReponseBytes);
 	}
 
 	private void startBrowser(URI requestUri) {

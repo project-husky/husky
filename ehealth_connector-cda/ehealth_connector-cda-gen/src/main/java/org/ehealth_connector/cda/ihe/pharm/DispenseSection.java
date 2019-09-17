@@ -90,6 +90,10 @@ public class DispenseSection
 		return null;
 	}
 
+	public LanguageCode getLanguageCode() {
+		return languageCode;
+	}
+
 	/**
 	 * Gets the title.
 	 *
@@ -117,10 +121,6 @@ public class DispenseSection
 			}
 		}
 		this.getMdht().addSupply(entry.getMdht());
-	}
-
-	public LanguageCode getLanguageCode() {
-		return languageCode;
 	}
 
 	public void setLanguageCode(LanguageCode languageCode) {

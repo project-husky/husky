@@ -79,6 +79,10 @@ public class PharmaceuticalAdviceSection
 		super(section);
 	}
 
+	public LanguageCode getLanguageCode() {
+		return languageCode;
+	}
+
 	/**
 	 * Gets the pharmaceutical advice item entry.
 	 *
@@ -103,6 +107,10 @@ public class PharmaceuticalAdviceSection
 		return null;
 	}
 
+	public void setLanguageCode(LanguageCode languageCode) {
+		this.languageCode = languageCode;
+	}
+
 	/**
 	 * Sets the pharmaceutical advice item entry.
 	 *
@@ -118,14 +126,6 @@ public class PharmaceuticalAdviceSection
 			}
 		}
 		this.getMdht().addObservation(entry.getMdht());
-	}
-
-	public LanguageCode getLanguageCode() {
-		return languageCode;
-	}
-
-	public void setLanguageCode(LanguageCode languageCode) {
-		this.languageCode = languageCode;
 	}
 
 }

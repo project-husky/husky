@@ -11,12 +11,11 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -36,13 +35,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * 'Laboratory Specialties'
  */
 public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl7cdar2.CE {
-
-	public CdachlrepHeaderDocumentCode() {
-		super.setCodeSystem("2.16.840.1.113883.6.1");
-		super.setCodeSystemName("LOINC");
-		super.getTranslation().add(createHl7TranslationFixedValue("4241000179101",
-				"2.16.840.1.113883.6.96", "SNOMED CT", "Laboratory report"));
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Translation
@@ -65,6 +57,13 @@ public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl
 		retVal.setCodeSystemName(codeSystemName);
 		retVal.setDisplayName(displayName);
 		return retVal;
+	}
+
+	public CdachlrepHeaderDocumentCode() {
+		super.setCodeSystem("2.16.840.1.113883.6.1");
+		super.setCodeSystemName("LOINC");
+		super.getTranslation().add(createHl7TranslationFixedValue("4241000179101",
+				"2.16.840.1.113883.6.96", "SNOMED CT", "Laboratory report"));
 	}
 
 	/**

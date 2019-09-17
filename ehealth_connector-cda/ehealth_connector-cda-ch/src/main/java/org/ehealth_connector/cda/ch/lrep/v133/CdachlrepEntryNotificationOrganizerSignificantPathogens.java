@@ -11,12 +11,11 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -25,31 +24,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class CdachlrepEntryNotificationOrganizerSignificantPathogens
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
-
-	public CdachlrepEntryNotificationOrganizerSignificantPathogens() {
-		super.setClassCode(org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryOrganizer
-				.fromValue("CLUSTER"));
-		super.getMoodCode().add("EVN");
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.88"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.13"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.1"));
-		super.setStatusCode(createHl7StatusCodeFixedValue("completed"));
-	}
-
-	/**
-	 * Adds a hl7Component
-	 */
-	public void addHl7Component(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
-		getComponent().add(value);
-	}
-
-	/**
-	 * Adds a hl7Component
-	 */
-	public void clearHl7Component() {
-		getComponent().clear();
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7StatusCode
@@ -77,6 +51,31 @@ public class CdachlrepEntryNotificationOrganizerSignificantPathogens
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public CdachlrepEntryNotificationOrganizerSignificantPathogens() {
+		super.setClassCode(org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryOrganizer
+				.fromValue("CLUSTER"));
+		super.getMoodCode().add("EVN");
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.88"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.13"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.1"));
+		super.setStatusCode(createHl7StatusCodeFixedValue("completed"));
+	}
+
+	/**
+	 * Adds a hl7Component
+	 */
+	public void addHl7Component(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 value) {
+		getComponent().add(value);
+	}
+
+	/**
+	 * Adds a hl7Component
+	 */
+	public void clearHl7Component() {
+		getComponent().clear();
 	}
 
 	/**

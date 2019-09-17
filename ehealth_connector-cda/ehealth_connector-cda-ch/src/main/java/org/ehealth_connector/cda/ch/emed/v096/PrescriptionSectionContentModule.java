@@ -11,12 +11,11 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
-import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -30,6 +29,37 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class PrescriptionSectionContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
+
+	/**
+	 * Creates fixed contents for CDA Element hl7Code
+	 *
+	 * @param code
+	 *            the desired fixed value for this argument.
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code,
+			String codeSystem, String codeSystemName, String displayName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
+		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7TemplateId
+	 *
+	 * @param root
+	 *            the desired fixed value for this argument.
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
 
 	public PrescriptionSectionContentModule() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.2.1"));
@@ -66,37 +96,6 @@ public class PrescriptionSectionContentModule
 	 */
 	public void clearHl7Entry() {
 		getEntry().clear();
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7Code
-	 *
-	 * @param code
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code,
-			String codeSystem, String codeSystemName, String displayName) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
-		retVal.setCode(code);
-		retVal.setCodeSystem(codeSystem);
-		retVal.setCodeSystemName(codeSystemName);
-		retVal.setDisplayName(displayName);
-		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7TemplateId
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
-			String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
-		retVal.setRoot(root);
-		return retVal;
 	}
 
 	/**

@@ -11,12 +11,11 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -27,32 +26,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class ChpccEntryAnnotationComments
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
-
-	public ChpccEntryAnnotationComments() {
-		super.setClassCode(
-				org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
-		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue("EVN"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.2"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.40"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.2"));
-		super.setCode(createHl7CodeFixedValue("48767-8", "2.16.840.1.113883.6.1", "LOINC",
-				"Annotation comment"));
-		super.setStatusCode(createHl7StatusCodeFixedValue("completed"));
-	}
-
-	/**
-	 * Adds a hl7Author The author of the comment MAY be specified.
-	 */
-	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
-		getAuthor().add(value);
-	}
-
-	/**
-	 * Adds a hl7Author The author of the comment MAY be specified.
-	 */
-	public void clearHl7Author() {
-		getAuthor().clear();
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -103,6 +76,32 @@ public class ChpccEntryAnnotationComments
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public ChpccEntryAnnotationComments() {
+		super.setClassCode(
+				org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
+		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue("EVN"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.2"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.40"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.2"));
+		super.setCode(createHl7CodeFixedValue("48767-8", "2.16.840.1.113883.6.1", "LOINC",
+				"Annotation comment"));
+		super.setStatusCode(createHl7StatusCodeFixedValue("completed"));
+	}
+
+	/**
+	 * Adds a hl7Author The author of the comment MAY be specified.
+	 */
+	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
+		getAuthor().add(value);
+	}
+
+	/**
+	 * Adds a hl7Author The author of the comment MAY be specified.
+	 */
+	public void clearHl7Author() {
+		getAuthor().clear();
 	}
 
 	/**

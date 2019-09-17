@@ -11,12 +11,11 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -45,44 +44,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class CdachlrepSectionLaboratorySpecialtyCoded
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
-
-	public CdachlrepSectionLaboratorySpecialtyCoded() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.3"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.2.1"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.77"));
-		super.setCode(createHl7CodeFixedValue("2.16.840.1.113883.6.1", "LOINC"));
-	}
-
-	/**
-	 * Adds a hl7Component
-	 */
-	public void addHl7Component(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040Component5 value) {
-		getComponent().add(value);
-	}
-
-	/**
-	 * Adds a hl7Entry The narrative text in the text element of the section
-	 * MUST be generated automatically from the information in this entry.
-	 */
-	public void addHl7Entry(org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry value) {
-		getEntry().add(value);
-	}
-
-	/**
-	 * Adds a hl7Component
-	 */
-	public void clearHl7Component() {
-		getComponent().clear();
-	}
-
-	/**
-	 * Adds a hl7Entry The narrative text in the text element of the section
-	 * MUST be generated automatically from the information in this entry.
-	 */
-	public void clearHl7Entry() {
-		getEntry().clear();
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -129,6 +90,55 @@ public class CdachlrepSectionLaboratorySpecialtyCoded
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry, filled by:
+	 * "DRIV"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry getPredefinedEntryDriv() {
+		return createHl7EntryFixedValue("DRIV");
+	}
+
+	public CdachlrepSectionLaboratorySpecialtyCoded() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.3"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.2.1"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.77"));
+		super.setCode(createHl7CodeFixedValue("2.16.840.1.113883.6.1", "LOINC"));
+	}
+
+	/**
+	 * Adds a hl7Component
+	 */
+	public void addHl7Component(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Component5 value) {
+		getComponent().add(value);
+	}
+
+	/**
+	 * Adds a hl7Entry The narrative text in the text element of the section
+	 * MUST be generated automatically from the information in this entry.
+	 */
+	public void addHl7Entry(org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry value) {
+		getEntry().add(value);
+	}
+
+	/**
+	 * Adds a hl7Component
+	 */
+	public void clearHl7Component() {
+		getComponent().clear();
+	}
+
+	/**
+	 * Adds a hl7Entry The narrative text in the text element of the section
+	 * MUST be generated automatically from the information in this entry.
+	 */
+	public void clearHl7Entry() {
+		getEntry().clear();
 	}
 
 	/**
@@ -261,17 +271,6 @@ public class CdachlrepSectionLaboratorySpecialtyCoded
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ST getHl7Title() {
 		return title;
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry, filled by:
-	 * "DRIV"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry getPredefinedEntryDriv() {
-		return createHl7EntryFixedValue("DRIV");
 	}
 
 	/**

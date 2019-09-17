@@ -11,13 +11,13 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.ArrayList;
-import java.util.List;
+
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -26,11 +26,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class ChpalmEntryParticipantBodySpecimenCollection
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole {
-
-	public ChpalmEntryParticipantBodySpecimenCollection() {
-		super.getClassCode().add("SPEC");
-		super.getId().add(createHl7IdFixedValue("NA"));
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Id
@@ -45,6 +40,11 @@ public class ChpalmEntryParticipantBodySpecimenCollection
 		retVal.nullFlavor = new ArrayList<String>();
 		retVal.nullFlavor.add(nullFlavor);
 		return retVal;
+	}
+
+	public ChpalmEntryParticipantBodySpecimenCollection() {
+		super.getClassCode().add("SPEC");
+		super.getId().add(createHl7IdFixedValue("NA"));
 	}
 
 	/**

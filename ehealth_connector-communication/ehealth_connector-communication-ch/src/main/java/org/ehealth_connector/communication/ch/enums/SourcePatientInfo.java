@@ -54,8 +54,7 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 	 * <div class="it">Maschile</div>
 	 * <!-- @formatter:on -->
 	 */
-	MALE("male", "2.16.840.1.113883.4.642.1.2", "Male", "Male", "Männlich", "Masculin",
-			"Maschile"),
+	MALE("male", "2.16.840.1.113883.4.642.1.2", "Male", "Male", "Männlich", "Masculin", "Maschile"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Other</div>

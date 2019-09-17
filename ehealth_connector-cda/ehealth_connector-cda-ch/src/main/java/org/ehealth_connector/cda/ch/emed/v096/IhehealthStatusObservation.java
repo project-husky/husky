@@ -11,12 +11,11 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
-import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -30,16 +29,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class IhehealthStatusObservation
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
-
-	public IhehealthStatusObservation() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.51"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.1.2"));
-		super.setCode(createHl7CodeFixedValue("11323-3", "2.16.840.1.113883.6.1", "LOINC",
-				"Health Status"));
-		super.setStatusCode(
-				createHl7StatusCodeFixedValue("completed", "2.16.840.1.113883.5.14", null, null));
-		super.getValue().add(createHl7ValueFixedValue());
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -96,6 +85,16 @@ public class IhehealthStatusObservation
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		return retVal;
+	}
+
+	public IhehealthStatusObservation() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.51"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.1.2"));
+		super.setCode(createHl7CodeFixedValue("11323-3", "2.16.840.1.113883.6.1", "LOINC",
+				"Health Status"));
+		super.setStatusCode(
+				createHl7StatusCodeFixedValue("completed", "2.16.840.1.113883.5.14", null, null));
+		super.getValue().add(createHl7ValueFixedValue());
 	}
 
 	/**

@@ -11,7 +11,7 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
@@ -19,7 +19,7 @@ package org.ehealth_connector.cda.ch.lrep.v133;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -28,6 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamSource;
+
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
@@ -53,6 +54,90 @@ import org.ehealth_connector.common.utils.Hl7CdaR2Util;
 @XmlRootElement(name = "ClinicalDocument", namespace = "urn:hl7-org:v3")
 public class CdaChLrepGrV1
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
+
+	/**
+	 * Creates fixed contents for CDA Element hl7TemplateId
+	 *
+	 * @param root
+	 *            the desired fixed value for this argument.
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7TypeId
+	 *
+	 * @param root
+	 *            the desired fixed value for this argument.
+	 * @param extension
+	 *            the desired fixed value for this argument.
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040InfrastructureRootTypeId createHl7TypeIdFixedValue(
+			String root, String extension) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040InfrastructureRootTypeId retVal = factory
+				.createPOCDMT000040InfrastructureRootTypeId();
+		retVal.setRoot(root);
+		retVal.setExtension(extension);
+		return retVal;
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
+	 * "2.16.756.5.30.1.1.1.1.3.9.1"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId2167565301111391() {
+		return createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.3.9.1");
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
+	 * "2.16.756.5.30.1.1.1.1.4"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId21675653011114() {
+		return createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.4");
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 *
+	 * @param inputFile
+	 *            the source file. n@return the CDA document\n@throws
+	 *            JAXBException the JAXB exception\n@throws IOException Signals
+	 *            that an I/O exception has occurred.
+	 */
+	public static CdaChLrepGrV1 loadFromFile(File inputFile) throws JAXBException, IOException {
+		CdaChLrepGrV1 retVal;
+		JAXBContext context = JAXBContext.newInstance(CdaChLrepGrV1.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<CdaChLrepGrV1> root = mar.unmarshal(source, CdaChLrepGrV1.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 *
+	 * @param inputFileName
+	 *            the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException the JAXB
+	 *         exception\n@throws IOException Signals that an I/O exception has
+	 *         occurred.
+	 */
+	public static CdaChLrepGrV1 loadFromFile(String inputFileName)
+			throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
 
 	public CdaChLrepGrV1() {
 		super.setTypeId(createHl7TypeIdFixedValue("2.16.840.1.113883.1.3", "POCD_HD000040"));
@@ -90,6 +175,15 @@ public class CdaChLrepGrV1
 	}
 
 	/**
+	 * Adds a hl7InformationRecipient The laboratory report MUST contain at
+	 * least one receiver.
+	 */
+	public void addHl7InformationRecipient(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040InformationRecipient value) {
+		getInformationRecipient().add(value);
+	}
+
+	/**
 	 * Adds a hl7InFulfillmentOf Reference to one or more orders which led to
 	 * the creation of this CDA document. It SHALL be declared, when the order
 	 * reference is relevant for some reason.
@@ -97,15 +191,6 @@ public class CdaChLrepGrV1
 	public void addHl7InFulfillmentOf(
 			org.ehealth_connector.common.hl7cdar2.POCDMT000040InFulfillmentOf value) {
 		getInFulfillmentOf().add(value);
-	}
-
-	/**
-	 * Adds a hl7InformationRecipient The laboratory report MUST contain at
-	 * least one receiver.
-	 */
-	public void addHl7InformationRecipient(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040InformationRecipient value) {
-		getInformationRecipient().add(value);
 	}
 
 	/**
@@ -170,20 +255,20 @@ public class CdaChLrepGrV1
 	}
 
 	/**
+	 * Adds a hl7InformationRecipient The laboratory report MUST contain at
+	 * least one receiver.
+	 */
+	public void clearHl7InformationRecipient() {
+		getInformationRecipient().clear();
+	}
+
+	/**
 	 * Adds a hl7InFulfillmentOf Reference to one or more orders which led to
 	 * the creation of this CDA document. It SHALL be declared, when the order
 	 * reference is relevant for some reason.
 	 */
 	public void clearHl7InFulfillmentOf() {
 		getInFulfillmentOf().clear();
-	}
-
-	/**
-	 * Adds a hl7InformationRecipient The laboratory report MUST contain at
-	 * least one receiver.
-	 */
-	public void clearHl7InformationRecipient() {
-		getInformationRecipient().clear();
 	}
 
 	/**
@@ -218,38 +303,6 @@ public class CdaChLrepGrV1
 	 */
 	public void clearHl7RelatedDocument() {
 		getRelatedDocument().clear();
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7TemplateId
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
-			String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
-		retVal.setRoot(root);
-		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7TypeId
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 * @param extension
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040InfrastructureRootTypeId createHl7TypeIdFixedValue(
-			String root, String extension) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040InfrastructureRootTypeId retVal = factory
-				.createPOCDMT000040InfrastructureRootTypeId();
-		retVal.setRoot(root);
-		retVal.setExtension(extension);
-		return retVal;
 	}
 
 	/**
@@ -382,29 +435,9 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
-	 * "2.16.756.5.30.1.1.1.1.3.9.1"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId2167565301111391() {
-		return createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.3.9.1");
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
-	 * "2.16.756.5.30.1.1.1.1.4"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId21675653011114() {
-		return createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.4");
-	}
-
-	/**
 	 * Sets the version number to 1 and makes sure the setId is the same as the
 	 * document id.
-	 * 
+	 *
 	 * @param newDocId
 	 *            the new doc id
 	 */
@@ -420,7 +453,7 @@ public class CdaChLrepGrV1
 	/**
 	 * Increases the version number by one and makes sure the setId remains the
 	 * same as previously.
-	 * 
+	 *
 	 * @param newDocId
 	 *            the new doc id
 	 */
@@ -436,59 +469,8 @@ public class CdaChLrepGrV1
 	}
 
 	/**
-	 * Loads the CDA document from file.
-	 * 
-	 * @param inputFileName
-	 *            the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException the JAXB
-	 *         exception\n@throws IOException Signals that an I/O exception has
-	 *         occurred.
-	 */
-	public static CdaChLrepGrV1 loadFromFile(String inputFileName)
-			throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
-	}
-
-	/**
-	 * Loads the CDA document from file.
-	 * 
-	 * @param inputFile
-	 *            the source file. n@return the CDA document\n@throws
-	 *            JAXBException the JAXB exception\n@throws IOException Signals
-	 *            that an I/O exception has occurred.
-	 */
-	public static CdaChLrepGrV1 loadFromFile(File inputFile) throws JAXBException, IOException {
-		CdaChLrepGrV1 retVal;
-		JAXBContext context = JAXBContext.newInstance(CdaChLrepGrV1.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<CdaChLrepGrV1> root = mar.unmarshal(source, CdaChLrepGrV1.class);
-		retVal = root.getValue();
-		return retVal;
-	}
-
-	/**
 	 * Saves the current CDA document to file.
-	 * 
-	 * @param outputFileName
-	 *            the full path and filename of the destination file.
-	 * @throws JAXBException
-	 *             the JAXB exception
-	 * @throws ParserConfigurationException
-	 *             the parser configuration exception
-	 * @throws TransformerException
-	 *             the transformer exception
-	 * @throws FileNotFoundException
-	 *             the file not found exception
-	 */
-	public void saveToFile(String outputFileName) throws JAXBException,
-			ParserConfigurationException, TransformerException, FileNotFoundException {
-		saveToFile(new File(outputFileName), null, null);
-	}
-
-	/**
-	 * Saves the current CDA document to file.
-	 * 
+	 *
 	 * @param outputFile
 	 *            the destination file.
 	 * @throws JAXBException
@@ -507,29 +489,7 @@ public class CdaChLrepGrV1
 
 	/**
 	 * Saves the current CDA document to file.
-	 * 
-	 * @param outputFileName
-	 *            the full path and filename of the destination file.
-	 * @param xsl
-	 *            the path and filename or url to the rendering stylesheet
-	 * @param css
-	 *            the path and filename or url to the rendering css
-	 * @throws JAXBException
-	 *             the JAXB exception
-	 * @throws ParserConfigurationException
-	 *             the parser configuration exception
-	 * @throws TransformerException
-	 *             the transformer exception\n@throws FileNotFoundException the
-	 *             file not found exception
-	 */
-	public void saveToFile(String outputFileName, String xsl, String css) throws JAXBException,
-			ParserConfigurationException, TransformerException, FileNotFoundException {
-		saveToFile(new File(outputFileName), xsl, css);
-	}
-
-	/**
-	 * Saves the current CDA document to file.
-	 * 
+	 *
 	 * @param outputFile
 	 *            the destination file.
 	 * @param xsl
@@ -547,6 +507,47 @@ public class CdaChLrepGrV1
 	public void saveToFile(File outputFile, String xsl, String css) throws JAXBException,
 			ParserConfigurationException, TransformerException, FileNotFoundException {
 		CdaUtil.saveJaxbObjectToFile(this, outputFile, xsl, css);
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 *
+	 * @param outputFileName
+	 *            the full path and filename of the destination file.
+	 * @throws JAXBException
+	 *             the JAXB exception
+	 * @throws ParserConfigurationException
+	 *             the parser configuration exception
+	 * @throws TransformerException
+	 *             the transformer exception
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException,
+			ParserConfigurationException, TransformerException, FileNotFoundException {
+		saveToFile(new File(outputFileName), null, null);
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 *
+	 * @param outputFileName
+	 *            the full path and filename of the destination file.
+	 * @param xsl
+	 *            the path and filename or url to the rendering stylesheet
+	 * @param css
+	 *            the path and filename or url to the rendering css
+	 * @throws JAXBException
+	 *             the JAXB exception
+	 * @throws ParserConfigurationException
+	 *             the parser configuration exception
+	 * @throws TransformerException
+	 *             the transformer exception\n@throws FileNotFoundException the
+	 *             file not found exception
+	 */
+	public void saveToFile(String outputFileName, String xsl, String css) throws JAXBException,
+			ParserConfigurationException, TransformerException, FileNotFoundException {
+		saveToFile(new File(outputFileName), xsl, css);
 	}
 
 	/**
@@ -689,7 +690,7 @@ public class CdaChLrepGrV1
 	 *
 	 * <div class="de">Weist dem Dokument eine Set Id und eine Versionsnummer
 	 * zu.</div>
-	 * 
+	 *
 	 * @param idVersion1
 	 *            the set Id (if null, the document ID will be used)
 	 * @param version

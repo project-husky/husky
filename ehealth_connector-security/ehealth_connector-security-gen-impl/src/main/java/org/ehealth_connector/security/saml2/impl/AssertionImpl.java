@@ -37,7 +37,8 @@ import org.joda.time.DateTime;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class AssertionImpl implements Assertion, SecurityObject<org.opensaml.saml.saml2.core.Assertion> {
+public class AssertionImpl
+		implements Assertion, SecurityObject<org.opensaml.saml.saml2.core.Assertion> {
 
 	/** The assertion. */
 	private org.opensaml.saml.saml2.core.Assertion assertion;
@@ -81,7 +82,8 @@ public class AssertionImpl implements Assertion, SecurityObject<org.opensaml.sam
 	@Override
 	public List<AuthnStatement> getAuthnStatements() {
 		final List<AuthnStatement> retVal = new ArrayList<>();
-		final List<org.opensaml.saml.saml2.core.AuthnStatement> innerList = assertion.getAuthnStatements();
+		final List<org.opensaml.saml.saml2.core.AuthnStatement> innerList = assertion
+				.getAuthnStatements();
 		innerList.forEach(c -> {
 			retVal.add(new AuthnStatementBuilderImpl().create(c));
 		});
@@ -98,7 +100,8 @@ public class AssertionImpl implements Assertion, SecurityObject<org.opensaml.sam
 	public List<Condition> getConditionsConditions() {
 		final List<Condition> retVal = new ArrayList<>();
 		if (assertion.getConditions() != null) {
-			final List<org.opensaml.saml.saml2.core.Condition> innerList = assertion.getConditions().getConditions();
+			final List<org.opensaml.saml.saml2.core.Condition> innerList = assertion.getConditions()
+					.getConditions();
 			innerList.forEach(c -> {
 				retVal.add(new ConditionBuilderImpl().create(c));
 			});

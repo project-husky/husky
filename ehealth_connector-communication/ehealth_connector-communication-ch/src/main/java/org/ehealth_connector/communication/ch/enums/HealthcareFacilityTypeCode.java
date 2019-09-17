@@ -102,8 +102,7 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	HEALTH_AUTHORITY("394747008", "2.16.840.1.113883.6.96", "Health Authority (qualifier value)",
-			"Health Authority", "Gesundheitsbehörde", "Autorité sanitaire",
-			"Autorità sanitaria"),
+			"Health Authority", "Gesundheitsbehörde", "Autorité sanitaire", "Autorità sanitaria"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Hospital</div>
@@ -202,8 +201,8 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	TELEMEDICINE_INSTITUTION("288565001", "2.16.840.1.113883.6.96", "Medical center (environment)",
-			"Telemedicine institution", "Telemedizinische Einrichtung",
-			"Institut de télémédecine", "Centro di telemedicina");
+			"Telemedicine institution", "Telemedizinische Einrichtung", "Institut de télémédecine",
+			"Centro di telemedicina");
 
 	/**
 	 * <!-- @formatter:off -->

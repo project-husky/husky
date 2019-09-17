@@ -11,12 +11,11 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
-import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -27,15 +26,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * Element description: IHE PHARM DIS document code
  */
 public class DocumentCodeMedicationDispense extends org.ehealth_connector.common.hl7cdar2.CE {
-
-	public DocumentCodeMedicationDispense() {
-		super.setCode("60593-1");
-		super.setCodeSystem("2.16.840.1.113883.6.1");
-		super.setCodeSystemName("LOINC");
-		super.setDisplayName("Medication dispensed.extended");
-		super.getTranslation().add(createHl7TranslationFixedValue("275670009",
-				"2.16.840.1.113883.6.96", "SNOMED CT", "Medication Dispensation"));
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Translation
@@ -52,6 +42,15 @@ public class DocumentCodeMedicationDispense extends org.ehealth_connector.common
 		retVal.setCodeSystemName(codeSystemName);
 		retVal.setDisplayName(displayName);
 		return retVal;
+	}
+
+	public DocumentCodeMedicationDispense() {
+		super.setCode("60593-1");
+		super.setCodeSystem("2.16.840.1.113883.6.1");
+		super.setCodeSystemName("LOINC");
+		super.setDisplayName("Medication dispensed.extended");
+		super.getTranslation().add(createHl7TranslationFixedValue("275670009",
+				"2.16.840.1.113883.6.96", "SNOMED CT", "Medication Dispensation"));
 	}
 
 	/**

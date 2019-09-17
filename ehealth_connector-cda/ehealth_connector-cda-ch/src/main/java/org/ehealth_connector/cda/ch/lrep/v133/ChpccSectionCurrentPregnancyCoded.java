@@ -11,12 +11,11 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -39,15 +38,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class ChpccSectionCurrentPregnancyCoded
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
-
-	public ChpccSectionCurrentPregnancyCoded() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.53"));
-		super.getTemplateId()
-				.add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.5.3.4"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.127.77.1.10.1"));
-		super.setCode(createHl7CodeFixedValue("10162-6", "2.16.840.1.113883.6.1", "LOINC",
-				"HISTORY OF PREGNANCIES"));
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -103,6 +93,26 @@ public class ChpccSectionCurrentPregnancyCoded
 	}
 
 	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry, filled by:
+	 * "DRIV"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry getPredefinedEntryDriv() {
+		return createHl7EntryFixedValue("DRIV");
+	}
+
+	public ChpccSectionCurrentPregnancyCoded() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.53"));
+		super.getTemplateId()
+				.add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.5.3.4"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.127.77.1.10.1"));
+		super.setCode(createHl7CodeFixedValue("10162-6", "2.16.840.1.113883.6.1", "LOINC",
+				"HISTORY OF PREGNANCIES"));
+	}
+
+	/**
 	 * Gets the hl7Code
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7Code() {
@@ -143,17 +153,6 @@ public class ChpccSectionCurrentPregnancyCoded
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ST getHl7Title() {
 		return title;
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry, filled by:
-	 * "DRIV"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry getPredefinedEntryDriv() {
-		return createHl7EntryFixedValue("DRIV");
 	}
 
 	/**

@@ -11,13 +11,13 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
 import java.util.ArrayList;
-import java.util.List;
+
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -28,17 +28,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class ChpalmEntrySpecimenCollection
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Procedure {
-
-	public ChpalmEntrySpecimenCollection() {
-		super.getClassCode().add("PROC");
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XDocumentProcedureMood.fromValue("EVN"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.2"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.11"));
-		super.setCode(createHl7CodeFixedValue("33882-2", "2.16.840.1.113883.6.1", "LOINC",
-				"Collection date of Unspecified specimen"));
-		super.setEffectiveTime(createHl7EffectiveTimeFixedValue("UNK"));
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -129,6 +118,38 @@ public class ChpalmEntrySpecimenCollection
 	}
 
 	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "COMP", null
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipCompNull() {
+		return createHl7EntryRelationshipFixedValue("COMP", null);
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
+	 * "2.16.840.1.113883.5.1052", "ActSite"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedTargetSiteCode216840111388351052ActSite() {
+		return createHl7TargetSiteCodeFixedValue("2.16.840.1.113883.5.1052", "ActSite");
+	}
+
+	public ChpalmEntrySpecimenCollection() {
+		super.getClassCode().add("PROC");
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XDocumentProcedureMood.fromValue("EVN"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.2"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.11"));
+		super.setCode(createHl7CodeFixedValue("33882-2", "2.16.840.1.113883.6.1", "LOINC",
+				"Collection date of Unspecified specimen"));
+		super.setEffectiveTime(createHl7EffectiveTimeFixedValue("UNK"));
+	}
+
+	/**
 	 * Gets the hl7Code The human-readable text MUST be generated automatically
 	 * from the structured information of this element. The text element MUST
 	 * contain the reference to the corresponding text in the human readable
@@ -203,27 +224,6 @@ public class ChpalmEntrySpecimenCollection
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ED getHl7Text() {
 		return text;
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "COMP", null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipCompNull() {
-		return createHl7EntryRelationshipFixedValue("COMP", null);
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
-	 * "2.16.840.1.113883.5.1052", "ActSite"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedTargetSiteCode216840111388351052ActSite() {
-		return createHl7TargetSiteCodeFixedValue("2.16.840.1.113883.5.1052", "ActSite");
 	}
 
 	/**

@@ -11,12 +11,11 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
-import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -25,16 +24,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class TreatmentReasonEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
-
-	public TreatmentReasonEntryContentModule() {
-		super.getClassCode().add("OBS");
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.41"));
-		super.setCode(
-				createHl7CodeFixedValue("75326-9", "2.16.840.1.113883.6.1", "LOINC", "Problem"));
-		super.setStatusCode(createHl7StatusCodeFixedValue("completed", null, null, null));
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -82,6 +71,16 @@ public class TreatmentReasonEntryContentModule
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public TreatmentReasonEntryContentModule() {
+		super.getClassCode().add("OBS");
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.41"));
+		super.setCode(
+				createHl7CodeFixedValue("75326-9", "2.16.840.1.113883.6.1", "LOINC", "Problem"));
+		super.setStatusCode(createHl7StatusCodeFixedValue("completed", null, null, null));
 	}
 
 	/**

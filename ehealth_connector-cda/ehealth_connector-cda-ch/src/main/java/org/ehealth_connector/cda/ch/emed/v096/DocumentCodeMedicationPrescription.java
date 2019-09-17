@@ -11,12 +11,11 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
-import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -27,15 +26,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * Element description: IHE PHARM PRE document code
  */
 public class DocumentCodeMedicationPrescription extends org.ehealth_connector.common.hl7cdar2.CE {
-
-	public DocumentCodeMedicationPrescription() {
-		super.setCode("57833-6");
-		super.setCodeSystem("2.16.840.1.113883.6.1");
-		super.setCodeSystemName("LOINC");
-		super.setDisplayName("Prescription for medication");
-		super.getTranslation().add(createHl7TranslationFixedValue("440545006",
-				"2.16.840.1.113883.6.96", "SNOMED CT", "Drug prescription"));
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Translation
@@ -52,6 +42,15 @@ public class DocumentCodeMedicationPrescription extends org.ehealth_connector.co
 		retVal.setCodeSystemName(codeSystemName);
 		retVal.setDisplayName(displayName);
 		return retVal;
+	}
+
+	public DocumentCodeMedicationPrescription() {
+		super.setCode("57833-6");
+		super.setCodeSystem("2.16.840.1.113883.6.1");
+		super.setCodeSystemName("LOINC");
+		super.setDisplayName("Prescription for medication");
+		super.getTranslation().add(createHl7TranslationFixedValue("440545006",
+				"2.16.840.1.113883.6.96", "SNOMED CT", "Drug prescription"));
 	}
 
 	/**

@@ -11,12 +11,11 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
-import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -47,27 +46,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * allow the negation to be recorded with post-coordinated coded terminology.
  */
 public class IheproblemEntry extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
-
-	public IheproblemEntry() {
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.5"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.28"));
-	}
-
-	/**
-	 * Adds a hl7Value
-	 */
-	public void addHl7Value(org.ehealth_connector.common.hl7cdar2.CD value) {
-		getValue().add(value);
-	}
-
-	/**
-	 * Adds a hl7Value
-	 */
-	public void clearHl7Value() {
-		getValue().clear();
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7EntryRelationship
@@ -120,6 +98,48 @@ public class IheproblemEntry extends org.ehealth_connector.common.hl7cdar2.POCDM
 	}
 
 	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "REFR", null
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrNull() {
+		return createHl7EntryRelationshipFixedValue("REFR", null);
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CS, filled by:
+	 * "completed", null, null, null
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CS getPredefinedStatusCodeCompletedNullNullNull() {
+		return createHl7StatusCodeFixedValue("completed", null, null, null);
+	}
+
+	public IheproblemEntry() {
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.5"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.28"));
+	}
+
+	/**
+	 * Adds a hl7Value
+	 */
+	public void addHl7Value(org.ehealth_connector.common.hl7cdar2.CD value) {
+		getValue().add(value);
+	}
+
+	/**
+	 * Adds a hl7Value
+	 */
+	public void clearHl7Value() {
+		getValue().clear();
+	}
+
+	/**
 	 * Gets the hl7Code
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
@@ -167,35 +187,14 @@ public class IheproblemEntry extends org.ehealth_connector.common.hl7cdar2.POCDM
 	/**
 	 * Gets the hl7Text <div>The &lt;text&gt; element is required and points to
 	 * the text describing the problem being
-	 * recorded; <span style="line-height: 1.22;">including any dates,
-	 * comments, et cetera. The &lt;reference&gt; contains a URI in value
-	 * attribute. This </span><span style="line-height: 1.22;">URI points to
-	 * the free text description of the problem in the document that is being
+	 * recorded; <span style="line-height: 1.22;">including any dates, comments,
+	 * et cetera. The &lt;reference&gt; contains a URI in value attribute.
+	 * This </span><span style="line-height: 1.22;">URI points to the free text
+	 * description of the problem in the document that is being
 	 * described</span></div>
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ED getHl7Text() {
 		return text;
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "REFR", null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrNull() {
-		return createHl7EntryRelationshipFixedValue("REFR", null);
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CS, filled by:
-	 * "completed", null, null, null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CS getPredefinedStatusCodeCompletedNullNullNull() {
-		return createHl7StatusCodeFixedValue("completed", null, null, null);
 	}
 
 	/**
@@ -250,10 +249,10 @@ public class IheproblemEntry extends org.ehealth_connector.common.hl7cdar2.POCDM
 	/**
 	 * Sets the hl7Text <div>The &lt;text&gt; element is required and points to
 	 * the text describing the problem being
-	 * recorded; <span style="line-height: 1.22;">including any dates,
-	 * comments, et cetera. The &lt;reference&gt; contains a URI in value
-	 * attribute. This </span><span style="line-height: 1.22;">URI points to
-	 * the free text description of the problem in the document that is being
+	 * recorded; <span style="line-height: 1.22;">including any dates, comments,
+	 * et cetera. The &lt;reference&gt; contains a URI in value attribute.
+	 * This </span><span style="line-height: 1.22;">URI points to the free text
+	 * description of the problem in the document that is being
 	 * described</span></div>
 	 */
 	public void setHl7Text(org.ehealth_connector.common.hl7cdar2.ED value) {

@@ -11,7 +11,7 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
@@ -29,6 +29,33 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class CdachOtherAssignedEntityCompilationNameAddrTelecom
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity {
+
+	/**
+	 * Creates fixed contents for CDA Element hl7Code
+	 *
+	 * @param codeSystem
+	 *            the desired fixed value for this argument.
+	 * @param codeSystemName
+	 *            the desired fixed value for this argument.
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(
+			String codeSystem, String codeSystemName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		return retVal;
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
+	 * "2.16.840.1.113883.6.96", "SNOMED CT"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedCode2168401113883696SnomedCt() {
+		return createHl7CodeFixedValue("2.16.840.1.113883.6.96", "SNOMED CT");
+	}
 
 	public CdachOtherAssignedEntityCompilationNameAddrTelecom() {
 	}
@@ -64,23 +91,6 @@ public class CdachOtherAssignedEntityCompilationNameAddrTelecom
 	}
 
 	/**
-	 * Creates fixed contents for CDA Element hl7Code
-	 *
-	 * @param codeSystem
-	 *            the desired fixed value for this argument.
-	 * @param codeSystemName
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(
-			String codeSystem, String codeSystemName) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
-		retVal.setCodeSystem(codeSystem);
-		retVal.setCodeSystemName(codeSystemName);
-		return retVal;
-	}
-
-	/**
 	 * Gets the hl7AssignedPerson The assigned person.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Person getHl7AssignedPerson() {
@@ -102,16 +112,6 @@ public class CdachOtherAssignedEntityCompilationNameAddrTelecom
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Organization getHl7RepresentedOrganization() {
 		return representedOrganization;
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
-	 * "2.16.840.1.113883.6.96", "SNOMED CT"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedCode2168401113883696SnomedCt() {
-		return createHl7CodeFixedValue("2.16.840.1.113883.6.96", "SNOMED CT");
 	}
 
 	/**

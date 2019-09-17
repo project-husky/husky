@@ -91,6 +91,10 @@ public class PrescriptionSection
 		this.getMdht().addSubstanceAdministration(entry.getMdht());
 	}
 
+	public LanguageCode getLanguageCode() {
+		return languageCode;
+	}
+
 	/**
 	 * Gets the prescription item entries.
 	 *
@@ -115,10 +119,6 @@ public class PrescriptionSection
 			return this.getMdht().getTitle().getText();
 		}
 		return null;
-	}
-
-	public LanguageCode getLanguageCode() {
-		return languageCode;
 	}
 
 	public void setLanguageCode(LanguageCode languageCode) {

@@ -11,12 +11,11 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
-import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -26,13 +25,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class DosageInstructionsNonStructuredEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
-
-	public DosageInstructionsNonStructuredEntryContentModule() {
-		super.getClassCode().add("SBADM");
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("INT"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.52"));
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
@@ -46,6 +38,13 @@ public class DosageInstructionsNonStructuredEntryContentModule
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public DosageInstructionsNonStructuredEntryContentModule() {
+		super.getClassCode().add("SBADM");
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("INT"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.52"));
 	}
 
 	/**

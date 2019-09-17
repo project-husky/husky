@@ -11,12 +11,11 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -43,15 +42,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class CdachvacdSectionOtherRelevantObservationsCoded
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
-
-	public CdachvacdSectionOtherRelevantObservationsCoded() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.46"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.3.27"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.3.28"));
-		super.setCode(createHl7CodeFixedValue("30954-2", "2.16.840.1.113883.6.1", "LOINC",
-				"Relevant diagnostic tests/laboratory data"));
-		super.getEntry().add(createHl7EntryFixedValue("DRIV"));
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -104,6 +94,15 @@ public class CdachvacdSectionOtherRelevantObservationsCoded
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public CdachvacdSectionOtherRelevantObservationsCoded() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.46"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.3.27"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.3.28"));
+		super.setCode(createHl7CodeFixedValue("30954-2", "2.16.840.1.113883.6.1", "LOINC",
+				"Relevant diagnostic tests/laboratory data"));
+		super.getEntry().add(createHl7EntryFixedValue("DRIV"));
 	}
 
 	/**

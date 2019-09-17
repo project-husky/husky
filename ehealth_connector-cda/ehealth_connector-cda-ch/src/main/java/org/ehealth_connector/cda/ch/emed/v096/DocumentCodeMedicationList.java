@@ -11,12 +11,11 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
-import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -27,15 +26,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * Element description: IHE PHARM PML document code
  */
 public class DocumentCodeMedicationList extends org.ehealth_connector.common.hl7cdar2.CE {
-
-	public DocumentCodeMedicationList() {
-		super.setCode("56445-0");
-		super.setCodeSystem("2.16.840.1.113883.6.1");
-		super.setCodeSystemName("LOINC");
-		super.setDisplayName("Medication summary");
-		super.getTranslation().add(createHl7TranslationFixedValue("721912009",
-				"2.16.840.1.113883.6.96", "SNOMED CT", "Medication summary"));
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Translation
@@ -52,6 +42,15 @@ public class DocumentCodeMedicationList extends org.ehealth_connector.common.hl7
 		retVal.setCodeSystemName(codeSystemName);
 		retVal.setDisplayName(displayName);
 		return retVal;
+	}
+
+	public DocumentCodeMedicationList() {
+		super.setCode("56445-0");
+		super.setCodeSystem("2.16.840.1.113883.6.1");
+		super.setCodeSystemName("LOINC");
+		super.setDisplayName("Medication summary");
+		super.getTranslation().add(createHl7TranslationFixedValue("721912009",
+				"2.16.840.1.113883.6.96", "SNOMED CT", "Medication summary"));
 	}
 
 	/**

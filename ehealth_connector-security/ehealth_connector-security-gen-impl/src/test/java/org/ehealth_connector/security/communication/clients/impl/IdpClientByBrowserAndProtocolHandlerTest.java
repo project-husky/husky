@@ -1,10 +1,9 @@
 /*
- *
  * The authorship of this project and accompanying materials is held by medshare GmbH, Switzerland.
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -46,7 +45,8 @@ import org.w3c.dom.Element;
 
 public class IdpClientByBrowserAndProtocolHandlerTest extends ServerTestHelper {
 
-	private static Logger logger = LoggerFactory.getLogger(IdpClientByBrowserAndProtocolHandlerTest.class);
+	private static Logger logger = LoggerFactory
+			.getLogger(IdpClientByBrowserAndProtocolHandlerTest.class);
 
 	private static HttpServer server;
 
@@ -55,14 +55,15 @@ public class IdpClientByBrowserAndProtocolHandlerTest extends ServerTestHelper {
 
 	@BeforeClass
 	public static void setUpBefore() throws IOException {
-		final SocketConfig socketConfig = SocketConfig.custom().setSoTimeout(15000).setTcpNoDelay(true).build();
+		final SocketConfig socketConfig = SocketConfig.custom().setSoTimeout(15000)
+				.setTcpNoDelay(true).build();
 
 		server = ServerBootstrap.bootstrap().setServerInfo("Test/1.1").setSocketConfig(socketConfig)
 				.registerHandler("*", new HttpRequestHandler() {
 
 					@Override
-					public void handle(HttpRequest request, HttpResponse response, HttpContext context)
-							throws HttpException, IOException {
+					public void handle(HttpRequest request, HttpResponse response,
+							HttpContext context) throws HttpException, IOException {
 						logger.debug("The request %s", request.getRequestLine());
 						response.setStatusCode(500);
 						response.setEntity(new StringEntity("Hello this is a testserver"));
@@ -93,8 +94,9 @@ public class IdpClientByBrowserAndProtocolHandlerTest extends ServerTestHelper {
 
 		testFilename = "/credential-criteria-registry.properties";
 
-		client = new IdpClientByBrowserAndProtocolHandler(new IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl()
-				.url("http://localhost:" + getHttpPort() + "/testit").create());
+		client = new IdpClientByBrowserAndProtocolHandler(
+				new IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl()
+						.url("http://localhost:" + getHttpPort() + "/testit").create());
 		final Element xmlElement = loadXmlDokument("/saml2/AuthnRequest.xml");
 		testAuthnRequest = new AuthnRequestDeserializerImpl().fromXmlElement(xmlElement);
 	}

@@ -11,12 +11,11 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.lrep.v133;
 
-import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -28,6 +27,118 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class CdachlrepEntryLaboratoryBatteryOrganizerAntibiogram
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
+
+	/**
+	 * Creates fixed contents for CDA Element hl7Code
+	 *
+	 * @param code
+	 *            the desired fixed value for this argument.
+	 * @param codeSystem
+	 *            the desired fixed value for this argument.
+	 * @param codeSystemName
+	 *            the desired fixed value for this argument.
+	 * @param displayName
+	 *            the desired fixed value for this argument.
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code,
+			String codeSystem, String codeSystemName, String displayName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
+		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7Component
+	 *
+	 * @param typeCode
+	 *            the desired fixed value for this argument.
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 createHl7ComponentFixedValue(
+			String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 retVal = factory
+				.createPOCDMT000040Component4();
+		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.ActRelationshipHasComponent
+				.fromValue(typeCode));
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7Reference
+	 *
+	 * @param typeCode
+	 *            the desired fixed value for this argument.
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(
+			String typeCode) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference retVal = factory
+				.createPOCDMT000040Reference();
+		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipExternalReference
+				.fromValue(typeCode));
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7StatusCode
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7TemplateId
+	 *
+	 * @param root
+	 *            the desired fixed value for this argument.
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
+	 * "29576-6", "2.16.840.1.113883.6.1", "LOINC", "Bacterial susceptibility
+	 * panel"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedCode295766216840111388361LoincBacterialSusceptibilityPanel() {
+		return createHl7CodeFixedValue("29576-6", "2.16.840.1.113883.6.1", "LOINC",
+				"Bacterial susceptibility panel");
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4, filled by:
+	 * "COMP"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 getPredefinedComponentComp() {
+		return createHl7ComponentFixedValue("COMP");
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference, filled by:
+	 * "REFR"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference getPredefinedReferenceRefr() {
+		return createHl7ReferenceFixedValue("REFR");
+	}
 
 	public CdachlrepEntryLaboratoryBatteryOrganizerAntibiogram() {
 		super.setClassCode(org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryOrganizer
@@ -131,84 +242,6 @@ public class CdachlrepEntryLaboratoryBatteryOrganizerAntibiogram
 	}
 
 	/**
-	 * Creates fixed contents for CDA Element hl7Code
-	 *
-	 * @param code
-	 *            the desired fixed value for this argument.
-	 * @param codeSystem
-	 *            the desired fixed value for this argument.
-	 * @param codeSystemName
-	 *            the desired fixed value for this argument.
-	 * @param displayName
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code,
-			String codeSystem, String codeSystemName, String displayName) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
-		retVal.setCode(code);
-		retVal.setCodeSystem(codeSystem);
-		retVal.setCodeSystemName(codeSystemName);
-		retVal.setDisplayName(displayName);
-		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7Component
-	 *
-	 * @param typeCode
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 createHl7ComponentFixedValue(
-			String typeCode) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 retVal = factory
-				.createPOCDMT000040Component4();
-		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.ActRelationshipHasComponent
-				.fromValue(typeCode));
-		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7Reference
-	 *
-	 * @param typeCode
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference createHl7ReferenceFixedValue(
-			String typeCode) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference retVal = factory
-				.createPOCDMT000040Reference();
-		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipExternalReference
-				.fromValue(typeCode));
-		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7StatusCode
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
-		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7TemplateId
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
-			String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
-		retVal.setRoot(root);
-		return retVal;
-	}
-
-	/**
 	 * Gets the hl7Code The antibiogram MUST be declared using the LOINC code
 	 * 29576-6 "Bacterial susceptibility panel".
 	 */
@@ -253,40 +286,6 @@ public class CdachlrepEntryLaboratoryBatteryOrganizerAntibiogram
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
 		return templateId;
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
-	 * "29576-6", "2.16.840.1.113883.6.1", "LOINC", "Bacterial susceptibility
-	 * panel"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedCode295766216840111388361LoincBacterialSusceptibilityPanel() {
-		return createHl7CodeFixedValue("29576-6", "2.16.840.1.113883.6.1", "LOINC",
-				"Bacterial susceptibility panel");
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4, filled by:
-	 * "COMP"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 getPredefinedComponentComp() {
-		return createHl7ComponentFixedValue("COMP");
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference, filled by:
-	 * "REFR"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference getPredefinedReferenceRefr() {
-		return createHl7ReferenceFixedValue("REFR");
 	}
 
 	/**

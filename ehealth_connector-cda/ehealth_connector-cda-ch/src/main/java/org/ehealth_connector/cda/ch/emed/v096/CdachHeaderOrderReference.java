@@ -11,12 +11,11 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
-import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -33,10 +32,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachHeaderOrderReference
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040InFulfillmentOf {
 
-	public CdachHeaderOrderReference() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.16"));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
@@ -49,6 +44,10 @@ public class CdachHeaderOrderReference
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public CdachHeaderOrderReference() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.16"));
 	}
 
 	/**
