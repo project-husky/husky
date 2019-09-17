@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>org.ehealth_connector.validation</groupId>
 		<artifactId>ehealth_connector-validation</artifactId>
-		<version>1.7.0-201909</version>
+		<version>1.8-SNAPSHOT</version>
 	</parent>
 
 	<properties>

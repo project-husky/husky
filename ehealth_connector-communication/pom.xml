@@ -3,7 +3,7 @@
   <parent>
     <groupId>org.ehealth_connector</groupId>
     <artifactId>ehealth_connector-api-java</artifactId>
-    <version>1.7.0-201909</version>
+    <version>1.8-SNAPSHOT</version>
   </parent>
   <groupId>org.ehealth_connector.communication</groupId>
   <artifactId>ehealth_connector-communication</artifactId>

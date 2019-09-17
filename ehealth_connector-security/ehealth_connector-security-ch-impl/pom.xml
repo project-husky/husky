@@ -7,19 +7,19 @@
 	<parent>
 		<groupId>org.ehealth_connector.security</groupId>
 		<artifactId>ehealth_connector-security</artifactId>
-		<version>1.7.0-201909</version>
+		<version>1.8-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.ehealth_connector.security</groupId>
 			<artifactId>ehealth_connector-security-ch-api</artifactId>
-			<version>1.7.0-201909</version>
+			<version>1.8-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ehealth_connector.security</groupId>
 			<artifactId>ehealth_connector-security-gen-impl</artifactId>
-			<version>1.7.0-201909</version>
+			<version>1.8-SNAPSHOT</version>
 		</dependency>
 		
 		
