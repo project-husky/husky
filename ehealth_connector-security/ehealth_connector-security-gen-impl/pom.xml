@@ -16,6 +16,20 @@
 			<version>1.7-SNAPSHOT</version>
 		</dependency>
 		<dependency>
+			<groupId>org.ehealth_connector.common.ch</groupId>
+			<artifactId>ehealth_connector-common-ch</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.openhealthtools.mdht.uml</groupId>
+					<artifactId>cda</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.openhealthtools.mdht.uml.hl7</groupId>
+					<artifactId>datatypes</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
 			<groupId>xerces</groupId>
 			<artifactId>xercesImpl</artifactId>
 			<scope>provided</scope>

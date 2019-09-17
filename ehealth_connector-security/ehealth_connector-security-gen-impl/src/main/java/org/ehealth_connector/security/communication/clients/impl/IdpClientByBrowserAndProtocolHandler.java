@@ -3,7 +3,7 @@
  * All rights reserved. https://medshare.net
  *
  * Source code, documentation and other resources have been contributed by various people.
- * Project Team: https://sourceforge.net/p/ehealthconnector/wiki/Team/
+ * Project Team: https://gitlab.com/ehealth-connector/api/wikis/Team/
  * For exact developer information, please refer to the commit history of the forge.
  *
  * This code is made available under the terms of the Eclipse Public License v1.0.
@@ -11,7 +11,7 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.security.communication.clients.impl;
@@ -30,6 +30,7 @@ import java.net.URISyntaxException;
 import java.util.Base64;
 import java.util.Calendar;
 
+import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.security.authentication.AuthnRequest;
 import org.ehealth_connector.security.communication.clients.IdpClient;
 import org.ehealth_connector.security.communication.config.impl.IdpClientByBrowserAndProtocolHandlerConfigImpl;
@@ -56,37 +57,9 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
-	public IdpClientByBrowserAndProtocolHandler(IdpClientByBrowserAndProtocolHandlerConfigImpl clientConfiguration) {
+	public IdpClientByBrowserAndProtocolHandler(
+			IdpClientByBrowserAndProtocolHandlerConfigImpl clientConfiguration) {
 		config = clientConfiguration;
-	}
-
-	private File getHtmlFormPage(AuthnRequest aAuthnRequest)
-			throws SerializeException, IOException, URISyntaxException {
-		final AuthnRequestSerializerImpl serializer = new AuthnRequestSerializerImpl();
-		final byte[] authnByteArray = serializer.toXmlByteArray(aAuthnRequest);
-		final String samlRequest = Base64.getEncoder().encodeToString(authnByteArray);
-		String template = readFromJARFile("/template/authnsubmitform.html");
-
-		template = template.replaceAll("@base64samlrequest@", samlRequest);
-		template = template.replaceAll("@bsamlrequesttype@", "SAMLRequest");// config.getSamlRequestType().toString());
-		template = template.replaceAll("@idpurl@", config.getUrl());
-
-		logger.debug("html to send to browser: " + template);
-
-		final File tempFile = File.createTempFile("saml_", ".html");
-		tempFile.deleteOnExit();
-
-		final FileOutputStream os = new FileOutputStream(tempFile);
-		os.write(template.getBytes());
-		os.close();
-
-		return tempFile;
-	}
-
-	private Response getResponse(String samlReponse) throws DeserializeException, UnsupportedEncodingException {
-		final byte[] samlReponseBytes = Base64.getDecoder().decode(samlReponse);
-		final ResponseDeserializerImpl deserializer = new ResponseDeserializerImpl();
-		return deserializer.fromXmlByteArray(samlReponseBytes);
 	}
 
 	/**
@@ -139,10 +112,16 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 	public Object send(AuthnRequest aAuthnRequest) throws ClientSendException {
 		try {
 
+			final File tempFile = new File(System.getProperty("java.io.tmpdir"),
+					config.getProtocolHandlerName() + ".io");
+			if (tempFile.exists()) {
+				tempFile.delete();
+			}
+
 			final File htmlFile = getHtmlFormPage(aAuthnRequest);
 			startBrowser(htmlFile.toURI());
 
-			return startWaitForResponse();
+			return startWaitForResponse(tempFile);
 
 		} catch (final Throwable t) {
 			logger.error("An error occured sending authnrequest.", t);
@@ -150,11 +129,43 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 		}
 	}
 
+	private File getHtmlFormPage(AuthnRequest aAuthnRequest)
+			throws SerializeException, IOException, URISyntaxException {
+		final AuthnRequestSerializerImpl serializer = new AuthnRequestSerializerImpl();
+		final byte[] authnByteArray = serializer.toXmlByteArray(aAuthnRequest);
+		final String samlRequest = Base64.getEncoder().encodeToString(authnByteArray);
+		String template = readFromJARFile("/template/authnsubmitform.html");
+
+		template = template.replaceAll("@base64samlrequest@", samlRequest);
+		template = template.replaceAll("@bsamlrequesttype@", "SAMLRequest");// config.getSamlRequestType().toString());
+		template = template.replaceAll("@idpurl@", config.getUrl());
+
+		logger.debug("html to send to browser: " + template);
+
+		final File tempFile = File.createTempFile("saml_", ".html");
+		tempFile.deleteOnExit();
+
+		final FileOutputStream os = new FileOutputStream(tempFile);
+		os.write(template.getBytes());
+		os.close();
+
+		return tempFile;
+	}
+
+	private Response getResponse(String samlReponse)
+			throws DeserializeException, UnsupportedEncodingException {
+		final byte[] samlReponseBytes = Base64.getDecoder().decode(samlReponse);
+		final ResponseDeserializerImpl deserializer = new ResponseDeserializerImpl();
+		return deserializer.fromXmlByteArray(samlReponseBytes);
+	}
+
 	private void startBrowser(URI requestUri) {
 		try {
-			if (Desktop.isDesktopSupported()) {
+			if (Util.isWindows()) {
+				Runtime runtime = Runtime.getRuntime();
+				runtime.exec("cmd /c start " + requestUri);
+			} else if (Desktop.isDesktopSupported()) {
 				final Desktop desktop = Desktop.getDesktop();
-
 				desktop.browse(requestUri);
 			} else {
 				logger.error("Desktop not supported.");
@@ -164,29 +175,32 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 		}
 	}
 
-	private Object startWaitForResponse() throws IOException, ClientSendException, DeserializeException {
+	private Object startWaitForResponse(File response)
+			throws IOException, ClientSendException, DeserializeException {
 		final Calendar end = Calendar.getInstance();
 
 		// This is the timeout to wait for the SAML response
 		end.add(Calendar.MINUTE, 2);
-
-		final File tempFile = new File(System.getProperty("java.io.tmpdir"), config.getProtocolHandlerName() + ".io");
-		if (tempFile.exists()) {
-			tempFile.delete();
-		}
-		tempFile.createNewFile();
-		final BufferedReader in = new BufferedReader(new FileReader(tempFile));
-		String line = in.readLine();
-		while ((line == null) || line.isEmpty() || !line.startsWith(config.getProtocolHandlerName())) {
-			line = in.readLine();
-			if (Calendar.getInstance().after(end)) {
-				break;
+		try {
+			while (!response.exists() && !Calendar.getInstance().after(end)) {
+				Thread.sleep(200);
 			}
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			// Do nothing
 		}
 
+		// final File tempFile = new File(System.getProperty("java.io.tmpdir"),
+		// config.getProtocolHandlerName() + ".io");
+		// if (tempFile.exists()) {
+		// tempFile.delete();
+		// }
+		// tempFile.createNewFile();
+		final BufferedReader in = new BufferedReader(new FileReader(response));
+		String line = in.readLine();
 		in.close();
-		if (tempFile.exists()) {
-			tempFile.delete();
+		if (response.exists()) {
+			response.delete();
 		}
 		if (line == null) {
 			throw new ClientSendException("No SAML response found");
