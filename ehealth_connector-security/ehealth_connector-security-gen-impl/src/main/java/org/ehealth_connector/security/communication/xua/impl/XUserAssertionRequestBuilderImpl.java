@@ -267,7 +267,7 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#subjectRole(java.lang.String)
+	 * @see org.ehealth_connector.security.communication.xua.XUserAssertionRequestBuilder#subjectRole(org.ehealth_connector.security.hl7v3.Role)
 	 */
 	@Override
 	public XUserAssertionRequestBuilder subjectRole(Role aRole) {
