@@ -161,14 +161,31 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 
 	private void startBrowser(URI requestUri) {
 		try {
-			if (Util.isWindows()) {
-				Runtime runtime = Runtime.getRuntime();
-				runtime.exec("cmd /c start " + requestUri);
-			} else if (Desktop.isDesktopSupported()) {
+			if (Desktop.isDesktopSupported()
+					&& Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
 				final Desktop desktop = Desktop.getDesktop();
 				desktop.browse(requestUri);
 			} else {
-				logger.error("Desktop not supported.");
+				if (Util.isWindows()) {
+					Runtime.getRuntime().exec("cmd /c start " + requestUri);
+				} else if (Util.isUnix()) {
+					final String[] browsers = { "epiphany", "firefox", "mozilla", "konqueror",
+							"netscape", "opera", "links", "lynx" };
+
+					final StringBuffer cmd = new StringBuffer();
+					for (int i = 0; i < browsers.length; i++) {
+						if (i == 0)
+							cmd.append(String.format("%s \"%s\"", browsers[i], requestUri));
+						else
+							cmd.append(String.format(" || %s \"%s\"", browsers[i], requestUri));
+						// If the first didn't work, try the next browser and so
+						// on
+					}
+					Runtime.getRuntime().exec(new String[] { "sh", "-c", cmd.toString() });
+				} else if (Util.isMac()) {
+					final String command = "open " + requestUri;
+					Runtime.getRuntime().exec(command);
+				}
 			}
 		} catch (final Throwable t) {
 			logger.error("An error occured starting the browser.", t);
@@ -186,7 +203,7 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 				Thread.sleep(200);
 			}
 			Thread.sleep(200);
-		} catch (InterruptedException e) {
+		} catch (final InterruptedException e) {
 			// Do nothing
 		}
 
