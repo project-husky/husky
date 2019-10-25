@@ -16,6 +16,10 @@
  */
 package org.ehealth_connector.security.saml2;
 
+import org.ehealth_connector.security.hl7v3.InstanceIdentifier;
+import org.ehealth_connector.security.hl7v3.PurposeOfUse;
+import org.ehealth_connector.security.hl7v3.Role;
+
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of Attribute. </div>
@@ -66,13 +70,61 @@ public interface Attribute {
 	 * <div class="it"></div>
 	 *
 	 * @return
-	 * <div class="en">the NameFormat as {@link java.lang.String}</div>
-	 * <div class="de">der NameFormat als {@link java.lang.String}</div>
+	 * <div class="en">the Value as {@link java.lang.String}</div>
+	 * <div class="de">der Value als {@link java.lang.String}</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
 	String getNameFormat();
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the NameFormat.</div>
+	 * <div class="de">Methode um das NameFormat zu holen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return
+	 * <div class="en">the Value as {org.ehealth_connector.security.hl7v3.InstanceIdentifier}</div>
+	 * <div class="de">der Value als {org.ehealth_connector.security.hl7v3.InstanceIdentifier}</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	InstanceIdentifier getValueAsInstanceIdentifier();
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the NameFormat.</div>
+	 * <div class="de">Methode um das NameFormat zu holen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return
+	 * <div class="en">the Value as {org.ehealth_connector.security.hl7v3.PurposeOfUse}</div>
+	 * <div class="de">der Value als {org.ehealth_connector.security.hl7v3.PurposeOfUse}</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	PurposeOfUse getValueAsPurposeOfUse();
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the NameFormat.</div>
+	 * <div class="de">Methode um das NameFormat zu holen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return
+	 * <div class="en">the Value as {org.ehealth_connector.security.hl7v3.Role}</div>
+	 * <div class="de">der Value als {org.ehealth_connector.security.hl7v3.Role}</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	Role getValueAsRole();
 
 	/**
 	 * <!-- @formatter:off -->
@@ -88,6 +140,14 @@ public interface Attribute {
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	String getValue();
+	String getValueAsString();
+
+	boolean isValueAInstanceIdentifier();
+
+	boolean isValueAPurposeOfUse();
+
+	boolean isValueARole();
+
+	boolean isValueAString();
 
 }

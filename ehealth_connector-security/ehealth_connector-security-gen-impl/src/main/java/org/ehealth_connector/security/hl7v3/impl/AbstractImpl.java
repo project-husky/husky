@@ -18,6 +18,7 @@ package org.ehealth_connector.security.hl7v3.impl;
 
 import java.util.List;
 
+import org.ehealth_connector.security.hl7v3.CE;
 import org.opensaml.core.xml.AbstractXMLObject;
 import org.opensaml.core.xml.XMLObject;
 
@@ -30,7 +31,7 @@ import org.opensaml.core.xml.XMLObject;
  *
  * <!-- @formatter:on -->
  */
-public abstract class AbstractImpl extends AbstractXMLObject {
+public abstract class AbstractImpl extends AbstractXMLObject implements CE {
 
 	protected String code;
 	protected String codeSystem;
@@ -42,22 +43,27 @@ public abstract class AbstractImpl extends AbstractXMLObject {
 		super(namespaceURI, elementLocalName, namespacePrefix);
 	}
 
+	@Override
 	public String getCode() {
 		return code;
 	}
 
+	@Override
 	public String getCodeSystem() {
 		return codeSystem;
 	}
 
+	@Override
 	public String getCodeSystemName() {
 		return codeSystemName;
 	}
 
+	@Override
 	public String getCodeSystemVersion() {
 		return codeSystemVersion;
 	}
 
+	@Override
 	public String getDisplayName() {
 		return displayName;
 	}
@@ -67,22 +73,27 @@ public abstract class AbstractImpl extends AbstractXMLObject {
 		return null;
 	}
 
+	@Override
 	public void setCode(String value) {
 		code = value;
 	}
 
+	@Override
 	public void setCodeSystem(String value) {
 		codeSystem = value;
 	}
 
+	@Override
 	public void setCodeSystemName(String value) {
 		codeSystemName = value;
 	}
 
+	@Override
 	public void setCodeSystemVersion(String value) {
 		codeSystemVersion = value;
 	}
 
+	@Override
 	public void setDisplayName(String value) {
 		displayName = value;
 	}

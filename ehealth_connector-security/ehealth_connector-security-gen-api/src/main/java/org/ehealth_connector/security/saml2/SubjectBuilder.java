@@ -73,6 +73,28 @@ public interface SubjectBuilder extends SimpleBuilder<Subject> {
 	/**
 	 *
 	 * <!-- @formatter:off -->
+	 * <div class="en">Builds the NameID.NameQualifier on the Subject.</div>
+	 * <div class="de">Bildet das NameID.NameQualifier im Subject.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @param aNameIDNameQualifier
+	 *  <div class="en">the NameID.NameQualifier to be set</div>
+	 * 	<div class="de">das NameID.NameQualifier welches gesetzt werden soll</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 * @return
+	 *  <div class="en">the actual instance of this builder</div>
+	 *  <div class="de">die aktuelle Instanz des Builders</div>
+	 *  <div class="fr"></div>
+	 *  <div class="it"></div>
+	 *  <!-- @formatter:on -->
+	 */
+	SubjectBuilder nameIDNameQualifier(String aNameIDNameQualifier);
+
+	/**
+	 *
+	 * <!-- @formatter:off -->
 	 * <div class="en">Builds the NameID.Value on the Subject.</div>
 	 * <div class="de">Bildet das NameID.Value im Subject.</div>
 	 * <div class="fr"></div>

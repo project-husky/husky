@@ -64,6 +64,20 @@ public class SubjectImpl implements Subject, SecurityObject<org.opensaml.saml.sa
 	 *
 	 * {@inheritDoc}
 	 *
+	 * @see org.ehealth_connector.security.saml2.Subject#getNameIDNameQualifier()
+	 */
+	@Override
+	public String getNameIDNameQualifier() {
+		if (subject.getNameID() != null) {
+			return subject.getNameID().getNameQualifier();
+		}
+		return "";
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
 	 * @see org.ehealth_connector.security.saml2.Subject#getNameIDValue()
 	 */
 	@Override

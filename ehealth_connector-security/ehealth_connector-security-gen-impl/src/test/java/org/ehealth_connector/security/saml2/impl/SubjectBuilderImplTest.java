@@ -37,6 +37,7 @@ public class SubjectBuilderImplTest {
 	private String testNameIdValue;
 	private SubjectConfirmation testSubjectConfirm;
 	private List<SubjectConfirmation> testSubjectConfirmations;
+	private String testNameIDNameQualifier;
 
 	@Before
 	public void setUp() throws Exception {
@@ -51,6 +52,8 @@ public class SubjectBuilderImplTest {
 		testInnerObject.setNameID(nameID);
 
 		testNameIdFormat = "MyFormat for nameId";
+
+		testNameIDNameQualifier = "urn:gs1:gln";
 
 		testAddress = "http://my.address.ch/test/it/now";
 
@@ -88,6 +91,12 @@ public class SubjectBuilderImplTest {
 	public void testNameIDFormat() {
 		final Subject ref = builder.nameIDFormat(testNameIdFormat).create();
 		assertEquals(testNameIdFormat, ref.getNameIDFormat());
+	}
+
+	@Test
+	public void testNameIDNameQualifier() {
+		final Subject ref = builder.nameIDNameQualifier(testNameIDNameQualifier).create();
+		assertEquals(testNameIDNameQualifier, ref.getNameIDNameQualifier());
 	}
 
 	/**

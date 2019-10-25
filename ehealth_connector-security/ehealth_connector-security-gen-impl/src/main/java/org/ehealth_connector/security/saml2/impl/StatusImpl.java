@@ -68,4 +68,10 @@ public class StatusImpl implements Status, SecurityObject<org.opensaml.saml.saml
 		return status;
 	}
 
+	@Override
+	public String toString() {
+		final String retVal = "Status [" + (status.getStatusCode() != null ? status.getStatusCode().getValue() : "n/a")
+			+ (status.getStatusMessage() != null ? "," + status.getStatusMessage().getMessage() : "") + "]";
+		return retVal;
+	}
 }

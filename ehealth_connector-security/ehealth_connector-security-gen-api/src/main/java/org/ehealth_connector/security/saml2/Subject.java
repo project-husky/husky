@@ -47,6 +47,22 @@ public interface Subject {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the NameID.NameQualifier.</div>
+	 * <div class="de">Methode um den NameID.NameQualifier zu erhalten.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return
+	 * <div class="en">the NameID.NameQualifier as {@link java.lang.String}</div>
+	 * <div class="de">den NameID.NameQualifier als {@link java.lang.String}</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	String getNameIDNameQualifier();
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the NameID.Value.</div>
 	 * <div class="de">Methode um den NameID.Value zu erhalten.</div>
 	 * <div class="fr"></div>

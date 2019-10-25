@@ -14,22 +14,31 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.security.hl7v3.impl;
+package org.ehealth_connector.security.saml2.impl;
 
-import org.ehealth_connector.security.hl7v3.OpenSamlPurposeOfUse;
+import static org.junit.Assert.assertNotNull;
 
-/**
- * <!-- @formatter:off -->
- * <div class="en">Implementation class of Interface OpenSaml PurposeOfUse.</div>
- * <div class="de">Implementations Klasse des Interfaces OpenSaml PurposeOfUse.</div>
- * <div class="fr"></div>
- * <div class="it"></div>
- * <!-- @formatter:on -->
- */
-public class PurposeOfUseImpl extends AbstractImpl implements OpenSamlPurposeOfUse {
+import org.ehealth_connector.security.saml2.Conditions;
+import org.ehealth_connector.security.saml2.ConditionsBuilder;
+import org.junit.Before;
+import org.junit.Test;
 
-	protected PurposeOfUseImpl(String namespaceURI, String elementLocalName,
-			String namespacePrefix) {
-		super(namespaceURI, elementLocalName, namespacePrefix);
+public class ConditionsBuilderImplTest {
+	public ConditionsBuilder testBuilder;
+
+	@Before
+	public void setUp() throws Exception {
+		testBuilder = new ConditionsBuilderImpl();
 	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.security.saml2.impl.AudienceBuilderImpl#create()}.
+	 */
+	@Test
+	public void testCreate() {
+		final Conditions audience = testBuilder.create();
+		assertNotNull(audience);
+	}
+
 }

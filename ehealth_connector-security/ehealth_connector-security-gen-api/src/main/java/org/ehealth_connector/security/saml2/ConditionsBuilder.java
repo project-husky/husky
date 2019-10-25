@@ -14,22 +14,19 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.security.hl7v3.impl;
-
-import org.ehealth_connector.security.hl7v3.OpenSamlPurposeOfUse;
+package org.ehealth_connector.security.saml2;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Implementation class of Interface OpenSaml PurposeOfUse.</div>
- * <div class="de">Implementations Klasse des Interfaces OpenSaml PurposeOfUse.</div>
+ * <div class="en">Interface describing the methods of the ConditionsBuilder.</div>
+ * <div class="de">Interface welches die Methoden des ConditionsBuilders beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class PurposeOfUseImpl extends AbstractImpl implements OpenSamlPurposeOfUse {
+public interface ConditionsBuilder extends SimpleBuilder<Conditions> {
 
-	protected PurposeOfUseImpl(String namespaceURI, String elementLocalName,
-			String namespacePrefix) {
-		super(namespaceURI, elementLocalName, namespacePrefix);
-	}
+	// There are no special methods defined, but the interface has to be
+	// declared for selection reasons.
+
 }

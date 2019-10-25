@@ -14,22 +14,32 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.security.hl7v3.impl;
 
-import org.ehealth_connector.security.hl7v3.OpenSamlPurposeOfUse;
+package org.ehealth_connector.security.saml2;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Implementation class of Interface OpenSaml PurposeOfUse.</div>
- * <div class="de">Implementations Klasse des Interfaces OpenSaml PurposeOfUse.</div>
+ * <div class="en">Interface describing the methods of Audience. </div>
+ * <div class="de">Interface welches die Methoden von Audience beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class PurposeOfUseImpl extends AbstractImpl implements OpenSamlPurposeOfUse {
+public interface Audience {
 
-	protected PurposeOfUseImpl(String namespaceURI, String elementLocalName,
-			String namespacePrefix) {
-		super(namespaceURI, elementLocalName, namespacePrefix);
-	}
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the AudienceURI.</div>
+	 * <div class="de">Methode um den AudienceURI zu erhalten.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return
+	 * <div class="en">the AudienceURI as {@link java.lang.String}</div>
+	 * <div class="de">die AudienceURI als {@link java.lang.String}</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	String getAudienceURI();
 }

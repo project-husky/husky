@@ -20,28 +20,26 @@ import java.util.List;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Interface describing the methods of AudienceRestriction. </div>
- * <div class="de">Interface welches die Methoden von AudienceRestriction beschreibt.</div>
+ * <div class="en">Interface describing the Conditions methods.</div>
+ * <div class="de">Interface welches die Conditions Methoden beschreibt.</div>
  * <div class="fr"></div>
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public interface AudienceRestriction {
-
+public interface Conditions {
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to get the Audiences.</div>
-	 * <div class="de">Methode um die Audiences zu erhalten.</div>
+	 * <div class="en">Method to get the AudienceRestriction.</div>
+	 * <div class="de">Methode um die AudienceRestriction zu erhalten.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
 	 * @return
-	 * <div class="en">a {@link java.util.List} of {@link org.ehealth_connector.security.saml2.Audience}s</div>
-	 * <div class="de">eine {@link java.util.List} von {@link org.ehealth_connector.security.saml2.Audience}s</div>
+	 * <div class="en">a {@link java.util.List} of {@link org.ehealth_connector.security.saml2.AudienceRestriction}s</div>
+	 * <div class="de">eine {@link java.util.List} von {@link org.ehealth_connector.security.saml2.AudienceRestriction}s</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	List<Audience> getAudiences();
-
+	List<AudienceRestriction> getAudienceRestrictions();
 }

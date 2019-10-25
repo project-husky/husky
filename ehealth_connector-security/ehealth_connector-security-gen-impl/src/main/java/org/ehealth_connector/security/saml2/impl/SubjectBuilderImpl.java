@@ -26,7 +26,12 @@ import org.opensaml.saml.saml2.core.NameID;
 import org.opensaml.saml.saml2.core.impl.NameIDBuilder;
 
 /**
- * @since Feb 22, 2018 9:26:34 AM
+ * <!-- @formatter:off -->
+ * <div class="en">Class implementing the corresponding interface for Subject building.</div>
+ * <div class="de">Die Klasse implementiert das entsprechende Interface um Subject bilden zu k&ouml;nnen.</div>
+ * <div class="fr"></div>
+ * <div class="it"></div>
+ * <!-- @formatter:on -->
  *
  */
 public class SubjectBuilderImpl implements SubjectBuilder,
@@ -42,12 +47,6 @@ public class SubjectBuilderImpl implements SubjectBuilder,
 		subject.setNameID(nameID);
 	}
 
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.saml2.SubjectBuilder#addSubjectConfirmations(org.ehealth_connector.security.saml2.SubjectConfirmation)
-	 */
 	@Override
 	public SubjectBuilder addSubjectConfirmations(SubjectConfirmation aSubjectConfirmation) {
 		if (aSubjectConfirmation != null) {
@@ -59,35 +58,28 @@ public class SubjectBuilderImpl implements SubjectBuilder,
 		return this;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.saml2.SubjectBuilder#create()
-	 */
 	@Override
 	public Subject create() {
 		return new SubjectImpl(subject);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.core.SecurityObjectBuilder#create(java.lang.Object)
-	 */
 	@Override
 	public Subject create(org.opensaml.saml.saml2.core.Subject aInternalObject) {
 		return new SubjectImpl(aInternalObject);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.saml2.SubjectBuilder#nameIDFormat(java.lang.String)
-	 */
 	@Override
 	public SubjectBuilder nameIDFormat(String aNameIDFormat) {
 		if (aNameIDFormat != null) {
 			subject.getNameID().setFormat(aNameIDFormat);
+		}
+		return this;
+	}
+
+	@Override
+	public SubjectBuilder nameIDNameQualifier(String aNameIDNameQualifier) {
+		if (aNameIDNameQualifier != null) {
+			subject.getNameID().setNameQualifier(aNameIDNameQualifier);
 		}
 		return this;
 	}
@@ -105,11 +97,6 @@ public class SubjectBuilderImpl implements SubjectBuilder,
 		return this;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.saml2.SubjectBuilder#subjectConfirmations(java.util.List)
-	 */
 	@Override
 	public SubjectBuilder subjectConfirmations(List<SubjectConfirmation> aSubjectConfirmations) {
 		if (aSubjectConfirmations != null) {
@@ -121,5 +108,4 @@ public class SubjectBuilderImpl implements SubjectBuilder,
 		}
 		return this;
 	}
-
 }

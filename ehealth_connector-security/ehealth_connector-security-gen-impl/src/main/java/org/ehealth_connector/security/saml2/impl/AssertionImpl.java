@@ -26,6 +26,7 @@ import org.ehealth_connector.security.saml2.Attribute;
 import org.ehealth_connector.security.saml2.AudienceRestriction;
 import org.ehealth_connector.security.saml2.AuthnStatement;
 import org.ehealth_connector.security.saml2.Condition;
+import org.ehealth_connector.security.saml2.Conditions;
 import org.ehealth_connector.security.saml2.Subject;
 import org.joda.time.DateTime;
 
@@ -91,8 +92,22 @@ public class AssertionImpl
 	}
 
 	@Override
+	public Conditions getConditions() {
+		if (assertion.getConditions() != null) {
+			return new ConditionsBuilderImpl().create(assertion.getConditions());
+		}
+		return null;
+	}
+
+	@Override
 	public List<AudienceRestriction> getConditionsAudienceRestrictions() {
 		final List<AudienceRestriction> retVal = new ArrayList<>();
+		if (assertion.getConditions() != null
+				&& assertion.getConditions().getAudienceRestrictions() != null) {
+			assertion.getConditions().getAudienceRestrictions().forEach(audres -> {
+				retVal.add(new AudienceRestrictionBuilderImpl().create(audres));
+			});
+		}
 		return retVal;
 	}
 
@@ -177,7 +192,7 @@ public class AssertionImpl
 	@Override
 	public Subject getSubject() {
 		if (assertion.getSubject() != null) {
-			return new SubjectBuilderImpl().create();
+			return new SubjectBuilderImpl().create(assertion.getSubject());
 		}
 		return null;
 	}

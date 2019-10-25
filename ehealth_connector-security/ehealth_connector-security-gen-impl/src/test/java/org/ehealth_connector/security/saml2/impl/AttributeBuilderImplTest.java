@@ -18,6 +18,8 @@ package org.ehealth_connector.security.saml2.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import org.ehealth_connector.security.hl7v3.Role;
+import org.ehealth_connector.security.hl7v3.impl.RoleBuilder;
 import org.ehealth_connector.security.saml2.Attribute;
 import org.ehealth_connector.security.saml2.AttributeBuilder;
 import org.junit.Before;
@@ -27,6 +29,8 @@ public class AttributeBuilderImplTest {
 
 	private String testAttributeName;
 	private String testAttributeValue;
+	public Role testAttributeValueRole;
+
 	public AttributeBuilder testBuilder;
 
 	@Before
@@ -34,6 +38,10 @@ public class AttributeBuilderImplTest {
 		testBuilder = new AttributeBuilderImpl();
 		testAttributeName = "My Attribute Name";
 		testAttributeValue = "My Attribute Value";
+
+		testAttributeValueRole = new RoleBuilder().buildObject();
+		testAttributeValueRole.setCode("My Code");
+		testAttributeValueRole.setCode("My Code System");
 	}
 
 	/**
@@ -53,7 +61,12 @@ public class AttributeBuilderImplTest {
 	@Test
 	public void testValue() {
 		final Attribute ref = testBuilder.value(testAttributeValue).create();
-		assertEquals(testAttributeValue, ref.getValue());
+		assertEquals(testAttributeValue, ref.getValueAsString());
+	}
+
+	public void testValueRole() {
+		final Attribute ref = testBuilder.value(testAttributeValueRole).create();
+		assertEquals(testAttributeValueRole, ref.getValueAsRole());
 	}
 
 }

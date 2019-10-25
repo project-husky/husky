@@ -17,9 +17,17 @@
 package org.ehealth_connector.security.saml2.impl;
 
 import org.ehealth_connector.security.core.SecurityObjectBuilder;
+import org.ehealth_connector.security.hl7v3.InstanceIdentifier;
+import org.ehealth_connector.security.hl7v3.OpenSamlInstanceIdentifier;
+import org.ehealth_connector.security.hl7v3.OpenSamlPurposeOfUse;
+import org.ehealth_connector.security.hl7v3.OpenSamlRole;
+import org.ehealth_connector.security.hl7v3.PurposeOfUse;
+import org.ehealth_connector.security.hl7v3.Role;
 import org.ehealth_connector.security.saml2.Attribute;
 import org.ehealth_connector.security.saml2.AttributeBuilder;
+import org.opensaml.core.xml.schema.XSAny;
 import org.opensaml.core.xml.schema.XSString;
+import org.opensaml.core.xml.schema.impl.XSAnyBuilder;
 import org.opensaml.core.xml.schema.impl.XSStringBuilder;
 import org.opensaml.saml.saml2.core.AttributeValue;
 
@@ -115,6 +123,21 @@ public class AttributeBuilderImpl implements AttributeBuilder,
 		return this;
 	}
 
+	@Override
+	public AttributeBuilder value(Object aValue) {
+		final XSAnyBuilder anyBuilder = new XSAnyBuilder();
+		final XSAny any = anyBuilder.buildObject(AttributeValue.DEFAULT_ELEMENT_NAME);
+		if (aValue instanceof Role) {
+			any.getUnknownXMLObjects().add((OpenSamlRole) aValue);
+		} else if (aValue instanceof PurposeOfUse) {
+			any.getUnknownXMLObjects().add((OpenSamlPurposeOfUse) aValue);
+		} else if (aValue instanceof InstanceIdentifier) {
+			any.getUnknownXMLObjects().add((OpenSamlInstanceIdentifier) aValue);
+		}
+		attribute.getAttributeValues().add(any);
+		return this;
+	}
+
 	/**
 	 * {@inheritDoc}
 	 *
@@ -132,5 +155,4 @@ public class AttributeBuilderImpl implements AttributeBuilder,
 
 		return this;
 	}
-
 }

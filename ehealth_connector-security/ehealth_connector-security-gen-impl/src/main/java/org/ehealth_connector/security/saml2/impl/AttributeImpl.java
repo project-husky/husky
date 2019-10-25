@@ -17,6 +17,9 @@
 package org.ehealth_connector.security.saml2.impl;
 
 import org.ehealth_connector.security.core.SecurityObject;
+import org.ehealth_connector.security.hl7v3.InstanceIdentifier;
+import org.ehealth_connector.security.hl7v3.PurposeOfUse;
+import org.ehealth_connector.security.hl7v3.Role;
 import org.ehealth_connector.security.saml2.Attribute;
 import org.opensaml.core.xml.schema.XSString;
 
@@ -73,15 +76,43 @@ public class AttributeImpl
 		return attribute.getNameFormat();
 	}
 
+	@Override
+	public InstanceIdentifier getValueAsInstanceIdentifier() {
+		if (isValueAInstanceIdentifier()) {
+			final InstanceIdentifier attributeValue = (InstanceIdentifier) attribute
+					.getAttributeValues().get(0);
+			return attributeValue;
+		}
+		return null;
+	}
+
+	@Override
+	public PurposeOfUse getValueAsPurposeOfUse() {
+		if (isValueAPurposeOfUse()) {
+			final PurposeOfUse attributeValue = (PurposeOfUse) attribute.getAttributeValues()
+					.get(0);
+			return attributeValue;
+		}
+		return null;
+	}
+
+	@Override
+	public Role getValueAsRole() {
+		if (isValueARole()) {
+			final Role attributeValue = (Role) attribute.getAttributeValues().get(0);
+			return attributeValue;
+		}
+		return null;
+	}
+
 	/**
 	 * {@inheritDoc}
 	 *
 	 * @see org.ehealth_connector.security.saml2.Attribute#getValue()
 	 */
 	@Override
-	public String getValue() {
-		if ((attribute.getAttributeValues() != null)
-				&& (attribute.getAttributeValues().size() > 0)) {
+	public String getValueAsString() {
+		if (isValueAString()) {
 			final XSString attributeValue = (XSString) attribute.getAttributeValues().get(0);
 			return attributeValue.getValue();
 		}
@@ -98,4 +129,33 @@ public class AttributeImpl
 	public org.opensaml.saml.saml2.core.Attribute getWrappedObject() {
 		return attribute;
 	}
+
+	@Override
+	public boolean isValueAInstanceIdentifier() {
+		return (attribute.getAttributeValues() != null) //
+				&& (attribute.getAttributeValues().size() > 0) //
+				&& (attribute.getAttributeValues().get(0) instanceof InstanceIdentifier);
+	}
+
+	@Override
+	public boolean isValueAPurposeOfUse() {
+		return (attribute.getAttributeValues() != null) //
+				&& (attribute.getAttributeValues().size() > 0) //
+				&& (attribute.getAttributeValues().get(0) instanceof PurposeOfUse);
+	}
+
+	@Override
+	public boolean isValueARole() {
+		return (attribute.getAttributeValues() != null) //
+				&& (attribute.getAttributeValues().size() > 0) //
+				&& (attribute.getAttributeValues().get(0) instanceof Role);
+	}
+
+	@Override
+	public boolean isValueAString() {
+		return (attribute.getAttributeValues() != null) //
+				&& (attribute.getAttributeValues().size() > 0) //
+				&& (attribute.getAttributeValues().get(0) instanceof XSString);
+	}
+
 }

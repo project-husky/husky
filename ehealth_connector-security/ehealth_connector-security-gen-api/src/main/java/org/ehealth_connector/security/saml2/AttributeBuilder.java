@@ -89,6 +89,8 @@ public interface AttributeBuilder extends SimpleBuilder<Attribute> {
 	 */
 	AttributeBuilder nameFormat(String aNameFormat);
 
+	AttributeBuilder value(Object aValue);
+
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to set the value of the Attribute to be build.</div>

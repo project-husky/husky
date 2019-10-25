@@ -14,22 +14,38 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.security.hl7v3.impl;
 
-import org.ehealth_connector.security.hl7v3.OpenSamlPurposeOfUse;
+package org.ehealth_connector.security.saml2.impl;
+
+import org.ehealth_connector.security.core.SecurityObject;
+import org.ehealth_connector.security.saml2.Audience;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Implementation class of Interface OpenSaml PurposeOfUse.</div>
- * <div class="de">Implementations Klasse des Interfaces OpenSaml PurposeOfUse.</div>
+ * <div class="en">Implementation class of Audience</div>
+ * <div class="de">Implementations Klasse von Audience</div>
  * <div class="fr"></div>
  * <div class="it"></div>
+ *
  * <!-- @formatter:on -->
  */
-public class PurposeOfUseImpl extends AbstractImpl implements OpenSamlPurposeOfUse {
+public class AudienceImpl
+		implements Audience, SecurityObject<org.opensaml.saml.saml2.core.Audience> {
 
-	protected PurposeOfUseImpl(String namespaceURI, String elementLocalName,
-			String namespacePrefix) {
-		super(namespaceURI, elementLocalName, namespacePrefix);
+	private org.opensaml.saml.saml2.core.Audience wrappedObject;
+
+	protected AudienceImpl(org.opensaml.saml.saml2.core.Audience aInternalObject) {
+		wrappedObject = aInternalObject;
 	}
+
+	@Override
+	public String getAudienceURI() {
+		return wrappedObject.getAudienceURI();
+	}
+
+	@Override
+	public org.opensaml.saml.saml2.core.Audience getWrappedObject() {
+		return wrappedObject;
+	}
+
 }

@@ -26,7 +26,7 @@ import java.util.List;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public interface ArtifactResponse extends Base {
+public interface ArtifactResponse extends SignatureBase {
 
 	/**
 	 *

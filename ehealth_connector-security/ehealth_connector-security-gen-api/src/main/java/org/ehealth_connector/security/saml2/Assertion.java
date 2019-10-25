@@ -29,7 +29,7 @@ import org.ehealth_connector.security.core.SecurityHeaderElement;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public interface Assertion extends Base, SecurityHeaderElement {
+public interface Assertion extends SignatureBase, SecurityHeaderElement {
 
 	/**
 	 * * <!-- @formatter:off -->
@@ -65,6 +65,22 @@ public interface Assertion extends Base, SecurityHeaderElement {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Method to get the Conditions.</div>
+	 * <div class="de">Methode um die Conditions zu holen.</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 *
+	 * @return
+	 * <div class="en">a {@link java.util.List} of  {@link org.ehealth_connector.security.saml2.Condition}</div>
+	 * <div class="de">eine {@link java.util.List} von {@link org.ehealth_connector.security.saml2.Condition}</div>
+	 * <div class="fr"></div>
+	 * <div class="it"></div>
+	 * <!-- @formatter:on -->
+	 */
+	Conditions getConditions();
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Method to get the AudienceRestrictions.</div>
 	 * <div class="de">Methode um die AudienceRestrictions zu holen.</div>
 	 * <div class="fr"></div>
@@ -81,8 +97,8 @@ public interface Assertion extends Base, SecurityHeaderElement {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Method to get the Conditions.</div>
-	 * <div class="de">Methode um die Conditions zu holen.</div>
+	 * <div class="en">Method to get the ConditionsConditions.</div>
+	 * <div class="de">Methode um die ConditionsConditions zu holen.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 *
@@ -142,21 +158,5 @@ public interface Assertion extends Base, SecurityHeaderElement {
 	 * <!-- @formatter:on -->
 	 */
 	Subject getSubject();
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Method check if signature is set.</div>
-	 * <div class="de">Methode um zu pruefen ob Signatur gesetzt ist.</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>
-	 *
-	 * @return
-	 * <div class="en">true if signature element is set.</div>
-	 * <div class="de">wahr wenn Signatur Element vorhanden.</div>
-	 * <div class="fr"></div>
-	 * <div class="it"></div>
-	 * <!-- @formatter:on -->
-	 */
-	boolean hasSignature();
 
 }

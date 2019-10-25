@@ -114,4 +114,14 @@ public class ArtifactResponseImpl
 		return wrappedObject;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.security.saml2.Response#hasSignature()
+	 */
+	@Override
+	public boolean hasSignature() {
+		return (wrappedObject.getSignature() != null);
+	}
+
 }

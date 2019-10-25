@@ -17,6 +17,7 @@
 package org.ehealth_connector.security.communication.clients.impl;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.StringWriter;
@@ -50,6 +51,7 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
+import org.apache.commons.fileupload.MultipartStream;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
@@ -169,18 +171,63 @@ public abstract class AbstractSoapClient<T> {
 	protected T execute(HttpPost post)
 			throws ClientSendException, ClientProtocolException, IOException {
 		final CloseableHttpClient httpclient = getHttpClient();
-
 		final CloseableHttpResponse response = httpclient.execute(post);
-		final HttpEntity errorEntity = response.getEntity();
-		final String content = EntityUtils.toString(errorEntity);
+
+		final HttpEntity responseEntity = response.getEntity();
+		logger.debug(responseEntity.getContentType().getValue());
+
+		String content = EntityUtils.toString(responseEntity);
+
+		if (responseEntity.getContentType().getValue().startsWith("multipart")) {
+			// "Content-Type: multipart/related; type="application/xop+xml";
+			// boundary="uuid:fa4b0428-f40b-4239-a697-ded3451fceb4";
+			// start="<root.message@cxf.apache.org>";
+			// start-info="application/soap+xml"
+			logger.debug("Multiparted Message\n" + content);
+
+			final byte[] boundary = getBoundary(responseEntity.getContentType().getValue());
+			logger.debug("Boundary: " + new String(boundary));
+
+			final MultipartStream multipartStream = new MultipartStream(
+					new ByteArrayInputStream(content.getBytes()), boundary, 16384, null);
+
+			boolean nextPart = multipartStream.skipPreamble();
+			while (nextPart) {
+				final String header = multipartStream.readHeaders();
+				logger.debug("");
+				logger.debug("Headers:");
+				logger.debug(header);
+				logger.debug("Body:");
+				final ByteArrayOutputStream out = new ByteArrayOutputStream();
+				multipartStream.readBodyData(out);
+				content = out.toString();
+				logger.debug(content);
+				out.close();
+				logger.debug("");
+				nextPart = multipartStream.readBoundary();
+			}
+
+		}
 		logger.debug("SOAP Message\n" + content);
+
 		if ((response.getStatusLine() != null)
 				&& (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK)) {
 			return parseResponse(content);
 		} else {
-
 			return parseResponseError(content);
 		}
+	}
+
+	protected byte[] getBoundary(String value) {
+		final String[] splits = value.split(";");
+		for (final String split : splits) {
+			if (split.trim().startsWith("boundary")) {
+				String boundaryWith = split.trim().split("=")[1];
+				boundaryWith = boundaryWith.substring(1, boundaryWith.length() - 1);
+				return boundaryWith.getBytes();
+			}
+		}
+		return null;
 	}
 
 	protected SoapClientConfig getConfig() {
