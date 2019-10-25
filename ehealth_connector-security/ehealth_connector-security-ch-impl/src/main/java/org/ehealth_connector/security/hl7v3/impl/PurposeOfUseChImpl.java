@@ -29,15 +29,30 @@ import org.ehealth_connector.security.hl7v3.PurposeOfUse;
 public abstract class PurposeOfUseChImpl {
 
 	/**
+	 * Normal access.
+	 *
+	 * @return the purpose of use
+	 */
+	public static PurposeOfUse AUTO() {
+		return createPurposeOfUse(
+				org.ehealth_connector.security.ch.epr.enums.PurposeOfUse.AUTOMATIC_UPLOAD);
+	}
+
+	private static PurposeOfUse createPurposeOfUse(
+			org.ehealth_connector.security.ch.epr.enums.PurposeOfUse code) {
+		return new PurposeOfUseBuilder().code(code.getCodeValue())
+				.codeSystem(code.getCodeSystemId()).codeSystemName(code.getValueSetName())
+				.displayName(code.getDisplayName()).buildObject();
+	}
+
+	/**
 	 * Emergency access.
 	 *
 	 * @return the purpose of use
 	 */
 	public static PurposeOfUse EMER() {
-		org.ehealth_connector.security.ch.epr.enums.PurposeOfUse code = org.ehealth_connector.security.ch.epr.enums.PurposeOfUse.EMERGENCY_ACCESS;
-		return new PurposeOfUseBuilder().code(code.getCodeValue())
-				.codeSystem(code.getCodeSystemId()).codeSystemName(code.getValueSetName())
-				.displayName(code.getDisplayName()).buildObject();
+		return createPurposeOfUse(
+				org.ehealth_connector.security.ch.epr.enums.PurposeOfUse.EMERGENCY_ACCESS);
 	}
 
 	/**
@@ -46,10 +61,8 @@ public abstract class PurposeOfUseChImpl {
 	 * @return the purpose of use
 	 */
 	public static PurposeOfUse NORM() {
-		org.ehealth_connector.security.ch.epr.enums.PurposeOfUse code = org.ehealth_connector.security.ch.epr.enums.PurposeOfUse.NORMAL_ACCESS;
-		return new PurposeOfUseBuilder().code(code.getCodeValue())
-				.codeSystem(code.getCodeSystemId()).codeSystemName(code.getValueSetName())
-				.displayName(code.getDisplayName()).buildObject();
+		return createPurposeOfUse(
+				org.ehealth_connector.security.ch.epr.enums.PurposeOfUse.NORMAL_ACCESS);
 	}
 
 }
