@@ -221,7 +221,7 @@ public class Destination {
 	}
 
 	@Override
-	protected Destination clone() throws CloneNotSupportedException {
+	public Destination clone() throws CloneNotSupportedException {
 		final Destination clone = new Destination();
 		clone.keyStore = this.keyStore;
 		clone.keyStorePassword = this.keyStorePassword;
