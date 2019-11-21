@@ -220,6 +220,24 @@ public class Destination {
 		setKeyStore();
 	}
 
+	@Override
+	protected Destination clone() throws CloneNotSupportedException {
+		final Destination clone = new Destination();
+		clone.keyStore = this.keyStore;
+		clone.keyStorePassword = this.keyStorePassword;
+		clone.keyStoreType = this.keyStoreType;
+		clone.receiverApplicationOid = this.receiverApplicationOid;
+		clone.receiverFacilityOid = this.receiverFacilityOid;
+		clone.senderApplicationOid = this.senderApplicationOid;
+		clone.senderFacilityOid = this.senderFacilityOid;
+		clone.senderOrganizationalOid = this.senderOrganizationalOid;
+		clone.trustStore = this.trustStore;
+		clone.trustStorePassword = this.trustStorePassword;
+		clone.trustStoreType = this.trustStoreType;
+		clone.uri = this.uri;
+		return clone;
+	}
+
 	/**
 	 * Gets the path to the keystore
 	 *
