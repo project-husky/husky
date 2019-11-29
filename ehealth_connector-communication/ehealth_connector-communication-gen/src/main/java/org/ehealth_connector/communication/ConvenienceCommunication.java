@@ -52,6 +52,7 @@ import org.openhealthtools.ihe.atna.auditor.XDSSourceAuditor;
 import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
 import org.openhealthtools.ihe.common.hl7v2.CX;
 import org.openhealthtools.ihe.utils.OID;
+import org.openhealthtools.ihe.xds.XDSConstants;
 import org.openhealthtools.ihe.xds.consumer.B_Consumer;
 import org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveDocumentSetRequestType;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
@@ -360,7 +361,7 @@ public class ConvenienceCommunication {
 			if (metadataDoc != null) {
 				docMetadata = new DocumentMetadata(txnData.getDocumentEntry(docEntryUUID));
 				docMetadata.setEntryUUID("toreplace");
-				String metadataDocUUID = txnData.addDocument(metadataDoc);
+				final String metadataDocUUID = txnData.addDocument(metadataDoc);
 				docMetadata = new DocumentMetadata(txnData.getDocumentEntry(metadataDocUUID));
 				txnData.getDocList().remove(txnData.getDocList().size() - 1);
 				txnData.getMetadata().getSubmissionSet().getAssociatedDocuments()
@@ -418,7 +419,7 @@ public class ConvenienceCommunication {
 		final XUAAssertion ohtAssertion = new XUAAssertion(assertionElement);
 		xuaContext.cacheAssertion(ohtAssertion);
 		xuaContext.getConfig().getXUAEnabledActions()
-				.add("urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b");
+				.add(XDSConstants.PROVIDE_AND_REGISTER_DOCUMENT_SET_ACTION);
 		AuditorModuleContext.getContext().getConfig()
 				.setSystemUserName(ohtAssertion.getAtnaUsername());
 		xuaContext.setXUAEnabled(true);
