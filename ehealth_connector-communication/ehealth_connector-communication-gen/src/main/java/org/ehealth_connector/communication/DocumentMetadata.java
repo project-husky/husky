@@ -721,6 +721,16 @@ public class DocumentMetadata {
 	}
 
 	/**
+	 *
+	 * Method to set the AvailabilityStatusType;
+	 *
+	 * @param availabilityStatus the availability status to set
+	 */
+	public void setAvailabilityStatus(AvailabilityStatusType availabilityStatus) {
+		xDoc.setAvailabilityStatus(availabilityStatus);
+	}
+
+	/**
 	 * Sets the (required, but in principle computable) class code, which
 	 * defines the class of the document (e.g. Code for "Consultation")
 	 *
