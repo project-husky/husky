@@ -956,6 +956,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 			// use a transformer to improve the output of the xml
 			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
 
 			// initialize StreamResult with File object to save to file
 			final StreamResult result = new StreamResult(new StringWriter());
@@ -964,7 +965,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 
 			final String xmlString = result.getWriter().toString();
 
-			log.debug(test + "\r" + xmlString);
+			log.debug(test + "\n" + xmlString);
 		} catch (final Exception e) {
 			log.debug(test + " problem encountered in printMessage");
 		}
