@@ -312,10 +312,11 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 		log.debug("add demographic data");
 		addDemographicData(patient, v3RecordAddedMessage);
 		try {
-			printMessage("addPatient", v3RecordAddedMessage.getV3RecordAddedMessage().getRequest());
+			printMessage("sourceAdd(req)",
+					v3RecordAddedMessage.getV3RecordAddedMessage().getRequest());
 			final V3PixSourceAcknowledgement v3pixack = pixSource
 					.sendRecordAdded(v3RecordAddedMessage.getV3RecordAddedMessage());
-			printMessage("sendRecordAdded", v3pixack.getRequest());
+			printMessage("sourceAdd(res)", v3pixack.getRequest());
 			ret = checkResponse(v3pixack);
 		} catch (final Exception e) {
 			log.error("addPatient failed", e);
@@ -919,11 +920,11 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 		v3pixSourceMsgMerge.getV3MergePatientsMessage().setObsoletePatientID(obsoleteId,
 				this.homeCommunityOid, this.adapterCfg.getHomeCommunityNamespace());
 		try {
-			printMessage("sourceMerge",
+			printMessage("sourceMerge(req)",
 					v3pixSourceMsgMerge.getV3MergePatientsMessage().getRequest());
 			final V3PixSourceAcknowledgement v3pixack = pixSource
 					.sendMergePatients(v3pixSourceMsgMerge.getV3MergePatientsMessage());
-			printMessage("sourceMerge", v3pixack.getRequest());
+			printMessage("sourceMerge(res)", v3pixack.getRequest());
 			ret = checkResponse(v3pixack);
 		} catch (final Exception e) {
 			log.error("mergePatient failed", e);
@@ -1047,7 +1048,9 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 			}
 			V3PixConsumerResponse v3PixConsumerResponse = null;
 			try {
+				printMessage("sourceQuery(req)", v3PixConsumerQuery.getRequest());
 				v3PixConsumerResponse = v3PixConsumer.sendQuery(v3PixConsumerQuery);
+				printMessage("sourceQuery(res)", v3PixConsumerResponse.getRequest());
 				if (domainToReturnOids != null) {
 					final String[] returnIds = new String[domainToReturnOids.length];
 					for (int i = 0; i < returnIds.length; ++i) {
@@ -1090,8 +1093,11 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 			if (!mpiQuery.doCancelQuery()) {
 				V3PdqConsumerResponse lastPdqConsumerResponse = null;
 				if (!mpiQuery.doContinueQuery()) {
+					printMessage("consumerQuery(req)",
+							mpiQuery.getV3PdqConsumerQuery().getRequest());
 					lastPdqConsumerResponse = v3PdqConsumer
 							.sendQuery(mpiQuery.getV3PdqConsumerQuery());
+					printMessage("consumerQuery(res)", lastPdqConsumerResponse.getRequest());
 				} else {
 					lastPdqConsumerResponse = mpiQuery.getLastPdqConsumerResponse();
 					final V3PdqContinuationQuery continuationQuery = new V3PdqContinuationQuery(
@@ -1101,7 +1107,10 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 							mpiQuery.getV3PdqConsumerQuery().getReceivingFacility(0),
 							lastPdqConsumerResponse, mpiQuery.getPageCount());
 					continuationQuery.setProcessingCode("T");
+					printMessage("consumerQuery(req,continue)", continuationQuery.getRequest());
 					lastPdqConsumerResponse = v3PdqConsumer.sendContinuation(continuationQuery);
+					printMessage("consumerQuery(res,continue)",
+							lastPdqConsumerResponse.getRequest());
 				}
 				queryResponse.setPatients(getPatientsFromPdqQuery(lastPdqConsumerResponse));
 				queryResponse.setSuccess(!lastPdqConsumerResponse.hasError());
@@ -1122,7 +1131,9 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 						mpiQuery.getV3PdqConsumerQuery().getReceivingApplication(0),
 						mpiQuery.getV3PdqConsumerQuery().getReceivingFacility(0),
 						lastPdqConsumerResponse);
+				printMessage("consumerQuery(req,cancel)", continuationCancel.getRequest());
 				final V3GenericAcknowledgement v3Ack = v3PdqConsumer.sendCancel(continuationCancel);
+				printMessage("consumerQuery(res,cancel)", v3Ack.getRequest());
 				queryResponse.setSuccess(!v3Ack.hasError());
 			}
 		} catch (final Exception e) {
@@ -1720,11 +1731,11 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 				adapterCfg.getReceiverFacilityOid());
 		addDemographicData(patient, v3RecordRevisedMessage);
 		try {
-			printMessage("sourceUpdate",
+			printMessage("sourceUpdate(req)",
 					v3RecordRevisedMessage.getV3RecordRevisedMessage().getRequest());
 			final V3PixSourceAcknowledgement v3pixack = pixSource
 					.sendRecordRevised(v3RecordRevisedMessage.getV3RecordRevisedMessage());
-			printMessage("sourceUpdate", v3pixack.getRequest());
+			printMessage("sourceUpdate(res)", v3pixack.getRequest());
 			return checkResponse(v3pixack);
 		} catch (final Exception e) {
 			log.error("updatePatient failed", e);
