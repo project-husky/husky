@@ -25,7 +25,7 @@ import org.ehealth_connector.common.mdht.Code;
  */
 public enum PharmaceuticalAdviceStatusList {
 
-	CANCEL("CANCEL"), CHANGE("CHANGE"), OK("OK"), REFUSE("REFUSE"), SUSPEND("SUSPEND");
+	CANCEL("CANCEL"), CHANGE("CHANGE"), OK("OK"), REFUSE("REFUSE"), SUSPEND("SUSPEND"), COMMENT("COMMENT");
 
 	/** The Constant CODE_SYSTEM_NAME. */
 	public static final String CODE_SYSTEM_NAME = "IHE Pharmaceutical Advice Status List";
