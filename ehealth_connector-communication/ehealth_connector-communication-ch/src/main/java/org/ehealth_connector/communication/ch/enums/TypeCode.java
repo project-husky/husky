@@ -27,8 +27,8 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Type of document as per Annex 3  EPRO-FDHA.<br clear="none"/><br clear="none"/>The code defines a document’s type (e.g. discharge report, laboratory report). Each document type should be assigned to precisely one document class.<br clear="none"/></div>
- * <div class="de">Typ des Dokumentes (2.16.756.5.30.1.127.3.10.1.27) gemäss Anhang 3 der Verordnungen zum EPDG.<br clear="none"/><br clear="none"/>Der Code definiert den Typ eines Dokuments (z.B.  Austrittsbericht, Labor-Bericht). Jeder Dokumenten-Typ sollte genau einer Dokumentenklasse zugeordnet sein.<br clear="none"/></div>
+ * <div class="en">Type of document as per Annex 3 EPRO-FDHA.<br clear="none"/><br clear="none"/>The code defines a document’s type (e.g. discharge report, laboratory report). Each document type should be assigned to precisely one document class.<br clear="none"/></div>
+ * <div class="de">Typ des Dokumentes (2.16.756.5.30.1.127.3.10.1.27) gemäss Anhang 3 der Verordnungen zum EPDG.<br clear="none"/><br clear="none"/>Der Code definiert den Typ eines Dokuments (z.B. Austrittsbericht, Labor-Bericht). Jeder Dokumenten-Typ sollte genau einer Dokumentenklasse zugeordnet sein.<br clear="none"/></div>
  * <div class="fr">Type du document selon l'annexe 3 ODEP-DFI.<br clear="none"/><br clear="none"/>Le code définit le type de document (p. ex. rapport de sortie, rapport de laboratoire). Chaque type de document doit être  associé à une seule classification.<br clear="none"/></div>
  * <div class="it">Tipo di documento secondo l'allegato 3 OCIP-DFI.<br clear="none"/><br clear="none"/>Il codice definisce il tipo di documento (p. es. rapporto di dimissione, rapporto di laboratorio). Ciascun tipo di documento dovrebbe essere associato a una sola classe di documenti.<br clear="none"/></div>
  * <!-- @formatter:on -->
@@ -40,68 +40,69 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Allergy record</div>
 	 * <div class="de">Allergieausweis</div>
-	 * <div class="fr">TODO</div>
-	 * <div class="it">TODO</div>
+	 * <div class="fr">Carnet des allergies</div>
+	 * <div class="it">Passaporto delle allergie</div>
 	 * <!-- @formatter:on -->
 	 */
 	ALLERGY_RECORD("722446000", "2.16.840.1.113883.6.96", "Allergy record (record artifact)",
-			"Allergy record", "Allergieausweis", "TODO", "TODO"),
+			"Allergy record", "Allergieausweis", "Carnet des allergies",
+			"Passaporto delle allergie"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Clinical Management plan</div>
 	 * <div class="de">Behandlungsplan</div>
-	 * <div class="fr">TODO</div>
-	 * <div class="it">TODO</div>
+	 * <div class="fr">Plan de traitement</div>
+	 * <div class="it">Piano di trattamento</div>
 	 * <!-- @formatter:on -->
 	 */
 	CLINICAL_MANAGEMENT_PLAN("737427001", "2.16.840.1.113883.6.96",
 			"Clinical Management plan (record artifact)", "Clinical Management plan",
-			"Behandlungsplan", "TODO", "TODO"),
+			"Behandlungsplan", "Plan de traitement", "Piano di trattamento"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Consultation report</div>
 	 * <div class="de">Beurteilung durch Fachspezialisten</div>
-	 * <div class="fr">Rapport de consultation</div>
-	 * <div class="it">Rapporto di consultazione</div>
+	 * <div class="fr">Évaluation par des spécialistes</div>
+	 * <div class="it">Valutazione dello specialista</div>
 	 * <!-- @formatter:on -->
 	 */
 	CONSULTATION_REPORT("371530004", "2.16.840.1.113883.6.96",
 			"Clinical consultation report (record artifact)", "Consultation report",
-			"Beurteilung durch Fachspezialisten", "Rapport de consultation",
-			"Rapporto di consultazione"),
+			"Beurteilung durch Fachspezialisten", "Évaluation par des spécialistes",
+			"Valutazione dello specialista"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Discharge summary</div>
 	 * <div class="de">Austrittsbericht</div>
-	 * <div class="fr">Lettre de sortie</div>
-	 * <div class="it">Rapporto/lettera d'uscita</div>
+	 * <div class="fr">Rapport de sortie</div>
+	 * <div class="it">Rapporto di dimissione</div>
 	 * <!-- @formatter:on -->
 	 */
 	DISCHARGE_SUMMARY("373942005", "2.16.840.1.113883.6.96", "Discharge summary (record artifact)",
-			"Discharge summary", "Austrittsbericht", "Lettre de sortie",
-			"Rapporto/lettera d'uscita"),
+			"Discharge summary", "Austrittsbericht", "Rapport de sortie", "Rapporto di dimissione"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Emergency department record</div>
 	 * <div class="de">Notfallberichtt</div>
-	 * <div class="fr">TODO</div>
-	 * <div class="it">TODO</div>
+	 * <div class="fr">Rapport d’urgence</div>
+	 * <div class="it">Referto di pronto soccorso</div>
 	 * <!-- @formatter:on -->
 	 */
 	EMERGENCY_DEPARTMENT_RECORD("445300006", "2.16.840.1.113883.6.96",
 			"Emergency department record (record artifact)", "Emergency department record",
-			"Notfallberichtt", "TODO", "TODO"),
+			"Notfallberichtt", "Rapport d’urgence", "Referto di pronto soccorso"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">History and physical report</div>
 	 * <div class="de">Anamnese / Untersuchungsbericht</div>
-	 * <div class="fr">TODO</div>
-	 * <div class="it">TODO</div>
+	 * <div class="fr">Anamnèse / rapport d’analyse</div>
+	 * <div class="it">Anamnesi / Rapporto di visita medica</div>
 	 * <!-- @formatter:on -->
 	 */
 	HISTORY_AND_PHYSICAL_REPORT("371529009", "2.16.840.1.113883.6.96",
 			"History and physical report (record artifact)", "History and physical report",
-			"Anamnese / Untersuchungsbericht", "TODO", "TODO"),
+			"Anamnese / Untersuchungsbericht", "Anamnèse / rapport d’analyse",
+			"Anamnesi / Rapporto di visita medica"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Image</div>
@@ -116,182 +117,191 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Imaging Order</div>
 	 * <div class="de">Bildgebungsauftrag</div>
-	 * <div class="fr">TODO</div>
-	 * <div class="it">TODO</div>
+	 * <div class="fr">Mandat d’imagerie</div>
+	 * <div class="it">Richiesta di immaginografia</div>
 	 * <!-- @formatter:on -->
 	 */
 	IMAGING_ORDER("2161000195103", "2.16.756.5.30.1.127.3.4", "Imaging order (record articact)",
-			"Imaging Order", "Bildgebungsauftrag", "TODO", "TODO"),
+			"Imaging Order", "Bildgebungsauftrag", "Mandat d’imagerie",
+			"Richiesta di immaginografia"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Imaging report</div>
 	 * <div class="de">Befundbericht zur Bildgebung</div>
-	 * <div class="fr">TODO</div>
-	 * <div class="it">TODO</div>
+	 * <div class="fr">Rapport de résultat relatif à l’imagerie</div>
+	 * <div class="it">Referto di immaginografia</div>
 	 * <!-- @formatter:on -->
 	 */
 	IMAGING_REPORT("4201000179104", "2.16.840.1.113883.6.96", "Imaging report (record artifact)",
-			"Imaging report", "Befundbericht zur Bildgebung", "TODO", "TODO"),
+			"Imaging report", "Befundbericht zur Bildgebung",
+			"Rapport de résultat relatif à l’imagerie", "Referto di immaginografia"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Immunization record</div>
 	 * <div class="de">Impfausweis</div>
-	 * <div class="fr">Certificat de vaccination</div>
+	 * <div class="fr">Carnet de vaccination</div>
 	 * <div class="it">Certificato di vaccinazione</div>
 	 * <!-- @formatter:on -->
 	 */
 	IMMUNIZATION_RECORD("41000179103", "2.16.840.1.113883.6.96",
 			"Immunization record (record artifact)", "Immunization record", "Impfausweis",
-			"Certificat de vaccination", "Certificato di vaccinazione"),
+			"Carnet de vaccination", "Certificato di vaccinazione"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Laboratory Order</div>
 	 * <div class="de">Laborauftrag</div>
-	 * <div class="fr">TODO</div>
-	 * <div class="it">TODO</div>
+	 * <div class="fr">Mandat d’analyse en laboratoire</div>
+	 * <div class="it">Richiesta di analisi di laboratorio</div>
 	 * <!-- @formatter:on -->
 	 */
 	LABORATORY_ORDER("721965002", "2.16.840.1.113883.6.96", "Laboratory order (record artifact)",
-			"Laboratory Order", "Laborauftrag", "TODO", "TODO"),
+			"Laboratory Order", "Laborauftrag", "Mandat d’analyse en laboratoire",
+			"Richiesta di analisi di laboratorio"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Laboratory report</div>
 	 * <div class="de">Laborbericht</div>
-	 * <div class="fr">Résultat de laboratoire</div>
+	 * <div class="fr">Rapport de laboratoire</div>
 	 * <div class="it">Referto di laboratorio</div>
 	 * <!-- @formatter:on -->
 	 */
 	LABORATORY_REPORT("4241000179101", "2.16.840.1.113883.6.96",
 			"Laboratory report (record artifact)", "Laboratory report", "Laborbericht",
-			"Résultat de laboratoire", "Referto di laboratorio"),
+			"Rapport de laboratoire", "Referto di laboratorio"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Medical certificate</div>
 	 * <div class="de">Ärztliches Attest</div>
-	 * <div class="fr">TODO</div>
-	 * <div class="it">TODO</div>
+	 * <div class="fr">Certificat médical</div>
+	 * <div class="it">Certificato medico</div>
 	 * <!-- @formatter:on -->
 	 */
 	MEDICAL_CERTIFICATE("772786005", "2.16.840.1.113883.6.96",
 			"Medical certificate (record artifact)", "Medical certificate", "Ärztliches Attest",
-			"TODO", "TODO"),
+			"Certificat médical", "Certificato medico"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Medical Prescription record</div>
 	 * <div class="de">Arzneimittel-Verschreibung / Rezept</div>
-	 * <div class="fr">TODO</div>
-	 * <div class="it">TODO</div>
+	 * <div class="fr">Prescription de médicaments / ordonnance</div>
+	 * <div class="it">Prescrizione di medicamenti</div>
 	 * <!-- @formatter:on -->
 	 */
 	MEDICAL_PRESCRIPTION_RECORD("761938008", "2.16.840.1.113883.6.96",
 			"Medical Prescription record (record artifact)", "Medical Prescription record",
-			"Arzneimittel-Verschreibung / Rezept", "TODO", "TODO"),
+			"Arzneimittel-Verschreibung / Rezept", "Prescription de médicaments / ordonnance",
+			"Prescrizione di medicamenti"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Medication summary document</div>
 	 * <div class="de">Medikationsliste</div>
-	 * <div class="fr">TODO</div>
-	 * <div class="it">TODO</div>
+	 * <div class="fr">Liste de médication</div>
+	 * <div class="it">Elenco dei medicamenti</div>
 	 * <!-- @formatter:on -->
 	 */
 	MEDICATION_SUMMARY_DOCUMENT("721912009", "2.16.840.1.113883.6.96",
 			"Medication summary document (record artifact)", "Medication summary document",
-			"Medikationsliste", "TODO", "TODO"),
+			"Medikationsliste", "Liste de médication", "Elenco dei medicamenti"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Non-drug prescription</div>
 	 * <div class="de">Nicht-Arzneimittel-Verschreibung / Rezept</div>
-	 * <div class="fr">Ordonnance nonmédicamenteuse</div>
-	 * <div class="it">Richiesta di prestazione sanitaria</div>
+	 * <div class="fr">Prescription sans médicaments / ordonnance</div>
+	 * <div class="it">Prescrizione non di medicamenti</div>
 	 * <!-- @formatter:on -->
 	 */
 	NON_DRUG_PRESCRIPTION("765492005", "2.16.840.1.113883.6.96",
 			"Non-drug prescription record (record artifact)", "Non-drug prescription",
-			"Nicht-Arzneimittel-Verschreibung / Rezept", "Ordonnance nonmédicamenteuse",
-			"Richiesta di prestazione sanitaria"),
+			"Nicht-Arzneimittel-Verschreibung / Rezept",
+			"Prescription sans médicaments / ordonnance", "Prescrizione non di medicamenti"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Nursing care plan</div>
 	 * <div class="de">Pflegeplan</div>
-	 * <div class="fr">TODO</div>
-	 * <div class="it">TODO</div>
+	 * <div class="fr">Plan de soins</div>
+	 * <div class="it">Piano di cura</div>
 	 * <!-- @formatter:on -->
 	 */
 	NURSING_CARE_PLAN("773130005", "2.16.840.1.113883.6.96", "Nursing care plan (record artifact)",
-			"Nursing care plan", "Pflegeplan", "TODO", "TODO"),
+			"Nursing care plan", "Pflegeplan", "Plan de soins", "Piano di cura"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Operative report</div>
 	 * <div class="de">Operationsbericht</div>
-	 * <div class="fr">Protocole opératoire</div>
-	 * <div class="it">Referto operatorio</div>
+	 * <div class="fr">Rapport d’opération</div>
+	 * <div class="it">Rapporto operatorio</div>
 	 * <!-- @formatter:on -->
 	 */
 	OPERATIVE_REPORT("371526002", "2.16.840.1.113883.6.96", "Operative report (record artifact)",
-			"Operative report", "Operationsbericht", "Protocole opératoire", "Referto operatorio"),
+			"Operative report", "Operationsbericht", "Rapport d’opération",
+			"Rapporto operatorio"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Pathology order</div>
 	 * <div class="de">Pathologieauftrag</div>
-	 * <div class="fr">TODO</div>
-	 * <div class="it">TODO</div>
+	 * <div class="fr">Mandat de rapport d’examen pathologique </div>
+	 * <div class="it">Richiesta di esame istologico</div>
 	 * <!-- @formatter:on -->
 	 */
 	PATHOLOGY_ORDER("721966001", "2.16.840.1.113883.6.96", "Pathology order (record artifact)",
-			"Pathology order", "Pathologieauftrag", "TODO", "TODO"),
+			"Pathology order", "Pathologieauftrag", "Mandat de rapport d’examen pathologique ",
+			"Richiesta di esame istologico"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Pathology report</div>
 	 * <div class="de">Pathologiebericht</div>
-	 * <div class="fr">TODO</div>
-	 * <div class="it">TODO</div>
+	 * <div class="fr">Rapport d’examen pathologique</div>
+	 * <div class="it">Referto istologico</div>
 	 * <!-- @formatter:on -->
 	 */
 	PATHOLOGY_REPORT("371528001", "2.16.840.1.113883.6.96", "Pathology report (record artifact)",
-			"Pathology report", "Pathologiebericht", "TODO", "TODO"),
+			"Pathology report", "Pathologiebericht", "Rapport d’examen pathologique",
+			"Referto istologico"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Professional allied to medicine clinical report</div>
 	 * <div class="de">Dokument ausserhalb des Behandlungskontextes</div>
-	 * <div class="fr">TODO</div>
-	 * <div class="it">TODO</div>
+	 * <div class="fr">Document hors contexte de traitement</div>
+	 * <div class="it">Documento al di fuori del contesto trattato</div>
 	 * <!-- @formatter:on -->
 	 */
 	PROFESSIONAL_ALLIED_TO_MEDICINE_CLINICAL_REPORT("445418005", "2.16.840.1.113883.6.96",
 			"Professional allied to medicine clinical report (record artifact)",
 			"Professional allied to medicine clinical report",
-			"Dokument ausserhalb des Behandlungskontextes", "TODO", "TODO"),
+			"Dokument ausserhalb des Behandlungskontextes", "Document hors contexte de traitement",
+			"Documento al di fuori del contesto trattato"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Progress note</div>
 	 * <div class="de">Verlaufsbericht</div>
-	 * <div class="fr">Note de suite</div>
-	 * <div class="it">Diario clinico</div>
+	 * <div class="fr">Rapport d’historique</div>
+	 * <div class="it">Rapporto sul decorso</div>
 	 * <!-- @formatter:on -->
 	 */
 	PROGRESS_NOTE("371532007", "2.16.840.1.113883.6.96", "Progress report (record artifact)",
-			"Progress note", "Verlaufsbericht", "Note de suite", "Diario clinico"),
+			"Progress note", "Verlaufsbericht", "Rapport d’historique", "Rapporto sul decorso"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Record artifact</div>
 	 * <div class="de">Nicht näher bezeichnetes Dokument</div>
-	 * <div class="fr">TODO</div>
-	 * <div class="it">TODO</div>
+	 * <div class="fr">Document non précisé</div>
+	 * <div class="it">Documento non meglio specificato</div>
 	 * <!-- @formatter:on -->
 	 */
 	RECORD_ARTIFACT("419891008", "2.16.840.1.113883.6.96", "Record artifact (record artifact)",
-			"Record artifact", "Nicht näher bezeichnetes Dokument", "TODO", "TODO"),
+			"Record artifact", "Nicht näher bezeichnetes Dokument", "Document non précisé",
+			"Documento non meglio specificato"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Rehabilitation care plan</div>
 	 * <div class="de">Rehabilitationsplan</div>
-	 * <div class="fr">TODO</div>
-	 * <div class="it">TODO</div>
+	 * <div class="fr">Plan de réhabilitation</div>
+	 * <div class="it">Piano di riabilitazione</div>
 	 * <!-- @formatter:on -->
 	 */
 	REHABILITATION_CARE_PLAN("736055001", "2.16.840.1.113883.6.96",
 			"Rehabilitation care plan (record articact)", "Rehabilitation care plan",
-			"Rehabilitationsplan", "TODO", "TODO"),
+			"Rehabilitationsplan", "Plan de réhabilitation", "Piano di riabilitazione"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Transfer summary report</div>
@@ -308,8 +318,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Allergy record</div>
 	 * <div class="de">Code für Allergieausweis</div>
-	 * <div class="fr">Code de TODO</div>
-	 * <div class="it">Code per TODO</div>
+	 * <div class="fr">Code de Carnet des allergies</div>
+	 * <div class="it">Code per Passaporto delle allergie</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String ALLERGY_RECORD_CODE = "722446000";
@@ -318,8 +328,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Clinical Management plan</div>
 	 * <div class="de">Code für Behandlungsplan</div>
-	 * <div class="fr">Code de TODO</div>
-	 * <div class="it">Code per TODO</div>
+	 * <div class="fr">Code de Plan de traitement</div>
+	 * <div class="it">Code per Piano di trattamento</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String CLINICAL_MANAGEMENT_PLAN_CODE = "737427001";
@@ -328,8 +338,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Consultation report</div>
 	 * <div class="de">Code für Beurteilung durch Fachspezialisten</div>
-	 * <div class="fr">Code de Rapport de consultation</div>
-	 * <div class="it">Code per Rapporto di consultazione</div>
+	 * <div class="fr">Code de Évaluation par des spécialistes</div>
+	 * <div class="it">Code per Valutazione dello specialista</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String CONSULTATION_REPORT_CODE = "371530004";
@@ -338,8 +348,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Discharge summary</div>
 	 * <div class="de">Code für Austrittsbericht</div>
-	 * <div class="fr">Code de Lettre de sortie</div>
-	 * <div class="it">Code per Rapporto/lettera d'uscita</div>
+	 * <div class="fr">Code de Rapport de sortie</div>
+	 * <div class="it">Code per Rapporto di dimissione</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String DISCHARGE_SUMMARY_CODE = "373942005";
@@ -348,8 +358,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Emergency department record</div>
 	 * <div class="de">Code für Notfallberichtt</div>
-	 * <div class="fr">Code de TODO</div>
-	 * <div class="it">Code per TODO</div>
+	 * <div class="fr">Code de Rapport d’urgence</div>
+	 * <div class="it">Code per Referto di pronto soccorso</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String EMERGENCY_DEPARTMENT_RECORD_CODE = "445300006";
@@ -358,8 +368,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for History and physical report</div>
 	 * <div class="de">Code für Anamnese / Untersuchungsbericht</div>
-	 * <div class="fr">Code de TODO</div>
-	 * <div class="it">Code per TODO</div>
+	 * <div class="fr">Code de Anamnèse / rapport d’analyse</div>
+	 * <div class="it">Code per Anamnesi / Rapporto di visita medica</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String HISTORY_AND_PHYSICAL_REPORT_CODE = "371529009";
@@ -378,8 +388,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Imaging Order</div>
 	 * <div class="de">Code für Bildgebungsauftrag</div>
-	 * <div class="fr">Code de TODO</div>
-	 * <div class="it">Code per TODO</div>
+	 * <div class="fr">Code de Mandat d’imagerie</div>
+	 * <div class="it">Code per Richiesta di immaginografia</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String IMAGING_ORDER_CODE = "2161000195103";
@@ -388,8 +398,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Imaging report</div>
 	 * <div class="de">Code für Befundbericht zur Bildgebung</div>
-	 * <div class="fr">Code de TODO</div>
-	 * <div class="it">Code per TODO</div>
+	 * <div class="fr">Code de Rapport de résultat relatif à l’imagerie</div>
+	 * <div class="it">Code per Referto di immaginografia</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String IMAGING_REPORT_CODE = "4201000179104";
@@ -398,7 +408,7 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Immunization record</div>
 	 * <div class="de">Code für Impfausweis</div>
-	 * <div class="fr">Code de Certificat de vaccination</div>
+	 * <div class="fr">Code de Carnet de vaccination</div>
 	 * <div class="it">Code per Certificato di vaccinazione</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -408,8 +418,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Laboratory Order</div>
 	 * <div class="de">Code für Laborauftrag</div>
-	 * <div class="fr">Code de TODO</div>
-	 * <div class="it">Code per TODO</div>
+	 * <div class="fr">Code de Mandat d’analyse en laboratoire</div>
+	 * <div class="it">Code per Richiesta di analisi di laboratorio</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String LABORATORY_ORDER_CODE = "721965002";
@@ -418,7 +428,7 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Laboratory report</div>
 	 * <div class="de">Code für Laborbericht</div>
-	 * <div class="fr">Code de Résultat de laboratoire</div>
+	 * <div class="fr">Code de Rapport de laboratoire</div>
 	 * <div class="it">Code per Referto di laboratorio</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -428,8 +438,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Medical certificate</div>
 	 * <div class="de">Code für Ärztliches Attest</div>
-	 * <div class="fr">Code de TODO</div>
-	 * <div class="it">Code per TODO</div>
+	 * <div class="fr">Code de Certificat médical</div>
+	 * <div class="it">Code per Certificato medico</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String MEDICAL_CERTIFICATE_CODE = "772786005";
@@ -438,8 +448,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Medical Prescription record</div>
 	 * <div class="de">Code für Arzneimittel-Verschreibung / Rezept</div>
-	 * <div class="fr">Code de TODO</div>
-	 * <div class="it">Code per TODO</div>
+	 * <div class="fr">Code de Prescription de médicaments / ordonnance</div>
+	 * <div class="it">Code per Prescrizione di medicamenti</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String MEDICAL_PRESCRIPTION_RECORD_CODE = "761938008";
@@ -448,8 +458,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Medication summary document</div>
 	 * <div class="de">Code für Medikationsliste</div>
-	 * <div class="fr">Code de TODO</div>
-	 * <div class="it">Code per TODO</div>
+	 * <div class="fr">Code de Liste de médication</div>
+	 * <div class="it">Code per Elenco dei medicamenti</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String MEDICATION_SUMMARY_DOCUMENT_CODE = "721912009";
@@ -458,8 +468,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Non-drug prescription</div>
 	 * <div class="de">Code für Nicht-Arzneimittel-Verschreibung / Rezept</div>
-	 * <div class="fr">Code de Ordonnance nonmédicamenteuse</div>
-	 * <div class="it">Code per Richiesta di prestazione sanitaria</div>
+	 * <div class="fr">Code de Prescription sans médicaments / ordonnance</div>
+	 * <div class="it">Code per Prescrizione non di medicamenti</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String NON_DRUG_PRESCRIPTION_CODE = "765492005";
@@ -468,8 +478,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Nursing care plan</div>
 	 * <div class="de">Code für Pflegeplan</div>
-	 * <div class="fr">Code de TODO</div>
-	 * <div class="it">Code per TODO</div>
+	 * <div class="fr">Code de Plan de soins</div>
+	 * <div class="it">Code per Piano di cura</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String NURSING_CARE_PLAN_CODE = "773130005";
@@ -478,8 +488,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Operative report</div>
 	 * <div class="de">Code für Operationsbericht</div>
-	 * <div class="fr">Code de Protocole opératoire</div>
-	 * <div class="it">Code per Referto operatorio</div>
+	 * <div class="fr">Code de Rapport d’opération</div>
+	 * <div class="it">Code per Rapporto operatorio</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String OPERATIVE_REPORT_CODE = "371526002";
@@ -488,8 +498,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Pathology order</div>
 	 * <div class="de">Code für Pathologieauftrag</div>
-	 * <div class="fr">Code de TODO</div>
-	 * <div class="it">Code per TODO</div>
+	 * <div class="fr">Code de Mandat de rapport d’examen pathologique </div>
+	 * <div class="it">Code per Richiesta di esame istologico</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String PATHOLOGY_ORDER_CODE = "721966001";
@@ -498,8 +508,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Pathology report</div>
 	 * <div class="de">Code für Pathologiebericht</div>
-	 * <div class="fr">Code de TODO</div>
-	 * <div class="it">Code per TODO</div>
+	 * <div class="fr">Code de Rapport d’examen pathologique</div>
+	 * <div class="it">Code per Referto istologico</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String PATHOLOGY_REPORT_CODE = "371528001";
@@ -508,8 +518,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Professional allied to medicine clinical report</div>
 	 * <div class="de">Code für Dokument ausserhalb des Behandlungskontextes</div>
-	 * <div class="fr">Code de TODO</div>
-	 * <div class="it">Code per TODO</div>
+	 * <div class="fr">Code de Document hors contexte de traitement</div>
+	 * <div class="it">Code per Documento al di fuori del contesto trattato</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String PROFESSIONAL_ALLIED_TO_MEDICINE_CLINICAL_REPORT_CODE = "445418005";
@@ -518,8 +528,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Progress note</div>
 	 * <div class="de">Code für Verlaufsbericht</div>
-	 * <div class="fr">Code de Note de suite</div>
-	 * <div class="it">Code per Diario clinico</div>
+	 * <div class="fr">Code de Rapport d’historique</div>
+	 * <div class="it">Code per Rapporto sul decorso</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String PROGRESS_NOTE_CODE = "371532007";
@@ -528,8 +538,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Record artifact</div>
 	 * <div class="de">Code für Nicht näher bezeichnetes Dokument</div>
-	 * <div class="fr">Code de TODO</div>
-	 * <div class="it">Code per TODO</div>
+	 * <div class="fr">Code de Document non précisé</div>
+	 * <div class="it">Code per Documento non meglio specificato</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String RECORD_ARTIFACT_CODE = "419891008";
@@ -538,8 +548,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Rehabilitation care plan</div>
 	 * <div class="de">Code für Rehabilitationsplan</div>
-	 * <div class="fr">Code de TODO</div>
-	 * <div class="it">Code per TODO</div>
+	 * <div class="fr">Code de Plan de réhabilitation</div>
+	 * <div class="it">Code per Piano di riabilitazione</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String REHABILITATION_CARE_PLAN_CODE = "736055001";

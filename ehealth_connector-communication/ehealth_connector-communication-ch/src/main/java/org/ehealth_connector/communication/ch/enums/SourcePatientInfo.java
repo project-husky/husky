@@ -27,10 +27,10 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Patient’s gender as per Annex 3  EPRO-FDHA.<br clear="none"/></div>
- * <div class="de">Geschlecht der Patientin oder des Patienten gemäss Anhang 3 EPDV-EDI.<br clear="none"/></div>
- * <div class="fr">Sexe du patient selon l'annexe 3 ODEP-DFI.<br clear="none"/></div>
- * <div class="it">Sesso del paziente secondo l'allegato 3 OCIP-DFI.<br clear="none"/></div>
+ * <div class="en">Patient’s gender as per Annex 3; EPRO-FDHA.</div>
+ * <div class="de">Geschlecht der Patientin oder des Patienten gemäss Anhang 3 EPDV-EDI.</div>
+ * <div class="fr">Sexe du patient selon l'annexe 3 ODEP-DFI.</div>
+ * <div class="it">Sesso del paziente secondo l'allegato 3 OCIP-DFI.</div>
  * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
@@ -54,7 +54,8 @@ public enum SourcePatientInfo implements ValueSetEnumInterface {
 	 * <div class="it">Maschile</div>
 	 * <!-- @formatter:on -->
 	 */
-	MALE("male", "2.16.840.1.113883.4.642.1.2", "Male", "Male", "Männlich", "Masculin", "Maschile"),
+	MALE("male", "2.16.840.1.113883.4.642.1.2", "Male", "Male", "Männlich", "Masculin",
+			"Maschile"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Other</div>

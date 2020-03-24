@@ -40,12 +40,12 @@ public enum SubmissionSetAuthorRole implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Assistant</div>
 	 * <div class="de">Hilfsperson</div>
-	 * <div class="fr">Assistant</div>
-	 * <div class="it">Assistente</div>
+	 * <div class="fr">Auxiliaire</div>
+	 * <div class="it">Persona ausiliara</div>
 	 * <!-- @formatter:on -->
 	 */
 	ASSISTANT("ASS", "2.16.756.5.30.1.127.3.10.6", "Assistant", "Assistant", "Hilfsperson",
-			"Assistant", "Assistente"),
+			"Auxiliaire", "Persona ausiliara"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Healthcare professional</div>
@@ -80,20 +80,20 @@ public enum SubmissionSetAuthorRole implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Technical user</div>
-	 * <div class="de">Technischer Nutzer</div>
+	 * <div class="de">Technischer Benutzer</div>
 	 * <div class="fr">Utilisateur technique</div>
 	 * <div class="it">Utente tecnico</div>
 	 * <!-- @formatter:on -->
 	 */
 	TECHNICAL_USER("TCU", "2.16.756.5.30.1.127.3.10.6", "Technical user", "Technical user",
-			"Technischer Nutzer", "Utilisateur technique", "Utente tecnico");
+			"Technischer Benutzer", "Utilisateur technique", "Utente tecnico");
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Assistant</div>
 	 * <div class="de">Code für Hilfsperson</div>
-	 * <div class="fr">Code de Assistant</div>
-	 * <div class="it">Code per Assistente</div>
+	 * <div class="fr">Code de Auxiliaire</div>
+	 * <div class="it">Code per Persona ausiliara</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String ASSISTANT_CODE = "ASS";
@@ -131,7 +131,7 @@ public enum SubmissionSetAuthorRole implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Technical user</div>
-	 * <div class="de">Code für Technischer Nutzer</div>
+	 * <div class="de">Code für Technischer Benutzer</div>
 	 * <div class="fr">Code de Utilisateur technique</div>
 	 * <div class="it">Code per Utente tecnico</div>
 	 * <!-- @formatter:on -->

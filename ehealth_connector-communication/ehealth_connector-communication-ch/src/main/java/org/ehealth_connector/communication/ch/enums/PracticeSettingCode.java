@@ -27,10 +27,10 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Medical specialisation of the data captured in the document as per Annex 3  EPRO-FDHA. <br clear="none"/><br clear="none"/>This attribute assigns the contents of a document to a medical specialisation. It is conceivable that this information will assist the patient with setting or changing the confidentiality level of documents, which is relevant for controlling access. <br clear="none"/></div>
- * <div class="de">Medizinische Fachrichtung der in dem Dokument erfassten Daten gemäss Anhang 3 EPDV-EDI.<br clear="none"/><br clear="none"/>Dieses Attribut soll den Inhalt eines Dokumentes einer medizinischen Fachrichtung zuordnen. Es ist denkbar, dass der Patient mit dieser Information eine Hilfestellung erhält zum Setzen oder Verändern der Vertraulichkeitsstufe von Dokumenten, welche relevant ist für die Zugriffssteuerung. <br clear="none"/></div>
- * <div class="fr">Discipline médicale des données saisies dans le document selon l'annexe 3 ODEP-DFI. <br clear="none"/><br clear="none"/>Cet attribut permet d'indiquer la discipline médicale dont relève le contenu d'un document. Cette information peut guider le patient et l'aider à choisir ou à changer le niveau de confidentialité attribué à ses documents et qui détermine les droits d'accès. <br clear="none"/></div>
- * <div class="it">Specialità medica dei dati inseriti nel documento secondo l'allegato 3 OCIP-DFI. <br clear="none"/><br clear="none"/>Questo attributo intende associare il contenuto di un documento a una specialità medica. È ipotizzabile che questa informazione fornisca un aiuto al paziente per impostare o modificare il grado di riservatezza dei documenti, rilevante per il controllo degli accessi. <br clear="none"/></div>
+ * <div class="en">Medical specialisation of the data captured in the document as per Annex 3; EPRO-FDHA.      This attribute assigns the contents of a document to a medical specialisation. It is conceivable that this information will assist the patient with setting or changing the confidentiality level of documents, which is relevant for controlling access.    </div>
+ * <div class="de">Medizinische Fachrichtung der in dem Dokument erfassten Daten gemäss Anhang 3 EPDV-EDI.      Dieses Attribut soll den Inhalt eines Dokumentes einer medizinischen Fachrichtung zuordnen. Es ist denkbar, dass der Patient mit dieser Information eine Hilfestellung erhält zum Setzen oder Verändern der Vertraulichkeitsstufe von Dokumenten, welche relevant ist für die Zugriffssteuerung.    </div>
+ * <div class="fr">Discipline médicale des données saisies dans le document selon l'annexe 3 ODEP-DFI.     Cet attribut permet d'indiquer la discipline médicale dont relève le contenu d'un document. Cette information peut guider le patient et l'aider à choisir ou à changer le niveau de confidentialité attribué à ses documents et qui détermine les droits d'accès.    </div>
+ * <div class="it">Specialità medica dei dati inseriti nel documento secondo l'allegato 3 OCIP-DFI.      Questo attributo intende associare il contenuto di un documento a una specialità medica. È ipotizzabile che questa informazione fornisca un aiuto al paziente per impostare o modificare il grado di riservatezza dei documenti, rilevante per il controllo degli accessi.    </div>
  * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
@@ -99,7 +99,8 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	CLINICAL_GENETICS("394580004", "2.16.840.1.113883.6.96", "Clinical genetics (qualifier value)",
-			"Clinical genetics", "Medizinische Genetik", "Génétique médicale", "Genetica medica"),
+			"Clinical genetics", "Medizinische Genetik", "Génétique médicale",
+			"Genetica medica"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Clinical haematology</div>

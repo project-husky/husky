@@ -27,7 +27,7 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">      Role codes as per Annex 5 EPRO-FDHA, version July 2019<br clear="none"/></div>
+ * <div class="en">Role codes as per Annex 5 EPRO-FDHA, version July 2019</div>
  * <div class="de">no designation found for language GERMAN</div>
  * <div class="fr">no designation found for language FRENCH</div>
  * <div class="it">no designation found for language ITALIAN</div>
@@ -50,12 +50,13 @@ public enum Role implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Document Administrator</div>
 	 * <div class="de">Dokumentenadministrator</div>
-	 * <div class="fr">TODO</div>
-	 * <div class="it">TODO</div>
+	 * <div class="fr">Administrateur des documents</div>
+	 * <div class="it">Amministratore documenti</div>
 	 * <!-- @formatter:on -->
 	 */
 	DOCUMENT_ADMINISTRATOR("DADM", "2.16.756.5.30.1.127.3.10.6", "Document Administrator",
-			"Document Administrator", "Dokumentenadministrator", "TODO", "TODO"),
+			"Document Administrator", "Dokumentenadministrator", "Administrateur des documents",
+			"Amministratore documenti"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Healthcare professional</div>
@@ -80,13 +81,15 @@ public enum Role implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Policy Administrator</div>
-	 * <div class="de">TODO</div>
-	 * <div class="fr">TODO</div>
-	 * <div class="it">TODO</div>
+	 * <div class="de">Datenschutzrichtlinien-Administrator</div>
+	 * <div class="fr">Administrateur des directives de protection des données</div>
+	 * <div class="it">Amministratore diritti di accesso</div>
 	 * <!-- @formatter:on -->
 	 */
 	POLICY_ADMINISTRATOR("PADM", "2.16.756.5.30.1.127.3.10.6", "Policy Administrator",
-			"Policy Administrator", "TODO", "TODO", "TODO"),
+			"Policy Administrator", "Datenschutzrichtlinien-Administrator",
+			"Administrateur des directives de protection des données",
+			"Amministratore diritti di accesso"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Representative</div>
@@ -122,8 +125,8 @@ public enum Role implements ValueSetEnumInterface {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Document Administrator</div>
 	 * <div class="de">Code für Dokumentenadministrator</div>
-	 * <div class="fr">Code de TODO</div>
-	 * <div class="it">Code per TODO</div>
+	 * <div class="fr">Code de Administrateur des documents</div>
+	 * <div class="it">Code per Amministratore documenti</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String DOCUMENT_ADMINISTRATOR_CODE = "DADM";
@@ -151,9 +154,9 @@ public enum Role implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Policy Administrator</div>
-	 * <div class="de">Code für TODO</div>
-	 * <div class="fr">Code de TODO</div>
-	 * <div class="it">Code per TODO</div>
+	 * <div class="de">Code für Datenschutzrichtlinien-Administrator</div>
+	 * <div class="fr">Code de Administrateur des directives de protection des données</div>
+	 * <div class="it">Code per Amministratore diritti di accesso</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String POLICY_ADMINISTRATOR_CODE = "PADM";

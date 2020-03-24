@@ -27,10 +27,10 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">MIME type of the document as per Annex 3  EPRO-FDHA.<br clear="none"/></div>
- * <div class="de">MIME Typ des Dokumentes gemäss Anhang 3 EPDG.<br clear="none"/></div>
- * <div class="fr">MIME Type du document selon l'annexe 3 ODEP-DFI.<br clear="none"/></div>
- * <div class="it">Tipo MIME del documento secondo l'allegato 3 OCIP-DFI.<br clear="none"/></div>
+ * <div class="en">MIME type of the document as per Annex; EPRO-FDHA.</div>
+ * <div class="de">MIME Typ des Dokumentes gemäss Anhang 3 EPDG.</div>
+ * <div class="fr">MIME Type du document selon l'annexe 3 ODEP-DFI.</div>
+ * <div class="it">Tipo MIME del documento secondo l'allegato 3 OCIP-DFI.</div>
  * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
