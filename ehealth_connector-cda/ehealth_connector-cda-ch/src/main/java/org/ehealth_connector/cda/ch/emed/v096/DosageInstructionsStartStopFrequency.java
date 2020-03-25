@@ -11,11 +11,12 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
+import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -28,6 +29,23 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class DosageInstructionsStartStopFrequency
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
+
+	public DosageInstructionsStartStopFrequency() {
+	}
+
+	/**
+	 * Adds a hl7ApproachSiteCode
+	 */
+	public void addHl7ApproachSiteCode(org.ehealth_connector.common.hl7cdar2.CD value) {
+		getApproachSiteCode().add(value);
+	}
+
+	/**
+	 * Adds a hl7ApproachSiteCode
+	 */
+	public void clearHl7ApproachSiteCode() {
+		getApproachSiteCode().clear();
+	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7EffectiveTime
@@ -53,42 +71,6 @@ public class DosageInstructionsStartStopFrequency
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.EIVLTS, filled
-	 * by: "A"
-	 *
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.EIVLTS getPredefinedEffectiveTimeA() {
-		return createHl7EffectiveTimeFixedValue("A");
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
-	 *
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedRouteCode() {
-		return createHl7RouteCodeFixedValue();
-	}
-
-	public DosageInstructionsStartStopFrequency() {
-	}
-
-	/**
-	 * Adds a hl7ApproachSiteCode
-	 */
-	public void addHl7ApproachSiteCode(org.ehealth_connector.common.hl7cdar2.CD value) {
-		getApproachSiteCode().add(value);
-	}
-
-	/**
-	 * Adds a hl7ApproachSiteCode
-	 */
-	public void clearHl7ApproachSiteCode() {
-		getApproachSiteCode().clear();
-	}
-
-	/**
 	 * Gets the hl7DoseQuantity
 	 */
 	public org.ehealth_connector.common.hl7cdar2.IVLPQ getHl7DoseQuantity() {
@@ -111,10 +93,36 @@ public class DosageInstructionsStartStopFrequency
 	}
 
 	/**
+	 * Gets the hl7RepeatNumber Number of repeats/refills
+	 */
+	public org.ehealth_connector.common.hl7cdar2.IVLINT getHl7RepeatNumber() {
+		return repeatNumber;
+	}
+
+	/**
 	 * Gets the hl7RouteCode
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7RouteCode() {
 		return routeCode;
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.EIVLTS, filled
+	 * by: "A"
+	 * 
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.EIVLTS getPredefinedEffectiveTimeA() {
+		return createHl7EffectiveTimeFixedValue("A");
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
+	 * 
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedRouteCode() {
+		return createHl7RouteCodeFixedValue();
 	}
 
 	/**
@@ -138,6 +146,13 @@ public class DosageInstructionsStartStopFrequency
 	 */
 	public void setHl7RateQuantity(org.ehealth_connector.common.hl7cdar2.IVLPQ value) {
 		this.rateQuantity = value;
+	}
+
+	/**
+	 * Sets the hl7RepeatNumber Number of repeats/refills
+	 */
+	public void setHl7RepeatNumber(org.ehealth_connector.common.hl7cdar2.IVLINT value) {
+		this.repeatNumber = value;
 	}
 
 	/**

@@ -27,116 +27,85 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Role of the author.<br clear="none"/><br clear="none"/>This code defines the role of the author of the document. This is a sub-attribute of epd_xds_author.<br clear="none"/></div>
- * <div class="de">Rolle des Autors.<br clear="none"/><br clear="none"/>Dieser Code definiert die Rolle des Authors vom Dokument. Dies ist ein Sub-Attribut von epd_xds_author.<br clear="none"/></div>
- * <div class="fr">Rôle de l'auteur.<br clear="none"/><br clear="none"/>Ce code définit le rôle de l'auteur du document. Il s'agit d'un sous-attribut de epd_xds_author.<br clear="none"/></div>
- * <div class="it">Ruolo dell'autore.<br clear="none"/><br clear="none"/>Questo codice definisce il ruolo dell'autore <span style="display: inline !important; float: none; background-color: rgb(255, 255, 255); color: rgb(0, 0, 0); font-family: arial,helvetica,clean,sans-serif; font-size: 13px; font-size-adjust: none; font-stretch: 100%; font-style: normal; font-variant: normal; font-weight: 400; letter-spacing: normal; line-height: 15.86px; orphans: 2; text-align: left; text-decoration: none; text-indent: 0px; text-transform: none; -webkit-text-stroke-width: 0px; white-space: normal; word-spacing: 0px;">del documento</span>. È un sottoattributo di epd_xds_author.<br clear="none"/></div>
+ * <div class="en"><p>    <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p><b>description: </b><p>Image media type.</p></div>
+ * <div class="de">no designation found for language GERMAN</div>
+ * <div class="fr">no designation found for language FRENCH</div>
+ * <div class="it">no designation found for language ITALIAN</div>
  * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
-public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
+public enum ImageMediaType implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Assistant</div>
-	 * <div class="de">Hilfsperson</div>
-	 * <div class="fr">Assistant</div>
-	 * <div class="it">Assistente</div>
+	 * <div class="en">G3Fax Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	ASSISTANT("ASS", "2.16.756.5.30.1.127.3.10.6", "Assistant", "Assistant", "Hilfsperson",
-			"Assistant", "Assistente"),
+	G3FAX_IMAGE("image/g3fax", "2.16.840.1.113883.5.79", "G3Fax Image", "G3Fax Image",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Healthcare professional</div>
-	 * <div class="de">Gesundheitsfachperson</div>
-	 * <div class="fr">Professionnel de la santé</div>
-	 * <div class="it">Professionista della salute</div>
+	 * <div class="en">GIF Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	HEALTHCARE_PROFESSIONAL("HCP", "2.16.756.5.30.1.127.3.10.6", "Healthcare professional",
-			"Healthcare professional", "Gesundheitsfachperson", "Professionnel de la santé",
-			"Professionista della salute"),
+	GIF_IMAGE("image/gif", "2.16.840.1.113883.5.79", "GIF Image", "GIF Image", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Patient</div>
-	 * <div class="de">Patient</div>
-	 * <div class="fr">Patient</div>
-	 * <div class="it">Paziente</div>
+	 * <div class="en">JPEG Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	PATIENT("PAT", "2.16.756.5.30.1.127.3.10.6", "Patient", "Patient", "Patient", "Patient",
-			"Paziente"),
+	JPEG_IMAGE("image/jpeg", "2.16.840.1.113883.5.79", "JPEG Image", "JPEG Image", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Representative</div>
-	 * <div class="de">Stellvertretung</div>
-	 * <div class="fr">Représentant</div>
-	 * <div class="it">Rappresentante</div>
+	 * <div class="en">PNG Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	REPRESENTATIVE("REP", "2.16.756.5.30.1.127.3.10.6", "Representative", "Representative",
-			"Stellvertretung", "Représentant", "Rappresentante"),
+	PNG_IMAGE("image/png", "2.16.840.1.113883.5.79", "PNG Image", "PNG Image", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Technical user</div>
-	 * <div class="de">Technischer Nutzer</div>
-	 * <div class="fr">Utilisateur technique</div>
-	 * <div class="it">Utente tecnico</div>
+	 * <div class="en">TIFF Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	TECHNICAL_USER("TCU", "2.16.756.5.30.1.127.3.10.6", "Technical user", "Technical user",
-			"Technischer Nutzer", "Utilisateur technique", "Utente tecnico");
+	TIFF_IMAGE("image/tiff", "2.16.840.1.113883.5.79", "TIFF Image", "TIFF Image", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Assistant</div>
-	 * <div class="de">Code für Hilfsperson</div>
-	 * <div class="fr">Code de Assistant</div>
-	 * <div class="it">Code per Assistente</div>
+	 * <div class="en">Code for G3Fax Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String ASSISTANT_CODE = "ASS";
+	public static final String G3FAX_IMAGE_CODE = "image/g3fax";
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Healthcare professional</div>
-	 * <div class="de">Code für Gesundheitsfachperson</div>
-	 * <div class="fr">Code de Professionnel de la santé</div>
-	 * <div class="it">Code per Professionista della salute</div>
+	 * <div class="en">Code for GIF Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String HEALTHCARE_PROFESSIONAL_CODE = "HCP";
+	public static final String GIF_IMAGE_CODE = "image/gif";
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Patient</div>
-	 * <div class="de">Code für Patient</div>
-	 * <div class="fr">Code de Patient</div>
-	 * <div class="it">Code per Paziente</div>
+	 * <div class="en">Code for JPEG Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String PATIENT_CODE = "PAT";
+	public static final String JPEG_IMAGE_CODE = "image/jpeg";
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Representative</div>
-	 * <div class="de">Code für Stellvertretung</div>
-	 * <div class="fr">Code de Représentant</div>
-	 * <div class="it">Code per Rappresentante</div>
+	 * <div class="en">Code for PNG Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String REPRESENTATIVE_CODE = "REP";
+	public static final String PNG_IMAGE_CODE = "image/png";
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Technical user</div>
-	 * <div class="de">Code für Technischer Nutzer</div>
-	 * <div class="fr">Code de Utilisateur technique</div>
-	 * <div class="it">Code per Utente tecnico</div>
+	 * <div class="en">Code for TIFF Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String TECHNICAL_USER_CODE = "TCU";
+	public static final String TIFF_IMAGE_CODE = "image/tiff";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -144,7 +113,7 @@ public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
 	 * <div class="de">Identifikator für das Value Set</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.1.3";
+	public static final String VALUE_SET_ID = "2.16.840.1.113883.1.11.14839";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -152,7 +121,7 @@ public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
 	 * <div class="de">Name des Value Sets</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String VALUE_SET_NAME = "DocumentEntry.authorRole";
+	public static final String VALUE_SET_NAME = "ImageMediaType";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -164,8 +133,8 @@ public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static DocumentEntryAuthorRole getEnum(String code) {
-		for (final DocumentEntryAuthorRole x : values()) {
+	public static ImageMediaType getEnum(String code) {
+		for (final ImageMediaType x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -188,7 +157,7 @@ public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
 			return false;
 		}
 		try {
-			Enum.valueOf(DocumentEntryAuthorRole.class, enumName);
+			Enum.valueOf(ImageMediaType.class, enumName);
 			return true;
 		} catch (final IllegalArgumentException ex) {
 			return false;
@@ -206,7 +175,7 @@ public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (final DocumentEntryAuthorRole x : values()) {
+		for (final ImageMediaType x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -256,9 +225,8 @@ public enum DocumentEntryAuthorRole implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	DocumentEntryAuthorRole(String code, String codeSystem, String displayName,
-			String displayNameEn, String displayNameDe, String displayNameFr,
-			String displayNameIt) {
+	ImageMediaType(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();

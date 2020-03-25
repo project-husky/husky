@@ -11,11 +11,12 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
+import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -27,6 +28,31 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class IheseverityEntry
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
+
+	public IheseverityEntry() {
+		super.getClassCode().add("OBS");
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.1"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.55"));
+		super.setCode(createHl7CodeFixedValue("SEV", "2.16.840.1.113883.5.4", null, null));
+		super.setStatusCode(
+				createHl7StatusCodeFixedValue("completed", "2.16.840.1.113883.5.14", null, null));
+	}
+
+	/**
+	 * Adds a hl7Value
+	 */
+	public void addHl7Value(org.ehealth_connector.common.hl7cdar2.CD value) {
+		getValue().add(value);
+	}
+
+	/**
+	 * Adds a hl7Value
+	 */
+	public void clearHl7Value() {
+		getValue().clear();
+	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -94,61 +120,6 @@ public class IheseverityEntry
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
-	 * "H", "2.16.840.1.113883.5.1063", null, null
-	 *
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedValueH216840111388351063NullNull() {
-		return createHl7ValueFixedValue("H", "2.16.840.1.113883.5.1063", null, null);
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
-	 * "L", "2.16.840.1.113883.5.1063", null, null
-	 *
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedValueL216840111388351063NullNull() {
-		return createHl7ValueFixedValue("L", "2.16.840.1.113883.5.1063", null, null);
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
-	 * "M", "2.16.840.1.113883.5.1063", null, null
-	 *
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedValueM216840111388351063NullNull() {
-		return createHl7ValueFixedValue("M", "2.16.840.1.113883.5.1063", null, null);
-	}
-
-	public IheseverityEntry() {
-		super.getClassCode().add("OBS");
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.1"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.55"));
-		super.setCode(createHl7CodeFixedValue("SEV", "2.16.840.1.113883.5.4", null, null));
-		super.setStatusCode(
-				createHl7StatusCodeFixedValue("completed", "2.16.840.1.113883.5.14", null, null));
-	}
-
-	/**
-	 * Adds a hl7Value
-	 */
-	public void addHl7Value(org.ehealth_connector.common.hl7cdar2.CD value) {
-		getValue().add(value);
-	}
-
-	/**
-	 * Adds a hl7Value
-	 */
-	public void clearHl7Value() {
-		getValue().clear();
-	}
-
-	/**
 	 * Gets the hl7Code This observation is of severity, as indicated by the
 	 * &lt;code&gt; element listed above. This element is required.
 	 */
@@ -181,6 +152,36 @@ public class IheseverityEntry
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ED getHl7Text() {
 		return text;
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
+	 * "H", "2.16.840.1.113883.5.1063", null, null
+	 * 
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedValueH216840111388351063NullNull() {
+		return createHl7ValueFixedValue("H", "2.16.840.1.113883.5.1063", null, null);
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
+	 * "L", "2.16.840.1.113883.5.1063", null, null
+	 * 
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedValueL216840111388351063NullNull() {
+		return createHl7ValueFixedValue("L", "2.16.840.1.113883.5.1063", null, null);
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
+	 * "M", "2.16.840.1.113883.5.1063", null, null
+	 * 
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedValueM216840111388351063NullNull() {
+		return createHl7ValueFixedValue("M", "2.16.840.1.113883.5.1063", null, null);
 	}
 
 	/**

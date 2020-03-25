@@ -27,127 +27,114 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">no designation found for language ENGLISH</div>
+ * <div class="en"><p>    <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p><b>description: </b><p>For any text</p></div>
  * <div class="de">no designation found for language GERMAN</div>
  * <div class="fr">no designation found for language FRENCH</div>
  * <div class="it">no designation found for language ITALIAN</div>
  * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
-public enum ProblemStatusObservationValue implements ValueSetEnumInterface {
+public enum TextMediaType implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Active</div>
+	 * <div class="en">HL7 Structured Narrative</div>
 	 * <!-- @formatter:on -->
 	 */
-	ACTIVE("55561003", "2.16.840.1.113883.6.96", "Active", "Active", "TOTRANSLATE", "TOTRANSLATE",
+	HL7_STRUCTURED_NARRATIVE("text/x-hl7-text+xml", "2.16.840.1.113883.5.79",
+			"HL7 Structured Narrative", "HL7 Structured Narrative", "TOTRANSLATE", "TOTRANSLATE",
 			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Chronic</div>
+	 * <div class="en">HL7 Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	CHRONIC("90734009", "2.16.840.1.113883.6.96", "Chronic", "Chronic", "TOTRANSLATE",
+	HL7_TEXT("text/x-hl7-ft", "2.16.840.1.113883.5.79", "HL7 Text", "HL7 Text", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Inactive</div>
+	 * <div class="en">HTML Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	INACTIVE("73425007", "2.16.840.1.113883.6.96", "Inactive", "Inactive", "TOTRANSLATE",
+	HTML_TEXT("text/html", "2.16.840.1.113883.5.79", "HTML Text", "HTML Text", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Intermittent</div>
+	 * <div class="en">Plain Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	INTERMITTENT("7087005", "2.16.840.1.113883.6.96", "Intermittent", "Intermittent", "TOTRANSLATE",
+	PLAIN_TEXT("text/plain", "2.16.840.1.113883.5.79", "Plain Text", "Plain Text", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Recurrent</div>
+	 * <div class="en">RTF Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	RECURRENT("255227004", "2.16.840.1.113883.6.96", "Recurrent", "Recurrent", "TOTRANSLATE",
+	RTF_TEXT("text/rtf", "2.16.840.1.113883.5.79", "RTF Text", "RTF Text", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Resolved</div>
+	 * <div class="en">SGML Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	RESOLVED("413322009", "2.16.840.1.113883.6.96", "Resolved", "Resolved", "TOTRANSLATE",
+	SGML_TEXT("text/sgml", "2.16.840.1.113883.5.79", "SGML Text", "SGML Text", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Ruled out</div>
+	 * <div class="en">XML Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	RULED_OUT("410516002", "2.16.840.1.113883.6.96", "Ruled out", "Ruled out", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Rule out</div>
-	 * <!-- @formatter:on -->
-	 */
-	RULE_OUT("415684004", "2.16.840.1.113883.6.96", "Rule out", "Rule out", "TOTRANSLATE",
+	XML_TEXT("text/xml", "2.16.840.1.113883.5.79", "XML Text", "XML Text", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Active</div>
+	 * <div class="en">Code for HL7 Structured Narrative</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String ACTIVE_CODE = "55561003";
+	public static final String HL7_STRUCTURED_NARRATIVE_CODE = "text/x-hl7-text+xml";
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Chronic</div>
+	 * <div class="en">Code for HL7 Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String CHRONIC_CODE = "90734009";
+	public static final String HL7_TEXT_CODE = "text/x-hl7-ft";
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Inactive</div>
+	 * <div class="en">Code for HTML Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String INACTIVE_CODE = "73425007";
+	public static final String HTML_TEXT_CODE = "text/html";
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Intermittent</div>
+	 * <div class="en">Code for Plain Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String INTERMITTENT_CODE = "7087005";
+	public static final String PLAIN_TEXT_CODE = "text/plain";
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Recurrent</div>
+	 * <div class="en">Code for RTF Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String RECURRENT_CODE = "255227004";
+	public static final String RTF_TEXT_CODE = "text/rtf";
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Resolved</div>
+	 * <div class="en">Code for SGML Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String RESOLVED_CODE = "413322009";
+	public static final String SGML_TEXT_CODE = "text/sgml";
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Ruled out</div>
+	 * <div class="en">Code for XML Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String RULED_OUT_CODE = "410516002";
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Rule out</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String RULE_OUT_CODE = "415684004";
+	public static final String XML_TEXT_CODE = "text/xml";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -155,7 +142,7 @@ public enum ProblemStatusObservationValue implements ValueSetEnumInterface {
 	 * <div class="de">Identifikator für das Value Set</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String VALUE_SET_ID = "1.3.6.1.4.1.19376.1.5.3.1.11.2";
+	public static final String VALUE_SET_ID = "2.16.840.1.113883.1.11.14825";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -163,7 +150,7 @@ public enum ProblemStatusObservationValue implements ValueSetEnumInterface {
 	 * <div class="de">Name des Value Sets</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String VALUE_SET_NAME = "ProblemStatusObservation_value";
+	public static final String VALUE_SET_NAME = "TextMediaType";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -175,8 +162,8 @@ public enum ProblemStatusObservationValue implements ValueSetEnumInterface {
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static ProblemStatusObservationValue getEnum(String code) {
-		for (final ProblemStatusObservationValue x : values()) {
+	public static TextMediaType getEnum(String code) {
+		for (final TextMediaType x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -199,7 +186,7 @@ public enum ProblemStatusObservationValue implements ValueSetEnumInterface {
 			return false;
 		}
 		try {
-			Enum.valueOf(ProblemStatusObservationValue.class, enumName);
+			Enum.valueOf(TextMediaType.class, enumName);
 			return true;
 		} catch (final IllegalArgumentException ex) {
 			return false;
@@ -217,7 +204,7 @@ public enum ProblemStatusObservationValue implements ValueSetEnumInterface {
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (final ProblemStatusObservationValue x : values()) {
+		for (final TextMediaType x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -267,9 +254,8 @@ public enum ProblemStatusObservationValue implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	ProblemStatusObservationValue(String code, String codeSystem, String displayName,
-			String displayNameEn, String displayNameDe, String displayNameFr,
-			String displayNameIt) {
+	TextMediaType(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();

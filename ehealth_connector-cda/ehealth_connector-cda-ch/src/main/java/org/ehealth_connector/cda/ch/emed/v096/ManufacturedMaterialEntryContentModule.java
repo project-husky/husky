@@ -11,13 +11,13 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
 import java.util.ArrayList;
-
+import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.IVLTS;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -31,6 +31,41 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class ManufacturedMaterialEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Material {
+
+	public ManufacturedMaterialEntryContentModule() {
+		super.setClassCode("MMAT");
+		super.setDeterminerCode(
+				org.ehealth_connector.common.hl7cdar2.EntityDeterminerDetermined.fromValue("KIND"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.33"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.1"));
+		super.setCode(createHl7CodeFixedValue("2.51.1.1"));
+		super.setName(createHl7NameFixedValue("NA"));
+	}
+
+	/**
+	 * Adds a pharmAsContent
+	 */
+	public void addPharmAsContent(
+			org.ehealth_connector.common.hl7cdar2.COCTMT230100UVContent value) {
+		asContent = value;
+	}
+
+	/**
+	 * Adds a pharmIngredient One or more active ingredients SHOULD be
+	 * represented with this structure.
+	 */
+	public void addPharmIngredient(
+			org.ehealth_connector.common.hl7cdar2.COCTMT230100UVIngredient value) {
+		getIngredient().add(value);
+	}
+
+	/**
+	 * Adds a pharmIngredient One or more active ingredients SHOULD be
+	 * represented with this structure.
+	 */
+	public void clearPharmIngredient() {
+		getIngredient().clear();
+	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -116,74 +151,9 @@ public class ManufacturedMaterialEntryContentModule
 	}
 
 	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.COCTMT230100UVContent, filled by:
-	 * "CONT"
-	 *
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.COCTMT230100UVContent getPredefinedAsContentCont() {
-		return createPharmAsContentFixedValue("CONT");
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
-	 *
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedFormCode() {
-		return createPharmFormCodeFixedValue();
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.COCTMT230100UVIngredient, filled
-	 * by: "ACTI"
-	 *
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.COCTMT230100UVIngredient getPredefinedIngredientActi() {
-		return createPharmIngredientFixedValue("ACTI");
-	}
-
-	public ManufacturedMaterialEntryContentModule() {
-		super.setClassCode("MMAT");
-		super.setDeterminerCode(
-				org.ehealth_connector.common.hl7cdar2.EntityDeterminerDetermined.fromValue("KIND"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.33"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.1"));
-		super.setCode(createHl7CodeFixedValue("2.16.840.1.113883.6.73"));
-		super.setName(createHl7NameFixedValue("NA"));
-	}
-
-	/**
-	 * Adds a pharmAsContent
-	 */
-	public void addPharmAsContent(
-			org.ehealth_connector.common.hl7cdar2.COCTMT230100UVContent value) {
-		asContent = value;
-	}
-
-	/**
-	 * Adds a pharmIngredient One or more active ingredients SHOULD be
-	 * represented with this structure.
-	 */
-	public void addPharmIngredient(
-			org.ehealth_connector.common.hl7cdar2.COCTMT230100UVIngredient value) {
-		getIngredient().add(value);
-	}
-
-	/**
-	 * Adds a pharmIngredient One or more active ingredients SHOULD be
-	 * represented with this structure.
-	 */
-	public void clearPharmIngredient() {
-		getIngredient().clear();
-	}
-
-	/**
-	 * Gets the hl7Code ATC Code of the medicine, if it as magistral
-	 * preparation/compound medicin nullFlavor SHALL be NA
+	 * Gets the hl7Code The element SHALL be present and describes the code of
+	 * the medication (GTIN). If it as magistral preparation/compound medicin
+	 * nullFlavor SHALL be NA
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7Code() {
 		return code;
@@ -227,8 +197,40 @@ public class ManufacturedMaterialEntryContentModule
 	}
 
 	/**
-	 * Sets the hl7Code ATC Code of the medicine, if it as magistral
-	 * preparation/compound medicin nullFlavor SHALL be NA
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.COCTMT230100UVContent, filled by:
+	 * "CONT"
+	 * 
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.COCTMT230100UVContent getPredefinedAsContentCont() {
+		return createPharmAsContentFixedValue("CONT");
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
+	 * 
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedFormCode() {
+		return createPharmFormCodeFixedValue();
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.COCTMT230100UVIngredient, filled
+	 * by: "ACTI"
+	 * 
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.COCTMT230100UVIngredient getPredefinedIngredientActi() {
+		return createPharmIngredientFixedValue("ACTI");
+	}
+
+	/**
+	 * Sets the hl7Code The element SHALL be present and describes the code of
+	 * the medication (GTIN). If it as magistral preparation/compound medicin
+	 * nullFlavor SHALL be NA
 	 */
 	public void setHl7Code(org.ehealth_connector.common.hl7cdar2.CE value) {
 		this.code = value;

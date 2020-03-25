@@ -27,77 +27,43 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Document confidentiality as per Annex; EPRO-FDHA.</div>
- * <div class="de">Vertraulichkeitsstufe gemäss Anhang 3 EPDV-EDI.</div>
- * <div class="fr">Niveau de confidentialité selon l'annexe 3 ODEP-DFI.</div>
- * <div class="it">Grado di riservatezza secondo l'allegato 3 OCIP-DFI.</div>
+ * <div class="en"><p>    <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p><b>description: </b><p>Video media type.</p></div>
+ * <div class="de">no designation found for language GERMAN</div>
+ * <div class="fr">no designation found for language FRENCH</div>
+ * <div class="it">no designation found for language ITALIAN</div>
  * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
-public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
+public enum VideoMediaType implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Normally accessible</div>
-	 * <div class="de">Normal zugänglich</div>
-	 * <div class="fr">Normalement accessible</div>
-	 * <div class="it">Normalmente accessibile</div>
+	 * <div class="en">MPEG Video</div>
 	 * <!-- @formatter:on -->
 	 */
-	NORMALLY_ACCESSIBLE("17621005", "2.16.840.1.113883.6.96", "Normal (qualifier value)",
-			"Normally accessible", "Normal zugänglich", "Normalement accessible",
-			"Normalmente accessibile"),
+	MPEG_VIDEO("video/mpeg", "2.16.840.1.113883.5.79", "MPEG Video", "MPEG Video", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Restricted accessible</div>
-	 * <div class="de">Eingeschränkt zugänglich</div>
-	 * <div class="fr">Restreint accessible</div>
-	 * <div class="it">Accessibile limitato</div>
+	 * <div class="en">X-AVI Video</div>
 	 * <!-- @formatter:on -->
 	 */
-	RESTRICTED_ACCESSIBLE("263856008", "2.16.840.1.113883.6.96", "Restricted (qualifier value)",
-			"Restricted accessible", "Eingeschränkt zugänglich", "Restreint accessible",
-			"Accessibile limitato"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Secret</div>
-	 * <div class="de">Geheim</div>
-	 * <div class="fr">Confidentiel</div>
-	 * <div class="it">Segreto</div>
-	 * <!-- @formatter:on -->
-	 */
-	SECRET("1141000195107", "2.16.756.5.30.1.127.3.4", "Secret (qualifier value)", "Secret",
-			"Geheim", "Confidentiel", "Segreto");
+	X_AVI_VIDEO("video/x-avi", "2.16.840.1.113883.5.79", "X-AVI Video", "X-AVI Video",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Normally accessible</div>
-	 * <div class="de">Code für Normal zugänglich</div>
-	 * <div class="fr">Code de Normalement accessible</div>
-	 * <div class="it">Code per Normalmente accessibile</div>
+	 * <div class="en">Code for MPEG Video</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String NORMALLY_ACCESSIBLE_CODE = "17621005";
+	public static final String MPEG_VIDEO_CODE = "video/mpeg";
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Restricted accessible</div>
-	 * <div class="de">Code für Eingeschränkt zugänglich</div>
-	 * <div class="fr">Code de Restreint accessible</div>
-	 * <div class="it">Code per Accessibile limitato</div>
+	 * <div class="en">Code for X-AVI Video</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String RESTRICTED_ACCESSIBLE_CODE = "263856008";
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Secret</div>
-	 * <div class="de">Code für Geheim</div>
-	 * <div class="fr">Code de Confidentiel</div>
-	 * <div class="it">Code per Segreto</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String SECRET_CODE = "1141000195107";
+	public static final String X_AVI_VIDEO_CODE = "video/x-avi";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -105,7 +71,7 @@ public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
 	 * <div class="de">Identifikator für das Value Set</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.5";
+	public static final String VALUE_SET_ID = "2.16.840.1.113883.1.11.14845";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -113,7 +79,7 @@ public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
 	 * <div class="de">Name des Value Sets</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String VALUE_SET_NAME = "DocumentEntry.confidentialityCode";
+	public static final String VALUE_SET_NAME = "VideoMediaType";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -125,8 +91,8 @@ public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static DocumentEntryConfidentialityCode getEnum(String code) {
-		for (final DocumentEntryConfidentialityCode x : values()) {
+	public static VideoMediaType getEnum(String code) {
+		for (final VideoMediaType x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -149,7 +115,7 @@ public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
 			return false;
 		}
 		try {
-			Enum.valueOf(DocumentEntryConfidentialityCode.class, enumName);
+			Enum.valueOf(VideoMediaType.class, enumName);
 			return true;
 		} catch (final IllegalArgumentException ex) {
 			return false;
@@ -167,7 +133,7 @@ public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (final DocumentEntryConfidentialityCode x : values()) {
+		for (final VideoMediaType x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -217,9 +183,8 @@ public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	DocumentEntryConfidentialityCode(String code, String codeSystem, String displayName,
-			String displayNameEn, String displayNameDe, String displayNameFr,
-			String displayNameIt) {
+	VideoMediaType(String code, String codeSystem, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();

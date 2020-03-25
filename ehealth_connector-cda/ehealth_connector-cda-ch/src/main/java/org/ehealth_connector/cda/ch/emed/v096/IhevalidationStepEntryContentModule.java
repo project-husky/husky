@@ -20,21 +20,20 @@ import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.9.1.3.15 Template
- * description: <div>Renewal Period Content Module describes the possible
- * renewal of a Prescription Item in terms 1985 of duration or period of time
- * (start / end date).</div>
+ * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.9.1.3.16 Template
+ * description: Reference to a Medication Treatment Plan Entry
  *
- * Element description: Renewal Period General Specification
+ * Element description: Reference to Medication Treatment Plan Item General
+ * Specification
  */
-public class IherenewalPeriodContentModule
-		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Supply {
+public class IhevalidationStepEntryContentModule
+		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
 
-	public IherenewalPeriodContentModule() {
-		super.setClassCode(org.ehealth_connector.common.hl7cdar2.ActClassSupply.fromValue("SPLY"));
+	public IhevalidationStepEntryContentModule() {
+		super.getClassCode().add("SBADM");
 		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("RQO"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.15"));
+				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("PRP"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.16"));
 	}
 
 	/**
@@ -52,31 +51,31 @@ public class IherenewalPeriodContentModule
 	}
 
 	/**
-	 * Gets the hl7EffectiveTime In case the renewal period is bound by a
-	 * precise date
+	 * Gets the hl7Consumable
 	 */
-	public java.util.List<org.ehealth_connector.common.hl7cdar2.SXCMTS> getHl7EffectiveTime() {
-		return effectiveTime;
+	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Consumable getHl7Consumable() {
+		return consumable;
 	}
 
 	/**
-	 * Gets the hl7TemplateId Renewal Period effectiveTime
+	 * Gets the hl7TemplateId Reference to Medication Treatment Plan Item
+	 * General Specification Template ID
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
 		return templateId;
 	}
 
 	/**
-	 * Sets the hl7EffectiveTime In case the renewal period is bound by a
-	 * precise date
+	 * Sets the hl7Consumable
 	 */
-	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
-		getEffectiveTime().clear();
-		getEffectiveTime().add(value);
+	public void setHl7Consumable(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Consumable value) {
+		this.consumable = value;
 	}
 
 	/**
-	 * Sets the hl7TemplateId Renewal Period effectiveTime
+	 * Sets the hl7TemplateId Reference to Medication Treatment Plan Item
+	 * General Specification Template ID
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		getTemplateId().clear();

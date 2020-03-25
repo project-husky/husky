@@ -27,72 +27,57 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Patient’s gender as per Annex 3  EPRO-FDHA, Chapter 2.10.<br clear="none"/></div>
- * <div class="de">Geschlecht der Patientin oder des Patienten gemäss Anhang 3 EPDV-EDI, Kapitel 2.10.<br clear="none"/></div>
- * <div class="fr">Sexe du patient selon l'annexe 3 ODEP-DFI, chapitre 2.10.<br clear="none"/></div>
- * <div class="it">Sesso del paziente secondo l'allegato 3 OCIP-DFI, capitolo 2.10.<br clear="none"/></div>
+ * <div class="en"><p>    <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p><b>description: </b><p>Application specific media type.</p></div>
+ * <div class="de">no designation found for language GERMAN</div>
+ * <div class="fr">no designation found for language FRENCH</div>
+ * <div class="it">no designation found for language ITALIAN</div>
  * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
-public enum XdsSourPatInf implements ValueSetEnumInterface {
+public enum ApplicationMediaType implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Female</div>
-	 * <div class="de">Weiblich</div>
-	 * <div class="fr">Féminin</div>
-	 * <div class="it">Femminile</div>
+	 * <div class="en">DICOM</div>
 	 * <!-- @formatter:on -->
 	 */
-	FEMALE("F", "2.16.840.1.113883.5.1", "Female", "Female", "Weiblich", "Féminin", "Femminile"),
+	DICOM("application/dicom", "2.16.840.1.113883.5.79", "DICOM", "DICOM", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Male</div>
-	 * <div class="de">Männlich</div>
-	 * <div class="fr">Masculin</div>
-	 * <div class="it">Maschile</div>
+	 * <div class="en">MSWORD</div>
 	 * <!-- @formatter:on -->
 	 */
-	MALE("M", "2.16.840.1.113883.5.1", "Male", "Male", "Männlich", "Masculin", "Maschile"),
+	MSWORD("application/msword", "2.16.840.1.113883.5.79", "MSWORD", "MSWORD", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Other</div>
-	 * <div class="de">Andere</div>
-	 * <div class="fr">Autre</div>
-	 * <div class="it">Altro</div>
+	 * <div class="en">PDF</div>
 	 * <!-- @formatter:on -->
 	 */
-	OTHER("UN", "2.16.840.1.113883.5.1", "Undifferentiated", "Other", "Andere", "Autre", "Altro");
+	PDF("application/pdf", "2.16.840.1.113883.5.79", "PDF", "PDF", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Female</div>
-	 * <div class="de">Code für Weiblich</div>
-	 * <div class="fr">Code de Féminin</div>
-	 * <div class="it">Code per Femminile</div>
+	 * <div class="en">Code for DICOM</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String FEMALE_CODE = "F";
+	public static final String DICOM_CODE = "application/dicom";
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Male</div>
-	 * <div class="de">Code für Männlich</div>
-	 * <div class="fr">Code de Masculin</div>
-	 * <div class="it">Code per Maschile</div>
+	 * <div class="en">Code for MSWORD</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String MALE_CODE = "M";
+	public static final String MSWORD_CODE = "application/msword";
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Other</div>
-	 * <div class="de">Code für Andere</div>
-	 * <div class="fr">Code de Autre</div>
-	 * <div class="it">Code per Altro</div>
+	 * <div class="en">Code for PDF</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String OTHER_CODE = "UN";
+	public static final String PDF_CODE = "application/pdf";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -100,7 +85,7 @@ public enum XdsSourPatInf implements ValueSetEnumInterface {
 	 * <div class="de">Identifikator für das Value Set</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.25";
+	public static final String VALUE_SET_ID = "2.16.840.1.113883.1.11.14832";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -108,7 +93,7 @@ public enum XdsSourPatInf implements ValueSetEnumInterface {
 	 * <div class="de">Name des Value Sets</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String VALUE_SET_NAME = "xds-sourPatInf";
+	public static final String VALUE_SET_NAME = "ApplicationMediaType";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -120,8 +105,8 @@ public enum XdsSourPatInf implements ValueSetEnumInterface {
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static XdsSourPatInf getEnum(String code) {
-		for (final XdsSourPatInf x : values()) {
+	public static ApplicationMediaType getEnum(String code) {
+		for (final ApplicationMediaType x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -144,7 +129,7 @@ public enum XdsSourPatInf implements ValueSetEnumInterface {
 			return false;
 		}
 		try {
-			Enum.valueOf(XdsSourPatInf.class, enumName);
+			Enum.valueOf(ApplicationMediaType.class, enumName);
 			return true;
 		} catch (final IllegalArgumentException ex) {
 			return false;
@@ -162,7 +147,7 @@ public enum XdsSourPatInf implements ValueSetEnumInterface {
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (final XdsSourPatInf x : values()) {
+		for (final ApplicationMediaType x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -212,7 +197,7 @@ public enum XdsSourPatInf implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	XdsSourPatInf(String code, String codeSystem, String displayName, String displayNameEn,
+	ApplicationMediaType(String code, String codeSystem, String displayName, String displayNameEn,
 			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;

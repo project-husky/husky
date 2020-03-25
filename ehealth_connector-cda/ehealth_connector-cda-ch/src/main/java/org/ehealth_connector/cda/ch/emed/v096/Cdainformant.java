@@ -11,7 +11,7 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
@@ -25,6 +25,11 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class Cdainformant extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Informant12 {
 
+	public Cdainformant() {
+		super.getTypeCode().add("INF");
+		super.setContextControlCode("OP");
+	}
+
 	/**
 	 * Creates fixed contents for CDA Element hl7RelatedEntity
 	 */
@@ -33,22 +38,6 @@ public class Cdainformant extends org.ehealth_connector.common.hl7cdar2.POCDMT00
 		org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity retVal = factory
 				.createPOCDMT000040RelatedEntity();
 		return retVal;
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity, filled
-	 * by:
-	 *
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity getPredefinedRelatedEntity() {
-		return createHl7RelatedEntityFixedValue();
-	}
-
-	public Cdainformant() {
-		super.getTypeCode().add("INF");
-		super.setContextControlCode("OP");
 	}
 
 	/**
@@ -63,6 +52,17 @@ public class Cdainformant extends org.ehealth_connector.common.hl7cdar2.POCDMT00
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity getHl7RelatedEntity() {
 		return relatedEntity;
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity, filled
+	 * by:
+	 * 
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity getPredefinedRelatedEntity() {
+		return createHl7RelatedEntityFixedValue();
 	}
 
 	/**

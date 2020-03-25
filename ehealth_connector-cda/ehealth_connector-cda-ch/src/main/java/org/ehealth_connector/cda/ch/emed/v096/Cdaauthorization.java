@@ -11,7 +11,7 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
@@ -25,6 +25,11 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class Cdaauthorization
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Authorization {
+
+	public Cdaauthorization() {
+		super.getTypeCode().add("AUTH");
+		super.setConsent(createHl7ConsentFixedValue("CONS", "EVN"));
+	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Consent
@@ -42,11 +47,6 @@ public class Cdaauthorization
 		retVal.getClassCode().add(classCode);
 		retVal.getMoodCode().add(moodCode);
 		return retVal;
-	}
-
-	public Cdaauthorization() {
-		super.getTypeCode().add("AUTH");
-		super.setConsent(createHl7ConsentFixedValue("CONS", "EVN"));
 	}
 
 	/**

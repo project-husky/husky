@@ -11,13 +11,13 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
 import java.util.ArrayList;
-
+import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -29,6 +29,11 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class IheinternalReferenceEntry
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
+
+	public IheinternalReferenceEntry() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.4.1"));
+		super.setCode(createHl7CodeFixedValue("NA"));
+	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -57,11 +62,6 @@ public class IheinternalReferenceEntry
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
-	}
-
-	public IheinternalReferenceEntry() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.4.1"));
-		super.setCode(createHl7CodeFixedValue("NA"));
 	}
 
 	/**

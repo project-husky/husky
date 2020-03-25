@@ -27,127 +27,29 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">no designation found for language ENGLISH</div>
+ * <div class="en"><p>    <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p></div>
  * <div class="de">no designation found for language GERMAN</div>
  * <div class="fr">no designation found for language FRENCH</div>
  * <div class="it">no designation found for language ITALIAN</div>
  * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
-public enum HealthStatusValue implements ValueSetEnumInterface {
+public enum ActSubstanceAdminSubstitutionCode implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Alive and well</div>
+	 * <div class="en">equivalent</div>
 	 * <!-- @formatter:on -->
 	 */
-	ALIVE_AND_WELL("81323004", "2.16.840.1.113883.6.96", "Alive and well", "Alive and well",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Chronically ill</div>
-	 * <!-- @formatter:on -->
-	 */
-	CHRONICALLY_ILL("161901003", "2.16.840.1.113883.6.96", "Chronically ill", "Chronically ill",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Deceased</div>
-	 * <!-- @formatter:on -->
-	 */
-	DECEASED("419099009", "2.16.840.1.113883.6.96", "Deceased", "Deceased", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Disabled</div>
-	 * <!-- @formatter:on -->
-	 */
-	DISABLED("21134002", "2.16.840.1.113883.6.96", "Disabled", "Disabled", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">In remission</div>
-	 * <!-- @formatter:on -->
-	 */
-	IN_REMISSION("313386006", "2.16.840.1.113883.6.96", "In remission", "In remission",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Severely disabled</div>
-	 * <!-- @formatter:on -->
-	 */
-	SEVERELY_DISABLED("161045001", "2.16.840.1.113883.6.96", "Severely disabled",
-			"Severely disabled", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Severely ill</div>
-	 * <!-- @formatter:on -->
-	 */
-	SEVERELY_ILL("271593001", "2.16.840.1.113883.6.96", "Severely ill", "Severely ill",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Symptom free</div>
-	 * <!-- @formatter:on -->
-	 */
-	SYMPTOM_FREE("162467007", "2.16.840.1.113883.6.96", "Symptom free", "Symptom free",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	EQUIVALENT("E", "2.16.840.1.113883.5.1070", "equivalent", "equivalent", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Alive and well</div>
+	 * <div class="en">Code for equivalent</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String ALIVE_AND_WELL_CODE = "81323004";
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Chronically ill</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String CHRONICALLY_ILL_CODE = "161901003";
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Deceased</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String DECEASED_CODE = "419099009";
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Disabled</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String DISABLED_CODE = "21134002";
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for In remission</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String IN_REMISSION_CODE = "313386006";
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Severely disabled</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String SEVERELY_DISABLED_CODE = "161045001";
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Severely ill</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String SEVERELY_ILL_CODE = "271593001";
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Symptom free</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String SYMPTOM_FREE_CODE = "162467007";
+	public static final String EQUIVALENT_CODE = "E";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -155,7 +57,7 @@ public enum HealthStatusValue implements ValueSetEnumInterface {
 	 * <div class="de">Identifikator für das Value Set</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String VALUE_SET_ID = "1.3.6.1.4.1.19376.1.5.3.1.11.3";
+	public static final String VALUE_SET_ID = "2.16.840.1.113883.1.11.16621";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -163,7 +65,7 @@ public enum HealthStatusValue implements ValueSetEnumInterface {
 	 * <div class="de">Name des Value Sets</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String VALUE_SET_NAME = "HealthStatus_value";
+	public static final String VALUE_SET_NAME = "ActSubstanceAdminSubstitutionCode";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -175,8 +77,8 @@ public enum HealthStatusValue implements ValueSetEnumInterface {
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static HealthStatusValue getEnum(String code) {
-		for (final HealthStatusValue x : values()) {
+	public static ActSubstanceAdminSubstitutionCode getEnum(String code) {
+		for (final ActSubstanceAdminSubstitutionCode x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -199,7 +101,7 @@ public enum HealthStatusValue implements ValueSetEnumInterface {
 			return false;
 		}
 		try {
-			Enum.valueOf(HealthStatusValue.class, enumName);
+			Enum.valueOf(ActSubstanceAdminSubstitutionCode.class, enumName);
 			return true;
 		} catch (final IllegalArgumentException ex) {
 			return false;
@@ -217,7 +119,7 @@ public enum HealthStatusValue implements ValueSetEnumInterface {
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(String codeValue) {
-		for (final HealthStatusValue x : values()) {
+		for (final ActSubstanceAdminSubstitutionCode x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -267,8 +169,9 @@ public enum HealthStatusValue implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	HealthStatusValue(String code, String codeSystem, String displayName, String displayNameEn,
-			String displayNameDe, String displayNameFr, String displayNameIt) {
+	ActSubstanceAdminSubstitutionCode(String code, String codeSystem, String displayName,
+			String displayNameEn, String displayNameDe, String displayNameFr,
+			String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();

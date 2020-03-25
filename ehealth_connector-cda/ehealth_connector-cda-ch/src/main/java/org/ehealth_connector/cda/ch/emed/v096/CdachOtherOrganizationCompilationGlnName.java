@@ -11,11 +11,12 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
+import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -29,19 +30,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class CdachOtherOrganizationCompilationGlnName
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organization {
-
-	/**
-	 * Creates fixed contents for CDA Element hl7Id
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7IdFixedValue(String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
-		retVal.setRoot(root);
-		return retVal;
-	}
 
 	public CdachOtherOrganizationCompilationGlnName() {
 		super.getId().add(createHl7IdFixedValue("2.51.1.3"));
@@ -89,6 +77,19 @@ public class CdachOtherOrganizationCompilationGlnName
 	 */
 	public void clearHl7Telecom() {
 		getTelecom().clear();
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7Id
+	 *
+	 * @param root
+	 *            the desired fixed value for this argument.
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7IdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
 	}
 
 	/**

@@ -11,11 +11,12 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
+import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -28,13 +29,24 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * observation records information about the current status of
  * the </span><span style="line-height: 1.22;">problem or allergy, for example,
  * whether it is active, in remission, resolved, et cetera.
- * The </span><span style="line-height: 1.22;">example below shows the recording
- * of clinical status of a condition or allergy, and is used as
+ * The </span><span style="line-height: 1.22;">example below shows the
+ * recording of clinical status of a condition or allergy, and is used as
  * the </span><span style="line-height: 1.22;">context for the following
  * sections.</span>
  */
 public class IheproblemStatusObservation
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
+
+	public IheproblemStatusObservation() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.57"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.50"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.1.1"));
+		super.setCode(
+				createHl7CodeFixedValue("33999-4", "2.16.840.1.113883.6.1", "LOINC", "Status"));
+		super.setStatusCode(
+				createHl7StatusCodeFixedValue("completed", "2.16.840.1.113883.5.14", null, null));
+		super.getValue().add(createHl7ValueFixedValue());
+	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -91,17 +103,6 @@ public class IheproblemStatusObservation
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		return retVal;
-	}
-
-	public IheproblemStatusObservation() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.57"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.50"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.1.1"));
-		super.setCode(
-				createHl7CodeFixedValue("33999-4", "2.16.840.1.113883.6.1", "LOINC", "Status"));
-		super.setStatusCode(
-				createHl7StatusCodeFixedValue("completed", "2.16.840.1.113883.5.14", null, null));
-		super.getValue().add(createHl7ValueFixedValue());
 	}
 
 	/**

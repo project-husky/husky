@@ -11,7 +11,7 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
@@ -24,6 +24,12 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * POCD_RM000040 MIF)
  */
 public class CdacomponentOf extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Component1 {
+
+	public CdacomponentOf() {
+		super.setTypeCode(org.ehealth_connector.common.hl7cdar2.ActRelationshipHasComponent
+				.fromValue("COMP"));
+		super.setEncompassingEncounter(createHl7EncompassingEncounterFixedValue("ENC", "EVN"));
+	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7EncompassingEncounter
@@ -41,12 +47,6 @@ public class CdacomponentOf extends org.ehealth_connector.common.hl7cdar2.POCDMT
 		retVal.getClassCode().add(classCode);
 		retVal.getMoodCode().add(moodCode);
 		return retVal;
-	}
-
-	public CdacomponentOf() {
-		super.setTypeCode(org.ehealth_connector.common.hl7cdar2.ActRelationshipHasComponent
-				.fromValue("COMP"));
-		super.setEncompassingEncounter(createHl7EncompassingEncounterFixedValue("ENC", "EVN"));
 	}
 
 	/**

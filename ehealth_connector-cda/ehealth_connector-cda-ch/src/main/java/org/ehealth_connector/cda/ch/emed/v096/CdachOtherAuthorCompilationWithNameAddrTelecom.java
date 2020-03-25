@@ -11,12 +11,10 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
-
-import java.util.ArrayList;
 
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -30,30 +28,16 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachOtherAuthorCompilationWithNameAddrTelecom
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Author {
 
-	/**
-	 * Creates fixed contents for CDA Element hl7FunctionCode
-	 *
-	 * @param nullFlavor
-	 *            the desired fixed value for this argument.
-	 * @param codeSystem
-	 *            the desired fixed value for this argument.
-	 * @param codeSystemName
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.CE createHl7FunctionCodeFixedValue(
-			String nullFlavor, String codeSystem, String codeSystemName) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
-		retVal.nullFlavor = new ArrayList<String>();
-		retVal.nullFlavor.add(nullFlavor);
-		retVal.setCodeSystem(codeSystem);
-		retVal.setCodeSystemName(codeSystemName);
-		return retVal;
+	public CdachOtherAuthorCompilationWithNameAddrTelecom() {
 	}
 
-	public CdachOtherAuthorCompilationWithNameAddrTelecom() {
-		super.setFunctionCode(
-				createHl7FunctionCodeFixedValue("NAV", "2.16.840.1.113883.6.96", "SNOMED CT"));
+	/**
+	 * Creates fixed contents for CDA Element hl7FunctionCode
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.CE createHl7FunctionCodeFixedValue() {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
+		return retVal;
 	}
 
 	/**
@@ -64,13 +48,7 @@ public class CdachOtherAuthorCompilationWithNameAddrTelecom
 	}
 
 	/**
-	 * Gets the hl7FunctionCode The functionCode MUST be taken from the Swiss
-	 * EPR Value-Set for author roles. See FDHA Ordinance on the Electronic
-	 * Patient Record (EPRO-FDHA), Appendix 3: Metadata, Section 2.1.If the
-	 * desired functionCode is not available in the Swiss EPR Value-Set for
-	 * author roles, nullFlavor='NAV' MUST be used. In this case, the
-	 * originalText element MUST contain the description of the
-	 * role.Translations to other vocabularies are allowed.
+	 * Gets the hl7FunctionCode
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7FunctionCode() {
 		return functionCode;
@@ -84,6 +62,15 @@ public class CdachOtherAuthorCompilationWithNameAddrTelecom
 	}
 
 	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
+	 * 
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedFunctionCode() {
+		return createHl7FunctionCodeFixedValue();
+	}
+
+	/**
 	 * Sets the hl7AssignedAuthor
 	 */
 	public void setHl7AssignedAuthor(
@@ -92,13 +79,7 @@ public class CdachOtherAuthorCompilationWithNameAddrTelecom
 	}
 
 	/**
-	 * Sets the hl7FunctionCode The functionCode MUST be taken from the Swiss
-	 * EPR Value-Set for author roles. See FDHA Ordinance on the Electronic
-	 * Patient Record (EPRO-FDHA), Appendix 3: Metadata, Section 2.1.If the
-	 * desired functionCode is not available in the Swiss EPR Value-Set for
-	 * author roles, nullFlavor='NAV' MUST be used. In this case, the
-	 * originalText element MUST contain the description of the
-	 * role.Translations to other vocabularies are allowed.
+	 * Sets the hl7FunctionCode
 	 */
 	public void setHl7FunctionCode(org.ehealth_connector.common.hl7cdar2.CE value) {
 		this.functionCode = value;

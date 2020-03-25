@@ -11,12 +11,10 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
-
-import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.54 Template
@@ -27,44 +25,10 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class DocumentCodeMedicationTreatmentPlan extends org.ehealth_connector.common.hl7cdar2.CE {
 
-	/**
-	 * Creates fixed contents for CDA Element hl7Translation
-	 *
-	 * @param code
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.CD createHl7TranslationFixedValue(
-			String code, String codeSystem, String codeSystemName, String displayName) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
-		retVal.setCode(code);
-		retVal.setCodeSystem(codeSystem);
-		retVal.setCodeSystemName(codeSystemName);
-		retVal.setDisplayName(displayName);
-		return retVal;
-	}
-
 	public DocumentCodeMedicationTreatmentPlan() {
 		super.setCode("77603-9");
 		super.setCodeSystem("2.16.840.1.113883.6.1");
 		super.setCodeSystemName("LOINC");
 		super.setDisplayName("Medication treatment plan.extended");
-		super.getTranslation().add(createHl7TranslationFixedValue("761931002",
-				"2.16.840.1.113883.6.96", "SNOMED CT", "Medication Treatment Plan"));
-	}
-
-	/**
-	 * Gets the hl7Translation Translation to the Swiss EPR XDS.b metadata.
-	 */
-	public java.util.List<org.ehealth_connector.common.hl7cdar2.CD> getHl7Translation() {
-		return translation;
-	}
-
-	/**
-	 * Sets the hl7Translation Translation to the Swiss EPR XDS.b metadata.
-	 */
-	public void setHl7Translation(org.ehealth_connector.common.hl7cdar2.CD value) {
-		getTranslation().clear();
-		getTranslation().add(value);
 	}
 }

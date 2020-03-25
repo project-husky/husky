@@ -11,11 +11,12 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
+import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -32,6 +33,10 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachOtherPersonNameInformationCompilationECh0011
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Patient {
 
+	public CdachOtherPersonNameInformationCompilationECh0011() {
+		super.getName().add(createHl7NameFixedValue("L"));
+	}
+
 	/**
 	 * Creates fixed contents for CDA Element hl7Name
 	 *
@@ -46,9 +51,17 @@ public class CdachOtherPersonNameInformationCompilationECh0011
 	}
 
 	/**
+	 * Gets the hl7Name The person's legal name (with required family and given
+	 * name).
+	 */
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.PN> getHl7Name() {
+		return name;
+	}
+
+	/**
 	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.PN, filled by:
 	 * "ASGN"
-	 *
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.PN getPredefinedNameAsgn() {
@@ -58,23 +71,11 @@ public class CdachOtherPersonNameInformationCompilationECh0011
 	/**
 	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.PN, filled by:
 	 * "P"
-	 *
+	 * 
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.PN getPredefinedNameP() {
 		return createHl7NameFixedValue("P");
-	}
-
-	public CdachOtherPersonNameInformationCompilationECh0011() {
-		super.getName().add(createHl7NameFixedValue("L"));
-	}
-
-	/**
-	 * Gets the hl7Name The person's legal name (with required family and given
-	 * name).
-	 */
-	public java.util.List<org.ehealth_connector.common.hl7cdar2.PN> getHl7Name() {
-		return name;
 	}
 
 	/**

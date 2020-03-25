@@ -11,11 +11,12 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
+import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -28,20 +29,21 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class IhesubstitutionPermissionContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
 
+	public IhesubstitutionPermissionContentModule() {
+		super.setClassCode(
+				org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
+		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue("DEF"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.9.1"));
+		super.setCode(createHl7CodeFixedValue());
+		super.setStatusCode(createHl7StatusCodeFixedValue("completed", null, null, null));
+	}
+
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
-	 *
-	 * @param codeSystemName
-	 *            the desired fixed value for this argument.
-	 * @param codeSystem
-	 *            the desired fixed value for this argument.
 	 */
-	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(
-			String codeSystemName, String codeSystem) {
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue() {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
-		retVal.setCodeSystemName(codeSystemName);
-		retVal.setCodeSystem(codeSystem);
 		return retVal;
 	}
 
@@ -74,16 +76,6 @@ public class IhesubstitutionPermissionContentModule
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
-	}
-
-	public IhesubstitutionPermissionContentModule() {
-		super.setClassCode(
-				org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
-		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue("DEF"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.9.1"));
-		super.setCode(createHl7CodeFixedValue("HL7 Substance Admin Substitution",
-				"2.16.840.1.113883.5.1070"));
-		super.setStatusCode(createHl7StatusCodeFixedValue("completed", null, null, null));
 	}
 
 	/**
