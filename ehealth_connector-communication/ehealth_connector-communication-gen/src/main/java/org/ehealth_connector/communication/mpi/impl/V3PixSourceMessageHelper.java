@@ -16,6 +16,8 @@
  */
 package org.ehealth_connector.communication.mpi.impl;
 
+import java.util.List;
+
 import org.eclipse.emf.common.util.Enumerator;
 import org.hl7.v3.AD;
 import org.hl7.v3.COCTMT710007UVPlace;
@@ -234,7 +236,7 @@ public class V3PixSourceMessageHelper {
 	 * @param addressType
 	 *            address type
 	 */
-	public void addPatientAddress(String addressStreetAddress, String addressCity,
+	public void addPatientAddress(List<String> addressStreetAddress, String addressCity,
 			String addressCounty, String addressState, String addressCountry, String addressZip,
 			String addressOtherDesignation, String addressType) {
 		if (v3RecordAddedMessage != null) {

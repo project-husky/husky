@@ -33,6 +33,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.util.FeatureMap;
+import org.ehealth_connector.common.enums.TelecomAddressUse;
 import org.ehealth_connector.communication.mpi.MpiAdapterInterface;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
@@ -50,6 +51,7 @@ import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.fhir.dstu3.model.IntegerType;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Patient.PatientCommunicationComponent;
+import org.hl7.fhir.dstu3.model.StringType;
 import org.hl7.fhir.dstu3.model.Type;
 import org.hl7.v3.AD;
 import org.hl7.v3.AdxpStreetAddressLine;
@@ -336,16 +338,19 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	protected void addPatientAddresses(FhirPatient patient,
 			V3PixSourceMessageHelper v3PixSourceMessage) {
 		if (patient.getAddress().size() > 0) {
-			for (final Address Address : patient.getAddress()) {
+			for (final Address address : patient.getAddress()) {
+
+				List<String> addressLines = new ArrayList<String>();
+				for (StringType addressLine : address.getLine()) {
+					addressLines.add(addressLine.getValueAsString());
+				}
 
 				String adressOtherDesignation = null;
-				if (Address.getLine().size() > 1) {
-					adressOtherDesignation = Address.getLine().get(1).getValueAsString();
-				}
+
 				String addressType = null;
-				if ((Address.getUseElement() != null)
-						&& (Address.getUseElement().getValue() != null)) {
-					switch (Address.getUseElement().getValue()) {
+				if ((address.getUseElement() != null)
+						&& (address.getUseElement().getValue() != null)) {
+					switch (address.getUseElement().getValue()) {
 					case HOME:
 						addressType = "H";
 						break;
@@ -362,9 +367,9 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 						break;
 					}
 				}
-				v3PixSourceMessage.addPatientAddress(Address.getLine().get(0).getValue(),
-						Address.getCity(), null, Address.getState(), Address.getCountry(),
-						Address.getPostalCode(), adressOtherDesignation, addressType);
+				v3PixSourceMessage.addPatientAddress(addressLines, address.getCity(), null,
+						address.getState(), address.getCountry(), address.getPostalCode(),
+						adressOtherDesignation, addressType);
 			}
 		}
 	}
@@ -519,33 +524,49 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 		// telecommunication addresses (only phone and email will be added to
 		// source)
 		if ((patient.getTelecom() != null) && (patient.getTelecom().size() > 0)) {
-			for (final ContactPoint ContactPoint : patient.getTelecom()) {
+			for (final ContactPoint contactPoint : patient.getTelecom()) {
 				// system I 0..1 code phone | fax | email | url
 				// use M 0..1 code home | work | temp | old | mobile - purpose
 				// of this contact point
 				String telecomValue = "";
 				String useValue = "";
-				if ("phone".equals(ContactPoint.getSystem())) {
-					telecomValue = "tel:" + ContactPoint.getValue();
-					if ("home".equals(ContactPoint.getUse())) {
-						useValue = "H";
+
+				String system = "";
+				String use = "";
+				String value = "NULL";
+
+				if (contactPoint.getSystem() != null)
+					system = contactPoint.getSystem().toString().toLowerCase();
+				if (contactPoint.getUse() != null)
+					use = contactPoint.getUse().toString().toLowerCase();
+				if (contactPoint.getValue() != null)
+					value = contactPoint.getValue();
+
+				if ("phone".equals(system)) {
+					telecomValue = "tel:" + value;
+					if ("home".equals(use)) {
+						useValue = TelecomAddressUse.PRIVATE.getCodeValue();
 					}
-					if ("work".equals(ContactPoint.getUse())) {
-						useValue = "WP";
+					if ("work".equals(use)) {
+						useValue = TelecomAddressUse.BUSINESS.getCodeValue();
 					}
-					if ("mobile".equals(ContactPoint.getUse())) {
-						useValue = "MC";
+					if ("mobile".equals(use)) {
+						// ignore, because MC will produce an
+						// java.lang.IllegalArgumentException: Invalid value:
+						// 'org.ehealth_connector.communication.mpi.impl.V3PixSourceMessageHelper$1@7528089c'
+						// for datatype :TelecommunicationAddressUse
 					}
 				}
-				if ("email".equals(ContactPoint.getSystem())) {
-					telecomValue = "mailto:" + ContactPoint.getValue();
-					if ("home".equals(ContactPoint.getUse())) {
-						useValue = "H";
+				if ("email".equals(system)) {
+					telecomValue = "mailto:" + value;
+					if ("home".equals(use)) {
+						useValue = TelecomAddressUse.PRIVATE.getCodeValue();
 					}
-					if ("work".equals(ContactPoint.getUse())) {
-						useValue = "WP";
+					if ("work".equals(use)) {
+						useValue = TelecomAddressUse.BUSINESS.getCodeValue();
 					}
 				}
+
 				v3PixSourceMessage.addPatientTelecom(telecomValue, useValue);
 			}
 		}
@@ -1636,7 +1657,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 		// scoping organization set the scoping organization
 		String organizationOid = "";
 		String organizationName = "";
-		String organizationTelecomValue = "";
+		String organizationTelecomValue = "NOTPROVIDED";
 
 		final Organization organization = (Organization) patient.getManagingOrganization()
 				.getResource();
