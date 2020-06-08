@@ -15,16 +15,16 @@
  *
  */
 
-package org.ehealth_connector.cda.ch.vacd;
+package org.ehealth_connector.cda.ch.vacd.v140;
 
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 import org.ehealth_connector.cda.MdhtFacade;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
-import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdImmunizations;
-import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdRecCategories;
-import org.ehealth_connector.cda.ch.vacd.enums.SectionsVacd;
+import org.ehealth_connector.cda.ch.vacd.v140.enums.CdaChVacdImmunizations;
+import org.ehealth_connector.cda.ch.vacd.v140.enums.CdaChVacdRecCategories;
+import org.ehealth_connector.cda.ch.vacd.v140.enums.SectionsVacd;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.Util;
@@ -76,7 +76,7 @@ public class ImmunizationSection
 	 * @param createSectionText
 	 *            if the section text should be created
 	 */
-	public void addImmunization(org.ehealth_connector.cda.ch.vacd.Immunization immunization,
+	public void addImmunization(org.ehealth_connector.cda.ch.vacd.v140.Immunization immunization,
 			boolean createSectionText) {
 		if (immunization != null) {
 			immunization.sortMedicationTargets();

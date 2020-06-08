@@ -25,7 +25,8 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdImmunizations;
+import org.ehealth_connector.cda.ch.vacd.v140.MedicationTargetEntry;
+import org.ehealth_connector.cda.ch.vacd.v140.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.junit.Test;

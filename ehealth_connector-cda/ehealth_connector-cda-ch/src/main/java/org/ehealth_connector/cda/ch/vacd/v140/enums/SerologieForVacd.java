@@ -14,7 +14,7 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.cda.ch.vacd.enums;
+package org.ehealth_connector.cda.ch.vacd.v140.enums;
 
 import java.util.Arrays;
 
@@ -65,6 +65,7 @@ public enum SerologieForVacd {
 	 * <div class="de">Tetanus</div> <div class="fr">Tétanos</div>
 	 */
 	CLOSTRIDIUM_TETANI_TOXIN_AB_IGG("58770-9", "Clostridium tetani toxin Ab.IgG");
+
 	public static final String VARICELLA_ZOSTER_VIRUS_AB_IGG_CODE = "22602-7";
 	public static final String MEASLES_VIRUS_AB_IGG_CODE = "22502-9";
 	public static final String MUMPS_VIRUS_AB_IGG_CODE = "22417-0";

@@ -14,7 +14,7 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.cda.ch.vacd.enums;
+package org.ehealth_connector.cda.ch.vacd.v140.enums;
 
 import java.util.Date;
 

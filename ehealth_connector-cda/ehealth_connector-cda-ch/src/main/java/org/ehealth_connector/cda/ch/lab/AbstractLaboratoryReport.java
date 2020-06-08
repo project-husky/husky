@@ -24,7 +24,7 @@ import org.ehealth_connector.cda.BaseObservation;
 import org.ehealth_connector.cda.ch.AbstractCdaChV1;
 import org.ehealth_connector.cda.ch.ParticipantClaimer;
 import org.ehealth_connector.cda.ch.textbuilder.ObservationChTextBuilder;
-import org.ehealth_connector.cda.ch.vacd.enums.SectionsVacd;
+import org.ehealth_connector.cda.ch.vacd.v140.enums.SectionsVacd;
 import org.ehealth_connector.cda.ihe.lab.BaseLaboratorySpecialtySection;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.common.enums.CodeSystems;
@@ -263,7 +263,7 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 							.getOrganizer();
 					for (final org.openhealthtools.mdht.uml.cda.ihe.lab.LaboratoryObservation mLo : mLabOrg
 							.getLaboratoryObservations()) {
-						final org.ehealth_connector.cda.ch.vacd.LaboratoryObservation lo = new org.ehealth_connector.cda.ch.vacd.LaboratoryObservation(
+						final org.ehealth_connector.cda.ch.vacd.v140.LaboratoryObservation lo = new org.ehealth_connector.cda.ch.vacd.v140.LaboratoryObservation(
 								mLo);
 						labObservations.add(lo);
 					}

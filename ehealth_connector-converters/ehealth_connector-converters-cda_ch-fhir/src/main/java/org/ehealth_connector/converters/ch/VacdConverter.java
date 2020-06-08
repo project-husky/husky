@@ -26,12 +26,12 @@ import org.ehealth_connector.cda.ch.ActiveProblemConcern;
 import org.ehealth_connector.cda.ch.CodedResults;
 import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.PregnancyHistory;
-import org.ehealth_connector.cda.ch.vacd.CdaChVacd;
-import org.ehealth_connector.cda.ch.vacd.CriterionEntry;
-import org.ehealth_connector.cda.ch.vacd.Immunization;
-import org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation;
-import org.ehealth_connector.cda.ch.vacd.LaboratoryObservation;
-import org.ehealth_connector.cda.ch.vacd.MedicationTargetEntry;
+import org.ehealth_connector.cda.ch.vacd.v140.CdaChVacd;
+import org.ehealth_connector.cda.ch.vacd.v140.CriterionEntry;
+import org.ehealth_connector.cda.ch.vacd.v140.Immunization;
+import org.ehealth_connector.cda.ch.vacd.v140.ImmunizationRecommendation;
+import org.ehealth_connector.cda.ch.vacd.v140.LaboratoryObservation;
+import org.ehealth_connector.cda.ch.vacd.v140.MedicationTargetEntry;
 import org.ehealth_connector.cda.enums.MedicationsSpecialConditions;
 import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.Code;
@@ -298,12 +298,12 @@ public class VacdConverter extends AbstractCdaChV12FhirConverter {
 	 *            the FHIR resource
 	 * @return the Immunization Recommendation
 	 */
-	private org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation getImmunizationRecommendation(
+	private org.ehealth_connector.cda.ch.vacd.v140.ImmunizationRecommendation getImmunizationRecommendation(
 			MedicationStatement fhirMedicationStatement) {
-		org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation retVal = null;
+		org.ehealth_connector.cda.ch.vacd.v140.ImmunizationRecommendation retVal = null;
 
 		// Create the immunization
-		retVal = new org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation();
+		retVal = new org.ehealth_connector.cda.ch.vacd.v140.ImmunizationRecommendation();
 
 		// Add Identifiers
 		for (final Identifier id : fhirMedicationStatement.getIdentifier()) {
@@ -395,9 +395,9 @@ public class VacdConverter extends AbstractCdaChV12FhirConverter {
 	 * @return list of eHC ImmunizationRecommendations </div>
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
-	public List<org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation> getImmunizationRecommendations(
+	public List<org.ehealth_connector.cda.ch.vacd.v140.ImmunizationRecommendation> getImmunizationRecommendations(
 			DocumentManifest docManifest) {
-		final List<org.ehealth_connector.cda.ch.vacd.ImmunizationRecommendation> retVal = new ArrayList<>();
+		final List<org.ehealth_connector.cda.ch.vacd.v140.ImmunizationRecommendation> retVal = new ArrayList<>();
 		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
 			if (!entry.getExtensionsByUrl(FhirCommon.urnUseAsImmunizationRecommendation)
 					.isEmpty()) {
@@ -485,13 +485,13 @@ public class VacdConverter extends AbstractCdaChV12FhirConverter {
 	 *            the FHIR resource
 	 * @return the VACD Immunization
 	 */
-	private org.ehealth_connector.cda.ch.vacd.Immunization getVacdImmunization(
+	private org.ehealth_connector.cda.ch.vacd.v140.Immunization getVacdImmunization(
 			MedicationStatement fhirMedicationStatement) {
 
 		final Code code = getCode(fhirMedicationStatement);
 
 		// Create the immunization
-		final org.ehealth_connector.cda.ch.vacd.Immunization retVal = new org.ehealth_connector.cda.ch.vacd.Immunization();
+		final org.ehealth_connector.cda.ch.vacd.v140.Immunization retVal = new org.ehealth_connector.cda.ch.vacd.v140.Immunization();
 
 		// Add Identifiers
 		retVal.getMdht().getIds().clear();
@@ -589,9 +589,9 @@ public class VacdConverter extends AbstractCdaChV12FhirConverter {
 	 * @return list of eHC Immunizations </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public List<org.ehealth_connector.cda.ch.vacd.Immunization> getVacdImmunizations(
+	public List<org.ehealth_connector.cda.ch.vacd.v140.Immunization> getVacdImmunizations(
 			DocumentManifest docManifest) {
-		final List<org.ehealth_connector.cda.ch.vacd.Immunization> retVal = new ArrayList<>();
+		final List<org.ehealth_connector.cda.ch.vacd.v140.Immunization> retVal = new ArrayList<>();
 		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
 			if (!entry.getExtensionsByUrl(FhirCommon.urnUseAsImmunization).isEmpty()) {
 				Reference ref = null;
@@ -614,9 +614,9 @@ public class VacdConverter extends AbstractCdaChV12FhirConverter {
 	 *            the FHIR resource
 	 * @return the VACD Laboratory Observation
 	 */
-	private org.ehealth_connector.cda.ch.vacd.LaboratoryObservation getVacdLaboratoryObservation(
+	private org.ehealth_connector.cda.ch.vacd.v140.LaboratoryObservation getVacdLaboratoryObservation(
 			Observation fhirObservation) {
-		final org.ehealth_connector.cda.ch.vacd.LaboratoryObservation retVal = new LaboratoryObservation();
+		final org.ehealth_connector.cda.ch.vacd.v140.LaboratoryObservation retVal = new LaboratoryObservation();
 
 		// TODO better inheritance: this code is copied from
 		// AbstractFhirCdaCh
@@ -800,9 +800,9 @@ public class VacdConverter extends AbstractCdaChV12FhirConverter {
 	 * @return list of eHC LaboratoryObservations </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public List<org.ehealth_connector.cda.ch.vacd.LaboratoryObservation> getVacdLaboratoryObservations(
+	public List<org.ehealth_connector.cda.ch.vacd.v140.LaboratoryObservation> getVacdLaboratoryObservations(
 			DocumentManifest docManifest) {
-		final List<org.ehealth_connector.cda.ch.vacd.LaboratoryObservation> retVal = new ArrayList<>();
+		final List<org.ehealth_connector.cda.ch.vacd.v140.LaboratoryObservation> retVal = new ArrayList<>();
 
 		// TODO better inheritance: this code is copied from
 		// AbstractFhirCdaCh

@@ -15,10 +15,10 @@
  *
  */
 
-package org.ehealth_connector.cda.ch.vacd;
+package org.ehealth_connector.cda.ch.vacd.v140;
 
 import org.ehealth_connector.cda.MdhtFacade;
-import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdImmunizations;
+import org.ehealth_connector.cda.ch.vacd.v140.enums.CdaChVacdImmunizations;
 import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;

@@ -32,7 +32,7 @@ import org.ehealth_connector.cda.ch.edes.enums.ObservationInterpretationForVital
 import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
 import org.ehealth_connector.cda.ch.lab.SpecimenCollectionEntry;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.VitalSignList;
-import org.ehealth_connector.cda.ch.vacd.GestationalAge;
+import org.ehealth_connector.cda.ch.vacd.v140.GestationalAge;
 import org.ehealth_connector.cda.enums.AllergiesAndIntolerances;
 import org.ehealth_connector.cda.enums.ProblemConcernStatusCode;
 import org.ehealth_connector.cda.enums.ProblemType;

@@ -30,8 +30,11 @@ import javax.xml.xpath.XPathFactory;
 
 import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
-import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdImmunizations;
-import org.ehealth_connector.cda.ch.vacd.enums.CdaChVacdRecCategories;
+import org.ehealth_connector.cda.ch.vacd.v140.CriterionEntry;
+import org.ehealth_connector.cda.ch.vacd.v140.Immunization;
+import org.ehealth_connector.cda.ch.vacd.v140.MedicationTargetEntry;
+import org.ehealth_connector.cda.ch.vacd.v140.enums.CdaChVacdImmunizations;
+import org.ehealth_connector.cda.ch.vacd.v140.enums.CdaChVacdRecCategories;
 import org.ehealth_connector.cda.enums.RouteOfAdministration;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Author;
