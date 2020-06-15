@@ -251,6 +251,24 @@ public class CdaUtil {
 	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher
 	 * dem angegebenen Argument entspricht.</div>
 	 *
+	 * @param value
+	 *            the value
+	 * @return an instance of the HL7 CDA R2 data type EN
+	 */
+	public static EN createHl7CdaR2En(String value) {
+		ObjectFactory factory = new ObjectFactory();
+		EN retVal = factory.createEN();
+		retVal.xmlContent = value;
+		return retVal;
+	}
+
+	/**
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
+	 * corresponding to the given argument.</div>
+	 *
+	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher
+	 * dem angegebenen Argument entspricht.</div>
+	 *
 	 * @param i
 	 *            the i
 	 * @return an instance of the HL7 CDA R2 data type INT
@@ -323,6 +341,30 @@ public class CdaUtil {
 		if (highValue != null)
 			high = Integer.parseInt(highValue);
 		return createHl7CdaR2IvlInt(low, high);
+	}
+
+	/**
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
+	 * corresponding to the given arguments.</div>
+	 *
+	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher
+	 * den angegebenen Argumenten entspricht.</div>
+	 *
+	 * @param centerValue
+	 *            the center value
+	 * @param unit
+	 *            the unit
+	 * @return the ivlpq
+	 */
+	public static IVLPQ createHl7CdaR2Ivlpq(NullFlavor nullFlavor) {
+		String nullFlavorString = "UNK";
+		if (nullFlavor != null)
+			nullFlavorString = nullFlavor.getCodeValue();
+		ObjectFactory factory = new ObjectFactory();
+		IVLPQ retVal = factory.createIVLPQ();
+		retVal.getNullFlavor().clear();
+		retVal.getNullFlavor().add(nullFlavorString);
+		return retVal;
 	}
 
 	/**
