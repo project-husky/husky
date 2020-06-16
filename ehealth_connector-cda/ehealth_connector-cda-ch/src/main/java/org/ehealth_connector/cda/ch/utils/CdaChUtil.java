@@ -26,13 +26,19 @@ import org.ehealth_connector.cda.ch.CdaChV2StructuredBody;
 import org.ehealth_connector.cda.ch.edes.CdaChEdesCtnn;
 import org.ehealth_connector.cda.ch.edes.CdaChEdesEdpn;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEdes;
+import org.ehealth_connector.cda.ch.emed.v096.*;
 import org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport;
 import org.ehealth_connector.cda.ch.lab.lrph.CdaChLrph;
 import org.ehealth_connector.cda.ch.lab.lrqc.CdaChLrqc;
 import org.ehealth_connector.cda.ch.lab.lrtp.CdaChLrtp;
 import org.ehealth_connector.cda.ch.vacd.v140.CdaChVacd;
 import org.ehealth_connector.cda.ch.vacd.v140.enums.SectionsVacd;
+import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.cda.utils.CdaUtilMdht;
+import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Section;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040StructuredBody;
+import org.ehealth_connector.common.hl7cdar2.StrucDocText;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
@@ -45,6 +51,12 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  * <div class="de">Eine Klasse mit Hilfsfunktionen.</div>
  */
 public abstract class CdaChUtil extends CdaUtilMdht {
+
+
+	public final static String PADV_SECTION_CODE = new PharmaceuticalAdviceSectionContentModule().getCode().getCode();
+	public final static String DIS_SECTION_CODE = new DispenseSectionContentModule().getCode().getCode();
+	public final static String PRE_SECTION_CODE = new PrescriptionSectionContentModule().getCode().getCode();
+	public final static String MTP_SECTION_CODE = new MedicationTreatmenPlanSectionContentModule().getCode().getCode();
 
 	/**
 	 * <div class="en">Loads a CdaChLrepV1GeneralReport document from a given
@@ -414,5 +426,52 @@ public abstract class CdaChUtil extends CdaUtilMdht {
 			er.getAct().setText(ed);
 		}
 		return er;
+	}
+
+	/**
+	 * <div class="en">Generate text narrative to the given section.</div>
+	 *
+	 * <div class="de">Setzt den angegebenen Text im angegebenen
+	 * Abschnitt.</div>
+	 * <p>
+	 * Sets the section text.
+	 *
+	 * @param structuredBody   the structured body
+	 * @param section          the section
+	 * @param languageCode     the language code
+	 * @param contentIdCounter the content id counter
+	 */
+	public static void setSectionTextGenerated(POCDMT000040StructuredBody structuredBody,
+									  POCDMT000040Section section, LanguageCode languageCode,
+									  int contentIdCounter) {
+
+		String temp = "section"
+				+ ("000" + Integer.toString(CdaUtil.getSectionCount(structuredBody) + 1)).substring(
+				Integer.toString(CdaUtil.getSectionCount(structuredBody) + 1).length()) + contentIdCounter;
+		String sectionCode = section.getCode().getCode();
+		StrucDocText strucDocText = null;
+
+		//MTP
+		if (sectionCode.contentEquals(MTP_SECTION_CODE) ||
+				sectionCode.contentEquals(PRE_SECTION_CODE) ||
+				sectionCode.contentEquals(PADV_SECTION_CODE) ||
+				sectionCode.contentEquals(DIS_SECTION_CODE)
+		)
+		{
+			try{
+				strucDocText = new EmedChStrucDocTextBuilder(section, languageCode,temp);
+			}
+			catch (Exception e){
+				e.printStackTrace();
+			}
+		}
+
+		if (strucDocText != null) {
+			section.setText(strucDocText);
+		}
+		else{
+			section.setText(CdaUtil.createHl7CdaR2StrucDocText(temp, languageCode, "narrative text not available"));
+		}
+
 	}
 }
