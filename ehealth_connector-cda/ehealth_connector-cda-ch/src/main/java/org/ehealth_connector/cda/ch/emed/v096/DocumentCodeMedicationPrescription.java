@@ -11,13 +11,14 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
-import java.util.List;
-import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+import java.util.ArrayList;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.basetypes.CodeBaseType;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.52 Template
@@ -33,33 +34,29 @@ public class DocumentCodeMedicationPrescription extends org.ehealth_connector.co
 		super.setCodeSystem("2.16.840.1.113883.6.1");
 		super.setCodeSystemName("LOINC");
 		super.setDisplayName("Prescription for medication");
-		super.getTranslation()
-				.add(createHl7TranslationFixedValue("761938008", "2.16.840.1.113883.6.96",
-						"SNOMED CT", "Medical Prescription record (record artifact)"));
+		vocabTranslationCode.add(new Code(CodeBaseType.builder().withCode("761938008")
+				.withCodeSystem("2.16.840.1.113883.6.96").withCodeSystemName("SNOMED CT")
+				.withDisplayName("Medical Prescription record (record artifact)").build()));
+		// vocab code list entry for attribute code / element hl7:translation:
+		// 761938008 / 2.16.840.1.113883.6.96 (Medical Prescription record
+		// (record artifact) / SNOMED CT)
+		// ---
 	}
 
-	/**
-	 * Creates fixed contents for CDA Element hl7Translation
-	 *
-	 * @param code
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.CD createHl7TranslationFixedValue(
-			String code, String codeSystem, String codeSystemName, String displayName) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
-		retVal.setCode(code);
-		retVal.setCodeSystem(codeSystem);
-		retVal.setCodeSystemName(codeSystemName);
-		retVal.setDisplayName(displayName);
-		return retVal;
-	}
+	private ArrayList<org.ehealth_connector.common.Code> vocabTranslationCode = new ArrayList<org.ehealth_connector.common.Code>();
 
 	/**
 	 * Gets the hl7Translation Translation to the Swiss EPR XDS.b metadata.
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.CD> getHl7Translation() {
 		return translation;
+	}
+
+	/**
+	 * Returns a list of vocab codes as definied in the ART-DECOR model
+	 */
+	public ArrayList<org.ehealth_connector.common.Code> getVocabTranslationCode() {
+		return vocabTranslationCode;
 	}
 
 	/**

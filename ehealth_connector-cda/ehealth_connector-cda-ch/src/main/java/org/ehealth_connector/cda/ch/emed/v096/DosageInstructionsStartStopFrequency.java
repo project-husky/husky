@@ -11,12 +11,11 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
-import java.util.List;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -78,10 +77,18 @@ public class DosageInstructionsStartStopFrequency
 	}
 
 	/**
+	 * Gets the hl7EffectiveTime Dosage Instructions PCC 6.3.4.16.12 -
+	 * Frequency: Multiple events within a day with the same dosage
+	 */
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.SXCMTS> getHl7EffectiveTime() {
+		return effectiveTime;
+	}
+
+	/**
 	 * Gets the hl7EffectiveTime Dosage Instructions PCC 6.3.4.16.10 - Start and
 	 * Stop
 	 */
-	public java.util.List<org.ehealth_connector.common.hl7cdar2.SXCMTS> getHl7EffectiveTime() {
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.SXCMTS> getHl7EffectiveTimeSxcmts() {
 		return effectiveTime;
 	}
 
@@ -132,14 +139,19 @@ public class DosageInstructionsStartStopFrequency
 		this.doseQuantity = value;
 	}
 
+
+
 	/**
-	 * Sets the hl7EffectiveTime Dosage Instructions PCC 6.3.4.16.10 - Start and
-	 * Stop
+	 * Sets the hl7EffectiveTime Dosage Instructions PCC 6.3.4.16.12 -
+	 * Frequency: Event based time interval, where the event is not a precise
+	 * time, but is used for timing purposes (e.g., with meals, between meals,
+	 * before breakfast, before sleep).
 	 */
-	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
+	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.SXCMTS value) {
 		getEffectiveTime().clear();
 		getEffectiveTime().add(value);
 	}
+
 
 	/**
 	 * Sets the hl7RateQuantity

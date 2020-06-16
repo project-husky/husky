@@ -39,42 +39,42 @@ public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Normally accessible</div>
-	 * <div class="de">Normal zugänglich</div>
-	 * <div class="fr">Normalement accessible</div>
-	 * <div class="it">Normalmente accessibile</div>
+	 * <div class="de">Normal zugängliche Dokumente</div>
+	 * <div class="fr">Normal</div>
+	 * <div class="it">Dati normalmente accessibili</div>
 	 * <!-- @formatter:on -->
 	 */
 	NORMALLY_ACCESSIBLE("17621005", "2.16.840.1.113883.6.96", "Normal (qualifier value)",
-			"Normally accessible", "Normal zugänglich", "Normalement accessible",
-			"Normalmente accessibile"),
+			"Normally accessible", "Normal zugängliche Dokumente", "Normal",
+			"Dati normalmente accessibili"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Restricted accessible</div>
-	 * <div class="de">Eingeschränkt zugänglich</div>
-	 * <div class="fr">Restreint accessible</div>
-	 * <div class="it">Accessibile limitato</div>
+	 * <div class="de">Eingeschränkt zugängliche Dokumente</div>
+	 * <div class="fr">Restreint</div>
+	 * <div class="it">Dati limitatamente accessibili</div>
 	 * <!-- @formatter:on -->
 	 */
 	RESTRICTED_ACCESSIBLE("263856008", "2.16.840.1.113883.6.96", "Restricted (qualifier value)",
-			"Restricted accessible", "Eingeschränkt zugänglich", "Restreint accessible",
-			"Accessibile limitato"),
+			"Restricted accessible", "Eingeschränkt zugängliche Dokumente", "Restreint",
+			"Dati limitatamente accessibili"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Secret</div>
-	 * <div class="de">Geheim</div>
-	 * <div class="fr">Confidentiel</div>
-	 * <div class="it">Segreto</div>
+	 * <div class="de">Geheime Dokumente</div>
+	 * <div class="fr">Secret</div>
+	 * <div class="it">Dati segreti</div>
 	 * <!-- @formatter:on -->
 	 */
 	SECRET("1141000195107", "2.16.756.5.30.1.127.3.4", "Secret (qualifier value)", "Secret",
-			"Geheim", "Confidentiel", "Segreto");
+			"Geheime Dokumente", "Secret", "Dati segreti");
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Normally accessible</div>
-	 * <div class="de">Code für Normal zugänglich</div>
-	 * <div class="fr">Code de Normalement accessible</div>
-	 * <div class="it">Code per Normalmente accessibile</div>
+	 * <div class="de">Code für Normal zugängliche Dokumente</div>
+	 * <div class="fr">Code de Normal</div>
+	 * <div class="it">Code per Dati normalmente accessibili</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String NORMALLY_ACCESSIBLE_CODE = "17621005";
@@ -82,9 +82,9 @@ public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Restricted accessible</div>
-	 * <div class="de">Code für Eingeschränkt zugänglich</div>
-	 * <div class="fr">Code de Restreint accessible</div>
-	 * <div class="it">Code per Accessibile limitato</div>
+	 * <div class="de">Code für Eingeschränkt zugängliche Dokumente</div>
+	 * <div class="fr">Code de Restreint</div>
+	 * <div class="it">Code per Dati limitatamente accessibili</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String RESTRICTED_ACCESSIBLE_CODE = "263856008";
@@ -92,9 +92,9 @@ public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Secret</div>
-	 * <div class="de">Code für Geheim</div>
-	 * <div class="fr">Code de Confidentiel</div>
-	 * <div class="it">Code per Segreto</div>
+	 * <div class="de">Code für Geheime Dokumente</div>
+	 * <div class="fr">Code de Secret</div>
+	 * <div class="it">Code per Dati segreti</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String SECRET_CODE = "1141000195107";

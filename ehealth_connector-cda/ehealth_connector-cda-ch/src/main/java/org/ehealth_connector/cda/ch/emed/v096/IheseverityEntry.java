@@ -11,12 +11,14 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
-import java.util.List;
+import java.util.ArrayList;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -36,9 +38,33 @@ public class IheseverityEntry
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.1"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.55"));
 		super.setCode(createHl7CodeFixedValue("SEV", "2.16.840.1.113883.5.4", null, null));
-		super.setStatusCode(
-				createHl7StatusCodeFixedValue("completed", "2.16.840.1.113883.5.14", null, null));
+		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed")
+				.withCodeSystem("2.16.840.1.113883.5.14").withCodeSystemName("null")
+				.withDisplayName("null").build()));
+		vocabValueCode.add(new Code(
+				CodeBaseType.builder().withCode("L").withCodeSystem("2.16.840.1.113883.5.1063")
+						.withCodeSystemName("null").withDisplayName("null").build()));
+		vocabValueCode.add(new Code(
+				CodeBaseType.builder().withCode("H").withCodeSystem("2.16.840.1.113883.5.1063")
+						.withCodeSystemName("null").withDisplayName("null").build()));
+		vocabValueCode.add(new Code(
+				CodeBaseType.builder().withCode("M").withCodeSystem("2.16.840.1.113883.5.1063")
+						.withCodeSystemName("null").withDisplayName("null").build()));
+		// vocab code list entry for attribute code / element hl7:statusCode:
+		// completed / 2.16.840.1.113883.5.14
+		// ---
+		// vocab code list entry for attribute code / element hl7:value: L /
+		// 2.16.840.1.113883.5.1063
+		// vocab code list entry for attribute code / element hl7:value: H /
+		// 2.16.840.1.113883.5.1063
+		// vocab code list entry for attribute code / element hl7:value: M /
+		// 2.16.840.1.113883.5.1063
+		// ---
 	}
+
+	private ArrayList<org.ehealth_connector.common.Code> vocabStatusCodeCode = new ArrayList<org.ehealth_connector.common.Code>();
+
+	private ArrayList<org.ehealth_connector.common.Code> vocabValueCode = new ArrayList<org.ehealth_connector.common.Code>();
 
 	/**
 	 * Adds a hl7Value
@@ -72,23 +98,6 @@ public class IheseverityEntry
 	}
 
 	/**
-	 * Creates fixed contents for CDA Element hl7StatusCode
-	 *
-	 * @param code
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(
-			String code, String codeSystem, String codeSystemName, String displayName) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
-		retVal.setCode(code);
-		retVal.setCodeSystem(codeSystem);
-		retVal.setCodeSystemName(codeSystemName);
-		retVal.setDisplayName(displayName);
-		return retVal;
-	}
-
-	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
 	 * @param root
@@ -99,23 +108,6 @@ public class IheseverityEntry
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
-		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7Value
-	 *
-	 * @param code
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.CD createHl7ValueFixedValue(String code,
-			String codeSystem, String codeSystemName, String displayName) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
-		retVal.setCode(code);
-		retVal.setCodeSystem(codeSystem);
-		retVal.setCodeSystemName(codeSystemName);
-		retVal.setDisplayName(displayName);
 		return retVal;
 	}
 
@@ -155,33 +147,17 @@ public class IheseverityEntry
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
-	 * "H", "2.16.840.1.113883.5.1063", null, null
-	 * 
-	 * @return the predefined element.
+	 * Returns a list of vocab codes as definied in the ART-DECOR model
 	 */
-	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedValueH216840111388351063NullNull() {
-		return createHl7ValueFixedValue("H", "2.16.840.1.113883.5.1063", null, null);
+	public ArrayList<org.ehealth_connector.common.Code> getVocabStatusCodeCode() {
+		return vocabStatusCodeCode;
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
-	 * "L", "2.16.840.1.113883.5.1063", null, null
-	 * 
-	 * @return the predefined element.
+	 * Returns a list of vocab codes as definied in the ART-DECOR model
 	 */
-	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedValueL216840111388351063NullNull() {
-		return createHl7ValueFixedValue("L", "2.16.840.1.113883.5.1063", null, null);
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
-	 * "M", "2.16.840.1.113883.5.1063", null, null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedValueM216840111388351063NullNull() {
-		return createHl7ValueFixedValue("M", "2.16.840.1.113883.5.1063", null, null);
+	public ArrayList<org.ehealth_connector.common.Code> getVocabValueCode() {
+		return vocabValueCode;
 	}
 
 	/**

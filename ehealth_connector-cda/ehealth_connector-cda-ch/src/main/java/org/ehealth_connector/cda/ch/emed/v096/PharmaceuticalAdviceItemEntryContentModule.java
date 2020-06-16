@@ -11,12 +11,14 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
-import java.util.List;
+import java.util.ArrayList;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -34,15 +36,53 @@ public class PharmaceuticalAdviceItemEntryContentModule
 				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.44"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.3"));
-		super.setCode(createHl7CodeFixedValue("OK", "1.3.6.1.4.1.19376.1.9.2.1", null, null));
-		super.setCode(createHl7CodeFixedValue("CHANGE", "1.3.6.1.4.1.19376.1.9.2.1", null, null));
-		super.setCode(createHl7CodeFixedValue("CANCEL", "1.3.6.1.4.1.19376.1.9.2.1", null, null));
-		super.setCode(createHl7CodeFixedValue("SUSPEND", "1.3.6.1.4.1.19376.1.9.2.1", null, null));
-		super.setCode(createHl7CodeFixedValue("REFUSE", "1.3.6.1.4.1.19376.1.9.2.1", null, null));
-		super.setCode(createHl7CodeFixedValue("COMMENT", "1.3.6.1.4.1.19376.1.9.2.1", null, null));
-		super.setStatusCode(createHl7StatusCodeFixedValue("active", null, null, null));
-		super.setStatusCode(createHl7StatusCodeFixedValue("completed", null, null, null));
+		vocabCodeCode.add(new Code(
+				CodeBaseType.builder().withCode("OK").withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1")
+						.withCodeSystemName("null").withDisplayName("null").build()));
+		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("CHANGE")
+				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").withCodeSystemName("null")
+				.withDisplayName("null").build()));
+		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("CANCEL")
+				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").withCodeSystemName("null")
+				.withDisplayName("null").build()));
+		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("SUSPEND")
+				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").withCodeSystemName("null")
+				.withDisplayName("null").build()));
+		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("REFUSE")
+				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").withCodeSystemName("null")
+				.withDisplayName("null").build()));
+		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("COMMENT")
+				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").withCodeSystemName("null")
+				.withDisplayName("null").build()));
+		vocabStatusCodeCode
+				.add(new Code(CodeBaseType.builder().withCode("active").withCodeSystem("null")
+						.withCodeSystemName("null").withDisplayName("null").build()));
+		vocabStatusCodeCode
+				.add(new Code(CodeBaseType.builder().withCode("completed").withCodeSystem("null")
+						.withCodeSystemName("null").withDisplayName("null").build()));
+		// vocab code list entry for attribute code / element hl7:code: OK /
+		// 1.3.6.1.4.1.19376.1.9.2.1
+		// vocab code list entry for attribute code / element hl7:code: CHANGE /
+		// 1.3.6.1.4.1.19376.1.9.2.1
+		// vocab code list entry for attribute code / element hl7:code: CANCEL /
+		// 1.3.6.1.4.1.19376.1.9.2.1
+		// vocab code list entry for attribute code / element hl7:code: SUSPEND
+		// / 1.3.6.1.4.1.19376.1.9.2.1
+		// vocab code list entry for attribute code / element hl7:code: REFUSE /
+		// 1.3.6.1.4.1.19376.1.9.2.1
+		// vocab code list entry for attribute code / element hl7:code: COMMENT
+		// / 1.3.6.1.4.1.19376.1.9.2.1
+		// ---
+		// vocab code list entry for attribute code / element hl7:statusCode:
+		// active / no code system !!
+		// vocab code list entry for attribute code / element hl7:statusCode:
+		// completed / no code system !!
+		// ---
 	}
+
+	private ArrayList<org.ehealth_connector.common.Code> vocabCodeCode = new ArrayList<org.ehealth_connector.common.Code>();
+
+	private ArrayList<org.ehealth_connector.common.Code> vocabStatusCodeCode = new ArrayList<org.ehealth_connector.common.Code>();
 
 	/**
 	 * Adds a hl7Id Pharmaceutical Advice Item ID
@@ -72,23 +112,6 @@ public class PharmaceuticalAdviceItemEntryContentModule
 	 */
 	public void clearHl7Reference() {
 		getReference().clear();
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7Code
-	 *
-	 * @param code
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(String code,
-			String codeSystem, String codeSystemName, String displayName) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
-		retVal.setCode(code);
-		retVal.setCodeSystem(codeSystem);
-		retVal.setCodeSystemName(codeSystemName);
-		retVal.setDisplayName(displayName);
-		return retVal;
 	}
 
 	/**
@@ -123,23 +146,6 @@ public class PharmaceuticalAdviceItemEntryContentModule
 				.createPOCDMT000040Reference();
 		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipExternalReference
 				.fromValue(typeCode));
-		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7StatusCode
-	 *
-	 * @param code
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(
-			String code, String codeSystem, String codeSystemName, String displayName) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
-		retVal.setCode(code);
-		retVal.setCodeSystem(codeSystem);
-		retVal.setCodeSystemName(codeSystemName);
-		retVal.setDisplayName(displayName);
 		return retVal;
 	}
 
@@ -208,66 +214,6 @@ public class PharmaceuticalAdviceItemEntryContentModule
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
-	 * "CANCEL", "1.3.6.1.4.1.19376.1.9.2.1", null, null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedCodeCancel136141193761921NullNull() {
-		return createHl7CodeFixedValue("CANCEL", "1.3.6.1.4.1.19376.1.9.2.1", null, null);
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
-	 * "CHANGE", "1.3.6.1.4.1.19376.1.9.2.1", null, null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedCodeChange136141193761921NullNull() {
-		return createHl7CodeFixedValue("CHANGE", "1.3.6.1.4.1.19376.1.9.2.1", null, null);
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
-	 * "COMMENT", "1.3.6.1.4.1.19376.1.9.2.1", null, null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedCodeComment136141193761921NullNull() {
-		return createHl7CodeFixedValue("COMMENT", "1.3.6.1.4.1.19376.1.9.2.1", null, null);
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
-	 * "OK", "1.3.6.1.4.1.19376.1.9.2.1", null, null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedCodeOk136141193761921NullNull() {
-		return createHl7CodeFixedValue("OK", "1.3.6.1.4.1.19376.1.9.2.1", null, null);
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
-	 * "REFUSE", "1.3.6.1.4.1.19376.1.9.2.1", null, null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedCodeRefuse136141193761921NullNull() {
-		return createHl7CodeFixedValue("REFUSE", "1.3.6.1.4.1.19376.1.9.2.1", null, null);
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
-	 * "SUSPEND", "1.3.6.1.4.1.19376.1.9.2.1", null, null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedCodeSuspend136141193761921NullNull() {
-		return createHl7CodeFixedValue("SUSPEND", "1.3.6.1.4.1.19376.1.9.2.1", null, null);
-	}
-
-	/**
 	 * Adds a predefined
 	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
 	 * filled by: "COMP", null
@@ -312,23 +258,17 @@ public class PharmaceuticalAdviceItemEntryContentModule
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CS, filled by:
-	 * "active", null, null, null
-	 * 
-	 * @return the predefined element.
+	 * Returns a list of vocab codes as definied in the ART-DECOR model
 	 */
-	public static org.ehealth_connector.common.hl7cdar2.CS getPredefinedStatusCodeActiveNullNullNull() {
-		return createHl7StatusCodeFixedValue("active", null, null, null);
+	public ArrayList<org.ehealth_connector.common.Code> getVocabCodeCode() {
+		return vocabCodeCode;
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CS, filled by:
-	 * "completed", null, null, null
-	 * 
-	 * @return the predefined element.
+	 * Returns a list of vocab codes as definied in the ART-DECOR model
 	 */
-	public static org.ehealth_connector.common.hl7cdar2.CS getPredefinedStatusCodeCompletedNullNullNull() {
-		return createHl7StatusCodeFixedValue("completed", null, null, null);
+	public ArrayList<org.ehealth_connector.common.Code> getVocabStatusCodeCode() {
+		return vocabStatusCodeCode;
 	}
 
 	/**

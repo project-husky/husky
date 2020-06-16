@@ -11,12 +11,14 @@
  * Accompanying materials are made available under the terms of the Creative Commons
  * Attribution-ShareAlike 4.0 License.
  *
- * This line is intended for UTF-8 encoding checks, do not modify/delete: �����
+ * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
-import java.util.List;
+import java.util.ArrayList;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -35,8 +37,15 @@ public class IhesubstitutionActContentModule
 		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue("EVN"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.9.2"));
 		super.setCode(createHl7CodeFixedValue());
-		super.setStatusCode(createHl7StatusCodeFixedValue("completed", null, null, null));
+		vocabStatusCodeCode
+				.add(new Code(CodeBaseType.builder().withCode("completed").withCodeSystem("null")
+						.withCodeSystemName("null").withDisplayName("null").build()));
+		// vocab code list entry for attribute code / element hl7:statusCode:
+		// completed / no code system !!
+		// ---
 	}
+
+	private ArrayList<org.ehealth_connector.common.Code> vocabStatusCodeCode = new ArrayList<org.ehealth_connector.common.Code>();
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -44,23 +53,6 @@ public class IhesubstitutionActContentModule
 	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue() {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
-		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7StatusCode
-	 *
-	 * @param code
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue(
-			String code, String codeSystem, String codeSystemName, String displayName) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
-		retVal.setCode(code);
-		retVal.setCodeSystem(codeSystem);
-		retVal.setCodeSystemName(codeSystemName);
-		retVal.setDisplayName(displayName);
 		return retVal;
 	}
 
@@ -97,6 +89,13 @@ public class IhesubstitutionActContentModule
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
 		return templateId;
+	}
+
+	/**
+	 * Returns a list of vocab codes as definied in the ART-DECOR model
+	 */
+	public ArrayList<org.ehealth_connector.common.Code> getVocabStatusCodeCode() {
+		return vocabStatusCodeCode;
 	}
 
 	/**
