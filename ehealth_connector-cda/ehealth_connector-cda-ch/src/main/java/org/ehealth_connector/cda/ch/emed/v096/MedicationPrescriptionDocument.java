@@ -75,15 +75,6 @@ public class MedicationPrescriptionDocument
 	}
 
 	/**
-	 * Adds a hl7DocumentationOf Information about a health service describing
-	 * the context of this CDA document.
-	 */
-	public void addHl7DocumentationOf(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf value) {
-		getDocumentationOf().add(value);
-	}
-
-	/**
 	 * Adds a hl7InFulfillmentOf Reference to one or more orders which led to
 	 * the creation of this CDA document. It SHALL be declared, when the order
 	 * reference is relevant for some reason.
@@ -139,14 +130,6 @@ public class MedicationPrescriptionDocument
 	 */
 	public void clearHl7Author() {
 		getAuthor().clear();
-	}
-
-	/**
-	 * Adds a hl7DocumentationOf Information about a health service describing
-	 * the context of this CDA document.
-	 */
-	public void clearHl7DocumentationOf() {
-		getDocumentationOf().clear();
 	}
 
 	/**
@@ -257,6 +240,13 @@ public class MedicationPrescriptionDocument
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040DataEnterer getHl7DataEnterer() {
 		return dataEnterer;
+	}
+
+	/**
+	 * Gets the hl7DocumentationOf Validity of document
+	 */
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf> getHl7DocumentationOf() {
+		return documentationOf;
 	}
 
 	/**
@@ -570,6 +560,15 @@ public class MedicationPrescriptionDocument
 	public void setHl7DataEnterer(
 			org.ehealth_connector.common.hl7cdar2.POCDMT000040DataEnterer value) {
 		this.dataEnterer = value;
+	}
+
+	/**
+	 * Sets the hl7DocumentationOf Validity of document
+	 */
+	public void setHl7DocumentationOf(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf value) {
+		getDocumentationOf().clear();
+		getDocumentationOf().add(value);
 	}
 
 	/**

@@ -182,7 +182,7 @@ public class PrescriptionItemEntryContentModule
 	 * Gets the hl7EffectiveTime Dosage Instructions PCC 6.3.4.16.10 - Start and
 	 * Stop
 	 */
-	public java.util.List<org.ehealth_connector.common.hl7cdar2.SXCMTS> getHl7EffectiveTimeSxcmts() {
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.SXCMTS> getHl7EffectiveTime() {
 		return effectiveTime;
 	}
 
@@ -385,7 +385,6 @@ public class PrescriptionItemEntryContentModule
 		getEffectiveTime().clear();
 		getEffectiveTime().add(value);
 	}
-
 
 	/**
 	 * Sets the hl7EntryRelationship Treatment Reason as text

@@ -178,14 +178,6 @@ public class IhemedicationTreatmentPlanItemEntryContentModule
 	}
 
 	/**
-	 * Gets the hl7EffectiveTime Dosage Instructions PCC 6.3.4.16.10 - Start and
-	 * Stop
-	 */
-	public java.util.List<org.ehealth_connector.common.hl7cdar2.SXCMTS> getHl7EffectiveTimeSxcmts() {
-		return effectiveTime;
-	}
-
-	/**
 	 * Gets the hl7EntryRelationship Reason
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship> getHl7EntryRelationship() {
@@ -391,14 +383,6 @@ public class IhemedicationTreatmentPlanItemEntryContentModule
 	 */
 	public void setHl7DoseQuantity(org.ehealth_connector.common.hl7cdar2.IVLPQ value) {
 		this.doseQuantity = value;
-	}
-
-	/**
-	 * Sets the hl7EffectiveTime Dosage Instructions PCC 6.3.4.16.12 - Frequency
-	 */
-	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.SXCMTS value) {
-		getEffectiveTime().clear();
-		getEffectiveTime().add(value);
 	}
 
 	/**

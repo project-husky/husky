@@ -54,7 +54,7 @@ public class IherenewalPeriodContentModule
 	 * Gets the hl7EffectiveTime In case the renewal period is bound by a
 	 * precise date
 	 */
-	public java.util.List<org.ehealth_connector.common.hl7cdar2.SXCMTS> getHl7EffectiveTimeSxcmts() {
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.SXCMTS> getHl7EffectiveTime() {
 		return effectiveTime;
 	}
 
@@ -73,7 +73,6 @@ public class IherenewalPeriodContentModule
 		getEffectiveTime().clear();
 		getEffectiveTime().add(value);
 	}
-
 
 	/**
 	 * Sets the hl7TemplateId Renewal Period effectiveTime
