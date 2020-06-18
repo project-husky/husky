@@ -1,7 +1,8 @@
-package org.ehealth_connector.cda.ch.emed.v096;
+package org.ehealth_connector.cda.ch.emed;
 
 import org.apache.commons.lang3.StringUtils;
 import org.ehealth_connector.cda.NarrativeTableInfos;
+import org.ehealth_connector.cda.ch.emed.v096.*;
 import org.ehealth_connector.cda.ch.emed.v096.enums.ActSubstanceAdminSubstitutionCode;
 import org.ehealth_connector.cda.ch.emed.v096.enums.ChEmedTimingEvent;
 import org.ehealth_connector.cda.ch.emed.v096.enums.PharmaceuticalDoseFormEdqm;
@@ -32,26 +33,43 @@ import java.util.stream.Collectors;
  *     <li>DIS</li>
  * </ul>
  */
-public class EmedChStrucDocTextBuilder extends StrucDocText {
+public class EmedChStrucDocTextBuilder096 extends StrucDocText {
 
-
+    /** key for retrieve "important info" sentence in "Messages.properties" file*/
     public final static String IMPORTANT_INFO_TAG = "important_info";
+    /** key for retrieve "icomplementary_info" sentence in "Messages.properties" file*/
     public final static String COMPLEMENTARY_INFO_TAG = "complementary_info";
 
+    /** Template ID used for medication instructions*/
     public final static String MEDICATION_INSTRUCTIONS_TEMPLATE_ID = "1.3.6.1.4.1.19376.1.5.3.1.4.3";
+    /** Template ID used for fulfillment instructions*/
     public final static String MEDICATION_FULFILLMENT_INSTRUCTIONS_TEMPLATE_ID = "1.3.6.1.4.1.19376.1.5.3.1.4.3.1";
+    /** Template ID used for medication instructions*/
     public final static String DOSAGE_INTAKE_REFERENCE_TEMPLATE_ID = new DosageIntakeModeEntryContentModule().getHl7TemplateId().get(0).getRoot(); //"2.16.756.5.30.1.1.10.4.37";
-    public final static String COMPLET_DATE_PATTERN = "dd MMMMM yyyy HH:mm";
+    /** Template ID used for traitment reason*/
     public static final String TRAITMENT_REASON_TEMPLATE_ID = new TreatmentReasonEntryContentModule().getHl7TemplateId().get(0).getRoot();
+    /** Template ID used for substitution permission*/
     public final static String SUBSTITUTION_PERMISSION_TEMPLATE_ID = new IhesubstitutionPermissionContentModule().getHl7TemplateId().get(0).getRoot();
+    /** Template ID used for  prescribed_quantity permission*/
     public final static String PRESCRIBED_QUANTITY_TEMPLATE_ID = new PrescribedQuantityEntryContentModule().getHl7TemplateId().get(0).getRoot();
-    /** get the resources from the Message file, we can choose the lang of the value **/
+    /**patern to format date ex : 20 June 2020 10:50 */
+    public final static String COMPLET_DATE_PATTERN = "dd MMMMM yyyy HH:mm";
+
+    /**
+     * get the resources from the Message file, we can choose the lang of the value
+     **/
     private static ResourceBundle resBundle;
-    /** ObjectFactoryt **/
+    /**
+     * ObjectFactory
+     **/
     ObjectFactory factory = new ObjectFactory();
+    /**Current section */
     private POCDMT000040Section section;
+    /**Current entry */
     private POCDMT000040Entry entry;
-    /** language of the narrative text**/
+    /**
+     * language of the narrative text
+     **/
     private String languageCodeStr = "";
 
     //list of parameters to add to the table
@@ -105,11 +123,12 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en"> Principal constructor for EmedChStrucDocTextBuilder</div>
+     *
      * @param section      section to add narative text
      * @param languageCode lang of the document
      * @param contentIdStr set the Id of the document
      */
-    public EmedChStrucDocTextBuilder(POCDMT000040Section section, LanguageCode languageCode, String contentIdStr) {
+    public EmedChStrucDocTextBuilder096(POCDMT000040Section section, LanguageCode languageCode, String contentIdStr) {
         this.languageCode = languageCode;
         this.languageCodeStr = languageCode.getCodeValue();
         this.resBundle = ResourceBundle.getBundle("Messages", new Locale(languageCodeStr));
@@ -286,8 +305,9 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">Check if there any templateId in the list of templates id</div>
+     *
      * @param templateIdsToFind template ids to find
-     * @param templateIds template ids
+     * @param templateIds       template ids
      * @return true if a template is in the list of themplates ids
      */
     public static boolean isAnyTemplateIdInList(List<String> templateIdsToFind, List<II> templateIds) {
@@ -296,8 +316,9 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">Get splited dosageIntake in an array of string</div>
+     *
      * @param substanceAdministration the substanceAdministration
-     * @param languageCode codes are going to be translated to this language
+     * @param languageCode            codes are going to be translated to this language
      * @return the list of string that represent all the dosages intake
      */
     public static List<String> parseSplitedDosageIntake(POCDMT000040SubstanceAdministration substanceAdministration, LanguageCode languageCode) {
@@ -344,9 +365,12 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">Transforme a date to a readable date of the choosen language</div>
-     * @param date date to format
-     * @param languageCode language for translation
-     * @return String date
+     *
+     * @param date
+     *      date to format
+     * @param languageCode
+     *      language of translation
+     * @return formated date
      */
     public static String dateToCompletDateString(Date date, LanguageCode languageCode) {
         SimpleDateFormat simpleDateFormat =
@@ -368,8 +392,11 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">Convert an eivlts to a String of the choosen language</div>
-     * @param languageCode language of translation
-     * @param eivlts format of dosage intake
+     *
+     * @param languageCode
+     *      language of translation
+     * @param eivlts
+     *      format of dosage intake
      * @return eivlts to string
      */
     public static String parseEivlTs(LanguageCode languageCode, EIVLTS eivlts) {
@@ -444,9 +471,12 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">Convert an pivlts to a String of the choosen language</div>
-     * @param languageCode language of translation
-     * @param pivlts  format of dosage intake
-     * @return pivlts to string
+     *
+     * @param languageCode
+     *      language of translation
+     * @param pivlts
+     *      format of dosage intake
+     * @return pivlts formated in string
      */
     public static String parsePivlTs(LanguageCode languageCode, PIVLTS pivlts) {
         resBundle = ResourceBundle.getBundle("Messages", new Locale(languageCode.getCodeValue()));
@@ -508,9 +538,11 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">Convert an ivlts to a String of the choosen language</div>
-     * @param ivlts  format of dosage intake
+     *
+     * @param ivlts        format of dosage intake
      * @param languageCode language of translation
-     * @return ivlts to string translated
+     * @return
+     *      ivlts to string translated
      */
     public static String parseIvlTs(IVLTS ivlts, LanguageCode languageCode) {
         resBundle = ResourceBundle.getBundle("Messages", new Locale(languageCode.getCodeValue()));
@@ -567,8 +599,11 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">Convert an sxprts to a String of the choosen language</div>
-     * @param languageCode language of translation
-     * @param sxprts  format of dosage intake
+     *
+     * @param languageCode
+     *      language of translation
+     * @param sxprts
+     *      format of dosage intake
      * @return sxprts to string translated
      */
     public static String parseSxprTs(LanguageCode languageCode, SXPRTS sxprts) {
@@ -603,7 +638,9 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">Convert an ivlpq to a String of the choosen language</div>
-     * @param ivlpq  format of dosage intake
+     *
+     * @param ivlpq
+     *      format of dosage intake
      * @return ivlpq to string formated
      */
     public static String parseIvlpq(IVLPQ ivlpq) {
@@ -654,7 +691,8 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">Convert an ivlpq rateQuantity formated to a String of the choosen language</div>
-     * @param ivlpq  format of dosage intake
+     *
+     * @param ivlpq format of dosage intake
      * @return ivlpq to rate quantity string format
      */
     public static String parseRateQuantity(IVLPQ ivlpq) {
@@ -703,6 +741,7 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">check if pq has a value</div>
+     *
      * @param pq
      * @return true if not empty
      */
@@ -712,6 +751,7 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">check if pq has an unit</div>
+     *
      * @param pq
      * @return true if not empty
      */
@@ -721,8 +761,11 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">Convert a doseQuentity to a String</div>
-     * @param doseQuantityElement a doseQuantityElement
-     * @param unitGlobal an unitGlobal
+     *
+     * @param doseQuantityElement
+     *      a doseQuantityElement
+     * @param unitGlobal
+     *      an unitGlobal
      * @return dose quantity to string
      */
     public static String doseQuantityElementToString(JAXBElement<? extends PQ> doseQuantityElement, String unitGlobal) {
@@ -738,8 +781,11 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">Convert a rateQuantity to a string</div>
-     * @param doseQuantityElement a doseQuantityElement
-     * @param unitGlobal an unit
+     *
+     * @param doseQuantityElement
+     *      a doseQuantityElement
+     * @param unitGlobal
+     *      an unit
      * @return tranformed rate quantity to string
      */
     public static String rateQuantityElementToString(JAXBElement<? extends PQ> doseQuantityElement, String unitGlobal) {
@@ -754,9 +800,10 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
     }
 
     /**
-     * <div class="en">Retrieve the treatmentReason if it exists</div>
-     * @param relationships a relationship
-     * @return found traeatment reason if exists
+     * <div class="en">Retrieve the treatmentReason EntryRelationship if it exists</div>
+     *
+     * @param relationships the relationship
+     * @return traeatment reason if exists
      */
     public static POCDMT000040EntryRelationship filterTreatmentReason(List<POCDMT000040EntryRelationship> relationships) {
         return relationships.stream()
@@ -775,7 +822,8 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">Retrieve the fulFillment if it exists</div>
-     * @param relationships  relationships list
+     *
+     * @param relationships relationships list
      * @return fulTillment entryrelationship if exists
      */
     public static POCDMT000040EntryRelationship filterFulfillment(List<POCDMT000040EntryRelationship> relationships) {
@@ -784,6 +832,7 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">Retrieve the SubstitutionPermission EntryRelationship if it exists</div>
+     *
      * @param relationships a realtionship
      * @return substitutionPermission if exists
      */
@@ -793,6 +842,7 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">Retrieve the PatientInstruction EntryRelationship if it exists</div>
+     *
      * @param relationships
      * @return patient instruction relationship if exists
      */
@@ -802,6 +852,7 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en"> Retrieve the DispenseAmount EntryRelationship if it exists</div>
+     *
      * @param relationships
      * @return dispenseAmount relationship if exists
      */
@@ -811,6 +862,7 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en"> Retrieve the SubstanceAdministration if it exists</div>
+     *
      * @param relationships
      * @return substanceAdministration if exists
      */
@@ -821,7 +873,8 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en"> Retrieve entryRelationship in function of an act templated id </div>
-     * @param relationships list of  EntryRelationship
+     *
+     * @param relationships    list of  EntryRelationship
      * @param templateIdToFind template id to find
      * @return entryRelationship
      */
@@ -842,7 +895,8 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en"> Retrieve entryRelationship in function of an substanceadmnistration templated id </div>
-     * @param relationships list of  EntryRelationship
+     *
+     * @param relationships    list of  EntryRelationship
      * @param templateIdToFind template id to find
      * @return entryRelationship
      */
@@ -862,10 +916,13 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
     }
 
     /**
-     * <div class="en">Fetch the first relationship that contains the templateIdToFind</div>
+     * <div class="en">Fetch the first relationship that contains the templateIdToFind in the supply templateId list</div>
+     *
      * @param relationships
+     *      list of EntryRelationship
      * @param templateIdToFind
-     * @return
+     *      template id to find
+     * @return an EntryRelationship
      */
     public static POCDMT000040EntryRelationship filterEntryRelationshipSupplyByTemplateId(List<POCDMT000040EntryRelationship> relationships, String templateIdToFind) {
         return relationships.stream()
@@ -885,6 +942,7 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">Parse and store the different elements of an substanceAdministration of a dis</div>
+     *
      * @param entryRelationships list of entryRelationships
      */
     private void parseSubstanceAdministrationDis(List<POCDMT000040EntryRelationship> entryRelationships) {
@@ -923,10 +981,11 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">Parse substanceAdministration Change Dosage</div>
+     *
      * @param substanceAdministration a substanceAdministration
      */
     private void parseChangeDosageInstruction(POCDMT000040SubstanceAdministration substanceAdministration) {
-        if(substanceAdministration==null || substanceAdministration.getEffectiveTime()==null)
+        if (substanceAdministration == null || substanceAdministration.getEffectiveTime() == null)
             return;
         for (SXCMTS sxcmts : substanceAdministration.getEffectiveTime()) {
 
@@ -936,8 +995,7 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
             } else if (sxcmts instanceof EIVLTS) {
                 this.dosageIntakes.add(parseEivlTs(this.languageCode, (EIVLTS) sxcmts));
 
-            }
-            else if(sxcmts instanceof SXPRTS){
+            } else if (sxcmts instanceof SXPRTS) {
                 this.dosageIntakes.add(parseSxprTs(this.languageCode, (SXPRTS) sxcmts));
 
             }
@@ -950,7 +1008,7 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
     }
 
     /**
-     * <div class="en">Set the different elements  for a PADV change</div>
+     * <div class="en">Set the different attributes  for a PADV change</div>
      */
     private void setPADVChangeNarrativeText() {
         this.resetAttributes();
@@ -1059,7 +1117,8 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
     /**
      * <div class="en">Retrieve the originalText if it exists otherwise it retrieves the code
      * and save the store the choosen reference</div>
-     * @param code code to get the original text
+     *
+     * @param code      code to get the original text
      * @param reference reference to store in the originalText
      * @return code or originalText if exist
      */
@@ -1079,7 +1138,7 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
     }
 
     /**
-     *  <div class="en">Fetch values to generate the narrative text for a PADV_COMMENT</div>
+     * <div class="en">Fetch values to generate the narrative text for a PADV_COMMENT</div>
      */
     private void setPADVNarrativeComment() {
         if (this.entry != null && this.entry.getObservation() != null && this.entry.getObservation().getEntryRelationship() != null) {
@@ -1118,8 +1177,9 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">set a reference to a Supply object</div>
-     * @param pocdmt000040Supply
-     * @param ref id reference
+     *
+     * @param pocdmt000040Supply the supply
+     * @param ref                id reference
      */
     private void setReferenceTextToSupply(POCDMT000040Supply pocdmt000040Supply, String ref) {
         if (pocdmt000040Supply != null && pocdmt000040Supply.getText() == null) {
@@ -1332,7 +1392,8 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">Get the original text of a cd and set the reference id</div>
-     * @param cd contains the originalText
+     *
+     * @param cd        contains the originalText
      * @param reference id reference
      * @return originalText
      */
@@ -1345,6 +1406,7 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">Fetch values to generate the narrative text from a material</div>
+     *
      * @param material a material
      */
     private void setAttributesFromMaterial(POCDMT000040Material material) {
@@ -1407,6 +1469,7 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">Store the list of ingrediant to display it in the narrative text</div>
+     *
      * @param ingredientsList an ingredientsList
      */
     private void setIngredients(List<COCTMT230100UVIngredient> ingredientsList) {
@@ -1429,6 +1492,7 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">Transforme a PQ object to string</div>
+     *
      * @param quantity quantity
      * @return quantity formated in string
      */
@@ -1447,9 +1511,9 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
     }
 
     /**
-     *
      * <div class="en">Add the reference to the element that contain the text who is going to be displayed in the narrative text</div>
-     * @param ed
+     *
+     * @param ed text that could contain a reference
      * @param ref ref to add in the ed
      * @return the xmlcontent
      */
@@ -1473,6 +1537,7 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en">Tranform dosageIntake codes to a string that is going to be add in the narrative text</div>
+     *
      * @param substanceAdministration a substanceAdmnistration
      */
     private void parseDosageIntake(POCDMT000040SubstanceAdministration substanceAdministration) {
@@ -1575,6 +1640,7 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
 
     /**
      * <div class="en"> Fetch the DosageIntakeText relationship if it exists</div>
+     *
      * @param entryRelationships
      * @return
      */
@@ -1676,9 +1742,9 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
     /**
      * <div class="en">Generate a strucDocTd with the text for choice and add an idRef</div>
      *
-     * @param text
-     * @param idReference
-     * @return
+     * @param text the text
+     * @param idReference the idReference
+     * @return the StrucDocTd
      */
     private StrucDocTd createTd(String text, String idReference) {
         StrucDocTd strucDocTd = factory.createStrucDocTd();
@@ -1690,9 +1756,9 @@ public class EmedChStrucDocTextBuilder extends StrucDocText {
     /**
      * <div class="en">Generate a strucDocTd with list of String choice and add an idRef</div>
      *
-     * @param textList
-     * @param idReference
-     * @return
+     * @param textList list of text
+     * @param idReference the idReference
+     * @return  the StrucDocTd
      */
     private StrucDocTd createTd(List<String> textList, String idReference) {
         StrucDocTd strucDocTd = factory.createStrucDocTd();
