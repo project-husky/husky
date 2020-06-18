@@ -26,7 +26,7 @@ import org.ehealth_connector.cda.ch.CdaChV2StructuredBody;
 import org.ehealth_connector.cda.ch.edes.CdaChEdesCtnn;
 import org.ehealth_connector.cda.ch.edes.CdaChEdesEdpn;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEdes;
-import org.ehealth_connector.cda.ch.emed.EmedChStrucDocTextBuilder096;
+import org.ehealth_connector.cda.ch.emed.EmedChStrucDocTextBuilderV096;
 import org.ehealth_connector.cda.ch.emed.v096.*;
 import org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport;
 import org.ehealth_connector.cda.ch.lab.lrph.CdaChLrph;
@@ -460,7 +460,7 @@ public abstract class CdaChUtil extends CdaUtilMdht {
 		)
 		{
 			try{
-				strucDocText = new EmedChStrucDocTextBuilder096(section, languageCode,temp);
+				strucDocText = new EmedChStrucDocTextBuilderV096(section, languageCode,temp);
 			}
 			catch (Exception e){
 				e.printStackTrace();

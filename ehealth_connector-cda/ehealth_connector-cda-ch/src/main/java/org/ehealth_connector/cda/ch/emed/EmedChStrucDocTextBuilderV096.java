@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
  *     <li>DIS</li>
  * </ul>
  */
-public class EmedChStrucDocTextBuilder096 extends StrucDocText {
+public class EmedChStrucDocTextBuilderV096 extends StrucDocText {
 
     /** key for retrieve "important info" sentence in "Messages.properties" file*/
     public final static String IMPORTANT_INFO_TAG = "important_info";
@@ -128,7 +128,7 @@ public class EmedChStrucDocTextBuilder096 extends StrucDocText {
      * @param languageCode lang of the document
      * @param contentIdStr set the Id of the document
      */
-    public EmedChStrucDocTextBuilder096(POCDMT000040Section section, LanguageCode languageCode, String contentIdStr) {
+    public EmedChStrucDocTextBuilderV096(POCDMT000040Section section, LanguageCode languageCode, String contentIdStr) {
         this.languageCode = languageCode;
         this.languageCodeStr = languageCode.getCodeValue();
         this.resBundle = ResourceBundle.getBundle("Messages", new Locale(languageCodeStr));
