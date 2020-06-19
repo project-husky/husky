@@ -225,13 +225,14 @@ public class EmedChStrucDocTextBuilderV096 extends StrucDocText {
                         } else if (codeStringLowerCase.contains("change")) {
                             padvType.set("change");
                             String messageKey = "emed.padv." + codeRef.replace("Item", "").toLowerCase() + "." + codeStringLowerCase;
-                            return new NarrativeTableInfos(resBundle.getString(messageKey), new String[]{EmedTextNarrativeAttributes.PACKAGE_NAME.getCodeValue(),
+                            return new NarrativeTableInfos(resBundle.getString(messageKey), new String[]{
                                     EmedTextNarrativeAttributes.DATE_FROM_TO.getCodeValue(),
                                     EmedTextNarrativeAttributes.FREQUENCY.getCodeValue(),
                                     EmedTextNarrativeAttributes.DOSE_QUANTITY.getCodeValue(),
                                     EmedTextNarrativeAttributes.RATE_QUANTITY.getCodeValue(),
                                     EmedTextNarrativeAttributes.FULFILMENT_INSTRUCTIONS.getCodeValue(),
                                     EmedTextNarrativeAttributes.PATIENT_INSTRUCTIONS.getCodeValue(),
+                                    EmedTextNarrativeAttributes.REPEAT.getCodeValue(),
                                     EmedTextNarrativeAttributes.DISPENSE_AMOUNT.getCodeValue()});
 
                         } else {
@@ -1033,6 +1034,25 @@ public class EmedChStrucDocTextBuilderV096 extends StrucDocText {
                     String dispenseAmountStr = this.quantityToString(entryRelationshipDispenseAmount.getSupply().getQuantity());
                     this.dispenseAmount = StringUtils.isNotEmpty(dispenseAmountStr) ? dispenseAmountStr : "-";
                 }
+
+                /** GETTING REPETITION*/
+                if (observation.getRepeatNumber() != null) {
+                    IVLINT ivlint = observation.getRepeatNumber();
+                    JAXBElement<? extends INT> jaxbElementLow = Optional.ofNullable(ivlint).map(IVLINT::getRest).map(jaxbElements -> jaxbElements.stream().filter(jaxbElement -> jaxbElement.getName() != null && jaxbElement.getName().getLocalPart().equals("low")).findFirst()).get().orElse(null);
+                    JAXBElement<? extends INT> jaxbElementHigh = Optional.ofNullable(ivlint).map(IVLINT::getRest).map(jaxbElements -> jaxbElements.stream().filter(jaxbElement -> jaxbElement.getName() != null && jaxbElement.getName().getLocalPart().equals("high")).findFirst()).get().orElse(null);
+                    if (jaxbElementLow.getValue() != null && jaxbElementLow.getValue().getValue() != null) {
+                        repeatNumber = jaxbElementLow.getValue().getValue().toString();
+                    }
+                    if (jaxbElementHigh.getValue() != null && jaxbElementHigh.getValue().getValue() != null) {
+                        if (!repeatNumber.equals("-")) {
+                            repeatNumber += "-" + jaxbElementHigh.getValue().getValue().toString();
+                        } else {
+                            repeatNumber = jaxbElementHigh.getValue().getValue().toString();
+                        }
+                    }
+                }
+                /** END GETTING REPETITION*/
+
             }
         }
 
