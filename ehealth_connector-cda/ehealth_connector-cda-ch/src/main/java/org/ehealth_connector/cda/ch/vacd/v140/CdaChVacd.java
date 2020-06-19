@@ -471,7 +471,7 @@ public class CdaChVacd extends AbstractCdaChV1<CdaChVacdV1> {
 		// create the CDA level 2 text (either generated or empty text with
 		// content reference)
 		if (isNarrativeTextGenerationEnabled()) {
-			LaboratorySpecialtySection laboratorySpecialtySection = getLaboratorySpecialtySection();
+			final LaboratorySpecialtySection laboratorySpecialtySection = getLaboratorySpecialtySection();
 			lss.createStrucDocText(generateNarrativeTextLaboratoryObservations(
 					laboratorySpecialtySection, 1, "lss"));
 		} else {
