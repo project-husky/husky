@@ -105,11 +105,6 @@ public class AttributeImpl
 		return null;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.security.saml2.Attribute#getValue()
-	 */
 	@Override
 	public String getValueAsString() {
 		if (isValueAString()) {

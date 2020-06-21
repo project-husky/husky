@@ -350,10 +350,8 @@ public class CdaUtil {
 	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher
 	 * den angegebenen Argumenten entspricht.</div>
 	 *
-	 * @param centerValue
-	 *            the center value
-	 * @param unit
-	 *            the unit
+	 * @param nullFlavor
+	 *            the null flavor
 	 * @return the ivlpq
 	 */
 	public static IVLPQ createHl7CdaR2Ivlpq(NullFlavor nullFlavor) {
