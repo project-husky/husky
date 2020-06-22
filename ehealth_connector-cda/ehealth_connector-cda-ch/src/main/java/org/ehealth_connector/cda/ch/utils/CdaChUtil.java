@@ -27,7 +27,10 @@ import org.ehealth_connector.cda.ch.edes.CdaChEdesCtnn;
 import org.ehealth_connector.cda.ch.edes.CdaChEdesEdpn;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEdes;
 import org.ehealth_connector.cda.ch.emed.EmedChStrucDocTextBuilderV096;
-import org.ehealth_connector.cda.ch.emed.v096.*;
+import org.ehealth_connector.cda.ch.emed.v096.DispenseSectionContentModule;
+import org.ehealth_connector.cda.ch.emed.v096.MedicationTreatmenPlanSectionContentModule;
+import org.ehealth_connector.cda.ch.emed.v096.PharmaceuticalAdviceSectionContentModule;
+import org.ehealth_connector.cda.ch.emed.v096.PrescriptionSectionContentModule;
 import org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport;
 import org.ehealth_connector.cda.ch.lab.lrph.CdaChLrph;
 import org.ehealth_connector.cda.ch.lab.lrqc.CdaChLrqc;
@@ -53,11 +56,21 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship
  */
 public abstract class CdaChUtil extends CdaUtilMdht {
 
+	/** The Constant DIS_SECTION_CODE. */
+	public final static String DIS_SECTION_CODE = new DispenseSectionContentModule().getCode()
+			.getCode();
 
-	public final static String PADV_SECTION_CODE = new PharmaceuticalAdviceSectionContentModule().getCode().getCode();
-	public final static String DIS_SECTION_CODE = new DispenseSectionContentModule().getCode().getCode();
-	public final static String PRE_SECTION_CODE = new PrescriptionSectionContentModule().getCode().getCode();
-	public final static String MTP_SECTION_CODE = new MedicationTreatmenPlanSectionContentModule().getCode().getCode();
+	/** The Constant MTP_SECTION_CODE. */
+	public final static String MTP_SECTION_CODE = new MedicationTreatmenPlanSectionContentModule()
+			.getCode().getCode();
+
+	/** The Constant PADV_SECTION_CODE. */
+	public final static String PADV_SECTION_CODE = new PharmaceuticalAdviceSectionContentModule()
+			.getCode().getCode();
+
+	/** The Constant PRE_SECTION_CODE. */
+	public final static String PRE_SECTION_CODE = new PrescriptionSectionContentModule().getCode()
+			.getCode();
 
 	/**
 	 * <div class="en">Loads a CdaChLrepV1GeneralReport document from a given
@@ -79,6 +92,17 @@ public abstract class CdaChUtil extends CdaUtilMdht {
 		return retVal;
 	}
 
+	/**
+	 * <div class="en">Loads a CdaChLrepV1GeneralReport document from a given
+	 * Stream.</div> <div class="de">Lädt ein CdaChLrepV1GeneralReport aus einem
+	 * Stream.</div> <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param inputStream
+	 *            the input stream
+	 * @return the cda ch lrep V 1 general report
+	 * @throws Exception
+	 *             the exception
+	 */
 	public static CdaChLrepV1GeneralReport loadCdaChLrepV1GeneralReportFromStream(
 			InputStream inputStream) throws Exception {
 		final CdaChLoader<CdaChLrepV1GeneralReport> loader = new CdaChLoader<CdaChLrepV1GeneralReport>();
@@ -337,6 +361,54 @@ public abstract class CdaChUtil extends CdaUtilMdht {
 	}
 
 	/**
+	 * <div class="en">Generate text narrative to the given section.</div>
+	 *
+	 * <div class="de">Setzt den angegebenen Text im angegebenen
+	 * Abschnitt.</div>
+	 * <p>
+	 * Sets the section text.
+	 *
+	 * @param structuredBody
+	 *            the structured body
+	 * @param section
+	 *            the section
+	 * @param languageCode
+	 *            the language code
+	 * @param contentIdCounter
+	 *            the content id counter
+	 */
+	public static void setSectionTextGenerated(POCDMT000040StructuredBody structuredBody,
+			POCDMT000040Section section, LanguageCode languageCode, int contentIdCounter) {
+
+		String temp = "section"
+				+ ("000" + Integer.toString(CdaUtil.getSectionCount(structuredBody) + 1)).substring(
+						Integer.toString(CdaUtil.getSectionCount(structuredBody) + 1).length())
+				+ contentIdCounter;
+		String sectionCode = section.getCode().getCode();
+		StrucDocText strucDocText = null;
+
+		// CDA-CH-EMED
+		if (sectionCode.contentEquals(MTP_SECTION_CODE)
+				|| sectionCode.contentEquals(PRE_SECTION_CODE)
+				|| sectionCode.contentEquals(PADV_SECTION_CODE)
+				|| sectionCode.contentEquals(DIS_SECTION_CODE)) {
+			try {
+				strucDocText = new EmedChStrucDocTextBuilderV096(section, languageCode, temp);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		if (strucDocText != null) {
+			section.setText(strucDocText);
+		} else {
+			section.setText(CdaUtil.createHl7CdaR2StrucDocText(temp, languageCode,
+					"narrative text not available"));
+		}
+
+	}
+
+	/**
 	 * Updates a Reference if it is a comment (in a deph of two counters)
 	 *
 	 * @param doNarrTextGen
@@ -427,52 +499,5 @@ public abstract class CdaChUtil extends CdaUtilMdht {
 			er.getAct().setText(ed);
 		}
 		return er;
-	}
-
-	/**
-	 * <div class="en">Generate text narrative to the given section.</div>
-	 *
-	 * <div class="de">Setzt den angegebenen Text im angegebenen
-	 * Abschnitt.</div>
-	 * <p>
-	 * Sets the section text.
-	 *
-	 * @param structuredBody   the structured body
-	 * @param section          the section
-	 * @param languageCode     the language code
-	 * @param contentIdCounter the content id counter
-	 */
-	public static void setSectionTextGenerated(POCDMT000040StructuredBody structuredBody,
-									  POCDMT000040Section section, LanguageCode languageCode,
-									  int contentIdCounter) {
-
-		String temp = "section"
-				+ ("000" + Integer.toString(CdaUtil.getSectionCount(structuredBody) + 1)).substring(
-				Integer.toString(CdaUtil.getSectionCount(structuredBody) + 1).length()) + contentIdCounter;
-		String sectionCode = section.getCode().getCode();
-		StrucDocText strucDocText = null;
-
-		//MTP
-		if (sectionCode.contentEquals(MTP_SECTION_CODE) ||
-				sectionCode.contentEquals(PRE_SECTION_CODE) ||
-				sectionCode.contentEquals(PADV_SECTION_CODE) ||
-				sectionCode.contentEquals(DIS_SECTION_CODE)
-		)
-		{
-			try{
-				strucDocText = new EmedChStrucDocTextBuilderV096(section, languageCode,temp);
-			}
-			catch (Exception e){
-				e.printStackTrace();
-			}
-		}
-
-		if (strucDocText != null) {
-			section.setText(strucDocText);
-		}
-		else{
-			section.setText(CdaUtil.createHl7CdaR2StrucDocText(temp, languageCode, "narrative text not available"));
-		}
-
 	}
 }
