@@ -90,6 +90,7 @@ import org.ehealth_connector.common.hl7cdar2.ST;
 import org.ehealth_connector.common.hl7cdar2.StrucDocContent;
 import org.ehealth_connector.common.hl7cdar2.StrucDocRenderMultiMedia;
 import org.ehealth_connector.common.hl7cdar2.StrucDocText;
+import org.ehealth_connector.common.hl7cdar2.TEL;
 import org.ehealth_connector.common.hl7cdar2.TS;
 import org.ehealth_connector.common.utils.Hl7CdaR2Util;
 import org.w3c.dom.Comment;
@@ -242,6 +243,33 @@ public class CdaUtil {
 		ED retVal = factory.createED();
 		retVal.xmlContent = value;
 		return retVal;
+	}
+
+	/**
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
+	 * corresponding to the given argument.</div>
+	 *
+	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher
+	 * dem angegebenen Argument entspricht.</div>
+	 *
+	 * @param value
+	 *            the value
+	 * @param ref
+	 *            the reference to the narrative text (without #)
+	 * @return an instance of the HL7 CDA R2 data type ED
+	 */
+	public static ED createHl7CdaR2Ed(String value, String ref) {
+		ObjectFactory factory = new ObjectFactory();
+		ED retVal = factory.createED();
+
+		// Add the text including the reference to the narrative text
+		TEL reference = factory.createTEL();
+		reference.setValue("#" + ref);
+
+		retVal.setReference(reference);
+		retVal.xmlContent = value;
+		return retVal;
+
 	}
 
 	/**
