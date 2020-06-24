@@ -283,6 +283,25 @@ public class CdaUtil {
 	 *            the value
 	 * @return an instance of the HL7 CDA R2 data type EN
 	 */
+	public static EN createHl7CdaR2En(NullFlavor value) {
+		ObjectFactory factory = new ObjectFactory();
+		EN retVal = factory.createEN();
+		retVal.nullFlavor = new ArrayList<String>();
+		retVal.nullFlavor.add(value.getCodeValue());
+		return retVal;
+	}
+
+	/**
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
+	 * corresponding to the given argument.</div>
+	 *
+	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher
+	 * dem angegebenen Argument entspricht.</div>
+	 *
+	 * @param value
+	 *            the value
+	 * @return an instance of the HL7 CDA R2 data type EN
+	 */
 	public static EN createHl7CdaR2En(String value) {
 		ObjectFactory factory = new ObjectFactory();
 		EN retVal = factory.createEN();
