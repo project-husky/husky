@@ -60,7 +60,7 @@ public class ChpalmEntryLaboratoryObservation
 				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.3"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.6"));
-		super.setCode(createHl7CodeFixedValue("UNK"));
+		super.setCode(createHl7CodeFixedValue("OTH"));
 		super.setStatusCode(createHl7StatusCodeFixedValue());
 	}
 

@@ -27,10 +27,10 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Type of document as per Annex 3 EPRO-FDHA.<br clear="none"/>      <br clear="none"/>The code defines a document’s type (e.g. discharge report, laboratory report). Each document type should be assigned to precisely one document class.<br clear="none"/>    </div>
- * <div class="de">Typ des Dokumentes (2.16.756.5.30.1.127.3.10.1.27) gemäss Anhang 3 der Verordnungen zum EPDG.<br clear="none"/>      <br clear="none"/>Der Code definiert den Typ eines Dokuments (z.B. Austrittsbericht, Labor-Bericht). Jeder Dokumenten-Typ sollte genau einer Dokumentenklasse zugeordnet sein.<br clear="none"/>    </div>
- * <div class="fr">Type du document selon l'annexe 3 ODEP-DFI.<br clear="none"/>      <br clear="none"/>Le code définit le type de document (p. ex. rapport de sortie, rapport de laboratoire). Chaque type de document doit être  associé à une seule classification.<br clear="none"/>    </div>
- * <div class="it">Tipo di documento secondo l'allegato 3 OCIP-DFI.<br clear="none"/>      <br clear="none"/>Il codice definisce il tipo di documento (p. es. rapporto di dimissione, rapporto di laboratorio). Ciascun tipo di documento dovrebbe essere associato a una sola classe di documenti.<br clear="none"/>    </div>
+ * <div class="en">Type of document as per Annex 3 EPRO-FDHA.      		The code defines a document’s type (e.g. discharge report, laboratory report). Each document type should be assigned to precisely one document class.    </div>
+ * <div class="de">Typ des Dokumentes (2.16.756.5.30.1.127.3.10.1.27) gemäss Anhang 3 der Verordnungen zum EPDG.      		Der Code definiert den Typ eines Dokuments (z.B. Austrittsbericht, Labor-Bericht). Jeder Dokumenten-Typ sollte genau einer Dokumentenklasse zugeordnet sein.    </div>
+ * <div class="fr">Type du document selon l'annexe 3 ODEP-DFI.        	Le code définit le type de document (p. ex. rapport de sortie, rapport de laboratoire). Chaque type de document doit être  associé à une seule classification.    </div>
+ * <div class="it">Tipo di documento secondo l'allegato 3 OCIP-DFI.     		Il codice definisce il tipo di documento (p. es. rapporto di dimissione, rapporto di laboratorio). Ciascun tipo di documento dovrebbe essere associato a una sola classe di documenti.    </div>
  * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
@@ -49,14 +49,14 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 			"Passaporto delle allergie"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Clinical Management plan</div>
+	 * <div class="en">Clinical management plan</div>
 	 * <div class="de">Behandlungsplan</div>
 	 * <div class="fr">Plan de traitement</div>
 	 * <div class="it">Piano di trattamento</div>
 	 * <!-- @formatter:on -->
 	 */
 	CLINICAL_MANAGEMENT_PLAN("737427001", "2.16.840.1.113883.6.96",
-			"Clinical Management plan (record artifact)", "Clinical Management plan",
+			"Clinical management plan (record artifact)", "Clinical management plan",
 			"Behandlungsplan", "Plan de traitement", "Piano di trattamento"),
 	/**
 	 * <!-- @formatter:off -->
@@ -200,7 +200,7 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	MEDICINAL_PRESCRIPTION_RECORD("761938008", "2.16.840.1.113883.6.96",
-			"Medicinal Prescription record (record artifact)", "Medicinal Prescription record",
+			"Medicinal prescription record (record artifact)", "Medicinal Prescription record",
 			"Arzneimittel-Verschreibung / Rezept", "Prescription de médicaments / ordonnance",
 			"Prescrizione di medicamenti"),
 	/**
@@ -327,7 +327,7 @@ public enum DocumentEntryTypeCode implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Clinical Management plan</div>
+	 * <div class="en">Code for Clinical management plan</div>
 	 * <div class="de">Code für Behandlungsplan</div>
 	 * <div class="fr">Code de Plan de traitement</div>
 	 * <div class="it">Code per Piano di trattamento</div>
