@@ -20,7 +20,7 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.71 Template
- * description: CDA-CH-VACD V2 bases on CDA-CH V2 (2017) and the Immunization
+ * description: CDA-CH-VACD V2 bases on CDA-CH V2.1 (2020) and the Immunization
  * Content profile (IHE PCC TF 11.0, 2016). This template defines the rules for
  * documents that are not to be published in the Swiss EPR.
  *
@@ -51,8 +51,8 @@ public class CdachvacdHeaderTemplateIdsCdaChVacdV2NonEpr
 	}
 
 	/**
-	 * Gets the hl7TemplateId CDA-CH-VACD / eVACDOC V2 specification. This is an
-	 * informational reference, only.
+	 * Gets the hl7TemplateId CDA-CH-VACD / eVACDOC V2.1 specification. This is
+	 * an informational reference, only.
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
 		return templateId;
@@ -69,8 +69,8 @@ public class CdachvacdHeaderTemplateIdsCdaChVacdV2NonEpr
 	}
 
 	/**
-	 * Sets the hl7TemplateId CDA-CH-VACD / eVACDOC V2 specification. This is an
-	 * informational reference, only.
+	 * Sets the hl7TemplateId CDA-CH-VACD / eVACDOC V2.1 specification. This is
+	 * an informational reference, only.
 	 */
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		getTemplateId().clear();
