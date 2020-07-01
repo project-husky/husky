@@ -22,44 +22,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <!-- @formatter:off -->
  * <div class="en">Unit of times used in emed</div>
- * <!-- @formatter:on -->
  */
 public enum UnitsOfTime {
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Second</div>
-	 * <div class="de">Sekunde</div>
-	 * <div class="fr">seconde</div>
-	 * <div class="it">secondo</div>
-	 * <!-- @formatter:on -->
-	 */
-	SECOND("s", 0, "Second",
-			"second(s)", "Sekunde(n)", "seconde(s)", "secondo(i)"),
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Minute</div>
-	 * <div class="de">Minute</div>
-	 * <div class="fr">minute</div>
-	 * <div class="it">minuto</div>
-	 * <!-- @formatter:on -->
-	 */
-	MINUTE("min", 1, "Minute",
-			"minute(s)", "Minute(n)", "minute(s)", "minuto(i)"),
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Hour</div>
-	 * <div class="de">Stunde</div>
-	 * <div class="fr">heure</div>
-	 * <div class="it">ora</div>
-	 * <!-- @formatter:on -->
-	 */
-	HOUR("h", 2, "Hour",
-			"hour(s)", "Stunde(n)", "heure(s)", "ora(e)"),
-
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">day</div>
@@ -68,20 +33,25 @@ public enum UnitsOfTime {
 	 * <div class="it">giorno</div>
 	 * <!-- @formatter:on -->
 	 */
-	DAY("d", 3, "Day",
-			"day(s)", "Tag(e)", "jour(s)", "giorno(i)"),
-
+	DAY("d", 3, "Day", "day(s)", "Tag(e)", "jour(s)", "giorno(i)"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">week</div>
-	 * <div class="de">Woche</div>
-	 * <div class="fr">semaine</div>
-	 * <div class="it">settimana</div>
+	 * <div class="en">Hour</div>
+	 * <div class="de">Stunde</div>
+	 * <div class="fr">heure</div>
+	 * <div class="it">ora</div>
 	 * <!-- @formatter:on -->
 	 */
-	WEEK("wk", 4, "Week",
-			"week(s)", "Woche(n)", "semaine(s)", "settimana(e)"),
-
+	HOUR("h", 2, "Hour", "hour(s)", "Stunde(n)", "heure(s)", "ora(e)"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Minute</div>
+	 * <div class="de">Minute</div>
+	 * <div class="fr">minute</div>
+	 * <div class="it">minuto</div>
+	 * <!-- @formatter:on -->
+	 */
+	MINUTE("min", 1, "Minute", "minute(s)", "Minute(n)", "minute(s)", "minuto(i)"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">month</div>
@@ -90,8 +60,25 @@ public enum UnitsOfTime {
 	 * <div class="it">mese</div>
 	 * <!-- @formatter:on -->
 	 */
-	MONTH("mo", 5, "Month",
-			"month(s)", "Monat(e)", "mois", "mese(i)"),
+	MONTH("mo", 5, "Month", "month(s)", "Monat(e)", "mois", "mese(i)"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Second</div>
+	 * <div class="de">Sekunde</div>
+	 * <div class="fr">seconde</div>
+	 * <div class="it">secondo</div>
+	 * <!-- @formatter:on -->
+	 */
+	SECOND("s", 0, "Second", "second(s)", "Sekunde(n)", "seconde(s)", "secondo(i)"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">week</div>
+	 * <div class="de">Woche</div>
+	 * <div class="fr">semaine</div>
+	 * <div class="it">settimana</div>
+	 * <!-- @formatter:on -->
+	 */
+	WEEK("wk", 4, "Week", "week(s)", "Woche(n)", "semaine(s)", "settimana(e)"),
 
 	/**
 	 * <!-- @formatter:off -->
@@ -101,23 +88,46 @@ public enum UnitsOfTime {
 	 * <div class="it">anno</div>
 	 * <!-- @formatter:on -->
 	 */
-	YEAR("a", 6, "Year",
-			"year(s)", "Jahr(e)", "année(s)", "anno(i)");
+	YEAR("a", 6, "Year", "year(s)", "Jahr(e)", "année(s)", "anno(i)");
 
-	String[] unitsOfTimeOrdered =new String[]{ "s","min","h","d","wk","mo","a"};
-	Integer[] unitsOfTimeOrderedTime = new Integer[]{ 60,60,24,7,4,12,1};
+	/**
+	 * List of unit time ordered
+	 */
+	String[] unitsOfTimeOrdered = new String[] { "s", "min", "h", "d", "wk", "mo", "a" };
+	/**
+	 * list of value of unit time sorted, each value represent one unit of the
+	 * next unit in the table ex : 60s = 1m / 60min=1h / 24h = 1d
+	 */
+	Integer[] unitsOfTimeOrderedTime = new Integer[] { 60, 60, 24, 7, 4, 12, 1 };
 
-	public Integer getUnitTimed(){
+	/**
+	 * <div class="en"> Get the next unit time "timed"</div>
+	 * 
+	 * @return the next unit time "timed"
+	 */
+	public Integer getUnitTimed() {
 		return this.unitsOfTimeOrderedTime[this.pos];
 	}
 
-	public UnitsOfTime getNext(){
-		int nextPos = this.pos +1;
-		if(nextPos>=unitsOfTimeOrdered.length)
+	/**
+	 * <div class="en">get the next unit time</div>
+	 * 
+	 * @return the next unit time of the curent value
+	 */
+	public UnitsOfTime getNext() {
+		int nextPos = this.pos + 1;
+		if (nextPos >= unitsOfTimeOrdered.length)
 			return null;
 		return getEnum(unitsOfTimeOrdered[nextPos]);
 	}
 
+	/**
+	 * <div class="en">get an unit time by its code</div>
+	 * 
+	 * @param code
+	 *            code of the unit of time
+	 * @return the UnitOfTime
+	 */
 	public static UnitsOfTime getEnum(String code) {
 		for (final UnitsOfTime x : values()) {
 			if (x.getCodeValue().equals(code)) {
@@ -208,9 +218,8 @@ public enum UnitsOfTime {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	UnitsOfTime(String code, int pos, String displayName,
-                String displayNameEn, String displayNameDe, String displayNameFr,
-                String displayNameIt) {
+	UnitsOfTime(String code, int pos, String displayName, String displayNameEn,
+			String displayNameDe, String displayNameFr, String displayNameIt) {
 		this.code = code;
 		this.pos = pos;
 		displayNames = new HashMap<>();
@@ -220,15 +229,6 @@ public enum UnitsOfTime {
 		displayNames.put(LanguageCode.FRENCH, displayNameFr);
 		displayNames.put(LanguageCode.ITALIAN, displayNameIt);
 	}
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the code system identifier.</div>
-	 * <div class="de">Liefert den Code System Identifikator.</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @return <div class="en">the code system identifier</div>
-	 */
 
 
 	/**
@@ -274,7 +274,7 @@ public enum UnitsOfTime {
 	 *
 	 * @return <div class="en">the code system identifier</div>
 	 */
-	public String toString(){
+	public String toString() {
 		return getCodeValue();
 	}
 
