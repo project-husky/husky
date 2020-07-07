@@ -16,6 +16,21 @@
  */
 package org.ehealth_connector.cda.ch.emed;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.io.Serializable;
+import java.io.StringWriter;
+import java.math.BigInteger;
+import java.util.Date;
+import java.util.List;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.namespace.QName;
+
 import org.apache.commons.lang3.StringUtils;
 import org.ehealth_connector.cda.ch.emed.v096.DosageInstructionsEntryDosageChange;
 import org.ehealth_connector.cda.ch.emed.v096.DosageInstructionsStartStopFrequency;
@@ -27,23 +42,30 @@ import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.hl7cdar2.*;
+import org.ehealth_connector.common.hl7cdar2.EIVLEvent;
+import org.ehealth_connector.common.hl7cdar2.EIVLTS;
+import org.ehealth_connector.common.hl7cdar2.INT;
+import org.ehealth_connector.common.hl7cdar2.IVLPQ;
+import org.ehealth_connector.common.hl7cdar2.IVLTS;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+import org.ehealth_connector.common.hl7cdar2.PIVLTS;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Component3;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040StructuredBody;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration;
+import org.ehealth_connector.common.hl7cdar2.PQ;
+import org.ehealth_connector.common.hl7cdar2.SXCMTS;
+import org.ehealth_connector.common.hl7cdar2.SXPRTS;
+import org.ehealth_connector.common.hl7cdar2.SetOperator;
+import org.ehealth_connector.common.hl7cdar2.StrucDocTable;
+import org.ehealth_connector.common.hl7cdar2.StrucDocTd;
+import org.ehealth_connector.common.hl7cdar2.StrucDocText;
+import org.ehealth_connector.common.hl7cdar2.TS;
+import org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.junit.Test;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.namespace.QName;
-import java.io.Serializable;
-import java.io.StringWriter;
-import java.math.BigInteger;
-import java.util.Date;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 /**
  * <div class="en">Unit Tests for Class EmedChStrucDocTextBuilderV096</div>
@@ -53,171 +75,6 @@ public class EmedChStrucDocTextBuilderV096Test {
 	 * to create new objects
 	 */
 	private ObjectFactory factory = new ObjectFactory();
-
-	/**
-	 * Test is narrative text and references are well created and added to the
-	 * doc
-	 */
-	@Test
-	public void narrativTextAndReferenceGenerated() {
-
-		// Check if narrative table is well created and added to the text
-		// section
-		DosageInstructionsStartStopFrequency dosageInstructionsSplited = createDosageSplited();
-		POCDMT000040ClinicalDocument doc = addDosageInstructionToNewDoc(dosageInstructionsSplited);
-		POCDMT000040StructuredBody structuredBody = CdaUtil.getHl7CdaR2StructuredBody(doc);
-		CdaChUtil.setSectionTextGenerated(structuredBody,
-				structuredBody.getComponent().get(0).getSection(), LanguageCode.FRENCH, 1);
-		StrucDocText strucDocText = structuredBody.getComponent().get(0).getSection().getText();
-		List<Serializable> content = strucDocText.getContent();
-		assertTrue(content.size() > 1);
-		StrucDocTable strucDocTable = (StrucDocTable) ((JAXBElement) content.get(1)).getValue();
-		StrucDocTd strucDocTd = (StrucDocTd) strucDocTable.getTbody().get(0).getTr().get(0)
-				.getThOrTd().get(2);
-		assertEquals("MTP.frequency.0", strucDocTd.getID());
-		assertEquals("1) 40g Après le repas du soir", strucDocTd.getContent().get(0));
-		assertEquals("2) 20g Avant le coucher, Débit : 10/min", strucDocTd.getContent().get(2));
-
-		String DOSAGE_INTAKE_REFERENCE_TEMPLATE_ID = new DosageIntakeModeEntryContentModule()
-				.getHl7TemplateId().get(0).getRoot(); // "2.16.756.5.30.1.1.10.4.37";
-		// Check if reference is well added in an entryRelationship
-		POCDMT000040SubstanceAdministration substanceAdministrationDosageIntakeText = structuredBody
-				.getComponent().get(0).getSection().getEntry().get(0).getSubstanceAdministration()
-				.getEntryRelationship().stream()
-				.filter(pocdmt000040EntryRelationship -> pocdmt000040EntryRelationship
-						.getSubstanceAdministration() != null)
-				.filter(pocdmt000040EntryRelationship -> pocdmt000040EntryRelationship
-						.getSubstanceAdministration().getTemplateId().stream()
-						.anyMatch(templateId -> templateId.getRoot()
-								.equals(DOSAGE_INTAKE_REFERENCE_TEMPLATE_ID)))
-				.findFirst().map(POCDMT000040EntryRelationship::getSubstanceAdministration)
-				.orElse(null);
-		assertEquals("MTP.frequency.0",
-				substanceAdministrationDosageIntakeText.getText().getReference().getValue());
-		jaxbObjectToXML(doc);
-	}
-
-	/**
-	 * Test date formating
-	 */
-	@Test
-	public void parseTsTest() {
-		TS ts = DateUtil.date2Ts(DateUtil.parseDateAndTime("20.6.2020 10:50"));
-		String dateFR = EmedChStrucDocTextBuilderV096.parseTs(LanguageCode.FRENCH, ts);
-		String dateDE = EmedChStrucDocTextBuilderV096.parseTs(LanguageCode.GERMAN, ts);
-		String dateIT = EmedChStrucDocTextBuilderV096.parseTs(LanguageCode.ITALIAN, ts);
-		String dateEN = EmedChStrucDocTextBuilderV096.parseTs(LanguageCode.ENGLISH, ts);
-		assertEquals(dateFR, "20 juin 2020 10:50");
-		assertEquals(dateDE, "20 Juni 2020 10:50");
-		assertEquals(dateIT, "20 giugno 2020 10:50");
-		assertEquals(dateEN, "20 June 2020 10:50");
-	}
-
-	/**
-	 * Test eivlts
-	 */
-	@Test
-	public void parseEivltsTest() {
-		EIVLTS eivltsWithOffset = createAcmWithOffset();
-		String eivltsWithOffsetText = EmedChStrucDocTextBuilderV096
-				.parseEivlTs(LanguageCode.ENGLISH, eivltsWithOffset);
-		String eivltsWithOffsetTextFrench = EmedChStrucDocTextBuilderV096
-				.parseEivlTs(LanguageCode.FRENCH, eivltsWithOffset);
-		String eivltsWithOffsetTextGerman = EmedChStrucDocTextBuilderV096
-				.parseEivlTs(LanguageCode.GERMAN, eivltsWithOffset);
-		String eivltsWithOffsetTextItalian = EmedChStrucDocTextBuilderV096
-				.parseEivlTs(LanguageCode.ITALIAN, eivltsWithOffset);
-		assertEquals("1 hour(s) - 2 hour(s) Before breakfast during 1 hour(s)",
-				eivltsWithOffsetText);
-		assertEquals("1 Stunde(n) - 2 Stunde(n) Vor dem Frühstück während 1 Stunde(n)",
-				eivltsWithOffsetTextGerman);
-
-		assertEquals("1 heure(s) - 2 heure(s) Avant le petit-déjeuner pendant 1 heure(s)",
-				eivltsWithOffsetTextFrench);
-		assertEquals("1 ora(e) - 2 ora(e) Prima di colazione durante 1 ora(e)",
-				eivltsWithOffsetTextItalian);
-		EIVLTS eivltsAcm = createAcm();
-		assertEquals("Before breakfast",
-				EmedChStrucDocTextBuilderV096.parseEivlTs(LanguageCode.ENGLISH, eivltsAcm));
-		assertEquals("Avant le petit-déjeuner",
-				EmedChStrucDocTextBuilderV096.parseEivlTs(LanguageCode.FRENCH, eivltsAcm));
-	}
-
-	/**
-	 * Test pivlts
-	 */
-	@Test
-	public void parsePivltsTest() {
-		/*
-		 * <effectiveTime xsi:type="PIVL_TS" institutionSpecified="true"
-		 * operator="A" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-		 * <period value="2" unit="h"/> </effectiveTime>
-		 */
-		PIVLTS pivltsFrequency = createPivl(true);
-		/*
-		 * 
-		 * <effectiveTime xsi:type="PIVL_TS" institutionSpecified="false"
-		 * operator="A" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-		 * <period value="2" unit="h"/> </effectiveTime>
-		 */
-		PIVLTS pivltsPeriod = createPivl(false);
-		String pivltsFrequencyStr = EmedChStrucDocTextBuilderV096.parsePivlTs(LanguageCode.ENGLISH,
-				pivltsFrequency);
-
-		PIVLTS pivltsWithPhase = createPivlWithPhase();
-		System.out.println(DateUtil.parseHl7Timestamp("198701010800").toString());
-		printDoc(pivltsWithPhase);
-		assertEquals("12x per day(s)", pivltsFrequencyStr);
-
-		assertEquals("chaque 2 heure(s)",
-				EmedChStrucDocTextBuilderV096.parsePivlTs(LanguageCode.FRENCH, pivltsPeriod));
-
-		assertEquals("chaque 1 jour(s) à 10:50 pendant 10 minute(s)",
-				EmedChStrucDocTextBuilderV096.parsePivlTs(LanguageCode.FRENCH, pivltsWithPhase));
-
-		createPivl(pivltsFrequency);
-		createPivl(pivltsPeriod);
-	}
-
-	/**
-	 * Test sxprts
-	 */
-	@Test
-	public void parseSxprtsTest() {
-		ObjectFactory objectFactory = new ObjectFactory();
-		SXPRTS sxprts = objectFactory.createSXPRTS();
-		sxprts.getComp()
-				.add(createHl7CdaR2IvlTs(
-						DateUtil.formatDateTime(DateUtil.parseDateAndTime("20.6.2020 10:50")), null,
-						"10", "d"));
-		sxprts.getComp().add(createAcm());
-		sxprts.getComp().add(createEIVLTS(ChEmedTimingEvent.AFTER_BREAKFAST));
-		sxprts.getComp().add(createEIVLTS(ChEmedTimingEvent.BETWEEN_LUNCH_AND_DINNER));
-		sxprts.getComp().add(createEIVLTS(ChEmedTimingEvent.AFTER_DINNER));
-
-		assertEquals(
-				"du 20 juin 2020 10:50 pendant 10 jour(s): Avant le petit-déjeuner et Après le petit-déjeuner et Entre le repas de midi et du soir et Après le repas du soir",
-				EmedChStrucDocTextBuilderV096.parseSxprTs(LanguageCode.FRENCH, sxprts));
-	}
-
-	/**
-	 * Test splited Dosage
-	 */
-	@Test
-	public void parseSplitedDosage() {
-
-		DosageInstructionsStartStopFrequency dosageInstructionsSplited = createDosageSplited();
-		System.out.println(dosageInstructionsSplited);
-		addDosageInstructionToNewDoc(dosageInstructionsSplited);
-
-		List<String> dosageIntakes = EmedChStrucDocTextBuilderV096
-				.parseSplitedDosageIntake(dosageInstructionsSplited, LanguageCode.FRENCH);
-
-		assertEquals("1) 40g Après le repas du soir", dosageIntakes.get(0));
-		assertEquals("2) 20g Avant le coucher, Débit : 10/min", dosageIntakes.get(1));
-		System.out.println(StringUtils.join(dosageIntakes, "\n"));
-
-	}
 
 	/**
 	 * Add dosage
@@ -432,50 +289,6 @@ public class EmedChStrucDocTextBuilderV096Test {
 		return acm;
 	}
 
-	private IVLTS createHl7CdaR2IvlTs(String lowValue, String highValue, String widthValue,
-			String unit) {
-		ObjectFactory factory = new ObjectFactory();
-		IVLTS retVal = factory.createIVLTS();
-
-		PQ pqLow = null;
-		if (lowValue == null) {
-			pqLow = CdaUtil.createHl7CdaR2NullFlavorPq(null);
-		} else {
-			pqLow = factory.createPQ();
-			pqLow.setValue(lowValue);
-			pqLow.setUnit(unit);
-		}
-
-		PQ pqHigh = null;
-		if (highValue == null) {
-			pqHigh = CdaUtil.createHl7CdaR2NullFlavorPq(null);
-		} else {
-			pqHigh = factory.createPQ();
-			pqHigh.setValue(highValue);
-			pqHigh.setUnit(unit);
-
-		}
-
-		PQ pqWidth = null;
-		if (widthValue == null) {
-			pqWidth = CdaUtil.createHl7CdaR2NullFlavorPq(null);
-		} else {
-			pqWidth = factory.createPQ();
-			pqWidth.setValue(widthValue);
-			pqWidth.setUnit(unit);
-
-		}
-
-		retVal.getRest()
-				.add(new JAXBElement<PQ>(new QName("urn:hl7-org:v3", "low"), PQ.class, pqLow));
-		retVal.getRest()
-				.add(new JAXBElement<PQ>(new QName("urn:hl7-org:v3", "high"), PQ.class, pqHigh));
-
-		retVal.getRest()
-				.add(new JAXBElement<PQ>(new QName("urn:hl7-org:v3", "width"), PQ.class, pqWidth));
-		return retVal;
-	}
-
 	private IVLPQ createHl7CdaR2Ivlpq(String lowValue, String highValue, String widthValue,
 			String unit) {
 		ObjectFactory factory = new ObjectFactory();
@@ -520,6 +333,67 @@ public class EmedChStrucDocTextBuilderV096Test {
 		return retVal;
 	}
 
+	private IVLTS createHl7CdaR2IvlTs(String lowValue, String highValue, String widthValue,
+			String unit) {
+		ObjectFactory factory = new ObjectFactory();
+		IVLTS retVal = factory.createIVLTS();
+
+		PQ pqLow = null;
+		if (lowValue == null) {
+			pqLow = CdaUtil.createHl7CdaR2NullFlavorPq(null);
+		} else {
+			pqLow = factory.createPQ();
+			pqLow.setValue(lowValue);
+			pqLow.setUnit(unit);
+		}
+
+		PQ pqHigh = null;
+		if (highValue == null) {
+			pqHigh = CdaUtil.createHl7CdaR2NullFlavorPq(null);
+		} else {
+			pqHigh = factory.createPQ();
+			pqHigh.setValue(highValue);
+			pqHigh.setUnit(unit);
+
+		}
+
+		PQ pqWidth = null;
+		if (widthValue == null) {
+			pqWidth = CdaUtil.createHl7CdaR2NullFlavorPq(null);
+		} else {
+			pqWidth = factory.createPQ();
+			pqWidth.setValue(widthValue);
+			pqWidth.setUnit(unit);
+
+		}
+
+		retVal.getRest()
+				.add(new JAXBElement<PQ>(new QName("urn:hl7-org:v3", "low"), PQ.class, pqLow));
+		retVal.getRest()
+				.add(new JAXBElement<PQ>(new QName("urn:hl7-org:v3", "high"), PQ.class, pqHigh));
+
+		retVal.getRest()
+				.add(new JAXBElement<PQ>(new QName("urn:hl7-org:v3", "width"), PQ.class, pqWidth));
+		return retVal;
+	}
+
+	/**
+	 * Creates sample data.
+	 *
+	 * @return the eivlts
+	 */
+	private PIVLTS createPivl(boolean institutionSpecified) {
+		ObjectFactory factory = new ObjectFactory();
+		PIVLTS pivlts = new PIVLTS();
+		pivlts.setInstitutionSpecified(institutionSpecified);
+		pivlts.setOperator(SetOperator.A);
+		PQ period = factory.createPQ();
+		period.setUnit("h");
+		period.setValue("2");
+		pivlts.setPeriod(period);
+		return pivlts;
+	}
+
 	/**
 	 * Creates sample data.
 	 *
@@ -540,23 +414,6 @@ public class EmedChStrucDocTextBuilderV096Test {
 		addDosageInstructionToNewDoc(diStartStopFrequency);
 		return diStartStopFrequency;
 
-	}
-
-	/**
-	 * Creates sample data.
-	 *
-	 * @return the eivlts
-	 */
-	private PIVLTS createPivl(boolean institutionSpecified) {
-		ObjectFactory factory = new ObjectFactory();
-		PIVLTS pivlts = new PIVLTS();
-		pivlts.setInstitutionSpecified(institutionSpecified);
-		pivlts.setOperator(SetOperator.A);
-		PQ period = factory.createPQ();
-		period.setUnit("h");
-		period.setValue("2");
-		pivlts.setPeriod(period);
-		return pivlts;
 	}
 
 	/**
@@ -625,6 +482,171 @@ public class EmedChStrucDocTextBuilderV096Test {
 		} catch (JAXBException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Test is narrative text and references are well created and added to the
+	 * doc
+	 */
+	@Test
+	public void narrativTextAndReferenceGenerated() {
+
+		// Check if narrative table is well created and added to the text
+		// section
+		DosageInstructionsStartStopFrequency dosageInstructionsSplited = createDosageSplited();
+		POCDMT000040ClinicalDocument doc = addDosageInstructionToNewDoc(dosageInstructionsSplited);
+		POCDMT000040StructuredBody structuredBody = CdaUtil.getHl7CdaR2StructuredBody(doc);
+		CdaChUtil.setSectionTextGenerated(structuredBody,
+				structuredBody.getComponent().get(0).getSection(), LanguageCode.FRENCH, 1);
+		StrucDocText strucDocText = structuredBody.getComponent().get(0).getSection().getText();
+		List<Serializable> content = strucDocText.getContent();
+		assertTrue(content.size() > 1);
+		StrucDocTable strucDocTable = (StrucDocTable) ((JAXBElement) content.get(1)).getValue();
+		StrucDocTd strucDocTd = (StrucDocTd) strucDocTable.getTbody().get(0).getTr().get(0)
+				.getThOrTd().get(2);
+		assertEquals("MTP.frequency.0", strucDocTd.getID());
+		assertEquals("1) 40g Après le repas du soir", strucDocTd.getContent().get(0));
+		assertEquals("2) 20g Avant le coucher, Débit : 10/min", strucDocTd.getContent().get(2));
+
+		String DOSAGE_INTAKE_REFERENCE_TEMPLATE_ID = new DosageIntakeModeEntryContentModule()
+				.getHl7TemplateId().get(0).getRoot(); // "2.16.756.5.30.1.1.10.4.37";
+		// Check if reference is well added in an entryRelationship
+		POCDMT000040SubstanceAdministration substanceAdministrationDosageIntakeText = structuredBody
+				.getComponent().get(0).getSection().getEntry().get(0).getSubstanceAdministration()
+				.getEntryRelationship().stream()
+				.filter(pocdmt000040EntryRelationship -> pocdmt000040EntryRelationship
+						.getSubstanceAdministration() != null)
+				.filter(pocdmt000040EntryRelationship -> pocdmt000040EntryRelationship
+						.getSubstanceAdministration().getTemplateId().stream()
+						.anyMatch(templateId -> templateId.getRoot()
+								.equals(DOSAGE_INTAKE_REFERENCE_TEMPLATE_ID)))
+				.findFirst().map(POCDMT000040EntryRelationship::getSubstanceAdministration)
+				.orElse(null);
+		assertEquals("#MTP.frequency.0",
+				substanceAdministrationDosageIntakeText.getText().getReference().getValue());
+		jaxbObjectToXML(doc);
+	}
+
+	/**
+	 * Test eivlts
+	 */
+	@Test
+	public void parseEivltsTest() {
+		EIVLTS eivltsWithOffset = createAcmWithOffset();
+		String eivltsWithOffsetText = EmedChStrucDocTextBuilderV096
+				.parseEivlTs(LanguageCode.ENGLISH, eivltsWithOffset);
+		String eivltsWithOffsetTextFrench = EmedChStrucDocTextBuilderV096
+				.parseEivlTs(LanguageCode.FRENCH, eivltsWithOffset);
+		String eivltsWithOffsetTextGerman = EmedChStrucDocTextBuilderV096
+				.parseEivlTs(LanguageCode.GERMAN, eivltsWithOffset);
+		String eivltsWithOffsetTextItalian = EmedChStrucDocTextBuilderV096
+				.parseEivlTs(LanguageCode.ITALIAN, eivltsWithOffset);
+		assertEquals("1 hour(s) - 2 hour(s) Before breakfast during 1 hour(s)",
+				eivltsWithOffsetText);
+		assertEquals("1 Stunde(n) - 2 Stunde(n) Vor dem Frühstück während 1 Stunde(n)",
+				eivltsWithOffsetTextGerman);
+
+		assertEquals("1 heure(s) - 2 heure(s) Avant le petit-déjeuner pendant 1 heure(s)",
+				eivltsWithOffsetTextFrench);
+		assertEquals("1 ora(e) - 2 ora(e) Prima di colazione durante 1 ora(e)",
+				eivltsWithOffsetTextItalian);
+		EIVLTS eivltsAcm = createAcm();
+		assertEquals("Before breakfast",
+				EmedChStrucDocTextBuilderV096.parseEivlTs(LanguageCode.ENGLISH, eivltsAcm));
+		assertEquals("Avant le petit-déjeuner",
+				EmedChStrucDocTextBuilderV096.parseEivlTs(LanguageCode.FRENCH, eivltsAcm));
+	}
+
+	/**
+	 * Test pivlts
+	 */
+	@Test
+	public void parsePivltsTest() {
+		/*
+		 * <effectiveTime xsi:type="PIVL_TS" institutionSpecified="true"
+		 * operator="A" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+		 * <period value="2" unit="h"/> </effectiveTime>
+		 */
+		PIVLTS pivltsFrequency = createPivl(true);
+		/*
+		 *
+		 * <effectiveTime xsi:type="PIVL_TS" institutionSpecified="false"
+		 * operator="A" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+		 * <period value="2" unit="h"/> </effectiveTime>
+		 */
+		PIVLTS pivltsPeriod = createPivl(false);
+		String pivltsFrequencyStr = EmedChStrucDocTextBuilderV096.parsePivlTs(LanguageCode.ENGLISH,
+				pivltsFrequency);
+
+		PIVLTS pivltsWithPhase = createPivlWithPhase();
+		System.out.println(DateUtil.parseHl7Timestamp("198701010800").toString());
+		printDoc(pivltsWithPhase);
+		assertEquals("12x per day(s)", pivltsFrequencyStr);
+
+		assertEquals("chaque 2 heure(s)",
+				EmedChStrucDocTextBuilderV096.parsePivlTs(LanguageCode.FRENCH, pivltsPeriod));
+
+		assertEquals("chaque 1 jour(s) à 10:50 pendant 10 minute(s)",
+				EmedChStrucDocTextBuilderV096.parsePivlTs(LanguageCode.FRENCH, pivltsWithPhase));
+
+		createPivl(pivltsFrequency);
+		createPivl(pivltsPeriod);
+	}
+
+	/**
+	 * Test splited Dosage
+	 */
+	@Test
+	public void parseSplitedDosage() {
+
+		DosageInstructionsStartStopFrequency dosageInstructionsSplited = createDosageSplited();
+		System.out.println(dosageInstructionsSplited);
+		addDosageInstructionToNewDoc(dosageInstructionsSplited);
+
+		List<String> dosageIntakes = EmedChStrucDocTextBuilderV096
+				.parseSplitedDosageIntake(dosageInstructionsSplited, LanguageCode.FRENCH);
+
+		assertEquals("1) 40g Après le repas du soir", dosageIntakes.get(0));
+		assertEquals("2) 20g Avant le coucher, Débit : 10/min", dosageIntakes.get(1));
+		System.out.println(StringUtils.join(dosageIntakes, "\n"));
+
+	}
+
+	/**
+	 * Test sxprts
+	 */
+	@Test
+	public void parseSxprtsTest() {
+		ObjectFactory objectFactory = new ObjectFactory();
+		SXPRTS sxprts = objectFactory.createSXPRTS();
+		sxprts.getComp()
+				.add(createHl7CdaR2IvlTs(
+						DateUtil.formatDateTime(DateUtil.parseDateAndTime("20.6.2020 10:50")), null,
+						"10", "d"));
+		sxprts.getComp().add(createAcm());
+		sxprts.getComp().add(createEIVLTS(ChEmedTimingEvent.AFTER_BREAKFAST));
+		sxprts.getComp().add(createEIVLTS(ChEmedTimingEvent.BETWEEN_LUNCH_AND_DINNER));
+		sxprts.getComp().add(createEIVLTS(ChEmedTimingEvent.AFTER_DINNER));
+
+		assertEquals(
+				"du 20 juin 2020 10:50 pendant 10 jour(s): Avant le petit-déjeuner et Après le petit-déjeuner et Entre le repas de midi et du soir et Après le repas du soir",
+				EmedChStrucDocTextBuilderV096.parseSxprTs(LanguageCode.FRENCH, sxprts));
+	}
+
+	/**
+	 * Test date formating
+	 */
+	@Test
+	public void parseTsTest() {
+		TS ts = DateUtil.date2Ts(DateUtil.parseDateAndTime("20.6.2020 10:50"));
+		String dateFR = EmedChStrucDocTextBuilderV096.parseTs(LanguageCode.FRENCH, ts);
+		String dateDE = EmedChStrucDocTextBuilderV096.parseTs(LanguageCode.GERMAN, ts);
+		String dateIT = EmedChStrucDocTextBuilderV096.parseTs(LanguageCode.ITALIAN, ts);
+		String dateEN = EmedChStrucDocTextBuilderV096.parseTs(LanguageCode.ENGLISH, ts);
+		assertEquals(dateFR, "20 juin 2020 10:50");
+		assertEquals(dateDE, "20 Juni 2020 10:50");
+		assertEquals(dateIT, "20 giugno 2020 10:50");
+		assertEquals(dateEN, "20 June 2020 10:50");
 	}
 
 	private void printDoc(SXCMTS dosageFrequency) {
