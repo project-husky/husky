@@ -36,17 +36,8 @@ public class ChpccEntryVitalSignsOrganizer
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.32"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.35"));
 		super.setCode(createHl7CodeFixedValue("46680005", "2.16.840.1.113883.6.96", "SNOMED CT",
-				"Vital signs"));
+				"VITAL SIGNS"));
 		super.setStatusCode(createHl7StatusCodeFixedValue("completed", null, null, null));
-		super.getComponent().add(createHl7ComponentFixedValue("COMP"));
-	}
-
-	/**
-	 * Adds a hl7Author The author of the statement SHALL be specified here,
-	 * even if it is the same as declared in an ancestor.
-	 */
-	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
-		getAuthor().add(value);
 	}
 
 	/**
@@ -62,14 +53,6 @@ public class ChpccEntryVitalSignsOrganizer
 	 */
 	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		getId().add(value);
-	}
-
-	/**
-	 * Adds a hl7Author The author of the statement SHALL be specified here,
-	 * even if it is the same as declared in an ancestor.
-	 */
-	public void clearHl7Author() {
-		getAuthor().clear();
 	}
 
 	/**
@@ -182,6 +165,17 @@ public class ChpccEntryVitalSignsOrganizer
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
 		return templateId;
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4, filled by:
+	 * "COMP"
+	 * 
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4 getPredefinedComponentComp() {
+		return createHl7ComponentFixedValue("COMP");
 	}
 
 	/**

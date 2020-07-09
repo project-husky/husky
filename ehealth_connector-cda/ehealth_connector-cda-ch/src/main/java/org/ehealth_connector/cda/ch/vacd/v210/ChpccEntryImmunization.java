@@ -49,12 +49,8 @@ public class ChpccEntryImmunization
 		super.setPriorityCode(createHl7PriorityCodeFixedValue());
 		super.setRouteCode(createHl7RouteCodeFixedValue());
 		vocabApproachSiteCodeCode.add(new Code(
-				CodeBaseType.builder().withCode("null").withCodeSystem("2.16.840.1.113883.5.1052")
-						.withCodeSystemName("null").withDisplayName("null").build()));
+				CodeBaseType.builder().withCodeSystem("2.16.840.1.113883.5.1052").build()));
 		super.setConsumable(createHl7ConsumableFixedValue("CSM"));
-		// vocab code list entry for attribute code / element
-		// hl7:approachSiteCode: no code !! / 2.16.840.1.113883.5.1052
-		// ---
 	}
 
 	private ArrayList<org.ehealth_connector.common.Code> vocabApproachSiteCodeCode = new ArrayList<org.ehealth_connector.common.Code>();

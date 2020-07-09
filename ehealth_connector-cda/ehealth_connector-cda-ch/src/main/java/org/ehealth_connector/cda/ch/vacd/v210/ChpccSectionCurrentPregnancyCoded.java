@@ -49,6 +49,13 @@ public class ChpccSectionCurrentPregnancyCoded
 	}
 
 	/**
+	 * Adds a hl7Id An ID for this section MAY be filled for traceability.
+	 */
+	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
+		id = value;
+	}
+
+	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
 	 * @param code
@@ -117,13 +124,6 @@ public class ChpccSectionCurrentPregnancyCoded
 	}
 
 	/**
-	 * Gets the hl7Id An ID for this section MAY be filled for traceability.
-	 */
-	public org.ehealth_connector.common.hl7cdar2.II getHl7Id() {
-		return id;
-	}
-
-	/**
 	 * Gets the hl7TemplateId
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
@@ -169,13 +169,6 @@ public class ChpccSectionCurrentPregnancyCoded
 	public void setHl7Entry(org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry value) {
 		getEntry().clear();
 		getEntry().add(value);
-	}
-
-	/**
-	 * Sets the hl7Id An ID for this section MAY be filled for traceability.
-	 */
-	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		this.id = value;
 	}
 
 	/**

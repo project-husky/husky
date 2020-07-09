@@ -36,48 +36,20 @@ public class PharmaceuticalAdviceItemEntryContentModule
 				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.44"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.3"));
-		vocabCodeCode.add(new Code(
-				CodeBaseType.builder().withCode("OK").withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1")
-						.withCodeSystemName("null").withDisplayName("null").build()));
+		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("OK")
+				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").build()));
 		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("CHANGE")
-				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").withCodeSystemName("null")
-				.withDisplayName("null").build()));
+				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").build()));
 		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("CANCEL")
-				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").withCodeSystemName("null")
-				.withDisplayName("null").build()));
+				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").build()));
 		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("SUSPEND")
-				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").withCodeSystemName("null")
-				.withDisplayName("null").build()));
+				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").build()));
 		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("REFUSE")
-				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").withCodeSystemName("null")
-				.withDisplayName("null").build()));
+				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").build()));
 		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("COMMENT")
-				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").withCodeSystemName("null")
-				.withDisplayName("null").build()));
-		vocabStatusCodeCode
-				.add(new Code(CodeBaseType.builder().withCode("active").withCodeSystem("null")
-						.withCodeSystemName("null").withDisplayName("null").build()));
-		vocabStatusCodeCode
-				.add(new Code(CodeBaseType.builder().withCode("completed").withCodeSystem("null")
-						.withCodeSystemName("null").withDisplayName("null").build()));
-		// vocab code list entry for attribute code / element hl7:code: OK /
-		// 1.3.6.1.4.1.19376.1.9.2.1
-		// vocab code list entry for attribute code / element hl7:code: CHANGE /
-		// 1.3.6.1.4.1.19376.1.9.2.1
-		// vocab code list entry for attribute code / element hl7:code: CANCEL /
-		// 1.3.6.1.4.1.19376.1.9.2.1
-		// vocab code list entry for attribute code / element hl7:code: SUSPEND
-		// / 1.3.6.1.4.1.19376.1.9.2.1
-		// vocab code list entry for attribute code / element hl7:code: REFUSE /
-		// 1.3.6.1.4.1.19376.1.9.2.1
-		// vocab code list entry for attribute code / element hl7:code: COMMENT
-		// / 1.3.6.1.4.1.19376.1.9.2.1
-		// ---
-		// vocab code list entry for attribute code / element hl7:statusCode:
-		// active / no code system !!
-		// vocab code list entry for attribute code / element hl7:statusCode:
-		// completed / no code system !!
-		// ---
+				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").build()));
+		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("active").build()));
+		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed").build()));
 	}
 
 	private ArrayList<org.ehealth_connector.common.Code> vocabCodeCode = new ArrayList<org.ehealth_connector.common.Code>();

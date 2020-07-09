@@ -37,10 +37,10 @@ public class DocumentCodeMedicationPrescription extends org.ehealth_connector.co
 		vocabTranslationCode.add(new Code(CodeBaseType.builder().withCode("761938008")
 				.withCodeSystem("2.16.840.1.113883.6.96").withCodeSystemName("SNOMED CT")
 				.withDisplayName("Medical Prescription record (record artifact)").build()));
-		// vocab code list entry for attribute code / element hl7:translation:
-		// 761938008 / 2.16.840.1.113883.6.96 (Medical Prescription record
-		// (record artifact) / SNOMED CT)
-		// ---
+		super.getTranslation().add((new Code(CodeBaseType.builder().withCode("761938008")
+				.withCodeSystem("2.16.840.1.113883.6.96").withCodeSystemName("SNOMED CT")
+				.withDisplayName("Medical Prescription record (record artifact)").build()))
+						.getHl7CdaR2Cd());
 	}
 
 	private ArrayList<org.ehealth_connector.common.Code> vocabTranslationCode = new ArrayList<org.ehealth_connector.common.Code>();

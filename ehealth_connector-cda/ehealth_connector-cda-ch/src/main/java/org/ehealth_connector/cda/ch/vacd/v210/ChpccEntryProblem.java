@@ -41,32 +41,16 @@ public class ChpccEntryProblem
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.28"));
 		super.setCode(createHl7CodeFixedValue("2.16.840.1.113883.6.96", "SNOMED CT"));
 		super.setStatusCode(createHl7StatusCodeFixedValue());
-		vocabValueValueSet.add(new Code(
-				CodeBaseType.builder().withCode("null").withCodeSystem("2.16.756.5.30.1.126.3.1")
-						.withCodeSystemName("null").withDisplayName("null").build()));
-		vocabValueValueSet.add(new Code(
-				CodeBaseType.builder().withCode("null").withCodeSystem("2.16.756.5.30.1.126.3.2")
-						.withCodeSystemName("null").withDisplayName("null").build()));
-		vocabValueValueSet.add(new Code(
-				CodeBaseType.builder().withCode("null").withCodeSystem("2.16.840.1.113883.6.139")
-						.withCodeSystemName("null").withDisplayName("null").build()));
-		vocabValueValueSet.add(new Code(CodeBaseType.builder().withCode("null")
-				.withCodeSystem("2.16.756.5.30.1.127.3.1.20080401.1").withCodeSystemName("null")
-				.withDisplayName("null").build()));
-		vocabValueValueSet.add(new Code(
-				CodeBaseType.builder().withCode("null").withCodeSystem("2.16.840.1.113883.6.96")
-						.withCodeSystemName("null").withDisplayName("null").build()));
-		// vocab code list entry for attribute valueSet / element hl7:value: no
-		// code !! / 2.16.756.5.30.1.126.3.1
-		// vocab code list entry for attribute valueSet / element hl7:value: no
-		// code !! / 2.16.756.5.30.1.126.3.2
-		// vocab code list entry for attribute valueSet / element hl7:value: no
-		// code !! / 2.16.840.1.113883.6.139
-		// vocab code list entry for attribute valueSet / element hl7:value: no
-		// code !! / 2.16.756.5.30.1.127.3.1.20080401.1
-		// vocab code list entry for attribute valueSet / element hl7:value: no
-		// code !! / 2.16.840.1.113883.6.96
-		// ---
+		vocabValueValueSet.add(
+				new Code(CodeBaseType.builder().withCodeSystem("2.16.756.5.30.1.126.3.1").build()));
+		vocabValueValueSet.add(
+				new Code(CodeBaseType.builder().withCodeSystem("2.16.756.5.30.1.126.3.2").build()));
+		vocabValueValueSet.add(
+				new Code(CodeBaseType.builder().withCodeSystem("2.16.840.1.113883.6.139").build()));
+		vocabValueValueSet.add(new Code(CodeBaseType.builder()
+				.withCodeSystem("2.16.756.5.30.1.127.3.1.20080401.1").build()));
+		vocabValueValueSet.add(
+				new Code(CodeBaseType.builder().withCodeSystem("2.16.840.1.113883.6.96").build()));
 	}
 
 	private ArrayList<org.ehealth_connector.common.Code> vocabValueValueSet = new ArrayList<org.ehealth_connector.common.Code>();

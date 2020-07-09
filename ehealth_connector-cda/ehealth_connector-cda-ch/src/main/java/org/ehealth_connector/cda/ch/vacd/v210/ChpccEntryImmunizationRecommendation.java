@@ -43,11 +43,9 @@ public class ChpccEntryImmunizationRecommendation
 	public ChpccEntryImmunizationRecommendation() {
 		super.getClassCode().add("SBADM");
 		vocabSubstanceAdministrationMoodCode
-				.add(new Code(CodeBaseType.builder().withCode("INT").withCodeSystem("null")
-						.withCodeSystemName("null").withDisplayName("null").build()));
+				.add(new Code(CodeBaseType.builder().withCode("INT").build()));
 		vocabSubstanceAdministrationMoodCode
-				.add(new Code(CodeBaseType.builder().withCode("PRP").withCodeSystem("null")
-						.withCodeSystemName("null").withDisplayName("null").build()));
+				.add(new Code(CodeBaseType.builder().withCode("PRP").build()));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.93"));
 		super.getTemplateId()
 				.add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.12.2"));
@@ -56,17 +54,8 @@ public class ChpccEntryImmunizationRecommendation
 		super.setPriorityCode(createHl7PriorityCodeFixedValue());
 		super.setRouteCode(createHl7RouteCodeFixedValue());
 		vocabApproachSiteCodeCode.add(new Code(
-				CodeBaseType.builder().withCode("null").withCodeSystem("2.16.840.1.113883.5.1052")
-						.withCodeSystemName("null").withDisplayName("null").build()));
+				CodeBaseType.builder().withCodeSystem("2.16.840.1.113883.5.1052").build()));
 		super.setConsumable(createHl7ConsumableFixedValue("CSM"));
-		// vocab code list entry for attribute moodCode / element
-		// hl7:substanceAdministration: INT / no code system !!
-		// vocab code list entry for attribute moodCode / element
-		// hl7:substanceAdministration: PRP / no code system !!
-		// ---
-		// vocab code list entry for attribute code / element
-		// hl7:approachSiteCode: no code !! / 2.16.840.1.113883.5.1052
-		// ---
 	}
 
 	private ArrayList<org.ehealth_connector.common.Code> vocabApproachSiteCodeCode = new ArrayList<org.ehealth_connector.common.Code>();

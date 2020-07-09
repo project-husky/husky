@@ -39,12 +39,9 @@ public class IhepatientMedicationInstructions
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.49"));
 		super.setCode(createHl7CodeFixedValue("PINSTRUCT", "1.3.6.1.4.1.19376.1.5.3.2",
 				"IHEActCode", null));
-		vocabStatusCodeCode
-				.add(new Code(CodeBaseType.builder().withCode("completed").withCodeSystem("null")
-						.withCodeSystemName("null").withDisplayName("null").build()));
-		// vocab code list entry for attribute code / element hl7:statusCode:
-		// completed / no code system !!
-		// ---
+		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed").build()));
+		statusCode = (new Code(CodeBaseType.builder().withCode("completed").build()))
+				.getHl7CdaR2Cs();
 	}
 
 	private ArrayList<org.ehealth_connector.common.Code> vocabStatusCodeCode = new ArrayList<org.ehealth_connector.common.Code>();

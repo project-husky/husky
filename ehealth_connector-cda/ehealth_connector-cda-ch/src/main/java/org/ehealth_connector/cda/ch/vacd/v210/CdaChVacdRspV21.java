@@ -117,7 +117,7 @@ public class CdaChVacdRspV21
 	}
 
 	/**
-	 * Adds a hl7Participant Information on a patient's insurance card.
+	 * Adds a hl7Participant Information on a patient's insurance.
 	 */
 	public void addHl7Participant(
 			org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 value) {
@@ -194,7 +194,7 @@ public class CdaChVacdRspV21
 	}
 
 	/**
-	 * Adds a hl7Participant Information on a patient's insurance card.
+	 * Adds a hl7Participant Information on a patient's insurance.
 	 */
 	public void clearHl7Participant() {
 		getParticipant().clear();

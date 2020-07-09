@@ -48,28 +48,15 @@ public class ChpccEntryAllergyOrIntolerance
 		super.setCode(
 				createHl7CodeFixedValue("2.16.840.1.113883.5.4", "ObservationIntoleranceType"));
 		super.setStatusCode(createHl7StatusCodeFixedValue());
-		vocabValueValueSet.add(new Code(
-				CodeBaseType.builder().withCode("null").withCodeSystem("2.16.756.5.30.1.126.3.1")
-						.withCodeSystemName("null").withDisplayName("null").build()));
-		vocabValueValueSet.add(new Code(
-				CodeBaseType.builder().withCode("null").withCodeSystem("2.16.756.5.30.1.126.3.2")
-						.withCodeSystemName("null").withDisplayName("null").build()));
-		vocabValueValueSet.add(new Code(
-				CodeBaseType.builder().withCode("null").withCodeSystem("2.16.840.1.113883.6.139")
-						.withCodeSystemName("null").withDisplayName("null").build()));
-		vocabValueValueSet.add(new Code(
-				CodeBaseType.builder().withCode("null").withCodeSystem("2.16.840.1.113883.6.96")
-						.withCodeSystemName("null").withDisplayName("null").build()));
+		vocabValueValueSet.add(
+				new Code(CodeBaseType.builder().withCodeSystem("2.16.756.5.30.1.126.3.1").build()));
+		vocabValueValueSet.add(
+				new Code(CodeBaseType.builder().withCodeSystem("2.16.756.5.30.1.126.3.2").build()));
+		vocabValueValueSet.add(
+				new Code(CodeBaseType.builder().withCodeSystem("2.16.840.1.113883.6.139").build()));
+		vocabValueValueSet.add(
+				new Code(CodeBaseType.builder().withCodeSystem("2.16.840.1.113883.6.96").build()));
 		super.getParticipant().add(createHl7ParticipantFixedValue("CSM"));
-		// vocab code list entry for attribute valueSet / element hl7:value: no
-		// code !! / 2.16.756.5.30.1.126.3.1
-		// vocab code list entry for attribute valueSet / element hl7:value: no
-		// code !! / 2.16.756.5.30.1.126.3.2
-		// vocab code list entry for attribute valueSet / element hl7:value: no
-		// code !! / 2.16.840.1.113883.6.139
-		// vocab code list entry for attribute valueSet / element hl7:value: no
-		// code !! / 2.16.840.1.113883.6.96
-		// ---
 	}
 
 	private ArrayList<org.ehealth_connector.common.Code> vocabValueValueSet = new ArrayList<org.ehealth_connector.common.Code>();

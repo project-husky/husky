@@ -42,29 +42,20 @@ public class ChpccEntryReactionObservation
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.54"));
 		super.setCode(createHl7CodeFixedValue("2.16.840.1.113883.6.96", "SNOMED CT"));
 		super.setStatusCode(createHl7StatusCodeFixedValue());
-		vocabValueCode.add(new Code(
-				CodeBaseType.builder().withCode("null").withCodeSystem("2.16.756.5.30.1.126.3.2")
-						.withCodeSystemName("null").withDisplayName("null").build()));
-		vocabValueCode.add(new Code(
-				CodeBaseType.builder().withCode("null").withCodeSystem("2.16.840.1.113883.6.139")
-						.withCodeSystemName("null").withDisplayName("null").build()));
-		vocabValueCode.add(new Code(
-				CodeBaseType.builder().withCode("null").withCodeSystem("2.16.840.1.113883.6.96")
-						.withCodeSystemName("null").withDisplayName("null").build()));
-		// vocab code list entry for attribute code / element hl7:value: no code
-		// !! / 2.16.756.5.30.1.126.3.2
-		// vocab code list entry for attribute code / element hl7:value: no code
-		// !! / 2.16.840.1.113883.6.139
-		// vocab code list entry for attribute code / element hl7:value: no code
-		// !! / 2.16.840.1.113883.6.96
-		// ---
+		vocabValueCode.add(
+				new Code(CodeBaseType.builder().withCodeSystem("2.16.756.5.30.1.126.3.2").build()));
+		vocabValueCode.add(
+				new Code(CodeBaseType.builder().withCodeSystem("2.16.840.1.113883.6.139").build()));
+		vocabValueCode.add(
+				new Code(CodeBaseType.builder().withCodeSystem("2.16.840.1.113883.6.96").build()));
 	}
 
 	private ArrayList<org.ehealth_connector.common.Code> vocabValueCode = new ArrayList<org.ehealth_connector.common.Code>();
 
 	/**
-	 * Adds a hl7Author The author of the statement SHALL be specified either
-	 * here or in one of the ancestors.
+	 * Adds a hl7Author This MAY be used to indicate who has documented the
+	 * observation. This information supersedes any information recorded at
+	 * higher level.
 	 */
 	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
 		getAuthor().add(value);
@@ -96,8 +87,9 @@ public class ChpccEntryReactionObservation
 	}
 
 	/**
-	 * Adds a hl7Author The author of the statement SHALL be specified either
-	 * here or in one of the ancestors.
+	 * Adds a hl7Author This MAY be used to indicate who has documented the
+	 * observation. This information supersedes any information recorded at
+	 * higher level.
 	 */
 	public void clearHl7Author() {
 		getAuthor().clear();

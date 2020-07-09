@@ -39,12 +39,10 @@ public class IhehealthStatusObservation
 		super.setCode(createHl7CodeFixedValue("11323-3", "2.16.840.1.113883.6.1", "LOINC",
 				"Health Status"));
 		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed")
-				.withCodeSystem("2.16.840.1.113883.5.14").withCodeSystemName("null")
-				.withDisplayName("null").build()));
+				.withCodeSystem("2.16.840.1.113883.5.14").build()));
+		statusCode = (new Code(CodeBaseType.builder().withCode("completed")
+				.withCodeSystem("2.16.840.1.113883.5.14").build())).getHl7CdaR2Cs();
 		super.getValue().add(createHl7ValueFixedValue());
-		// vocab code list entry for attribute code / element hl7:statusCode:
-		// completed / 2.16.840.1.113883.5.14
-		// ---
 	}
 
 	private ArrayList<org.ehealth_connector.common.Code> vocabStatusCodeCode = new ArrayList<org.ehealth_connector.common.Code>();

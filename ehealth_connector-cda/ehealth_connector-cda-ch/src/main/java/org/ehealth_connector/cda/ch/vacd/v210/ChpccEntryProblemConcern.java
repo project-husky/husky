@@ -47,28 +47,11 @@ public class ChpccEntryProblemConcern
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.5.1"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.27"));
 		super.setCode(createHl7CodeFixedValue("NA"));
-		vocabStatusCodeCode
-				.add(new Code(CodeBaseType.builder().withCode("active").withCodeSystem("null")
-						.withCodeSystemName("null").withDisplayName("null").build()));
-		vocabStatusCodeCode
-				.add(new Code(CodeBaseType.builder().withCode("suspended").withCodeSystem("null")
-						.withCodeSystemName("null").withDisplayName("null").build()));
-		vocabStatusCodeCode
-				.add(new Code(CodeBaseType.builder().withCode("aborted").withCodeSystem("null")
-						.withCodeSystemName("null").withDisplayName("null").build()));
-		vocabStatusCodeCode
-				.add(new Code(CodeBaseType.builder().withCode("completed").withCodeSystem("null")
-						.withCodeSystemName("null").withDisplayName("null").build()));
+		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("active").build()));
+		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("suspended").build()));
+		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("aborted").build()));
+		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed").build()));
 		super.getEntryRelationship().add(createHl7EntryRelationshipFixedValue("SUBJ", "false"));
-		// vocab code list entry for attribute code / element hl7:statusCode:
-		// active / no code system !!
-		// vocab code list entry for attribute code / element hl7:statusCode:
-		// suspended / no code system !!
-		// vocab code list entry for attribute code / element hl7:statusCode:
-		// aborted / no code system !!
-		// vocab code list entry for attribute code / element hl7:statusCode:
-		// completed / no code system !!
-		// ---
 	}
 
 	private ArrayList<org.ehealth_connector.common.Code> vocabStatusCodeCode = new ArrayList<org.ehealth_connector.common.Code>();

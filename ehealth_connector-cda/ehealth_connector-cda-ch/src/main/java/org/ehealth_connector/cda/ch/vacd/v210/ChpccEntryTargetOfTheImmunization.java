@@ -100,7 +100,7 @@ public class ChpccEntryTargetOfTheImmunization
 	}
 
 	/**
-	 * Gets the hl7Id Each observation SHALL have an identifier.
+	 * Gets the hl7Id An ID for this item MAY be filled for traceability.
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7Id() {
 		return id;
@@ -139,7 +139,7 @@ public class ChpccEntryTargetOfTheImmunization
 	}
 
 	/**
-	 * Sets the hl7Id Each observation SHALL have an identifier.
+	 * Sets the hl7Id An ID for this item MAY be filled for traceability.
 	 */
 	public void setHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
 		getId().clear();

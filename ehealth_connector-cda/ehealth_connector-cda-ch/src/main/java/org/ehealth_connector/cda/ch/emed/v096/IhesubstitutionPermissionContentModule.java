@@ -37,12 +37,9 @@ public class IhesubstitutionPermissionContentModule
 		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue("DEF"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.9.1"));
 		super.setCode(createHl7CodeFixedValue());
-		vocabStatusCodeCode
-				.add(new Code(CodeBaseType.builder().withCode("completed").withCodeSystem("null")
-						.withCodeSystemName("null").withDisplayName("null").build()));
-		// vocab code list entry for attribute code / element hl7:statusCode:
-		// completed / no code system !!
-		// ---
+		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed").build()));
+		statusCode = (new Code(CodeBaseType.builder().withCode("completed").build()))
+				.getHl7CdaR2Cs();
 	}
 
 	private ArrayList<org.ehealth_connector.common.Code> vocabStatusCodeCode = new ArrayList<org.ehealth_connector.common.Code>();

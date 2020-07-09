@@ -39,27 +39,15 @@ public class IheseverityEntry
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.55"));
 		super.setCode(createHl7CodeFixedValue("SEV", "2.16.840.1.113883.5.4", null, null));
 		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed")
-				.withCodeSystem("2.16.840.1.113883.5.14").withCodeSystemName("null")
-				.withDisplayName("null").build()));
-		vocabValueCode.add(new Code(
-				CodeBaseType.builder().withCode("L").withCodeSystem("2.16.840.1.113883.5.1063")
-						.withCodeSystemName("null").withDisplayName("null").build()));
-		vocabValueCode.add(new Code(
-				CodeBaseType.builder().withCode("H").withCodeSystem("2.16.840.1.113883.5.1063")
-						.withCodeSystemName("null").withDisplayName("null").build()));
-		vocabValueCode.add(new Code(
-				CodeBaseType.builder().withCode("M").withCodeSystem("2.16.840.1.113883.5.1063")
-						.withCodeSystemName("null").withDisplayName("null").build()));
-		// vocab code list entry for attribute code / element hl7:statusCode:
-		// completed / 2.16.840.1.113883.5.14
-		// ---
-		// vocab code list entry for attribute code / element hl7:value: L /
-		// 2.16.840.1.113883.5.1063
-		// vocab code list entry for attribute code / element hl7:value: H /
-		// 2.16.840.1.113883.5.1063
-		// vocab code list entry for attribute code / element hl7:value: M /
-		// 2.16.840.1.113883.5.1063
-		// ---
+				.withCodeSystem("2.16.840.1.113883.5.14").build()));
+		statusCode = (new Code(CodeBaseType.builder().withCode("completed")
+				.withCodeSystem("2.16.840.1.113883.5.14").build())).getHl7CdaR2Cs();
+		vocabValueCode.add(new Code(CodeBaseType.builder().withCode("L")
+				.withCodeSystem("2.16.840.1.113883.5.1063").build()));
+		vocabValueCode.add(new Code(CodeBaseType.builder().withCode("H")
+				.withCodeSystem("2.16.840.1.113883.5.1063").build()));
+		vocabValueCode.add(new Code(CodeBaseType.builder().withCode("M")
+				.withCodeSystem("2.16.840.1.113883.5.1063").build()));
 	}
 
 	private ArrayList<org.ehealth_connector.common.Code> vocabStatusCodeCode = new ArrayList<org.ehealth_connector.common.Code>();

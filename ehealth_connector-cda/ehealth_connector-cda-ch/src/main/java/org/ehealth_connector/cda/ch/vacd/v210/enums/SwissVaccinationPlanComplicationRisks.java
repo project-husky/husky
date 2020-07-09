@@ -322,6 +322,21 @@ public enum SwissVaccinationPlanComplicationRisks implements ValueSetEnumInterfa
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">RHEUMATISMUS_ODER_AUTOIMMUNKRANKHEIT_WELCHE_EINE_IMMUNSUPPRESSION_BEDINGT</div>
+	 * <div class="de">Rheumatismus oder Autoimmunkrankheit, welche eine Immunsuppression bedingt</div>
+	 * <div class="fr">Maladie rhumatismale ou auto-immune allant nécessiter une immunosuppression</div>
+	 * <div class="it">Malattia reumatica o autoimmune che presto richiederà l'immunosoppressione</div>
+	 * <!-- @formatter:on -->
+	 */
+	RHEUMATISMUS_ODER_AUTOIMMUNKRANKHEIT_WELCHE_EINE_IMMUNSUPPRESSION_BEDINGT("113035",
+			"2.16.756.5.30.1.127.3.3.1",
+			"RHEUMATISMUS_ODER_AUTOIMMUNKRANKHEIT_WELCHE_EINE_IMMUNSUPPRESSION_BEDINGT",
+			"RHEUMATISMUS_ODER_AUTOIMMUNKRANKHEIT_WELCHE_EINE_IMMUNSUPPRESSION_BEDINGT",
+			"Rheumatismus oder Autoimmunkrankheit, welche eine Immunsuppression bedingt",
+			"Maladie rhumatismale ou auto-immune allant nécessiter une immunosuppression",
+			"Malattia reumatica o autoimmune che presto richiederà l'immunosoppressione"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">SCHAEDELBASISFRAKTUR_MISSBILDUNG_ZEREBROSPINALE_LIQUORFISTEL</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -362,7 +377,17 @@ public enum SwissVaccinationPlanComplicationRisks implements ValueSetEnumInterfa
 	 * <!-- @formatter:on -->
 	 */
 	SICHELZELLANAEMIE("114014", "2.16.756.5.30.1.127.3.3.1", "SICHELZELLANAEMIE",
-			"SICHELZELLANAEMIE", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+			"SICHELZELLANAEMIE", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">ZOELIAKIE</div>
+	 * <div class="de">Zöliakie</div>
+	 * <div class="fr">Coeliaquie</div>
+	 * <div class="it">Celiachia</div>
+	 * <!-- @formatter:on -->
+	 */
+	ZOELIAKIE("113036", "2.16.756.5.30.1.127.3.3.1", "ZOELIAKIE", "ZOELIAKIE", "Zöliakie",
+			"Coeliaquie", "Celiachia");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -604,6 +629,16 @@ public enum SwissVaccinationPlanComplicationRisks implements ValueSetEnumInterfa
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Code for RHEUMATISMUS_ODER_AUTOIMMUNKRANKHEIT_WELCHE_EINE_IMMUNSUPPRESSION_BEDINGT</div>
+	 * <div class="de">Code für Rheumatismus oder Autoimmunkrankheit, welche eine Immunsuppression bedingt</div>
+	 * <div class="fr">Code de Maladie rhumatismale ou auto-immune allant nécessiter une immunosuppression</div>
+	 * <div class="it">Code per Malattia reumatica o autoimmune che presto richiederà l'immunosoppressione</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String RHEUMATISMUS_ODER_AUTOIMMUNKRANKHEIT_WELCHE_EINE_IMMUNSUPPRESSION_BEDINGT_CODE = "113035";
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for SCHAEDELBASISFRAKTUR_MISSBILDUNG_ZEREBROSPINALE_LIQUORFISTEL</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -636,6 +671,16 @@ public enum SwissVaccinationPlanComplicationRisks implements ValueSetEnumInterfa
 	 * <!-- @formatter:on -->
 	 */
 	public static final String SICHELZELLANAEMIE_CODE = "114014";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for ZOELIAKIE</div>
+	 * <div class="de">Code für Zöliakie</div>
+	 * <div class="fr">Code de Coeliaquie</div>
+	 * <div class="it">Code per Celiachia</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String ZOELIAKIE_CODE = "113036";
 
 	/**
 	 * <!-- @formatter:off -->
