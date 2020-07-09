@@ -1377,7 +1377,7 @@ public class EmedChStrucDocTextBuilderV096 extends StrucDocText {
 				getOriginalTextAndSetRef(code, reference);
 				ED ed = new ED();
 				TEL referenceTel = new TEL();
-				referenceTel.setValue("#"+this.emedClass + "." + reference + "." + this.rowCrt);
+				referenceTel.setValue("#" + this.emedClass + "." + reference + "." + this.rowCrt);
 				ed.setReference(referenceTel);
 				code.setOriginalText(ed);
 				return code.getCode();
@@ -2200,7 +2200,7 @@ public class EmedChStrucDocTextBuilderV096 extends StrucDocText {
 		if (ed != null) {
 			TEL reference = new TEL();
 			if (StringUtils.isNotEmpty(ref)) {
-				reference.setValue("#"+this.emedClass + "." + ref + "." + this.rowCrt);
+				reference.setValue("#" + this.emedClass + "." + ref + "." + this.rowCrt);
 				ed.setReference(reference);
 			}
 			if (StringUtils.isNotEmpty(ed.xmlContent)) {
@@ -2225,12 +2225,12 @@ public class EmedChStrucDocTextBuilderV096 extends StrucDocText {
 		if (pocdmt000040Supply != null && pocdmt000040Supply.getText() == null) {
 			ED textRef = new ED();
 			TEL tel = new TEL();
-			tel.setValue("#"+this.emedClass + "." + ref + "." + rowCrt);
+			tel.setValue("#" + this.emedClass + "." + ref + "." + rowCrt);
 			textRef.setReference(tel);
 			pocdmt000040Supply.setText(textRef);
 		} else if (pocdmt000040Supply != null && pocdmt000040Supply.getText() != null) {
 			TEL tel = new TEL();
-			tel.setValue("#"+this.emedClass + "." + ref + "." + rowCrt);
+			tel.setValue("#" + this.emedClass + "." + ref + "." + rowCrt);
 			pocdmt000040Supply.getText().setReference(tel);
 		}
 	}

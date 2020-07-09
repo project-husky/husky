@@ -395,7 +395,8 @@ public abstract class CdaChUtil extends CdaUtilMdht {
 			try {
 				strucDocText = new EmedChStrucDocTextBuilderV096(section, languageCode, temp);
 			} catch (Exception e) {
-				// if an exception is catched it means that the document was malformated -> narrative text is not generated
+				// if an exception is catched it means that the document was
+				// malformated -> narrative text is not generated
 				e.printStackTrace();
 			}
 		}

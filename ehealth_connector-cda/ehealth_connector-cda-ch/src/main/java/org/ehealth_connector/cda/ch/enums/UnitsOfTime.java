@@ -230,7 +230,6 @@ public enum UnitsOfTime {
 		displayNames.put(LanguageCode.ITALIAN, displayNameIt);
 	}
 
-
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Gets the actual Code as string</div>
