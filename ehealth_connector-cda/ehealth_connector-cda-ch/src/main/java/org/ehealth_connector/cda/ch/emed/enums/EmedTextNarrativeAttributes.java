@@ -1318,11 +1318,67 @@ public enum EmedTextNarrativeAttributes {
 
 	/**
      * <!-- @formatter:off -->
+     * <div class="en">Gets the Enum with a given code</div>
+     * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
+     * <!-- @formatter:on -->
+     *
+     * @param code <div class="de"> code</div>
+     * @return <div class="en">the enum</div>
+     */
+	public static EmedTextNarrativeAttributes getEnum(String code) {
+		for (final EmedTextNarrativeAttributes x : values()) {
+			if (x.getCodeValue().equals(code)) {
+				return x;
+			}
+		}
+		return null;
+	}
+	/**
+     * <!-- @formatter:off -->
+     * <div class="en">Checks if a given enum is part of this value set.</div>
+     * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
+     * <!-- @formatter:on -->
+     *
+     * @param enumName <div class="de"> enumName</div>
+     * @return true, if enum is in this value set
+     */
+	public static boolean isEnumOfValueSet(String enumName) {
+		if (enumName == null) {
+			return false;
+		}
+		try {
+			Enum.valueOf(EmedTextNarrativeAttributes.class, enumName);
+			return true;
+		} catch (final IllegalArgumentException ex) {
+			return false;
+		}
+	}
+	/**
+     * <!-- @formatter:off -->
+     * <div class="en">Checks if a given code value is in this value set.</div>
+     * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
+     * <!-- @formatter:on -->
+     *
+     * @param codeValue <div class="de"> code</div>
+     * @return true, if is in value set
+     */
+	public static boolean isInValueSet(String codeValue) {
+		for (final EmedTextNarrativeAttributes x : values()) {
+			if (x.getCodeValue().equals(codeValue)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+     * <!-- @formatter:off -->
      * <div class="en">Machine interpretable and (inside this class) unique code</div>
      * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse) eindeutiger Code</div>
      * <!-- @formatter:on -->
      */
 	private String code;
+
 	/**
      * <!-- @formatter:off -->
      * <div class="en">Identifier of the referencing code system.</div>
@@ -1330,6 +1386,7 @@ public enum EmedTextNarrativeAttributes {
      * <!-- @formatter:on -->
      */
 	private String codeSystem;
+
 	/**
 	 * The display names per language
 	 */
@@ -1360,63 +1417,6 @@ public enum EmedTextNarrativeAttributes {
 		displayNames.put(LanguageCode.GERMAN, displayNameDe);
 		displayNames.put(LanguageCode.FRENCH, displayNameFr);
 		displayNames.put(LanguageCode.ITALIAN, displayNameIt);
-	}
-
-	/**
-     * <!-- @formatter:off -->
-     * <div class="en">Gets the Enum with a given code</div>
-     * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
-     * <!-- @formatter:on -->
-     *
-     * @param code <div class="de"> code</div>
-     * @return <div class="en">the enum</div>
-     */
-	public static EmedTextNarrativeAttributes getEnum(String code) {
-		for (final EmedTextNarrativeAttributes x : values()) {
-			if (x.getCodeValue().equals(code)) {
-				return x;
-			}
-		}
-		return null;
-	}
-
-	/**
-     * <!-- @formatter:off -->
-     * <div class="en">Checks if a given enum is part of this value set.</div>
-     * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
-     * <!-- @formatter:on -->
-     *
-     * @param enumName <div class="de"> enumName</div>
-     * @return true, if enum is in this value set
-     */
-	public static boolean isEnumOfValueSet(String enumName) {
-		if (enumName == null) {
-			return false;
-		}
-		try {
-			Enum.valueOf(EmedTextNarrativeAttributes.class, enumName);
-			return true;
-		} catch (final IllegalArgumentException ex) {
-			return false;
-		}
-	}
-
-	/**
-     * <!-- @formatter:off -->
-     * <div class="en">Checks if a given code value is in this value set.</div>
-     * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
-     * <!-- @formatter:on -->
-     *
-     * @param codeValue <div class="de"> code</div>
-     * @return true, if is in value set
-     */
-	public static boolean isInValueSet(String codeValue) {
-		for (final EmedTextNarrativeAttributes x : values()) {
-			if (x.getCodeValue().equals(codeValue)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	/**

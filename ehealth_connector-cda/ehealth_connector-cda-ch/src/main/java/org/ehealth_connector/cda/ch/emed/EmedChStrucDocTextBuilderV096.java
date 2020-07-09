@@ -132,10 +132,16 @@ public class EmedChStrucDocTextBuilderV096 extends StrucDocText {
 	private final static String PRESCRIBED_QUANTITY_TEMPLATE_ID = new PrescribedQuantityEntryContentModule()
 			.getHl7TemplateId().get(0).getRoot();
 	/**
+	 * get the resources from the Message file, we can choose the lang of the
+	 * value
+	 **/
+	private static ResourceBundle resBundle;
+	/**
 	 * Template ID used for substitution permission
 	 */
 	private final static String SUBSTITUTION_PERMISSION_TEMPLATE_ID = new IhesubstitutionPermissionContentModule()
 			.getHl7TemplateId().get(0).getRoot();
+
 	/**
 	 * Template ID used for traitment reason
 	 */
@@ -143,10 +149,304 @@ public class EmedChStrucDocTextBuilderV096 extends StrucDocText {
 			.getHl7TemplateId().get(0).getRoot();
 
 	/**
-	 * get the resources from the Message file, we can choose the lang of the
-	 * value
-	 **/
-	private static ResourceBundle resBundle;
+	 * <div class="en">Convert an eivlts to a String of the choosen
+	 * language</div>
+	 *
+	 * @param languageCode
+	 *            language of translation
+	 * @param eivlts
+	 *            format of dosage intake
+	 * @return eivlts to string
+	 */
+	public static String parseEivlTs(LanguageCode languageCode, EIVLTS eivlts) {
+		resBundle = ResourceBundle.getBundle("Messages", new Locale(languageCode.getCodeValue()));
+
+		if (eivlts == null) {
+			return "";
+		}
+		String narrativText = "";
+		IVLPQ offset = eivlts.getOffset();
+		String eventText = "";
+		String widthText = "";
+		String lowText = "";
+		String highText = "";
+		if (offset != null) {
+			List<JAXBElement<? extends PQ>> offsetElements = offset.getRest();
+
+			for (JAXBElement<? extends PQ> offsetElement : offsetElements) {
+				String elementName = offsetElement.getName().getLocalPart();
+				if (elementName.equals("low")) {
+					try {
+						// we used the abs value because it's allways a positive
+						// number (ex: <low value='-1' unit='h'/> = 1h before)
+						lowText = Math.abs(Integer.parseInt(offsetElement.getValue().getValue()))
+								+ " "
+								+ Objects
+										.requireNonNull(UnitsOfTime
+												.getEnum(offsetElement.getValue().getUnit()))
+										.getDisplayName(languageCode);
+					} catch (Exception e) {
+						// an exception can be catched when there is a parsing
+						// problem.
+						e.printStackTrace();
+					}
+				}
+
+				if (elementName.equals("high")) {
+					try {
+						// we used the abs value because it's allways a positive
+						// number (ex: <low value='-1' unit='h'/> = 1h before)
+						highText = Math.abs(Integer.parseInt(offsetElement.getValue().getValue()))
+								+ " "
+								+ Objects
+										.requireNonNull(UnitsOfTime
+												.getEnum(offsetElement.getValue().getUnit()))
+										.getDisplayName(languageCode);
+					} catch (Exception e) {
+						// an exception can be catched when there is a parsing
+						// problem.
+						e.printStackTrace();
+					}
+				}
+				if (elementName.equals("width")) {
+					try {
+						widthText = resBundle.getString("emed.during") + " "
+								+ offsetElement.getValue().getValue() + " "
+								+ Objects
+										.requireNonNull(UnitsOfTime
+												.getEnum(offsetElement.getValue().getUnit()))
+										.getDisplayName(languageCode);
+					} catch (Exception e) {
+						// an exception can be catched when there is a parsing
+						// problem.
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+
+		if (eivlts.getEvent() != null && eivlts.getEvent().getCode() != null) {
+			eventText = Objects
+					.requireNonNull(ChEmedTimingEvent.getEnum(eivlts.getEvent().getCode()))
+					.getDisplayName(languageCode);
+		}
+
+		if (lowText.length() > 0) {
+			narrativText += lowText + " ";
+		}
+		if (highText.length() > 0) {
+			if (narrativText.length() > 0) {
+				narrativText += "- ";
+			}
+			narrativText += highText + " ";
+		}
+
+		if (eventText.length() > 0) {
+			narrativText += eventText;
+		}
+		if (widthText.length() > 0) {
+			narrativText += " " + widthText;
+		}
+		return narrativText;
+
+	}
+
+	/**
+	 * <div class="en">Convert an pivlts to a String of the choosen
+	 * language</div>
+	 *
+	 * @param languageCode
+	 *            language of translation
+	 * @param pivlts
+	 *            format of dosage intake
+	 * @return pivlts formated in string
+	 */
+	public static String parsePivlTs(LanguageCode languageCode, PIVLTS pivlts) {
+		resBundle = ResourceBundle.getBundle("Messages", new Locale(languageCode.getCodeValue()));
+
+		String narrativText;
+		Integer periodValue = Integer.parseInt(pivlts.getPeriod().getValue());
+		String periodUnit = pivlts.getPeriod().getUnit();
+		UnitsOfTime unitsOfTime = UnitsOfTime.getEnum(periodUnit);
+		assert unitsOfTime != null;
+		if (pivlts.isInstitutionSpecified()) {
+			if (periodValue >= 1) {
+				narrativText = (unitsOfTime.getUnitTimed() / periodValue) + "x "
+						+ resBundle.getString("emed.per") + " " + Objects
+								.requireNonNull(unitsOfTime.getNext()).getDisplayName(languageCode);
+			} else {
+				narrativText = (1.0 / periodValue) + resBundle.getString("emed.per") + " "
+						+ unitsOfTime.getDisplayName(languageCode);
+			}
+		} else {
+			narrativText = resBundle.getString("emed.each") + " " + periodValue + " "
+					+ unitsOfTime.getDisplayName(languageCode);
+			if (pivlts.getPhase() != null) {
+				IVLTS phase = pivlts.getPhase();
+				String lowText = "";
+				String widthText = "";
+				for (JAXBElement<? extends QTY> phaseElement : phase.getRest()) {
+					String elementName = phaseElement.getName().getLocalPart();
+					if (elementName.equals("low")) {
+						try {
+							TS lowValue = (TS) phaseElement.getValue();
+							final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+
+							lowText = sdf.format(DateUtil.parseHl7Timestamp(lowValue));
+						} catch (Exception e) {
+							// an exception can be catched when there is a
+							// parsing problem.
+							e.printStackTrace();
+						}
+					}
+
+					// there is no high value (only the lower order components
+					// of this value are relevant with respect to the <period>)
+					else if (elementName.equals("width")) {
+						PQ width = (PQ) phaseElement.getValue();
+						widthText = resBundle.getString("emed.during") + " " + width.getValue()
+								+ " " + Objects.requireNonNull(UnitsOfTime.getEnum(width.getUnit()))
+										.getDisplayName(languageCode);
+					}
+				}
+
+				if (StringUtils.isNotEmpty(lowText)) {
+					narrativText += " " + resBundle.getString("emed.at") + " " + lowText;
+				}
+				if (StringUtils.isNotEmpty(widthText)) {
+					narrativText += " " + widthText;
+				}
+			}
+
+		}
+		return narrativText;
+	}
+
+	/**
+	 * <div class="en">Get splited dosageIntake in an array of string</div>
+	 *
+	 * @param substanceAdministration
+	 *            the substanceAdministration
+	 * @param languageCode
+	 *            codes are going to be translated to this language
+	 * @return the list of string that represent all the dosages intake
+	 */
+	public static List<String> parseSplitedDosageIntake(
+			POCDMT000040SubstanceAdministration substanceAdministration,
+			LanguageCode languageCode) {
+		resBundle = ResourceBundle.getBundle("Messages", new Locale(languageCode.getCodeValue()));
+
+		List<String> dosageIntakes = new ArrayList<>();
+		if (substanceAdministration != null
+				&& substanceAdministration.getEntryRelationship() != null) {
+
+			List<POCDMT000040EntryRelationship> relationships = substanceAdministration
+					.getEntryRelationship().stream()
+					.filter(pocdmt000040EntryRelationship -> pocdmt000040EntryRelationship
+							.getTypeCode() != null)
+					.filter(pocdmt000040EntryRelationship -> pocdmt000040EntryRelationship
+							.getTypeCode().value().equals("COMP"))
+					.collect(Collectors.toList());
+
+			for (POCDMT000040EntryRelationship entryRelationship : relationships) {
+				POCDMT000040SubstanceAdministration substanceAdministrationCrt = entryRelationship
+						.getSubstanceAdministration();
+
+				EIVLTS eivltsCrt = null;
+				String eivltsCrtStr;
+				if (substanceAdministrationCrt != null
+						&& substanceAdministrationCrt.getEffectiveTime() != null) {
+					eivltsCrt = (EIVLTS) substanceAdministrationCrt.getEffectiveTime().stream()
+							.filter(sxcmts -> sxcmts instanceof EIVLTS).findFirst().orElse(null);
+				}
+				if (eivltsCrt == null) {
+					continue;
+				}
+				eivltsCrtStr = parseEivlTs(languageCode, eivltsCrt);
+
+				String seqNumber = entryRelationship.getSequenceNumber() != null
+						? entryRelationship.getSequenceNumber().getValue().toString()
+						: "";
+				String doseQuantityStr = parseIvlPq(substanceAdministrationCrt.getDoseQuantity());
+
+				String rateQuantityStr = parseRateQuantity(
+						substanceAdministrationCrt.getRateQuantity());
+				if (StringUtils.isNotEmpty(rateQuantityStr)) {
+					rateQuantityStr = ", "
+							+ EmedTextNarrativeAttributes.RATE_QUANTITY.getDisplayName(languageCode)
+							+ " : " + rateQuantityStr;
+				}
+				String dosageIntakeStrCrt = String.format("%s) %s %s%s", seqNumber, doseQuantityStr,
+						eivltsCrtStr, rateQuantityStr);
+				dosageIntakes.add(dosageIntakeStrCrt);
+			}
+		}
+		return dosageIntakes;
+
+	}
+
+	/**
+	 * <div class="en">Convert an sxprts to a String of the choosen
+	 * language</div>
+	 *
+	 * @param languageCode
+	 *            language of translation
+	 * @param sxprts
+	 *            format of dosage intake
+	 * @return sxprts to string translated
+	 */
+	public static String parseSxprTs(LanguageCode languageCode, SXPRTS sxprts) {
+		resBundle = ResourceBundle.getBundle("Messages", new Locale(languageCode.getCodeValue()));
+		String AND_STRING = " " + resBundle.getString("emed.and") + " ";
+		String textNarrativ = "";
+		boolean notAddAnd = false;
+		for (SXCMTS sxcmts : sxprts.getComp()) {
+			if (sxcmts instanceof IVLTS) {
+				textNarrativ = parseIvlTs((IVLTS) sxcmts, languageCode) + ": ";
+				notAddAnd = true;
+			} else if (sxcmts instanceof SXPRTS) {
+				if (StringUtils.isNotEmpty(textNarrativ) && !notAddAnd)
+					textNarrativ += AND_STRING;
+				textNarrativ += parseSxprTs(languageCode, (SXPRTS) sxcmts);
+				notAddAnd = false;
+			} else if (sxcmts instanceof EIVLTS) {
+				if (StringUtils.isNotEmpty(textNarrativ) && !notAddAnd)
+					textNarrativ += AND_STRING;
+				textNarrativ += parseEivlTs(languageCode, (EIVLTS) sxcmts);
+				notAddAnd = false;
+				// in case of a TS
+			} else if (sxcmts != null) {
+				if (StringUtils.isNotEmpty(textNarrativ) && !notAddAnd)
+					textNarrativ += AND_STRING;
+				textNarrativ += parseTs(languageCode, sxcmts);
+				notAddAnd = false;
+			}
+
+		}
+		return textNarrativ;
+	}
+
+	/**
+	 * <div class="en">Convert a TS to a string</div>
+	 *
+	 * @param languageCode
+	 *            language for translation
+	 * @param ts
+	 *            A quantity specifying a point on the axis of natural
+	 * @return ts to string translated
+	 */
+	public static String parseTs(LanguageCode languageCode, TS ts) {
+
+		String date = null;
+		try {
+			date = dateToCompletDateString(DateUtil.parseHl7Timestamp(ts.getValue()), languageCode);
+
+		} catch (Exception e) {
+			// an exception can be catched when there is a parsing problem.
+			e.printStackTrace();
+		}
+		return date;
+	}
 
 	/**
 	 * <div class="en">Transforme a date to a readable date of the choosen
@@ -378,169 +678,6 @@ public class EmedChStrucDocTextBuilderV096 extends StrucDocText {
 	}
 
 	/**
-	 * <div class="en">Convert an eivlts to a String of the choosen
-	 * language</div>
-	 *
-	 * @param languageCode
-	 *            language of translation
-	 * @param eivlts
-	 *            format of dosage intake
-	 * @return eivlts to string
-	 */
-	public static String parseEivlTs(LanguageCode languageCode, EIVLTS eivlts) {
-		resBundle = ResourceBundle.getBundle("Messages", new Locale(languageCode.getCodeValue()));
-
-		if (eivlts == null) {
-			return "";
-		}
-		String narrativText = "";
-		IVLPQ offset = eivlts.getOffset();
-		String eventText = "";
-		String widthText = "";
-		String lowText = "";
-		String highText = "";
-		if (offset != null) {
-			List<JAXBElement<? extends PQ>> offsetElements = offset.getRest();
-
-			for (JAXBElement<? extends PQ> offsetElement : offsetElements) {
-				String elementName = offsetElement.getName().getLocalPart();
-				if (elementName.equals("low")) {
-					try {
-						// we used the abs value because it's allways a positive
-						// number (ex: <low value='-1' unit='h'/> = 1h before)
-						lowText = Math.abs(Integer.parseInt(offsetElement.getValue().getValue()))
-								+ " "
-								+ Objects
-										.requireNonNull(UnitsOfTime
-												.getEnum(offsetElement.getValue().getUnit()))
-										.getDisplayName(languageCode);
-					} catch (Exception e) {
-						// an exception can be catched when there is a parsing
-						// problem.
-						e.printStackTrace();
-					}
-				}
-
-				if (elementName.equals("high")) {
-					try {
-						// we used the abs value because it's allways a positive
-						// number (ex: <low value='-1' unit='h'/> = 1h before)
-						highText = Math.abs(Integer.parseInt(offsetElement.getValue().getValue()))
-								+ " "
-								+ Objects
-										.requireNonNull(UnitsOfTime
-												.getEnum(offsetElement.getValue().getUnit()))
-										.getDisplayName(languageCode);
-					} catch (Exception e) {
-						// an exception can be catched when there is a parsing
-						// problem.
-						e.printStackTrace();
-					}
-				}
-				if (elementName.equals("width")) {
-					try {
-						widthText = resBundle.getString("emed.during") + " "
-								+ offsetElement.getValue().getValue() + " "
-								+ Objects
-										.requireNonNull(UnitsOfTime
-												.getEnum(offsetElement.getValue().getUnit()))
-										.getDisplayName(languageCode);
-					} catch (Exception e) {
-						// an exception can be catched when there is a parsing
-						// problem.
-						e.printStackTrace();
-					}
-				}
-			}
-		}
-
-		if (eivlts.getEvent() != null && eivlts.getEvent().getCode() != null) {
-			eventText = Objects
-					.requireNonNull(ChEmedTimingEvent.getEnum(eivlts.getEvent().getCode()))
-					.getDisplayName(languageCode);
-		}
-
-		if (lowText.length() > 0) {
-			narrativText += lowText + " ";
-		}
-		if (highText.length() > 0) {
-			if (narrativText.length() > 0) {
-				narrativText += "- ";
-			}
-			narrativText += highText + " ";
-		}
-
-		if (eventText.length() > 0) {
-			narrativText += eventText;
-		}
-		if (widthText.length() > 0) {
-			narrativText += " " + widthText;
-		}
-		return narrativText;
-
-	}
-
-	/**
-	 * <div class="en">Convert an ivlpq to a String of the choosen
-	 * language</div>
-	 *
-	 * @param ivlpq
-	 *            format of dosage intake
-	 * @return ivlpq to string formated
-	 */
-	static String parseIvlPq(IVLPQ ivlpq) {
-		String narrativeText = "";
-		if (ivlpq != null) {
-			String unitGlobal = "";
-			String valueText;
-			if (StringUtils.isNotEmpty(ivlpq.getUnit()) && !ivlpq.getUnit().equals("1")) {
-				unitGlobal = ivlpq.getUnit();
-			}
-			// if the value is directly in the doseQuantity element the unit can
-			// only be in this element (not on low/high child element)
-			if (StringUtils.isNotEmpty(ivlpq.getValue())) {
-				valueText = ivlpq.getValue() + unitGlobal;
-				return valueText;
-			} else {
-				String lowText = "";
-				String highText = "";
-				String centerText;
-				for (JAXBElement<? extends PQ> doseQuantityElement : ivlpq.getRest()) {
-					String elementName = doseQuantityElement.getName().getLocalPart();
-					// check if it contain a value
-					if (isNotEmptyPqValue(doseQuantityElement)) {
-						switch (elementName) {
-						case "low":
-							lowText = doseQuantityElementToString(doseQuantityElement, unitGlobal);
-							break;
-						case "high":
-							highText = doseQuantityElementToString(doseQuantityElement, unitGlobal);
-							break;
-						case "center":
-							centerText = doseQuantityElementToString(doseQuantityElement,
-									unitGlobal);
-
-							// if there is a ceter value its should not have low
-							// or high value
-							return centerText;
-						}
-					}
-
-				}
-
-				if (StringUtils.isNotEmpty(lowText) && StringUtils.isNotEmpty(highText)) {
-					return lowText + " - " + highText;
-				} else if (StringUtils.isNotEmpty(lowText)) {
-					return lowText;
-				} else {
-					return "";
-				}
-			}
-		}
-		return narrativeText;
-	}
-
-	/**
 	 * <div class="en">Convert an ivlts to a String of the choosen
 	 * language</div>
 	 *
@@ -606,77 +743,6 @@ public class EmedChStrucDocTextBuilderV096 extends StrucDocText {
 	}
 
 	/**
-	 * <div class="en">Convert an pivlts to a String of the choosen
-	 * language</div>
-	 *
-	 * @param languageCode
-	 *            language of translation
-	 * @param pivlts
-	 *            format of dosage intake
-	 * @return pivlts formated in string
-	 */
-	public static String parsePivlTs(LanguageCode languageCode, PIVLTS pivlts) {
-		resBundle = ResourceBundle.getBundle("Messages", new Locale(languageCode.getCodeValue()));
-
-		String narrativText;
-		Integer periodValue = Integer.parseInt(pivlts.getPeriod().getValue());
-		String periodUnit = pivlts.getPeriod().getUnit();
-		UnitsOfTime unitsOfTime = UnitsOfTime.getEnum(periodUnit);
-		assert unitsOfTime != null;
-		if (pivlts.isInstitutionSpecified()) {
-			if (periodValue >= 1) {
-				narrativText = (unitsOfTime.getUnitTimed() / periodValue) + "x "
-						+ resBundle.getString("emed.per") + " " + Objects
-								.requireNonNull(unitsOfTime.getNext()).getDisplayName(languageCode);
-			} else {
-				narrativText = (1.0 / periodValue) + resBundle.getString("emed.per") + " "
-						+ unitsOfTime.getDisplayName(languageCode);
-			}
-		} else {
-			narrativText = resBundle.getString("emed.each") + " " + periodValue + " "
-					+ unitsOfTime.getDisplayName(languageCode);
-			if (pivlts.getPhase() != null) {
-				IVLTS phase = pivlts.getPhase();
-				String lowText = "";
-				String widthText = "";
-				for (JAXBElement<? extends QTY> phaseElement : phase.getRest()) {
-					String elementName = phaseElement.getName().getLocalPart();
-					if (elementName.equals("low")) {
-						try {
-							TS lowValue = (TS) phaseElement.getValue();
-							final SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-
-							lowText = sdf.format(DateUtil.parseHl7Timestamp(lowValue));
-						} catch (Exception e) {
-							// an exception can be catched when there is a
-							// parsing problem.
-							e.printStackTrace();
-						}
-					}
-
-					// there is no high value (only the lower order components
-					// of this value are relevant with respect to the <period>)
-					else if (elementName.equals("width")) {
-						PQ width = (PQ) phaseElement.getValue();
-						widthText = resBundle.getString("emed.during") + " " + width.getValue()
-								+ " " + Objects.requireNonNull(UnitsOfTime.getEnum(width.getUnit()))
-										.getDisplayName(languageCode);
-					}
-				}
-
-				if (StringUtils.isNotEmpty(lowText)) {
-					narrativText += " " + resBundle.getString("emed.at") + " " + lowText;
-				}
-				if (StringUtils.isNotEmpty(widthText)) {
-					narrativText += " " + widthText;
-				}
-			}
-
-		}
-		return narrativText;
-	}
-
-	/**
 	 * <div class="en">Convert an ivlpq rateQuantity formated to a String of the
 	 * choosen language</div>
 	 *
@@ -735,132 +801,6 @@ public class EmedChStrucDocTextBuilderV096 extends StrucDocText {
 	}
 
 	/**
-	 * <div class="en">Get splited dosageIntake in an array of string</div>
-	 *
-	 * @param substanceAdministration
-	 *            the substanceAdministration
-	 * @param languageCode
-	 *            codes are going to be translated to this language
-	 * @return the list of string that represent all the dosages intake
-	 */
-	public static List<String> parseSplitedDosageIntake(
-			POCDMT000040SubstanceAdministration substanceAdministration,
-			LanguageCode languageCode) {
-		resBundle = ResourceBundle.getBundle("Messages", new Locale(languageCode.getCodeValue()));
-
-		List<String> dosageIntakes = new ArrayList<>();
-		if (substanceAdministration != null
-				&& substanceAdministration.getEntryRelationship() != null) {
-
-			List<POCDMT000040EntryRelationship> relationships = substanceAdministration
-					.getEntryRelationship().stream()
-					.filter(pocdmt000040EntryRelationship -> pocdmt000040EntryRelationship
-							.getTypeCode() != null)
-					.filter(pocdmt000040EntryRelationship -> pocdmt000040EntryRelationship
-							.getTypeCode().value().equals("COMP"))
-					.collect(Collectors.toList());
-
-			for (POCDMT000040EntryRelationship entryRelationship : relationships) {
-				POCDMT000040SubstanceAdministration substanceAdministrationCrt = entryRelationship
-						.getSubstanceAdministration();
-
-				EIVLTS eivltsCrt = null;
-				String eivltsCrtStr;
-				if (substanceAdministrationCrt != null
-						&& substanceAdministrationCrt.getEffectiveTime() != null) {
-					eivltsCrt = (EIVLTS) substanceAdministrationCrt.getEffectiveTime().stream()
-							.filter(sxcmts -> sxcmts instanceof EIVLTS).findFirst().orElse(null);
-				}
-				if (eivltsCrt == null) {
-					continue;
-				}
-				eivltsCrtStr = parseEivlTs(languageCode, eivltsCrt);
-
-				String seqNumber = entryRelationship.getSequenceNumber() != null
-						? entryRelationship.getSequenceNumber().getValue().toString()
-						: "";
-				String doseQuantityStr = parseIvlPq(substanceAdministrationCrt.getDoseQuantity());
-
-				String rateQuantityStr = parseRateQuantity(
-						substanceAdministrationCrt.getRateQuantity());
-				if (StringUtils.isNotEmpty(rateQuantityStr)) {
-					rateQuantityStr = ", "
-							+ EmedTextNarrativeAttributes.RATE_QUANTITY.getDisplayName(languageCode)
-							+ " : " + rateQuantityStr;
-				}
-				String dosageIntakeStrCrt = String.format("%s) %s %s%s", seqNumber, doseQuantityStr,
-						eivltsCrtStr, rateQuantityStr);
-				dosageIntakes.add(dosageIntakeStrCrt);
-			}
-		}
-		return dosageIntakes;
-
-	}
-
-	/**
-	 * <div class="en">Convert an sxprts to a String of the choosen
-	 * language</div>
-	 *
-	 * @param languageCode
-	 *            language of translation
-	 * @param sxprts
-	 *            format of dosage intake
-	 * @return sxprts to string translated
-	 */
-	public static String parseSxprTs(LanguageCode languageCode, SXPRTS sxprts) {
-		resBundle = ResourceBundle.getBundle("Messages", new Locale(languageCode.getCodeValue()));
-		String AND_STRING = " " + resBundle.getString("emed.and") + " ";
-		String textNarrativ = "";
-		boolean notAddAnd = false;
-		for (SXCMTS sxcmts : sxprts.getComp()) {
-			if (sxcmts instanceof IVLTS) {
-				textNarrativ = parseIvlTs((IVLTS) sxcmts, languageCode) + ": ";
-				notAddAnd = true;
-			} else if (sxcmts instanceof SXPRTS) {
-				if (StringUtils.isNotEmpty(textNarrativ) && !notAddAnd)
-					textNarrativ += AND_STRING;
-				textNarrativ += parseSxprTs(languageCode, (SXPRTS) sxcmts);
-				notAddAnd = false;
-			} else if (sxcmts instanceof EIVLTS) {
-				if (StringUtils.isNotEmpty(textNarrativ) && !notAddAnd)
-					textNarrativ += AND_STRING;
-				textNarrativ += parseEivlTs(languageCode, (EIVLTS) sxcmts);
-				notAddAnd = false;
-				// in case of a TS
-			} else if (sxcmts != null) {
-				if (StringUtils.isNotEmpty(textNarrativ) && !notAddAnd)
-					textNarrativ += AND_STRING;
-				textNarrativ += parseTs(languageCode, sxcmts);
-				notAddAnd = false;
-			}
-
-		}
-		return textNarrativ;
-	}
-
-	/**
-	 * <div class="en">Convert a TS to a string</div>
-	 *
-	 * @param languageCode
-	 *            language for translation
-	 * @param ts
-	 *            A quantity specifying a point on the axis of natural
-	 * @return ts to string translated
-	 */
-	public static String parseTs(LanguageCode languageCode, TS ts) {
-
-		String date = null;
-		try {
-			date = dateToCompletDateString(DateUtil.parseHl7Timestamp(ts.getValue()), languageCode);
-
-		} catch (Exception e) {
-			// an exception can be catched when there is a parsing problem.
-			e.printStackTrace();
-		}
-		return date;
-	}
-
-	/**
 	 * <div class="en">Convert a rateQuantity to a string</div>
 	 *
 	 * @param doseQuantityElement
@@ -881,124 +821,184 @@ public class EmedChStrucDocTextBuilderV096 extends StrucDocText {
 		return str;
 	}
 
+	/**
+	 * <div class="en">Convert an ivlpq to a String of the choosen
+	 * language</div>
+	 *
+	 * @param ivlpq
+	 *            format of dosage intake
+	 * @return ivlpq to string formated
+	 */
+	static String parseIvlPq(IVLPQ ivlpq) {
+		String narrativeText = "";
+		if (ivlpq != null) {
+			String unitGlobal = "";
+			String valueText;
+			if (StringUtils.isNotEmpty(ivlpq.getUnit()) && !ivlpq.getUnit().equals("1")) {
+				unitGlobal = ivlpq.getUnit();
+			}
+			// if the value is directly in the doseQuantity element the unit can
+			// only be in this element (not on low/high child element)
+			if (StringUtils.isNotEmpty(ivlpq.getValue())) {
+				valueText = ivlpq.getValue() + unitGlobal;
+				return valueText;
+			} else {
+				String lowText = "";
+				String highText = "";
+				String centerText;
+				for (JAXBElement<? extends PQ> doseQuantityElement : ivlpq.getRest()) {
+					String elementName = doseQuantityElement.getName().getLocalPart();
+					// check if it contain a value
+					if (isNotEmptyPqValue(doseQuantityElement)) {
+						switch (elementName) {
+						case "low":
+							lowText = doseQuantityElementToString(doseQuantityElement, unitGlobal);
+							break;
+						case "high":
+							highText = doseQuantityElementToString(doseQuantityElement, unitGlobal);
+							break;
+						case "center":
+							centerText = doseQuantityElementToString(doseQuantityElement,
+									unitGlobal);
+
+							// if there is a ceter value its should not have low
+							// or high value
+							return centerText;
+						}
+					}
+
+				}
+
+				if (StringUtils.isNotEmpty(lowText) && StringUtils.isNotEmpty(highText)) {
+					return lowText + " - " + highText;
+				} else if (StringUtils.isNotEmpty(lowText)) {
+					return lowText;
+				} else {
+					return "";
+				}
+			}
+		}
+		return narrativeText;
+	}
+
+	/** The variable approachSite for narrativ text */
+	private String approachSite = "-";
 	/** approachSiteList to add to the narrative text table */
 	private final List<StrucDocTd> approachSiteList = new ArrayList<>();
+	/** The variable comment for narrativ text */
+	private String comment = "-";
 	/** commentList to add to the narrative text table */
 	private final List<StrucDocTd> commentList = new ArrayList<>();
+	/** The variable dateFromTo for narrativ text */
+	private String dateFromTo = "-";
 	/** dateFromToList to add to the narrative text table */
 	private final List<StrucDocTd> dateFromToList = new ArrayList<>();
+	/** The variable dispenseAmount for narrativ text */
+	private String dispenseAmount = "-";
 	/** dispenseAmountList to add to the narrative text table */
 	private final List<StrucDocTd> dispenseAmountList = new ArrayList<>();
+	/** The variable dosageIntakes for narrativ text */
+	private List<String> dosageIntakes = new ArrayList<>();
 	/** dosageIntakesList to add to the narrative text table */
 	private final List<StrucDocTd> dosageIntakesList = new ArrayList<>();
+	/** The variable doseQuantity for narrativ text */
+	private String doseQuantity = "-";
 	/** doseQuantityList to add to the narrative text table */
 	private final List<StrucDocTd> doseQuantityList = new ArrayList<>();
+	/** current emed class */
+	private String emedClass;
+	/** Current entry */
+	private POCDMT000040Entry entry;
 	/*** the ObjectFactory **/
 	private final ObjectFactory factory = new ObjectFactory();
+	/** The variable fulfillmentInstructions for narrativ text */
+	private String fulfillmentInstructions = "-";
 	/** fulfillmentInstructionsList to add to the narrative text table */
 	private final List<StrucDocTd> fulfillmentInstructionsList = new ArrayList<>();
+	/** The variable gtin for narrativ text */
+	private String gtin = "-";
 	/** gtinList to add to the narrative text table */
 	private final List<StrucDocTd> gtinList = new ArrayList<>();
+	/** The list of variable ingredients for narrativ text */
+	private List<String> ingredients = new ArrayList<>();
 	/** ingredientsList to add to the narrative text table */
 	private final List<StrucDocTd> ingredientsList = new ArrayList<>();
 	/** languageCode of the document */
 	private final LanguageCode languageCode;
-	/** lotNumberList to add to the narrative text table */
-	private final List<StrucDocTd> lotNumberList = new ArrayList<>();
-	/** Title and headers of each table of the narative text */
-	private final List<NarrativeTableInfos> narrativeTableInfosList = new ArrayList<>();
-	/** packageCapacityList to add to the narrative text table */
-	private final List<StrucDocTd> packageCapacityList = new ArrayList<>();
-	/** packageFormList to add to the narrative text table */
-	private final List<StrucDocTd> packageFormList = new ArrayList<>();
-	/** packageNameList to add to the narrative text table */
-	private final List<StrucDocTd> packageNameList = new ArrayList<>();
-	/** hashmap of original text by the headers */
-	private final HashMap<String, List<StrucDocTd>> paramNameToValues = new HashMap<>();
-	/** patientInstructionsList to add to the narrative text table */
-	private final List<StrucDocTd> patientInstructionsList = new ArrayList<>();
-	/** rateQuantityList to add to the narrative text table */
-	private final List<StrucDocTd> rateQuantityList = new ArrayList<>();
-	/** reasonList to add to the narrative text table */
-	private final List<StrucDocTd> reasonList = new ArrayList<>();
-	/** repeatNumberList to add to the narrative text table */
-	private final List<StrucDocTd> repeatNumberList = new ArrayList<>();
-	/** routeCodeList to add to the narrative text table */
-	private final List<StrucDocTd> routeCodeList = new ArrayList<>();
-	/**
-	 * Current section
-	 */
-	private final POCDMT000040Section section;
-
-	private final List<StrucDocTd> substitutionList = new ArrayList<>();
-
-	/** The variable approachSite for narrativ text */
-	private String approachSite = "-";
-
-	/** The variable comment for narrativ text */
-	private String comment = "-";
-
-	/** The variable dateFromTo for narrativ text */
-	private String dateFromTo = "-";
-
-	/** The variable dispenseAmount for narrativ text */
-	private String dispenseAmount = "-";
-
-	/** The variable dosageIntakes for narrativ text */
-	private List<String> dosageIntakes = new ArrayList<>();
-
-	/** The variable doseQuantity for narrativ text */
-	private String doseQuantity = "-";
-
-	/** current emed class */
-	private String emedClass;
-
-	/** Current entry */
-	private POCDMT000040Entry entry;
-
-	/** The variable fulfillmentInstructions for narrativ text */
-	private String fulfillmentInstructions = "-";
-
-	/** The variable gtin for narrativ text */
-	private String gtin = "-";
-
-	/** The list of variable ingredients for narrativ text */
-	private List<String> ingredients = new ArrayList<>();
-
 	/** The variable lotNumber for narrativ text */
 	private String lotNumber = "-";
+
+	/** lotNumberList to add to the narrative text table */
+	private final List<StrucDocTd> lotNumberList = new ArrayList<>();
+
+	/** Title and headers of each table of the narative text */
+	private final List<NarrativeTableInfos> narrativeTableInfosList = new ArrayList<>();
 
 	/** The variable packageCapacity for narrativ text */
 	private String packageCapacity = "-";
 
+	/** packageCapacityList to add to the narrative text table */
+	private final List<StrucDocTd> packageCapacityList = new ArrayList<>();
+
 	/** The variable packageForm for narrativ text */
 	private String packageForm = "-";
+
+	/** packageFormList to add to the narrative text table */
+	private final List<StrucDocTd> packageFormList = new ArrayList<>();
 
 	/** The variable packageName for narrativ text */
 	private String packageName = "-";
 
+	/** packageNameList to add to the narrative text table */
+	private final List<StrucDocTd> packageNameList = new ArrayList<>();
+
+	/** hashmap of original text by the headers */
+	private final HashMap<String, List<StrucDocTd>> paramNameToValues = new HashMap<>();
+
 	/** The variable patientInstructions for narrativ text */
 	private String patientInstructions = "-";
+
+	/** patientInstructionsList to add to the narrative text table */
+	private final List<StrucDocTd> patientInstructionsList = new ArrayList<>();
 
 	/** The variable rateQuantity for narrativ text */
 	private String rateQuantity = "-";
 
+	/** rateQuantityList to add to the narrative text table */
+	private final List<StrucDocTd> rateQuantityList = new ArrayList<>();
+
 	/** The variable reason for narrativ text */
 	private String reason = "-";
+
+	/** reasonList to add to the narrative text table */
+	private final List<StrucDocTd> reasonList = new ArrayList<>();
 
 	/** The variable repeatNumber for narrativ text */
 	private String repeatNumber = "-";
 
+	/** repeatNumberList to add to the narrative text table */
+	private final List<StrucDocTd> repeatNumberList = new ArrayList<>();
+
 	/** The variable routeCode for narrativ text */
 	private String routeCode = "-";
+
+	/** routeCodeList to add to the narrative text table */
+	private final List<StrucDocTd> routeCodeList = new ArrayList<>();
 
 	/**
 	 * used for the id to know the current number of rows
 	 */
 	private int rowCrt = 0;
 
+	/**
+	 * Current section
+	 */
+	private final POCDMT000040Section section;
+
 	/** The variable substitution for narrativ text */
 	private String substitution = "-";
+
+	private final List<StrucDocTd> substitutionList = new ArrayList<>();
 
 	/**
 	 * <div class="en"> Principal constructor for

@@ -91,37 +91,6 @@ public enum UnitsOfTime {
 	YEAR("a", 6, "Year", "year(s)", "Jahr(e)", "année(s)", "anno(i)");
 
 	/**
-	 * List of unit time ordered
-	 */
-	String[] unitsOfTimeOrdered = new String[] { "s", "min", "h", "d", "wk", "mo", "a" };
-	/**
-	 * list of value of unit time sorted, each value represent one unit of the
-	 * next unit in the table ex : 60s = 1m / 60min=1h / 24h = 1d
-	 */
-	Integer[] unitsOfTimeOrderedTime = new Integer[] { 60, 60, 24, 7, 4, 12, 1 };
-
-	/**
-	 * <div class="en"> Get the next unit time "timed"</div>
-	 * 
-	 * @return the next unit time "timed"
-	 */
-	public Integer getUnitTimed() {
-		return this.unitsOfTimeOrderedTime[this.pos];
-	}
-
-	/**
-	 * <div class="en">get the next unit time</div>
-	 * 
-	 * @return the next unit time of the curent value
-	 */
-	public UnitsOfTime getNext() {
-		int nextPos = this.pos + 1;
-		if (nextPos >= unitsOfTimeOrdered.length)
-			return null;
-		return getEnum(unitsOfTimeOrdered[nextPos]);
-	}
-
-	/**
 	 * <div class="en">get an unit time by its code</div>
 	 * 
 	 * @param code
@@ -136,7 +105,6 @@ public enum UnitsOfTime {
 		}
 		return null;
 	}
-
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
@@ -187,15 +155,26 @@ public enum UnitsOfTime {
 	private String code;
 
 	/**
+	 * The display names per language
+	 */
+	private Map<LanguageCode, String> displayNames;
+
+	/**
 	 * <!-- @formatter:off -->
 	 * <!-- @formatter:on -->
 	 */
 	private int pos;
 
 	/**
-	 * The display names per language
+	 * List of unit time ordered
 	 */
-	private Map<LanguageCode, String> displayNames;
+	String[] unitsOfTimeOrdered = new String[] { "s", "min", "h", "d", "wk", "mo", "a" };
+
+	/**
+	 * list of value of unit time sorted, each value represent one unit of the
+	 * next unit in the table ex : 60s = 1m / 60min=1h / 24h = 1d
+	 */
+	Integer[] unitsOfTimeOrderedTime = new Integer[] { 60, 60, 24, 7, 4, 12, 1 };
 
 	/**
 	 * <!-- @formatter:off -->
@@ -263,6 +242,27 @@ public enum UnitsOfTime {
 			return displayNames.get(null);
 		}
 		return displayName;
+	}
+
+	/**
+	 * <div class="en">get the next unit time</div>
+	 * 
+	 * @return the next unit time of the curent value
+	 */
+	public UnitsOfTime getNext() {
+		int nextPos = this.pos + 1;
+		if (nextPos >= unitsOfTimeOrdered.length)
+			return null;
+		return getEnum(unitsOfTimeOrdered[nextPos]);
+	}
+
+	/**
+	 * <div class="en"> Get the next unit time "timed"</div>
+	 * 
+	 * @return the next unit time "timed"
+	 */
+	public Integer getUnitTimed() {
+		return this.unitsOfTimeOrderedTime[this.pos];
 	}
 
 	/**
