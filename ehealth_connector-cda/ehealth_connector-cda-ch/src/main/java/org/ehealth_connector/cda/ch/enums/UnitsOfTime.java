@@ -16,83 +16,40 @@
  */
 package org.ehealth_connector.cda.ch.enums;
 
-import org.ehealth_connector.common.enums.LanguageCode;
-
 import java.util.HashMap;
 import java.util.Map;
 
+import org.ehealth_connector.common.enums.LanguageCode;
+
 /**
- * <div class="en">Unit of times used in emed</div>
+ * <div class="en">Unit of times</div>.
  */
 public enum UnitsOfTime {
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">day</div>
-	 * <div class="de">Tag</div>
-	 * <div class="fr">jour</div>
-	 * <div class="it">giorno</div>
-	 * <!-- @formatter:on -->
-	 */
+
+	/** <!-- @formatter:off --> <div class="en">day</div> <div class="de">Tag</div> <div class="fr">jour</div> <div class="it">giorno</div> <!-- @formatter:on -->. */
 	DAY("d", 3, "Day", "day(s)", "Tag(e)", "jour(s)", "giorno(i)"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Hour</div>
-	 * <div class="de">Stunde</div>
-	 * <div class="fr">heure</div>
-	 * <div class="it">ora</div>
-	 * <!-- @formatter:on -->
-	 */
+
+	/** <!-- @formatter:off --> <div class="en">Hour</div> <div class="de">Stunde</div> <div class="fr">heure</div> <div class="it">ora</div> <!-- @formatter:on -->. */
 	HOUR("h", 2, "Hour", "hour(s)", "Stunde(n)", "heure(s)", "ora(e)"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Minute</div>
-	 * <div class="de">Minute</div>
-	 * <div class="fr">minute</div>
-	 * <div class="it">minuto</div>
-	 * <!-- @formatter:on -->
-	 */
+
+	/** <!-- @formatter:off --> <div class="en">Minute</div> <div class="de">Minute</div> <div class="fr">minute</div> <div class="it">minuto</div> <!-- @formatter:on -->. */
 	MINUTE("min", 1, "Minute", "minute(s)", "Minute(n)", "minute(s)", "minuto(i)"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">month</div>
-	 * <div class="de">Monat</div>
-	 * <div class="fr">mois</div>
-	 * <div class="it">mese</div>
-	 * <!-- @formatter:on -->
-	 */
+
+	/** <!-- @formatter:off --> <div class="en">month</div> <div class="de">Monat</div> <div class="fr">mois</div> <div class="it">mese</div> <!-- @formatter:on -->. */
 	MONTH("mo", 5, "Month", "month(s)", "Monat(e)", "mois", "mese(i)"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Second</div>
-	 * <div class="de">Sekunde</div>
-	 * <div class="fr">seconde</div>
-	 * <div class="it">secondo</div>
-	 * <!-- @formatter:on -->
-	 */
+
+	/** <!-- @formatter:off --> <div class="en">Second</div> <div class="de">Sekunde</div> <div class="fr">seconde</div> <div class="it">secondo</div> <!-- @formatter:on -->. */
 	SECOND("s", 0, "Second", "second(s)", "Sekunde(n)", "seconde(s)", "secondo(i)"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">week</div>
-	 * <div class="de">Woche</div>
-	 * <div class="fr">semaine</div>
-	 * <div class="it">settimana</div>
-	 * <!-- @formatter:on -->
-	 */
+
+	/** <!-- @formatter:off --> <div class="en">week</div> <div class="de">Woche</div> <div class="fr">semaine</div> <div class="it">settimana</div> <!-- @formatter:on -->. */
 	WEEK("wk", 4, "Week", "week(s)", "Woche(n)", "semaine(s)", "settimana(e)"),
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">year</div>
-	 * <div class="de">Jahr</div>
-	 * <div class="fr">année</div>
-	 * <div class="it">anno</div>
-	 * <!-- @formatter:on -->
-	 */
+	/** <!-- @formatter:off --> <div class="en">year</div> <div class="de">Jahr</div> <div class="fr">année</div> <div class="it">anno</div> <!-- @formatter:on -->. */
 	YEAR("a", 6, "Year", "year(s)", "Jahr(e)", "année(s)", "anno(i)");
 
 	/**
-	 * <div class="en">get an unit time by its code</div>
-	 * 
+	 * <div class="en">get an unit time by its code</div>.
+	 *
 	 * @param code
 	 *            code of the unit of time
 	 * @return the UnitOfTime
@@ -105,6 +62,7 @@ public enum UnitsOfTime {
 		}
 		return null;
 	}
+
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Checks if a given enum is part of this value set.</div>
@@ -146,33 +104,21 @@ public enum UnitsOfTime {
 		return false;
 	}
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Machine interpretable and (inside this class) unique code</div>
-	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse) eindeutiger Code</div>
-	 * <!-- @formatter:on -->
-	 */
+	/** <!-- @formatter:off --> <div class="en">Machine interpretable and (inside this class) unique code</div> <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse) eindeutiger Code</div> <!-- @formatter:on -->. */
 	private String code;
 
-	/**
-	 * The display names per language
-	 */
+	/** The display names per language. */
 	private Map<LanguageCode, String> displayNames;
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <!-- @formatter:on -->
-	 */
+	/** The pos. */
 	private int pos;
 
-	/**
-	 * List of unit time ordered
-	 */
+	/** List of unit time ordered. */
 	String[] unitsOfTimeOrdered = new String[] { "s", "min", "h", "d", "wk", "mo", "a" };
 
 	/**
 	 * list of value of unit time sorted, each value represent one unit of the
-	 * next unit in the table ex : 60s = 1m / 60min=1h / 24h = 1d
+	 * next unit in the table ex : 60s = 1m / 60min=1h / 24h = 1d.
 	 */
 	Integer[] unitsOfTimeOrderedTime = new Integer[] { 60, 60, 24, 7, 4, 12, 1 };
 
@@ -213,7 +159,7 @@ public enum UnitsOfTime {
 	 * <!-- @formatter:off -->
 	 * <div class="en">Gets the actual Code as string</div>
 	 * <div class="de">Liefert den eigentlichen Code als String</div>
-	 * <!-- @formatter:on -->
+	 * <!-- @formatter:on -->.
 	 *
 	 * @return <div class="en">the code</div>
 	 */
@@ -245,8 +191,8 @@ public enum UnitsOfTime {
 	}
 
 	/**
-	 * <div class="en">get the next unit time</div>
-	 * 
+	 * <div class="en">get the next unit time</div>.
+	 *
 	 * @return the next unit time of the curent value
 	 */
 	public UnitsOfTime getNext() {
@@ -257,8 +203,8 @@ public enum UnitsOfTime {
 	}
 
 	/**
-	 * <div class="en"> Get the next unit time "timed"</div>
-	 * 
+	 * <div class="en"> Get the next unit time "timed"</div>.
+	 *
 	 * @return the next unit time "timed"
 	 */
 	public Integer getUnitTimed() {
@@ -273,6 +219,7 @@ public enum UnitsOfTime {
 	 *
 	 * @return <div class="en">the code system identifier</div>
 	 */
+	@Override
 	public String toString() {
 		return getCodeValue();
 	}

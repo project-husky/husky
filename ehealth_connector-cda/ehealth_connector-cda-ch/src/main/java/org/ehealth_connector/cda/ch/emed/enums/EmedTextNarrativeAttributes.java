@@ -16,15 +16,15 @@
  */
 package org.ehealth_connector.cda.ch.emed.enums;
 
-import org.ehealth_connector.common.enums.CodeSystems;
-import org.ehealth_connector.common.enums.LanguageCode;
-
 import java.util.HashMap;
 import java.util.Map;
 
+import org.ehealth_connector.common.enums.CodeSystems;
+import org.ehealth_connector.common.enums.LanguageCode;
+
 /**
  * <!-- @formatter:off -->
- * <div class="en">Available values for the header of the narritive text table</div>
+ * <div class="en">Available values for the header of the narrative text table</div>
  * <!-- @formatter:on -->
  */
 public enum EmedTextNarrativeAttributes {
@@ -1333,6 +1333,7 @@ public enum EmedTextNarrativeAttributes {
 		}
 		return null;
 	}
+
 	/**
      * <!-- @formatter:off -->
      * <div class="en">Checks if a given enum is part of this value set.</div>
@@ -1353,6 +1354,7 @@ public enum EmedTextNarrativeAttributes {
 			return false;
 		}
 	}
+
 	/**
      * <!-- @formatter:off -->
      * <div class="en">Checks if a given code value is in this value set.</div>
@@ -1487,6 +1489,7 @@ public enum EmedTextNarrativeAttributes {
      *
      * @return <div class="en">the code system identifier</div>
      */
+	@Override
 	public String toString() {
 		return getCodeValue();
 	}

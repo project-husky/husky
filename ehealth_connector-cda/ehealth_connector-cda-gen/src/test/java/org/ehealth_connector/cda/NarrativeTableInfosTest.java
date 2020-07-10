@@ -24,8 +24,9 @@ import org.junit.Test;
 
 public class NarrativeTableInfosTest {
 
-	private  String[] colHeaders = new String[] { "col1", "col2" };
-	private NarrativeTableInfos narrativeTableInfos = new NarrativeTableInfos("Test title", colHeaders);
+	private String[] colHeaders = new String[] { "col1", "col2" };
+	private NarrativeTableInfos narrativeTableInfos = new NarrativeTableInfos("Test title",
+			colHeaders);
 
 	/**
 	 * Test if getTableCol works
