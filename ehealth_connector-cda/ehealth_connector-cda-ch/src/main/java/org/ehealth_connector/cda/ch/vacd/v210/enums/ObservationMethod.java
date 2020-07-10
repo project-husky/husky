@@ -126,6 +126,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 			"Agar Gel Immunodiffusion", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Agar screen</div>
+	 * <!-- @formatter:on -->
+	 */
+	AGAR_SCREEN_L1("0278", "2.16.840.1.113883.5.84", "Agar screen", "Agar screen", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Agglutination</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -163,6 +170,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">algorithm</div>
+	 * <!-- @formatter:on -->
+	 */
+	ALGORITHM_L1("ALGM", "2.16.840.1.113883.5.84", "algorithm", "algorithm", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Anaerobic Culture</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -181,6 +195,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	ANTIBIOTIC_SENSITIVITY_DISK("0240", "2.16.840.1.113883.5.84", "Antibiotic sensitivity, disk",
+			"Antibiotic sensitivity, disk", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Antibiotic sensitivity, disk</div>
+	 * <!-- @formatter:on -->
+	 */
+	ANTIBIOTIC_SENSITIVITY_DISK_L1("0240", "2.16.840.1.113883.5.84", "Antibiotic sensitivity, disk",
 			"Antibiotic sensitivity, disk", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
@@ -314,6 +335,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 			"BACTEC susceptibility test", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">BACTEC susceptibility test</div>
+	 * <!-- @formatter:on -->
+	 */
+	BACTEC_SUSCEPTIBILITY_TEST_L1("0241", "2.16.840.1.113883.5.84", "BACTEC susceptibility test",
+			"BACTEC susceptibility test", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Bacterial identification</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -332,6 +360,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	BAYESIAN_CALCULATION("BYCL", "2.16.840.1.113883.5.84", "bayesian calculation",
+			"bayesian calculation", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">bayesian calculation</div>
+	 * <!-- @formatter:on -->
+	 */
+	BAYESIAN_CALCULATION_L2("BYCL", "2.16.840.1.113883.5.84", "bayesian calculation",
 			"bayesian calculation", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
@@ -593,6 +628,35 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Disk dilution</div>
+	 * <!-- @formatter:on -->
+	 */
+	DISK_DILUTION_L1("0242", "2.16.840.1.113883.5.84", "Disk dilution", "Disk dilution",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Disk induction</div>
+	 * <!-- @formatter:on -->
+	 */
+	DISK_INDUCTION_L1("0279", "2.16.840.1.113883.5.84", "Disk induction", "Disk induction",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">document verification</div>
+	 * <!-- @formatter:on -->
+	 */
+	DOCUMENT_VERIFICATION_L1("VDOC", "2.16.840.1.113883.5.84", "document verification",
+			"document verification", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">electronic token verification</div>
+	 * <!-- @formatter:on -->
+	 */
+	ELECTRONIC_TOKEN_VERIFICATION_L1("VTOKEN", "2.16.840.1.113883.5.84",
+			"electronic token verification", "electronic token verification", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Electron microscopy</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -784,6 +848,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 			"global introspection", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">global introspection</div>
+	 * <!-- @formatter:on -->
+	 */
+	GLOBAL_INTROSPECTION_L1("GINT", "2.16.840.1.113883.5.84", "global introspection",
+			"global introspection", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Gomori methenamine silver stain</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -805,6 +876,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 	GOMORI_WHEATLY_TRICHROME_STAIN("0179", "2.16.840.1.113883.5.84",
 			"Gomori-Wheatly trichrome stain", "Gomori-Wheatly trichrome stain", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Gradient Strip</div>
+	 * <!-- @formatter:on -->
+	 */
+	GRADIENT_STRIP_L1("0275", "2.16.840.1.113883.5.84", "Gradient Strip", "Gradient Strip",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Gridley stain</div>
@@ -1346,10 +1424,27 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Minimum Inhibitory Concentration</div>
+	 * <!-- @formatter:on -->
+	 */
+	MINIMUM_INHIBITORY_CONCENTRATION_L1("0272", "2.16.840.1.113883.5.84",
+			"Minimum Inhibitory Concentration", "Minimum Inhibitory Concentration", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Minimum Inhibitory Concentration, macrodilution</div>
 	 * <!-- @formatter:on -->
 	 */
 	MINIMUM_INHIBITORY_CONCENTRATION_MACRODILUTION("0245", "2.16.840.1.113883.5.84",
+			"Minimum Inhibitory Concentration, macrodilution",
+			"Minimum Inhibitory Concentration, macrodilution", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Minimum Inhibitory Concentration, macrodilution</div>
+	 * <!-- @formatter:on -->
+	 */
+	MINIMUM_INHIBITORY_CONCENTRATION_MACRODILUTION_L1("0245", "2.16.840.1.113883.5.84",
 			"Minimum Inhibitory Concentration, macrodilution",
 			"Minimum Inhibitory Concentration, macrodilution", "TOTRANSLATE", "TOTRANSLATE",
 			"TOTRANSLATE"),
@@ -1364,10 +1459,27 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Minimum Inhibitory Concentration, microdilution</div>
+	 * <!-- @formatter:on -->
+	 */
+	MINIMUM_INHIBITORY_CONCENTRATION_MICRODILUTION_L1("0246", "2.16.840.1.113883.5.84",
+			"Minimum Inhibitory Concentration, microdilution",
+			"Minimum Inhibitory Concentration, microdilution", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Minimum Lethal Concentration (MLC)</div>
 	 * <!-- @formatter:on -->
 	 */
 	MINIMUM_LETHAL_CONCENTRATION_MLC("0275a", "2.16.840.1.113883.5.84",
+			"Minimum Lethal Concentration (MLC)", "Minimum Lethal Concentration (MLC)",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Minimum Lethal Concentration (MLC)</div>
+	 * <!-- @formatter:on -->
+	 */
+	MINIMUM_LETHAL_CONCENTRATION_MLC_L1("0275a", "2.16.840.1.113883.5.84",
 			"Minimum Lethal Concentration (MLC)", "Minimum Lethal Concentration (MLC)",
 			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
@@ -1511,6 +1623,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 	 */
 	ORCEIN_STAIN("0216", "2.16.840.1.113883.5.84", "Orcein stain", "Orcein stain", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">PCR</div>
+	 * <!-- @formatter:on -->
+	 */
+	PCR_L1("PCR", "2.16.840.1.113883.5.84", "PCR", "PCR", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Perls' stain</div>
@@ -1739,6 +1858,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">registry verification</div>
+	 * <!-- @formatter:on -->
+	 */
+	REGISTRY_VERIFICATION_L1("VREG", "2.16.840.1.113883.5.84", "registry verification",
+			"registry verification", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Restriction Fragment Length Polymorphism</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -1810,6 +1936,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 			"Seiver-Munger stain", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Serum bactericidal titer</div>
+	 * <!-- @formatter:on -->
+	 */
+	SERUM_BACTERICIDAL_TITER_L1("0277", "2.16.840.1.113883.5.84", "Serum bactericidal titer",
+			"Serum bactericidal titer", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Serum Neutralization</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -1821,6 +1954,14 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	SILVER_STAIN("0228", "2.16.840.1.113883.5.84", "Silver stain", "Silver stain", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Slow Mycobacteria Susceptibility</div>
+	 * <!-- @formatter:on -->
+	 */
+	SLOW_MYCOBACTERIA_SUSCEPTIBILITY_L1("0276", "2.16.840.1.113883.5.84",
+			"Slow Mycobacteria Susceptibility", "Slow Mycobacteria Susceptibility", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
@@ -2041,6 +2182,22 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Viral Genotype Susceptibility</div>
+	 * <!-- @formatter:on -->
+	 */
+	VIRAL_GENOTYPE_SUSCEPTIBILITY_L1("0273", "2.16.840.1.113883.5.84",
+			"Viral Genotype Susceptibility", "Viral Genotype Susceptibility", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Viral Phenotype Susceptibility</div>
+	 * <!-- @formatter:on -->
+	 */
+	VIRAL_PHENOTYPE_SUSCEPTIBILITY_L1("0274", "2.16.840.1.113883.5.84",
+			"Viral Phenotype Susceptibility", "Viral Phenotype Susceptibility", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Vital Stain</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -2060,6 +2217,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 	 */
 	VITEK_2("0094", "2.16.840.1.113883.5.84", "VITEK 2", "VITEK 2", "TOTRANSLATE", "TOTRANSLATE",
 			"TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">voice-based verification</div>
+	 * <!-- @formatter:on -->
+	 */
+	VOICE_BASED_VERIFICATION_L1("VVOICE", "2.16.840.1.113883.5.84", "voice-based verification",
+			"voice-based verification", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">von Kossa stain</div>
@@ -2168,6 +2332,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Agar screen</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String AGAR_SCREEN_L1_CODE = "0278";
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Agglutination</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -2203,6 +2374,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Code for algorithm</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String ALGORITHM_L1_CODE = "ALGM";
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Anaerobic Culture</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -2221,6 +2399,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	public static final String ANTIBIOTIC_SENSITIVITY_DISK_CODE = "0240";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Antibiotic sensitivity, disk</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String ANTIBIOTIC_SENSITIVITY_DISK_L1_CODE = "0240";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -2350,6 +2535,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Code for BACTEC susceptibility test</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String BACTEC_SUSCEPTIBILITY_TEST_L1_CODE = "0241";
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Bacterial identification</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -2368,6 +2560,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	public static final String BAYESIAN_CALCULATION_CODE = "BYCL";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for bayesian calculation</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String BAYESIAN_CALCULATION_L2_CODE = "BYCL";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -2623,6 +2822,34 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Disk dilution</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String DISK_DILUTION_L1_CODE = "0242";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Disk induction</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String DISK_INDUCTION_L1_CODE = "0279";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for document verification</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String DOCUMENT_VERIFICATION_L1_CODE = "VDOC";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for electronic token verification</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String ELECTRONIC_TOKEN_VERIFICATION_L1_CODE = "VTOKEN";
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Electron microscopy</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -2805,6 +3032,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Code for global introspection</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String GLOBAL_INTROSPECTION_L1_CODE = "GINT";
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Gomori methenamine silver stain</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -2823,6 +3057,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	public static final String GOMORI_WHEATLY_TRICHROME_STAIN_CODE = "0179";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Gradient Strip</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String GRADIENT_STRIP_L1_CODE = "0275";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -3330,10 +3571,24 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Minimum Inhibitory Concentration</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String MINIMUM_INHIBITORY_CONCENTRATION_L1_CODE = "0272";
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Minimum Inhibitory Concentration, macrodilution</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String MINIMUM_INHIBITORY_CONCENTRATION_MACRODILUTION_CODE = "0245";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Minimum Inhibitory Concentration, macrodilution</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String MINIMUM_INHIBITORY_CONCENTRATION_MACRODILUTION_L1_CODE = "0245";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -3344,10 +3599,24 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Minimum Inhibitory Concentration, microdilution</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String MINIMUM_INHIBITORY_CONCENTRATION_MICRODILUTION_L1_CODE = "0246";
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Minimum Lethal Concentration (MLC)</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String MINIMUM_LETHAL_CONCENTRATION_MLC_CODE = "0275a";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Minimum Lethal Concentration (MLC)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String MINIMUM_LETHAL_CONCENTRATION_MLC_L1_CODE = "0275a";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -3481,6 +3750,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	public static final String ORCEIN_STAIN_CODE = "0216";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for PCR</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String PCR_L1_CODE = "PCR";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -3694,6 +3970,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Code for registry verification</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String REGISTRY_VERIFICATION_L1_CODE = "VREG";
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Restriction Fragment Length Polymorphism</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -3764,6 +4047,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Serum bactericidal titer</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String SERUM_BACTERICIDAL_TITER_L1_CODE = "0277";
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Serum Neutralization</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -3775,6 +4065,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	public static final String SILVER_STAIN_CODE = "0228";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Slow Mycobacteria Susceptibility</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String SLOW_MYCOBACTERIA_SUSCEPTIBILITY_L1_CODE = "0276";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -3988,6 +4285,20 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Viral Genotype Susceptibility</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String VIRAL_GENOTYPE_SUSCEPTIBILITY_L1_CODE = "0273";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Viral Phenotype Susceptibility</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String VIRAL_PHENOTYPE_SUSCEPTIBILITY_L1_CODE = "0274";
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Vital Stain</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -4006,6 +4317,13 @@ public enum ObservationMethod implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	public static final String VITEK_2_CODE = "0094";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for voice-based verification</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String VOICE_BASED_VERIFICATION_L1_CODE = "VVOICE";
 
 	/**
 	 * <!-- @formatter:off -->

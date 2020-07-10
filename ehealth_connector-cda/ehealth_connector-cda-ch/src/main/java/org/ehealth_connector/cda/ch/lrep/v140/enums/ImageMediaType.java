@@ -41,35 +41,35 @@ public enum ImageMediaType implements ValueSetEnumInterface {
 	 * <div class="en">G3Fax Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	G3FAX_IMAGE("image/g3fax", "2.16.840.1.113883.5.79", "G3Fax Image", "G3Fax Image",
+	G3FAX_IMAGE_L1("image/g3fax", "2.16.840.1.113883.5.79", "G3Fax Image", "G3Fax Image",
 			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">GIF Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	GIF_IMAGE("image/gif", "2.16.840.1.113883.5.79", "GIF Image", "GIF Image", "TOTRANSLATE",
+	GIF_IMAGE_L1("image/gif", "2.16.840.1.113883.5.79", "GIF Image", "GIF Image", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">JPEG Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	JPEG_IMAGE("image/jpeg", "2.16.840.1.113883.5.79", "JPEG Image", "JPEG Image", "TOTRANSLATE",
+	JPEG_IMAGE_L1("image/jpeg", "2.16.840.1.113883.5.79", "JPEG Image", "JPEG Image", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">PNG Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	PNG_IMAGE("image/png", "2.16.840.1.113883.5.79", "PNG Image", "PNG Image", "TOTRANSLATE",
+	PNG_IMAGE_L1("image/png", "2.16.840.1.113883.5.79", "PNG Image", "PNG Image", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">TIFF Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	TIFF_IMAGE("image/tiff", "2.16.840.1.113883.5.79", "TIFF Image", "TIFF Image", "TOTRANSLATE",
+	TIFF_IMAGE_L1("image/tiff", "2.16.840.1.113883.5.79", "TIFF Image", "TIFF Image", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE");
 
 	/**
@@ -77,35 +77,35 @@ public enum ImageMediaType implements ValueSetEnumInterface {
 	 * <div class="en">Code for G3Fax Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String G3FAX_IMAGE_CODE = "image/g3fax";
+	public static final String G3FAX_IMAGE_L1_CODE = "image/g3fax";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for GIF Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String GIF_IMAGE_CODE = "image/gif";
+	public static final String GIF_IMAGE_L1_CODE = "image/gif";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for JPEG Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String JPEG_IMAGE_CODE = "image/jpeg";
+	public static final String JPEG_IMAGE_L1_CODE = "image/jpeg";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for PNG Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String PNG_IMAGE_CODE = "image/png";
+	public static final String PNG_IMAGE_L1_CODE = "image/png";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for TIFF Image</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String TIFF_IMAGE_CODE = "image/tiff";
+	public static final String TIFF_IMAGE_L1_CODE = "image/tiff";
 
 	/**
 	 * <!-- @formatter:off -->

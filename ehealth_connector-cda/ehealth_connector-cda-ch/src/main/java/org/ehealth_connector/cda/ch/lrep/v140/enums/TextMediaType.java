@@ -41,7 +41,7 @@ public enum TextMediaType implements ValueSetEnumInterface {
 	 * <div class="en">HL7 Structured Narrative</div>
 	 * <!-- @formatter:on -->
 	 */
-	HL7_STRUCTURED_NARRATIVE("text/x-hl7-text+xml", "2.16.840.1.113883.5.79",
+	HL7_STRUCTURED_NARRATIVE_L1("text/x-hl7-text+xml", "2.16.840.1.113883.5.79",
 			"HL7 Structured Narrative", "HL7 Structured Narrative", "TOTRANSLATE", "TOTRANSLATE",
 			"TOTRANSLATE"),
 	/**
@@ -49,42 +49,42 @@ public enum TextMediaType implements ValueSetEnumInterface {
 	 * <div class="en">HL7 Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	HL7_TEXT("text/x-hl7-ft", "2.16.840.1.113883.5.79", "HL7 Text", "HL7 Text", "TOTRANSLATE",
+	HL7_TEXT_L1("text/x-hl7-ft", "2.16.840.1.113883.5.79", "HL7 Text", "HL7 Text", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">HTML Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	HTML_TEXT("text/html", "2.16.840.1.113883.5.79", "HTML Text", "HTML Text", "TOTRANSLATE",
+	HTML_TEXT_L1("text/html", "2.16.840.1.113883.5.79", "HTML Text", "HTML Text", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Plain Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	PLAIN_TEXT("text/plain", "2.16.840.1.113883.5.79", "Plain Text", "Plain Text", "TOTRANSLATE",
+	PLAIN_TEXT_L1("text/plain", "2.16.840.1.113883.5.79", "Plain Text", "Plain Text", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">RTF Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	RTF_TEXT("text/rtf", "2.16.840.1.113883.5.79", "RTF Text", "RTF Text", "TOTRANSLATE",
+	RTF_TEXT_L1("text/rtf", "2.16.840.1.113883.5.79", "RTF Text", "RTF Text", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">SGML Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	SGML_TEXT("text/sgml", "2.16.840.1.113883.5.79", "SGML Text", "SGML Text", "TOTRANSLATE",
+	SGML_TEXT_L1("text/sgml", "2.16.840.1.113883.5.79", "SGML Text", "SGML Text", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">XML Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	XML_TEXT("text/xml", "2.16.840.1.113883.5.79", "XML Text", "XML Text", "TOTRANSLATE",
+	XML_TEXT_L1("text/xml", "2.16.840.1.113883.5.79", "XML Text", "XML Text", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE");
 
 	/**
@@ -92,49 +92,49 @@ public enum TextMediaType implements ValueSetEnumInterface {
 	 * <div class="en">Code for HL7 Structured Narrative</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String HL7_STRUCTURED_NARRATIVE_CODE = "text/x-hl7-text+xml";
+	public static final String HL7_STRUCTURED_NARRATIVE_L1_CODE = "text/x-hl7-text+xml";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for HL7 Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String HL7_TEXT_CODE = "text/x-hl7-ft";
+	public static final String HL7_TEXT_L1_CODE = "text/x-hl7-ft";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for HTML Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String HTML_TEXT_CODE = "text/html";
+	public static final String HTML_TEXT_L1_CODE = "text/html";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Plain Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String PLAIN_TEXT_CODE = "text/plain";
+	public static final String PLAIN_TEXT_L1_CODE = "text/plain";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for RTF Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String RTF_TEXT_CODE = "text/rtf";
+	public static final String RTF_TEXT_L1_CODE = "text/rtf";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for SGML Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String SGML_TEXT_CODE = "text/sgml";
+	public static final String SGML_TEXT_L1_CODE = "text/sgml";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for XML Text</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String XML_TEXT_CODE = "text/xml";
+	public static final String XML_TEXT_L1_CODE = "text/xml";
 
 	/**
 	 * <!-- @formatter:off -->

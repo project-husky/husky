@@ -41,7 +41,7 @@ public enum ModelMediaType implements ValueSetEnumInterface {
 	 * <div class="en">VRML Model</div>
 	 * <!-- @formatter:on -->
 	 */
-	VRML_MODEL("model/vrml", "2.16.840.1.113883.5.79", "VRML Model", "VRML Model", "TOTRANSLATE",
+	VRML_MODEL_L1("model/vrml", "2.16.840.1.113883.5.79", "VRML Model", "VRML Model", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE");
 
 	/**
@@ -49,7 +49,7 @@ public enum ModelMediaType implements ValueSetEnumInterface {
 	 * <div class="en">Code for VRML Model</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String VRML_MODEL_CODE = "model/vrml";
+	public static final String VRML_MODEL_L1_CODE = "model/vrml";
 
 	/**
 	 * <!-- @formatter:off -->

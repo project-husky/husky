@@ -41,63 +41,77 @@ public enum ActEncounterCode implements ValueSetEnumInterface {
 	 * <div class="en">ambulatory</div>
 	 * <!-- @formatter:on -->
 	 */
-	AMBULATORY("AMB", "2.16.840.1.113883.5.4", "ambulatory", "ambulatory", "TOTRANSLATE",
+	AMBULATORY_L1("AMB", "2.16.840.1.113883.5.4", "ambulatory", "ambulatory", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">emergency</div>
 	 * <!-- @formatter:on -->
 	 */
-	EMERGENCY("EMER", "2.16.840.1.113883.5.4", "emergency", "emergency", "TOTRANSLATE",
+	EMERGENCY_L1("EMER", "2.16.840.1.113883.5.4", "emergency", "emergency", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">field</div>
 	 * <!-- @formatter:on -->
 	 */
-	FIELD("FLD", "2.16.840.1.113883.5.4", "field", "field", "TOTRANSLATE", "TOTRANSLATE",
+	FIELD_L1("FLD", "2.16.840.1.113883.5.4", "field", "field", "TOTRANSLATE", "TOTRANSLATE",
 			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">home health</div>
 	 * <!-- @formatter:on -->
 	 */
-	HOME_HEALTH("HH", "2.16.840.1.113883.5.4", "home health", "home health", "TOTRANSLATE",
+	HOME_HEALTH_L1("HH", "2.16.840.1.113883.5.4", "home health", "home health", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">inpatient acute</div>
+	 * <!-- @formatter:on -->
+	 */
+	INPATIENT_ACUTE_L2("ACUTE", "2.16.840.1.113883.5.4", "inpatient acute", "inpatient acute",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">inpatient encounter</div>
 	 * <!-- @formatter:on -->
 	 */
-	INPATIENT_ENCOUNTER("IMP", "2.16.840.1.113883.5.4", "inpatient encounter",
+	INPATIENT_ENCOUNTER_L1("IMP", "2.16.840.1.113883.5.4", "inpatient encounter",
 			"inpatient encounter", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">inpatient non-acute</div>
+	 * <!-- @formatter:on -->
+	 */
+	INPATIENT_NON_ACUTE_L2("NONAC", "2.16.840.1.113883.5.4", "inpatient non-acute",
+			"inpatient non-acute", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">observation encounter</div>
 	 * <!-- @formatter:on -->
 	 */
-	OBSERVATION_ENCOUNTER("OBSENC", "2.16.840.1.113883.5.4", "observation encounter",
+	OBSERVATION_ENCOUNTER_L1("OBSENC", "2.16.840.1.113883.5.4", "observation encounter",
 			"observation encounter", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">pre-admission</div>
 	 * <!-- @formatter:on -->
 	 */
-	PRE_ADMISSION("PRENC", "2.16.840.1.113883.5.4", "pre-admission", "pre-admission", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	PRE_ADMISSION_L1("PRENC", "2.16.840.1.113883.5.4", "pre-admission", "pre-admission",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">short stay</div>
 	 * <!-- @formatter:on -->
 	 */
-	SHORT_STAY("SS", "2.16.840.1.113883.5.4", "short stay", "short stay", "TOTRANSLATE",
+	SHORT_STAY_L1("SS", "2.16.840.1.113883.5.4", "short stay", "short stay", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">virtual</div>
 	 * <!-- @formatter:on -->
 	 */
-	VIRTUAL("VR", "2.16.840.1.113883.5.4", "virtual", "virtual", "TOTRANSLATE", "TOTRANSLATE",
+	VIRTUAL_L1("VR", "2.16.840.1.113883.5.4", "virtual", "virtual", "TOTRANSLATE", "TOTRANSLATE",
 			"TOTRANSLATE");
 
 	/**
@@ -105,63 +119,77 @@ public enum ActEncounterCode implements ValueSetEnumInterface {
 	 * <div class="en">Code for ambulatory</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String AMBULATORY_CODE = "AMB";
+	public static final String AMBULATORY_L1_CODE = "AMB";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for emergency</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String EMERGENCY_CODE = "EMER";
+	public static final String EMERGENCY_L1_CODE = "EMER";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for field</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String FIELD_CODE = "FLD";
+	public static final String FIELD_L1_CODE = "FLD";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for home health</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String HOME_HEALTH_CODE = "HH";
+	public static final String HOME_HEALTH_L1_CODE = "HH";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for inpatient acute</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String INPATIENT_ACUTE_L2_CODE = "ACUTE";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for inpatient encounter</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String INPATIENT_ENCOUNTER_CODE = "IMP";
+	public static final String INPATIENT_ENCOUNTER_L1_CODE = "IMP";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for inpatient non-acute</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String INPATIENT_NON_ACUTE_L2_CODE = "NONAC";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for observation encounter</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String OBSERVATION_ENCOUNTER_CODE = "OBSENC";
+	public static final String OBSERVATION_ENCOUNTER_L1_CODE = "OBSENC";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for pre-admission</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String PRE_ADMISSION_CODE = "PRENC";
+	public static final String PRE_ADMISSION_L1_CODE = "PRENC";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for short stay</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String SHORT_STAY_CODE = "SS";
+	public static final String SHORT_STAY_L1_CODE = "SS";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for virtual</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String VIRTUAL_CODE = "VR";
+	public static final String VIRTUAL_L1_CODE = "VR";
 
 	/**
 	 * <!-- @formatter:off -->

@@ -42,7 +42,28 @@ public enum ObservationAllergyType implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	ALLERGY("ALG", "2.16.840.1.113883.5.4", "Allergy", "Allergy", "TOTRANSLATE", "TOTRANSLATE",
-			"TOTRANSLATE");
+			"TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Drug Allergy</div>
+	 * <!-- @formatter:on -->
+	 */
+	DRUG_ALLERGY_L1("DALG", "2.16.840.1.113883.5.4", "Drug Allergy", "Drug Allergy", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Environmental Allergy</div>
+	 * <!-- @formatter:on -->
+	 */
+	ENVIRONMENTAL_ALLERGY_L1("EALG", "2.16.840.1.113883.5.4", "Environmental Allergy",
+			"Environmental Allergy", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Food Allergy</div>
+	 * <!-- @formatter:on -->
+	 */
+	FOOD_ALLERGY_L1("FALG", "2.16.840.1.113883.5.4", "Food Allergy", "Food Allergy", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -50,6 +71,27 @@ public enum ObservationAllergyType implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	public static final String ALLERGY_CODE = "ALG";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Drug Allergy</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String DRUG_ALLERGY_L1_CODE = "DALG";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Environmental Allergy</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String ENVIRONMENTAL_ALLERGY_L1_CODE = "EALG";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Food Allergy</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String FOOD_ALLERGY_L1_CODE = "FALG";
 
 	/**
 	 * <!-- @formatter:off -->

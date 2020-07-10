@@ -38,6 +38,20 @@ public enum RoleStatus implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">active</div>
+	 * <!-- @formatter:on -->
+	 */
+	ACTIVE_L1("active", "2.16.840.1.113883.5.1068", "active", "active", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">cancelled</div>
+	 * <!-- @formatter:on -->
+	 */
+	CANCELLED_L1("cancelled", "2.16.840.1.113883.5.1068", "cancelled", "cancelled", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">normal</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -49,7 +63,42 @@ public enum RoleStatus implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	NULLIFIED("nullified", "2.16.840.1.113883.5.1068", "nullified", "nullified", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE");
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">pending</div>
+	 * <!-- @formatter:on -->
+	 */
+	PENDING_L1("pending", "2.16.840.1.113883.5.1068", "pending", "pending", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">suspended</div>
+	 * <!-- @formatter:on -->
+	 */
+	SUSPENDED_L1("suspended", "2.16.840.1.113883.5.1068", "suspended", "suspended", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">terminated</div>
+	 * <!-- @formatter:on -->
+	 */
+	TERMINATED_L1("terminated", "2.16.840.1.113883.5.1068", "terminated", "terminated",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for active</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String ACTIVE_L1_CODE = "active";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for cancelled</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String CANCELLED_L1_CODE = "cancelled";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -64,6 +113,27 @@ public enum RoleStatus implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	public static final String NULLIFIED_CODE = "nullified";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for pending</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String PENDING_L1_CODE = "pending";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for suspended</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String SUSPENDED_L1_CODE = "suspended";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for terminated</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String TERMINATED_L1_CODE = "terminated";
 
 	/**
 	 * <!-- @formatter:off -->

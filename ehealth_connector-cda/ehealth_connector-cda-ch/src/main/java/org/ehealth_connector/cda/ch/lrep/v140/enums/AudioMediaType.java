@@ -41,21 +41,21 @@ public enum AudioMediaType implements ValueSetEnumInterface {
 	 * <div class="en">Basic Audio</div>
 	 * <!-- @formatter:on -->
 	 */
-	BASIC_AUDIO("audio/basic", "2.16.840.1.113883.5.79", "Basic Audio", "Basic Audio",
+	BASIC_AUDIO_L1("audio/basic", "2.16.840.1.113883.5.79", "Basic Audio", "Basic Audio",
 			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">K32ADPCM Audio</div>
 	 * <!-- @formatter:on -->
 	 */
-	K32ADPCM_AUDIO("audio/k32adpcm", "2.16.840.1.113883.5.79", "K32ADPCM Audio", "K32ADPCM Audio",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	K32ADPCM_AUDIO_L1("audio/k32adpcm", "2.16.840.1.113883.5.79", "K32ADPCM Audio",
+			"K32ADPCM Audio", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">MPEG audio layer 3 MP3 Audio</div>
 	 * <!-- @formatter:on -->
 	 */
-	MPEG_AUDIO_LAYER_3_MP3_AUDIO("audio/mpeg", "2.16.840.1.113883.5.79",
+	MPEG_AUDIO_LAYER_3_MP3_AUDIO_L1("audio/mpeg", "2.16.840.1.113883.5.79",
 			"MPEG audio layer 3 MP3 Audio", "MPEG audio layer 3 MP3 Audio", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE");
 
@@ -64,21 +64,21 @@ public enum AudioMediaType implements ValueSetEnumInterface {
 	 * <div class="en">Code for Basic Audio</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String BASIC_AUDIO_CODE = "audio/basic";
+	public static final String BASIC_AUDIO_L1_CODE = "audio/basic";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for K32ADPCM Audio</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String K32ADPCM_AUDIO_CODE = "audio/k32adpcm";
+	public static final String K32ADPCM_AUDIO_L1_CODE = "audio/k32adpcm";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for MPEG audio layer 3 MP3 Audio</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String MPEG_AUDIO_LAYER_3_MP3_AUDIO_CODE = "audio/mpeg";
+	public static final String MPEG_AUDIO_LAYER_3_MP3_AUDIO_L1_CODE = "audio/mpeg";
 
 	/**
 	 * <!-- @formatter:off -->

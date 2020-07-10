@@ -41,7 +41,7 @@ public enum MultipartMediaType implements ValueSetEnumInterface {
 	 * <div class="en">CDA Level 1 Multipart</div>
 	 * <!-- @formatter:on -->
 	 */
-	CDA_LEVEL_1_MULTIPART("multipart/x-hl7-cda-level-one", "2.16.840.1.113883.5.79",
+	CDA_LEVEL_1_MULTIPART_L1("multipart/x-hl7-cda-level-one", "2.16.840.1.113883.5.79",
 			"CDA Level 1 Multipart", "CDA Level 1 Multipart", "TOTRANSLATE", "TOTRANSLATE",
 			"TOTRANSLATE");
 
@@ -50,7 +50,7 @@ public enum MultipartMediaType implements ValueSetEnumInterface {
 	 * <div class="en">Code for CDA Level 1 Multipart</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String CDA_LEVEL_1_MULTIPART_CODE = "multipart/x-hl7-cda-level-one";
+	public static final String CDA_LEVEL_1_MULTIPART_L1_CODE = "multipart/x-hl7-cda-level-one";
 
 	/**
 	 * <!-- @formatter:off -->

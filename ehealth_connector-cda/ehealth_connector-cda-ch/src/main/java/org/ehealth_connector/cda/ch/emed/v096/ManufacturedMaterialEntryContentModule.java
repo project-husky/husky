@@ -42,14 +42,6 @@ public class ManufacturedMaterialEntryContentModule
 	}
 
 	/**
-	 * Adds a pharmAsContent
-	 */
-	public void addPharmAsContent(
-			org.ehealth_connector.common.hl7cdar2.COCTMT230100UVContent value) {
-		asContent = value;
-	}
-
-	/**
 	 * Adds a pharmIngredient One or more active ingredients SHOULD be
 	 * represented with this structure.
 	 */
@@ -180,6 +172,13 @@ public class ManufacturedMaterialEntryContentModule
 	}
 
 	/**
+	 * Gets the pharmAsContent
+	 */
+	public org.ehealth_connector.common.hl7cdar2.COCTMT230100UVContent getPharmAsContent() {
+		return asContent;
+	}
+
+	/**
 	 * Gets the pharmExpirationTime
 	 */
 	public org.ehealth_connector.common.hl7cdar2.TS getPharmExpirationTime() {
@@ -255,6 +254,14 @@ public class ManufacturedMaterialEntryContentModule
 	public void setHl7TemplateId(org.ehealth_connector.common.hl7cdar2.II value) {
 		getTemplateId().clear();
 		getTemplateId().add(value);
+	}
+
+	/**
+	 * Sets the pharmAsContent
+	 */
+	public void setPharmAsContent(
+			org.ehealth_connector.common.hl7cdar2.COCTMT230100UVContent value) {
+		this.asContent = value;
 	}
 
 	/**

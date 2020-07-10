@@ -38,11 +38,56 @@ public enum ObservationNonAllergyIntoleranceType implements ValueSetEnumInterfac
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Drug Non-Allergy Intolerance</div>
+	 * <!-- @formatter:on -->
+	 */
+	DRUG_NON_ALLERGY_INTOLERANCE_L1("DNAINT", "2.16.840.1.113883.5.4",
+			"Drug Non-Allergy Intolerance", "Drug Non-Allergy Intolerance", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Environmental Non-Allergy Intolerance</div>
+	 * <!-- @formatter:on -->
+	 */
+	ENVIRONMENTAL_NON_ALLERGY_INTOLERANCE_L1("ENAINT", "2.16.840.1.113883.5.4",
+			"Environmental Non-Allergy Intolerance", "Environmental Non-Allergy Intolerance",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Food Non-Allergy Intolerance</div>
+	 * <!-- @formatter:on -->
+	 */
+	FOOD_NON_ALLERGY_INTOLERANCE_L1("FNAINT", "2.16.840.1.113883.5.4",
+			"Food Non-Allergy Intolerance", "Food Non-Allergy Intolerance", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Non-Allergy Intolerance</div>
 	 * <!-- @formatter:on -->
 	 */
 	NON_ALLERGY_INTOLERANCE("NAINT", "2.16.840.1.113883.5.4", "Non-Allergy Intolerance",
 			"Non-Allergy Intolerance", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Drug Non-Allergy Intolerance</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String DRUG_NON_ALLERGY_INTOLERANCE_L1_CODE = "DNAINT";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Environmental Non-Allergy Intolerance</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String ENVIRONMENTAL_NON_ALLERGY_INTOLERANCE_L1_CODE = "ENAINT";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Food Non-Allergy Intolerance</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String FOOD_NON_ALLERGY_INTOLERANCE_L1_CODE = "FNAINT";
 
 	/**
 	 * <!-- @formatter:off -->

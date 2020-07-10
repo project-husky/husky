@@ -41,21 +41,21 @@ public enum ApplicationMediaType implements ValueSetEnumInterface {
 	 * <div class="en">DICOM</div>
 	 * <!-- @formatter:on -->
 	 */
-	DICOM("application/dicom", "2.16.840.1.113883.5.79", "DICOM", "DICOM", "TOTRANSLATE",
+	DICOM_L1("application/dicom", "2.16.840.1.113883.5.79", "DICOM", "DICOM", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">MSWORD</div>
 	 * <!-- @formatter:on -->
 	 */
-	MSWORD("application/msword", "2.16.840.1.113883.5.79", "MSWORD", "MSWORD", "TOTRANSLATE",
+	MSWORD_L1("application/msword", "2.16.840.1.113883.5.79", "MSWORD", "MSWORD", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">PDF</div>
 	 * <!-- @formatter:on -->
 	 */
-	PDF("application/pdf", "2.16.840.1.113883.5.79", "PDF", "PDF", "TOTRANSLATE", "TOTRANSLATE",
+	PDF_L1("application/pdf", "2.16.840.1.113883.5.79", "PDF", "PDF", "TOTRANSLATE", "TOTRANSLATE",
 			"TOTRANSLATE");
 
 	/**
@@ -63,21 +63,21 @@ public enum ApplicationMediaType implements ValueSetEnumInterface {
 	 * <div class="en">Code for DICOM</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String DICOM_CODE = "application/dicom";
+	public static final String DICOM_L1_CODE = "application/dicom";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for MSWORD</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String MSWORD_CODE = "application/msword";
+	public static final String MSWORD_L1_CODE = "application/msword";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for PDF</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String PDF_CODE = "application/pdf";
+	public static final String PDF_L1_CODE = "application/pdf";
 
 	/**
 	 * <!-- @formatter:off -->

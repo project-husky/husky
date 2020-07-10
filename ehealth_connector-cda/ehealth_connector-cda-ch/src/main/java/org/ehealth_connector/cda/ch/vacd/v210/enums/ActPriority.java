@@ -58,11 +58,27 @@ public enum ActPriority implements ValueSetEnumInterface {
 			"callback for scheduling", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">callback placer for scheduling</div>
+	 * <!-- @formatter:on -->
+	 */
+	CALLBACK_PLACER_FOR_SCHEDULING_L1("CSP", "2.16.840.1.113883.5.7",
+			"callback placer for scheduling", "callback placer for scheduling", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">callback results</div>
 	 * <!-- @formatter:on -->
 	 */
 	CALLBACK_RESULTS("CR", "2.16.840.1.113883.5.7", "callback results", "callback results",
 			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">contact recipient for scheduling</div>
+	 * <!-- @formatter:on -->
+	 */
+	CONTACT_RECIPIENT_FOR_SCHEDULING_L1("CSR", "2.16.840.1.113883.5.7",
+			"contact recipient for scheduling", "contact recipient for scheduling", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">elective</div>
@@ -149,10 +165,24 @@ public enum ActPriority implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Code for callback placer for scheduling</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String CALLBACK_PLACER_FOR_SCHEDULING_L1_CODE = "CSP";
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for callback results</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String CALLBACK_RESULTS_CODE = "CR";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for contact recipient for scheduling</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String CONTACT_RECIPIENT_FOR_SCHEDULING_L1_CODE = "CSR";
 
 	/**
 	 * <!-- @formatter:off -->

@@ -41,14 +41,14 @@ public enum VideoMediaType implements ValueSetEnumInterface {
 	 * <div class="en">MPEG Video</div>
 	 * <!-- @formatter:on -->
 	 */
-	MPEG_VIDEO("video/mpeg", "2.16.840.1.113883.5.79", "MPEG Video", "MPEG Video", "TOTRANSLATE",
+	MPEG_VIDEO_L1("video/mpeg", "2.16.840.1.113883.5.79", "MPEG Video", "MPEG Video", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">X-AVI Video</div>
 	 * <!-- @formatter:on -->
 	 */
-	X_AVI_VIDEO("video/x-avi", "2.16.840.1.113883.5.79", "X-AVI Video", "X-AVI Video",
+	X_AVI_VIDEO_L1("video/x-avi", "2.16.840.1.113883.5.79", "X-AVI Video", "X-AVI Video",
 			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
 
 	/**
@@ -56,14 +56,14 @@ public enum VideoMediaType implements ValueSetEnumInterface {
 	 * <div class="en">Code for MPEG Video</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String MPEG_VIDEO_CODE = "video/mpeg";
+	public static final String MPEG_VIDEO_L1_CODE = "video/mpeg";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for X-AVI Video</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String X_AVI_VIDEO_CODE = "video/x-avi";
+	public static final String X_AVI_VIDEO_L1_CODE = "video/x-avi";
 
 	/**
 	 * <!-- @formatter:off -->

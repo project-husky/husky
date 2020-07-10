@@ -16,20 +16,18 @@
  */
 package org.ehealth_connector.cda.ch.emed.v096.enums;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.annotation.Generated;
+
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
-import javax.annotation.Generated;
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * <!-- @formatter:off -->
- * <div class="en"><p>Note this class was updated manually to add the missings translation, if we regenerate with the art decor generator thoses modification will be missing</p>
- * <p>
- *     <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26
- * </p></div>
+ * <div class="en">no designation found for language ENGLISH</div>
  * <div class="de">no designation found for language GERMAN</div>
  * <div class="fr">no designation found for language FRENCH</div>
  * <div class="it">no designation found for language ITALIAN</div>
@@ -40,92 +38,47 @@ public enum ActSubstanceAdminSubstitutionCode implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">brand composition</div>
+	 * <div class="de">Äquivalent, andere Marke</div>
+	 * <div class="fr">équivalent même fabriquant</div>
+	 * <div class="it">equivalente dello stesso produttore</div>
+	 * <!-- @formatter:on -->
+	 */
+	BRAND_COMPOSITION_L3("BC", "2.16.840.1.113883.5.1070", "brand composition", "brand composition",
+			"Äquivalent, andere Marke", "équivalent même fabriquant",
+			"equivalente dello stesso produttore"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">equivalent composition</div>
+	 * <div class="de">äquivalente Zusammensetzung</div>
+	 * <div class="fr">composition équivalente</div>
+	 * <div class="it">composizione simile</div>
+	 * <!-- @formatter:on -->
+	 */
+	EQUIVALENT_COMPOSITION_L2("EC", "2.16.840.1.113883.5.1070", "equivalent composition",
+			"equivalent composition", "äquivalente Zusammensetzung", "composition équivalente",
+			"composizione simile"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">equivalent</div>
 	 * <div class="de">Äquivalent</div>
 	 * <div class="fr">équivalent</div>
 	 * <div class="it">equivalente</div>
 	 * <!-- @formatter:on -->
 	 */
-	EQUIVALENT("E", "2.16.840.1.113883.5.139", "equivalent",
-			"equivalent", "Äquivalent", "équivalent", "equivalente"),
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">equivalent composition</div>
-	 * <div class="de">ähnliche Zusammensetzung</div>
-	 * <div class="fr">composition équivalente</div>
-	 * <div class="it">composizione simile</div>
-	 * <!-- @formatter:on -->
-	 */
-	EQUIVALENT_COMPOSITION("EC", "2.16.840.1.113883.5.139", "equivalent composition",
-			"equivalent composition", "ähnliche Zusammensetzung", "composition équivalente", "composizione simile"),
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">brand composition</div>
-	 * <div class="de">Äquivalent desselben Herstellers</div>
-	 * <div class="fr">équivalent même fabriquant</div>
-	 * <div class="it">equivalente dello stesso produttore</div>
-	 * <!-- @formatter:on -->
-	 */
-	BRAND_COMPOSITION("BC", "2.16.840.1.113883.5.139", "brand composition",
-			"brand composition", "Äquivalent desselben Herstellers", "équivalent même fabriquant", "equivalente dello stesso produttore"),
-
+	EQUIVALENT_L1("E", "2.16.840.1.113883.5.1070", "equivalent", "equivalent", "Äquivalent",
+			"équivalent", "equivalente"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">generic composition</div>
-	 * <div class="de">identische Zusammensetzung</div>
+	 * <div class="de">Äquivalent, Generikum</div>
 	 * <div class="fr">composition identique</div>
 	 * <div class="it">composizione identica</div>
 	 * <!-- @formatter:on -->
 	 */
-	GENERIC_COMPOSITION("G", "2.16.840.1.113883.5.139", "generic composition",
-			"generic composition", "identische Zusammensetzung", "composition identique", "composizione identica"),
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">therapeutic alternative</div>
-	 * <div class="de">therapeutische Alternative</div>
-	 * <div class="fr">alternative thérapeutique</div>
-	 * <div class="it">alternativa terapeutica</div>
-	 * <!-- @formatter:on -->
-	 */
-	THERAPEUTIC_ALTERNATIVE("TE", "2.16.840.1.113883.5.139", "therapeutic alternative",
-			"therapeutic alternative", "therapeutische Alternative", "alternative thérapeutique", "alternativa terapeutica"),
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">therapeutic brand</div>
-	 * <div class="de">therapeutische Alternative gleicher Hersteller</div>
-	 * <div class="fr">alternative thérapeutique même fabricant</div>
-	 * <div class="it">alternativa terapeutica stesso produttore</div>
-	 * <!-- @formatter:on -->
-	 */
-	THERAPEUTIC_BRAND("TB", "2.16.840.1.113883.5.139", "therapeutic brand",
-			"therapeutic brand", "therapeutische Alternative gleicher Hersteller", "alternative thérapeutique même fabricant", "alternativa terapeutica stesso produttore"),
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">therapeutic generic</div>
-	 * <div class="de">gleiche therapeutische Wirkung</div>
-	 * <div class="fr">effet thérapeutique identique</div>
-	 * <div class="it">stesso effetto terapeutico</div>
-	 * <!-- @formatter:on -->
-	 */
-	THERAPEUTIC_GENERIC("TG", "2.16.840.1.113883.5.139", "therapeutic generic",
-			"therapeutic generic", "gleiche therapeutische Wirkung", "effet thérapeutique identique", "stesso effetto terapeutico"),
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">formulary</div>
-	 * <div class="de">dieselbe Formel</div>
-	 * <div class="fr">même formule</div>
-	 * <div class="it">stessa formula</div>
-	 * <!-- @formatter:on -->
-	 */
-	FORMULARY("F", "2.16.840.1.113883.5.139", "formulary",
-			"formulary", "dieselbe Formel", "même formule", "stessa formula"),
-
+	GENERIC_COMPOSITION_L3("G", "2.16.840.1.113883.5.1070", "generic composition",
+			"generic composition", "Äquivalent, Generikum", "composition identique",
+			"composizione identica"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">none</div>
@@ -134,73 +87,122 @@ public enum ActSubstanceAdminSubstitutionCode implements ValueSetEnumInterface {
 	 * <div class="it">non autorizzato</div>
 	 * <!-- @formatter:on -->
 	 */
-	NONE("N", "2.16.840.1.113883.5.139", "none",
-			"none", "nicht autorisiert", "non autorisé", "non autorizzato");
-
+	NONE_L1("N", "2.16.840.1.113883.5.1070", "none", "none", "nicht autorisiert", "non autorisé",
+			"non autorizzato"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for equivalent</div>
+	 * <div class="en">therapeutic alternative</div>
+	 * <div class="de">therapeutische Alternative</div>
+	 * <div class="fr">alternative thérapeutique</div>
+	 * <div class="it">alternativa terapeutica</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String EQUIVALENT_CODE = "E";
-
+	THERAPEUTIC_ALTERNATIVE_L2("TE", "2.16.840.1.113883.5.1070", "therapeutic alternative",
+			"therapeutic alternative", "therapeutische Alternative", "alternative thérapeutique",
+			"alternativa terapeutica"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for equivalent composition</div>
+	 * <div class="en">therapeutic brand</div>
+	 * <div class="de">therapeutische Alternative, andere Marke</div>
+	 * <div class="fr">alternative thérapeutique même fabricant</div>
+	 * <div class="it">alternativa terapeutica stesso produttore</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String EQUIVALENT_COMPOSITION_CODE = "EC";
+	THERAPEUTIC_BRAND_L3("TB", "2.16.840.1.113883.5.1070", "therapeutic brand", "therapeutic brand",
+			"therapeutische Alternative, andere Marke",
+			"alternative thérapeutique même fabricant",
+			"alternativa terapeutica stesso produttore"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">therapeutic generic</div>
+	 * <div class="de">therapeutische Alternative, Generikum</div>
+	 * <div class="fr">effet thérapeutique identique</div>
+	 * <div class="it">stesso effetto terapeutico</div>
+	 * <!-- @formatter:on -->
+	 */
+	THERAPEUTIC_GENERIC_L3("TG", "2.16.840.1.113883.5.1070", "therapeutic generic",
+			"therapeutic generic", "therapeutische Alternative, Generikum",
+			"effet thérapeutique identique", "stesso effetto terapeutico");
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for brand composition</div>
+	 * <div class="de">Code für Äquivalent, andere Marke</div>
+	 * <div class="fr">Code de équivalent même fabriquant</div>
+	 * <div class="it">Code per equivalente dello stesso produttore</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String BRAND_COMPOSITION_CODE = "BC";
+	public static final String BRAND_COMPOSITION_L3_CODE = "BC";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for equivalent composition</div>
+	 * <div class="de">Code für äquivalente Zusammensetzung</div>
+	 * <div class="fr">Code de composition équivalente</div>
+	 * <div class="it">Code per composizione simile</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String EQUIVALENT_COMPOSITION_L2_CODE = "EC";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for equivalent</div>
+	 * <div class="de">Code für Äquivalent</div>
+	 * <div class="fr">Code de équivalent</div>
+	 * <div class="it">Code per equivalente</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String EQUIVALENT_L1_CODE = "E";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for generic composition</div>
+	 * <div class="de">Code für Äquivalent, Generikum</div>
+	 * <div class="fr">Code de composition identique</div>
+	 * <div class="it">Code per composizione identica</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String GENERIC_COMPOSITION_CODE = "G";
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for therapeutic alternative</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String THERAPEUTIC_ALTERNATIVE_CODE = "TE";
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for therapeutic brand</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String THERAPEUTIC_BRAND_CODE = "TB";
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for therapeutic generic</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String THERAPEUTIC_GENERIC_CODE = "TG";
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for formulary</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String FORMULARY_CODE = "F";
+	public static final String GENERIC_COMPOSITION_L3_CODE = "G";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for none</div>
+	 * <div class="de">Code für nicht autorisiert</div>
+	 * <div class="fr">Code de non autorisé</div>
+	 * <div class="it">Code per non autorizzato</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String NONE_CODE = "N";
+	public static final String NONE_L1_CODE = "N";
 
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for therapeutic alternative</div>
+	 * <div class="de">Code für therapeutische Alternative</div>
+	 * <div class="fr">Code de alternative thérapeutique</div>
+	 * <div class="it">Code per alternativa terapeutica</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String THERAPEUTIC_ALTERNATIVE_L2_CODE = "TE";
 
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for therapeutic brand</div>
+	 * <div class="de">Code für therapeutische Alternative, andere Marke</div>
+	 * <div class="fr">Code de alternative thérapeutique même fabricant</div>
+	 * <div class="it">Code per alternativa terapeutica stesso produttore</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String THERAPEUTIC_BRAND_L3_CODE = "TB";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for therapeutic generic</div>
+	 * <div class="de">Code für therapeutische Alternative, Generikum</div>
+	 * <div class="fr">Code de effet thérapeutique identique</div>
+	 * <div class="it">Code per stesso effetto terapeutico</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String THERAPEUTIC_GENERIC_L3_CODE = "TG";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -208,7 +210,7 @@ public enum ActSubstanceAdminSubstitutionCode implements ValueSetEnumInterface {
 	 * <div class="de">Identifikator für das Value Set</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String VALUE_SET_ID = "2.16.840.1.113883.1.11.16621";
+	public static final String VALUE_SET_ID = "2.16.756.5.30.1.1.11.81";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -321,8 +323,8 @@ public enum ActSubstanceAdminSubstitutionCode implements ValueSetEnumInterface {
 	 *            the display name it
 	 */
 	ActSubstanceAdminSubstitutionCode(String code, String codeSystem, String displayName,
-                                      String displayNameEn, String displayNameDe, String displayNameFr,
-                                      String displayNameIt) {
+			String displayNameEn, String displayNameDe, String displayNameFr,
+			String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		displayNames = new HashMap<>();

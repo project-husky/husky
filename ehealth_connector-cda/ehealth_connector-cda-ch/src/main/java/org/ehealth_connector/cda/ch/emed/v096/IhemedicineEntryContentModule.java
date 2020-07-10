@@ -44,13 +44,6 @@ public class IhemedicineEntryContentModule
 	}
 
 	/**
-	 * Adds a pharmFormCode Form Code
-	 */
-	public void addPharmFormCode(org.ehealth_connector.common.hl7cdar2.CE value) {
-		formCode = value;
-	}
-
-	/**
 	 * Adds a pharmIngredient Active Ingredient List
 	 */
 	public void addPharmIngredient(
@@ -191,6 +184,13 @@ public class IhemedicineEntryContentModule
 	}
 
 	/**
+	 * Gets the pharmFormCode Form Code
+	 */
+	public org.ehealth_connector.common.hl7cdar2.CE getPharmFormCode() {
+		return formCode;
+	}
+
+	/**
 	 * Adds a predefined
 	 * org.ehealth_connector.common.hl7cdar2.COCTMT230100UVContent, filled by:
 	 * "CONT"
@@ -268,5 +268,12 @@ public class IhemedicineEntryContentModule
 		IVLTS ivlts = factory.createIVLTS();
 		ivlts.setValue(value.getValue());
 		this.expirationTime = ivlts;
+	}
+
+	/**
+	 * Sets the pharmFormCode Form Code
+	 */
+	public void setPharmFormCode(org.ehealth_connector.common.hl7cdar2.CE value) {
+		this.formCode = value;
 	}
 }

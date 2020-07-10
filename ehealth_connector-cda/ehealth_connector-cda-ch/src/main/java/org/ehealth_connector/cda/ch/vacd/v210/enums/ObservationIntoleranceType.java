@@ -38,11 +38,74 @@ public enum ObservationIntoleranceType implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Allergy</div>
+	 * <!-- @formatter:on -->
+	 */
+	ALLERGY_L1("ALG", "2.16.840.1.113883.5.4", "Allergy", "Allergy", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Drug Intolerance</div>
+	 * <!-- @formatter:on -->
+	 */
+	DRUG_INTOLERANCE_L1("DINT", "2.16.840.1.113883.5.4", "Drug Intolerance", "Drug Intolerance",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Environmental Intolerance</div>
+	 * <!-- @formatter:on -->
+	 */
+	ENVIRONMENTAL_INTOLERANCE_L1("EINT", "2.16.840.1.113883.5.4", "Environmental Intolerance",
+			"Environmental Intolerance", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Food Intolerance</div>
+	 * <!-- @formatter:on -->
+	 */
+	FOOD_INTOLERANCE_L1("FINT", "2.16.840.1.113883.5.4", "Food Intolerance", "Food Intolerance",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">intolerance</div>
 	 * <!-- @formatter:on -->
 	 */
 	INTOLERANCE("OINT", "2.16.840.1.113883.5.4", "intolerance", "intolerance", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE");
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Non-Allergy Intolerance</div>
+	 * <!-- @formatter:on -->
+	 */
+	NON_ALLERGY_INTOLERANCE_L1("NAINT", "2.16.840.1.113883.5.4", "Non-Allergy Intolerance",
+			"Non-Allergy Intolerance", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Allergy</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String ALLERGY_L1_CODE = "ALG";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Drug Intolerance</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String DRUG_INTOLERANCE_L1_CODE = "DINT";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Environmental Intolerance</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String ENVIRONMENTAL_INTOLERANCE_L1_CODE = "EINT";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Food Intolerance</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String FOOD_INTOLERANCE_L1_CODE = "FINT";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -50,6 +113,13 @@ public enum ObservationIntoleranceType implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	public static final String INTOLERANCE_CODE = "OINT";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Non-Allergy Intolerance</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String NON_ALLERGY_INTOLERANCE_L1_CODE = "NAINT";
 
 	/**
 	 * <!-- @formatter:off -->

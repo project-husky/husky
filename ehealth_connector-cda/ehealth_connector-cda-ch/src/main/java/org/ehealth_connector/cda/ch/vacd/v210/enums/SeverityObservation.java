@@ -41,42 +41,43 @@ public enum SeverityObservation implements ValueSetEnumInterface {
 	 * <div class="en">High</div>
 	 * <!-- @formatter:on -->
 	 */
-	HIGH("H", "2.16.840.1.113883.5.1063", "High", "High", "TOTRANSLATE", "TOTRANSLATE",
+	HIGH_L1("H", "2.16.840.1.113883.5.1063", "High", "High", "TOTRANSLATE", "TOTRANSLATE",
 			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Low</div>
 	 * <!-- @formatter:on -->
 	 */
-	LOW("L", "2.16.840.1.113883.5.1063", "Low", "Low", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	LOW_L1("L", "2.16.840.1.113883.5.1063", "Low", "Low", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Moderate</div>
 	 * <!-- @formatter:on -->
 	 */
-	MODERATE("M", "2.16.840.1.113883.5.1063", "Moderate", "Moderate", "TOTRANSLATE", "TOTRANSLATE",
-			"TOTRANSLATE");
+	MODERATE_L1("M", "2.16.840.1.113883.5.1063", "Moderate", "Moderate", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE");
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for High</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String HIGH_CODE = "H";
+	public static final String HIGH_L1_CODE = "H";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Low</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String LOW_CODE = "L";
+	public static final String LOW_L1_CODE = "L";
 
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Moderate</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String MODERATE_CODE = "M";
+	public static final String MODERATE_L1_CODE = "M";
 
 	/**
 	 * <!-- @formatter:off -->

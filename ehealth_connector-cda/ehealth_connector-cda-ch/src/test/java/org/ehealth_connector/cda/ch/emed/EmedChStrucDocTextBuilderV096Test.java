@@ -139,7 +139,7 @@ public class EmedChStrucDocTextBuilderV096Test {
 	 */
 	private EIVLTS createAcm() {
 
-		return createEIVLTS(ChEmedTimingEvent.BEFORE_BREAKFAST);
+		return createEIVLTS(ChEmedTimingEvent.BEFORE_BREAKFAST_L1);
 	}
 
 	/**
@@ -151,7 +151,7 @@ public class EmedChStrucDocTextBuilderV096Test {
 		ObjectFactory factory = new ObjectFactory();
 		EIVLTS acm = DosageInstructionsStartStopFrequency.getPredefinedEffectiveTimeA();
 		EIVLEvent eivlEvent = factory.createEIVLEvent();
-		eivlEvent.setCode(ChEmedTimingEvent.BEFORE_BREAKFAST_CODE);
+		eivlEvent.setCode(ChEmedTimingEvent.BEFORE_BREAKFAST_L1.getCodeValue());
 		acm.setEvent(eivlEvent);
 		IVLPQ offset = createHl7CdaR2Ivlpq("1", "2", "1", "h");
 		acm.setOffset(offset);
@@ -264,9 +264,9 @@ public class EmedChStrucDocTextBuilderV096Test {
 				.add(DateUtil.date2IvltsTzon(DateUtil.parseDateyyyyMMdd("20111129")));
 
 		diStartStopFrequency.getEntryRelationship().add(createDosageInstructionsEntryDosageChange(1,
-				"40", null, ChEmedTimingEvent.AFTER_DINNER));
+				"40", null, ChEmedTimingEvent.AFTER_DINNER_L1));
 		diStartStopFrequency.getEntryRelationship().add(createDosageInstructionsEntryDosageChange(2,
-				"20", "10", ChEmedTimingEvent.BEFORE_SLEEP));
+				"20", "10", ChEmedTimingEvent.BEFORE_SLEEP_L1));
 
 		diStartStopFrequency.setDoseQuantity(CdaUtil.createHl7CdaR2Ivlpq("0.5", null));
 
@@ -624,9 +624,9 @@ public class EmedChStrucDocTextBuilderV096Test {
 						DateUtil.formatDateTime(DateUtil.parseDateAndTime("20.6.2020 10:50")), null,
 						"10", "d"));
 		sxprts.getComp().add(createAcm());
-		sxprts.getComp().add(createEIVLTS(ChEmedTimingEvent.AFTER_BREAKFAST));
-		sxprts.getComp().add(createEIVLTS(ChEmedTimingEvent.BETWEEN_LUNCH_AND_DINNER));
-		sxprts.getComp().add(createEIVLTS(ChEmedTimingEvent.AFTER_DINNER));
+		sxprts.getComp().add(createEIVLTS(ChEmedTimingEvent.AFTER_BREAKFAST_L1));
+		sxprts.getComp().add(createEIVLTS(ChEmedTimingEvent.BETWEEN_LUNCH_AND_DINNER_L1));
+		sxprts.getComp().add(createEIVLTS(ChEmedTimingEvent.AFTER_DINNER_L1));
 
 		assertEquals(
 				"du 20 juin 2020 10:50 pendant 10 jour(s): Avant le petit-déjeuner et Après le petit-déjeuner et Entre le repas de midi et du soir et Après le repas du soir",
