@@ -37,15 +37,10 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040PatientRole;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040RecordTarget;
 
 /**
- * Generates the narrative text for CDA Emed
- * <p>
- * Here are the manadged profiles :
- * <ul>
- * <li>MTP</li>
- * <li>PRE</li>
- * <li>PADV</li>
- * <li>DIS</li>
- * </ul>
+ * <div class="en">Contains some utilities for the management of CDA-CH-VACD
+ * V2.1.0.</div> <div class="de">Enthält einige Tools für die Verwaltung von
+ * CDA-CH-VACD V2.1.0.</div>.
+ *
  */
 public class VacdUtilsV210 {
 
@@ -53,7 +48,10 @@ public class VacdUtilsV210 {
 	 * <div class="en">Pseudonymization of a clinical document according to the
 	 * CDA-CH-VACD specification (Masked Patient)</div>
 	 * <div class="de">Pseudonymisierung eines ClinicalDocument nach der
-	 * CDA-CH-VACD Spezifikation (Masked Patient)</div>
+	 * CDA-CH-VACD Spezifikation (Masked Patient)</div>.
+	 *
+	 * @param doc
+	 *            the doc
 	 */
 	public static void pseudonymization(POCDMT000040ClinicalDocument doc) {
 
@@ -67,15 +65,12 @@ public class VacdUtilsV210 {
 				srcRecordTarget = recordTarget;
 
 				destRecordTarget = new CdachvacdHeaderPatientMasked();
-				// destRecordTarget.getTemplateId().addAll(srcRecordTarget.getTemplateId());
 
 				POCDMT000040PatientRole sourcePatientRole = srcRecordTarget.getPatientRole();
 				POCDMT000040PatientRole destPatientRole = factory.createPOCDMT000040PatientRole();
-				// destPatientRole.getTemplateId().addAll(sourcePatientRole.getTemplateId());
 
 				POCDMT000040Patient sourcePatient = sourcePatientRole.getPatient();
 				POCDMT000040Patient destPatient = factory.createPOCDMT000040Patient();
-				// destPatient.getTemplateId().addAll(sourcePatient.getTemplateId());
 
 				destPatientRole.setPatient(destPatient);
 
@@ -87,8 +82,6 @@ public class VacdUtilsV210 {
 				// Adress
 				for (final AD sourceAd : sourcePatientRole.getAddr()) {
 					final AD ad = factory.createAD();
-					// ad.nullFlavor = new ArrayList<String>();
-					// ad.nullFlavor.add("MSK");
 					for (final Serializable element : sourceAd.getContent()) {
 						if (element instanceof JAXBElement) {
 							JAXBElement<?> elem = (JAXBElement<?>) element;
