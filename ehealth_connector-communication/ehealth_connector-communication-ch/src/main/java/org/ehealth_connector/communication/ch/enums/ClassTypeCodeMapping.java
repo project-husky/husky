@@ -56,6 +56,14 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Allergy record (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	ALLERGY_RECORD_RECORD_ARTIFACT_L1("722446000", "2.16.840.1.113883.6.96",
+			"Allergy record (record artifact)", "Allergy record (record artifact)", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Audit trail report (record artifact)</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -69,6 +77,24 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 	 */
 	CARE_PLAN_RECORD_ARTIFACT("734163000", "2.16.840.1.113883.6.96", "Care Plan (record artifact)",
 			"Care Plan (record artifact)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Clinical consultation report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	CLINICAL_CONSULTATION_REPORT_RECORD_ARTIFACT_L1("371530004", "2.16.840.1.113883.6.96",
+			"Clinical consultation report (record artifact)",
+			"Clinical consultation report (record artifact)", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Clinical Management plan (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	CLINICAL_MANAGEMENT_PLAN_RECORD_ARTIFACT_L1("737427001", "2.16.840.1.113883.6.96",
+			"Clinical Management plan (record artifact)",
+			"Clinical Management plan (record artifact)", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Clinical procedure report (record artifact)</div>
@@ -88,6 +114,23 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Discharge summary (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	DISCHARGE_SUMMARY_RECORD_ARTIFACT_L1("373942005", "2.16.840.1.113883.6.96",
+			"Discharge summary (record artifact)", "Discharge summary (record artifact)",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Emergency department record (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	EMERGENCY_DEPARTMENT_RECORD_RECORD_ARTIFACT_L1("445300006", "2.16.840.1.113883.6.96",
+			"Emergency department record (record artifact)",
+			"Emergency department record (record artifact)", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Emergency medical identification record (record artifact)</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -97,11 +140,120 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">History and physical report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	HISTORY_AND_PHYSICAL_REPORT_RECORD_ARTIFACT_L1("371529009", "2.16.840.1.113883.6.96",
+			"History and physical report (record artifact)",
+			"History and physical report (record artifact)", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Image reference (foundation metadata concept)</div>
+	 * <!-- @formatter:on -->
+	 */
+	IMAGE_REFERENCE_FOUNDATION_METADATA_CONCEPT_L1("900000000000471006", "2.16.840.1.113883.6.96",
+			"Image reference (foundation metadata concept)",
+			"Image reference (foundation metadata concept)", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Imaging Order (record articact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	IMAGING_ORDER_RECORD_ARTICACT_L1("2161000195103", "2.16.840.1.113883.6.96",
+			"Imaging Order (record articact)", "Imaging Order (record articact)", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Imaging report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	IMAGING_REPORT_RECORD_ARTIFACT_L1("4201000179104", "2.16.756.5.30.1.127.3.4",
+			"Imaging report (record artifact)", "Imaging report (record artifact)", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Immunization record (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	IMMUNIZATION_RECORD_RECORD_ARTIFACT_L1("41000179103", "2.16.840.1.113883.6.96",
+			"Immunization record (record artifact)", "Immunization record (record artifact)",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Laboratory Order (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	LABORATORY_ORDER_RECORD_ARTIFACT_L1("721965002", "2.16.840.1.113883.6.96",
+			"Laboratory Order (record artifact)", "Laboratory Order (record artifact)",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Laboratory report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	LABORATORY_REPORT_RECORD_ARTIFACT_L1("4241000179101", "2.16.840.1.113883.6.96",
+			"Laboratory report (record artifact)", "Laboratory report (record artifact)",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Medical certificate (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	MEDICAL_CERTIFICATE_RECORD_ARTIFACT_L1("772786005", "2.16.840.1.113883.6.96",
+			"Medical certificate (record artifact)", "Medical certificate (record artifact)",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Medical Prescription record (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	MEDICAL_PRESCRIPTION_RECORD_RECORD_ARTIFACT_L1("761938008", "2.16.840.1.113883.6.96",
+			"Medical Prescription record (record artifact)",
+			"Medical Prescription record (record artifact)", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Medication summary document (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	MEDICATION_SUMMARY_DOCUMENT_RECORD_ARTIFACT_L1("721912009", "2.16.840.1.113883.6.96",
+			"Medication summary document (record artifact)",
+			"Medication summary document (record artifact)", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Non-drug prescription record (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	NON_DRUG_PRESCRIPTION_RECORD_RECORD_ARTIFACT_L1("765492005", "2.16.840.1.113883.6.96",
+			"Non-drug prescription record (record artifact)",
+			"Non-drug prescription record (record artifact)", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Nursing care plan (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	NURSING_CARE_PLAN_RECORD_ARTIFACT_L1("773130005", "2.16.840.1.113883.6.96",
+			"Nursing care plan (record artifact)", "Nursing care plan (record artifact)",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Obstetrical Record (record artifact)</div>
 	 * <!-- @formatter:on -->
 	 */
 	OBSTETRICAL_RECORD_RECORD_ARTIFACT("2171000195109", "2.16.756.5.30.1.127.3.4",
 			"Obstetrical Record (record artifact)", "Obstetrical Record (record artifact)",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Operative report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	OPERATIVE_REPORT_RECORD_ARTIFACT_L1("371526002", "2.16.840.1.113883.6.96",
+			"Operative report (record artifact)", "Operative report (record artifact)",
 			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
@@ -117,6 +269,22 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 	 */
 	ORGAN_DONOR_CARD_RECORD_ARTIFACT("772790007", "2.16.840.1.113883.6.96",
 			"Organ donor card (record artifact)", "Organ donor card (record artifact)",
+			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Pathology order (record artifact</div>
+	 * <!-- @formatter:on -->
+	 */
+	PATHOLOGY_ORDER_RECORD_ARTIFACT_L1("721966001", "2.16.840.1.113883.6.96",
+			"Pathology order (record artifact", "Pathology order (record artifact", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Pathology report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	PATHOLOGY_REPORT_RECORD_ARTIFACT_L1("371528001", "2.16.840.1.113883.6.96",
+			"Pathology report (record artifact)", "Pathology report (record artifact)",
 			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
@@ -136,10 +304,36 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Professional allied to medicine clinical report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	PROFESSIONAL_ALLIED_TO_MEDICINE_CLINICAL_REPORT_RECORD_ARTIFACT_L1("445418005",
+			"2.16.840.1.113883.6.96",
+			"Professional allied to medicine clinical report (record artifact)",
+			"Professional allied to medicine clinical report (record artifact)", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Progress report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	PROGRESS_REPORT_RECORD_ARTIFACT_L1("371532007", "2.16.840.1.113883.6.96",
+			"Progress report (record artifact)", "Progress report (record artifact)", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Record artifact (record artifact)</div>
 	 * <!-- @formatter:on -->
 	 */
 	RECORD_ARTIFACT_RECORD_ARTIFACT("419891008", "2.16.840.1.113883.6.96",
+			"Record artifact (record artifact)", "Record artifact (record artifact)", "TOTRANSLATE",
+			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Record artifact (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	RECORD_ARTIFACT_RECORD_ARTIFACT_L1("419891008", "2.16.840.1.113883.6.96",
 			"Record artifact (record artifact)", "Record artifact (record artifact)", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
@@ -160,6 +354,15 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Rehabilitation care plan (record articact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	REHABILITATION_CARE_PLAN_RECORD_ARTICACT_L1("736055001", "2.16.840.1.113883.6.96",
+			"Rehabilitation care plan (record articact)",
+			"Rehabilitation care plan (record articact)", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Report of clinical encounter (record artifact)</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -175,6 +378,15 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 	SUMMARY_CLINICAL_DOCUMENT_RECORD_ARTIFACT("422735006", "2.16.840.1.113883.6.96",
 			"Summary clinical document (record artifact)",
 			"Summary clinical document (record artifact)", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Transfer summary report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	TRANSFER_SUMMARY_REPORT_RECORD_ARTIFACT_L1("371535009", "2.16.840.1.113883.6.96",
+			"Transfer summary report (record artifact)",
+			"Transfer summary report (record artifact)", "TOTRANSLATE", "TOTRANSLATE",
 			"TOTRANSLATE");
 
 	/**
@@ -193,6 +405,13 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Allergy record (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String ALLERGY_RECORD_RECORD_ARTIFACT_L1_CODE = "722446000";
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Audit trail report (record artifact)</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -204,6 +423,20 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	public static final String CARE_PLAN_RECORD_ARTIFACT_CODE = "734163000";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Clinical consultation report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String CLINICAL_CONSULTATION_REPORT_RECORD_ARTIFACT_L1_CODE = "371530004";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Clinical Management plan (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String CLINICAL_MANAGEMENT_PLAN_RECORD_ARTIFACT_L1_CODE = "737427001";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -221,6 +454,20 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Discharge summary (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String DISCHARGE_SUMMARY_RECORD_ARTIFACT_L1_CODE = "373942005";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Emergency department record (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String EMERGENCY_DEPARTMENT_RECORD_RECORD_ARTIFACT_L1_CODE = "445300006";
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Emergency medical identification record (record artifact)</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -228,10 +475,101 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Code for History and physical report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String HISTORY_AND_PHYSICAL_REPORT_RECORD_ARTIFACT_L1_CODE = "371529009";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Image reference (foundation metadata concept)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String IMAGE_REFERENCE_FOUNDATION_METADATA_CONCEPT_L1_CODE = "900000000000471006";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Imaging Order (record articact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String IMAGING_ORDER_RECORD_ARTICACT_L1_CODE = "2161000195103";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Imaging report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String IMAGING_REPORT_RECORD_ARTIFACT_L1_CODE = "4201000179104";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Immunization record (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String IMMUNIZATION_RECORD_RECORD_ARTIFACT_L1_CODE = "41000179103";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Laboratory Order (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String LABORATORY_ORDER_RECORD_ARTIFACT_L1_CODE = "721965002";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Laboratory report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String LABORATORY_REPORT_RECORD_ARTIFACT_L1_CODE = "4241000179101";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Medical certificate (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String MEDICAL_CERTIFICATE_RECORD_ARTIFACT_L1_CODE = "772786005";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Medical Prescription record (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String MEDICAL_PRESCRIPTION_RECORD_RECORD_ARTIFACT_L1_CODE = "761938008";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Medication summary document (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String MEDICATION_SUMMARY_DOCUMENT_RECORD_ARTIFACT_L1_CODE = "721912009";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Non-drug prescription record (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String NON_DRUG_PRESCRIPTION_RECORD_RECORD_ARTIFACT_L1_CODE = "765492005";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Nursing care plan (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String NURSING_CARE_PLAN_RECORD_ARTIFACT_L1_CODE = "773130005";
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Obstetrical Record (record artifact)</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String OBSTETRICAL_RECORD_RECORD_ARTIFACT_CODE = "2171000195109";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Operative report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String OPERATIVE_REPORT_RECORD_ARTIFACT_L1_CODE = "371526002";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -249,6 +587,20 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Pathology order (record artifact</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String PATHOLOGY_ORDER_RECORD_ARTIFACT_L1_CODE = "721966001";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Pathology report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String PATHOLOGY_REPORT_RECORD_ARTIFACT_L1_CODE = "371528001";
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Patient record type (record artifact)</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -263,10 +615,31 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Professional allied to medicine clinical report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String PROFESSIONAL_ALLIED_TO_MEDICINE_CLINICAL_REPORT_RECORD_ARTIFACT_L1_CODE = "445418005";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Progress report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String PROGRESS_REPORT_RECORD_ARTIFACT_L1_CODE = "371532007";
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Record artifact (record artifact)</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String RECORD_ARTIFACT_RECORD_ARTIFACT_CODE = "419891008";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Record artifact (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String RECORD_ARTIFACT_RECORD_ARTIFACT_L1_CODE = "419891008";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -284,6 +657,13 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Rehabilitation care plan (record articact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String REHABILITATION_CARE_PLAN_RECORD_ARTICACT_L1_CODE = "736055001";
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Report of clinical encounter (record artifact)</div>
 	 * <!-- @formatter:on -->
 	 */
@@ -295,6 +675,13 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	public static final String SUMMARY_CLINICAL_DOCUMENT_RECORD_ARTIFACT_CODE = "422735006";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Transfer summary report (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String TRANSFER_SUMMARY_REPORT_RECORD_ARTIFACT_L1_CODE = "371535009";
 
 	/**
 	 * <!-- @formatter:off -->
