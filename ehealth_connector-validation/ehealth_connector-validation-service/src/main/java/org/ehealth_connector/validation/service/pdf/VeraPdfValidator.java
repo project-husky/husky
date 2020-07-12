@@ -21,8 +21,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
-import java.util.Iterator;
-import java.util.Set;
 
 import javax.xml.transform.stream.StreamSource;
 
@@ -73,14 +71,14 @@ public class VeraPdfValidator {
 	/** PDF compliance level as string */
 	private String pdfConformanceLevel = "not set";
 
-	/** PDF reporting level as string */
-	private String reportingLevel = "not set";
-
 	/** Current PDF validation results */
 	private VeraPdfValidationResult pdfValidationResult = null;
 
 	/** veraPDF validator */
 	private PDFAValidator pdfValidator = null;
+
+	/** PDF reporting level as string */
+	private String reportingLevel = "not set";
 
 	/**
 	 * Default constructor
@@ -308,10 +306,7 @@ public class VeraPdfValidator {
 					pdfValidationResult.setIsDone();
 					int realFailures = 0;
 					if (!result.isCompliant()) {
-						Set<TestAssertion> assertionSet = result.getTestAssertions();
-						Iterator<TestAssertion> iterator = assertionSet.iterator();
-						while (iterator.hasNext()) {
-							TestAssertion assertion = iterator.next();
+						for (TestAssertion assertion : result.getTestAssertions()) {
 							VeraPdfValidationResultEntry failure = new VeraPdfValidationResultEntry();
 							failure.setPdfSpecificationId(
 									assertion.getRuleId().getSpecification().getId());
