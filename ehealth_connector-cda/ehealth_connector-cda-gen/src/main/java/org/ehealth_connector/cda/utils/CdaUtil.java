@@ -18,10 +18,15 @@ package org.ehealth_connector.cda.utils;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
@@ -982,7 +987,8 @@ public class CdaUtil {
 		POCDMT000040ClinicalDocument retVal;
 		JAXBContext context = JAXBContext.newInstance(POCDMT000040ClinicalDocument.class);
 		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
+		Reader rdr = new InputStreamReader(new FileInputStream(inputFile), "UTF-8");
+		StreamSource source = new StreamSource(rdr);
 		JAXBElement<POCDMT000040ClinicalDocument> root = mar.unmarshal(source,
 				POCDMT000040ClinicalDocument.class);
 		retVal = root.getValue();
@@ -1204,13 +1210,19 @@ public class CdaUtil {
 		}
 
 		final DOMSource domSource = new DOMSource(doc);
-		final StreamResult streamResult = new StreamResult(outputStream);
-		final TransformerFactory tf = TransformerFactory.newInstance();
-		final Transformer transformer = tf.newTransformer();
-		transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-		transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
-		transformer.transform(domSource, streamResult);
+		OutputStreamWriter sw;
+		try {
+			sw = new OutputStreamWriter(outputStream, "UTF-8");
+			final StreamResult streamResult = new StreamResult(sw);
+			final TransformerFactory tf = TransformerFactory.newInstance();
+			final Transformer transformer = tf.newTransformer();
+			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+			transformer.transform(domSource, streamResult);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
 
 	}
 
