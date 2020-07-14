@@ -292,7 +292,7 @@ public class VeraPdfValidator {
 							errMsg = errMsg + " (" + e.getCause().getMessage() + ")";
 					}
 					errMsg = errMsg
-							+ "*** Note: veraPDF seems still not to be fully thread save with version 1.14.102";
+							+ "*** Note: veraPDF seems still not to be fully thread save with version 1.16.1";
 					if (Util.isDebug()) {
 						errMsg = errMsg + debugString;
 					}
