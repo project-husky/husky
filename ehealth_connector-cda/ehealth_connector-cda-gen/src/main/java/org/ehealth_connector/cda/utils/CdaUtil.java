@@ -132,8 +132,16 @@ public class CdaUtil {
 
 		final String id = "originalrepresentationpdf";
 		ObjectFactory factory = new ObjectFactory();
+		LanguageCode languageCode = LanguageCode.getEnum(doc.getLanguageCode().getCode());
 
-		section.setTitle(CdaUtil.createHl7CdaR2St("Original representation"));
+		if (languageCode == LanguageCode.FRENCH)
+			section.setTitle(CdaUtil.createHl7CdaR2St("Représentation originale"));
+		if (languageCode == LanguageCode.GERMAN)
+			section.setTitle(CdaUtil.createHl7CdaR2St("Original Darstellung"));
+		if (languageCode == LanguageCode.ITALIAN)
+			section.setTitle(CdaUtil.createHl7CdaR2St("Rappresentazione originale"));
+		if (languageCode == LanguageCode.ENGLISH)
+			section.setTitle(CdaUtil.createHl7CdaR2St("Original representation"));
 
 		POCDMT000040ObservationMedia obsMedia = factory.createPOCDMT000040ObservationMedia();
 		obsMedia.getClassCode().add("OBS");
@@ -155,8 +163,20 @@ public class CdaUtil {
 		value.setRepresentation(BinaryDataEncoding.B_64);
 		obsMedia.setValue(value);
 
-		StrucDocText strucDocText = CdaUtil.createHl7CdaR2StrucDocText(
-				"Representation of the original view which has been signed by the legal authenticator:\n");
+		StrucDocText strucDocText = null;
+		if (languageCode == LanguageCode.FRENCH)
+			strucDocText = CdaUtil.createHl7CdaR2StrucDocText(
+					"Représentation de la vue originale signée par le signataire légal:\n");
+		if (languageCode == LanguageCode.GERMAN)
+			strucDocText = CdaUtil.createHl7CdaR2StrucDocText(
+					"Darstellung der ursprünglichen Ansicht, die vom rechtsgültigen Unterzeichner unterzeichnet wurde:\n");
+		if (languageCode == LanguageCode.ITALIAN)
+			strucDocText = CdaUtil.createHl7CdaR2StrucDocText(
+					"Rappresentazione della vista originale firmata dal firmatario legale:\n");
+		if (languageCode == LanguageCode.ENGLISH)
+			strucDocText = CdaUtil.createHl7CdaR2StrucDocText(
+					"Representation of the original view which has been signed by the legal authenticator:\n");
+
 		StrucDocRenderMultiMedia renderMultimedia = factory.createStrucDocRenderMultiMedia();
 		renderMultimedia.getReferencedObject().add(obsMedia);
 		strucDocText.getContent()
