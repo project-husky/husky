@@ -97,6 +97,7 @@ public class VacdUtilsV210 {
 								ad.getContent().add(new JAXBElement<AdxpCity>(
 										new QName("urn:hl7-org:v3", "city"), AdxpCity.class, obj));
 							} else if (elem.getValue() instanceof AdxpState) {
+								@SuppressWarnings("unused")
 								AdxpState obj = (AdxpState) elem.getValue();
 								// retVal.setState(obj.xmlContent);
 							} else if (elem.getValue() instanceof AdxpCountry) {

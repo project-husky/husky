@@ -80,11 +80,11 @@ public class XdmContents {
 	/** The xdm readme. */
 	private static String XDM_README = "README.TXT";
 
-	/** The SLF4J logger instance. */
-	private final Logger log = LoggerFactory.getLogger(getClass());
-
 	/** The index htm. */
 	private IndexHtm indexHtm;
+
+	/** The SLF4J logger instance. */
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	/** The readme txt. */
 	private ReadmeTxt readmeTxt;
@@ -193,6 +193,7 @@ public class XdmContents {
 	 *            the txn data
 	 * @return the XML resource
 	 */
+	@SuppressWarnings("resource")
 	private XMLResource createMetadataXml(SubmitTransactionData txnData) {
 		final org.openhealthtools.ihe.xdm.creator.PortableMediaCreator pmc = new org.openhealthtools.ihe.xdm.creator.PortableMediaCreator();
 		SubmitObjectsRequestType submit = null;
@@ -315,6 +316,7 @@ public class XdmContents {
 	 *
 	 * @return false, if the values don´t match, true otherwise
 	 */
+	@SuppressWarnings("resource")
 	private boolean documentsIntegrityCheck() {
 		if (isSubmitTransactionDataNull(0))
 			return false;

@@ -195,6 +195,7 @@ public class EmedChStrucDocTextBuilderV096Test {
 	 *
 	 * @return the dosage instructions start stop frequency
 	 */
+	@SuppressWarnings("unused")
 	private DosageInstructionsStartStopFrequency createDosageSingle() {
 
 		DosageInstructionsStartStopFrequency diStartStopFrequency = new DosageInstructionsStartStopFrequency();
@@ -221,6 +222,7 @@ public class EmedChStrucDocTextBuilderV096Test {
 	 *
 	 * @return the dosage instructions start stop frequency
 	 */
+	@SuppressWarnings("unused")
 	private DosageInstructionsStartStopFrequency createDosageSingleWithOffset() {
 
 		DosageInstructionsStartStopFrequency diStartStopFrequency = new DosageInstructionsStartStopFrequency();
@@ -436,6 +438,7 @@ public class EmedChStrucDocTextBuilderV096Test {
 	 *
 	 * @return the dosage instructions for a specific datetime
 	 */
+	@SuppressWarnings("unused")
 	private DosageInstructionsStartStopFrequency createTS() {
 
 		DosageInstructionsStartStopFrequency diStartStopFrequency = new DosageInstructionsStartStopFrequency();
@@ -501,6 +504,7 @@ public class EmedChStrucDocTextBuilderV096Test {
 		StrucDocText strucDocText = structuredBody.getComponent().get(0).getSection().getText();
 		List<Serializable> content = strucDocText.getContent();
 		assertTrue(content.size() > 1);
+		@SuppressWarnings("rawtypes")
 		StrucDocTable strucDocTable = (StrucDocTable) ((JAXBElement) content.get(1)).getValue();
 		StrucDocTd strucDocTd = (StrucDocTd) strucDocTable.getTbody().get(0).getTr().get(0)
 				.getThOrTd().get(2);

@@ -87,6 +87,9 @@ public class CdaChLrepV1GeneralReport extends
 			break;
 		case ENGLISH:
 			setTitle("Laboratory report");
+		case ROMANSH:
+			setTitle("Laboratory report TOTRANSLATE RM");
+			break;
 		}
 
 		// Make sure the document contains all necessary templateIds

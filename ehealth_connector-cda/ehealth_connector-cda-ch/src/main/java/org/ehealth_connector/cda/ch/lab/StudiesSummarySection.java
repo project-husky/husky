@@ -57,6 +57,9 @@ public class StudiesSummarySection
 		case ENGLISH:
 			setTitle("Blood Group");
 			break;
+		case ROMANSH:
+			setTitle("Blood Group TOTRANSLATE RM");
+			break;
 		}
 	}
 

@@ -424,6 +424,11 @@ public abstract class AbstractLaboratoryReport<EClinicalDocument extends Clinica
 			case ENGLISH:
 				rs.setTitle(Util.st("Comment"));
 				break;
+			case ROMANSH:
+				rs.setTitle(Util.st("Comment TOTRANSLATE RM"));
+				break;
+			default:
+				break;
 			}
 
 			Code code = new Code(CodeSystems.LOINC.getCodeSystemId(), "48767-8",

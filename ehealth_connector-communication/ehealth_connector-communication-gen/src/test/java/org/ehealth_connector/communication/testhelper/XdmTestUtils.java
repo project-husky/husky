@@ -126,7 +126,9 @@ public class XdmTestUtils extends TestUtils {
 			final String doc1Hash = DigestUtils.sha1Hex(doc1.getStream());
 			final String doc2Hash = DigestUtils.sha1Hex(doc2.getStream());
 			// Size
+			@SuppressWarnings("resource")
 			final long doc1Size = IOUtils.toByteArray(doc1.getStream()).length;
+			@SuppressWarnings("resource")
 			final long doc2Size = IOUtils.toByteArray(doc2.getStream()).length;
 
 			// Compare Hash

@@ -434,6 +434,8 @@ public class CdaChLrqc
 			return ("Rapporto di laboratorio per l’assicurazione di qualità");
 		case ENGLISH:
 			return ("Laboratory report for quality control");
+		case ROMANSH:
+			return ("Laboratory report for quality control TOTRANSLATE RM");
 		}
 		return "Laboratory report";
 	}

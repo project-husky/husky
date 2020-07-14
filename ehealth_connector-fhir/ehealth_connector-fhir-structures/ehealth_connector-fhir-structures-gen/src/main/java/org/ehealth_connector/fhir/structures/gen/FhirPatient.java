@@ -231,20 +231,20 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 	@Description(shortDefinition = "The birtplace of the patientt")
 	private org.hl7.fhir.dstu3.model.Address birthPlace;
 
-	@Child(name = "religiousAffiliation")
-	@Extension(url = "http://hl7.org/fhir/ExtensionDefinition/us-core-religion", definedLocally = false, isModifier = false)
-	@Description(shortDefinition = "The religious Affiliation of the patient")
-	private CodeableConcept religiousAffiliation;
+	@Child(name = "employeeOccupation")
+	@Extension(url = "http://www.ehealth-connector.org/fhir-extensions/employeeOccupation", definedLocally = false, isModifier = false)
+	@Description(shortDefinition = "The employee OccupationCode of the patient")
+	private CodeableConcept employeeOccupation;
 
 	@Child(name = "nation")
 	@Extension(url = "http://www.ehealth-connector.org/fhir-extensions/nation", definedLocally = false, isModifier = false)
 	@Description(shortDefinition = "The nation of the patient")
 	private CodeableConcept nation;
 
-	@Child(name = "employeeOccupation")
-	@Extension(url = "http://www.ehealth-connector.org/fhir-extensions/employeeOccupation", definedLocally = false, isModifier = false)
-	@Description(shortDefinition = "The employee OccupationCode of the patient")
-	private CodeableConcept employeeOccupation;
+	@Child(name = "religiousAffiliation")
+	@Extension(url = "http://hl7.org/fhir/ExtensionDefinition/us-core-religion", definedLocally = false, isModifier = false)
+	@Description(shortDefinition = "The religious Affiliation of the patient")
+	private CodeableConcept religiousAffiliation;
 
 	/**
 	 * Instantiates a new fhir patient.
@@ -770,7 +770,8 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 		for (final ContactComponent contact : getContact()) {
 			for (final CodeableConcept CodeableConcept : contact.getRelationship()) {
 				for (final Coding Coding : CodeableConcept.getCoding()) {
-					if ("parent".equals(Coding.getCode()) && "female".equals(contact.getGender())) {
+					if ("parent".equals(Coding.getCode())
+							&& "female".equals(contact.getGender().getDefinition().toLowerCase())) {
 						if ((NameUse.MAIDEN.equals(contact.getName().getUseElement().getValue()))) {
 							contact.setName(maidenName);
 							return;

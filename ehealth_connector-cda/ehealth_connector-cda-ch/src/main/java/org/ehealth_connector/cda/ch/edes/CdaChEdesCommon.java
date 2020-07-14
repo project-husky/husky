@@ -71,10 +71,10 @@ public class CdaChEdesCommon {
 
 	public static final String OID_MAIN = "2.16.756.5.30.1.1.1.1.3.1.1";
 
-	private CodedVitalSignsSection mCodedVitalSigns;
-	private final ClinicalDocument mdhtDocument;
-
 	private final AbstractCda<?> cdaDocument;
+	private CodedVitalSignsSection mCodedVitalSigns;
+
+	private final ClinicalDocument mdhtDocument;
 
 	/**
 	 * Create a new common EDES CDA.
@@ -730,8 +730,9 @@ public class CdaChEdesCommon {
 				// Check if the problem is not unknown (leads to no reference,
 				// because there is no problem)
 				final Code code = new Code(problemEntry.getCode());
-				if ("2.16.840.1.113883.6.96".equals(code.getCodeSystem()) && code.getCode().equals(
-						ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode())) {
+				if ("2.16.840.1.113883.6.96".equals(code.getCodeSystem()) && code.getCode()
+						.equals(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode()
+								.getCode())) {
 					return false;
 				} else {
 					// Create references to level 1 text
@@ -764,8 +765,9 @@ public class CdaChEdesCommon {
 				// Check if the problem is not unknown (leads to no reference,
 				// because there is no problem)
 				final Code code = new Code(problemEntry.getCode());
-				if ("2.16.840.1.113883.6.96".equals(code.getCodeSystem()) && code.getCode().equals(
-						ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode())) {
+				if ("2.16.840.1.113883.6.96".equals(code.getCodeSystem()) && code.getCode()
+						.equals(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode()
+								.getCode())) {
 					return false;
 				} else {
 					// Create references to level 1 text
@@ -797,8 +799,9 @@ public class CdaChEdesCommon {
 				// Check if the problem is not unknown (leads to no reference,
 				// because there is no problem)
 				final Code code = new Code(problemEntry.getCode());
-				if ("2.16.840.1.113883.6.96".equals(code.getCodeSystem()) && code.getCode().equals(
-						ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode())) {
+				if ("2.16.840.1.113883.6.96".equals(code.getCodeSystem()) && code.getCode()
+						.equals(ProblemsSpecialConditions.HISTORY_OF_PAST_ILLNESS_UNKNOWN.getCode()
+								.getCode())) {
 					return false;
 				} else {
 					// Create references to level 1 text

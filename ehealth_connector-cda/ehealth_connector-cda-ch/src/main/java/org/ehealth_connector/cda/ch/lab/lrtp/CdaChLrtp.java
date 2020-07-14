@@ -435,6 +435,8 @@ public class CdaChLrtp
 			return ("it: TOTRANSLATE");
 		case ENGLISH:
 			return ("Laboratory Report in the Transplantation Process");
+		case ROMANSH:
+			return ("Laboratory Report in the Transplantation Process TOTRANSLATE RM");
 		}
 		return "Laboratory report";
 	}

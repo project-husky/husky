@@ -460,6 +460,10 @@ public class CdaChLrph
 			return ("it: TOTRANSLATE");
 		case ENGLISH:
 			return ("Laboratory Reports for Public Health");
+		case ROMANSH:
+			return ("Laboratory Reports for Public Health TOTRANSLATE RM");
+		default:
+			break;
 		}
 		return "Laboratory report";
 	}

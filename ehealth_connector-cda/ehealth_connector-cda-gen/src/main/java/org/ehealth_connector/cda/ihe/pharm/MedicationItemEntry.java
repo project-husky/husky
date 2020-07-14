@@ -76,8 +76,8 @@ import org.openhealthtools.mdht.uml.hl7.vocab.x_DocumentSubstanceMood;
 public class MedicationItemEntry
 		extends MdhtFacade<org.openhealthtools.mdht.uml.cda.ihe.pharm.MedicationItemEntry> {
 
-	public static final String APPROACH_SITE_CODE_SYSTEM_OID = "2.16.840.1.113883.6.96";
 	public static final String APPROACH_SITE_CODE_SYSTEM_NAME = "SNOMED CT";
+	public static final String APPROACH_SITE_CODE_SYSTEM_OID = "2.16.840.1.113883.6.96";
 
 	/**
 	 * Creates the subordinate substance administration element.
@@ -1040,8 +1040,8 @@ public class MedicationItemEntry
 	public void setSubordinateSubstanceAdministration(int sequenceNumber,
 			SubstanceAdministration substanceAdmin) {
 		for (final EntryRelationship entryRelationship : getMdht().getEntryRelationships()) {
-			if (entryRelationship.getSubstanceAdministration() != null
-					&& entryRelationship.getSequenceNumber().getValue().equals(sequenceNumber)) {
+			if (entryRelationship.getSubstanceAdministration() != null && entryRelationship
+					.getSequenceNumber().getValue().equals(BigInteger.valueOf(sequenceNumber))) {
 				entryRelationship.setSubstanceAdministration(substanceAdmin.copy());
 				return;
 			}
