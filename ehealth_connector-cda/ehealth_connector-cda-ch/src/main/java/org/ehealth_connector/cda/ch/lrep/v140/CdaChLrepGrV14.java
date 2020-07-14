@@ -81,8 +81,7 @@ public class CdaChLrepGrV14
 	}
 
 	/**
-	 * Adds a hl7DocumentationOf Information about a health service describing
-	 * the context of this CDA document.
+	 * Adds a hl7DocumentationOf
 	 */
 	public void addHl7DocumentationOf(
 			org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf value) {
@@ -117,7 +116,7 @@ public class CdaChLrepGrV14
 	}
 
 	/**
-	 * Adds a hl7RecordTarget Patient (Human Patient).
+	 * Adds a hl7RecordTarget Human Patient with Non-Human Subject.
 	 */
 	public void addHl7RecordTarget(
 			org.ehealth_connector.common.hl7cdar2.POCDMT000040RecordTarget value) {
@@ -162,8 +161,7 @@ public class CdaChLrepGrV14
 	}
 
 	/**
-	 * Adds a hl7DocumentationOf Information about a health service describing
-	 * the context of this CDA document.
+	 * Adds a hl7DocumentationOf
 	 */
 	public void clearHl7DocumentationOf() {
 		getDocumentationOf().clear();
@@ -194,7 +192,7 @@ public class CdaChLrepGrV14
 	}
 
 	/**
-	 * Adds a hl7RecordTarget Patient (Human Patient).
+	 * Adds a hl7RecordTarget Human Patient with Non-Human Subject.
 	 */
 	public void clearHl7RecordTarget() {
 		getRecordTarget().clear();
