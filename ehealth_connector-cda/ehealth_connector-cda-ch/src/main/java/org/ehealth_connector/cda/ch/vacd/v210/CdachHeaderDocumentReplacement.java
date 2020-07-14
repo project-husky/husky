@@ -41,12 +41,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachHeaderDocumentReplacement
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedDocument {
 
-	public CdachHeaderDocumentReplacement() {
-		super.setTypeCode(
-				org.ehealth_connector.common.hl7cdar2.XActRelationshipDocument.fromValue("RPLC"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.13"));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
@@ -59,6 +53,12 @@ public class CdachHeaderDocumentReplacement
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public CdachHeaderDocumentReplacement() {
+		super.setTypeCode(
+				org.ehealth_connector.common.hl7cdar2.XActRelationshipDocument.fromValue("RPLC"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.13"));
 	}
 
 	/**

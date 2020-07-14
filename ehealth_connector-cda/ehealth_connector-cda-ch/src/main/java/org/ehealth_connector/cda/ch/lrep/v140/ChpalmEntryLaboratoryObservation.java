@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.lrep.v140;
 
 import java.util.ArrayList;
+
 import org.ehealth_connector.common.hl7cdar2.IVLTS;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -53,107 +54,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class ChpalmEntryLaboratoryObservation
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
-
-	public ChpalmEntryLaboratoryObservation() {
-		super.getClassCode().add("OBS");
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.3"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.6"));
-		super.setCode(createHl7CodeFixedValue("OTH"));
-		super.setStatusCode(createHl7StatusCodeFixedValue());
-	}
-
-	/**
-	 * Adds a hl7Author This CAN be used to identify other parties: - Who has
-	 * verified the result (AUTHEN). - Which external laboratory has delivered
-	 * the result (RESP). - Which device (analyzer) was used to determine the
-	 * result (DEV).
-	 */
-	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
-		getAuthor().add(value);
-	}
-
-	/**
-	 * Adds a hl7EntryRelationship Information on specimen collection for this
-	 * Observation. This information supersedes any information recorded at
-	 * higher level.
-	 */
-	public void addHl7EntryRelationship(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship value) {
-		getEntryRelationship().add(value);
-	}
-
-	/**
-	 * Adds a hl7Participant Who has verified the result (AUTHEN). This
-	 * information supersedes any information recorded at higher level.
-	 */
-	public void addHl7Participant(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 value) {
-		getParticipant().add(value);
-	}
-
-	/**
-	 * Adds a hl7Performer This CAN be used to indicate who has performed the
-	 * test. This information supersedes any information recorded at higher
-	 * level.
-	 */
-	public void addHl7Performer(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer2 value) {
-		getPerformer().add(value);
-	}
-
-	/**
-	 * Adds a hl7Reference This CAN be used to make reference to an external
-	 * document.
-	 */
-	public void addHl7Reference(org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference value) {
-		getReference().add(value);
-	}
-
-	/**
-	 * Adds a hl7Author This CAN be used to identify other parties: - Who has
-	 * verified the result (AUTHEN). - Which external laboratory has delivered
-	 * the result (RESP). - Which device (analyzer) was used to determine the
-	 * result (DEV).
-	 */
-	public void clearHl7Author() {
-		getAuthor().clear();
-	}
-
-	/**
-	 * Adds a hl7EntryRelationship Information on specimen collection for this
-	 * Observation. This information supersedes any information recorded at
-	 * higher level.
-	 */
-	public void clearHl7EntryRelationship() {
-		getEntryRelationship().clear();
-	}
-
-	/**
-	 * Adds a hl7Participant Who has verified the result (AUTHEN). This
-	 * information supersedes any information recorded at higher level.
-	 */
-	public void clearHl7Participant() {
-		getParticipant().clear();
-	}
-
-	/**
-	 * Adds a hl7Performer This CAN be used to indicate who has performed the
-	 * test. This information supersedes any information recorded at higher
-	 * level.
-	 */
-	public void clearHl7Performer() {
-		getPerformer().clear();
-	}
-
-	/**
-	 * Adds a hl7Reference This CAN be used to make reference to an external
-	 * document.
-	 */
-	public void clearHl7Reference() {
-		getReference().clear();
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Author
@@ -300,6 +200,202 @@ public class ChpalmEntryLaboratoryObservation
 	}
 
 	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Author, filled by:
+	 * "AUT"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Author getPredefinedAuthorAut() {
+		return createHl7AuthorFixedValue("AUT");
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "COMP", null
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipCompNull() {
+		return createHl7EntryRelationshipFixedValue("COMP", null);
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "REFR", null
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrNull() {
+		return createHl7EntryRelationshipFixedValue("REFR", null);
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "SUBJ", "true"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjTrue() {
+		return createHl7EntryRelationshipFixedValue("SUBJ", "true");
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedInterpretationCode() {
+		return createHl7InterpretationCodeFixedValue();
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
+	 * "2.16.840.1.113883.5.84", "HL7 ObservationMethod"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedMethodCode2168401113883584Hl7ObservationMethod() {
+		return createHl7MethodCodeFixedValue("2.16.840.1.113883.5.84", "HL7 ObservationMethod");
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040ReferenceRange, filled
+	 * by: "REFV"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040ReferenceRange getPredefinedReferenceRangeRefv() {
+		return createHl7ReferenceRangeFixedValue("REFV");
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference, filled by:
+	 * "REFR"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference getPredefinedReferenceRefr() {
+		return createHl7ReferenceFixedValue("REFR");
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.BL, filled by:
+	 * "NA"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.BL getPredefinedValueNa() {
+		return createHl7ValueFixedValue("NA");
+	}
+
+	public ChpalmEntryLaboratoryObservation() {
+		super.getClassCode().add("OBS");
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.3"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.6"));
+		super.setCode(createHl7CodeFixedValue("OTH"));
+		super.setStatusCode(createHl7StatusCodeFixedValue());
+	}
+
+	/**
+	 * Adds a hl7Author This CAN be used to identify other parties: - Who has
+	 * verified the result (AUTHEN). - Which external laboratory has delivered
+	 * the result (RESP). - Which device (analyzer) was used to determine the
+	 * result (DEV).
+	 */
+	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
+		getAuthor().add(value);
+	}
+
+	/**
+	 * Adds a hl7EntryRelationship Information on specimen collection for this
+	 * Observation. This information supersedes any information recorded at
+	 * higher level.
+	 */
+	public void addHl7EntryRelationship(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship value) {
+		getEntryRelationship().add(value);
+	}
+
+	/**
+	 * Adds a hl7Participant Who has verified the result (AUTHEN). This
+	 * information supersedes any information recorded at higher level.
+	 */
+	public void addHl7Participant(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 value) {
+		getParticipant().add(value);
+	}
+
+	/**
+	 * Adds a hl7Performer This CAN be used to indicate who has performed the
+	 * test. This information supersedes any information recorded at higher
+	 * level.
+	 */
+	public void addHl7Performer(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer2 value) {
+		getPerformer().add(value);
+	}
+
+	/**
+	 * Adds a hl7Reference This CAN be used to make reference to an external
+	 * document.
+	 */
+	public void addHl7Reference(org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference value) {
+		getReference().add(value);
+	}
+
+	/**
+	 * Adds a hl7Author This CAN be used to identify other parties: - Who has
+	 * verified the result (AUTHEN). - Which external laboratory has delivered
+	 * the result (RESP). - Which device (analyzer) was used to determine the
+	 * result (DEV).
+	 */
+	public void clearHl7Author() {
+		getAuthor().clear();
+	}
+
+	/**
+	 * Adds a hl7EntryRelationship Information on specimen collection for this
+	 * Observation. This information supersedes any information recorded at
+	 * higher level.
+	 */
+	public void clearHl7EntryRelationship() {
+		getEntryRelationship().clear();
+	}
+
+	/**
+	 * Adds a hl7Participant Who has verified the result (AUTHEN). This
+	 * information supersedes any information recorded at higher level.
+	 */
+	public void clearHl7Participant() {
+		getParticipant().clear();
+	}
+
+	/**
+	 * Adds a hl7Performer This CAN be used to indicate who has performed the
+	 * test. This information supersedes any information recorded at higher
+	 * level.
+	 */
+	public void clearHl7Performer() {
+		getPerformer().clear();
+	}
+
+	/**
+	 * Adds a hl7Reference This CAN be used to make reference to an external
+	 * document.
+	 */
+	public void clearHl7Reference() {
+		getReference().clear();
+	}
+
+	/**
 	 * Gets the hl7Code A unique code for this result MUST be specified.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
@@ -405,101 +501,6 @@ public class ChpalmEntryLaboratoryObservation
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.ANY> getHl7ValueAny() {
 		return value;
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Author, filled by:
-	 * "AUT"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Author getPredefinedAuthorAut() {
-		return createHl7AuthorFixedValue("AUT");
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "COMP", null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipCompNull() {
-		return createHl7EntryRelationshipFixedValue("COMP", null);
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "REFR", null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrNull() {
-		return createHl7EntryRelationshipFixedValue("REFR", null);
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "SUBJ", "true"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjTrue() {
-		return createHl7EntryRelationshipFixedValue("SUBJ", "true");
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedInterpretationCode() {
-		return createHl7InterpretationCodeFixedValue();
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
-	 * "2.16.840.1.113883.5.84", "HL7 ObservationMethod"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedMethodCode2168401113883584Hl7ObservationMethod() {
-		return createHl7MethodCodeFixedValue("2.16.840.1.113883.5.84", "HL7 ObservationMethod");
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040ReferenceRange, filled
-	 * by: "REFV"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040ReferenceRange getPredefinedReferenceRangeRefv() {
-		return createHl7ReferenceRangeFixedValue("REFV");
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference, filled by:
-	 * "REFR"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference getPredefinedReferenceRefr() {
-		return createHl7ReferenceFixedValue("REFR");
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.BL, filled by:
-	 * "NA"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.BL getPredefinedValueNa() {
-		return createHl7ValueFixedValue("NA");
 	}
 
 	/**

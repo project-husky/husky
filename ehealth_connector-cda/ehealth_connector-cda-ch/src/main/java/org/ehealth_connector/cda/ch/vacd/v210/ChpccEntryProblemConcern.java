@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.vacd.v210;
 
 import java.util.ArrayList;
+
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
@@ -37,55 +38,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class ChpccEntryProblemConcern
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
-
-	public ChpccEntryProblemConcern() {
-		super.setClassCode(
-				org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
-		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue("EVN"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.90"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.5.2"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.5.1"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.27"));
-		super.setCode(createHl7CodeFixedValue("NA"));
-		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("active").build()));
-		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("suspended").build()));
-		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("aborted").build()));
-		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed").build()));
-		super.getEntryRelationship().add(createHl7EntryRelationshipFixedValue("SUBJ", "false"));
-	}
-
-	private ArrayList<org.ehealth_connector.common.Code> vocabStatusCodeCode = new ArrayList<org.ehealth_connector.common.Code>();
-
-	/**
-	 * Adds a hl7Author The author of the statement SHALL be specified either
-	 * here or in one of the ancestors.
-	 */
-	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
-		getAuthor().add(value);
-	}
-
-	/**
-	 * Adds a hl7EntryRelationship
-	 */
-	public void addHl7EntryRelationship(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship value) {
-		getEntryRelationship().add(value);
-	}
-
-	/**
-	 * Adds a hl7Author The author of the statement SHALL be specified either
-	 * here or in one of the ancestors.
-	 */
-	public void clearHl7Author() {
-		getAuthor().clear();
-	}
-
-	/**
-	 * Adds a hl7EntryRelationship
-	 */
-	public void clearHl7EntryRelationship() {
-		getEntryRelationship().clear();
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -133,6 +85,55 @@ public class ChpccEntryProblemConcern
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	private ArrayList<org.ehealth_connector.common.Code> vocabStatusCodeCode = new ArrayList<org.ehealth_connector.common.Code>();
+
+	public ChpccEntryProblemConcern() {
+		super.setClassCode(
+				org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
+		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue("EVN"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.90"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.5.2"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.5.1"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.27"));
+		super.setCode(createHl7CodeFixedValue("NA"));
+		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("active").build()));
+		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("suspended").build()));
+		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("aborted").build()));
+		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed").build()));
+		super.getEntryRelationship().add(createHl7EntryRelationshipFixedValue("SUBJ", "false"));
+	}
+
+	/**
+	 * Adds a hl7Author The author of the statement SHALL be specified either
+	 * here or in one of the ancestors.
+	 */
+	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
+		getAuthor().add(value);
+	}
+
+	/**
+	 * Adds a hl7EntryRelationship
+	 */
+	public void addHl7EntryRelationship(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship value) {
+		getEntryRelationship().add(value);
+	}
+
+	/**
+	 * Adds a hl7Author The author of the statement SHALL be specified either
+	 * here or in one of the ancestors.
+	 */
+	public void clearHl7Author() {
+		getAuthor().clear();
+	}
+
+	/**
+	 * Adds a hl7EntryRelationship
+	 */
+	public void clearHl7EntryRelationship() {
+		getEntryRelationship().clear();
 	}
 
 	/**

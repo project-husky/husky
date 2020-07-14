@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.vacd.v210;
 
 import java.util.ArrayList;
+
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -25,11 +26,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class ChpalmEntryParticipantBodySpecimenCollection
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole {
-
-	public ChpalmEntryParticipantBodySpecimenCollection() {
-		super.getClassCode().add("SPEC");
-		super.getId().add(createHl7IdFixedValue("NA"));
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Id
@@ -44,6 +40,11 @@ public class ChpalmEntryParticipantBodySpecimenCollection
 		retVal.nullFlavor = new ArrayList<String>();
 		retVal.nullFlavor.add(nullFlavor);
 		return retVal;
+	}
+
+	public ChpalmEntryParticipantBodySpecimenCollection() {
+		super.getClassCode().add("SPEC");
+		super.getId().add(createHl7IdFixedValue("NA"));
 	}
 
 	/**

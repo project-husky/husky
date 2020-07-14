@@ -32,33 +32,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachvacdEntryGestationalAgeAtBirth
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
-	public CdachvacdEntryGestationalAgeAtBirth() {
-		super.getClassCode().add("OBS");
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.84"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13"));
-		super.setCode(createHl7CodeFixedValue("49052-4", "2.16.840.1.113883.6.1", "LOINC",
-				"Gestational age in days"));
-		super.setStatusCode(createHl7StatusCodeFixedValue());
-	}
-
-	/**
-	 * Adds a hl7Author The author of the statement SHALL be specified either
-	 * here or in one of the ancestors.
-	 */
-	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
-		getAuthor().add(value);
-	}
-
-	/**
-	 * Adds a hl7Author The author of the statement SHALL be specified either
-	 * here or in one of the ancestors.
-	 */
-	public void clearHl7Author() {
-		getAuthor().clear();
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
@@ -103,6 +76,33 @@ public class CdachvacdEntryGestationalAgeAtBirth
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public CdachvacdEntryGestationalAgeAtBirth() {
+		super.getClassCode().add("OBS");
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.84"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13"));
+		super.setCode(createHl7CodeFixedValue("49052-4", "2.16.840.1.113883.6.1", "LOINC",
+				"Gestational age in days"));
+		super.setStatusCode(createHl7StatusCodeFixedValue());
+	}
+
+	/**
+	 * Adds a hl7Author The author of the statement SHALL be specified either
+	 * here or in one of the ancestors.
+	 */
+	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
+		getAuthor().add(value);
+	}
+
+	/**
+	 * Adds a hl7Author The author of the statement SHALL be specified either
+	 * here or in one of the ancestors.
+	 */
+	public void clearHl7Author() {
+		getAuthor().clear();
 	}
 
 	/**

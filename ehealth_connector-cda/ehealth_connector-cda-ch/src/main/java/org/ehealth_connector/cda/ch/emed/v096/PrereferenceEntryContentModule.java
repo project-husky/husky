@@ -27,15 +27,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class PrereferenceEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
 
-	public PrereferenceEntryContentModule() {
-		super.getClassCode().add("SBADM");
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("INT"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.11"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.47"));
-		super.setCode(createHl7CodeFixedValue("PREItem", "1.3.6.1.4.1.19376.1.9.2.2", null, null));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
@@ -84,6 +75,26 @@ public class PrereferenceEntryContentModule
 	}
 
 	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference, filled by:
+	 * "XCRPT"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference getPredefinedReferenceXcrpt() {
+		return createHl7ReferenceFixedValue("XCRPT");
+	}
+
+	public PrereferenceEntryContentModule() {
+		super.getClassCode().add("SBADM");
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("INT"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.11"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.47"));
+		super.setCode(createHl7CodeFixedValue("PREItem", "1.3.6.1.4.1.19376.1.9.2.2", null, null));
+	}
+
+	/**
 	 * Gets the hl7Author Author of the referenced item
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040Author> getHl7Author() {
@@ -123,17 +134,6 @@ public class PrereferenceEntryContentModule
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
 		return templateId;
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference, filled by:
-	 * "XCRPT"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference getPredefinedReferenceXcrpt() {
-		return createHl7ReferenceFixedValue("XCRPT");
 	}
 
 	/**

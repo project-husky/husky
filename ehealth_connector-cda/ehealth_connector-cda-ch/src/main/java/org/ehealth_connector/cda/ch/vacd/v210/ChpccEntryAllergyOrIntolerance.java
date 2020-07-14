@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.vacd.v210;
 
 import java.util.ArrayList;
+
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
@@ -35,101 +36,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class ChpccEntryAllergyOrIntolerance
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
-
-	public ChpccEntryAllergyOrIntolerance() {
-		super.getClassCode().add("OBS");
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.98"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.6"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.5"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.28"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.18"));
-		super.setCode(
-				createHl7CodeFixedValue("2.16.840.1.113883.5.4", "ObservationIntoleranceType"));
-		super.setStatusCode(createHl7StatusCodeFixedValue());
-		vocabValueValueSet.add(
-				new Code(CodeBaseType.builder().withCodeSystem("2.16.756.5.30.1.126.3.1").build()));
-		vocabValueValueSet.add(
-				new Code(CodeBaseType.builder().withCodeSystem("2.16.756.5.30.1.126.3.2").build()));
-		vocabValueValueSet.add(
-				new Code(CodeBaseType.builder().withCodeSystem("2.16.840.1.113883.6.139").build()));
-		vocabValueValueSet.add(
-				new Code(CodeBaseType.builder().withCodeSystem("2.16.840.1.113883.6.96").build()));
-		super.getParticipant().add(createHl7ParticipantFixedValue("CSM"));
-	}
-
-	private ArrayList<org.ehealth_connector.common.Code> vocabValueValueSet = new ArrayList<org.ehealth_connector.common.Code>();
-
-	/**
-	 * Adds a hl7Author The author of the statement SHALL be specified either
-	 * here or in one of the ancestors.
-	 */
-	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
-		getAuthor().add(value);
-	}
-
-	/**
-	 * Adds a hl7EntryRelationship Reactions that are manifestations of the
-	 * allergy or intolerance.
-	 */
-	public void addHl7EntryRelationship(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship value) {
-		getEntryRelationship().add(value);
-	}
-
-	/**
-	 * Adds a hl7Participant This element SHALL indicate the substance which
-	 * causes the allergy or intolerance.
-	 */
-	public void addHl7Participant(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 value) {
-		getParticipant().add(value);
-	}
-
-	/**
-	 * Adds a hl7Value The human-readable text MUST be generated automatically
-	 * from the structured information of this element. The text element MUST
-	 * contain the reference to the corresponding text in the human readable
-	 * part, ONLY.
-	 */
-	public void addHl7Value(org.ehealth_connector.common.hl7cdar2.CD value) {
-		getValue().add(value);
-	}
-
-	/**
-	 * Adds a hl7Author The author of the statement SHALL be specified either
-	 * here or in one of the ancestors.
-	 */
-	public void clearHl7Author() {
-		getAuthor().clear();
-	}
-
-	/**
-	 * Adds a hl7EntryRelationship Reactions that are manifestations of the
-	 * allergy or intolerance.
-	 */
-	public void clearHl7EntryRelationship() {
-		getEntryRelationship().clear();
-	}
-
-	/**
-	 * Adds a hl7Participant This element SHALL indicate the substance which
-	 * causes the allergy or intolerance.
-	 */
-	public void clearHl7Participant() {
-		getParticipant().clear();
-	}
-
-	/**
-	 * Adds a hl7Value The human-readable text MUST be generated automatically
-	 * from the structured information of this element. The text element MUST
-	 * contain the reference to the corresponding text in the human readable
-	 * part, ONLY.
-	 */
-	public void clearHl7Value() {
-		getValue().clear();
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -221,6 +127,144 @@ public class ChpccEntryAllergyOrIntolerance
 	}
 
 	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "MFST", null
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipMfstNull() {
+		return createHl7EntryRelationshipFixedValue("MFST", null);
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "REFR", "false"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrFalse() {
+		return createHl7EntryRelationshipFixedValue("REFR", "false");
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "SUBJ", "true"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjTrue() {
+		return createHl7EntryRelationshipFixedValue("SUBJ", "true");
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
+	 * "NAV"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedValueNav() {
+		return createHl7ValueFixedValue("NAV");
+	}
+
+	private ArrayList<org.ehealth_connector.common.Code> vocabValueValueSet = new ArrayList<org.ehealth_connector.common.Code>();
+
+	public ChpccEntryAllergyOrIntolerance() {
+		super.getClassCode().add("OBS");
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.98"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.6"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.5"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.28"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.18"));
+		super.setCode(
+				createHl7CodeFixedValue("2.16.840.1.113883.5.4", "ObservationIntoleranceType"));
+		super.setStatusCode(createHl7StatusCodeFixedValue());
+		vocabValueValueSet.add(
+				new Code(CodeBaseType.builder().withCodeSystem("2.16.756.5.30.1.126.3.1").build()));
+		vocabValueValueSet.add(
+				new Code(CodeBaseType.builder().withCodeSystem("2.16.756.5.30.1.126.3.2").build()));
+		vocabValueValueSet.add(
+				new Code(CodeBaseType.builder().withCodeSystem("2.16.840.1.113883.6.139").build()));
+		vocabValueValueSet.add(
+				new Code(CodeBaseType.builder().withCodeSystem("2.16.840.1.113883.6.96").build()));
+		super.getParticipant().add(createHl7ParticipantFixedValue("CSM"));
+	}
+
+	/**
+	 * Adds a hl7Author The author of the statement SHALL be specified either
+	 * here or in one of the ancestors.
+	 */
+	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
+		getAuthor().add(value);
+	}
+
+	/**
+	 * Adds a hl7EntryRelationship Reactions that are manifestations of the
+	 * allergy or intolerance.
+	 */
+	public void addHl7EntryRelationship(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship value) {
+		getEntryRelationship().add(value);
+	}
+
+	/**
+	 * Adds a hl7Participant This element SHALL indicate the substance which
+	 * causes the allergy or intolerance.
+	 */
+	public void addHl7Participant(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2 value) {
+		getParticipant().add(value);
+	}
+
+	/**
+	 * Adds a hl7Value The human-readable text MUST be generated automatically
+	 * from the structured information of this element. The text element MUST
+	 * contain the reference to the corresponding text in the human readable
+	 * part, ONLY.
+	 */
+	public void addHl7Value(org.ehealth_connector.common.hl7cdar2.CD value) {
+		getValue().add(value);
+	}
+
+	/**
+	 * Adds a hl7Author The author of the statement SHALL be specified either
+	 * here or in one of the ancestors.
+	 */
+	public void clearHl7Author() {
+		getAuthor().clear();
+	}
+
+	/**
+	 * Adds a hl7EntryRelationship Reactions that are manifestations of the
+	 * allergy or intolerance.
+	 */
+	public void clearHl7EntryRelationship() {
+		getEntryRelationship().clear();
+	}
+
+	/**
+	 * Adds a hl7Participant This element SHALL indicate the substance which
+	 * causes the allergy or intolerance.
+	 */
+	public void clearHl7Participant() {
+		getParticipant().clear();
+	}
+
+	/**
+	 * Adds a hl7Value The human-readable text MUST be generated automatically
+	 * from the structured information of this element. The text element MUST
+	 * contain the reference to the corresponding text in the human readable
+	 * part, ONLY.
+	 */
+	public void clearHl7Value() {
+		getValue().clear();
+	}
+
+	/**
 	 * Gets the hl7Code The human-readable text MUST be generated automatically
 	 * from the structured information of this element. The text element MUST
 	 * contain the reference to the corresponding text in the human readable
@@ -265,49 +309,6 @@ public class ChpccEntryAllergyOrIntolerance
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ED getHl7Text() {
 		return text;
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "MFST", null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipMfstNull() {
-		return createHl7EntryRelationshipFixedValue("MFST", null);
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "REFR", "false"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrFalse() {
-		return createHl7EntryRelationshipFixedValue("REFR", "false");
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "SUBJ", "true"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjTrue() {
-		return createHl7EntryRelationshipFixedValue("SUBJ", "true");
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
-	 * "NAV"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedValueNav() {
-		return createHl7ValueFixedValue("NAV");
 	}
 
 	/**

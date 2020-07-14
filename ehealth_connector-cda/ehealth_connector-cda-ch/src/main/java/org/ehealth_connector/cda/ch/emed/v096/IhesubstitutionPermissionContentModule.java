@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.emed.v096;
 
 import java.util.ArrayList;
+
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
@@ -30,19 +31,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class IhesubstitutionPermissionContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
-
-	public IhesubstitutionPermissionContentModule() {
-		super.setClassCode(
-				org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
-		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue("DEF"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.9.1"));
-		super.setCode(createHl7CodeFixedValue());
-		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed").build()));
-		statusCode = (new Code(CodeBaseType.builder().withCode("completed").build()))
-				.getHl7CdaR2Cs();
-	}
-
-	private ArrayList<org.ehealth_connector.common.Code> vocabStatusCodeCode = new ArrayList<org.ehealth_connector.common.Code>();
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -65,6 +53,19 @@ public class IhesubstitutionPermissionContentModule
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	private ArrayList<org.ehealth_connector.common.Code> vocabStatusCodeCode = new ArrayList<org.ehealth_connector.common.Code>();
+
+	public IhesubstitutionPermissionContentModule() {
+		super.setClassCode(
+				org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
+		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue("DEF"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.9.1"));
+		super.setCode(createHl7CodeFixedValue());
+		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed").build()));
+		statusCode = (new Code(CodeBaseType.builder().withCode("completed").build()))
+				.getHl7CdaR2Cs();
 	}
 
 	/**

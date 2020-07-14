@@ -28,9 +28,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachOtherAuthorCompilationWithNameAddrTelecom
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Author {
 
-	public CdachOtherAuthorCompilationWithNameAddrTelecom() {
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7FunctionCode
 	 */
@@ -38,6 +35,18 @@ public class CdachOtherAuthorCompilationWithNameAddrTelecom
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		return retVal;
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedFunctionCode() {
+		return createHl7FunctionCodeFixedValue();
+	}
+
+	public CdachOtherAuthorCompilationWithNameAddrTelecom() {
 	}
 
 	/**
@@ -59,15 +68,6 @@ public class CdachOtherAuthorCompilationWithNameAddrTelecom
 	 */
 	public org.ehealth_connector.common.hl7cdar2.TS getHl7Time() {
 		return time;
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedFunctionCode() {
-		return createHl7FunctionCodeFixedValue();
 	}
 
 	/**

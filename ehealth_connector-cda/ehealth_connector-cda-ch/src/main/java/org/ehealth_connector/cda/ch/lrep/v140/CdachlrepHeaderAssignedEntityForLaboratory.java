@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.lrep.v140;
 
 import java.util.ArrayList;
+
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -28,6 +29,24 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class CdachlrepHeaderAssignedEntityForLaboratory
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity {
+
+	/**
+	 * Creates fixed contents for CDA Element hl7Id
+	 *
+	 * @param nullFlavor
+	 *            the desired fixed value for this argument.
+	 * @param root
+	 *            the desired fixed value for this argument.
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7IdFixedValue(String nullFlavor,
+			String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.nullFlavor = new ArrayList<String>();
+		retVal.nullFlavor.add(nullFlavor);
+		retVal.setRoot(root);
+		return retVal;
+	}
 
 	public CdachlrepHeaderAssignedEntityForLaboratory() {
 		super.getId().add(createHl7IdFixedValue("NAV", "2.51.1.3"));
@@ -75,24 +94,6 @@ public class CdachlrepHeaderAssignedEntityForLaboratory
 	 */
 	public void clearHl7Telecom() {
 		getTelecom().clear();
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7Id
-	 *
-	 * @param nullFlavor
-	 *            the desired fixed value for this argument.
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7IdFixedValue(String nullFlavor,
-			String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
-		retVal.nullFlavor = new ArrayList<String>();
-		retVal.nullFlavor.add(nullFlavor);
-		retVal.setRoot(root);
-		return retVal;
 	}
 
 	/**

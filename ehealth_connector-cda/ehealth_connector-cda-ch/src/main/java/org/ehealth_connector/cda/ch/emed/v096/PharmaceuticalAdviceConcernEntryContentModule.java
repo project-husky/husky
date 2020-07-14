@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.emed.v096;
 
 import java.util.ArrayList;
+
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -29,18 +30,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class PharmaceuticalAdviceConcernEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
-
-	public PharmaceuticalAdviceConcernEntryContentModule() {
-		super.setClassCode(
-				org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
-		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue("EVN"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.81"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.27"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.5.1"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.5"));
-		super.setCode(createHl7CodeFixedValue("NA"));
-		super.setStatusCode(createHl7StatusCodeFixedValue("active", null, null, null));
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -108,6 +97,51 @@ public class PharmaceuticalAdviceConcernEntryContentModule
 	}
 
 	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "REFR", "false"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrFalse() {
+		return createHl7EntryRelationshipFixedValue("REFR", "false");
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "SUBJ", null
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjNull() {
+		return createHl7EntryRelationshipFixedValue("SUBJ", null);
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "SUBJ", "true"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjTrue() {
+		return createHl7EntryRelationshipFixedValue("SUBJ", "true");
+	}
+
+	public PharmaceuticalAdviceConcernEntryContentModule() {
+		super.setClassCode(
+				org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
+		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue("EVN"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.81"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.27"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.5.1"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.5"));
+		super.setCode(createHl7CodeFixedValue("NA"));
+		super.setStatusCode(createHl7StatusCodeFixedValue("active", null, null, null));
+	}
+
+	/**
 	 * Gets the hl7Code Code
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
@@ -155,39 +189,6 @@ public class PharmaceuticalAdviceConcernEntryContentModule
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ED getHl7Text() {
 		return text;
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "REFR", "false"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrFalse() {
-		return createHl7EntryRelationshipFixedValue("REFR", "false");
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "SUBJ", null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjNull() {
-		return createHl7EntryRelationshipFixedValue("SUBJ", null);
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "SUBJ", "true"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjTrue() {
-		return createHl7EntryRelationshipFixedValue("SUBJ", "true");
 	}
 
 	/**

@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.emed.v096;
 
 import java.util.ArrayList;
+
 import org.ehealth_connector.common.hl7cdar2.IVLTS;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -26,44 +27,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class IhemedicineEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Material {
-
-	public IhemedicineEntryContentModule() {
-		super.setClassCode("MMAT");
-		super.setDeterminerCode(
-				org.ehealth_connector.common.hl7cdar2.EntityDeterminerDetermined.fromValue("KIND"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.1"));
-		super.setName(createHl7NameFixedValue("NA"));
-	}
-
-	/**
-	 * Adds a pharmAsSpecializedKind Generic Equivalent
-	 */
-	public void addPharmAsSpecializedKind(
-			org.ehealth_connector.common.hl7cdar2.COCTMT230100UVSpecializedKind value) {
-		getAsSpecializedKind().add(value);
-	}
-
-	/**
-	 * Adds a pharmIngredient Active Ingredient List
-	 */
-	public void addPharmIngredient(
-			org.ehealth_connector.common.hl7cdar2.COCTMT230100UVIngredient value) {
-		getIngredient().add(value);
-	}
-
-	/**
-	 * Adds a pharmAsSpecializedKind Generic Equivalent
-	 */
-	public void clearPharmAsSpecializedKind() {
-		getAsSpecializedKind().clear();
-	}
-
-	/**
-	 * Adds a pharmIngredient Active Ingredient List
-	 */
-	public void clearPharmIngredient() {
-		getIngredient().clear();
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Name
@@ -142,6 +105,77 @@ public class IhemedicineEntryContentModule
 	}
 
 	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.COCTMT230100UVContent, filled by:
+	 * "CONT"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.COCTMT230100UVContent getPredefinedAsContentCont() {
+		return createPharmAsContentFixedValue("CONT");
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.COCTMT230100UVSpecializedKind,
+	 * filled by: "GRIC"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.COCTMT230100UVSpecializedKind getPredefinedAsSpecializedKindGric() {
+		return createPharmAsSpecializedKindFixedValue("GRIC");
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.COCTMT230100UVIngredient, filled
+	 * by: "ACTI"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.COCTMT230100UVIngredient getPredefinedIngredientActi() {
+		return createPharmIngredientFixedValue("ACTI");
+	}
+
+	public IhemedicineEntryContentModule() {
+		super.setClassCode("MMAT");
+		super.setDeterminerCode(
+				org.ehealth_connector.common.hl7cdar2.EntityDeterminerDetermined.fromValue("KIND"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.1"));
+		super.setName(createHl7NameFixedValue("NA"));
+	}
+
+	/**
+	 * Adds a pharmAsSpecializedKind Generic Equivalent
+	 */
+	public void addPharmAsSpecializedKind(
+			org.ehealth_connector.common.hl7cdar2.COCTMT230100UVSpecializedKind value) {
+		getAsSpecializedKind().add(value);
+	}
+
+	/**
+	 * Adds a pharmIngredient Active Ingredient List
+	 */
+	public void addPharmIngredient(
+			org.ehealth_connector.common.hl7cdar2.COCTMT230100UVIngredient value) {
+		getIngredient().add(value);
+	}
+
+	/**
+	 * Adds a pharmAsSpecializedKind Generic Equivalent
+	 */
+	public void clearPharmAsSpecializedKind() {
+		getAsSpecializedKind().clear();
+	}
+
+	/**
+	 * Adds a pharmIngredient Active Ingredient List
+	 */
+	public void clearPharmIngredient() {
+		getIngredient().clear();
+	}
+
+	/**
 	 * Gets the hl7Code Code
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7Code() {
@@ -188,39 +222,6 @@ public class IhemedicineEntryContentModule
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getPharmFormCode() {
 		return formCode;
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.COCTMT230100UVContent, filled by:
-	 * "CONT"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.COCTMT230100UVContent getPredefinedAsContentCont() {
-		return createPharmAsContentFixedValue("CONT");
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.COCTMT230100UVSpecializedKind,
-	 * filled by: "GRIC"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.COCTMT230100UVSpecializedKind getPredefinedAsSpecializedKindGric() {
-		return createPharmAsSpecializedKindFixedValue("GRIC");
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.COCTMT230100UVIngredient, filled
-	 * by: "ACTI"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.COCTMT230100UVIngredient getPredefinedIngredientActi() {
-		return createPharmIngredientFixedValue("ACTI");
 	}
 
 	/**

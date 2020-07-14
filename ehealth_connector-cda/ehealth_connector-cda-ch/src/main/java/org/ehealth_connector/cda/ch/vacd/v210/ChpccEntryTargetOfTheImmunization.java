@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.vacd.v210;
 
 import java.util.ArrayList;
+
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -35,15 +36,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class ChpccEntryTargetOfTheImmunization
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
-
-	public ChpccEntryTargetOfTheImmunization() {
-		super.getClassCode().add("OBS");
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.95"));
-		super.setCode(createHl7CodeFixedValue("NAV", "2.16.840.1.113883.6.96", "SNOMED CT"));
-		super.setStatusCode(createHl7StatusCodeFixedValue());
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -87,6 +79,15 @@ public class ChpccEntryTargetOfTheImmunization
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public ChpccEntryTargetOfTheImmunization() {
+		super.getClassCode().add("OBS");
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.95"));
+		super.setCode(createHl7CodeFixedValue("NAV", "2.16.840.1.113883.6.96", "SNOMED CT"));
+		super.setStatusCode(createHl7StatusCodeFixedValue());
 	}
 
 	/**

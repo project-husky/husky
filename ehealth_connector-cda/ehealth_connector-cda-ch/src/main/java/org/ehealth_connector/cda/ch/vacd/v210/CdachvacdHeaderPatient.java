@@ -28,11 +28,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachvacdHeaderPatient
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040RecordTarget {
 
-	public CdachvacdHeaderPatient() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.68"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.1"));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
@@ -45,6 +40,11 @@ public class CdachvacdHeaderPatient
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public CdachvacdHeaderPatient() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.68"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.1"));
 	}
 
 	/**

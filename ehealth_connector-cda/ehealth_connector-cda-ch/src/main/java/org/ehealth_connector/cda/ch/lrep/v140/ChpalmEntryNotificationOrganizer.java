@@ -29,6 +29,29 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class ChpalmEntryNotificationOrganizer
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer {
 
+	/**
+	 * Creates fixed contents for CDA Element hl7StatusCode
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7TemplateId
+	 *
+	 * @param root
+	 *            the desired fixed value for this argument.
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
 	public ChpalmEntryNotificationOrganizer() {
 		super.setClassCode(org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryOrganizer
 				.fromValue("CLUSTER"));
@@ -51,29 +74,6 @@ public class ChpalmEntryNotificationOrganizer
 	 */
 	public void clearHl7Component() {
 		getComponent().clear();
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7StatusCode
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
-		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7TemplateId
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
-			String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
-		retVal.setRoot(root);
-		return retVal;
 	}
 
 	/**

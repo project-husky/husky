@@ -233,8 +233,7 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	OPERATIVE_REPORT("371526002", "2.16.840.1.113883.6.96", "Operative report (record artifact)",
-			"Operative report", "Operationsbericht", "Rapport d’opération",
-			"Rapporto operatorio"),
+			"Operative report", "Operationsbericht", "Rapport d’opération", "Rapporto operatorio"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Pathology order</div>

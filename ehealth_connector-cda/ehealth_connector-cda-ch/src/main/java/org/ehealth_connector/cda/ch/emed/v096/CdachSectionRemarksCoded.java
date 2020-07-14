@@ -31,26 +31,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachSectionRemarksCoded
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 
-	public CdachSectionRemarksCoded() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.2"));
-		super.setCode(createHl7CodeFixedValue("48767-8", "2.16.840.1.113883.6.1", "LOINC",
-				"Annotation comment"));
-	}
-
-	/**
-	 * Adds a hl7Entry
-	 */
-	public void addHl7Entry(org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry value) {
-		getEntry().add(value);
-	}
-
-	/**
-	 * Adds a hl7Entry
-	 */
-	public void clearHl7Entry() {
-		getEntry().clear();
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
@@ -86,6 +66,26 @@ public class CdachSectionRemarksCoded
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public CdachSectionRemarksCoded() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.2"));
+		super.setCode(createHl7CodeFixedValue("48767-8", "2.16.840.1.113883.6.1", "LOINC",
+				"Annotation comment"));
+	}
+
+	/**
+	 * Adds a hl7Entry
+	 */
+	public void addHl7Entry(org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry value) {
+		getEntry().add(value);
+	}
+
+	/**
+	 * Adds a hl7Entry
+	 */
+	public void clearHl7Entry() {
+		getEntry().clear();
 	}
 
 	/**

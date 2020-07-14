@@ -109,8 +109,7 @@ public enum ActSubstanceAdminSubstitutionCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	THERAPEUTIC_BRAND_L3("TB", "2.16.840.1.113883.5.1070", "therapeutic brand", "therapeutic brand",
-			"therapeutische Alternative, andere Marke",
-			"alternative thérapeutique même fabricant",
+			"therapeutische Alternative, andere Marke", "alternative thérapeutique même fabricant",
 			"alternativa terapeutica stesso produttore"),
 	/**
 	 * <!-- @formatter:off -->

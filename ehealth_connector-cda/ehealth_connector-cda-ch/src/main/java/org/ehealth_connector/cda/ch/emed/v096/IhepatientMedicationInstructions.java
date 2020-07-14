@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.emed.v096;
 
 import java.util.ArrayList;
+
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
@@ -24,27 +25,11 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 /**
  * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.5.3.1.4.3 Template
  * description: <div>Any medication may be the subject of further instructions
- * to the patient, for example to
- * indicate <span style="line-height: 1.22;">that it should be taken with food,
- * et cetera.</span></div>
+ * to the patient, for example to indicate <span style="line-height: 1.22;">that
+ * it should be taken with food, et cetera.</span></div>
  */
 public class IhepatientMedicationInstructions
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
-
-	public IhepatientMedicationInstructions() {
-		super.setClassCode(
-				org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
-		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue("INT"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.3"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.49"));
-		super.setCode(createHl7CodeFixedValue("PINSTRUCT", "1.3.6.1.4.1.19376.1.5.3.2",
-				"IHEActCode", null));
-		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed").build()));
-		statusCode = (new Code(CodeBaseType.builder().withCode("completed").build()))
-				.getHl7CdaR2Cs();
-	}
-
-	private ArrayList<org.ehealth_connector.common.Code> vocabStatusCodeCode = new ArrayList<org.ehealth_connector.common.Code>();
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -75,6 +60,21 @@ public class IhepatientMedicationInstructions
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	private ArrayList<org.ehealth_connector.common.Code> vocabStatusCodeCode = new ArrayList<org.ehealth_connector.common.Code>();
+
+	public IhepatientMedicationInstructions() {
+		super.setClassCode(
+				org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
+		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue("INT"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.3"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.49"));
+		super.setCode(createHl7CodeFixedValue("PINSTRUCT", "1.3.6.1.4.1.19376.1.5.3.2",
+				"IHEActCode", null));
+		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed").build()));
+		statusCode = (new Code(CodeBaseType.builder().withCode("completed").build()))
+				.getHl7CdaR2Cs();
 	}
 
 	/**

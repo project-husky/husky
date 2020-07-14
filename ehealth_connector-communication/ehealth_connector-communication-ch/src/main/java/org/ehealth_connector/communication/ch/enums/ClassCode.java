@@ -115,8 +115,7 @@ public enum ClassCode implements ValueSetEnumInterface {
 	EMERGENCY_MEDICAL_IDENTIFICATION_RECORD("722216001", "2.16.840.1.113883.6.96",
 			"Emergency medical identification record (record artifact)",
 			"Emergency medical identification record", "Notfall-ID / Ausweis",
-			"ID d’urgence / carte d’urgence",
-			"Identificativo d'emergenza / scheda d'emergenza"),
+			"ID d’urgence / carte d’urgence", "Identificativo d'emergenza / scheda d'emergenza"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Obstetrical Record</div>

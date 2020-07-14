@@ -37,6 +37,7 @@ public enum Allergies {
 	 * atopique</div>
 	 */
 	ATOPIC_DERMATITIS("24079001", "Atopic dermatitis");
+
 	public static final String EGG_PROTEIN_SUBSTANCE_CODE = "303300008";
 	public static final String ATOPIC_DERMATITIS_CODE = "24079001";
 

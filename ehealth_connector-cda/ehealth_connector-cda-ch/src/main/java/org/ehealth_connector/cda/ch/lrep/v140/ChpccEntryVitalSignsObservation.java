@@ -26,6 +26,46 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class ChpccEntryVitalSignsObservation
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
+	/**
+	 * Creates fixed contents for CDA Element hl7Code
+	 *
+	 * @param codeSystem
+	 *            the desired fixed value for this argument.
+	 * @param codeSystemName
+	 *            the desired fixed value for this argument.
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(
+			String codeSystem, String codeSystemName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7StatusCode
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7TemplateId
+	 *
+	 * @param root
+	 *            the desired fixed value for this argument.
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
 	public ChpccEntryVitalSignsObservation() {
 		super.getClassCode().add("OBS");
 		super.setMoodCode(
@@ -95,46 +135,6 @@ public class ChpccEntryVitalSignsObservation
 	 */
 	public void clearHl7TargetSiteCode() {
 		getTargetSiteCode().clear();
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7Code
-	 *
-	 * @param codeSystem
-	 *            the desired fixed value for this argument.
-	 * @param codeSystemName
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(
-			String codeSystem, String codeSystemName) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
-		retVal.setCodeSystem(codeSystem);
-		retVal.setCodeSystemName(codeSystemName);
-		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7StatusCode
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
-		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7TemplateId
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
-			String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
-		retVal.setRoot(root);
-		return retVal;
 	}
 
 	/**

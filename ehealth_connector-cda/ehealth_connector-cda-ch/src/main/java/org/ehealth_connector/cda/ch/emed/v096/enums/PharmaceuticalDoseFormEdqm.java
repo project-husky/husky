@@ -360,8 +360,8 @@ public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
 	 */
 	CONCENTRATE_FOR_SOLUTION_FOR_INFUSION("11213000", "0.4.0.127.0.16.1.1.2.1",
 			"Concentrate for solution for infusion", "Concentrate for solution for infusion",
-			"Konzentrat zur Herstellung einer Infusionslösung",
-			"Solution à diluer pour perfusion", "Concentrato per soluzione per infusione"),
+			"Konzentrat zur Herstellung einer Infusionslösung", "Solution à diluer pour perfusion",
+			"Concentrato per soluzione per infusione"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Concentrate for solution for injection</div>
@@ -589,8 +589,7 @@ public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	CUTANEOUS_STICK("10523000", "0.4.0.127.0.16.1.1.2.1", "Cutaneous stick", "Cutaneous stick",
-			"Stift zur Anwendung auf der Haut", "Bâton pour application cutanée",
-			"Matita cutanea"),
+			"Stift zur Anwendung auf der Haut", "Bâton pour application cutanée", "Matita cutanea"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Cutaneous suspension</div>
@@ -817,8 +816,7 @@ public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	EAR_EYE_DROPS_SOLUTION("50018000", "0.4.0.127.0.16.1.1.2.1", "Ear/eye drops, solution",
-			"Ear/eye drops, solution", "Augen-/Ohrentropfen, Lösung", "TOTRANSLATE",
-			"TOTRANSLATE"),
+			"Ear/eye drops, solution", "Augen-/Ohrentropfen, Lösung", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Ear/eye drops, suspension</div>
@@ -908,8 +906,8 @@ public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	EAR_SPRAY_SOLUTION("10709000", "0.4.0.127.0.16.1.1.2.1", "Ear spray, solution",
-			"Ear spray, solution", "Ohrenspray, Lösung",
-			"Solution pour pulvérisation auriculaire", "Spray auricolare, soluzione"),
+			"Ear spray, solution", "Ohrenspray, Lösung", "Solution pour pulvérisation auriculaire",
+			"Spray auricolare, soluzione"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Ear spray, suspension</div>
@@ -1060,8 +1058,7 @@ public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
 	 */
 	EMULSION_FOR_INJECTION_INFUSION("50021000", "0.4.0.127.0.16.1.1.2.1",
 			"Emulsion for injection/infusion", "Emulsion for injection/infusion",
-			"Emulsion zur Injektion/Infusion", "Émulsion injectable/pour perfusion",
-			"TOTRANSLATE"),
+			"Emulsion zur Injektion/Infusion", "Émulsion injectable/pour perfusion", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Emulsion for suspension for injection</div>
@@ -1102,8 +1099,7 @@ public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
 	 */
 	ENDOSINUSIAL_WASH_SUSPENSION("50022000", "0.4.0.127.0.16.1.1.2.1",
 			"Endosinusial wash, suspension", "Endosinusial wash, suspension",
-			"Nebenhöhlenspülung, Suspension", "Suspension pour lavage endosinusal",
-			"TOTRANSLATE"),
+			"Nebenhöhlenspülung, Suspension", "Suspension pour lavage endosinusal", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Endotracheopulmonary instillation, powder for solution</div>
@@ -1166,8 +1162,8 @@ public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	EPILESIONAL_SOLUTION("13042000", "0.4.0.127.0.16.1.1.2.1", "Epilesional solution",
-			"Epilesional solution", "Lösung zum Auftragen auf die Haut",
-			"Solution épilésionnelle", "TOTRANSLATE"),
+			"Epilesional solution", "Lösung zum Auftragen auf die Haut", "Solution épilésionnelle",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Eye cream</div>
@@ -1682,8 +1678,7 @@ public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	IMPLANTATION_PASTE("13043000", "0.4.0.127.0.16.1.1.2.1", "Implantation paste",
-			"Implantation paste", "Paste für Implantate", "Pâte pour implantation",
-			"TOTRANSLATE"),
+			"Implantation paste", "Paste für Implantate", "Pâte pour implantation", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Implantation suspension</div>
@@ -2007,8 +2002,7 @@ public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
 	 */
 	KIT_FOR_RADIOPHARMACEUTICAL_PREPARATION("12107000", "0.4.0.127.0.16.1.1.2.1",
 			"Kit for radiopharmaceutical preparation", "Kit for radiopharmaceutical preparation",
-			"Kit für ein radioaktives Arzneimittel",
-			"Trousse pour préparation radiopharmaceutique",
+			"Kit für ein radioaktives Arzneimittel", "Trousse pour préparation radiopharmaceutique",
 			"Kit per preparazione radiofarmaceutica"),
 	/**
 	 * <!-- @formatter:off -->
@@ -2072,8 +2066,8 @@ public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	MEDICATED_CHEWING_GUM("10229000", "0.4.0.127.0.16.1.1.2.1", "Medicated chewing-gum",
-			"Medicated chewing-gum", "wirkstoffhaltiges Kaugummi",
-			"Gomme à mâcher médicamenteuse", "Gomma da masticare medicata"),
+			"Medicated chewing-gum", "wirkstoffhaltiges Kaugummi", "Gomme à mâcher médicamenteuse",
+			"Gomma da masticare medicata"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Medicated nail lacquer</div>
@@ -2250,8 +2244,7 @@ public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
 	MOUTHWASH_TABLET_FOR_SOLUTION("10311000", "0.4.0.127.0.16.1.1.2.1",
 			"Mouthwash, tablet for solution", "Mouthwash, tablet for solution",
 			"Tablette zur Herstellung eines Mundwassers",
-			"Comprimé pour solution pour bain de bouche",
-			"Compressa per soluzione per collutorio"),
+			"Comprimé pour solution pour bain de bouche", "Compressa per soluzione per collutorio"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Muco-adhesive buccal tablet</div>
@@ -2662,8 +2655,8 @@ public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	ORAL_RECTAL_SOLUTION("50037900", "0.4.0.127.0.16.1.1.2.1", "Oral/rectal solution",
-			"Oral/rectal solution", "Lösung zum Einnehmen/Rektallösung",
-			"Solution buvable/rectale", "TOTRANSLATE"),
+			"Oral/rectal solution", "Lösung zum Einnehmen/Rektallösung", "Solution buvable/rectale",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Oral/rectal suspension</div>
@@ -3036,8 +3029,7 @@ public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
 			"Powder for concentrate for solution for injection/infusion",
 			"Powder for concentrate for solution for injection/infusion",
 			"Pulver für ein Konzentrat zur Herstellung einer Injektions-/Infusionslösung",
-			"Poudre pour solution à diluer pour solution injectable/pour perfusion",
-			"TOTRANSLATE"),
+			"Poudre pour solution à diluer pour solution injectable/pour perfusion", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Powder for cutaneous solution</div>
@@ -3739,8 +3731,8 @@ public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	SOLUBLE_TABLET("10120000", "0.4.0.127.0.16.1.1.2.1", "Soluble tablet", "Soluble tablet",
-			"Tablette zur Herstellung einer Lösung zum Einnehmen",
-			"Comprimé pour solution buvable", "Compressa solubile"),
+			"Tablette zur Herstellung einer Lösung zum Einnehmen", "Comprimé pour solution buvable",
+			"Compressa solubile"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Solution for blood fraction modification</div>
@@ -3816,8 +3808,7 @@ public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
 	 */
 	SOLUTION_FOR_HAEMODIALYSIS_HAEMOFILTRATION("50057000", "0.4.0.127.0.16.1.1.2.1",
 			"Solution for haemodialysis/haemofiltration",
-			"Solution for haemodialysis/haemofiltration",
-			"Hämodialyselösung/Hämofiltrationslösung",
+			"Solution for haemodialysis/haemofiltration", "Hämodialyselösung/Hämofiltrationslösung",
 			"Solution pour hémodialyse/hémofiltration", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
@@ -3828,9 +3819,8 @@ public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	SOLUTION_FOR_HAEMOFILTRATION("11402000", "0.4.0.127.0.16.1.1.2.1",
-			"Solution for haemofiltration", "Solution for haemofiltration",
-			"Hämofiltrationslösung", "Solution pour hémofiltration",
-			"Soluzione per emofiltrazione"),
+			"Solution for haemofiltration", "Solution for haemofiltration", "Hämofiltrationslösung",
+			"Solution pour hémofiltration", "Soluzione per emofiltrazione"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Solution for infusion</div>
@@ -3964,9 +3954,8 @@ public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	SOLUTION_FOR_SKIN_SCRATCH_TEST("10549000", "0.4.0.127.0.16.1.1.2.1",
-			"Solution for skin-scratch test", "Solution for skin-scratch test",
-			"Scratchtestlösung", "solution pour test intradermique",
-			"Soluzione per scarificazione"),
+			"Solution for skin-scratch test", "Solution for skin-scratch test", "Scratchtestlösung",
+			"solution pour test intradermique", "Soluzione per scarificazione"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Solution for solution for infusion</div>
@@ -3976,8 +3965,8 @@ public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
 	 */
 	SOLUTION_FOR_SOLUTION_FOR_INFUSION("13061000", "0.4.0.127.0.16.1.1.2.1",
 			"Solution for solution for infusion", "Solution for solution for infusion",
-			"Lösung zur Herstellung einer Infusionslösung",
-			"Solution pour solution pour perfusion", "TOTRANSLATE"),
+			"Lösung zur Herstellung einer Infusionslösung", "Solution pour solution pour perfusion",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Solution for solution for injection</div>
@@ -4282,8 +4271,7 @@ public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	TRANSDERMAL_SOLUTION("10546400", "0.4.0.127.0.16.1.1.2.1", "Transdermal solution",
-			"Transdermal solution", "transdermale Lösung", "Solution transdermique",
-			"TOTRANSLATE"),
+			"Transdermal solution", "transdermale Lösung", "Solution transdermique", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Transdermal spray, solution</div>

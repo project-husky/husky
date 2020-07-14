@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.emed.v096;
 
 import java.util.ArrayList;
+
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 
@@ -28,6 +29,8 @@ import org.ehealth_connector.common.basetypes.CodeBaseType;
  * Element description: IHE PHARM PRE document code
  */
 public class DocumentCodeMedicationPrescription extends org.ehealth_connector.common.hl7cdar2.CE {
+
+	private ArrayList<org.ehealth_connector.common.Code> vocabTranslationCode = new ArrayList<org.ehealth_connector.common.Code>();
 
 	public DocumentCodeMedicationPrescription() {
 		super.setCode("57833-6");
@@ -42,8 +45,6 @@ public class DocumentCodeMedicationPrescription extends org.ehealth_connector.co
 				.withDisplayName("Medical Prescription record (record artifact)").build()))
 						.getHl7CdaR2Cd());
 	}
-
-	private ArrayList<org.ehealth_connector.common.Code> vocabTranslationCode = new ArrayList<org.ehealth_connector.common.Code>();
 
 	/**
 	 * Gets the hl7Translation Translation to the Swiss EPR XDS.b metadata.

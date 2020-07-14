@@ -27,17 +27,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class ChpccEntryImmunizationSeriesNumber
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
-	public ChpccEntryImmunizationSeriesNumber() {
-		super.getClassCode().add("OBS");
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.119"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.46"));
-		super.setCode(createHl7CodeFixedValue("30973-2", "2.16.840.1.113883.6.1", "LOINC",
-				"Dose Number"));
-		super.setStatusCode(createHl7StatusCodeFixedValue());
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
@@ -82,6 +71,17 @@ public class ChpccEntryImmunizationSeriesNumber
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public ChpccEntryImmunizationSeriesNumber() {
+		super.getClassCode().add("OBS");
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.119"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.46"));
+		super.setCode(createHl7CodeFixedValue("30973-2", "2.16.840.1.113883.6.1", "LOINC",
+				"Dose Number"));
+		super.setStatusCode(createHl7StatusCodeFixedValue());
 	}
 
 	/**

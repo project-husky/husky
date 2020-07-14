@@ -149,20 +149,20 @@ public class CdachOtherAddressInformationCompilationECh0010 {
 	}
 
 	/**
-	 * Gets the hl7PostBox Number of the addressed post box in a maximum length
-	 * of 8 characters.
-	 */
-	public org.ehealth_connector.common.hl7cdar2.ADXP getHl7PostBox() {
-		return postBox;
-	}
-
-	/**
 	 * Gets the hl7PostalCode Postal code given by Swiss Post or postal code
 	 * issued by a post office abroad, that can consist of numbers, letters or a
 	 * combination of both, possibly even special characters.
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ADXP getHl7PostalCode() {
 		return postalCode;
+	}
+
+	/**
+	 * Gets the hl7PostBox Number of the addressed post box in a maximum length
+	 * of 8 characters.
+	 */
+	public org.ehealth_connector.common.hl7cdar2.ADXP getHl7PostBox() {
+		return postBox;
 	}
 
 	/**
@@ -237,20 +237,20 @@ public class CdachOtherAddressInformationCompilationECh0010 {
 	}
 
 	/**
-	 * Sets the hl7PostBox Number of the addressed post box in a maximum length
-	 * of 8 characters.
-	 */
-	public void setHl7PostBox(org.ehealth_connector.common.hl7cdar2.ADXP value) {
-		this.postBox = value;
-	}
-
-	/**
 	 * Sets the hl7PostalCode Postal code given by Swiss Post or postal code
 	 * issued by a post office abroad, that can consist of numbers, letters or a
 	 * combination of both, possibly even special characters.
 	 */
 	public void setHl7PostalCode(org.ehealth_connector.common.hl7cdar2.ADXP value) {
 		this.postalCode = value;
+	}
+
+	/**
+	 * Sets the hl7PostBox Number of the addressed post box in a maximum length
+	 * of 8 characters.
+	 */
+	public void setHl7PostBox(org.ehealth_connector.common.hl7cdar2.ADXP value) {
+		this.postBox = value;
 	}
 
 	/**

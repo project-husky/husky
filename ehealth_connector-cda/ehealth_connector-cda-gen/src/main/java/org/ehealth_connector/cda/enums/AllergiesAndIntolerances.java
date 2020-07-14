@@ -51,6 +51,7 @@ public enum AllergiesAndIntolerances {
 	 * système immunitaire en cas d’absorption de certains aliments.</div>
 	 */
 	FOOD_INTOLERANCE("FINT", "Food Intolerance");
+
 	public static final String CODE_SYSTEM_NAME = "HL7ActCode";
 	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.5.4";
 	public static final String DRUG_ALLERGY_CODE = "DALG";

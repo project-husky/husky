@@ -36,13 +36,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl7cdar2.CE {
 
-	public CdachlrepHeaderDocumentCode() {
-		super.setCodeSystem("2.16.840.1.113883.6.1");
-		super.setCodeSystemName("LOINC");
-		super.getTranslation().add(createHl7TranslationFixedValue("4241000179101",
-				"2.16.840.1.113883.6.96", "SNOMED CT", "Laboratory report"));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7Translation
 	 *
@@ -64,6 +57,13 @@ public class CdachlrepHeaderDocumentCode extends org.ehealth_connector.common.hl
 		retVal.setCodeSystemName(codeSystemName);
 		retVal.setDisplayName(displayName);
 		return retVal;
+	}
+
+	public CdachlrepHeaderDocumentCode() {
+		super.setCodeSystem("2.16.840.1.113883.6.1");
+		super.setCodeSystemName("LOINC");
+		super.getTranslation().add(createHl7TranslationFixedValue("4241000179101",
+				"2.16.840.1.113883.6.96", "SNOMED CT", "Laboratory report"));
 	}
 
 	/**

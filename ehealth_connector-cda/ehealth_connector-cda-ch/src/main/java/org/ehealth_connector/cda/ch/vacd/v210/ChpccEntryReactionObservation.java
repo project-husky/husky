@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.vacd.v210;
 
 import java.util.ArrayList;
+
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
@@ -30,6 +31,73 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class ChpccEntryReactionObservation
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
+
+	/**
+	 * Creates fixed contents for CDA Element hl7Code
+	 *
+	 * @param codeSystem
+	 *            the desired fixed value for this argument.
+	 * @param codeSystemName
+	 *            the desired fixed value for this argument.
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(
+			String codeSystem, String codeSystemName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7StatusCode
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7TemplateId
+	 *
+	 * @param root
+	 *            the desired fixed value for this argument.
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7Value
+	 *
+	 * @param nullFlavor
+	 *            the desired fixed value for this argument.
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.CD createHl7ValueFixedValue(
+			String nullFlavor) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
+		retVal.nullFlavor = new ArrayList<String>();
+		retVal.nullFlavor.add(nullFlavor);
+		return retVal;
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
+	 * "NAV"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedValueNav() {
+		return createHl7ValueFixedValue("NAV");
+	}
+
+	private ArrayList<org.ehealth_connector.common.Code> vocabValueCode = new ArrayList<org.ehealth_connector.common.Code>();
 
 	public ChpccEntryReactionObservation() {
 		super.getClassCode().add("OBS");
@@ -49,8 +117,6 @@ public class ChpccEntryReactionObservation
 		vocabValueCode.add(
 				new Code(CodeBaseType.builder().withCodeSystem("2.16.840.1.113883.6.96").build()));
 	}
-
-	private ArrayList<org.ehealth_connector.common.Code> vocabValueCode = new ArrayList<org.ehealth_connector.common.Code>();
 
 	/**
 	 * Adds a hl7Author This MAY be used to indicate who has documented the
@@ -120,61 +186,6 @@ public class ChpccEntryReactionObservation
 	}
 
 	/**
-	 * Creates fixed contents for CDA Element hl7Code
-	 *
-	 * @param codeSystem
-	 *            the desired fixed value for this argument.
-	 * @param codeSystemName
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.CD createHl7CodeFixedValue(
-			String codeSystem, String codeSystemName) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
-		retVal.setCodeSystem(codeSystem);
-		retVal.setCodeSystemName(codeSystemName);
-		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7StatusCode
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.CS createHl7StatusCodeFixedValue() {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CS retVal = factory.createCS();
-		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7TemplateId
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
-			String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
-		retVal.setRoot(root);
-		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7Value
-	 *
-	 * @param nullFlavor
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.CD createHl7ValueFixedValue(
-			String nullFlavor) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CD retVal = factory.createCD();
-		retVal.nullFlavor = new ArrayList<String>();
-		retVal.nullFlavor.add(nullFlavor);
-		return retVal;
-	}
-
-	/**
 	 * Gets the hl7Code The human-readable text MUST be generated automatically
 	 * from the structured information of this element. The text element MUST
 	 * contain the reference to the corresponding text in the human readable
@@ -212,16 +223,6 @@ public class ChpccEntryReactionObservation
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ED getHl7Text() {
 		return text;
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
-	 * "NAV"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedValueNav() {
-		return createHl7ValueFixedValue("NAV");
 	}
 
 	/**

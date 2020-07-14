@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.vacd.v210;
 
 import java.util.ArrayList;
+
 import org.ehealth_connector.common.hl7cdar2.IVLTS;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -27,17 +28,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class ChpalmEntrySpecimenReceived
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
-
-	public ChpalmEntrySpecimenReceived() {
-		super.setClassCode(
-				org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
-		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue("EVN"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.12"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.3"));
-		super.getId().add(createHl7IdFixedValue("ASKU"));
-		super.setCode(createHl7CodeFixedValue("SPRECEIVE", "1.3.5.1.4.1.19376.1.5.3.2",
-				"IHEActCode", "Receive Time"));
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -89,6 +79,17 @@ public class ChpalmEntrySpecimenReceived
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public ChpalmEntrySpecimenReceived() {
+		super.setClassCode(
+				org.ehealth_connector.common.hl7cdar2.XActClassDocumentEntryAct.fromValue("ACT"));
+		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentActMood.fromValue("EVN"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.12"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.3"));
+		super.getId().add(createHl7IdFixedValue("ASKU"));
+		super.setCode(createHl7CodeFixedValue("SPRECEIVE", "1.3.5.1.4.1.19376.1.5.3.2",
+				"IHEActCode", "Receive Time"));
 	}
 
 	/**

@@ -65,6 +65,7 @@ public enum RouteOfAdministration {
 	 * intra-musculaire</div>
 	 */
 	INJECTION_INTRAMUSCULAR("IM", "Injection, intramuscular");
+
 	public static final String INJECTION_INTRADERMAL_CODE = "IDINJ";
 	public static final String INHALATION_NEBULIZATION_NASAL_CODE = "NASNEB";
 	public static final String SWALLOW_ORAL_CODE = "PO";

@@ -30,13 +30,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class ChpalmSectionLaboratoryReportItemCoded
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 
-	public ChpalmSectionLaboratoryReportItemCoded() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.5"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.2.2"));
-		super.setCode(createHl7CodeFixedValue("2.16.840.1.113883.6.1", "LOINC"));
-		super.getEntry().add(createHl7EntryFixedValue("DRIV"));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
@@ -82,6 +75,13 @@ public class ChpalmSectionLaboratoryReportItemCoded
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public ChpalmSectionLaboratoryReportItemCoded() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.5"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.2.2"));
+		super.setCode(createHl7CodeFixedValue("2.16.840.1.113883.6.1", "LOINC"));
+		super.getEntry().add(createHl7EntryFixedValue("DRIV"));
 	}
 
 	/**

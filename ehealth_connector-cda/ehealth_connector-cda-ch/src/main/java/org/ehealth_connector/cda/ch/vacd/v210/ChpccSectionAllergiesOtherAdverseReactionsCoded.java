@@ -41,31 +41,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class ChpccSectionAllergiesOtherAdverseReactionsCoded
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 
-	public ChpccSectionAllergiesOtherAdverseReactionsCoded() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.51"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.3.13"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.2"));
-		super.setCode(createHl7CodeFixedValue("48765-2", "2.16.840.1.113883.6.1", "LOINC",
-				"ALLERGIES, ADVERSE REACTIONS, ALERTS"));
-		super.getEntry().add(createHl7EntryFixedValue("DRIV"));
-	}
-
-	/**
-	 * Adds a hl7Entry The narrative text in the text element of the section
-	 * MUST be generated automatically from the information in this entry.
-	 */
-	public void addHl7Entry(org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry value) {
-		getEntry().add(value);
-	}
-
-	/**
-	 * Adds a hl7Entry The narrative text in the text element of the section
-	 * MUST be generated automatically from the information in this entry.
-	 */
-	public void clearHl7Entry() {
-		getEntry().clear();
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
@@ -117,6 +92,31 @@ public class ChpccSectionAllergiesOtherAdverseReactionsCoded
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public ChpccSectionAllergiesOtherAdverseReactionsCoded() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.51"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.3.13"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.2"));
+		super.setCode(createHl7CodeFixedValue("48765-2", "2.16.840.1.113883.6.1", "LOINC",
+				"ALLERGIES, ADVERSE REACTIONS, ALERTS"));
+		super.getEntry().add(createHl7EntryFixedValue("DRIV"));
+	}
+
+	/**
+	 * Adds a hl7Entry The narrative text in the text element of the section
+	 * MUST be generated automatically from the information in this entry.
+	 */
+	public void addHl7Entry(org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry value) {
+		getEntry().add(value);
+	}
+
+	/**
+	 * Adds a hl7Entry The narrative text in the text element of the section
+	 * MUST be generated automatically from the information in this entry.
+	 */
+	public void clearHl7Entry() {
+		getEntry().clear();
 	}
 
 	/**

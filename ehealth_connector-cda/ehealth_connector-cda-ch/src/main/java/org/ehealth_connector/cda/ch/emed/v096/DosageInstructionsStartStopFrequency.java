@@ -29,23 +29,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class DosageInstructionsStartStopFrequency
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
 
-	public DosageInstructionsStartStopFrequency() {
-	}
-
-	/**
-	 * Adds a hl7ApproachSiteCode
-	 */
-	public void addHl7ApproachSiteCode(org.ehealth_connector.common.hl7cdar2.CD value) {
-		getApproachSiteCode().add(value);
-	}
-
-	/**
-	 * Adds a hl7ApproachSiteCode
-	 */
-	public void clearHl7ApproachSiteCode() {
-		getApproachSiteCode().clear();
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7EffectiveTime
 	 *
@@ -67,6 +50,42 @@ public class DosageInstructionsStartStopFrequency
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		return retVal;
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.EIVLTS, filled
+	 * by: "A"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.EIVLTS getPredefinedEffectiveTimeA() {
+		return createHl7EffectiveTimeFixedValue("A");
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedRouteCode() {
+		return createHl7RouteCodeFixedValue();
+	}
+
+	public DosageInstructionsStartStopFrequency() {
+	}
+
+	/**
+	 * Adds a hl7ApproachSiteCode
+	 */
+	public void addHl7ApproachSiteCode(org.ehealth_connector.common.hl7cdar2.CD value) {
+		getApproachSiteCode().add(value);
+	}
+
+	/**
+	 * Adds a hl7ApproachSiteCode
+	 */
+	public void clearHl7ApproachSiteCode() {
+		getApproachSiteCode().clear();
 	}
 
 	/**
@@ -103,25 +122,6 @@ public class DosageInstructionsStartStopFrequency
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7RouteCode() {
 		return routeCode;
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.EIVLTS, filled
-	 * by: "A"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.EIVLTS getPredefinedEffectiveTimeA() {
-		return createHl7EffectiveTimeFixedValue("A");
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedRouteCode() {
-		return createHl7RouteCodeFixedValue();
 	}
 
 	/**

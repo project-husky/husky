@@ -30,29 +30,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class PharmaceuticalAdviceSectionContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 
-	public PharmaceuticalAdviceSectionContentModule() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.2.2"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.12"));
-		super.setCode(createHl7CodeFixedValue("61357-0", "2.16.840.1.113883.6.1", "LOINC",
-				"Medication pharmaceutical advice.brief"));
-	}
-
-	/**
-	 * Adds a hl7Author Information about the author of a CDA document, section
-	 * or entry. An author MAY be a person or a device.
-	 */
-	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
-		getAuthor().add(value);
-	}
-
-	/**
-	 * Adds a hl7Author Information about the author of a CDA document, section
-	 * or entry. An author MAY be a person or a device.
-	 */
-	public void clearHl7Author() {
-		getAuthor().clear();
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
@@ -82,6 +59,29 @@ public class PharmaceuticalAdviceSectionContentModule
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public PharmaceuticalAdviceSectionContentModule() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.2.2"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.12"));
+		super.setCode(createHl7CodeFixedValue("61357-0", "2.16.840.1.113883.6.1", "LOINC",
+				"Medication pharmaceutical advice.brief"));
+	}
+
+	/**
+	 * Adds a hl7Author Information about the author of a CDA document, section
+	 * or entry. An author MAY be a person or a device.
+	 */
+	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
+		getAuthor().add(value);
+	}
+
+	/**
+	 * Adds a hl7Author Information about the author of a CDA document, section
+	 * or entry. An author MAY be a person or a device.
+	 */
+	public void clearHl7Author() {
+		getAuthor().clear();
 	}
 
 	/**

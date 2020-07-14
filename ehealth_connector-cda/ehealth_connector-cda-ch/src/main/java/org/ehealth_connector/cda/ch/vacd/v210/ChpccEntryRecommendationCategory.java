@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.vacd.v210;
 
 import java.util.ArrayList;
+
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -28,12 +29,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class ChpccEntryRecommendationCategory
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Criterion {
-
-	public ChpccEntryRecommendationCategory() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.96"));
-		super.setCode(createHl7CodeFixedValue("NAV", "2.16.756.5.30.1.127.3.3.4",
-				"Swiss Vaccination Plan Recommendation Category"));
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -68,6 +63,12 @@ public class ChpccEntryRecommendationCategory
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public ChpccEntryRecommendationCategory() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.96"));
+		super.setCode(createHl7CodeFixedValue("NAV", "2.16.756.5.30.1.127.3.3.4",
+				"Swiss Vaccination Plan Recommendation Category"));
 	}
 
 	/**

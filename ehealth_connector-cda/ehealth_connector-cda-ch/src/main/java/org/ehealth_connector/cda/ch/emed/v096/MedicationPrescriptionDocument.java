@@ -19,6 +19,7 @@ package org.ehealth_connector.cda.ch.emed.v096;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
@@ -27,6 +28,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamSource;
+
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
@@ -45,130 +47,6 @@ import org.ehealth_connector.common.utils.Hl7CdaR2Util;
 @XmlRootElement(name = "ClinicalDocument", namespace = "urn:hl7-org:v3")
 public class MedicationPrescriptionDocument
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
-
-	public MedicationPrescriptionDocument() {
-		super.setTypeId(createHl7TypeIdFixedValue("2.16.840.1.113883.1.3", "POCD_HD000040"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.127.1.4"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.1"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.1.4"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.1.1"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.1.9"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.2"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.1"));
-	}
-
-	/**
-	 * Adds a hl7Authenticator Information about an authenticator of a CDA
-	 * document. An authenticator MUST be a person.
-	 */
-	public void addHl7Authenticator(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040Authenticator value) {
-		getAuthenticator().add(value);
-	}
-
-	/**
-	 * Adds a hl7Author Information about the author of a CDA document, section
-	 * or entry. An author MAY be a person or a device.
-	 */
-	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
-		getAuthor().add(value);
-	}
-
-	/**
-	 * Adds a hl7InFulfillmentOf Reference to one or more orders which led to
-	 * the creation of this CDA document. It SHALL be declared, when the order
-	 * reference is relevant for some reason.
-	 */
-	public void addHl7InFulfillmentOf(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040InFulfillmentOf value) {
-		getInFulfillmentOf().add(value);
-	}
-
-	/**
-	 * Adds a hl7Informant
-	 */
-	public void addHl7Informant(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040Informant12 value) {
-		getInformant().add(value);
-	}
-
-	/**
-	 * Adds a hl7InformationRecipient A recipient of this CDA document
-	 * (corresponds to the addressee of a letter - person or
-	 * organization).Recipient types: - The main recipient of the document is
-	 * indicated by typeCode 'PRCP' (primary recipient).Note: Since it makes no
-	 * sense to create a CDA document without doing it for someone, in
-	 * Switzerland at least one recipient MUST be declared. If the document is
-	 * created for the user's own needs, the user itself or its organization
-	 * will be the primary recipient. - Other recipients (copy to; Cc) are
-	 * indicated with typeCode, TRC '(secondary recipient).
-	 */
-	public void addHl7InformationRecipient(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040InformationRecipient value) {
-		getInformationRecipient().add(value);
-	}
-
-	/**
-	 * Adds a hl7Participant Information on a patient contact.
-	 */
-	public void addHl7Participant(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 value) {
-		getParticipant().add(value);
-	}
-
-	/**
-	 * Adds a hl7Authenticator Information about an authenticator of a CDA
-	 * document. An authenticator MUST be a person.
-	 */
-	public void clearHl7Authenticator() {
-		getAuthenticator().clear();
-	}
-
-	/**
-	 * Adds a hl7Author Information about the author of a CDA document, section
-	 * or entry. An author MAY be a person or a device.
-	 */
-	public void clearHl7Author() {
-		getAuthor().clear();
-	}
-
-	/**
-	 * Adds a hl7InFulfillmentOf Reference to one or more orders which led to
-	 * the creation of this CDA document. It SHALL be declared, when the order
-	 * reference is relevant for some reason.
-	 */
-	public void clearHl7InFulfillmentOf() {
-		getInFulfillmentOf().clear();
-	}
-
-	/**
-	 * Adds a hl7Informant
-	 */
-	public void clearHl7Informant() {
-		getInformant().clear();
-	}
-
-	/**
-	 * Adds a hl7InformationRecipient A recipient of this CDA document
-	 * (corresponds to the addressee of a letter - person or
-	 * organization).Recipient types: - The main recipient of the document is
-	 * indicated by typeCode 'PRCP' (primary recipient).Note: Since it makes no
-	 * sense to create a CDA document without doing it for someone, in
-	 * Switzerland at least one recipient MUST be declared. If the document is
-	 * created for the user's own needs, the user itself or its organization
-	 * will be the primary recipient. - Other recipients (copy to; Cc) are
-	 * indicated with typeCode, TRC '(secondary recipient).
-	 */
-	public void clearHl7InformationRecipient() {
-		getInformationRecipient().clear();
-	}
-
-	/**
-	 * Adds a hl7Participant Information on a patient contact.
-	 */
-	public void clearHl7Participant() {
-		getParticipant().clear();
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
@@ -200,6 +78,174 @@ public class MedicationPrescriptionDocument
 		retVal.setRoot(root);
 		retVal.setExtension(extension);
 		return retVal;
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
+	 * "2.16.756.5.30.1.1.1.1.4"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId21675653011114() {
+		return createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.4");
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 *
+	 * @param inputFile
+	 *            the source file. n@return the CDA document\n@throws
+	 *            JAXBException the JAXB exception\n@throws IOException Signals
+	 *            that an I/O exception has occurred.
+	 */
+	public static MedicationPrescriptionDocument loadFromFile(File inputFile)
+			throws JAXBException, IOException {
+		MedicationPrescriptionDocument retVal;
+		JAXBContext context = JAXBContext.newInstance(MedicationPrescriptionDocument.class);
+		Unmarshaller mar = context.createUnmarshaller();
+		StreamSource source = new StreamSource(inputFile);
+		JAXBElement<MedicationPrescriptionDocument> root = mar.unmarshal(source,
+				MedicationPrescriptionDocument.class);
+		retVal = root.getValue();
+		return retVal;
+	}
+
+	/**
+	 * Loads the CDA document from file.
+	 *
+	 * @param inputFileName
+	 *            the full path and filename of the sourcefile.
+	 * @return the CDA document\n@throws JAXBException the JAXB
+	 *         exception\n@throws IOException Signals that an I/O exception has
+	 *         occurred.
+	 */
+	public static MedicationPrescriptionDocument loadFromFile(String inputFileName)
+			throws JAXBException, IOException {
+		return loadFromFile(new File(inputFileName));
+	}
+
+	public MedicationPrescriptionDocument() {
+		super.setTypeId(createHl7TypeIdFixedValue("2.16.840.1.113883.1.3", "POCD_HD000040"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.127.1.4"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.1"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.1.4"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.1.1"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.1.9"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.2"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.1"));
+	}
+
+	/**
+	 * Adds a hl7Authenticator Information about an authenticator of a CDA
+	 * document. An authenticator MUST be a person.
+	 */
+	public void addHl7Authenticator(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Authenticator value) {
+		getAuthenticator().add(value);
+	}
+
+	/**
+	 * Adds a hl7Author Information about the author of a CDA document, section
+	 * or entry. An author MAY be a person or a device.
+	 */
+	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
+		getAuthor().add(value);
+	}
+
+	/**
+	 * Adds a hl7Informant
+	 */
+	public void addHl7Informant(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Informant12 value) {
+		getInformant().add(value);
+	}
+
+	/**
+	 * Adds a hl7InformationRecipient A recipient of this CDA document
+	 * (corresponds to the addressee of a letter - person or
+	 * organization).Recipient types: - The main recipient of the document is
+	 * indicated by typeCode 'PRCP' (primary recipient).Note: Since it makes no
+	 * sense to create a CDA document without doing it for someone, in
+	 * Switzerland at least one recipient MUST be declared. If the document is
+	 * created for the user's own needs, the user itself or its organization
+	 * will be the primary recipient. - Other recipients (copy to; Cc) are
+	 * indicated with typeCode, TRC '(secondary recipient).
+	 */
+	public void addHl7InformationRecipient(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040InformationRecipient value) {
+		getInformationRecipient().add(value);
+	}
+
+	/**
+	 * Adds a hl7InFulfillmentOf Reference to one or more orders which led to
+	 * the creation of this CDA document. It SHALL be declared, when the order
+	 * reference is relevant for some reason.
+	 */
+	public void addHl7InFulfillmentOf(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040InFulfillmentOf value) {
+		getInFulfillmentOf().add(value);
+	}
+
+	/**
+	 * Adds a hl7Participant Information on a patient contact.
+	 */
+	public void addHl7Participant(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 value) {
+		getParticipant().add(value);
+	}
+
+	/**
+	 * Adds a hl7Authenticator Information about an authenticator of a CDA
+	 * document. An authenticator MUST be a person.
+	 */
+	public void clearHl7Authenticator() {
+		getAuthenticator().clear();
+	}
+
+	/**
+	 * Adds a hl7Author Information about the author of a CDA document, section
+	 * or entry. An author MAY be a person or a device.
+	 */
+	public void clearHl7Author() {
+		getAuthor().clear();
+	}
+
+	/**
+	 * Adds a hl7Informant
+	 */
+	public void clearHl7Informant() {
+		getInformant().clear();
+	}
+
+	/**
+	 * Adds a hl7InformationRecipient A recipient of this CDA document
+	 * (corresponds to the addressee of a letter - person or
+	 * organization).Recipient types: - The main recipient of the document is
+	 * indicated by typeCode 'PRCP' (primary recipient).Note: Since it makes no
+	 * sense to create a CDA document without doing it for someone, in
+	 * Switzerland at least one recipient MUST be declared. If the document is
+	 * created for the user's own needs, the user itself or its organization
+	 * will be the primary recipient. - Other recipients (copy to; Cc) are
+	 * indicated with typeCode, TRC '(secondary recipient).
+	 */
+	public void clearHl7InformationRecipient() {
+		getInformationRecipient().clear();
+	}
+
+	/**
+	 * Adds a hl7InFulfillmentOf Reference to one or more orders which led to
+	 * the creation of this CDA document. It SHALL be declared, when the order
+	 * reference is relevant for some reason.
+	 */
+	public void clearHl7InFulfillmentOf() {
+		getInFulfillmentOf().clear();
+	}
+
+	/**
+	 * Adds a hl7Participant Information on a patient contact.
+	 */
+	public void clearHl7Participant() {
+		getParticipant().clear();
 	}
 
 	/**
@@ -361,19 +407,9 @@ public class MedicationPrescriptionDocument
 	}
 
 	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
-	 * "2.16.756.5.30.1.1.1.1.4"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId21675653011114() {
-		return createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.4");
-	}
-
-	/**
 	 * Sets the version number to 1 and makes sure the setId is the same as the
 	 * document id.
-	 * 
+	 *
 	 * @param newDocId
 	 *            the new doc id
 	 */
@@ -389,7 +425,7 @@ public class MedicationPrescriptionDocument
 	/**
 	 * Increases the version number by one and makes sure the setId remains the
 	 * same as previously.
-	 * 
+	 *
 	 * @param newDocId
 	 *            the new doc id
 	 */
@@ -405,61 +441,8 @@ public class MedicationPrescriptionDocument
 	}
 
 	/**
-	 * Loads the CDA document from file.
-	 * 
-	 * @param inputFileName
-	 *            the full path and filename of the sourcefile.
-	 * @return the CDA document\n@throws JAXBException the JAXB
-	 *         exception\n@throws IOException Signals that an I/O exception has
-	 *         occurred.
-	 */
-	public static MedicationPrescriptionDocument loadFromFile(String inputFileName)
-			throws JAXBException, IOException {
-		return loadFromFile(new File(inputFileName));
-	}
-
-	/**
-	 * Loads the CDA document from file.
-	 * 
-	 * @param inputFile
-	 *            the source file. n@return the CDA document\n@throws
-	 *            JAXBException the JAXB exception\n@throws IOException Signals
-	 *            that an I/O exception has occurred.
-	 */
-	public static MedicationPrescriptionDocument loadFromFile(File inputFile)
-			throws JAXBException, IOException {
-		MedicationPrescriptionDocument retVal;
-		JAXBContext context = JAXBContext.newInstance(MedicationPrescriptionDocument.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		StreamSource source = new StreamSource(inputFile);
-		JAXBElement<MedicationPrescriptionDocument> root = mar.unmarshal(source,
-				MedicationPrescriptionDocument.class);
-		retVal = root.getValue();
-		return retVal;
-	}
-
-	/**
 	 * Saves the current CDA document to file.
-	 * 
-	 * @param outputFileName
-	 *            the full path and filename of the destination file.
-	 * @throws JAXBException
-	 *             the JAXB exception
-	 * @throws ParserConfigurationException
-	 *             the parser configuration exception
-	 * @throws TransformerException
-	 *             the transformer exception
-	 * @throws FileNotFoundException
-	 *             the file not found exception
-	 */
-	public void saveToFile(String outputFileName) throws JAXBException,
-			ParserConfigurationException, TransformerException, FileNotFoundException {
-		saveToFile(new File(outputFileName), null, null);
-	}
-
-	/**
-	 * Saves the current CDA document to file.
-	 * 
+	 *
 	 * @param outputFile
 	 *            the destination file.
 	 * @throws JAXBException
@@ -478,29 +461,7 @@ public class MedicationPrescriptionDocument
 
 	/**
 	 * Saves the current CDA document to file.
-	 * 
-	 * @param outputFileName
-	 *            the full path and filename of the destination file.
-	 * @param xsl
-	 *            the path and filename or url to the rendering stylesheet
-	 * @param css
-	 *            the path and filename or url to the rendering css
-	 * @throws JAXBException
-	 *             the JAXB exception
-	 * @throws ParserConfigurationException
-	 *             the parser configuration exception
-	 * @throws TransformerException
-	 *             the transformer exception\n@throws FileNotFoundException the
-	 *             file not found exception
-	 */
-	public void saveToFile(String outputFileName, String xsl, String css) throws JAXBException,
-			ParserConfigurationException, TransformerException, FileNotFoundException {
-		saveToFile(new File(outputFileName), xsl, css);
-	}
-
-	/**
-	 * Saves the current CDA document to file.
-	 * 
+	 *
 	 * @param outputFile
 	 *            the destination file.
 	 * @param xsl
@@ -518,6 +479,47 @@ public class MedicationPrescriptionDocument
 	public void saveToFile(File outputFile, String xsl, String css) throws JAXBException,
 			ParserConfigurationException, TransformerException, FileNotFoundException {
 		CdaUtil.saveJaxbObjectToFile(this, outputFile, xsl, css);
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 *
+	 * @param outputFileName
+	 *            the full path and filename of the destination file.
+	 * @throws JAXBException
+	 *             the JAXB exception
+	 * @throws ParserConfigurationException
+	 *             the parser configuration exception
+	 * @throws TransformerException
+	 *             the transformer exception
+	 * @throws FileNotFoundException
+	 *             the file not found exception
+	 */
+	public void saveToFile(String outputFileName) throws JAXBException,
+			ParserConfigurationException, TransformerException, FileNotFoundException {
+		saveToFile(new File(outputFileName), null, null);
+	}
+
+	/**
+	 * Saves the current CDA document to file.
+	 *
+	 * @param outputFileName
+	 *            the full path and filename of the destination file.
+	 * @param xsl
+	 *            the path and filename or url to the rendering stylesheet
+	 * @param css
+	 *            the path and filename or url to the rendering css
+	 * @throws JAXBException
+	 *             the JAXB exception
+	 * @throws ParserConfigurationException
+	 *             the parser configuration exception
+	 * @throws TransformerException
+	 *             the transformer exception\n@throws FileNotFoundException the
+	 *             file not found exception
+	 */
+	public void saveToFile(String outputFileName, String xsl, String css) throws JAXBException,
+			ParserConfigurationException, TransformerException, FileNotFoundException {
+		saveToFile(new File(outputFileName), xsl, css);
 	}
 
 	/**
@@ -693,7 +695,7 @@ public class MedicationPrescriptionDocument
 	 *
 	 * <div class="de">Weist dem Dokument eine Set Id und eine Versionsnummer
 	 * zu.</div>
-	 * 
+	 *
 	 * @param idVersion1
 	 *            the set Id (if null, the document ID will be used)
 	 * @param version

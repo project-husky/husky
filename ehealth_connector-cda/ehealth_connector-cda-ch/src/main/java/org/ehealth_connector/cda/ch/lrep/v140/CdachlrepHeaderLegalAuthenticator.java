@@ -27,13 +27,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachlrepHeaderLegalAuthenticator
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040LegalAuthenticator {
 
-	public CdachlrepHeaderLegalAuthenticator() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.61"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.5"));
-		super.setSignatureCode(createHl7SignatureCodeFixedValue("S", "2.16.840.1.113883.1.11.10282",
-				"ParticipationSignature", "signed"));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7SignatureCode
 	 *
@@ -69,6 +62,13 @@ public class CdachlrepHeaderLegalAuthenticator
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public CdachlrepHeaderLegalAuthenticator() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.61"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.5"));
+		super.setSignatureCode(createHl7SignatureCodeFixedValue("S", "2.16.840.1.113883.1.11.10282",
+				"ParticipationSignature", "signed"));
 	}
 
 	/**

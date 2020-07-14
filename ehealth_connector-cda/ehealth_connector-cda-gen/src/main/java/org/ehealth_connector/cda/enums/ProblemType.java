@@ -55,6 +55,7 @@ public enum ProblemType {
 	 * <div class="de">Symptom</div> <div class="fr">Symptôme</div>
 	 */
 	SYMPTOM("418799008", "Symptom ");
+
 	public static final String PROBLEM_CODE = "55607006";
 	public static final String CONDITION_CODE = "64572001";
 	public static final String FUNCTIONAL_LIMITATION_CODE = "248536006";

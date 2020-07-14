@@ -53,6 +53,7 @@ public enum InsufficientMemoryReaction {
 	THROW_EXCEPTION("throwException"), @XmlEnumValue("returnValidationError")
 	RETURN_VALIDATION_ERROR("returnValidationError"), @XmlEnumValue("sleep")
 	SLEEP("sleep");
+
 	public static InsufficientMemoryReaction fromValue(String v) {
 		for (InsufficientMemoryReaction c : InsufficientMemoryReaction.values()) {
 			if (c.value.equals(v)) {

@@ -34,11 +34,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class ChpalmEntryHumanPatientWithNonHumanSubject
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Subject {
 
-	public ChpalmEntryHumanPatientWithNonHumanSubject() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.6"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.1.3.1"));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
@@ -51,6 +46,11 @@ public class ChpalmEntryHumanPatientWithNonHumanSubject
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public ChpalmEntryHumanPatientWithNonHumanSubject() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.6"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.3.1.3.1"));
 	}
 
 	/**

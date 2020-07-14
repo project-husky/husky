@@ -42,6 +42,7 @@ public enum AllergiesSpecialConditions {
 	 * <div class="fr">Aucune intolérance à des médicaments connue</div>
 	 */
 	NO_KNOWN_DRUG_ALLERGIES("409137002", "No Known Drug Allergies");
+
 	public static final String SUBSTANCE_TYPE_UNKNOWN_CODE = "64970000";
 	public static final String NO_KNOWN_ALLERGIES_CODE = "160244002";
 	public static final String NO_KNOWN_DRUG_ALLERGIES_CODE = "409137002";

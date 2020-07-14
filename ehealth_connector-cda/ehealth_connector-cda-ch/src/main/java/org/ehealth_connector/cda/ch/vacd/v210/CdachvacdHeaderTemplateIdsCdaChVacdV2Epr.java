@@ -30,12 +30,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachvacdHeaderTemplateIdsCdaChVacdV2Epr
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
 
-	public CdachvacdHeaderTemplateIdsCdaChVacdV2Epr() {
-		super.getTemplateId()
-				.add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.18.1.2"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.1"));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
@@ -51,17 +45,9 @@ public class CdachvacdHeaderTemplateIdsCdaChVacdV2Epr
 	}
 
 	/**
-	 * Gets the hl7TemplateId CDA-CH-VACD / eVACDOC V2.1 specification. This is
-	 * an informational reference, only.
-	 */
-	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
-		return templateId;
-	}
-
-	/**
 	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
 	 * "2.16.756.5.30.1.1.1.1.3.5.2"
-	 * 
+	 *
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId2167565301111352() {
@@ -71,11 +57,25 @@ public class CdachvacdHeaderTemplateIdsCdaChVacdV2Epr
 	/**
 	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
 	 * "2.16.756.5.30.1.127.1.4"
-	 * 
+	 *
 	 * @return the predefined element.
 	 */
 	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId216756530112714() {
 		return createHl7TemplateIdFixedValue("2.16.756.5.30.1.127.1.4");
+	}
+
+	public CdachvacdHeaderTemplateIdsCdaChVacdV2Epr() {
+		super.getTemplateId()
+				.add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.18.1.2"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.1"));
+	}
+
+	/**
+	 * Gets the hl7TemplateId CDA-CH-VACD / eVACDOC V2.1 specification. This is
+	 * an informational reference, only.
+	 */
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
+		return templateId;
 	}
 
 	/**

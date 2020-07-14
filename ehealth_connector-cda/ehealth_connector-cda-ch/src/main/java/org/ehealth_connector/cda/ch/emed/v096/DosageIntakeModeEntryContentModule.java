@@ -26,13 +26,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class DosageIntakeModeEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
 
-	public DosageIntakeModeEntryContentModule() {
-		super.getClassCode().add("SBADM");
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("INT"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.37"));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
@@ -45,6 +38,13 @@ public class DosageIntakeModeEntryContentModule
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public DosageIntakeModeEntryContentModule() {
+		super.getClassCode().add("SBADM");
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("INT"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.37"));
 	}
 
 	/**

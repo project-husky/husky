@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.emed.v096;
 
 import java.util.ArrayList;
+
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
@@ -30,61 +31,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class PharmaceuticalAdviceItemEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
-
-	public PharmaceuticalAdviceItemEntryContentModule() {
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.44"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.3"));
-		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("OK")
-				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").build()));
-		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("CHANGE")
-				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").build()));
-		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("CANCEL")
-				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").build()));
-		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("SUSPEND")
-				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").build()));
-		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("REFUSE")
-				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").build()));
-		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("COMMENT")
-				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").build()));
-		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("active").build()));
-		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed").build()));
-	}
-
-	private ArrayList<org.ehealth_connector.common.Code> vocabCodeCode = new ArrayList<org.ehealth_connector.common.Code>();
-
-	private ArrayList<org.ehealth_connector.common.Code> vocabStatusCodeCode = new ArrayList<org.ehealth_connector.common.Code>();
-
-	/**
-	 * Adds a hl7Id Pharmaceutical Advice Item ID
-	 */
-	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		getId().add(value);
-	}
-
-	/**
-	 * Adds a hl7Reference ID of parent container (Community Pharmaceutical
-	 * Advice document)
-	 */
-	public void addHl7Reference(org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference value) {
-		getReference().add(value);
-	}
-
-	/**
-	 * Adds a hl7Id Pharmaceutical Advice Item ID
-	 */
-	public void clearHl7Id() {
-		getId().clear();
-	}
-
-	/**
-	 * Adds a hl7Reference ID of parent container (Community Pharmaceutical
-	 * Advice document)
-	 */
-	public void clearHl7Reference() {
-		getReference().clear();
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7EntryRelationship
@@ -136,6 +82,105 @@ public class PharmaceuticalAdviceItemEntryContentModule
 	}
 
 	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "COMP", null
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipCompNull() {
+		return createHl7EntryRelationshipFixedValue("COMP", null);
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "REFR", "false"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrFalse() {
+		return createHl7EntryRelationshipFixedValue("REFR", "false");
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "REFR", null
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrNull() {
+		return createHl7EntryRelationshipFixedValue("REFR", null);
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference, filled by:
+	 * "XCRPT"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference getPredefinedReferenceXcrpt() {
+		return createHl7ReferenceFixedValue("XCRPT");
+	}
+
+	private ArrayList<org.ehealth_connector.common.Code> vocabCodeCode = new ArrayList<org.ehealth_connector.common.Code>();
+
+	private ArrayList<org.ehealth_connector.common.Code> vocabStatusCodeCode = new ArrayList<org.ehealth_connector.common.Code>();
+
+	public PharmaceuticalAdviceItemEntryContentModule() {
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.44"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.3"));
+		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("OK")
+				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").build()));
+		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("CHANGE")
+				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").build()));
+		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("CANCEL")
+				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").build()));
+		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("SUSPEND")
+				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").build()));
+		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("REFUSE")
+				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").build()));
+		vocabCodeCode.add(new Code(CodeBaseType.builder().withCode("COMMENT")
+				.withCodeSystem("1.3.6.1.4.1.19376.1.9.2.1").build()));
+		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("active").build()));
+		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed").build()));
+	}
+
+	/**
+	 * Adds a hl7Id Pharmaceutical Advice Item ID
+	 */
+	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
+		getId().add(value);
+	}
+
+	/**
+	 * Adds a hl7Reference ID of parent container (Community Pharmaceutical
+	 * Advice document)
+	 */
+	public void addHl7Reference(org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference value) {
+		getReference().add(value);
+	}
+
+	/**
+	 * Adds a hl7Id Pharmaceutical Advice Item ID
+	 */
+	public void clearHl7Id() {
+		getId().clear();
+	}
+
+	/**
+	 * Adds a hl7Reference ID of parent container (Community Pharmaceutical
+	 * Advice document)
+	 */
+	public void clearHl7Reference() {
+		getReference().clear();
+	}
+
+	/**
 	 * Gets the hl7Author Pharmaceutical Adviser
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040Author> getHl7Author() {
@@ -183,50 +228,6 @@ public class PharmaceuticalAdviceItemEntryContentModule
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ED getHl7Text() {
 		return text;
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "COMP", null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipCompNull() {
-		return createHl7EntryRelationshipFixedValue("COMP", null);
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "REFR", "false"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrFalse() {
-		return createHl7EntryRelationshipFixedValue("REFR", "false");
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "REFR", null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRefrNull() {
-		return createHl7EntryRelationshipFixedValue("REFR", null);
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference, filled by:
-	 * "XCRPT"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference getPredefinedReferenceXcrpt() {
-		return createHl7ReferenceFixedValue("XCRPT");
 	}
 
 	/**

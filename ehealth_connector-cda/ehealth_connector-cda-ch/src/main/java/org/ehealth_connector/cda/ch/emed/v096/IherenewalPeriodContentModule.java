@@ -29,13 +29,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class IherenewalPeriodContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Supply {
 
-	public IherenewalPeriodContentModule() {
-		super.setClassCode(org.ehealth_connector.common.hl7cdar2.ActClassSupply.fromValue("SPLY"));
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("RQO"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.15"));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
@@ -48,6 +41,13 @@ public class IherenewalPeriodContentModule
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public IherenewalPeriodContentModule() {
+		super.setClassCode(org.ehealth_connector.common.hl7cdar2.ActClassSupply.fromValue("SPLY"));
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("RQO"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.15"));
 	}
 
 	/**

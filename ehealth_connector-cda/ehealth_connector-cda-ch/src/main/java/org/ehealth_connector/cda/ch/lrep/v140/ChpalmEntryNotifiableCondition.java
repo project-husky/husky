@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.lrep.v140;
 
 import java.util.ArrayList;
+
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -27,30 +28,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class ChpalmEntryNotifiableCondition
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
-
-	public ChpalmEntryNotifiableCondition() {
-		super.getClassCode().add("COND");
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.14"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.1.1"));
-		super.setStatusCode(createHl7StatusCodeFixedValue());
-		super.getValue().add(createHl7ValueFixedValue("NA"));
-	}
-
-	/**
-	 * Adds a hl7Id An ID for this item CAN be filled for traceability.
-	 */
-	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		getId().add(value);
-	}
-
-	/**
-	 * Adds a hl7Id An ID for this item CAN be filled for traceability.
-	 */
-	public void clearHl7Id() {
-		getId().clear();
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7StatusCode
@@ -88,6 +65,30 @@ public class ChpalmEntryNotifiableCondition
 		retVal.nullFlavor = new ArrayList<String>();
 		retVal.nullFlavor.add(nullFlavor);
 		return retVal;
+	}
+
+	public ChpalmEntryNotifiableCondition() {
+		super.getClassCode().add("COND");
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.14"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1.1.1"));
+		super.setStatusCode(createHl7StatusCodeFixedValue());
+		super.getValue().add(createHl7ValueFixedValue("NA"));
+	}
+
+	/**
+	 * Adds a hl7Id An ID for this item CAN be filled for traceability.
+	 */
+	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
+		getId().add(value);
+	}
+
+	/**
+	 * Adds a hl7Id An ID for this item CAN be filled for traceability.
+	 */
+	public void clearHl7Id() {
+		getId().clear();
 	}
 
 	/**

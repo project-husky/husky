@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.emed.v096;
 
 import java.util.ArrayList;
+
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
@@ -32,20 +33,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class IhehealthStatusObservation
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
-
-	public IhehealthStatusObservation() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.51"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.1.2"));
-		super.setCode(createHl7CodeFixedValue("11323-3", "2.16.840.1.113883.6.1", "LOINC",
-				"Health Status"));
-		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed")
-				.withCodeSystem("2.16.840.1.113883.5.14").build()));
-		statusCode = (new Code(CodeBaseType.builder().withCode("completed")
-				.withCodeSystem("2.16.840.1.113883.5.14").build())).getHl7CdaR2Cs();
-		super.getValue().add(createHl7ValueFixedValue());
-	}
-
-	private ArrayList<org.ehealth_connector.common.Code> vocabStatusCodeCode = new ArrayList<org.ehealth_connector.common.Code>();
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -85,6 +72,20 @@ public class IhehealthStatusObservation
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
 		return retVal;
+	}
+
+	private ArrayList<org.ehealth_connector.common.Code> vocabStatusCodeCode = new ArrayList<org.ehealth_connector.common.Code>();
+
+	public IhehealthStatusObservation() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.51"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.1.2"));
+		super.setCode(createHl7CodeFixedValue("11323-3", "2.16.840.1.113883.6.1", "LOINC",
+				"Health Status"));
+		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed")
+				.withCodeSystem("2.16.840.1.113883.5.14").build()));
+		statusCode = (new Code(CodeBaseType.builder().withCode("completed")
+				.withCodeSystem("2.16.840.1.113883.5.14").build())).getHl7CdaR2Cs();
+		super.getValue().add(createHl7ValueFixedValue());
 	}
 
 	/**

@@ -27,29 +27,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class IheantigenDoseEntry
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
 
-	public IheantigenDoseEntry() {
-		super.getClassCode().add("SBADM");
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("EVN"));
-		super.getTemplateId()
-				.add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.12.1"));
-		super.setConsumable(createHl7ConsumableFixedValue("CSM"));
-	}
-
-	/**
-	 * Adds a hl7Id
-	 */
-	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		getId().add(value);
-	}
-
-	/**
-	 * Adds a hl7Id
-	 */
-	public void clearHl7Id() {
-		getId().clear();
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7Consumable
 	 *
@@ -77,6 +54,29 @@ public class IheantigenDoseEntry
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public IheantigenDoseEntry() {
+		super.getClassCode().add("SBADM");
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("EVN"));
+		super.getTemplateId()
+				.add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.12.1"));
+		super.setConsumable(createHl7ConsumableFixedValue("CSM"));
+	}
+
+	/**
+	 * Adds a hl7Id
+	 */
+	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
+		getId().add(value);
+	}
+
+	/**
+	 * Adds a hl7Id
+	 */
+	public void clearHl7Id() {
+		getId().clear();
 	}
 
 	/**

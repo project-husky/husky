@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.vacd.v210;
 
 import java.util.ArrayList;
+
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
@@ -37,106 +38,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class ChpccEntryImmunization
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
-
-	public ChpccEntryImmunization() {
-		super.getClassCode().add("SBADM");
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("EVN"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.89"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.12"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.24"));
-		super.setStatusCode(createHl7StatusCodeFixedValue());
-		super.setPriorityCode(createHl7PriorityCodeFixedValue());
-		super.setRouteCode(createHl7RouteCodeFixedValue());
-		vocabApproachSiteCodeCode.add(new Code(
-				CodeBaseType.builder().withCodeSystem("2.16.840.1.113883.5.1052").build()));
-		super.setConsumable(createHl7ConsumableFixedValue("CSM"));
-	}
-
-	private ArrayList<org.ehealth_connector.common.Code> vocabApproachSiteCodeCode = new ArrayList<org.ehealth_connector.common.Code>();
-
-	/**
-	 * Adds a hl7ApproachSiteCode If laterility of the administration is known,
-	 * it MAY be recorded according to the HL7 value set.Recommendation for
-	 * eVACDOC: omit
-	 */
-	public void addHl7ApproachSiteCode(org.ehealth_connector.common.hl7cdar2.CD value) {
-		getApproachSiteCode().add(value);
-	}
-
-	/**
-	 * Adds a hl7Author The author of the statement SHALL be specified either
-	 * here or in one of the ancestors.
-	 */
-	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
-		getAuthor().add(value);
-	}
-
-	/**
-	 * Adds a hl7EntryRelationship Immunization series number, if applicable.
-	 */
-	public void addHl7EntryRelationship(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship value) {
-		getEntryRelationship().add(value);
-	}
-
-	/**
-	 * Adds a hl7Performer This MAY be used to indicate who has administered the
-	 * immunization.
-	 */
-	public void addHl7Performer(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer2 value) {
-		getPerformer().add(value);
-	}
-
-	/**
-	 * Adds a hl7Precondition Recommendation-Category according to the swiss
-	 * vaccination plan.
-	 */
-	public void addHl7Precondition(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040Precondition value) {
-		getPrecondition().add(value);
-	}
-
-	/**
-	 * Adds a hl7ApproachSiteCode If laterility of the administration is known,
-	 * it MAY be recorded according to the HL7 value set.Recommendation for
-	 * eVACDOC: omit
-	 */
-	public void clearHl7ApproachSiteCode() {
-		getApproachSiteCode().clear();
-	}
-
-	/**
-	 * Adds a hl7Author The author of the statement SHALL be specified either
-	 * here or in one of the ancestors.
-	 */
-	public void clearHl7Author() {
-		getAuthor().clear();
-	}
-
-	/**
-	 * Adds a hl7EntryRelationship Immunization series number, if applicable.
-	 */
-	public void clearHl7EntryRelationship() {
-		getEntryRelationship().clear();
-	}
-
-	/**
-	 * Adds a hl7Performer This MAY be used to indicate who has administered the
-	 * immunization.
-	 */
-	public void clearHl7Performer() {
-		getPerformer().clear();
-	}
-
-	/**
-	 * Adds a hl7Precondition Recommendation-Category according to the swiss
-	 * vaccination plan.
-	 */
-	public void clearHl7Precondition() {
-		getPrecondition().clear();
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -234,6 +135,159 @@ public class ChpccEntryImmunization
 	}
 
 	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
+	 * "2.16.840.1.113883.6.96", "SNOMED CT", null
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedCode2168401113883696SnomedCtNull() {
+		return createHl7CodeFixedValue("2.16.840.1.113883.6.96", "SNOMED CT", null);
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
+	 * "IMMUNIZ", "2.16.840.1.113883.5.4", "ActCode"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedCodeImmuniz216840111388354ActCode() {
+		return createHl7CodeFixedValue("IMMUNIZ", "2.16.840.1.113883.5.4", "ActCode");
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "CAUS", null
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipCausNull() {
+		return createHl7EntryRelationshipFixedValue("CAUS", null);
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "RSON", null
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRsonNull() {
+		return createHl7EntryRelationshipFixedValue("RSON", null);
+	}
+
+	/**
+	 * Adds a predefined
+	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
+	 * filled by: "SUBJ", null
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjNull() {
+		return createHl7EntryRelationshipFixedValue("SUBJ", null);
+	}
+
+	private ArrayList<org.ehealth_connector.common.Code> vocabApproachSiteCodeCode = new ArrayList<org.ehealth_connector.common.Code>();
+
+	public ChpccEntryImmunization() {
+		super.getClassCode().add("SBADM");
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("EVN"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.89"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.12"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.24"));
+		super.setStatusCode(createHl7StatusCodeFixedValue());
+		super.setPriorityCode(createHl7PriorityCodeFixedValue());
+		super.setRouteCode(createHl7RouteCodeFixedValue());
+		vocabApproachSiteCodeCode.add(new Code(
+				CodeBaseType.builder().withCodeSystem("2.16.840.1.113883.5.1052").build()));
+		super.setConsumable(createHl7ConsumableFixedValue("CSM"));
+	}
+
+	/**
+	 * Adds a hl7ApproachSiteCode If laterility of the administration is known,
+	 * it MAY be recorded according to the HL7 value set.Recommendation for
+	 * eVACDOC: omit
+	 */
+	public void addHl7ApproachSiteCode(org.ehealth_connector.common.hl7cdar2.CD value) {
+		getApproachSiteCode().add(value);
+	}
+
+	/**
+	 * Adds a hl7Author The author of the statement SHALL be specified either
+	 * here or in one of the ancestors.
+	 */
+	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
+		getAuthor().add(value);
+	}
+
+	/**
+	 * Adds a hl7EntryRelationship Immunization series number, if applicable.
+	 */
+	public void addHl7EntryRelationship(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship value) {
+		getEntryRelationship().add(value);
+	}
+
+	/**
+	 * Adds a hl7Performer This MAY be used to indicate who has administered the
+	 * immunization.
+	 */
+	public void addHl7Performer(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer2 value) {
+		getPerformer().add(value);
+	}
+
+	/**
+	 * Adds a hl7Precondition Recommendation-Category according to the swiss
+	 * vaccination plan.
+	 */
+	public void addHl7Precondition(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040Precondition value) {
+		getPrecondition().add(value);
+	}
+
+	/**
+	 * Adds a hl7ApproachSiteCode If laterility of the administration is known,
+	 * it MAY be recorded according to the HL7 value set.Recommendation for
+	 * eVACDOC: omit
+	 */
+	public void clearHl7ApproachSiteCode() {
+		getApproachSiteCode().clear();
+	}
+
+	/**
+	 * Adds a hl7Author The author of the statement SHALL be specified either
+	 * here or in one of the ancestors.
+	 */
+	public void clearHl7Author() {
+		getAuthor().clear();
+	}
+
+	/**
+	 * Adds a hl7EntryRelationship Immunization series number, if applicable.
+	 */
+	public void clearHl7EntryRelationship() {
+		getEntryRelationship().clear();
+	}
+
+	/**
+	 * Adds a hl7Performer This MAY be used to indicate who has administered the
+	 * immunization.
+	 */
+	public void clearHl7Performer() {
+		getPerformer().clear();
+	}
+
+	/**
+	 * Adds a hl7Precondition Recommendation-Category according to the swiss
+	 * vaccination plan.
+	 */
+	public void clearHl7Precondition() {
+		getPrecondition().clear();
+	}
+
+	/**
 	 * Gets the hl7Code
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CD getHl7Code() {
@@ -310,59 +364,6 @@ public class ChpccEntryImmunization
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ED getHl7Text() {
 		return text;
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
-	 * "2.16.840.1.113883.6.96", "SNOMED CT", null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedCode2168401113883696SnomedCtNull() {
-		return createHl7CodeFixedValue("2.16.840.1.113883.6.96", "SNOMED CT", null);
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CD, filled by:
-	 * "IMMUNIZ", "2.16.840.1.113883.5.4", "ActCode"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CD getPredefinedCodeImmuniz216840111388354ActCode() {
-		return createHl7CodeFixedValue("IMMUNIZ", "2.16.840.1.113883.5.4", "ActCode");
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "CAUS", null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipCausNull() {
-		return createHl7EntryRelationshipFixedValue("CAUS", null);
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "RSON", null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipRsonNull() {
-		return createHl7EntryRelationshipFixedValue("RSON", null);
-	}
-
-	/**
-	 * Adds a predefined
-	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship,
-	 * filled by: "SUBJ", null
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship getPredefinedEntryRelationshipSubjNull() {
-		return createHl7EntryRelationshipFixedValue("SUBJ", null);
 	}
 
 	/**

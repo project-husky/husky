@@ -32,6 +32,48 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class MedicationListSectionContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 
+	/**
+	 * Creates fixed contents for CDA Element hl7Code
+	 *
+	 * @param code
+	 *            the desired fixed value for this argument.
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code,
+			String codeSystem, String codeSystemName, String displayName) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
+		retVal.setCode(code);
+		retVal.setCodeSystem(codeSystem);
+		retVal.setCodeSystemName(codeSystemName);
+		retVal.setDisplayName(displayName);
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element hl7TemplateId
+	 *
+	 * @param root
+	 *            the desired fixed value for this argument.
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
+	 * "10160-0", "2.16.840.1.113883.6.1", "LOINC", "History of medication use"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedCode101600216840111388361LoincHistoryOfMedicationUse() {
+		return createHl7CodeFixedValue("10160-0", "2.16.840.1.113883.6.1", "LOINC",
+				"History of medication use");
+	}
+
 	public MedicationListSectionContentModule() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.44"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.2.5"));
@@ -68,37 +110,6 @@ public class MedicationListSectionContentModule
 	}
 
 	/**
-	 * Creates fixed contents for CDA Element hl7Code
-	 *
-	 * @param code
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue(String code,
-			String codeSystem, String codeSystemName, String displayName) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
-		retVal.setCode(code);
-		retVal.setCodeSystem(codeSystem);
-		retVal.setCodeSystemName(codeSystemName);
-		retVal.setDisplayName(displayName);
-		return retVal;
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7TemplateId
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
-			String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
-		retVal.setRoot(root);
-		return retVal;
-	}
-
-	/**
 	 * Gets the hl7Code
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7Code() {
@@ -131,17 +142,6 @@ public class MedicationListSectionContentModule
 	 */
 	public org.ehealth_connector.common.hl7cdar2.ST getHl7Title() {
 		return title;
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
-	 * "10160-0", "2.16.840.1.113883.6.1", "LOINC", "History of medication use"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedCode101600216840111388361LoincHistoryOfMedicationUse() {
-		return createHl7CodeFixedValue("10160-0", "2.16.840.1.113883.6.1", "LOINC",
-				"History of medication use");
 	}
 
 	/**

@@ -30,12 +30,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachHeaderDocumentTemplateIdsCdaChv20StructuredBody
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
 
-	public CdachHeaderDocumentTemplateIdsCdaChv20StructuredBody() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.1.9"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.2"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.1"));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
@@ -51,21 +45,27 @@ public class CdachHeaderDocumentTemplateIdsCdaChv20StructuredBody
 	}
 
 	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
+	 * "2.16.756.5.30.1.1.1.1.4"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId21675653011114() {
+		return createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.4");
+	}
+
+	public CdachHeaderDocumentTemplateIdsCdaChv20StructuredBody() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.1.9"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.2"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.1"));
+	}
+
+	/**
 	 * Gets the hl7TemplateId CDA-CH v2.0 specification. This is an
 	 * informational reference, only.
 	 */
 	public java.util.List<org.ehealth_connector.common.hl7cdar2.II> getHl7TemplateId() {
 		return templateId;
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.II, filled by:
-	 * "2.16.756.5.30.1.1.1.1.4"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.II getPredefinedTemplateId21675653011114() {
-		return createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.1.1.4");
 	}
 
 	/**

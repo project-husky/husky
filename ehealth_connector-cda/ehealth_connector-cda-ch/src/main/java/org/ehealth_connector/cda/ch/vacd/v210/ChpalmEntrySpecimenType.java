@@ -29,9 +29,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class ChpalmEntrySpecimenType
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040PlayingEntity {
 
-	public ChpalmEntrySpecimenType() {
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
@@ -53,6 +50,19 @@ public class ChpalmEntrySpecimenType
 	}
 
 	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
+	 * "LOINC", "2.16.756.5.30.2.1.1.10", "CDA-CH Material"
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedCodeLoinc21675653021110CdaChMaterial() {
+		return createHl7CodeFixedValue("LOINC", "2.16.756.5.30.2.1.1.10", "CDA-CH Material");
+	}
+
+	public ChpalmEntrySpecimenType() {
+	}
+
+	/**
 	 * Gets the hl7Code IHE XD-LAB requires coding of the specimen. However,
 	 * since the laboratory results have to be coded with LOINC, the specimen is
 	 * already defined via the 'System' axis of LOINC. Therefore the following,
@@ -60,16 +70,6 @@ public class ChpalmEntrySpecimenType
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7Code() {
 		return code;
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
-	 * "LOINC", "2.16.756.5.30.2.1.1.10", "CDA-CH Material"
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedCodeLoinc21675653021110CdaChMaterial() {
-		return createHl7CodeFixedValue("LOINC", "2.16.756.5.30.2.1.1.10", "CDA-CH Material");
 	}
 
 	/**

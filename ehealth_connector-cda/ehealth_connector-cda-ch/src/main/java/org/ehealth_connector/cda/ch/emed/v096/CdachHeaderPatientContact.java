@@ -29,12 +29,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachHeaderPatientContact
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 {
 
-	public CdachHeaderPatientContact() {
-		super.getTypeCode().add("IND");
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.43"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.2.4"));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
@@ -47,6 +41,12 @@ public class CdachHeaderPatientContact
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public CdachHeaderPatientContact() {
+		super.getTypeCode().add("IND");
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.43"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.2.4"));
 	}
 
 	/**

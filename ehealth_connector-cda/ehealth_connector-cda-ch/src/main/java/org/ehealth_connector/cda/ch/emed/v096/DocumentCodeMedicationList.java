@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.emed.v096;
 
 import java.util.ArrayList;
+
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 
@@ -28,6 +29,8 @@ import org.ehealth_connector.common.basetypes.CodeBaseType;
  * Element description: IHE PHARM PML document code
  */
 public class DocumentCodeMedicationList extends org.ehealth_connector.common.hl7cdar2.CE {
+
+	private ArrayList<org.ehealth_connector.common.Code> vocabTranslationCode = new ArrayList<org.ehealth_connector.common.Code>();
 
 	public DocumentCodeMedicationList() {
 		super.setCode("56445-0");
@@ -42,8 +45,6 @@ public class DocumentCodeMedicationList extends org.ehealth_connector.common.hl7
 				.withDisplayName("Medication summary document (record artifact)").build()))
 						.getHl7CdaR2Cd());
 	}
-
-	private ArrayList<org.ehealth_connector.common.Code> vocabTranslationCode = new ArrayList<org.ehealth_connector.common.Code>();
 
 	/**
 	 * Gets the hl7Translation Translation to the Swiss EPR XDS.b metadata.

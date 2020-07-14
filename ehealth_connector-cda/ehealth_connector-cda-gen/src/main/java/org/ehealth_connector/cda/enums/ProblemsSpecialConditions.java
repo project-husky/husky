@@ -46,6 +46,7 @@ public enum ProblemsSpecialConditions {
 	 * <div class="fr">Aucun antécédent familial connu</div>
 	 */
 	FAMILY_HISTORY_UNKNOWN("407559004", "Family History Unknown");
+
 	public static final String NO_SIGNIFICANT_MEDICAL_HISTORY_CODE = "160243008";
 	public static final String NO_CURRENT_PROBLEMS_OR_DISABILITY_CODE = "160245001";
 	public static final String HISTORY_OF_PAST_ILLNESS_UNKNOWN_CODE = "396782006";

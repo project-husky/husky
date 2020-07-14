@@ -30,10 +30,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class CdachOtherAuthor extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Author {
 
-	public CdachOtherAuthor() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.9.23"));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7FunctionCode
 	 */
@@ -55,6 +51,19 @@ public class CdachOtherAuthor extends org.ehealth_connector.common.hl7cdar2.POCD
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedFunctionCode() {
+		return createHl7FunctionCodeFixedValue();
+	}
+
+	public CdachOtherAuthor() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.9.23"));
 	}
 
 	/**
@@ -83,15 +92,6 @@ public class CdachOtherAuthor extends org.ehealth_connector.common.hl7cdar2.POCD
 	 */
 	public org.ehealth_connector.common.hl7cdar2.TS getHl7Time() {
 		return time;
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedFunctionCode() {
-		return createHl7FunctionCodeFixedValue();
 	}
 
 	/**

@@ -26,6 +26,24 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdarelatedEntity
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedEntity {
 
+	/**
+	 * Creates fixed contents for CDA Element hl7Code
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue() {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
+		return retVal;
+	}
+
+	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedCode() {
+		return createHl7CodeFixedValue();
+	}
+
 	public CdarelatedEntity() {
 	}
 
@@ -58,15 +76,6 @@ public class CdarelatedEntity
 	}
 
 	/**
-	 * Creates fixed contents for CDA Element hl7Code
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.CE createHl7CodeFixedValue() {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.CE retVal = factory.createCE();
-		return retVal;
-	}
-
-	/**
 	 * Gets the hl7Code
 	 */
 	public org.ehealth_connector.common.hl7cdar2.CE getHl7Code() {
@@ -85,15 +94,6 @@ public class CdarelatedEntity
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040Person getHl7RelatedPerson() {
 		return relatedPerson;
-	}
-
-	/**
-	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
-	 * 
-	 * @return the predefined element.
-	 */
-	public static org.ehealth_connector.common.hl7cdar2.CE getPredefinedCode() {
-		return createHl7CodeFixedValue();
 	}
 
 	/**

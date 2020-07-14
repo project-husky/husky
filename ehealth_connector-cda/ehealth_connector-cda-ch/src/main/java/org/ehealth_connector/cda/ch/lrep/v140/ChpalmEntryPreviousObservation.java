@@ -29,14 +29,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class ChpalmEntryPreviousObservation
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
-	public ChpalmEntryPreviousObservation() {
-		super.getClassCode().add("OBS");
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.22"));
-		super.setStatusCode(createHl7StatusCodeFixedValue());
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7StatusCode
 	 */
@@ -58,6 +50,14 @@ public class ChpalmEntryPreviousObservation
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public ChpalmEntryPreviousObservation() {
+		super.getClassCode().add("OBS");
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.22"));
+		super.setStatusCode(createHl7StatusCodeFixedValue());
 	}
 
 	/**

@@ -25,12 +25,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class CdacomponentOf extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Component1 {
 
-	public CdacomponentOf() {
-		super.setTypeCode(org.ehealth_connector.common.hl7cdar2.ActRelationshipHasComponent
-				.fromValue("COMP"));
-		super.setEncompassingEncounter(createHl7EncompassingEncounterFixedValue("ENC", "EVN"));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7EncompassingEncounter
 	 *
@@ -47,6 +41,12 @@ public class CdacomponentOf extends org.ehealth_connector.common.hl7cdar2.POCDMT
 		retVal.getClassCode().add(classCode);
 		retVal.getMoodCode().add(moodCode);
 		return retVal;
+	}
+
+	public CdacomponentOf() {
+		super.setTypeCode(org.ehealth_connector.common.hl7cdar2.ActRelationshipHasComponent
+				.fromValue("COMP"));
+		super.setEncompassingEncounter(createHl7EncompassingEncounterFixedValue("ENC", "EVN"));
 	}
 
 	/**

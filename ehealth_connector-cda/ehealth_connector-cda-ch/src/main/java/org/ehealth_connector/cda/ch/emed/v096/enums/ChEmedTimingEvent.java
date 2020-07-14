@@ -178,8 +178,7 @@ public enum ChEmedTimingEvent implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	DURING_BREAKFAST_L2("CM", "2.16.840.1.113883.5.139", "During breakfast", "During breakfast",
-			"Während des Frühstücks", "Pendant le petit-déjeuner",
-			"Durante la prima colazione"),
+			"Während des Frühstücks", "Pendant le petit-déjeuner", "Durante la prima colazione"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">During dinner</div>

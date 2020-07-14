@@ -82,6 +82,7 @@ public enum ImmunologicalDisorders {
 	 * protéine S</div>
 	 */
 	PROTEIN_S_DEFICIENCY_DISEASE("1563006", "Protein S deficiency disease ");
+
 	public static final String AUTOIMMUNE_DISEASE_CODE = "85828009";
 	public static final String RHEUMATISM_CODE = "396332003";
 	public static final String DRUG_INDUCED_IMMUNODEFICIENCY_CODE = "234645009";

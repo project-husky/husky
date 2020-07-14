@@ -25,15 +25,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class PrescribedQuantityEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Supply {
 
-	public PrescribedQuantityEntryContentModule() {
-		super.setClassCode(org.ehealth_connector.common.hl7cdar2.ActClassSupply.fromValue("SPLY"));
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("RQO"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.8"));
-		super.setIndependentInd(createHl7IndependentIndFixedValue("false"));
-		super.setQuantity(createHl7QuantityFixedValue("1"));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7IndependentInd
 	 *
@@ -74,6 +65,15 @@ public class PrescribedQuantityEntryContentModule
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public PrescribedQuantityEntryContentModule() {
+		super.setClassCode(org.ehealth_connector.common.hl7cdar2.ActClassSupply.fromValue("SPLY"));
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("RQO"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.8"));
+		super.setIndependentInd(createHl7IndependentIndFixedValue("false"));
+		super.setQuantity(createHl7QuantityFixedValue("1"));
 	}
 
 	/**

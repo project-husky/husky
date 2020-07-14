@@ -27,12 +27,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class ChpalmEntryLaboratoryReportDataProcessingEntry
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry {
 
-	public ChpalmEntryLaboratoryReportDataProcessingEntry() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.4"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1"));
-		super.setAct(createHl7ActFixedValue("ACT", "EVN"));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7Act
 	 *
@@ -65,6 +59,12 @@ public class ChpalmEntryLaboratoryReportDataProcessingEntry
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public ChpalmEntryLaboratoryReportDataProcessingEntry() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.4"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.3.1"));
+		super.setAct(createHl7ActFixedValue("ACT", "EVN"));
 	}
 
 	/**

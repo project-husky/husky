@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.vacd.v210;
 
 import java.util.ArrayList;
+
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
@@ -41,13 +42,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class ChpccEntryManufacturedProduct
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ManufacturedProduct {
-
-	public ChpccEntryManufacturedProduct() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.94"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.7.2"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.53"));
-		super.getId().add(createHl7IdFixedValue("NAV", "2.51.1.1"));
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Id
@@ -79,6 +73,13 @@ public class ChpccEntryManufacturedProduct
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public ChpccEntryManufacturedProduct() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.94"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.7.2"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.53"));
+		super.getId().add(createHl7IdFixedValue("NAV", "2.51.1.1"));
 	}
 
 	/**

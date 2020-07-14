@@ -51,6 +51,7 @@ public enum MaxWaitReaction {
 	@XmlEnumValue("throwException")
 	THROW_EXCEPTION("throwException"), @XmlEnumValue("returnValidationError")
 	RETURN_VALIDATION_ERROR("returnValidationError");
+
 	public static MaxWaitReaction fromValue(String v) {
 		for (MaxWaitReaction c : MaxWaitReaction.values()) {
 			if (c.value.equals(v)) {

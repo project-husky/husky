@@ -29,29 +29,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class DispenseSectionContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 
-	public DispenseSectionContentModule() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.2.3"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.11"));
-		super.setCode(createHl7CodeFixedValue("60590-7", "2.16.840.1.113883.6.1", "LOINC",
-				"Medication dispensed.brief"));
-	}
-
-	/**
-	 * Adds a hl7Author Information about the author of a CDA document, section
-	 * or entry. An author MAY be a person or a device.
-	 */
-	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
-		getAuthor().add(value);
-	}
-
-	/**
-	 * Adds a hl7Author Information about the author of a CDA document, section
-	 * or entry. An author MAY be a person or a device.
-	 */
-	public void clearHl7Author() {
-		getAuthor().clear();
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
@@ -81,6 +58,29 @@ public class DispenseSectionContentModule
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public DispenseSectionContentModule() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.2.3"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.11"));
+		super.setCode(createHl7CodeFixedValue("60590-7", "2.16.840.1.113883.6.1", "LOINC",
+				"Medication dispensed.brief"));
+	}
+
+	/**
+	 * Adds a hl7Author Information about the author of a CDA document, section
+	 * or entry. An author MAY be a person or a device.
+	 */
+	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
+		getAuthor().add(value);
+	}
+
+	/**
+	 * Adds a hl7Author Information about the author of a CDA document, section
+	 * or entry. An author MAY be a person or a device.
+	 */
+	public void clearHl7Author() {
+		getAuthor().clear();
 	}
 
 	/**

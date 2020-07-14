@@ -38,10 +38,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class ChpalmHeaderDocumentationOfLaboratoryPerformer
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf {
 
-	public ChpalmHeaderDocumentationOfLaboratoryPerformer() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.28"));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
@@ -54,6 +50,10 @@ public class ChpalmHeaderDocumentationOfLaboratoryPerformer
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public ChpalmHeaderDocumentationOfLaboratoryPerformer() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.28"));
 	}
 
 	/**

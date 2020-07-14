@@ -99,8 +99,7 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	CLINICAL_GENETICS("394580004", "2.16.840.1.113883.6.96", "Clinical genetics (qualifier value)",
-			"Clinical genetics", "Medizinische Genetik", "Génétique médicale",
-			"Genetica medica"),
+			"Clinical genetics", "Medizinische Genetik", "Génétique médicale", "Genetica medica"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Clinical haematology</div>

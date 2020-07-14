@@ -26,11 +26,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class Cdaauthorization
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Authorization {
 
-	public Cdaauthorization() {
-		super.getTypeCode().add("AUTH");
-		super.setConsent(createHl7ConsentFixedValue("CONS", "EVN"));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7Consent
 	 *
@@ -47,6 +42,11 @@ public class Cdaauthorization
 		retVal.getClassCode().add(classCode);
 		retVal.getMoodCode().add(moodCode);
 		return retVal;
+	}
+
+	public Cdaauthorization() {
+		super.getTypeCode().add("AUTH");
+		super.setConsent(createHl7ConsentFixedValue("CONS", "EVN"));
 	}
 
 	/**

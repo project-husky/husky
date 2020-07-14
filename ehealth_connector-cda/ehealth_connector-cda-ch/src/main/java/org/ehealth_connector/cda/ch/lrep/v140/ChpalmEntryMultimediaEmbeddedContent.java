@@ -33,27 +33,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class ChpalmEntryMultimediaEmbeddedContent
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ObservationMedia {
 
-	public ChpalmEntryMultimediaEmbeddedContent() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.18"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.83"));
-		super.setLanguageCode(createHl7LanguageCodeFixedValue());
-		super.setValue(createHl7ValueFixedValue("B64"));
-	}
-
-	/**
-	 * Adds a hl7Id IDs for this item CAN be filled for traceability.
-	 */
-	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
-		getId().add(value);
-	}
-
-	/**
-	 * Adds a hl7Id IDs for this item CAN be filled for traceability.
-	 */
-	public void clearHl7Id() {
-		getId().clear();
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7LanguageCode
 	 */
@@ -90,6 +69,27 @@ public class ChpalmEntryMultimediaEmbeddedContent
 		return retVal;
 		// TODO: Contents shall be taken from enum:
 		// org.ehealth_connector.cda.ch.lrep.v140.enums.MultimediaEmbeddedMediaTypes
+	}
+
+	public ChpalmEntryMultimediaEmbeddedContent() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.18"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.83"));
+		super.setLanguageCode(createHl7LanguageCodeFixedValue());
+		super.setValue(createHl7ValueFixedValue("B64"));
+	}
+
+	/**
+	 * Adds a hl7Id IDs for this item CAN be filled for traceability.
+	 */
+	public void addHl7Id(org.ehealth_connector.common.hl7cdar2.II value) {
+		getId().add(value);
+	}
+
+	/**
+	 * Adds a hl7Id IDs for this item CAN be filled for traceability.
+	 */
+	public void clearHl7Id() {
+		getId().clear();
 	}
 
 	/**

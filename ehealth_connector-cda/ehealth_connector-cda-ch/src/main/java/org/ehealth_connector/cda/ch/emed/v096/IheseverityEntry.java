@@ -17,6 +17,7 @@
 package org.ehealth_connector.cda.ch.emed.v096;
 
 import java.util.ArrayList;
+
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
@@ -30,43 +31,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class IheseverityEntry
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
-
-	public IheseverityEntry() {
-		super.getClassCode().add("OBS");
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.1"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.55"));
-		super.setCode(createHl7CodeFixedValue("SEV", "2.16.840.1.113883.5.4", null, null));
-		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed")
-				.withCodeSystem("2.16.840.1.113883.5.14").build()));
-		statusCode = (new Code(CodeBaseType.builder().withCode("completed")
-				.withCodeSystem("2.16.840.1.113883.5.14").build())).getHl7CdaR2Cs();
-		vocabValueCode.add(new Code(CodeBaseType.builder().withCode("L")
-				.withCodeSystem("2.16.840.1.113883.5.1063").build()));
-		vocabValueCode.add(new Code(CodeBaseType.builder().withCode("H")
-				.withCodeSystem("2.16.840.1.113883.5.1063").build()));
-		vocabValueCode.add(new Code(CodeBaseType.builder().withCode("M")
-				.withCodeSystem("2.16.840.1.113883.5.1063").build()));
-	}
-
-	private ArrayList<org.ehealth_connector.common.Code> vocabStatusCodeCode = new ArrayList<org.ehealth_connector.common.Code>();
-
-	private ArrayList<org.ehealth_connector.common.Code> vocabValueCode = new ArrayList<org.ehealth_connector.common.Code>();
-
-	/**
-	 * Adds a hl7Value
-	 */
-	public void addHl7Value(org.ehealth_connector.common.hl7cdar2.CD value) {
-		getValue().add(value);
-	}
-
-	/**
-	 * Adds a hl7Value
-	 */
-	public void clearHl7Value() {
-		getValue().clear();
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
@@ -97,6 +61,43 @@ public class IheseverityEntry
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	private ArrayList<org.ehealth_connector.common.Code> vocabStatusCodeCode = new ArrayList<org.ehealth_connector.common.Code>();
+
+	private ArrayList<org.ehealth_connector.common.Code> vocabValueCode = new ArrayList<org.ehealth_connector.common.Code>();
+
+	public IheseverityEntry() {
+		super.getClassCode().add("OBS");
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.1"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.55"));
+		super.setCode(createHl7CodeFixedValue("SEV", "2.16.840.1.113883.5.4", null, null));
+		vocabStatusCodeCode.add(new Code(CodeBaseType.builder().withCode("completed")
+				.withCodeSystem("2.16.840.1.113883.5.14").build()));
+		statusCode = (new Code(CodeBaseType.builder().withCode("completed")
+				.withCodeSystem("2.16.840.1.113883.5.14").build())).getHl7CdaR2Cs();
+		vocabValueCode.add(new Code(CodeBaseType.builder().withCode("L")
+				.withCodeSystem("2.16.840.1.113883.5.1063").build()));
+		vocabValueCode.add(new Code(CodeBaseType.builder().withCode("H")
+				.withCodeSystem("2.16.840.1.113883.5.1063").build()));
+		vocabValueCode.add(new Code(CodeBaseType.builder().withCode("M")
+				.withCodeSystem("2.16.840.1.113883.5.1063").build()));
+	}
+
+	/**
+	 * Adds a hl7Value
+	 */
+	public void addHl7Value(org.ehealth_connector.common.hl7cdar2.CD value) {
+		getValue().add(value);
+	}
+
+	/**
+	 * Adds a hl7Value
+	 */
+	public void clearHl7Value() {
+		getValue().clear();
 	}
 
 	/**

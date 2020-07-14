@@ -31,15 +31,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  */
 public class CdachvacdHeaderDocumentCode extends org.ehealth_connector.common.hl7cdar2.CE {
 
-	public CdachvacdHeaderDocumentCode() {
-		super.setCode("11369-6");
-		super.setCodeSystem("2.16.840.1.113883.6.1");
-		super.setCodeSystemName("LOINC");
-		super.setDisplayName("HISTORY OF IMMUNIZATIONS");
-		super.getTranslation().add(createHl7TranslationFixedValue("41000179103",
-				"2.16.840.1.113883.6.96", "SNOMED CT", "Immunization record"));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7Translation
 	 *
@@ -61,6 +52,15 @@ public class CdachvacdHeaderDocumentCode extends org.ehealth_connector.common.hl
 		retVal.setCodeSystemName(codeSystemName);
 		retVal.setDisplayName(displayName);
 		return retVal;
+	}
+
+	public CdachvacdHeaderDocumentCode() {
+		super.setCode("11369-6");
+		super.setCodeSystem("2.16.840.1.113883.6.1");
+		super.setCodeSystemName("LOINC");
+		super.setDisplayName("HISTORY OF IMMUNIZATIONS");
+		super.getTranslation().add(createHl7TranslationFixedValue("41000179103",
+				"2.16.840.1.113883.6.96", "SNOMED CT", "Immunization record"));
 	}
 
 	/**

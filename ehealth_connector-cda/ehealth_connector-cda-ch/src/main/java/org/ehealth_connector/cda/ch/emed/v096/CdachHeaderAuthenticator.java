@@ -31,11 +31,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachHeaderAuthenticator
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Authenticator {
 
-	public CdachHeaderAuthenticator() {
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.6"));
-		super.setSignatureCode(createHl7SignatureCodeFixedValue("S"));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7SignatureCode
 	 *
@@ -62,6 +57,11 @@ public class CdachHeaderAuthenticator
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public CdachHeaderAuthenticator() {
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.6"));
+		super.setSignatureCode(createHl7SignatureCodeFixedValue("S"));
 	}
 
 	/**

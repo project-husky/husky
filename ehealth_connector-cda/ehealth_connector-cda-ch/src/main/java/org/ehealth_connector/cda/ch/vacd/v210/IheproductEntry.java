@@ -21,20 +21,12 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 /**
  * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.5.3.1.4.7.2 Template
  * description: <div>The product entry describes a medication or immunization
- * used in a
- * &lt;substanceAdministration&gt; <span style="line-height: 1.22;">or
+ * used in a &lt;substanceAdministration&gt; <span style="line-height: 1.22;">or
  * &lt;supply&gt; act. It adopts the constraints of the ASTM/HL7 Continuity of
  * Care Document.</span></div>
  */
 public class IheproductEntry
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ManufacturedProduct {
-
-	public IheproductEntry() {
-		super.setClassCode(org.ehealth_connector.common.hl7cdar2.RoleClassManufacturedProduct
-				.fromValue("MANU"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.7.2"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.53"));
-	}
 
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
@@ -48,6 +40,13 @@ public class IheproductEntry
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public IheproductEntry() {
+		super.setClassCode(org.ehealth_connector.common.hl7cdar2.RoleClassManufacturedProduct
+				.fromValue("MANU"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.7.2"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.53"));
 	}
 
 	/**

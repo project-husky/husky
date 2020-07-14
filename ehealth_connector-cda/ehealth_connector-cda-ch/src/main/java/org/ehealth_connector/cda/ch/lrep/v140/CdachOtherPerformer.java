@@ -31,15 +31,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachOtherPerformer
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer1 {
 
-	public CdachOtherPerformer() {
-		super.setTypeCode(
-				org.ehealth_connector.common.hl7cdar2.XServiceEventPerformer.fromValue("PRF"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.9.31"));
-		super.getTemplateId()
-				.add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.24.3.5"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.323"));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7TemplateId
 	 *
@@ -52,6 +43,15 @@ public class CdachOtherPerformer
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public CdachOtherPerformer() {
+		super.setTypeCode(
+				org.ehealth_connector.common.hl7cdar2.XServiceEventPerformer.fromValue("PRF"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.9.31"));
+		super.getTemplateId()
+				.add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.1.24.3.5"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.12.323"));
 	}
 
 	/**

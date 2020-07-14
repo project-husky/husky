@@ -30,6 +30,20 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachEntryExternalDocument
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ExternalDocument {
 
+	/**
+	 * Creates fixed contents for CDA Element hl7TemplateId
+	 *
+	 * @param root
+	 *            the desired fixed value for this argument.
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
+			String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
 	public CdachEntryExternalDocument() {
 		super.setClassCode("DOC");
 		super.getMoodCode().add("EVN");
@@ -48,20 +62,6 @@ public class CdachEntryExternalDocument
 	 */
 	public void clearHl7Id() {
 		getId().clear();
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7TemplateId
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7TemplateIdFixedValue(
-			String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
-		retVal.setRoot(root);
-		return retVal;
 	}
 
 	/**

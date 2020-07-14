@@ -62,6 +62,7 @@ public enum HistoryOfPastIllness {
 	 * <div class="de">Tetanus</div> <div class="fr">Tétanos</div>
 	 */
 	TETANUS("76902006", "Tetanus");
+
 	public static final String HO_CHICKENPOX_CODE = "38907003";
 	public static final String HO_MEASLES_CODE = "14189004";
 	public static final String HO_MUMPS_CODE = "36989005";

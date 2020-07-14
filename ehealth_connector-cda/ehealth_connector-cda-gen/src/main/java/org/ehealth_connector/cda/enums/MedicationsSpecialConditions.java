@@ -47,6 +47,7 @@ public enum MedicationsSpecialConditions {
 	 * médicaments.</div>
 	 */
 	PATIENT_NOT_ON_SELF_MEDICATIONS("408350003", "Patient Not On Self-Medications");
+
 	public static final String CODE_SYSTEM_NAME = "SNOMED CT";
 	public static final String CODE_SYSTEM_OID = "2.16.840.1.113883.6.96";
 	public static final String DRUG_TREATMENT_UNKNOWN_CODE = "182904002";

@@ -724,7 +724,8 @@ public class DocumentMetadata {
 	 *
 	 * Method to set the AvailabilityStatusType;
 	 *
-	 * @param availabilityStatus the availability status to set
+	 * @param availabilityStatus
+	 *            the availability status to set
 	 */
 	public void setAvailabilityStatus(AvailabilityStatusType availabilityStatus) {
 		xDoc.setAvailabilityStatus(availabilityStatus);

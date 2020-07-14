@@ -29,12 +29,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachHeaderInsurance
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant1 {
 
-	public CdachHeaderInsurance() {
-		super.getTypeCode().add("COV");
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.15"));
-		super.setAssociatedEntity(createHl7AssociatedEntityFixedValue("PAYOR"));
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7AssociatedEntity
 	 *
@@ -62,6 +56,12 @@ public class CdachHeaderInsurance
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public CdachHeaderInsurance() {
+		super.getTypeCode().add("COV");
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.2.15"));
+		super.setAssociatedEntity(createHl7AssociatedEntityFixedValue("PAYOR"));
 	}
 
 	/**

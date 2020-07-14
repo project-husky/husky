@@ -29,18 +29,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class ChpccEntryPregnancyObservation
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
-	public ChpccEntryPregnancyObservation() {
-		super.getClassCode().add("OBS");
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.92"));
-		super.getTemplateId()
-				.add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13.5"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13"));
-		super.setCode(createHl7CodeFixedValue("2.16.840.1.113883.6.1", "LOINC"));
-		super.setStatusCode(createHl7StatusCodeFixedValue());
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
@@ -79,6 +67,18 @@ public class ChpccEntryPregnancyObservation
 		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
 		retVal.setRoot(root);
 		return retVal;
+	}
+
+	public ChpccEntryPregnancyObservation() {
+		super.getClassCode().add("OBS");
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.92"));
+		super.getTemplateId()
+				.add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13.5"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.13"));
+		super.setCode(createHl7CodeFixedValue("2.16.840.1.113883.6.1", "LOINC"));
+		super.setStatusCode(createHl7StatusCodeFixedValue());
 	}
 
 	/**
@@ -139,6 +139,14 @@ public class ChpccEntryPregnancyObservation
 	}
 
 	/**
+	 * Sets the hl7EffectiveTime Period of the finding (physiologically relevant
+	 * time span of this observation).
+	 */
+	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
+		this.effectiveTime = value;
+	}
+
+	/**
 	 * Sets the hl7EffectiveTime Date or timestamp of the finding
 	 * (physiologically relevant time of this observation).
 	 */
@@ -147,14 +155,6 @@ public class ChpccEntryPregnancyObservation
 		IVLTS ivlts = factory.createIVLTS();
 		ivlts.setValue(value.getValue());
 		this.effectiveTime = ivlts;
-	}
-
-	/**
-	 * Sets the hl7EffectiveTime Period of the finding (physiologically relevant
-	 * time span of this observation).
-	 */
-	public void setHl7EffectiveTime(org.ehealth_connector.common.hl7cdar2.IVLTS value) {
-		this.effectiveTime = value;
 	}
 
 	/**

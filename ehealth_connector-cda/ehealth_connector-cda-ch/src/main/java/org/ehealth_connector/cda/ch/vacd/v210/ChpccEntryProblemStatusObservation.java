@@ -29,36 +29,6 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class ChpccEntryProblemStatusObservation
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
-	public ChpccEntryProblemStatusObservation() {
-		super.getClassCode().add("OBS");
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.100"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.1.1"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.57"));
-		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.50"));
-		super.setCode(
-				createHl7CodeFixedValue("33999-4", "2.16.840.1.113883.6.1", "LOINC", "Status"));
-		super.setStatusCode(createHl7StatusCodeFixedValue());
-		super.getValue().add(createHl7ValueFixedValue("2.16.840.1.113883.6.96", "SNOMED CT"));
-	}
-
-	/**
-	 * Adds a hl7Author The author of the statement SHALL be specified either
-	 * here or in one of the ancestors.
-	 */
-	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
-		getAuthor().add(value);
-	}
-
-	/**
-	 * Adds a hl7Author The author of the statement SHALL be specified either
-	 * here or in one of the ancestors.
-	 */
-	public void clearHl7Author() {
-		getAuthor().clear();
-	}
-
 	/**
 	 * Creates fixed contents for CDA Element hl7Code
 	 *
@@ -120,6 +90,36 @@ public class ChpccEntryProblemStatusObservation
 		retVal.setCodeSystem(codeSystem);
 		retVal.setCodeSystemName(codeSystemName);
 		return retVal;
+	}
+
+	public ChpccEntryProblemStatusObservation() {
+		super.getClassCode().add("OBS");
+		super.setMoodCode(
+				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.100"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.5.3.1.4.1.1"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.57"));
+		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.840.1.113883.10.20.1.50"));
+		super.setCode(
+				createHl7CodeFixedValue("33999-4", "2.16.840.1.113883.6.1", "LOINC", "Status"));
+		super.setStatusCode(createHl7StatusCodeFixedValue());
+		super.getValue().add(createHl7ValueFixedValue("2.16.840.1.113883.6.96", "SNOMED CT"));
+	}
+
+	/**
+	 * Adds a hl7Author The author of the statement SHALL be specified either
+	 * here or in one of the ancestors.
+	 */
+	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
+		getAuthor().add(value);
+	}
+
+	/**
+	 * Adds a hl7Author The author of the statement SHALL be specified either
+	 * here or in one of the ancestors.
+	 */
+	public void clearHl7Author() {
+		getAuthor().clear();
 	}
 
 	/**

@@ -30,6 +30,19 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 public class CdachOtherOrganizationCompilationGlnNameAddrTelecom
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organization {
 
+	/**
+	 * Creates fixed contents for CDA Element hl7Id
+	 *
+	 * @param root
+	 *            the desired fixed value for this argument.
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.II createHl7IdFixedValue(String root) {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
+		retVal.setRoot(root);
+		return retVal;
+	}
+
 	public CdachOtherOrganizationCompilationGlnNameAddrTelecom() {
 		super.getId().add(createHl7IdFixedValue("2.51.1.3"));
 	}
@@ -76,19 +89,6 @@ public class CdachOtherOrganizationCompilationGlnNameAddrTelecom
 	 */
 	public void clearHl7Telecom() {
 		getTelecom().clear();
-	}
-
-	/**
-	 * Creates fixed contents for CDA Element hl7Id
-	 *
-	 * @param root
-	 *            the desired fixed value for this argument.
-	 */
-	private static org.ehealth_connector.common.hl7cdar2.II createHl7IdFixedValue(String root) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.II retVal = factory.createII();
-		retVal.setRoot(root);
-		return retVal;
 	}
 
 	/**

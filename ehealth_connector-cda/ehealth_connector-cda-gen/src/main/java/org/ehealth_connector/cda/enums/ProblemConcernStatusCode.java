@@ -54,6 +54,7 @@ public enum ProblemConcernStatusCode {
 	 * médecin.</div>
 	 */
 	ABORTED("aborted", "aborted");
+
 	public static final String ACTIVE_CODE = "active";
 	public static final String COMPLETED_CODE = "completed";
 	public static final String SUSPENDED_CODE = "suspended";
