@@ -7,19 +7,19 @@
 	<parent>
 		<groupId>org.ehealth_connector.communication</groupId>
 		<artifactId>ehealth_connector-communication</artifactId>
-		<version>1.8.0-202007</version>
+		<version>1.9-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.ehealth_connector.communication</groupId>
 			<artifactId>ehealth_connector-communication-gen</artifactId>
-			<version>1.8.0-202007</version>
+			<version>1.9-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.ehealth_connector.cda.ch</groupId>
 			<artifactId>ehealth_connector-cda-ch</artifactId>
-			<version>1.8.0-202007</version>
+			<version>1.9-SNAPSHOT</version>
 		</dependency>
 		
 		<dependency>
@@ -52,21 +52,21 @@
 		<dependency>
 			<groupId>org.ehealth_connector.cda</groupId>
 			<artifactId>ehealth_connector-cda-gen</artifactId>
-			<version>1.8.0-202007</version>
+			<version>1.9-SNAPSHOT</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.ehealth_connector.cda.ch</groupId>
 			<artifactId>ehealth_connector-cda-ch</artifactId>
-			<version>1.8.0-202007</version>
+			<version>1.9-SNAPSHOT</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.ehealth_connector.communication</groupId>
 			<artifactId>ehealth_connector-communication-gen</artifactId>
-			<version>1.8.0-202007</version>
+			<version>1.9-SNAPSHOT</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
