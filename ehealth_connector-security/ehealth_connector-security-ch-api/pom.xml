@@ -6,14 +6,14 @@
 	<parent>
 		<groupId>org.ehealth_connector.security</groupId>
 		<artifactId>ehealth_connector-security</artifactId>
-		<version>1.8-SNAPSHOT</version>
+		<version>1.8.0-202007</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.ehealth_connector.security</groupId>
 			<artifactId>ehealth_connector-security-gen-api</artifactId>
-			<version>1.8-SNAPSHOT</version>
+			<version>1.8.0-202007</version>
 		</dependency>
 	</dependencies>
 
