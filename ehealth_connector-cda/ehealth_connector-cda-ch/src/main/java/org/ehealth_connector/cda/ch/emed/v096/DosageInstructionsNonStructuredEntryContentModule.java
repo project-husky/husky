@@ -40,11 +40,28 @@ public class DosageInstructionsNonStructuredEntryContentModule
 		return retVal;
 	}
 
+	/**
+	 * Creates fixed contents for CDA Element hl7Consumable, containing an hl7ManufacturedMaterial with a null flavor NA
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Consumable createHl7ConsumableNa() {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Material material = factory.createPOCDMT000040Material();
+		material.getNullFlavor().add("NA");
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040ManufacturedProduct product =
+				factory.createPOCDMT000040ManufacturedProduct();
+		product.setManufacturedMaterial(material);
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Consumable consumable =
+				factory.createPOCDMT000040Consumable();
+		consumable.setManufacturedProduct(product);
+		return consumable;
+	}
+
 	public DosageInstructionsNonStructuredEntryContentModule() {
 		super.getClassCode().add("SBADM");
 		super.setMoodCode(
 				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("INT"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.52"));
+		super.setConsumable(createHl7ConsumableNa());
 	}
 
 	/**
