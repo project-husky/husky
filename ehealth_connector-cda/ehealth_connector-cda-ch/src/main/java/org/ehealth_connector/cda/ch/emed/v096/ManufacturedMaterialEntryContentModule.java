@@ -18,6 +18,8 @@ package org.ehealth_connector.cda.ch.emed.v096;
 
 import java.util.ArrayList;
 
+import org.ehealth_connector.common.hl7cdar2.COCTMT230100UVPackagedMedicine;
+import org.ehealth_connector.common.hl7cdar2.EntityClassContainer;
 import org.ehealth_connector.common.hl7cdar2.IVLTS;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
@@ -88,6 +90,17 @@ public class ManufacturedMaterialEntryContentModule
 				.createCOCTMT230100UVContent();
 		retVal.setClassCode(
 				org.ehealth_connector.common.hl7cdar2.RoleClassContent.fromValue(classCode));
+		return retVal;
+	}
+
+	/**
+	 * Creates fixed contents for CDA Element pharmContainerPackagedMedicine
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.COCTMT230100UVPackagedMedicine createPharmContainerPackagedMedicineFixedValue() {
+		ObjectFactory factory = new ObjectFactory();
+		final COCTMT230100UVPackagedMedicine retVal = factory.createCOCTMT230100UVPackagedMedicine();
+		retVal.setClassCode(EntityClassContainer.CONT);
+		retVal.setDeterminerCode("INSTANCE");
 		return retVal;
 	}
 
