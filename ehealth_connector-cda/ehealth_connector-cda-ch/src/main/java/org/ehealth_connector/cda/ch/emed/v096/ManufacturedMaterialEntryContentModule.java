@@ -140,6 +140,15 @@ public class ManufacturedMaterialEntryContentModule
 	}
 
 	/**
+	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.COCTMT230100UVPackagedMedicine
+	 *
+	 * @return the predefined element.
+	 */
+	public static org.ehealth_connector.common.hl7cdar2.COCTMT230100UVPackagedMedicine getPredefinedContainerPackagedMedicine() {
+		return createPharmContainerPackagedMedicineFixedValue();
+	}
+
+	/**
 	 * Adds a predefined org.ehealth_connector.common.hl7cdar2.CE, filled by:
 	 *
 	 * @return the predefined element.
