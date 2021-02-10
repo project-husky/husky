@@ -88,8 +88,7 @@ public class PadvreferenceEntryContentModule
 
 	public PadvreferenceEntryContentModule() {
 		super.getClassCode().add("OBS");
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.fromValue("EVN"));
+		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XActMoodDocumentObservation.EVN);
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.13"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.53"));
 		super.setCode(createHl7CodeFixedValue("PADVItem", "1.3.6.1.4.1.19376.1.9.2.2", null, null));

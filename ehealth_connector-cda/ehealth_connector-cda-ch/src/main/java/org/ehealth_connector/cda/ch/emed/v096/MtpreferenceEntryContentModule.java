@@ -76,6 +76,22 @@ public class MtpreferenceEntryContentModule
 	}
 
 	/**
+	 * Creates fixed contents for CDA Element hl7Consumable, containing an hl7ManufacturedMaterial with a null flavor NA
+	 */
+	private static org.ehealth_connector.common.hl7cdar2.POCDMT000040Consumable createHl7ConsumableNa() {
+		ObjectFactory factory = new ObjectFactory();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Material material = factory.createPOCDMT000040Material();
+		material.getNullFlavor().add("NA");
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040ManufacturedProduct product =
+				factory.createPOCDMT000040ManufacturedProduct();
+		product.setManufacturedMaterial(material);
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Consumable consumable =
+				factory.createPOCDMT000040Consumable();
+		consumable.setManufacturedProduct(product);
+		return consumable;
+	}
+
+	/**
 	 * Adds a predefined
 	 * org.ehealth_connector.common.hl7cdar2.POCDMT000040Reference, filled by:
 	 * "XCRPT"
@@ -88,11 +104,11 @@ public class MtpreferenceEntryContentModule
 
 	public MtpreferenceEntryContentModule() {
 		super.getClassCode().add("SBADM");
-		super.setMoodCode(
-				org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.fromValue("INT"));
+		super.setMoodCode(org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood.INT);
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.3.10"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.4.45"));
 		super.setCode(createHl7CodeFixedValue("MTPItem", "1.3.6.1.4.1.19376.1.9.2.2", null, null));
+		super.setConsumable(createHl7ConsumableNa());
 	}
 
 	/**
