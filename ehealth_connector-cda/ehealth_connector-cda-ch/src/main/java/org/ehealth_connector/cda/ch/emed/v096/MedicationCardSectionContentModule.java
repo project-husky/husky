@@ -79,6 +79,7 @@ public class MedicationCardSectionContentModule
 	public MedicationCardSectionContentModule() {
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("2.16.756.5.30.1.1.10.3.9"));
 		super.getTemplateId().add(createHl7TemplateIdFixedValue("1.3.6.1.4.1.19376.1.9.1.2.5"));
+		super.setCode(getPredefinedCode101600216840111388361LoincHistoryOfMedicationUse());
 	}
 
 	/**
