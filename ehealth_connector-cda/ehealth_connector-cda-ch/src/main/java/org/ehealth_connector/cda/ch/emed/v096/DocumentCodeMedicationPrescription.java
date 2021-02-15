@@ -30,20 +30,18 @@ import org.ehealth_connector.common.basetypes.CodeBaseType;
  */
 public class DocumentCodeMedicationPrescription extends org.ehealth_connector.common.hl7cdar2.CE {
 
-	private ArrayList<org.ehealth_connector.common.Code> vocabTranslationCode = new ArrayList<org.ehealth_connector.common.Code>();
+	private final ArrayList<org.ehealth_connector.common.Code> vocabTranslationCode = new ArrayList<>();
 
 	public DocumentCodeMedicationPrescription() {
 		super.setCode("57833-6");
 		super.setCodeSystem("2.16.840.1.113883.6.1");
 		super.setCodeSystemName("LOINC");
 		super.setDisplayName("Prescription for medication");
-		vocabTranslationCode.add(new Code(CodeBaseType.builder().withCode("761938008")
+		final Code translation =new Code(CodeBaseType.builder().withCode("761938008")
 				.withCodeSystem("2.16.840.1.113883.6.96").withCodeSystemName("SNOMED CT")
-				.withDisplayName("Medical Prescription record (record artifact)").build()));
-		super.getTranslation().add((new Code(CodeBaseType.builder().withCode("761938008")
-				.withCodeSystem("2.16.840.1.113883.6.96").withCodeSystemName("SNOMED CT")
-				.withDisplayName("Medical Prescription record (record artifact)").build()))
-						.getHl7CdaR2Cd());
+				.withDisplayName("Medicinal prescription record (record artifact)").build());
+		vocabTranslationCode.add(translation);
+		super.getTranslation().add(translation.getHl7CdaR2Cd());
 	}
 
 	/**

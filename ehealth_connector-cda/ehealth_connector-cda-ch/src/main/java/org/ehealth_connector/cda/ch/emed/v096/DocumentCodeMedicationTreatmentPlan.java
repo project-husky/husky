@@ -16,6 +16,11 @@
  */
 package org.ehealth_connector.cda.ch.emed.v096;
 
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.basetypes.CodeBaseType;
+
+import java.util.ArrayList;
+
 /**
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.54 Template
  * description: A LOINC based document type of a CDA document instance including
@@ -25,10 +30,39 @@ package org.ehealth_connector.cda.ch.emed.v096;
  */
 public class DocumentCodeMedicationTreatmentPlan extends org.ehealth_connector.common.hl7cdar2.CE {
 
+	private final ArrayList<org.ehealth_connector.common.Code> vocabTranslationCode = new ArrayList<>();
+
 	public DocumentCodeMedicationTreatmentPlan() {
 		super.setCode("77603-9");
 		super.setCodeSystem("2.16.840.1.113883.6.1");
 		super.setCodeSystemName("LOINC");
 		super.setDisplayName("Medication treatment plan.extended");
+		final Code translation = new Code(CodeBaseType.builder().withCode("419891008")
+				.withCodeSystem("2.16.840.1.113883.6.96").withCodeSystemName("SNOMED CT")
+				.withDisplayName("Record artifact (record artifact)").build());
+		vocabTranslationCode.add(translation);
+		super.getTranslation().add(translation.getHl7CdaR2Cd());
+	}
+
+	/**
+	 * Gets the hl7Translation Translation to the Swiss EPR XDS.b metadata.
+	 */
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.CD> getHl7Translation() {
+		return translation;
+	}
+
+	/**
+	 * Returns a list of vocab codes as definied in the ART-DECOR model
+	 */
+	public ArrayList<Code> getVocabTranslationCode() {
+		return vocabTranslationCode;
+	}
+
+	/**
+	 * Sets the hl7Translation Translation to the Swiss EPR XDS.b metadata.
+	 */
+	public void setHl7Translation(org.ehealth_connector.common.hl7cdar2.CD value) {
+		getTranslation().clear();
+		getTranslation().add(value);
 	}
 }
