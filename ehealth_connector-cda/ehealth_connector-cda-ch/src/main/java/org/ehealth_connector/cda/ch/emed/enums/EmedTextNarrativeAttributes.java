@@ -79,6 +79,16 @@ public enum EmedTextNarrativeAttributes {
 	APPROACH_SITE_PML("approach_site_pml", "-", "Approach site", "Approach site",
 			"Ort der Verwaltung", "Lieu d'administration", "Avvicinamento al sito"),
 	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Approach site</div>
+	 * <div class="de">Ort der Verwaltung</div>
+	 * <div class="fr">Lieu d'administration</div>
+	 * <div class="it">Avvicinamento al sito</div>
+	 * <!-- @formatter:on -->
+	 */
+	APPROACH_SITE_PMLC("approach_site_pmlc", "-", "Approach site", "Approach site",
+			"Ort der Verwaltung", "Lieu d'administration", "Avvicinamento al sito"),
+	/**
      * <!-- @formatter:off -->
      * <div class="en">Approach site</div>
      * <div class="de">Ort der Verwaltung</div>
@@ -139,6 +149,16 @@ public enum EmedTextNarrativeAttributes {
 	COMMENT_PML("comment_pml", "-", "Further information", "Further information",
 			"Weitere Informationen", "Informations complémentaires", "Commento"),
 	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Further information</div>
+	 * <div class="de">Weitere Informationen</div>
+	 * <div class="fr">Informations complémentaires</div>
+	 * <div class="it">Commento</div>
+	 * <!-- @formatter:on -->
+	 */
+	COMMENT_PMLC("comment_pmlc", "-", "Further information", "Further information",
+			"Weitere Informationen", "Informations complémentaires", "Commento"),
+	/**
      * <!-- @formatter:off -->
      * <div class="en">Further information</div>
      * <div class="de">Weitere Informationen</div>
@@ -184,6 +204,15 @@ public enum EmedTextNarrativeAttributes {
      * <!-- @formatter:on -->
      */
 	DATE_FROM_PML("date_from_pml", "-", "Start", "Start", "Start", "Début", "Data a partire da"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Start</div>
+	 * <div class="de">Start</div>
+	 * <div class="fr">Début</div>
+	 * <div class="it">Data a partire da</div>
+	 * <!-- @formatter:on -->
+	 */
+	DATE_FROM_PMLC("date_from_pmlc", "-", "Start", "Start", "Start", "Début", "Data a partire da"),
 	/**
      * <!-- @formatter:off -->
      * <div class="en">Start</div>
@@ -234,6 +263,16 @@ public enum EmedTextNarrativeAttributes {
 	DATE_FROM_TO_PADV("date_from_to_padv", "-", "Start / End", "Start / End", "Start / Ende",
 			"Début / Fin", "Iniziare / Fine"),
 	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Start</div>
+	 * <div class="de">Start</div>
+	 * <div class="fr">Début</div>
+	 * <div class="it">Iniziare</div>
+	 * <!-- @formatter:on -->
+	 */
+	DATE_FROM_TO_PMLC("date_from_to_pmlc", "-", "Start / End", "Start / End", "Start / Ende",
+			"Début / Fin", "Iniziare / Fine"),
+	/**
      * <!-- @formatter:off -->
      * <div class="en">Start</div>
      * <div class="de">Start</div>
@@ -279,6 +318,15 @@ public enum EmedTextNarrativeAttributes {
      * <!-- @formatter:on -->
      */
 	DATE_TO_PML("date_to_pml", "-", "End", "End", "Ende", "Fin", "Data a"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">End</div>
+	 * <div class="de">Ende</div>
+	 * <div class="fr">Fin</div>
+	 * <div class="it">Data a</div>
+	 * <!-- @formatter:on -->
+	 */
+	DATE_TO_PMLC("date_to_pmlc", "-", "End", "End", "Ende", "Fin", "Data a"),
 	/**
      * <!-- @formatter:off -->
      * <div class="en">End</div>
@@ -341,6 +389,16 @@ public enum EmedTextNarrativeAttributes {
 	DISPENSE_AMOUNT_PML("dispense_amount_pml", "-", "Dispense amount", "Dispense amount",
 			"Anzahl der Pakete", "Nombre d'emballages", "Importo dell'erogazione"),
 	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Dispense amount</div>
+	 * <div class="de">Anzahl der Pakete</div>
+	 * <div class="fr">Nombre d'emballages</div>
+	 * <div class="it">Importo dell'erogazione</div>
+	 * <!-- @formatter:on -->
+	 */
+	DISPENSE_AMOUNT_PMLC("dispense_amount_pmlc", "-", "Dispense amount", "Dispense amount",
+			"Anzahl der Pakete", "Nombre d'emballages", "Importo dell'erogazione"),
+	/**
      * <!-- @formatter:off -->
      * <div class="en">Dispense amount</div>
      * <div class="de">Anzahl der Pakete</div>
@@ -399,6 +457,16 @@ public enum EmedTextNarrativeAttributes {
      * <!-- @formatter:on -->
      */
 	DOSE_FORM_PML("dose_form_pml", "-", "Presentation", "Presentation", "Präsentation",
+			"Présentation", "Forma di dosaggio"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Presentation</div>
+	 * <div class="de">Präsentation</div>
+	 * <div class="fr">Présentation</div>
+	 * <div class="it">Forma di dosaggio</div>
+	 * <!-- @formatter:on -->
+	 */
+	DOSE_FORM_PMLC("dose_form_pmlc", "-", "Presentation", "Presentation", "Präsentation",
 			"Présentation", "Forma di dosaggio"),
 	/**
      * <!-- @formatter:off -->
@@ -461,6 +529,16 @@ public enum EmedTextNarrativeAttributes {
 	DOSE_QUANTITY_PML("dose_quantity_pml", "-", "Unit Dose", "Unit Dose", "Einheit Dosis",
 			"Dose unitaire", "Quantità di dose"),
 	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Unit Dose</div>
+	 * <div class="de">Einheit Dosis</div>
+	 * <div class="fr">Dose unitaire</div>
+	 * <div class="it">Quantità di dose</div>
+	 * <!-- @formatter:on -->
+	 */
+	DOSE_QUANTITY_PMLC("dose_quantity_pmlc", "-", "Unit Dose", "Unit Dose", "Einheit Dosis",
+			"Dose unitaire", "Quantità di dose"),
+	/**
      * <!-- @formatter:off -->
      * <div class="en">Unit Dose</div>
      * <div class="de">Einheit Dosis</div>
@@ -516,6 +594,15 @@ public enum EmedTextNarrativeAttributes {
      * <!-- @formatter:on -->
      */
 	FREQUENCY_PML("frequency_pml", "-", "Dosage", "Dosage", "Dosierung", "Posologie", "Frequenza"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Dosage</div>
+	 * <div class="de">Dosierung</div>
+	 * <div class="fr">Posologie</div>
+	 * <div class="it">Frequenza</div>
+	 * <!-- @formatter:on -->
+	 */
+	FREQUENCY_PMLC("frequency_pmlc", "-", "Dosage", "Dosage", "Dosierung", "Posologie", "Frequenza"),
 	/**
      * <!-- @formatter:off -->
      * <div class="en">Dosage</div>
@@ -581,6 +668,17 @@ public enum EmedTextNarrativeAttributes {
 			"Fulfilment instructions", "Informationen für Fachleute",
 			"Informations pour les professionnels", "Istruzioni per l'adempimento"),
 	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Fulfilment instructions</div>
+	 * <div class="de">Informationen für Fachleute</div>
+	 * <div class="fr">Informations pour les professionnels</div>
+	 * <div class="it">Istruzioni per l'adempimento</div>
+	 * <!-- @formatter:on -->
+	 */
+	FULFILMENT_INSTRUCTIONS_PMLC("fulfilment_instructions_pmlc", "-", "Fulfilment instructions",
+			"Fulfilment instructions", "Informationen für Fachleute",
+			"Informations pour les professionnels", "Istruzioni per l'adempimento"),
+	/**
      * <!-- @formatter:off -->
      * <div class="en">Fulfilment instructions</div>
      * <div class="de">Informationen für Fachleute</div>
@@ -637,6 +735,15 @@ public enum EmedTextNarrativeAttributes {
      * <!-- @formatter:on -->
      */
 	GTIN_PML("gtin_pml", "-", "Code (GTIN)", "Code (GTIN)", "Code (GTIN)", "Code (GTIN)", "GTIN"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code (GTIN)</div>
+	 * <div class="de">Code (GTIN)</div>
+	 * <div class="fr">Code (GTIN)</div>
+	 * <div class="it">GTIN</div>
+	 * <!-- @formatter:on -->
+	 */
+	GTIN_PMLC("gtin_pmlc", "-", "Code (GTIN)", "Code (GTIN)", "Code (GTIN)", "Code (GTIN)", "GTIN"),
 	/**
      * <!-- @formatter:off -->
      * <div class="en">Code (GTIN)</div>
@@ -696,6 +803,16 @@ public enum EmedTextNarrativeAttributes {
      * <!-- @formatter:on -->
      */
 	INGREDIENTS_PML("ingredients_pml", "-", "Active ingredients", "Active ingredients",
+			"Aktive Inhaltsstoffe", "Principes actifs", "Ingredienti"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Active ingredients</div>
+	 * <div class="de">Aktive Inhaltsstoffe</div>
+	 * <div class="fr">Principes actifs</div>
+	 * <div class="it">Ingredienti</div>
+	 * <!-- @formatter:on -->
+	 */
+	INGREDIENTS_PMLC("ingredients_pmlc", "-", "Active ingredients", "Active ingredients",
 			"Aktive Inhaltsstoffe", "Principes actifs", "Ingredienti"),
 	/**
      * <!-- @formatter:off -->
@@ -758,6 +875,16 @@ public enum EmedTextNarrativeAttributes {
 	LOT_NUMBER_PML("lot_number_pml", "-", "Batch number", "Batch number", "Los-Nummer",
 			"Numéro de lot", "Numero di lotto"),
 	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Batch number</div>
+	 * <div class="de">Los-Nummer</div>
+	 * <div class="fr">Numéro de lot</div>
+	 * <div class="it">Numero di lotto</div>
+	 * <!-- @formatter:on -->
+	 */
+	LOT_NUMBER_PMLC("lot_number_pmlc", "-", "Batch number", "Batch number", "Los-Nummer",
+			"Numéro de lot", "Numero di lotto"),
+	/**
      * <!-- @formatter:off -->
      * <div class="en">Batch number</div>
      * <div class="de">Los-Nummer</div>
@@ -818,6 +945,16 @@ public enum EmedTextNarrativeAttributes {
 	PACKAGE_CAPACITY_PML("package_capacity_pml", "-", "Package size", "Package size",
 			"Packungsgröße", "Taille de l'emballage", "Capacità del pacchetto"),
 	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Package size</div>
+	 * <div class="de">Packungsgröße</div>
+	 * <div class="fr">Taille de l'emballage</div>
+	 * <div class="it">Capacità del pacchetto</div>
+	 * <!-- @formatter:on -->
+	 */
+	PACKAGE_CAPACITY_PMLC("package_capacity_pmlc", "-", "Package size", "Package size",
+			"Packungsgröße", "Taille de l'emballage", "Capacità del pacchetto"),
+	/**
      * <!-- @formatter:off -->
      * <div class="en">Package size</div>
      * <div class="de">Packungsgröße</div>
@@ -876,6 +1013,16 @@ public enum EmedTextNarrativeAttributes {
      * <!-- @formatter:on -->
      */
 	PACKAGE_NAME_PML("package_name_pml", "-", "Drug Name", "Drug Name", "Name des Medikaments",
+			"Nom du médicament", "Nome del pacchetto"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Drug Name</div>
+	 * <div class="de">Name des Medikaments</div>
+	 * <div class="fr">Nom du médicament</div>
+	 * <div class="it">Nome del pacchetto</div>
+	 * <!-- @formatter:on -->
+	 */
+	PACKAGE_NAME_PMLC("package_name_pmlc", "-", "Drug Name", "Drug Name", "Name des Medikaments",
 			"Nom du médicament", "Nome del pacchetto"),
 	/**
      * <!-- @formatter:off -->
@@ -943,6 +1090,17 @@ public enum EmedTextNarrativeAttributes {
 			"Patient's instructions", "Anweisungen für den Patienten",
 			"Instructions pour le patient", "Istruzioni per il paziente"),
 	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Patient's instructions</div>
+	 * <div class="de">Anweisungen für den Patienten</div>
+	 * <div class="fr">Instructions pour le patient</div>
+	 * <div class="it">Istruzioni per il paziente</div>
+	 * <!-- @formatter:on -->
+	 */
+	PATIENT_INSTRUCTIONS_PMLC("patient_instructions_pmlc", "-", "Patient's instructions",
+			"Patient's instructions", "Anweisungen für den Patienten",
+			"Instructions pour le patient", "Istruzioni per il paziente"),
+	/**
      * <!-- @formatter:off -->
      * <div class="en">Patient's instructions</div>
      * <div class="de">Anweisungen für den Patienten</div>
@@ -1001,6 +1159,16 @@ public enum EmedTextNarrativeAttributes {
      * <!-- @formatter:on -->
      */
 	RATE_QUANTITY_PML("rate_quantity_pml", "-", "Rate", "Rate", "Durchflussrate", "Débit",
+			"Tasso di quantità"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Rate</div>
+	 * <div class="de">Durchflussrate</div>
+	 * <div class="fr">Débit</div>
+	 * <div class="it">Tasso di quantità</div>
+	 * <!-- @formatter:on -->
+	 */
+	RATE_QUANTITY_PMLC("rate_quantity_pmlc", "-", "Rate", "Rate", "Durchflussrate", "Débit",
 			"Tasso di quantità"),
 	/**
      * <!-- @formatter:off -->
@@ -1063,6 +1231,16 @@ public enum EmedTextNarrativeAttributes {
 	REASON_PML("reason_pml", "-", "Reason for treatment", "Reason for treatment",
 			"Grund für die Behandlung", "Raison du traitement", "Motivo"),
 	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Reason for treatment</div>
+	 * <div class="de">Grund für die Behandlung</div>
+	 * <div class="fr">Raison du traitement</div>
+	 * <div class="it">Motivo</div>
+	 * <!-- @formatter:on -->
+	 */
+	REASON_PMLC("reason_pmlc", "-", "Reason for treatment", "Reason for treatment",
+			"Grund für die Behandlung", "Raison du traitement", "Motivo"),
+	/**
      * <!-- @formatter:off -->
      * <div class="en">Reason for treatment</div>
      * <div class="de">Grund für die Behandlung</div>
@@ -1121,6 +1299,16 @@ public enum EmedTextNarrativeAttributes {
      * <!-- @formatter:on -->
      */
 	RENEWAL_PERIOD_PML("renewal_period_pml", "-", "Renewal Term", "Renewal Term",
+			"Erneuerungsdauer", "Durée de renouvellement", "Rinnovo"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Renewal Term</div>
+	 * <div class="de">Erneuerungsdauer</div>
+	 * <div class="fr">Durée de renouvellement</div>
+	 * <div class="it">Rinnovo</div>
+	 * <!-- @formatter:on -->
+	 */
+	RENEWAL_PERIOD_PMLC("renewal_period_pmlc", "-", "Renewal Term", "Renewal Term",
 			"Erneuerungsdauer", "Durée de renouvellement", "Rinnovo"),
 	/**
      * <!-- @formatter:off -->
@@ -1186,6 +1374,17 @@ public enum EmedTextNarrativeAttributes {
 			"Anzahl der Erneuerungen", "Nombre de renouvellements",
 			"Numero di ripetizioni / ricariche"),
 	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Number of renewals</div>
+	 * <div class="de">Anzahl der Erneuerungen</div>
+	 * <div class="fr">Nombre de renouvellements</div>
+	 * <div class="it">Numero di ripetizioni / ricariche</div>
+	 * <!-- @formatter:on -->
+	 */
+	REPEAT_PMLC("repeat_pmlc", "-", "Number of renewals", "Number of renewals",
+			"Anzahl der Erneuerungen", "Nombre de renouvellements",
+			"Numero di ripetizioni / ricariche"),
+	/**
      * <!-- @formatter:off -->
      * <div class="en">Number of renewals</div>
      * <div class="de">Anzahl der Erneuerungen</div>
@@ -1246,6 +1445,16 @@ public enum EmedTextNarrativeAttributes {
 	ROUTE_CODE_PML("route_code_pml", "-", "Route of Administration", "Route of Administration",
 			"Weg der Verwaltung", "Voie d'administration", "Via di somministrazione"),
 	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Route of Administration</div>
+	 * <div class="de">Weg der Verwaltung</div>
+	 * <div class="fr">Voie d'administration</div>
+	 * <div class="it">Via di somministrazione</div>
+	 * <!-- @formatter:on -->
+	 */
+	ROUTE_CODE_PMLC("route_code_pmlc", "-", "Route of Administration", "Route of Administration",
+			"Weg der Verwaltung", "Voie d'administration", "Via di somministrazione"),
+	/**
      * <!-- @formatter:off -->
      * <div class="en">Route of Administration</div>
      * <div class="de">Weg der Verwaltung</div>
@@ -1304,6 +1513,16 @@ public enum EmedTextNarrativeAttributes {
      * <!-- @formatter:on -->
      */
 	SUBSTITUTION_PML("substitution_pml", "-", "Possible substitution", "Possible substitution",
+			"Mögliche Substitution", "Substitution possible", "Sostituzione"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Possible substitution</div>
+	 * <div class="de">Mögliche Substitution</div>
+	 * <div class="fr">Substitution possible</div>
+	 * <div class="it">Sostituzione</div>
+	 * <!-- @formatter:on -->
+	 */
+	SUBSTITUTION_PMLC("substitution_pmlc", "-", "Possible substitution", "Possible substitution",
 			"Mögliche Substitution", "Substitution possible", "Sostituzione"),
 	/**
      * <!-- @formatter:off -->

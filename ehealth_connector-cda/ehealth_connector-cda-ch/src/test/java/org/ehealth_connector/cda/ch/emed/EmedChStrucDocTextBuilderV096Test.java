@@ -508,7 +508,7 @@ public class EmedChStrucDocTextBuilderV096Test {
 		StrucDocTable strucDocTable = (StrucDocTable) ((JAXBElement) content.get(1)).getValue();
 		StrucDocTd strucDocTd = (StrucDocTd) strucDocTable.getTbody().get(0).getTr().get(0)
 				.getThOrTd().get(2);
-		assertEquals("MTP.frequency.0", strucDocTd.getID());
+		assertEquals("MTP.frequency.section0021.0", strucDocTd.getID());
 		assertEquals("1) 40g Après le repas du soir", strucDocTd.getContent().get(0));
 		assertEquals("2) 20g Avant le coucher, Débit : 10/min", strucDocTd.getContent().get(2));
 
@@ -526,7 +526,7 @@ public class EmedChStrucDocTextBuilderV096Test {
 								.equals(DOSAGE_INTAKE_REFERENCE_TEMPLATE_ID)))
 				.findFirst().map(POCDMT000040EntryRelationship::getSubstanceAdministration)
 				.orElse(null);
-		assertEquals("#MTP.frequency.0",
+		assertEquals("#MTP.frequency.section0021.0",
 				substanceAdministrationDosageIntakeText.getText().getReference().getValue());
 		jaxbObjectToXML(doc);
 	}
@@ -608,7 +608,7 @@ public class EmedChStrucDocTextBuilderV096Test {
 		addDosageInstructionToNewDoc(dosageInstructionsSplited);
 
 		List<String> dosageIntakes = EmedChStrucDocTextBuilderV096
-				.parseSplitedDosageIntake(dosageInstructionsSplited, LanguageCode.FRENCH);
+				.parseSplitDosageIntake(dosageInstructionsSplited, LanguageCode.FRENCH);
 
 		assertEquals("1) 40g Après le repas du soir", dosageIntakes.get(0));
 		assertEquals("2) 20g Avant le coucher, Débit : 10/min", dosageIntakes.get(1));
