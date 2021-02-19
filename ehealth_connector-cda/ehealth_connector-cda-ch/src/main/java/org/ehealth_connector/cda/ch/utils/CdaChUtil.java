@@ -27,10 +27,7 @@ import org.ehealth_connector.cda.ch.edes.CdaChEdesCtnn;
 import org.ehealth_connector.cda.ch.edes.CdaChEdesEdpn;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEdes;
 import org.ehealth_connector.cda.ch.emed.EmedChStrucDocTextBuilderV096;
-import org.ehealth_connector.cda.ch.emed.v096.DispenseSectionContentModule;
-import org.ehealth_connector.cda.ch.emed.v096.MedicationTreatmenPlanSectionContentModule;
-import org.ehealth_connector.cda.ch.emed.v096.PharmaceuticalAdviceSectionContentModule;
-import org.ehealth_connector.cda.ch.emed.v096.PrescriptionSectionContentModule;
+import org.ehealth_connector.cda.ch.emed.v096.*;
 import org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport;
 import org.ehealth_connector.cda.ch.lab.lrph.CdaChLrph;
 import org.ehealth_connector.cda.ch.lab.lrqc.CdaChLrqc;
@@ -71,6 +68,14 @@ public abstract class CdaChUtil extends CdaUtilMdht {
 	/** The Constant PRE_SECTION_CODE. */
 	public final static String PRE_SECTION_CODE = new PrescriptionSectionContentModule().getCode()
 			.getCode();
+
+	/** The Constant PML_SECTION_CODE. *
+	public final static String PML_SECTION_CODE = new MedicationListSectionContentModule().getCode()
+			.getCode();*/
+
+	/** The Constant PMLC_SECTION_CODE. */
+	public final static String PMLC_SECTION_CODE = "10160-0";
+			//new MedicationCardSectionContentModule().getCode().getCode();
 
 	/**
 	 * <div class="en">Loads a CdaChLrepV1GeneralReport document from a given
@@ -391,7 +396,8 @@ public abstract class CdaChUtil extends CdaUtilMdht {
 		if (sectionCode.contentEquals(MTP_SECTION_CODE)
 				|| sectionCode.contentEquals(PRE_SECTION_CODE)
 				|| sectionCode.contentEquals(PADV_SECTION_CODE)
-				|| sectionCode.contentEquals(DIS_SECTION_CODE)) {
+				|| sectionCode.contentEquals(DIS_SECTION_CODE)
+				|| sectionCode.contentEquals(PMLC_SECTION_CODE)) {
 			try {
 				strucDocText = new EmedChStrucDocTextBuilderV096(section, languageCode, temp);
 			} catch (Exception e) {
