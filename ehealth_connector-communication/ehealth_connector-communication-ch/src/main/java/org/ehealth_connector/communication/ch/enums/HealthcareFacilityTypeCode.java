@@ -27,13 +27,13 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Type of healthcare facility as per Annex 3  EPRO-FDHA.<br clear="none"/><br clear="none"/>This code describes the type of healthcare facility in which the document was compiled during the treatment process. In conjunction with the authorisation control, the patient can use this information to assign all documents from a specific type of healthcare facility to a specific confidentiality level in their rights and attributes, for example.<br clear="none"/></div>
- * <div class="de">Typ der Gesundheitseinrichtung gemäss Anhang 3 EPDV-EDI. <br clear="none"/><br clear="none"/>Dieser Code beschreibt den Typ der Gesundheitseinrichtung, in der das Dokument während des Behandlungsprozesses erstellt wurde. Der Patient kann im Zusammenhang mit der Berechtigungsteuerung diese Information nutzen, um beispielsweise in seinen Rechteattributen allen Dokumenten aus einem bestimmten Gesundheitseinrichtungstyp eine bestimmte Vertraulichkeitsstufe zuzuordnen.<br clear="none"/></div>
- * <div class="fr">Type de l'institution de santé selon l'annexe 3 ODEP-DFI.<br clear="none"/><br clear="none"/>Ce code décrit le type de l'institution de santé qui a élaboré le document pendant le processus thérapeutique. Le patient peut utiliser cette information pour gérer les droits d'accès et définir, dans les règles d'accès, un même niveau de confidentialité pour tous les documents émanant d'un type d'institution donné.<br clear="none"/></div>
- * <div class="it">Tipo di istituzione sanitaria secondo l'allegato 3 OCIP-DFI.<br clear="none"/><br clear="none"/>Questo codice descrive il tipo di istituzione sanitaria nella quale è stato creato il documento durante il processo terapeutico. Il paziente può utilizzare questa informazione in relazione al controllo delle autorizzazioni, ad esempio per attribuire un determinato grado di riservatezza a tutti i documenti provenienti da un determinato tipo di istituzione sanitaria.<br clear="none"/></div>
+ * <div class="en">Type of healthcare facility as per Annex 3; EPRO-FDHA. This code describes the type of healthcare facility in which the document was compiled during the treatment process. In conjunction with the authorisation control, the patient can use this information to assign all documents from a specific type of healthcare facility to a specific confidentiality level in their rights and attributes, for example.</div>
+ * <div class="de">Typ der Gesundheitseinrichtung gemäss Anhang 3 EPDV-EDI. Dieser Code beschreibt den Typ der Gesundheitseinrichtung, in der das Dokument während des Behandlungsprozesses erstellt wurde. Der Patient kann im Zusammenhang mit der Berechtigungsteuerung diese Information nutzen, um beispielsweise in seinen Rechteattributen allen Dokumenten aus einem bestimmten Gesundheitseinrichtungstyp eine bestimmte Vertraulichkeitsstufe zuzuordnen.</div>
+ * <div class="fr">Type de l'institution de santé selon l'annexe 3 ODEP-DFI. Ce code décrit le type de l'institution de santé qui a élaboré le document pendant le processus thérapeutique. Le patient peut utiliser cette information pour gérer les droits d'accès et définir, dans les règles d'accès, un même niveau de confidentialité pour tous les documents émanant d'un type d'institution donné.</div>
+ * <div class="it">Tipo di istituzione sanitaria secondo l'allegato 3 OCIP-DFI. Questo codice descrive il tipo di istituzione sanitaria nella quale è stato creato il documento durante il processo terapeutico. Il paziente può utilizzare questa informazione in relazione al controllo delle autorizzazioni, ad esempio per attribuire un determinato grado di riservatezza a tutti i documenti provenienti da un determinato tipo di istituzione sanitaria.</div>
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-02-23")
 public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 
 	/**
@@ -102,7 +102,8 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	HEALTH_AUTHORITY("394747008", "2.16.840.1.113883.6.96", "Health Authority (qualifier value)",
-			"Health Authority", "Gesundheitsbehörde", "Autorité sanitaire", "Autorità sanitaria"),
+			"Health Authority", "Gesundheitsbehörde", "Autorité sanitaire",
+			"Autorità sanitaria"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Hospital</div>
@@ -143,7 +144,7 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Altre organizzazioni sanitarie</div>
 	 * <!-- @formatter:on -->
 	 */
-	OTHER_SITE_OF_CARE("43741000", "2.16.840.1.113883.6.96", "Site of care (social concept)",
+	OTHER_SITE_OF_CARE("43741000", "2.16.840.1.113883.6.96", "Site of care (environment)",
 			"Other Site of Care", "Andere Gesundheitsorganisation", "Autres prestataires de soins",
 			"Altre organizzazioni sanitarie"),
 	/**
@@ -201,8 +202,8 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	TELEMEDICINE_INSTITUTION("288565001", "2.16.840.1.113883.6.96", "Medical center (environment)",
-			"Telemedicine institution", "Telemedizinische Einrichtung", "Institut de télémédecine",
-			"Centro di telemedicina");
+			"Telemedicine institution", "Telemedizinische Einrichtung",
+			"Institut de télémédecine", "Centro di telemedicina");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -380,7 +381,7 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static HealthcareFacilityTypeCode getEnum(String code) {
+	public static HealthcareFacilityTypeCode getEnum(final String code) {
 		for (final HealthcareFacilityTypeCode x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
@@ -399,7 +400,7 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
-	public static boolean isEnumOfValueSet(String enumName) {
+	public static boolean isEnumOfValueSet(final String enumName) {
 		if (enumName == null) {
 			return false;
 		}
@@ -421,7 +422,7 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
-	public static boolean isInValueSet(String codeValue) {
+	public static boolean isInValueSet(final String codeValue) {
 		for (final HealthcareFacilityTypeCode x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
@@ -472,17 +473,17 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	HealthcareFacilityTypeCode(String code, String codeSystem, String displayName,
-			String displayNameEn, String displayNameDe, String displayNameFr,
-			String displayNameIt) {
+	HealthcareFacilityTypeCode(final String code, final String codeSystem, final String displayName,
+			final String displayNameEn, final String displayNameDe, final String displayNameFr,
+			final String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
-		displayNames = new HashMap<>();
-		displayNames.put(null, displayName);
-		displayNames.put(LanguageCode.ENGLISH, displayNameEn);
-		displayNames.put(LanguageCode.GERMAN, displayNameDe);
-		displayNames.put(LanguageCode.FRENCH, displayNameFr);
-		displayNames.put(LanguageCode.ITALIAN, displayNameIt);
+		this.displayNames = new HashMap<>();
+		this.displayNames.put(null, displayName);
+		this.displayNames.put(LanguageCode.ENGLISH, displayNameEn);
+		this.displayNames.put(LanguageCode.GERMAN, displayNameDe);
+		this.displayNames.put(LanguageCode.FRENCH, displayNameFr);
+		this.displayNames.put(LanguageCode.ITALIAN, displayNameIt);
 	}
 
 	/**
@@ -543,9 +544,9 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 */
 	@Override
 	public String getDisplayName(LanguageCode languageCode) {
-		String displayName = displayNames.get(languageCode);
+		String displayName = this.displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
-			return displayNames.get(null);
+			return this.displayNames.get(null);
 		}
 		return displayName;
 	}

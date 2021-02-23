@@ -27,13 +27,13 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Type of document as per Annex 3 EPRO-FDHA.<br clear="none"/><br clear="none"/>The code defines a document’s type (e.g. discharge report, laboratory report). Each document type should be assigned to precisely one document class.<br clear="none"/></div>
- * <div class="de">Typ des Dokumentes (2.16.756.5.30.1.127.3.10.1.27) gemäss Anhang 3 der Verordnungen zum EPDG.<br clear="none"/><br clear="none"/>Der Code definiert den Typ eines Dokuments (z.B. Austrittsbericht, Labor-Bericht). Jeder Dokumenten-Typ sollte genau einer Dokumentenklasse zugeordnet sein.<br clear="none"/></div>
- * <div class="fr">Type du document selon l'annexe 3 ODEP-DFI.<br clear="none"/><br clear="none"/>Le code définit le type de document (p. ex. rapport de sortie, rapport de laboratoire). Chaque type de document doit être  associé à une seule classification.<br clear="none"/></div>
- * <div class="it">Tipo di documento secondo l'allegato 3 OCIP-DFI.<br clear="none"/><br clear="none"/>Il codice definisce il tipo di documento (p. es. rapporto di dimissione, rapporto di laboratorio). Ciascun tipo di documento dovrebbe essere associato a una sola classe di documenti.<br clear="none"/></div>
+ * <div class="en">Type of document as per Annex 3 EPRO-FDHA. The code defines a document’s type (e.g. discharge report, laboratory report). Each document type should be assigned to precisely one document class.</div>
+ * <div class="de">Typ des Dokumentes (2.16.756.5.30.1.127.3.10.1.27) gemäss Anhang 3 der Verordnungen zum EPDG. Der Code definiert den Typ eines Dokuments (z.B. Austrittsbericht, Labor-Bericht). Jeder Dokumenten-Typ sollte genau einer Dokumentenklasse zugeordnet sein.</div>
+ * <div class="fr">Type du document selon l'annexe 3 ODEP-DFI. Le code définit le type de document (p. ex. rapport de sortie, rapport de laboratoire). Chaque type de document doit être associé à une seule classification.</div>
+ * <div class="it">Tipo di documento secondo l'allegato 3 OCIP-DFI. Il codice definisce il tipo di documento (p. es. rapporto di dimissione, rapporto di laboratorio). Ciascun tipo di documento dovrebbe essere associato a una sola classe di documenti.</div>
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-02-23")
 public enum TypeCode implements ValueSetEnumInterface {
 
 	/**
@@ -49,14 +49,14 @@ public enum TypeCode implements ValueSetEnumInterface {
 			"Passaporto delle allergie"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Clinical Management plan</div>
+	 * <div class="en">Clinical management plan</div>
 	 * <div class="de">Behandlungsplan</div>
 	 * <div class="fr">Plan de traitement</div>
 	 * <div class="it">Piano di trattamento</div>
 	 * <!-- @formatter:on -->
 	 */
 	CLINICAL_MANAGEMENT_PLAN("737427001", "2.16.840.1.113883.6.96",
-			"Clinical Management plan (record artifact)", "Clinical Management plan",
+			"Clinical management plan (record artifact)", "Clinical management plan",
 			"Behandlungsplan", "Plan de traitement", "Piano di trattamento"),
 	/**
 	 * <!-- @formatter:off -->
@@ -111,8 +111,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Immagine</div>
 	 * <!-- @formatter:on -->
 	 */
-	IMAGE("900000000000471006", "2.16.840.1.113883.6.96",
-			"Image reference (foundation metadata concept)", "Image", "Bild", "Image", "Immagine"),
+	IMAGE("787148009", "2.16.840.1.113883.6.96",
+			"Digital representation of specimen (record artifact)", "Image", "Bild", "Image",
+			"Immagine"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Imaging Order</div>
@@ -181,18 +182,6 @@ public enum TypeCode implements ValueSetEnumInterface {
 			"Certificat médical", "Certificato medico"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Medical Prescription record</div>
-	 * <div class="de">Arzneimittel-Verschreibung / Rezept</div>
-	 * <div class="fr">Prescription de médicaments / ordonnance</div>
-	 * <div class="it">Prescrizione di medicamenti</div>
-	 * <!-- @formatter:on -->
-	 */
-	MEDICAL_PRESCRIPTION_RECORD("761938008", "2.16.840.1.113883.6.96",
-			"Medical Prescription record (record artifact)", "Medical Prescription record",
-			"Arzneimittel-Verschreibung / Rezept", "Prescription de médicaments / ordonnance",
-			"Prescrizione di medicamenti"),
-	/**
-	 * <!-- @formatter:off -->
 	 * <div class="en">Medication summary document</div>
 	 * <div class="de">Medikationsliste</div>
 	 * <div class="fr">Liste de médication</div>
@@ -202,6 +191,18 @@ public enum TypeCode implements ValueSetEnumInterface {
 	MEDICATION_SUMMARY_DOCUMENT("721912009", "2.16.840.1.113883.6.96",
 			"Medication summary document (record artifact)", "Medication summary document",
 			"Medikationsliste", "Liste de médication", "Elenco dei medicamenti"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Medicinal Prescription record</div>
+	 * <div class="de">Arzneimittel-Verschreibung / Rezept</div>
+	 * <div class="fr">Prescription de médicaments / ordonnance</div>
+	 * <div class="it">Prescrizione di medicamenti</div>
+	 * <!-- @formatter:on -->
+	 */
+	MEDICINAL_PRESCRIPTION_RECORD("761938008", "2.16.840.1.113883.6.96",
+			"Medicinal prescription record (record artifact)", "Medicinal Prescription record",
+			"Arzneimittel-Verschreibung / Rezept", "Prescription de médicaments / ordonnance",
+			"Prescrizione di medicamenti"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Non-drug prescription</div>
@@ -233,7 +234,8 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	OPERATIVE_REPORT("371526002", "2.16.840.1.113883.6.96", "Operative report (record artifact)",
-			"Operative report", "Operationsbericht", "Rapport d’opération", "Rapporto operatorio"),
+			"Operative report", "Operationsbericht", "Rapport d’opération",
+			"Rapporto operatorio"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Pathology order</div>
@@ -325,7 +327,7 @@ public enum TypeCode implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Clinical Management plan</div>
+	 * <div class="en">Code for Clinical management plan</div>
 	 * <div class="de">Code für Behandlungsplan</div>
 	 * <div class="fr">Code de Plan de traitement</div>
 	 * <div class="it">Code per Piano di trattamento</div>
@@ -381,7 +383,7 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Code per Immagine</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String IMAGE_CODE = "900000000000471006";
+	public static final String IMAGE_CODE = "787148009";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -445,16 +447,6 @@ public enum TypeCode implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Medical Prescription record</div>
-	 * <div class="de">Code für Arzneimittel-Verschreibung / Rezept</div>
-	 * <div class="fr">Code de Prescription de médicaments / ordonnance</div>
-	 * <div class="it">Code per Prescrizione di medicamenti</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String MEDICAL_PRESCRIPTION_RECORD_CODE = "761938008";
-
-	/**
-	 * <!-- @formatter:off -->
 	 * <div class="en">Code for Medication summary document</div>
 	 * <div class="de">Code für Medikationsliste</div>
 	 * <div class="fr">Code de Liste de médication</div>
@@ -462,6 +454,16 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	public static final String MEDICATION_SUMMARY_DOCUMENT_CODE = "721912009";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Medicinal Prescription record</div>
+	 * <div class="de">Code für Arzneimittel-Verschreibung / Rezept</div>
+	 * <div class="fr">Code de Prescription de médicaments / ordonnance</div>
+	 * <div class="it">Code per Prescrizione di medicamenti</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String MEDICINAL_PRESCRIPTION_RECORD_CODE = "761938008";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -589,7 +591,7 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static TypeCode getEnum(String code) {
+	public static TypeCode getEnum(final String code) {
 		for (final TypeCode x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
@@ -608,7 +610,7 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
-	public static boolean isEnumOfValueSet(String enumName) {
+	public static boolean isEnumOfValueSet(final String enumName) {
 		if (enumName == null) {
 			return false;
 		}
@@ -630,7 +632,7 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
-	public static boolean isInValueSet(String codeValue) {
+	public static boolean isInValueSet(final String codeValue) {
 		for (final TypeCode x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
@@ -681,16 +683,17 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	TypeCode(String code, String codeSystem, String displayName, String displayNameEn,
-			String displayNameDe, String displayNameFr, String displayNameIt) {
+	TypeCode(final String code, final String codeSystem, final String displayName,
+			final String displayNameEn, final String displayNameDe, final String displayNameFr,
+			final String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
-		displayNames = new HashMap<>();
-		displayNames.put(null, displayName);
-		displayNames.put(LanguageCode.ENGLISH, displayNameEn);
-		displayNames.put(LanguageCode.GERMAN, displayNameDe);
-		displayNames.put(LanguageCode.FRENCH, displayNameFr);
-		displayNames.put(LanguageCode.ITALIAN, displayNameIt);
+		this.displayNames = new HashMap<>();
+		this.displayNames.put(null, displayName);
+		this.displayNames.put(LanguageCode.ENGLISH, displayNameEn);
+		this.displayNames.put(LanguageCode.GERMAN, displayNameDe);
+		this.displayNames.put(LanguageCode.FRENCH, displayNameFr);
+		this.displayNames.put(LanguageCode.ITALIAN, displayNameIt);
 	}
 
 	/**
@@ -751,9 +754,9 @@ public enum TypeCode implements ValueSetEnumInterface {
 	 */
 	@Override
 	public String getDisplayName(LanguageCode languageCode) {
-		String displayName = displayNames.get(languageCode);
+		String displayName = this.displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
-			return displayNames.get(null);
+			return this.displayNames.get(null);
 		}
 		return displayName;
 	}

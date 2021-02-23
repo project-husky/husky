@@ -28,12 +28,12 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 /**
  * <!-- @formatter:off -->
  * <div class="en">no designation found for language ENGLISH</div>
- * <div class="de">Das folgende Valueset zeigt das Mapping zwischen den Dokumentklassen und Dokumenttypen (gemäss Kapitel 2.11 Anhang 3 EPDV). Das Valueset dient als Hilfestellung bei der Implementierung. Für die konkreten Werte in documentTypeCode und documentClassCode dienen weiterhin die beiden definierten Valuesets (<span class="xforms-control xforms-select1 xforms-incremental xforms-select1-appearance-xxforms-tree xforms-visited" id="valueSetNavigation">    <span class="ygtvlabel node-sdraft xforms-tree-label-selected" id="ygtvlabelel10">EprDocumentTypeCode resp. </span></span><span class="xforms-control xforms-select1 xforms-incremental xforms-select1-appearance-xxforms-tree xforms-visited" id="valueSetNavigation">    <span class="ygtvlabel node-sdraft xforms-tree-label-selected" id="ygtvlabelel10">EprDocumentClassCode)</span></span>. <br clear="none"/></div>
+ * <div class="de">Das folgende Valueset zeigt das Mapping zwischen den Dokumentklassen und Dokumenttypen (gemäss Kapitel 2.11 Anhang 3 EPDV). Das Valueset dient als Hilfestellung bei der Implementierung. Für die konkreten Werte in documentTypeCode und documentClassCode dienen weiterhin die beiden definierten Valuesets (<span class="xforms-control xforms-select1 xforms-incremental xforms-select1-appearance-xxforms-tree xforms-visited" id="valueSetNavigation"> <span class="ygtvlabel node-sdraft xforms-tree-label-selected" id="ygtvlabelel10">DocumentEntry.typeCode</span></span><span class="xforms-control xforms-select1 xforms-incremental xforms-select1-appearance-xxforms-tree xforms-visited" id="valueSetNavigation"> <span class="ygtvlabel node-sdraft xforms-tree-label-selected" id="ygtvlabelel10">DocumentEntry.classCode</span></span></div>
  * <div class="fr">no designation found for language FRENCH</div>
  * <div class="it">no designation found for language ITALIAN</div>
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-02-23")
 public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 
 	/**
@@ -72,11 +72,11 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Care Plan (record artifact)</div>
+	 * <div class="en">Care plan (record artifact)</div>
 	 * <!-- @formatter:on -->
 	 */
-	CARE_PLAN_RECORD_ARTIFACT("734163000", "2.16.840.1.113883.6.96", "Care Plan (record artifact)",
-			"Care Plan (record artifact)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	CARE_PLAN_RECORD_ARTIFACT("734163000", "2.16.840.1.113883.6.96", "Care plan (record artifact)",
+			"Care plan (record artifact)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Clinical consultation report (record artifact)</div>
@@ -88,12 +88,12 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Clinical Management plan (record artifact)</div>
+	 * <div class="en">Clinical management plan (record artifact)</div>
 	 * <!-- @formatter:on -->
 	 */
 	CLINICAL_MANAGEMENT_PLAN_RECORD_ARTIFACT_L1("737427001", "2.16.840.1.113883.6.96",
-			"Clinical Management plan (record artifact)",
-			"Clinical Management plan (record artifact)", "TOTRANSLATE", "TOTRANSLATE",
+			"Clinical management plan (record artifact)",
+			"Clinical management plan (record artifact)", "TOTRANSLATE", "TOTRANSLATE",
 			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
@@ -112,6 +112,15 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 	CONSENT_REPORT_RECORD_ARTIFACT("371537001", "2.16.840.1.113883.6.96",
 			"Consent report (record artifact)", "Consent report (record artifact)", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Digital representation of specimen (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	DIGITAL_REPRESENTATION_OF_SPECIMEN_RECORD_ARTIFACT_L1("787148009", "2.16.840.1.113883.6.96",
+			"Digital representation of specimen (record artifact)",
+			"Digital representation of specimen (record artifact)", "TOTRANSLATE", "TOTRANSLATE",
+			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Discharge summary (record artifact)</div>
@@ -149,27 +158,18 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Image reference (foundation metadata concept)</div>
-	 * <!-- @formatter:on -->
-	 */
-	IMAGE_REFERENCE_FOUNDATION_METADATA_CONCEPT_L1("900000000000471006", "2.16.840.1.113883.6.96",
-			"Image reference (foundation metadata concept)",
-			"Image reference (foundation metadata concept)", "TOTRANSLATE", "TOTRANSLATE",
-			"TOTRANSLATE"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Imaging Order (record articact)</div>
+	 * <div class="en">Imaging order (record articact)</div>
 	 * <!-- @formatter:on -->
 	 */
 	IMAGING_ORDER_RECORD_ARTICACT_L1("2161000195103", "2.16.840.1.113883.6.96",
-			"Imaging Order (record articact)", "Imaging Order (record articact)", "TOTRANSLATE",
+			"Imaging order (record articact)", "Imaging order (record articact)", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Imaging report (record artifact)</div>
 	 * <!-- @formatter:on -->
 	 */
-	IMAGING_REPORT_RECORD_ARTIFACT_L1("4201000179104", "2.16.756.5.30.1.127.3.4",
+	IMAGING_REPORT_RECORD_ARTIFACT_L1("4201000179104", "2.16.840.1.113883.6.96",
 			"Imaging report (record artifact)", "Imaging report (record artifact)", "TOTRANSLATE",
 			"TOTRANSLATE", "TOTRANSLATE"),
 	/**
@@ -182,11 +182,11 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Laboratory Order (record artifact)</div>
+	 * <div class="en">Laboratory order (record artifact)</div>
 	 * <!-- @formatter:on -->
 	 */
 	LABORATORY_ORDER_RECORD_ARTIFACT_L1("721965002", "2.16.840.1.113883.6.96",
-			"Laboratory Order (record artifact)", "Laboratory Order (record artifact)",
+			"Laboratory order (record artifact)", "Laboratory order (record artifact)",
 			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
@@ -206,12 +206,12 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Medical Prescription record (record artifact)</div>
+	 * <div class="en">Medical prescription record (record artifact)</div>
 	 * <!-- @formatter:on -->
 	 */
 	MEDICAL_PRESCRIPTION_RECORD_RECORD_ARTIFACT_L1("761938008", "2.16.840.1.113883.6.96",
-			"Medical Prescription record (record artifact)",
-			"Medical Prescription record (record artifact)", "TOTRANSLATE", "TOTRANSLATE",
+			"Medical prescription record (record artifact)",
+			"Medical prescription record (record artifact)", "TOTRANSLATE", "TOTRANSLATE",
 			"TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
@@ -241,11 +241,11 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Obstetrical Record (record artifact)</div>
+	 * <div class="en">Obstetrical record (record artifact)</div>
 	 * <!-- @formatter:on -->
 	 */
 	OBSTETRICAL_RECORD_RECORD_ARTIFACT("2171000195109", "2.16.756.5.30.1.127.3.4",
-			"Obstetrical Record (record artifact)", "Obstetrical Record (record artifact)",
+			"Obstetrical record (record artifact)", "Obstetrical record (record artifact)",
 			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
 	 * <!-- @formatter:off -->
@@ -419,7 +419,7 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Care Plan (record artifact)</div>
+	 * <div class="en">Code for Care plan (record artifact)</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String CARE_PLAN_RECORD_ARTIFACT_CODE = "734163000";
@@ -433,7 +433,7 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Clinical Management plan (record artifact)</div>
+	 * <div class="en">Code for Clinical management plan (record artifact)</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String CLINICAL_MANAGEMENT_PLAN_RECORD_ARTIFACT_L1_CODE = "737427001";
@@ -451,6 +451,13 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	public static final String CONSENT_REPORT_RECORD_ARTIFACT_CODE = "371537001";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Digital representation of specimen (record artifact)</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String DIGITAL_REPRESENTATION_OF_SPECIMEN_RECORD_ARTIFACT_L1_CODE = "787148009";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -482,14 +489,7 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Image reference (foundation metadata concept)</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String IMAGE_REFERENCE_FOUNDATION_METADATA_CONCEPT_L1_CODE = "900000000000471006";
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Imaging Order (record articact)</div>
+	 * <div class="en">Code for Imaging order (record articact)</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String IMAGING_ORDER_RECORD_ARTICACT_L1_CODE = "2161000195103";
@@ -510,7 +510,7 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Laboratory Order (record artifact)</div>
+	 * <div class="en">Code for Laboratory order (record artifact)</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String LABORATORY_ORDER_RECORD_ARTIFACT_L1_CODE = "721965002";
@@ -531,7 +531,7 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Medical Prescription record (record artifact)</div>
+	 * <div class="en">Code for Medical prescription record (record artifact)</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String MEDICAL_PRESCRIPTION_RECORD_RECORD_ARTIFACT_L1_CODE = "761938008";
@@ -559,7 +559,7 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Obstetrical Record (record artifact)</div>
+	 * <div class="en">Code for Obstetrical record (record artifact)</div>
 	 * <!-- @formatter:on -->
 	 */
 	public static final String OBSTETRICAL_RECORD_RECORD_ARTIFACT_CODE = "2171000195109";
@@ -709,7 +709,7 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static ClassTypeCodeMapping getEnum(String code) {
+	public static ClassTypeCodeMapping getEnum(final String code) {
 		for (final ClassTypeCodeMapping x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
@@ -728,7 +728,7 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
-	public static boolean isEnumOfValueSet(String enumName) {
+	public static boolean isEnumOfValueSet(final String enumName) {
 		if (enumName == null) {
 			return false;
 		}
@@ -750,7 +750,7 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
-	public static boolean isInValueSet(String codeValue) {
+	public static boolean isInValueSet(final String codeValue) {
 		for (final ClassTypeCodeMapping x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
@@ -801,16 +801,17 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	ClassTypeCodeMapping(String code, String codeSystem, String displayName, String displayNameEn,
-			String displayNameDe, String displayNameFr, String displayNameIt) {
+	ClassTypeCodeMapping(final String code, final String codeSystem, final String displayName,
+			final String displayNameEn, final String displayNameDe, final String displayNameFr,
+			final String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
-		displayNames = new HashMap<>();
-		displayNames.put(null, displayName);
-		displayNames.put(LanguageCode.ENGLISH, displayNameEn);
-		displayNames.put(LanguageCode.GERMAN, displayNameDe);
-		displayNames.put(LanguageCode.FRENCH, displayNameFr);
-		displayNames.put(LanguageCode.ITALIAN, displayNameIt);
+		this.displayNames = new HashMap<>();
+		this.displayNames.put(null, displayName);
+		this.displayNames.put(LanguageCode.ENGLISH, displayNameEn);
+		this.displayNames.put(LanguageCode.GERMAN, displayNameDe);
+		this.displayNames.put(LanguageCode.FRENCH, displayNameFr);
+		this.displayNames.put(LanguageCode.ITALIAN, displayNameIt);
 	}
 
 	/**
@@ -871,9 +872,9 @@ public enum ClassTypeCodeMapping implements ValueSetEnumInterface {
 	 */
 	@Override
 	public String getDisplayName(LanguageCode languageCode) {
-		String displayName = displayNames.get(languageCode);
+		String displayName = this.displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
-			return displayNames.get(null);
+			return this.displayNames.get(null);
 		}
 		return displayName;
 	}

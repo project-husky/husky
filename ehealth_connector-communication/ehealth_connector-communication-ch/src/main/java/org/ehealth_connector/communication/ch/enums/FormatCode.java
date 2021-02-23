@@ -27,13 +27,13 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Document format as per Annex; EPRO-FDHA. <br clear="none"/><br clear="none"/>This unambiguous code defines the format of the XDS document. Together with the mimetype, this should provide the potential consumer with sufficient information as to whether they are in a position to process the document.<br clear="none"/></div>
- * <div class="de">Format des Dokumentes gemäss Anhang 3 EPDV-EDI. <br clear="none"/><br clear="none"/>Dieser eindeutige Code definiert das Format des XDS Dokumentes. Zusammen mit dem mimeType, sollte es dem potentiellen Konsumenten genügend Informationen liefern, ob er in der Lage ist, das Dokument zu verarbeiten.</div>
- * <div class="fr">Format du document selon l'annexe 3 ODEP-DFI.<br clear="none"/><br clear="none"/>Ce code univoque définit le format du document XDS. Combiné au mimeType, il doit fournir à l'utilisateur suffisamment d'informations pour savoir s'il est en mesure de traiter le document.<br clear="none"/><br clear="none"/></div>
- * <div class="it">Formato del documento secondo l'allegato 3 OCIP-DFI.<br clear="none"/><br clear="none"/>Questo codice univoco definisce il formato del documento XDS. Insieme al tipo MIME, intende fornire al potenziale consumatore sufficienti informazioni per capire se è in grado o meno di elaborare il documento.<br clear="none"/></div>
+ * <div class="en">Document format as per Annex; EPRO-FDHA. This unambiguous code defines the format of the XDS document. Together with the mimetype, this should provide the potential consumer with sufficient information as to whether they are in a position to process the document.</div>
+ * <div class="de">Format des Dokumentes gemäss Anhang 3 EPDV-EDI. Dieser eindeutige Code definiert das Format des XDS Dokumentes. Zusammen mit dem mimeType, sollte es dem potentiellen Konsumenten genügend Informationen liefern, ob er in der Lage ist, das Dokument zu verarbeiten.</div>
+ * <div class="fr">Format du document selon l'annexe 3 ODEP-DFI. Ce code univoque définit le format du document XDS. Combiné au mimeType, il doit fournir à l'utilisateur suffisamment d'informations pour savoir s'il est en mesure de traiter le document.</div>
+ * <div class="it">Formato del documento secondo l'allegato 3 OCIP-DFI. Questo codice univoco definisce il formato del documento XDS. Insieme al tipo MIME, intende fornire al potenziale consumatore sufficienti informazioni per capire se è in grado o meno di elaborare il documento.</div>
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-02-23")
 public enum FormatCode implements ValueSetEnumInterface {
 
 	/**
@@ -386,7 +386,7 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static FormatCode getEnum(String code) {
+	public static FormatCode getEnum(final String code) {
 		for (final FormatCode x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
@@ -405,7 +405,7 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
-	public static boolean isEnumOfValueSet(String enumName) {
+	public static boolean isEnumOfValueSet(final String enumName) {
 		if (enumName == null) {
 			return false;
 		}
@@ -427,7 +427,7 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
-	public static boolean isInValueSet(String codeValue) {
+	public static boolean isInValueSet(final String codeValue) {
 		for (final FormatCode x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
@@ -478,16 +478,17 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	FormatCode(String code, String codeSystem, String displayName, String displayNameEn,
-			String displayNameDe, String displayNameFr, String displayNameIt) {
+	FormatCode(final String code, final String codeSystem, final String displayName,
+			final String displayNameEn, final String displayNameDe, final String displayNameFr,
+			final String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
-		displayNames = new HashMap<>();
-		displayNames.put(null, displayName);
-		displayNames.put(LanguageCode.ENGLISH, displayNameEn);
-		displayNames.put(LanguageCode.GERMAN, displayNameDe);
-		displayNames.put(LanguageCode.FRENCH, displayNameFr);
-		displayNames.put(LanguageCode.ITALIAN, displayNameIt);
+		this.displayNames = new HashMap<>();
+		this.displayNames.put(null, displayName);
+		this.displayNames.put(LanguageCode.ENGLISH, displayNameEn);
+		this.displayNames.put(LanguageCode.GERMAN, displayNameDe);
+		this.displayNames.put(LanguageCode.FRENCH, displayNameFr);
+		this.displayNames.put(LanguageCode.ITALIAN, displayNameIt);
 	}
 
 	/**
@@ -548,9 +549,9 @@ public enum FormatCode implements ValueSetEnumInterface {
 	 */
 	@Override
 	public String getDisplayName(LanguageCode languageCode) {
-		String displayName = displayNames.get(languageCode);
+		String displayName = this.displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
-			return displayNames.get(null);
+			return this.displayNames.get(null);
 		}
 		return displayName;
 	}

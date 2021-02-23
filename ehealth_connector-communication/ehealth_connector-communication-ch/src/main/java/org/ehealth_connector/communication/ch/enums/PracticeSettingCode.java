@@ -27,13 +27,13 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Medical specialisation of the data captured in the document as per Annex 3; EPRO-FDHA.      This attribute assigns the contents of a document to a medical specialisation. It is conceivable that this information will assist the patient with setting or changing the confidentiality level of documents, which is relevant for controlling access.    </div>
- * <div class="de">Medizinische Fachrichtung der in dem Dokument erfassten Daten gemäss Anhang 3 EPDV-EDI.      Dieses Attribut soll den Inhalt eines Dokumentes einer medizinischen Fachrichtung zuordnen. Es ist denkbar, dass der Patient mit dieser Information eine Hilfestellung erhält zum Setzen oder Verändern der Vertraulichkeitsstufe von Dokumenten, welche relevant ist für die Zugriffssteuerung.    </div>
- * <div class="fr">Discipline médicale des données saisies dans le document selon l'annexe 3 ODEP-DFI.     Cet attribut permet d'indiquer la discipline médicale dont relève le contenu d'un document. Cette information peut guider le patient et l'aider à choisir ou à changer le niveau de confidentialité attribué à ses documents et qui détermine les droits d'accès.    </div>
- * <div class="it">Specialità medica dei dati inseriti nel documento secondo l'allegato 3 OCIP-DFI.      Questo attributo intende associare il contenuto di un documento a una specialità medica. È ipotizzabile che questa informazione fornisca un aiuto al paziente per impostare o modificare il grado di riservatezza dei documenti, rilevante per il controllo degli accessi.    </div>
+ * <div class="en">Medical specialisation of the data captured in the document as per Annex 3; EPRO-FDHA. This attribute assigns the contents of a document to a medical specialisation. It is conceivable that this information will assist the patient with setting or changing the confidentiality level of documents, which is relevant for controlling access.</div>
+ * <div class="de">Medizinische Fachrichtung der in dem Dokument erfassten Daten gemäss Anhang 3 EPDV-EDI. Dieses Attribut soll den Inhalt eines Dokumentes einer medizinischen Fachrichtung zuordnen. Es ist denkbar, dass der Patient mit dieser Information eine Hilfestellung erhält zum Setzen oder Verändern der Vertraulichkeitsstufe von Dokumenten, welche relevant ist für die Zugriffssteuerung.</div>
+ * <div class="fr">Discipline médicale des données saisies dans le document selon l'annexe 3 ODEP-DFI. Cet attribut permet d'indiquer la discipline médicale dont relève le contenu d'un document. Cette information peut guider le patient et l'aider à choisir ou à changer le niveau de confidentialité attribué à ses documents et qui détermine les droits d'accès.</div>
+ * <div class="it">Specialità medica dei dati inseriti nel documento secondo l'allegato 3 OCIP-DFI. Questo attributo intende associare il contenuto di un documento a una specialità medica. È ipotizzabile che questa informazione fornisca un aiuto al paziente per impostare o modificare il grado di riservatezza dei documenti, rilevante per il controllo degli accessi.</div>
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-02-23")
 public enum PracticeSettingCode implements ValueSetEnumInterface {
 
 	/**
@@ -99,7 +99,8 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	CLINICAL_GENETICS("394580004", "2.16.840.1.113883.6.96", "Clinical genetics (qualifier value)",
-			"Clinical genetics", "Medizinische Genetik", "Génétique médicale", "Genetica medica"),
+			"Clinical genetics", "Medizinische Genetik", "Génétique médicale",
+			"Genetica medica"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Clinical haematology</div>
@@ -1331,7 +1332,7 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static PracticeSettingCode getEnum(String code) {
+	public static PracticeSettingCode getEnum(final String code) {
 		for (final PracticeSettingCode x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
@@ -1350,7 +1351,7 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
-	public static boolean isEnumOfValueSet(String enumName) {
+	public static boolean isEnumOfValueSet(final String enumName) {
 		if (enumName == null) {
 			return false;
 		}
@@ -1372,7 +1373,7 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
-	public static boolean isInValueSet(String codeValue) {
+	public static boolean isInValueSet(final String codeValue) {
 		for (final PracticeSettingCode x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
@@ -1423,16 +1424,17 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	PracticeSettingCode(String code, String codeSystem, String displayName, String displayNameEn,
-			String displayNameDe, String displayNameFr, String displayNameIt) {
+	PracticeSettingCode(final String code, final String codeSystem, final String displayName,
+			final String displayNameEn, final String displayNameDe, final String displayNameFr,
+			final String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
-		displayNames = new HashMap<>();
-		displayNames.put(null, displayName);
-		displayNames.put(LanguageCode.ENGLISH, displayNameEn);
-		displayNames.put(LanguageCode.GERMAN, displayNameDe);
-		displayNames.put(LanguageCode.FRENCH, displayNameFr);
-		displayNames.put(LanguageCode.ITALIAN, displayNameIt);
+		this.displayNames = new HashMap<>();
+		this.displayNames.put(null, displayName);
+		this.displayNames.put(LanguageCode.ENGLISH, displayNameEn);
+		this.displayNames.put(LanguageCode.GERMAN, displayNameDe);
+		this.displayNames.put(LanguageCode.FRENCH, displayNameFr);
+		this.displayNames.put(LanguageCode.ITALIAN, displayNameIt);
 	}
 
 	/**
@@ -1493,9 +1495,9 @@ public enum PracticeSettingCode implements ValueSetEnumInterface {
 	 */
 	@Override
 	public String getDisplayName(LanguageCode languageCode) {
-		String displayName = displayNames.get(languageCode);
+		String displayName = this.displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
-			return displayNames.get(null);
+			return this.displayNames.get(null);
 		}
 		return displayName;
 	}

@@ -33,7 +33,7 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
  * <div class="it">Classe del documento secondo l'allegato 3 OCIP-DFI</div>
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-02-23")
 public enum ClassCode implements ValueSetEnumInterface {
 
 	/**
@@ -72,13 +72,13 @@ public enum ClassCode implements ValueSetEnumInterface {
 			"Cronologia degli accessi alla CIP"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Care Plan</div>
+	 * <div class="en">Care plan</div>
 	 * <div class="de">Behandlungsplan</div>
 	 * <div class="fr">Plan de traitement</div>
 	 * <div class="it">Piano di trattamento</div>
 	 * <!-- @formatter:on -->
 	 */
-	CARE_PLAN("734163000", "2.16.840.1.113883.6.96", "Care Plan (record artifact)", "Care Plan",
+	CARE_PLAN("734163000", "2.16.840.1.113883.6.96", "Care plan (record artifact)", "Care plan",
 			"Behandlungsplan", "Plan de traitement", "Piano di trattamento"),
 	/**
 	 * <!-- @formatter:off -->
@@ -115,7 +115,8 @@ public enum ClassCode implements ValueSetEnumInterface {
 	EMERGENCY_MEDICAL_IDENTIFICATION_RECORD("722216001", "2.16.840.1.113883.6.96",
 			"Emergency medical identification record (record artifact)",
 			"Emergency medical identification record", "Notfall-ID / Ausweis",
-			"ID d’urgence / carte d’urgence", "Identificativo d'emergenza / scheda d'emergenza"),
+			"ID d’urgence / carte d’urgence",
+			"Identificativo d'emergenza / scheda d'emergenza"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Obstetrical Record</div>
@@ -125,7 +126,7 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	OBSTETRICAL_RECORD("2171000195109", "2.16.756.5.30.1.127.3.4",
-			"Obstetrical Record (record artifact)", "Obstetrical Record",
+			"Obstetrical record (record artifact)", "Obstetrical Record",
 			"Schwangerschafts-/ Geburtsbericht", "Rapport de grossesse / de naissance",
 			"Referto della gravidanza / del parto"),
 	/**
@@ -260,7 +261,7 @@ public enum ClassCode implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Care Plan</div>
+	 * <div class="en">Code for Care plan</div>
 	 * <div class="de">Code für Behandlungsplan</div>
 	 * <div class="fr">Code de Plan de traitement</div>
 	 * <div class="it">Code per Piano di trattamento</div>
@@ -424,7 +425,7 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static ClassCode getEnum(String code) {
+	public static ClassCode getEnum(final String code) {
 		for (final ClassCode x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
@@ -443,7 +444,7 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 *            <div class="de"> enumName</div>
 	 * @return true, if enum is in this value set
 	 */
-	public static boolean isEnumOfValueSet(String enumName) {
+	public static boolean isEnumOfValueSet(final String enumName) {
 		if (enumName == null) {
 			return false;
 		}
@@ -465,7 +466,7 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 *            <div class="de"> code</div>
 	 * @return true, if is in value set
 	 */
-	public static boolean isInValueSet(String codeValue) {
+	public static boolean isInValueSet(final String codeValue) {
 		for (final ClassCode x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
@@ -516,16 +517,17 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	ClassCode(String code, String codeSystem, String displayName, String displayNameEn,
-			String displayNameDe, String displayNameFr, String displayNameIt) {
+	ClassCode(final String code, final String codeSystem, final String displayName,
+			final String displayNameEn, final String displayNameDe, final String displayNameFr,
+			final String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
-		displayNames = new HashMap<>();
-		displayNames.put(null, displayName);
-		displayNames.put(LanguageCode.ENGLISH, displayNameEn);
-		displayNames.put(LanguageCode.GERMAN, displayNameDe);
-		displayNames.put(LanguageCode.FRENCH, displayNameFr);
-		displayNames.put(LanguageCode.ITALIAN, displayNameIt);
+		this.displayNames = new HashMap<>();
+		this.displayNames.put(null, displayName);
+		this.displayNames.put(LanguageCode.ENGLISH, displayNameEn);
+		this.displayNames.put(LanguageCode.GERMAN, displayNameDe);
+		this.displayNames.put(LanguageCode.FRENCH, displayNameFr);
+		this.displayNames.put(LanguageCode.ITALIAN, displayNameIt);
 	}
 
 	/**
@@ -586,9 +588,9 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 */
 	@Override
 	public String getDisplayName(LanguageCode languageCode) {
-		String displayName = displayNames.get(languageCode);
+		String displayName = this.displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
-			return displayNames.get(null);
+			return this.displayNames.get(null);
 		}
 		return displayName;
 	}
