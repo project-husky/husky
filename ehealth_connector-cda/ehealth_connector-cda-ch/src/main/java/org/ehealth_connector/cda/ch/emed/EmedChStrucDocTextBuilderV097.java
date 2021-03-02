@@ -386,7 +386,7 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 			listOfTemplatesIdsPADVRefs.add("2.16.756.5.30.1.1.10.4.46");
 
 			Optional.ofNullable(section.getEntry())
-					.map(entries -> (entries.size() > 0) ? entries.get(0) : null)
+					.map(entries -> (!entries.isEmpty()) ? entries.get(0) : null)
 					.map(POCDMT000040Entry::getObservation)
 					.filter(observation -> observation.getCode() != null
 							&& observation.getCode().getCode() != null)
@@ -399,7 +399,7 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 							.findAny())
 					.map(POCDMT000040EntryRelationship::getSubstanceAdministration)
 					.map(POCDMT000040SubstanceAdministration::getCode).map(CD::getCode)
-					.map(codeRef -> {
+					.map((String codeRef) -> {
 						String codeStringLowerCase = section.getEntry().get(0).getObservation()
 								.getCode().getCode().toLowerCase();
 						if (codeStringLowerCase.contains("ok")
@@ -410,12 +410,15 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 									+ codeRef.replace("Item", "").toLowerCase() + "."
 									+ codeStringLowerCase;
 							return new NarrativeTableInfos(resBundle.getString(messageKey),
-									new String[] {});
+									new String[] {
+											EmedTextNarrativeAttributes.COMMENT.getCodeValue()
+									});
 						} else if (codeStringLowerCase.contains("comment")) {
 							padvType.set("comment");
 							return new NarrativeTableInfos(resBundle.getString("emed.padv.comment"),
 									new String[] {
-											EmedTextNarrativeAttributes.COMMENT.getCodeValue() });
+											EmedTextNarrativeAttributes.COMMENT.getCodeValue()
+									});
 						} else if (codeStringLowerCase.contains("change")) {
 							padvType.set("change");
 							String messageKey = "emed.padv."
@@ -435,8 +438,8 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 													.getCodeValue(),
 											EmedTextNarrativeAttributes.REPEAT.getCodeValue(),
 											EmedTextNarrativeAttributes.DISPENSE_AMOUNT
-													.getCodeValue() });
-
+													.getCodeValue()
+									});
 						} else {
 							return null;
 						}
@@ -496,38 +499,25 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 		}
 
 		initParamNameToValues();
-		if (padvType.get().contains("comment")) {
-			if (section.getEntry() != null && section.getEntry().size() > 0) {
-				for (POCDMT000040Entry entry : section.getEntry()) {
+
+		if (!section.getEntry().isEmpty()) {
+			for (final POCDMT000040Entry entry : section.getEntry()) {
+				if (this.emedClass.equals("PADV")) {
 					this.entry = entry;
 					setPadvNarrativeComment();
-				}
-			}
-		} else if (padvType.get().contains("change")) {
-			if (section.getEntry() != null && section.getEntry().size() > 0) {
-				for (POCDMT000040Entry entry : section.getEntry()) {
-					this.entry = entry;
-					this.setPadvChangeNarrativeText();
-				}
-
-			}
-		} else if (emedClass.equals("DIS")) {
-			if (section.getEntry() != null && section.getEntry().size() > 0) {
-				for (POCDMT000040Entry entry : section.getEntry()) {
+					if (padvType.get().contains("change")) {
+						setPadvChangeNarrativeText();
+					}
+				} else if (emedClass.equals("DIS")) {
 					this.entry = entry;
 					setDisNarrativeText();
-				}
-			}
-		} else {
-			if (section.getEntry() != null && section.getEntry().size() > 0) {
-				for (POCDMT000040Entry entry : section.getEntry()) {
+				} else {
 					this.entry = entry;
 					setNarrativeParameters();
 					rowCrt++;
 				}
 			}
 		}
-
 		addNarrativeTablesInfos(this);
 
 		this.setID(contentIdStr);
