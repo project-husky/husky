@@ -1205,10 +1205,14 @@ public class CdaUtil {
 		final Binder<Node> binder = context.createBinder();
 		final Comment comment = doc.createComment(CdaUtil.generateVersionForCdaXmlHeaderComment());
 		doc.appendChild(comment);
-		doc.appendChild(doc.createProcessingInstruction("xml-stylesheet",
-				"type=\"text/css\" href=\"" + css + "\""));
-		doc.appendChild(doc.createProcessingInstruction("xml-stylesheet",
-				"type=\"text/xsl\" href=\"" + xsl + "\""));
+		if (css != null) {
+			doc.appendChild(doc.createProcessingInstruction("xml-stylesheet",
+					"type=\"text/css\" href=\"" + css + "\""));
+		}
+		if (xsl != null) {
+			doc.appendChild(doc.createProcessingInstruction("xml-stylesheet",
+					"type=\"text/xsl\" href=\"" + xsl + "\""));
+		}
 
 		binder.marshal(jaxbObject, doc);
 
