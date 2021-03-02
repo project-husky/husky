@@ -27,7 +27,7 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * Dosage Instructions may be provided structured and/or narrative. This entry
  * describes structured dosage instructions.
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
 public class DosageInstructionsStartStopFrequency
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
 

@@ -39,7 +39,7 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * new document. - Values that are only contained in the new document are to be
  * added.
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
 public class CdachHeaderDocumentReplacement
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedDocument {
 

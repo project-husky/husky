@@ -27,7 +27,7 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * entries <span style="line-height: 1.22;">within the same
  * document </span></div>
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
 public class IheinternalReferenceEntry
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
 

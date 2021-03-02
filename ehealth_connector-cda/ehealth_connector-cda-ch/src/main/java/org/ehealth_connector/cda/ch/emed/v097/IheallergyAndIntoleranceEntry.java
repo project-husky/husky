@@ -28,7 +28,7 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * Problem Entry 1.3.6.1.4.1.19376.1.5.3.1.4.5 and of the CCD alert observation
  * template 2.16.840.1.113883.10.20.1.18
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
 public class IheallergyAndIntoleranceEntry
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
@@ -100,7 +100,9 @@ public class IheallergyAndIntoleranceEntry
 				.createPOCDMT000040EntryRelationship();
 		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship
 				.fromValue(typeCode));
-		retVal.setInversionInd(Boolean.parseBoolean(inversionInd));
+		if (inversionInd != null) {
+			retVal.setInversionInd(Boolean.parseBoolean(inversionInd));
+		}
 		return retVal;
 	}
 

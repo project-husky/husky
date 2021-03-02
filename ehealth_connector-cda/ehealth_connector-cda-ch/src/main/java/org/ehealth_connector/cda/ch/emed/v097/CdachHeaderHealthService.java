@@ -28,7 +28,7 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * Element description: Information about a health service describing the
  * context of this CDA document.
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
 public class CdachHeaderHealthService
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf {
 

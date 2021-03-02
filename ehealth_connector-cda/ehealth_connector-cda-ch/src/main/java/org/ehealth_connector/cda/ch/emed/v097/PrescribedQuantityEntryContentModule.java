@@ -23,7 +23,7 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.38 Template
  * description: Amount of units of the consumable to dispense
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
 public class PrescribedQuantityEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Supply {
 
@@ -45,7 +45,9 @@ public class PrescribedQuantityEntryContentModule
 			String value) {
 		ObjectFactory factory = new ObjectFactory();
 		org.ehealth_connector.common.hl7cdar2.BL retVal = factory.createBL();
-		retVal.setValue(Boolean.parseBoolean(value));
+		if (value != null) {
+			retVal.setValue(Boolean.parseBoolean(value));
+		}
 		return retVal;
 	}
 

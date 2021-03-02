@@ -29,7 +29,7 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * preparation/compound medicine and contains information such as name,
  * medication form, packaging information and active ingredients.
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
 public class ManufacturedMaterialEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Material {
 

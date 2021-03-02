@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * countries will result in adjustments to the ISO country list.The length of
  * the feature is 2 characters.
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
 public class CdachOtherAddressInformationCompilationECh0010 {
 
 	public CdachOtherAddressInformationCompilationECh0010() {

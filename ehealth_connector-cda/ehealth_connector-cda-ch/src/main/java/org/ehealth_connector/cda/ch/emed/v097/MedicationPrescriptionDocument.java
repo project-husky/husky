@@ -44,7 +44,7 @@ import org.ehealth_connector.common.utils.Hl7CdaR2Util;
  * Pharmacy Technical Framework Supplement – Pharmacy Prescription (PRE)</a>.
  */
 @XmlRootElement(name = "ClinicalDocument", namespace = "urn:hl7-org:v3")
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
 public class MedicationPrescriptionDocument
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
 
@@ -74,15 +74,6 @@ public class MedicationPrescriptionDocument
 	 */
 	public void addHl7Author(org.ehealth_connector.common.hl7cdar2.POCDMT000040Author value) {
 		getAuthor().add(value);
-	}
-
-	/**
-	 * Adds a hl7DocumentationOf Information about a health service describing
-	 * the context of this CDA document.
-	 */
-	public void addHl7DocumentationOf(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf value) {
-		getDocumentationOf().add(value);
 	}
 
 	/**
@@ -141,14 +132,6 @@ public class MedicationPrescriptionDocument
 	 */
 	public void clearHl7Author() {
 		getAuthor().clear();
-	}
-
-	/**
-	 * Adds a hl7DocumentationOf Information about a health service describing
-	 * the context of this CDA document.
-	 */
-	public void clearHl7DocumentationOf() {
-		getDocumentationOf().clear();
 	}
 
 	/**
@@ -259,6 +242,13 @@ public class MedicationPrescriptionDocument
 	 */
 	public org.ehealth_connector.common.hl7cdar2.POCDMT000040DataEnterer getHl7DataEnterer() {
 		return dataEnterer;
+	}
+
+	/**
+	 * Gets the hl7DocumentationOf Validity of document
+	 */
+	public java.util.List<org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf> getHl7DocumentationOf() {
+		return documentationOf;
 	}
 
 	/**
@@ -572,6 +562,15 @@ public class MedicationPrescriptionDocument
 	public void setHl7DataEnterer(
 			org.ehealth_connector.common.hl7cdar2.POCDMT000040DataEnterer value) {
 		this.dataEnterer = value;
+	}
+
+	/**
+	 * Sets the hl7DocumentationOf Validity of document
+	 */
+	public void setHl7DocumentationOf(
+			org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf value) {
+		getDocumentationOf().clear();
+		getDocumentationOf().add(value);
 	}
 
 	/**

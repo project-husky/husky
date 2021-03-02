@@ -27,7 +27,7 @@ import javax.annotation.Generated;
  * the very first version of that document. For later versions, the version
  * number MUST be increased by 1 each.
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
 public class CdachHeaderDocumentSetIdAndVersionNumber
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
 

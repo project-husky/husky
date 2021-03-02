@@ -29,7 +29,7 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * Element description: Information about the author of a CDA document, section
  * or entry. An author MAY be a person or a device.
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
 public class CdachOtherAuthor extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Author {
 
 	public CdachOtherAuthor() {

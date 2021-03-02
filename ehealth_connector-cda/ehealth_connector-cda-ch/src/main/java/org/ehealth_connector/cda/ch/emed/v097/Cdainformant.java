@@ -23,7 +23,7 @@ import javax.annotation.Generated;
  * description: Template CDA Informant (prototype, directly derived from
  * POCD_RM000040 MIF)
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
 public class Cdainformant extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Informant12 {
 
 	public Cdainformant() {

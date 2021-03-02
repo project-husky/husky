@@ -29,7 +29,7 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * the target act using the &lt;entryRelationship&gt; element defined in the CDA
  * Schema.</span>
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
 public class IheseverityEntry
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 

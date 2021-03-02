@@ -36,7 +36,7 @@ import javax.annotation.Generated;
  * Element description: Swiss Realm of Confidentiality Code according to the
  * Swiss EPR regulation.
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
 public class CdachHeaderDocumentConfidentialityCode
 		extends org.ehealth_connector.common.hl7cdar2.CE {
 

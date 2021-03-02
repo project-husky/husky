@@ -25,7 +25,7 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * dispensed medication. It contains the dispensed medicinal product including
  * information such as product code, brand name and packaging information.
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
 public class DispenseItemEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Supply {
 
@@ -74,7 +74,9 @@ public class DispenseItemEntryContentModule
 				.createPOCDMT000040EntryRelationship();
 		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship
 				.fromValue(typeCode));
-		retVal.setInversionInd(Boolean.parseBoolean(inversionInd));
+		if (inversionInd != null) {
+			retVal.setInversionInd(Boolean.parseBoolean(inversionInd));
+		}
 		return retVal;
 	}
 

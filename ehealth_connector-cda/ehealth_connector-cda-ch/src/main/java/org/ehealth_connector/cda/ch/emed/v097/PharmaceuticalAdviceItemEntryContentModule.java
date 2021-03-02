@@ -29,7 +29,7 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * the referenced Medication Treatment Plan-, Prescription- or Dispense Item
  * (e.g., change, cancel, etc.).
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
 public class PharmaceuticalAdviceItemEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
@@ -102,7 +102,9 @@ public class PharmaceuticalAdviceItemEntryContentModule
 				.createPOCDMT000040EntryRelationship();
 		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship
 				.fromValue(typeCode));
-		retVal.setInversionInd(Boolean.parseBoolean(inversionInd));
+		if (inversionInd != null) {
+			retVal.setInversionInd(Boolean.parseBoolean(inversionInd));
+		}
 		return retVal;
 	}
 

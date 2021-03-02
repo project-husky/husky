@@ -28,7 +28,7 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * Prescription-, Dispense- or Administration Item referenced by the underlying
  * Pharmaceutical Advice Item causes.
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
 public class PharmaceuticalAdviceConcernEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
 
@@ -73,7 +73,9 @@ public class PharmaceuticalAdviceConcernEntryContentModule
 				.createPOCDMT000040EntryRelationship();
 		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship
 				.fromValue(typeCode));
-		retVal.setInversionInd(Boolean.parseBoolean(inversionInd));
+		if (inversionInd != null) {
+			retVal.setInversionInd(Boolean.parseBoolean(inversionInd));
+		}
 		return retVal;
 	}
 

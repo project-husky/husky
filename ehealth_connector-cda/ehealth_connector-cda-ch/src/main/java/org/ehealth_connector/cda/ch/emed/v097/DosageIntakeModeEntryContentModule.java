@@ -27,7 +27,7 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040Material;
  * description: Dosage intake mode reference to free text (non structured) in
  * narrative part.
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
 public class DosageIntakeModeEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
 

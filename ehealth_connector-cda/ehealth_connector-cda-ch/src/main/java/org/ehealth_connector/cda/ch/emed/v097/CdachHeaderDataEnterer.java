@@ -32,7 +32,7 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * has been entered by a person other than the author but only when this is
  * relevant for some reason.
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
 public class CdachHeaderDataEnterer
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040DataEnterer {
 

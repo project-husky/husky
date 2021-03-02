@@ -46,7 +46,7 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
  * vocabulary that does not supply pre-coordinated negations, or which do not
  * allow the negation to be recorded with post-coordinated coded terminology.
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
 public class IheproblemEntry extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
 	public IheproblemEntry() {
@@ -84,7 +84,9 @@ public class IheproblemEntry extends org.ehealth_connector.common.hl7cdar2.POCDM
 				.createPOCDMT000040EntryRelationship();
 		retVal.setTypeCode(org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship
 				.fromValue(typeCode));
-		retVal.setInversionInd(Boolean.parseBoolean(inversionInd));
+		if (inversionInd != null) {
+			retVal.setInversionInd(Boolean.parseBoolean(inversionInd));
+		}
 		return retVal;
 	}
 

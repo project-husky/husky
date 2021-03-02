@@ -28,7 +28,7 @@ import org.ehealth_connector.common.basetypes.CodeBaseType;
  *
  * Element description: IHE PHARM MTP document code
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
 public class DocumentCodeMedicationTreatmentPlan extends org.ehealth_connector.common.hl7cdar2.CE {
 
 	public DocumentCodeMedicationTreatmentPlan() {
