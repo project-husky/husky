@@ -26,8 +26,8 @@ import org.ehealth_connector.cda.ch.CdaChV2StructuredBody;
 import org.ehealth_connector.cda.ch.edes.CdaChEdesCtnn;
 import org.ehealth_connector.cda.ch.edes.CdaChEdesEdpn;
 import org.ehealth_connector.cda.ch.edes.enums.SectionsEdes;
-import org.ehealth_connector.cda.ch.emed.EmedChStrucDocTextBuilderV096;
-import org.ehealth_connector.cda.ch.emed.v096.*;
+import org.ehealth_connector.cda.ch.emed.EmedChStrucDocTextBuilderV097;
+import org.ehealth_connector.cda.ch.emed.v097.*;
 import org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport;
 import org.ehealth_connector.cda.ch.lab.lrph.CdaChLrph;
 import org.ehealth_connector.cda.ch.lab.lrqc.CdaChLrqc;
@@ -399,7 +399,7 @@ public abstract class CdaChUtil extends CdaUtilMdht {
 				|| sectionCode.contentEquals(DIS_SECTION_CODE)
 				|| sectionCode.contentEquals(PMLC_SECTION_CODE)) {
 			try {
-				strucDocText = new EmedChStrucDocTextBuilderV096(section, languageCode, temp);
+				strucDocText = new EmedChStrucDocTextBuilderV097(section, languageCode, temp);
 			} catch (Exception e) {
 				// if an exception is catched it means that the document was
 				// malformated -> narrative text is not generated
