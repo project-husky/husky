@@ -20,10 +20,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.ehealth_connector.cda.NarrativeTableInfos;
 import org.ehealth_connector.cda.ch.emed.enums.EmedTextNarrativeAttributes;
 import org.ehealth_connector.cda.ch.emed.v097.*;
-import org.ehealth_connector.cda.ch.emed.v097.enums.ActSubstanceAdminSubstitutionCode;
-import org.ehealth_connector.cda.ch.emed.v097.enums.ChEmedTimingEvent;
-import org.ehealth_connector.cda.ch.emed.v097.enums.PharmaceuticalDoseFormEdqm;
-import org.ehealth_connector.cda.ch.emed.v097.enums.RouteOfAdministrationEdqm;
+import org.ehealth_connector.cda.ch.emed.v097.enums.*;
 import org.ehealth_connector.cda.ch.enums.UnitsOfTime;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.ihe.pharm.enums.DosageType;
@@ -738,10 +735,10 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 				String seqNumber = entryRelationship.getSequenceNumber() != null
 						? entryRelationship.getSequenceNumber().getValue().toString()
 						: "";
-				String doseQuantityStr = parseIvlPq(substanceAdministrationCrt.getDoseQuantity());
+				String doseQuantityStr = parseIvlPq(substanceAdministrationCrt.getDoseQuantity(), languageCode);
 
 				String rateQuantityStr = parseRateQuantity(
-						substanceAdministrationCrt.getRateQuantity());
+						substanceAdministrationCrt.getRateQuantity(), languageCode);
 				if (StringUtils.isNotEmpty(rateQuantityStr)) {
 					rateQuantityStr = ", "
 							+ EmedTextNarrativeAttributes.RATE_QUANTITY.getDisplayName(languageCode)
@@ -838,20 +835,24 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 	 *
 	 * @param doseQuantityElement
 	 *            a doseQuantityElement
-	 * @param unitGlobal
+	 * @param unit
 	 *            an unitGlobal
+	 * @param languageCode
+	 *            the language code
 	 * @return dose quantity to string
 	 */
 	private static String doseQuantityElementToString(JAXBElement<? extends PQ> doseQuantityElement,
-			String unitGlobal) {
-		String str;
-		str = doseQuantityElement.getValue().getValue();
-		if (isNotEmptyPqUnit(doseQuantityElement)) {
-			str += doseQuantityElement.getValue().getUnit();
-		} else {
-			str += unitGlobal;
+			                                          String unit,
+											          LanguageCode languageCode) {
+		if (doseQuantityElement == null) {
+			return "";
 		}
-		return str;
+		if (isNotEmptyPqUnit(doseQuantityElement)) {
+			final String unitCode = doseQuantityElement.getValue().getUnit();
+			final UnitsOfPresentation unitEnum = UnitsOfPresentation.getEnum(unitCode);
+			unit = (unitEnum != null) ? unitEnum.getDisplayName(languageCode) : unitCode;
+		}
+		return doseQuantityElement.getValue().getValue() + unit;
 	}
 
 	/**
@@ -1129,38 +1130,44 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 	 *
 	 * @param ivlpq
 	 *            format of dosage intake
+	 * @param languageCode
+	 *            the language code
 	 * @return ivlpq to rate quantity string format
 	 */
-	private static String parseRateQuantity(IVLPQ ivlpq) {
+	private static String parseRateQuantity(IVLPQ ivlpq, LanguageCode languageCode) {
 		if (ivlpq != null) {
 			String unitGlobal = "";
 			if (StringUtils.isNotEmpty(ivlpq.getUnit()) && !ivlpq.getUnit().equals("1")) {
-				unitGlobal = ivlpq.getUnit();
+				final UnitsOfPresentation unitEnum = UnitsOfPresentation.getEnum(ivlpq.getUnit());
+				unitGlobal = (unitEnum != null) ? unitEnum.getDisplayName(languageCode) : ivlpq.getUnit();
 			}
-			// if the value is directly in the doseQuantity element the unit can
+			// if the value is directly in the rateQuantity element the unit can
 			// only be in this element (not on low/high child element)
 			if (StringUtils.isNotEmpty(ivlpq.getValue())) {
-				return ivlpq.getValue() + "/" + unitGlobal;
+				return String.format("%s %s %s",
+						ivlpq.getValue(),
+						resBundle.getString("emed.per"),
+						unitGlobal);
 			} else {
 				String lowText = "";
 				String highText = "";
 				String centerText = "";
-				for (JAXBElement<? extends PQ> doseQuantityElement : ivlpq.getRest()) {
-					String elementName = doseQuantityElement.getName().getLocalPart();
+				for (JAXBElement<? extends PQ> rateQuantityElement : ivlpq.getRest()) {
+					String elementName = rateQuantityElement.getName().getLocalPart();
 					// check if it contain a value
-					if (isNotEmptyPqValue(doseQuantityElement)) {
+					if (isNotEmptyPqValue(rateQuantityElement)) {
 						switch (elementName) {
 						case "low":
-							lowText = rateQuantityElementToString(doseQuantityElement, unitGlobal);
+							lowText = rateQuantityElementToString(rateQuantityElement, unitGlobal, languageCode);
 							break;
 						case "high":
-							highText = rateQuantityElementToString(doseQuantityElement, unitGlobal);
+							highText = rateQuantityElementToString(rateQuantityElement, unitGlobal, languageCode);
 							break;
 						case "center":
-							centerText = rateQuantityElementToString(doseQuantityElement,
-									unitGlobal);
+							centerText = rateQuantityElementToString(rateQuantityElement,
+									unitGlobal, languageCode);
 
-							// if there is a ceter value its should not have low
+							// if there is a center value its should not have low
 							// or high value
 						}
 					}
@@ -1186,20 +1193,27 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 	 *
 	 * @param rateQuantityElement
 	 *            a rateQuantityElement
-	 * @param unitGlobal
+	 * @param unit
 	 *            an unit
+	 * @param languageCode
+	 *            the language code
 	 * @return transformed rate quantity to string
 	 */
 	private static String rateQuantityElementToString(JAXBElement<? extends PQ> rateQuantityElement,
-			String unitGlobal) {
-		String str;
-		str = rateQuantityElement.getValue().getValue() + "/";
-		if (isNotEmptyPqUnit(rateQuantityElement)) {
-			str += rateQuantityElement.getValue().getUnit();
-		} else {
-			str += unitGlobal;
+			                                          String unit,
+											          LanguageCode languageCode) {
+		if (rateQuantityElement == null) {
+			return "";
 		}
-		return str;
+		if (isNotEmptyPqUnit(rateQuantityElement)) {
+			final String unitCode = rateQuantityElement.getValue().getUnit();
+			final UnitsOfPresentation unitEnum = UnitsOfPresentation.getEnum(unitCode);
+			unit = (unitEnum != null) ? unitEnum.getDisplayName(languageCode) : unitCode;
+		}
+		return String.format("%s %s %s",
+				rateQuantityElement.getValue().getValue(),
+				resBundle.getString("emed.per"),
+				unit);
 	}
 
 	/**
@@ -1208,9 +1222,11 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 	 *
 	 * @param ivlpq
 	 *            format of dosage intake
+	 * @param languageCode
+	 *            language code
 	 * @return ivlpq to string formatted
 	 */
-	static String parseIvlPq(IVLPQ ivlpq) {
+	static String parseIvlPq(IVLPQ ivlpq, LanguageCode languageCode) {
 		if (ivlpq != null) {
 			String unitGlobal = "";
 			String valueText;
@@ -1232,14 +1248,14 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 					if (isNotEmptyPqValue(doseQuantityElement)) {
 						switch (elementName) {
 						case "low":
-							lowText = doseQuantityElementToString(doseQuantityElement, unitGlobal);
+							lowText = doseQuantityElementToString(doseQuantityElement, unitGlobal, languageCode);
 							break;
 						case "high":
-							highText = doseQuantityElementToString(doseQuantityElement, unitGlobal);
+							highText = doseQuantityElementToString(doseQuantityElement, unitGlobal, languageCode);
 							break;
 						case "center":
 							centerText = doseQuantityElementToString(doseQuantityElement,
-									unitGlobal);
+									unitGlobal, languageCode);
 
 							// if there is a ceter value its should not have low
 							// or high value
@@ -1672,8 +1688,8 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 				this.dateFromTo = "-";
 			}
 
-			this.doseQuantity = parseIvlPq(substanceAdministration.getDoseQuantity());
-			this.rateQuantity = parseRateQuantity(substanceAdministration.getRateQuantity());
+			this.doseQuantity = parseIvlPq(substanceAdministration.getDoseQuantity(), this.languageCode);
+			this.rateQuantity = parseRateQuantity(substanceAdministration.getRateQuantity(), this.languageCode);
 		}
 
 	}
@@ -1866,9 +1882,9 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 					if (StringUtils.isEmpty(this.dateFromTo)) {
 						this.dateFromTo = "-";
 					}
-					this.doseQuantity = parseIvlPq(substanceAdministration.getDoseQuantity());
+					this.doseQuantity = parseIvlPq(substanceAdministration.getDoseQuantity(), languageCode);
 					this.rateQuantity = parseRateQuantity(
-							substanceAdministration.getRateQuantity());
+							substanceAdministration.getRateQuantity(), languageCode);
 				}
 
 				POCDMT000040EntryRelationship entryRelationshipComment = filterEntryRelationshipAtcByTemplateId(
@@ -1971,10 +1987,10 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 			}
 
 			if (substanceAdministration.getDoseQuantity() != null) {
-				this.doseQuantity = parseIvlPq(substanceAdministration.getDoseQuantity());
+				this.doseQuantity = parseIvlPq(substanceAdministration.getDoseQuantity(), this.languageCode);
 			}
 			if (substanceAdministration.getRateQuantity() != null) {
-				this.rateQuantity = parseRateQuantity(substanceAdministration.getRateQuantity());
+				this.rateQuantity = parseRateQuantity(substanceAdministration.getRateQuantity(), this.languageCode);
 			}
 
 			// Getting treatment reason

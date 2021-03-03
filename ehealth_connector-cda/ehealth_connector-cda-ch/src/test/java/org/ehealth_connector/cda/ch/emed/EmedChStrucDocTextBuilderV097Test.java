@@ -22,7 +22,7 @@ import org.ehealth_connector.cda.ch.emed.v097.DosageInstructionsStartStopFrequen
 import org.ehealth_connector.cda.ch.emed.v097.DosageIntakeModeEntryContentModule;
 import org.ehealth_connector.cda.ch.emed.v097.MedicationTreatmenPlanSectionContentModule;
 import org.ehealth_connector.cda.ch.emed.v097.enums.ChEmedTimingEvent;
-import org.ehealth_connector.cda.ch.enums.UnitsOfTime;
+import org.ehealth_connector.cda.ch.emed.v097.enums.UnitsOfPresentation;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Identificator;
@@ -154,12 +154,13 @@ public class EmedChStrucDocTextBuilderV097Test {
 		dosageInstructionsEntryDosageChange.setHl7SequenceNumber(anInt);
 		dosageInstructionsEntryDosageChange.setSubstanceAdministration(substanceAdministration);
 		if (doseQuantityInG != null) {
-			IVLPQ doseQuantity = CdaUtil.createHl7CdaR2Ivlpq(doseQuantityInG, "g");
+			IVLPQ doseQuantity = CdaUtil.createHl7CdaR2Ivlpq(doseQuantityInG,
+					UnitsOfPresentation.G.getCodeValue());
 			substanceAdministration.setDoseQuantity(doseQuantity);
 		}
 		if (rateQuantityInG != null) {
 			IVLPQ doseQuantity = CdaUtil.createHl7CdaR2Ivlpq(rateQuantityInG,
-					UnitsOfTime.MINUTE.getCodeValue());
+					UnitsOfPresentation.MIN.getCodeValue());
 
 			substanceAdministration.setRateQuantity(doseQuantity);
 		}
@@ -216,7 +217,7 @@ public class EmedChStrucDocTextBuilderV097Test {
 
 		EIVLTS eivlts = createAcmWithOffset();
 
-		System.out.println(EmedChStrucDocTextBuilderV096.parseEivlTs(LanguageCode.ENGLISH, eivlts));
+		System.out.println(EmedChStrucDocTextBuilderV097.parseEivlTs(LanguageCode.ENGLISH, eivlts));
 		diStartStopFrequency.getEffectiveTime().add(eivlts);
 
 		diStartStopFrequency.setDoseQuantity(CdaUtil.createHl7CdaR2Ivlpq("0.5", null));
@@ -488,7 +489,7 @@ public class EmedChStrucDocTextBuilderV097Test {
 				.getThOrTd().get(2);
 		assertEquals("MTP.frequency.section0021.0", strucDocTd.getID());
 		assertEquals("1) 40g Après le repas du soir", strucDocTd.getContent().get(0));
-		assertEquals("2) 20g Avant le coucher, Débit : 10/min", strucDocTd.getContent().get(2));
+		assertEquals("2) 20g Avant le coucher, Débit : 10 par min", strucDocTd.getContent().get(2));
 
 		String DOSAGE_INTAKE_REFERENCE_TEMPLATE_ID = new DosageIntakeModeEntryContentModule()
 				.getHl7TemplateId().get(0).getRoot(); // "2.16.756.5.30.1.1.10.4.37";
@@ -515,13 +516,13 @@ public class EmedChStrucDocTextBuilderV097Test {
 	@Test
 	public void parseEivltsTest() {
 		EIVLTS eivltsWithOffset = createAcmWithOffset();
-		String eivltsWithOffsetText = EmedChStrucDocTextBuilderV096
+		String eivltsWithOffsetText = EmedChStrucDocTextBuilderV097
 				.parseEivlTs(LanguageCode.ENGLISH, eivltsWithOffset);
-		String eivltsWithOffsetTextFrench = EmedChStrucDocTextBuilderV096
+		String eivltsWithOffsetTextFrench = EmedChStrucDocTextBuilderV097
 				.parseEivlTs(LanguageCode.FRENCH, eivltsWithOffset);
-		String eivltsWithOffsetTextGerman = EmedChStrucDocTextBuilderV096
+		String eivltsWithOffsetTextGerman = EmedChStrucDocTextBuilderV097
 				.parseEivlTs(LanguageCode.GERMAN, eivltsWithOffset);
-		String eivltsWithOffsetTextItalian = EmedChStrucDocTextBuilderV096
+		String eivltsWithOffsetTextItalian = EmedChStrucDocTextBuilderV097
 				.parseEivlTs(LanguageCode.ITALIAN, eivltsWithOffset);
 		assertEquals("1 hour(s) - 2 hour(s) Before breakfast during 1 hour(s)",
 				eivltsWithOffsetText);
@@ -534,9 +535,9 @@ public class EmedChStrucDocTextBuilderV097Test {
 				eivltsWithOffsetTextItalian);
 		EIVLTS eivltsAcm = createAcm();
 		assertEquals("Before breakfast",
-				EmedChStrucDocTextBuilderV096.parseEivlTs(LanguageCode.ENGLISH, eivltsAcm));
+				EmedChStrucDocTextBuilderV097.parseEivlTs(LanguageCode.ENGLISH, eivltsAcm));
 		assertEquals("Avant le petit-déjeuner",
-				EmedChStrucDocTextBuilderV096.parseEivlTs(LanguageCode.FRENCH, eivltsAcm));
+				EmedChStrucDocTextBuilderV097.parseEivlTs(LanguageCode.FRENCH, eivltsAcm));
 	}
 
 	/**
@@ -557,7 +558,7 @@ public class EmedChStrucDocTextBuilderV097Test {
 		 * <period value="2" unit="h"/> </effectiveTime>
 		 */
 		PIVLTS pivltsPeriod = createPivl(false);
-		String pivltsFrequencyStr = EmedChStrucDocTextBuilderV096.parsePivlTs(LanguageCode.ENGLISH,
+		String pivltsFrequencyStr = EmedChStrucDocTextBuilderV097.parsePivlTs(LanguageCode.ENGLISH,
 				pivltsFrequency);
 
 		PIVLTS pivltsWithPhase = createPivlWithPhase();
@@ -566,10 +567,10 @@ public class EmedChStrucDocTextBuilderV097Test {
 		assertEquals("12x per day(s)", pivltsFrequencyStr);
 
 		assertEquals("chaque 2 heure(s)",
-				EmedChStrucDocTextBuilderV096.parsePivlTs(LanguageCode.FRENCH, pivltsPeriod));
+				EmedChStrucDocTextBuilderV097.parsePivlTs(LanguageCode.FRENCH, pivltsPeriod));
 
 		assertEquals("chaque 1 jour(s) à 10:50 pendant 10 minute(s)",
-				EmedChStrucDocTextBuilderV096.parsePivlTs(LanguageCode.FRENCH, pivltsWithPhase));
+				EmedChStrucDocTextBuilderV097.parsePivlTs(LanguageCode.FRENCH, pivltsWithPhase));
 
 		createPivl(pivltsFrequency);
 		createPivl(pivltsPeriod);
@@ -585,11 +586,11 @@ public class EmedChStrucDocTextBuilderV097Test {
 		System.out.println(dosageInstructionsSplited);
 		addDosageInstructionToNewDoc(dosageInstructionsSplited);
 
-		List<String> dosageIntakes = EmedChStrucDocTextBuilderV096
+		List<String> dosageIntakes = EmedChStrucDocTextBuilderV097
 				.parseSplitDosageIntake(dosageInstructionsSplited, LanguageCode.FRENCH);
 
 		assertEquals("1) 40g Après le repas du soir", dosageIntakes.get(0));
-		assertEquals("2) 20g Avant le coucher, Débit : 10/min", dosageIntakes.get(1));
+		assertEquals("2) 20g Avant le coucher, Débit : 10 par min", dosageIntakes.get(1));
 		System.out.println(StringUtils.join(dosageIntakes, "\n"));
 
 	}
@@ -612,7 +613,7 @@ public class EmedChStrucDocTextBuilderV097Test {
 
 		assertEquals(
 				"du 20 juin 2020 10:50 pendant 10 jour(s): Avant le petit-déjeuner et Après le petit-déjeuner et Entre le repas de midi et du soir et Après le repas du soir",
-				EmedChStrucDocTextBuilderV096.parseSxprTs(LanguageCode.FRENCH, sxprts));
+				EmedChStrucDocTextBuilderV097.parseSxprTs(LanguageCode.FRENCH, sxprts));
 	}
 
 	/**
@@ -621,14 +622,14 @@ public class EmedChStrucDocTextBuilderV097Test {
 	@Test
 	public void parseTsTest() {
 		TS ts = DateUtil.date2Ts(DateUtil.parseDateAndTime("20.6.2020 10:50"));
-		String dateFR = EmedChStrucDocTextBuilderV096.parseTs(LanguageCode.FRENCH, ts);
-		String dateDE = EmedChStrucDocTextBuilderV096.parseTs(LanguageCode.GERMAN, ts);
-		String dateIT = EmedChStrucDocTextBuilderV096.parseTs(LanguageCode.ITALIAN, ts);
-		String dateEN = EmedChStrucDocTextBuilderV096.parseTs(LanguageCode.ENGLISH, ts);
-		assertEquals(dateFR, "20 juin 2020 10:50");
-		assertEquals(dateDE, "20 Juni 2020 10:50");
-		assertEquals(dateIT, "20 giugno 2020 10:50");
-		assertEquals(dateEN, "20 June 2020 10:50");
+		String dateFR = EmedChStrucDocTextBuilderV097.parseTs(LanguageCode.FRENCH, ts);
+		String dateDE = EmedChStrucDocTextBuilderV097.parseTs(LanguageCode.GERMAN, ts);
+		String dateIT = EmedChStrucDocTextBuilderV097.parseTs(LanguageCode.ITALIAN, ts);
+		String dateEN = EmedChStrucDocTextBuilderV097.parseTs(LanguageCode.ENGLISH, ts);
+		assertEquals("20 juin 2020 10:50", dateFR);
+		assertEquals("20 Juni 2020 10:50", dateDE);
+		assertEquals("20 giugno 2020 10:50", dateIT);
+		assertEquals("20 June 2020 10:50", dateEN);
 	}
 
 	private void printDoc(SXCMTS dosageFrequency) {
@@ -649,7 +650,7 @@ public class EmedChStrucDocTextBuilderV097Test {
 																							// "g"));
 
 		System.out.println(
-				EmedChStrucDocTextBuilderV096.parseIvlPq(diStartStopFrequency.getDoseQuantity()));
+				EmedChStrucDocTextBuilderV097.parseIvlPq(diStartStopFrequency.getDoseQuantity(), LanguageCode.FRENCH));
 		addDosageInstructionToNewDoc(diStartStopFrequency);
 
 	}

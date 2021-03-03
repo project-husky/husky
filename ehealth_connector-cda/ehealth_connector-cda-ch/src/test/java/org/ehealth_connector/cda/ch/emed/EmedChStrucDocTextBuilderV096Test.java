@@ -38,7 +38,6 @@ import org.ehealth_connector.cda.ch.emed.v096.DosageIntakeModeEntryContentModule
 import org.ehealth_connector.cda.ch.emed.v096.MedicationTreatmenPlanSectionContentModule;
 import org.ehealth_connector.cda.ch.emed.v096.enums.ChEmedTimingEvent;
 import org.ehealth_connector.cda.ch.enums.UnitsOfTime;
-import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.LanguageCode;
@@ -499,9 +498,13 @@ public class EmedChStrucDocTextBuilderV096Test {
 		DosageInstructionsStartStopFrequency dosageInstructionsSplited = createDosageSplited();
 		POCDMT000040ClinicalDocument doc = addDosageInstructionToNewDoc(dosageInstructionsSplited);
 		POCDMT000040StructuredBody structuredBody = CdaUtil.getHl7CdaR2StructuredBody(doc);
-		CdaChUtil.setSectionTextGenerated(structuredBody,
-				structuredBody.getComponent().get(0).getSection(), LanguageCode.FRENCH, 1);
-		StrucDocText strucDocText = structuredBody.getComponent().get(0).getSection().getText();
+
+		String temp = "section"
+				+ ("000" + Integer.toString(CdaUtil.getSectionCount(structuredBody) + 1)).substring(
+				Integer.toString(CdaUtil.getSectionCount(structuredBody) + 1).length())
+				+ 1;
+		StrucDocText strucDocText = new EmedChStrucDocTextBuilderV096(
+				structuredBody.getComponent().get(0).getSection(), LanguageCode.FRENCH, temp);
 		List<Serializable> content = strucDocText.getContent();
 		assertTrue(content.size() > 1);
 		@SuppressWarnings("rawtypes")
