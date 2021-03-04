@@ -33,7 +33,7 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
  * <div class="it">Classe del documento secondo l'allegato 3 OCIP-DFI</div>
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-04")
 public enum ClassCode implements ValueSetEnumInterface {
 
 	/**
@@ -72,13 +72,13 @@ public enum ClassCode implements ValueSetEnumInterface {
 			"Cronologia degli accessi alla CIP"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Care plan</div>
+	 * <div class="en">Care Plan</div>
 	 * <div class="de">Behandlungsplan</div>
 	 * <div class="fr">Plan de traitement</div>
 	 * <div class="it">Piano di trattamento</div>
 	 * <!-- @formatter:on -->
 	 */
-	CARE_PLAN("734163000", "2.16.840.1.113883.6.96", "Care plan (record artifact)", "Care plan",
+	CARE_PLAN("734163000", "2.16.840.1.113883.6.96", "Care Plan (record artifact)", "Care Plan",
 			"Behandlungsplan", "Plan de traitement", "Piano di trattamento"),
 	/**
 	 * <!-- @formatter:off -->
@@ -126,7 +126,7 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	OBSTETRICAL_RECORD("2171000195109", "2.16.756.5.30.1.127.3.4",
-			"Obstetrical record (record artifact)", "Obstetrical Record",
+			"Obstetrical Record (record artifact)", "Obstetrical Record",
 			"Schwangerschafts-/ Geburtsbericht", "Rapport de grossesse / de naissance",
 			"Referto della gravidanza / del parto"),
 	/**
@@ -261,7 +261,7 @@ public enum ClassCode implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Care plan</div>
+	 * <div class="en">Code for Care Plan</div>
 	 * <div class="de">Code für Behandlungsplan</div>
 	 * <div class="fr">Code de Plan de traitement</div>
 	 * <div class="it">Code per Piano di trattamento</div>

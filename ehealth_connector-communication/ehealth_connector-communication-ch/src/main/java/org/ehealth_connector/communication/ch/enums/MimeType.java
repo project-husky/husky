@@ -33,7 +33,7 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
  * <div class="it">Tipo MIME del documento secondo l'allegato 3 OCIP-DFI.</div>
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-02-23")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-04")
 public enum MimeType implements ValueSetEnumInterface {
 
 	/**
