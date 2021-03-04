@@ -650,7 +650,7 @@ public class EmedChStrucDocTextBuilderV097Test {
 																							// "g"));
 
 		System.out.println(
-				EmedChStrucDocTextBuilderV097.parseIvlPq(diStartStopFrequency.getDoseQuantity(), LanguageCode.FRENCH));
+				EmedChStrucDocTextBuilderV097.parseDoseQuantity(diStartStopFrequency.getDoseQuantity(), LanguageCode.FRENCH));
 		addDosageInstructionToNewDoc(diStartStopFrequency);
 
 	}

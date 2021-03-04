@@ -735,7 +735,7 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 				String seqNumber = entryRelationship.getSequenceNumber() != null
 						? entryRelationship.getSequenceNumber().getValue().toString()
 						: "";
-				String doseQuantityStr = parseIvlPq(substanceAdministrationCrt.getDoseQuantity(), languageCode);
+				String doseQuantityStr = parseDoseQuantity(substanceAdministrationCrt.getDoseQuantity(), languageCode);
 
 				String rateQuantityStr = parseRateQuantity(
 						substanceAdministrationCrt.getRateQuantity(), languageCode);
@@ -1226,12 +1226,14 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 	 *            language code
 	 * @return ivlpq to string formatted
 	 */
-	static String parseIvlPq(IVLPQ ivlpq, LanguageCode languageCode) {
+	static String parseDoseQuantity(IVLPQ ivlpq, LanguageCode languageCode) {
 		if (ivlpq != null) {
 			String unitGlobal = "";
 			String valueText;
 			if (StringUtils.isNotEmpty(ivlpq.getUnit()) && !ivlpq.getUnit().equals("1")) {
-				unitGlobal = ivlpq.getUnit();
+				final String unitCode = ivlpq.getUnit();
+				final UnitsOfPresentation unitEnum = UnitsOfPresentation.getEnum(unitCode);
+				unitGlobal = (unitEnum != null) ? unitEnum.getDisplayName(languageCode) : unitCode;
 			}
 			// if the value is directly in the doseQuantity element the unit can
 			// only be in this element (not on low/high child element)
@@ -1688,7 +1690,7 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 				this.dateFromTo = "-";
 			}
 
-			this.doseQuantity = parseIvlPq(substanceAdministration.getDoseQuantity(), this.languageCode);
+			this.doseQuantity = parseDoseQuantity(substanceAdministration.getDoseQuantity(), this.languageCode);
 			this.rateQuantity = parseRateQuantity(substanceAdministration.getRateQuantity(), this.languageCode);
 		}
 
@@ -1882,7 +1884,7 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 					if (StringUtils.isEmpty(this.dateFromTo)) {
 						this.dateFromTo = "-";
 					}
-					this.doseQuantity = parseIvlPq(substanceAdministration.getDoseQuantity(), languageCode);
+					this.doseQuantity = parseDoseQuantity(substanceAdministration.getDoseQuantity(), languageCode);
 					this.rateQuantity = parseRateQuantity(
 							substanceAdministration.getRateQuantity(), languageCode);
 				}
@@ -1987,7 +1989,7 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 			}
 
 			if (substanceAdministration.getDoseQuantity() != null) {
-				this.doseQuantity = parseIvlPq(substanceAdministration.getDoseQuantity(), this.languageCode);
+				this.doseQuantity = parseDoseQuantity(substanceAdministration.getDoseQuantity(), this.languageCode); // QQQ
 			}
 			if (substanceAdministration.getRateQuantity() != null) {
 				this.rateQuantity = parseRateQuantity(substanceAdministration.getRateQuantity(), this.languageCode);
