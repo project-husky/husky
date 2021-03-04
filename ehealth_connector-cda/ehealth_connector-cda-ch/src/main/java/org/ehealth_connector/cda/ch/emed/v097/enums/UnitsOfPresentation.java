@@ -33,7 +33,7 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
  * <div class="it">no designation found for language ITALIAN</div>
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-04")
 public enum UnitsOfPresentation implements ValueSetEnumInterface {
 
 	/**
@@ -849,6 +849,33 @@ public enum UnitsOfPresentation implements ValueSetEnumInterface {
 			"tube", "Tubo"),
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">µg</div>
+	 * <div class="de">µg</div>
+	 * <div class="fr">µg</div>
+	 * <div class="it">µg</div>
+	 * <!-- @formatter:on -->
+	 */
+	UG("ug", "2.16.840.1.113883.6.8", "microgram", "µg", "µg", "µg", "µg"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">µl</div>
+	 * <div class="de">µl</div>
+	 * <div class="fr">µl</div>
+	 * <div class="it">µl</div>
+	 * <!-- @formatter:on -->
+	 */
+	UL("uL", "2.16.840.1.113883.6.8", "microliter", "µl", "µl", "µl", "µl"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">µmol</div>
+	 * <div class="de">µmol</div>
+	 * <div class="fr">µmol</div>
+	 * <div class="it">µmol</div>
+	 * <!-- @formatter:on -->
+	 */
+	UMOL("umol", "2.16.840.1.113883.6.8", "micromol", "µmol", "µmol", "µmol", "µmol"),
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">unit</div>
 	 * <div class="de">Einheit</div>
 	 * <div class="fr">unité(s)</div>
@@ -875,34 +902,7 @@ public enum UnitsOfPresentation implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	VIAL("733026001", "2.16.840.1.113883.6.96", "Vial (unit of presentation)", "Vial",
-			"Durchstechflasche", "petit flacon", "Flaconcino"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">µg</div>
-	 * <div class="de">µg</div>
-	 * <div class="fr">µg</div>
-	 * <div class="it">µg</div>
-	 * <!-- @formatter:on -->
-	 */
-	_G("ug", "2.16.840.1.113883.6.8", "microgram", "µg", "µg", "µg", "µg"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">µl</div>
-	 * <div class="de">µl</div>
-	 * <div class="fr">µl</div>
-	 * <div class="it">µl</div>
-	 * <!-- @formatter:on -->
-	 */
-	_L("uL", "2.16.840.1.113883.6.8", "microliter", "µl", "µl", "µl", "µl"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">µmol</div>
-	 * <div class="de">µmol</div>
-	 * <div class="fr">µmol</div>
-	 * <div class="it">µmol</div>
-	 * <!-- @formatter:on -->
-	 */
-	_MOL("umol", "2.16.840.1.113883.6.8", "micromol", "µmol", "µmol", "µmol", "µmol");
+			"Durchstechflasche", "petit flacon", "Flaconcino");
 
 	/**
 	 * <!-- @formatter:off -->
@@ -1746,6 +1746,36 @@ public enum UnitsOfPresentation implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
+	 * <div class="en">Code for µg</div>
+	 * <div class="de">Code für µg</div>
+	 * <div class="fr">Code de µg</div>
+	 * <div class="it">Code per µg</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String UG_CODE = "ug";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for µl</div>
+	 * <div class="de">Code für µl</div>
+	 * <div class="fr">Code de µl</div>
+	 * <div class="it">Code per µl</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String UL_CODE = "uL";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for µmol</div>
+	 * <div class="de">Code für µmol</div>
+	 * <div class="fr">Code de µmol</div>
+	 * <div class="it">Code per µmol</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String UMOL_CODE = "umol";
+
+	/**
+	 * <!-- @formatter:off -->
 	 * <div class="en">Code for unit</div>
 	 * <div class="de">Code für Einheit</div>
 	 * <div class="fr">Code de unité(s)</div>
@@ -1773,36 +1803,6 @@ public enum UnitsOfPresentation implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	public static final String VIAL_CODE = "733026001";
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for µg</div>
-	 * <div class="de">Code für µg</div>
-	 * <div class="fr">Code de µg</div>
-	 * <div class="it">Code per µg</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String _G_CODE = "ug";
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for µl</div>
-	 * <div class="de">Code für µl</div>
-	 * <div class="fr">Code de µl</div>
-	 * <div class="it">Code per µl</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String _L_CODE = "uL";
-
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for µmol</div>
-	 * <div class="de">Code für µmol</div>
-	 * <div class="fr">Code de µmol</div>
-	 * <div class="it">Code per µmol</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String _MOL_CODE = "umol";
 
 	/**
 	 * <!-- @formatter:off -->
