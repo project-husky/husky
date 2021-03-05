@@ -27,13 +27,20 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
+ * Enumeration of EprRole values
+ *
  * <div class="en">Role codes as per Annex 5 EPRO-FDHA, version July 2019</div>
  * <div class="de">no designation found for language GERMAN</div>
  * <div class="fr">no designation found for language FRENCH</div>
  * <div class="it">no designation found for language ITALIAN</div>
+ *
+ * Identifier: 2.16.756.5.30.1.127.3.10.15.1
+ * Effective date: 2019-12-11 17:01
+ * Version: 201907.2-stable
+ * Status: FINAL
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-04")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-05")
 public enum Role implements ValueSetEnumInterface {
 
 	/**

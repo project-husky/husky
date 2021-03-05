@@ -27,13 +27,20 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
+ * Enumeration of DocumentEntry.sourcePatientInfo.PID-8 values
+ *
  * <div class="en">Patient’s gender as per Annex 3; EPRO-FDHA.</div>
  * <div class="de">Geschlecht der Patientin oder des Patienten gemäss Anhang 3 EPDV-EDI.</div>
  * <div class="fr">Sexe du patient selon l'annexe 3 ODEP-DFI.</div>
  * <div class="it">Sesso del paziente secondo l'allegato 3 OCIP-DFI.</div>
+ *
+ * Identifier: 2.16.840.1.113883.4.642.3.1
+ * Effective date: 2019-12-11 08:57
+ * Version: 201907.2-stable
+ * Status: FINAL
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-04")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-05")
 public enum SourcePatientInfo implements ValueSetEnumInterface {
 
 	/**

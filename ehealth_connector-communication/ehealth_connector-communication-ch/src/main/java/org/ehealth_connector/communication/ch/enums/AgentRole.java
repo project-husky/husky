@@ -27,13 +27,20 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
+ * Enumeration of EprAgentRole values
+ *
  * <div class="en"><span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;">Role codes as per Annex 5 EPRO-FDHA, CH:ATC, </span><span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;">version</span> <span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;">July 2019 </span><br clear="none"/></div>
  * <div class="de">no designation found for language GERMAN</div>
  * <div class="fr">no designation found for language FRENCH</div>
  * <div class="it">no designation found for language ITALIAN</div>
+ *
+ * Identifier: 2.16.756.5.30.1.127.3.10.13.1
+ * Effective date: 2019-11-03 14:34
+ * Version: 201907.1-stable
+ * Status: FINAL
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-04")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-05")
 public enum AgentRole implements ValueSetEnumInterface {
 
 	/**

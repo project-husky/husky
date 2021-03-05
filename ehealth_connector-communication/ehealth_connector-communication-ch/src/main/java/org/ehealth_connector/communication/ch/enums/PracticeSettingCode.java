@@ -27,13 +27,20 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
+ * Enumeration of DocumentEntry.practiceSettingCode values
+ *
  * <div class="en">Medical specialisation of the data captured in the document as per Annex 3; EPRO-FDHA. This attribute assigns the contents of a document to a medical specialisation. It is conceivable that this information will assist the patient with setting or changing the confidentiality level of documents, which is relevant for controlling access.</div>
  * <div class="de">Medizinische Fachrichtung der in dem Dokument erfassten Daten gemäss Anhang 3 EPDV-EDI. Dieses Attribut soll den Inhalt eines Dokumentes einer medizinischen Fachrichtung zuordnen. Es ist denkbar, dass der Patient mit dieser Information eine Hilfestellung erhält zum Setzen oder Verändern der Vertraulichkeitsstufe von Dokumenten, welche relevant ist für die Zugriffssteuerung.</div>
  * <div class="fr">Discipline médicale des données saisies dans le document selon l'annexe 3 ODEP-DFI. Cet attribut permet d'indiquer la discipline médicale dont relève le contenu d'un document. Cette information peut guider le patient et l'aider à choisir ou à changer le niveau de confidentialité attribué à ses documents et qui détermine les droits d'accès.</div>
  * <div class="it">Specialità medica dei dati inseriti nel documento secondo l'allegato 3 OCIP-DFI. Questo attributo intende associare il contenuto di un documento a una specialità medica. È ipotizzabile che questa informazione fornisca un aiuto al paziente per impostare o modificare il grado di riservatezza dei documenti, rilevante per il controllo degli accessi.</div>
+ *
+ * Identifier: 2.16.756.5.30.1.127.3.10.1.18
+ * Effective date: 2019-12-11 15:04
+ * Version: 201907.2-stable
+ * Status: FINAL
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-04")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-05")
 public enum PracticeSettingCode implements ValueSetEnumInterface {
 
 	/**

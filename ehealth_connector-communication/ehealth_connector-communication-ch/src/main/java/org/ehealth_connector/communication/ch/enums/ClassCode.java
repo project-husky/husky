@@ -27,13 +27,20 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
+ * Enumeration of DocumentEntry.classCode values
+ *
  * <div class="en">Document class as per EPRO-FDHA Annex 3</div>
  * <div class="de">Dokumentenklasse gemäss EPDV-EDI Anhang 3</div>
  * <div class="fr">Classification du document selon l'annexe 3 ODEP-DFI</div>
  * <div class="it">Classe del documento secondo l'allegato 3 OCIP-DFI</div>
+ *
+ * Identifier: 2.16.756.5.30.1.127.3.10.1.3
+ * Effective date: 2020-06-22 10:05
+ * Version: 201907.0-beta
+ * Status: FINAL
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-04")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-05")
 public enum ClassCode implements ValueSetEnumInterface {
 
 	/**
@@ -72,13 +79,13 @@ public enum ClassCode implements ValueSetEnumInterface {
 			"Cronologia degli accessi alla CIP"),
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Care Plan</div>
+	 * <div class="en">Care plan</div>
 	 * <div class="de">Behandlungsplan</div>
 	 * <div class="fr">Plan de traitement</div>
 	 * <div class="it">Piano di trattamento</div>
 	 * <!-- @formatter:on -->
 	 */
-	CARE_PLAN("734163000", "2.16.840.1.113883.6.96", "Care Plan (record artifact)", "Care Plan",
+	CARE_PLAN("734163000", "2.16.840.1.113883.6.96", "Care plan (record artifact)", "Care plan",
 			"Behandlungsplan", "Plan de traitement", "Piano di trattamento"),
 	/**
 	 * <!-- @formatter:off -->
@@ -126,7 +133,7 @@ public enum ClassCode implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	OBSTETRICAL_RECORD("2171000195109", "2.16.756.5.30.1.127.3.4",
-			"Obstetrical Record (record artifact)", "Obstetrical Record",
+			"Obstetrical record (record artifact)", "Obstetrical Record",
 			"Schwangerschafts-/ Geburtsbericht", "Rapport de grossesse / de naissance",
 			"Referto della gravidanza / del parto"),
 	/**
@@ -261,7 +268,7 @@ public enum ClassCode implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Care Plan</div>
+	 * <div class="en">Code for Care plan</div>
 	 * <div class="de">Code für Behandlungsplan</div>
 	 * <div class="fr">Code de Plan de traitement</div>
 	 * <div class="it">Code per Piano di trattamento</div>

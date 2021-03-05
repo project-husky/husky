@@ -27,13 +27,20 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Document format as per Annex; EPRO-FDHA. <br clear="none"/><br clear="none"/>This unambiguous code defines the format of the XDS document. Together with the mimetype, this should provide the potential consumer with sufficient information as to whether they are in a position to process the document.<br clear="none"/></div>
- * <div class="de">Format des Dokumentes gemäss Anhang 3 EPDV-EDI. <br clear="none"/><br clear="none"/>Dieser eindeutige Code definiert das Format des XDS Dokumentes. Zusammen mit dem mimeType, sollte es dem potentiellen Konsumenten genügend Informationen liefern, ob er in der Lage ist, das Dokument zu verarbeiten.</div>
- * <div class="fr">Format du document selon l'annexe 3 ODEP-DFI.<br clear="none"/><br clear="none"/>Ce code univoque définit le format du document XDS. Combiné au mimeType, il doit fournir à l'utilisateur suffisamment d'informations pour savoir s'il est en mesure de traiter le document.<br clear="none"/><br clear="none"/></div>
- * <div class="it">Formato del documento secondo l'allegato 3 OCIP-DFI.<br clear="none"/><br clear="none"/>Questo codice univoco definisce il formato del documento XDS. Insieme al tipo MIME, intende fornire al potenziale consumatore sufficienti informazioni per capire se è in grado o meno di elaborare il documento.<br clear="none"/></div>
+ * Enumeration of DocumentEntry.formatCode values
+ *
+ * <div class="en">Document format as per Annex; EPRO-FDHA. This unambiguous code defines the format of the XDS document. Together with the mimetype, this should provide the potential consumer with sufficient information as to whether they are in a position to process the document.</div>
+ * <div class="de">Format des Dokumentes gemäss Anhang 3 EPDV-EDI. Dieser eindeutige Code definiert das Format des XDS Dokumentes. Zusammen mit dem mimeType, sollte es dem potentiellen Konsumenten genügend Informationen liefern, ob er in der Lage ist, das Dokument zu verarbeiten.</div>
+ * <div class="fr">Format du document selon l'annexe 3 ODEP-DFI. Ce code univoque définit le format du document XDS. Combiné au mimeType, il doit fournir à l'utilisateur suffisamment d'informations pour savoir s'il est en mesure de traiter le document.</div>
+ * <div class="it">Formato del documento secondo l'allegato 3 OCIP-DFI. Questo codice univoco definisce il formato del documento XDS. Insieme al tipo MIME, intende fornire al potenziale consumatore sufficienti informazioni per capire se è in grado o meno di elaborare il documento.</div>
+ *
+ * Identifier: 2.16.756.5.30.1.127.3.10.1.9
+ * Effective date: 2020-06-22 10:18
+ * Version: 201907.3-stable
+ * Status: FINAL
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-04")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-05")
 public enum FormatCode implements ValueSetEnumInterface {
 
 	/**

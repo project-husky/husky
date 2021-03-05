@@ -27,13 +27,20 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
+ * Enumeration of DocumentEntry.mimeType values
+ *
  * <div class="en">MIME type of the document as per Annex; EPRO-FDHA.</div>
  * <div class="de">MIME Typ des Dokumentes gemäss Anhang 3 EPDG.</div>
  * <div class="fr">MIME Type du document selon l'annexe 3 ODEP-DFI.</div>
  * <div class="it">Tipo MIME del documento secondo l'allegato 3 OCIP-DFI.</div>
+ *
+ * Identifier: 2.16.756.5.30.1.127.3.10.1.16
+ * Effective date: 2019-12-11 14:58
+ * Version: 201907.2-stable
+ * Status: FINAL
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-04")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-05")
 public enum MimeType implements ValueSetEnumInterface {
 
 	/**

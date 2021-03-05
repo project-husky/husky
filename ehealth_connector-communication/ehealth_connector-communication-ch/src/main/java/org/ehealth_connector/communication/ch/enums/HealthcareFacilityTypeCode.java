@@ -27,13 +27,20 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Type of healthcare facility as per Annex 3 EPRO-FDHA.<br clear="none"/><br clear="none"/>This code describes the type of healthcare facility in which the document was compiled during the treatment process. In conjunction with the authorisation control, the patient can use this information to assign all documents from a specific type of healthcare facility to a specific confidentiality level in their rights and attributes, for example.<br clear="none"/></div>
- * <div class="de">Typ der Gesundheitseinrichtung gemäss Anhang 3 EPDV-EDI. <br clear="none"/><br clear="none"/>Dieser Code beschreibt den Typ der Gesundheitseinrichtung, in der das Dokument während des Behandlungsprozesses erstellt wurde. Der Patient kann im Zusammenhang mit der Berechtigungsteuerung diese Information nutzen, um beispielsweise in seinen Rechteattributen allen Dokumenten aus einem bestimmten Gesundheitseinrichtungstyp eine bestimmte Vertraulichkeitsstufe zuzuordnen.<br clear="none"/></div>
- * <div class="fr">Type de l'institution de santé selon l'annexe 3 ODEP-DFI.<br clear="none"/><br clear="none"/>Ce code décrit le type de l'institution de santé qui a élaboré le document pendant le processus thérapeutique. Le patient peut utiliser cette information pour gérer les droits d'accès et définir, dans les règles d'accès, un même niveau de confidentialité pour tous les documents émanant d'un type d'institution donné.<br clear="none"/></div>
- * <div class="it">Tipo di istituzione sanitaria secondo l'allegato 3 OCIP-DFI.<br clear="none"/><br clear="none"/>Questo codice descrive il tipo di istituzione sanitaria nella quale è stato creato il documento durante il processo terapeutico. Il paziente può utilizzare questa informazione in relazione al controllo delle autorizzazioni, ad esempio per attribuire un determinato grado di riservatezza a tutti i documenti provenienti da un determinato tipo di istituzione sanitaria.<br clear="none"/></div>
+ * Enumeration of DocumentEntry.healthcareFacilityTypeCode values
+ *
+ * <div class="en">Type of healthcare facility as per Annex 3; EPRO-FDHA. This code describes the type of healthcare facility in which the document was compiled during the treatment process. In conjunction with the authorisation control, the patient can use this information to assign all documents from a specific type of healthcare facility to a specific confidentiality level in their rights and attributes, for example.</div>
+ * <div class="de">Typ der Gesundheitseinrichtung gemäss Anhang 3 EPDV-EDI. Dieser Code beschreibt den Typ der Gesundheitseinrichtung, in der das Dokument während des Behandlungsprozesses erstellt wurde. Der Patient kann im Zusammenhang mit der Berechtigungsteuerung diese Information nutzen, um beispielsweise in seinen Rechteattributen allen Dokumenten aus einem bestimmten Gesundheitseinrichtungstyp eine bestimmte Vertraulichkeitsstufe zuzuordnen.</div>
+ * <div class="fr">Type de l'institution de santé selon l'annexe 3 ODEP-DFI. Ce code décrit le type de l'institution de santé qui a élaboré le document pendant le processus thérapeutique. Le patient peut utiliser cette information pour gérer les droits d'accès et définir, dans les règles d'accès, un même niveau de confidentialité pour tous les documents émanant d'un type d'institution donné.</div>
+ * <div class="it">Tipo di istituzione sanitaria secondo l'allegato 3 OCIP-DFI. Questo codice descrive il tipo di istituzione sanitaria nella quale è stato creato il documento durante il processo terapeutico. Il paziente può utilizzare questa informazione in relazione al controllo delle autorizzazioni, ad esempio per attribuire un determinato grado di riservatezza a tutti i documenti provenienti da un determinato tipo di istituzione sanitaria.</div>
+ *
+ * Identifier: 2.16.756.5.30.1.127.3.10.1.11
+ * Effective date: 2020-05-18 18:47
+ * Version: 201907.3-stable
+ * Status: FINAL
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-04")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-05")
 public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 
 	/**
@@ -144,7 +151,7 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	 * <div class="it">Altre organizzazioni sanitarie</div>
 	 * <!-- @formatter:on -->
 	 */
-	OTHER_SITE_OF_CARE("43741000", "2.16.840.1.113883.6.96", "Site of care (social concept)",
+	OTHER_SITE_OF_CARE("43741000", "2.16.840.1.113883.6.96", "Site of care (environment)",
 			"Other Site of Care", "Andere Gesundheitsorganisation", "Autres prestataires de soins",
 			"Altre organizzazioni sanitarie"),
 	/**
