@@ -20,17 +20,20 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.43 Template
- * description: A Prescription Item belongs to one prescription and represents
- * one prescribed medication. It may be associated with one or more
- * observations. Prescription Item is the atomic entity for logistics,
- * distribution and billing. It contains the prescribed medicine and dosage
- * information as well as other information to the prescribed item such as
- * patient- and fulfillment instructions and substitution handling.
+ * PrescriptionItemEntryContentModule
+ *
+ * Template description: A Prescription Item belongs to one prescription and represents one prescribed medication. It may be associated with one or more observations. Prescription Item is the atomic entity for logistics, distribution and billing. It contains the prescribed medicine and dosage information as well as other information to the prescribed item such as patient- and fulfillment instructions and substitution handling.
  *
  * Element description: Prescription Item Entry Additional Template ID
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.4.43
+ * Effective date: 2019-09-11 17:05:49
+ * Version: 2021
+ * Status: draft
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class PrescriptionItemEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
 

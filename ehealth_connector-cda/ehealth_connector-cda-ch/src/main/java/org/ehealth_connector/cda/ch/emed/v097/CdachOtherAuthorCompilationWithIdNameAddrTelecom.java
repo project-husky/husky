@@ -20,13 +20,18 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.54 Template
- * description: Reusable template wherever an author with required name, addr
- * and telecom is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e.
- * Swiss exchange formats MAY use this template by either reference or
- * specialisation.
+ * cdach_other_AuthorCompilationWithIdNameAddrTelecom
+ *
+ * Template description: Reusable template wherever an author with required name, addr and telecom is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.9.54
+ * Effective date: 2020-04-28 12:02:52
+ * Version: 2020
+ * Status: active
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class CdachOtherAuthorCompilationWithIdNameAddrTelecom
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Author {
 

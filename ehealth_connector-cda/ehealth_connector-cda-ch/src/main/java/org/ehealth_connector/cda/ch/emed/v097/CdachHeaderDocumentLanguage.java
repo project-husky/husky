@@ -19,15 +19,20 @@ package org.ehealth_connector.cda.ch.emed.v097;
 import javax.annotation.Generated;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.22 Template
- * description: The language in which the narrative texts in this CDA document
- * instance are written. All CDA-CH V2 derivatives, i.e. Swiss exchange formats
- * MUST reference this template.
+ * cdach_header_DocumentLanguage
  *
- * Element description: The RFC5646 based language in which the narrative texts
- * in this CDA document instance are written.
+ * Template description: The language in which the narrative texts in this CDA document instance are written. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.
+ *
+ * Element description: The RFC5646 based language in which the narrative texts in this CDA document instance are written.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.2.22
+ * Effective date: 2019-09-12 14:28:13
+ * Version: 2020
+ * Status: active
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class CdachHeaderDocumentLanguage extends org.ehealth_connector.common.hl7cdar2.CS {
 
 	public CdachHeaderDocumentLanguage() {

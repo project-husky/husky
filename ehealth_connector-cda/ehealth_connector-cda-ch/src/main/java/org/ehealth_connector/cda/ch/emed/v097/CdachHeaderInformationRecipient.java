@@ -20,22 +20,22 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.4 Template
- * description: A recipient of this CDA document (corresponds to the addressee
- * of a letter - person or organization). All CDA-CH V2 derivatives, i.e. Swiss
- * exchange formats MUST use this template by either reference or
- * specialisation.
+ * cdach_header_InformationRecipient
  *
- * Element description: A recipient of this CDA document (corresponds to the
- * addressee of a letter - person or organization).Recipient types: - The main
- * recipient of the document is indicated by typeCode 'PRCP' (primary
- * recipient).Note: Since it makes no sense to create a CDA document without
- * doing it for someone, in Switzerland at least one recipient MUST be declared.
- * If the document is created for the user's own needs, the user itself or its
- * organization will be the primary recipient. - Other recipients (copy to; Cc)
- * are indicated with typeCode, TRC '(secondary recipient).
+ * Template description: A recipient of this CDA document (corresponds to the addressee of a letter - person or organization). All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST use this template by either reference or specialisation.
+ *
+ * Element description: A recipient of this CDA document (corresponds to the addressee of a letter - person or organization).Recipient types:
+ * - The main recipient of the document is indicated by typeCode 'PRCP' (primary recipient).Note: Since it makes no sense to create a CDA document without doing it for someone, in Switzerland at least one recipient MUST be declared. If the document is created for the user's own needs, the user itself or its organization will be the primary recipient.
+ * - Other recipients (copy to; Cc) are indicated with typeCode, TRC '(secondary recipient).
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.2.4
+ * Effective date: 2018-04-18 00:00:00
+ * Version: 2017
+ * Status: active
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class CdachHeaderInformationRecipient
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040InformationRecipient {
 

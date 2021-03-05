@@ -27,13 +27,20 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
+ * Enumeration of ApplicationMediaType values
+ *
  * <div class="en"><p> <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p><b>description: </b><p>Application specific media type.</p></div>
  * <div class="de">no designation found for language GERMAN</div>
  * <div class="fr">no designation found for language FRENCH</div>
  * <div class="it">no designation found for language ITALIAN</div>
+ *
+ * Identifier: 2.16.840.1.113883.1.11.14832
+ * Effective date: 2014-03-26 00:00
+ * Version: DEFN=UV=VO=1360-20160323
+ * Status: FINAL
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-05")
 public enum ApplicationMediaType implements ValueSetEnumInterface {
 
 	/**

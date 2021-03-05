@@ -20,14 +20,18 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.11 Template
- * description: The Dispense Section contains a description of a medication
- * dispensed for the patient. It includes exactly one Dispense Item entry as
- * described in the Dispense Item Entry Content Module. See also<a href=
- * "http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_DIS.pdf">IHE
- * Pharmacy DIS Suppl</a>
+ * DispenseSectionContentModule
+ *
+ * Template description: The Dispense Section contains a description of a medication dispensed for the patient. It includes exactly one Dispense Item entry as described in the Dispense Item Entry Content Module. See also<a href="http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_DIS.pdf">IHE Pharmacy DIS Suppl</a>
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.3.11
+ * Effective date: 2016-06-06 00:00:00
+ * Version: 2017
+ * Status: pending
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class DispenseSectionContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 

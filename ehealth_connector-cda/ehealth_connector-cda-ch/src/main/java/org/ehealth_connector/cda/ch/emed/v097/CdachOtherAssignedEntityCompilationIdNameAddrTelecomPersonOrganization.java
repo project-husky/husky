@@ -19,15 +19,20 @@ package org.ehealth_connector.cda.ch.emed.v097;
 import javax.annotation.Generated;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.32 Template
- * description: Reusable template wherever an assigned entity with required id,
- * name, addr, telecom, person and organization are used in a CDA-CH V2
- * document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this
- * template by either reference or specialisation.
+ * cdach_other_AssignedEntityCompilationIdNameAddrTelecomPersonOrganization
+ *
+ * Template description: Reusable template wherever an assigned entity with required id, name, addr, telecom, person and organization are used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.
  *
  * Element description: The assigned organization.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.9.32
+ * Effective date: 2019-10-24 16:38:14
+ * Version: 2020
+ * Status: active
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class CdachOtherAssignedEntityCompilationIdNameAddrTelecomPersonOrganization
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity {
 

@@ -21,14 +21,18 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.81 Template
- * description: A Pharmaceutical Advice Concern Item belongs to one
- * Pharmaceutical Advice Item and represents the information to concerns (e.g.,
- * problems, allergies, etc.) which the Medication Treatment Plan-,
- * Prescription-, Dispense- or Administration Item referenced by the underlying
- * Pharmaceutical Advice Item causes.
+ * PharmaceuticalAdviceConcernEntryContentModule
+ *
+ * Template description: A Pharmaceutical Advice Concern Item belongs to one Pharmaceutical Advice Item and represents the information to concerns (e.g., problems, allergies, etc.) which the Medication Treatment Plan-, Prescription-, Dispense- or Administration Item referenced by the underlying Pharmaceutical Advice Item causes.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.4.81
+ * Effective date: 2016-01-11 11:13:04
+ * Version: 2017
+ * Status: pending
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class PharmaceuticalAdviceConcernEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
 

@@ -27,13 +27,20 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
+ * Enumeration of ProblemStatusObservation_value values
+ *
  * <div class="en">no designation found for language ENGLISH</div>
  * <div class="de">no designation found for language GERMAN</div>
  * <div class="fr">no designation found for language FRENCH</div>
  * <div class="it">no designation found for language ITALIAN</div>
+ *
+ * Identifier: 1.3.6.1.4.1.19376.1.5.3.1.11.2
+ * Effective date: 2016-09-26 13:58
+ * Version: 2014
+ * Status: FINAL
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-05")
 public enum ProblemStatusObservationValue implements ValueSetEnumInterface {
 
 	/**

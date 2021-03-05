@@ -20,12 +20,20 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.2 Template
- * description: This entry allows for a comment to be supplied with each entry.
+ * chpcc_entry_AnnotationComments
+ *
+ * Template description: This entry allows for a comment to be supplied with each entry.
  *
  * Element description: A comment to the parent entry.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.4.2
+ * Effective date: 2016-11-12 00:00:00
+ * Version: 2016
+ * Status: active
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class ChpccEntryAnnotationComments
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
 

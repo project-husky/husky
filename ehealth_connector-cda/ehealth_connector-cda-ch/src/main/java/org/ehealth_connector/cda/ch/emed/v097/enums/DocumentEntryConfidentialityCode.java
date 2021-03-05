@@ -27,13 +27,20 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
+ * Enumeration of DocumentEntry.confidentialityCode values
+ *
  * <div class="en">Document confidentiality as per Annex; EPRO-FDHA.</div>
  * <div class="de">Vertraulichkeitsstufe gemäss Anhang 3 EPDV-EDI.</div>
  * <div class="fr">Niveau de confidentialité selon l'annexe 3 ODEP-DFI.</div>
  * <div class="it">Grado di riservatezza secondo l'allegato 3 OCIP-DFI.</div>
+ *
+ * Identifier: 2.16.756.5.30.1.127.3.10.1.5
+ * Effective date: 2020-04-23 11:44
+ * Version: 201907.3-stable
+ * Status: FINAL
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-05")
 public enum DocumentEntryConfidentialityCode implements ValueSetEnumInterface {
 
 	/**

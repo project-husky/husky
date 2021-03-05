@@ -20,33 +20,20 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.5.3.1.4.5 Template
- * description: This section makes use of the linking, severity, clinical status
- * and comment content specifications defined elsewhere in the technical
- * framework. In HL7 RIM parlance, observations about a problem, complaint,
- * symptom, finding, diagnosis, or functional limitation of a patient is the
- * event (moodCode='EVN') of observing (&lt;observation classCode='OBS'&gt;)
- * that problem. The &lt;value&gt; of the observation comes from a controlled
- * vocabulary representing such things. The &lt;code&gt; contained within the
- * &lt;observation&gt; describes the method of determination from yet another
- * controlled vocabulary. An example appears below in the figure below.Parent
- * TemplateThis template is compatible with the ASTM/HL7 Continuity of Care
- * Document template: 2.16.840.1.113883.10.20.1.28
+ * IHEProblemEntry
  *
- * Element description: The basic pattern for reporting a problem uses the CDA
- * &lt;observation&gt; element, setting the classCode='OBS' to represent that
- * this is an observation of a problem, and the moodCode='EVN', to represent
- * that this is an observation that has in fact taken place. The negationInd
- * attribute, if true, specifies that the problem indicated was observed to not
- * have occurred (which is subtly but importantly different from having not been
- * observed).The value of negationInd should not normally be set to true.
- * Instead, to record that there is "no prior history of chicken pox", one would
- * use a coded value indicated exactly that. However, it is not always possible
- * to record problems in this manner, especially if using a controlled
- * vocabulary that does not supply pre-coordinated negations, or which do not
- * allow the negation to be recorded with post-coordinated coded terminology.
+ * Template description: This section makes use of the linking, severity, clinical status and comment content specifications defined elsewhere in the technical framework. In HL7 RIM parlance, observations about a problem, complaint, symptom, finding, diagnosis, or functional limitation of a patient is the event (moodCode='EVN') of observing (&lt;observation classCode='OBS'&gt;) that problem. The &lt;value&gt; of the observation comes from a controlled vocabulary representing such things. The &lt;code&gt; contained within the &lt;observation&gt; describes the method of determination from yet another controlled vocabulary. An example appears below in the figure below.Parent TemplateThis template is compatible with the ASTM/HL7 Continuity of Care Document template: 2.16.840.1.113883.10.20.1.28
+ *
+ * Element description: The basic pattern for reporting a problem uses the CDA &lt;observation&gt; element, setting the classCode='OBS' to represent that this is an observation of a problem, and the moodCode='EVN', to represent that this is an observation that has in fact taken place. The negationInd attribute, if true, specifies that the problem indicated was observed to not have occurred (which is subtly but importantly different from having not been observed).The value of negationInd should not normally be set to true. Instead, to record that there is "no prior history of chicken pox", one would use a coded value indicated exactly that. However, it is not always possible to record problems in this manner, especially if using a controlled vocabulary that does not supply pre-coordinated negations, or which do not allow the negation to be recorded with post-coordinated coded terminology.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 1.3.6.1.4.1.19376.1.5.3.1.4.5
+ * Effective date: 2016-09-26 09:50:55
+ * Version: 2014
+ * Status: active
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class IheproblemEntry extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 
 	public IheproblemEntry() {

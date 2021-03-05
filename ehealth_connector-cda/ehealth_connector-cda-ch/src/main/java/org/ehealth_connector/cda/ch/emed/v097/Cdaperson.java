@@ -19,11 +19,17 @@ package org.ehealth_connector.cda.ch.emed.v097;
 import javax.annotation.Generated;
 
 /**
- * Original ART-DECOR template id: 2.16.840.1.113883.10.12.152 Template
- * description: Template CDA Person (prototype, directly derived from
- * POCD_RM000040 MIF)
+ * CDAPerson
+ *
+ * Template description: Template CDA Person (prototype, directly derived from POCD_RM000040 MIF)
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.840.1.113883.10.12.152
+ * Effective date: 2005-09-07 00:00:00
+ * Status: active
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class Cdaperson extends org.ehealth_connector.common.hl7cdar2.PN {
 
 	public Cdaperson() {

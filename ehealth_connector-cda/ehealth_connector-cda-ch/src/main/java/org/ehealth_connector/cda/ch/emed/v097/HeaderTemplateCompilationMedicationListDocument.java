@@ -19,14 +19,20 @@ package org.ehealth_connector.cda.ch.emed.v097;
 import javax.annotation.Generated;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.46 Template
- * description: Header Templates for Medication List document.
+ * HeaderTemplateCompilationMedicationListDocument
  *
- * Element description: The document's creation date and time. If this document
- * replaces a previous version (linked via parentDocument), this is the date and
- * time of the new version.
+ * Template description: Header Templates for Medication List document.
+ *
+ * Element description: The document's creation date and time. If this document replaces a previous version (linked via parentDocument), this is the date and time of the new version.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.9.46
+ * Effective date: 2018-01-22 15:29:29
+ * Version: 2019
+ * Status: pending
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class HeaderTemplateCompilationMedicationListDocument
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
 

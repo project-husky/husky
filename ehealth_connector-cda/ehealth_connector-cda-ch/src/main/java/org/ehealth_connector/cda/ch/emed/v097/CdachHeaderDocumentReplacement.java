@@ -20,26 +20,23 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.13 Template
- * description: Relationship to another CDA-CH V2 based document that is
- * replaced by the current one. All CDA-CH V2 derivatives, i.e. Swiss exchange
- * formats MUST reference this template.
+ * cdach_header_DocumentReplacement
  *
- * Element description: Relationship to another CDA-CH V2 based document that is
- * replaced by the current one.Notes:For correction of wrong information, a new
- * document that replaces the earlier document MUST be created. The new document
- * corrects previously incorrect information. This also applies to the case
- * where information in the CDA header has been corrected (e.g., if the original
- * document has been issued to the wrong patient). While processing the new
- * document at the recipient, all values from the previous document MUST be
- * interpreted as deprecated (deleted/marked as deleted/deprecated) and all
- * values in the new document MUST be marked as valid: - Values that were only
- * contained in the previous document have to be treated as deleted. - Values
- * that are present in both documents are overwritten with the contents of the
- * new document. - Values that are only contained in the new document are to be
- * added.
+ * Template description: Relationship to another CDA-CH V2 based document that is replaced by the current one. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.
+ *
+ * Element description: Relationship to another CDA-CH V2 based document that is replaced by the current one.Notes:For correction of wrong information, a new document that replaces the earlier document MUST be created. The new document corrects previously incorrect information. This also applies to the case where information in the CDA header has been corrected (e.g., if the original document has been issued to the wrong patient). While processing the new document at the recipient, all values from the previous document MUST be interpreted as deprecated (deleted/marked as deleted/deprecated) and all values in the new document MUST be marked as valid:
+ * - Values that were only contained in the previous document have to be treated as deleted.
+ * - Values that are present in both documents are overwritten with the contents of the new document.
+ * - Values that are only contained in the new document are to be added.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.2.13
+ * Effective date: 2019-01-01 21:22:58
+ * Version: 2020
+ * Status: active
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class CdachHeaderDocumentReplacement
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040RelatedDocument {
 

@@ -19,16 +19,20 @@ package org.ehealth_connector.cda.ch.emed.v097;
 import javax.annotation.Generated;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.36 Template
- * description: Dosage Instructions are a set of data elements which together
- * represent the dosage instructions to a medication such as duration of
- * treatment, medication frequency, dose quantity, route of administration, etc.
- * Dosage Instructions may be provided structured and/or narrative. This entry
- * describes structured dosage instructions.
+ * DosageInstructionsEntryDosageChange
+ *
+ * Template description: Dosage Instructions are a set of data elements which together represent the dosage instructions to a medication such as duration of treatment, medication frequency, dose quantity, route of administration, etc. Dosage Instructions may be provided structured and/or narrative. This entry describes structured dosage instructions.
  *
  * Element description: Dosage Instructions PCC 6.3.4.16.12 - Dosage change
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.4.36
+ * Effective date: 2017-01-23 16:30:55
+ * Version: 2021
+ * Status: pending
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class DosageInstructionsEntryDosageChange
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship {
 

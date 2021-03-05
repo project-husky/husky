@@ -20,11 +20,17 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.840.1.113883.10.12.151 Template
- * description: Template CDA Organization (prototype, directly derived from
- * POCD_RM000040 MIF)
+ * CDAOrganization
+ *
+ * Template description: Template CDA Organization (prototype, directly derived from POCD_RM000040 MIF)
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.840.1.113883.10.12.151
+ * Effective date: 2005-09-07 00:00:00
+ * Status: active
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class Cdaorganization
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Organization {
 

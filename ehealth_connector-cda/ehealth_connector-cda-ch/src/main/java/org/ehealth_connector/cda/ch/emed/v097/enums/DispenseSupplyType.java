@@ -27,13 +27,20 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
+ * Enumeration of DispenseSupplyType values
+ *
  * <div class="en">no designation found for language ENGLISH</div>
  * <div class="de">IHE DIS 6.3.4.5.3.4 Code</div>
  * <div class="fr">no designation found for language FRENCH</div>
  * <div class="it">no designation found for language ITALIAN</div>
+ *
+ * Identifier: 2.16.756.5.30.1.127.77.4.11.7
+ * Effective date: 2017-01-10 20:44
+ * Version: 2017
+ * Status: null
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-05")
 public enum DispenseSupplyType implements ValueSetEnumInterface {
 
 	/**

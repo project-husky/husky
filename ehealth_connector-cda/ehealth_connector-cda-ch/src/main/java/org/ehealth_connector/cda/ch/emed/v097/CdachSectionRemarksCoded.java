@@ -20,16 +20,20 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.2 Template
- * description: This section MAY be used to provide comments, remarks or other
- * information that cannot be declared in any of the other existing sections in
- * the document.
+ * cdach_section_RemarksCoded
  *
- * Element description: This section can be used to provide comments, remarks or
- * other information that cannot be declared in any of the other existing
- * sections in the document.
+ * Template description: This section MAY be used to provide comments, remarks or other information that cannot be declared in any of the other existing sections in the document.
+ *
+ * Element description: This section can be used to provide comments, remarks or other information that cannot be declared in any of the other existing sections in the document.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.3.2
+ * Effective date: 2018-04-18 00:00:00
+ * Version: 2017
+ * Status: active
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class CdachSectionRemarksCoded
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 

@@ -27,13 +27,20 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
+ * Enumeration of PharmaceuticalDoseFormEDQM values
+ *
  * <div class="en">Valueset RouteOuPharmaceutical Dose Form from EDQM, PDF, export 24.4.2018, see https://standardterms.edqm.eu/#</div>
  * <div class="de">no designation found for language GERMAN</div>
  * <div class="fr">no designation found for language FRENCH</div>
  * <div class="it">no designation found for language ITALIAN</div>
+ *
+ * Identifier: 2.16.756.5.30.1.1.11.3
+ * Effective date: 2018-04-10 16:57
+ * Version: 2017
+ * Status: null
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-05")
 public enum PharmaceuticalDoseFormEdqm implements ValueSetEnumInterface {
 
 	/**

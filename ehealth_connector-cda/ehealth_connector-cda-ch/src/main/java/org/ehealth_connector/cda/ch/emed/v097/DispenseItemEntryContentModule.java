@@ -20,12 +20,18 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.42 Template
- * description: A Dispense Item belongs to one Dispensation and represents one
- * dispensed medication. It contains the dispensed medicinal product including
- * information such as product code, brand name and packaging information.
+ * DispenseItemEntryContentModule
+ *
+ * Template description: A Dispense Item belongs to one Dispensation and represents one dispensed medication. It contains the dispensed medicinal product including information such as product code, brand name and packaging information.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.4.42
+ * Effective date: 2016-06-17 00:00:00
+ * Version: 2021
+ * Status: pending
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class DispenseItemEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Supply {
 

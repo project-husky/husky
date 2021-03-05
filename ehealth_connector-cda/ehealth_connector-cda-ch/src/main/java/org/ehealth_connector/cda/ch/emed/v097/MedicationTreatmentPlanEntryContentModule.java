@@ -20,17 +20,20 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.34 Template
- * description: A medication treatment plan item is an entity describing a
- * medication included in the medication treatment plan of the patient. See
- * also<a href=
- * "http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_MTP.pdf">IHE
- * Pharmacy MTP Suppl</a>
+ * MedicationTreatmentPlanEntryContentModule
  *
- * Element description: 6.3.4.E1.3.1 Medication Treatment Plan Item Entry
- * General Specification
+ * Template description: A medication treatment plan item is an entity describing a medication included in the medication treatment plan of the patient. See also<a href="http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_MTP.pdf">IHE Pharmacy MTP Suppl</a>
+ *
+ * Element description: 6.3.4.E1.3.1 Medication Treatment Plan Item Entry General Specification
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.4.34
+ * Effective date: 2019-12-11 11:31:52
+ * Version: 2021
+ * Status: draft
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class MedicationTreatmentPlanEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
 

@@ -20,13 +20,20 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.53 Template
- * description: Reference to Pharmaceutical Advice
+ * PADVReferenceEntryContentModule
  *
- * Element description: Reference to Pharmaceutical Advice Item General
- * Specification
+ * Template description: Reference to Pharmaceutical Advice
+ *
+ * Element description: Reference to Pharmaceutical Advice Item General Specification
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.4.53
+ * Effective date: 2018-01-11 21:10:57
+ * Version: 2017
+ * Status: pending
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class PadvreferenceEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 

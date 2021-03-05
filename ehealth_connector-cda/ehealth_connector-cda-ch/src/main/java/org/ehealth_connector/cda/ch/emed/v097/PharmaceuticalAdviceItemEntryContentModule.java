@@ -23,13 +23,18 @@ import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.44 Template
- * description: A Pharmaceutical Advice Item belongs to one Pharmaceutical
- * Advice and represents the validation outcome or management command regarding
- * the referenced Medication Treatment Plan-, Prescription- or Dispense Item
- * (e.g., change, cancel, etc.).
+ * PharmaceuticalAdviceItemEntryContentModule
+ *
+ * Template description: A Pharmaceutical Advice Item belongs to one Pharmaceutical Advice and represents the validation outcome or management command regarding the referenced Medication Treatment Plan-, Prescription- or Dispense Item (e.g., change, cancel, etc.).
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.4.44
+ * Effective date: 2016-06-25 00:00:00
+ * Version: 2020
+ * Status: draft
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class PharmaceuticalAdviceItemEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 

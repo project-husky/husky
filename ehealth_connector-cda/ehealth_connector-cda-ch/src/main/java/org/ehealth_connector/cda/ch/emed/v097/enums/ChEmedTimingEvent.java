@@ -27,13 +27,20 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
+ * Enumeration of CH-EMED-TimingEvent values
+ *
  * <div class="en">no designation found for language ENGLISH</div>
  * <div class="de">no designation found for language GERMAN</div>
  * <div class="fr">no designation found for language FRENCH</div>
  * <div class="it">no designation found for language ITALIAN</div>
+ *
+ * Identifier: 2.16.756.5.30.1.127.77.4.11.2
+ * Effective date: 2020-07-10 00:28
+ * Version: 2020
+ * Status: DRAFT
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-05")
 public enum ChEmedTimingEvent implements ValueSetEnumInterface {
 
 	/**

@@ -20,14 +20,20 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.9.1.3.15 Template
- * description: <div>Renewal Period Content Module describes the possible
- * renewal of a Prescription Item in terms 1985 of duration or period of time
- * (start / end date).</div>
+ * IHERenewalPeriodContentModule
+ *
+ * Template description: <div>Renewal Period Content Module describes the possible renewal of a Prescription Item in terms 1985 of duration or period of time (start / end date).</div>
  *
  * Element description: Renewal Period General Specification
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 1.3.6.1.4.1.19376.1.9.1.3.15
+ * Effective date: 2018-01-11 15:34:25
+ * Version: 2017
+ * Status: pending
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class IherenewalPeriodContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Supply {
 

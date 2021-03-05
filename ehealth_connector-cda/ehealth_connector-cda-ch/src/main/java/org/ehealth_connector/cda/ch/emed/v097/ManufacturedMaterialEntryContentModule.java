@@ -22,14 +22,18 @@ import org.ehealth_connector.common.hl7cdar2.IVLTS;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.33 Template
- * description: A Medicine entry describes a medicine and is used within
- * Medication Treatment- Prescription- or Dispensation Items. It describes
- * either a medicinal product, a generic/scientific name or a magistral
- * preparation/compound medicine and contains information such as name,
- * medication form, packaging information and active ingredients.
+ * ManufacturedMaterialEntryContentModule
+ *
+ * Template description: A Medicine entry describes a medicine and is used within Medication Treatment- Prescription- or Dispensation Items. It describes either a medicinal product, a generic/scientific name or a magistral preparation/compound medicine and contains information such as name, medication form, packaging information and active ingredients.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.4.33
+ * Effective date: 2019-12-11 11:34:24
+ * Version: 2020
+ * Status: draft
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class ManufacturedMaterialEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Material {
 

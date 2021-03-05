@@ -23,9 +23,16 @@ import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.5.3.1.4.3.1
+ * IHEMedicationFulFillmentInstructions
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 1.3.6.1.4.1.19376.1.5.3.1.4.3.1
+ * Effective date: 2013-12-20 00:00:00
+ * Version: 2014
+ * Status: active
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class IhemedicationFulFillmentInstructions
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
 

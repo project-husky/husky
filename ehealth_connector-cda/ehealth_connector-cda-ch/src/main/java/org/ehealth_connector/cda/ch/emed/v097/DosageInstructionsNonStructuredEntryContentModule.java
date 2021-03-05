@@ -23,11 +23,18 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040ManufacturedProduct;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Material;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.52 Template
- * description: Dosage Instructions reference to free text (non structured) in
- * narrative part.
+ * DosageInstructionsNonStructuredEntryContentModule
+ *
+ * Template description: Dosage Instructions reference to free text (non structured) in narrative part.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.4.52
+ * Effective date: 2016-09-13 15:33:18
+ * Version: 2017
+ * Status: pending
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class DosageInstructionsNonStructuredEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
 

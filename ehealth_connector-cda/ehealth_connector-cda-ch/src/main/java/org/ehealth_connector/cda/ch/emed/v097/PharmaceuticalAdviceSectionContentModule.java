@@ -20,15 +20,18 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.12 Template
- * description: The Pharmaceutical Advice section contains a pharmaceutical
- * advice to a medication prescribed or dispensed for the patient. It shall
- * include exactly one Pharmaceutical Advice entry as described in the
- * Pharmaceutical Advice Item Entry Content Module. See also<a href=
- * "http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PADV.pdf">IHE
- * Pharmacy PADV Suppl</a>
+ * PharmaceuticalAdviceSectionContentModule
+ *
+ * Template description: The Pharmaceutical Advice section contains a pharmaceutical advice to a medication prescribed or dispensed for the patient. It shall include exactly one Pharmaceutical Advice entry as described in the Pharmaceutical Advice Item Entry Content Module. See also<a href="http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PADV.pdf">IHE Pharmacy PADV Suppl</a>
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.3.12
+ * Effective date: 2016-06-06 00:00:00
+ * Version: 2017
+ * Status: pending
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class PharmaceuticalAdviceSectionContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 

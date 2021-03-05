@@ -20,14 +20,18 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.35 Template
- * description: Dosage Instructions are a set of data elements which together
- * represent the dosage instructions to a medication such as duration of
- * treatment, medication frequency, dose quantity, route of administration, etc.
- * Dosage Instructions may be provided structured and/or narrative. This entry
- * describes structured dosage instructions.
+ * DosageInstructionsStartStopFrequency
+ *
+ * Template description: Dosage Instructions are a set of data elements which together represent the dosage instructions to a medication such as duration of treatment, medication frequency, dose quantity, route of administration, etc. Dosage Instructions may be provided structured and/or narrative. This entry describes structured dosage instructions.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.4.35
+ * Effective date: 2019-08-27 16:30:05
+ * Version: 2021
+ * Status: draft
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class DosageInstructionsStartStopFrequency
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
 

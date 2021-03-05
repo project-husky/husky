@@ -20,17 +20,18 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.44 Template
- * description: The Medication List section shall contain a description of the
- * Medication Treatment Plan-, Prescription-, Dispense- and Medication
- * Administration Items assembled to a medication list. It shall include zero to
- * many Medication Treatment Plan items and/or Prescription items and/or
- * Dispense items and/or Medication Administration Items altogether with related
- * Pharmaceutical Advice Items. See<a class="" href=
- * "http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PML.pdf"
- * target="" title="">IHE Pharmacy PML Suppl</a>.
+ * MedicationListSectionContentModule
+ *
+ * Template description: The Medication List section shall contain a description of the Medication Treatment Plan-, Prescription-, Dispense- and Medication Administration Items assembled to a medication list. It shall include zero to many Medication Treatment Plan items and/or Prescription items and/or Dispense items and/or Medication Administration Items altogether with related Pharmaceutical Advice Items. See<a class="" href="http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PML.pdf" target="" title="">IHE Pharmacy PML Suppl</a>.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.3.44
+ * Effective date: 2018-01-22 15:40:38
+ * Version: 2021
+ * Status: pending
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class MedicationListSectionContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 

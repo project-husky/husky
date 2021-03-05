@@ -20,19 +20,18 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.9 Template
- * description: The Meciation Card Section includes the current and planned
- * medication of a patient. See<a class="" href=
- * "http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PML.pdf"
- * target="" title="">IHE Pharmacy PML Suppl</a>. It includes entries for
- * Medication Treatment Plan Items as described in the Medication Treatment Plan
- * Item Entry Content Module. See also<a class="" href=
- * "http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_MTP.pdf"
- * target="" title="">IHE Pharmacy MTP Suppl</a>. Other entries like
- * Prescription, Dispense and Pharmaceutical Advise entries which are allowd in
- * a PML section are not allowed in the eCurrentMedication section.
+ * MedicationCardSectionContentModule
+ *
+ * Template description: The Meciation Card Section includes the current and planned medication of a patient. See<a class="" href="http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PML.pdf" target="" title="">IHE Pharmacy PML Suppl</a>. It includes entries for Medication Treatment Plan Items as described in the Medication Treatment Plan Item Entry Content Module. See also<a class="" href="http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_MTP.pdf" target="" title="">IHE Pharmacy MTP Suppl</a>. Other entries like Prescription, Dispense and Pharmaceutical Advise entries which are allowd in a PML section are not allowed in the eCurrentMedication section.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.3.9
+ * Effective date: 2016-05-21 00:00:00
+ * Version: 2021
+ * Status: pending
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class MedicationCardSectionContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 

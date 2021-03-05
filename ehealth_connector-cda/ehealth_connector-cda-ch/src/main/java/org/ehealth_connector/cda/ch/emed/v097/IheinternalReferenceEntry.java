@@ -21,13 +21,18 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.5.3.1.4.4.1 Template
- * description: <div>CDA and HL7 Version 3 Entries may reference (point to)
- * information contained in other
- * entries <span style="line-height: 1.22;">within the same
- * document </span></div>
+ * IHEInternalReferenceEntry
+ *
+ * Template description: <div>CDA and HL7 Version 3 Entries may reference (point to) information contained in other entries <span style="line-height: 1.22;">within the same document </span></div>
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 1.3.6.1.4.1.19376.1.5.3.1.4.4.1
+ * Effective date: 2013-12-20 00:00:00
+ * Version: 2014
+ * Status: active
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class IheinternalReferenceEntry
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
 

@@ -20,15 +20,20 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.46 Template
- * description: Information about a health service describing the context of
- * this CDA document. All CDA-CH V2 derivatives, i.e. Swiss exchange formats
- * MUST use this template by either reference or specialisation.
+ * cdach_header_HealthService
  *
- * Element description: Information about a health service describing the
- * context of this CDA document.
+ * Template description: Information about a health service describing the context of this CDA document. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST use this template by either reference or specialisation.
+ *
+ * Element description: Information about a health service describing the context of this CDA document.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.2.46
+ * Effective date: 2019-01-01 20:53:33
+ * Version: 2019
+ * Status: active
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class CdachHeaderHealthService
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040DocumentationOf {
 

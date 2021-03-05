@@ -34,17 +34,19 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 import org.ehealth_connector.common.utils.Hl7CdaR2Util;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.1.4 Template
- * description: TheMedication Prescription document(IPAG report: eRezept)
- * describes the content and format of a Prescription document generated during
- * the process in which a health care professional decides that the patient
- * needs medication (*).Relation to IHE PharmacyThe Medication Prescription
- * document is based on the<a href=
- * "http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PRE.pdf">IHE
- * Pharmacy Technical Framework Supplement – Pharmacy Prescription (PRE)</a>.
+ * MedicationPrescriptionDocument
+ *
+ * Template description: TheMedication Prescription document(IPAG report: eRezept) describes the content and format of a Prescription document generated during the process in which a health care professional decides that the patient needs medication (*).Relation to IHE PharmacyThe Medication Prescription document is based on the<a href="http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PRE.pdf">IHE Pharmacy Technical Framework Supplement – Pharmacy Prescription (PRE)</a>.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.1.4
+ * Effective date: 2016-05-21 00:00:00
+ * Version: 2020
+ * Status: draft
+ * <!-- @formatter:on -->
  */
 @XmlRootElement(name = "ClinicalDocument", namespace = "urn:hl7-org:v3")
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class MedicationPrescriptionDocument
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
 

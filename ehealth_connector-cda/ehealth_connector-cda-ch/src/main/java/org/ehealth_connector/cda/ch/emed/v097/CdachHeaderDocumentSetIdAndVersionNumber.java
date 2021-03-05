@@ -19,15 +19,20 @@ package org.ehealth_connector.cda.ch.emed.v097;
 import javax.annotation.Generated;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.20 Template
- * description: Unity of document versions. All CDA-CH V2 derivatives, i.e.
- * Swiss exchange formats MUST reference this template.
+ * cdach_header_DocumentSetIdAndVersionNumber
  *
- * Element description: The versionNumber element MUST contain the value 1 for
- * the very first version of that document. For later versions, the version
- * number MUST be increased by 1 each.
+ * Template description: Unity of document versions. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST reference this template.
+ *
+ * Element description: The versionNumber element MUST contain the value 1 for the very first version of that document. For later versions, the version number MUST be increased by 1 each.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.2.20
+ * Effective date: 2018-04-18 00:00:00
+ * Version: 2017
+ * Status: active
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class CdachHeaderDocumentSetIdAndVersionNumber
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
 

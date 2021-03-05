@@ -20,16 +20,20 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.6 Template
- * description: Information about an authenticator of a CDA document. An
- * authenticator MUST be a person. All CDA-CH V2 derivatives, i.e. Swiss
- * exchange formats MUST use this template by either reference or
- * specialisation.
+ * cdach_header_Authenticator
  *
- * Element description: Information about an authenticator of a CDA document. An
- * authenticator MUST be a person.
+ * Template description: Information about an authenticator of a CDA document. An authenticator MUST be a person. All CDA-CH V2 derivatives, i.e. Swiss exchange formats MUST use this template by either reference or specialisation.
+ *
+ * Element description: Information about an authenticator of a CDA document. An authenticator MUST be a person.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.2.6
+ * Effective date: 2019-01-01 20:20:44
+ * Version: 2020
+ * Status: active
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class CdachHeaderAuthenticator
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Authenticator {
 

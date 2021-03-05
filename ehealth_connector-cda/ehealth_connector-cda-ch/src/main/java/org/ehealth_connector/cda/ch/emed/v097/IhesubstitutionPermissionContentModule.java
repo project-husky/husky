@@ -23,13 +23,20 @@ import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.9.1.3.9.1 Template
- * description: <div>An act element, containing exactly one element describing
- * the substitution permission.</div>
+ * IHESubstitutionPermissionContentModule
+ *
+ * Template description: <div>An act element, containing exactly one element describing the substitution permission.</div>
  *
  * Element description: 6.3.4.8 Substitution Permission Content Module
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 1.3.6.1.4.1.19376.1.9.1.3.9.1
+ * Effective date: 2018-01-10 15:34:25
+ * Version: 2017
+ * Status: pending
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class IhesubstitutionPermissionContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
 

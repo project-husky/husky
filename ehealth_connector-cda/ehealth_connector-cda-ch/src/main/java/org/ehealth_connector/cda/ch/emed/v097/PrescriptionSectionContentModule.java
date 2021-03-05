@@ -20,15 +20,18 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.10 Template
- * description: The Prescription Section contains a description of the
- * medications in a given prescription for the patient. It includes entries for
- * Prescription Items as described in the Prescription Item Entry Content
- * Module. See also chapter 6.3.3.1 in<a href=
- * "http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PRE.pdf">IHE
- * Pharmacy PRE Suppl</a>
+ * PrescriptionSectionContentModule
+ *
+ * Template description: The Prescription Section contains a description of the medications in a given prescription for the patient. It includes entries for Prescription Items as described in the Prescription Item Entry Content Module. See also chapter 6.3.3.1 in<a href="http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PRE.pdf">IHE Pharmacy PRE Suppl</a>
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.3.10
+ * Effective date: 2016-06-06 00:00:00
+ * Version: 2017
+ * Status: pending
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class PrescriptionSectionContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 

@@ -34,17 +34,19 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 import org.ehealth_connector.common.utils.Hl7CdaR2Util;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.1.13 Template
- * description: TheMedication List document(IPAG:eCurrentMedication) aims to
- * fully comprise the current medication of a patient. It consists of Medication
- * Treatment Plan, Medication Prescription, Medication Dispense and
- * Pharmaceutical Advice entries (*).Relation to IHE PharmacyThe Medication List
- * document it derived from the<a href=
- * "http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PML.pdf">IHE
- * Pharmacy PML Supplement</a>(Pharmacy Medication List).
+ * MedicationListDocument
+ *
+ * Template description: TheMedication List document(IPAG:eCurrentMedication) aims to fully comprise the current medication of a patient. It consists of Medication Treatment Plan, Medication Prescription, Medication Dispense and Pharmaceutical Advice entries (*).Relation to IHE PharmacyThe Medication List document it derived from the<a href="http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PML.pdf">IHE Pharmacy PML Supplement</a>(Pharmacy Medication List).
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.1.13
+ * Effective date: 2018-01-22 15:17:26
+ * Version: 2020
+ * Status: draft
+ * <!-- @formatter:on -->
  */
 @XmlRootElement(name = "ClinicalDocument", namespace = "urn:hl7-org:v3")
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class MedicationListDocument
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
 

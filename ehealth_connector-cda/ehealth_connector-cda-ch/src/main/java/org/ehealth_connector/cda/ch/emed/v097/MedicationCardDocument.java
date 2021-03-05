@@ -34,20 +34,19 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 import org.ehealth_connector.common.utils.Hl7CdaR2Util;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.1.3 Template
- * description: TheMedication Card document(IPAG:eCurrentMedication, different
- * view) describes the current medication of a patient, medications (*) that
- * have been or will be taken by the patient.Relation to IHE PharmacyThe
- * Medication Card document it derived from the<a href=
- * "http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PML.pdf">IHE
- * Pharmacy PML Supplement</a>(Pharmacy Medication List) and the<a href=
- * "http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_MTP.pdf">IHE
- * Pharmacy MTP Supplement</a>(Medication Treatment Plan). The planned
- * medication entries in the eCurrentMedication follow the contraints of the IHE
- * MTP entries.
+ * MedicationCardDocument
+ *
+ * Template description: TheMedication Card document(IPAG:eCurrentMedication, different view) describes the current medication of a patient, medications (*) that have been or will be taken by the patient.Relation to IHE PharmacyThe Medication Card document it derived from the<a href="http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_PML.pdf">IHE Pharmacy PML Supplement</a>(Pharmacy Medication List) and the<a href="http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_MTP.pdf">IHE Pharmacy MTP Supplement</a>(Medication Treatment Plan). The planned medication entries in the eCurrentMedication follow the contraints of the IHE MTP entries.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.1.3
+ * Effective date: 2016-05-13 00:00:00
+ * Version: 2020
+ * Status: draft
+ * <!-- @formatter:on -->
  */
 @XmlRootElement(name = "ClinicalDocument", namespace = "urn:hl7-org:v3")
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class MedicationCardDocument
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
 

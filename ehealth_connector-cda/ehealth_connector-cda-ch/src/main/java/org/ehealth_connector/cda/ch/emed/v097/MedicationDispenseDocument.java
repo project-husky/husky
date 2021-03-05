@@ -34,17 +34,19 @@ import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 import org.ehealth_connector.common.utils.Hl7CdaR2Util;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.1.5 Template
- * description: TheMedication Dispense document(IPAG report: eDispense)
- * describes the direct dispensation of a (1) drug to a patient or legitimized
- * third party with regard to a later application of the product by a qualified
- * health professional.Relation to IHE PharmacyThe Medication Dispense document
- * is based on the<a class="" href=
- * "http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_DIS.pdf">IHE
- * Pharmacy Technical Framework Supplement – Pharmacy Dispense (DIS)</a>.
+ * MedicationDispenseDocument
+ *
+ * Template description: TheMedication Dispense document(IPAG report: eDispense) describes the direct dispensation of a (1) drug to a patient or legitimized third party with regard to a later application of the product by a qualified health professional.Relation to IHE PharmacyThe Medication Dispense document is based on the<a class="" href="http://www.ihe.net/uploadedFiles/Documents/Pharmacy/IHE_Pharmacy_Suppl_DIS.pdf">IHE Pharmacy Technical Framework Supplement – Pharmacy Dispense (DIS)</a>.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.1.5
+ * Effective date: 2016-05-21 00:00:00
+ * Version: 2020
+ * Status: draft
+ * <!-- @formatter:on -->
  */
 @XmlRootElement(name = "ClinicalDocument", namespace = "urn:hl7-org:v3")
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class MedicationDispenseDocument
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
 

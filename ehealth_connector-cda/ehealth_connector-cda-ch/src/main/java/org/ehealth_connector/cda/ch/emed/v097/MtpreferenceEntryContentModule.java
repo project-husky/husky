@@ -23,13 +23,20 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040ManufacturedProduct;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Material;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.45 Template
- * description: Reference to a Medication Treatment Plan Entry
+ * MTPReferenceEntryContentModule
  *
- * Element description: Reference to Medication Treatment Plan Item General
- * Specification
+ * Template description: Reference to a Medication Treatment Plan Entry
+ *
+ * Element description: Reference to Medication Treatment Plan Item General Specification
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.4.45
+ * Effective date: 2017-01-10 15:34:25
+ * Version: 2017
+ * Status: pending
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class MtpreferenceEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
 

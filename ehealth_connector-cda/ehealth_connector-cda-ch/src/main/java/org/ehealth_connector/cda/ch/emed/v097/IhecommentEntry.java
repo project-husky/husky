@@ -23,18 +23,18 @@ import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.5.3.1.4.2 Template
- * description: This entry allows for a comment to be supplied with each entry.
- * For CDA this structure is usually included in the target act using the
- * &lt;entryRelationship&gt; element defined in the CDA Schema, but can also be
- * used in the &lt;component&gt; element when the comment appears within an
- * &lt;organizer&gt;. The example below shows recording a comment for an
- * &lt;entry&gt;, and is used as context for the following sections. For HL7
- * Version 3 Messages, this relationship is represented with the element
- * &lt;sourceOf&gt;, although the remainder of the typecodes and semantics are
- * unchanged.Any condition or allergy may be the subject of a comment.
+ * IHECommentEntry
+ *
+ * Template description: This entry allows for a comment to be supplied with each entry. For CDA this structure is usually included in the target act using the &lt;entryRelationship&gt; element defined in the CDA Schema, but can also be used in the &lt;component&gt; element when the comment appears within an &lt;organizer&gt;. The example below shows recording a comment for an &lt;entry&gt;, and is used as context for the following sections. For HL7 Version 3 Messages, this relationship is represented with the element &lt;sourceOf&gt;, although the remainder of the typecodes and semantics are unchanged.Any condition or allergy may be the subject of a comment.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 1.3.6.1.4.1.19376.1.5.3.1.4.2
+ * Effective date: 2013-12-20 00:00:00
+ * Version: 2014
+ * Status: active
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class IhecommentEntry extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
 
 	public IhecommentEntry() {

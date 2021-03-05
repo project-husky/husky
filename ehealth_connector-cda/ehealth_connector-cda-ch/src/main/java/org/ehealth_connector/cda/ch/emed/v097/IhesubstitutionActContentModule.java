@@ -23,13 +23,20 @@ import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.9.1.3.9.2 Template
- * description: <div>At most one substitution act element MAY be present to
- * inform that a substitution occurred..</div>
+ * IHESubstitutionActContentModule
+ *
+ * Template description: <div>At most one substitution act element MAY be present to inform that a substitution occurred..</div>
  *
  * Element description: Substitution Act Content Module
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 1.3.6.1.4.1.19376.1.9.1.3.9.2
+ * Effective date: 2018-01-10 15:34:25
+ * Version: 2017
+ * Status: pending
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class IhesubstitutionActContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Act {
 

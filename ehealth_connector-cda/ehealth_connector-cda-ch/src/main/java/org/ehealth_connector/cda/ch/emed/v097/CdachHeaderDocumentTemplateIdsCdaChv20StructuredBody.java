@@ -20,15 +20,20 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.18 Template
- * description: CDA-CH V2 bases on HL7 CDA R2 (2005) and - by using this
- * template - require a structured body. All CDA-CH V2 derivatives, i.e. Swiss
- * exchange formats SHALL reference this template. These SHALL define further
- * template ids in their own separate templates.
+ * cdach_header_DocumentTemplateIdsCdaChv2.0-structuredBody
+ *
+ * Template description: CDA-CH V2 bases on HL7 CDA R2 (2005) and - by using this template - require a structured body. All CDA-CH V2 derivatives, i.e. Swiss exchange formats SHALL reference this template. These SHALL define further template ids in their own separate templates.
  *
  * Element description: HL7 CDA R2 (2005).
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.2.18
+ * Effective date: 2019-10-17 15:21:50
+ * Version: 2020
+ * Status: active
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class CdachHeaderDocumentTemplateIdsCdaChv20StructuredBody
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument {
 

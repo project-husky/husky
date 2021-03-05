@@ -23,12 +23,20 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040ManufacturedProduct;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Material;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.47 Template
- * description: Reference to Prescription Item
+ * PREReferenceEntryContentModule
+ *
+ * Template description: Reference to Prescription Item
  *
  * Element description: Reference to Prescription Item General Specification
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.4.47
+ * Effective date: 2018-01-11 18:31:33
+ * Version: 2017
+ * Status: pending
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class PrereferenceEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
 

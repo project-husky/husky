@@ -23,21 +23,18 @@ import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.5.3.1.4.1.1 Template
- * description: Any problem or allergy observation may reference a problem
- * status observation. This structure
- * is <span style="line-height: 1.22;">included in the target observation using
- * the &lt;entryRelationship&gt; element defined in the
- * CDA </span><span style="line-height: 1.22;">Schema. The clinical status
- * observation records information about the current status of
- * the </span><span style="line-height: 1.22;">problem or allergy, for example,
- * whether it is active, in remission, resolved, et cetera.
- * The </span><span style="line-height: 1.22;">example below shows the
- * recording of clinical status of a condition or allergy, and is used as
- * the </span><span style="line-height: 1.22;">context for the following
- * sections.</span>
+ * IHEProblemStatusObservation
+ *
+ * Template description: Any problem or allergy observation may reference a problem status observation. This structure is <span style="line-height: 1.22;">included in the target observation using the &lt;entryRelationship&gt; element defined in the CDA </span><span style="line-height: 1.22;">Schema. The clinical status observation records information about the current status of the </span><span style="line-height: 1.22;">problem or allergy, for example, whether it is active, in remission, resolved, et cetera. The </span><span style="line-height: 1.22;">example below shows the recording of clinical status of a condition or allergy, and is used as the </span><span style="line-height: 1.22;">context for the following sections.</span>
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 1.3.6.1.4.1.19376.1.5.3.1.4.1.1
+ * Effective date: 2013-12-20 00:00:00
+ * Version: 2014
+ * Status: active
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class IheproblemStatusObservation
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 

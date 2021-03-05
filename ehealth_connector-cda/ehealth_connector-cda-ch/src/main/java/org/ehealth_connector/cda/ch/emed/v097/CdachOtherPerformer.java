@@ -20,16 +20,20 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.9.31 Template
- * description: Reusable template wherever a healthcare provider who was the
- * primary performer of an act is used in a CDA-CH V2 document. CDA-CH V2
- * derivatives, i.e. Swiss exchange formats MAY use this template by either
- * reference or specialisation.
+ * cdach_other_Performer
  *
- * Element description: Information about a healthcare provider who was the
- * primary performer of the act.
+ * Template description: Reusable template wherever a healthcare provider who was the primary performer of an act is used in a CDA-CH V2 document. CDA-CH V2 derivatives, i.e. Swiss exchange formats MAY use this template by either reference or specialisation.
+ *
+ * Element description: Information about a healthcare provider who was the primary performer of the act.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.9.31
+ * Effective date: 2018-12-24 19:51:04
+ * Version: 2020
+ * Status: active
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class CdachOtherPerformer
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer1 {
 

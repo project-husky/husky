@@ -20,10 +20,18 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.38 Template
- * description: Amount of units of the consumable to dispense
+ * PrescribedQuantityEntryContentModule
+ *
+ * Template description: Amount of units of the consumable to dispense
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.4.38
+ * Effective date: 2016-06-13 00:00:00
+ * Version: 2017
+ * Status: pending
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class PrescribedQuantityEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Supply {
 

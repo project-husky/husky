@@ -20,18 +20,18 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.4.83 Template
- * description: Multimedia objects (e.g., PDF representations of the CDA
- * document, pictures, Reiber diagrams, electrophoresis, etc.) MAY be integrated
- * into a CDA document, either by reference to external multimedia objects or by
- * means of XML embedding.This template defines only the embedding of multimedia
- * objects in the CDA document. References to external documents can be created
- * with the ExternalDocument template.For embedding in XML, the multimedia
- * objects Base-64 must be encoded.Due to the amount of data, only light objects
- * should be embedded.Heavy objects should be integrated using links to external
- * documents.
+ * cdach_entry_ObservationMedia
+ *
+ * Template description: Multimedia objects (e.g., PDF representations of the CDA document, pictures, Reiber diagrams, electrophoresis, etc.) MAY be integrated into a CDA document, either by reference to external multimedia objects or by means of XML embedding.This template defines only the embedding of multimedia objects in the CDA document. References to external documents can be created with the ExternalDocument template.For embedding in XML, the multimedia objects Base-64 must be encoded.Due to the amount of data, only light objects should be embedded.Heavy objects should be integrated using links to external documents.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.4.83
+ * Effective date: 2018-04-18 00:00:00
+ * Version: 2017
+ * Status: active
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class CdachEntryObservationMedia
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040ObservationMedia {
 

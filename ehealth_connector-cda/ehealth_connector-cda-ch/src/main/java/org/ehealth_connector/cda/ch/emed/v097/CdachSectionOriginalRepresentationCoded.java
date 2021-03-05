@@ -20,22 +20,24 @@ import javax.annotation.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.3.45 Template
- * description: This section MAY be used to provide the original representation
- * of the current CDA document as it has been seen by the legal authenticator
- * while signing.Notes: - This template doesn't require PDF/A but keep in mind
- * that only PDF/A contains all necessary information that allows to identically
- * display the PDF on different machines. - To ensure that digital data remains
- * legible in the long term, PDF/A (but not PDF) is mentioned in the allowed
- * list of archival formats for the Swiss Federal Archives. - The certification
- * requirements according to the Swiss EPR (EPRA) require PDF/A-1 oder PDF/A-2.
- * - Following the recommendations of CDA-CH V2 (2017), embedding the original
- * representation in PDF/A-1a format is therefore strongly recommended.
+ * cdach_section_OriginalRepresentationCoded
  *
- * Element description: Contains the original representation of the current CDA
- * document as it has been seen by the legal authenticator while signing.
+ * Template description: This section MAY be used to provide the original representation of the current CDA document as it has been seen by the legal authenticator while signing.Notes:
+ * - This template doesn't require PDF/A but keep in mind that only PDF/A contains all necessary information that allows to identically display the PDF on different machines.
+ * - To ensure that digital data remains legible in the long term, PDF/A (but not PDF) is mentioned in the allowed list of archival formats for the Swiss Federal Archives.
+ * - The certification requirements according to the Swiss EPR (EPRA) require PDF/A-1 oder PDF/A-2.
+ * - Following the recommendations of CDA-CH V2 (2017), embedding the original representation in PDF/A-1a format is therefore strongly recommended.
+ *
+ * Element description: Contains the original representation of the current CDA document as it has been seen by the legal authenticator while signing.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.3.45
+ * Effective date: 2020-07-14 12:28:51
+ * Version: 2017
+ * Status: draft
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class CdachSectionOriginalRepresentationCoded
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Section {
 

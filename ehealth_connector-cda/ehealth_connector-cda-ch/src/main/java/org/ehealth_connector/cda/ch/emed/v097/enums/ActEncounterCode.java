@@ -27,13 +27,20 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
+ * Enumeration of ActEncounterCode values
+ *
  * <div class="en"><p> <b>History description 2014-03-26: </b>Lock all vaue sets untouched since 2014-03-26 to trackingId 2014T1_2014_03_26</p><b>description: </b><p>Domain provides codes that qualify the ActEncounterClass (ENC)</p></div>
  * <div class="de">no designation found for language GERMAN</div>
  * <div class="fr">no designation found for language FRENCH</div>
  * <div class="it">no designation found for language ITALIAN</div>
+ *
+ * Identifier: 2.16.840.1.113883.1.11.13955
+ * Effective date: 2017-12-17 00:00
+ * Version: DEFN=UV=VO=1402-20171217
+ * Status: FINAL
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-05")
 public enum ActEncounterCode implements ValueSetEnumInterface {
 
 	/**

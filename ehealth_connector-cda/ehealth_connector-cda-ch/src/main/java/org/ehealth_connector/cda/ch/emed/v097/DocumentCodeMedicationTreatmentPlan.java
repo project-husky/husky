@@ -22,13 +22,20 @@ import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 
 /**
- * Original ART-DECOR template id: 2.16.756.5.30.1.1.10.2.54 Template
- * description: A LOINC based document type of a CDA document instance including
- * a translation to the Swiss EPR XDS.b metadata.
+ * DocumentCodeMedicationTreatmentPlan
+ *
+ * Template description: A LOINC based document type of a CDA document instance including a translation to the Swiss EPR XDS.b metadata.
  *
  * Element description: IHE PHARM MTP document code
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 2.16.756.5.30.1.1.10.2.54
+ * Effective date: 2020-02-03 17:29:10
+ * Version: 2020
+ * Status: draft
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class DocumentCodeMedicationTreatmentPlan extends org.ehealth_connector.common.hl7cdar2.CE {
 
 	public DocumentCodeMedicationTreatmentPlan() {

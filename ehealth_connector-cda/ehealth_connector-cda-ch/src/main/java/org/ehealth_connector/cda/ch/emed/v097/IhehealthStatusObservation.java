@@ -23,15 +23,18 @@ import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
- * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.5.3.1.4.1.2 Template
- * description: A problem observation may reference a health status observation.
- * This structure is included in the target observation using the
- * &lt;entryRelationship&gt; element defined in the CDA Schema. The health
- * status observation records information about the current health status of the
- * patient. The example below shows the recording the health status, and is used
- * as the context for the following sections.
+ * IHEHealthStatusObservation
+ *
+ * Template description: A problem observation may reference a health status observation. This structure is included in the target observation using the &lt;entryRelationship&gt; element defined in the CDA Schema. The health status observation records information about the current health status of the patient. The example below shows the recording the health status, and is used as the context for the following sections.
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 1.3.6.1.4.1.19376.1.5.3.1.4.1.2
+ * Effective date: 2013-12-20 00:00:00
+ * Version: 2014
+ * Status: active
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class IhehealthStatusObservation
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation {
 

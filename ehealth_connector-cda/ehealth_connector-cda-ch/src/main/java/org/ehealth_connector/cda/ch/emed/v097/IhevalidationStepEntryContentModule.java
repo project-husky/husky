@@ -23,13 +23,20 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040ManufacturedProduct;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Material;
 
 /**
- * Original ART-DECOR template id: 1.3.6.1.4.1.19376.1.9.1.3.16 Template
- * description: Reference to a Medication Treatment Plan Entry
+ * IHEValidationStepEntryContentModule
  *
- * Element description: Reference to Medication Treatment Plan Item General
- * Specification
+ * Template description: Reference to a Medication Treatment Plan Entry
+ *
+ * Element description: Reference to Medication Treatment Plan Item General Specification
+ *
+ * <!-- @formatter:off -->
+ * Identifier: 1.3.6.1.4.1.19376.1.9.1.3.16
+ * Effective date: 2020-02-03 18:26:16
+ * Version: 2020
+ * Status: pending
+ * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-02")
+@Generated(value = "org.ehealth_connector.codegenerator.cda.ArtDecor2JavaGenerator", date = "2021-03-05")
 public class IhevalidationStepEntryContentModule
 		extends org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration {
 
