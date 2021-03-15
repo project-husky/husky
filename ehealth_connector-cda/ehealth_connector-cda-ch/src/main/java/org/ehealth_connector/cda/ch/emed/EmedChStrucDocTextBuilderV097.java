@@ -476,7 +476,7 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 							EmedTextNarrativeAttributes.RATE_QUANTITY.getCodeValue(),
 							EmedTextNarrativeAttributes.REASON.getCodeValue(),
 							EmedTextNarrativeAttributes.PATIENT_INSTRUCTIONS.getCodeValue(),
-							EmedTextNarrativeAttributes.DISPENSE_AMOUNT.getCodeValue() });
+							EmedTextNarrativeAttributes.REPEAT.getCodeValue() });
 
 			NarrativeTableInfos narrativeTableInfosComplementaryInfos = new NarrativeTableInfos(
 					resBundle.getString("emed.title." + COMPLEMENTARY_INFO_TAG),
@@ -1624,31 +1624,33 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 		if (dosageType == DosageType.Normal) {
 			for (SXCMTS sxcmts : substanceAdministration.getEffectiveTime()) {
 				if (sxcmts instanceof PIVLTS) {
-					dosageIntakes.add(parsePivlTs(this.languageCode, (PIVLTS) sxcmts));
+					this.dosageIntakes.add(parsePivlTs(this.languageCode, (PIVLTS) sxcmts));
 					return;
 				} else if (sxcmts instanceof EIVLTS) {
-					dosageIntakes.add(parseEivlTs(this.languageCode, (EIVLTS) sxcmts));
+					this.dosageIntakes.add(parseEivlTs(this.languageCode, (EIVLTS) sxcmts));
+					return;
+				} else if (sxcmts instanceof SXPRTS) {
+					this.dosageIntakes.add(parseSxprTs(this.languageCode, (SXPRTS) sxcmts));
 					return;
 				}
 			}
 		} else if (dosageType == DosageType.Tapered) {
 			for (SXCMTS sxcmts : substanceAdministration.getEffectiveTime()) {
 				if (sxcmts instanceof SXPRTS) {
-					dosageIntakes.add(parseSxprTs(languageCode, (SXPRTS) sxcmts));
+					this.dosageIntakes.add(parseSxprTs(languageCode, (SXPRTS) sxcmts));
 					return;
 				}
 			}
 		} else if (dosageType == DosageType.Split) {
-			List<String> dosageIntakesCrt = parseSplitDosageIntake(substanceAdministration,
-					languageCode);
+			List<String> dosageIntakesCrt = parseSplitDosageIntake(substanceAdministration, this.languageCode);
 			if (dosageIntakesCrt.size() == 0) {
-				dosageIntakes.add("-");
+				this.dosageIntakes.add("-");
 			} else {
-				dosageIntakes.addAll(dosageIntakesCrt);
+				this.dosageIntakes.addAll(dosageIntakesCrt);
 			}
 			return;
 		}
-		dosageIntakes.add("-");
+		this.dosageIntakes.add("-");
 
 	}
 
@@ -1936,9 +1938,7 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 			ingredientStrCrt = setReferenceAndGetXmlContent(originalTextIngredient,
 					EmedTextNarrativeAttributes.INGREDIENTS.getCodeValue());
 			if (StringUtils.isEmpty(ingredientStrCrt)) {
-				ingredientStrCrt = ingredientCrt.getIngredient().getValue().getCode()
-						.getDisplayName() + " ("
-						+ ingredientCrt.getIngredient().getValue().getCode().getCode() + ")";
+				ingredientStrCrt = ingredientCrt.getIngredient().getValue().getCode().getDisplayName();
 			}
 			ingredients.add(ingredientStrCrt);
 		}
