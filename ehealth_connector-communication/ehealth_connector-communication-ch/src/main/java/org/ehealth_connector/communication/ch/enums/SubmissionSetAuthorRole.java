@@ -35,12 +35,12 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
  * <div class="it">no designation found for language ITALIAN</div>
  *
  * Identifier: 2.16.756.5.30.1.127.3.10.1.41
- * Effective date: 2019-12-11 17:09
- * Version: 201907.2-stable
+ * Effective date: 2021-04-01 17:12
+ * Version: 202104.0-stable
  * Status: FINAL
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-05")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-04-22")
 public enum SubmissionSetAuthorRole implements ValueSetEnumInterface {
 
 	/**
@@ -53,6 +53,17 @@ public enum SubmissionSetAuthorRole implements ValueSetEnumInterface {
 	 */
 	ASSISTANT("ASS", "2.16.756.5.30.1.127.3.10.6", "Assistant", "Assistant", "Hilfsperson",
 			"Auxiliaire", "Persona ausiliara"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Document administrator</div>
+	 * <div class="de">Dokumenten-Administrator</div>
+	 * <div class="fr">Administrateur de documents</div>
+	 * <div class="it">Amministratore dei documenti</div>
+	 * <!-- @formatter:on -->
+	 */
+	DOCUMENT_ADMINISTRATOR("DADM", "2.16.756.5.30.1.127.3.10.6", "Document administrator",
+			"Document administrator", "Dokumenten-Administrator", "Administrateur de documents",
+			"Amministratore dei documenti"),
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Healthcare professional</div>
@@ -104,6 +115,16 @@ public enum SubmissionSetAuthorRole implements ValueSetEnumInterface {
 	 * <!-- @formatter:on -->
 	 */
 	public static final String ASSISTANT_CODE = "ASS";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Document administrator</div>
+	 * <div class="de">Code für Dokumenten-Administrator</div>
+	 * <div class="fr">Code de Administrateur de documents</div>
+	 * <div class="it">Code per Amministratore dei documenti</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String DOCUMENT_ADMINISTRATOR_CODE = "DADM";
 
 	/**
 	 * <!-- @formatter:off -->

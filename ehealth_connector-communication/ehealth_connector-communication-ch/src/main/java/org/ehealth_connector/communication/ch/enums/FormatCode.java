@@ -35,12 +35,12 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
  * <div class="it">Formato del documento secondo l'allegato 3 OCIP-DFI. Questo codice univoco definisce il formato del documento XDS. Insieme al tipo MIME, intende fornire al potenziale consumatore sufficienti informazioni per capire se è in grado o meno di elaborare il documento.</div>
  *
  * Identifier: 2.16.756.5.30.1.127.3.10.1.9
- * Effective date: 2020-06-22 10:18
- * Version: 201907.3-stable
+ * Effective date: 2021-04-01 17:06
+ * Version: 202104.0-stable
  * Status: FINAL
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-05")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-04-22")
 public enum FormatCode implements ValueSetEnumInterface {
 
 	/**

@@ -35,12 +35,12 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
  * <div class="it">Tipo MIME del documento secondo l'allegato 3 OCIP-DFI.</div>
  *
  * Identifier: 2.16.756.5.30.1.127.3.10.1.16
- * Effective date: 2019-12-11 14:58
- * Version: 201907.2-stable
+ * Effective date: 2021-04-01 17:07
+ * Version: 202104.0-stable
  * Status: FINAL
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-05")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-04-22")
 public enum MimeType implements ValueSetEnumInterface {
 
 	/**

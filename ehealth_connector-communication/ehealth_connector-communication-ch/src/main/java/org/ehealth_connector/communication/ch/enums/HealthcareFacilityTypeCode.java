@@ -35,12 +35,12 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
  * <div class="it">Tipo di istituzione sanitaria secondo l'allegato 3 OCIP-DFI. Questo codice descrive il tipo di istituzione sanitaria nella quale è stato creato il documento durante il processo terapeutico. Il paziente può utilizzare questa informazione in relazione al controllo delle autorizzazioni, ad esempio per attribuire un determinato grado di riservatezza a tutti i documenti provenienti da un determinato tipo di istituzione sanitaria.</div>
  *
  * Identifier: 2.16.756.5.30.1.127.3.10.1.11
- * Effective date: 2020-05-18 18:47
- * Version: 201907.3-stable
+ * Effective date: 2021-04-01 16:16
+ * Version: 202104.0-stable
  * Status: FINAL
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-05")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-04-22")
 public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 
 	/**

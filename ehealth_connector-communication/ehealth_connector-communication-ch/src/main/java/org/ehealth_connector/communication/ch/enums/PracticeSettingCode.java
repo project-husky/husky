@@ -35,12 +35,12 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
  * <div class="it">Specialità medica dei dati inseriti nel documento secondo l'allegato 3 OCIP-DFI. Questo attributo intende associare il contenuto di un documento a una specialità medica. È ipotizzabile che questa informazione fornisca un aiuto al paziente per impostare o modificare il grado di riservatezza dei documenti, rilevante per il controllo degli accessi.</div>
  *
  * Identifier: 2.16.756.5.30.1.127.3.10.1.18
- * Effective date: 2019-12-11 15:04
- * Version: 201907.2-stable
+ * Effective date: 2021-04-01 16:19
+ * Version: 202104.0-stable
  * Status: FINAL
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-05")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-04-22")
 public enum PracticeSettingCode implements ValueSetEnumInterface {
 
 	/**

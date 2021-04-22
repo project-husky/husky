@@ -40,7 +40,7 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
  * Status: FINAL
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-05")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-04-22")
 public enum Role implements ValueSetEnumInterface {
 
 	/**

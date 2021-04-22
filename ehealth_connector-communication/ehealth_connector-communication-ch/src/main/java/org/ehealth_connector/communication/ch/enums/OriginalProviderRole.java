@@ -27,36 +27,144 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
  * <!-- @formatter:off -->
- * Enumeration of EprAgentRole values
+ * Enumeration of DocumentEntry.originalProviderRole values
  *
- * <div class="en"><span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;">Role codes as per Annex 5 EPRO-FDHA, CH:ATC, </span><span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;">version</span> <span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;">July 2019 </span><br clear="none"/></div>
+ * <div class="en">no designation found for language ENGLISH</div>
  * <div class="de">no designation found for language GERMAN</div>
  * <div class="fr">no designation found for language FRENCH</div>
  * <div class="it">no designation found for language ITALIAN</div>
  *
- * Identifier: 2.16.756.5.30.1.127.3.10.13.1
- * Effective date: 2019-11-03 14:34
- * Version: 201907.1-stable
+ * Identifier: 2.16.756.5.30.1.127.3.10.1.42
+ * Effective date: 2021-04-01 17:23
+ * Version: 202104.0-stable
  * Status: FINAL
  * <!-- @formatter:on -->
  */
 @Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-04-22")
-public enum AgentRole implements ValueSetEnumInterface {
+public enum OriginalProviderRole implements ValueSetEnumInterface {
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Group</div>
+	 * <div class="en">Assistant</div>
+	 * <div class="de">Hilfsperson</div>
+	 * <div class="fr">Auxiliaire</div>
+	 * <div class="it">Persona ausiliara</div>
 	 * <!-- @formatter:on -->
 	 */
-	GROUP("GRP", "2.16.756.5.30.1.127.3.10.14", "Group", "Group", "TOTRANSLATE", "TOTRANSLATE",
-			"TOTRANSLATE");
+	ASSISTANT("ASS", "2.16.756.5.30.1.127.3.10.6", "Assistant", "Assistant", "Hilfsperson",
+			"Auxiliaire", "Persona ausiliara"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Document administrator</div>
+	 * <div class="de">Dokumenten-Administrator</div>
+	 * <div class="fr">Administrateur de documents</div>
+	 * <div class="it">Amministratore dei documenti</div>
+	 * <!-- @formatter:on -->
+	 */
+	DOCUMENT_ADMINISTRATOR("DADM", "2.16.756.5.30.1.127.3.10.6", "Document administrator",
+			"Document administrator", "Dokumenten-Administrator", "Administrateur de documents",
+			"Amministratore dei documenti"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Healthcare professional</div>
+	 * <div class="de">Gesundheitsfachperson</div>
+	 * <div class="fr">Professionnel de la santé</div>
+	 * <div class="it">Professionista della salute</div>
+	 * <!-- @formatter:on -->
+	 */
+	HEALTHCARE_PROFESSIONAL("HCP", "2.16.756.5.30.1.127.3.10.6", "Healthcare professional",
+			"Healthcare professional", "Gesundheitsfachperson", "Professionnel de la santé",
+			"Professionista della salute"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Patient</div>
+	 * <div class="de">Patient</div>
+	 * <div class="fr">Patient</div>
+	 * <div class="it">Paziente</div>
+	 * <!-- @formatter:on -->
+	 */
+	PATIENT("PAT", "2.16.756.5.30.1.127.3.10.6", "Patient", "Patient", "Patient", "Patient",
+			"Paziente"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Representative</div>
+	 * <div class="de">Stellvertretung</div>
+	 * <div class="fr">Représentant</div>
+	 * <div class="it">Rappresentante</div>
+	 * <!-- @formatter:on -->
+	 */
+	REPRESENTATIVE("REP", "2.16.756.5.30.1.127.3.10.6", "Representative", "Representative",
+			"Stellvertretung", "Représentant", "Rappresentante"),
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Technical user</div>
+	 * <div class="de">Technischer Benutzer</div>
+	 * <div class="fr">Utilisateur technique</div>
+	 * <div class="it">Utente tecnico</div>
+	 * <!-- @formatter:on -->
+	 */
+	TECHNICAL_USER("TCU", "2.16.756.5.30.1.127.3.10.6", "Technical user", "Technical user",
+			"Technischer Benutzer", "Utilisateur technique", "Utente tecnico");
 
 	/**
 	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Group</div>
+	 * <div class="en">Code for Assistant</div>
+	 * <div class="de">Code für Hilfsperson</div>
+	 * <div class="fr">Code de Auxiliaire</div>
+	 * <div class="it">Code per Persona ausiliara</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String GROUP_CODE = "GRP";
+	public static final String ASSISTANT_CODE = "ASS";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Document administrator</div>
+	 * <div class="de">Code für Dokumenten-Administrator</div>
+	 * <div class="fr">Code de Administrateur de documents</div>
+	 * <div class="it">Code per Amministratore dei documenti</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String DOCUMENT_ADMINISTRATOR_CODE = "DADM";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Healthcare professional</div>
+	 * <div class="de">Code für Gesundheitsfachperson</div>
+	 * <div class="fr">Code de Professionnel de la santé</div>
+	 * <div class="it">Code per Professionista della salute</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String HEALTHCARE_PROFESSIONAL_CODE = "HCP";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Patient</div>
+	 * <div class="de">Code für Patient</div>
+	 * <div class="fr">Code de Patient</div>
+	 * <div class="it">Code per Paziente</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String PATIENT_CODE = "PAT";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Representative</div>
+	 * <div class="de">Code für Stellvertretung</div>
+	 * <div class="fr">Code de Représentant</div>
+	 * <div class="it">Code per Rappresentante</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String REPRESENTATIVE_CODE = "REP";
+
+	/**
+	 * <!-- @formatter:off -->
+	 * <div class="en">Code for Technical user</div>
+	 * <div class="de">Code für Technischer Benutzer</div>
+	 * <div class="fr">Code de Utilisateur technique</div>
+	 * <div class="it">Code per Utente tecnico</div>
+	 * <!-- @formatter:on -->
+	 */
+	public static final String TECHNICAL_USER_CODE = "TCU";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -64,7 +172,7 @@ public enum AgentRole implements ValueSetEnumInterface {
 	 * <div class="de">Identifikator für das Value Set</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.13.1";
+	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.42";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -72,7 +180,7 @@ public enum AgentRole implements ValueSetEnumInterface {
 	 * <div class="de">Name des Value Sets</div>
 	 * <!-- @formatter:on -->
 	 */
-	public static final String VALUE_SET_NAME = "EprAgentRole";
+	public static final String VALUE_SET_NAME = "DocumentEntry.originalProviderRole";
 
 	/**
 	 * <!-- @formatter:off -->
@@ -84,8 +192,8 @@ public enum AgentRole implements ValueSetEnumInterface {
 	 *            <div class="de"> code</div>
 	 * @return <div class="en">the enum</div>
 	 */
-	public static AgentRole getEnum(final String code) {
-		for (final AgentRole x : values()) {
+	public static OriginalProviderRole getEnum(final String code) {
+		for (final OriginalProviderRole x : values()) {
 			if (x.getCodeValue().equals(code)) {
 				return x;
 			}
@@ -108,7 +216,7 @@ public enum AgentRole implements ValueSetEnumInterface {
 			return false;
 		}
 		try {
-			Enum.valueOf(AgentRole.class, enumName);
+			Enum.valueOf(OriginalProviderRole.class, enumName);
 			return true;
 		} catch (final IllegalArgumentException ex) {
 			return false;
@@ -126,7 +234,7 @@ public enum AgentRole implements ValueSetEnumInterface {
 	 * @return true, if is in value set
 	 */
 	public static boolean isInValueSet(final String codeValue) {
-		for (final AgentRole x : values()) {
+		for (final OriginalProviderRole x : values()) {
 			if (x.getCodeValue().equals(codeValue)) {
 				return true;
 			}
@@ -176,7 +284,7 @@ public enum AgentRole implements ValueSetEnumInterface {
 	 * @param displayNameIt
 	 *            the display name it
 	 */
-	AgentRole(final String code, final String codeSystem, final String displayName,
+	OriginalProviderRole(final String code, final String codeSystem, final String displayName,
 			final String displayNameEn, final String displayNameDe, final String displayNameFr,
 			final String displayNameIt) {
 		this.code = code;

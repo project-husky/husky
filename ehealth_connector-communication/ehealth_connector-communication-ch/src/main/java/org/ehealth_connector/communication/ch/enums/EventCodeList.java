@@ -35,12 +35,12 @@ import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
  * <div class="it">no designation found for language ITALIAN</div>
  *
  * Identifier: 2.16.756.5.30.1.127.3.10.1.8
- * Effective date: 2019-11-03 14:33
- * Version: 201907.1-stable
+ * Effective date: 2021-04-01 17:00
+ * Version: 202104.0-stable
  * Status: FINAL
  * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-03-05")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-04-22")
 public enum EventCodeList implements ValueSetEnumInterface {
 
 	/**
