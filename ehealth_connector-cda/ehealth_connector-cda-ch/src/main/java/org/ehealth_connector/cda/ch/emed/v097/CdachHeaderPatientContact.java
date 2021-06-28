@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.cda.ch.emed.v097;
 
-import javax.annotation.Generated;
+import javax.annotation.processing.Generated;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 
 /**
