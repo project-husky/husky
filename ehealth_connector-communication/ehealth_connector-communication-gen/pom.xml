@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>ehealth_connector-communication-gen</artifactId>
 	<name>eHealth Connector Communication Generic</name>
@@ -174,15 +176,15 @@
 			<artifactId>addressing</artifactId>
 			<!--type>mar</type -->
 		</dependency>
-		
+
 		<dependency>
-				<groupId>org.apache.ws.commons.axiom</groupId>
-				<artifactId>axiom-impl</artifactId>
-				</dependency>
-				<dependency>
-				<groupId>xerces</groupId>
-				<artifactId>xercesImpl</artifactId>
-				</dependency>
+			<groupId>org.apache.ws.commons.axiom</groupId>
+			<artifactId>axiom-impl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
@@ -286,8 +288,10 @@
 							<target>
 								<exec executable="ikvmc">
 									<arg value="-target:library" />
-									<arg value="-out:${project.build.directory}/${project.artifactId}-${project.version}.dll" />
-									<arg value="${project.build.directory}/${project.artifactId}-${project.version}.jar" />
+									<arg
+										value="-out:${project.build.directory}/${project.artifactId}-${project.version}.dll" />
+									<arg
+										value="${project.build.directory}/${project.artifactId}-${project.version}.jar" />
 								</exec>
 							</target>
 						</configuration>
