@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.common.ch.enums.ConfidentialityCode;
+import org.ehealth_connector.common.communication.DocumentMetadata;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.communication.DocumentMetadata;
 import org.ehealth_connector.communication.ch.enums.ClassCode;
 import org.ehealth_connector.communication.ch.enums.FormatCode;
 import org.ehealth_connector.communication.ch.enums.HealthcareFacilityTypeCode;
@@ -31,7 +31,7 @@ import org.ehealth_connector.communication.ch.enums.TypeCode;
 import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
 import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 
-public class DocumentMetadataCh extends org.ehealth_connector.communication.DocumentMetadata {
+public class DocumentMetadataCh extends org.ehealth_connector.common.communication.DocumentMetadata {
 
 	/**
 	 * Instantiates a new document meta data.

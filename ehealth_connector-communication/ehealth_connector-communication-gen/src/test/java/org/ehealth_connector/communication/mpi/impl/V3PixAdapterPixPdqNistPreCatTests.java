@@ -21,11 +21,11 @@ import static org.junit.Assert.assertTrue;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import org.ehealth_connector.common.communication.AffinityDomain;
+import org.ehealth_connector.common.communication.Destination;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.utils.DateUtilMdht;
-import org.ehealth_connector.communication.AffinityDomain;
 import org.ehealth_connector.communication.ConvenienceMasterPatientIndexV3;
-import org.ehealth_connector.communication.Destination;
 import org.ehealth_connector.communication.MasterPatientIndexQuery;
 import org.ehealth_connector.communication.MasterPatientIndexQueryResponse;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;

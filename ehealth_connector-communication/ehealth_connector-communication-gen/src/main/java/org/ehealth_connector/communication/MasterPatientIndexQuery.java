@@ -22,6 +22,7 @@ import java.util.Date;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.eclipse.emf.ecore.EPackage;
+import org.ehealth_connector.common.communication.Destination;
 import org.ehealth_connector.common.mdht.Address;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Name;

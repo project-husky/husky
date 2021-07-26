@@ -22,10 +22,10 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ehealth_connector.common.communication.AffinityDomain;
+import org.ehealth_connector.common.communication.DocumentMetadata;
+import org.ehealth_connector.common.communication.SubmissionSetMetadata;
 import org.ehealth_connector.common.mdht.Patient;
-import org.ehealth_connector.communication.AffinityDomain;
-import org.ehealth_connector.communication.DocumentMetadata;
-import org.ehealth_connector.communication.SubmissionSetMetadata;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.ehealth_connector.fhir.structures.utils.FhirUtilities;
 import org.hl7.fhir.dstu3.model.Coding;
@@ -121,7 +121,7 @@ public class FhirXdTransaction {
 		afinityDomain.setRegistryDestination(getRegistry(transaction));
 
 		// set the repositories
-		final List<org.ehealth_connector.communication.Destination> repos = getRepositories(
+		final List<org.ehealth_connector.common.communication.Destination> repos = getRepositories(
 				transaction);
 		// TODO support of multiple repos as soon as this will be asked
 		if (!repos.isEmpty())
@@ -171,9 +171,9 @@ public class FhirXdTransaction {
 	 * @return the eHC Destination </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	private org.ehealth_connector.communication.Destination getDestination(
+	private org.ehealth_connector.common.communication.Destination getDestination(
 			MessageHeader fhirObject) {
-		org.ehealth_connector.communication.Destination retVal = null;
+		org.ehealth_connector.common.communication.Destination retVal = null;
 
 		final String senderOrganizationalOid = fhirObject.getSource().getSoftware();
 		String receiverFacilityOid = null;
@@ -191,7 +191,7 @@ public class FhirXdTransaction {
 		} catch (final URISyntaxException e) {
 			// do nothing
 		}
-		retVal = new org.ehealth_connector.communication.Destination(senderOrganizationalOid, uri);
+		retVal = new org.ehealth_connector.common.communication.Destination(senderOrganizationalOid, uri);
 		if (receiverFacilityOid != null)
 			retVal.setReceiverFacilityOid(receiverFacilityOid);
 		if (sourceFacilityOid != null)
@@ -287,9 +287,9 @@ public class FhirXdTransaction {
 	 * @return the registry as eHC Destination object </div>
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
-	public org.ehealth_connector.communication.Destination getRegistry(
+	public org.ehealth_connector.common.communication.Destination getRegistry(
 			DocumentManifest docManifest) {
-		org.ehealth_connector.communication.Destination retVal = null;
+		org.ehealth_connector.common.communication.Destination retVal = null;
 
 		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
 			Reference ref = null;
@@ -318,9 +318,9 @@ public class FhirXdTransaction {
 	 * @return list of repositories</div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public List<org.ehealth_connector.communication.Destination> getRepositories(
+	public List<org.ehealth_connector.common.communication.Destination> getRepositories(
 			DocumentManifest docManifest) {
-		final List<org.ehealth_connector.communication.Destination> retVal = new ArrayList<>();
+		final List<org.ehealth_connector.common.communication.Destination> retVal = new ArrayList<>();
 
 		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
 			Reference ref = null;

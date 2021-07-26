@@ -102,27 +102,27 @@ public class PurposeOfUseBuilder extends AbstractXMLObjectBuilder<OpenSamlPurpos
 		return ppou;
 	}
 
-	PurposeOfUseBuilder code(String aCode) {
+	public PurposeOfUseBuilder code(String aCode) {
 		code = aCode;
 		return this;
 	}
 
-	PurposeOfUseBuilder codeSystem(String aCodeSystem) {
+	public PurposeOfUseBuilder codeSystem(String aCodeSystem) {
 		codeSystem = aCodeSystem;
 		return this;
 	}
 
-	PurposeOfUseBuilder codeSystemName(String aCodeSystemName) {
+	public PurposeOfUseBuilder codeSystemName(String aCodeSystemName) {
 		codeSystemName = aCodeSystemName;
 		return this;
 	}
 
-	PurposeOfUseBuilder codeSystemVersion(String aCodeSystemVersion) {
+	public PurposeOfUseBuilder codeSystemVersion(String aCodeSystemVersion) {
 		codeSystemVersion = aCodeSystemVersion;
 		return this;
 	}
 
-	PurposeOfUseBuilder displayName(String aDisplayNamen) {
+	public PurposeOfUseBuilder displayName(String aDisplayNamen) {
 		displayName = aDisplayNamen;
 		return this;
 	}

@@ -100,27 +100,27 @@ public class RoleBuilder extends AbstractXMLObjectBuilder<OpenSamlRole> {
 		return ppou;
 	}
 
-	RoleBuilder code(String aCode) {
+	public RoleBuilder code(String aCode) {
 		code = aCode;
 		return this;
 	}
 
-	RoleBuilder codeSystem(String aCodeSystem) {
+	public RoleBuilder codeSystem(String aCodeSystem) {
 		codeSystem = aCodeSystem;
 		return this;
 	}
 
-	RoleBuilder codeSystemName(String aCodeSystemName) {
+	public RoleBuilder codeSystemName(String aCodeSystemName) {
 		codeSystemName = aCodeSystemName;
 		return this;
 	}
 
-	RoleBuilder codeSystemVersion(String aCodeSystemVersion) {
+	public RoleBuilder codeSystemVersion(String aCodeSystemVersion) {
 		codeSystemVersion = aCodeSystemVersion;
 		return this;
 	}
 
-	RoleBuilder displayName(String aDisplayNamen) {
+	public RoleBuilder displayName(String aDisplayNamen) {
 		displayName = aDisplayNamen;
 		return this;
 	}

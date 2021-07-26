@@ -31,7 +31,7 @@ public class PurposeOfUseBuilderTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.hl7v3.impl.PurposeOfUseBuilder#buildObject()}.
+	 * {@link org.ehealth_connector.security.hl7v3.impl.ch.ppq.hl7v3.PurposeOfUseBuilder#buildObject()}.
 	 */
 	@Test
 	public void testBuildObject() {

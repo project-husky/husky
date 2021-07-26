@@ -49,7 +49,7 @@ public class RoleBuilderTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.hl7v3.impl.RoleBuilder#buildObject(java.lang.String, java.lang.String, java.lang.String)}.
+	 * {@link org.ehealth_connector.security.hl7v3.impl.ch.ppq.hl7v3.RoleBuilder#buildObject(java.lang.String, java.lang.String, java.lang.String)}.
 	 */
 	@Test
 	public void testBuildObject() {
