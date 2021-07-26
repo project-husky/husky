@@ -15,7 +15,7 @@
  *
  */
 
-package org.ehealth_connector.fhir;
+package org.ehealth_connector.fhir.communication;
 
 import java.net.URI;
 import java.net.URISyntaxException;

@@ -15,7 +15,7 @@
  *
  */
 
-package org.ehealth_connector.fhir.testhelper;
+package org.ehealth_connector.fhir.communication.testhelper;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -14,7 +14,7 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.fhir;
+package org.ehealth_connector.fhir.communication;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -28,9 +28,9 @@ import org.ehealth_connector.common.mdht.Patient;
 import org.ehealth_connector.common.mdht.enums.CountryCode;
 import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.ehealth_connector.fhir.communication.testhelper.TestPatient;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
-import org.ehealth_connector.fhir.testhelper.TestPatient;
 import org.hl7.fhir.dstu3.model.Address;
 import org.hl7.fhir.dstu3.model.BooleanType;
 import org.hl7.fhir.dstu3.model.CodeableConcept;

@@ -13,5 +13,6 @@
 
 	<modules>
 		<module>ehealth_connector-fhir-structures</module>
+		<module>ehealth_connector-fhir-communication</module>
 	</modules>
 </project>

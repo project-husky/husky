@@ -2,12 +2,14 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<artifactId>ehealth_connector-cda-validation</artifactId>
+	<name>eHealth Connector CDA Validation</name>
+
 	<parent>
 		<groupId>org.ehealth_connector.cda</groupId>
 		<artifactId>ehealth_connector-cda</artifactId>
 		<version>1.9-SNAPSHOT</version>
 	</parent>
-	<artifactId>ehealth_connector-cda-validation</artifactId>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
