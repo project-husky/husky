@@ -12,5 +12,6 @@
   <modules>
   	<module>ehealth_connector-communication-gen</module>
   	<module>ehealth_connector-communication-ch</module>
+  	<module>ehealth_connector-xua</module>
   </modules>
 </project>

@@ -2,19 +2,19 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>ehealth_connector-security-gen-impl</artifactId>
-	<name>eHealth Connector Security Generic</name>
+	<artifactId>ehealth_connector-xua-gen-impl</artifactId>
+	<name>eHealth Connector XUA Generic</name>
 
 	<parent>
-		<groupId>org.ehealth_connector.security</groupId>
-		<artifactId>ehealth_connector-security</artifactId>
+		<groupId>org.ehealth_connector.xua</groupId>
+	<artifactId>ehealth_connector-xua</artifactId>
 		<version>1.9-SNAPSHOT</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
-			<groupId>org.ehealth_connector.security</groupId>
-			<artifactId>ehealth_connector-security-gen-api</artifactId>
+			<groupId>org.ehealth_connector.xua</groupId>
+			<artifactId>ehealth_connector-xua-gen-api</artifactId>
 			<version>1.9-SNAPSHOT</version>
 		</dependency>
 		<dependency>

@@ -32,7 +32,6 @@
 		<module>ehealth_connector-validation</module>
 		<module>ehealth_connector-fhir</module>
 		<module>ehealth_connector-converters</module>
-		<module>ehealth_connector-security</module>
 	</modules>
 
 	<dependencyManagement>
