@@ -15,7 +15,7 @@
  *
  */
 
-package org.ehealth_connector.validation.service.api;
+package org.ehealth_connector.cda.validation.api;
 
 public class XsdValidationResult {
 

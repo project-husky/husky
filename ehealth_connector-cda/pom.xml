@@ -14,6 +14,7 @@
 	<modules>
 		<module>ehealth_connector-cda-gen</module>
 		<module>ehealth_connector-cda-ch</module>
+		<module>ehealth_connector-cda-validation</module>
 	</modules>
 
 </project>

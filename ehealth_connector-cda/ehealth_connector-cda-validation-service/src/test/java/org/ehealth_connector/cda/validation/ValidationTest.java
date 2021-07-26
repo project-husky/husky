@@ -14,7 +14,7 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.validation.service;
+package org.ehealth_connector.cda.validation;
 
 import static org.junit.Assert.assertTrue;
 
@@ -27,8 +27,8 @@ import javax.xml.transform.stream.StreamSource;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.io.output.ByteArrayOutputStream;
-import org.ehealth_connector.validation.service.api.CdaValidator;
-import org.ehealth_connector.validation.service.api.XsdValidationResult;
+import org.ehealth_connector.cda.validation.api.CdaValidator;
+import org.ehealth_connector.cda.validation.api.XsdValidationResult;
 import org.ehealth_connector.validation.service.config.ConfigurationException;
 import org.ehealth_connector.validation.service.pdf.PdfValidationResult;
 import org.ehealth_connector.validation.service.pdf.VeraPdfValidationResult;
