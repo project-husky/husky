@@ -14,5 +14,6 @@
   	<module>ehealth_connector-communication-ch</module>
   	<module>ehealth_connector-xua</module>
   	<module>ehealth_connector-valueset-gen</module>
+  	<module>ehealth_connector-ppq</module>
   </modules>
 </project>
