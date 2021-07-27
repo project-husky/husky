@@ -20,6 +20,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.processing.Generated;
 
@@ -188,17 +189,17 @@ public class ValueSet implements Serializable {
 
 		String enumName = displayName.trim().toUpperCase();
 
-		enumName = enumName.replaceAll("CLIENT'S", "CLIENT");
-		enumName = enumName.replaceAll("PATIENT'S", "PATIENT");
-		enumName = enumName.replaceAll(" \\(IC\\)", "");
-		enumName = enumName.replaceAll("&AMP;", "AND");
-		enumName = enumName.replaceAll("%", "PERCENT");
-		enumName = enumName.replaceAll("Μ", "U"); // That's not a 'M', that's an uppercased 'µ'
-		enumName = enumName.replaceAll("\\*", "STAR");
-		enumName = enumName.replaceAll("\\(S\\)", "");
-		enumName = enumName.replaceAll("-", "_");
+		enumName = enumName.replace("CLIENT'S", "CLIENT");
+		enumName = enumName.replace("PATIENT'S", "PATIENT");
+		enumName = enumName.replace(" (IC)", "");
+		enumName = enumName.replace("&AMP;", "AND");
+		enumName = enumName.replace("%", "PERCENT");
+		enumName = enumName.replace("Μ", "U"); // That's not a 'M', that's an uppercased 'µ'
+		enumName = enumName.replace("*", "STAR");
+		enumName = enumName.replace("(S)", "");
+		enumName = enumName.replace("-", "_");
 		enumName = enumName.replaceAll("\\W", "_");
-		enumName = enumName.replaceAll("_+", "_");
+		enumName = enumName.replace("_+", "_");
 
 
 		while (enumName.endsWith("_"))
@@ -262,7 +263,7 @@ public class ValueSet implements Serializable {
 	}
 
 	/** The description list. */
-	private ArrayList<LangText> descriptionList;
+	private List<LangText> descriptionList;
 
 	/** The display name. */
 	private String displayName;
@@ -274,10 +275,10 @@ public class ValueSet implements Serializable {
 	private IdentificatorBaseType identificator;
 
 	/** The mapping identificator list. */
-	private ArrayList<IdentificatorBaseType> mappingIdentificatorList;
+	private List<IdentificatorBaseType> mappingIdentificatorList;
 
 	/** The mapping name list. */
-	private ArrayList<String> mappingNameList;
+	private List<String> mappingNameList;
 
 	/** The name. */
 	private String name;
@@ -286,7 +287,7 @@ public class ValueSet implements Serializable {
 	private ValueSetStatus status;
 
 	/** The value set entry list. */
-	private ArrayList<ValueSetEntry> valueSetEntryList;
+	private List<ValueSetEntry> valueSetEntryList;
 
 	/** The version. */
 	private Version version;
@@ -324,13 +325,13 @@ public class ValueSet implements Serializable {
 	 */
 	public void addDescription(LangText value) {
 		if (this.descriptionList == null)
-			this.descriptionList = new ArrayList<LangText>();
+			this.descriptionList = new ArrayList<>();
 
 		this.descriptionList.add(value);
 	}
 
-	private void addEntryList(ArrayList<ValueSetEntry> globalList,
-			ArrayList<ValueSetEntry> valueSetEntryList) {
+	private void addEntryList(List<ValueSetEntry> globalList,
+			List<ValueSetEntry> valueSetEntryList) {
 		if (valueSetEntryList != null) {
 			for (ValueSetEntry valueSetEntry : valueSetEntryList) {
 				globalList.add(valueSetEntry);
@@ -338,9 +339,9 @@ public class ValueSet implements Serializable {
 		}
 	}
 
-	private ArrayList<ValueSetEntry> addEntryListRecursive(ArrayList<ValueSetEntry> globalList,
-			ArrayList<ValueSetEntry> valueSetEntryList) {
-		ArrayList<ValueSetEntry> retVal = new ArrayList<ValueSetEntry>();
+	private ArrayList<ValueSetEntry> addEntryListRecursive(List<ValueSetEntry> globalList,
+			List<ValueSetEntry> valueSetEntryList) {
+		ArrayList<ValueSetEntry> retVal = new ArrayList<>();
 		retVal.addAll(globalList);
 		if (valueSetEntryList != null) {
 			for (ValueSetEntry valueSetEntry : valueSetEntryList) {
@@ -358,9 +359,8 @@ public class ValueSet implements Serializable {
 				if (!isAlreadyThere)
 					retVal.add(valueSetEntry);
 
-				ArrayList<ValueSetEntry> children = valueSetEntry.getChildList();
-				if (children != null)
-					if (children.size() > 0)
+				List<ValueSetEntry> children = valueSetEntry.getChildList();
+				if (children != null && !children.isEmpty())
 						retVal = addEntryListRecursive(retVal, children);
 			}
 		}
@@ -377,7 +377,7 @@ public class ValueSet implements Serializable {
 	 */
 	public void addMappingIdentificator(IdentificatorBaseType value) {
 		if (this.mappingIdentificatorList == null)
-			this.mappingIdentificatorList = new ArrayList<IdentificatorBaseType>();
+			this.mappingIdentificatorList = new ArrayList<>();
 
 		this.mappingIdentificatorList.add(value);
 	}
@@ -392,7 +392,7 @@ public class ValueSet implements Serializable {
 	 */
 	public void addMappingName(String value) {
 		if (this.mappingNameList == null)
-			this.mappingNameList = new ArrayList<String>();
+			this.mappingNameList = new ArrayList<>();
 
 		this.mappingNameList.add(value);
 	}
@@ -407,7 +407,7 @@ public class ValueSet implements Serializable {
 	 */
 	public void addValueSetEntry(ValueSetEntry value) {
 		if (this.valueSetEntryList == null)
-			this.valueSetEntryList = new ArrayList<ValueSetEntry>();
+			this.valueSetEntryList = new ArrayList<>();
 
 		this.valueSetEntryList.add(value);
 	}
@@ -418,7 +418,7 @@ public class ValueSet implements Serializable {
 	 * <div class="de">Löscht die Beschreibungsliste.</div>
 	 */
 	public void clearDescriptionList() {
-		this.valueSetEntryList = new ArrayList<ValueSetEntry>();
+		this.valueSetEntryList = new ArrayList<>();
 	}
 
 	/**
@@ -427,7 +427,7 @@ public class ValueSet implements Serializable {
 	 * <div class="de">Löscht die Liste der Zuordnungsidentifikatoren.</div>
 	 */
 	public void clearMappingIdentificatorList() {
-		this.mappingIdentificatorList = new ArrayList<IdentificatorBaseType>();
+		this.mappingIdentificatorList = new ArrayList<>();
 	}
 
 	/**
@@ -436,7 +436,7 @@ public class ValueSet implements Serializable {
 	 * <div class="de">Löscht die Liste der Zuordnungsnamen.</div>
 	 */
 	public void clearMappingNameList() {
-		this.mappingNameList = new ArrayList<String>();
+		this.mappingNameList = new ArrayList<>();
 	}
 
 	/**
@@ -445,7 +445,7 @@ public class ValueSet implements Serializable {
 	 * <div class="de">Löscht die Wertesatz-Eintragsliste.</div>
 	 */
 	public void clearValueSetEntryList() {
-		this.valueSetEntryList = new ArrayList<ValueSetEntry>();
+		this.valueSetEntryList = new ArrayList<>();
 	}
 
 	/**
@@ -558,7 +558,7 @@ public class ValueSet implements Serializable {
 
 		if (retVal) {
 			if (this.descriptionList == null)
-				this.descriptionList = new ArrayList<LangText>();
+				this.descriptionList = new ArrayList<>();
 			retVal = (this.descriptionList.size() == ((ValueSet) obj).getDescriptionList().size());
 			if (retVal) {
 				for (int i = 0; i < this.descriptionList.size(); i++) {
@@ -570,7 +570,7 @@ public class ValueSet implements Serializable {
 		}
 		if (retVal) {
 			if (this.mappingIdentificatorList == null)
-				this.mappingIdentificatorList = new ArrayList<IdentificatorBaseType>();
+				this.mappingIdentificatorList = new ArrayList<>();
 			retVal = (this.mappingIdentificatorList.size() == ((ValueSet) obj)
 					.getMappingIdentificatorList().size());
 			if (retVal) {
@@ -584,7 +584,7 @@ public class ValueSet implements Serializable {
 		}
 		if (retVal) {
 			if (this.mappingNameList == null)
-				this.mappingNameList = new ArrayList<String>();
+				this.mappingNameList = new ArrayList<>();
 			retVal = (this.mappingNameList.size() == ((ValueSet) obj).getMappingNameList().size());
 			if (retVal) {
 				for (int i = 0; i < this.mappingNameList.size(); i++) {
@@ -596,7 +596,7 @@ public class ValueSet implements Serializable {
 		}
 		if (retVal) {
 			if (this.valueSetEntryList == null)
-				this.valueSetEntryList = new ArrayList<ValueSetEntry>();
+				this.valueSetEntryList = new ArrayList<>();
 			retVal = (this.valueSetEntryList.size() == ((ValueSet) obj).getValueSetEntryList()
 					.size());
 			if (retVal) {
@@ -677,9 +677,9 @@ public class ValueSet implements Serializable {
 	 *
 	 * @return the description list
 	 */
-	public ArrayList<LangText> getDescriptionList() {
+	public List<LangText> getDescriptionList() {
 		if (descriptionList == null) {
-			descriptionList = new ArrayList<LangText>();
+			descriptionList = new ArrayList<>();
 		}
 		return descriptionList;
 	}
@@ -724,9 +724,9 @@ public class ValueSet implements Serializable {
 	 *
 	 * @return the mapping identificator list
 	 */
-	public ArrayList<IdentificatorBaseType> getMappingIdentificatorList() {
+	public List<IdentificatorBaseType> getMappingIdentificatorList() {
 		if (mappingIdentificatorList == null) {
-			mappingIdentificatorList = new ArrayList<IdentificatorBaseType>();
+			mappingIdentificatorList = new ArrayList<>();
 		}
 		return mappingIdentificatorList;
 	}
@@ -738,9 +738,9 @@ public class ValueSet implements Serializable {
 	 *
 	 * @return the mapping name list
 	 */
-	public ArrayList<String> getMappingNameList() {
+	public List<String> getMappingNameList() {
 		if (mappingNameList == null) {
-			mappingNameList = new ArrayList<String>();
+			mappingNameList = new ArrayList<>();
 		}
 		return mappingNameList;
 	}
@@ -763,8 +763,8 @@ public class ValueSet implements Serializable {
 	 *
 	 * @return the sorted entry list
 	 */
-	public ArrayList<ValueSetEntry> getSortedEntryList() {
-		ArrayList<ValueSetEntry> retVal = new ArrayList<ValueSetEntry>();
+	public List<ValueSetEntry> getSortedEntryList() {
+		List<ValueSetEntry> retVal = new ArrayList<>();
 		addEntryList(retVal, valueSetEntryList);
 		retVal.sort(new ValueSetEntryEnumNameComparator());
 		return retVal;
@@ -779,8 +779,8 @@ public class ValueSet implements Serializable {
 	 *
 	 * @return the sorted entry list
 	 */
-	public ArrayList<ValueSetEntry> getSortedEntryListRecursive() {
-		ArrayList<ValueSetEntry> retVal = new ArrayList<ValueSetEntry>();
+	public List<ValueSetEntry> getSortedEntryListRecursive() {
+		ArrayList<ValueSetEntry> retVal = new ArrayList<>();
 		retVal = addEntryListRecursive(retVal, valueSetEntryList);
 		retVal.sort(new ValueSetEntryEnumNameComparator());
 		return retVal;
@@ -877,9 +877,9 @@ public class ValueSet implements Serializable {
 	 *
 	 * @return the value set entry list
 	 */
-	public ArrayList<ValueSetEntry> getValueSetEntryList() {
+	public List<ValueSetEntry> getValueSetEntryList() {
 		if (valueSetEntryList == null) {
-			valueSetEntryList = new ArrayList<ValueSetEntry>();
+			valueSetEntryList = new ArrayList<>();
 		}
 		return valueSetEntryList;
 	}
@@ -913,7 +913,7 @@ public class ValueSet implements Serializable {
 	 * @param descriptionList
 	 *            the new description list
 	 */
-	public void setDescriptionList(ArrayList<LangText> descriptionList) {
+	public void setDescriptionList(List<LangText> descriptionList) {
 		this.descriptionList = descriptionList;
 	}
 
@@ -962,7 +962,7 @@ public class ValueSet implements Serializable {
 	 *            the new mapping identificator list
 	 */
 	public void setMappingIdentificatorList(
-			ArrayList<IdentificatorBaseType> mappingIdentificatorList) {
+			List<IdentificatorBaseType> mappingIdentificatorList) {
 		this.mappingIdentificatorList = mappingIdentificatorList;
 	}
 
@@ -974,7 +974,7 @@ public class ValueSet implements Serializable {
 	 * @param mappingNameList
 	 *            the new mapping name list
 	 */
-	public void setMappingNameList(ArrayList<String> mappingNameList) {
+	public void setMappingNameList(List<String> mappingNameList) {
 		this.mappingNameList = mappingNameList;
 	}
 
@@ -1010,7 +1010,7 @@ public class ValueSet implements Serializable {
 	 * @param valueSetEntryList
 	 *            the new value set entry list
 	 */
-	public void setValueSetEntryList(ArrayList<ValueSetEntry> valueSetEntryList) {
+	public void setValueSetEntryList(List<ValueSetEntry> valueSetEntryList) {
 		this.valueSetEntryList = valueSetEntryList;
 	}
 
@@ -1035,9 +1035,9 @@ public class ValueSet implements Serializable {
 	 *
 	 * @return the array list
 	 */
-	public ArrayList<ValueSetEntry> sortValueSetEntriesByEnumName() {
+	public List<ValueSetEntry> sortValueSetEntriesByEnumName() {
 		if (this.valueSetEntryList == null) {
-			this.valueSetEntryList = new ArrayList<ValueSetEntry>();
+			this.valueSetEntryList = new ArrayList<>();
 		}
 		this.valueSetEntryList.sort(new ValueSetEntryEnumNameComparator());
 		return this.valueSetEntryList;

@@ -183,7 +183,7 @@ public class Version implements Serializable {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		boolean retVal = true;
+		var retVal = true;
 		if (obj == null)
 			return false;
 

@@ -25,7 +25,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.StringWriter;
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -35,6 +34,7 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -95,10 +95,6 @@ public class ValueSetManager {
 	 * definition file</div>
 	 */
 	public static final String JSON_VALUE_SET_BASE_PATH = "$.valueSet[0]";
-	/**
-	 * The default encoding used to encode URL parameter.
-	 */
-	static final String UTF8_ENCODING = "UTF-8";
 
 	/**
 	 * <div class="en">Build the complete URL to retrieve a value set from
@@ -119,14 +115,10 @@ public class ValueSetManager {
 	 */
 	public static URL buildValueSetArtDecorUrl(String baseUrl, IdentificatorBaseType id,
 			Date effectiveDate) throws MalformedURLException {
-		try {
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 			return new URL(baseUrl + "&id="
-					+ java.net.URLEncoder.encode(id.getRoot(), UTF8_ENCODING) + "&effectiveDate="
-					+ java.net.URLEncoder.encode(dateFormat.format(effectiveDate), UTF8_ENCODING));
-		} catch (UnsupportedEncodingException unsupportedEncodingException) {
-			throw new MalformedURLException(unsupportedEncodingException.getMessage());
-		}
+					+ java.net.URLEncoder.encode(id.getRoot(), Charsets.UTF_8) + "&effectiveDate="
+					+ java.net.URLEncoder.encode(dateFormat.format(effectiveDate), Charsets.UTF_8));
 	}
 
 	/**
@@ -166,23 +158,23 @@ public class ValueSetManager {
 				String sourceUrlString = valueSetConfig.getSourceUrl();
 				String downloadedString = "";
 				try {
-					downloadedString = IOUtils.toString(new URL(sourceUrlString), UTF8_ENCODING);
-					downloadedString = downloadedString.replaceAll("&lt;", "<");
-					downloadedString = downloadedString.replaceAll("&gt;", ">");
-					downloadedString = downloadedString.replaceAll("&amp;", "&");
-					downloadedString = downloadedString.replaceAll("&#160;", "&nbsp;");
-					downloadedString = downloadedString.replaceAll("&nbsp;", " ");
-					downloadedString = downloadedString.replaceAll("\r\n", "\n");
+					downloadedString = IOUtils.toString(new URL(sourceUrlString), Charsets.UTF_8);
+					downloadedString = downloadedString.replace("&lt;", "<");
+					downloadedString = downloadedString.replace("&gt;", ">");
+					downloadedString = downloadedString.replace("&amp;", "&");
+					downloadedString = downloadedString.replace("&#160;", "&nbsp;");
+					downloadedString = downloadedString.replace("&nbsp;", " ");
+					downloadedString = downloadedString.replace("\r\n", "\n");
 					switch (valueSetConfig.getSourceFormatType()) {
 					case JSON:
-						retVal = loadValueSetJson(IOUtils.toInputStream(downloadedString, "UTF-8"));
+						retVal = loadValueSetJson(IOUtils.toInputStream(downloadedString, Charsets.UTF_8));
 						break;
 					case XML:
-						retVal = loadValueSetXml(IOUtils.toInputStream(downloadedString, "UTF-8"));
+						retVal = loadValueSetXml(IOUtils.toInputStream(downloadedString, Charsets.UTF_8));
 						break;
 					case IHESVS:
 						retVal = loadValueSetIheSvs(
-								IOUtils.toInputStream(downloadedString, "UTF-8"));
+								IOUtils.toInputStream(downloadedString, Charsets.UTF_8));
 						break;
 					}
 				} catch (RuntimeException e) {
@@ -268,31 +260,34 @@ public class ValueSetManager {
 	 * @return the string
 	 */
 	private String evaluateXpathExprAsString(Document xmlDoc, String xpathExpr) {
-		String retVal = null;
+		StringBuilder retVal = new StringBuilder("");
 
 		NodeList nodes = evaluateXpathExprAsNodeList(xmlDoc, xpathExpr);
 
 		if (nodes != null) {
-			retVal = "";
 			for (int i = 0; i < nodes.getLength(); i++) {
-				if (i == 0)
-					retVal = retVal + nodes.item(i).getTextContent().trim();
-				else {
+				if (i == 0) {
+					retVal.append(nodes.item(i).getTextContent().trim());
+				} else {
 					StringWriter writer = new StringWriter();
 					Transformer transformer;
 					try {
-						transformer = TransformerFactory.newInstance().newTransformer();
+						TransformerFactory transformerFactory = TransformerFactory.newInstance();
+						transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+						transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");					
+						transformer = transformerFactory.newTransformer();
 						transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
 						transformer.transform(new DOMSource(nodes.item(i)),
 								new StreamResult(writer));
-						retVal = retVal + writer.toString();
+						retVal.append(writer.toString());
 					} catch (TransformerFactoryConfigurationError | TransformerException e) {
 						// Do nothing
 					}
 				}
 			}
 		}
-		return retVal.replaceAll("\r\n", "\n").replaceAll("\n", "");
+
+		return retVal.toString().replace("\r\n", "\n").replace("\n", "");	
 	}
 
 	/**
@@ -321,8 +316,7 @@ public class ValueSetManager {
 	 */
 	private Map<String, Object> getValueSetJsonMap(InputStreamReader reader) throws IOException {
 		String json = IOUtils.toString(reader);
-		Map<String, Object> retVal = JsonPath.read(json, JSON_VALUE_SET_BASE_PATH);
-		return retVal;
+		return JsonPath.read(json, JSON_VALUE_SET_BASE_PATH);
 	}
 
 	/**
@@ -354,9 +348,8 @@ public class ValueSetManager {
 	 */
 	public ValueSetConfig loadValueSetConfig(InputStream inputStream) {
 		InputStreamReader reader = new InputStreamReader(inputStream, Charsets.UTF_8);
-		ValueSetConfig valueSetConfig = CustomizedYaml.getCustomizedYaml().loadAs(reader,
+		return CustomizedYaml.getCustomizedYaml().loadAs(reader,
 				ValueSetConfig.class);
-		return valueSetConfig;
 	}
 
 	/**
@@ -420,6 +413,8 @@ public class ValueSetManager {
 
 		String textContent;
 		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+		docBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+		docBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
 		DocumentBuilder docBuilder;
 		docBuilder = docBuilderFactory.newDocumentBuilder();
 		Document xmlDoc = docBuilder
@@ -446,51 +441,57 @@ public class ValueSetManager {
 		if (textContent != null)
 			version.setLabel(textContent);
 
-		ArrayList<LanguageCode> langCodes = new ArrayList<LanguageCode>();
+		ArrayList<LanguageCode> langCodes = new ArrayList<>();
 		NodeList nodeList;
 		nodeList = evaluateXpathExprAsNodeList(xmlDoc, "//ValueSet/ConceptList/@lang");
-		for (int i = 0; i < nodeList.getLength(); i++) {
-			LanguageCode languageCode = getLanguageCode(nodeList.item(i).getTextContent().trim());
-			if (languageCode != null)
-				langCodes.add(languageCode);
+
+		if(nodeList != null) {
+			for (int i = 0; i < nodeList.getLength(); i++) {
+				LanguageCode languageCode = getLanguageCode(nodeList.item(i).getTextContent().trim());
+				if (languageCode != null)
+					langCodes.add(languageCode);
+			}
 		}
-
+		
 		nodeList = evaluateXpathExprAsNodeList(xmlDoc, "//ValueSet/ConceptList[1]/Concept");
-		for (int i = 0; i < nodeList.getLength(); i++) {
-			Node node = nodeList.item(i);
-			if ("Concept".equals(node.getNodeName())) {
-				ValueSetEntry valueSetEntry = new ValueSetEntry();
-				CodeBaseType code = new CodeBaseType();
 
-				textContent = node.getAttributes().getNamedItem("code").getNodeValue();
-				if (textContent != null)
-					code.setCode(textContent);
+		if(nodeList != null) {
+			for (int i = 0; i < nodeList.getLength(); i++) {
+				Node node = nodeList.item(i);
+				if ("Concept".equals(node.getNodeName())) {
+					ValueSetEntry valueSetEntry = new ValueSetEntry();
+					CodeBaseType code = new CodeBaseType();
 
-				textContent = node.getAttributes().getNamedItem("codeSystem").getNodeValue();
-				if (textContent != null)
-					code.setCodeSystem(textContent);
+					textContent = node.getAttributes().getNamedItem("code").getNodeValue();
+					if (textContent != null)
+						code.setCode(textContent);
 
-				textContent = node.getAttributes().getNamedItem("displayName").getNodeValue();
-				if (textContent != null)
-					code.setDisplayName(textContent);
+					textContent = node.getAttributes().getNamedItem("codeSystem").getNodeValue();
+					if (textContent != null)
+						code.setCodeSystem(textContent);
 
-				valueSetEntry.setCodeBaseType(code);
+					textContent = node.getAttributes().getNamedItem("displayName").getNodeValue();
+					if (textContent != null)
+						code.setDisplayName(textContent);
 
-				for (LanguageCode languageCode : langCodes) {
-					textContent = evaluateXpathExprAsString(xmlDoc,
-							"//ValueSet/ConceptList[@lang='" + languageCode.getCodeValue()
-									+ "' or starts-with(@lang,'" + languageCode.getCodeValue()
-									+ "')]/Concept[@code='" + code.getCode() + "' and @codeSystem='"
-									+ code.getCodeSystem() + "']/@displayName");
-					if (textContent != null) {
-						Designation designation = Designation.builder()
-								.withLanguageCode(languageCode).withDisplayName(textContent)
-								.build();
-						valueSetEntry.addDesignation(designation);
+					valueSetEntry.setCodeBaseType(code);
+
+					for (LanguageCode languageCode : langCodes) {
+						textContent = evaluateXpathExprAsString(xmlDoc,
+								"//ValueSet/ConceptList[@lang='" + languageCode.getCodeValue()
+										+ "' or starts-with(@lang,'" + languageCode.getCodeValue()
+										+ "')]/Concept[@code='" + code.getCode() + "' and @codeSystem='"
+										+ code.getCodeSystem() + "']/@displayName");
+						if (textContent != null) {
+							Designation designation = Designation.builder()
+									.withLanguageCode(languageCode).withDisplayName(textContent)
+									.build();
+							valueSetEntry.addDesignation(designation);
+						}
 					}
-				}
 
-				valueSet.addValueSetEntry(valueSetEntry);
+					valueSet.addValueSetEntry(valueSetEntry);
+				}
 			}
 		}
 
@@ -503,9 +504,9 @@ public class ValueSetManager {
 		if (textContent != null) {
 			String status = textContent;
 
-			if ("active".equals(status.toLowerCase()))
+			if ("active".equalsIgnoreCase(status))
 				valueSet.setStatus(ValueSetStatus.FINAL);
-			if ("inactive".equals(status.toLowerCase()))
+			if ("inactive".equalsIgnoreCase(status))
 				valueSet.setStatus(ValueSetStatus.DEPRECATED);
 
 		}
@@ -598,31 +599,31 @@ public class ValueSetManager {
 				// to become a draft/finalized value set. Beyond the author,
 				// nobody should look at this value set unless it's status code
 				// is draft or finalized.
-				if ("new".equals(status.toLowerCase()))
+				if ("new".equalsIgnoreCase(status))
 					valueSet.setStatus(ValueSetStatus.NEW);
 				// draft: Value set under development (nascent). Metadata and
 				// value set may be incomplete. Entered primarily to encourage
 				// other users to be aware of ongoing process.
-				if ("draft".equals(status.toLowerCase()))
+				if ("draft".equalsIgnoreCase(status))
 					valueSet.setStatus(ValueSetStatus.DRAFT);
 
 				// final: Value set has been published by the custodian
 				// organization and deemed fit for use. May have associated
 				// adoption and annotation metadata
-				if ("final".equals(status.toLowerCase()))
+				if ("final".equalsIgnoreCase(status))
 					valueSet.setStatus(ValueSetStatus.FINAL);
 
 				// deprecated: Value set retired: No longer fit for use.
 				// Information available for historical reference.
-				if ("deprecated".equals(status.toLowerCase()))
+				if ("deprecated".equalsIgnoreCase(status))
 					valueSet.setStatus(ValueSetStatus.DEPRECATED);
 
 				// rejected: Value set is rejected
-				if ("rejected".equals(status.toLowerCase()))
+				if ("rejected".equalsIgnoreCase(status))
 					valueSet.setStatus(ValueSetStatus.REJECTED);
 
 				// cancelled: Value set is withdrawn
-				if ("cancelled".equals(status.toLowerCase()))
+				if ("cancelled".equalsIgnoreCase(status))
 					valueSet.setStatus(ValueSetStatus.CANCELLED);
 
 			}
@@ -645,8 +646,8 @@ public class ValueSetManager {
 							content = subEntry.getValue().toString();
 					}
 					valueSet.addDescription(
-							new LangText(languageCode, content.replaceAll("\r\n", "\n")
-									.replaceAll("\n", "").replaceAll("\\s+", " ").trim()));
+							new LangText(languageCode, content.replace("\r\n", "\n")
+									.replace("\n", "").replaceAll("\\s+", " ").trim()));
 				}
 			}
 			if ("publishingAuthority".contentEquals(key) && (entry.getValue() != null)
@@ -775,20 +776,19 @@ public class ValueSetManager {
 												}
 												if ("type".contentEquals(subKey3)
 														&& (subEntry3.getValue() != null)) {
-													if ("abbreviation".equals(subEntry3.getValue()
-															.toString().toLowerCase()))
+													if ("abbreviation".equalsIgnoreCase(subEntry3.getValue()
+															.toString()))
 														designation.setType(
 																DesignationType.ABBREVIATION);
-													if ("fsn".equals(subEntry3.getValue().toString()
-															.toLowerCase()))
+													if ("fsn".equalsIgnoreCase(subEntry3.getValue().toString()))
 														designation.setType(
 																DesignationType.FULLY_SPECIFIED_NAME);
-													if ("preferred".equals(subEntry3.getValue()
-															.toString().toLowerCase()))
+													if ("preferred".equalsIgnoreCase(subEntry3.getValue()
+															.toString()))
 														designation
 																.setType(DesignationType.PREFERRED);
-													if ("synonym".equals(subEntry3.getValue()
-															.toString().toLowerCase()))
+													if ("synonym".equalsIgnoreCase(subEntry3.getValue()
+															.toString()))
 														designation
 																.setType(DesignationType.SYNONYM);
 												}
@@ -953,6 +953,8 @@ public class ValueSetManager {
 
 		String textContent;
 		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+		docBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+		docBuilderFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
 		DocumentBuilder docBuilder;
 		docBuilder = docBuilderFactory.newDocumentBuilder();
 		Document xmlDoc = docBuilder
@@ -963,13 +965,16 @@ public class ValueSetManager {
 			valueSet.setIdentificator(
 					IdentificatorBaseType.builder().withRoot(textContent).build());
 
-		ArrayList<LanguageCode> langCodes = new ArrayList<LanguageCode>();
+		ArrayList<LanguageCode> langCodes = new ArrayList<>();
 		NodeList nodeList = evaluateXpathExprAsNodeList(xmlDoc,
 				"//valueSets/project/valueSet/desc/@language");
-		for (int i = 0; i < nodeList.getLength(); i++) {
-			LanguageCode languageCode = getLanguageCode(nodeList.item(i).getTextContent().trim());
-			if (languageCode != null)
-				langCodes.add(languageCode);
+		
+		if(nodeList != null) {
+			for (int i = 0; i < nodeList.getLength(); i++) {
+				LanguageCode languageCode = getLanguageCode(nodeList.item(i).getTextContent().trim());
+				if (languageCode != null)
+					langCodes.add(languageCode);
+			}
 		}
 
 		for (LanguageCode languageCode : langCodes) {
@@ -999,64 +1004,70 @@ public class ValueSetManager {
 
 		nodeList = evaluateXpathExprAsNodeList(xmlDoc,
 				"/valueSets/project/valueSet/conceptList/concept");
-		for (int i = 0; i < nodeList.getLength(); i++) {
-			Node node = nodeList.item(i);
-			ValueSetEntry valueSetEntry = new ValueSetEntry();
-			CodeBaseType code = new CodeBaseType();
+		
+		if(nodeList != null) {
+			for (int i = 0; i < nodeList.getLength(); i++) {
+				Node node = nodeList.item(i);
+				ValueSetEntry valueSetEntry = new ValueSetEntry();
+				CodeBaseType code = new CodeBaseType();
 
-			textContent = node.getAttributes().getNamedItem("code").getNodeValue();
-			if (textContent != null)
-				code.setCode(textContent);
-
-			textContent = node.getAttributes().getNamedItem("codeSystem").getNodeValue();
-			if (textContent != null)
-				code.setCodeSystem(textContent);
-
-			textContent = node.getAttributes().getNamedItem("displayName").getNodeValue();
-			if (textContent != null)
-				code.setDisplayName(textContent);
-
-			textContent = node.getAttributes().getNamedItem("level").getNodeValue();
-			if (textContent != null)
-				valueSetEntry.setLevel(Integer.parseInt(textContent));
-
-			textContent = node.getAttributes().getNamedItem("type").getNodeValue();
-			if (textContent != null) {
-				valueSetEntry.setValueSetEntryType(ValueSetEntryType.getEnum(textContent));
-			}
-
-			NodeList subNnodeList;
-			subNnodeList = evaluateXpathExprAsNodeList(xmlDoc,
-					"/valueSets/project/valueSet/conceptList/concept[@code='" + code.getCode()
-							+ "' and @codeSystem='" + code.getCodeSystem() + "']/designation");
-			for (int j = 0; j < subNnodeList.getLength(); j++) {
-				Node subNode = subNnodeList.item(j);
-				Designation designation = new Designation();
-
-				textContent = subNode.getAttributes().getNamedItem("language").getNodeValue();
-				if (textContent != null) {
-					LanguageCode languageCode = LanguageCode.getEnum(textContent.toLowerCase());
-					if (languageCode == null)
-						languageCode = LanguageCode
-								.getEnum(textContent.toLowerCase().substring(0, 2));
-					designation.setLanguageCode(languageCode);
-				}
-
-				textContent = subNode.getAttributes().getNamedItem("type").getNodeValue();
-				if (textContent != null) {
-					designation.setType(DesignationType.getEnum(textContent));
-				}
-
-				textContent = subNode.getAttributes().getNamedItem("displayName").getNodeValue();
+				textContent = node.getAttributes().getNamedItem("code").getNodeValue();
 				if (textContent != null)
-					designation.setDisplayName(textContent);
+					code.setCode(textContent);
 
-				valueSetEntry.addDesignation(designation);
+				textContent = node.getAttributes().getNamedItem("codeSystem").getNodeValue();
+				if (textContent != null)
+					code.setCodeSystem(textContent);
+
+				textContent = node.getAttributes().getNamedItem("displayName").getNodeValue();
+				if (textContent != null)
+					code.setDisplayName(textContent);
+
+				textContent = node.getAttributes().getNamedItem("level").getNodeValue();
+				if (textContent != null)
+					valueSetEntry.setLevel(Integer.parseInt(textContent));
+
+				textContent = node.getAttributes().getNamedItem("type").getNodeValue();
+				if (textContent != null) {
+					valueSetEntry.setValueSetEntryType(ValueSetEntryType.getEnum(textContent));
+				}
+
+				NodeList subNnodeList;
+				subNnodeList = evaluateXpathExprAsNodeList(xmlDoc,
+						"/valueSets/project/valueSet/conceptList/concept[@code='" + code.getCode()
+								+ "' and @codeSystem='" + code.getCodeSystem() + "']/designation");
+
+				if(subNnodeList != null) {
+					for (int j = 0; j < subNnodeList.getLength(); j++) {
+						Node subNode = subNnodeList.item(j);
+						Designation designation = new Designation();
+
+						textContent = subNode.getAttributes().getNamedItem("language").getNodeValue();
+						if (textContent != null) {
+							LanguageCode languageCode = LanguageCode.getEnum(textContent.toLowerCase());
+							if (languageCode == null)
+								languageCode = LanguageCode
+										.getEnum(textContent.toLowerCase().substring(0, 2));
+							designation.setLanguageCode(languageCode);
+						}
+
+						textContent = subNode.getAttributes().getNamedItem("type").getNodeValue();
+						if (textContent != null) {
+							designation.setType(DesignationType.getEnum(textContent));
+						}
+
+						textContent = subNode.getAttributes().getNamedItem("displayName").getNodeValue();
+						if (textContent != null)
+							designation.setDisplayName(textContent);
+
+						valueSetEntry.addDesignation(designation);
+					}
+				}
+
+				valueSetEntry.setCodeBaseType(code);
+
+				valueSet.addValueSetEntry(valueSetEntry);
 			}
-
-			valueSetEntry.setCodeBaseType(code);
-
-			valueSet.addValueSetEntry(valueSetEntry);
 		}
 
 		valueSet.setVersion(version);
@@ -1073,31 +1084,31 @@ public class ValueSetManager {
 			// to become a draft/finalized value set. Beyond the author,
 			// nobody should look at this value set unless it's status code
 			// is draft or finalized.
-			if ("new".equals(status.toLowerCase()))
+			if ("new".equalsIgnoreCase(status))
 				valueSet.setStatus(ValueSetStatus.NEW);
 			// draft: Value set under development (nascent). Metadata and
 			// value set may be incomplete. Entered primarily to encourage
 			// other users to be aware of ongoing process.
-			if ("draft".equals(status.toLowerCase()))
+			if ("draft".equalsIgnoreCase(status))
 				valueSet.setStatus(ValueSetStatus.DRAFT);
 
 			// final: Value set has been published by the custodian
 			// organization and deemed fit for use. May have associated
 			// adoption and annotation metadata
-			if ("final".equals(status.toLowerCase()))
+			if ("final".equalsIgnoreCase(status))
 				valueSet.setStatus(ValueSetStatus.FINAL);
 
 			// deprecated: Value set retired: No longer fit for use.
 			// Information available for historical reference.
-			if ("deprecated".equals(status.toLowerCase()))
+			if ("deprecated".equalsIgnoreCase(status))
 				valueSet.setStatus(ValueSetStatus.DEPRECATED);
 
 			// rejected: Value set is rejected
-			if ("rejected".equals(status.toLowerCase()))
+			if ("rejected".equalsIgnoreCase(status))
 				valueSet.setStatus(ValueSetStatus.REJECTED);
 
 			// cancelled: Value set is withdrawn
-			if ("cancelled".equals(status.toLowerCase()))
+			if ("cancelled".equalsIgnoreCase(status))
 				valueSet.setStatus(ValueSetStatus.CANCELLED);
 
 		}
@@ -1163,8 +1174,7 @@ public class ValueSetManager {
 	 */
 	public ValueSet loadValueSetYaml(InputStream inputStream) {
 		InputStreamReader reader = new InputStreamReader(inputStream, Charsets.UTF_8);
-		ValueSet valueSet = CustomizedYaml.getCustomizedYaml().loadAs(reader, ValueSet.class);
-		return valueSet;
+		return CustomizedYaml.getCustomizedYaml().loadAs(reader, ValueSet.class);
 	}
 
 	/**

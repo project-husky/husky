@@ -55,11 +55,6 @@ import org.xml.sax.SAXException;
  */
 public class ValueSetPackageManager {
 
-	/**
-	 * The default encoding used to encode URL parameter.
-	 */
-	private static final String UTF8_ENCODING = "UTF-8";
-
 	/** The value set package config list. */
 	private ArrayList<ValueSetPackageConfig> valueSetPackageConfigList;
 
@@ -73,7 +68,7 @@ public class ValueSetPackageManager {
 	 */
 	public void addValueSetPackageConfig(ValueSetPackageConfig value) {
 		if (this.valueSetPackageConfigList == null) {
-			this.valueSetPackageConfigList = new ArrayList<ValueSetPackageConfig>();
+			this.valueSetPackageConfigList = new ArrayList<>();
 		}
 		this.valueSetPackageConfigList.add(value);
 
@@ -85,7 +80,7 @@ public class ValueSetPackageManager {
 	 * <div class="de">Löscht die Konfigurationsliste des Wertesatzpakets.</div>
 	 */
 	public void clearValueSetPackageConfigList() {
-		this.valueSetPackageConfigList = new ArrayList<ValueSetPackageConfig>();
+		this.valueSetPackageConfigList = new ArrayList<>();
 	}
 
 	/**
@@ -167,7 +162,7 @@ public class ValueSetPackageManager {
 			throws IOException, ConfigurationException {
 		ValueSetPackageConfig retVal = null;
 		// download a package config
-		String downloadedString = IOUtils.toString(sourceUrl, UTF8_ENCODING);
+		String downloadedString = IOUtils.toString(sourceUrl, Charsets.UTF_8);
 		retVal = loadValueSetPackageConfig(IOUtils.toInputStream(downloadedString));
 		return retVal;
 	}
@@ -331,7 +326,7 @@ public class ValueSetPackageManager {
 	 */
 	public List<ValueSetPackageConfig> listValueSetPackageConfigs() {
 		if (this.valueSetPackageConfigList == null) {
-			this.valueSetPackageConfigList = new ArrayList<ValueSetPackageConfig>();
+			this.valueSetPackageConfigList = new ArrayList<>();
 		}
 		return this.valueSetPackageConfigList;
 
@@ -365,9 +360,8 @@ public class ValueSetPackageManager {
 	 */
 	public ValueSetPackage loadValueSetPackage(InputStream inputStream) {
 		InputStreamReader reader = new InputStreamReader(inputStream, Charsets.UTF_8);
-		ValueSetPackage valueSetPackage = CustomizedYaml.getCustomizedYaml().loadAs(reader,
+		return CustomizedYaml.getCustomizedYaml().loadAs(reader,
 				ValueSetPackage.class);
-		return valueSetPackage;
 
 	}
 
@@ -431,7 +425,7 @@ public class ValueSetPackageManager {
 			throws ConfigurationException {
 		InputStreamReader reader = new InputStreamReader(inputStream, Charsets.UTF_8);
 		if (this.valueSetPackageConfigList == null) {
-			this.valueSetPackageConfigList = new ArrayList<ValueSetPackageConfig>();
+			this.valueSetPackageConfigList = new ArrayList<>();
 		}
 
 		ValueSetPackageConfig valueSetPackageConfig;

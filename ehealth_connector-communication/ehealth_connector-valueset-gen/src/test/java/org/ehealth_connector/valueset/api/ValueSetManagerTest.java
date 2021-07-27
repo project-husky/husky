@@ -67,7 +67,7 @@ public class ValueSetManagerTest {
 	// @Test
 	public void downloadRawTest() throws MalformedURLException, IOException {
 		String testUrl = "http://art-decor.org/decor/services/RetrieveValueSet?prefix=ch-epr-&format=json&id=2.16.756.5.30.1.127.3.10.1";
-		String downloadedString = IOUtils.toString(new URL(testUrl), ValueSetManager.UTF8_ENCODING);
+		String downloadedString = IOUtils.toString(new URL(testUrl), Charsets.UTF_8);
 		ValueSetManager valueSetManager = new ValueSetManager();
 		ValueSetConfig valueSetConfig = ValueSetConfig.builder()
 				.withSourceSystemType(SourceSystemType.ARTDECOR_FHIR).withSourceUrl(testUrl)

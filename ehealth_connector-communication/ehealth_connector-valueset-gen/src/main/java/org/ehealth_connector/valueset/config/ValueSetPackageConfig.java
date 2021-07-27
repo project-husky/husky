@@ -17,6 +17,7 @@
 package org.ehealth_connector.valueset.config;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.processing.Generated;
 
@@ -172,7 +173,7 @@ public class ValueSetPackageConfig {
 	private ValueSetPackageStatus status;
 
 	/** The value set config list. */
-	private ArrayList<ValueSetConfig> valueSetConfigList;
+	private List<ValueSetConfig> valueSetConfigList;
 
 	/** The version. */
 	private Version version;
@@ -213,7 +214,7 @@ public class ValueSetPackageConfig {
 	 */
 	public void addValueSetConfig(ValueSetConfig value) {
 		if (this.valueSetConfigList == null) {
-			this.valueSetConfigList = new ArrayList<ValueSetConfig>();
+			this.valueSetConfigList = new ArrayList<>();
 		}
 		this.valueSetConfigList.add(value);
 
@@ -272,9 +273,9 @@ public class ValueSetPackageConfig {
 	 *
 	 * @return the value set config list
 	 */
-	public ArrayList<ValueSetConfig> getValueSetConfigList() {
+	public List<ValueSetConfig> getValueSetConfigList() {
 		if (valueSetConfigList == null) {
-			valueSetConfigList = new ArrayList<ValueSetConfig>();
+			valueSetConfigList = new ArrayList<>();
 		}
 		return valueSetConfigList;
 	}
@@ -348,7 +349,7 @@ public class ValueSetPackageConfig {
 	 * @param valueSetConfigList
 	 *            the new value set config list
 	 */
-	public void setValueSetConfigList(ArrayList<ValueSetConfig> valueSetConfigList) {
+	public void setValueSetConfigList(List<ValueSetConfig> valueSetConfigList) {
 		this.valueSetConfigList = valueSetConfigList;
 	}
 

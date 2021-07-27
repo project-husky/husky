@@ -18,6 +18,7 @@ package org.ehealth_connector.valueset.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.processing.Generated;
 
@@ -215,7 +216,7 @@ public class ValueSetEntry implements Serializable {
 	private ValueSetEntry parent;
 
 	/** The children. */
-	private ArrayList<ValueSetEntry> childList;
+	private List<ValueSetEntry> childList;
 
 	/** The code base type. */
 	private CodeBaseType codeBaseType;
@@ -224,16 +225,16 @@ public class ValueSetEntry implements Serializable {
 	private String defaultMappingName;
 
 	/** The designation list. */
-	private ArrayList<Designation> designationList;
+	private List<Designation> designationList;
 
 	/** The level. */
 	private int level = 0;
 
 	/** The mapping code list. */
-	private ArrayList<CodeBaseType> mappingCodeList;
+	private List<CodeBaseType> mappingCodeList;
 
 	/** The mapping name list. */
-	private ArrayList<String> mappingNameList;
+	private List<String> mappingNameList;
 
 	/** The value set entry type. */
 	private ValueSetEntryType valueSetEntryType;
@@ -277,7 +278,7 @@ public class ValueSetEntry implements Serializable {
 	 */
 	public void addChild(ValueSetEntry value) {
 		if (this.childList == null)
-			this.childList = new ArrayList<ValueSetEntry>();
+			this.childList = new ArrayList<>();
 
 		this.childList.add(value);
 	}
@@ -292,7 +293,7 @@ public class ValueSetEntry implements Serializable {
 	 */
 	public void addDesignation(Designation value) {
 		if (this.designationList == null)
-			this.designationList = new ArrayList<Designation>();
+			this.designationList = new ArrayList<>();
 
 		this.designationList.add(value);
 	}
@@ -307,7 +308,7 @@ public class ValueSetEntry implements Serializable {
 	 */
 	public void addMappingCode(CodeBaseType value) {
 		if (this.mappingCodeList == null)
-			this.mappingCodeList = new ArrayList<CodeBaseType>();
+			this.mappingCodeList = new ArrayList<>();
 
 		this.mappingCodeList.add(value);
 	}
@@ -322,7 +323,7 @@ public class ValueSetEntry implements Serializable {
 	 */
 	public void addMappingName(String value) {
 		if (this.mappingNameList == null)
-			this.mappingNameList = new ArrayList<String>();
+			this.mappingNameList = new ArrayList<>();
 
 		this.mappingNameList.add(value);
 	}
@@ -333,7 +334,7 @@ public class ValueSetEntry implements Serializable {
 	 * <div class="de">Löscht die Liste untergeordneter ValueSets.</div>
 	 */
 	public void clearChildList() {
-		this.childList = new ArrayList<ValueSetEntry>();
+		this.childList = new ArrayList<>();
 	}
 
 	/**
@@ -342,7 +343,7 @@ public class ValueSetEntry implements Serializable {
 	 * <div class="de">Löscht die Bezeichnungsliste.</div>
 	 */
 	public void clearDesignationList() {
-		this.designationList = new ArrayList<Designation>();
+		this.designationList = new ArrayList<>();
 	}
 
 	/**
@@ -351,7 +352,7 @@ public class ValueSetEntry implements Serializable {
 	 * <div class="de">Löscht die Mapping-Code-Liste.</div>
 	 */
 	public void clearMappingCodeList() {
-		this.mappingCodeList = new ArrayList<CodeBaseType>();
+		this.mappingCodeList = new ArrayList<>();
 	}
 
 	/**
@@ -360,7 +361,7 @@ public class ValueSetEntry implements Serializable {
 	 * <div class="de">Löscht die Mapping-Namensliste.</div>
 	 */
 	public void clearMappingNameList() {
-		this.mappingNameList = new ArrayList<String>();
+		this.mappingNameList = new ArrayList<>();
 	}
 
 	/**
@@ -473,7 +474,7 @@ public class ValueSetEntry implements Serializable {
 
 		if (retVal) {
 			if (this.childList == null)
-				this.childList = new ArrayList<ValueSetEntry>();
+				this.childList = new ArrayList<>();
 			retVal = (this.childList.size() == ((ValueSetEntry) obj).getChildList().size());
 			if (retVal) {
 				for (int i = 0; i < this.childList.size(); i++) {
@@ -485,7 +486,7 @@ public class ValueSetEntry implements Serializable {
 		}
 		if (retVal) {
 			if (this.designationList == null)
-				this.designationList = new ArrayList<Designation>();
+				this.designationList = new ArrayList<>();
 			retVal = (this.designationList.size() == ((ValueSetEntry) obj).getDesignationList()
 					.size());
 			if (retVal) {
@@ -498,7 +499,7 @@ public class ValueSetEntry implements Serializable {
 		}
 		if (retVal) {
 			if (this.mappingCodeList == null)
-				this.mappingCodeList = new ArrayList<CodeBaseType>();
+				this.mappingCodeList = new ArrayList<>();
 			retVal = (this.mappingCodeList.size() == ((ValueSetEntry) obj).getMappingCodeList()
 					.size());
 			if (retVal) {
@@ -511,7 +512,7 @@ public class ValueSetEntry implements Serializable {
 		}
 		if (retVal) {
 			if (this.mappingNameList == null)
-				this.mappingNameList = new ArrayList<String>();
+				this.mappingNameList = new ArrayList<>();
 			retVal = (this.mappingNameList.size() == ((ValueSetEntry) obj).getMappingNameList()
 					.size());
 			if (retVal) {
@@ -555,9 +556,9 @@ public class ValueSetEntry implements Serializable {
 	 *
 	 * @return the child list
 	 */
-	public ArrayList<ValueSetEntry> getChildList() {
+	public List<ValueSetEntry> getChildList() {
 		if (childList == null) {
-			childList = new ArrayList<ValueSetEntry>();
+			childList = new ArrayList<>();
 		}
 		return childList;
 	}
@@ -601,7 +602,7 @@ public class ValueSetEntry implements Serializable {
 			if (language.equals(designation.getLanguageCode()) && (designationType == null))
 				retVal = designation.getDisplayName();
 			else if (language.equals(designation.getLanguageCode())
-					&& (designationType.equals(designation.getType())))
+					&& (designationType != null && designationType.equals(designation.getType())))
 				retVal = designation.getDisplayName();
 		}
 		return retVal;
@@ -614,9 +615,9 @@ public class ValueSetEntry implements Serializable {
 	 *
 	 * @return the designation list
 	 */
-	public ArrayList<Designation> getDesignationList() {
+	public List<Designation> getDesignationList() {
 		if (designationList == null) {
-			designationList = new ArrayList<Designation>();
+			designationList = new ArrayList<>();
 		}
 		return designationList;
 	}
@@ -653,9 +654,9 @@ public class ValueSetEntry implements Serializable {
 	 *
 	 * @return the mapping code list
 	 */
-	public ArrayList<CodeBaseType> getMappingCodeList() {
+	public List<CodeBaseType> getMappingCodeList() {
 		if (mappingCodeList == null) {
-			mappingCodeList = new ArrayList<CodeBaseType>();
+			mappingCodeList = new ArrayList<>();
 		}
 		return mappingCodeList;
 	}
@@ -667,9 +668,9 @@ public class ValueSetEntry implements Serializable {
 	 *
 	 * @return the mapping name list
 	 */
-	public ArrayList<String> getMappingNameList() {
+	public List<String> getMappingNameList() {
 		if (mappingNameList == null) {
-			mappingNameList = new ArrayList<String>();
+			mappingNameList = new ArrayList<>();
 		}
 		return mappingNameList;
 	}
@@ -712,7 +713,7 @@ public class ValueSetEntry implements Serializable {
 	 * @param childList
 	 *            the new child list
 	 */
-	public void setChildList(ArrayList<ValueSetEntry> childList) {
+	public void setChildList(List<ValueSetEntry> childList) {
 		this.childList = childList;
 	}
 
@@ -748,7 +749,7 @@ public class ValueSetEntry implements Serializable {
 	 * @param designationList
 	 *            the new designation list
 	 */
-	public void setDesignationList(ArrayList<Designation> designationList) {
+	public void setDesignationList(List<Designation> designationList) {
 		this.designationList = designationList;
 	}
 
@@ -772,7 +773,7 @@ public class ValueSetEntry implements Serializable {
 	 * @param mappingCodeList
 	 *            the new mapping code list
 	 */
-	public void setMappingCodeList(ArrayList<CodeBaseType> mappingCodeList) {
+	public void setMappingCodeList(List<CodeBaseType> mappingCodeList) {
 		this.mappingCodeList = mappingCodeList;
 	}
 
@@ -784,7 +785,7 @@ public class ValueSetEntry implements Serializable {
 	 * @param mappingNameList
 	 *            the new mapping name list
 	 */
-	public void setMappingNameList(ArrayList<String> mappingNameList) {
+	public void setMappingNameList(List<String> mappingNameList) {
 		this.mappingNameList = mappingNameList;
 	}
 
