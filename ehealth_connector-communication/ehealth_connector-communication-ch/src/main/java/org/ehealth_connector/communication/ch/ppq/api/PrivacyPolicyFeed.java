@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.communication.ch.ppq.api;
 
-import org.ehealth_connector.security.saml2.Assertion;
+import org.ehealth_connector.xua.saml2.Assertion;
 
 /**
  * <!-- @formatter:off -->
@@ -49,8 +49,8 @@ public interface PrivacyPolicyFeed {
 	 * <div class="it"></div>
 	 *
 	 * @return
-	 * <div class="en">the {@link org.ehealth_connector.security.saml2.Assertion} which is set.</div>
-	 * <div class="de">die {@link org.ehealth_connector.security.saml2.Assertion} die gesetzt ist.</div>
+	 * <div class="en">the {@link org.ehealth_connector.xua.saml2.Assertion} which is set.</div>
+	 * <div class="de">die {@link org.ehealth_connector.xua.saml2.Assertion} die gesetzt ist.</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->

@@ -18,8 +18,8 @@ package org.ehealth_connector.communication.ch.ppq.api.clients;
 
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeed;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeedResponse;
-import org.ehealth_connector.security.core.SecurityHeaderElement;
-import org.ehealth_connector.security.exceptions.ClientSendException;
+import org.ehealth_connector.xua.core.SecurityHeaderElement;
+import org.ehealth_connector.xua.exceptions.ClientSendException;
 
 /**
  * <!-- @formatter:off -->

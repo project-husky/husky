@@ -43,7 +43,7 @@ public class PrivacyPolicyQueryResponseBuilderImplTest extends InitializerTestHe
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryResponseBuilderImpl#create(org.opensaml.saml.saml2.core.Response)}.
+	 * {@link org.ehealth_connector.xua.ch.ppq.impl.PrivacyPolicyQueryResponseBuilderImpl#create(org.opensaml.saml.saml2.core.Response)}.
 	 */
 	@Test
 	public void testCreate() {

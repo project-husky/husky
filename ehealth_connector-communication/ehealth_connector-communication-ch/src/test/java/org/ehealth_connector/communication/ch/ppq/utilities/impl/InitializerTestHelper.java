@@ -28,9 +28,9 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.ehealth_connector.security.exceptions.SerializeException;
-import org.ehealth_connector.security.serialization.OpenSaml2Serializer;
-import org.ehealth_connector.security.serialization.impl.OpenSaml2SerializerImpl;
+import org.ehealth_connector.xua.exceptions.SerializeException;
+import org.ehealth_connector.xua.serialization.OpenSaml2Serializer;
+import org.ehealth_connector.xua.serialization.impl.OpenSaml2SerializerImpl;
 import org.junit.BeforeClass;
 import org.opensaml.core.config.InitializationService;
 import org.opensaml.core.xml.XMLObject;

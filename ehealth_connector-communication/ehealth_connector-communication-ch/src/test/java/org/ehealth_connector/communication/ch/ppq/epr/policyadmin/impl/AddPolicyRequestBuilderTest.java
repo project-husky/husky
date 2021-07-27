@@ -21,8 +21,8 @@ import static org.junit.Assert.assertNotNull;
 
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.OpenSamlAddPolicyRequest;
 import org.ehealth_connector.communication.ch.ppq.utilities.impl.InitializerTestHelper;
-import org.ehealth_connector.security.saml2.Assertion;
-import org.ehealth_connector.security.saml2.impl.AssertionBuilderImpl;
+import org.ehealth_connector.xua.saml2.Assertion;
+import org.ehealth_connector.xua.saml2.impl.AssertionBuilderImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
@@ -49,7 +49,7 @@ public class AddPolicyRequestBuilderTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.ch.epr.policyadmin.impl.AddPolicyRequestBuilder#assertion(org.ehealth_connector.security.saml2.Assertion)}.
+	 * {@link org.ehealth_connector.xua.ch.epr.policyadmin.impl.AddPolicyRequestBuilder#assertion(org.ehealth_connector.xua.saml2.Assertion)}.
 	 */
 	@Test
 	public void testAssertion() {

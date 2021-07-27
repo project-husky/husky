@@ -17,7 +17,7 @@
 package org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl;
 
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.OpenSamlAddPolicyRequest;
-import org.ehealth_connector.security.saml2.impl.AssertionBuilderImpl;
+import org.ehealth_connector.xua.saml2.impl.AssertionBuilderImpl;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.core.xml.io.AbstractXMLObjectUnmarshaller;
 import org.opensaml.core.xml.io.UnmarshallingException;

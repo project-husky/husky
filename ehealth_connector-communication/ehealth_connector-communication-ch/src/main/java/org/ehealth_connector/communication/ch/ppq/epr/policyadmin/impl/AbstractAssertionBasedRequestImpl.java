@@ -17,7 +17,7 @@
 package org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl;
 
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.OpenSamlAssertionBasedRequest;
-import org.ehealth_connector.security.saml2.Assertion;
+import org.ehealth_connector.xua.saml2.Assertion;
 import org.opensaml.core.xml.AbstractXMLObject;
 
 /**

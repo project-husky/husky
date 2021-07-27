@@ -17,9 +17,9 @@
 package org.ehealth_connector.communication.ch.ppq.impl;
 
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeed;
-import org.ehealth_connector.security.core.SecurityObject;
-import org.ehealth_connector.security.saml2.Assertion;
-import org.ehealth_connector.security.saml2.impl.AssertionBuilderImpl;
+import org.ehealth_connector.xua.core.SecurityObject;
+import org.ehealth_connector.xua.saml2.Assertion;
+import org.ehealth_connector.xua.saml2.impl.AssertionBuilderImpl;
 
 /**
  * <!-- @formatter:off -->

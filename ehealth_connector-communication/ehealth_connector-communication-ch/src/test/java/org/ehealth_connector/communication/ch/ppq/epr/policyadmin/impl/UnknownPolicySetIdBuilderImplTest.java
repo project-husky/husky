@@ -35,7 +35,7 @@ public class UnknownPolicySetIdBuilderImplTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.ch.epr.policyadmin.impl.UnknownPolicySetIdBuilderImpl#message(java.lang.String)}.
+	 * {@link org.ehealth_connector.xua.ch.epr.policyadmin.impl.UnknownPolicySetIdBuilderImpl#message(java.lang.String)}.
 	 */
 	@Test
 	public void testMessage() {

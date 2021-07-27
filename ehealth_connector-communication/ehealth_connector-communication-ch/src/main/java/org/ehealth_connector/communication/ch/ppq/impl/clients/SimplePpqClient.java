@@ -31,17 +31,17 @@ import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQuery;
 import org.ehealth_connector.communication.ch.ppq.api.clients.PpqClient;
 import org.ehealth_connector.communication.ch.ppq.api.config.PpClientConfig;
 import org.ehealth_connector.communication.ch.ppq.impl.serialization.PrivacyPolicyQuerySerializerImpl;
-import org.ehealth_connector.security.communication.clients.impl.AbstractSoapClient;
-import org.ehealth_connector.security.communication.soap.impl.WsaHeaderValue;
-import org.ehealth_connector.security.core.SecurityHeaderElement;
-import org.ehealth_connector.security.exceptions.ClientSendException;
-import org.ehealth_connector.security.exceptions.SerializeException;
-import org.ehealth_connector.security.saml2.Assertion;
-import org.ehealth_connector.security.saml2.EncryptedAssertion;
-import org.ehealth_connector.security.saml2.Response;
-import org.ehealth_connector.security.saml2.impl.ResponseBuilderImpl;
-import org.ehealth_connector.security.serialization.impl.AssertionSerializerImpl;
-import org.ehealth_connector.security.serialization.impl.EncryptedAssertionSerializerImpl;
+import org.ehealth_connector.xua.communication.clients.impl.AbstractSoapClient;
+import org.ehealth_connector.xua.communication.soap.impl.WsaHeaderValue;
+import org.ehealth_connector.xua.core.SecurityHeaderElement;
+import org.ehealth_connector.xua.exceptions.ClientSendException;
+import org.ehealth_connector.xua.exceptions.SerializeException;
+import org.ehealth_connector.xua.saml2.Assertion;
+import org.ehealth_connector.xua.saml2.EncryptedAssertion;
+import org.ehealth_connector.xua.saml2.Response;
+import org.ehealth_connector.xua.saml2.impl.ResponseBuilderImpl;
+import org.ehealth_connector.xua.serialization.impl.AssertionSerializerImpl;
+import org.ehealth_connector.xua.serialization.impl.EncryptedAssertionSerializerImpl;
 import org.opensaml.core.xml.io.MarshallingException;
 import org.opensaml.core.xml.io.UnmarshallingException;
 import org.opensaml.saml.common.xml.SAMLConstants;
@@ -121,7 +121,7 @@ public class SimplePpqClient extends AbstractSoapClient<Response> implements Ppq
 	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.communication.ch.ppq.api.clients.PpqClient#send(org.ehealth_connector.security.core.SecurityHeaderElement,
+	 * @see org.ehealth_connector.communication.ch.ppq.api.clients.PpqClient#send(org.ehealth_connector.xua.core.SecurityHeaderElement,
 	 *      org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQuery)
 	 */
 	@Override

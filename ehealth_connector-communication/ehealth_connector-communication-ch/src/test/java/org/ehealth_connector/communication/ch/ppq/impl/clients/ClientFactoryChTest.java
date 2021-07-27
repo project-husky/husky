@@ -44,7 +44,7 @@ public class ClientFactoryChTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.communication.ch.clients.impl.ClientFactoryCh#getPpfClient(org.ehealth_connector.security.communication.ch.ppq.config.PpClientConfig)}.
+	 * {@link org.ehealth_connector.xua.communication.ch.clients.impl.ClientFactoryCh#getPpfClient(org.ehealth_connector.xua.communication.ch.ppq.config.PpClientConfig)}.
 	 */
 	@Test
 	public void testGetPpfClient() {
@@ -54,7 +54,7 @@ public class ClientFactoryChTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.communication.ch.clients.impl.ClientFactoryCh#getPpqClient(org.ehealth_connector.security.communication.ch.ppq.config.PpClientConfig)}.
+	 * {@link org.ehealth_connector.xua.communication.ch.clients.impl.ClientFactoryCh#getPpqClient(org.ehealth_connector.xua.communication.ch.ppq.config.PpClientConfig)}.
 	 */
 	@Test
 	public void testGetPpqClient() {

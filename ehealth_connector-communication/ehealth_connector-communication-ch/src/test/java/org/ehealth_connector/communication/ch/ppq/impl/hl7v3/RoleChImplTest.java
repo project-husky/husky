@@ -20,7 +20,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.ehealth_connector.communication.ch.ppq.hl7v3.RoleChImpl;
-import org.ehealth_connector.security.hl7v3.Role;
+import org.ehealth_connector.xua.hl7v3.Role;
 import org.junit.Test;
 
 public class RoleChImplTest {

@@ -16,8 +16,8 @@
  */
 package org.ehealth_connector.communication.ch.ppq.api;
 
-import org.ehealth_connector.security.hl7v3.InstanceIdentifier;
-import org.ehealth_connector.security.saml2.BaseBuilder;
+import org.ehealth_connector.xua.hl7v3.InstanceIdentifier;
+import org.ehealth_connector.xua.saml2.BaseBuilder;
 
 /**
  * <!-- @formatter:off -->

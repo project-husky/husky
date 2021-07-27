@@ -17,9 +17,9 @@
 package org.ehealth_connector.communication.ch.ppq.api;
 
 import org.ehealth_connector.communication.ch.ppq.api.config.PpClientConfig;
-import org.ehealth_connector.security.core.SecurityHeaderElement;
-import org.ehealth_connector.security.exceptions.ClientSendException;
-import org.ehealth_connector.security.saml2.Response;
+import org.ehealth_connector.xua.core.SecurityHeaderElement;
+import org.ehealth_connector.xua.exceptions.ClientSendException;
+import org.ehealth_connector.xua.saml2.Response;
 
 /**
  * <!-- @formatter:off -->

@@ -20,9 +20,9 @@ import java.util.Calendar;
 
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQuery;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQueryBuilder;
-import org.ehealth_connector.security.core.SecurityObjectBuilder;
-import org.ehealth_connector.security.hl7v3.InstanceIdentifier;
-import org.ehealth_connector.security.hl7v3.OpenSamlInstanceIdentifier;
+import org.ehealth_connector.xua.core.SecurityObjectBuilder;
+import org.ehealth_connector.xua.hl7v3.InstanceIdentifier;
+import org.ehealth_connector.xua.hl7v3.OpenSamlInstanceIdentifier;
 import org.joda.time.DateTime;
 import org.opensaml.saml.common.SAMLVersion;
 import org.opensaml.saml.saml2.core.Issuer;

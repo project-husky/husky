@@ -22,7 +22,7 @@ import static org.junit.Assert.assertNotNull;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeed;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeed.PpfMethod;
 import org.ehealth_connector.communication.ch.ppq.utilities.impl.InitializerTestHelper;
-import org.ehealth_connector.security.saml2.impl.AssertionImpl;
+import org.ehealth_connector.xua.saml2.impl.AssertionImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.opensaml.saml.saml2.core.Assertion;
@@ -55,7 +55,7 @@ public class PrivacyPolicyFeedBuilderImplTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyFeedBuilderImpl#create()}.
+	 * {@link org.ehealth_connector.xua.ch.ppq.impl.PrivacyPolicyFeedBuilderImpl#create()}.
 	 */
 	@Test
 	public void testCreate() {
@@ -66,7 +66,7 @@ public class PrivacyPolicyFeedBuilderImplTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyFeedBuilderImpl#create(org.opensaml.saml.saml2.core.Assertion)}.
+	 * {@link org.ehealth_connector.xua.ch.ppq.impl.PrivacyPolicyFeedBuilderImpl#create(org.opensaml.saml.saml2.core.Assertion)}.
 	 */
 	@Test
 	public void testCreateAssertion() {
@@ -78,7 +78,7 @@ public class PrivacyPolicyFeedBuilderImplTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyFeedBuilderImpl#method(org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeed.PpfMethod)}.
+	 * {@link org.ehealth_connector.xua.ch.ppq.impl.PrivacyPolicyFeedBuilderImpl#method(org.ehealth_connector.xua.ch.ppq.PrivacyPolicyFeed.PpfMethod)}.
 	 */
 	@Test
 	public void testMethod() {

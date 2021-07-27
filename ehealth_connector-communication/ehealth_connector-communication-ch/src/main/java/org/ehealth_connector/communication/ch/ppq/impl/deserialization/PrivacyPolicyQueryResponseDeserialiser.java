@@ -18,8 +18,8 @@ package org.ehealth_connector.communication.ch.ppq.impl.deserialization;
 
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQueryResponse;
 import org.ehealth_connector.communication.ch.ppq.impl.PrivacyPolicyQueryResponseBuilderImpl;
-import org.ehealth_connector.security.deserialization.impl.AbstractDeserializerImpl;
-import org.ehealth_connector.security.exceptions.DeserializeException;
+import org.ehealth_connector.xua.deserialization.impl.AbstractDeserializerImpl;
+import org.ehealth_connector.xua.exceptions.DeserializeException;
 import org.opensaml.saml.saml2.core.Response;
 import org.w3c.dom.Element;
 

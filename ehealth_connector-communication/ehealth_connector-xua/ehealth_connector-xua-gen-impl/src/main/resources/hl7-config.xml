@@ -6,23 +6,23 @@
 
 		<!-- PurposeOfUse -->
 		<ObjectProvider qualifiedName="hl7:PurposeOfUse">
-			<BuilderClass className="org.ehealth_connector.security.hl7v3.impl.PurposeOfUseBuilder" />
-			<MarshallingClass className="org.ehealth_connector.security.hl7v3.impl.PurposeOfUseMarshaller" />
-			<UnmarshallingClass className="org.ehealth_connector.security.hl7v3.impl.PurposeOfUseUnmarshaller" />
+			<BuilderClass className="org.ehealth_connector.xua.hl7v3.impl.PurposeOfUseBuilder" />
+			<MarshallingClass className="org.ehealth_connector.xua.hl7v3.impl.PurposeOfUseMarshaller" />
+			<UnmarshallingClass className="org.ehealth_connector.xua.hl7v3.impl.PurposeOfUseUnmarshaller" />
 		</ObjectProvider>
 
 		<!-- InstanceIdentifier -->
 		<ObjectProvider qualifiedName="hl7:InstanceIdentifier">
-			<BuilderClass className="org.ehealth_connector.security.hl7v3.impl.InstanceIdentifierBuilder" />
-			<MarshallingClass className="org.ehealth_connector.security.hl7v3.impl.InstanceIdentifierMarshaller" />
-			<UnmarshallingClass className="org.ehealth_connector.security.hl7v3.impl.InstanceIdentifierUnmarshaller" />
+			<BuilderClass className="org.ehealth_connector.xua.hl7v3.impl.InstanceIdentifierBuilder" />
+			<MarshallingClass className="org.ehealth_connector.xua.hl7v3.impl.InstanceIdentifierMarshaller" />
+			<UnmarshallingClass className="org.ehealth_connector.xua.hl7v3.impl.InstanceIdentifierUnmarshaller" />
 		</ObjectProvider>
 		
 		<!-- Role -->
 		<ObjectProvider qualifiedName="hl7:Role">
-			<BuilderClass className="org.ehealth_connector.security.hl7v3.impl.RoleBuilder" />
-			<MarshallingClass className="org.ehealth_connector.security.hl7v3.impl.RoleMarshaller" />
-			<UnmarshallingClass className="org.ehealth_connector.security.hl7v3.impl.RoleUnmarshaller" />
+			<BuilderClass className="org.ehealth_connector.xua.hl7v3.impl.RoleBuilder" />
+			<MarshallingClass className="org.ehealth_connector.xua.hl7v3.impl.RoleMarshaller" />
+			<UnmarshallingClass className="org.ehealth_connector.xua.hl7v3.impl.RoleUnmarshaller" />
 		</ObjectProvider>
 
 	</ObjectProviders>

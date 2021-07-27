@@ -35,7 +35,7 @@ public class EprPolicyRepositoryResponseBuilderImplTest extends InitializerTestH
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.ch.epr.policyadmin.impl.EprPolicyRepositoryResponseBuilderImpl#status(java.lang.String)}.
+	 * {@link org.ehealth_connector.xua.ch.epr.policyadmin.impl.EprPolicyRepositoryResponseBuilderImpl#status(java.lang.String)}.
 	 */
 	@Test
 	public void testStatus() {

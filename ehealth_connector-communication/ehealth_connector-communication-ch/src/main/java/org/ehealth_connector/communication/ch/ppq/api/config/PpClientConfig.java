@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.communication.ch.ppq.api.config;
 
-import org.ehealth_connector.security.communication.config.SoapClientConfig;
+import org.ehealth_connector.xua.communication.config.SoapClientConfig;
 
 /**
  * <!-- @formatter:off -->

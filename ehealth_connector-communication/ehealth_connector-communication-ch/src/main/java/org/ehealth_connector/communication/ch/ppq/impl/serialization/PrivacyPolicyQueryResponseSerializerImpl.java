@@ -18,9 +18,9 @@ package org.ehealth_connector.communication.ch.ppq.impl.serialization;
 
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQueryResponse;
 import org.ehealth_connector.communication.ch.ppq.impl.PrivacyPolicyQueryResponseImpl;
-import org.ehealth_connector.security.exceptions.SerializeException;
-import org.ehealth_connector.security.serialization.Serializer;
-import org.ehealth_connector.security.serialization.impl.AbstractSerializerImpl;
+import org.ehealth_connector.xua.exceptions.SerializeException;
+import org.ehealth_connector.xua.serialization.Serializer;
+import org.ehealth_connector.xua.serialization.impl.AbstractSerializerImpl;
 import org.w3c.dom.Element;
 
 /**

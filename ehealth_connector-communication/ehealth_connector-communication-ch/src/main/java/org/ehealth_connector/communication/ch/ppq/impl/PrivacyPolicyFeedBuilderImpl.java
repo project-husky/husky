@@ -19,7 +19,7 @@ package org.ehealth_connector.communication.ch.ppq.impl;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeed;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeed.PpfMethod;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeedBuilder;
-import org.ehealth_connector.security.core.SecurityObjectBuilder;
+import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.opensaml.saml.saml2.core.Assertion;
 import org.opensaml.saml.saml2.core.impl.AssertionBuilder;
 

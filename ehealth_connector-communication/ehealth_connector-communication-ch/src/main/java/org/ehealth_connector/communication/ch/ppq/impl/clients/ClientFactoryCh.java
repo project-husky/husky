@@ -19,7 +19,7 @@ package org.ehealth_connector.communication.ch.ppq.impl.clients;
 import org.ehealth_connector.communication.ch.ppq.api.clients.PpfClient;
 import org.ehealth_connector.communication.ch.ppq.api.clients.PpqClient;
 import org.ehealth_connector.communication.ch.ppq.api.config.PpClientConfig;
-import org.ehealth_connector.security.communication.clients.impl.ClientFactory;
+import org.ehealth_connector.xua.communication.clients.impl.ClientFactory;
 
 /**
  * <!-- @formatter:off -->

@@ -26,7 +26,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeed;
 import org.ehealth_connector.communication.ch.ppq.utilities.impl.InitializerTestHelper;
-import org.ehealth_connector.security.exceptions.DeserializeException;
+import org.ehealth_connector.xua.exceptions.DeserializeException;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -98,7 +98,7 @@ public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.deserialization.impl.PrivacyPolicyFeedDeserialiser#fromXmlByteArray(byte[])}.
+	 * {@link org.ehealth_connector.xua.deserialization.impl.PrivacyPolicyFeedDeserialiser#fromXmlByteArray(byte[])}.
 	 */
 	@Test
 	public void testFromXmlByteArrayAddPol() throws DeserializeException {
@@ -109,7 +109,7 @@ public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.deserialization.impl.PrivacyPolicyFeedDeserialiser#fromXmlByteArray(byte[])}.
+	 * {@link org.ehealth_connector.xua.deserialization.impl.PrivacyPolicyFeedDeserialiser#fromXmlByteArray(byte[])}.
 	 */
 	@Test
 	public void testFromXmlByteArrayDelPol() throws DeserializeException {
@@ -120,7 +120,7 @@ public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.deserialization.impl.PrivacyPolicyFeedDeserialiser#fromXmlByteArray(byte[])}.
+	 * {@link org.ehealth_connector.xua.deserialization.impl.PrivacyPolicyFeedDeserialiser#fromXmlByteArray(byte[])}.
 	 */
 	@Test
 	public void testFromXmlByteArrayUpdPol() throws DeserializeException {
@@ -131,7 +131,7 @@ public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.deserialization.impl.PrivacyPolicyFeedDeserialiser#fromXmlElement(org.w3c.dom.Element)}.
+	 * {@link org.ehealth_connector.xua.deserialization.impl.PrivacyPolicyFeedDeserialiser#fromXmlElement(org.w3c.dom.Element)}.
 	 *
 	 * @throws DeserializeException
 	 */
@@ -144,7 +144,7 @@ public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.deserialization.impl.PrivacyPolicyFeedDeserialiser#fromXmlElement(org.w3c.dom.Element)}.
+	 * {@link org.ehealth_connector.xua.deserialization.impl.PrivacyPolicyFeedDeserialiser#fromXmlElement(org.w3c.dom.Element)}.
 	 *
 	 * @throws DeserializeException
 	 */
@@ -157,7 +157,7 @@ public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.deserialization.impl.PrivacyPolicyFeedDeserialiser#fromXmlElement(org.w3c.dom.Element)}.
+	 * {@link org.ehealth_connector.xua.deserialization.impl.PrivacyPolicyFeedDeserialiser#fromXmlElement(org.w3c.dom.Element)}.
 	 *
 	 * @throws DeserializeException
 	 */
@@ -170,7 +170,7 @@ public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.deserialization.impl.PrivacyPolicyFeedDeserialiser#fromXmlString(java.lang.String)}.
+	 * {@link org.ehealth_connector.xua.deserialization.impl.PrivacyPolicyFeedDeserialiser#fromXmlString(java.lang.String)}.
 	 *
 	 * @throws DeserializeException
 	 */
@@ -183,7 +183,7 @@ public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.deserialization.impl.PrivacyPolicyFeedDeserialiser#fromXmlString(java.lang.String)}.
+	 * {@link org.ehealth_connector.xua.deserialization.impl.PrivacyPolicyFeedDeserialiser#fromXmlString(java.lang.String)}.
 	 *
 	 * @throws DeserializeException
 	 */
@@ -196,7 +196,7 @@ public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.deserialization.impl.PrivacyPolicyFeedDeserialiser#fromXmlString(java.lang.String)}.
+	 * {@link org.ehealth_connector.xua.deserialization.impl.PrivacyPolicyFeedDeserialiser#fromXmlString(java.lang.String)}.
 	 *
 	 * @throws DeserializeException
 	 */

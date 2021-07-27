@@ -16,8 +16,8 @@
  */
 package org.ehealth_connector.communication.ch.ppq.hl7v3;
 
-import org.ehealth_connector.security.hl7v3.Role;
-import org.ehealth_connector.security.hl7v3.impl.RoleBuilder;
+import org.ehealth_connector.xua.hl7v3.Role;
+import org.ehealth_connector.xua.hl7v3.impl.RoleBuilder;
 
 /**
  * <!-- @formatter:off -->

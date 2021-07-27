@@ -27,10 +27,10 @@ import org.ehealth_connector.communication.ch.ppq.api.clients.PpfClient;
 import org.ehealth_connector.communication.ch.ppq.api.clients.PpqClient;
 import org.ehealth_connector.communication.ch.ppq.api.config.PpClientConfig;
 import org.ehealth_connector.communication.ch.ppq.impl.clients.ClientFactoryCh;
-import org.ehealth_connector.security.communication.impl.ConvenienceUserAccessAuthenticationImpl;
-import org.ehealth_connector.security.core.SecurityHeaderElement;
-import org.ehealth_connector.security.exceptions.ClientSendException;
-import org.ehealth_connector.security.saml2.Response;
+import org.ehealth_connector.xua.communication.impl.ConvenienceUserAccessAuthenticationImpl;
+import org.ehealth_connector.xua.core.SecurityHeaderElement;
+import org.ehealth_connector.xua.exceptions.ClientSendException;
+import org.ehealth_connector.xua.saml2.Response;
 import org.opensaml.core.config.InitializationException;
 import org.opensaml.core.config.Initializer;
 
@@ -71,7 +71,7 @@ public class ConvenienceUserAccessAuthenticationChImpl
 	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQueryModule#invokePrivacyPolicyFeed(org.ehealth_connector.security.core.SecurityHeaderElement,
+	 * @see org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQueryModule#invokePrivacyPolicyFeed(org.ehealth_connector.xua.core.SecurityHeaderElement,
 	 *      org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeed,
 	 *      org.ehealth_connector.communication.ch.ppq.api.config.PpClientConfig)
 	 */
@@ -86,7 +86,7 @@ public class ConvenienceUserAccessAuthenticationChImpl
 	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQueryModule#invokePrivacyPolicyQuery(org.ehealth_connector.security.core.SecurityHeaderElement,
+	 * @see org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQueryModule#invokePrivacyPolicyQuery(org.ehealth_connector.xua.core.SecurityHeaderElement,
 	 *      org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQuery,
 	 *      org.ehealth_connector.communication.ch.ppq.api.config.PpClientConfig)
 	 */

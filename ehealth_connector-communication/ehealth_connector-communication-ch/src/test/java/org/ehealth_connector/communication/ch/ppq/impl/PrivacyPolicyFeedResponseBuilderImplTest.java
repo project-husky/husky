@@ -51,7 +51,7 @@ public class PrivacyPolicyFeedResponseBuilderImplTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyFeedResponseBuilderImpl#create()}.
+	 * {@link org.ehealth_connector.xua.ch.ppq.impl.PrivacyPolicyFeedResponseBuilderImpl#create()}.
 	 */
 	@Test
 	public void testCreate() {
@@ -61,7 +61,7 @@ public class PrivacyPolicyFeedResponseBuilderImplTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyFeedResponseBuilderImpl#exception(java.lang.Exception)}.
+	 * {@link org.ehealth_connector.xua.ch.ppq.impl.PrivacyPolicyFeedResponseBuilderImpl#exception(java.lang.Exception)}.
 	 */
 	@Test
 	public void testException() {
@@ -73,7 +73,7 @@ public class PrivacyPolicyFeedResponseBuilderImplTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyFeedResponseBuilderImpl#method(org.ehealth_connector.security.ch.ppq.PrivacyPolicyFeed.PpfMethod)}.
+	 * {@link org.ehealth_connector.xua.ch.ppq.impl.PrivacyPolicyFeedResponseBuilderImpl#method(org.ehealth_connector.xua.ch.ppq.PrivacyPolicyFeed.PpfMethod)}.
 	 */
 	@Test
 	public void testMethod() {
@@ -84,7 +84,7 @@ public class PrivacyPolicyFeedResponseBuilderImplTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyFeedResponseBuilderImpl#status(java.lang.String)}.
+	 * {@link org.ehealth_connector.xua.ch.ppq.impl.PrivacyPolicyFeedResponseBuilderImpl#status(java.lang.String)}.
 	 */
 	@Test
 	public void testStatus() {

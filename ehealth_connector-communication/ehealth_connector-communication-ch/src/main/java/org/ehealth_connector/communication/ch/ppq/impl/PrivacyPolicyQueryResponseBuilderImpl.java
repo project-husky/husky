@@ -18,7 +18,7 @@ package org.ehealth_connector.communication.ch.ppq.impl;
 
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQueryResponse;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQueryResponseBuilder;
-import org.ehealth_connector.security.core.SecurityObjectBuilder;
+import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.opensaml.saml.saml2.core.Response;
 
 /**

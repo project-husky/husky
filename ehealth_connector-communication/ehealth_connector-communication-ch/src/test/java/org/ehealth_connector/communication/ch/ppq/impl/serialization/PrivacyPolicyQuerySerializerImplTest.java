@@ -24,9 +24,9 @@ import static org.junit.Assert.assertTrue;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQuery;
 import org.ehealth_connector.communication.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl;
 import org.ehealth_connector.communication.ch.ppq.utilities.impl.InitializerTestHelper;
-import org.ehealth_connector.security.exceptions.SerializeException;
-import org.ehealth_connector.security.hl7v3.InstanceIdentifier;
-import org.ehealth_connector.security.hl7v3.impl.InstanceIdentifierBuilder;
+import org.ehealth_connector.xua.exceptions.SerializeException;
+import org.ehealth_connector.xua.hl7v3.InstanceIdentifier;
+import org.ehealth_connector.xua.hl7v3.impl.InstanceIdentifierBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -69,7 +69,7 @@ public class PrivacyPolicyQuerySerializerImplTest extends InitializerTestHelper 
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.serialization.impl.PrivacyPolicyQuerySerializerImpl#toXmlByteArray(org.ehealth_connector.security.ch.ppq.PrivacyPolicyQuery)}.
+	 * {@link org.ehealth_connector.xua.serialization.impl.PrivacyPolicyQuerySerializerImpl#toXmlByteArray(org.ehealth_connector.xua.ch.ppq.PrivacyPolicyQuery)}.
 	 *
 	 * @throws SerializeException
 	 */
@@ -84,7 +84,7 @@ public class PrivacyPolicyQuerySerializerImplTest extends InitializerTestHelper 
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.serialization.impl.PrivacyPolicyQuerySerializerImpl#toXmlElement(org.ehealth_connector.security.ch.ppq.PrivacyPolicyQuery)}.
+	 * {@link org.ehealth_connector.xua.serialization.impl.PrivacyPolicyQuerySerializerImpl#toXmlElement(org.ehealth_connector.xua.ch.ppq.PrivacyPolicyQuery)}.
 	 *
 	 * @throws SerializeException
 	 */
@@ -98,7 +98,7 @@ public class PrivacyPolicyQuerySerializerImplTest extends InitializerTestHelper 
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.serialization.impl.PrivacyPolicyQuerySerializerImpl#toXmlString(org.ehealth_connector.security.ch.ppq.PrivacyPolicyQuery)}.
+	 * {@link org.ehealth_connector.xua.serialization.impl.PrivacyPolicyQuerySerializerImpl#toXmlString(org.ehealth_connector.xua.ch.ppq.PrivacyPolicyQuery)}.
 	 *
 	 * @throws SerializeException
 	 */

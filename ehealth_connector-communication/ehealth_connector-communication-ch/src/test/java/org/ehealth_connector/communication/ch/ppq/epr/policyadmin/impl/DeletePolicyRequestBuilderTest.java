@@ -21,8 +21,8 @@ import static org.junit.Assert.assertNotNull;
 
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.OpenSamlDeletePolicyRequest;
 import org.ehealth_connector.communication.ch.ppq.utilities.impl.InitializerTestHelper;
-import org.ehealth_connector.security.saml2.Assertion;
-import org.ehealth_connector.security.saml2.impl.AssertionBuilderImpl;
+import org.ehealth_connector.xua.saml2.Assertion;
+import org.ehealth_connector.xua.saml2.impl.AssertionBuilderImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;

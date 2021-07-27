@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api;
 
-import org.ehealth_connector.security.saml2.Assertion;
+import org.ehealth_connector.xua.saml2.Assertion;
 
 /**
  * <!-- @formatter:off -->

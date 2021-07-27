@@ -19,8 +19,8 @@ package org.ehealth_connector.communication.ch.ppq.impl;
 import java.util.Calendar;
 
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQuery;
-import org.ehealth_connector.security.core.SecurityObject;
-import org.ehealth_connector.security.hl7v3.InstanceIdentifier;
+import org.ehealth_connector.xua.core.SecurityObject;
+import org.ehealth_connector.xua.hl7v3.InstanceIdentifier;
 import org.joda.time.DateTime;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.xacml.ctx.AttributeType;

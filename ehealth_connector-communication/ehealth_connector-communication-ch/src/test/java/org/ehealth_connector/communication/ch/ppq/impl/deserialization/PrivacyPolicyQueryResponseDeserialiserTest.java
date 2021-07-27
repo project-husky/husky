@@ -23,8 +23,8 @@ import java.nio.file.Paths;
 
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQueryResponse;
 import org.ehealth_connector.communication.ch.ppq.utilities.impl.InitializerTestHelper;
-import org.ehealth_connector.security.deserialization.impl.OpenSaml2DeserializerImpl;
-import org.ehealth_connector.security.exceptions.DeserializeException;
+import org.ehealth_connector.xua.deserialization.impl.OpenSaml2DeserializerImpl;
+import org.ehealth_connector.xua.exceptions.DeserializeException;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Element;
@@ -48,7 +48,7 @@ public class PrivacyPolicyQueryResponseDeserialiserTest extends InitializerTestH
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.deserialization.impl.PrivacyPolicyQueryResponseDeserialiser#fromXmlByteArray(byte[])}.
+	 * {@link org.ehealth_connector.xua.deserialization.impl.PrivacyPolicyQueryResponseDeserialiser#fromXmlByteArray(byte[])}.
 	 *
 	 * @throws DeserializeException
 	 */
@@ -60,7 +60,7 @@ public class PrivacyPolicyQueryResponseDeserialiserTest extends InitializerTestH
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.deserialization.impl.PrivacyPolicyQueryResponseDeserialiser#fromXmlElement(org.w3c.dom.Element)}.
+	 * {@link org.ehealth_connector.xua.deserialization.impl.PrivacyPolicyQueryResponseDeserialiser#fromXmlElement(org.w3c.dom.Element)}.
 	 *
 	 * @throws DeserializeException
 	 */
@@ -72,7 +72,7 @@ public class PrivacyPolicyQueryResponseDeserialiserTest extends InitializerTestH
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.deserialization.impl.PrivacyPolicyQueryResponseDeserialiser#fromXmlString(java.lang.String)}.
+	 * {@link org.ehealth_connector.xua.deserialization.impl.PrivacyPolicyQueryResponseDeserialiser#fromXmlString(java.lang.String)}.
 	 *
 	 * @throws DeserializeException
 	 */

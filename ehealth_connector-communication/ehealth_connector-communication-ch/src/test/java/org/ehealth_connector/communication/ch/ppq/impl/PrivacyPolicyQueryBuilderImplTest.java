@@ -28,8 +28,8 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQuery;
 import org.ehealth_connector.communication.ch.ppq.utilities.impl.InitializerTestHelper;
-import org.ehealth_connector.security.hl7v3.InstanceIdentifier;
-import org.ehealth_connector.security.hl7v3.impl.InstanceIdentifierBuilder;
+import org.ehealth_connector.xua.hl7v3.InstanceIdentifier;
+import org.ehealth_connector.xua.hl7v3.impl.InstanceIdentifierBuilder;
 import org.junit.Before;
 import org.junit.Test;
 import org.opensaml.core.xml.io.UnmarshallingException;
@@ -90,7 +90,7 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#consent(java.lang.String)}.
+	 * {@link org.ehealth_connector.xua.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#consent(java.lang.String)}.
 	 */
 	@Test
 	public void testConsent() {
@@ -101,7 +101,7 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#create(org.opensaml.xacml.profile.saml.XACMLPolicyQueryType)}.
+	 * {@link org.ehealth_connector.xua.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#create(org.opensaml.xacml.profile.saml.XACMLPolicyQueryType)}.
 	 */
 	@Test
 	public void testCreateXACMLPolicyQueryType() {
@@ -112,7 +112,7 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#destination(java.lang.String)}.
+	 * {@link org.ehealth_connector.xua.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#destination(java.lang.String)}.
 	 */
 	@Test
 	public void testDestination() {
@@ -123,7 +123,7 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#id(java.lang.String)}.
+	 * {@link org.ehealth_connector.xua.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#id(java.lang.String)}.
 	 */
 	@Test
 	public void testId() {
@@ -134,7 +134,7 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#version(java.lang.String)}.
+	 * {@link org.ehealth_connector.xua.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#version(java.lang.String)}.
 	 */
 	@Test
 	public void testInstanceIdentifier() {
@@ -145,7 +145,7 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#issueInstant(java.util.Calendar)}.
+	 * {@link org.ehealth_connector.xua.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#issueInstant(java.util.Calendar)}.
 	 */
 	@Test
 	public void testIssueInstant() {
@@ -156,7 +156,7 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#issuer(java.lang.String)}.
+	 * {@link org.ehealth_connector.xua.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#issuer(java.lang.String)}.
 	 */
 	@Test
 	public void testIssuer() {
@@ -167,7 +167,7 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.security.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#version(java.lang.String)}.
+	 * {@link org.ehealth_connector.xua.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl#version(java.lang.String)}.
 	 */
 	@Test
 	public void testVersion() {

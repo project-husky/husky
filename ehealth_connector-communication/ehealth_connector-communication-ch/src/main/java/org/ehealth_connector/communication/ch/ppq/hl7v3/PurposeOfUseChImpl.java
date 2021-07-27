@@ -16,8 +16,8 @@
  */
 package org.ehealth_connector.communication.ch.ppq.hl7v3;
 
-import org.ehealth_connector.security.hl7v3.PurposeOfUse;
-import org.ehealth_connector.security.hl7v3.impl.PurposeOfUseBuilder;
+import org.ehealth_connector.xua.hl7v3.PurposeOfUse;
+import org.ehealth_connector.xua.hl7v3.impl.PurposeOfUseBuilder;
 
 /**
  * <!-- @formatter:off -->

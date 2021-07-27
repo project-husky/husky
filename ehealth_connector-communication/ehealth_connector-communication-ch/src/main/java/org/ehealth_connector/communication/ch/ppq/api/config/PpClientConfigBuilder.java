@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.communication.ch.ppq.api.config;
 
-import org.ehealth_connector.security.communication.config.SoapClientConfigBuilder;
+import org.ehealth_connector.xua.communication.config.SoapClientConfigBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -56,7 +56,7 @@ public interface PpClientConfigBuilder extends SoapClientConfigBuilder {
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#portName(java.lang.String)
+	 * @see org.ehealth_connector.xua.communication.config.SoapClientConfigBuilder#portName(java.lang.String)
 	 */
 	@Override
 	PpClientConfigBuilder portName(String portName);
@@ -64,7 +64,7 @@ public interface PpClientConfigBuilder extends SoapClientConfigBuilder {
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#portNamespace(java.lang.String)
+	 * @see org.ehealth_connector.xua.communication.config.SoapClientConfigBuilder#portNamespace(java.lang.String)
 	 */
 	@Override
 	PpClientConfigBuilder portNamespace(String portNamespace);
@@ -72,7 +72,7 @@ public interface PpClientConfigBuilder extends SoapClientConfigBuilder {
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#serviceName(java.lang.String)
+	 * @see org.ehealth_connector.xua.communication.config.SoapClientConfigBuilder#serviceName(java.lang.String)
 	 */
 	@Override
 	PpClientConfigBuilder serviceName(String serviceName);
@@ -80,7 +80,7 @@ public interface PpClientConfigBuilder extends SoapClientConfigBuilder {
 	/**
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.communication.config.SoapClientConfigBuilder#serviceNamespace(java.lang.String)
+	 * @see org.ehealth_connector.xua.communication.config.SoapClientConfigBuilder#serviceNamespace(java.lang.String)
 	 */
 	@Override
 	PpClientConfigBuilder serviceNamespace(String serviceNamespace);
@@ -89,7 +89,7 @@ public interface PpClientConfigBuilder extends SoapClientConfigBuilder {
 	 *
 	 * {@inheritDoc}
 	 *
-	 * @see org.ehealth_connector.security.communication.config.ClientConfigBuilder#url(java.lang.String)
+	 * @see org.ehealth_connector.xua.communication.config.ClientConfigBuilder#url(java.lang.String)
 	 */
 	@Override
 	PpClientConfigBuilder url(String aEndpointUrl);
