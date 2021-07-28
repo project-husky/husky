@@ -20,11 +20,11 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
-import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.AssertionBuilder;
 import org.ehealth_connector.xua.saml2.Attribute;
-import org.ehealth_connector.xua.saml2.Condition;
 import org.joda.time.DateTime;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionsType;
 import org.opensaml.saml.common.SAMLVersion;
 import org.opensaml.saml.saml2.core.AttributeStatement;
 import org.opensaml.saml.saml2.core.Issuer;
@@ -40,7 +40,7 @@ import org.opensaml.saml.saml2.core.impl.IssuerBuilder;
  * <!-- @formatter:on -->
  */
 public class AssertionBuilderImpl implements AssertionBuilder,
-		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Assertion, Assertion> {
+		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Assertion, AssertionType> {
 
 	private org.opensaml.saml.saml2.core.Issuer issuer;
 	private org.opensaml.saml.saml2.core.Assertion wrappedObject;
@@ -75,11 +75,9 @@ public class AssertionBuilderImpl implements AssertionBuilder,
 	}
 
 	@Override
-	public AssertionBuilder addCondition(Condition condition) {
+	public AssertionBuilder addCondition(ConditionsType condition) {
 		if (wrappedObject.getConditions() != null) {
-			final List<org.opensaml.saml.saml2.core.Condition> conditionList = wrappedObject
-					.getConditions().getConditions();
-			conditionList.add(((ConditionImpl) condition).getWrappedObject());
+			wrappedObject.setConditions(((ConditionsImpl) condition).getWrappedObject());
 		}
 		return this;
 	}
@@ -91,7 +89,7 @@ public class AssertionBuilderImpl implements AssertionBuilder,
 	 * @see org.ehealth_connector.xua.saml2.AssertionBuilder#create()
 	 */
 	@Override
-	public Assertion create() {
+	public AssertionType create() {
 		return new AssertionImpl(wrappedObject);
 	}
 
@@ -102,7 +100,7 @@ public class AssertionBuilderImpl implements AssertionBuilder,
 	 * @see org.ehealth_connector.xua.core.SecurityObjectBuilder#create(java.lang.Object)
 	 */
 	@Override
-	public Assertion create(org.opensaml.saml.saml2.core.Assertion aInternalObject) {
+	public AssertionType create(org.opensaml.saml.saml2.core.Assertion aInternalObject) {
 		return new AssertionImpl(aInternalObject);
 	}
 

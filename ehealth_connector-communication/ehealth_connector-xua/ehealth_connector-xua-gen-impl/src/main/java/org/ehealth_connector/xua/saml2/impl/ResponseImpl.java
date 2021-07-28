@@ -26,6 +26,7 @@ import org.ehealth_connector.xua.saml2.EncryptedAssertion;
 import org.ehealth_connector.xua.saml2.Response;
 import org.ehealth_connector.xua.saml2.Status;
 import org.joda.time.DateTime;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 
 /**
  * <!-- @formatter:off -->
@@ -57,9 +58,9 @@ public class ResponseImpl
 	 * @see org.ehealth_connector.xua.saml2.Response#getAssertions()
 	 */
 	@Override
-	public List<Assertion> getAssertions() {
+	public List<AssertionType> getAssertions() {
 		final List<org.opensaml.saml.saml2.core.Assertion> internal = response.getAssertions();
-		final List<Assertion> retVal = new ArrayList<>();
+		final List<AssertionType> retVal = new ArrayList<>();
 		internal.forEach(c -> {
 			retVal.add(new AssertionBuilderImpl().create(c));
 		});

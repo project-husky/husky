@@ -18,6 +18,8 @@ package org.ehealth_connector.xua.saml2;
 
 import java.util.List;
 
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
+
 /**
  *
  * <!-- @formatter:off -->
@@ -44,7 +46,7 @@ public interface Response extends SignatureBase {
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	List<Assertion> getAssertions();
+	List<AssertionType> getAssertions();
 
 	/**
 	 *

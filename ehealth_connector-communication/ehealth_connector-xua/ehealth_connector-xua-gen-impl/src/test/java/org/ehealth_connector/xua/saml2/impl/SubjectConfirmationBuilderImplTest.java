@@ -26,6 +26,7 @@ import org.ehealth_connector.xua.saml2.impl.SubjectConfirmationBuilderImpl;
 import org.ehealth_connector.xua.saml2.impl.SubjectConfirmationImpl;
 import org.junit.Before;
 import org.junit.Test;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationType;
 
 public class SubjectConfirmationBuilderImplTest {
 
@@ -66,8 +67,8 @@ public class SubjectConfirmationBuilderImplTest {
 	 */
 	@Test
 	public void testAddress() {
-		final SubjectConfirmation ref = builder.address(testAddress).create();
-		assertEquals(testAddress, ref.getAddress());
+		final SubjectConfirmationType ref = builder.address(testAddress).create();
+		assertEquals(testAddress, ref.getSubjectConfirmationData().getAddress());
 	}
 
 	/**
@@ -76,7 +77,7 @@ public class SubjectConfirmationBuilderImplTest {
 	 */
 	@Test
 	public void testCreateSubjectConfirmation() {
-		final SubjectConfirmation ref = ((SubjectConfirmationBuilderImpl) builder)
+		final SubjectConfirmationType ref = ((SubjectConfirmationBuilderImpl) builder)
 				.create(testInternalObject);
 		assertEquals(testInternalObject, ((SubjectConfirmationImpl) ref).getWrappedObject());
 	}
@@ -87,8 +88,8 @@ public class SubjectConfirmationBuilderImplTest {
 	 */
 	@Test
 	public void testInResponseTo() {
-		final SubjectConfirmation ref = builder.inResponseTo(testInResponseTO).create();
-		assertEquals(testInResponseTO, ref.getInResponseTo());
+		final SubjectConfirmationType ref = builder.inResponseTo(testInResponseTO).create();
+		assertEquals(testInResponseTO, ref.getSubjectConfirmationData().getInResponseTo());
 	}
 
 	/**
@@ -97,7 +98,7 @@ public class SubjectConfirmationBuilderImplTest {
 	 */
 	@Test
 	public void testMethod() {
-		final SubjectConfirmation ref = builder.method(testMethod).create();
+		final SubjectConfirmationType ref = builder.method(testMethod).create();
 		assertEquals(testMethod, ref.getMethod());
 	}
 
@@ -107,8 +108,8 @@ public class SubjectConfirmationBuilderImplTest {
 	 */
 	@Test
 	public void testNotBefore() {
-		final SubjectConfirmation ref = builder.notBefore(testNotBefore).create();
-		assertEquals(testNotBefore, ref.getNotBefore());
+		final SubjectConfirmationType ref = builder.notBefore(testNotBefore).create();
+		assertEquals(testNotBefore, ref.getSubjectConfirmationData().getNotBefore().toGregorianCalendar());
 	}
 
 	/**
@@ -117,8 +118,8 @@ public class SubjectConfirmationBuilderImplTest {
 	 */
 	@Test
 	public void testNotOnOrAfter() {
-		final SubjectConfirmation ref = builder.notOnOrAfter(testNotOnOrAfter).create();
-		assertEquals(testNotOnOrAfter, ref.getNotOnOrAfter());
+		final SubjectConfirmationType ref = builder.notOnOrAfter(testNotOnOrAfter).create();
+		assertEquals(testNotOnOrAfter, ref.getSubjectConfirmationData().getNotOnOrAfter().toGregorianCalendar());
 	}
 
 	/**
@@ -127,8 +128,8 @@ public class SubjectConfirmationBuilderImplTest {
 	 */
 	@Test
 	public void testRecipient() {
-		final SubjectConfirmation ref = builder.recipient(testRecepient).create();
-		assertEquals(testRecepient, ref.getRecipient());
+		final SubjectConfirmationType ref = builder.recipient(testRecepient).create();
+		assertEquals(testRecepient, ref.getSubjectConfirmationData().getRecipient());
 	}
 
 }

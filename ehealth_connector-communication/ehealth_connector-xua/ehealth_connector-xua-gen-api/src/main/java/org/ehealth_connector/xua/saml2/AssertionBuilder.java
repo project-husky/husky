@@ -16,6 +16,9 @@
  */
 package org.ehealth_connector.xua.saml2;
 
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionsType;
+
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the AssertionBuilder. </div>
@@ -66,7 +69,7 @@ public interface AssertionBuilder extends BaseBuilder<AssertionBuilder> {
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	AssertionBuilder addCondition(Condition aCondition);
+	AssertionBuilder addCondition(ConditionsType aCondition);
 
 	/**
 	 * <!-- @formatter:off -->
@@ -82,6 +85,6 @@ public interface AssertionBuilder extends BaseBuilder<AssertionBuilder> {
 	 *  <div class="it"></div>
 	 *  <!-- @formatter:on -->
 	 */
-	Assertion create();
+	AssertionType create();
 
 }

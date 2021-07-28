@@ -16,6 +16,8 @@
  */
 package org.ehealth_connector.xua.saml2;
 
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AudienceRestrictionType;
+
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the AudienceRestrictionBuilder. </div>
@@ -23,7 +25,7 @@ package org.ehealth_connector.xua.saml2;
  * <div class="fr"></div>
  * <div class="it"></div
  */
-public interface AudienceRestrictionBuilder extends SimpleBuilder<AudienceRestriction> {
+public interface AudienceRestrictionBuilder extends SimpleBuilder<AudienceRestrictionType> {
 
 	// There are no special methods defined, but the interface has to be
 	// declared for selection reasons.

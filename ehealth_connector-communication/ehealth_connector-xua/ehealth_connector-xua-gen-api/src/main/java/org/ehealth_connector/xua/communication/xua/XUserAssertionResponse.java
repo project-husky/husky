@@ -17,6 +17,7 @@
 package org.ehealth_connector.xua.communication.xua;
 
 import org.ehealth_connector.xua.saml2.Assertion;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 
 /**
  * <!-- @formatter:off -->
@@ -41,7 +42,7 @@ public interface XUserAssertionResponse {
 	 * <div class="de">Die Assertion.</div>
 	 * <!-- @formatter:on -->
 	 */
-	Assertion getAssertion();
+	AssertionType getAssertion();
 
 	/**
 	 *

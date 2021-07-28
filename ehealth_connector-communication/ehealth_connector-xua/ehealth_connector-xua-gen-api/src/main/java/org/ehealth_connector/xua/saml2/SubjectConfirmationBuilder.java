@@ -18,6 +18,8 @@ package org.ehealth_connector.xua.saml2;
 
 import java.util.Calendar;
 
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationType;
+
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the SubjectConfirmation.</div>
@@ -26,7 +28,7 @@ import java.util.Calendar;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public interface SubjectConfirmationBuilder extends SimpleBuilder<SubjectConfirmation> {
+public interface SubjectConfirmationBuilder extends SimpleBuilder<SubjectConfirmationType> {
 
 	/**
 	 * <!-- @formatter:off -->

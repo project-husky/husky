@@ -19,6 +19,7 @@ package org.ehealth_connector.xua.saml2.impl;
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.ehealth_connector.xua.saml2.Conditions;
 import org.ehealth_connector.xua.saml2.ConditionsBuilder;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionsType;
 
 /**
  * <!-- @formatter:off -->
@@ -29,7 +30,7 @@ import org.ehealth_connector.xua.saml2.ConditionsBuilder;
  * <!-- @formatter:on -->
  */
 public class ConditionsBuilderImpl implements ConditionsBuilder,
-		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Conditions, Conditions> {
+		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Conditions, ConditionsType> {
 
 	private org.opensaml.saml.saml2.core.Conditions conditions;
 
@@ -38,7 +39,7 @@ public class ConditionsBuilderImpl implements ConditionsBuilder,
 	}
 
 	@Override
-	public Conditions create() {
+	public ConditionsType create() {
 		return new ConditionsImpl(conditions);
 	}
 
@@ -48,8 +49,7 @@ public class ConditionsBuilderImpl implements ConditionsBuilder,
 	 *
 	 * @see org.ehealth_connector.xua.core.SecurityObjectBuilder#create(java.lang.Object)
 	 */
-	@Override
-	public Conditions create(org.opensaml.saml.saml2.core.Conditions aInternalObject) {
+	public ConditionsType create(org.opensaml.saml.saml2.core.Conditions aInternalObject) {
 		return new ConditionsImpl(aInternalObject);
 	}
 
