@@ -25,6 +25,16 @@
 			<artifactId>opensaml-saml-impl</artifactId>
 		</dependency>
 		
+		<dependency>
+            <groupId>org.openehealth.ipf.platform-camel</groupId>
+            <artifactId>ipf-platform-camel-ihe-atna</artifactId>
+        </dependency>
+		
+		<dependency>
+			<groupId>org.openehealth.ipf.platform-camel</groupId>
+			<artifactId>ipf-platform-camel-ihe-xacml20</artifactId>
+		</dependency>
+		
 		<!-- TODO: remove after implementing PPQ IPF call -->
 		<dependency>
 			<groupId>org.ehealth_connector.xua</groupId>

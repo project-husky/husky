@@ -29,7 +29,7 @@ import org.ehealth_connector.xua.communication.clients.impl.ClientFactory;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class ClientFactoryCh extends ClientFactory {
+public class ClientFactoryCh {
 
 	public static PpfClient getPpfClient(PpClientConfig clientConfiguration) {
 		return new SimplePpfClient(clientConfiguration);
