@@ -104,7 +104,7 @@ public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 	public void testFromXmlByteArrayAddPol() throws DeserializeException {
 		final PrivacyPolicyFeed ref = testDeserializer.fromXmlByteArray(testXmlByteArrayAddPol);
 		assertNotNull(ref);
-		assertEquals(testAddPolAssertionId, ref.getAssertion().getId());
+		assertEquals(testAddPolAssertionId, ref.getAssertion().getID());
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 	public void testFromXmlByteArrayDelPol() throws DeserializeException {
 		final PrivacyPolicyFeed ref = testDeserializer.fromXmlByteArray(testXmlByteArrayDelPol);
 		assertNotNull(ref);
-		assertEquals(testDelPolAssertionId, ref.getAssertion().getId());
+		assertEquals(testDelPolAssertionId, ref.getAssertion().getID());
 	}
 
 	/**
@@ -126,7 +126,7 @@ public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 	public void testFromXmlByteArrayUpdPol() throws DeserializeException {
 		final PrivacyPolicyFeed ref = testDeserializer.fromXmlByteArray(testXmlByteArrayUpdPol);
 		assertNotNull(ref);
-		assertEquals(testUpdPolAssertionId, ref.getAssertion().getId());
+		assertEquals(testUpdPolAssertionId, ref.getAssertion().getID());
 	}
 
 	/**
@@ -139,7 +139,7 @@ public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 	public void testFromXmlElementAddPolicy() throws DeserializeException {
 		final PrivacyPolicyFeed ref = testDeserializer.fromXmlElement(testXmlElementAddPol);
 		assertNotNull(ref);
-		assertEquals(testAddPolAssertionId, ref.getAssertion().getId());
+		assertEquals(testAddPolAssertionId, ref.getAssertion().getID());
 	}
 
 	/**
@@ -152,7 +152,7 @@ public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 	public void testFromXmlElementDeletePolicy() throws DeserializeException {
 		final PrivacyPolicyFeed ref = testDeserializer.fromXmlElement(testXmlElementDelPol);
 		assertNotNull(ref);
-		assertEquals(testDelPolAssertionId, ref.getAssertion().getId());
+		assertEquals(testDelPolAssertionId, ref.getAssertion().getID());
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 	public void testFromXmlElementUpdatePolicy() throws DeserializeException {
 		final PrivacyPolicyFeed ref = testDeserializer.fromXmlElement(testXmlElementUpdPol);
 		assertNotNull(ref);
-		assertEquals(testUpdPolAssertionId, ref.getAssertion().getId());
+		assertEquals(testUpdPolAssertionId, ref.getAssertion().getID());
 	}
 
 	/**
@@ -178,7 +178,7 @@ public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 	public void testFromXmlStringAddPol() throws DeserializeException {
 		final PrivacyPolicyFeed ref = testDeserializer.fromXmlString(testXmlStringAddPol);
 		assertNotNull(ref);
-		assertEquals(testAddPolAssertionId, ref.getAssertion().getId());
+		assertEquals(testAddPolAssertionId, ref.getAssertion().getID());
 	}
 
 	/**
@@ -191,7 +191,7 @@ public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 	public void testFromXmlStringDelPol() throws DeserializeException {
 		final PrivacyPolicyFeed ref = testDeserializer.fromXmlString(testXmlStringDelPol);
 		assertNotNull(ref);
-		assertEquals(testDelPolAssertionId, ref.getAssertion().getId());
+		assertEquals(testDelPolAssertionId, ref.getAssertion().getID());
 	}
 
 	/**
@@ -204,7 +204,7 @@ public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 	public void testFromXmlStringUpdPol() throws DeserializeException {
 		final PrivacyPolicyFeed ref = testDeserializer.fromXmlString(testXmlStringUpdPol);
 		assertNotNull(ref);
-		assertEquals(testUpdPolAssertionId, ref.getAssertion().getId());
+		assertEquals(testUpdPolAssertionId, ref.getAssertion().getID());
 	}
 
 }

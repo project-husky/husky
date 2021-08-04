@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api;
 
-import org.ehealth_connector.xua.saml2.Assertion;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.opensaml.core.xml.XMLObject;
 
 /**
@@ -28,7 +28,7 @@ import org.opensaml.core.xml.XMLObject;
 * <!-- @formatter:on -->
 */
 public interface OpenSamlAssertionBasedRequest extends AssertionBasedRequest, XMLObject {
-	public void setAssertion(Assertion aAssertion);
+	public void setAssertion(AssertionType aAssertion);
 	// There are no special methods defined, but this intermediate interface has
 	// to be declared for opensaml reasons
 }

@@ -27,8 +27,10 @@ import java.io.InputStreamReader;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
+import org.apache.commons.io.Charsets;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.mdht.Address;
 import org.ehealth_connector.common.mdht.Author;
@@ -1893,18 +1895,17 @@ public class FhirCommon {
 	 * @return the given XML file (UTF-8)<div class="en">string containing the
 	 *         XML file content</div> <div class="de"></div>
 	 *         <div class="fr"></div>
+	 * @throws IOException 
 	 */
-	public static String getXmlResource(String fileName) {
-		final StringBuffer sb = new StringBuffer();
-		try {
-			final BufferedReader bufferedReader = new BufferedReader(
-					new InputStreamReader(new FileInputStream(fileName), "UTF8"));
+	public static String getXmlResource(String fileName){
+		final var sb = new StringBuilder();
+		try (final var bufferedReader = new BufferedReader(
+				new InputStreamReader(new FileInputStream(fileName), StandardCharsets.UTF_8))){
 			String line;
 			try {
 				while ((line = bufferedReader.readLine()) != null) {
 					sb.append(line);
 				}
-				bufferedReader.close();
 			} catch (final IOException e) {
 				e.printStackTrace();
 			}
@@ -1912,6 +1913,8 @@ public class FhirCommon {
 			e1.printStackTrace();
 		} catch (final UnsupportedEncodingException e1) {
 			e1.printStackTrace();
+		} catch (IOException e2) {
+			e2.printStackTrace();
 		}
 		return sb.toString();
 	}

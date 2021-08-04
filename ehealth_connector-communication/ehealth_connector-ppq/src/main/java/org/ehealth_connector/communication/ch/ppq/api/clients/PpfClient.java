@@ -17,9 +17,9 @@
 package org.ehealth_connector.communication.ch.ppq.api.clients;
 
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeed;
+import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeedResponse;
 import org.ehealth_connector.xua.core.SecurityHeaderElement;
 import org.ehealth_connector.xua.exceptions.ClientSendException;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.ehealthswiss.EprPolicyRepositoryResponse;
 
 /**
  * <!-- @formatter:off -->
@@ -60,7 +60,7 @@ public interface PpfClient {
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	EprPolicyRepositoryResponse send(SecurityHeaderElement aAssertion, PrivacyPolicyFeed request)
+	PrivacyPolicyFeedResponse send(SecurityHeaderElement aAssertion, PrivacyPolicyFeed request)
 			throws ClientSendException;
 
 }

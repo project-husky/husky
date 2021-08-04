@@ -19,17 +19,15 @@ package org.ehealth_connector.xua.authentication.impl;
 import java.util.Calendar;
 
 import org.apache.commons.lang.StringUtils;
-import org.ehealth_connector.xua.core.SecurityObjectBuilder;
-import org.ehealth_connector.xua.saml2.Subject;
 import org.ehealth_connector.xua.authentication.AuthnRequest;
 import org.ehealth_connector.xua.authentication.AuthnRequestBuilder;
+import org.ehealth_connector.xua.core.SecurityObjectBuilder;
+import org.ehealth_connector.xua.saml2.Subject;
 import org.joda.time.DateTime;
 import org.opensaml.saml.common.SAMLVersion;
-import org.opensaml.saml.saml2.core.IDPEntry;
 import org.opensaml.saml.saml2.core.IDPList;
 import org.opensaml.saml.saml2.core.Issuer;
 import org.opensaml.saml.saml2.core.NameIDPolicy;
-import org.opensaml.saml.saml2.core.Scoping;
 import org.opensaml.saml.saml2.core.impl.IDPEntryBuilder;
 import org.opensaml.saml.saml2.core.impl.IDPListBuilder;
 import org.opensaml.saml.saml2.core.impl.IssuerBuilder;
@@ -66,18 +64,18 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder,
 	 * Instantiates a new AuthnRequestBuilderImpl.
 	 */
 	public AuthnRequestBuilderImpl() {
-		final org.opensaml.saml.saml2.core.impl.AuthnRequestBuilder builder = new org.opensaml.saml.saml2.core.impl.AuthnRequestBuilder();
+		final var builder = new org.opensaml.saml.saml2.core.impl.AuthnRequestBuilder();
 		authnRequest = builder.buildObject();
 
-		final NameIDPolicyBuilder nameidpolBuilder = new NameIDPolicyBuilder();
+		final var nameidpolBuilder = new NameIDPolicyBuilder();
 		nameIdPolicy = nameidpolBuilder.buildObject();
 		authnRequest.setNameIDPolicy(nameIdPolicy);
 
-		final IssuerBuilder issueBuilder = new IssuerBuilder();
+		final var issueBuilder = new IssuerBuilder();
 		issuer = issueBuilder.buildObject();
 		authnRequest.setIssuer(issuer);
 
-		final Scoping scoping = new ScopingBuilder().buildObject();
+		final var scoping = new ScopingBuilder().buildObject();
 		idpList = new IDPListBuilder().buildObject();
 		scoping.setIDPList(idpList);
 		authnRequest.setScoping(scoping);
@@ -209,7 +207,7 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder,
 	@Override
 	public AuthnRequestBuilder issueInstant(Calendar aIssueInstant) {
 		if (aIssueInstant != null) {
-			final DateTime dateTime = new DateTime(aIssueInstant.getTimeInMillis());
+			final var dateTime = new DateTime(aIssueInstant.getTimeInMillis());
 			authnRequest.setIssueInstant(dateTime);
 		}
 		return this;
@@ -280,7 +278,7 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder,
 	@Override
 	public AuthnRequestBuilder providerId(String aProviderID) {
 		if (!StringUtils.isEmpty(aProviderID)) {
-			final IDPEntry idpEntry = new IDPEntryBuilder().buildObject();
+			final var idpEntry = new IDPEntryBuilder().buildObject();
 			idpEntry.setProviderID(aProviderID);
 			idpList.getIDPEntrys().add(idpEntry);
 		}

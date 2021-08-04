@@ -51,8 +51,8 @@ import org.ehealth_connector.communication.xd.xdm.IndexHtm;
 import org.ehealth_connector.communication.xd.xdm.ReadmeTxt;
 import org.ehealth_connector.communication.xd.xdm.XdmContents;
 import org.ehealth_connector.xua.exceptions.SerializeException;
-import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.serialization.impl.AssertionSerializerImpl;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.openhealthtools.ihe.atna.auditor.XDSSourceAuditor;
 import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
 import org.openhealthtools.ihe.common.hl7v2.CX;
@@ -418,7 +418,7 @@ public class ConvenienceCommunication {
 	 * @throws SerializeException
 	 *             if there are problems adding the assertion
 	 */
-	public void addXUserAssertion(Assertion assertion) throws SerializeException {
+	public void addXUserAssertion(AssertionType assertion) throws SerializeException {
 		final XUAModuleContext xuaContext = XUAModuleContext.getContext();
 		final Element assertionElement = new AssertionSerializerImpl().toXmlElement(assertion);
 		final XUAAssertion ohtAssertion = new XUAAssertion(assertionElement);

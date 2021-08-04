@@ -24,8 +24,6 @@ import java.nio.file.Paths;
 import org.ehealth_connector.xua.exceptions.DeserializeException;
 import org.ehealth_connector.xua.saml2.Response;
 import org.ehealth_connector.xua.utilities.impl.AbstractTestHelper;
-import org.ehealth_connector.xua.deserialization.impl.OpenSaml2DeserializerImpl;
-import org.ehealth_connector.xua.deserialization.impl.ResponseDeserializerImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Element;

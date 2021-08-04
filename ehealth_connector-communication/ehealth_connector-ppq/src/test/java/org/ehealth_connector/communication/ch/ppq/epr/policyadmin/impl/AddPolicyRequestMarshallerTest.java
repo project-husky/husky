@@ -20,10 +20,10 @@ import static org.junit.Assert.assertNotNull;
 
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.OpenSamlAddPolicyRequest;
 import org.ehealth_connector.communication.ch.ppq.utilities.impl.InitializerTestHelper;
-import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.impl.AssertionBuilderImpl;
 import org.junit.Before;
 import org.junit.Test;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.opensaml.core.xml.io.Marshaller;
 import org.opensaml.core.xml.io.MarshallerFactory;
@@ -49,7 +49,7 @@ public class AddPolicyRequestMarshallerTest extends InitializerTestHelper {
 		final org.opensaml.saml.saml2.core.Assertion innerAssertion = (org.opensaml.saml.saml2.core.Assertion) unmarshaller
 				.unmarshall(testAssertionXmlElement);
 
-		final Assertion assertion = new AssertionBuilderImpl().create(innerAssertion);
+		final AssertionType assertion = new AssertionBuilderImpl().create(innerAssertion);
 		testAddPolicyRequest = new AddPolicyRequestBuilder().assertion(assertion).buildObject();
 
 	}

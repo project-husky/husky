@@ -22,8 +22,8 @@ import javax.xml.namespace.QName;
 
 import org.ehealth_connector.xua.communication.xua.XUserAssertionResponse;
 import org.ehealth_connector.xua.core.SecurityObject;
-import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.impl.AssertionBuilderImpl;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.soap.wstrust.RequestSecurityTokenResponse;
 import org.opensaml.soap.wstrust.RequestedSecurityToken;
@@ -48,10 +48,10 @@ public class XUserAssertionResponseImpl implements XUserAssertionResponse,
 	}
 
 	@Override
-	public Assertion getAssertion() {
+	public AssertionType getAssertion() {
 		final List<XMLObject> requestedTokens = responseCollection.getUnknownXMLObjects(new QName(
 				"http://docs.oasis-open.org/ws-sx/ws-trust/200512", "RequestedSecurityToken"));
-		if ((requestedTokens != null) && !requestedTokens.isEmpty()) {
+		if (!requestedTokens.isEmpty()) {
 			final RequestedSecurityToken token = (RequestedSecurityToken) requestedTokens.get(0);
 			return new AssertionBuilderImpl()
 					.create((org.opensaml.saml.saml2.core.Assertion) token.getUnknownXMLObject());

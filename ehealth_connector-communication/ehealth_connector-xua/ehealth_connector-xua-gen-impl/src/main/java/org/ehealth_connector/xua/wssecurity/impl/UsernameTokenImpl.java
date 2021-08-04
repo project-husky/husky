@@ -51,12 +51,10 @@ public class UsernameTokenImpl
 	 */
 	@Override
 	public String getNonce() {
-		if ((wrappedObject
-				.getUnknownXMLObjects(org.opensaml.soap.wssecurity.Nonce.ELEMENT_NAME) != null)
-				&& (wrappedObject
+		if (!wrappedObject
 						.getUnknownXMLObjects(org.opensaml.soap.wssecurity.Nonce.ELEMENT_NAME)
-						.size() > 0)) {
-			final org.opensaml.soap.wssecurity.Nonce nonce = (org.opensaml.soap.wssecurity.Nonce) wrappedObject
+						.isEmpty()) {
+			final var nonce = (org.opensaml.soap.wssecurity.Nonce) wrappedObject
 					.getUnknownXMLObjects(org.opensaml.soap.wssecurity.Nonce.ELEMENT_NAME).get(0);
 			return nonce.getValue();
 		}
@@ -70,12 +68,10 @@ public class UsernameTokenImpl
 	 */
 	@Override
 	public String getPassword() {
-		if ((wrappedObject
-				.getUnknownXMLObjects(org.opensaml.soap.wssecurity.Password.ELEMENT_NAME) != null)
-				&& (wrappedObject
+		if (!wrappedObject
 						.getUnknownXMLObjects(org.opensaml.soap.wssecurity.Password.ELEMENT_NAME)
-						.size() > 0)) {
-			final org.opensaml.soap.wssecurity.Password password = (org.opensaml.soap.wssecurity.Password) wrappedObject
+						.isEmpty()) {
+			final var password = (org.opensaml.soap.wssecurity.Password) wrappedObject
 					.getUnknownXMLObjects(org.opensaml.soap.wssecurity.Password.ELEMENT_NAME)
 					.get(0);
 			return password.getValue();

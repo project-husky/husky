@@ -17,7 +17,6 @@
 package org.ehealth_connector.communication.ch.ppq.impl.clients;
 
 import java.io.IOException;
-import java.util.UUID;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -26,7 +25,6 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.ParseException;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.ehealth_connector.communication.ch.ppq.WebServiceClient;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeed;
@@ -38,13 +36,11 @@ import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl.AddPolicy
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl.DeletePolicyRequestBuilder;
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl.UpdatePolicyRequestBuilder;
 import org.ehealth_connector.communication.ch.ppq.impl.PrivacyPolicyFeedResponseBuilderImpl;
-import org.ehealth_connector.communication.ch.ppq.impl.PrivacyPolicyFeedResponseImpl;
 import org.ehealth_connector.xua.communication.soap.impl.WsaHeaderValue;
 import org.ehealth_connector.xua.core.SecurityHeaderElement;
 import org.ehealth_connector.xua.exceptions.ClientSendException;
 import org.ehealth_connector.xua.exceptions.SerializeException;
 import org.ehealth_connector.xua.exceptions.SoapException;
-import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.EncryptedAssertion;
 import org.ehealth_connector.xua.serialization.impl.AssertionSerializerImpl;
 import org.ehealth_connector.xua.serialization.impl.EncryptedAssertionSerializerImpl;
@@ -53,6 +49,7 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.ehealthswiss.AssertionBasedR
 import org.openehealth.ipf.commons.ihe.xacml20.stub.ehealthswiss.DeletePolicyRequest;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.ehealthswiss.EprPolicyRepositoryResponse;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.ehealthswiss.UpdatePolicyRequest;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.opensaml.core.xml.io.Marshaller;
 import org.opensaml.core.xml.io.MarshallerFactory;
@@ -60,7 +57,6 @@ import org.opensaml.core.xml.io.MarshallingException;
 import org.opensaml.core.xml.io.Unmarshaller;
 import org.opensaml.core.xml.io.UnmarshallerFactory;
 import org.opensaml.core.xml.io.UnmarshallingException;
-import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
@@ -90,9 +86,9 @@ public class SimplePpfClient extends WebServiceClient<EprPolicyRepositoryRespons
 		final Element envelopElement = createEnvelope();
 
 		Element headerAssertionElement = null;
-		if (aSecurityHeaderElement instanceof Assertion) {
+		if (aSecurityHeaderElement instanceof AssertionType) {
 			headerAssertionElement = new AssertionSerializerImpl()
-					.toXmlElement((Assertion) aSecurityHeaderElement);
+					.toXmlElement((AssertionType) aSecurityHeaderElement);
 		} else if (aSecurityHeaderElement instanceof EncryptedAssertion) {
 			headerAssertionElement = new EncryptedAssertionSerializerImpl()
 					.toXmlElement((EncryptedAssertion) aSecurityHeaderElement);
@@ -178,7 +174,7 @@ public class SimplePpfClient extends WebServiceClient<EprPolicyRepositoryRespons
 		}
 	}
 	
-	public EprPolicyRepositoryResponse send(SecurityHeaderElement aAssertion,
+	public PrivacyPolicyFeedResponse send(SecurityHeaderElement aAssertion,
 			PrivacyPolicyFeed request) {
 		
 		try {
@@ -192,15 +188,18 @@ public class SimplePpfClient extends WebServiceClient<EprPolicyRepositoryRespons
 					requestToSend = new UpdatePolicyRequest();
 				}
 				
-				requestToSend.setAssertion(request.getAssertion());
-			}
-			
-			EprPolicyRepositoryResponse response = super.send(String.format("ch-ppq1://%s", config.getUrl()), requestToSend, aAssertion, EprPolicyRepositoryResponse.class);
-			
-			
+				if (requestToSend != null) {
+					requestToSend.setAssertion(request.getAssertion());
+
+					EprPolicyRepositoryResponse response = super.send(String.format("ch-ppq1://%s", config.getUrl()),
+							requestToSend, aAssertion, EprPolicyRepositoryResponse.class);
+
+					return new PrivacyPolicyFeedResponseBuilderImpl().status(response.getStatus())
+							.method(request.getMethod()).create();
+				}
+			}	
 		} catch (Exception e) {
-			
-			e.printStackTrace();
+			return new PrivacyPolicyFeedResponseBuilderImpl().exception(e).method(request.getMethod()).create();
 		}
 		
 		return null;		

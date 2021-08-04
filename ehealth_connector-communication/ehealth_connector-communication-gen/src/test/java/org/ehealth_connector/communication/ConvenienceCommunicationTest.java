@@ -39,11 +39,11 @@ import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.xua.deserialization.impl.AssertionDeserializerImpl;
 import org.ehealth_connector.xua.exceptions.DeserializeException;
 import org.ehealth_connector.xua.exceptions.SerializeException;
-import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.serialization.impl.AssertionSerializerImpl;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.response.XDSQueryResponseType;
 import org.openhealthtools.ihe.xua.XUAAssertion;
@@ -84,7 +84,7 @@ public class ConvenienceCommunicationTest {
 	Destination repo;
 	ConvenienceCommunication c;
 	XDSQueryResponseType qr;
-	private Assertion testAssertion;
+	private AssertionType testAssertion;
 
 	@Before
 	public void init()

@@ -21,11 +21,11 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.ehealth_connector.xua.core.SecurityObject;
-import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.EncryptedAssertion;
 import org.ehealth_connector.xua.saml2.Response;
 import org.ehealth_connector.xua.saml2.Status;
 import org.joda.time.DateTime;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 
 /**
  * <!-- @formatter:off -->
@@ -57,12 +57,12 @@ public class ResponseImpl
 	 * @see org.ehealth_connector.xua.saml2.Response#getAssertions()
 	 */
 	@Override
-	public List<Assertion> getAssertions() {
+	public List<AssertionType> getAssertions() {
 		final List<org.opensaml.saml.saml2.core.Assertion> internal = response.getAssertions();
-		final List<Assertion> retVal = new ArrayList<>();
-		internal.forEach(c -> {
-			retVal.add(new AssertionBuilderImpl().create(c));
-		});
+		final List<AssertionType> retVal = new ArrayList<>();
+		internal.forEach(c -> 
+			retVal.add(new AssertionBuilderImpl().create(c))
+		);
 		return retVal;
 	}
 
@@ -96,9 +96,9 @@ public class ResponseImpl
 		final List<org.opensaml.saml.saml2.core.EncryptedAssertion> internal = response
 				.getEncryptedAssertions();
 		final List<EncryptedAssertion> retVal = new ArrayList<>();
-		internal.forEach(c -> {
-			retVal.add(new EncryptedAssertionBuilderImpl().create(c));
-		});
+		internal.forEach(c -> 
+			retVal.add(new EncryptedAssertionBuilderImpl().create(c))
+		);
 		return retVal;
 	}
 
@@ -133,7 +133,7 @@ public class ResponseImpl
 	@Override
 	public Calendar getIssueInstant() {
 		final DateTime instant = response.getIssueInstant();
-		final Calendar retVal = Calendar.getInstance();
+		final var retVal = Calendar.getInstance();
 		retVal.setTimeInMillis(instant.getMillis());
 		return retVal;
 	}

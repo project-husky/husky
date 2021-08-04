@@ -9,9 +9,7 @@ import org.apache.camel.support.DefaultExchange;
 import org.apache.cxf.binding.soap.SoapHeader;
 import org.apache.cxf.headers.Header.Direction;
 import org.ehealth_connector.xua.core.SecurityHeaderElement;
-import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.serialization.impl.OpenSaml2SerializerImpl;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.opensaml.core.xml.XMLObject;
 
 public class WebServiceClient<T> implements CamelContextAware {

@@ -23,7 +23,6 @@ import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeed;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeedResponse;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQuery;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQueryModule;
-import org.ehealth_connector.communication.ch.ppq.api.clients.PpfClient;
 import org.ehealth_connector.communication.ch.ppq.api.clients.PpqClient;
 import org.ehealth_connector.communication.ch.ppq.api.config.PpClientConfig;
 import org.ehealth_connector.communication.ch.ppq.impl.clients.ClientFactoryCh;
@@ -78,8 +77,14 @@ public class ConvenienceUserAccessAuthenticationChImpl
 	@Override
 	public PrivacyPolicyFeedResponse invokePrivacyPolicyFeed(SecurityHeaderElement aAssertion,
 			PrivacyPolicyFeed feed, PpClientConfig clientConfiguration) throws ClientSendException {
-		final PpfClient client = ClientFactoryCh.getPpfClient(clientConfiguration);
-		return client.send(aAssertion, feed);
+		final var client = ClientFactoryCh.getPpfClient(clientConfiguration);
+		PrivacyPolicyFeedResponse response = client.send(aAssertion, feed);
+
+		if (response != null) {
+
+		}
+
+		return null;
 	}
 
 	/**

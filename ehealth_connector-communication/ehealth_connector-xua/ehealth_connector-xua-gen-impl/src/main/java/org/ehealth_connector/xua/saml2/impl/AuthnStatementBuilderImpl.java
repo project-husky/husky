@@ -40,7 +40,7 @@ public class AuthnStatementBuilderImpl implements AuthnStatementBuilder,
 
 	public AuthnStatementBuilderImpl() {
 		wrappedObject = new org.opensaml.saml.saml2.core.impl.AuthnStatementBuilder().buildObject();
-		final org.opensaml.saml.saml2.core.AuthnContext authnContext = new org.opensaml.saml.saml2.core.impl.AuthnContextBuilder()
+		final var authnContext = new org.opensaml.saml.saml2.core.impl.AuthnContextBuilder()
 				.buildObject();
 		wrappedObject.setAuthnContext(authnContext);
 		authnContextClassRef = new org.opensaml.saml.saml2.core.impl.AuthnContextClassRefBuilder()
@@ -59,7 +59,7 @@ public class AuthnStatementBuilderImpl implements AuthnStatementBuilder,
 	@Override
 	public AuthnStatementBuilder authnInstant(Calendar aAuthnInstant) {
 		if (aAuthnInstant != null) {
-			final DateTime dateTime = new DateTime(aAuthnInstant.getTimeInMillis());
+			final var dateTime = new DateTime(aAuthnInstant.getTimeInMillis());
 			wrappedObject.setAuthnInstant(dateTime);
 		}
 		return this;
@@ -86,7 +86,7 @@ public class AuthnStatementBuilderImpl implements AuthnStatementBuilder,
 	@Override
 	public AuthnStatementBuilder sessionNotOnOrAfter(Calendar aSessionNotOnOrAfter) {
 		if (aSessionNotOnOrAfter != null) {
-			final DateTime dateTime = new DateTime(aSessionNotOnOrAfter.getTimeInMillis());
+			final var dateTime = new DateTime(aSessionNotOnOrAfter.getTimeInMillis());
 			wrappedObject.setSessionNotOnOrAfter(dateTime);
 		}
 		return this;
