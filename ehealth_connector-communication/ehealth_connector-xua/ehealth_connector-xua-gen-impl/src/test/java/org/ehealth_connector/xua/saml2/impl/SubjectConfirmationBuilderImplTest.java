@@ -22,10 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import org.ehealth_connector.xua.saml2.SubjectConfirmation;
 import org.ehealth_connector.xua.saml2.SubjectConfirmationBuilder;
-import org.ehealth_connector.xua.saml2.impl.SubjectConfirmationBuilderImpl;
-import org.ehealth_connector.xua.saml2.impl.SubjectConfirmationImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationType;

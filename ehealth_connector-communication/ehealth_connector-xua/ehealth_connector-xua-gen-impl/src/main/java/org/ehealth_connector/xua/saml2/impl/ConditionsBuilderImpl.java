@@ -17,7 +17,6 @@
 package org.ehealth_connector.xua.saml2.impl;
 
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
-import org.ehealth_connector.xua.saml2.Conditions;
 import org.ehealth_connector.xua.saml2.ConditionsBuilder;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionsType;
 

@@ -18,9 +18,8 @@ package org.ehealth_connector.xua.authentication.impl;
 
 import java.util.Calendar;
 
-import org.ehealth_connector.xua.core.SecurityObject;
-import org.ehealth_connector.xua.saml2.Subject;
 import org.ehealth_connector.xua.authentication.AuthnRequest;
+import org.ehealth_connector.xua.core.SecurityObject;
 import org.ehealth_connector.xua.saml2.impl.SubjectBuilderImpl;
 import org.joda.time.DateTime;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectType;

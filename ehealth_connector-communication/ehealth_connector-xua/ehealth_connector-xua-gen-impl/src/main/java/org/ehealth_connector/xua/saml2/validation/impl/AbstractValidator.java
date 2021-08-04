@@ -23,7 +23,6 @@ import java.util.Map;
 import org.ehealth_connector.xua.exceptions.ValidationException;
 import org.opensaml.core.criterion.EntityIdCriterion;
 import org.opensaml.saml.security.impl.SAMLSignatureProfileValidator;
-import org.opensaml.security.credential.Credential;
 import org.opensaml.security.credential.impl.KeyStoreCredentialResolver;
 import org.opensaml.xmlsec.signature.Signature;
 import org.opensaml.xmlsec.signature.support.SignatureValidator;
