@@ -22,9 +22,11 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
+import org.apache.commons.httpclient.NoHttpResponseException;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
 import org.apache.http.ParseException;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -32,18 +34,16 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.ehealth_connector.xua.authentication.AuthnRequest;
 import org.ehealth_connector.xua.communication.clients.IdpClient;
 import org.ehealth_connector.xua.communication.config.IdpClientConfig;
+import org.ehealth_connector.xua.deserialization.impl.ResponseDeserializerImpl;
 import org.ehealth_connector.xua.exceptions.ClientSendException;
 import org.ehealth_connector.xua.exceptions.DeserializeException;
 import org.ehealth_connector.xua.exceptions.SerializeException;
 import org.ehealth_connector.xua.saml2.Response;
-import org.ehealth_connector.xua.authentication.AuthnRequest;
-import org.ehealth_connector.xua.deserialization.impl.ResponseDeserializerImpl;
 import org.ehealth_connector.xua.serialization.impl.AuthnRequestSerializerImpl;
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -78,6 +78,9 @@ public abstract class AbstractIdpClient implements IdpClient {
 	 * <div class="de">der Response</div>
 	 * <div class="fr"></div>
 	 * <div class="it"></div>
+	 * @throws ClientSendException 
+	 * @throws IOException 
+	 * @throws  
 	 * @throws Throwable
 	 * <div class="en">will be thrown if an error occures.</div>
 	 * <div class="de">wird geworfen wenn ein Fehler auftritt.</div>
@@ -85,7 +88,7 @@ public abstract class AbstractIdpClient implements IdpClient {
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	Response execute(HttpPost post) throws Throwable {
+	Response execute(HttpPost post) throws ClientSendException, IOException {
 		final CloseableHttpClient httpclient = getHttpClient();
 
 		final CloseableHttpResponse response = httpclient.execute(post);
@@ -94,7 +97,7 @@ public abstract class AbstractIdpClient implements IdpClient {
 
 			return parseResponse(response);
 		} else {
-			throw new Throwable("No valid response found: " + response);
+			throw new NoHttpResponseException("No valid response found: " + response);
 		}
 	}
 
@@ -125,7 +128,7 @@ public abstract class AbstractIdpClient implements IdpClient {
 	 * <!-- @formatter:on -->
 	 */
 	HttpPost getHttpPost(IdpClientConfig config) throws UnsupportedEncodingException {
-		final HttpPost post = new HttpPost(config.getUrl());
+		final var post = new HttpPost(config.getUrl());
 		post.setConfig(getRequestConfig());
 		return post;
 	}
@@ -151,7 +154,7 @@ public abstract class AbstractIdpClient implements IdpClient {
 	 */
 	UrlEncodedFormEntity getUrlFormEntity(AuthnRequest aAuthnRequest)
 			throws SerializeException, UnsupportedEncodingException {
-		final AuthnRequestSerializerImpl serializer = new AuthnRequestSerializerImpl();
+		final var serializer = new AuthnRequestSerializerImpl();
 		final byte[] authnByteArray = serializer.toXmlByteArray(aAuthnRequest);
 
 		final List<NameValuePair> urlParameters = new ArrayList<>();
@@ -188,16 +191,16 @@ public abstract class AbstractIdpClient implements IdpClient {
 	 */
 	Response parseResponse(CloseableHttpResponse response) throws ClientSendException {
 		try {
-			final String responseEntity = EntityUtils.toString(response.getEntity());
-			logger.debug("Response:\n" + responseEntity);
+			final var responseEntity = EntityUtils.toString(response.getEntity());
+			logger.debug("Response:\n {}", responseEntity);
 			final org.jsoup.nodes.Document doc = Jsoup.parse(responseEntity);
-			final Elements samlElements = doc.getElementsByAttributeValue("name", "SAMLResponse");
-			final Element samlElement = samlElements.first();
-			final String samlResponseBase64String = samlElement.attr("value");
+			final var samlElements = doc.getElementsByAttributeValue("name", "SAMLResponse");
+			final var samlElement = samlElements.first();
+			final var samlResponseBase64String = samlElement.attr("value");
 
 			final byte[] reponseByteArray = Base64.getDecoder().decode(samlResponseBase64String);
 
-			final ResponseDeserializerImpl deserializer = new ResponseDeserializerImpl();
+			final var deserializer = new ResponseDeserializerImpl();
 
 			return deserializer.fromXmlByteArray(reponseByteArray);
 		} catch (ParseException | IOException | DeserializeException e) {

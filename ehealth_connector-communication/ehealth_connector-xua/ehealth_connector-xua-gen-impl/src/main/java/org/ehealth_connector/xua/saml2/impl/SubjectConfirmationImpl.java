@@ -27,6 +27,8 @@ import org.ehealth_connector.xua.core.SecurityObject;
 import org.joda.time.DateTime;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationDataType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <!-- @formatter:off -->
@@ -39,6 +41,8 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConf
 public class SubjectConfirmationImpl extends SubjectConfirmationType implements
 		SecurityObject<org.opensaml.saml.saml2.core.SubjectConfirmation> {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(SubjectConfirmationImpl.class);
+	
 	/** The subject confirmation. */
 	private org.opensaml.saml.saml2.core.SubjectConfirmation subjectConfirmation;
 
@@ -139,7 +143,7 @@ public class SubjectConfirmationImpl extends SubjectConfirmationType implements
 				xmlGregCal = DatatypeFactory.newInstance().newXMLGregorianCalendar(retVal);
 				getSubjectConfirmationData().setNotBefore(xmlGregCal);
 			} catch (DatatypeConfigurationException e) {
-				e.printStackTrace();
+				LOGGER.error(e.getMessage(), e);
 			}
 			
 			return retVal;
@@ -165,7 +169,7 @@ public class SubjectConfirmationImpl extends SubjectConfirmationType implements
 				xmlGregCal = DatatypeFactory.newInstance().newXMLGregorianCalendar(retVal);
 				getSubjectConfirmationData().setNotOnOrAfter(xmlGregCal);
 			} catch (DatatypeConfigurationException e) {
-				e.printStackTrace();
+				LOGGER.error(e.getMessage(), e);
 			}
 
 			return retVal;
@@ -204,8 +208,8 @@ public class SubjectConfirmationImpl extends SubjectConfirmationType implements
 	 */
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		final var prime = 31;
+		var result = 1;
 		result = (prime * result)
 				+ ((subjectConfirmation == null) ? 0 : subjectConfirmation.hashCode());
 		return result;

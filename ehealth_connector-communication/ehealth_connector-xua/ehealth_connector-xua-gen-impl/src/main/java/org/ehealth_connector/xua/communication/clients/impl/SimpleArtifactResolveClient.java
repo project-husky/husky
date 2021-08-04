@@ -20,7 +20,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.UUID;
 
-import javax.xml.parsers.DocumentBuilder;
+import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
@@ -28,25 +28,18 @@ import javax.xml.transform.TransformerFactoryConfigurationError;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpHeaders;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.ehealth_connector.xua.communication.clients.ArtifactResolveClient;
 import org.ehealth_connector.xua.communication.config.SoapClientConfig;
-import org.ehealth_connector.xua.exceptions.ClientSendException;
-import org.ehealth_connector.xua.exceptions.DeserializeException;
-import org.ehealth_connector.xua.exceptions.SerializeException;
-import org.ehealth_connector.xua.saml2.ArtifactResolve;
-import org.ehealth_connector.xua.saml2.ArtifactResponse;
 import org.ehealth_connector.xua.communication.soap.impl.WsaHeaderValue;
 import org.ehealth_connector.xua.deserialization.impl.ArtifactResponseDeserializerImpl;
+import org.ehealth_connector.xua.exceptions.ClientSendException;
+import org.ehealth_connector.xua.exceptions.DeserializeException;
+import org.ehealth_connector.xua.saml2.ArtifactResolve;
+import org.ehealth_connector.xua.saml2.ArtifactResponse;
 import org.ehealth_connector.xua.saml2.impl.ArtifactResolveImpl;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
-import org.opensaml.core.xml.io.Marshaller;
-import org.opensaml.core.xml.io.MarshallerFactory;
 import org.opensaml.core.xml.io.MarshallingException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
 /**
@@ -65,36 +58,33 @@ public class SimpleArtifactResolveClient extends AbstractSoapClient<ArtifactResp
 		setConfig(config);
 	}
 
-	private HttpEntity getSoapEntity(ArtifactResolve aArtifactResolve) throws SerializeException,
+	private HttpEntity getSoapEntity(ArtifactResolve aArtifactResolve) throws
 			ParserConfigurationException, TransformerException, MarshallingException {
 
-		final Element envelopElement = createEnvelope();
+		final var envelopElement = createEnvelope();
 
-		// final Element headerAssertionElement = new
-		// ArtifactResolveSerializerImpl().toXmlElement(aArtifactResolve);
-
-		final WsaHeaderValue wsHeaders = new WsaHeaderValue(
+		final var wsHeaders = new WsaHeaderValue(
 				"urn:uuid:" + UUID.randomUUID().toString(), null, null);
 
 		createHeader(null, wsHeaders, envelopElement);
 
 		// serialize the authnrequest to xml element
-		final MarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport
+		final var marshallerFactory = XMLObjectProviderRegistrySupport
 				.getMarshallerFactory();
-		final Marshaller marshaller = marshallerFactory
+		final var marshaller = marshallerFactory
 				.getMarshaller(((ArtifactResolveImpl) aArtifactResolve).getWrappedObject());
 
-		final Element policyElement = marshaller
+		final var policyElement = marshaller
 				.marshall(((ArtifactResolveImpl) aArtifactResolve).getWrappedObject());
 
 		createBody(policyElement, envelopElement);
 
-		final String body = createXmlString(envelopElement);
+		final var body = createXmlString(envelopElement);
 
-		getLogger().debug("SOAP Message\n" + body);
+		getLogger().debug("SOAP Message\n {}", body);
 
 		// add string as body to httpentity
-		final StringEntity stringEntity = new StringEntity(body, "UTF-8");
+		final var stringEntity = new StringEntity(body, "UTF-8");
 		stringEntity.setChunked(false);
 
 		return stringEntity;
@@ -103,21 +93,23 @@ public class SimpleArtifactResolveClient extends AbstractSoapClient<ArtifactResp
 	@Override
 	protected ArtifactResponse parseResponse(String content) throws ClientSendException {
 		try {
-			final DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
+			final var docFactory = DocumentBuilderFactory.newInstance();
 			docFactory.setNamespaceAware(true);
-			final DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
-			final Document soapDocument = docBuilder
+			docFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
+			docFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
+			final var docBuilder = docFactory.newDocumentBuilder();
+			final var soapDocument = docBuilder
 					.parse(new ByteArrayInputStream(content.getBytes()));
 
 			// get the xml response node
-			final Node responseNode = soapDocument.getFirstChild().getLastChild().getFirstChild();
+			final var responseNode = soapDocument.getFirstChild().getLastChild().getFirstChild();
 
-			final Document doc = docBuilder.newDocument();
-			final Node importedNode = doc.importNode(responseNode, true);
+			final var doc = docBuilder.newDocument();
+			final var importedNode = doc.importNode(responseNode, true);
 			doc.appendChild(importedNode);
 
 			// deserialize to the rtifactResponse instance
-			final ArtifactResponseDeserializerImpl deserializer = new ArtifactResponseDeserializerImpl();
+			final var deserializer = new ArtifactResponseDeserializerImpl();
 			return deserializer.fromXmlElement(doc.getDocumentElement());
 		} catch (UnsupportedOperationException | IOException | DeserializeException
 				| TransformerFactoryConfigurationError | ParserConfigurationException
@@ -129,13 +121,13 @@ public class SimpleArtifactResolveClient extends AbstractSoapClient<ArtifactResp
 	@Override
 	public ArtifactResponse send(ArtifactResolve aArtifactResolve) throws ClientSendException {
 		try {
-			final HttpPost post = getHttpPost();
+			final var post = getHttpPost();
 			post.setHeader(HttpHeaders.CONTENT_TYPE, "text/xml");
 			post.setEntity(getSoapEntity(aArtifactResolve));
 			post.addHeader("Accept", "text/xml");
 
 			return execute(post);
-		} catch (final Throwable t) {
+		} catch (final Exception t) {
 			throw new ClientSendException(t);
 		}
 	}

@@ -75,7 +75,7 @@ public class AuthnStatementImpl
 	@Override
 	public Calendar getAuthnInstant() {
 		final DateTime instant = authnStatement.getAuthnInstant();
-		final Calendar retVal = Calendar.getInstance();
+		final var retVal = Calendar.getInstance();
 		retVal.setTimeInMillis(instant.getMillis());
 		return retVal;
 	}
@@ -100,7 +100,7 @@ public class AuthnStatementImpl
 	@Override
 	public Calendar getSessionNotOnOrAfter() {
 		final DateTime instant = authnStatement.getSessionNotOnOrAfter();
-		final Calendar retVal = Calendar.getInstance();
+		final var retVal = Calendar.getInstance();
 		retVal.setTimeInMillis(instant.getMillis());
 		return retVal;
 	}

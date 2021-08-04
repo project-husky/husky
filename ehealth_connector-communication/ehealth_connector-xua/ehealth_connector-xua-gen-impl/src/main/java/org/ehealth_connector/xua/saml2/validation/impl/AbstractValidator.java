@@ -70,19 +70,19 @@ public abstract class AbstractValidator {
 
 	public void validate(Signature aSignature, String aAlias) throws ValidationException {
 		try {
-			final SAMLSignatureProfileValidator profileValidator = new SAMLSignatureProfileValidator();
+			final var profileValidator = new SAMLSignatureProfileValidator();
 			profileValidator.validate(aSignature);
 		} catch (final Exception e) {
 			log.error("Error", e);
 		}
 		try {
 			final Map<String, String> passwordMap = new HashMap<>();
-			final KeyStoreCredentialResolver resolver = new KeyStoreCredentialResolver(trustStore,
+			final var resolver = new KeyStoreCredentialResolver(trustStore,
 					passwordMap);
 
 			final Criterion criterion = new EntityIdCriterion(aAlias);
-			final CriteriaSet criteriaSet = new CriteriaSet(criterion);
-			final Credential credential = resolver.resolveSingle(criteriaSet);
+			final var criteriaSet = new CriteriaSet(criterion);
+			final var credential = resolver.resolveSingle(criteriaSet);
 
 			SignatureValidator.validate(aSignature, credential);
 

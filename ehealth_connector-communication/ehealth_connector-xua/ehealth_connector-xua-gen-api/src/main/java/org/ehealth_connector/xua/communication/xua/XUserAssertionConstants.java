@@ -46,5 +46,9 @@ public class XUserAssertionConstants {
 
 	/** XACML subject subject-id string */
 	public static final String OASIS_XACML_SUBJECTID = "urn:oasis:names:tc:xacml:1.0:subject:subject-id";
+	
+	private XUserAssertionConstants() {
+		 throw new IllegalStateException("Constants class");
+	}
 
 }

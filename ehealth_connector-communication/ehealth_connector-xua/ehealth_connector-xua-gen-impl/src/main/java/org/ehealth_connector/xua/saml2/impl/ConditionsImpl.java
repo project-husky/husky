@@ -37,9 +37,9 @@ public class ConditionsImpl
 
 	public List<AudienceRestrictionType> getAudienceRestrictions() {	
 		if (wrappedObject.getAudienceRestrictions() != null) {
-			wrappedObject.getAudienceRestrictions().forEach(audienceRestrictions -> {
-				getAudienceRestrictions().add(new AudienceRestrictionBuilderImpl().create(audienceRestrictions));
-			});
+			wrappedObject.getAudienceRestrictions().forEach(audienceRestrictions -> 
+				getAudienceRestrictions().add(new AudienceRestrictionBuilderImpl().create(audienceRestrictions))
+				);
 		}
 		return getAudienceRestrictions();
 	}

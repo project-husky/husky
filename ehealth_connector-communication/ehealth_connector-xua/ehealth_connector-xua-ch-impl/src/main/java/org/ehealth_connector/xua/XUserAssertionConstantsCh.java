@@ -63,5 +63,9 @@ public final class XUserAssertionConstantsCh {
 	 * <!-- @formatter:on -->
 	 */
 	public static final String ROLE_REPRESENTATIVE = "REP";
+	
+	private XUserAssertionConstantsCh() {
+		throw new IllegalStateException("Constants class");
+	}
 
 }

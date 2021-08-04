@@ -21,17 +21,14 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.UnrecoverableKeyException;
 
-import javax.net.ssl.SSLContext;
-
 import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.ssl.SSLContexts;
-import org.ehealth_connector.xua.exceptions.ClientSendException;
-import org.ehealth_connector.xua.saml2.Response;
 import org.ehealth_connector.xua.authentication.AuthnRequest;
 import org.ehealth_connector.xua.communication.config.impl.IdpClientCertificateAuthConfigImpl;
+import org.ehealth_connector.xua.exceptions.ClientSendException;
+import org.ehealth_connector.xua.saml2.Response;
 
 /**
  * <!-- @formatter:off -->
@@ -53,7 +50,7 @@ public class IdpClientByCert extends AbstractHttpFormIdpClient {
 	@Override
 	public CloseableHttpClient getHttpClient() throws ClientSendException {
 		try {
-			final SSLContext sslContext = SSLContexts.custom()
+			final var sslContext = SSLContexts.custom()
 					.loadKeyMaterial(config.getClientKeyStore(), config.getClientKeyStorePassword())
 					.build();
 			return HttpClients.custom().setSslcontext(sslContext).build();
@@ -72,7 +69,7 @@ public class IdpClientByCert extends AbstractHttpFormIdpClient {
 	@Override
 	public Response send(AuthnRequest aAuthnRequest) throws ClientSendException {
 		try {
-			final HttpPost post = getHttpPost(aAuthnRequest, config);
+			final var post = getHttpPost(aAuthnRequest, config);
 
 			return execute(post);
 		} catch (final Throwable t) {

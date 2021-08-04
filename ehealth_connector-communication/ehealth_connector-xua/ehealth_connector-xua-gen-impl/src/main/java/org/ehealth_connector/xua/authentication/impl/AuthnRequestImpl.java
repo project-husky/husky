@@ -126,7 +126,7 @@ public class AuthnRequestImpl
 	@Override
 	public Calendar getIssueInstant() {
 		final DateTime instant = authnRequest.getIssueInstant();
-		final Calendar retVal = Calendar.getInstance();
+		final var retVal = Calendar.getInstance();
 		retVal.setTimeInMillis(instant.getMillis());
 		return retVal;
 	}

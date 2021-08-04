@@ -46,10 +46,10 @@ public class AssertionBuilderImpl implements AssertionBuilder,
 	private org.opensaml.saml.saml2.core.Assertion wrappedObject;
 
 	public AssertionBuilderImpl() {
-		final org.opensaml.saml.saml2.core.impl.AssertionBuilder builder = new org.opensaml.saml.saml2.core.impl.AssertionBuilder();
+		final var builder = new org.opensaml.saml.saml2.core.impl.AssertionBuilder();
 		wrappedObject = builder.buildObject();
 
-		final IssuerBuilder issueBuilder = new IssuerBuilder();
+		final var issueBuilder = new IssuerBuilder();
 		issuer = issueBuilder.buildObject(Issuer.DEFAULT_ELEMENT_NAME);
 		wrappedObject.setIssuer(issuer);
 	}
@@ -127,7 +127,7 @@ public class AssertionBuilderImpl implements AssertionBuilder,
 	@Override
 	public AssertionBuilder issueInstant(Calendar aIssueInstant) {
 		if (aIssueInstant != null) {
-			final DateTime dateTime = new DateTime(aIssueInstant.getTimeInMillis());
+			final var dateTime = new DateTime(aIssueInstant.getTimeInMillis());
 			wrappedObject.setIssueInstant(dateTime);
 		}
 		return this;

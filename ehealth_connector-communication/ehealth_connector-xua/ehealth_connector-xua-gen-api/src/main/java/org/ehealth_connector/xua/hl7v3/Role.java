@@ -43,6 +43,6 @@ public interface Role extends CE {
 	public static final String TYPE_LOCAL_NAME = "Role";
 
 	/** QName of the XSI type. */
-	public static final QName TYPE_NAME = new QName("urn:hl7-org:v3", TYPE_LOCAL_NAME, "hl7");
+	public static final QName TYPE_NAME = new QName(DEFAULT_NS_URI, TYPE_LOCAL_NAME, "hl7");
 
 }

@@ -41,7 +41,7 @@ public class AppliesToImpl
 
 	@Override
 	public String getAddress() {
-		final EndpointReference wsEndpointReference = new ListXmlObjectHelper<EndpointReference>()
+		final var wsEndpointReference = new ListXmlObjectHelper<EndpointReference>()
 				.getComponent(EndpointReferenceImpl.class, appliesTo.getUnknownXMLObjects());
 		if ((wsEndpointReference != null) && (wsEndpointReference.getAddress() != null)) {
 			return wsEndpointReference.getAddress().getValue();

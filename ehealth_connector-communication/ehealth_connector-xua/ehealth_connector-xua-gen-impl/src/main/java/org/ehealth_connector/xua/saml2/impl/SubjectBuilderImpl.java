@@ -102,9 +102,9 @@ public class SubjectBuilderImpl implements SubjectBuilder,
 		if (aSubjectConfirmations != null) {
 			final List<org.opensaml.saml.saml2.core.SubjectConfirmation> subjectConfirms = subject
 					.getSubjectConfirmations();
-			aSubjectConfirmations.forEach(c -> {
-				subjectConfirms.add(((SubjectConfirmationImpl) c).getWrappedObject());
-			});
+			aSubjectConfirmations.forEach(c -> 
+				subjectConfirms.add(((SubjectConfirmationImpl) c).getWrappedObject())
+			);
 		}
 		return this;
 	}

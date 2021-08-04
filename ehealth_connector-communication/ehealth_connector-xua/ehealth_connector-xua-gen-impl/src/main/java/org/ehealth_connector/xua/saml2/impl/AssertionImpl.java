@@ -30,10 +30,11 @@ import org.ehealth_connector.xua.saml2.Attribute;
 import org.ehealth_connector.xua.saml2.AuthnStatement;
 import org.joda.time.DateTime;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionAbstractType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionsType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.NameIDType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <!-- @formatter:off -->
@@ -46,6 +47,8 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectType
 public class AssertionImpl
 		extends AssertionType implements SecurityObject<org.opensaml.saml.saml2.core.Assertion> {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(AssertionImpl.class);
+	
 	/** The assertion. */
 	private org.opensaml.saml.saml2.core.Assertion assertion;
 
@@ -83,9 +86,9 @@ public class AssertionImpl
 				.getAttributeStatements();
 		internalAttributes.forEach(c -> {
 			final List<org.opensaml.saml.saml2.core.Attribute> listOfAttributes = c.getAttributes();
-			listOfAttributes.forEach(d -> {
-				retVal.add(new AttributeBuilderImpl().create(d));
-			});
+			listOfAttributes.forEach(d -> 
+				retVal.add(new AttributeBuilderImpl().create(d))
+			);
 		});
 		return retVal;
 	}
@@ -100,9 +103,9 @@ public class AssertionImpl
 		final List<AuthnStatement> retVal = new ArrayList<>();
 		final List<org.opensaml.saml.saml2.core.AuthnStatement> innerList = assertion
 				.getAuthnStatements();
-		innerList.forEach(c -> {
-			retVal.add(new AuthnStatementBuilderImpl().create(c));
-		});
+		innerList.forEach(c -> 
+			retVal.add(new AuthnStatementBuilderImpl().create(c))
+		);
 		return retVal;
 	}
 
@@ -117,16 +120,16 @@ public class AssertionImpl
 	public void getConditionsAudienceRestrictions() {
 		if (assertion.getConditions() != null
 				&& assertion.getConditions().getAudienceRestrictions() != null) {
-			assertion.getConditions().getAudienceRestrictions().forEach(audres -> {
-				getConditions().getConditionOrAudienceRestrictionOrOneTimeUse().add(new AudienceRestrictionBuilderImpl().create(audres));
-			});
+			assertion.getConditions().getAudienceRestrictions().forEach(audres -> 
+				getConditions().getConditionOrAudienceRestrictionOrOneTimeUse().add(new AudienceRestrictionBuilderImpl().create(audres))
+			);
 		}
 	}
 
 	public Calendar getConditionsNotBefore() {
 		if (assertion.getConditions() != null) {
 			final DateTime instant = assertion.getConditions().getNotBefore();
-			final Calendar retVal = Calendar.getInstance();
+			final var retVal = Calendar.getInstance();
 			retVal.setTimeInMillis(instant.getMillis());
 			return retVal;
 		}
@@ -136,7 +139,7 @@ public class AssertionImpl
 	public Calendar getConditionsNotOnOrAfter() {
 		if (assertion.getConditions() != null) {
 			final DateTime instant = assertion.getConditions().getNotOnOrAfter();
-			final Calendar retVal = Calendar.getInstance();
+			final var retVal = Calendar.getInstance();
 			retVal.setTimeInMillis(instant.getMillis());
 			return retVal;
 		}
@@ -163,7 +166,7 @@ public class AssertionImpl
 	public XMLGregorianCalendar getIssueInstant() {
 		if(assertion.getIssueInstant() != null) {
 			final DateTime instant = assertion.getIssueInstant();
-			final GregorianCalendar retVal = new GregorianCalendar();
+			final var retVal = new GregorianCalendar();
 			retVal.setTimeInMillis(instant.getMillis());
 				
 			XMLGregorianCalendar xmlGregCal = null;
@@ -171,7 +174,7 @@ public class AssertionImpl
 				xmlGregCal = DatatypeFactory.newInstance().newXMLGregorianCalendar(retVal);
 				setIssueInstant(xmlGregCal);
 			} catch (DatatypeConfigurationException e) {
-				e.printStackTrace();
+				LOGGER.error(e.getMessage(), e);
 			}
 			
 			return xmlGregCal;

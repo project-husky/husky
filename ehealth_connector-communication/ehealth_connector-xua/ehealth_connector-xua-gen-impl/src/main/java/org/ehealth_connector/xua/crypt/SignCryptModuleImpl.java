@@ -25,11 +25,10 @@ import java.security.PrivateKey;
 import java.security.UnrecoverableEntryException;
 import java.security.cert.X509Certificate;
 
-import org.ehealth_connector.xua.crypt.SignCryptModule;
-import org.ehealth_connector.xua.exceptions.SigningException;
-import org.ehealth_connector.xua.saml2.ArtifactResolve;
 import org.ehealth_connector.xua.authentication.AuthnRequest;
 import org.ehealth_connector.xua.authentication.impl.AuthnRequestImpl;
+import org.ehealth_connector.xua.exceptions.SigningException;
+import org.ehealth_connector.xua.saml2.ArtifactResolve;
 import org.ehealth_connector.xua.saml2.impl.ArtifactResolveImpl;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.opensaml.core.xml.io.MarshallingException;
@@ -57,7 +56,7 @@ import org.slf4j.LoggerFactory;
  */
 public class SignCryptModuleImpl implements SignCryptModule {
 
-	private static Logger LOG = LoggerFactory.getLogger(SignCryptModuleImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(SignCryptModuleImpl.class);
 
 	private KeyStore keyStore;
 
@@ -96,15 +95,14 @@ public class SignCryptModuleImpl implements SignCryptModule {
 	 */
 	private BasicX509Credential getSigningCredential(String aSigningAlias) throws SigningException {
 		try {
-			final PrivateKeyEntry privateKeyEntry = (PrivateKeyEntry) keyStore.getEntry(
+			final var privateKeyEntry = (PrivateKeyEntry) keyStore.getEntry(
 					aSigningAlias, new PasswordProtection(keyStorePassword.toCharArray()));
-			final PrivateKey privateKey = privateKeyEntry.getPrivateKey();
+			final var privateKey = privateKeyEntry.getPrivateKey();
 			final X509Certificate certificate = (X509Certificate) privateKeyEntry.getCertificate();
 
-			LOG.debug(certificate.getIssuerDN().getName());
-			LOG.debug(certificate.getSubjectDN().getName());
-
-			final BasicX509Credential credential = new BasicX509Credential(certificate, privateKey);
+			LOG.debug(certificate.getIssuerX500Principal().getName());
+			
+			final var credential = new BasicX509Credential(certificate, privateKey);
 			credential.setEntityId(aSigningAlias);
 
 			return credential;
@@ -143,14 +141,14 @@ public class SignCryptModuleImpl implements SignCryptModule {
 			signature.setCanonicalizationAlgorithm(
 					SignatureConstants.ALGO_ID_C14N_EXCL_OMIT_COMMENTS);
 
-			final X509KeyInfoGeneratorFactory keyInfoGeneratorFactory = new X509KeyInfoGeneratorFactory();
+			final var keyInfoGeneratorFactory = new X509KeyInfoGeneratorFactory();
 			keyInfoGeneratorFactory.setEmitEntityCertificate(true);
 			keyInfoGeneratorFactory
 					.setX509DigestAlgorithmURI(SignatureConstants.ALGO_ID_DIGEST_SHA1);
 
 			if (keyInfoGeneratorFactory.handles(signingCredential)) {
-				final KeyInfoGenerator keyInfoGenerator = keyInfoGeneratorFactory.newInstance();
-				final KeyInfo keyInfo = keyInfoGenerator.generate(signingCredential);
+				final var keyInfoGenerator = keyInfoGeneratorFactory.newInstance();
+				final var keyInfo = keyInfoGenerator.generate(signingCredential);
 
 				signature.setKeyInfo(keyInfo);
 

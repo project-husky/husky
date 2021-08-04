@@ -41,7 +41,7 @@ public class AssertionValidatorImpl extends AbstractValidator implements Asserti
 
 	@Override
 	public void validate(AssertionType aType, String aAlias) throws ValidationException {
-		final org.opensaml.saml.saml2.core.Assertion innerAssertion = ((AssertionImpl) aType)
+		final var innerAssertion = ((AssertionImpl) aType)
 				.getWrappedObject();
 		innerAssertion.getDOM().setIdAttribute("ID", true);
 		validate(innerAssertion.getSignature(), aAlias);

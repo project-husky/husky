@@ -95,7 +95,6 @@ public class SubjectConfirmationBuilderImpl implements SubjectConfirmationBuilde
 	public SubjectConfirmationBuilder inResponseTo(String aResponseTo) {
 		if (aResponseTo != null) {
 			subjectConfirmationData.setInResponseTo(aResponseTo);
-			;
 		}
 		return this;
 	}
@@ -121,7 +120,7 @@ public class SubjectConfirmationBuilderImpl implements SubjectConfirmationBuilde
 	@Override
 	public SubjectConfirmationBuilder notBefore(Calendar aNotBefore) {
 		if (aNotBefore != null) {
-			final DateTime dateTime = new DateTime(aNotBefore.getTimeInMillis());
+			final var dateTime = new DateTime(aNotBefore.getTimeInMillis());
 			subjectConfirmationData.setNotBefore(dateTime);
 		}
 		return this;
@@ -135,7 +134,7 @@ public class SubjectConfirmationBuilderImpl implements SubjectConfirmationBuilde
 	@Override
 	public SubjectConfirmationBuilder notOnOrAfter(Calendar aNotOnOrAfter) {
 		if (aNotOnOrAfter != null) {
-			final DateTime dateTime = new DateTime(aNotOnOrAfter.getTimeInMillis());
+			final var dateTime = new DateTime(aNotOnOrAfter.getTimeInMillis());
 			subjectConfirmationData.setNotOnOrAfter(dateTime);
 		}
 		return this;
