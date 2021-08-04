@@ -125,7 +125,7 @@ public class PkiManagerImplTest {
 		assertTrue(keyStore.isCertificateEntry(testCertAlias));
 		final X509Certificate ref1 = (X509Certificate) keyStore.getCertificate(testCertAlias);
 		assertNotNull(ref1);
-		LoggerFactory.getLogger(getClass()).info(ref1.getSubjectDN().toString());
+		LoggerFactory.getLogger(getClass()).info(ref1.getIssuerX500Principal().toString());
 	}
 
 	/**

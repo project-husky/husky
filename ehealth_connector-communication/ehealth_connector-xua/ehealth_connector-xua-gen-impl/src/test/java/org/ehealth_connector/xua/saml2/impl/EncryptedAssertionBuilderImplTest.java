@@ -22,8 +22,6 @@ import static org.junit.Assert.assertNotNull;
 import java.util.UUID;
 
 import org.ehealth_connector.xua.saml2.EncryptedAssertion;
-import org.ehealth_connector.xua.saml2.impl.EncryptedAssertionBuilderImpl;
-import org.ehealth_connector.xua.saml2.impl.EncryptedAssertionImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.opensaml.xmlsec.encryption.EncryptedData;

@@ -26,7 +26,6 @@ import java.util.UUID;
 
 import javax.xml.bind.JAXBElement;
 
-import org.ehealth_connector.xua.saml2.SubjectConfirmation;
 import org.junit.Before;
 import org.junit.Test;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.NameIDType;

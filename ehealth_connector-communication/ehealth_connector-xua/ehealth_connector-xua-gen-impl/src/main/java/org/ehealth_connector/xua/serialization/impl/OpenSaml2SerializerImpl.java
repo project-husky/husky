@@ -18,7 +18,6 @@ package org.ehealth_connector.xua.serialization.impl;
 
 import java.io.ByteArrayOutputStream;
 
-import javax.xml.XMLConstants;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
