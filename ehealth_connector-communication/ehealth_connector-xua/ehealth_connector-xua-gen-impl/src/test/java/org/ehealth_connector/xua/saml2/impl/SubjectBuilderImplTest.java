@@ -123,7 +123,7 @@ public class SubjectBuilderImplTest {
 		final SubjectType ref = builder.subjectConfirmations(testSubjectConfirmations).create();
 		assertArrayEquals(
 				testSubjectConfirmations
-						.toArray(new SubjectConfirmation[testSubjectConfirmations.size()]),
+						.toArray(new SubjectConfirmationType[testSubjectConfirmations.size()]),
 				extractSubjectConfirmationTypeFromJaxbElements(ref)
 						.toArray(new SubjectConfirmationType[testSubjectConfirmations.size()]));
 	}

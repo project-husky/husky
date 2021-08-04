@@ -36,13 +36,13 @@ import org.ehealth_connector.xua.communication.xua.XUserAssertionResponse;
 import org.ehealth_connector.xua.core.SecurityHeaderElement;
 import org.ehealth_connector.xua.exceptions.ClientSendException;
 import org.ehealth_connector.xua.exceptions.SerializeException;
-import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.EncryptedAssertion;
 import org.ehealth_connector.xua.communication.soap.impl.WsaHeaderValue;
 import org.ehealth_connector.xua.communication.xua.impl.XUserAssertionResponseBuilderImpl;
 import org.ehealth_connector.xua.serialization.impl.AssertionSerializerImpl;
 import org.ehealth_connector.xua.serialization.impl.EncryptedAssertionSerializerImpl;
 import org.ehealth_connector.xua.serialization.impl.XUserAssertionRequestSerializerImpl;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.opensaml.core.xml.io.UnmarshallingException;
 import org.opensaml.soap.wstrust.RequestSecurityTokenResponse;
 import org.opensaml.soap.wstrust.RequestSecurityTokenResponseCollection;
@@ -75,9 +75,9 @@ public class SimpleXuaClient extends AbstractSoapClient<List<XUserAssertionRespo
 		final Element envelopElement = createEnvelope();
 
 		Element headerAssertionElement = null;
-		if (aSecurityHeaderElement instanceof Assertion) {
+		if (aSecurityHeaderElement instanceof AssertionType) {
 			headerAssertionElement = new AssertionSerializerImpl()
-					.toXmlElement((Assertion) aSecurityHeaderElement);
+					.toXmlElement((AssertionType) aSecurityHeaderElement);
 		} else if (aSecurityHeaderElement instanceof EncryptedAssertion) {
 			headerAssertionElement = new EncryptedAssertionSerializerImpl()
 					.toXmlElement((EncryptedAssertion) aSecurityHeaderElement);

@@ -47,6 +47,9 @@ public class SubjectImpl extends SubjectType implements SecurityObject<org.opens
 	 */
 	protected SubjectImpl(org.opensaml.saml.saml2.core.Subject aSubject) {
 		subject = aSubject;
+		
+		getNameID();
+		getSubjectConfirmations();
 	}
 
 	/**
@@ -76,12 +79,15 @@ public class SubjectImpl extends SubjectType implements SecurityObject<org.opens
 	 *
 	 * @see org.ehealth_connector.xua.saml2.Subject#getSubjectConfirmations()
 	 */
-	public List<SubjectConfirmationType> getSubjectConfirmations() {
+	public List<SubjectConfirmationType> getSubjectConfirmations() {		
 		final List<SubjectConfirmationType> retVal = new ArrayList<>();
-		final List<org.opensaml.saml.saml2.core.SubjectConfirmation> innerConfirms = subject
-				.getSubjectConfirmations();
-		innerConfirms.forEach(c -> getContent().add(new JAXBElement<>(c.getElementQName(), SubjectConfirmationType.class, new SubjectConfirmationBuilderImpl().create(c))));
 		
+		if(subject.getSubjectConfirmations() != null) {
+			final List<org.opensaml.saml.saml2.core.SubjectConfirmation> innerConfirms = subject
+					.getSubjectConfirmations();
+			innerConfirms.forEach(c -> getContent().add(new JAXBElement<>(c.getElementQName(), SubjectConfirmationType.class, new SubjectConfirmationBuilderImpl().create(c))));
+		}
+				
 		return retVal;
 	}
 

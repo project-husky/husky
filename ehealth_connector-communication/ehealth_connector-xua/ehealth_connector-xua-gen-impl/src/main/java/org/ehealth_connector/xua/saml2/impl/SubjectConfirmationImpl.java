@@ -51,6 +51,13 @@ public class SubjectConfirmationImpl extends SubjectConfirmationType implements
 			org.opensaml.saml.saml2.core.SubjectConfirmation aInternalObject) {
 		subjectConfirmation = aInternalObject;
 		setSubjectConfirmationData(new SubjectConfirmationDataType());
+		
+		getAddress();
+		getInResponseTo();
+		getMethod();
+		getNotBefore();
+		getNotOnOrAfter();
+		getRecipient();
 	}
 
 	/**
@@ -121,7 +128,7 @@ public class SubjectConfirmationImpl extends SubjectConfirmationType implements
 	 * @see org.ehealth_connector.xua.saml2.SubjectConfirmation#getNotBefore()
 	 */
 	public Calendar getNotBefore() {
-		if (subjectConfirmation.getSubjectConfirmationData() != null) {
+		if (subjectConfirmation.getSubjectConfirmationData() != null && subjectConfirmation.getSubjectConfirmationData().getNotBefore() != null) {
 			final DateTime notOnOrAfter = subjectConfirmation.getSubjectConfirmationData()
 					.getNotBefore();
 			final var retVal = new GregorianCalendar();
@@ -147,7 +154,7 @@ public class SubjectConfirmationImpl extends SubjectConfirmationType implements
 	 * @see org.ehealth_connector.xua.saml2.SubjectConfirmation#getNotOnOrAfter()
 	 */
 	public Calendar getNotOnOrAfter() {
-		if (subjectConfirmation.getSubjectConfirmationData() != null) {
+		if (subjectConfirmation.getSubjectConfirmationData() != null && subjectConfirmation.getSubjectConfirmationData().getNotOnOrAfter() != null) {
 			final DateTime notOnOrAfter = subjectConfirmation.getSubjectConfirmationData()
 					.getNotOnOrAfter();
 			final var retVal = new GregorianCalendar();

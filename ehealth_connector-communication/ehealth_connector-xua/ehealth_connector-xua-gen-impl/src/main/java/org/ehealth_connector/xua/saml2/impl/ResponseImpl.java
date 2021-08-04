@@ -21,7 +21,6 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.ehealth_connector.xua.core.SecurityObject;
-import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.EncryptedAssertion;
 import org.ehealth_connector.xua.saml2.Response;
 import org.ehealth_connector.xua.saml2.Status;

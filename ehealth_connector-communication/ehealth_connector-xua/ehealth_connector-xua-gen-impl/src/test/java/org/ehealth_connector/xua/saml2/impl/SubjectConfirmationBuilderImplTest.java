@@ -18,7 +18,9 @@ package org.ehealth_connector.xua.saml2.impl;
 
 import static org.junit.Assert.assertEquals;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import org.ehealth_connector.xua.saml2.SubjectConfirmation;
 import org.ehealth_connector.xua.saml2.SubjectConfirmationBuilder;
@@ -35,8 +37,8 @@ public class SubjectConfirmationBuilderImplTest {
 	private String testInResponseTO;
 	private org.opensaml.saml.saml2.core.SubjectConfirmation testInternalObject;
 	private String testMethod;
-	private Calendar testNotBefore;
-	private Calendar testNotOnOrAfter;
+	private GregorianCalendar testNotBefore;
+	private GregorianCalendar testNotOnOrAfter;
 	private String testRecepient;
 
 	@Before
@@ -48,10 +50,10 @@ public class SubjectConfirmationBuilderImplTest {
 
 		final Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_YEAR, -120);
-		testNotOnOrAfter = (Calendar) cal.clone();
+		testNotOnOrAfter = (GregorianCalendar) cal.clone();
 
 		cal.add(Calendar.DAY_OF_YEAR, 66);
-		testNotBefore = (Calendar) cal.clone();
+		testNotBefore = (GregorianCalendar) cal.clone();
 
 		testAddress = "http://my.address.ch/test/it/now";
 
@@ -109,7 +111,8 @@ public class SubjectConfirmationBuilderImplTest {
 	@Test
 	public void testNotBefore() {
 		final SubjectConfirmationType ref = builder.notBefore(testNotBefore).create();
-		assertEquals(testNotBefore, ref.getSubjectConfirmationData().getNotBefore().toGregorianCalendar());
+		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmssZ");
+		assertEquals(sdf.format(testNotBefore.getTime()), sdf.format(ref.getSubjectConfirmationData().getNotBefore().toGregorianCalendar().getTime()));
 	}
 
 	/**
@@ -119,7 +122,8 @@ public class SubjectConfirmationBuilderImplTest {
 	@Test
 	public void testNotOnOrAfter() {
 		final SubjectConfirmationType ref = builder.notOnOrAfter(testNotOnOrAfter).create();
-		assertEquals(testNotOnOrAfter, ref.getSubjectConfirmationData().getNotOnOrAfter().toGregorianCalendar());
+		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmssZ");
+		assertEquals(sdf.format(testNotOnOrAfter.getTime()), sdf.format(ref.getSubjectConfirmationData().getNotOnOrAfter().toGregorianCalendar().getTime()));
 	}
 
 	/**

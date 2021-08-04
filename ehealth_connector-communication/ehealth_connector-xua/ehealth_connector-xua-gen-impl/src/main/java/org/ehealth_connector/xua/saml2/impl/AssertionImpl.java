@@ -57,6 +57,18 @@ public class AssertionImpl
 	 */
 	protected AssertionImpl(org.opensaml.saml.saml2.core.Assertion aAssertion) {
 		assertion = aAssertion;
+		
+		getAttributes();
+		getAuthnStatements();
+		getConditions();
+		getConditionsAudienceRestrictions();
+		getId();
+		getConditionsNotBefore();
+		getConditionsNotOnOrAfter();
+		getIssueInstant();
+		getIssuer();
+		getSubject();
+		getVersion();
 	}
 
 	/**
@@ -102,15 +114,13 @@ public class AssertionImpl
 		return null;
 	}
 
-	public List<ConditionAbstractType> getConditionsAudienceRestrictions() {
+	public void getConditionsAudienceRestrictions() {
 		if (assertion.getConditions() != null
 				&& assertion.getConditions().getAudienceRestrictions() != null) {
 			assertion.getConditions().getAudienceRestrictions().forEach(audres -> {
 				getConditions().getConditionOrAudienceRestrictionOrOneTimeUse().add(new AudienceRestrictionBuilderImpl().create(audres));
 			});
 		}
-		
-		return getConditions().getConditionOrAudienceRestrictionOrOneTimeUse();
 	}
 
 	public Calendar getConditionsNotBefore() {
@@ -151,19 +161,23 @@ public class AssertionImpl
 	 */
 	@Override
 	public XMLGregorianCalendar getIssueInstant() {
-		final DateTime instant = assertion.getIssueInstant();
-		final GregorianCalendar retVal = new GregorianCalendar();
-		retVal.setTimeInMillis(instant.getMillis());
+		if(assertion.getIssueInstant() != null) {
+			final DateTime instant = assertion.getIssueInstant();
+			final GregorianCalendar retVal = new GregorianCalendar();
+			retVal.setTimeInMillis(instant.getMillis());
+				
+			XMLGregorianCalendar xmlGregCal = null;
+			try {
+				xmlGregCal = DatatypeFactory.newInstance().newXMLGregorianCalendar(retVal);
+				setIssueInstant(xmlGregCal);
+			} catch (DatatypeConfigurationException e) {
+				e.printStackTrace();
+			}
 			
-		XMLGregorianCalendar xmlGregCal = null;
-		try {
-			xmlGregCal = DatatypeFactory.newInstance().newXMLGregorianCalendar(retVal);
-			setIssueInstant(xmlGregCal);
-		} catch (DatatypeConfigurationException e) {
-			e.printStackTrace();
+			return xmlGregCal;
 		}
 		
-		return xmlGregCal;
+		return null;		
 	}
 
 	/**

@@ -17,7 +17,6 @@
 package org.ehealth_connector.xua.deserialization.impl;
 
 import org.ehealth_connector.xua.exceptions.DeserializeException;
-import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.impl.AssertionBuilderImpl;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.w3c.dom.Element;

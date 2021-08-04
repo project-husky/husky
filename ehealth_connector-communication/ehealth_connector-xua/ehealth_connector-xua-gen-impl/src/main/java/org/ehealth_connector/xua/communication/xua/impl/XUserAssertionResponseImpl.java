@@ -22,7 +22,6 @@ import javax.xml.namespace.QName;
 
 import org.ehealth_connector.xua.communication.xua.XUserAssertionResponse;
 import org.ehealth_connector.xua.core.SecurityObject;
-import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.impl.AssertionBuilderImpl;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.opensaml.core.xml.XMLObject;

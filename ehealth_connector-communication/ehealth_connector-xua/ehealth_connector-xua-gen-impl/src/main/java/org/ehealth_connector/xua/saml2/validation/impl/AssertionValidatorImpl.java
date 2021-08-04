@@ -19,8 +19,8 @@ package org.ehealth_connector.xua.saml2.validation.impl;
 import java.security.KeyStore;
 
 import org.ehealth_connector.xua.exceptions.ValidationException;
-import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.validation.AssertionValidator;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.ehealth_connector.xua.saml2.impl.AssertionImpl;
 
 /**
@@ -40,7 +40,7 @@ public class AssertionValidatorImpl extends AbstractValidator implements Asserti
 	}
 
 	@Override
-	public void validate(Assertion aType, String aAlias) throws ValidationException {
+	public void validate(AssertionType aType, String aAlias) throws ValidationException {
 		final org.opensaml.saml.saml2.core.Assertion innerAssertion = ((AssertionImpl) aType)
 				.getWrappedObject();
 		innerAssertion.getDOM().setIdAttribute("ID", true);
