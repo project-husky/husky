@@ -37,7 +37,7 @@ import org.ehealth_connector.xua.communication.config.impl.IdpClientViaHttpProxy
  */
 public class ClientFactory {
 	
-	private ClientFactory() throws IllegalStateException {
+	protected ClientFactory() throws IllegalStateException {
 		throw new IllegalStateException("This is a factory class!");
 	}
 	

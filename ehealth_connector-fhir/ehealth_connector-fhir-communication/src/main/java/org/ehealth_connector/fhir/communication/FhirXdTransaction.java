@@ -17,6 +17,7 @@
 
 package org.ehealth_connector.fhir.communication;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
@@ -420,8 +421,9 @@ public class FhirXdTransaction {
 	 * @param fileName
 	 *            the file name
 	 * @return the transaction
+	 * @throws IOException 
 	 */
-	public Transaction readTransactionFromFile(String fileName) {
+	public Transaction readTransactionFromFile(String fileName) throws IOException {
 		final String resourceString = FhirCommon.getXmlResource(fileName);
 		final IParser parser = fhirCtx.newXmlParser();
 		return parser.parseResource(Transaction.class, resourceString);

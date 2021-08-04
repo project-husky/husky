@@ -94,9 +94,7 @@ public class OpenSaml2SerializerImpl implements OpenSaml2Serializer {
 		try {
 			final var element = serializeToXml(aXmlObject);
 
-			var transformerFactory = javax.xml.transform.TransformerFactory.newInstance();
-			transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-			transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
+			var transformerFactory = javax.xml.transform.TransformerFactory.newInstance();			
 			final var tr = transformerFactory.newTransformer();
 			tr.setOutputProperty(OutputKeys.INDENT, "no");
 			tr.setOutputProperty(OutputKeys.METHOD, "xml");

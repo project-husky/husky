@@ -1897,7 +1897,7 @@ public class FhirCommon {
 	 *         <div class="fr"></div>
 	 * @throws IOException 
 	 */
-	public static String getXmlResource(String fileName) throws IOException {
+	public static String getXmlResource(String fileName){
 		final var sb = new StringBuilder();
 		try (final var bufferedReader = new BufferedReader(
 				new InputStreamReader(new FileInputStream(fileName), StandardCharsets.UTF_8))){
@@ -1913,6 +1913,8 @@ public class FhirCommon {
 			e1.printStackTrace();
 		} catch (final UnsupportedEncodingException e1) {
 			e1.printStackTrace();
+		} catch (IOException e2) {
+			e2.printStackTrace();
 		}
 		return sb.toString();
 	}

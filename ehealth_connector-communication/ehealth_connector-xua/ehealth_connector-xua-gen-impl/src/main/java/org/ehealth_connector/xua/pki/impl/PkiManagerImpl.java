@@ -73,7 +73,7 @@ public class PkiManagerImpl implements PkiManager {
 
 			var privateKeyContent = new String(Files.readAllBytes(Paths.get(keyUri)), StandardCharsets.UTF_8);
 
-			privateKeyContent = privateKeyContent.replace("\\n", "").replace("\\r", "")
+			privateKeyContent = privateKeyContent.replace("\n", "").replace("\r", "")
 					.replace("-----BEGIN PRIVATE KEY-----", "")
 					.replace("-----END PRIVATE KEY-----", "");
 
@@ -117,7 +117,7 @@ public class PkiManagerImpl implements PkiManager {
 	 */
 	@Override
 	public KeyStore createNewStore(String storeType) throws KeyStoreException {
-		final KeyStore keyStore = KeyStore.getInstance(storeType);
+		final var keyStore = KeyStore.getInstance(storeType);
 		try {
 			keyStore.load(null, null);
 		} catch (NoSuchAlgorithmException | CertificateException | IOException e) {
