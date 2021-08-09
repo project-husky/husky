@@ -32,19 +32,20 @@ public class WebServiceClient<T> implements CamelContextAware {
         return result.getMessage().getBody(outType);
     }
     
-    protected T send(String endpoint, Object input, SecurityHeaderElement securityHeaderElement, Class<T> outType) throws Exception {
+	protected T send(String endpoint, Object input, SecurityHeaderElement securityHeaderElement, Class<T> outType)
+			throws Exception {
         var result = send(endpoint, input, securityHeaderElement);
         return result.getMessage().getBody(outType);
     }
     
-    private Exchange send(String endpoint, Object body, SecurityHeaderElement securityHeaderElement) throws Exception {
+	private Exchange send(String endpoint, Object body, SecurityHeaderElement securityHeaderElement) throws Exception {
         Exchange exchange = new DefaultExchange(getCamelContext());
         exchange.getIn().setBody(body);
                
         
         if(securityHeaderElement != null) {
-        	var serializedSecurityElement = new OpenSaml2SerializerImpl()
-    				.serializeToXml((XMLObject) securityHeaderElement.getWrappedObject());
+			var serializedSecurityElement = new OpenSaml2SerializerImpl()
+					.serializeToXml((XMLObject) securityHeaderElement.getWrappedObject());
             
             var newSoapHeader = new SoapHeader(new QName(
     				"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd",
