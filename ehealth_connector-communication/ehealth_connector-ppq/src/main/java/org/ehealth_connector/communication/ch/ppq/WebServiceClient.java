@@ -27,7 +27,7 @@ public class WebServiceClient<T> implements CamelContextAware {
 	}
 	
     protected T send(String endpoint, Object input, Class<T> outType) throws Exception {
-    	SecurityHeaderElement securityHeaderElement = null;
+		SecurityHeaderElement securityHeaderElement = null;
         var result = send(endpoint, input, securityHeaderElement);
         return result.getMessage().getBody(outType);
     }

@@ -26,10 +26,10 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.ehealth_connector.xua.core.SecurityObject;
+import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.Attribute;
 import org.ehealth_connector.xua.saml2.AuthnStatement;
 import org.joda.time.DateTime;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionsType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.NameIDType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectType;
@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
  * <!-- @formatter:on -->
  */
 public class AssertionImpl
-		extends AssertionType implements SecurityObject<org.opensaml.saml.saml2.core.Assertion> {
+		extends Assertion implements SecurityObject<org.opensaml.saml.saml2.core.Assertion> {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(AssertionImpl.class);
 	
