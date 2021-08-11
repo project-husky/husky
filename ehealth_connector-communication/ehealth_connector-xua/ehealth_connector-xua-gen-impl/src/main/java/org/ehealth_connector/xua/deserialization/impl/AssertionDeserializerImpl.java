@@ -17,8 +17,8 @@
 package org.ehealth_connector.xua.deserialization.impl;
 
 import org.ehealth_connector.xua.exceptions.DeserializeException;
+import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.impl.AssertionBuilderImpl;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.w3c.dom.Element;
 
 /**
@@ -30,10 +30,10 @@ import org.w3c.dom.Element;
  * <!-- @formatter:on -->
  */
 public class AssertionDeserializerImpl
-		extends AbstractDeserializerImpl<org.opensaml.saml.saml2.core.Assertion, AssertionType> {
+		extends AbstractDeserializerImpl<org.opensaml.saml.saml2.core.Assertion, Assertion> {
 
 	@Override
-	public AssertionType fromXmlByteArray(byte[] aByteArray) throws DeserializeException {
+	public Assertion fromXmlByteArray(byte[] aByteArray) throws DeserializeException {
 		try {
 			final org.opensaml.saml.saml2.core.Assertion request = getOpenSamlDeserializer()
 					.deserializeFromByteArray(aByteArray);
@@ -44,7 +44,7 @@ public class AssertionDeserializerImpl
 	}
 
 	@Override
-	public AssertionType fromXmlElement(Element aXmlElement) throws DeserializeException {
+	public Assertion fromXmlElement(Element aXmlElement) throws DeserializeException {
 		try {
 			final org.opensaml.saml.saml2.core.Assertion request = getOpenSamlDeserializer()
 					.deserializeFromXml(aXmlElement);
@@ -55,7 +55,7 @@ public class AssertionDeserializerImpl
 	}
 
 	@Override
-	public AssertionType fromXmlString(String aXmlString) throws DeserializeException {
+	public Assertion fromXmlString(String aXmlString) throws DeserializeException {
 		try {
 			final org.opensaml.saml.saml2.core.Assertion request = getOpenSamlDeserializer()
 					.deserializeFromString(aXmlString);

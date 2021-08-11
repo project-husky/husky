@@ -20,7 +20,6 @@ import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeed;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeedResponse;
 import org.ehealth_connector.xua.core.SecurityHeaderElement;
 import org.ehealth_connector.xua.exceptions.ClientSendException;
-imp.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 
 /**
  * <!-- @formatter:off -->

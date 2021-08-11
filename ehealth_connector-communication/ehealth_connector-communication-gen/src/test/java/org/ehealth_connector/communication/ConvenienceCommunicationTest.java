@@ -30,20 +30,20 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import org.ehealth_connector.common.communication.AffinityDomain;
+import org.ehealth_connector.common.communication.AtnaConfig.AtnaConfigMode;
 import org.ehealth_connector.common.communication.Destination;
 import org.ehealth_connector.common.communication.DocumentMetadata;
-import org.ehealth_connector.common.communication.AtnaConfig.AtnaConfigMode;
 import org.ehealth_connector.common.communication.DocumentMetadata.DocumentMetadataExtractionMode;
 import org.ehealth_connector.common.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.xua.deserialization.impl.AssertionDeserializerImpl;
 import org.ehealth_connector.xua.exceptions.DeserializeException;
 import org.ehealth_connector.xua.exceptions.SerializeException;
+import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.serialization.impl.AssertionSerializerImpl;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.response.XDSQueryResponseType;
 import org.openhealthtools.ihe.xua.XUAAssertion;
@@ -84,7 +84,7 @@ public class ConvenienceCommunicationTest {
 	Destination repo;
 	ConvenienceCommunication c;
 	XDSQueryResponseType qr;
-	private AssertionType testAssertion;
+	private Assertion testAssertion;
 
 	@Before
 	public void init()
