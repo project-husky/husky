@@ -17,9 +17,9 @@
 package org.ehealth_connector.xua.serialization.impl;
 
 import org.ehealth_connector.xua.exceptions.SerializeException;
-import org.ehealth_connector.xua.serialization.Serializer;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
+import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.impl.AssertionImpl;
+import org.ehealth_connector.xua.serialization.Serializer;
 import org.w3c.dom.Element;
 
 /**
@@ -31,10 +31,10 @@ import org.w3c.dom.Element;
  * <!-- @formatter:on -->
  */
 public class AssertionSerializerImpl extends AbstractSerializerImpl
-		implements Serializer<AssertionType> {
+		implements Serializer<Assertion> {
 
 	@Override
-	public byte[] toXmlByteArray(AssertionType aSecurityObject) throws SerializeException {
+	public byte[] toXmlByteArray(Assertion aSecurityObject) throws SerializeException {
 		try {
 			return getOpenSamlSerializer()
 					.serializeToByteArray(((AssertionImpl) aSecurityObject).getWrappedObject());
@@ -44,7 +44,7 @@ public class AssertionSerializerImpl extends AbstractSerializerImpl
 	}
 
 	@Override
-	public Element toXmlElement(AssertionType aSecurityObject) throws SerializeException {
+	public Element toXmlElement(Assertion aSecurityObject) throws SerializeException {
 		try {
 			return getOpenSamlSerializer()
 					.serializeToXml(((AssertionImpl) aSecurityObject).getWrappedObject());
@@ -54,7 +54,7 @@ public class AssertionSerializerImpl extends AbstractSerializerImpl
 	}
 
 	@Override
-	public String toXmlString(AssertionType aSecurityObject) throws SerializeException {
+	public String toXmlString(Assertion aSecurityObject) throws SerializeException {
 		try {
 			return getOpenSamlSerializer()
 					.serializeToString(((AssertionImpl) aSecurityObject).getWrappedObject());

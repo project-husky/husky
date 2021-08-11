@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.xua.saml2.validation;
 
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
+import org.ehealth_connector.xua.saml2.Assertion;
 
 /**
  * <!-- @formatter:off -->
@@ -26,7 +26,7 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionTy
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public interface AssertionValidator extends GenericValidator<AssertionType> {
+public interface AssertionValidator extends GenericValidator<Assertion> {
 
 	// There are no special methods defined, but the interface has to be
 	// declared for selection reasons.

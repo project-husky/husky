@@ -20,6 +20,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
+import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.AssertionBuilder;
 import org.ehealth_connector.xua.saml2.Attribute;
 import org.joda.time.DateTime;
@@ -89,7 +90,7 @@ public class AssertionBuilderImpl implements AssertionBuilder,
 	 * @see org.ehealth_connector.xua.saml2.AssertionBuilder#create()
 	 */
 	@Override
-	public AssertionType create() {
+	public Assertion create() {
 		return new AssertionImpl(wrappedObject);
 	}
 
@@ -100,7 +101,7 @@ public class AssertionBuilderImpl implements AssertionBuilder,
 	 * @see org.ehealth_connector.xua.core.SecurityObjectBuilder#create(java.lang.Object)
 	 */
 	@Override
-	public AssertionType create(org.opensaml.saml.saml2.core.Assertion aInternalObject) {
+	public Assertion create(org.opensaml.saml.saml2.core.Assertion aInternalObject) {
 		return new AssertionImpl(aInternalObject);
 	}
 
