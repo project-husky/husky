@@ -63,11 +63,6 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 	 */
 	private final static String COMPLETE_DATE_PATTERN = "dd MMMMM yyyy HH:mm";
 	/**
-	 * Template ID used for medication instructions
-	 */
-	private final static String DOSAGE_INTAKE_REFERENCE_TEMPLATE_ID = new DosageIntakeModeEntryContentModule()
-			.getHl7TemplateId().get(0).getRoot(); // "2.16.756.5.30.1.1.10.4.37";
-	/**
 	 * Key to retrieve "important info" sentence in "Messages.properties" file
 	 */
 	private final static String IMPORTANT_INFO_TAG = "important_info";
@@ -1283,26 +1278,6 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 	}
 
 	/**
-	 * <div class="en">Add the the reference of the dosageIntake</div>
-	 */
-	private void addDosageIntakeReference() {
-
-		if (this.entry != null && this.entry.getSubstanceAdministration() != null
-				&& this.entry.getSubstanceAdministration().getEntryRelationship() != null) {
-			POCDMT000040EntryRelationship pocdmt000040EntryRelationship = MedicationTreatmentPlanEntryContentModule
-					.getPredefinedEntryRelationshipCompNull();
-			DosageIntakeModeEntryContentModule dosageIntakeModeEntryContentModule = new DosageIntakeModeEntryContentModule();
-			ED ed = new ED();
-			setReferenceAndGetXmlContent(ed, EmedTextNarrativeAttributes.FREQUENCY.getCodeValue());
-			dosageIntakeModeEntryContentModule.setHl7Text(ed);
-			pocdmt000040EntryRelationship
-					.setSubstanceAdministration(dosageIntakeModeEntryContentModule);
-			this.entry.getSubstanceAdministration().getEntryRelationship()
-					.add(pocdmt000040EntryRelationship);
-		}
-	}
-
-	/**
 	 * <div class="en">Create all the attributes for the narrativeTable with all
 	 * the values retrieved before</div>
 	 *
@@ -1478,39 +1453,6 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 	}
 
 	/**
-	 * <div class="en"> Fetch the DosageIntakeText relationship if it
-	 * exists</div>
-	 *
-	 * @param entryRelationships
-	 *            list of entryRelationship
-	 * @return dosage intake formatted
-	 */
-	private String getDosageIntakeTextIfExist(
-			List<POCDMT000040EntryRelationship> entryRelationships) {
-
-		String dosageIntakeText = null;
-		if (entryRelationships != null) {
-			POCDMT000040SubstanceAdministration substanceAdministrationDosageIntakeText = entryRelationships
-					.stream()
-					.filter(pocdmt000040EntryRelationship -> pocdmt000040EntryRelationship
-							.getSubstanceAdministration() != null)
-					.filter(pocdmt000040EntryRelationship -> pocdmt000040EntryRelationship
-							.getSubstanceAdministration().getTemplateId().stream()
-							.anyMatch(templateId -> templateId.getRoot()
-									.equals(DOSAGE_INTAKE_REFERENCE_TEMPLATE_ID)))
-					.findFirst().map(POCDMT000040EntryRelationship::getSubstanceAdministration)
-					.orElse(null);
-			if (substanceAdministrationDosageIntakeText != null
-					&& substanceAdministrationDosageIntakeText.getText() != null) {
-				ED dosageIntakeEd = substanceAdministrationDosageIntakeText.getText();
-				dosageIntakeText = setReferenceAndGetXmlContent(dosageIntakeEd,
-						EmedTextNarrativeAttributes.FREQUENCY.getCodeValue());
-			}
-		}
-		return dosageIntakeText;
-	}
-
-	/**
 	 * <div class="en">Get the original text of a cd and set the reference
 	 * id</div>
 	 *
@@ -1665,24 +1607,6 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 			List<POCDMT000040EntryRelationship> entryRelationships) {
 		POCDMT000040SubstanceAdministration substanceAdministration = filterSubstanceAdministrationDis(
 				entryRelationships);
-		String dosageIntakeText = null;
-		if (entryRelationships != null) {
-			dosageIntakeText = this.getDosageIntakeTextIfExist(entryRelationships);
-		}
-
-		if (StringUtils.isEmpty(dosageIntakeText)) {
-			if (substanceAdministration != null && !emedClass.equals("PADV")) {
-				this.parseDosageIntake(substanceAdministration);
-			} else if (substanceAdministration != null) {
-				this.parseChangeDosageInstruction(substanceAdministration);
-			}
-
-			if (dosageIntakeText == null) {
-				this.addDosageIntakeReference();
-			}
-		} else {
-			this.dosageIntakes.add(dosageIntakeText);
-		}
 
 		if (substanceAdministration != null && substanceAdministration.getEffectiveTime() != null
 				&& substanceAdministration.getEffectiveTime().size() > 0) {
@@ -1860,14 +1784,14 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 					packageForm = originalTextOrFormCode;
 				}
 
+				/*
+				TODO: Remove
 				String dosageIntakeText = null;
 				if (supply.getEntryRelationship() != null) {
 					dosageIntakeText = getDosageIntakeTextIfExist(supply.getEntryRelationship());
 				}
 				// if it already exist a text for the dosage intake we don't
 				// generate the dosageIntake instruction String
-				POCDMT000040SubstanceAdministration substanceAdministration = filterSubstanceAdministrationDis(
-						supply.getEntryRelationship());
 
 				if (StringUtils.isEmpty(dosageIntakeText)) {
 
@@ -1877,7 +1801,10 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 						addDosageIntakeReference();
 				} else {
 					this.dosageIntakes.add(dosageIntakeText);
-				}
+				}*/
+
+				POCDMT000040SubstanceAdministration substanceAdministration = filterSubstanceAdministrationDis(
+						supply.getEntryRelationship());
 				if (substanceAdministration != null
 						&& substanceAdministration.getEffectiveTime() != null
 						&& substanceAdministration.getEffectiveTime().size() > 0) {
@@ -1970,6 +1897,9 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 						.getManufacturedProduct().getManufacturedMaterial();
 				setAttributesFromMaterial(material);
 			}
+
+			/*
+			TODO: Remove
 			String dosageIntakeText = null;
 			if (substanceAdministration.getEntryRelationship() != null) {
 				dosageIntakeText = getDosageIntakeTextIfExist(
@@ -1986,7 +1916,7 @@ public class EmedChStrucDocTextBuilderV097 extends StrucDocText {
 				parseDosageIntake(substanceAdministration);
 			} else {
 				this.dosageIntakes.add(dosageIntakeText);
-			}
+			}*/
 
 			if (substanceAdministration.getDoseQuantity() != null) {
 				this.doseQuantity = parseDoseQuantity(substanceAdministration.getDoseQuantity(), this.languageCode); // QQQ

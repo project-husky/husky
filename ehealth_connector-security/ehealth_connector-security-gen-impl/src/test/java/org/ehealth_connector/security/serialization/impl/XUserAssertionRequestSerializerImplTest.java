@@ -26,6 +26,7 @@ import org.ehealth_connector.security.communication.xua.impl.XUserAssertionReque
 import org.ehealth_connector.security.exceptions.SerializeException;
 import org.junit.Before;
 import org.junit.Test;
+import org.opensaml.core.config.InitializationService;
 import org.w3c.dom.Element;
 
 public class XUserAssertionRequestSerializerImplTest {
@@ -41,6 +42,8 @@ public class XUserAssertionRequestSerializerImplTest {
 
 		testDialect = "http://bag.admin.ch/epr/2017/annex/5/addendum/2";
 		testContext = "This is my Context";
+		
+		InitializationService.initialize();
 
 		testXmlObject = new XUserAssertionRequestBuilderImpl()//
 				.context(testContext)//

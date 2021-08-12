@@ -19,7 +19,7 @@ package org.ehealth_connector.cda.ch.vacd.v210.enums;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.annotation.Generated;
+import javax.annotation.processing.Generated;
 
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;

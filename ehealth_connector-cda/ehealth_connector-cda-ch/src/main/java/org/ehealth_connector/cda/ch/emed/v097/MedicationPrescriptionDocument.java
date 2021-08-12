@@ -19,7 +19,7 @@ package org.ehealth_connector.cda.ch.emed.v097;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import javax.annotation.Generated;
+import javax.annotation.processing.Generated;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
