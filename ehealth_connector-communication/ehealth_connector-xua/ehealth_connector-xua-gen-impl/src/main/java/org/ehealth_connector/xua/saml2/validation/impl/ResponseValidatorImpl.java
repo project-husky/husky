@@ -42,7 +42,7 @@ public class ResponseValidatorImpl extends AbstractValidator implements Response
 	@Override
 	public void validate(Response aType, String aAlias) throws ValidationException {
 
-		final var innerResponse = ((ResponseImpl) aType)
+		final org.opensaml.saml.saml2.core.Response innerResponse = ((ResponseImpl) aType)
 				.getWrappedObject();
 		if (innerResponse.getSignature() != null) {
 			validate(innerResponse.getSignature(), aAlias);

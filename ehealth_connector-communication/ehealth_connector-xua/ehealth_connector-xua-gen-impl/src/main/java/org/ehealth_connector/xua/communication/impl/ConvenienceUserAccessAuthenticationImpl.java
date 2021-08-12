@@ -19,9 +19,8 @@ package org.ehealth_connector.xua.communication.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.ehealth_connector.xua.authentication.AuthenticationModule;
-import org.ehealth_connector.xua.authentication.AuthnRequest;
-import org.ehealth_connector.xua.communication.clients.impl.ClientFactory;
+import org.ehealth_connector.xua.communication.clients.IdpClient;
+import org.ehealth_connector.xua.communication.clients.XuaClient;
 import org.ehealth_connector.xua.communication.config.IdpClientConfig;
 import org.ehealth_connector.xua.communication.config.XuaClientConfig;
 import org.ehealth_connector.xua.communication.xua.XUserAssertionModule;
@@ -29,6 +28,9 @@ import org.ehealth_connector.xua.communication.xua.XUserAssertionRequest;
 import org.ehealth_connector.xua.communication.xua.XUserAssertionResponse;
 import org.ehealth_connector.xua.core.SecurityHeaderElement;
 import org.ehealth_connector.xua.exceptions.ClientSendException;
+import org.ehealth_connector.xua.authentication.AuthenticationModule;
+import org.ehealth_connector.xua.authentication.AuthnRequest;
+import org.ehealth_connector.xua.communication.clients.impl.ClientFactory;
 import org.opensaml.core.config.InitializationException;
 import org.opensaml.core.config.Initializer;
 
@@ -87,7 +89,7 @@ public class ConvenienceUserAccessAuthenticationImpl
 	public List<XUserAssertionResponse> invokeGetXUserAssertion(
 			SecurityHeaderElement aSecurityHeaderElement, XUserAssertionRequest aRequest,
 			XuaClientConfig clientConfiguration) throws ClientSendException {
-		final var client = ClientFactory.getXuaClient(clientConfiguration);
+		final XuaClient client = ClientFactory.getXuaClient(clientConfiguration);
 		return client.send(aSecurityHeaderElement, aRequest);
 	}
 
@@ -101,7 +103,7 @@ public class ConvenienceUserAccessAuthenticationImpl
 	@Override
 	public Object invokeUserAuthentication(AuthnRequest aAuthnRequest,
 			IdpClientConfig clientConfiguration) throws ClientSendException {
-		final var client = ClientFactory.getIdpClient(clientConfiguration);
+		final IdpClient client = ClientFactory.getIdpClient(clientConfiguration);
 		return client.send(aAuthnRequest);
 	}
 

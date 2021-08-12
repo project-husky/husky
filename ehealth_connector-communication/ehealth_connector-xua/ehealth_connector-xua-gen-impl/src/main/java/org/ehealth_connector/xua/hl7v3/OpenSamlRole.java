@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.xua.hl7v3;
 
+import org.ehealth_connector.xua.hl7v3.Role;
 import org.opensaml.core.xml.XMLObject;
 
 /**

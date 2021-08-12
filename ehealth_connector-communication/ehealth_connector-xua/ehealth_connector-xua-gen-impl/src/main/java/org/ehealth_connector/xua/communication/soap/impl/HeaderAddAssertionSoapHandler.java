@@ -34,6 +34,7 @@ import org.ehealth_connector.xua.serialization.impl.OpenSaml2SerializerImpl;
 import org.opensaml.core.xml.XMLObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.Element;
 
 /**
  * <!-- @formatter:off -->
@@ -57,7 +58,6 @@ public class HeaderAddAssertionSoapHandler implements SOAPHandler<SOAPMessageCon
 
 	@Override
 	public void close(MessageContext context) {
-		mLogger.debug("close: {}", context);
 	}
 
 	@Override
@@ -67,7 +67,8 @@ public class HeaderAddAssertionSoapHandler implements SOAPHandler<SOAPMessageCon
 
 	@Override
 	public boolean handleFault(SOAPMessageContext context) {
-		mLogger.error("SOAP Fault: {}", context);
+		// throw new UnsupportedOperationException("Not supported yet.");
+		mLogger.error("SOAP Fault: " + context);
 		return true;
 	}
 
@@ -79,7 +80,7 @@ public class HeaderAddAssertionSoapHandler implements SOAPHandler<SOAPMessageCon
 		if (outboundProperty.booleanValue()) {
 			try {
 				final SOAPEnvelope envelope = context.getMessage().getSOAPPart().getEnvelope();
-				final var factory = SOAPFactory.newInstance();
+				final SOAPFactory factory = SOAPFactory.newInstance();
 
 				SOAPHeader header = envelope.getHeader();
 				if (header == null) {
@@ -89,7 +90,7 @@ public class HeaderAddAssertionSoapHandler implements SOAPHandler<SOAPMessageCon
 						"http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd",
 						"Security"));
 
-				final var serializedElement = new OpenSaml2SerializerImpl()
+				final Element serializedElement = new OpenSaml2SerializerImpl()
 						.serializeToXml((XMLObject) mSecurityHeaderElement.getWrappedObject());
 
 				XmlAppender.addFragment(serializedElement, securityElem);
@@ -97,7 +98,7 @@ public class HeaderAddAssertionSoapHandler implements SOAPHandler<SOAPMessageCon
 				header.addChildElement(securityElem);
 
 			} catch (final Exception e) {
-				mLogger.error("Exception in handler: {}", e.getMessage(), e);
+				mLogger.error("Exception in handler: " + e);
 			}
 		} else {
 			// inbound

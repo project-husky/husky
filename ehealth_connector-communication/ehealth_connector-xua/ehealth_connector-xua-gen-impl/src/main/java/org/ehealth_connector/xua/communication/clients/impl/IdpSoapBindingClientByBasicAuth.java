@@ -18,13 +18,14 @@ package org.ehealth_connector.xua.communication.clients.impl;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.nio.charset.StandardCharsets;
+import java.nio.charset.Charset;
 import java.util.Base64;
 
-import javax.xml.XMLConstants;
+import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
@@ -39,14 +40,17 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.ehealth_connector.xua.authentication.AuthnRequest;
-import org.ehealth_connector.xua.communication.config.impl.IdpClientBasicAuthConfigImpl;
-import org.ehealth_connector.xua.deserialization.impl.ResponseDeserializerImpl;
 import org.ehealth_connector.xua.exceptions.ClientSendException;
 import org.ehealth_connector.xua.exceptions.DeserializeException;
 import org.ehealth_connector.xua.exceptions.SerializeException;
 import org.ehealth_connector.xua.saml2.Response;
+import org.ehealth_connector.xua.authentication.AuthnRequest;
+import org.ehealth_connector.xua.communication.config.impl.IdpClientBasicAuthConfigImpl;
+import org.ehealth_connector.xua.deserialization.impl.ResponseDeserializerImpl;
 import org.ehealth_connector.xua.serialization.impl.AuthnRequestSerializerImpl;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
 /**
@@ -59,8 +63,6 @@ import org.xml.sax.SAXException;
  */
 public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 
-	
-	private static final String SOAPNS = "http://schemas.xmlsoap.org/soap/envelope/";
 	private IdpClientBasicAuthConfigImpl config;
 
 	public IdpSoapBindingClientByBasicAuth(IdpClientBasicAuthConfigImpl clientConfiguration) {
@@ -82,7 +84,7 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 	private void addBasicAuthentication(HttpPost post) {
 		final String auth = config.getBasicAuthUsername() + ":" + config.getBasicAuthPassword();
 		final byte[] encodedAuth = Base64.getEncoder()
-				.encode(auth.getBytes(StandardCharsets.ISO_8859_1));
+				.encode(auth.getBytes(Charset.forName("ISO-8859-1")));
 		final String authHeader = "Basic " + new String(encodedAuth);
 		post.setHeader(HttpHeaders.AUTHORIZATION, authHeader);
 	}
@@ -141,44 +143,46 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 			throws SerializeException, ParserConfigurationException, TransformerException {
 
 		// serialize the authnrequest to xml element
-		final var serializer = new AuthnRequestSerializerImpl();
-		final var authnRequestElement = serializer.toXmlElement(aAuthnRequest);
+		final AuthnRequestSerializerImpl serializer = new AuthnRequestSerializerImpl();
+		final Element authnRequestElement = serializer.toXmlElement(aAuthnRequest);
 
 		// create xml dokument
-		final var docFactory = DocumentBuilderFactory.newInstance();
+		final DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 		docFactory.setNamespaceAware(true);
-		final var docBuilder = docFactory.newDocumentBuilder();
-		final var soapDoc = docBuilder.newDocument();
+		final DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+		final Document soapDoc = docBuilder.newDocument();
 
 		// create soap envelope
-		final var envelopElement = soapDoc.createElementNS(SOAPNS, "Envelope");
+		final Element envelopElement = soapDoc.createElementNS(getSoapNs(), "Envelope");
 		soapDoc.appendChild(envelopElement);
 
-		final var soapHeader = soapDoc.createElementNS(SOAPNS, "Header");
+		final Element soapHeader = soapDoc.createElementNS(getSoapNs(), "Header");
 		envelopElement.appendChild(soapHeader);
 
 		// create soap body
-		final var soapBody = soapDoc.createElementNS(SOAPNS, "Body");
+		final Element soapBody = soapDoc.createElementNS(getSoapNs(), "Body");
 		envelopElement.appendChild(soapBody);
 
 		// add authnrequest to soap body
-		final var importedNode = soapDoc.importNode(authnRequestElement, true);
+		final Node importedNode = soapDoc.importNode(authnRequestElement, true);
 		soapBody.appendChild(importedNode);
 
 		// transform to string
-		final var tf = TransformerFactory.newInstance();
-		tf.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-		tf.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
-		final var transformer = tf.newTransformer();
+		final TransformerFactory tf = TransformerFactory.newInstance();
+		final Transformer transformer = tf.newTransformer();
 		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
-		final var writer = new StringWriter();
+		final StringWriter writer = new StringWriter();
 		transformer.transform(new DOMSource(soapDoc), new StreamResult(writer));
-		final var body = writer.toString();
+		final String body = writer.toString();
 
 		// add string as body to httpentity
-		final var stringEntity = new StringEntity(body, "UTF-8");
+		final StringEntity stringEntity = new StringEntity(body, "UTF-8");
 		stringEntity.setChunked(true);
 		return stringEntity;
+	}
+
+	private String getSoapNs() {
+		return "http://schemas.xmlsoap.org/soap/envelope/";
 	}
 
 	/**
@@ -190,22 +194,20 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 	@Override
 	Response parseResponse(CloseableHttpResponse response) throws ClientSendException {
 		try {
-			final var docFactory = DocumentBuilderFactory.newInstance();
+			final DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
 			docFactory.setNamespaceAware(true);
-			docFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-			docFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_SCHEMA, "");
-			final var docBuilder = docFactory.newDocumentBuilder();
-			final var soapDocument = docBuilder.parse(response.getEntity().getContent());
+			final DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
+			final Document soapDocument = docBuilder.parse(response.getEntity().getContent());
 
 			// get the xml response node
-			final var responseNode = soapDocument.getFirstChild().getLastChild().getFirstChild();
+			final Node responseNode = soapDocument.getFirstChild().getLastChild().getFirstChild();
 
-			final var doc = docBuilder.newDocument();
-			final var importedNode = doc.importNode(responseNode, true);
+			final Document doc = docBuilder.newDocument();
+			final Node importedNode = doc.importNode(responseNode, true);
 			doc.appendChild(importedNode);
 
 			// deserialize to the Response instance
-			final var deserializer = new ResponseDeserializerImpl();
+			final ResponseDeserializerImpl deserializer = new ResponseDeserializerImpl();
 			return deserializer.fromXmlElement(doc.getDocumentElement());
 		} catch (UnsupportedOperationException | IOException | DeserializeException
 				| TransformerFactoryConfigurationError | ParserConfigurationException
@@ -224,7 +226,7 @@ public class IdpSoapBindingClientByBasicAuth extends AbstractIdpClient {
 	@Override
 	public Response send(AuthnRequest aAuthnRequest) throws ClientSendException {
 		try {
-			final var post = getHttpPost(config);
+			final HttpPost post = getHttpPost(config);
 			post.setHeader(HttpHeaders.CONTENT_TYPE, "text/xml");
 			post.setEntity(getSoapEntity(aAuthnRequest));
 			post.addHeader("Accept", "text/xml");

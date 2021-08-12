@@ -23,6 +23,7 @@ import static org.junit.Assert.assertNull;
 import java.util.UUID;
 
 import org.ehealth_connector.xua.saml2.Response;
+import org.ehealth_connector.xua.saml2.impl.ResponseBuilderImpl;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;

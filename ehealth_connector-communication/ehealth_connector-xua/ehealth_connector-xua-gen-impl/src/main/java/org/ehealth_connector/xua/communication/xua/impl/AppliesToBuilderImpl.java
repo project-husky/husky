@@ -19,6 +19,7 @@ package org.ehealth_connector.xua.communication.xua.impl;
 import org.ehealth_connector.xua.communication.xua.AppliesTo;
 import org.ehealth_connector.xua.communication.xua.AppliesToBuilder;
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
+import org.opensaml.soap.wsaddressing.Address;
 import org.opensaml.soap.wsaddressing.EndpointReference;
 import org.opensaml.soap.wsaddressing.impl.AddressBuilder;
 import org.opensaml.soap.wsaddressing.impl.EndpointReferenceBuilder;
@@ -47,7 +48,7 @@ public class AppliesToBuilderImpl implements AppliesToBuilder,
 	 */
 	@Override
 	public AppliesToBuilder address(String aAddress) {
-		final var wsaAddress = new AddressBuilder().buildObject();
+		final Address wsaAddress = new AddressBuilder().buildObject();
 		wsaAddress.setValue(aAddress);
 
 		final EndpointReference enpointRef = new EndpointReferenceBuilder().buildObject();

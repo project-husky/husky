@@ -14,27 +14,38 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.xua.deserialization.impl;
 
-import org.ehealth_connector.xua.deserialization.Deserializer;
-import org.ehealth_connector.xua.deserialization.OpenSaml2Deserializer;
+package org.ehealth_connector.xua.saml2.impl;
+
+import org.ehealth_connector.xua.core.SecurityObject;
+import org.ehealth_connector.xua.saml2.Audience;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Abstract implementation class with the common methods and fields.</div>
- * <div class="de">Abstrakte implementations Klasse mit den gemeinsamen Methoden und Feldern.</div>
+ * <div class="en">Implementation class of Audience</div>
+ * <div class="de">Implementations Klasse von Audience</div>
  * <div class="fr"></div>
  * <div class="it"></div>
+ *
  * <!-- @formatter:on -->
  */
-public abstract class AbstractDeserializerImpl<T, U> implements Deserializer<U> {
-	private OpenSaml2Deserializer<T> openSamlDeserializer;
+public class AudienceImpl
+		implements Audience, SecurityObject<org.opensaml.saml.saml2.core.Audience> {
 
-	public AbstractDeserializerImpl() {
-		openSamlDeserializer = new OpenSaml2DeserializerImpl<>();
+	private org.opensaml.saml.saml2.core.Audience wrappedObject;
+
+	protected AudienceImpl(org.opensaml.saml.saml2.core.Audience aInternalObject) {
+		wrappedObject = aInternalObject;
 	}
 
-	protected OpenSaml2Deserializer<T> getOpenSamlDeserializer() {
-		return openSamlDeserializer;
+	@Override
+	public String getAudienceURI() {
+		return wrappedObject.getAudienceURI();
 	}
+
+	@Override
+	public org.opensaml.saml.saml2.core.Audience getWrappedObject() {
+		return wrappedObject;
+	}
+
 }

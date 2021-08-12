@@ -27,14 +27,14 @@ import org.ehealth_connector.xua.communication.config.SoapClientConfig;
  * <!-- @formatter:on -->
  */
 public class BaseSoapClientConfigImpl extends AbstractClientConfig implements SoapClientConfig {
-	private String keyStoreFile;
-	private String keyStorePassword;
-	private String keyStoreType;
-	private String portName;
+	public String keyStoreFile;
+	public String keyStorePassword;
+	public String keyStoreType;
+	public String portName;
 
-	private String portNamespace;
-	private String serviceName;
-	private String serviceNamespace;
+	public String portNamespace;
+	public String serviceName;
+	public String serviceNamespace;
 
 	private boolean simple;
 	private SoapVersion version;

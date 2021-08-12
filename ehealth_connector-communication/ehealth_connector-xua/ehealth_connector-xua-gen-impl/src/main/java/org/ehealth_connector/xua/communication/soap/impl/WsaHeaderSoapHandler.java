@@ -20,7 +20,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.xml.namespace.QName;
+import javax.xml.soap.SOAPHeader;
 import javax.xml.soap.SOAPHeaderElement;
+import javax.xml.soap.SOAPMessage;
 import javax.xml.ws.handler.MessageContext;
 import javax.xml.ws.handler.soap.SOAPHandler;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
@@ -38,7 +40,7 @@ import org.slf4j.LoggerFactory;
  */
 public class WsaHeaderSoapHandler implements SOAPHandler<SOAPMessageContext> {
 
-	public static final String IN_OUT_PARAM = "InOutExchange";
+	public final String IN_OUT_PARAM = "InOutExchange";
 	private QName mActionHeader;
 	private Logger mLogger;
 
@@ -48,10 +50,10 @@ public class WsaHeaderSoapHandler implements SOAPHandler<SOAPMessageContext> {
 
 	private WsaHeaderValue mWsaValues;
 
-	public static final String NAMESPACE_SOAPENV_URI = "http://www.w3.org/2003/05/soap-envelope";
+	public final String NAMESPACE_SOAPENV_URI = "http://www.w3.org/2003/05/soap-envelope";
 
-	public static final String NAMESPACE_WSA = "wsa";
-	public static final String NAMESPACE_WSA_URI = "http://www.w3.org/2005/08/addressing";
+	public final String NAMESPACE_WSA = "wsa";
+	public final String NAMESPACE_WSA_URI = "http://www.w3.org/2005/08/addressing";
 
 	public WsaHeaderSoapHandler(WsaHeaderValue aActionValue) {
 		mLogger = LoggerFactory.getLogger(getClass());
@@ -67,7 +69,7 @@ public class WsaHeaderSoapHandler implements SOAPHandler<SOAPMessageContext> {
 
 	@Override
 	public void close(MessageContext context) {
-		mLogger.trace("close: {}", context);
+		mLogger.trace("close: " + context);
 	}
 
 	@Override
@@ -76,13 +78,13 @@ public class WsaHeaderSoapHandler implements SOAPHandler<SOAPMessageContext> {
 		headers.add(mActionHeader);
 		headers.add(mMessageIdHeader);
 		headers.add(mToHeader);
-		mLogger.trace("getHeaders: {}", headers);
+		mLogger.trace("getHeaders: " + headers);
 		return headers;
 	}
 
 	@Override
 	public boolean handleFault(SOAPMessageContext context) {
-		mLogger.error("SOAP Fault: {}", context);
+		mLogger.error("SOAP Fault: " + context);
 		return true;
 	}
 
@@ -93,13 +95,13 @@ public class WsaHeaderSoapHandler implements SOAPHandler<SOAPMessageContext> {
 					.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
 			if (outboundProperty.booleanValue()) {
 
-				final var soapMessage = context.getMessage();
-				final var soapHeader = soapMessage.getSOAPHeader();
-				mLogger.debug("InOutValue: {}", context.get(IN_OUT_PARAM));
+				final SOAPMessage soapMessage = context.getMessage();
+				final SOAPHeader soapHeader = soapMessage.getSOAPHeader();
+				mLogger.debug("InOutValue: " + context.get(IN_OUT_PARAM));
 
 				final String soapEnvelopPrefix = soapMessage.getSOAPPart().getEnvelope()
 						.getPrefix();
-				final var mustUnderstandAttribute = new QName(NAMESPACE_SOAPENV_URI,
+				final QName mustUnderstandAttribute = new QName(NAMESPACE_SOAPENV_URI,
 						"mustUnderstand", soapEnvelopPrefix);
 
 				soapHeader.addNamespaceDeclaration(NAMESPACE_WSA, NAMESPACE_WSA_URI);
@@ -131,7 +133,7 @@ public class WsaHeaderSoapHandler implements SOAPHandler<SOAPMessageContext> {
 
 			}
 
-		} catch (final Exception t) {
+		} catch (final Throwable t) {
 			mLogger.error("error handling inout stuff", t);
 			return true;
 		}

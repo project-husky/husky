@@ -20,17 +20,16 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-import javax.xml.bind.JAXBElement;
-
+import org.ehealth_connector.xua.saml2.Subject;
+import org.ehealth_connector.xua.saml2.SubjectConfirmation;
+import org.ehealth_connector.xua.saml2.impl.SubjectBuilderImpl;
+import org.ehealth_connector.xua.saml2.impl.SubjectConfirmationBuilderImpl;
+import org.ehealth_connector.xua.saml2.impl.SubjectImpl;
 import org.junit.Before;
 import org.junit.Test;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.NameIDType;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationType;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectType;
 
 public class SubjectBuilderImplTest {
 
@@ -39,8 +38,8 @@ public class SubjectBuilderImplTest {
 	private org.opensaml.saml.saml2.core.Subject testInnerObject;
 	private String testNameIdFormat;
 	private String testNameIdValue;
-	private SubjectConfirmationType testSubjectConfirm;
-	private List<SubjectConfirmationType> testSubjectConfirmations;
+	private SubjectConfirmation testSubjectConfirm;
+	private List<SubjectConfirmation> testSubjectConfirmations;
 	private String testNameIDNameQualifier;
 
 	@Before
@@ -72,9 +71,9 @@ public class SubjectBuilderImplTest {
 	 */
 	@Test
 	public void testAddSubjectConfirmations() {
-		final SubjectType ref = builder.addSubjectConfirmations(testSubjectConfirm).create();
-		assertEquals(testSubjectConfirm.getSubjectConfirmationData().getAddress(),
-				extractSubjectConfirmationTypeFromJaxbElements(ref).get(0).getSubjectConfirmationData().getAddress());
+		final Subject ref = builder.addSubjectConfirmations(testSubjectConfirm).create();
+		assertEquals(testSubjectConfirm.getAddress(),
+				ref.getSubjectConfirmations().get(0).getAddress());
 	}
 
 	/**
@@ -83,7 +82,7 @@ public class SubjectBuilderImplTest {
 	 */
 	@Test
 	public void testCreateSubject() {
-		final SubjectType ref = builder.create(testInnerObject);
+		final Subject ref = builder.create(testInnerObject);
 		assertEquals(testInnerObject, ((SubjectImpl) ref).getWrappedObject());
 	}
 
@@ -93,14 +92,14 @@ public class SubjectBuilderImplTest {
 	 */
 	@Test
 	public void testNameIDFormat() {
-		final SubjectType ref = builder.nameIDFormat(testNameIdFormat).create();
-		assertEquals(testNameIdFormat, extractNameIDTypeFromJaxbElements(ref).getFormat());
+		final Subject ref = builder.nameIDFormat(testNameIdFormat).create();
+		assertEquals(testNameIdFormat, ref.getNameIDFormat());
 	}
 
 	@Test
 	public void testNameIDNameQualifier() {
-		final SubjectType ref = builder.nameIDNameQualifier(testNameIDNameQualifier).create();
-		assertEquals(testNameIDNameQualifier, extractNameIDTypeFromJaxbElements(ref).getNameQualifier());
+		final Subject ref = builder.nameIDNameQualifier(testNameIDNameQualifier).create();
+		assertEquals(testNameIDNameQualifier, ref.getNameIDNameQualifier());
 	}
 
 	/**
@@ -109,8 +108,8 @@ public class SubjectBuilderImplTest {
 	 */
 	@Test
 	public void testNameIDValue() {
-		final SubjectType ref = builder.nameIDValue(testNameIdValue).create();
-		assertEquals(testNameIdValue, extractNameIDTypeFromJaxbElements(ref).getValue());
+		final Subject ref = builder.nameIDValue(testNameIdValue).create();
+		assertEquals(testNameIdValue, ref.getNameIDValue());
 	}
 
 	/**
@@ -119,33 +118,12 @@ public class SubjectBuilderImplTest {
 	 */
 	@Test
 	public void testSubjectConfirmations() {
-		final SubjectType ref = builder.subjectConfirmations(testSubjectConfirmations).create();
+		final Subject ref = builder.subjectConfirmations(testSubjectConfirmations).create();
 		assertArrayEquals(
 				testSubjectConfirmations
-						.toArray(new SubjectConfirmationType[testSubjectConfirmations.size()]),
-				extractSubjectConfirmationTypeFromJaxbElements(ref)
-						.toArray(new SubjectConfirmationType[testSubjectConfirmations.size()]));
-	}
-	
-	private NameIDType extractNameIDTypeFromJaxbElements(SubjectType ref) {
-		for(JAXBElement<?> element: ref.getContent()) {
-			if(element != null && element.getValue() instanceof NameIDType) {
-				return (NameIDType) element.getValue();
-			}
-		}
-		
-		return null;
-	}
-	
-	private List<SubjectConfirmationType> extractSubjectConfirmationTypeFromJaxbElements(SubjectType ref) {
-		List<SubjectConfirmationType> retVal = new LinkedList<>();
-		for(JAXBElement<?> element: ref.getContent()) {
-			if(element != null && element.getValue() instanceof SubjectConfirmationType) {
-				retVal.add((SubjectConfirmationType) element.getValue());
-			}
-		}
-		
-		return retVal;
+						.toArray(new SubjectConfirmation[testSubjectConfirmations.size()]),
+				ref.getSubjectConfirmations()
+						.toArray(new SubjectConfirmation[testSubjectConfirmations.size()]));
 	}
 
 }

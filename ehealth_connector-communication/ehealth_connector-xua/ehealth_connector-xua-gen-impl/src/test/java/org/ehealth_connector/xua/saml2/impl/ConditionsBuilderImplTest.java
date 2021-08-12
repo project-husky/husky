@@ -18,10 +18,11 @@ package org.ehealth_connector.xua.saml2.impl;
 
 import static org.junit.Assert.assertNotNull;
 
+import org.ehealth_connector.xua.saml2.Conditions;
 import org.ehealth_connector.xua.saml2.ConditionsBuilder;
+import org.ehealth_connector.xua.saml2.impl.ConditionsBuilderImpl;
 import org.junit.Before;
 import org.junit.Test;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionsType;
 
 public class ConditionsBuilderImplTest {
 	public ConditionsBuilder testBuilder;
@@ -37,7 +38,7 @@ public class ConditionsBuilderImplTest {
 	 */
 	@Test
 	public void testCreate() {
-		final ConditionsType audience = testBuilder.create();
+		final Conditions audience = testBuilder.create();
 		assertNotNull(audience);
 	}
 

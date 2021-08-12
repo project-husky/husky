@@ -10,11 +10,6 @@
 	</parent>
 
 	<dependencies>
-	 <dependency>
-				<groupId>org.openehealth.ipf.platform-camel</groupId>
-			<artifactId>ipf-platform-camel-ihe-xacml20</artifactId>
-			</dependency>
-	
 		<!-- test stuff -->
 		<dependency>
 			<groupId>junit</groupId>

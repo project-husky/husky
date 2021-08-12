@@ -21,10 +21,10 @@ import static org.junit.Assert.assertNotNull;
 
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.OpenSamlDeletePolicyRequest;
 import org.ehealth_connector.communication.ch.ppq.utilities.impl.InitializerTestHelper;
+import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.impl.AssertionBuilderImpl;
 import org.junit.Before;
 import org.junit.Test;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.opensaml.core.xml.io.Unmarshaller;
 import org.opensaml.core.xml.io.UnmarshallerFactory;
@@ -32,7 +32,7 @@ import org.w3c.dom.Element;
 
 public class DeletePolicyRequestBuilderTest extends InitializerTestHelper {
 
-	private AssertionType testAssertion;
+	private Assertion testAssertion;
 
 	@Before
 	public void setUp() throws Exception {

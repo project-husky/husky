@@ -19,12 +19,9 @@ package org.ehealth_connector.xua.saml2.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.JAXBElement;
-
 import org.ehealth_connector.xua.core.SecurityObject;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.NameIDType;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationType;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectType;
+import org.ehealth_connector.xua.saml2.Subject;
+import org.ehealth_connector.xua.saml2.SubjectConfirmation;
 
 /**
  * <!-- @formatter:off -->
@@ -34,7 +31,7 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectType
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class SubjectImpl extends SubjectType implements SecurityObject<org.opensaml.saml.saml2.core.Subject> {
+public class SubjectImpl implements Subject, SecurityObject<org.opensaml.saml.saml2.core.Subject> {
 
 	/** The subject. */
 	private org.opensaml.saml.saml2.core.Subject subject;
@@ -47,9 +44,6 @@ public class SubjectImpl extends SubjectType implements SecurityObject<org.opens
 	 */
 	protected SubjectImpl(org.opensaml.saml.saml2.core.Subject aSubject) {
 		subject = aSubject;
-		
-		getNameID();
-		getSubjectConfirmations();
 	}
 
 	/**
@@ -58,19 +52,40 @@ public class SubjectImpl extends SubjectType implements SecurityObject<org.opens
 	 *
 	 * @see org.ehealth_connector.xua.saml2.Subject#getNameIDFormat()
 	 */
-	public NameIDType getNameID() {
-		if (subject.getNameID() != null) {		
-			var nameIdType = new NameIDType();
-			nameIdType.setFormat(subject.getNameID().getFormat());
-			nameIdType.setValue(subject.getNameID().getValue());
-			nameIdType.setNameQualifier(subject.getNameID().getNameQualifier());
-			nameIdType.setSPNameQualifier(subject.getNameID().getSPNameQualifier());
-			nameIdType.setSPProvidedID(subject.getNameID().getSPProvidedID());			
-			getContent().add(new JAXBElement<>(subject.getNameID().getElementQName(), NameIDType.class, nameIdType));
-			
-			return nameIdType;
+	@Override
+	public String getNameIDFormat() {
+		if (subject.getNameID() != null) {
+			return subject.getNameID().getFormat();
 		}
-		return null;
+		return "";
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.xua.saml2.Subject#getNameIDNameQualifier()
+	 */
+	@Override
+	public String getNameIDNameQualifier() {
+		if (subject.getNameID() != null) {
+			return subject.getNameID().getNameQualifier();
+		}
+		return "";
+	}
+
+	/**
+	 *
+	 * {@inheritDoc}
+	 *
+	 * @see org.ehealth_connector.xua.saml2.Subject#getNameIDValue()
+	 */
+	@Override
+	public String getNameIDValue() {
+		if (subject.getNameID() != null) {
+			return subject.getNameID().getValue();
+		}
+		return "";
 	}
 
 	/**
@@ -79,15 +94,14 @@ public class SubjectImpl extends SubjectType implements SecurityObject<org.opens
 	 *
 	 * @see org.ehealth_connector.xua.saml2.Subject#getSubjectConfirmations()
 	 */
-	public List<SubjectConfirmationType> getSubjectConfirmations() {		
-		final List<SubjectConfirmationType> retVal = new ArrayList<>();
-		
-		if(subject.getSubjectConfirmations() != null) {
-			final List<org.opensaml.saml.saml2.core.SubjectConfirmation> innerConfirms = subject
-					.getSubjectConfirmations();
-			innerConfirms.forEach(c -> getContent().add(new JAXBElement<>(c.getElementQName(), SubjectConfirmationType.class, new SubjectConfirmationBuilderImpl().create(c))));
-		}
-				
+	@Override
+	public List<SubjectConfirmation> getSubjectConfirmations() {
+		final List<SubjectConfirmation> retVal = new ArrayList<>();
+		final List<org.opensaml.saml.saml2.core.SubjectConfirmation> innerConfirms = subject
+				.getSubjectConfirmations();
+		innerConfirms.forEach(c -> {
+			retVal.add(new SubjectConfirmationBuilderImpl().create(c));
+		});
 		return retVal;
 	}
 

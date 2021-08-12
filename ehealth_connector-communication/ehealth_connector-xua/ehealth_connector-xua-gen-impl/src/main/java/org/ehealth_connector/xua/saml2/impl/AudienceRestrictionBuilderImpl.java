@@ -18,8 +18,8 @@
 package org.ehealth_connector.xua.saml2.impl;
 
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
+import org.ehealth_connector.xua.saml2.AudienceRestriction;
 import org.ehealth_connector.xua.saml2.AudienceRestrictionBuilder;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AudienceRestrictionType;
 
 /**
  * <!-- @formatter:off -->
@@ -30,7 +30,7 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AudienceRes
  * <!-- @formatter:on -->
  */
 public class AudienceRestrictionBuilderImpl implements AudienceRestrictionBuilder,
-		SecurityObjectBuilder<org.opensaml.saml.saml2.core.AudienceRestriction, AudienceRestrictionType> {
+		SecurityObjectBuilder<org.opensaml.saml.saml2.core.AudienceRestriction, AudienceRestriction> {
 
 	private org.opensaml.saml.saml2.core.AudienceRestriction audienceRestriction;
 
@@ -40,11 +40,12 @@ public class AudienceRestrictionBuilderImpl implements AudienceRestrictionBuilde
 	}
 
 	@Override
-	public AudienceRestrictionType create() {
+	public AudienceRestriction create() {
 		return new AudienceRestrictionImpl(audienceRestriction);
 	}
 
-	public AudienceRestrictionType create(
+	@Override
+	public AudienceRestriction create(
 			org.opensaml.saml.saml2.core.AudienceRestriction aInternalObject) {
 
 		return new AudienceRestrictionImpl(aInternalObject);

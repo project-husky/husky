@@ -16,6 +16,8 @@
  */
 package org.ehealth_connector.xua.saml2.utils;
 
+import org.w3c.dom.Document;
+import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.Element;
 
 /**
@@ -47,13 +49,13 @@ public final class XmlAppender {
 	 */
 	public static void addFragment(Element sourceElement, Element destinationElement) {
 
-		final var document = sourceElement.getOwnerDocument();
-		final var docFrag = document.createDocumentFragment();
-		final var rootElement = document.getDocumentElement();
+		final Document document = sourceElement.getOwnerDocument();
+		final DocumentFragment docFrag = document.createDocumentFragment();
+		final Element rootElement = document.getDocumentElement();
 		if (rootElement != null) {
 			docFrag.appendChild(rootElement);
-			final var ownerDoc = destinationElement.getOwnerDocument();
-			final var replacingNode = ownerDoc.importNode(docFrag, true);
+			final Document ownerDoc = destinationElement.getOwnerDocument();
+			final org.w3c.dom.Node replacingNode = ownerDoc.importNode(docFrag, true);
 			destinationElement.appendChild(replacingNode);
 		}
 	}

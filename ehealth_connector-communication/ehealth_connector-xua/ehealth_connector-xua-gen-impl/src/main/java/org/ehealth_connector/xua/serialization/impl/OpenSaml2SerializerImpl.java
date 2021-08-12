@@ -17,8 +17,12 @@
 package org.ehealth_connector.xua.serialization.impl;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Map;
 
+import javax.xml.namespace.QName;
 import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
@@ -26,6 +30,8 @@ import org.ehealth_connector.xua.exceptions.SerializeException;
 import org.ehealth_connector.xua.serialization.OpenSaml2Serializer;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
+import org.opensaml.core.xml.io.Marshaller;
+import org.opensaml.core.xml.io.MarshallerFactory;
 import org.opensaml.core.xml.io.MarshallingException;
 import org.w3c.dom.Element;
 
@@ -57,10 +63,12 @@ public class OpenSaml2SerializerImpl implements OpenSaml2Serializer {
 	public Integer getLoadedMarshallerCount() {
 		Integer retVal = 0;
 		try {
-			final var marshallerFactory = XMLObjectProviderRegistrySupport
+			final MarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport
 					.getMarshallerFactory();
 			if (marshallerFactory != null) {
-				retVal = marshallerFactory.getMarshallers().size();
+				Map<QName, Marshaller> map = marshallerFactory.getMarshallers();
+				if (map != null)
+					retVal = marshallerFactory.getMarshallers().size();
 			}
 		} catch (Exception e) {
 			// Do nothing
@@ -91,15 +99,14 @@ public class OpenSaml2SerializerImpl implements OpenSaml2Serializer {
 	private ByteArrayOutputStream serializeToByteArrayOutputStream(XMLObject aXmlObject)
 			throws SerializeException {
 		try {
-			final var element = serializeToXml(aXmlObject);
+			final Element element = serializeToXml(aXmlObject);
 
-			var transformerFactory = javax.xml.transform.TransformerFactory.newInstance();			
-			final var tr = transformerFactory.newTransformer();
+			final Transformer tr = TransformerFactory.newInstance().newTransformer();
 			tr.setOutputProperty(OutputKeys.INDENT, "no");
 			tr.setOutputProperty(OutputKeys.METHOD, "xml");
 			tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", String.valueOf(4));
 
-			final var bas = new ByteArrayOutputStream();
+			final ByteArrayOutputStream bas = new ByteArrayOutputStream();
 			tr.transform(new DOMSource(element), new StreamResult(bas));
 
 			return bas;
@@ -128,10 +135,10 @@ public class OpenSaml2SerializerImpl implements OpenSaml2Serializer {
 	@Override
 	public Element serializeToXml(XMLObject aXmlObject) throws SerializeException {
 		try {
-			final var marshallerFactory = XMLObjectProviderRegistrySupport
+			final MarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport
 					.getMarshallerFactory();
 
-			final var marshaller = marshallerFactory.getMarshaller(aXmlObject);
+			final Marshaller marshaller = marshallerFactory.getMarshaller(aXmlObject);
 
 			return marshaller.marshall(aXmlObject);
 

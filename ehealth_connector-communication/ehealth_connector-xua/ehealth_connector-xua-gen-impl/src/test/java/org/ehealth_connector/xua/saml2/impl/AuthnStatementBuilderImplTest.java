@@ -23,6 +23,7 @@ import java.util.UUID;
 
 import org.ehealth_connector.xua.saml2.AuthnStatement;
 import org.ehealth_connector.xua.saml2.AuthnStatementBuilder;
+import org.ehealth_connector.xua.saml2.impl.AuthnStatementBuilderImpl;
 import org.junit.Before;
 import org.junit.Test;
 

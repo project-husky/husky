@@ -21,9 +21,11 @@ import static org.junit.Assert.assertNotNull;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import org.ehealth_connector.xua.authentication.AuthnRequest;
 import org.ehealth_connector.xua.exceptions.DeserializeException;
 import org.ehealth_connector.xua.utilities.impl.AbstractTestHelper;
+import org.ehealth_connector.xua.authentication.AuthnRequest;
+import org.ehealth_connector.xua.deserialization.impl.AuthnRequestDeserializerImpl;
+import org.ehealth_connector.xua.deserialization.impl.OpenSaml2DeserializerImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Element;

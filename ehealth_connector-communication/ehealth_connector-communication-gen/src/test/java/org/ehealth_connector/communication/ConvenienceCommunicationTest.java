@@ -30,9 +30,9 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import org.ehealth_connector.common.communication.AffinityDomain;
-import org.ehealth_connector.common.communication.AtnaConfig.AtnaConfigMode;
 import org.ehealth_connector.common.communication.Destination;
 import org.ehealth_connector.common.communication.DocumentMetadata;
+import org.ehealth_connector.common.communication.AtnaConfig.AtnaConfigMode;
 import org.ehealth_connector.common.communication.DocumentMetadata.DocumentMetadataExtractionMode;
 import org.ehealth_connector.common.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
 import org.ehealth_connector.common.utils.Util;

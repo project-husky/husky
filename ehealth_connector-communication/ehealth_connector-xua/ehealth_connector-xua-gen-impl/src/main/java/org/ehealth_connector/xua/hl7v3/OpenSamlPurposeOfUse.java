@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.xua.hl7v3;
 
+import org.ehealth_connector.xua.hl7v3.PurposeOfUse;
 import org.opensaml.core.xml.XMLObject;
 
 /**

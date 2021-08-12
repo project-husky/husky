@@ -18,23 +18,17 @@ package org.ehealth_connector.xua.saml2.impl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
-
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.ehealth_connector.xua.core.SecurityObject;
 import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.Attribute;
+import org.ehealth_connector.xua.saml2.AudienceRestriction;
 import org.ehealth_connector.xua.saml2.AuthnStatement;
+import org.ehealth_connector.xua.saml2.Condition;
+import org.ehealth_connector.xua.saml2.Conditions;
+import org.ehealth_connector.xua.saml2.Subject;
 import org.joda.time.DateTime;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionsType;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.NameIDType;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * <!-- @formatter:off -->
@@ -45,10 +39,8 @@ import org.slf4j.LoggerFactory;
  * <!-- @formatter:on -->
  */
 public class AssertionImpl
-		extends Assertion implements SecurityObject<org.opensaml.saml.saml2.core.Assertion> {
+		implements Assertion, SecurityObject<org.opensaml.saml.saml2.core.Assertion> {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(AssertionImpl.class);
-	
 	/** The assertion. */
 	private org.opensaml.saml.saml2.core.Assertion assertion;
 
@@ -60,18 +52,6 @@ public class AssertionImpl
 	 */
 	protected AssertionImpl(org.opensaml.saml.saml2.core.Assertion aAssertion) {
 		assertion = aAssertion;
-		
-		getAttributes();
-		getAuthnStatements();
-		getConditions();
-		getConditionsAudienceRestrictions();
-		getId();
-		getConditionsNotBefore();
-		getConditionsNotOnOrAfter();
-		getIssueInstant();
-		getIssuer();
-		getSubject();
-		getVersion();
 	}
 
 	/**
@@ -79,6 +59,7 @@ public class AssertionImpl
 	 *
 	 * @see org.ehealth_connector.xua.saml2.Assertion#getAttributes()
 	 */
+	@Override
 	public List<Attribute> getAttributes() {
 		final List<Attribute> retVal = new ArrayList<>();
 
@@ -86,9 +67,9 @@ public class AssertionImpl
 				.getAttributeStatements();
 		internalAttributes.forEach(c -> {
 			final List<org.opensaml.saml.saml2.core.Attribute> listOfAttributes = c.getAttributes();
-			listOfAttributes.forEach(d -> 
-				retVal.add(new AttributeBuilderImpl().create(d))
-			);
+			listOfAttributes.forEach(d -> {
+				retVal.add(new AttributeBuilderImpl().create(d));
+			});
 		});
 		return retVal;
 	}
@@ -99,47 +80,66 @@ public class AssertionImpl
 	 *
 	 * @see org.ehealth_connector.xua.saml2.Assertion#getAuthnStatements()
 	 */
+	@Override
 	public List<AuthnStatement> getAuthnStatements() {
 		final List<AuthnStatement> retVal = new ArrayList<>();
 		final List<org.opensaml.saml.saml2.core.AuthnStatement> innerList = assertion
 				.getAuthnStatements();
-		innerList.forEach(c -> 
-			retVal.add(new AuthnStatementBuilderImpl().create(c))
-		);
+		innerList.forEach(c -> {
+			retVal.add(new AuthnStatementBuilderImpl().create(c));
+		});
 		return retVal;
 	}
 
 	@Override
-	public ConditionsType getConditions() {
+	public Conditions getConditions() {
 		if (assertion.getConditions() != null) {
 			return new ConditionsBuilderImpl().create(assertion.getConditions());
 		}
 		return null;
 	}
 
-	public void getConditionsAudienceRestrictions() {
+	@Override
+	public List<AudienceRestriction> getConditionsAudienceRestrictions() {
+		final List<AudienceRestriction> retVal = new ArrayList<>();
 		if (assertion.getConditions() != null
 				&& assertion.getConditions().getAudienceRestrictions() != null) {
-			assertion.getConditions().getAudienceRestrictions().forEach(audres -> 
-				getConditions().getConditionOrAudienceRestrictionOrOneTimeUse().add(new AudienceRestrictionBuilderImpl().create(audres))
-			);
+			assertion.getConditions().getAudienceRestrictions().forEach(audres -> {
+				retVal.add(new AudienceRestrictionBuilderImpl().create(audres));
+			});
 		}
+		return retVal;
 	}
 
+	@Override
+	public List<Condition> getConditionsConditions() {
+		final List<Condition> retVal = new ArrayList<>();
+		if (assertion.getConditions() != null) {
+			final List<org.opensaml.saml.saml2.core.Condition> innerList = assertion.getConditions()
+					.getConditions();
+			innerList.forEach(c -> {
+				retVal.add(new ConditionBuilderImpl().create(c));
+			});
+		}
+		return retVal;
+	}
+
+	@Override
 	public Calendar getConditionsNotBefore() {
 		if (assertion.getConditions() != null) {
 			final DateTime instant = assertion.getConditions().getNotBefore();
-			final var retVal = Calendar.getInstance();
+			final Calendar retVal = Calendar.getInstance();
 			retVal.setTimeInMillis(instant.getMillis());
 			return retVal;
 		}
 		return Calendar.getInstance();
 	}
 
+	@Override
 	public Calendar getConditionsNotOnOrAfter() {
 		if (assertion.getConditions() != null) {
 			final DateTime instant = assertion.getConditions().getNotOnOrAfter();
-			final var retVal = Calendar.getInstance();
+			final Calendar retVal = Calendar.getInstance();
 			retVal.setTimeInMillis(instant.getMillis());
 			return retVal;
 		}
@@ -152,8 +152,8 @@ public class AssertionImpl
 	 *
 	 * @see org.ehealth_connector.xua.saml2.Assertion#getId()
 	 */
+	@Override
 	public String getId() {
-		setID(assertion.getID());
 		return assertion.getID();
 	}
 
@@ -163,24 +163,11 @@ public class AssertionImpl
 	 * @see org.ehealth_connector.xua.saml2.Assertion#getIssueInstant()
 	 */
 	@Override
-	public XMLGregorianCalendar getIssueInstant() {
-		if(assertion.getIssueInstant() != null) {
-			final DateTime instant = assertion.getIssueInstant();
-			final var retVal = new GregorianCalendar();
-			retVal.setTimeInMillis(instant.getMillis());
-				
-			XMLGregorianCalendar xmlGregCal = null;
-			try {
-				xmlGregCal = DatatypeFactory.newInstance().newXMLGregorianCalendar(retVal);
-				setIssueInstant(xmlGregCal);
-			} catch (DatatypeConfigurationException e) {
-				LOGGER.error(e.getMessage(), e);
-			}
-			
-			return xmlGregCal;
-		}
-		
-		return null;		
+	public Calendar getIssueInstant() {
+		final DateTime instant = assertion.getIssueInstant();
+		final Calendar retVal = Calendar.getInstance();
+		retVal.setTimeInMillis(instant.getMillis());
+		return retVal;
 	}
 
 	/**
@@ -190,15 +177,11 @@ public class AssertionImpl
 	 * @see org.ehealth_connector.xua.saml2.Assertion#getIssuer()
 	 */
 	@Override
-	public NameIDType getIssuer() {		
-		if (assertion.getIssuer() != null) {			
-			var nameIdType = new NameIDType();
-			nameIdType.setValue(assertion.getIssuer().getValue());
-			setIssuer(nameIdType);	
-			return nameIdType;
+	public String getIssuer() {
+		if (assertion.getIssuer() != null) {
+			return assertion.getIssuer().getValue();
 		}
-		
-		return null;
+		return "";
 	}
 
 	/**
@@ -207,11 +190,9 @@ public class AssertionImpl
 	 * @see org.ehealth_connector.xua.saml2.Assertion#getSubject()
 	 */
 	@Override
-	public SubjectType getSubject() {
+	public Subject getSubject() {
 		if (assertion.getSubject() != null) {
-			var retVal = new SubjectBuilderImpl().create(assertion.getSubject());
-			setSubject(retVal);
-			return retVal;
+			return new SubjectBuilderImpl().create(assertion.getSubject());
 		}
 		return null;
 	}
@@ -225,9 +206,7 @@ public class AssertionImpl
 	@Override
 	public String getVersion() {
 		if (assertion.getVersion() != null) {
-			var retVal = assertion.getVersion().toString();		
-			setVersion(retVal);
-			return retVal;
+			return assertion.getVersion().toString();
 		}
 		return "";
 	}
@@ -247,6 +226,7 @@ public class AssertionImpl
 	 *
 	 * @see org.ehealth_connector.xua.saml2.Response#hasSignature()
 	 */
+	@Override
 	public boolean hasSignature() {
 		return (assertion.getSignature() != null);
 	}

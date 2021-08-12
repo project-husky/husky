@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api;
 
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
+import org.ehealth_connector.xua.saml2.Assertion;
 
 /**
  * <!-- @formatter:off -->
@@ -28,6 +28,6 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionTy
  */
 public interface AssertionBasedRequest extends BasePolicyAdministration {
 
-	public AssertionType getAssertion();
+	public Assertion getAssertion();
 
 }

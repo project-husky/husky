@@ -24,20 +24,21 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
-import java.nio.file.Files;
+import java.net.URISyntaxException;
 import java.util.Base64;
 import java.util.Calendar;
 
 import org.ehealth_connector.common.utils.Util;
-import org.ehealth_connector.xua.authentication.AuthnRequest;
 import org.ehealth_connector.xua.communication.clients.IdpClient;
-import org.ehealth_connector.xua.communication.config.impl.IdpClientByBrowserAndProtocolHandlerConfigImpl;
-import org.ehealth_connector.xua.deserialization.impl.ResponseDeserializerImpl;
 import org.ehealth_connector.xua.exceptions.ClientSendException;
 import org.ehealth_connector.xua.exceptions.DeserializeException;
 import org.ehealth_connector.xua.exceptions.SerializeException;
 import org.ehealth_connector.xua.saml2.Response;
+import org.ehealth_connector.xua.authentication.AuthnRequest;
+import org.ehealth_connector.xua.communication.config.impl.IdpClientByBrowserAndProtocolHandlerConfigImpl;
+import org.ehealth_connector.xua.deserialization.impl.ResponseDeserializerImpl;
 import org.ehealth_connector.xua.serialization.impl.AuthnRequestSerializerImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -62,32 +63,32 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 	}
 
 	private File getHtmlFormPage(AuthnRequest aAuthnRequest)
-			throws SerializeException, IOException {
-		final var serializer = new AuthnRequestSerializerImpl();
+			throws SerializeException, IOException, URISyntaxException {
+		final AuthnRequestSerializerImpl serializer = new AuthnRequestSerializerImpl();
 		final byte[] authnByteArray = serializer.toXmlByteArray(aAuthnRequest);
-		final var samlRequest = Base64.getEncoder().encodeToString(authnByteArray);
+		final String samlRequest = Base64.getEncoder().encodeToString(authnByteArray);
 		String template = readFromJARFile("/template/authnsubmitform.html");
 
-		template = template.replace("@base64samlrequest@", samlRequest);
-		template = template.replace("@bsamlrequesttype@", "SAMLRequest");
-		template = template.replace("@idpurl@", config.getUrl());
+		template = template.replaceAll("@base64samlrequest@", samlRequest);
+		template = template.replaceAll("@bsamlrequesttype@", "SAMLRequest");// config.getSamlRequestType().toString());
+		template = template.replaceAll("@idpurl@", config.getUrl());
 
-		logger.debug("html to send to browser: {}", template);
+		logger.debug("html to send to browser: " + template);
 
-		final var tempFile = File.createTempFile("saml_", ".html");
+		final File tempFile = File.createTempFile("saml_", ".html");
 		tempFile.deleteOnExit();
 
-		try(final var os = new FileOutputStream(tempFile)){
-			os.write(template.getBytes());
-		}
+		final FileOutputStream os = new FileOutputStream(tempFile);
+		os.write(template.getBytes());
+		os.close();
 
 		return tempFile;
 	}
 
 	private Response getResponse(String samlReponse)
-			throws DeserializeException {
+			throws DeserializeException, UnsupportedEncodingException {
 		final byte[] samlReponseBytes = Base64.getDecoder().decode(samlReponse);
-		final var deserializer = new ResponseDeserializerImpl();
+		final ResponseDeserializerImpl deserializer = new ResponseDeserializerImpl();
 		return deserializer.fromXmlByteArray(samlReponseBytes);
 	}
 
@@ -118,9 +119,9 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 	 */
 	public String readFromJARFile(String filename) throws IOException {
 		final InputStream is = getClass().getResourceAsStream(filename);
-		final var isr = new InputStreamReader(is);
-		final var br = new BufferedReader(isr);
-		final var sb = new StringBuilder();
+		final InputStreamReader isr = new InputStreamReader(is);
+		final BufferedReader br = new BufferedReader(isr);
+		final StringBuffer sb = new StringBuffer();
 		String line;
 		while ((line = br.readLine()) != null) {
 			sb.append(line);
@@ -141,15 +142,19 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 	public Object send(AuthnRequest aAuthnRequest) throws ClientSendException {
 		try {
 
-			final var tempFile = new File(System.getProperty("java.io.tmpdir"),
-					config.getProtocolHandlerName() + ".io");			
-			Files.deleteIfExists(tempFile.toPath());
-			final var htmlFile = getHtmlFormPage(aAuthnRequest);
+			final File tempFile = new File(System.getProperty("java.io.tmpdir"),
+					config.getProtocolHandlerName() + ".io");
+			if (tempFile.exists()) {
+				tempFile.delete();
+			}
+
+			final File htmlFile = getHtmlFormPage(aAuthnRequest);
 			startBrowser(htmlFile.toURI());
 
 			return startWaitForResponse(tempFile);
 
-		} catch (final Exception t) {
+		} catch (final Throwable t) {
+			logger.error("An error occured sending authnrequest.", t);
 			throw new ClientSendException(t);
 		}
 	}
@@ -158,7 +163,7 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 		try {
 			if (Desktop.isDesktopSupported()
 					&& Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
-				final var desktop = Desktop.getDesktop();
+				final Desktop desktop = Desktop.getDesktop();
 				desktop.browse(requestUri);
 			} else {
 				if (Util.isWindows()) {
@@ -167,8 +172,8 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 					final String[] browsers = { "epiphany", "firefox", "mozilla", "konqueror",
 							"netscape", "opera", "links", "lynx" };
 
-					final var cmd = new StringBuilder();
-					for (var i = 0; i < browsers.length; i++) {
+					final StringBuffer cmd = new StringBuffer();
+					for (int i = 0; i < browsers.length; i++) {
 						if (i == 0)
 							cmd.append(String.format("%s \"%s\"", browsers[i], requestUri));
 						else
@@ -182,14 +187,14 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 					Runtime.getRuntime().exec(command);
 				}
 			}
-		} catch (final Exception t) {
+		} catch (final Throwable t) {
 			logger.error("An error occured starting the browser.", t);
 		}
 	}
 
 	private Object startWaitForResponse(File response)
 			throws IOException, ClientSendException, DeserializeException {
-		final var end = Calendar.getInstance();
+		final Calendar end = Calendar.getInstance();
 
 		// This is the timeout to wait for the SAML response
 		end.add(Calendar.MINUTE, 2);
@@ -199,31 +204,38 @@ public class IdpClientByBrowserAndProtocolHandler implements IdpClient {
 			}
 			Thread.sleep(200);
 		} catch (final InterruptedException e) {
-			logger.warn("Interrupted wait for SAML response", e);
-			Thread.currentThread().interrupt();
+			// Do nothing
 		}
 
-		try(final var in = new BufferedReader(new FileReader(response))){
-			String line = in.readLine();
-			
-			Files.deleteIfExists(response.toPath());
-			if (line == null) {
-				throw new ClientSendException("No SAML response found");
-			}
-			line = java.net.URLDecoder.decode(line, "UTF-8");
-			logger.info("SAML Response: {}", line);
-
-			if (IdpClientByBrowserAndProtocolHandlerConfigImpl.SamlRequestType.SAMLART
-					.equals(config.getSamlRequestType())) {
-				final String[] urlSplit = line.split("SAMLart");
-				return urlSplit[1].substring(1);
-			} else {
-				final String[] urlSplit = line.split("SAMLResponse");
-				final var samlReponse = urlSplit[1].substring(1);
-				return getResponse(samlReponse);
-			}
+		// final File tempFile = new File(System.getProperty("java.io.tmpdir"),
+		// config.getProtocolHandlerName() + ".io");
+		// if (tempFile.exists()) {
+		// tempFile.delete();
+		// }
+		// tempFile.createNewFile();
+		final BufferedReader in = new BufferedReader(new FileReader(response));
+		String line = in.readLine();
+		in.close();
+		if (response.exists()) {
+			response.delete();
 		}
-		
+		if (line == null) {
+			throw new ClientSendException("No SAML response found");
+		}
+		line = java.net.URLDecoder.decode(line, "UTF-8");
+		logger.info("SAML Response: " + line);
+
+		if (IdpClientByBrowserAndProtocolHandlerConfigImpl.SamlRequestType.SAMLart
+				.equals(config.getSamlRequestType())) {
+			final String[] urlSplit = line.split("SAMLart");
+			final String artReponse = urlSplit[1].substring(1);
+
+			return artReponse;
+		} else {
+			final String[] urlSplit = line.split("SAMLResponse");
+			final String samlReponse = urlSplit[1].substring(1);
+			return getResponse(samlReponse);
+		}
 	}
 
 }

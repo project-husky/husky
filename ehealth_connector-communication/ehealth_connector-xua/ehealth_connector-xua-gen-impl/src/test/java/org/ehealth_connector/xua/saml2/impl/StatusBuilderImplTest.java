@@ -20,6 +20,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.ehealth_connector.xua.saml2.Status;
 import org.ehealth_connector.xua.saml2.StatusCode;
+import org.ehealth_connector.xua.saml2.impl.StatusBuilderImpl;
+import org.ehealth_connector.xua.saml2.impl.StatusImpl;
 import org.junit.Before;
 import org.junit.Test;
 

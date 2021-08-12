@@ -17,17 +17,18 @@
 
 package org.ehealth_connector.xua.saml2.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.xua.core.SecurityObject;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AudienceRestrictionType;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionsType;
+import org.ehealth_connector.xua.saml2.AudienceRestriction;
+import org.ehealth_connector.xua.saml2.Conditions;
 
 /**
  *
  */
 public class ConditionsImpl
-		extends ConditionsType implements SecurityObject<org.opensaml.saml.saml2.core.Conditions> {
+		implements Conditions, SecurityObject<org.opensaml.saml.saml2.core.Conditions> {
 
 	private org.opensaml.saml.saml2.core.Conditions wrappedObject;
 
@@ -35,13 +36,15 @@ public class ConditionsImpl
 		wrappedObject = aInternalObject;
 	}
 
-	public List<AudienceRestrictionType> getAudienceRestrictions() {	
+	@Override
+	public List<AudienceRestriction> getAudienceRestrictions() {
+		final List<AudienceRestriction> retVal = new ArrayList<>();
 		if (wrappedObject.getAudienceRestrictions() != null) {
-			wrappedObject.getAudienceRestrictions().forEach(audienceRestrictions -> 
-				getAudienceRestrictions().add(new AudienceRestrictionBuilderImpl().create(audienceRestrictions))
-				);
+			wrappedObject.getAudienceRestrictions().forEach(audienceRestrictions -> {
+				retVal.add(new AudienceRestrictionBuilderImpl().create(audienceRestrictions));
+			});
 		}
-		return getAudienceRestrictions();
+		return retVal;
 	}
 
 	@Override

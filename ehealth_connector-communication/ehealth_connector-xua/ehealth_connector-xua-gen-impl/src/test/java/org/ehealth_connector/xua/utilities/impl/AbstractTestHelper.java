@@ -46,9 +46,9 @@ public abstract class AbstractTestHelper extends InitializerTestHelper {
 
 		testId = UUID.randomUUID().toString();
 		testIssueInstant = Calendar.getInstance();
-		testAssertionConsumerServiceIndex = Integer.valueOf(111);
+		testAssertionConsumerServiceIndex = new Integer(111);
 		testAssertionConsumerServiceURL = "https://test.it.now.ch/do/it/now/good";
-		testAttributeConsumingServiceIndex = Integer.valueOf(222);
+		testAttributeConsumingServiceIndex = new Integer(222);
 		testDestination = "https://test.soe.healthcare/idp";
 		testProviderName = "IG eHealthConnector";
 		testConsent = "MyConsent";

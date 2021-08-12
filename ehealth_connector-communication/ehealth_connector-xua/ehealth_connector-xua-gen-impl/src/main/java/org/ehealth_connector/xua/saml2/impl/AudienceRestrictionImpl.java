@@ -17,10 +17,12 @@
 
 package org.ehealth_connector.xua.saml2.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.xua.core.SecurityObject;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AudienceRestrictionType;
+import org.ehealth_connector.xua.saml2.Audience;
+import org.ehealth_connector.xua.saml2.AudienceRestriction;
 
 /**
  * <!-- @formatter:off -->
@@ -31,7 +33,7 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AudienceRes
  *
  * <!-- @formatter:on -->
  */
-public class AudienceRestrictionImpl extends AudienceRestrictionType implements
+public class AudienceRestrictionImpl implements AudienceRestriction,
 		SecurityObject<org.opensaml.saml.saml2.core.AudienceRestriction> {
 
 	private org.opensaml.saml.saml2.core.AudienceRestriction wrappedObject;
@@ -41,10 +43,14 @@ public class AudienceRestrictionImpl extends AudienceRestrictionType implements
 		wrappedObject = aInternalObject;
 	}
 
-	public List<String> getAudiences() {		
-		final List<org.opensaml.saml.saml2.core.Audience> internal = wrappedObject.getAudiences();		
-		internal.forEach(c -> getAudience().add(c.getAudienceURI()));		
-		return getAudience();
+	@Override
+	public List<Audience> getAudiences() {
+		final List<org.opensaml.saml.saml2.core.Audience> internal = wrappedObject.getAudiences();
+		final List<Audience> retVal = new ArrayList<>();
+		internal.forEach(c -> {
+			retVal.add(new AudienceBuilderImpl().create(c));
+		});
+		return retVal;
 	}
 
 	@Override

@@ -23,6 +23,7 @@ import java.util.UUID;
 
 import org.ehealth_connector.xua.authentication.AuthnRequest;
 import org.ehealth_connector.xua.authentication.AuthnRequestBuilder;
+import org.ehealth_connector.xua.authentication.impl.AuthnRequestBuilderImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.opensaml.saml.common.xml.SAMLConstants;
@@ -50,9 +51,9 @@ public class AuthnRequestBuilderImplTest {
 		testBuilder = new AuthnRequestBuilderImpl();
 		testId = UUID.randomUUID().toString();
 		testIssueInstant = Calendar.getInstance();
-		testAssertionConsumerServiceIndex = Integer.valueOf(111);
+		testAssertionConsumerServiceIndex = new Integer(111);
 		testAssertionConsumerServiceURL = "https://test.it.now.ch/do/it/now/good";
-		testAttributeConsumingServiceIndex = Integer.valueOf(222);
+		testAttributeConsumingServiceIndex = new Integer(222);
 		testDestination = "https://test.soe.healthcare/idp";
 		testProviderName = "IG eHealthConnector";
 		testConsent = "MyConsent";

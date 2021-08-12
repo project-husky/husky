@@ -59,7 +59,7 @@ public class XUserAssertionRequestImpl implements XUserAssertionRequest,
 
 	@Override
 	public AppliesTo getAppliesTo() {
-		final var wspAppliesTo = new ListXmlObjectHelper<org.opensaml.soap.wspolicy.AppliesTo>()
+		final org.opensaml.soap.wspolicy.AppliesTo wspAppliesTo = new ListXmlObjectHelper<org.opensaml.soap.wspolicy.AppliesTo>()
 				.getComponent(org.opensaml.soap.wspolicy.impl.AppliesToImpl.class,
 						requestSecurityToken.getUnknownXMLObjects());
 		return new AppliesToBuilderImpl().create(wspAppliesTo);
@@ -79,7 +79,7 @@ public class XUserAssertionRequestImpl implements XUserAssertionRequest,
 		final List<Attribute> attributes = new ListXmlObjectHelper<Attribute>()
 				.getComponentList(AttributeImpl.class, unknownXMLObjects);
 		if (attributes != null) {
-			final var attribute = getAttributeByName(attributes, oasisXacmlSubjectid);
+			final Attribute attribute = getAttributeByName(attributes, oasisXacmlSubjectid);
 			if (attribute != null) {
 				final XSAny value = new ListXmlObjectHelper<XSAny>().getComponent(XSAnyImpl.class,
 						attribute.getAttributeValues());
@@ -94,7 +94,7 @@ public class XUserAssertionRequestImpl implements XUserAssertionRequest,
 		final List<Attribute> attributes = new ListXmlObjectHelper<Attribute>()
 				.getComponentList(AttributeImpl.class, unknownXMLObjects);
 		if (attributes != null) {
-			final var attribute = getAttributeByName(attributes, oasisXacmlSubjectid);
+			final Attribute attribute = getAttributeByName(attributes, oasisXacmlSubjectid);
 			if (attribute != null) {
 				final XSString value = new ListXmlObjectHelper<XSString>()
 						.getComponent(XSStringImpl.class, attribute.getAttributeValues());
@@ -144,7 +144,7 @@ public class XUserAssertionRequestImpl implements XUserAssertionRequest,
 
 	@Override
 	public RequestType getRequestType() {
-		final var wstRequestType = new ListXmlObjectHelper<org.opensaml.soap.wstrust.RequestType>()
+		final org.opensaml.soap.wstrust.RequestType wstRequestType = new ListXmlObjectHelper<org.opensaml.soap.wstrust.RequestType>()
 				.getComponent(org.opensaml.soap.wstrust.impl.RequestTypeImpl.class,
 						requestSecurityToken.getUnknownXMLObjects());
 		return RequestType.getEnum(wstRequestType.getValue());
@@ -163,7 +163,7 @@ public class XUserAssertionRequestImpl implements XUserAssertionRequest,
 
 	@Override
 	public String getSubjectId() {
-		final var nameId = new ListXmlObjectHelper<NameID>().getComponent(NameIDImpl.class,
+		final NameID nameId = new ListXmlObjectHelper<NameID>().getComponent(NameIDImpl.class,
 				requestSecurityToken.getUnknownXMLObjects());
 		if (nameId != null) {
 			return nameId.getValue();

@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.communication.ch.ppq.api;
 
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
+import org.ehealth_connector.xua.saml2.Assertion;
 
 /**
  * <!-- @formatter:off -->
@@ -55,7 +55,7 @@ public interface PrivacyPolicyFeed {
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	AssertionType getAssertion();
+	Assertion getAssertion();
 
 	/**
 	 *

@@ -18,10 +18,11 @@ package org.ehealth_connector.xua.saml2.impl;
 
 import static org.junit.Assert.assertNotNull;
 
+import org.ehealth_connector.xua.saml2.AudienceRestriction;
 import org.ehealth_connector.xua.saml2.AudienceRestrictionBuilder;
+import org.ehealth_connector.xua.saml2.impl.AudienceRestrictionBuilderImpl;
 import org.junit.Before;
 import org.junit.Test;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AudienceRestrictionType;
 
 /**
  *
@@ -41,7 +42,7 @@ public class AudienceRestrictionBuilderImplTest {
 	 */
 	@Test
 	public void testCreate() {
-		final AudienceRestrictionType audience = testBuilder.create();
+		final AudienceRestriction audience = testBuilder.create();
 		assertNotNull(audience);
 	}
 

@@ -19,9 +19,9 @@ package org.ehealth_connector.xua.saml2.impl;
 import java.util.List;
 
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
+import org.ehealth_connector.xua.saml2.Subject;
 import org.ehealth_connector.xua.saml2.SubjectBuilder;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationType;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectType;
+import org.ehealth_connector.xua.saml2.SubjectConfirmation;
 import org.opensaml.saml.saml2.core.NameID;
 import org.opensaml.saml.saml2.core.impl.NameIDBuilder;
 
@@ -35,7 +35,7 @@ import org.opensaml.saml.saml2.core.impl.NameIDBuilder;
  *
  */
 public class SubjectBuilderImpl implements SubjectBuilder,
-		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Subject, SubjectType> {
+		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Subject, Subject> {
 
 	private NameID nameID;
 	private org.opensaml.saml.saml2.core.Subject subject;
@@ -48,7 +48,7 @@ public class SubjectBuilderImpl implements SubjectBuilder,
 	}
 
 	@Override
-	public SubjectBuilder addSubjectConfirmations(SubjectConfirmationType aSubjectConfirmation) {
+	public SubjectBuilder addSubjectConfirmations(SubjectConfirmation aSubjectConfirmation) {
 		if (aSubjectConfirmation != null) {
 			final List<org.opensaml.saml.saml2.core.SubjectConfirmation> subjectConfirms = subject
 					.getSubjectConfirmations();
@@ -59,12 +59,12 @@ public class SubjectBuilderImpl implements SubjectBuilder,
 	}
 
 	@Override
-	public SubjectType create() {
+	public Subject create() {
 		return new SubjectImpl(subject);
 	}
 
 	@Override
-	public SubjectType create(org.opensaml.saml.saml2.core.Subject aInternalObject) {
+	public Subject create(org.opensaml.saml.saml2.core.Subject aInternalObject) {
 		return new SubjectImpl(aInternalObject);
 	}
 
@@ -98,13 +98,13 @@ public class SubjectBuilderImpl implements SubjectBuilder,
 	}
 
 	@Override
-	public SubjectBuilder subjectConfirmations(List<SubjectConfirmationType> aSubjectConfirmations) {
+	public SubjectBuilder subjectConfirmations(List<SubjectConfirmation> aSubjectConfirmations) {
 		if (aSubjectConfirmations != null) {
 			final List<org.opensaml.saml.saml2.core.SubjectConfirmation> subjectConfirms = subject
 					.getSubjectConfirmations();
-			aSubjectConfirmations.forEach(c -> 
-				subjectConfirms.add(((SubjectConfirmationImpl) c).getWrappedObject())
-			);
+			aSubjectConfirmations.forEach(c -> {
+				subjectConfirms.add(((SubjectConfirmationImpl) c).getWrappedObject());
+			});
 		}
 		return this;
 	}

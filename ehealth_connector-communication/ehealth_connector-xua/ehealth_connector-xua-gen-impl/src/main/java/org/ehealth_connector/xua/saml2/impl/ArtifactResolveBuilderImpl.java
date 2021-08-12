@@ -45,7 +45,7 @@ public class ArtifactResolveBuilderImpl implements ArtifactResolveBuilder,
 		wrappedObject = new org.opensaml.saml.saml2.core.impl.ArtifactResolveBuilder()
 				.buildObject();
 
-		final var issueBuilder = new IssuerBuilder();
+		final IssuerBuilder issueBuilder = new IssuerBuilder();
 		issuer = issueBuilder.buildObject(Issuer.DEFAULT_ELEMENT_NAME);
 		wrappedObject.setIssuer(issuer);
 
@@ -79,7 +79,7 @@ public class ArtifactResolveBuilderImpl implements ArtifactResolveBuilder,
 	@Override
 	public ArtifactResolveBuilderImpl issueInstant(Calendar aIssueInstant) {
 		if (aIssueInstant != null) {
-			final var dateTime = new DateTime(aIssueInstant.getTimeInMillis());
+			final DateTime dateTime = new DateTime(aIssueInstant.getTimeInMillis());
 			wrappedObject.setIssueInstant(dateTime);
 		}
 		return this;

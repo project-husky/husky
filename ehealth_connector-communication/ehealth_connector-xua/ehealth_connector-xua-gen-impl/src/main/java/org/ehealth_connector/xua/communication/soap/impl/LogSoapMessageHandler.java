@@ -22,8 +22,8 @@ import java.util.Set;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import javax.xml.XMLConstants;
 import javax.xml.namespace.QName;
+import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
@@ -68,14 +68,14 @@ public class LogSoapMessageHandler implements SOAPHandler<SOAPMessageContext> {
 	 */
 	@Override
 	public void close(MessageContext context) {
-		mLogger.debug("close: {}", context);
+		mLogger.debug("close: " + context);
 	}
 
 	@PreDestroy
 	public void destroy() {
 		mLogger.debug("------------------------------------");
-		mLogger.debug("In Handler {} :destroy()", this.getClass().getName());
-		mLogger.debug("Exiting Handler {} :destroy()", this.getClass().getName());
+		mLogger.debug("In Handler " + this.getClass().getName() + " :destroy()");
+		mLogger.debug("Exiting Handler " + this.getClass().getName() + " :destroy()");
 		mLogger.debug("------------------------------------");
 	}
 
@@ -98,8 +98,8 @@ public class LogSoapMessageHandler implements SOAPHandler<SOAPMessageContext> {
 	public boolean handleFault(SOAPMessageContext context) {
 		try {
 			final javax.xml.soap.SOAPMessage soapMsg = context.getMessage();
-			mLogger.debug("SOAP Message: {}", soapMsg);
-		} catch (final Exception ex) {
+			mLogger.debug(soapMsg.toString());
+		} catch (final Throwable ex) {
 			mLogger.debug("Error in soap logging", ex);
 			return false;
 		}
@@ -118,7 +118,7 @@ public class LogSoapMessageHandler implements SOAPHandler<SOAPMessageContext> {
 
 			final Boolean outboundProperty = (Boolean) context
 					.get(MessageContext.MESSAGE_OUTBOUND_PROPERTY);
-			var inout = "";
+			String inout = "";
 
 			if (outboundProperty.booleanValue()) {
 				inout = "Request: ";
@@ -130,17 +130,14 @@ public class LogSoapMessageHandler implements SOAPHandler<SOAPMessageContext> {
 			context.put("soapMsg", soapMsg);
 			context.setScope("soapMsg", MessageContext.Scope.APPLICATION);
 
-			final var sw = new StringWriter();
-			final var transformerFactory = TransformerFactory.newInstance();
-			transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
-			transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
-			final var transformer = transformerFactory.newTransformer();
+			final StringWriter sw = new StringWriter();
+			final Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			// transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 			// transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount",
 			// "2");
 			transformer.transform(new DOMSource(soapMsg.getSOAPPart()), new StreamResult(sw));
-			mLogger.debug("Message: {} {}", inout, sw);
-		} catch (final Exception ex) {
+			mLogger.debug(inout + sw.toString());
+		} catch (final Throwable ex) {
 			mLogger.debug("Error in soap logging", ex);
 			return false;
 		}
@@ -150,8 +147,8 @@ public class LogSoapMessageHandler implements SOAPHandler<SOAPMessageContext> {
 	@PostConstruct
 	public void init() {
 		mLogger.debug("------------------------------------");
-		mLogger.debug("In Handler {} : init()", this.getClass().getName());
-		mLogger.debug("Exiting Handler {} : init()", this.getClass().getName());
+		mLogger.debug("In Handler " + this.getClass().getName() + " : init()");
+		mLogger.debug("Exiting Handler " + this.getClass().getName() + " : init()");
 		mLogger.debug("------------------------------------");
 	}
 }

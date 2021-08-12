@@ -18,14 +18,14 @@ package org.ehealth_connector.xua.saml2.impl;
 
 import static org.junit.Assert.assertEquals;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
+import org.ehealth_connector.xua.saml2.SubjectConfirmation;
 import org.ehealth_connector.xua.saml2.SubjectConfirmationBuilder;
+import org.ehealth_connector.xua.saml2.impl.SubjectConfirmationBuilderImpl;
+import org.ehealth_connector.xua.saml2.impl.SubjectConfirmationImpl;
 import org.junit.Before;
 import org.junit.Test;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationType;
 
 public class SubjectConfirmationBuilderImplTest {
 
@@ -34,8 +34,8 @@ public class SubjectConfirmationBuilderImplTest {
 	private String testInResponseTO;
 	private org.opensaml.saml.saml2.core.SubjectConfirmation testInternalObject;
 	private String testMethod;
-	private GregorianCalendar testNotBefore;
-	private GregorianCalendar testNotOnOrAfter;
+	private Calendar testNotBefore;
+	private Calendar testNotOnOrAfter;
 	private String testRecepient;
 
 	@Before
@@ -47,10 +47,10 @@ public class SubjectConfirmationBuilderImplTest {
 
 		final Calendar cal = Calendar.getInstance();
 		cal.add(Calendar.DAY_OF_YEAR, -120);
-		testNotOnOrAfter = (GregorianCalendar) cal.clone();
+		testNotOnOrAfter = (Calendar) cal.clone();
 
 		cal.add(Calendar.DAY_OF_YEAR, 66);
-		testNotBefore = (GregorianCalendar) cal.clone();
+		testNotBefore = (Calendar) cal.clone();
 
 		testAddress = "http://my.address.ch/test/it/now";
 
@@ -66,8 +66,8 @@ public class SubjectConfirmationBuilderImplTest {
 	 */
 	@Test
 	public void testAddress() {
-		final SubjectConfirmationType ref = builder.address(testAddress).create();
-		assertEquals(testAddress, ref.getSubjectConfirmationData().getAddress());
+		final SubjectConfirmation ref = builder.address(testAddress).create();
+		assertEquals(testAddress, ref.getAddress());
 	}
 
 	/**
@@ -76,7 +76,7 @@ public class SubjectConfirmationBuilderImplTest {
 	 */
 	@Test
 	public void testCreateSubjectConfirmation() {
-		final SubjectConfirmationType ref = ((SubjectConfirmationBuilderImpl) builder)
+		final SubjectConfirmation ref = ((SubjectConfirmationBuilderImpl) builder)
 				.create(testInternalObject);
 		assertEquals(testInternalObject, ((SubjectConfirmationImpl) ref).getWrappedObject());
 	}
@@ -87,8 +87,8 @@ public class SubjectConfirmationBuilderImplTest {
 	 */
 	@Test
 	public void testInResponseTo() {
-		final SubjectConfirmationType ref = builder.inResponseTo(testInResponseTO).create();
-		assertEquals(testInResponseTO, ref.getSubjectConfirmationData().getInResponseTo());
+		final SubjectConfirmation ref = builder.inResponseTo(testInResponseTO).create();
+		assertEquals(testInResponseTO, ref.getInResponseTo());
 	}
 
 	/**
@@ -97,7 +97,7 @@ public class SubjectConfirmationBuilderImplTest {
 	 */
 	@Test
 	public void testMethod() {
-		final SubjectConfirmationType ref = builder.method(testMethod).create();
+		final SubjectConfirmation ref = builder.method(testMethod).create();
 		assertEquals(testMethod, ref.getMethod());
 	}
 
@@ -107,9 +107,8 @@ public class SubjectConfirmationBuilderImplTest {
 	 */
 	@Test
 	public void testNotBefore() {
-		final SubjectConfirmationType ref = builder.notBefore(testNotBefore).create();
-		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmssZ");
-		assertEquals(sdf.format(testNotBefore.getTime()), sdf.format(ref.getSubjectConfirmationData().getNotBefore().toGregorianCalendar().getTime()));
+		final SubjectConfirmation ref = builder.notBefore(testNotBefore).create();
+		assertEquals(testNotBefore, ref.getNotBefore());
 	}
 
 	/**
@@ -118,9 +117,8 @@ public class SubjectConfirmationBuilderImplTest {
 	 */
 	@Test
 	public void testNotOnOrAfter() {
-		final SubjectConfirmationType ref = builder.notOnOrAfter(testNotOnOrAfter).create();
-		SimpleDateFormat sdf = new SimpleDateFormat("ddMMyyyyhhmmssZ");
-		assertEquals(sdf.format(testNotOnOrAfter.getTime()), sdf.format(ref.getSubjectConfirmationData().getNotOnOrAfter().toGregorianCalendar().getTime()));
+		final SubjectConfirmation ref = builder.notOnOrAfter(testNotOnOrAfter).create();
+		assertEquals(testNotOnOrAfter, ref.getNotOnOrAfter());
 	}
 
 	/**
@@ -129,8 +127,8 @@ public class SubjectConfirmationBuilderImplTest {
 	 */
 	@Test
 	public void testRecipient() {
-		final SubjectConfirmationType ref = builder.recipient(testRecepient).create();
-		assertEquals(testRecepient, ref.getSubjectConfirmationData().getRecipient());
+		final SubjectConfirmation ref = builder.recipient(testRecepient).create();
+		assertEquals(testRecepient, ref.getRecipient());
 	}
 
 }

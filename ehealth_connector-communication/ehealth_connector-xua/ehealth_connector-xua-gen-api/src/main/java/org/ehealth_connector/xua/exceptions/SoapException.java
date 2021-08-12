@@ -30,10 +30,10 @@ public class SoapException extends ClientSendException {
 
 	/** the soap exception code */
 	@SuppressWarnings("unused")
-	private final String code;
+	private String code;
 	/** the soap exception message */
 	@SuppressWarnings("unused")
-	private final String message;
+	private String message;
 
 	/**
 	 *

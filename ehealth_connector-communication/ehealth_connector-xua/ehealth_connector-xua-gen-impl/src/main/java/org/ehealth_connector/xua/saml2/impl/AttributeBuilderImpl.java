@@ -125,7 +125,7 @@ public class AttributeBuilderImpl implements AttributeBuilder,
 
 	@Override
 	public AttributeBuilder value(Object aValue) {
-		final var anyBuilder = new XSAnyBuilder();
+		final XSAnyBuilder anyBuilder = new XSAnyBuilder();
 		final XSAny any = anyBuilder.buildObject(AttributeValue.DEFAULT_ELEMENT_NAME);
 		if (aValue instanceof Role) {
 			any.getUnknownXMLObjects().add((OpenSamlRole) aValue);
@@ -146,7 +146,7 @@ public class AttributeBuilderImpl implements AttributeBuilder,
 	@Override
 	public AttributeBuilder value(String aValue) {
 		if (aValue != null) {
-			final var builder = new XSStringBuilder();
+			final XSStringBuilder builder = new XSStringBuilder();
 			final XSString attributeValue = builder.buildObject(AttributeValue.DEFAULT_ELEMENT_NAME,
 					XSString.TYPE_NAME);
 			attributeValue.setValue(aValue);

@@ -36,7 +36,7 @@ public abstract class AbstractHttpFormIdpClient extends AbstractIdpClient {
 
 	HttpPost getHttpPost(AuthnRequest aAuthnRequest, IdpClientConfig config)
 			throws UnsupportedEncodingException, SerializeException {
-		final var post = super.getHttpPost(config);
+		final HttpPost post = super.getHttpPost(config);
 		post.setConfig(getRequestConfig());
 		post.setHeader(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded");
 		post.setEntity(getUrlFormEntity(aAuthnRequest));

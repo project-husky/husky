@@ -33,7 +33,7 @@ public class IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl implements Cl
 	public IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl() {
 		clientConfig = new IdpClientByBrowserAndProtocolHandlerConfigImpl();
 		clientConfig.setSamlRequestType(
-				IdpClientByBrowserAndProtocolHandlerConfigImpl.SamlRequestType.SAMLART);
+				IdpClientByBrowserAndProtocolHandlerConfigImpl.SamlRequestType.SAMLart);
 	}
 
 	public IdpClientByBrowserAndProtocolHandlerConfigImpl create() {

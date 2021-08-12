@@ -19,6 +19,7 @@ package org.ehealth_connector.xua.hl7v3.impl;
 import static org.junit.Assert.assertNotNull;
 
 import org.ehealth_connector.xua.hl7v3.Role;
+import org.ehealth_connector.xua.hl7v3.impl.RoleBuilder;
 import org.junit.Before;
 import org.junit.Test;
 

@@ -21,11 +21,13 @@ import static org.junit.Assert.assertNotNull;
 
 import java.util.UUID;
 
+import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.AssertionBuilder;
 import org.ehealth_connector.xua.saml2.Attribute;
+import org.ehealth_connector.xua.saml2.impl.AssertionBuilderImpl;
+import org.ehealth_connector.xua.saml2.impl.AttributeBuilderImpl;
 import org.junit.Before;
 import org.junit.Test;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 
 public class AssertionBuilderImplTest {
 
@@ -52,7 +54,7 @@ public class AssertionBuilderImplTest {
 	public void testAddAttribute() {
 		final Attribute attribute = new AttributeBuilderImpl().name(testAttributeName)
 				.value(testAttributeValue).create();
-		final AssertionType ref = testBuilder.addAttribute(attribute).create();
+		final Assertion ref = testBuilder.addAttribute(attribute).create();
 		assertNotNull(ref);
 	}
 
@@ -62,8 +64,8 @@ public class AssertionBuilderImplTest {
 	 */
 	@Test
 	public void testId() {
-		final AssertionType ref = testBuilder.id(testId).create();
-		assertEquals(testId, ref.getID());
+		final Assertion ref = testBuilder.id(testId).create();
+		assertEquals(testId, ref.getId());
 	}
 
 }

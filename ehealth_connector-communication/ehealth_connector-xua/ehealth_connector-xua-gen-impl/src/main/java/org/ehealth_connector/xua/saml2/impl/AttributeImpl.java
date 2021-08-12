@@ -79,8 +79,9 @@ public class AttributeImpl
 	@Override
 	public InstanceIdentifier getValueAsInstanceIdentifier() {
 		if (isValueAInstanceIdentifier()) {
-			return (InstanceIdentifier) attribute
+			final InstanceIdentifier attributeValue = (InstanceIdentifier) attribute
 					.getAttributeValues().get(0);
+			return attributeValue;
 		}
 		return null;
 	}
@@ -88,8 +89,9 @@ public class AttributeImpl
 	@Override
 	public PurposeOfUse getValueAsPurposeOfUse() {
 		if (isValueAPurposeOfUse()) {
-			return (PurposeOfUse) attribute.getAttributeValues()
+			final PurposeOfUse attributeValue = (PurposeOfUse) attribute.getAttributeValues()
 					.get(0);
+			return attributeValue;
 		}
 		return null;
 	}
@@ -97,7 +99,8 @@ public class AttributeImpl
 	@Override
 	public Role getValueAsRole() {
 		if (isValueARole()) {
-			return (Role) attribute.getAttributeValues().get(0);
+			final Role attributeValue = (Role) attribute.getAttributeValues().get(0);
+			return attributeValue;
 		}
 		return null;
 	}
@@ -125,28 +128,28 @@ public class AttributeImpl
 	@Override
 	public boolean isValueAInstanceIdentifier() {
 		return (attribute.getAttributeValues() != null) //
-				&& (!attribute.getAttributeValues().isEmpty()) //
+				&& (attribute.getAttributeValues().size() > 0) //
 				&& (attribute.getAttributeValues().get(0) instanceof InstanceIdentifier);
 	}
 
 	@Override
 	public boolean isValueAPurposeOfUse() {
 		return (attribute.getAttributeValues() != null) //
-				&& (!attribute.getAttributeValues().isEmpty()) //
+				&& (attribute.getAttributeValues().size() > 0) //
 				&& (attribute.getAttributeValues().get(0) instanceof PurposeOfUse);
 	}
 
 	@Override
 	public boolean isValueARole() {
 		return (attribute.getAttributeValues() != null) //
-				&& (!attribute.getAttributeValues().isEmpty()) //
+				&& (attribute.getAttributeValues().size() > 0) //
 				&& (attribute.getAttributeValues().get(0) instanceof Role);
 	}
 
 	@Override
 	public boolean isValueAString() {
 		return (attribute.getAttributeValues() != null) //
-				&& (!attribute.getAttributeValues().isEmpty()) //
+				&& (attribute.getAttributeValues().size() > 0) //
 				&& (attribute.getAttributeValues().get(0) instanceof XSString);
 	}
 

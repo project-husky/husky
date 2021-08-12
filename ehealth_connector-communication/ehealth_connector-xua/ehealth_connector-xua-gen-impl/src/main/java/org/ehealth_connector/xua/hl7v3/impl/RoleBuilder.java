@@ -18,7 +18,6 @@ package org.ehealth_connector.xua.hl7v3.impl;
 
 import org.apache.commons.lang.StringUtils;
 import org.ehealth_connector.xua.hl7v3.OpenSamlRole;
-import org.ehealth_connector.xua.hl7v3.Role;
 import org.opensaml.core.xml.AbstractXMLObjectBuilder;
 
 /**
@@ -62,8 +61,8 @@ public class RoleBuilder extends AbstractXMLObjectBuilder<OpenSamlRole> {
 	 * <!-- @formatter:on -->
 	 */
 	public OpenSamlRole buildObject() {
-		return buildObject(Role.DEFAULT_NS_URI, Role.DEFAULT_ELEMENT_LOCAL_NAME,
-				Role.DEFAULT_PREFIX);
+		return buildObject(OpenSamlRole.DEFAULT_NS_URI, OpenSamlRole.DEFAULT_ELEMENT_LOCAL_NAME,
+				OpenSamlRole.DEFAULT_PREFIX);
 	}
 
 	/**

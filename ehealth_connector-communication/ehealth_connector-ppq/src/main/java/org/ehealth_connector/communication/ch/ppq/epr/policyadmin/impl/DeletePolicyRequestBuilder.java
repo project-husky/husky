@@ -18,7 +18,7 @@ package org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl;
 
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.DeletePolicyRequest;
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.OpenSamlDeletePolicyRequest;
-import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
+import org.ehealth_connector.xua.saml2.Assertion;
 import org.opensaml.core.xml.AbstractXMLObjectBuilder;
 
 /**
@@ -32,9 +32,9 @@ import org.opensaml.core.xml.AbstractXMLObjectBuilder;
 public class DeletePolicyRequestBuilder
 		extends AbstractXMLObjectBuilder<OpenSamlDeletePolicyRequest> {
 
-	private AssertionType assertion;
+	private Assertion assertion;
 
-	public DeletePolicyRequestBuilder assertion(AssertionType aAssertion) {
+	public DeletePolicyRequestBuilder assertion(Assertion aAssertion) {
 		assertion = aAssertion;
 		return this;
 	}

@@ -20,10 +20,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
-import org.ehealth_connector.xua.authentication.AuthnRequest;
-import org.ehealth_connector.xua.authentication.impl.AuthnRequestBuilderImpl;
 import org.ehealth_connector.xua.exceptions.SerializeException;
 import org.ehealth_connector.xua.utilities.impl.AbstractTestHelper;
+import org.ehealth_connector.xua.authentication.AuthnRequest;
+import org.ehealth_connector.xua.authentication.impl.AuthnRequestBuilderImpl;
+import org.ehealth_connector.xua.serialization.impl.AuthnRequestSerializerImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Element;

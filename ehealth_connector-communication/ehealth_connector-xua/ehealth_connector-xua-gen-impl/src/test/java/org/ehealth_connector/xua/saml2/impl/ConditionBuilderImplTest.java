@@ -19,6 +19,8 @@ package org.ehealth_connector.xua.saml2.impl;
 import static org.junit.Assert.assertEquals;
 
 import org.ehealth_connector.xua.saml2.Condition;
+import org.ehealth_connector.xua.saml2.impl.ConditionBuilderImpl;
+import org.ehealth_connector.xua.saml2.impl.ConditionImpl;
 import org.junit.Before;
 import org.junit.Test;
 

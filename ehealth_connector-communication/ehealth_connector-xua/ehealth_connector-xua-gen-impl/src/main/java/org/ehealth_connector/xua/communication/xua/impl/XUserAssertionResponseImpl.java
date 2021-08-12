@@ -51,7 +51,7 @@ public class XUserAssertionResponseImpl implements XUserAssertionResponse,
 	public Assertion getAssertion() {
 		final List<XMLObject> requestedTokens = responseCollection.getUnknownXMLObjects(new QName(
 				"http://docs.oasis-open.org/ws-sx/ws-trust/200512", "RequestedSecurityToken"));
-		if (!requestedTokens.isEmpty()) {
+		if ((requestedTokens != null) && !requestedTokens.isEmpty()) {
 			final RequestedSecurityToken token = (RequestedSecurityToken) requestedTokens.get(0);
 			return new AssertionBuilderImpl()
 					.create((org.opensaml.saml.saml2.core.Assertion) token.getUnknownXMLObject());

@@ -18,7 +18,6 @@ package org.ehealth_connector.xua.hl7v3.impl;
 
 import org.apache.commons.lang.StringUtils;
 import org.ehealth_connector.xua.hl7v3.OpenSamlPurposeOfUse;
-import org.ehealth_connector.xua.hl7v3.PurposeOfUse;
 import org.opensaml.core.xml.AbstractXMLObjectBuilder;
 
 /**
@@ -62,9 +61,9 @@ public class PurposeOfUseBuilder extends AbstractXMLObjectBuilder<OpenSamlPurpos
 	 * <!-- @formatter:on -->
 	 */
 	public OpenSamlPurposeOfUse buildObject() {
-		return buildObject(PurposeOfUse.DEFAULT_NS_URI,
-				PurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME,
-				PurposeOfUse.DEFAULT_PREFIX);
+		return buildObject(OpenSamlPurposeOfUse.DEFAULT_NS_URI,
+				OpenSamlPurposeOfUse.DEFAULT_ELEMENT_LOCAL_NAME,
+				OpenSamlPurposeOfUse.DEFAULT_PREFIX);
 	}
 
 	/**

@@ -16,7 +16,6 @@
  */
 package org.ehealth_connector.xua.hl7v3.impl;
 
-import org.ehealth_connector.xua.hl7v3.InstanceIdentifier;
 import org.ehealth_connector.xua.hl7v3.OpenSamlInstanceIdentifier;
 import org.opensaml.core.xml.AbstractXMLObjectBuilder;
 
@@ -43,9 +42,9 @@ public class InstanceIdentifierBuilder
 	 * <!-- @formatter:on -->
 	 */
 	public OpenSamlInstanceIdentifier buildObject() {
-		return buildObject(InstanceIdentifier.DEFAULT_NS_URI,
-				InstanceIdentifier.DEFAULT_ELEMENT_LOCAL_NAME,
-				InstanceIdentifier.DEFAULT_PREFIX);
+		return buildObject(OpenSamlInstanceIdentifier.DEFAULT_NS_URI,
+				OpenSamlInstanceIdentifier.DEFAULT_ELEMENT_LOCAL_NAME,
+				OpenSamlInstanceIdentifier.DEFAULT_PREFIX);
 	}
 
 	/**

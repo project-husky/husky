@@ -122,9 +122,9 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 	}
 
 	private XMLObject createObjectAttribute(String aName, XMLObject hl7PurposeOfUse) {
-		final var attribute = new AttributeBuilder().buildObject();
+		final Attribute attribute = new AttributeBuilder().buildObject();
 		attribute.setName(aName);
-		final var anyBuilder = new XSAnyBuilder();
+		final XSAnyBuilder anyBuilder = new XSAnyBuilder();
 		final XSAny any = anyBuilder.buildObject(AttributeValue.DEFAULT_ELEMENT_NAME);
 		any.getUnknownXMLObjects().add(hl7PurposeOfUse);
 		attribute.getAttributeValues().add(any);
@@ -132,10 +132,10 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 	}
 
 	private Attribute createStringAttribute(String aName, String aValue) {
-		final var attribute = new AttributeBuilder().buildObject();
+		final Attribute attribute = new AttributeBuilder().buildObject();
 		attribute.setName(aName);
 
-		final var stringBuilder = new XSStringBuilder();
+		final XSStringBuilder stringBuilder = new XSStringBuilder();
 		final XSString attributeValue = stringBuilder
 				.buildObject(AttributeValue.DEFAULT_ELEMENT_NAME, XSString.TYPE_NAME);
 		attributeValue.setValue(aValue);
@@ -213,7 +213,7 @@ public class XUserAssertionRequestBuilderImpl implements XUserAssertionRequestBu
 	@Override
 	public XUserAssertionRequestBuilder requestType(RequestType requestType) {
 		if (requestType != null) {
-			final var wstRequestType = new RequestTypeBuilder()
+			final org.opensaml.soap.wstrust.RequestType wstRequestType = new RequestTypeBuilder()
 					.buildObject();
 			wstRequestType.setValue(requestType.toString());
 			addXMLObject(wstRequestType);

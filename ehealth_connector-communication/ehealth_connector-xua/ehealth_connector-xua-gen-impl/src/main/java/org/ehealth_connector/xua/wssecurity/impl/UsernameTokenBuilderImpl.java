@@ -19,7 +19,6 @@ package org.ehealth_connector.xua.wssecurity.impl;
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.ehealth_connector.xua.wssecurity.UsernameToken;
 import org.ehealth_connector.xua.wssecurity.UsernameTokenBuilder;
-import org.opensaml.soap.wssecurity.EncodedString;
 
 /**
  * <!-- @formatter:off -->
@@ -43,7 +42,7 @@ public class UsernameTokenBuilderImpl implements UsernameTokenBuilder,
 		password = new org.opensaml.soap.wssecurity.impl.PasswordBuilder().buildObject();
 		password.setType(org.opensaml.soap.wssecurity.Password.TYPE_PASSWORD_TEXT);
 		nonce = new org.opensaml.soap.wssecurity.impl.NonceBuilder().buildObject();
-		nonce.setEncodingType(EncodedString.ENCODING_TYPE_BASE64_BINARY);
+		nonce.setEncodingType(org.opensaml.soap.wssecurity.Nonce.ENCODING_TYPE_BASE64_BINARY);
 	}
 
 	@Override

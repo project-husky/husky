@@ -19,9 +19,10 @@ package org.ehealth_connector.xua.saml2.impl;
 import static org.junit.Assert.assertEquals;
 
 import org.ehealth_connector.xua.hl7v3.Role;
-import org.ehealth_connector.xua.hl7v3.impl.RoleBuilder;
 import org.ehealth_connector.xua.saml2.Attribute;
 import org.ehealth_connector.xua.saml2.AttributeBuilder;
+import org.ehealth_connector.xua.hl7v3.impl.RoleBuilder;
+import org.ehealth_connector.xua.saml2.impl.AttributeBuilderImpl;
 import org.junit.Before;
 import org.junit.Test;
 

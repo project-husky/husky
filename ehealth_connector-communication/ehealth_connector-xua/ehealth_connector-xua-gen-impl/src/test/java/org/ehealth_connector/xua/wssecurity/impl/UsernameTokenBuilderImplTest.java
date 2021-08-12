@@ -23,6 +23,8 @@ import java.util.Base64;
 import java.util.Random;
 
 import org.ehealth_connector.xua.wssecurity.UsernameToken;
+import org.ehealth_connector.xua.wssecurity.impl.UsernameTokenBuilderImpl;
+import org.ehealth_connector.xua.wssecurity.impl.UsernameTokenImpl;
 import org.junit.Before;
 import org.junit.Test;
 

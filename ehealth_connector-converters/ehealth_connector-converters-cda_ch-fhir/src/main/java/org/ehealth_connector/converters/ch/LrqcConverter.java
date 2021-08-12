@@ -16,7 +16,6 @@
  */
 package org.ehealth_connector.converters.ch;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -603,7 +602,6 @@ public class LrqcConverter extends AbstractCdaChV12FhirConverter {
 	 * @param fileName
 	 *            the file name
 	 * @return the LRQC document
-	 * @throws IOException 
 	 */
 	public LrqcDocument readLrqcDocumentFromFile(String fileName) {
 		final String resourceString = FhirCommon.getXmlResource(fileName);

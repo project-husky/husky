@@ -19,6 +19,8 @@ package org.ehealth_connector.xua.communication.config.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
+import org.ehealth_connector.xua.communication.config.impl.IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl;
+import org.ehealth_connector.xua.communication.config.impl.IdpClientByBrowserAndProtocolHandlerConfigImpl;
 import org.junit.Before;
 import org.junit.Test;
 

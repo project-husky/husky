@@ -19,8 +19,9 @@ package org.ehealth_connector.xua.hl7v3.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import org.ehealth_connector.xua.hl7v3.OpenSamlPurposeOfUse;
 import org.ehealth_connector.xua.utilities.impl.InitializerTestHelper;
+import org.ehealth_connector.xua.hl7v3.OpenSamlPurposeOfUse;
+import org.ehealth_connector.xua.hl7v3.impl.PurposeOfUseUnmarshaller;
 import org.junit.Before;
 import org.junit.Test;
 import org.opensaml.core.xml.io.UnmarshallingException;

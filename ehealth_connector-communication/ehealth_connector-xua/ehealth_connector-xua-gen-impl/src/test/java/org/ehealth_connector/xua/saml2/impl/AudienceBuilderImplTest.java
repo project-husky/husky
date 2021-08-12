@@ -14,18 +14,37 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.xua.saml2;
+
+package org.ehealth_connector.xua.saml2.impl;
+
+import static org.junit.Assert.assertNotNull;
+
+import org.ehealth_connector.xua.saml2.Audience;
+import org.ehealth_connector.xua.saml2.AudienceBuilder;
+import org.ehealth_connector.xua.saml2.impl.AudienceBuilderImpl;
+import org.junit.Before;
+import org.junit.Test;
 
 /**
- * <!-- @formatter:off -->
- * <div class="en">Interface describing the methods of the AudienceRestrictionBuilder. </div>
- * <div class="de">Interface welches die Methoden des AudienceRestrictionBuilder beschreibt.</div>
- * <div class="fr"></div>
- * <div class="it"></div
+ *
  */
-public interface AudienceRestrictionBuilder extends SimpleBuilder<AudienceRestriction> {
+public class AudienceBuilderImplTest {
 
-	// There are no special methods defined, but the interface has to be
-	// declared for selection reasons.
+	public AudienceBuilder testBuilder;
+
+	@Before
+	public void setUp() throws Exception {
+		testBuilder = new AudienceBuilderImpl();
+	}
+
+	/**
+	 * Test method for
+	 * {@link org.ehealth_connector.xua.saml2.impl.AudienceBuilderImpl#create()}.
+	 */
+	@Test
+	public void testCreate() {
+		final Audience audience = testBuilder.create();
+		assertNotNull(audience);
+	}
 
 }

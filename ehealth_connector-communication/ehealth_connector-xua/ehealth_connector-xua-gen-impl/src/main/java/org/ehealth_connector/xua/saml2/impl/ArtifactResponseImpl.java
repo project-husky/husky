@@ -69,7 +69,7 @@ public class ArtifactResponseImpl
 	@Override
 	public Calendar getIssueInstant() {
 		final DateTime instant = wrappedObject.getIssueInstant();
-		final var retVal = Calendar.getInstance();
+		final Calendar retVal = Calendar.getInstance();
 		retVal.setTimeInMillis(instant.getMillis());
 		return retVal;
 	}
