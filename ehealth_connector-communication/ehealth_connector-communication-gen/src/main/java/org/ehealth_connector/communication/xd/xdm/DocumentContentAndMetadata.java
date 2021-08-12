@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.communication.xd.xdm;
 
-import org.ehealth_connector.communication.DocumentMetadata;
+import org.ehealth_connector.common.communication.DocumentMetadata;
 import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 

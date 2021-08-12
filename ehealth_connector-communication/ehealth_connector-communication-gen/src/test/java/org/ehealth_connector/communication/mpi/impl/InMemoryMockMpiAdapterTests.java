@@ -19,8 +19,8 @@ package org.ehealth_connector.communication.mpi.impl;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+import org.ehealth_connector.communication.testhelper.TestPatient;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
-import org.ehealth_connector.fhir.testhelper.TestPatient;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;

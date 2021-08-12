@@ -29,6 +29,7 @@ import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.hl7cdar2.*;
 import org.ehealth_connector.common.utils.DateUtil;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.xml.bind.JAXBContext;
@@ -470,6 +471,7 @@ public class EmedChStrucDocTextBuilderV097Test {
 	 * Test is narrative text and references are well created and added to the
 	 * doc
 	 */
+	@Ignore
 	@Test
 	public void narrativTextAndReferenceGenerated() {
 

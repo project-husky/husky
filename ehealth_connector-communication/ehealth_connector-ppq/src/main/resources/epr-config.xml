@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XMLTooling xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.opensaml.org/xmltooling-config" xmlns:epr="urn:e-health-suisse:2015:policy-administration"
+	xsi:schemaLocation="http://www.opensaml.org/xmltooling-config ../../src/schema/xmltooling-config.xsd">
+	<ObjectProviders>
+
+		<!-- AddPolicyRequest -->
+		<ObjectProvider qualifiedName="epr:AddPolicyRequest">
+			<BuilderClass className="org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl.AddPolicyRequestBuilder" />
+			<MarshallingClass className="org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl.AddPolicyRequestMarshaller" />
+			<UnmarshallingClass className="org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl.AddPolicyRequestUnmarshaller" />
+		</ObjectProvider>
+
+		<!-- UpdatePolicyRequest -->
+		<ObjectProvider qualifiedName="epr:UpdatePolicyRequest">
+			<BuilderClass className="org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl.UpdatePolicyRequestBuilder" />
+			<MarshallingClass className="org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl.UpdatePolicyRequestMarshaller" />
+			<UnmarshallingClass className="org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl.UpdatePolicyRequestUnmarshaller" />
+		</ObjectProvider>
+
+		<!-- DeletePolicyRequest -->
+		<ObjectProvider qualifiedName="epr:DeletePolicyRequest">
+			<BuilderClass className="org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl.DeletePolicyRequestBuilder" />
+			<MarshallingClass className="org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl.DeletePolicyRequestMarshaller" />
+			<UnmarshallingClass className="org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl.DeletePolicyRequestUnmarshaller" />
+		</ObjectProvider>
+
+		<!-- EprPolicyRepositoryResponse -->
+		<ObjectProvider qualifiedName="epr:EprPolicyRepositoryResponse">
+			<BuilderClass className="org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl.EprPolicyRepositoryResponseBuilderImpl" />
+			<MarshallingClass className="org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl.EprPolicyRepositoryResponseMarshaller" />
+			<UnmarshallingClass className="org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl.EprPolicyRepositoryResponseUnmarshaller" />
+		</ObjectProvider>
+
+		<!-- UnknownPolicySetId -->
+		<ObjectProvider qualifiedName="epr:UnknownPolicySetId">
+			<BuilderClass className="org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl.UnknownPolicySetIdBuilderImpl" />
+			<MarshallingClass className="org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl.UnknownPolicySetIdMarshaller" />
+			<UnmarshallingClass className="org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl.UnknownPolicySetIdUnmarshaller" />
+		</ObjectProvider>
+
+	</ObjectProviders>
+
+</XMLTooling>

@@ -1,0 +1,51 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>ehealth_connector-cda-validation</artifactId>
+	<name>eHealth Connector CDA Validation</name>
+
+	<parent>
+		<groupId>org.ehealth_connector.cda</groupId>
+		<artifactId>ehealth_connector-cda</artifactId>
+		<version>1.9-SNAPSHOT</version>
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.ehealth_connector.common</groupId>
+			<artifactId>ehealth_connector-common-gen</artifactId>
+			<version>1.9-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.ehealth_connector.validation.service</groupId>
+			<artifactId>ehealth_connector-validation-service</artifactId>
+			<version>1.9-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.saxon</groupId>
+			<artifactId>Saxon-HE</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.pdftools</groupId>
+			<artifactId>VALA</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.verapdf</groupId>
+			<artifactId>validation-model</artifactId>
+		</dependency>
+
+	</dependencies>
+</project>

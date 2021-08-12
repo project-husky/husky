@@ -19,6 +19,9 @@ package org.ehealth_connector.communication;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ehealth_connector.common.communication.AffinityDomain;
+import org.ehealth_connector.common.communication.AtnaConfig;
+import org.ehealth_connector.common.communication.Destination;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Patient;
 import org.ehealth_connector.communication.mpi.impl.V3PdqQueryResponse;

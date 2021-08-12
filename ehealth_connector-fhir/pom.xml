@@ -7,11 +7,12 @@
 
 	<parent>
 		<groupId>org.ehealth_connector</groupId>
-		<artifactId>ehealth_connector-api-java</artifactId>
+		<artifactId>ehealth_connector-api</artifactId>
 		<version>1.9-SNAPSHOT</version>
 	</parent>
 
 	<modules>
 		<module>ehealth_connector-fhir-structures</module>
+		<module>ehealth_connector-fhir-communication</module>
 	</modules>
 </project>

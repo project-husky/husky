@@ -21,6 +21,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.net.URISyntaxException;
 
+import org.ehealth_connector.common.communication.Destination;
 import org.ehealth_connector.common.utils.Util;
 import org.junit.Before;
 import org.junit.Test;
