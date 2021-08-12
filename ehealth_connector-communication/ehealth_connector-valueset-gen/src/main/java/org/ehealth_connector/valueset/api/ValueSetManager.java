@@ -27,6 +27,7 @@ import java.io.OutputStreamWriter;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -51,7 +52,6 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.apache.commons.io.Charsets;
 import org.apache.commons.io.IOUtils;
 import org.ehealth_connector.common.basetypes.AddressBaseType;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
@@ -117,8 +117,8 @@ public class ValueSetManager {
 			Date effectiveDate) throws MalformedURLException {
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
 			return new URL(baseUrl + "&id="
-					+ java.net.URLEncoder.encode(id.getRoot(), Charsets.UTF_8) + "&effectiveDate="
-					+ java.net.URLEncoder.encode(dateFormat.format(effectiveDate), Charsets.UTF_8));
+					+ java.net.URLEncoder.encode(id.getRoot(), StandardCharsets.UTF_8) + "&effectiveDate="
+					+ java.net.URLEncoder.encode(dateFormat.format(effectiveDate), StandardCharsets.UTF_8));
 	}
 
 	/**
@@ -158,7 +158,7 @@ public class ValueSetManager {
 				String sourceUrlString = valueSetConfig.getSourceUrl();
 				String downloadedString = "";
 				try {
-					downloadedString = IOUtils.toString(new URL(sourceUrlString), Charsets.UTF_8);
+					downloadedString = IOUtils.toString(new URL(sourceUrlString), StandardCharsets.UTF_8);
 					downloadedString = downloadedString.replace("&lt;", "<");
 					downloadedString = downloadedString.replace("&gt;", ">");
 					downloadedString = downloadedString.replace("&amp;", "&");
@@ -167,14 +167,14 @@ public class ValueSetManager {
 					downloadedString = downloadedString.replace("\r\n", "\n");
 					switch (valueSetConfig.getSourceFormatType()) {
 					case JSON:
-						retVal = loadValueSetJson(IOUtils.toInputStream(downloadedString, Charsets.UTF_8));
+						retVal = loadValueSetJson(IOUtils.toInputStream(downloadedString, StandardCharsets.UTF_8));
 						break;
 					case XML:
-						retVal = loadValueSetXml(IOUtils.toInputStream(downloadedString, Charsets.UTF_8));
+						retVal = loadValueSetXml(IOUtils.toInputStream(downloadedString, StandardCharsets.UTF_8));
 						break;
 					case IHESVS:
 						retVal = loadValueSetIheSvs(
-								IOUtils.toInputStream(downloadedString, Charsets.UTF_8));
+								IOUtils.toInputStream(downloadedString, StandardCharsets.UTF_8));
 						break;
 					}
 				} catch (RuntimeException e) {
@@ -347,7 +347,7 @@ public class ValueSetManager {
 	 * @return the value set config
 	 */
 	public ValueSetConfig loadValueSetConfig(InputStream inputStream) {
-		InputStreamReader reader = new InputStreamReader(inputStream, Charsets.UTF_8);
+		InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
 		return CustomizedYaml.getCustomizedYaml().loadAs(reader,
 				ValueSetConfig.class);
 	}
@@ -407,7 +407,7 @@ public class ValueSetManager {
 	 */
 	public ValueSet loadValueSetIheSvs(InputStream inputStream)
 			throws IOException, ParserConfigurationException, SAXException {
-		InputStreamReader reader = new InputStreamReader(inputStream, Charsets.UTF_8);
+		InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
 		ValueSet valueSet = new ValueSet();
 		Version version = new Version();
 
@@ -418,7 +418,7 @@ public class ValueSetManager {
 		DocumentBuilder docBuilder;
 		docBuilder = docBuilderFactory.newDocumentBuilder();
 		Document xmlDoc = docBuilder
-				.parse(IOUtils.toInputStream(IOUtils.toString(reader), Charsets.UTF_8));
+				.parse(IOUtils.toInputStream(IOUtils.toString(reader), StandardCharsets.UTF_8));
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//ValueSet/@id");
 		if (textContent != null)
@@ -573,7 +573,7 @@ public class ValueSetManager {
 	 * @throws IOException
 	 */
 	public ValueSet loadValueSetJson(InputStream inputStream) throws IOException {
-		InputStreamReader reader = new InputStreamReader(inputStream, Charsets.UTF_8);
+		InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
 		ValueSet valueSet = new ValueSet();
 		Version version = new Version();
 		Map<String, Object> map = getValueSetJsonMap(reader);
@@ -947,7 +947,7 @@ public class ValueSetManager {
 	 */
 	public ValueSet loadValueSetXml(InputStream inputStream)
 			throws IOException, ParserConfigurationException, SAXException {
-		InputStreamReader reader = new InputStreamReader(inputStream, Charsets.UTF_8);
+		InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
 		ValueSet valueSet = new ValueSet();
 		Version version = new Version();
 
@@ -958,7 +958,7 @@ public class ValueSetManager {
 		DocumentBuilder docBuilder;
 		docBuilder = docBuilderFactory.newDocumentBuilder();
 		Document xmlDoc = docBuilder
-				.parse(IOUtils.toInputStream(IOUtils.toString(reader), Charsets.UTF_8));
+				.parse(IOUtils.toInputStream(IOUtils.toString(reader), StandardCharsets.UTF_8));
 
 		textContent = evaluateXpathExprAsString(xmlDoc, "//valueSets/project/valueSet/@id");
 		if (textContent != null)
@@ -1173,7 +1173,7 @@ public class ValueSetManager {
 	 * @return the value set
 	 */
 	public ValueSet loadValueSetYaml(InputStream inputStream) {
-		InputStreamReader reader = new InputStreamReader(inputStream, Charsets.UTF_8);
+		InputStreamReader reader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
 		return CustomizedYaml.getCustomizedYaml().loadAs(reader, ValueSet.class);
 	}
 
@@ -1229,7 +1229,7 @@ public class ValueSetManager {
 	 *             Signals that an I/O exception has occurred.
 	 */
 	public void saveValueSet(ValueSet valueSet, OutputStream outputStream) throws IOException {
-		OutputStreamWriter writer = new OutputStreamWriter(outputStream, Charsets.UTF_8);
+		OutputStreamWriter writer = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
 		writer.write(CustomizedYaml.getCustomizedYaml().dumpAsMap(valueSet));
 		writer.flush();
 		writer.close();
@@ -1289,7 +1289,7 @@ public class ValueSetManager {
 	 */
 	public void saveValueSetConfig(ValueSetConfig valueSetConfig, OutputStream outputStream)
 			throws IOException {
-		OutputStreamWriter writer = new OutputStreamWriter(outputStream, Charsets.UTF_8);
+		OutputStreamWriter writer = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
 		writer.write(CustomizedYaml.getCustomizedYaml().dumpAsMap(valueSetConfig));
 		writer.flush();
 		writer.close();

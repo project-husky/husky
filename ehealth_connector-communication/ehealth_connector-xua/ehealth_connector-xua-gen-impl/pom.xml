@@ -20,6 +20,7 @@
 		<dependency>
 			<groupId>org.ehealth_connector.common.ch</groupId>
 			<artifactId>ehealth_connector-common-ch</artifactId>
+			<version>1.9-SNAPSHOT</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.openhealthtools.mdht.uml</groupId>

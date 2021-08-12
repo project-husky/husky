@@ -20,6 +20,7 @@
 		<dependency>
 			<groupId>org.ehealth_connector.common</groupId>
 			<artifactId>ehealth_connector-common-gen</artifactId>
+			<version>1.9-SNAPSHOT</version>
 		</dependency>
 
 		<!-- open health tools ihe utils -->
