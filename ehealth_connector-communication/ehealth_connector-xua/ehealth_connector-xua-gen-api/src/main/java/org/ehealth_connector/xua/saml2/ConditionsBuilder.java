@@ -16,6 +16,8 @@
  */
 package org.ehealth_connector.xua.saml2;
 
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionsType;
+
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the ConditionsBuilder.</div>
@@ -24,7 +26,7 @@ package org.ehealth_connector.xua.saml2;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public interface ConditionsBuilder extends SimpleBuilder<Conditions> {
+public interface ConditionsBuilder extends SimpleBuilder<ConditionsType> {
 
 	// There are no special methods defined, but the interface has to be
 	// declared for selection reasons.

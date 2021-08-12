@@ -17,7 +17,7 @@
 package org.ehealth_connector.xua.authentication;
 
 import org.ehealth_connector.xua.saml2.Base;
-import org.ehealth_connector.xua.saml2.Subject;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectType;
 
 /**
  * <!-- @formatter:off -->
@@ -187,5 +187,5 @@ public interface AuthnRequest extends Base {
 	 *
 	 * @return the subject
 	 */
-	Subject getSubject();
+	SubjectType getSubject();
 }

@@ -16,6 +16,8 @@
  */
 package org.ehealth_connector.communication.ch.ppq.impl.clients;
 
+import javax.jms.IllegalStateException;
+
 import org.ehealth_connector.communication.ch.ppq.api.clients.PpfClient;
 import org.ehealth_connector.communication.ch.ppq.api.clients.PpqClient;
 import org.ehealth_connector.communication.ch.ppq.api.config.PpClientConfig;
@@ -30,6 +32,10 @@ import org.ehealth_connector.xua.communication.clients.impl.ClientFactory;
  * <!-- @formatter:on -->
  */
 public class ClientFactoryCh extends ClientFactory {
+	
+	private ClientFactoryCh() throws IllegalStateException {
+		super();
+	}
 
 	public static PpfClient getPpfClient(PpClientConfig clientConfiguration) {
 		return new SimplePpfClient(clientConfiguration);

@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.converters.ch;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -788,8 +789,9 @@ public class LrtpConverter extends AbstractCdaChV12FhirConverter {
 	 * @param fileName
 	 *            the file name
 	 * @return the LRTP document
+	 * @throws IOException 
 	 */
-	public LrtpDocument readLrtpDocumentFromFile(String fileName) {
+	public LrtpDocument readLrtpDocumentFromFile(String fileName){
 		final String resourceString = FhirCommon.getXmlResource(fileName);
 		final IParser parser = getFhirCtx().newXmlParser();
 		return parser.parseResource(LrtpDocument.class, resourceString);

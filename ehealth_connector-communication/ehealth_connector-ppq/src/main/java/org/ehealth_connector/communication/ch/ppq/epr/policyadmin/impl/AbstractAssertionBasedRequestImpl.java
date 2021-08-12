@@ -17,7 +17,7 @@
 package org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl;
 
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.OpenSamlAssertionBasedRequest;
-import org.ehealth_connector.xua.saml2.Assertion;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.opensaml.core.xml.AbstractXMLObject;
 
 /**
@@ -31,7 +31,7 @@ import org.opensaml.core.xml.AbstractXMLObject;
 public abstract class AbstractAssertionBasedRequestImpl extends AbstractXMLObject
 		implements OpenSamlAssertionBasedRequest {
 
-	private Assertion assertion;
+	private AssertionType assertion;
 
 	protected AbstractAssertionBasedRequestImpl(String namespaceURI, String elementLocalName,
 			String namespacePrefix) {
@@ -44,7 +44,7 @@ public abstract class AbstractAssertionBasedRequestImpl extends AbstractXMLObjec
 	 * @see org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.AssertionBasedRequest#getAssertion()
 	 */
 	@Override
-	public Assertion getAssertion() {
+	public AssertionType getAssertion() {
 		return assertion;
 	}
 
@@ -64,7 +64,7 @@ public abstract class AbstractAssertionBasedRequestImpl extends AbstractXMLObjec
 	 * <!-- @formatter:on -->
 	 */
 	@Override
-	public void setAssertion(Assertion aAssertion) {
+	public void setAssertion(AssertionType aAssertion) {
 		assertion = aAssertion;
 	}
 

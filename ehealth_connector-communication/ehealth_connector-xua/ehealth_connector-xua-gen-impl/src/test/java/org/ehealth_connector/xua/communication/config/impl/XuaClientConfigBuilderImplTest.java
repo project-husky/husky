@@ -21,7 +21,6 @@ import static org.junit.Assert.assertNotNull;
 
 import org.ehealth_connector.xua.communication.config.XuaClientConfig;
 import org.ehealth_connector.xua.communication.config.XuaClientConfigBuilder;
-import org.ehealth_connector.xua.communication.config.impl.XuaClientConfigBuilderImpl;
 import org.junit.Before;
 import org.junit.Test;
 

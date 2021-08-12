@@ -19,9 +19,9 @@ package org.ehealth_connector.xua.saml2.impl;
 import java.util.Calendar;
 
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
-import org.ehealth_connector.xua.saml2.SubjectConfirmation;
 import org.ehealth_connector.xua.saml2.SubjectConfirmationBuilder;
 import org.joda.time.DateTime;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationType;
 
 /**
  * <!-- @formatter:off -->
@@ -33,7 +33,7 @@ import org.joda.time.DateTime;
  *
  */
 public class SubjectConfirmationBuilderImpl implements SubjectConfirmationBuilder,
-		SecurityObjectBuilder<org.opensaml.saml.saml2.core.SubjectConfirmation, SubjectConfirmation> {
+		SecurityObjectBuilder<org.opensaml.saml.saml2.core.SubjectConfirmation, SubjectConfirmationType> {
 
 	/** The subject confirmation. */
 	private org.opensaml.saml.saml2.core.SubjectConfirmation subjectConfirmation;
@@ -71,7 +71,7 @@ public class SubjectConfirmationBuilderImpl implements SubjectConfirmationBuilde
 	 * @see org.ehealth_connector.xua.saml2.SubjectConfirmationBuilder#create()
 	 */
 	@Override
-	public SubjectConfirmation create() {
+	public SubjectConfirmationType create() {
 		return new SubjectConfirmationImpl(subjectConfirmation);
 	}
 
@@ -81,7 +81,7 @@ public class SubjectConfirmationBuilderImpl implements SubjectConfirmationBuilde
 	 * @see org.ehealth_connector.xua.core.SecurityObjectBuilder#create(java.lang.Object)
 	 */
 	@Override
-	public SubjectConfirmation create(
+	public SubjectConfirmationType create(
 			org.opensaml.saml.saml2.core.SubjectConfirmation aInternalObject) {
 		return new SubjectConfirmationImpl(aInternalObject);
 	}
@@ -95,7 +95,6 @@ public class SubjectConfirmationBuilderImpl implements SubjectConfirmationBuilde
 	public SubjectConfirmationBuilder inResponseTo(String aResponseTo) {
 		if (aResponseTo != null) {
 			subjectConfirmationData.setInResponseTo(aResponseTo);
-			;
 		}
 		return this;
 	}
@@ -121,7 +120,7 @@ public class SubjectConfirmationBuilderImpl implements SubjectConfirmationBuilde
 	@Override
 	public SubjectConfirmationBuilder notBefore(Calendar aNotBefore) {
 		if (aNotBefore != null) {
-			final DateTime dateTime = new DateTime(aNotBefore.getTimeInMillis());
+			final var dateTime = new DateTime(aNotBefore.getTimeInMillis());
 			subjectConfirmationData.setNotBefore(dateTime);
 		}
 		return this;
@@ -135,7 +134,7 @@ public class SubjectConfirmationBuilderImpl implements SubjectConfirmationBuilde
 	@Override
 	public SubjectConfirmationBuilder notOnOrAfter(Calendar aNotOnOrAfter) {
 		if (aNotOnOrAfter != null) {
-			final DateTime dateTime = new DateTime(aNotOnOrAfter.getTimeInMillis());
+			final var dateTime = new DateTime(aNotOnOrAfter.getTimeInMillis());
 			subjectConfirmationData.setNotOnOrAfter(dateTime);
 		}
 		return this;

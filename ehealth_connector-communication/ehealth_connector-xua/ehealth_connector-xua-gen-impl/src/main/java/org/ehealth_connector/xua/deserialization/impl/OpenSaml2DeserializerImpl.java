@@ -18,15 +18,11 @@ package org.ehealth_connector.xua.deserialization.impl;
 
 import java.io.ByteArrayInputStream;
 
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import org.ehealth_connector.xua.exceptions.DeserializeException;
 import org.ehealth_connector.xua.deserialization.OpenSaml2Deserializer;
+import org.ehealth_connector.xua.exceptions.DeserializeException;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
-import org.opensaml.core.xml.io.Unmarshaller;
-import org.opensaml.core.xml.io.UnmarshallerFactory;
-import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 /**
@@ -56,7 +52,7 @@ public class OpenSaml2DeserializerImpl<T> implements OpenSaml2Deserializer<T> {
 	@Override
 	public T deserializeFromByteArray(byte[] aXmlBytes) throws DeserializeException {
 		try {
-			final Element element = deserializeFromByteArrayToXmlElement(aXmlBytes);
+			final var element = deserializeFromByteArrayToXmlElement(aXmlBytes);
 
 			return deserializeFromXml(element);
 		} catch (final Exception e) {
@@ -73,14 +69,14 @@ public class OpenSaml2DeserializerImpl<T> implements OpenSaml2Deserializer<T> {
 	@Override
 	public Element deserializeFromByteArrayToXmlElement(byte[] aXmlBytes)
 			throws DeserializeException {
-		final String FEATURE = "http://xml.org/sax/features/external-general-entities";
+		final var FEATURE = "http://xml.org/sax/features/external-general-entities";
 		try {
-			final DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory
+			final var documentBuilderFactory = DocumentBuilderFactory
 					.newInstance();
 			documentBuilderFactory.setNamespaceAware(true);
 			documentBuilderFactory.setFeature(FEATURE, false);
-			final DocumentBuilder docBuilder = documentBuilderFactory.newDocumentBuilder();
-			final Document document = docBuilder.parse(new ByteArrayInputStream(aXmlBytes));
+			final var docBuilder = documentBuilderFactory.newDocumentBuilder();
+			final var document = docBuilder.parse(new ByteArrayInputStream(aXmlBytes));
 
 			return document.getDocumentElement();
 		} catch (final Exception e) {
@@ -110,9 +106,9 @@ public class OpenSaml2DeserializerImpl<T> implements OpenSaml2Deserializer<T> {
 	@Override
 	public T deserializeFromXml(Element aXmlElement) throws DeserializeException {
 		try {
-			final UnmarshallerFactory marshallerFactory = XMLObjectProviderRegistrySupport
+			final var marshallerFactory = XMLObjectProviderRegistrySupport
 					.getUnmarshallerFactory();
-			final Unmarshaller unmarshaller = marshallerFactory.getUnmarshaller(aXmlElement);
+			final var unmarshaller = marshallerFactory.getUnmarshaller(aXmlElement);
 
 			return (T) unmarshaller.unmarshall(aXmlElement);
 		} catch (final Exception e) {
