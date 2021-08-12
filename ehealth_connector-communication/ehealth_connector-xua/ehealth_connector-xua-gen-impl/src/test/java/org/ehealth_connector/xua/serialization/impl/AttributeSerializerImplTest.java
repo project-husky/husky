@@ -22,9 +22,8 @@ import static org.junit.Assert.assertTrue;
 
 import org.ehealth_connector.xua.exceptions.SerializeException;
 import org.ehealth_connector.xua.saml2.Attribute;
-import org.ehealth_connector.xua.utilities.impl.AbstractTestHelper;
 import org.ehealth_connector.xua.saml2.impl.AttributeBuilderImpl;
-import org.ehealth_connector.xua.serialization.impl.AttributeSerializerImpl;
+import org.ehealth_connector.xua.utilities.impl.AbstractTestHelper;
 import org.junit.Before;
 import org.junit.Test;
 import org.w3c.dom.Element;

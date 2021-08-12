@@ -18,6 +18,9 @@ package org.ehealth_connector.xua.saml2;
 
 import java.util.List;
 
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationType;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectType;
+
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the SubjectBuilder.</div>
@@ -26,7 +29,7 @@ import java.util.List;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public interface SubjectBuilder extends SimpleBuilder<Subject> {
+public interface SubjectBuilder extends SimpleBuilder<SubjectType> {
 	/**
 	 * <!-- @formatter:off -->
 	 * <div class="en">Method to add a SubjectConfirmation to the Subject to be build.</div>
@@ -46,7 +49,7 @@ public interface SubjectBuilder extends SimpleBuilder<Subject> {
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	SubjectBuilder addSubjectConfirmations(SubjectConfirmation aSubjectConfirmation);
+	SubjectBuilder addSubjectConfirmations(SubjectConfirmationType aSubjectConfirmation);
 
 	/**
 	 *
@@ -133,6 +136,6 @@ public interface SubjectBuilder extends SimpleBuilder<Subject> {
 	 *  <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	SubjectBuilder subjectConfirmations(List<SubjectConfirmation> aSubjectConfirmations);
+	SubjectBuilder subjectConfirmations(List<SubjectConfirmationType> aSubjectConfirmations);
 
 }

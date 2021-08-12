@@ -30,7 +30,7 @@ public class IdpClientByBrowserAndProtocolHandlerConfigImpl extends AbstractClie
 		implements IdpClientConfig {
 
 	public enum SamlRequestType {
-		SAMLRequest, SAMLart
+		SAMLREQUEST, SAMLART
 	}
 
 	private String protocolHandlerName;

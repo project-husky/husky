@@ -25,8 +25,6 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.security.KeyStore;
 
-import org.ehealth_connector.xua.communication.config.impl.IdpClientCertificateAuthConfigBuilder;
-import org.ehealth_connector.xua.communication.config.impl.IdpClientCertificateAuthConfigImpl;
 import org.ehealth_connector.xua.pki.impl.PkiManagerImpl;
 import org.junit.Before;
 import org.junit.Test;

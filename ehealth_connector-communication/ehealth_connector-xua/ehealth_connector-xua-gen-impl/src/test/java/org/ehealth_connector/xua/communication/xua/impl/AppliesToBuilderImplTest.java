@@ -21,8 +21,6 @@ import static org.junit.Assert.assertNotNull;
 
 import org.ehealth_connector.xua.communication.xua.AppliesTo;
 import org.ehealth_connector.xua.communication.xua.AppliesToBuilder;
-import org.ehealth_connector.xua.communication.xua.impl.AppliesToBuilderImpl;
-import org.ehealth_connector.xua.communication.xua.impl.AppliesToImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.opensaml.soap.wsaddressing.Address;

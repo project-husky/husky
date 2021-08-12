@@ -18,11 +18,11 @@ package org.ehealth_connector.xua.authentication.impl;
 
 import java.util.Calendar;
 
-import org.ehealth_connector.xua.core.SecurityObject;
-import org.ehealth_connector.xua.saml2.Subject;
 import org.ehealth_connector.xua.authentication.AuthnRequest;
+import org.ehealth_connector.xua.core.SecurityObject;
 import org.ehealth_connector.xua.saml2.impl.SubjectBuilderImpl;
 import org.joda.time.DateTime;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectType;
 
 /**
  * <!-- @formatter:off -->
@@ -125,7 +125,7 @@ public class AuthnRequestImpl
 	@Override
 	public Calendar getIssueInstant() {
 		final DateTime instant = authnRequest.getIssueInstant();
-		final Calendar retVal = Calendar.getInstance();
+		final var retVal = Calendar.getInstance();
 		retVal.setTimeInMillis(instant.getMillis());
 		return retVal;
 	}
@@ -200,7 +200,7 @@ public class AuthnRequestImpl
 	 * @see org.ehealth_connector.xua.authentication.AuthnRequest#getSubject()
 	 */
 	@Override
-	public Subject getSubject() {
+	public SubjectType getSubject() {
 		if (authnRequest.getSubject() != null) {
 			return new SubjectBuilderImpl().create(authnRequest.getSubject());
 		}

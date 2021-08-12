@@ -23,8 +23,9 @@ import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.AssertionBuilder;
 import org.ehealth_connector.xua.saml2.Attribute;
-import org.ehealth_connector.xua.saml2.Condition;
 import org.joda.time.DateTime;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionsType;
 import org.opensaml.saml.common.SAMLVersion;
 import org.opensaml.saml.saml2.core.AttributeStatement;
 import org.opensaml.saml.saml2.core.Issuer;
@@ -40,16 +41,16 @@ import org.opensaml.saml.saml2.core.impl.IssuerBuilder;
  * <!-- @formatter:on -->
  */
 public class AssertionBuilderImpl implements AssertionBuilder,
-		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Assertion, Assertion> {
+		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Assertion, AssertionType> {
 
 	private org.opensaml.saml.saml2.core.Issuer issuer;
 	private org.opensaml.saml.saml2.core.Assertion wrappedObject;
 
 	public AssertionBuilderImpl() {
-		final org.opensaml.saml.saml2.core.impl.AssertionBuilder builder = new org.opensaml.saml.saml2.core.impl.AssertionBuilder();
+		final var builder = new org.opensaml.saml.saml2.core.impl.AssertionBuilder();
 		wrappedObject = builder.buildObject();
 
-		final IssuerBuilder issueBuilder = new IssuerBuilder();
+		final var issueBuilder = new IssuerBuilder();
 		issuer = issueBuilder.buildObject(Issuer.DEFAULT_ELEMENT_NAME);
 		wrappedObject.setIssuer(issuer);
 	}
@@ -75,11 +76,9 @@ public class AssertionBuilderImpl implements AssertionBuilder,
 	}
 
 	@Override
-	public AssertionBuilder addCondition(Condition condition) {
+	public AssertionBuilder addCondition(ConditionsType condition) {
 		if (wrappedObject.getConditions() != null) {
-			final List<org.opensaml.saml.saml2.core.Condition> conditionList = wrappedObject
-					.getConditions().getConditions();
-			conditionList.add(((ConditionImpl) condition).getWrappedObject());
+			wrappedObject.setConditions(((ConditionsImpl) condition).getWrappedObject());
 		}
 		return this;
 	}
@@ -129,7 +128,7 @@ public class AssertionBuilderImpl implements AssertionBuilder,
 	@Override
 	public AssertionBuilder issueInstant(Calendar aIssueInstant) {
 		if (aIssueInstant != null) {
-			final DateTime dateTime = new DateTime(aIssueInstant.getTimeInMillis());
+			final var dateTime = new DateTime(aIssueInstant.getTimeInMillis());
 			wrappedObject.setIssueInstant(dateTime);
 		}
 		return this;

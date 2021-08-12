@@ -18,8 +18,8 @@ package org.ehealth_connector.communication.ch.ppq.impl;
 
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeed;
 import org.ehealth_connector.xua.core.SecurityObject;
-import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.impl.AssertionBuilderImpl;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 
 /**
  * <!-- @formatter:off -->
@@ -42,7 +42,7 @@ public class PrivacyPolicyFeedImpl
 	}
 
 	@Override
-	public Assertion getAssertion() {
+	public AssertionType getAssertion() {
 		return new AssertionBuilderImpl().create(mAssertion);
 	}
 

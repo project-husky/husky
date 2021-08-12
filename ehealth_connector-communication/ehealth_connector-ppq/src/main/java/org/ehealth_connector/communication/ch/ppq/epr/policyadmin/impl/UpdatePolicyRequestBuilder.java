@@ -18,7 +18,7 @@ package org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl;
 
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.OpenSamlUpdatePolicyRequest;
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.UpdatePolicyRequest;
-import org.ehealth_connector.xua.saml2.Assertion;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.opensaml.core.xml.AbstractXMLObjectBuilder;
 
 /**
@@ -32,9 +32,9 @@ import org.opensaml.core.xml.AbstractXMLObjectBuilder;
 public class UpdatePolicyRequestBuilder
 		extends AbstractXMLObjectBuilder<OpenSamlUpdatePolicyRequest> {
 
-	private Assertion assertion;
+	private AssertionType assertion;
 
-	public UpdatePolicyRequestBuilder assertion(Assertion aAssertion) {
+	public UpdatePolicyRequestBuilder assertion(AssertionType aAssertion) {
 		assertion = aAssertion;
 		return this;
 	}

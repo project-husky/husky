@@ -36,7 +36,6 @@ import java.util.Collections;
 import java.util.List;
 
 import org.ehealth_connector.xua.pki.PkiManager;
-import org.ehealth_connector.xua.pki.impl.PkiManagerImpl;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
@@ -126,7 +125,7 @@ public class PkiManagerImplTest {
 		assertTrue(keyStore.isCertificateEntry(testCertAlias));
 		final X509Certificate ref1 = (X509Certificate) keyStore.getCertificate(testCertAlias);
 		assertNotNull(ref1);
-		LoggerFactory.getLogger(getClass()).info(ref1.getSubjectDN().toString());
+		LoggerFactory.getLogger(getClass()).info(ref1.getIssuerX500Principal().toString());
 	}
 
 	/**

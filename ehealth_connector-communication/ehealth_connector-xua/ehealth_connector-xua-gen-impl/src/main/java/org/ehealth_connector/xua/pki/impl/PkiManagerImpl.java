@@ -21,7 +21,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URI;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.KeyFactory;
@@ -64,22 +64,22 @@ public class PkiManagerImpl implements PkiManager {
 	public void addClientKeyAndCert(File privateKeyPemPath, File clientCertPemPath, String alias,
 			KeyStore keyStore, String aKeyPassword) throws KeyStoreException {
 		try {
-			final CertificateFactory fact = CertificateFactory.getInstance("X.509");
-			final FileInputStream is = new FileInputStream(clientCertPemPath);
+			final var fact = CertificateFactory.getInstance("X.509");
+			final var is = new FileInputStream(clientCertPemPath);
 			final X509Certificate cer = (X509Certificate) fact.generateCertificate(is);
 			final Certificate[] chain = new Certificate[] { cer };
 
-			final URI keyUri = privateKeyPemPath.toURI();
+			final var keyUri = privateKeyPemPath.toURI();
 
-			String privateKeyContent = new String(Files.readAllBytes(Paths.get(keyUri)), "UTF-8");
+			var privateKeyContent = new String(Files.readAllBytes(Paths.get(keyUri)), StandardCharsets.UTF_8);
 
-			privateKeyContent = privateKeyContent.replaceAll("\\n", "").replaceAll("\\r", "")
+			privateKeyContent = privateKeyContent.replace("\n", "").replace("\r", "")
 					.replace("-----BEGIN PRIVATE KEY-----", "")
 					.replace("-----END PRIVATE KEY-----", "");
 
-			final KeyFactory kf = KeyFactory.getInstance("RSA");
+			final var kf = KeyFactory.getInstance("RSA");
 			byte[] temp = Base64.getDecoder().decode(privateKeyContent);
-			final PKCS8EncodedKeySpec keySpecPKCS8 = new PKCS8EncodedKeySpec(temp);
+			final var keySpecPKCS8 = new PKCS8EncodedKeySpec(temp);
 			final PrivateKey privKey = kf.generatePrivate(keySpecPKCS8);
 
 			keyStore.setKeyEntry(alias.toLowerCase(), privKey, aKeyPassword.toCharArray(), chain);
@@ -100,8 +100,8 @@ public class PkiManagerImpl implements PkiManager {
 	public void addPublicCert(File publiCertPath, String alias, KeyStore keyStore)
 			throws KeyStoreException {
 		try {
-			final CertificateFactory fact = CertificateFactory.getInstance("X.509");
-			final FileInputStream is = new FileInputStream(publiCertPath);
+			final var fact = CertificateFactory.getInstance("X.509");
+			final var is = new FileInputStream(publiCertPath);
 			final X509Certificate cer = (X509Certificate) fact.generateCertificate(is);
 			keyStore.setCertificateEntry(alias.toLowerCase(), cer);
 		} catch (CertificateException | IOException | KeyStoreException e) {
@@ -117,7 +117,7 @@ public class PkiManagerImpl implements PkiManager {
 	 */
 	@Override
 	public KeyStore createNewStore(String storeType) throws KeyStoreException {
-		final KeyStore keyStore = KeyStore.getInstance(storeType);
+		final var keyStore = KeyStore.getInstance(storeType);
 		try {
 			keyStore.load(null, null);
 		} catch (NoSuchAlgorithmException | CertificateException | IOException e) {
@@ -172,7 +172,7 @@ public class PkiManagerImpl implements PkiManager {
 	public KeyStore loadStore(InputStream storeInputStream, String storePassword, String storeType)
 			throws KeyStoreException {
 		try {
-			final KeyStore keyStore = KeyStore.getInstance(storeType);
+			final var keyStore = KeyStore.getInstance(storeType);
 			keyStore.load(storeInputStream, storePassword.toCharArray());
 			return keyStore;
 		} catch (NoSuchAlgorithmException | CertificateException | IOException e) {

@@ -17,10 +17,18 @@
 package org.ehealth_connector.xua.saml2.impl;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import org.ehealth_connector.xua.core.SecurityObject;
-import org.ehealth_connector.xua.saml2.SubjectConfirmation;
 import org.joda.time.DateTime;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationDataType;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * <!-- @formatter:off -->
@@ -30,9 +38,11 @@ import org.joda.time.DateTime;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class SubjectConfirmationImpl implements SubjectConfirmation,
+public class SubjectConfirmationImpl extends SubjectConfirmationType implements
 		SecurityObject<org.opensaml.saml.saml2.core.SubjectConfirmation> {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(SubjectConfirmationImpl.class);
+	
 	/** The subject confirmation. */
 	private org.opensaml.saml.saml2.core.SubjectConfirmation subjectConfirmation;
 
@@ -44,6 +54,14 @@ public class SubjectConfirmationImpl implements SubjectConfirmation,
 	protected SubjectConfirmationImpl(
 			org.opensaml.saml.saml2.core.SubjectConfirmation aInternalObject) {
 		subjectConfirmation = aInternalObject;
+		setSubjectConfirmationData(new SubjectConfirmationDataType());
+		
+		getAddress();
+		getInResponseTo();
+		getMethod();
+		getNotBefore();
+		getNotOnOrAfter();
+		getRecipient();
 	}
 
 	/**
@@ -74,10 +92,10 @@ public class SubjectConfirmationImpl implements SubjectConfirmation,
 	 *
 	 * @see org.ehealth_connector.xua.saml2.SubjectConfirmation#getAddress()
 	 */
-	@Override
-	public String getAddress() {
+	public String getAddress() {		
 		if (subjectConfirmation.getSubjectConfirmationData() != null) {
-			return subjectConfirmation.getSubjectConfirmationData().getAddress();
+			getSubjectConfirmationData().setAddress(subjectConfirmation.getSubjectConfirmationData().getAddress());			
+			return getSubjectConfirmationData().getAddress();
 		}
 		return "";
 	}
@@ -88,10 +106,10 @@ public class SubjectConfirmationImpl implements SubjectConfirmation,
 	 *
 	 * @see org.ehealth_connector.xua.saml2.SubjectConfirmation#getInResponseTo()
 	 */
-	@Override
 	public String getInResponseTo() {
 		if (subjectConfirmation.getSubjectConfirmationData() != null) {
-			return subjectConfirmation.getSubjectConfirmationData().getInResponseTo();
+			getSubjectConfirmationData().setInResponseTo(subjectConfirmation.getSubjectConfirmationData().getInResponseTo());	
+			return getSubjectConfirmationData().getInResponseTo();
 		}
 		return "";
 	}
@@ -103,7 +121,8 @@ public class SubjectConfirmationImpl implements SubjectConfirmation,
 	 */
 	@Override
 	public String getMethod() {
-		return subjectConfirmation.getMethod();
+		setMethod(subjectConfirmation.getMethod());
+		return super.getMethod();
 	}
 
 	/**
@@ -112,13 +131,21 @@ public class SubjectConfirmationImpl implements SubjectConfirmation,
 	 *
 	 * @see org.ehealth_connector.xua.saml2.SubjectConfirmation#getNotBefore()
 	 */
-	@Override
 	public Calendar getNotBefore() {
-		if (subjectConfirmation.getSubjectConfirmationData() != null) {
+		if (subjectConfirmation.getSubjectConfirmationData() != null && subjectConfirmation.getSubjectConfirmationData().getNotBefore() != null) {
 			final DateTime notOnOrAfter = subjectConfirmation.getSubjectConfirmationData()
 					.getNotBefore();
-			final Calendar retVal = Calendar.getInstance();
+			final var retVal = new GregorianCalendar();
 			retVal.setTimeInMillis(notOnOrAfter.getMillis());
+			
+			XMLGregorianCalendar xmlGregCal = null;
+			try {
+				xmlGregCal = DatatypeFactory.newInstance().newXMLGregorianCalendar(retVal);
+				getSubjectConfirmationData().setNotBefore(xmlGregCal);
+			} catch (DatatypeConfigurationException e) {
+				LOGGER.error(e.getMessage(), e);
+			}
+			
 			return retVal;
 		}
 		return Calendar.getInstance();
@@ -130,13 +157,21 @@ public class SubjectConfirmationImpl implements SubjectConfirmation,
 	 *
 	 * @see org.ehealth_connector.xua.saml2.SubjectConfirmation#getNotOnOrAfter()
 	 */
-	@Override
 	public Calendar getNotOnOrAfter() {
-		if (subjectConfirmation.getSubjectConfirmationData() != null) {
+		if (subjectConfirmation.getSubjectConfirmationData() != null && subjectConfirmation.getSubjectConfirmationData().getNotOnOrAfter() != null) {
 			final DateTime notOnOrAfter = subjectConfirmation.getSubjectConfirmationData()
 					.getNotOnOrAfter();
-			final Calendar retVal = Calendar.getInstance();
+			final var retVal = new GregorianCalendar();
 			retVal.setTimeInMillis(notOnOrAfter.getMillis());
+			
+			XMLGregorianCalendar xmlGregCal = null;
+			try {
+				xmlGregCal = DatatypeFactory.newInstance().newXMLGregorianCalendar(retVal);
+				getSubjectConfirmationData().setNotOnOrAfter(xmlGregCal);
+			} catch (DatatypeConfigurationException e) {
+				LOGGER.error(e.getMessage(), e);
+			}
+
 			return retVal;
 		}
 		return Calendar.getInstance();
@@ -148,10 +183,10 @@ public class SubjectConfirmationImpl implements SubjectConfirmation,
 	 *
 	 * @see org.ehealth_connector.xua.saml2.SubjectConfirmation#getRecipient()
 	 */
-	@Override
 	public String getRecipient() {
 		if (subjectConfirmation.getSubjectConfirmationData() != null) {
-			return subjectConfirmation.getSubjectConfirmationData().getRecipient();
+			getSubjectConfirmationData().setRecipient(subjectConfirmation.getSubjectConfirmationData().getRecipient());
+			return getSubjectConfirmationData().getRecipient();
 		}
 		return "";
 	}
@@ -173,8 +208,8 @@ public class SubjectConfirmationImpl implements SubjectConfirmation,
 	 */
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		final var prime = 31;
+		var result = 1;
 		result = (prime * result)
 				+ ((subjectConfirmation == null) ? 0 : subjectConfirmation.hashCode());
 		return result;

@@ -30,7 +30,7 @@ public abstract class AbstractSerializerImpl {
 
 	private OpenSaml2Serializer openSamlSerializer;
 
-	public AbstractSerializerImpl() {
+	protected AbstractSerializerImpl() {
 		openSamlSerializer = new OpenSaml2SerializerImpl();
 	}
 

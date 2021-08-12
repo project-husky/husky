@@ -18,8 +18,8 @@ package org.ehealth_connector.xua.serialization.impl;
 
 import org.ehealth_connector.xua.exceptions.SerializeException;
 import org.ehealth_connector.xua.saml2.Assertion;
-import org.ehealth_connector.xua.serialization.Serializer;
 import org.ehealth_connector.xua.saml2.impl.AssertionImpl;
+import org.ehealth_connector.xua.serialization.Serializer;
 import org.w3c.dom.Element;
 
 /**
