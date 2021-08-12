@@ -7,7 +7,7 @@
 
 	<parent>
 		<groupId>org.ehealth_connector</groupId>
-		<artifactId>ehealth_connector-api-java</artifactId>
+		<artifactId>ehealth_connector-api</artifactId>
 		<version>1.9-SNAPSHOT</version>
 	</parent>
 
