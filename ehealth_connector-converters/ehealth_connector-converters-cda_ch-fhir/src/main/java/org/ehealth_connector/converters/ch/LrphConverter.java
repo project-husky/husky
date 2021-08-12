@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.converters.ch;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -712,6 +713,7 @@ public class LrphConverter extends AbstractCdaChV12FhirConverter {
 	 * @param fileName
 	 *            the file name
 	 * @return the LRPH document
+	 * @throws IOException 
 	 */
 	public LrphDocument readLrphDocumentFromFile(String fileName) {
 		final String resourceString = FhirCommon.getXmlResource(fileName);

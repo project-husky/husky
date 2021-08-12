@@ -30,7 +30,7 @@ import org.ehealth_connector.xua.deserialization.OpenSaml2Deserializer;
 public abstract class AbstractDeserializerImpl<T, U> implements Deserializer<U> {
 	private OpenSaml2Deserializer<T> openSamlDeserializer;
 
-	public AbstractDeserializerImpl() {
+	protected AbstractDeserializerImpl() {
 		openSamlDeserializer = new OpenSaml2DeserializerImpl<>();
 	}
 

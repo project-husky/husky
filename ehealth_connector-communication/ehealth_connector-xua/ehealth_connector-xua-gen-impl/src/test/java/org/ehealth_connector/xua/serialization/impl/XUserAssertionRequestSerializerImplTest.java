@@ -22,9 +22,8 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import org.ehealth_connector.xua.communication.xua.XUserAssertionRequest;
-import org.ehealth_connector.xua.exceptions.SerializeException;
 import org.ehealth_connector.xua.communication.xua.impl.XUserAssertionRequestBuilderImpl;
-import org.ehealth_connector.xua.serialization.impl.XUserAssertionRequestSerializerImpl;
+import org.ehealth_connector.xua.exceptions.SerializeException;
 import org.junit.Before;
 import org.junit.Test;
 import org.opensaml.core.config.InitializationService;

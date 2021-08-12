@@ -18,13 +18,12 @@ package org.ehealth_connector.xua.communication.clients.impl;
 
 import org.apache.http.HttpHost;
 import org.apache.http.client.config.RequestConfig;
-import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.ehealth_connector.xua.exceptions.ClientSendException;
-import org.ehealth_connector.xua.saml2.Response;
 import org.ehealth_connector.xua.authentication.AuthnRequest;
 import org.ehealth_connector.xua.communication.config.impl.IdpClientViaHttpProxyConfigImpl;
+import org.ehealth_connector.xua.exceptions.ClientSendException;
+import org.ehealth_connector.xua.saml2.Response;
 
 /**
  * <!-- @formatter:off -->
@@ -50,7 +49,7 @@ public class IdpClientByProxy extends AbstractHttpFormIdpClient {
 
 	@Override
 	public RequestConfig getRequestConfig() {
-		final HttpHost proxy = new HttpHost(config.getProxyHost(), config.getProxyPort(),
+		final var proxy = new HttpHost(config.getProxyHost(), config.getProxyPort(),
 				config.getProxyProtocol());
 		return RequestConfig.custom().setProxy(proxy).build();
 	}
@@ -58,7 +57,7 @@ public class IdpClientByProxy extends AbstractHttpFormIdpClient {
 	@Override
 	public Response send(AuthnRequest aAuthnRequest) throws ClientSendException {
 		try {
-			final HttpPost post = getHttpPost(aAuthnRequest, config);
+			final var post = getHttpPost(aAuthnRequest, config);
 
 			return execute(post);
 		} catch (final Throwable t) {

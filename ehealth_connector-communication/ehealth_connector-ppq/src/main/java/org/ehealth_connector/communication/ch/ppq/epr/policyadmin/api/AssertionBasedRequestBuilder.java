@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api;
 
-import org.ehealth_connector.xua.saml2.Assertion;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 
 /**
  * <!-- @formatter:off -->
@@ -28,6 +28,6 @@ import org.ehealth_connector.xua.saml2.Assertion;
  */
 public interface AssertionBasedRequestBuilder {
 
-	AssertionBasedRequestBuilder assertion(Assertion aAssertion);
+	AssertionBasedRequestBuilder assertion(AssertionType aAssertion);
 
 }
