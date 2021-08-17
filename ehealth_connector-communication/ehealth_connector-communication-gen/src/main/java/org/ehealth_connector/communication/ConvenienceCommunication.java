@@ -22,9 +22,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URI;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.zip.ZipFile;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -50,16 +48,17 @@ import org.ehealth_connector.communication.xd.storedquery.StoredQueryInterface;
 import org.ehealth_connector.communication.xd.xdm.IndexHtm;
 import org.ehealth_connector.communication.xd.xdm.ReadmeTxt;
 import org.ehealth_connector.communication.xd.xdm.XdmContents;
+import org.ehealth_connector.xua.core.SecurityHeaderElement;
 import org.ehealth_connector.xua.exceptions.SerializeException;
 import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.serialization.impl.AssertionSerializerImpl;
+import org.openehealth.ipf.commons.ihe.xds.core.requests.RetrieveDocumentSet;
 import org.openhealthtools.ihe.atna.auditor.XDSSourceAuditor;
 import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
 import org.openhealthtools.ihe.common.hl7v2.CX;
 import org.openhealthtools.ihe.utils.OID;
 import org.openhealthtools.ihe.xds.XDSConstants;
 import org.openhealthtools.ihe.xds.consumer.B_Consumer;
-import org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveDocumentSetRequestType;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromStream;
@@ -71,7 +70,6 @@ import org.openhealthtools.ihe.xds.metadata.SubmissionSetType;
 import org.openhealthtools.ihe.xds.metadata.extract.MetadataExtractionException;
 import org.openhealthtools.ihe.xds.response.XDSQueryResponseType;
 import org.openhealthtools.ihe.xds.response.XDSResponseType;
-import org.openhealthtools.ihe.xds.response.XDSRetrieveResponseType;
 import org.openhealthtools.ihe.xds.source.B_Source;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionCompositionException;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
@@ -103,7 +101,7 @@ import org.w3c.dom.Element;
  * </ul>
  * </div>
  */
-public class ConvenienceCommunication {
+public class ConvenienceCommunication extends CamelService {
 
 	/** The SLF4J logger instance. */
 	private static Logger log = LoggerFactory.getLogger(ConvenienceCommunication.class);
@@ -887,48 +885,43 @@ public class ConvenienceCommunication {
 	/**
 	 * <div class="en">Retrieves a document from a Repository
 	 *
-	 * @param docReq
-	 *            the document request
+	 * @param docReq the document request
 	 * @return the OHT XDSRetrieveResponseType </div>
+	 * @throws Exception
 	 */
-	public XDSRetrieveResponseType retrieveDocument(DocumentRequest docReq) {
-		return retrieveDocuments(new DocumentRequest[] { docReq });
+	public RetrieveDocumentSet retrieveDocument(DocumentRequest docReq, SecurityHeaderElement securityHeader)
+			throws Exception {
+		return retrieveDocuments(new DocumentRequest[] { docReq }, securityHeader);
 	}
 
 	/**
-	 * <div class="en">Retrieves multiple documents from one or more
-	 * Repositories
+	 * <div class="en">Retrieves multiple documents from one or more Repositories
 	 *
-	 * @param docReq
-	 *            an array of document requests
+	 * @param docReq an array of document requests
 	 * @return the OHT XDSRetrieveResponseType </div>
+	 * @throws Exception
 	 */
-	@SuppressWarnings("unchecked")
-	public XDSRetrieveResponseType retrieveDocuments(DocumentRequest[] docReq) {
-		final B_Consumer consumer = new B_Consumer(
-				affinityDomain.getRegistryDestination().getUri());
+	public RetrieveDocumentSet retrieveDocuments(DocumentRequest[] docReq, SecurityHeaderElement securityHeader)
+			throws Exception {
+		final var retrieveDocumentSet = new RetrieveDocumentSet();
 
-		// Create RetrieveSetRequestType
-		final RetrieveDocumentSetRequestType retrieveDocumentSetRequest = org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveFactory.eINSTANCE
-				.createRetrieveDocumentSetRequestType();
-
-		// Put the Repository to the OHT Repository HashMap
-		HashMap<String, URI> repositoryMap = null;
 		for (final DocumentRequest element : docReq) {
-			repositoryMap = new HashMap<>();
-			repositoryMap.put(element.getRepositoryId(), element.getRepositoryUri());
-
-			// Add Document Request
-			retrieveDocumentSetRequest.getDocumentRequest()
-					.add(element.getOhtDocumentRequestType());
+			if (element != null) {
+				retrieveDocumentSet.addReferenceTo(element.getIpfDocumentEntry());
+			}
 		}
-		consumer.setRepositoryMap(repositoryMap);
 
-		// invoke retrieve documentSet
-		final XDSRetrieveResponseType response = consumer.retrieveDocumentSet(false,
-				retrieveDocumentSetRequest, null);
+		final var serverInLogger = "#serverInLogger2";
+		final var serverOutLogger = "#serverOutLogger2";
+		final var endpoint = String.format(
+				"xds-iti43://%s/xds/iti43?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
+				this.affinityDomain.getRepositoryDestination().getUri().toURL().getPath(), serverInLogger,
+				serverInLogger, serverOutLogger, serverOutLogger,
+				atnaConfigMode == AtnaConfigMode.SECURE);
+		log.info("Sending request to '{}' endpoint", endpoint);
+		final var exchange = send(endpoint, retrieveDocumentSet, securityHeader);
 
-		return response;
+		return exchange.getMessage().getBody(RetrieveDocumentSet.class);
 	}
 
 	/**

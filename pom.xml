@@ -32,6 +32,7 @@
 		<jaxws-version>2.3.4</jaxws-version>
 		<opensaml.version>3.3.1</opensaml.version>
 		<ipf.version>4.1.0</ipf.version>
+		<spring.boot.version>2.5.3</spring.boot.version>
 		<org.apache.ws.commons.axiom.version>1.2.21</org.apache.ws.commons.axiom.version>
 		<maven.compiler.release>16</maven.compiler.release>
 		<maven.compiler.source>16</maven.compiler.source>
@@ -300,6 +301,25 @@
 				<version>${ipf.version}</version>
 
 			</dependency>
+
+			<dependency>
+				<groupId>org.openehealth.ipf.boot</groupId>
+				<artifactId>ipf-xds-spring-boot-starter</artifactId>
+				<version>${ipf.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.apache.tomcat.embed</groupId>
+						<artifactId>tomcat-embed-websocket</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
+			<!-- Spring boot stuff -->
+			<!--  <dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-actuator</artifactId>
+				<version>${spring.boot.version}</version>
+			</dependency>-->
 
 
 			<!-- hapi fhir -->
