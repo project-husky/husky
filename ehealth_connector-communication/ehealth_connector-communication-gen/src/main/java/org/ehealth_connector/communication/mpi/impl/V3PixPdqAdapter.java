@@ -16,8 +16,8 @@
  */
 package org.ehealth_connector.communication.mpi.impl;
 
+import java.io.Serializable;
 import java.io.StringWriter;
-import java.math.BigInteger;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -30,11 +30,10 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.util.FeatureMap;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
 import org.ehealth_connector.communication.mpi.MpiAdapterInterface;
+import org.ehealth_connector.communication.utils.PixPdqV3Utils;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.hl7.fhir.dstu3.model.Address;
@@ -53,39 +52,12 @@ import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Patient.PatientCommunicationComponent;
 import org.hl7.fhir.dstu3.model.StringType;
 import org.hl7.fhir.dstu3.model.Type;
-import org.hl7.v3.AD;
-import org.hl7.v3.AdxpStreetAddressLine;
-import org.hl7.v3.CE;
-import org.hl7.v3.COCTMT030007UVPerson;
-import org.hl7.v3.COCTMT150003UV03ContactParty;
-import org.hl7.v3.EN;
-import org.hl7.v3.EnFamily;
-import org.hl7.v3.EnGiven;
-import org.hl7.v3.EnPrefix;
-import org.hl7.v3.EnSuffix;
-import org.hl7.v3.HomeAddressUse;
-import org.hl7.v3.II;
-import org.hl7.v3.INT1;
-import org.hl7.v3.ON;
-import org.hl7.v3.PN;
-import org.hl7.v3.PRPAMT201310UV02BirthPlace;
-import org.hl7.v3.PRPAMT201310UV02Employee;
-import org.hl7.v3.PRPAMT201310UV02LanguageCommunication;
-import org.hl7.v3.PRPAMT201310UV02Nation;
-import org.hl7.v3.PRPAMT201310UV02OtherIDs;
-import org.hl7.v3.PRPAMT201310UV02Patient;
-import org.hl7.v3.PRPAMT201310UV02PersonalRelationship;
-import org.hl7.v3.TEL;
-import org.hl7.v3.TS1;
 import org.hl7.v3.V3Package;
-import org.hl7.v3.WorkPlaceAddressUse;
 import org.openhealthtools.ihe.atna.auditor.PDQConsumerAuditor;
 import org.openhealthtools.ihe.atna.auditor.PIXConsumerAuditor;
 import org.openhealthtools.ihe.atna.auditor.PIXSourceAuditor;
-import org.openhealthtools.ihe.common.hl7v3.client.PixPdqV3Utils;
 import org.openhealthtools.ihe.common.hl7v3.client.V3GenericAcknowledgement;
 import org.openhealthtools.ihe.pdq.consumer.v3.V3PdqConsumer;
-import org.openhealthtools.ihe.pdq.consumer.v3.V3PdqConsumerResponse;
 import org.openhealthtools.ihe.pdq.consumer.v3.V3PdqContinuationCancel;
 import org.openhealthtools.ihe.pdq.consumer.v3.V3PdqContinuationQuery;
 import org.openhealthtools.ihe.pix.consumer.v3.V3PixConsumer;
@@ -96,6 +68,28 @@ import org.openhealthtools.ihe.pix.source.v3.V3PixSourceAcknowledgement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
+
+import net.ihe.gazelle.hl7v3.coctmt030007UV.COCTMT030007UVPerson;
+import net.ihe.gazelle.hl7v3.coctmt150003UV03.COCTMT150003UV03ContactParty;
+import net.ihe.gazelle.hl7v3.datatypes.AD;
+import net.ihe.gazelle.hl7v3.datatypes.CE;
+import net.ihe.gazelle.hl7v3.datatypes.EN;
+import net.ihe.gazelle.hl7v3.datatypes.EnFamily;
+import net.ihe.gazelle.hl7v3.datatypes.EnGiven;
+import net.ihe.gazelle.hl7v3.datatypes.EnPrefix;
+import net.ihe.gazelle.hl7v3.datatypes.EnSuffix;
+import net.ihe.gazelle.hl7v3.datatypes.II;
+import net.ihe.gazelle.hl7v3.datatypes.INT;
+import net.ihe.gazelle.hl7v3.datatypes.ON;
+import net.ihe.gazelle.hl7v3.datatypes.PN;
+import net.ihe.gazelle.hl7v3.datatypes.TEL;
+import net.ihe.gazelle.hl7v3.datatypes.TS;
+import net.ihe.gazelle.hl7v3.prpamt201310UV02.PRPAMT201310UV02BirthPlace;
+import net.ihe.gazelle.hl7v3.prpamt201310UV02.PRPAMT201310UV02Citizen;
+import net.ihe.gazelle.hl7v3.prpamt201310UV02.PRPAMT201310UV02Employee;
+import net.ihe.gazelle.hl7v3.prpamt201310UV02.PRPAMT201310UV02Nation;
+import net.ihe.gazelle.hl7v3.prpamt201310UV02.PRPAMT201310UV02Patient;
+import net.ihe.gazelle.hl7v3.prpamt201310UV02.PRPAMT201310UV02PersonalRelationship;
 
 /**
  * V3PixPdqAdapter
@@ -483,7 +477,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 *            the patient
 	 */
 	protected void addPatientName(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
-		final EList<PN> pns = pdqPatient.getPatientPerson().getName();
+		final List<PN> pns = pdqPatient.getPatientPerson().getName();
 		for (int i = 0; i < pns.size(); ++i) {
 			final PN pn = pns.get(i);
 			final HumanName HumanNameType = new HumanName();
@@ -594,8 +588,8 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 					} else if (tel.getUse().contains(HomeAddressUse.H)
 							|| tel.getUse().contains(HomeAddressUse.HP)) {
 						ContactPoint.setUse(ContactPointUse.HOME);
-					} else if ((tel.getUse().size() > 0)
-							&& "MC".equals(tel.getUse().get(0).getName())) {
+					} else if ((!tel.getUse().isEmpty())
+							&& "MC".equals(tel.getUse())) {
 						ContactPoint.setUse(ContactPointUse.MOBILE);
 					}
 					patient.getTelecom().add(ContactPoint);
@@ -813,11 +807,11 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	 *            (the FeatureMap containing the value)
 	 * @return String containing the value of the supplied FeatureMap.
 	 */
-	protected String getMixedValue(FeatureMap mixed) {
-		String returnValue = "";
+	protected String getMixedValue(List<Serializable> mixed) {
+		var returnValue = "";
 		// if we have a mixed
-		if (mixed.size() > 0) {
-			returnValue = mixed.get(0).getValue().toString();
+		if (!mixed.isEmpty() && mixed.get(0) instanceof String) {
+			returnValue = (String) mixed.get(0);
 		}
 		return returnValue;
 	}
@@ -865,14 +859,14 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 				&& ((v3PixConsumerResponse.getNumPatientIds() > 0)
 						|| (v3PixConsumerResponse.getNumAsOtherIds() > 0))) {
 
-			for (int i = 0; i < v3PixConsumerResponse.getNumPatientIds(); i++) {
+			for (var i = 0; i < v3PixConsumerResponse.getNumPatientIds(); i++) {
 				final String[] id = v3PixConsumerResponse.getPatientID(i);
 				if ((id[2] != null) && id[2].equals(rootOid)) {
 					retVal = id[0];
 				}
 			}
 			if (retVal == null) {
-				for (int i = 0; i < v3PixConsumerResponse.getNumAsOtherIds(); i++) {
+				for (var i = 0; i < v3PixConsumerResponse.getNumAsOtherIds(); i++) {
 					final String[] id = v3PixConsumerResponse.getPatientAsOtherID(i);
 					if ((id[2] != null) && id[2].equals(rootOid)) {
 						retVal = id[0];
@@ -930,9 +924,9 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 			return false;
 		}
 
-		boolean ret = false;
+		var ret = false;
 
-		final V3PixSourceMessageHelper v3pixSourceMsgMerge = new V3PixSourceMessageHelper(false,
+		final var v3pixSourceMsgMerge = new V3PixSourceMessageHelper(false,
 				false, true, adapterCfg.getSenderApplicationOid(),
 				adapterCfg.getSenderFacilityOid(), adapterCfg.getReceiverApplicationOid(),
 				adapterCfg.getReceiverFacilityOid());
@@ -1137,7 +1131,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 				queryResponse.setSuccess(!lastPdqConsumerResponse.hasError());
 				queryResponse.setCurrentNumbers(lastPdqConsumerResponse.getNumRecordsCurrent());
 				queryResponse.setRemainingNumbers(lastPdqConsumerResponse.getNumRecordsRemaining());
-				final INT1 totalNumbers = lastPdqConsumerResponse.getPdqResponse()
+				final INT totalNumbers = lastPdqConsumerResponse.getPdqResponse()
 						.getControlActProcess().getQueryAck().getResultTotalQuantity();
 				if (totalNumbers != null) {
 					queryResponse.setTotalNumbers(totalNumbers.getValue().intValue());
@@ -1247,9 +1241,9 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	protected void setDeceased(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
 		if (pdqPatient.getPatientPerson() != null) {
 			if ((pdqPatient.getPatientPerson().getDeceasedInd() != null)
-					&& pdqPatient.getPatientPerson().getDeceasedInd().isSetValue()) {
+					&& pdqPatient.getPatientPerson().getDeceasedInd().value) {
 				final BooleanType dt = new BooleanType();
-				dt.setValue(pdqPatient.getPatientPerson().getDeceasedInd().isValue());
+				dt.setValue(pdqPatient.getPatientPerson().getDeceasedInd().value);
 				patient.setDeceased(dt);
 			}
 			if (pdqPatient.getPatientPerson().getDeceasedTime() != null) {
@@ -1337,13 +1331,13 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	protected void setMultipeBirth(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
 		if (pdqPatient.getPatientPerson() != null) {
 			if ((pdqPatient.getPatientPerson().getMultipleBirthInd() != null)
-					&& pdqPatient.getPatientPerson().getMultipleBirthInd().isSetValue()) {
+					&& pdqPatient.getPatientPerson().getMultipleBirthInd().value) {
 				final BooleanType dt = new BooleanType();
-				dt.setValue(pdqPatient.getPatientPerson().getMultipleBirthInd().isValue());
+				dt.setValue(pdqPatient.getPatientPerson().getMultipleBirthInd().value);
 				patient.setMultipleBirth(dt);
 			}
 			if (pdqPatient.getPatientPerson().getMultipleBirthOrderNumber() != null) {
-				final BigInteger birthOrderNumber = pdqPatient.getPatientPerson()
+				final Integer birthOrderNumber = pdqPatient.getPatientPerson()
 						.getMultipleBirthOrderNumber().getValue();
 				patient.setMultipleBirth(new IntegerType(birthOrderNumber.intValue()));
 			}
@@ -1375,7 +1369,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	protected void setNation(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
 		if ((pdqPatient.getPatientPerson() != null)
 				&& (pdqPatient.getPatientPerson().getAsCitizen() != null)) {
-			final List<org.hl7.v3.PRPAMT201310UV02Citizen> citizens = pdqPatient.getPatientPerson()
+			final List<PRPAMT201310UV02Citizen> citizens = pdqPatient.getPatientPerson()
 					.getAsCitizen();
 			if (citizens.size() > 0) {
 				final PRPAMT201310UV02Nation nation = citizens.get(0).getPoliticalNation();
@@ -1414,7 +1408,7 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 	protected void setPatientBirthTime(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
 		if ((pdqPatient.getPatientPerson() != null)
 				&& (pdqPatient.getPatientPerson().getBirthTime() != null)) {
-			final TS1 ts = pdqPatient.getPatientPerson().getBirthTime();
+			final TS ts = pdqPatient.getPatientPerson().getBirthTime();
 			final String date = ts.getValue();
 			if ((date != null) && (date.length() >= 4)) {
 				String dateFhir = date.substring(0, 4);
@@ -1708,15 +1702,15 @@ public class V3PixPdqAdapter implements MpiAdapterInterface<V3PdqQuery, V3PdqQue
 				}
 			}
 
-			final EList<ON> ons = pdqPatient.getProviderOrganization().getName();
+			final List<ON> ons = pdqPatient.getProviderOrganization().getName();
 			if ((ons != null) && (ons.size() > 0)) {
 				organization.setName(getMixedValue(ons.get(0).getMixed()));
 			}
 
-			final EList<COCTMT150003UV03ContactParty> contactParties = pdqPatient
+			final List<COCTMT150003UV03ContactParty> contactParties = pdqPatient
 					.getProviderOrganization().getContactParty();
 			if ((contactParties != null) && (contactParties.size() > 0)) {
-				final EList<TEL> tels = contactParties.get(0).getTelecom();
+				final List<TEL> tels = contactParties.get(0).getTelecom();
 				if ((tels != null) && (tels.size() > 0)) {
 					final TEL tel = tels.get(0);
 					if ((tel.getValue() != null) && tel.getValue().startsWith("tel:")) {

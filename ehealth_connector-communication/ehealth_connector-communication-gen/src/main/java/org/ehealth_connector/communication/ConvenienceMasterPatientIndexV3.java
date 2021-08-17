@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
  * Master Patient Index bereit (MPI) Die Kommunikation erfolgt in dieser Klasse
  * mit HL7 V3 (PIX V3, PDQV3) </div>
  */
-public class ConvenienceMasterPatientIndexV3 {
+public class ConvenienceMasterPatientIndexV3 extends CamelService {
 
 	/** The SLF4J logger instance. */
 	private static Logger log = LoggerFactory.getLogger(ConvenienceMasterPatientIndexV3.class);
