@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.ehealth_connector</groupId>
 	<artifactId>ehealth_connector-api</artifactId>
-	<version>1.9-SNAPSHOT</version>
+	<version>2.0-ALPHA</version>
 	<url>https://gitlab.com/ehealth-connector/api/wikis/Home</url>
 	<name>eHealth Connector main Git project Api</name>
 	<packaging>pom</packaging>
@@ -65,7 +65,7 @@
 			<dependency>
 				<groupId>org.ehealth_connector.common</groupId>
 				<artifactId>ehealth_connector-common-gen</artifactId>
-				<version>1.9-SNAPSHOT</version>
+				<version>2.0-ALPHA</version>
 				<type>test-jar</type>
 				<scope>test</scope>
 			</dependency>
