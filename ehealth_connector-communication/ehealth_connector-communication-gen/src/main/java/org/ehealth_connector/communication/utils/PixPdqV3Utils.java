@@ -75,20 +75,20 @@ public class PixPdqV3Utils {
 	 */
 	public static String[] ADToStringArray(AD ad) {
 		// NOTE: I'm only getting the first address line, other locator, etc.
-		String[] addressArray = new String[9];
-		if (null != ad.getStreetAddressLine() && ad.getStreetAddressLine().size() > 0)
+		var addressArray = new String[9];
+		if (null != ad.getStreetAddressLine() && !ad.getStreetAddressLine().isEmpty())
 			addressArray[0] = getMixedValue(ad.getStreetAddressLine().get(0).getMixed());
-		if (null != ad.getAdditionalLocator() && ad.getAdditionalLocator().size() > 0)
+		if (null != ad.getAdditionalLocator() && !ad.getAdditionalLocator().isEmpty())
 			addressArray[1] = getMixedValue(ad.getAdditionalLocator().get(0).getMixed());
-		if (null != ad.getCity() && ad.getCity().size() > 0)
+		if (null != ad.getCity() && !ad.getCity().isEmpty())
 			addressArray[2] = getMixedValue(ad.getCity().get(0).getMixed());
-		if (null != ad.getState() && ad.getState().size() > 0)
+		if (null != ad.getState() && !ad.getState().isEmpty())
 			addressArray[3] = getMixedValue(ad.getState().get(0).getMixed());
-		if (null != ad.getPostalCode() && ad.getPostalCode().size() > 0)
+		if (null != ad.getPostalCode() && !ad.getPostalCode().isEmpty())
 			addressArray[4] = getMixedValue(ad.getPostalCode().get(0).getMixed());
-		if (null != ad.getCountry() && ad.getCountry().size() > 0)
+		if (null != ad.getCountry() && !ad.getCountry().isEmpty())
 			addressArray[5] = getMixedValue(ad.getCountry().get(0).getMixed());
-		if (null != ad.getCounty() && ad.getCounty().size() > 0)
+		if (null != ad.getCounty() && !ad.getCounty().isEmpty())
 			addressArray[8] = getMixedValue(ad.getCounty().get(0).getMixed());
 		return addressArray;
 	}
@@ -135,10 +135,10 @@ public class PixPdqV3Utils {
 				var streetAddress = new AdxpStreetAddressLine();
 
 				// set the street address value
-				streetAddress.getMixed().add(addressStreetAddress);
+				streetAddress.addMixed(addressStreetAddress);
 
 				// Add the street address to the AD
-				addressAD.getStreetAddressLine().add(streetAddress);
+				addressAD.addStreetAddressLine(streetAddress);
 
 				// indicate that some part of the address was added
 				addressAdded = true;
@@ -151,10 +151,10 @@ public class PixPdqV3Utils {
 			var city = new AdxpCity();
 
 			// set the street address value
-			city.getMixed().add(addressCity);
+			city.addMixed(addressCity);
 
 			// Add the city to the AD
-			addressAD.getCity().add(city);
+			addressAD.addCity(city);
 
 			// indicate that some part of the address was added
 			addressAdded = true;
@@ -166,10 +166,10 @@ public class PixPdqV3Utils {
 			var county = new AdxpCounty();
 
 			// set the county value
-			county.getMixed().add(addressCounty);
+			county.addMixed(addressCounty);
 
 			// Add the county to the AD
-			addressAD.getCounty().add(county);
+			addressAD.addCounty(county);
 
 			// indicate that some part of the address was added
 			addressAdded = true;
@@ -181,10 +181,10 @@ public class PixPdqV3Utils {
 			var state = new AdxpState();
 
 			// set the state value
-			state.getMixed().add(addressState);
+			state.addMixed(addressState);
 
 			// Add the state to the AD
-			addressAD.getState().add(state);
+			addressAD.addState(state);
 
 			// indicate that some part of the address was added
 			addressAdded = true;
@@ -196,10 +196,10 @@ public class PixPdqV3Utils {
 			var country = new AdxpCountry();
 
 			// set the state value
-			country.getMixed().add(addressCountry);
+			country.addMixed(addressCountry);
 
 			// Add the country to the AD
-			addressAD.getCountry().add(country);
+			addressAD.addCountry(country);
 
 			// indicate that some part of the address was added
 			addressAdded = true;
@@ -211,10 +211,10 @@ public class PixPdqV3Utils {
 			var zipCode = new AdxpPostalCode();
 
 			// set the zip code
-			zipCode.getMixed().add(addressZip);
+			zipCode.addMixed(addressZip);
 
 			// add the zip code to the AD
-			addressAD.getPostalCode().add(zipCode);
+			addressAD.addPostalCode(zipCode);
 
 			// indicate that some part of the address was added
 			addressAdded = true;
@@ -227,10 +227,10 @@ public class PixPdqV3Utils {
 			var otherDesignation = new AdxpAdditionalLocator();
 
 			// set the other designation
-			otherDesignation.getMixed().add(addressOtherDesignation);
+			otherDesignation.addMixed(addressOtherDesignation);
 
 			// add the other designation to the AD
-			addressAD.getAdditionalLocator().add(otherDesignation);
+			addressAD.addAdditionalLocator(otherDesignation);
 
 			// indicate that some part of the address was added
 			addressAdded = true;
@@ -426,10 +426,10 @@ public class PixPdqV3Utils {
 			var familyName = new EnFamily();
 
 			// add the text to the family name
-			familyName.getMixed().add(family);
+			familyName.addMixed(family);
 
 			// Add the family name to the EN
-			en.getFamily().add(familyName);
+			en.addFamily(familyName);
 		}
 
 		// if there is a given name
@@ -438,10 +438,10 @@ public class PixPdqV3Utils {
 			var givenName = new EnGiven();
 
 			// add the text to the family name
-			givenName.getMixed().add(given);
+			givenName.addMixed(given);
 
 			// Add the given name to the EN
-			en.getGiven().add(givenName);
+			en.addGiven(givenName);
 		}
 
 		// if there is an other name
@@ -450,10 +450,10 @@ public class PixPdqV3Utils {
 			var givenName2 = new EnGiven();
 
 			// add the text to the second given name
-			givenName2.getMixed().add(other);
+			givenName2.addMixed(other);
 
 			// Add the given name to the EN
-			en.getGiven().add(givenName2);
+			en.addGiven(givenName2);
 		}
 
 		// if there is a suffix
@@ -462,10 +462,10 @@ public class PixPdqV3Utils {
 			var suffixname = new EnSuffix();
 
 			// add the text to the suffix
-			suffixname.getMixed().add(suffix);
+			suffixname.addMixed(suffix);
 
 			// Add the suffix to the EN
-			en.getSuffix().add(suffixname);
+			en.addSuffix(suffixname);
 		}
 
 		// if there is a prefix
@@ -474,10 +474,10 @@ public class PixPdqV3Utils {
 			var prefixname = new EnPrefix();
 
 			// add the text to the suffix
-			prefixname.getMixed().add(prefix);
+			prefixname.addMixed(prefix);
 
 			// Add the prefix to the EN
-			en.getPrefix().add(prefixname);
+			en.addPrefix(prefixname);
 		}
 
 		return en;
@@ -737,7 +737,7 @@ public class PixPdqV3Utils {
 			senderRepresentedOrganization.setDeterminerCode(EntityDeterminer.INSTANCE);
 
 			// add the id to the representedOrganization
-			senderRepresentedOrganization.getId().add(createII(facilityOID, "", ""));
+			senderRepresentedOrganization.addId(createII(facilityOID, "", ""));
 
 			// set the representedOrganization
 			asAgent.setRepresentedOrganization(senderRepresentedOrganization);
@@ -845,14 +845,14 @@ public class PixPdqV3Utils {
 		var assignedEntity = new COCTMT090003UV01AssignedEntity();
 		custodian.setAssignedEntity(assignedEntity);
 		assignedEntity.setClassCode(RoleClassAssignedEntity.ASSIGNED);
-		assignedEntity.getId().add(createII(organizationOID, "", ""));
+		assignedEntity.addId(createII(organizationOID, "", ""));
 		var assignedOrganization = new COCTMT090003UV01Organization();
 		assignedEntity.setAssignedOrganization(assignedOrganization);
 		assignedOrganization.setClassCode(EntityClassOrganization.ORG);
 		assignedOrganization.setDeterminerCode(EntityDeterminer.INSTANCE);
 		var name = new EN();
-		assignedOrganization.getName().add(name);
-		name.getMixed().add(organizationName);
+		name.addMixed(organizationName);
+		assignedOrganization.addName(name);
 		return custodian;
 	}
 
@@ -864,7 +864,7 @@ public class PixPdqV3Utils {
 	 */
 	public static ST createST(String text) {
 		var semanticsText = new ST();
-		semanticsText.getMixed().add(text);
+		semanticsText.addMixed(text);
 		return semanticsText;
 	}
 
@@ -927,17 +927,17 @@ public class PixPdqV3Utils {
 	public static String[] ENToStringArray(EN en) {
 		var patientName = new String[5];
 
-		if (null != en.getFamily() && en.getFamily().size() > 0)
+		if (null != en.getFamily() && !en.getFamily().isEmpty())
 			patientName[0] = getMixedValue(en.getFamily().get(0).getMixed());
-		if (null != en.getGiven() && en.getGiven().size() > 0) {
+		if (null != en.getGiven() && !en.getGiven().isEmpty()) {
 			patientName[1] = getMixedValue(en.getGiven().get(0).getMixed());
 
 			if (en.getGiven().size() > 1)
 				patientName[2] = getMixedValue(en.getGiven().get(1).getMixed());
 		}
-		if (null != en.getSuffix() && en.getSuffix().size() > 0)
+		if (null != en.getSuffix() && !en.getSuffix().isEmpty())
 			patientName[3] = getMixedValue(en.getSuffix().get(0).getMixed());
-		if (null != en.getPrefix() && en.getPrefix().size() > 0)
+		if (null != en.getPrefix() && !en.getPrefix().isEmpty())
 			patientName[4] = getMixedValue(en.getPrefix().get(0).getMixed());
 
 		return patientName;
@@ -1007,20 +1007,20 @@ public class PixPdqV3Utils {
 	 * @return String[] with each component of the name.
 	 */
 	public static String[] PNToStringArray(PN pn) {
-		String[] patientName = new String[5];
+		var patientName = new String[5];
 
 		// if we've got a family name
-		if (null != pn.getFamily() && pn.getFamily().size() > 0)
+		if (null != pn.getFamily() && !pn.getFamily().isEmpty())
 			patientName[0] = getMixedValue(pn.getFamily().get(0).getMixed());
-		if (null != pn.getGiven() && pn.getGiven().size() > 0) {
+		if (null != pn.getGiven() && !pn.getGiven().isEmpty()) {
 			patientName[1] = getMixedValue(pn.getGiven().get(0).getMixed());
 
 			if (pn.getGiven().size() > 1)
 				patientName[2] = getMixedValue(pn.getGiven().get(1).getMixed());
 		}
-		if (null != pn.getSuffix() && pn.getSuffix().size() > 0)
+		if (null != pn.getSuffix() && !pn.getSuffix().isEmpty())
 			patientName[3] = getMixedValue(pn.getSuffix().get(0).getMixed());
-		if (null != pn.getPrefix() && pn.getPrefix().size() > 0)
+		if (null != pn.getPrefix() && !pn.getPrefix().isEmpty())
 			patientName[4] = getMixedValue(pn.getPrefix().get(0).getMixed());
 
 		return patientName;

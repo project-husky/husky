@@ -17,6 +17,7 @@
 package org.ehealth_connector.communication.mpi;
 
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
+import org.ehealth_connector.xua.core.SecurityHeaderElement;
 
 /**
  * General adapter Inteface for an MPI implementation.
@@ -35,7 +36,7 @@ public interface MpiAdapterInterface<T extends MpiQuery, U extends MpiQueryRespo
 	 *            the patient
 	 * @return if success true, false otherwise
 	 */
-	abstract boolean addPatient(FhirPatient patient);
+	abstract boolean addPatient(FhirPatient patient, SecurityHeaderElement assertion);
 
 	/**
 	 * Gets an empty MpiQuery objects.
@@ -54,7 +55,7 @@ public interface MpiAdapterInterface<T extends MpiQuery, U extends MpiQueryRespo
 	 *            the obsolete id
 	 * @return if success true, false otherwise
 	 */
-	abstract boolean mergePatient(FhirPatient patient, String obsoleteId);
+	abstract boolean mergePatient(FhirPatient patient, String obsoleteId, SecurityHeaderElement assertion);
 
 	/**
 	 * query the mpi with patient id and return the ids in the queried Domains
@@ -70,7 +71,7 @@ public interface MpiAdapterInterface<T extends MpiQuery, U extends MpiQueryRespo
 	 * @return string array with correspoding identifiers to queryDomainOids
 	 */
 	abstract String[] queryPatientId(FhirPatient patient, String[] queryDomainOids,
-			String[] queryDomainNamespaces);
+			String[] queryDomainNamespaces, SecurityHeaderElement assertion);
 
 	/**
 	 * queries the mpi for patients according to the criteria specified
@@ -79,7 +80,7 @@ public interface MpiAdapterInterface<T extends MpiQuery, U extends MpiQueryRespo
 	 *            the mpi query criterias
 	 * @return the mpi query response
 	 */
-	abstract U queryPatients(T mpiQuery);
+	abstract U queryPatients(T mpiQuery, SecurityHeaderElement assertion);
 
 	/**
 	 * updates the demographic information of the patient in the mpi.
@@ -88,6 +89,6 @@ public interface MpiAdapterInterface<T extends MpiQuery, U extends MpiQueryRespo
 	 *            the patient
 	 * @return if success true, false otherwise
 	 */
-	abstract boolean updatePatient(FhirPatient patient);
+	abstract boolean updatePatient(FhirPatient patient, SecurityHeaderElement assertion);
 
 }

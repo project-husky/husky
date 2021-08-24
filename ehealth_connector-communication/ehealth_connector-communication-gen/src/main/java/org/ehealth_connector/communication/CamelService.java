@@ -1,7 +1,9 @@
 package org.ehealth_connector.communication;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.namespace.QName;
 
@@ -46,6 +48,7 @@ public abstract class CamelService implements CamelContextAware {
 		// Element wssElement = StaxUtils.read(new
 		// StringReader(wssHeader)).getDocumentElement();
 
+
 		List<SoapHeader> soapHeaders = CastUtils
 				.cast((List<?>) exchange.getIn().getHeader(AbstractWsEndpoint.OUTGOING_SOAP_HEADERS));
 		SoapHeader newHeader;
@@ -66,13 +69,31 @@ public abstract class CamelService implements CamelContextAware {
 
 	}
 
-	protected Exchange send(String endpoint, Object body, SecurityHeaderElement securityHeaderElement)
+	protected void addHttpHeader(Exchange exchange, String action) {
+
+		Map<String, String> outgoingHeaders = CastUtils
+				.cast((Map<String, String>) exchange.getIn().getHeader(AbstractWsEndpoint.OUTGOING_HTTP_HEADERS));
+
+		if (outgoingHeaders == null) {
+			outgoingHeaders = new HashMap<>();
+		}
+
+		outgoingHeaders.put("Accept", "application/soap+xml");
+		outgoingHeaders.put("Content-Type",
+				String.format("application/soap+xml; charset=UTF-8; action=\"%s\"", action));
+		exchange.getIn().setHeader(AbstractWsEndpoint.OUTGOING_HTTP_HEADERS, outgoingHeaders);
+
+	}
+
+	protected Exchange send(String endpoint, Object body, SecurityHeaderElement securityHeaderElement, String action)
 			throws Exception {
 		Exchange exchange = new DefaultExchange(getCamelContext());
 		exchange.getIn().setBody(body);
 		if (securityHeaderElement != null) {
 			addWssHeader(securityHeaderElement, exchange);
 		}
+
+		addHttpHeader(exchange, action);
 
 		try (var template = camelContext.createProducerTemplate()) {
 			var result = template.send(endpoint, exchange);

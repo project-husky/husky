@@ -919,7 +919,7 @@ public class ConvenienceCommunication extends CamelService {
 				serverInLogger, serverOutLogger, serverOutLogger,
 				atnaConfigMode == AtnaConfigMode.SECURE);
 		log.info("Sending request to '{}' endpoint", endpoint);
-		final var exchange = send(endpoint, retrieveDocumentSet, securityHeader);
+		final var exchange = send(endpoint, retrieveDocumentSet, securityHeader, "");
 
 		return exchange.getMessage().getBody(RetrieveDocumentSet.class);
 	}

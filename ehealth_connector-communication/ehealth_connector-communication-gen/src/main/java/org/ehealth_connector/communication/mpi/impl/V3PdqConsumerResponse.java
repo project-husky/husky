@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.ehealth_connector.communication.utils.PixPdqV3Utils;
-import org.w3c.dom.Element;
 
 import net.ihe.gazelle.hl7v3.datatypes.II;
 import net.ihe.gazelle.hl7v3.prpain201306UV02.PRPAIN201306UV02Type;
@@ -24,8 +23,8 @@ public class V3PdqConsumerResponse {
 	protected String acknowledgementDetailText = null;
 	protected String errorText = "";
 
-	private ArrayList<String> receivingApplication = new ArrayList<String>(0);
-	private ArrayList<String> receivingFacility = new ArrayList<String>(0);
+	private ArrayList<String> receivingApplication = new ArrayList<>(0);
+	private ArrayList<String> receivingFacility = new ArrayList<>(0);
 
 	protected boolean hasError = false;
 
@@ -35,15 +34,14 @@ public class V3PdqConsumerResponse {
 	 * @param pdqConsumerResponseElement
 	 * @throws Exception
 	 */
-	public V3PdqConsumerResponse(Element pdqConsumerResponseElement) throws Exception {
+	public V3PdqConsumerResponse(PRPAIN201306UV02Type pdqConsumerResponseElement) throws Exception {
 
 		// convert the response to the model
 		// this.v3Message = this.getDocumentRoot(pdqConsumerResponseElement);
 
 		// if we got a pdq response
 		// if (null != this.v3Message.getPRPAIN201306UV02()) {
-		rootElement = new PRPAIN201306UV02Type();
-		rootElement.set_xmlNodePresentation(pdqConsumerResponseElement);
+		rootElement = pdqConsumerResponseElement;
 
 		// set the id
 		this.messageId = rootElement.getId();
@@ -150,7 +148,7 @@ public class V3PdqConsumerResponse {
 	 * @return int - the value in the "result current quantity" of the response
 	 */
 	public int getNumRecordsCurrent() {
-		int numRecords = 0;
+		var numRecords = 0;
 		if (rootElement != null && rootElement.getControlActProcess().getQueryAck().getResultCurrentQuantity() != null)
 			numRecords = rootElement.getControlActProcess().getQueryAck().getResultCurrentQuantity().getValue()
 					.intValue();
@@ -163,7 +161,7 @@ public class V3PdqConsumerResponse {
 	 * @return int - the value in the "result remaining quantity" of the response
 	 */
 	public int getNumRecordsRemaining() {
-		int numRecords = 0;
+		var numRecords = 0;
 		if (rootElement != null
 				&& rootElement.getControlActProcess().getQueryAck().getResultRemainingQuantity() != null)
 			numRecords = rootElement.getControlActProcess().getQueryAck().getResultRemainingQuantity().getValue()
@@ -198,7 +196,7 @@ public class V3PdqConsumerResponse {
 	 *         populated> String[8] = County
 	 */
 	public String[] getPatientAddress(int patientIndex, int addrIndex) {
-		String[] addressArray = new String[9];
+		var addressArray = new String[9];
 		// get the patient address as an array
 		if (getPatientByIndex(patientIndex).getPatientPerson().getAddr().size() > addrIndex)
 			addressArray = PixPdqV3Utils
@@ -240,7 +238,7 @@ public class V3PdqConsumerResponse {
 	 * @return String - Specified Patient's Date of Birth
 	 */
 	public String getPatientDOB(int patientIndex) {
-		String patientDOB = "";
+		var patientDOB = "";
 		if (getPatientByIndex(patientIndex).getPatientPerson().getBirthTime() != null)
 			patientDOB = getPatientByIndex(patientIndex).getPatientPerson().getBirthTime().getValue();
 		return patientDOB;
@@ -421,5 +419,13 @@ public class V3PdqConsumerResponse {
 	 */
 	public String getQueryAcknowledgement() {
 		return queryAcknowledgement;
+	}
+
+	public II getMessageId() {
+		return messageId;
+	}
+
+	public boolean hasError() {
+		return hasError;
 	}
 }

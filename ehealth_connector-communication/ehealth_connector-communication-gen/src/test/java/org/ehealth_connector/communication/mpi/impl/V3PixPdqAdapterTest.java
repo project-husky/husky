@@ -30,7 +30,6 @@ import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.Before;
 import org.junit.Test;
-import org.openhealthtools.ihe.pdq.consumer.v3.V3PdqConsumerResponse;
 import org.w3c.dom.Element;
 
 /**

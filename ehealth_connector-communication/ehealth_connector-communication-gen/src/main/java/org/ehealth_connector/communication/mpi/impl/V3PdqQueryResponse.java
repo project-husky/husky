@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.communication.mpi.impl;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import org.ehealth_connector.communication.mpi.MpiQueryResponse;
@@ -40,6 +41,11 @@ public class V3PdqQueryResponse implements MpiQueryResponse {
 
 	/** The total numbers of patient for whole query. */
 	private int totalNumbers;
+
+	protected String errorCode = null;
+	protected String errorText = null;
+	protected List<String> infoCodes = new LinkedList<>();
+	protected List<String> infoTexts = new LinkedList<>();
 
 	/**
 	 * Gets the current numbers of returned patients in the query.
@@ -139,6 +145,38 @@ public class V3PdqQueryResponse implements MpiQueryResponse {
 	 */
 	protected void setTotalNumbers(int totalNumbers) {
 		this.totalNumbers = totalNumbers;
+	}
+
+	public String getErrorCode() {
+		return this.errorCode;
+	}
+
+	public String getErrorText() {
+		return this.errorText;
+	}
+
+	public List<String> getInfoCodes() {
+		return this.infoCodes;
+	}
+
+	public List<String> getInfoTexts() {
+		return this.infoTexts;
+	}
+
+	public void setErrorCode(String errorCode) {
+		this.errorCode = errorCode;
+	}
+
+	public void setErrorText(String errorText) {
+		this.errorText = errorText;
+	}
+
+	public void setInfoCodes(List<String> infoCodes) {
+		this.infoCodes = infoCodes;
+	}
+
+	public void setInfoTexts(List<String> infoTexts) {
+		this.infoTexts = infoTexts;
 	}
 
 }
