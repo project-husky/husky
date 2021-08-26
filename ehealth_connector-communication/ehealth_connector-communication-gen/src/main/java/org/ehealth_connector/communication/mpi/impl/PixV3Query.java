@@ -5,8 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.ehealth_connector.common.communication.AffinityDomain;
+import org.ehealth_connector.communication.mpi.V3Acknowledgement;
 import org.ehealth_connector.communication.mpi.impl.pix.V3PixSource;
-import org.ehealth_connector.communication.mpi.impl.pix.V3PixSourceAcknowledgement;
 import org.ehealth_connector.communication.mpi.impl.pix.V3PixSourceMessageHelper;
 import org.ehealth_connector.communication.utils.PixPdqV3Utils;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
@@ -153,7 +153,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 		LOGGER.debug("add demographic data");
 		addDemographicData(patient, v3RecordAddedMessage);
 		try {
-			final V3PixSourceAcknowledgement v3pixack = pixSource
+			final V3Acknowledgement v3pixack = pixSource
 					.sendRecordAdded(v3RecordAddedMessage.getV3RecordAddedMessage(), assertion);
 			ret = checkResponse(v3pixack);
 		} catch (final Exception e) {
@@ -194,7 +194,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 		v3pixSourceMsgMerge.getV3MergePatientsMessage().setObsoletePatientID(obsoleteId, this.homeCommunityOid,
 				this.homeCommunityNamespace);
 		try {
-			final V3PixSourceAcknowledgement v3pixack = pixSource
+			final V3Acknowledgement v3pixack = pixSource
 					.sendMergePatients(v3pixSourceMsgMerge.getV3MergePatientsMessage(), assertion);
 			ret = checkResponse(v3pixack);
 		} catch (final Exception e) {
@@ -221,7 +221,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 				this.receiverFacilityOid);
 		addDemographicData(patient, v3RecordRevisedMessage);
 		try {
-			final V3PixSourceAcknowledgement v3pixack = pixSource
+			final V3Acknowledgement v3pixack = pixSource
 					.sendRecordRevised(v3RecordRevisedMessage.getV3RecordRevisedMessage(), assertion);
 			return checkResponse(v3pixack);
 		} catch (final Exception e) {
@@ -236,7 +236,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 * @param response the response
 	 * @return true, if response has no error, false if there are errors
 	 */
-	protected boolean checkResponse(V3PixSourceAcknowledgement response) {
+	protected boolean checkResponse(V3Acknowledgement response) {
 		if (response.hasError()) {
 			LOGGER.error("AcknowledgementCode: {}", response.getAcknowledgementCode());
 			LOGGER.error("Query error text: {}", response.getErrorText());

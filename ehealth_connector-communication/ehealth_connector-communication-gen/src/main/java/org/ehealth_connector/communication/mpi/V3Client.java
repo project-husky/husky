@@ -20,19 +20,9 @@ package org.ehealth_connector.communication.mpi;
 import java.net.URI;
 
 import org.ehealth_connector.communication.CamelService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-/**
- * @author <a href="mailto:anthony.larocca@sage.com">Anthony Larocca</a>
- *
- */
+
 public abstract class V3Client extends CamelService {
-
-	/**
-	 * Logger for this class.
-	 */
-	private static final Logger LOGGER = LoggerFactory.getLogger(V3Client.class.getName());
 
 	/**
 	 * The URI of the server to issue a query against.
@@ -45,7 +35,7 @@ public abstract class V3Client extends CamelService {
 	 * @param serverURI:
 	 *            the URI for the server to use for query requests
 	 */
-	public V3Client(URI serverURI) {
+	protected V3Client(URI serverURI) {
 		this.serverURI = serverURI;
 	}
 

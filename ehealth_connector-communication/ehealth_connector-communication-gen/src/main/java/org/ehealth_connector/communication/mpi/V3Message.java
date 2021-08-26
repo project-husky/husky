@@ -19,17 +19,15 @@ package org.ehealth_connector.communication.mpi;
 
 import java.util.ArrayList;
 
-/**
- * @author <a href="mailto:anthony.larocca@sage.com">Anthony Larocca</a>
- *
- */
+import net.ihe.gazelle.hl7v3.datatypes.II;
+
 public abstract class V3Message {
 
-	// sender/receiver application/facility
 	protected String sendingApplication = null;
 	protected String sendingFacility = null;
 	private ArrayList<String> receivingApplication = new ArrayList<String>(0);
 	private ArrayList<String> receivingFacility = new ArrayList<String>(0);
+	protected II messageId;
 
 	/**
 	 * Adds the receiving application ID provided
@@ -95,6 +93,14 @@ public abstract class V3Message {
 	 */
 	public String getSendingFacility() {
 		return sendingFacility;
+	}
+
+	public II getMessageId() {
+		return messageId;
+	}
+
+	public void setMessageId(II messageId) {
+		this.messageId = messageId;
 	}
 
 }

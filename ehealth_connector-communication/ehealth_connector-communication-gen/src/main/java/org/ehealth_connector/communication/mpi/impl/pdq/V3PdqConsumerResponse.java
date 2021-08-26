@@ -1,9 +1,9 @@
 package org.ehealth_connector.communication.mpi.impl.pdq;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.ehealth_connector.communication.mpi.V3Response;
 import org.ehealth_connector.communication.utils.PixPdqV3Utils;
 
 import net.ihe.gazelle.hl7v3.datatypes.II;
@@ -11,22 +11,10 @@ import net.ihe.gazelle.hl7v3.prpain201306UV02.PRPAIN201306UV02Type;
 import net.ihe.gazelle.hl7v3.prpamt201310UV02.PRPAMT201310UV02Patient;
 import net.ihe.gazelle.hl7v3.prpamt201310UV02.PRPAMT201310UV02PersonalRelationship;
 
-public class V3PdqConsumerResponse {
+public class V3PdqConsumerResponse extends V3Response {
 
-	private II messageId = null;
 	private PRPAIN201306UV02Type rootElement = null;
 	private String queryAcknowledgement = null;
-	private String sendingApplication = null;
-	private String sendingFacility = null;
-	private String acknowledgementCode = null;
-	private String acknowledgementDetailCode = null;
-	private String acknowledgementDetailText = null;
-	private String errorText = "";
-
-	private ArrayList<String> receivingApplication = new ArrayList<>(0);
-	private ArrayList<String> receivingFacility = new ArrayList<>(0);
-
-	protected boolean hasError = false;
 
 	/**
 	 * Create the V3PdqConsumerResponse given the provided XML element
@@ -34,7 +22,7 @@ public class V3PdqConsumerResponse {
 	 * @param pdqConsumerResponseElement
 	 * @throws Exception
 	 */
-	public V3PdqConsumerResponse(PRPAIN201306UV02Type pdqConsumerResponseElement) throws Exception {
+	public V3PdqConsumerResponse(PRPAIN201306UV02Type pdqConsumerResponseElement) {
 
 		// convert the response to the model
 		// this.v3Message = this.getDocumentRoot(pdqConsumerResponseElement);
@@ -50,7 +38,7 @@ public class V3PdqConsumerResponse {
 		this.sendingApplication = rootElement.getSender().getDevice().getId().get(0).getRoot();
 		if (null != rootElement.getSender().getDevice().getAsAgent()
 				&& null != rootElement.getSender().getDevice().getAsAgent().getRepresentedOrganization()
-				&& rootElement.getSender().getDevice().getAsAgent().getRepresentedOrganization().getId().size() > 0)
+				&& !rootElement.getSender().getDevice().getAsAgent().getRepresentedOrganization().getId().isEmpty())
 			this.sendingFacility = rootElement.getSender().getDevice().getAsAgent().getRepresentedOrganization().getId()
 					.get(0).getRoot();
 
@@ -58,21 +46,21 @@ public class V3PdqConsumerResponse {
 		final int numReceivers = rootElement.getReceiver().size();
 
 		// for each reciever
-		for (int i = 0; i < numReceivers; i++) {
+		for (var i = 0; i < numReceivers; i++) {
 			// get the application and (if available) facility
-			this.receivingApplication.add(rootElement.getReceiver().get(i).getDevice().getId().get(0).getRoot());
+			this.addReceivingApplication(rootElement.getReceiver().get(i).getDevice().getId().get(0).getRoot());
 			if (null != rootElement.getReceiver().get(i).getDevice().getAsAgent())
-				this.receivingFacility.add(rootElement.getReceiver().get(i).getDevice().getAsAgent()
+				this.addReceivingFacility(rootElement.getReceiver().get(i).getDevice().getAsAgent()
 						.getRepresentedOrganization().getId().get(0).getRoot());
 		}
 
 		// get the ack code
-		this.acknowledgementCode = rootElement.getAcknowledgement().get(0).getTypeCode().getCode().toString();
+		this.acknowledgementCode = rootElement.getAcknowledgement().get(0).getTypeCode().getCode();
 
 		// if there is acknowledgement detail
-		if (rootElement.getAcknowledgement().get(0).getAcknowledgementDetail().size() > 0) {
-			String detailCode = "";
-			String detailText = "";
+		if (!rootElement.getAcknowledgement().get(0).getAcknowledgementDetail().isEmpty()) {
+			var detailCode = "";
+			var detailText = "";
 
 			if (null != rootElement.getAcknowledgement().get(0).getAcknowledgementDetail().get(0).getCode())
 				detailCode = rootElement.getAcknowledgement().get(0).getAcknowledgementDetail().get(0).getCode()
@@ -83,8 +71,8 @@ public class V3PdqConsumerResponse {
 						.getMixed().get(0).toString();
 
 			if (rootElement.getAcknowledgement().get(0).getAcknowledgementDetail().get(0).getLocation() != null
-					&& rootElement.getAcknowledgement().get(0).getAcknowledgementDetail().get(0).getLocation()
-							.size() > 0)
+					&& !rootElement.getAcknowledgement().get(0).getAcknowledgementDetail().get(0).getLocation()
+							.isEmpty())
 				detailText += " Location: " + rootElement.getAcknowledgement().get(0).getAcknowledgementDetail().get(0)
 						.getLocation().get(0).getMixed().get(0).toString();
 
@@ -95,8 +83,7 @@ public class V3PdqConsumerResponse {
 		// if the code was AA, then:
 		if (acknowledgementCode.equalsIgnoreCase("AA")) {
 			// set up the response for data retrieval
-			queryAcknowledgement = rootElement.getControlActProcess().getQueryAck().getQueryResponseCode().getCode()
-					.toString();
+			queryAcknowledgement = rootElement.getControlActProcess().getQueryAck().getQueryResponseCode().getCode();
 
 			// if this was an app error
 			if (queryAcknowledgement.equalsIgnoreCase("AE")) {
@@ -421,27 +408,4 @@ public class V3PdqConsumerResponse {
 		return queryAcknowledgement;
 	}
 
-	public II getMessageId() {
-		return messageId;
-	}
-
-	public boolean hasError() {
-		return hasError;
-	}
-
-	public String getAcknowledgementCode() {
-		return acknowledgementCode;
-	}
-
-	public String getAcknowledgementDetailCode() {
-		return acknowledgementDetailCode;
-	}
-
-	public String getAcknowledgementDetailText() {
-		return acknowledgementDetailText;
-	}
-
-	public String getErrorText() {
-		return errorText;
-	}
 }

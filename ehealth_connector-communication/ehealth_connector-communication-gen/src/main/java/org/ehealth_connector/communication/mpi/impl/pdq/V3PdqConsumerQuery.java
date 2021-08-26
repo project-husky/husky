@@ -26,7 +26,6 @@ import net.ihe.gazelle.hl7v3.voc.XActMoodIntentEvent;
 public class V3PdqConsumerQuery extends V3Message {
 
 	// the PIX query
-	private II messageId = null;
 	private PRPAIN201305UV02Type rootElement = null;
 	private PRPAIN201305UV02QUQIMT021001UV01ControlActProcess queryControlActProcess = null;
 	private PRPAMT201306UV02QueryByParameter queryByParameter = null;
@@ -49,7 +48,7 @@ public class V3PdqConsumerQuery extends V3Message {
 	public V3PdqConsumerQuery(String senderApplicationOID, String senderFacilityOID, String receiverApplicationOID,
 			String receiverFacilityOID) {
 
-		// create the root v3 pix element
+		// create the root v3 pdq element
 		rootElement = new PRPAIN201305UV02Type();
 
 		// set the interaction id
@@ -67,7 +66,6 @@ public class V3PdqConsumerQuery extends V3Message {
 
 		// set ProcessingCode. This attribute defines whether the message is part of a production,
 		// training, or debugging system. Valid values are D (Debugging), T (Testing), P (Production)
-		// TODO: how can this be indicated outside of the system? New bridge.properties global to indicate "testing"?
 		// Will default to production because it will need to be that way in the field.
 		this.setProcessingCode("P");
 
@@ -91,15 +89,9 @@ public class V3PdqConsumerQuery extends V3Message {
 
 		// set the class code
 		queryControlActProcess.setClassCode(ActClassControlAct.CACT);
-
-		// TODO: CONFLICT: The value of ControlActProcess.moodCode SHALL be set to RQO
 		queryControlActProcess.setMoodCode(XActMoodIntentEvent.EVN);
 
-		// The trigger event code in ControlActProcess.code SHALL be set to PRPA_TE201309UV02 (2.16.840.1.113883.1.6)
-		// CP 506: <code code="PRPA_TE201305UV02" codeSystem="2.16.840.1.113883.1.18"/>
 		queryControlActProcess.setCode(PixPdqV3Utils.createCD("PRPA_TE201305UV02", "2.16.840.1.113883.1.18", "", ""));
-
-		// TODO: should we populate authorOrPerformer?
 
 		// create the query by parameter
 		queryByParameter = new PRPAMT201306UV02QueryByParameter();
@@ -108,7 +100,6 @@ public class V3PdqConsumerQuery extends V3Message {
 		queryControlActProcess.setQueryByParameter(queryByParameter);
 
 		// set the queryId
-		// TODO: This also needs to be a generated random II
 		queryByParameter.setQueryId(PixPdqV3Utils.createIIwithUniqueExtension("1.2.840.114350.1.13.28.1.18.5.999"));
 
 		// QueryByParameter.statusCode is defaulted to "new".
@@ -362,35 +353,6 @@ public class V3PdqConsumerQuery extends V3Message {
 		this.setInitialQuantity(initialQuantity, "RD");
 	}
 
-	// TODO: <OMITTED FROM MODEL> possibly omitted: expose a method to set the livingSubjectBirthPlaceAddress (not currently supported in V2
-	// bridge)
-	// public void addLivingSubjectBirthPlaceAddress(String addressStreetAddress, String addressCity, String addressCounty, String addressState,
-	// String addressCountry, String addressZip, String addressOtherDesignation) {
-	// // Create an AD type to store the address information
-	// AD patientAddressAD = PixPdqV3Utils.createAD(addressStreetAddress, addressCity, addressCounty, addressState, addressCountry, addressZip,
-	// addressOtherDesignation);
-	//
-	// // Add the AD to the patient Address
-	// if (null != patientAddressAD)
-	// {
-	// PRPAMT201306UV02LivingSubjectBirthPlaceAddress birthPlaceAddress =
-	// V3Factory.eINSTANCE.createPRPAMT201306UV02LivingSubjectBirthPlaceAddress();
-	//
-	// birthPlaceAddress.getValue().add(patientAddressAD);
-	//
-	// // set semantics text
-	// birthPlaceAddress.setSemanticsText(PixPdqV3Utils.createST1("LivingSubject.birthPlaceAddress"));
-	//
-	// // add the address to the querybyparameterlist
-	// parameterList.getLivingSubjectBirthPlaceAddress().add(birthPlaceAddress);
-	// }
-	// }
-
-	// // TODO: <OMITTED FROM MODEL> expose a method to set the livingSubjectBirthPlaceName (possibly omitted)
-	// public void setLivingSubjectBirthPlaceName() {
-	// // NOT Implemented
-	// }
-
 	/**
 	 * Set the initial quantity of type "units" to return in the PDQ response.
 	 * 
@@ -401,11 +363,6 @@ public class V3PdqConsumerQuery extends V3Message {
 		queryByParameter.setInitialQuantity(PixPdqV3Utils.createINT1(initialQuantity));
 		queryByParameter.setInitialQuantityCode(PixPdqV3Utils.createCE(units));
 	}
-
-	// // TODO: <OMITTED FROM MODEL> expose a method to set the livingSubjectDeceasedTime (possibly omitted)
-	// public void setLivingSubjectDeceasedTime() {
-	// // placeholder
-	// }
 
 	/**
 	 * Set the minimum degree match to 75
@@ -482,7 +439,7 @@ public class V3PdqConsumerQuery extends V3Message {
 	 * @param extension
 	 * @param namespace
 	 */
-	public void setQueryId(String root, String extension, String namespace) { // TODO: This also needs to be a generated random II
+	public void setQueryId(String root, String extension, String namespace) {
 		queryByParameter.setQueryId(PixPdqV3Utils.createII(root, extension, namespace));
 	}
 
@@ -501,35 +458,4 @@ public class V3PdqConsumerQuery extends V3Message {
 		this.sendingApplication = applicationOID;
 		this.sendingFacility = facilityOID;
 	}
-
-
-	// // TODO: <OMITTED FROM MODEL> expose a method to set the patientStatusCode (not currently supported in V2 bridge)
-	// public void setPatientStatusCode() {
-	// // placeholder
-	// }
-
-	// TODO: <OMITTED FROM MODEL>
-	// expose a method to add a patient telecom to the query
-	// public void addPatientTelecom(String telecomValue, String useValue) {
-	//
-	// // TODO: how do you specify work or home?
-	// // create the telecom element
-	// PRPAMT201306UV02PatientTelecom patientTelecom = V3Factory.eINSTANCE.createPRPAMT201306UV02PatientTelecom();
-	//
-	// // add the telecom to the patienttelecom element
-	// patientTelecom.getValue().add(PixPdqV3Utils.createTEL(telecomValue, useValue));
-	//
-	// // add the patienttelecom object to the parameter list
-	// parameterList.getPatientTelecom().add(patientTelecom);
-	// }
-
-	// // TODO: <OMITTED FROM MODEL> expose a method to set the principalCareProviderId (not currently supported in V2 bridge)
-	// public void setPrincipalCareProviderId() {
-	// // placeholder
-	// }
-	//
-	// // TODO: <OMITTED FROM MODEL> expose a method to set the principalCareProvisionId (not currently supported in V2 bridge)
-	// public void setPrincipalCareProvisionId() {
-	// // placeholder
-	// }
 }

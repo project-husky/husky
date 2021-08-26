@@ -63,7 +63,6 @@ public class V3PixSourceMergePatients extends V3Message {
 	private PRPAMT201303UV02Patient subjectPatient = new PRPAMT201303UV02Patient();
 	private PRPAMT201303UV02Person patientPerson = new PRPAMT201303UV02Person();
 	private String patientId = "";
-	private II messageId = null;
 
 	/**
 	 * Create a V3PixSourceMergePatients with the supplied sender and receiver
@@ -95,8 +94,6 @@ public class V3PixSourceMergePatients extends V3Message {
 		// part of a production,
 		// training, or debugging system. Valid values are D (Debugging), T
 		// (Testing), P (Production)
-		// TODO: how can this be indicated outside of the system? New
-		// bridge.properties global to indicate "testing"?
 		// Will default to production because it will need to be that way in the
 		// field.
 		this.setProcessingCode("P");
@@ -119,8 +116,6 @@ public class V3PixSourceMergePatients extends V3Message {
 		// set the class code
 		queryControlActProcess.setClassCode(ActClassControlAct.CACT);
 
-		// TODO: CONFLICT: The value of ControlActProcess.moodCode SHALL be set
-		// to RQO
 		queryControlActProcess.setMoodCode(XActMoodIntentEvent.EVN);
 
 		// The trigger event code in ControlActProcess.code SHALL be set to

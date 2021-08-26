@@ -25,7 +25,8 @@ import java.nio.charset.StandardCharsets;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
-import org.ehealth_connector.communication.mpi.V3Client;
+import org.ehealth_connector.communication.CamelService;
+import org.ehealth_connector.communication.mpi.V3Acknowledgement;
 import org.ehealth_connector.xua.core.SecurityHeaderElement;
 import org.openhealthtools.ihe.atna.auditor.PIXSourceAuditor;
 import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3881EventOutcomeCodes;
@@ -41,18 +42,19 @@ import net.ihe.gazelle.hl7v3.prpain201304UV02.PRPAIN201304UV02Type;
  * @author <a href="mailto:anthony.larocca@sage.com">Anthony Larocca</a>
  *
  */
-public class V3PixSource extends V3Client {
+public class V3PixSource extends CamelService {
 
 	/**
 	 * Logger for this class.
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(V3PixSource.class.getName());
 
+	private static final String ACTOR_NAME = "";
+
 	/**
-	 * Instance Actor Name
+	 * The URI of the server to issue a query against.
 	 */
-	// TODO: What should the actor name actually be?
-	private static final String ACTOR_NAME = "OHF_PIX_SOURCE";
+	private URI serverURI;
 
 	/**
 	 * PIX Source Auditor for ATNA Audit Events
@@ -66,17 +68,7 @@ public class V3PixSource extends V3Client {
 	 *                     (required, cannot be null)
 	 */
 	public V3PixSource(URI pixServerURI) {
-		super(pixServerURI);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.openhealthtools.ihe.xds.consumer.AbstractConsumer#getActorName()
-	 */
-	@Override
-	public String getActorName() {
-		return ACTOR_NAME;
+		this.serverURI = pixServerURI;
 	}
 
 	/**
@@ -89,13 +81,20 @@ public class V3PixSource extends V3Client {
 	}
 
 	/**
+	 * @return Returns the server URI
+	 */
+	public URI getServerURI() {
+		return serverURI;
+	}
+
+	/**
 	 * Send the provided V3PixSourceMergePatients message to the server
 	 * 
 	 * @param v3query
 	 * @return V3PixSourceAcknowledgement - The Server Ack
 	 * @throws Exception
 	 */
-	public V3PixSourceAcknowledgement sendMergePatients(V3PixSourceMergePatients v3query,
+	public V3Acknowledgement sendMergePatients(V3PixSourceMergePatients v3query,
 			SecurityHeaderElement assertion)
 			throws Exception {
 		if (LOGGER.isDebugEnabled()) {
@@ -106,7 +105,7 @@ public class V3PixSource extends V3Client {
 		auditor.auditActorStartEvent(RFC3881EventOutcomeCodes.SUCCESS, ACTOR_NAME, null);
 
 		// send the request
-		var v3response = new V3PixSourceAcknowledgement(sendITI44Query(v3query.getRootElement(), assertion,
+		var v3response = new V3Acknowledgement(sendITI44Query(v3query.getRootElement(), assertion,
 				getServerURI(), "urn:hl7-org:v3:PRPA_IN201304UV02"));
 
 		// default to success
@@ -115,7 +114,6 @@ public class V3PixSource extends V3Client {
 			eventOutcome = RFC3881EventOutcomeCodes.MINOR_FAILURE;
 
 		// audit the pdq query
-		// TODO: How do I map to the V2 equivalent parameters
 		auditor.auditDeletePatientRecordV3Event(eventOutcome, this.getServerURI().toString(),
 				v3query.getReceivingFacility(0), v3query.getReceivingApplication(0), v3query.getSendingFacility(),
 				v3query.getSendingApplication(), v3query.getMessageId().getRoot(), v3query.getPatientId());
@@ -138,7 +136,7 @@ public class V3PixSource extends V3Client {
 	 * @return V3PixSourceAcknowledgement - The Server Ack
 	 * @throws Exception
 	 */
-	public V3PixSourceAcknowledgement sendRecordAdded(V3PixSourceRecordAdded v3query, SecurityHeaderElement assertion)
+	public V3Acknowledgement sendRecordAdded(V3PixSourceRecordAdded v3query, SecurityHeaderElement assertion)
 			throws Exception {
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Beginning Send Patient Record Added (V3)");
@@ -148,7 +146,7 @@ public class V3PixSource extends V3Client {
 		auditor.auditActorStartEvent(RFC3881EventOutcomeCodes.SUCCESS, ACTOR_NAME, null);
 
 		// send the request
-		var v3response = new V3PixSourceAcknowledgement(sendITI44Query(v3query.getRootElement(), assertion,
+		var v3response = new V3Acknowledgement(sendITI44Query(v3query.getRootElement(), assertion,
 				getServerURI(), "urn:hl7-org:v3:PRPA_IN201301UV02"));
 
 		// default to success
@@ -157,7 +155,6 @@ public class V3PixSource extends V3Client {
 			eventOutcome = RFC3881EventOutcomeCodes.MINOR_FAILURE;
 
 		// audit the pdq query
-		// TODO: How do I map to the V2 equivalent parameters
 		auditor.auditCreatePatientRecordV3Event(eventOutcome, this.getServerURI().toString(),
 				v3query.getReceivingFacility(0), v3query.getReceivingApplication(0), v3query.getSendingFacility(),
 				v3query.getSendingApplication(), v3query.getMessageId().getRoot(), v3query.getPatientId());
@@ -180,7 +177,7 @@ public class V3PixSource extends V3Client {
 	 * @return V3PixSourceAcknowledgement - The Server Ack
 	 * @throws Exception
 	 */
-	public V3PixSourceAcknowledgement sendRecordRevised(V3PixSourceRecordRevised v3query, SecurityHeaderElement assertion)
+	public V3Acknowledgement sendRecordRevised(V3PixSourceRecordRevised v3query, SecurityHeaderElement assertion)
 			throws Exception {
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Beginning Send Patient Record Revised (V3)");
@@ -190,7 +187,7 @@ public class V3PixSource extends V3Client {
 		auditor.auditActorStartEvent(RFC3881EventOutcomeCodes.SUCCESS, ACTOR_NAME, null);
 
 		// send the request
-		var v3response = new V3PixSourceAcknowledgement(
+		var v3response = new V3Acknowledgement(
 				sendITI44Query(v3query.getRootElement(), assertion, getServerURI(),
 						"urn:hl7-org:v3:PRPA_IN201302UV02"));
 				
@@ -200,7 +197,6 @@ public class V3PixSource extends V3Client {
 			eventOutcome = RFC3881EventOutcomeCodes.MINOR_FAILURE;
 
 		// audit the pdq query
-		// TODO: How do I map to the V2 equivalent parameters
 		auditor.auditUpdatePatientRecordV3Event(eventOutcome, this.getServerURI().toString(),
 				v3query.getReceivingFacility(0), v3query.getReceivingApplication(0), v3query.getSendingFacility(),
 				v3query.getSendingApplication(), v3query.getMessageId().getRoot(), v3query.getPatientId());

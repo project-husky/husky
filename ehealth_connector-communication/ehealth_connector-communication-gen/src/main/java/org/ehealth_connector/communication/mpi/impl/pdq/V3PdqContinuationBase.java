@@ -17,8 +17,7 @@
 
 package org.ehealth_connector.communication.mpi.impl.pdq;
 
-import java.util.ArrayList;
-
+import org.ehealth_connector.communication.mpi.V3Message;
 import org.ehealth_connector.communication.utils.PixPdqV3Utils;
 import org.openhealthtools.ihe.utils.OID;
 
@@ -31,22 +30,10 @@ import net.ihe.gazelle.hl7v3.quqimt000001UV01.QUQIMT000001UV01QueryContinuation;
 import net.ihe.gazelle.hl7v3.voc.ActClassControlAct;
 import net.ihe.gazelle.hl7v3.voc.XActMoodIntentEvent;
 
-/**
- * @author <a href="mailto:anthony.larocca@sage.com">Anthony Larocca</a>
- *
- */
-public abstract class V3PdqContinuationBase {
+public abstract class V3PdqContinuationBase extends V3Message {
 
-	// sender/receiver application/facility
-	protected String sendingApplication = null;
-	protected String sendingFacility = null;
-	private ArrayList<String> receivingApplication = new ArrayList<>(0);
-	private ArrayList<String> receivingFacility = new ArrayList<>(0);
-	protected II messageId = null;
-
-	QUQIIN000003UV01Type rootElement = new QUQIIN000003UV01Type();
-
-	QUQIMT000001UV01QueryContinuation queryContinuation = new QUQIMT000001UV01QueryContinuation();
+	protected QUQIIN000003UV01Type rootElement = new QUQIIN000003UV01Type();
+	protected QUQIMT000001UV01QueryContinuation queryContinuation = new QUQIMT000001UV01QueryContinuation();
 
 	/**
 	 * Create a V3PdqContinuationBase with the provided sender and receiver and original query
@@ -62,7 +49,8 @@ public abstract class V3PdqContinuationBase {
 	 * @param v3pdqresponse
 	 *            (The original V3 PDQ Response)
 	 */
-	public V3PdqContinuationBase(String senderApplicationOID, String senderFacilityOID, String receiverApplicationOID,
+	protected V3PdqContinuationBase(String senderApplicationOID, String senderFacilityOID,
+			String receiverApplicationOID,
 			String receiverFacilityOID, V3PdqConsumerResponse v3pdqresponse) {
 
 		// set the interaction id
@@ -119,8 +107,6 @@ public abstract class V3PdqContinuationBase {
 
 		// set the class code
 		continuationCAP.setClassCode(ActClassControlAct.CACT);
-
-		// TODO: CONFLICT: The value of ControlActProcess.moodCode SHALL be set to RQO
 		continuationCAP.setMoodCode(XActMoodIntentEvent.EVN);
 
 		// set the code
@@ -172,74 +158,12 @@ public abstract class V3PdqContinuationBase {
 	}
 
 	/**
-	 * Adds the receiving application ID provided
-	 * 
-	 * @param applicationOID (Receiving Device ID)
-	 */
-	public void addReceivingApplication(String applicationOID) {
-		receivingApplication.add(applicationOID);
-	}
-
-	/**
-	 * Added the receiving facility ID provided
-	 * 
-	 * @param facilityOID (Receiving Organization ID)
-	 */
-	public void addReceivingFacility(String facilityOID) {
-		receivingFacility.add(facilityOID);
-	}
-
-	/**
 	 * Gets the messageId
 	 * 
 	 * @return II - messageId
 	 */
 	public II getId() {
 		return messageId;
-	}
-
-	/**
-	 * Gets the specified Receiving Application (Receiver Device ID)
-	 * 
-	 * @param i (the index of the receiving application to get)
-	 * @returnString - Receiving Application
-	 */
-	public String getReceivingApplication(int i) {
-		String returnValue = null;
-		if (receivingApplication.size() > i)
-			returnValue = receivingApplication.get(i);
-		return returnValue;
-	}
-
-	/**
-	 * Gets the specified Receiving Facility (Receiver Organization ID)
-	 * 
-	 * @param i (the index of the receiving facility to get)
-	 * @return String - Receiving Facility
-	 */
-	public String getReceivingFacility(int i) {
-		String returnValue = null;
-		if (receivingFacility.size() > i)
-			returnValue = receivingFacility.get(i);
-		return returnValue;
-	}
-
-	/**
-	 * Gets the Sending Application (Sender Device ID)
-	 * 
-	 * @return String - Sending Application
-	 */
-	public String getSendingApplication() {
-		return sendingApplication;
-	}
-
-	/**
-	 * Gets the Sending Facility (Sender Organization ID)
-	 * 
-	 * @return String - Sending Facility
-	 */
-	public String getSendingFacility() {
-		return sendingFacility;
 	}
 
 	public QUQIIN000003UV01Type getRootElement() {

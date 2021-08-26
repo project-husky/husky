@@ -19,10 +19,6 @@ package org.ehealth_connector.communication.mpi.impl.pdq;
 
 import org.ehealth_connector.communication.utils.PixPdqV3Utils;
 
-/**
- * @author <a href="mailto:anthony.larocca@sage.com">Anthony Larocca</a>
- *
- */
 public class V3PdqContinuationQuery extends V3PdqContinuationBase {
 
 	/**
@@ -53,7 +49,5 @@ public class V3PdqContinuationQuery extends V3PdqContinuationBase {
 		// set the quantity to return
 		queryContinuation.setContinuationQuantity(PixPdqV3Utils.createINT1(quantityLimit));
 
-		// set the rootElement as the cancel root
-		// this.v3Message.setQUQIIN000003UV01(rootElement);
 	}
 }

@@ -9,6 +9,7 @@ import java.util.Set;
 
 import org.ehealth_connector.common.communication.AffinityDomain;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.communication.CamelService;
 import org.ehealth_connector.communication.mpi.impl.pix.V3PixSourceMessageHelper;
 import org.ehealth_connector.communication.utils.PixPdqV3Utils;
@@ -734,14 +735,15 @@ public class PixPdqV3QueryBase extends CamelService {
 	 */
 	protected void setDeceased(PRPAMT201310UV02Patient pdqPatient, FhirPatient patient) {
 		if (pdqPatient.getPatientPerson() != null) {
-			if ((pdqPatient.getPatientPerson().getDeceasedInd() != null)
-					&& pdqPatient.getPatientPerson().getDeceasedInd().value) {
-				final BooleanType dt = new BooleanType();
+			if (pdqPatient.getPatientPerson().getDeceasedInd() != null && pdqPatient.getPatientPerson().getDeceasedInd().value != null &&
+					pdqPatient.getPatientPerson().getDeceasedInd().value.booleanValue()) {
+				final var dt = new BooleanType();
 				dt.setValue(pdqPatient.getPatientPerson().getDeceasedInd().value);
 				patient.setDeceased(dt);
 			}
 			if (pdqPatient.getPatientPerson().getDeceasedTime() != null) {
-				final String deceasedTime = pdqPatient.getPatientPerson().getDeceasedTime().getValue();
+				final var deceasedTime = DateUtil
+						.parseHl7Timestamp(pdqPatient.getPatientPerson().getDeceasedTime().getValue());
 				patient.setDeceased(new DateTimeType(deceasedTime));
 			}
 		}

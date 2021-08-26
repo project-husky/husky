@@ -116,26 +116,26 @@ public class V3PdqQuery implements MpiQuery {
 	 * @return the query object
 	 */
 	@Override
-	public MpiQuery addPatientAddress(org.hl7.fhir.dstu3.model.Address Address) {
-		if (Address == null) {
+	public MpiQuery addPatientAddress(org.hl7.fhir.dstu3.model.Address address) {
+		if (address == null) {
 			log.error("Address not specified");
 			return this;
 		}
 
 		String addressStreetAddress = null;
-		if (!Address.getLine().isEmpty()) {
-			addressStreetAddress = Address.getLine().get(0).getValueAsString();
+		if (!address.getLine().isEmpty()) {
+			addressStreetAddress = address.getLine().get(0).getValueAsString();
 		}
 
 		String addressOtherDesignation = null;
-		if (Address.getLine().size() > 1) {
-			addressOtherDesignation = Address.getLine().get(1).getValueAsString();
+		if (address.getLine().size() > 1) {
+			addressOtherDesignation = address.getLine().get(1).getValueAsString();
 		}
 
 		// H, W WP
 		String addressType = null;
-		if ((Address.getUseElement() != null) && (Address.getUseElement().getValue() != null)) {
-			switch (Address.getUseElement().getValue()) {
+		if ((address.getUseElement() != null) && (address.getUseElement().getValue() != null)) {
+			switch (address.getUseElement().getValue()) {
 			case HOME:
 				addressType = "H";
 				break;
@@ -146,8 +146,8 @@ public class V3PdqQuery implements MpiQuery {
 				break;
 			}
 		}
-		v3PdqConsumerQuery.addPatientAddress(addressStreetAddress, Address.getCity(), null,
-				Address.getState(), Address.getCountry(), Address.getPostalCode(),
+		v3PdqConsumerQuery.addPatientAddress(addressStreetAddress, address.getCity(), null, address.getState(),
+				address.getCountry(), address.getPostalCode(),
 				addressOtherDesignation, addressType);
 		return this;
 	}
@@ -161,11 +161,11 @@ public class V3PdqQuery implements MpiQuery {
 	 */
 	@Override
 	public MpiQuery addPatientIdentifier(Identifier identifier) {
-		if ((identifier != null) && (identifier.getSystem().length() > 8)
-				&& (identifier.getSystem().startsWith(FhirCommon.oidUrn))) {
+		if (identifier != null && identifier.getSystem() != null && identifier.getSystem().length() > 8
+				&& identifier.getSystem().startsWith(FhirCommon.oidUrn)) {
 			final String oid = FhirCommon.removeUrnOidPrefix(identifier.getSystem());
 			v3PdqConsumerQuery.addPatientID(oid, identifier.getValue(), "");
-		} else {
+		} else if (identifier != null) {
 			v3PdqConsumerQuery.addPatientID(identifier.getSystem(), identifier.getValue(), "");
 		}
 		return this;
@@ -197,26 +197,22 @@ public class V3PdqQuery implements MpiQuery {
 	 * @return the query object
 	 */
 	@Override
-	public MpiQuery addPatientTelecom(ContactPoint ContactPoint) {
-		if (ContactPoint == null) {
+	public MpiQuery addPatientTelecom(ContactPoint contactPoint) {
+		if (contactPoint == null) {
 			log.error("ContactPoint not specified");
 			return this;
 		}
-		if (ContactPointSystem.PHONE.equals(ContactPoint.getSystemElement().getValue())) {
-			String use = "";
-			if (ContactPointUse.HOME.equals(ContactPoint.getUseElement().getValue())) {
+		if (ContactPointSystem.PHONE.equals(contactPoint.getSystemElement().getValue())) {
+			var use = "";
+			if (ContactPointUse.HOME.equals(contactPoint.getUseElement().getValue())) {
 				use = "HP";
-			} else if (ContactPointUse.WORK.equals(ContactPoint.getUseElement().getValue())) {
+			} else if (ContactPointUse.WORK.equals(contactPoint.getUseElement().getValue())) {
 				use = "WP";
 			}
-			// else if
-			// (ContactPointUse.MOBILE.equals(ContactPoint.getUseElement().getValue()))
-			// {
-			// }
-			addPatientTelecom(ContactPoint.getValue(), use);
+			addPatientTelecom(contactPoint.getValue(), use);
 		} else {
 			log.error(
-					"no phone specified as telecom {}", ContactPoint.getSystemElement().getValue());
+					"no phone specified as telecom {}", contactPoint.getSystemElement().getValue());
 		}
 		return this;
 	}
@@ -344,7 +340,7 @@ public class V3PdqQuery implements MpiQuery {
 			log.error("date not specified");
 			return this;
 		}
-		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		final var sdf = new SimpleDateFormat("yyyyMMdd");
 		v3PdqConsumerQuery.setPatientDateOfBirth(sdf.format(date));
 		return this;
 	}

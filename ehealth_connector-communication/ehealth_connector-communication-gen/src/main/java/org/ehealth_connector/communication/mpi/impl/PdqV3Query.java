@@ -5,6 +5,7 @@ import java.io.StringWriter;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -152,7 +153,7 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 				return listFhirPatients;
 			}
 		}
-		return null;
+		return new LinkedList<>();
 	}
 
 	/**

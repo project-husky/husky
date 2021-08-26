@@ -62,7 +62,6 @@ public class V3PixSourceRecordRevised extends V3Message {
 	private PRPAMT201302UV02Patient subjectPatient = new PRPAMT201302UV02Patient();
 	private PRPAMT201302UV02PatientPatientPerson patientPerson = new PRPAMT201302UV02PatientPatientPerson();
 	private String patientId = "";
-	private II messageId;
 
 	/**
 	 * Create a V3PixSourceRecordRevised with the supplied sender and receiver

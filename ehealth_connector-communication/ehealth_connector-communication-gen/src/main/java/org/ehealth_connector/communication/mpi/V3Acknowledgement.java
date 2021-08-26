@@ -20,11 +20,7 @@ package org.ehealth_connector.communication.mpi;
 import net.ihe.gazelle.hl7v3.datatypes.II;
 import net.ihe.gazelle.hl7v3.mcciin000002UV01.MCCIIN000002UV01Type;
 
-/**
- * @author <a href="mailto:anthony.larocca@sage.com">Anthony Larocca</a>
- *
- */
-public abstract class V3Acknowledgement extends V3Response {
+public class V3Acknowledgement extends V3Response {
 
 	private MCCIIN000002UV01Type rootElement = null;
 	private II messageId = null;
@@ -36,7 +32,7 @@ public abstract class V3Acknowledgement extends V3Response {
 	 * @param v3Acknowledgement
 	 * @throws Exception
 	 */
-	protected V3Acknowledgement(MCCIIN000002UV01Type v3Acknowledgement) {
+	public V3Acknowledgement(MCCIIN000002UV01Type v3Acknowledgement) {
 
 		// get the pix response
 		rootElement = v3Acknowledgement;
@@ -56,7 +52,7 @@ public abstract class V3Acknowledgement extends V3Response {
 		int numReceivers = rootElement.getReceiver().size();
 
 		// for each reciever
-		for (int i = 0; i < numReceivers; i++) {
+		for (var i = 0; i < numReceivers; i++) {
 			// get the application and (if available) facility
 			this.addReceivingApplication(rootElement.getReceiver().get(i).getDevice().getId().get(0).getRoot());
 			if (null != rootElement.getReceiver().get(i).getDevice().getAsAgent())
@@ -65,7 +61,7 @@ public abstract class V3Acknowledgement extends V3Response {
 		}
 
 		// get the ack code
-		this.setAcknowledgementCode(rootElement.getAcknowledgement().get(0).getTypeCode().getCode().toString());
+		this.setAcknowledgementCode(rootElement.getAcknowledgement().get(0).getTypeCode().getCode());
 
 		// if there is acknowledgement detail
 		if (!rootElement.getAcknowledgement().get(0).getAcknowledgementDetail().isEmpty()) {

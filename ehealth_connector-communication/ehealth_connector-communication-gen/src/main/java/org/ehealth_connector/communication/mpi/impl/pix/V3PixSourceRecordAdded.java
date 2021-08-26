@@ -25,7 +25,6 @@ import org.ehealth_connector.communication.utils.PixPdqV3Utils;
 import org.openhealthtools.ihe.utils.OID;
 
 import net.ihe.gazelle.hl7v3.coctmt030007UV.COCTMT030007UVPerson;
-import net.ihe.gazelle.hl7v3.datatypes.II;
 import net.ihe.gazelle.hl7v3.prpain201301UV02.PRPAIN201301UV02MFMIMT700701UV01ControlActProcess;
 import net.ihe.gazelle.hl7v3.prpain201301UV02.PRPAIN201301UV02MFMIMT700701UV01RegistrationEvent;
 import net.ihe.gazelle.hl7v3.prpain201301UV02.PRPAIN201301UV02MFMIMT700701UV01Subject1;
@@ -59,7 +58,6 @@ public class V3PixSourceRecordAdded extends V3Message {
 	private PRPAMT201301UV02Patient subjectPatient = new PRPAMT201301UV02Patient();
 	private PRPAMT201301UV02Person patientPerson = new PRPAMT201301UV02Person();
 	private String patientId = "";
-	private II messageId;
 
 	/**
 	 * Create a V3PixSourceRecordAdded with the supplied sender and receiver
@@ -91,8 +89,6 @@ public class V3PixSourceRecordAdded extends V3Message {
 		// part of a production,
 		// training, or debugging system. Valid values are D (Debugging), T
 		// (Testing), P (Production)
-		// TODO: how can this be indicated outside of the system? New
-		// bridge.properties global to indicate "testing"?
 		// Will default to production because it will need to be that way in the
 		// field.
 		this.setProcessingCode("P");
@@ -115,8 +111,6 @@ public class V3PixSourceRecordAdded extends V3Message {
 		// set the class code
 		queryControlActProcess.setClassCode(ActClassControlAct.CACT);
 
-		// TODO: CONFLICT: The value of ControlActProcess.moodCode SHALL be set
-		// to RQO
 		queryControlActProcess.setMoodCode(XActMoodIntentEvent.EVN);
 
 		// The trigger event code in ControlActProcess.code SHALL be set to
@@ -472,7 +466,6 @@ public class V3PixSourceRecordAdded extends V3Message {
 				organizationOID, organizationName, telecomValue));
 
 		// add this orgnaization as custodian as well
-		// TODO: is this right?
 		subjectRegistrationEvent.setCustodian(
 				PixPdqV3Utils.createRegistrationCustodian(organizationOID, organizationName));
 	}
@@ -493,7 +486,4 @@ public class V3PixSourceRecordAdded extends V3Message {
 				.setSender(PixPdqV3Utils.createMCCIMT000100UV01Sender(applicationOID, facilityOID));
 	}
 
-	public II getMessageId() {
-		return messageId;
-	}
 }
