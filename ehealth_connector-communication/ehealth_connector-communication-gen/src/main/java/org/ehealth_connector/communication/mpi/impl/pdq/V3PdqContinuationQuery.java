@@ -15,9 +15,9 @@
  *
  */
 
-package org.ehealth_connector.communication.mpi.impl;
+package org.ehealth_connector.communication.mpi.impl.pdq;
 
-import org.openhealthtools.ihe.common.hl7v3.client.PixPdqV3Utils;
+import org.ehealth_connector.communication.utils.PixPdqV3Utils;
 
 /**
  * @author <a href="mailto:anthony.larocca@sage.com">Anthony Larocca</a>
@@ -48,12 +48,12 @@ public class V3PdqContinuationQuery extends V3PdqContinuationBase {
 		super(senderApplicationOID, senderFacilityOID, receiverApplicationOID, receiverFacilityOID, v3pdqresponse);
 
 		// set the status code
-		queryContinuation.setStatusCode(PixPdqV3Utils.createCS1("waitContinuedQueryResponse"));
+		queryContinuation.setStatusCode(PixPdqV3Utils.createCS("waitContinuedQueryResponse"));
 
 		// set the quantity to return
 		queryContinuation.setContinuationQuantity(PixPdqV3Utils.createINT1(quantityLimit));
 
 		// set the rootElement as the cancel root
-		this.v3Message.setQUQIIN000003UV01(rootElement);
+		// this.v3Message.setQUQIIN000003UV01(rootElement);
 	}
 }

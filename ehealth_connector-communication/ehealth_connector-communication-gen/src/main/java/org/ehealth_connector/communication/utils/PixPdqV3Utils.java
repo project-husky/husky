@@ -831,6 +831,31 @@ public class PixPdqV3Utils {
 	}
 
 	/**
+	 * Create a PN Object containing the supplied name parts.
+	 *
+	 * @param familyName
+	 * @param givenName
+	 * @param otherName
+	 * @param suffixName
+	 * @param prefixName
+	 * @return PN Object containing the supplied name parts.
+	 */
+	public static PN createPN(String familyName, String givenName, String suffixName, String prefixName) {
+		// first create the en
+		var en = createEN(familyName, givenName, null, suffixName, prefixName);
+
+		// now create the pn
+		var pn = new PN();
+		// copy values over
+		pn.getFamily().addAll(en.getFamily());
+		pn.getGiven().addAll(en.getGiven());
+		pn.getSuffix().addAll(en.getSuffix());
+		pn.getPrefix().addAll(en.getPrefix());
+
+		return pn;
+	}
+
+	/**
 	 * Creates a MFMIMT700701UV01Custodian with the supplied Organization ID and
 	 * name
 	 *

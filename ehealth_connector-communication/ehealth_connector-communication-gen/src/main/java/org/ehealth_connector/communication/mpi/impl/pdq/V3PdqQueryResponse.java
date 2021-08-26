@@ -14,7 +14,7 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.communication.mpi.impl;
+package org.ehealth_connector.communication.mpi.impl.pdq;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -103,7 +103,7 @@ public class V3PdqQueryResponse implements MpiQueryResponse {
 	 * @param currentNumbers
 	 *            the new current numbers
 	 */
-	protected void setCurrentNumbers(int currentNumbers) {
+	public void setCurrentNumbers(int currentNumbers) {
 		this.currentNumbers = currentNumbers;
 	}
 
@@ -113,7 +113,7 @@ public class V3PdqQueryResponse implements MpiQueryResponse {
 	 * @param patients
 	 *            the new patients
 	 */
-	protected void setPatients(List<FhirPatient> patients) {
+	public void setPatients(List<FhirPatient> patients) {
 		this.patients = patients;
 	}
 
@@ -123,7 +123,7 @@ public class V3PdqQueryResponse implements MpiQueryResponse {
 	 * @param remainingNumbers
 	 *            the new remaining numbers
 	 */
-	protected void setRemainingNumbers(int remainingNumbers) {
+	public void setRemainingNumbers(int remainingNumbers) {
 		this.remainingNumbers = remainingNumbers;
 	}
 
@@ -133,7 +133,7 @@ public class V3PdqQueryResponse implements MpiQueryResponse {
 	 * @param success
 	 *            the new success
 	 */
-	protected void setSuccess(boolean success) {
+	public void setSuccess(boolean success) {
 		this.success = success;
 	}
 
@@ -143,7 +143,7 @@ public class V3PdqQueryResponse implements MpiQueryResponse {
 	 * @param totalNumbers
 	 *            the new total numbers
 	 */
-	protected void setTotalNumbers(int totalNumbers) {
+	public void setTotalNumbers(int totalNumbers) {
 		this.totalNumbers = totalNumbers;
 	}
 

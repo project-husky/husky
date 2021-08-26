@@ -15,9 +15,9 @@
  *
  */
 
-package org.ehealth_connector.communication.mpi.impl;
+package org.ehealth_connector.communication.mpi.impl.pdq;
 
-import org.openhealthtools.ihe.common.hl7v3.client.PixPdqV3Utils;
+import org.ehealth_connector.communication.utils.PixPdqV3Utils;
 
 /**
  * @author <a href="mailto:anthony.larocca@sage.com">Anthony Larocca</a>
@@ -46,12 +46,12 @@ public class V3PdqContinuationCancel extends V3PdqContinuationBase {
 		super(senderApplicationOID, senderFacilityOID, receiverApplicationOID, receiverFacilityOID, v3pdqresponse);
 
 		// set the values unique to cancellation
-		this.queryContinuation.setStatusCode(PixPdqV3Utils.createCS1("aborted"));
+		this.queryContinuation.setStatusCode(PixPdqV3Utils.createCS("aborted"));
 
 		// set the quantity to return to zero
 		this.queryContinuation.setContinuationQuantity(PixPdqV3Utils.createINT1(0));
 
 		// set the rootElement as the cancel root
-		this.v3Message.setQUQIIN000003UV01Cancel(rootElement);
+		// this.v3Message.setQUQIIN000003UV01Cancel(rootElement);
 	}
 }

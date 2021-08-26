@@ -19,15 +19,10 @@ package org.ehealth_connector.communication.mpi.impl;
 import static org.junit.Assert.assertTrue;
 
 import java.net.URI;
-import java.net.URISyntaxException;
 
 import org.ehealth_connector.common.communication.AffinityDomain;
 import org.ehealth_connector.common.communication.Destination;
-import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.utils.DateUtilMdht;
-import org.ehealth_connector.communication.ConvenienceMasterPatientIndexV3;
-import org.ehealth_connector.communication.MasterPatientIndexQuery;
-import org.ehealth_connector.communication.MasterPatientIndexQueryResponse;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender;
@@ -61,13 +56,10 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 	/** The SLF4J logger instance. */
 	protected static Logger log = LoggerFactory.getLogger(V3PixAdapterPixPdqNistPreCatTests.class);
 
-	private V3PixPdqAdapter v3PixPdqAdapter;
-	private V3PixPdqAdapterConfig v3PixPdqAdapterCfg;
-
 	// note: fill below in from test tool before running test and remove @Ignore
 	// Annotation above to run the tests manual
 	final private String applicationName = "2.16.840.1.113883.3.72.6.5.100.1399";
-	final private String ipAddress = "129.6.24.81";
+	final private String pixUri = "129.6.24.81";
 	final private String facilityName = null; // "2.16.840.1.113883.3.72.6.1";
 
 	final private String senderApplicationOid = "1.2.3.4";
@@ -101,12 +93,19 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 	@Test
 	public void ITI44SourceFeedTest() {
 
-		log.debug("ITI44SourceFeedTest with ipAdress Target " + ipAddress);
-		v3PixPdqAdapterCfg = new V3PixPdqAdapterConfig(null,
-				URI.create("http://" + ipAddress + ":9090"), null, senderApplicationOid, null,
-				applicationName, facilityName, homeCommunityOid, homeCommunityNamespace, null, null,
-				null, null, null, null);
-		v3PixPdqAdapter = new V3PixPdqAdapter(v3PixPdqAdapterCfg);
+		log.debug("ITI44SourceFeedTest with ipAdress Target " + pixUri);
+
+		final AffinityDomain affinityDomain = new AffinityDomain();
+		final Destination dest = new Destination();
+
+		dest.setUri(URI.create(pixUri));
+		dest.setSenderApplicationOid(senderApplicationOid);
+		dest.setReceiverApplicationOid(applicationName);
+		dest.setReceiverFacilityOid(facilityName);
+		affinityDomain.setPdqDestination(dest);
+		affinityDomain.setPixDestination(dest);
+
+		PixV3Query pixV3Query = new PixV3Query(null, homeCommunityOid, homeCommunityNamespace, null, null);
 
 		// ALPHA ALAN
 		final FhirPatient patient = new FhirPatient();
@@ -127,7 +126,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		log.debug(encoded);
 
-		assertTrue(v3PixPdqAdapter.addPatient(patient));
+		assertTrue(pixV3Query.addPatient(patient, null));
 	}
 
 	/**
@@ -142,13 +141,19 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 	 */
 	@Test
 	public void ITI44SourceMergeTest() {
-		log.debug("ITI44SourceMergeTest with ipAdress Target " + ipAddress);
+		log.debug("ITI44SourceMergeTest with ipAdress Target {}", pixUri);
 
-		v3PixPdqAdapterCfg = new V3PixPdqAdapterConfig(null,
-				URI.create("http://" + ipAddress + ":9090"), null, senderApplicationOid, null,
-				applicationName, facilityName, homeCommunityOid, homeCommunityNamespace, null, null,
-				null, null, null, null);
-		v3PixPdqAdapter = new V3PixPdqAdapter(v3PixPdqAdapterCfg);
+		final AffinityDomain affinityDomain = new AffinityDomain();
+		final Destination dest = new Destination();
+
+		dest.setUri(URI.create(pixUri));
+		dest.setSenderApplicationOid(senderApplicationOid);
+		dest.setReceiverApplicationOid(applicationName);
+		dest.setReceiverFacilityOid(facilityName);
+		affinityDomain.setPdqDestination(dest);
+		affinityDomain.setPixDestination(dest);
+
+		PixV3Query pixV3Query = new PixV3Query(null, homeCommunityOid, homeCommunityNamespace, null, null);
 
 		// LINCOLN MARY
 		final FhirPatient patient = new FhirPatient();
@@ -169,7 +174,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		log.debug(encoded);
 
-		assertTrue(v3PixPdqAdapter.mergePatient(patient, "PIXW"));
+		assertTrue(pixV3Query.mergePatient(patient, "PIXW", null));
 	}
 
 	/*
@@ -236,11 +241,17 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 
 	@Test
 	public void ITI44SourceUpdateTest() {
-		v3PixPdqAdapterCfg = new V3PixPdqAdapterConfig(null,
-				URI.create("http://" + ipAddress + ":9090"), null, senderApplicationOid, null,
-				applicationName, facilityName, homeCommunityOid, homeCommunityNamespace, null, null,
-				null, null, null, null);
-		v3PixPdqAdapter = new V3PixPdqAdapter(v3PixPdqAdapterCfg);
+		final AffinityDomain affinityDomain = new AffinityDomain();
+		final Destination dest = new Destination();
+
+		dest.setUri(URI.create(pixUri));
+		dest.setSenderApplicationOid(senderApplicationOid);
+		dest.setReceiverApplicationOid(applicationName);
+		dest.setReceiverFacilityOid(facilityName);
+		affinityDomain.setPdqDestination(dest);
+		affinityDomain.setPixDestination(dest);
+
+		PixV3Query pixV3Query = new PixV3Query(null, homeCommunityOid, homeCommunityNamespace, null, null);
 
 		// TAU TERI
 		final FhirPatient patient = new FhirPatient();
@@ -262,7 +273,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 		final String encoded = ctx.newXmlParser().encodeResourceToString(patient);
 		log.debug(encoded);
 
-		assertTrue(v3PixPdqAdapter.updatePatient(patient));
+		assertTrue(pixV3Query.updatePatient(patient, null));
 	}
 
 	/*
@@ -335,12 +346,18 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 	@Test
 	public void ITI45ConsumperStep1Test() {
 
-		log.debug("ITI45ConsumperStep1Test with ipAdress Target " + ipAddress);
-		v3PixPdqAdapterCfg = new V3PixPdqAdapterConfig(URI.create("http://" + ipAddress + ":9090"),
-				null, null, senderApplicationOid, null, applicationName, facilityName,
-				homeCommunityOid, homeCommunityNamespace, domainToReturnOid,
-				domainToReturnNamespace, null, null, null, null);
-		v3PixPdqAdapter = new V3PixPdqAdapter(v3PixPdqAdapterCfg);
+		log.debug("ITI45ConsumperStep1Test with ipAdress Target " + pixUri);
+		final AffinityDomain affinityDomain = new AffinityDomain();
+		final Destination dest = new Destination();
+
+		dest.setUri(URI.create(pixUri));
+		dest.setSenderApplicationOid(senderApplicationOid);
+		dest.setReceiverApplicationOid(applicationName);
+		dest.setReceiverFacilityOid(facilityName);
+		affinityDomain.setPdqDestination(dest);
+		affinityDomain.setPixDestination(dest);
+
+		PixV3Query pixV3Query = new PixV3Query(null, homeCommunityOid, homeCommunityNamespace, null, null);
 
 		final FhirPatient patient = new FhirPatient();
 		final Identifier identifier = new Identifier();
@@ -353,7 +370,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 		log.debug(encoded);
 
 		// note: response in precat tool doest not contain response with id
-		v3PixPdqAdapter.queryPatientId(patient);
+		pixV3Query.queryPatientId(patient, null);
 	}
 
 	/*
@@ -426,11 +443,18 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 	@Test
 	public void ITI45ConsumperStep2Test() {
 
-		log.debug("ITI45ConsumperStep2Test with ipAdress Target " + ipAddress);
-		v3PixPdqAdapterCfg = new V3PixPdqAdapterConfig(URI.create("http://" + ipAddress + ":9090"),
-				null, null, senderApplicationOid, null, applicationName, facilityName,
-				homeCommunityOid, homeCommunityNamespace, null, null, null, null, null, null);
-		v3PixPdqAdapter = new V3PixPdqAdapter(v3PixPdqAdapterCfg);
+		log.debug("ITI45ConsumperStep2Test with ipAdress Target " + pixUri);
+		final AffinityDomain affinityDomain = new AffinityDomain();
+		final Destination dest = new Destination();
+
+		dest.setUri(URI.create(pixUri));
+		dest.setSenderApplicationOid(senderApplicationOid);
+		dest.setReceiverApplicationOid(applicationName);
+		dest.setReceiverFacilityOid(facilityName);
+		affinityDomain.setPdqDestination(dest);
+		affinityDomain.setPixDestination(dest);
+
+		PixV3Query pixV3Query = new PixV3Query(null, homeCommunityOid, homeCommunityNamespace, null, null);
 
 		final FhirPatient patient = new FhirPatient();
 		final Identifier identifier = new Identifier();
@@ -443,7 +467,7 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 		log.debug(encoded);
 
 		// NOTE: response in precat tool doest not contain response id
-		v3PixPdqAdapter.queryPatientId(patient);
+		pixV3Query.queryPatientId(patient, null);
 	}
 
 	/*
@@ -602,60 +626,4 @@ public class V3PixAdapterPixPdqNistPreCatTests {
 	 * 2/19/15 9:14:01 AM - Transaction finished
 	 */
 
-	@Test
-	public void ITI47ConsumerQueryPatientPatientIdStep1Test() {
-		log.debug("ITI47ConsumerQueryPatientPatientIdStep1Test with ipAdress Target " + ipAddress);
-
-		final AffinityDomain affinityDomain = new AffinityDomain();
-		final Destination dest = new Destination();
-
-		try {
-			dest.setUri(new URI("http://" + ipAddress + ":9090"));
-		} catch (final URISyntaxException e) {
-			e.printStackTrace();
-		}
-		dest.setSenderApplicationOid(senderApplicationOid);
-		dest.setReceiverApplicationOid(applicationName);
-		dest.setReceiverFacilityOid(facilityName);
-		affinityDomain.setPdqDestination(dest);
-		affinityDomain.setPixDestination(dest);
-
-		final MasterPatientIndexQuery mpiQuery = new MasterPatientIndexQuery(
-				affinityDomain.getPdqDestination());
-		final Identificator identificator = new Identificator("2.16.840.1.113883.3.72.5.9.1",
-				"HJ-361");
-		final MasterPatientIndexQueryResponse response = ConvenienceMasterPatientIndexV3
-				.queryPatientDemographics(mpiQuery.addPatientIdentificator(identificator)
-						.addDomainToReturn("2.16.840.1.113883.3.72.5.9.1"), affinityDomain);
-		assertTrue(response.getSuccess());
-	}
-
-	@Test
-	public void ITI47ConsumerQueryPatientPatientIdStep2Test() {
-
-		log.debug("ITI47ConsumerQueryPatientPatientIdStep2Test with ipAdress Target " + ipAddress);
-
-		final AffinityDomain affinityDomain = new AffinityDomain();
-		final Destination dest = new Destination();
-
-		try {
-			dest.setUri(new URI("http://" + ipAddress + ":9090"));
-		} catch (final URISyntaxException e) {
-			e.printStackTrace();
-		}
-		dest.setSenderApplicationOid(senderApplicationOid);
-		dest.setReceiverApplicationOid(applicationName);
-		dest.setReceiverFacilityOid(facilityName);
-		affinityDomain.setPdqDestination(dest);
-		affinityDomain.setPixDestination(dest);
-
-		final MasterPatientIndexQuery mpiQuery = new MasterPatientIndexQuery(
-				affinityDomain.getPdqDestination());
-		final Identificator identificator = new Identificator("2.16.840.1.113883.3.72.5.9.1",
-				"HJ-361");
-		final MasterPatientIndexQueryResponse response = ConvenienceMasterPatientIndexV3
-				.queryPatientDemographics(mpiQuery.addPatientIdentificator(identificator)
-						.addDomainToReturn("2.16.840.1.113883.3.72.5.9.1"), affinityDomain);
-		assertTrue(response.getSuccess());
-	}
 }

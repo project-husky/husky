@@ -18,27 +18,53 @@ package org.ehealth_connector.communication.mpi.impl;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.bind.JAXBContext;
 
+import org.ehealth_connector.common.communication.AffinityDomain;
+import org.ehealth_connector.common.communication.Destination;
+import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.communication.ConvenienceMasterPatientIndexV3;
+import org.ehealth_connector.communication.MasterPatientIndexQuery;
+import org.ehealth_connector.communication.MasterPatientIndexQueryResponse;
+import org.ehealth_connector.communication.mpi.impl.pdq.V3PdqConsumerResponse;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.hl7.fhir.dstu3.model.Organization;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
-import org.w3c.dom.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import net.ihe.gazelle.hl7v3.prpain201306UV02.PRPAIN201306UV02Type;
 
 /**
  * Test of class V3PixPdqAdapter
  */
-public class V3PixPdqAdapterTest {
+@Ignore
+public class PdqV3QueryTest {
 
-	// private org.openhealthtools.mdht.uml.cda.CDAFactory factory =
-	// org.openhealthtools.mdht.uml.cda.impl.CDAFactoryImpl.eINSTANCE;
+	private static final Logger LOGGER = LoggerFactory.getLogger(PdqV3QueryTest.class.getName());
+	final private String pdqUri = "";
+
+	final private String applicationName = "2.16.840.1.113883.3.72.6.5.100.1399";
+	final private String ipAddress = "129.6.24.81";
+	final private String facilityName = null; // "2.16.840.1.113883.3.72.6.1";
+
+	final private String senderApplicationOid = "1.2.3.4";
+
+	final private String homeCommunityOid = "2.16.840.1.113883.3.72.5.9.1";
+	final private String homeCommunityNamespace = "NIST2010";
+
+	final private String domainToReturnOid = "2.16.840.1.113883.3.72.5.9.3";
+	final private String domainToReturnNamespace = "NIST2010-3";
 
 	/**
 	 * Method implementing
@@ -49,14 +75,10 @@ public class V3PixPdqAdapterTest {
 	private V3PdqConsumerResponse loadV3PdqResponse() throws Exception {
 
 		final InputStream inputStream = getClass().getResourceAsStream("/02_PDQQuery1Response.xml");
-		final DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-
-		final org.w3c.dom.Document doc = db.parse(inputStream);
-
-		final Element rootElement = doc.getDocumentElement();
+		final var unmarshaller = JAXBContext.newInstance(PRPAIN201306UV02Type.class).createUnmarshaller();
+		var rootElement = (PRPAIN201306UV02Type) unmarshaller.unmarshal(inputStream);
 
 		return new V3PdqConsumerResponse(rootElement);
-
 	}
 
 	/**
@@ -81,8 +103,18 @@ public class V3PixPdqAdapterTest {
 		final V3PdqConsumerResponse response = loadV3PdqResponse();
 		assertNotNull(response);
 
-		final V3PixPdqAdapter v3PixPdqAdapter = new V3PixPdqAdapter();
-		final List<FhirPatient> patients = v3PixPdqAdapter.getPatientsFromPdqQuery(response);
+		final AffinityDomain affinityDomain = new AffinityDomain();
+		final Destination dest = new Destination();
+
+		dest.setUri(URI.create(pdqUri));
+		dest.setSenderApplicationOid(senderApplicationOid);
+		dest.setReceiverApplicationOid(applicationName);
+		dest.setReceiverFacilityOid(facilityName);
+		affinityDomain.setPdqDestination(dest);
+		affinityDomain.setPixDestination(dest);
+
+		final var v3PdqQuery = new PdqV3Query(affinityDomain, null);
+		final List<FhirPatient> patients = v3PdqQuery.getPatientsFromPdqQuery(response);
 		assertEquals(2, patients.size());
 		final FhirPatient james = patients.get(0);
 		assertEquals("Jones", james.getNameFirstRep().getFamily());
@@ -136,6 +168,67 @@ public class V3PixPdqAdapterTest {
 		assertEquals(FhirCommon.addUrnOid("1.2.840.114350.1.13.99998.8734"),
 				jim.getIdentifierFirstRep().getSystem());
 		assertEquals("34827R534", jim.getIdentifierFirstRep().getValue());
+	}
+
+	@Test
+	public void ITI47ConsumerQueryPatientPatientIdStep1Test() {
+		LOGGER.debug("ITI47ConsumerQueryPatientPatientIdStep1Test with ipAdress Target " + pdqUri);
+
+		final AffinityDomain affinityDomain = new AffinityDomain();
+		final Destination dest = new Destination();
+
+		try {
+			dest.setUri(new URI(pdqUri));
+		} catch (final URISyntaxException e) {
+			e.printStackTrace();
+		}
+		dest.setSenderApplicationOid(senderApplicationOid);
+		dest.setReceiverApplicationOid(applicationName);
+		dest.setReceiverFacilityOid(facilityName);
+		affinityDomain.setPdqDestination(dest);
+		affinityDomain.setPixDestination(dest);
+
+		final MasterPatientIndexQuery mpiQuery = new MasterPatientIndexQuery(affinityDomain.getPdqDestination());
+		final Identificator identificator = new Identificator("2.16.840.1.113883.3.72.5.9.1", "HJ-361");
+		mpiQuery.addPatientIdentificator(identificator).addDomainToReturn("2.16.840.1.113883.3.72.5.9.1");
+		
+		ConvenienceMasterPatientIndexV3 convenienceMasterPatientIndex = new ConvenienceMasterPatientIndexV3();
+
+		final MasterPatientIndexQueryResponse response = convenienceMasterPatientIndex.queryPatientDemographics(
+				mpiQuery,
+				affinityDomain, null);
+		assertTrue(response.getSuccess());
+	}
+
+	@Test
+	public void ITI47ConsumerQueryPatientPatientIdStep2Test() {
+
+		LOGGER.debug("ITI47ConsumerQueryPatientPatientIdStep2Test with ipAdress Target " + pdqUri);
+
+		final AffinityDomain affinityDomain = new AffinityDomain();
+		final Destination dest = new Destination();
+
+		try {
+			dest.setUri(new URI(pdqUri));
+		} catch (final URISyntaxException e) {
+			e.printStackTrace();
+		}
+		dest.setSenderApplicationOid(senderApplicationOid);
+		dest.setReceiverApplicationOid(applicationName);
+		dest.setReceiverFacilityOid(facilityName);
+		affinityDomain.setPdqDestination(dest);
+		affinityDomain.setPixDestination(dest);
+
+		final MasterPatientIndexQuery mpiQuery = new MasterPatientIndexQuery(affinityDomain.getPdqDestination());
+		final Identificator identificator = new Identificator("2.16.840.1.113883.3.72.5.9.1", "HJ-361");
+		mpiQuery.addPatientIdentificator(identificator).addDomainToReturn("2.16.840.1.113883.3.72.5.9.1");
+
+		ConvenienceMasterPatientIndexV3 convenienceMasterPatientIndex = new ConvenienceMasterPatientIndexV3();
+
+		final MasterPatientIndexQueryResponse response = convenienceMasterPatientIndex
+				.queryPatientDemographics(mpiQuery, affinityDomain, null);
+
+		assertTrue(response.getSuccess());
 	}
 
 }

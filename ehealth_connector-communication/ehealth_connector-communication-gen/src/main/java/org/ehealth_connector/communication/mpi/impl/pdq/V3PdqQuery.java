@@ -14,7 +14,7 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.communication.mpi.impl;
+package org.ehealth_connector.communication.mpi.impl.pdq;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -265,7 +265,7 @@ public class V3PdqQuery implements MpiQuery {
 	 *
 	 * @return true cancel next query
 	 */
-	protected boolean doCancelQuery() {
+	public boolean doCancelQuery() {
 		return cancelQuery;
 	}
 
@@ -274,7 +274,7 @@ public class V3PdqQuery implements MpiQuery {
 	 *
 	 * @return true continue next query
 	 */
-	protected boolean doContinueQuery() {
+	public boolean doContinueQuery() {
 		return continueQuery;
 	}
 
@@ -283,7 +283,7 @@ public class V3PdqQuery implements MpiQuery {
 	 *
 	 * @return the last pdq consumer response
 	 */
-	protected V3PdqConsumerResponse getLastPdqConsumerResponse() {
+	public V3PdqConsumerResponse getLastPdqConsumerResponse() {
 		return lastPdqConsumerResponse;
 	}
 
@@ -293,7 +293,7 @@ public class V3PdqQuery implements MpiQuery {
 	 *
 	 * @return the page count
 	 */
-	protected int getPageCount() {
+	public int getPageCount() {
 		return pageCount;
 	}
 
@@ -312,7 +312,7 @@ public class V3PdqQuery implements MpiQuery {
 	 * @param lastPdqConsumerResponse
 	 *            the new last pdq consumer response
 	 */
-	protected void setLastPdqConsumerResponse(V3PdqConsumerResponse lastPdqConsumerResponse) {
+	public void setLastPdqConsumerResponse(V3PdqConsumerResponse lastPdqConsumerResponse) {
 		this.lastPdqConsumerResponse = lastPdqConsumerResponse;
 	}
 

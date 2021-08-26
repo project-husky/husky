@@ -1,5 +1,6 @@
-package org.ehealth_connector.communication.mpi.impl;
+package org.ehealth_connector.communication.mpi.impl.pdq;
 
+import org.ehealth_connector.communication.mpi.V3Message;
 import org.ehealth_connector.communication.utils.PixPdqV3Utils;
 import org.openhealthtools.ihe.utils.OID;
 
@@ -22,7 +23,7 @@ import net.ihe.gazelle.hl7v3.voc.ActClassControlAct;
 import net.ihe.gazelle.hl7v3.voc.EntityNameSearchUse;
 import net.ihe.gazelle.hl7v3.voc.XActMoodIntentEvent;
 
-public class V3PdqConsumerQuery {
+public class V3PdqConsumerQuery extends V3Message {
 
 	// the PIX query
 	private II messageId = null;
@@ -496,7 +497,11 @@ public class V3PdqConsumerQuery {
 	public void setSender(String applicationOID, String facilityOID) {
 		// set the sender/application OIDs
 		rootElement.setSender(PixPdqV3Utils.createMCCIMT000100UV01Sender(applicationOID, facilityOID));
+
+		this.sendingApplication = applicationOID;
+		this.sendingFacility = facilityOID;
 	}
+
 
 	// // TODO: <OMITTED FROM MODEL> expose a method to set the patientStatusCode (not currently supported in V2 bridge)
 	// public void setPatientStatusCode() {

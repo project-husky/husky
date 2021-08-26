@@ -1,4 +1,4 @@
-package org.ehealth_connector.communication.mpi.impl;
+package org.ehealth_connector.communication.mpi.impl.pdq;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -18,10 +18,10 @@ public class V3PdqConsumerResponse {
 	private String queryAcknowledgement = null;
 	private String sendingApplication = null;
 	private String sendingFacility = null;
-	protected String acknowledgementCode = null;
-	protected String acknowledgementDetailCode = null;
-	protected String acknowledgementDetailText = null;
-	protected String errorText = "";
+	private String acknowledgementCode = null;
+	private String acknowledgementDetailCode = null;
+	private String acknowledgementDetailText = null;
+	private String errorText = "";
 
 	private ArrayList<String> receivingApplication = new ArrayList<>(0);
 	private ArrayList<String> receivingFacility = new ArrayList<>(0);
@@ -427,5 +427,21 @@ public class V3PdqConsumerResponse {
 
 	public boolean hasError() {
 		return hasError;
+	}
+
+	public String getAcknowledgementCode() {
+		return acknowledgementCode;
+	}
+
+	public String getAcknowledgementDetailCode() {
+		return acknowledgementDetailCode;
+	}
+
+	public String getAcknowledgementDetailText() {
+		return acknowledgementDetailText;
+	}
+
+	public String getErrorText() {
+		return errorText;
 	}
 }

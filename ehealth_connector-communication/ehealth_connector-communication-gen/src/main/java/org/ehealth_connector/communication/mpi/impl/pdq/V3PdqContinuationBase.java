@@ -15,7 +15,7 @@
  *
  */
 
-package org.ehealth_connector.communication.mpi.impl;
+package org.ehealth_connector.communication.mpi.impl.pdq;
 
 import java.util.ArrayList;
 
@@ -240,6 +240,10 @@ public abstract class V3PdqContinuationBase {
 	 */
 	public String getSendingFacility() {
 		return sendingFacility;
+	}
+
+	public QUQIIN000003UV01Type getRootElement() {
+		return this.rootElement;
 	}
 
 }

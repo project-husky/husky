@@ -17,21 +17,21 @@
 package org.ehealth_connector.communication;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.ehealth_connector.common.communication.AffinityDomain;
-import org.ehealth_connector.common.communication.AtnaConfig;
-import org.ehealth_connector.common.communication.Destination;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Patient;
-import org.ehealth_connector.communication.mpi.impl.V3PdqQueryResponse;
-import org.ehealth_connector.communication.mpi.impl.V3PixPdqAdapter;
-import org.ehealth_connector.communication.mpi.impl.V3PixPdqAdapterConfig;
+import org.ehealth_connector.communication.mpi.impl.PdqV3Query;
+import org.ehealth_connector.communication.mpi.impl.PixV3Query;
+import org.ehealth_connector.communication.mpi.impl.pdq.V3PdqQueryResponse;
 import org.ehealth_connector.communication.tls.CustomHttpsTLSv11v12SocketFactory;
-import org.ehealth_connector.communication.utils.AbstractAxis2Util;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
+import org.ehealth_connector.xua.core.SecurityHeaderElement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 /**
  * ConvenienceMasterPatientIndexV3
@@ -45,6 +45,7 @@ import org.slf4j.LoggerFactory;
  * Master Patient Index bereit (MPI) Die Kommunikation erfolgt in dieser Klasse
  * mit HL7 V3 (PIX V3, PDQV3) </div>
  */
+@Component
 public class ConvenienceMasterPatientIndexV3 extends CamelService {
 
 	/** The SLF4J logger instance. */
@@ -52,7 +53,6 @@ public class ConvenienceMasterPatientIndexV3 extends CamelService {
 
 	static {
 		CustomHttpsTLSv11v12SocketFactory.setup();
-		AbstractAxis2Util.initAxis2Config();
 	}
 
 	/**
@@ -80,30 +80,18 @@ public class ConvenienceMasterPatientIndexV3 extends CamelService {
 	 *            homeCommunityId and Atna configuration
 	 * @return true, if successful
 	 */
-	public static boolean addPatientDemographics(Patient patient, String homeCommunityOid,
-			AffinityDomain affinityDomain) {
+	public boolean addPatientDemographics(Patient patient, String homeCommunityOid,
+			AffinityDomain affinityDomain, SecurityHeaderElement security) {
 		if (affinityDomain == null) {
 			log.error("affinityDomain has to be specified");
 			return false;
 		}
-		final Destination pixSource = affinityDomain.getPixDestination();
-		final AtnaConfig atna = affinityDomain.getAtnaConfig();
-		final V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(null,
-				(pixSource != null ? pixSource.getUri() : null), null,
-				(pixSource != null ? pixSource.getSenderApplicationOid() : null),
-				(pixSource != null ? pixSource.getSenderFacilityOid() : null),
-				(pixSource != null ? pixSource.getReceiverApplicationOid() : null),
-				(pixSource != null ? pixSource.getReceiverFacilityOid() : null), homeCommunityOid,
-				null, null, null, (atna != null ? atna.getAuditRepositoryUri() : null),
-				(atna != null ? atna.getAuditSourceId() : null),
-				(atna != null ? atna.getAuditEnterpriseSiteID() : null),
-				affinityDomain.getOtherIdsOidSet().toArray(new String[0]));
-		log.debug("addPatientDemographics, creating V3PixAdapter");
-		final V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
+
 		log.debug("addPatientDemographics, creating patient");
-		final FhirPatient fhirPatient = new FhirPatient(patient);
+		final var fhirPatient = new FhirPatient(patient);
 		log.debug("addPatientDemographics, add patient");
-		final boolean ret = v3PixAdapter.addPatient(fhirPatient);
+		var v3PixQuery = new PixV3Query(affinityDomain, homeCommunityOid);
+		final boolean ret = v3PixQuery.addPatient(fhirPatient, security);
 		log.debug("addPatientDemographics, add patient finished");
 		return ret;
 	}
@@ -139,34 +127,21 @@ public class ConvenienceMasterPatientIndexV3 extends CamelService {
 	 *            homeCommunityId and Atna configuration
 	 * @return true, if successful
 	 */
-	public static boolean mergePatients(Patient finalPatient, String mergeObsoleteId,
-			String homeCommunityOid, AffinityDomain affinityDomain) {
+	public boolean mergePatients(Patient finalPatient, String mergeObsoleteId,
+			String homeCommunityOid, AffinityDomain affinityDomain, SecurityHeaderElement security) {
 
 		if (affinityDomain == null) {
 			log.error("affinityDomain has to be specified");
 			return false;
 		}
-		final Destination pixSource = affinityDomain.getPixDestination();
-		final AtnaConfig atna = affinityDomain.getAtnaConfig();
 
-		final V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(null,
-				(pixSource != null ? pixSource.getUri() : null), null,
-				(pixSource != null ? pixSource.getSenderApplicationOid() : null),
-				(pixSource != null ? pixSource.getSenderFacilityOid() : null),
-				(pixSource != null ? pixSource.getReceiverApplicationOid() : null),
-				(pixSource != null ? pixSource.getReceiverFacilityOid() : null), homeCommunityOid,
-				null, null, null, (atna != null ? atna.getAuditRepositoryUri() : null),
-				(atna != null ? atna.getAuditSourceId() : null),
-				(atna != null ? atna.getAuditEnterpriseSiteID() : null),
-				affinityDomain.getOtherIdsOidSet().toArray(new String[0]));
-		final V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
 		if (mergeObsoleteId == null) {
-			log.error("no localid specified for oid " + homeCommunityOid);
+			log.error("no localid specified for oid {}", homeCommunityOid);
 			return false;
 		}
-		final boolean ret = v3PixAdapter.mergePatient(new FhirPatient(finalPatient),
-				mergeObsoleteId);
-		return ret;
+
+		var v3PixQuery = new PixV3Query(affinityDomain, homeCommunityOid);
+		return v3PixQuery.mergePatient(new FhirPatient(finalPatient), mergeObsoleteId, security);
 	}
 
 	/**
@@ -180,29 +155,18 @@ public class ConvenienceMasterPatientIndexV3 extends CamelService {
 	 *            homeCommunityId and Atna configuration
 	 * @return query response with patients
 	 */
-	public static MasterPatientIndexQueryResponse queryPatientDemographics(
-			MasterPatientIndexQuery mpiQuery, AffinityDomain affinityDomain) {
+	public MasterPatientIndexQueryResponse queryPatientDemographics(
+			MasterPatientIndexQuery mpiQuery, AffinityDomain affinityDomain, SecurityHeaderElement security) {
 
 		if (affinityDomain == null) {
 			log.error("affinityDomain has to be specified");
 			return null;
 		}
-		final Destination pdqQuery = affinityDomain.getPdqDestination();
-		final AtnaConfig atna = affinityDomain.getAtnaConfig();
 
-		final V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(null, null,
-				(pdqQuery != null ? pdqQuery.getUri() : null),
-				(pdqQuery != null ? pdqQuery.getSenderApplicationOid() : null),
-				(pdqQuery != null ? pdqQuery.getSenderFacilityOid() : null),
-				(pdqQuery != null ? pdqQuery.getReceiverApplicationOid() : null),
-				(pdqQuery != null ? pdqQuery.getReceiverFacilityOid() : null), null, null, null,
-				null, (atna != null ? atna.getAuditRepositoryUri() : null),
-				(atna != null ? atna.getAuditSourceId() : null),
-				(atna != null ? atna.getAuditEnterpriseSiteID() : null),
-				affinityDomain.getOtherIdsOidSet().toArray(new String[0]));
-		final V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
-		final V3PdqQueryResponse pdqQueryRespones = v3PixAdapter
-				.queryPatients(mpiQuery.getV3PdqQuery());
+		var query = new PdqV3Query(affinityDomain, null);
+
+		final V3PdqQueryResponse pdqQueryRespones = query
+				.queryPatients(mpiQuery.getV3PdqQuery(), security);
 		return new MasterPatientIndexQueryResponse(pdqQueryRespones);
 	}
 
@@ -236,37 +200,25 @@ public class ConvenienceMasterPatientIndexV3 extends CamelService {
 	 *            homeCommunityId and Atna configuration
 	 * @return list of ids
 	 */
-	public static List<Identificator> queryPatientId(Patient patient, String homeCommunityOid,
-			String[] requestedCommunityOIDs, AffinityDomain affinityDomain) {
+	public List<Identificator> queryPatientId(Patient patient, String homeCommunityOid,
+			List<String> requestedCommunityOIDs, AffinityDomain affinityDomain, SecurityHeaderElement security) {
 
 		if (affinityDomain == null) {
 			log.error("affinityDomain has to be specified");
-			return null;
+			return new LinkedList<>();
 		}
-		final Destination pixQuery = affinityDomain.getPixDestination();
-		final AtnaConfig atna = affinityDomain.getAtnaConfig();
 
-		final V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(
-				(pixQuery != null ? pixQuery.getUri() : null), null, null,
-				(pixQuery != null ? pixQuery.getSenderApplicationOid() : null),
-				(pixQuery != null ? pixQuery.getSenderFacilityOid() : null),
-				(pixQuery != null ? pixQuery.getReceiverApplicationOid() : null),
-				(pixQuery != null ? pixQuery.getReceiverFacilityOid() : null), homeCommunityOid,
-				null, null, null, (atna != null ? atna.getAuditRepositoryUri() : null),
-				(atna != null ? atna.getAuditSourceId() : null),
-				(atna != null ? atna.getAuditEnterpriseSiteID() : null),
-				affinityDomain.getOtherIdsOidSet().toArray(new String[0]));
-		final V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
-		final String[] ids = v3PixAdapter.queryPatientId(new FhirPatient(patient),
-				requestedCommunityOIDs, null);
+		var query = new PixV3Query(affinityDomain, homeCommunityOid);
+		List<String> ids = query.queryPatientId(new FhirPatient(patient), requestedCommunityOIDs, null, security);
+
 		final List<Identificator> list = new ArrayList<>();
 		if (requestedCommunityOIDs != null) {
-			for (int i = 0; i < requestedCommunityOIDs.length; ++i) {
-				String id = "";
-				if (i < ids.length) {
-					id = ids[i];
+			for (var i = 0; i < requestedCommunityOIDs.size(); ++i) {
+				var id = "";
+				if (i < ids.size()) {
+					id = ids.get(i);
 				}
-				list.add(new Identificator(requestedCommunityOIDs[i], id));
+				list.add(new Identificator(requestedCommunityOIDs.get(i), id));
 			}
 		}
 		return list;
@@ -298,29 +250,16 @@ public class ConvenienceMasterPatientIndexV3 extends CamelService {
 	 *            homeCommunityId and Atna configuration
 	 * @return true, if successful
 	 */
-	public static boolean updatePatientDemographics(Patient patient, String homeCommunityOid,
-			AffinityDomain affinityDomain) {
+	public boolean updatePatientDemographics(Patient patient, String homeCommunityOid,
+			AffinityDomain affinityDomain, SecurityHeaderElement security) {
 
 		if (affinityDomain == null) {
 			log.error("affinityDomain has to be specified");
 			return false;
 		}
-		final Destination pixSource = affinityDomain.getPixDestination();
-		final AtnaConfig atna = affinityDomain.getAtnaConfig();
 
-		final V3PixPdqAdapterConfig v3PixAdapterConfig = new V3PixPdqAdapterConfig(null,
-				(pixSource != null ? pixSource.getUri() : null), null,
-				(pixSource != null ? pixSource.getSenderApplicationOid() : null),
-				(pixSource != null ? pixSource.getSenderFacilityOid() : null),
-				(pixSource != null ? pixSource.getReceiverApplicationOid() : null),
-				(pixSource != null ? pixSource.getReceiverFacilityOid() : null), homeCommunityOid,
-				null, null, null, (atna != null ? atna.getAuditRepositoryUri() : null),
-				(atna != null ? atna.getAuditSourceId() : null),
-				(atna != null ? atna.getAuditEnterpriseSiteID() : null),
-				affinityDomain.getOtherIdsOidSet().toArray(new String[0]));
-		final V3PixPdqAdapter v3PixAdapter = new V3PixPdqAdapter(v3PixAdapterConfig);
-		final boolean ret = v3PixAdapter.updatePatient(new FhirPatient(patient));
-		return ret;
+		var v3PixQuery = new PixV3Query(affinityDomain, homeCommunityOid);
+		return v3PixQuery.updatePatient(new FhirPatient(patient), security);
 	}
 
 }
