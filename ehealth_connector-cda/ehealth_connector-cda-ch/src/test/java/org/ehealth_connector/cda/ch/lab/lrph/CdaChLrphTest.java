@@ -35,7 +35,7 @@ import org.ehealth_connector.cda.ch.lab.CdaChV12LaboratoryReportTest;
 import org.ehealth_connector.cda.ch.lab.lrph.enums.LabObsListSnomed;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
 import org.ehealth_connector.cda.ihe.lab.SpecimenReceivedEntry;
-import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.IntendedRecipient;
 import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;

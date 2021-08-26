@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.cda.ihe.lab;
 
-import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.mdht.enums.StatusCode;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;

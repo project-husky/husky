@@ -23,7 +23,7 @@ import org.ehealth_connector.cda.MdhtObservationFacade;
 import org.ehealth_connector.cda.SectionAnnotationCommentEntry;
 import org.ehealth_connector.cda.enums.epsos.BloodGroup;
 import org.ehealth_connector.cda.utils.CdaUtilMdht;
-import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
 import org.openhealthtools.mdht.uml.cda.ch.BloodgroupObservation;

@@ -79,8 +79,9 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.GenericXMLResourceFactoryImpl;
 import org.eclipse.emf.ecore.xml.type.AnyType;
 import org.eclipse.emf.ecore.xml.type.XMLTypeDocumentRoot;
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
-import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedAuthor;
 import org.ehealth_connector.common.mdht.Organization;
 import org.ehealth_connector.common.mdht.Participant;
 import org.ehealth_connector.common.mdht.ParticipantRole;
@@ -201,11 +202,10 @@ public class Util {
 	 *            the list to convert
 	 * @return </div> <div class="de"></div> <div class="fr"></div>
 	 */
-	public static List<Identificator> convertIds(EList<II> mII) {
+	public static List<Identificator> convertIds(List<org.ehealth_connector.common.hl7cdar2.II> mII) {
 		final List<Identificator> il = new ArrayList<>();
-		for (final II mId : mII) {
-			final Identificator id = new Identificator(mId);
-			il.add(id);
+		for (final org.ehealth_connector.common.hl7cdar2.II mId : mII) {
+			il.add(new Identificator(mId));
 		}
 		return il;
 	}
@@ -328,17 +328,17 @@ public class Util {
 	 *            the organization
 	 * @return the assigned author
 	 */
-	public static AssignedAuthor createAssignedAuthorFromOrganization(Organization organization) {
-		final org.openhealthtools.mdht.uml.cda.Organization o = organization.getMdhtOrganization();
-		final AssignedAuthor a = CDAFactory.eINSTANCE.createAssignedAuthor();
-		if (!o.getAddrs().isEmpty()) {
-			a.getAddrs().addAll(EcoreUtil.copyAll(o.getAddrs()));
+	public static POCDMT000040AssignedAuthor createAssignedAuthorFromOrganization(org.ehealth_connector.common.Organization organization) {
+		final var o = organization.getHl7CdaR2Pocdmt000040Organization();
+		final var a = new POCDMT000040AssignedAuthor();
+		if (!o.getAddr().isEmpty()) {
+			a.getAddr().addAll(o.getAddr());
 		}
-		if (!o.getTelecoms().isEmpty()) {
-			a.getTelecoms().addAll(EcoreUtil.copyAll(o.getTelecoms()));
+		if (!o.getTelecom().isEmpty()) {
+			a.getTelecom().addAll(o.getTelecom());
 		}
-		if (!o.getIds().isEmpty()) {
-			a.getIds().addAll(EcoreUtil.copyAll(o.getIds()));
+		if (!o.getId().isEmpty()) {
+			a.getId().addAll(o.getId());
 		}
 		return a;
 	}
@@ -406,7 +406,7 @@ public class Util {
 	 * @return the authenticator
 	 */
 	public static Authenticator createAuthenticatorFromAuthor(
-			org.ehealth_connector.common.mdht.Author author) {
+			org.ehealth_connector.common.Author author) {
 		final org.openhealthtools.mdht.uml.cda.Author a = author.copyMdhtAuthor();
 		final Authenticator mdhtAuth = CDAFactory.eINSTANCE.createAuthenticator();
 		mdhtAuth.setAssignedEntity(createAssignedEntityFromAssignedAuthor(a.getAssignedAuthor()));
@@ -675,7 +675,7 @@ public class Util {
 	 * @return the legal authenticator
 	 */
 	public static LegalAuthenticator createLegalAuthenticatorFromAuthor(
-			org.ehealth_connector.common.mdht.Author author) {
+			org.ehealth_connector.common.Author author) {
 		final org.openhealthtools.mdht.uml.cda.Author a = author.copyMdhtAuthor();
 		final LegalAuthenticator mdhtLegAuth = CDAFactory.eINSTANCE.createLegalAuthenticator();
 		mdhtLegAuth

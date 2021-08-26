@@ -15,14 +15,12 @@
  *
  */
 
-package org.ehealth_connector.common.mdht;
+package org.ehealth_connector.common;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Person;
 
 /**
  * Eine Person (z.B. Arzt, Datenerfasser, Angehörige, ...)
@@ -30,9 +28,9 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 public class Person {
 
 	/**
-	 * The mdht person.
+	 * The CDA person.
 	 */
-	private org.openhealthtools.mdht.uml.cda.Person mPerson;
+	private POCDMT000040Person mPerson;
 
 	/**
 	 * <div class="en">Instantiates a new person.</div>
@@ -40,7 +38,7 @@ public class Person {
 	 * <div class="fr"></div> <div class="it"></div>
 	 */
 	public Person() {
-		mPerson = CDAFactory.eINSTANCE.createPerson();
+		mPerson = new POCDMT000040Person();
 	}
 
 	/**
@@ -53,9 +51,9 @@ public class Person {
 	 *            <div class="it"></div>
 	 */
 	public Person(Name name) {
-		mPerson = CDAFactory.eINSTANCE.createPerson();
+		mPerson = new POCDMT000040Person();
 		// Create and fill Person Name
-		mPerson.getNames().add(name.copyMdhtPn());
+		mPerson.getName().add(name.getHl7CdaR2Pn());
 	}
 
 	/**
@@ -68,7 +66,7 @@ public class Person {
 	 *            <div class="de"> person</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
-	public Person(org.openhealthtools.mdht.uml.cda.Person person) {
+	public Person(POCDMT000040Person person) {
 		mPerson = person;
 	}
 
@@ -80,18 +78,7 @@ public class Person {
 	 *            name
 	 */
 	public void addName(Name name) {
-		mPerson.getNames().add(name.getMdhtPn());
-	}
-
-	/**
-	 * <div class="en">Copy mdht person.</div> <div class="de"></div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @return the org.openhealthtools.mdht.uml.cda.Person The MDHT Person
-	 *         object
-	 */
-	public org.openhealthtools.mdht.uml.cda.Person copyMdhtPerson() {
-		return EcoreUtil.copy(mPerson);
+		mPerson.getName().add(name.getHl7CdaR2Pn());
 	}
 
 	/**
@@ -101,12 +88,10 @@ public class Person {
 	 * @return <div class="en">the complete name</div>
 	 */
 	public String getCompleteName() {
-		String retVal = "";
-		if (mPerson.getNames() != null) {
-			if (mPerson.getNames().size() > 0) {
-				final Name name = new Name(mPerson.getNames().get(0));
-				retVal = name.getCompleteName();
-			}
+		var retVal = "";
+		if (mPerson.getName() != null && !mPerson.getName().isEmpty()) {
+			final var name = new Name(mPerson.getName().get(0));
+			retVal = name.getFullName();
 		}
 		return retVal;
 	}
@@ -118,7 +103,7 @@ public class Person {
 	 * @return org.openhealthtools.mdht.uml.cda.Person <div class="en">the mdht
 	 *         person</div>
 	 */
-	public org.openhealthtools.mdht.uml.cda.Person getMdhtPerson() {
+	public POCDMT000040Person getHl7CdaPerson() {
 		return mPerson;
 	}
 
@@ -129,8 +114,7 @@ public class Person {
 	 * @return <div class="en">the name</div>
 	 */
 	public Name getName() {
-		final Name name = new Name(mPerson.getNames().get(0));
-		return name;
+		return new Name(mPerson.getName().get(0));
 	}
 
 	/**
@@ -140,10 +124,9 @@ public class Person {
 	 * @return <div class="en">the names</div>
 	 */
 	public List<Name> getNames() {
-		final List<Name> nl = new ArrayList<Name>();
-		for (PN mName : mPerson.getNames()) {
-			final Name name = new Name(mName);
-			nl.add(name);
+		final List<Name> nl = new ArrayList<>();
+		for (org.ehealth_connector.common.hl7cdar2.PN mName : mPerson.getName()) {
+			nl.add(new Name(mName));
 		}
 		return nl;
 	}

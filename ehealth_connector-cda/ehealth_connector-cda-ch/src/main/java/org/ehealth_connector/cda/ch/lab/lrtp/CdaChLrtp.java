@@ -27,8 +27,8 @@ import org.ehealth_connector.cda.ch.lab.BloodGroupObservation;
 import org.ehealth_connector.cda.ch.lab.StudiesSummarySection;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.ReportScopes;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.IntendedRecipient;
@@ -147,7 +147,7 @@ public class CdaChLrtp
 	 */
 	public CdaChLrtp(LanguageCode languageCode, Author author,
 			ReferralOrderingPhysician refOrderingPhysician,
-			org.ehealth_connector.common.mdht.Patient patient, IntendedRecipient recipient,
+			org.ehealth_connector.common.Patient patient, IntendedRecipient recipient,
 			ReportScopes scope, String soasCode) {
 		this(languageCode);
 		// set SOAS ID
@@ -215,7 +215,7 @@ public class CdaChLrtp
 	 */
 	public CdaChLrtp(LanguageCode languageCode, String styleSheet, String css, Author author,
 			ReferralOrderingPhysician refOrderingPhysician,
-			org.ehealth_connector.common.mdht.Patient patient, IntendedRecipient recipient,
+			org.ehealth_connector.common.Patient patient, IntendedRecipient recipient,
 			ReportScopes scope, String soasCode) {
 		this(languageCode, styleSheet, css);
 		// set SOAS ID

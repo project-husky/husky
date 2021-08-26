@@ -15,36 +15,34 @@
  *
  */
 
-package org.ehealth_connector.common.mdht;
+package org.ehealth_connector.common;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.common.hl7cdar2.AD;
+import org.ehealth_connector.common.hl7cdar2.II;
+import org.ehealth_connector.common.hl7cdar2.PN;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Patient;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040PatientRole;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040RecordTarget;
+import org.ehealth_connector.common.hl7cdar2.TEL;
+import org.ehealth_connector.common.hl7cdar2.TS;
 import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
-import org.ehealth_connector.common.utils.DateUtilMdht;
-import org.ehealth_connector.common.utils.Util;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.PatientRole;
-import org.openhealthtools.mdht.uml.cda.RecordTarget;
-import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.II;
-import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
-import org.openhealthtools.mdht.uml.hl7.datatypes.TS;
+import org.ehealth_connector.common.utils.DateUtil;
 
 /**
  * <div class="en">Class Patient</div>
  */
 public class Patient extends Person {
 
-	private final RecordTarget mRecordTarget;
-	protected PatientRole mPatientRole;
-	protected org.openhealthtools.mdht.uml.cda.Patient mPatient;
+	private final POCDMT000040RecordTarget mRecordTarget;
+	protected POCDMT000040PatientRole mPatientRole;
+	protected POCDMT000040Patient mPatient;
 	private Boolean isNonHumenSubject = false;
 
 	/**
@@ -108,9 +106,9 @@ public class Patient extends Person {
 	 */
 	public Patient() {
 		// Create the RecordTarget, PatientRole and Patient
-		mRecordTarget = CDAFactory.eINSTANCE.createRecordTarget();
-		mPatientRole = CDAFactory.eINSTANCE.createPatientRole();
-		mPatient = CDAFactory.eINSTANCE.createPatient();
+		mRecordTarget = new POCDMT000040RecordTarget();
+		mPatientRole = new POCDMT000040PatientRole();
+		mPatient = new POCDMT000040Patient();
 
 		mPatientRole.setPatient(mPatient);
 		mRecordTarget.setPatientRole(mPatientRole);
@@ -135,12 +133,12 @@ public class Patient extends Person {
 		}
 
 		// Fill Patient Name
-		mPatient.getNames().add(name.getMdhtPn());
+		mPatient.getName().add(name.getHl7CdaR2Pn());
 
 		// Create and fill birth date
 		if (birthDay != null) {
 			try {
-				mPatient.setBirthTime(DateUtilMdht.createDateTSFromEuroDate(birthDay));
+				mPatient.setBirthTime(DateUtil.date2TsDateOnly(birthDay));
 			} catch (final ParseException e) {
 				e.printStackTrace();
 			}
@@ -165,9 +163,9 @@ public class Patient extends Person {
 	 */
 	public Patient(Name name, AdministrativeGender sex, Date birthDay, Identificator id) {
 		// Create the RecordTarget, PatientRole and Patient
-		mRecordTarget = CDAFactory.eINSTANCE.createRecordTarget();
-		mPatientRole = CDAFactory.eINSTANCE.createPatientRole();
-		mPatient = CDAFactory.eINSTANCE.createPatient();
+		mRecordTarget = new POCDMT000040RecordTarget();
+		mPatientRole = new POCDMT000040PatientRole();
+		mPatient = new POCDMT000040Patient();
 
 		mPatientRole.setPatient(mPatient);
 		mRecordTarget.setPatientRole(mPatientRole);
@@ -192,7 +190,7 @@ public class Patient extends Person {
 	 *            <br>
 	 *            <div class="en"> record target</div>
 	 */
-	public Patient(RecordTarget recordTarget) {
+	public Patient(POCDMT000040RecordTarget recordTarget) {
 		mRecordTarget = recordTarget;
 		mPatientRole = recordTarget.getPatientRole();
 		mPatient = recordTarget.getPatientRole().getPatient();
@@ -205,8 +203,8 @@ public class Patient extends Person {
 	 *            Adresse
 	 */
 	public void addAddress(Address address) {
-		if (mPatientRole.getAddrs() != null) {
-			mPatientRole.getAddrs().add(address.copyMdhtAdress());
+		if (mPatientRole.getAddr() != null) {
+			mPatientRole.getAddr().add(address.getHl7CdaR2Ad());
 		}
 	}
 
@@ -217,10 +215,10 @@ public class Patient extends Person {
 	 *            Identificator
 	 */
 	public void addId(Identificator identificator) {
-		final II id = DatatypesFactory.eINSTANCE.createII();
+		final II id = new II();
 		id.setRoot(identificator.getRoot());
 		id.setExtension(identificator.getExtension());
-		mPatientRole.getIds().add(id);
+		mPatientRole.getId().add(id);
 	}
 
 	/**
@@ -234,38 +232,7 @@ public class Patient extends Person {
 	 */
 	@Override
 	public void addName(Name name) {
-		mPatient.getNames().add(name.copyMdhtPn());
-	}
-
-	/**
-	 * <div class="en">Copy mdht patient.</div> <div class="de"></div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @return the org.openhealthtools.mdht.uml.cda.Patient the MDHT Patient
-	 *         object
-	 */
-	public org.openhealthtools.mdht.uml.cda.Patient copyMdhtPatient() {
-		return EcoreUtil.copy(mPatient);
-	}
-
-	/**
-	 * <div class="en">Copy mdht patient role.</div> <div class="de"></div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @return PatientRole the patient role
-	 */
-	public PatientRole copyMdhtPatientRole() {
-		return EcoreUtil.copy(mPatientRole);
-	}
-
-	/**
-	 * <div class="en">Copy mdht record target.</div> <div class="de"></div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @return RecordTarget the record target
-	 */
-	public RecordTarget copyMdhtRecordTarget() {
-		return EcoreUtil.copy(mRecordTarget);
+		mPatient.getName().add(name.getHl7CdaR2Pn());
 	}
 
 	/**
@@ -275,9 +242,8 @@ public class Patient extends Person {
 	 * @return <div class="en">the address</div>
 	 */
 	public Address getAddress() {
-		final AD mAd = mPatientRole.getAddrs().get(0);
-		final Address address = new Address(mAd);
-		return address;
+		final var mAd = mPatientRole.getAddr().get(0);
+		return new Address(mAd);
 	}
 
 	/**
@@ -287,10 +253,9 @@ public class Patient extends Person {
 	 * @return <div class="en">the adresses</div>
 	 */
 	public List<Address> getAddresses() {
-		final List<Address> al = new ArrayList<Address>();
-		for (final AD mAddress : mPatientRole.getAddrs()) {
-			final Address address = new Address(mAddress);
-			al.add(address);
+		final List<Address> al = new ArrayList<>();
+		for (final AD mAddress : mPatientRole.getAddr()) {
+			al.add(new Address(mAddress));
 		}
 		return al;
 	}
@@ -337,10 +302,10 @@ public class Patient extends Person {
 	@Override
 	public String getCompleteName() {
 		String retVal = "";
-		if (mPatient.getNames() != null) {
-			if (mPatient.getNames().size() > 0) {
-				final Name name = new Name(mPatient.getNames().get(0));
-				retVal = name.getCompleteName();
+		if (mPatient.getName() != null) {
+			if (mPatient.getName().size() > 0) {
+				final Name name = new Name(mPatient.getName().get(0));
+				retVal = name.getFullName();
 			}
 		}
 		return retVal;
@@ -380,7 +345,12 @@ public class Patient extends Person {
 	 * @return <div class="en">the ids</div>
 	 */
 	public List<Identificator> getIds() {
-		return Util.convertIds(mPatientRole.getIds());
+		List<Identificator> ids = new LinkedList<>();
+		for (II id : mPatientRole.getId()) {
+			ids.add(new Identificator(id));
+		}
+
+		return ids;
 	}
 
 	/**
@@ -390,7 +360,7 @@ public class Patient extends Person {
 	 * @return org.openhealthtools.mdht.uml.cda.Patient <div class="en">the mdht
 	 *         patient</div>
 	 */
-	public org.openhealthtools.mdht.uml.cda.Patient getMdhtPatient() {
+	public POCDMT000040Patient getMdhtPatient() {
 		return mPatient;
 	}
 
@@ -400,7 +370,7 @@ public class Patient extends Person {
 	 *
 	 * @return PatientRole <div class="en">the mdht patient role</div>
 	 */
-	public PatientRole getMdhtPatientRole() {
+	public POCDMT000040PatientRole getMdhtPatientRole() {
 		return mPatientRole;
 	}
 
@@ -411,7 +381,7 @@ public class Patient extends Person {
 	 *
 	 * @return RecordTarget <div class="en">the mdht record target</div>
 	 */
-	public RecordTarget getMdhtRecordTarget() {
+	public POCDMT000040RecordTarget getMdhtRecordTarget() {
 		return mRecordTarget;
 	}
 
@@ -449,8 +419,7 @@ public class Patient extends Person {
 	 */
 	@Override
 	public Name getName() {
-		final Name name = new Name(mPatient.getNames().get(0));
-		return name;
+		return new Name(mPatient.getName().get(0));
 	}
 
 	/*
@@ -460,10 +429,9 @@ public class Patient extends Person {
 	 */
 	@Override
 	public List<Name> getNames() {
-		final List<Name> nl = new ArrayList<Name>();
-		for (final PN mName : mPatient.getNames()) {
-			final Name name = new Name(mName);
-			nl.add(name);
+		final List<Name> nl = new ArrayList<>();
+		for (final PN mName : mPatient.getName()) {
+			nl.add(new Name(mName));
 		}
 		return nl;
 	}
@@ -501,8 +469,13 @@ public class Patient extends Person {
 	 *
 	 * @return Telecoms <div class="en">the telecoms</div>
 	 */
-	public Telecoms getTelecoms() {
-		final Telecoms telecoms = new Telecoms(mPatientRole.getTelecoms());
+	public List<Telecom> getTelecoms() {
+		List<Telecom> telecoms = new LinkedList<>();
+
+		for (TEL tel : mPatientRole.getTelecom()) {
+			telecoms.add(new Telecom(tel));
+		}
+
 		return telecoms;
 	}
 
@@ -545,11 +518,7 @@ public class Patient extends Person {
 	 *            <div class="it"></div>
 	 */
 	public void setBirthday(Date birthDay) {
-		try {
-			mPatient.setBirthTime(DateUtilMdht.createDateTSFromEuroDate(birthDay));
-		} catch (final ParseException e) {
-			e.printStackTrace();
-		}
+		mPatient.setBirthTime(DateUtil.date2TsDateOnly(birthDay));
 	}
 
 	/**
@@ -644,7 +613,7 @@ public class Patient extends Person {
 	 *            the new provider organization
 	 */
 	public void setProviderOrganization(Organization organization) {
-		mPatientRole.setProviderOrganization(organization.getMdhtOrganization());
+		mPatientRole.setProviderOrganization(organization.getHl7CdaR2Pocdmt000040Organization());
 	}
 
 	/**
@@ -667,8 +636,13 @@ public class Patient extends Person {
 	 *            neue telecoms.</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
-	public void setTelecoms(Telecoms telecoms) {
-		mPatientRole.getTelecoms().addAll(telecoms.getMdhtTelecoms());
+	public void setTelecoms(List<Telecom> telecoms) {
+
+		for (Telecom tel : telecoms) {
+			if (tel != null) {
+				mPatientRole.getTelecom().add(tel.getHl7CdaR2Tel());
+			}
+		}
 	}
 
 }

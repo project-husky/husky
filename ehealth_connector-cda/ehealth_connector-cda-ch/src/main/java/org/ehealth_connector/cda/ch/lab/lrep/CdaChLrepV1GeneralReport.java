@@ -23,13 +23,13 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.cda.ch.CdaChV2StructuredBody;
 import org.ehealth_connector.cda.utils.CdaUtilMdht;
+import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Address;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Organization;
-import org.ehealth_connector.common.mdht.Patient;
 import org.openhealthtools.mdht.uml.cda.Author;
 import org.openhealthtools.mdht.uml.cda.Custodian;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
@@ -118,7 +118,7 @@ public class CdaChLrepV1GeneralReport extends
 	 * @return the author
 	 */
 	@Override
-	public Author addAuthor(org.ehealth_connector.common.mdht.Author author) {
+	public Author addAuthor(org.ehealth_connector.common.Author author) {
 		Author mdht = super.addAuthor(author);
 		CdaUtilMdht.addTemplateIdOnce(mdht, new Identificator("2.16.756.5.30.1.1.10.2.59"));
 		return mdht;

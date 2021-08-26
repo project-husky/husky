@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.communication.xd.storedquery;
 
-import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
+import java.util.List;
 
 /**
  * Represents a query to get XDS documents by their document IDs
@@ -34,14 +34,17 @@ public class GetDocumentsQuery extends AbstractStoredQuery {
 	 *            uniqueID (external to registry) of the document. In most user
 	 *            cases, this should be set to false
 	 */
-	public GetDocumentsQuery(String[] docIds, boolean isUUID) {
-		try {
-			setOhtStoredQuery(
-					new org.openhealthtools.ihe.xds.consumer.storedquery.GetDocumentsQuery(docIds,
-							isUUID));
-		} catch (final MalformedStoredQueryException e) {
-			e.printStackTrace();
+	public GetDocumentsQuery(List<String> docIds, boolean isUUID) {
+
+		var query = new org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetDocumentsQuery();
+
+		if (isUUID) {
+			query.setUuids(docIds);
+		} else {
+			query.setUniqueIds(docIds);
 		}
+
+		setIpfStoredQuery(query);
 	}
 
 	/**
@@ -57,13 +60,18 @@ public class GetDocumentsQuery extends AbstractStoredQuery {
 	 *            profile. Value may be null or empty, in which case it is not
 	 *            added to the query.
 	 */
-	public GetDocumentsQuery(String[] docIds, boolean isUUID, String homeCommunityId) {
-		try {
-			setOhtStoredQuery(
-					new org.openhealthtools.ihe.xds.consumer.storedquery.GetDocumentsQuery(docIds,
-							isUUID, homeCommunityId));
-		} catch (final MalformedStoredQueryException e) {
-			e.printStackTrace();
+	public GetDocumentsQuery(List<String> docIds, boolean isUUID, String homeCommunityId) {
+
+		var query = new org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetDocumentsQuery();
+
+		if (isUUID) {
+			query.setUuids(docIds);
+		} else {
+			query.setUniqueIds(docIds);
 		}
+
+		query.setHomeCommunityId(homeCommunityId);
+
+		setIpfStoredQuery(query);
 	}
 }

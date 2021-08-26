@@ -31,9 +31,9 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import org.apache.commons.io.Charsets;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.mdht.Address;
-import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.AuthoringDevice;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
@@ -946,8 +946,8 @@ public class FhirCommon {
 	 * @return the eHC Author </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Author getAuthor(IBaseResource res) {
-		org.ehealth_connector.common.mdht.Author retVal = null;
+	public static org.ehealth_connector.common.Author getAuthor(IBaseResource res) {
+		org.ehealth_connector.common.Author retVal = null;
 		if (res instanceof org.hl7.fhir.dstu3.model.Person) {
 			retVal = FhirCommon.getAuthor((org.hl7.fhir.dstu3.model.Person) res);
 		}
@@ -969,14 +969,14 @@ public class FhirCommon {
 	 * @return <div class="en">the eHC Author</div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Author getAuthor(
+	public static org.ehealth_connector.common.Author getAuthor(
 			org.hl7.fhir.dstu3.model.Organization fhirObject) {
-		org.ehealth_connector.common.mdht.Author retVal = null;
+		org.ehealth_connector.common.Author retVal = null;
 		final String authoringDeviceName = fhirObject.getName();
 
 		// Create the author
 		final AuthoringDevice ad = new AuthoringDevice(authoringDeviceName);
-		retVal = new org.ehealth_connector.common.mdht.Author(ad);
+		retVal = new org.ehealth_connector.common.Author(ad);
 		retVal.setFunctionCode(Author.FUNCTION_CODE_AUTHORDEVICE);
 
 		// Set Function Code
@@ -1032,14 +1032,14 @@ public class FhirCommon {
 	 * @return <div class="en">the eHC Author</div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Author getAuthor(
+	public static org.ehealth_connector.common.Author getAuthor(
 			org.hl7.fhir.dstu3.model.Person fhirObject) {
-		org.ehealth_connector.common.mdht.Author retVal = null;
+		org.ehealth_connector.common.Author retVal = null;
 		final Name personName = new Name(fhirObject.getNameFirstRep().getGivenAsSingleString(),
 				fhirObject.getNameFirstRep().getFamily());
 
 		// Create the author
-		retVal = new org.ehealth_connector.common.mdht.Author(personName);
+		retVal = new org.ehealth_connector.common.Author(personName);
 
 		// Set Function Code
 		setAuthorFuntionCode(retVal, fhirObject);
@@ -1089,7 +1089,7 @@ public class FhirCommon {
 	 * @return the eHC Author </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Author getAuthor(
+	public static org.ehealth_connector.common.Author getAuthor(
 			org.hl7.fhir.dstu3.model.Reference ref) {
 		return getAuthor(ref.getResource());
 	}
@@ -1103,13 +1103,13 @@ public class FhirCommon {
 	 * @return <div class="en">the eHC Author</div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Author getAuthor(Practitioner fhirObject) {
-		org.ehealth_connector.common.mdht.Author retVal = null;
+	public static org.ehealth_connector.common.Author getAuthor(Practitioner fhirObject) {
+		org.ehealth_connector.common.Author retVal = null;
 		final Name personName = new Name(fhirObject.getName().get(0).getGivenAsSingleString(),
 				fhirObject.getName().get(0).getFamily());
 
 		// Create the author
-		retVal = new org.ehealth_connector.common.mdht.Author(personName);
+		retVal = new org.ehealth_connector.common.Author(personName);
 
 		// Set Function Code
 		setAuthorFuntionCode(retVal, fhirObject);
@@ -1153,7 +1153,7 @@ public class FhirCommon {
 	 * @return the community patient id
 	 */
 	public static Identificator getCommunityPatientId(
-			org.ehealth_connector.common.mdht.Patient patient, String communityOid) {
+			org.ehealth_connector.common.Patient patient, String communityOid) {
 		Identificator retVal = null;
 		if (communityOid != null) {
 			for (final Identificator item : patient.getIds()) {
@@ -1707,8 +1707,8 @@ public class FhirCommon {
 	 * @return the eHC Patient object </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Patient getPatient(IBaseResource res) {
-		org.ehealth_connector.common.mdht.Patient retVal = null;
+	public static org.ehealth_connector.common.Patient getPatient(IBaseResource res) {
+		org.ehealth_connector.common.Patient retVal = null;
 		if (res instanceof org.hl7.fhir.dstu3.model.Patient) {
 			retVal = FhirCommon.getPatient((org.hl7.fhir.dstu3.model.Patient) res);
 		}
@@ -1723,7 +1723,7 @@ public class FhirCommon {
 	 * @return eHC Patient object </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Patient getPatient(
+	public static org.ehealth_connector.common.Patient getPatient(
 			org.hl7.fhir.dstu3.model.Bundle bundle) {
 		org.hl7.fhir.dstu3.model.Patient fhirPatient = null;
 		for (final BundleEntryComponent entry : bundle.getEntry()) {
@@ -1741,7 +1741,7 @@ public class FhirCommon {
 	 * @return eHC Patient object </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Patient getPatient(
+	public static org.ehealth_connector.common.Patient getPatient(
 			org.hl7.fhir.dstu3.model.DocumentManifest docManifest) {
 		org.hl7.fhir.dstu3.model.Patient fhirPatient = null;
 		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
@@ -1768,14 +1768,14 @@ public class FhirCommon {
 	 * @return the eHC Patient object </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Patient getPatient(
+	public static org.ehealth_connector.common.Patient getPatient(
 			org.hl7.fhir.dstu3.model.Patient fhirPatient) {
-		org.ehealth_connector.common.mdht.Patient retVal = null;
+		org.ehealth_connector.common.Patient retVal = null;
 		final List<Extension> extensions = fhirPatient
 				.getExtensionsByUrl(FhirCommon.urnUseAsNonLivingSubject);
 		if (!extensions.isEmpty()) {
 			// Create eHC Patient
-			retVal = new org.ehealth_connector.common.mdht.Patient();
+			retVal = new org.ehealth_connector.common.Patient();
 			retVal.setIsNonHumenSubject();
 		} else {
 			final Name patientName = new Name(
@@ -1791,7 +1791,7 @@ public class FhirCommon {
 			}
 
 			// Create eHC Patient
-			retVal = new org.ehealth_connector.common.mdht.Patient(patientName, gender,
+			retVal = new org.ehealth_connector.common.Patient(patientName, gender,
 					fhirPatient.getBirthDate());
 
 			// Add Addresses
@@ -1831,7 +1831,7 @@ public class FhirCommon {
 	 * @return the eHC Patient object </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Patient getPatient(
+	public static org.ehealth_connector.common.Patient getPatient(
 			org.hl7.fhir.dstu3.model.Reference orgRef) {
 		return getPatient(orgRef.getResource());
 	}
@@ -2007,7 +2007,7 @@ public class FhirCommon {
 	 *            any FHIR DomainResource containing the extension
 	 *            urnUseAsFunctionCode
 	 */
-	private static void setAuthorFuntionCode(org.ehealth_connector.common.mdht.Author author,
+	private static void setAuthorFuntionCode(org.ehealth_connector.common.Author author,
 			DomainResource fhirResource) {
 		final List<Extension> extensions = fhirResource
 				.getExtensionsByUrl(FhirCommon.urnUseAsFunctionCode);

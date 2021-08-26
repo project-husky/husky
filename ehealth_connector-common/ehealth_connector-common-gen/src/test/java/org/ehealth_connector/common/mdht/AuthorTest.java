@@ -23,6 +23,7 @@ import static org.junit.Assert.assertTrue;
 import java.util.Date;
 import java.util.List;
 
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
 import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
@@ -203,7 +204,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#addAddress(org.ehealth_connector.common.mdht.Address)}
+	 * {@link org.ehealth_connector.common.Author#addAddress(org.ehealth_connector.common.mdht.Address)}
 	 * .
 	 */
 	@Test
@@ -229,7 +230,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#addId(org.ehealth_connector.common.mdht.Identificator)}
+	 * {@link org.ehealth_connector.common.Author#addId(org.ehealth_connector.common.mdht.Identificator)}
 	 * .
 	 */
 	@Test
@@ -243,7 +244,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#addName(org.ehealth_connector.common.mdht.Name)}
+	 * {@link org.ehealth_connector.common.Author#addName(org.ehealth_connector.common.mdht.Name)}
 	 * .
 	 */
 	@Test
@@ -286,7 +287,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#Author(org.openhealthtools.mdht.uml.cda.Author)}
+	 * {@link org.ehealth_connector.common.Author#Author(org.openhealthtools.mdht.uml.cda.Author)}
 	 * .
 	 */
 	@Test
@@ -300,7 +301,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#Author(org.ehealth_connector.common.mdht.Name)}
+	 * {@link org.ehealth_connector.common.Author#Author(org.ehealth_connector.common.mdht.Name)}
 	 * .
 	 */
 	@Test
@@ -313,7 +314,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#Author(org.ehealth_connector.common.mdht.Name, java.lang.String)}
+	 * {@link org.ehealth_connector.common.Author#Author(org.ehealth_connector.common.mdht.Name, java.lang.String)}
 	 * .
 	 */
 	@Test
@@ -329,7 +330,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#copyMdhtAuthor()}.
+	 * {@link org.ehealth_connector.common.Author#copyMdhtAuthor()}.
 	 */
 	@Test
 	public void testCopyMdhtAuthor() {
@@ -340,7 +341,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#getCompleteName()}.
+	 * {@link org.ehealth_connector.common.Author#getCompleteName()}.
 	 */
 	@Test
 	public void testGetCompleteName() {
@@ -351,7 +352,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#getGlnAsIdentificator()}.
+	 * {@link org.ehealth_connector.common.Author#getGlnAsIdentificator()}.
 	 */
 	@Test
 	public void testGetGlnAsIdentificator() {
@@ -365,7 +366,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#getGln()}.
+	 * {@link org.ehealth_connector.common.Author#getGln()}.
 	 */
 	@Test
 	// @Ignore("setGln does not replace the gln set by constructor")
@@ -383,7 +384,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#getOrganization()}.
+	 * {@link org.ehealth_connector.common.Author#getOrganization()}.
 	 */
 	@Test
 	public void testSetGetOrganization() {
@@ -399,7 +400,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#getTelecoms()} .
+	 * {@link org.ehealth_connector.common.Author#getTelecoms()} .
 	 */
 	@Test
 	public void testSetGetTelecoms() {
@@ -414,7 +415,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#getTime()}.
+	 * {@link org.ehealth_connector.common.Author#getTime()}.
 	 */
 	@Test
 	@Ignore

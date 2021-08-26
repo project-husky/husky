@@ -23,9 +23,9 @@ import java.util.Date;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;

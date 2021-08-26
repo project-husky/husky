@@ -19,9 +19,9 @@ package org.ehealth_connector.fhir.structures.gen;
 import java.util.Date;
 
 import org.eclipse.emf.common.util.EList;
+import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Name;
-import org.ehealth_connector.common.mdht.Patient;
 import org.ehealth_connector.common.mdht.Telecoms;
 import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
 import org.ehealth_connector.common.utils.Util;

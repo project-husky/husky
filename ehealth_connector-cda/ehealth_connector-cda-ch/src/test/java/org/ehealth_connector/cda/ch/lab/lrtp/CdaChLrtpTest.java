@@ -36,7 +36,7 @@ import org.ehealth_connector.cda.ch.lab.lrqc.enums.SpecialtySections;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.LabObsList;
 import org.ehealth_connector.cda.ch.lab.lrtp.enums.ReportScopes;
 import org.ehealth_connector.cda.ihe.lab.ReferralOrderingPhysician;
-import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.mdht.IntendedRecipient;
 import org.junit.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;

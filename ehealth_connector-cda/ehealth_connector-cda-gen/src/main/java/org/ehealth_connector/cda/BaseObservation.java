@@ -25,8 +25,8 @@ import java.util.List;
 
 import org.ehealth_connector.cda.enums.ActSite;
 import org.ehealth_connector.cda.enums.VitalSignCodes;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Performer;
 import org.ehealth_connector.common.mdht.ReferenceRange;

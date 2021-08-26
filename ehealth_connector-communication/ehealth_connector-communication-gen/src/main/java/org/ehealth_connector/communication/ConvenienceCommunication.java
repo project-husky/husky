@@ -42,6 +42,7 @@ import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.ehealth_connector.communication.tls.CustomHttpsTLSv11v12SocketFactory;
 import org.ehealth_connector.communication.utils.AbstractAxis2Util;
+import org.ehealth_connector.communication.xd.storedquery.AbstractStoredQuery;
 import org.ehealth_connector.communication.xd.storedquery.FindDocumentsQuery;
 import org.ehealth_connector.communication.xd.storedquery.FindFoldersStoredQuery;
 import org.ehealth_connector.communication.xd.storedquery.StoredQueryInterface;
@@ -52,13 +53,17 @@ import org.ehealth_connector.xua.core.SecurityHeaderElement;
 import org.ehealth_connector.xua.exceptions.SerializeException;
 import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.serialization.impl.AssertionSerializerImpl;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
+import org.openehealth.ipf.commons.ihe.xds.core.requests.QueryRegistry;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.RetrieveDocumentSet;
+import org.openehealth.ipf.commons.ihe.xds.core.responses.QueryResponse;
+import org.openehealth.ipf.commons.ihe.xds.core.responses.RetrievedDocumentSet;
 import org.openhealthtools.ihe.atna.auditor.XDSSourceAuditor;
 import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
 import org.openhealthtools.ihe.common.hl7v2.CX;
 import org.openhealthtools.ihe.utils.OID;
 import org.openhealthtools.ihe.xds.XDSConstants;
-import org.openhealthtools.ihe.xds.consumer.B_Consumer;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.document.XDSDocument;
 import org.openhealthtools.ihe.xds.document.XDSDocumentFromStream;
@@ -68,7 +73,6 @@ import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 import org.openhealthtools.ihe.xds.metadata.FolderType;
 import org.openhealthtools.ihe.xds.metadata.SubmissionSetType;
 import org.openhealthtools.ihe.xds.metadata.extract.MetadataExtractionException;
-import org.openhealthtools.ihe.xds.response.XDSQueryResponseType;
 import org.openhealthtools.ihe.xds.response.XDSResponseType;
 import org.openhealthtools.ihe.xds.source.B_Source;
 import org.openhealthtools.ihe.xds.source.SubmitTransactionCompositionException;
@@ -221,10 +225,10 @@ public class ConvenienceCommunication extends CamelService {
 	 *            (it's texts will be ascii conform for registry purposes)
 	 * @return the document metadata (which have to be completed)</div>
 	 */
-	public DocumentMetadata addDocument(DocumentDescriptor desc, InputStream inputStream,
+	public Document addDocument(DocumentDescriptor desc, InputStream inputStream,
 			InputStream inputStream4Metadata) {
 		lastError = "";
-		DocumentMetadata retVal = null;
+		DocumentEntry retVal = null;
 		XDSDocument doc;
 		try {
 			XDSDocument doc4Metadata = null;
@@ -783,8 +787,9 @@ public class ConvenienceCommunication extends CamelService {
 	 * @return the OHT XDSQueryResponseType containing references instead of the
 	 *         complete document metadata</div>
 	 */
-	public XDSQueryResponseType queryDocumentReferencesOnly(FindDocumentsQuery queryParameter) {
-		return this.queryDocuments((StoredQueryInterface) queryParameter);
+	public QueryResponse queryDocumentReferencesOnly(FindDocumentsQuery queryParameter,
+			SecurityHeaderElement securityHeader) {
+		return this.queryDocuments(queryParameter, securityHeader);
 	}
 
 	/**
@@ -796,90 +801,111 @@ public class ConvenienceCommunication extends CamelService {
 	 * @return the OHT XDSQueryResponseType containing full document
 	 *         metadata</div>
 	 */
-	public XDSQueryResponseType queryDocuments(FindDocumentsQuery queryParameter) {
-		return this.queryDocuments((StoredQueryInterface) queryParameter);
+	public QueryResponse queryDocuments(FindDocumentsQuery queryParameter, SecurityHeaderElement securityHeader) {
+		return this.queryDocuments(queryParameter, securityHeader);
 	}
 
 	/**
-	 * <div class="en">Queries the registry of the affinity domain for all
-	 * documents satisfying the given query parameters.
+	 * <div class="en">Queries the registry of the affinity domain for all documents
+	 * satisfying the given query parameters.
 	 *
-	 * @param query
-	 *            one of the given queries (@see
-	 *            org.ehealth_connector.communication.storedquery and
-	 *            org.ehealth_connector.communication.storedquery.ch)
-	 * @return the OHT XDSQueryResponseType containing full document
-	 *         metadata</div>
+	 * @param query one of the given queries (@see
+	 *              org.ehealth_connector.communication.storedquery and
+	 *              org.ehealth_connector.communication.storedquery.ch)
+	 * @return the OHT XDSQueryResponseType containing full document metadata</div>
+	 * @throws Exception
 	 */
-	public XDSQueryResponseType queryDocuments(StoredQueryInterface query) {
-		lastError = "";
-		setDefaultKeystoreTruststore(affinityDomain.getRegistryDestination());
-		final B_Consumer consumer = new B_Consumer(
-				affinityDomain.getRegistryDestination().getUri());
+	public QueryResponse queryDocuments(AbstractStoredQuery query, SecurityHeaderElement securityHeader)
+			throws Exception {
+		/*
+		 * lastError = "";
+		 * setDefaultKeystoreTruststore(affinityDomain.getRegistryDestination()); final
+		 * B_Consumer consumer = new B_Consumer(
+		 * affinityDomain.getRegistryDestination().getUri());
+		 * 
+		 * try { return consumer.invokeStoredQuery(query.getOhtStoredQuery(), false); }
+		 * catch (final Exception e) { log.error("Exception", e); String message =
+		 * e.getMessage(); if (e.getCause() != null) message = e.getCause().getMessage()
+		 * + ": " + message; lastError = "Query for documents failed: " + message; if
+		 * (Util.isDebug()) e.printStackTrace();
+		 * 
+		 * }
+		 */
 
-		try {
-			return consumer.invokeStoredQuery(query.getOhtStoredQuery(), false);
-		} catch (final Exception e) {
-			log.error("Exception", e);
-			String message = e.getMessage();
-			if (e.getCause() != null)
-				message = e.getCause().getMessage() + ": " + message;
-			lastError = "Query for documents failed: " + message;
-			if (Util.isDebug())
-				e.printStackTrace();
 
-		}
-		return null;
+		final var queryRegistry = new QueryRegistry(query.getIpfQuery());
+
+		final var serverInLogger = "#serverInLogger";
+		final var serverOutLogger = "#serverOutLogger";
+		final var endpoint = String.format(
+				"xds-iti18://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
+				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", ""),
+				serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
+				atnaConfigMode == AtnaConfigMode.SECURE);
+		log.info("Sending request to '{}' endpoint", endpoint);
+		final var exchange = send(endpoint, queryRegistry, securityHeader, null);
+
+		return exchange.getMessage().getBody(QueryResponse.class);
 	}
 
 	/**
-	 * <div class="en">Queries the registry of the affinity domain for all
-	 * documents satisfying the given query parameters. This is useful if the
-	 * number of results is limited in the registry and your query would exceed
-	 * this limit. In this case, precise your query or do a query for references
-	 * first, choose the possible matches (e.g. the last 10 results) and then
-	 * query for metadata.
+	 * <div class="en">Queries the registry of the affinity domain for all documents
+	 * satisfying the given query parameters. This is useful if the number of
+	 * results is limited in the registry and your query would exceed this limit. In
+	 * this case, precise your query or do a query for references first, choose the
+	 * possible matches (e.g. the last 10 results) and then query for metadata.
 	 *
-	 * @param query
-	 *            one of the given queries (@see
-	 *            org.ehealth_connector.communication.storedquery and
-	 *            org.ehealth_connector.communication.storedquery.ch)
+	 * @param query one of the given queries (@see
+	 *              org.ehealth_connector.communication.storedquery and
+	 *              org.ehealth_connector.communication.storedquery.ch)
 	 * @return the OHT XDSQueryResponseType containing references instead of the
 	 *         complete document metadata</div>
+	 * @throws Exception
 	 */
-	public XDSQueryResponseType queryDocumentsReferencesOnly(StoredQueryInterface query) {
-		lastError = "";
-		setDefaultKeystoreTruststore(affinityDomain.getRegistryDestination());
-		final B_Consumer consumer = new B_Consumer(
-				affinityDomain.getRegistryDestination().getUri());
+	public QueryResponse queryDocumentsReferencesOnly(StoredQueryInterface query,
+			SecurityHeaderElement securityHeader) throws Exception {
+		/*
+		 * lastError = "";
+		 * setDefaultKeystoreTruststore(affinityDomain.getRegistryDestination()); final
+		 * B_Consumer consumer = new B_Consumer(
+		 * affinityDomain.getRegistryDestination().getUri());
+		 * 
+		 * try { return consumer.invokeStoredQuery(query.getOhtStoredQuery(), true); }
+		 * catch (final Exception e) { log.error("Exception", e); String message =
+		 * e.getMessage(); if (e.getCause() != null) message = e.getCause().getMessage()
+		 * + ": " + message; lastError = "Query for document references failed: " +
+		 * message; if (Util.isDebug()) e.printStackTrace();
+		 * 
+		 * } return null;
+		 */
 
-		try {
-			return consumer.invokeStoredQuery(query.getOhtStoredQuery(), true);
-		} catch (final Exception e) {
-			log.error("Exception", e);
-			String message = e.getMessage();
-			if (e.getCause() != null)
-				message = e.getCause().getMessage() + ": " + message;
-			lastError = "Query for document references failed: " + message;
-			if (Util.isDebug())
-				e.printStackTrace();
+		final var queryRegistry = new QueryRegistry(query.getIpfQuery());
 
-		}
-		return null;
+		final var serverInLogger = "#serverInLogger";
+		final var serverOutLogger = "#serverOutLogger";
+		final var endpoint = String.format(
+				"xds-iti18://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
+				affinityDomain.getRegistryDestination().getUri().toString().replace("https://", ""), serverInLogger,
+				serverInLogger, serverOutLogger, serverOutLogger, atnaConfigMode == AtnaConfigMode.SECURE);
+		log.info("Sending request to '{}' endpoint", endpoint);
+		final var exchange = send(endpoint, queryRegistry, securityHeader, null);
+
+		return exchange.getMessage().getBody(QueryResponse.class);
 	}
 
 	/**
 	 * <div class="en">Queries the document registry of the affinity domain for
 	 * documents, using a find documents query.
 	 *
-	 * @param queryParameter
-	 *            a findFoldersQuery object filled with your query parameters
-	 * @return the OHT XDSQueryResponseType containing full folder metadata
-	 *         </div>
+	 * @param queryParameter a findFoldersQuery object filled with your query
+	 *                       parameters
+	 * @return the OHT XDSQueryResponseType containing full folder metadata </div>
+	 * @throws Exception
 	 *
 	 */
-	public XDSQueryResponseType queryFolders(FindFoldersStoredQuery queryParameter) {
-		return this.queryDocuments(queryParameter);
+	public QueryResponse queryFolders(FindFoldersStoredQuery queryParameter, SecurityHeaderElement security)
+			throws Exception {
+		return this.queryDocuments(queryParameter, security);
 	}
 
 	/**
@@ -889,7 +915,7 @@ public class ConvenienceCommunication extends CamelService {
 	 * @return the OHT XDSRetrieveResponseType </div>
 	 * @throws Exception
 	 */
-	public RetrieveDocumentSet retrieveDocument(DocumentRequest docReq, SecurityHeaderElement securityHeader)
+	public RetrievedDocumentSet retrieveDocument(DocumentRequest docReq, SecurityHeaderElement securityHeader)
 			throws Exception {
 		return retrieveDocuments(new DocumentRequest[] { docReq }, securityHeader);
 	}
@@ -901,7 +927,7 @@ public class ConvenienceCommunication extends CamelService {
 	 * @return the OHT XDSRetrieveResponseType </div>
 	 * @throws Exception
 	 */
-	public RetrieveDocumentSet retrieveDocuments(DocumentRequest[] docReq, SecurityHeaderElement securityHeader)
+	public RetrievedDocumentSet retrieveDocuments(DocumentRequest[] docReq, SecurityHeaderElement securityHeader)
 			throws Exception {
 		final var retrieveDocumentSet = new RetrieveDocumentSet();
 
@@ -911,17 +937,18 @@ public class ConvenienceCommunication extends CamelService {
 			}
 		}
 
-		final var serverInLogger = "#serverInLogger2";
-		final var serverOutLogger = "#serverOutLogger2";
+		final var serverInLogger = "#serverInLogger";
+		final var serverOutLogger = "#serverOutLogger";
 		final var endpoint = String.format(
 				"xds-iti43://%s/xds/iti43?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
-				this.affinityDomain.getRepositoryDestination().getUri().toURL().getPath(), serverInLogger,
+				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", ""),
+				serverInLogger,
 				serverInLogger, serverOutLogger, serverOutLogger,
 				atnaConfigMode == AtnaConfigMode.SECURE);
 		log.info("Sending request to '{}' endpoint", endpoint);
-		final var exchange = send(endpoint, retrieveDocumentSet, securityHeader);
+		final var exchange = send(endpoint, retrieveDocumentSet, securityHeader, null);
 
-		return exchange.getMessage().getBody(RetrieveDocumentSet.class);
+		return exchange.getMessage().getBody(RetrievedDocumentSet.class);
 	}
 
 	/**

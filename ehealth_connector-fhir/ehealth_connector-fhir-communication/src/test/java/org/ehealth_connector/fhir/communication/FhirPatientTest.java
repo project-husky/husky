@@ -22,9 +22,9 @@ import static org.junit.Assert.assertTrue;
 import java.util.Date;
 import java.util.Map;
 
+import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
 import org.ehealth_connector.common.mdht.Name;
-import org.ehealth_connector.common.mdht.Patient;
 import org.ehealth_connector.common.mdht.enums.CountryCode;
 import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
 import org.ehealth_connector.common.utils.DateUtil;
@@ -428,7 +428,7 @@ public class FhirPatientTest {
 	@Test
 	public void testFhirPatientAddress() {
 		final Name name = new Name("given", "family", "prefix", "suffix");
-		final org.ehealth_connector.common.mdht.Patient conveniencePatient = new org.ehealth_connector.common.mdht.Patient(
+		final org.ehealth_connector.common.Patient conveniencePatient = new org.ehealth_connector.common.Patient(
 				name, org.ehealth_connector.common.mdht.enums.AdministrativeGender.MALE,
 				new Date());
 

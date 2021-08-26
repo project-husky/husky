@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.ehealth_connector.cda.BaseObservation;
-import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.enums.StatusCode;
 import org.ehealth_connector.common.utils.Util;

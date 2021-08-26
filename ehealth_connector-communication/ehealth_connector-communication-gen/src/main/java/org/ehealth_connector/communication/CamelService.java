@@ -1,7 +1,9 @@
 package org.ehealth_connector.communication;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.namespace.QName;
 
@@ -19,12 +21,14 @@ import org.openehealth.ipf.platform.camel.ihe.ws.AbstractWsEndpoint;
 import org.opensaml.core.xml.XMLObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class CamelService implements CamelContextAware {
 
 	/** The SLF4J logger instance. */
 	private static Logger log = LoggerFactory.getLogger(CamelService.class);
 
+	@Autowired
 	private CamelContext camelContext;
 
 	@Override
@@ -66,12 +70,33 @@ public abstract class CamelService implements CamelContextAware {
 
 	}
 
-	protected Exchange send(String endpoint, Object body, SecurityHeaderElement securityHeaderElement)
+	protected void addHttpHeader(Exchange exchange, String action) {
+
+		Map<String, String> outgoingHeaders = CastUtils
+				.cast((Map<String, String>) exchange.getIn().getHeader(AbstractWsEndpoint.OUTGOING_HTTP_HEADERS));
+
+		if (outgoingHeaders == null) {
+			outgoingHeaders = new HashMap<>();
+		}
+
+		outgoingHeaders.put("Accept", "application/soap+xml");
+		outgoingHeaders.put("Content-Type",
+				String.format("application/soap+xml; charset=UTF-8; action=\"%s\"", action));
+		exchange.getIn().setHeader(AbstractWsEndpoint.OUTGOING_HTTP_HEADERS, outgoingHeaders);
+
+	}
+
+	protected Exchange send(String endpoint, Object body, SecurityHeaderElement securityHeaderElement, String action)
 			throws Exception {
-		Exchange exchange = new DefaultExchange(getCamelContext());
+		var camelContext = getCamelContext();
+		Exchange exchange = new DefaultExchange(camelContext);
 		exchange.getIn().setBody(body);
 		if (securityHeaderElement != null) {
 			addWssHeader(securityHeaderElement, exchange);
+		}
+
+		if (action != null && !action.isEmpty()) {
+			addHttpHeader(exchange, action);
 		}
 
 		try (var template = camelContext.createProducerTemplate()) {

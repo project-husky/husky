@@ -25,7 +25,7 @@ import java.util.List;
 
 import org.ehealth_connector.cda.BaseObservation;
 import org.ehealth_connector.cda.ObservationMediaEntry;
-import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Name;
 import org.ehealth_connector.common.mdht.Performer;
@@ -42,7 +42,7 @@ public class LaboratoryBatteryOrganizerTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.lab.lrep.LaboratoryBatteryOrganizer#addAuthor(org.ehealth_connector.common.mdht.Author)}.
+	 * {@link org.ehealth_connector.cda.ch.lab.lrep.LaboratoryBatteryOrganizer#addAuthor(org.ehealth_connector.common.Author)}.
 	 */
 	@Test
 	public void testAddGetAuthor() {

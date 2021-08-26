@@ -23,7 +23,7 @@ import java.util.List;
 import org.ehealth_connector.cda.BaseVitalSignObservation;
 import org.ehealth_connector.cda.BaseVitalSignsOrganizer;
 import org.ehealth_connector.cda.ch.AbstractCdaChV1;
-import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.enums.NullFlavor;
 import org.openhealthtools.ihe.utils.UUID;

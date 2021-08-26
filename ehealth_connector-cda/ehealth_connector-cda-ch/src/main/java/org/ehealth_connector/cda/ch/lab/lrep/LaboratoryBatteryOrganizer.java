@@ -26,7 +26,7 @@ import org.ehealth_connector.cda.BaseObservationComparator;
 import org.ehealth_connector.cda.ObservationMediaEntry;
 import org.ehealth_connector.cda.ihe.lab.BaseLaboratoryBatteryOrganizer;
 import org.ehealth_connector.cda.utils.CdaUtilMdht;
-import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Performer;
 import org.ehealth_connector.common.utils.DateUtilMdht;

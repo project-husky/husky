@@ -18,12 +18,12 @@ package org.ehealth_connector.common.testhelpers;
 
 import java.util.Random;
 
-import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Name;
 import org.ehealth_connector.common.mdht.Organization;
-import org.ehealth_connector.common.mdht.Patient;
 import org.ehealth_connector.common.mdht.Telecoms;
 import org.ehealth_connector.common.mdht.Value;
 

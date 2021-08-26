@@ -25,13 +25,13 @@ import java.util.List;
 
 import org.ehealth_connector.cda.Section;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
+import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Name;
 import org.ehealth_connector.common.mdht.Organization;
-import org.ehealth_connector.common.mdht.Patient;
 import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
@@ -53,7 +53,7 @@ public class CdaChLrepV1GeneralReportTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport#addAuthor(org.ehealth_connector.common.mdht.Author)}.
+	 * {@link org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport#addAuthor(org.ehealth_connector.common.Author)}.
 	 */
 	@Test
 	public void testAddGetAuthor() {
@@ -248,7 +248,7 @@ public class CdaChLrepV1GeneralReportTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport#setPatient(org.ehealth_connector.common.mdht.Patient)}.
+	 * {@link org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport#setPatient(org.ehealth_connector.common.Patient)}.
 	 */
 	@Test
 	public void testSetGetPatient() {

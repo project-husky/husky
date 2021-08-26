@@ -23,11 +23,11 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
 
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.ch.enums.AuthorRole;
 import org.ehealth_connector.common.ch.enums.AuthorSpeciality;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.mdht.Address;
-import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Name;
 import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
