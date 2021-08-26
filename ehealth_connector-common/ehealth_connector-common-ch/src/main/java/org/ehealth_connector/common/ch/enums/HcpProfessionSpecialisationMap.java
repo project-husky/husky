@@ -26,949 +26,604 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
- * <!-- @formatter:off -->
  * Enumeration of HCProfessional.hcProfessionSpecialisationMap values
- *
- * <div class="en">no designation found for language ENGLISH</div>
- * <div class="de">no designation found for language GERMAN</div>
- * <div class="fr">no designation found for language FRENCH</div>
- * <div class="it">no designation found for language ITALIAN</div>
- *
- * Identifier: 2.16.756.5.30.1.127.3.10.8.3
- * Effective date: 2020-05-18 20:00
- * Version: 202004.1-stable
+ * <p>
+ * EN: No designation found.<br>
+ * DE: No designation found.<br>
+ * FR: No designation found.<br>
+ * IT: No designation found.<br>
+ * <p>
+ * Identifier: 2.16.756.5.30.1.127.3.10.8.3<br>
+ * Effective date: 2020-05-18 20:00<br>
+ * Version: 202004.1-stable<br>
  * Status: FINAL
- * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-04-22")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-08-26")
 public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Allergology and clinical immunology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Allergology and clinical immunology<br>
 	 */
-	ALLERGOLOGY_AND_CLINICAL_IMMUNOLOGY_L1("1019", "2.16.756.5.30.1.127.3.5",
-			"Allergology and clinical immunology", "Allergology and clinical immunology",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	ALLERGOLOGY_AND_CLINICAL_IMMUNOLOGY_L1("1019", "2.16.756.5.30.1.127.3.5", "Allergology and clinical immunology", "Allergology and clinical immunology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Anaesthesiology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Anaesthesiology<br>
 	 */
-	ANAESTHESIOLOGY_L1("1012", "2.16.756.5.30.1.127.3.5", "Anaesthesiology", "Anaesthesiology",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	ANAESTHESIOLOGY_L1("1012", "2.16.756.5.30.1.127.3.5", "Anaesthesiology", "Anaesthesiology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Angiology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Angiology<br>
 	 */
-	ANGIOLOGY_L1("1041", "2.16.756.5.30.1.127.3.5", "Angiology", "Angiology", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	ANGIOLOGY_L1("1041", "2.16.756.5.30.1.127.3.5", "Angiology", "Angiology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Cardiac and thoracic vascular surgery</div>
-	 * <!-- @formatter:on -->
+	 * EN: Cardiac and thoracic vascular surgery<br>
 	 */
-	CARDIAC_AND_THORACIC_VASCULAR_SURGERY_L1("1004", "2.16.756.5.30.1.127.3.5",
-			"Cardiac and thoracic vascular surgery", "Cardiac and thoracic vascular surgery",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	CARDIAC_AND_THORACIC_VASCULAR_SURGERY_L1("1004", "2.16.756.5.30.1.127.3.5", "Cardiac and thoracic vascular surgery", "Cardiac and thoracic vascular surgery", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Cardiology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Cardiology<br>
 	 */
-	CARDIOLOGY_L1("1025", "2.16.756.5.30.1.127.3.5", "Cardiology", "Cardiology", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	CARDIOLOGY_L1("1025", "2.16.756.5.30.1.127.3.5", "Cardiology", "Cardiology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Child and adolescent psychiatry and psychotherapy</div>
-	 * <!-- @formatter:on -->
+	 * EN: Child and adolescent psychiatry and psychotherapy<br>
 	 */
-	CHILD_AND_ADOLESCENT_PSYCHIATRY_AND_PSYCHOTHERAPY_L1("1027", "2.16.756.5.30.1.127.3.5",
-			"Child and adolescent psychiatry and psychotherapy",
-			"Child and adolescent psychiatry and psychotherapy", "TOTRANSLATE", "TOTRANSLATE",
-			"TOTRANSLATE"),
+	CHILD_AND_ADOLESCENT_PSYCHIATRY_AND_PSYCHOTHERAPY_L1("1027", "2.16.756.5.30.1.127.3.5", "Child and adolescent psychiatry and psychotherapy", "Child and adolescent psychiatry and psychotherapy", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Child and adolescent psychology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Child and adolescent psychology<br>
 	 */
-	CHILD_AND_ADOLESCENT_PSYCHOLOGY_L1("1055", "2.16.756.5.30.1.127.3.5",
-			"Child and adolescent psychology", "Child and adolescent psychology", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	CHILD_AND_ADOLESCENT_PSYCHOLOGY_L1("1055", "2.16.756.5.30.1.127.3.5", "Child and adolescent psychology", "Child and adolescent psychology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Chiropractic specialist</div>
-	 * <!-- @formatter:on -->
+	 * EN: Chiropractic specialist<br>
 	 */
-	CHIROPRACTIC_SPECIALIST_L1("1011", "2.16.756.5.30.1.127.3.5", "Chiropractic specialist",
-			"Chiropractic specialist", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	CHIROPRACTIC_SPECIALIST_L1("1011", "2.16.756.5.30.1.127.3.5", "Chiropractic specialist", "Chiropractic specialist", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Chiropractor (occupation)</div>
-	 * <!-- @formatter:on -->
+	 * EN: Chiropractor (occupation)<br>
 	 */
-	CHIROPRACTOR_OCCUPATION("3842006", "2.16.840.1.113883.6.96", "Chiropractor (occupation)",
-			"Chiropractor (occupation)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	CHIROPRACTOR_OCCUPATION("3842006", "2.16.840.1.113883.6.96", "Chiropractor (occupation)", "Chiropractor (occupation)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Clinical pharmacology and toxicology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Clinical pharmacology and toxicology<br>
 	 */
-	CLINICAL_PHARMACOLOGY_AND_TOXICOLOGY_L1("1029", "2.16.756.5.30.1.127.3.5",
-			"Clinical pharmacology and toxicology", "Clinical pharmacology and toxicology",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	CLINICAL_PHARMACOLOGY_AND_TOXICOLOGY_L1("1029", "2.16.756.5.30.1.127.3.5", "Clinical pharmacology and toxicology", "Clinical pharmacology and toxicology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Clinical psychology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Clinical psychology<br>
 	 */
-	CLINICAL_PSYCHOLOGY_L1("1056", "2.16.756.5.30.1.127.3.5", "Clinical psychology",
-			"Clinical psychology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	CLINICAL_PSYCHOLOGY_L1("1056", "2.16.756.5.30.1.127.3.5", "Clinical psychology", "Clinical psychology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Community pharmacy</div>
-	 * <!-- @formatter:on -->
+	 * EN: Community pharmacy<br>
 	 */
-	COMMUNITY_PHARMACY_L1("1052", "2.16.756.5.30.1.127.3.5", "Community pharmacy",
-			"Community pharmacy", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	COMMUNITY_PHARMACY_L1("1052", "2.16.756.5.30.1.127.3.5", "Community pharmacy", "Community pharmacy", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Dentist (occupation)</div>
-	 * <!-- @formatter:on -->
+	 * EN: Dentist (occupation)<br>
 	 */
-	DENTIST_OCCUPATION("106289002", "2.16.840.1.113883.6.96", "Dentist (occupation)",
-			"Dentist (occupation)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	DENTIST_OCCUPATION("106289002", "2.16.840.1.113883.6.96", "Dentist (occupation)", "Dentist (occupation)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Dermatology and venereology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Dermatology and venereology<br>
 	 */
-	DERMATOLOGY_AND_VENEREOLOGY_L1("1021", "2.16.756.5.30.1.127.3.5", "Dermatology and venereology",
-			"Dermatology and venereology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	DERMATOLOGY_AND_VENEREOLOGY_L1("1021", "2.16.756.5.30.1.127.3.5", "Dermatology and venereology", "Dermatology and venereology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Endocrinology – Diabetology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Endocrinology – Diabetology<br>
 	 */
-	ENDOCRINOLOGY_DIABETOLOGY_L1("1022", "2.16.756.5.30.1.127.3.5", "Endocrinology – Diabetology",
-			"Endocrinology – Diabetology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	ENDOCRINOLOGY_DIABETOLOGY_L1("1022", "2.16.756.5.30.1.127.3.5", "Endocrinology – Diabetology", "Endocrinology – Diabetology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Forensic medicine</div>
-	 * <!-- @formatter:on -->
+	 * EN: Forensic medicine<br>
 	 */
-	FORENSIC_MEDICINE_L1("1046", "2.16.756.5.30.1.127.3.5", "Forensic medicine",
-			"Forensic medicine", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	FORENSIC_MEDICINE_L1("1046", "2.16.756.5.30.1.127.3.5", "Forensic medicine", "Forensic medicine", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gastroenterology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Gastroenterology<br>
 	 */
-	GASTROENTEROLOGY_L1("1023", "2.16.756.5.30.1.127.3.5", "Gastroenterology", "Gastroenterology",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	GASTROENTEROLOGY_L1("1023", "2.16.756.5.30.1.127.3.5", "Gastroenterology", "Gastroenterology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">General internal medicine</div>
-	 * <!-- @formatter:on -->
+	 * EN: General internal medicine<br>
 	 */
-	GENERAL_INTERNAL_MEDICINE_L1("1051", "2.16.756.5.30.1.127.3.5", "General internal medicine",
-			"General internal medicine", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	GENERAL_INTERNAL_MEDICINE_L1("1051", "2.16.756.5.30.1.127.3.5", "General internal medicine", "General internal medicine", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">General medical practitioner</div>
-	 * <!-- @formatter:on -->
+	 * EN: General medical practitioner<br>
 	 */
-	GENERAL_MEDICAL_PRACTITIONER_L1("1040", "2.16.756.5.30.1.127.3.5",
-			"General medical practitioner", "General medical practitioner", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	GENERAL_MEDICAL_PRACTITIONER_L1("1040", "2.16.756.5.30.1.127.3.5", "General medical practitioner", "General medical practitioner", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gynaecology and obstetrics</div>
-	 * <!-- @formatter:on -->
+	 * EN: Gynaecology and obstetrics<br>
 	 */
-	GYNAECOLOGY_AND_OBSTETRICS_L1("1003", "2.16.756.5.30.1.127.3.5", "Gynaecology and obstetrics",
-			"Gynaecology and obstetrics", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	GYNAECOLOGY_AND_OBSTETRICS_L1("1003", "2.16.756.5.30.1.127.3.5", "Gynaecology and obstetrics", "Gynaecology and obstetrics", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Haematology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Haematology<br>
 	 */
-	HAEMATOLOGY_L1("1024", "2.16.756.5.30.1.127.3.5", "Haematology", "Haematology", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	HAEMATOLOGY_L1("1024", "2.16.756.5.30.1.127.3.5", "Haematology", "Haematology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Hand surgery</div>
-	 * <!-- @formatter:on -->
+	 * EN: Hand surgery<br>
 	 */
-	HAND_SURGERY_L1("1059", "2.16.756.5.30.1.127.3.5", "Hand surgery", "Hand surgery",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	HAND_SURGERY_L1("1059", "2.16.756.5.30.1.127.3.5", "Hand surgery", "Hand surgery", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Health psychology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Health psychology<br>
 	 */
-	HEALTH_PSYCHOLOGY_L1("1058", "2.16.756.5.30.1.127.3.5", "Health psychology",
-			"Health psychology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	HEALTH_PSYCHOLOGY_L1("1058", "2.16.756.5.30.1.127.3.5", "Health psychology", "Health psychology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Hospital pharmacy</div>
-	 * <!-- @formatter:on -->
+	 * EN: Hospital pharmacy<br>
 	 */
-	HOSPITAL_PHARMACY_L1("1053", "2.16.756.5.30.1.127.3.5", "Hospital pharmacy",
-			"Hospital pharmacy", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	HOSPITAL_PHARMACY_L1("1053", "2.16.756.5.30.1.127.3.5", "Hospital pharmacy", "Hospital pharmacy", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Infectology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Infectology<br>
 	 */
-	INFECTOLOGY_L1("1039", "2.16.756.5.30.1.127.3.5", "Infectology", "Infectology", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	INFECTOLOGY_L1("1039", "2.16.756.5.30.1.127.3.5", "Infectology", "Infectology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Intensive care medicine</div>
-	 * <!-- @formatter:on -->
+	 * EN: Intensive care medicine<br>
 	 */
-	INTENSIVE_CARE_MEDICINE_L1("1042", "2.16.756.5.30.1.127.3.5", "Intensive care medicine",
-			"Intensive care medicine", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	INTENSIVE_CARE_MEDICINE_L1("1042", "2.16.756.5.30.1.127.3.5", "Intensive care medicine", "Intensive care medicine", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Medical genetics</div>
-	 * <!-- @formatter:on -->
+	 * EN: Medical genetics<br>
 	 */
-	MEDICAL_GENETICS_L1("1043", "2.16.756.5.30.1.127.3.5", "Medical genetics", "Medical genetics",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	MEDICAL_GENETICS_L1("1043", "2.16.756.5.30.1.127.3.5", "Medical genetics", "Medical genetics", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Medical oncology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Medical oncology<br>
 	 */
-	MEDICAL_ONCOLOGY_L1("1044", "2.16.756.5.30.1.127.3.5", "Medical oncology", "Medical oncology",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	MEDICAL_ONCOLOGY_L1("1044", "2.16.756.5.30.1.127.3.5", "Medical oncology", "Medical oncology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Nephrology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Nephrology<br>
 	 */
-	NEPHROLOGY_L1("1033", "2.16.756.5.30.1.127.3.5", "Nephrology", "Nephrology", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	NEPHROLOGY_L1("1033", "2.16.756.5.30.1.127.3.5", "Nephrology", "Nephrology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Neurology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Neurology<br>
 	 */
-	NEUROLOGY_L1("1014", "2.16.756.5.30.1.127.3.5", "Neurology", "Neurology", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	NEUROLOGY_L1("1014", "2.16.756.5.30.1.127.3.5", "Neurology", "Neurology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Neuropsychology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Neuropsychology<br>
 	 */
-	NEUROPSYCHOLOGY_L1("1057", "2.16.756.5.30.1.127.3.5", "Neuropsychology", "Neuropsychology",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	NEUROPSYCHOLOGY_L1("1057", "2.16.756.5.30.1.127.3.5", "Neuropsychology", "Neuropsychology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Neurosurgery</div>
-	 * <!-- @formatter:on -->
+	 * EN: Neurosurgery<br>
 	 */
-	NEUROSURGERY_L1("1013", "2.16.756.5.30.1.127.3.5", "Neurosurgery", "Neurosurgery",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	NEUROSURGERY_L1("1013", "2.16.756.5.30.1.127.3.5", "Neurosurgery", "Neurosurgery", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Nuclear medicine</div>
-	 * <!-- @formatter:on -->
+	 * EN: Nuclear medicine<br>
 	 */
-	NUCLEAR_MEDICINE_L1("1031", "2.16.756.5.30.1.127.3.5", "Nuclear medicine", "Nuclear medicine",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	NUCLEAR_MEDICINE_L1("1031", "2.16.756.5.30.1.127.3.5", "Nuclear medicine", "Nuclear medicine", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Occupational medicine</div>
-	 * <!-- @formatter:on -->
+	 * EN: Occupational medicine<br>
 	 */
-	OCCUPATIONAL_MEDICINE_L1("1020", "2.16.756.5.30.1.127.3.5", "Occupational medicine",
-			"Occupational medicine", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	OCCUPATIONAL_MEDICINE_L1("1020", "2.16.756.5.30.1.127.3.5", "Occupational medicine", "Occupational medicine", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Ophthalmology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Ophthalmology<br>
 	 */
-	OPHTHALMOLOGY_L1("1007", "2.16.756.5.30.1.127.3.5", "Ophthalmology", "Ophthalmology",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	OPHTHALMOLOGY_L1("1007", "2.16.756.5.30.1.127.3.5", "Ophthalmology", "Ophthalmology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Oral and maxillofacial surgery</div>
-	 * <!-- @formatter:on -->
+	 * EN: Oral and maxillofacial surgery<br>
 	 */
-	ORAL_AND_MAXILLOFACIAL_SURGERY_L1("1026", "2.16.756.5.30.1.127.3.5",
-			"Oral and maxillofacial surgery", "Oral and maxillofacial surgery", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	ORAL_AND_MAXILLOFACIAL_SURGERY_L1("1026", "2.16.756.5.30.1.127.3.5", "Oral and maxillofacial surgery", "Oral and maxillofacial surgery", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Oral surgery</div>
-	 * <!-- @formatter:on -->
+	 * EN: Oral surgery<br>
 	 */
-	ORAL_SURGERY_L1("1047", "2.16.756.5.30.1.127.3.5", "Oral surgery", "Oral surgery",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	ORAL_SURGERY_L1("1047", "2.16.756.5.30.1.127.3.5", "Oral surgery", "Oral surgery", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Orthodontics</div>
-	 * <!-- @formatter:on -->
+	 * EN: Orthodontics<br>
 	 */
-	ORTHODONTICS_L1("1010", "2.16.756.5.30.1.127.3.5", "Orthodontics", "Orthodontics",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	ORTHODONTICS_L1("1010", "2.16.756.5.30.1.127.3.5", "Orthodontics", "Orthodontics", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Orthopaedic surgery and traumatology of the locomotor apparatus</div>
-	 * <!-- @formatter:on -->
+	 * EN: Orthopaedic surgery and traumatology of the locomotor apparatus<br>
 	 */
-	ORTHOPAEDIC_SURGERY_AND_TRAUMATOLOGY_OF_THE_LOCOMOTOR_APPARATUS_L1("1015",
-			"2.16.756.5.30.1.127.3.5",
-			"Orthopaedic surgery and traumatology of the locomotor apparatus",
-			"Orthopaedic surgery and traumatology of the locomotor apparatus", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	ORTHOPAEDIC_SURGERY_AND_TRAUMATOLOGY_OF_THE_LOCOMOTOR_APPARATUS_L1("1015", "2.16.756.5.30.1.127.3.5", "Orthopaedic surgery and traumatology of the locomotor apparatus", "Orthopaedic surgery and traumatology of the locomotor apparatus", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Otorhinolaryngology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Otorhinolaryngology<br>
 	 */
-	OTORHINOLARYNGOLOGY_L1("1008", "2.16.756.5.30.1.127.3.5", "Otorhinolaryngology",
-			"Otorhinolaryngology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	OTORHINOLARYNGOLOGY_L1("1008", "2.16.756.5.30.1.127.3.5", "Otorhinolaryngology", "Otorhinolaryngology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Paediatrics</div>
-	 * <!-- @formatter:on -->
+	 * EN: Paediatrics<br>
 	 */
-	PAEDIATRICS_L1("1006", "2.16.756.5.30.1.127.3.5", "Paediatrics", "Paediatrics", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	PAEDIATRICS_L1("1006", "2.16.756.5.30.1.127.3.5", "Paediatrics", "Paediatrics", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Paediatric surgery</div>
-	 * <!-- @formatter:on -->
+	 * EN: Paediatric surgery<br>
 	 */
-	PAEDIATRIC_SURGERY_L1("1028", "2.16.756.5.30.1.127.3.5", "Paediatric surgery",
-			"Paediatric surgery", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	PAEDIATRIC_SURGERY_L1("1028", "2.16.756.5.30.1.127.3.5", "Paediatric surgery", "Paediatric surgery", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Paradontology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Paradontology<br>
 	 */
-	PARADONTOLOGY_L1("1048", "2.16.756.5.30.1.127.3.5", "Paradontology", "Paradontology",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	PARADONTOLOGY_L1("1048", "2.16.756.5.30.1.127.3.5", "Paradontology", "Paradontology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Pathology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Pathology<br>
 	 */
-	PATHOLOGY_L1("1009", "2.16.756.5.30.1.127.3.5", "Pathology", "Pathology", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	PATHOLOGY_L1("1009", "2.16.756.5.30.1.127.3.5", "Pathology", "Pathology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Pharmaceutical medicine</div>
-	 * <!-- @formatter:on -->
+	 * EN: Pharmaceutical medicine<br>
 	 */
-	PHARMACEUTICAL_MEDICINE_L1("1045", "2.16.756.5.30.1.127.3.5", "Pharmaceutical medicine",
-			"Pharmaceutical medicine", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	PHARMACEUTICAL_MEDICINE_L1("1045", "2.16.756.5.30.1.127.3.5", "Pharmaceutical medicine", "Pharmaceutical medicine", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Pharmacist (occupation)</div>
-	 * <!-- @formatter:on -->
+	 * EN: Pharmacist (occupation)<br>
 	 */
-	PHARMACIST_OCCUPATION("46255001", "2.16.840.1.113883.6.96", "Pharmacist (occupation)",
-			"Pharmacist (occupation)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	PHARMACIST_OCCUPATION("46255001", "2.16.840.1.113883.6.96", "Pharmacist (occupation)", "Pharmacist (occupation)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Physical medicine and rehabilitation</div>
-	 * <!-- @formatter:on -->
+	 * EN: Physical medicine and rehabilitation<br>
 	 */
-	PHYSICAL_MEDICINE_AND_REHABILITATION_L1("1034", "2.16.756.5.30.1.127.3.5",
-			"Physical medicine and rehabilitation", "Physical medicine and rehabilitation",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	PHYSICAL_MEDICINE_AND_REHABILITATION_L1("1034", "2.16.756.5.30.1.127.3.5", "Physical medicine and rehabilitation", "Physical medicine and rehabilitation", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Physician (occupation)</div>
-	 * <!-- @formatter:on -->
+	 * EN: Physician (occupation)<br>
 	 */
-	PHYSICIAN_OCCUPATION("309343006", "2.16.840.1.113883.6.96", "Physician (occupation)",
-			"Physician (occupation)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	PHYSICIAN_OCCUPATION("309343006", "2.16.840.1.113883.6.96", "Physician (occupation)", "Physician (occupation)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Plastic, reconstructive and aesthetic surgery</div>
-	 * <!-- @formatter:on -->
+	 * EN: Plastic, reconstructive and aesthetic surgery<br>
 	 */
-	PLASTIC_RECONSTRUCTIVE_AND_AESTHETIC_SURGERY_L1("1035", "2.16.756.5.30.1.127.3.5",
-			"Plastic, reconstructive and aesthetic surgery",
-			"Plastic, reconstructive and aesthetic surgery", "TOTRANSLATE", "TOTRANSLATE",
-			"TOTRANSLATE"),
+	PLASTIC_RECONSTRUCTIVE_AND_AESTHETIC_SURGERY_L1("1035", "2.16.756.5.30.1.127.3.5", "Plastic, reconstructive and aesthetic surgery", "Plastic, reconstructive and aesthetic surgery", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Pneumology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Pneumology<br>
 	 */
-	PNEUMOLOGY_L1("1016", "2.16.756.5.30.1.127.3.5", "Pneumology", "Pneumology", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	PNEUMOLOGY_L1("1016", "2.16.756.5.30.1.127.3.5", "Pneumology", "Pneumology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Prevention and public health</div>
-	 * <!-- @formatter:on -->
+	 * EN: Prevention and public health<br>
 	 */
-	PREVENTION_AND_PUBLIC_HEALTH_L1("1036", "2.16.756.5.30.1.127.3.5",
-			"Prevention and public health", "Prevention and public health", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	PREVENTION_AND_PUBLIC_HEALTH_L1("1036", "2.16.756.5.30.1.127.3.5", "Prevention and public health", "Prevention and public health", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Psychiatry and psychotherapy</div>
-	 * <!-- @formatter:on -->
+	 * EN: Psychiatry and psychotherapy<br>
 	 */
-	PSYCHIATRY_AND_PSYCHOTHERAPY_L1("1017", "2.16.756.5.30.1.127.3.5",
-			"Psychiatry and psychotherapy", "Psychiatry and psychotherapy", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	PSYCHIATRY_AND_PSYCHOTHERAPY_L1("1017", "2.16.756.5.30.1.127.3.5", "Psychiatry and psychotherapy", "Psychiatry and psychotherapy", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Psychologist (occupation)</div>
-	 * <!-- @formatter:on -->
+	 * EN: Psychologist (occupation)<br>
 	 */
-	PSYCHOLOGIST_OCCUPATION("59944000", "2.16.840.1.113883.6.96", "Psychologist (occupation)",
-			"Psychologist (occupation)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	PSYCHOLOGIST_OCCUPATION("59944000", "2.16.840.1.113883.6.96", "Psychologist (occupation)", "Psychologist (occupation)", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Psychotherapy</div>
-	 * <!-- @formatter:on -->
+	 * EN: Psychotherapy<br>
 	 */
-	PSYCHOTHERAPY_L1("1054", "2.16.756.5.30.1.127.3.5", "Psychotherapy", "Psychotherapy",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	PSYCHOTHERAPY_L1("1054", "2.16.756.5.30.1.127.3.5", "Psychotherapy", "Psychotherapy", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Radiology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Radiology<br>
 	 */
-	RADIOLOGY_L1("1030", "2.16.756.5.30.1.127.3.5", "Radiology", "Radiology", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	RADIOLOGY_L1("1030", "2.16.756.5.30.1.127.3.5", "Radiology", "Radiology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Radio-oncology / radiotherapy</div>
-	 * <!-- @formatter:on -->
+	 * EN: Radio-oncology / radiotherapy<br>
 	 */
-	RADIO_ONCOLOGY_RADIOTHERAPY_L1("1032", "2.16.756.5.30.1.127.3.5",
-			"Radio-oncology / radiotherapy", "Radio-oncology / radiotherapy", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	RADIO_ONCOLOGY_RADIOTHERAPY_L1("1032", "2.16.756.5.30.1.127.3.5", "Radio-oncology / radiotherapy", "Radio-oncology / radiotherapy", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Reconstructive dentistry</div>
-	 * <!-- @formatter:on -->
+	 * EN: Reconstructive dentistry<br>
 	 */
-	RECONSTRUCTIVE_DENTISTRY_L1("1049", "2.16.756.5.30.1.127.3.5", "Reconstructive dentistry",
-			"Reconstructive dentistry", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	RECONSTRUCTIVE_DENTISTRY_L1("1049", "2.16.756.5.30.1.127.3.5", "Reconstructive dentistry", "Reconstructive dentistry", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Rheumatology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Rheumatology<br>
 	 */
-	RHEUMATOLOGY_L1("1037", "2.16.756.5.30.1.127.3.5", "Rheumatology", "Rheumatology",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	RHEUMATOLOGY_L1("1037", "2.16.756.5.30.1.127.3.5", "Rheumatology", "Rheumatology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Surgery</div>
-	 * <!-- @formatter:on -->
+	 * EN: Surgery<br>
 	 */
-	SURGERY_L1("1002", "2.16.756.5.30.1.127.3.5", "Surgery", "Surgery", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	SURGERY_L1("1002", "2.16.756.5.30.1.127.3.5", "Surgery", "Surgery", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Thoracic surgery</div>
-	 * <!-- @formatter:on -->
+	 * EN: Thoracic surgery<br>
 	 */
-	THORACIC_SURGERY_L1("1061", "2.16.756.5.30.1.127.3.5", "Thoracic surgery", "Thoracic surgery",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
+	THORACIC_SURGERY_L1("1061", "2.16.756.5.30.1.127.3.5", "Thoracic surgery", "Thoracic surgery", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Tropical and travel medicine</div>
-	 * <!-- @formatter:on -->
+	 * EN: Tropical and travel medicine<br>
 	 */
-	TROPICAL_AND_TRAVEL_MEDICINE_L1("1038", "2.16.756.5.30.1.127.3.5",
-			"Tropical and travel medicine", "Tropical and travel medicine", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	TROPICAL_AND_TRAVEL_MEDICINE_L1("1038", "2.16.756.5.30.1.127.3.5", "Tropical and travel medicine", "Tropical and travel medicine", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Urology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Urology<br>
 	 */
-	UROLOGY_L1("1018", "2.16.756.5.30.1.127.3.5", "Urology", "Urology", "TOTRANSLATE",
-			"TOTRANSLATE", "TOTRANSLATE"),
+	UROLOGY_L1("1018", "2.16.756.5.30.1.127.3.5", "Urology", "Urology", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Vascular surgery</div>
-	 * <!-- @formatter:on -->
+	 * EN: Vascular surgery<br>
 	 */
-	VASCULAR_SURGERY_L1("1060", "2.16.756.5.30.1.127.3.5", "Vascular surgery", "Vascular surgery",
-			"TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
+	VASCULAR_SURGERY_L1("1060", "2.16.756.5.30.1.127.3.5", "Vascular surgery", "Vascular surgery", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Allergology and clinical immunology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Allergology and clinical immunology<br>
 	 */
 	public static final String ALLERGOLOGY_AND_CLINICAL_IMMUNOLOGY_L1_CODE = "1019";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Anaesthesiology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Anaesthesiology<br>
 	 */
 	public static final String ANAESTHESIOLOGY_L1_CODE = "1012";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Angiology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Angiology<br>
 	 */
 	public static final String ANGIOLOGY_L1_CODE = "1041";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Cardiac and thoracic vascular surgery</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Cardiac and thoracic vascular surgery<br>
 	 */
 	public static final String CARDIAC_AND_THORACIC_VASCULAR_SURGERY_L1_CODE = "1004";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Cardiology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Cardiology<br>
 	 */
 	public static final String CARDIOLOGY_L1_CODE = "1025";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Child and adolescent psychiatry and psychotherapy</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Child and adolescent psychiatry and psychotherapy<br>
 	 */
 	public static final String CHILD_AND_ADOLESCENT_PSYCHIATRY_AND_PSYCHOTHERAPY_L1_CODE = "1027";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Child and adolescent psychology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Child and adolescent psychology<br>
 	 */
 	public static final String CHILD_AND_ADOLESCENT_PSYCHOLOGY_L1_CODE = "1055";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Chiropractic specialist</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Chiropractic specialist<br>
 	 */
 	public static final String CHIROPRACTIC_SPECIALIST_L1_CODE = "1011";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Chiropractor (occupation)</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Chiropractor (occupation)<br>
 	 */
 	public static final String CHIROPRACTOR_OCCUPATION_CODE = "3842006";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Clinical pharmacology and toxicology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Clinical pharmacology and toxicology<br>
 	 */
 	public static final String CLINICAL_PHARMACOLOGY_AND_TOXICOLOGY_L1_CODE = "1029";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Clinical psychology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Clinical psychology<br>
 	 */
 	public static final String CLINICAL_PSYCHOLOGY_L1_CODE = "1056";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Community pharmacy</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Community pharmacy<br>
 	 */
 	public static final String COMMUNITY_PHARMACY_L1_CODE = "1052";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Dentist (occupation)</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Dentist (occupation)<br>
 	 */
 	public static final String DENTIST_OCCUPATION_CODE = "106289002";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Dermatology and venereology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Dermatology and venereology<br>
 	 */
 	public static final String DERMATOLOGY_AND_VENEREOLOGY_L1_CODE = "1021";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Endocrinology – Diabetology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Endocrinology – Diabetology<br>
 	 */
 	public static final String ENDOCRINOLOGY_DIABETOLOGY_L1_CODE = "1022";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Forensic medicine</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Forensic medicine<br>
 	 */
 	public static final String FORENSIC_MEDICINE_L1_CODE = "1046";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Gastroenterology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Gastroenterology<br>
 	 */
 	public static final String GASTROENTEROLOGY_L1_CODE = "1023";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for General internal medicine</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for General internal medicine<br>
 	 */
 	public static final String GENERAL_INTERNAL_MEDICINE_L1_CODE = "1051";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for General medical practitioner</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for General medical practitioner<br>
 	 */
 	public static final String GENERAL_MEDICAL_PRACTITIONER_L1_CODE = "1040";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Gynaecology and obstetrics</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Gynaecology and obstetrics<br>
 	 */
 	public static final String GYNAECOLOGY_AND_OBSTETRICS_L1_CODE = "1003";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Haematology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Haematology<br>
 	 */
 	public static final String HAEMATOLOGY_L1_CODE = "1024";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Hand surgery</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Hand surgery<br>
 	 */
 	public static final String HAND_SURGERY_L1_CODE = "1059";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Health psychology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Health psychology<br>
 	 */
 	public static final String HEALTH_PSYCHOLOGY_L1_CODE = "1058";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Hospital pharmacy</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Hospital pharmacy<br>
 	 */
 	public static final String HOSPITAL_PHARMACY_L1_CODE = "1053";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Infectology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Infectology<br>
 	 */
 	public static final String INFECTOLOGY_L1_CODE = "1039";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Intensive care medicine</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Intensive care medicine<br>
 	 */
 	public static final String INTENSIVE_CARE_MEDICINE_L1_CODE = "1042";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Medical genetics</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Medical genetics<br>
 	 */
 	public static final String MEDICAL_GENETICS_L1_CODE = "1043";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Medical oncology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Medical oncology<br>
 	 */
 	public static final String MEDICAL_ONCOLOGY_L1_CODE = "1044";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Nephrology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Nephrology<br>
 	 */
 	public static final String NEPHROLOGY_L1_CODE = "1033";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Neurology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Neurology<br>
 	 */
 	public static final String NEUROLOGY_L1_CODE = "1014";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Neuropsychology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Neuropsychology<br>
 	 */
 	public static final String NEUROPSYCHOLOGY_L1_CODE = "1057";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Neurosurgery</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Neurosurgery<br>
 	 */
 	public static final String NEUROSURGERY_L1_CODE = "1013";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Nuclear medicine</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Nuclear medicine<br>
 	 */
 	public static final String NUCLEAR_MEDICINE_L1_CODE = "1031";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Occupational medicine</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Occupational medicine<br>
 	 */
 	public static final String OCCUPATIONAL_MEDICINE_L1_CODE = "1020";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Ophthalmology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Ophthalmology<br>
 	 */
 	public static final String OPHTHALMOLOGY_L1_CODE = "1007";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Oral and maxillofacial surgery</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Oral and maxillofacial surgery<br>
 	 */
 	public static final String ORAL_AND_MAXILLOFACIAL_SURGERY_L1_CODE = "1026";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Oral surgery</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Oral surgery<br>
 	 */
 	public static final String ORAL_SURGERY_L1_CODE = "1047";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Orthodontics</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Orthodontics<br>
 	 */
 	public static final String ORTHODONTICS_L1_CODE = "1010";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Orthopaedic surgery and traumatology of the locomotor apparatus</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Orthopaedic surgery and traumatology of the locomotor apparatus<br>
 	 */
 	public static final String ORTHOPAEDIC_SURGERY_AND_TRAUMATOLOGY_OF_THE_LOCOMOTOR_APPARATUS_L1_CODE = "1015";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Otorhinolaryngology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Otorhinolaryngology<br>
 	 */
 	public static final String OTORHINOLARYNGOLOGY_L1_CODE = "1008";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Paediatrics</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Paediatrics<br>
 	 */
 	public static final String PAEDIATRICS_L1_CODE = "1006";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Paediatric surgery</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Paediatric surgery<br>
 	 */
 	public static final String PAEDIATRIC_SURGERY_L1_CODE = "1028";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Paradontology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Paradontology<br>
 	 */
 	public static final String PARADONTOLOGY_L1_CODE = "1048";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Pathology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Pathology<br>
 	 */
 	public static final String PATHOLOGY_L1_CODE = "1009";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Pharmaceutical medicine</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Pharmaceutical medicine<br>
 	 */
 	public static final String PHARMACEUTICAL_MEDICINE_L1_CODE = "1045";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Pharmacist (occupation)</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Pharmacist (occupation)<br>
 	 */
 	public static final String PHARMACIST_OCCUPATION_CODE = "46255001";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Physical medicine and rehabilitation</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Physical medicine and rehabilitation<br>
 	 */
 	public static final String PHYSICAL_MEDICINE_AND_REHABILITATION_L1_CODE = "1034";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Physician (occupation)</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Physician (occupation)<br>
 	 */
 	public static final String PHYSICIAN_OCCUPATION_CODE = "309343006";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Plastic, reconstructive and aesthetic surgery</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Plastic, reconstructive and aesthetic surgery<br>
 	 */
 	public static final String PLASTIC_RECONSTRUCTIVE_AND_AESTHETIC_SURGERY_L1_CODE = "1035";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Pneumology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Pneumology<br>
 	 */
 	public static final String PNEUMOLOGY_L1_CODE = "1016";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Prevention and public health</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Prevention and public health<br>
 	 */
 	public static final String PREVENTION_AND_PUBLIC_HEALTH_L1_CODE = "1036";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Psychiatry and psychotherapy</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Psychiatry and psychotherapy<br>
 	 */
 	public static final String PSYCHIATRY_AND_PSYCHOTHERAPY_L1_CODE = "1017";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Psychologist (occupation)</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Psychologist (occupation)<br>
 	 */
 	public static final String PSYCHOLOGIST_OCCUPATION_CODE = "59944000";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Psychotherapy</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Psychotherapy<br>
 	 */
 	public static final String PSYCHOTHERAPY_L1_CODE = "1054";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Radiology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Radiology<br>
 	 */
 	public static final String RADIOLOGY_L1_CODE = "1030";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Radio-oncology / radiotherapy</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Radio-oncology / radiotherapy<br>
 	 */
 	public static final String RADIO_ONCOLOGY_RADIOTHERAPY_L1_CODE = "1032";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Reconstructive dentistry</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Reconstructive dentistry<br>
 	 */
 	public static final String RECONSTRUCTIVE_DENTISTRY_L1_CODE = "1049";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Rheumatology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Rheumatology<br>
 	 */
 	public static final String RHEUMATOLOGY_L1_CODE = "1037";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Surgery</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Surgery<br>
 	 */
 	public static final String SURGERY_L1_CODE = "1002";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Thoracic surgery</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Thoracic surgery<br>
 	 */
 	public static final String THORACIC_SURGERY_L1_CODE = "1061";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Tropical and travel medicine</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Tropical and travel medicine<br>
 	 */
 	public static final String TROPICAL_AND_TRAVEL_MEDICINE_L1_CODE = "1038";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Urology</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Urology<br>
 	 */
 	public static final String UROLOGY_L1_CODE = "1018";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Vascular surgery</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Vascular surgery<br>
 	 */
 	public static final String VASCULAR_SURGERY_L1_CODE = "1060";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
-	 * <!-- @formatter:on -->
+	 * Identifier of the value set.
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.8.3";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Name of the value set</div>
-	 * <div class="de">Name des Value Sets</div>
-	 * <!-- @formatter:on -->
+	 * Name of the value set.
 	 */
 	public static final String VALUE_SET_NAME = "HCProfessional.hcProfessionSpecialisationMap";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
-	 * <!-- @formatter:on -->
+	 * Gets the Enum with a given code.
 	 *
-	 * @param code
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
+	 * @param code The code value.
+	 * @return the enum value found or {@code null}.
 	 */
 	public static HcpProfessionSpecialisationMap getEnum(final String code) {
 		for (final HcpProfessionSpecialisationMap x : values()) {
@@ -980,14 +635,10 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
-	 * <!-- @formatter:on -->
+	 * Checks if a given enum is part of this value set.
 	 *
-	 * @param enumName
-	 *            <div class="de"> enumName</div>
-	 * @return true, if enum is in this value set
+	 * @param enumName The name of the enum.
+	 * @return {@code true} if the name is found in this value set, {@code false} otherwise.
 	 */
 	public static boolean isEnumOfValueSet(final String enumName) {
 		if (enumName == null) {
@@ -1002,14 +653,10 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
-	 * <!-- @formatter:on -->
+	 * Checks if a given code value is in this value set.
 	 *
-	 * @param codeValue
-	 *            <div class="de"> code</div>
-	 * @return true, if is in value set
+	 * @param codeValue The code value.
+	 * @return {@code true} if the value is found in this value set, {@code false} otherwise.
 	 */
 	public static boolean isInValueSet(final String codeValue) {
 		for (final HcpProfessionSpecialisationMap x : values()) {
@@ -1021,50 +668,32 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Machine interpretable and (inside this class) unique code</div>
-	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse) eindeutiger Code</div>
-	 * <!-- @formatter:on -->
+	 * Machine interpretable and (inside this class) unique code.
 	 */
 	private String code;
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Identifier of the referencing code system.</div>
-	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
-	 * <!-- @formatter:on -->
+	 * Identifier of the referencing code system.
 	 */
 	private String codeSystem;
 
 	/**
-	 * The display names per language
+	 * The display names per language.
 	 */
 	private Map<LanguageCode, String> displayNames;
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display Name</div>
-	 * <div class="de">Instanziiert dieses Enum Object mittels eines Codes und einem Display Name</div>.
-	 * <!-- @formatter:on -->
+	 * Instantiates this enum with a given code and display names.
 	 *
-	 * @param code
-	 *            code
-	 * @param codeSystem
-	 *            codeSystem
-	 * @param displayName
-	 *            the default display name
-	 * @param displayNameEn
-	 *            the display name en
-	 * @param displayNameDe
-	 *            the display name de
-	 * @param displayNameFr
-	 *            the display name fr
-	 * @param displayNameIt
-	 *            the display name it
+	 * @param code          The code value.
+	 * @param codeSystem    The code system (OID).
+	 * @param displayName   The default display name.
+	 * @param displayNameEn The display name in English.
+	 * @param displayNameDe The display name in German.
+	 * @param displayNameFr The display name in French.
+	 * @param displayNameIt The display name in Italian.
 	 */
-	HcpProfessionSpecialisationMap(final String code, final String codeSystem,
-			final String displayName, final String displayNameEn, final String displayNameDe,
-			final String displayNameFr, final String displayNameIt) {
+	HcpProfessionSpecialisationMap(final String code, final String codeSystem, final String displayName, final String displayNameEn, final String displayNameDe, final String displayNameFr, final String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		this.displayNames = new HashMap<>();
@@ -1076,12 +705,9 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the code system identifier.</div>
-	 * <div class="de">Liefert den Code System Identifikator.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the code system identifier.
 	 *
-	 * @return <div class="en">the code system identifier</div>
+	 * @return the code system identifier.
 	 */
 	@Override
 	public String getCodeSystemId() {
@@ -1089,29 +715,23 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the code system name.</div>
-	 * <div class="de">Liefert den Code System Namen.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the code system name.
 	 *
-	 * @return <div class="en">the code system identifier</div>
+	 * @return the code system identifier.
 	 */
 	@Override
 	public String getCodeSystemName() {
-		String retVal = "";
-		CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
-		if (cs != null)
-			retVal = cs.getCodeSystemName();
-		return retVal;
+		final CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
+		if (cs != null) {
+			return cs.getCodeSystemName();
+		}
+		return "";
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>
-	 * <!-- @formatter:on -->
+	 * Gets the code value as a string.
 	 *
-	 * @return <div class="en">the code</div>
+	 * @return the code value.
 	 */
 	@Override
 	public String getCodeValue() {
@@ -1119,21 +739,15 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the display name defined by the language param. If
-	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
-	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the display name defined by the language param. If there is no english translation, the default display name
+	 *      is returned.
 	 *
-	 * @param languageCode
-	 *            the language code to get the display name for
-	 * @return returns the display name in the desired language. if language not
-	 *         found, display name in german will returned
+	 * @param languageCode The language code to get the display name for.
+	 * @return the display name in the desired language. if language not found, display name in german will be returned.
 	 */
 	@Override
-	public String getDisplayName(LanguageCode languageCode) {
-		String displayName = this.displayNames.get(languageCode);
+	public String getDisplayName(final LanguageCode languageCode) {
+		final String displayName = this.displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
 			return this.displayNames.get(null);
 		}
@@ -1141,12 +755,9 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the value set identifier.</div>
-	 * <div class="de">Liefert den Value Set Identifikator.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the value set identifier.
 	 *
-	 * @return <div class="en">the value set identifier</div>
+	 * @return the value set identifier.
 	 */
 	@Override
 	public String getValueSetId() {
@@ -1154,12 +765,9 @@ public enum HcpProfessionSpecialisationMap implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the value set name.</div>
-	 * <div class="de">Liefert den Value Set Namen.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the value set name.
 	 *
-	 * @return <div class="en">the value set name</div>
+	 * @return the value set name.
 	 */
 	@Override
 	public String getValueSetName() {

@@ -26,852 +26,622 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
- * <!-- @formatter:off -->
  * Enumeration of DocumentEntry.eventCodeList values
- *
- * <div class="en">no designation found for language ENGLISH</div>
- * <div class="de">no designation found for language GERMAN</div>
- * <div class="fr">no designation found for language FRENCH</div>
- * <div class="it">no designation found for language ITALIAN</div>
- *
- * Identifier: 2.16.756.5.30.1.127.3.10.1.8
- * Effective date: 2021-04-01 17:00
- * Version: 202104.0-stable
+ * <p>
+ * EN: No designation found.<br>
+ * DE: No designation found.<br>
+ * FR: No designation found.<br>
+ * IT: No designation found.<br>
+ * <p>
+ * Identifier: 2.16.756.5.30.1.127.3.10.1.8<br>
+ * Effective date: 2021-04-01 17:00<br>
+ * Version: 202104.0-stable<br>
  * Status: FINAL
- * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-04-22")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-08-26")
 public enum EventCodeList implements ValueSetEnumInterface {
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Autorefraction</div>
-	 * <div class="de">Autorefraktion</div>
-	 * <div class="fr">Autoréfraction</div>
-	 * <div class="it">Autorifrazione</div>
-	 * <!-- @formatter:on -->
+	 * EN: Autorefraction<br>
+	 * DE: Autorefraktion<br>
+	 * FR: Autoréfraction<br>
+	 * IT: Autorifrazione<br>
 	 */
-	AUTOREFRACTION("AR", "1.2.840.10008.2.16.4", "Autorefraction", "Autorefraction",
-			"Autorefraktion", "Autoréfraction", "Autorifrazione"),
+	AUTOREFRACTION("AR", "1.2.840.10008.2.16.4", "Autorefraction", "Autorefraction", "Autorefraktion", "Autoréfraction", "Autorifrazione"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Bone Mineral Densitometry</div>
-	 * <div class="de">Knochenmineraldensitometrie</div>
-	 * <div class="fr">Densitométrie minérale osseuse</div>
-	 * <div class="it">Mineralometria ossea computerizzata</div>
-	 * <!-- @formatter:on -->
+	 * EN: Bone Mineral Densitometry<br>
+	 * DE: Knochenmineraldensitometrie<br>
+	 * FR: Densitométrie minérale osseuse<br>
+	 * IT: Mineralometria ossea computerizzata<br>
 	 */
-	BONE_MINERAL_DENSITOMETRY("BMD", "1.2.840.10008.2.16.4", "Bone Mineral Densitometry",
-			"Bone Mineral Densitometry", "Knochenmineraldensitometrie",
-			"Densitométrie minérale osseuse", "Mineralometria ossea computerizzata"),
+	BONE_MINERAL_DENSITOMETRY("BMD", "1.2.840.10008.2.16.4", "Bone Mineral Densitometry", "Bone Mineral Densitometry", "Knochenmineraldensitometrie", "Densitométrie minérale osseuse", "Mineralometria ossea computerizzata"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Cardiac Electrophysiology</div>
-	 * <div class="de">Herz-Elektrophysiologie</div>
-	 * <div class="fr">Électrophysiologie cardiaque</div>
-	 * <div class="it">Elettrofisiologia cardiaca</div>
-	 * <!-- @formatter:on -->
+	 * EN: Cardiac Electrophysiology<br>
+	 * DE: Herz-Elektrophysiologie<br>
+	 * FR: Électrophysiologie cardiaque<br>
+	 * IT: Elettrofisiologia cardiaca<br>
 	 */
-	CARDIAC_ELECTROPHYSIOLOGY("EPS", "1.2.840.10008.2.16.4", "Cardiac Electrophysiology",
-			"Cardiac Electrophysiology", "Herz-Elektrophysiologie", "Électrophysiologie cardiaque",
-			"Elettrofisiologia cardiaca"),
+	CARDIAC_ELECTROPHYSIOLOGY("EPS", "1.2.840.10008.2.16.4", "Cardiac Electrophysiology", "Cardiac Electrophysiology", "Herz-Elektrophysiologie", "Électrophysiologie cardiaque", "Elettrofisiologia cardiaca"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Computed Radiography</div>
-	 * <div class="de">Computerradiografie</div>
-	 * <div class="fr">Radiographie numérique</div>
-	 * <div class="it">Radiografia computerizzata</div>
-	 * <!-- @formatter:on -->
+	 * EN: Computed Radiography<br>
+	 * DE: Computerradiografie<br>
+	 * FR: Radiographie numérique<br>
+	 * IT: Radiografia computerizzata<br>
 	 */
-	COMPUTED_RADIOGRAPHY("CR", "1.2.840.10008.2.16.4", "Computed Radiography",
-			"Computed Radiography", "Computerradiografie", "Radiographie numérique",
-			"Radiografia computerizzata"),
+	COMPUTED_RADIOGRAPHY("CR", "1.2.840.10008.2.16.4", "Computed Radiography", "Computed Radiography", "Computerradiografie", "Radiographie numérique", "Radiografia computerizzata"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Computed Tomography</div>
-	 * <div class="de">Computertomografie</div>
-	 * <div class="fr">Tomographie numérique</div>
-	 * <div class="it">Tomografia computerizzata</div>
-	 * <!-- @formatter:on -->
+	 * EN: Computed Tomography<br>
+	 * DE: Computertomografie<br>
+	 * FR: Tomographie numérique<br>
+	 * IT: Tomografia computerizzata<br>
 	 */
-	COMPUTED_TOMOGRAPHY("CT", "1.2.840.10008.2.16.4", "Computed Tomography", "Computed Tomography",
-			"Computertomografie", "Tomographie numérique", "Tomografia computerizzata"),
+	COMPUTED_TOMOGRAPHY("CT", "1.2.840.10008.2.16.4", "Computed Tomography", "Computed Tomography", "Computertomografie", "Tomographie numérique", "Tomografia computerizzata"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Digital Radiography</div>
-	 * <div class="de">Digitales Röntgen</div>
-	 * <div class="fr">Radiologie numérique</div>
-	 * <div class="it">Radiografia digitale</div>
-	 * <!-- @formatter:on -->
+	 * EN: Digital Radiography<br>
+	 * DE: Digitales Röntgen<br>
+	 * FR: Radiologie numérique<br>
+	 * IT: Radiografia digitale<br>
 	 */
-	DIGITAL_RADIOGRAPHY("DX", "1.2.840.10008.2.16.4", "Digital Radiography", "Digital Radiography",
-			"Digitales Röntgen", "Radiologie numérique", "Radiografia digitale"),
+	DIGITAL_RADIOGRAPHY("DX", "1.2.840.10008.2.16.4", "Digital Radiography", "Digital Radiography", "Digitales Röntgen", "Radiologie numérique", "Radiografia digitale"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Electrocardiography</div>
-	 * <div class="de">Elektrokardiografie</div>
-	 * <div class="fr">Électrocardiographie</div>
-	 * <div class="it">Elettrocardiografia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Electrocardiography<br>
+	 * DE: Elektrokardiografie<br>
+	 * FR: Électrocardiographie<br>
+	 * IT: Elettrocardiografia<br>
 	 */
-	ELECTROCARDIOGRAPHY("ECG", "1.2.840.10008.2.16.4", "Electrocardiography", "Electrocardiography",
-			"Elektrokardiografie", "Électrocardiographie", "Elettrocardiografia"),
+	ELECTROCARDIOGRAPHY("ECG", "1.2.840.10008.2.16.4", "Electrocardiography", "Electrocardiography", "Elektrokardiografie", "Électrocardiographie", "Elettrocardiografia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Endoscopy</div>
-	 * <div class="de">Endoskopie</div>
-	 * <div class="fr">Endoscopie</div>
-	 * <div class="it">Endoscopia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Endoscopy<br>
+	 * DE: Endoskopie<br>
+	 * FR: Endoscopie<br>
+	 * IT: Endoscopia<br>
 	 */
-	ENDOSCOPY("ES", "1.2.840.10008.2.16.4", "Endoscopy", "Endoscopy", "Endoskopie", "Endoscopie",
-			"Endoscopia"),
+	ENDOSCOPY("ES", "1.2.840.10008.2.16.4", "Endoscopy", "Endoscopy", "Endoskopie", "Endoscopie", "Endoscopia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">External-camera Photography</div>
-	 * <div class="de">Fotografie mit externer Kamera</div>
-	 * <div class="fr">Photographie par appareil externe</div>
-	 * <div class="it">Fotografia con fotocamera esterna</div>
-	 * <!-- @formatter:on -->
+	 * EN: External-camera Photography<br>
+	 * DE: Fotografie mit externer Kamera<br>
+	 * FR: Photographie par appareil externe<br>
+	 * IT: Fotografia con fotocamera esterna<br>
 	 */
-	EXTERNAL_CAMERA_PHOTOGRAPHY("XC", "1.2.840.10008.2.16.4", "External-camera Photography",
-			"External-camera Photography", "Fotografie mit externer Kamera",
-			"Photographie par appareil externe", "Fotografia con fotocamera esterna"),
+	EXTERNAL_CAMERA_PHOTOGRAPHY("XC", "1.2.840.10008.2.16.4", "External-camera Photography", "External-camera Photography", "Fotografie mit externer Kamera", "Photographie par appareil externe", "Fotografia con fotocamera esterna"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">General Microscopy</div>
-	 * <div class="de">Allgemeine Mikroskopie</div>
-	 * <div class="fr">Microscopie générale</div>
-	 * <div class="it">Microscopia generale</div>
-	 * <!-- @formatter:on -->
+	 * EN: General Microscopy<br>
+	 * DE: Allgemeine Mikroskopie<br>
+	 * FR: Microscopie générale<br>
+	 * IT: Microscopia generale<br>
 	 */
-	GENERAL_MICROSCOPY("GM", "1.2.840.10008.2.16.4", "General Microscopy", "General Microscopy",
-			"Allgemeine Mikroskopie", "Microscopie générale", "Microscopia generale"),
+	GENERAL_MICROSCOPY("GM", "1.2.840.10008.2.16.4", "General Microscopy", "General Microscopy", "Allgemeine Mikroskopie", "Microscopie générale", "Microscopia generale"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Hemodynamic Waveform</div>
-	 * <div class="de">Hämodynamische Druckkurve</div>
-	 * <div class="fr">Courbe hémodynamique</div>
-	 * <div class="it">Monitoraggio emodinamico</div>
-	 * <!-- @formatter:on -->
+	 * EN: Hemodynamic Waveform<br>
+	 * DE: Hämodynamische Druckkurve<br>
+	 * FR: Courbe hémodynamique<br>
+	 * IT: Monitoraggio emodinamico<br>
 	 */
-	HEMODYNAMIC_WAVEFORM("HD", "1.2.840.10008.2.16.4", "Hemodynamic Waveform",
-			"Hemodynamic Waveform", "Hämodynamische Druckkurve", "Courbe hémodynamique",
-			"Monitoraggio emodinamico"),
+	HEMODYNAMIC_WAVEFORM("HD", "1.2.840.10008.2.16.4", "Hemodynamic Waveform", "Hemodynamic Waveform", "Hämodynamische Druckkurve", "Courbe hémodynamique", "Monitoraggio emodinamico"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Intravascular Optical Coherence Tomography</div>
-	 * <div class="de">Intravaskuläre optische Kohärenztomografie</div>
-	 * <div class="fr">Tomographie en cohérence optique intravasculaire</div>
-	 * <div class="it">Tomografia intravascolare a coerenza ottica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Intravascular Optical Coherence Tomography<br>
+	 * DE: Intravaskuläre optische Kohärenztomografie<br>
+	 * FR: Tomographie en cohérence optique intravasculaire<br>
+	 * IT: Tomografia intravascolare a coerenza ottica<br>
 	 */
-	INTRAVASCULAR_OPTICAL_COHERENCE_TOMOGRAPHY("IVOCT", "1.2.840.10008.2.16.4",
-			"Intravascular Optical Coherence Tomography",
-			"Intravascular Optical Coherence Tomography",
-			"Intravaskuläre optische Kohärenztomografie",
-			"Tomographie en cohérence optique intravasculaire",
-			"Tomografia intravascolare a coerenza ottica"),
+	INTRAVASCULAR_OPTICAL_COHERENCE_TOMOGRAPHY("IVOCT", "1.2.840.10008.2.16.4", "Intravascular Optical Coherence Tomography", "Intravascular Optical Coherence Tomography", "Intravaskuläre optische Kohärenztomografie", "Tomographie en cohérence optique intravasculaire", "Tomografia intravascolare a coerenza ottica"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Intravascular Ultrasound</div>
-	 * <div class="de">Intravaskulärer Ultraschall</div>
-	 * <div class="fr">Ultrason intravasculaire</div>
-	 * <div class="it">Ecografia intravascolare</div>
-	 * <!-- @formatter:on -->
+	 * EN: Intravascular Ultrasound<br>
+	 * DE: Intravaskulärer Ultraschall<br>
+	 * FR: Ultrason intravasculaire<br>
+	 * IT: Ecografia intravascolare<br>
 	 */
-	INTRAVASCULAR_ULTRASOUND("IVUS", "1.2.840.10008.2.16.4", "Intravascular Ultrasound",
-			"Intravascular Ultrasound", "Intravaskulärer Ultraschall", "Ultrason intravasculaire",
-			"Ecografia intravascolare"),
+	INTRAVASCULAR_ULTRASOUND("IVUS", "1.2.840.10008.2.16.4", "Intravascular Ultrasound", "Intravascular Ultrasound", "Intravaskulärer Ultraschall", "Ultrason intravasculaire", "Ecografia intravascolare"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Intra-oral Radiography</div>
-	 * <div class="de">Intraorales Röntgen</div>
-	 * <div class="fr">Radiographie intra-orale</div>
-	 * <div class="it">Radiografia intraorale</div>
-	 * <!-- @formatter:on -->
+	 * EN: Intra-oral Radiography<br>
+	 * DE: Intraorales Röntgen<br>
+	 * FR: Radiographie intra-orale<br>
+	 * IT: Radiografia intraorale<br>
 	 */
-	INTRA_ORAL_RADIOGRAPHY("IO", "1.2.840.10008.2.16.4", "Intra-oral Radiography",
-			"Intra-oral Radiography", "Intraorales Röntgen", "Radiographie intra-orale",
-			"Radiografia intraorale"),
+	INTRA_ORAL_RADIOGRAPHY("IO", "1.2.840.10008.2.16.4", "Intra-oral Radiography", "Intra-oral Radiography", "Intraorales Röntgen", "Radiographie intra-orale", "Radiografia intraorale"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Keratometry</div>
-	 * <div class="de">Keratometrie</div>
-	 * <div class="fr">Kératométrie</div>
-	 * <div class="it">Cheratometria</div>
-	 * <!-- @formatter:on -->
+	 * EN: Keratometry<br>
+	 * DE: Keratometrie<br>
+	 * FR: Kératométrie<br>
+	 * IT: Cheratometria<br>
 	 */
-	KERATOMETRY("KER", "1.2.840.10008.2.16.4", "Keratometry", "Keratometry", "Keratometrie",
-			"Kératométrie", "Cheratometria"),
+	KERATOMETRY("KER", "1.2.840.10008.2.16.4", "Keratometry", "Keratometry", "Keratometrie", "Kératométrie", "Cheratometria"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Lensometry</div>
-	 * <div class="de">Linsenmessung</div>
-	 * <div class="fr">Lensométrie</div>
-	 * <div class="it">Focometria</div>
-	 * <!-- @formatter:on -->
+	 * EN: Lensometry<br>
+	 * DE: Linsenmessung<br>
+	 * FR: Lensométrie<br>
+	 * IT: Focometria<br>
 	 */
-	LENSOMETRY("LEN", "1.2.840.10008.2.16.4", "Lensometry", "Lensometry", "Linsenmessung",
-			"Lensométrie", "Focometria"),
+	LENSOMETRY("LEN", "1.2.840.10008.2.16.4", "Lensometry", "Lensometry", "Linsenmessung", "Lensométrie", "Focometria"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Magnetic Resonance</div>
-	 * <div class="de">Magnetresonanz</div>
-	 * <div class="fr">Résonance magnétique</div>
-	 * <div class="it">Risonanza magnetica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Magnetic Resonance<br>
+	 * DE: Magnetresonanz<br>
+	 * FR: Résonance magnétique<br>
+	 * IT: Risonanza magnetica<br>
 	 */
-	MAGNETIC_RESONANCE("MR", "1.2.840.10008.2.16.4", "Magnetic Resonance", "Magnetic Resonance",
-			"Magnetresonanz", "Résonance magnétique", "Risonanza magnetica"),
+	MAGNETIC_RESONANCE("MR", "1.2.840.10008.2.16.4", "Magnetic Resonance", "Magnetic Resonance", "Magnetresonanz", "Résonance magnétique", "Risonanza magnetica"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Mammography</div>
-	 * <div class="de">Mammografie</div>
-	 * <div class="fr">Mammographie</div>
-	 * <div class="it">Mammografia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Mammography<br>
+	 * DE: Mammografie<br>
+	 * FR: Mammographie<br>
+	 * IT: Mammografia<br>
 	 */
-	MAMMOGRAPHY("MG", "1.2.840.10008.2.16.4", "Mammography", "Mammography", "Mammografie",
-			"Mammographie", "Mammografia"),
+	MAMMOGRAPHY("MG", "1.2.840.10008.2.16.4", "Mammography", "Mammography", "Mammografie", "Mammographie", "Mammografia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Nuclear Medicine</div>
-	 * <div class="de">Nuklearmedizin</div>
-	 * <div class="fr">Médecine nucléaire</div>
-	 * <div class="it">Medicina nucleare</div>
-	 * <!-- @formatter:on -->
+	 * EN: Nuclear Medicine<br>
+	 * DE: Nuklearmedizin<br>
+	 * FR: Médecine nucléaire<br>
+	 * IT: Medicina nucleare<br>
 	 */
-	NUCLEAR_MEDICINE("NM", "1.2.840.10008.2.16.4", "Nuclear Medicine", "Nuclear Medicine",
-			"Nuklearmedizin", "Médecine nucléaire", "Medicina nucleare"),
+	NUCLEAR_MEDICINE("NM", "1.2.840.10008.2.16.4", "Nuclear Medicine", "Nuclear Medicine", "Nuklearmedizin", "Médecine nucléaire", "Medicina nucleare"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Ophthalmic Axial Measurements</div>
-	 * <div class="de">Augenachsenmessungen</div>
-	 * <div class="fr">Mesures axiales ophtalmiques</div>
-	 * <div class="it">Misurazioni oftalmiche assiali</div>
-	 * <!-- @formatter:on -->
+	 * EN: Ophthalmic Axial Measurements<br>
+	 * DE: Augenachsenmessungen<br>
+	 * FR: Mesures axiales ophtalmiques<br>
+	 * IT: Misurazioni oftalmiche assiali<br>
 	 */
-	OPHTHALMIC_AXIAL_MEASUREMENTS("OAM", "1.2.840.10008.2.16.4", "Ophthalmic Axial Measurements",
-			"Ophthalmic Axial Measurements", "Augenachsenmessungen", "Mesures axiales ophtalmiques",
-			"Misurazioni oftalmiche assiali"),
+	OPHTHALMIC_AXIAL_MEASUREMENTS("OAM", "1.2.840.10008.2.16.4", "Ophthalmic Axial Measurements", "Ophthalmic Axial Measurements", "Augenachsenmessungen", "Mesures axiales ophtalmiques", "Misurazioni oftalmiche assiali"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Ophthalmic Mapping</div>
-	 * <div class="de">Augenkartierung</div>
-	 * <div class="fr">Cartographie ophtalmique</div>
-	 * <div class="it">Mappatura oftalmica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Ophthalmic Mapping<br>
+	 * DE: Augenkartierung<br>
+	 * FR: Cartographie ophtalmique<br>
+	 * IT: Mappatura oftalmica<br>
 	 */
-	OPHTHALMIC_MAPPING("OPM", "1.2.840.10008.2.16.4", "Ophthalmic Mapping", "Ophthalmic Mapping",
-			"Augenkartierung", "Cartographie ophtalmique", "Mappatura oftalmica"),
+	OPHTHALMIC_MAPPING("OPM", "1.2.840.10008.2.16.4", "Ophthalmic Mapping", "Ophthalmic Mapping", "Augenkartierung", "Cartographie ophtalmique", "Mappatura oftalmica"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Ophthalmic Photography</div>
-	 * <div class="de">Augenfotografie</div>
-	 * <div class="fr">Photographie ophtalmique</div>
-	 * <div class="it">Fotografia oftalmica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Ophthalmic Photography<br>
+	 * DE: Augenfotografie<br>
+	 * FR: Photographie ophtalmique<br>
+	 * IT: Fotografia oftalmica<br>
 	 */
-	OPHTHALMIC_PHOTOGRAPHY("OP", "1.2.840.10008.2.16.4", "Ophthalmic Photography",
-			"Ophthalmic Photography", "Augenfotografie", "Photographie ophtalmique",
-			"Fotografia oftalmica"),
+	OPHTHALMIC_PHOTOGRAPHY("OP", "1.2.840.10008.2.16.4", "Ophthalmic Photography", "Ophthalmic Photography", "Augenfotografie", "Photographie ophtalmique", "Fotografia oftalmica"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Ophthalmic Refraction</div>
-	 * <div class="de">Augenrefraktion</div>
-	 * <div class="fr">Réfraction ophtalmique</div>
-	 * <div class="it">Rifrazione oggettiva</div>
-	 * <!-- @formatter:on -->
+	 * EN: Ophthalmic Refraction<br>
+	 * DE: Augenrefraktion<br>
+	 * FR: Réfraction ophtalmique<br>
+	 * IT: Rifrazione oggettiva<br>
 	 */
-	OPHTHALMIC_REFRACTION("OPR", "1.2.840.10008.2.16.4", "Ophthalmic Refraction",
-			"Ophthalmic Refraction", "Augenrefraktion", "Réfraction ophtalmique",
-			"Rifrazione oggettiva"),
+	OPHTHALMIC_REFRACTION("OPR", "1.2.840.10008.2.16.4", "Ophthalmic Refraction", "Ophthalmic Refraction", "Augenrefraktion", "Réfraction ophtalmique", "Rifrazione oggettiva"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Ophthalmic Tomography</div>
-	 * <div class="de">Augentomografie</div>
-	 * <div class="fr">Tomographie ophtalmique</div>
-	 * <div class="it">Tomografia ottica computerizzata</div>
-	 * <!-- @formatter:on -->
+	 * EN: Ophthalmic Tomography<br>
+	 * DE: Augentomografie<br>
+	 * FR: Tomographie ophtalmique<br>
+	 * IT: Tomografia ottica computerizzata<br>
 	 */
-	OPHTHALMIC_TOMOGRAPHY("OPT", "1.2.840.10008.2.16.4", "Ophthalmic Tomography",
-			"Ophthalmic Tomography", "Augentomografie", "Tomographie ophtalmique",
-			"Tomografia ottica computerizzata"),
+	OPHTHALMIC_TOMOGRAPHY("OPT", "1.2.840.10008.2.16.4", "Ophthalmic Tomography", "Ophthalmic Tomography", "Augentomografie", "Tomographie ophtalmique", "Tomografia ottica computerizzata"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Ophthalmic Tomography B-scan Volume Analysis</div>
-	 * <div class="de">TODO</div>
-	 * <div class="fr">TODO</div>
-	 * <div class="it">TODO</div>
-	 * <!-- @formatter:on -->
+	 * EN: Ophthalmic Tomography B-scan Volume Analysis<br>
+	 * DE: TODO<br>
+	 * FR: TODO<br>
+	 * IT: TODO<br>
 	 */
-	OPHTHALMIC_TOMOGRAPHY_B_SCAN_VOLUME_ANALYSIS("OPTBSV", "1.2.840.10008.2.16.4",
-			"Ophthalmic Tomography B-scan Volume Analysis",
-			"Ophthalmic Tomography B-scan Volume Analysis", "TODO", "TODO", "TODO"),
+	OPHTHALMIC_TOMOGRAPHY_B_SCAN_VOLUME_ANALYSIS("OPTBSV", "1.2.840.10008.2.16.4", "Ophthalmic Tomography B-scan Volume Analysis", "Ophthalmic Tomography B-scan Volume Analysis", "TODO", "TODO", "TODO"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Ophthalmic Tomography En Face</div>
-	 * <div class="de">TODO</div>
-	 * <div class="fr">TODO</div>
-	 * <div class="it">TODO</div>
-	 * <!-- @formatter:on -->
+	 * EN: Ophthalmic Tomography En Face<br>
+	 * DE: TODO<br>
+	 * FR: TODO<br>
+	 * IT: TODO<br>
 	 */
-	OPHTHALMIC_TOMOGRAPHY_EN_FACE("OPTENF", "1.2.840.10008.2.16.4", "Ophthalmic Tomography En Face",
-			"Ophthalmic Tomography En Face", "TODO", "TODO", "TODO"),
+	OPHTHALMIC_TOMOGRAPHY_EN_FACE("OPTENF", "1.2.840.10008.2.16.4", "Ophthalmic Tomography En Face", "Ophthalmic Tomography En Face", "TODO", "TODO", "TODO"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Ophthalmic Visual Field</div>
-	 * <div class="de">Gesichtsfeld der Augen</div>
-	 * <div class="fr">Champ visuel ophtalmique</div>
-	 * <div class="it">Perimetria computerizzata</div>
-	 * <!-- @formatter:on -->
+	 * EN: Ophthalmic Visual Field<br>
+	 * DE: Gesichtsfeld der Augen<br>
+	 * FR: Champ visuel ophtalmique<br>
+	 * IT: Perimetria computerizzata<br>
 	 */
-	OPHTHALMIC_VISUAL_FIELD("OPV", "1.2.840.10008.2.16.4", "Ophthalmic Visual Field",
-			"Ophthalmic Visual Field", "Gesichtsfeld der Augen", "Champ visuel ophtalmique",
-			"Perimetria computerizzata"),
+	OPHTHALMIC_VISUAL_FIELD("OPV", "1.2.840.10008.2.16.4", "Ophthalmic Visual Field", "Ophthalmic Visual Field", "Gesichtsfeld der Augen", "Champ visuel ophtalmique", "Perimetria computerizzata"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Optical Coherence Tomography</div>
-	 * <div class="de">Optische Kohärenztomografie</div>
-	 * <div class="fr">Tomographie en cohérence optique</div>
-	 * <div class="it">Tomografia a coerenza ottica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Optical Coherence Tomography<br>
+	 * DE: Optische Kohärenztomografie<br>
+	 * FR: Tomographie en cohérence optique<br>
+	 * IT: Tomografia a coerenza ottica<br>
 	 */
-	OPTICAL_COHERENCE_TOMOGRAPHY("OCT", "1.2.840.10008.2.16.4", "Optical Coherence Tomography",
-			"Optical Coherence Tomography", "Optische Kohärenztomografie",
-			"Tomographie en cohérence optique", "Tomografia a coerenza ottica"),
+	OPTICAL_COHERENCE_TOMOGRAPHY("OCT", "1.2.840.10008.2.16.4", "Optical Coherence Tomography", "Optical Coherence Tomography", "Optische Kohärenztomografie", "Tomographie en cohérence optique", "Tomografia a coerenza ottica"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Optical Surface Scanner</div>
-	 * <div class="de">Optischer Oberflächenscanner</div>
-	 * <div class="fr">Scanneur optique de surface</div>
-	 * <div class="it">Scanner ottico per superfici</div>
-	 * <!-- @formatter:on -->
+	 * EN: Optical Surface Scanner<br>
+	 * DE: Optischer Oberflächenscanner<br>
+	 * FR: Scanneur optique de surface<br>
+	 * IT: Scanner ottico per superfici<br>
 	 */
-	OPTICAL_SURFACE_SCANNER("OSS", "1.2.840.10008.2.16.4", "Optical Surface Scanner",
-			"Optical Surface Scanner", "Optischer Oberflächenscanner",
-			"Scanneur optique de surface", "Scanner ottico per superfici"),
+	OPTICAL_SURFACE_SCANNER("OSS", "1.2.840.10008.2.16.4", "Optical Surface Scanner", "Optical Surface Scanner", "Optischer Oberflächenscanner", "Scanneur optique de surface", "Scanner ottico per superfici"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Panoramic X-Ray</div>
-	 * <div class="de">Panoramaröntgen</div>
-	 * <div class="fr">Radiographie panoramique</div>
-	 * <div class="it">Radiografia panoramica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Panoramic X-Ray<br>
+	 * DE: Panoramaröntgen<br>
+	 * FR: Radiographie panoramique<br>
+	 * IT: Radiografia panoramica<br>
 	 */
-	PANORAMIC_X_RAY("PX", "1.2.840.10008.2.16.4", "Panoramic X-Ray", "Panoramic X-Ray",
-			"Panoramaröntgen", "Radiographie panoramique", "Radiografia panoramica"),
+	PANORAMIC_X_RAY("PX", "1.2.840.10008.2.16.4", "Panoramic X-Ray", "Panoramic X-Ray", "Panoramaröntgen", "Radiographie panoramique", "Radiografia panoramica"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Positron emission tomography</div>
-	 * <div class="de">Positronen-Emissions-Tomografie</div>
-	 * <div class="fr">Tomographie par émission de positons</div>
-	 * <div class="it">Tomografia a emissione di positroni</div>
-	 * <!-- @formatter:on -->
+	 * EN: Positron emission tomography<br>
+	 * DE: Positronen-Emissions-Tomografie<br>
+	 * FR: Tomographie par émission de positons<br>
+	 * IT: Tomografia a emissione di positroni<br>
 	 */
-	POSITRON_EMISSION_TOMOGRAPHY("PT", "1.2.840.10008.2.16.4", "Positron emission tomography",
-			"Positron emission tomography", "Positronen-Emissions-Tomografie",
-			"Tomographie par émission de positons", "Tomografia a emissione di positroni"),
+	POSITRON_EMISSION_TOMOGRAPHY("PT", "1.2.840.10008.2.16.4", "Positron emission tomography", "Positron emission tomography", "Positronen-Emissions-Tomografie", "Tomographie par émission de positons", "Tomografia a emissione di positroni"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Radiofluoroscopy</div>
-	 * <div class="de">Radio-Fluoroskopie</div>
-	 * <div class="fr">Radio-fluoroscopie</div>
-	 * <div class="it">Radiofluoroscopia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Radiofluoroscopy<br>
+	 * DE: Radio-Fluoroskopie<br>
+	 * FR: Radio-fluoroscopie<br>
+	 * IT: Radiofluoroscopia<br>
 	 */
-	RADIOFLUOROSCOPY("RF", "1.2.840.10008.2.16.4", "Radiofluoroscopy", "Radiofluoroscopy",
-			"Radio-Fluoroskopie", "Radio-fluoroscopie", "Radiofluoroscopia"),
+	RADIOFLUOROSCOPY("RF", "1.2.840.10008.2.16.4", "Radiofluoroscopy", "Radiofluoroscopy", "Radio-Fluoroskopie", "Radio-fluoroscopie", "Radiofluoroscopia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Radiographic imaging</div>
-	 * <div class="de">Röntgenbildgebung</div>
-	 * <div class="fr">Imagerie radiographique</div>
-	 * <div class="it">Imaging radiografico</div>
-	 * <!-- @formatter:on -->
+	 * EN: Radiographic imaging<br>
+	 * DE: Röntgenbildgebung<br>
+	 * FR: Imagerie radiographique<br>
+	 * IT: Imaging radiografico<br>
 	 */
-	RADIOGRAPHIC_IMAGING("RG", "1.2.840.10008.2.16.4", "Radiographic imaging",
-			"Radiographic imaging", "Röntgenbildgebung", "Imagerie radiographique",
-			"Imaging radiografico"),
+	RADIOGRAPHIC_IMAGING("RG", "1.2.840.10008.2.16.4", "Radiographic imaging", "Radiographic imaging", "Röntgenbildgebung", "Imagerie radiographique", "Imaging radiografico"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Slide Microscopy</div>
-	 * <div class="de">Objektträger Mikroskopie</div>
-	 * <div class="fr">Microscopie avec lamelles</div>
-	 * <div class="it">Microscopia a vetrini</div>
-	 * <!-- @formatter:on -->
+	 * EN: Slide Microscopy<br>
+	 * DE: Objektträger Mikroskopie<br>
+	 * FR: Microscopie avec lamelles<br>
+	 * IT: Microscopia a vetrini<br>
 	 */
-	SLIDE_MICROSCOPY("SM", "1.2.840.10008.2.16.4", "Slide Microscopy", "Slide Microscopy",
-			"Objektträger Mikroskopie", "Microscopie avec lamelles", "Microscopia a vetrini"),
+	SLIDE_MICROSCOPY("SM", "1.2.840.10008.2.16.4", "Slide Microscopy", "Slide Microscopy", "Objektträger Mikroskopie", "Microscopie avec lamelles", "Microscopia a vetrini"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Subjective Refraction</div>
-	 * <div class="de">Subjektive Refraktion</div>
-	 * <div class="fr">Réfraction subjective</div>
-	 * <div class="it">Rifrazione soggettiva</div>
-	 * <!-- @formatter:on -->
+	 * EN: Subjective Refraction<br>
+	 * DE: Subjektive Refraktion<br>
+	 * FR: Réfraction subjective<br>
+	 * IT: Rifrazione soggettiva<br>
 	 */
-	SUBJECTIVE_REFRACTION("SRF", "1.2.840.10008.2.16.4", "Subjective Refraction",
-			"Subjective Refraction", "Subjektive Refraktion", "Réfraction subjective",
-			"Rifrazione soggettiva"),
+	SUBJECTIVE_REFRACTION("SRF", "1.2.840.10008.2.16.4", "Subjective Refraction", "Subjective Refraction", "Subjektive Refraktion", "Réfraction subjective", "Rifrazione soggettiva"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Ultrasound</div>
-	 * <div class="de">Ultraschall</div>
-	 * <div class="fr">Ultrason</div>
-	 * <div class="it">Ecografia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Ultrasound<br>
+	 * DE: Ultraschall<br>
+	 * FR: Ultrason<br>
+	 * IT: Ecografia<br>
 	 */
-	ULTRASOUND("US", "1.2.840.10008.2.16.4", "Ultrasound", "Ultrasound", "Ultraschall", "Ultrason",
-			"Ecografia"),
+	ULTRASOUND("US", "1.2.840.10008.2.16.4", "Ultrasound", "Ultrasound", "Ultraschall", "Ultrason", "Ecografia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Ultrasound Bone Densitometry</div>
-	 * <div class="de">Ultraschall-Knochendichtemessung</div>
-	 * <div class="fr">Densitométrie osseuse par ultrasons</div>
-	 * <div class="it">Densitometria ossea a ultrasuoni</div>
-	 * <!-- @formatter:on -->
+	 * EN: Ultrasound Bone Densitometry<br>
+	 * DE: Ultraschall-Knochendichtemessung<br>
+	 * FR: Densitométrie osseuse par ultrasons<br>
+	 * IT: Densitometria ossea a ultrasuoni<br>
 	 */
-	ULTRASOUND_BONE_DENSITOMETRY("BDUS", "1.2.840.10008.2.16.4", "Ultrasound Bone Densitometry",
-			"Ultrasound Bone Densitometry", "Ultraschall-Knochendichtemessung",
-			"Densitométrie osseuse par ultrasons", "Densitometria ossea a ultrasuoni"),
+	ULTRASOUND_BONE_DENSITOMETRY("BDUS", "1.2.840.10008.2.16.4", "Ultrasound Bone Densitometry", "Ultrasound Bone Densitometry", "Ultraschall-Knochendichtemessung", "Densitométrie osseuse par ultrasons", "Densitometria ossea a ultrasuoni"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Visual Acuity</div>
-	 * <div class="de">Sehschärfe</div>
-	 * <div class="fr">Acuité visuelle</div>
-	 * <div class="it">Acutezza visiva</div>
-	 * <!-- @formatter:on -->
+	 * EN: Visual Acuity<br>
+	 * DE: Sehschärfe<br>
+	 * FR: Acuité visuelle<br>
+	 * IT: Acutezza visiva<br>
 	 */
-	VISUAL_ACUITY("VA", "1.2.840.10008.2.16.4", "Visual Acuity", "Visual Acuity", "Sehschärfe",
-			"Acuité visuelle", "Acutezza visiva"),
+	VISUAL_ACUITY("VA", "1.2.840.10008.2.16.4", "Visual Acuity", "Visual Acuity", "Sehschärfe", "Acuité visuelle", "Acutezza visiva"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">X-Ray Angiography</div>
-	 * <div class="de">Röntgen-Angiografie</div>
-	 * <div class="fr">Angiographie par rayons X</div>
-	 * <div class="it">Angiografia a raggi X</div>
-	 * <!-- @formatter:on -->
+	 * EN: X-Ray Angiography<br>
+	 * DE: Röntgen-Angiografie<br>
+	 * FR: Angiographie par rayons X<br>
+	 * IT: Angiografia a raggi X<br>
 	 */
-	X_RAY_ANGIOGRAPHY("XA", "1.2.840.10008.2.16.4", "X-Ray Angiography", "X-Ray Angiography",
-			"Röntgen-Angiografie", "Angiographie par rayons X", "Angiografia a raggi X");
+	X_RAY_ANGIOGRAPHY("XA", "1.2.840.10008.2.16.4", "X-Ray Angiography", "X-Ray Angiography", "Röntgen-Angiografie", "Angiographie par rayons X", "Angiografia a raggi X");
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Autorefraction</div>
-	 * <div class="de">Code für Autorefraktion</div>
-	 * <div class="fr">Code de Autoréfraction</div>
-	 * <div class="it">Code per Autorifrazione</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Autorefraction<br>
+	 * DE: Code für Autorefraktion<br>
+	 * FR: Code de Autoréfraction<br>
+	 * IT: Code per Autorifrazione<br>
 	 */
 	public static final String AUTOREFRACTION_CODE = "AR";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Bone Mineral Densitometry</div>
-	 * <div class="de">Code für Knochenmineraldensitometrie</div>
-	 * <div class="fr">Code de Densitométrie minérale osseuse</div>
-	 * <div class="it">Code per Mineralometria ossea computerizzata</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Bone Mineral Densitometry<br>
+	 * DE: Code für Knochenmineraldensitometrie<br>
+	 * FR: Code de Densitométrie minérale osseuse<br>
+	 * IT: Code per Mineralometria ossea computerizzata<br>
 	 */
 	public static final String BONE_MINERAL_DENSITOMETRY_CODE = "BMD";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Cardiac Electrophysiology</div>
-	 * <div class="de">Code für Herz-Elektrophysiologie</div>
-	 * <div class="fr">Code de Électrophysiologie cardiaque</div>
-	 * <div class="it">Code per Elettrofisiologia cardiaca</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Cardiac Electrophysiology<br>
+	 * DE: Code für Herz-Elektrophysiologie<br>
+	 * FR: Code de Électrophysiologie cardiaque<br>
+	 * IT: Code per Elettrofisiologia cardiaca<br>
 	 */
 	public static final String CARDIAC_ELECTROPHYSIOLOGY_CODE = "EPS";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Computed Radiography</div>
-	 * <div class="de">Code für Computerradiografie</div>
-	 * <div class="fr">Code de Radiographie numérique</div>
-	 * <div class="it">Code per Radiografia computerizzata</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Computed Radiography<br>
+	 * DE: Code für Computerradiografie<br>
+	 * FR: Code de Radiographie numérique<br>
+	 * IT: Code per Radiografia computerizzata<br>
 	 */
 	public static final String COMPUTED_RADIOGRAPHY_CODE = "CR";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Computed Tomography</div>
-	 * <div class="de">Code für Computertomografie</div>
-	 * <div class="fr">Code de Tomographie numérique</div>
-	 * <div class="it">Code per Tomografia computerizzata</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Computed Tomography<br>
+	 * DE: Code für Computertomografie<br>
+	 * FR: Code de Tomographie numérique<br>
+	 * IT: Code per Tomografia computerizzata<br>
 	 */
 	public static final String COMPUTED_TOMOGRAPHY_CODE = "CT";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Digital Radiography</div>
-	 * <div class="de">Code für Digitales Röntgen</div>
-	 * <div class="fr">Code de Radiologie numérique</div>
-	 * <div class="it">Code per Radiografia digitale</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Digital Radiography<br>
+	 * DE: Code für Digitales Röntgen<br>
+	 * FR: Code de Radiologie numérique<br>
+	 * IT: Code per Radiografia digitale<br>
 	 */
 	public static final String DIGITAL_RADIOGRAPHY_CODE = "DX";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Electrocardiography</div>
-	 * <div class="de">Code für Elektrokardiografie</div>
-	 * <div class="fr">Code de Électrocardiographie</div>
-	 * <div class="it">Code per Elettrocardiografia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Electrocardiography<br>
+	 * DE: Code für Elektrokardiografie<br>
+	 * FR: Code de Électrocardiographie<br>
+	 * IT: Code per Elettrocardiografia<br>
 	 */
 	public static final String ELECTROCARDIOGRAPHY_CODE = "ECG";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Endoscopy</div>
-	 * <div class="de">Code für Endoskopie</div>
-	 * <div class="fr">Code de Endoscopie</div>
-	 * <div class="it">Code per Endoscopia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Endoscopy<br>
+	 * DE: Code für Endoskopie<br>
+	 * FR: Code de Endoscopie<br>
+	 * IT: Code per Endoscopia<br>
 	 */
 	public static final String ENDOSCOPY_CODE = "ES";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for External-camera Photography</div>
-	 * <div class="de">Code für Fotografie mit externer Kamera</div>
-	 * <div class="fr">Code de Photographie par appareil externe</div>
-	 * <div class="it">Code per Fotografia con fotocamera esterna</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for External-camera Photography<br>
+	 * DE: Code für Fotografie mit externer Kamera<br>
+	 * FR: Code de Photographie par appareil externe<br>
+	 * IT: Code per Fotografia con fotocamera esterna<br>
 	 */
 	public static final String EXTERNAL_CAMERA_PHOTOGRAPHY_CODE = "XC";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for General Microscopy</div>
-	 * <div class="de">Code für Allgemeine Mikroskopie</div>
-	 * <div class="fr">Code de Microscopie générale</div>
-	 * <div class="it">Code per Microscopia generale</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for General Microscopy<br>
+	 * DE: Code für Allgemeine Mikroskopie<br>
+	 * FR: Code de Microscopie générale<br>
+	 * IT: Code per Microscopia generale<br>
 	 */
 	public static final String GENERAL_MICROSCOPY_CODE = "GM";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Hemodynamic Waveform</div>
-	 * <div class="de">Code für Hämodynamische Druckkurve</div>
-	 * <div class="fr">Code de Courbe hémodynamique</div>
-	 * <div class="it">Code per Monitoraggio emodinamico</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Hemodynamic Waveform<br>
+	 * DE: Code für Hämodynamische Druckkurve<br>
+	 * FR: Code de Courbe hémodynamique<br>
+	 * IT: Code per Monitoraggio emodinamico<br>
 	 */
 	public static final String HEMODYNAMIC_WAVEFORM_CODE = "HD";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Intravascular Optical Coherence Tomography</div>
-	 * <div class="de">Code für Intravaskuläre optische Kohärenztomografie</div>
-	 * <div class="fr">Code de Tomographie en cohérence optique intravasculaire</div>
-	 * <div class="it">Code per Tomografia intravascolare a coerenza ottica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Intravascular Optical Coherence Tomography<br>
+	 * DE: Code für Intravaskuläre optische Kohärenztomografie<br>
+	 * FR: Code de Tomographie en cohérence optique intravasculaire<br>
+	 * IT: Code per Tomografia intravascolare a coerenza ottica<br>
 	 */
 	public static final String INTRAVASCULAR_OPTICAL_COHERENCE_TOMOGRAPHY_CODE = "IVOCT";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Intravascular Ultrasound</div>
-	 * <div class="de">Code für Intravaskulärer Ultraschall</div>
-	 * <div class="fr">Code de Ultrason intravasculaire</div>
-	 * <div class="it">Code per Ecografia intravascolare</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Intravascular Ultrasound<br>
+	 * DE: Code für Intravaskulärer Ultraschall<br>
+	 * FR: Code de Ultrason intravasculaire<br>
+	 * IT: Code per Ecografia intravascolare<br>
 	 */
 	public static final String INTRAVASCULAR_ULTRASOUND_CODE = "IVUS";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Intra-oral Radiography</div>
-	 * <div class="de">Code für Intraorales Röntgen</div>
-	 * <div class="fr">Code de Radiographie intra-orale</div>
-	 * <div class="it">Code per Radiografia intraorale</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Intra-oral Radiography<br>
+	 * DE: Code für Intraorales Röntgen<br>
+	 * FR: Code de Radiographie intra-orale<br>
+	 * IT: Code per Radiografia intraorale<br>
 	 */
 	public static final String INTRA_ORAL_RADIOGRAPHY_CODE = "IO";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Keratometry</div>
-	 * <div class="de">Code für Keratometrie</div>
-	 * <div class="fr">Code de Kératométrie</div>
-	 * <div class="it">Code per Cheratometria</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Keratometry<br>
+	 * DE: Code für Keratometrie<br>
+	 * FR: Code de Kératométrie<br>
+	 * IT: Code per Cheratometria<br>
 	 */
 	public static final String KERATOMETRY_CODE = "KER";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Lensometry</div>
-	 * <div class="de">Code für Linsenmessung</div>
-	 * <div class="fr">Code de Lensométrie</div>
-	 * <div class="it">Code per Focometria</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Lensometry<br>
+	 * DE: Code für Linsenmessung<br>
+	 * FR: Code de Lensométrie<br>
+	 * IT: Code per Focometria<br>
 	 */
 	public static final String LENSOMETRY_CODE = "LEN";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Magnetic Resonance</div>
-	 * <div class="de">Code für Magnetresonanz</div>
-	 * <div class="fr">Code de Résonance magnétique</div>
-	 * <div class="it">Code per Risonanza magnetica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Magnetic Resonance<br>
+	 * DE: Code für Magnetresonanz<br>
+	 * FR: Code de Résonance magnétique<br>
+	 * IT: Code per Risonanza magnetica<br>
 	 */
 	public static final String MAGNETIC_RESONANCE_CODE = "MR";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Mammography</div>
-	 * <div class="de">Code für Mammografie</div>
-	 * <div class="fr">Code de Mammographie</div>
-	 * <div class="it">Code per Mammografia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Mammography<br>
+	 * DE: Code für Mammografie<br>
+	 * FR: Code de Mammographie<br>
+	 * IT: Code per Mammografia<br>
 	 */
 	public static final String MAMMOGRAPHY_CODE = "MG";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Nuclear Medicine</div>
-	 * <div class="de">Code für Nuklearmedizin</div>
-	 * <div class="fr">Code de Médecine nucléaire</div>
-	 * <div class="it">Code per Medicina nucleare</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Nuclear Medicine<br>
+	 * DE: Code für Nuklearmedizin<br>
+	 * FR: Code de Médecine nucléaire<br>
+	 * IT: Code per Medicina nucleare<br>
 	 */
 	public static final String NUCLEAR_MEDICINE_CODE = "NM";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Ophthalmic Axial Measurements</div>
-	 * <div class="de">Code für Augenachsenmessungen</div>
-	 * <div class="fr">Code de Mesures axiales ophtalmiques</div>
-	 * <div class="it">Code per Misurazioni oftalmiche assiali</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Ophthalmic Axial Measurements<br>
+	 * DE: Code für Augenachsenmessungen<br>
+	 * FR: Code de Mesures axiales ophtalmiques<br>
+	 * IT: Code per Misurazioni oftalmiche assiali<br>
 	 */
 	public static final String OPHTHALMIC_AXIAL_MEASUREMENTS_CODE = "OAM";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Ophthalmic Mapping</div>
-	 * <div class="de">Code für Augenkartierung</div>
-	 * <div class="fr">Code de Cartographie ophtalmique</div>
-	 * <div class="it">Code per Mappatura oftalmica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Ophthalmic Mapping<br>
+	 * DE: Code für Augenkartierung<br>
+	 * FR: Code de Cartographie ophtalmique<br>
+	 * IT: Code per Mappatura oftalmica<br>
 	 */
 	public static final String OPHTHALMIC_MAPPING_CODE = "OPM";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Ophthalmic Photography</div>
-	 * <div class="de">Code für Augenfotografie</div>
-	 * <div class="fr">Code de Photographie ophtalmique</div>
-	 * <div class="it">Code per Fotografia oftalmica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Ophthalmic Photography<br>
+	 * DE: Code für Augenfotografie<br>
+	 * FR: Code de Photographie ophtalmique<br>
+	 * IT: Code per Fotografia oftalmica<br>
 	 */
 	public static final String OPHTHALMIC_PHOTOGRAPHY_CODE = "OP";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Ophthalmic Refraction</div>
-	 * <div class="de">Code für Augenrefraktion</div>
-	 * <div class="fr">Code de Réfraction ophtalmique</div>
-	 * <div class="it">Code per Rifrazione oggettiva</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Ophthalmic Refraction<br>
+	 * DE: Code für Augenrefraktion<br>
+	 * FR: Code de Réfraction ophtalmique<br>
+	 * IT: Code per Rifrazione oggettiva<br>
 	 */
 	public static final String OPHTHALMIC_REFRACTION_CODE = "OPR";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Ophthalmic Tomography</div>
-	 * <div class="de">Code für Augentomografie</div>
-	 * <div class="fr">Code de Tomographie ophtalmique</div>
-	 * <div class="it">Code per Tomografia ottica computerizzata</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Ophthalmic Tomography<br>
+	 * DE: Code für Augentomografie<br>
+	 * FR: Code de Tomographie ophtalmique<br>
+	 * IT: Code per Tomografia ottica computerizzata<br>
 	 */
 	public static final String OPHTHALMIC_TOMOGRAPHY_CODE = "OPT";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Ophthalmic Tomography B-scan Volume Analysis</div>
-	 * <div class="de">Code für TODO</div>
-	 * <div class="fr">Code de TODO</div>
-	 * <div class="it">Code per TODO</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Ophthalmic Tomography B-scan Volume Analysis<br>
+	 * DE: Code für TODO<br>
+	 * FR: Code de TODO<br>
+	 * IT: Code per TODO<br>
 	 */
 	public static final String OPHTHALMIC_TOMOGRAPHY_B_SCAN_VOLUME_ANALYSIS_CODE = "OPTBSV";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Ophthalmic Tomography En Face</div>
-	 * <div class="de">Code für TODO</div>
-	 * <div class="fr">Code de TODO</div>
-	 * <div class="it">Code per TODO</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Ophthalmic Tomography En Face<br>
+	 * DE: Code für TODO<br>
+	 * FR: Code de TODO<br>
+	 * IT: Code per TODO<br>
 	 */
 	public static final String OPHTHALMIC_TOMOGRAPHY_EN_FACE_CODE = "OPTENF";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Ophthalmic Visual Field</div>
-	 * <div class="de">Code für Gesichtsfeld der Augen</div>
-	 * <div class="fr">Code de Champ visuel ophtalmique</div>
-	 * <div class="it">Code per Perimetria computerizzata</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Ophthalmic Visual Field<br>
+	 * DE: Code für Gesichtsfeld der Augen<br>
+	 * FR: Code de Champ visuel ophtalmique<br>
+	 * IT: Code per Perimetria computerizzata<br>
 	 */
 	public static final String OPHTHALMIC_VISUAL_FIELD_CODE = "OPV";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Optical Coherence Tomography</div>
-	 * <div class="de">Code für Optische Kohärenztomografie</div>
-	 * <div class="fr">Code de Tomographie en cohérence optique</div>
-	 * <div class="it">Code per Tomografia a coerenza ottica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Optical Coherence Tomography<br>
+	 * DE: Code für Optische Kohärenztomografie<br>
+	 * FR: Code de Tomographie en cohérence optique<br>
+	 * IT: Code per Tomografia a coerenza ottica<br>
 	 */
 	public static final String OPTICAL_COHERENCE_TOMOGRAPHY_CODE = "OCT";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Optical Surface Scanner</div>
-	 * <div class="de">Code für Optischer Oberflächenscanner</div>
-	 * <div class="fr">Code de Scanneur optique de surface</div>
-	 * <div class="it">Code per Scanner ottico per superfici</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Optical Surface Scanner<br>
+	 * DE: Code für Optischer Oberflächenscanner<br>
+	 * FR: Code de Scanneur optique de surface<br>
+	 * IT: Code per Scanner ottico per superfici<br>
 	 */
 	public static final String OPTICAL_SURFACE_SCANNER_CODE = "OSS";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Panoramic X-Ray</div>
-	 * <div class="de">Code für Panoramaröntgen</div>
-	 * <div class="fr">Code de Radiographie panoramique</div>
-	 * <div class="it">Code per Radiografia panoramica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Panoramic X-Ray<br>
+	 * DE: Code für Panoramaröntgen<br>
+	 * FR: Code de Radiographie panoramique<br>
+	 * IT: Code per Radiografia panoramica<br>
 	 */
 	public static final String PANORAMIC_X_RAY_CODE = "PX";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Positron emission tomography</div>
-	 * <div class="de">Code für Positronen-Emissions-Tomografie</div>
-	 * <div class="fr">Code de Tomographie par émission de positons</div>
-	 * <div class="it">Code per Tomografia a emissione di positroni</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Positron emission tomography<br>
+	 * DE: Code für Positronen-Emissions-Tomografie<br>
+	 * FR: Code de Tomographie par émission de positons<br>
+	 * IT: Code per Tomografia a emissione di positroni<br>
 	 */
 	public static final String POSITRON_EMISSION_TOMOGRAPHY_CODE = "PT";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Radiofluoroscopy</div>
-	 * <div class="de">Code für Radio-Fluoroskopie</div>
-	 * <div class="fr">Code de Radio-fluoroscopie</div>
-	 * <div class="it">Code per Radiofluoroscopia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Radiofluoroscopy<br>
+	 * DE: Code für Radio-Fluoroskopie<br>
+	 * FR: Code de Radio-fluoroscopie<br>
+	 * IT: Code per Radiofluoroscopia<br>
 	 */
 	public static final String RADIOFLUOROSCOPY_CODE = "RF";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Radiographic imaging</div>
-	 * <div class="de">Code für Röntgenbildgebung</div>
-	 * <div class="fr">Code de Imagerie radiographique</div>
-	 * <div class="it">Code per Imaging radiografico</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Radiographic imaging<br>
+	 * DE: Code für Röntgenbildgebung<br>
+	 * FR: Code de Imagerie radiographique<br>
+	 * IT: Code per Imaging radiografico<br>
 	 */
 	public static final String RADIOGRAPHIC_IMAGING_CODE = "RG";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Slide Microscopy</div>
-	 * <div class="de">Code für Objektträger Mikroskopie</div>
-	 * <div class="fr">Code de Microscopie avec lamelles</div>
-	 * <div class="it">Code per Microscopia a vetrini</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Slide Microscopy<br>
+	 * DE: Code für Objektträger Mikroskopie<br>
+	 * FR: Code de Microscopie avec lamelles<br>
+	 * IT: Code per Microscopia a vetrini<br>
 	 */
 	public static final String SLIDE_MICROSCOPY_CODE = "SM";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Subjective Refraction</div>
-	 * <div class="de">Code für Subjektive Refraktion</div>
-	 * <div class="fr">Code de Réfraction subjective</div>
-	 * <div class="it">Code per Rifrazione soggettiva</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Subjective Refraction<br>
+	 * DE: Code für Subjektive Refraktion<br>
+	 * FR: Code de Réfraction subjective<br>
+	 * IT: Code per Rifrazione soggettiva<br>
 	 */
 	public static final String SUBJECTIVE_REFRACTION_CODE = "SRF";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Ultrasound</div>
-	 * <div class="de">Code für Ultraschall</div>
-	 * <div class="fr">Code de Ultrason</div>
-	 * <div class="it">Code per Ecografia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Ultrasound<br>
+	 * DE: Code für Ultraschall<br>
+	 * FR: Code de Ultrason<br>
+	 * IT: Code per Ecografia<br>
 	 */
 	public static final String ULTRASOUND_CODE = "US";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Ultrasound Bone Densitometry</div>
-	 * <div class="de">Code für Ultraschall-Knochendichtemessung</div>
-	 * <div class="fr">Code de Densitométrie osseuse par ultrasons</div>
-	 * <div class="it">Code per Densitometria ossea a ultrasuoni</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Ultrasound Bone Densitometry<br>
+	 * DE: Code für Ultraschall-Knochendichtemessung<br>
+	 * FR: Code de Densitométrie osseuse par ultrasons<br>
+	 * IT: Code per Densitometria ossea a ultrasuoni<br>
 	 */
 	public static final String ULTRASOUND_BONE_DENSITOMETRY_CODE = "BDUS";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Visual Acuity</div>
-	 * <div class="de">Code für Sehschärfe</div>
-	 * <div class="fr">Code de Acuité visuelle</div>
-	 * <div class="it">Code per Acutezza visiva</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Visual Acuity<br>
+	 * DE: Code für Sehschärfe<br>
+	 * FR: Code de Acuité visuelle<br>
+	 * IT: Code per Acutezza visiva<br>
 	 */
 	public static final String VISUAL_ACUITY_CODE = "VA";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for X-Ray Angiography</div>
-	 * <div class="de">Code für Röntgen-Angiografie</div>
-	 * <div class="fr">Code de Angiographie par rayons X</div>
-	 * <div class="it">Code per Angiografia a raggi X</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for X-Ray Angiography<br>
+	 * DE: Code für Röntgen-Angiografie<br>
+	 * FR: Code de Angiographie par rayons X<br>
+	 * IT: Code per Angiografia a raggi X<br>
 	 */
 	public static final String X_RAY_ANGIOGRAPHY_CODE = "XA";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
-	 * <!-- @formatter:on -->
+	 * Identifier of the value set.
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.8";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Name of the value set</div>
-	 * <div class="de">Name des Value Sets</div>
-	 * <!-- @formatter:on -->
+	 * Name of the value set.
 	 */
 	public static final String VALUE_SET_NAME = "DocumentEntry.eventCodeList";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
-	 * <!-- @formatter:on -->
+	 * Gets the Enum with a given code.
 	 *
-	 * @param code
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
+	 * @param code The code value.
+	 * @return the enum value found or {@code null}.
 	 */
 	public static EventCodeList getEnum(final String code) {
 		for (final EventCodeList x : values()) {
@@ -883,14 +653,10 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
-	 * <!-- @formatter:on -->
+	 * Checks if a given enum is part of this value set.
 	 *
-	 * @param enumName
-	 *            <div class="de"> enumName</div>
-	 * @return true, if enum is in this value set
+	 * @param enumName The name of the enum.
+	 * @return {@code true} if the name is found in this value set, {@code false} otherwise.
 	 */
 	public static boolean isEnumOfValueSet(final String enumName) {
 		if (enumName == null) {
@@ -905,14 +671,10 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
-	 * <!-- @formatter:on -->
+	 * Checks if a given code value is in this value set.
 	 *
-	 * @param codeValue
-	 *            <div class="de"> code</div>
-	 * @return true, if is in value set
+	 * @param codeValue The code value.
+	 * @return {@code true} if the value is found in this value set, {@code false} otherwise.
 	 */
 	public static boolean isInValueSet(final String codeValue) {
 		for (final EventCodeList x : values()) {
@@ -924,50 +686,32 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Machine interpretable and (inside this class) unique code</div>
-	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse) eindeutiger Code</div>
-	 * <!-- @formatter:on -->
+	 * Machine interpretable and (inside this class) unique code.
 	 */
 	private String code;
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Identifier of the referencing code system.</div>
-	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
-	 * <!-- @formatter:on -->
+	 * Identifier of the referencing code system.
 	 */
 	private String codeSystem;
 
 	/**
-	 * The display names per language
+	 * The display names per language.
 	 */
 	private Map<LanguageCode, String> displayNames;
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display Name</div>
-	 * <div class="de">Instanziiert dieses Enum Object mittels eines Codes und einem Display Name</div>.
-	 * <!-- @formatter:on -->
+	 * Instantiates this enum with a given code and display names.
 	 *
-	 * @param code
-	 *            code
-	 * @param codeSystem
-	 *            codeSystem
-	 * @param displayName
-	 *            the default display name
-	 * @param displayNameEn
-	 *            the display name en
-	 * @param displayNameDe
-	 *            the display name de
-	 * @param displayNameFr
-	 *            the display name fr
-	 * @param displayNameIt
-	 *            the display name it
+	 * @param code          The code value.
+	 * @param codeSystem    The code system (OID).
+	 * @param displayName   The default display name.
+	 * @param displayNameEn The display name in English.
+	 * @param displayNameDe The display name in German.
+	 * @param displayNameFr The display name in French.
+	 * @param displayNameIt The display name in Italian.
 	 */
-	EventCodeList(final String code, final String codeSystem, final String displayName,
-			final String displayNameEn, final String displayNameDe, final String displayNameFr,
-			final String displayNameIt) {
+	EventCodeList(final String code, final String codeSystem, final String displayName, final String displayNameEn, final String displayNameDe, final String displayNameFr, final String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		this.displayNames = new HashMap<>();
@@ -979,12 +723,9 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the code system identifier.</div>
-	 * <div class="de">Liefert den Code System Identifikator.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the code system identifier.
 	 *
-	 * @return <div class="en">the code system identifier</div>
+	 * @return the code system identifier.
 	 */
 	@Override
 	public String getCodeSystemId() {
@@ -992,29 +733,23 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the code system name.</div>
-	 * <div class="de">Liefert den Code System Namen.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the code system name.
 	 *
-	 * @return <div class="en">the code system identifier</div>
+	 * @return the code system identifier.
 	 */
 	@Override
 	public String getCodeSystemName() {
-		String retVal = "";
-		CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
-		if (cs != null)
-			retVal = cs.getCodeSystemName();
-		return retVal;
+		final CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
+		if (cs != null) {
+			return cs.getCodeSystemName();
+		}
+		return "";
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>
-	 * <!-- @formatter:on -->
+	 * Gets the code value as a string.
 	 *
-	 * @return <div class="en">the code</div>
+	 * @return the code value.
 	 */
 	@Override
 	public String getCodeValue() {
@@ -1022,21 +757,15 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the display name defined by the language param. If
-	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
-	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the display name defined by the language param. If there is no english translation, the default display name
+	 *      is returned.
 	 *
-	 * @param languageCode
-	 *            the language code to get the display name for
-	 * @return returns the display name in the desired language. if language not
-	 *         found, display name in german will returned
+	 * @param languageCode The language code to get the display name for.
+	 * @return the display name in the desired language. if language not found, display name in german will be returned.
 	 */
 	@Override
-	public String getDisplayName(LanguageCode languageCode) {
-		String displayName = this.displayNames.get(languageCode);
+	public String getDisplayName(final LanguageCode languageCode) {
+		final String displayName = this.displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
 			return this.displayNames.get(null);
 		}
@@ -1044,12 +773,9 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the value set identifier.</div>
-	 * <div class="de">Liefert den Value Set Identifikator.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the value set identifier.
 	 *
-	 * @return <div class="en">the value set identifier</div>
+	 * @return the value set identifier.
 	 */
 	@Override
 	public String getValueSetId() {
@@ -1057,12 +783,9 @@ public enum EventCodeList implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the value set name.</div>
-	 * <div class="de">Liefert den Value Set Namen.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the value set name.
 	 *
-	 * @return <div class="en">the value set name</div>
+	 * @return the value set name.
 	 */
 	@Override
 	public String getValueSetName() {

@@ -26,63 +26,46 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
- * <!-- @formatter:off -->
  * Enumeration of EprAgentRole values
- *
- * <div class="en"><span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;">Role codes as per Annex 5 EPRO-FDHA, CH:ATC, </span><span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;">version</span> <span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;">July 2019 </span><br clear="none"/></div>
- * <div class="de">no designation found for language GERMAN</div>
- * <div class="fr">no designation found for language FRENCH</div>
- * <div class="it">no designation found for language ITALIAN</div>
- *
- * Identifier: 2.16.756.5.30.1.127.3.10.13.1
- * Effective date: 2019-11-03 14:34
- * Version: 201907.1-stable
+ * <p>
+ * EN: <span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;">Role codes as per Annex 5 EPRO-FDHA, CH:ATC, </span><span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;">version</span> <span style="color: rgb(51, 51, 51); font-family: Verdana, Arial, sans-serif; font-size: 12px;">July 2019 </span><br clear="none"/><br>
+ * DE: No designation found.<br>
+ * FR: No designation found.<br>
+ * IT: No designation found.<br>
+ * <p>
+ * Identifier: 2.16.756.5.30.1.127.3.10.13.1<br>
+ * Effective date: 2019-11-03 14:34<br>
+ * Version: 201907.1-stable<br>
  * Status: FINAL
- * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-04-22")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-08-26")
 public enum AgentRole implements ValueSetEnumInterface {
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Group</div>
-	 * <!-- @formatter:on -->
+	 * EN: Group<br>
 	 */
-	GROUP("GRP", "2.16.756.5.30.1.127.3.10.14", "Group", "Group", "TOTRANSLATE", "TOTRANSLATE",
-			"TOTRANSLATE");
+	GROUP("GRP", "2.16.756.5.30.1.127.3.10.14", "Group", "Group", "TOTRANSLATE", "TOTRANSLATE", "TOTRANSLATE");
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Group</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Group<br>
 	 */
 	public static final String GROUP_CODE = "GRP";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
-	 * <!-- @formatter:on -->
+	 * Identifier of the value set.
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.13.1";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Name of the value set</div>
-	 * <div class="de">Name des Value Sets</div>
-	 * <!-- @formatter:on -->
+	 * Name of the value set.
 	 */
 	public static final String VALUE_SET_NAME = "EprAgentRole";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
-	 * <!-- @formatter:on -->
+	 * Gets the Enum with a given code.
 	 *
-	 * @param code
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
+	 * @param code The code value.
+	 * @return the enum value found or {@code null}.
 	 */
 	public static AgentRole getEnum(final String code) {
 		for (final AgentRole x : values()) {
@@ -94,14 +77,10 @@ public enum AgentRole implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
-	 * <!-- @formatter:on -->
+	 * Checks if a given enum is part of this value set.
 	 *
-	 * @param enumName
-	 *            <div class="de"> enumName</div>
-	 * @return true, if enum is in this value set
+	 * @param enumName The name of the enum.
+	 * @return {@code true} if the name is found in this value set, {@code false} otherwise.
 	 */
 	public static boolean isEnumOfValueSet(final String enumName) {
 		if (enumName == null) {
@@ -116,14 +95,10 @@ public enum AgentRole implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
-	 * <!-- @formatter:on -->
+	 * Checks if a given code value is in this value set.
 	 *
-	 * @param codeValue
-	 *            <div class="de"> code</div>
-	 * @return true, if is in value set
+	 * @param codeValue The code value.
+	 * @return {@code true} if the value is found in this value set, {@code false} otherwise.
 	 */
 	public static boolean isInValueSet(final String codeValue) {
 		for (final AgentRole x : values()) {
@@ -135,50 +110,32 @@ public enum AgentRole implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Machine interpretable and (inside this class) unique code</div>
-	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse) eindeutiger Code</div>
-	 * <!-- @formatter:on -->
+	 * Machine interpretable and (inside this class) unique code.
 	 */
 	private String code;
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Identifier of the referencing code system.</div>
-	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
-	 * <!-- @formatter:on -->
+	 * Identifier of the referencing code system.
 	 */
 	private String codeSystem;
 
 	/**
-	 * The display names per language
+	 * The display names per language.
 	 */
 	private Map<LanguageCode, String> displayNames;
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display Name</div>
-	 * <div class="de">Instanziiert dieses Enum Object mittels eines Codes und einem Display Name</div>.
-	 * <!-- @formatter:on -->
+	 * Instantiates this enum with a given code and display names.
 	 *
-	 * @param code
-	 *            code
-	 * @param codeSystem
-	 *            codeSystem
-	 * @param displayName
-	 *            the default display name
-	 * @param displayNameEn
-	 *            the display name en
-	 * @param displayNameDe
-	 *            the display name de
-	 * @param displayNameFr
-	 *            the display name fr
-	 * @param displayNameIt
-	 *            the display name it
+	 * @param code          The code value.
+	 * @param codeSystem    The code system (OID).
+	 * @param displayName   The default display name.
+	 * @param displayNameEn The display name in English.
+	 * @param displayNameDe The display name in German.
+	 * @param displayNameFr The display name in French.
+	 * @param displayNameIt The display name in Italian.
 	 */
-	AgentRole(final String code, final String codeSystem, final String displayName,
-			final String displayNameEn, final String displayNameDe, final String displayNameFr,
-			final String displayNameIt) {
+	AgentRole(final String code, final String codeSystem, final String displayName, final String displayNameEn, final String displayNameDe, final String displayNameFr, final String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		this.displayNames = new HashMap<>();
@@ -190,12 +147,9 @@ public enum AgentRole implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the code system identifier.</div>
-	 * <div class="de">Liefert den Code System Identifikator.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the code system identifier.
 	 *
-	 * @return <div class="en">the code system identifier</div>
+	 * @return the code system identifier.
 	 */
 	@Override
 	public String getCodeSystemId() {
@@ -203,29 +157,23 @@ public enum AgentRole implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the code system name.</div>
-	 * <div class="de">Liefert den Code System Namen.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the code system name.
 	 *
-	 * @return <div class="en">the code system identifier</div>
+	 * @return the code system identifier.
 	 */
 	@Override
 	public String getCodeSystemName() {
-		String retVal = "";
-		CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
-		if (cs != null)
-			retVal = cs.getCodeSystemName();
-		return retVal;
+		final CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
+		if (cs != null) {
+			return cs.getCodeSystemName();
+		}
+		return "";
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>
-	 * <!-- @formatter:on -->
+	 * Gets the code value as a string.
 	 *
-	 * @return <div class="en">the code</div>
+	 * @return the code value.
 	 */
 	@Override
 	public String getCodeValue() {
@@ -233,21 +181,15 @@ public enum AgentRole implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the display name defined by the language param. If
-	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
-	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the display name defined by the language param. If there is no english translation, the default display name
+	 *      is returned.
 	 *
-	 * @param languageCode
-	 *            the language code to get the display name for
-	 * @return returns the display name in the desired language. if language not
-	 *         found, display name in german will returned
+	 * @param languageCode The language code to get the display name for.
+	 * @return the display name in the desired language. if language not found, display name in german will be returned.
 	 */
 	@Override
-	public String getDisplayName(LanguageCode languageCode) {
-		String displayName = this.displayNames.get(languageCode);
+	public String getDisplayName(final LanguageCode languageCode) {
+		final String displayName = this.displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
 			return this.displayNames.get(null);
 		}
@@ -255,12 +197,9 @@ public enum AgentRole implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the value set identifier.</div>
-	 * <div class="de">Liefert den Value Set Identifikator.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the value set identifier.
 	 *
-	 * @return <div class="en">the value set identifier</div>
+	 * @return the value set identifier.
 	 */
 	@Override
 	public String getValueSetId() {
@@ -268,12 +207,9 @@ public enum AgentRole implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the value set name.</div>
-	 * <div class="de">Liefert den Value Set Namen.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the value set name.
 	 *
-	 * @return <div class="en">the value set name</div>
+	 * @return the value set name.
 	 */
 	@Override
 	public String getValueSetName() {

@@ -26,1272 +26,922 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
- * <!-- @formatter:off -->
  * Enumeration of HCProfessional.hcSpecialisation values
- *
- * <div class="en">no designation found for language ENGLISH</div>
- * <div class="de">no designation found for language GERMAN</div>
- * <div class="fr">no designation found for language FRENCH</div>
- * <div class="it">no designation found for language ITALIAN</div>
- *
- * Identifier: 2.16.756.5.30.1.127.3.10.8.2
- * Effective date: 2020-05-18 19:54
- * Version: 202004.1-stable
+ * <p>
+ * EN: No designation found.<br>
+ * DE: No designation found.<br>
+ * FR: No designation found.<br>
+ * IT: No designation found.<br>
+ * <p>
+ * Identifier: 2.16.756.5.30.1.127.3.10.8.2<br>
+ * Effective date: 2020-05-18 19:54<br>
+ * Version: 202004.1-stable<br>
  * Status: FINAL
- * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-04-22")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-08-26")
 public enum HcpSpecialisation implements ValueSetEnumInterface {
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Allergology and clinical immunology</div>
-	 * <div class="de">Allergologie und klinische Immunologie</div>
-	 * <div class="fr">Allergologie et immunologie clinique</div>
-	 * <div class="it">Allergologia e immunologia clinica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Allergology and clinical immunology<br>
+	 * DE: Allergologie und klinische Immunologie<br>
+	 * FR: Allergologie et immunologie clinique<br>
+	 * IT: Allergologia e immunologia clinica<br>
 	 */
-	ALLERGOLOGY_AND_CLINICAL_IMMUNOLOGY("1019", "2.16.756.5.30.1.127.3.5",
-			"Allergology and clinical immunology", "Allergology and clinical immunology",
-			"Allergologie und klinische Immunologie", "Allergologie et immunologie clinique",
-			"Allergologia e immunologia clinica"),
+	ALLERGOLOGY_AND_CLINICAL_IMMUNOLOGY("1019", "2.16.756.5.30.1.127.3.5", "Allergology and clinical immunology", "Allergology and clinical immunology", "Allergologie und klinische Immunologie", "Allergologie et immunologie clinique", "Allergologia e immunologia clinica"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Anaesthesiology</div>
-	 * <div class="de">Anästhesiologie</div>
-	 * <div class="fr">Anesthésiologie</div>
-	 * <div class="it">Anestesiologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Anaesthesiology<br>
+	 * DE: Anästhesiologie<br>
+	 * FR: Anesthésiologie<br>
+	 * IT: Anestesiologia<br>
 	 */
-	ANAESTHESIOLOGY("1012", "2.16.756.5.30.1.127.3.5", "Anaesthesiology", "Anaesthesiology",
-			"Anästhesiologie", "Anesthésiologie", "Anestesiologia"),
+	ANAESTHESIOLOGY("1012", "2.16.756.5.30.1.127.3.5", "Anaesthesiology", "Anaesthesiology", "Anästhesiologie", "Anesthésiologie", "Anestesiologia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Angiology</div>
-	 * <div class="de">Angiologie</div>
-	 * <div class="fr">Angiologie</div>
-	 * <div class="it">Angiologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Angiology<br>
+	 * DE: Angiologie<br>
+	 * FR: Angiologie<br>
+	 * IT: Angiologia<br>
 	 */
-	ANGIOLOGY("1041", "2.16.756.5.30.1.127.3.5", "Angiology", "Angiology", "Angiologie",
-			"Angiologie", "Angiologia"),
+	ANGIOLOGY("1041", "2.16.756.5.30.1.127.3.5", "Angiology", "Angiology", "Angiologie", "Angiologie", "Angiologia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Cardiac and thoracic vascular surgery</div>
-	 * <div class="de">Herz- und thorakale Gefässchirurgie</div>
-	 * <div class="fr">Chirurgie cardiaque et vasculaire thoracique</div>
-	 * <div class="it">Chirurgia del cuore e dei vasi toracici</div>
-	 * <!-- @formatter:on -->
+	 * EN: Cardiac and thoracic vascular surgery<br>
+	 * DE: Herz- und thorakale Gefässchirurgie<br>
+	 * FR: Chirurgie cardiaque et vasculaire thoracique<br>
+	 * IT: Chirurgia del cuore e dei vasi toracici<br>
 	 */
-	CARDIAC_AND_THORACIC_VASCULAR_SURGERY("1004", "2.16.756.5.30.1.127.3.5",
-			"Cardiac and thoracic vascular surgery", "Cardiac and thoracic vascular surgery",
-			"Herz- und thorakale Gefässchirurgie", "Chirurgie cardiaque et vasculaire thoracique",
-			"Chirurgia del cuore e dei vasi toracici"),
+	CARDIAC_AND_THORACIC_VASCULAR_SURGERY("1004", "2.16.756.5.30.1.127.3.5", "Cardiac and thoracic vascular surgery", "Cardiac and thoracic vascular surgery", "Herz- und thorakale Gefässchirurgie", "Chirurgie cardiaque et vasculaire thoracique", "Chirurgia del cuore e dei vasi toracici"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Cardiology</div>
-	 * <div class="de">Kardiologie</div>
-	 * <div class="fr">Cardiologie</div>
-	 * <div class="it">Cardiologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Cardiology<br>
+	 * DE: Kardiologie<br>
+	 * FR: Cardiologie<br>
+	 * IT: Cardiologia<br>
 	 */
-	CARDIOLOGY("1025", "2.16.756.5.30.1.127.3.5", "Cardiology", "Cardiology", "Kardiologie",
-			"Cardiologie", "Cardiologia"),
+	CARDIOLOGY("1025", "2.16.756.5.30.1.127.3.5", "Cardiology", "Cardiology", "Kardiologie", "Cardiologie", "Cardiologia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Child and adolescent psychiatry and psychotherapy</div>
-	 * <div class="de">Kinder- und Jugendpsychiatrie und -psychotherapie</div>
-	 * <div class="fr">Psychiatrie et psychothérapie d’enfants et d’adolescents</div>
-	 * <div class="it">Psichiatria e psicoterapia infantile e dell’adolescenza</div>
-	 * <!-- @formatter:on -->
+	 * EN: Child and adolescent psychiatry and psychotherapy<br>
+	 * DE: Kinder- und Jugendpsychiatrie und -psychotherapie<br>
+	 * FR: Psychiatrie et psychothérapie d’enfants et d’adolescents<br>
+	 * IT: Psichiatria e psicoterapia infantile e dell’adolescenza<br>
 	 */
-	CHILD_AND_ADOLESCENT_PSYCHIATRY_AND_PSYCHOTHERAPY("1027", "2.16.756.5.30.1.127.3.5",
-			"Child and adolescent psychiatry and psychotherapy",
-			"Child and adolescent psychiatry and psychotherapy",
-			"Kinder- und Jugendpsychiatrie und -psychotherapie",
-			"Psychiatrie et psychothérapie d’enfants et d’adolescents",
-			"Psichiatria e psicoterapia infantile e dell’adolescenza"),
+	CHILD_AND_ADOLESCENT_PSYCHIATRY_AND_PSYCHOTHERAPY("1027", "2.16.756.5.30.1.127.3.5", "Child and adolescent psychiatry and psychotherapy", "Child and adolescent psychiatry and psychotherapy", "Kinder- und Jugendpsychiatrie und -psychotherapie", "Psychiatrie et psychothérapie d’enfants et d’adolescents", "Psichiatria e psicoterapia infantile e dell’adolescenza"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Child and adolescent psychology</div>
-	 * <div class="de">Kinder- und Jugendpsychologie</div>
-	 * <div class="fr">psychologie des enfants et des adolescents</div>
-	 * <div class="it">psicologia dell’età evolutiva</div>
-	 * <!-- @formatter:on -->
+	 * EN: Child and adolescent psychology<br>
+	 * DE: Kinder- und Jugendpsychologie<br>
+	 * FR: psychologie des enfants et des adolescents<br>
+	 * IT: psicologia dell’età evolutiva<br>
 	 */
-	CHILD_AND_ADOLESCENT_PSYCHOLOGY("1055", "2.16.756.5.30.1.127.3.5",
-			"Child and adolescent psychology", "Child and adolescent psychology",
-			"Kinder- und Jugendpsychologie", "psychologie des enfants et des adolescents",
-			"psicologia dell’età evolutiva"),
+	CHILD_AND_ADOLESCENT_PSYCHOLOGY("1055", "2.16.756.5.30.1.127.3.5", "Child and adolescent psychology", "Child and adolescent psychology", "Kinder- und Jugendpsychologie", "psychologie des enfants et des adolescents", "psicologia dell’età evolutiva"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Chiropractic specialist</div>
-	 * <div class="de">Fachchiropraktik</div>
-	 * <div class="fr">Chiropratique spécialisée</div>
-	 * <div class="it">Chiropratica specialistica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Chiropractic specialist<br>
+	 * DE: Fachchiropraktik<br>
+	 * FR: Chiropratique spécialisée<br>
+	 * IT: Chiropratica specialistica<br>
 	 */
-	CHIROPRACTIC_SPECIALIST("1011", "2.16.756.5.30.1.127.3.5", "Chiropractic specialist",
-			"Chiropractic specialist", "Fachchiropraktik", "Chiropratique spécialisée",
-			"Chiropratica specialistica"),
+	CHIROPRACTIC_SPECIALIST("1011", "2.16.756.5.30.1.127.3.5", "Chiropractic specialist", "Chiropractic specialist", "Fachchiropraktik", "Chiropratique spécialisée", "Chiropratica specialistica"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Clinical pharmacology and toxicology</div>
-	 * <div class="de">Klinische Pharmakologie und Toxikologie</div>
-	 * <div class="fr">Pharmacologie et toxicologie cliniques</div>
-	 * <div class="it">Farmacologia e tossicologia cliniche</div>
-	 * <!-- @formatter:on -->
+	 * EN: Clinical pharmacology and toxicology<br>
+	 * DE: Klinische Pharmakologie und Toxikologie<br>
+	 * FR: Pharmacologie et toxicologie cliniques<br>
+	 * IT: Farmacologia e tossicologia cliniche<br>
 	 */
-	CLINICAL_PHARMACOLOGY_AND_TOXICOLOGY("1029", "2.16.756.5.30.1.127.3.5",
-			"Clinical pharmacology and toxicology", "Clinical pharmacology and toxicology",
-			"Klinische Pharmakologie und Toxikologie", "Pharmacologie et toxicologie cliniques",
-			"Farmacologia e tossicologia cliniche"),
+	CLINICAL_PHARMACOLOGY_AND_TOXICOLOGY("1029", "2.16.756.5.30.1.127.3.5", "Clinical pharmacology and toxicology", "Clinical pharmacology and toxicology", "Klinische Pharmakologie und Toxikologie", "Pharmacologie et toxicologie cliniques", "Farmacologia e tossicologia cliniche"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Clinical psychology</div>
-	 * <div class="de">Klinische Psychologie</div>
-	 * <div class="fr">psychologie clinique</div>
-	 * <div class="it">psicologia clinica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Clinical psychology<br>
+	 * DE: Klinische Psychologie<br>
+	 * FR: psychologie clinique<br>
+	 * IT: psicologia clinica<br>
 	 */
-	CLINICAL_PSYCHOLOGY("1056", "2.16.756.5.30.1.127.3.5", "Clinical psychology",
-			"Clinical psychology", "Klinische Psychologie", "psychologie clinique",
-			"psicologia clinica"),
+	CLINICAL_PSYCHOLOGY("1056", "2.16.756.5.30.1.127.3.5", "Clinical psychology", "Clinical psychology", "Klinische Psychologie", "psychologie clinique", "psicologia clinica"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Community pharmacy</div>
-	 * <div class="de">Offizinpharmazie</div>
-	 * <div class="fr">Pharmacie d’officine</div>
-	 * <div class="it">Farmacia d’officina</div>
-	 * <!-- @formatter:on -->
+	 * EN: Community pharmacy<br>
+	 * DE: Offizinpharmazie<br>
+	 * FR: Pharmacie d’officine<br>
+	 * IT: Farmacia d’officina<br>
 	 */
-	COMMUNITY_PHARMACY("1052", "2.16.756.5.30.1.127.3.5", "Community pharmacy",
-			"Community pharmacy", "Offizinpharmazie", "Pharmacie d’officine",
-			"Farmacia d’officina"),
+	COMMUNITY_PHARMACY("1052", "2.16.756.5.30.1.127.3.5", "Community pharmacy", "Community pharmacy", "Offizinpharmazie", "Pharmacie d’officine", "Farmacia d’officina"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Dermatology and venereology</div>
-	 * <div class="de">Dermatologie und Venerologie</div>
-	 * <div class="fr">Dermatologie et vénéréologie</div>
-	 * <div class="it">Dermatologia e venereologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Dermatology and venereology<br>
+	 * DE: Dermatologie und Venerologie<br>
+	 * FR: Dermatologie et vénéréologie<br>
+	 * IT: Dermatologia e venereologia<br>
 	 */
-	DERMATOLOGY_AND_VENEREOLOGY("1021", "2.16.756.5.30.1.127.3.5", "Dermatology and venereology",
-			"Dermatology and venereology", "Dermatologie und Venerologie",
-			"Dermatologie et vénéréologie", "Dermatologia e venereologia"),
+	DERMATOLOGY_AND_VENEREOLOGY("1021", "2.16.756.5.30.1.127.3.5", "Dermatology and venereology", "Dermatology and venereology", "Dermatologie und Venerologie", "Dermatologie et vénéréologie", "Dermatologia e venereologia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Endocrinology – Diabetology</div>
-	 * <div class="de">Endokrinologie-Diabetologie</div>
-	 * <div class="fr">Endocrinologie-diabétologie</div>
-	 * <div class="it">Endocrinologia e diabetologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Endocrinology – Diabetology<br>
+	 * DE: Endokrinologie-Diabetologie<br>
+	 * FR: Endocrinologie-diabétologie<br>
+	 * IT: Endocrinologia e diabetologia<br>
 	 */
-	ENDOCRINOLOGY_DIABETOLOGY("1022", "2.16.756.5.30.1.127.3.5", "Endocrinology – Diabetology",
-			"Endocrinology – Diabetology", "Endokrinologie-Diabetologie",
-			"Endocrinologie-diabétologie", "Endocrinologia e diabetologia"),
+	ENDOCRINOLOGY_DIABETOLOGY("1022", "2.16.756.5.30.1.127.3.5", "Endocrinology – Diabetology", "Endocrinology – Diabetology", "Endokrinologie-Diabetologie", "Endocrinologie-diabétologie", "Endocrinologia e diabetologia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Forensic medicine</div>
-	 * <div class="de">Rechtsmedizin</div>
-	 * <div class="fr">Médecine légale</div>
-	 * <div class="it">Medicina legale</div>
-	 * <!-- @formatter:on -->
+	 * EN: Forensic medicine<br>
+	 * DE: Rechtsmedizin<br>
+	 * FR: Médecine légale<br>
+	 * IT: Medicina legale<br>
 	 */
-	FORENSIC_MEDICINE("1046", "2.16.756.5.30.1.127.3.5", "Forensic medicine", "Forensic medicine",
-			"Rechtsmedizin", "Médecine légale", "Medicina legale"),
+	FORENSIC_MEDICINE("1046", "2.16.756.5.30.1.127.3.5", "Forensic medicine", "Forensic medicine", "Rechtsmedizin", "Médecine légale", "Medicina legale"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gastroenterology</div>
-	 * <div class="de">Gastroenterologie</div>
-	 * <div class="fr">Gastroentérologie</div>
-	 * <div class="it">Gastroenterologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Gastroenterology<br>
+	 * DE: Gastroenterologie<br>
+	 * FR: Gastroentérologie<br>
+	 * IT: Gastroenterologia<br>
 	 */
-	GASTROENTEROLOGY("1023", "2.16.756.5.30.1.127.3.5", "Gastroenterology", "Gastroenterology",
-			"Gastroenterologie", "Gastroentérologie", "Gastroenterologia"),
+	GASTROENTEROLOGY("1023", "2.16.756.5.30.1.127.3.5", "Gastroenterology", "Gastroenterology", "Gastroenterologie", "Gastroentérologie", "Gastroenterologia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">General internal medicine</div>
-	 * <div class="de">Allgemeine Innere Medizin</div>
-	 * <div class="fr">Médecine interne générale</div>
-	 * <div class="it">Medicina interna generale</div>
-	 * <!-- @formatter:on -->
+	 * EN: General internal medicine<br>
+	 * DE: Allgemeine Innere Medizin<br>
+	 * FR: Médecine interne générale<br>
+	 * IT: Medicina interna generale<br>
 	 */
-	GENERAL_INTERNAL_MEDICINE("1051", "2.16.756.5.30.1.127.3.5", "General internal medicine",
-			"General internal medicine", "Allgemeine Innere Medizin",
-			"Médecine interne générale", "Medicina interna generale"),
+	GENERAL_INTERNAL_MEDICINE("1051", "2.16.756.5.30.1.127.3.5", "General internal medicine", "General internal medicine", "Allgemeine Innere Medizin", "Médecine interne générale", "Medicina interna generale"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">General medical practitioner</div>
-	 * <div class="de">Praktische Ärztin _ Praktischer Arzt</div>
-	 * <div class="fr">Médecin praticien</div>
-	 * <div class="it">Medico generico</div>
-	 * <!-- @formatter:on -->
+	 * EN: General medical practitioner<br>
+	 * DE: Praktische Ärztin _ Praktischer Arzt<br>
+	 * FR: Médecin praticien<br>
+	 * IT: Medico generico<br>
 	 */
-	GENERAL_MEDICAL_PRACTITIONER("1040", "2.16.756.5.30.1.127.3.5", "General medical practitioner",
-			"General medical practitioner", "Praktische Ärztin _ Praktischer Arzt",
-			"Médecin praticien", "Medico generico"),
+	GENERAL_MEDICAL_PRACTITIONER("1040", "2.16.756.5.30.1.127.3.5", "General medical practitioner", "General medical practitioner", "Praktische Ärztin _ Praktischer Arzt", "Médecin praticien", "Medico generico"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gynaecology and obstetrics</div>
-	 * <div class="de">Gynäkologie und Geburtshilfe</div>
-	 * <div class="fr">Gynécologie et obstétrique</div>
-	 * <div class="it">Ginecologia e ostetricia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Gynaecology and obstetrics<br>
+	 * DE: Gynäkologie und Geburtshilfe<br>
+	 * FR: Gynécologie et obstétrique<br>
+	 * IT: Ginecologia e ostetricia<br>
 	 */
-	GYNAECOLOGY_AND_OBSTETRICS("1003", "2.16.756.5.30.1.127.3.5", "Gynaecology and obstetrics",
-			"Gynaecology and obstetrics", "Gynäkologie und Geburtshilfe",
-			"Gynécologie et obstétrique", "Ginecologia e ostetricia"),
+	GYNAECOLOGY_AND_OBSTETRICS("1003", "2.16.756.5.30.1.127.3.5", "Gynaecology and obstetrics", "Gynaecology and obstetrics", "Gynäkologie und Geburtshilfe", "Gynécologie et obstétrique", "Ginecologia e ostetricia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Haematology</div>
-	 * <div class="de">Hämatologie</div>
-	 * <div class="fr">Hématologie</div>
-	 * <div class="it">Ematologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Haematology<br>
+	 * DE: Hämatologie<br>
+	 * FR: Hématologie<br>
+	 * IT: Ematologia<br>
 	 */
-	HAEMATOLOGY("1024", "2.16.756.5.30.1.127.3.5", "Haematology", "Haematology", "Hämatologie",
-			"Hématologie", "Ematologia"),
+	HAEMATOLOGY("1024", "2.16.756.5.30.1.127.3.5", "Haematology", "Haematology", "Hämatologie", "Hématologie", "Ematologia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Hand surgery</div>
-	 * <div class="de">Handchirurgie</div>
-	 * <div class="fr">Chirurgie de la main</div>
-	 * <div class="it">Chirurgia della mano</div>
-	 * <!-- @formatter:on -->
+	 * EN: Hand surgery<br>
+	 * DE: Handchirurgie<br>
+	 * FR: Chirurgie de la main<br>
+	 * IT: Chirurgia della mano<br>
 	 */
-	HAND_SURGERY("1059", "2.16.756.5.30.1.127.3.5", "Hand surgery", "Hand surgery", "Handchirurgie",
-			"Chirurgie de la main", "Chirurgia della mano"),
+	HAND_SURGERY("1059", "2.16.756.5.30.1.127.3.5", "Hand surgery", "Hand surgery", "Handchirurgie", "Chirurgie de la main", "Chirurgia della mano"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Health psychology</div>
-	 * <div class="de">Gesundheitspsychologie</div>
-	 * <div class="fr">psychologie de la santé</div>
-	 * <div class="it">psicologia della salute</div>
-	 * <!-- @formatter:on -->
+	 * EN: Health psychology<br>
+	 * DE: Gesundheitspsychologie<br>
+	 * FR: psychologie de la santé<br>
+	 * IT: psicologia della salute<br>
 	 */
-	HEALTH_PSYCHOLOGY("1058", "2.16.756.5.30.1.127.3.5", "Health psychology", "Health psychology",
-			"Gesundheitspsychologie", "psychologie de la santé", "psicologia della salute"),
+	HEALTH_PSYCHOLOGY("1058", "2.16.756.5.30.1.127.3.5", "Health psychology", "Health psychology", "Gesundheitspsychologie", "psychologie de la santé", "psicologia della salute"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Hospital pharmacy</div>
-	 * <div class="de">Spitalpharmazie</div>
-	 * <div class="fr">Pharmacie hospitalière</div>
-	 * <div class="it">Farmacia d’ospedale</div>
-	 * <!-- @formatter:on -->
+	 * EN: Hospital pharmacy<br>
+	 * DE: Spitalpharmazie<br>
+	 * FR: Pharmacie hospitalière<br>
+	 * IT: Farmacia d’ospedale<br>
 	 */
-	HOSPITAL_PHARMACY("1053", "2.16.756.5.30.1.127.3.5", "Hospital pharmacy", "Hospital pharmacy",
-			"Spitalpharmazie", "Pharmacie hospitalière", "Farmacia d’ospedale"),
+	HOSPITAL_PHARMACY("1053", "2.16.756.5.30.1.127.3.5", "Hospital pharmacy", "Hospital pharmacy", "Spitalpharmazie", "Pharmacie hospitalière", "Farmacia d’ospedale"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Infectology</div>
-	 * <div class="de">Infektiologie</div>
-	 * <div class="fr">Infectiologie</div>
-	 * <div class="it">Malattie infettive</div>
-	 * <!-- @formatter:on -->
+	 * EN: Infectology<br>
+	 * DE: Infektiologie<br>
+	 * FR: Infectiologie<br>
+	 * IT: Malattie infettive<br>
 	 */
-	INFECTOLOGY("1039", "2.16.756.5.30.1.127.3.5", "Infectology", "Infectology", "Infektiologie",
-			"Infectiologie", "Malattie infettive"),
+	INFECTOLOGY("1039", "2.16.756.5.30.1.127.3.5", "Infectology", "Infectology", "Infektiologie", "Infectiologie", "Malattie infettive"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Intensive care medicine</div>
-	 * <div class="de">Intensivmedizin</div>
-	 * <div class="fr">Médecine intensive</div>
-	 * <div class="it">Medicina intensiva</div>
-	 * <!-- @formatter:on -->
+	 * EN: Intensive care medicine<br>
+	 * DE: Intensivmedizin<br>
+	 * FR: Médecine intensive<br>
+	 * IT: Medicina intensiva<br>
 	 */
-	INTENSIVE_CARE_MEDICINE("1042", "2.16.756.5.30.1.127.3.5", "Intensive care medicine",
-			"Intensive care medicine", "Intensivmedizin", "Médecine intensive",
-			"Medicina intensiva"),
+	INTENSIVE_CARE_MEDICINE("1042", "2.16.756.5.30.1.127.3.5", "Intensive care medicine", "Intensive care medicine", "Intensivmedizin", "Médecine intensive", "Medicina intensiva"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Medical genetics</div>
-	 * <div class="de">Medizinische Genetik</div>
-	 * <div class="fr">Génétique médicale</div>
-	 * <div class="it">Genetica medica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Medical genetics<br>
+	 * DE: Medizinische Genetik<br>
+	 * FR: Génétique médicale<br>
+	 * IT: Genetica medica<br>
 	 */
-	MEDICAL_GENETICS("1043", "2.16.756.5.30.1.127.3.5", "Medical genetics", "Medical genetics",
-			"Medizinische Genetik", "Génétique médicale", "Genetica medica"),
+	MEDICAL_GENETICS("1043", "2.16.756.5.30.1.127.3.5", "Medical genetics", "Medical genetics", "Medizinische Genetik", "Génétique médicale", "Genetica medica"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Medical oncology</div>
-	 * <div class="de">Medizinische Onkologie</div>
-	 * <div class="fr">Oncologie médicale</div>
-	 * <div class="it">Oncologia medica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Medical oncology<br>
+	 * DE: Medizinische Onkologie<br>
+	 * FR: Oncologie médicale<br>
+	 * IT: Oncologia medica<br>
 	 */
-	MEDICAL_ONCOLOGY("1044", "2.16.756.5.30.1.127.3.5", "Medical oncology", "Medical oncology",
-			"Medizinische Onkologie", "Oncologie médicale", "Oncologia medica"),
+	MEDICAL_ONCOLOGY("1044", "2.16.756.5.30.1.127.3.5", "Medical oncology", "Medical oncology", "Medizinische Onkologie", "Oncologie médicale", "Oncologia medica"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Nephrology</div>
-	 * <div class="de">Nephrologie</div>
-	 * <div class="fr">Néphrologie</div>
-	 * <div class="it">Nefrologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Nephrology<br>
+	 * DE: Nephrologie<br>
+	 * FR: Néphrologie<br>
+	 * IT: Nefrologia<br>
 	 */
-	NEPHROLOGY("1033", "2.16.756.5.30.1.127.3.5", "Nephrology", "Nephrology", "Nephrologie",
-			"Néphrologie", "Nefrologia"),
+	NEPHROLOGY("1033", "2.16.756.5.30.1.127.3.5", "Nephrology", "Nephrology", "Nephrologie", "Néphrologie", "Nefrologia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Neurology</div>
-	 * <div class="de">Neurologie</div>
-	 * <div class="fr">Neurologie</div>
-	 * <div class="it">Neurologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Neurology<br>
+	 * DE: Neurologie<br>
+	 * FR: Neurologie<br>
+	 * IT: Neurologia<br>
 	 */
-	NEUROLOGY("1014", "2.16.756.5.30.1.127.3.5", "Neurology", "Neurology", "Neurologie",
-			"Neurologie", "Neurologia"),
+	NEUROLOGY("1014", "2.16.756.5.30.1.127.3.5", "Neurology", "Neurology", "Neurologie", "Neurologie", "Neurologia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Neuropsychology</div>
-	 * <div class="de">Neuropsychologie</div>
-	 * <div class="fr">neuropsychologie</div>
-	 * <div class="it">neuropsicologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Neuropsychology<br>
+	 * DE: Neuropsychologie<br>
+	 * FR: neuropsychologie<br>
+	 * IT: neuropsicologia<br>
 	 */
-	NEUROPSYCHOLOGY("1057", "2.16.756.5.30.1.127.3.5", "Neuropsychology", "Neuropsychology",
-			"Neuropsychologie", "neuropsychologie", "neuropsicologia"),
+	NEUROPSYCHOLOGY("1057", "2.16.756.5.30.1.127.3.5", "Neuropsychology", "Neuropsychology", "Neuropsychologie", "neuropsychologie", "neuropsicologia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Neurosurgery</div>
-	 * <div class="de">Neurochirurgie</div>
-	 * <div class="fr">Neurochirurgie</div>
-	 * <div class="it">Neurochirurgia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Neurosurgery<br>
+	 * DE: Neurochirurgie<br>
+	 * FR: Neurochirurgie<br>
+	 * IT: Neurochirurgia<br>
 	 */
-	NEUROSURGERY("1013", "2.16.756.5.30.1.127.3.5", "Neurosurgery", "Neurosurgery",
-			"Neurochirurgie", "Neurochirurgie", "Neurochirurgia"),
+	NEUROSURGERY("1013", "2.16.756.5.30.1.127.3.5", "Neurosurgery", "Neurosurgery", "Neurochirurgie", "Neurochirurgie", "Neurochirurgia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Nuclear medicine</div>
-	 * <div class="de">Nuklearmedizin</div>
-	 * <div class="fr">Médecine nucléaire</div>
-	 * <div class="it">Medicina nucleare</div>
-	 * <!-- @formatter:on -->
+	 * EN: Nuclear medicine<br>
+	 * DE: Nuklearmedizin<br>
+	 * FR: Médecine nucléaire<br>
+	 * IT: Medicina nucleare<br>
 	 */
-	NUCLEAR_MEDICINE("1031", "2.16.756.5.30.1.127.3.5", "Nuclear medicine", "Nuclear medicine",
-			"Nuklearmedizin", "Médecine nucléaire", "Medicina nucleare"),
+	NUCLEAR_MEDICINE("1031", "2.16.756.5.30.1.127.3.5", "Nuclear medicine", "Nuclear medicine", "Nuklearmedizin", "Médecine nucléaire", "Medicina nucleare"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Occupational medicine</div>
-	 * <div class="de">Arbeitsmedizin</div>
-	 * <div class="fr">Médecine du travail</div>
-	 * <div class="it">Medicina del lavoro</div>
-	 * <!-- @formatter:on -->
+	 * EN: Occupational medicine<br>
+	 * DE: Arbeitsmedizin<br>
+	 * FR: Médecine du travail<br>
+	 * IT: Medicina del lavoro<br>
 	 */
-	OCCUPATIONAL_MEDICINE("1020", "2.16.756.5.30.1.127.3.5", "Occupational medicine",
-			"Occupational medicine", "Arbeitsmedizin", "Médecine du travail",
-			"Medicina del lavoro"),
+	OCCUPATIONAL_MEDICINE("1020", "2.16.756.5.30.1.127.3.5", "Occupational medicine", "Occupational medicine", "Arbeitsmedizin", "Médecine du travail", "Medicina del lavoro"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Ophthalmology</div>
-	 * <div class="de">Ophthalmologie</div>
-	 * <div class="fr">Ophtalmologie</div>
-	 * <div class="it">Oftalmologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Ophthalmology<br>
+	 * DE: Ophthalmologie<br>
+	 * FR: Ophtalmologie<br>
+	 * IT: Oftalmologia<br>
 	 */
-	OPHTHALMOLOGY("1007", "2.16.756.5.30.1.127.3.5", "Ophthalmology", "Ophthalmology",
-			"Ophthalmologie", "Ophtalmologie", "Oftalmologia"),
+	OPHTHALMOLOGY("1007", "2.16.756.5.30.1.127.3.5", "Ophthalmology", "Ophthalmology", "Ophthalmologie", "Ophtalmologie", "Oftalmologia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Oral and maxillofacial surgery</div>
-	 * <div class="de">Mund-, Kiefer- und Gesichtschirurgie</div>
-	 * <div class="fr">Chirurgie orale et maxillo-faciale</div>
-	 * <div class="it">Chirurgia oro-maxillo-facciale</div>
-	 * <!-- @formatter:on -->
+	 * EN: Oral and maxillofacial surgery<br>
+	 * DE: Mund-, Kiefer- und Gesichtschirurgie<br>
+	 * FR: Chirurgie orale et maxillo-faciale<br>
+	 * IT: Chirurgia oro-maxillo-facciale<br>
 	 */
-	ORAL_AND_MAXILLOFACIAL_SURGERY("1026", "2.16.756.5.30.1.127.3.5",
-			"Oral and maxillofacial surgery", "Oral and maxillofacial surgery",
-			"Mund-, Kiefer- und Gesichtschirurgie", "Chirurgie orale et maxillo-faciale",
-			"Chirurgia oro-maxillo-facciale"),
+	ORAL_AND_MAXILLOFACIAL_SURGERY("1026", "2.16.756.5.30.1.127.3.5", "Oral and maxillofacial surgery", "Oral and maxillofacial surgery", "Mund-, Kiefer- und Gesichtschirurgie", "Chirurgie orale et maxillo-faciale", "Chirurgia oro-maxillo-facciale"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Oral surgery</div>
-	 * <div class="de">Oralchirurgie</div>
-	 * <div class="fr">Chirurgie orale</div>
-	 * <div class="it">Chirurgia orale</div>
-	 * <!-- @formatter:on -->
+	 * EN: Oral surgery<br>
+	 * DE: Oralchirurgie<br>
+	 * FR: Chirurgie orale<br>
+	 * IT: Chirurgia orale<br>
 	 */
-	ORAL_SURGERY("1047", "2.16.756.5.30.1.127.3.5", "Oral surgery", "Oral surgery", "Oralchirurgie",
-			"Chirurgie orale", "Chirurgia orale"),
+	ORAL_SURGERY("1047", "2.16.756.5.30.1.127.3.5", "Oral surgery", "Oral surgery", "Oralchirurgie", "Chirurgie orale", "Chirurgia orale"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Orthodontics</div>
-	 * <div class="de">Kieferorthopädie</div>
-	 * <div class="fr">Orthodontie</div>
-	 * <div class="it">Ortodonzia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Orthodontics<br>
+	 * DE: Kieferorthopädie<br>
+	 * FR: Orthodontie<br>
+	 * IT: Ortodonzia<br>
 	 */
-	ORTHODONTICS("1010", "2.16.756.5.30.1.127.3.5", "Orthodontics", "Orthodontics",
-			"Kieferorthopädie", "Orthodontie", "Ortodonzia"),
+	ORTHODONTICS("1010", "2.16.756.5.30.1.127.3.5", "Orthodontics", "Orthodontics", "Kieferorthopädie", "Orthodontie", "Ortodonzia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Orthopaedic surgery and traumatology of the locomotor apparatus</div>
-	 * <div class="de">Orthopädische Chirurgie und Traumatologie des Bewegungsapparates</div>
-	 * <div class="fr">Chirurgie orthopédique et traumatologie de l’appareil locomoteur</div>
-	 * <div class="it">Chirurgia ortopedica e traumatologia dell’apparato locomotore</div>
-	 * <!-- @formatter:on -->
+	 * EN: Orthopaedic surgery and traumatology of the locomotor apparatus<br>
+	 * DE: Orthopädische Chirurgie und Traumatologie des Bewegungsapparates<br>
+	 * FR: Chirurgie orthopédique et traumatologie de l’appareil locomoteur<br>
+	 * IT: Chirurgia ortopedica e traumatologia dell’apparato locomotore<br>
 	 */
-	ORTHOPAEDIC_SURGERY_AND_TRAUMATOLOGY_OF_THE_LOCOMOTOR_APPARATUS("1015",
-			"2.16.756.5.30.1.127.3.5",
-			"Orthopaedic surgery and traumatology of the locomotor apparatus",
-			"Orthopaedic surgery and traumatology of the locomotor apparatus",
-			"Orthopädische Chirurgie und Traumatologie des Bewegungsapparates",
-			"Chirurgie orthopédique et traumatologie de l’appareil locomoteur",
-			"Chirurgia ortopedica e traumatologia dell’apparato locomotore"),
+	ORTHOPAEDIC_SURGERY_AND_TRAUMATOLOGY_OF_THE_LOCOMOTOR_APPARATUS("1015", "2.16.756.5.30.1.127.3.5", "Orthopaedic surgery and traumatology of the locomotor apparatus", "Orthopaedic surgery and traumatology of the locomotor apparatus", "Orthopädische Chirurgie und Traumatologie des Bewegungsapparates", "Chirurgie orthopédique et traumatologie de l’appareil locomoteur", "Chirurgia ortopedica e traumatologia dell’apparato locomotore"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Other</div>
-	 * <div class="de">Andere</div>
-	 * <div class="fr">Autre</div>
-	 * <div class="it">Altre</div>
-	 * <!-- @formatter:on -->
+	 * EN: Other<br>
+	 * DE: Andere<br>
+	 * FR: Autre<br>
+	 * IT: Altre<br>
 	 */
 	OTHER("1050", "2.16.756.5.30.1.127.3.5", "Other", "Other", "Andere", "Autre", "Altre"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Otorhinolaryngology</div>
-	 * <div class="de">Oto-Rhino-Laryngologie</div>
-	 * <div class="fr">Oto-rhino-laryngologie</div>
-	 * <div class="it">Otorinolaringoiatria</div>
-	 * <!-- @formatter:on -->
+	 * EN: Otorhinolaryngology<br>
+	 * DE: Oto-Rhino-Laryngologie<br>
+	 * FR: Oto-rhino-laryngologie<br>
+	 * IT: Otorinolaringoiatria<br>
 	 */
-	OTORHINOLARYNGOLOGY("1008", "2.16.756.5.30.1.127.3.5", "Otorhinolaryngology",
-			"Otorhinolaryngology", "Oto-Rhino-Laryngologie", "Oto-rhino-laryngologie",
-			"Otorinolaringoiatria"),
+	OTORHINOLARYNGOLOGY("1008", "2.16.756.5.30.1.127.3.5", "Otorhinolaryngology", "Otorhinolaryngology", "Oto-Rhino-Laryngologie", "Oto-rhino-laryngologie", "Otorinolaringoiatria"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Paediatrics</div>
-	 * <div class="de">Kinder- und Jugendmedizin</div>
-	 * <div class="fr">Pédiatrie</div>
-	 * <div class="it">Pediatria</div>
-	 * <!-- @formatter:on -->
+	 * EN: Paediatrics<br>
+	 * DE: Kinder- und Jugendmedizin<br>
+	 * FR: Pédiatrie<br>
+	 * IT: Pediatria<br>
 	 */
-	PAEDIATRICS("1006", "2.16.756.5.30.1.127.3.5", "Paediatrics", "Paediatrics",
-			"Kinder- und Jugendmedizin", "Pédiatrie", "Pediatria"),
+	PAEDIATRICS("1006", "2.16.756.5.30.1.127.3.5", "Paediatrics", "Paediatrics", "Kinder- und Jugendmedizin", "Pédiatrie", "Pediatria"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Paediatric surgery</div>
-	 * <div class="de">Kinderchirurgie</div>
-	 * <div class="fr">Chirurgie pédiatrique</div>
-	 * <div class="it">Chirurgia pediatrica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Paediatric surgery<br>
+	 * DE: Kinderchirurgie<br>
+	 * FR: Chirurgie pédiatrique<br>
+	 * IT: Chirurgia pediatrica<br>
 	 */
-	PAEDIATRIC_SURGERY("1028", "2.16.756.5.30.1.127.3.5", "Paediatric surgery",
-			"Paediatric surgery", "Kinderchirurgie", "Chirurgie pédiatrique",
-			"Chirurgia pediatrica"),
+	PAEDIATRIC_SURGERY("1028", "2.16.756.5.30.1.127.3.5", "Paediatric surgery", "Paediatric surgery", "Kinderchirurgie", "Chirurgie pédiatrique", "Chirurgia pediatrica"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Paradontology</div>
-	 * <div class="de">Parodontologie</div>
-	 * <div class="fr">Parodontologie</div>
-	 * <div class="it">Parodontologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Paradontology<br>
+	 * DE: Parodontologie<br>
+	 * FR: Parodontologie<br>
+	 * IT: Parodontologia<br>
 	 */
-	PARADONTOLOGY("1048", "2.16.756.5.30.1.127.3.5", "Paradontology", "Paradontology",
-			"Parodontologie", "Parodontologie", "Parodontologia"),
+	PARADONTOLOGY("1048", "2.16.756.5.30.1.127.3.5", "Paradontology", "Paradontology", "Parodontologie", "Parodontologie", "Parodontologia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Pathology</div>
-	 * <div class="de">Pathologie</div>
-	 * <div class="fr">Pathologie</div>
-	 * <div class="it">Patologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Pathology<br>
+	 * DE: Pathologie<br>
+	 * FR: Pathologie<br>
+	 * IT: Patologia<br>
 	 */
-	PATHOLOGY("1009", "2.16.756.5.30.1.127.3.5", "Pathology", "Pathology", "Pathologie",
-			"Pathologie", "Patologia"),
+	PATHOLOGY("1009", "2.16.756.5.30.1.127.3.5", "Pathology", "Pathology", "Pathologie", "Pathologie", "Patologia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Pharmaceutical medicine</div>
-	 * <div class="de">Pharmazeutische Medizin</div>
-	 * <div class="fr">Médecine pharmaceutique</div>
-	 * <div class="it">Medicina farmacologica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Pharmaceutical medicine<br>
+	 * DE: Pharmazeutische Medizin<br>
+	 * FR: Médecine pharmaceutique<br>
+	 * IT: Medicina farmacologica<br>
 	 */
-	PHARMACEUTICAL_MEDICINE("1045", "2.16.756.5.30.1.127.3.5", "Pharmaceutical medicine",
-			"Pharmaceutical medicine", "Pharmazeutische Medizin", "Médecine pharmaceutique",
-			"Medicina farmacologica"),
+	PHARMACEUTICAL_MEDICINE("1045", "2.16.756.5.30.1.127.3.5", "Pharmaceutical medicine", "Pharmaceutical medicine", "Pharmazeutische Medizin", "Médecine pharmaceutique", "Medicina farmacologica"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Physical medicine and rehabilitation</div>
-	 * <div class="de">Physikalische Medizin und Rehabilitation</div>
-	 * <div class="fr">Médecine physique et réadaptation</div>
-	 * <div class="it">Medicina fisica e riabilitazione</div>
-	 * <!-- @formatter:on -->
+	 * EN: Physical medicine and rehabilitation<br>
+	 * DE: Physikalische Medizin und Rehabilitation<br>
+	 * FR: Médecine physique et réadaptation<br>
+	 * IT: Medicina fisica e riabilitazione<br>
 	 */
-	PHYSICAL_MEDICINE_AND_REHABILITATION("1034", "2.16.756.5.30.1.127.3.5",
-			"Physical medicine and rehabilitation", "Physical medicine and rehabilitation",
-			"Physikalische Medizin und Rehabilitation", "Médecine physique et réadaptation",
-			"Medicina fisica e riabilitazione"),
+	PHYSICAL_MEDICINE_AND_REHABILITATION("1034", "2.16.756.5.30.1.127.3.5", "Physical medicine and rehabilitation", "Physical medicine and rehabilitation", "Physikalische Medizin und Rehabilitation", "Médecine physique et réadaptation", "Medicina fisica e riabilitazione"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Plastic, reconstructive and aesthetic surgery</div>
-	 * <div class="de">Plastische, Rekonstruktive und Ästhetische Chirurgie</div>
-	 * <div class="fr">Chirurgie plastique, reconstructive et esthétique</div>
-	 * <div class="it">Chirurgia plastica, ricostruttiva ed estetica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Plastic, reconstructive and aesthetic surgery<br>
+	 * DE: Plastische, Rekonstruktive und Ästhetische Chirurgie<br>
+	 * FR: Chirurgie plastique, reconstructive et esthétique<br>
+	 * IT: Chirurgia plastica, ricostruttiva ed estetica<br>
 	 */
-	PLASTIC_RECONSTRUCTIVE_AND_AESTHETIC_SURGERY("1035", "2.16.756.5.30.1.127.3.5",
-			"Plastic, reconstructive and aesthetic surgery",
-			"Plastic, reconstructive and aesthetic surgery",
-			"Plastische, Rekonstruktive und Ästhetische Chirurgie",
-			"Chirurgie plastique, reconstructive et esthétique",
-			"Chirurgia plastica, ricostruttiva ed estetica"),
+	PLASTIC_RECONSTRUCTIVE_AND_AESTHETIC_SURGERY("1035", "2.16.756.5.30.1.127.3.5", "Plastic, reconstructive and aesthetic surgery", "Plastic, reconstructive and aesthetic surgery", "Plastische, Rekonstruktive und Ästhetische Chirurgie", "Chirurgie plastique, reconstructive et esthétique", "Chirurgia plastica, ricostruttiva ed estetica"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Pneumology</div>
-	 * <div class="de">Pneumologie</div>
-	 * <div class="fr">Pneumologie</div>
-	 * <div class="it">Pneumologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Pneumology<br>
+	 * DE: Pneumologie<br>
+	 * FR: Pneumologie<br>
+	 * IT: Pneumologia<br>
 	 */
-	PNEUMOLOGY("1016", "2.16.756.5.30.1.127.3.5", "Pneumology", "Pneumology", "Pneumologie",
-			"Pneumologie", "Pneumologia"),
+	PNEUMOLOGY("1016", "2.16.756.5.30.1.127.3.5", "Pneumology", "Pneumology", "Pneumologie", "Pneumologie", "Pneumologia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Prevention and public health</div>
-	 * <div class="de">Prävention und Gesundheitswesen</div>
-	 * <div class="fr">Prévention et santé publique</div>
-	 * <div class="it">Prevenzione e salute pubblica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Prevention and public health<br>
+	 * DE: Prävention und Gesundheitswesen<br>
+	 * FR: Prévention et santé publique<br>
+	 * IT: Prevenzione e salute pubblica<br>
 	 */
-	PREVENTION_AND_PUBLIC_HEALTH("1036", "2.16.756.5.30.1.127.3.5", "Prevention and public health",
-			"Prevention and public health", "Prävention und Gesundheitswesen",
-			"Prévention et santé publique", "Prevenzione e salute pubblica"),
+	PREVENTION_AND_PUBLIC_HEALTH("1036", "2.16.756.5.30.1.127.3.5", "Prevention and public health", "Prevention and public health", "Prävention und Gesundheitswesen", "Prévention et santé publique", "Prevenzione e salute pubblica"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Psychiatry and psychotherapy</div>
-	 * <div class="de">Psychiatrie und Psychotherapie</div>
-	 * <div class="fr">Psychiatrie et psychothérapie</div>
-	 * <div class="it">Psichiatria e psicoterapia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Psychiatry and psychotherapy<br>
+	 * DE: Psychiatrie und Psychotherapie<br>
+	 * FR: Psychiatrie et psychothérapie<br>
+	 * IT: Psichiatria e psicoterapia<br>
 	 */
-	PSYCHIATRY_AND_PSYCHOTHERAPY("1017", "2.16.756.5.30.1.127.3.5", "Psychiatry and psychotherapy",
-			"Psychiatry and psychotherapy", "Psychiatrie und Psychotherapie",
-			"Psychiatrie et psychothérapie", "Psichiatria e psicoterapia"),
+	PSYCHIATRY_AND_PSYCHOTHERAPY("1017", "2.16.756.5.30.1.127.3.5", "Psychiatry and psychotherapy", "Psychiatry and psychotherapy", "Psychiatrie und Psychotherapie", "Psychiatrie et psychothérapie", "Psichiatria e psicoterapia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Psychotherapy</div>
-	 * <div class="de">Psychotherapie</div>
-	 * <div class="fr">psychothérapie</div>
-	 * <div class="it">psicoterapia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Psychotherapy<br>
+	 * DE: Psychotherapie<br>
+	 * FR: psychothérapie<br>
+	 * IT: psicoterapia<br>
 	 */
-	PSYCHOTHERAPY("1054", "2.16.756.5.30.1.127.3.5", "Psychotherapy", "Psychotherapy",
-			"Psychotherapie", "psychothérapie", "psicoterapia"),
+	PSYCHOTHERAPY("1054", "2.16.756.5.30.1.127.3.5", "Psychotherapy", "Psychotherapy", "Psychotherapie", "psychothérapie", "psicoterapia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Radiology</div>
-	 * <div class="de">Radiologie</div>
-	 * <div class="fr">Radiologie</div>
-	 * <div class="it">Radiologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Radiology<br>
+	 * DE: Radiologie<br>
+	 * FR: Radiologie<br>
+	 * IT: Radiologia<br>
 	 */
-	RADIOLOGY("1030", "2.16.756.5.30.1.127.3.5", "Radiology", "Radiology", "Radiologie",
-			"Radiologie", "Radiologia"),
+	RADIOLOGY("1030", "2.16.756.5.30.1.127.3.5", "Radiology", "Radiology", "Radiologie", "Radiologie", "Radiologia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Radio-oncology / radiotherapy</div>
-	 * <div class="de">Radio-Onkologie_Strahlentherapie</div>
-	 * <div class="fr">Radio-oncologie_radiothérapie</div>
-	 * <div class="it">Radio-oncologia_radioterapia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Radio-oncology / radiotherapy<br>
+	 * DE: Radio-Onkologie_Strahlentherapie<br>
+	 * FR: Radio-oncologie_radiothérapie<br>
+	 * IT: Radio-oncologia_radioterapia<br>
 	 */
-	RADIO_ONCOLOGY_RADIOTHERAPY("1032", "2.16.756.5.30.1.127.3.5", "Radio-oncology / radiotherapy",
-			"Radio-oncology / radiotherapy", "Radio-Onkologie_Strahlentherapie",
-			"Radio-oncologie_radiothérapie", "Radio-oncologia_radioterapia"),
+	RADIO_ONCOLOGY_RADIOTHERAPY("1032", "2.16.756.5.30.1.127.3.5", "Radio-oncology / radiotherapy", "Radio-oncology / radiotherapy", "Radio-Onkologie_Strahlentherapie", "Radio-oncologie_radiothérapie", "Radio-oncologia_radioterapia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Reconstructive dentistry</div>
-	 * <div class="de">Rekonstruktive Zahnmedizin</div>
-	 * <div class="fr">Médecine dentaire reconstructive</div>
-	 * <div class="it">Medicina dentaria riconstruttiva</div>
-	 * <!-- @formatter:on -->
+	 * EN: Reconstructive dentistry<br>
+	 * DE: Rekonstruktive Zahnmedizin<br>
+	 * FR: Médecine dentaire reconstructive<br>
+	 * IT: Medicina dentaria riconstruttiva<br>
 	 */
-	RECONSTRUCTIVE_DENTISTRY("1049", "2.16.756.5.30.1.127.3.5", "Reconstructive dentistry",
-			"Reconstructive dentistry", "Rekonstruktive Zahnmedizin",
-			"Médecine dentaire reconstructive", "Medicina dentaria riconstruttiva"),
+	RECONSTRUCTIVE_DENTISTRY("1049", "2.16.756.5.30.1.127.3.5", "Reconstructive dentistry", "Reconstructive dentistry", "Rekonstruktive Zahnmedizin", "Médecine dentaire reconstructive", "Medicina dentaria riconstruttiva"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Rheumatology</div>
-	 * <div class="de">Rheumatologie</div>
-	 * <div class="fr">Rhumatologie</div>
-	 * <div class="it">Reumatologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Rheumatology<br>
+	 * DE: Rheumatologie<br>
+	 * FR: Rhumatologie<br>
+	 * IT: Reumatologia<br>
 	 */
-	RHEUMATOLOGY("1037", "2.16.756.5.30.1.127.3.5", "Rheumatology", "Rheumatology", "Rheumatologie",
-			"Rhumatologie", "Reumatologia"),
+	RHEUMATOLOGY("1037", "2.16.756.5.30.1.127.3.5", "Rheumatology", "Rheumatology", "Rheumatologie", "Rhumatologie", "Reumatologia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Surgery</div>
-	 * <div class="de">Chirurgie</div>
-	 * <div class="fr">Chirurgie</div>
-	 * <div class="it">Chirurgia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Surgery<br>
+	 * DE: Chirurgie<br>
+	 * FR: Chirurgie<br>
+	 * IT: Chirurgia<br>
 	 */
-	SURGERY("1002", "2.16.756.5.30.1.127.3.5", "Surgery", "Surgery", "Chirurgie", "Chirurgie",
-			"Chirurgia"),
+	SURGERY("1002", "2.16.756.5.30.1.127.3.5", "Surgery", "Surgery", "Chirurgie", "Chirurgie", "Chirurgia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Thoracic surgery</div>
-	 * <div class="de">Thoraxchirurgie</div>
-	 * <div class="fr">Chirurgie thoracique</div>
-	 * <div class="it">Chirurgia toracica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Thoracic surgery<br>
+	 * DE: Thoraxchirurgie<br>
+	 * FR: Chirurgie thoracique<br>
+	 * IT: Chirurgia toracica<br>
 	 */
-	THORACIC_SURGERY("1061", "2.16.756.5.30.1.127.3.5", "Thoracic surgery", "Thoracic surgery",
-			"Thoraxchirurgie", "Chirurgie thoracique", "Chirurgia toracica"),
+	THORACIC_SURGERY("1061", "2.16.756.5.30.1.127.3.5", "Thoracic surgery", "Thoracic surgery", "Thoraxchirurgie", "Chirurgie thoracique", "Chirurgia toracica"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Tropical and travel medicine</div>
-	 * <div class="de">Tropen- und Reisemedizin</div>
-	 * <div class="fr">Médecine tropicale et médecine des voyages</div>
-	 * <div class="it">Medicina tropicale e medicina di viaggio</div>
-	 * <!-- @formatter:on -->
+	 * EN: Tropical and travel medicine<br>
+	 * DE: Tropen- und Reisemedizin<br>
+	 * FR: Médecine tropicale et médecine des voyages<br>
+	 * IT: Medicina tropicale e medicina di viaggio<br>
 	 */
-	TROPICAL_AND_TRAVEL_MEDICINE("1038", "2.16.756.5.30.1.127.3.5", "Tropical and travel medicine",
-			"Tropical and travel medicine", "Tropen- und Reisemedizin",
-			"Médecine tropicale et médecine des voyages",
-			"Medicina tropicale e medicina di viaggio"),
+	TROPICAL_AND_TRAVEL_MEDICINE("1038", "2.16.756.5.30.1.127.3.5", "Tropical and travel medicine", "Tropical and travel medicine", "Tropen- und Reisemedizin", "Médecine tropicale et médecine des voyages", "Medicina tropicale e medicina di viaggio"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Urology</div>
-	 * <div class="de">Urologie</div>
-	 * <div class="fr">Urologie</div>
-	 * <div class="it">Urologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Urology<br>
+	 * DE: Urologie<br>
+	 * FR: Urologie<br>
+	 * IT: Urologia<br>
 	 */
-	UROLOGY("1018", "2.16.756.5.30.1.127.3.5", "Urology", "Urology", "Urologie", "Urologie",
-			"Urologia"),
+	UROLOGY("1018", "2.16.756.5.30.1.127.3.5", "Urology", "Urology", "Urologie", "Urologie", "Urologia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Vascular surgery</div>
-	 * <div class="de">Gefässchirurgie</div>
-	 * <div class="fr">Chirurgie vasculaire</div>
-	 * <div class="it">Chirurgia vascolare</div>
-	 * <!-- @formatter:on -->
+	 * EN: Vascular surgery<br>
+	 * DE: Gefässchirurgie<br>
+	 * FR: Chirurgie vasculaire<br>
+	 * IT: Chirurgia vascolare<br>
 	 */
-	VASCULAR_SURGERY("1060", "2.16.756.5.30.1.127.3.5", "Vascular surgery", "Vascular surgery",
-			"Gefässchirurgie", "Chirurgie vasculaire", "Chirurgia vascolare");
+	VASCULAR_SURGERY("1060", "2.16.756.5.30.1.127.3.5", "Vascular surgery", "Vascular surgery", "Gefässchirurgie", "Chirurgie vasculaire", "Chirurgia vascolare");
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Allergology and clinical immunology</div>
-	 * <div class="de">Code für Allergologie und klinische Immunologie</div>
-	 * <div class="fr">Code de Allergologie et immunologie clinique</div>
-	 * <div class="it">Code per Allergologia e immunologia clinica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Allergology and clinical immunology<br>
+	 * DE: Code für Allergologie und klinische Immunologie<br>
+	 * FR: Code de Allergologie et immunologie clinique<br>
+	 * IT: Code per Allergologia e immunologia clinica<br>
 	 */
 	public static final String ALLERGOLOGY_AND_CLINICAL_IMMUNOLOGY_CODE = "1019";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Anaesthesiology</div>
-	 * <div class="de">Code für Anästhesiologie</div>
-	 * <div class="fr">Code de Anesthésiologie</div>
-	 * <div class="it">Code per Anestesiologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Anaesthesiology<br>
+	 * DE: Code für Anästhesiologie<br>
+	 * FR: Code de Anesthésiologie<br>
+	 * IT: Code per Anestesiologia<br>
 	 */
 	public static final String ANAESTHESIOLOGY_CODE = "1012";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Angiology</div>
-	 * <div class="de">Code für Angiologie</div>
-	 * <div class="fr">Code de Angiologie</div>
-	 * <div class="it">Code per Angiologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Angiology<br>
+	 * DE: Code für Angiologie<br>
+	 * FR: Code de Angiologie<br>
+	 * IT: Code per Angiologia<br>
 	 */
 	public static final String ANGIOLOGY_CODE = "1041";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Cardiac and thoracic vascular surgery</div>
-	 * <div class="de">Code für Herz- und thorakale Gefässchirurgie</div>
-	 * <div class="fr">Code de Chirurgie cardiaque et vasculaire thoracique</div>
-	 * <div class="it">Code per Chirurgia del cuore e dei vasi toracici</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Cardiac and thoracic vascular surgery<br>
+	 * DE: Code für Herz- und thorakale Gefässchirurgie<br>
+	 * FR: Code de Chirurgie cardiaque et vasculaire thoracique<br>
+	 * IT: Code per Chirurgia del cuore e dei vasi toracici<br>
 	 */
 	public static final String CARDIAC_AND_THORACIC_VASCULAR_SURGERY_CODE = "1004";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Cardiology</div>
-	 * <div class="de">Code für Kardiologie</div>
-	 * <div class="fr">Code de Cardiologie</div>
-	 * <div class="it">Code per Cardiologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Cardiology<br>
+	 * DE: Code für Kardiologie<br>
+	 * FR: Code de Cardiologie<br>
+	 * IT: Code per Cardiologia<br>
 	 */
 	public static final String CARDIOLOGY_CODE = "1025";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Child and adolescent psychiatry and psychotherapy</div>
-	 * <div class="de">Code für Kinder- und Jugendpsychiatrie und -psychotherapie</div>
-	 * <div class="fr">Code de Psychiatrie et psychothérapie d’enfants et d’adolescents</div>
-	 * <div class="it">Code per Psichiatria e psicoterapia infantile e dell’adolescenza</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Child and adolescent psychiatry and psychotherapy<br>
+	 * DE: Code für Kinder- und Jugendpsychiatrie und -psychotherapie<br>
+	 * FR: Code de Psychiatrie et psychothérapie d’enfants et d’adolescents<br>
+	 * IT: Code per Psichiatria e psicoterapia infantile e dell’adolescenza<br>
 	 */
 	public static final String CHILD_AND_ADOLESCENT_PSYCHIATRY_AND_PSYCHOTHERAPY_CODE = "1027";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Child and adolescent psychology</div>
-	 * <div class="de">Code für Kinder- und Jugendpsychologie</div>
-	 * <div class="fr">Code de psychologie des enfants et des adolescents</div>
-	 * <div class="it">Code per psicologia dell’età evolutiva</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Child and adolescent psychology<br>
+	 * DE: Code für Kinder- und Jugendpsychologie<br>
+	 * FR: Code de psychologie des enfants et des adolescents<br>
+	 * IT: Code per psicologia dell’età evolutiva<br>
 	 */
 	public static final String CHILD_AND_ADOLESCENT_PSYCHOLOGY_CODE = "1055";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Chiropractic specialist</div>
-	 * <div class="de">Code für Fachchiropraktik</div>
-	 * <div class="fr">Code de Chiropratique spécialisée</div>
-	 * <div class="it">Code per Chiropratica specialistica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Chiropractic specialist<br>
+	 * DE: Code für Fachchiropraktik<br>
+	 * FR: Code de Chiropratique spécialisée<br>
+	 * IT: Code per Chiropratica specialistica<br>
 	 */
 	public static final String CHIROPRACTIC_SPECIALIST_CODE = "1011";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Clinical pharmacology and toxicology</div>
-	 * <div class="de">Code für Klinische Pharmakologie und Toxikologie</div>
-	 * <div class="fr">Code de Pharmacologie et toxicologie cliniques</div>
-	 * <div class="it">Code per Farmacologia e tossicologia cliniche</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Clinical pharmacology and toxicology<br>
+	 * DE: Code für Klinische Pharmakologie und Toxikologie<br>
+	 * FR: Code de Pharmacologie et toxicologie cliniques<br>
+	 * IT: Code per Farmacologia e tossicologia cliniche<br>
 	 */
 	public static final String CLINICAL_PHARMACOLOGY_AND_TOXICOLOGY_CODE = "1029";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Clinical psychology</div>
-	 * <div class="de">Code für Klinische Psychologie</div>
-	 * <div class="fr">Code de psychologie clinique</div>
-	 * <div class="it">Code per psicologia clinica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Clinical psychology<br>
+	 * DE: Code für Klinische Psychologie<br>
+	 * FR: Code de psychologie clinique<br>
+	 * IT: Code per psicologia clinica<br>
 	 */
 	public static final String CLINICAL_PSYCHOLOGY_CODE = "1056";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Community pharmacy</div>
-	 * <div class="de">Code für Offizinpharmazie</div>
-	 * <div class="fr">Code de Pharmacie d’officine</div>
-	 * <div class="it">Code per Farmacia d’officina</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Community pharmacy<br>
+	 * DE: Code für Offizinpharmazie<br>
+	 * FR: Code de Pharmacie d’officine<br>
+	 * IT: Code per Farmacia d’officina<br>
 	 */
 	public static final String COMMUNITY_PHARMACY_CODE = "1052";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Dermatology and venereology</div>
-	 * <div class="de">Code für Dermatologie und Venerologie</div>
-	 * <div class="fr">Code de Dermatologie et vénéréologie</div>
-	 * <div class="it">Code per Dermatologia e venereologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Dermatology and venereology<br>
+	 * DE: Code für Dermatologie und Venerologie<br>
+	 * FR: Code de Dermatologie et vénéréologie<br>
+	 * IT: Code per Dermatologia e venereologia<br>
 	 */
 	public static final String DERMATOLOGY_AND_VENEREOLOGY_CODE = "1021";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Endocrinology – Diabetology</div>
-	 * <div class="de">Code für Endokrinologie-Diabetologie</div>
-	 * <div class="fr">Code de Endocrinologie-diabétologie</div>
-	 * <div class="it">Code per Endocrinologia e diabetologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Endocrinology – Diabetology<br>
+	 * DE: Code für Endokrinologie-Diabetologie<br>
+	 * FR: Code de Endocrinologie-diabétologie<br>
+	 * IT: Code per Endocrinologia e diabetologia<br>
 	 */
 	public static final String ENDOCRINOLOGY_DIABETOLOGY_CODE = "1022";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Forensic medicine</div>
-	 * <div class="de">Code für Rechtsmedizin</div>
-	 * <div class="fr">Code de Médecine légale</div>
-	 * <div class="it">Code per Medicina legale</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Forensic medicine<br>
+	 * DE: Code für Rechtsmedizin<br>
+	 * FR: Code de Médecine légale<br>
+	 * IT: Code per Medicina legale<br>
 	 */
 	public static final String FORENSIC_MEDICINE_CODE = "1046";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Gastroenterology</div>
-	 * <div class="de">Code für Gastroenterologie</div>
-	 * <div class="fr">Code de Gastroentérologie</div>
-	 * <div class="it">Code per Gastroenterologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Gastroenterology<br>
+	 * DE: Code für Gastroenterologie<br>
+	 * FR: Code de Gastroentérologie<br>
+	 * IT: Code per Gastroenterologia<br>
 	 */
 	public static final String GASTROENTEROLOGY_CODE = "1023";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for General internal medicine</div>
-	 * <div class="de">Code für Allgemeine Innere Medizin</div>
-	 * <div class="fr">Code de Médecine interne générale</div>
-	 * <div class="it">Code per Medicina interna generale</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for General internal medicine<br>
+	 * DE: Code für Allgemeine Innere Medizin<br>
+	 * FR: Code de Médecine interne générale<br>
+	 * IT: Code per Medicina interna generale<br>
 	 */
 	public static final String GENERAL_INTERNAL_MEDICINE_CODE = "1051";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for General medical practitioner</div>
-	 * <div class="de">Code für Praktische Ärztin _ Praktischer Arzt</div>
-	 * <div class="fr">Code de Médecin praticien</div>
-	 * <div class="it">Code per Medico generico</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for General medical practitioner<br>
+	 * DE: Code für Praktische Ärztin _ Praktischer Arzt<br>
+	 * FR: Code de Médecin praticien<br>
+	 * IT: Code per Medico generico<br>
 	 */
 	public static final String GENERAL_MEDICAL_PRACTITIONER_CODE = "1040";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Gynaecology and obstetrics</div>
-	 * <div class="de">Code für Gynäkologie und Geburtshilfe</div>
-	 * <div class="fr">Code de Gynécologie et obstétrique</div>
-	 * <div class="it">Code per Ginecologia e ostetricia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Gynaecology and obstetrics<br>
+	 * DE: Code für Gynäkologie und Geburtshilfe<br>
+	 * FR: Code de Gynécologie et obstétrique<br>
+	 * IT: Code per Ginecologia e ostetricia<br>
 	 */
 	public static final String GYNAECOLOGY_AND_OBSTETRICS_CODE = "1003";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Haematology</div>
-	 * <div class="de">Code für Hämatologie</div>
-	 * <div class="fr">Code de Hématologie</div>
-	 * <div class="it">Code per Ematologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Haematology<br>
+	 * DE: Code für Hämatologie<br>
+	 * FR: Code de Hématologie<br>
+	 * IT: Code per Ematologia<br>
 	 */
 	public static final String HAEMATOLOGY_CODE = "1024";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Hand surgery</div>
-	 * <div class="de">Code für Handchirurgie</div>
-	 * <div class="fr">Code de Chirurgie de la main</div>
-	 * <div class="it">Code per Chirurgia della mano</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Hand surgery<br>
+	 * DE: Code für Handchirurgie<br>
+	 * FR: Code de Chirurgie de la main<br>
+	 * IT: Code per Chirurgia della mano<br>
 	 */
 	public static final String HAND_SURGERY_CODE = "1059";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Health psychology</div>
-	 * <div class="de">Code für Gesundheitspsychologie</div>
-	 * <div class="fr">Code de psychologie de la santé</div>
-	 * <div class="it">Code per psicologia della salute</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Health psychology<br>
+	 * DE: Code für Gesundheitspsychologie<br>
+	 * FR: Code de psychologie de la santé<br>
+	 * IT: Code per psicologia della salute<br>
 	 */
 	public static final String HEALTH_PSYCHOLOGY_CODE = "1058";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Hospital pharmacy</div>
-	 * <div class="de">Code für Spitalpharmazie</div>
-	 * <div class="fr">Code de Pharmacie hospitalière</div>
-	 * <div class="it">Code per Farmacia d’ospedale</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Hospital pharmacy<br>
+	 * DE: Code für Spitalpharmazie<br>
+	 * FR: Code de Pharmacie hospitalière<br>
+	 * IT: Code per Farmacia d’ospedale<br>
 	 */
 	public static final String HOSPITAL_PHARMACY_CODE = "1053";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Infectology</div>
-	 * <div class="de">Code für Infektiologie</div>
-	 * <div class="fr">Code de Infectiologie</div>
-	 * <div class="it">Code per Malattie infettive</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Infectology<br>
+	 * DE: Code für Infektiologie<br>
+	 * FR: Code de Infectiologie<br>
+	 * IT: Code per Malattie infettive<br>
 	 */
 	public static final String INFECTOLOGY_CODE = "1039";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Intensive care medicine</div>
-	 * <div class="de">Code für Intensivmedizin</div>
-	 * <div class="fr">Code de Médecine intensive</div>
-	 * <div class="it">Code per Medicina intensiva</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Intensive care medicine<br>
+	 * DE: Code für Intensivmedizin<br>
+	 * FR: Code de Médecine intensive<br>
+	 * IT: Code per Medicina intensiva<br>
 	 */
 	public static final String INTENSIVE_CARE_MEDICINE_CODE = "1042";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Medical genetics</div>
-	 * <div class="de">Code für Medizinische Genetik</div>
-	 * <div class="fr">Code de Génétique médicale</div>
-	 * <div class="it">Code per Genetica medica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Medical genetics<br>
+	 * DE: Code für Medizinische Genetik<br>
+	 * FR: Code de Génétique médicale<br>
+	 * IT: Code per Genetica medica<br>
 	 */
 	public static final String MEDICAL_GENETICS_CODE = "1043";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Medical oncology</div>
-	 * <div class="de">Code für Medizinische Onkologie</div>
-	 * <div class="fr">Code de Oncologie médicale</div>
-	 * <div class="it">Code per Oncologia medica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Medical oncology<br>
+	 * DE: Code für Medizinische Onkologie<br>
+	 * FR: Code de Oncologie médicale<br>
+	 * IT: Code per Oncologia medica<br>
 	 */
 	public static final String MEDICAL_ONCOLOGY_CODE = "1044";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Nephrology</div>
-	 * <div class="de">Code für Nephrologie</div>
-	 * <div class="fr">Code de Néphrologie</div>
-	 * <div class="it">Code per Nefrologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Nephrology<br>
+	 * DE: Code für Nephrologie<br>
+	 * FR: Code de Néphrologie<br>
+	 * IT: Code per Nefrologia<br>
 	 */
 	public static final String NEPHROLOGY_CODE = "1033";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Neurology</div>
-	 * <div class="de">Code für Neurologie</div>
-	 * <div class="fr">Code de Neurologie</div>
-	 * <div class="it">Code per Neurologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Neurology<br>
+	 * DE: Code für Neurologie<br>
+	 * FR: Code de Neurologie<br>
+	 * IT: Code per Neurologia<br>
 	 */
 	public static final String NEUROLOGY_CODE = "1014";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Neuropsychology</div>
-	 * <div class="de">Code für Neuropsychologie</div>
-	 * <div class="fr">Code de neuropsychologie</div>
-	 * <div class="it">Code per neuropsicologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Neuropsychology<br>
+	 * DE: Code für Neuropsychologie<br>
+	 * FR: Code de neuropsychologie<br>
+	 * IT: Code per neuropsicologia<br>
 	 */
 	public static final String NEUROPSYCHOLOGY_CODE = "1057";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Neurosurgery</div>
-	 * <div class="de">Code für Neurochirurgie</div>
-	 * <div class="fr">Code de Neurochirurgie</div>
-	 * <div class="it">Code per Neurochirurgia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Neurosurgery<br>
+	 * DE: Code für Neurochirurgie<br>
+	 * FR: Code de Neurochirurgie<br>
+	 * IT: Code per Neurochirurgia<br>
 	 */
 	public static final String NEUROSURGERY_CODE = "1013";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Nuclear medicine</div>
-	 * <div class="de">Code für Nuklearmedizin</div>
-	 * <div class="fr">Code de Médecine nucléaire</div>
-	 * <div class="it">Code per Medicina nucleare</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Nuclear medicine<br>
+	 * DE: Code für Nuklearmedizin<br>
+	 * FR: Code de Médecine nucléaire<br>
+	 * IT: Code per Medicina nucleare<br>
 	 */
 	public static final String NUCLEAR_MEDICINE_CODE = "1031";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Occupational medicine</div>
-	 * <div class="de">Code für Arbeitsmedizin</div>
-	 * <div class="fr">Code de Médecine du travail</div>
-	 * <div class="it">Code per Medicina del lavoro</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Occupational medicine<br>
+	 * DE: Code für Arbeitsmedizin<br>
+	 * FR: Code de Médecine du travail<br>
+	 * IT: Code per Medicina del lavoro<br>
 	 */
 	public static final String OCCUPATIONAL_MEDICINE_CODE = "1020";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Ophthalmology</div>
-	 * <div class="de">Code für Ophthalmologie</div>
-	 * <div class="fr">Code de Ophtalmologie</div>
-	 * <div class="it">Code per Oftalmologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Ophthalmology<br>
+	 * DE: Code für Ophthalmologie<br>
+	 * FR: Code de Ophtalmologie<br>
+	 * IT: Code per Oftalmologia<br>
 	 */
 	public static final String OPHTHALMOLOGY_CODE = "1007";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Oral and maxillofacial surgery</div>
-	 * <div class="de">Code für Mund-, Kiefer- und Gesichtschirurgie</div>
-	 * <div class="fr">Code de Chirurgie orale et maxillo-faciale</div>
-	 * <div class="it">Code per Chirurgia oro-maxillo-facciale</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Oral and maxillofacial surgery<br>
+	 * DE: Code für Mund-, Kiefer- und Gesichtschirurgie<br>
+	 * FR: Code de Chirurgie orale et maxillo-faciale<br>
+	 * IT: Code per Chirurgia oro-maxillo-facciale<br>
 	 */
 	public static final String ORAL_AND_MAXILLOFACIAL_SURGERY_CODE = "1026";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Oral surgery</div>
-	 * <div class="de">Code für Oralchirurgie</div>
-	 * <div class="fr">Code de Chirurgie orale</div>
-	 * <div class="it">Code per Chirurgia orale</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Oral surgery<br>
+	 * DE: Code für Oralchirurgie<br>
+	 * FR: Code de Chirurgie orale<br>
+	 * IT: Code per Chirurgia orale<br>
 	 */
 	public static final String ORAL_SURGERY_CODE = "1047";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Orthodontics</div>
-	 * <div class="de">Code für Kieferorthopädie</div>
-	 * <div class="fr">Code de Orthodontie</div>
-	 * <div class="it">Code per Ortodonzia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Orthodontics<br>
+	 * DE: Code für Kieferorthopädie<br>
+	 * FR: Code de Orthodontie<br>
+	 * IT: Code per Ortodonzia<br>
 	 */
 	public static final String ORTHODONTICS_CODE = "1010";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Orthopaedic surgery and traumatology of the locomotor apparatus</div>
-	 * <div class="de">Code für Orthopädische Chirurgie und Traumatologie des Bewegungsapparates</div>
-	 * <div class="fr">Code de Chirurgie orthopédique et traumatologie de l’appareil locomoteur</div>
-	 * <div class="it">Code per Chirurgia ortopedica e traumatologia dell’apparato locomotore</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Orthopaedic surgery and traumatology of the locomotor apparatus<br>
+	 * DE: Code für Orthopädische Chirurgie und Traumatologie des Bewegungsapparates<br>
+	 * FR: Code de Chirurgie orthopédique et traumatologie de l’appareil locomoteur<br>
+	 * IT: Code per Chirurgia ortopedica e traumatologia dell’apparato locomotore<br>
 	 */
 	public static final String ORTHOPAEDIC_SURGERY_AND_TRAUMATOLOGY_OF_THE_LOCOMOTOR_APPARATUS_CODE = "1015";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Other</div>
-	 * <div class="de">Code für Andere</div>
-	 * <div class="fr">Code de Autre</div>
-	 * <div class="it">Code per Altre</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Other<br>
+	 * DE: Code für Andere<br>
+	 * FR: Code de Autre<br>
+	 * IT: Code per Altre<br>
 	 */
 	public static final String OTHER_CODE = "1050";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Otorhinolaryngology</div>
-	 * <div class="de">Code für Oto-Rhino-Laryngologie</div>
-	 * <div class="fr">Code de Oto-rhino-laryngologie</div>
-	 * <div class="it">Code per Otorinolaringoiatria</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Otorhinolaryngology<br>
+	 * DE: Code für Oto-Rhino-Laryngologie<br>
+	 * FR: Code de Oto-rhino-laryngologie<br>
+	 * IT: Code per Otorinolaringoiatria<br>
 	 */
 	public static final String OTORHINOLARYNGOLOGY_CODE = "1008";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Paediatrics</div>
-	 * <div class="de">Code für Kinder- und Jugendmedizin</div>
-	 * <div class="fr">Code de Pédiatrie</div>
-	 * <div class="it">Code per Pediatria</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Paediatrics<br>
+	 * DE: Code für Kinder- und Jugendmedizin<br>
+	 * FR: Code de Pédiatrie<br>
+	 * IT: Code per Pediatria<br>
 	 */
 	public static final String PAEDIATRICS_CODE = "1006";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Paediatric surgery</div>
-	 * <div class="de">Code für Kinderchirurgie</div>
-	 * <div class="fr">Code de Chirurgie pédiatrique</div>
-	 * <div class="it">Code per Chirurgia pediatrica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Paediatric surgery<br>
+	 * DE: Code für Kinderchirurgie<br>
+	 * FR: Code de Chirurgie pédiatrique<br>
+	 * IT: Code per Chirurgia pediatrica<br>
 	 */
 	public static final String PAEDIATRIC_SURGERY_CODE = "1028";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Paradontology</div>
-	 * <div class="de">Code für Parodontologie</div>
-	 * <div class="fr">Code de Parodontologie</div>
-	 * <div class="it">Code per Parodontologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Paradontology<br>
+	 * DE: Code für Parodontologie<br>
+	 * FR: Code de Parodontologie<br>
+	 * IT: Code per Parodontologia<br>
 	 */
 	public static final String PARADONTOLOGY_CODE = "1048";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Pathology</div>
-	 * <div class="de">Code für Pathologie</div>
-	 * <div class="fr">Code de Pathologie</div>
-	 * <div class="it">Code per Patologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Pathology<br>
+	 * DE: Code für Pathologie<br>
+	 * FR: Code de Pathologie<br>
+	 * IT: Code per Patologia<br>
 	 */
 	public static final String PATHOLOGY_CODE = "1009";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Pharmaceutical medicine</div>
-	 * <div class="de">Code für Pharmazeutische Medizin</div>
-	 * <div class="fr">Code de Médecine pharmaceutique</div>
-	 * <div class="it">Code per Medicina farmacologica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Pharmaceutical medicine<br>
+	 * DE: Code für Pharmazeutische Medizin<br>
+	 * FR: Code de Médecine pharmaceutique<br>
+	 * IT: Code per Medicina farmacologica<br>
 	 */
 	public static final String PHARMACEUTICAL_MEDICINE_CODE = "1045";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Physical medicine and rehabilitation</div>
-	 * <div class="de">Code für Physikalische Medizin und Rehabilitation</div>
-	 * <div class="fr">Code de Médecine physique et réadaptation</div>
-	 * <div class="it">Code per Medicina fisica e riabilitazione</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Physical medicine and rehabilitation<br>
+	 * DE: Code für Physikalische Medizin und Rehabilitation<br>
+	 * FR: Code de Médecine physique et réadaptation<br>
+	 * IT: Code per Medicina fisica e riabilitazione<br>
 	 */
 	public static final String PHYSICAL_MEDICINE_AND_REHABILITATION_CODE = "1034";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Plastic, reconstructive and aesthetic surgery</div>
-	 * <div class="de">Code für Plastische, Rekonstruktive und Ästhetische Chirurgie</div>
-	 * <div class="fr">Code de Chirurgie plastique, reconstructive et esthétique</div>
-	 * <div class="it">Code per Chirurgia plastica, ricostruttiva ed estetica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Plastic, reconstructive and aesthetic surgery<br>
+	 * DE: Code für Plastische, Rekonstruktive und Ästhetische Chirurgie<br>
+	 * FR: Code de Chirurgie plastique, reconstructive et esthétique<br>
+	 * IT: Code per Chirurgia plastica, ricostruttiva ed estetica<br>
 	 */
 	public static final String PLASTIC_RECONSTRUCTIVE_AND_AESTHETIC_SURGERY_CODE = "1035";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Pneumology</div>
-	 * <div class="de">Code für Pneumologie</div>
-	 * <div class="fr">Code de Pneumologie</div>
-	 * <div class="it">Code per Pneumologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Pneumology<br>
+	 * DE: Code für Pneumologie<br>
+	 * FR: Code de Pneumologie<br>
+	 * IT: Code per Pneumologia<br>
 	 */
 	public static final String PNEUMOLOGY_CODE = "1016";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Prevention and public health</div>
-	 * <div class="de">Code für Prävention und Gesundheitswesen</div>
-	 * <div class="fr">Code de Prévention et santé publique</div>
-	 * <div class="it">Code per Prevenzione e salute pubblica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Prevention and public health<br>
+	 * DE: Code für Prävention und Gesundheitswesen<br>
+	 * FR: Code de Prévention et santé publique<br>
+	 * IT: Code per Prevenzione e salute pubblica<br>
 	 */
 	public static final String PREVENTION_AND_PUBLIC_HEALTH_CODE = "1036";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Psychiatry and psychotherapy</div>
-	 * <div class="de">Code für Psychiatrie und Psychotherapie</div>
-	 * <div class="fr">Code de Psychiatrie et psychothérapie</div>
-	 * <div class="it">Code per Psichiatria e psicoterapia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Psychiatry and psychotherapy<br>
+	 * DE: Code für Psychiatrie und Psychotherapie<br>
+	 * FR: Code de Psychiatrie et psychothérapie<br>
+	 * IT: Code per Psichiatria e psicoterapia<br>
 	 */
 	public static final String PSYCHIATRY_AND_PSYCHOTHERAPY_CODE = "1017";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Psychotherapy</div>
-	 * <div class="de">Code für Psychotherapie</div>
-	 * <div class="fr">Code de psychothérapie</div>
-	 * <div class="it">Code per psicoterapia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Psychotherapy<br>
+	 * DE: Code für Psychotherapie<br>
+	 * FR: Code de psychothérapie<br>
+	 * IT: Code per psicoterapia<br>
 	 */
 	public static final String PSYCHOTHERAPY_CODE = "1054";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Radiology</div>
-	 * <div class="de">Code für Radiologie</div>
-	 * <div class="fr">Code de Radiologie</div>
-	 * <div class="it">Code per Radiologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Radiology<br>
+	 * DE: Code für Radiologie<br>
+	 * FR: Code de Radiologie<br>
+	 * IT: Code per Radiologia<br>
 	 */
 	public static final String RADIOLOGY_CODE = "1030";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Radio-oncology / radiotherapy</div>
-	 * <div class="de">Code für Radio-Onkologie_Strahlentherapie</div>
-	 * <div class="fr">Code de Radio-oncologie_radiothérapie</div>
-	 * <div class="it">Code per Radio-oncologia_radioterapia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Radio-oncology / radiotherapy<br>
+	 * DE: Code für Radio-Onkologie_Strahlentherapie<br>
+	 * FR: Code de Radio-oncologie_radiothérapie<br>
+	 * IT: Code per Radio-oncologia_radioterapia<br>
 	 */
 	public static final String RADIO_ONCOLOGY_RADIOTHERAPY_CODE = "1032";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Reconstructive dentistry</div>
-	 * <div class="de">Code für Rekonstruktive Zahnmedizin</div>
-	 * <div class="fr">Code de Médecine dentaire reconstructive</div>
-	 * <div class="it">Code per Medicina dentaria riconstruttiva</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Reconstructive dentistry<br>
+	 * DE: Code für Rekonstruktive Zahnmedizin<br>
+	 * FR: Code de Médecine dentaire reconstructive<br>
+	 * IT: Code per Medicina dentaria riconstruttiva<br>
 	 */
 	public static final String RECONSTRUCTIVE_DENTISTRY_CODE = "1049";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Rheumatology</div>
-	 * <div class="de">Code für Rheumatologie</div>
-	 * <div class="fr">Code de Rhumatologie</div>
-	 * <div class="it">Code per Reumatologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Rheumatology<br>
+	 * DE: Code für Rheumatologie<br>
+	 * FR: Code de Rhumatologie<br>
+	 * IT: Code per Reumatologia<br>
 	 */
 	public static final String RHEUMATOLOGY_CODE = "1037";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Surgery</div>
-	 * <div class="de">Code für Chirurgie</div>
-	 * <div class="fr">Code de Chirurgie</div>
-	 * <div class="it">Code per Chirurgia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Surgery<br>
+	 * DE: Code für Chirurgie<br>
+	 * FR: Code de Chirurgie<br>
+	 * IT: Code per Chirurgia<br>
 	 */
 	public static final String SURGERY_CODE = "1002";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Thoracic surgery</div>
-	 * <div class="de">Code für Thoraxchirurgie</div>
-	 * <div class="fr">Code de Chirurgie thoracique</div>
-	 * <div class="it">Code per Chirurgia toracica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Thoracic surgery<br>
+	 * DE: Code für Thoraxchirurgie<br>
+	 * FR: Code de Chirurgie thoracique<br>
+	 * IT: Code per Chirurgia toracica<br>
 	 */
 	public static final String THORACIC_SURGERY_CODE = "1061";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Tropical and travel medicine</div>
-	 * <div class="de">Code für Tropen- und Reisemedizin</div>
-	 * <div class="fr">Code de Médecine tropicale et médecine des voyages</div>
-	 * <div class="it">Code per Medicina tropicale e medicina di viaggio</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Tropical and travel medicine<br>
+	 * DE: Code für Tropen- und Reisemedizin<br>
+	 * FR: Code de Médecine tropicale et médecine des voyages<br>
+	 * IT: Code per Medicina tropicale e medicina di viaggio<br>
 	 */
 	public static final String TROPICAL_AND_TRAVEL_MEDICINE_CODE = "1038";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Urology</div>
-	 * <div class="de">Code für Urologie</div>
-	 * <div class="fr">Code de Urologie</div>
-	 * <div class="it">Code per Urologia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Urology<br>
+	 * DE: Code für Urologie<br>
+	 * FR: Code de Urologie<br>
+	 * IT: Code per Urologia<br>
 	 */
 	public static final String UROLOGY_CODE = "1018";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Vascular surgery</div>
-	 * <div class="de">Code für Gefässchirurgie</div>
-	 * <div class="fr">Code de Chirurgie vasculaire</div>
-	 * <div class="it">Code per Chirurgia vascolare</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Vascular surgery<br>
+	 * DE: Code für Gefässchirurgie<br>
+	 * FR: Code de Chirurgie vasculaire<br>
+	 * IT: Code per Chirurgia vascolare<br>
 	 */
 	public static final String VASCULAR_SURGERY_CODE = "1060";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
-	 * <!-- @formatter:on -->
+	 * Identifier of the value set.
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.8.2";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Name of the value set</div>
-	 * <div class="de">Name des Value Sets</div>
-	 * <!-- @formatter:on -->
+	 * Name of the value set.
 	 */
 	public static final String VALUE_SET_NAME = "HCProfessional.hcSpecialisation";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
-	 * <!-- @formatter:on -->
+	 * Gets the Enum with a given code.
 	 *
-	 * @param code
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
+	 * @param code The code value.
+	 * @return the enum value found or {@code null}.
 	 */
 	public static HcpSpecialisation getEnum(final String code) {
 		for (final HcpSpecialisation x : values()) {
@@ -1303,14 +953,10 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
-	 * <!-- @formatter:on -->
+	 * Checks if a given enum is part of this value set.
 	 *
-	 * @param enumName
-	 *            <div class="de"> enumName</div>
-	 * @return true, if enum is in this value set
+	 * @param enumName The name of the enum.
+	 * @return {@code true} if the name is found in this value set, {@code false} otherwise.
 	 */
 	public static boolean isEnumOfValueSet(final String enumName) {
 		if (enumName == null) {
@@ -1325,14 +971,10 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
-	 * <!-- @formatter:on -->
+	 * Checks if a given code value is in this value set.
 	 *
-	 * @param codeValue
-	 *            <div class="de"> code</div>
-	 * @return true, if is in value set
+	 * @param codeValue The code value.
+	 * @return {@code true} if the value is found in this value set, {@code false} otherwise.
 	 */
 	public static boolean isInValueSet(final String codeValue) {
 		for (final HcpSpecialisation x : values()) {
@@ -1344,50 +986,32 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Machine interpretable and (inside this class) unique code</div>
-	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse) eindeutiger Code</div>
-	 * <!-- @formatter:on -->
+	 * Machine interpretable and (inside this class) unique code.
 	 */
 	private String code;
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Identifier of the referencing code system.</div>
-	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
-	 * <!-- @formatter:on -->
+	 * Identifier of the referencing code system.
 	 */
 	private String codeSystem;
 
 	/**
-	 * The display names per language
+	 * The display names per language.
 	 */
 	private Map<LanguageCode, String> displayNames;
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display Name</div>
-	 * <div class="de">Instanziiert dieses Enum Object mittels eines Codes und einem Display Name</div>.
-	 * <!-- @formatter:on -->
+	 * Instantiates this enum with a given code and display names.
 	 *
-	 * @param code
-	 *            code
-	 * @param codeSystem
-	 *            codeSystem
-	 * @param displayName
-	 *            the default display name
-	 * @param displayNameEn
-	 *            the display name en
-	 * @param displayNameDe
-	 *            the display name de
-	 * @param displayNameFr
-	 *            the display name fr
-	 * @param displayNameIt
-	 *            the display name it
+	 * @param code          The code value.
+	 * @param codeSystem    The code system (OID).
+	 * @param displayName   The default display name.
+	 * @param displayNameEn The display name in English.
+	 * @param displayNameDe The display name in German.
+	 * @param displayNameFr The display name in French.
+	 * @param displayNameIt The display name in Italian.
 	 */
-	HcpSpecialisation(final String code, final String codeSystem, final String displayName,
-			final String displayNameEn, final String displayNameDe, final String displayNameFr,
-			final String displayNameIt) {
+	HcpSpecialisation(final String code, final String codeSystem, final String displayName, final String displayNameEn, final String displayNameDe, final String displayNameFr, final String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		this.displayNames = new HashMap<>();
@@ -1399,12 +1023,9 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the code system identifier.</div>
-	 * <div class="de">Liefert den Code System Identifikator.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the code system identifier.
 	 *
-	 * @return <div class="en">the code system identifier</div>
+	 * @return the code system identifier.
 	 */
 	@Override
 	public String getCodeSystemId() {
@@ -1412,29 +1033,23 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the code system name.</div>
-	 * <div class="de">Liefert den Code System Namen.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the code system name.
 	 *
-	 * @return <div class="en">the code system identifier</div>
+	 * @return the code system identifier.
 	 */
 	@Override
 	public String getCodeSystemName() {
-		String retVal = "";
-		CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
-		if (cs != null)
-			retVal = cs.getCodeSystemName();
-		return retVal;
+		final CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
+		if (cs != null) {
+			return cs.getCodeSystemName();
+		}
+		return "";
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>
-	 * <!-- @formatter:on -->
+	 * Gets the code value as a string.
 	 *
-	 * @return <div class="en">the code</div>
+	 * @return the code value.
 	 */
 	@Override
 	public String getCodeValue() {
@@ -1442,21 +1057,15 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the display name defined by the language param. If
-	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
-	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the display name defined by the language param. If there is no english translation, the default display name
+	 *      is returned.
 	 *
-	 * @param languageCode
-	 *            the language code to get the display name for
-	 * @return returns the display name in the desired language. if language not
-	 *         found, display name in german will returned
+	 * @param languageCode The language code to get the display name for.
+	 * @return the display name in the desired language. if language not found, display name in german will be returned.
 	 */
 	@Override
-	public String getDisplayName(LanguageCode languageCode) {
-		String displayName = this.displayNames.get(languageCode);
+	public String getDisplayName(final LanguageCode languageCode) {
+		final String displayName = this.displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
 			return this.displayNames.get(null);
 		}
@@ -1464,12 +1073,9 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the value set identifier.</div>
-	 * <div class="de">Liefert den Value Set Identifikator.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the value set identifier.
 	 *
-	 * @return <div class="en">the value set identifier</div>
+	 * @return the value set identifier.
 	 */
 	@Override
 	public String getValueSetId() {
@@ -1477,12 +1083,9 @@ public enum HcpSpecialisation implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the value set name.</div>
-	 * <div class="de">Liefert den Value Set Namen.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the value set name.
 	 *
-	 * @return <div class="en">the value set name</div>
+	 * @return the value set name.
 	 */
 	@Override
 	public String getValueSetName() {

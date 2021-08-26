@@ -26,565 +26,412 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
- * <!-- @formatter:off -->
  * Enumeration of DocumentEntry.mimeType values
- *
- * <div class="en">MIME type of the document as per Annex; EPRO-FDHA.</div>
- * <div class="de">MIME Typ des Dokumentes gemäss Anhang 3 EPDG.</div>
- * <div class="fr">MIME Type du document selon l'annexe 3 ODEP-DFI.</div>
- * <div class="it">Tipo MIME del documento secondo l'allegato 3 OCIP-DFI.</div>
- *
- * Identifier: 2.16.756.5.30.1.127.3.10.1.16
- * Effective date: 2021-04-01 17:07
- * Version: 202104.0-stable
+ * <p>
+ * EN: MIME type of the document as per Annex; EPRO-FDHA.<br>
+ * DE: MIME Typ des Dokumentes gemäss Anhang 3 EPDG.<br>
+ * FR: MIME Type du document selon l'annexe 3 ODEP-DFI.<br>
+ * IT: Tipo MIME del documento secondo l'allegato 3 OCIP-DFI.<br>
+ * <p>
+ * Identifier: 2.16.756.5.30.1.127.3.10.1.16<br>
+ * Effective date: 2021-04-01 17:07<br>
+ * Version: 202104.0-stable<br>
  * Status: FINAL
- * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-04-22")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-08-26")
 public enum MimeType implements ValueSetEnumInterface {
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">CDA Level 1 Multipart</div>
-	 * <div class="de">CDA Level 1 Multipart</div>
-	 * <div class="fr">CDA Level 1 Multipart</div>
-	 * <div class="it">CDA Level 1 Multipart</div>
-	 * <!-- @formatter:on -->
+	 * EN: CDA Level 1 Multipart<br>
+	 * DE: CDA Level 1 Multipart<br>
+	 * FR: CDA Level 1 Multipart<br>
+	 * IT: CDA Level 1 Multipart<br>
 	 */
-	CDA_LEVEL_1_MULTIPART("multipart/x-hl7-cda-level1", "2.16.840.1.113883.5.79",
-			"CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart",
-			"CDA Level 1 Multipart", "CDA Level 1 Multipart"),
+	CDA_LEVEL_1_MULTIPART("multipart/x-hl7-cda-level1", "2.16.840.1.113883.5.79", "CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart", "CDA Level 1 Multipart"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">CSV Comma-separated Values</div>
-	 * <div class="de">CSV Comma-separated Values</div>
-	 * <div class="fr">CSV Comma-separated Values</div>
-	 * <div class="it">CSV Comma-separated Values</div>
-	 * <!-- @formatter:on -->
+	 * EN: CSV Comma-separated Values<br>
+	 * DE: CSV Comma-separated Values<br>
+	 * FR: CSV Comma-separated Values<br>
+	 * IT: CSV Comma-separated Values<br>
 	 */
-	CSV_COMMA_SEPARATED_VALUES("text/csv", "2.16.840.1.113883.5.79", "CSV Comma-separated Values",
-			"CSV Comma-separated Values", "CSV Comma-separated Values",
-			"CSV Comma-separated Values", "CSV Comma-separated Values"),
+	CSV_COMMA_SEPARATED_VALUES("text/csv", "2.16.840.1.113883.5.79", "CSV Comma-separated Values", "CSV Comma-separated Values", "CSV Comma-separated Values", "CSV Comma-separated Values", "CSV Comma-separated Values"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">DICOM</div>
-	 * <div class="de">DICOM</div>
-	 * <div class="fr">DICOM</div>
-	 * <div class="it">DICOM</div>
-	 * <!-- @formatter:on -->
+	 * EN: DICOM<br>
+	 * DE: DICOM<br>
+	 * FR: DICOM<br>
+	 * IT: DICOM<br>
 	 */
-	DICOM("application/dicom", "2.16.840.1.113883.5.79", "DICOM", "DICOM", "DICOM", "DICOM",
-			"DICOM"),
+	DICOM("application/dicom", "2.16.840.1.113883.5.79", "DICOM", "DICOM", "DICOM", "DICOM", "DICOM"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Extensible 3D Graphics (VRML)</div>
-	 * <div class="de">Extensible 3D Graphics (VRML)</div>
-	 * <div class="fr">Extensible 3D Graphics (VRML)</div>
-	 * <div class="it">Extensible 3D Graphics (VRML)</div>
-	 * <!-- @formatter:on -->
+	 * EN: Extensible 3D Graphics (VRML)<br>
+	 * DE: Extensible 3D Graphics (VRML)<br>
+	 * FR: Extensible 3D Graphics (VRML)<br>
+	 * IT: Extensible 3D Graphics (VRML)<br>
 	 */
-	EXTENSIBLE_3D_GRAPHICS_VRML("model/x3d-vrml", "2.16.840.1.113883.5.79",
-			"Extensible 3D Graphics (VRML)", "Extensible 3D Graphics (VRML)",
-			"Extensible 3D Graphics (VRML)", "Extensible 3D Graphics (VRML)",
-			"Extensible 3D Graphics (VRML)"),
+	EXTENSIBLE_3D_GRAPHICS_VRML("model/x3d-vrml", "2.16.840.1.113883.5.79", "Extensible 3D Graphics (VRML)", "Extensible 3D Graphics (VRML)", "Extensible 3D Graphics (VRML)", "Extensible 3D Graphics (VRML)", "Extensible 3D Graphics (VRML)"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Extensible 3D Graphics (XML)</div>
-	 * <div class="de">Extensible 3D Graphics (XML)</div>
-	 * <div class="fr">Extensible 3D Graphics (XML)</div>
-	 * <div class="it">Extensible 3D Graphics (XML)</div>
-	 * <!-- @formatter:on -->
+	 * EN: Extensible 3D Graphics (XML)<br>
+	 * DE: Extensible 3D Graphics (XML)<br>
+	 * FR: Extensible 3D Graphics (XML)<br>
+	 * IT: Extensible 3D Graphics (XML)<br>
 	 */
-	EXTENSIBLE_3D_GRAPHICS_XML("model/x3d+xml", "2.16.840.1.113883.5.79",
-			"Extensible 3D Graphics (XML)", "Extensible 3D Graphics (XML)",
-			"Extensible 3D Graphics (XML)", "Extensible 3D Graphics (XML)",
-			"Extensible 3D Graphics (XML)"),
+	EXTENSIBLE_3D_GRAPHICS_XML("model/x3d+xml", "2.16.840.1.113883.5.79", "Extensible 3D Graphics (XML)", "Extensible 3D Graphics (XML)", "Extensible 3D Graphics (XML)", "Extensible 3D Graphics (XML)", "Extensible 3D Graphics (XML)"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">FHIR (JSON)</div>
-	 * <div class="de">FHIR (JSON)</div>
-	 * <div class="fr">FHIR (JSON)</div>
-	 * <div class="it">FHIR (JSON)</div>
-	 * <!-- @formatter:on -->
+	 * EN: FHIR (JSON)<br>
+	 * DE: FHIR (JSON)<br>
+	 * FR: FHIR (JSON)<br>
+	 * IT: FHIR (JSON)<br>
 	 */
-	FHIR_JSON("application/fhir+json", "2.16.840.1.113883.5.79", "FHIR (JSON)", "FHIR (JSON)",
-			"FHIR (JSON)", "FHIR (JSON)", "FHIR (JSON)"),
+	FHIR_JSON("application/fhir+json", "2.16.840.1.113883.5.79", "FHIR (JSON)", "FHIR (JSON)", "FHIR (JSON)", "FHIR (JSON)", "FHIR (JSON)"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">FHIR (XML)</div>
-	 * <div class="de">FHIR (XML)</div>
-	 * <div class="fr">FHIR (XML)</div>
-	 * <div class="it">FHIR (XML)</div>
-	 * <!-- @formatter:on -->
+	 * EN: FHIR (XML)<br>
+	 * DE: FHIR (XML)<br>
+	 * FR: FHIR (XML)<br>
+	 * IT: FHIR (XML)<br>
 	 */
-	FHIR_XML("application/fhir+xml", "2.16.840.1.113883.5.79", "FHIR (XML)", "FHIR (XML)",
-			"FHIR (XML)", "FHIR (XML)", "FHIR (XML)"),
+	FHIR_XML("application/fhir+xml", "2.16.840.1.113883.5.79", "FHIR (XML)", "FHIR (XML)", "FHIR (XML)", "FHIR (XML)", "FHIR (XML)"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">GIF Graphics Interchange Format</div>
-	 * <div class="de">GIF Graphics Interchange Format</div>
-	 * <div class="fr">GIF Graphics Interchange Format</div>
-	 * <div class="it">GIF Graphics Interchange Format</div>
-	 * <!-- @formatter:on -->
+	 * EN: GIF Graphics Interchange Format<br>
+	 * DE: GIF Graphics Interchange Format<br>
+	 * FR: GIF Graphics Interchange Format<br>
+	 * IT: GIF Graphics Interchange Format<br>
 	 */
-	GIF_GRAPHICS_INTERCHANGE_FORMAT("image/gif", "2.16.840.1.113883.5.79",
-			"GIF Graphics Interchange Format", "GIF Graphics Interchange Format",
-			"GIF Graphics Interchange Format", "GIF Graphics Interchange Format",
-			"GIF Graphics Interchange Format"),
+	GIF_GRAPHICS_INTERCHANGE_FORMAT("image/gif", "2.16.840.1.113883.5.79", "GIF Graphics Interchange Format", "GIF Graphics Interchange Format", "GIF Graphics Interchange Format", "GIF Graphics Interchange Format", "GIF Graphics Interchange Format"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">JPEG 2000 Compound Image File</div>
-	 * <div class="de">JPEG 2000 Compound Image File</div>
-	 * <div class="fr">JPEG 2000 Compound Image File</div>
-	 * <div class="it">JPEG 2000 Compound Image File</div>
-	 * <!-- @formatter:on -->
+	 * EN: JPEG 2000 Compound Image File<br>
+	 * DE: JPEG 2000 Compound Image File<br>
+	 * FR: JPEG 2000 Compound Image File<br>
+	 * IT: JPEG 2000 Compound Image File<br>
 	 */
-	JPEG_2000_COMPOUND_IMAGE_FILE("image/jpm", "2.16.840.1.113883.5.79",
-			"JPEG 2000 Compound Image File", "JPEG 2000 Compound Image File",
-			"JPEG 2000 Compound Image File", "JPEG 2000 Compound Image File",
-			"JPEG 2000 Compound Image File"),
+	JPEG_2000_COMPOUND_IMAGE_FILE("image/jpm", "2.16.840.1.113883.5.79", "JPEG 2000 Compound Image File", "JPEG 2000 Compound Image File", "JPEG 2000 Compound Image File", "JPEG 2000 Compound Image File", "JPEG 2000 Compound Image File"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">JPEG 2000 Core Image File</div>
-	 * <div class="de">JPEG 2000 Core Image File</div>
-	 * <div class="fr">JPEG 2000 Core Image File</div>
-	 * <div class="it">JPEG 2000 Core Image File</div>
-	 * <!-- @formatter:on -->
+	 * EN: JPEG 2000 Core Image File<br>
+	 * DE: JPEG 2000 Core Image File<br>
+	 * FR: JPEG 2000 Core Image File<br>
+	 * IT: JPEG 2000 Core Image File<br>
 	 */
-	JPEG_2000_CORE_IMAGE_FILE("image/jp2", "2.16.840.1.113883.5.79", "JPEG 2000 Core Image File",
-			"JPEG 2000 Core Image File", "JPEG 2000 Core Image File", "JPEG 2000 Core Image File",
-			"JPEG 2000 Core Image File"),
+	JPEG_2000_CORE_IMAGE_FILE("image/jp2", "2.16.840.1.113883.5.79", "JPEG 2000 Core Image File", "JPEG 2000 Core Image File", "JPEG 2000 Core Image File", "JPEG 2000 Core Image File", "JPEG 2000 Core Image File"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">JPEG 2000 Image File</div>
-	 * <div class="de">JPEG 2000 Image File</div>
-	 * <div class="fr">JPEG 2000 Image File</div>
-	 * <div class="it">JPEG 2000 Image File</div>
-	 * <!-- @formatter:on -->
+	 * EN: JPEG 2000 Image File<br>
+	 * DE: JPEG 2000 Image File<br>
+	 * FR: JPEG 2000 Image File<br>
+	 * IT: JPEG 2000 Image File<br>
 	 */
-	JPEG_2000_IMAGE_FILE("image/jpx", "2.16.840.1.113883.5.79", "JPEG 2000 Image File",
-			"JPEG 2000 Image File", "JPEG 2000 Image File", "JPEG 2000 Image File",
-			"JPEG 2000 Image File"),
+	JPEG_2000_IMAGE_FILE("image/jpx", "2.16.840.1.113883.5.79", "JPEG 2000 Image File", "JPEG 2000 Image File", "JPEG 2000 Image File", "JPEG 2000 Image File", "JPEG 2000 Image File"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">JPEG Image</div>
-	 * <div class="de">JPEG Image</div>
-	 * <div class="fr">JPEG Image</div>
-	 * <div class="it">JPEG Image</div>
-	 * <!-- @formatter:on -->
+	 * EN: JPEG Image<br>
+	 * DE: JPEG Image<br>
+	 * FR: JPEG Image<br>
+	 * IT: JPEG Image<br>
 	 */
-	JPEG_IMAGE("image/jpeg", "2.16.840.1.113883.5.79", "JPEG Image", "JPEG Image", "JPEG Image",
-			"JPEG Image", "JPEG Image"),
+	JPEG_IMAGE("image/jpeg", "2.16.840.1.113883.5.79", "JPEG Image", "JPEG Image", "JPEG Image", "JPEG Image", "JPEG Image"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Motion JPEG 2000</div>
-	 * <div class="de">Motion JPEG 2000</div>
-	 * <div class="fr">Motion JPEG 2000</div>
-	 * <div class="it">Motion JPEG 2000</div>
-	 * <!-- @formatter:on -->
+	 * EN: Motion JPEG 2000<br>
+	 * DE: Motion JPEG 2000<br>
+	 * FR: Motion JPEG 2000<br>
+	 * IT: Motion JPEG 2000<br>
 	 */
-	MOTION_JPEG_2000("video/mj2", "2.16.840.1.113883.5.79", "Motion JPEG 2000", "Motion JPEG 2000",
-			"Motion JPEG 2000", "Motion JPEG 2000", "Motion JPEG 2000"),
+	MOTION_JPEG_2000("video/mj2", "2.16.840.1.113883.5.79", "Motion JPEG 2000", "Motion JPEG 2000", "Motion JPEG 2000", "Motion JPEG 2000", "Motion JPEG 2000"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">MP4 Audio</div>
-	 * <div class="de">MP4 Audio</div>
-	 * <div class="fr">MP4 Audio</div>
-	 * <div class="it">MP4 Audio</div>
-	 * <!-- @formatter:on -->
+	 * EN: MP4 Audio<br>
+	 * DE: MP4 Audio<br>
+	 * FR: MP4 Audio<br>
+	 * IT: MP4 Audio<br>
 	 */
-	MP4_AUDIO("audio/mp4", "2.16.840.1.113883.5.79", "MP4 Audio", "MP4 Audio", "MP4 Audio",
-			"MP4 Audio", "MP4 Audio"),
+	MP4_AUDIO("audio/mp4", "2.16.840.1.113883.5.79", "MP4 Audio", "MP4 Audio", "MP4 Audio", "MP4 Audio", "MP4 Audio"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">MPEG-4 Part 14</div>
-	 * <div class="de">MPEG-4 Part 14</div>
-	 * <div class="fr">MPEG-4 Part 14</div>
-	 * <div class="it">MPEG-4 Part 14</div>
-	 * <!-- @formatter:on -->
+	 * EN: MPEG-4 Part 14<br>
+	 * DE: MPEG-4 Part 14<br>
+	 * FR: MPEG-4 Part 14<br>
+	 * IT: MPEG-4 Part 14<br>
 	 */
-	MPEG_4_PART_14("video/mp4", "2.16.840.1.113883.5.79", "MPEG-4 Part 14", "MPEG-4 Part 14",
-			"MPEG-4 Part 14", "MPEG-4 Part 14", "MPEG-4 Part 14"),
+	MPEG_4_PART_14("video/mp4", "2.16.840.1.113883.5.79", "MPEG-4 Part 14", "MPEG-4 Part 14", "MPEG-4 Part 14", "MPEG-4 Part 14", "MPEG-4 Part 14"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">MPEG audio layer 3</div>
-	 * <div class="de">MPEG audio layer 3</div>
-	 * <div class="fr">MPEG audio layer 3</div>
-	 * <div class="it">MPEG audio layer 3</div>
-	 * <!-- @formatter:on -->
+	 * EN: MPEG audio layer 3<br>
+	 * DE: MPEG audio layer 3<br>
+	 * FR: MPEG audio layer 3<br>
+	 * IT: MPEG audio layer 3<br>
 	 */
-	MPEG_AUDIO_LAYER_3("audio/mpeg", "2.16.840.1.113883.5.79", "MPEG audio layer 3",
-			"MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3"),
+	MPEG_AUDIO_LAYER_3("audio/mpeg", "2.16.840.1.113883.5.79", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3", "MPEG audio layer 3"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">MPEG Video</div>
-	 * <div class="de">MPEG Video</div>
-	 * <div class="fr">MPEG Video</div>
-	 * <div class="it">MPEG Video</div>
-	 * <!-- @formatter:on -->
+	 * EN: MPEG Video<br>
+	 * DE: MPEG Video<br>
+	 * FR: MPEG Video<br>
+	 * IT: MPEG Video<br>
 	 */
-	MPEG_VIDEO("video/mpeg", "2.16.840.1.113883.5.79", "MPEG Video", "MPEG Video", "MPEG Video",
-			"MPEG Video", "MPEG Video"),
+	MPEG_VIDEO("video/mpeg", "2.16.840.1.113883.5.79", "MPEG Video", "MPEG Video", "MPEG Video", "MPEG Video", "MPEG Video"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Multilingual Multipart</div>
-	 * <div class="de">Multilingual Multipart</div>
-	 * <div class="fr">Multilingual Multipart</div>
-	 * <div class="it">Multilingual Multipart</div>
-	 * <!-- @formatter:on -->
+	 * EN: Multilingual Multipart<br>
+	 * DE: Multilingual Multipart<br>
+	 * FR: Multilingual Multipart<br>
+	 * IT: Multilingual Multipart<br>
 	 */
-	MULTILINGUAL_MULTIPART("multipart/multilingual", "2.16.840.1.113883.5.79",
-			"Multilingual Multipart", "Multilingual Multipart", "Multilingual Multipart",
-			"Multilingual Multipart", "Multilingual Multipart"),
+	MULTILINGUAL_MULTIPART("multipart/multilingual", "2.16.840.1.113883.5.79", "Multilingual Multipart", "Multilingual Multipart", "Multilingual Multipart", "Multilingual Multipart", "Multilingual Multipart"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">PDF</div>
-	 * <div class="de">PDF</div>
-	 * <div class="fr">PDF</div>
-	 * <div class="it">PDF</div>
-	 * <!-- @formatter:on -->
+	 * EN: PDF<br>
+	 * DE: PDF<br>
+	 * FR: PDF<br>
+	 * IT: PDF<br>
 	 */
 	PDF("application/pdf", "2.16.840.1.113883.5.79", "PDF", "PDF", "PDF", "PDF", "PDF"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Plain Text</div>
-	 * <div class="de">Plain Text</div>
-	 * <div class="fr">Plain Text</div>
-	 * <div class="it">Plain Text</div>
-	 * <!-- @formatter:on -->
+	 * EN: Plain Text<br>
+	 * DE: Plain Text<br>
+	 * FR: Plain Text<br>
+	 * IT: Plain Text<br>
 	 */
-	PLAIN_TEXT("text/plain", "2.16.840.1.113883.5.79", "Plain Text", "Plain Text", "Plain Text",
-			"Plain Text", "Plain Text"),
+	PLAIN_TEXT("text/plain", "2.16.840.1.113883.5.79", "Plain Text", "Plain Text", "Plain Text", "Plain Text", "Plain Text"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">PNG Portable Network Graphics</div>
-	 * <div class="de">PNG Portable Network Graphics</div>
-	 * <div class="fr">PNG Portable Network Graphics</div>
-	 * <div class="it">PNG Portable Network Graphics</div>
-	 * <!-- @formatter:on -->
+	 * EN: PNG Portable Network Graphics<br>
+	 * DE: PNG Portable Network Graphics<br>
+	 * FR: PNG Portable Network Graphics<br>
+	 * IT: PNG Portable Network Graphics<br>
 	 */
-	PNG_PORTABLE_NETWORK_GRAPHICS("image/png", "2.16.840.1.113883.5.79",
-			"PNG Portable Network Graphics", "PNG Portable Network Graphics",
-			"PNG Portable Network Graphics", "PNG Portable Network Graphics",
-			"PNG Portable Network Graphics"),
+	PNG_PORTABLE_NETWORK_GRAPHICS("image/png", "2.16.840.1.113883.5.79", "PNG Portable Network Graphics", "PNG Portable Network Graphics", "PNG Portable Network Graphics", "PNG Portable Network Graphics", "PNG Portable Network Graphics"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Signed Multipart</div>
-	 * <div class="de">Signed Multipart</div>
-	 * <div class="fr">Signed Multipart</div>
-	 * <div class="it">Signed Multipart</div>
-	 * <!-- @formatter:on -->
+	 * EN: Signed Multipart<br>
+	 * DE: Signed Multipart<br>
+	 * FR: Signed Multipart<br>
+	 * IT: Signed Multipart<br>
 	 */
-	SIGNED_MULTIPART("multipart/signed", "2.16.840.1.113883.5.79", "Signed Multipart",
-			"Signed Multipart", "Signed Multipart", "Signed Multipart", "Signed Multipart"),
+	SIGNED_MULTIPART("multipart/signed", "2.16.840.1.113883.5.79", "Signed Multipart", "Signed Multipart", "Signed Multipart", "Signed Multipart", "Signed Multipart"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">TIFF Image</div>
-	 * <div class="de">TIFF Image</div>
-	 * <div class="fr">TIFF Image</div>
-	 * <div class="it">TIFF Image</div>
-	 * <!-- @formatter:on -->
+	 * EN: TIFF Image<br>
+	 * DE: TIFF Image<br>
+	 * FR: TIFF Image<br>
+	 * IT: TIFF Image<br>
 	 */
-	TIFF_IMAGE("image/tiff", "2.16.840.1.113883.5.79", "TIFF Image", "TIFF Image", "TIFF Image",
-			"TIFF Image", "TIFF Image"),
+	TIFF_IMAGE("image/tiff", "2.16.840.1.113883.5.79", "TIFF Image", "TIFF Image", "TIFF Image", "TIFF Image", "TIFF Image"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Virtual Reality Modeling Language</div>
-	 * <div class="de">Virtual Reality Modeling Language</div>
-	 * <div class="fr">Virtual Reality Modeling Language</div>
-	 * <div class="it">Virtual Reality Modeling Language</div>
-	 * <!-- @formatter:on -->
+	 * EN: Virtual Reality Modeling Language<br>
+	 * DE: Virtual Reality Modeling Language<br>
+	 * FR: Virtual Reality Modeling Language<br>
+	 * IT: Virtual Reality Modeling Language<br>
 	 */
-	VIRTUAL_REALITY_MODELING_LANGUAGE("model/vrml", "2.16.840.1.113883.5.79",
-			"Virtual Reality Modeling Language", "Virtual Reality Modeling Language",
-			"Virtual Reality Modeling Language", "Virtual Reality Modeling Language",
-			"Virtual Reality Modeling Language"),
+	VIRTUAL_REALITY_MODELING_LANGUAGE("model/vrml", "2.16.840.1.113883.5.79", "Virtual Reality Modeling Language", "Virtual Reality Modeling Language", "Virtual Reality Modeling Language", "Virtual Reality Modeling Language", "Virtual Reality Modeling Language"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">XML-Text</div>
-	 * <div class="de">XML-Text</div>
-	 * <div class="fr">XML-Text</div>
-	 * <div class="it">XML-Text</div>
-	 * <!-- @formatter:on -->
+	 * EN: XML-Text<br>
+	 * DE: XML-Text<br>
+	 * FR: XML-Text<br>
+	 * IT: XML-Text<br>
 	 */
-	XML_TEXT("text/xml", "2.16.840.1.113883.5.79", "XML-Text", "XML-Text", "XML-Text", "XML-Text",
-			"XML-Text");
+	XML_TEXT("text/xml", "2.16.840.1.113883.5.79", "XML-Text", "XML-Text", "XML-Text", "XML-Text", "XML-Text");
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for CDA Level 1 Multipart</div>
-	 * <div class="de">Code für CDA Level 1 Multipart</div>
-	 * <div class="fr">Code de CDA Level 1 Multipart</div>
-	 * <div class="it">Code per CDA Level 1 Multipart</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for CDA Level 1 Multipart<br>
+	 * DE: Code für CDA Level 1 Multipart<br>
+	 * FR: Code de CDA Level 1 Multipart<br>
+	 * IT: Code per CDA Level 1 Multipart<br>
 	 */
 	public static final String CDA_LEVEL_1_MULTIPART_CODE = "multipart/x-hl7-cda-level1";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for CSV Comma-separated Values</div>
-	 * <div class="de">Code für CSV Comma-separated Values</div>
-	 * <div class="fr">Code de CSV Comma-separated Values</div>
-	 * <div class="it">Code per CSV Comma-separated Values</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for CSV Comma-separated Values<br>
+	 * DE: Code für CSV Comma-separated Values<br>
+	 * FR: Code de CSV Comma-separated Values<br>
+	 * IT: Code per CSV Comma-separated Values<br>
 	 */
 	public static final String CSV_COMMA_SEPARATED_VALUES_CODE = "text/csv";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for DICOM</div>
-	 * <div class="de">Code für DICOM</div>
-	 * <div class="fr">Code de DICOM</div>
-	 * <div class="it">Code per DICOM</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for DICOM<br>
+	 * DE: Code für DICOM<br>
+	 * FR: Code de DICOM<br>
+	 * IT: Code per DICOM<br>
 	 */
 	public static final String DICOM_CODE = "application/dicom";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Extensible 3D Graphics (VRML)</div>
-	 * <div class="de">Code für Extensible 3D Graphics (VRML)</div>
-	 * <div class="fr">Code de Extensible 3D Graphics (VRML)</div>
-	 * <div class="it">Code per Extensible 3D Graphics (VRML)</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Extensible 3D Graphics (VRML)<br>
+	 * DE: Code für Extensible 3D Graphics (VRML)<br>
+	 * FR: Code de Extensible 3D Graphics (VRML)<br>
+	 * IT: Code per Extensible 3D Graphics (VRML)<br>
 	 */
 	public static final String EXTENSIBLE_3D_GRAPHICS_VRML_CODE = "model/x3d-vrml";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Extensible 3D Graphics (XML)</div>
-	 * <div class="de">Code für Extensible 3D Graphics (XML)</div>
-	 * <div class="fr">Code de Extensible 3D Graphics (XML)</div>
-	 * <div class="it">Code per Extensible 3D Graphics (XML)</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Extensible 3D Graphics (XML)<br>
+	 * DE: Code für Extensible 3D Graphics (XML)<br>
+	 * FR: Code de Extensible 3D Graphics (XML)<br>
+	 * IT: Code per Extensible 3D Graphics (XML)<br>
 	 */
 	public static final String EXTENSIBLE_3D_GRAPHICS_XML_CODE = "model/x3d+xml";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for FHIR (JSON)</div>
-	 * <div class="de">Code für FHIR (JSON)</div>
-	 * <div class="fr">Code de FHIR (JSON)</div>
-	 * <div class="it">Code per FHIR (JSON)</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for FHIR (JSON)<br>
+	 * DE: Code für FHIR (JSON)<br>
+	 * FR: Code de FHIR (JSON)<br>
+	 * IT: Code per FHIR (JSON)<br>
 	 */
 	public static final String FHIR_JSON_CODE = "application/fhir+json";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for FHIR (XML)</div>
-	 * <div class="de">Code für FHIR (XML)</div>
-	 * <div class="fr">Code de FHIR (XML)</div>
-	 * <div class="it">Code per FHIR (XML)</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for FHIR (XML)<br>
+	 * DE: Code für FHIR (XML)<br>
+	 * FR: Code de FHIR (XML)<br>
+	 * IT: Code per FHIR (XML)<br>
 	 */
 	public static final String FHIR_XML_CODE = "application/fhir+xml";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for GIF Graphics Interchange Format</div>
-	 * <div class="de">Code für GIF Graphics Interchange Format</div>
-	 * <div class="fr">Code de GIF Graphics Interchange Format</div>
-	 * <div class="it">Code per GIF Graphics Interchange Format</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for GIF Graphics Interchange Format<br>
+	 * DE: Code für GIF Graphics Interchange Format<br>
+	 * FR: Code de GIF Graphics Interchange Format<br>
+	 * IT: Code per GIF Graphics Interchange Format<br>
 	 */
 	public static final String GIF_GRAPHICS_INTERCHANGE_FORMAT_CODE = "image/gif";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for JPEG 2000 Compound Image File</div>
-	 * <div class="de">Code für JPEG 2000 Compound Image File</div>
-	 * <div class="fr">Code de JPEG 2000 Compound Image File</div>
-	 * <div class="it">Code per JPEG 2000 Compound Image File</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for JPEG 2000 Compound Image File<br>
+	 * DE: Code für JPEG 2000 Compound Image File<br>
+	 * FR: Code de JPEG 2000 Compound Image File<br>
+	 * IT: Code per JPEG 2000 Compound Image File<br>
 	 */
 	public static final String JPEG_2000_COMPOUND_IMAGE_FILE_CODE = "image/jpm";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for JPEG 2000 Core Image File</div>
-	 * <div class="de">Code für JPEG 2000 Core Image File</div>
-	 * <div class="fr">Code de JPEG 2000 Core Image File</div>
-	 * <div class="it">Code per JPEG 2000 Core Image File</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for JPEG 2000 Core Image File<br>
+	 * DE: Code für JPEG 2000 Core Image File<br>
+	 * FR: Code de JPEG 2000 Core Image File<br>
+	 * IT: Code per JPEG 2000 Core Image File<br>
 	 */
 	public static final String JPEG_2000_CORE_IMAGE_FILE_CODE = "image/jp2";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for JPEG 2000 Image File</div>
-	 * <div class="de">Code für JPEG 2000 Image File</div>
-	 * <div class="fr">Code de JPEG 2000 Image File</div>
-	 * <div class="it">Code per JPEG 2000 Image File</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for JPEG 2000 Image File<br>
+	 * DE: Code für JPEG 2000 Image File<br>
+	 * FR: Code de JPEG 2000 Image File<br>
+	 * IT: Code per JPEG 2000 Image File<br>
 	 */
 	public static final String JPEG_2000_IMAGE_FILE_CODE = "image/jpx";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for JPEG Image</div>
-	 * <div class="de">Code für JPEG Image</div>
-	 * <div class="fr">Code de JPEG Image</div>
-	 * <div class="it">Code per JPEG Image</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for JPEG Image<br>
+	 * DE: Code für JPEG Image<br>
+	 * FR: Code de JPEG Image<br>
+	 * IT: Code per JPEG Image<br>
 	 */
 	public static final String JPEG_IMAGE_CODE = "image/jpeg";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Motion JPEG 2000</div>
-	 * <div class="de">Code für Motion JPEG 2000</div>
-	 * <div class="fr">Code de Motion JPEG 2000</div>
-	 * <div class="it">Code per Motion JPEG 2000</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Motion JPEG 2000<br>
+	 * DE: Code für Motion JPEG 2000<br>
+	 * FR: Code de Motion JPEG 2000<br>
+	 * IT: Code per Motion JPEG 2000<br>
 	 */
 	public static final String MOTION_JPEG_2000_CODE = "video/mj2";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for MP4 Audio</div>
-	 * <div class="de">Code für MP4 Audio</div>
-	 * <div class="fr">Code de MP4 Audio</div>
-	 * <div class="it">Code per MP4 Audio</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for MP4 Audio<br>
+	 * DE: Code für MP4 Audio<br>
+	 * FR: Code de MP4 Audio<br>
+	 * IT: Code per MP4 Audio<br>
 	 */
 	public static final String MP4_AUDIO_CODE = "audio/mp4";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for MPEG-4 Part 14</div>
-	 * <div class="de">Code für MPEG-4 Part 14</div>
-	 * <div class="fr">Code de MPEG-4 Part 14</div>
-	 * <div class="it">Code per MPEG-4 Part 14</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for MPEG-4 Part 14<br>
+	 * DE: Code für MPEG-4 Part 14<br>
+	 * FR: Code de MPEG-4 Part 14<br>
+	 * IT: Code per MPEG-4 Part 14<br>
 	 */
 	public static final String MPEG_4_PART_14_CODE = "video/mp4";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for MPEG audio layer 3</div>
-	 * <div class="de">Code für MPEG audio layer 3</div>
-	 * <div class="fr">Code de MPEG audio layer 3</div>
-	 * <div class="it">Code per MPEG audio layer 3</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for MPEG audio layer 3<br>
+	 * DE: Code für MPEG audio layer 3<br>
+	 * FR: Code de MPEG audio layer 3<br>
+	 * IT: Code per MPEG audio layer 3<br>
 	 */
 	public static final String MPEG_AUDIO_LAYER_3_CODE = "audio/mpeg";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for MPEG Video</div>
-	 * <div class="de">Code für MPEG Video</div>
-	 * <div class="fr">Code de MPEG Video</div>
-	 * <div class="it">Code per MPEG Video</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for MPEG Video<br>
+	 * DE: Code für MPEG Video<br>
+	 * FR: Code de MPEG Video<br>
+	 * IT: Code per MPEG Video<br>
 	 */
 	public static final String MPEG_VIDEO_CODE = "video/mpeg";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Multilingual Multipart</div>
-	 * <div class="de">Code für Multilingual Multipart</div>
-	 * <div class="fr">Code de Multilingual Multipart</div>
-	 * <div class="it">Code per Multilingual Multipart</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Multilingual Multipart<br>
+	 * DE: Code für Multilingual Multipart<br>
+	 * FR: Code de Multilingual Multipart<br>
+	 * IT: Code per Multilingual Multipart<br>
 	 */
 	public static final String MULTILINGUAL_MULTIPART_CODE = "multipart/multilingual";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for PDF</div>
-	 * <div class="de">Code für PDF</div>
-	 * <div class="fr">Code de PDF</div>
-	 * <div class="it">Code per PDF</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for PDF<br>
+	 * DE: Code für PDF<br>
+	 * FR: Code de PDF<br>
+	 * IT: Code per PDF<br>
 	 */
 	public static final String PDF_CODE = "application/pdf";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Plain Text</div>
-	 * <div class="de">Code für Plain Text</div>
-	 * <div class="fr">Code de Plain Text</div>
-	 * <div class="it">Code per Plain Text</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Plain Text<br>
+	 * DE: Code für Plain Text<br>
+	 * FR: Code de Plain Text<br>
+	 * IT: Code per Plain Text<br>
 	 */
 	public static final String PLAIN_TEXT_CODE = "text/plain";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for PNG Portable Network Graphics</div>
-	 * <div class="de">Code für PNG Portable Network Graphics</div>
-	 * <div class="fr">Code de PNG Portable Network Graphics</div>
-	 * <div class="it">Code per PNG Portable Network Graphics</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for PNG Portable Network Graphics<br>
+	 * DE: Code für PNG Portable Network Graphics<br>
+	 * FR: Code de PNG Portable Network Graphics<br>
+	 * IT: Code per PNG Portable Network Graphics<br>
 	 */
 	public static final String PNG_PORTABLE_NETWORK_GRAPHICS_CODE = "image/png";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Signed Multipart</div>
-	 * <div class="de">Code für Signed Multipart</div>
-	 * <div class="fr">Code de Signed Multipart</div>
-	 * <div class="it">Code per Signed Multipart</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Signed Multipart<br>
+	 * DE: Code für Signed Multipart<br>
+	 * FR: Code de Signed Multipart<br>
+	 * IT: Code per Signed Multipart<br>
 	 */
 	public static final String SIGNED_MULTIPART_CODE = "multipart/signed";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for TIFF Image</div>
-	 * <div class="de">Code für TIFF Image</div>
-	 * <div class="fr">Code de TIFF Image</div>
-	 * <div class="it">Code per TIFF Image</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for TIFF Image<br>
+	 * DE: Code für TIFF Image<br>
+	 * FR: Code de TIFF Image<br>
+	 * IT: Code per TIFF Image<br>
 	 */
 	public static final String TIFF_IMAGE_CODE = "image/tiff";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Virtual Reality Modeling Language</div>
-	 * <div class="de">Code für Virtual Reality Modeling Language</div>
-	 * <div class="fr">Code de Virtual Reality Modeling Language</div>
-	 * <div class="it">Code per Virtual Reality Modeling Language</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Virtual Reality Modeling Language<br>
+	 * DE: Code für Virtual Reality Modeling Language<br>
+	 * FR: Code de Virtual Reality Modeling Language<br>
+	 * IT: Code per Virtual Reality Modeling Language<br>
 	 */
 	public static final String VIRTUAL_REALITY_MODELING_LANGUAGE_CODE = "model/vrml";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for XML-Text</div>
-	 * <div class="de">Code für XML-Text</div>
-	 * <div class="fr">Code de XML-Text</div>
-	 * <div class="it">Code per XML-Text</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for XML-Text<br>
+	 * DE: Code für XML-Text<br>
+	 * FR: Code de XML-Text<br>
+	 * IT: Code per XML-Text<br>
 	 */
 	public static final String XML_TEXT_CODE = "text/xml";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
-	 * <!-- @formatter:on -->
+	 * Identifier of the value set.
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.16";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Name of the value set</div>
-	 * <div class="de">Name des Value Sets</div>
-	 * <!-- @formatter:on -->
+	 * Name of the value set.
 	 */
 	public static final String VALUE_SET_NAME = "DocumentEntry.mimeType";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
-	 * <!-- @formatter:on -->
+	 * Gets the Enum with a given code.
 	 *
-	 * @param code
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
+	 * @param code The code value.
+	 * @return the enum value found or {@code null}.
 	 */
 	public static MimeType getEnum(final String code) {
 		for (final MimeType x : values()) {
@@ -596,14 +443,10 @@ public enum MimeType implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
-	 * <!-- @formatter:on -->
+	 * Checks if a given enum is part of this value set.
 	 *
-	 * @param enumName
-	 *            <div class="de"> enumName</div>
-	 * @return true, if enum is in this value set
+	 * @param enumName The name of the enum.
+	 * @return {@code true} if the name is found in this value set, {@code false} otherwise.
 	 */
 	public static boolean isEnumOfValueSet(final String enumName) {
 		if (enumName == null) {
@@ -618,14 +461,10 @@ public enum MimeType implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
-	 * <!-- @formatter:on -->
+	 * Checks if a given code value is in this value set.
 	 *
-	 * @param codeValue
-	 *            <div class="de"> code</div>
-	 * @return true, if is in value set
+	 * @param codeValue The code value.
+	 * @return {@code true} if the value is found in this value set, {@code false} otherwise.
 	 */
 	public static boolean isInValueSet(final String codeValue) {
 		for (final MimeType x : values()) {
@@ -637,50 +476,32 @@ public enum MimeType implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Machine interpretable and (inside this class) unique code</div>
-	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse) eindeutiger Code</div>
-	 * <!-- @formatter:on -->
+	 * Machine interpretable and (inside this class) unique code.
 	 */
 	private String code;
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Identifier of the referencing code system.</div>
-	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
-	 * <!-- @formatter:on -->
+	 * Identifier of the referencing code system.
 	 */
 	private String codeSystem;
 
 	/**
-	 * The display names per language
+	 * The display names per language.
 	 */
 	private Map<LanguageCode, String> displayNames;
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display Name</div>
-	 * <div class="de">Instanziiert dieses Enum Object mittels eines Codes und einem Display Name</div>.
-	 * <!-- @formatter:on -->
+	 * Instantiates this enum with a given code and display names.
 	 *
-	 * @param code
-	 *            code
-	 * @param codeSystem
-	 *            codeSystem
-	 * @param displayName
-	 *            the default display name
-	 * @param displayNameEn
-	 *            the display name en
-	 * @param displayNameDe
-	 *            the display name de
-	 * @param displayNameFr
-	 *            the display name fr
-	 * @param displayNameIt
-	 *            the display name it
+	 * @param code          The code value.
+	 * @param codeSystem    The code system (OID).
+	 * @param displayName   The default display name.
+	 * @param displayNameEn The display name in English.
+	 * @param displayNameDe The display name in German.
+	 * @param displayNameFr The display name in French.
+	 * @param displayNameIt The display name in Italian.
 	 */
-	MimeType(final String code, final String codeSystem, final String displayName,
-			final String displayNameEn, final String displayNameDe, final String displayNameFr,
-			final String displayNameIt) {
+	MimeType(final String code, final String codeSystem, final String displayName, final String displayNameEn, final String displayNameDe, final String displayNameFr, final String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		this.displayNames = new HashMap<>();
@@ -692,12 +513,9 @@ public enum MimeType implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the code system identifier.</div>
-	 * <div class="de">Liefert den Code System Identifikator.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the code system identifier.
 	 *
-	 * @return <div class="en">the code system identifier</div>
+	 * @return the code system identifier.
 	 */
 	@Override
 	public String getCodeSystemId() {
@@ -705,29 +523,23 @@ public enum MimeType implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the code system name.</div>
-	 * <div class="de">Liefert den Code System Namen.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the code system name.
 	 *
-	 * @return <div class="en">the code system identifier</div>
+	 * @return the code system identifier.
 	 */
 	@Override
 	public String getCodeSystemName() {
-		String retVal = "";
-		CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
-		if (cs != null)
-			retVal = cs.getCodeSystemName();
-		return retVal;
+		final CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
+		if (cs != null) {
+			return cs.getCodeSystemName();
+		}
+		return "";
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>
-	 * <!-- @formatter:on -->
+	 * Gets the code value as a string.
 	 *
-	 * @return <div class="en">the code</div>
+	 * @return the code value.
 	 */
 	@Override
 	public String getCodeValue() {
@@ -735,21 +547,15 @@ public enum MimeType implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the display name defined by the language param. If
-	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
-	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the display name defined by the language param. If there is no english translation, the default display name
+	 *      is returned.
 	 *
-	 * @param languageCode
-	 *            the language code to get the display name for
-	 * @return returns the display name in the desired language. if language not
-	 *         found, display name in german will returned
+	 * @param languageCode The language code to get the display name for.
+	 * @return the display name in the desired language. if language not found, display name in german will be returned.
 	 */
 	@Override
-	public String getDisplayName(LanguageCode languageCode) {
-		String displayName = this.displayNames.get(languageCode);
+	public String getDisplayName(final LanguageCode languageCode) {
+		final String displayName = this.displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
 			return this.displayNames.get(null);
 		}
@@ -757,12 +563,9 @@ public enum MimeType implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the value set identifier.</div>
-	 * <div class="de">Liefert den Value Set Identifikator.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the value set identifier.
 	 *
-	 * @return <div class="en">the value set identifier</div>
+	 * @return the value set identifier.
 	 */
 	@Override
 	public String getValueSetId() {
@@ -770,12 +573,9 @@ public enum MimeType implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the value set name.</div>
-	 * <div class="de">Liefert den Value Set Namen.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the value set name.
 	 *
-	 * @return <div class="en">the value set name</div>
+	 * @return the value set name.
 	 */
 	@Override
 	public String getValueSetName() {

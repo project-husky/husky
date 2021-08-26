@@ -26,411 +26,292 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
- * <!-- @formatter:off -->
  * Enumeration of DocumentEntry.classCode values
- *
- * <div class="en">Document class as per EPRO-FDHA Annex 3</div>
- * <div class="de">Dokumentenklasse gemäss EPDV-EDI Anhang 3</div>
- * <div class="fr">Classification du document selon l'annexe 3 ODEP-DFI</div>
- * <div class="it">Classe del documento secondo l'allegato 3 OCIP-DFI</div>
- *
- * Identifier: 2.16.756.5.30.1.127.3.10.1.3
- * Effective date: 2021-04-01 16:32
- * Version: 202104.0-stable
+ * <p>
+ * EN: Document class as per EPRO-FDHA Annex 3<br>
+ * DE: Dokumentenklasse gemäss EPDV-EDI Anhang 3<br>
+ * FR: Classification du document selon l'annexe 3 ODEP-DFI<br>
+ * IT: Classe del documento secondo l'allegato 3 OCIP-DFI<br>
+ * <p>
+ * Identifier: 2.16.756.5.30.1.127.3.10.1.3<br>
+ * Effective date: 2021-04-01 16:32<br>
+ * Version: 202104.0-stable<br>
  * Status: FINAL
- * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-04-22")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-08-26")
 public enum ClassCode implements ValueSetEnumInterface {
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Administrative documentation</div>
-	 * <div class="de">Administratives Dokument</div>
-	 * <div class="fr">Document administratif</div>
-	 * <div class="it">Documento amministrativo</div>
-	 * <!-- @formatter:on -->
+	 * EN: Administrative documentation<br>
+	 * DE: Administratives Dokument<br>
+	 * FR: Document administratif<br>
+	 * IT: Documento amministrativo<br>
 	 */
-	ADMINISTRATIVE_DOCUMENTATION("405624007", "2.16.840.1.113883.6.96",
-			"Administrative documentation (record artifact)", "Administrative documentation",
-			"Administratives Dokument", "Document administratif", "Documento amministrativo"),
+	ADMINISTRATIVE_DOCUMENTATION("405624007", "2.16.840.1.113883.6.96", "Administrative documentation (record artifact)", "Administrative documentation", "Administratives Dokument", "Document administratif", "Documento amministrativo"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Advance directive report</div>
-	 * <div class="de">Patientenverfügung</div>
-	 * <div class="fr">Directives anticipées</div>
-	 * <div class="it">Direttive del paziente</div>
-	 * <!-- @formatter:on -->
+	 * EN: Advance directive report<br>
+	 * DE: Patientenverfügung<br>
+	 * FR: Directives anticipées<br>
+	 * IT: Direttive del paziente<br>
 	 */
-	ADVANCE_DIRECTIVE_REPORT("371538006", "2.16.840.1.113883.6.96",
-			"Advance directive report (record artifact)", "Advance directive report",
-			"Patientenverfügung", "Directives anticipées", "Direttive del paziente"),
+	ADVANCE_DIRECTIVE_REPORT("371538006", "2.16.840.1.113883.6.96", "Advance directive report (record artifact)", "Advance directive report", "Patientenverfügung", "Directives anticipées", "Direttive del paziente"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Audit trail report</div>
-	 * <div class="de">Rückverfolgung der EPD Zugriffe</div>
-	 * <div class="fr">Traçabilité des accès aux DEP</div>
-	 * <div class="it">Cronologia degli accessi alla CIP</div>
-	 * <!-- @formatter:on -->
+	 * EN: Audit trail report<br>
+	 * DE: Rückverfolgung der EPD Zugriffe<br>
+	 * FR: Traçabilité des accès aux DEP<br>
+	 * IT: Cronologia degli accessi alla CIP<br>
 	 */
-	AUDIT_TRAIL_REPORT("722160009", "2.16.840.1.113883.6.96",
-			"Audit trail report (record artifact)", "Audit trail report",
-			"Rückverfolgung der EPD Zugriffe", "Traçabilité des accès aux DEP",
-			"Cronologia degli accessi alla CIP"),
+	AUDIT_TRAIL_REPORT("722160009", "2.16.840.1.113883.6.96", "Audit trail report (record artifact)", "Audit trail report", "Rückverfolgung der EPD Zugriffe", "Traçabilité des accès aux DEP", "Cronologia degli accessi alla CIP"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Care Plan</div>
-	 * <div class="de">Behandlungsplan</div>
-	 * <div class="fr">Plan de traitement</div>
-	 * <div class="it">Piano di trattamento</div>
-	 * <!-- @formatter:on -->
+	 * EN: Care Plan<br>
+	 * DE: Behandlungsplan<br>
+	 * FR: Plan de traitement<br>
+	 * IT: Piano di trattamento<br>
 	 */
-	CARE_PLAN("734163000", "2.16.840.1.113883.6.96", "Care Plan (record artifact)", "Care Plan",
-			"Behandlungsplan", "Plan de traitement", "Piano di trattamento"),
+	CARE_PLAN("734163000", "2.16.840.1.113883.6.96", "Care Plan (record artifact)", "Care Plan", "Behandlungsplan", "Plan de traitement", "Piano di trattamento"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Clinical procedure report</div>
-	 * <div class="de">Interventionsbericht / Untersuchungsresultat</div>
-	 * <div class="fr">Rapport d’intervention / résultat de l’analyse</div>
-	 * <div class="it">Rapporto operatorio / Referto di analisi</div>
-	 * <!-- @formatter:on -->
+	 * EN: Clinical procedure report<br>
+	 * DE: Interventionsbericht / Untersuchungsresultat<br>
+	 * FR: Rapport d’intervention / résultat de l’analyse<br>
+	 * IT: Rapporto operatorio / Referto di analisi<br>
 	 */
-	CLINICAL_PROCEDURE_REPORT("371525003", "2.16.840.1.113883.6.96",
-			"Clinical procedure report (record artifact)", "Clinical procedure report",
-			"Interventionsbericht / Untersuchungsresultat",
-			"Rapport d’intervention / résultat de l’analyse",
-			"Rapporto operatorio / Referto di analisi"),
+	CLINICAL_PROCEDURE_REPORT("371525003", "2.16.840.1.113883.6.96", "Clinical procedure report (record artifact)", "Clinical procedure report", "Interventionsbericht / Untersuchungsresultat", "Rapport d’intervention / résultat de l’analyse", "Rapporto operatorio / Referto di analisi"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Consent report</div>
-	 * <div class="de">Einwilligung zur Behandlung</div>
-	 * <div class="fr">Consentement au traitement</div>
-	 * <div class="it">Consenso al trattamento</div>
-	 * <!-- @formatter:on -->
+	 * EN: Consent report<br>
+	 * DE: Einwilligung zur Behandlung<br>
+	 * FR: Consentement au traitement<br>
+	 * IT: Consenso al trattamento<br>
 	 */
-	CONSENT_REPORT("371537001", "2.16.840.1.113883.6.96", "Consent report (record artifact)",
-			"Consent report", "Einwilligung zur Behandlung", "Consentement au traitement",
-			"Consenso al trattamento"),
+	CONSENT_REPORT("371537001", "2.16.840.1.113883.6.96", "Consent report (record artifact)", "Consent report", "Einwilligung zur Behandlung", "Consentement au traitement", "Consenso al trattamento"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Emergency medical identification record</div>
-	 * <div class="de">Notfall-ID / Ausweis</div>
-	 * <div class="fr">ID d’urgence / carte d’urgence</div>
-	 * <div class="it">Identificativo d'emergenza / scheda d'emergenza</div>
-	 * <!-- @formatter:on -->
+	 * EN: Emergency medical identification record<br>
+	 * DE: Notfall-ID / Ausweis<br>
+	 * FR: ID d’urgence / carte d’urgence<br>
+	 * IT: Identificativo d'emergenza / scheda d'emergenza<br>
 	 */
-	EMERGENCY_MEDICAL_IDENTIFICATION_RECORD("722216001", "2.16.840.1.113883.6.96",
-			"Emergency medical identification record (record artifact)",
-			"Emergency medical identification record", "Notfall-ID / Ausweis",
-			"ID d’urgence / carte d’urgence",
-			"Identificativo d'emergenza / scheda d'emergenza"),
+	EMERGENCY_MEDICAL_IDENTIFICATION_RECORD("722216001", "2.16.840.1.113883.6.96", "Emergency medical identification record (record artifact)", "Emergency medical identification record", "Notfall-ID / Ausweis", "ID d’urgence / carte d’urgence", "Identificativo d'emergenza / scheda d'emergenza"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Obstetrical Record</div>
-	 * <div class="de">Schwangerschafts-/ Geburtsbericht</div>
-	 * <div class="fr">Rapport de grossesse / de naissance</div>
-	 * <div class="it">Referto della gravidanza / del parto</div>
-	 * <!-- @formatter:on -->
+	 * EN: Obstetrical Record<br>
+	 * DE: Schwangerschafts-/ Geburtsbericht<br>
+	 * FR: Rapport de grossesse / de naissance<br>
+	 * IT: Referto della gravidanza / del parto<br>
 	 */
-	OBSTETRICAL_RECORD("2171000195109", "2.16.756.5.30.1.127.3.4",
-			"Obstetrical Record (record artifact)", "Obstetrical Record",
-			"Schwangerschafts-/ Geburtsbericht", "Rapport de grossesse / de naissance",
-			"Referto della gravidanza / del parto"),
+	OBSTETRICAL_RECORD("2171000195109", "2.16.756.5.30.1.127.3.4", "Obstetrical Record (record artifact)", "Obstetrical Record", "Schwangerschafts-/ Geburtsbericht", "Rapport de grossesse / de naissance", "Referto della gravidanza / del parto"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Order</div>
-	 * <div class="de">Untersuchungsauftrag</div>
-	 * <div class="fr">Mandat d’analyse</div>
-	 * <div class="it">Prescrizione di analisi</div>
-	 * <!-- @formatter:on -->
+	 * EN: Order<br>
+	 * DE: Untersuchungsauftrag<br>
+	 * FR: Mandat d’analyse<br>
+	 * IT: Prescrizione di analisi<br>
 	 */
-	ORDER("721963009", "2.16.840.1.113883.6.96", "Order (record artifact)", "Order",
-			"Untersuchungsauftrag", "Mandat d’analyse", "Prescrizione di analisi"),
+	ORDER("721963009", "2.16.840.1.113883.6.96", "Order (record artifact)", "Order", "Untersuchungsauftrag", "Mandat d’analyse", "Prescrizione di analisi"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Organ donor card</div>
-	 * <div class="de">Organspendeausweis</div>
-	 * <div class="fr">Carte de donneur d’organes</div>
-	 * <div class="it">Tessera di donatore di organi</div>
-	 * <!-- @formatter:on -->
+	 * EN: Organ donor card<br>
+	 * DE: Organspendeausweis<br>
+	 * FR: Carte de donneur d’organes<br>
+	 * IT: Tessera di donatore di organi<br>
 	 */
-	ORGAN_DONOR_CARD("772790007", "2.16.840.1.113883.6.96", "Organ donor card (record artifact)",
-			"Organ donor card", "Organspendeausweis", "Carte de donneur d’organes",
-			"Tessera di donatore di organi"),
+	ORGAN_DONOR_CARD("772790007", "2.16.840.1.113883.6.96", "Organ donor card (record artifact)", "Organ donor card", "Organspendeausweis", "Carte de donneur d’organes", "Tessera di donatore di organi"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Patient record type</div>
-	 * <div class="de">Langzeitdokumentation</div>
-	 * <div class="fr">Documentation à long terme</div>
-	 * <div class="it">Documentazione a lungo termine</div>
-	 * <!-- @formatter:on -->
+	 * EN: Patient record type<br>
+	 * DE: Langzeitdokumentation<br>
+	 * FR: Documentation à long terme<br>
+	 * IT: Documentazione a lungo termine<br>
 	 */
-	PATIENT_RECORD_TYPE("184216000", "2.16.840.1.113883.6.96",
-			"Patient record type (record artifact)", "Patient record type", "Langzeitdokumentation",
-			"Documentation à long terme", "Documentazione a lungo termine"),
+	PATIENT_RECORD_TYPE("184216000", "2.16.840.1.113883.6.96", "Patient record type (record artifact)", "Patient record type", "Langzeitdokumentation", "Documentation à long terme", "Documentazione a lungo termine"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Prescription record</div>
-	 * <div class="de">Verschreibung / Rezept</div>
-	 * <div class="fr">Prescription / ordonnance</div>
-	 * <div class="it">Prescrizione medica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Prescription record<br>
+	 * DE: Verschreibung / Rezept<br>
+	 * FR: Prescription / ordonnance<br>
+	 * IT: Prescrizione medica<br>
 	 */
-	PRESCRIPTION_RECORD("440545006", "2.16.840.1.113883.6.96",
-			"Prescription record (record artifact)", "Prescription record",
-			"Verschreibung / Rezept", "Prescription / ordonnance", "Prescrizione medica"),
+	PRESCRIPTION_RECORD("440545006", "2.16.840.1.113883.6.96", "Prescription record (record artifact)", "Prescription record", "Verschreibung / Rezept", "Prescription / ordonnance", "Prescrizione medica"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Record artifact</div>
-	 * <div class="de">Nicht näher bezeichnetes Dokument</div>
-	 * <div class="fr">Document non précisé</div>
-	 * <div class="it">Documento non meglio specificato</div>
-	 * <!-- @formatter:on -->
+	 * EN: Record artifact<br>
+	 * DE: Nicht näher bezeichnetes Dokument<br>
+	 * FR: Document non précisé<br>
+	 * IT: Documento non meglio specificato<br>
 	 */
-	RECORD_ARTIFACT("419891008", "2.16.840.1.113883.6.96", "Record artifact (record artifact)",
-			"Record artifact", "Nicht näher bezeichnetes Dokument", "Document non précisé",
-			"Documento non meglio specificato"),
+	RECORD_ARTIFACT("419891008", "2.16.840.1.113883.6.96", "Record artifact (record artifact)", "Record artifact", "Nicht näher bezeichnetes Dokument", "Document non précisé", "Documento non meglio specificato"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Record of health event</div>
-	 * <div class="de">Dokument zu gesundheitsrelevantem Ereignis</div>
-	 * <div class="fr">Document sur l’événement sanitaire</div>
-	 * <div class="it">Documento concernente un evento rilevante per la salute</div>
-	 * <!-- @formatter:on -->
+	 * EN: Record of health event<br>
+	 * DE: Dokument zu gesundheitsrelevantem Ereignis<br>
+	 * FR: Document sur l’événement sanitaire<br>
+	 * IT: Documento concernente un evento rilevante per la salute<br>
 	 */
-	RECORD_OF_HEALTH_EVENT("417319006", "2.16.840.1.113883.6.96",
-			"Record of health event (record artifact)", "Record of health event",
-			"Dokument zu gesundheitsrelevantem Ereignis", "Document sur l’événement sanitaire",
-			"Documento concernente un evento rilevante per la salute"),
+	RECORD_OF_HEALTH_EVENT("417319006", "2.16.840.1.113883.6.96", "Record of health event (record artifact)", "Record of health event", "Dokument zu gesundheitsrelevantem Ereignis", "Document sur l’événement sanitaire", "Documento concernente un evento rilevante per la salute"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Referral note</div>
-	 * <div class="de">Zuweisungsschreiben</div>
-	 * <div class="fr">Lettre de référence</div>
-	 * <div class="it">Lettera d'invio</div>
-	 * <!-- @formatter:on -->
+	 * EN: Referral note<br>
+	 * DE: Zuweisungsschreiben<br>
+	 * FR: Lettre de référence<br>
+	 * IT: Lettera d'invio<br>
 	 */
-	REFERRAL_NOTE("721927009", "2.16.840.1.113883.6.96", "Referral note (record artifact)",
-			"Referral note", "Zuweisungsschreiben", "Lettre de référence", "Lettera d'invio"),
+	REFERRAL_NOTE("721927009", "2.16.840.1.113883.6.96", "Referral note (record artifact)", "Referral note", "Zuweisungsschreiben", "Lettre de référence", "Lettera d'invio"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Report of clinical encounter</div>
-	 * <div class="de">Bericht aufgrund einer Konsultation</div>
-	 * <div class="fr">Rapport suite à une consultation</div>
-	 * <div class="it">Rapporto di visita medica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Report of clinical encounter<br>
+	 * DE: Bericht aufgrund einer Konsultation<br>
+	 * FR: Rapport suite à une consultation<br>
+	 * IT: Rapporto di visita medica<br>
 	 */
-	REPORT_OF_CLINICAL_ENCOUNTER("371531000", "2.16.840.1.113883.6.96",
-			"Report of clinical encounter (record artifact)", "Report of clinical encounter",
-			"Bericht aufgrund einer Konsultation", "Rapport suite à une consultation",
-			"Rapporto di visita medica"),
+	REPORT_OF_CLINICAL_ENCOUNTER("371531000", "2.16.840.1.113883.6.96", "Report of clinical encounter (record artifact)", "Report of clinical encounter", "Bericht aufgrund einer Konsultation", "Rapport suite à une consultation", "Rapporto di visita medica"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Summary clinical document</div>
-	 * <div class="de">Zusammenfassender Bericht</div>
-	 * <div class="fr">Rapport de synthèse</div>
-	 * <div class="it">Rapporto riassuntivo</div>
-	 * <!-- @formatter:on -->
+	 * EN: Summary clinical document<br>
+	 * DE: Zusammenfassender Bericht<br>
+	 * FR: Rapport de synthèse<br>
+	 * IT: Rapporto riassuntivo<br>
 	 */
-	SUMMARY_CLINICAL_DOCUMENT("422735006", "2.16.840.1.113883.6.96",
-			"Summary clinical document (record artifact)", "Summary clinical document",
-			"Zusammenfassender Bericht", "Rapport de synthèse", "Rapporto riassuntivo");
+	SUMMARY_CLINICAL_DOCUMENT("422735006", "2.16.840.1.113883.6.96", "Summary clinical document (record artifact)", "Summary clinical document", "Zusammenfassender Bericht", "Rapport de synthèse", "Rapporto riassuntivo");
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Administrative documentation</div>
-	 * <div class="de">Code für Administratives Dokument</div>
-	 * <div class="fr">Code de Document administratif</div>
-	 * <div class="it">Code per Documento amministrativo</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Administrative documentation<br>
+	 * DE: Code für Administratives Dokument<br>
+	 * FR: Code de Document administratif<br>
+	 * IT: Code per Documento amministrativo<br>
 	 */
 	public static final String ADMINISTRATIVE_DOCUMENTATION_CODE = "405624007";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Advance directive report</div>
-	 * <div class="de">Code für Patientenverfügung</div>
-	 * <div class="fr">Code de Directives anticipées</div>
-	 * <div class="it">Code per Direttive del paziente</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Advance directive report<br>
+	 * DE: Code für Patientenverfügung<br>
+	 * FR: Code de Directives anticipées<br>
+	 * IT: Code per Direttive del paziente<br>
 	 */
 	public static final String ADVANCE_DIRECTIVE_REPORT_CODE = "371538006";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Audit trail report</div>
-	 * <div class="de">Code für Rückverfolgung der EPD Zugriffe</div>
-	 * <div class="fr">Code de Traçabilité des accès aux DEP</div>
-	 * <div class="it">Code per Cronologia degli accessi alla CIP</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Audit trail report<br>
+	 * DE: Code für Rückverfolgung der EPD Zugriffe<br>
+	 * FR: Code de Traçabilité des accès aux DEP<br>
+	 * IT: Code per Cronologia degli accessi alla CIP<br>
 	 */
 	public static final String AUDIT_TRAIL_REPORT_CODE = "722160009";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Care Plan</div>
-	 * <div class="de">Code für Behandlungsplan</div>
-	 * <div class="fr">Code de Plan de traitement</div>
-	 * <div class="it">Code per Piano di trattamento</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Care Plan<br>
+	 * DE: Code für Behandlungsplan<br>
+	 * FR: Code de Plan de traitement<br>
+	 * IT: Code per Piano di trattamento<br>
 	 */
 	public static final String CARE_PLAN_CODE = "734163000";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Clinical procedure report</div>
-	 * <div class="de">Code für Interventionsbericht / Untersuchungsresultat</div>
-	 * <div class="fr">Code de Rapport d’intervention / résultat de l’analyse</div>
-	 * <div class="it">Code per Rapporto operatorio / Referto di analisi</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Clinical procedure report<br>
+	 * DE: Code für Interventionsbericht / Untersuchungsresultat<br>
+	 * FR: Code de Rapport d’intervention / résultat de l’analyse<br>
+	 * IT: Code per Rapporto operatorio / Referto di analisi<br>
 	 */
 	public static final String CLINICAL_PROCEDURE_REPORT_CODE = "371525003";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Consent report</div>
-	 * <div class="de">Code für Einwilligung zur Behandlung</div>
-	 * <div class="fr">Code de Consentement au traitement</div>
-	 * <div class="it">Code per Consenso al trattamento</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Consent report<br>
+	 * DE: Code für Einwilligung zur Behandlung<br>
+	 * FR: Code de Consentement au traitement<br>
+	 * IT: Code per Consenso al trattamento<br>
 	 */
 	public static final String CONSENT_REPORT_CODE = "371537001";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Emergency medical identification record</div>
-	 * <div class="de">Code für Notfall-ID / Ausweis</div>
-	 * <div class="fr">Code de ID d’urgence / carte d’urgence</div>
-	 * <div class="it">Code per Identificativo d'emergenza / scheda d'emergenza</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Emergency medical identification record<br>
+	 * DE: Code für Notfall-ID / Ausweis<br>
+	 * FR: Code de ID d’urgence / carte d’urgence<br>
+	 * IT: Code per Identificativo d'emergenza / scheda d'emergenza<br>
 	 */
 	public static final String EMERGENCY_MEDICAL_IDENTIFICATION_RECORD_CODE = "722216001";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Obstetrical Record</div>
-	 * <div class="de">Code für Schwangerschafts-/ Geburtsbericht</div>
-	 * <div class="fr">Code de Rapport de grossesse / de naissance</div>
-	 * <div class="it">Code per Referto della gravidanza / del parto</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Obstetrical Record<br>
+	 * DE: Code für Schwangerschafts-/ Geburtsbericht<br>
+	 * FR: Code de Rapport de grossesse / de naissance<br>
+	 * IT: Code per Referto della gravidanza / del parto<br>
 	 */
 	public static final String OBSTETRICAL_RECORD_CODE = "2171000195109";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Order</div>
-	 * <div class="de">Code für Untersuchungsauftrag</div>
-	 * <div class="fr">Code de Mandat d’analyse</div>
-	 * <div class="it">Code per Prescrizione di analisi</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Order<br>
+	 * DE: Code für Untersuchungsauftrag<br>
+	 * FR: Code de Mandat d’analyse<br>
+	 * IT: Code per Prescrizione di analisi<br>
 	 */
 	public static final String ORDER_CODE = "721963009";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Organ donor card</div>
-	 * <div class="de">Code für Organspendeausweis</div>
-	 * <div class="fr">Code de Carte de donneur d’organes</div>
-	 * <div class="it">Code per Tessera di donatore di organi</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Organ donor card<br>
+	 * DE: Code für Organspendeausweis<br>
+	 * FR: Code de Carte de donneur d’organes<br>
+	 * IT: Code per Tessera di donatore di organi<br>
 	 */
 	public static final String ORGAN_DONOR_CARD_CODE = "772790007";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Patient record type</div>
-	 * <div class="de">Code für Langzeitdokumentation</div>
-	 * <div class="fr">Code de Documentation à long terme</div>
-	 * <div class="it">Code per Documentazione a lungo termine</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Patient record type<br>
+	 * DE: Code für Langzeitdokumentation<br>
+	 * FR: Code de Documentation à long terme<br>
+	 * IT: Code per Documentazione a lungo termine<br>
 	 */
 	public static final String PATIENT_RECORD_TYPE_CODE = "184216000";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Prescription record</div>
-	 * <div class="de">Code für Verschreibung / Rezept</div>
-	 * <div class="fr">Code de Prescription / ordonnance</div>
-	 * <div class="it">Code per Prescrizione medica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Prescription record<br>
+	 * DE: Code für Verschreibung / Rezept<br>
+	 * FR: Code de Prescription / ordonnance<br>
+	 * IT: Code per Prescrizione medica<br>
 	 */
 	public static final String PRESCRIPTION_RECORD_CODE = "440545006";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Record artifact</div>
-	 * <div class="de">Code für Nicht näher bezeichnetes Dokument</div>
-	 * <div class="fr">Code de Document non précisé</div>
-	 * <div class="it">Code per Documento non meglio specificato</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Record artifact<br>
+	 * DE: Code für Nicht näher bezeichnetes Dokument<br>
+	 * FR: Code de Document non précisé<br>
+	 * IT: Code per Documento non meglio specificato<br>
 	 */
 	public static final String RECORD_ARTIFACT_CODE = "419891008";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Record of health event</div>
-	 * <div class="de">Code für Dokument zu gesundheitsrelevantem Ereignis</div>
-	 * <div class="fr">Code de Document sur l’événement sanitaire</div>
-	 * <div class="it">Code per Documento concernente un evento rilevante per la salute</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Record of health event<br>
+	 * DE: Code für Dokument zu gesundheitsrelevantem Ereignis<br>
+	 * FR: Code de Document sur l’événement sanitaire<br>
+	 * IT: Code per Documento concernente un evento rilevante per la salute<br>
 	 */
 	public static final String RECORD_OF_HEALTH_EVENT_CODE = "417319006";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Referral note</div>
-	 * <div class="de">Code für Zuweisungsschreiben</div>
-	 * <div class="fr">Code de Lettre de référence</div>
-	 * <div class="it">Code per Lettera d'invio</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Referral note<br>
+	 * DE: Code für Zuweisungsschreiben<br>
+	 * FR: Code de Lettre de référence<br>
+	 * IT: Code per Lettera d'invio<br>
 	 */
 	public static final String REFERRAL_NOTE_CODE = "721927009";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Report of clinical encounter</div>
-	 * <div class="de">Code für Bericht aufgrund einer Konsultation</div>
-	 * <div class="fr">Code de Rapport suite à une consultation</div>
-	 * <div class="it">Code per Rapporto di visita medica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Report of clinical encounter<br>
+	 * DE: Code für Bericht aufgrund einer Konsultation<br>
+	 * FR: Code de Rapport suite à une consultation<br>
+	 * IT: Code per Rapporto di visita medica<br>
 	 */
 	public static final String REPORT_OF_CLINICAL_ENCOUNTER_CODE = "371531000";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Summary clinical document</div>
-	 * <div class="de">Code für Zusammenfassender Bericht</div>
-	 * <div class="fr">Code de Rapport de synthèse</div>
-	 * <div class="it">Code per Rapporto riassuntivo</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Summary clinical document<br>
+	 * DE: Code für Zusammenfassender Bericht<br>
+	 * FR: Code de Rapport de synthèse<br>
+	 * IT: Code per Rapporto riassuntivo<br>
 	 */
 	public static final String SUMMARY_CLINICAL_DOCUMENT_CODE = "422735006";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
-	 * <!-- @formatter:on -->
+	 * Identifier of the value set.
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.3";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Name of the value set</div>
-	 * <div class="de">Name des Value Sets</div>
-	 * <!-- @formatter:on -->
+	 * Name of the value set.
 	 */
 	public static final String VALUE_SET_NAME = "DocumentEntry.classCode";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
-	 * <!-- @formatter:on -->
+	 * Gets the Enum with a given code.
 	 *
-	 * @param code
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
+	 * @param code The code value.
+	 * @return the enum value found or {@code null}.
 	 */
 	public static ClassCode getEnum(final String code) {
 		for (final ClassCode x : values()) {
@@ -442,14 +323,10 @@ public enum ClassCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
-	 * <!-- @formatter:on -->
+	 * Checks if a given enum is part of this value set.
 	 *
-	 * @param enumName
-	 *            <div class="de"> enumName</div>
-	 * @return true, if enum is in this value set
+	 * @param enumName The name of the enum.
+	 * @return {@code true} if the name is found in this value set, {@code false} otherwise.
 	 */
 	public static boolean isEnumOfValueSet(final String enumName) {
 		if (enumName == null) {
@@ -464,14 +341,10 @@ public enum ClassCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
-	 * <!-- @formatter:on -->
+	 * Checks if a given code value is in this value set.
 	 *
-	 * @param codeValue
-	 *            <div class="de"> code</div>
-	 * @return true, if is in value set
+	 * @param codeValue The code value.
+	 * @return {@code true} if the value is found in this value set, {@code false} otherwise.
 	 */
 	public static boolean isInValueSet(final String codeValue) {
 		for (final ClassCode x : values()) {
@@ -483,50 +356,32 @@ public enum ClassCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Machine interpretable and (inside this class) unique code</div>
-	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse) eindeutiger Code</div>
-	 * <!-- @formatter:on -->
+	 * Machine interpretable and (inside this class) unique code.
 	 */
 	private String code;
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Identifier of the referencing code system.</div>
-	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
-	 * <!-- @formatter:on -->
+	 * Identifier of the referencing code system.
 	 */
 	private String codeSystem;
 
 	/**
-	 * The display names per language
+	 * The display names per language.
 	 */
 	private Map<LanguageCode, String> displayNames;
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display Name</div>
-	 * <div class="de">Instanziiert dieses Enum Object mittels eines Codes und einem Display Name</div>.
-	 * <!-- @formatter:on -->
+	 * Instantiates this enum with a given code and display names.
 	 *
-	 * @param code
-	 *            code
-	 * @param codeSystem
-	 *            codeSystem
-	 * @param displayName
-	 *            the default display name
-	 * @param displayNameEn
-	 *            the display name en
-	 * @param displayNameDe
-	 *            the display name de
-	 * @param displayNameFr
-	 *            the display name fr
-	 * @param displayNameIt
-	 *            the display name it
+	 * @param code          The code value.
+	 * @param codeSystem    The code system (OID).
+	 * @param displayName   The default display name.
+	 * @param displayNameEn The display name in English.
+	 * @param displayNameDe The display name in German.
+	 * @param displayNameFr The display name in French.
+	 * @param displayNameIt The display name in Italian.
 	 */
-	ClassCode(final String code, final String codeSystem, final String displayName,
-			final String displayNameEn, final String displayNameDe, final String displayNameFr,
-			final String displayNameIt) {
+	ClassCode(final String code, final String codeSystem, final String displayName, final String displayNameEn, final String displayNameDe, final String displayNameFr, final String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		this.displayNames = new HashMap<>();
@@ -538,12 +393,9 @@ public enum ClassCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the code system identifier.</div>
-	 * <div class="de">Liefert den Code System Identifikator.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the code system identifier.
 	 *
-	 * @return <div class="en">the code system identifier</div>
+	 * @return the code system identifier.
 	 */
 	@Override
 	public String getCodeSystemId() {
@@ -551,29 +403,23 @@ public enum ClassCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the code system name.</div>
-	 * <div class="de">Liefert den Code System Namen.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the code system name.
 	 *
-	 * @return <div class="en">the code system identifier</div>
+	 * @return the code system identifier.
 	 */
 	@Override
 	public String getCodeSystemName() {
-		String retVal = "";
-		CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
-		if (cs != null)
-			retVal = cs.getCodeSystemName();
-		return retVal;
+		final CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
+		if (cs != null) {
+			return cs.getCodeSystemName();
+		}
+		return "";
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>
-	 * <!-- @formatter:on -->
+	 * Gets the code value as a string.
 	 *
-	 * @return <div class="en">the code</div>
+	 * @return the code value.
 	 */
 	@Override
 	public String getCodeValue() {
@@ -581,21 +427,15 @@ public enum ClassCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the display name defined by the language param. If
-	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
-	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the display name defined by the language param. If there is no english translation, the default display name
+	 *      is returned.
 	 *
-	 * @param languageCode
-	 *            the language code to get the display name for
-	 * @return returns the display name in the desired language. if language not
-	 *         found, display name in german will returned
+	 * @param languageCode The language code to get the display name for.
+	 * @return the display name in the desired language. if language not found, display name in german will be returned.
 	 */
 	@Override
-	public String getDisplayName(LanguageCode languageCode) {
-		String displayName = this.displayNames.get(languageCode);
+	public String getDisplayName(final LanguageCode languageCode) {
+		final String displayName = this.displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
 			return this.displayNames.get(null);
 		}
@@ -603,12 +443,9 @@ public enum ClassCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the value set identifier.</div>
-	 * <div class="de">Liefert den Value Set Identifikator.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the value set identifier.
 	 *
-	 * @return <div class="en">the value set identifier</div>
+	 * @return the value set identifier.
 	 */
 	@Override
 	public String getValueSetId() {
@@ -616,12 +453,9 @@ public enum ClassCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the value set name.</div>
-	 * <div class="de">Liefert den Value Set Namen.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the value set name.
 	 *
-	 * @return <div class="en">the value set name</div>
+	 * @return the value set name.
 	 */
 	@Override
 	public String getValueSetName() {

@@ -26,367 +26,262 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
- * <!-- @formatter:off -->
  * Enumeration of DocumentEntry.healthcareFacilityTypeCode values
- *
- * <div class="en">Type of healthcare facility as per Annex 3; EPRO-FDHA. This code describes the type of healthcare facility in which the document was compiled during the treatment process. In conjunction with the authorisation control, the patient can use this information to assign all documents from a specific type of healthcare facility to a specific confidentiality level in their rights and attributes, for example.</div>
- * <div class="de">Typ der Gesundheitseinrichtung gemäss Anhang 3 EPDV-EDI. Dieser Code beschreibt den Typ der Gesundheitseinrichtung, in der das Dokument während des Behandlungsprozesses erstellt wurde. Der Patient kann im Zusammenhang mit der Berechtigungsteuerung diese Information nutzen, um beispielsweise in seinen Rechteattributen allen Dokumenten aus einem bestimmten Gesundheitseinrichtungstyp eine bestimmte Vertraulichkeitsstufe zuzuordnen.</div>
- * <div class="fr">Type de l'institution de santé selon l'annexe 3 ODEP-DFI. Ce code décrit le type de l'institution de santé qui a élaboré le document pendant le processus thérapeutique. Le patient peut utiliser cette information pour gérer les droits d'accès et définir, dans les règles d'accès, un même niveau de confidentialité pour tous les documents émanant d'un type d'institution donné.</div>
- * <div class="it">Tipo di istituzione sanitaria secondo l'allegato 3 OCIP-DFI. Questo codice descrive il tipo di istituzione sanitaria nella quale è stato creato il documento durante il processo terapeutico. Il paziente può utilizzare questa informazione in relazione al controllo delle autorizzazioni, ad esempio per attribuire un determinato grado di riservatezza a tutti i documenti provenienti da un determinato tipo di istituzione sanitaria.</div>
- *
- * Identifier: 2.16.756.5.30.1.127.3.10.1.11
- * Effective date: 2021-04-01 16:16
- * Version: 202104.0-stable
+ * <p>
+ * EN: Type of healthcare facility as per Annex 3; EPRO-FDHA. This code describes the type of healthcare facility in which the document was compiled during the treatment process. In conjunction with the authorisation control, the patient can use this information to assign all documents from a specific type of healthcare facility to a specific confidentiality level in their rights and attributes, for example.<br>
+ * DE: Typ der Gesundheitseinrichtung gemäss Anhang 3 EPDV-EDI. Dieser Code beschreibt den Typ der Gesundheitseinrichtung, in der das Dokument während des Behandlungsprozesses erstellt wurde. Der Patient kann im Zusammenhang mit der Berechtigungsteuerung diese Information nutzen, um beispielsweise in seinen Rechteattributen allen Dokumenten aus einem bestimmten Gesundheitseinrichtungstyp eine bestimmte Vertraulichkeitsstufe zuzuordnen.<br>
+ * FR: Type de l'institution de santé selon l'annexe 3 ODEP-DFI. Ce code décrit le type de l'institution de santé qui a élaboré le document pendant le processus thérapeutique. Le patient peut utiliser cette information pour gérer les droits d'accès et définir, dans les règles d'accès, un même niveau de confidentialité pour tous les documents émanant d'un type d'institution donné.<br>
+ * IT: Tipo di istituzione sanitaria secondo l'allegato 3 OCIP-DFI. Questo codice descrive il tipo di istituzione sanitaria nella quale è stato creato il documento durante il processo terapeutico. Il paziente può utilizzare questa informazione in relazione al controllo delle autorizzazioni, ad esempio per attribuire un determinato grado di riservatezza a tutti i documenti provenienti da un determinato tipo di istituzione sanitaria.<br>
+ * <p>
+ * Identifier: 2.16.756.5.30.1.127.3.10.1.11<br>
+ * Effective date: 2021-04-01 16:16<br>
+ * Version: 202104.0-stable<br>
  * Status: FINAL
- * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-04-22")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-08-26")
 public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Accident and Emergency department</div>
-	 * <div class="de">Notfall-/Rettungsdienste</div>
-	 * <div class="fr">Service d'urgence et de sauvetage</div>
-	 * <div class="it">Servizio di pronto soccorso e di salvataggio</div>
-	 * <!-- @formatter:on -->
+	 * EN: Accident and Emergency department<br>
+	 * DE: Notfall-/Rettungsdienste<br>
+	 * FR: Service d'urgence et de sauvetage<br>
+	 * IT: Servizio di pronto soccorso e di salvataggio<br>
 	 */
-	ACCIDENT_AND_EMERGENCY_DEPARTMENT("225728007", "2.16.840.1.113883.6.96",
-			"Accident and Emergency department (environment)", "Accident and Emergency department",
-			"Notfall-/Rettungsdienste", "Service d'urgence et de sauvetage",
-			"Servizio di pronto soccorso e di salvataggio"),
+	ACCIDENT_AND_EMERGENCY_DEPARTMENT("225728007", "2.16.840.1.113883.6.96", "Accident and Emergency department (environment)", "Accident and Emergency department", "Notfall-/Rettungsdienste", "Service d'urgence et de sauvetage", "Servizio di pronto soccorso e di salvataggio"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Ambulatory care site</div>
-	 * <div class="de">Ambulante Einrichtung/Ambulatorium</div>
-	 * <div class="fr">Etablissement ambulatoire</div>
-	 * <div class="it">Struttura ambulatoriale, incl. gli studi medici</div>
-	 * <!-- @formatter:on -->
+	 * EN: Ambulatory care site<br>
+	 * DE: Ambulante Einrichtung/Ambulatorium<br>
+	 * FR: Etablissement ambulatoire<br>
+	 * IT: Struttura ambulatoriale, incl. gli studi medici<br>
 	 */
-	AMBULATORY_CARE_SITE("35971002", "2.16.840.1.113883.6.96", "Ambulatory care site (environment)",
-			"Ambulatory care site", "Ambulante Einrichtung/Ambulatorium",
-			"Etablissement ambulatoire", "Struttura ambulatoriale, incl. gli studi medici"),
+	AMBULATORY_CARE_SITE("35971002", "2.16.840.1.113883.6.96", "Ambulatory care site (environment)", "Ambulatory care site", "Ambulante Einrichtung/Ambulatorium", "Etablissement ambulatoire", "Struttura ambulatoriale, incl. gli studi medici"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Client's or patient's home</div>
-	 * <div class="de">Domizil des Patienten</div>
-	 * <div class="fr">Domicile du patient</div>
-	 * <div class="it">Domicilio del paziente</div>
-	 * <!-- @formatter:on -->
+	 * EN: Client's or patient's home<br>
+	 * DE: Domizil des Patienten<br>
+	 * FR: Domicile du patient<br>
+	 * IT: Domicilio del paziente<br>
 	 */
-	CLIENT_OR_PATIENT_HOME("394778007", "2.16.840.1.113883.6.96",
-			"Client's or patient's home (environment)", "Client's or patient's home",
-			"Domizil des Patienten", "Domicile du patient", "Domicilio del paziente"),
+	CLIENT_OR_PATIENT_HOME("394778007", "2.16.840.1.113883.6.96", "Client's or patient's home (environment)", "Client's or patient's home", "Domizil des Patienten", "Domicile du patient", "Domicilio del paziente"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Diagnostic institution</div>
-	 * <div class="de">Institution für medizinische Diagnostik</div>
-	 * <div class="fr">Institut d’aide au diagnostic</div>
-	 * <div class="it">Istituto di diagnostica medica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Diagnostic institution<br>
+	 * DE: Institution für medizinische Diagnostik<br>
+	 * FR: Institut d’aide au diagnostic<br>
+	 * IT: Istituto di diagnostica medica<br>
 	 */
-	DIAGNOSTIC_INSTITUTION("722171005", "2.16.840.1.113883.6.96",
-			"Diagnostic institution (environment)", "Diagnostic institution",
-			"Institution für medizinische Diagnostik", "Institut d’aide au diagnostic",
-			"Istituto di diagnostica medica"),
+	DIAGNOSTIC_INSTITUTION("722171005", "2.16.840.1.113883.6.96", "Diagnostic institution (environment)", "Diagnostic institution", "Institution für medizinische Diagnostik", "Institut d’aide au diagnostic", "Istituto di diagnostica medica"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">General practice premises</div>
-	 * <div class="de">Arztpraxis</div>
-	 * <div class="fr">Cabinet médical</div>
-	 * <div class="it">Studio medico</div>
-	 * <!-- @formatter:on -->
+	 * EN: General practice premises<br>
+	 * DE: Arztpraxis<br>
+	 * FR: Cabinet médical<br>
+	 * IT: Studio medico<br>
 	 */
-	GENERAL_PRACTICE_PREMISES("264358009", "2.16.840.1.113883.6.96",
-			"General practice premises (environment)", "General practice premises", "Arztpraxis",
-			"Cabinet médical", "Studio medico"),
+	GENERAL_PRACTICE_PREMISES("264358009", "2.16.840.1.113883.6.96", "General practice premises (environment)", "General practice premises", "Arztpraxis", "Cabinet médical", "Studio medico"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Health Authority</div>
-	 * <div class="de">Gesundheitsbehörde</div>
-	 * <div class="fr">Autorité sanitaire</div>
-	 * <div class="it">Autorità sanitaria</div>
-	 * <!-- @formatter:on -->
+	 * EN: Health Authority<br>
+	 * DE: Gesundheitsbehörde<br>
+	 * FR: Autorité sanitaire<br>
+	 * IT: Autorità sanitaria<br>
 	 */
-	HEALTH_AUTHORITY("394747008", "2.16.840.1.113883.6.96", "Health Authority (qualifier value)",
-			"Health Authority", "Gesundheitsbehörde", "Autorité sanitaire",
-			"Autorità sanitaria"),
+	HEALTH_AUTHORITY("394747008", "2.16.840.1.113883.6.96", "Health Authority (qualifier value)", "Health Authority", "Gesundheitsbehörde", "Autorité sanitaire", "Autorità sanitaria"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Hospital</div>
-	 * <div class="de">Stationäre Einrichtung/Spital</div>
-	 * <div class="fr">Hôpital</div>
-	 * <div class="it">Ospedale</div>
-	 * <!-- @formatter:on -->
+	 * EN: Hospital<br>
+	 * DE: Stationäre Einrichtung/Spital<br>
+	 * FR: Hôpital<br>
+	 * IT: Ospedale<br>
 	 */
-	HOSPITAL("22232009", "2.16.840.1.113883.6.96", "Hospital (environment)", "Hospital",
-			"Stationäre Einrichtung/Spital", "Hôpital", "Ospedale"),
+	HOSPITAL("22232009", "2.16.840.1.113883.6.96", "Hospital (environment)", "Hospital", "Stationäre Einrichtung/Spital", "Hôpital", "Ospedale"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Military health institution</div>
-	 * <div class="de">Armeeärztliche Dienste</div>
-	 * <div class="fr">Service sanitaire de l'armée</div>
-	 * <div class="it">Servizio di medicina militare</div>
-	 * <!-- @formatter:on -->
+	 * EN: Military health institution<br>
+	 * DE: Armeeärztliche Dienste<br>
+	 * FR: Service sanitaire de l'armée<br>
+	 * IT: Servizio di medicina militare<br>
 	 */
-	MILITARY_HEALTH_INSTITUTION("722172003", "2.16.840.1.113883.6.96",
-			"Military health institution (environment)", "Military health institution",
-			"Armeeärztliche Dienste", "Service sanitaire de l'armée",
-			"Servizio di medicina militare"),
+	MILITARY_HEALTH_INSTITUTION("722172003", "2.16.840.1.113883.6.96", "Military health institution (environment)", "Military health institution", "Armeeärztliche Dienste", "Service sanitaire de l'armée", "Servizio di medicina militare"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Nursing home</div>
-	 * <div class="de">Pflegeheim</div>
-	 * <div class="fr">Etablissement médico-social</div>
-	 * <div class="it">Casa di cura</div>
-	 * <!-- @formatter:on -->
+	 * EN: Nursing home<br>
+	 * DE: Pflegeheim<br>
+	 * FR: Etablissement médico-social<br>
+	 * IT: Casa di cura<br>
 	 */
-	NURSING_HOME("42665001", "2.16.840.1.113883.6.96", "Nursing home (environment)", "Nursing home",
-			"Pflegeheim", "Etablissement médico-social", "Casa di cura"),
+	NURSING_HOME("42665001", "2.16.840.1.113883.6.96", "Nursing home (environment)", "Nursing home", "Pflegeheim", "Etablissement médico-social", "Casa di cura"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Other Site of Care</div>
-	 * <div class="de">Andere Gesundheitsorganisation</div>
-	 * <div class="fr">Autres prestataires de soins</div>
-	 * <div class="it">Altre organizzazioni sanitarie</div>
-	 * <!-- @formatter:on -->
+	 * EN: Other Site of Care<br>
+	 * DE: Andere Gesundheitsorganisation<br>
+	 * FR: Autres prestataires de soins<br>
+	 * IT: Altre organizzazioni sanitarie<br>
 	 */
-	OTHER_SITE_OF_CARE("43741000", "2.16.840.1.113883.6.96", "Site of care (environment)",
-			"Other Site of Care", "Andere Gesundheitsorganisation", "Autres prestataires de soins",
-			"Altre organizzazioni sanitarie"),
+	OTHER_SITE_OF_CARE("43741000", "2.16.840.1.113883.6.96", "Site of care (environment)", "Other Site of Care", "Andere Gesundheitsorganisation", "Autres prestataires de soins", "Altre organizzazioni sanitarie"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Pharmacy</div>
-	 * <div class="de">Apotheke</div>
-	 * <div class="fr">Pharmacie</div>
-	 * <div class="it">Farmacia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Pharmacy<br>
+	 * DE: Apotheke<br>
+	 * FR: Pharmacie<br>
+	 * IT: Farmacia<br>
 	 */
-	PHARMACY("264372000", "2.16.840.1.113883.6.96", "Pharmacy (environment)", "Pharmacy",
-			"Apotheke", "Pharmacie", "Farmacia"),
+	PHARMACY("264372000", "2.16.840.1.113883.6.96", "Pharmacy (environment)", "Pharmacy", "Apotheke", "Pharmacie", "Farmacia"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Prison based care site</div>
-	 * <div class="de">Gesundheitseinrichtung in der Haftanstalt</div>
-	 * <div class="fr">Service de santé en milieu carcéral</div>
-	 * <div class="it">Struttura sanitaria in uno stabilimento carcerario</div>
-	 * <!-- @formatter:on -->
+	 * EN: Prison based care site<br>
+	 * DE: Gesundheitseinrichtung in der Haftanstalt<br>
+	 * FR: Service de santé en milieu carcéral<br>
+	 * IT: Struttura sanitaria in uno stabilimento carcerario<br>
 	 */
-	PRISON_BASED_CARE_SITE("722173008", "2.16.840.1.113883.6.96",
-			"Prison based care site (environment)", "Prison based care site",
-			"Gesundheitseinrichtung in der Haftanstalt", "Service de santé en milieu carcéral",
-			"Struttura sanitaria in uno stabilimento carcerario"),
+	PRISON_BASED_CARE_SITE("722173008", "2.16.840.1.113883.6.96", "Prison based care site (environment)", "Prison based care site", "Gesundheitseinrichtung in der Haftanstalt", "Service de santé en milieu carcéral", "Struttura sanitaria in uno stabilimento carcerario"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Private home-based care</div>
-	 * <div class="de">Organisation für Pflege zu Hause</div>
-	 * <div class="fr">Soins à domicile</div>
-	 * <div class="it">Servizio di assistenza e cura a domicilio</div>
-	 * <!-- @formatter:on -->
+	 * EN: Private home-based care<br>
+	 * DE: Organisation für Pflege zu Hause<br>
+	 * FR: Soins à domicile<br>
+	 * IT: Servizio di assistenza e cura a domicilio<br>
 	 */
-	PRIVATE_HOME_BASED_CARE("66280005", "2.16.840.1.113883.6.96",
-			"Private home-based care (environment)", "Private home-based care",
-			"Organisation für Pflege zu Hause", "Soins à domicile",
-			"Servizio di assistenza e cura a domicilio"),
+	PRIVATE_HOME_BASED_CARE("66280005", "2.16.840.1.113883.6.96", "Private home-based care (environment)", "Private home-based care", "Organisation für Pflege zu Hause", "Soins à domicile", "Servizio di assistenza e cura a domicilio"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Rehabilitation hospital</div>
-	 * <div class="de">Organisation für stationäre Rehabilitation</div>
-	 * <div class="fr">Réadaptation stationnaire</div>
-	 * <div class="it">Istituto di riabilitazione stazionaria</div>
-	 * <!-- @formatter:on -->
+	 * EN: Rehabilitation hospital<br>
+	 * DE: Organisation für stationäre Rehabilitation<br>
+	 * FR: Réadaptation stationnaire<br>
+	 * IT: Istituto di riabilitazione stazionaria<br>
 	 */
-	REHABILITATION_HOSPITAL("80522000", "2.16.840.1.113883.6.96",
-			"Rehabilitation hospital (environment)", "Rehabilitation hospital",
-			"Organisation für stationäre Rehabilitation", "Réadaptation stationnaire",
-			"Istituto di riabilitazione stazionaria"),
+	REHABILITATION_HOSPITAL("80522000", "2.16.840.1.113883.6.96", "Rehabilitation hospital (environment)", "Rehabilitation hospital", "Organisation für stationäre Rehabilitation", "Réadaptation stationnaire", "Istituto di riabilitazione stazionaria"),
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Telemedicine institution</div>
-	 * <div class="de">Telemedizinische Einrichtung</div>
-	 * <div class="fr">Institut de télémédecine</div>
-	 * <div class="it">Centro di telemedicina</div>
-	 * <!-- @formatter:on -->
+	 * EN: Telemedicine institution<br>
+	 * DE: Telemedizinische Einrichtung<br>
+	 * FR: Institut de télémédecine<br>
+	 * IT: Centro di telemedicina<br>
 	 */
-	TELEMEDICINE_INSTITUTION("288565001", "2.16.840.1.113883.6.96", "Medical center (environment)",
-			"Telemedicine institution", "Telemedizinische Einrichtung",
-			"Institut de télémédecine", "Centro di telemedicina");
+	TELEMEDICINE_INSTITUTION("288565001", "2.16.840.1.113883.6.96", "Medical center (environment)", "Telemedicine institution", "Telemedizinische Einrichtung", "Institut de télémédecine", "Centro di telemedicina");
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Accident and Emergency department</div>
-	 * <div class="de">Code für Notfall-/Rettungsdienste</div>
-	 * <div class="fr">Code de Service d'urgence et de sauvetage</div>
-	 * <div class="it">Code per Servizio di pronto soccorso e di salvataggio</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Accident and Emergency department<br>
+	 * DE: Code für Notfall-/Rettungsdienste<br>
+	 * FR: Code de Service d'urgence et de sauvetage<br>
+	 * IT: Code per Servizio di pronto soccorso e di salvataggio<br>
 	 */
 	public static final String ACCIDENT_AND_EMERGENCY_DEPARTMENT_CODE = "225728007";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Ambulatory care site</div>
-	 * <div class="de">Code für Ambulante Einrichtung/Ambulatorium</div>
-	 * <div class="fr">Code de Etablissement ambulatoire</div>
-	 * <div class="it">Code per Struttura ambulatoriale, incl. gli studi medici</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Ambulatory care site<br>
+	 * DE: Code für Ambulante Einrichtung/Ambulatorium<br>
+	 * FR: Code de Etablissement ambulatoire<br>
+	 * IT: Code per Struttura ambulatoriale, incl. gli studi medici<br>
 	 */
 	public static final String AMBULATORY_CARE_SITE_CODE = "35971002";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Client's or patient's home</div>
-	 * <div class="de">Code für Domizil des Patienten</div>
-	 * <div class="fr">Code de Domicile du patient</div>
-	 * <div class="it">Code per Domicilio del paziente</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Client's or patient's home<br>
+	 * DE: Code für Domizil des Patienten<br>
+	 * FR: Code de Domicile du patient<br>
+	 * IT: Code per Domicilio del paziente<br>
 	 */
 	public static final String CLIENT_OR_PATIENT_HOME_CODE = "394778007";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Diagnostic institution</div>
-	 * <div class="de">Code für Institution für medizinische Diagnostik</div>
-	 * <div class="fr">Code de Institut d’aide au diagnostic</div>
-	 * <div class="it">Code per Istituto di diagnostica medica</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Diagnostic institution<br>
+	 * DE: Code für Institution für medizinische Diagnostik<br>
+	 * FR: Code de Institut d’aide au diagnostic<br>
+	 * IT: Code per Istituto di diagnostica medica<br>
 	 */
 	public static final String DIAGNOSTIC_INSTITUTION_CODE = "722171005";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for General practice premises</div>
-	 * <div class="de">Code für Arztpraxis</div>
-	 * <div class="fr">Code de Cabinet médical</div>
-	 * <div class="it">Code per Studio medico</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for General practice premises<br>
+	 * DE: Code für Arztpraxis<br>
+	 * FR: Code de Cabinet médical<br>
+	 * IT: Code per Studio medico<br>
 	 */
 	public static final String GENERAL_PRACTICE_PREMISES_CODE = "264358009";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Health Authority</div>
-	 * <div class="de">Code für Gesundheitsbehörde</div>
-	 * <div class="fr">Code de Autorité sanitaire</div>
-	 * <div class="it">Code per Autorità sanitaria</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Health Authority<br>
+	 * DE: Code für Gesundheitsbehörde<br>
+	 * FR: Code de Autorité sanitaire<br>
+	 * IT: Code per Autorità sanitaria<br>
 	 */
 	public static final String HEALTH_AUTHORITY_CODE = "394747008";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Hospital</div>
-	 * <div class="de">Code für Stationäre Einrichtung/Spital</div>
-	 * <div class="fr">Code de Hôpital</div>
-	 * <div class="it">Code per Ospedale</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Hospital<br>
+	 * DE: Code für Stationäre Einrichtung/Spital<br>
+	 * FR: Code de Hôpital<br>
+	 * IT: Code per Ospedale<br>
 	 */
 	public static final String HOSPITAL_CODE = "22232009";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Military health institution</div>
-	 * <div class="de">Code für Armeeärztliche Dienste</div>
-	 * <div class="fr">Code de Service sanitaire de l'armée</div>
-	 * <div class="it">Code per Servizio di medicina militare</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Military health institution<br>
+	 * DE: Code für Armeeärztliche Dienste<br>
+	 * FR: Code de Service sanitaire de l'armée<br>
+	 * IT: Code per Servizio di medicina militare<br>
 	 */
 	public static final String MILITARY_HEALTH_INSTITUTION_CODE = "722172003";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Nursing home</div>
-	 * <div class="de">Code für Pflegeheim</div>
-	 * <div class="fr">Code de Etablissement médico-social</div>
-	 * <div class="it">Code per Casa di cura</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Nursing home<br>
+	 * DE: Code für Pflegeheim<br>
+	 * FR: Code de Etablissement médico-social<br>
+	 * IT: Code per Casa di cura<br>
 	 */
 	public static final String NURSING_HOME_CODE = "42665001";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Other Site of Care</div>
-	 * <div class="de">Code für Andere Gesundheitsorganisation</div>
-	 * <div class="fr">Code de Autres prestataires de soins</div>
-	 * <div class="it">Code per Altre organizzazioni sanitarie</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Other Site of Care<br>
+	 * DE: Code für Andere Gesundheitsorganisation<br>
+	 * FR: Code de Autres prestataires de soins<br>
+	 * IT: Code per Altre organizzazioni sanitarie<br>
 	 */
 	public static final String OTHER_SITE_OF_CARE_CODE = "43741000";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Pharmacy</div>
-	 * <div class="de">Code für Apotheke</div>
-	 * <div class="fr">Code de Pharmacie</div>
-	 * <div class="it">Code per Farmacia</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Pharmacy<br>
+	 * DE: Code für Apotheke<br>
+	 * FR: Code de Pharmacie<br>
+	 * IT: Code per Farmacia<br>
 	 */
 	public static final String PHARMACY_CODE = "264372000";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Prison based care site</div>
-	 * <div class="de">Code für Gesundheitseinrichtung in der Haftanstalt</div>
-	 * <div class="fr">Code de Service de santé en milieu carcéral</div>
-	 * <div class="it">Code per Struttura sanitaria in uno stabilimento carcerario</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Prison based care site<br>
+	 * DE: Code für Gesundheitseinrichtung in der Haftanstalt<br>
+	 * FR: Code de Service de santé en milieu carcéral<br>
+	 * IT: Code per Struttura sanitaria in uno stabilimento carcerario<br>
 	 */
 	public static final String PRISON_BASED_CARE_SITE_CODE = "722173008";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Private home-based care</div>
-	 * <div class="de">Code für Organisation für Pflege zu Hause</div>
-	 * <div class="fr">Code de Soins à domicile</div>
-	 * <div class="it">Code per Servizio di assistenza e cura a domicilio</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Private home-based care<br>
+	 * DE: Code für Organisation für Pflege zu Hause<br>
+	 * FR: Code de Soins à domicile<br>
+	 * IT: Code per Servizio di assistenza e cura a domicilio<br>
 	 */
 	public static final String PRIVATE_HOME_BASED_CARE_CODE = "66280005";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Rehabilitation hospital</div>
-	 * <div class="de">Code für Organisation für stationäre Rehabilitation</div>
-	 * <div class="fr">Code de Réadaptation stationnaire</div>
-	 * <div class="it">Code per Istituto di riabilitazione stazionaria</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Rehabilitation hospital<br>
+	 * DE: Code für Organisation für stationäre Rehabilitation<br>
+	 * FR: Code de Réadaptation stationnaire<br>
+	 * IT: Code per Istituto di riabilitazione stazionaria<br>
 	 */
 	public static final String REHABILITATION_HOSPITAL_CODE = "80522000";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Telemedicine institution</div>
-	 * <div class="de">Code für Telemedizinische Einrichtung</div>
-	 * <div class="fr">Code de Institut de télémédecine</div>
-	 * <div class="it">Code per Centro di telemedicina</div>
-	 * <!-- @formatter:on -->
+	 * EN: Code for Telemedicine institution<br>
+	 * DE: Code für Telemedizinische Einrichtung<br>
+	 * FR: Code de Institut de télémédecine<br>
+	 * IT: Code per Centro di telemedicina<br>
 	 */
 	public static final String TELEMEDICINE_INSTITUTION_CODE = "288565001";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
-	 * <!-- @formatter:on -->
+	 * Identifier of the value set.
 	 */
 	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.11";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Name of the value set</div>
-	 * <div class="de">Name des Value Sets</div>
-	 * <!-- @formatter:on -->
+	 * Name of the value set.
 	 */
 	public static final String VALUE_SET_NAME = "DocumentEntry.healthcareFacilityTypeCode";
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
-	 * <!-- @formatter:on -->
+	 * Gets the Enum with a given code.
 	 *
-	 * @param code
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
+	 * @param code The code value.
+	 * @return the enum value found or {@code null}.
 	 */
 	public static HealthcareFacilityTypeCode getEnum(final String code) {
 		for (final HealthcareFacilityTypeCode x : values()) {
@@ -398,14 +293,10 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
-	 * <!-- @formatter:on -->
+	 * Checks if a given enum is part of this value set.
 	 *
-	 * @param enumName
-	 *            <div class="de"> enumName</div>
-	 * @return true, if enum is in this value set
+	 * @param enumName The name of the enum.
+	 * @return {@code true} if the name is found in this value set, {@code false} otherwise.
 	 */
 	public static boolean isEnumOfValueSet(final String enumName) {
 		if (enumName == null) {
@@ -420,14 +311,10 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
-	 * <!-- @formatter:on -->
+	 * Checks if a given code value is in this value set.
 	 *
-	 * @param codeValue
-	 *            <div class="de"> code</div>
-	 * @return true, if is in value set
+	 * @param codeValue The code value.
+	 * @return {@code true} if the value is found in this value set, {@code false} otherwise.
 	 */
 	public static boolean isInValueSet(final String codeValue) {
 		for (final HealthcareFacilityTypeCode x : values()) {
@@ -439,50 +326,32 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Machine interpretable and (inside this class) unique code</div>
-	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse) eindeutiger Code</div>
-	 * <!-- @formatter:on -->
+	 * Machine interpretable and (inside this class) unique code.
 	 */
 	private String code;
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Identifier of the referencing code system.</div>
-	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
-	 * <!-- @formatter:on -->
+	 * Identifier of the referencing code system.
 	 */
 	private String codeSystem;
 
 	/**
-	 * The display names per language
+	 * The display names per language.
 	 */
 	private Map<LanguageCode, String> displayNames;
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display Name</div>
-	 * <div class="de">Instanziiert dieses Enum Object mittels eines Codes und einem Display Name</div>.
-	 * <!-- @formatter:on -->
+	 * Instantiates this enum with a given code and display names.
 	 *
-	 * @param code
-	 *            code
-	 * @param codeSystem
-	 *            codeSystem
-	 * @param displayName
-	 *            the default display name
-	 * @param displayNameEn
-	 *            the display name en
-	 * @param displayNameDe
-	 *            the display name de
-	 * @param displayNameFr
-	 *            the display name fr
-	 * @param displayNameIt
-	 *            the display name it
+	 * @param code          The code value.
+	 * @param codeSystem    The code system (OID).
+	 * @param displayName   The default display name.
+	 * @param displayNameEn The display name in English.
+	 * @param displayNameDe The display name in German.
+	 * @param displayNameFr The display name in French.
+	 * @param displayNameIt The display name in Italian.
 	 */
-	HealthcareFacilityTypeCode(final String code, final String codeSystem, final String displayName,
-			final String displayNameEn, final String displayNameDe, final String displayNameFr,
-			final String displayNameIt) {
+	HealthcareFacilityTypeCode(final String code, final String codeSystem, final String displayName, final String displayNameEn, final String displayNameDe, final String displayNameFr, final String displayNameIt) {
 		this.code = code;
 		this.codeSystem = codeSystem;
 		this.displayNames = new HashMap<>();
@@ -494,12 +363,9 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the code system identifier.</div>
-	 * <div class="de">Liefert den Code System Identifikator.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the code system identifier.
 	 *
-	 * @return <div class="en">the code system identifier</div>
+	 * @return the code system identifier.
 	 */
 	@Override
 	public String getCodeSystemId() {
@@ -507,29 +373,23 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the code system name.</div>
-	 * <div class="de">Liefert den Code System Namen.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the code system name.
 	 *
-	 * @return <div class="en">the code system identifier</div>
+	 * @return the code system identifier.
 	 */
 	@Override
 	public String getCodeSystemName() {
-		String retVal = "";
-		CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
-		if (cs != null)
-			retVal = cs.getCodeSystemName();
-		return retVal;
+		final CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
+		if (cs != null) {
+			return cs.getCodeSystemName();
+		}
+		return "";
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>
-	 * <!-- @formatter:on -->
+	 * Gets the code value as a string.
 	 *
-	 * @return <div class="en">the code</div>
+	 * @return the code value.
 	 */
 	@Override
 	public String getCodeValue() {
@@ -537,21 +397,15 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the display name defined by the language param. If
-	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
-	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the display name defined by the language param. If there is no english translation, the default display name
+	 *      is returned.
 	 *
-	 * @param languageCode
-	 *            the language code to get the display name for
-	 * @return returns the display name in the desired language. if language not
-	 *         found, display name in german will returned
+	 * @param languageCode The language code to get the display name for.
+	 * @return the display name in the desired language. if language not found, display name in german will be returned.
 	 */
 	@Override
-	public String getDisplayName(LanguageCode languageCode) {
-		String displayName = this.displayNames.get(languageCode);
+	public String getDisplayName(final LanguageCode languageCode) {
+		final String displayName = this.displayNames.get(languageCode);
 		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
 			return this.displayNames.get(null);
 		}
@@ -559,12 +413,9 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the value set identifier.</div>
-	 * <div class="de">Liefert den Value Set Identifikator.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the value set identifier.
 	 *
-	 * @return <div class="en">the value set identifier</div>
+	 * @return the value set identifier.
 	 */
 	@Override
 	public String getValueSetId() {
@@ -572,12 +423,9 @@ public enum HealthcareFacilityTypeCode implements ValueSetEnumInterface {
 	}
 
 	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the value set name.</div>
-	 * <div class="de">Liefert den Value Set Namen.</div>
-	 * <!-- @formatter:on -->
+	 * Gets the value set name.
 	 *
-	 * @return <div class="en">the value set name</div>
+	 * @return the value set name.
 	 */
 	@Override
 	public String getValueSetName() {
