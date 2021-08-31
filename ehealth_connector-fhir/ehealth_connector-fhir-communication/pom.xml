@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.ehealth_connector.fhir</groupId>
 		<artifactId>ehealth_connector-fhir</artifactId>
-		<version>1.9-SNAPSHOT</version>
+		<version>2.0-ALPHA</version>
 	</parent>
 	<artifactId>ehealth_connector-fhir-communication</artifactId>
 
@@ -13,7 +13,7 @@
 		<dependency>
 			<groupId>org.ehealth_connector.fhir.structures</groupId>
 			<artifactId>ehealth_connector-fhir-structures-gen</artifactId>
-			<version>1.9-SNAPSHOT</version>
+			<version>2.0-ALPHA</version>
 		</dependency>
 		
 		<!-- test stuff -->
