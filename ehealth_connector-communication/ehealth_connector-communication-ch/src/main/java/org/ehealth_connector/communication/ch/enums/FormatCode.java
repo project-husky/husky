@@ -26,566 +26,505 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
- * <!-- @formatter:off -->
  * Enumeration of DocumentEntry.formatCode values
- *
- * <div class="en">Document format as per Annex; EPRO-FDHA. This unambiguous code defines the format of the XDS document. Together with the mimetype, this should provide the potential consumer with sufficient information as to whether they are in a position to process the document.</div>
- * <div class="de">Format des Dokumentes gemäss Anhang 3 EPDV-EDI. Dieser eindeutige Code definiert das Format des XDS Dokumentes. Zusammen mit dem mimeType, sollte es dem potentiellen Konsumenten genügend Informationen liefern, ob er in der Lage ist, das Dokument zu verarbeiten.</div>
- * <div class="fr">Format du document selon l'annexe 3 ODEP-DFI. Ce code univoque définit le format du document XDS. Combiné au mimeType, il doit fournir à l'utilisateur suffisamment d'informations pour savoir s'il est en mesure de traiter le document.</div>
- * <div class="it">Formato del documento secondo l'allegato 3 OCIP-DFI. Questo codice univoco definisce il formato del documento XDS. Insieme al tipo MIME, intende fornire al potenziale consumatore sufficienti informazioni per capire se è in grado o meno di elaborare il documento.</div>
- *
- * Identifier: 2.16.756.5.30.1.127.3.10.1.9
- * Effective date: 2021-04-01 17:06
- * Version: 202104.0-stable
+ * <p>
+ * EN: Document format as per Annex; EPRO-FDHA. This unambiguous code defines the format of the XDS document. Together with the mimetype, this should provide the potential consumer with sufficient information as to whether they are in a position to process the document.<br>
+ * DE: Format des Dokumentes gemäss Anhang 3 EPDV-EDI. Dieser eindeutige Code definiert das Format des XDS Dokumentes. Zusammen mit dem mimeType, sollte es dem potentiellen Konsumenten genügend Informationen liefern, ob er in der Lage ist, das Dokument zu verarbeiten.<br>
+ * FR: Format du document selon l'annexe 3 ODEP-DFI. Ce code univoque définit le format du document XDS. Combiné au mimeType, il doit fournir à l'utilisateur suffisamment d'informations pour savoir s'il est en mesure de traiter le document.<br>
+ * IT: Formato del documento secondo l'allegato 3 OCIP-DFI. Questo codice univoco definisce il formato del documento XDS. Insieme al tipo MIME, intende fornire al potenziale consumatore sufficienti informazioni per capire se è in grado o meno di elaborare il documento.<br>
+ * <p>
+ * Identifier: 2.16.756.5.30.1.127.3.10.1.9<br>
+ * Effective date: 2021-04-01 17:06<br>
+ * Version: 202104.0-stable<br>
  * Status: FINAL
- * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-04-22")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-08-26")
 public enum FormatCode implements ValueSetEnumInterface {
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">CDA Imaging Report with Structured Headings</div>
-	 * <div class="de">CDA Imaging Report with Structured Headings</div>
-	 * <div class="fr">CDA Imaging Report with Structured Headings</div>
-	 * <div class="it">CDA Imaging Report with Structured Headings</div>
-	 * <!-- @formatter:on -->
-	 */
-	CDA_IMAGING_REPORT_WITH_STRUCTURED_HEADINGS(
-			"urn:ihe:rad:CDA:ImagingReportStructuredHeadings:2013", "1.3.6.1.4.1.19376.1.2.3",
-			"XDS-I Imaging Report with Structured Headings (XDS-I)",
-			"CDA Imaging Report with Structured Headings",
-			"CDA Imaging Report with Structured Headings",
-			"CDA Imaging Report with Structured Headings",
-			"CDA Imaging Report with Structured Headings"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">CDA Laboratory Report</div>
-	 * <div class="de">CDA Laboratory Report</div>
-	 * <div class="fr">CDA Laboratory Report</div>
-	 * <div class="it">CDA Laboratory Report</div>
-	 * <!-- @formatter:on -->
-	 */
-	CDA_LABORATORY_REPORT("urn:ihe:lab:xd-lab:2008", "1.3.6.1.4.1.19376.1.2.3",
-			"CDA Laboratory Report", "CDA Laboratory Report", "CDA Laboratory Report",
-			"CDA Laboratory Report", "CDA Laboratory Report"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">CDA Wrapped Text Report</div>
-	 * <div class="de">CDA Wrapped Text Report</div>
-	 * <div class="fr">CDA Wrapped Text Report</div>
-	 * <div class="it">CDA Wrapped Text Report</div>
-	 * <!-- @formatter:on -->
-	 */
-	CDA_WRAPPED_TEXT_REPORT("urn:ihe:rad:TEXT", "1.3.6.1.4.1.19376.1.2.3",
-			"XDS-I CDA Wrapped Text Report (XDS-I)", "CDA Wrapped Text Report",
-			"CDA Wrapped Text Report", "CDA Wrapped Text Report", "CDA Wrapped Text Report"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Community Dispense</div>
-	 * <div class="de">Community Dispense</div>
-	 * <div class="fr">Community Dispense</div>
-	 * <div class="it">Community Dispense</div>
-	 * <!-- @formatter:on -->
-	 */
-	COMMUNITY_DISPENSE("urn:ihe:pharm:dis:2010", "1.3.6.1.4.1.19376.1.2.3", "Community Dispense",
-			"Community Dispense", "Community Dispense", "Community Dispense", "Community Dispense"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Community Medication List</div>
-	 * <div class="de">Community Medication List</div>
-	 * <div class="fr">Community Medication List</div>
-	 * <div class="it">Community Medication List</div>
-	 * <!-- @formatter:on -->
-	 */
-	COMMUNITY_MEDICATION_LIST("urn:ihe:pharm:pml:2013", "1.3.6.1.4.1.19376.1.2.3",
-			"Community Medication List", "Community Medication List", "Community Medication List",
-			"Community Medication List", "Community Medication List"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Community Medication Treatment Plan</div>
-	 * <div class="de">Community Medication Treatment Plan</div>
-	 * <div class="fr">Community Medication Treatment Plan</div>
-	 * <div class="it">Community Medication Treatment Plan</div>
-	 * <!-- @formatter:on -->
-	 */
-	COMMUNITY_MEDICATION_TREATMENT_PLAN("urn:ihe:pharm:mtp:2015", "1.3.6.1.4.1.19376.1.2.3",
-			"Community Medication Treatment Plan", "Community Medication Treatment Plan",
-			"Community Medication Treatment Plan", "Community Medication Treatment Plan",
-			"Community Medication Treatment Plan"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Community Pharmaceutical Advice</div>
-	 * <div class="de">Community Pharmaceutical Advice</div>
-	 * <div class="fr">Community Pharmaceutical Advice</div>
-	 * <div class="it">Community Pharmaceutical Advice</div>
-	 * <!-- @formatter:on -->
-	 */
-	COMMUNITY_PHARMACEUTICAL_ADVICE("urn:ihe:pharm:padv:2010", "1.3.6.1.4.1.19376.1.2.3",
-			"Community Pharmaceutical Advice", "Community Pharmaceutical Advice",
-			"Community Pharmaceutical Advice", "Community Pharmaceutical Advice",
-			"Community Pharmaceutical Advice"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Community Prescription</div>
-	 * <div class="de">Community Prescription</div>
-	 * <div class="fr">Community Prescription</div>
-	 * <div class="it">Community Prescription</div>
-	 * <!-- @formatter:on -->
-	 */
-	COMMUNITY_PRESCRIPTION("urn:ihe:pharm:pre:2010", "1.3.6.1.4.1.19376.1.2.3",
-			"Community Prescription", "Community Prescription", "Community Prescription",
-			"Community Prescription", "Community Prescription"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">IHE KOS document</div>
-	 * <div class="de">KOS Dokument</div>
-	 * <div class="fr">Document KOS</div>
-	 * <div class="it">Documento KOS </div>
-	 * <!-- @formatter:on -->
-	 */
-	IHE_KOS_DOCUMENT("1.2.840.10008.5.1.4.1.1.88.59", "1.2.840.10008.2.6.1",
-			"DICOM Manifest (DICOM KOS SOP Class UID)", "IHE KOS document", "KOS Dokument",
-			"Document KOS", "Documento KOS "),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Immunization Content (IC)</div>
-	 * <div class="de">Immunization Content (IC)</div>
-	 * <div class="fr">Immunization Content (IC)</div>
-	 * <div class="it">Immunization Content (IC)</div>
-	 * <!-- @formatter:on -->
-	 */
-	IMMUNIZATION_CONTENT("urn:ihe:pcc:ic:2009", "1.3.6.1.4.1.19376.1.2.3",
-			"Immunization Content (IC)", "Immunization Content (IC)", "Immunization Content (IC)",
-			"Immunization Content (IC)", "Immunization Content (IC)"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">MimeType sufficient</div>
-	 * <div class="de">MimeType sufficient</div>
-	 * <div class="fr">MimeType sufficient</div>
-	 * <div class="it">MimeType sufficient</div>
-	 * <!-- @formatter:on -->
-	 */
-	MIMETYPE_SUFFICIENT("urn:ihe:iti:xds:2017:mimeTypeSufficient", "1.3.6.1.4.1.19376.1.2.3",
-			"MimeType sufficient", "MimeType sufficient", "MimeType sufficient",
-			"MimeType sufficient", "MimeType sufficient"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">PDF embedded in CDA per XDS-SD profile</div>
-	 * <div class="de">PDF embedded in CDA per XDS-SD profile</div>
-	 * <div class="fr">PDF embedded in CDA per XDS-SD profile</div>
-	 * <div class="it">PDF embedded in CDA per XDS-SD profile</div>
-	 * <!-- @formatter:on -->
-	 */
-	PDF_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE("urn:ihe:iti:xds-sd:pdf:2008", "1.3.6.1.4.1.19376.1.2.3",
-			"Scanned Documents (PDF)", "PDF embedded in CDA per XDS-SD profile",
-			"PDF embedded in CDA per XDS-SD profile", "PDF embedded in CDA per XDS-SD profile",
-			"PDF embedded in CDA per XDS-SD profile"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">PDF Radiology Report</div>
-	 * <div class="de">PDF Radiology Report</div>
-	 * <div class="fr">PDF Radiology Report</div>
-	 * <div class="it">PDF Radiology Report</div>
-	 * <!-- @formatter:on -->
-	 */
-	PDF_RADIOLOGY_REPORT("urn:ihe:rad:PDF", "1.3.6.1.4.1.19376.1.2.3", "XDS-I PDF (XDS-I)",
-			"PDF Radiology Report", "PDF Radiology Report", "PDF Radiology Report",
-			"PDF Radiology Report"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Text embedded in CDA per XDS-SD profile</div>
-	 * <div class="de">Text embedded in CDA per XDS-SD profile</div>
-	 * <div class="fr">Text embedded in CDA per XDS-SD profile</div>
-	 * <div class="it">Text embedded in CDA per XDS-SD profile</div>
-	 * <!-- @formatter:on -->
-	 */
-	TEXT_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE("urn:ihe:iti:xds-sd:text:2008",
-			"1.3.6.1.4.1.19376.1.2.3", "Scanned Documents (text)",
-			"Text embedded in CDA per XDS-SD profile", "Text embedded in CDA per XDS-SD profile",
-			"Text embedded in CDA per XDS-SD profile", "Text embedded in CDA per XDS-SD profile"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Unstructured EPR document</div>
-	 * <div class="de">Unstrukturiertes EPD Dokument</div>
-	 * <div class="fr">Document DEP non structuré</div>
-	 * <div class="it">Documento CIP non strutturato</div>
-	 * <!-- @formatter:on -->
-	 */
-	UNSTRUCTURED_EPR_DOCUMENT("urn:che:epr:EPR_Unstructured_Document",
-			"2.16.756.5.30.1.127.3.10.10", "Unstructured EPR document", "Unstructured EPR document",
-			"Unstrukturiertes EPD Dokument", "Document DEP non structuré",
-			"Documento CIP non strutturato");
+    /**
+     * EN: CDA Imaging Report with Structured Headings<br>
+     * DE: CDA Imaging Report with Structured Headings<br>
+     * FR: CDA Imaging Report with Structured Headings<br>
+     * IT: CDA Imaging Report with Structured Headings<br>
+     */
+    CDA_IMAGING_REPORT_WITH_STRUCTURED_HEADINGS("urn:ihe:rad:CDA:ImagingReportStructuredHeadings:2013",
+                                                "1.3.6.1.4.1.19376.1.2.3",
+                                                "XDS-I Imaging Report with Structured Headings (XDS-I)",
+                                                "CDA Imaging Report with Structured Headings",
+                                                "CDA Imaging Report with Structured Headings",
+                                                "CDA Imaging Report with Structured Headings",
+                                                "CDA Imaging Report with Structured Headings"),
+    /**
+     * EN: CDA Laboratory Report<br>
+     * DE: CDA Laboratory Report<br>
+     * FR: CDA Laboratory Report<br>
+     * IT: CDA Laboratory Report<br>
+     */
+    CDA_LABORATORY_REPORT("urn:ihe:lab:xd-lab:2008",
+                          "1.3.6.1.4.1.19376.1.2.3",
+                          "CDA Laboratory Report",
+                          "CDA Laboratory Report",
+                          "CDA Laboratory Report",
+                          "CDA Laboratory Report",
+                          "CDA Laboratory Report"),
+    /**
+     * EN: CDA Wrapped Text Report<br>
+     * DE: CDA Wrapped Text Report<br>
+     * FR: CDA Wrapped Text Report<br>
+     * IT: CDA Wrapped Text Report<br>
+     */
+    CDA_WRAPPED_TEXT_REPORT("urn:ihe:rad:TEXT",
+                            "1.3.6.1.4.1.19376.1.2.3",
+                            "XDS-I CDA Wrapped Text Report (XDS-I)",
+                            "CDA Wrapped Text Report",
+                            "CDA Wrapped Text Report",
+                            "CDA Wrapped Text Report",
+                            "CDA Wrapped Text Report"),
+    /**
+     * EN: Community Dispense<br>
+     * DE: Community Dispense<br>
+     * FR: Community Dispense<br>
+     * IT: Community Dispense<br>
+     */
+    COMMUNITY_DISPENSE("urn:ihe:pharm:dis:2010",
+                       "1.3.6.1.4.1.19376.1.2.3",
+                       "Community Dispense",
+                       "Community Dispense",
+                       "Community Dispense",
+                       "Community Dispense",
+                       "Community Dispense"),
+    /**
+     * EN: Community Medication List<br>
+     * DE: Community Medication List<br>
+     * FR: Community Medication List<br>
+     * IT: Community Medication List<br>
+     */
+    COMMUNITY_MEDICATION_LIST("urn:ihe:pharm:pml:2013",
+                              "1.3.6.1.4.1.19376.1.2.3",
+                              "Community Medication List",
+                              "Community Medication List",
+                              "Community Medication List",
+                              "Community Medication List",
+                              "Community Medication List"),
+    /**
+     * EN: Community Medication Treatment Plan<br>
+     * DE: Community Medication Treatment Plan<br>
+     * FR: Community Medication Treatment Plan<br>
+     * IT: Community Medication Treatment Plan<br>
+     */
+    COMMUNITY_MEDICATION_TREATMENT_PLAN("urn:ihe:pharm:mtp:2015",
+                                        "1.3.6.1.4.1.19376.1.2.3",
+                                        "Community Medication Treatment Plan",
+                                        "Community Medication Treatment Plan",
+                                        "Community Medication Treatment Plan",
+                                        "Community Medication Treatment Plan",
+                                        "Community Medication Treatment Plan"),
+    /**
+     * EN: Community Pharmaceutical Advice<br>
+     * DE: Community Pharmaceutical Advice<br>
+     * FR: Community Pharmaceutical Advice<br>
+     * IT: Community Pharmaceutical Advice<br>
+     */
+    COMMUNITY_PHARMACEUTICAL_ADVICE("urn:ihe:pharm:padv:2010",
+                                    "1.3.6.1.4.1.19376.1.2.3",
+                                    "Community Pharmaceutical Advice",
+                                    "Community Pharmaceutical Advice",
+                                    "Community Pharmaceutical Advice",
+                                    "Community Pharmaceutical Advice",
+                                    "Community Pharmaceutical Advice"),
+    /**
+     * EN: Community Prescription<br>
+     * DE: Community Prescription<br>
+     * FR: Community Prescription<br>
+     * IT: Community Prescription<br>
+     */
+    COMMUNITY_PRESCRIPTION("urn:ihe:pharm:pre:2010",
+                           "1.3.6.1.4.1.19376.1.2.3",
+                           "Community Prescription",
+                           "Community Prescription",
+                           "Community Prescription",
+                           "Community Prescription",
+                           "Community Prescription"),
+    /**
+     * EN: IHE KOS document<br>
+     * DE: KOS Dokument<br>
+     * FR: Document KOS<br>
+     * IT: Documento KOS <br>
+     */
+    IHE_KOS_DOCUMENT("1.2.840.10008.5.1.4.1.1.88.59",
+                     "1.2.840.10008.2.6.1",
+                     "DICOM Manifest (DICOM KOS SOP Class UID)",
+                     "IHE KOS document",
+                     "KOS Dokument",
+                     "Document KOS",
+                     "Documento KOS "),
+    /**
+     * EN: Immunization Content (IC)<br>
+     * DE: Immunization Content (IC)<br>
+     * FR: Immunization Content (IC)<br>
+     * IT: Immunization Content (IC)<br>
+     */
+    IMMUNIZATION_CONTENT("urn:ihe:pcc:ic:2009",
+                         "1.3.6.1.4.1.19376.1.2.3",
+                         "Immunization Content (IC)",
+                         "Immunization Content (IC)",
+                         "Immunization Content (IC)",
+                         "Immunization Content (IC)",
+                         "Immunization Content (IC)"),
+    /**
+     * EN: MimeType sufficient<br>
+     * DE: MimeType sufficient<br>
+     * FR: MimeType sufficient<br>
+     * IT: MimeType sufficient<br>
+     */
+    MIMETYPE_SUFFICIENT("urn:ihe:iti:xds:2017:mimeTypeSufficient",
+                        "1.3.6.1.4.1.19376.1.2.3",
+                        "MimeType sufficient",
+                        "MimeType sufficient",
+                        "MimeType sufficient",
+                        "MimeType sufficient",
+                        "MimeType sufficient"),
+    /**
+     * EN: PDF embedded in CDA per XDS-SD profile<br>
+     * DE: PDF embedded in CDA per XDS-SD profile<br>
+     * FR: PDF embedded in CDA per XDS-SD profile<br>
+     * IT: PDF embedded in CDA per XDS-SD profile<br>
+     */
+    PDF_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE("urn:ihe:iti:xds-sd:pdf:2008",
+                                           "1.3.6.1.4.1.19376.1.2.3",
+                                           "Scanned Documents (PDF)",
+                                           "PDF embedded in CDA per XDS-SD profile",
+                                           "PDF embedded in CDA per XDS-SD profile",
+                                           "PDF embedded in CDA per XDS-SD profile",
+                                           "PDF embedded in CDA per XDS-SD profile"),
+    /**
+     * EN: PDF Radiology Report<br>
+     * DE: PDF Radiology Report<br>
+     * FR: PDF Radiology Report<br>
+     * IT: PDF Radiology Report<br>
+     */
+    PDF_RADIOLOGY_REPORT("urn:ihe:rad:PDF",
+                         "1.3.6.1.4.1.19376.1.2.3",
+                         "XDS-I PDF (XDS-I)",
+                         "PDF Radiology Report",
+                         "PDF Radiology Report",
+                         "PDF Radiology Report",
+                         "PDF Radiology Report"),
+    /**
+     * EN: Text embedded in CDA per XDS-SD profile<br>
+     * DE: Text embedded in CDA per XDS-SD profile<br>
+     * FR: Text embedded in CDA per XDS-SD profile<br>
+     * IT: Text embedded in CDA per XDS-SD profile<br>
+     */
+    TEXT_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE("urn:ihe:iti:xds-sd:text:2008",
+                                            "1.3.6.1.4.1.19376.1.2.3",
+                                            "Scanned Documents (text)",
+                                            "Text embedded in CDA per XDS-SD profile",
+                                            "Text embedded in CDA per XDS-SD profile",
+                                            "Text embedded in CDA per XDS-SD profile",
+                                            "Text embedded in CDA per XDS-SD profile"),
+    /**
+     * EN: Unstructured EPR document<br>
+     * DE: Unstrukturiertes EPD Dokument<br>
+     * FR: Document DEP non structuré<br>
+     * IT: Documento CIP non strutturato<br>
+     */
+    UNSTRUCTURED_EPR_DOCUMENT("urn:che:epr:EPR_Unstructured_Document",
+                              "2.16.756.5.30.1.127.3.10.10",
+                              "Unstructured EPR document",
+                              "Unstructured EPR document",
+                              "Unstrukturiertes EPD Dokument",
+                              "Document DEP non structuré",
+                              "Documento CIP non strutturato");
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for CDA Imaging Report with Structured Headings</div>
-	 * <div class="de">Code für CDA Imaging Report with Structured Headings</div>
-	 * <div class="fr">Code de CDA Imaging Report with Structured Headings</div>
-	 * <div class="it">Code per CDA Imaging Report with Structured Headings</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String CDA_IMAGING_REPORT_WITH_STRUCTURED_HEADINGS_CODE = "urn:ihe:rad:CDA:ImagingReportStructuredHeadings:2013";
+    /**
+     * EN: Code for CDA Imaging Report with Structured Headings<br>
+     * DE: Code für CDA Imaging Report with Structured Headings<br>
+     * FR: Code de CDA Imaging Report with Structured Headings<br>
+     * IT: Code per CDA Imaging Report with Structured Headings<br>
+     */
+    public static final String CDA_IMAGING_REPORT_WITH_STRUCTURED_HEADINGS_CODE = "urn:ihe:rad:CDA:ImagingReportStructuredHeadings:2013";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for CDA Laboratory Report</div>
-	 * <div class="de">Code für CDA Laboratory Report</div>
-	 * <div class="fr">Code de CDA Laboratory Report</div>
-	 * <div class="it">Code per CDA Laboratory Report</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String CDA_LABORATORY_REPORT_CODE = "urn:ihe:lab:xd-lab:2008";
+    /**
+     * EN: Code for CDA Laboratory Report<br>
+     * DE: Code für CDA Laboratory Report<br>
+     * FR: Code de CDA Laboratory Report<br>
+     * IT: Code per CDA Laboratory Report<br>
+     */
+    public static final String CDA_LABORATORY_REPORT_CODE = "urn:ihe:lab:xd-lab:2008";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for CDA Wrapped Text Report</div>
-	 * <div class="de">Code für CDA Wrapped Text Report</div>
-	 * <div class="fr">Code de CDA Wrapped Text Report</div>
-	 * <div class="it">Code per CDA Wrapped Text Report</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String CDA_WRAPPED_TEXT_REPORT_CODE = "urn:ihe:rad:TEXT";
+    /**
+     * EN: Code for CDA Wrapped Text Report<br>
+     * DE: Code für CDA Wrapped Text Report<br>
+     * FR: Code de CDA Wrapped Text Report<br>
+     * IT: Code per CDA Wrapped Text Report<br>
+     */
+    public static final String CDA_WRAPPED_TEXT_REPORT_CODE = "urn:ihe:rad:TEXT";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Community Dispense</div>
-	 * <div class="de">Code für Community Dispense</div>
-	 * <div class="fr">Code de Community Dispense</div>
-	 * <div class="it">Code per Community Dispense</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String COMMUNITY_DISPENSE_CODE = "urn:ihe:pharm:dis:2010";
+    /**
+     * EN: Code for Community Dispense<br>
+     * DE: Code für Community Dispense<br>
+     * FR: Code de Community Dispense<br>
+     * IT: Code per Community Dispense<br>
+     */
+    public static final String COMMUNITY_DISPENSE_CODE = "urn:ihe:pharm:dis:2010";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Community Medication List</div>
-	 * <div class="de">Code für Community Medication List</div>
-	 * <div class="fr">Code de Community Medication List</div>
-	 * <div class="it">Code per Community Medication List</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String COMMUNITY_MEDICATION_LIST_CODE = "urn:ihe:pharm:pml:2013";
+    /**
+     * EN: Code for Community Medication List<br>
+     * DE: Code für Community Medication List<br>
+     * FR: Code de Community Medication List<br>
+     * IT: Code per Community Medication List<br>
+     */
+    public static final String COMMUNITY_MEDICATION_LIST_CODE = "urn:ihe:pharm:pml:2013";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Community Medication Treatment Plan</div>
-	 * <div class="de">Code für Community Medication Treatment Plan</div>
-	 * <div class="fr">Code de Community Medication Treatment Plan</div>
-	 * <div class="it">Code per Community Medication Treatment Plan</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String COMMUNITY_MEDICATION_TREATMENT_PLAN_CODE = "urn:ihe:pharm:mtp:2015";
+    /**
+     * EN: Code for Community Medication Treatment Plan<br>
+     * DE: Code für Community Medication Treatment Plan<br>
+     * FR: Code de Community Medication Treatment Plan<br>
+     * IT: Code per Community Medication Treatment Plan<br>
+     */
+    public static final String COMMUNITY_MEDICATION_TREATMENT_PLAN_CODE = "urn:ihe:pharm:mtp:2015";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Community Pharmaceutical Advice</div>
-	 * <div class="de">Code für Community Pharmaceutical Advice</div>
-	 * <div class="fr">Code de Community Pharmaceutical Advice</div>
-	 * <div class="it">Code per Community Pharmaceutical Advice</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String COMMUNITY_PHARMACEUTICAL_ADVICE_CODE = "urn:ihe:pharm:padv:2010";
+    /**
+     * EN: Code for Community Pharmaceutical Advice<br>
+     * DE: Code für Community Pharmaceutical Advice<br>
+     * FR: Code de Community Pharmaceutical Advice<br>
+     * IT: Code per Community Pharmaceutical Advice<br>
+     */
+    public static final String COMMUNITY_PHARMACEUTICAL_ADVICE_CODE = "urn:ihe:pharm:padv:2010";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Community Prescription</div>
-	 * <div class="de">Code für Community Prescription</div>
-	 * <div class="fr">Code de Community Prescription</div>
-	 * <div class="it">Code per Community Prescription</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String COMMUNITY_PRESCRIPTION_CODE = "urn:ihe:pharm:pre:2010";
+    /**
+     * EN: Code for Community Prescription<br>
+     * DE: Code für Community Prescription<br>
+     * FR: Code de Community Prescription<br>
+     * IT: Code per Community Prescription<br>
+     */
+    public static final String COMMUNITY_PRESCRIPTION_CODE = "urn:ihe:pharm:pre:2010";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for IHE KOS document</div>
-	 * <div class="de">Code für KOS Dokument</div>
-	 * <div class="fr">Code de Document KOS</div>
-	 * <div class="it">Code per Documento KOS </div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String IHE_KOS_DOCUMENT_CODE = "1.2.840.10008.5.1.4.1.1.88.59";
+    /**
+     * EN: Code for IHE KOS document<br>
+     * DE: Code für KOS Dokument<br>
+     * FR: Code de Document KOS<br>
+     * IT: Code per Documento KOS <br>
+     */
+    public static final String IHE_KOS_DOCUMENT_CODE = "1.2.840.10008.5.1.4.1.1.88.59";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Immunization Content (IC)</div>
-	 * <div class="de">Code für Immunization Content (IC)</div>
-	 * <div class="fr">Code de Immunization Content (IC)</div>
-	 * <div class="it">Code per Immunization Content (IC)</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String IMMUNIZATION_CONTENT_CODE = "urn:ihe:pcc:ic:2009";
+    /**
+     * EN: Code for Immunization Content (IC)<br>
+     * DE: Code für Immunization Content (IC)<br>
+     * FR: Code de Immunization Content (IC)<br>
+     * IT: Code per Immunization Content (IC)<br>
+     */
+    public static final String IMMUNIZATION_CONTENT_CODE = "urn:ihe:pcc:ic:2009";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for MimeType sufficient</div>
-	 * <div class="de">Code für MimeType sufficient</div>
-	 * <div class="fr">Code de MimeType sufficient</div>
-	 * <div class="it">Code per MimeType sufficient</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String MIMETYPE_SUFFICIENT_CODE = "urn:ihe:iti:xds:2017:mimeTypeSufficient";
+    /**
+     * EN: Code for MimeType sufficient<br>
+     * DE: Code für MimeType sufficient<br>
+     * FR: Code de MimeType sufficient<br>
+     * IT: Code per MimeType sufficient<br>
+     */
+    public static final String MIMETYPE_SUFFICIENT_CODE = "urn:ihe:iti:xds:2017:mimeTypeSufficient";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for PDF embedded in CDA per XDS-SD profile</div>
-	 * <div class="de">Code für PDF embedded in CDA per XDS-SD profile</div>
-	 * <div class="fr">Code de PDF embedded in CDA per XDS-SD profile</div>
-	 * <div class="it">Code per PDF embedded in CDA per XDS-SD profile</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String PDF_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE_CODE = "urn:ihe:iti:xds-sd:pdf:2008";
+    /**
+     * EN: Code for PDF embedded in CDA per XDS-SD profile<br>
+     * DE: Code für PDF embedded in CDA per XDS-SD profile<br>
+     * FR: Code de PDF embedded in CDA per XDS-SD profile<br>
+     * IT: Code per PDF embedded in CDA per XDS-SD profile<br>
+     */
+    public static final String PDF_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE_CODE = "urn:ihe:iti:xds-sd:pdf:2008";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for PDF Radiology Report</div>
-	 * <div class="de">Code für PDF Radiology Report</div>
-	 * <div class="fr">Code de PDF Radiology Report</div>
-	 * <div class="it">Code per PDF Radiology Report</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String PDF_RADIOLOGY_REPORT_CODE = "urn:ihe:rad:PDF";
+    /**
+     * EN: Code for PDF Radiology Report<br>
+     * DE: Code für PDF Radiology Report<br>
+     * FR: Code de PDF Radiology Report<br>
+     * IT: Code per PDF Radiology Report<br>
+     */
+    public static final String PDF_RADIOLOGY_REPORT_CODE = "urn:ihe:rad:PDF";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Text embedded in CDA per XDS-SD profile</div>
-	 * <div class="de">Code für Text embedded in CDA per XDS-SD profile</div>
-	 * <div class="fr">Code de Text embedded in CDA per XDS-SD profile</div>
-	 * <div class="it">Code per Text embedded in CDA per XDS-SD profile</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String TEXT_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE_CODE = "urn:ihe:iti:xds-sd:text:2008";
+    /**
+     * EN: Code for Text embedded in CDA per XDS-SD profile<br>
+     * DE: Code für Text embedded in CDA per XDS-SD profile<br>
+     * FR: Code de Text embedded in CDA per XDS-SD profile<br>
+     * IT: Code per Text embedded in CDA per XDS-SD profile<br>
+     */
+    public static final String TEXT_EMBEDDED_IN_CDA_PER_XDS_SD_PROFILE_CODE = "urn:ihe:iti:xds-sd:text:2008";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Unstructured EPR document</div>
-	 * <div class="de">Code für Unstrukturiertes EPD Dokument</div>
-	 * <div class="fr">Code de Document DEP non structuré</div>
-	 * <div class="it">Code per Documento CIP non strutturato</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String UNSTRUCTURED_EPR_DOCUMENT_CODE = "urn:che:epr:EPR_Unstructured_Document";
+    /**
+     * EN: Code for Unstructured EPR document<br>
+     * DE: Code für Unstrukturiertes EPD Dokument<br>
+     * FR: Code de Document DEP non structuré<br>
+     * IT: Code per Documento CIP non strutturato<br>
+     */
+    public static final String UNSTRUCTURED_EPR_DOCUMENT_CODE = "urn:che:epr:EPR_Unstructured_Document";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.9";
+    /**
+     * Identifier of the value set.
+     */
+    public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.9";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Name of the value set</div>
-	 * <div class="de">Name des Value Sets</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String VALUE_SET_NAME = "DocumentEntry.formatCode";
+    /**
+     * Name of the value set.
+     */
+    public static final String VALUE_SET_NAME = "DocumentEntry.formatCode";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @param code
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
-	 */
-	public static FormatCode getEnum(final String code) {
-		for (final FormatCode x : values()) {
-			if (x.getCodeValue().equals(code)) {
-				return x;
-			}
-		}
-		return null;
-	}
+    /**
+     * Gets the Enum with a given code.
+     *
+     * @param code The code value.
+     * @return the enum value found or {@code null}.
+     */
+    public static FormatCode getEnum(final String code) {
+        for (final FormatCode x : values()) {
+            if (x.getCodeValue().equals(code)) {
+                return x;
+            }
+        }
+        return null;
+    }
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @param enumName
-	 *            <div class="de"> enumName</div>
-	 * @return true, if enum is in this value set
-	 */
-	public static boolean isEnumOfValueSet(final String enumName) {
-		if (enumName == null) {
-			return false;
-		}
-		try {
-			Enum.valueOf(FormatCode.class, enumName);
-			return true;
-		} catch (final IllegalArgumentException ex) {
-			return false;
-		}
-	}
+    /**
+     * Checks if a given enum is part of this value set.
+     *
+     * @param enumName The name of the enum.
+     * @return {@code true} if the name is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isEnumOfValueSet(final String enumName) {
+        if (enumName == null) {
+            return false;
+        }
+        try {
+            Enum.valueOf(FormatCode.class,
+                         enumName);
+            return true;
+        } catch (final IllegalArgumentException ex) {
+            return false;
+        }
+    }
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @param codeValue
-	 *            <div class="de"> code</div>
-	 * @return true, if is in value set
-	 */
-	public static boolean isInValueSet(final String codeValue) {
-		for (final FormatCode x : values()) {
-			if (x.getCodeValue().equals(codeValue)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    /**
+     * Checks if a given code value is in this value set.
+     *
+     * @param codeValue The code value.
+     * @return {@code true} if the value is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isInValueSet(final String codeValue) {
+        for (final FormatCode x : values()) {
+            if (x.getCodeValue().equals(codeValue)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Machine interpretable and (inside this class) unique code</div>
-	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse) eindeutiger Code</div>
-	 * <!-- @formatter:on -->
-	 */
-	private String code;
+    /**
+     * Machine interpretable and (inside this class) unique code.
+     */
+    private String code;
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Identifier of the referencing code system.</div>
-	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
-	 * <!-- @formatter:on -->
-	 */
-	private String codeSystem;
+    /**
+     * Identifier of the referencing code system.
+     */
+    private String codeSystem;
 
-	/**
-	 * The display names per language
-	 */
-	private Map<LanguageCode, String> displayNames;
+    /**
+     * The display names per language.
+     */
+    private Map<LanguageCode, String> displayNames;
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display Name</div>
-	 * <div class="de">Instanziiert dieses Enum Object mittels eines Codes und einem Display Name</div>.
-	 * <!-- @formatter:on -->
-	 *
-	 * @param code
-	 *            code
-	 * @param codeSystem
-	 *            codeSystem
-	 * @param displayName
-	 *            the default display name
-	 * @param displayNameEn
-	 *            the display name en
-	 * @param displayNameDe
-	 *            the display name de
-	 * @param displayNameFr
-	 *            the display name fr
-	 * @param displayNameIt
-	 *            the display name it
-	 */
-	FormatCode(final String code, final String codeSystem, final String displayName,
-			final String displayNameEn, final String displayNameDe, final String displayNameFr,
-			final String displayNameIt) {
-		this.code = code;
-		this.codeSystem = codeSystem;
-		this.displayNames = new HashMap<>();
-		this.displayNames.put(null, displayName);
-		this.displayNames.put(LanguageCode.ENGLISH, displayNameEn);
-		this.displayNames.put(LanguageCode.GERMAN, displayNameDe);
-		this.displayNames.put(LanguageCode.FRENCH, displayNameFr);
-		this.displayNames.put(LanguageCode.ITALIAN, displayNameIt);
-	}
+    /**
+     * Instantiates this enum with a given code and display names.
+     *
+     * @param code          The code value.
+     * @param codeSystem    The code system (OID).
+     * @param displayName   The default display name.
+     * @param displayNameEn The display name in English.
+     * @param displayNameDe The display name in German.
+     * @param displayNameFr The display name in French.
+     * @param displayNameIt The display name in Italian.
+     */
+    FormatCode(final String code, final String codeSystem, final String displayName, final String displayNameEn, final String displayNameDe, final String displayNameFr, final String displayNameIt) {
+        this.code = code;
+        this.codeSystem = codeSystem;
+        this.displayNames = new HashMap<>();
+        this.displayNames.put(null,
+                              displayName);
+        this.displayNames.put(LanguageCode.ENGLISH,
+                              displayNameEn);
+        this.displayNames.put(LanguageCode.GERMAN,
+                              displayNameDe);
+        this.displayNames.put(LanguageCode.FRENCH,
+                              displayNameFr);
+        this.displayNames.put(LanguageCode.ITALIAN,
+                              displayNameIt);
+    }
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the code system identifier.</div>
-	 * <div class="de">Liefert den Code System Identifikator.</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @return <div class="en">the code system identifier</div>
-	 */
-	@Override
-	public String getCodeSystemId() {
-		return this.codeSystem;
-	}
+    /**
+     * Gets the code system identifier.
+     *
+     * @return the code system identifier.
+     */
+    @Override
+    public String getCodeSystemId() {
+        return this.codeSystem;
+    }
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the code system name.</div>
-	 * <div class="de">Liefert den Code System Namen.</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @return <div class="en">the code system identifier</div>
-	 */
-	@Override
-	public String getCodeSystemName() {
-		String retVal = "";
-		CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
-		if (cs != null)
-			retVal = cs.getCodeSystemName();
-		return retVal;
-	}
+    /**
+     * Gets the code system name.
+     *
+     * @return the code system identifier.
+     */
+    @Override
+    public String getCodeSystemName() {
+        final CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
+        if (cs != null) {
+            return cs.getCodeSystemName();
+        }
+        return "";
+    }
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @return <div class="en">the code</div>
-	 */
-	@Override
-	public String getCodeValue() {
-		return this.code;
-	}
+    /**
+     * Gets the code value as a string.
+     *
+     * @return the code value.
+     */
+    @Override
+    public String getCodeValue() {
+        return this.code;
+    }
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the display name defined by the language param. If
-	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
-	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @param languageCode
-	 *            the language code to get the display name for
-	 * @return returns the display name in the desired language. if language not
-	 *         found, display name in german will returned
-	 */
-	@Override
-	public String getDisplayName(LanguageCode languageCode) {
-		String displayName = this.displayNames.get(languageCode);
-		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
-			return this.displayNames.get(null);
-		}
-		return displayName;
-	}
+    /**
+     * Gets the display name defined by the language param. If there is no english translation, the default display name
+     *      is returned.
+     *
+     * @param languageCode The language code to get the display name for.
+     * @return the display name in the desired language. if language not found, display name in german will be returned.
+     */
+    @Override
+    public String getDisplayName(final LanguageCode languageCode) {
+        final String displayName = this.displayNames.get(languageCode);
+        if (displayName == null && languageCode == LanguageCode.ENGLISH) {
+            return this.displayNames.get(null);
+        }
+        return displayName;
+    }
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the value set identifier.</div>
-	 * <div class="de">Liefert den Value Set Identifikator.</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @return <div class="en">the value set identifier</div>
-	 */
-	@Override
-	public String getValueSetId() {
-		return VALUE_SET_ID;
-	}
+    /**
+     * Gets the value set identifier.
+     *
+     * @return the value set identifier.
+     */
+    @Override
+    public String getValueSetId() {
+        return VALUE_SET_ID;
+    }
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the value set name.</div>
-	 * <div class="de">Liefert den Value Set Namen.</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @return <div class="en">the value set name</div>
-	 */
-	@Override
-	public String getValueSetName() {
-		return VALUE_SET_NAME;
-	}
+    /**
+     * Gets the value set name.
+     *
+     * @return the value set name.
+     */
+    @Override
+    public String getValueSetName() {
+        return VALUE_SET_NAME;
+    }
 }
