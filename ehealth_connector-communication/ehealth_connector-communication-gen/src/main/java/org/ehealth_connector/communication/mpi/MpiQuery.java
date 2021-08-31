@@ -59,7 +59,7 @@ public interface MpiQuery {
 	 *            the address to be queried for
 	 * @return the query object
 	 */
-	public abstract MpiQuery addPatientAddress(Address Address);
+	public abstract MpiQuery addPatientAddress(Address address);
 
 	/**
 	 * Adds a patient identifier to be queried for.
@@ -68,7 +68,7 @@ public interface MpiQuery {
 	 *            patient identifier
 	 * @return the query object
 	 */
-	public abstract MpiQuery addPatientIdentifier(Identifier Identifier);
+	public abstract MpiQuery addPatientIdentifier(Identifier identifier);
 
 	/**
 	 * Adds a patient name to the query.
@@ -89,7 +89,7 @@ public interface MpiQuery {
 	 *            telecom
 	 * @return the query object
 	 */
-	public abstract MpiQuery addPatientTelecom(ContactPoint ContactPoint);
+	public abstract MpiQuery addPatientTelecom(ContactPoint contactPoint);
 
 	/**
 	 * Cancels the next query.

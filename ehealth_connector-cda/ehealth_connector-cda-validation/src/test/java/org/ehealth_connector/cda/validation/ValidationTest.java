@@ -16,7 +16,8 @@
  */
 package org.ehealth_connector.cda.validation;
 
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -35,8 +36,8 @@ import org.ehealth_connector.validation.service.pdf.VeraPdfValidationResult;
 import org.ehealth_connector.validation.service.schematron.RuleSetDetectionException;
 import org.ehealth_connector.validation.service.schematron.result.SchematronValidationResult;
 import org.ehealth_connector.validation.service.transform.TransformationException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
@@ -65,7 +66,7 @@ public class ValidationTest {
 	/** The SLF4J logger instance. */
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		log.info("basePath='" + new File(".").getAbsolutePath() + "'");
 		cdaVali = new CdaValidator(new File(configFilePath).getAbsoluteFile());

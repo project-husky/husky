@@ -16,16 +16,17 @@
  */
 package org.ehealth_connector.xua.serialization.impl;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.ehealth_connector.xua.communication.xua.XUserAssertionRequest;
 import org.ehealth_connector.xua.communication.xua.impl.XUserAssertionRequestBuilderImpl;
 import org.ehealth_connector.xua.exceptions.SerializeException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.opensaml.core.config.InitializationService;
 import org.w3c.dom.Element;
 
@@ -36,7 +37,7 @@ public class XUserAssertionRequestSerializerImplTest {
 	private XUserAssertionRequestSerializerImpl testSerializer;
 	private XUserAssertionRequest testXmlObject;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testSerializer = new XUserAssertionRequestSerializerImpl();
 
@@ -51,9 +52,9 @@ public class XUserAssertionRequestSerializerImplTest {
 				.create();
 	}
 
-	@Test(expected = SerializeException.class)
+	@Test
 	public void testSerializeToXml_InputNull() throws SerializeException {
-		testSerializer.toXmlElement(null);
+		assertThrows(SerializeException.class, () -> testSerializer.toXmlElement(null));
 	}
 
 	/**

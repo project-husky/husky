@@ -18,8 +18,8 @@ package org.ehealth_connector.cda.utils;
 
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.mdht.Identificator;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
@@ -50,7 +50,7 @@ public class CdaUtilMdhtTest {
 	 *
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testId = "1234-5678-123456789";
 		testIdentiicator = new Identificator(CodeSystems.GLN, testId);

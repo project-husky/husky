@@ -16,12 +16,12 @@
  */
 package org.ehealth_connector.cda.ihe.lab;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.xml.xpath.XPathExpressionException;
 
 import org.ehealth_connector.cda.testhelper.TestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 
 public class LaboratoryReportDataProcessingEntryTest extends TestUtils {

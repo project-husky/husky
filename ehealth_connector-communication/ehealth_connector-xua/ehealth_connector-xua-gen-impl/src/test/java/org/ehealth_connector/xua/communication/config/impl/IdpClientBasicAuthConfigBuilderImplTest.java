@@ -16,11 +16,11 @@
  */
 package org.ehealth_connector.xua.communication.config.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * <!-- @formatter:off -->
@@ -41,7 +41,7 @@ public class IdpClientBasicAuthConfigBuilderImplTest {
 	/**
 	 * set up test parameters
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		builder = new IdpClientBasicAuthConfigBuilderImpl();
 

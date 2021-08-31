@@ -16,8 +16,8 @@
  */
 package org.ehealth_connector.xua.communication.clients.impl;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.ehealth_connector.xua.communication.clients.IdpClient;
 import org.ehealth_connector.xua.communication.clients.XuaClient;
@@ -31,8 +31,8 @@ import org.ehealth_connector.xua.communication.config.impl.IdpClientCertificateA
 import org.ehealth_connector.xua.communication.config.impl.IdpClientViaHttpProxyConfigBuilder;
 import org.ehealth_connector.xua.communication.config.impl.IdpClientViaHttpProxyConfigImpl;
 import org.ehealth_connector.xua.communication.config.impl.XuaClientConfigBuilderImpl;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * <!-- @formatter:off -->
@@ -55,7 +55,7 @@ public class ClientFactoryTest {
 	/**
 	 * setup the test parameters
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		testClientConfigurationHttpProxy = new IdpClientViaHttpProxyConfigBuilder().create();

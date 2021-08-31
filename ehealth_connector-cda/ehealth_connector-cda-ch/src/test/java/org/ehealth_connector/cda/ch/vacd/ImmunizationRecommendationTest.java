@@ -17,8 +17,8 @@
 
 package org.ehealth_connector.cda.ch.vacd;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
 
@@ -44,7 +44,7 @@ import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Name;
 import org.ehealth_connector.common.mdht.Organization;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 

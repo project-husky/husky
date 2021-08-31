@@ -16,14 +16,14 @@
  */
 package org.ehealth_connector.cda.ch.lab.lrep;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.ehealth_connector.cda.ch.lab.BaseChSpecimenAct;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit Tests for Class LaboratoryReportDataProcessingEntry.
@@ -53,10 +53,10 @@ public class LaboratoryReportDataProcessingEntryTest {
 				idFoundChPalm = true;
 		}
 
-		assertTrue(cutName + " templateID defined by IHE XD-LAB is missing", idFoundIhe);
-		assertTrue(cutName + " templateID defined by ART DECOR CH-PALM is missing", idFoundChPalm);
-		assertFalse(cutName + " contains more templateIds than expected",
-				(lrdpe.getTemplateIds().size() > 2));
+		assertTrue(idFoundIhe, cutName + " templateID defined by IHE XD-LAB is missing");
+		assertTrue(idFoundChPalm, cutName + " templateID defined by ART DECOR CH-PALM is missing");
+		assertFalse((lrdpe.getTemplateIds().size() > 2), cutName + " contains more templateIds than expected"
+				);
 	}
 
 	/**

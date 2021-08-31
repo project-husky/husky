@@ -28,8 +28,8 @@ import org.apache.http.impl.bootstrap.ServerBootstrap;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.protocol.HttpRequestHandler;
 import org.ehealth_connector.xua.utilities.impl.InitializerTestHelper;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,7 +63,7 @@ public abstract class ServerTestHelper extends InitializerTestHelper {
 		return null;
 	}
 
-	@BeforeClass
+	@BeforeAll
 	public static void setUpBefore() throws IOException {
 		final SocketConfig socketConfig = SocketConfig.custom().setSoTimeout(15000)
 				.setTcpNoDelay(true).build();
@@ -87,7 +87,7 @@ public abstract class ServerTestHelper extends InitializerTestHelper {
 
 	}
 
-	@AfterClass
+	@AfterAll
 	public static void tearDownAfter() {
 		server.stop();
 	}

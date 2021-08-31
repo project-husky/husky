@@ -16,10 +16,10 @@
  */
 package org.ehealth_connector.common.basetypes;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.ehealth_connector.common.enums.EntityNameUse;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * The test class for NameBaseType.

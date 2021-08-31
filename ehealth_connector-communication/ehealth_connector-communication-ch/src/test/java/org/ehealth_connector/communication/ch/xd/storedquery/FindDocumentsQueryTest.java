@@ -16,12 +16,13 @@
  */
 package org.ehealth_connector.communication.ch.xd.storedquery;
 
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.function.Consumer;
 
 import org.ehealth_connector.communication.ch.testhelper.XdsChTestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameter;
 import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameterList;
 import org.slf4j.Logger;

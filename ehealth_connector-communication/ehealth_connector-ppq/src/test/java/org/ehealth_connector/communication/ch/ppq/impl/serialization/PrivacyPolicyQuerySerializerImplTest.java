@@ -16,10 +16,11 @@
  */
 package org.ehealth_connector.communication.ch.ppq.impl.serialization;
 
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQuery;
 import org.ehealth_connector.communication.ch.ppq.impl.PrivacyPolicyQueryBuilderImpl;
@@ -27,8 +28,8 @@ import org.ehealth_connector.communication.ch.ppq.utilities.impl.InitializerTest
 import org.ehealth_connector.xua.exceptions.SerializeException;
 import org.ehealth_connector.xua.hl7v3.InstanceIdentifier;
 import org.ehealth_connector.xua.hl7v3.impl.InstanceIdentifierBuilder;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
@@ -45,7 +46,7 @@ public class PrivacyPolicyQuerySerializerImplTest extends InitializerTestHelper 
 	private PrivacyPolicyQuerySerializerImpl testSerializer;
 	private PrivacyPolicyQuery testXmlObject;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testSerializer = new PrivacyPolicyQuerySerializerImpl();
 		testConsent = "My New Consent";
@@ -62,9 +63,9 @@ public class PrivacyPolicyQuerySerializerImplTest extends InitializerTestHelper 
 				.destination(testDestination).instanceIdentifier(testInstanceIdentifier).create();
 	}
 
-	@Test(expected = SerializeException.class)
+	@Test
 	public void testSerializeToXml_InputNull() throws SerializeException {
-		testSerializer.toXmlElement(null);
+		assertThrows(SerializeException.class, () -> testSerializer.toXmlElement(null));
 	}
 
 	/**

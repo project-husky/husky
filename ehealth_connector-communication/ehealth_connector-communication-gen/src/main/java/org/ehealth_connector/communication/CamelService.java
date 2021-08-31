@@ -50,6 +50,7 @@ public abstract class CamelService implements CamelContextAware {
 		// Element wssElement = StaxUtils.read(new
 		// StringReader(wssHeader)).getDocumentElement();
 
+
 		List<SoapHeader> soapHeaders = CastUtils
 				.cast((List<?>) exchange.getIn().getHeader(AbstractWsEndpoint.OUTGOING_SOAP_HEADERS));
 		SoapHeader newHeader;

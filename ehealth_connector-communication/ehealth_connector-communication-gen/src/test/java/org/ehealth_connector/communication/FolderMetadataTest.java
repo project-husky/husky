@@ -16,10 +16,11 @@
  */
 package org.ehealth_connector.communication;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -29,9 +30,9 @@ import java.util.UUID;
 
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.openhealthtools.ihe.utils.OID;
 import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;
 
@@ -69,7 +70,7 @@ public class FolderMetadataTest {
 	 *
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testAvailabilityStatus1 = AvailabilityStatusType.WITHDRAWN_LITERAL;
 		testAvailabilityStatus2 = AvailabilityStatusType.DEPRECATED_LITERAL;
@@ -189,7 +190,7 @@ public class FolderMetadataTest {
 	 * {@link org.ehealth_connector.communication.FolderMetadata#getLastUpdateTime()}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testSetGetLastUpdateTime() {
 		final FolderMetadata ref = new FolderMetadata();
 		assertNull(ref.getLastUpdateTime());

@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.cda.utils;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * The Test Class for CdaUtil.

@@ -14,14 +14,11 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.communication.mpi.impl;
+package org.ehealth_connector.communication.testhelper;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.ehealth_connector.communication.mpi.MpiAdapterInterface;
-import org.ehealth_connector.communication.mpi.MpiQuery;
-import org.ehealth_connector.communication.mpi.MpiQueryResponse;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.hl7.fhir.dstu3.model.Identifier;
@@ -34,7 +31,7 @@ import org.slf4j.LoggerFactory;
  * for testing Note: No production use, no demographic data is stored, just the
  * identifier.
  */
-public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, MpiQueryResponse> {
+public class InMemoryMockMpiAdapter {
 
 	static private Map<String, org.ehealth_connector.fhir.structures.gen.FhirPatient> map = new HashMap<String, FhirPatient>();
 
@@ -54,7 +51,6 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 	 *            the patient
 	 * @return true, if successful
 	 */
-	@Override
 	public boolean addPatient(FhirPatient patient) {
 		if (patient == null) {
 			log.debug("patient is null");
@@ -144,11 +140,6 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 		return getPatientId(patient, FhirCommon.addUrnOid(mpiCommunityOid));
 	}
 
-	@Override
-	public MpiQuery getMpiQuery() {
-		return null;
-	}
-
 	/**
 	 * gets the patient identifier defined by the system which issued the
 	 * patient identifier.
@@ -199,7 +190,6 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 	 *            the obsolete id
 	 * @return true, if successful
 	 */
-	@Override
 	public boolean mergePatient(FhirPatient patient, String obsoleteId) {
 		if ((patient == null) || (obsoleteId == null)) {
 			log.debug("patient or obosoleId is null");
@@ -240,7 +230,6 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 	 *            the query domain namespaces
 	 * @return the string[]
 	 */
-	@Override
 	public String[] queryPatientId(FhirPatient patient, String[] queryDomainOids,
 			String[] queryDomainNamespaces) {
 		String[] domainOids = null;
@@ -272,25 +261,12 @@ public class InMemoryMockMpiAdapter implements MpiAdapterInterface<MpiQuery, Mpi
 	}
 
 	/**
-	 * Query patients.
-	 *
-	 * @param mpiQuery
-	 *            the mpi query
-	 * @return the mpi query response
-	 */
-	@Override
-	public MpiQueryResponse queryPatients(MpiQuery mpiQuery) {
-		return null;
-	}
-
-	/**
 	 * Update patient.
 	 *
 	 * @param patient
 	 *            the patient
 	 * @return true, if successful
 	 */
-	@Override
 	public boolean updatePatient(FhirPatient patient) {
 		if (patient == null) {
 			log.debug("patient is null");

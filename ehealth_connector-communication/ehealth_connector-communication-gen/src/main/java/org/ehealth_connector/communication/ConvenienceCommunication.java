@@ -35,7 +35,6 @@ import org.ehealth_connector.common.communication.DocumentMetadata.DocumentMetad
 import org.ehealth_connector.common.communication.SubmissionSetMetadata;
 import org.ehealth_connector.common.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
 import org.ehealth_connector.common.enums.EhcVersions;
-import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.Util;
@@ -946,7 +945,8 @@ public class ConvenienceCommunication extends CamelService {
 				serverInLogger, serverOutLogger, serverOutLogger,
 				atnaConfigMode == AtnaConfigMode.SECURE);
 		log.info("Sending request to '{}' endpoint", endpoint);
-		final var exchange = send(endpoint, retrieveDocumentSet, securityHeader, null);
+
+		final var exchange = send(endpoint, retrieveDocumentSet, securityHeader, "");
 
 		return exchange.getMessage().getBody(RetrievedDocumentSet.class);
 	}

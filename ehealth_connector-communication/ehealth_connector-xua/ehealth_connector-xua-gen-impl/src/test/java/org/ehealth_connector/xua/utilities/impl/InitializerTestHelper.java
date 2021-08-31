@@ -31,7 +31,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.ehealth_connector.xua.exceptions.SerializeException;
 import org.ehealth_connector.xua.serialization.OpenSaml2Serializer;
 import org.ehealth_connector.xua.serialization.impl.OpenSaml2SerializerImpl;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.BeforeAll;
 import org.opensaml.core.config.InitializationService;
 import org.opensaml.core.xml.XMLObject;
 import org.slf4j.LoggerFactory;
@@ -40,7 +40,7 @@ import org.w3c.dom.Element;
 import org.xml.sax.SAXException;
 
 public abstract class InitializerTestHelper {
-	@BeforeClass
+	@BeforeAll
 	public static void setUpBeforeClass() throws Exception {
 		// Initialize the library
 		InitializationService.initialize();

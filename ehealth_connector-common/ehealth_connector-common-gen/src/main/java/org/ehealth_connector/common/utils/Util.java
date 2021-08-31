@@ -35,6 +35,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -182,6 +183,8 @@ public class Util {
 	 * to support http and https
 	 */
 	public static final String TELECOMS_WEBSITE_PREFIX = "http";
+
+	private static Random rand;
 
 	/**
 	 * Checks to see if the list has at least one element.
@@ -1039,14 +1042,15 @@ public class Util {
 			if (input == null) {
 				throw new IOException("File '" + filename + "' not found.");
 			}
-			final OutputStream output = new FileOutputStream(targetPath);
-			final byte[] buffer = new byte[2048];
-			int bytesRead;
-			while ((bytesRead = input.read(buffer)) != -1) {
-				output.write(buffer, 0, bytesRead);
+			try (OutputStream output = new FileOutputStream(targetPath)) {
+				final var buffer = new byte[2048];
+				int bytesRead;
+				while ((bytesRead = input.read(buffer)) != -1) {
+					output.write(buffer, 0, bytesRead);
+				}
 			}
+
 			input.close();
-			output.close();
 		} catch (final IOException e1) {
 			e1.printStackTrace();
 		}
@@ -1091,13 +1095,21 @@ public class Util {
 		// application instance, the extension part identifies the document
 		// instance.
 
+		if (Util.getRand() == null) {
+			try {
+				Util.setRand(SecureRandom.getInstanceStrong());
+			} catch (NoSuchAlgorithmException e) {
+				Util.setRand(new Random());
+			}
+		}
+
 		final String documentOid = org.openhealthtools.ihe.utils.OID
 				.createOIDGivenRoot("ehealthconnctor");
 		// Creates a random extension ID to identify the document
-		final var r = new Random();
+
 		final var id = new II();
 		id.setRoot(documentOid);
-		id.setExtension(String.valueOf(r.nextInt()));
+		id.setExtension(String.valueOf(rand.nextInt()));
 		return id;
 	}
 
@@ -1921,6 +1933,14 @@ public class Util {
 					+ entry.getValue().toString() + "\"");
 		}
 		return sb;
+	}
+
+	public static Random getRand() {
+		return rand;
+	}
+
+	public static void setRand(Random rand) {
+		Util.rand = rand;
 	}
 
 }

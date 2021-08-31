@@ -16,8 +16,9 @@
  */
 package org.ehealth_connector.communication.ch;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.ehealth_connector.common.ch.enums.ConfidentialityCode;
 import org.ehealth_connector.common.enums.LanguageCode;
@@ -27,7 +28,7 @@ import org.ehealth_connector.communication.ch.enums.HealthcareFacilityTypeCode;
 import org.ehealth_connector.communication.ch.enums.MimeType;
 import org.ehealth_connector.communication.ch.enums.PracticeSettingCode;
 import org.ehealth_connector.communication.ch.enums.TypeCode;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DocumentMetadataChTest extends DocumentMetadataTest {
 

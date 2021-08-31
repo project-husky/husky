@@ -16,21 +16,22 @@
  */
 package org.ehealth_connector.communication;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.communication.SubmissionSetMetadata;
 import org.ehealth_connector.common.mdht.Code;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;
 
 public class SubmissionSetMetadataTest extends TestUtils {
 
 	private SubmissionSetMetadata s;
 
-	@Before
+	@BeforeEach
 	public void initTestData() {
 		s = new SubmissionSetMetadata();
 

@@ -16,18 +16,18 @@
  */
 package org.ehealth_connector.xua.saml2.impl;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.ehealth_connector.xua.saml2.Condition;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ConditionBuilderImplTest {
 
 	private ConditionBuilderImpl builder;
 	private org.opensaml.saml.saml2.core.Condition testInnerObject;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		builder = new ConditionBuilderImpl();
 		testInnerObject = new org.opensaml.saml.saml2.core.impl.AudienceRestrictionBuilder()

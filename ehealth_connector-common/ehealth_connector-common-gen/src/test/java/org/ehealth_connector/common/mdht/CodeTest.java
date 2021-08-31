@@ -16,13 +16,13 @@
  */
 package org.ehealth_connector.common.mdht;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.ehealth_connector.common.enums.CodeSystems;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test of class Code
@@ -34,7 +34,7 @@ public class CodeTest {
 	 *
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 	}
 
@@ -43,7 +43,7 @@ public class CodeTest {
 	 * {@link org.ehealth_connector.common.mdht.Code#Code(java.lang.String, java.lang.String)}
 	 * .
 	 */
-	@Ignore
+	@Disabled
 	@Test
 	public void testCodeStringString() {
 		fail("Not yet implemented");
@@ -54,7 +54,7 @@ public class CodeTest {
 	 * {@link org.ehealth_connector.common.mdht.Code#Code(java.lang.String, java.lang.String, java.lang.String)}
 	 * .
 	 */
-	@Ignore
+	@Disabled
 	@Test
 	public void testCodeStringStringString() {
 		fail("Not yet implemented");
@@ -65,7 +65,7 @@ public class CodeTest {
 	 * {@link org.ehealth_connector.common.mdht.Code#Code(java.lang.String, java.lang.String, java.lang.String, java.lang.String)}
 	 * .
 	 */
-	@Ignore
+	@Disabled
 	@Test
 	public void testCodeStringStringStringString() {
 		fail("Not yet implemented");
@@ -90,7 +90,7 @@ public class CodeTest {
 	 * {@link org.ehealth_connector.common.mdht.Code#setCD(org.openhealthtools.mdht.uml.hl7.datatypes.CD)}
 	 * .
 	 */
-	@Ignore
+	@Disabled
 	@Test
 	public void testSetCD() {
 		fail("Not yet implemented");
@@ -100,7 +100,7 @@ public class CodeTest {
 	 * Test method for
 	 * {@link org.ehealth_connector.common.mdht.Code#setCode(java.lang.String)}.
 	 */
-	@Ignore
+	@Disabled
 	@Test
 	public void testSetCode() {
 		fail("Not yet implemented");
@@ -111,7 +111,7 @@ public class CodeTest {
 	 * {@link org.ehealth_connector.common.mdht.Code#setCodeSystem(java.lang.String)}
 	 * .
 	 */
-	@Ignore
+	@Disabled
 	@Test
 	public void testSetCodeSystem() {
 		fail("Not yet implemented");
@@ -122,7 +122,7 @@ public class CodeTest {
 	 * {@link org.ehealth_connector.common.mdht.Code#setCodeSystemName(java.lang.String)}
 	 * .
 	 */
-	@Ignore
+	@Disabled
 	@Test
 	public void testSetCodeSystemName() {
 		fail("Not yet implemented");
@@ -133,7 +133,7 @@ public class CodeTest {
 	 * {@link org.ehealth_connector.common.mdht.Code#setNullFlavor(org.ehealth_connector.common.mdht.enums.NullFlavor)}
 	 * .
 	 */
-	@Ignore
+	@Disabled
 	@Test
 	public void testSetNullFlavor() {
 		fail("Not yet implemented");

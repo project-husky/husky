@@ -16,10 +16,10 @@
  */
 package org.ehealth_connector.cda.ch.lab.lrph;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.xml.xpath.XPathExpressionException;
 
@@ -29,7 +29,7 @@ import org.ehealth_connector.common.mdht.Participant;
 import org.ehealth_connector.common.mdht.ParticipantRole;
 import org.ehealth_connector.common.mdht.PlayingEntity;
 import org.ehealth_connector.common.mdht.Specimen;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 
 public class LaboratoryIsolateOrganizerTest extends TestUtils {

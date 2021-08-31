@@ -27,7 +27,7 @@ import org.ehealth_connector.common.mdht.Address;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Name;
 import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
-import org.ehealth_connector.communication.mpi.impl.V3PdqQuery;
+import org.ehealth_connector.communication.mpi.impl.pdq.V3PdqQuery;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.v3.V3Package;

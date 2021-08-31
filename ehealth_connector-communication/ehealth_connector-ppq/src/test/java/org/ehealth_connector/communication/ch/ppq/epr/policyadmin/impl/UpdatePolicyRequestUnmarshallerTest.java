@@ -16,13 +16,13 @@
  */
 package org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.OpenSamlUpdatePolicyRequest;
 import org.ehealth_connector.communication.ch.ppq.utilities.impl.InitializerTestHelper;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.opensaml.core.xml.io.MarshallingException;
@@ -35,7 +35,7 @@ public class UpdatePolicyRequestUnmarshallerTest extends InitializerTestHelper {
 
 	private Element testXmlElement;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testXmlElement = loadXmlDokument("/ch-ppq/update_policy_request.xml");
 	}
