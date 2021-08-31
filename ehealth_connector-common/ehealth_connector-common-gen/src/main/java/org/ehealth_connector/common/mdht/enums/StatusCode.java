@@ -16,9 +16,8 @@
  */
 package org.ehealth_connector.common.mdht.enums;
 
-import org.ehealth_connector.common.mdht.Code;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.hl7cdar2.CS;
 
 /*
 *<div class="de">Die Codes beschreiben die möglichen Zustände einer Aktion</div>
@@ -179,7 +178,7 @@ public enum StatusCode {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(code, CODE_SYSTEM_OID, displayName);
 		return ehcCode;
 	}
 
@@ -220,7 +219,7 @@ public enum StatusCode {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CS getCS() {
-		final CS cs = DatatypesFactory.eINSTANCE.createCS();
+		final CS cs = new CS();
 		cs.setCode(code);
 		return cs;
 	}

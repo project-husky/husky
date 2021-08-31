@@ -22,6 +22,7 @@ import java.util.List;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.enums.NullFlavor;
 import org.ehealth_connector.common.hl7cdar2.II;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Identifiable;
 
 /**
  * <div class="en">The class Identificator contains all necessary fields for an
@@ -187,6 +188,15 @@ public class Identificator extends IdentificatorBaseType {
 	public Identificator(String root, String extension) {
 		super.setRoot(root);
 		super.setExtension(extension);
+	}
+
+	public Identificator(Identifiable id) {
+		if (id != null) {
+			super.setExtension(id.getId());
+			if (id.getAssigningAuthority() != null) {
+				super.setRoot(id.getAssigningAuthority().getUniversalId());
+			}
+		}
 	}
 
 	/**

@@ -23,32 +23,25 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Patient;
+import org.ehealth_connector.common.basetypes.AddressBaseType;
+import org.ehealth_connector.common.basetypes.OrganizationBaseType;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
-import org.ehealth_connector.common.mdht.Address;
-import org.ehealth_connector.common.mdht.Organization;
-import org.ehealth_connector.common.mdht.Telecoms;
 import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
-import org.ehealth_connector.common.mdht.enums.CodedMetadataEnumInterface;
-import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssigningAuthority;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Identifiable;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.LocalizedString;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.PatientInfo;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Person;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Telecom;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.XpnName;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.query.QueryList;
-import org.openhealthtools.ihe.common.hl7v2.CX;
-import org.openhealthtools.ihe.common.hl7v2.Hl7v2Factory;
-import org.openhealthtools.ihe.common.hl7v2.XAD;
-import org.openhealthtools.ihe.common.hl7v2.XON;
-import org.openhealthtools.ihe.common.hl7v2.XTN;
-import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
-import org.openhealthtools.mdht.uml.cda.Person;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
-import org.openhealthtools.mdht.uml.hl7.datatypes.II;
 
 /**
  * <div class="de">Class XdsUtil provides helper methods for the IHE XDS
@@ -64,41 +57,39 @@ public class XdsMetadataUtil {
 
 	public static final String DTM_FMT_YMDHMS = "yyyyMMddHHmmss";
 
-	public static final String[] DTM_FMT = { DTM_FMT_YMDHMS, DTM_FMT_YMDHM, DTM_FMT_YMDH,
-			DTM_FMT_YMD, DTM_FMT_YM, DTM_FMT_Y };
+	public static final String[] DTM_FMT = { DTM_FMT_YMDHMS, DTM_FMT_YMDHM, DTM_FMT_YMDH, DTM_FMT_YMD, DTM_FMT_YM,
+			DTM_FMT_Y };
 
 	/**
-	 * <div class="en">Method to convert a Date object to an DTM formatted
-	 * string using the format yyyyMMddHHmmss.
+	 * <div class="en">Method to convert a Date object to an DTM formatted string
+	 * using the format yyyyMMddHHmmss.
 	 *
-	 * @param dateTime
-	 *            the date to be formatted to a string
+	 * @param dateTime the date to be formatted to a string
 	 * @return the string representing the date object</div>
 	 */
 	public static String convertDateToDtmString(Date dateTime) {
 		String retVal = null;
 		if (dateTime != null) {
-			final SimpleDateFormat sdf = new SimpleDateFormat(DTM_FMT_YMDHMS);
+			final var sdf = new SimpleDateFormat(DTM_FMT_YMDHMS);
 			retVal = sdf.format(dateTime);
 		}
 		return retVal;
 	}
 
 	/**
-	 * <div class="en">Method to convert the DTM string to a Date object. The
-	 * String will be parsed using the formats int the following definition and
-	 * order: yyyyMMddHHmmss yyyyMMddHHmm yyyyMMddHH yyyyMMdd yyyyMM yyyy";
+	 * <div class="en">Method to convert the DTM string to a Date object. The String
+	 * will be parsed using the formats int the following definition and order:
+	 * yyyyMMddHHmmss yyyyMMddHHmm yyyyMMddHH yyyyMMdd yyyyMM yyyy";
 	 *
-	 * @param dateTimeString
-	 *            the string with DTM format
+	 * @param dateTimeString the string with DTM format
 	 * @return the representing Date object </div>
 	 */
 	public static Date convertDtmStringToDate(String dateTimeString) {
 		Date retVal = null;
 		if ((dateTimeString != null) && !"".equals(dateTimeString)) {
-			final SimpleDateFormat sdf = new SimpleDateFormat();
+			final var sdf = new SimpleDateFormat();
 
-			int count = 0;
+			var count = 0;
 			while ((retVal == null) && (count < DTM_FMT.length)) {
 				sdf.applyPattern(DTM_FMT[count]);
 				try {
@@ -113,27 +104,24 @@ public class XdsMetadataUtil {
 	}
 
 	/**
-	 * <div class="en">Converts eHC Code to OHT CodedMetadataType.</div>
+	 * <div class="en">Converts eHC Code to IPF Code.</div>
 	 *
-	 * @param code
-	 *            <br>
-	 *            <div class="en"> the code</div>
-	 * @return the coded metadata type
+	 * @param code <br>
+	 *             <div class="en"> the code</div>
+	 * @return the code
 	 */
 	public static org.openehealth.ipf.commons.ihe.xds.core.metadata.Code convertEhcCodeToCode(Code code) {
 		return createCodedMetadata(code.getCodeSystem(), code.getCode(), code.getDisplayName());
 	}
 
 	/**
-	 * Converts eHC Code and a given language to OHT CodedMetadataType.
+	 * Converts eHC Code and a given language to IPF Code.
 	 *
-	 * @param code
-	 *            the code
-	 * @param language
-	 *            the language
-	 * @return the coded metadata type
+	 * @param code     the code
+	 * @param language the language
+	 * @return the code
 	 */
-	public static org.openehealth.ipf.commons.ihe.xds.core.metadata.Code convertEhcCodeToCodedMetadataType(Code code,
+	public static org.openehealth.ipf.commons.ihe.xds.core.metadata.Code convertEhcCodeToIpfCode(Code code,
 			String language) {
 		var retVal = createCodedMetadata(code.getCodeSystem(), code.getCode(), code.getDisplayName());
 		retVal.getDisplayName().setLang(language);
@@ -141,16 +129,14 @@ public class XdsMetadataUtil {
 	}
 
 	/**
-	 * Converts a list of eHC Code to a list of OHT CodedMetadataType.
+	 * Converts a list of eHC Code to a list of IPF Code.
 	 *
-	 * @param codeList
-	 *            the list of Code
-	 * @return the CodedMetadataType Array
+	 * @param codeList the list of Code
+	 * @return the list of IPF Code
 	 */
-	public static List<org.openehealth.ipf.commons.ihe.xds.core.metadata.Code> convertEhcCodeToCode(
-			Code[] codeList) {
+	public static List<org.openehealth.ipf.commons.ihe.xds.core.metadata.Code> convertEhcCodeToCode(Code[] codeList) {
 		if (codeList == null)
-			return null;
+			return new LinkedList<>();
 		else {
 			final List<org.openehealth.ipf.commons.ihe.xds.core.metadata.Code> cmtArray = new LinkedList<>();
 
@@ -163,10 +149,10 @@ public class XdsMetadataUtil {
 	}
 
 	/**
-	 * Converts a list of eHC Code to a list of OHT CodedMetadataType.
+	 * Converts a list of eHC Code to a list of IPF Code.
 	 *
 	 * @param codeList the list of Code
-	 * @return the CodedMetadataType Array
+	 * @return the list of IPF Code
 	 */
 	public static QueryList<org.openehealth.ipf.commons.ihe.xds.core.metadata.Code> convertEhcCodeToQueryListCode(
 			Code[] codeList) {
@@ -177,31 +163,6 @@ public class XdsMetadataUtil {
 
 			for (final Code cme : codeList) {
 				cmtArray.getOuterList().add(List.of(XdsMetadataUtil.convertEhcCodeToCode(cme)));
-			}
-
-			return cmtArray;
-		}
-	}
-
-	/**
-	 * Converts a list of eHC Enums to a given language to a list of OHT
-	 * CodedMetadataType.
-	 *
-	 * @param codedMetadataEnum
-	 *            the eHC Enums
-	 * @return the CodedMetadataType array
-	 */
-	public static CodedMetadataType[] convertEhcEnumToCodedMetadataType(
-			CodedMetadataEnumInterface[] codedMetadataEnum) {
-		if (codedMetadataEnum == null)
-			return null;
-		else {
-			final CodedMetadataType[] cmtArray = new CodedMetadataType[codedMetadataEnum.length];
-
-			int i = 0;
-			for (final CodedMetadataEnumInterface cme : codedMetadataEnum) {
-				cmtArray[i] = cme.getCodedMetadataType();
-				i++;
 			}
 
 			return cmtArray;
@@ -225,8 +186,7 @@ public class XdsMetadataUtil {
 	/**
 	 * Converts an OHT InternationalStringType to String
 	 *
-	 * @param ist
-	 *            the InternationalStringType
+	 * @param ist the InternationalStringType
 	 * @return the String
 	 */
 	public static String convertInternationalStringType(LocalizedString ist) {
@@ -237,61 +197,93 @@ public class XdsMetadataUtil {
 	}
 
 	/**
-	 * Converts an OHT AuthorType to eHC Author
+	 * Converts an IPF Author to eHC Author
 	 *
-	 * @param at
-	 *            the OHT AuthorType
+	 * @param at the IPF Author
 	 * @return the eHC Author
 	 */
-	public static org.openehealth.ipf.commons.ihe.xds.core.metadata.Author convertOhtAuthorType(Author at) {
-		final var a = new org.openehealth.ipf.commons.ihe.xds.core.metadata.Author();
+	public static Author convertIpfAuthor(org.openehealth.ipf.commons.ihe.xds.core.metadata.Author at) {
+		final var a = new Author();
 
 		// Author Person
 		Person ap = null;
 		if (at != null) {
-			if (at.getPerson() != null) {
-				ap = at.getPerson();
+			if (at.getAuthorPerson() != null) {
+				ap = at.getAuthorPerson();
 				// Id
-				a.addId(convertOhtXcnIdToEhc(ap.getAssigningAuthorityUniversalId(),
-						ap.getIdNumber()));
+				a.addId(convertIpfIdentifiableToEhc(ap.getId()));
 				// Name
-				final Name name = new Name(ap.getGivenName(), ap.getFamilyName(), ap.getPrefix(),
-						ap.getSuffix());
-				a.addName(name);
+				a.addName(new Name(ap.getName()));
 			}
-		}
-		// Institution
-		XON xon = null;
-		if (Util.atLeastOne(at.getAuthorInstitution())) {
-			for (int i = 0; i < at.getAuthorInstitution().size(); i++) {
-				xon = (XON) at.getAuthorInstitution().get(i);
-				final Organization org = new Organization(xon.getOrganizationName());
-				org.addId(convertOhtXcnIdToEhc(xon.getAssigningAuthorityUniversalId(),
-						xon.getIdNumber()));
+
+			// Institution
+			org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization xon = null;
+			if (Util.atLeastOne(at.getAuthorInstitution())) {
+				for (var i = 0; i < at.getAuthorInstitution().size(); i++) {
+					xon = at.getAuthorInstitution().get(i);
+					final var org = new OrganizationBaseType();
+					org.addIdentificator(
+							convertOhtXcnIdToEhc(xon.getAssigningAuthority().getUniversalId(), xon.getIdNumber()));
+					org.addName(new Name(xon.getOrganizationName()));
+					a.setOrganization(new Organization(org));
+				}
 			}
-		}
-		// Role
-		String role = null;
-		if (Util.atLeastOne(at.getAuthorRole())) {
-			role = (String) at.getAuthorRole().get(0);
-			a.setRoleFunction(new Code("", role));
-		}
-		// Speciality
-		CE speciality = null;
-		if (Util.atLeastOne(at.getAuthorSpeciality())) {
-			speciality = (CE) at.getAuthorSpeciality().get(0);
-			a.setSpeciality(new Code(speciality));
-		}
-		// Telecoms
-		XTN xtn = null;
-		final Telecoms t = new Telecoms();
-		if (Util.atLeastOne(at.getAuthorTelecommunication())) {
-			for (int i = 0; i < at.getAuthorTelecommunication().size(); i++) {
-				xtn = (XTN) at.getAuthorTelecommunication().get(i);
-				if ((xtn.getTelecommunicationAddress() != null)
-						&& (xtn.getTelecommunicationType() != null))
-					t.add(xtn.getTelecommunicationType(), xtn.getTelecommunicationAddress(),
-							TelecomAddressUse.PRIVATE);
+
+			// Role
+			Code role = null;
+			if (Util.atLeastOne(at.getAuthorRole())) {
+				if (at.getAuthorRole().get(0) != null) {
+					role = new Code();
+					role.setCode(at.getAuthorRole().get(0).getId());
+					role.setCodeSystem(at.getAuthorRole().get(0).getAssigningAuthority().getUniversalId());
+				}
+
+				a.setRoleFunction(role);
+			}
+
+			// Speciality
+			Code speciality = null;
+			if (Util.atLeastOne(at.getAuthorSpecialty())) {
+				if (at.getAuthorSpecialty().get(0) != null) {
+					speciality = new Code();
+					speciality.setCode(at.getAuthorSpecialty().get(0).getId());
+					speciality.setCodeSystem(at.getAuthorSpecialty().get(0).getAssigningAuthority().getUniversalId());
+				}
+
+				a.setSpeciality(speciality);
+			}
+
+			// Telecoms
+			Telecom xtn = null;
+			final List<org.ehealth_connector.common.Telecom> t = new LinkedList<>();
+			if (Util.atLeastOne(at.getAuthorTelecom())) {
+				for (var i = 0; i < at.getAuthorTelecom().size(); i++) {
+					xtn = at.getAuthorTelecom().get(i);
+					if (xtn.getType() != null) {
+						var telecom = new org.ehealth_connector.common.Telecom();
+
+						var number = "";
+						if (xtn.getUnformattedPhoneNumber() != null && !xtn.getUnformattedPhoneNumber().isEmpty()) {
+							number = xtn.getUnformattedPhoneNumber();
+						} else {
+							number = String.format("%d%d%d%d", xtn.getCountryCode(), xtn.getAreaCityCode(),
+									xtn.getLocalNumber(), xtn.getExtension());
+						}
+
+						if ("FX".equalsIgnoreCase(xtn.getType())) {
+							telecom.setFax(number);
+						} else if ("PH".equalsIgnoreCase(xtn.getType())) {
+							telecom.setPhone(number);
+						} else {
+							telecom.setMail(xtn.getEmail());
+						}
+
+						telecom.setUsage(TelecomAddressUse.valueOf(xtn.getUse()));
+						t.add(telecom);
+					}
+				}
+
+				a.setTelecoms(t);
 			}
 		}
 
@@ -299,10 +291,72 @@ public class XdsMetadataUtil {
 	}
 
 	/**
-	 * Converts an OHT CodedMetadataType to eHC Code
+	 * Converts an eHC Author to IPF Author
 	 *
-	 * @param cmt
-	 *            the CodedMetadataType
+	 * @param at the eHC Author
+	 * @return the IPF Author
+	 */
+	public static org.openehealth.ipf.commons.ihe.xds.core.metadata.Author converteHCAuthor(Author at) {
+		final var a = new org.openehealth.ipf.commons.ihe.xds.core.metadata.Author();
+
+		// Author Person
+		var ap = new Person();
+		if (at != null) {
+			if (at.getName() != null) {
+				ap.setName(new XpnName(at.getName().getFamily(), at.getName().getGiven(), null,
+						at.getName().getSuffix(), at.getName().getPrefix(), null));
+			}
+
+			if (at.getIds() != null && !at.getIds().isEmpty() && at.getIds().get(0) != null) {
+				ap.setId(convertEhcIdentificator(at.getIds().get(0)));
+			}
+
+			a.setAuthorPerson(ap);
+
+			// Institution
+			Organization xon = null;
+			if (at.getOrganization() != null) {
+				xon = at.getOrganization();
+				final var org = new org.openehealth.ipf.commons.ihe.xds.core.metadata.Organization();
+
+				if (xon.getPrimaryName() != null) {
+					org.setOrganizationName(xon.getPrimaryName().getFullName());
+				}
+
+				if (xon.getPrimaryIdentificator() != null) {
+					org.setIdNumber(xon.getPrimaryIdentificator().getExtension());
+					var assigningAuthority = new AssigningAuthority();
+					assigningAuthority.setUniversalId(xon.getPrimaryIdentificator().getExtension());
+					org.setAssigningAuthority(assigningAuthority);
+				}
+
+					a.getAuthorInstitution().add(org);
+			}
+
+			// Role
+			Identifiable role = null;
+			if (at.getRoleFunction() != null) {
+				role = new Identifiable(at.getRoleFunction().getCode(),
+						new AssigningAuthority(at.getRoleFunction().getCodeSystem()));
+				a.getAuthorRole().add(role);
+			}
+
+			// Speciality
+			Identifiable speciality = null;
+			if (at.getSpeciality() != null) {
+				speciality = new Identifiable(at.getSpeciality().getCode(),
+						new AssigningAuthority(at.getSpeciality().getCodeSystem()));
+				a.getAuthorSpecialty().add(speciality);
+			}
+		}
+
+		return a;
+	}
+
+	/**
+	 * Converts an IPF Code to eHC Code
+	 *
+	 * @param cmt the Code
 	 * @return the eHC Code
 	 */
 	public static Code convertOhtCodedMetadataType(org.openehealth.ipf.commons.ihe.xds.core.metadata.Code cmt) {
@@ -314,10 +368,9 @@ public class XdsMetadataUtil {
 	}
 
 	/**
-	 * Converts an OHT CX to an eHC Identificator
+	 * Converts an IPF Identifiable to an eHC Identificator
 	 *
-	 * @param cx
-	 *            the OHT CX
+	 * @param cx the IPF Identifiable
 	 * @return the Identificator
 	 */
 	public static Identificator convertOhtCx(Identifiable cx) {
@@ -328,14 +381,13 @@ public class XdsMetadataUtil {
 	}
 
 	/**
-	 * Converts an OHT SourcePatientInfoType to an eHC Patient
+	 * Converts an IPF PatientInfo to an eHC Patient
 	 *
-	 * @param spit
-	 *            the SourcePatientInfoType
+	 * @param spit the IPF PatientInfo
 	 * @return the eHC Patient
 	 */
 	public static Patient convertOhtSourcePatientInfoType(PatientInfo spit) {
-		final Patient p = new Patient();
+		final var p = new Patient();
 
 		// Name
 		if (spit.getNames().hasNext()) {
@@ -346,7 +398,7 @@ public class XdsMetadataUtil {
 		}
 		// Date of birth
 		if (spit.getDateOfBirth() != null) {
-			p.setBirthday(DateUtil.parseDateyyyyMMdd(spit.getDateOfBirth().getDateTime()));
+			p.setBirthday(spit.getDateOfBirth().getDateTime());
 		}
 		// Gender
 		if (spit.getGender() != null) {
@@ -354,75 +406,82 @@ public class XdsMetadataUtil {
 		}
 		// Address
 		if (spit.getAddresses() != null) {
-			p.addAddress(XdsMetadataUtil.convertOhtXad(spit.getAddresses()));
+			while (spit.getAddresses().hasNext()) {
+				p.addAddress(XdsMetadataUtil.convertOhtXad(spit.getAddresses().next()));
+			}
+
 		}
 		// ID
-		if (Util.atLeastOne(spit.getPatientIdentifier())) {
-			for (int i = 0; i < spit.getPatientIdentifier().size(); i++) {
-				final CX cx = (CX) spit.getPatientIdentifier().get(i);
+		if (spit.getIds() != null) {
+			while (spit.getIds().hasNext()) {
+				final Identifiable cx = spit.getIds().next();
 				p.addId(XdsMetadataUtil.convertOhtCx(cx));
 			}
+
 		}
-		// Phone Business
-		final Telecoms t = new Telecoms();
-		if (spit.getPatientPhoneBusiness() != null) {
-			t.add(spit.getPatientPhoneBusiness().getTelecommunicationType(),
-					spit.getPatientPhoneBusiness().getTelecommunicationAddress(),
-					TelecomAddressUse.BUSINESS);
-		}
-		// Phone Home
-		if (spit.getPatientPhoneHome() != null) {
-			t.add(spit.getPatientPhoneHome().getTelecommunicationType(),
-					spit.getPatientPhoneHome().getTelecommunicationAddress(),
-					TelecomAddressUse.PRIVATE);
-		}
-		p.setTelecoms(t);
 
 		return p;
 	}
 
 	/**
-	 * Converts an OHT XAD to an eHC Address
+	 * Converts an IPF Address to an eHC Address
 	 *
-	 * @param xad
-	 *            the XAD
+	 * @param xad the IPF address
 	 * @return the Address
 	 */
-	public static Address convertOhtXad(XAD xad) {
+	public static Address convertOhtXad(org.openehealth.ipf.commons.ihe.xds.core.metadata.Address xad) {
 		if (xad == null)
 			return null;
 		else {
-			final Address address = new Address();
+			final var address = new Address(new AddressBaseType());
 			if ((xad.getStreetAddress() != null) && !xad.getStreetAddress().equals("")) {
-				address.setAddressline1(xad.getStreetAddress());
+				address.setStreetAddressLine1(xad.getStreetAddress());
 			}
 			if (xad.getZipOrPostalCode() != null) {
-				address.setZip(xad.getZipOrPostalCode());
+				address.setPostalCode(xad.getZipOrPostalCode());
 			}
-			address.setUsage(PostalAddressUse.PRIVATE);
+
+			if (xad.getCity() != null) {
+				address.setCity(xad.getCity());
+			}
+
+			if (xad.getCountry() != null) {
+				address.setCountry(xad.getCountry());
+			}
+
+			if (xad.getStateOrProvince() != null) {
+				address.setState(xad.getStateOrProvince());
+			}
+
 			return address;
 		}
 	}
 
 	/**
-	 * Converts the parts of an OHC XCN to an eHC Identificator
+	 * Converts the parts of an XCN to an eHC Identificator
 	 *
-	 * @param assigningAuthorityUniversalId
-	 *            the assigningAuthorityUniversalId
-	 * @param id
-	 *            the ID part
+	 * @param assigningAuthorityUniversalId the assigningAuthorityUniversalId
+	 * @param id                            the ID part
 	 * @return the Identificator
 	 */
-	public static Identificator convertOhtXcnIdToEhc(String assigningAuthorityUniversalId,
-			String id) {
+	public static Identificator convertOhtXcnIdToEhc(String assigningAuthorityUniversalId, String id) {
 		return new Identificator(assigningAuthorityUniversalId, id);
 	}
 
 	/**
-	 * Converts an OHT XPN (Name) to an eHC Name
+	 * Converts IPF Identifiable to an eHC Identificator
 	 *
-	 * @param xpn
-	 *            the OHT XPN
+	 * @param id the Identifiable
+	 * @return the Identificator
+	 */
+	public static Identificator convertIpfIdentifiableToEhc(Identifiable id) {
+		return new Identificator(id);
+	}
+
+	/**
+	 * Converts an IPF XPN (Name) to an eHC Name
+	 *
+	 * @param xpn the IPF Name
 	 * @return the OHT Name
 	 */
 	public static Name convertOhtXpn(org.openehealth.ipf.commons.ihe.xds.core.metadata.Name<?> xpn) {
@@ -435,25 +494,20 @@ public class XdsMetadataUtil {
 	}
 
 	/**
-	 * <div class="en">Creates the OHT coded metadata.</div>
+	 * <div class="en">Creates the IPF code.</div>
 	 *
-	 * @param schemeName
-	 *            <br>
-	 *            <div class="en"> scheme name</div>
-	 * @param code
-	 *            <br>
-	 *            <div class="en"> code</div>
-	 * @param displayName
-	 *            <br>
-	 *            <div class="en"> display name</div>
-	 * @param schemeUuid
-	 *            <br>
-	 *            <div class="en"> scheme uuid</div>
-	 * @return the coded metadata type
+	 * @param schemeName  <br>
+	 *                    <div class="en"> scheme name</div>
+	 * @param code        <br>
+	 *                    <div class="en"> code</div>
+	 * @param displayName <br>
+	 *                    <div class="en"> display name</div>
+	 * @param schemeUuid  <br>
+	 *                    <div class="en"> scheme uuid</div>
+	 * @return the code
 	 */
 	public static org.openehealth.ipf.commons.ihe.xds.core.metadata.Code createCodedMetadata(String schemeName,
-			String code,
-			String displayName) {
+			String code, String displayName) {
 		var cmt = new org.openehealth.ipf.commons.ihe.xds.core.metadata.Code();
 
 		cmt.setCode(code);
@@ -471,26 +525,20 @@ public class XdsMetadataUtil {
 	/**
 	 * <div class="en">Creates the OHT coded metadata.</div>
 	 *
-	 * @param schemeName
-	 *            <br>
-	 *            <div class="en"> scheme name</div>
-	 * @param code
-	 *            <br>
-	 *            <div class="en"> code</div>
-	 * @param displayName
-	 *            <br>
-	 *            <div class="en"> display name</div>
-	 * @param schemeUuid
-	 *            <br>
-	 *            <div class="en"> scheme uuid</div>
-	 * @param language
-	 *            <br>
-	 *            language
+	 * @param schemeName  <br>
+	 *                    <div class="en"> scheme name</div>
+	 * @param code        <br>
+	 *                    <div class="en"> code</div>
+	 * @param displayName <br>
+	 *                    <div class="en"> display name</div>
+	 * @param schemeUuid  <br>
+	 *                    <div class="en"> scheme uuid</div>
+	 * @param language    <br>
+	 *                    language
 	 * @return the coded metadata type
 	 */
 	public static org.openehealth.ipf.commons.ihe.xds.core.metadata.Code createCodedMetadata(String schemeName,
-			String code,
-			String displayName, String language) {
+			String code, String displayName, String language) {
 		final var cmt = new org.openehealth.ipf.commons.ihe.xds.core.metadata.Code();
 
 		cmt.setCode(code);
@@ -505,70 +553,28 @@ public class XdsMetadataUtil {
 	}
 
 	/**
-	 * <div class="en">Creates the OHT CX.</div>
+	 * <div class="en">Creates the IPF LocalizedString.</div>
 	 *
-	 * @param ii
-	 *            <br>
-	 *            <div class="en">the II value</div>
-	 * @return the cx
+	 * @param text <br>
+	 *             <div class="en"> text</div>
+	 * @return the org.openehealth.ipf.commons.ihe.xds.core.metadata.LocalizedString
 	 */
-	public static CX createCx(II ii) {
-		final CX cx = Hl7v2Factory.eINSTANCE.createCX();
-		cx.setAssigningAuthorityUniversalId(ii.getRoot());
-		cx.setIdNumber(ii.getExtension());
-		cx.setAssigningAuthorityName(ii.getAssigningAuthorityName());
-		cx.setAssigningAuthorityUniversalIdType("ISO");
-		return cx;
-	}
-
-	/**
-	 * <div class="en">Creates the OHT CX.</div>
-	 *
-	 * @param authorityId
-	 *            <br>
-	 *            <div class="en"> authority id</div>
-	 * @param id
-	 *            <br>
-	 *            <div class="en"> id</div>
-	 * @return the cx
-	 */
-	public static CX createCx(String authorityId, String id) {
-		final CX cx = Hl7v2Factory.eINSTANCE.createCX();
-		cx.setAssigningAuthorityUniversalId(authorityId);
-		cx.setIdNumber(id);
-		cx.setAssigningAuthorityUniversalIdType("ISO");
-		return cx;
-	}
-
-	/**
-	 * <div class="en">Creates the OHT InternationalStringType.</div>
-	 *
-	 * @param text
-	 *            <br>
-	 *            <div class="en"> text</div>
-	 * @return the org.openhealthtools.ihe.xds.metadata.InternationalStringType
-	 */
-	@SuppressWarnings("unchecked")
-	public static LocalizedString createInternationalString(
-			String text) {
+	public static LocalizedString createInternationalString(String text) {
 		final var lst = new LocalizedString();
 		lst.setValue(text);
 		return lst;
 	}
 
 	/**
-	 * <div class="en">Creates the OHT InternationalStringType</div>
+	 * <div class="en">Creates the IPF LocalizedString</div>
 	 *
-	 * @param text
-	 *            <br>
-	 *            <div class="en">the text</div>
-	 * @param language
-	 *            <br>
-	 *            the language
-	 * @return the org.openhealthtools.ihe.xds.metadata.InternationalStringType
+	 * @param text     <br>
+	 *                 <div class="en">the text</div>
+	 * @param language <br>
+	 *                 the language
+	 * @return the org.openehealth.ipf.commons.ihe.xds.core.metadata.LocalizedString
 	 */
-	public static LocalizedString createInternationalString(
-			String text, String language) {
+	public static LocalizedString createInternationalString(String text, String language) {
 		final var lst = new LocalizedString();
 		lst.setValue(text);
 		lst.setLang(language);

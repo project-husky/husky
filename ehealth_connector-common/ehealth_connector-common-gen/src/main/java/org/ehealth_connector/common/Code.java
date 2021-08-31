@@ -318,6 +318,33 @@ public class Code extends CodeBaseType {
 	}
 
 	/**
+	 * <div class="en">Instantiates a new instance from the given information.<div>
+	 *
+	 * <div class="de">Instanziiert eine neue Instanz vom angegebenen Daten.<div>
+	 *
+	 * @param code       the code
+	 * @param codeSystem the code System
+	 * @param display    the display name
+	 */
+	public Code(String code, String codeSystem, String display) {
+		setCode(code);
+		setCodeSystem(codeSystem);
+		setDisplayName(display);
+	}
+
+	/**
+	 * <div class="en">Instantiates a new instance from the given null flavor.<div>
+	 *
+	 * <div class="de">Instanziiert eine neue Instanz vom angegebenen Null
+	 * Flavor.<div>
+	 *
+	 * @param nf the null flavor
+	 */
+	public Code(NullFlavor nf) {
+		setNullFlavor(nf);
+	}
+
+	/**
 	 * <div class="en">Instantiates a new instance from the given HL7 CDA R2
 	 * data type.<div>
 	 *

@@ -17,9 +17,8 @@
 package org.ehealth_connector.common.mdht.enums;
 
 import org.apache.commons.lang3.EnumUtils;
-import org.ehealth_connector.common.mdht.Code;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.hl7cdar2.CS;
 
 /**
  * ISO 3166-1 alpha-3 Country Code
@@ -122,8 +121,7 @@ public enum CountryCode {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		final Code ehcCode = new Code(CODE_SYSTEM_OID, codeAlpha3, displayName);
-		return ehcCode;
+		return new Code(codeAlpha3, CODE_SYSTEM_OID, displayName);
 	}
 
 	/**
@@ -171,7 +169,7 @@ public enum CountryCode {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CS getCS() {
-		final CS cs = DatatypesFactory.eINSTANCE.createCS();
+		final var cs = new CS();
 		cs.setCode(codeAlpha3);
 		return cs;
 	}

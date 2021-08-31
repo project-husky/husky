@@ -18,6 +18,8 @@ package org.ehealth_connector.common.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -259,6 +261,27 @@ public class DateUtil {
 	}
 
 	/**
+	 * <div class="en">Converts the given date without day of time to a CDA R2 TS
+	 * (without time zone).</div>
+	 *
+	 * <div class="de">Konvertiert das angegebene Datum ohne Tageszeit in ein CDA R2
+	 * TS (ohne Zeitzone).</div>
+	 *
+	 * @param value the value
+	 * @return the ts
+	 */
+	public static TS date2TsDateOnly(ZonedDateTime value) {
+		if (value == null) {
+			return createIvltsUnknown(null);
+		} else {
+			ObjectFactory factory = new ObjectFactory();
+			final TS ts = factory.createTS();
+			ts.setValue(formatDateOnly(value));
+			return ts;
+		}
+	}
+
+	/**
 	 * <div class="en">Converts the given date including day of time to a CDA R2
 	 * TS (including time zone).</div>
 	 *
@@ -296,6 +319,19 @@ public class DateUtil {
 	}
 
 	/**
+	 * <div class="en">Formats the given timestamp as String: yyyyMMdd</div>
+	 *
+	 * <div class="de">Formatiert den angegebenen Zeitstempel als String:
+	 * yyyyMMdd</div>
+	 *
+	 * @param value the value
+	 * @return the string
+	 */
+	public static String formatDateOnly(ZonedDateTime value) {
+		return value.format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+	}
+
+	/**
 	 * <div class="en">Formats the given timestamp as String:
 	 * yyyyMMddHHmmss</div>
 	 *
@@ -312,6 +348,19 @@ public class DateUtil {
 	}
 
 	/**
+	 * <div class="en">Formats the given timestamp as String: yyyyMMddHHmmss</div>
+	 *
+	 * <div class="de">Formatiert den angegebenen Zeitstempel als String:
+	 * yyyyMMddHHmmss</div>
+	 *
+	 * @param value the value
+	 * @return the string
+	 */
+	public static String formatDateTime(ZonedDateTime value) {
+		return value.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+	}
+
+	/**
 	 * <div class="en">Formats the given timestamp as String:
 	 * yyyyMMddHHmmssZ</div>
 	 *
@@ -325,6 +374,19 @@ public class DateUtil {
 	public static String formatDateTimeTzon(Date value) {
 		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssZ");
 		return sdf.format(value);
+	}
+
+	/**
+	 * <div class="en">Formats the given timestamp as String: yyyyMMddHHmmssZ</div>
+	 *
+	 * <div class="de">Formatiert den angegebenen Zeitstempel als String:
+	 * yyyyMMddHHmmssZ</div>
+	 *
+	 * @param value the value
+	 * @return the string
+	 */
+	public static String formatDateTimeTzon(ZonedDateTime value) {
+		return value.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssXXXX"));
 	}
 
 	/**

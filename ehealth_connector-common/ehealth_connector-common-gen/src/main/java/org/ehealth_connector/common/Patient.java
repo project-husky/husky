@@ -19,12 +19,14 @@ package org.ehealth_connector.common;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
 import org.ehealth_connector.common.hl7cdar2.AD;
+import org.ehealth_connector.common.hl7cdar2.CE;
 import org.ehealth_connector.common.hl7cdar2.II;
 import org.ehealth_connector.common.hl7cdar2.PN;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Patient;
@@ -137,11 +139,7 @@ public class Patient extends Person {
 
 		// Create and fill birth date
 		if (birthDay != null) {
-			try {
 				mPatient.setBirthTime(DateUtil.date2TsDateOnly(birthDay));
-			} catch (final ParseException e) {
-				e.printStackTrace();
-			}
 		}
 	}
 
@@ -215,7 +213,7 @@ public class Patient extends Person {
 	 *            Identificator
 	 */
 	public void addId(Identificator identificator) {
-		final II id = new II();
+		final var id = new II();
 		id.setRoot(identificator.getRoot());
 		id.setExtension(identificator.getExtension());
 		mPatientRole.getId().add(id);
@@ -301,12 +299,10 @@ public class Patient extends Person {
 	 */
 	@Override
 	public String getCompleteName() {
-		String retVal = "";
-		if (mPatient.getName() != null) {
-			if (mPatient.getName().size() > 0) {
-				final Name name = new Name(mPatient.getName().get(0));
+		var retVal = "";
+		if (mPatient.getName() != null && !mPatient.getName().isEmpty()) {
+			final var name = new Name(mPatient.getName().get(0));
 				retVal = name.getFullName();
-			}
 		}
 		return retVal;
 	}
@@ -490,7 +486,7 @@ public class Patient extends Person {
 	}
 
 	private Date parseDate(String value) throws ParseException {
-		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		final var sdf = new SimpleDateFormat("yyyyMMdd");
 		return sdf.parse(value);
 	}
 
@@ -518,6 +514,18 @@ public class Patient extends Person {
 	 *            <div class="it"></div>
 	 */
 	public void setBirthday(Date birthDay) {
+		mPatient.setBirthTime(DateUtil.date2TsDateOnly(birthDay));
+	}
+
+	/**
+	 * <div class="en">Sets the birthday.</div> <div class="de">Setzt
+	 * birthday.</div> <div class="fr"></div> <div class="it"></div>
+	 *
+	 * @param birthDay <div class="en">the new birthday</div> <div class="de">das
+	 *                 neue birthday.</div> <div class="fr"></div>
+	 *                 <div class="it"></div>
+	 */
+	public void setBirthday(ZonedDateTime birthDay) {
 		mPatient.setBirthTime(DateUtil.date2TsDateOnly(birthDay));
 	}
 

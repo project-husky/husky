@@ -17,13 +17,17 @@
 package org.ehealth_connector.common.mdht;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.common.Address;
+import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Telecom;
+import org.ehealth_connector.common.hl7cdar2.AD;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040ParticipantRole;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040PlayingEntity;
+import org.ehealth_connector.common.hl7cdar2.TEL;
 import org.ehealth_connector.common.utils.Util;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
-import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassRoot;
 
 /**
  * The Class ParticipantRole. This element does not necessarily contain
@@ -32,13 +36,13 @@ import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassRoot;
 public class ParticipantRole {
 
 	/** The MDHT participant role object. */
-	private org.openhealthtools.mdht.uml.cda.ParticipantRole mParticipantRole;
+	private POCDMT000040ParticipantRole mParticipantRole;
 
 	/**
 	 * Instantiates a new participant role.
 	 */
 	public ParticipantRole() {
-		mParticipantRole = CDAFactory.eINSTANCE.createParticipantRole();
+		mParticipantRole = new POCDMT000040ParticipantRole();
 	}
 
 	/**
@@ -47,7 +51,7 @@ public class ParticipantRole {
 	 * @param mdht
 	 *            the mdht
 	 */
-	public ParticipantRole(org.openhealthtools.mdht.uml.cda.ParticipantRole mdht) {
+	public ParticipantRole(POCDMT000040ParticipantRole mdht) {
 		this.mParticipantRole = mdht;
 	}
 
@@ -58,7 +62,7 @@ public class ParticipantRole {
 	 *            the address
 	 */
 	public void addAddress(Address address) {
-		mParticipantRole.getAddrs().add(address.copyMdhtAdress());
+		mParticipantRole.getAddr().add(address.getHl7CdaR2Ad());
 	}
 
 	/**
@@ -68,16 +72,7 @@ public class ParticipantRole {
 	 *            the id
 	 */
 	public void addId(Identificator id) {
-		mParticipantRole.getIds().add(id.getIi());
-	}
-
-	/**
-	 * Copy.
-	 *
-	 * @return the org.openhealthtools.mdht.uml.cda. participant role
-	 */
-	public org.openhealthtools.mdht.uml.cda.ParticipantRole copy() {
-		return EcoreUtil.copy(mParticipantRole);
+		mParticipantRole.getId().add(id.getHl7CdaR2Ii());
 	}
 
 	/**
@@ -87,10 +82,9 @@ public class ParticipantRole {
 	 * @return <div class="en">the addresses</div>
 	 */
 	public List<Address> getAddresses() {
-		final List<Address> al = new ArrayList<Address>();
-		for (final AD mAddress : mParticipantRole.getAddrs()) {
-			final Address address = new Address(mAddress);
-			al.add(address);
+		final List<Address> al = new ArrayList<>();
+		for (final AD mAddress : mParticipantRole.getAddr()) {
+			al.add(new Address(mAddress));
 		}
 		return al;
 	}
@@ -100,7 +94,7 @@ public class ParticipantRole {
 	 *
 	 * @return the class code
 	 */
-	public RoleClassRoot getClassCode() {
+	public List<String> getClassCode() {
 		return mParticipantRole.getClassCode();
 	}
 
@@ -110,7 +104,7 @@ public class ParticipantRole {
 	 * @return the id list
 	 */
 	public List<Identificator> getIdList() {
-		return Util.convertIds(mParticipantRole.getIds());
+		return Util.convertIds(mParticipantRole.getId());
 	}
 
 	/**
@@ -118,7 +112,7 @@ public class ParticipantRole {
 	 *
 	 * @return the mdht
 	 */
-	public org.openhealthtools.mdht.uml.cda.ParticipantRole getMdht() {
+	public POCDMT000040ParticipantRole getMdht() {
 		return this.mParticipantRole;
 	}
 
@@ -127,8 +121,8 @@ public class ParticipantRole {
 	 *
 	 * @return the playing entity
 	 */
-	public PlayingEntity getPlayingEntity() {
-		return new PlayingEntity(mParticipantRole.getPlayingEntity());
+	public POCDMT000040PlayingEntity getPlayingEntity() {
+		return mParticipantRole.getPlayingEntity();
 	}
 
 	/**
@@ -137,8 +131,16 @@ public class ParticipantRole {
 	 *
 	 * @return Telecoms <div class="en">the telecoms</div>
 	 */
-	public Telecoms getTelecoms() {
-		return new Telecoms(mParticipantRole.getTelecoms());
+	public List<Telecom> getTelecoms() {
+		List<Telecom> telecoms = new LinkedList<>();
+
+		for (TEL tel : mParticipantRole.getTelecom()) {
+			if (tel != null) {
+				telecoms.add(new Telecom(tel));
+			}
+		}
+
+		return telecoms;
 	}
 
 	/**
@@ -147,8 +149,9 @@ public class ParticipantRole {
 	 * @param classCode
 	 *            the new class code
 	 */
-	public void setClassCode(RoleClassRoot classCode) {
-		mParticipantRole.setClassCode(classCode);
+	public void setClassCode(String classCode) {
+		mParticipantRole.getClassCode().clear();
+		mParticipantRole.getClassCode().add(classCode);
 	}
 
 	/**
@@ -158,7 +161,7 @@ public class ParticipantRole {
 	 *            the new playing entity
 	 */
 	public void setPlayingEntity(PlayingEntity playingEntity) {
-		mParticipantRole.setPlayingEntity(playingEntity.copyPlayingEntity());
+		mParticipantRole.setPlayingEntity(playingEntity.getPlayingEntity());
 	}
 
 	/**
@@ -170,7 +173,11 @@ public class ParticipantRole {
 	 *            neue telecoms.</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
-	public void setTelecoms(Telecoms telecoms) {
-		mParticipantRole.getTelecoms().addAll(EcoreUtil.copyAll(telecoms.getMdhtTelecoms()));
+	public void setTelecoms(List<Telecom> telecoms) {
+		for (Telecom telecom : telecoms) {
+			if (telecom != null) {
+				mParticipantRole.getTelecom().add(telecom.getHl7CdaR2Tel());
+			}
+		}
 	}
 }

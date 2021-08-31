@@ -16,9 +16,8 @@
  */
 package org.ehealth_connector.common.mdht.enums;
 
-import org.ehealth_connector.common.mdht.Code;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.hl7cdar2.CD;
 
 /**
  * <div class="de">Codesystem: HL7 nullFlavor Tabelle (OID:
@@ -156,7 +155,7 @@ public enum NullFlavor {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CD getCD() {
-		final CD cd = DatatypesFactory.eINSTANCE.createCD();
+		final var cd = new CD();
 		cd.setCodeSystem(CODE_SYSTEM_OID);
 		cd.setCode(code);
 		cd.setDisplayName(displayName);
@@ -170,7 +169,7 @@ public enum NullFlavor {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
+		final Code ehcCode = new Code(code, CODE_SYSTEM_OID, displayName);
 		return ehcCode;
 	}
 

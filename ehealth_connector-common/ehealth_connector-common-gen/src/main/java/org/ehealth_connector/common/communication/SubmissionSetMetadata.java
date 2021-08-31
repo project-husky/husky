@@ -19,6 +19,7 @@ package org.ehealth_connector.common.communication;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.enums.EhcVersions;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.utils.DateUtilMdht;
@@ -29,8 +30,6 @@ import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;
 import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
 import org.openhealthtools.ihe.xds.metadata.SubmissionSetType;
 import org.openhealthtools.ihe.xds.metadata.extract.cdar2.CDAR2Extractor;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 
@@ -90,7 +89,7 @@ public class SubmissionSetMetadata {
 	}
 
 	/** The cda. */
-	private final ClinicalDocument cda;
+	private final POCDMT000040ClinicalDocument cda;
 	private SubmissionSetType s;
 
 	/**
@@ -98,7 +97,7 @@ public class SubmissionSetMetadata {
 	 */
 	public SubmissionSetMetadata() {
 		s = MetadataFactory.eINSTANCE.createSubmissionSetType();
-		cda = CDAFactory.eINSTANCE.createClinicalDocument();
+		cda = new POCDMT000040ClinicalDocument();
 	}
 
 	/**
@@ -109,7 +108,7 @@ public class SubmissionSetMetadata {
 	 */
 	public SubmissionSetMetadata(SubmissionSetType ohtSubmissionSet) {
 		this.s = ohtSubmissionSet;
-		cda = CDAFactory.eINSTANCE.createClinicalDocument();
+		cda = new POCDMT000040ClinicalDocument();
 	}
 
 	/**
@@ -118,7 +117,7 @@ public class SubmissionSetMetadata {
 	 * @return the Author as Convenience API Object
 	 */
 	public Author getAuthor() {
-		return XdsMetadataUtil.convertOhtAuthorType(s.getAuthor());
+		return XdsMetadataUtil.convertIpfAuthor(s.getAuthor());
 	}
 
 	/**
