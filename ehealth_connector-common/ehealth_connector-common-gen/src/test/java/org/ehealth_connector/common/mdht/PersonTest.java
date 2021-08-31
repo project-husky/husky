@@ -16,16 +16,16 @@
  */
 package org.ehealth_connector.common.mdht;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test of class Person
  */
-@Ignore
+@Disabled
 public class PersonTest {
 
 	/**
@@ -33,7 +33,7 @@ public class PersonTest {
 	 *
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 	}
 

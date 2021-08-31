@@ -17,7 +17,7 @@
 
 package org.ehealth_connector.cda.ch;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Date;
 
@@ -33,7 +33,7 @@ import org.ehealth_connector.cda.enums.AllergiesSpecialConditions;
 import org.ehealth_connector.cda.enums.ProblemType;
 import org.ehealth_connector.cda.enums.ProblemsSpecialConditions;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 

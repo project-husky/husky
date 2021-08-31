@@ -16,14 +16,14 @@
  */
 package org.ehealth_connector.communication.ch.ppq.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeed.PpfMethod;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeedResponse;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeedResponseBuilder;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * TestClass to test the class PrivacyPolicyFeedResponseBuilderImpl
@@ -41,7 +41,7 @@ public class PrivacyPolicyFeedResponseBuilderImplTest {
 	 * @throws Exception
 	 *             will be thrown on error
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		builder = new PrivacyPolicyFeedResponseBuilderImpl();
 		testException = new Exception("myTest Exception");

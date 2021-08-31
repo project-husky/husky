@@ -16,9 +16,9 @@
  */
 package org.ehealth_connector.communication.mpi.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.InputStream;
 import java.net.URI;
@@ -34,37 +34,43 @@ import org.ehealth_connector.communication.ConvenienceMasterPatientIndexV3;
 import org.ehealth_connector.communication.MasterPatientIndexQuery;
 import org.ehealth_connector.communication.MasterPatientIndexQueryResponse;
 import org.ehealth_connector.communication.mpi.impl.pdq.V3PdqConsumerResponse;
+import org.ehealth_connector.communication.testhelper.TestApplication;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.hl7.fhir.dstu3.model.Organization;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import net.ihe.gazelle.hl7v3.prpain201306UV02.PRPAIN201306UV02Type;
 
 /**
- * Test of class V3PixPdqAdapter
+ * Test of class PdqV3Query
  */
-@Ignore
+@ExtendWith(value = SpringExtension.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = { TestApplication.class })
+@EnableAutoConfiguration
 public class PdqV3QueryTest {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PdqV3QueryTest.class.getName());
-	final private String pdqUri = "";
+
+	@Autowired
+	private ConvenienceMasterPatientIndexV3 convenienceMasterPatientIndexV3Client;
+
+	final private String pdqUri = "https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType";
 
 	final private String applicationName = "2.16.840.1.113883.3.72.6.5.100.1399";
-	final private String ipAddress = "129.6.24.81";
-	final private String facilityName = null; // "2.16.840.1.113883.3.72.6.1";
+	final private String facilityName = null;
 
 	final private String senderApplicationOid = "1.2.3.4";
-
-	final private String homeCommunityOid = "2.16.840.1.113883.3.72.5.9.1";
-	final private String homeCommunityNamespace = "NIST2010";
-
-	final private String domainToReturnOid = "2.16.840.1.113883.3.72.5.9.3";
-	final private String domainToReturnNamespace = "NIST2010-3";
 
 	/**
 	 * Method implementing
@@ -86,9 +92,18 @@ public class PdqV3QueryTest {
 	 *
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
+		var app = new SpringApplication(TestApplication.class);
+		app.setWebApplicationType(WebApplicationType.NONE);
 
+		var context = app.run();
+	}
+
+	@Test
+	public void contextLoads() {
+		assertNotNull(convenienceMasterPatientIndexV3Client);
+		assertNotNull(convenienceMasterPatientIndexV3Client.getContext());
 	}
 
 	/**
@@ -113,7 +128,8 @@ public class PdqV3QueryTest {
 		affinityDomain.setPdqDestination(dest);
 		affinityDomain.setPixDestination(dest);
 
-		final var v3PdqQuery = new PdqV3Query(affinityDomain, null);
+		final var v3PdqQuery = new PdqV3Query(affinityDomain, null, null,
+				convenienceMasterPatientIndexV3Client.getAuditContext());
 		final List<FhirPatient> patients = v3PdqQuery.getPatientsFromPdqQuery(response);
 		assertEquals(2, patients.size());
 		final FhirPatient james = patients.get(0);
@@ -189,12 +205,11 @@ public class PdqV3QueryTest {
 		affinityDomain.setPixDestination(dest);
 
 		final MasterPatientIndexQuery mpiQuery = new MasterPatientIndexQuery(affinityDomain.getPdqDestination());
-		final Identificator identificator = new Identificator("2.16.840.1.113883.3.72.5.9.1", "HJ-361");
-		mpiQuery.addPatientIdentificator(identificator).addDomainToReturn("2.16.840.1.113883.3.72.5.9.1");
+		final Identificator identificator = new Identificator("1.3.6.1.4.1.12559.11.20.1", "4711");
+		mpiQuery.addPatientIdentificator(identificator);// .addDomainToReturn("1.3.6.1.4.1.12559.11.20.1");
 		
-		ConvenienceMasterPatientIndexV3 convenienceMasterPatientIndex = new ConvenienceMasterPatientIndexV3();
-
-		final MasterPatientIndexQueryResponse response = convenienceMasterPatientIndex.queryPatientDemographics(
+		final MasterPatientIndexQueryResponse response = convenienceMasterPatientIndexV3Client
+				.queryPatientDemographics(
 				mpiQuery,
 				affinityDomain, null);
 		assertTrue(response.getSuccess());
@@ -220,12 +235,10 @@ public class PdqV3QueryTest {
 		affinityDomain.setPixDestination(dest);
 
 		final MasterPatientIndexQuery mpiQuery = new MasterPatientIndexQuery(affinityDomain.getPdqDestination());
-		final Identificator identificator = new Identificator("2.16.840.1.113883.3.72.5.9.1", "HJ-361");
-		mpiQuery.addPatientIdentificator(identificator).addDomainToReturn("2.16.840.1.113883.3.72.5.9.1");
+		final Identificator identificator = new Identificator("1.3.6.1.4.1.12559.11.20.1", "4711");
+		mpiQuery.addPatientIdentificator(identificator).addDomainToReturn("1.3.6.1.4.1.12559.11.20.1");
 
-		ConvenienceMasterPatientIndexV3 convenienceMasterPatientIndex = new ConvenienceMasterPatientIndexV3();
-
-		final MasterPatientIndexQueryResponse response = convenienceMasterPatientIndex
+		final MasterPatientIndexQueryResponse response = convenienceMasterPatientIndexV3Client
 				.queryPatientDemographics(mpiQuery, affinityDomain, null);
 
 		assertTrue(response.getSuccess());

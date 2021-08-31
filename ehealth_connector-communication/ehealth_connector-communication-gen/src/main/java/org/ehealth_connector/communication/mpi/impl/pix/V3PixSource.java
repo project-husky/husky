@@ -25,11 +25,11 @@ import java.nio.charset.StandardCharsets;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
+import org.apache.camel.CamelContext;
 import org.ehealth_connector.communication.CamelService;
 import org.ehealth_connector.communication.mpi.V3Acknowledgement;
 import org.ehealth_connector.xua.core.SecurityHeaderElement;
-import org.openhealthtools.ihe.atna.auditor.PIXSourceAuditor;
-import org.openhealthtools.ihe.atna.auditor.codes.rfc3881.RFC3881EventCodes.RFC3881EventOutcomeCodes;
+import org.openehealth.ipf.commons.audit.AuditContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -38,10 +38,6 @@ import net.ihe.gazelle.hl7v3.prpain201301UV02.PRPAIN201301UV02Type;
 import net.ihe.gazelle.hl7v3.prpain201302UV02.PRPAIN201302UV02Type;
 import net.ihe.gazelle.hl7v3.prpain201304UV02.PRPAIN201304UV02Type;
 
-/**
- * @author <a href="mailto:anthony.larocca@sage.com">Anthony Larocca</a>
- *
- */
 public class V3PixSource extends CamelService {
 
 	/**
@@ -49,17 +45,15 @@ public class V3PixSource extends CamelService {
 	 */
 	private static final Logger LOGGER = LoggerFactory.getLogger(V3PixSource.class.getName());
 
-	private static final String ACTOR_NAME = "";
-
 	/**
 	 * The URI of the server to issue a query against.
 	 */
 	private URI serverURI;
 
 	/**
-	 * PIX Source Auditor for ATNA Audit Events
+	 * ATNA Auditor Context
 	 */
-	private PIXSourceAuditor auditor = PIXSourceAuditor.getAuditor();
+	private AuditContext auditorContext;
 
 	/**
 	 * Constructor:
@@ -67,17 +61,10 @@ public class V3PixSource extends CamelService {
 	 * @param pdqServerURI the URI for the server to use for query requests
 	 *                     (required, cannot be null)
 	 */
-	public V3PixSource(URI pixServerURI) {
+	public V3PixSource(URI pixServerURI, CamelContext context, AuditContext auditorContext) {
 		this.serverURI = pixServerURI;
-	}
-
-	/**
-	 * Gets the ATNA Auditor for this Actor
-	 * 
-	 * @return The ATNA Auditor
-	 */
-	public PIXSourceAuditor getAuditor() {
-		return auditor;
+		this.auditorContext = auditorContext;
+		setCamelContext(context);
 	}
 
 	/**
@@ -101,25 +88,9 @@ public class V3PixSource extends CamelService {
 			LOGGER.debug("Beginning Send Patient Record Duplicates Resolved (V3)");
 		}
 
-		// Audit Actor Start
-		auditor.auditActorStartEvent(RFC3881EventOutcomeCodes.SUCCESS, ACTOR_NAME, null);
-
 		// send the request
 		var v3response = new V3Acknowledgement(sendITI44Query(v3query.getRootElement(), assertion,
 				getServerURI(), "urn:hl7-org:v3:PRPA_IN201304UV02"));
-
-		// default to success
-		RFC3881EventOutcomeCodes eventOutcome = RFC3881EventOutcomeCodes.SUCCESS;
-		if (v3response.hasError())
-			eventOutcome = RFC3881EventOutcomeCodes.MINOR_FAILURE;
-
-		// audit the pdq query
-		auditor.auditDeletePatientRecordV3Event(eventOutcome, this.getServerURI().toString(),
-				v3query.getReceivingFacility(0), v3query.getReceivingApplication(0), v3query.getSendingFacility(),
-				v3query.getSendingApplication(), v3query.getMessageId().getRoot(), v3query.getPatientId());
-
-		// Audit Actor Start
-		auditor.auditActorStopEvent(RFC3881EventOutcomeCodes.SUCCESS, ACTOR_NAME, null);
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Ending Send Patient Record Duplicates Resolved (V3)");
@@ -142,25 +113,9 @@ public class V3PixSource extends CamelService {
 			LOGGER.debug("Beginning Send Patient Record Added (V3)");
 		}
 
-		// Audit Actor Start
-		auditor.auditActorStartEvent(RFC3881EventOutcomeCodes.SUCCESS, ACTOR_NAME, null);
-
 		// send the request
 		var v3response = new V3Acknowledgement(sendITI44Query(v3query.getRootElement(), assertion,
 				getServerURI(), "urn:hl7-org:v3:PRPA_IN201301UV02"));
-
-		// default to success
-		RFC3881EventOutcomeCodes eventOutcome = RFC3881EventOutcomeCodes.SUCCESS;
-		if (v3response.hasError())
-			eventOutcome = RFC3881EventOutcomeCodes.MINOR_FAILURE;
-
-		// audit the pdq query
-		auditor.auditCreatePatientRecordV3Event(eventOutcome, this.getServerURI().toString(),
-				v3query.getReceivingFacility(0), v3query.getReceivingApplication(0), v3query.getSendingFacility(),
-				v3query.getSendingApplication(), v3query.getMessageId().getRoot(), v3query.getPatientId());
-
-		// Audit Actor Start
-		auditor.auditActorStopEvent(RFC3881EventOutcomeCodes.SUCCESS, ACTOR_NAME, null);
 
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Ending Send Patient Record Added (V3)");
@@ -183,27 +138,11 @@ public class V3PixSource extends CamelService {
 			LOGGER.debug("Beginning Send Patient Record Revised (V3)");
 		}
 
-		// Audit Actor Start
-		auditor.auditActorStartEvent(RFC3881EventOutcomeCodes.SUCCESS, ACTOR_NAME, null);
-
 		// send the request
 		var v3response = new V3Acknowledgement(
 				sendITI44Query(v3query.getRootElement(), assertion, getServerURI(),
 						"urn:hl7-org:v3:PRPA_IN201302UV02"));
 				
-		// default to success
-		RFC3881EventOutcomeCodes eventOutcome = RFC3881EventOutcomeCodes.SUCCESS;
-		if (v3response.hasError())
-			eventOutcome = RFC3881EventOutcomeCodes.MINOR_FAILURE;
-
-		// audit the pdq query
-		auditor.auditUpdatePatientRecordV3Event(eventOutcome, this.getServerURI().toString(),
-				v3query.getReceivingFacility(0), v3query.getReceivingApplication(0), v3query.getSendingFacility(),
-				v3query.getSendingApplication(), v3query.getMessageId().getRoot(), v3query.getPatientId());
-
-		// Audit Actor Start
-		auditor.auditActorStopEvent(RFC3881EventOutcomeCodes.SUCCESS, ACTOR_NAME, null);
-
 		if (LOGGER.isDebugEnabled()) {
 			LOGGER.debug("Ending Send Patient Record Revised (V3)");
 		}
@@ -268,8 +207,8 @@ public class V3PixSource extends CamelService {
 	private String sendITI44Query(String request, SecurityHeaderElement assertion, URI pdqDest, String action)
 			throws Exception {
 		final var endpoint = String.format(
-				"pdqv3-iti44://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s",
-				pdqDest.toString().replace("https://", ""), true);
+				"pixv3-iti44://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&audit=%s",
+				pdqDest.toString().replace("https://", ""), true, auditorContext.isAuditEnabled());
 		LOGGER.info("Sending request to '{}' endpoint", endpoint);
 
 		final var exchange = send(endpoint, request, assertion, action);

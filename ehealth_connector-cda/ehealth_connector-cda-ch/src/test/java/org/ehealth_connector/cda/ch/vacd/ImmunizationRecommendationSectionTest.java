@@ -17,8 +17,8 @@
 
 package org.ehealth_connector.cda.ch.vacd;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
@@ -35,7 +35,7 @@ import org.ehealth_connector.cda.ch.vacd.v140.MedicationTargetEntry;
 import org.ehealth_connector.cda.ch.vacd.v140.enums.CdaChVacdRecCategories;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Author;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 

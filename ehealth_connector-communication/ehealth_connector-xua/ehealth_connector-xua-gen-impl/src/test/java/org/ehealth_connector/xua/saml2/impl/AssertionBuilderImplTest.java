@@ -16,15 +16,15 @@
  */
 package org.ehealth_connector.xua.saml2.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.UUID;
 
 import org.ehealth_connector.xua.saml2.AssertionBuilder;
 import org.ehealth_connector.xua.saml2.Attribute;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 
 public class AssertionBuilderImplTest {
@@ -34,7 +34,7 @@ public class AssertionBuilderImplTest {
 	private AssertionBuilder testBuilder;
 	private String testId;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testBuilder = new AssertionBuilderImpl();
 

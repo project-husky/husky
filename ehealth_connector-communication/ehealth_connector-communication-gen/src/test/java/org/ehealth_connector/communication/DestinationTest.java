@@ -17,14 +17,16 @@
 
 package org.ehealth_connector.communication;
 
-import static org.junit.Assert.assertEquals;
+
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.net.URISyntaxException;
 
 import org.ehealth_connector.common.communication.Destination;
 import org.ehealth_connector.common.utils.Util;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DestinationTest {
 
@@ -50,7 +52,7 @@ public class DestinationTest {
 	java.net.URI u1 = null;
 	java.net.URI u2 = null;
 
-	@Before
+	@BeforeEach
 	public void init() {
 		try {
 			repUri = new java.net.URI(NIST_SECURED);

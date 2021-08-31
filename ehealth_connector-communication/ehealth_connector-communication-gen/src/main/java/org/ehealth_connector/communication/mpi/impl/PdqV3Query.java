@@ -11,6 +11,7 @@ import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
+import org.apache.camel.CamelContext;
 import org.ehealth_connector.common.communication.AffinityDomain;
 import org.ehealth_connector.communication.mpi.impl.pdq.V3PdqConsumerQuery;
 import org.ehealth_connector.communication.mpi.impl.pdq.V3PdqConsumerResponse;
@@ -21,8 +22,10 @@ import org.ehealth_connector.communication.mpi.impl.pdq.V3PdqQuery;
 import org.ehealth_connector.communication.mpi.impl.pdq.V3PdqQueryResponse;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.ehealth_connector.xua.core.SecurityHeaderElement;
+import org.openehealth.ipf.commons.audit.AuditContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import net.ihe.gazelle.hl7v3.datatypes.INT;
 import net.ihe.gazelle.hl7v3.prpain201305UV02.PRPAIN201305UV02Type;
@@ -35,16 +38,25 @@ import net.ihe.gazelle.hl7v3.quqiin000003UV01.QUQIIN000003UV01Type;
  *
  * PdqV3Query implements the ITI-47 PDQ Consumer
  */
+@Component
 public class PdqV3Query extends PixPdqV3QueryBase {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PdqV3Query.class.getName());
 
-	public PdqV3Query(AffinityDomain affinityDomain, String homeCommunityOid) {
-		super(affinityDomain, homeCommunityOid);
+	public PdqV3Query() {
+		super();
 	}
 
-	public PdqV3Query(AffinityDomain affinityDomain, String homeCommunityOid, String homeCommunityNameSpace) {
-		super(affinityDomain, homeCommunityOid, homeCommunityNameSpace, null, null);
+	public PdqV3Query(AffinityDomain affinityDomain, String homeCommunityOid, CamelContext context,
+			AuditContext auditContext) {
+		super(affinityDomain, homeCommunityOid, context);
+		this.auditContext = auditContext;
+	}
+
+	public PdqV3Query(AffinityDomain affinityDomain, String homeCommunityOid, String homeCommunityNameSpace,
+			CamelContext context, AuditContext auditContext) {
+		super(affinityDomain, homeCommunityOid, homeCommunityNameSpace, null, null, context);
+		this.auditContext = auditContext;
 	}
 
 	/**
@@ -55,9 +67,7 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 	 */
 	public V3PdqQueryResponse queryPatients(V3PdqQuery mpiQuery, SecurityHeaderElement assertion) {
 		final var queryResponse = new V3PdqQueryResponse();
-		if (!configurePdqAtna()) {
-			return queryResponse;
-		}
+
 		/** The last pdq consumer response. */
 
 		try {
@@ -67,19 +77,6 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 					try {
 						lastPdqConsumerResponse = sendITI47Query(mpiQuery.getV3PdqConsumerQuery(), assertion,
 								this.pdqConsumerUri);
-						var response = new V3PdqConsumerResponse(lastPdqConsumerResponse);
-						queryResponse.setPatients(getPatientsFromPdqQuery(response));
-						queryResponse.setSuccess(!response.hasError());
-						queryResponse.setCurrentNumbers(response.getNumRecordsCurrent());
-						queryResponse.setRemainingNumbers(response.getNumRecordsRemaining());
-						queryResponse.setInfoCodes(List.of(response.getAcknowledgementDetailCode()));
-						queryResponse.setInfoTexts(List.of(response.getAcknowledgementDetailText()));
-						queryResponse.setErrorText(response.getErrorText());
-						final INT totalNumbers = response.getPdqResponse().getControlActProcess().getQueryAck()
-								.getResultTotalQuantity();
-						if (totalNumbers != null) {
-							queryResponse.setTotalNumbers(totalNumbers.getValue().intValue());
-						}
 					} catch (final Exception e) {
 						LOGGER.error("queryPatient failed", e);
 						queryResponse.setSuccess(false);
@@ -102,8 +99,13 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 				queryResponse.setSuccess(!response.hasError());
 				queryResponse.setCurrentNumbers(response.getNumRecordsCurrent());
 				queryResponse.setRemainingNumbers(response.getNumRecordsRemaining());
-				queryResponse.setInfoCodes(List.of(response.getAcknowledgementDetailCode()));
-				queryResponse.setInfoTexts(List.of(response.getAcknowledgementDetailText()));
+				if (response.getAcknowledgementDetailCode() != null) {
+					queryResponse.setInfoCodes(List.of(response.getAcknowledgementDetailCode()));
+				}
+
+				if (response.getAcknowledgementDetailText() != null) {
+					queryResponse.setInfoTexts(List.of(response.getAcknowledgementDetailText()));
+				}
 				queryResponse.setErrorText(response.getErrorText());
 				final INT totalNumbers = response.getPdqResponse().getControlActProcess().getQueryAck()
 						.getResultTotalQuantity();

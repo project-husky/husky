@@ -16,15 +16,15 @@
  */
 package org.ehealth_connector.xua.wssecurity.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Base64;
 import java.util.Random;
 
 import org.ehealth_connector.xua.wssecurity.UsernameToken;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class UsernameTokenBuilderImplTest {
 
@@ -34,7 +34,7 @@ public class UsernameTokenBuilderImplTest {
 	private String testPassword;
 	private String testUsername;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		builder = new UsernameTokenBuilderImpl();
 		testUsername = "MyNameIsHarry";

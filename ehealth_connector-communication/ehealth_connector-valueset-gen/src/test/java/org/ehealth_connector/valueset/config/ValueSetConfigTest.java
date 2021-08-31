@@ -16,11 +16,11 @@
  */
 package org.ehealth_connector.valueset.config;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.ehealth_connector.valueset.enums.SourceFormatType;
 import org.ehealth_connector.valueset.enums.SourceSystemType;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * The Test Class for ValueSetConfig.

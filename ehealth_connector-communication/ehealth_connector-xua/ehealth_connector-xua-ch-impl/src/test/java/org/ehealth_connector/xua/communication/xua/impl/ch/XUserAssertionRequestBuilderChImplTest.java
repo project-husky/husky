@@ -16,28 +16,27 @@
  */
 package org.ehealth_connector.xua.communication.xua.impl.ch;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.ehealth_connector.xua.XUserAssertionConstantsCh;
 import org.ehealth_connector.xua.communication.xua.XUserAssertionRequest;
 import org.ehealth_connector.xua.communication.xua.impl.XUserAssertionRequestBuilderImpl;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 public class XUserAssertionRequestBuilderChImplTest {
 
 	private XUserAssertionRequestBuilderImpl builder;
 	private String testDialect;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		builder = new XUserAssertionRequestBuilderChImpl();
 		testDialect = "This is a Dialect";
 	}
 
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testDialect() {
 		final XUserAssertionRequest ref = builder.dialect(testDialect).create();
 		assertNotNull(ref);

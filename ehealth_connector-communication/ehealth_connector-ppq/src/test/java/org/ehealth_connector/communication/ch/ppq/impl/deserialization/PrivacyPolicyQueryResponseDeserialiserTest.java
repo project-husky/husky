@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.communication.ch.ppq.impl.deserialization;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -25,8 +25,8 @@ import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQueryResponse
 import org.ehealth_connector.communication.ch.ppq.utilities.impl.InitializerTestHelper;
 import org.ehealth_connector.xua.deserialization.impl.OpenSaml2DeserializerImpl;
 import org.ehealth_connector.xua.exceptions.DeserializeException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Element;
 
 public class PrivacyPolicyQueryResponseDeserialiserTest extends InitializerTestHelper {
@@ -36,7 +36,7 @@ public class PrivacyPolicyQueryResponseDeserialiserTest extends InitializerTestH
 	private Element testXmlElement;
 	private String testXmlString;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testDeserializer = new PrivacyPolicyQueryResponseDeserialiser();
 		testXmlByteArray = Files.readAllBytes(Paths

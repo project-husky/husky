@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.camel.CamelContext;
 import org.ehealth_connector.common.communication.AffinityDomain;
 import org.ehealth_connector.communication.mpi.V3Acknowledgement;
 import org.ehealth_connector.communication.mpi.impl.pix.V3PixSource;
@@ -13,11 +14,13 @@ import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.ehealth_connector.xua.core.SecurityHeaderElement;
 import org.hl7.fhir.dstu3.model.Identifier;
+import org.openehealth.ipf.commons.audit.AuditContext;
 import org.openehealth.ipf.commons.ihe.hl7v3.core.metadata.Device;
 import org.openehealth.ipf.commons.ihe.hl7v3.core.requests.PixV3QueryRequest;
 import org.openehealth.ipf.commons.ihe.hl7v3.core.responses.PixV3QueryResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import net.ihe.gazelle.hl7v3.datatypes.II;
 
@@ -29,21 +32,30 @@ import net.ihe.gazelle.hl7v3.datatypes.II;
  * Consumer from ITI-45 PIXV3 Query
  *
  */
+@Component
 public class PixV3Query extends PixPdqV3QueryBase {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PixV3Query.class.getName());
 
 	private V3PixSource pixSource;
 
-	public PixV3Query(AffinityDomain affinityDomain, String homeCommunityOid) {
-		super(affinityDomain, homeCommunityOid);
-		this.pixSource = new V3PixSource(this.pixSourceUri);
+	public PixV3Query() {
+
+	}
+
+	public PixV3Query(AffinityDomain affinityDomain, String homeCommunityOid, CamelContext context,
+			AuditContext auditContext) {
+		super(affinityDomain, homeCommunityOid, context);
+		this.pixSource = new V3PixSource(this.pixSourceUri, context, auditContext);
+		this.auditContext = auditContext;
 	}
 
 	public PixV3Query(AffinityDomain affinityDomain, String homeCommunityOid, String homeCommunityNamespace,
-			String domainToReturnOid, String domainToReturnNamespace) {
-		super(affinityDomain, homeCommunityOid, homeCommunityNamespace, domainToReturnOid, domainToReturnNamespace);
-		this.pixSource = new V3PixSource(this.pixSourceUri);
+			String domainToReturnOid, String domainToReturnNamespace, CamelContext context, AuditContext auditContext) {
+		super(affinityDomain, homeCommunityOid, homeCommunityNamespace, domainToReturnOid, domainToReturnNamespace,
+				context);
+		this.pixSource = new V3PixSource(this.pixSourceUri, context, auditContext);
+		this.auditContext = auditContext;
 	}
 
 	/**
@@ -61,10 +73,6 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 */
 	public List<String> queryPatientId(org.ehealth_connector.fhir.structures.gen.FhirPatient patient,
 			List<String> queryDomainOids, List<String> queryDomainNamespaces, SecurityHeaderElement assertion) {
-
-		if (!configurePixAtna(false)) {
-			return new LinkedList<>();
-		}
 		List<String> domainToReturnOids = new LinkedList<>();
 
 		if (queryDomainOids != null) {
@@ -89,12 +97,8 @@ public class PixV3Query extends PixPdqV3QueryBase {
 		receiverDev.getIds().add(idReceiver);
 		v3PixConsumerQueryRequest.setReceiver(receiverDev);
 
-		/*
-		 * final var v3PixConsumerQuery = new
-		 * V3PixConsumerQuery(adapterCfg.getSenderApplicationOid(),
-		 * adapterCfg.getSenderFacilityOid(), adapterCfg.getReceiverApplicationOid(),
-		 * adapterCfg.getReceiverFacilityOid());
-		 */
+		v3PixConsumerQueryRequest.setQueryId(PixPdqV3Utils.createIIwithUniqueExtension(this.senderApplicationOid));
+		v3PixConsumerQueryRequest.setMessageId(PixPdqV3Utils.createIIwithUniqueExtension(this.senderApplicationOid));
 
 		// add the patient identifier
 		final String homeCommunityPatientId = this.getHomeCommunityPatientId(patient);
@@ -138,11 +142,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 */
 	public boolean addPatient(FhirPatient patient, SecurityHeaderElement assertion) {
 		if (pixSource == null) {
-			pixSource = new V3PixSource(this.pixSourceUri);
-		}
-
-		if (!configurePixAtna(true)) {
-			return false;
+			pixSource = new V3PixSource(this.pixSourceUri, getCamelContext(), auditContext);
 		}
 
 		LOGGER.debug("creating v3RecordAddedMessage");
@@ -177,11 +177,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 */
 	public boolean mergePatient(FhirPatient patient, String obsoleteId, SecurityHeaderElement assertion) {
 		if (pixSource == null) {
-			pixSource = new V3PixSource(this.pixSourceUri);
-		}
-
-		if (!configurePixAtna(true)) {
-			return false;
+			pixSource = new V3PixSource(this.pixSourceUri, getCamelContext(), auditContext);
 		}
 
 		var ret = false;
@@ -214,7 +210,7 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 */
 	public boolean updatePatient(FhirPatient patient, SecurityHeaderElement assertion) {
 		if (pixSource == null) {
-			pixSource = new V3PixSource(this.pixSourceUri);
+			pixSource = new V3PixSource(this.pixSourceUri, getCamelContext(), auditContext);
 		}
 		final var v3RecordRevisedMessage = new V3PixSourceMessageHelper(false, true, false,
 				this.senderApplicationOid, this.senderFacilityOid, this.receiverApplicationOid,
@@ -252,7 +248,13 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	 * @return the string
 	 */
 	public String queryPatientId(FhirPatient patient, SecurityHeaderElement assertion) {
-		return queryPatientId(patient, null, null, assertion).get(0);
+		List<String> ids = queryPatientId(patient, null, null, assertion);
+
+		if (ids != null && !ids.isEmpty()) {
+			return ids.get(0);
+		}
+
+		return null;
 	}
 
 	/**
@@ -304,8 +306,8 @@ public class PixV3Query extends PixPdqV3QueryBase {
 	private PixV3QueryResponse sendQuery(PixV3QueryRequest request, SecurityHeaderElement assertion, URI pdqDest)
 			throws Exception {
 		final var endpoint = String.format(
-				"pixv3-iti45://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s",
-				pdqDest.toString().replace("https://", ""), true);
+				"pixv3-iti45://%s?inInterceptors=#serverInLogger&inFaultInterceptors=#serverInLogger&outInterceptors=#serverOutLogger&outFaultInterceptors=#serverOutLogger&secure=%s&audit=%s",
+				pdqDest.toString().replace("https://", ""), true, auditContext.isAuditEnabled());
 		LOGGER.info("Sending request to '{}' endpoint", endpoint);
 
 		final var exchange = send(endpoint, request, assertion, "urn:hl7-org:v3:PRPA_IN201309UV02");

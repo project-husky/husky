@@ -16,13 +16,13 @@
  */
 package org.ehealth_connector.xua.communication.xua.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.ehealth_connector.xua.communication.xua.AppliesTo;
 import org.ehealth_connector.xua.communication.xua.AppliesToBuilder;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.opensaml.soap.wsaddressing.Address;
 import org.opensaml.soap.wsaddressing.EndpointReference;
 import org.opensaml.soap.wsaddressing.impl.AddressBuilder;
@@ -34,7 +34,7 @@ public class AppliesToBuilderImplTest {
 	private String testAddress;
 	private org.opensaml.soap.wspolicy.AppliesTo testFromOutsietAppliesTo;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		builder = new AppliesToBuilderImpl();
 		testAddress = "https://guguesli.org/test/access/";

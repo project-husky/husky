@@ -16,13 +16,13 @@
  */
 package org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.OpenSamlUnknownPolicySetId;
 import org.ehealth_connector.communication.ch.ppq.utilities.impl.InitializerTestHelper;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.opensaml.core.xml.io.Marshaller;
 import org.opensaml.core.xml.io.MarshallerFactory;
@@ -34,7 +34,7 @@ public class UnknownPolicySetIdMarshallerTest extends InitializerTestHelper {
 	private String testMessage;
 	private OpenSamlUnknownPolicySetId testOpenSamlUnknownPolicySetId;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testMessage = "This is a message";
 		testOpenSamlUnknownPolicySetId = new UnknownPolicySetIdBuilderImpl().message(testMessage)

@@ -16,8 +16,8 @@
  */
 package org.ehealth_connector.communication.ch.ppq.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -30,8 +30,8 @@ import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQuery;
 import org.ehealth_connector.communication.ch.ppq.utilities.impl.InitializerTestHelper;
 import org.ehealth_connector.xua.hl7v3.InstanceIdentifier;
 import org.ehealth_connector.xua.hl7v3.impl.InstanceIdentifierBuilder;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.opensaml.core.xml.io.UnmarshallingException;
 import org.opensaml.xacml.profile.saml.XACMLPolicyQueryType;
 import org.opensaml.xacml.profile.saml.impl.XACMLPolicyQueryTypeUnmarshaller;
@@ -69,7 +69,7 @@ public class PrivacyPolicyQueryBuilderImplTest extends InitializerTestHelper {
 				.unmarshall(doc.getDocumentElement());
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		builder = new PrivacyPolicyQueryBuilderImpl();
 		testXacmlPolicyQuery = loadTestPolicySet();

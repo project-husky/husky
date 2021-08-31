@@ -16,9 +16,9 @@
  */
 package org.ehealth_connector.common.mdht;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
 import java.util.List;
@@ -28,9 +28,9 @@ import org.ehealth_connector.common.enums.TelecomAddressUse;
 import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
 import org.ehealth_connector.common.testhelpers.AbstractTestHelper;
 import org.ehealth_connector.common.utils.DateUtilMdht;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.TS;
@@ -134,7 +134,7 @@ public class AuthorTest {
 	 *
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		testAuthorMdht = CDAFactory.eINSTANCE.createAuthor();
@@ -290,7 +290,7 @@ public class AuthorTest {
 	 * .
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testAuthorAuthor() {
 		final Author auth = new Author(testAuthorMdht);
 		final org.openhealthtools.mdht.uml.cda.Author ref = auth.getAuthorMdht();
@@ -417,7 +417,7 @@ public class AuthorTest {
 	 * {@link org.ehealth_connector.common.mdht.Author#getTime()}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testSetGetTime() {
 		final Author auth = new Author(testName1, testGln1);
 		auth.setTime(testDate1);

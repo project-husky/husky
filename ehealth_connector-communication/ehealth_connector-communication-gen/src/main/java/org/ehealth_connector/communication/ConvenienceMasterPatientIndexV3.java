@@ -20,17 +20,19 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.camel.CamelContext;
 import org.ehealth_connector.common.communication.AffinityDomain;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Patient;
 import org.ehealth_connector.communication.mpi.impl.PdqV3Query;
 import org.ehealth_connector.communication.mpi.impl.PixV3Query;
 import org.ehealth_connector.communication.mpi.impl.pdq.V3PdqQueryResponse;
-import org.ehealth_connector.communication.tls.CustomHttpsTLSv11v12SocketFactory;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.ehealth_connector.xua.core.SecurityHeaderElement;
+import org.openehealth.ipf.commons.audit.AuditContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -45,15 +47,17 @@ import org.springframework.stereotype.Component;
  * Master Patient Index bereit (MPI) Die Kommunikation erfolgt in dieser Klasse
  * mit HL7 V3 (PIX V3, PDQV3) </div>
  */
-@Component
-public class ConvenienceMasterPatientIndexV3 extends CamelService {
+@Component("convenienceMasterPatientIndexV3Client")
+public class ConvenienceMasterPatientIndexV3 {
 
 	/** The SLF4J logger instance. */
 	private static Logger log = LoggerFactory.getLogger(ConvenienceMasterPatientIndexV3.class);
 
-	static {
-		CustomHttpsTLSv11v12SocketFactory.setup();
-	}
+	@Autowired
+	private CamelContext context;
+
+	@Autowired
+	private AuditContext auditContext;
 
 	/**
 	 * adds a patient to the mpi. implements ITI-44 Patient Identity Source –
@@ -90,7 +94,7 @@ public class ConvenienceMasterPatientIndexV3 extends CamelService {
 		log.debug("addPatientDemographics, creating patient");
 		final var fhirPatient = new FhirPatient(patient);
 		log.debug("addPatientDemographics, add patient");
-		var v3PixQuery = new PixV3Query(affinityDomain, homeCommunityOid);
+		var v3PixQuery = new PixV3Query(affinityDomain, homeCommunityOid, context, auditContext);
 		final boolean ret = v3PixQuery.addPatient(fhirPatient, security);
 		log.debug("addPatientDemographics, add patient finished");
 		return ret;
@@ -140,7 +144,7 @@ public class ConvenienceMasterPatientIndexV3 extends CamelService {
 			return false;
 		}
 
-		var v3PixQuery = new PixV3Query(affinityDomain, homeCommunityOid);
+		var v3PixQuery = new PixV3Query(affinityDomain, homeCommunityOid, context, auditContext);
 		return v3PixQuery.mergePatient(new FhirPatient(finalPatient), mergeObsoleteId, security);
 	}
 
@@ -163,7 +167,7 @@ public class ConvenienceMasterPatientIndexV3 extends CamelService {
 			return null;
 		}
 
-		var query = new PdqV3Query(affinityDomain, null);
+		var query = new PdqV3Query(affinityDomain, null, context, auditContext);
 
 		final V3PdqQueryResponse pdqQueryRespones = query
 				.queryPatients(mpiQuery.getV3PdqQuery(), security);
@@ -208,7 +212,7 @@ public class ConvenienceMasterPatientIndexV3 extends CamelService {
 			return new LinkedList<>();
 		}
 
-		var query = new PixV3Query(affinityDomain, homeCommunityOid);
+		var query = new PixV3Query(affinityDomain, homeCommunityOid, context, auditContext);
 		List<String> ids = query.queryPatientId(new FhirPatient(patient), requestedCommunityOIDs, null, security);
 
 		final List<Identificator> list = new ArrayList<>();
@@ -258,8 +262,24 @@ public class ConvenienceMasterPatientIndexV3 extends CamelService {
 			return false;
 		}
 
-		var v3PixQuery = new PixV3Query(affinityDomain, homeCommunityOid);
+		var v3PixQuery = new PixV3Query(affinityDomain, homeCommunityOid, context, auditContext);
 		return v3PixQuery.updatePatient(new FhirPatient(patient), security);
+	}
+
+	public CamelContext getContext() {
+		return context;
+	}
+
+	public void setContext(CamelContext context) {
+		this.context = context;
+	}
+
+	public AuditContext getAuditContext() {
+		return auditContext;
+	}
+
+	public void setAuditContext(AuditContext context) {
+		this.auditContext = context;
 	}
 
 }

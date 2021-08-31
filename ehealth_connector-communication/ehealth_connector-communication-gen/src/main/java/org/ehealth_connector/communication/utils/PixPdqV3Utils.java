@@ -814,18 +814,70 @@ public class PixPdqV3Utils {
 	 * @param prefixName
 	 * @return PN Object containing the supplied name parts.
 	 */
-	public static PN createPN(String familyName, String givenName, String otherName, String suffixName,
-			String prefixName) {
-		// first create the en
-		var en = createEN(familyName, givenName, otherName, suffixName, prefixName);
+	public static PN createPN(String family, String given, String other, String suffix, String prefix) {
 
 		// now create the pn
 		var pn = new PN();
-		// copy values over
-		pn.getFamily().addAll(en.getFamily());
-		pn.getGiven().addAll(en.getGiven());
-		pn.getSuffix().addAll(en.getSuffix());
-		pn.getPrefix().addAll(en.getPrefix());
+
+		// if there is a family name
+		if (family != null && !family.isEmpty()) {
+			// create the family name object
+			var familyName = new EnFamily();
+
+			// add the text to the family name
+			familyName.addMixed(family);
+
+			// Add the family name to the EN
+			pn.addFamily(familyName);
+		}
+
+		// if there is a given name
+		if (given != null && !given.isEmpty()) {
+			// create the given name object
+			var givenName = new EnGiven();
+
+			// add the text to the family name
+			givenName.addMixed(given);
+
+			// Add the given name to the EN
+			pn.addGiven(givenName);
+		}
+
+		// if there is an other name
+		if (other != null && !other.isEmpty()) {
+			// create the given name object
+			var givenName2 = new EnGiven();
+
+			// add the text to the second given name
+			givenName2.addMixed(other);
+
+			// Add the given name to the EN
+			pn.addGiven(givenName2);
+		}
+
+		// if there is a suffix
+		if (suffix != null && !suffix.isEmpty()) {
+			// create the suffix object
+			var suffixname = new EnSuffix();
+
+			// add the text to the suffix
+			suffixname.addMixed(suffix);
+
+			// Add the suffix to the EN
+			pn.addSuffix(suffixname);
+		}
+
+		// if there is a prefix
+		if (prefix != null && !prefix.isEmpty()) {
+			// create the prefix object
+			var prefixname = new EnPrefix();
+
+			// add the text to the suffix
+			prefixname.addMixed(prefix);
+
+			// Add the prefix to the EN
+			pn.addPrefix(prefixname);
+		}
 
 		return pn;
 	}
@@ -841,18 +893,7 @@ public class PixPdqV3Utils {
 	 * @return PN Object containing the supplied name parts.
 	 */
 	public static PN createPN(String familyName, String givenName, String suffixName, String prefixName) {
-		// first create the en
-		var en = createEN(familyName, givenName, null, suffixName, prefixName);
-
-		// now create the pn
-		var pn = new PN();
-		// copy values over
-		pn.getFamily().addAll(en.getFamily());
-		pn.getGiven().addAll(en.getGiven());
-		pn.getSuffix().addAll(en.getSuffix());
-		pn.getPrefix().addAll(en.getPrefix());
-
-		return pn;
+		return createPN(familyName, givenName, null, suffixName, prefixName);
 	}
 
 	/**
@@ -876,8 +917,8 @@ public class PixPdqV3Utils {
 		assignedOrganization.setClassCode(EntityClassOrganization.ORG);
 		assignedOrganization.setDeterminerCode(EntityDeterminer.INSTANCE);
 		var name = new EN();
-		name.addMixed(organizationName);
-		assignedOrganization.addName(name);
+		name.setMixed(List.of(organizationName));
+		assignedOrganization.setName(List.of(name));
 		return custodian;
 	}
 

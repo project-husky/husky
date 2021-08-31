@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.camel.CamelContext;
 import org.ehealth_connector.common.communication.AffinityDomain;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
 import org.ehealth_connector.common.utils.DateUtil;
@@ -31,11 +32,10 @@ import org.hl7.fhir.dstu3.model.Organization;
 import org.hl7.fhir.dstu3.model.Patient.PatientCommunicationComponent;
 import org.hl7.fhir.dstu3.model.StringType;
 import org.hl7.fhir.dstu3.model.Type;
-import org.openhealthtools.ihe.atna.auditor.PDQConsumerAuditor;
-import org.openhealthtools.ihe.atna.auditor.PIXConsumerAuditor;
-import org.openhealthtools.ihe.atna.auditor.PIXSourceAuditor;
+import org.openehealth.ipf.commons.audit.AuditContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import net.ihe.gazelle.hl7v3.coctmt030007UV.COCTMT030007UVPerson;
 import net.ihe.gazelle.hl7v3.coctmt150003UV03.COCTMT150003UV03ContactParty;
@@ -65,14 +65,9 @@ public class PixPdqV3QueryBase extends CamelService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(PixPdqV3QueryBase.class.getName());
 
-	/** The ATNA audit enterprise site id. */
-	protected final String auditEnterpriseSiteId;
-
-	/** The ATNA audit repository uri. */
-	protected final String auditRepositoryUri;
-
-	/** The ATNA audit source id. */
-	protected final String auditSourceId;
+	/** The ATNA audit context */
+	@Autowired
+	protected AuditContext auditContext;
 
 	/** The domain to return namespace (optional). */
 	protected String domainToReturnNamespace;
@@ -87,37 +82,40 @@ public class PixPdqV3QueryBase extends CamelService {
 	protected String homeCommunityNamespace;
 
 	/** The home community oid. */
-	protected final String homeCommunityOid;
+	protected String homeCommunityOid;
 
 	/** oid of id domains which are not medical ids */
-	protected final Set<String> otherOidIds;
+	protected Set<String> otherOidIds;
 
 	/** The pdq consumer uri endpoint. */
-	protected final URI pdqConsumerUri;
+	protected URI pdqConsumerUri;
 
 	/** The pix query uri endpoint. */
-	protected final URI pixQueryUri;
+	protected URI pixQueryUri;
 
 	/** The pix source uri endpoint. */
-	protected final URI pixSourceUri;
+	protected URI pixSourceUri;
 
 	/** The receiver application oid. */
-	protected final String receiverApplicationOid;
+	protected String receiverApplicationOid;
 
 	/** The receiver facility oid. */
-	protected final String receiverFacilityOid;
+	protected String receiverFacilityOid;
 
 	/** The sender application oid. */
-	protected final String senderApplicationOid;
+	protected String senderApplicationOid;
 
 	/** The sender facility oid. */
-	protected final String senderFacilityOid;
+	protected String senderFacilityOid;
+
+	public PixPdqV3QueryBase() {
+
+	}
 
 	public PixPdqV3QueryBase(AffinityDomain affinityDomain, String homeCommunityOid, String homeCommunityNamespace,
-			String domainToReturnOid, String domainToReturnNamespace) {
+			String domainToReturnOid, String domainToReturnNamespace, CamelContext context) {
 		var pixQuery = affinityDomain.getPixDestination();
 		var pdqQuery = affinityDomain.getPdqDestination();
-		var atna = affinityDomain.getAtnaConfig();
 		
 		this.pixQueryUri = pixQuery != null ? pixQuery.getUri() : null;
 		this.pixSourceUri = pixQuery != null ? pixQuery.getUri() : null;
@@ -130,16 +128,13 @@ public class PixPdqV3QueryBase extends CamelService {
 		this.homeCommunityNamespace = homeCommunityNamespace;
 		this.domainToReturnOid = domainToReturnOid;
 		this.domainToReturnNamespace = domainToReturnNamespace;
-		this.auditRepositoryUri = atna != null ? atna.getAuditRepositoryUri() : null;
-		this.auditSourceId = atna != null ? atna.getAuditSourceId() : null;
-		this.auditEnterpriseSiteId = atna != null ? atna.getAuditEnterpriseSiteID() : null;
 		this.otherOidIds = affinityDomain.getOtherIdsOidSet();
+		this.setCamelContext(context);
 	}
 
-	public PixPdqV3QueryBase(AffinityDomain affinityDomain, String homeCommunityOid) {
+	public PixPdqV3QueryBase(AffinityDomain affinityDomain, String homeCommunityOid, CamelContext context) {
 		var pixQuery = affinityDomain.getPixDestination();
 		var pdqQuery = affinityDomain.getPdqDestination();
-		var atna = affinityDomain.getAtnaConfig();
 
 		this.pixQueryUri = pixQuery != null ? pixQuery.getUri() : null;
 		this.pixSourceUri = pixQuery != null ? pixQuery.getUri() : null;
@@ -149,79 +144,21 @@ public class PixPdqV3QueryBase extends CamelService {
 		this.receiverApplicationOid = pixQuery != null ? pixQuery.getReceiverApplicationOid() : null;
 		this.receiverFacilityOid = pixQuery != null ? pixQuery.getReceiverFacilityOid() : null;
 		this.homeCommunityOid = homeCommunityOid;
-		this.auditRepositoryUri = atna != null ? atna.getAuditRepositoryUri() : null;
-		this.auditSourceId = atna != null ? atna.getAuditSourceId() : null;
-		this.auditEnterpriseSiteId = atna != null ? atna.getAuditEnterpriseSiteID() : null;
 		this.otherOidIds = affinityDomain.getOtherIdsOidSet();
+		this.setCamelContext(context);
 	}
 
-	/**
-	 * Configures the pix actor, is automatically called by the different functions.
-	 *
-	 * @param source true if source actor, false for consumer
-	 * @return true, if successful
-	 */
-	protected boolean configurePixAtna(boolean source) {
-		try {
-			LOGGER.debug("pix configure start");
-			if (source) {
-				if (auditSourceId != null) {
-					PIXSourceAuditor.getAuditor().getConfig().setAuditSourceId(auditSourceId);
-				}
-				if (auditEnterpriseSiteId != null) {
-					PIXSourceAuditor.getAuditor().getConfig()
-							.setAuditEnterpriseSiteId(auditEnterpriseSiteId);
-				}
-				if (auditRepositoryUri != null) {
-					PIXSourceAuditor.getAuditor().getConfig().setAuditRepositoryUri(auditRepositoryUri);
-				}
-			}
-			if (!source) {
-				if (auditSourceId != null) {
-					PIXConsumerAuditor.getAuditor().getConfig().setAuditSourceId(auditSourceId);
-				}
-				if (auditEnterpriseSiteId != null) {
-					PIXConsumerAuditor.getAuditor().getConfig()
-							.setAuditEnterpriseSiteId(auditEnterpriseSiteId);
-				}
-				if (auditRepositoryUri != null) {
-					PIXConsumerAuditor.getAuditor().getConfig()
-							.setAuditRepositoryUri(auditRepositoryUri);
-				}
-			}
-		} catch (final Exception e) {
-			LOGGER.error("configuring not successful", e);
-			return false;
-		}
-		LOGGER.debug("configure end");
-		return true;
-	}
+	public void setAffinityDomain(AffinityDomain affinityDomain) {
+		var pixQuery = affinityDomain.getPixDestination();
+		var pdqQuery = affinityDomain.getPdqDestination();
 
-	/**
-	 * Configures the pdq consumer actor, is automatically called by the different
-	 * functions.
-	 *
-	 * @return true, if successful
-	 */
-	protected boolean configurePdqAtna() {
-		try {
-			LOGGER.debug("pdq configure start");
-			if (auditSourceId != null) {
-				PDQConsumerAuditor.getAuditor().getConfig().setAuditSourceId(auditSourceId);
-			}
-			if (auditEnterpriseSiteId != null) {
-				PDQConsumerAuditor.getAuditor().getConfig()
-						.setAuditEnterpriseSiteId(auditEnterpriseSiteId);
-			}
-			if (auditRepositoryUri != null) {
-				PDQConsumerAuditor.getAuditor().getConfig().setAuditRepositoryUri(auditRepositoryUri);
-			}
-		} catch (final Exception e) {
-			LOGGER.error("configuring not successful", e);
-			return false;
-		}
-		LOGGER.debug("configure end");
-		return true;
+		this.pixQueryUri = pixQuery != null ? pixQuery.getUri() : null;
+		this.pixSourceUri = pixQuery != null ? pixQuery.getUri() : null;
+		this.pdqConsumerUri = pdqQuery != null ? pdqQuery.getUri() : null;
+		this.senderApplicationOid = pixQuery != null ? pixQuery.getSenderApplicationOid() : null;
+		this.senderFacilityOid = pixQuery != null ? pixQuery.getSenderFacilityOid() : null;
+		this.receiverApplicationOid = pixQuery != null ? pixQuery.getReceiverApplicationOid() : null;
+		this.receiverFacilityOid = pixQuery != null ? pixQuery.getReceiverFacilityOid() : null;
 	}
 
 	/**
@@ -386,17 +323,17 @@ public class PixPdqV3QueryBase extends CamelService {
 	 * @param v3PixSourceMessage the v3 pix source message
 	 */
 	protected void addPatientIds(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
-		for (final Identifier Identifier : patient.getIdentifier()) {
-			if ((Identifier.getSystem().length() > 8) && (Identifier.getSystem().startsWith(FhirCommon.oidUrn))) {
-				final String oid = FhirCommon.removeUrnOidPrefix(Identifier.getSystem());
+		for (final Identifier identifier : patient.getIdentifier()) {
+			if ((identifier.getSystem().length() > 8)) {
+				final String oid = FhirCommon.removeUrnOidPrefix(identifier.getSystem());
 				if (this.otherOidIds.contains(oid)) {
-					v3PixSourceMessage.addPatientOtherID(Identifier.getValue(), oid);
+					v3PixSourceMessage.addPatientOtherID(identifier.getValue(), oid);
 				} else {
 					if (this.homeCommunityOid != null && this.homeCommunityOid.equals(oid)) {
-						v3PixSourceMessage.addPatientID(Identifier.getValue(), this.homeCommunityOid,
+						v3PixSourceMessage.addPatientID(identifier.getValue(), this.homeCommunityOid,
 								this.homeCommunityNamespace);
 					} else {
-						v3PixSourceMessage.addPatientID(Identifier.getValue(), oid, "");
+						v3PixSourceMessage.addPatientID(identifier.getValue(), oid, "");
 					}
 				}
 			}
@@ -462,28 +399,28 @@ public class PixPdqV3QueryBase extends CamelService {
 		final List<PN> pns = pdqPatient.getPatientPerson().getName();
 		for (var i = 0; i < pns.size(); ++i) {
 			final var pn = pns.get(i);
-			final var HumanNameType = new HumanName();
+			final var humanNameType = new HumanName();
 			if (pn.getGiven() != null) {
 				for (final EnGiven given : pn.getGiven()) {
-					HumanNameType.addGiven(getMixedValue(given.getMixed()));
+					humanNameType.addGiven(getMixedValue(given.getMixed()));
 				}
 			}
 			if (pn.getFamily() != null) {
 				for (final EnFamily family : pn.getFamily()) {
-					HumanNameType.setFamily(getMixedValue(family.getMixed()));
+					humanNameType.setFamily(getMixedValue(family.getMixed()));
 				}
 			}
 			if (pn.getPrefix() != null) {
 				for (final EnPrefix prefix : pn.getPrefix()) {
-					HumanNameType.addPrefix(getMixedValue(prefix.getMixed()));
+					humanNameType.addPrefix(getMixedValue(prefix.getMixed()));
 				}
 			}
 			if (pn.getSuffix() != null) {
 				for (final EnSuffix suffix : pn.getSuffix()) {
-					HumanNameType.addPrefix(getMixedValue(suffix.getMixed()));
+					humanNameType.addPrefix(getMixedValue(suffix.getMixed()));
 				}
 			}
-			patient.getName().add(HumanNameType);
+			patient.getName().add(humanNameType);
 		}
 	}
 
@@ -975,7 +912,7 @@ public class PixPdqV3QueryBase extends CamelService {
 	 */
 	protected void setPatientMothersMaidenName(FhirPatient patient, V3PixSourceMessageHelper v3PixSourceMessage) {
 		final HumanName maidenName = patient.getMothersMaidenName();
-		if (maidenName.isEmpty()) {
+		if (maidenName != null && maidenName.getFamily() != null) {
 			final String familyName = maidenName.getFamily();
 			final var givenName = maidenName.getGivenAsSingleString();
 			final var otherName = ""; // other is resolved into given in

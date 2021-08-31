@@ -16,15 +16,15 @@
  */
 package org.ehealth_connector.common.mdht;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.eclipse.emf.common.util.EList;
 import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.ADXP;
 
@@ -52,7 +52,7 @@ public class AddressTest {
 	private String testCity_2;
 	private String testCountry_2;
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		testStreet_1 = "Musterstrasse";
 		testHouseNumber_1 = "2";
@@ -81,7 +81,7 @@ public class AddressTest {
 	 * .
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testAddressAD() {
 		// this test has to be implemented with mock
 	}
@@ -170,7 +170,7 @@ public class AddressTest {
 	 * .
 	 */
 	@Test
-	@Ignore("Error within setter and getter")
+	@Disabled("Error within setter and getter")
 	public void testSetAddressline1() {
 		final Address adr = new Address(testAddressline1_1, testAddressline2_1, testAddressline3_1,
 				testZip_1, testCity_1, testUsage_1);
@@ -185,7 +185,7 @@ public class AddressTest {
 	 * .
 	 */
 	@Test
-	@Ignore("Error within setter and getter")
+	@Disabled("Error within setter and getter")
 	public void testSetAddressline2() {
 		final Address adr = new Address(testAddressline1_1, testAddressline2_1, testAddressline3_1,
 				testZip_1, testCity_1, testUsage_1);
@@ -200,7 +200,7 @@ public class AddressTest {
 	 * .
 	 */
 	@Test
-	@Ignore("Error within setter and getter")
+	@Disabled("Error within setter and getter")
 	public void testSetAddressline3() {
 		final Address adr = new Address(testAddressline1_1, testAddressline2_1, testAddressline3_1,
 				testZip_1, testCity_1, testUsage_1);
@@ -214,7 +214,7 @@ public class AddressTest {
 	 * {@link org.ehealth_connector.common.mdht.Address#setCity(java.lang.String)}.
 	 */
 	@Test
-	@Ignore("Error within setter and getter")
+	@Disabled("Error within setter and getter")
 	public void testSetCity() {
 		final Address adr = new Address(testStreet_1, testHouseNumber_1, testZip_1, testCity_1,
 				testUsage_1);
@@ -229,7 +229,7 @@ public class AddressTest {
 	 * .
 	 */
 	@Test
-	@Ignore("Error out of bound")
+	@Disabled("Error out of bound")
 	public void testSetCountry() {
 		final Address adr = new Address(testStreet_1, testHouseNumber_1, testZip_1, testCity_1,
 				testUsage_1);
@@ -245,7 +245,7 @@ public class AddressTest {
 	 * .
 	 */
 	@Test
-	@Ignore("Error within setter and getter")
+	@Disabled("Error within setter and getter")
 	public void testSetHouseNumber() {
 		final Address adr = new Address(testStreet_1, testHouseNumber_1, testZip_1, testCity_1,
 				testUsage_1);
@@ -259,7 +259,7 @@ public class AddressTest {
 	 * {@link org.ehealth_connector.common.mdht.Address#setStreet(java.lang.String)}.
 	 */
 	@Test
-	@Ignore("Error within setter and getter")
+	@Disabled("Error within setter and getter")
 	public void testSetStreet() {
 		final Address adr = new Address(testStreet_1, testHouseNumber_1, testZip_1, testCity_1,
 				testUsage_1);
@@ -273,7 +273,7 @@ public class AddressTest {
 	 * {@link org.ehealth_connector.common.mdht.Address#setZip(java.lang.String)}.
 	 */
 	@Test
-	@Ignore("Error within setter and getter")
+	@Disabled("Error within setter and getter")
 	public void testSetZip() {
 		final Address adr = new Address(testStreet_1, testHouseNumber_1, testZip_1, testCity_1,
 				testUsage_1);

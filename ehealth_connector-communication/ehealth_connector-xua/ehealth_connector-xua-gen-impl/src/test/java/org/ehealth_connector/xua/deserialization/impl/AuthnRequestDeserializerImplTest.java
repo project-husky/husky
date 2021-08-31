@@ -16,7 +16,8 @@
  */
 package org.ehealth_connector.xua.deserialization.impl;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -24,8 +25,8 @@ import java.nio.file.Paths;
 import org.ehealth_connector.xua.authentication.AuthnRequest;
 import org.ehealth_connector.xua.exceptions.DeserializeException;
 import org.ehealth_connector.xua.utilities.impl.AbstractTestHelper;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Element;
 
 public class AuthnRequestDeserializerImplTest extends AbstractTestHelper {
@@ -36,7 +37,7 @@ public class AuthnRequestDeserializerImplTest extends AbstractTestHelper {
 	private String testXmlString;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		testDeserializer = new AuthnRequestDeserializerImpl();
@@ -77,10 +78,9 @@ public class AuthnRequestDeserializerImplTest extends AbstractTestHelper {
 	 *
 	 * @throws DeserializeException
 	 */
-	@Test(expected = DeserializeException.class)
+	@Test
 	public void testFromXmlElement_InputNull() throws DeserializeException {
-		final AuthnRequest ref = testDeserializer.fromXmlElement(null);
-		assertNotNull(ref);
+		assertThrows(DeserializeException.class, () -> testDeserializer.fromXmlElement(null));
 	}
 
 	/**

@@ -16,12 +16,12 @@
  */
 package org.ehealth_connector.xua.saml2.impl;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.ehealth_connector.xua.saml2.Status;
 import org.ehealth_connector.xua.saml2.StatusCode;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class StatusBuilderImplTest {
 
@@ -30,7 +30,7 @@ public class StatusBuilderImplTest {
 	private StatusCode testStatusCode;
 	private String testStatusMessage;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		builder = new StatusBuilderImpl();
 		testInnerObject = new org.opensaml.saml.saml2.core.impl.StatusBuilder().buildObject();

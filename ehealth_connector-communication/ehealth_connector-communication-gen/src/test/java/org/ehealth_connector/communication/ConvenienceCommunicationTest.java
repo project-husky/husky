@@ -16,9 +16,10 @@
  */
 package org.ehealth_connector.communication;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,9 +42,9 @@ import org.ehealth_connector.xua.exceptions.DeserializeException;
 import org.ehealth_connector.xua.exceptions.SerializeException;
 import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.serialization.impl.AssertionSerializerImpl;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.response.XDSQueryResponseType;
 import org.openhealthtools.ihe.xua.XUAAssertion;
@@ -86,7 +87,7 @@ public class ConvenienceCommunicationTest {
 	XDSQueryResponseType qr;
 	private Assertion testAssertion;
 
-	@Before
+	@BeforeEach
 	public void init()
 			throws IOException, URISyntaxException, DeserializeException, InitializationException {
 		try {
@@ -124,7 +125,7 @@ public class ConvenienceCommunicationTest {
 	}
 
 	@Test
-	@Ignore
+	@Disabled
 	public void testAddDocument() {
 		try {
 			final DocumentMetadata d = c.addDocument(DocumentDescriptor.CDA_R2, cdaFilePath);

@@ -21,12 +21,14 @@ import org.openehealth.ipf.platform.camel.ihe.ws.AbstractWsEndpoint;
 import org.opensaml.core.xml.XMLObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class CamelService implements CamelContextAware {
 
 	/** The SLF4J logger instance. */
 	private static Logger log = LoggerFactory.getLogger(CamelService.class);
 
+	@Autowired
 	private CamelContext camelContext;
 
 	@Override
