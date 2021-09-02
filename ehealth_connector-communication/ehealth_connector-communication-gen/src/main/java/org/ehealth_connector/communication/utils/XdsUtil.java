@@ -18,6 +18,7 @@ package org.ehealth_connector.communication.utils;
 
 import org.ehealth_connector.communication.DocDescriptor;
 import org.ehealth_connector.communication.xd.storedquery.DateTimeRange;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.TimeRange;
 import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.document.XDSDocument;
 
@@ -35,14 +36,14 @@ public class XdsUtil {
 	 *            the OHT DateTimeRange
 	 * @return the DateTimeRange Array
 	 */
-	public static org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] convertEhcDateTimeRange(
+	public static TimeRange[] convertEhcDateTimeRange(
 			DateTimeRange[] dtr) {
 		if (dtr == null)
 			return null;
 		else {
-			final org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] dtrArray = new org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[dtr.length];
+			final var dtrArray = new TimeRange[dtr.length];
 
-			int i = 0;
+			var i = 0;
 			for (final DateTimeRange dt : dtr) {
 				dtrArray[i] = dt.getOhtDateTimeRange();
 				i++;
@@ -64,7 +65,7 @@ public class XdsUtil {
 	 */
 	public static String createXdmDocName(XDSDocument xdsDoc, int docNr) {
 		// compile the path and filename for the zip file
-		String fileName = "DOC";
+		var fileName = "DOC";
 
 		// Fix DocumentDescriptor problem...
 		DocumentDescriptor dd = xdsDoc.getDescriptor();

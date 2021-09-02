@@ -19,12 +19,12 @@ package org.ehealth_connector.common.testhelpers;
 import java.util.Random;
 
 import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Patient;
-import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.mdht.Identificator;
-import org.ehealth_connector.common.mdht.Name;
-import org.ehealth_connector.common.mdht.Organization;
-import org.ehealth_connector.common.mdht.Telecoms;
+import org.ehealth_connector.common.basetypes.TelecomBaseType;
 import org.ehealth_connector.common.mdht.Value;
 
 /**
@@ -120,23 +120,23 @@ public abstract class AbstractTestHelper {
 	}
 
 	public static boolean isEqual(Name n1, Name n2) {
-		if (!n1.getPrefixes().equals(n2.getPrefixes()))
+		if (!n1.getPrefix().equals(n2.getPrefix()))
 			return false;
-		if (!n1.getAllGivenNames().equals(n2.getAllGivenNames()))
+		if (!n1.getGiven().equals(n2.getGiven()))
 			return false;
-		if (!n1.getFamilyNames().equals(n2.getFamilyNames()))
+		if (!n1.getFamily().equals(n2.getFamily()))
 			return false;
-		if (!n1.getSuffixes().equals(n2.getSuffixes()))
+		if (!n1.getSuffix().equals(n2.getSuffix()))
 			return false;
 		return true;
 	}
 
 	public static boolean isEqual(Organization o1, Organization o2) {
-		if (!o1.getId().equals(o2.getId()))
+		if (!o1.getPrimaryIdentificator().equals(o2.getPrimaryIdentificator()))
 			return false;
-		if (!o1.getName().equals(o2.getName()))
+		if (!o1.getPrimaryName().equals(o2.getPrimaryName()))
 			return false;
-		if (!isEqual(o1.getTelecoms(), o2.getTelecoms()))
+		if (!isEqual(o1.getPrimaryTelecom(), o2.getPrimaryTelecom()))
 			return false;
 		return true;
 	}
@@ -169,25 +169,9 @@ public abstract class AbstractTestHelper {
 		return true;
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
-	public static boolean isEqual(Telecoms t1, Telecoms t2) {
-		if (t1.getEMails() != null) {
-			for (int i = 0; i < t1.getEMails().size(); i++) {
-				if (t1.getEMails().get(i) != t2.getEMails().get(i))
-					return false;
-			}
-		}
-		if (t1.getFaxes() != null) {
-			for (int i = 0; i < t1.getFaxes().size(); i++) {
-				if (t1.getFaxes().get(i) != t2.getFaxes().get(i))
-					return false;
-			}
-		}
-		if (t1.getPhones() != null) {
-			for (int i = 0; i < t1.getPhones().size(); i++) {
-				if (t1.getPhones().get(i) != t2.getPhones().get(i))
-					return false;
-			}
+	public static boolean isEqual(TelecomBaseType t1, TelecomBaseType t2) {
+		if (t1.getValue() != null) {
+			return t1.getValue().equalsIgnoreCase(t2.getValue());
 		}
 
 		return true;
