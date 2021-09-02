@@ -295,7 +295,7 @@ public class CdaChV2StructuredBodyTest {
 		cda.addTemplateId(id2);
 
 		for (Identificator id : cda.getTemplateIds()) {
-			assertNull("Extensions not allowd for template ids", id.getExtension());
+			assertNull(id.getExtension(), "Extensions not allowd for template ids");
 			if (id1.getRoot().equals(id.getRoot()))
 				id1Found = true;
 			if (id2.getRoot().equals(id.getRoot()))
@@ -325,7 +325,7 @@ public class CdaChV2StructuredBodyTest {
 				"dummy");
 
 		for (Identificator id : cda.getTemplateIds()) {
-			assertNull("Extensions not allowd for template ids", id.getExtension());
+			assertNull(id.getExtension(), "Extensions not allowd for template ids");
 			if (idCdaChV2SbEnhanced.equals(id.getRoot()))
 				idFoundCdaChV2SbEnhanced = true;
 			if (idCdaChV2Sb.equals(id.getRoot()))

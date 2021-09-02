@@ -52,7 +52,7 @@ public class PreviousObservationTest {
 				DateUtil.parseDateyyyyMMddHHmmZZZZ("201505021003+0200"), value, obsIntCode);
 
 		for (Identificator id : prevObs.getTemplateIds()) {
-			assertNull("Extensions not allowd for template ids", id.getExtension());
+			assertNull(id.getExtension(), "Extensions not allowd for template ids");
 			if (idIhe.equals(id.getRoot()))
 				idFoundIhe = true;
 			if (idChPalm.equals(id.getRoot()))

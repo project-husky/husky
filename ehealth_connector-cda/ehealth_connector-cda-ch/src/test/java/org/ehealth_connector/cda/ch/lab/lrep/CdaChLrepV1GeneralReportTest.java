@@ -144,7 +144,7 @@ public class CdaChLrepV1GeneralReportTest {
 				"dummy");
 
 		for (Identificator id : cda.getTemplateIds()) {
-			assertNull("Extensions not allowd for template ids", id.getExtension());
+			assertNull(id.getExtension(), "Extensions not allowd for template ids");
 			if (idIheXdLab.equals(id.getRoot()))
 				idFoundIheXdLab = true;
 			if (idIheMs.equals(id.getRoot()))

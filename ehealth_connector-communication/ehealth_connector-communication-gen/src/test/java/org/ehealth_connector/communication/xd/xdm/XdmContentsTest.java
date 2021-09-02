@@ -27,11 +27,13 @@ import java.util.Date;
 
 import org.ehealth_connector.communication.ConvenienceCommunication;
 import org.ehealth_connector.communication.testhelper.XdmTestUtils;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
  * Test of class XdmContents
  */
+@Disabled
 public class XdmContentsTest extends XdmTestUtils {
 
 	public static final String XDM_FILE_PATH = "/docConsumer/xdm.zip";

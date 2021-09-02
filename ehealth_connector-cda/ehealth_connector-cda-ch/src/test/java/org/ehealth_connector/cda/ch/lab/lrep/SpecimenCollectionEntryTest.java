@@ -48,7 +48,7 @@ public class SpecimenCollectionEntryTest {
 		sce.setSpecimenCollectionApproachSiteCodeOriginalText("Test site");
 
 		for (Identificator id : sce.getTemplateIds()) {
-			assertNull("Extensions not allowd for template ids", id.getExtension());
+			assertNull(id.getExtension(), "Extensions not allowd for template ids");
 			if (idIhe.equals(id.getRoot()))
 				idFoundIhe = true;
 			if (idChPalm.equals(id.getRoot()))
