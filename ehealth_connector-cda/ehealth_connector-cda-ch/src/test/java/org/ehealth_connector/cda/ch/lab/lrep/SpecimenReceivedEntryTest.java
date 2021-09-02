@@ -45,7 +45,7 @@ public class SpecimenReceivedEntryTest {
 		final SpecimenReceivedEntry sre = new SpecimenReceivedEntry(
 				DateUtilMdht.dateAndTime("22.02.2018 12:02"), null);
 		for (Identificator id : sre.getTemplateIds()) {
-			assertNull("Extensions not allowd for template ids", id.getExtension());
+			assertNull(id.getExtension(), "Extensions not allowd for template ids");
 			if (idIhe.equals(id.getRoot()))
 				idFoundIhe = true;
 			if (idChPalm.equals(id.getRoot()))

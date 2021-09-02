@@ -853,11 +853,11 @@
 			<artifactId>junit-jupiter-api</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.apache.maven.surefire</groupId>
 			<artifactId>surefire-junit-platform</artifactId>
 			<scope>test</scope>
-		</dependency>
+		</dependency> -->
 	</dependencies>
 
 	<repositories>

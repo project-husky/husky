@@ -53,6 +53,7 @@ import org.opensaml.core.config.InitializationException;
 import org.opensaml.core.config.InitializationService;
 import org.w3c.dom.Element;
 
+@Disabled
 public class ConvenienceCommunicationTest {
 
 	// NIST Repository

@@ -46,7 +46,7 @@ public class LaboratoryReportDataProcessingEntryTest {
 		LaboratoryReportDataProcessingEntry lrdpe = new LaboratoryReportDataProcessingEntry();
 
 		for (Identificator id : lrdpe.getTemplateIds()) {
-			assertNull("Extensions not allowd for template ids", id.getExtension());
+			assertNull(id.getExtension(), "Extensions not allowd for template ids");
 			if (idIhe.equals(id.getRoot()))
 				idFoundIhe = true;
 			if (idChPalm.equals(id.getRoot()))
