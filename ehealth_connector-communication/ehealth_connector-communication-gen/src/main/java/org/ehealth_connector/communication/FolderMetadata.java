@@ -17,18 +17,16 @@
 
 package org.ehealth_connector.communication;
 
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
-import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
-import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;
-import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
-import org.openhealthtools.ihe.xds.metadata.FolderType;
-import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Folder;
 
 /**
  * <div class="en">Class FolderMetadata. Provides metadata attributes as
@@ -41,24 +39,23 @@ import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
  */
 public class FolderMetadata {
 
-	/** the OHT FolderType */
-	private final FolderType f;
+	/** the IPF Folder */
+	private final Folder f;
 
 	/**
 	 * Default constructor to instanciate the object
 	 */
 	public FolderMetadata() {
-		f = MetadataFactory.eINSTANCE.createFolderType();
+		f = new Folder();
 	}
 
 	/**
 	 * <div class="en">Default constructor to instanciate the object
 	 *
-	 * @param ohtFolderType
-	 *            OHT FolderType </div>
+	 * @param ipfFolder IPF folder </div>
 	 */
-	public FolderMetadata(FolderType ohtFolderType) {
-		f = ohtFolderType;
+	public FolderMetadata(Folder ipfFolder) {
+		f = ipfFolder;
 	}
 
 	/**
@@ -68,9 +65,8 @@ public class FolderMetadata {
 	 *            the code to be added
 	 */
 	public void addCode(Code aCode) {
-		@SuppressWarnings("unchecked")
-		final EList<CodedMetadataType> eList = f.getCode();
-		eList.add(XdsMetadataUtil.convertEhcCodeToCodedMetadataType(aCode));
+		final List<org.openehealth.ipf.commons.ihe.xds.core.metadata.Code> list = f.getCodeList();
+		list.add(XdsMetadataUtil.convertEhcCodeToCode(aCode));
 	}
 
 	/**
@@ -78,7 +74,7 @@ public class FolderMetadata {
 	 *
 	 * @return status the AvailabilityStatus </div>
 	 */
-	public AvailabilityStatusType getAvailabilityStatus() {
+	public AvailabilityStatus getAvailabilityStatus() {
 		return f.getAvailabilityStatus();
 	}
 
@@ -89,10 +85,10 @@ public class FolderMetadata {
 	 */
 	public List<Code> getCodeList() {
 		final List<Code> retVal = new ArrayList<>();
-		@SuppressWarnings("unchecked")
-		final EList<CodedMetadataType> eList = f.getCode();
-		for (int i = 0; i < eList.size(); ++i) {
-			retVal.add(XdsMetadataUtil.convertOhtCodedMetadataType(eList.get(i)));
+
+		List<org.openehealth.ipf.commons.ihe.xds.core.metadata.Code> list = f.getCodeList();
+		for (var i = 0; i < list.size(); ++i) {
+			retVal.add(XdsMetadataUtil.convertOhtCodedMetadataType(list.get(i)));
 		}
 
 		return retVal;
@@ -113,7 +109,7 @@ public class FolderMetadata {
 	 * @return the EntryUUID </div>
 	 */
 	public String getEntryUUID() {
-		return f.getEntryUUID();
+		return f.getEntryUuid();
 	}
 
 	/**
@@ -123,8 +119,8 @@ public class FolderMetadata {
 	 *
 	 * @return the update time </div>
 	 */
-	public Date getLastUpdateTime() {
-		return XdsMetadataUtil.convertDtmStringToDate(f.getLastUpdateTime());
+	public ZonedDateTime getLastUpdateTime() {
+		return f.getLastUpdateTime().getDateTime();
 	}
 
 	/**
@@ -164,7 +160,7 @@ public class FolderMetadata {
 	 * @param status
 	 *            the AvailabilityStatus </div>
 	 */
-	public void setAvailabilityStatus(AvailabilityStatusType status) {
+	public void setAvailabilityStatus(AvailabilityStatus status) {
 		f.setAvailabilityStatus(status);
 	}
 
@@ -175,11 +171,10 @@ public class FolderMetadata {
 	 *            the list of codes to be set </div>
 	 */
 	public void setCodeList(List<Code> codeList) {
-		@SuppressWarnings("unchecked")
-		final EList<CodedMetadataType> eList = f.getCode();
-		eList.clear();
+		final List<org.openehealth.ipf.commons.ihe.xds.core.metadata.Code> list = f.getCodeList();
+		list.clear();
 		for (final Code code : codeList) {
-			eList.add(XdsMetadataUtil.convertEhcCodeToCodedMetadataType(code));
+			list.add(XdsMetadataUtil.convertEhcCodeToCode(code));
 		}
 
 	}
@@ -201,7 +196,7 @@ public class FolderMetadata {
 	 *            the uuid to be set </div>
 	 */
 	public void setEntryUUID(String entryUuid) {
-		f.setEntryUUID(entryUuid);
+		f.setEntryUuid(entryUuid);
 	}
 
 	/**

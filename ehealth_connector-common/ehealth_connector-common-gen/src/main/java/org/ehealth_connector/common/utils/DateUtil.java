@@ -362,13 +362,12 @@ public class DateUtil {
 
 	/**
 	 * <div class="en">Formats the given timestamp as String:
-	 * yyyyMMddHHmmssZ</div>
+	 * yyyyMMddHHmmssXXXX</div>
 	 *
 	 * <div class="de">Formatiert den angegebenen Zeitstempel als String:
-	 * yyyyMMddHHmmssZ</div>
+	 * yyyyMMddHHmmssXXXX</div>
 	 *
-	 * @param value
-	 *            the value
+	 * @param value the value
 	 * @return the string
 	 */
 	public static String formatDateTimeTzon(Date value) {
@@ -377,16 +376,17 @@ public class DateUtil {
 	}
 
 	/**
-	 * <div class="en">Formats the given timestamp as String: yyyyMMddHHmmssZ</div>
+	 * <div class="en">Formats the given timestamp as String:
+	 * yyyyMMddHHmmssXXXX</div>
 	 *
 	 * <div class="de">Formatiert den angegebenen Zeitstempel als String:
-	 * yyyyMMddHHmmssZ</div>
+	 * yyyyMMddHHmmssXXXX</div>
 	 *
 	 * @param value the value
 	 * @return the string
 	 */
 	public static String formatDateTimeTzon(ZonedDateTime value) {
-		return value.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssXXXX"));
+		return value.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssZ"));
 	}
 
 	/**
@@ -398,6 +398,25 @@ public class DateUtil {
 	 */
 	public static Date nowAsDate() {
 		return new Date();
+	}
+
+	/**
+	 * <div class="en">Returns the current system timestamp.</div>
+	 *
+	 * <div class="de">Liefert die aktuelle Systemzeit.</div>
+	 *
+	 * @return the date
+	 */
+	public static ZonedDateTime nowAsZonedDate() {
+		return ZonedDateTime.now();
+	}
+
+	public static Date parseDate(ZonedDateTime date) {
+		return Date.from(date.toInstant());
+	}
+
+	public static ZonedDateTime parseZonedDate(Date date) {
+		return ZonedDateTime.from(date.toInstant());
 	}
 
 	/**

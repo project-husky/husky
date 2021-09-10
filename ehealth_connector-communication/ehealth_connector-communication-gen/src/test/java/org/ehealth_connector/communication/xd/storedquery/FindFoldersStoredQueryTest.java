@@ -20,17 +20,19 @@ package org.ehealth_connector.communication.xd.storedquery;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.Map;
+
 import org.ehealth_connector.communication.testhelper.XdsTestUtils;
 import org.junit.jupiter.api.Test;
+import org.openehealth.ipf.commons.ihe.xds.core.requests.query.QueryList;
 import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
-import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameterList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * Test of class FindFoldersStoredQuery
  */
-public class FindFoldersStoredQueryTest extends XdsTestUtils {
+class FindFoldersStoredQueryTest extends XdsTestUtils {
 
 	/** The SLF4J logger instance. */
 	protected final Logger log = LoggerFactory.getLogger(getClass());
@@ -43,19 +45,19 @@ public class FindFoldersStoredQueryTest extends XdsTestUtils {
 	 * @throws MalformedStoredQueryException
 	 */
 	@Test
-	public void testFindFoldersStoredQuery() throws MalformedStoredQueryException {
+	void testFindFoldersStoredQuery() throws MalformedStoredQueryException {
 		final FindFoldersStoredQuery q = new FindFoldersStoredQuery(patientId, availabilityStatus);
 
-		final StoredQueryParameterList sqpl = q.getOhtStoredQuery().getQueryParameters();
+		final Map<String, QueryList<String>> sqpl = q.getIpfQuery().getExtraParameters();
 
-		final String patientIdRootRef = sqpl.get("$XDSFolderPatientId");
-		assertEquals(patientId.getRoot(), extractByRegex(".*\\&(.*)\\&.*", patientIdRootRef));
+		final QueryList<String> patientIdRootRef = sqpl.get("$XDSFolderPatientId");
+		assertEquals(patientId.getRoot(), extractByRegex(".*\\&(.*)\\&.*", patientIdRootRef.getOuterList()));
 		assertEquals(patientId.getExtension(),
-				extractByRegex("'(.*)\\^\\^\\^\\&.*\\&.*'", patientIdRootRef));
+				extractByRegex("'(.*)\\^\\^\\^\\&.*\\&.*'", patientIdRootRef.getOuterList()));
 
-		final String statusRef = sqpl.get("$XDSFolderStatus");
-		assertEquals(availabilityStatus.getName(), extractByRegex(
-				"\\(\\'urn:oasis:names:tc:ebxml-regrep:StatusType:(.*)\\'\\)", statusRef));
+		final QueryList<String> statusRef = sqpl.get("$XDSFolderStatus");
+		assertEquals(availabilityStatus.getQueryOpcode(), extractByRegex(
+				"\\(\\'urn:oasis:names:tc:ebxml-regrep:StatusType:(.*)\\'\\)", statusRef.getOuterList()));
 
 	}
 

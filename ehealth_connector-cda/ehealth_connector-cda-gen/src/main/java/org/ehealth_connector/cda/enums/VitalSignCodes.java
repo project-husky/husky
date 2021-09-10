@@ -17,9 +17,9 @@
 
 package org.ehealth_connector.cda.enums;
 
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.utils.LangText;
 import org.ehealth_connector.common.utils.LangTexts;
 
@@ -89,7 +89,7 @@ public enum VitalSignCodes {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		final Code ret = new Code(CodeSystems.LOINC, loinc);
+		final var ret = new Code(CodeSystems.LOINC.getCodeSystemId(), loinc, null);
 		ret.setDisplayName(getDisplayName(null));
 		return ret;
 	}
@@ -151,7 +151,7 @@ public enum VitalSignCodes {
 	}
 
 	public LangTexts getLangTexts() {
-		LangTexts retVal = new LangTexts();
+		var retVal = new LangTexts();
 		retVal.add(new LangText(LanguageCode.GERMAN, descriptionDe));
 		retVal.add(new LangText(LanguageCode.ENGLISH, descriptionEn));
 		retVal.add(new LangText(LanguageCode.FRENCH, descriptionFr));

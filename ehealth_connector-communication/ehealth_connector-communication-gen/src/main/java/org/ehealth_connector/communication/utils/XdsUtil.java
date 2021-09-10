@@ -16,11 +16,11 @@
  */
 package org.ehealth_connector.communication.utils;
 
+import org.ehealth_connector.common.enums.DocumentDescriptor;
 import org.ehealth_connector.communication.DocDescriptor;
 import org.ehealth_connector.communication.xd.storedquery.DateTimeRange;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.TimeRange;
-import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
-import org.openhealthtools.ihe.xds.document.XDSDocument;
 
 /**
  *
@@ -63,12 +63,13 @@ public class XdsUtil {
 	 *            the number of the document
 	 * @return the name of the document
 	 */
-	public static String createXdmDocName(XDSDocument xdsDoc, int docNr) {
+	public static String createXdmDocName(Document xdsDoc, int docNr) {
 		// compile the path and filename for the zip file
 		var fileName = "DOC";
 
 		// Fix DocumentDescriptor problem...
-		DocumentDescriptor dd = xdsDoc.getDescriptor();
+		var dd = DocumentDescriptor
+				.valueOf(xdsDoc.getDocumentEntry().getMimeType());
 		if (dd.toString().startsWith("UNKNOWN!")) {
 			String mimeType = dd.toString().replace("UNKNOWN!", "");
 			mimeType = mimeType.substring(mimeType.indexOf("!") + 1, mimeType.length());
@@ -93,9 +94,8 @@ public class XdsUtil {
 	 *            the number of the document
 	 * @return the path and name of the document
 	 */
-	public static String createXdmDocPathAndName(XDSDocument xdsDoc, int docNr) {
-		final String filePath = "IHE_XDM/SUBSET01/" + createXdmDocName(xdsDoc, docNr);
-		return filePath;
+	public static String createXdmDocPathAndName(Document xdsDoc, int docNr) {
+		return "IHE_XDM/SUBSET01/" + createXdmDocName(xdsDoc, docNr);
 	}
 
 	/**

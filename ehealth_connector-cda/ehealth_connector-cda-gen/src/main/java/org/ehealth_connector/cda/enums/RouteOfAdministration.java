@@ -17,8 +17,8 @@
 
 package org.ehealth_connector.cda.enums;
 
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.mdht.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
@@ -328,8 +328,7 @@ public enum RouteOfAdministration {
 		} else
 			displayName = displayNameEn;
 
-		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, CODE_SYSTEM_NAME, displayName);
-		return ehcCode;
+		return new Code(CODE_SYSTEM_OID, code, CODE_SYSTEM_NAME, displayName);
 	}
 
 	/**

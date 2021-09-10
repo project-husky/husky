@@ -19,16 +19,18 @@ package org.ehealth_connector.communication.xd.storedquery;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Map;
+
 import org.ehealth_connector.communication.testhelper.XdsTestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openhealthtools.ihe.xds.consumer.storedquery.ObjectType;
-import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameterList;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntryType;
+import org.openehealth.ipf.commons.ihe.xds.core.requests.query.QueryList;
 
 /**
  * Test of class GetFolderAndContentsQuery
  */
-public class GetFolderAndContentsQueryTest extends XdsTestUtils {
+class GetFolderAndContentsQueryTest extends XdsTestUtils {
 
 	/**
 	 * Method implementing
@@ -45,15 +47,16 @@ public class GetFolderAndContentsQueryTest extends XdsTestUtils {
 	 * .
 	 */
 	@Test
-	public void testGetFolderAndContentsQueryStringBooleanCodeArrayCodeArray() {
+	void testGetFolderAndContentsQueryStringBooleanCodeArrayCodeArray() {
 		final GetFolderAndContentsQuery q1 = new GetFolderAndContentsQuery("1234", true,
 				formatCodes, confidentialityCodes);
-		final StoredQueryParameterList sqpl1 = q1.getOhtStoredQuery().getQueryParameters();
+		final Map<String, QueryList<String>> sqpl1 = q1.getIpfQuery().getExtraParameters();
 
-		assertTrue(sqpl1.get("$XDSFolderEntryUUID").contains("1234"));
-		assertTrue(sqpl1.get("$XDSDocumentEntryFormatCode").contains(formatCodes[0].getCode()));
-		assertTrue(sqpl1.get("$XDSDocumentEntryConfidentialityCode")
-				.contains(confidentialityCodes[0].getCode()));
+		assertTrue(sqpl1.get("$XDSFolderEntryUUID").getOuterList().stream().anyMatch(t -> t.contains("1234")));
+		assertTrue(sqpl1.get("$XDSDocumentEntryFormatCode").getOuterList().stream()
+				.anyMatch(t -> t.contains(formatCodes[0].getCode())));
+		assertTrue(sqpl1.get("$XDSDocumentEntryConfidentialityCode").getOuterList().stream()
+				.anyMatch(t -> t.contains(confidentialityCodes[0].getCode())));
 	}
 
 	/**
@@ -62,10 +65,10 @@ public class GetFolderAndContentsQueryTest extends XdsTestUtils {
 	 * .
 	 */
 	@Test
-	public void testGetFolderAndContentsQueryStringBooleanCodeArrayCodeArrayString() {
+	void testGetFolderAndContentsQueryStringBooleanCodeArrayCodeArrayString() {
 		final GetFolderAndContentsQuery q2 = new GetFolderAndContentsQuery("1234", true,
 				formatCodes, confidentialityCodes, "9876");
-		assertTrue(q2.getOhtStoredQuery().getHomeCommunityId().contains("9876"));
+		assertTrue(q2.getIpfQuery().getHomeCommunityId().contains("9876"));
 	}
 
 	/**
@@ -74,11 +77,11 @@ public class GetFolderAndContentsQueryTest extends XdsTestUtils {
 	 * .
 	 */
 	@Test
-	public void testGetFolderAndContentsQueryStringBooleanCodeArrayCodeArrayStringObjectType() {
+	void testGetFolderAndContentsQueryStringBooleanCodeArrayCodeArrayStringObjectType() {
 		final GetFolderAndContentsQuery q3 = new GetFolderAndContentsQuery("1234", true,
-				formatCodes, confidentialityCodes, "6565873dsdgsdg", ObjectType.STATIC);
-		assertTrue(q3.getOhtStoredQuery().getQueryParameters().get("$XDSDocumentEntryType")
-				.contains("urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1"));
+				formatCodes, confidentialityCodes, "6565873dsdgsdg", DocumentEntryType.STABLE);
+		assertTrue(q3.getIpfQuery().getExtraParameters().get("$XDSDocumentEntryType").getOuterList().stream()
+				.anyMatch(t -> t.contains("urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1")));
 	}
 
 }

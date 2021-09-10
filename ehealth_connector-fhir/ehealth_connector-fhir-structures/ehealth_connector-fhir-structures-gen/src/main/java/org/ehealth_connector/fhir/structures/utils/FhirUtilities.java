@@ -16,12 +16,12 @@
  */
 package org.ehealth_connector.fhir.structures.utils;
 
-import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.hl7cdar2.II;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Identifier;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /**
  *
@@ -94,7 +94,7 @@ public class FhirUtilities {
 	 * <!-- @formatter:on -->
 	 */
 	public static Identificator toIdentificator(Identifier identifier) {
-		final Identificator retVal = new Identificator(DatatypesFactory.eINSTANCE.createII());
+		final var retVal = new Identificator(new II());
 		retVal.setRoot(identifier.getSystem());
 		retVal.setExtension(identifier.getValue());
 		return retVal;

@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.cda.enums.epsos;
 
-import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 

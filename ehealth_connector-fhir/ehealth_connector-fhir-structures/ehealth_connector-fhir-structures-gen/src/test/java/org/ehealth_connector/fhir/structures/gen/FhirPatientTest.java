@@ -17,16 +17,20 @@
 package org.ehealth_connector.fhir.structures.gen;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
+import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Patient;
+import org.ehealth_connector.common.Telecom;
+import org.ehealth_connector.common.basetypes.AddressBaseType;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
-import org.ehealth_connector.common.mdht.Name;
+import org.ehealth_connector.common.hl7cdar2.II;
 import org.ehealth_connector.common.mdht.enums.CountryCode;
-import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.fhir.structures.testhelper.TestPatient;
 import org.hl7.fhir.dstu3.model.Address;
@@ -66,7 +70,9 @@ public class FhirPatientTest {
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 
 	private Patient getPatient(TestPatient patientMueller) {
-		final Name name = new Name(patientMueller.given, patientMueller.family);
+		final Name name = new Name();
+		name.setGiven(patientMueller.given);
+		name.setFamily(patientMueller.family);
 		org.ehealth_connector.common.mdht.enums.AdministrativeGender gender;
 		if ("male".equals(patientMueller.gender.toLowerCase())) {
 			gender = org.ehealth_connector.common.mdht.enums.AdministrativeGender.MALE;
@@ -122,14 +128,14 @@ public class FhirPatientTest {
 
 		assertEquals("2.16.840.1.113883.3.72.5.9.1", patient.getIds().get(0).getRoot());
 		assertEquals("PIX", patient.getIds().get(0).getExtension());
-		assertEquals("1 PINETREE", patient.getAddress().getAddressline1());
-		assertEquals("63119", patient.getAddress().getZip());
+		assertEquals("1 PINETREE", patient.getAddress().getStreetAddressLine1());
+		assertEquals("63119", patient.getAddress().getPostalCode());
 		assertEquals("WEBSTER", patient.getAddress().getCity());
-		assertEquals("ALPHA", patient.getName().getFamilyName());
-		assertEquals("ALAN", patient.getName().getAllGivenNames());
+		assertEquals("ALPHA", patient.getName().getFamily());
+		assertEquals("ALAN", patient.getName().getGiven());
 
-		org.openhealthtools.mdht.uml.hl7.datatypes.II ii = patient.getMdhtPatientRole()
-				.getProviderOrganization().getIds().get(0);
+		II ii = patient.getMdhtPatientRole()
+				.getProviderOrganization().getId().get(0);
 		assertEquals("2.16.840.1.113883.3.72.5.9.2", ii.getRoot());
 
 		final FhirPatient fhirPatientEquals = new FhirPatient(patient);
@@ -137,13 +143,13 @@ public class FhirPatientTest {
 
 		assertEquals("2.16.840.1.113883.3.72.5.9.1", patientEquals.getIds().get(0).getRoot());
 		assertEquals("PIX", patientEquals.getIds().get(0).getExtension());
-		assertEquals("1 PINETREE", patientEquals.getAddress().getAddressline1());
-		assertEquals("63119", patientEquals.getAddress().getZip());
+		assertEquals("1 PINETREE", patientEquals.getAddress().getStreetAddressLine1());
+		assertEquals("63119", patientEquals.getAddress().getPostalCode());
 		assertEquals("WEBSTER", patientEquals.getAddress().getCity());
-		assertEquals("ALPHA", patientEquals.getName().getFamilyName());
-		assertEquals("ALAN", patientEquals.getName().getAllGivenNames());
+		assertEquals("ALPHA", patientEquals.getName().getFamily());
+		assertEquals("ALAN", patientEquals.getName().getGiven());
 
-		ii = patientEquals.getMdhtPatientRole().getProviderOrganization().getIds().get(0);
+		ii = patientEquals.getMdhtPatientRole().getProviderOrganization().getId().get(0);
 		assertEquals("2.16.840.1.113883.3.72.5.9.2", ii.getRoot());
 	}
 
@@ -160,7 +166,7 @@ public class FhirPatientTest {
 
 		final Patient patient = fhirPatient.getPatient();
 		assertEquals("Doncaster", patient.getMdhtPatient().getBirthplace().getPlace().getAddr()
-				.getCities().get(0).getText());
+				.getContent().get(0));
 
 		final FhirPatient fhirPatient2 = new FhirPatient(patient);
 		assertEquals("Doncaster", fhirPatient2.getBirthPlace().getCity());
@@ -221,9 +227,9 @@ public class FhirPatientTest {
 		fhirPatient.getCommunication().add(new PatientCommunicationComponent().setLanguage(frCH));
 
 		final Patient patient = fhirPatient.getPatient();
-		assertEquals("de-CH", patient.getMdhtPatient().getLanguageCommunications().get(0)
+		assertEquals("de-CH", patient.getMdhtPatient().getLanguageCommunication().get(0)
 				.getLanguageCode().getCode());
-		assertEquals("fr-CH", patient.getMdhtPatient().getLanguageCommunications().get(1)
+		assertEquals("fr-CH", patient.getMdhtPatient().getLanguageCommunication().get(1)
 				.getLanguageCode().getCode());
 
 		final FhirPatient fhirPatient2 = new FhirPatient(patient);
@@ -324,11 +330,11 @@ public class FhirPatientTest {
 
 		final Patient patient = fhirPatient.getPatient();
 		assertEquals("Test",
-				patient.getMdhtPatientRole().getProviderOrganization().getNames().get(0).getText());
+				patient.getMdhtPatientRole().getProviderOrganization().getName().get(0).xmlContent);
 		assertEquals("1234",
-				patient.getMdhtPatientRole().getProviderOrganization().getIds().get(0).getRoot());
+				patient.getMdhtPatientRole().getProviderOrganization().getId().get(0).getRoot());
 		assertEquals("tel:+417600000000", patient.getMdhtPatientRole().getProviderOrganization()
-				.getTelecoms().get(0).getValue());
+				.getTelecom().get(0).getValue());
 
 		final FhirPatient fhirPatient2 = new FhirPatient(patient);
 		org = (org.hl7.fhir.dstu3.model.Organization) fhirPatient2.getManagingOrganization()
@@ -387,13 +393,22 @@ public class FhirPatientTest {
 
 		final Patient patient = fhirPatient.getPatient();
 
-		final Map<String, TelecomAddressUse> phones = patient.getTelecoms().getPhones();
+		final Map<String, TelecomAddressUse> phones = new HashMap<>();
+		final Map<String, TelecomAddressUse> emails = new HashMap<>();
+		for (Telecom telecom : patient.getTelecoms()) {
+			if (telecom.getValue().contains("tel:")) {
+				phones.put(telecom.getValue(), telecom.getUsage());
+			}
+
+			if (telecom.getValue().contains("mailto:")) {
+				emails.put(telecom.getValue(), telecom.getUsage());
+			}
+		}
 
 		assertEquals(TelecomAddressUse.PRIVATE, phones.get("tel:+4144000000000"));
 		assertEquals(TelecomAddressUse.BUSINESS, phones.get("tel:+4188000000000"));
 		assertEquals(TelecomAddressUse.MOBILE, phones.get("tel:+4176000000000"));
 
-		final Map<String, TelecomAddressUse> emails = patient.getTelecoms().getEMails();
 		assertEquals(TelecomAddressUse.BUSINESS, emails.get("mailto:xyz@abc.ch"));
 
 		final FhirPatient fhirPatient2 = new FhirPatient(patient);
@@ -425,17 +440,24 @@ public class FhirPatientTest {
 
 	@Test
 	public void testFhirPatientAddress() {
-		final Name name = new Name("given", "family", "prefix", "suffix");
+		final Name name = new Name();
+		name.setGiven("given");
+		name.setFamily("family");
+		name.setPrefix("prefix");
+		name.setSuffix("suffix");
 		final org.ehealth_connector.common.Patient conveniencePatient = new org.ehealth_connector.common.Patient(
 				name, org.ehealth_connector.common.mdht.enums.AdministrativeGender.MALE,
 				new Date());
 
-		final org.ehealth_connector.common.mdht.Address address = new org.ehealth_connector.common.mdht.Address(
-				"addressline1", "addressline2", "addressline3", "zip", "city",
-				PostalAddressUse.PRIVATE);
-
-		address.getMdhtAdress().addCountry("cty");
-		address.getMdhtAdress().addState("state");
+		final org.ehealth_connector.common.Address address = new org.ehealth_connector.common.Address(
+				new AddressBaseType());
+		address.setStreetAddressLine1("addressline1");
+		address.setStreetAddressLine2("addressline2");
+		address.setPostalCode("zip");
+		address.setCity("city");
+		address.setUsage(org.ehealth_connector.common.enums.PostalAddressUse.PRIMARY_HOME);
+		address.setCountry("cty");
+		address.setState("state");
 
 		conveniencePatient.addAddress(address);
 
@@ -443,7 +465,6 @@ public class FhirPatientTest {
 
 		assertEquals("addressline1", fhirPatient.getAddressFirstRep().getLine().get(0).getValue());
 		assertEquals("addressline2", fhirPatient.getAddressFirstRep().getLine().get(1).getValue());
-		assertEquals("addressline3", fhirPatient.getAddressFirstRep().getLine().get(2).getValue());
 		assertEquals("zip", fhirPatient.getAddressFirstRep().getPostalCode());
 		assertEquals("city", fhirPatient.getAddressFirstRep().getCity());
 		assertEquals("cty", fhirPatient.getAddressFirstRep().getCountry());
@@ -476,11 +497,12 @@ public class FhirPatientTest {
 
 	@Test
 	public void testFhirPatientMiddleName() {
-		final Name name = new Name("given", "family", "prefix", "suffix");
-		name.getMdhtPn().addGiven("middle");
-		name.getMdhtPn().addFamily("family2");
-		name.getMdhtPn().addPrefix("prefix2");
-		name.getMdhtPn().addSuffix("suffix2");
+		final Name name = new Name();
+		name.setGiven("given middle");
+		name.setFamily("family");
+		name.setPrefix("prefix prefix2");
+		name.setSuffix("suffix suffix2");
+
 		final Patient conveniencePatient = new Patient(name,
 				org.ehealth_connector.common.mdht.enums.AdministrativeGender.MALE, new Date());
 		final FhirPatient fhirPatient = new FhirPatient(conveniencePatient);
@@ -496,7 +518,12 @@ public class FhirPatientTest {
 
 	@Test
 	public void testFhirPatientNames() {
-		final Name name = new Name("given", "family", "prefix", "suffix");
+		final Name name = new Name();
+		name.setGiven("given");
+		name.setFamily("family");
+		name.setPrefix("prefix");
+		name.setSuffix("suffix");
+
 		final Patient conveniencePatient = new Patient(name,
 				org.ehealth_connector.common.mdht.enums.AdministrativeGender.MALE, new Date());
 		final FhirPatient fhirPatient = new FhirPatient(conveniencePatient);
@@ -597,7 +624,7 @@ public class FhirPatientTest {
 		final IParser parser = ctx.newXmlParser();
 		final FhirPatient fhirPatientDeserialized = parser.parseResource(FhirPatient.class,
 				stringPatient);
-		assertTrue(fhirPatientDeserialized != null);
+		assertNotNull(fhirPatientDeserialized);
 
 	}
 

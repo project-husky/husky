@@ -333,6 +333,22 @@ public class Code extends CodeBaseType {
 	}
 
 	/**
+	 * <div class="en">Instantiates a new instance from the given information.<div>
+	 *
+	 * <div class="de">Instanziiert eine neue Instanz vom angegebenen Daten.<div>
+	 *
+	 * @param code       the code
+	 * @param codeSystem the code System
+	 * @param display    the display name
+	 */
+	public Code(String code, String codeSystem, String codeSystemName, String display) {
+		setCode(code);
+		setCodeSystem(codeSystem);
+		setCodeSystemName(codeSystemName);
+		setDisplayName(display);
+	}
+
+	/**
 	 * <div class="en">Instantiates a new instance from the given null flavor.<div>
 	 *
 	 * <div class="de">Instanziiert eine neue Instanz vom angegebenen Null

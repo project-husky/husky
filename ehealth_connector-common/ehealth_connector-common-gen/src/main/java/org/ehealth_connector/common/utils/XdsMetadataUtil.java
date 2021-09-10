@@ -34,6 +34,7 @@ import org.ehealth_connector.common.basetypes.AddressBaseType;
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
 import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
+import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssigningAuthority;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Identifiable;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.LocalizedString;
@@ -115,6 +116,18 @@ public class XdsMetadataUtil {
 	}
 
 	/**
+	 * <div class="en">Converts eHC Code to IPF Code.</div>
+	 *
+	 * @param code <br>
+	 *             <div class="en"> the code</div>
+	 * @return the code
+	 */
+	public static org.openehealth.ipf.commons.ihe.xds.core.metadata.Code convertEhcCodeToCode(
+			ValueSetEnumInterface code) {
+		return createCodedMetadata(code.getCodeSystemId(), code.getCodeValue(), code.getDisplayName());
+	}
+
+	/**
 	 * Converts eHC Code and a given language to IPF Code.
 	 *
 	 * @param code     the code
@@ -154,6 +167,27 @@ public class XdsMetadataUtil {
 	 * @param codeList the list of Code
 	 * @return the list of IPF Code
 	 */
+	public static List<org.openehealth.ipf.commons.ihe.xds.core.metadata.Code> convertEhcCodeToCode(
+			ValueSetEnumInterface[] codeList) {
+		if (codeList == null)
+			return new LinkedList<>();
+		else {
+			final List<org.openehealth.ipf.commons.ihe.xds.core.metadata.Code> cmtArray = new LinkedList<>();
+
+			for (final ValueSetEnumInterface cme : codeList) {
+				cmtArray.add(XdsMetadataUtil.convertEhcCodeToCode(cme));
+			}
+
+			return cmtArray;
+		}
+	}
+
+	/**
+	 * Converts a list of eHC Code to a list of IPF Code.
+	 *
+	 * @param codeList the list of Code
+	 * @return the list of IPF Code
+	 */
 	public static QueryList<org.openehealth.ipf.commons.ihe.xds.core.metadata.Code> convertEhcCodeToQueryListCode(
 			Code[] codeList) {
 		if (codeList == null)
@@ -162,6 +196,27 @@ public class XdsMetadataUtil {
 			final QueryList<org.openehealth.ipf.commons.ihe.xds.core.metadata.Code> cmtArray = new QueryList<>();
 
 			for (final Code cme : codeList) {
+				cmtArray.getOuterList().add(List.of(XdsMetadataUtil.convertEhcCodeToCode(cme)));
+			}
+
+			return cmtArray;
+		}
+	}
+
+	/**
+	 * Converts a list of eHC Code to a list of IPF Code.
+	 *
+	 * @param codeList the list of Code
+	 * @return the list of IPF Code
+	 */
+	public static QueryList<org.openehealth.ipf.commons.ihe.xds.core.metadata.Code> convertEhcCodeToQueryListCode(
+			ValueSetEnumInterface[] codeList) {
+		if (codeList == null)
+			return null;
+		else {
+			final QueryList<org.openehealth.ipf.commons.ihe.xds.core.metadata.Code> cmtArray = new QueryList<>();
+
+			for (final ValueSetEnumInterface cme : codeList) {
 				cmtArray.getOuterList().add(List.of(XdsMetadataUtil.convertEhcCodeToCode(cme)));
 			}
 

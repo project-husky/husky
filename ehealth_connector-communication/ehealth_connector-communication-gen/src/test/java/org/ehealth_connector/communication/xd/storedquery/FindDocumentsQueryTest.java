@@ -20,48 +20,51 @@ package org.ehealth_connector.communication.xd.storedquery;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.function.Consumer;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.ehealth_connector.communication.testhelper.XdsTestUtils;
 import org.junit.jupiter.api.Test;
+import org.openehealth.ipf.commons.ihe.xds.core.requests.query.QueryList;
 import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
-import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameter;
-import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameterList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * Test of class FindDocumentsQuery
  */
-public class FindDocumentsQueryTest extends XdsTestUtils {
+class FindDocumentsQueryTest extends XdsTestUtils {
 
 	/** The SLF4J logger instance. */
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 
 	@Test
-	public void testFindDocumentsQueryIdentificatorAvailabilityStatus()
+	void testFindDocumentsQueryIdentificatorAvailabilityStatus()
 			throws MalformedStoredQueryException {
 
 		final FindDocumentsQuery q = new FindDocumentsQuery(patientId, availabilityStatus);
 
 		// Check query parameters
-		final StoredQueryParameterList sqpl = q.getOhtStoredQuery().getQueryParameters();
+		final Map<String, QueryList<String>> sqpl = q.getIpfQuery().getExtraParameters();
 
-		sqpl.forEach(new Consumer<StoredQueryParameter>() {
-			@Override
-			public void accept(StoredQueryParameter t) {
-				log.debug(t.getName() + ": " + t.getValue());
+		for (Entry<String, QueryList<String>> sqpl1 : sqpl.entrySet()) {
+			if (sqpl1.getKey() != null && sqpl1.getValue() != null) {
+				sqpl1.getValue().getOuterList().stream().forEach(t -> {
+					log.debug(sqpl1.getKey() + ": " + t);
+				});
 			}
-		});
 
-		final String patientIdRootRef = sqpl.get("$XDSDocumentEntryPatientId");
-		assertEquals(patientId.getRoot(), extractByRegex(".*\\&(.*)\\&.*", patientIdRootRef));
+		}
+
+		final QueryList<String> patientIdRootRef = sqpl.get("$XDSDocumentEntryPatientId");
+		assertEquals(patientId.getRoot(), extractByRegex(".*\\&(.*)\\&.*", patientIdRootRef.getOuterList()));
 		assertEquals(patientId.getExtension(),
-				extractByRegex("'(.*)\\^\\^\\^\\&.*\\&.*'", patientIdRootRef));
+				extractByRegex("'(.*)\\^\\^\\^\\&.*\\&.*'", patientIdRootRef.getOuterList()));
 
-		final String entryStatusRef = sqpl.get("$XDSDocumentEntryStatus");
-		assertEquals(availabilityStatus.getName(), extractByRegex(
-				"\\(\\'urn:oasis:names:tc:ebxml-regrep:StatusType:(.*)\\'\\)", entryStatusRef));
+		final QueryList<String> entryStatusRef = sqpl.get("$XDSDocumentEntryStatus");
+		assertEquals(availabilityStatus.getQueryOpcode(),
+				extractByRegex(
+						"\\(\\'urn:oasis:names:tc:ebxml-regrep:StatusType:(.*)\\'\\)", entryStatusRef.getOuterList()));
 	}
 
 }

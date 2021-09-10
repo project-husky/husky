@@ -22,24 +22,27 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.activation.DataHandler;
+import javax.mail.util.ByteArrayDataSource;
+
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.ch.AuthorCh;
 import org.ehealth_connector.common.ch.enums.AuthorRole;
 import org.ehealth_connector.common.communication.AffinityDomain;
-import org.ehealth_connector.common.communication.SubmissionSetMetadata;
 import org.ehealth_connector.common.communication.AtnaConfig.AtnaConfigMode;
 import org.ehealth_connector.common.communication.DocumentMetadata.DocumentMetadataExtractionMode;
+import org.ehealth_connector.common.communication.SubmissionSetMetadata;
 import org.ehealth_connector.common.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
-import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.enums.DocumentDescriptor;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.communication.ConvenienceCommunication;
 import org.ehealth_connector.communication.ch.enums.AvailabilityStatus;
 import org.ehealth_connector.communication.ch.xd.storedquery.FindDocumentsQuery;
 import org.ehealth_connector.communication.exceptions.DocumentNotAccessibleException;
-import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
-import org.openhealthtools.ihe.xds.document.XDSDocument;
-import org.openhealthtools.ihe.xds.document.XDSDocumentFromStream;
-import org.openhealthtools.ihe.xds.response.XDSQueryResponseType;
-import org.openhealthtools.ihe.xds.response.XDSResponseType;
+import org.ehealth_connector.xua.core.SecurityHeaderElement;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
+import org.openehealth.ipf.commons.ihe.xds.core.responses.QueryResponse;
+import org.openehealth.ipf.commons.ihe.xds.core.responses.Response;
 
 /**
  *
@@ -119,14 +122,16 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 			} catch (final DocumentNotAccessibleException e) {
 				e.printStackTrace();
 			}
-		XDSDocument doc;
+		var doc = new Document();
 		try {
-			XDSDocument doc4Metadata = null;
+			var doc4Metadata = new Document();
 			if (inputStream4Metadata != null) {
-				doc4Metadata = new XDSDocumentFromStream(desc,
-						Util.convertNonAsciiText2Unicode(inputStream4Metadata));
+				InputStream unicodeStream = Util.convertNonAsciiText2Unicode(inputStream4Metadata);
+				var dataSource = new ByteArrayDataSource(unicodeStream, desc.getMimeType());
+				doc4Metadata.setDataHandler(new DataHandler(dataSource));
 			}
-			doc = new XDSDocumentFromStream(desc, inputStream);
+			var dataSource = new ByteArrayDataSource(inputStream, desc.getMimeType());
+			doc.setDataHandler(new DataHandler(dataSource));
 			retVal = new DocumentMetadataCh(addXdsDocument(doc, desc, doc4Metadata));
 		} catch (final IOException e) {
 			e.printStackTrace();
@@ -154,32 +159,32 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	}
 
 	/**
-	 * <div class="en">Queries the registry of the affinity domain for all
-	 * documents of one patient. This is useful if the number of results is
-	 * limited in the registry and your query would exceed this limit. In this
-	 * case, precise your query or do a query for references first, choose the
-	 * possible matches (e.g. the last 10 results) and then query for metadata.
+	 * <div class="en">Queries the registry of the affinity domain for all documents
+	 * of one patient. This is useful if the number of results is limited in the
+	 * registry and your query would exceed this limit. In this case, precise your
+	 * query or do a query for references first, choose the possible matches (e.g.
+	 * the last 10 results) and then query for metadata.
 	 *
-	 * @param patientId
-	 *            the ID of the patient
+	 * @param patientId the ID of the patient
 	 * @return the OHT XDSQueryResponseType containing references instead of the
 	 *         complete document metadata</div>
+	 * @throws Exception
 	 */
-	public XDSQueryResponseType queryDocumentReferencesOnly(Identificator patientId) {
-		return this.queryDocuments(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED));
+	public QueryResponse queryDocumentReferencesOnly(Identificator patientId, SecurityHeaderElement security)
+			throws Exception {
+		return queryDocumentsReferencesOnly(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED), security);
 	}
 
 	/**
-	 * <div class="en">Queries the registry of the affinity domain for all
-	 * documents of one patient.
+	 * <div class="en">Queries the registry of the affinity domain for all documents
+	 * of one patient.
 	 *
-	 * @param patientId
-	 *            the ID of the patient
-	 * @return the OHT XDSQueryResponseType containing full document
-	 *         metadata</div>
+	 * @param patientId the ID of the patient
+	 * @return the OHT XDSQueryResponseType containing full document metadata</div>
+	 * @throws Exception
 	 */
-	public XDSQueryResponseType queryDocuments(Identificator patientId) {
-		return this.queryDocuments(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED));
+	public QueryResponse queryDocuments(Identificator patientId, SecurityHeaderElement security) throws Exception {
+		return queryDocuments(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED), security);
 	}
 
 	/**
@@ -196,12 +201,12 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	 * @throws Exception
 	 *             if the transfer is not successful
 	 */
-	public XDSResponseType submit(AuthorRole authorRole) throws Exception {
-		final SubmissionSetMetadata subSet = new SubmissionSetMetadata();
-		final AuthorCh author = new AuthorCh();
+	public Response submit(AuthorRole authorRole, SecurityHeaderElement security) throws Exception {
+		final var subSet = new SubmissionSetMetadata(getTxnData().getSubmissionSet());
+		final var author = new AuthorCh();
 		author.setRoleFunction(authorRole);
 		subSet.setAuthor(author);
-		return submit(subSet);
+		return submit(subSet, security);
 	}
 
 }

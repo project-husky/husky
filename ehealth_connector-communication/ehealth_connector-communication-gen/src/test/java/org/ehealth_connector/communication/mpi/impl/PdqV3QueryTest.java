@@ -29,7 +29,7 @@ import javax.xml.bind.JAXBContext;
 
 import org.ehealth_connector.common.communication.AffinityDomain;
 import org.ehealth_connector.common.communication.Destination;
-import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.communication.ConvenienceMasterPatientIndexV3;
 import org.ehealth_connector.communication.MasterPatientIndexQuery;
 import org.ehealth_connector.communication.MasterPatientIndexQueryResponse;

@@ -35,13 +35,13 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.FeatureMap.Entry;
 import org.eclipse.emf.ecore.util.FeatureMapUtil;
 import org.eclipse.emf.ecore.xml.type.impl.ProcessingInstructionImpl;
-import org.ehealth_connector.common.Patient;
-import org.ehealth_connector.common.Person;
 import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Organization;
+import org.ehealth_connector.common.mdht.Patient;
+import org.ehealth_connector.common.mdht.Person;
 import org.ehealth_connector.common.mdht.enums.ConfidentialityCode;
 import org.ehealth_connector.common.mdht.enums.ParticipantType;
 import org.ehealth_connector.common.mdht.enums.Signature;
@@ -202,7 +202,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * @param author
 	 *            Unterzeichner
 	 */
-	public void addAuthenticator(org.ehealth_connector.common.Author author) {
+	public void addAuthenticator(org.ehealth_connector.common.mdht.Author author) {
 		final Authenticator auth = CDAFactory.eINSTANCE.createAuthenticator();
 		final AssignedEntity entity = CDAFactory.eINSTANCE.createAssignedEntity();
 
@@ -253,7 +253,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * @param author
 	 * @return the added MDHT Author
 	 */
-	public Author addAuthor(org.ehealth_connector.common.Author author) {
+	public Author addAuthor(org.ehealth_connector.common.mdht.Author author) {
 		final Author docAuthor = author.copyMdhtAuthor();
 		getDoc().getAuthors().add(docAuthor);
 		return docAuthor;
@@ -478,10 +478,10 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 * @return <div class="en">the authenticators</div> <div class="de">die
 	 *         Unterzeichner</div>
 	 */
-	public List<org.ehealth_connector.common.Person> getAuthenticators() {
-		final List<org.ehealth_connector.common.Person> persons = new ArrayList<org.ehealth_connector.common.Person>();
+	public List<org.ehealth_connector.common.mdht.Person> getAuthenticators() {
+		final List<org.ehealth_connector.common.mdht.Person> persons = new ArrayList<org.ehealth_connector.common.mdht.Person>();
 		for (final Authenticator mAutor : getDoc().getAuthenticators()) {
-			final org.ehealth_connector.common.Person person = new org.ehealth_connector.common.Person(
+			final org.ehealth_connector.common.mdht.Person person = new org.ehealth_connector.common.mdht.Person(
 					mAutor.getAssignedEntity().getAssignedPerson());
 			persons.add(person);
 		}
@@ -493,11 +493,11 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 *
 	 * @return the authenticators as author
 	 */
-	public List<org.ehealth_connector.common.Author> getAuthenticatorsAsAuthor() {
-		List<org.ehealth_connector.common.Author> retVal = new ArrayList<org.ehealth_connector.common.Author>();
+	public List<org.ehealth_connector.common.mdht.Author> getAuthenticatorsAsAuthor() {
+		List<org.ehealth_connector.common.mdht.Author> retVal = new ArrayList<org.ehealth_connector.common.mdht.Author>();
 
 		for (final Authenticator authenticator : getDoc().getAuthenticators()) {
-			org.ehealth_connector.common.Author author = new org.ehealth_connector.common.Author(
+			org.ehealth_connector.common.mdht.Author author = new org.ehealth_connector.common.mdht.Author(
 					Util.createAuthorFromAuthenticator(authenticator));
 			retVal.add(author);
 		}
@@ -510,8 +510,8 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 *
 	 * @return the author
 	 */
-	public org.ehealth_connector.common.Author getAuthor() {
-		final org.ehealth_connector.common.Author author = new org.ehealth_connector.common.Author(
+	public org.ehealth_connector.common.mdht.Author getAuthor() {
+		final org.ehealth_connector.common.mdht.Author author = new org.ehealth_connector.common.mdht.Author(
 				getDoc().getAuthors().get(0));
 		return author;
 	}
@@ -535,10 +535,10 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 *
 	 * @return list of authors
 	 */
-	public List<org.ehealth_connector.common.Author> getAuthors() {
-		final List<org.ehealth_connector.common.Author> authors = new ArrayList<org.ehealth_connector.common.Author>();
+	public List<org.ehealth_connector.common.mdht.Author> getAuthors() {
+		final List<org.ehealth_connector.common.mdht.Author> authors = new ArrayList<org.ehealth_connector.common.mdht.Author>();
 		for (final Author mAutor : getDoc().getAuthors()) {
-			final org.ehealth_connector.common.Author author = new org.ehealth_connector.common.Author(
+			final org.ehealth_connector.common.mdht.Author author = new org.ehealth_connector.common.mdht.Author(
 					mAutor);
 			authors.add(author);
 		}
@@ -609,11 +609,11 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 *
 	 * @return the data enterer person
 	 */
-	public org.ehealth_connector.common.Person getDataEntererPerson() {
+	public org.ehealth_connector.common.mdht.Person getDataEntererPerson() {
 		if (getDoc().getDataEnterer() != null) {
 			if (getDoc().getDataEnterer().getAssignedEntity() != null) {
 				if (getDoc().getDataEnterer().getAssignedEntity().getAssignedPerson() != null) {
-					final org.ehealth_connector.common.Person person = new org.ehealth_connector.common.Person(
+					final org.ehealth_connector.common.mdht.Person person = new org.ehealth_connector.common.mdht.Person(
 							getDoc().getDataEnterer().getAssignedEntity().getAssignedPerson());
 					return person;
 				}
@@ -780,11 +780,11 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 *
 	 * @return the legal authenticator as Author object
 	 */
-	public org.ehealth_connector.common.Author getLegalAuthenticatorAsAuthor() {
+	public org.ehealth_connector.common.mdht.Author getLegalAuthenticatorAsAuthor() {
 		final LegalAuthenticator la = getDoc().getLegalAuthenticator();
 
 		if (la != null) {
-			return new org.ehealth_connector.common.Author(
+			return new org.ehealth_connector.common.mdht.Author(
 					Util.createAuthorFromLegalAuthenticator(la));
 		}
 		return null;
@@ -1208,7 +1208,7 @@ public abstract class AbstractCda<EClinicalDocument extends ClinicalDocument>
 	 *            <div class="en">legal authenticator</div>
 	 *            <div class="de">rechtsgültiger Unterzeichner</div>
 	 */
-	public void setLegalAuthenticator(org.ehealth_connector.common.Author legalAuthenticator) {
+	public void setLegalAuthenticator(org.ehealth_connector.common.mdht.Author legalAuthenticator) {
 		getDoc().setLegalAuthenticator(Util.createLegalAuthenticatorFromAuthor(legalAuthenticator));
 		getDoc().getLegalAuthenticator()
 				.setTime(EcoreUtil.copy(legalAuthenticator.getAuthorMdht().getTime()));

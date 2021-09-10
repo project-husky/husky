@@ -18,7 +18,7 @@ package org.ehealth_connector.cda.ihe.lab;
 
 import org.ehealth_connector.cda.MdhtActFacade;
 import org.ehealth_connector.cda.utils.CdaUtilMdht;
-import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.Code;
 import org.openhealthtools.mdht.uml.cda.Act;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
@@ -66,7 +66,8 @@ public class BaseLaboratoryAct extends MdhtActFacade<Act> {
 	 */
 	public Code getStatusCode() {
 		if (getMdht() != null && getMdht().getStatusCode() != null) {
-			return new Code(getMdht().getStatusCode());
+			return new Code(getMdht().getStatusCode().getCode(), getMdht().getStatusCode().getCodeSystem(),
+					getMdht().getStatusCode().getDisplayName());
 		}
 		return null;
 	}

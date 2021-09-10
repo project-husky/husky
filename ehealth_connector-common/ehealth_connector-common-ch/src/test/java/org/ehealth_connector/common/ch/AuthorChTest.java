@@ -23,14 +23,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
 
+import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.basetypes.AddressBaseType;
 import org.ehealth_connector.common.ch.enums.AuthorRole;
 import org.ehealth_connector.common.ch.enums.AuthorSpeciality;
 import org.ehealth_connector.common.enums.CodeSystems;
-import org.ehealth_connector.common.mdht.Address;
-import org.ehealth_connector.common.mdht.Identificator;
-import org.ehealth_connector.common.mdht.Name;
-import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
+import org.ehealth_connector.common.enums.PostalAddressUse;
 import org.ehealth_connector.common.testhelpers.AbstractTestHelper;
 import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.junit.jupiter.api.BeforeEach;
@@ -67,6 +68,7 @@ public class AuthorChTest {
 	private Identificator testIdentificator2;
 
 	private Name testName1;
+	private Name testName2;
 
 	private String testStreet_1;
 
@@ -91,29 +93,41 @@ public class AuthorChTest {
 	public void setUp() throws Exception {
 		testCodeSystem1 = CodeSystems.GLN;
 		testId1 = "1.2.3.4.5.6.7.8.9.0";
-		testIdentificator1 = new Identificator(testCodeSystem1, testId1);
+		testIdentificator1 = new Identificator();
+		testIdentificator1.setRoot(testCodeSystem1.getCodeSystemId());
+		testIdentificator1.setExtension(testId1);
 
 		testGivenName = "GivenAuthor";
 		testFamilyName = "FamilyAuthor";
-		testName1 = new Name(testGivenName, testFamilyName);
+		testName1 = new Name();
+		testName1.setGiven(testGivenName);
+		testName1.setFamily(testFamilyName);
 
 		testStreet_1 = "Musterstrasse";
 		testHouseNumber_1 = "2";
 		testAddressline1_1 = testStreet_1 + " " + testHouseNumber_1;
 		testZip_1 = "9999";
 		testCity_1 = "Musterhausen";
-		testUsage_1 = PostalAddressUse.BUSINESS;
-		testAddress = new Address(testAddressline1_1, testZip_1, testCity_1, testUsage_1);
+		testUsage_1 = PostalAddressUse.WORK_PLACE;
+		testAddress = new Address(new AddressBaseType());
+		testAddress.setStreetAddressLine1(testAddressline1_1);
+		testAddress.setPostalCode(testZip_1);
+		testAddress.setCity(testCity_1);
+		testAddress.setUsage(testUsage_1);
 
 		testGln1 = "7601001401563";
 
 		testCodeSystem2 = CodeSystems.GTIN;
 		testId2 = "100.99.88.77.66";
-		testIdentificator2 = new Identificator(testCodeSystem2, testId2);
+		testIdentificator2 = new Identificator();
+		testIdentificator2.setRoot(testCodeSystem2.getCodeSystemId());
+		testIdentificator2.setExtension(testId2);
 
 		testGivenName2 = "Given My Author";
 		testFamilyName2 = "Family My Author";
-		new Name(testGivenName2, testFamilyName2);
+		testName2 = new Name();
+		testName2.setGiven(testGivenName2);
+		testName2.setFamily(testFamilyName2);
 
 		testDate1 = DateUtilMdht.date("28.02.2018");
 	}
@@ -175,6 +189,6 @@ public class AuthorChTest {
 		assertNotNull(autCh.getIds());
 		assertFalse(autCh.getIds().isEmpty());
 		assertEquals(testIdentificator1, autCh.getIds().get(0));
-		assertEquals(testName1.getFamilyName(), autCh.getName().getFamilyName());
+		assertEquals(testName1.getFamily(), autCh.getName().getFamily());
 	}
 }

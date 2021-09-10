@@ -27,12 +27,12 @@ import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Patient;
+import org.ehealth_connector.common.enums.DocumentDescriptor;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 import org.ehealth_connector.common.mdht.enums.ConfidentialityCode;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
-import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 
 
 /**

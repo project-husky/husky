@@ -16,25 +16,25 @@
  */
 package org.ehealth_connector.communication.ch.xd.storedquery;
 
+import java.util.List;
+
+import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.ch.enums.ConfidentialityCode;
-import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.ehealth_connector.communication.ch.enums.AvailabilityStatus;
 import org.ehealth_connector.communication.ch.enums.HealthcareFacilityTypeCode;
-import org.ehealth_connector.communication.utils.XdsUtil;
-import org.ehealth_connector.communication.xd.storedquery.StoredQueryInterface;
-import org.openhealthtools.ihe.common.hl7v2.XCN;
-import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
-import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQuery;
-import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;
+import org.ehealth_connector.communication.xd.storedquery.AbstractStoredQuery;
+import org.openehealth.ipf.commons.ihe.xds.core.requests.query.StoredQuery;
 
 /**
  * Represents a query to find documents in an XDS Registry (XDS
  * FindDocumentsQuery). This class uses only enums for XDS metadata which are
  * specified by eHealth Suisse for the usage in Switzerland.
  */
-public class FindDocumentsQuery implements StoredQueryInterface {
-	private org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery ohtStoredQuery;
+public class FindDocumentsQuery extends AbstractStoredQuery {
+	private org.openehealth.ipf.commons.ihe.xds.core.requests.query.FindDocumentsQuery ipfStoredQuery;
 
 	/**
 	 * Constructs a FindDocuments Query
@@ -45,13 +45,10 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 	 *            Status of the document
 	 */
 	public FindDocumentsQuery(Identificator patientId, AvailabilityStatus status) {
-		try {
-			ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
-					XdsMetadataUtil.convertEhcIdentificator(patientId),
-					new AvailabilityStatusType[] { getAsOhtAvailabilityStatusType(status) });
-		} catch (final MalformedStoredQueryException e) {
-			e.printStackTrace();
-		}
+		ipfStoredQuery = new org.openehealth.ipf.commons.ihe.xds.core.requests.query.FindDocumentsQuery();
+		ipfStoredQuery.setPatientId(XdsMetadataUtil.convertEhcIdentificator(patientId));
+		ipfStoredQuery.setStatus(List.of(org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus
+				.valueOfOpcode(status.getCodeValue())));
 	}
 
 	/**
@@ -86,30 +83,42 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 			org.ehealth_connector.communication.ch.enums.PracticeSettingCode[] practiceSettingCodes,
 			HealthcareFacilityTypeCode[] healthCareFacilityCodes,
 			org.ehealth_connector.common.ch.enums.ConfidentialityCode[] confidentialityCodes,
-			org.ehealth_connector.communication.ch.enums.FormatCode[] formatCodes, XCN authorPerson,
+			org.ehealth_connector.communication.ch.enums.FormatCode[] formatCodes, Author authorPerson,
 			AvailabilityStatus status) {
 
-		try {
-			ohtStoredQuery = new org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
-					XdsMetadataUtil.convertEhcIdentificator(patientId),
-					XdsMetadataUtil.convertEhcEnumToCodedMetadataType(classCodes),
-					XdsUtil.convertEhcDateTimeRange(dateTimeRanges),
-					XdsMetadataUtil.convertEhcEnumToCodedMetadataType(practiceSettingCodes),
-					XdsMetadataUtil.convertEhcEnumToCodedMetadataType(healthCareFacilityCodes),
-					null, // Event
-					// Code
-					// is
-					// currently
-					// not
-					// used
-					// in
-					// Switzerland
-					XdsMetadataUtil.convertEhcEnumToCodedMetadataType(confidentialityCodes),
-					XdsMetadataUtil.convertEhcEnumToCodedMetadataType(formatCodes), authorPerson,
-					new AvailabilityStatusType[] { getAsOhtAvailabilityStatusType(status) });
-		} catch (final MalformedStoredQueryException e) {
-			e.printStackTrace();
+		ipfStoredQuery = new org.openehealth.ipf.commons.ihe.xds.core.requests.query.FindDocumentsQuery();
+		ipfStoredQuery.setPatientId(XdsMetadataUtil.convertEhcIdentificator(patientId));
+		ipfStoredQuery.setClassCodes(XdsMetadataUtil.convertEhcCodeToCode(classCodes));
+		ipfStoredQuery.setPracticeSettingCodes(XdsMetadataUtil.convertEhcCodeToCode(practiceSettingCodes));
+		ipfStoredQuery
+				.setHealthcareFacilityTypeCodes(XdsMetadataUtil.convertEhcCodeToCode(healthCareFacilityCodes));
+		ipfStoredQuery.setConfidentialityCodes(XdsMetadataUtil.convertEhcCodeToQueryListCode(confidentialityCodes));
+		ipfStoredQuery.setFormatCodes(XdsMetadataUtil.convertEhcCodeToCode(formatCodes));
+
+		ipfStoredQuery.setStatus(List.of(org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus
+				.valueOfOpcode(status.getCodeValue())));
+
+		if (dateTimeRanges != null) {
+			for (var index = 0; index < dateTimeRanges.length; index++) {
+				if (dateTimeRanges[index] != null) {
+					if (dateTimeRanges[index].getDateTimeRangeAttribute()
+							.equals(DateTimeRangeAttributes.SERVICE_START_TIME)) {
+						ipfStoredQuery.getServiceStartTime()
+								.setFrom(dateTimeRanges[index].getFromAsUsFormattedString());
+						ipfStoredQuery.getServiceStartTime()
+								.setTo(dateTimeRanges[index].getToAsUsFormattedString());
+					} else if (dateTimeRanges[index].getDateTimeRangeAttribute()
+							.equals(DateTimeRangeAttributes.SERVICE_STOP_TIME)) {
+						ipfStoredQuery.getServiceStopTime()
+								.setFrom(dateTimeRanges[index].getFromAsUsFormattedString());
+						ipfStoredQuery.getServiceStopTime().setTo(dateTimeRanges[index].getToAsUsFormattedString());
+					}
+				}
+			}
 		}
+
+		var author = XdsMetadataUtil.converteHCAuthor(authorPerson);
+		ipfStoredQuery.getTypedAuthorPersons().add(author.getAuthorPerson());
 	}
 
 	/**
@@ -124,40 +133,35 @@ public class FindDocumentsQuery implements StoredQueryInterface {
 	 *            array of confidentiality codes
 	 */
 	public void addConfidentialityCodes(ConfidentialityCode[] confidentialityCodes) {
-		try {
-			ohtStoredQuery.addConfidentialityCodes(
-					XdsMetadataUtil.convertEhcEnumToCodedMetadataType(confidentialityCodes));
-		} catch (final MalformedStoredQueryException e) {
-			e.printStackTrace();
-		}
+		ipfStoredQuery.setConfidentialityCodes(XdsMetadataUtil.convertEhcCodeToQueryListCode(confidentialityCodes));
 	}
 
 	/**
-	 * <div class="en">Gets the AvailabilityStatus as OHT AvailabilityStatusType
-	 * Object.</div> <div class="de">Liefert AvailabilityStatus als OHT
+	 * <div class="en">Gets the AvailabilityStatus as IPF AvailabilityStatusType
+	 * Object.</div> <div class="de">Liefert AvailabilityStatus als IPF
 	 * AvailabilityStatusType Objekt.</div>
 	 *
 	 * @return <div class="en">the address use as postal address use</div>
 	 */
-	public AvailabilityStatusType getAsOhtAvailabilityStatusType(
+	public org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus getAsIpfAvailabilityStatusType(
 			AvailabilityStatus availabilityStatus) {
 		switch (availabilityStatus) {
 		case APPROVED:
-			return AvailabilityStatusType.APPROVED_LITERAL;
+			return org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus.APPROVED;
 		case DEPRECATED:
-			return AvailabilityStatusType.DEPRECATED_LITERAL;
+			return org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus.DEPRECATED;
 		default:
-			return AvailabilityStatusType.APPROVED_LITERAL;
+			return org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus.APPROVED;
 		}
 	}
 
 	/**
-	 * Gets the OHT StoredQuery object, which is being wrapped by this class
+	 * Gets the IPF StoredQuery object, which is being wrapped by this class
 	 *
-	 * @return the OHT StoredQuery
+	 * @return the IPF StoredQuery
 	 */
 	@Override
-	public StoredQuery getOhtStoredQuery() {
-		return ohtStoredQuery;
+	public StoredQuery getIpfQuery() {
+		return ipfStoredQuery;
 	}
 }

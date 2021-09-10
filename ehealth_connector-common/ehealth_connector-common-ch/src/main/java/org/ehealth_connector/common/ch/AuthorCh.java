@@ -17,9 +17,10 @@
 package org.ehealth_connector.common.ch;
 
 import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.ch.enums.AuthorRole;
 import org.ehealth_connector.common.ch.enums.AuthorSpeciality;
-import org.ehealth_connector.common.mdht.Name;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Author;
 
 /**
  * The Swis derivation of an Author (adds features for GLN).
@@ -71,7 +72,7 @@ public class AuthorCh extends org.ehealth_connector.common.Author {
 	 * @param authorMdht
 	 *            the MDHT Author Object
 	 */
-	public AuthorCh(org.openhealthtools.mdht.uml.cda.Author authorMdht) {
+	public AuthorCh(POCDMT000040Author authorMdht) {
 		super(authorMdht);
 	}
 
@@ -109,7 +110,7 @@ public class AuthorCh extends org.ehealth_connector.common.Author {
 	 *            the function code
 	 */
 	public void setRoleFunction(AuthorRole code) {
-		getAuthorMdht().setFunctionCode(code.getCode().getCE());
+		getAuthorMdht().setFunctionCode(code.getCode().getHl7CdaR2Ce());
 	}
 
 	/**
@@ -122,6 +123,6 @@ public class AuthorCh extends org.ehealth_connector.common.Author {
 	 *            the speciality code
 	 */
 	public void setSpeciality(AuthorSpeciality code) {
-		getAsAuthor().setCode(code.getCode().getCE());
+		getAsAuthor().setCode(code.getCode().getHl7CdaR2Ce());
 	}
 }

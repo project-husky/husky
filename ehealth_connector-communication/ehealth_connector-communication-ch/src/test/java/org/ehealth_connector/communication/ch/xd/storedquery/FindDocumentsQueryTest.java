@@ -19,12 +19,12 @@ package org.ehealth_connector.communication.ch.xd.storedquery;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.function.Consumer;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.ehealth_connector.communication.ch.testhelper.XdsChTestUtils;
 import org.junit.jupiter.api.Test;
-import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameter;
-import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameterList;
+import org.openehealth.ipf.commons.ihe.xds.core.requests.query.QueryList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,39 +50,47 @@ public class FindDocumentsQueryTest extends XdsChTestUtils {
 				authorPerson, avaiabilityStatus);
 
 		// Check query parameters
-		final StoredQueryParameterList sqpl = q.getOhtStoredQuery().getQueryParameters();
+		final Map<String, QueryList<String>> sqpl = q.getIpfQuery().getExtraParameters();
 
-		sqpl.forEach(new Consumer<StoredQueryParameter>() {
-			@Override
-			public void accept(StoredQueryParameter t) {
-				log.debug(t.getName() + ": " + t.getValue());
-			}
-		});
+		for (Entry<String, QueryList<String>> item : sqpl.entrySet()) {
+			item.getValue().getOuterList().stream().forEach(t -> {
+				log.debug(item.getKey() + ": " + t);
+			});
+		}
 
-		assertTrue(sqpl.get("$XDSDocumentEntryPatientId").contains(patientId.getRoot()));
-		assertTrue(sqpl.get("$XDSDocumentEntryPatientId").contains(patientId.getExtension()));
+		assertTrue(sqpl.get("$XDSDocumentEntryPatientId").getOuterList().stream()
+				.anyMatch(t -> t.contains(patientId.getRoot())));
+		assertTrue(sqpl.get("$XDSDocumentEntryPatientId").getOuterList().stream()
+				.anyMatch(t -> t.contains(patientId.getExtension())));
 
-		assertTrue(sqpl.get("$XDSDocumentEntryStatus").contains(avaiabilityStatus.getCodeValue()));
+		assertTrue(sqpl.get("$XDSDocumentEntryStatus").getOuterList().stream()
+				.anyMatch(t -> t.contains(avaiabilityStatus.getCodeValue())));
 
-		assertTrue(sqpl.get("$XDSDocumentEntryCreationTimeFrom")
-				.contains(eDateTimeRange1.getFromAsUsFormattedString()));
-		assertTrue(sqpl.get("$XDSDocumentEntryCreationTimeTo")
-				.contains(eDateTimeRange1.getToAsUsFormattedString()));
+		assertTrue(sqpl.get("$XDSDocumentEntryCreationTimeFrom").getOuterList().stream()
+				.anyMatch(t -> t.contains(eDateTimeRange1.getFromAsUsFormattedString())));
+		assertTrue(sqpl.get("$XDSDocumentEntryCreationTimeTo").getOuterList().stream()
+				.anyMatch(t -> t.contains(eDateTimeRange1.getToAsUsFormattedString())));
 
-		assertTrue(sqpl.get("$XDSDocumentEntryClassCode").contains(classCodes[0].getCodeValue()));
-		assertTrue(sqpl.get("$XDSDocumentEntryPracticeSettingCode")
-				.contains(practiceSettingCodes[0].getCodeSystemId()));
-		assertTrue(sqpl.get("$XDSDocumentEntryHealthcareFacilityTypeCode")
-				.contains(healthCareFacilityCodes[0].getCodeValue()));
-		assertTrue(sqpl.get("$XDSDocumentEntryConfidentialityCode")
-				.contains(confidentialityCodes[1].getCodeValue()));
-		assertTrue(sqpl.get("$XDSDocumentEntryFormatCode").contains(formatCodes[1].getCodeValue()));
+		assertTrue(sqpl.get("$XDSDocumentEntryClassCode").getOuterList().stream()
+				.anyMatch(t -> t.contains(classCodes[0].getCodeValue())));
+		assertTrue(sqpl.get("$XDSDocumentEntryPracticeSettingCode").getOuterList().stream()
+				.anyMatch(t -> t.contains(practiceSettingCodes[0].getCodeSystemId())));
+		assertTrue(sqpl.get("$XDSDocumentEntryHealthcareFacilityTypeCode").getOuterList().stream()
+				.anyMatch(t -> t.contains(healthCareFacilityCodes[0].getCodeValue())));
+		assertTrue(sqpl.get("$XDSDocumentEntryConfidentialityCode").getOuterList().stream()
+				.anyMatch(t -> t.contains(confidentialityCodes[1].getCodeValue())));
+		assertTrue(sqpl.get("$XDSDocumentEntryFormatCode").getOuterList().stream()
+				.anyMatch(t -> t.contains(formatCodes[1].getCodeValue())));
 
-		assertTrue(sqpl.get("$XDSDocumentEntryAuthorPerson").contains(authorPerson.getGivenName()));
+		assertTrue(sqpl.get("$XDSDocumentEntryAuthorPerson").getOuterList().stream()
+				.anyMatch(t -> t.contains(authorPerson.getName().getGiven())));
 		assertTrue(
-				sqpl.get("$XDSDocumentEntryAuthorPerson").contains(authorPerson.getFamilyName()));
-		assertTrue(sqpl.get("$XDSDocumentEntryAuthorPerson").contains(authorPerson.getPrefix()));
-		assertTrue(sqpl.get("$XDSDocumentEntryAuthorPerson").contains(authorPerson.getPrefix()));
+				sqpl.get("$XDSDocumentEntryAuthorPerson").getOuterList().stream()
+						.anyMatch(t -> t.contains(authorPerson.getName().getFamily())));
+		assertTrue(sqpl.get("$XDSDocumentEntryAuthorPerson").getOuterList().stream()
+				.anyMatch(t -> t.contains(authorPerson.getName().getPrefix())));
+		assertTrue(sqpl.get("$XDSDocumentEntryAuthorPerson").getOuterList().stream()
+				.anyMatch(t -> t.contains(authorPerson.getName().getSuffix())));
 	}
 
 }

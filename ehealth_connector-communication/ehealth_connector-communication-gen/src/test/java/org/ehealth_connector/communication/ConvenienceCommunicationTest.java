@@ -36,6 +36,7 @@ import org.ehealth_connector.common.communication.Destination;
 import org.ehealth_connector.common.communication.DocumentMetadata;
 import org.ehealth_connector.common.communication.DocumentMetadata.DocumentMetadataExtractionMode;
 import org.ehealth_connector.common.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
+import org.ehealth_connector.common.enums.DocumentDescriptor;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.xua.deserialization.impl.AssertionDeserializerImpl;
 import org.ehealth_connector.xua.exceptions.DeserializeException;
@@ -45,7 +46,6 @@ import org.ehealth_connector.xua.serialization.impl.AssertionSerializerImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
 import org.openhealthtools.ihe.xds.response.XDSQueryResponseType;
 import org.openhealthtools.ihe.xua.XUAAssertion;
 import org.openhealthtools.ihe.xua.context.XUAModuleContext;
@@ -54,7 +54,7 @@ import org.opensaml.core.config.InitializationService;
 import org.w3c.dom.Element;
 
 @Disabled
-public class ConvenienceCommunicationTest {
+class ConvenienceCommunicationTest {
 
 	// NIST Repository
 	public static final String NIST = "http://ihexds.nist.gov/tf6/services/xdsrepositoryb";
@@ -127,10 +127,10 @@ public class ConvenienceCommunicationTest {
 
 	@Test
 	@Disabled
-	public void testAddDocument() {
+	void testAddDocument() {
 		try {
 			final DocumentMetadata d = c.addDocument(DocumentDescriptor.CDA_R2, cdaFilePath);
-			assertNotNull(d.getMdhtDocumentEntryType().getEntryUUID());
+			assertNotNull(d.getDocumentEntry().getEntryUuid());
 			assertNotNull(c.getTxnData());
 		} catch (final Exception e) {
 			e.printStackTrace();
@@ -138,7 +138,7 @@ public class ConvenienceCommunicationTest {
 	}
 
 	@Test
-	public void testAddXUserAssertion() throws SerializeException {
+	void testAddXUserAssertion() throws SerializeException {
 		c.addXUserAssertion(testAssertion);
 
 		final XUAModuleContext xuaContext = XUAModuleContext.getContext();
@@ -154,7 +154,7 @@ public class ConvenienceCommunicationTest {
 	}
 
 	@Test
-	public void testCreateXUAAssertion() throws SerializeException {
+	void testCreateXUAAssertion() throws SerializeException {
 		final Element assertionElement = new AssertionSerializerImpl().toXmlElement(testAssertion);
 		final XUAAssertion ohtAssertion = new XUAAssertion(assertionElement);
 		final String atnaUserName = ohtAssertion.getAtnaUsername();

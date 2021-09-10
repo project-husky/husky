@@ -25,13 +25,13 @@ import org.eclipse.emf.ecore.EPackage;
 import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.Telecom;
 import org.ehealth_connector.common.communication.Destination;
 import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
 import org.ehealth_connector.communication.mpi.impl.pdq.V3PdqQuery;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.hl7.fhir.dstu3.model.Identifier;
 import org.hl7.v3.V3Package;
-import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
 
 /**
  * Convenience class MasterPatientIndexQuery adds the MpiQuery functionality for
@@ -120,7 +120,7 @@ public class MasterPatientIndexQuery {
 	 */
 	public MasterPatientIndexQuery addPatientAddress(Address address) {
 		fixV3Package();
-		v3PdqQuery.addPatientAddress(FhirPatient.convertAddress(address.getMdhtAdress()));
+		v3PdqQuery.addPatientAddress(FhirPatient.convertAddress(address));
 		postFixV3Package();
 		return this;
 	}
@@ -166,7 +166,7 @@ public class MasterPatientIndexQuery {
 	 *            telecom
 	 * @return the query object
 	 */
-	public MasterPatientIndexQuery addPatientTelecom(TEL tel) {
+	public MasterPatientIndexQuery addPatientTelecom(Telecom tel) {
 		fixV3Package();
 		v3PdqQuery.addPatientTelecom(FhirPatient.convertTelecom(tel));
 		postFixV3Package();

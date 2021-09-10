@@ -18,6 +18,8 @@ package org.ehealth_connector.cda.testhelper;
 
 import java.io.File;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 
 import javax.xml.xpath.XPath;
@@ -29,20 +31,24 @@ import javax.xml.xpath.XPathFactory;
 import org.ehealth_connector.cda.BaseAllergyProblem;
 import org.ehealth_connector.cda.BaseProblemEntry;
 import org.ehealth_connector.cda.Consumable;
+import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.Organization;
 import org.ehealth_connector.common.Patient;
+import org.ehealth_connector.common.Telecom;
+import org.ehealth_connector.common.basetypes.AddressBaseType;
+import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
+import org.ehealth_connector.common.basetypes.NameBaseType;
+import org.ehealth_connector.common.basetypes.OrganizationBaseType;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
-import org.ehealth_connector.common.mdht.Address;
-import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.mdht.Identificator;
-import org.ehealth_connector.common.mdht.Name;
-import org.ehealth_connector.common.mdht.Organization;
 import org.ehealth_connector.common.mdht.Performer;
-import org.ehealth_connector.common.mdht.Telecoms;
 import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
-import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
@@ -143,23 +149,23 @@ public class TestUtils {
 	}
 
 	public static boolean isEqual(Name n1, Name n2) {
-		if (!n1.getPrefixes().equals(n2.getPrefixes()))
+		if (!n1.getPrefix().equals(n2.getPrefix()))
 			return false;
-		if (!n1.getAllGivenNames().equals(n2.getAllGivenNames()))
+		if (!n1.getGiven().equals(n2.getGiven()))
 			return false;
-		if (!n1.getFamilyNames().equals(n2.getFamilyNames()))
+		if (!n1.getFamily().equals(n2.getFamily()))
 			return false;
-		if (!n1.getSuffixes().equals(n2.getSuffixes()))
+		if (!n1.getSuffix().equals(n2.getSuffix()))
 			return false;
 		return true;
 	}
 
 	public static boolean isEqual(Organization o1, Organization o2) {
-		if (!o1.getId().equals(o2.getId()))
+		if (!o1.getPrimaryIdentificator().equals(o2.getPrimaryIdentificator()))
 			return false;
-		if (!o1.getName().equals(o2.getName()))
+		if (!o1.getPrimaryName().equals(o2.getPrimaryName()))
 			return false;
-		if (!isEqual(o1.getTelecoms(), o2.getTelecoms()))
+		if (!isEqual(o1.getTelecomList(), o2.getTelecomList()))
 			return false;
 		return true;
 	}
@@ -175,24 +181,39 @@ public class TestUtils {
 		return true;
 	}
 
-	@SuppressWarnings("unlikely-arg-type")
-	public static boolean isEqual(Telecoms t1, Telecoms t2) {
-		if (t1.getEMails() != null) {
-			for (int i = 0; i < t1.getEMails().size(); i++) {
-				if (t1.getEMails().get(i) != t2.getEMails().get(i))
-					return false;
-			}
+	public static boolean isEqual(Telecom t1, Telecom t2) {
+
+		if (t1 == null && t2 == null) {
+			return true;
 		}
-		if (t1.getFaxes() != null) {
-			for (int i = 0; i < t1.getFaxes().size(); i++) {
-				if (t1.getFaxes().get(i) != t2.getFaxes().get(i))
-					return false;
-			}
+
+		if (t1.getValue() == null && t2.getValue() == null && t1.getUsage() == null && t2.getUsage() == null) {
+			return true;
 		}
-		if (t1.getPhones() != null) {
-			for (int i = 0; i < t1.getPhones().size(); i++) {
-				if (t1.getPhones().get(i) != t2.getPhones().get(i))
+
+		if (t1.getValue() == null && t2.getValue() == null && t1.getUsage() != null
+				&& t1.getUsage().equals(t2.getUsage())) {
+			return true;
+		}
+
+		if (t1.getValue() != null && t1.getValue().equalsIgnoreCase(t2.getValue()) && t1.getUsage() == null
+				&& t2.getUsage() == null) {
+			return true;
+		}
+
+		if (t1.getValue().equals(t2.getValue()) && t1.getUsage().equals(t2.getUsage())) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public static boolean isEquals(List<Telecom> t1, List<Telecom> t2) {
+		for (Telecom t : t1) {
+			if (t != null) {
+				if (!t2.contains(t)) {
 					return false;
+				}
 			}
 		}
 
@@ -250,7 +271,7 @@ public class TestUtils {
 	public Date startDate;
 	public String startDateString;
 
-	public Telecoms telecoms1;
+	public List<Telecom> telecoms1;
 
 	public String telS1;
 
@@ -280,8 +301,12 @@ public class TestUtils {
 	}
 
 	public Address createAddress1() {
-		final Address a = new Address("Baurat-Gerber-Str.", "18", "37073", "Göttingen",
-				PostalAddressUse.BUSINESS);
+		final Address a = new Address(new AddressBaseType());
+		a.setStreetName("Baurat-Gerber-Str.");
+		a.setBuildingNumber("18");
+		a.setPostalCode("37073");
+		a.setCity("Göttingen");
+		a.setUsage(org.ehealth_connector.common.enums.PostalAddressUse.WORK_PLACE);
 		return a;
 	}
 
@@ -297,45 +322,72 @@ public class TestUtils {
 
 	// Create Test Objects
 	public Code createCode1() {
-		final Code code = new Code(ts1, ts2, ts3, ts4);
+		final Code code = new Code(ts1, ts2, ts3);
 		return code;
 	}
 
 	public Code createCode2() {
-		final Code code = new Code(ts5, ts4, ts3, ts2);
+		final Code code = new Code(ts5, ts4, ts3);
 		return code;
 	}
 
 	public Code createGtinCode() {
-		final Code code = new Code(CodeSystems.GTIN, ts3);
+		final Code code = new Code(CodeSystems.GTIN.getCodeSystemId(), ts3, null);
 		return code;
 	}
 
 	public Identificator createIdentificator1() {
-		final Identificator id = new Identificator(CodeSystems.GLN, numS1);
+		final Identificator id = new Identificator();
+		id.setRoot(CodeSystems.GLN.getCodeSystemId());
+		id.setExtension(numS1);
 		return id;
 	}
 
 	public Identificator createIdentificator2() {
-		final Identificator id = new Identificator(CodeSystems.ICD10, numS2);
+		final Identificator id = new Identificator();
+		id.setRoot(CodeSystems.ICD10.getCodeSystemId());
+		id.setExtension(numS2);
 		return id;
 	}
 
 	public Name createName1() {
-		final Name n = new Name(ts1, ts2, ts3, ts4);
+		final Name n = new Name();
+		n.setGiven(ts1);
+		n.setFamily(ts2);
+		n.setPrefix(ts3);
+		n.setSuffix(ts4);
 		return n;
 	}
 
 	public Name createName2() {
-		final Name n = new Name(ts5, ts4, ts3, ts2);
+		final Name n = new Name();
+		n.setGiven(ts5);
+		n.setFamily(ts4);
+		n.setPrefix(ts3);
+		n.setSuffix(ts2);
 		return n;
 	}
 
 	public Organization createOrganization1() {
-		final Organization o = new Organization(ts1, numS1);
-		o.setTelecoms(telecoms1);
-		telecoms1.addEMail("testMail", TelecomAddressUse.BUSINESS);
-		telecoms1.addPhone(numS1, TelecomAddressUse.PRIVATE);
+		final Organization o = new Organization(new OrganizationBaseType());
+		o.setPrimaryName(new NameBaseType());
+		o.getPrimaryName().setName(ts1);
+
+		o.setPrimaryIdentificator(new IdentificatorBaseType());
+		o.getPrimaryIdentificator().setExtension(numS1);
+
+		Telecom t1 = new Telecom();
+		t1.setMail("testMail");
+		t1.setUsage(TelecomAddressUse.BUSINESS);
+		telecoms1.add(t1);
+
+		Telecom t2 = new Telecom();
+		t2.setPhone(numS1);
+		t2.setUsage(TelecomAddressUse.PRIVATE);
+		telecoms1.add(t2);
+
+		o.setTelecomList(telecoms1);
+
 		return o;
 	}
 
@@ -359,17 +411,43 @@ public class TestUtils {
 	}
 
 	public Date createStartDate() {
-		return DateUtilMdht.date("15.12.2014");
+		return DateUtil.parseDateyyyyMMdd("20141215");
 	}
 
-	public Telecoms createTelecoms1() {
-		final Telecoms t = new Telecoms();
-		t.addEMail(telS1, TelecomAddressUse.BUSINESS);
-		t.addEMail(telS2, TelecomAddressUse.PRIVATE);
-		t.addFax(telS1, TelecomAddressUse.BUSINESS);
-		t.addFax(telS2, TelecomAddressUse.PRIVATE);
-		t.addPhone(telS1, TelecomAddressUse.BUSINESS);
-		t.addPhone(telS2, TelecomAddressUse.PRIVATE);
+	public List<Telecom> createTelecoms1() {
+		final List<Telecom> t = new LinkedList<>();
+
+		Telecom t1 = new Telecom();
+		t1.setMail(telS1);
+		t1.setUsage(TelecomAddressUse.BUSINESS);
+
+		t.add(t1);
+
+		Telecom t2 = new Telecom();
+		t2.setMail(telS2);
+		t2.setUsage(TelecomAddressUse.PRIVATE);
+		t.add(t2);
+
+		Telecom t3 = new Telecom();
+		t3.setFax(telS1);
+		t3.setUsage(TelecomAddressUse.BUSINESS);
+		t.add(t3);
+
+		Telecom t4 = new Telecom();
+		t4.setFax(telS2);
+		t4.setUsage(TelecomAddressUse.PRIVATE);
+		t.add(t4);
+
+		Telecom t5 = new Telecom();
+		t5.setPhone(telS1);
+		t5.setUsage(TelecomAddressUse.BUSINESS);
+		t.add(t5);
+
+		Telecom t6 = new Telecom();
+		t6.setPhone(telS2);
+		t6.setUsage(TelecomAddressUse.PRIVATE);
+		t.add(t6);
+
 		return t;
 	}
 
@@ -420,8 +498,8 @@ public class TestUtils {
 		// Convenience API Types
 		code1 = createCode1();
 		code2 = createCode2();
-		loincCode = new Code("2.16.840.1.113883.6.1", numS1);
-		problemCode = new Code("2.16.840.1.113883.6.139", numS2);
+		loincCode = new Code("2.16.840.1.113883.6.1", numS1, null);
+		problemCode = new Code("2.16.840.1.113883.6.139", numS2, null);
 		value1 = createValue1();
 		value2 = createValue2();
 		gtinCode = createGtinCode();

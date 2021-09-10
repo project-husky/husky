@@ -36,6 +36,7 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040AuthoringDevice;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Person;
 import org.ehealth_connector.common.hl7cdar2.TEL;
 import org.ehealth_connector.common.hl7cdar2.TS;
+import org.ehealth_connector.common.mdht.AuthoringDevice;
 import org.ehealth_connector.common.mdht.enums.Isco08;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
@@ -76,6 +77,16 @@ public class Author {
 	public Author(POCDMT000040AuthoringDevice device) {
 		this();
 		setAssignedAuthoringDevice(device);
+	}
+
+	/**
+	 * Instantiates a new software author (e.g. a laboratory information system)
+	 *
+	 * @param device the device
+	 */
+	public Author(AuthoringDevice device) {
+		this();
+		setAssignedAuthoringDevice(device.getMdht());
 	}
 
 	/**
