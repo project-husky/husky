@@ -16,11 +16,6 @@
 			<artifactId>ehealth_connector-communication-gen</artifactId>
 			<version>2.0-ALPHA</version>
 		</dependency>
-		<dependency>
-			<groupId>org.ehealth_connector.cda.ch</groupId>
-			<artifactId>ehealth_connector-cda-ch</artifactId>
-			<version>2.0-ALPHA</version>
-		</dependency>
 		
 		<dependency>
 			<groupId>org.apache.axis2</groupId>
@@ -61,20 +56,6 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.ehealth_connector.cda</groupId>
-			<artifactId>ehealth_connector-cda-gen</artifactId>
-			<version>2.0-ALPHA</version>
-			<type>test-jar</type>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.ehealth_connector.cda.ch</groupId>
-			<artifactId>ehealth_connector-cda-ch</artifactId>
-			<version>2.0-ALPHA</version>
-			<type>test-jar</type>
-			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.ehealth_connector.communication</groupId>

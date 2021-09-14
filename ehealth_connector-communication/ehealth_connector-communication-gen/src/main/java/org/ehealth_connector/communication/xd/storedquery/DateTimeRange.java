@@ -17,7 +17,6 @@
 package org.ehealth_connector.communication.xd.storedquery;
 
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
@@ -65,7 +64,7 @@ public class DateTimeRange {
 	 * @return the start point
 	 */
 	public String getFromAsUsFormattedString() {
-		return ipfDtr.getFrom().getDateTime().format(DateTimeFormatter.ISO_DATE_TIME);
+		return DateUtil.formatDateTimeTzon(ipfDtr.getFrom().getDateTime());
 	}
 
 	/**
@@ -92,7 +91,7 @@ public class DateTimeRange {
 	 * @return the end point
 	 */
 	public String getToAsUsFormattedString() {
-		return ipfDtr.getTo().getDateTime().format(DateTimeFormatter.ISO_DATE_TIME);
+		return DateUtil.formatDateTimeTzon(ipfDtr.getTo().getDateTime());
 	}
 
 	/**

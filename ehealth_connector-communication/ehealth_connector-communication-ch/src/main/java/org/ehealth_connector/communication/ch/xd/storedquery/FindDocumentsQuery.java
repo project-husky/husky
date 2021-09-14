@@ -112,13 +112,17 @@ public class FindDocumentsQuery extends AbstractStoredQuery {
 						ipfStoredQuery.getServiceStopTime()
 								.setFrom(dateTimeRanges[index].getFromAsUsFormattedString());
 						ipfStoredQuery.getServiceStopTime().setTo(dateTimeRanges[index].getToAsUsFormattedString());
+					} else if (dateTimeRanges[index].getDateTimeRangeAttribute()
+							.equals(DateTimeRangeAttributes.CREATION_TIME)) {
+						ipfStoredQuery.getCreationTime().setFrom(dateTimeRanges[index].getFromAsUsFormattedString());
+						ipfStoredQuery.getCreationTime().setTo(dateTimeRanges[index].getToAsUsFormattedString());
 					}
 				}
 			}
 		}
 
 		var author = XdsMetadataUtil.converteHCAuthor(authorPerson);
-		ipfStoredQuery.getTypedAuthorPersons().add(author.getAuthorPerson());
+		ipfStoredQuery.setTypedAuthorPersons(List.of(author.getAuthorPerson()));
 	}
 
 	/**

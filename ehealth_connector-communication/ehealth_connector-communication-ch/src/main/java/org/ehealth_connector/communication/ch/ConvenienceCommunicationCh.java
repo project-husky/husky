@@ -41,6 +41,7 @@ import org.ehealth_connector.communication.ch.xd.storedquery.FindDocumentsQuery;
 import org.ehealth_connector.communication.exceptions.DocumentNotAccessibleException;
 import org.ehealth_connector.xua.core.SecurityHeaderElement;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
+import org.openehealth.ipf.commons.ihe.xds.core.requests.query.QueryReturnType;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.QueryResponse;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.Response;
 
@@ -184,7 +185,8 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	 * @throws Exception
 	 */
 	public QueryResponse queryDocuments(Identificator patientId, SecurityHeaderElement security) throws Exception {
-		return queryDocuments(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED), security);
+		return queryDocumentQuery(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED), security,
+				QueryReturnType.LEAF_CLASS);
 	}
 
 	/**

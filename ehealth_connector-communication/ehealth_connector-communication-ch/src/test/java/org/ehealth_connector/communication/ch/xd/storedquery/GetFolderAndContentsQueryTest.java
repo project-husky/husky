@@ -17,15 +17,13 @@
 package org.ehealth_connector.communication.ch.xd.storedquery;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Map;
 
 import org.ehealth_connector.communication.ch.testhelper.XdsChTestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntryType;
-import org.openehealth.ipf.commons.ihe.xds.core.requests.query.QueryList;
 
 /**
  * Test of class GetFolderAndContentsQuery
@@ -51,14 +49,16 @@ public class GetFolderAndContentsQueryTest extends XdsChTestUtils {
 		final GetFolderAndContentsQuery q1 = new GetFolderAndContentsQuery("1234", true,
 				formatCodes, confidentialityCodes);
 
-		final Map<String, QueryList<String>> sqpl1 = q1.getIpfQuery().getExtraParameters();
+		assertTrue(q1
+				.getIpfQuery() instanceof org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetFolderAndContentsQuery);
 
-		assertTrue(sqpl1.get("$XDSFolderEntryUUID").getOuterList().stream().anyMatch(t -> t.contains("1234")));
-		assertTrue(
-				sqpl1.get("$XDSDocumentEntryFormatCode").getOuterList().stream()
-						.anyMatch(t -> t.contains(formatCodes[1].getCodeValue())));
-		assertTrue(sqpl1.get("$XDSDocumentEntryConfidentialityCode")
-				.getOuterList().stream().anyMatch(t -> t.contains(confidentialityCodes[1].getCodeSystemId())));
+		var sqpl = (org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetFolderAndContentsQuery) q1.getIpfQuery();
+
+		assertEquals("1234", sqpl.getUuid());
+		assertTrue(sqpl.getFormatCodes().stream().anyMatch(t -> t != null && t.getCode().equalsIgnoreCase(formatCodes[1].getCodeValue())));
+		assertTrue(sqpl.getConfidentialityCodes().getOuterList().stream()
+				.anyMatch(t -> t != null && t.stream()
+						.anyMatch(code -> code.getCode().equalsIgnoreCase(confidentialityCodes[1].getCodeValue()))));
 	}
 
 	/**
@@ -84,10 +84,15 @@ public class GetFolderAndContentsQueryTest extends XdsChTestUtils {
 	public void testGetFolderAndContentsQueryStringBooleanFormatCodeArrayConfidentialityCodeArrayStringObjectType() {
 		final GetFolderAndContentsQuery q3 = new GetFolderAndContentsQuery("1234", true,
 				formatCodes, confidentialityCodes, "6565873dsdgsdg", DocumentEntryType.STABLE);
+
+		assertTrue(q3
+				.getIpfQuery() instanceof org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetFolderAndContentsQuery);
+
+		var sqpl = (org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetFolderAndContentsQuery) q3.getIpfQuery();
+
 		assertTrue(
-				q3.getIpfQuery()
-						.getExtraParameters().get("$XDSDocumentEntryType").getOuterList().stream()
-						.anyMatch(t -> t.contains("urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1")));
+				sqpl.getDocumentEntryTypes().stream().anyMatch(t -> t != null
+						&& t.getUuid().equalsIgnoreCase("urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1")));
 	}
 
 }
