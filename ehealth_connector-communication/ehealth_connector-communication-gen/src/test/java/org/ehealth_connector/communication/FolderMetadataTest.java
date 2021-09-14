@@ -125,7 +125,7 @@ class FolderMetadataTest {
 	@Test
 	void testSetAvailabilityStatus() {
 		final FolderMetadata ref = new FolderMetadata();
-		assertEquals(AvailabilityStatus.SUBMITTED, ref.getAvailabilityStatus());
+		assertNull(ref.getAvailabilityStatus());
 
 		ref.setAvailabilityStatus(testAvailabilityStatus1);
 		assertEquals(testAvailabilityStatus1, ref.getAvailabilityStatus());

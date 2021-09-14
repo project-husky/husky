@@ -19,13 +19,10 @@ package org.ehealth_connector.communication.xd.storedquery;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.Map;
-import java.util.Map.Entry;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.ehealth_connector.communication.testhelper.XdsTestUtils;
 import org.junit.jupiter.api.Test;
-import org.openehealth.ipf.commons.ihe.xds.core.requests.query.QueryList;
 import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,27 +41,15 @@ class FindDocumentsQueryTest extends XdsTestUtils {
 
 		final FindDocumentsQuery q = new FindDocumentsQuery(patientId, availabilityStatus);
 
-		// Check query parameters
-		final Map<String, QueryList<String>> sqpl = q.getIpfQuery().getExtraParameters();
+		assertTrue(
+				q.getIpfQuery() instanceof org.openehealth.ipf.commons.ihe.xds.core.requests.query.FindDocumentsQuery);
 
-		for (Entry<String, QueryList<String>> sqpl1 : sqpl.entrySet()) {
-			if (sqpl1.getKey() != null && sqpl1.getValue() != null) {
-				sqpl1.getValue().getOuterList().stream().forEach(t -> {
-					log.debug(sqpl1.getKey() + ": " + t);
-				});
-			}
+		var sqpl = (org.openehealth.ipf.commons.ihe.xds.core.requests.query.FindDocumentsQuery) q.getIpfQuery();
 
-		}
+		assertEquals(patientId.getRoot(), sqpl.getPatientId().getAssigningAuthority().getUniversalId());
+		assertEquals(patientId.getExtension(), sqpl.getPatientId().getId());
 
-		final QueryList<String> patientIdRootRef = sqpl.get("$XDSDocumentEntryPatientId");
-		assertEquals(patientId.getRoot(), extractByRegex(".*\\&(.*)\\&.*", patientIdRootRef.getOuterList()));
-		assertEquals(patientId.getExtension(),
-				extractByRegex("'(.*)\\^\\^\\^\\&.*\\&.*'", patientIdRootRef.getOuterList()));
-
-		final QueryList<String> entryStatusRef = sqpl.get("$XDSDocumentEntryStatus");
-		assertEquals(availabilityStatus.getQueryOpcode(),
-				extractByRegex(
-						"\\(\\'urn:oasis:names:tc:ebxml-regrep:StatusType:(.*)\\'\\)", entryStatusRef.getOuterList()));
+		assertEquals(availabilityStatus.getQueryOpcode(), sqpl.getStatus().get(0).getQueryOpcode());
 	}
 
 }

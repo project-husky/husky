@@ -20,6 +20,7 @@ package org.ehealth_connector.common.utils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -278,7 +279,7 @@ public class XdsMetadataUtil {
 					xon = at.getAuthorInstitution().get(i);
 					final var org = new OrganizationBaseType();
 					org.addIdentificator(
-							convertOhtXcnIdToEhc(xon.getAssigningAuthority().getUniversalId(), xon.getIdNumber()));
+							convertOhtXcnIdToEhc(xon.getAssigningAuthority(), xon.getIdNumber()));
 					org.addName(new Name(xon.getOrganizationName()));
 					a.setOrganization(new Organization(org));
 				}
@@ -290,7 +291,9 @@ public class XdsMetadataUtil {
 				if (at.getAuthorRole().get(0) != null) {
 					role = new Code();
 					role.setCode(at.getAuthorRole().get(0).getId());
-					role.setCodeSystem(at.getAuthorRole().get(0).getAssigningAuthority().getUniversalId());
+					if (at.getAuthorRole().get(0).getAssigningAuthority() != null) {
+						role.setCodeSystem(at.getAuthorRole().get(0).getAssigningAuthority().getUniversalId());
+					}
 				}
 
 				a.setRoleFunction(role);
@@ -333,7 +336,10 @@ public class XdsMetadataUtil {
 							telecom.setMail(xtn.getEmail());
 						}
 
-						telecom.setUsage(TelecomAddressUse.valueOf(xtn.getUse()));
+						if (xtn.getUse() != null) {
+							telecom.setUsage(TelecomAddressUse.valueOf(xtn.getUse()));
+						}
+
 						t.add(telecom);
 					}
 				}
@@ -445,10 +451,10 @@ public class XdsMetadataUtil {
 		final var p = new Patient();
 
 		// Name
-		if (spit.getNames().hasNext()) {
-			while (spit.getNames().hasNext()) {
-				final var xpn = spit.getNames().next();
-				p.addName(XdsMetadataUtil.convertOhtXpn(xpn));
+		Iterator<org.openehealth.ipf.commons.ihe.xds.core.metadata.Name> names = spit.getNames();
+		if (names.hasNext()) {
+			while (names.hasNext()) {
+				p.addName(XdsMetadataUtil.convertOhtXpn(names.next()));
 			}
 		}
 		// Date of birth
@@ -460,16 +466,18 @@ public class XdsMetadataUtil {
 			p.setAdministrativeGender(AdministrativeGender.getEnum(spit.getGender()));
 		}
 		// Address
-		if (spit.getAddresses() != null) {
-			while (spit.getAddresses().hasNext()) {
-				p.addAddress(XdsMetadataUtil.convertOhtXad(spit.getAddresses().next()));
+		Iterator<org.openehealth.ipf.commons.ihe.xds.core.metadata.Address> addresses = spit.getAddresses();
+		if (addresses != null) {
+			while (addresses.hasNext()) {
+				p.addAddress(XdsMetadataUtil.convertOhtXad(addresses.next()));
 			}
 
 		}
 		// ID
-		if (spit.getIds() != null) {
-			while (spit.getIds().hasNext()) {
-				final Identifiable cx = spit.getIds().next();
+		Iterator<Identifiable> ids = spit.getIds();
+		if (ids != null) {
+			while (ids.hasNext()) {
+				final Identifiable cx = ids.next();
 				p.addId(XdsMetadataUtil.convertOhtCx(cx));
 			}
 
@@ -519,8 +527,12 @@ public class XdsMetadataUtil {
 	 * @param id                            the ID part
 	 * @return the Identificator
 	 */
-	public static Identificator convertOhtXcnIdToEhc(String assigningAuthorityUniversalId, String id) {
-		return new Identificator(assigningAuthorityUniversalId, id);
+	public static Identificator convertOhtXcnIdToEhc(AssigningAuthority assigningAuthorityUniversalId, String id) {
+		if (assigningAuthorityUniversalId != null) {
+			return new Identificator(assigningAuthorityUniversalId.getUniversalId(), id);
+		} else {
+			return new Identificator(null, id);
+		}
 	}
 
 	/**

@@ -23,11 +23,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.zip.ZipFile;
 
 import javax.activation.DataHandler;
 import javax.mail.util.ByteArrayDataSource;
 
+import org.apache.camel.CamelContext;
+import org.apache.cxf.binding.soap.interceptor.SoapOutInterceptor;
+import org.apache.cxf.interceptor.AttachmentOutInterceptor;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.communication.AffinityDomain;
 import org.ehealth_connector.common.communication.AtnaConfig;
@@ -43,8 +48,6 @@ import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
-import org.ehealth_connector.communication.tls.CustomHttpsTLSv11v12SocketFactory;
-import org.ehealth_connector.communication.utils.AbstractAxis2Util;
 import org.ehealth_connector.communication.xd.storedquery.AbstractStoredQuery;
 import org.ehealth_connector.communication.xd.storedquery.FindDocumentsQuery;
 import org.ehealth_connector.communication.xd.storedquery.FindFoldersStoredQuery;
@@ -62,6 +65,7 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.QueryRegistry;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.RetrieveDocumentSet;
+import org.openehealth.ipf.commons.ihe.xds.core.requests.query.QueryReturnType;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.QueryResponse;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.Response;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.RetrievedDocumentSet;
@@ -74,6 +78,8 @@ import org.openhealthtools.ihe.xua.XUAAssertion;
 import org.openhealthtools.ihe.xua.context.XUAModuleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.w3c.dom.Element;
 
 /**
@@ -98,10 +104,14 @@ import org.w3c.dom.Element;
  * </ul>
  * </div>
  */
+@Component
 public class ConvenienceCommunication extends CamelService {
 
 	/** The SLF4J logger instance. */
 	private static Logger log = LoggerFactory.getLogger(ConvenienceCommunication.class);
+
+	@Autowired
+	private CamelContext context;
 
 	/**
 	 * <div class="en">The affinity domain set-up</div>
@@ -140,8 +150,8 @@ public class ConvenienceCommunication extends CamelService {
 		super();
 		this.affinityDomain = null;
 		this.atnaConfigMode = AtnaConfigMode.UNSECURE;
-		CustomHttpsTLSv11v12SocketFactory.setup();
-		AbstractAxis2Util.initAxis2Config();
+		// CustomHttpsTLSv11v12SocketFactory.setup();
+		// AbstractAxis2Util.initAxis2Config();
 	}
 
 	/**
@@ -153,8 +163,8 @@ public class ConvenienceCommunication extends CamelService {
 	public ConvenienceCommunication(AffinityDomain affinityDomain) {
 		this.affinityDomain = affinityDomain;
 		this.atnaConfigMode = AtnaConfigMode.UNSECURE;
-		CustomHttpsTLSv11v12SocketFactory.setup();
-		AbstractAxis2Util.initAxis2Config();
+		// CustomHttpsTLSv11v12SocketFactory.setup();
+		// AbstractAxis2Util.initAxis2Config();
 	}
 
 	/**
@@ -184,8 +194,8 @@ public class ConvenienceCommunication extends CamelService {
 		this.atnaConfigMode = atnaConfigMode;
 		this.documentMetadataExtractionMode = documentMetadataExtractionMode;
 		this.submissionSetMetadataExtractionMode = submissionSetMetadataExtractionMode;
-		CustomHttpsTLSv11v12SocketFactory.setup();
-		AbstractAxis2Util.initAxis2Config();
+		// CustomHttpsTLSv11v12SocketFactory.setup();
+		// AbstractAxis2Util.initAxis2Config();
 	}
 
 	/**
@@ -702,10 +712,11 @@ public class ConvenienceCommunication extends CamelService {
 	 *                       parameters
 	 * @return the OHT XDSQueryResponseType containing references instead of the
 	 *         complete document metadata</div>
+	 * @throws Exception
 	 */
 	public QueryResponse queryDocumentReferencesOnly(FindDocumentsQuery queryParameter,
-			SecurityHeaderElement securityHeader) {
-		return this.queryDocuments(queryParameter, securityHeader);
+			SecurityHeaderElement securityHeader) throws Exception {
+		return queryDocumentQuery(queryParameter, securityHeader, QueryReturnType.OBJECT_REF);
 	}
 
 	/**
@@ -715,9 +726,11 @@ public class ConvenienceCommunication extends CamelService {
 	 * @param queryParameter a findDocumentsQuery object filled with your query
 	 *                       parameters
 	 * @return the OHT XDSQueryResponseType containing full document metadata</div>
+	 * @throws Exception
 	 */
-	public QueryResponse queryDocuments(FindDocumentsQuery queryParameter, SecurityHeaderElement securityHeader) {
-		return this.queryDocuments(queryParameter, securityHeader);
+	public QueryResponse queryDocuments(FindDocumentsQuery queryParameter, SecurityHeaderElement securityHeader)
+			throws Exception {
+		return queryDocumentQuery(queryParameter, securityHeader, QueryReturnType.LEAF_CLASS);
 	}
 
 	/**
@@ -730,7 +743,8 @@ public class ConvenienceCommunication extends CamelService {
 	 * @return the OHT XDSQueryResponseType containing full document metadata</div>
 	 * @throws Exception
 	 */
-	public QueryResponse queryDocuments(AbstractStoredQuery query, SecurityHeaderElement securityHeader)
+	public QueryResponse queryDocumentQuery(AbstractStoredQuery query, SecurityHeaderElement securityHeader,
+			QueryReturnType returnType)
 			throws Exception {
 		/*
 		 * lastError = "";
@@ -748,16 +762,29 @@ public class ConvenienceCommunication extends CamelService {
 		 */
 
 		final var queryRegistry = new QueryRegistry(query.getIpfQuery());
+		queryRegistry.setReturnType(returnType);
 
 		final var serverInLogger = "#serverInLogger";
 		final var serverOutLogger = "#serverOutLogger";
+		final var attachmentOutInterceptor = "#AttachmentOutInterceptor";
+		AttachmentOutInterceptor interceptor = new AttachmentOutInterceptor();
+		SoapOutInterceptor soapOutInterceptor = new SoapOutInterceptor(null);
+
 		final var endpoint = String.format(
 				"xds-iti18://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
 				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", ""),
 				serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
 				atnaConfigMode == AtnaConfigMode.SECURE);
 		log.info("Sending request to '{}' endpoint", endpoint);
-		final var exchange = send(endpoint, queryRegistry, securityHeader, null);
+
+		Map<String, String> outgoingHeaders = new HashMap<>();
+		// outgoingHeaders.put("Accept", "application/soap+xml");
+		outgoingHeaders.put("transfer-encoding", "chunked");
+		outgoingHeaders.put("Content-Type",
+				"application/soap+xml; charset=UTF-8; action=\"urn:ihe:iti:2007:RegistryStoredQuery\"");
+		outgoingHeaders.put("Force MTOM", "false");
+
+		final var exchange = send(endpoint, queryRegistry, securityHeader, outgoingHeaders);
 
 		return exchange.getMessage().getBody(QueryResponse.class);
 	}
@@ -819,7 +846,7 @@ public class ConvenienceCommunication extends CamelService {
 	 */
 	public QueryResponse queryFolders(FindFoldersStoredQuery queryParameter, SecurityHeaderElement security)
 			throws Exception {
-		return this.queryDocuments(queryParameter, security);
+		return queryDocumentQuery(queryParameter, security, QueryReturnType.LEAF_CLASS);
 	}
 
 	/**
@@ -860,7 +887,12 @@ public class ConvenienceCommunication extends CamelService {
 				atnaConfigMode == AtnaConfigMode.SECURE);
 		log.info("Sending request to '{}' endpoint", endpoint);
 
-		final var exchange = send(endpoint, retrieveDocumentSet, securityHeader, "");
+		Map<String, String> outgoingHeaders = new HashMap<>();
+		outgoingHeaders.put("Accept", "application/soap+xml");
+		outgoingHeaders.put("Content-Type",
+				"multipart/related; charset=UTF-8; action=\"urn:ihe:iti:2007:RetrieveDocumentSet\"");
+
+		final var exchange = send(endpoint, retrieveDocumentSet, securityHeader, outgoingHeaders);
 
 		return exchange.getMessage().getBody(RetrievedDocumentSet.class);
 	}
@@ -946,7 +978,12 @@ public class ConvenienceCommunication extends CamelService {
 				atnaConfigMode == AtnaConfigMode.SECURE);
 		log.info("Sending request to '{}' endpoint", endpoint);
 
-		final var exchange = send(endpoint, txnData, securityHeader, "");
+		Map<String, String> outgoingHeaders = new HashMap<>();
+		outgoingHeaders.put("Accept", "application/soap+xml");
+		outgoingHeaders.put("Content-Type",
+				"multipart/related; charset=UTF-8; action=\"urn:ihe:iti:2007:RegistryStoredQuery\"");
+
+		final var exchange = send(endpoint, txnData, securityHeader, outgoingHeaders);
 
 		return exchange.getMessage().getBody(Response.class);
 	}

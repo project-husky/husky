@@ -65,12 +65,12 @@ public class TelecomsTest {
 		t.setUsage(TelecomAddressUse.BUSINESS);
 
 		assertTrue(t.getValue().contains("mailto:axel.helmer.job@gmail.com"));
-		assertEquals(t.getUsage(), TelecomAddressUse.BUSINESS.getCodeValue());
+		assertEquals(t.getUsage().getCodeValue(), TelecomAddressUse.BUSINESS.getCodeValue());
 
 		t.setMail("test@test.de");
 		t.setUsage(TelecomAddressUse.PRIVATE);
 		assertTrue(t.getValue().contains("mailto:test@test.de"));
-		assertEquals(t.getValue(), TelecomAddressUse.PRIVATE.getCodeValue());
+		assertEquals(t.getUsage().getCodeValue(), TelecomAddressUse.PRIVATE.getCodeValue());
 	}
 
 	/**
@@ -85,12 +85,12 @@ public class TelecomsTest {
 		t.setFax(numS1);
 		t.setUsage(TelecomAddressUse.BUSINESS);
 		assertTrue(t.getValue().contains("fax:" + numS1));
-		assertEquals(t.getValue(), TelecomAddressUse.BUSINESS.getCodeValue());
+		assertEquals(t.getUsage().getCodeValue(), TelecomAddressUse.BUSINESS.getCodeValue());
 
-		t.setPhone(numS2);
+		t.setFax(numS2);
 		t.setUsage(TelecomAddressUse.MOBILE);
-		assertTrue(t.getValue().contains("fax:" + numS1));
-		assertEquals(t.getValue(), TelecomAddressUse.BUSINESS.getCodeValue());
+		assertTrue(t.getValue().contains("fax:" + numS2));
+		assertEquals(t.getUsage().getCodeValue(), TelecomAddressUse.MOBILE.getCodeValue());
 	}
 
 	/**
@@ -108,8 +108,8 @@ public class TelecomsTest {
 		t.setPhone(telS2);
 		t.setUsage(TelecomAddressUse.MOBILE);
 
-		assertTrue(t.getValue().contains("tel:" + telS1));
-		assertEquals(t.getValue(), TelecomAddressUse.MOBILE.getCodeValue());
+		assertTrue(t.getValue().contains("tel:" + telS2));
+		assertEquals(t.getUsage().getCodeValue(), TelecomAddressUse.MOBILE.getCodeValue());
 	}
 
 	/**
@@ -125,7 +125,7 @@ public class TelecomsTest {
 		t.setUsage(TelecomAddressUse.BUSINESS);
 
 		assertTrue(t.getValue().contains(testWebsite1));
-		assertEquals(t.getValue(), TelecomAddressUse.PRIVATE.getCodeValue());
+		assertEquals(t.getUsage().getCodeValue(), TelecomAddressUse.BUSINESS.getCodeValue());
 	}
 
 	/**

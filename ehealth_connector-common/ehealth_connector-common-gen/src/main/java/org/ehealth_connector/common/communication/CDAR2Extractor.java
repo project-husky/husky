@@ -3,8 +3,6 @@ package org.ehealth_connector.common.communication;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -49,6 +47,7 @@ import org.ehealth_connector.common.hl7cdar2.POCDMT000040ServiceEvent;
 import org.ehealth_connector.common.hl7cdar2.QTY;
 import org.ehealth_connector.common.hl7cdar2.TEL;
 import org.ehealth_connector.common.hl7cdar2.TS;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Address;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssigningAuthority;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Author;
@@ -1836,8 +1835,7 @@ public class CDAR2Extractor {
 			}
 		}
 
-		var dateTime = ZonedDateTime.parse(tm, DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
-		timestamp.setDateTime(dateTime);
+		timestamp.setDateTime(DateUtil.parseZonedDate(DateUtil.parseHl7Timestamp(tm)));
 
 		return timestamp;
 	}

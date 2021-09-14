@@ -21,15 +21,17 @@ package org.ehealth_connector.communication;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.temporal.ChronoField;
+import java.time.format.DateTimeFormatter;
 
-import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.communication.DocumentMetadata;
 import org.ehealth_connector.common.enums.LanguageCode;
+import org.ehealth_connector.communication.testhelper.TestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
@@ -69,7 +71,7 @@ public class DocumentMetadataTest extends TestUtils {
 
 	@Test
 	void testClassCode() {
-		final Code cc = new Code("1.3.6.1.4.1.21367.100.1", "DEMO-Consult", "Consultation");
+		final Code cc = new Code("DEMO-Consult", "1.3.6.1.4.1.21367.100.1", "Consultation");
 		d.setClassCode(cc); // Just
 		// for
 		// the
@@ -96,13 +98,22 @@ public class DocumentMetadataTest extends TestUtils {
 	@Test
 	void testCreationTime() {
 		startDate = createStartDate();
-		d.setCreationTime(ZonedDateTime.from(startDate.toInstant()));
-		assertEquals(startDate.getTime(), d.getCreationTime().getLong(ChronoField.INSTANT_SECONDS));
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ssXXX");
+		System.out.println(sdf.format(startDate));
+		System.out.println(ZonedDateTime.parse(sdf.format(startDate),
+				DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.systemDefault())));
+
+		d.setCreationTime(ZonedDateTime.parse(sdf.format(startDate),
+				DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.systemDefault())));
+
+		assertEquals(sdf.format(startDate),
+				d.getCreationTime().format(DateTimeFormatter.ISO_OFFSET_DATE_TIME.withZone(ZoneId.systemDefault())));
 	}
 
 	@Test
 	void testFormatCode() {
-		final Code fc = new Code("1.3.6.1.4.1.19376.1.2.3", "urn:ihe:iti:xds-sd:pdf:2008",
+		final Code fc = new Code("urn:ihe:iti:xds-sd:pdf:2008", "1.3.6.1.4.1.19376.1.2.3",
 				"1.3.6.1.4.1.19376.1.2.20 (Scanned Document)");
 		d.setFormatCode(fc); // Can be
 		// extracted
@@ -116,7 +127,7 @@ public class DocumentMetadataTest extends TestUtils {
 
 	@Test
 	void testHealthcareFacilityTypeCode() {
-		final Code hftc = new Code("2.16.840.1.113883.5.11", "AMB", "Ambulance");
+		final Code hftc = new Code("AMB", "2.16.840.1.113883.5.11", "Ambulance");
 		d.setHealthcareFacilityTypeCode(hftc); // The
 		// codes
 		// here
@@ -163,7 +174,7 @@ public class DocumentMetadataTest extends TestUtils {
 
 	@Test
 	void testPracticeSettingCode() {
-		final Code psc = new Code("2.16.840.1.113883.6.96", "394802001", "General Medicine");
+		final Code psc = new Code("394802001", "2.16.840.1.113883.6.96", "General Medicine");
 		d.setPracticeSettingCode(psc); // The
 		// codes
 		// here
@@ -192,7 +203,7 @@ public class DocumentMetadataTest extends TestUtils {
 
 	@Test
 	void testTypeCode() {
-		final Code tc = new Code("2.16.840.1.113883.6.1", "34133-9",
+		final Code tc = new Code("34133-9", "2.16.840.1.113883.6.1", 
 				"Summarization of Episode Note");
 		d.setTypeCode(tc); // Can
 		// be

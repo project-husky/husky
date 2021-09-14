@@ -19,12 +19,9 @@ package org.ehealth_connector.communication.xd.storedquery;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Map;
-
 import org.ehealth_connector.communication.testhelper.XdsTestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openehealth.ipf.commons.ihe.xds.core.requests.query.QueryList;
 import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
 
 /**
@@ -52,11 +49,14 @@ class GetDocumentsQueryTest extends XdsTestUtils {
 	void testGetDocumentsQueryStringArrayBoolean() throws MalformedStoredQueryException {
 		final GetDocumentsQuery q = new GetDocumentsQuery(docIds, true);
 
-		final Map<String, QueryList<String>> sqpl = q.getIpfQuery().getExtraParameters();
+		assertTrue(
+				q.getIpfQuery() instanceof org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetDocumentsQuery);
 
-		assertTrue(sqpl.get("$XDSDocumentEntryEntryUUID").getOuterList().stream()
+		var sqpl = (org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetDocumentsQuery) q.getIpfQuery();
+
+		assertTrue(sqpl.getUuids().stream()
 				.anyMatch(t -> t.contains(docIds.get(0))));
-		assertTrue(sqpl.get("$XDSDocumentEntryEntryUUID").getOuterList().stream()
+		assertTrue(sqpl.getUuids().stream()
 				.anyMatch(t -> t.contains(docIds.get(1))));
 	}
 

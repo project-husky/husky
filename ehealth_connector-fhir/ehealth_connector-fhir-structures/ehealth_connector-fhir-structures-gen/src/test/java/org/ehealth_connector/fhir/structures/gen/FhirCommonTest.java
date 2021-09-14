@@ -61,7 +61,7 @@ public class FhirCommonTest {
 
 		testIdentificator = new Identificator(testSystemOid, testOidString);
 
-		testCode = new Code(testSystemOid, testOidString, null);
+		testCode = new Code(testOidString, testSystemOid, null);
 	}
 
 	/**

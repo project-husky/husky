@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.xml.namespace.QName;
 
@@ -71,7 +72,7 @@ public abstract class CamelService implements CamelContextAware {
 
 	}
 
-	protected void addHttpHeader(Exchange exchange, String action) {
+	protected void addHttpHeader(Exchange exchange, Map<String, String> outgoingHttpHeaders) {
 
 		Map<String, String> outgoingHeaders = CastUtils
 				.cast((Map<String, String>) exchange.getIn().getHeader(AbstractWsEndpoint.OUTGOING_HTTP_HEADERS));
@@ -80,14 +81,18 @@ public abstract class CamelService implements CamelContextAware {
 			outgoingHeaders = new HashMap<>();
 		}
 
-		outgoingHeaders.put("Accept", "application/soap+xml");
-		outgoingHeaders.put("Content-Type",
-				String.format("application/soap+xml; charset=UTF-8; action=\"%s\"", action));
+		for (Entry<String, String> entry : outgoingHttpHeaders.entrySet()) {
+			if (entry != null && entry.getValue() != null && entry.getKey() != null) {
+				outgoingHeaders.put(entry.getKey(), entry.getValue());
+			}
+		}
+
 		exchange.getIn().setHeader(AbstractWsEndpoint.OUTGOING_HTTP_HEADERS, outgoingHeaders);
 
 	}
 
-	protected Exchange send(String endpoint, Object body, SecurityHeaderElement securityHeaderElement, String action)
+	protected Exchange send(String endpoint, Object body, SecurityHeaderElement securityHeaderElement,
+			Map<String, String> outgoingHttpHeaders)
 			throws Exception {
 		var camelContext = getCamelContext();
 		Exchange exchange = new DefaultExchange(camelContext);
@@ -96,12 +101,18 @@ public abstract class CamelService implements CamelContextAware {
 			addWssHeader(securityHeaderElement, exchange);
 		}
 
-		if (action != null && !action.isEmpty()) {
-			addHttpHeader(exchange, action);
+		if (outgoingHttpHeaders != null && !outgoingHttpHeaders.isEmpty()) {
+			addHttpHeader(exchange, outgoingHttpHeaders);
 		}
 
 		try (var template = camelContext.createProducerTemplate()) {
+			// exchange.getProperties().put("mtom-enabled", false);
+			// System.out.println(exchange.getProperties());
+
+
 			var result = template.send(endpoint, exchange);
+
+			// System.out.println(exchange.getProperties());
 			if (result.getException() != null) {
 				throw result.getException();
 			}

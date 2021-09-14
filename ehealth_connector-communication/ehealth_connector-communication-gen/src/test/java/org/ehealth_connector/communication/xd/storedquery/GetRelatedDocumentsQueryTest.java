@@ -17,15 +17,13 @@
 package org.ehealth_connector.communication.xd.storedquery;
 
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Map;
 
 import org.ehealth_connector.communication.testhelper.XdsTestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntryType;
-import org.openehealth.ipf.commons.ihe.xds.core.requests.query.QueryList;
 
 /**
  * Test of class GetRelatedDocumentsQuery
@@ -51,13 +49,16 @@ class GetRelatedDocumentsQueryTest extends XdsTestUtils {
 		final GetRelatedDocumentsQuery q1 = new GetRelatedDocumentsQuery("1234", true,
 				parentRelation);
 
-		final Map<String, QueryList<String>> sqpl = q1.getIpfQuery().getExtraParameters();
+		assertTrue(q1
+				.getIpfQuery() instanceof org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetRelatedDocumentsQuery);
 
-		assertTrue(sqpl.get("$XDSDocumentEntryEntryUUID").getOuterList().stream().anyMatch(t -> t.contains("1234")));
-		assertTrue(sqpl.get("$AssociationTypes").getOuterList().stream()
-				.anyMatch(t -> t.contains(parentRelation.get(0).getOpcode21())));
-		assertTrue(sqpl.get("$AssociationTypes").getOuterList().stream()
-				.anyMatch(t -> t.contains(parentRelation.get(1).getOpcode21())));
+		var sqpl = (org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetRelatedDocumentsQuery) q1.getIpfQuery();
+
+		assertEquals("1234", sqpl.getUuid());
+		assertTrue(sqpl.getAssociationTypes().stream()
+				.anyMatch(t -> t != null && t.getOpcode21().equals(parentRelation.get(0).getOpcode21())));
+		assertTrue(sqpl.getAssociationTypes().stream()
+				.anyMatch(t -> t != null && t.getOpcode21().equals(parentRelation.get(1).getOpcode21())));
 
 	}
 
@@ -82,8 +83,14 @@ class GetRelatedDocumentsQueryTest extends XdsTestUtils {
 	void testGetRelatedDocumentsQueryStringBooleanParentDocumentRelationshipTypeArrayStringObjectType() {
 		final GetRelatedDocumentsQuery q3 = new GetRelatedDocumentsQuery("1234", true,
 				parentRelation, "6789", DocumentEntryType.STABLE);
-		assertTrue(q3.getIpfQuery().getExtraParameters().get("$XDSDocumentEntryType").getOuterList().stream()
-				.anyMatch(t -> t.contains("urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1")));
+
+		assertTrue(q3
+				.getIpfQuery() instanceof org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetRelatedDocumentsQuery);
+
+		var sqpl = (org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetRelatedDocumentsQuery) q3.getIpfQuery();
+
+		assertTrue(sqpl.getDocumentEntryTypes().stream().anyMatch(
+				t -> t != null && t.getUuid().equalsIgnoreCase("urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1")));
 	}
 
 }

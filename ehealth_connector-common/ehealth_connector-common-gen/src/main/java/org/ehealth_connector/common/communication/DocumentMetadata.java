@@ -16,9 +16,9 @@
  */
 package org.ehealth_connector.common.communication;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -696,8 +696,9 @@ public class DocumentMetadata {
 	 *            the new creation time
 	 */
 	public void setCreationTime(ZonedDateTime dateAndTime) {
-		final DateFormat cdaDateFormatter = new SimpleDateFormat("yyyyMMddHHmm");
-		xDoc.setCreationTime(cdaDateFormatter.format(dateAndTime));
+		xDoc.setCreationTime(
+				dateAndTime.format(
+						DateTimeFormatter.ofPattern("yyyyMMddHHmmssZ").withZone(ZoneId.systemDefault())));
 	}
 
 	/**

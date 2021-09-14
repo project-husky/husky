@@ -18,10 +18,12 @@ package org.ehealth_connector.common.utils;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.TimeZone;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
@@ -357,7 +359,7 @@ public class DateUtil {
 	 * @return the string
 	 */
 	public static String formatDateTime(ZonedDateTime value) {
-		return value.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss"));
+		return value.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneId.systemDefault()));
 	}
 
 	/**
@@ -372,6 +374,7 @@ public class DateUtil {
 	 */
 	public static String formatDateTimeTzon(Date value) {
 		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssZ");
+		sdf.setTimeZone(TimeZone.getDefault());
 		return sdf.format(value);
 	}
 
@@ -386,7 +389,7 @@ public class DateUtil {
 	 * @return the string
 	 */
 	public static String formatDateTimeTzon(ZonedDateTime value) {
-		return value.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssZ"));
+		return value.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmssZ").withZone(ZoneId.systemDefault()));
 	}
 
 	/**
@@ -416,7 +419,7 @@ public class DateUtil {
 	}
 
 	public static ZonedDateTime parseZonedDate(Date date) {
-		return ZonedDateTime.from(date.toInstant());
+		return ZonedDateTime.from(date.toInstant().atZone(ZoneId.systemDefault()));
 	}
 
 	/**
@@ -616,6 +619,7 @@ public class DateUtil {
 	public static Date parseDateyyyyMMddHHmmss(String value) {
 		try {
 			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+			sdf.setTimeZone(TimeZone.getDefault());
 			return sdf.parse(value);
 		} catch (final ParseException e) {
 			throw new IllegalArgumentException(

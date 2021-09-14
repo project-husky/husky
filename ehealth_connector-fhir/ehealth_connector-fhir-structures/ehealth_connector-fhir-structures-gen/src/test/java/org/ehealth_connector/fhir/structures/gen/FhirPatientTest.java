@@ -20,15 +20,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.xml.bind.JAXBElement;
 
 import org.ehealth_connector.common.Name;
 import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.Telecom;
 import org.ehealth_connector.common.basetypes.AddressBaseType;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
+import org.ehealth_connector.common.hl7cdar2.AdxpCity;
 import org.ehealth_connector.common.hl7cdar2.II;
 import org.ehealth_connector.common.mdht.enums.CountryCode;
 import org.ehealth_connector.common.utils.DateUtil;
@@ -165,8 +169,16 @@ public class FhirPatientTest {
 		assertEquals("Doncaster", fhirPatient.getBirthPlace().getCity());
 
 		final Patient patient = fhirPatient.getPatient();
-		assertEquals("Doncaster", patient.getMdhtPatient().getBirthplace().getPlace().getAddr()
-				.getContent().get(0));
+
+		AdxpCity city = null;
+		for (Serializable element : patient.getMdhtPatient().getBirthplace().getPlace().getAddr().getContent()) {
+			if (element instanceof JAXBElement
+					&& ((JAXBElement) element).getDeclaredType().equals(AdxpCity.class)) {
+				city = ((JAXBElement<AdxpCity>) element).getValue();
+			}
+
+		}
+		assertEquals("Doncaster", city.xmlContent);
 
 		final FhirPatient fhirPatient2 = new FhirPatient(patient);
 		assertEquals("Doncaster", fhirPatient2.getBirthPlace().getCity());
@@ -510,7 +522,7 @@ public class FhirPatientTest {
 
 		// Note with FHIR DSTU3 Family changed. ONly the latest Family Name
 		// remains...
-		assertEquals("family2", fhirPatient.getNameFirstRep().getFamily());
+		assertEquals("family", fhirPatient.getNameFirstRep().getFamily());
 
 		assertEquals("prefix prefix2", fhirPatient.getNameFirstRep().getPrefixAsSingleString());
 		assertEquals("suffix suffix2", fhirPatient.getNameFirstRep().getSuffixAsSingleString());

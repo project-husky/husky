@@ -35,7 +35,6 @@ import java.util.zip.ZipFile;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
-import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.communication.DocumentMetadata;

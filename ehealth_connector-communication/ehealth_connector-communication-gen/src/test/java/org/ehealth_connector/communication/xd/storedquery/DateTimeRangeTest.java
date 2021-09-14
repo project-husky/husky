@@ -19,6 +19,8 @@ package org.ehealth_connector.communication.xd.storedquery;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
@@ -67,8 +69,10 @@ class DateTimeRangeTest {
 		assertEquals(DateUtil.formatDateTime(d.getFrom()), "19800521022211");
 		assertEquals(DateUtil.formatDateTime(d.getTo()), "20150521133459");
 
-		assertEquals("19800521022211", d.getOhtDateTimeRange().getFrom());
-		assertEquals("20150521133459", d.getOhtDateTimeRange().getTo());
+		assertEquals("19800521022211", d.getOhtDateTimeRange().getFrom().getDateTime()
+				.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneId.systemDefault())));
+		assertEquals("20150521133459", d.getOhtDateTimeRange().getTo().getDateTime()
+				.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneId.systemDefault())));
 
 	}
 
@@ -89,6 +93,8 @@ class DateTimeRangeTest {
 
 		assertEquals(testDateTo1.toInstant(), d.getTo().toInstant());
 
-		assertEquals(testDateToStr1, d.getToAsUsFormattedString());
+		assertEquals(testDateToStr1,
+				d.getTo()
+						.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneId.systemDefault())));
 	}
 }

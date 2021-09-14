@@ -202,14 +202,14 @@ public class AuthorTest {
 		testOrgcanization1 = new Organization(new OrganizationBaseType());
 		NameBaseType orgName = new NameBaseType();
 		orgName.setName(testOrgName1);
-		testOrgcanization1.addName(orgName);
+		testOrgcanization1.setPrimaryName(orgName);
 
 		testTelecoms = new Telecom();
 		testOrgPhone1 = "+41 44 500 55 20";
 		testOrgPhoneUsage1 = TelecomAddressUse.BUSINESS;
 		testTelecoms.setPhone(testOrgPhone1);
 		testTelecoms.setUsage(testOrgPhoneUsage1);
-		testOrgcanization1.addTelecom(testTelecoms);
+		testOrgcanization1.setPrimaryTelecom(testTelecoms);
 
 		ts1 = AbstractTestHelper.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
 		ts2 = AbstractTestHelper.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
