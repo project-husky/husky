@@ -1301,4 +1301,1526 @@ Keep-Alive: timeout=5, max=99
 Server: Apache
 Strict-Transport-Security: max-age=63072000; includeSubdomains;
 
-<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201306UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:f59fcf1f-140e-4566-ad99-5a1e9179b17e</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</To><RelatesTo xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:72eee82a-1b09-4b0a-b342-6a23b2ccf506</RelatesTo></soap:Header><soap:Body><PRPA_IN201306UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id extension="77616" root="1.3.6.1.4.1.12559.11.25.1.1.5.1"/><creationTime value="20210914162553"/><interactionId extension="PRPA_IN201306UV02" root="2.16.840.1.113883.1.18"/><processingCode code="T"/><processingModeCode code="T"/><acceptAckCode code="NE"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.3.6.1.4.1.12559.11.25.1.14"/><telecom value="https://ehealthsuisse.ihe-europe.net:10443/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType?wsdl"/></device></sender><acknowledgement><typeCode code="AA"/><targetMessage><id root="1.2.3.4.187000034071070120.1631629553249.2"/></targetMessage></acknowledgement><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201306UV02" displayName="2.16.840.1.113883.1.18"/><queryAck><queryId extension="16316295532492" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="deliveredResponse"/><queryResponseCode code="NF"/></queryAck><queryByParameter><queryId extension="16316295532492" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId><otherIDsScopingOrganization><value root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>OtherIDs.scopingOrganization.id</semanticsText></otherIDsScopingOrganization></parameterList></queryByParameter></controlActProcess></PRPA_IN201306UV02></soap:Body></soap:Envelope>
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201306UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:f59fcf1f-140e-4566-ad99-5a1e9179b17e</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</To><RelatesTo xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:72eee82a-1b09-4b0a-b342-6a23b2ccf506</RelatesTo></soap:Header><soap:Body><PRPA_IN201306UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id extension="77616" root="1.3.6.1.4.1.12559.11.25.1.1.5.1"/><creationTime value="20210914162553"/><interactionId extension="PRPA_IN201306UV02" root="2.16.840.1.113883.1.18"/><processingCode code="T"/><processingModeCode code="T"/><acceptAckCode code="NE"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.3.6.1.4.1.12559.11.25.1.14"/><telecom value="https://ehealthsuisse.ihe-europe.net:10443/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType?wsdl"/></device></sender><acknowledgement><typeCode code="AA"/><targetMessage><id root="1.2.3.4.187000034071070120.1631629553249.2"/></targetMessage></acknowledgement><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201306UV02" displayName="2.16.840.1.113883.1.18"/><queryAck><queryId extension="16316295532492" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="deliveredResponse"/><queryResponseCode code="NF"/></queryAck><queryByParameter><queryId extension="16316295532492" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId><otherIDsScopingOrganization><value root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>OtherIDs.scopingOrganization.id</semanticsText></otherIDsScopingOrganization></parameterList></queryByParameter></controlActProcess></PRPA_IN201306UV02></soap:Body></soap:Envelope>Target endpoint: https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:hl7-org:v3:PRPA_IN201305UV02"
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201305UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:f0030ae6-0617-476a-bc00-488e52bd9203</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><PRPA_IN201305UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id root="1.2.3.4.135000003069125027.1631693181034.1"/><creationTime value="20210915100621"/><interactionId extension="PRPA_IN201305UV02" root="2.16.840.1.113883.1.6"/><processingCode code="P"/><processingModeCode code="T"/><acceptAckCode code="AL"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="2.16.840.1.113883.3.72.6.5.100.1399"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></sender><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201305UV02" codeSystem="2.16.840.1.113883.1.18"/><queryByParameter><queryId extension="16316931810371" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId></parameterList></queryByParameter></controlActProcess></PRPA_IN201305UV02></soap:Body></soap:Envelope>HTTP response code: 200
+Character set: UTF-8
+
+connection: Keep-Alive
+Content-Length: 2089
+content-type: application/soap+xml;charset=UTF-8
+Date: Wed, 15 Sep 2021 08:06:22 GMT
+Keep-Alive: timeout=5, max=100
+Server: Apache
+Strict-Transport-Security: max-age=63072000; includeSubdomains;
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201306UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:e64bc5dd-4fe8-4d56-b88b-676fb40f4151</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</To><RelatesTo xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:f0030ae6-0617-476a-bc00-488e52bd9203</RelatesTo></soap:Header><soap:Body><PRPA_IN201306UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id extension="77617" root="1.3.6.1.4.1.12559.11.25.1.1.5.1"/><creationTime value="20210915100623"/><interactionId extension="PRPA_IN201306UV02" root="2.16.840.1.113883.1.18"/><processingCode code="T"/><processingModeCode code="T"/><acceptAckCode code="NE"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.3.6.1.4.1.12559.11.25.1.14"/><telecom value="https://ehealthsuisse.ihe-europe.net:10443/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType?wsdl"/></device></sender><acknowledgement><typeCode code="AA"/><targetMessage><id root="1.2.3.4.135000003069125027.1631693181034.1"/></targetMessage></acknowledgement><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201306UV02" displayName="2.16.840.1.113883.1.18"/><queryAck><queryId extension="16316931810371" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="deliveredResponse"/><queryResponseCode code="NF"/></queryAck><queryByParameter><queryId extension="16316931810371" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId></parameterList></queryByParameter></controlActProcess></PRPA_IN201306UV02></soap:Body></soap:Envelope>Target endpoint: https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:hl7-org:v3:PRPA_IN201305UV02"
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201305UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:aa26729e-7212-4d1d-b08f-560018086dca</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><PRPA_IN201305UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id root="1.2.3.4.121000135044064132.1631693185608.2"/><creationTime value="20210915100625"/><interactionId extension="PRPA_IN201305UV02" root="2.16.840.1.113883.1.6"/><processingCode code="P"/><processingModeCode code="T"/><acceptAckCode code="AL"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="2.16.840.1.113883.3.72.6.5.100.1399"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></sender><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201305UV02" codeSystem="2.16.840.1.113883.1.18"/><queryByParameter><queryId extension="16316931856092" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId><otherIDsScopingOrganization><value root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>OtherIDs.scopingOrganization.id</semanticsText></otherIDsScopingOrganization></parameterList></queryByParameter></controlActProcess></PRPA_IN201305UV02></soap:Body></soap:Envelope>HTTP response code: 200
+Character set: UTF-8
+
+connection: Keep-Alive
+Content-Length: 2251
+content-type: application/soap+xml;charset=UTF-8
+Date: Wed, 15 Sep 2021 08:06:25 GMT
+Keep-Alive: timeout=5, max=99
+Server: Apache
+Strict-Transport-Security: max-age=63072000; includeSubdomains;
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201306UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:afce7d3d-c789-4748-a4be-884dc51f1bae</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</To><RelatesTo xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:aa26729e-7212-4d1d-b08f-560018086dca</RelatesTo></soap:Header><soap:Body><PRPA_IN201306UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id extension="77618" root="1.3.6.1.4.1.12559.11.25.1.1.5.1"/><creationTime value="20210915100625"/><interactionId extension="PRPA_IN201306UV02" root="2.16.840.1.113883.1.18"/><processingCode code="T"/><processingModeCode code="T"/><acceptAckCode code="NE"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.3.6.1.4.1.12559.11.25.1.14"/><telecom value="https://ehealthsuisse.ihe-europe.net:10443/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType?wsdl"/></device></sender><acknowledgement><typeCode code="AA"/><targetMessage><id root="1.2.3.4.121000135044064132.1631693185608.2"/></targetMessage></acknowledgement><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201306UV02" displayName="2.16.840.1.113883.1.18"/><queryAck><queryId extension="16316931856092" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="deliveredResponse"/><queryResponseCode code="NF"/></queryAck><queryByParameter><queryId extension="16316931856092" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId><otherIDsScopingOrganization><value root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>OtherIDs.scopingOrganization.id</semanticsText></otherIDsScopingOrganization></parameterList></queryByParameter></controlActProcess></PRPA_IN201306UV02></soap:Body></soap:Envelope>Target endpoint: https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:hl7-org:v3:PRPA_IN201305UV02"
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201305UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:317b220d-f164-4bf4-a1b3-1d8d81ff8ef5</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><PRPA_IN201305UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id root="1.2.3.4.118000035035054055.1631694900291.1"/><creationTime value="20210915103500"/><interactionId extension="PRPA_IN201305UV02" root="2.16.840.1.113883.1.6"/><processingCode code="P"/><processingModeCode code="T"/><acceptAckCode code="AL"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="2.16.840.1.113883.3.72.6.5.100.1399"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></sender><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201305UV02" codeSystem="2.16.840.1.113883.1.18"/><queryByParameter><queryId extension="16316949002951" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId></parameterList></queryByParameter></controlActProcess></PRPA_IN201305UV02></soap:Body></soap:Envelope>HTTP response code: 200
+Character set: UTF-8
+
+connection: Keep-Alive
+Content-Length: 2089
+content-type: application/soap+xml;charset=UTF-8
+Date: Wed, 15 Sep 2021 08:35:01 GMT
+Keep-Alive: timeout=5, max=100
+Server: Apache
+Strict-Transport-Security: max-age=63072000; includeSubdomains;
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201306UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:0174975f-0ec5-4303-b6bb-77b0375af62d</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</To><RelatesTo xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:317b220d-f164-4bf4-a1b3-1d8d81ff8ef5</RelatesTo></soap:Header><soap:Body><PRPA_IN201306UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id extension="77619" root="1.3.6.1.4.1.12559.11.25.1.1.5.1"/><creationTime value="20210915103502"/><interactionId extension="PRPA_IN201306UV02" root="2.16.840.1.113883.1.18"/><processingCode code="T"/><processingModeCode code="T"/><acceptAckCode code="NE"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.3.6.1.4.1.12559.11.25.1.14"/><telecom value="https://ehealthsuisse.ihe-europe.net:10443/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType?wsdl"/></device></sender><acknowledgement><typeCode code="AA"/><targetMessage><id root="1.2.3.4.118000035035054055.1631694900291.1"/></targetMessage></acknowledgement><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201306UV02" displayName="2.16.840.1.113883.1.18"/><queryAck><queryId extension="16316949002951" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="deliveredResponse"/><queryResponseCode code="NF"/></queryAck><queryByParameter><queryId extension="16316949002951" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId></parameterList></queryByParameter></controlActProcess></PRPA_IN201306UV02></soap:Body></soap:Envelope>Target endpoint: https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:hl7-org:v3:PRPA_IN201305UV02"
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201305UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:e2eb9edb-ea3a-4e5e-b262-11504d819b95</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><PRPA_IN201305UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id root="1.2.3.4.125001082030085155.1631694904463.2"/><creationTime value="20210915103504"/><interactionId extension="PRPA_IN201305UV02" root="2.16.840.1.113883.1.6"/><processingCode code="P"/><processingModeCode code="T"/><acceptAckCode code="AL"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="2.16.840.1.113883.3.72.6.5.100.1399"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></sender><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201305UV02" codeSystem="2.16.840.1.113883.1.18"/><queryByParameter><queryId extension="16316949044632" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId><otherIDsScopingOrganization><value root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>OtherIDs.scopingOrganization.id</semanticsText></otherIDsScopingOrganization></parameterList></queryByParameter></controlActProcess></PRPA_IN201305UV02></soap:Body></soap:Envelope>HTTP response code: 200
+Character set: UTF-8
+
+connection: Keep-Alive
+Content-Length: 2251
+content-type: application/soap+xml;charset=UTF-8
+Date: Wed, 15 Sep 2021 08:35:04 GMT
+Keep-Alive: timeout=5, max=99
+Server: Apache
+Strict-Transport-Security: max-age=63072000; includeSubdomains;
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201306UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:0d2ae263-7954-4f07-83f4-059a927e9737</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</To><RelatesTo xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:e2eb9edb-ea3a-4e5e-b262-11504d819b95</RelatesTo></soap:Header><soap:Body><PRPA_IN201306UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id extension="77620" root="1.3.6.1.4.1.12559.11.25.1.1.5.1"/><creationTime value="20210915103504"/><interactionId extension="PRPA_IN201306UV02" root="2.16.840.1.113883.1.18"/><processingCode code="T"/><processingModeCode code="T"/><acceptAckCode code="NE"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.3.6.1.4.1.12559.11.25.1.14"/><telecom value="https://ehealthsuisse.ihe-europe.net:10443/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType?wsdl"/></device></sender><acknowledgement><typeCode code="AA"/><targetMessage><id root="1.2.3.4.125001082030085155.1631694904463.2"/></targetMessage></acknowledgement><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201306UV02" displayName="2.16.840.1.113883.1.18"/><queryAck><queryId extension="16316949044632" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="deliveredResponse"/><queryResponseCode code="NF"/></queryAck><queryByParameter><queryId extension="16316949044632" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId><otherIDsScopingOrganization><value root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>OtherIDs.scopingOrganization.id</semanticsText></otherIDsScopingOrganization></parameterList></queryByParameter></controlActProcess></PRPA_IN201306UV02></soap:Body></soap:Envelope>Target endpoint: https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:hl7-org:v3:PRPA_IN201305UV02"
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201305UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:d268452b-11d5-4d82-89d2-3ce1ca60a19d</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><PRPA_IN201305UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id root="1.2.3.4.167000125049082111.1631701996958.1"/><creationTime value="20210915123316"/><interactionId extension="PRPA_IN201305UV02" root="2.16.840.1.113883.1.6"/><processingCode code="P"/><processingModeCode code="T"/><acceptAckCode code="AL"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="2.16.840.1.113883.3.72.6.5.100.1399"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></sender><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201305UV02" codeSystem="2.16.840.1.113883.1.18"/><queryByParameter><queryId extension="16317019969611" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId></parameterList></queryByParameter></controlActProcess></PRPA_IN201305UV02></soap:Body></soap:Envelope>HTTP response code: 200
+Character set: UTF-8
+
+connection: Keep-Alive
+Content-Length: 2089
+content-type: application/soap+xml;charset=UTF-8
+Date: Wed, 15 Sep 2021 10:33:18 GMT
+Keep-Alive: timeout=5, max=100
+Server: Apache
+Strict-Transport-Security: max-age=63072000; includeSubdomains;
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201306UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:7159fb4b-49e5-4b08-866b-cb68a88b5374</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</To><RelatesTo xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:d268452b-11d5-4d82-89d2-3ce1ca60a19d</RelatesTo></soap:Header><soap:Body><PRPA_IN201306UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id extension="77621" root="1.3.6.1.4.1.12559.11.25.1.1.5.1"/><creationTime value="20210915123318"/><interactionId extension="PRPA_IN201306UV02" root="2.16.840.1.113883.1.18"/><processingCode code="T"/><processingModeCode code="T"/><acceptAckCode code="NE"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.3.6.1.4.1.12559.11.25.1.14"/><telecom value="https://ehealthsuisse.ihe-europe.net:10443/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType?wsdl"/></device></sender><acknowledgement><typeCode code="AA"/><targetMessage><id root="1.2.3.4.167000125049082111.1631701996958.1"/></targetMessage></acknowledgement><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201306UV02" displayName="2.16.840.1.113883.1.18"/><queryAck><queryId extension="16317019969611" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="deliveredResponse"/><queryResponseCode code="NF"/></queryAck><queryByParameter><queryId extension="16317019969611" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId></parameterList></queryByParameter></controlActProcess></PRPA_IN201306UV02></soap:Body></soap:Envelope>Target endpoint: https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:hl7-org:v3:PRPA_IN201305UV02"
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201305UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:134fbd09-0b2a-4619-88e4-c73d09e60599</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><PRPA_IN201305UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id root="1.2.3.4.115000001046110009.1631702001274.2"/><creationTime value="20210915123321"/><interactionId extension="PRPA_IN201305UV02" root="2.16.840.1.113883.1.6"/><processingCode code="P"/><processingModeCode code="T"/><acceptAckCode code="AL"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="2.16.840.1.113883.3.72.6.5.100.1399"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></sender><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201305UV02" codeSystem="2.16.840.1.113883.1.18"/><queryByParameter><queryId extension="16317020012742" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId><otherIDsScopingOrganization><value root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>OtherIDs.scopingOrganization.id</semanticsText></otherIDsScopingOrganization></parameterList></queryByParameter></controlActProcess></PRPA_IN201305UV02></soap:Body></soap:Envelope>HTTP response code: 200
+Character set: UTF-8
+
+connection: Keep-Alive
+Content-Length: 2251
+content-type: application/soap+xml;charset=UTF-8
+Date: Wed, 15 Sep 2021 10:33:21 GMT
+Keep-Alive: timeout=5, max=99
+Server: Apache
+Strict-Transport-Security: max-age=63072000; includeSubdomains;
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201306UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:754627a4-0082-4049-a37a-7f29822be9d0</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</To><RelatesTo xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:134fbd09-0b2a-4619-88e4-c73d09e60599</RelatesTo></soap:Header><soap:Body><PRPA_IN201306UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id extension="77622" root="1.3.6.1.4.1.12559.11.25.1.1.5.1"/><creationTime value="20210915123321"/><interactionId extension="PRPA_IN201306UV02" root="2.16.840.1.113883.1.18"/><processingCode code="T"/><processingModeCode code="T"/><acceptAckCode code="NE"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.3.6.1.4.1.12559.11.25.1.14"/><telecom value="https://ehealthsuisse.ihe-europe.net:10443/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType?wsdl"/></device></sender><acknowledgement><typeCode code="AA"/><targetMessage><id root="1.2.3.4.115000001046110009.1631702001274.2"/></targetMessage></acknowledgement><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201306UV02" displayName="2.16.840.1.113883.1.18"/><queryAck><queryId extension="16317020012742" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="deliveredResponse"/><queryResponseCode code="NF"/></queryAck><queryByParameter><queryId extension="16317020012742" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId><otherIDsScopingOrganization><value root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>OtherIDs.scopingOrganization.id</semanticsText></otherIDsScopingOrganization></parameterList></queryByParameter></controlActProcess></PRPA_IN201306UV02></soap:Body></soap:Envelope>Target endpoint: https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:hl7-org:v3:PRPA_IN201305UV02"
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201305UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:f8fd4a1a-a7b2-4b6e-8623-1eff1da70a89</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><PRPA_IN201305UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id root="1.2.3.4.174001060021116171.1631709422446.1"/><creationTime value="20210915143702"/><interactionId extension="PRPA_IN201305UV02" root="2.16.840.1.113883.1.6"/><processingCode code="P"/><processingModeCode code="T"/><acceptAckCode code="AL"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="2.16.840.1.113883.3.72.6.5.100.1399"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></sender><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201305UV02" codeSystem="2.16.840.1.113883.1.18"/><queryByParameter><queryId extension="16317094224541" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId></parameterList></queryByParameter></controlActProcess></PRPA_IN201305UV02></soap:Body></soap:Envelope>HTTP response code: 200
+Character set: UTF-8
+
+connection: Keep-Alive
+Content-Length: 2089
+content-type: application/soap+xml;charset=UTF-8
+Date: Wed, 15 Sep 2021 12:37:04 GMT
+Keep-Alive: timeout=5, max=100
+Server: Apache
+Strict-Transport-Security: max-age=63072000; includeSubdomains;
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201306UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:1f328495-488c-44e5-822c-9a875e0f9557</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</To><RelatesTo xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:f8fd4a1a-a7b2-4b6e-8623-1eff1da70a89</RelatesTo></soap:Header><soap:Body><PRPA_IN201306UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id extension="77624" root="1.3.6.1.4.1.12559.11.25.1.1.5.1"/><creationTime value="20210915143704"/><interactionId extension="PRPA_IN201306UV02" root="2.16.840.1.113883.1.18"/><processingCode code="T"/><processingModeCode code="T"/><acceptAckCode code="NE"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.3.6.1.4.1.12559.11.25.1.14"/><telecom value="https://ehealthsuisse.ihe-europe.net:10443/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType?wsdl"/></device></sender><acknowledgement><typeCode code="AA"/><targetMessage><id root="1.2.3.4.174001060021116171.1631709422446.1"/></targetMessage></acknowledgement><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201306UV02" displayName="2.16.840.1.113883.1.18"/><queryAck><queryId extension="16317094224541" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="deliveredResponse"/><queryResponseCode code="NF"/></queryAck><queryByParameter><queryId extension="16317094224541" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId></parameterList></queryByParameter></controlActProcess></PRPA_IN201306UV02></soap:Body></soap:Envelope>Target endpoint: https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:hl7-org:v3:PRPA_IN201305UV02"
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201305UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:37ca6026-017b-4748-991e-62a64071e504</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><PRPA_IN201305UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id root="1.2.3.4.106001038067107024.1631709427317.2"/><creationTime value="20210915143707"/><interactionId extension="PRPA_IN201305UV02" root="2.16.840.1.113883.1.6"/><processingCode code="P"/><processingModeCode code="T"/><acceptAckCode code="AL"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="2.16.840.1.113883.3.72.6.5.100.1399"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></sender><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201305UV02" codeSystem="2.16.840.1.113883.1.18"/><queryByParameter><queryId extension="16317094273172" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId><otherIDsScopingOrganization><value root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>OtherIDs.scopingOrganization.id</semanticsText></otherIDsScopingOrganization></parameterList></queryByParameter></controlActProcess></PRPA_IN201305UV02></soap:Body></soap:Envelope>HTTP response code: 200
+Character set: UTF-8
+
+connection: Keep-Alive
+Content-Length: 2251
+content-type: application/soap+xml;charset=UTF-8
+Date: Wed, 15 Sep 2021 12:37:07 GMT
+Keep-Alive: timeout=5, max=99
+Server: Apache
+Strict-Transport-Security: max-age=63072000; includeSubdomains;
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201306UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:b5dfe8aa-a2e2-45ca-8696-9f495c8d6e67</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</To><RelatesTo xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:37ca6026-017b-4748-991e-62a64071e504</RelatesTo></soap:Header><soap:Body><PRPA_IN201306UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id extension="77625" root="1.3.6.1.4.1.12559.11.25.1.1.5.1"/><creationTime value="20210915143707"/><interactionId extension="PRPA_IN201306UV02" root="2.16.840.1.113883.1.18"/><processingCode code="T"/><processingModeCode code="T"/><acceptAckCode code="NE"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.3.6.1.4.1.12559.11.25.1.14"/><telecom value="https://ehealthsuisse.ihe-europe.net:10443/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType?wsdl"/></device></sender><acknowledgement><typeCode code="AA"/><targetMessage><id root="1.2.3.4.106001038067107024.1631709427317.2"/></targetMessage></acknowledgement><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201306UV02" displayName="2.16.840.1.113883.1.18"/><queryAck><queryId extension="16317094273172" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="deliveredResponse"/><queryResponseCode code="NF"/></queryAck><queryByParameter><queryId extension="16317094273172" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId><otherIDsScopingOrganization><value root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>OtherIDs.scopingOrganization.id</semanticsText></otherIDsScopingOrganization></parameterList></queryByParameter></controlActProcess></PRPA_IN201306UV02></soap:Body></soap:Envelope>Target endpoint: https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:hl7-org:v3:PRPA_IN201305UV02"
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201305UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:fbbba904-adb4-490a-987b-bc041b288a24</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><PRPA_IN201305UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id root="1.2.3.4.122000071020070032.1631780810242.1"/><creationTime value="20210916102650"/><interactionId extension="PRPA_IN201305UV02" root="2.16.840.1.113883.1.6"/><processingCode code="P"/><processingModeCode code="T"/><acceptAckCode code="AL"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="2.16.840.1.113883.3.72.6.5.100.1399"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></sender><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201305UV02" codeSystem="2.16.840.1.113883.1.18"/><queryByParameter><queryId extension="16317808102451" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId></parameterList></queryByParameter></controlActProcess></PRPA_IN201305UV02></soap:Body></soap:Envelope>HTTP response code: 200
+Character set: UTF-8
+
+connection: Keep-Alive
+Content-Length: 2089
+content-type: application/soap+xml;charset=UTF-8
+Date: Thu, 16 Sep 2021 08:26:51 GMT
+Keep-Alive: timeout=5, max=100
+Server: Apache
+Strict-Transport-Security: max-age=63072000; includeSubdomains;
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201306UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:8d4ef731-ab19-46ff-b775-9735f6295a63</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</To><RelatesTo xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:fbbba904-adb4-490a-987b-bc041b288a24</RelatesTo></soap:Header><soap:Body><PRPA_IN201306UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id extension="77636" root="1.3.6.1.4.1.12559.11.25.1.1.5.1"/><creationTime value="20210916102652"/><interactionId extension="PRPA_IN201306UV02" root="2.16.840.1.113883.1.18"/><processingCode code="T"/><processingModeCode code="T"/><acceptAckCode code="NE"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.3.6.1.4.1.12559.11.25.1.14"/><telecom value="https://ehealthsuisse.ihe-europe.net:10443/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType?wsdl"/></device></sender><acknowledgement><typeCode code="AA"/><targetMessage><id root="1.2.3.4.122000071020070032.1631780810242.1"/></targetMessage></acknowledgement><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201306UV02" displayName="2.16.840.1.113883.1.18"/><queryAck><queryId extension="16317808102451" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="deliveredResponse"/><queryResponseCode code="NF"/></queryAck><queryByParameter><queryId extension="16317808102451" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId></parameterList></queryByParameter></controlActProcess></PRPA_IN201306UV02></soap:Body></soap:Envelope>Target endpoint: https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:hl7-org:v3:PRPA_IN201305UV02"
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201305UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:ea0f994f-4440-40f2-ad71-40a78dd33450</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><PRPA_IN201305UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id root="1.2.3.4.102000080008070009.1631780815275.2"/><creationTime value="20210916102655"/><interactionId extension="PRPA_IN201305UV02" root="2.16.840.1.113883.1.6"/><processingCode code="P"/><processingModeCode code="T"/><acceptAckCode code="AL"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="2.16.840.1.113883.3.72.6.5.100.1399"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></sender><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201305UV02" codeSystem="2.16.840.1.113883.1.18"/><queryByParameter><queryId extension="16317808152752" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId><otherIDsScopingOrganization><value root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>OtherIDs.scopingOrganization.id</semanticsText></otherIDsScopingOrganization></parameterList></queryByParameter></controlActProcess></PRPA_IN201305UV02></soap:Body></soap:Envelope>HTTP response code: 200
+Character set: UTF-8
+
+connection: Keep-Alive
+Content-Length: 2251
+content-type: application/soap+xml;charset=UTF-8
+Date: Thu, 16 Sep 2021 08:26:55 GMT
+Keep-Alive: timeout=5, max=99
+Server: Apache
+Strict-Transport-Security: max-age=63072000; includeSubdomains;
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201306UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:cb77c7f9-0e31-4ed2-b9bc-300baaccbbcf</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</To><RelatesTo xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:ea0f994f-4440-40f2-ad71-40a78dd33450</RelatesTo></soap:Header><soap:Body><PRPA_IN201306UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id extension="77637" root="1.3.6.1.4.1.12559.11.25.1.1.5.1"/><creationTime value="20210916102655"/><interactionId extension="PRPA_IN201306UV02" root="2.16.840.1.113883.1.18"/><processingCode code="T"/><processingModeCode code="T"/><acceptAckCode code="NE"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.3.6.1.4.1.12559.11.25.1.14"/><telecom value="https://ehealthsuisse.ihe-europe.net:10443/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType?wsdl"/></device></sender><acknowledgement><typeCode code="AA"/><targetMessage><id root="1.2.3.4.102000080008070009.1631780815275.2"/></targetMessage></acknowledgement><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201306UV02" displayName="2.16.840.1.113883.1.18"/><queryAck><queryId extension="16317808152752" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="deliveredResponse"/><queryResponseCode code="NF"/></queryAck><queryByParameter><queryId extension="16317808152752" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId><otherIDsScopingOrganization><value root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>OtherIDs.scopingOrganization.id</semanticsText></otherIDsScopingOrganization></parameterList></queryByParameter></controlActProcess></PRPA_IN201306UV02></soap:Body></soap:Envelope>Target endpoint: https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:hl7-org:v3:PRPA_IN201305UV02"
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201305UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:6fb61fb4-668c-4765-9b87-6ba3830562ec</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><PRPA_IN201305UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id root="1.2.3.4.111001034068060080.1631780982590.1"/><creationTime value="20210916102942"/><interactionId extension="PRPA_IN201305UV02" root="2.16.840.1.113883.1.6"/><processingCode code="P"/><processingModeCode code="T"/><acceptAckCode code="AL"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="2.16.840.1.113883.3.72.6.5.100.1399"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></sender><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201305UV02" codeSystem="2.16.840.1.113883.1.18"/><queryByParameter><queryId extension="16317809825931" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId></parameterList></queryByParameter></controlActProcess></PRPA_IN201305UV02></soap:Body></soap:Envelope>HTTP response code: 200
+Character set: UTF-8
+
+connection: Keep-Alive
+Content-Length: 2089
+content-type: application/soap+xml;charset=UTF-8
+Date: Thu, 16 Sep 2021 08:29:43 GMT
+Keep-Alive: timeout=5, max=100
+Server: Apache
+Strict-Transport-Security: max-age=63072000; includeSubdomains;
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201306UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:5fa4b1fe-a6ea-464c-9351-7d5e6d214b47</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</To><RelatesTo xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:6fb61fb4-668c-4765-9b87-6ba3830562ec</RelatesTo></soap:Header><soap:Body><PRPA_IN201306UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id extension="77638" root="1.3.6.1.4.1.12559.11.25.1.1.5.1"/><creationTime value="20210916102944"/><interactionId extension="PRPA_IN201306UV02" root="2.16.840.1.113883.1.18"/><processingCode code="T"/><processingModeCode code="T"/><acceptAckCode code="NE"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.3.6.1.4.1.12559.11.25.1.14"/><telecom value="https://ehealthsuisse.ihe-europe.net:10443/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType?wsdl"/></device></sender><acknowledgement><typeCode code="AA"/><targetMessage><id root="1.2.3.4.111001034068060080.1631780982590.1"/></targetMessage></acknowledgement><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201306UV02" displayName="2.16.840.1.113883.1.18"/><queryAck><queryId extension="16317809825931" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="deliveredResponse"/><queryResponseCode code="NF"/></queryAck><queryByParameter><queryId extension="16317809825931" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId></parameterList></queryByParameter></controlActProcess></PRPA_IN201306UV02></soap:Body></soap:Envelope>Target endpoint: https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:hl7-org:v3:PRPA_IN201305UV02"
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201305UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:fce7cd9a-30c1-40d7-adc0-2bcb53c0f22d</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><PRPA_IN201305UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id root="1.2.3.4.121000015063042039.1631780986323.2"/><creationTime value="20210916102946"/><interactionId extension="PRPA_IN201305UV02" root="2.16.840.1.113883.1.6"/><processingCode code="P"/><processingModeCode code="T"/><acceptAckCode code="AL"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="2.16.840.1.113883.3.72.6.5.100.1399"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></sender><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201305UV02" codeSystem="2.16.840.1.113883.1.18"/><queryByParameter><queryId extension="16317809863232" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId><otherIDsScopingOrganization><value root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>OtherIDs.scopingOrganization.id</semanticsText></otherIDsScopingOrganization></parameterList></queryByParameter></controlActProcess></PRPA_IN201305UV02></soap:Body></soap:Envelope>HTTP response code: 200
+Character set: UTF-8
+
+connection: Keep-Alive
+Content-Length: 2251
+content-type: application/soap+xml;charset=UTF-8
+Date: Thu, 16 Sep 2021 08:29:46 GMT
+Keep-Alive: timeout=5, max=99
+Server: Apache
+Strict-Transport-Security: max-age=63072000; includeSubdomains;
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201306UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:5bdcf4ad-c6e8-473c-b0b0-9fd1f1d37dae</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</To><RelatesTo xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:fce7cd9a-30c1-40d7-adc0-2bcb53c0f22d</RelatesTo></soap:Header><soap:Body><PRPA_IN201306UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id extension="77639" root="1.3.6.1.4.1.12559.11.25.1.1.5.1"/><creationTime value="20210916102946"/><interactionId extension="PRPA_IN201306UV02" root="2.16.840.1.113883.1.18"/><processingCode code="T"/><processingModeCode code="T"/><acceptAckCode code="NE"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.3.6.1.4.1.12559.11.25.1.14"/><telecom value="https://ehealthsuisse.ihe-europe.net:10443/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType?wsdl"/></device></sender><acknowledgement><typeCode code="AA"/><targetMessage><id root="1.2.3.4.121000015063042039.1631780986323.2"/></targetMessage></acknowledgement><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201306UV02" displayName="2.16.840.1.113883.1.18"/><queryAck><queryId extension="16317809863232" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="deliveredResponse"/><queryResponseCode code="NF"/></queryAck><queryByParameter><queryId extension="16317809863232" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId><otherIDsScopingOrganization><value root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>OtherIDs.scopingOrganization.id</semanticsText></otherIDsScopingOrganization></parameterList></queryByParameter></controlActProcess></PRPA_IN201306UV02></soap:Body></soap:Envelope>Target endpoint: http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/ret
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: multipart/related; charset=UTF-8; action="urn:ihe:iti:2007:RetrieveDocumentSet"
+
+
+--uuid:6b941842-7d03-4eb7-b88f-96ec7f40680a
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <root.message@cxf.apache.org>
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:ihe:iti:2007:RetrieveDocumentSet</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:246c8b78-8645-41cb-b9eb-8f879b4ca2b3</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/ret</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><ns2:RetrieveDocumentSetRequest xmlns:ns6="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0" xmlns:ns5="urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0" xmlns:ns4="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" xmlns:ns3="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0" xmlns:ns2="urn:ihe:iti:xds-b:2007"><ns2:DocumentRequest><ns2:RepositoryUniqueId>1.1.4567332.1.5</ns2:RepositoryUniqueId><ns2:DocumentUniqueId>1.3.6.1.4.1.12559.11.25.1.16.2.20210915135217444</ns2:DocumentUniqueId></ns2:DocumentRequest></ns2:RetrieveDocumentSetRequest></soap:Body></soap:Envelope>
+--uuid:6b941842-7d03-4eb7-b88f-96ec7f40680a--HTTP response code: 200
+Character set: UTF-8
+
+connection: keep-alive
+Content-Length: 656
+content-type: multipart/related; boundary=MIMEBoundary112233445566778899; type="application/xop+xml"; start="<doc0@ihexds.nist.gov>"; start-info="application/soap+xml"
+Date: Thu, 16 Sep 2021 11:05:57 GMT
+Keep-Alive: timeout=20
+
+--MIMEBoundary112233445566778899
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <doc0@ihexds.nist.gov>
+
+<S:Envelope xmlns:S="http://www.w3.org/2003/05/soap-envelope"><S:Header /><S:Body><fault:Fault xmlns:fault="http://www.w3.org/2003/05/soap-envelope"><fault:Code><fault:Value>fault:Sender</fault:Value></fault:Code><fault:Reason><fault:Text xml:lang="en">Header/Format Validation errors reported by HttpMessageValidator
+
+Expected [Multipart]  Found [ SIMPLE Format]
+</fault:Text></fault:Reason></fault:Fault></S:Body></S:Envelope>
+
+
+--MIMEBoundary112233445566778899--
+HTTP response code: 200
+Character set: UTF-8
+
+connection: keep-alive
+Content-Length: 656
+content-type: multipart/related; boundary=MIMEBoundary112233445566778899; type="application/xop+xml"; start="<doc0@ihexds.nist.gov>"; start-info="application/soap+xml"
+Date: Thu, 16 Sep 2021 11:05:57 GMT
+Keep-Alive: timeout=20
+
+Target endpoint: https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:hl7-org:v3:PRPA_IN201305UV02"
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201305UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:3e168e31-4f15-4ca0-b3e5-e141c0f9b0c2</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><PRPA_IN201305UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id root="1.2.3.4.146001032055119131.1631791339195.1"/><creationTime value="20210916132219"/><interactionId extension="PRPA_IN201305UV02" root="2.16.840.1.113883.1.6"/><processingCode code="P"/><processingModeCode code="T"/><acceptAckCode code="AL"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="2.16.840.1.113883.3.72.6.5.100.1399"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></sender><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201305UV02" codeSystem="2.16.840.1.113883.1.18"/><queryByParameter><queryId extension="16317913392001" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId></parameterList></queryByParameter></controlActProcess></PRPA_IN201305UV02></soap:Body></soap:Envelope>HTTP response code: 200
+Character set: UTF-8
+
+connection: Keep-Alive
+Content-Length: 2089
+content-type: application/soap+xml;charset=UTF-8
+Date: Thu, 16 Sep 2021 11:22:20 GMT
+Keep-Alive: timeout=5, max=100
+Server: Apache
+Strict-Transport-Security: max-age=63072000; includeSubdomains;
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201306UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:5c544e89-191f-43fc-aaf9-03a6a609f7c5</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</To><RelatesTo xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:3e168e31-4f15-4ca0-b3e5-e141c0f9b0c2</RelatesTo></soap:Header><soap:Body><PRPA_IN201306UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id extension="77645" root="1.3.6.1.4.1.12559.11.25.1.1.5.1"/><creationTime value="20210916132221"/><interactionId extension="PRPA_IN201306UV02" root="2.16.840.1.113883.1.18"/><processingCode code="T"/><processingModeCode code="T"/><acceptAckCode code="NE"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.3.6.1.4.1.12559.11.25.1.14"/><telecom value="https://ehealthsuisse.ihe-europe.net:10443/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType?wsdl"/></device></sender><acknowledgement><typeCode code="AA"/><targetMessage><id root="1.2.3.4.146001032055119131.1631791339195.1"/></targetMessage></acknowledgement><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201306UV02" displayName="2.16.840.1.113883.1.18"/><queryAck><queryId extension="16317913392001" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="deliveredResponse"/><queryResponseCode code="NF"/></queryAck><queryByParameter><queryId extension="16317913392001" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId></parameterList></queryByParameter></controlActProcess></PRPA_IN201306UV02></soap:Body></soap:Envelope>Target endpoint: https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:hl7-org:v3:PRPA_IN201305UV02"
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201305UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:4187fcd3-6b97-4d15-8fbc-eec1e6bf963d</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><PRPA_IN201305UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id root="1.2.3.4.101001070052069153.1631791343622.2"/><creationTime value="20210916132223"/><interactionId extension="PRPA_IN201305UV02" root="2.16.840.1.113883.1.6"/><processingCode code="P"/><processingModeCode code="T"/><acceptAckCode code="AL"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="2.16.840.1.113883.3.72.6.5.100.1399"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></sender><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201305UV02" codeSystem="2.16.840.1.113883.1.18"/><queryByParameter><queryId extension="16317913436222" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId><otherIDsScopingOrganization><value root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>OtherIDs.scopingOrganization.id</semanticsText></otherIDsScopingOrganization></parameterList></queryByParameter></controlActProcess></PRPA_IN201305UV02></soap:Body></soap:Envelope>HTTP response code: 200
+Character set: UTF-8
+
+connection: Keep-Alive
+Content-Length: 2251
+content-type: application/soap+xml;charset=UTF-8
+Date: Thu, 16 Sep 2021 11:22:23 GMT
+Keep-Alive: timeout=5, max=99
+Server: Apache
+Strict-Transport-Security: max-age=63072000; includeSubdomains;
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201306UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:86f34f1f-8c95-4711-85be-0d121f01b74d</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</To><RelatesTo xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:4187fcd3-6b97-4d15-8fbc-eec1e6bf963d</RelatesTo></soap:Header><soap:Body><PRPA_IN201306UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id extension="77646" root="1.3.6.1.4.1.12559.11.25.1.1.5.1"/><creationTime value="20210916132223"/><interactionId extension="PRPA_IN201306UV02" root="2.16.840.1.113883.1.18"/><processingCode code="T"/><processingModeCode code="T"/><acceptAckCode code="NE"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.3.6.1.4.1.12559.11.25.1.14"/><telecom value="https://ehealthsuisse.ihe-europe.net:10443/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType?wsdl"/></device></sender><acknowledgement><typeCode code="AA"/><targetMessage><id root="1.2.3.4.101001070052069153.1631791343622.2"/></targetMessage></acknowledgement><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201306UV02" displayName="2.16.840.1.113883.1.18"/><queryAck><queryId extension="16317913436222" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="deliveredResponse"/><queryResponseCode code="NF"/></queryAck><queryByParameter><queryId extension="16317913436222" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId><otherIDsScopingOrganization><value root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>OtherIDs.scopingOrganization.id</semanticsText></otherIDsScopingOrganization></parameterList></queryByParameter></controlActProcess></PRPA_IN201306UV02></soap:Body></soap:Envelope>Target endpoint: https://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/ret
+Character set: UTF-8
+
+Accept: */*
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:ihe:iti:2007:RegistryStoredQuery"
+Force MTOM: false
+transfer-encoding: chunked
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:ihe:iti:2007:RegistryStoredQuery</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:4aadd0ee-0d70-42fe-accc-8256565b3e2e</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">https://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/ret</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><ns4:AdhocQueryRequest xmlns:ns6="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0" xmlns:ns5="urn:ihe:iti:xds-b:2007" xmlns:ns4="urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0" xmlns:ns3="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" xmlns:ns2="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0"><ns4:ResponseOption returnType="LeafClass" returnComposedObjects="true"/><ns2:AdhocQuery id="urn:uuid:14d4debf-8f97-4251-9a74-a90016b0af0d"><ns2:Slot name="$XDSDocumentEntryPatientId"><ns2:ValueList><ns2:Value>'IHEBLUE-2737^^^&amp;1.3.6.1.4.1.21367.13.20.3000&amp;ISO'</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Slot name="$XDSDocumentEntryStatus"><ns2:ValueList><ns2:Value>('urn:oasis:names:tc:ebxml-regrep:StatusType:Approved')</ns2:Value></ns2:ValueList></ns2:Slot></ns2:AdhocQuery></ns4:AdhocQueryRequest></soap:Body></soap:Envelope>Target endpoint: http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/ret
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:ihe:iti:2007:RetrieveDocumentSet"
+
+
+--uuid:4e824931-461d-4fa2-a8ba-aa559ac7fe87
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <root.message@cxf.apache.org>
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:ihe:iti:2007:RetrieveDocumentSet</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:bc448648-6b2c-4e88-aabd-5254f35c979b</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/ret</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><ns2:RetrieveDocumentSetRequest xmlns:ns6="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0" xmlns:ns5="urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0" xmlns:ns4="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" xmlns:ns3="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0" xmlns:ns2="urn:ihe:iti:xds-b:2007"><ns2:DocumentRequest><ns2:RepositoryUniqueId>1.1.4567332.1.5</ns2:RepositoryUniqueId><ns2:DocumentUniqueId>1.3.6.1.4.1.12559.11.25.1.16.2.20210915135217444</ns2:DocumentUniqueId></ns2:DocumentRequest></ns2:RetrieveDocumentSetRequest></soap:Body></soap:Envelope>
+--uuid:4e824931-461d-4fa2-a8ba-aa559ac7fe87--HTTP response code: 200
+Character set: UTF-8
+
+connection: keep-alive
+Content-Length: 656
+content-type: multipart/related; boundary=MIMEBoundary112233445566778899; type="application/xop+xml"; start="<doc0@ihexds.nist.gov>"; start-info="application/soap+xml"
+Date: Thu, 16 Sep 2021 11:22:27 GMT
+Keep-Alive: timeout=20
+
+--MIMEBoundary112233445566778899
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <doc0@ihexds.nist.gov>
+
+<S:Envelope xmlns:S="http://www.w3.org/2003/05/soap-envelope"><S:Header /><S:Body><fault:Fault xmlns:fault="http://www.w3.org/2003/05/soap-envelope"><fault:Code><fault:Value>fault:Sender</fault:Value></fault:Code><fault:Reason><fault:Text xml:lang="en">Header/Format Validation errors reported by HttpMessageValidator
+
+Expected [Multipart]  Found [ SIMPLE Format]
+</fault:Text></fault:Reason></fault:Fault></S:Body></S:Envelope>
+
+
+--MIMEBoundary112233445566778899--
+HTTP response code: 200
+Character set: UTF-8
+
+connection: keep-alive
+Content-Length: 656
+content-type: multipart/related; boundary=MIMEBoundary112233445566778899; type="application/xop+xml"; start="<doc0@ihexds.nist.gov>"; start-info="application/soap+xml"
+Date: Thu, 16 Sep 2021 11:22:27 GMT
+Keep-Alive: timeout=20
+
+Target endpoint: https://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/ret
+Character set: UTF-8
+
+Accept: */*
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:ihe:iti:2007:RegistryStoredQuery"
+Force MTOM: false
+transfer-encoding: chunked
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:ihe:iti:2007:RegistryStoredQuery</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:96de9b5a-1969-44e5-bc35-c1a9bf08ae75</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">https://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/ret</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><ns4:AdhocQueryRequest xmlns:ns6="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0" xmlns:ns5="urn:ihe:iti:xds-b:2007" xmlns:ns4="urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0" xmlns:ns3="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" xmlns:ns2="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0"><ns4:ResponseOption returnType="LeafClass" returnComposedObjects="true"/><ns2:AdhocQuery id="urn:uuid:14d4debf-8f97-4251-9a74-a90016b0af0d"><ns2:Slot name="$XDSDocumentEntryPatientId"><ns2:ValueList><ns2:Value>'IHEBLUE-2737^^^&amp;1.3.6.1.4.1.21367.13.20.3000&amp;ISO'</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Slot name="$XDSDocumentEntryStatus"><ns2:ValueList><ns2:Value>('urn:oasis:names:tc:ebxml-regrep:StatusType:Approved')</ns2:Value></ns2:ValueList></ns2:Slot></ns2:AdhocQuery></ns4:AdhocQueryRequest></soap:Body></soap:Envelope>Target endpoint: http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/ret
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:ihe:iti:2007:RetrieveDocumentSet"
+
+
+--uuid:1a0f531a-c4b4-4742-b0a3-8e863222e7a7
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <root.message@cxf.apache.org>
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:ihe:iti:2007:RetrieveDocumentSet</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:70517b39-cf32-4faf-814a-9c6855daf208</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/ret</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><ns2:RetrieveDocumentSetRequest xmlns:ns6="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0" xmlns:ns5="urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0" xmlns:ns4="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" xmlns:ns3="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0" xmlns:ns2="urn:ihe:iti:xds-b:2007"><ns2:DocumentRequest><ns2:RepositoryUniqueId>1.1.4567332.1.5</ns2:RepositoryUniqueId><ns2:DocumentUniqueId>1.3.6.1.4.1.12559.11.25.1.16.2.20210915135217444</ns2:DocumentUniqueId></ns2:DocumentRequest></ns2:RetrieveDocumentSetRequest></soap:Body></soap:Envelope>
+--uuid:1a0f531a-c4b4-4742-b0a3-8e863222e7a7--HTTP response code: 200
+Character set: UTF-8
+
+connection: keep-alive
+Content-Length: 656
+content-type: multipart/related; boundary=MIMEBoundary112233445566778899; type="application/xop+xml"; start="<doc0@ihexds.nist.gov>"; start-info="application/soap+xml"
+Date: Thu, 16 Sep 2021 11:24:17 GMT
+Keep-Alive: timeout=20
+
+--MIMEBoundary112233445566778899
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <doc0@ihexds.nist.gov>
+
+<S:Envelope xmlns:S="http://www.w3.org/2003/05/soap-envelope"><S:Header /><S:Body><fault:Fault xmlns:fault="http://www.w3.org/2003/05/soap-envelope"><fault:Code><fault:Value>fault:Sender</fault:Value></fault:Code><fault:Reason><fault:Text xml:lang="en">Header/Format Validation errors reported by HttpMessageValidator
+
+Expected [Multipart]  Found [ SIMPLE Format]
+</fault:Text></fault:Reason></fault:Fault></S:Body></S:Envelope>
+
+
+--MIMEBoundary112233445566778899--
+HTTP response code: 200
+Character set: UTF-8
+
+connection: keep-alive
+Content-Length: 656
+content-type: multipart/related; boundary=MIMEBoundary112233445566778899; type="application/xop+xml"; start="<doc0@ihexds.nist.gov>"; start-info="application/soap+xml"
+Date: Thu, 16 Sep 2021 11:24:17 GMT
+Keep-Alive: timeout=20
+
+Target endpoint: https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:hl7-org:v3:PRPA_IN201305UV02"
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201305UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:6d86185d-4acd-4cff-aa71-e32efb182d7a</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><PRPA_IN201305UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id root="1.2.3.4.190001058065018058.1631791777501.1"/><creationTime value="20210916132937"/><interactionId extension="PRPA_IN201305UV02" root="2.16.840.1.113883.1.6"/><processingCode code="P"/><processingModeCode code="T"/><acceptAckCode code="AL"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="2.16.840.1.113883.3.72.6.5.100.1399"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></sender><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201305UV02" codeSystem="2.16.840.1.113883.1.18"/><queryByParameter><queryId extension="16317917775051" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId></parameterList></queryByParameter></controlActProcess></PRPA_IN201305UV02></soap:Body></soap:Envelope>HTTP response code: 200
+Character set: UTF-8
+
+connection: Keep-Alive
+Content-Length: 2089
+content-type: application/soap+xml;charset=UTF-8
+Date: Thu, 16 Sep 2021 11:29:40 GMT
+Keep-Alive: timeout=5, max=100
+Server: Apache
+Strict-Transport-Security: max-age=63072000; includeSubdomains;
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201306UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:07e0f651-317c-4d4e-b64e-84a79ff0be57</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</To><RelatesTo xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:6d86185d-4acd-4cff-aa71-e32efb182d7a</RelatesTo></soap:Header><soap:Body><PRPA_IN201306UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id extension="77647" root="1.3.6.1.4.1.12559.11.25.1.1.5.1"/><creationTime value="20210916132940"/><interactionId extension="PRPA_IN201306UV02" root="2.16.840.1.113883.1.18"/><processingCode code="T"/><processingModeCode code="T"/><acceptAckCode code="NE"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.3.6.1.4.1.12559.11.25.1.14"/><telecom value="https://ehealthsuisse.ihe-europe.net:10443/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType?wsdl"/></device></sender><acknowledgement><typeCode code="AA"/><targetMessage><id root="1.2.3.4.190001058065018058.1631791777501.1"/></targetMessage></acknowledgement><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201306UV02" displayName="2.16.840.1.113883.1.18"/><queryAck><queryId extension="16317917775051" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="deliveredResponse"/><queryResponseCode code="NF"/></queryAck><queryByParameter><queryId extension="16317917775051" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId></parameterList></queryByParameter></controlActProcess></PRPA_IN201306UV02></soap:Body></soap:Envelope>Target endpoint: https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:hl7-org:v3:PRPA_IN201305UV02"
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201305UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:815f55ce-b6d7-47f2-b67c-1e2a3b2806f7</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><PRPA_IN201305UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id root="1.2.3.4.191001097072008081.1631791782734.2"/><creationTime value="20210916132942"/><interactionId extension="PRPA_IN201305UV02" root="2.16.840.1.113883.1.6"/><processingCode code="P"/><processingModeCode code="T"/><acceptAckCode code="AL"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="2.16.840.1.113883.3.72.6.5.100.1399"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></sender><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201305UV02" codeSystem="2.16.840.1.113883.1.18"/><queryByParameter><queryId extension="16317917827342" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId><otherIDsScopingOrganization><value root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>OtherIDs.scopingOrganization.id</semanticsText></otherIDsScopingOrganization></parameterList></queryByParameter></controlActProcess></PRPA_IN201305UV02></soap:Body></soap:Envelope>HTTP response code: 200
+Character set: UTF-8
+
+connection: Keep-Alive
+Content-Length: 2251
+content-type: application/soap+xml;charset=UTF-8
+Date: Thu, 16 Sep 2021 11:29:42 GMT
+Keep-Alive: timeout=5, max=99
+Server: Apache
+Strict-Transport-Security: max-age=63072000; includeSubdomains;
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201306UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:0be88da1-cb5f-4fcc-827a-1c827fbf92b6</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</To><RelatesTo xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:815f55ce-b6d7-47f2-b67c-1e2a3b2806f7</RelatesTo></soap:Header><soap:Body><PRPA_IN201306UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id extension="77648" root="1.3.6.1.4.1.12559.11.25.1.1.5.1"/><creationTime value="20210916132943"/><interactionId extension="PRPA_IN201306UV02" root="2.16.840.1.113883.1.18"/><processingCode code="T"/><processingModeCode code="T"/><acceptAckCode code="NE"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.3.6.1.4.1.12559.11.25.1.14"/><telecom value="https://ehealthsuisse.ihe-europe.net:10443/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType?wsdl"/></device></sender><acknowledgement><typeCode code="AA"/><targetMessage><id root="1.2.3.4.191001097072008081.1631791782734.2"/></targetMessage></acknowledgement><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201306UV02" displayName="2.16.840.1.113883.1.18"/><queryAck><queryId extension="16317917827342" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="deliveredResponse"/><queryResponseCode code="NF"/></queryAck><queryByParameter><queryId extension="16317917827342" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId><otherIDsScopingOrganization><value root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>OtherIDs.scopingOrganization.id</semanticsText></otherIDsScopingOrganization></parameterList></queryByParameter></controlActProcess></PRPA_IN201306UV02></soap:Body></soap:Envelope>Target endpoint: https://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/ret
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:ihe:iti:2007:RetrieveDocumentSet"
+
+
+--uuid:6f3cffab-b568-4d5e-b459-837dad100f2c
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <root.message@cxf.apache.org>
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:ihe:iti:2007:RetrieveDocumentSet</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:9738909e-07fd-4f15-8f56-569c24f36141</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">https://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/ret</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><ns2:RetrieveDocumentSetRequest xmlns:ns6="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0" xmlns:ns5="urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0" xmlns:ns4="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" xmlns:ns3="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0" xmlns:ns2="urn:ihe:iti:xds-b:2007"><ns2:DocumentRequest><ns2:RepositoryUniqueId>1.1.4567332.1.5</ns2:RepositoryUniqueId><ns2:DocumentUniqueId>1.3.6.1.4.1.12559.11.25.1.16.2.20210915135217444</ns2:DocumentUniqueId></ns2:DocumentRequest></ns2:RetrieveDocumentSetRequest></soap:Body></soap:Envelope>
+--uuid:6f3cffab-b568-4d5e-b459-837dad100f2c--Target endpoint: http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/ret
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:ihe:iti:2007:RetrieveDocumentSet"
+
+
+--uuid:d2df63a2-785e-432c-8fe2-a75df351094d
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <root.message@cxf.apache.org>
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:ihe:iti:2007:RetrieveDocumentSet</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:e4d3184e-b1f4-4ea3-9410-85d82dd0c510</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/ret</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><ns2:RetrieveDocumentSetRequest xmlns:ns6="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0" xmlns:ns5="urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0" xmlns:ns4="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" xmlns:ns3="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0" xmlns:ns2="urn:ihe:iti:xds-b:2007"><ns2:DocumentRequest><ns2:RepositoryUniqueId>1.1.4567332.1.5</ns2:RepositoryUniqueId><ns2:DocumentUniqueId>1.3.6.1.4.1.12559.11.25.1.16.2.20210915135217444</ns2:DocumentUniqueId></ns2:DocumentRequest></ns2:RetrieveDocumentSetRequest></soap:Body></soap:Envelope>
+--uuid:d2df63a2-785e-432c-8fe2-a75df351094d--HTTP response code: 200
+Character set: UTF-8
+
+connection: keep-alive
+Content-Length: 656
+content-type: multipart/related; boundary=MIMEBoundary112233445566778899; type="application/xop+xml"; start="<doc0@ihexds.nist.gov>"; start-info="application/soap+xml"
+Date: Thu, 16 Sep 2021 12:15:46 GMT
+Keep-Alive: timeout=20
+
+--MIMEBoundary112233445566778899
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <doc0@ihexds.nist.gov>
+
+<S:Envelope xmlns:S="http://www.w3.org/2003/05/soap-envelope"><S:Header /><S:Body><fault:Fault xmlns:fault="http://www.w3.org/2003/05/soap-envelope"><fault:Code><fault:Value>fault:Sender</fault:Value></fault:Code><fault:Reason><fault:Text xml:lang="en">Header/Format Validation errors reported by HttpMessageValidator
+
+Expected [Multipart]  Found [ SIMPLE Format]
+</fault:Text></fault:Reason></fault:Fault></S:Body></S:Envelope>
+
+
+--MIMEBoundary112233445566778899--
+HTTP response code: 200
+Character set: UTF-8
+
+connection: keep-alive
+Content-Length: 656
+content-type: multipart/related; boundary=MIMEBoundary112233445566778899; type="application/xop+xml"; start="<doc0@ihexds.nist.gov>"; start-info="application/soap+xml"
+Date: Thu, 16 Sep 2021 12:15:46 GMT
+Keep-Alive: timeout=20
+
+Target endpoint: http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/ret
+Character set: UTF-8
+
+Accept: */*
+
+
+--uuid:9570d3d0-1da3-458d-a401-a0d3c14bedf6
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <root.message@cxf.apache.org>
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:ihe:iti:2007:RetrieveDocumentSet</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:556ed1f4-9b87-415d-ae4f-7b73facf9820</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/ret</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><ns2:RetrieveDocumentSetRequest xmlns:ns6="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0" xmlns:ns5="urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0" xmlns:ns4="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" xmlns:ns3="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0" xmlns:ns2="urn:ihe:iti:xds-b:2007"><ns2:DocumentRequest><ns2:RepositoryUniqueId>1.1.4567332.1.5</ns2:RepositoryUniqueId><ns2:DocumentUniqueId>1.3.6.1.4.1.12559.11.25.1.16.2.20210915135217444</ns2:DocumentUniqueId></ns2:DocumentRequest></ns2:RetrieveDocumentSetRequest></soap:Body></soap:Envelope>
+--uuid:9570d3d0-1da3-458d-a401-a0d3c14bedf6--HTTP response code: 200
+Character set: UTF-8
+
+connection: keep-alive
+Content-Length: 1215
+content-type: multipart/related; boundary=MIMEBoundary112233445566778899; type="application/xop+xml"; start="<doc0@ihexds.nist.gov>"; start-info="application/soap+xml"
+Date: Thu, 16 Sep 2021 14:10:35 GMT
+Keep-Alive: timeout=20
+
+--MIMEBoundary112233445566778899
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <doc0@ihexds.nist.gov>
+
+<S:Envelope xmlns:S="http://www.w3.org/2003/05/soap-envelope"><S:Header><wsa:Action xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:s="http://www.w3.org/2003/05/soap-envelope" s:mustUnderstand="1">urn:ihe:iti:2007:RetrieveDocumentSetResponse</wsa:Action><wsa:RelatesTo xmlns:wsa="http://www.w3.org/2005/08/addressing">urn:uuid:556ed1f4-9b87-415d-ae4f-7b73facf9820</wsa:RelatesTo></S:Header><S:Body><xdsb:RetrieveDocumentSetResponse xmlns:xdsb="urn:ihe:iti:xds-b:2007"><rs:RegistryResponse xmlns:rs="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" status="urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Failure"><rs:RegistryErrorList><rs:RegistryError codeContext="DsSimCommon#addDocumentAttachments: Not found." errorCode="XDSDocumentUniqueIdError" location="1.3.6.1.4.1.12559.11.25.1.16.2.20210915135217444" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /></rs:RegistryErrorList></rs:RegistryResponse></xdsb:RetrieveDocumentSetResponse></S:Body></S:Envelope>
+
+
+--MIMEBoundary112233445566778899--
+Target endpoint: https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:hl7-org:v3:PRPA_IN201305UV02"
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201305UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:4354bbd3-b172-4fd8-b32d-2e59e66a54f4</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><PRPA_IN201305UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id root="1.2.3.4.112001006014008140.1631801602902.1"/><creationTime value="20210916161322"/><interactionId extension="PRPA_IN201305UV02" root="2.16.840.1.113883.1.6"/><processingCode code="P"/><processingModeCode code="T"/><acceptAckCode code="AL"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="2.16.840.1.113883.3.72.6.5.100.1399"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></sender><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201305UV02" codeSystem="2.16.840.1.113883.1.18"/><queryByParameter><queryId extension="16318016029071" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId></parameterList></queryByParameter></controlActProcess></PRPA_IN201305UV02></soap:Body></soap:Envelope>HTTP response code: 200
+Character set: UTF-8
+
+connection: Keep-Alive
+Content-Length: 2089
+content-type: application/soap+xml;charset=UTF-8
+Date: Thu, 16 Sep 2021 14:13:25 GMT
+Keep-Alive: timeout=5, max=100
+Server: Apache
+Strict-Transport-Security: max-age=63072000; includeSubdomains;
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201306UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:ce8bd455-9024-4e01-be52-9a2422e56311</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</To><RelatesTo xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:4354bbd3-b172-4fd8-b32d-2e59e66a54f4</RelatesTo></soap:Header><soap:Body><PRPA_IN201306UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id extension="77649" root="1.3.6.1.4.1.12559.11.25.1.1.5.1"/><creationTime value="20210916161326"/><interactionId extension="PRPA_IN201306UV02" root="2.16.840.1.113883.1.18"/><processingCode code="T"/><processingModeCode code="T"/><acceptAckCode code="NE"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.3.6.1.4.1.12559.11.25.1.14"/><telecom value="https://ehealthsuisse.ihe-europe.net:10443/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType?wsdl"/></device></sender><acknowledgement><typeCode code="AA"/><targetMessage><id root="1.2.3.4.112001006014008140.1631801602902.1"/></targetMessage></acknowledgement><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201306UV02" displayName="2.16.840.1.113883.1.18"/><queryAck><queryId extension="16318016029071" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="deliveredResponse"/><queryResponseCode code="NF"/></queryAck><queryByParameter><queryId extension="16318016029071" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId></parameterList></queryByParameter></controlActProcess></PRPA_IN201306UV02></soap:Body></soap:Envelope>Target endpoint: https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: application/soap+xml; charset=UTF-8; action="urn:hl7-org:v3:PRPA_IN201305UV02"
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201305UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:7d5f6b78-5dbf-4e84-9846-237ff1d76684</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">https://ehealthsuisse.ihe-europe.net/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><PRPA_IN201305UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id root="1.2.3.4.165000014063111088.1631801612335.2"/><creationTime value="20210916161332"/><interactionId extension="PRPA_IN201305UV02" root="2.16.840.1.113883.1.6"/><processingCode code="P"/><processingModeCode code="T"/><acceptAckCode code="AL"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="2.16.840.1.113883.3.72.6.5.100.1399"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></sender><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201305UV02" codeSystem="2.16.840.1.113883.1.18"/><queryByParameter><queryId extension="16318016123362" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId><otherIDsScopingOrganization><value root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>OtherIDs.scopingOrganization.id</semanticsText></otherIDsScopingOrganization></parameterList></queryByParameter></controlActProcess></PRPA_IN201305UV02></soap:Body></soap:Envelope>HTTP response code: 200
+Character set: UTF-8
+
+connection: Keep-Alive
+Content-Length: 2251
+content-type: application/soap+xml;charset=UTF-8
+Date: Thu, 16 Sep 2021 14:13:32 GMT
+Keep-Alive: timeout=5, max=99
+Server: Apache
+Strict-Transport-Security: max-age=63072000; includeSubdomains;
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action xmlns="http://www.w3.org/2005/08/addressing">urn:hl7-org:v3:PRPA_IN201306UV02</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:da0ff5b0-fd24-490f-9ba3-ef46fcab448f</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://www.w3.org/2005/08/addressing/anonymous</To><RelatesTo xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:7d5f6b78-5dbf-4e84-9846-237ff1d76684</RelatesTo></soap:Header><soap:Body><PRPA_IN201306UV02 xmlns="urn:hl7-org:v3" ITSVersion="XML_1.0"><id extension="77650" root="1.3.6.1.4.1.12559.11.25.1.1.5.1"/><creationTime value="20210916161333"/><interactionId extension="PRPA_IN201306UV02" root="2.16.840.1.113883.1.18"/><processingCode code="T"/><processingModeCode code="T"/><acceptAckCode code="NE"/><receiver typeCode="RCV"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.2.3.4"/></device></receiver><sender typeCode="SND"><device classCode="DEV" determinerCode="INSTANCE"><id root="1.3.6.1.4.1.12559.11.25.1.14"/><telecom value="https://ehealthsuisse.ihe-europe.net:10443/PAMSimulator-ejb/PDQSupplier_Service/PDQSupplier_PortType?wsdl"/></device></sender><acknowledgement><typeCode code="AA"/><targetMessage><id root="1.2.3.4.165000014063111088.1631801612335.2"/></targetMessage></acknowledgement><controlActProcess classCode="CACT" moodCode="EVN"><code code="PRPA_TE201306UV02" displayName="2.16.840.1.113883.1.18"/><queryAck><queryId extension="16318016123362" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="deliveredResponse"/><queryResponseCode code="NF"/></queryAck><queryByParameter><queryId extension="16318016123362" root="1.2.840.114350.1.13.28.1.18.5.999"/><statusCode code="new"/><responseModalityCode code="R"/><responsePriorityCode code="I"/><parameterList><livingSubjectId><value extension="4711" root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>LivingSubject.id</semanticsText></livingSubjectId><otherIDsScopingOrganization><value root="1.3.6.1.4.1.12559.11.20.1"/><semanticsText>OtherIDs.scopingOrganization.id</semanticsText></otherIDsScopingOrganization></parameterList></queryByParameter></controlActProcess></PRPA_IN201306UV02></soap:Body></soap:Envelope>Target endpoint: http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/ret
+Character set: UTF-8
+
+Accept: application/soap+xml
+Content-Type: multipart/related; charset=UTF-8; action="urn:ihe:iti:2007:RegistryStoredQuery"
+
+
+--uuid:efa9e7db-55ea-4c50-b622-9785db0cca9e
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <root.message@cxf.apache.org>
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:40f33ffc-de47-403c-aed9-b4eb3c09bfef</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/ret</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><ns4:ProvideAndRegisterDocumentSetRequest xmlns:ns6="urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0" xmlns:ns5="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0" xmlns:ns4="urn:ihe:iti:xds-b:2007" xmlns:ns3="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" xmlns:ns2="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0"><ns5:SubmitObjectsRequest><ns3:RequestSlotList/><ns2:RegistryObjectList><ns2:Classification classificationNode="urn:uuid:a54d6aa5-d40d-43f9-88c5-b4633d873bdd" id="urn:uuid:698c3f9d-9512-4a6a-bcac-294b8dd1586e"/></ns2:RegistryObjectList></ns5:SubmitObjectsRequest></ns4:ProvideAndRegisterDocumentSetRequest></soap:Body></soap:Envelope>
+--uuid:efa9e7db-55ea-4c50-b622-9785db0cca9e--HTTP response code: 200
+Character set: UTF-8
+
+connection: keep-alive
+Content-Length: 656
+content-type: multipart/related; boundary=MIMEBoundary112233445566778899; type="application/xop+xml"; start="<doc0@ihexds.nist.gov>"; start-info="application/soap+xml"
+Date: Thu, 16 Sep 2021 14:44:27 GMT
+Keep-Alive: timeout=20
+
+--MIMEBoundary112233445566778899
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <doc0@ihexds.nist.gov>
+
+<S:Envelope xmlns:S="http://www.w3.org/2003/05/soap-envelope"><S:Header /><S:Body><fault:Fault xmlns:fault="http://www.w3.org/2003/05/soap-envelope"><fault:Code><fault:Value>fault:Sender</fault:Value></fault:Code><fault:Reason><fault:Text xml:lang="en">Header/Format Validation errors reported by HttpMessageValidator
+
+Expected [Multipart]  Found [ SIMPLE Format]
+</fault:Text></fault:Reason></fault:Fault></S:Body></S:Envelope>
+
+
+--MIMEBoundary112233445566778899--
+HTTP response code: 200
+Character set: UTF-8
+
+connection: keep-alive
+Content-Length: 656
+content-type: multipart/related; boundary=MIMEBoundary112233445566778899; type="application/xop+xml"; start="<doc0@ihexds.nist.gov>"; start-info="application/soap+xml"
+Date: Thu, 16 Sep 2021 14:44:27 GMT
+Keep-Alive: timeout=20
+
+Target endpoint: http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/ret
+Character set: UTF-8
+
+Accept: */*
+
+
+--uuid:0352df46-e4e5-4562-a9de-7825c01a2a55
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <root.message@cxf.apache.org>
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:1dc87341-ef18-4939-8087-300dd84bb150</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/ret</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><ns4:ProvideAndRegisterDocumentSetRequest xmlns:ns6="urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0" xmlns:ns5="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0" xmlns:ns4="urn:ihe:iti:xds-b:2007" xmlns:ns3="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" xmlns:ns2="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0"><ns5:SubmitObjectsRequest><ns3:RequestSlotList/><ns2:RegistryObjectList><ns2:Classification classificationNode="urn:uuid:a54d6aa5-d40d-43f9-88c5-b4633d873bdd" id="urn:uuid:19d78685-bdf3-4483-99b5-d51bc52d6932"/></ns2:RegistryObjectList></ns5:SubmitObjectsRequest></ns4:ProvideAndRegisterDocumentSetRequest></soap:Body></soap:Envelope>
+--uuid:0352df46-e4e5-4562-a9de-7825c01a2a55--HTTP response code: 200
+Character set: UTF-8
+
+connection: keep-alive
+Content-Length: 1081
+content-type: multipart/related; boundary=MIMEBoundary112233445566778899; type="application/xop+xml"; start="<doc0@ihexds.nist.gov>"; start-info="application/soap+xml"
+Date: Thu, 16 Sep 2021 14:45:37 GMT
+Keep-Alive: timeout=20
+
+--MIMEBoundary112233445566778899
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <doc0@ihexds.nist.gov>
+
+<S:Envelope xmlns:S="http://www.w3.org/2003/05/soap-envelope"><S:Header><wsa:Action xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:s="http://www.w3.org/2003/05/soap-envelope" s:mustUnderstand="1">urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-bResponse</wsa:Action><wsa:RelatesTo xmlns:wsa="http://www.w3.org/2005/08/addressing">urn:uuid:1dc87341-ef18-4939-8087-300dd84bb150</wsa:RelatesTo></S:Header><S:Body><fault:Fault xmlns:fault="http://www.w3.org/2003/05/soap-envelope"><fault:Code><fault:Value>fault:Sender</fault:Value></fault:Code><fault:Reason><fault:Text xml:lang="en">Header/Format Validation errors reported by SoapMessageValidator
+Checking expected WS-Action against SOAP Body contents
+??? : 
+Expected [???]  Found [ urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b]
+</fault:Text></fault:Reason></fault:Fault></S:Body></S:Envelope>
+
+
+--MIMEBoundary112233445566778899--
+HTTP response code: 200
+Character set: UTF-8
+
+connection: keep-alive
+Content-Length: 1081
+content-type: multipart/related; boundary=MIMEBoundary112233445566778899; type="application/xop+xml"; start="<doc0@ihexds.nist.gov>"; start-info="application/soap+xml"
+Date: Thu, 16 Sep 2021 14:45:37 GMT
+Keep-Alive: timeout=20
+
+Target endpoint: http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/ret
+Character set: UTF-8
+
+Accept: */*
+SOAPAction: urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b
+
+
+--uuid:c01b3cd6-3822-478d-85ba-443defef9e01
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <root.message@cxf.apache.org>
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:0f4d52bb-2084-4a47-83cc-04a143128b17</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/ret</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><ns4:ProvideAndRegisterDocumentSetRequest xmlns:ns6="urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0" xmlns:ns5="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0" xmlns:ns4="urn:ihe:iti:xds-b:2007" xmlns:ns3="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" xmlns:ns2="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0"><ns5:SubmitObjectsRequest><ns3:RequestSlotList/><ns2:RegistryObjectList><ns2:Classification classificationNode="urn:uuid:a54d6aa5-d40d-43f9-88c5-b4633d873bdd" id="urn:uuid:91cb7569-ac44-4e32-888b-73c36672fb78"/></ns2:RegistryObjectList></ns5:SubmitObjectsRequest></ns4:ProvideAndRegisterDocumentSetRequest></soap:Body></soap:Envelope>
+--uuid:c01b3cd6-3822-478d-85ba-443defef9e01--HTTP response code: 200
+Character set: UTF-8
+
+connection: keep-alive
+Content-Length: 1081
+content-type: multipart/related; boundary=MIMEBoundary112233445566778899; type="application/xop+xml"; start="<doc0@ihexds.nist.gov>"; start-info="application/soap+xml"
+Date: Thu, 16 Sep 2021 14:48:05 GMT
+Keep-Alive: timeout=20
+
+--MIMEBoundary112233445566778899
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <doc0@ihexds.nist.gov>
+
+<S:Envelope xmlns:S="http://www.w3.org/2003/05/soap-envelope"><S:Header><wsa:Action xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:s="http://www.w3.org/2003/05/soap-envelope" s:mustUnderstand="1">urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-bResponse</wsa:Action><wsa:RelatesTo xmlns:wsa="http://www.w3.org/2005/08/addressing">urn:uuid:0f4d52bb-2084-4a47-83cc-04a143128b17</wsa:RelatesTo></S:Header><S:Body><fault:Fault xmlns:fault="http://www.w3.org/2003/05/soap-envelope"><fault:Code><fault:Value>fault:Sender</fault:Value></fault:Code><fault:Reason><fault:Text xml:lang="en">Header/Format Validation errors reported by SoapMessageValidator
+Checking expected WS-Action against SOAP Body contents
+??? : 
+Expected [???]  Found [ urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b]
+</fault:Text></fault:Reason></fault:Fault></S:Body></S:Envelope>
+
+
+--MIMEBoundary112233445566778899--
+HTTP response code: 200
+Character set: UTF-8
+
+connection: keep-alive
+Content-Length: 1081
+content-type: multipart/related; boundary=MIMEBoundary112233445566778899; type="application/xop+xml"; start="<doc0@ihexds.nist.gov>"; start-info="application/soap+xml"
+Date: Thu, 16 Sep 2021 14:48:05 GMT
+Keep-Alive: timeout=20
+
+Target endpoint: http://http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/prb
+Character set: UTF-8
+
+Accept: */*
+
+
+--uuid:41f2dd14-c90e-46a5-9608-eaf2dc3971ef
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <root.message@cxf.apache.org>
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:08593109-5a6e-4df4-b0fd-bd2c60798b46</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/prb</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><ns4:ProvideAndRegisterDocumentSetRequest xmlns:ns6="urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0" xmlns:ns5="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0" xmlns:ns4="urn:ihe:iti:xds-b:2007" xmlns:ns3="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" xmlns:ns2="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0"><ns5:SubmitObjectsRequest><ns3:RequestSlotList/><ns2:RegistryObjectList><ns2:Classification classificationNode="urn:uuid:a54d6aa5-d40d-43f9-88c5-b4633d873bdd" id="urn:uuid:9fb1730f-3d2e-4740-bc3a-86869f5f0bba"/></ns2:RegistryObjectList></ns5:SubmitObjectsRequest></ns4:ProvideAndRegisterDocumentSetRequest></soap:Body></soap:Envelope>
+--uuid:41f2dd14-c90e-46a5-9608-eaf2dc3971ef--Target endpoint: http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/prb
+Character set: UTF-8
+
+Accept: */*
+
+
+--uuid:4c0bcbd5-748c-4160-aa1b-6bc7c802fac0
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <root.message@cxf.apache.org>
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:aa3f0abd-5935-4a88-beff-a2566fb2dd18</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/prb</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><ns4:ProvideAndRegisterDocumentSetRequest xmlns:ns6="urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0" xmlns:ns5="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0" xmlns:ns4="urn:ihe:iti:xds-b:2007" xmlns:ns3="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" xmlns:ns2="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0"><ns5:SubmitObjectsRequest><ns3:RequestSlotList/><ns2:RegistryObjectList><ns2:Classification classificationNode="urn:uuid:a54d6aa5-d40d-43f9-88c5-b4633d873bdd" id="urn:uuid:cd7c3d8a-bb84-45dd-b959-a8965a31290f"/></ns2:RegistryObjectList></ns5:SubmitObjectsRequest></ns4:ProvideAndRegisterDocumentSetRequest></soap:Body></soap:Envelope>
+--uuid:4c0bcbd5-748c-4160-aa1b-6bc7c802fac0--HTTP response code: 200
+Character set: UTF-8
+
+connection: keep-alive
+Content-Length: 2124
+content-type: multipart/related; boundary=MIMEBoundary112233445566778899; type="application/xop+xml"; start="<doc0@ihexds.nist.gov>"; start-info="application/soap+xml"
+Date: Thu, 16 Sep 2021 14:55:15 GMT
+Keep-Alive: timeout=20
+
+--MIMEBoundary112233445566778899
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <doc0@ihexds.nist.gov>
+
+<S:Envelope xmlns:S="http://www.w3.org/2003/05/soap-envelope"><S:Header><wsa:Action xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:s="http://www.w3.org/2003/05/soap-envelope" s:mustUnderstand="1">urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-bResponse</wsa:Action><wsa:RelatesTo xmlns:wsa="http://www.w3.org/2005/08/addressing">urn:uuid:aa3f0abd-5935-4a88-beff-a2566fb2dd18</wsa:RelatesTo></S:Header><S:Body><rs:RegistryResponse xmlns:rs="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" status="urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Failure"><rs:RegistryErrorList><rs:RegistryError codeContext="Input did not validate against schema:Schema location is urn:ihe:iti:xds-b:2007 /var/lib/tomcat8/webapps/xdstools7/toolkitx/schema/v3/XDS.b_DocumentRepository.xsd urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0 /var/lib/tomcat8/webapps/xdstools7/toolkitx/schema/v3/rs.xsd urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0 /var/lib/tomcat8/webapps/xdstools7/toolkitx/schema/v3/rim.xsd http://schemas.xmlsoap.org/soap/envelope/ /var/lib/tomcat8/webapps/xdstools7/toolkitx/schema/v3/soap.xsd http://docs.oasis-open.org/wsn/b-2 /var/lib/tomcat8/webapps/xdstools7/toolkitx/schema/wsn/b-2.xsd http://docs.oasis-open.org/wsn/br-2 /var/lib/tomcat8/webapps/xdstools7/toolkitx/schema/wsn/br-2.xsd http://docs.oasis-open.org/wsn/t-1 /var/lib/tomcat8/webapps/xdstools7/toolkitx/schema/wsn/t-1.xsd&#xa;cvc-complex-type.4: Attribute 'classifiedObject' must appear on element 'ns2:Classification'.&#xa;" errorCode="XDSRegistryError" location="SchemaValidator" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /><rs:RegistryError codeContext="Submission does not contain a SubmissionSet" errorCode="XDSRegistryMetadataError" location="SubmissionStructure" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /></rs:RegistryErrorList></rs:RegistryResponse></S:Body></S:Envelope>
+
+
+--MIMEBoundary112233445566778899--
+Target endpoint: http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/prb
+Character set: UTF-8
+
+Accept: */*
+
+
+--uuid:a69c2b89-acb2-444a-924d-924539437f01
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <root.message@cxf.apache.org>
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:c2729bf7-477a-4118-913e-dcef612b892f</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/prb</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><ns4:ProvideAndRegisterDocumentSetRequest xmlns:ns6="urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0" xmlns:ns5="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0" xmlns:ns4="urn:ihe:iti:xds-b:2007" xmlns:ns3="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" xmlns:ns2="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0"><ns5:SubmitObjectsRequest><ns3:RequestSlotList/><ns2:RegistryObjectList><ns2:ExtrinsicObject mimeType="text/xml" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1"><ns2:Slot name="creationTime"><ns2:ValueList><ns2:Value>20210917110612</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Slot name="languageCode"><ns2:ValueList><ns2:Value>fr-CH</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Slot name="sourcePatientId"><ns2:ValueList><ns2:Value>2342134localid^^^&amp;1.2.3.4&amp;ISO</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Classification classificationScheme="urn:uuid:93606bcf-9494-43ec-9b4e-a7748d1a838d" nodeRepresentation="" id="urn:uuid:47ad3dc2-a770-4f87-a7ab-c5baf817dfb6"><ns2:Slot name="authorPerson"><ns2:ValueList><ns2:Value>^Bereit^Allzeit^^^Dr.</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Slot name="authorRole"><ns2:ValueList><ns2:Value>221^^^&amp;2.16.840.1.113883.2.9.6.2.7&amp;ISO</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Slot name="authorSpecialty"><ns2:ValueList><ns2:Value>^^^&amp;&amp;ISO</ns2:Value></ns2:ValueList></ns2:Slot></ns2:Classification><ns2:Classification classificationScheme="urn:uuid:41a5887f-8865-4c09-adf7-e362475b143a" nodeRepresentation="SUMMARY" id="urn:uuid:52aff8ac-30fe-4d94-867f-05bca55f033f"><ns2:Slot name="codingScheme"><ns2:ValueList><ns2:Value>1.3.6.1.4.1.19376.1.2.6.1</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Name><ns2:LocalizedString charset="UTF-8" value="Summary"/></ns2:Name></ns2:Classification><ns2:Classification classificationScheme="urn:uuid:a09d5840-386c-46f2-b5ad-9c3699a4309d" nodeRepresentation="urn:ihe:pcc:ic:2009" id="urn:uuid:d0dbefc4-269e-4388-b082-990cb9ee4928"><ns2:Slot name="codingScheme"><ns2:ValueList><ns2:Value>1.3.6.1.4.1.19376.1.2.3</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Name><ns2:LocalizedString charset="UTF-8" value="Immunization Content (IC)"/></ns2:Name></ns2:Classification><ns2:Classification classificationScheme="urn:uuid:f33fb8ac-18af-42cc-ae0e-ed0b0bdb91e1" nodeRepresentation="394747008" id="urn:uuid:eba6ef97-ccf2-496c-9a41-eabed0577316"><ns2:Slot name="codingScheme"><ns2:ValueList><ns2:Value>2.16.840.1.113883.6.96</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Name><ns2:LocalizedString charset="UTF-8" value="Health Authority"/></ns2:Name></ns2:Classification><ns2:Classification classificationScheme="urn:uuid:cccf5598-8b07-4b77-a05e-ae952c785ead" nodeRepresentation="Practice-F" id="urn:uuid:0d81038f-417d-4480-b9e1-ea79dcff5d23"><ns2:Slot name="codingScheme"><ns2:ValueList><ns2:Value>1.3.6.1.4.1.21367.2017.3</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Name><ns2:LocalizedString charset="UTF-8" value="Family Practice"/></ns2:Name></ns2:Classification><ns2:Classification classificationScheme="urn:uuid:f0306f51-975f-434e-a61c-c59651d33983" nodeRepresentation="2.16.840.1.113883.6.1" id="urn:uuid:2fe47a0e-2b36-4dbb-a20e-4dbfc70cee38"><ns2:Slot name="codingScheme"><ns2:ValueList><ns2:Value>11369-6</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Name><ns2:LocalizedString charset="UTF-8" value="Immunization"/></ns2:Name></ns2:Classification><ns2:Classification classificationScheme="urn:uuid:f4f85eac-e6cb-4883-b524-f2705394840f" nodeRepresentation="N" id="urn:uuid:127d89cb-0caa-487d-935c-068aabdaee4f"><ns2:Slot name="codingScheme"><ns2:ValueList><ns2:Value>2.16.840.1.113883.5.25</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Name><ns2:LocalizedString charset="UTF-8" value="normal"/></ns2:Name></ns2:Classification><ns2:ExternalIdentifier identificationScheme="urn:uuid:58a6f841-87b3-4a3e-92fd-a8ffeff98427" value="IHERED-1024^^^&amp;1.3.6.1.4.1.21367.13.20.1000&amp;ISO" id="urn:uuid:9c3cf400-7632-4f16-b0ea-e518b1ba611a"><ns2:Name><ns2:LocalizedString value="XDSDocumentEntry.patientId"/></ns2:Name></ns2:ExternalIdentifier><ns2:ExternalIdentifier identificationScheme="urn:uuid:2e82c1f6-a085-4c72-9da3-8640a32e42ab" value="1.2.820.99999.123000010015018132.1631876772834.1" id="urn:uuid:68e4cae3-c1c8-4bba-8f71-67694e855a8e"><ns2:Name><ns2:LocalizedString value="XDSDocumentEntry.uniqueId"/></ns2:Name></ns2:ExternalIdentifier></ns2:ExtrinsicObject><ns2:RegistryPackage id="3916c058-c91d-4648-b1eb-51ad38571591"><ns2:Slot name="submissionTime"><ns2:ValueList><ns2:Value>20210917</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Classification classificationScheme="urn:uuid:aa543740-bdda-424e-8c96-df4873be8500" classifiedObject="3916c058-c91d-4648-b1eb-51ad38571591" nodeRepresentation="2.16.840.1.113883.6.1" id="urn:uuid:5dfaef66-0ef3-4fac-b201-aee04b4f042c"><ns2:Slot name="codingScheme"><ns2:ValueList><ns2:Value>11369-6</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Name><ns2:LocalizedString charset="UTF-8" value="Immunization"/></ns2:Name></ns2:Classification><ns2:ExternalIdentifier registryObject="3916c058-c91d-4648-b1eb-51ad38571591" identificationScheme="urn:uuid:6b5aea1a-874d-4603-a4bc-96a0a7b38446" value="IHERED-1024^^^&amp;1.3.6.1.4.1.21367.13.20.1000&amp;ISO" id="urn:uuid:64f4d3ee-a5d4-4434-9dbe-1a5828210eeb"><ns2:Name><ns2:LocalizedString value="XDSSubmissionSet.patientId"/></ns2:Name></ns2:ExternalIdentifier><ns2:ExternalIdentifier registryObject="3916c058-c91d-4648-b1eb-51ad38571591" identificationScheme="urn:uuid:96fdda7c-d067-4183-912e-bf5ee74998a8" value="2.16.756.5.30.1.139.1.1.11.104000039051051032.163187677" id="urn:uuid:e4c84260-b8ca-4e84-9214-e91b50e854a1"><ns2:Name><ns2:LocalizedString value="XDSSubmissionSet.uniqueId"/></ns2:Name></ns2:ExternalIdentifier><ns2:ExternalIdentifier registryObject="3916c058-c91d-4648-b1eb-51ad38571591" identificationScheme="urn:uuid:554ac39e-e3fe-47fe-b233-965d2a147832" value="1.3.6.1.4.1.21367.13.20.1000" id="urn:uuid:cb904cc8-fdcd-4aa6-b6bf-a7baa1e1c76b"><ns2:Name><ns2:LocalizedString value="XDSSubmissionSet.sourceId"/></ns2:Name></ns2:ExternalIdentifier></ns2:RegistryPackage><ns2:Classification classifiedObject="3916c058-c91d-4648-b1eb-51ad38571591" classificationNode="urn:uuid:a54d6aa5-d40d-43f9-88c5-b4633d873bdd" id="urn:uuid:b0fef27d-3faf-481f-bbb0-c80f054c9d82"/></ns2:RegistryObjectList></ns5:SubmitObjectsRequest></ns4:ProvideAndRegisterDocumentSetRequest></soap:Body></soap:Envelope>
+--uuid:a69c2b89-acb2-444a-924d-924539437f01--HTTP response code: 200
+Character set: UTF-8
+
+connection: keep-alive
+Content-Length: 8053
+content-type: multipart/related; boundary=MIMEBoundary112233445566778899; type="application/xop+xml"; start="<doc0@ihexds.nist.gov>"; start-info="application/soap+xml"
+Date: Fri, 17 Sep 2021 11:06:14 GMT
+Keep-Alive: timeout=20
+
+--MIMEBoundary112233445566778899
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <doc0@ihexds.nist.gov>
+
+<S:Envelope xmlns:S="http://www.w3.org/2003/05/soap-envelope"><S:Header><wsa:Action xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:s="http://www.w3.org/2003/05/soap-envelope" s:mustUnderstand="1">urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-bResponse</wsa:Action><wsa:RelatesTo xmlns:wsa="http://www.w3.org/2005/08/addressing">urn:uuid:c2729bf7-477a-4118-913e-dcef612b892f</wsa:RelatesTo></S:Header><S:Body><rs:RegistryResponse xmlns:rs="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" status="urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Failure"><rs:RegistryErrorList><rs:RegistryError codeContext="Input did not validate against schema:Schema location is urn:ihe:iti:xds-b:2007 /var/lib/tomcat8/webapps/xdstools7/toolkitx/schema/v3/XDS.b_DocumentRepository.xsd urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0 /var/lib/tomcat8/webapps/xdstools7/toolkitx/schema/v3/rs.xsd urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0 /var/lib/tomcat8/webapps/xdstools7/toolkitx/schema/v3/rim.xsd http://schemas.xmlsoap.org/soap/envelope/ /var/lib/tomcat8/webapps/xdstools7/toolkitx/schema/v3/soap.xsd http://docs.oasis-open.org/wsn/b-2 /var/lib/tomcat8/webapps/xdstools7/toolkitx/schema/wsn/b-2.xsd http://docs.oasis-open.org/wsn/br-2 /var/lib/tomcat8/webapps/xdstools7/toolkitx/schema/wsn/br-2.xsd http://docs.oasis-open.org/wsn/t-1 /var/lib/tomcat8/webapps/xdstools7/toolkitx/schema/wsn/t-1.xsd&#xa;cvc-complex-type.4: Attribute 'id' must appear on element 'ns2:ExtrinsicObject'.&#xa;cvc-complex-type.4: Attribute 'classifiedObject' must appear on element 'ns2:Classification'.&#xa;cvc-complex-type.4: Attribute 'classifiedObject' must appear on element 'ns2:Classification'.&#xa;cvc-complex-type.4: Attribute 'classifiedObject' must appear on element 'ns2:Classification'.&#xa;cvc-complex-type.4: Attribute 'classifiedObject' must appear on element 'ns2:Classification'.&#xa;cvc-complex-type.4: Attribute 'classifiedObject' must appear on element 'ns2:Classification'.&#xa;cvc-complex-type.4: Attribute 'classifiedObject' must appear on element 'ns2:Classification'.&#xa;cvc-complex-type.4: Attribute 'classifiedObject' must appear on element 'ns2:Classification'.&#xa;cvc-complex-type.4: Attribute 'registryObject' must appear on element 'ns2:ExternalIdentifier'.&#xa;cvc-complex-type.4: Attribute 'registryObject' must appear on element 'ns2:ExternalIdentifier'.&#xa;" errorCode="XDSRegistryError" location="SchemaValidator" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /><rs:RegistryError codeContext="Classification (classificationScheme=urn:uuid:41a5887f-8865-4c09-adf7-e362475b143a codingScheme=1.3.6.1.4.1.19376.1.2.6.1) of model ID_181304420_1: is a child of model ID_181304420_1 but the classifiedObject value is null, they must match" errorCode="XDSRegistryMetadataError" location="ClassificationValidator" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /><rs:RegistryError codeContext="Classification (classificationScheme=urn:uuid:a09d5840-386c-46f2-b5ad-9c3699a4309d codingScheme=1.3.6.1.4.1.19376.1.2.3) of model ID_181304420_1: is a child of model ID_181304420_1 but the classifiedObject value is null, they must match" errorCode="XDSRegistryMetadataError" location="ClassificationValidator" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /><rs:RegistryError codeContext="Classification (classificationScheme=urn:uuid:f33fb8ac-18af-42cc-ae0e-ed0b0bdb91e1 codingScheme=2.16.840.1.113883.6.96) of model ID_181304420_1: is a child of model ID_181304420_1 but the classifiedObject value is null, they must match" errorCode="XDSRegistryMetadataError" location="ClassificationValidator" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /><rs:RegistryError codeContext="Classification (classificationScheme=urn:uuid:cccf5598-8b07-4b77-a05e-ae952c785ead codingScheme=1.3.6.1.4.1.21367.2017.3) of model ID_181304420_1: is a child of model ID_181304420_1 but the classifiedObject value is null, they must match" errorCode="XDSRegistryMetadataError" location="ClassificationValidator" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /><rs:RegistryError codeContext="Classification (classificationScheme=urn:uuid:f0306f51-975f-434e-a61c-c59651d33983 codingScheme=11369-6) of model ID_181304420_1: is a child of model ID_181304420_1 but the classifiedObject value is null, they must match" errorCode="XDSRegistryMetadataError" location="ClassificationValidator" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /><rs:RegistryError codeContext="Classification (classificationScheme=urn:uuid:f4f85eac-e6cb-4883-b524-f2705394840f codingScheme=2.16.840.1.113883.5.25) of model ID_181304420_1: is a child of model ID_181304420_1 but the classifiedObject value is null, they must match" errorCode="XDSRegistryMetadataError" location="ClassificationValidator" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /><rs:RegistryError codeContext="Author (^Bereit^Allzeit^^^Dr.): is a child of model ID_181304420_1 but the classifiedObject value is null, they must match" errorCode="XDSRegistryMetadataError" location="AuthorValidator" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /><rs:RegistryError codeContext="ExternalIdentifier(identificationScheme=urn:uuid:58a6f841-87b3-4a3e-92fd-a8ffeff98427, type=XDSDocumentEntry.patientId): is a child of model ID_181304420_1 but the registryObject value is null, they must match" errorCode="XDSRegistryMetadataError" location="ExternalIdentifierValidator" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /><rs:RegistryError codeContext="ExternalIdentifier(identificationScheme=urn:uuid:2e82c1f6-a085-4c72-9da3-8640a32e42ab, type=XDSDocumentEntry.uniqueId): is a child of model ID_181304420_1 but the registryObject value is null, they must match" errorCode="XDSRegistryMetadataError" location="ExternalIdentifierValidator" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /><rs:RegistryError codeContext="DocumentEntry(ID_181304420_1): the code 1.3.6.1.4.1.19376.1.2.6.1(SUMMARY) is not found in the Affinity Domain configuration" errorCode="XDSRegistryMetadataError" location="CodeValidation" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /><rs:RegistryError codeContext="DocumentEntry(ID_181304420_1): the code 1.3.6.1.4.1.21367.2017.3(Practice-F) is not found in the Affinity Domain configuration" errorCode="XDSRegistryMetadataError" location="CodeValidation" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /><rs:RegistryError codeContext="DocumentEntry(ID_181304420_1): the code 11369-6(2.16.840.1.113883.6.1) is not found in the Affinity Domain configuration" errorCode="XDSRegistryMetadataError" location="CodeValidation" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /><rs:RegistryError codeContext="DocumentEntry(ID_181304420_1): the code 2.16.840.1.113883.5.25(N) is not found in the Affinity Domain configuration" errorCode="XDSRegistryMetadataError" location="CodeValidation" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /><rs:RegistryError codeContext="SubmissionSet(3916c058-c91d-4648-b1eb-51ad38571591): the code 11369-6(2.16.840.1.113883.6.1) is not found in the Affinity Domain configuration" errorCode="XDSRegistryMetadataError" location="CodeValidation" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /><rs:RegistryError codeContext="DocumentEntry(ID_181304420_1) is not linked to the SubmissionSet with a urn:oasis:names:tc:ebxml-regrep:AssociationType:HasMember Association" errorCode="XDSRegistryMetadataError" location="SubmissionStructure" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /></rs:RegistryErrorList></rs:RegistryResponse></S:Body></S:Envelope>
+
+
+--MIMEBoundary112233445566778899--
+Target endpoint: http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/prb
+Character set: UTF-8
+
+Accept: */*
+
+
+--uuid:ece3f8bb-84fb-4534-b28b-2d99a1bbda36
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <root.message@cxf.apache.org>
+
+<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"><soap:Header><Action soap:mustUnderstand="true" xmlns="http://www.w3.org/2005/08/addressing">urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b</Action><MessageID xmlns="http://www.w3.org/2005/08/addressing">urn:uuid:c180aab6-2abe-4fea-8da5-f5ffcc7a2c10</MessageID><To xmlns="http://www.w3.org/2005/08/addressing">http://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/prb</To><ReplyTo xmlns="http://www.w3.org/2005/08/addressing"><Address>http://www.w3.org/2005/08/addressing/anonymous</Address></ReplyTo></soap:Header><soap:Body><ns4:ProvideAndRegisterDocumentSetRequest xmlns:ns6="urn:oasis:names:tc:ebxml-regrep:xsd:query:3.0" xmlns:ns5="urn:oasis:names:tc:ebxml-regrep:xsd:lcm:3.0" xmlns:ns4="urn:ihe:iti:xds-b:2007" xmlns:ns3="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" xmlns:ns2="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0"><ns5:SubmitObjectsRequest><ns3:RequestSlotList/><ns2:RegistryObjectList><ns2:ExtrinsicObject mimeType="text/xml" objectType="urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1" id="b234208f-b9b5-4aca-b48a-47817a3681ce"><ns2:Slot name="creationTime"><ns2:ValueList><ns2:Value>20210917114844</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Slot name="languageCode"><ns2:ValueList><ns2:Value>fr-CH</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Slot name="sourcePatientId"><ns2:ValueList><ns2:Value>2342134localid^^^&amp;1.2.3.4&amp;ISO</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Classification classificationScheme="urn:uuid:93606bcf-9494-43ec-9b4e-a7748d1a838d" classifiedObject="b234208f-b9b5-4aca-b48a-47817a3681ce" nodeRepresentation="" id="urn:uuid:b1776c9f-51a4-46a8-b32f-c6099e9463f7"><ns2:Slot name="authorPerson"><ns2:ValueList><ns2:Value>^Bereit^Allzeit^^^Dr.</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Slot name="authorRole"><ns2:ValueList><ns2:Value>221^^^&amp;2.16.840.1.113883.2.9.6.2.7&amp;ISO</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Slot name="authorSpecialty"><ns2:ValueList><ns2:Value>^^^&amp;&amp;ISO</ns2:Value></ns2:ValueList></ns2:Slot></ns2:Classification><ns2:Classification classificationScheme="urn:uuid:41a5887f-8865-4c09-adf7-e362475b143a" classifiedObject="b234208f-b9b5-4aca-b48a-47817a3681ce" nodeRepresentation="SUMMARY" id="urn:uuid:e6c808e5-904b-42e7-9882-2e169f60372f"><ns2:Slot name="codingScheme"><ns2:ValueList><ns2:Value>1.3.6.1.4.1.19376.1.2.6.1</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Name><ns2:LocalizedString charset="UTF-8" value="Summary"/></ns2:Name></ns2:Classification><ns2:Classification classificationScheme="urn:uuid:a09d5840-386c-46f2-b5ad-9c3699a4309d" classifiedObject="b234208f-b9b5-4aca-b48a-47817a3681ce" nodeRepresentation="urn:ihe:pcc:ic:2009" id="urn:uuid:d620acc4-6943-4043-b7ae-0ba679b8f3d5"><ns2:Slot name="codingScheme"><ns2:ValueList><ns2:Value>1.3.6.1.4.1.19376.1.2.3</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Name><ns2:LocalizedString charset="UTF-8" value="Immunization Content (IC)"/></ns2:Name></ns2:Classification><ns2:Classification classificationScheme="urn:uuid:f33fb8ac-18af-42cc-ae0e-ed0b0bdb91e1" classifiedObject="b234208f-b9b5-4aca-b48a-47817a3681ce" nodeRepresentation="394747008" id="urn:uuid:883b7644-c17b-4f8c-bf74-a550bf193d26"><ns2:Slot name="codingScheme"><ns2:ValueList><ns2:Value>2.16.840.1.113883.6.96</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Name><ns2:LocalizedString charset="UTF-8" value="Health Authority"/></ns2:Name></ns2:Classification><ns2:Classification classificationScheme="urn:uuid:cccf5598-8b07-4b77-a05e-ae952c785ead" classifiedObject="b234208f-b9b5-4aca-b48a-47817a3681ce" nodeRepresentation="Practice-F" id="urn:uuid:5a563374-b8de-4f36-92b5-d2ca17cdb7f5"><ns2:Slot name="codingScheme"><ns2:ValueList><ns2:Value>1.3.6.1.4.1.21367.2017.3</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Name><ns2:LocalizedString charset="UTF-8" value="Family Practice"/></ns2:Name></ns2:Classification><ns2:Classification classificationScheme="urn:uuid:f0306f51-975f-434e-a61c-c59651d33983" classifiedObject="b234208f-b9b5-4aca-b48a-47817a3681ce" nodeRepresentation="2.16.840.1.113883.6.1" id="urn:uuid:0c3c7d71-92ba-4360-ae49-8ee436dc3280"><ns2:Slot name="codingScheme"><ns2:ValueList><ns2:Value>11369-6</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Name><ns2:LocalizedString charset="UTF-8" value="Immunization"/></ns2:Name></ns2:Classification><ns2:Classification classificationScheme="urn:uuid:f4f85eac-e6cb-4883-b524-f2705394840f" classifiedObject="b234208f-b9b5-4aca-b48a-47817a3681ce" nodeRepresentation="N" id="urn:uuid:939cbff1-66e7-465f-aace-36a3e3b724c9"><ns2:Slot name="codingScheme"><ns2:ValueList><ns2:Value>2.16.840.1.113883.5.25</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Name><ns2:LocalizedString charset="UTF-8" value="normal"/></ns2:Name></ns2:Classification><ns2:ExternalIdentifier registryObject="b234208f-b9b5-4aca-b48a-47817a3681ce" identificationScheme="urn:uuid:58a6f841-87b3-4a3e-92fd-a8ffeff98427" value="IHERED-1024^^^&amp;1.3.6.1.4.1.21367.13.20.1000&amp;ISO" id="urn:uuid:a5b4abc6-8d9c-45e6-875f-f56aa0ba3e26"><ns2:Name><ns2:LocalizedString value="XDSDocumentEntry.patientId"/></ns2:Name></ns2:ExternalIdentifier><ns2:ExternalIdentifier registryObject="b234208f-b9b5-4aca-b48a-47817a3681ce" identificationScheme="urn:uuid:2e82c1f6-a085-4c72-9da3-8640a32e42ab" value="1.2.820.99999.189001084046064136.1631879324352.1" id="urn:uuid:7900fb42-211a-4a8d-bcdf-78cbdb31149b"><ns2:Name><ns2:LocalizedString value="XDSDocumentEntry.uniqueId"/></ns2:Name></ns2:ExternalIdentifier></ns2:ExtrinsicObject><ns2:RegistryPackage id="f68853de-c8af-4a12-80d1-7daababa0bcc"><ns2:Slot name="submissionTime"><ns2:ValueList><ns2:Value>20210917</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Classification classificationScheme="urn:uuid:aa543740-bdda-424e-8c96-df4873be8500" classifiedObject="f68853de-c8af-4a12-80d1-7daababa0bcc" nodeRepresentation="2.16.840.1.113883.6.1" id="urn:uuid:074090c7-2e6b-49d7-8e63-eee80c2948ea"><ns2:Slot name="codingScheme"><ns2:ValueList><ns2:Value>11369-6</ns2:Value></ns2:ValueList></ns2:Slot><ns2:Name><ns2:LocalizedString charset="UTF-8" value="Immunization"/></ns2:Name></ns2:Classification><ns2:ExternalIdentifier registryObject="f68853de-c8af-4a12-80d1-7daababa0bcc" identificationScheme="urn:uuid:6b5aea1a-874d-4603-a4bc-96a0a7b38446" value="IHERED-1024^^^&amp;1.3.6.1.4.1.21367.13.20.1000&amp;ISO" id="urn:uuid:1bc64710-82c6-4745-84c7-7dc68e0e317f"><ns2:Name><ns2:LocalizedString value="XDSSubmissionSet.patientId"/></ns2:Name></ns2:ExternalIdentifier><ns2:ExternalIdentifier registryObject="f68853de-c8af-4a12-80d1-7daababa0bcc" identificationScheme="urn:uuid:96fdda7c-d067-4183-912e-bf5ee74998a8" value="2.16.756.5.30.1.139.1.1.11.148001132037092060.163187932" id="urn:uuid:eb0e3bd3-19a5-4453-8a9b-445507b233c1"><ns2:Name><ns2:LocalizedString value="XDSSubmissionSet.uniqueId"/></ns2:Name></ns2:ExternalIdentifier><ns2:ExternalIdentifier registryObject="f68853de-c8af-4a12-80d1-7daababa0bcc" identificationScheme="urn:uuid:554ac39e-e3fe-47fe-b233-965d2a147832" value="1.3.6.1.4.1.21367.13.20.1000" id="urn:uuid:e972f1e3-6455-47e4-a2c1-95b9380d1520"><ns2:Name><ns2:LocalizedString value="XDSSubmissionSet.sourceId"/></ns2:Name></ns2:ExternalIdentifier></ns2:RegistryPackage><ns2:Classification classifiedObject="f68853de-c8af-4a12-80d1-7daababa0bcc" classificationNode="urn:uuid:a54d6aa5-d40d-43f9-88c5-b4633d873bdd" id="urn:uuid:68adef3e-6928-4fe0-bf4c-3e47e9e6df3e"/><ns2:Association associationType="urn:oasis:names:tc:ebxml-regrep:AssociationType:HasMember" sourceObject="f68853de-c8af-4a12-80d1-7daababa0bcc" targetObject="b234208f-b9b5-4aca-b48a-47817a3681ce"><ns2:Slot name="SubmissionSetStatus"><ns2:ValueList><ns2:Value>Original</ns2:Value></ns2:ValueList></ns2:Slot></ns2:Association></ns2:RegistryObjectList></ns5:SubmitObjectsRequest><ns4:Document id="b234208f-b9b5-4aca-b48a-47817a3681ce"><xop:Include xmlns:xop="http://www.w3.org/2004/08/xop/include" href="cid:9b8c153e-f810-4e87-bb59-92abbd76e017-1@urn%3Aihe%3Aiti%3Axds-b%3A2007"/></ns4:Document></ns4:ProvideAndRegisterDocumentSetRequest></soap:Body></soap:Envelope>
+--uuid:ece3f8bb-84fb-4534-b28b-2d99a1bbda36
+Content-Type: text/xml
+Content-Transfer-Encoding: binary
+Content-ID: <9b8c153e-f810-4e87-bb59-92abbd76e017-1@urn:ihe:iti:xds-b:2007>
+
+<?xml version='1.0' encoding='utf-8'?>
+<!-- ********************************************************
+Beispiel eVACDOC zum Darstellen eines elektronischen Impfausweises
+
+History:
+2014.04.03: Tony Schaller, medshare GmbH (Dokument erstellt im Einklang mit den Schematronregeln)
+2014.06.04: Tony Schaller, medshare GmbH (Abgabe CDA-CH-VACD)
+2014.11.11: Tony Schaller, medshare GmbH (Korrekturen zur besseren Validierung)
+
+******************************************************** -->
+<?xml-stylesheet type='text/xsl' href='../../../../stylesheets/HL7.ch/CDA-CH/v1.2/cda-ch.xsl'?>
+<ClinicalDocument xmlns='urn:hl7-org:v3' xmlns:voc='urn:hl7-org:v3/voc' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='urn:hl7-org:v3 CDA.xsd'>
+	<!-- ********************************************************
+	CDA Header
+	******************************************************** -->
+	<typeId root='2.16.840.1.113883.1.3' extension='POCD_HD000040'/>
+	<!-- Parent Templates -->
+	<!-- IHE PCC Medical Documents Specification -->
+	<templateId root='1.3.6.1.4.1.19376.1.5.3.1.1.1'/>
+	<!-- IHE Immunization Detail Specification -->
+	<templateId root='1.3.6.1.4.1.19376.1.5.3.1.1.18.1.2'/>
+	<!-- CDA-CH -->
+	<templateId root='2.16.756.5.30.1.1.1.1' extension='CDA-CH' />
+	<!-- eVACDOC (VACD) V1 -->
+	<templateId root='2.16.756.5.30.1.1.1.1.3.5.1' extension='CDA-CH-VACD' />
+	
+	<id extension='56B94FF0-3D35-4BC2-8F3C-0065EA83BB8D' root='2.16.756.5.30.1.1.1.1.3.5.1'/>
+	<code code='11369-6' codeSystem='2.16.840.1.113883.6.1' codeSystemName='LOINC' displayName='HISTORY OF IMMUNIZATIONS'/>
+	<title>eVACDOC</title>
+	<effectiveTime value='20140604'/>
+	<confidentialityCode code='N' codeSystem='2.16.840.1.113883.5.25' displayName='Normal'/>
+	<languageCode code='de-CH'/>
+	<setId extension='77CF85B2-E1A9-4CEA-A513-2DC581DA595F' root='2.16.756.5.30.1.1.1.1.3.5.1'/>
+	<versionNumber value='1'/>
+	<recordTarget>
+		<patientRole>
+			<id extension='898989' root='2.16.756.5.30.999999999999'/>
+			<addr use='HP'>
+				<streetName>Leidensweg</streetName>
+				<houseNumber>10</houseNumber>
+				<postalCode>9876</postalCode>
+				<city>Specimendorf</city>
+				<country>CH</country>
+			</addr>
+			<telecom nullFlavor='MSK' />
+			<patient>
+				<name>
+					<given>Sesuna</given>
+					<family>Tigrinja</family>
+				</name>
+				<administrativeGenderCode code='F' codeSystem='2.16.840.1.113883.5.1'/>
+				<birthTime value='20000404'/>
+			</patient>
+			<providerOrganization>
+				<id extension='7608888888888' root='1.3.88'/>
+				<name>Gruppenpraxis CH, Dr. med. Allzeit Bereit</name>
+			</providerOrganization>
+		</patientRole>
+	</recordTarget>
+	<author>
+		<functionCode  code='221'  codeSystem='2.16.840.1.113883.2.9.6.2.7'  codeSystemName='ISCO-08'  displayName='Medical doctors'/>
+		<time value='20140604'/>
+		<assignedAuthor>
+			<id extension='7608888888888' root='1.3.88'/>
+			<addr use='WP'>
+				<streetName>Doktorgasse</streetName>
+				<houseNumber>2</houseNumber>
+				<postalCode>8888</postalCode>
+				<city>Musterhausen</city>
+				<country>CH</country>
+			</addr>
+			<telecom use='PUB' value='tel:+41.32.234.55.66'/>
+			<telecom use='PUB' value='fax:+41.32.234.66.77'/>
+			<telecom use='PUB' value='mailto:bereit@gruppenpraxis.ch'/>
+			<telecom use='PUB' value='http://www.gruppenpraxis.ch'/>
+			<assignedPerson>
+				<name>
+					<prefix>Dr. med.</prefix>
+					<given>Allzeit</given>
+					<family>Bereit</family>
+					<suffix>Facharzt für Allgemeine Medizin</suffix>
+				</name>
+			</assignedPerson>
+			<representedOrganization>
+				<id nullFlavor='NA'/>
+				<name>Gruppenpraxis CH</name>
+				<addr use='WP'>
+					<streetName>Doktorgasse</streetName>
+					<houseNumber>2</houseNumber>
+					<postalCode>8888</postalCode>
+					<city>Musterhausen</city>
+					<country>CH</country>
+				</addr>
+			</representedOrganization>
+		</assignedAuthor>
+	</author>
+	<custodian>
+		<assignedCustodian>
+			<representedCustodianOrganization>
+				<id extension='7608888888888' root='1.3.88'/>
+				<name>Gruppenpraxis CH</name>
+				<addr use='WP'>
+					<streetName>Doktorgasse</streetName>
+					<houseNumber>2</houseNumber>
+					<postalCode>8888</postalCode>
+					<city>Musterhausen</city>
+					<country>CH</country>
+				</addr>
+			</representedCustodianOrganization>
+		</assignedCustodian>
+	</custodian>
+	<legalAuthenticator>
+		<time value='20140604'/>
+		<signatureCode code='S'/>
+		<assignedEntity>
+			<id extension='7608888888888' root='1.3.88'/>
+			<assignedPerson>
+				<name>
+					<prefix>Dr. med.</prefix>
+					<given>Allzeit</given>
+					<family>Bereit</family>
+					<suffix>Facharzt für Allgemeine Medizin</suffix>
+				</name>
+			</assignedPerson>
+			<representedOrganization>
+				<id nullFlavor='NA'/>
+				<name>Gruppenpraxis CH</name>
+				<addr use='WP'>
+					<streetName>Doktorgasse</streetName>
+					<houseNumber>2</houseNumber>
+					<postalCode>8888</postalCode>
+					<city>Musterhausen</city>
+					<country>CH</country>
+				</addr>
+			</representedOrganization>
+		</assignedEntity>
+	</legalAuthenticator>
+	<!--
+	********************************************************
+	CDA Body
+	******************************************************** -->
+	<component>
+		<structuredBody>
+			
+			<!--
+			********************************************************
+			Required History of Immunizations Section content (1.3.6.1.4.1.19376.1.5.3.1.3.23)
+			******************************************************** -->
+			<component>
+				<section>
+					<templateId root='2.16.840.1.113883.10.20.1.6'/>
+					<templateId root='1.3.6.1.4.1.19376.1.5.3.1.3.23'/>
+					<code code='11369-6' codeSystem='2.16.840.1.113883.6.1' codeSystemName='LOINC' displayName='HISTORY OF IMMUNIZATIONS' />
+					<title>Impfungen</title>
+					<text>
+						<table>
+							<tbody>
+								<tr>
+									<th>Impfstoff Handelsname</th>
+									<th>Hersteller</th>
+									<th>Lot-Nr</th>
+									<th>Datum</th>
+									<th>Impfung gegen</th>
+									<th>Impfung erfolgt durch</th>
+									<th>Impfung dokumentiert durch</th>
+									<th>Bemerkung</th>
+								</tr>
+								<tr>
+									<td>
+										<content ID='ip1'>
+											BOOSTRIX Polio Inj Susp
+										</content>
+									</td>
+									<td>GlaxoSmithKline AG</td>
+									<td></td>
+									<td>04.06.2014</td>
+									<td>Diphterie, Tetanus, Keuchhusten, Kinderlähmung</td>
+									<td>Dr. med. Allzeit Bereit</td>
+									<td>Dr. med. Allzeit Bereit</td>
+									<td>
+										<content ID='ic1'>
+											Anlässlich Schularztuntersuchung
+										</content>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<content ID='ip2'>
+											MMRVAXPRO Trockensub c Solv
+										</content>
+									</td>
+									<td>Sanofi Pasteur MSD AG</td>
+									<td></td>
+									<td>04.06.2014</td>
+									<td>Masern, Mumps, Röteln</td>
+									<td>Dr. med. Allzeit Bereit</td>
+									<td>Dr. med. Allzeit Bereit</td>
+									<td>
+										<content ID='ic2'>
+											Anlässlich Schularztuntersuchung
+										</content>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<content ID='ip3'>
+											ENGERIX B 20 Inj Susp Erw
+										</content>
+									</td>
+									<td>GlaxoSmithKline AG</td>
+									<td></td>
+									<td>04.06.2014</td>
+									<td>Hepatitis B</td>
+									<td>Dr. med. Allzeit Bereit</td>
+									<td>Dr. med. Allzeit Bereit</td>
+									<td>
+										<content ID='ic3'>
+											Anlässlich Schularztuntersuchung
+										</content>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<content ID='ip4'>
+											GARDASIL Inj Susp m Nad o SD
+										</content>
+									</td>
+									<td>Sanofi Pasteur MSD AG</td>
+									<td></td>
+									<td>04.06.2014</td>
+									<td>Papilloma-Virus</td>
+									<td>Dr. med. Allzeit Bereit</td>
+									<td>Dr. med. Allzeit Bereit</td>
+									<td>
+										<content ID='ic4'>
+											Anlässlich Schularztuntersuchung
+										</content>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</text>
+					<!-- Impfempfehlung Boostrix Polio -->
+					<entry>
+						<substanceAdministration classCode='SBADM' moodCode='PRP' negationInd='false'>
+							<templateId root='2.16.756.5.30.1.1.1.1.1' extension='CDA-CH.Body.MediL3' />
+							<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.7.1'/>
+							<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.7'/>
+							<templateId root='2.16.840.1.113883.10.20.1.24'/>
+							<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.12'/>
+							<id root='1.3.160' extension='7680006370012'/>
+							<code code='IMMUNIZ' codeSystem='2.16.840.1.113883.5.4' codeSystemName='ActCode'/>
+							<text>
+								<reference value='#ip1'/>
+							</text>
+							<statusCode code='completed'/>
+							<effectiveTime value='20140604' />
+							<priorityCode nullFlavor='NASK' />
+							<routeCode nullFlavor='NASK' />
+							<approachSiteCode nullFlavor='NASK'>
+								<originalText>
+									<reference nullFlavor='NA' />
+								</originalText>
+							</approachSiteCode>
+							<doseQuantity nullFlavor='NASK' />
+							<rateQuantity nullFlavor='NASK' />
+							<consumable typeCode='CSM'>
+								<manufacturedProduct>
+									<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.7.2'/>
+									<templateId root='2.16.840.1.113883.10.20.1.53'/>
+									<manufacturedMaterial>
+										<!-- epSOSVaccine Pivot Code -->
+										<code code='421245007' codeSystem='1.3.6.1.4.1.12559.11.10.1.3.1.42.28' codeSystemName='epSOSVaccine' displayName='Diphtheria + pertussis + tetanus vaccine'>
+											<originalText>
+												<reference value='#ip1'/>
+											</originalText>
+											<!-- GTIN -->
+											<translation code='7680006810013' codeSystem='1.3.160' />
+											<!-- ATC WHO Code -->
+											<translation code='J07CA02' codeSystem='2.16.840.1.113883.6.73'/>
+											<!-- Polio auch angeben -->
+											<translation code='111164008' codeSystem='1.3.6.1.4.1.12559.11.10.1.3.1.42.28' codeSystemName='epSOSVaccine' displayName='Poliovirus vaccine' />
+										</code>
+										<name>BOOSTRIX Polio Inj Susp</name>
+									</manufacturedMaterial>
+								</manufacturedProduct>
+							</consumable>
+							<performer>
+								<time value='20140604' />
+								<assignedEntity>
+									<id extension='7608888888888' root='1.3.88'/>
+									<assignedPerson>
+										<name>
+											<prefix>Dr. med.</prefix>
+											<given>Allzeit</given>
+											<family>Bereit</family>
+											<suffix>Facharzt für Allgemeine Medizin</suffix>
+										</name>
+									</assignedPerson>
+								</assignedEntity>
+							</performer>
+							<author>
+								<time value='20140604' />
+								<assignedAuthor>
+									<id extension='7607777777777' root='1.3.88'/>
+									<addr use='WP'>
+										<streetName>Rathaus</streetName>
+										<postalCode>8888</postalCode>
+										<city>Musterhausen</city>
+										<country>CH</country>
+									</addr>
+									<telecom use='PUB' value='tel:+41.99.999.99.99'/>
+									<telecom use='PUB' value='mailto:info@cdss.ch'/>
+									<telecom use='PUB' value='http://www.cdss.ch'/>
+									<assignedPerson>
+										<name>
+											<prefix>Prof.</prefix>
+											<given>Pieks</given>
+											<family>Ratschlag</family>
+											<suffix>Immunologin</suffix>
+										</name>
+									</assignedPerson>
+									<representedOrganization>
+										<id nullFlavor='NA'/>
+										<name>CDSS AG</name>
+									</representedOrganization>
+								</assignedAuthor>
+							</author>
+							<entryRelationship typeCode='RSON' inversionInd='false'>
+								<observation classCode='OBS' moodCode='EVN'>
+									<templateId root='2.16.756.5.30.1.1.1.1.3.2.1' extension='CDA-CH.VACD.Body.MediL3.Reason' />
+									<id root='2.16.756.5.30.1.1.1.1.3.2.1' extension='66502037-9B9C-4ECB-9D24-A8EAD5D77D4B' />
+									<code code='76668005' codeSystem='2.16.840.1.113883.6.96' codeSystemName='SNOMED CT' displayName='Diphtheria vaccination (procedure)' />
+									<statusCode code='completed'/>
+										
+								</observation>
+							</entryRelationship>
+							<entryRelationship typeCode='RSON' inversionInd='false'>
+								<observation classCode='OBS' moodCode='EVN'>
+									<templateId root='2.16.756.5.30.1.1.1.1.3.2.1' extension='CDA-CH.VACD.Body.MediL3.Reason' />
+									<id root='2.16.756.5.30.1.1.1.1.3.2.1' extension='66502037-9B9C-4ECB-9D24-A8EAD5D77D4B' />
+									<code code='127786006' codeSystem='2.16.840.1.113883.6.96' codeSystemName='SNOMED CT' displayName='Tetanus vaccination (procedure)' />
+									<statusCode code='completed'/>
+										
+								</observation>
+							</entryRelationship>
+							<entryRelationship typeCode='RSON' inversionInd='false'>
+								<observation classCode='OBS' moodCode='EVN'>
+									<templateId root='2.16.756.5.30.1.1.1.1.3.2.1' extension='CDA-CH.VACD.Body.MediL3.Reason' />
+									<id root='2.16.756.5.30.1.1.1.1.3.2.1' extension='66502037-9B9C-4ECB-9D24-A8EAD5D77D4B' />
+									<code code='39343008' codeSystem='2.16.840.1.113883.6.96' codeSystemName='SNOMED CT' displayName='Pertussis vaccination (procedure)' />
+									<statusCode code='completed'/>
+										
+								</observation>
+							</entryRelationship>
+							<entryRelationship typeCode='RSON' inversionInd='false'>
+								<observation classCode='OBS' moodCode='EVN'>
+									<templateId root='2.16.756.5.30.1.1.1.1.3.2.1' extension='CDA-CH.VACD.Body.MediL3.Reason' />
+									<id root='2.16.756.5.30.1.1.1.1.3.2.1' extension='66502037-9B9C-4ECB-9D24-A8EAD5D77D4B' />
+									<code code='72093006' codeSystem='2.16.840.1.113883.6.96' codeSystemName='SNOMED CT' displayName='Poliomyelitis vaccination (procedure)' />
+									<statusCode code='completed'/>
+										
+								</observation>
+							</entryRelationship>
+							<entryRelationship typeCode='SUBJ' inversionInd='true'>
+								<act classCode='ACT' moodCode='EVN'>
+									<templateId root='2.16.840.1.113883.10.20.1.40'/>
+									<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.2'/>
+									<code code='48767-8' codeSystem='2.16.840.1.113883.6.1' codeSystemName='LOINC' displayName='Annotation comment' />
+									<text>
+										<reference value='#ic1'/>
+									</text>
+									<statusCode code='completed'/>
+								</act>
+							</entryRelationship>
+						</substanceAdministration>
+					</entry>
+					<!-- Impfempfehlung MMR -->
+					<entry>
+						<substanceAdministration classCode='SBADM' moodCode='PRP' negationInd='false'>
+							<templateId root='2.16.756.5.30.1.1.1.1.1' extension='CDA-CH.Body.MediL3' />
+							<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.7.1'/>
+							<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.7'/>
+							<templateId root='2.16.840.1.113883.10.20.1.24'/>
+							<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.12'/>
+							<id root='1.3.160' extension='7680006370012'/>
+							<code code='IMMUNIZ' codeSystem='2.16.840.1.113883.5.4' codeSystemName='ActCode'/>
+							<text>
+								<reference value='#ip2'/>
+							</text>
+							<statusCode code='completed'/>
+							<effectiveTime value='20140604' />
+							<priorityCode nullFlavor='NASK' />
+							<routeCode nullFlavor='NASK' />
+							<approachSiteCode nullFlavor='NASK'>
+								<originalText>
+									<reference nullFlavor='NA' />
+								</originalText>
+							</approachSiteCode>
+							<doseQuantity nullFlavor='NASK' />
+							<rateQuantity nullFlavor='NASK' />
+							<consumable typeCode='CSM'>
+								<manufacturedProduct>
+									<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.7.2'/>
+									<templateId root='2.16.840.1.113883.10.20.1.53'/>
+									<manufacturedMaterial>
+										<!-- epSOSVaccine Pivot Code -->
+										<code code='61153008' codeSystem='1.3.6.1.4.1.12559.11.10.1.3.1.42.28' codeSystemName='epSOSVaccine' displayName='Measles + Mumps + Rubella vaccine'>
+											<originalText>
+												<reference value='#ip1'/>
+											</originalText>
+											<!-- GTIN -->
+											<translation code='7680007030014' codeSystem='1.3.160' />
+											<!-- ATC WHO Code -->
+											<translation code='J07BD52' codeSystem='2.16.840.1.113883.6.73'/>
+										</code>
+										<name>MMRVAXPRO Trockensub c Solv</name>
+									</manufacturedMaterial>
+								</manufacturedProduct>
+							</consumable>
+							<performer>
+								<time value='20140604' />
+								<assignedEntity>
+									<id extension='7608888888888' root='1.3.88'/>
+									<assignedPerson>
+										<name>
+											<prefix>Dr. med.</prefix>
+											<given>Allzeit</given>
+											<family>Bereit</family>
+											<suffix>Facharzt für Allgemeine Medizin</suffix>
+										</name>
+									</assignedPerson>
+								</assignedEntity>
+							</performer>
+							<author>
+								<time value='20140604' />
+								<assignedAuthor>
+									<id extension='7607777777777' root='1.3.88'/>
+									<addr use='WP'>
+										<streetName>Rathaus</streetName>
+										<postalCode>8888</postalCode>
+										<city>Musterhausen</city>
+										<country>CH</country>
+									</addr>
+									<telecom use='PUB' value='tel:+41.99.999.99.99'/>
+									<telecom use='PUB' value='mailto:info@cdss.ch'/>
+									<telecom use='PUB' value='http://www.cdss.ch'/>
+									<assignedPerson>
+										<name>
+											<prefix>Prof.</prefix>
+											<given>Pieks</given>
+											<family>Ratschlag</family>
+											<suffix>Immunologin</suffix>
+										</name>
+									</assignedPerson>
+									<representedOrganization>
+										<id nullFlavor='NA'/>
+										<name>CDSS AG</name>
+									</representedOrganization>
+								</assignedAuthor>
+							</author>
+							<entryRelationship typeCode='RSON' inversionInd='false'>
+								<observation classCode='OBS' moodCode='EVN'>
+									<templateId root='2.16.756.5.30.1.1.1.1.3.2.1' extension='CDA-CH.VACD.Body.MediL3.Reason' />
+									<id root='2.16.756.5.30.1.1.1.1.3.2.1' extension='66502037-9B9C-4ECB-9D24-A8EAD5D77D4B' />
+									<code code='47435007' codeSystem='2.16.840.1.113883.6.96' codeSystemName='SNOMED CT' displayName='Measles vaccination (procedure)' />
+									<statusCode code='completed'/>
+										
+								</observation>
+							</entryRelationship>
+							<entryRelationship typeCode='RSON' inversionInd='false'>
+								<observation classCode='OBS' moodCode='EVN'>
+									<templateId root='2.16.756.5.30.1.1.1.1.3.2.1' extension='CDA-CH.VACD.Body.MediL3.Reason' />
+									<id root='2.16.756.5.30.1.1.1.1.3.2.1' extension='66502037-9B9C-4ECB-9D24-A8EAD5D77D4B' />
+									<code code='50583002' codeSystem='2.16.840.1.113883.6.96' codeSystemName='SNOMED CT' displayName='Mumps vaccination (procedure)' />
+									<statusCode code='completed'/>
+										
+								</observation>
+							</entryRelationship>
+							<entryRelationship typeCode='RSON' inversionInd='false'>
+								<observation classCode='OBS' moodCode='EVN'>
+									<templateId root='2.16.756.5.30.1.1.1.1.3.2.1' extension='CDA-CH.VACD.Body.MediL3.Reason' />
+									<id root='2.16.756.5.30.1.1.1.1.3.2.1' extension='66502037-9B9C-4ECB-9D24-A8EAD5D77D4B' />
+									<code code='82314000' codeSystem='2.16.840.1.113883.6.96' codeSystemName='SNOMED CT' displayName='Rubella vaccination (procedure)' />
+									<statusCode code='completed'/>
+										
+								</observation>
+							</entryRelationship>
+							<entryRelationship typeCode='SUBJ' inversionInd='true'>
+								<act classCode='ACT' moodCode='EVN'>
+									<templateId root='2.16.840.1.113883.10.20.1.40'/>
+									<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.2'/>
+									<code code='48767-8' codeSystem='2.16.840.1.113883.6.1' codeSystemName='LOINC' displayName='Annotation comment' />
+									<text>
+										<reference value='#ic2'/>
+									</text>
+									<statusCode code='completed'/>
+								</act>
+							</entryRelationship>
+						</substanceAdministration>
+					</entry>
+					<!-- Impfempfehlung Engerix -->
+					<entry>
+						<substanceAdministration classCode='SBADM' moodCode='PRP' negationInd='false'>
+							<templateId root='2.16.756.5.30.1.1.1.1.1' extension='CDA-CH.Body.MediL3' />
+							<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.7.1'/>
+							<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.7'/>
+							<templateId root='2.16.840.1.113883.10.20.1.24'/>
+							<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.12'/>
+							<id root='1.3.160' extension='7680006370012'/>
+							<code code='IMMUNIZ' codeSystem='2.16.840.1.113883.5.4' codeSystemName='ActCode'/>
+							<text>
+								<reference value='#ip3'/>
+							</text>
+							<statusCode code='completed'/>
+							<effectiveTime value='20140604' />
+							<priorityCode nullFlavor='NASK' />
+							<routeCode nullFlavor='NASK' />
+							<approachSiteCode nullFlavor='NASK'>
+								<originalText>
+									<reference nullFlavor='NA' />
+								</originalText>
+							</approachSiteCode>
+							<doseQuantity nullFlavor='NASK' />
+							<rateQuantity nullFlavor='NASK' />
+							<consumable typeCode='CSM'>
+								<manufacturedProduct>
+									<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.7.2'/>
+									<templateId root='2.16.840.1.113883.10.20.1.53'/>
+									<manufacturedMaterial>
+										<!-- epSOSVaccine Pivot Code -->
+										<code code='34689006' codeSystem='1.3.6.1.4.1.12559.11.10.1.3.1.42.28' codeSystemName='epSOSVaccine' displayName='Hepatitis B virus vaccine'>
+											<originalText>
+												<reference value='#ip1'/>
+											</originalText>
+											<!-- GTIN -->
+											<translation code='7680005340016' codeSystem='1.3.160' />
+											<!-- ATC WHO Code -->
+											<translation code='J07BC01' codeSystem='2.16.840.1.113883.6.73'/>
+										</code>
+										<name>ENGERIX B 20 Inj Susp Erw</name>
+									</manufacturedMaterial>
+								</manufacturedProduct>
+							</consumable>
+							<performer>
+								<time value='20140604' />
+								<assignedEntity>
+									<id extension='7608888888888' root='1.3.88'/>
+									<assignedPerson>
+										<name>
+											<prefix>Dr. med.</prefix>
+											<given>Allzeit</given>
+											<family>Bereit</family>
+											<suffix>Facharzt für Allgemeine Medizin</suffix>
+										</name>
+									</assignedPerson>
+								</assignedEntity>
+							</performer>
+							<author>
+								<time value='20140604' />
+								<assignedAuthor>
+									<id extension='7607777777777' root='1.3.88'/>
+									<addr use='WP'>
+										<streetName>Rathaus</streetName>
+										<postalCode>8888</postalCode>
+										<city>Musterhausen</city>
+										<country>CH</country>
+									</addr>
+									<telecom use='PUB' value='tel:+41.99.999.99.99'/>
+									<telecom use='PUB' value='mailto:info@cdss.ch'/>
+									<telecom use='PUB' value='http://www.cdss.ch'/>
+									<assignedPerson>
+										<name>
+											<prefix>Prof.</prefix>
+											<given>Pieks</given>
+											<family>Ratschlag</family>
+											<suffix>Immunologin</suffix>
+										</name>
+									</assignedPerson>
+									<representedOrganization>
+										<id nullFlavor='NA'/>
+										<name>CDSS AG</name>
+									</representedOrganization>
+								</assignedAuthor>
+							</author>
+							<entryRelationship typeCode='RSON' inversionInd='false'>
+								<observation classCode='OBS' moodCode='EVN'>
+									<templateId root='2.16.756.5.30.1.1.1.1.3.2.1' extension='CDA-CH.VACD.Body.MediL3.Reason' />
+									<id root='2.16.756.5.30.1.1.1.1.3.2.1' extension='66502037-9B9C-4ECB-9D24-A8EAD5D77D4B' />
+									<code code='16584000' codeSystem='2.16.840.1.113883.6.96' codeSystemName='SNOMED CT' displayName='Hepatitis B vaccination (procedure)' />
+									<statusCode code='completed'/>
+										
+								</observation>
+							</entryRelationship>
+							<entryRelationship typeCode='SUBJ' inversionInd='true'>
+								<act classCode='ACT' moodCode='EVN'>
+									<templateId root='2.16.840.1.113883.10.20.1.40'/>
+									<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.2'/>
+									<code code='48767-8' codeSystem='2.16.840.1.113883.6.1' codeSystemName='LOINC' displayName='Annotation comment' />
+									<text>
+										<reference value='#ic3'/>
+									</text>
+									<statusCode code='completed'/>
+								</act>
+							</entryRelationship>
+						</substanceAdministration>
+					</entry>
+					<!-- Impfempfehlung Gardasil -->
+					<entry>
+						<substanceAdministration classCode='SBADM' moodCode='PRP' negationInd='false'>
+							<templateId root='2.16.756.5.30.1.1.1.1.1' extension='CDA-CH.Body.MediL3' />
+							<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.7.1'/>
+							<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.7'/>
+							<templateId root='2.16.840.1.113883.10.20.1.24'/>
+							<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.12'/>
+							<id root='1.3.160' extension='7680006370012'/>
+							<code code='IMMUNIZ' codeSystem='2.16.840.1.113883.5.4' codeSystemName='ActCode'/>
+							<text>
+								<reference value='#ip4'/>
+							</text>
+							<statusCode code='completed'/>
+							<effectiveTime value='20140604' />
+							<priorityCode nullFlavor='NASK' />
+							<routeCode nullFlavor='NASK' />
+							<approachSiteCode nullFlavor='NASK'>
+								<originalText>
+									<reference nullFlavor='NA' />
+								</originalText>
+							</approachSiteCode>
+							<doseQuantity nullFlavor='NASK' />
+							<rateQuantity nullFlavor='NASK' />
+							<consumable typeCode='CSM'>
+								<manufacturedProduct>
+									<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.7.2'/>
+									<templateId root='2.16.840.1.113883.10.20.1.53'/>
+									<manufacturedMaterial>
+										<!-- epSOSVaccine Pivot Code (derzeit kein Code für Papilloma-Virus verfügbar) -->
+										<code nullFlavor='NAV' >
+											<originalText>
+												<reference value='#ip1'/>
+											</originalText>
+											<!-- GTIN -->
+											<translation code='7680577350031' codeSystem='1.3.160' />
+											<!-- ATC WHO Code -->
+											<translation code='J07BM01' codeSystem='2.16.840.1.113883.6.73'/>
+										</code>
+										<name>GARDASIL Inj Susp m Nad o SD</name>
+									</manufacturedMaterial>
+								</manufacturedProduct>
+							</consumable>
+							<performer>
+								<time value='20140604' />
+								<assignedEntity>
+									<id extension='7608888888888' root='1.3.88'/>
+									<assignedPerson>
+										<name>
+											<prefix>Dr. med.</prefix>
+											<given>Allzeit</given>
+											<family>Bereit</family>
+											<suffix>Facharzt für Allgemeine Medizin</suffix>
+										</name>
+									</assignedPerson>
+								</assignedEntity>
+							</performer>
+							<author>
+								<time value='20140604' />
+								<assignedAuthor>
+									<id extension='7607777777777' root='1.3.88'/>
+									<addr use='WP'>
+										<streetName>Rathaus</streetName>
+										<postalCode>8888</postalCode>
+										<city>Musterhausen</city>
+										<country>CH</country>
+									</addr>
+									<telecom use='PUB' value='tel:+41.99.999.99.99'/>
+									<telecom use='PUB' value='mailto:info@cdss.ch'/>
+									<telecom use='PUB' value='http://www.cdss.ch'/>
+									<assignedPerson>
+										<name>
+											<prefix>Prof.</prefix>
+											<given>Pieks</given>
+											<family>Ratschlag</family>
+											<suffix>Immunologin</suffix>
+										</name>
+									</assignedPerson>
+									<representedOrganization>
+										<id nullFlavor='NA'/>
+										<name>CDSS AG</name>
+									</representedOrganization>
+								</assignedAuthor>
+							</author>
+							<entryRelationship typeCode='RSON' inversionInd='false'>
+								<observation classCode='OBS' moodCode='EVN'>
+									<templateId root='2.16.756.5.30.1.1.1.1.3.2.1' extension='CDA-CH.VACD.Body.MediL3.Reason' />
+									<id root='2.16.756.5.30.1.1.1.1.3.2.1' extension='66502037-9B9C-4ECB-9D24-A8EAD5D77D4B' />
+									<!-- derzeit kein Code für Papilloma-Virus verfügbar -->
+									<code nullFlavor='NAV' />
+									<statusCode code='completed'/>
+										
+								</observation>
+							</entryRelationship>
+							<entryRelationship typeCode='SUBJ' inversionInd='true'>
+								<act classCode='ACT' moodCode='EVN'>
+									<templateId root='2.16.840.1.113883.10.20.1.40'/>
+									<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.2'/>
+									<code code='48767-8' codeSystem='2.16.840.1.113883.6.1' codeSystemName='LOINC' displayName='Annotation comment' />
+									<text>
+										<reference value='#ic4'/>
+									</text>
+									<statusCode code='completed'/>
+								</act>
+							</entryRelationship>
+						</substanceAdministration>
+					</entry>
+				</section>
+			</component>
+			
+			<!--
+			********************************************************
+			Required if known Comments Section content (1.3.6.1.4.1.19376.1.5.3.1.4.2)
+			******************************************************** -->
+			<component>
+				<section>
+					<templateId root="2.16.756.5.30.1.1.1.1.1" extension="CDA-CH.Body.CodedRem" />
+					<code code='48767-8' codeSystem='2.16.840.1.113883.6.1' codeSystemName='LOINC' displayName='ANNOTATION COMMENT'/>
+					<title>Kommentar</title>
+					<text>
+						<content ID='comment1'>
+							Der Impfausweis enthält alle Impfungen (im Fallbeispiel nun identisch mit den Verabreichten Impfungen).
+						</content>
+					</text>
+					<entry>
+						<act classCode='ACT' moodCode='EVN'>
+							<templateId root='2.16.840.1.113883.10.20.1.40'/>
+							<templateId root='1.3.6.1.4.1.19376.1.5.3.1.4.2'/>
+							<code code='48767-8' codeSystem='2.16.840.1.113883.6.1' codeSystemName='LOINC' displayName='Annotation comment' />
+							<text>
+								<reference value='#comment1'/>
+							</text>
+							<statusCode code='completed'/>
+						</act>
+					</entry>
+				</section>
+			</component>
+			
+		</structuredBody>
+	</component>
+</ClinicalDocument>
+
+--uuid:ece3f8bb-84fb-4534-b28b-2d99a1bbda36--HTTP response code: 200
+Character set: UTF-8
+
+connection: keep-alive
+Content-Length: 3434
+content-type: multipart/related; boundary=MIMEBoundary112233445566778899; type="application/xop+xml"; start="<doc0@ihexds.nist.gov>"; start-info="application/soap+xml"
+Date: Fri, 17 Sep 2021 11:48:46 GMT
+Keep-Alive: timeout=20
+
+--MIMEBoundary112233445566778899
+Content-Type: application/xop+xml; charset=UTF-8; type="application/soap+xml"
+Content-Transfer-Encoding: binary
+Content-ID: <doc0@ihexds.nist.gov>
+
+<S:Envelope xmlns:S="http://www.w3.org/2003/05/soap-envelope"><S:Header><wsa:Action xmlns:wsa="http://www.w3.org/2005/08/addressing" xmlns:s="http://www.w3.org/2003/05/soap-envelope" s:mustUnderstand="1">urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-bResponse</wsa:Action><wsa:RelatesTo xmlns:wsa="http://www.w3.org/2005/08/addressing">urn:uuid:c180aab6-2abe-4fea-8da5-f5ffcc7a2c10</wsa:RelatesTo></S:Header><S:Body><rs:RegistryResponse xmlns:rs="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" status="urn:oasis:names:tc:ebxml-regrep:ResponseStatusType:Failure"><rs:RegistryErrorList><rs:RegistryError codeContext="Input did not validate against schema:Schema location is urn:ihe:iti:xds-b:2007 /var/lib/tomcat8/webapps/xdstools7/toolkitx/schema/v3/XDS.b_DocumentRepository.xsd urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0 /var/lib/tomcat8/webapps/xdstools7/toolkitx/schema/v3/rs.xsd urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0 /var/lib/tomcat8/webapps/xdstools7/toolkitx/schema/v3/rim.xsd http://schemas.xmlsoap.org/soap/envelope/ /var/lib/tomcat8/webapps/xdstools7/toolkitx/schema/v3/soap.xsd http://docs.oasis-open.org/wsn/b-2 /var/lib/tomcat8/webapps/xdstools7/toolkitx/schema/wsn/b-2.xsd http://docs.oasis-open.org/wsn/br-2 /var/lib/tomcat8/webapps/xdstools7/toolkitx/schema/wsn/br-2.xsd http://docs.oasis-open.org/wsn/t-1 /var/lib/tomcat8/webapps/xdstools7/toolkitx/schema/wsn/t-1.xsd&#xa;cvc-complex-type.4: Attribute 'id' must appear on element 'ns2:Association'.&#xa;" errorCode="XDSRegistryError" location="SchemaValidator" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /><rs:RegistryError codeContext="DocumentEntry(b234208f-b9b5-4aca-b48a-47817a3681ce): the code 1.3.6.1.4.1.19376.1.2.6.1(SUMMARY) is not found in the Affinity Domain configuration" errorCode="XDSRegistryMetadataError" location="CodeValidation" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /><rs:RegistryError codeContext="DocumentEntry(b234208f-b9b5-4aca-b48a-47817a3681ce): the code 1.3.6.1.4.1.21367.2017.3(Practice-F) is not found in the Affinity Domain configuration" errorCode="XDSRegistryMetadataError" location="CodeValidation" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /><rs:RegistryError codeContext="DocumentEntry(b234208f-b9b5-4aca-b48a-47817a3681ce): the code 11369-6(2.16.840.1.113883.6.1) is not found in the Affinity Domain configuration" errorCode="XDSRegistryMetadataError" location="CodeValidation" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /><rs:RegistryError codeContext="DocumentEntry(b234208f-b9b5-4aca-b48a-47817a3681ce): the code 2.16.840.1.113883.5.25(N) is not found in the Affinity Domain configuration" errorCode="XDSRegistryMetadataError" location="CodeValidation" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /><rs:RegistryError codeContext="SubmissionSet(f68853de-c8af-4a12-80d1-7daababa0bcc): the code 11369-6(2.16.840.1.113883.6.1) is not found in the Affinity Domain configuration" errorCode="XDSRegistryMetadataError" location="CodeValidation" severity="urn:oasis:names:tc:ebxml-regrep:ErrorSeverityType:Error" /></rs:RegistryErrorList></rs:RegistryResponse></S:Body></S:Envelope>
+
+
+--MIMEBoundary112233445566778899--

@@ -25,6 +25,7 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 import java.util.zip.ZipFile;
 
 import javax.activation.DataHandler;
@@ -58,10 +59,14 @@ import org.ehealth_connector.xua.core.SecurityHeaderElement;
 import org.ehealth_connector.xua.exceptions.SerializeException;
 import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.serialization.impl.AssertionSerializerImpl;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Association;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationLabel;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationType;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Folder;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp.Precision;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.QueryRegistry;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.RetrieveDocumentSet;
@@ -225,9 +230,10 @@ public class ConvenienceCommunication extends CamelService {
 			InputStream inputStream4Metadata) {
 		lastError = "";
 		DocumentMetadata retVal = null;
-		Document doc = new Document();
+		var doc = new Document();
 		try {
 			var doc4Metadata = new Document();
+			doc4Metadata.setDocumentEntry(new DocumentEntry());
 			if (inputStream4Metadata != null) {
 				InputStream unicodeStream = Util.convertNonAsciiText2Unicode(inputStream4Metadata);
 				var dataSource = new ByteArrayDataSource(unicodeStream, desc.getMimeType());
@@ -350,18 +356,22 @@ public class ConvenienceCommunication extends CamelService {
 
 		DocumentMetadata docMetadata = null;
 
-		txnData.getDocuments().add(doc);
 		if (metadataDoc != null) {
 			docMetadata = new DocumentMetadata(metadataDoc.getDocumentEntry());
+			if (doc.getDocumentEntry() == null) {
+				doc.setDocumentEntry(metadataDoc.getDocumentEntry());
+			}
 		} else {
 			docMetadata = new DocumentMetadata(doc.getDocumentEntry());
 		}
+
+		txnData.getDocuments().add(doc);
 
 		if (documentMetadataExtractionMode == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
 			if (DocumentDescriptor.CDA_R2.equals(desc)) {
 				cdaExtractionFixes(docMetadata);
 			}
-			generateDefaultDocEntryAttributes(docMetadata, doc);
+			generateDefaultDocEntryAttributes(docMetadata, doc, desc);
 		} else {
 			docMetadata.clear();
 		}
@@ -432,7 +442,8 @@ public class ConvenienceCommunication extends CamelService {
 	 */
 	public XdmContents createXdmContents(OutputStream outputStream) {
 		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
-			generateDefaultSubmissionSetAttributes();
+			txnData.setSubmissionSet(generateDefaultSubmissionSetAttributes());
+			linkDocumentEntryWithSubmissionSet();
 		}
 		final var xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
 		xdmContents.createZip(outputStream, txnData);
@@ -452,7 +463,8 @@ public class ConvenienceCommunication extends CamelService {
 	 */
 	public XdmContents createXdmContents(OutputStream outputStream, XdmContents xdmContents) {
 		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
-			generateDefaultSubmissionSetAttributes();
+			txnData.setSubmissionSet(generateDefaultSubmissionSetAttributes());
+			linkDocumentEntryWithSubmissionSet();
 		}
 		xdmContents.createZip(outputStream, txnData);
 		return xdmContents;
@@ -467,7 +479,8 @@ public class ConvenienceCommunication extends CamelService {
 	 */
 	public XdmContents createXdmContents(String filePath) {
 		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
-			generateDefaultSubmissionSetAttributes();
+			txnData.setSubmissionSet(generateDefaultSubmissionSetAttributes());
+			linkDocumentEntryWithSubmissionSet();
 		}
 		final var xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
 		xdmContents.createZip(filePath, txnData);
@@ -486,7 +499,8 @@ public class ConvenienceCommunication extends CamelService {
 	 */
 	public XdmContents createXdmContents(String filePath, XdmContents xdmContents) {
 		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
-			generateDefaultSubmissionSetAttributes();
+			txnData.setSubmissionSet(generateDefaultSubmissionSetAttributes());
+			linkDocumentEntryWithSubmissionSet();
 		}
 		xdmContents.createZip(filePath, txnData);
 		return xdmContents;
@@ -513,22 +527,53 @@ public class ConvenienceCommunication extends CamelService {
 	 *
 	 * @param docEntryUuid the doc entry uuid </div>
 	 */
-	private void generateDefaultDocEntryAttributes(DocumentMetadata docMetadata, Document document) {
+	private void generateDefaultDocEntryAttributes(DocumentMetadata docMetadata, Document document,
+			DocumentDescriptor documentDescriptor) {
 
 		// Derive MimeType from DocumentDescriptor
 		if (docMetadata.getDocumentEntry().getMimeType() == null) {
-			docMetadata.setMimeType(document.getDocumentEntry().getMimeType());
+			docMetadata.setMimeType(documentDescriptor.getMimeType());
+			document.getDocumentEntry().setMimeType(documentDescriptor.getMimeType());
+		}
+
+		// Generate the unique ID
+		if (docMetadata.getDocumentEntry().getUniqueId() == null) {
+			docMetadata.setUniqueId(OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
+			document.getDocumentEntry()
+					.setUniqueId(OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
 		}
 
 		// Generate the UUID
-		if (docMetadata.getDocumentEntry().getUniqueId() == null) {
-			docMetadata.setUniqueId(OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
+		if (docMetadata.getDocumentEntry().getEntryUuid() == null) {
+			document.getDocumentEntry().setEntryUuid(UUID.randomUUID().toString());
+			docMetadata.setEntryUUID(document.getDocumentEntry().getEntryUuid());
 		}
 
 		// Generate Creation Time with the current time
 		if (docMetadata.getDocumentEntry().getCreationTime() == null) {
 			docMetadata.setCreationTime(DateUtil.nowAsZonedDate());
+
+			var timestamp = new org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp(
+					docMetadata.getCreationTime(), Precision.SECOND);
+			document.getDocumentEntry().setCreationTime(timestamp);
 		}
+	}
+
+	private void linkDocumentEntryWithSubmissionSet() {
+
+		for (Document document : this.txnData.getDocuments()) {
+			// link document entry to submission set
+			var association = new Association();
+
+			association.setAssociationType(AssociationType.HAS_MEMBER);
+			association.setSourceUuid(this.txnData.getSubmissionSet().getEntryUuid());
+			association.setTargetUuid(document.getDocumentEntry().getEntryUuid());
+			association.setLabel(AssociationLabel.ORIGINAL);
+			association.setEntryUuid(UUID.randomUUID().toString());
+
+			this.txnData.getAssociations().add(association);
+		}
+
 	}
 
 	/**
@@ -538,101 +583,108 @@ public class ConvenienceCommunication extends CamelService {
 	 */
 	public SubmissionSet generateDefaultSubmissionSetAttributes() {
 
+		if (txnData.getSubmissionSet() == null) {
+			txnData.setSubmissionSet(new SubmissionSet());
+		}
+
 		// Create SubmissionSet
-		final SubmissionSet subSet = txnData.getSubmissionSet();
+		final var subSet = txnData.getSubmissionSet();
 
-		if (txnData.getDocuments() != null && !txnData.getDocuments().isEmpty() && txnData.getDocuments().get(0) != null
-				&& txnData.getDocuments().get(0).getDocumentEntry() != null) {
-			final DocumentEntry firstDocEntry = txnData.getDocuments().get(0).getDocumentEntry();
-			if (firstDocEntry.getPatientId() == null) {
-				throw new IllegalStateException(
-						"Missing destination patient ID in DocumentMetadata of first document.");
-			}
+		if (txnData.getDocuments() != null && !txnData.getDocuments().isEmpty()) {
 
-			if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
-
-				// This is the eHealth Connector Root OID
-				// default value just in case...
-				String organizationalId = EhcVersions.getCurrentVersion().getOid();
-
-				if (subSet.getUniqueId() == null) {
-					subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+			for (Document document : txnData.getDocuments()) {
+				final var docEntry = document.getDocumentEntry();
+				if (docEntry.getPatientId() == null) {
+					throw new IllegalStateException(
+							"Missing destination patient ID in DocumentMetadata of first document.");
 				}
 
-				if (firstDocEntry.getPatientId() != null) {
-					organizationalId = firstDocEntry.getPatientId()
-							.getAssigningAuthority().getUniversalId();
-				}
-				// set submission set source id
-				if (subSet.getSourceId() == null) {
-					subSet.setSourceId(organizationalId);
-				}
-			}
+				if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
 
-			// set submission time
-			if (subSet.getSubmissionTime() == null) {
-				subSet.setSubmissionTime(DateUtilMdht.nowAsTS().getValue());
-			}
-			// txnData.saveMetadataToFile("C:/temp/metadata.xml");
+					// This is the eHealth Connector Root OID
+					// default value just in case...
+					String organizationalId = EhcVersions.getCurrentVersion().getOid();
 
-			// Use the PatientId of the first Document for the Submission set ID
-			if (subSet.getPatientId() == null) {
-				subSet.setPatientId(firstDocEntry.getPatientId());
-			}
+					if (subSet.getUniqueId() == null) {
+						subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+					}
 
-			// set ContentTypeCode
-			if (subSet.getContentTypeCode() == null) {
-				if (firstDocEntry.getTypeCode() != null) {
-					subSet.setContentTypeCode(firstDocEntry.getTypeCode());
-				}
-			}
-		} else if (txnData.getFolders() != null && !txnData.getFolders().isEmpty()
-				&& txnData.getFolders().get(0) != null) {
-			final Folder firstFolder = txnData.getFolders().get(0);
-			if (firstFolder.getPatientId() == null) {
-				throw new IllegalStateException(
-						"Missing destination patient ID in DocumentMetadata of first document.");
-			}
+					if (subSet.getEntryUuid() == null) {
+						subSet.setEntryUuid(UUID.randomUUID().toString());
+					}
 
-			if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
-
-				// This is the eHealth Connector Root OID
-				// default value just in case...
-				String organizationalId = EhcVersions.getCurrentVersion().getOid();
-
-				if (subSet.getUniqueId() == null) {
-					subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+					if (docEntry.getPatientId() != null) {
+						organizationalId = docEntry.getPatientId().getAssigningAuthority().getUniversalId();
+					}
+					// set submission set source id
+					if (subSet.getSourceId() == null) {
+						subSet.setSourceId(organizationalId);
+					}
 				}
 
-				if (firstFolder.getPatientId() != null) {
-					organizationalId = firstFolder.getPatientId().getAssigningAuthority().getUniversalId();
+				// set submission time
+				if (subSet.getSubmissionTime() == null) {
+					subSet.setSubmissionTime(DateUtilMdht.nowAsTS().getValue());
 				}
-				// set submission set source id
-				if (subSet.getSourceId() == null) {
-					subSet.setSourceId(organizationalId);
+				// txnData.saveMetadataToFile("C:/temp/metadata.xml");
+
+				// Use the PatientId of the first Document for the Submission set ID
+				if (subSet.getPatientId() == null) {
+					subSet.setPatientId(docEntry.getPatientId());
 				}
-			}
 
-			// set submission time
-			if (subSet.getSubmissionTime() == null) {
-				subSet.setSubmissionTime(DateUtilMdht.nowAsTS().getValue());
-			}
-			// txnData.saveMetadataToFile("C:/temp/metadata.xml");
+				// set ContentTypeCode
+				if (subSet.getContentTypeCode() == null && docEntry.getTypeCode() != null) {
+					subSet.setContentTypeCode(docEntry.getTypeCode());
 
-			// Use the PatientId of the first Document for the Submission set ID
-			if (subSet.getPatientId() == null) {
-				subSet.setPatientId(firstFolder.getPatientId());
-			}
-
-			if (subSet.getContentTypeCode() == null) {
-				if ((firstFolder.getCodeList() != null) && (firstFolder.getCodeList().get(0) != null)) {
-					subSet.setContentTypeCode(firstFolder.getCodeList().get(0));
 				}
 			}
+		} else if (txnData.getFolders() != null && !txnData.getFolders().isEmpty()) {
+			for (Folder folder : txnData.getFolders()) {
+				if (folder.getPatientId() == null) {
+					throw new IllegalStateException(
+							"Missing destination patient ID in DocumentMetadata of first document.");
+				}
 
+				if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
+
+					// This is the eHealth Connector Root OID
+					// default value just in case...
+					String organizationalId = EhcVersions.getCurrentVersion().getOid();
+
+					if (subSet.getUniqueId() == null) {
+						subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+					}
+
+					if (folder.getPatientId() != null) {
+						organizationalId = folder.getPatientId().getAssigningAuthority().getUniversalId();
+					}
+					// set submission set source id
+					if (subSet.getSourceId() == null) {
+						subSet.setSourceId(organizationalId);
+					}
+				}
+
+				// set submission time
+				if (subSet.getSubmissionTime() == null) {
+					subSet.setSubmissionTime(DateUtilMdht.nowAsTS().getValue());
+				}
+				// txnData.saveMetadataToFile("C:/temp/metadata.xml");
+
+				// Use the PatientId of the first Document for the Submission set ID
+				if (subSet.getPatientId() == null) {
+					subSet.setPatientId(folder.getPatientId());
+				}
+
+				if (subSet.getContentTypeCode() == null && folder.getCodeList() != null
+						&& folder.getCodeList().get(0) != null) {
+					subSet.setContentTypeCode(folder.getCodeList().get(0));
+				}
+			}
 		}
 		return subSet;
 	}
+
 
 	/**
 	 * <div class="en">Returns the current affinity domain
@@ -715,8 +767,8 @@ public class ConvenienceCommunication extends CamelService {
 	 * @throws Exception
 	 */
 	public QueryResponse queryDocumentReferencesOnly(FindDocumentsQuery queryParameter,
-			SecurityHeaderElement securityHeader) throws Exception {
-		return queryDocumentQuery(queryParameter, securityHeader, QueryReturnType.OBJECT_REF);
+			SecurityHeaderElement securityHeader, boolean secure) throws Exception {
+		return queryDocumentQuery(queryParameter, securityHeader, QueryReturnType.OBJECT_REF, secure);
 	}
 
 	/**
@@ -728,9 +780,10 @@ public class ConvenienceCommunication extends CamelService {
 	 * @return the OHT XDSQueryResponseType containing full document metadata</div>
 	 * @throws Exception
 	 */
-	public QueryResponse queryDocuments(FindDocumentsQuery queryParameter, SecurityHeaderElement securityHeader)
+	public QueryResponse queryDocuments(FindDocumentsQuery queryParameter, SecurityHeaderElement securityHeader,
+			boolean secure)
 			throws Exception {
-		return queryDocumentQuery(queryParameter, securityHeader, QueryReturnType.LEAF_CLASS);
+		return queryDocumentQuery(queryParameter, securityHeader, QueryReturnType.LEAF_CLASS, secure);
 	}
 
 	/**
@@ -744,7 +797,7 @@ public class ConvenienceCommunication extends CamelService {
 	 * @throws Exception
 	 */
 	public QueryResponse queryDocumentQuery(AbstractStoredQuery query, SecurityHeaderElement securityHeader,
-			QueryReturnType returnType)
+			QueryReturnType returnType, boolean secure)
 			throws Exception {
 		/*
 		 * lastError = "";
@@ -774,7 +827,7 @@ public class ConvenienceCommunication extends CamelService {
 				"xds-iti18://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
 				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", ""),
 				serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
-				atnaConfigMode == AtnaConfigMode.SECURE);
+				secure);
 		log.info("Sending request to '{}' endpoint", endpoint);
 
 		Map<String, String> outgoingHeaders = new HashMap<>();
@@ -844,9 +897,10 @@ public class ConvenienceCommunication extends CamelService {
 	 * @throws Exception
 	 *
 	 */
-	public QueryResponse queryFolders(FindFoldersStoredQuery queryParameter, SecurityHeaderElement security)
+	public QueryResponse queryFolders(FindFoldersStoredQuery queryParameter, SecurityHeaderElement security,
+			boolean secure)
 			throws Exception {
-		return queryDocumentQuery(queryParameter, security, QueryReturnType.LEAF_CLASS);
+		return queryDocumentQuery(queryParameter, security, QueryReturnType.LEAF_CLASS, secure);
 	}
 
 	/**
@@ -856,9 +910,10 @@ public class ConvenienceCommunication extends CamelService {
 	 * @return the OHT XDSRetrieveResponseType </div>
 	 * @throws Exception
 	 */
-	public RetrievedDocumentSet retrieveDocument(DocumentRequest docReq, SecurityHeaderElement securityHeader)
+	public RetrievedDocumentSet retrieveDocument(DocumentRequest docReq, SecurityHeaderElement securityHeader,
+			boolean secure)
 			throws Exception {
-		return retrieveDocuments(new DocumentRequest[] { docReq }, securityHeader);
+		return retrieveDocuments(new DocumentRequest[] { docReq }, securityHeader, secure);
 	}
 
 	/**
@@ -868,7 +923,8 @@ public class ConvenienceCommunication extends CamelService {
 	 * @return the OHT XDSRetrieveResponseType </div>
 	 * @throws Exception
 	 */
-	public RetrievedDocumentSet retrieveDocuments(DocumentRequest[] docReq, SecurityHeaderElement securityHeader)
+	public RetrievedDocumentSet retrieveDocuments(DocumentRequest[] docReq, SecurityHeaderElement securityHeader,
+			boolean secure)
 			throws Exception {
 		final var retrieveDocumentSet = new RetrieveDocumentSet();
 
@@ -884,15 +940,18 @@ public class ConvenienceCommunication extends CamelService {
 				"xds-iti43://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
 				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", ""),
 				serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
-				atnaConfigMode == AtnaConfigMode.SECURE);
+				secure);
 		log.info("Sending request to '{}' endpoint", endpoint);
 
-		Map<String, String> outgoingHeaders = new HashMap<>();
-		outgoingHeaders.put("Accept", "application/soap+xml");
-		outgoingHeaders.put("Content-Type",
-				"multipart/related; charset=UTF-8; action=\"urn:ihe:iti:2007:RetrieveDocumentSet\"");
+		/*
+		 * Map<String, String> outgoingHeaders = new HashMap<>();
+		 * outgoingHeaders.put("Accept", "application/soap+xml");
+		 * outgoingHeaders.put("Content-Type",
+		 * "application/soap+xml; charset=UTF-8; action=\"urn:ihe:iti:2007:RetrieveDocumentSet\""
+		 * );
+		 */
 
-		final var exchange = send(endpoint, retrieveDocumentSet, securityHeader, outgoingHeaders);
+		final var exchange = send(endpoint, retrieveDocumentSet, securityHeader, null);
 
 		return exchange.getMessage().getBody(RetrievedDocumentSet.class);
 	}
@@ -966,7 +1025,8 @@ public class ConvenienceCommunication extends CamelService {
 		setDefaultKeystoreTruststore(affinityDomain.getRepositoryDestination());
 
 		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
-			generateDefaultSubmissionSetAttributes();
+			txnData.setSubmissionSet(generateDefaultSubmissionSetAttributes());
+			linkDocumentEntryWithSubmissionSet();
 		}
 
 		final var serverInLogger = "#serverInLogger";
@@ -978,12 +1038,7 @@ public class ConvenienceCommunication extends CamelService {
 				atnaConfigMode == AtnaConfigMode.SECURE);
 		log.info("Sending request to '{}' endpoint", endpoint);
 
-		Map<String, String> outgoingHeaders = new HashMap<>();
-		outgoingHeaders.put("Accept", "application/soap+xml");
-		outgoingHeaders.put("Content-Type",
-				"multipart/related; charset=UTF-8; action=\"urn:ihe:iti:2007:RegistryStoredQuery\"");
-
-		final var exchange = send(endpoint, txnData, securityHeader, outgoingHeaders);
+		final var exchange = send(endpoint, txnData, securityHeader, null);
 
 		return exchange.getMessage().getBody(Response.class);
 	}

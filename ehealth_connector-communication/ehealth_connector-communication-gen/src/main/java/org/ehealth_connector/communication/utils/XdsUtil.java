@@ -69,7 +69,7 @@ public class XdsUtil {
 
 		// Fix DocumentDescriptor problem...
 		var dd = DocumentDescriptor
-				.valueOf(xdsDoc.getDocumentEntry().getMimeType());
+				.getDocumentDescriptorForMimeType(xdsDoc.getDocumentEntry().getMimeType());
 		if (dd.toString().startsWith("UNKNOWN!")) {
 			String mimeType = dd.toString().replace("UNKNOWN!", "");
 			mimeType = mimeType.substring(mimeType.indexOf("!") + 1, mimeType.length());

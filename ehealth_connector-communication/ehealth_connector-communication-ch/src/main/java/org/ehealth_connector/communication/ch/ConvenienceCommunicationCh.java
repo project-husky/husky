@@ -184,9 +184,10 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 	 * @return the OHT XDSQueryResponseType containing full document metadata</div>
 	 * @throws Exception
 	 */
-	public QueryResponse queryDocuments(Identificator patientId, SecurityHeaderElement security) throws Exception {
+	public QueryResponse queryDocuments(Identificator patientId, SecurityHeaderElement security, boolean secure)
+			throws Exception {
 		return queryDocumentQuery(new FindDocumentsQuery(patientId, AvailabilityStatus.APPROVED), security,
-				QueryReturnType.LEAF_CLASS);
+				QueryReturnType.LEAF_CLASS, secure);
 	}
 
 	/**
