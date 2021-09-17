@@ -16,17 +16,17 @@
  */
 package org.ehealth_connector.xua.saml2;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 public class StatusCodeTest {
 
 	private String testCode1 = "urn:oasis:names:tc:SAML:2.0:status:VersionMismatch";
 	private String testCode2 = "urn:oasis:names:tc:SAML:2.0:status:RequestVersionDeprecated";
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 	}
 

@@ -16,15 +16,15 @@
  */
 package org.ehealth_connector.xua.deserialization.impl;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
 import org.ehealth_connector.xua.communication.xua.XUserAssertionRequest;
 import org.ehealth_connector.xua.exceptions.DeserializeException;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Element;
 
 public class XUserAssertionRequestDeserializerImplTest {
@@ -34,7 +34,7 @@ public class XUserAssertionRequestDeserializerImplTest {
 	private Element testXmlElement;
 	private String testXmlString;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testDeserializer = new XUserAssertionRequestDeserializerImpl();
 		testXmlByteArray = Files.readAllBytes(

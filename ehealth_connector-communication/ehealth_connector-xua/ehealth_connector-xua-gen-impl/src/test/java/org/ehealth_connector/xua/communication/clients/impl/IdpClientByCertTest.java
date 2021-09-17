@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.xua.communication.clients.impl;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.IOException;
 import java.net.URL;
@@ -45,11 +45,11 @@ import org.ehealth_connector.xua.exceptions.ClientSendException;
 import org.ehealth_connector.xua.pki.impl.PkiManagerImpl;
 import org.ehealth_connector.xua.saml2.Response;
 import org.ehealth_connector.xua.utilities.impl.InitializerTestHelper;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
@@ -65,7 +65,7 @@ public class IdpClientByCertTest extends InitializerTestHelper {
 
 	private static int httpPort;
 
-	@BeforeClass
+	@BeforeAll
 	public static void setUpBeforeClass() throws Exception {
 		InitializerTestHelper.setUpBeforeClass();
 		final SocketConfig socketConfig = SocketConfig.custom().setSoTimeout(15000)
@@ -106,7 +106,7 @@ public class IdpClientByCertTest extends InitializerTestHelper {
 
 	}
 
-	@AfterClass
+	@AfterAll
 	public static void tearDownAfterClass() throws Exception {
 		server.stop();
 	}
@@ -117,7 +117,7 @@ public class IdpClientByCertTest extends InitializerTestHelper {
 
 	private KeyStore testClientKeyStore;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		testClientKeyStore = new PkiManagerImpl().loadStore(
@@ -164,7 +164,7 @@ public class IdpClientByCertTest extends InitializerTestHelper {
 	 * @throws ClientSendException
 	 */
 	@Test
-	@Ignore("TODO: client/server ssl stuff has to be resolved.")
+	@Disabled("TODO: client/server ssl stuff has to be resolved.")
 	public void testSend() throws ClientSendException {
 		final IdpClientByCert icbc = new IdpClientByCert(clientConfig);
 		final Response resp = icbc.send(testAuthnRequest);

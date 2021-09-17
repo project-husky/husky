@@ -16,9 +16,9 @@
  */
 package org.ehealth_connector.cda.ch;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.util.Date;
@@ -40,7 +40,7 @@ import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
 import org.ehealth_connector.common.mdht.enums.ParticipantType;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 
 /**
@@ -295,7 +295,7 @@ public class CdaChV2StructuredBodyTest {
 		cda.addTemplateId(id2);
 
 		for (Identificator id : cda.getTemplateIds()) {
-			assertNull("Extensions not allowd for template ids", id.getExtension());
+			assertNull(id.getExtension(), "Extensions not allowd for template ids");
 			if (id1.getRoot().equals(id.getRoot()))
 				id1Found = true;
 			if (id2.getRoot().equals(id.getRoot()))
@@ -325,7 +325,7 @@ public class CdaChV2StructuredBodyTest {
 				"dummy");
 
 		for (Identificator id : cda.getTemplateIds()) {
-			assertNull("Extensions not allowd for template ids", id.getExtension());
+			assertNull(id.getExtension(), "Extensions not allowd for template ids");
 			if (idCdaChV2SbEnhanced.equals(id.getRoot()))
 				idFoundCdaChV2SbEnhanced = true;
 			if (idCdaChV2Sb.equals(id.getRoot()))
@@ -336,17 +336,11 @@ public class CdaChV2StructuredBodyTest {
 				idFoundHl7CdaSb = true;
 		}
 
-		assertTrue(cutName
-				+ " templateID defined by ART DECOR CDA-CH V2 Structured Body enhanced is missing",
-				idFoundCdaChV2SbEnhanced);
-		assertTrue(
-				cutName + " templateID defined by ART DECOR CDA-CH V2 Structured Body is missing",
-				idFoundCdaChV2Sb);
-		assertTrue(cutName + " templateID defined by ART DECOR HL7 CDA R2 is missing",
-				idFoundHl7Cda);
-		assertTrue(
-				cutName + " templateID defined by ART DECOR HL7 CDA R2 Structured Body is missing",
-				idFoundHl7CdaSb);
+		assertTrue(idFoundCdaChV2SbEnhanced,
+				cutName + " templateID defined by ART DECOR CDA-CH V2 Structured Body enhanced is missing");
+		assertTrue(idFoundCdaChV2Sb, cutName + " templateID defined by ART DECOR CDA-CH V2 Structured Body is missing");
+		assertTrue(idFoundHl7Cda, cutName + " templateID defined by ART DECOR HL7 CDA R2 is missing");
+		assertTrue(idFoundHl7CdaSb, cutName + " templateID defined by ART DECOR HL7 CDA R2 Structured Body is missing");
 	}
 
 	/**

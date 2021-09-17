@@ -16,8 +16,8 @@
  */
 package org.ehealth_connector.cda.ch.lab.lrph;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
@@ -30,7 +30,7 @@ import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Performer;
 import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
 import org.ehealth_connector.common.utils.DateUtilMdht;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 

@@ -17,10 +17,11 @@
 
 package org.ehealth_connector.communication.xd.storedquery;
 
-import static org.junit.Assert.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.ehealth_connector.communication.testhelper.XdsTestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
 import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameterList;
 import org.slf4j.Logger;

@@ -16,13 +16,13 @@
  */
 package org.ehealth_connector.converters.ch;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.ehealth_connector.cda.ch.lab.lrqc.CdaChLrqc;
 import org.ehealth_connector.fhir.structures.ch.FhirCdaChLrqc.LrqcDocument;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -40,7 +40,7 @@ public class LrqcConverterTest extends AbstractConverter {
 	 *
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		converter = new LrqcConverter();
 		setUpTestFile("/FHIRLrqcDocument_Chemie.xml");

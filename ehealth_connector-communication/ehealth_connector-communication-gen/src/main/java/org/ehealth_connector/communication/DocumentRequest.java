@@ -18,21 +18,20 @@ package org.ehealth_connector.communication;
 
 import java.net.URI;
 
-import org.openhealthtools.ihe.xds.consumer.retrieve.DocumentRequestType;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 
 /**
  * Represents request information for one Document
  */
 public class DocumentRequest {
-	private DocumentRequestType ohtDocReq;
+	private DocumentEntry ipfDocReq;
 	private URI xdsRepositoryUri;
 
 	/**
 	 * Standard constructor.
 	 */
 	public DocumentRequest() {
-		this.ohtDocReq = org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveFactory.eINSTANCE
-				.createDocumentRequestType();
+		this.ipfDocReq = new DocumentEntry();
 	}
 
 	/**
@@ -108,7 +107,7 @@ public class DocumentRequest {
 	 * @return the document Id
 	 */
 	public String getDocumentId() {
-		return ohtDocReq.getDocumentUniqueId();
+		return ipfDocReq.getUniqueId();
 	}
 
 	/**
@@ -117,7 +116,7 @@ public class DocumentRequest {
 	 * @return the Id of the community
 	 */
 	public String getHomeCommunityId() {
-		return ohtDocReq.getHomeCommunityId();
+		return ipfDocReq.getHomeCommunityId();
 	}
 
 	/**
@@ -125,8 +124,8 @@ public class DocumentRequest {
 	 *
 	 * @return the OHT DocumentRequestType
 	 */
-	public DocumentRequestType getOhtDocumentRequestType() {
-		return this.ohtDocReq;
+	public DocumentEntry getIpfDocumentEntry() {
+		return this.ipfDocReq;
 	}
 
 	/**
@@ -135,7 +134,7 @@ public class DocumentRequest {
 	 * @return the repositoryId
 	 */
 	public String getRepositoryId() {
-		return ohtDocReq.getRepositoryUniqueId();
+		return ipfDocReq.getRepositoryUniqueId();
 	}
 
 	/**
@@ -158,7 +157,7 @@ public class DocumentRequest {
 	 *            ().getRepositoryUri())
 	 */
 	public void setDocumentId(String documentId) {
-		ohtDocReq.setDocumentUniqueId(documentId.toString());
+		ipfDocReq.setUniqueId(documentId);
 	}
 
 	/**
@@ -171,7 +170,7 @@ public class DocumentRequest {
 	 *            .getDocumentEntryResponses().getHomeCommunityId())
 	 */
 	public void setHomeCommunityId(String homeCommunityId) {
-		ohtDocReq.setHomeCommunityId(homeCommunityId);
+		ipfDocReq.setHomeCommunityId(homeCommunityId);
 	}
 
 	/**
@@ -185,7 +184,7 @@ public class DocumentRequest {
 	 *            ().getRepositoryUniqueId())
 	 */
 	public void setRepositoryId(String repositoryId) {
-		ohtDocReq.setRepositoryUniqueId(repositoryId);
+		ipfDocReq.setRepositoryUniqueId(repositoryId);
 	}
 
 	/**

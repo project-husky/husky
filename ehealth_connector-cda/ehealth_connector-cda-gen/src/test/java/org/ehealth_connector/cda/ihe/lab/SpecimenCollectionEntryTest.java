@@ -16,16 +16,16 @@
  */
 package org.ehealth_connector.cda.ihe.lab;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.xml.xpath.XPathExpressionException;
 
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.mdht.Participant;
 import org.ehealth_connector.common.mdht.ParticipantRole;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 import org.openhealthtools.mdht.uml.hl7.vocab.RoleClassRoot;
 import org.w3c.dom.Document;

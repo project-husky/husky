@@ -16,13 +16,13 @@
  */
 package org.ehealth_connector.xua.hl7v3.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.ehealth_connector.xua.hl7v3.OpenSamlRole;
 import org.ehealth_connector.xua.utilities.impl.InitializerTestHelper;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.opensaml.core.xml.io.UnmarshallingException;
 import org.w3c.dom.Element;
 
@@ -30,7 +30,7 @@ public class RoleUnmarshallerTest extends InitializerTestHelper {
 
 	private Element testDomElement;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		testDomElement = loadXmlDokument("/hl7v3/role.xml");

@@ -16,9 +16,9 @@
  */
 package org.ehealth_connector.valueset.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
 
@@ -29,7 +29,7 @@ import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.LangText;
 import org.ehealth_connector.valueset.enums.ValueSetEntryType;
 import org.ehealth_connector.valueset.enums.ValueSetStatus;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * The Test Class for ValueSet.

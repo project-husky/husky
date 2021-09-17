@@ -16,8 +16,8 @@
  */
 package org.ehealth_connector.cda.ch.lab;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import javax.xml.xpath.XPathExpressionException;
 
@@ -25,7 +25,7 @@ import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.enums.NullFlavor;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Value;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Document;
 
 public class SoasInfoEntryTest extends TestUtils {

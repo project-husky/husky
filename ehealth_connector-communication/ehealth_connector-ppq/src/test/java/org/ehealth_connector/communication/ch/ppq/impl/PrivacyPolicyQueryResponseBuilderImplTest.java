@@ -16,13 +16,13 @@
  */
 package org.ehealth_connector.communication.ch.ppq.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQueryResponse;
 import org.ehealth_connector.communication.ch.ppq.utilities.impl.InitializerTestHelper;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.opensaml.saml.saml2.core.Response;
 import org.opensaml.saml.saml2.core.impl.ResponseBuilder;
 
@@ -32,7 +32,7 @@ public class PrivacyPolicyQueryResponseBuilderImplTest extends InitializerTestHe
 	private String testConsent;
 	private Response testInternalObject;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		builder = new PrivacyPolicyQueryResponseBuilderImpl();
 		testInternalObject = new ResponseBuilder().buildObject();

@@ -16,16 +16,16 @@
  */
 package org.ehealth_connector.xua.serialization.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.ehealth_connector.xua.exceptions.SerializeException;
 import org.ehealth_connector.xua.saml2.Attribute;
 import org.ehealth_connector.xua.saml2.impl.AttributeBuilderImpl;
 import org.ehealth_connector.xua.utilities.impl.AbstractTestHelper;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -36,7 +36,7 @@ public class AttributeSerializerImplTest extends AbstractTestHelper {
 	private Attribute testXmlObject;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		testSerializer = new AttributeSerializerImpl();

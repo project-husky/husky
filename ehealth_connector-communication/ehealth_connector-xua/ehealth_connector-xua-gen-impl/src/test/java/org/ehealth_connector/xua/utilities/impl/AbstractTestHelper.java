@@ -19,7 +19,7 @@ package org.ehealth_connector.xua.utilities.impl;
 import java.util.Calendar;
 import java.util.UUID;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.opensaml.saml.common.xml.SAMLConstants;
 import org.opensaml.saml.saml2.core.NameID;
 
@@ -41,7 +41,7 @@ public abstract class AbstractTestHelper extends InitializerTestHelper {
 	protected String testProtocolBinding;
 	protected String testProviderName;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		testId = UUID.randomUUID().toString();

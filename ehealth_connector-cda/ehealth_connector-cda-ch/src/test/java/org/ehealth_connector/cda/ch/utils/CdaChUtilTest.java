@@ -16,9 +16,9 @@
  */
 package org.ehealth_connector.cda.ch.utils;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.net.URL;
@@ -33,8 +33,8 @@ import org.ehealth_connector.cda.ch.vacd.v140.CdaChVacd;
 import org.ehealth_connector.cda.ch.vacd.v140.enums.SectionsVacd;
 import org.ehealth_connector.cda.utils.CdaUtilMdhtTest;
 import org.ehealth_connector.common.enums.CodeSystems;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.DocumentRoot;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
@@ -50,7 +50,7 @@ public class CdaChUtilTest extends CdaUtilMdhtTest {
 	private SectionsVacd testPrefix;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		testPrefix = SectionsVacd.ALLERGIES_REACTIONS;

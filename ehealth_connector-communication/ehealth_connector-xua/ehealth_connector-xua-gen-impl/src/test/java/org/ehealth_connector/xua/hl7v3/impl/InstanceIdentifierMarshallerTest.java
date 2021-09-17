@@ -16,21 +16,21 @@
  */
 package org.ehealth_connector.xua.hl7v3.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.ehealth_connector.xua.hl7v3.OpenSamlInstanceIdentifier;
 import org.ehealth_connector.xua.utilities.impl.InitializerTestHelper;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.opensaml.core.config.InitializationService;
 import org.opensaml.core.xml.io.MarshallingException;
 import org.w3c.dom.Element;
 
 public class InstanceIdentifierMarshallerTest extends InitializerTestHelper {
 
-	@BeforeClass
+	@BeforeAll
 	public static void setUpBeforeClass() throws Exception {
 		// Initialize the library
 		InitializationService.initialize();
@@ -41,7 +41,7 @@ public class InstanceIdentifierMarshallerTest extends InitializerTestHelper {
 
 	private OpenSamlInstanceIdentifier testXmlObject;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testRoot = "1.2.3.4.5.6.7.8.9";
 		testExtension = "123456789";

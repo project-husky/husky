@@ -16,11 +16,12 @@
  */
 package org.ehealth_connector.communication.xd.storedquery;
 
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.ehealth_connector.communication.testhelper.XdsTestUtils;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openhealthtools.ihe.xds.consumer.storedquery.ObjectType;
 import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameterList;
 
@@ -34,7 +35,7 @@ public class GetRelatedDocumentsQueryTest extends XdsTestUtils {
 	 *
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 	}
 

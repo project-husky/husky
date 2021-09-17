@@ -16,8 +16,8 @@
  */
 package org.ehealth_connector.cda;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
 
@@ -25,7 +25,7 @@ import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.mdht.ReferenceRange;
 import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ReferenceRangeTest extends TestUtils {
 	@Test

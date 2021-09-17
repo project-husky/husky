@@ -16,8 +16,8 @@
  */
 package org.ehealth_connector.communication.ch.ppq.impl.deserialization;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -27,15 +27,15 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeed;
 import org.ehealth_connector.communication.ch.ppq.utilities.impl.InitializerTestHelper;
 import org.ehealth_connector.xua.exceptions.DeserializeException;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-@Ignore
+@Disabled
 public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 
 	private Logger mLogger = LoggerFactory.getLogger(getClass());
@@ -69,7 +69,7 @@ public class PrivacyPolicyFeedDeserialiserTest extends InitializerTestHelper {
 		}
 	}
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testDeserializer = new PrivacyPolicyFeedDeserialiser();
 		testXmlByteArrayAddPol = Files.readAllBytes(Paths.get(

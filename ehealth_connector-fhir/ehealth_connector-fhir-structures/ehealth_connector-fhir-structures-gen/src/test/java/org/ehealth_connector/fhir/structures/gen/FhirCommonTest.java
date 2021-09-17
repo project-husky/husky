@@ -16,10 +16,10 @@
  */
 package org.ehealth_connector.fhir.structures.gen;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.UUID;
 
@@ -28,9 +28,9 @@ import org.ehealth_connector.common.mdht.Identificator;
 import org.hl7.fhir.dstu3.model.CodeableConcept;
 import org.hl7.fhir.dstu3.model.Coding;
 import org.hl7.fhir.dstu3.model.Identifier;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -52,7 +52,7 @@ public class FhirCommonTest {
 	 *
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testSystemOid = "1.2.3.4.5";
 		testOidString = "2.16.840.1.113883.3.72.5.9.2";
@@ -69,7 +69,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#addDocManifestContent(org.hl7.fhir.dstu3.model.DocumentManifest, org.hl7.fhir.dstu3.model.Resource)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testAddDocManifestContent() {
 		fail("Not yet implemented");
 	}
@@ -180,7 +180,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#createObservation()}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testCreateObservation() {
 		fail("Not yet implemented");
 	}
@@ -190,7 +190,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#createObservation(org.hl7.fhir.dstu3.model.CodeableConcept)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testCreateObservationCodeableConcept() {
 		fail("Not yet implemented");
 	}
@@ -212,7 +212,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#fhirAddressToEhcAddress(org.hl7.fhir.dstu3.model.Address)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testFhirAddressToEhcAddress() {
 		fail("Not yet implemented");
 	}
@@ -222,7 +222,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#fhirCodeToEhcCode(org.hl7.fhir.dstu3.model.CodeableConcept)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testFhirCodeToEhcCode() {
 		fail("Not yet implemented");
 	}
@@ -232,7 +232,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#fhirIdentifierToEhcIdentificator(org.hl7.fhir.dstu3.model.Identifier)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testFhirIdentifierToEhcIdentificator() {
 		fail("Not yet implemented");
 	}
@@ -242,7 +242,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#fhirNameToEhcName(org.hl7.fhir.dstu3.model.HumanName)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testFhirNameToEhcName() {
 		fail("Not yet implemented");
 	}
@@ -252,7 +252,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getAuthor(org.hl7.fhir.instance.model.api.IBaseResource)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetAuthorIBaseResource() {
 		fail("Not yet implemented");
 	}
@@ -262,7 +262,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getAuthor(org.hl7.fhir.dstu3.model.Organization)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetAuthorOrganization() {
 		fail("Not yet implemented");
 	}
@@ -272,7 +272,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getAuthor(org.hl7.fhir.dstu3.model.Person)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetAuthorPerson() {
 		fail("Not yet implemented");
 	}
@@ -282,7 +282,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getAuthor(org.hl7.fhir.dstu3.model.Practitioner)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetAuthorPractitioner() {
 		fail("Not yet implemented");
 	}
@@ -292,7 +292,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getAuthor(org.hl7.fhir.dstu3.model.Reference)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetAuthorReference() {
 		fail("Not yet implemented");
 	}
@@ -302,7 +302,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getCommunityPatientId(org.ehealth_connector.common.mdht.Patient, java.lang.String)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetCommunityPatientId() {
 		fail("Not yet implemented");
 	}
@@ -312,7 +312,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getDocumentFilepath(org.hl7.fhir.dstu3.model.DocumentReference)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetDocumentFilepath() {
 		fail("Not yet implemented");
 	}
@@ -322,7 +322,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getFormatCode(org.hl7.fhir.dstu3.model.DocumentReference)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetFormatCode() {
 		fail("Not yet implemented");
 	}
@@ -332,7 +332,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getMetadataLanguage(org.hl7.fhir.dstu3.model.DocumentReference)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetMetadataLanguage() {
 		fail("Not yet implemented");
 	}
@@ -342,7 +342,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getMimeType(org.hl7.fhir.dstu3.model.DocumentReference)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetMimeType() {
 		fail("Not yet implemented");
 	}
@@ -352,7 +352,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getOrganization(org.hl7.fhir.instance.model.api.IBaseResource)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetOrganizationIBaseResource() {
 		fail("Not yet implemented");
 	}
@@ -362,7 +362,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getOrganization(org.hl7.fhir.dstu3.model.Organization)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetOrganizationOrganization() {
 		fail("Not yet implemented");
 	}
@@ -372,7 +372,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getOrganization(org.hl7.fhir.dstu3.model.Reference)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetOrganizationReference() {
 		fail("Not yet implemented");
 	}
@@ -382,7 +382,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getPatient(org.hl7.fhir.dstu3.model.Bundle)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetPatientBundle() {
 		fail("Not yet implemented");
 	}
@@ -392,7 +392,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getPatient(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetPatientDocumentManifest() {
 		fail("Not yet implemented");
 	}
@@ -402,7 +402,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getPatient(org.hl7.fhir.instance.model.api.IBaseResource)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetPatientIBaseResource() {
 		fail("Not yet implemented");
 	}
@@ -412,7 +412,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getPatient(org.hl7.fhir.dstu3.model.Patient)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetPatientPatient() {
 		fail("Not yet implemented");
 	}
@@ -422,7 +422,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getPatient(org.hl7.fhir.dstu3.model.Reference)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetPatientReference() {
 		fail("Not yet implemented");
 	}
@@ -432,7 +432,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getPracticeSettingCode(org.hl7.fhir.dstu3.model.DocumentReference)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetPracticeSettingCode() {
 		fail("Not yet implemented");
 	}
@@ -442,7 +442,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getTelecoms(java.util.List)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetTelecoms() {
 		fail("Not yet implemented");
 	}
@@ -452,7 +452,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#getXmlResource(java.lang.String)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetXmlResource() {
 		fail("Not yet implemented");
 	}
@@ -462,7 +462,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#removeUrnOidPrefix(java.lang.String)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testRemoveUrnOidPrefix() {
 		fail("Not yet implemented");
 	}
@@ -472,7 +472,7 @@ public class FhirCommonTest {
 	 * {@link org.ehealth_connector.fhir.structures.gen.FhirCommon#saveResource(org.slf4j.Logger, java.lang.String, org.hl7.fhir.instance.model.api.IBaseResource, java.lang.String, org.ehealth_connector.fhir.structures.gen.FhirCommon.SaveMode)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testSaveResource() {
 		fail("Not yet implemented");
 	}

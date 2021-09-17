@@ -16,6 +16,21 @@
  */
 package org.ehealth_connector.cda.ch.emed;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.io.Serializable;
+import java.io.StringWriter;
+import java.math.BigInteger;
+import java.util.Date;
+import java.util.List;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBElement;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.namespace.QName;
+
 import org.apache.commons.lang3.StringUtils;
 import org.ehealth_connector.cda.ch.emed.v097.DosageInstructionsEntryDosageChange;
 import org.ehealth_connector.cda.ch.emed.v097.DosageInstructionsStartStopFrequency;
@@ -27,24 +42,31 @@ import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.utils.CdaUtil;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.hl7cdar2.*;
+import org.ehealth_connector.common.hl7cdar2.EIVLEvent;
+import org.ehealth_connector.common.hl7cdar2.EIVLTS;
+import org.ehealth_connector.common.hl7cdar2.INT;
+import org.ehealth_connector.common.hl7cdar2.IVLPQ;
+import org.ehealth_connector.common.hl7cdar2.IVLTS;
+import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
+import org.ehealth_connector.common.hl7cdar2.PIVLTS;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Component3;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040StructuredBody;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040SubstanceAdministration;
+import org.ehealth_connector.common.hl7cdar2.PQ;
+import org.ehealth_connector.common.hl7cdar2.SXCMTS;
+import org.ehealth_connector.common.hl7cdar2.SXPRTS;
+import org.ehealth_connector.common.hl7cdar2.SetOperator;
+import org.ehealth_connector.common.hl7cdar2.StrucDocTable;
+import org.ehealth_connector.common.hl7cdar2.StrucDocTd;
+import org.ehealth_connector.common.hl7cdar2.StrucDocText;
+import org.ehealth_connector.common.hl7cdar2.TS;
+import org.ehealth_connector.common.hl7cdar2.XDocumentSubstanceMood;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.junit.Ignore;
-import org.junit.Test;
-
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBElement;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.namespace.QName;
-import java.io.Serializable;
-import java.io.StringWriter;
-import java.math.BigInteger;
-import java.util.Date;
-import java.util.List;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * <div class="en">Unit Tests for Class EmedChStrucDocTextBuilderV097</div>
@@ -471,7 +493,7 @@ public class EmedChStrucDocTextBuilderV097Test {
 	 * Test is narrative text and references are well created and added to the
 	 * doc
 	 */
-	@Ignore
+	@Disabled
 	@Test
 	public void narrativTextAndReferenceGenerated() {
 

@@ -16,15 +16,15 @@
  */
 package org.ehealth_connector.xua.saml2.impl;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import org.ehealth_connector.xua.saml2.SubjectConfirmationBuilder;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationType;
 
 public class SubjectConfirmationBuilderImplTest {
@@ -38,7 +38,7 @@ public class SubjectConfirmationBuilderImplTest {
 	private GregorianCalendar testNotOnOrAfter;
 	private String testRecepient;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		builder = new SubjectConfirmationBuilderImpl();
 

@@ -16,15 +16,15 @@
  */
 package org.ehealth_connector.xua.saml2.impl;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Calendar;
 import java.util.UUID;
 
 import org.ehealth_connector.xua.saml2.AuthnStatement;
 import org.ehealth_connector.xua.saml2.AuthnStatementBuilder;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AuthnStatementBuilderImplTest {
 
@@ -34,7 +34,7 @@ public class AuthnStatementBuilderImplTest {
 	private String testSessionIndex;
 	private Calendar testSessionNotOnOrAfter;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		builder = new AuthnStatementBuilderImpl();
 		final Calendar cal = Calendar.getInstance();

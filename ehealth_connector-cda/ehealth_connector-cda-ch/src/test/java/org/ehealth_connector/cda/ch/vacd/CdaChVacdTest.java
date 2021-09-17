@@ -16,10 +16,10 @@
  */
 package org.ehealth_connector.cda.ch.vacd;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -70,9 +70,9 @@ import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
 import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
 import org.ehealth_connector.common.utils.DateUtilMdht;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.CdaChVacdV1;
 import org.openhealthtools.mdht.uml.cda.ch.ChPackage;
@@ -424,7 +424,7 @@ public class CdaChVacdTest extends TestUtils {
 		assertTrue(vacdDeserialized != null);
 	}
 
-	@Before
+	@BeforeEach
 	public void initTestData() {
 
 		// Dates
@@ -722,8 +722,8 @@ public class CdaChVacdTest extends TestUtils {
 	}
 
 	public void testDocMetadata(String constructorName, CdaChVacd doc) {
-		assertNotNull(constructorName + " Constructor - DocumentRoot is null", doc.getDocRoot());
-		assertNotNull(constructorName + " Constructor - Document is null", doc.getDoc());
+		assertNotNull(doc.getDocRoot(), constructorName + " Constructor - DocumentRoot is null");
+		assertNotNull(doc.getDoc(), constructorName + " Constructor - Document is null");
 		assertEquals(constructorName + " Constructor - Wrong Language Code set", "de-CH",
 				doc.getDoc().getLanguageCode().getCode());
 	}
@@ -779,7 +779,7 @@ public class CdaChVacdTest extends TestUtils {
 
 	// 1
 	@Test
-	@Ignore
+	@Disabled
 	public void testImmunizationSetterGetter() {
 		final Immunization i = new Immunization();
 

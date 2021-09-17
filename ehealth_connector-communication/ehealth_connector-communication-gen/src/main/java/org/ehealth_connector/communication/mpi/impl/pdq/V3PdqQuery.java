@@ -14,12 +14,13 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.communication.mpi.impl;
+package org.ehealth_connector.communication.mpi.impl.pdq;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.ehealth_connector.communication.mpi.MpiQuery;
+import org.ehealth_connector.communication.utils.PixPdqV3Utils;
 import org.ehealth_connector.fhir.structures.gen.FhirCommon;
 import org.hl7.fhir.dstu3.model.ContactPoint;
 import org.hl7.fhir.dstu3.model.ContactPoint.ContactPointSystem;
@@ -27,14 +28,10 @@ import org.hl7.fhir.dstu3.model.ContactPoint.ContactPointUse;
 import org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender;
 import org.hl7.fhir.dstu3.model.HumanName;
 import org.hl7.fhir.dstu3.model.Identifier;
-import org.hl7.v3.PRPAMT201306UV02PatientTelecom;
-import org.hl7.v3.TEL;
-import org.hl7.v3.V3Factory;
-import org.openhealthtools.ihe.common.hl7v3.client.PixPdqV3Utils;
-import org.openhealthtools.ihe.pdq.consumer.v3.V3PdqConsumerQuery;
-import org.openhealthtools.ihe.pdq.consumer.v3.V3PdqConsumerResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import net.ihe.gazelle.hl7v3.prpamt201306UV02.PRPAMT201306UV02PatientTelecom;
 
 /**
  * The class V3PdqQuery implements the MpiQuery functionality for the Patient
@@ -119,26 +116,26 @@ public class V3PdqQuery implements MpiQuery {
 	 * @return the query object
 	 */
 	@Override
-	public MpiQuery addPatientAddress(org.hl7.fhir.dstu3.model.Address Address) {
-		if (Address == null) {
+	public MpiQuery addPatientAddress(org.hl7.fhir.dstu3.model.Address address) {
+		if (address == null) {
 			log.error("Address not specified");
 			return this;
 		}
 
 		String addressStreetAddress = null;
-		if (Address.getLine().size() > 0) {
-			addressStreetAddress = Address.getLine().get(0).getValueAsString();
+		if (!address.getLine().isEmpty()) {
+			addressStreetAddress = address.getLine().get(0).getValueAsString();
 		}
 
 		String addressOtherDesignation = null;
-		if (Address.getLine().size() > 1) {
-			addressOtherDesignation = Address.getLine().get(1).getValueAsString();
+		if (address.getLine().size() > 1) {
+			addressOtherDesignation = address.getLine().get(1).getValueAsString();
 		}
 
 		// H, W WP
 		String addressType = null;
-		if ((Address.getUseElement() != null) && (Address.getUseElement().getValue() != null)) {
-			switch (Address.getUseElement().getValue()) {
+		if ((address.getUseElement() != null) && (address.getUseElement().getValue() != null)) {
+			switch (address.getUseElement().getValue()) {
 			case HOME:
 				addressType = "H";
 				break;
@@ -149,8 +146,8 @@ public class V3PdqQuery implements MpiQuery {
 				break;
 			}
 		}
-		v3PdqConsumerQuery.addPatientAddress(addressStreetAddress, Address.getCity(), null,
-				Address.getState(), Address.getCountry(), Address.getPostalCode(),
+		v3PdqConsumerQuery.addPatientAddress(addressStreetAddress, address.getCity(), null, address.getState(),
+				address.getCountry(), address.getPostalCode(),
 				addressOtherDesignation, addressType);
 		return this;
 	}
@@ -163,13 +160,13 @@ public class V3PdqQuery implements MpiQuery {
 	 * @return the query object
 	 */
 	@Override
-	public MpiQuery addPatientIdentifier(Identifier Identifier) {
-		if ((Identifier != null) && (Identifier.getSystem().length() > 8)
-				&& (Identifier.getSystem().startsWith(FhirCommon.oidUrn))) {
-			final String oid = FhirCommon.removeUrnOidPrefix(Identifier.getSystem());
-			v3PdqConsumerQuery.addPatientID(oid, Identifier.getValue(), "");
-		} else {
-			v3PdqConsumerQuery.addPatientID(Identifier.getSystem(), Identifier.getValue(), "");
+	public MpiQuery addPatientIdentifier(Identifier identifier) {
+		if (identifier != null && identifier.getSystem() != null && identifier.getSystem().length() > 8
+				&& identifier.getSystem().startsWith(FhirCommon.oidUrn)) {
+			final String oid = FhirCommon.removeUrnOidPrefix(identifier.getSystem());
+			v3PdqConsumerQuery.addPatientID(oid, identifier.getValue(), "");
+		} else if (identifier != null) {
+			v3PdqConsumerQuery.addPatientID(identifier.getSystem(), identifier.getValue(), "");
 		}
 		return this;
 	}
@@ -200,26 +197,22 @@ public class V3PdqQuery implements MpiQuery {
 	 * @return the query object
 	 */
 	@Override
-	public MpiQuery addPatientTelecom(ContactPoint ContactPoint) {
-		if (ContactPoint == null) {
+	public MpiQuery addPatientTelecom(ContactPoint contactPoint) {
+		if (contactPoint == null) {
 			log.error("ContactPoint not specified");
 			return this;
 		}
-		if (ContactPointSystem.PHONE.equals(ContactPoint.getSystemElement().getValue())) {
-			String use = "";
-			if (ContactPointUse.HOME.equals(ContactPoint.getUseElement().getValue())) {
+		if (ContactPointSystem.PHONE.equals(contactPoint.getSystemElement().getValue())) {
+			var use = "";
+			if (ContactPointUse.HOME.equals(contactPoint.getUseElement().getValue())) {
 				use = "HP";
-			} else if (ContactPointUse.WORK.equals(ContactPoint.getUseElement().getValue())) {
+			} else if (ContactPointUse.WORK.equals(contactPoint.getUseElement().getValue())) {
 				use = "WP";
 			}
-			// else if
-			// (ContactPointUse.MOBILE.equals(ContactPoint.getUseElement().getValue()))
-			// {
-			// }
-			addPatientTelecom(ContactPoint.getValue(), use);
+			addPatientTelecom(contactPoint.getValue(), use);
 		} else {
 			log.error(
-					"no phone specified as telecom " + ContactPoint.getSystemElement().getValue());
+					"no phone specified as telecom {}", contactPoint.getSystemElement().getValue());
 		}
 		return this;
 	}
@@ -234,11 +227,10 @@ public class V3PdqQuery implements MpiQuery {
 	 *            ("HP" or "WP"
 	 */
 	private void addPatientTelecom(String telecom, String type) {
-		final PRPAMT201306UV02PatientTelecom patientTel = V3Factory.eINSTANCE
-				.createPRPAMT201306UV02PatientTelecom();
-		final TEL tel = PixPdqV3Utils.createTEL(telecom, type);
+		final var patientTel = new PRPAMT201306UV02PatientTelecom();
+		final var tel = PixPdqV3Utils.createTEL(telecom, type);
 		patientTel.getValue().add(tel);
-		patientTel.setSemanticsText(PixPdqV3Utils.createST1("Patient.telecom"));
+		patientTel.setSemanticsText(PixPdqV3Utils.createST("Patient.telecom"));
 		v3PdqConsumerQuery.getParameterList().getPatientTelecom().add(patientTel);
 	}
 
@@ -269,7 +261,7 @@ public class V3PdqQuery implements MpiQuery {
 	 *
 	 * @return true cancel next query
 	 */
-	protected boolean doCancelQuery() {
+	public boolean doCancelQuery() {
 		return cancelQuery;
 	}
 
@@ -278,7 +270,7 @@ public class V3PdqQuery implements MpiQuery {
 	 *
 	 * @return true continue next query
 	 */
-	protected boolean doContinueQuery() {
+	public boolean doContinueQuery() {
 		return continueQuery;
 	}
 
@@ -287,7 +279,7 @@ public class V3PdqQuery implements MpiQuery {
 	 *
 	 * @return the last pdq consumer response
 	 */
-	protected V3PdqConsumerResponse getLastPdqConsumerResponse() {
+	public V3PdqConsumerResponse getLastPdqConsumerResponse() {
 		return lastPdqConsumerResponse;
 	}
 
@@ -297,7 +289,7 @@ public class V3PdqQuery implements MpiQuery {
 	 *
 	 * @return the page count
 	 */
-	protected int getPageCount() {
+	public int getPageCount() {
 		return pageCount;
 	}
 
@@ -316,7 +308,7 @@ public class V3PdqQuery implements MpiQuery {
 	 * @param lastPdqConsumerResponse
 	 *            the new last pdq consumer response
 	 */
-	protected void setLastPdqConsumerResponse(V3PdqConsumerResponse lastPdqConsumerResponse) {
+	public void setLastPdqConsumerResponse(V3PdqConsumerResponse lastPdqConsumerResponse) {
 		this.lastPdqConsumerResponse = lastPdqConsumerResponse;
 	}
 
@@ -348,7 +340,7 @@ public class V3PdqQuery implements MpiQuery {
 			log.error("date not specified");
 			return this;
 		}
-		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		final var sdf = new SimpleDateFormat("yyyyMMdd");
 		v3PdqConsumerQuery.setPatientDateOfBirth(sdf.format(date));
 		return this;
 	}

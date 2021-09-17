@@ -16,14 +16,14 @@
  */
 package org.ehealth_connector.xua.saml2.impl;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.ehealth_connector.xua.hl7v3.Role;
 import org.ehealth_connector.xua.hl7v3.impl.RoleBuilder;
 import org.ehealth_connector.xua.saml2.Attribute;
 import org.ehealth_connector.xua.saml2.AttributeBuilder;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AttributeBuilderImplTest {
 
@@ -33,7 +33,7 @@ public class AttributeBuilderImplTest {
 
 	public AttributeBuilder testBuilder;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testBuilder = new AttributeBuilderImpl();
 		testAttributeName = "My Attribute Name";

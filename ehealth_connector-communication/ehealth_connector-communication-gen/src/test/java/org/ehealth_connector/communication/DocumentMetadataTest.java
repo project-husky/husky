@@ -17,8 +17,9 @@
 
 package org.ehealth_connector.communication;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.ehealth_connector.cda.testhelper.TestUtils;
 import org.ehealth_connector.common.communication.DocumentMetadata;
@@ -26,8 +27,8 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Patient;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 import org.openhealthtools.ihe.xds.metadata.LocalizedStringType;
 
@@ -37,7 +38,7 @@ public class DocumentMetadataTest extends TestUtils {
 	private LocalizedStringType l;
 	private DocumentEntryType m = d.getMdhtDocumentEntryType();
 
-	@Before
+	@BeforeEach
 	public void initTestData() {
 		super.init();
 		// Test String with German, French and Italic special characters

@@ -16,9 +16,9 @@
  */
 package org.ehealth_connector.communication.xd.xdm;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -27,11 +27,13 @@ import java.util.Date;
 
 import org.ehealth_connector.communication.ConvenienceCommunication;
 import org.ehealth_connector.communication.testhelper.XdmTestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test of class XdmContents
  */
+@Disabled
 public class XdmContentsTest extends XdmTestUtils {
 
 	public static final String XDM_FILE_PATH = "/docConsumer/xdm.zip";

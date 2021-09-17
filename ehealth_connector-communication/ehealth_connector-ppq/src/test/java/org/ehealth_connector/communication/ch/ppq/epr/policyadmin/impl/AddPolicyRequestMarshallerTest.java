@@ -16,13 +16,13 @@
  */
 package org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.OpenSamlAddPolicyRequest;
 import org.ehealth_connector.communication.ch.ppq.utilities.impl.InitializerTestHelper;
 import org.ehealth_connector.xua.saml2.impl.AssertionBuilderImpl;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.opensaml.core.xml.io.Marshaller;
@@ -36,7 +36,7 @@ public class AddPolicyRequestMarshallerTest extends InitializerTestHelper {
 
 	private OpenSamlAddPolicyRequest testAddPolicyRequest;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		final Element testAssertionXmlElement = loadXmlDokument(
 				"/ch-ppq/add_policy_request_assertion_only.xml");

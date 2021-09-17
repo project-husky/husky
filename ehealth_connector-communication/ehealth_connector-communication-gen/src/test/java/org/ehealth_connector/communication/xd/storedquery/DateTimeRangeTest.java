@@ -16,16 +16,17 @@
  */
 package org.ehealth_connector.communication.xd.storedquery;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
 
 import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.DateUtilMdht;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openhealthtools.ihe.xds.consumer.query.MalformedQueryException;
 
 /**
@@ -45,7 +46,7 @@ public class DateTimeRangeTest {
 	 *
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testDate1 = DateUtil.parseDateyyyyMMddHHmmss("19800521022211");
 		testDate2 = DateUtil.parseDateyyyyMMddHHmmss("20150521133459");

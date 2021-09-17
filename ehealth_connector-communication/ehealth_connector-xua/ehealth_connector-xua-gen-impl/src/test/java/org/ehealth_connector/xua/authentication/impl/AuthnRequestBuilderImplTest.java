@@ -16,15 +16,15 @@
  */
 package org.ehealth_connector.xua.authentication.impl;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.Calendar;
 import java.util.UUID;
 
 import org.ehealth_connector.xua.authentication.AuthnRequest;
 import org.ehealth_connector.xua.authentication.AuthnRequestBuilder;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.opensaml.saml.common.xml.SAMLConstants;
 import org.opensaml.saml.saml2.core.NameID;
 
@@ -45,7 +45,7 @@ public class AuthnRequestBuilderImplTest {
 	private String testProtocolBinding;
 	private String testProviderName;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testBuilder = new AuthnRequestBuilderImpl();
 		testId = UUID.randomUUID().toString();

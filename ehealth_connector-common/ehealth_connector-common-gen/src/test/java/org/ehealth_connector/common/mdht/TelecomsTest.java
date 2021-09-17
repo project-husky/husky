@@ -16,13 +16,13 @@
  */
 package org.ehealth_connector.common.mdht;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.ehealth_connector.common.enums.TelecomAddressUse;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test of class Telecoms
@@ -42,7 +42,7 @@ public class TelecomsTest {
 	 *
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		numS1 = "1231425352";
 		numS2 = "987653";
@@ -121,7 +121,7 @@ public class TelecomsTest {
 	 * .
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testTelecomsEListOfTEL() {
 		fail("Not yet implemented");
 	}

@@ -16,10 +16,10 @@
  */
 package org.ehealth_connector.common.ch;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
 
@@ -33,8 +33,8 @@ import org.ehealth_connector.common.mdht.Name;
 import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
 import org.ehealth_connector.common.testhelpers.AbstractTestHelper;
 import org.ehealth_connector.common.utils.DateUtilMdht;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class AuthorChTest {
 
@@ -87,7 +87,7 @@ public class AuthorChTest {
 	 *
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testCodeSystem1 = CodeSystems.GLN;
 		testId1 = "1.2.3.4.5.6.7.8.9.0";
