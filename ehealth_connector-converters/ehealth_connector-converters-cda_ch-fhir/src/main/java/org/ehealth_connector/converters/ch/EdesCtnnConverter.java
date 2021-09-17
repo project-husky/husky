@@ -26,7 +26,7 @@ import org.ehealth_connector.cda.ch.PastProblemConcern;
 import org.ehealth_connector.cda.ch.edes.CdaChEdesCtnn;
 import org.ehealth_connector.cda.ch.edes.VitalSignObservation;
 import org.ehealth_connector.cda.ch.edes.VitalSignsOrganizer;
-import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Value;
@@ -190,7 +190,7 @@ public class EdesCtnnConverter extends AbstractCdaChV12FhirConverter {
 									.getExtensionsByUrl(FhirCommon.urnUseAsAuthor);
 							if (!extensions2.isEmpty()
 									&& (listEntry.getItem().getResource() instanceof Person)) {
-								final org.ehealth_connector.common.mdht.Author author = FhirCommon
+								final org.ehealth_connector.common.Author author = FhirCommon
 										.getAuthor((Person) listEntry.getItem().getResource());
 								final TimeType timeStamp2 = ((TimeType) extensions2.get(0)
 										.getValue());

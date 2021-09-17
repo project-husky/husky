@@ -16,10 +16,9 @@
  */
 package org.ehealth_connector.common.mdht;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.SC;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040AuthoringDevice;
+import org.ehealth_connector.common.hl7cdar2.SC;
+
 
 /**
  * The Class AuthoringDevice. The element represents a system or device which
@@ -28,13 +27,13 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.SC;
 public class AuthoringDevice {
 
 	/** The MDHT authoring device object. */
-	private org.openhealthtools.mdht.uml.cda.AuthoringDevice mAuthoringDevice;
+	private POCDMT000040AuthoringDevice mAuthoringDevice;
 
 	/**
 	 * Instantiates a new authoring device.
 	 */
 	public AuthoringDevice() {
-		mAuthoringDevice = CDAFactory.eINSTANCE.createAuthoringDevice();
+		mAuthoringDevice = new POCDMT000040AuthoringDevice();
 	}
 
 	/**
@@ -43,7 +42,7 @@ public class AuthoringDevice {
 	 * @param mdht
 	 *            the mdht
 	 */
-	public AuthoringDevice(org.openhealthtools.mdht.uml.cda.AuthoringDevice mdht) {
+	public AuthoringDevice(POCDMT000040AuthoringDevice mdht) {
 		mAuthoringDevice = mdht;
 	}
 
@@ -59,23 +58,14 @@ public class AuthoringDevice {
 	}
 
 	/**
-	 * Copy.
-	 *
-	 * @return the org.openhealthtools.mdht.uml.cda. authoring device
-	 */
-	public org.openhealthtools.mdht.uml.cda.AuthoringDevice copy() {
-		return EcoreUtil.copy(mAuthoringDevice);
-	}
-
-	/**
 	 * Gets the manufacturer name.
 	 *
 	 * @return the manufacturer name
 	 */
 	public String getManufacturerName() {
 		if ((mAuthoringDevice.getManufacturerModelName() != null)
-				&& (mAuthoringDevice.getManufacturerModelName().getText() != null)) {
-			return mAuthoringDevice.getManufacturerModelName().getText();
+				&& (mAuthoringDevice.getManufacturerModelName().xmlContent != null)) {
+			return mAuthoringDevice.getManufacturerModelName().xmlContent;
 		}
 		return null;
 	}
@@ -85,7 +75,7 @@ public class AuthoringDevice {
 	 *
 	 * @return the mdht
 	 */
-	public org.openhealthtools.mdht.uml.cda.AuthoringDevice getMdht() {
+	public POCDMT000040AuthoringDevice getMdht() {
 		return mAuthoringDevice;
 	}
 
@@ -96,8 +86,8 @@ public class AuthoringDevice {
 	 */
 	public String getSoftwareName() {
 		if ((mAuthoringDevice.getSoftwareName() != null)
-				&& (mAuthoringDevice.getSoftwareName().getText() != null)) {
-			return mAuthoringDevice.getSoftwareName().getText();
+				&& (mAuthoringDevice.getSoftwareName().xmlContent != null)) {
+			return mAuthoringDevice.getSoftwareName().xmlContent;
 		}
 		return null;
 	}
@@ -109,8 +99,8 @@ public class AuthoringDevice {
 	 *            the new manufacturer name
 	 */
 	public void setManufacturerName(String name) {
-		final SC sc = DatatypesFactory.eINSTANCE.createSC();
-		sc.addText(name);
+		final var sc = new SC();
+		sc.xmlContent = name;
 		mAuthoringDevice.setManufacturerModelName(sc);
 	}
 
@@ -121,8 +111,8 @@ public class AuthoringDevice {
 	 *            the new software name
 	 */
 	public void setSoftwareName(String name) {
-		final SC sc = DatatypesFactory.eINSTANCE.createSC();
-		sc.addText(name);
+		final var sc = new SC();
+		sc.xmlContent = name;
 		mAuthoringDevice.setSoftwareName(sc);
 	}
 }

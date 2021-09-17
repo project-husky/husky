@@ -19,7 +19,7 @@ package org.ehealth_connector.cda.ihe.lab;
 import org.ehealth_connector.cda.BaseVitalSignObservation;
 import org.ehealth_connector.cda.MdhtOrganizerFacade;
 import org.ehealth_connector.cda.utils.CdaUtilMdht;
-import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.openhealthtools.mdht.uml.cda.ihe.IHEFactory;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;

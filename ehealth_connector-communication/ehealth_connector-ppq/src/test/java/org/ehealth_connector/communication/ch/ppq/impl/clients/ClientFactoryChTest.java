@@ -16,14 +16,14 @@
  */
 package org.ehealth_connector.communication.ch.ppq.impl.clients;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.ehealth_connector.communication.ch.ppq.api.clients.PpfClient;
 import org.ehealth_connector.communication.ch.ppq.api.clients.PpqClient;
 import org.ehealth_connector.communication.ch.ppq.api.config.PpClientConfig;
 import org.ehealth_connector.communication.ch.ppq.impl.config.PpClientConfigBuilderImpl;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Testclass to the the CH specific client factory.
@@ -36,7 +36,7 @@ public class ClientFactoryChTest {
 	/**
 	 * Setup test parameters
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testPortName = "My Port Name";
 		testPpClientConfiguration = new PpClientConfigBuilderImpl().portName(testPortName).create();

@@ -16,13 +16,13 @@
  */
 package org.ehealth_connector.cda.ch.lab.lrep;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.utils.DateUtilMdht;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit Tests for Class SpecimenCollectionEntry.
@@ -48,17 +48,16 @@ public class SpecimenCollectionEntryTest {
 		sce.setSpecimenCollectionApproachSiteCodeOriginalText("Test site");
 
 		for (Identificator id : sce.getTemplateIds()) {
-			assertNull("Extensions not allowd for template ids", id.getExtension());
+			assertNull(id.getExtension(), "Extensions not allowd for template ids");
 			if (idIhe.equals(id.getRoot()))
 				idFoundIhe = true;
 			if (idChPalm.equals(id.getRoot()))
 				idFoundChPalm = true;
 		}
 
-		assertTrue(cutName + " templateID defined by IHE XD-LAB is missing", idFoundIhe);
-		assertTrue(cutName + " templateID defined by ART DECOR CH-PALM is missing", idFoundChPalm);
-		assertFalse(cutName + " contains more templateIds than expected",
-				(sce.getTemplateIds().size() > 2));
+		assertTrue(idFoundIhe, cutName + " templateID defined by IHE XD-LAB is missing");
+		assertTrue(idFoundChPalm, cutName + " templateID defined by ART DECOR CH-PALM is missing");
+		assertFalse((sce.getTemplateIds().size() > 2), cutName + " contains more templateIds than expected");
 	}
 
 }

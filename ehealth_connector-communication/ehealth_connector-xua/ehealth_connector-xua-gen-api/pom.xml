@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>org.ehealth_connector.xua</groupId>
 	<artifactId>ehealth_connector-xua</artifactId>
-		<version>1.9-SNAPSHOT</version>
+		<version>2.0-ALPHA</version>
 	</parent>
 
 	<dependencies>
@@ -17,8 +17,8 @@
 	
 		<!-- test stuff -->
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

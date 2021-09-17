@@ -16,9 +16,8 @@
  */
 package org.ehealth_connector.common.mdht.enums;
 
-import org.ehealth_connector.common.mdht.Code;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.hl7cdar2.CS;
 
 /*
 *<div class="de">Die Codes beschreiben ob und wie ein Teilnehmer das Dokument unterschreibt</div>
@@ -155,8 +154,7 @@ public enum Signature {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
-		return ehcCode;
+		return new Code(code, CODE_SYSTEM_OID, displayName);
 	}
 
 	/**
@@ -196,7 +194,7 @@ public enum Signature {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CS getCS() {
-		final CS cs = DatatypesFactory.eINSTANCE.createCS();
+		final var cs = new CS();
 		cs.setCode(code);
 		return cs;
 	}

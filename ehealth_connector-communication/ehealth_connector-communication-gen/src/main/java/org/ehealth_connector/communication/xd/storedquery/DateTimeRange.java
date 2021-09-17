@@ -16,12 +16,14 @@
  */
 package org.ehealth_connector.communication.xd.storedquery;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 
 import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.ehealth_connector.common.utils.DateUtilMdht;
-import org.openhealthtools.ihe.xds.consumer.query.MalformedQueryException;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.TimeRange;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp.Precision;
 
 /**
  * This class represents a date and time range
@@ -29,26 +31,22 @@ import org.openhealthtools.ihe.xds.consumer.query.MalformedQueryException;
 public class DateTimeRange {
 
 	/** the oht date time range */
-	private org.openhealthtools.ihe.xds.consumer.query.DateTimeRange ohtDtr;
+	private org.openehealth.ipf.commons.ihe.xds.core.metadata.TimeRange ipfDtr;
+	DateTimeRangeAttributes dateTimeRangeAttribute;
 
 	/**
 	 * Constructs a new DateTimeRange
 	 *
-	 * @param name
-	 *            The XDS metadata attribute to which this DateTimeRange belongs
-	 *            to (CreationTime, ServiceStartTime, ServiceStopTime)
-	 * @param from
-	 *            The point in time where this range starts
-	 * @param to
-	 *            The point in time where this range ends
+	 * @param name The XDS metadata attribute to which this DateTimeRange belongs to
+	 *             (CreationTime, ServiceStartTime, ServiceStopTime)
+	 * @param from The point in time where this range starts
+	 * @param to   The point in time where this range ends
 	 */
 	public DateTimeRange(DateTimeRangeAttributes name, Date from, Date to) {
-		try {
-			ohtDtr = new org.openhealthtools.ihe.xds.consumer.query.DateTimeRange(name.getName(),
-					DateUtilMdht.format(from), DateUtilMdht.format(to));
-		} catch (final MalformedQueryException e) {
-			e.printStackTrace();
-		}
+		ipfDtr = new TimeRange();
+		ipfDtr.setFrom(DateUtil.formatDateTimeTzon(from));
+		ipfDtr.setTo(DateUtil.formatDateTimeTzon(to));
+		dateTimeRangeAttribute = name;
 	}
 
 	/**
@@ -56,8 +54,8 @@ public class DateTimeRange {
 	 *
 	 * @return the starting point
 	 */
-	public Date getFrom() {
-		return DateUtil.parseDateyyyyMMddHHmmss(ohtDtr.getFrom());
+	public ZonedDateTime getFrom() {
+		return ipfDtr.getFrom().getDateTime();
 	}
 
 	/**
@@ -66,7 +64,7 @@ public class DateTimeRange {
 	 * @return the start point
 	 */
 	public String getFromAsUsFormattedString() {
-		return ohtDtr.getFrom();
+		return DateUtil.formatDateTimeTzon(ipfDtr.getFrom().getDateTime());
 	}
 
 	/**
@@ -74,8 +72,8 @@ public class DateTimeRange {
 	 *
 	 * @return the DateTimeRange
 	 */
-	public org.openhealthtools.ihe.xds.consumer.query.DateTimeRange getOhtDateTimeRange() {
-		return this.ohtDtr;
+	public org.openehealth.ipf.commons.ihe.xds.core.metadata.TimeRange getOhtDateTimeRange() {
+		return this.ipfDtr;
 	}
 
 	/**
@@ -83,8 +81,8 @@ public class DateTimeRange {
 	 *
 	 * @return the end point
 	 */
-	public Date getTo() {
-		return DateUtil.parseDateyyyyMMddHHmmss(ohtDtr.getTo());
+	public ZonedDateTime getTo() {
+		return ipfDtr.getTo().getDateTime();
 	}
 
 	/**
@@ -93,26 +91,46 @@ public class DateTimeRange {
 	 * @return the end point
 	 */
 	public String getToAsUsFormattedString() {
-		return ohtDtr.getTo();
+		return DateUtil.formatDateTimeTzon(ipfDtr.getTo().getDateTime());
 	}
 
 	/**
 	 * Sets the point in time where this range starts
 	 *
-	 * @param from
-	 *            the starting point
+	 * @param from the starting point
 	 */
 	public void setFrom(Date from) {
-		ohtDtr.setFrom(DateUtilMdht.format(from));
+		ipfDtr.setFrom(DateUtil.formatDateTimeTzon(from));
 	}
 
 	/**
 	 * Sets the point in time where this range ends
 	 *
-	 * @param to
-	 *            the end point
+	 * @param to the end point
 	 */
 	public void setTo(Date to) {
-		ohtDtr.setTo(DateUtilMdht.format(to));
+		ipfDtr.setTo(DateUtil.formatDateTimeTzon(to));
+	}
+
+	/**
+	 * Sets the point in time where this range starts
+	 *
+	 * @param from the starting point
+	 */
+	public void setFrom(ZonedDateTime from, Precision precision) {
+		ipfDtr.setFrom(new Timestamp(from, precision));
+	}
+
+	/**
+	 * Sets the point in time where this range ends
+	 *
+	 * @param to the end point
+	 */
+	public void setTo(ZonedDateTime to, Precision precision) {
+		ipfDtr.setTo(new Timestamp(to, precision));
+	}
+
+	public DateTimeRangeAttributes getDateTimeRangeAttribute() {
+		return dateTimeRangeAttribute;
 	}
 }

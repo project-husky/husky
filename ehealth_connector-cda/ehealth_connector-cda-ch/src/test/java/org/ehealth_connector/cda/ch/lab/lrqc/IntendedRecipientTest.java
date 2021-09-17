@@ -16,12 +16,12 @@
  */
 package org.ehealth_connector.cda.ch.lab.lrqc;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.QualabQcc;
 import org.ehealth_connector.cda.testhelper.TestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class IntendedRecipientTest extends TestUtils {
 	@Test

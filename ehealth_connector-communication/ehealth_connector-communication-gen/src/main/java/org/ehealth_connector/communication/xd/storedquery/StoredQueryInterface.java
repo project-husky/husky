@@ -16,15 +16,17 @@
  */
 package org.ehealth_connector.communication.xd.storedquery;
 
+import org.openehealth.ipf.commons.ihe.xds.core.requests.query.Query;
+
 /**
  * Interface for convenience stored queries
  */
 public interface StoredQueryInterface {
 
 	/**
-	 * Gets the OHT StoredQuery object, which is being wrapped by this class
+	 * Gets the IPF Query object, which is being wrapped by this class
 	 *
-	 * @return the OHT StoredQuery
+	 * @return the IPF Query
 	 */
-	public org.openhealthtools.ihe.xds.consumer.storedquery.StoredQuery getOhtStoredQuery();
+	public Query getIpfQuery();
 }

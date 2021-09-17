@@ -16,16 +16,16 @@
  */
 package org.ehealth_connector.xua.saml2.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import java.util.UUID;
 
 import org.ehealth_connector.xua.saml2.Response;
 import org.joda.time.DateTime;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ResponseBuilderImplTest {
 
@@ -34,7 +34,7 @@ public class ResponseBuilderImplTest {
 	private String testId;
 	private DateTime testIssueInstant;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		responseBuilder = new ResponseBuilderImpl();
 

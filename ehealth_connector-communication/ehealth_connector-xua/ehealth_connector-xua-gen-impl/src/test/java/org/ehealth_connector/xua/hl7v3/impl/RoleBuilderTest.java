@@ -16,11 +16,11 @@
  */
 package org.ehealth_connector.xua.hl7v3.impl;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.ehealth_connector.xua.hl7v3.Role;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * <!-- @formatter:off -->
@@ -43,7 +43,7 @@ public class RoleBuilderTest {
 	 * @throws java.lang.Exception
 	 * <!-- @formatter:on -->
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 	}
 

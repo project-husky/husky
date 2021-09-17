@@ -42,8 +42,8 @@ import org.ehealth_connector.cda.ch.textbuilder.ProblemConcernEntryChTextBuilder
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
 import org.ehealth_connector.cda.enums.ProblemsSpecialConditions;
 import org.ehealth_connector.cda.textbuilder.SimpleTextBuilder;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.utils.DateUtilMdht;

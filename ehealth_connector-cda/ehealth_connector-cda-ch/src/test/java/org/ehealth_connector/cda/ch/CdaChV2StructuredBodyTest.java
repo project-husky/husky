@@ -16,9 +16,9 @@
  */
 package org.ehealth_connector.cda.ch;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.util.Date;
@@ -28,19 +28,19 @@ import org.ehealth_connector.cda.DataEnterer;
 import org.ehealth_connector.cda.Section;
 import org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
+import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Patient;
+import org.ehealth_connector.common.Person;
 import org.ehealth_connector.common.ch.enums.ConfidentialityCode;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Name;
 import org.ehealth_connector.common.mdht.Organization;
-import org.ehealth_connector.common.mdht.Patient;
-import org.ehealth_connector.common.mdht.Person;
 import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
 import org.ehealth_connector.common.mdht.enums.ParticipantType;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.openhealthtools.mdht.uml.cda.ch.ChFactory;
 
 /**
@@ -55,9 +55,9 @@ public class CdaChV2StructuredBodyTest {
 	 * Test method for
 	 * {@link org.ehealth_connector.cda.AbstractCda#addAuthenticator(org.openhealthtools.mdht.uml.cda.Authenticator)}
 	 * and {@link org.ehealth_connector.cda.AbstractCda#getAuthenticators()} and
-	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#addAuthenticator(org.ehealth_connector.common.mdht.Author)}
+	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#addAuthenticator(org.ehealth_connector.common.Author)}
 	 * and
-	 * {@link org.ehealth_connector.cda.AbstractCda#addAuthenticator(org.ehealth_connector.common.mdht.Person, java.util.Date)}
+	 * {@link org.ehealth_connector.cda.AbstractCda#addAuthenticator(org.ehealth_connector.common.Person, java.util.Date)}
 	 * and
 	 * {@link org.ehealth_connector.cda.AbstractCda#getAuthenticatorsAsAuthor()}.
 	 *
@@ -86,7 +86,7 @@ public class CdaChV2StructuredBodyTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#addAuthor(org.ehealth_connector.common.mdht.Author)}
+	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#addAuthor(org.ehealth_connector.common.Author)}
 	 * and {@link org.ehealth_connector.cda.AbstractCda#getAuthor()} and
 	 * {@link org.ehealth_connector.cda.AbstractCda#getAuthors()}.
 	 */
@@ -295,7 +295,7 @@ public class CdaChV2StructuredBodyTest {
 		cda.addTemplateId(id2);
 
 		for (Identificator id : cda.getTemplateIds()) {
-			assertNull("Extensions not allowd for template ids", id.getExtension());
+			assertNull(id.getExtension(), "Extensions not allowd for template ids");
 			if (id1.getRoot().equals(id.getRoot()))
 				id1Found = true;
 			if (id2.getRoot().equals(id.getRoot()))
@@ -325,7 +325,7 @@ public class CdaChV2StructuredBodyTest {
 				"dummy");
 
 		for (Identificator id : cda.getTemplateIds()) {
-			assertNull("Extensions not allowd for template ids", id.getExtension());
+			assertNull(id.getExtension(), "Extensions not allowd for template ids");
 			if (idCdaChV2SbEnhanced.equals(id.getRoot()))
 				idFoundCdaChV2SbEnhanced = true;
 			if (idCdaChV2Sb.equals(id.getRoot()))
@@ -336,17 +336,11 @@ public class CdaChV2StructuredBodyTest {
 				idFoundHl7CdaSb = true;
 		}
 
-		assertTrue(cutName
-				+ " templateID defined by ART DECOR CDA-CH V2 Structured Body enhanced is missing",
-				idFoundCdaChV2SbEnhanced);
-		assertTrue(
-				cutName + " templateID defined by ART DECOR CDA-CH V2 Structured Body is missing",
-				idFoundCdaChV2Sb);
-		assertTrue(cutName + " templateID defined by ART DECOR HL7 CDA R2 is missing",
-				idFoundHl7Cda);
-		assertTrue(
-				cutName + " templateID defined by ART DECOR HL7 CDA R2 Structured Body is missing",
-				idFoundHl7CdaSb);
+		assertTrue(idFoundCdaChV2SbEnhanced,
+				cutName + " templateID defined by ART DECOR CDA-CH V2 Structured Body enhanced is missing");
+		assertTrue(idFoundCdaChV2Sb, cutName + " templateID defined by ART DECOR CDA-CH V2 Structured Body is missing");
+		assertTrue(idFoundHl7Cda, cutName + " templateID defined by ART DECOR HL7 CDA R2 is missing");
+		assertTrue(idFoundHl7CdaSb, cutName + " templateID defined by ART DECOR HL7 CDA R2 Structured Body is missing");
 	}
 
 	/**
@@ -415,7 +409,7 @@ public class CdaChV2StructuredBodyTest {
 	 * Test method for
 	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#setDataEnterer(org.ehealth_connector.cda.DataEnterer)}
 	 * and
-	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#setDataEnterer(org.ehealth_connector.common.mdht.Person)}
+	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#setDataEnterer(org.ehealth_connector.common.Person)}
 	 * and {@link org.ehealth_connector.cda.AbstractCda#getDataEnterer()} and
 	 * {@link org.ehealth_connector.cda.AbstractCda#getDataEntererPerson()}.
 	 */
@@ -464,7 +458,7 @@ public class CdaChV2StructuredBodyTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#setLegalAuthenticator(org.ehealth_connector.common.mdht.Author)}
+	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#setLegalAuthenticator(org.ehealth_connector.common.Author)}
 	 * and {@link org.ehealth_connector.cda.AbstractCda#getLegalAuthenticator()}
 	 * and
 	 * {@link org.ehealth_connector.cda.AbstractCda#getLegalAuthenticatorAsAuthor()}.
@@ -481,7 +475,7 @@ public class CdaChV2StructuredBodyTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#setPatient(org.ehealth_connector.common.mdht.Patient)}
+	 * {@link org.ehealth_connector.cda.ch.CdaChV2StructuredBody#setPatient(org.ehealth_connector.common.Patient)}
 	 * and {@link org.ehealth_connector.cda.AbstractCda#getPatient()}.
 	 */
 	@Test

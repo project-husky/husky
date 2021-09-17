@@ -14,42 +14,38 @@
  * This line is intended for UTF-8 encoding checks, do not modify/delete: äöüéè
  *
  */
-package org.ehealth_connector.communication.mpi.impl;
+package org.ehealth_connector.communication.mpi.impl.pix;
 
 import java.util.List;
 
-import org.eclipse.emf.common.util.Enumerator;
-import org.hl7.v3.AD;
-import org.hl7.v3.COCTMT710007UVPlace;
-import org.hl7.v3.HomeAddressUse;
-import org.hl7.v3.PRPAIN201301UV02Type;
-import org.hl7.v3.PRPAIN201302UV02Type;
-import org.hl7.v3.PRPAIN201304UV02Type;
-import org.hl7.v3.PRPAMT201301UV02BirthPlace;
-import org.hl7.v3.PRPAMT201301UV02Citizen;
-import org.hl7.v3.PRPAMT201301UV02Employee;
-import org.hl7.v3.PRPAMT201301UV02LanguageCommunication;
-import org.hl7.v3.PRPAMT201301UV02Nation;
-import org.hl7.v3.PRPAMT201301UV02Person;
-import org.hl7.v3.PRPAMT201302UV02BirthPlace;
-import org.hl7.v3.PRPAMT201302UV02Citizen;
-import org.hl7.v3.PRPAMT201302UV02Employee;
-import org.hl7.v3.PRPAMT201302UV02LanguageCommunication;
-import org.hl7.v3.PRPAMT201302UV02Nation;
-import org.hl7.v3.PRPAMT201302UV02PatientPatientPerson;
-import org.hl7.v3.PRPAMT201303UV02BirthPlace;
-import org.hl7.v3.PRPAMT201303UV02Citizen;
-import org.hl7.v3.PRPAMT201303UV02Employee;
-import org.hl7.v3.PRPAMT201303UV02LanguageCommunication;
-import org.hl7.v3.PRPAMT201303UV02Nation;
-import org.hl7.v3.PRPAMT201303UV02Person;
-import org.hl7.v3.TEL;
-import org.hl7.v3.V3Factory;
-import org.hl7.v3.WorkPlaceAddressUse;
-import org.openhealthtools.ihe.common.hl7v3.client.PixPdqV3Utils;
-import org.openhealthtools.ihe.pix.source.v3.V3PixSourceMergePatients;
-import org.openhealthtools.ihe.pix.source.v3.V3PixSourceRecordAdded;
-import org.openhealthtools.ihe.pix.source.v3.V3PixSourceRecordRevised;
+import org.ehealth_connector.communication.utils.PixPdqV3Utils;
+
+import net.ihe.gazelle.hl7v3.coctmt710007UV.COCTMT710007UVPlace;
+import net.ihe.gazelle.hl7v3.datatypes.AD;
+import net.ihe.gazelle.hl7v3.datatypes.TEL;
+import net.ihe.gazelle.hl7v3.prpain201301UV02.PRPAIN201301UV02Type;
+import net.ihe.gazelle.hl7v3.prpain201302UV02.PRPAIN201302UV02Type;
+import net.ihe.gazelle.hl7v3.prpain201304UV02.PRPAIN201304UV02Type;
+import net.ihe.gazelle.hl7v3.prpamt201301UV02.PRPAMT201301UV02BirthPlace;
+import net.ihe.gazelle.hl7v3.prpamt201301UV02.PRPAMT201301UV02Citizen;
+import net.ihe.gazelle.hl7v3.prpamt201301UV02.PRPAMT201301UV02Employee;
+import net.ihe.gazelle.hl7v3.prpamt201301UV02.PRPAMT201301UV02LanguageCommunication;
+import net.ihe.gazelle.hl7v3.prpamt201301UV02.PRPAMT201301UV02Nation;
+import net.ihe.gazelle.hl7v3.prpamt201301UV02.PRPAMT201301UV02Person;
+import net.ihe.gazelle.hl7v3.prpamt201302UV02.PRPAMT201302UV02BirthPlace;
+import net.ihe.gazelle.hl7v3.prpamt201302UV02.PRPAMT201302UV02Citizen;
+import net.ihe.gazelle.hl7v3.prpamt201302UV02.PRPAMT201302UV02Employee;
+import net.ihe.gazelle.hl7v3.prpamt201302UV02.PRPAMT201302UV02LanguageCommunication;
+import net.ihe.gazelle.hl7v3.prpamt201302UV02.PRPAMT201302UV02Nation;
+import net.ihe.gazelle.hl7v3.prpamt201302UV02.PRPAMT201302UV02PatientPatientPerson;
+import net.ihe.gazelle.hl7v3.prpamt201303UV02.PRPAMT201303UV02BirthPlace;
+import net.ihe.gazelle.hl7v3.prpamt201303UV02.PRPAMT201303UV02Citizen;
+import net.ihe.gazelle.hl7v3.prpamt201303UV02.PRPAMT201303UV02Employee;
+import net.ihe.gazelle.hl7v3.prpamt201303UV02.PRPAMT201303UV02LanguageCommunication;
+import net.ihe.gazelle.hl7v3.prpamt201303UV02.PRPAMT201303UV02Nation;
+import net.ihe.gazelle.hl7v3.prpamt201303UV02.PRPAMT201303UV02Person;
+import net.ihe.gazelle.hl7v3.voc.HomeAddressUse;
+import net.ihe.gazelle.hl7v3.voc.WorkPlaceAddressUse;
 
 /**
  * The Class V3PixSourceMessageHelper.
@@ -72,34 +68,17 @@ public class V3PixSourceMessageHelper {
 	 * @return TEL type with the supplied telecom and use values.
 	 */
 	public static TEL createTEL(String telecomValue, String useValue) {
-		final TEL returnTEL = V3Factory.eINSTANCE.createTEL();
+		final var returnTEL = new TEL();
 		returnTEL.setValue(telecomValue);
 		if (null != useValue) {
 			if ("WP".equals(useValue)) {
-				returnTEL.setUse(PixPdqV3Utils.createEnumeratorList(WorkPlaceAddressUse.WP));
+				returnTEL.setUse(WorkPlaceAddressUse.WP.value());
 			} else if ("HP".equals(useValue)) {
-				returnTEL.setUse(PixPdqV3Utils.createEnumeratorList(HomeAddressUse.HP));
+				returnTEL.setUse(HomeAddressUse.HP.value());
 			} else if ("H".equals(useValue)) {
-				returnTEL.setUse(PixPdqV3Utils.createEnumeratorList(HomeAddressUse.H));
+				returnTEL.setUse(HomeAddressUse.H.value());
 			} else if ("MC".equals(useValue)) {
-				returnTEL.setUse(PixPdqV3Utils.createEnumeratorList(new Enumerator() {
-
-					@Override
-					public String getLiteral() {
-						return "MC";
-					}
-
-					@Override
-					public String getName() {
-						return "MC";
-					}
-
-					@Override
-					public int getValue() {
-						return 0;
-					}
-
-				}));
+				returnTEL.setUse("MC");
 			}
 		}
 		return returnTEL;
@@ -163,23 +142,20 @@ public class V3PixSourceMessageHelper {
 	public void addEmployeeCode(String employeeOccupationCode) {
 		if (v3RecordAddedMessage != null) {
 			final PRPAMT201301UV02Person patientPerson = getPatientPerson(v3RecordAddedMessage);
-			final PRPAMT201301UV02Employee employee = V3Factory.eINSTANCE
-					.createPRPAMT201301UV02Employee();
+			final var employee = new PRPAMT201301UV02Employee();
 			employee.setOccupationCode(PixPdqV3Utils.createCE(employeeOccupationCode));
 			patientPerson.getAsEmployee().add(employee);
 		}
 		if (v3RecordRevisedMessage != null) {
 			final PRPAMT201302UV02PatientPatientPerson patientPerson = getPatientPerson(
 					v3RecordRevisedMessage);
-			final PRPAMT201302UV02Employee employee = V3Factory.eINSTANCE
-					.createPRPAMT201302UV02Employee();
+			final var employee = new PRPAMT201302UV02Employee();
 			employee.setOccupationCode(PixPdqV3Utils.createCE(employeeOccupationCode));
 			patientPerson.getAsEmployee().add(employee);
 		}
 		if (v3MergePatientsMessage != null) {
 			final PRPAMT201303UV02Person patientPerson = getPatientPerson(v3MergePatientsMessage);
-			final PRPAMT201303UV02Employee employee = V3Factory.eINSTANCE
-					.createPRPAMT201303UV02Employee();
+			final var employee = new PRPAMT201303UV02Employee();
 			employee.setOccupationCode(PixPdqV3Utils.createCE(employeeOccupationCode));
 			patientPerson.getAsEmployee().add(employee);
 		}
@@ -194,23 +170,20 @@ public class V3PixSourceMessageHelper {
 	public void addLanguageCommunication(String languageCommunication) {
 		if (v3RecordAddedMessage != null) {
 			final PRPAMT201301UV02Person patientPerson = getPatientPerson(v3RecordAddedMessage);
-			final PRPAMT201301UV02LanguageCommunication communication = V3Factory.eINSTANCE
-					.createPRPAMT201301UV02LanguageCommunication();
+			final var communication = new PRPAMT201301UV02LanguageCommunication();
 			communication.setLanguageCode(PixPdqV3Utils.createCE(languageCommunication));
 			patientPerson.getLanguageCommunication().add(communication);
 		}
 		if (v3RecordRevisedMessage != null) {
 			final PRPAMT201302UV02PatientPatientPerson patientPerson = getPatientPerson(
 					v3RecordRevisedMessage);
-			final PRPAMT201302UV02LanguageCommunication communication = V3Factory.eINSTANCE
-					.createPRPAMT201302UV02LanguageCommunication();
+			final var communication = new PRPAMT201302UV02LanguageCommunication();
 			communication.setLanguageCode(PixPdqV3Utils.createCE(languageCommunication));
 			patientPerson.getLanguageCommunication().add(communication);
 		}
 		if (v3MergePatientsMessage != null) {
 			final PRPAMT201303UV02Person patientPerson = getPatientPerson(v3MergePatientsMessage);
-			final PRPAMT201303UV02LanguageCommunication communication = V3Factory.eINSTANCE
-					.createPRPAMT201303UV02LanguageCommunication();
+			final var communication = new PRPAMT201303UV02LanguageCommunication();
 			communication.setLanguageCode(PixPdqV3Utils.createCE(languageCommunication));
 			patientPerson.getLanguageCommunication().add(communication);
 		}
@@ -352,10 +325,8 @@ public class V3PixSourceMessageHelper {
 	public void addPatientNation(String nationCode) {
 		if (v3RecordAddedMessage != null) {
 			final PRPAMT201301UV02Person patientPerson = getPatientPerson(v3RecordAddedMessage);
-			final PRPAMT201301UV02Citizen citizen = V3Factory.eINSTANCE
-					.createPRPAMT201301UV02Citizen();
-			final PRPAMT201301UV02Nation citizenNation = V3Factory.eINSTANCE
-					.createPRPAMT201301UV02Nation();
+			final var citizen = new PRPAMT201301UV02Citizen();
+			final var citizenNation = new PRPAMT201301UV02Nation();
 			citizen.setPoliticalNation(citizenNation);
 			citizenNation.setCode(PixPdqV3Utils.createCE(nationCode));
 			patientPerson.getAsCitizen().add(citizen);
@@ -363,20 +334,16 @@ public class V3PixSourceMessageHelper {
 		if (v3RecordRevisedMessage != null) {
 			final PRPAMT201302UV02PatientPatientPerson patientPerson = getPatientPerson(
 					v3RecordRevisedMessage);
-			final PRPAMT201302UV02Citizen citizen = V3Factory.eINSTANCE
-					.createPRPAMT201302UV02Citizen();
-			final PRPAMT201302UV02Nation citizenNation = V3Factory.eINSTANCE
-					.createPRPAMT201302UV02Nation();
+			final var citizen = new PRPAMT201302UV02Citizen();
+			final var citizenNation = new PRPAMT201302UV02Nation();
 			citizen.setPoliticalNation(citizenNation);
 			citizenNation.setCode(PixPdqV3Utils.createCE(nationCode));
 			patientPerson.getAsCitizen().add(citizen);
 		}
 		if (v3MergePatientsMessage != null) {
 			final PRPAMT201303UV02Person patientPerson = getPatientPerson(v3MergePatientsMessage);
-			final PRPAMT201303UV02Citizen citizen = V3Factory.eINSTANCE
-					.createPRPAMT201303UV02Citizen();
-			final PRPAMT201303UV02Nation citizenNation = V3Factory.eINSTANCE
-					.createPRPAMT201303UV02Nation();
+			final var citizen = new PRPAMT201303UV02Citizen();
+			final var citizenNation = new PRPAMT201303UV02Nation();
 			citizen.setPoliticalNation(citizenNation);
 			citizenNation.setCode(PixPdqV3Utils.createCE(nationCode));
 			patientPerson.getAsCitizen().add(citizen);
@@ -533,9 +500,8 @@ public class V3PixSourceMessageHelper {
 	public void setPatientBirthPlace(AD addressBirthPlace) {
 		if (v3RecordAddedMessage != null) {
 			final PRPAMT201301UV02Person patientPerson = getPatientPerson(v3RecordAddedMessage);
-			final PRPAMT201301UV02BirthPlace birthplace = V3Factory.eINSTANCE
-					.createPRPAMT201301UV02BirthPlace();
-			final COCTMT710007UVPlace place = V3Factory.eINSTANCE.createCOCTMT710007UVPlace();
+			final var birthplace = new PRPAMT201301UV02BirthPlace();
+			final var place = new COCTMT710007UVPlace();
 			place.setAddr(addressBirthPlace);
 			birthplace.setBirthplace(place);
 			patientPerson.setBirthPlace(birthplace);
@@ -543,18 +509,16 @@ public class V3PixSourceMessageHelper {
 		if (v3RecordRevisedMessage != null) {
 			final PRPAMT201302UV02PatientPatientPerson patientPerson = getPatientPerson(
 					v3RecordRevisedMessage);
-			final PRPAMT201302UV02BirthPlace birthplace = V3Factory.eINSTANCE
-					.createPRPAMT201302UV02BirthPlace();
-			final COCTMT710007UVPlace place = V3Factory.eINSTANCE.createCOCTMT710007UVPlace();
+			final var birthplace = new PRPAMT201302UV02BirthPlace();
+			final var place = new COCTMT710007UVPlace();
 			place.setAddr(addressBirthPlace);
 			birthplace.setBirthplace(place);
 			patientPerson.setBirthPlace(birthplace);
 		}
 		if (v3MergePatientsMessage != null) {
 			final PRPAMT201303UV02Person patientPerson = getPatientPerson(v3MergePatientsMessage);
-			final PRPAMT201303UV02BirthPlace birthplace = V3Factory.eINSTANCE
-					.createPRPAMT201303UV02BirthPlace();
-			final COCTMT710007UVPlace place = V3Factory.eINSTANCE.createCOCTMT710007UVPlace();
+			final var birthplace = new PRPAMT201303UV02BirthPlace();
+			final var place = new COCTMT710007UVPlace();
 			place.setAddr(addressBirthPlace);
 			birthplace.setBirthplace(place);
 			patientPerson.setBirthPlace(birthplace);
@@ -675,8 +639,7 @@ public class V3PixSourceMessageHelper {
 					prefix);
 		}
 		if (v3MergePatientsMessage != null) {
-			v3MergePatientsMessage.setPatientMothersMaidenName(family, given, other, suffix,
-					prefix);
+			v3MergePatientsMessage.setPatientMothersMaidenName(family, given, other, suffix, prefix);
 		}
 	}
 

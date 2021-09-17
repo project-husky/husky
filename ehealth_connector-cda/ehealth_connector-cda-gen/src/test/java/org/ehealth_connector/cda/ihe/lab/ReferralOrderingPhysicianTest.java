@@ -16,12 +16,12 @@
  */
 package org.ehealth_connector.cda.ihe.lab;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.ehealth_connector.cda.AssociatedEntity;
 import org.ehealth_connector.cda.testhelper.TestUtils;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ReferralOrderingPhysicianTest extends TestUtils {
 	@Test

@@ -22,12 +22,19 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import java.util.zip.ZipFile;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import javax.activation.DataHandler;
+import javax.mail.util.ByteArrayDataSource;
+
+import org.apache.camel.CamelContext;
+import org.apache.cxf.binding.soap.interceptor.SoapOutInterceptor;
+import org.apache.cxf.interceptor.AttachmentOutInterceptor;
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.communication.AffinityDomain;
 import org.ehealth_connector.common.communication.AtnaConfig;
 import org.ehealth_connector.common.communication.AtnaConfig.AtnaConfigMode;
@@ -36,49 +43,48 @@ import org.ehealth_connector.common.communication.DocumentMetadata;
 import org.ehealth_connector.common.communication.DocumentMetadata.DocumentMetadataExtractionMode;
 import org.ehealth_connector.common.communication.SubmissionSetMetadata;
 import org.ehealth_connector.common.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
+import org.ehealth_connector.common.enums.DocumentDescriptor;
 import org.ehealth_connector.common.enums.EhcVersions;
-import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
-import org.ehealth_connector.communication.tls.CustomHttpsTLSv11v12SocketFactory;
-import org.ehealth_connector.communication.utils.AbstractAxis2Util;
+import org.ehealth_connector.communication.xd.storedquery.AbstractStoredQuery;
 import org.ehealth_connector.communication.xd.storedquery.FindDocumentsQuery;
 import org.ehealth_connector.communication.xd.storedquery.FindFoldersStoredQuery;
-import org.ehealth_connector.communication.xd.storedquery.StoredQueryInterface;
 import org.ehealth_connector.communication.xd.xdm.IndexHtm;
 import org.ehealth_connector.communication.xd.xdm.ReadmeTxt;
 import org.ehealth_connector.communication.xd.xdm.XdmContents;
+import org.ehealth_connector.xua.core.SecurityHeaderElement;
 import org.ehealth_connector.xua.exceptions.SerializeException;
 import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.serialization.impl.AssertionSerializerImpl;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Association;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationLabel;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationType;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Folder;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp.Precision;
+import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
+import org.openehealth.ipf.commons.ihe.xds.core.requests.QueryRegistry;
+import org.openehealth.ipf.commons.ihe.xds.core.requests.RetrieveDocumentSet;
+import org.openehealth.ipf.commons.ihe.xds.core.requests.query.QueryReturnType;
+import org.openehealth.ipf.commons.ihe.xds.core.responses.QueryResponse;
+import org.openehealth.ipf.commons.ihe.xds.core.responses.Response;
+import org.openehealth.ipf.commons.ihe.xds.core.responses.RetrievedDocumentSet;
 import org.openhealthtools.ihe.atna.auditor.XDSSourceAuditor;
 import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
-import org.openhealthtools.ihe.common.hl7v2.CX;
 import org.openhealthtools.ihe.utils.OID;
 import org.openhealthtools.ihe.xds.XDSConstants;
-import org.openhealthtools.ihe.xds.consumer.B_Consumer;
-import org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveDocumentSetRequestType;
-import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
-import org.openhealthtools.ihe.xds.document.XDSDocument;
-import org.openhealthtools.ihe.xds.document.XDSDocumentFromStream;
 import org.openhealthtools.ihe.xds.metadata.AuthorType;
-import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
-import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
-import org.openhealthtools.ihe.xds.metadata.FolderType;
-import org.openhealthtools.ihe.xds.metadata.SubmissionSetType;
-import org.openhealthtools.ihe.xds.metadata.extract.MetadataExtractionException;
-import org.openhealthtools.ihe.xds.response.XDSQueryResponseType;
-import org.openhealthtools.ihe.xds.response.XDSResponseType;
-import org.openhealthtools.ihe.xds.response.XDSRetrieveResponseType;
-import org.openhealthtools.ihe.xds.source.B_Source;
-import org.openhealthtools.ihe.xds.source.SubmitTransactionCompositionException;
-import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
 import org.openhealthtools.ihe.xua.XUAAssertion;
 import org.openhealthtools.ihe.xua.context.XUAModuleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.w3c.dom.Element;
 
 /**
@@ -103,10 +109,14 @@ import org.w3c.dom.Element;
  * </ul>
  * </div>
  */
-public class ConvenienceCommunication {
+@Component
+public class ConvenienceCommunication extends CamelService {
 
 	/** The SLF4J logger instance. */
 	private static Logger log = LoggerFactory.getLogger(ConvenienceCommunication.class);
+
+	@Autowired
+	private CamelContext context;
 
 	/**
 	 * <div class="en">The affinity domain set-up</div>
@@ -125,65 +135,62 @@ public class ConvenienceCommunication {
 	private DocumentMetadataExtractionMode documentMetadataExtractionMode = DocumentMetadataExtractionMode.DEFAULT_EXTRACTION;
 
 	/**
-	 * <div class="en">The OHT source</div>
-	 */
-	private B_Source source = null;
-
-	/**
 	 * <div class="en">Determines if SubmissionSet metadata will be extracted
 	 * automatically (e.g. from CDA documents)</div>
 	 */
 	private SubmissionSetMetadataExtractionMode submissionSetMetadataExtractionMode = SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION;
 	/**
-	 * <div class="en">The OHT transaction data to send XDS Documents</div>
+	 * <div class="en">The IPF transaction data to send XDS Documents</div>
 	 */
-	private SubmitTransactionData txnData = null;
+	private ProvideAndRegisterDocumentSet txnData = null;
 
 	private String lastError = "";
 
 	/**
-	 * <div class="en">Instantiates a new convenience communication without
-	 * affinity domain set-up. ATNA audit is disabled (unsecure) </div>
+	 * <div class="en">Instantiates a new convenience communication without affinity
+	 * domain set-up. ATNA audit is disabled (unsecure) </div>
 	 *
 	 */
 	public ConvenienceCommunication() {
 		super();
 		this.affinityDomain = null;
 		this.atnaConfigMode = AtnaConfigMode.UNSECURE;
-		CustomHttpsTLSv11v12SocketFactory.setup();
-		AbstractAxis2Util.initAxis2Config();
+		// CustomHttpsTLSv11v12SocketFactory.setup();
+		// AbstractAxis2Util.initAxis2Config();
 	}
 
 	/**
-	 * <div class="en">Instantiates a new convenience communication with the
-	 * given affinity domain set-up. ATNA audit is disabled (unsecure) </div>
+	 * <div class="en">Instantiates a new convenience communication with the given
+	 * affinity domain set-up. ATNA audit is disabled (unsecure) </div>
 	 *
-	 * @param affinityDomain
-	 *            the affinity domain configuration
+	 * @param affinityDomain the affinity domain configuration
 	 */
 	public ConvenienceCommunication(AffinityDomain affinityDomain) {
 		this.affinityDomain = affinityDomain;
 		this.atnaConfigMode = AtnaConfigMode.UNSECURE;
-		CustomHttpsTLSv11v12SocketFactory.setup();
-		AbstractAxis2Util.initAxis2Config();
+		// CustomHttpsTLSv11v12SocketFactory.setup();
+		// AbstractAxis2Util.initAxis2Config();
 	}
 
 	/**
-	 * <div class="en">Instantiates a new convenience communication with the
-	 * given affinity domain set-up.</div>
+	 * <div class="en">Instantiates a new convenience communication with the given
+	 * affinity domain set-up.</div>
 	 *
-	 * @param affinityDomain
-	 *            the affinity domain configuration
-	 * @param atnaConfigMode
-	 *            the ATNA config mode (secure or unsecure)
-	 * @param documentMetadataExtractionMode
-	 *            determines, if and how document metadata should be extracted
-	 *            automatically. Extracted metadata attributes will not
-	 *            overwrite attributes that have been set, manually.
-	 * @param submissionSetMetadataExtractionMode
-	 *            determines, if and how submission set metadata should be
-	 *            extracted, automatically. Extracted metadata attributes will
-	 *            not overwrite attributes that have been set, manually.
+	 * @param affinityDomain                      the affinity domain configuration
+	 * @param atnaConfigMode                      the ATNA config mode (secure or
+	 *                                            unsecure)
+	 * @param documentMetadataExtractionMode      determines, if and how document
+	 *                                            metadata should be extracted
+	 *                                            automatically. Extracted metadata
+	 *                                            attributes will not overwrite
+	 *                                            attributes that have been set,
+	 *                                            manually.
+	 * @param submissionSetMetadataExtractionMode determines, if and how submission
+	 *                                            set metadata should be extracted,
+	 *                                            automatically. Extracted metadata
+	 *                                            attributes will not overwrite
+	 *                                            attributes that have been set,
+	 *                                            manually.
 	 */
 	public ConvenienceCommunication(AffinityDomain affinityDomain, AtnaConfigMode atnaConfigMode,
 			DocumentMetadataExtractionMode documentMetadataExtractionMode,
@@ -192,18 +199,16 @@ public class ConvenienceCommunication {
 		this.atnaConfigMode = atnaConfigMode;
 		this.documentMetadataExtractionMode = documentMetadataExtractionMode;
 		this.submissionSetMetadataExtractionMode = submissionSetMetadataExtractionMode;
-		CustomHttpsTLSv11v12SocketFactory.setup();
-		AbstractAxis2Util.initAxis2Config();
+		// CustomHttpsTLSv11v12SocketFactory.setup();
+		// AbstractAxis2Util.initAxis2Config();
 	}
 
 	/**
 	 * <div class="en">Adds a document to the XDS Submission set.
 	 *
-	 * @param desc
-	 *            the document descriptor (which kind of document do you want to
-	 *            transfer? e.g. PDF, CDA,...)
-	 * @param inputStream
-	 *            The input stream to the document
+	 * @param desc        the document descriptor (which kind of document do you
+	 *                    want to transfer? e.g. PDF, CDA,...)
+	 * @param inputStream The input stream to the document
 	 * @return the document metadata (which have to be completed)</div>
 	 */
 	public DocumentMetadata addDocument(DocumentDescriptor desc, InputStream inputStream) {
@@ -213,28 +218,30 @@ public class ConvenienceCommunication {
 	/**
 	 * <div class="en">Adds a document to the XDS Submission set.
 	 *
-	 * @param desc
-	 *            the document descriptor (which kind of document do you want to
-	 *            transfer? e.g. PDF, CDA,...)
-	 * @param inputStream
-	 *            The input stream to the document
-	 * @param inputStream4Metadata
-	 *            the input stream that is only used to get the metadata from
-	 *            (it's texts will be ascii conform for registry purposes)
+	 * @param desc                 the document descriptor (which kind of document
+	 *                             do you want to transfer? e.g. PDF, CDA,...)
+	 * @param inputStream          The input stream to the document
+	 * @param inputStream4Metadata the input stream that is only used to get the
+	 *                             metadata from (it's texts will be ascii conform
+	 *                             for registry purposes)
 	 * @return the document metadata (which have to be completed)</div>
 	 */
 	public DocumentMetadata addDocument(DocumentDescriptor desc, InputStream inputStream,
 			InputStream inputStream4Metadata) {
 		lastError = "";
 		DocumentMetadata retVal = null;
-		XDSDocument doc;
+		var doc = new Document();
 		try {
-			XDSDocument doc4Metadata = null;
+			var doc4Metadata = new Document();
+			doc4Metadata.setDocumentEntry(new DocumentEntry());
 			if (inputStream4Metadata != null) {
-				doc4Metadata = new XDSDocumentFromStream(desc,
-						Util.convertNonAsciiText2Unicode(inputStream4Metadata));
+				InputStream unicodeStream = Util.convertNonAsciiText2Unicode(inputStream4Metadata);
+				var dataSource = new ByteArrayDataSource(unicodeStream, desc.getMimeType());
+				doc4Metadata.setDataHandler(new DataHandler(dataSource));
 			}
-			doc = new XDSDocumentFromStream(desc, inputStream);
+
+			var dataSource = new ByteArrayDataSource(inputStream, desc.getMimeType());
+			doc.setDataHandler(new DataHandler(dataSource));
 			retVal = addXdsDocument(doc, desc, doc4Metadata);
 		} catch (final IOException e) {
 			log.error("Error adding document from inputstream.", e);
@@ -253,36 +260,28 @@ public class ConvenienceCommunication {
 	/**
 	 * <div class="en"> Adds a document to the XDS Submission set.
 	 *
-	 * @param desc
-	 *            the document descriptor (which kind of document do you want to
-	 *            transfer? e.g. PDF, CDA,...)
-	 * @param filePath
-	 *            the file path
+	 * @param desc     the document descriptor (which kind of document do you want
+	 *                 to transfer? e.g. PDF, CDA,...)
+	 * @param filePath the file path
 	 * @return the document metadata (which have to be completed) </div>
-	 * @throws FileNotFoundException
-	 *             exception
+	 * @throws FileNotFoundException exception
 	 */
-	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath)
-			throws FileNotFoundException {
+	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath) throws FileNotFoundException {
 		return addDocument(desc, filePath, null);
 	}
 
 	/**
 	 * <div class="en"> Adds a document to the XDS Submission set.
 	 *
-	 * @param desc
-	 *            the document descriptor (which kind of document do you want to
-	 *            transfer? e.g. PDF, CDA,...)
-	 * @param filePath
-	 *            the file path
-	 * @param filePathMetadata
-	 *            the file path metadata
+	 * @param desc             the document descriptor (which kind of document do
+	 *                         you want to transfer? e.g. PDF, CDA,...)
+	 * @param filePath         the file path
+	 * @param filePathMetadata the file path metadata
 	 * @return the document metadata (which have to be completed) </div>
-	 * @throws FileNotFoundException
-	 *             exception
+	 * @throws FileNotFoundException exception
 	 */
-	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath,
-			String filePathMetadata) throws FileNotFoundException {
+	public DocumentMetadata addDocument(DocumentDescriptor desc, String filePath, String filePathMetadata)
+			throws FileNotFoundException {
 		return addDocument(desc, new FileInputStream(new File(filePath)));
 	}
 
@@ -290,154 +289,120 @@ public class ConvenienceCommunication {
 	 *
 	 * <div class="en">Add a document to a folder by theire ids</div>
 	 *
-	 * @param documentEntryUUID
-	 *            the entry uuid of the document
-	 * @param folderEntryUUID
-	 *            the entry uuid of the folder
+	 * @param documentEntryUUID the entry uuid of the document
+	 * @param folderEntryUUID   the entry uuid of the folder
 	 */
 	public void addDocumentToFolder(String documentEntryUUID, String folderEntryUUID) {
-		txnData.addDocumentToFolder(documentEntryUUID, folderEntryUUID);
+		
+		Folder folder = new Folder();
+		folder.setEntryUuid(folderEntryUUID);
+		folder.setLogicalUuid(documentEntryUUID);
+		txnData.getFolders().add(folder);
 	}
 
 	/**
 	 * <div class="en">Adds a xds folder.</div>
 	 *
-	 * @param submissionSetContentType
-	 *            the contenttype code for submission set
+	 * @param submissionSetContentType the contenttype code for submission set
 	 * @return the metadata of the new fold
 	 */
-	public FolderMetadata addFolder(Code submissionSetContentType) {
+	public Folder addFolder(Code submissionSetContentType) {
 		if (txnData == null) {
-			txnData = new SubmitTransactionData();
+			txnData = new ProvideAndRegisterDocumentSet();
 		}
-		XDSSourceAuditor.getAuditor().getConfig()
-				.setAuditorEnabled(this.atnaConfigMode == AtnaConfigMode.SECURE);
+		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(this.atnaConfigMode == AtnaConfigMode.SECURE);
 
-		final String fodlerEntryUUID = txnData.addFolder();
-		final FolderMetadata folderMeta = new FolderMetadata(txnData.getFolder(fodlerEntryUUID));
+		Folder folder = new Folder();
+		folder.assignEntryUuid();
 
-		if (folderMeta.getUniqueId() == null) {
+		if (folder.getUniqueId() == null) {
 			final String organizationalId = EhcVersions.getCurrentVersion().getOid();
-			folderMeta.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+			folder.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
 		}
-		txnData.getSubmissionSet().setContentTypeCode(
-				XdsMetadataUtil.convertEhcCodeToCodedMetadataType(submissionSetContentType));
 
-		return folderMeta;
+		txnData.getFolders().add(folder);
+
+		txnData.getSubmissionSet()
+				.setContentTypeCode(XdsMetadataUtil.convertEhcCodeToCode(submissionSetContentType));
+
+		return folder;
 	}
 
 	/**
 	 * <div class="en">Adds an XDSDocument to the Transaction data</div>
 	 *
-	 * @param doc
-	 *            the document
-	 * @param desc
-	 *            the Document descriptor
+	 * @param doc  the document
+	 * @param desc the Document descriptor
 	 * @return the DocumentMetadata
 	 */
-	protected DocumentMetadata addXdsDocument(XDSDocument doc, DocumentDescriptor desc) {
+	protected DocumentMetadata addXdsDocument(Document doc, DocumentDescriptor desc) {
 		return addXdsDocument(doc, desc, null);
 	}
 
 	/**
 	 * <div class="en">Adds an XDSDocument to the Transaction data</div>.
 	 *
-	 * @param doc
-	 *            the document
-	 * @param desc
-	 *            the Document descriptor
-	 * @param metadataDoc
-	 *            the metadata doc
+	 * @param doc         the document
+	 * @param desc        the Document descriptor
+	 * @param metadataDoc the metadata doc
 	 * @return the doc to get the metadata from
 	 */
-	protected DocumentMetadata addXdsDocument(XDSDocument doc, DocumentDescriptor desc,
-			XDSDocument metadataDoc) {
+	protected DocumentMetadata addXdsDocument(Document doc, DocumentDescriptor desc, Document metadataDoc) {
 		lastError = "";
 		if (txnData == null) {
-			txnData = new SubmitTransactionData();
+			txnData = new ProvideAndRegisterDocumentSet();
 		}
-		XDSSourceAuditor.getAuditor().getConfig()
-				.setAuditorEnabled(this.atnaConfigMode == AtnaConfigMode.SECURE);
-		String docEntryUUID;
-		try {
+		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(this.atnaConfigMode == AtnaConfigMode.SECURE);
 
-			DocumentMetadata docMetadata = null;
-			docEntryUUID = txnData.addDocument(doc);
-			if (metadataDoc != null) {
-				docMetadata = new DocumentMetadata(txnData.getDocumentEntry(docEntryUUID));
-				docMetadata.setEntryUUID("toreplace");
-				final String metadataDocUUID = txnData.addDocument(metadataDoc);
-				docMetadata = new DocumentMetadata(txnData.getDocumentEntry(metadataDocUUID));
-				txnData.getDocList().remove(txnData.getDocList().size() - 1);
-				txnData.getMetadata().getSubmissionSet().getAssociatedDocuments()
-						.remove(metadataDocUUID);
-				docMetadata.setEntryUUID(docEntryUUID);
-				txnData.deleteDocument("toreplace");
+		DocumentMetadata docMetadata = null;
+
+		if (metadataDoc != null) {
+			docMetadata = new DocumentMetadata(metadataDoc.getDocumentEntry());
+			if (doc.getDocumentEntry() == null) {
+				doc.setDocumentEntry(metadataDoc.getDocumentEntry());
 			}
-			docMetadata = new DocumentMetadata(txnData.getDocumentEntry(docEntryUUID));
-
-			if (documentMetadataExtractionMode == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
-				if (DocumentDescriptor.CDA_R2.equals(desc)) {
-					cdaExtractionFixes(docMetadata);
-				}
-				generateDefaultDocEntryAttributes(doc.getDocumentEntryUUID());
-			} else {
-				docMetadata.clear();
-			}
-
-			return docMetadata;
-		} catch (final MetadataExtractionException e) {
-			log.error("Error adding document by extracting metadata.", e);
-			String message = e.getMessage();
-			if (e.getCause() != null)
-				message = e.getCause().getMessage() + ": " + message;
-			lastError = "Error adding document by extracting metadata: " + message;
-			if (Util.isDebug())
-				e.printStackTrace();
-
-		} catch (final SubmitTransactionCompositionException e) {
-			log.error("Error adding document by submit transaction.", e);
-			String message = e.getMessage();
-			if (e.getCause() != null)
-				message = e.getCause().getMessage() + ": " + message;
-			lastError = "Error adding document by submit transaction: " + message;
-			if (Util.isDebug())
-				e.printStackTrace();
-
+		} else {
+			docMetadata = new DocumentMetadata(doc.getDocumentEntry());
 		}
-		return null;
+
+		txnData.getDocuments().add(doc);
+
+		if (documentMetadataExtractionMode == DocumentMetadataExtractionMode.DEFAULT_EXTRACTION) {
+			if (DocumentDescriptor.CDA_R2.equals(desc)) {
+				cdaExtractionFixes(docMetadata);
+			}
+			generateDefaultDocEntryAttributes(docMetadata, doc, desc);
+		} else {
+			docMetadata.clear();
+		}
+
+		return docMetadata;
 	}
 
 	/**
 	 *
-	 * <div class="en">Method to add a xuser assertion to allow authentication
-	 * on XDS.b transactions.</div>
+	 * <div class="en">Method to add a xuser assertion to allow authentication on
+	 * XDS.b transactions.</div>
 	 *
-	 * @param assertion
-	 *            The assertion to be added to the soap header
-	 * @throws SerializeException
-	 *             if there are problems adding the assertion
+	 * @param assertion The assertion to be added to the soap header
+	 * @throws SerializeException if there are problems adding the assertion
 	 */
 	public void addXUserAssertion(Assertion assertion) throws SerializeException {
 		final XUAModuleContext xuaContext = XUAModuleContext.getContext();
 		final Element assertionElement = new AssertionSerializerImpl().toXmlElement(assertion);
 		final XUAAssertion ohtAssertion = new XUAAssertion(assertionElement);
 		xuaContext.cacheAssertion(ohtAssertion);
-		xuaContext.getConfig().getXUAEnabledActions()
-				.add(XDSConstants.PROVIDE_AND_REGISTER_DOCUMENT_SET_ACTION);
-		AuditorModuleContext.getContext().getConfig()
-				.setSystemUserName(ohtAssertion.getAtnaUsername());
+		xuaContext.getConfig().getXUAEnabledActions().add(XDSConstants.PROVIDE_AND_REGISTER_DOCUMENT_SET_ACTION);
+		AuditorModuleContext.getContext().getConfig().setSystemUserName(ohtAssertion.getAtnaUsername());
 		xuaContext.setXUAEnabled(true);
 		xuaContext.setActiveAssertion(ohtAssertion);
 	}
 
 	/**
-	 * <div class="en">Cda fixes of OHT CDAExtraction bugs and extraction
-	 * methods, which are unsafe, because an XDS registry might use another
-	 * value set.</div>
+	 * <div class="en">Cda fixes of OHT CDAExtraction bugs and extraction methods,
+	 * which are unsafe, because an XDS registry might use another value set.</div>
 	 *
-	 * @param docMetadata
-	 *            the doc metadata </div>
+	 * @param docMetadata the doc metadata </div>
 	 */
 	private void cdaExtractionFixes(DocumentMetadata docMetadata) {
 		// Fix the OHT CDAExtraction behaviour, that uses the confidentiality
@@ -448,7 +413,7 @@ public class ConvenienceCommunication {
 
 		// Fix the OHT for invalid empty authorTelecommunicationentries by
 		// deleting all authorTelecommunications
-		for (final Object object : docMetadata.getMdhtDocumentEntryType().getAuthors()) {
+		for (final Object object : docMetadata.getDocumentEntry().getAuthors()) {
 			final AuthorType at = (AuthorType) object;
 			at.getAuthorTelecommunication().clear();
 		}
@@ -456,8 +421,7 @@ public class ConvenienceCommunication {
 		// Fix the OHT CDAExtraction bug(?) that generates Unique Ids, which are
 		// to long for the registry (EXT part is larger than the allowed 16
 		// characters)
-		docMetadata.setUniqueId(
-				OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
+		docMetadata.setUniqueId(OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
 	}
 
 	/**
@@ -465,101 +429,95 @@ public class ConvenienceCommunication {
 	 * DocumentMetadata)</div>
 	 */
 	public void clearDocuments() {
-		txnData = new SubmitTransactionData();
+		txnData = new ProvideAndRegisterDocumentSet();
 	}
 
 	/**
-	 * <div class="en">creates an XDM volume with default values. You have to
-	 * add a document to this class first.</div>
+	 * <div class="en">creates an XDM volume with default values. You have to add a
+	 * document to this class first.</div>
 	 *
-	 * @param outputStream
-	 *            The outputStream object where the contents will be written to.
+	 * @param outputStream The outputStream object where the contents will be
+	 *                     written to.
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(OutputStream outputStream) {
 		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
-			generateDefaultSubmissionSetAttributes();
+			txnData.setSubmissionSet(generateDefaultSubmissionSetAttributes());
+			linkDocumentEntryWithSubmissionSet();
 		}
-		final XdmContents xdmContents = new XdmContents(new IndexHtm(txnData),
-				new ReadmeTxt(txnData));
+		final var xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
 		xdmContents.createZip(outputStream, txnData);
 		return xdmContents;
 	}
 
 	/**
-	 * <div class="en">creates an XDM volume with a given XdmContents object.
-	 * This method will be used, if you want to create your own INDEX.HTM and
-	 * README.TXT for your XDM volume. You have to add a document to this class
-	 * first.</div>
+	 * <div class="en">creates an XDM volume with a given XdmContents object. This
+	 * method will be used, if you want to create your own INDEX.HTM and README.TXT
+	 * for your XDM volume. You have to add a document to this class first.</div>
 	 *
-	 * @param outputStream
-	 *            The outputStream object where the contents will be written to.
-	 * @param xdmContents
-	 *            The xdmContents object containing your own INDEX.HTM and
-	 *            README.TXT
+	 * @param outputStream The outputStream object where the contents will be
+	 *                     written to.
+	 * @param xdmContents  The xdmContents object containing your own INDEX.HTM and
+	 *                     README.TXT
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(OutputStream outputStream, XdmContents xdmContents) {
 		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
-			generateDefaultSubmissionSetAttributes();
+			txnData.setSubmissionSet(generateDefaultSubmissionSetAttributes());
+			linkDocumentEntryWithSubmissionSet();
 		}
 		xdmContents.createZip(outputStream, txnData);
 		return xdmContents;
 	}
 
 	/**
-	 * <div class="en">creates an XDM volume with default values. You have to
-	 * add a document to this class first.</div>
+	 * <div class="en">creates an XDM volume with default values. You have to add a
+	 * document to this class first.</div>
 	 *
-	 * @param filePath
-	 *            The filePath where the contents will be written to.
+	 * @param filePath The filePath where the contents will be written to.
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(String filePath) {
 		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
-			generateDefaultSubmissionSetAttributes();
+			txnData.setSubmissionSet(generateDefaultSubmissionSetAttributes());
+			linkDocumentEntryWithSubmissionSet();
 		}
-		final XdmContents xdmContents = new XdmContents(new IndexHtm(txnData),
-				new ReadmeTxt(txnData));
+		final var xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
 		xdmContents.createZip(filePath, txnData);
 		return xdmContents;
 	}
 
 	/**
-	 * <div class="en">creates an XDM volume with default values. You have to
-	 * add a document to this class first.</div>
+	 * <div class="en">creates an XDM volume with default values. You have to add a
+	 * document to this class first.</div>
 	 *
-	 * @param filePath
-	 *            The filePath where the contents will be written to.
-	 * @param xdmContents
-	 *            The xdmContents object containing your own INDEX.HTM and
-	 *            README.TXT
+	 * @param filePath    The filePath where the contents will be written to.
+	 * @param xdmContents The xdmContents object containing your own INDEX.HTM and
+	 *                    README.TXT
 	 *
 	 * @return the XdmContents object
 	 */
 	public XdmContents createXdmContents(String filePath, XdmContents xdmContents) {
 		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
-			generateDefaultSubmissionSetAttributes();
+			txnData.setSubmissionSet(generateDefaultSubmissionSetAttributes());
+			linkDocumentEntryWithSubmissionSet();
 		}
 		xdmContents.createZip(filePath, txnData);
 		return xdmContents;
 	}
 
 	/**
-	 * <div class="en">creates an XDM volume with the given submission set
-	 * metadata. You have to add a document to this class first.</div>
+	 * <div class="en">creates an XDM volume with the given submission set metadata.
+	 * You have to add a document to this class first.</div>
 	 *
-	 * @param submissionSetMetadata
-	 *            The metadata of the submission set
-	 * @param outputStream
-	 *            The outputStream object where the contents will be written to.
+	 * @param submissionSetMetadata The metadata of the submission set
+	 * @param outputStream          The outputStream object where the contents will
+	 *                              be written to.
 	 * @return the XdmContents object
 	 */
-	public XdmContents createXdmContents(SubmissionSetMetadata submissionSetMetadata,
-			OutputStream outputStream) {
+	public XdmContents createXdmContents(SubmissionSetMetadata submissionSetMetadata, OutputStream outputStream) {
 		submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
-		final XdmContents xdmContents = new XdmContents(new IndexHtm(txnData),
-				new ReadmeTxt(txnData));
+		final var xdmContents = new XdmContents(new IndexHtm(txnData), new ReadmeTxt(txnData));
 		xdmContents.createZip(outputStream, txnData);
 		return xdmContents;
 	}
@@ -567,30 +525,55 @@ public class ConvenienceCommunication {
 	/**
 	 * <div class="en">Generate missing doc entry attributes.</div>
 	 *
-	 * @param docEntryUuid
-	 *            the doc entry uuid </div>
+	 * @param docEntryUuid the doc entry uuid </div>
 	 */
-	private void generateDefaultDocEntryAttributes(String docEntryUuid) {
-
-		final DocumentMetadata docMetadata = new DocumentMetadata(
-				txnData.getDocumentEntry(docEntryUuid));
-		final DocumentDescriptor desc = txnData.getDocument(docEntryUuid).getDescriptor();
+	private void generateDefaultDocEntryAttributes(DocumentMetadata docMetadata, Document document,
+			DocumentDescriptor documentDescriptor) {
 
 		// Derive MimeType from DocumentDescriptor
-		if (docMetadata.getMdhtDocumentEntryType().getMimeType() == null) {
-			docMetadata.setMimeType(desc.getMimeType());
+		if (docMetadata.getDocumentEntry().getMimeType() == null) {
+			docMetadata.setMimeType(documentDescriptor.getMimeType());
+			document.getDocumentEntry().setMimeType(documentDescriptor.getMimeType());
+		}
+
+		// Generate the unique ID
+		if (docMetadata.getDocumentEntry().getUniqueId() == null) {
+			docMetadata.setUniqueId(OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
+			document.getDocumentEntry()
+					.setUniqueId(OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
 		}
 
 		// Generate the UUID
-		if (docMetadata.getMdhtDocumentEntryType().getUniqueId() == null) {
-			docMetadata.setUniqueId(
-					OID.createOIDGivenRoot(docMetadata.getDocSourceActorOrganizationId(), 64));
+		if (docMetadata.getDocumentEntry().getEntryUuid() == null) {
+			document.getDocumentEntry().setEntryUuid(UUID.randomUUID().toString());
+			docMetadata.setEntryUUID(document.getDocumentEntry().getEntryUuid());
 		}
 
 		// Generate Creation Time with the current time
-		if (docMetadata.getMdhtDocumentEntryType().getCreationTime() == null) {
-			docMetadata.setCreationTime(DateUtil.nowAsDate());
+		if (docMetadata.getDocumentEntry().getCreationTime() == null) {
+			docMetadata.setCreationTime(DateUtil.nowAsZonedDate());
+
+			var timestamp = new org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp(
+					docMetadata.getCreationTime(), Precision.SECOND);
+			document.getDocumentEntry().setCreationTime(timestamp);
 		}
+	}
+
+	private void linkDocumentEntryWithSubmissionSet() {
+
+		for (Document document : this.txnData.getDocuments()) {
+			// link document entry to submission set
+			var association = new Association();
+
+			association.setAssociationType(AssociationType.HAS_MEMBER);
+			association.setSourceUuid(this.txnData.getSubmissionSet().getEntryUuid());
+			association.setTargetUuid(document.getDocumentEntry().getEntryUuid());
+			association.setLabel(AssociationLabel.ORIGINAL);
+			association.setEntryUuid(UUID.randomUUID().toString());
+
+			this.txnData.getAssociations().add(association);
+		}
+
 	}
 
 	/**
@@ -598,110 +581,110 @@ public class ConvenienceCommunication {
 	 *
 	 * @return the submission set
 	 */
-	public SubmissionSetType generateDefaultSubmissionSetAttributes() {
+	public SubmissionSet generateDefaultSubmissionSetAttributes() {
+
+		if (txnData.getSubmissionSet() == null) {
+			txnData.setSubmissionSet(new SubmissionSet());
+		}
 
 		// Create SubmissionSet
-		final SubmissionSetType subSet = txnData.getSubmissionSet();
+		final var subSet = txnData.getSubmissionSet();
 
-		if ((txnData.getMetadata().getDocumentEntry() != null)
-				&& !txnData.getMetadata().getDocumentEntry().isEmpty()
-				&& (txnData.getMetadata().getDocumentEntry().get(0) instanceof DocumentEntryType)) {
-			final DocumentEntryType firstDocEntry = (DocumentEntryType) txnData.getMetadata()
-					.getDocumentEntry().get(0);
-			if (firstDocEntry.getPatientId() == null) {
-				throw new IllegalStateException(
-						"Missing destination patient ID in DocumentMetadata of first document.");
-			}
+		if (txnData.getDocuments() != null && !txnData.getDocuments().isEmpty()) {
 
-			if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
-
-				// This is the eHealth Connector Root OID
-				// default value just in case...
-				String organizationalId = EhcVersions.getCurrentVersion().getOid();
-
-				if (subSet.getUniqueId() == null) {
-					subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+			for (Document document : txnData.getDocuments()) {
+				final var docEntry = document.getDocumentEntry();
+				if (docEntry.getPatientId() == null) {
+					throw new IllegalStateException(
+							"Missing destination patient ID in DocumentMetadata of first document.");
 				}
 
-				if (!txnData.getMetadata().getDocumentEntry().isEmpty()) {
-					organizationalId = firstDocEntry.getPatientId()
-							.getAssigningAuthorityUniversalId();
-				}
-				// set submission set source id
-				if (subSet.getSourceId() == null) {
-					subSet.setSourceId(organizationalId);
-				}
-			}
+				if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
 
-			// set submission time
-			if (subSet.getSubmissionTime() == null) {
-				subSet.setSubmissionTime(DateUtilMdht.nowAsTS().getValue());
-			}
-			// txnData.saveMetadataToFile("C:/temp/metadata.xml");
+					// This is the eHealth Connector Root OID
+					// default value just in case...
+					String organizationalId = EhcVersions.getCurrentVersion().getOid();
 
-			// Use the PatientId of the first Document for the Submission set ID
-			if (subSet.getPatientId() == null) {
-				final CX testCx = firstDocEntry.getPatientId();
-				subSet.setPatientId(EcoreUtil.copy(testCx));
-			}
+					if (subSet.getUniqueId() == null) {
+						subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+					}
 
-			// set ContentTypeCode
-			if (subSet.getContentTypeCode() == null) {
-				if (firstDocEntry.getTypeCode() != null) {
-					subSet.setContentTypeCode(EcoreUtil.copy(firstDocEntry.getTypeCode()));
-				}
-			}
-		} else if ((txnData.getMetadata().getFolder() != null)
-				&& !txnData.getMetadata().getFolder().isEmpty()
-				&& (txnData.getMetadata().getFolder().get(0) instanceof FolderType)) {
-			final FolderType firstFolder = (FolderType) txnData.getMetadata().getFolder().get(0);
-			if (firstFolder.getPatientId() == null) {
-				throw new IllegalStateException(
-						"Missing destination patient ID in DocumentMetadata of first document.");
-			}
+					if (subSet.getEntryUuid() == null) {
+						subSet.setEntryUuid(UUID.randomUUID().toString());
+					}
 
-			if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
-
-				// This is the eHealth Connector Root OID
-				// default value just in case...
-				String organizationalId = EhcVersions.getCurrentVersion().getOid();
-
-				if (subSet.getUniqueId() == null) {
-					subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+					if (docEntry.getPatientId() != null) {
+						organizationalId = docEntry.getPatientId().getAssigningAuthority().getUniversalId();
+					}
+					// set submission set source id
+					if (subSet.getSourceId() == null) {
+						subSet.setSourceId(organizationalId);
+					}
 				}
 
-				if (!txnData.getMetadata().getFolder().isEmpty()) {
-					organizationalId = firstFolder.getPatientId()
-							.getAssigningAuthorityUniversalId();
+				// set submission time
+				if (subSet.getSubmissionTime() == null) {
+					subSet.setSubmissionTime(DateUtilMdht.nowAsTS().getValue());
 				}
-				// set submission set source id
-				if (subSet.getSourceId() == null) {
-					subSet.setSourceId(organizationalId);
+				// txnData.saveMetadataToFile("C:/temp/metadata.xml");
+
+				// Use the PatientId of the first Document for the Submission set ID
+				if (subSet.getPatientId() == null) {
+					subSet.setPatientId(docEntry.getPatientId());
 				}
-			}
 
-			// set submission time
-			if (subSet.getSubmissionTime() == null) {
-				subSet.setSubmissionTime(DateUtilMdht.nowAsTS().getValue());
-			}
-			// txnData.saveMetadataToFile("C:/temp/metadata.xml");
+				// set ContentTypeCode
+				if (subSet.getContentTypeCode() == null && docEntry.getTypeCode() != null) {
+					subSet.setContentTypeCode(docEntry.getTypeCode());
 
-			// Use the PatientId of the first Document for the Submission set ID
-			if (subSet.getPatientId() == null) {
-				final CX testCx = firstFolder.getPatientId();
-				subSet.setPatientId(EcoreUtil.copy(testCx));
-			}
-
-			if (subSet.getContentTypeCode() == null) {
-				if ((firstFolder.getCode() != null) && (firstFolder.getCode().get(0) != null)) {
-					subSet.setContentTypeCode(
-							EcoreUtil.copy((CodedMetadataType) firstFolder.getCode().get(0)));
 				}
 			}
+		} else if (txnData.getFolders() != null && !txnData.getFolders().isEmpty()) {
+			for (Folder folder : txnData.getFolders()) {
+				if (folder.getPatientId() == null) {
+					throw new IllegalStateException(
+							"Missing destination patient ID in DocumentMetadata of first document.");
+				}
 
+				if ((subSet.getUniqueId() == null) || (subSet.getSourceId() == null)) {
+
+					// This is the eHealth Connector Root OID
+					// default value just in case...
+					String organizationalId = EhcVersions.getCurrentVersion().getOid();
+
+					if (subSet.getUniqueId() == null) {
+						subSet.setUniqueId(OID.createOIDGivenRoot(organizationalId, 64));
+					}
+
+					if (folder.getPatientId() != null) {
+						organizationalId = folder.getPatientId().getAssigningAuthority().getUniversalId();
+					}
+					// set submission set source id
+					if (subSet.getSourceId() == null) {
+						subSet.setSourceId(organizationalId);
+					}
+				}
+
+				// set submission time
+				if (subSet.getSubmissionTime() == null) {
+					subSet.setSubmissionTime(DateUtilMdht.nowAsTS().getValue());
+				}
+				// txnData.saveMetadataToFile("C:/temp/metadata.xml");
+
+				// Use the PatientId of the first Document for the Submission set ID
+				if (subSet.getPatientId() == null) {
+					subSet.setPatientId(folder.getPatientId());
+				}
+
+				if (subSet.getContentTypeCode() == null && folder.getCodeList() != null
+						&& folder.getCodeList().get(0) != null) {
+					subSet.setContentTypeCode(folder.getCodeList().get(0));
+				}
+			}
 		}
 		return subSet;
 	}
+
 
 	/**
 	 * <div class="en">Returns the current affinity domain
@@ -717,12 +700,12 @@ public class ConvenienceCommunication {
 	/**
 	 * Query a registry for documents, using a find documents query.
 	 *
-	 * @param queryParameter
-	 *            a findDocumentsQuery object filled with your query parameters
-	 * @param returnReferencesOnly
-	 *            if set to false, the registry response will contain the
-	 *            document metadata. If set to true, the response will contain
-	 *            references instead of the complete document metadata.
+	 * @param queryParameter       a findDocumentsQuery object filled with your
+	 *                             query parameters
+	 * @param returnReferencesOnly if set to false, the registry response will
+	 *                             contain the document metadata. If set to true,
+	 *                             the response will contain references instead of
+	 *                             the complete document metadata.
 	 * @return the XDSQueryResponseType
 	 */
 
@@ -746,15 +729,14 @@ public class ConvenienceCommunication {
 	 *
 	 * @return the transaction data object </div>
 	 */
-	public SubmitTransactionData getTxnData() {
+	public ProvideAndRegisterDocumentSet getTxnData() {
 		return this.txnData;
 	}
 
 	/**
 	 * Returns the contents of an existing XDM volume.
 	 *
-	 * @param filePath
-	 *            the XDM volume as ZipFile
+	 * @param filePath the XDM volume as ZipFile
 	 * @return the XDMContents
 	 */
 	public XdmContents getXdmContents(String filePath) {
@@ -764,8 +746,7 @@ public class ConvenienceCommunication {
 	/**
 	 * Returns the contents of an existing XDM volume.
 	 *
-	 * @param zipFile
-	 *            the XDM volume as ZipFile
+	 * @param zipFile the XDM volume as ZipFile
 	 * @return the XDMContents
 	 */
 	public XdmContents getXdmContents(ZipFile zipFile) {
@@ -775,167 +756,210 @@ public class ConvenienceCommunication {
 	/**
 	 * <div class="en">Queries the document registry of the affinity domain for
 	 * documents, using a find documents query. This is useful if the number of
-	 * results is limited in the registry and your query would exceed this
-	 * limit. In this case, precise your query or do a query for references
-	 * first, choose the possible matches (e.g. the last 10 results) and then
-	 * query for metadata.
+	 * results is limited in the registry and your query would exceed this limit. In
+	 * this case, precise your query or do a query for references first, choose the
+	 * possible matches (e.g. the last 10 results) and then query for metadata.
 	 *
-	 * @param queryParameter
-	 *            a findDocumentsQuery object filled with your query parameters
+	 * @param queryParameter a findDocumentsQuery object filled with your query
+	 *                       parameters
 	 * @return the OHT XDSQueryResponseType containing references instead of the
 	 *         complete document metadata</div>
+	 * @throws Exception
 	 */
-	public XDSQueryResponseType queryDocumentReferencesOnly(FindDocumentsQuery queryParameter) {
-		return this.queryDocuments((StoredQueryInterface) queryParameter);
+	public QueryResponse queryDocumentReferencesOnly(FindDocumentsQuery queryParameter,
+			SecurityHeaderElement securityHeader, boolean secure) throws Exception {
+		return queryDocumentQuery(queryParameter, securityHeader, QueryReturnType.OBJECT_REF, secure);
 	}
 
 	/**
 	 * <div class="en">Queries the document registry of the affinity domain for
 	 * documents, using a find documents query.
 	 *
-	 * @param queryParameter
-	 *            a findDocumentsQuery object filled with your query parameters
-	 * @return the OHT XDSQueryResponseType containing full document
-	 *         metadata</div>
+	 * @param queryParameter a findDocumentsQuery object filled with your query
+	 *                       parameters
+	 * @return the OHT XDSQueryResponseType containing full document metadata</div>
+	 * @throws Exception
 	 */
-	public XDSQueryResponseType queryDocuments(FindDocumentsQuery queryParameter) {
-		return this.queryDocuments((StoredQueryInterface) queryParameter);
+	public QueryResponse queryDocuments(FindDocumentsQuery queryParameter, SecurityHeaderElement securityHeader,
+			boolean secure)
+			throws Exception {
+		return queryDocumentQuery(queryParameter, securityHeader, QueryReturnType.LEAF_CLASS, secure);
 	}
 
 	/**
-	 * <div class="en">Queries the registry of the affinity domain for all
-	 * documents satisfying the given query parameters.
+	 * <div class="en">Queries the registry of the affinity domain for all documents
+	 * satisfying the given query parameters.
 	 *
-	 * @param query
-	 *            one of the given queries (@see
-	 *            org.ehealth_connector.communication.storedquery and
-	 *            org.ehealth_connector.communication.storedquery.ch)
-	 * @return the OHT XDSQueryResponseType containing full document
-	 *         metadata</div>
+	 * @param query one of the given queries (@see
+	 *              org.ehealth_connector.communication.storedquery and
+	 *              org.ehealth_connector.communication.storedquery.ch)
+	 * @return the OHT XDSQueryResponseType containing full document metadata</div>
+	 * @throws Exception
 	 */
-	public XDSQueryResponseType queryDocuments(StoredQueryInterface query) {
-		lastError = "";
-		setDefaultKeystoreTruststore(affinityDomain.getRegistryDestination());
-		final B_Consumer consumer = new B_Consumer(
-				affinityDomain.getRegistryDestination().getUri());
+	public QueryResponse queryDocumentQuery(AbstractStoredQuery query, SecurityHeaderElement securityHeader,
+			QueryReturnType returnType, boolean secure)
+			throws Exception {
+		/*
+		 * lastError = "";
+		 * setDefaultKeystoreTruststore(affinityDomain.getRegistryDestination()); final
+		 * B_Consumer consumer = new B_Consumer(
+		 * affinityDomain.getRegistryDestination().getUri());
+		 * 
+		 * try { return consumer.invokeStoredQuery(query.getOhtStoredQuery(), false); }
+		 * catch (final Exception e) { log.error("Exception", e); String message =
+		 * e.getMessage(); if (e.getCause() != null) message = e.getCause().getMessage()
+		 * + ": " + message; lastError = "Query for documents failed: " + message; if
+		 * (Util.isDebug()) e.printStackTrace();
+		 * 
+		 * }
+		 */
 
-		try {
-			return consumer.invokeStoredQuery(query.getOhtStoredQuery(), false);
-		} catch (final Exception e) {
-			log.error("Exception", e);
-			String message = e.getMessage();
-			if (e.getCause() != null)
-				message = e.getCause().getMessage() + ": " + message;
-			lastError = "Query for documents failed: " + message;
-			if (Util.isDebug())
-				e.printStackTrace();
+		final var queryRegistry = new QueryRegistry(query.getIpfQuery());
+		queryRegistry.setReturnType(returnType);
 
-		}
-		return null;
+		final var serverInLogger = "#serverInLogger";
+		final var serverOutLogger = "#serverOutLogger";
+		final var attachmentOutInterceptor = "#AttachmentOutInterceptor";
+		AttachmentOutInterceptor interceptor = new AttachmentOutInterceptor();
+		SoapOutInterceptor soapOutInterceptor = new SoapOutInterceptor(null);
+
+		final var endpoint = String.format(
+				"xds-iti18://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
+				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", ""),
+				serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
+				secure);
+		log.info("Sending request to '{}' endpoint", endpoint);
+
+		Map<String, String> outgoingHeaders = new HashMap<>();
+		// outgoingHeaders.put("Accept", "application/soap+xml");
+		outgoingHeaders.put("transfer-encoding", "chunked");
+		outgoingHeaders.put("Content-Type",
+				"application/soap+xml; charset=UTF-8; action=\"urn:ihe:iti:2007:RegistryStoredQuery\"");
+		outgoingHeaders.put("Force MTOM", "false");
+
+		final var exchange = send(endpoint, queryRegistry, securityHeader, outgoingHeaders);
+
+		return exchange.getMessage().getBody(QueryResponse.class);
 	}
 
 	/**
-	 * <div class="en">Queries the registry of the affinity domain for all
-	 * documents satisfying the given query parameters. This is useful if the
-	 * number of results is limited in the registry and your query would exceed
-	 * this limit. In this case, precise your query or do a query for references
-	 * first, choose the possible matches (e.g. the last 10 results) and then
-	 * query for metadata.
+	 * <div class="en">Queries the registry of the affinity domain for all documents
+	 * satisfying the given query parameters. This is useful if the number of
+	 * results is limited in the registry and your query would exceed this limit. In
+	 * this case, precise your query or do a query for references first, choose the
+	 * possible matches (e.g. the last 10 results) and then query for metadata.
 	 *
-	 * @param query
-	 *            one of the given queries (@see
-	 *            org.ehealth_connector.communication.storedquery and
-	 *            org.ehealth_connector.communication.storedquery.ch)
+	 * @param query one of the given queries (@see
+	 *              org.ehealth_connector.communication.storedquery and
+	 *              org.ehealth_connector.communication.storedquery.ch)
 	 * @return the OHT XDSQueryResponseType containing references instead of the
 	 *         complete document metadata</div>
+	 * @throws Exception
 	 */
-	public XDSQueryResponseType queryDocumentsReferencesOnly(StoredQueryInterface query) {
-		lastError = "";
-		setDefaultKeystoreTruststore(affinityDomain.getRegistryDestination());
-		final B_Consumer consumer = new B_Consumer(
-				affinityDomain.getRegistryDestination().getUri());
+	public QueryResponse queryDocumentsReferencesOnly(AbstractStoredQuery query, SecurityHeaderElement securityHeader)
+			throws Exception {
+		/*
+		 * lastError = "";
+		 * setDefaultKeystoreTruststore(affinityDomain.getRegistryDestination()); final
+		 * B_Consumer consumer = new B_Consumer(
+		 * affinityDomain.getRegistryDestination().getUri());
+		 * 
+		 * try { return consumer.invokeStoredQuery(query.getOhtStoredQuery(), true); }
+		 * catch (final Exception e) { log.error("Exception", e); String message =
+		 * e.getMessage(); if (e.getCause() != null) message = e.getCause().getMessage()
+		 * + ": " + message; lastError = "Query for document references failed: " +
+		 * message; if (Util.isDebug()) e.printStackTrace();
+		 * 
+		 * } return null;
+		 */
 
-		try {
-			return consumer.invokeStoredQuery(query.getOhtStoredQuery(), true);
-		} catch (final Exception e) {
-			log.error("Exception", e);
-			String message = e.getMessage();
-			if (e.getCause() != null)
-				message = e.getCause().getMessage() + ": " + message;
-			lastError = "Query for document references failed: " + message;
-			if (Util.isDebug())
-				e.printStackTrace();
+		final var queryRegistry = new QueryRegistry(query.getIpfQuery());
 
-		}
-		return null;
+		final var serverInLogger = "#serverInLogger";
+		final var serverOutLogger = "#serverOutLogger";
+		final var endpoint = String.format(
+				"xds-iti18://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
+				affinityDomain.getRegistryDestination().getUri().toString().replace("https://", ""), serverInLogger,
+				serverInLogger, serverOutLogger, serverOutLogger, atnaConfigMode == AtnaConfigMode.SECURE);
+		log.info("Sending request to '{}' endpoint", endpoint);
+		final var exchange = send(endpoint, queryRegistry, securityHeader, null);
+
+		return exchange.getMessage().getBody(QueryResponse.class);
 	}
 
 	/**
 	 * <div class="en">Queries the document registry of the affinity domain for
 	 * documents, using a find documents query.
 	 *
-	 * @param queryParameter
-	 *            a findFoldersQuery object filled with your query parameters
-	 * @return the OHT XDSQueryResponseType containing full folder metadata
-	 *         </div>
+	 * @param queryParameter a findFoldersQuery object filled with your query
+	 *                       parameters
+	 * @return the OHT XDSQueryResponseType containing full folder metadata </div>
+	 * @throws Exception
 	 *
 	 */
-	public XDSQueryResponseType queryFolders(FindFoldersStoredQuery queryParameter) {
-		return this.queryDocuments(queryParameter);
+	public QueryResponse queryFolders(FindFoldersStoredQuery queryParameter, SecurityHeaderElement security,
+			boolean secure)
+			throws Exception {
+		return queryDocumentQuery(queryParameter, security, QueryReturnType.LEAF_CLASS, secure);
 	}
 
 	/**
 	 * <div class="en">Retrieves a document from a Repository
 	 *
-	 * @param docReq
-	 *            the document request
+	 * @param docReq the document request
 	 * @return the OHT XDSRetrieveResponseType </div>
+	 * @throws Exception
 	 */
-	public XDSRetrieveResponseType retrieveDocument(DocumentRequest docReq) {
-		return retrieveDocuments(new DocumentRequest[] { docReq });
+	public RetrievedDocumentSet retrieveDocument(DocumentRequest docReq, SecurityHeaderElement securityHeader,
+			boolean secure)
+			throws Exception {
+		return retrieveDocuments(new DocumentRequest[] { docReq }, securityHeader, secure);
 	}
 
 	/**
-	 * <div class="en">Retrieves multiple documents from one or more
-	 * Repositories
+	 * <div class="en">Retrieves multiple documents from one or more Repositories
 	 *
-	 * @param docReq
-	 *            an array of document requests
+	 * @param docReq an array of document requests
 	 * @return the OHT XDSRetrieveResponseType </div>
+	 * @throws Exception
 	 */
-	@SuppressWarnings("unchecked")
-	public XDSRetrieveResponseType retrieveDocuments(DocumentRequest[] docReq) {
-		final B_Consumer consumer = new B_Consumer(
-				affinityDomain.getRegistryDestination().getUri());
+	public RetrievedDocumentSet retrieveDocuments(DocumentRequest[] docReq, SecurityHeaderElement securityHeader,
+			boolean secure)
+			throws Exception {
+		final var retrieveDocumentSet = new RetrieveDocumentSet();
 
-		// Create RetrieveSetRequestType
-		final RetrieveDocumentSetRequestType retrieveDocumentSetRequest = org.openhealthtools.ihe.xds.consumer.retrieve.RetrieveFactory.eINSTANCE
-				.createRetrieveDocumentSetRequestType();
-
-		// Put the Repository to the OHT Repository HashMap
-		HashMap<String, URI> repositoryMap = null;
 		for (final DocumentRequest element : docReq) {
-			repositoryMap = new HashMap<>();
-			repositoryMap.put(element.getRepositoryId(), element.getRepositoryUri());
-
-			// Add Document Request
-			retrieveDocumentSetRequest.getDocumentRequest()
-					.add(element.getOhtDocumentRequestType());
+			if (element != null) {
+				retrieveDocumentSet.addReferenceTo(element.getIpfDocumentEntry());
+			}
 		}
-		consumer.setRepositoryMap(repositoryMap);
 
-		// invoke retrieve documentSet
-		final XDSRetrieveResponseType response = consumer.retrieveDocumentSet(false,
-				retrieveDocumentSetRequest, null);
+		final var serverInLogger = "#serverInLogger";
+		final var serverOutLogger = "#serverOutLogger";
+		final var endpoint = String.format(
+				"xds-iti43://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
+				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", ""),
+				serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
+				secure);
+		log.info("Sending request to '{}' endpoint", endpoint);
 
-		return response;
+		/*
+		 * Map<String, String> outgoingHeaders = new HashMap<>();
+		 * outgoingHeaders.put("Accept", "application/soap+xml");
+		 * outgoingHeaders.put("Content-Type",
+		 * "application/soap+xml; charset=UTF-8; action=\"urn:ihe:iti:2007:RetrieveDocumentSet\""
+		 * );
+		 */
+
+		final var exchange = send(endpoint, retrieveDocumentSet, securityHeader, null);
+
+		return exchange.getMessage().getBody(RetrievedDocumentSet.class);
 	}
 
 	/**
 	 * <div class="en">Sets the affinity domain set-up
 	 *
-	 * @param affinityDomain
-	 *            the affinity domain set-up </div>
+	 * @param affinityDomain the affinity domain set-up </div>
 	 */
 	public void setAffinityDomain(AffinityDomain affinityDomain) {
 		this.affinityDomain = affinityDomain;
@@ -944,20 +968,17 @@ public class ConvenienceCommunication {
 	/**
 	 * Sets the status of the automatic metadata extraction
 	 *
-	 * @param automaticExtractionEnabled
-	 *            true, if metadata will be extracted as far as possible)
-	 *            automatically, false otherwise
+	 * @param automaticExtractionEnabled true, if metadata will be extracted as far
+	 *                                   as possible) automatically, false otherwise
 	 */
-	public void setAutomaticExtractionEnabled(
-			DocumentMetadataExtractionMode automaticExtractionEnabled) {
+	public void setAutomaticExtractionEnabled(DocumentMetadataExtractionMode automaticExtractionEnabled) {
 		this.documentMetadataExtractionMode = automaticExtractionEnabled;
 	}
 
 	/**
 	 * Sets the key- and truststore for the default security domain
 	 *
-	 * @param dest
-	 *            the Destination Object
+	 * @param dest the Destination Object
 	 */
 	private void setDefaultKeystoreTruststore(Destination dest) {
 		if (dest.getKeyStore() == null) {
@@ -982,60 +1003,66 @@ public class ConvenienceCommunication {
 	}
 
 	/**
-	 * Setting up the communication endpoints for the affinity domain and the
-	 * logger
+	 * Setting up the communication endpoints for the affinity domain and the logger
 	 *
-	 * @param affinityDomain
-	 *            the affinity domain
-	 * @param atnaConfigMode
-	 *            the ATNA config mode (secure or unsecure)
+	 * @param affinityDomain the affinity domain
+	 * @param atnaConfigMode the ATNA config mode (secure or unsecure)
 	 */
 	protected void setUp(AffinityDomain affinityDomain, AtnaConfigMode atnaConfigMode) {
-		XDSSourceAuditor.getAuditor().getConfig()
-				.setAuditorEnabled(atnaConfigMode == AtnaConfigMode.SECURE);
+		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(atnaConfigMode == AtnaConfigMode.SECURE);
 	}
 
 	/**
 	 * <div class="en">Submission of the previously prepared document(s) to the
 	 * repository<br>
-	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE
-	 * ITI Document Source actor
+	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE ITI
+	 * Document Source actor
 	 *
 	 * @return the OHT XDSResponseType</div>
-	 * @throws Exception
-	 *             if the transfer is not successful
+	 * @throws Exception if the transfer is not successful
 	 */
-	public XDSResponseType submit() throws Exception {
+	public Response submit(SecurityHeaderElement securityHeader) throws Exception {
 		setDefaultKeystoreTruststore(affinityDomain.getRepositoryDestination());
-		source = new B_Source(affinityDomain.getRepositoryDestination().getUri());
 
 		if (submissionSetMetadataExtractionMode == SubmissionSetMetadataExtractionMode.DEFAULT_EXTRACTION) {
-			generateDefaultSubmissionSetAttributes();
+			txnData.setSubmissionSet(generateDefaultSubmissionSetAttributes());
+			linkDocumentEntryWithSubmissionSet();
 		}
-		// txnData.saveMetadataToFile("C:/temp/metadata.xml");
-		return source.submit(txnData);
+
+		final var serverInLogger = "#serverInLogger";
+		final var serverOutLogger = "#serverOutLogger";
+		final var endpoint = String.format(
+				"xds-iti41://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
+				this.affinityDomain.getRepositoryDestination().getUri().toString().replace("https://", ""),
+				serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
+				atnaConfigMode == AtnaConfigMode.SECURE);
+		log.info("Sending request to '{}' endpoint", endpoint);
+
+		final var exchange = send(endpoint, txnData, securityHeader, null);
+
+		return exchange.getMessage().getBody(Response.class);
 	}
 
 	/**
 	 * <div class="en">Submission of the previously prepared document(s) to the
 	 * repository<br>
-	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE
-	 * ITI Document Source actor
+	 * IHE [ITI-41] Provide and Register Document Set – b in the role of the IHE ITI
+	 * Document Source actor
 	 *
-	 * @param submissionSetMetadata
-	 *            The information in this object will be used to create
-	 *            comprehensive meta data about this submission (e.g. with
-	 *            AuthorRole, AuthorInstitution, ContentType and Title).
-	 *            Although, some of this information can be derived
-	 *            automatically, some may be required in your country (e.g.
-	 *            AuthorRole in Switzerland)
+	 * @param submissionSetMetadata The information in this object will be used to
+	 *                              create comprehensive meta data about this
+	 *                              submission (e.g. with AuthorRole,
+	 *                              AuthorInstitution, ContentType and Title).
+	 *                              Although, some of this information can be
+	 *                              derived automatically, some may be required in
+	 *                              your country (e.g. AuthorRole in Switzerland)
 	 * @return the OHT XDSResponseType</div>
-	 * @throws Exception
-	 *             if the transfer is not successful
+	 * @throws Exception if the transfer is not successful
 	 */
-	public XDSResponseType submit(SubmissionSetMetadata submissionSetMetadata) throws Exception {
+	public Response submit(SubmissionSetMetadata submissionSetMetadata, SecurityHeaderElement securityHeader)
+			throws Exception {
 		submissionSetMetadata.toOhtSubmissionSetType(txnData.getSubmissionSet());
 		// txnData.saveMetadataToFile("C:/temp/metadata_fhir.xml");
-		return submit();
+		return submit(securityHeader);
 	}
 }

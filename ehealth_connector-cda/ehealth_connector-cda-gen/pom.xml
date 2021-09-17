@@ -8,14 +8,14 @@
 	<parent>
 		<groupId>org.ehealth_connector.cda</groupId>
 		<artifactId>ehealth_connector-cda</artifactId>
-		<version>1.9-SNAPSHOT</version>
+		<version>2.0-ALPHA</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.ehealth_connector.common.ch</groupId>
 			<artifactId>ehealth_connector-common-ch</artifactId>
-			<version>1.9-SNAPSHOT</version>
+			<version>2.0-ALPHA</version>
 			<exclusions>
 				<exclusion>
 					<groupId>org.openhealthtools.mdht.uml</groupId>
@@ -36,8 +36,8 @@
 
 		<!-- test stuff -->
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

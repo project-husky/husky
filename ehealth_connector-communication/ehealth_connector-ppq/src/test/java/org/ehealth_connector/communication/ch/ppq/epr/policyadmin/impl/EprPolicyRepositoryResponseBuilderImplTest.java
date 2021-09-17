@@ -16,19 +16,19 @@
  */
 package org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.OpenSamlEprPolicyRepositoryResponse;
 import org.ehealth_connector.communication.ch.ppq.utilities.impl.InitializerTestHelper;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class EprPolicyRepositoryResponseBuilderImplTest extends InitializerTestHelper {
 
 	private String testStatus;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		testStatus = "urn:e-health-suisse:2015:response-status:success";
 	}

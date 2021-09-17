@@ -16,8 +16,8 @@
  */
 package org.ehealth_connector.xua.communication.clients.impl;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 
@@ -34,11 +34,11 @@ import org.ehealth_connector.xua.authentication.AuthnRequest;
 import org.ehealth_connector.xua.communication.config.impl.IdpClientByBrowserAndProtocolHandlerConfigBuilderImpl;
 import org.ehealth_connector.xua.deserialization.impl.AuthnRequestDeserializerImpl;
 import org.ehealth_connector.xua.exceptions.ClientSendException;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Element;
@@ -53,7 +53,7 @@ public class IdpClientByBrowserAndProtocolHandlerTest extends ServerTestHelper {
 	@SuppressWarnings("unused")
 	private static int httpPort;
 
-	@BeforeClass
+	@BeforeAll
 	public static void setUpBefore() throws IOException {
 		final SocketConfig socketConfig = SocketConfig.custom().setSoTimeout(15000)
 				.setTcpNoDelay(true).build();
@@ -75,7 +75,7 @@ public class IdpClientByBrowserAndProtocolHandlerTest extends ServerTestHelper {
 		httpPort = server.getLocalPort();
 	}
 
-	@AfterClass
+	@AfterAll
 	public static void tearDownAfter() {
 		server.stop();
 	}
@@ -89,7 +89,7 @@ public class IdpClientByBrowserAndProtocolHandlerTest extends ServerTestHelper {
 	/**
 	 * set up test parameters
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 
 		testFilename = "/credential-criteria-registry.properties";
@@ -121,7 +121,7 @@ public class IdpClientByBrowserAndProtocolHandlerTest extends ServerTestHelper {
 	 * @throws ClientSendException
 	 */
 	@Test
-	@Ignore("This test is not executable in this way.")
+	@Disabled("This test is not executable in this way.")
 	public void testSend() throws ClientSendException {
 
 		final Object ref = client.send(testAuthnRequest);

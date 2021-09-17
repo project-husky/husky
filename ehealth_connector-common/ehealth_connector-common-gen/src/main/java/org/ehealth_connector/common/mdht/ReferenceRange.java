@@ -16,12 +16,10 @@
  */
 package org.ehealth_connector.common.mdht;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040ReferenceRange;
 import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.BL;
 import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
-import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipType;
 
 /**
  * The Class ReferenceRange. A reference range or reference interval is the
@@ -30,16 +28,17 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipType;
 public class ReferenceRange extends ObservationRange {
 
 	/** The MDHT Reference Range. */
-	private org.openhealthtools.mdht.uml.cda.ReferenceRange mRr;
+	private POCDMT000040ReferenceRange mRr;
 
 	/**
 	 * Instantiates a new reference range.
 	 */
 	public ReferenceRange() {
 		super();
-		mRr = CDAFactory.eINSTANCE.createReferenceRange();
+		mRr = new POCDMT000040ReferenceRange();
 		mRr.setObservationRange(getObsR());
-		mRr.setTypeCode(ActRelationshipType.REFV);
+		mRr.getTypeCode().clear();
+		mRr.getTypeCode().add("REFV");
 		this.setInterpretation(ObservationInterpretation.NORMAL);
 	}
 
@@ -49,7 +48,7 @@ public class ReferenceRange extends ObservationRange {
 	 * @param mdht
 	 *            the mdht
 	 */
-	public ReferenceRange(org.openhealthtools.mdht.uml.cda.ReferenceRange mdht) {
+	public ReferenceRange(POCDMT000040ReferenceRange mdht) {
 		super(mdht.getObservationRange());
 		this.mRr = mdht;
 	}
@@ -69,20 +68,11 @@ public class ReferenceRange extends ObservationRange {
 	}
 
 	/**
-	 * Copy.
-	 *
-	 * @return the org.openhealthtools.mdht.uml.cda. reference range
-	 */
-	public org.openhealthtools.mdht.uml.cda.ReferenceRange copy() {
-		return EcoreUtil.copy(mRr);
-	}
-
-	/**
 	 * Gets the mdht.
 	 *
 	 * @return the mdht
 	 */
-	public org.openhealthtools.mdht.uml.cda.ReferenceRange getMdht() {
+	public POCDMT000040ReferenceRange getMdht() {
 		return mRr;
 	}
 
@@ -92,22 +82,21 @@ public class ReferenceRange extends ObservationRange {
 	 * @return the Reference Range as narrative String
 	 */
 	public String toNarrativeString() {
-		String retVal = "";
-		String value = "";
-		String lowValue = "";
-		String lowUnit = "";
-		String highValue = "";
-		String highUnit = "";
+		var retVal = "";
+		var value = "";
+		var lowValue = "";
+		var lowUnit = "";
+		var highValue = "";
+		var highUnit = "";
 
 		IVL_PQ tempIvl = null;
-		if (mRr != null)
-			if (mRr.getObservationRange() != null)
-				if (mRr.getObservationRange().getValue() != null) {
-					if (mRr.getObservationRange().getValue() instanceof IVL_PQ)
-						tempIvl = (IVL_PQ) mRr.getObservationRange().getValue();
-					if (mRr.getObservationRange().getValue() instanceof BL)
-						value = ((BL) mRr.getObservationRange().getValue()).getValue().toString();
-				}
+		if (mRr != null && mRr.getObservationRange() != null && mRr.getObservationRange().getValue() != null) {
+			if (mRr.getObservationRange().getValue() instanceof IVL_PQ)
+				tempIvl = (IVL_PQ) mRr.getObservationRange().getValue();
+			if (mRr.getObservationRange().getValue() instanceof BL)
+				value = ((BL) mRr.getObservationRange().getValue()).getValue().toString();
+		}
+
 		if (tempIvl != null) {
 			lowValue = tempIvl.getLow().getValue().toString();
 			lowUnit = tempIvl.getLow().getUnit();
@@ -118,12 +107,12 @@ public class ReferenceRange extends ObservationRange {
 			if (highUnit == null)
 				highUnit = tempIvl.getUnit();
 		}
-		if (!"".equals(value)) {
+		if (!value.isEmpty()) {
 			retVal = value;
 		} else {
-			if (!"".equals(lowUnit))
+			if (!lowUnit.isEmpty())
 				lowUnit = " " + lowUnit;
-			if (!"".equals(highUnit))
+			if (!highUnit.isEmpty())
 				highUnit = " " + highUnit;
 
 			if (lowUnit.equals(highUnit))

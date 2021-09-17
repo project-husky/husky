@@ -26,344 +26,295 @@ import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
 
 /**
- * <!-- @formatter:off -->
  * Enumeration of DocumentEntry.author.authorRole values
- *
- * <div class="en">Role of the author. This code defines the role of the author of the document. This is a sub-attribute of epd_xds_author.</div>
- * <div class="de">Rolle des Autors. Dieser Code definiert die Rolle des Authors vom Dokument. Dies ist ein Sub-Attribut von epd_xds_author.</div>
- * <div class="fr">Rôle de l'auteur. Ce code définit le rôle de l'auteur du document. Il s'agit d'un sous-attribut de epd_xds_author.</div>
- * <div class="it">Ruolo dell'autore. Questo codice definisce il ruolo dell'autore del documento. È un sottoattributo di epd_xds_author.</div>
- *
- * Identifier: 2.16.756.5.30.1.127.3.10.1.1.3
- * Effective date: 2021-04-01 08:55
- * Version: 202104.0-stable
+ * <p>
+ * EN: Role of the author. This code defines the role of the author of the document. This is a sub-attribute of epd_xds_author.<br>
+ * DE: Rolle des Autors. Dieser Code definiert die Rolle des Authors vom Dokument. Dies ist ein Sub-Attribut von epd_xds_author.<br>
+ * FR: Rôle de l'auteur. Ce code définit le rôle de l'auteur du document. Il s'agit d'un sous-attribut de epd_xds_author.<br>
+ * IT: Ruolo dell'autore. Questo codice definisce il ruolo dell'autore del documento. È un sottoattributo di epd_xds_author.<br>
+ * <p>
+ * Identifier: 2.16.756.5.30.1.127.3.10.1.1.3<br>
+ * Effective date: 2021-04-01 08:55<br>
+ * Version: 202104.0-stable<br>
  * Status: FINAL
- * <!-- @formatter:on -->
  */
-@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-04-22")
+@Generated(value = "org.ehealth_connector.codegenerator.ch.valuesets.UpdateValueSets", date = "2021-08-26")
 public enum AuthorRole implements ValueSetEnumInterface {
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Assistant</div>
-	 * <div class="de">Hilfsperson</div>
-	 * <div class="fr">Auxiliaire</div>
-	 * <div class="it">Persona ausiliara</div>
-	 * <!-- @formatter:on -->
-	 */
-	ASSISTANT("ASS", "2.16.756.5.30.1.127.3.10.6", "Assistant", "Assistant", "Hilfsperson",
-			"Auxiliaire", "Persona ausiliara"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Healthcare professional</div>
-	 * <div class="de">Gesundheitsfachperson</div>
-	 * <div class="fr">Professionnel de la santé</div>
-	 * <div class="it">Professionista della salute</div>
-	 * <!-- @formatter:on -->
-	 */
-	HEALTHCARE_PROFESSIONAL("HCP", "2.16.756.5.30.1.127.3.10.6", "Healthcare professional",
-			"Healthcare professional", "Gesundheitsfachperson", "Professionnel de la santé",
-			"Professionista della salute"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Patient</div>
-	 * <div class="de">Patient</div>
-	 * <div class="fr">Patient</div>
-	 * <div class="it">Paziente</div>
-	 * <!-- @formatter:on -->
-	 */
-	PATIENT("PAT", "2.16.756.5.30.1.127.3.10.6", "Patient", "Patient", "Patient", "Patient",
-			"Paziente"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Representative</div>
-	 * <div class="de">Stellvertretung</div>
-	 * <div class="fr">Représentant</div>
-	 * <div class="it">Rappresentante</div>
-	 * <!-- @formatter:on -->
-	 */
-	REPRESENTATIVE("REP", "2.16.756.5.30.1.127.3.10.6", "Representative", "Representative",
-			"Stellvertretung", "Représentant", "Rappresentante"),
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Technical user</div>
-	 * <div class="de">Technischer Benutzer</div>
-	 * <div class="fr">Utilisateur technique</div>
-	 * <div class="it">Utente tecnico</div>
-	 * <!-- @formatter:on -->
-	 */
-	TECHNICAL_USER("TCU", "2.16.756.5.30.1.127.3.10.6", "Technical user", "Technical user",
-			"Technischer Benutzer", "Utilisateur technique", "Utente tecnico");
+    /**
+     * EN: Assistant<br>
+     * DE: Hilfsperson<br>
+     * FR: Auxiliaire<br>
+     * IT: Persona ausiliara<br>
+     */
+    ASSISTANT("ASS",
+              "2.16.756.5.30.1.127.3.10.6",
+              "Assistant",
+              "Assistant",
+              "Hilfsperson",
+              "Auxiliaire",
+              "Persona ausiliara"),
+    /**
+     * EN: Healthcare professional<br>
+     * DE: Gesundheitsfachperson<br>
+     * FR: Professionnel de la santé<br>
+     * IT: Professionista della salute<br>
+     */
+    HEALTHCARE_PROFESSIONAL("HCP",
+                            "2.16.756.5.30.1.127.3.10.6",
+                            "Healthcare professional",
+                            "Healthcare professional",
+                            "Gesundheitsfachperson",
+                            "Professionnel de la santé",
+                            "Professionista della salute"),
+    /**
+     * EN: Patient<br>
+     * DE: Patient<br>
+     * FR: Patient<br>
+     * IT: Paziente<br>
+     */
+    PATIENT("PAT",
+            "2.16.756.5.30.1.127.3.10.6",
+            "Patient",
+            "Patient",
+            "Patient",
+            "Patient",
+            "Paziente"),
+    /**
+     * EN: Representative<br>
+     * DE: Stellvertretung<br>
+     * FR: Représentant<br>
+     * IT: Rappresentante<br>
+     */
+    REPRESENTATIVE("REP",
+                   "2.16.756.5.30.1.127.3.10.6",
+                   "Representative",
+                   "Representative",
+                   "Stellvertretung",
+                   "Représentant",
+                   "Rappresentante"),
+    /**
+     * EN: Technical user<br>
+     * DE: Technischer Benutzer<br>
+     * FR: Utilisateur technique<br>
+     * IT: Utente tecnico<br>
+     */
+    TECHNICAL_USER("TCU",
+                   "2.16.756.5.30.1.127.3.10.6",
+                   "Technical user",
+                   "Technical user",
+                   "Technischer Benutzer",
+                   "Utilisateur technique",
+                   "Utente tecnico");
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Assistant</div>
-	 * <div class="de">Code für Hilfsperson</div>
-	 * <div class="fr">Code de Auxiliaire</div>
-	 * <div class="it">Code per Persona ausiliara</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String ASSISTANT_CODE = "ASS";
+    /**
+     * EN: Code for Assistant<br>
+     * DE: Code für Hilfsperson<br>
+     * FR: Code de Auxiliaire<br>
+     * IT: Code per Persona ausiliara<br>
+     */
+    public static final String ASSISTANT_CODE = "ASS";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Healthcare professional</div>
-	 * <div class="de">Code für Gesundheitsfachperson</div>
-	 * <div class="fr">Code de Professionnel de la santé</div>
-	 * <div class="it">Code per Professionista della salute</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String HEALTHCARE_PROFESSIONAL_CODE = "HCP";
+    /**
+     * EN: Code for Healthcare professional<br>
+     * DE: Code für Gesundheitsfachperson<br>
+     * FR: Code de Professionnel de la santé<br>
+     * IT: Code per Professionista della salute<br>
+     */
+    public static final String HEALTHCARE_PROFESSIONAL_CODE = "HCP";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Patient</div>
-	 * <div class="de">Code für Patient</div>
-	 * <div class="fr">Code de Patient</div>
-	 * <div class="it">Code per Paziente</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String PATIENT_CODE = "PAT";
+    /**
+     * EN: Code for Patient<br>
+     * DE: Code für Patient<br>
+     * FR: Code de Patient<br>
+     * IT: Code per Paziente<br>
+     */
+    public static final String PATIENT_CODE = "PAT";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Representative</div>
-	 * <div class="de">Code für Stellvertretung</div>
-	 * <div class="fr">Code de Représentant</div>
-	 * <div class="it">Code per Rappresentante</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String REPRESENTATIVE_CODE = "REP";
+    /**
+     * EN: Code for Representative<br>
+     * DE: Code für Stellvertretung<br>
+     * FR: Code de Représentant<br>
+     * IT: Code per Rappresentante<br>
+     */
+    public static final String REPRESENTATIVE_CODE = "REP";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Code for Technical user</div>
-	 * <div class="de">Code für Technischer Benutzer</div>
-	 * <div class="fr">Code de Utilisateur technique</div>
-	 * <div class="it">Code per Utente tecnico</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String TECHNICAL_USER_CODE = "TCU";
+    /**
+     * EN: Code for Technical user<br>
+     * DE: Code für Technischer Benutzer<br>
+     * FR: Code de Utilisateur technique<br>
+     * IT: Code per Utente tecnico<br>
+     */
+    public static final String TECHNICAL_USER_CODE = "TCU";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Identifier of the value set</div>
-	 * <div class="de">Identifikator für das Value Set</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.1.3";
+    /**
+     * Identifier of the value set.
+     */
+    public static final String VALUE_SET_ID = "2.16.756.5.30.1.127.3.10.1.1.3";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Name of the value set</div>
-	 * <div class="de">Name des Value Sets</div>
-	 * <!-- @formatter:on -->
-	 */
-	public static final String VALUE_SET_NAME = "DocumentEntry.author.authorRole";
+    /**
+     * Name of the value set.
+     */
+    public static final String VALUE_SET_NAME = "DocumentEntry.author.authorRole";
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the Enum with a given code</div>
-	 * <div class="de">Liefert den Enum anhand eines gegebenen codes</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @param code
-	 *            <div class="de"> code</div>
-	 * @return <div class="en">the enum</div>
-	 */
-	public static AuthorRole getEnum(final String code) {
-		for (final AuthorRole x : values()) {
-			if (x.getCodeValue().equals(code)) {
-				return x;
-			}
-		}
-		return null;
-	}
+    /**
+     * Gets the Enum with a given code.
+     *
+     * @param code The code value.
+     * @return the enum value found or {@code null}.
+     */
+    public static AuthorRole getEnum(final String code) {
+        for (final AuthorRole x : values()) {
+            if (x.getCodeValue().equals(code)) {
+                return x;
+            }
+        }
+        return null;
+    }
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Checks if a given enum is part of this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene enum Teil dieses Value Sets ist.</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @param enumName
-	 *            <div class="de"> enumName</div>
-	 * @return true, if enum is in this value set
-	 */
-	public static boolean isEnumOfValueSet(final String enumName) {
-		if (enumName == null) {
-			return false;
-		}
-		try {
-			Enum.valueOf(AuthorRole.class, enumName);
-			return true;
-		} catch (final IllegalArgumentException ex) {
-			return false;
-		}
-	}
+    /**
+     * Checks if a given enum is part of this value set.
+     *
+     * @param enumName The name of the enum.
+     * @return {@code true} if the name is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isEnumOfValueSet(final String enumName) {
+        if (enumName == null) {
+            return false;
+        }
+        try {
+            Enum.valueOf(AuthorRole.class,
+                         enumName);
+            return true;
+        } catch (final IllegalArgumentException ex) {
+            return false;
+        }
+    }
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Checks if a given code value is in this value set.</div>
-	 * <div class="de">Prüft, ob der angegebene code in diesem Value Set vorhanden ist.</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @param codeValue
-	 *            <div class="de"> code</div>
-	 * @return true, if is in value set
-	 */
-	public static boolean isInValueSet(final String codeValue) {
-		for (final AuthorRole x : values()) {
-			if (x.getCodeValue().equals(codeValue)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    /**
+     * Checks if a given code value is in this value set.
+     *
+     * @param codeValue The code value.
+     * @return {@code true} if the value is found in this value set, {@code false} otherwise.
+     */
+    public static boolean isInValueSet(final String codeValue) {
+        for (final AuthorRole x : values()) {
+            if (x.getCodeValue().equals(codeValue)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Machine interpretable and (inside this class) unique code</div>
-	 * <div class="de">Maschinen interpretierbarer und (innerhalb dieser Klasse) eindeutiger Code</div>
-	 * <!-- @formatter:on -->
-	 */
-	private String code;
+    /**
+     * Machine interpretable and (inside this class) unique code.
+     */
+    private String code;
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Identifier of the referencing code system.</div>
-	 * <div class="de">Identifikator des referenzierende Codesystems.</div>
-	 * <!-- @formatter:on -->
-	 */
-	private String codeSystem;
+    /**
+     * Identifier of the referencing code system.
+     */
+    private String codeSystem;
 
-	/**
-	 * The display names per language
-	 */
-	private Map<LanguageCode, String> displayNames;
+    /**
+     * The display names per language.
+     */
+    private Map<LanguageCode, String> displayNames;
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Instantiates this Enum Object with a given Code and Display Name</div>
-	 * <div class="de">Instanziiert dieses Enum Object mittels eines Codes und einem Display Name</div>.
-	 * <!-- @formatter:on -->
-	 *
-	 * @param code
-	 *            code
-	 * @param codeSystem
-	 *            codeSystem
-	 * @param displayName
-	 *            the default display name
-	 * @param displayNameEn
-	 *            the display name en
-	 * @param displayNameDe
-	 *            the display name de
-	 * @param displayNameFr
-	 *            the display name fr
-	 * @param displayNameIt
-	 *            the display name it
-	 */
-	AuthorRole(final String code, final String codeSystem, final String displayName,
-			final String displayNameEn, final String displayNameDe, final String displayNameFr,
-			final String displayNameIt) {
-		this.code = code;
-		this.codeSystem = codeSystem;
-		this.displayNames = new HashMap<>();
-		this.displayNames.put(null, displayName);
-		this.displayNames.put(LanguageCode.ENGLISH, displayNameEn);
-		this.displayNames.put(LanguageCode.GERMAN, displayNameDe);
-		this.displayNames.put(LanguageCode.FRENCH, displayNameFr);
-		this.displayNames.put(LanguageCode.ITALIAN, displayNameIt);
-	}
+    /**
+     * Instantiates this enum with a given code and display names.
+     *
+     * @param code          The code value.
+     * @param codeSystem    The code system (OID).
+     * @param displayName   The default display name.
+     * @param displayNameEn The display name in English.
+     * @param displayNameDe The display name in German.
+     * @param displayNameFr The display name in French.
+     * @param displayNameIt The display name in Italian.
+     */
+    AuthorRole(final String code, final String codeSystem, final String displayName, final String displayNameEn, final String displayNameDe, final String displayNameFr, final String displayNameIt) {
+        this.code = code;
+        this.codeSystem = codeSystem;
+        this.displayNames = new HashMap<>();
+        this.displayNames.put(null,
+                              displayName);
+        this.displayNames.put(LanguageCode.ENGLISH,
+                              displayNameEn);
+        this.displayNames.put(LanguageCode.GERMAN,
+                              displayNameDe);
+        this.displayNames.put(LanguageCode.FRENCH,
+                              displayNameFr);
+        this.displayNames.put(LanguageCode.ITALIAN,
+                              displayNameIt);
+    }
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the code system identifier.</div>
-	 * <div class="de">Liefert den Code System Identifikator.</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @return <div class="en">the code system identifier</div>
-	 */
-	@Override
-	public String getCodeSystemId() {
-		return this.codeSystem;
-	}
+    /**
+     * Gets the code system identifier.
+     *
+     * @return the code system identifier.
+     */
+    @Override
+    public String getCodeSystemId() {
+        return this.codeSystem;
+    }
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the code system name.</div>
-	 * <div class="de">Liefert den Code System Namen.</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @return <div class="en">the code system identifier</div>
-	 */
-	@Override
-	public String getCodeSystemName() {
-		String retVal = "";
-		CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
-		if (cs != null)
-			retVal = cs.getCodeSystemName();
-		return retVal;
-	}
+    /**
+     * Gets the code system name.
+     *
+     * @return the code system identifier.
+     */
+    @Override
+    public String getCodeSystemName() {
+        final CodeSystems cs = CodeSystems.getEnum(this.codeSystem);
+        if (cs != null) {
+            return cs.getCodeSystemName();
+        }
+        return "";
+    }
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the actual Code as string</div>
-	 * <div class="de">Liefert den eigentlichen Code als String</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @return <div class="en">the code</div>
-	 */
-	@Override
-	public String getCodeValue() {
-		return this.code;
-	}
+    /**
+     * Gets the code value as a string.
+     *
+     * @return the code value.
+     */
+    @Override
+    public String getCodeValue() {
+        return this.code;
+    }
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the display name defined by the language param. If
-	 * there is no english translation, the default display name is returned.</div>
-	 * <div class="de">Liefert display name gemäss Parameter, falls es keine
-	 * Englische Übersetzung gibt, wird der default-Name zurückgegeben.</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @param languageCode
-	 *            the language code to get the display name for
-	 * @return returns the display name in the desired language. if language not
-	 *         found, display name in german will returned
-	 */
-	@Override
-	public String getDisplayName(LanguageCode languageCode) {
-		String displayName = this.displayNames.get(languageCode);
-		if (displayName == null && languageCode == LanguageCode.ENGLISH) {
-			return this.displayNames.get(null);
-		}
-		return displayName;
-	}
+    /**
+     * Gets the display name defined by the language param. If there is no english translation, the default display name
+     *      is returned.
+     *
+     * @param languageCode The language code to get the display name for.
+     * @return the display name in the desired language. if language not found, display name in german will be returned.
+     */
+    @Override
+    public String getDisplayName(final LanguageCode languageCode) {
+        final String displayName = this.displayNames.get(languageCode);
+        if (displayName == null && languageCode == LanguageCode.ENGLISH) {
+            return this.displayNames.get(null);
+        }
+        return displayName;
+    }
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the value set identifier.</div>
-	 * <div class="de">Liefert den Value Set Identifikator.</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @return <div class="en">the value set identifier</div>
-	 */
-	@Override
-	public String getValueSetId() {
-		return VALUE_SET_ID;
-	}
+    /**
+     * Gets the value set identifier.
+     *
+     * @return the value set identifier.
+     */
+    @Override
+    public String getValueSetId() {
+        return VALUE_SET_ID;
+    }
 
-	/**
-	 * <!-- @formatter:off -->
-	 * <div class="en">Gets the value set name.</div>
-	 * <div class="de">Liefert den Value Set Namen.</div>
-	 * <!-- @formatter:on -->
-	 *
-	 * @return <div class="en">the value set name</div>
-	 */
-	@Override
-	public String getValueSetName() {
-		return VALUE_SET_NAME;
-	}
+    /**
+     * Gets the value set name.
+     *
+     * @return the value set name.
+     */
+    @Override
+    public String getValueSetName() {
+        return VALUE_SET_NAME;
+    }
 }

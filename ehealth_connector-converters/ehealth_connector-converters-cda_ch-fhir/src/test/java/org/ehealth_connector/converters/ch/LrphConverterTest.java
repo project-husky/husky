@@ -16,14 +16,13 @@
  */
 package org.ehealth_connector.converters.ch;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.ehealth_connector.cda.ch.lab.lrph.CdaChLrph;
 import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
 import org.ehealth_connector.fhir.structures.ch.FhirCdaChLrph.LrphDocument;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  *
@@ -41,7 +40,7 @@ public class LrphConverterTest extends AbstractConverter {
 	 *
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		converter = new LrphConverter();
 		setUpTestFile("/FHIRLrphDocument_Isolate.xml");
@@ -56,7 +55,7 @@ public class LrphConverterTest extends AbstractConverter {
 	 * {@link org.ehealth_connector.converters.ch.LrphConverter#readLrphDocumentFromFile(java.lang.String)}.
 	 * {@link org.ehealth_connector.converters.ch.LrphConverter#createCdaChLrphFromFhir(org.ehealth_connector.fhir.structures.ch.FhirCdaChLrph.LrphDocument, java.lang.String, java.lang.String)}.
 	 */
-	@Test
+	@org.junit.jupiter.api.Test
 	public void testReadLrphDocumentFromFileCreateCdaChLrphFromFhir() {
 		final LrphDocument fhirDocument = converter.readLrphDocumentFromFile(testFile);
 		assertNotNull(fhirDocument);

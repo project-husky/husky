@@ -16,15 +16,15 @@
  */
 package org.ehealth_connector.valueset.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
 
 import org.ehealth_connector.common.basetypes.NameBaseType;
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
 import org.ehealth_connector.common.utils.DateUtilMdht;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * The Test Class for Version.

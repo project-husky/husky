@@ -22,7 +22,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.mdht.enums.ValueSetEnumInterface;
-import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
 import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
@@ -588,7 +587,11 @@ public class Code {
 		if (textReference != null) {
 			if (!textReference.startsWith("#"))
 				textReference = "#" + textReference;
-			ed = Util.createReference(textReference, originalText);
+			ed = DatatypesFactory.eINSTANCE.createED();
+			var tel = DatatypesFactory.eINSTANCE.createTEL();
+			ed.addText(originalText);
+			tel.setValue(textReference);
+			ed.setReference(tel);
 		}
 		if (ed == null) {
 			ed = DatatypesFactory.eINSTANCE.createED();
@@ -605,6 +608,10 @@ public class Code {
 	 *            the reference
 	 */
 	public void setOriginalTextReference(String reference) {
-		mCD.setOriginalText(Util.createReference(reference));
+		ED ed = DatatypesFactory.eINSTANCE.createED();
+		var tel = DatatypesFactory.eINSTANCE.createTEL();
+		tel.setValue(reference);
+		ed.setReference(tel);
+		mCD.setOriginalText(ed);
 	}
 }

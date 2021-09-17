@@ -22,7 +22,7 @@ import java.util.List;
 
 import org.ehealth_connector.cda.BaseVitalSignsOrganizer;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
-import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.enums.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.ActRelationshipHasComponent;

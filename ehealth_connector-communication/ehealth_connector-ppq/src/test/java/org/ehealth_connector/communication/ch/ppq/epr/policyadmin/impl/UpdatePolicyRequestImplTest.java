@@ -16,14 +16,14 @@
  */
 package org.ehealth_connector.communication.ch.ppq.epr.policyadmin.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.ehealth_connector.communication.ch.ppq.epr.policyadmin.api.UpdatePolicyRequest;
 import org.ehealth_connector.communication.ch.ppq.utilities.impl.InitializerTestHelper;
 import org.ehealth_connector.xua.saml2.impl.AssertionBuilderImpl;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
 import org.opensaml.core.xml.config.XMLObjectProviderRegistrySupport;
 import org.opensaml.core.xml.io.Unmarshaller;
@@ -34,7 +34,7 @@ public class UpdatePolicyRequestImplTest extends InitializerTestHelper {
 
 	private AssertionType testAssertion;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		final Element testAssertionXmlElement = loadXmlDokument(
 				"/ch-ppq/update_policy_request_assertion_only.xml");

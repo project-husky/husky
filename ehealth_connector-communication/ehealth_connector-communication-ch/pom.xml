@@ -7,19 +7,14 @@
 	<parent>
 		<groupId>org.ehealth_connector.communication</groupId>
 		<artifactId>ehealth_connector-communication</artifactId>
-		<version>1.9-SNAPSHOT</version>
+		<version>2.0-ALPHA</version>
 	</parent>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.ehealth_connector.communication</groupId>
 			<artifactId>ehealth_connector-communication-gen</artifactId>
-			<version>1.9-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.ehealth_connector.cda.ch</groupId>
-			<artifactId>ehealth_connector-cda-ch</artifactId>
-			<version>1.9-SNAPSHOT</version>
+			<version>2.0-ALPHA</version>
 		</dependency>
 		
 		<dependency>
@@ -45,8 +40,8 @@
 
 		<!-- test stuff -->
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -63,23 +58,9 @@
 			<artifactId>slf4j-log4j12</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.ehealth_connector.cda</groupId>
-			<artifactId>ehealth_connector-cda-gen</artifactId>
-			<version>1.9-SNAPSHOT</version>
-			<type>test-jar</type>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.ehealth_connector.cda.ch</groupId>
-			<artifactId>ehealth_connector-cda-ch</artifactId>
-			<version>1.9-SNAPSHOT</version>
-			<type>test-jar</type>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.ehealth_connector.communication</groupId>
 			<artifactId>ehealth_connector-communication-gen</artifactId>
-			<version>1.9-SNAPSHOT</version>
+			<version>2.0-ALPHA</version>
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>

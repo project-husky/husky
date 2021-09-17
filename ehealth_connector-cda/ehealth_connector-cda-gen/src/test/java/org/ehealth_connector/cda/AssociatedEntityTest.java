@@ -16,13 +16,13 @@
  */
 package org.ehealth_connector.cda;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.ehealth_connector.cda.testhelper.TestUtils;
-import org.ehealth_connector.common.mdht.Person;
-import org.junit.Test;
+import org.ehealth_connector.common.Person;
+import org.junit.jupiter.api.Test;
 
 public class AssociatedEntityTest extends TestUtils {
 	@Test

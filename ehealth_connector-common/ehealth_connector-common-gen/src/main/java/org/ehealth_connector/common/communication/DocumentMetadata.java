@@ -16,30 +16,24 @@
  */
 package org.ehealth_connector.common.communication;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.common.mdht.Author;
-import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.mdht.Identificator;
-import org.ehealth_connector.common.mdht.Patient;
+import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Patient;
+import org.ehealth_connector.common.enums.DocumentDescriptor;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
 import org.ehealth_connector.common.mdht.enums.ConfidentialityCode;
-import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
-import org.openhealthtools.ihe.common.hl7v2.SourcePatientInfoType;
-import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
-import org.openhealthtools.ihe.xds.metadata.AuthorType;
-import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;
-import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
-import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
-import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
-import org.openhealthtools.ihe.xds.metadata.extract.cdar2.CDAR2Extractor;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
+
 
 /**
  * Provides metadata attributes as specified in [IHE ITI TF-3], Table 4.1-5:
@@ -151,10 +145,10 @@ public class DocumentMetadata {
 	}
 
 	/** The x doc. */
-	private DocumentEntryType xDoc;
+	private DocumentEntry xDoc;
 
 	/** The CDA document. */
-	private final ClinicalDocument cda;
+	private final POCDMT000040ClinicalDocument cda;
 
 	/**
 	 * <div class="en">The document descriptor</div>
@@ -173,8 +167,8 @@ public class DocumentMetadata {
 	 * Instantiates a new document metadata.
 	 */
 	public DocumentMetadata() {
-		xDoc = MetadataFactory.eINSTANCE.createDocumentEntryType();
-		cda = CDAFactory.eINSTANCE.createClinicalDocument();
+		xDoc = new DocumentEntry();
+		cda = new POCDMT000040ClinicalDocument();
 	}
 
 	/**
@@ -183,7 +177,7 @@ public class DocumentMetadata {
 	 * @param documentEntryType
 	 *            the document entry type
 	 */
-	public DocumentMetadata(DocumentEntryType documentEntryType) {
+	public DocumentMetadata(DocumentEntry documentEntryType) {
 		this();
 		xDoc = documentEntryType;
 	}
@@ -203,76 +197,20 @@ public class DocumentMetadata {
 	 * Adds an (optional) author element. All information relevant for the XDS
 	 * Document Metadata will be extracted from the Convenience API Author.
 	 *
-	 * @param author
-	 *            the author
 	 */
-	@SuppressWarnings("unchecked")
-	public void addAuthor(Author author) {
-		// Workaround for a Bug in the CDAR2Extractor, which causes a
-		// NullpointerException, if no Telecom value is interted and
-		// logger.Debug is set to true
-
-		// 20180718 ts: empty TELs lead to the problem that the XTN cannot be
-		// extracted while processing the query response of an XDS document
-		// query:
-		// java.lang.ArrayStoreException:
-		// org.openhealthtools.ihe.common.hl7v2.impl.XTNImpl
-		// at org.eclipse.emf.common.util.BasicEList.assign(BasicEList.java:118)
-		// at
-		// org.eclipse.emf.common.util.BasicEList.addUnique(BasicEList.java:418)
-		// at
-		// org.eclipse.emf.common.notify.impl.NotifyingListImpl.doAddUnique(NotifyingListImpl.java:325)
-		// at
-		// org.eclipse.emf.common.notify.impl.NotifyingListImpl.addUnique(NotifyingListImpl.java:309)
-		// at
-		// org.eclipse.emf.common.util.AbstractEList.add(AbstractEList.java:303)
-		// at
-		// org.openhealthtools.ihe.xds.metadata.extract.EbXML_3_0DocumentEntryExtractor.extractExtrinsicObjectClassifications(EbXML_3_0DocumentEntryExtractor.java:574)
-		// at
-		// org.openhealthtools.ihe.xds.metadata.extract.EbXML_3_0DocumentEntryExtractor.extract(EbXML_3_0DocumentEntryExtractor.java:215)
-		// at
-		// org.openhealthtools.ihe.xds.consumer.utils.EbXML_3_0MetadataUtils.processEbXML_3_0QueryResults(EbXML_3_0MetadataUtils.java:226)
-		// at
-		// org.openhealthtools.ihe.xds.consumer.handlers.RegistryStoredQueryMetadataHandler.processResponse(RegistryStoredQueryMetadataHandler.java:71)
-		// at
-		// org.openhealthtools.ihe.xds.consumer.AbstractConsumer.invokeStoredQuery(AbstractConsumer.java:218)
-		// at
-		// org.openhealthtools.ihe.xds.consumer.B_Consumer.invokeStoredQuery(B_Consumer.java:215)
-		// at
-		// org.openhealthtools.ihe.xds.consumer.B_Consumer.invokeStoredQuery(B_Consumer.java:207)
-		// at
-		// org.ehealth_connector.communication.ConvenienceCommunication.queryDocuments(ConvenienceCommunication.java:751)
-		//
-		// Therefore we do no longer send empty TELs, here
-		// if ((author.getAuthorMdht().getAssignedAuthor().getTelecoms() ==
-		// null)
-		// ||
-		// author.getAuthorMdht().getAssignedAuthor().getTelecoms().isEmpty()) {
-		// final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		// author.getAuthorMdht().getAssignedAuthor().getTelecoms().add(tel);
-		// }
-
-		// There is another bug in the extractAuthorPerson Member. When the
-		// author has no id, the authorPerson object is not extracted. No
-		// workaround yet.
-
-		cda.getAuthors().add(author.copyMdhtAuthor());
-
-		final CDAR2Extractor extractor = new CDAR2Extractor(cda);
-		final AuthorType xAuthor = extractor.extractAuthors().get(0);
+	public void addAuthor() {
+		final var extractor = new CDAR2Extractor(cda);
+		final var xAuthor = extractor.extractAuthors().get(0);
 		xDoc.getAuthors().add(xAuthor);
 	}
 
 	/**
-	 * Adds the (optional) confidentialityCode code (e.g. 'N' for 'normal')
+	 * Adds an (optional) author element. All information relevant for the XDS
+	 * Document Metadata will be extracted from the Convenience API Author.
 	 *
-	 * @param code
-	 *            the code
 	 */
-	@SuppressWarnings("unchecked")
-	public void addConfidentialityCode(Code code) {
-		xDoc.getConfidentialityCode().add(XdsMetadataUtil.createCodedMetadata(code.getCodeSystem(),
-				code.getCode(), code.getDisplayName(), null, language));
+	public void addAuthor(Author author) {
+		xDoc.getAuthors().add(XdsMetadataUtil.converteHCAuthor(author));
 	}
 
 	/**
@@ -281,9 +219,19 @@ public class DocumentMetadata {
 	 * @param code
 	 *            the code
 	 */
-	@SuppressWarnings("unchecked")
+	public void addConfidentialityCode(Code code) {
+		xDoc.getConfidentialityCodes().add(XdsMetadataUtil.convertEhcCodeToCode(code));
+	}
+
+	/**
+	 * Adds the (optional) confidentialityCode code (e.g. 'N' for 'normal')
+	 *
+	 * @param code
+	 *            the code
+	 */
 	public void addConfidentialityCode(ConfidentialityCode code) {
-		xDoc.getConfidentialityCode().add(XdsMetadataUtil.createCodedMetadata(
+		xDoc.getConfidentialityCodes().add(XdsMetadataUtil
+				.createCodedMetadata(
 				code.getCodeSystemOid(), code.getCodeValue(), code.getDisplayName(), null));
 	}
 
@@ -295,31 +243,31 @@ public class DocumentMetadata {
 		xDoc.setAvailabilityStatus(null);
 		xDoc.setClassCode(null);
 		xDoc.setComments(null);
-		xDoc.setCreationTime(null);
+		xDoc.setCreationTime("");
 		xDoc.setFormatCode(null);
 		xDoc.setHash(null);
 		xDoc.setLanguageCode(null);
 		xDoc.setLegalAuthenticator(null);
 		xDoc.setMimeType(null);
-		xDoc.setParentDocument(null);
+
 		xDoc.setPatientId(null);
 		xDoc.setPracticeSettingCode(null);
 		xDoc.setRepositoryUniqueId(null);
-		xDoc.setServiceStartTime(null);
-		xDoc.setServiceStopTime(null);
+		xDoc.setServiceStartTime("");
+		xDoc.setServiceStopTime("");
 		xDoc.setSize(null);
 		xDoc.setSourcePatientId(null);
 		xDoc.setSourcePatientInfo(null);
 
 		xDoc.setTypeCode(null);
-		xDoc.setHealthCareFacilityTypeCode(null);
+		xDoc.setHealthcareFacilityTypeCode(null);
 		xDoc.setTitle(null);
 		xDoc.setUniqueId(null);
 
 		xDoc.getAuthors().clear();
-		xDoc.getConfidentialityCode().clear();
-		xDoc.getEventCode().clear();
-		xDoc.getExtension().clear();
+		xDoc.getConfidentialityCodes().clear();
+		xDoc.getEventCodeList().clear();
+		xDoc.getExtraMetadata().clear();
 	}
 
 	/**
@@ -332,22 +280,12 @@ public class DocumentMetadata {
 		xDoc.setFormatCode(null);
 		xDoc.setHash(null);
 		xDoc.setMimeType(null);
-		xDoc.setParentDocument(null);
 		xDoc.setPatientId(null);
 		xDoc.setPracticeSettingCode(null);
 		xDoc.setRepositoryUniqueId(null);
 
 		xDoc.getAuthors().clear();
-		xDoc.getConfidentialityCode().clear();
-	}
-
-	/**
-	 * Copy mdht document entry type.
-	 *
-	 * @return the document entry type
-	 */
-	public DocumentEntryType copyMdhtDocumentEntryType() {
-		return EcoreUtil.copy(xDoc);
+		xDoc.getConfidentialityCodes().clear();
 	}
 
 	@Override
@@ -369,7 +307,7 @@ public class DocumentMetadata {
 		if (this.getAuthors() == null) {
 			if (other.getAuthors() != null)
 				return false;
-		} else if (!(this.getAuthors().size() == other.getAuthors().size()))
+		} else if (this.getAuthors().size() != other.getAuthors().size())
 			return false;
 
 		if (this.getPatientId() == null) {
@@ -469,9 +407,8 @@ public class DocumentMetadata {
 	public List<Author> getAuthors() {
 		final List<Author> authorList = new ArrayList<>();
 
-		for (int i = 0; i < xDoc.getAuthors().size(); i++) {
-			final AuthorType at = (AuthorType) xDoc.getAuthors().get(i);
-			authorList.add(XdsMetadataUtil.convertOhtAuthorType(at));
+		for (org.openehealth.ipf.commons.ihe.xds.core.metadata.Author at : xDoc.getAuthors()) {
+			authorList.add(XdsMetadataUtil.convertIpfAuthor(at));
 		}
 		return authorList;
 	}
@@ -482,7 +419,7 @@ public class DocumentMetadata {
 	 *
 	 * @return the Availabilitystatus of the document
 	 */
-	public AvailabilityStatusType getAvailabilityStatus() {
+	public AvailabilityStatus getAvailabilityStatus() {
 		return xDoc.getAvailabilityStatus();
 	}
 
@@ -516,14 +453,12 @@ public class DocumentMetadata {
 	public List<Code> getConfidentialityCodes() {
 		final List<Code> confCodes = new ArrayList<>();
 
-		if (!xDoc.getConfidentialityCode().isEmpty()) {
-			for (int i = 0; i < xDoc.getConfidentialityCode().size(); i++) {
-				final CodedMetadataType cmt = (CodedMetadataType) xDoc.getConfidentialityCode()
-						.get(i);
-				confCodes.add(XdsMetadataUtil.convertOhtCodedMetadataType(cmt));
+		if (!xDoc.getConfidentialityCodes().isEmpty()) {
+			for (org.openehealth.ipf.commons.ihe.xds.core.metadata.Code code : xDoc.getConfidentialityCodes()) {
+				confCodes.add(XdsMetadataUtil.convertOhtCodedMetadataType(code));
 			}
 		} else {
-			return null;
+			return new LinkedList<>();
 		}
 		return confCodes;
 	}
@@ -533,8 +468,8 @@ public class DocumentMetadata {
 	 *
 	 * @return creationTime as Date
 	 */
-	public Date getCreationTime() {
-		return DateUtilMdht.parseDates(xDoc.getCreationTime());
+	public ZonedDateTime getCreationTime() {
+		return xDoc.getCreationTime().getDateTime();
 	}
 
 	/**
@@ -561,7 +496,7 @@ public class DocumentMetadata {
 	 * @return the EntryUUID
 	 */
 	public String getEntryUUID() {
-		return xDoc.getEntryUUID();
+		return xDoc.getEntryUuid();
 	}
 
 	/**
@@ -579,7 +514,7 @@ public class DocumentMetadata {
 	 * @return healthcareFacilityTypeCode as Code
 	 */
 	public Code getHealthcareFacilityTypeCode() {
-		return XdsMetadataUtil.convertOhtCodedMetadataType(xDoc.getHealthCareFacilityTypeCode());
+		return XdsMetadataUtil.convertOhtCodedMetadataType(xDoc.getHealthcareFacilityTypeCode());
 	}
 
 	/**
@@ -587,7 +522,7 @@ public class DocumentMetadata {
 	 *
 	 * @return the mdht document entry type
 	 */
-	public DocumentEntryType getMdhtDocumentEntryType() {
+	public DocumentEntry getDocumentEntry() {
 		return xDoc;
 	}
 
@@ -697,8 +632,8 @@ public class DocumentMetadata {
 	 */
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
+		final var prime = 31;
+		var result = 1;
 		if (this.xDoc == null)
 			return prime;
 		result = result + getAuthors().hashCode();
@@ -727,7 +662,7 @@ public class DocumentMetadata {
 	 * @param availabilityStatus
 	 *            the availability status to set
 	 */
-	public void setAvailabilityStatus(AvailabilityStatusType availabilityStatus) {
+	public void setAvailabilityStatus(AvailabilityStatus availabilityStatus) {
 		xDoc.setAvailabilityStatus(availabilityStatus);
 	}
 
@@ -739,7 +674,7 @@ public class DocumentMetadata {
 	 *            the new class code
 	 */
 	public void setClassCode(Code code) {
-		xDoc.setClassCode(XdsMetadataUtil.convertEhcCodeToCodedMetadataType(code, language));
+		xDoc.setClassCode(XdsMetadataUtil.convertEhcCodeToIpfCode(code, language));
 	}
 
 	/**
@@ -760,9 +695,10 @@ public class DocumentMetadata {
 	 * @param dateAndTime
 	 *            the new creation time
 	 */
-	public void setCreationTime(Date dateAndTime) {
-		final DateFormat cdaDateFormatter = new SimpleDateFormat("yyyyMMddHHmm");
-		xDoc.setCreationTime(cdaDateFormatter.format(dateAndTime));
+	public void setCreationTime(ZonedDateTime dateAndTime) {
+		xDoc.setCreationTime(
+				dateAndTime.format(
+						DateTimeFormatter.ofPattern("yyyyMMddHHmmssZ").withZone(ZoneId.systemDefault())));
 	}
 
 	/**
@@ -803,7 +739,7 @@ public class DocumentMetadata {
 	 *            the uuid to be set
 	 */
 	public void setEntryUUID(String entryUuid) {
-		xDoc.setEntryUUID(entryUuid);
+		xDoc.setEntryUuid(entryUuid);
 	}
 
 	/**
@@ -814,7 +750,7 @@ public class DocumentMetadata {
 	 *            the new format code
 	 */
 	public void setFormatCode(Code code) {
-		xDoc.setFormatCode(XdsMetadataUtil.convertEhcCodeToCodedMetadataType(code, language));
+		xDoc.setFormatCode(XdsMetadataUtil.convertEhcCodeToIpfCode(code, language));
 	}
 
 	/**
@@ -825,13 +761,13 @@ public class DocumentMetadata {
 	 *            the new healthcare facility type code
 	 */
 	public void setHealthcareFacilityTypeCode(Code code) {
-		xDoc.setHealthCareFacilityTypeCode(
-				XdsMetadataUtil.convertEhcCodeToCodedMetadataType(code, language));
+		xDoc.setHealthcareFacilityTypeCode(
+				XdsMetadataUtil.convertEhcCodeToIpfCode(code, language));
 	}
 
 	public void setMetadata(DocumentMetadata metaData) {
 		clear();
-		for (final Author item : metaData.getAuthors()) {
+		for (final org.ehealth_connector.common.Author item : metaData.getAuthors()) {
 			addAuthor(item);
 		}
 
@@ -889,15 +825,15 @@ public class DocumentMetadata {
 	 *            the new patient
 	 */
 	public void setPatient(Patient patient) {
-		cda.getRecordTargets().add(patient.getMdhtRecordTarget());
+		cda.getRecordTarget().add(patient.getMdhtRecordTarget());
 
 		// Source Patient Info (Adress etc.)
-		final CDAR2Extractor extractor = new CDAR2Extractor(cda);
-		final SourcePatientInfoType spi = extractor.extractSourcePatientInfo();
+		final var extractor = new CDAR2Extractor(cda);
+		final var spi = extractor.extractSourcePatientInfo();
 		xDoc.setSourcePatientInfo(spi);
 
 		// PatientID
-		if ((patient.getIds() != null) && (patient.getIds().size() > 0)) {
+		if (patient.getIds() != null && !patient.getIds().isEmpty()) {
 			setDestinationPatientId(patient.getIds().get(0));
 		}
 	}
@@ -912,7 +848,7 @@ public class DocumentMetadata {
 	 */
 	public void setPracticeSettingCode(Code code) {
 		xDoc.setPracticeSettingCode(
-				XdsMetadataUtil.convertEhcCodeToCodedMetadataType(code, language));
+				XdsMetadataUtil.convertEhcCodeToIpfCode(code, language));
 	}
 
 	/**
@@ -945,7 +881,7 @@ public class DocumentMetadata {
 	 *            the new type code
 	 */
 	public void setTypeCode(Code code) {
-		xDoc.setTypeCode(XdsMetadataUtil.convertEhcCodeToCodedMetadataType(code, language));
+		xDoc.setTypeCode(XdsMetadataUtil.convertEhcCodeToIpfCode(code, language));
 	}
 
 	/**

@@ -16,15 +16,15 @@
  */
 package org.ehealth_connector.converters.ch;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.hl7.fhir.dstu3.model.Narrative;
 import org.hl7.fhir.dstu3.model.Observation;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -49,7 +49,7 @@ public class CdaChV12FhirConverterTest {
 	 *
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		converter = new MyCdaChFhirConverter();
 
@@ -84,7 +84,7 @@ public class CdaChV12FhirConverterTest {
 	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getActiveProblemConcernEntries(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetActiveProblemConcernEntries() {
 		fail("Not yet implemented");
 	}
@@ -94,7 +94,7 @@ public class CdaChV12FhirConverterTest {
 	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getAllergyProblemConcernEntries(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetAllergyProblemConcernEntries() {
 		fail("Not yet implemented");
 	}
@@ -104,7 +104,7 @@ public class CdaChV12FhirConverterTest {
 	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getAuthors(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetAuthors() {
 		fail("Not yet implemented");
 	}
@@ -114,7 +114,7 @@ public class CdaChV12FhirConverterTest {
 	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getCodedVitalSigns(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetCodedVitalSigns() {
 		fail("Not yet implemented");
 	}
@@ -124,7 +124,7 @@ public class CdaChV12FhirConverterTest {
 	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getComment(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetCommentDocumentManifest() {
 		fail("Not yet implemented");
 	}
@@ -134,7 +134,7 @@ public class CdaChV12FhirConverterTest {
 	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getConfidentialityCode(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetConfidentialityCode() {
 		fail("Not yet implemented");
 	}
@@ -144,7 +144,7 @@ public class CdaChV12FhirConverterTest {
 	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getCustodian(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetCustodian() {
 		fail("Not yet implemented");
 	}
@@ -154,7 +154,7 @@ public class CdaChV12FhirConverterTest {
 	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getDocLanguage(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetDocLanguage() {
 		fail("Not yet implemented");
 	}
@@ -164,7 +164,7 @@ public class CdaChV12FhirConverterTest {
 	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getDocumentDate(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetDocumentDate() {
 		fail("Not yet implemented");
 	}
@@ -174,7 +174,7 @@ public class CdaChV12FhirConverterTest {
 	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getDocumentId(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetDocumentId() {
 		fail("Not yet implemented");
 	}
@@ -184,7 +184,7 @@ public class CdaChV12FhirConverterTest {
 	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getDocumentSetId(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetDocumentSetId() {
 		fail("Not yet implemented");
 	}
@@ -194,7 +194,7 @@ public class CdaChV12FhirConverterTest {
 	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getEdDiagnoses(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetEdDiagnoses() {
 		fail("Not yet implemented");
 	}
@@ -204,7 +204,7 @@ public class CdaChV12FhirConverterTest {
 	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getGestationalAge(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetGestationalAge() {
 		fail("Not yet implemented");
 	}
@@ -214,7 +214,7 @@ public class CdaChV12FhirConverterTest {
 	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getIntendedRecipient(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetIntendedRecipient() {
 		fail("Not yet implemented");
 	}
@@ -224,7 +224,7 @@ public class CdaChV12FhirConverterTest {
 	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getLaboratoryObservations(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetLaboratoryObservations() {
 		fail("Not yet implemented");
 	}
@@ -234,7 +234,7 @@ public class CdaChV12FhirConverterTest {
 	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getLegalAuthenticator(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetLegalAuthenticator() {
 		fail("Not yet implemented");
 	}
@@ -244,7 +244,7 @@ public class CdaChV12FhirConverterTest {
 	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getNarrative(org.hl7.fhir.dstu3.model.DocumentManifest, java.lang.String)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetNarrative() {
 		fail("Not yet implemented");
 	}
@@ -254,7 +254,7 @@ public class CdaChV12FhirConverterTest {
 	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getPastProblemConcernEntries(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetPastProblemConcernEntries() {
 		fail("Not yet implemented");
 	}
@@ -264,7 +264,7 @@ public class CdaChV12FhirConverterTest {
 	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getPerformer(org.hl7.fhir.dstu3.model.MedicationStatement)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetPerformer() {
 		fail("Not yet implemented");
 	}
@@ -274,7 +274,7 @@ public class CdaChV12FhirConverterTest {
 	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getPregnancyHistory(org.hl7.fhir.dstu3.model.DocumentManifest)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetPregnancyHistory() {
 		fail("Not yet implemented");
 	}
@@ -284,7 +284,7 @@ public class CdaChV12FhirConverterTest {
 	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#getValueFromKeyValueString(org.hl7.fhir.dstu3.model.Observation, java.lang.String)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testGetValueFromKeyValueString() {
 		fail("Not yet implemented");
 	}
@@ -294,7 +294,7 @@ public class CdaChV12FhirConverterTest {
 	 * {@link org.ehealth_connector.converters.ch.AbstractCdaChV12FhirConverter#isDocType(org.hl7.fhir.dstu3.model.DocumentManifest, java.lang.String)}.
 	 */
 	@Test
-	@Ignore
+	@Disabled
 	public void testIsDocType() {
 		fail("Not yet implemented");
 	}

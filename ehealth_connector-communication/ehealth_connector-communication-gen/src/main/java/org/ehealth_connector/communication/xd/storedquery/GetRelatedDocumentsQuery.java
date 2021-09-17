@@ -16,9 +16,10 @@
  */
 package org.ehealth_connector.communication.xd.storedquery;
 
-import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
-import org.openhealthtools.ihe.xds.consumer.storedquery.ObjectType;
-import org.openhealthtools.ihe.xds.metadata.ParentDocumentRelationshipType;
+import java.util.List;
+
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationType;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntryType;
 
 /**
  * Represents a query to get documents, which are associated with a given
@@ -28,92 +29,99 @@ public class GetRelatedDocumentsQuery extends AbstractStoredQuery {
 	/**
 	 * Constructor.
 	 *
-	 * @param docId
-	 *            ID of the document
-	 * @param isUUID
-	 *            set to true if docID is the entryUUID (internal registry
-	 *            identifier) of the document and set to false if it is the
-	 *            uniqueID (external to registry) of the document. In most user
-	 *            cases, this should be set to false
-	 * @param relationshipTypes
-	 *            list of relationship types that relate the document in
-	 *            question to other documents and that are desired to be
-	 *            queried.
+	 * @param docId             ID of the document
+	 * @param isUUID            set to true if docID is the entryUUID (internal
+	 *                          registry identifier) of the document and set to
+	 *                          false if it is the uniqueID (external to registry)
+	 *                          of the document. In most user cases, this should be
+	 *                          set to false
+	 * @param relationshipTypes list of relationship types that relate the document
+	 *                          in question to other documents and that are desired
+	 *                          to be queried.
 	 */
-	public GetRelatedDocumentsQuery(String docId, boolean isUUID,
-			ParentDocumentRelationshipType[] relationshipTypes) {
-		try {
-			setOhtStoredQuery(
-					new org.openhealthtools.ihe.xds.consumer.storedquery.GetRelatedDocumentsQuery(
-							docId, isUUID, relationshipTypes));
-		} catch (final MalformedStoredQueryException e) {
-			e.printStackTrace();
+	public GetRelatedDocumentsQuery(String docId, boolean isUUID, List<AssociationType> relationshipTypes) {
+		var query = new org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetRelatedDocumentsQuery();
+
+		if (isUUID) {
+			query.setUuid(docId);
+		} else {
+			query.setUniqueId(docId);
 		}
+
+		query.setAssociationTypes(relationshipTypes);
+
+		setIpfStoredQuery(query);
 	}
 
 	/**
-	 * Constructor that allows for the addition of a homeCommunityId to the
-	 * query to support the XCA profile extension of this query.
+	 * Constructor that allows for the addition of a homeCommunityId to the query to
+	 * support the XCA profile extension of this query.
 	 *
-	 * @param docId
-	 *            ID of the document
-	 * @param isUUID
-	 *            set to true if docID is the entryUUID (internal registry
-	 *            identifier) of the document and set to false if it is the
-	 *            uniqueID (external to registry) of the document. In most user
-	 *            cases, this should be set to false
-	 * @param relationshipTypes
-	 *            list of relationship types that relate the document in
-	 *            question to other documents and that are desired to be
-	 *            queried.
-	 * @param homeCommunityId
-	 *            this is the id of the home community as specified by the XCA
-	 *            profile. Value may be null or empty, in which case it is not
-	 *            added to the query.
+	 * @param docId             ID of the document
+	 * @param isUUID            set to true if docID is the entryUUID (internal
+	 *                          registry identifier) of the document and set to
+	 *                          false if it is the uniqueID (external to registry)
+	 *                          of the document. In most user cases, this should be
+	 *                          set to false
+	 * @param relationshipTypes list of relationship types that relate the document
+	 *                          in question to other documents and that are desired
+	 *                          to be queried.
+	 * @param homeCommunityId   this is the id of the home community as specified by
+	 *                          the XCA profile. Value may be null or empty, in
+	 *                          which case it is not added to the query.
 	 */
-	public GetRelatedDocumentsQuery(String docId, boolean isUUID,
-			ParentDocumentRelationshipType[] relationshipTypes, String homeCommunityId) {
-		try {
-			setOhtStoredQuery(
-					new org.openhealthtools.ihe.xds.consumer.storedquery.GetRelatedDocumentsQuery(
-							docId, isUUID, relationshipTypes, homeCommunityId));
-		} catch (final MalformedStoredQueryException e) {
-			e.printStackTrace();
+	public GetRelatedDocumentsQuery(String docId, boolean isUUID, List<AssociationType> relationshipTypes,
+			String homeCommunityId) {
+
+		var query = new org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetRelatedDocumentsQuery();
+
+		if (isUUID) {
+			query.setUuid(docId);
+		} else {
+			query.setUniqueId(docId);
 		}
+
+		query.setAssociationTypes(relationshipTypes);
+		query.setHomeCommunityId(homeCommunityId);
+
+		setIpfStoredQuery(query);
 	}
 
 	/**
-	 * Constructor that allows for the addition of a homeCommunityId to the
-	 * query to support the XCA profile extension of this query.
+	 * Constructor that allows for the addition of a homeCommunityId to the query to
+	 * support the XCA profile extension of this query.
 	 *
-	 * @param docId
-	 *            ID of the document
-	 * @param isUUID
-	 *            set to true if docID is the entryUUID (internal registry
-	 *            identifier) of the document and set to false if it is the
-	 *            uniqueID (external to registry) of the document. In most user
-	 *            cases, this should be set to false
-	 * @param relationshipTypes
-	 *            list of relationship types that relate the document in
-	 *            question to other documents and that are desired to be
-	 *            queried.
-	 * @param homeCommunityId
-	 *            this is the id of the home community as specified by the XCA
-	 *            profile. Value may be null or empty, in which case it is not
-	 *            added to the query.
-	 * @param objectType
-	 *            for the OnDemand document feature. Tells whether you want
-	 *            static docs, on demand docs, or both
+	 * @param docId             ID of the document
+	 * @param isUUID            set to true if docID is the entryUUID (internal
+	 *                          registry identifier) of the document and set to
+	 *                          false if it is the uniqueID (external to registry)
+	 *                          of the document. In most user cases, this should be
+	 *                          set to false
+	 * @param relationshipTypes list of relationship types that relate the document
+	 *                          in question to other documents and that are desired
+	 *                          to be queried.
+	 * @param homeCommunityId   this is the id of the home community as specified by
+	 *                          the XCA profile. Value may be null or empty, in
+	 *                          which case it is not added to the query.
+	 * @param objectType        for the OnDemand document feature. Tells whether you
+	 *                          want static docs, on demand docs, or both
 	 */
-	public GetRelatedDocumentsQuery(String docId, boolean isUUID,
-			ParentDocumentRelationshipType[] relationshipTypes, String homeCommunityId,
-			ObjectType objectType) {
-		try {
-			setOhtStoredQuery(
-					new org.openhealthtools.ihe.xds.consumer.storedquery.GetRelatedDocumentsQuery(
-							docId, isUUID, relationshipTypes, homeCommunityId, objectType));
-		} catch (final MalformedStoredQueryException e) {
-			e.printStackTrace();
+	public GetRelatedDocumentsQuery(String docId, boolean isUUID, List<AssociationType> relationshipTypes,
+			String homeCommunityId, DocumentEntryType objectType) {
+
+		var query = new org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetRelatedDocumentsQuery();
+
+		if (isUUID) {
+			query.setUuid(docId);
+		} else {
+			query.setUniqueId(docId);
 		}
+
+		query.setAssociationTypes(relationshipTypes);
+		query.setHomeCommunityId(homeCommunityId);
+
+		query.setDocumentEntryTypes(List.of(objectType));
+
+		setIpfStoredQuery(query);
 	}
 }

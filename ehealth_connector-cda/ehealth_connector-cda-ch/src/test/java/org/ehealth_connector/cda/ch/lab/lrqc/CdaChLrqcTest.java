@@ -16,10 +16,10 @@
  */
 package org.ehealth_connector.cda.ch.lab.lrqc;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -37,16 +37,16 @@ import org.ehealth_connector.cda.ch.lab.lrqc.enums.LabObsList;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.QualabQcc;
 import org.ehealth_connector.cda.ch.lab.lrqc.enums.SpecialtySections;
 import org.ehealth_connector.cda.ihe.lab.SpecimenReceivedEntry;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
 import org.ehealth_connector.common.mdht.Address;
-import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.AuthoringDevice;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Name;
 import org.ehealth_connector.common.mdht.Telecoms;
 import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
 import org.openhealthtools.mdht.uml.cda.ch.ChPackage;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABPackage;

@@ -16,9 +16,10 @@
  */
 package org.ehealth_connector.communication;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -35,16 +36,16 @@ import org.ehealth_connector.common.communication.Destination;
 import org.ehealth_connector.common.communication.DocumentMetadata;
 import org.ehealth_connector.common.communication.DocumentMetadata.DocumentMetadataExtractionMode;
 import org.ehealth_connector.common.communication.SubmissionSetMetadata.SubmissionSetMetadataExtractionMode;
+import org.ehealth_connector.common.enums.DocumentDescriptor;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.xua.deserialization.impl.AssertionDeserializerImpl;
 import org.ehealth_connector.xua.exceptions.DeserializeException;
 import org.ehealth_connector.xua.exceptions.SerializeException;
 import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.serialization.impl.AssertionSerializerImpl;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.openhealthtools.ihe.xds.response.XDSQueryResponseType;
 import org.openhealthtools.ihe.xua.XUAAssertion;
 import org.openhealthtools.ihe.xua.context.XUAModuleContext;
@@ -52,7 +53,8 @@ import org.opensaml.core.config.InitializationException;
 import org.opensaml.core.config.InitializationService;
 import org.w3c.dom.Element;
 
-public class ConvenienceCommunicationTest {
+@Disabled
+class ConvenienceCommunicationTest {
 
 	// NIST Repository
 	public static final String NIST = "http://ihexds.nist.gov/tf6/services/xdsrepositoryb";
@@ -86,7 +88,7 @@ public class ConvenienceCommunicationTest {
 	XDSQueryResponseType qr;
 	private Assertion testAssertion;
 
-	@Before
+	@BeforeEach
 	public void init()
 			throws IOException, URISyntaxException, DeserializeException, InitializationException {
 		try {
@@ -124,11 +126,11 @@ public class ConvenienceCommunicationTest {
 	}
 
 	@Test
-	@Ignore
-	public void testAddDocument() {
+	@Disabled
+	void testAddDocument() {
 		try {
 			final DocumentMetadata d = c.addDocument(DocumentDescriptor.CDA_R2, cdaFilePath);
-			assertNotNull(d.getMdhtDocumentEntryType().getEntryUUID());
+			assertNotNull(d.getDocumentEntry().getEntryUuid());
 			assertNotNull(c.getTxnData());
 		} catch (final Exception e) {
 			e.printStackTrace();
@@ -136,7 +138,7 @@ public class ConvenienceCommunicationTest {
 	}
 
 	@Test
-	public void testAddXUserAssertion() throws SerializeException {
+	void testAddXUserAssertion() throws SerializeException {
 		c.addXUserAssertion(testAssertion);
 
 		final XUAModuleContext xuaContext = XUAModuleContext.getContext();
@@ -152,7 +154,7 @@ public class ConvenienceCommunicationTest {
 	}
 
 	@Test
-	public void testCreateXUAAssertion() throws SerializeException {
+	void testCreateXUAAssertion() throws SerializeException {
 		final Element assertionElement = new AssertionSerializerImpl().toXmlElement(testAssertion);
 		final XUAAssertion ohtAssertion = new XUAAssertion(assertionElement);
 		final String atnaUserName = ohtAssertion.getAtnaUsername();

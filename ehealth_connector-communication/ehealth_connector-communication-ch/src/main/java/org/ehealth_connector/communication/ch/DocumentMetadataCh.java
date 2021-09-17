@@ -28,8 +28,8 @@ import org.ehealth_connector.communication.ch.enums.HealthcareFacilityTypeCode;
 import org.ehealth_connector.communication.ch.enums.MimeType;
 import org.ehealth_connector.communication.ch.enums.PracticeSettingCode;
 import org.ehealth_connector.communication.ch.enums.TypeCode;
-import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
-import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Code;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 
 public class DocumentMetadataCh extends org.ehealth_connector.common.communication.DocumentMetadata {
 
@@ -46,7 +46,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.common.communicati
 	 * @param documentEntryType
 	 *            the document entry type
 	 */
-	public DocumentMetadataCh(DocumentEntryType documentEntryType) {
+	public DocumentMetadataCh(DocumentEntry documentEntryType) {
 		super(documentEntryType);
 	}
 
@@ -57,7 +57,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.common.communicati
 	 *            the DocumentMetadata object
 	 */
 	public DocumentMetadataCh(DocumentMetadata dm) {
-		super(dm.getMdhtDocumentEntryType());
+		super(dm.getDocumentEntry());
 	}
 
 	/**
@@ -67,9 +67,8 @@ public class DocumentMetadataCh extends org.ehealth_connector.common.communicati
 	 * @param code
 	 *            the code
 	 */
-	@SuppressWarnings("unchecked")
 	public void addConfidentialityCode(ConfidentialityCode code) {
-		getMdhtDocumentEntryType().getConfidentialityCode().add(code.getCodedMetadataType());
+		getDocumentEntry().getConfidentialityCodes().add(code.getIpfCode());
 	}
 
 	/**
@@ -78,7 +77,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.common.communicati
 	 * @return Code element with classCode as Enum
 	 */
 	public org.ehealth_connector.communication.ch.enums.ClassCode getClassCodeEnum() {
-		return ClassCode.getEnum(getMdhtDocumentEntryType().getClassCode().getCode());
+		return ClassCode.getEnum(getDocumentEntry().getClassCode().getCode());
 	}
 
 	/**
@@ -87,11 +86,10 @@ public class DocumentMetadataCh extends org.ehealth_connector.common.communicati
 	 * @return the ArrayList with ConfidentialityCodes as Enums
 	 */
 	public List<ConfidentialityCode> getConfidentialityCodesEnum() {
-		final List<ConfidentialityCode> ccl = new ArrayList<ConfidentialityCode>();
-		if (!getMdhtDocumentEntryType().getConfidentialityCode().isEmpty()) {
-			for (int i = 0; i < getMdhtDocumentEntryType().getConfidentialityCode().size(); i++) {
-				final CodedMetadataType cmt = (CodedMetadataType) getMdhtDocumentEntryType()
-						.getConfidentialityCode().get(i);
+		final List<ConfidentialityCode> ccl = new ArrayList<>();
+		if (!getDocumentEntry().getConfidentialityCodes().isEmpty()) {
+			for (var i = 0; i < getDocumentEntry().getConfidentialityCodes().size(); i++) {
+				final Code cmt = getDocumentEntry().getConfidentialityCodes().get(i);
 				ccl.add(ConfidentialityCode.getEnum(cmt.getCode()));
 			}
 		} else
@@ -105,7 +103,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.common.communicati
 	 * @return formatCode as Enum
 	 */
 	public org.ehealth_connector.communication.ch.enums.FormatCode getFormatCodeEnum() {
-		return FormatCode.getEnum(getMdhtDocumentEntryType().getFormatCode().getCode());
+		return FormatCode.getEnum(getDocumentEntry().getFormatCode().getCode());
 	}
 
 	/**
@@ -115,7 +113,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.common.communicati
 	 */
 	public org.ehealth_connector.communication.ch.enums.HealthcareFacilityTypeCode getHealthcareFacilityTypeCodeEnum() {
 		return HealthcareFacilityTypeCode
-				.getEnum(getMdhtDocumentEntryType().getHealthCareFacilityTypeCode().getCode());
+				.getEnum(getDocumentEntry().getHealthcareFacilityTypeCode().getCode());
 	}
 
 	/**
@@ -124,7 +122,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.common.communicati
 	 * @return codedLanguage as Enum
 	 */
 	public LanguageCode getLanguageCodeEnum() {
-		return LanguageCode.getEnum(getMdhtDocumentEntryType().getLanguageCode());
+		return LanguageCode.getEnum(getDocumentEntry().getLanguageCode());
 	}
 
 	/**
@@ -133,7 +131,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.common.communicati
 	 * @return the mimetype of the document
 	 */
 	public org.ehealth_connector.communication.ch.enums.MimeType getMimeTypeCodeEnum() {
-		return MimeType.getEnum(getMdhtDocumentEntryType().getMimeType());
+		return MimeType.getEnum(getDocumentEntry().getMimeType());
 	}
 
 	/**
@@ -143,7 +141,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.common.communicati
 	 */
 	public org.ehealth_connector.communication.ch.enums.PracticeSettingCode getPracticeSettingCodeEnum() {
 		return PracticeSettingCode
-				.getEnum(getMdhtDocumentEntryType().getPracticeSettingCode().getCode());
+				.getEnum(getDocumentEntry().getPracticeSettingCode().getCode());
 	}
 
 	/**
@@ -153,7 +151,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.common.communicati
 	 * @return the practiceSettingCode as Enum
 	 */
 	public org.ehealth_connector.communication.ch.enums.TypeCode getTypeCodeEnum() {
-		return TypeCode.getEnum(getMdhtDocumentEntryType().getTypeCode().getCode());
+		return TypeCode.getEnum(getDocumentEntry().getTypeCode().getCode());
 	}
 
 	/**
@@ -165,7 +163,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.common.communicati
 	 *            the new class code
 	 */
 	public void setClassCode(org.ehealth_connector.communication.ch.enums.ClassCode code) {
-		getMdhtDocumentEntryType().setClassCode(code.getCodedMetadataType());
+		getDocumentEntry().setClassCode(code.getIpfCode());
 	}
 
 	/**
@@ -176,7 +174,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.common.communicati
 	 *            the new language code
 	 */
 	public void setCodedLanguage(LanguageCode codedLanguage) {
-		getMdhtDocumentEntryType().setLanguageCode(codedLanguage.getCodeValue());
+		getDocumentEntry().setLanguageCode(codedLanguage.getCodeValue());
 	}
 
 	/**
@@ -187,7 +185,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.common.communicati
 	 *            the new format code
 	 */
 	public void setFormatCode(FormatCode code) {
-		getMdhtDocumentEntryType().setFormatCode(code.getCodedMetadataType());
+		getDocumentEntry().setFormatCode(code.getIpfCode());
 	}
 
 	/**
@@ -198,7 +196,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.common.communicati
 	 *            the new healthcare facility type code
 	 */
 	public void setHealthcareFacilityTypeCode(HealthcareFacilityTypeCode code) {
-		getMdhtDocumentEntryType().setHealthCareFacilityTypeCode(code.getCodedMetadataType());
+		getDocumentEntry().setHealthcareFacilityTypeCode(code.getIpfCode());
 	}
 
 	/**
@@ -208,7 +206,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.common.communicati
 	 *            the new mime type
 	 */
 	public void setMimeType(MimeType mimeType) {
-		getMdhtDocumentEntryType().setMimeType(mimeType.getCodedMetadataType().getCode());
+		getDocumentEntry().setMimeType(mimeType.getIpfCode().getCode());
 	}
 
 	/**
@@ -220,7 +218,7 @@ public class DocumentMetadataCh extends org.ehealth_connector.common.communicati
 	 *            the new practice setting code
 	 */
 	public void setPracticeSettingCode(PracticeSettingCode code) {
-		getMdhtDocumentEntryType().setPracticeSettingCode(code.getCodedMetadataType());
+		getDocumentEntry().setPracticeSettingCode(code.getIpfCode());
 	}
 
 	/**
@@ -232,6 +230,6 @@ public class DocumentMetadataCh extends org.ehealth_connector.common.communicati
 	 *            the new type code
 	 */
 	public void setTypeCode(TypeCode code) {
-		getMdhtDocumentEntryType().setTypeCode(code.getCodedMetadataType());
+		getDocumentEntry().setTypeCode(code.getIpfCode());
 	}
 }

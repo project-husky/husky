@@ -16,16 +16,17 @@
  */
 package org.ehealth_connector.xua.serialization.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.ehealth_connector.xua.authentication.AuthnRequest;
 import org.ehealth_connector.xua.authentication.impl.AuthnRequestBuilderImpl;
 import org.ehealth_connector.xua.exceptions.SerializeException;
 import org.ehealth_connector.xua.utilities.impl.AbstractTestHelper;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.w3c.dom.Element;
 
 public class AuthnRequestSerializerImplTest extends AbstractTestHelper {
@@ -35,7 +36,7 @@ public class AuthnRequestSerializerImplTest extends AbstractTestHelper {
 	private AuthnRequest testXmlObject;
 
 	@Override
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		super.setUp();
 		testSerializer = new AuthnRequestSerializerImpl();
@@ -60,9 +61,9 @@ public class AuthnRequestSerializerImplTest extends AbstractTestHelper {
 	 *
 	 * @throws SerializeException
 	 */
-	@Test(expected = SerializeException.class)
+	@Test
 	public void testSerializeToXml_InputNull() throws SerializeException {
-		testSerializer.toXmlElement(null);
+		assertThrows(SerializeException.class, () -> testSerializer.toXmlElement(null));
 	}
 
 	/**

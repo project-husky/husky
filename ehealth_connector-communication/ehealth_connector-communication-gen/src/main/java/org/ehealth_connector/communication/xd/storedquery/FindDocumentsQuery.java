@@ -16,13 +16,14 @@
  */
 package org.ehealth_connector.communication.xd.storedquery;
 
-import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.mdht.Identificator;
+import java.util.List;
+
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
-import org.ehealth_connector.communication.utils.XdsUtil;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.openhealthtools.ihe.common.hl7v2.XCN;
-import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
-import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;
 
 /**
  * Represents a query to find documents in an XDS Registry (XDS
@@ -36,135 +37,94 @@ public class FindDocumentsQuery /* implements StoredQueryInterface */ extends Ab
 	/**
 	 * Constructs a FindDocuments Query
 	 *
-	 * @param patientId
-	 *            ID of the patient
-	 * @param status
-	 *            Status of the document
+	 * @param patientId ID of the patient
+	 * @param status    Status of the document
 	 */
-	public FindDocumentsQuery(Identificator patientId, AvailabilityStatusType status) {
-		try {
-			// ohtStoredQuery = new
-			// org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
-			// XdsMetadataUtil.convertEhcIdentificator(patientId),
-			// new AvailabilityStatusType[] { status });
-			setOhtStoredQuery(
-					new org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
-							XdsMetadataUtil.convertEhcIdentificator(patientId),
-							new AvailabilityStatusType[] { status }));
-		} catch (final MalformedStoredQueryException e) {
-			e.printStackTrace();
-		}
+	public FindDocumentsQuery(Identificator patientId, AvailabilityStatus status) {
+		var findDocumentsQuery = new org.openehealth.ipf.commons.ihe.xds.core.requests.query.FindDocumentsQuery();
+		findDocumentsQuery.setPatientId(XdsMetadataUtil.convertEhcIdentificator(patientId));
+		findDocumentsQuery.setStatus(List.of(status));
+
+		setIpfStoredQuery(findDocumentsQuery);
 	}
 
 	/**
 	 * Constructs a FindDocuments Query
 	 *
-	 * @param patientId
-	 *            ID of the patient (required)
-	 * @param classCodes
-	 *            an array of codes, which classify the document (can be null)
-	 * @param dateTimeRanges
-	 *            an array of DateTimeRange objects (can be null)
-	 * @param practiceSettingCodes
-	 *            an array of codes, which classify the institution, where the
-	 *            document was created (can be null)
-	 * @param healthCareFacilityCodes
-	 *            an array of codes, which classify the type of healthcare
-	 *            facility, where the document was created (can be null)
-	 * @param confidentialityCodes
-	 *            an array of codes, which classify the confidentiality of the
-	 *            document (can be null)
-	 * @param formatCodes
-	 *            an array of codes, which classify the format of the document
-	 *            (can be null)
-	 * @param authorPerson
-	 *            information about the author of the document (can be null)
-	 * @param status
-	 *            the availability status of the document (required)
+	 * @param patientId               ID of the patient (required)
+	 * @param classCodes              an array of codes, which classify the document
+	 *                                (can be null)
+	 * @param dateTimeRanges          an array of DateTimeRange objects (can be
+	 *                                null)
+	 * @param practiceSettingCodes    an array of codes, which classify the
+	 *                                institution, where the document was created
+	 *                                (can be null)
+	 * @param healthCareFacilityCodes an array of codes, which classify the type of
+	 *                                healthcare facility, where the document was
+	 *                                created (can be null)
+	 * @param confidentialityCodes    an array of codes, which classify the
+	 *                                confidentiality of the document (can be null)
+	 * @param formatCodes             an array of codes, which classify the format
+	 *                                of the document (can be null)
+	 * @param authorPerson            information about the author of the document
+	 *                                (can be null)
+	 * @param status                  the availability status of the document
+	 *                                (required)
 	 */
 	public FindDocumentsQuery(Identificator patientId, Code[] classCodes,
 			org.ehealth_connector.communication.xd.storedquery.DateTimeRange[] dateTimeRanges,
-			Code[] practiceSettingCodes, Code[] healthCareFacilityCodes,
-			Code[] confidentialityCodes, Code[] formatCodes, XCN authorPerson,
-			AvailabilityStatusType status) {
+			Code[] practiceSettingCodes, Code[] healthCareFacilityCodes, Code[] confidentialityCodes,
+			Code[] formatCodes, XCN authorPerson, AvailabilityStatus status) {
 
-		try {
-			// ohtStoredQuery = new
-			// org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
-			// XdsMetadataUtil.convertEhcIdentificator(patientId),
-			// XdsMetadataUtil.convertEhcCodeToCodedMetadataType(classCodes),
-			// XdsUtil.convertEhcDateTimeRange(dateTimeRanges),
-			// XdsMetadataUtil.convertEhcCodeToCodedMetadataType(practiceSettingCodes),
-			// XdsMetadataUtil.convertEhcCodeToCodedMetadataType(healthCareFacilityCodes),
-			// null, // Event
-			// // code
-			// // is
-			// // currently
-			// // not
-			// // used
-			// // in
-			// // Switzerland
-			// XdsMetadataUtil.convertEhcCodeToCodedMetadataType(confidentialityCodes),
-			// XdsMetadataUtil.convertEhcCodeToCodedMetadataType(formatCodes),
-			// authorPerson,
-			// new AvailabilityStatusType[] { status });
+		var findDocumentsQuery = new org.openehealth.ipf.commons.ihe.xds.core.requests.query.FindDocumentsQuery();
+		findDocumentsQuery.setPatientId(XdsMetadataUtil.convertEhcIdentificator(patientId));
+		findDocumentsQuery.setClassCodes(XdsMetadataUtil.convertEhcCodeToCode(classCodes));
+		findDocumentsQuery.setPracticeSettingCodes(XdsMetadataUtil.convertEhcCodeToCode(practiceSettingCodes));
+		findDocumentsQuery
+				.setHealthcareFacilityTypeCodes(XdsMetadataUtil.convertEhcCodeToCode(healthCareFacilityCodes));
+		findDocumentsQuery.setConfidentialityCodes(XdsMetadataUtil.convertEhcCodeToQueryListCode(confidentialityCodes));
+		findDocumentsQuery.setFormatCodes(XdsMetadataUtil.convertEhcCodeToCode(formatCodes));
 
-			setOhtStoredQuery(
-					new org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery(
-							XdsMetadataUtil.convertEhcIdentificator(patientId),
-							XdsMetadataUtil.convertEhcCodeToCodedMetadataType(classCodes),
-							XdsUtil.convertEhcDateTimeRange(dateTimeRanges),
-							XdsMetadataUtil.convertEhcCodeToCodedMetadataType(practiceSettingCodes),
-							XdsMetadataUtil.convertEhcCodeToCodedMetadataType(
-									healthCareFacilityCodes),
-							null, // Event
-							// code
-							// is
-							// currently
-							// not
-							// used
-							// in
-							// Switzerland
-							XdsMetadataUtil.convertEhcCodeToCodedMetadataType(confidentialityCodes),
-							XdsMetadataUtil.convertEhcCodeToCodedMetadataType(formatCodes),
-							authorPerson, new AvailabilityStatusType[] { status }));
-		} catch (final MalformedStoredQueryException e) {
-			e.printStackTrace();
+		if (dateTimeRanges != null) {
+			for (var index = 0; index < dateTimeRanges.length; index++) {
+				if (dateTimeRanges[index] != null) {
+					if (dateTimeRanges[index].getDateTimeRangeAttribute()
+							.equals(DateTimeRangeAttributes.SERVICE_START_TIME)) {
+						findDocumentsQuery.getServiceStartTime()
+								.setFrom(dateTimeRanges[index].getFromAsUsFormattedString());
+						findDocumentsQuery.getServiceStartTime()
+								.setTo(dateTimeRanges[index].getToAsUsFormattedString());
+					} else if (dateTimeRanges[index].getDateTimeRangeAttribute()
+							.equals(DateTimeRangeAttributes.SERVICE_STOP_TIME)) {
+						findDocumentsQuery.getServiceStopTime()
+								.setFrom(dateTimeRanges[index].getFromAsUsFormattedString());
+						findDocumentsQuery.getServiceStopTime().setTo(dateTimeRanges[index].getToAsUsFormattedString());
+					}
+				}
+			}
 		}
+
+		findDocumentsQuery.setStatus(List.of(status));
+
+		setIpfStoredQuery(findDocumentsQuery);
 	}
 
 	/**
-	 * Adds an additional disjunctive clause of confidentiality codes to the
-	 * query. Per IHE 2008-2009 ITI CP 228, codes with in the parameter will be
-	 * interpreted with OR semantics. The resultant disjunctive clause will be
-	 * AND-ed together with any confidentialityCode clauses previously added.
-	 * Calling this method sequentially will result in the AND-ing of multiple
-	 * clauses.
+	 * Adds an additional disjunctive clause of confidentiality codes to the query.
+	 * Per IHE 2008-2009 ITI CP 228, codes with in the parameter will be interpreted
+	 * with OR semantics. The resultant disjunctive clause will be AND-ed together
+	 * with any confidentialityCode clauses previously added. Calling this method
+	 * sequentially will result in the AND-ing of multiple clauses.
 	 *
-	 * @param confidentialityCodes
-	 *            array of confidentiality codes
+	 * @param confidentialityCodes array of confidentiality codes
 	 */
 	public void addConfidentialityCodes(Code[] confidentialityCodes) {
 		try {
-			// ohtStoredQuery.addConfidentialityCodes(
-			// XdsMetadataUtil.convertEhcCodeToCodedMetadataType(confidentialityCodes));
-			((org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery) getOhtStoredQuery())
-					.addConfidentialityCodes(XdsMetadataUtil
-							.convertEhcCodeToCodedMetadataType(confidentialityCodes));
-		} catch (final MalformedStoredQueryException e) {
-			e.printStackTrace();
+			((org.openehealth.ipf.commons.ihe.xds.core.requests.query.FindDocumentsQuery) getIpfQuery())
+					.getConfidentialityCodes().getOuterList()
+					.add(XdsMetadataUtil.convertEhcCodeToCode(confidentialityCodes));
 		} catch (final ClassCastException e) {
 			e.printStackTrace();
 		}
 	}
-	//
-	// /**
-	// * Gets the OHT StoredQuery object, which is being wrapped by this class
-	// *
-	// * @return the OHT StoredQuery
-	// */
-	// @Override
-	// public StoredQuery getOhtStoredQuery() {
-	// return ohtStoredQuery;
-	// }
 }

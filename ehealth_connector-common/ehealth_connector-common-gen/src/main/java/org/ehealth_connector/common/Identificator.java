@@ -17,9 +17,12 @@
 package org.ehealth_connector.common;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.enums.NullFlavor;
+import org.ehealth_connector.common.hl7cdar2.II;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Identifiable;
 
 /**
  * <div class="en">The class Identificator contains all necessary fields for an
@@ -187,6 +190,15 @@ public class Identificator extends IdentificatorBaseType {
 		super.setExtension(extension);
 	}
 
+	public Identificator(Identifiable id) {
+		if (id != null) {
+			super.setExtension(id.getId());
+			if (id.getAssigningAuthority() != null) {
+				super.setRoot(id.getAssigningAuthority().getUniversalId());
+			}
+		}
+	}
+
 	/**
 	 * <div class="en">Gets the HL7 CDA R2 data type from the current
 	 * instance.<div>
@@ -255,4 +267,23 @@ public class Identificator extends IdentificatorBaseType {
 		initFromHl7CdaR2(hl7CdaR2Value);
 	}
 
+	/**
+	 * <div class="en">Gets the identificator with the given root id from a list of
+	 * ids.</div> <div class="de">Liefert identificator mit der gegebenen root id
+	 * aus der liste der Ids.</div>
+	 *
+	 * @param iiList <br>
+	 *               <div class="de"> ii list</div>
+	 * @param root   <br>
+	 *               <div class="de"> root</div>
+	 * @return <div class="en">the identificator</div>
+	 */
+	public static Identificator getIdentificator(List<II> iiList, String root) {
+		for (final II i : iiList) {
+			if (i.getRoot().equals(root)) {
+				return new Identificator(i);
+			}
+		}
+		return null;
+	}
 }

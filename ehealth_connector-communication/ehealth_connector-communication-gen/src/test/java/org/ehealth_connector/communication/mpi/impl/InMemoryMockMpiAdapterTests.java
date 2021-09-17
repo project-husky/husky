@@ -16,20 +16,22 @@
  */
 package org.ehealth_connector.communication.mpi.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.ehealth_connector.communication.testhelper.InMemoryMockMpiAdapter;
 import org.ehealth_connector.communication.testhelper.TestPatient;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * Junit Tests for the ImMemoryMpiAdapter
  *
- * @see org.ehealth_connector.communication.mpi.impl.InMemoryMockMpiAdapter
+ * @see org.ehealth_connector.communication.testhelper.InMemoryMockMpiAdapter
  */
 public class InMemoryMockMpiAdapterTests {
 
@@ -38,7 +40,7 @@ public class InMemoryMockMpiAdapterTests {
 
 	private InMemoryMockMpiAdapter mpiAdapter;
 
-	@Before
+	@BeforeEach
 	public void initMpi() {
 		log.debug("init mpi");
 		mpiAdapter = new InMemoryMockMpiAdapter();

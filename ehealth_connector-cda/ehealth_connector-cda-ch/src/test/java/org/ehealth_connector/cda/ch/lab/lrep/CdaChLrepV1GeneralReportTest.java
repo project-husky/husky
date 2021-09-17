@@ -16,8 +16,8 @@
  */
 package org.ehealth_connector.cda.ch.lab.lrep;
 
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.util.Date;
@@ -25,18 +25,18 @@ import java.util.List;
 
 import org.ehealth_connector.cda.Section;
 import org.ehealth_connector.cda.ch.utils.CdaChUtil;
+import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Patient;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Identificator;
 import org.ehealth_connector.common.mdht.Name;
 import org.ehealth_connector.common.mdht.Organization;
-import org.ehealth_connector.common.mdht.Patient;
 import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
 import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Unit Tests for Class CdaChLrepV1GeneralReport.
@@ -46,14 +46,14 @@ public class CdaChLrepV1GeneralReportTest {
 	/** The name of the class under test. */
 	private String cutName = "CdaChLrepV1GeneralReport";
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		// TODO
 	}
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport#addAuthor(org.ehealth_connector.common.mdht.Author)}.
+	 * {@link org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport#addAuthor(org.ehealth_connector.common.Author)}.
 	 */
 	@Test
 	public void testAddGetAuthor() {
@@ -144,7 +144,7 @@ public class CdaChLrepV1GeneralReportTest {
 				"dummy");
 
 		for (Identificator id : cda.getTemplateIds()) {
-			assertNull("Extensions not allowd for template ids", id.getExtension());
+			assertNull(id.getExtension(), "Extensions not allowd for template ids");
 			if (idIheXdLab.equals(id.getRoot()))
 				idFoundIheXdLab = true;
 			if (idIheMs.equals(id.getRoot()))
@@ -163,24 +163,15 @@ public class CdaChLrepV1GeneralReportTest {
 				idFoundHl7CdaSb = true;
 		}
 
-		assertTrue(cutName + " templateID defined by IHE XD-LAB is missing", idFoundIheXdLab);
-		assertTrue(cutName + " templateID defined by IHE MS is missing", idFoundIheMs);
-		assertTrue(
-				cutName + " templateID defined by ART DECOR CDA-CH-LREP General Report is missing",
-				idFoundChLrepGr);
-		assertTrue(cutName + " templateID defined by ART DECOR CDA-CH-LREP is missing",
-				idFoundChLrep);
-		assertTrue(cutName
-				+ " templateID defined by ART DECOR CDA-CH V2 Structured Body enhanced is missing",
-				idFoundCdaChV2SbEnhanced);
-		assertTrue(
-				cutName + " templateID defined by ART DECOR CDA-CH V2 Structured Body is missing",
-				idFoundCdaChV2Sb);
-		assertTrue(cutName + " templateID defined by ART DECOR HL7 CDA R2 is missing",
-				idFoundHl7Cda);
-		assertTrue(
-				cutName + " templateID defined by ART DECOR HL7 CDA R2 Structured Body is missing",
-				idFoundHl7CdaSb);
+		assertTrue(idFoundIheXdLab, cutName + " templateID defined by IHE XD-LAB is missing");
+		assertTrue(idFoundIheMs, cutName + " templateID defined by IHE MS is missing");
+		assertTrue(idFoundChLrepGr, cutName + " templateID defined by ART DECOR CDA-CH-LREP General Report is missing");
+		assertTrue(idFoundChLrep, cutName + " templateID defined by ART DECOR CDA-CH-LREP is missing");
+		assertTrue(idFoundCdaChV2SbEnhanced,
+				cutName + " templateID defined by ART DECOR CDA-CH V2 Structured Body enhanced is missing");
+		assertTrue(idFoundCdaChV2Sb, cutName + " templateID defined by ART DECOR CDA-CH V2 Structured Body is missing");
+		assertTrue(idFoundHl7Cda, cutName + " templateID defined by ART DECOR HL7 CDA R2 is missing");
+		assertTrue(idFoundHl7CdaSb, cutName + " templateID defined by ART DECOR HL7 CDA R2 Structured Body is missing");
 	}
 
 	/**
@@ -248,7 +239,7 @@ public class CdaChLrepV1GeneralReportTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport#setPatient(org.ehealth_connector.common.mdht.Patient)}.
+	 * {@link org.ehealth_connector.cda.ch.lab.lrep.CdaChLrepV1GeneralReport#setPatient(org.ehealth_connector.common.Patient)}.
 	 */
 	@Test
 	public void testSetGetPatient() {

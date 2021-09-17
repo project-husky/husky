@@ -16,15 +16,15 @@
  */
 package org.ehealth_connector.communication.ch.ppq.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeed;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeed.PpfMethod;
 import org.ehealth_connector.communication.ch.ppq.utilities.impl.InitializerTestHelper;
 import org.ehealth_connector.xua.saml2.impl.AssertionImpl;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.opensaml.saml.saml2.core.Assertion;
 import org.opensaml.saml.saml2.core.impl.AssertionUnmarshaller;
 import org.w3c.dom.Element;
@@ -44,7 +44,7 @@ public class PrivacyPolicyFeedBuilderImplTest extends InitializerTestHelper {
 	 * @throws Exception
 	 *             will be thrown on error
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		builder = new PrivacyPolicyFeedBuilderImpl();
 		testMethod = PpfMethod.AddPolicy;

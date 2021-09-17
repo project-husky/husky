@@ -16,8 +16,8 @@
  */
 package org.ehealth_connector.common;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 
@@ -26,7 +26,7 @@ import org.ehealth_connector.common.enums.NullFlavor;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 import org.ehealth_connector.common.hl7cdar2.TEL;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * The test class for Telecom.

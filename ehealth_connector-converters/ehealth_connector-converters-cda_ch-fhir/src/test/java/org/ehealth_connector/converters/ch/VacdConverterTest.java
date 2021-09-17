@@ -16,15 +16,15 @@
  */
 package org.ehealth_connector.converters.ch;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.ehealth_connector.cda.ch.vacd.v140.CdaChVacd;
 import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
 import org.ehealth_connector.fhir.structures.ch.FhirCdaChVacd.VacdDocument;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  *
@@ -42,7 +42,7 @@ public class VacdConverterTest extends AbstractConverter {
 	 *
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		converter = new VacdConverter();
 		setUpTestFile("/FHIRVacdDocument_ImmunizationMaxContent.xml");

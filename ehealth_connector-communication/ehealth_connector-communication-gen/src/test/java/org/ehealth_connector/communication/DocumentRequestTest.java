@@ -16,20 +16,21 @@
  */
 package org.ehealth_connector.communication;
 
-import static org.junit.Assert.assertEquals;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import org.ehealth_connector.cda.testhelper.TestUtils;
-import org.junit.Before;
-import org.junit.Test;
+import org.ehealth_connector.communication.testhelper.TestUtils;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class DocumentRequestTest extends TestUtils {
 
 	String testUri = "ihexds.nist.gov";
 
-	@Before
+	@BeforeEach
 	public void setUp() {
 		init();
 	}

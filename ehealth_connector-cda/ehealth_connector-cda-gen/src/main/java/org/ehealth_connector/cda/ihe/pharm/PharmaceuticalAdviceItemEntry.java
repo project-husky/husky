@@ -88,7 +88,7 @@ public class PharmaceuticalAdviceItemEntry extends
 	 *            Author to add to the list
 	 *
 	 */
-	public void addAuthor(org.ehealth_connector.common.mdht.Author author) {
+	public void addAuthor(org.ehealth_connector.common.Author author) {
 
 		this.getMdht().getAuthors().add(author.getAuthorMdht());
 
@@ -236,12 +236,12 @@ public class PharmaceuticalAdviceItemEntry extends
 	 * @return authors list
 	 *
 	 */
-	public ArrayList<org.ehealth_connector.common.mdht.Author> getAuthors() {
+	public ArrayList<org.ehealth_connector.common.Author> getAuthors() {
 
-		ArrayList<org.ehealth_connector.common.mdht.Author> authors = new ArrayList<org.ehealth_connector.common.mdht.Author>();
+		ArrayList<org.ehealth_connector.common.Author> authors = new ArrayList<org.ehealth_connector.common.Author>();
 
 		for (final Author mdhtAuthor : this.getMdht().getAuthors()) {
-			authors.add(new org.ehealth_connector.common.mdht.Author(mdhtAuthor));
+			authors.add(new org.ehealth_connector.common.Author(mdhtAuthor));
 		}
 
 		return authors;

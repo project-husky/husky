@@ -34,9 +34,9 @@ import org.ehealth_connector.cda.ch.vacd.v140.ImmunizationRecommendation;
 import org.ehealth_connector.cda.ch.vacd.v140.LaboratoryObservation;
 import org.ehealth_connector.cda.ch.vacd.v140.MedicationTargetEntry;
 import org.ehealth_connector.cda.enums.MedicationsSpecialConditions;
-import org.ehealth_connector.common.mdht.Author;
-import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.mdht.Value;
 import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
 import org.ehealth_connector.common.mdht.enums.Ucum;
@@ -187,9 +187,9 @@ public class VacdConverter extends AbstractCdaChV12FhirConverter {
 	 * @return eHC Author object </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public org.ehealth_connector.common.mdht.Author getAuthor(
+	public org.ehealth_connector.common.Author getAuthor(
 			MedicationStatement fhirMedicationStatement) {
-		org.ehealth_connector.common.mdht.Author retVal = null;
+		org.ehealth_connector.common.Author retVal = null;
 		for (final Reference ref : fhirMedicationStatement.getDerivedFrom()) {
 			final List<org.hl7.fhir.dstu3.model.Extension> extensions = ref
 					.getExtensionsByUrl(FhirCommon.urnUseAsAuthor);

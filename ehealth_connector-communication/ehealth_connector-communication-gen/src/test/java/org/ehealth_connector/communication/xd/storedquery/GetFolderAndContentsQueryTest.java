@@ -16,25 +16,26 @@
  */
 package org.ehealth_connector.communication.xd.storedquery;
 
-import static org.junit.Assert.assertTrue;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.ehealth_connector.communication.testhelper.XdsTestUtils;
-import org.junit.Before;
-import org.junit.Test;
-import org.openhealthtools.ihe.xds.consumer.storedquery.ObjectType;
-import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameterList;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntryType;
 
 /**
  * Test of class GetFolderAndContentsQuery
  */
-public class GetFolderAndContentsQueryTest extends XdsTestUtils {
+class GetFolderAndContentsQueryTest extends XdsTestUtils {
 
 	/**
 	 * Method implementing
 	 *
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 	}
 
@@ -44,15 +45,21 @@ public class GetFolderAndContentsQueryTest extends XdsTestUtils {
 	 * .
 	 */
 	@Test
-	public void testGetFolderAndContentsQueryStringBooleanCodeArrayCodeArray() {
-		final GetFolderAndContentsQuery q1 = new GetFolderAndContentsQuery("1234", true,
+	void testGetFolderAndContentsQueryStringBooleanCodeArrayCodeArray() {
+		final GetFolderAndContentsQuery q = new GetFolderAndContentsQuery("1234", true,
 				formatCodes, confidentialityCodes);
-		final StoredQueryParameterList sqpl1 = q1.getOhtStoredQuery().getQueryParameters();
 
-		assertTrue(sqpl1.get("$XDSFolderEntryUUID").contains("1234"));
-		assertTrue(sqpl1.get("$XDSDocumentEntryFormatCode").contains(formatCodes[0].getCode()));
-		assertTrue(sqpl1.get("$XDSDocumentEntryConfidentialityCode")
-				.contains(confidentialityCodes[0].getCode()));
+		assertTrue(
+				q.getIpfQuery() instanceof org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetFolderAndContentsQuery);
+
+		var sqpl = (org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetFolderAndContentsQuery) q.getIpfQuery();
+
+		assertEquals("1234", sqpl.getUuid());
+		assertTrue(
+				sqpl.getFormatCodes().stream().anyMatch(t -> t.getCode().equalsIgnoreCase(formatCodes[0].getCode())));
+		assertTrue(sqpl.getConfidentialityCodes().getOuterList().stream()
+				.anyMatch(t -> t.stream()
+						.anyMatch(code -> code != null && code.getCode().equals(confidentialityCodes[0].getCode()))));
 	}
 
 	/**
@@ -61,10 +68,10 @@ public class GetFolderAndContentsQueryTest extends XdsTestUtils {
 	 * .
 	 */
 	@Test
-	public void testGetFolderAndContentsQueryStringBooleanCodeArrayCodeArrayString() {
+	void testGetFolderAndContentsQueryStringBooleanCodeArrayCodeArrayString() {
 		final GetFolderAndContentsQuery q2 = new GetFolderAndContentsQuery("1234", true,
 				formatCodes, confidentialityCodes, "9876");
-		assertTrue(q2.getOhtStoredQuery().getHomeCommunityId().contains("9876"));
+		assertTrue(q2.getIpfQuery().getHomeCommunityId().contains("9876"));
 	}
 
 	/**
@@ -73,11 +80,18 @@ public class GetFolderAndContentsQueryTest extends XdsTestUtils {
 	 * .
 	 */
 	@Test
-	public void testGetFolderAndContentsQueryStringBooleanCodeArrayCodeArrayStringObjectType() {
+	void testGetFolderAndContentsQueryStringBooleanCodeArrayCodeArrayStringObjectType() {
 		final GetFolderAndContentsQuery q3 = new GetFolderAndContentsQuery("1234", true,
-				formatCodes, confidentialityCodes, "6565873dsdgsdg", ObjectType.STATIC);
-		assertTrue(q3.getOhtStoredQuery().getQueryParameters().get("$XDSDocumentEntryType")
-				.contains("urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1"));
+				formatCodes, confidentialityCodes, "6565873dsdgsdg", DocumentEntryType.STABLE);
+
+		assertTrue(
+				q3.getIpfQuery() instanceof org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetFolderAndContentsQuery);
+
+		var sqpl = (org.openehealth.ipf.commons.ihe.xds.core.requests.query.GetFolderAndContentsQuery) q3.getIpfQuery();
+
+		assertTrue(sqpl.getDocumentEntryTypes().stream()
+				.anyMatch(t -> t != null && t.getUuid() != null
+						&& t.getUuid().equals("urn:uuid:7edca82f-054d-47f2-a032-9b2a5b5186c1")));
 	}
 
 }

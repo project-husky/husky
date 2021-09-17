@@ -7,7 +7,7 @@
   <parent>
     <groupId>org.ehealth_connector.communication</groupId>
     <artifactId>ehealth_connector-communication</artifactId>
-    <version>1.9-SNAPSHOT</version>
+    <version>2.0-ALPHA</version>
   </parent>
   
   <dependencies>
@@ -39,13 +39,13 @@
 		<dependency>
 			<groupId>org.ehealth_connector.xua</groupId>
 			<artifactId>ehealth_connector-xua-gen-impl</artifactId>
-			<version>1.9-SNAPSHOT</version>
+			<version>2.0-ALPHA</version>
 		</dependency>
 
 		<!-- test stuff -->
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

@@ -16,10 +16,11 @@
  */
 package org.ehealth_connector.communication.utils;
 
+import org.ehealth_connector.common.enums.DocumentDescriptor;
 import org.ehealth_connector.communication.DocDescriptor;
 import org.ehealth_connector.communication.xd.storedquery.DateTimeRange;
-import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
-import org.openhealthtools.ihe.xds.document.XDSDocument;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.TimeRange;
 
 /**
  *
@@ -35,14 +36,14 @@ public class XdsUtil {
 	 *            the OHT DateTimeRange
 	 * @return the DateTimeRange Array
 	 */
-	public static org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] convertEhcDateTimeRange(
+	public static TimeRange[] convertEhcDateTimeRange(
 			DateTimeRange[] dtr) {
 		if (dtr == null)
 			return null;
 		else {
-			final org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[] dtrArray = new org.openhealthtools.ihe.xds.consumer.query.DateTimeRange[dtr.length];
+			final var dtrArray = new TimeRange[dtr.length];
 
-			int i = 0;
+			var i = 0;
 			for (final DateTimeRange dt : dtr) {
 				dtrArray[i] = dt.getOhtDateTimeRange();
 				i++;
@@ -62,12 +63,13 @@ public class XdsUtil {
 	 *            the number of the document
 	 * @return the name of the document
 	 */
-	public static String createXdmDocName(XDSDocument xdsDoc, int docNr) {
+	public static String createXdmDocName(Document xdsDoc, int docNr) {
 		// compile the path and filename for the zip file
-		String fileName = "DOC";
+		var fileName = "DOC";
 
 		// Fix DocumentDescriptor problem...
-		DocumentDescriptor dd = xdsDoc.getDescriptor();
+		var dd = DocumentDescriptor
+				.getDocumentDescriptorForMimeType(xdsDoc.getDocumentEntry().getMimeType());
 		if (dd.toString().startsWith("UNKNOWN!")) {
 			String mimeType = dd.toString().replace("UNKNOWN!", "");
 			mimeType = mimeType.substring(mimeType.indexOf("!") + 1, mimeType.length());
@@ -92,9 +94,8 @@ public class XdsUtil {
 	 *            the number of the document
 	 * @return the path and name of the document
 	 */
-	public static String createXdmDocPathAndName(XDSDocument xdsDoc, int docNr) {
-		final String filePath = "IHE_XDM/SUBSET01/" + createXdmDocName(xdsDoc, docNr);
-		return filePath;
+	public static String createXdmDocPathAndName(Document xdsDoc, int docNr) {
+		return "IHE_XDM/SUBSET01/" + createXdmDocName(xdsDoc, docNr);
 	}
 
 	/**

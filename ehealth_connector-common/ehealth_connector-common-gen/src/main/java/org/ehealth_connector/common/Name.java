@@ -19,7 +19,7 @@ package org.ehealth_connector.common;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-
+import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import org.apache.commons.lang3.NotImplementedException;
@@ -31,8 +31,6 @@ import org.ehealth_connector.common.hl7cdar2.EnFamily;
 import org.ehealth_connector.common.hl7cdar2.EnGiven;
 import org.ehealth_connector.common.hl7cdar2.EnPrefix;
 import org.ehealth_connector.common.hl7cdar2.EnSuffix;
-
-import javax.xml.bind.JAXBElement;
 
 /**
  * <div class="en">The class Name contains all fields for different name parts
@@ -494,6 +492,30 @@ public class Name extends NameBaseType {
 	}
 
 	/**
+	 * <div class="en">Instantiates a new instance from the given IPF name
+	 * type.<div>
+	 *
+	 * <div class="de">Instanziiert eine neue Instanz vom angegebenen IPF
+	 * Datentyp.<div>
+	 *
+	 * @param ipfName the ipf name
+	 */
+	public Name(org.openehealth.ipf.commons.ihe.xds.core.metadata.Name<?> ipfName) {
+		initFromIpfType(ipfName);
+	}
+
+	/**
+	 * <div class="en">Instantiates a new instance from the given name.<div>
+	 *
+	 * <div class="de">Instanziiert eine neue Instanz vom angegebenen Namen.<div>
+	 *
+	 * @param name the name
+	 */
+	public Name(String name) {
+		setName(name);
+	}
+
+	/**
 	 * <div class="en">Gets the HL7 CDA R2 data type from the current
 	 * instance.<div>
 	 *
@@ -551,6 +573,21 @@ public class Name extends NameBaseType {
 			else
 				setUsage(EntityNameUse.LEGAL);
 			setNullFlavor(baseType.getNullFlavor());
+		} else
+			setNullFlavor(NullFlavor.NOT_AVAILABLE);
+	}
+
+	/**
+	 * Inits from the ipf type.
+	 *
+	 * @param ipfType the ipf type
+	 */
+	private void initFromIpfType(org.openehealth.ipf.commons.ihe.xds.core.metadata.Name<?> ipfType) {
+		if (ipfType != null) {
+			setFamily(ipfType.getFamilyName());
+			setGiven(ipfType.getGivenName());
+			setPrefix(ipfType.getPrefix());
+			setSuffix(ipfType.getSuffix());
 		} else
 			setNullFlavor(NullFlavor.NOT_AVAILABLE);
 	}

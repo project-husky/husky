@@ -17,7 +17,7 @@
 package org.ehealth_connector.cda.ihe.lab;
 
 import org.ehealth_connector.cda.MdhtOrganizerFacade;
-import org.ehealth_connector.common.mdht.Author;
+import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.mdht.Code;
 import org.ehealth_connector.common.mdht.Specimen;
 import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;

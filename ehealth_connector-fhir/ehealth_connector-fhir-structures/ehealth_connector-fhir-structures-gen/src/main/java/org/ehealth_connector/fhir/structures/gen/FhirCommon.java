@@ -28,17 +28,21 @@ import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.commons.io.Charsets;
+import org.ehealth_connector.common.Address;
+import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.Telecom;
+import org.ehealth_connector.common.basetypes.AddressBaseType;
+import org.ehealth_connector.common.basetypes.CodeBaseType;
+import org.ehealth_connector.common.basetypes.NameBaseType;
+import org.ehealth_connector.common.basetypes.OrganizationBaseType;
 import org.ehealth_connector.common.enums.CodeSystems;
-import org.ehealth_connector.common.mdht.Address;
-import org.ehealth_connector.common.mdht.Author;
 import org.ehealth_connector.common.mdht.AuthoringDevice;
-import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.mdht.Identificator;
-import org.ehealth_connector.common.mdht.Name;
-import org.ehealth_connector.common.mdht.Telecoms;
 import org.ehealth_connector.common.mdht.enums.ConfidentialityCode;
 import org.ehealth_connector.common.mdht.enums.Isco08;
 import org.ehealth_connector.common.utils.FileUtil;
@@ -67,7 +71,6 @@ import org.hl7.fhir.dstu3.model.StringType;
 import org.hl7.fhir.exceptions.FHIRException;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.utilities.xhtml.XhtmlNode;
-import org.openhealthtools.mdht.uml.hl7.vocab.PostalAddressUse;
 import org.slf4j.Logger;
 
 import ca.uhn.fhir.context.FhirContext;
@@ -622,8 +625,8 @@ public class FhirCommon {
 	 */
 	public static DocumentManifestContentComponent addDocManifestContent(
 			DocumentManifest documentManifest, Resource resource) {
-		final DocumentManifestContentComponent content = new DocumentManifestContentComponent();
-		final Reference ref = new Reference();
+		final var content = new DocumentManifestContentComponent();
+		final var ref = new Reference();
 		ref.setResource(resource);
 		content.setP(ref);
 		documentManifest.addContent(content);
@@ -687,7 +690,7 @@ public class FhirCommon {
 	 */
 	public static CodeableConcept createCodeableConcept(String systemOid, String value,
 			String displayName) {
-		final CodeableConcept retVal = new CodeableConcept();
+		final var retVal = new CodeableConcept();
 		retVal.addCoding(createCoding(systemOid, value, displayName));
 		return retVal;
 
@@ -719,7 +722,7 @@ public class FhirCommon {
 	 * @return the generated code
 	 */
 	public static Coding createCoding(String systemOid, String value, String displayName) {
-		final Coding retVal = new Coding();
+		final var retVal = new Coding();
 		retVal.setSystem(FhirCommon.addUrnOid(systemOid));
 		retVal.setCode(value);
 		retVal.setDisplay(displayName);
@@ -780,7 +783,7 @@ public class FhirCommon {
 	 * @return the FHIR observation
 	 */
 	public static Observation createObservation(CodeableConcept ccd) {
-		final Observation retVal = new Observation();
+		final var retVal = new Observation();
 		retVal.setStatus(ObservationStatus.UNKNOWN);
 		if (ccd != null)
 			retVal.setCode(ccd);
@@ -797,7 +800,7 @@ public class FhirCommon {
 	 * @return the FHIR code
 	 */
 	public static CodeableConcept ehcCodeToFhirCode(Code code) {
-		final CodeableConcept cc = new CodeableConcept();
+		final var cc = new CodeableConcept();
 		Coding fCode;
 
 		fCode = new Coding();
@@ -806,8 +809,8 @@ public class FhirCommon {
 		fCode.setDisplay(code.getDisplayName());
 		cc.addCoding(fCode);
 
-		for (final Code translation : code.getTranslations()) {
-			final Coding cdt = new Coding();
+		for (final CodeBaseType translation : code.getCodeTranslationList()) {
+			final var cdt = new Coding();
 			cdt.setSystem(addUrnOid(translation.getCodeSystem()));
 			cdt.setCode(translation.getCode());
 			cdt.setDisplay(translation.getDisplayName());
@@ -825,12 +828,12 @@ public class FhirCommon {
 	 * @return the eHC address
 	 */
 	public static Address fhirAddressToEhcAddress(org.hl7.fhir.dstu3.model.Address fAddr) {
-		final Address addr = new Address();
+		final var addr = new Address(new AddressBaseType());
 		for (final StringType line : fAddr.getLine()) {
-			addr.getMdhtAdress().addStreetAddressLine(line.asStringValue());
+			addr.setStreetAddressLine1(line.asStringValue());
 		}
 		if (fAddr.getPostalCode() != null) {
-			addr.setZip(fAddr.getPostalCode());
+			addr.setPostalCode(fAddr.getPostalCode());
 		}
 		if (fAddr.getCity() != null) {
 			addr.setCity(fAddr.getCity());
@@ -839,23 +842,23 @@ public class FhirCommon {
 			addr.setCountry(fAddr.getCountry());
 		}
 		if (fAddr.getState() != null) {
-			addr.getMdhtAdress().addState(fAddr.getState());
+			addr.setState(fAddr.getState());
 		}
 		final Enumeration<org.hl7.fhir.dstu3.model.Address.AddressUse> useElement = fAddr
 				.getUseElement();
 		if (useElement.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.HOME) {
-			addr.getMdhtAdress().getUses().add(PostalAddressUse.HP);
+			addr.setUsage(org.ehealth_connector.common.enums.PostalAddressUse.HOME_ADDRESS);
 		}
 		if (useElement.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.OLD) {
-			addr.getMdhtAdress().getUses().add(PostalAddressUse.BAD);
+			addr.setUsage(org.ehealth_connector.common.enums.PostalAddressUse.BAD_ADDRESS);
 		}
 		// We use TMP for PUB, because it is required in LRQC but not
 		// available in FHIR ;)
 		if (useElement.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.TEMP) {
-			addr.getMdhtAdress().getUses().add(PostalAddressUse.PUB);
+			addr.setUsage(org.ehealth_connector.common.enums.PostalAddressUse.TEMPORARY);
 		}
 		if (useElement.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.WORK) {
-			addr.getMdhtAdress().getUses().add(PostalAddressUse.WP);
+			addr.setUsage(org.ehealth_connector.common.enums.PostalAddressUse.WORK_PLACE);
 		}
 		return addr;
 	}
@@ -873,9 +876,10 @@ public class FhirCommon {
 				codableConcept.getCodingFirstRep().getCode(),
 				codableConcept.getCodingFirstRep().getDisplay());
 		if (codableConcept.getCoding().size() > 1) {
-			for (int i = 1; i < codableConcept.getCoding().size(); i++) {
+			for (var i = 1; i < codableConcept.getCoding().size(); i++) {
 				final Coding fhirCode = codableConcept.getCoding().get(i);
-				code.addTranslation(new Code(removeUrnOidPrefix(fhirCode.getSystem()),
+				code.addCodeTranslation(
+						new Code(removeUrnOidPrefix(fhirCode.getSystem()),
 						fhirCode.getCode(), fhirCode.getDisplay()));
 			}
 
@@ -906,9 +910,10 @@ public class FhirCommon {
 	 * @return the eHC name
 	 */
 	public static Name fhirNameToEhcName(HumanName fName) {
-		Name name = null;
+		var name = new Name();
 		if (!fName.getGivenAsSingleString().isEmpty() && !fName.getFamily().isEmpty()) {
-			name = new Name(fName.getGivenAsSingleString(), fName.getFamily());
+			name.setGiven(fName.getGivenAsSingleString());
+			name.setFamily(fName.getFamily());
 		} else {
 			if (!fName.getText().isEmpty()) {
 				name = new Name(fName.getText());
@@ -932,7 +937,7 @@ public class FhirCommon {
 	 * @return the DIV content
 	 */
 	public static String formatDiv(XhtmlNode xhtmlNode) {
-		String retVal = xhtmlNode.getValueAsString();
+		var retVal = xhtmlNode.getValueAsString();
 		retVal = retVal.replace("</div>", "");
 		retVal = retVal.substring(retVal.indexOf(">") + 1, retVal.length());
 		return retVal;
@@ -946,8 +951,8 @@ public class FhirCommon {
 	 * @return the eHC Author </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Author getAuthor(IBaseResource res) {
-		org.ehealth_connector.common.mdht.Author retVal = null;
+	public static org.ehealth_connector.common.Author getAuthor(IBaseResource res) {
+		org.ehealth_connector.common.Author retVal = null;
 		if (res instanceof org.hl7.fhir.dstu3.model.Person) {
 			retVal = FhirCommon.getAuthor((org.hl7.fhir.dstu3.model.Person) res);
 		}
@@ -969,14 +974,14 @@ public class FhirCommon {
 	 * @return <div class="en">the eHC Author</div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Author getAuthor(
+	public static org.ehealth_connector.common.Author getAuthor(
 			org.hl7.fhir.dstu3.model.Organization fhirObject) {
-		org.ehealth_connector.common.mdht.Author retVal = null;
+		org.ehealth_connector.common.Author retVal = null;
 		final String authoringDeviceName = fhirObject.getName();
 
 		// Create the author
-		final AuthoringDevice ad = new AuthoringDevice(authoringDeviceName);
-		retVal = new org.ehealth_connector.common.mdht.Author(ad);
+		final var ad = new AuthoringDevice(authoringDeviceName);
+		retVal = new org.ehealth_connector.common.Author(ad);
 		retVal.setFunctionCode(Author.FUNCTION_CODE_AUTHORDEVICE);
 
 		// Set Function Code
@@ -990,17 +995,20 @@ public class FhirCommon {
 
 		// Add Addresses
 		for (final org.hl7.fhir.dstu3.model.Address addr : fhirObject.getAddress()) {
-			org.ehealth_connector.common.mdht.enums.PostalAddressUse usage = org.ehealth_connector.common.mdht.enums.PostalAddressUse.BUSINESS;
+			org.ehealth_connector.common.enums.PostalAddressUse usage = org.ehealth_connector.common.enums.PostalAddressUse.WORK_PLACE;
 			if (addr.getUseElement()
 					.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.HOME) {
-				usage = org.ehealth_connector.common.mdht.enums.PostalAddressUse.PRIVATE;
+				usage = org.ehealth_connector.common.enums.PostalAddressUse.HOME_ADDRESS;
 			}
 			if (addr.getUseElement()
 					.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.TEMP) {
-				usage = org.ehealth_connector.common.mdht.enums.PostalAddressUse.PUBLIC;
+				usage = org.ehealth_connector.common.enums.PostalAddressUse.PUBLIC;
 			}
-			final Address eHCAddr = new Address(addr.getLine().get(0).toString(),
-					addr.getPostalCode(), addr.getCity(), usage);
+			final var eHCAddr = new Address(new AddressBaseType());
+			eHCAddr.setStreetAddressLine1(addr.getLine().get(0).toString());
+			eHCAddr.setPostalCode(addr.getPostalCode());
+			eHCAddr.setCity(addr.getCity());
+			eHCAddr.setUsage(usage);
 			if (addr.getCountry() != null) {
 				eHCAddr.setCountry(addr.getCountry());
 			}
@@ -1014,10 +1022,12 @@ public class FhirCommon {
 		final OrganizationContactComponent contact = fhirObject.getContactFirstRep();
 		if (contact != null) {
 			final String name = contact.getName().getFamily();
-			if (name != null)
-				if (!"".equals(name))
-					retVal.setOrganization(
-							new org.ehealth_connector.common.mdht.Organization(name));
+			if (name != null && !name.isEmpty()) {
+				retVal.setOrganization(new org.ehealth_connector.common.Organization(new OrganizationBaseType()));
+				var orgName = new NameBaseType();
+				orgName.setName(name);
+				retVal.getOrganization().addName(orgName);
+			}
 		}
 
 		return retVal;
@@ -1032,14 +1042,16 @@ public class FhirCommon {
 	 * @return <div class="en">the eHC Author</div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Author getAuthor(
+	public static org.ehealth_connector.common.Author getAuthor(
 			org.hl7.fhir.dstu3.model.Person fhirObject) {
-		org.ehealth_connector.common.mdht.Author retVal = null;
-		final Name personName = new Name(fhirObject.getNameFirstRep().getGivenAsSingleString(),
-				fhirObject.getNameFirstRep().getFamily());
+		org.ehealth_connector.common.Author retVal = null;
+		final var personName = new Name();
+		personName.setGiven(fhirObject.getNameFirstRep().getGivenAsSingleString());
+		personName.setFamily(fhirObject.getNameFirstRep().getFamily());
+
 
 		// Create the author
-		retVal = new org.ehealth_connector.common.mdht.Author(personName);
+		retVal = new org.ehealth_connector.common.Author(personName);
 
 		// Set Function Code
 		setAuthorFuntionCode(retVal, fhirObject);
@@ -1052,17 +1064,20 @@ public class FhirCommon {
 
 		// Add Addresses
 		for (final org.hl7.fhir.dstu3.model.Address addr : fhirObject.getAddress()) {
-			org.ehealth_connector.common.mdht.enums.PostalAddressUse usage = org.ehealth_connector.common.mdht.enums.PostalAddressUse.BUSINESS;
+			org.ehealth_connector.common.enums.PostalAddressUse usage = org.ehealth_connector.common.enums.PostalAddressUse.WORK_PLACE;
 			if (addr.getUseElement()
 					.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.HOME) {
-				usage = org.ehealth_connector.common.mdht.enums.PostalAddressUse.PRIVATE;
+				usage = org.ehealth_connector.common.enums.PostalAddressUse.HOME_ADDRESS;
 			}
 			if (addr.getUseElement()
 					.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.TEMP) {
-				usage = org.ehealth_connector.common.mdht.enums.PostalAddressUse.PUBLIC;
+				usage = org.ehealth_connector.common.enums.PostalAddressUse.PUBLIC;
 			}
-			final Address eHCAddr = new Address(addr.getLine().get(0).toString(),
-					addr.getPostalCode(), addr.getCity(), usage);
+			final var eHCAddr = new Address(new AddressBaseType());
+			eHCAddr.setStreetAddressLine1(addr.getLine().get(0).toString());
+			eHCAddr.setPostalCode(addr.getPostalCode());
+			eHCAddr.setCity(addr.getCity());
+			eHCAddr.setUsage(usage);
 			eHCAddr.setCountry(addr.getCountry());
 			retVal.addAddress(eHCAddr);
 		}
@@ -1089,7 +1104,7 @@ public class FhirCommon {
 	 * @return the eHC Author </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Author getAuthor(
+	public static org.ehealth_connector.common.Author getAuthor(
 			org.hl7.fhir.dstu3.model.Reference ref) {
 		return getAuthor(ref.getResource());
 	}
@@ -1103,13 +1118,14 @@ public class FhirCommon {
 	 * @return <div class="en">the eHC Author</div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Author getAuthor(Practitioner fhirObject) {
-		org.ehealth_connector.common.mdht.Author retVal = null;
-		final Name personName = new Name(fhirObject.getName().get(0).getGivenAsSingleString(),
-				fhirObject.getName().get(0).getFamily());
+	public static org.ehealth_connector.common.Author getAuthor(Practitioner fhirObject) {
+		org.ehealth_connector.common.Author retVal = null;
+		final var personName = new Name();
+		personName.setGiven(fhirObject.getName().get(0).getGivenAsSingleString());
+		personName.setFamily(fhirObject.getName().get(0).getFamily());
 
 		// Create the author
-		retVal = new org.ehealth_connector.common.mdht.Author(personName);
+		retVal = new org.ehealth_connector.common.Author(personName);
 
 		// Set Function Code
 		setAuthorFuntionCode(retVal, fhirObject);
@@ -1122,13 +1138,16 @@ public class FhirCommon {
 
 		// Add Addresses
 		for (final org.hl7.fhir.dstu3.model.Address addr : fhirObject.getAddress()) {
-			org.ehealth_connector.common.mdht.enums.PostalAddressUse usage = org.ehealth_connector.common.mdht.enums.PostalAddressUse.BUSINESS;
+			org.ehealth_connector.common.enums.PostalAddressUse usage = org.ehealth_connector.common.enums.PostalAddressUse.WORK_PLACE;
 			if (addr.getUseElement()
 					.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.HOME) {
-				usage = org.ehealth_connector.common.mdht.enums.PostalAddressUse.PRIVATE;
+				usage = org.ehealth_connector.common.enums.PostalAddressUse.HOME_ADDRESS;
 			}
-			final Address eHCAddr = new Address(addr.getLine().get(0).toString(),
-					addr.getPostalCode(), addr.getCity(), usage);
+			final var eHCAddr = new Address(new AddressBaseType());
+			eHCAddr.setStreetAddressLine1(addr.getLine().get(0).toString());
+			eHCAddr.setPostalCode(addr.getPostalCode());
+			eHCAddr.setCity(addr.getCity());
+			eHCAddr.setUsage(usage);
 			eHCAddr.setCountry(addr.getCountry());
 			retVal.addAddress(eHCAddr);
 		}
@@ -1153,7 +1172,7 @@ public class FhirCommon {
 	 * @return the community patient id
 	 */
 	public static Identificator getCommunityPatientId(
-			org.ehealth_connector.common.mdht.Patient patient, String communityOid) {
+			org.ehealth_connector.common.Patient patient, String communityOid) {
 		Identificator retVal = null;
 		if (communityOid != null) {
 			for (final Identificator item : patient.getIds()) {
@@ -1174,7 +1193,7 @@ public class FhirCommon {
 	 * @return the FHIR element for a normal confidentiality code
 	 */
 	public static Basic getConfidentialityNormal() {
-		final Basic docRestrictedConfidentiality = new Basic();
+		final var docRestrictedConfidentiality = new Basic();
 		final ConfidentialityCode conf = ConfidentialityCode.NORMAL;
 		docRestrictedConfidentiality.setCode(FhirCommon.createCodeableConcept(
 				conf.getCodeSystemOid(), conf.getCodeValue(), conf.getDisplayName()));
@@ -1188,7 +1207,7 @@ public class FhirCommon {
 	 * @return the FHIR element for a restricted confidentiality code
 	 */
 	public static Basic getConfidentialityRestricted() {
-		final Basic docRestrictedConfidentiality = new Basic();
+		final var docRestrictedConfidentiality = new Basic();
 		final ConfidentialityCode conf = ConfidentialityCode.RESTRICTED;
 		docRestrictedConfidentiality.setCode(FhirCommon.createCodeableConcept(
 				conf.getCodeSystemOid(), conf.getCodeValue(), conf.getDisplayName()));
@@ -1247,7 +1266,7 @@ public class FhirCommon {
 	 * @return the dummy code
 	 */
 	public static CodeableConcept getDummyCodeableConcept() {
-		final CodeableConcept retVal = new CodeableConcept();
+		final var retVal = new CodeableConcept();
 		retVal.addCoding(getDummyCode());
 		return retVal;
 	}
@@ -1258,7 +1277,7 @@ public class FhirCommon {
 	 * @return the dummy reference
 	 */
 	public static Reference getDummyReference() {
-		final Reference dummyRef = new Reference();
+		final var dummyRef = new Reference();
 		dummyRef.setDisplay("dummy");
 		return dummyRef;
 
@@ -1412,7 +1431,7 @@ public class FhirCommon {
 	 */
 	public static Extension getExtensionFunctionCodeDoctor() {
 		final Isco08 functionCode = Isco08.MEDICAL_DOCTORS;
-		final Coding code = new Coding(functionCode.getCodeSystemName(),
+		final var code = new Coding(functionCode.getCodeSystemName(),
 				functionCode.getCodeValue(), functionCode.getDisplayName());
 		return new Extension(FhirCommon.urnUseAsFunctionCode, code);
 	}
@@ -1425,7 +1444,7 @@ public class FhirCommon {
 	 */
 	public static Extension getExtensionFunctionCodeLabTechnician() {
 		final Isco08 functionCode = Isco08.MEDICAL_AND_PATHOLOGY_LABORATORY_TECHNICIANS;
-		final Coding code = new Coding();
+		final var code = new Coding();
 		code.setSystem(FhirCommon.addUrnOid(functionCode.getCodeSystemOid()));
 		code.setCode(functionCode.getCodeValue());
 		code.setDisplay(functionCode.getDisplayName());
@@ -1588,7 +1607,7 @@ public class FhirCommon {
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	public static String getMetadataLanguage(DocumentReference fhirObject) {
-		String retVal = "";
+		var retVal = "";
 		final List<Extension> extensions = fhirObject
 				.getExtensionsByUrl(FhirCommon.urnUseAsMetadataLanguage);
 		if (!extensions.isEmpty())
@@ -1606,7 +1625,7 @@ public class FhirCommon {
 	 *         <div class="fr"></div>
 	 */
 	public static String getMimeType(DocumentReference fhirObject) {
-		String retVal = "";
+		var retVal = "";
 		final Coding item = fhirObject.getContentFirstRep().getFormat();
 		final List<Extension> extensions = item.getExtensionsByUrl(FhirCommon.urnUseAsMimeType);
 		if (!extensions.isEmpty()) {
@@ -1624,9 +1643,9 @@ public class FhirCommon {
 	 * @return the eHC Organization </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Organization getOrganization(
+	public static org.ehealth_connector.common.Organization getOrganization(
 			IBaseResource res) {
-		org.ehealth_connector.common.mdht.Organization retVal = null;
+		org.ehealth_connector.common.Organization retVal = null;
 		if (res instanceof org.hl7.fhir.dstu3.model.Organization) {
 			retVal = FhirCommon.getOrganization((org.hl7.fhir.dstu3.model.Organization) res);
 		}
@@ -1643,36 +1662,39 @@ public class FhirCommon {
 	 * @return eHC Organization object eHC Organization</div>
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Organization getOrganization(
+	public static org.ehealth_connector.common.Organization getOrganization(
 			org.hl7.fhir.dstu3.model.Organization fhirOrganization) {
-		org.ehealth_connector.common.mdht.Organization retVal = null;
+		org.ehealth_connector.common.Organization retVal = null;
 		// Create the organization
 		if (fhirOrganization.getName() != null) {
-			retVal = new org.ehealth_connector.common.mdht.Organization(fhirOrganization.getName());
+			retVal = new org.ehealth_connector.common.Organization(new OrganizationBaseType());
+			var name = new NameBaseType();
+			name.setName(fhirOrganization.getName());
+			retVal.addName(name);
 
 			// Add Identifiers
 			for (final Identifier id : fhirOrganization.getIdentifier()) {
 				final String codeSystem = FhirCommon.removeUrnOidPrefix(id.getSystem());
-				retVal.addId(new Identificator(codeSystem, id.getValue()));
+				retVal.addIdentificator(new Identificator(codeSystem, id.getValue()));
 			}
 
 			// Add Addresses
 			for (final org.hl7.fhir.dstu3.model.Address addr : fhirOrganization.getAddress()) {
-				org.ehealth_connector.common.mdht.enums.PostalAddressUse usage = org.ehealth_connector.common.mdht.enums.PostalAddressUse.BUSINESS;
+				org.ehealth_connector.common.enums.PostalAddressUse usage = org.ehealth_connector.common.enums.PostalAddressUse.WORK_PLACE;
 				if (addr.getUseElement()
 						.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.HOME) {
-					usage = org.ehealth_connector.common.mdht.enums.PostalAddressUse.PRIVATE;
+					usage = org.ehealth_connector.common.enums.PostalAddressUse.HOME_ADDRESS;
 				}
 				if (addr.getUseElement()
 						.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.TEMP) {
-					usage = org.ehealth_connector.common.mdht.enums.PostalAddressUse.PUBLIC;
+					usage = org.ehealth_connector.common.enums.PostalAddressUse.PUBLIC;
 				}
-				final Address eHCAddr = new Address();
-				eHCAddr.setAddressline1(addr.getLine().get(0).toString());
+				final var eHCAddr = new Address(new AddressBaseType());
+				eHCAddr.setStreetAddressLine1(addr.getLine().get(0).toString());
 				if (addr.getLine().size() > 1) {
-					eHCAddr.setAddressline2(addr.getLine().get(1).getValueAsString());
+					eHCAddr.setStreetAddressLine2(addr.getLine().get(1).getValueAsString());
 				}
-				eHCAddr.setZip(addr.getPostalCode());
+				eHCAddr.setPostalCode(addr.getPostalCode());
 				eHCAddr.setCity(addr.getCity());
 				eHCAddr.setCountry(addr.getCountry());
 				eHCAddr.setUsage(usage);
@@ -1680,8 +1702,10 @@ public class FhirCommon {
 			}
 
 			// Add Telecoms
-			retVal.setTelecoms(FhirCommon.getTelecoms(fhirOrganization.getTelecom()));
-
+			List<Telecom> telecoms = FhirCommon.getTelecoms(fhirOrganization.getTelecom());
+			for (Telecom tel : telecoms) {
+				retVal.addTelecom(tel);
+			}
 		}
 		return retVal;
 	}
@@ -1693,7 +1717,7 @@ public class FhirCommon {
 	 *            the FHIR reference object
 	 * @return the eHC Organization
 	 */
-	public static org.ehealth_connector.common.mdht.Organization getOrganization(
+	public static org.ehealth_connector.common.Organization getOrganization(
 			org.hl7.fhir.dstu3.model.Reference orgRef) {
 		return getOrganization(orgRef.getResource());
 	}
@@ -1707,8 +1731,8 @@ public class FhirCommon {
 	 * @return the eHC Patient object </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Patient getPatient(IBaseResource res) {
-		org.ehealth_connector.common.mdht.Patient retVal = null;
+	public static org.ehealth_connector.common.Patient getPatient(IBaseResource res) {
+		org.ehealth_connector.common.Patient retVal = null;
 		if (res instanceof org.hl7.fhir.dstu3.model.Patient) {
 			retVal = FhirCommon.getPatient((org.hl7.fhir.dstu3.model.Patient) res);
 		}
@@ -1723,14 +1747,13 @@ public class FhirCommon {
 	 * @return eHC Patient object </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Patient getPatient(
+	public static org.ehealth_connector.common.Patient getPatient(
 			org.hl7.fhir.dstu3.model.Bundle bundle) {
-		org.hl7.fhir.dstu3.model.Patient fhirPatient = null;
 		for (final BundleEntryComponent entry : bundle.getEntry()) {
 			if (entry.getResource() instanceof org.hl7.fhir.dstu3.model.Patient)
-				fhirPatient = (org.hl7.fhir.dstu3.model.Patient) entry.getResource();
+				return getPatient((org.hl7.fhir.dstu3.model.Patient) entry.getResource());
 		}
-		return getPatient(fhirPatient);
+		return null;
 	}
 
 	/**
@@ -1741,9 +1764,8 @@ public class FhirCommon {
 	 * @return eHC Patient object </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Patient getPatient(
+	public static org.ehealth_connector.common.Patient getPatient(
 			org.hl7.fhir.dstu3.model.DocumentManifest docManifest) {
-		org.hl7.fhir.dstu3.model.Patient fhirPatient = null;
 		for (final DocumentManifestContentComponent entry : docManifest.getContent()) {
 			Reference ref = null;
 			try {
@@ -1751,12 +1773,11 @@ public class FhirCommon {
 					ref = entry.getPReference();
 			} catch (final FHIRException e) {
 			}
-			if (ref != null) {
-				if (ref.getResource() instanceof org.hl7.fhir.dstu3.model.Patient)
-					fhirPatient = (org.hl7.fhir.dstu3.model.Patient) ref.getResource();
+			if (ref != null && ref.getResource() instanceof org.hl7.fhir.dstu3.model.Patient) {
+					return getPatient((org.hl7.fhir.dstu3.model.Patient) ref.getResource());
 			}
 		}
-		return getPatient(fhirPatient);
+		return null;
 	}
 
 	/**
@@ -1768,19 +1789,19 @@ public class FhirCommon {
 	 * @return the eHC Patient object </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Patient getPatient(
+	public static org.ehealth_connector.common.Patient getPatient(
 			org.hl7.fhir.dstu3.model.Patient fhirPatient) {
-		org.ehealth_connector.common.mdht.Patient retVal = null;
+		org.ehealth_connector.common.Patient retVal = null;
 		final List<Extension> extensions = fhirPatient
 				.getExtensionsByUrl(FhirCommon.urnUseAsNonLivingSubject);
 		if (!extensions.isEmpty()) {
 			// Create eHC Patient
-			retVal = new org.ehealth_connector.common.mdht.Patient();
+			retVal = new org.ehealth_connector.common.Patient();
 			retVal.setIsNonHumenSubject();
 		} else {
-			final Name patientName = new Name(
-					fhirPatient.getNameFirstRep().getGivenAsSingleString(),
-					fhirPatient.getNameFirstRep().getFamily());
+			final var patientName = new Name();
+			patientName.setGiven(fhirPatient.getNameFirstRep().getGivenAsSingleString());
+			patientName.setFamily(fhirPatient.getNameFirstRep().getFamily());
 			org.ehealth_connector.common.mdht.enums.AdministrativeGender gender = org.ehealth_connector.common.mdht.enums.AdministrativeGender.UNDIFFERENTIATED;
 			if (fhirPatient.getGenderElement()
 					.getValue() == org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender.FEMALE) {
@@ -1791,21 +1812,24 @@ public class FhirCommon {
 			}
 
 			// Create eHC Patient
-			retVal = new org.ehealth_connector.common.mdht.Patient(patientName, gender,
+			retVal = new org.ehealth_connector.common.Patient(patientName, gender,
 					fhirPatient.getBirthDate());
 
 			// Add Addresses
 			for (final org.hl7.fhir.dstu3.model.Address addr : fhirPatient.getAddress()) {
-				org.ehealth_connector.common.mdht.enums.PostalAddressUse usage = org.ehealth_connector.common.mdht.enums.PostalAddressUse.BUSINESS;
+				org.ehealth_connector.common.enums.PostalAddressUse usage = org.ehealth_connector.common.enums.PostalAddressUse.WORK_PLACE;
 				if (addr.getUseElement()
 						.getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.HOME) {
-					usage = org.ehealth_connector.common.mdht.enums.PostalAddressUse.PRIVATE;
+					usage = org.ehealth_connector.common.enums.PostalAddressUse.HOME_ADDRESS;
 				}
 				String addrLine = null;
-				if (addr.getLine().size() > 0)
+				if (!addr.getLine().isEmpty())
 					addrLine = addr.getLine().get(0).toString();
-				final Address eHCAddr = new Address(addrLine, addr.getPostalCode(), addr.getCity(),
-						usage);
+				final var eHCAddr = new Address(new AddressBaseType());
+				eHCAddr.setStreetAddressLine1(addrLine);
+				eHCAddr.setPostalCode(addr.getPostalCode());
+				eHCAddr.setCity(addr.getCity());
+				eHCAddr.setUsage(usage);
 				eHCAddr.setCountry(addr.getCountry());
 				retVal.addAddress(eHCAddr);
 			}
@@ -1831,7 +1855,7 @@ public class FhirCommon {
 	 * @return the eHC Patient object </div> <div class="de"></div>
 	 *         <div class="fr"></div>
 	 */
-	public static org.ehealth_connector.common.mdht.Patient getPatient(
+	public static org.ehealth_connector.common.Patient getPatient(
 			org.hl7.fhir.dstu3.model.Reference orgRef) {
 		return getPatient(orgRef.getResource());
 	}
@@ -1861,8 +1885,8 @@ public class FhirCommon {
 	 *            a list of FHIR ContactPoint resources
 	 * @return eHC Telecoms</div> <div class="de"></div> <div class="fr"></div>
 	 */
-	public static Telecoms getTelecoms(List<ContactPoint> fhirContactPoints) {
-		final Telecoms eHCTelecoms = new Telecoms();
+	public static List<Telecom> getTelecoms(List<ContactPoint> fhirContactPoints) {
+		final List<Telecom> eHCTelecoms = new LinkedList<>();
 		for (final ContactPoint telco : fhirContactPoints) {
 			org.ehealth_connector.common.enums.TelecomAddressUse usage = org.ehealth_connector.common.enums.TelecomAddressUse.BUSINESS;
 			if (telco.getUseElement().getValue() == ContactPointUse.HOME) {
@@ -1872,15 +1896,19 @@ public class FhirCommon {
 				usage = org.ehealth_connector.common.enums.TelecomAddressUse.PUBLIC;
 			}
 			final String value = telco.getValue();
+			final var eHCTelecom = new Telecom();
 			if (value.toLowerCase().startsWith("tel:")) {
-				eHCTelecoms.addPhone(value.substring(4, value.length()), usage);
+				eHCTelecom.setPhone(value.substring(4, value.length()));
 			} else if (value.toLowerCase().startsWith("fax:")) {
-				eHCTelecoms.addFax(value.substring(4, value.length()), usage);
+				eHCTelecom.setFax(value.substring(4, value.length()));
 			} else if (value.toLowerCase().startsWith("mailto:")) {
-				eHCTelecoms.addEMail(value.substring(7, value.length()), usage);
+				eHCTelecom.setMail(value.substring(7, value.length()));
 			} else if (value.toLowerCase().startsWith("http:")) {
-				eHCTelecoms.addWebsite(value, usage);
+				eHCTelecom.setValue(value);
 			}
+
+			eHCTelecom.setUsage(usage);
+			eHCTelecoms.add(eHCTelecom);
 		}
 		return eHCTelecoms;
 	}
@@ -1909,9 +1937,7 @@ public class FhirCommon {
 			} catch (final IOException e) {
 				e.printStackTrace();
 			}
-		} catch (final FileNotFoundException e1) {
-			e1.printStackTrace();
-		} catch (final UnsupportedEncodingException e1) {
+		} catch (final FileNotFoundException | UnsupportedEncodingException e1) {
 			e1.printStackTrace();
 		} catch (IOException e2) {
 			e2.printStackTrace();
@@ -1931,7 +1957,7 @@ public class FhirCommon {
 	 *         <div class="de"></div> <div class="fr"></div>
 	 */
 	public static String removeUrnOidPrefix(String value) {
-		String retVal = "";
+		var retVal = "";
 		if (value != null) {
 			if (value.toLowerCase().startsWith("urn:oid:"))
 				retVal = value.replace("urn:oid:", "");
@@ -1961,7 +1987,7 @@ public class FhirCommon {
 	 */
 	public static boolean saveResource(Logger log, String path, IBaseResource fhirResource,
 			String fileName, SaveMode saveMode) {
-		boolean retVal = true;
+		var retVal = true;
 		final String separator = FileUtil.getPlatformSpecificPathSeparator();
 		String fullFn = path;
 		if (!path.endsWith(separator))
@@ -1979,7 +2005,7 @@ public class FhirCommon {
 			} else {
 				writer = new BufferedWriter(new FileWriter(fullFn));
 			}
-			final FhirContext fhirCtx = new FhirContext(FhirVersionEnum.DSTU3);
+			final var fhirCtx = new FhirContext(FhirVersionEnum.DSTU3);
 			fhirCtx.newXmlParser().setPrettyPrint(true).encodeResourceToWriter(fhirResource,
 					writer);
 
@@ -2007,13 +2033,13 @@ public class FhirCommon {
 	 *            any FHIR DomainResource containing the extension
 	 *            urnUseAsFunctionCode
 	 */
-	private static void setAuthorFuntionCode(org.ehealth_connector.common.mdht.Author author,
+	private static void setAuthorFuntionCode(org.ehealth_connector.common.Author author,
 			DomainResource fhirResource) {
 		final List<Extension> extensions = fhirResource
 				.getExtensionsByUrl(FhirCommon.urnUseAsFunctionCode);
 		if (!extensions.isEmpty()) {
-			final Coding coding = (Coding) extensions.get(0).getValue();
-			final Code code = FhirUtilities.toCode(coding);
+			final var coding = (Coding) extensions.get(0).getValue();
+			final var code = FhirUtilities.toCode(coding);
 			code.setCodeSystemName(coding.getVersion());
 			author.setFunctionCode(code);
 		}

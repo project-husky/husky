@@ -16,16 +16,16 @@
  */
 package org.ehealth_connector.common.mdht;
 
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 /**
  * Test of class Person
  */
-@Ignore
+@Disabled
 public class PersonTest {
 
 	/**
@@ -33,13 +33,13 @@ public class PersonTest {
 	 *
 	 * @throws java.lang.Exception
 	 */
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 	}
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Person#Person()}.
+	 * {@link org.ehealth_connector.common.Person#Person()}.
 	 */
 	@Test
 	public void testPerson() {
@@ -48,7 +48,7 @@ public class PersonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Person#Person(org.ehealth_connector.common.mdht.Name)}
+	 * {@link org.ehealth_connector.common.Person#Person(org.ehealth_connector.common.mdht.Name)}
 	 * .
 	 */
 	@Test
@@ -58,7 +58,7 @@ public class PersonTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Person#Person(org.openhealthtools.mdht.uml.cda.Person)}
+	 * {@link org.ehealth_connector.common.Person#Person(org.openhealthtools.mdht.uml.cda.Person)}
 	 * .
 	 */
 	@Test

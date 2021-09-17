@@ -16,8 +16,8 @@
  */
 package org.ehealth_connector.xua.communication.xua.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.UUID;
 
@@ -29,8 +29,8 @@ import org.ehealth_connector.xua.hl7v3.PurposeOfUse;
 import org.ehealth_connector.xua.hl7v3.Role;
 import org.ehealth_connector.xua.hl7v3.impl.PurposeOfUseBuilder;
 import org.ehealth_connector.xua.hl7v3.impl.RoleBuilder;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.opensaml.soap.wstrust.RequestSecurityToken;
 import org.opensaml.soap.wstrust.impl.RequestSecurityTokenBuilder;
 
@@ -58,7 +58,7 @@ public class XUserAssertionRequestBuilderImplTest {
 	private String testRoleCodeSystemName;
 	private String testRoleDisplayName;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		builder = new XUserAssertionRequestBuilderImpl();
 		testDialect = "http://bag.admin.ch/epr/2017/annex/5/addendum/2";

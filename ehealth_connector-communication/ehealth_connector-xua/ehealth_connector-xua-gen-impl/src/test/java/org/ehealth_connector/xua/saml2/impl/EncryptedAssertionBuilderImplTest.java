@@ -16,14 +16,14 @@
  */
 package org.ehealth_connector.xua.saml2.impl;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.UUID;
 
 import org.ehealth_connector.xua.saml2.EncryptedAssertion;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.opensaml.xmlsec.encryption.EncryptedData;
 
 public class EncryptedAssertionBuilderImplTest {
@@ -32,7 +32,7 @@ public class EncryptedAssertionBuilderImplTest {
 	private String testId;
 	private org.opensaml.saml.saml2.core.EncryptedAssertion testInnerObject;
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		builder = new EncryptedAssertionBuilderImpl();
 		testInnerObject = new org.opensaml.saml.saml2.core.impl.EncryptedAssertionBuilder()

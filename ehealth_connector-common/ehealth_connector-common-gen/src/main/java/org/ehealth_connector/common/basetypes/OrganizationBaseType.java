@@ -18,6 +18,7 @@ package org.ehealth_connector.common.basetypes;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.processing.Generated;
 
@@ -50,13 +51,13 @@ public class OrganizationBaseType implements Serializable {
 	public static final class Builder {
 
 		/** The address list. */
-		private ArrayList<AddressBaseType> addressList;
+		private List<AddressBaseType> addressList;
 
 		/** The identificator list. */
-		private ArrayList<IdentificatorBaseType> identificatorList;
+		private List<IdentificatorBaseType> identificatorList;
 
 		/** The name list. */
-		private ArrayList<NameBaseType> nameList;
+		private List<NameBaseType> nameList;
 
 		/** The null flavor. */
 		private NullFlavor nullFlavor;
@@ -74,7 +75,7 @@ public class OrganizationBaseType implements Serializable {
 		private TelecomBaseType primaryTelecom;
 
 		/** The telecom list. */
-		private ArrayList<TelecomBaseType> telecomList;
+		private List<TelecomBaseType> telecomList;
 
 		/**
 		 * Instantiates a new builder.
@@ -214,13 +215,13 @@ public class OrganizationBaseType implements Serializable {
 	}
 
 	/** The address list. */
-	private ArrayList<AddressBaseType> addressList;
+	private List<AddressBaseType> addressList;
 
 	/** The identificator list. */
-	private ArrayList<IdentificatorBaseType> identificatorList;
+	private List<IdentificatorBaseType> identificatorList;
 
 	/** The name list. */
-	private ArrayList<NameBaseType> nameList;
+	private List<NameBaseType> nameList;
 
 	/** The null flavor. */
 	private NullFlavor nullFlavor;
@@ -238,7 +239,7 @@ public class OrganizationBaseType implements Serializable {
 	private TelecomBaseType primaryTelecom;
 
 	/** The telecom list. */
-	private ArrayList<TelecomBaseType> telecomList;
+	private List<TelecomBaseType> telecomList;
 
 	/**
 	 * <div class="en">Instantiates a new OrganizationBaseType. Default
@@ -281,7 +282,7 @@ public class OrganizationBaseType implements Serializable {
 	 */
 	public void addAddress(AddressBaseType value) {
 		if (this.addressList == null) {
-			this.addressList = new ArrayList<AddressBaseType>();
+			this.addressList = new ArrayList<>();
 			if (primaryAddress == null)
 				primaryAddress = value;
 		}
@@ -300,7 +301,7 @@ public class OrganizationBaseType implements Serializable {
 	 */
 	public void addIdentificator(IdentificatorBaseType value) {
 		if (this.identificatorList == null) {
-			this.identificatorList = new ArrayList<IdentificatorBaseType>();
+			this.identificatorList = new ArrayList<>();
 			if (primaryIdentificator == null)
 				primaryIdentificator = value;
 		}
@@ -319,7 +320,7 @@ public class OrganizationBaseType implements Serializable {
 	 */
 	public void addName(NameBaseType value) {
 		if (this.nameList == null) {
-			this.nameList = new ArrayList<NameBaseType>();
+			this.nameList = new ArrayList<>();
 			if (primaryName == null)
 				primaryName = value;
 		}
@@ -338,7 +339,7 @@ public class OrganizationBaseType implements Serializable {
 	 */
 	public void addTelecom(TelecomBaseType value) {
 		if (this.telecomList == null) {
-			this.telecomList = new ArrayList<TelecomBaseType>();
+			this.telecomList = new ArrayList<>();
 			if (primaryTelecom == null)
 				primaryTelecom = value;
 		}
@@ -351,7 +352,7 @@ public class OrganizationBaseType implements Serializable {
 	 * <div class="de">Löscht die Adressliste.</div>
 	 */
 	public void clearAddressList() {
-		this.addressList = new ArrayList<AddressBaseType>();
+		this.addressList = new ArrayList<>();
 	}
 
 	/**
@@ -360,7 +361,7 @@ public class OrganizationBaseType implements Serializable {
 	 * <div class="de">Löscht die Identifikatorliste.</div>
 	 */
 	public void clearIdentificatorList() {
-		this.identificatorList = new ArrayList<IdentificatorBaseType>();
+		this.identificatorList = new ArrayList<>();
 	}
 
 	/**
@@ -369,7 +370,7 @@ public class OrganizationBaseType implements Serializable {
 	 * <div class="de">Löscht die Namensliste.</div>
 	 */
 	public void clearNameList() {
-		this.nameList = new ArrayList<NameBaseType>();
+		this.nameList = new ArrayList<>();
 	}
 
 	/**
@@ -378,7 +379,7 @@ public class OrganizationBaseType implements Serializable {
 	 * <div class="de">Löscht die Telekommunikationsliste.</div>
 	 */
 	public void clearTelecomList() {
-		this.telecomList = new ArrayList<TelecomBaseType>();
+		this.telecomList = new ArrayList<>();
 	}
 
 	/**
@@ -482,15 +483,15 @@ public class OrganizationBaseType implements Serializable {
 	 */
 	@Override
 	public boolean equals(Object obj) {
-		boolean retVal = true;
+		var retVal = true;
 		if (obj == null)
 			return false;
 		if (!(obj instanceof OrganizationBaseType))
 			return false;
 		if (retVal) {
 			if (this.addressList == null)
-				this.addressList = new ArrayList<AddressBaseType>();
-			for (int i = 0; i < this.addressList.size(); i++) {
+				this.addressList = new ArrayList<>();
+			for (var i = 0; i < this.addressList.size(); i++) {
 				retVal = ((OrganizationBaseType) obj).contains(this.addressList.get(i));
 				if (!retVal)
 					break;
@@ -498,8 +499,8 @@ public class OrganizationBaseType implements Serializable {
 		}
 		if (retVal) {
 			if (this.identificatorList == null)
-				this.identificatorList = new ArrayList<IdentificatorBaseType>();
-			for (int i = 0; i < this.identificatorList.size(); i++) {
+				this.identificatorList = new ArrayList<>();
+			for (var i = 0; i < this.identificatorList.size(); i++) {
 				retVal = ((OrganizationBaseType) obj).contains(this.identificatorList.get(i));
 				if (!retVal)
 					break;
@@ -507,8 +508,8 @@ public class OrganizationBaseType implements Serializable {
 		}
 		if (retVal) {
 			if (this.nameList == null)
-				this.nameList = new ArrayList<NameBaseType>();
-			for (int i = 0; i < this.nameList.size(); i++) {
+				this.nameList = new ArrayList<>();
+			for (var i = 0; i < this.nameList.size(); i++) {
 				retVal = ((OrganizationBaseType) obj).contains(this.nameList.get(i));
 				if (!retVal)
 					break;
@@ -516,8 +517,8 @@ public class OrganizationBaseType implements Serializable {
 		}
 		if (retVal) {
 			if (this.telecomList == null)
-				this.telecomList = new ArrayList<TelecomBaseType>();
-			for (int i = 0; i < this.telecomList.size(); i++) {
+				this.telecomList = new ArrayList<>();
+			for (var i = 0; i < this.telecomList.size(); i++) {
 				retVal = ((OrganizationBaseType) obj).contains(this.telecomList.get(i));
 				if (!retVal)
 					break;
@@ -533,9 +534,9 @@ public class OrganizationBaseType implements Serializable {
 	 *
 	 * @return the address list
 	 */
-	public ArrayList<AddressBaseType> getAddressList() {
+	public List<AddressBaseType> getAddressList() {
 		if (this.addressList == null)
-			this.addressList = new ArrayList<AddressBaseType>();
+			this.addressList = new ArrayList<>();
 		return addressList;
 	}
 
@@ -546,9 +547,9 @@ public class OrganizationBaseType implements Serializable {
 	 *
 	 * @return the identificator list
 	 */
-	public ArrayList<IdentificatorBaseType> getIdentificatorList() {
+	public List<IdentificatorBaseType> getIdentificatorList() {
 		if (this.identificatorList == null)
-			this.identificatorList = new ArrayList<IdentificatorBaseType>();
+			this.identificatorList = new ArrayList<>();
 		return identificatorList;
 	}
 
@@ -559,9 +560,9 @@ public class OrganizationBaseType implements Serializable {
 	 *
 	 * @return the name list
 	 */
-	public ArrayList<NameBaseType> getNameList() {
+	public List<NameBaseType> getNameList() {
 		if (this.nameList == null)
-			this.nameList = new ArrayList<NameBaseType>();
+			this.nameList = new ArrayList<>();
 		return nameList;
 	}
 
@@ -627,9 +628,9 @@ public class OrganizationBaseType implements Serializable {
 	 *
 	 * @return the telecom list
 	 */
-	public ArrayList<TelecomBaseType> getTelecomList() {
+	public List<TelecomBaseType> getTelecomList() {
 		if (this.telecomList == null)
-			this.telecomList = new ArrayList<TelecomBaseType>();
+			this.telecomList = new ArrayList<>();
 		return telecomList;
 	}
 
@@ -663,7 +664,7 @@ public class OrganizationBaseType implements Serializable {
 	 * @param addressList
 	 *            the new address list
 	 */
-	public void setAddressList(ArrayList<AddressBaseType> addressList) {
+	public void setAddressList(List<AddressBaseType> addressList) {
 		this.addressList = addressList;
 	}
 
@@ -675,7 +676,7 @@ public class OrganizationBaseType implements Serializable {
 	 * @param identificatorList
 	 *            the new identificator list
 	 */
-	public void setIdentificatorList(ArrayList<IdentificatorBaseType> identificatorList) {
+	public void setIdentificatorList(List<IdentificatorBaseType> identificatorList) {
 		this.identificatorList = identificatorList;
 	}
 
@@ -687,7 +688,7 @@ public class OrganizationBaseType implements Serializable {
 	 * @param nameList
 	 *            the new name list
 	 */
-	public void setNameList(ArrayList<NameBaseType> nameList) {
+	public void setNameList(List<NameBaseType> nameList) {
 		this.nameList = nameList;
 	}
 
@@ -780,7 +781,7 @@ public class OrganizationBaseType implements Serializable {
 	 * @param telecomList
 	 *            the new telecom list
 	 */
-	public void setTelecomList(ArrayList<TelecomBaseType> telecomList) {
+	public void setTelecomList(List<TelecomBaseType> telecomList) {
 		this.telecomList = telecomList;
 	}
 
@@ -795,7 +796,7 @@ public class OrganizationBaseType implements Serializable {
 	 */
 	@Override
 	public String toString() {
-		StringBuilder retVal = new StringBuilder();
+		var retVal = new StringBuilder();
 
 		retVal.append(getPrimaryName().toString());
 		retVal.append("\n");
