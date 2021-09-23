@@ -21,6 +21,7 @@ import javax.xml.namespace.QName;
 
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.ehealth_connector.xua.saml2.SimpleBuilder;
+import org.herasaf.xacml.core.combiningAlgorithm.policy.impl.PolicyDenyOverridesAlgorithm;
 import org.herasaf.xacml.core.combiningAlgorithm.policy.impl.PolicyFirstApplicableAlgorithm;
 import org.herasaf.xacml.core.combiningAlgorithm.policy.impl.PolicyOnlyOneApplicableAlgorithm;
 import org.herasaf.xacml.core.combiningAlgorithm.policy.impl.PolicyOrderedDenyOverridesAlgorithm;
@@ -68,7 +69,7 @@ public class PolicySetBuilderImpl
 
 		if ("urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:deny-overrides"
 				.equalsIgnoreCase(aInternalObject.getPolicyCombiningAlgoId())) {
-			policySet.setCombiningAlg(new PolicyOrderedDenyOverridesAlgorithm());
+			policySet.setCombiningAlg(new PolicyDenyOverridesAlgorithm());
 		} else if ("urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:only-one-applicable"
 				.equalsIgnoreCase(aInternalObject.getPolicyCombiningAlgoId())) {
 			policySet.setCombiningAlg(new PolicyOnlyOneApplicableAlgorithm());
@@ -143,35 +144,35 @@ public class PolicySetBuilderImpl
 			
 			if (aInternalObject.getTarget().getSubjects() != null
 					&& aInternalObject.getTarget().getSubjects().getSubjects() != null) {
-					var subjectsType = new SubjectsType();
+				var subjectsType = new SubjectsType();
 
-					for (var type : aInternalObject.getTarget().getSubjects().getSubjects()) {
-						var subjectType = new org.herasaf.xacml.core.policy.impl.SubjectType();
+				for (var type : aInternalObject.getTarget().getSubjects().getSubjects()) {
+					var subjectType = new org.herasaf.xacml.core.policy.impl.SubjectType();
 
-						for (var typeMatch : type.getSubjectMatches()) {
-							subjectType.getSubjectMatches().add(new SubjectMatchBuilderImpl().create(typeMatch));
-						}
-
-						subjectsType.getSubjects().add(subjectType);
+					for (var typeMatch : type.getSubjectMatches()) {
+						subjectType.getSubjectMatches().add(new SubjectMatchBuilderImpl().create(typeMatch));
 					}
-					targetType.setSubjects(subjectsType);
+
+					subjectsType.getSubjects().add(subjectType);
 				}
-			
-				if (aInternalObject.getTarget().getResources() != null
-						&& aInternalObject.getTarget().getResources().getResources() != null) {
-					var resourcesType = new ResourcesType();
+				targetType.setSubjects(subjectsType);
+			}
 
-					for (var type : aInternalObject.getTarget().getResources().getResources()) {
-						var resourceType = new ResourceType();
+			if (aInternalObject.getTarget().getResources() != null
+					&& aInternalObject.getTarget().getResources().getResources() != null) {
+				var resourcesType = new ResourcesType();
 
-						for (var typeMatch : type.getResourceMatches()) {
-							resourceType.getResourceMatches().add(new ResourceMatchBuilderImpl().create(typeMatch));
-						}
+				for (var type : aInternalObject.getTarget().getResources().getResources()) {
+					var resourceType = new ResourceType();
 
-						resourcesType.getResources().add(resourceType);
+					for (var typeMatch : type.getResourceMatches()) {
+						resourceType.getResourceMatches().add(new ResourceMatchBuilderImpl().create(typeMatch));
 					}
-					targetType.setResources(resourcesType);
+
+					resourcesType.getResources().add(resourceType);
 				}
+				targetType.setResources(resourcesType);
+			}
 
 
 			policySet.setTarget(targetType);

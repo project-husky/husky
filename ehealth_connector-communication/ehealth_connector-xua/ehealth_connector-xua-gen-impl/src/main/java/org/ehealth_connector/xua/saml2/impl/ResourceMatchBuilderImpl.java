@@ -16,19 +16,19 @@
  */
 package org.ehealth_connector.xua.saml2.impl;
 
+import java.util.Map.Entry;
+
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.ehealth_connector.xua.hl7v3.impl.InstanceIdentifierImpl;
 import org.ehealth_connector.xua.saml2.SimpleBuilder;
-import org.herasaf.xacml.core.function.Function;
 import org.herasaf.xacml.core.policy.impl.AttributeSelectorType;
 import org.herasaf.xacml.core.policy.impl.AttributeValueType;
 import org.herasaf.xacml.core.policy.impl.ResourceAttributeDesignatorType;
 import org.herasaf.xacml.core.policy.impl.ResourceMatchType;
-import org.openehealth.ipf.commons.ihe.xacml20.herasaf.functions.CvEqualFunction;
-import org.openehealth.ipf.commons.ihe.xacml20.herasaf.functions.IiEqualFunction;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.CV;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.II;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.core.xml.schema.impl.XSAnyImpl;
@@ -42,8 +42,7 @@ import org.opensaml.xacml.policy.impl.ResourceMatchTypeImplBuilder;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class ResourceMatchBuilderImpl
-		implements SimpleBuilder<ResourceMatchType>,
+public class ResourceMatchBuilderImpl implements SimpleBuilder<ResourceMatchType>,
 		SecurityObjectBuilder<org.opensaml.xacml.policy.ResourceMatchType, ResourceMatchType> {
 
 	private org.opensaml.xacml.policy.ResourceMatchType wrappedObject;
@@ -68,8 +67,7 @@ public class ResourceMatchBuilderImpl
 			attrSelectorType.setRequestContextPath(aInternalObject.getAttributeSelector().getRequestContextPath());
 			retVal.setAttributeSelector(attrSelectorType);
 		}
-		
-		
+
 		if (aInternalObject.getAttributeValue() != null) {
 			var attrValue = new AttributeValueType();
 
@@ -78,9 +76,22 @@ public class ResourceMatchBuilderImpl
 					if (object instanceof XSAnyImpl) {
 						XSAnyImpl anyImpl = (XSAnyImpl) object;
 
-						if (anyImpl.getElementQName() != null) {
+						if (anyImpl.getElementQName() != null
+								&& "CodedValue".equalsIgnoreCase(anyImpl.getElementQName().getLocalPart())) {
+							CV cv = new CV();
+
+							for (Entry<QName, String> entry : anyImpl.getUnknownAttributes().entrySet()) {
+								if (entry != null && entry.getKey() != null
+										&& "code".equalsIgnoreCase(entry.getKey().getLocalPart())) {
+									cv.setCode(entry.getValue());
+								} else if (entry != null && entry.getKey() != null
+										&& "codeSystem".equalsIgnoreCase(entry.getKey().getLocalPart())) {
+									cv.setCodeSystem(entry.getValue());
+								}
+							}
+
 							attrValue.getContent()
-									.add(new JAXBElement<>(anyImpl.getElementQName(), XSAnyImpl.class, anyImpl));
+									.add(new JAXBElement<>(anyImpl.getElementQName(), CV.class, cv));
 						}
 					} else if (object instanceof InstanceIdentifierImpl) {
 						InstanceIdentifierImpl instanceIdent = (InstanceIdentifierImpl) object;
@@ -98,26 +109,33 @@ public class ResourceMatchBuilderImpl
 				attrValue.getContent().add(aInternalObject.getAttributeValue().getValue());
 			}
 
+			if (aInternalObject.getAttributeValue().getDataType() != null) {
+				attrValue.setDataType(new DataTypeAttributeBuilderImpl()
+						.create(aInternalObject.getAttributeValue().getDataType()));
+			}
+
 			retVal.setAttributeValue(attrValue);
 		}
 
 		if (aInternalObject.getResourceAttributeDesignator() != null) {
 			var resourceAttrDesignator = new ResourceAttributeDesignatorType();
 			resourceAttrDesignator.setAttributeId(aInternalObject.getResourceAttributeDesignator().getAttributeId());
-			resourceAttrDesignator.setIssuer(aInternalObject.getResourceAttributeDesignator().getIssuer());
+
+			if (aInternalObject.getResourceAttributeDesignator().getIssuer() != null) {
+				resourceAttrDesignator.setIssuer(aInternalObject.getResourceAttributeDesignator().getIssuer());
+			}
+
+			if (aInternalObject.getResourceAttributeDesignator().getDataType() != null) {
+				resourceAttrDesignator.setDataType(new DataTypeAttributeBuilderImpl()
+						.create(aInternalObject.getResourceAttributeDesignator().getDataType()));
+			}
+
 			resourceAttrDesignator
 					.setMustBePresent(aInternalObject.getResourceAttributeDesignator().getMustBePresent());
 			retVal.setResourceAttributeDesignator(resourceAttrDesignator);
 		}
-		
-		Function function = null;
-		if ("urn:hl7-org:v3:function:CV-equal".equalsIgnoreCase(aInternalObject.getMatchId())) {
-			function = new CvEqualFunction();
-		} else if ("urn:hl7-org:v3:function:II-equal".equalsIgnoreCase(aInternalObject.getMatchId())) {
-			function = new IiEqualFunction();
-		} 
-		
-		retVal.setMatchFunction(function);
+
+		retVal.setMatchFunction(new FunctionBuilderImpl().create(aInternalObject.getMatchId()));
 
 		return retVal;
 	}

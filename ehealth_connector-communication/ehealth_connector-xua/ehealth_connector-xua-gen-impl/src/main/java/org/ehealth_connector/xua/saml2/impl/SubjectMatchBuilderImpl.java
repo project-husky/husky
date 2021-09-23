@@ -16,36 +16,19 @@
  */
 package org.ehealth_connector.xua.saml2.impl;
 
+import java.util.Map.Entry;
+
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.ehealth_connector.xua.hl7v3.impl.InstanceIdentifierImpl;
 import org.ehealth_connector.xua.saml2.SimpleBuilder;
-import org.herasaf.xacml.core.function.Function;
-import org.herasaf.xacml.core.function.impl.bagFunctions.DateBagFunction;
-import org.herasaf.xacml.core.function.impl.bagFunctions.DateBagSizeFunction;
-import org.herasaf.xacml.core.function.impl.bagFunctions.DateIsInFunction;
-import org.herasaf.xacml.core.function.impl.bagFunctions.DateOneAndOnlyFunction;
-import org.herasaf.xacml.core.function.impl.dateAndTimeArithmeticFunctions.DateAddYearMonthDurationFunction;
-import org.herasaf.xacml.core.function.impl.dateAndTimeArithmeticFunctions.DateSubtractYearMonthDurationFunction;
-import org.herasaf.xacml.core.function.impl.equalityPredicates.DateEqualFunction;
-import org.herasaf.xacml.core.function.impl.equalityPredicates.StringEqualFunction;
-import org.herasaf.xacml.core.function.impl.nonNumericComparisonFunctions.DateGreaterThanFunction;
-import org.herasaf.xacml.core.function.impl.nonNumericComparisonFunctions.DateGreaterThanOrEqualFunction;
-import org.herasaf.xacml.core.function.impl.nonNumericComparisonFunctions.DateLessThanFunction;
-import org.herasaf.xacml.core.function.impl.nonNumericComparisonFunctions.DateLessThanOrEqualFunction;
-import org.herasaf.xacml.core.function.impl.setFunction.DateAtLeastOneMemberOfFunction;
-import org.herasaf.xacml.core.function.impl.setFunction.DateIntersectionFunction;
-import org.herasaf.xacml.core.function.impl.setFunction.DateSetEqualsFunction;
-import org.herasaf.xacml.core.function.impl.setFunction.DateSubsetFunction;
-import org.herasaf.xacml.core.function.impl.setFunction.DateUnionFunction;
 import org.herasaf.xacml.core.policy.impl.AttributeSelectorType;
 import org.herasaf.xacml.core.policy.impl.AttributeValueType;
 import org.herasaf.xacml.core.policy.impl.SubjectAttributeDesignatorType;
 import org.herasaf.xacml.core.policy.impl.SubjectMatchType;
-import org.openehealth.ipf.commons.ihe.xacml20.herasaf.functions.CvEqualFunction;
-import org.openehealth.ipf.commons.ihe.xacml20.herasaf.functions.IiEqualFunction;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.CV;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.II;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.core.xml.schema.impl.XSAnyImpl;
@@ -93,12 +76,27 @@ public class SubjectMatchBuilderImpl
 			if (aInternalObject.getAttributeValue().getUnknownXMLObjects() != null) {
 				for (XMLObject object : aInternalObject.getAttributeValue().getUnknownXMLObjects()) {
 					if (object instanceof XSAnyImpl) {
+
 						XSAnyImpl anyImpl = (XSAnyImpl) object;
 
-						if (anyImpl.getElementQName() != null) {
+						if (anyImpl.getElementQName() != null
+								&& "CodedValue".equalsIgnoreCase(anyImpl.getElementQName().getLocalPart())) {
+							CV cv = new CV();
+							
+							for (Entry<QName, String> entry : anyImpl.getUnknownAttributes().entrySet()) {
+								if (entry != null && entry.getKey() != null
+										&& "code".equalsIgnoreCase(entry.getKey().getLocalPart())) {
+									cv.setCode(entry.getValue());
+								} else if (entry != null && entry.getKey() != null
+										&& "codeSystem".equalsIgnoreCase(entry.getKey().getLocalPart())) {
+									cv.setCodeSystem(entry.getValue());
+								}
+							}
+
 							attrValue.getContent()
-									.add(new JAXBElement<>(anyImpl.getElementQName(), XSAnyImpl.class, anyImpl));
+									.add(new JAXBElement<>(anyImpl.getElementQName(), CV.class, cv));
 						}
+
 					} else if (object instanceof InstanceIdentifierImpl) {
 						InstanceIdentifierImpl instanceIdent = (InstanceIdentifierImpl) object;
 
@@ -115,71 +113,32 @@ public class SubjectMatchBuilderImpl
 				attrValue.getContent().add(aInternalObject.getAttributeValue().getValue());
 			}
 
+			if (aInternalObject.getAttributeValue().getDataType() != null) {
+				attrValue.setDataType(new DataTypeAttributeBuilderImpl()
+						.create(aInternalObject.getAttributeValue().getDataType()));
+			}
+
 			retVal.setAttributeValue(attrValue);
 		}
 
 		if (aInternalObject.getSubjectAttributeDesignator() != null) {
 			var subjectAttrDesignator = new SubjectAttributeDesignatorType();
 			subjectAttrDesignator.setAttributeId(aInternalObject.getSubjectAttributeDesignator().getAttributeId());
-			subjectAttrDesignator.setIssuer(aInternalObject.getSubjectAttributeDesignator().getIssuer());
+
+			if (aInternalObject.getSubjectAttributeDesignator().getIssuer() != null) {
+				subjectAttrDesignator.setIssuer(aInternalObject.getSubjectAttributeDesignator().getIssuer());
+			}
+
+			if (aInternalObject.getSubjectAttributeDesignator().getDataType() != null) {
+				subjectAttrDesignator.setDataType(new DataTypeAttributeBuilderImpl()
+						.create(aInternalObject.getSubjectAttributeDesignator().getDataType()));
+			}
+
 			subjectAttrDesignator.setMustBePresent(aInternalObject.getSubjectAttributeDesignator().getMustBePresent());
 			retVal.setSubjectAttributeDesignator(subjectAttrDesignator);
 		}
 		
-		Function function = null;
-		if ("urn:hl7-org:v3:function:CV-equal".equalsIgnoreCase(aInternalObject.getMatchId())) {
-			function = new CvEqualFunction();
-		} else if ("urn:hl7-org:v3:function:II-equal".equalsIgnoreCase(aInternalObject.getMatchId())) {
-			function = new IiEqualFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:string-equal"
-				.equalsIgnoreCase(aInternalObject.getMatchId())) {
-			function = new StringEqualFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-equal".equalsIgnoreCase(aInternalObject.getMatchId())) {
-			function = new DateEqualFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-greater-than"
-				.equalsIgnoreCase(aInternalObject.getMatchId())) {
-			function = new DateGreaterThanFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-at-least-one-member-of"
-				.equalsIgnoreCase(aInternalObject.getMatchId())) {
-			function = new DateAtLeastOneMemberOfFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-bag".equalsIgnoreCase(aInternalObject.getMatchId())) {
-			function = new DateBagFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-bag-size"
-				.equalsIgnoreCase(aInternalObject.getMatchId())) {
-			function = new DateBagSizeFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-greater-than-or-equal"
-				.equalsIgnoreCase(aInternalObject.getMatchId())) {
-			function = new DateGreaterThanOrEqualFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-intersection"
-				.equalsIgnoreCase(aInternalObject.getMatchId())) {
-			function = new DateIntersectionFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-is-in".equalsIgnoreCase(aInternalObject.getMatchId())) {
-			function = new DateIsInFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-less-than"
-				.equalsIgnoreCase(aInternalObject.getMatchId())) {
-			function = new DateLessThanFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-less-than-or-equal"
-				.equalsIgnoreCase(aInternalObject.getMatchId())) {
-			function = new DateLessThanOrEqualFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-one-and-only"
-				.equalsIgnoreCase(aInternalObject.getMatchId())) {
-			function = new DateOneAndOnlyFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-set-equals"
-				.equalsIgnoreCase(aInternalObject.getMatchId())) {
-			function = new DateSetEqualsFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-subset".equalsIgnoreCase(aInternalObject.getMatchId())) {
-			function = new DateSubsetFunction();
-		} else if ("urn:oasis:names:tc:xacml:1.0:function:date-union".equalsIgnoreCase(aInternalObject.getMatchId())) {
-			function = new DateUnionFunction();
-		} else if ("urn:oasis:names:tc:xacml:3.0:function:date-add-yearMonthDuration"
-				.equalsIgnoreCase(aInternalObject.getMatchId())) {
-			function = new DateAddYearMonthDurationFunction();
-		} else if ("urn:oasis:names:tc:xacml:3.0:function:date-subtract-yearMonthDuration"
-				.equalsIgnoreCase(aInternalObject.getMatchId())) {
-			function = new DateSubtractYearMonthDurationFunction();
-		}
-		
-		retVal.setMatchFunction(function);
+		retVal.setMatchFunction(new FunctionBuilderImpl().create(aInternalObject.getMatchId()));
 
 		return retVal;
 	}

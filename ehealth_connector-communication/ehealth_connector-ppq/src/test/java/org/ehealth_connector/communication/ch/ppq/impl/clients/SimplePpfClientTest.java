@@ -96,6 +96,7 @@ public class SimplePpfClientTest {
 		PrivacyPolicyFeedResponse response = client.send(null, ppFeedRequest);
 
 		assertNull(response.getExceptions());
+
 	}
 
 	@Test
@@ -116,8 +117,9 @@ public class SimplePpfClientTest {
 
 		org.opensaml.saml.saml2.core.Assertion samlAssertion = (org.opensaml.saml.saml2.core.Assertion) assertionRequest
 				.getWrappedObject();
+
 		PrivacyPolicyFeed ppFeedRequest = new PrivacyPolicyFeedBuilderImpl().method(PpfMethod.DeletePolicy)
-				.create(samlAssertion);
+				.create(null);
 
 		PrivacyPolicyFeedResponse response = client.send(null, ppFeedRequest);
 

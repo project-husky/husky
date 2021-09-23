@@ -224,6 +224,9 @@ public class AssertionImpl extends Assertion implements SecurityObject<org.opens
 		if (assertion.getIssuer() != null) {
 			var nameIdType = new NameIDType();
 			nameIdType.setValue(assertion.getIssuer().getValue());
+			nameIdType.setNameQualifier(assertion.getIssuer().getNameQualifier());
+			nameIdType.setSPNameQualifier(assertion.getIssuer().getSPNameQualifier());
+			nameIdType.setSPProvidedID(assertion.getIssuer().getSPProvidedID());
 			setIssuer(nameIdType);
 			return nameIdType;
 		}
