@@ -73,9 +73,6 @@ public class ConvenienceCommunicationIpfTest extends XdsTestUtils {
 	@Autowired
 	private ConvenienceCommunication convenienceCommunication;
 
-	final private String repositoryUri = "https://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/ret";
-	final private String registryUri = "https://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/ret";
-
 	final private String applicationName = "2.16.840.1.113883.3.72.6.5.100.1399";
 	final private String facilityName = null;
 
@@ -117,13 +114,12 @@ public class ConvenienceCommunicationIpfTest extends XdsTestUtils {
 
 	@Test
 	public void ITI18QueryMetadataTest() throws Exception {
-		LOGGER.debug("ITI18QueryMetadata with ipAdress Target {}", registryUri);
-
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 
 		try {
-			dest.setUri(new URI(registryUri));
+			dest.setUri(new URI(
+					"https://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/xcq"));
 		} catch (final URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -146,13 +142,12 @@ public class ConvenienceCommunicationIpfTest extends XdsTestUtils {
 
 	@Test
 	public void ITI43QueryMetadataTest() throws Exception {
-		LOGGER.debug("ITI43QueryMetadata with ipAdress Target {}", registryUri);
-
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 
 		try {
-			dest.setUri(new URI(registryUri));
+			dest.setUri(new URI(
+					"https://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_init_gw_testing/rep/xcq"));
 		} catch (final URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -174,13 +169,12 @@ public class ConvenienceCommunicationIpfTest extends XdsTestUtils {
 
 	@Test
 	public void ITI43RetrieveDocument() throws Exception {
-		LOGGER.debug("ITI43QueryMetadata with ipAdress Target {}", registryUri);
-
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 
 		try {
-			dest.setUri(new URI(repositoryUri));
+			dest.setUri(new URI(
+					"https://ehealthsuisse.ihe-europe.net:8280/xdstools7/sim/epr-testing__for_doc_source_testing/rep/ret"));
 		} catch (final URISyntaxException e) {
 			e.printStackTrace();
 		}
@@ -212,8 +206,6 @@ public class ConvenienceCommunicationIpfTest extends XdsTestUtils {
 
 	@Test
 	public void ITI41ProvideAndRegisterDocument() throws Exception {
-		LOGGER.debug("ITI41 with ipAdress Target {}", registryUri);
-
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 
@@ -249,8 +241,6 @@ public class ConvenienceCommunicationIpfTest extends XdsTestUtils {
 
 	@Test
 	public void ITI41ProvideAndRegisterDocumentXmlDoc() throws Exception {
-		LOGGER.debug("ITI41 with ipAdress Target {}", registryUri);
-
 		final AffinityDomain affinityDomain = new AffinityDomain();
 		final Destination dest = new Destination();
 

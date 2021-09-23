@@ -16,6 +16,11 @@
  */
 package org.ehealth_connector.xua.saml2;
 
+import org.ehealth_connector.xua.hl7v3.InstanceIdentifier;
+import org.ehealth_connector.xua.hl7v3.PurposeOfUse;
+import org.ehealth_connector.xua.hl7v3.Role;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeType;
+
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the AttributeBuilder. </div>
@@ -24,7 +29,7 @@ package org.ehealth_connector.xua.saml2;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public interface AttributeBuilder extends SimpleBuilder<Attribute> {
+public interface AttributeBuilder extends SimpleBuilder<AttributeType> {
 
 	/**
 	 * <!-- @formatter:off -->
@@ -112,4 +117,11 @@ public interface AttributeBuilder extends SimpleBuilder<Attribute> {
 	 */
 	AttributeBuilder value(String aValue);
 
+	InstanceIdentifier getValueAsInstanceIdentifier();
+
+	PurposeOfUse getValueAsPurposeOfUse();
+
+	Role getValueAsRole();
+
+	String getValueAsString();
 }

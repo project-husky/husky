@@ -16,8 +16,17 @@
  */
 package org.ehealth_connector.communication.ch.ppq.impl;
 
+import java.io.StringWriter;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQueryResponse;
+import org.ehealth_connector.communication.ch.ppq.impl.deserialization.ResponseDeserialiser;
 import org.ehealth_connector.xua.core.SecurityObject;
+import org.ehealth_connector.xua.exceptions.DeserializeException;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.protocol.ResponseType;
 import org.opensaml.saml.saml2.core.Response;
 
 /**
@@ -35,6 +44,20 @@ public class PrivacyPolicyQueryResponseImpl
 
 	protected PrivacyPolicyQueryResponseImpl(Response aInternalObject) {
 		wrappedObject = aInternalObject;
+	}
+
+	protected PrivacyPolicyQueryResponseImpl(ResponseType aInternalObject) throws JAXBException, DeserializeException {
+		final var marshaller = JAXBContext.newInstance(ResponseType.class).createMarshaller();
+		marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.FALSE);
+		marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
+		marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF8");
+		final var stringWriter = new StringWriter();
+		marshaller.marshal(aInternalObject, stringWriter);
+
+		var deserializer = new ResponseDeserialiser();
+
+		wrappedObject = deserializer.fromXmlString(stringWriter.toString());
+
 	}
 
 	@Override

@@ -69,8 +69,7 @@ public class PrivacyPolicyQueryImpl
 		for (final RequestType request : internalObject.getRequests()) {
 			for (final ResourceType resource : request.getResources()) {
 				for (final AttributeType attribute : resource.getAttributes()) {
-					if ("urn:e-health-suisse:2015:epr-spid"
-							.equalsIgnoreCase(attribute.getAttributeId())) {
+					if ("urn:e-health-suisse:2015:epr-spid".equalsIgnoreCase(attribute.getAttributeId())) {
 						for (final AttributeValueType attVal : attribute.getAttributeValues()) {
 							for (final XMLObject value : attVal.getUnknownXMLObjects()) {
 								if (value instanceof InstanceIdentifier) {

@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.communication.ch.ppq.impl.clients;
 
-import org.ehealth_connector.communication.ch.ppq.WebServiceClient;
+import org.ehealth_connector.communication.CamelService;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeed;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyFeedResponse;
 import org.ehealth_connector.communication.ch.ppq.api.clients.PpfClient;
@@ -37,7 +37,7 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.ehealthswiss.UpdatePolicyReq
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class SimplePpfClient extends WebServiceClient<EprPolicyRepositoryResponse>
+public class SimplePpfClient extends CamelService
 		implements PpfClient {
 
 	private static final String EHS_2015_POLYADMIN = "urn:e-health-suisse:2015:policy-administration:";
@@ -48,85 +48,6 @@ public class SimplePpfClient extends WebServiceClient<EprPolicyRepositoryRespons
 	public SimplePpfClient(PpClientConfig clientConfiguration) {
 		this.config = clientConfiguration;
 	}
-
-	/*
-	 * private HttpEntity getSoapEntity(SecurityHeaderElement
-	 * aSecurityHeaderElement, PrivacyPolicyFeed feed, WsaHeaderValue wsHeaders)
-	 * throws ParserConfigurationException, SerializeException,
-	 * TransformerException, MarshallingException { final Element envelopElement =
-	 * createEnvelope();
-	 * 
-	 * Element headerAssertionElement = null; if (aSecurityHeaderElement instanceof
-	 * AssertionType) { headerAssertionElement = new AssertionSerializerImpl()
-	 * .toXmlElement((AssertionType) aSecurityHeaderElement); } else if
-	 * (aSecurityHeaderElement instanceof EncryptedAssertion) {
-	 * headerAssertionElement = new EncryptedAssertionSerializerImpl()
-	 * .toXmlElement((EncryptedAssertion) aSecurityHeaderElement); }
-	 * createHeader(headerAssertionElement, wsHeaders, envelopElement);
-	 * 
-	 * OpenSamlAssertionBasedRequest opensamlFeed = null; if
-	 * (PrivacyPolicyFeed.PpfMethod.AddPolicy.equals(feed.getMethod())) {
-	 * opensamlFeed = new AddPolicyRequestBuilder().assertion(feed.getAssertion())
-	 * .buildObject(); } else if
-	 * (PrivacyPolicyFeed.PpfMethod.UpdatePolicy.equals(feed.getMethod())) {
-	 * opensamlFeed = new
-	 * UpdatePolicyRequestBuilder().assertion(feed.getAssertion()) .buildObject(); }
-	 * else if (PrivacyPolicyFeed.PpfMethod.DeletePolicy.equals(feed.getMethod())) {
-	 * opensamlFeed = new
-	 * DeletePolicyRequestBuilder().assertion(feed.getAssertion()) .buildObject(); }
-	 * 
-	 * // serialize the authnrequest to xml element final MarshallerFactory
-	 * marshallerFactory = XMLObjectProviderRegistrySupport .getMarshallerFactory();
-	 * final Marshaller marshaller = marshallerFactory.getMarshaller(opensamlFeed);
-	 * 
-	 * final Element policyElement = marshaller.marshall(opensamlFeed);
-	 * 
-	 * createBody(policyElement, envelopElement);
-	 * 
-	 * final String body = createXmlString(envelopElement);
-	 * 
-	 * getLogger().debug("SOAP Message\n" + body);
-	 * 
-	 * // add string as body to httpentity final StringEntity stringEntity = new
-	 * StringEntity(body, "UTF-8"); stringEntity.setChunked(false);
-	 * 
-	 * return stringEntity; }
-	 */
-
-	/*
-	 * protected PrivacyPolicyFeedResponse parseResponseError(String httpResponse)
-	 * throws ClientSendException { try { final Element reponseElement =
-	 * getResponseElement(httpResponse, EprPolicyRepositoryResponse.DEFAULT_NS_URI,
-	 * EprPolicyRepositoryResponse.DEFAULT_ELEMENT_LOCAL_NAME); final
-	 * UnmarshallerFactory unmarshallerFactory = XMLObjectProviderRegistrySupport
-	 * .getUnmarshallerFactory(); final Unmarshaller unmarshaller =
-	 * unmarshallerFactory.getUnmarshaller(reponseElement);
-	 * 
-	 * final EprPolicyRepositoryResponse response = (EprPolicyRepositoryResponse)
-	 * unmarshaller .unmarshall(reponseElement);
-	 * 
-	 * final PrivacyPolicyFeedResponse ppfResponse = new
-	 * PrivacyPolicyFeedResponseBuilderImpl()
-	 * .status(response.getStatus()).create();
-	 * 
-	 * try { final Element reasonElement = getResponseElement(httpResponse,
-	 * "http://www.w3.org/2003/05/soap-envelope", "Reason"); if (reasonElement !=
-	 * null) { final SoapException exception = getSoapException(reasonElement);
-	 * 
-	 * ppfResponse.getExceptions().add(exception); }
-	 * 
-	 * } catch (final XPathExpressionException e) { getLogger().trace("Error", e); }
-	 * try { final Element faultText = getResponseElement(httpResponse,
-	 * "http://www.w3.org/2003/05/soap-envelope", "Text"); if (faultText != null) {
-	 * final SoapException exception = getSoapException(faultText);
-	 * ppfResponse.getExceptions().add(exception); } } catch (final
-	 * XPathExpressionException e) { getLogger().trace("Error", e); }
-	 * 
-	 * return ppfResponse; } catch (UnsupportedOperationException |
-	 * TransformerFactoryConfigurationError | ParseException | IOException |
-	 * ParserConfigurationException | SAXException | UnmarshallingException |
-	 * XPathExpressionException e) { throw new ClientSendException(e); } }
-	 */
 	
 	public PrivacyPolicyFeedResponse send(SecurityHeaderElement aAssertion,
 			PrivacyPolicyFeed request) {
@@ -145,9 +66,22 @@ public class SimplePpfClient extends WebServiceClient<EprPolicyRepositoryRespons
 				if (requestToSend != null) {
 					requestToSend.setAssertion(request.getAssertion());
 
-					EprPolicyRepositoryResponse response = super.send(String.format("ch-ppq1://%s", config.getUrl()),
-							requestToSend, aAssertion, EprPolicyRepositoryResponse.class);
+					final var serverInLogger = "#serverInLogger";
+					final var serverOutLogger = "#serverOutLogger";
+					final var endpoint = String.format(
+							"ch-ppq1://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
+							config.getUrl().replace("https://", ""),
+							serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
+							true);
 
+					final var exchange = send(endpoint, requestToSend, aAssertion, null);
+
+					if (exchange.getException() != null) {
+						return new PrivacyPolicyFeedResponseBuilderImpl().exception(exchange.getException())
+								.method(request.getMethod()).create();
+					}
+
+					var response = exchange.getMessage().getBody(EprPolicyRepositoryResponse.class);
 					return new PrivacyPolicyFeedResponseBuilderImpl().status(response.getStatus())
 							.method(request.getMethod()).create();
 				}
@@ -158,28 +92,5 @@ public class SimplePpfClient extends WebServiceClient<EprPolicyRepositoryRespons
 		
 		return null;		
 	}
-	
-
-	/*public PrivacyPolicyFeedResponse send(SecurityHeaderElement aAssertion,
-			PrivacyPolicyFeed request) throws ClientSendException {
-
-		try {
-			final HttpPost post = getHttpPost();
-
-			final String actionString = EHS_2015_POLYADMIN + request.getMethod().name();
-
-			final WsaHeaderValue wsHeaders = new WsaHeaderValue(
-					"urn:uuid:" + UUID.randomUUID().toString(), actionString, null);
-
-			post.setEntity(getSoapEntity(aAssertion, request, wsHeaders));
-
-			final PrivacyPolicyFeedResponseImpl response = (PrivacyPolicyFeedResponseImpl) execute(
-					post);
-			response.setMethod(request.getMethod());
-			return response;
-		} catch (final Throwable t) {
-			throw new ClientSendException(t);
-		}
-	}*/
 
 }

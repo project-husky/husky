@@ -20,7 +20,7 @@ import java.util.List;
 
 /**
  * <!-- @formatter:off -->
- * <div class="en">Interface decribing the methods of Subject</div>
+ * <div class="en">Interface describing the methods of Subject</div>
  * <div class="de">Interface welches die Methoden von Subject beschreibt</div>
  * <div class="fr"></div>
  * <div class="it"></div>

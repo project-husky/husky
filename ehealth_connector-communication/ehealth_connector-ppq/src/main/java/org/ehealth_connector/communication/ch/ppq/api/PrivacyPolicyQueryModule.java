@@ -19,7 +19,6 @@ package org.ehealth_connector.communication.ch.ppq.api;
 import org.ehealth_connector.communication.ch.ppq.api.config.PpClientConfig;
 import org.ehealth_connector.xua.core.SecurityHeaderElement;
 import org.ehealth_connector.xua.exceptions.ClientSendException;
-import org.ehealth_connector.xua.saml2.Response;
 
 /**
  * <!-- @formatter:off -->
@@ -103,7 +102,7 @@ public interface PrivacyPolicyQueryModule {
 	 * <div class="it"></div>
 	 * <!-- @formatter:on -->
 	 */
-	Response invokePrivacyPolicyQuery(SecurityHeaderElement aAssertion, PrivacyPolicyQuery query,
+	PrivacyPolicyQueryResponse invokePrivacyPolicyQuery(SecurityHeaderElement aAssertion, PrivacyPolicyQuery query,
 			PpClientConfig clientConfiguration) throws ClientSendException;
 
 }

@@ -19,6 +19,7 @@ package org.ehealth_connector.cda.validation;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -26,8 +27,6 @@ import java.io.IOException;
 
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.ehealth_connector.cda.validation.api.CdaValidator;
 import org.ehealth_connector.cda.validation.api.XsdValidationResult;
 import org.ehealth_connector.validation.service.config.ConfigurationException;
@@ -254,7 +253,7 @@ public class ValidationTest {
 
 		// test validation by passing the CDA document as byte[]
 		testFile = cdaFilePath_Valid;
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		java.io.ByteArrayOutputStream baos = new java.io.ByteArrayOutputStream();
 		byte[] cdaByteArray = null;
 		try {
 			IOUtils.copyLarge(new FileInputStream(new File(testFile).getAbsoluteFile()), baos);

@@ -23,8 +23,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.UUID;
 import java.util.zip.ZipFile;
 
@@ -830,14 +828,16 @@ public class ConvenienceCommunication extends CamelService {
 				secure);
 		log.info("Sending request to '{}' endpoint", endpoint);
 
-		Map<String, String> outgoingHeaders = new HashMap<>();
-		// outgoingHeaders.put("Accept", "application/soap+xml");
-		outgoingHeaders.put("transfer-encoding", "chunked");
-		outgoingHeaders.put("Content-Type",
-				"application/soap+xml; charset=UTF-8; action=\"urn:ihe:iti:2007:RegistryStoredQuery\"");
-		outgoingHeaders.put("Force MTOM", "false");
+		/*
+		 * Map<String, String> outgoingHeaders = new HashMap<>();
+		 * outgoingHeaders.put("Accept", "application/soap+xml");
+		 * outgoingHeaders.put("transfer-encoding", "chunked");
+		 * outgoingHeaders.put("Content-Type",
+		 * "application/soap+xml; charset=UTF-8; action=\"urn:ihe:iti:2007:RegistryStoredQuery\""
+		 * ); outgoingHeaders.put("Force MTOM", "false");
+		 */
 
-		final var exchange = send(endpoint, queryRegistry, securityHeader, outgoingHeaders);
+		final var exchange = send(endpoint, queryRegistry, securityHeader, null);
 
 		return exchange.getMessage().getBody(QueryResponse.class);
 	}

@@ -18,6 +18,8 @@ package org.ehealth_connector.xua.saml2;
 
 import java.util.Calendar;
 
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AuthnStatementType;
+
 /**
  * <!-- @formatter:off -->
  * <div class="en">Interface describing the methods of the AuthnStatementBuilder. </div>
@@ -26,7 +28,7 @@ import java.util.Calendar;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public interface AuthnStatementBuilder extends SimpleBuilder<AuthnStatement> {
+public interface AuthnStatementBuilder extends SimpleBuilder<AuthnStatementType> {
 
 	/**
 	 *

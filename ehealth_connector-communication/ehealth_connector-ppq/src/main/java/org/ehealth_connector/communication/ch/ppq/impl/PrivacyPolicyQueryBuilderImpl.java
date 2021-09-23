@@ -53,17 +53,16 @@ public class PrivacyPolicyQueryBuilderImpl implements PrivacyPolicyQueryBuilder,
 	private XACMLPolicyQueryType wrappedObject;
 
 	public PrivacyPolicyQueryBuilderImpl() {
-		wrappedObject = new XACMLPolicyQueryTypeImplBuilder()
-				.buildObject(XACMLPolicyQueryType.DEFAULT_ELEMENT_NAME_XACML20);
+		wrappedObject = new XACMLPolicyQueryTypeImplBuilder().buildObject(
+				"urn:oasis:names:tc:xacml:2.0:profile:saml2.0:v2:schema:protocol", "XACMLPolicyQuery", "xacml-samlp");
 		final IssuerBuilder issueBuilder = new IssuerBuilder();
 		issuer = issueBuilder.buildObject(Issuer.DEFAULT_ELEMENT_NAME);
 		wrappedObject.setIssuer(issuer);
 
 		request = new org.opensaml.xacml.ctx.impl.RequestTypeImplBuilder().buildObject();
-		wrappedObject.getRequests().add(request);
-
 		resource = new org.opensaml.xacml.ctx.impl.ResourceTypeImplBuilder().buildObject();
 		request.getResources().add(resource);
+		wrappedObject.getRequests().add(request);
 	}
 
 	@Override

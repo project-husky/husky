@@ -104,7 +104,6 @@ public abstract class CamelService implements CamelContextAware {
 	protected Exchange send(String endpoint, Object body, SecurityHeaderElement securityHeaderElement,
 			Map<String, String> outgoingHttpHeaders)
 			throws Exception {
-		var camelContext = getCamelContext();
 		Exchange exchange = new DefaultExchange(camelContext);
 		exchange.getIn().setBody(body);
 		if (securityHeaderElement != null) {
