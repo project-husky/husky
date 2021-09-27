@@ -33,13 +33,18 @@ public class SimplePpqClientTest {
 	@Autowired
 	private CamelContext camelContext;
 	private String urlToPpq = "https://ehealthsuisse.ihe-europe.net:10443/ppq-repository";
-	private String clientKeyStore;
-	private String clientKeyStorePass;
+	private String clientKeyStore = "/src/test/resources/testKeystore.jks";
+	private String clientKeyStorePass = "changeit";
 
 	@BeforeEach
 	public void setup() {
 		try {
 			InitializationService.initialize();
+
+			System.setProperty("javax.net.ssl.keyStore", clientKeyStore);
+			System.setProperty("javax.net.ssl.keyStorePassword", clientKeyStorePass);
+			System.setProperty("javax.net.ssl.trustStore", clientKeyStore);
+			System.setProperty("javax.net.ssl.trustStorePassword", clientKeyStorePass);
 		} catch (InitializationException e1) {
 			e1.printStackTrace();
 		}

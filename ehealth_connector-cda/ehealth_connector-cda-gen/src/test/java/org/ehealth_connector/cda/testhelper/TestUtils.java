@@ -28,9 +28,6 @@ import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 
-import org.ehealth_connector.cda.BaseAllergyProblem;
-import org.ehealth_connector.cda.BaseProblemEntry;
-import org.ehealth_connector.cda.Consumable;
 import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
@@ -43,6 +40,7 @@ import org.ehealth_connector.common.basetypes.AddressBaseType;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.basetypes.NameBaseType;
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
+import org.ehealth_connector.common.basetypes.TelecomBaseType;
 import org.ehealth_connector.common.enums.CodeSystems;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
 import org.ehealth_connector.common.mdht.Performer;
@@ -80,29 +78,6 @@ public class TestUtils {
 		return true;
 	}
 
-	public static boolean isEqual(BaseAllergyProblem p1, BaseAllergyProblem p2) {
-		if (!isEqual(p1.getCode(), p2.getCode()))
-			return false;
-		if ((p1.getEndDate() != null) && !p1.getEndDate().equals(p2.getEndDate()))
-			return false;
-		if ((p1.getStartDate() != null) && !p1.getStartDate().equals(p2.getStartDate()))
-			return false;
-		if (!isEqual(p1.getId(), p2.getId()))
-			return false;
-		for (int i = 0; i < p1.getValues().size(); i++) {
-			if (!isEqual(p1.getValues().get(i), p2.getValues().get(i)))
-				return false;
-		}
-		return true;
-	}
-
-	public static boolean isEqual(BaseProblemEntry p1, BaseProblemEntry p2) {
-		if (p1 == null) {
-			return false;
-		}
-		return p1.equals(p2);
-	}
-
 	public static boolean isEqual(Code c1, Code c2) {
 		if ((c1 == null) && (c2 == null)) {
 			return true;
@@ -125,18 +100,6 @@ public class TestUtils {
 			if (c2.getDisplayName() != null)
 				return false;
 		}
-		return true;
-	}
-
-	public static boolean isEqual(Consumable c1, Consumable c2) {
-		if (!isEqual(c1.getManufacturedMaterialCode(), c2.getManufacturedMaterialCode()))
-			return false;
-		if (!isEqual(c1.getManufacturedProductId(), c2.getManufacturedProductId()))
-			return false;
-		if (!c1.getTradeName().equals(c2.getTradeName()))
-			return false;
-		if (!isEqual(c1.getWhoAtcCode(), c2.getWhoAtcCode()))
-			return false;
 		return true;
 	}
 
@@ -210,6 +173,18 @@ public class TestUtils {
 
 	public static boolean isEquals(List<Telecom> t1, List<Telecom> t2) {
 		for (Telecom t : t1) {
+			if (t != null) {
+				if (!t2.contains(t)) {
+					return false;
+				}
+			}
+		}
+
+		return true;
+	}
+
+	public static boolean isEqual(List<TelecomBaseType> t1, List<TelecomBaseType> t2) {
+		for (TelecomBaseType t : t1) {
 			if (t != null) {
 				if (!t2.contains(t)) {
 					return false;
@@ -376,17 +351,18 @@ public class TestUtils {
 		o.setPrimaryIdentificator(new IdentificatorBaseType());
 		o.getPrimaryIdentificator().setExtension(numS1);
 
-		Telecom t1 = new Telecom();
+		List<TelecomBaseType> telecomBaseTypes = new LinkedList<>();
+		TelecomBaseType t1 = new TelecomBaseType();
 		t1.setMail("testMail");
 		t1.setUsage(TelecomAddressUse.BUSINESS);
-		telecoms1.add(t1);
+		telecomBaseTypes.add(t1);
 
-		Telecom t2 = new Telecom();
+		TelecomBaseType t2 = new TelecomBaseType();
 		t2.setPhone(numS1);
 		t2.setUsage(TelecomAddressUse.PRIVATE);
-		telecoms1.add(t2);
+		telecomBaseTypes.add(t2);
 
-		o.setTelecomList(telecoms1);
+		o.setTelecomList(telecomBaseTypes);
 
 		return o;
 	}

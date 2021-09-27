@@ -23,16 +23,10 @@ import org.herasaf.xacml.core.combiningAlgorithm.rule.impl.RuleFirstApplicableAl
 import org.herasaf.xacml.core.combiningAlgorithm.rule.impl.RuleOrderedDenyOverridesAlgorithm;
 import org.herasaf.xacml.core.combiningAlgorithm.rule.impl.RuleOrderedPermitOverridesAlgorithm;
 import org.herasaf.xacml.core.combiningAlgorithm.rule.impl.RulePermitOverridesAlgorithm;
-import org.herasaf.xacml.core.policy.impl.ActionType;
-import org.herasaf.xacml.core.policy.impl.ActionsType;
 import org.herasaf.xacml.core.policy.impl.DefaultsType;
 import org.herasaf.xacml.core.policy.impl.EvaluatableIDImpl;
 import org.herasaf.xacml.core.policy.impl.ObligationsType;
 import org.herasaf.xacml.core.policy.impl.PolicyType;
-import org.herasaf.xacml.core.policy.impl.ResourceType;
-import org.herasaf.xacml.core.policy.impl.ResourcesType;
-import org.herasaf.xacml.core.policy.impl.SubjectsType;
-import org.herasaf.xacml.core.policy.impl.TargetType;
 import org.opensaml.xacml.policy.impl.PolicyTypeImplBuilder;
 
 /**
@@ -61,21 +55,21 @@ public class PolicyBuilderImpl
 			policy.setDescription(aInternalObject.getDescription().getValue());
 		}
 
-		if ("urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:deny-overrides"
-				.equalsIgnoreCase(aInternalObject.getRuleCombiningAlgoId())) {
-			policy.setCombiningAlg(new RuleDenyOverridesAlgorithm());
-		} else if ("urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:only-one-applicable"
-				.equalsIgnoreCase(aInternalObject.getRuleCombiningAlgoId())) {
-			policy.setCombiningAlg(new RuleFirstApplicableAlgorithm());
-		} else if ("urn:oasis:names:tc:xacml:1.0:rule-combining-algorithm:permit-overrides"
-				.equalsIgnoreCase(aInternalObject.getRuleCombiningAlgoId())) {
-			policy.setCombiningAlg(new RulePermitOverridesAlgorithm());
-		} else if ("urn:oasis:names:tc:xacml:1.1:rule-combining-algorithm:ordered-permit-overrides"
-				.equalsIgnoreCase(aInternalObject.getRuleCombiningAlgoId())) {
-			policy.setCombiningAlg(new RuleOrderedPermitOverridesAlgorithm());
-		} else if ("urn:oasis:names:tc:xacml:1.1:rule-combining-algorithm:ordered-deny-overrides"
-				.equalsIgnoreCase(aInternalObject.getRuleCombiningAlgoId())) {
-			policy.setCombiningAlg(new RuleOrderedDenyOverridesAlgorithm());
+		if (aInternalObject.getRuleCombiningAlgoId() != null) {
+			if (aInternalObject.getRuleCombiningAlgoId().contains("rule-combining-algorithm:deny-overrides")) {
+				policy.setCombiningAlg(new RuleDenyOverridesAlgorithm());
+			} else if (aInternalObject.getRuleCombiningAlgoId()
+					.contains("rule-combining-algorithm:only-one-applicable")) {
+				policy.setCombiningAlg(new RuleFirstApplicableAlgorithm());
+			} else if (aInternalObject.getRuleCombiningAlgoId().contains("rule-combining-algorithm:permit-overrides")) {
+				policy.setCombiningAlg(new RulePermitOverridesAlgorithm());
+			} else if (aInternalObject.getRuleCombiningAlgoId()
+					.contains("urn:oasis:names:tc:xacml:1.1:rule-combining-algorithm:ordered-permit-overrides")) {
+				policy.setCombiningAlg(new RuleOrderedPermitOverridesAlgorithm());
+			} else if (aInternalObject.getRuleCombiningAlgoId()
+					.contains("urn:oasis:names:tc:xacml:1.1:rule-combining-algorithm:ordered-deny-overrides")) {
+				policy.setCombiningAlg(new RuleOrderedDenyOverridesAlgorithm());
+			}
 		}
 
 		if (aInternalObject.getObligations() != null) {
@@ -98,57 +92,13 @@ public class PolicyBuilderImpl
 		policy.setPolicyId(new EvaluatableIDImpl(aInternalObject.getPolicyId()));
 
 		if (aInternalObject.getTarget() != null) {
-			var targetType = new TargetType();
+			policy.setTarget(new TargetBuilderImpl().create(aInternalObject.getTarget()));
+		}
 
-			if (aInternalObject.getTarget().getActions() != null
-					&& aInternalObject.getTarget().getActions().getActions() != null) {
-				var actionsType = new ActionsType();
-				for (var type : aInternalObject.getTarget().getActions().getActions()) {
-					var actionType = new ActionType();
-
-					for (var typeMatch : type.getActionMatches()) {
-						actionType.getActionMatches().add(new ActionMatchBuilderImpl().create(typeMatch));
-					}
-
-					actionsType.getActions().add(actionType);
-				}
-
-				targetType.setActions(actionsType);
+		if (aInternalObject.getRules() != null) {
+			for (org.opensaml.xacml.policy.RuleType rule : aInternalObject.getRules()) {
+				policy.getAdditionalInformation().add(new RuleBuilderImpl().create(rule));
 			}
-
-			if (aInternalObject.getTarget().getSubjects() != null
-					&& aInternalObject.getTarget().getSubjects().getSubjects() != null) {
-				var subjectsType = new SubjectsType();
-
-				for (var type : aInternalObject.getTarget().getSubjects().getSubjects()) {
-					var subjectType = new org.herasaf.xacml.core.policy.impl.SubjectType();
-
-					for (var typeMatch : type.getSubjectMatches()) {
-						subjectType.getSubjectMatches().add(new SubjectMatchBuilderImpl().create(typeMatch));
-					}
-
-					subjectsType.getSubjects().add(subjectType);
-				}
-				targetType.setSubjects(subjectsType);
-			}
-
-			if (aInternalObject.getTarget().getResources() != null
-					&& aInternalObject.getTarget().getResources().getResources() != null) {
-				var resourcesType = new ResourcesType();
-
-				for (var type : aInternalObject.getTarget().getResources().getResources()) {
-					var resourceType = new ResourceType();
-
-					for (var typeMatch : type.getResourceMatches()) {
-						resourceType.getResourceMatches().add(new ResourceMatchBuilderImpl().create(typeMatch));
-					}
-
-					resourcesType.getResources().add(resourceType);
-				}
-				targetType.setResources(resourcesType);
-			}
-
-			policy.setTarget(targetType);
 		}
 
 		return policy;

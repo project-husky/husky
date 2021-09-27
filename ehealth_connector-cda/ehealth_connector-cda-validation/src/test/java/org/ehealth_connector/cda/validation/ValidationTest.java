@@ -27,6 +27,7 @@ import java.io.IOException;
 
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.commons.io.IOUtils;
 import org.ehealth_connector.cda.validation.api.CdaValidator;
 import org.ehealth_connector.cda.validation.api.XsdValidationResult;
 import org.ehealth_connector.validation.service.config.ConfigurationException;

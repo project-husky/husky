@@ -25,6 +25,7 @@ import org.ehealth_connector.xua.saml2.AuthnStatementBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AuthnStatementType;
+import org.opensaml.saml.saml2.core.impl.AuthnContextClassRefImpl;
 
 public class AuthnStatementBuilderImplTest {
 
@@ -54,7 +55,9 @@ public class AuthnStatementBuilderImplTest {
 	@Test
 	public void testAuthnContextClassRef() {
 		final AuthnStatementType ref = builder.authnContextClassRef(testAuthnContextClassRef).create();
-		assertEquals(testAuthnContextClassRef, ref.getAuthnContext());
+		assertEquals(testAuthnContextClassRef,
+				((AuthnContextClassRefImpl) ref.getAuthnContext().getContent().get(0).getValue())
+						.getAuthnContextClassRef());
 	}
 
 	/**

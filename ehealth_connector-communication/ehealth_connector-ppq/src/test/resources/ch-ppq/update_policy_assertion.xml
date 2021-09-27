@@ -1,0 +1,135 @@
+<saml:Assertion xmlns:hl7="urn:hl7-org:v3"
+	xmlns:xacml="urn:oasis:names:tc:xacml:2.0:policy:schema:os"
+	xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"
+	xmlns:epr="urn:e-health-suisse:2015:policy-administration"
+	xmlns:samlp="urn:oasis:names:tc:SAML:2.0:protocol"
+	xmlns:xacml-context="urn:oasis:names:tc:xacml:2.0:context:schema:os"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xacml-samlp="urn:oasis:names:tc:xacml:2.0:profile:saml2.0:v2:schema:protocol"
+	xmlns:xacml-saml="urn:oasis:names:tc:xacml:2.0:profile:saml2.0:v2:schema:assertion"
+	Version="2.0" ID="\_b882d240-45cd-4fa3-aa9f-65394115d0e0"
+	IssueInstant="2019-03-06T14:28:35.249Z">
+	<saml:Issuer
+		NameQualifier="urn:e-health-suisse:community-index">urn:oid:1.3.6.1.4.1.21367.2017.2.6.2</saml:Issuer>
+	<saml:Statement
+		xsi:type="xacml-saml:XACMLPolicyStatementType">
+		<xacml:PolicySet
+			PolicySetId="urn:uuid:451fb3f6-7b35-4344-bee1-ddc26018cab3"
+			PolicyCombiningAlgId="urn:oasis:names:tc:xacml:1.0:policy-combining-algorithm:deny-overrides">
+			<xacml:Description>Patient specific PolicySet for EPD Setup 201 -
+				granting full access to a patient at EPD setup
+			</xacml:Description>
+			<xacml:Target>
+				<xacml:Subjects>
+					<xacml:Subject>
+						<xacml:SubjectMatch
+							MatchId="urn:oasis:names:tc:xacml:1.0:function:string-equal">
+							<xacml:AttributeValue
+								DataType="http://www.w3.org/2001/XMLSchema#anyURI">761337610435209810</xacml:AttributeValue>
+							<xacml:SubjectAttributeDesignator
+								AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id"
+								DataType="http://www.w3.org/2001/XMLSchema#string" />
+						</xacml:SubjectMatch>
+						<xacml:SubjectMatch
+							MatchId="urn:oasis:names:tc:xacml:1.0:function:anyURI-equal">
+							<xacml:AttributeValue
+								DataType="http://www.w3.org/2001/XMLSchema#anyURI">urn:e-health-suisse:2015:epr-spid
+							</xacml:AttributeValue>
+							<xacml:SubjectAttributeDesignator
+								AttributeId="urn:oasis:names:tc:xacml:1.0:subject:subject-id-qualifier"
+								DataType="http://www.w3.org/2001/XMLSchema#string" />
+						</xacml:SubjectMatch>
+						<xacml:SubjectMatch
+							MatchId="urn:hl7-org:v3:function:CV-equal">
+							<xacml:AttributeValue
+								DataType="urn:hl7-org:v3#CV">
+								<hl7:CodedValue code="PAT"
+									codeSystem="2.16.756.5.30.1.127.3.10.6" />
+							</xacml:AttributeValue>
+							<xacml:SubjectAttributeDesignator
+								DataType="urn:hl7-org:v3#CV"
+								AttributeId="urn:oasis:names:tc:xacml:2.0:subject:role" />
+						</xacml:SubjectMatch>
+					</xacml:Subject>
+				</xacml:Subjects>
+				<xacml:Resources>
+					<xacml:Resource>
+						<xacml:ResourceMatch
+							MatchId="urn:hl7-org:v3:function:II-equal">
+							<xacml:AttributeValue
+								DataType="urn:hl7-org:v3#II">
+								<hl7:InstanceIdentifier
+									root="2.16.756.5.30.1.127.3.10.3"
+									extension="761337610435209810" />
+							</xacml:AttributeValue>
+							<xacml:ResourceAttributeDesignator
+								DataType="urn:hl7-org:v3#II"
+								AttributeId="urn:e-health-suisse:2015:epr-spid" />
+						</xacml:ResourceMatch>
+					</xacml:Resource>
+				</xacml:Resources>
+			</xacml:Target>
+			<xacml:PolicySetIdReference>urn:e-health-suisse:2015:policies:access-level:full
+			</xacml:PolicySetIdReference>
+		</xacml:PolicySet>
+		<xacml:Policy
+				PolicyId="e0187e8b-d913-4a24-98f4-14b2a6f0ef04"
+				RuleCombiningAlgId="identifier:rule-combining-algorithm:permit-overrides">
+				<xacml:Description>Sample Policy to be updated</xacml:Description>
+				<xacml:Target />
+				<xacml:Rule RuleId="3d37e220-4dec-11e3-8f96-0800200c9a66"
+					Effect="Permit">
+					<xacml:Target>
+						<xacml:Resources>
+							<xacml:Resource>
+								<xacml:ResourceMatch
+									MatchId="urn:oasis:names:tc:xacml:1.0:function:anyURI-equal">
+									<xacml:AttributeValue
+										DataType="http://www.w3.org/2001/XMLSchema#anyURI">urn:ihe:2017:record:interactions
+									</xacml:AttributeValue>
+									<xacml:ResourceAttributeDesignator
+										AttributeId="urn:ihe-d:cookbook:2013:resource-type"
+										DataType="http://www.w3.org/2001/XMLSchema#anyURI" />
+								</xacml:ResourceMatch>
+							</xacml:Resource>
+						</xacml:Resources>
+						<xacml:Actions>
+							<xacml:Action>
+								<xacml:ActionMatch
+									MatchId="urn:oasis:names:tc:xacml:1.0:function:anyURI-equal">
+									<xacml:AttributeValue
+										DataType="http://www.w3.org/2001/XMLSchema#anyURI">urn:ihe:2017:record:search-response
+									</xacml:AttributeValue>
+									<xacml:ActionAttributeDesignator
+										AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
+										DataType="http://www.w3.org/2001/XMLSchema#anyURI" />
+								</xacml:ActionMatch>
+							</xacml:Action>
+							<xacml:Action>
+								<xacml:ActionMatch
+									MatchId="urn:oasis:names:tc:xacml:1.0:function:anyURI-equal">
+									<xacml:AttributeValue
+										DataType="http://www.w3.org/2001/XMLSchema#anyURI">urn:ihe:2017:record:view-all-response
+									</xacml:AttributeValue>
+									<xacml:ActionAttributeDesignator
+										AttributeId="urn:oasis:names:tc:xacml:1.0:action:action-id"
+										DataType="http://www.w3.org/2001/XMLSchema#anyURI" />
+								</xacml:ActionMatch>
+							</xacml:Action>
+						</xacml:Actions>
+					</xacml:Target>
+					<xacml:Condition>
+						<xacml:Apply
+							FunctionId="urn:ihe:2017:record:function:interactedPreviously">
+							<xacml:SubjectAttributeDesignator
+								AttributeId="urn:oasis:names:tc:xspa:1.0:subject:organization-id"
+								DataType="http://www.w3.org/2001/XMLSchema#anyURI" />
+							<xacml:ResourceAttributeDesignator
+								AttributeId="urn:ihe:2017:record:latest-organization-interaction"
+								DataType="urn:ihe:2017:record#interaction" />
+						</xacml:Apply>
+					</xacml:Condition>
+				</xacml:Rule>
+			</xacml:Policy>
+	</saml:Statement>
+</saml:Assertion>

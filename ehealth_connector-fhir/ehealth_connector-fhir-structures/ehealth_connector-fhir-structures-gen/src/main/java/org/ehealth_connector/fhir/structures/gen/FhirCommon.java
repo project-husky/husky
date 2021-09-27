@@ -36,12 +36,16 @@ import org.ehealth_connector.common.Author;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.Organization;
+import org.ehealth_connector.common.Person;
 import org.ehealth_connector.common.Telecom;
 import org.ehealth_connector.common.basetypes.AddressBaseType;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.basetypes.NameBaseType;
 import org.ehealth_connector.common.basetypes.OrganizationBaseType;
 import org.ehealth_connector.common.enums.CodeSystems;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer2;
 import org.ehealth_connector.common.mdht.AuthoringDevice;
 import org.ehealth_connector.common.mdht.enums.ConfidentialityCode;
 import org.ehealth_connector.common.mdht.enums.Isco08;
@@ -1861,6 +1865,74 @@ public class FhirCommon {
 	}
 
 	/**
+	 * Gets an eHC Author from FHIR Person.
+	 *
+	 * @param fhirObject <div class="en">FHIR Person resource</div>
+	 *                   <div class="de"></div> <div class="fr"></div>
+	 * @return <div class="en">the eHC Author</div> <div class="de"></div>
+	 *         <div class="fr"></div>
+	 */
+	public static POCDMT000040Performer2 getPerformer(org.hl7.fhir.dstu3.model.Person fhirObject) {
+		POCDMT000040Performer2 retVal = null;
+		final var personName = new Name();
+		personName.setGiven(fhirObject.getNameFirstRep().getGivenAsSingleString());
+		personName.setFamily(fhirObject.getNameFirstRep().getFamily());
+
+		// Create the author
+		retVal = new POCDMT000040Performer2();
+		POCDMT000040AssignedEntity entity = new POCDMT000040AssignedEntity();
+		entity.setAssignedPerson(new Person(personName).getHl7CdaPerson());
+		retVal.setAssignedEntity(entity);
+
+		// Set Function Code
+		setPerformerFuntionCode(retVal, fhirObject);
+
+		// Add Identifiers
+		for (final Identifier id : fhirObject.getIdentifier()) {
+			final String codeSystem = FhirCommon.removeUrnOidPrefix(id.getSystem());
+			retVal.getAssignedEntity().getId().add(new Identificator(codeSystem, id.getValue()).getHl7CdaR2Ii());
+		}
+
+		// Add Addresses
+		for (final org.hl7.fhir.dstu3.model.Address addr : fhirObject.getAddress()) {
+			org.ehealth_connector.common.enums.PostalAddressUse usage = org.ehealth_connector.common.enums.PostalAddressUse.WORK_PLACE;
+			if (addr.getUseElement().getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.HOME) {
+				usage = org.ehealth_connector.common.enums.PostalAddressUse.HOME_ADDRESS;
+			}
+			if (addr.getUseElement().getValue() == org.hl7.fhir.dstu3.model.Address.AddressUse.TEMP) {
+				usage = org.ehealth_connector.common.enums.PostalAddressUse.PUBLIC;
+			}
+			final var eHCAddr = new Address(new AddressBaseType());
+			eHCAddr.setStreetAddressLine1(addr.getLine().get(0).toString());
+			eHCAddr.setPostalCode(addr.getPostalCode());
+			eHCAddr.setCity(addr.getCity());
+			eHCAddr.setUsage(usage);
+			eHCAddr.setCountry(addr.getCountry());
+			retVal.getAssignedEntity().getAddr().add(eHCAddr.getHl7CdaR2Ad());
+		}
+
+		// Add Telecoms
+		List<Telecom> telecoms = getTelecoms(fhirObject.getTelecom());
+		for (Telecom telecom : telecoms) {
+			if (telecom != null) {
+				retVal.getAssignedEntity().getTelecom().add(telecom.getHl7CdaR2Tel());
+			}
+		}
+
+		// Add organization
+		if ((fhirObject.getManagingOrganization().getResource() != null)
+				&& !fhirObject.getManagingOrganization().getResource().isEmpty()) {
+			Organization org = getOrganization(fhirObject.getManagingOrganization().getResource());
+			if (org != null) {
+				retVal.getAssignedEntity().setRepresentedOrganization(org.getHl7CdaR2Pocdmt000040Organization());
+			}
+		}
+
+		return retVal;
+
+	}
+
+	/**
 	 * <div class="en">Gets a eHC Code to be used as practice setting code from
 	 * the FHIR DocumentReference object.
 	 *
@@ -2042,6 +2114,24 @@ public class FhirCommon {
 			final var code = FhirUtilities.toCode(coding);
 			code.setCodeSystemName(coding.getVersion());
 			author.setFunctionCode(code);
+		}
+
+	}
+
+	/**
+	 * Sets the functionCode Element of the author
+	 *
+	 * @param author       the author
+	 * @param fhirResource any FHIR DomainResource containing the extension
+	 *                     urnUseAsFunctionCode
+	 */
+	private static void setPerformerFuntionCode(POCDMT000040Performer2 performer, DomainResource fhirResource) {
+		final List<Extension> extensions = fhirResource.getExtensionsByUrl(FhirCommon.urnUseAsFunctionCode);
+		if (!extensions.isEmpty()) {
+			final var coding = (Coding) extensions.get(0).getValue();
+			final var code = FhirUtilities.toCode(coding);
+			code.setCodeSystemName(coding.getVersion());
+			performer.getAssignedEntity().setCode(code.getHl7CdaR2Ce());
 		}
 
 	}

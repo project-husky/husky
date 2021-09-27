@@ -30,11 +30,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<dependency>
-			<groupId>org.openhealthtools.ihe.atna</groupId>
-			<artifactId>oht-atna-auditor</artifactId>
-		</dependency>
-
 		<!-- test stuff -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>

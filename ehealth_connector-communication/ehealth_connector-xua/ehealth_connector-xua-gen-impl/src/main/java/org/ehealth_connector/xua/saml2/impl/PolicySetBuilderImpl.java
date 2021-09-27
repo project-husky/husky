@@ -26,17 +26,11 @@ import org.herasaf.xacml.core.combiningAlgorithm.policy.impl.PolicyFirstApplicab
 import org.herasaf.xacml.core.combiningAlgorithm.policy.impl.PolicyOnlyOneApplicableAlgorithm;
 import org.herasaf.xacml.core.combiningAlgorithm.policy.impl.PolicyOrderedDenyOverridesAlgorithm;
 import org.herasaf.xacml.core.combiningAlgorithm.policy.impl.PolicyPermitOverridesAlgorithm;
-import org.herasaf.xacml.core.policy.impl.ActionType;
-import org.herasaf.xacml.core.policy.impl.ActionsType;
 import org.herasaf.xacml.core.policy.impl.DefaultsType;
 import org.herasaf.xacml.core.policy.impl.EvaluatableIDImpl;
 import org.herasaf.xacml.core.policy.impl.IdReferenceType;
 import org.herasaf.xacml.core.policy.impl.ObligationsType;
 import org.herasaf.xacml.core.policy.impl.PolicySetType;
-import org.herasaf.xacml.core.policy.impl.ResourceType;
-import org.herasaf.xacml.core.policy.impl.ResourcesType;
-import org.herasaf.xacml.core.policy.impl.SubjectsType;
-import org.herasaf.xacml.core.policy.impl.TargetType;
 import org.opensaml.xacml.policy.impl.PolicySetTypeImplBuilder;
 
 /**
@@ -124,58 +118,7 @@ public class PolicySetBuilderImpl
 		}
 
 		if (aInternalObject.getTarget() != null) {
-			var targetType = new TargetType();
-			if (aInternalObject.getTarget().getActions() != null
-				&& aInternalObject.getTarget().getActions().getActions() != null) {
-				var actionsType = new ActionsType();
-
-				for (var type : aInternalObject.getTarget().getActions().getActions()) {
-					var actionType = new ActionType();
-
-					for (var typeMatch : type.getActionMatches()) {
-						actionType.getActionMatches().add(new ActionMatchBuilderImpl().create(typeMatch));
-					}
-
-					actionsType.getActions().add(actionType);
-				}
-
-				targetType.setActions(actionsType);
-			}
-			
-			if (aInternalObject.getTarget().getSubjects() != null
-					&& aInternalObject.getTarget().getSubjects().getSubjects() != null) {
-				var subjectsType = new SubjectsType();
-
-				for (var type : aInternalObject.getTarget().getSubjects().getSubjects()) {
-					var subjectType = new org.herasaf.xacml.core.policy.impl.SubjectType();
-
-					for (var typeMatch : type.getSubjectMatches()) {
-						subjectType.getSubjectMatches().add(new SubjectMatchBuilderImpl().create(typeMatch));
-					}
-
-					subjectsType.getSubjects().add(subjectType);
-				}
-				targetType.setSubjects(subjectsType);
-			}
-
-			if (aInternalObject.getTarget().getResources() != null
-					&& aInternalObject.getTarget().getResources().getResources() != null) {
-				var resourcesType = new ResourcesType();
-
-				for (var type : aInternalObject.getTarget().getResources().getResources()) {
-					var resourceType = new ResourceType();
-
-					for (var typeMatch : type.getResourceMatches()) {
-						resourceType.getResourceMatches().add(new ResourceMatchBuilderImpl().create(typeMatch));
-					}
-
-					resourcesType.getResources().add(resourceType);
-				}
-				targetType.setResources(resourcesType);
-			}
-
-
-			policySet.setTarget(targetType);
+			policySet.setTarget(new TargetBuilderImpl().create(aInternalObject.getTarget()));
 		}
 
 		return policySet;
