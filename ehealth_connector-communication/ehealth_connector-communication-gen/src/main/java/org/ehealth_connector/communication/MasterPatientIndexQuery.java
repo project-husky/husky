@@ -21,7 +21,6 @@ import java.util.Date;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.eclipse.emf.ecore.EPackage;
 import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
@@ -31,7 +30,6 @@ import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
 import org.ehealth_connector.communication.mpi.impl.pdq.V3PdqQuery;
 import org.ehealth_connector.fhir.structures.gen.FhirPatient;
 import org.hl7.fhir.dstu3.model.Identifier;
-import org.hl7.v3.V3Package;
 
 /**
  * Convenience class MasterPatientIndexQuery adds the MpiQuery functionality for
@@ -58,11 +56,6 @@ public class MasterPatientIndexQuery {
 	 * at
 	 * org.eclipse.emf.ecore.resource.impl.ResourceImpl.load(ResourceImpl.java:1518)
 	 */
-	@SuppressWarnings("unused")
-	static private org.openhealthtools.mdht.uml.cda.CDAFactory factory = org.openhealthtools.mdht.uml.cda.impl.CDAFactoryImpl.eINSTANCE;
-
-	/** The orginal model package. */
-	private EPackage eOrigPackage;
 
 	/** The v3 pdq query. */
 	private final V3PdqQuery v3PdqQuery;
@@ -74,10 +67,8 @@ public class MasterPatientIndexQuery {
 	 *            the dest
 	 */
 	public MasterPatientIndexQuery(Destination dest) {
-		fixV3Package();
 		v3PdqQuery = new V3PdqQuery(dest.getSenderApplicationOid(), dest.getSenderFacilityOid(),
 				dest.getReceiverApplicationOid(), dest.getReceiverFacilityOid());
-		postFixV3Package();
 	}
 
 	/**
@@ -88,9 +79,7 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery addDomainToReturn(String organizationOID) {
-		fixV3Package();
 		v3PdqQuery.addDomainToReturn(organizationOID);
-		postFixV3Package();
 		return this;
 	}
 
@@ -105,9 +94,7 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery addMothersMaidenName(boolean useFuzzySearch, Name name) {
-		fixV3Package();
 		v3PdqQuery.addMothersMaidenName(useFuzzySearch, FhirPatient.convertName(name));
-		postFixV3Package();
 		return this;
 	}
 
@@ -119,9 +106,7 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery addPatientAddress(Address address) {
-		fixV3Package();
 		v3PdqQuery.addPatientAddress(FhirPatient.convertAddress(address));
-		postFixV3Package();
 		return this;
 	}
 
@@ -133,12 +118,10 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery addPatientIdentificator(Identificator identificator) {
-		fixV3Package();
 		Identifier id = new Identifier();
 		id.setSystem(identificator.getRoot());
 		id.setValue(identificator.getExtension());
 		v3PdqQuery.addPatientIdentifier(id);
-		postFixV3Package();
 		return this;
 	}
 
@@ -153,9 +136,7 @@ public class MasterPatientIndexQuery {
 	 * @return the master patient index query
 	 */
 	public MasterPatientIndexQuery addPatientName(boolean useFuzzySearch, Name name) {
-		fixV3Package();
 		v3PdqQuery.addPatientName(useFuzzySearch, FhirPatient.convertName(name));
-		postFixV3Package();
 		return this;
 	}
 
@@ -167,9 +148,7 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery addPatientTelecom(Telecom tel) {
-		fixV3Package();
 		v3PdqQuery.addPatientTelecom(FhirPatient.convertTelecom(tel));
-		postFixV3Package();
 		return this;
 	}
 
@@ -179,9 +158,7 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery cancelQuery() {
-		fixV3Package();
 		v3PdqQuery.cancelQuery();
-		postFixV3Package();
 		return this;
 	}
 
@@ -191,30 +168,8 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery continueQuery() {
-		fixV3Package();
 		v3PdqQuery.continueQuery();
-		postFixV3Package();
 		return this;
-	}
-
-	/**
-	 * Fix v3 package.
-	 */
-	private void fixV3Package() {
-		// OHT SAGE HACK!! Save the loaded EPackage off
-		EPackage eOrigPackage = EPackage.Registry.INSTANCE.getEPackage("urn:hl7-org:v3");
-		if (eOrigPackage != null) {
-			String name = eOrigPackage.getClass().getName();
-			if (!"org.hl7.v3.impl.V3PackageImpl".equals(name)) {
-				log.debug("fixV3Package class loaded, removing here:" + name);
-				EPackage.Registry.INSTANCE.remove("urn:hl7-org:v3");
-				EPackage.Registry.INSTANCE.put("urn:hl7-org:v3", V3Package.eINSTANCE);
-				log.debug("V3Package " + V3Package.eINSTANCE.getClass().getName());
-				log.debug("Now set for urn:hl7-org:v3"
-						+ EPackage.Registry.INSTANCE.getEPackage("urn:hl7-org:v3"));
-				this.eOrigPackage = eOrigPackage;
-			}
-		}
 	}
 
 	/**
@@ -226,15 +181,6 @@ public class MasterPatientIndexQuery {
 		return v3PdqQuery;
 	}
 
-	/**
-	 * Post fix v3 package.
-	 */
-	private void postFixV3Package() {
-		if (eOrigPackage != null) {
-			EPackage.Registry.INSTANCE.put(V3Package.eNS_URI, eOrigPackage);
-			eOrigPackage = null;
-		}
-	}
 
 	/**
 	 * Special test preperation IHE PIX and PDQ Pre-Connectathon Test Tool
@@ -243,9 +189,7 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery setNistContinuationQueryId() {
-		fixV3Package();
 		v3PdqQuery.getV3PdqConsumerQuery().setQueryId("1.2.3.4", "NIST_CONTINUATION", "");
-		postFixV3Package();
 		return this;
 	}
 
@@ -258,9 +202,7 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery setPageCount(int pageCount) {
-		fixV3Package();
 		v3PdqQuery.setPageCount(pageCount);
-		postFixV3Package();
 		return this;
 	}
 
@@ -272,9 +214,7 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery setPatientDateOfBirth(Date birthDate) {
-		fixV3Package();
 		v3PdqQuery.setPatientBirthDate(birthDate);
-		postFixV3Package();
 		return this;
 	}
 
@@ -286,9 +226,7 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery setPatientSex(AdministrativeGender adminstrativeGender) {
-		fixV3Package();
 		v3PdqQuery.setPatientSex(FhirPatient.convertGender(adminstrativeGender));
-		postFixV3Package();
 		return this;
 	}
 

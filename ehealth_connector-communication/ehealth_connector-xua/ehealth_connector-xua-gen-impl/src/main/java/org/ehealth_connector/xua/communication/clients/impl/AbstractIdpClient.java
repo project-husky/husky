@@ -22,9 +22,9 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 
-import org.apache.commons.httpclient.NoHttpResponseException;
 import org.apache.http.HttpStatus;
 import org.apache.http.NameValuePair;
+import org.apache.http.NoHttpResponseException;
 import org.apache.http.ParseException;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;

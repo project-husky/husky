@@ -16,6 +16,7 @@
  */
 package org.ehealth_connector.common.utils;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.ZoneId;
@@ -813,6 +814,21 @@ public class DateUtil {
 	 */
 	public static Date parseHl7Timestamp(TS value) {
 		return parseHl7Timestamp(value.getValue());
+	}
+
+	/**
+	 * Check whether the dates of the two dates are equal (ignoring the time of the
+	 * day).
+	 *
+	 * @param validFrom  the valid from
+	 * @param validFrom2 the valid from 2
+	 * @return true, if equal
+	 */
+	public static boolean equalsDateOnly(Date validFrom, Date validFrom2) {
+		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+		String validFromStr = dateFormat.format(validFrom);
+		String validFromStr2 = dateFormat.format(validFrom2);
+		return validFromStr.equals(validFromStr2);
 	}
 
 }

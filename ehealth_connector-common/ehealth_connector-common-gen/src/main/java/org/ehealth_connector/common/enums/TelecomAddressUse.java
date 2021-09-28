@@ -18,7 +18,6 @@ package org.ehealth_connector.common.enums;
 
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.hl7cdar2.CE;
-import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
 
 /**
  * <div class="en">Address uses that only apply to telecommunication addresses,
@@ -221,54 +220,24 @@ public enum TelecomAddressUse {
 	 *
 	 * @return the address use as telecommunication address use
 	 */
-	public TelecommunicationAddressUse getAddressUseAsTelecommunicationAddressUse() {
-		TelecommunicationAddressUse retVal = TelecommunicationAddressUse.HP;
-		switch (this) {
-		case ANSWERING_SERVICE:
-			retVal = TelecommunicationAddressUse.AS;
-			break;
-		case BAD:
-			retVal = TelecommunicationAddressUse.BAD;
-			break;
-		case CONFIDENTIAL:
-			retVal = TelecommunicationAddressUse.H;
-			break;
-		case EMERGENCY_CONTACT:
-			retVal = TelecommunicationAddressUse.EC;
-			break;
-		case MOBILE:
-			retVal = TelecommunicationAddressUse.MC;
-			break;
-		case OLD:
-			retVal = TelecommunicationAddressUse.H;
-			break;
-		case PAGER:
-			retVal = TelecommunicationAddressUse.PG;
-			break;
-		case PRIVATE:
-			retVal = TelecommunicationAddressUse.H;
-			break;
-		case PRIVATE_PRIMARY:
-			retVal = TelecommunicationAddressUse.HP;
-			break;
-		case PRIVATE_VACATION:
-			retVal = TelecommunicationAddressUse.HV;
-			break;
-		case TEMPORARY:
-			retVal = TelecommunicationAddressUse.TMP;
-			break;
-		case BUSINESS:
-			retVal = TelecommunicationAddressUse.WP;
-			break;
-		case BUSINESS_DIRECT:
-			retVal = TelecommunicationAddressUse.WP;
-			break;
-		case PUBLIC:
-			retVal = TelecommunicationAddressUse.PUB;
-			break;
-		}
-		return retVal;
-	}
+	/*
+	 * public Telecom getAddressUseAsTelecommunicationAddressUse() {
+	 * TelecommunicationAddressUse retVal = TelecommunicationAddressUse.HP; switch
+	 * (this) { case ANSWERING_SERVICE: retVal = TelecommunicationAddressUse.AS;
+	 * break; case BAD: retVal = TelecommunicationAddressUse.BAD; break; case
+	 * CONFIDENTIAL: retVal = TelecommunicationAddressUse.H; break; case
+	 * EMERGENCY_CONTACT: retVal = TelecommunicationAddressUse.EC; break; case
+	 * MOBILE: retVal = TelecommunicationAddressUse.MC; break; case OLD: retVal =
+	 * TelecommunicationAddressUse.H; break; case PAGER: retVal =
+	 * TelecommunicationAddressUse.PG; break; case PRIVATE: retVal =
+	 * TelecommunicationAddressUse.H; break; case PRIVATE_PRIMARY: retVal =
+	 * TelecommunicationAddressUse.HP; break; case PRIVATE_VACATION: retVal =
+	 * TelecommunicationAddressUse.HV; break; case TEMPORARY: retVal =
+	 * TelecommunicationAddressUse.TMP; break; case BUSINESS: retVal =
+	 * TelecommunicationAddressUse.WP; break; case BUSINESS_DIRECT: retVal =
+	 * TelecommunicationAddressUse.WP; break; case PUBLIC: retVal =
+	 * TelecommunicationAddressUse.PUB; break; } return retVal; }
+	 */
 
 	/**
 	 * <div class="en">Gets the Code of this Enum as MDHT Object.</div>

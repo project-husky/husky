@@ -25,7 +25,7 @@ import java.util.Date;
 import org.ehealth_connector.common.basetypes.CodeBaseType;
 import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.utils.DateUtilMdht;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.LangText;
 import org.ehealth_connector.valueset.enums.ValueSetEntryType;
 import org.ehealth_connector.valueset.enums.ValueSetStatus;
@@ -45,13 +45,13 @@ public class ValueSetTest {
 		// Basic ValueSet elements tests
 		String description = "description";
 		String displayName = "displayName";
-		Date effectiveDate = DateUtilMdht.date("06.06.2019");
+		Date effectiveDate = DateUtil.parseDateyyyyMMdd("20190606");
 		IdentificatorBaseType identificator = IdentificatorBaseType.builder().withRoot("2.999")
 				.withExtension("1").build();
 		String name = "myValueSetName";
 		ValueSetStatus status = ValueSetStatus.FINAL;
 		Version version = Version.builder().withLabel("1.0")
-				.withValidFrom(DateUtilMdht.date("03.06.2019 00:00:00")).build();
+				.withValidFrom(DateUtil.parseDateyyyyMMddHHmmss("20190603000000")).build();
 
 		ValueSet valueSet1 = ValueSet.builder().withDisplayName(displayName)
 				.withEffectiveDate(effectiveDate).withIdentificator(identificator).withName(name)

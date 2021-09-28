@@ -23,7 +23,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.ehealth_connector.communication.testhelper.XdsTestUtils;
 import org.junit.jupiter.api.Test;
-import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,8 +35,7 @@ class FindDocumentsQueryTest extends XdsTestUtils {
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 
 	@Test
-	void testFindDocumentsQueryIdentificatorAvailabilityStatus()
-			throws MalformedStoredQueryException {
+	void testFindDocumentsQueryIdentificatorAvailabilityStatus() {
 
 		final FindDocumentsQuery q = new FindDocumentsQuery(patientId, availabilityStatus);
 

@@ -15,12 +15,6 @@
 
 	<dependencies>
 
-		<!-- open health tools mdht -->
-		<dependency>
-			<groupId>org.openhealthtools.mdht.cda</groupId>
-			<artifactId>org.openhealthtools.mdht.uml.cda.ihe.lab</artifactId>
-		</dependency>
-
 		<!-- JAXB binding stuff -->
 		<dependency>
 			<groupId>org.glassfish.jaxb</groupId>
@@ -39,37 +33,6 @@
 		<dependency>
 			<groupId>org.yaml</groupId>
 			<artifactId>snakeyaml</artifactId>
-		</dependency>
-
-		<!-- open health tools ihe -->
-		<dependency>
-			<groupId>org.openhealthtools.ihe.xds.metadata</groupId>
-			<artifactId>oht-xds-metadata-transform</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.xds.metadata</groupId>
-			<artifactId>oht-xds-metadata-extract-cdar2</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>org.openhealthtools.mdht.uml.hl7</groupId>
-					<artifactId>datatypes</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.openhealthtools.mdht.uml</groupId>
-					<artifactId>cda</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-		<!-- open health tools ihe utils -->
-		<dependency>
-			<groupId>org.openhealthtools.ihe.utils</groupId>
-			<artifactId>oht-ihe-utils</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.openhealthtools.ihe.xds</groupId>
-			<artifactId>oht-xds-consumer</artifactId>
 		</dependency>
 
 		<dependency>

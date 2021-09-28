@@ -31,6 +31,8 @@ import org.ehealth_connector.common.hl7cdar2.EnFamily;
 import org.ehealth_connector.common.hl7cdar2.EnGiven;
 import org.ehealth_connector.common.hl7cdar2.EnPrefix;
 import org.ehealth_connector.common.hl7cdar2.EnSuffix;
+import org.ehealth_connector.common.hl7cdar2.PN;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.XpnName;
 
 /**
  * <div class="en">The class Name contains all fields for different name parts
@@ -426,6 +428,12 @@ public class Name extends NameBaseType {
 		return retVal;
 	}
 
+	public static XpnName getIpfXpnName(PN hl7CdaR2Value) {
+		var nameBase = createNameBaseType(hl7CdaR2Value);
+		return new XpnName(nameBase.getFamily(), nameBase.getGiven(), null, nameBase.getSuffix(), nameBase.getPrefix(),
+				null);
+	}
+
 	/**
 	 * <div class="en">Instantiates a new instance. Default constructor.<div>
 	 *
@@ -629,4 +637,5 @@ public class Name extends NameBaseType {
 	public void set(org.ehealth_connector.common.hl7cdar2.EN hl7CdaR2Value) {
 		initFromHl7CdaR2(hl7CdaR2Value);
 	}
+
 }

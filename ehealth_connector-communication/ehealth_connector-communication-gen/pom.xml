@@ -14,12 +14,6 @@
 
 	<dependencies>
 
-		<!-- hl7 -->
-		<dependency>
-			<groupId>org.hl7.v3</groupId>
-			<artifactId>hl7v3-core</artifactId>
-		</dependency>
-
 		<!-- <dependency>
 			<groupId>org.ehealth_connector.cda</groupId>
 			<artifactId>ehealth_connector-cda-gen</artifactId>
@@ -34,124 +28,6 @@
 			<groupId>org.ehealth_connector.xua</groupId>
 			<artifactId>ehealth_connector-xua-gen-impl</artifactId>
 			<version>2.0-ALPHA</version>
-		</dependency>
-
-		<!-- open health tools ihe xds -->
-		<dependency>
-			<groupId>org.openhealthtools.ihe.xds</groupId>
-			<artifactId>oht-xds-source</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.xds</groupId>
-			<artifactId>oht-xds-consumer</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.xds</groupId>
-			<artifactId>oht-xds-soap</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.xds.metadata</groupId>
-			<artifactId>oht-xds-metadata-transform</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.xds.metadata</groupId>
-			<artifactId>oht-xds-metadata-extract-cdar2</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openhealthtools.ihe</groupId>
-			<artifactId>oht-xdm</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.xua</groupId>
-			<artifactId>oht-xua</artifactId>
-		</dependency>
-
-		<!-- eclipse libs -->
-		<dependency>
-			<groupId>org.eclipse.ohf</groupId>
-			<artifactId>org.eclipse.ohf.utilities</artifactId>
-		</dependency>
-
-
-
-		<!-- open health tools ihe atna -->
-		<dependency>
-			<groupId>org.openhealthtools.ihe.atna</groupId>
-			<artifactId>oht-atna-auditor</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.atna</groupId>
-			<artifactId>oht-atna-context</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.atna</groupId>
-			<artifactId>oht-atna-nodeauth</artifactId>
-		</dependency>
-
-		<!-- open health tools ihe ebXML -->
-		<dependency>
-			<groupId>org.openhealthtools.ihe.common</groupId>
-			<artifactId>oht-common-ebXML._2._1</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.common</groupId>
-			<artifactId>oht-common-ebXML._3._0</artifactId>
-		</dependency>
-
-		<!-- open health tools ihe hl7v2 -->
-		<dependency>
-			<groupId>org.openhealthtools.ihe.common.hl7v2</groupId>
-			<artifactId>oht-common-hl7v2</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.common.hl7v2</groupId>
-			<artifactId>oht-common-hl7v2-client</artifactId>
-		</dependency>
-
-		<!-- open health tools ihe hl7v3 -->
-		<dependency>
-			<groupId>org.openhealthtools.ihe.common.hl7v3</groupId>
-			<artifactId>oht-common-hl7v3</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.common.hl7v3</groupId>
-			<artifactId>oht-common-hl7v3-client</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.common.hl7v3</groupId>
-			<artifactId>oht-common-hl7v3-soap</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.openhealthtools.ihe.common.ws</groupId>
-			<artifactId>oht-common-ws-axis2</artifactId>
-		</dependency>
-
-		<!-- open health tools ihe pix -->
-		<dependency>
-			<groupId>org.openhealthtools.ihe.pix</groupId>
-			<artifactId>oht-pix-consumer-v3</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.pix</groupId>
-			<artifactId>oht-pix-consumer</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.pix</groupId>
-			<artifactId>oht-pix-source</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.pix</groupId>
-			<artifactId>oht-pix-source-v3</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.pdq</groupId>
-			<artifactId>oht-pdq-consumer</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.openhealthtools.ihe.pdq</groupId>
-			<artifactId>oht-pdq-consumer-v3</artifactId>
 		</dependency>
 
 		<!-- axis2 -->

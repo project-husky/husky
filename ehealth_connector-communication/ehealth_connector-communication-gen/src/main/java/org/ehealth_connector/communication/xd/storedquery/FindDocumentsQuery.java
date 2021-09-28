@@ -20,10 +20,10 @@ import java.util.List;
 
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Person;
 import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
-import org.openhealthtools.ihe.common.hl7v2.XCN;
 
 /**
  * Represents a query to find documents in an XDS Registry (XDS
@@ -74,7 +74,7 @@ public class FindDocumentsQuery /* implements StoredQueryInterface */ extends Ab
 	public FindDocumentsQuery(Identificator patientId, Code[] classCodes,
 			org.ehealth_connector.communication.xd.storedquery.DateTimeRange[] dateTimeRanges,
 			Code[] practiceSettingCodes, Code[] healthCareFacilityCodes, Code[] confidentialityCodes,
-			Code[] formatCodes, XCN authorPerson, AvailabilityStatus status) {
+			Code[] formatCodes, Person authorPerson, AvailabilityStatus status) {
 
 		var findDocumentsQuery = new org.openehealth.ipf.commons.ihe.xds.core.requests.query.FindDocumentsQuery();
 		findDocumentsQuery.setPatientId(XdsMetadataUtil.convertEhcIdentificator(patientId));
@@ -84,6 +84,10 @@ public class FindDocumentsQuery /* implements StoredQueryInterface */ extends Ab
 				.setHealthcareFacilityTypeCodes(XdsMetadataUtil.convertEhcCodeToCode(healthCareFacilityCodes));
 		findDocumentsQuery.setConfidentialityCodes(XdsMetadataUtil.convertEhcCodeToQueryListCode(confidentialityCodes));
 		findDocumentsQuery.setFormatCodes(XdsMetadataUtil.convertEhcCodeToCode(formatCodes));
+
+		if (authorPerson != null) {
+			findDocumentsQuery.setTypedAuthorPersons(List.of(authorPerson.getIpfPerson()));
+		}
 
 		if (dateTimeRanges != null) {
 			for (var index = 0; index < dateTimeRanges.length; index++) {

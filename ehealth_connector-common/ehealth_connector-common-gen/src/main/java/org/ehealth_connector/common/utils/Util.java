@@ -44,7 +44,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-import java.util.Stack;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
@@ -70,17 +69,6 @@ import org.apache.commons.lang3.SystemUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.emf.ecore.util.FeatureMap;
-import org.eclipse.emf.ecore.util.FeatureMap.Entry;
-import org.eclipse.emf.ecore.util.FeatureMapUtil;
-import org.eclipse.emf.ecore.xmi.XMLResource;
-import org.eclipse.emf.ecore.xmi.impl.GenericXMLResourceFactoryImpl;
-import org.eclipse.emf.ecore.xml.type.AnyType;
-import org.eclipse.emf.ecore.xml.type.XMLTypeDocumentRoot;
 import org.ehealth_connector.common.Address;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
@@ -120,13 +108,6 @@ import org.ehealth_connector.common.mdht.ParticipantRole;
 import org.ehealth_connector.common.mdht.PlayingEntity;
 import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
 import org.ehealth_connector.common.mdht.enums.Signature;
-import org.openhealthtools.mdht.uml.cda.AssignedAuthor;
-import org.openhealthtools.mdht.uml.cda.AssignedEntity;
-import org.openhealthtools.mdht.uml.cda.Author;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.EntryRelationship;
-import org.openhealthtools.mdht.uml.cda.StrucDocText;
-import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -323,27 +304,25 @@ public class Util {
 	 *            the assignedAuthor
 	 * @return the assignedEntity
 	 */
-	public static AssignedAuthor createAssignedAuthorFromAssignedEntity(AssignedEntity a) {
-		final AssignedAuthor asAut = CDAFactory.eINSTANCE.createAssignedAuthor();
+	public static POCDMT000040AssignedAuthor createAssignedAuthorFromAssignedEntity(POCDMT000040AssignedEntity a) {
+		final POCDMT000040AssignedAuthor asAut = new POCDMT000040AssignedAuthor();
 		// Copy Addresses
-		if (a.getAddrs() != null) {
-			asAut.getAddrs().addAll(EcoreUtil.copyAll(a.getAddrs()));
+		if (a.getAddr() != null) {
+			asAut.getAddr().addAll(a.getAddr());
 		}
 		// Copy Ids
-		if (a.getIds() != null) {
-			asAut.getIds().addAll(EcoreUtil.copyAll(a.getIds()));
+		if (a.getId() != null) {
+			asAut.getId().addAll(a.getId());
 		}
 		// Copy Telecoms
-		if (a.getTelecoms() != null) {
-			asAut.getTelecoms().addAll(EcoreUtil.copyAll(a.getTelecoms()));
+		if (a.getTelecom() != null) {
+			asAut.getTelecom().addAll(a.getTelecom());
 		}
 		// Copy Represented Organization
-		if (!a.getRepresentedOrganizations().isEmpty()) {
-			asAut.setRepresentedOrganization(
-					EcoreUtil.copy(a.getRepresentedOrganizations().get(0)));
-		}
+		asAut.setRepresentedOrganization(a.getRepresentedOrganization());
+
 		// Set Assigned Person
-		asAut.setAssignedPerson(EcoreUtil.copy(a.getAssignedPerson()));
+		asAut.setAssignedPerson(a.getAssignedPerson());
 
 		return asAut;
 	}
@@ -454,15 +433,15 @@ public class Util {
 	 *            <div class="de">the authenticator</div>
 	 * @return the Author
 	 */
-	public static Author createAuthorFromAuthenticator(
-			org.openhealthtools.mdht.uml.cda.Authenticator authenticator) {
-		final org.openhealthtools.mdht.uml.cda.Author a = CDAFactory.eINSTANCE.createAuthor();
+	public static POCDMT000040Author createAuthorFromAuthenticator(
+			POCDMT000040Authenticator authenticator) {
+		final POCDMT000040Author a = new POCDMT000040Author();
 
 		a.setAssignedAuthor(
 				createAssignedAuthorFromAssignedEntity(authenticator.getAssignedEntity()));
 
 		// Copy Time
-		a.setTime(EcoreUtil.copy(authenticator.getTime()));
+		a.setTime(authenticator.getTime());
 
 		return a;
 	}
@@ -475,15 +454,14 @@ public class Util {
 	 *            <div class="de">the authenticator</div>
 	 * @return the Author
 	 */
-	public static Author createAuthorFromLegalAuthenticator(
-			org.openhealthtools.mdht.uml.cda.LegalAuthenticator authenticator) {
-		final org.openhealthtools.mdht.uml.cda.Author a = CDAFactory.eINSTANCE.createAuthor();
+	public static POCDMT000040Author createAuthorFromLegalAuthenticator(POCDMT000040LegalAuthenticator authenticator) {
+		final POCDMT000040Author a = new POCDMT000040Author();
 
 		a.setAssignedAuthor(
 				createAssignedAuthorFromAssignedEntity(authenticator.getAssignedEntity()));
 
 		// Copy Time
-		a.setTime(EcoreUtil.copy(authenticator.getTime()));
+		a.setTime(authenticator.getTime());
 
 		return a;
 	}
@@ -626,7 +604,7 @@ public class Util {
 	 */
 	public static TEL createEMail(String eMail, TelecomAddressUse usage) {
 		final var tel = new TEL();
-		tel.getUse().add(usage.getAddressUseAsTelecommunicationAddressUse().getLiteral());
+		tel.getUse().add(usage.getCodeValue());
 		tel.setValue(TELECOMS_EMAIL_PREFIX + eMail);
 		return tel;
 	}
@@ -658,7 +636,7 @@ public class Util {
 	 */
 	public static TEL createFax(String faxNr, TelecomAddressUse usage) {
 		final var tel = new TEL();
-		tel.getUse().add(usage.getAddressUseAsTelecommunicationAddressUse().getLiteral());
+		tel.getUse().add(usage.getCodeValue());
 		tel.setValue(TELECOMS_FAX_PREFIX + faxNr);
 		return tel;
 	}
@@ -722,30 +700,6 @@ public class Util {
 		mdhtLegAuth.setTime(a.getTime());
 
 		return mdhtLegAuth;
-	}
-
-	/**
-	 * <div class="en">Creates the non quoted MDHT StrucDocText.</div>
-	 *
-	 * @param xmlString
-	 *            <br>
-	 *            <div class="de"> xml string</div>
-	 * @return the StrucDocText
-	 */
-	public static StrucDocText createNonQotedStrucDocText(String xmlString) {
-		final Resource.Factory factory = new GenericXMLResourceFactoryImpl();
-		final XMLResource resource = (XMLResource) factory.createResource(null);
-		try {
-			resource.load(new URIConverter.ReadableInputStream("<text>" + xmlString + "</text>"),
-					null);
-		} catch (final IOException e) {
-			e.printStackTrace();
-		}
-		final XMLTypeDocumentRoot root = (XMLTypeDocumentRoot) resource.getContents().get(0);
-		final AnyType value = (AnyType) root.getMixed().getValue(0);
-		final StrucDocText text = CDAFactory.eINSTANCE.createStrucDocText();
-		text.getMixed().addAll(value.getMixed());
-		return text;
 	}
 
 	/**
@@ -1000,7 +954,7 @@ public class Util {
 	public static TEL createTel(String telNr, TelecomAddressUse usage) {
 		final var tel = new TEL();
 		if (usage != null) {
-			tel.getUse().add(usage.getAddressUseAsTelecommunicationAddressUse().getLiteral());
+			tel.getUse().add(usage.getCodeValue());
 		}
 		tel.setValue(TELECOMS_PHONE_PREFIX + telNr.replaceAll("\\s+", ""));
 		return tel;
@@ -1024,7 +978,7 @@ public class Util {
 		final var tel = new TEL();
 		if (usage != null) {
 			tel.getUse().clear();
-			tel.getUse().add(usage.getAddressUseAsTelecommunicationAddressUse().getLiteral());
+			tel.getUse().add(usage.getCodeValue());
 		}
 		tel.setValue(endpointIdentifier);
 		return tel;
@@ -1113,22 +1067,6 @@ public class Util {
 	}
 
 	/**
-	 * <div class="en">Extract string from a non quoted MDHT StrucDocText.</div>
-	 *
-	 * @param strucDocText
-	 *            <br>
-	 *            <div class="en">the StrucDocText</div>
-	 * @return the string
-	 */
-	public static String extractStringFromNonQuotedStrucDocText(StrucDocText strucDocText) {
-		StringBuilder sb = new StringBuilder();
-		if (strucDocText != null) {
-			sb = traverse2(strucDocText.getMixed(), sb);
-		}
-		return sb.toString();
-	}
-
-	/**
 	 * Run the Garbage Collector to get the most possible heap space free for
 	 * subsequent tasks. This is not recommended but can be used if situations
 	 * arise.
@@ -1157,7 +1095,7 @@ public class Util {
 			}
 		}
 
-		final String documentOid = org.openhealthtools.ihe.utils.OID
+		final String documentOid = OID
 				.createOIDGivenRoot("ehealthconnctor");
 		// Creates a random extension ID to identify the document
 
@@ -1450,28 +1388,6 @@ public class Util {
 	}
 
 	/**
-	 * Extract text from an Ecore FeatureMap.
-	 *
-	 * @param featureMap
-	 *            the featureMap
-	 * @return the text as String
-	 */
-	@SuppressWarnings("unused")
-	private static String getText(FeatureMap featureMap) {
-		final StringBuffer buffer = new StringBuffer("");
-		for (final FeatureMap.Entry entry : featureMap) {
-			if (FeatureMapUtil.isText(entry)) {
-				buffer.append(entry.getValue().toString());
-			} else {
-				if (entry.getEStructuralFeature() instanceof EReference) {
-					buffer.append("<" + entry.getEStructuralFeature().getName() + ">");
-				}
-			}
-		}
-		return buffer.toString().trim();
-	}
-
-	/**
 	 *
 	 * Gets the used memory as string for display e.g. to console.
 	 *
@@ -1688,9 +1604,9 @@ public class Util {
 	 *            the EntryRelationship
 	 * @return true if the EntryRelationship is a comment, false otherwise
 	 */
-	public static boolean isComment(EntryRelationship er) {
-		return er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ) && er.getInversionInd() != null
-				&& er.getInversionInd().booleanValue();
+	public static boolean isComment(POCDMT000040EntryRelationship er) {
+		return er.getTypeCode().equals(XActRelationshipEntryRelationship.SUBJ) && er.isInversionInd() != null
+				&& er.isInversionInd().booleanValue();
 	}
 
 	/**
@@ -1876,117 +1792,6 @@ public class Util {
 	 */
 	public static InputStream string2InputStream(String inputStr) {
 		return new ByteArrayInputStream(inputStr.getBytes(StandardCharsets.UTF_8));
-	}
-
-	/**
-	 * Tranverses through a given FeatureMap and prints an XML representations
-	 * of this map (only for test purposes).
-	 *
-	 * @param root
-	 *            the root of the FeatureMap
-	 */
-	@SuppressWarnings("unused")
-	private static void traverse(FeatureMap root) {
-		final Stack<FeatureMap> stack = new Stack<>();
-		final Stack<String> stack2 = new Stack<>();
-		stack.push(root);
-		while (!stack.isEmpty()) {
-			final FeatureMap featureMap = stack.pop();
-			for (int i = featureMap.size() - 1; i >= 0; i--) {
-				final Entry entry = featureMap.get(i);
-				if (entry.getEStructuralFeature() instanceof EReference) {
-					System.out.print("<" + entry.getEStructuralFeature().getName());
-					final AnyType anyType = (AnyType) entry.getValue();
-					traverseAttributes(anyType.getAnyAttribute());
-					System.out.print(">");
-					stack.push(anyType.getMixed());
-
-				} else {
-					// if (entry.getValue() != null && !stack2.isEmpty()) {
-					// System.out.print("</"+stack2.pop()+">");}
-					// //Text between the Elements
-					if (entry.getValue() != null) {
-						final String value = entry.getValue().toString();
-						if (value.trim().length() > 0) {
-							System.out.print(value);
-						}
-					} else {
-						System.out.println(" }");
-					}
-				}
-				if ((entry.getValue() != null) && !stack2.isEmpty()) {
-					System.out.print("</" + stack2.pop() + ">");
-				}
-			}
-		}
-	}
-
-	/**
-	 * Tranverses through a given FeatureMap and updates a given StringBuilder
-	 * with the XML representation of the map.
-	 *
-	 * @param featureMap
-	 *            the Ecore FeatureMap
-	 * @param sb
-	 *            the StringBuilder
-	 * @return the updated StringBuilder
-	 */
-	private static StringBuilder traverse2(FeatureMap featureMap, StringBuilder sb) {
-		for (int i = 0; i <= (featureMap.size() - 1); i++) {
-			final Entry entry = featureMap.get(i);
-			if (entry.getEStructuralFeature() instanceof EReference) {
-				sb.append("<" + entry.getEStructuralFeature().getName());
-				final AnyType anyType = (AnyType) entry.getValue();
-				// sb = traverseAttributes2(anyType.getAnyAttribute(), sb);
-				traverseAttributes2(anyType.getAnyAttribute(), sb);
-				sb.append(">");
-				traverse2(anyType.getMixed(), sb);
-				sb.append("</" + entry.getEStructuralFeature().getName() + ">");
-			} else {
-				// //Text between the Elements
-				if (entry.getValue() != null) {
-					final String value = entry.getValue().toString();
-					if (value.trim().length() > 0) {
-						sb.append(value);
-					}
-				} else {
-					System.out.println(" }");
-				}
-			}
-		}
-		return sb;
-	}
-
-	/**
-	 * Recursive function to tranverse all attributes and print the contents
-	 * (only for test purposes).
-	 *
-	 * @param anyAttribute
-	 *            the Ecore FeatureMap
-	 */
-	private static void traverseAttributes(FeatureMap anyAttribute) {
-		for (final Entry entry : anyAttribute) {
-			System.out.print(" " + entry.getEStructuralFeature().getName() + "=\""
-					+ entry.getValue().toString() + "\"");
-		}
-	}
-
-	/**
-	 * Recursive function to tranverse all attributes and update the given
-	 * StringBuilder with an XML representation of the attributes.
-	 *
-	 * @param anyAttribute
-	 *            the Ecore FeatureMap
-	 * @param sb
-	 *            the StringBuilder
-	 * @return the updated StringBuilder
-	 */
-	private static StringBuilder traverseAttributes2(FeatureMap anyAttribute, StringBuilder sb) {
-		for (final Entry entry : anyAttribute) {
-			sb.append(" " + entry.getEStructuralFeature().getName() + "=\""
-					+ entry.getValue().toString() + "\"");
-		}
-		return sb;
 	}
 
 	public static Random getRand() {

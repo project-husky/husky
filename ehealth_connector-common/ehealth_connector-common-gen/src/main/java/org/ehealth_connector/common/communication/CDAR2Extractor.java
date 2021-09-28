@@ -14,6 +14,7 @@ import java.util.TimeZone;
 import javax.xml.bind.JAXBElement;
 
 import org.apache.log4j.Logger;
+import org.ehealth_connector.common.enums.AdministrativeGender;
 import org.ehealth_connector.common.hl7cdar2.AD;
 import org.ehealth_connector.common.hl7cdar2.AdxpAdditionalLocator;
 import org.ehealth_connector.common.hl7cdar2.AdxpCity;
@@ -63,16 +64,6 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.Telecom;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.XcnName;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.XpnName;
-import org.openhealthtools.ihe.xds.metadata.ParentDocumentType;
-import org.openhealthtools.ihe.xds.metadata.extract.MetadataExtractionException;
-import org.openhealthtools.ihe.xds.metadata.extract.MetadataExtractionStatus;
-import org.openhealthtools.ihe.xds.metadata.extract.cdar2.AdministrativeGender;
-import org.openhealthtools.mdht.uml.cda.AssignedAuthor;
-import org.openhealthtools.mdht.uml.cda.ClinicalDocument;
-import org.openhealthtools.mdht.uml.cda.Component1;
-import org.openhealthtools.mdht.uml.cda.EncompassingEncounter;
-import org.openhealthtools.mdht.uml.cda.HealthCareFacility;
-import org.openhealthtools.mdht.uml.cda.Location;
 
 
 public class CDAR2Extractor {
@@ -94,9 +85,9 @@ public class CDAR2Extractor {
 	public static final Map<String, String> ADMIN_GENDER_TABLE_001;
 	static {
 		ADMIN_GENDER_TABLE_001 = new HashMap<>();
-		ADMIN_GENDER_TABLE_001.put(AdministrativeGender.M_LITERAL.getName(), "M");
-		ADMIN_GENDER_TABLE_001.put(AdministrativeGender.F_LITERAL.getName(), "F");
-		ADMIN_GENDER_TABLE_001.put(AdministrativeGender.UN_LITERAL.getName(), "O");
+		ADMIN_GENDER_TABLE_001.put(AdministrativeGender.MALE_CODE, "M");
+		ADMIN_GENDER_TABLE_001.put(AdministrativeGender.FEMALE_CODE, "F");
+		ADMIN_GENDER_TABLE_001.put(AdministrativeGender.UNDIFFERENTIATED_CODE, "O");
 	}
 
 	/** CDA R2 document object */
@@ -293,10 +284,6 @@ public class CDAR2Extractor {
 	 */
 	public List<Author> extractAuthors() {
 		if (!atLeastOne(cda.getAuthor())) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + ClinicalDocument.class.getName() + "/"
-						+ Author.class.getName());
-			}
 			return new ArrayList<>();
 		} else {
 			Iterator<POCDMT000040Author> i = cda.getAuthor().iterator();
@@ -305,16 +292,9 @@ public class CDAR2Extractor {
 			while (i.hasNext()) {
 				POCDMT000040Author author = i.next();
 				POCDMT000040AssignedAuthor aAuth = author.getAssignedAuthor();
-				if (aAuth == null) {
-					if (logger.isDebugEnabled()) {
-						logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + ClinicalDocument.class.getName()
-								+ "/" + Author.class.getName() + "/" + AssignedAuthor.class.getName());
-					}
-				} else {
+				if (aAuth != null && aAuth.getAssignedAuthoringDevice() == null) {
 					// make sure that we have an author person and not authoring device
-					if (aAuth.getAssignedAuthoringDevice() == null) {
-						authorList.add(extractAuthor(author));
-					}
+					authorList.add(extractAuthor(author));
 				}
 			} // end iterator
 			return authorList;
@@ -393,9 +373,6 @@ public class CDAR2Extractor {
 	 */
 	public Code extractClassCode() {
 		if (cda.getCode() == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + ClinicalDocument.class.getName() + "/code");
-			}
 			return null;
 		}
 
@@ -423,10 +400,6 @@ public class CDAR2Extractor {
 	 */
 	public List<Code> extractConfidentialityCodes() {
 		if (cda.getConfidentialityCode() == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + ClinicalDocument.class.getName()
-						+ "/confidentialityCode");
-			}
 			return null;
 		}
 
@@ -448,18 +421,10 @@ public class CDAR2Extractor {
 	 */
 	public Timestamp extractCreationTime() {
 		if (cda.getEffectiveTime() == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + ClinicalDocument.class.getName()
-						+ "/effectiveTime");
-			}
 			return null;
 		}
 
 		if (cda.getEffectiveTime().getValue() == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + ClinicalDocument.class.getName()
-						+ "/effectiveTime@value");
-			}
 			return null;
 		} else {
 			return map(cda.getEffectiveTime());
@@ -548,36 +513,11 @@ public class CDAR2Extractor {
 // FIXME Implementation ALMOST consistent with PCC TF-2 Medical Document Binding
 // * to XDS, XDM and XDR.
 	public Code extractHealthCareFacilityTypeCode() {
-		if (cda.getComponentOf() == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + ClinicalDocument.class.getName() + "/ "
-						+ Component1.class.getName());
-			}
-		} else if (cda.getComponentOf().getEncompassingEncounter() == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + ClinicalDocument.class.getName() + "/ "
-						+ Component1.class.getName() + "/ " + EncompassingEncounter.class.getName());
-			}
-		} else if (cda.getComponentOf().getEncompassingEncounter().getLocation() == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + ClinicalDocument.class.getName() + "/ "
-						+ Component1.class.getName() + "/ " + EncompassingEncounter.class.getName() + "/ "
-						+ Location.class.getName());
-			}
-		} else if (cda.getComponentOf().getEncompassingEncounter().getLocation().getHealthCareFacility() == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + ClinicalDocument.class.getName() + "/ "
-						+ Component1.class.getName() + "/ " + EncompassingEncounter.class.getName() + "/ "
-						+ Location.class.getName() + "/ " + HealthCareFacility.class.getName());
-			}
-		} else if (cda.getComponentOf().getEncompassingEncounter().getLocation().getHealthCareFacility()
-				.getCode() == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + ClinicalDocument.class.getName() + "/ "
-						+ Component1.class.getName() + "/ " + EncompassingEncounter.class.getName() + "/ "
-						+ Location.class.getName() + "/ " + HealthCareFacility.class.getName() + "/code");
-			}
-		} else {
+		if (cda.getComponentOf() != null && cda.getComponentOf().getEncompassingEncounter() != null
+				&& cda.getComponentOf().getEncompassingEncounter().getLocation() != null
+				&& cda.getComponentOf().getEncompassingEncounter().getLocation().getHealthCareFacility() != null
+				&& cda.getComponentOf().getEncompassingEncounter().getLocation().getHealthCareFacility()
+						.getCode() != null) {
 			CE facility = cda.getComponentOf().getEncompassingEncounter().getLocation().getHealthCareFacility()
 					.getCode();
 
@@ -667,7 +607,7 @@ public class CDAR2Extractor {
 	 * @return null
 	 * @see org.openhealthtools.ihe.xds.metadata.extract.DocumentEntryElementExtractor.extractParentDocument()
 	 */
-	public ParentDocumentType extractParentDocument() {
+	public Identifiable extractParentDocument() {
 		logger.info("DocumentEntry.parentDocument expresses the id and relationship of a parent document to this CDA"
 				+ " document in the XDS Regisry.\nThis is not necessairly the same parent document that is"
 				+ " documented within the CDA. \nThus, this information is not" + " extracted.");
@@ -742,10 +682,6 @@ public class CDAR2Extractor {
 	 */
 	public Timestamp extractServiceStartTime() {
 		if (!atLeastOne(cda.getDocumentationOf())) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + POCDMT000040ClinicalDocument.class.getName()
-						+ "/ " + POCDMT000040DocumentationOf.class.getName());
-			}
 			return null;
 		} else {
 			Iterator<POCDMT000040DocumentationOf> i = this.cda.getDocumentationOf().iterator();
@@ -807,10 +743,6 @@ public class CDAR2Extractor {
 	 */
 	public Timestamp extractServiceStopTime() {
 		if (!atLeastOne(cda.getDocumentationOf())) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + POCDMT000040ClinicalDocument.class.getName()
-						+ "/ " + POCDMT000040DocumentationOf.class.getName());
-			}
 			return null;
 		} else {
 			Iterator<POCDMT000040DocumentationOf> i = this.cda.getDocumentationOf().iterator();
@@ -880,11 +812,6 @@ public class CDAR2Extractor {
 	 */
 	public Identifiable extractSourcePatientId() {
 		if (!atLeastOne(cda.getRecordTarget())) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + POCDMT000040ClinicalDocument.class.getName()
-						+ "/ "
-						+ POCDMT000040RecordTarget.class.getName());
-			}
 			return null;
 		} else {
 			POCDMT000040RecordTarget target = cda.getRecordTarget().get(0);
@@ -927,20 +854,11 @@ public class CDAR2Extractor {
 	 */
 	public PatientInfo extractSourcePatientInfo() {
 		if (!atLeastOne(cda.getRecordTarget())) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + POCDMT000040ClinicalDocument.class.getName()
-						+ "/ " + POCDMT000040RecordTarget.class.getName());
-			}
 			return null;
 		}
 
 		POCDMT000040RecordTarget target = cda.getRecordTarget().get(0);
 		if (target.getPatientRole() == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + POCDMT000040ClinicalDocument.class.getName()
-						+ "/ " + POCDMT000040RecordTarget.class.getName() + "/ "
-						+ POCDMT000040PatientRole.class.getName());
-			}
 			return null;
 		}
 
@@ -1022,10 +940,6 @@ public class CDAR2Extractor {
 	 */
 	public LocalizedString extractTitle() {
 		if (cda.getTitle() == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(
-						MetadataExtractionStatus.MISSING_DATA_SOURCE + ClinicalDocument.class.getName() + "/title");
-			}
 			return null;
 		}
 
@@ -1055,25 +969,13 @@ public class CDAR2Extractor {
 	 */
 	public String extractUniqueId() {
 		if (cda.getId() == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + POCDMT000040ClinicalDocument.class.getName()
-						+ "/id");
-			}
 			return null;
 		}
 
 		if (cda.getId().getRoot() == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + POCDMT000040ClinicalDocument.class.getName()
-						+ "/id@root");
-			}
 			// no root
 			return null;
 		} else if (cda.getId().getExtension() == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + POCDMT000040ClinicalDocument.class.getName()
-						+ "/id@extension");
-			}
 			// no extension, but there is a root
 			return cda.getId().getRoot();
 		}
@@ -1120,11 +1022,6 @@ public class CDAR2Extractor {
 	private Organization extractAuthorInstitution(
 			POCDMT000040Organization org) {
 		if (org == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + POCDMT000040ClinicalDocument.class.getName()
-						+ "/" + POCDMT000040Author.class.getName() + "/" + POCDMT000040AssignedAuthor.class.getName()
-						+ "/ " + POCDMT000040Organization.class.getName());
-			}
 			return null;
 		}
 
@@ -1171,10 +1068,6 @@ public class CDAR2Extractor {
 	 */
 	private Person extractAuthorPerson(POCDMT000040AssignedAuthor aAuth) {
 		if (aAuth == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + POCDMT000040ClinicalDocument.class.getName()
-						+ "/" + POCDMT000040Author.class.getName() + "/" + POCDMT000040AssignedAuthor.class.getName());
-			}
 			return null;
 		}
 		var idNull = false;
@@ -1217,10 +1110,6 @@ public class CDAR2Extractor {
 
 		var identifiable = new Identifiable();
 		if (role.getCode() == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + ClinicalDocument.class.getName() + "/"
-						+ Author.class.getName() + "/ functionCode");
-			}
 			return null;
 		}
 
@@ -1243,10 +1132,6 @@ public class CDAR2Extractor {
 
 		var identifiable = new Identifiable();
 		if (spec.getCode() == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + ClinicalDocument.class.getName() + "/"
-						+ Author.class.getName() + "/" + AssignedAuthor.class.getName() + "/code");
-			}
 			return null;
 		}
 
@@ -1265,10 +1150,6 @@ public class CDAR2Extractor {
 	 */
 	private Telecom extractAuthorTelecommunication(TEL tel) {
 		if (tel == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + ClinicalDocument.class.getName() + "/"
-						+ Author.class.getName() + "/" + AssignedAuthor.class.getName() + "/ " + TEL.class.getName());
-			}
 			return null;
 		}
 		return map(tel);
@@ -1337,12 +1218,6 @@ public class CDAR2Extractor {
 	 */
 	private Timestamp extractPid7(TS time) {
 		if (time == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + POCDMT000040ClinicalDocument.class.getName()
-						+ "/ " + POCDMT000040RecordTarget.class.getName() + "/ "
-						+ POCDMT000040PatientRole.class.getName() + "/ " + POCDMT000040Patient.class.getName()
-						+ "/ birthTime");
-			}
 			return new Timestamp();
 		}
 
@@ -1359,21 +1234,12 @@ public class CDAR2Extractor {
 	 */
 	private String extractPid8(CE docCode) {
 		if (docCode == null) {
-			if (logger.isDebugEnabled()) {
-				logger.debug(MetadataExtractionStatus.MISSING_DATA_SOURCE + POCDMT000040ClinicalDocument.class.getName()
-						+ "/ " + POCDMT000040RecordTarget.class.getName() + "/ "
-						+ POCDMT000040PatientRole.class.getName() + "/ " + POCDMT000040Patient.class.getName()
-						+ "/ administrativeGenderCode");
-			}
 			return "";
 		}
 
 		String gender = docCode.getCode();
 		String value = ADMIN_GENDER_TABLE_001.get(gender);
 
-		if (value == null && gender != null) {
-			logger.warn(MetadataExtractionStatus.INVALID_VOCAB + gender);
-		}
 		return value;
 	}
 

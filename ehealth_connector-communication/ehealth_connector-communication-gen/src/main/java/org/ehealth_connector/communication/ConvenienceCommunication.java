@@ -44,7 +44,7 @@ import org.ehealth_connector.common.communication.SubmissionSetMetadata.Submissi
 import org.ehealth_connector.common.enums.DocumentDescriptor;
 import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.ehealth_connector.common.utils.DateUtilMdht;
+import org.ehealth_connector.common.utils.OID;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.ehealth_connector.communication.xd.storedquery.AbstractStoredQuery;
@@ -54,16 +54,15 @@ import org.ehealth_connector.communication.xd.xdm.IndexHtm;
 import org.ehealth_connector.communication.xd.xdm.ReadmeTxt;
 import org.ehealth_connector.communication.xd.xdm.XdmContents;
 import org.ehealth_connector.xua.core.SecurityHeaderElement;
-import org.ehealth_connector.xua.exceptions.SerializeException;
-import org.ehealth_connector.xua.saml2.Assertion;
-import org.ehealth_connector.xua.serialization.impl.AssertionSerializerImpl;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Association;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationLabel;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AssociationType;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Author;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Folder;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.Timestamp.Precision;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.QueryRegistry;
@@ -72,18 +71,10 @@ import org.openehealth.ipf.commons.ihe.xds.core.requests.query.QueryReturnType;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.QueryResponse;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.Response;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.RetrievedDocumentSet;
-import org.openhealthtools.ihe.atna.auditor.XDSSourceAuditor;
-import org.openhealthtools.ihe.atna.auditor.context.AuditorModuleContext;
-import org.openhealthtools.ihe.utils.OID;
-import org.openhealthtools.ihe.xds.XDSConstants;
-import org.openhealthtools.ihe.xds.metadata.AuthorType;
-import org.openhealthtools.ihe.xua.XUAAssertion;
-import org.openhealthtools.ihe.xua.context.XUAModuleContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.w3c.dom.Element;
 
 /**
  * <div class="en">The ConvenienceCommunication class provides a convenience API
@@ -308,7 +299,6 @@ public class ConvenienceCommunication extends CamelService {
 		if (txnData == null) {
 			txnData = new ProvideAndRegisterDocumentSet();
 		}
-		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(this.atnaConfigMode == AtnaConfigMode.SECURE);
 
 		Folder folder = new Folder();
 		folder.assignEntryUuid();
@@ -350,7 +340,6 @@ public class ConvenienceCommunication extends CamelService {
 		if (txnData == null) {
 			txnData = new ProvideAndRegisterDocumentSet();
 		}
-		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(this.atnaConfigMode == AtnaConfigMode.SECURE);
 
 		DocumentMetadata docMetadata = null;
 
@@ -378,25 +367,6 @@ public class ConvenienceCommunication extends CamelService {
 	}
 
 	/**
-	 *
-	 * <div class="en">Method to add a xuser assertion to allow authentication on
-	 * XDS.b transactions.</div>
-	 *
-	 * @param assertion The assertion to be added to the soap header
-	 * @throws SerializeException if there are problems adding the assertion
-	 */
-	public void addXUserAssertion(Assertion assertion) throws SerializeException {
-		final XUAModuleContext xuaContext = XUAModuleContext.getContext();
-		final Element assertionElement = new AssertionSerializerImpl().toXmlElement(assertion);
-		final XUAAssertion ohtAssertion = new XUAAssertion(assertionElement);
-		xuaContext.cacheAssertion(ohtAssertion);
-		xuaContext.getConfig().getXUAEnabledActions().add(XDSConstants.PROVIDE_AND_REGISTER_DOCUMENT_SET_ACTION);
-		AuditorModuleContext.getContext().getConfig().setSystemUserName(ohtAssertion.getAtnaUsername());
-		xuaContext.setXUAEnabled(true);
-		xuaContext.setActiveAssertion(ohtAssertion);
-	}
-
-	/**
 	 * <div class="en">Cda fixes of OHT CDAExtraction bugs and extraction methods,
 	 * which are unsafe, because an XDS registry might use another value set.</div>
 	 *
@@ -411,9 +381,8 @@ public class ConvenienceCommunication extends CamelService {
 
 		// Fix the OHT for invalid empty authorTelecommunicationentries by
 		// deleting all authorTelecommunications
-		for (final Object object : docMetadata.getDocumentEntry().getAuthors()) {
-			final AuthorType at = (AuthorType) object;
-			at.getAuthorTelecommunication().clear();
+		for (final Author at : docMetadata.getDocumentEntry().getAuthors()) {
+			at.getAuthorTelecom().clear();
 		}
 
 		// Fix the OHT CDAExtraction bug(?) that generates Unique Ids, which are
@@ -622,7 +591,7 @@ public class ConvenienceCommunication extends CamelService {
 
 				// set submission time
 				if (subSet.getSubmissionTime() == null) {
-					subSet.setSubmissionTime(DateUtilMdht.nowAsTS().getValue());
+					subSet.setSubmissionTime(new Timestamp(DateUtil.nowAsZonedDate(), Precision.SECOND));
 				}
 				// txnData.saveMetadataToFile("C:/temp/metadata.xml");
 
@@ -665,7 +634,7 @@ public class ConvenienceCommunication extends CamelService {
 
 				// set submission time
 				if (subSet.getSubmissionTime() == null) {
-					subSet.setSubmissionTime(DateUtilMdht.nowAsTS().getValue());
+					subSet.setSubmissionTime(new Timestamp(DateUtil.nowAsZonedDate(), Precision.SECOND));
 				}
 				// txnData.saveMetadataToFile("C:/temp/metadata.xml");
 
@@ -1000,16 +969,6 @@ public class ConvenienceCommunication extends CamelService {
 
 		// System.setProperty("https.ciphersuites",
 		// "TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_RSA_WITH_AES_256_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA384,TLS_DHE_RSA_WITH_AES_256_CBC_SHA256,TLS_DHE_DSS_WITH_AES_256_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_256_CBC_SHA,TLS_ECDH_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_DSS_WITH_AES_256_CBC_SHA,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256,TLS_RSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_RSA_WITH_AES_128_CBC_SHA256,TLS_DHE_DSS_WITH_AES_128_CBC_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_128_CBC_SHA,TLS_ECDH_ECDSA_WITH_AES_128_CBC_SHA,TLS_ECDH_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_DSS_WITH_AES_128_CBC_SHA,TLS_ECDHE_ECDSA_WITH_RC4_128_SHA,TLS_ECDHE_RSA_WITH_RC4_128_SHA,SSL_RSA_WITH_RC4_128_SHA,TLS_ECDH_ECDSA_WITH_RC4_128_SHA,TLS_ECDH_RSA_WITH_RC4_128_SHA,TLS_ECDHE_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDHE_RSA_WITH_3DES_EDE_CBC_SHA,SSL_RSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_ECDSA_WITH_3DES_EDE_CBC_SHA,TLS_ECDH_RSA_WITH_3DES_EDE_CBC_SHA,SSL_DHE_RSA_WITH_3DES_EDE_CBC_SHA,SSL_DHE_DSS_WITH_3DES_EDE_CBC_SHA,SSL_RSA_WITH_RC4_128_MD5");
-	}
-
-	/**
-	 * Setting up the communication endpoints for the affinity domain and the logger
-	 *
-	 * @param affinityDomain the affinity domain
-	 * @param atnaConfigMode the ATNA config mode (secure or unsecure)
-	 */
-	protected void setUp(AffinityDomain affinityDomain, AtnaConfigMode atnaConfigMode) {
-		XDSSourceAuditor.getAuditor().getConfig().setAuditorEnabled(atnaConfigMode == AtnaConfigMode.SECURE);
 	}
 
 	/**

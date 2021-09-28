@@ -22,13 +22,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
+import org.ehealth_connector.common.hl7cdar2.TEL;
 import org.ehealth_connector.common.utils.Util;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
-import org.openhealthtools.mdht.uml.hl7.vocab.TelecommunicationAddressUse;
 
 /**
  * <div class="en">Class Telecom represents a list of telecommunication
@@ -61,7 +57,7 @@ public class Telecoms {
 	public Telecoms(List<TEL> telecoms) {
 		this();
 		for (final TEL tel : telecoms) {
-			mTels.add(EcoreUtil.copy(tel));
+			mTels.add(tel);
 		}
 	}
 
@@ -103,9 +99,9 @@ public class Telecoms {
 	}
 
 	public TEL createTel(String telNr, TelecomAddressUse usage) {
-		final var tel = DatatypesFactory.eINSTANCE.createTEL();
+		final var tel = new TEL();
 		if (usage != null) {
-			tel.getUses().add(TelecommunicationAddressUse.valueOf(usage.getCodeValue()));
+			tel.getUse().add(usage.getCodeValue());
 		}
 		tel.setValue("tel:" + telNr.replaceAll("\\s+", ""));
 		return tel;
@@ -127,9 +123,9 @@ public class Telecoms {
 	}
 
 	public TEL createEMail(String eMail, TelecomAddressUse usage) {
-		final var tel = DatatypesFactory.eINSTANCE.createTEL();
+		final var tel = new TEL();
 		if (usage != null) {
-			tel.getUses().add(TelecommunicationAddressUse.valueOf(usage.getCodeValue()));
+			tel.getUse().add(usage.getCodeValue());
 		}
 		tel.setValue("mailto:" + eMail);
 		return tel;
@@ -187,19 +183,10 @@ public class Telecoms {
 	 *            </div>
 	 */
 	public void addWebsite(String url, TelecomAddressUse usage) {
-		final TEL t = DatatypesFactory.eINSTANCE.createTEL();
-		t.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
+		final var t = new TEL();
+		t.getUse().add(usage.getCodeValue());
 		t.setValue(url);
 		mTels.add(t);
-	}
-
-	/**
-	 * <div class="en">Copy mdht telecoms.</div>
-	 *
-	 * @return EList the MDHT EList containing the Telecoms
-	 */
-	public EList<TEL> copyMdhtTelecoms() {
-		return (EList<TEL>) EcoreUtil.copyAll(mTels);
 	}
 
 	/**
@@ -210,7 +197,7 @@ public class Telecoms {
 	 *         and AddressUse</div>
 	 */
 	public Map<String, TelecomAddressUse> getEMails() {
-		return new HashMap<String, TelecomAddressUse>();
+		return new HashMap<>();
 	}
 
 	/**
@@ -220,7 +207,7 @@ public class Telecoms {
 	 * @return <div class="en">the faxes</div>
 	 */
 	public Map<String, TelecomAddressUse> getFaxes() {
-		return new HashMap<String, TelecomAddressUse>();
+		return new HashMap<>();
 	}
 
 	/**
@@ -240,7 +227,7 @@ public class Telecoms {
 	 * @return <div class="en">the phones</div>
 	 */
 	public Map<String, TelecomAddressUse> getPhones() {
-		return new HashMap<String, TelecomAddressUse>();
+		return new HashMap<>();
 	}
 
 	/**
@@ -249,10 +236,10 @@ public class Telecoms {
 	 *
 	 * @return <div class="en">the telecoms</div>
 	 */
-	public Map<String, TelecommunicationAddressUse> getTelecoms() {
-		final Map<String, TelecommunicationAddressUse> pm = new HashMap<String, TelecommunicationAddressUse>();
+	public Map<String, TelecomAddressUse> getTelecoms() {
+		final Map<String, TelecomAddressUse> pm = new HashMap<>();
 		for (final TEL mName : mTels) {
-			pm.put(mName.getValue(), mName.getUses().get(0));
+			pm.put(mName.getValue(), TelecomAddressUse.getEnum(mName.getUse().get(0)));
 		}
 		return pm;
 	}
@@ -264,6 +251,6 @@ public class Telecoms {
 	 * @return <div class="en">the websides</div>
 	 */
 	public Map<String, TelecomAddressUse> getWebsites() {
-		return new HashMap<String, TelecomAddressUse>();
+		return new HashMap<>();
 	}
 }

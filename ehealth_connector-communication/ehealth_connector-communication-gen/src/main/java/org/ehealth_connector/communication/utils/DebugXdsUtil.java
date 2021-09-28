@@ -16,10 +16,12 @@
  */
 package org.ehealth_connector.communication.utils;
 
-import org.ehealth_connector.common.utils.DebugUtil;
-import org.openhealthtools.ihe.xds.metadata.SubmissionSetType;
-import org.openhealthtools.ihe.xds.source.SubmitTransactionData;
+import java.util.List;
 
+import org.ehealth_connector.common.utils.DebugUtil;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Author;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.SubmissionSet;
+import org.openehealth.ipf.commons.ihe.xds.core.requests.ProvideAndRegisterDocumentSet;
 /**
  * Debug xds util class
  *
@@ -34,18 +36,18 @@ public class DebugXdsUtil extends DebugUtil {
 	 * @return <div class="en">string with the submission-set metadata (for
 	 *         debugging purposes only)</div>
 	 */
-	public static String debugSubmissionSetMetaData(SubmitTransactionData[] txnDatas) {
-		final StringBuffer retVal = new StringBuffer();
+	public static String debugSubmissionSetMetaData(List<ProvideAndRegisterDocumentSet> txnDatas) {
+		final StringBuilder retVal = new StringBuilder();
 		Integer i = 0;
-		for (final SubmitTransactionData txnData : txnDatas) {
+		for (final ProvideAndRegisterDocumentSet txnData : txnDatas) {
 			i++;
 
 			retVal.append("\nSubmission-Set " + i + "\n");
 			// txnData.getDocList();
 			// ProvideAndRegisterDocumentSetType metadata =
 			// txnData.getMetadata();
-			final SubmissionSetType ss = txnData.getSubmissionSet();
-			retVal.append("  EntryUUID:            " + ss.getEntryUUID() + "\n");
+			final SubmissionSet ss = txnData.getSubmissionSet();
+			retVal.append("  EntryUUID:            " + ss.getEntryUuid() + "\n");
 			retVal.append("  SourceId:             " + ss.getSourceId() + "\n");
 			retVal.append("  SubmissionTime:       " + ss.getSubmissionTime() + "\n");
 			retVal.append("  UniqueId:             " + ss.getUniqueId() + "\n");
@@ -53,35 +55,40 @@ public class DebugXdsUtil extends DebugUtil {
 			retVal.append("  PatientId:            " + ss.getPatientId() + "\n");
 			retVal.append(
 					"  ContentTypeCode:      " + debugCodeString(ss.getContentTypeCode()) + "\n");
-			retVal.append("  Author:               " + debugAuthorString(ss.getAuthor()) + "\n");
+			for (Author author : ss.getAuthors()) {
+				if (author != null) {
+					retVal.append("  Author:               " + debugAuthorString(author) + "\n");
+				}
+			}
+
 			retVal.append("  AvailabilityStatus:   " + ss.getAvailabilityStatus() + "\n");
 			retVal.append(
-					"  Comments:             " + debugInternationalString(ss.getComments()) + "\n");
+					"  Comments:             " + debugLocalizedString(ss.getComments()) + "\n");
 			retVal.append("  IntendedRecipient:    ");
-			if (ss.getIntendedRecipient().isEmpty()) {
+			if (ss.getIntendedRecipients().isEmpty()) {
 				retVal.append("null");
 			} else {
-				for (final Object item2 : ss.getIntendedRecipient()) {
+				for (final Object item2 : ss.getIntendedRecipients()) {
 					retVal.append("\n    TODO IntendedRecipient " + item2.getClass().getName());
 				}
 			}
 			retVal.append("\n");
 
 			retVal.append("  AssociatedFolders:    ");
-			if (ss.getAssociatedFolders().isEmpty()) {
+			if (txnData.getFolders().isEmpty()) {
 				retVal.append("null");
 			} else {
-				for (final Object item2 : ss.getAssociatedFolders()) {
+				for (final Object item2 : txnData.getFolders()) {
 					retVal.append("\n    TODO AssociatedFolders " + item2.getClass().getName());
 				}
 			}
 			retVal.append("\n");
 
 			retVal.append("  AssociatedDocuments:  ");
-			if (ss.getAssociatedDocuments().isEmpty()) {
+			if (txnData.getDocuments().isEmpty()) {
 				retVal.append("null");
 			} else {
-				for (final Object item2 : ss.getAssociatedDocuments()) {
+				for (final Object item2 : txnData.getDocuments()) {
 					retVal.append("\n    " + (String) item2);
 				}
 			}

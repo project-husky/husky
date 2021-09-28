@@ -20,9 +20,9 @@ package org.ehealth_connector.communication.mpi.impl.pix;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.ehealth_connector.common.utils.OID;
 import org.ehealth_connector.communication.mpi.V3Message;
 import org.ehealth_connector.communication.utils.PixPdqV3Utils;
-import org.openhealthtools.ihe.utils.OID;
 
 import net.ihe.gazelle.hl7v3.coctmt030007UV.COCTMT030007UVPerson;
 import net.ihe.gazelle.hl7v3.prpain201301UV02.PRPAIN201301UV02MFMIMT700701UV01ControlActProcess;

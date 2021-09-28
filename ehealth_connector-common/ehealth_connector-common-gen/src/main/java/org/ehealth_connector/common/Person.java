@@ -131,4 +131,14 @@ public class Person {
 		return nl;
 	}
 
+	public org.openehealth.ipf.commons.ihe.xds.core.metadata.Person getIpfPerson() {
+		var person = new org.openehealth.ipf.commons.ihe.xds.core.metadata.Person();
+
+		if(mPerson.getName() != null && !mPerson.getName().isEmpty()) {
+			person.setName(Name.getIpfXpnName(mPerson.getName().get(0)));
+		}
+		
+		return person;
+	}
+
 }

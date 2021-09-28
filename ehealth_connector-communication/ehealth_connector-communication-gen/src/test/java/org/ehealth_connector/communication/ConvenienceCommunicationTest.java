@@ -17,9 +17,7 @@
 package org.ehealth_connector.communication;
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,7 +26,6 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 import org.ehealth_connector.common.communication.AffinityDomain;
 import org.ehealth_connector.common.communication.AtnaConfig.AtnaConfigMode;
@@ -40,18 +37,12 @@ import org.ehealth_connector.common.enums.DocumentDescriptor;
 import org.ehealth_connector.common.utils.Util;
 import org.ehealth_connector.xua.deserialization.impl.AssertionDeserializerImpl;
 import org.ehealth_connector.xua.exceptions.DeserializeException;
-import org.ehealth_connector.xua.exceptions.SerializeException;
 import org.ehealth_connector.xua.saml2.Assertion;
-import org.ehealth_connector.xua.serialization.impl.AssertionSerializerImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.openhealthtools.ihe.xds.response.XDSQueryResponseType;
-import org.openhealthtools.ihe.xua.XUAAssertion;
-import org.openhealthtools.ihe.xua.context.XUAModuleContext;
 import org.opensaml.core.config.InitializationException;
 import org.opensaml.core.config.InitializationService;
-import org.w3c.dom.Element;
 
 @Disabled
 class ConvenienceCommunicationTest {
@@ -85,7 +76,6 @@ class ConvenienceCommunicationTest {
 	AffinityDomain affinityDomain;
 	Destination repo;
 	ConvenienceCommunication c;
-	XDSQueryResponseType qr;
 	private Assertion testAssertion;
 
 	@BeforeEach
@@ -137,28 +127,4 @@ class ConvenienceCommunicationTest {
 		}
 	}
 
-	@Test
-	void testAddXUserAssertion() throws SerializeException {
-		c.addXUserAssertion(testAssertion);
-
-		final XUAModuleContext xuaContext = XUAModuleContext.getContext();
-		assertTrue(xuaContext.isXUAEnabled());
-
-		final List<String> activeActions = xuaContext.getConfig().getXUAEnabledActions();
-		assertNotNull(activeActions);
-		assertTrue(activeActions.contains("urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b"));
-
-		final XUAAssertion activeAssertion = xuaContext.getActiveAssertion();
-		assertNotNull(activeAssertion);
-
-	}
-
-	@Test
-	void testCreateXUAAssertion() throws SerializeException {
-		final Element assertionElement = new AssertionSerializerImpl().toXmlElement(testAssertion);
-		final XUAAssertion ohtAssertion = new XUAAssertion(assertionElement);
-		final String atnaUserName = ohtAssertion.getAtnaUsername();
-		assertNotNull(atnaUserName);
-		assertEquals("<7601000080776@https://ehealthsuisse.ihe-europe.net/STS>", atnaUserName);
-	}
 }

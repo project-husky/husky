@@ -24,7 +24,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.ehealth_connector.communication.testhelper.XdsTestUtils;
 import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.query.FindFoldersQuery;
-import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,7 +43,7 @@ class FindFoldersStoredQueryTest extends XdsTestUtils {
 	 * @throws MalformedStoredQueryException
 	 */
 	@Test
-	void testFindFoldersStoredQuery() throws MalformedStoredQueryException {
+	void testFindFoldersStoredQuery() {
 		final FindFoldersStoredQuery q = new FindFoldersStoredQuery(patientId, availabilityStatus);
 
 		assertTrue(q.getIpfQuery() instanceof FindFoldersQuery);

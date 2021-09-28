@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.eclipse.emf.common.util.Enumerator;
-
 import net.ihe.gazelle.hl7v3.coctmt090003UV01.COCTMT090003UV01AssignedEntity;
 import net.ihe.gazelle.hl7v3.coctmt090003UV01.COCTMT090003UV01Organization;
 import net.ihe.gazelle.hl7v3.coctmt150002UV01.COCTMT150002UV01Organization;
@@ -481,23 +479,6 @@ public class PixPdqV3Utils {
 		}
 
 		return en;
-	}
-
-	/**
-	 * Helper method for turning an Enumerator into a list
-	 *
-	 * @param Enumerator (the enum value that will make up the list)
-	 * @return List of Enumerator containing the single supplied value.
-	 */
-	public static List<Enumerator> createEnumeratorList(Enumerator enumValue) {
-
-		// create a list to hold the "use" value
-		List<Enumerator> enumList = new ArrayList<>();
-
-		// add the SRCH value;
-		enumList.add(enumValue);
-
-		return enumList;
 	}
 
 	/**
