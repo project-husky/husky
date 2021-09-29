@@ -38,7 +38,7 @@ public class SimplePpfClientTest {
 	@Autowired
 	private CamelContext camelContext;
 	private String urlToPpq = "https://ehealthsuisse.ihe-europe.net:10443/ppq-repository";
-	private String clientKeyStore = "/src/test/resources/testKeystore.jks";
+	private String clientKeyStore = "src/test/resources/testKeystore.jks";
 	private String clientKeyStorePass = "changeit";
 
 	@BeforeEach
@@ -46,7 +46,8 @@ public class SimplePpfClientTest {
 		try {
 			InitializationService.initialize();
 
-			System.setProperty("javax.net.ssl.trustStoreType", "JKS");
+			File file = new File(clientKeyStore);
+
 			System.setProperty("javax.net.ssl.keyStore", clientKeyStore);
 			System.setProperty("javax.net.ssl.keyStorePassword", clientKeyStorePass);
 			System.setProperty("javax.net.ssl.trustStore", clientKeyStore);
@@ -78,6 +79,8 @@ public class SimplePpfClientTest {
 				.create(samlAssertion);
 
 		PrivacyPolicyFeedResponse response = client.send(null, ppFeedRequest);
+
+		response.getExceptions().get(0).printStackTrace();
 
 		assertNull(response.getExceptions());
 	}
