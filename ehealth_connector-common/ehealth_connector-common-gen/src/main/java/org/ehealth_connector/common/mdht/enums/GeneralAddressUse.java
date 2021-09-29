@@ -17,9 +17,8 @@
 
 package org.ehealth_connector.common.mdht.enums;
 
-import org.ehealth_connector.common.mdht.Code;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.hl7cdar2.CE;
 
 /**
  * <div class="en">Address uses that can apply to both postal and
@@ -194,7 +193,7 @@ public enum GeneralAddressUse {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CE getCE() {
-		final CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final var ce = new CE();
 		ce.setCodeSystem(CODE_SYSTEM_OID);
 		ce.setCode(code);
 		ce.setDisplayName(displayName);
@@ -208,8 +207,7 @@ public enum GeneralAddressUse {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		final Code ehcCode = new Code(CODE_SYSTEM_OID, code, displayName);
-		return ehcCode;
+		return new Code(code, CODE_SYSTEM_OID, displayName);
 	}
 
 	/**

@@ -23,18 +23,26 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Date;
 import java.util.List;
 
+import org.ehealth_connector.common.Address;
+import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.Organization;
+import org.ehealth_connector.common.Telecom;
+import org.ehealth_connector.common.basetypes.AddressBaseType;
+import org.ehealth_connector.common.basetypes.NameBaseType;
+import org.ehealth_connector.common.basetypes.OrganizationBaseType;
 import org.ehealth_connector.common.enums.CodeSystems;
+import org.ehealth_connector.common.enums.PostalAddressUse;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
-import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Author;
+import org.ehealth_connector.common.hl7cdar2.TS;
 import org.ehealth_connector.common.testhelpers.AbstractTestHelper;
-import org.ehealth_connector.common.utils.DateUtilMdht;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.TS;
-import org.openhealthtools.mdht.uml.hl7.datatypes.impl.DatatypesFactoryImpl;
 
 /**
  * Test of class Author
@@ -44,7 +52,7 @@ public class AuthorTest {
 
 	public static final int NUMBER_OF_RANDOM_STRING_LETTERS = 129;
 
-	private org.openhealthtools.mdht.uml.cda.Author testAuthorMdht;
+	private POCDMT000040Author testAuthorMdht;
 
 	private String testGivenName;
 	private String testFamilyName;
@@ -65,7 +73,7 @@ public class AuthorTest {
 
 	private String testCity_1;
 
-	private PostalAddressUse testUsage_1;
+	private org.ehealth_connector.common.enums.PostalAddressUse testUsage_1;
 
 	private String testStreet_2;
 
@@ -77,7 +85,7 @@ public class AuthorTest {
 
 	private String testCity_2;
 
-	private PostalAddressUse testUsage_2;
+	private org.ehealth_connector.common.enums.PostalAddressUse testUsage_2;
 
 	private Address testAddress2;
 
@@ -107,7 +115,7 @@ public class AuthorTest {
 
 	private String testOrgName1;
 
-	private Telecoms testTelecoms;
+	private Telecom testTelecoms;
 
 	private String testOrgPhone1;
 
@@ -137,20 +145,23 @@ public class AuthorTest {
 	@BeforeEach
 	public void setUp() throws Exception {
 
-		testAuthorMdht = CDAFactory.eINSTANCE.createAuthor();
+		testAuthorMdht = new POCDMT000040Author();
 
-		final DatatypesFactory dttF = new DatatypesFactoryImpl();
-		testTs1 = dttF.createTS();
+		testTs1 = new TS();
 		testTs1.setValue("10:00:12");
 		testAuthorMdht.setTime(testTs1);
 
 		testGivenName = "GivenAuthor";
 		testFamilyName = "FamilyAuthor";
-		testName1 = new Name(testGivenName, testFamilyName);
+		testName1 = new Name();
+		testName1.setGiven(testGivenName);
+		testName1.setFamily(testFamilyName);
 
 		testGivenName2 = "Given My Author";
 		testFamilyName2 = "Family My Author";
-		testName2 = new Name(testGivenName2, testFamilyName2);
+		testName2 = new Name();
+		testName2.setGiven(testGivenName2);
+		testName2.setFamily(testFamilyName2);
 
 		testGln1 = "7601001401563";
 		testGln2 = "7601001401564";
@@ -160,33 +171,45 @@ public class AuthorTest {
 		testAddressline1_1 = testStreet_1 + " " + testHouseNumber_1;
 		testZip_1 = "9999";
 		testCity_1 = "Musterhausen";
-		testUsage_1 = PostalAddressUse.BUSINESS;
-		testAddress = new Address(testAddressline1_1, testZip_1, testCity_1, testUsage_1);
+		testUsage_1 = PostalAddressUse.WORK_PLACE;
+		testAddress = new Address(new AddressBaseType());
+		testAddress.setStreetAddressLine1(testAddressline1_1);
+		testAddress.setPostalCode(testZip_1);
+		testAddress.setCity(testCity_1);
+		testAddress.setUsage(testUsage_1);
 
 		testStreet_2 = "Meistergasse";
 		testHouseNumber_2 = "11";
 		testAddressline1_2 = testStreet_2 + " " + testHouseNumber_2;
 		testZip_2 = "1234";
 		testCity_2 = "Meisterdorf";
-		testUsage_2 = PostalAddressUse.PRIVATE;
-		testAddress2 = new Address(testAddressline1_2, testZip_2, testCity_2, testUsage_2);
+		testUsage_2 = PostalAddressUse.PRIMARY_HOME;
+		testAddress2 = new Address(new AddressBaseType());
+		testAddress2.setStreetAddressLine1(testAddressline1_2);
+		testAddress2.setPostalCode(testZip_2);
+		testAddress2.setCity(testCity_2);
+		testAddress2.setUsage(testUsage_2);
 
 		testCodeSystem1 = CodeSystems.GLN;
 		testId1 = "1.2.3.4.5.6.7.8.9.0";
-		testIdentificator1 = new Identificator(testCodeSystem1, testId1);
+		testIdentificator1 = new Identificator(testCodeSystem1.getCodeSystemId(), testId1);
 
 		testCodeSystem2 = CodeSystems.GTIN;
 		testId2 = "100.99.88.77.66";
-		testIdentificator2 = new Identificator(testCodeSystem2, testId2);
+		testIdentificator2 = new Identificator(testCodeSystem2.getCodeSystemId(), testId2);
 
 		testOrgName1 = "Arpage AG";
-		testOrgcanization1 = new Organization(testOrgName1);
+		testOrgcanization1 = new Organization(new OrganizationBaseType());
+		NameBaseType orgName = new NameBaseType();
+		orgName.setName(testOrgName1);
+		testOrgcanization1.setPrimaryName(orgName);
 
-		testTelecoms = new Telecoms();
+		testTelecoms = new Telecom();
 		testOrgPhone1 = "+41 44 500 55 20";
 		testOrgPhoneUsage1 = TelecomAddressUse.BUSINESS;
-		testTelecoms.addPhone(testOrgPhone1, testOrgPhoneUsage1);
-		testOrgcanization1.setTelecoms(testTelecoms);
+		testTelecoms.setPhone(testOrgPhone1);
+		testTelecoms.setUsage(testOrgPhoneUsage1);
+		testOrgcanization1.setPrimaryTelecom(testTelecoms);
 
 		ts1 = AbstractTestHelper.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
 		ts2 = AbstractTestHelper.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
@@ -195,15 +218,15 @@ public class AuthorTest {
 		ts5 = AbstractTestHelper.generateString(NUMBER_OF_RANDOM_STRING_LETTERS);
 
 		// Convenience API Types
-		code1 = new Code(ts1, ts2, ts3, ts4);
-		code2 = new Code(ts5, ts4, ts3, ts2);
+		code1 = new Code(ts1, ts2, ts3);
+		code2 = new Code(ts5, ts4, ts3);
 
-		testDate1 = DateUtilMdht.date("28.02.2018");
+		testDate1 = DateUtil.parseDateyyyyMMdd("20180228");
 	}
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#addAddress(org.ehealth_connector.common.mdht.Address)}
+	 * {@link org.ehealth_connector.common.Author#addAddress(org.ehealth_connector.common.mdht.Address)}
 	 * .
 	 */
 	@Test
@@ -211,25 +234,25 @@ public class AuthorTest {
 		final Author auth = new Author(testName1);
 		auth.addAddress(testAddress);
 		final Address ref = auth.getAddress();
-		assertEquals(testAddress.getAddressline1(), ref.getAddressline1());
+		assertEquals(testAddress.getStreetAddressLine1(), ref.getStreetAddressLine1());
 
 		final List<Address> addrs1 = auth.getAddresses();
 		assertNotNull(addrs1);
 		assertEquals(1, addrs1.size());
-		assertEquals(testAddress.getAddressline1(), addrs1.get(0).getAddressline1());
+		assertEquals(testAddress.getStreetAddressLine1(), addrs1.get(0).getStreetAddressLine1());
 
 		auth.addAddress(testAddress2);
 		final List<Address> addrs2 = auth.getAddresses();
 		assertNotNull(addrs2);
 		assertEquals(2, addrs2.size());
-		assertEquals(testAddress.getAddressline1(), addrs2.get(0).getAddressline1());
-		assertEquals(testAddress2.getAddressline1(), addrs2.get(1).getAddressline1());
+		assertEquals(testAddress.getStreetAddressLine1(), addrs2.get(0).getStreetAddressLine1());
+		assertEquals(testAddress2.getStreetAddressLine1(), addrs2.get(1).getStreetAddressLine1());
 
 	}
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#addId(org.ehealth_connector.common.mdht.Identificator)}
+	 * {@link org.ehealth_connector.common.Author#addId(org.ehealth_connector.common.mdht.Identificator)}
 	 * .
 	 */
 	@Test
@@ -243,25 +266,25 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#addName(org.ehealth_connector.common.mdht.Name)}
+	 * {@link org.ehealth_connector.common.Author#addName(org.ehealth_connector.common.mdht.Name)}
 	 * .
 	 */
 	@Test
 	public void testAddName() {
 		final Author auth = new Author(testName1);
 		final Name ref = auth.getName();
-		assertEquals(testName1.getFamilyName(), ref.getFamilyName());
+		assertEquals(testName1.getFamily(), ref.getFamily());
 		final List<Name> names1 = auth.getNames();
 		assertNotNull(names1);
 		assertEquals(1, names1.size());
-		assertEquals(testName1.getFamilyName(), names1.get(0).getFamilyName());
+		assertEquals(testName1.getFamily(), names1.get(0).getFamily());
 
 		auth.addName(testName2);
 		final List<Name> names2 = auth.getNames();
 		assertNotNull(names2);
 		assertEquals(2, names2.size());
-		assertEquals(testName1.getFamilyName(), names2.get(0).getFamilyName());
-		assertEquals(testName2.getFamilyName(), names2.get(1).getFamilyName());
+		assertEquals(testName1.getFamily(), names2.get(0).getFamily());
+		assertEquals(testName2.getFamily(), names2.get(1).getFamily());
 	}
 
 	@Test
@@ -286,34 +309,34 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#Author(org.openhealthtools.mdht.uml.cda.Author)}
+	 * {@link org.ehealth_connector.common.Author#Author(org.openhealthtools.mdht.uml.cda.Author)}
 	 * .
 	 */
 	@Test
 	@Disabled
 	public void testAuthorAuthor() {
 		final Author auth = new Author(testAuthorMdht);
-		final org.openhealthtools.mdht.uml.cda.Author ref = auth.getAuthorMdht();
+		final POCDMT000040Author ref = auth.getAuthorMdht();
 		assertNotNull(testAuthorMdht);
 		assertEquals(testTs1, ref.getTime());
 	}
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#Author(org.ehealth_connector.common.mdht.Name)}
+	 * {@link org.ehealth_connector.common.Author#Author(org.ehealth_connector.common.mdht.Name)}
 	 * .
 	 */
 	@Test
 	public void testAuthorName() {
 		final Author auth = new Author(testName1);
 		final Name ref = auth.getName();
-		assertEquals(testFamilyName, ref.getFamilyName());
-		assertEquals(testGivenName, ref.getAllGivenNames());
+		assertEquals(testFamilyName, ref.getFamily());
+		assertEquals(testGivenName, ref.getGiven());
 	}
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#Author(org.ehealth_connector.common.mdht.Name, java.lang.String)}
+	 * {@link org.ehealth_connector.common.Author#Author(org.ehealth_connector.common.mdht.Name, java.lang.String)}
 	 * .
 	 */
 	@Test
@@ -321,26 +344,15 @@ public class AuthorTest {
 		final Author auth = new Author(testName1, testGln1);
 
 		final Name ref = auth.getName();
-		assertEquals(testFamilyName, ref.getFamilyName());
-		assertEquals(testGivenName, ref.getAllGivenNames());
+		assertEquals(testFamilyName, ref.getFamily());
+		assertEquals(testGivenName, ref.getGiven());
 
 		assertEquals(testGln1, auth.getGln());
 	}
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#copyMdhtAuthor()}.
-	 */
-	@Test
-	public void testCopyMdhtAuthor() {
-		final Author auth = new Author(testAuthorMdht);
-		final org.openhealthtools.mdht.uml.cda.Author ref = auth.copyMdhtAuthor();
-		assertEquals(testAuthorMdht.getTime().getValue(), ref.getTime().getValue());
-	}
-
-	/**
-	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#getCompleteName()}.
+	 * {@link org.ehealth_connector.common.Author#getCompleteName()}.
 	 */
 	@Test
 	public void testGetCompleteName() {
@@ -351,7 +363,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#getGlnAsIdentificator()}.
+	 * {@link org.ehealth_connector.common.Author#getGlnAsIdentificator()}.
 	 */
 	@Test
 	public void testGetGlnAsIdentificator() {
@@ -365,7 +377,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#getGln()}.
+	 * {@link org.ehealth_connector.common.Author#getGln()}.
 	 */
 	@Test
 	// @Ignore("setGln does not replace the gln set by constructor")
@@ -383,7 +395,7 @@ public class AuthorTest {
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#getOrganization()}.
+	 * {@link org.ehealth_connector.common.Author#getOrganization()}.
 	 */
 	@Test
 	public void testSetGetOrganization() {
@@ -392,29 +404,27 @@ public class AuthorTest {
 
 		final Organization ref = auth.getOrganization();
 		assertNotNull(ref);
-		assertEquals(testOrgcanization1.getName(), ref.getName());
-		assertEquals(testOrgcanization1.getTelecoms().getPhones().get(testOrgPhone1),
-				ref.getTelecoms().getPhones().get(testOrgPhone1));
+		assertEquals(testOrgcanization1.getPrimaryName().getName(), ref.getPrimaryName().getName());
+		assertEquals(testOrgcanization1.getPrimaryTelecom().getValue(), ref.getPrimaryTelecom().getValue());
 	}
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#getTelecoms()} .
+	 * {@link org.ehealth_connector.common.Author#getTelecoms()} .
 	 */
 	@Test
 	public void testSetGetTelecoms() {
 		final Author auth = new Author(testName1, testGln1);
-		auth.setTelecoms(testTelecoms);
+		auth.setTelecoms(List.of(testTelecoms));
 
-		final Telecoms ref = auth.getTelecoms();
+		final Telecom ref = auth.getTelecoms().get(0);
 		assertNotNull(ref);
-		assertEquals(testTelecoms.getPhones().get(testOrgPhone1),
-				ref.getPhones().get(testOrgPhone1));
+		assertEquals(testTelecoms.getValue(), ref.getValue());
 	}
 
 	/**
 	 * Test method for
-	 * {@link org.ehealth_connector.common.mdht.Author#getTime()}.
+	 * {@link org.ehealth_connector.common.Author#getTime()}.
 	 */
 	@Test
 	@Disabled

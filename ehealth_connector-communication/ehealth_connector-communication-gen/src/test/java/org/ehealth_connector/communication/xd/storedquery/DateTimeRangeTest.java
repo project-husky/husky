@@ -18,13 +18,13 @@ package org.ehealth_connector.communication.xd.storedquery;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
 import org.ehealth_connector.common.utils.DateUtil;
-import org.ehealth_connector.common.utils.DateUtilMdht;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openhealthtools.ihe.xds.consumer.query.MalformedQueryException;
@@ -32,7 +32,7 @@ import org.openhealthtools.ihe.xds.consumer.query.MalformedQueryException;
 /**
  * Test of class DateTimeRange
  */
-public class DateTimeRangeTest {
+class DateTimeRangeTest {
 
 	private Date testDate1;
 	private Date testDate2;
@@ -59,38 +59,42 @@ public class DateTimeRangeTest {
 	}
 
 	@Test
-	public void testDateTimeRange() throws MalformedQueryException {
+	void testDateTimeRange() throws MalformedQueryException {
 
 		final DateTimeRange d = new DateTimeRange(DateTimeRangeAttributes.CREATION_TIME, testDate1,
 				testDate2);
-		assertTrue(d.getFrom().getTime() == testDate1.getTime());
-		assertTrue(d.getTo().getTime() == testDate2.getTime());// 201401012300
+		assertEquals(d.getFrom().toInstant(), testDate1.toInstant());
+		assertEquals(d.getTo().toInstant(), testDate2.toInstant());// 201401012300
 
-		assertTrue(DateUtilMdht.format(d.getFrom()).equals("19800521022211"));
-		assertTrue(DateUtilMdht.format(d.getTo()).equals("20150521133459"));
+		assertEquals(DateUtil.formatDateTime(d.getFrom()), "19800521022211");
+		assertEquals(DateUtil.formatDateTime(d.getTo()), "20150521133459");
 
-		assertEquals("19800521022211", d.getOhtDateTimeRange().getFrom());
-		assertEquals("20150521133459", d.getOhtDateTimeRange().getTo());
+		assertEquals("19800521022211", d.getOhtDateTimeRange().getFrom().getDateTime()
+				.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneId.systemDefault())));
+		assertEquals("20150521133459", d.getOhtDateTimeRange().getTo().getDateTime()
+				.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneId.systemDefault())));
 
 	}
 
 	@Test
-	public void testSetGetFrom() throws MalformedQueryException {
+	void testSetGetFrom() throws MalformedQueryException {
 		final DateTimeRange d = new DateTimeRange(DateTimeRangeAttributes.CREATION_TIME, testDate1,
 				testDate2);
 		d.setFrom(testDateTo2);
-		assertEquals(testDateTo2, d.getFrom());
+		assertEquals(testDateTo2.toInstant(), d.getFrom().toInstant());
 	}
 
 	@Test
-	public void testSetGetTo() throws MalformedQueryException {
+	void testSetGetTo() throws MalformedQueryException {
 		final DateTimeRange d = new DateTimeRange(DateTimeRangeAttributes.CREATION_TIME, testDate1,
 				testDate2);
 
 		d.setTo(testDateTo1);
 
-		assertEquals(testDateTo1, d.getTo());
+		assertEquals(testDateTo1.toInstant(), d.getTo().toInstant());
 
-		assertEquals(testDateToStr1, d.getToAsUsFormattedString());
+		assertEquals(testDateToStr1,
+				d.getTo()
+						.format(DateTimeFormatter.ofPattern("yyyyMMddHHmmss").withZone(ZoneId.systemDefault())));
 	}
 }

@@ -5,8 +5,10 @@ import java.io.StringWriter;
 import java.net.URI;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -186,7 +188,12 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 
 		System.out.println(stringWriter.toString());
 
-		final var exchange = send(endpoint, stringWriter.toString(), assertion, "urn:hl7-org:v3:PRPA_IN201305UV02");
+		Map<String, String> outgoingHeaders = new HashMap<>();
+		outgoingHeaders.put("Accept", "application/soap+xml");
+		outgoingHeaders.put("Content-Type",
+				"application/soap+xml; charset=UTF-8; action=\"urn:hl7-org:v3:PRPA_IN201305UV02\"");
+
+		final var exchange = send(endpoint, stringWriter.toString(), assertion, outgoingHeaders);
 
 		var xml = exchange.getMessage().getBody(String.class);
 
@@ -211,7 +218,12 @@ public class PdqV3Query extends PixPdqV3QueryBase {
 
 		System.out.println(stringWriter.toString());
 
-		final var exchange = send(endpoint, stringWriter.toString(), assertion, "urn:hl7-org:v3:QUQI_IN000003UV01");
+		Map<String, String> outgoingHeaders = new HashMap<>();
+		outgoingHeaders.put("Accept", "application/soap+xml");
+		outgoingHeaders.put("Content-Type",
+				"application/soap+xml; charset=UTF-8; action=\"urn:hl7-org:v3:QUQI_IN000003UV01\"");
+
+		final var exchange = send(endpoint, stringWriter.toString(), assertion, outgoingHeaders);
 
 		var xml = exchange.getMessage().getBody(String.class);
 

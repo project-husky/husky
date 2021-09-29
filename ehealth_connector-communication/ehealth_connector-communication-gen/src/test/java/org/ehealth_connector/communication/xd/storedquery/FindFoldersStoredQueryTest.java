@@ -19,18 +19,19 @@ package org.ehealth_connector.communication.xd.storedquery;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.ehealth_connector.communication.testhelper.XdsTestUtils;
 import org.junit.jupiter.api.Test;
+import org.openehealth.ipf.commons.ihe.xds.core.requests.query.FindFoldersQuery;
 import org.openhealthtools.ihe.xds.consumer.storedquery.MalformedStoredQueryException;
-import org.openhealthtools.ihe.xds.consumer.storedquery.StoredQueryParameterList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * Test of class FindFoldersStoredQuery
  */
-public class FindFoldersStoredQueryTest extends XdsTestUtils {
+class FindFoldersStoredQueryTest extends XdsTestUtils {
 
 	/** The SLF4J logger instance. */
 	protected final Logger log = LoggerFactory.getLogger(getClass());
@@ -43,19 +44,17 @@ public class FindFoldersStoredQueryTest extends XdsTestUtils {
 	 * @throws MalformedStoredQueryException
 	 */
 	@Test
-	public void testFindFoldersStoredQuery() throws MalformedStoredQueryException {
+	void testFindFoldersStoredQuery() throws MalformedStoredQueryException {
 		final FindFoldersStoredQuery q = new FindFoldersStoredQuery(patientId, availabilityStatus);
 
-		final StoredQueryParameterList sqpl = q.getOhtStoredQuery().getQueryParameters();
+		assertTrue(q.getIpfQuery() instanceof FindFoldersQuery);
 
-		final String patientIdRootRef = sqpl.get("$XDSFolderPatientId");
-		assertEquals(patientId.getRoot(), extractByRegex(".*\\&(.*)\\&.*", patientIdRootRef));
-		assertEquals(patientId.getExtension(),
-				extractByRegex("'(.*)\\^\\^\\^\\&.*\\&.*'", patientIdRootRef));
+		FindFoldersQuery sqpl = (FindFoldersQuery) q.getIpfQuery();
 
-		final String statusRef = sqpl.get("$XDSFolderStatus");
-		assertEquals(availabilityStatus.getName(), extractByRegex(
-				"\\(\\'urn:oasis:names:tc:ebxml-regrep:StatusType:(.*)\\'\\)", statusRef));
+		assertEquals(patientId.getRoot(), sqpl.getPatientId().getAssigningAuthority().getUniversalId());
+		assertEquals(patientId.getExtension(), sqpl.getPatientId().getId());
+
+		assertEquals(availabilityStatus.getQueryOpcode(), sqpl.getStatus().get(0).getQueryOpcode());
 
 	}
 

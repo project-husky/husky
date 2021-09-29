@@ -19,9 +19,10 @@ package org.ehealth_connector.common.mdht;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.hl7cdar2.PN;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040PlayingEntity;
 
 /**
  * The Class PlayingEntity. An entity with a name.
@@ -29,13 +30,13 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 public class PlayingEntity {
 
 	/** The MDHT playing entity. */
-	private org.openhealthtools.mdht.uml.cda.PlayingEntity mPlayingEntity;
+	private POCDMT000040PlayingEntity mPlayingEntity;
 
 	/**
 	 * Instantiates a new playing entity.
 	 */
 	public PlayingEntity() {
-		setPlayingEntity(CDAFactory.eINSTANCE.createPlayingEntity());
+		setPlayingEntity(new POCDMT000040PlayingEntity());
 		// mPlayingEntity.setClassCode(EntityClassRoot.MIC);
 	}
 
@@ -45,7 +46,7 @@ public class PlayingEntity {
 	 * @param mdht
 	 *            the mdht
 	 */
-	public PlayingEntity(org.openhealthtools.mdht.uml.cda.PlayingEntity mdht) {
+	public PlayingEntity(POCDMT000040PlayingEntity mdht) {
 		setPlayingEntity(mdht);
 	}
 
@@ -57,16 +58,7 @@ public class PlayingEntity {
 	 *            name
 	 */
 	public void addName(Name name) {
-		getPlayingEntity().getNames().add(name.copyMdhtPn());
-	}
-
-	/**
-	 * Copy playing entity.
-	 *
-	 * @return the org.openhealthtools.mdht.uml.cda. playing entity
-	 */
-	public org.openhealthtools.mdht.uml.cda.PlayingEntity copyPlayingEntity() {
-		return EcoreUtil.copy(getPlayingEntity());
+		getPlayingEntity().getName().add(name.getHl7CdaR2Pn());
 	}
 
 	/**
@@ -79,25 +71,15 @@ public class PlayingEntity {
 	}
 
 	/**
-	 * Gets the mdht playing entity.
-	 *
-	 * @return the mdht playing entity
-	 */
-	public org.openhealthtools.mdht.uml.cda.PlayingEntity getMdhtPlayingEntity() {
-		return getPlayingEntity();
-	}
-
-	/**
 	 * <div class="en">Gets the names.</div> <div class="de">Liefert alle
 	 * Nachnamen</div> <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @return <div class="en">the names</div>
 	 */
 	public List<Name> getNames() {
-		final List<Name> nl = new ArrayList<Name>();
-		for (final PN mName : getPlayingEntity().getNames()) {
-			final Name name = new Name(mName);
-			nl.add(name);
+		final List<Name> nl = new ArrayList<>();
+		for (final PN mName : getPlayingEntity().getName()) {
+			nl.add(new Name(mName));
 		}
 		return nl;
 	}
@@ -107,7 +89,7 @@ public class PlayingEntity {
 	 *
 	 * @return the playingEntity
 	 */
-	public org.openhealthtools.mdht.uml.cda.PlayingEntity getPlayingEntity() {
+	public POCDMT000040PlayingEntity getPlayingEntity() {
 		return mPlayingEntity;
 	}
 
@@ -118,7 +100,7 @@ public class PlayingEntity {
 	 *            the new code
 	 */
 	public void setCode(Code code) {
-		getPlayingEntity().setCode(code.getCE());
+		getPlayingEntity().setCode(code.getHl7CdaR2Ce());
 	}
 
 	/**
@@ -127,7 +109,7 @@ public class PlayingEntity {
 	 * @param playingEntity
 	 *            the playingEntity to set
 	 */
-	public void setPlayingEntity(org.openhealthtools.mdht.uml.cda.PlayingEntity playingEntity) {
+	public void setPlayingEntity(POCDMT000040PlayingEntity playingEntity) {
 		mPlayingEntity = playingEntity;
 	}
 }

@@ -28,23 +28,23 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import org.ehealth_connector.common.mdht.Code;
-import org.ehealth_connector.common.mdht.Identificator;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.Identificator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 import org.openhealthtools.ihe.utils.OID;
-import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;
 
 /**
  * <div class="en">Testclass for
  * {@link org.ehealth_connector.communication.FolderMetadata}.</div>
  *
  */
-public class FolderMetadataTest {
+class FolderMetadataTest {
 
-	private AvailabilityStatusType testAvailabilityStatus1;
-	private AvailabilityStatusType testAvailabilityStatus2;
+	private AvailabilityStatus testAvailabilityStatus1;
+	private AvailabilityStatus testAvailabilityStatus2;
 
 	private List<Code> testCodeList;
 	private Code testCode1;
@@ -72,12 +72,12 @@ public class FolderMetadataTest {
 	 */
 	@BeforeEach
 	public void setUp() throws Exception {
-		testAvailabilityStatus1 = AvailabilityStatusType.WITHDRAWN_LITERAL;
-		testAvailabilityStatus2 = AvailabilityStatusType.DEPRECATED_LITERAL;
+		testAvailabilityStatus1 = AvailabilityStatus.APPROVED;
+		testAvailabilityStatus2 = AvailabilityStatus.DEPRECATED;
 		testCodeList = new ArrayList<>();
 
-		testCode1 = new Code("1.2.3.4", "TestCode1");
-		testCode2 = new Code("5.6.7.8", "TestCode2");
+		testCode1 = new Code("1.2.3.4", "TestCode1", null);
+		testCode2 = new Code("5.6.7.8", "TestCode2", null);
 		testCodeList.add(testCode1);
 		testCodeList.add(testCode2);
 
@@ -102,7 +102,7 @@ public class FolderMetadataTest {
 	 * {@link org.ehealth_connector.communication.FolderMetadata#addCode(org.ehealth_connector.common.mdht.Code)}.
 	 */
 	@Test
-	public void testAddCode() {
+	void testAddCode() {
 		final FolderMetadata ref = new FolderMetadata();
 		assertNotNull(ref.getCodeList());
 		assertEquals(0, ref.getCodeList().size());
@@ -123,9 +123,9 @@ public class FolderMetadataTest {
 	 * {@link org.ehealth_connector.communication.FolderMetadata#setAvailabilityStatus(org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType)}.
 	 */
 	@Test
-	public void testSetAvailabilityStatus() {
+	void testSetAvailabilityStatus() {
 		final FolderMetadata ref = new FolderMetadata();
-		assertEquals(AvailabilityStatusType.SUBMITTED_LITERAL, ref.getAvailabilityStatus());
+		assertNull(ref.getAvailabilityStatus());
 
 		ref.setAvailabilityStatus(testAvailabilityStatus1);
 		assertEquals(testAvailabilityStatus1, ref.getAvailabilityStatus());
@@ -139,7 +139,7 @@ public class FolderMetadataTest {
 	 * {@link org.ehealth_connector.communication.FolderMetadata#setCodeList(java.util.List)}.
 	 */
 	@Test
-	public void testSetGetCodeList() {
+	void testSetGetCodeList() {
 		final FolderMetadata ref = new FolderMetadata();
 		assertNotNull(ref.getCodeList());
 		assertEquals(0, ref.getCodeList().size());
@@ -157,7 +157,7 @@ public class FolderMetadataTest {
 	 * {@link org.ehealth_connector.communication.FolderMetadata#setComments(java.lang.String)}.
 	 */
 	@Test
-	public void testSetGetComments() {
+	void testSetGetComments() {
 		final FolderMetadata ref = new FolderMetadata();
 		assertNull(ref.getComments());
 
@@ -171,7 +171,7 @@ public class FolderMetadataTest {
 	 * {@link org.ehealth_connector.communication.FolderMetadata#getEntryUUID()}.
 	 */
 	@Test
-	public void testSetGetEntryUUID() {
+	void testSetGetEntryUUID() {
 		final FolderMetadata ref = new FolderMetadata();
 		assertNull(ref.getEntryUUID());
 
@@ -191,12 +191,12 @@ public class FolderMetadataTest {
 	 */
 	@Test
 	@Disabled
-	public void testSetGetLastUpdateTime() {
+	void testSetGetLastUpdateTime() {
 		final FolderMetadata ref = new FolderMetadata();
 		assertNull(ref.getLastUpdateTime());
 
 		ref.setLastUpdateTime(testLastUpdateTime);
-		assertEquals(testLastUpdateTime, ref.getLastUpdateTime());
+		assertEquals(testLastUpdateTime.toInstant(), ref.getLastUpdateTime().toInstant());
 	}
 
 	/**
@@ -205,7 +205,7 @@ public class FolderMetadataTest {
 	 * {@link org.ehealth_connector.communication.FolderMetadata#getPatientId()}.
 	 */
 	@Test
-	public void testSetGetPatientId() {
+	void testSetGetPatientId() {
 		final FolderMetadata ref = new FolderMetadata();
 		assertNull(ref.getPatientId());
 
@@ -219,7 +219,7 @@ public class FolderMetadataTest {
 	 * {@link org.ehealth_connector.communication.FolderMetadata#getTitle()}.
 	 */
 	@Test
-	public void testSetGetTitle() {
+	void testSetGetTitle() {
 		final FolderMetadata ref = new FolderMetadata();
 		assertNull(ref.getTitle());
 
@@ -236,7 +236,7 @@ public class FolderMetadataTest {
 	 * {@link org.ehealth_connector.communication.FolderMetadata#getUniqueId()}.
 	 */
 	@Test
-	public void testSetGetUniqueId() {
+	void testSetGetUniqueId() {
 		final FolderMetadata ref = new FolderMetadata();
 		assertNull(ref.getUniqueId());
 

@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.communication;
 
-import org.openhealthtools.ihe.xds.document.DocumentDescriptor;
+import org.ehealth_connector.common.enums.DocumentDescriptor;
 
 public class DocDescriptor {
 

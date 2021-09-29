@@ -16,12 +16,14 @@
  */
 package org.ehealth_connector.common.mdht;
 
+import java.util.Map;
+
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.hl7cdar2.ANY;
+import org.ehealth_connector.common.hl7cdar2.IVLPQ;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040ObservationRange;
+import org.ehealth_connector.common.hl7cdar2.PQ;
 import org.ehealth_connector.common.mdht.enums.ObservationInterpretation;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
-import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
-import org.openhealthtools.mdht.uml.hl7.vocab.ActClassObservation;
-import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
 
 /**
  * The Class ObservationRange. This elements holds information about the range
@@ -30,15 +32,17 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ActMood;
 public class ObservationRange {
 
 	/** The MDHT Observation Range Object */
-	private org.openhealthtools.mdht.uml.cda.ObservationRange mObsR;
+	private POCDMT000040ObservationRange mObsR;
 
 	/**
 	 * Instantiates a new observation range.
 	 */
 	public ObservationRange() {
-		mObsR = CDAFactory.eINSTANCE.createObservationRange();
-		mObsR.setClassCode(ActClassObservation.OBS);
-		mObsR.setMoodCode(ActMood.EVNCRT);
+		mObsR = new POCDMT000040ObservationRange();
+		mObsR.getClassCode().clear();
+		mObsR.getClassCode().add("OBS");
+		mObsR.getMoodCode().clear();
+		mObsR.getMoodCode().add("EVNCRT");
 	}
 
 	/**
@@ -47,7 +51,7 @@ public class ObservationRange {
 	 * @param mdht
 	 *            the mdht
 	 */
-	public ObservationRange(org.openhealthtools.mdht.uml.cda.ObservationRange mdht) {
+	public ObservationRange(POCDMT000040ObservationRange mdht) {
 		mObsR = mdht;
 	}
 
@@ -73,15 +77,6 @@ public class ObservationRange {
 			return new Code(mObsR.getInterpretationCode());
 		}
 		return null;
-	}
-
-	/**
-	 * Method to get
-	 *
-	 * @return the obsR
-	 */
-	public org.openhealthtools.mdht.uml.cda.ObservationRange getObsR() {
-		return mObsR;
 	}
 
 	/**
@@ -113,7 +108,7 @@ public class ObservationRange {
 	 *            the new interpretation code
 	 */
 	public void setInterpretationCode(Code code) {
-		mObsR.setInterpretationCode(code.getCE());
+		mObsR.setInterpretationCode(code.getHl7CdaR2Ce());
 	}
 
 	/**
@@ -122,8 +117,17 @@ public class ObservationRange {
 	 * @param obsR
 	 *            the obsR to set
 	 */
-	public void setObsR(org.openhealthtools.mdht.uml.cda.ObservationRange obsR) {
+	public void setObsR(POCDMT000040ObservationRange obsR) {
 		mObsR = obsR;
+	}
+
+	/**
+	 * Method to get
+	 *
+	 * @return the obsR
+	 */
+	public POCDMT000040ObservationRange getObsR() {
+		return mObsR;
 	}
 
 	/**
@@ -134,15 +138,16 @@ public class ObservationRange {
 	 */
 	public void setValue(Value value) {
 		ANY val = value.getValue();
-		if (val instanceof IVL_PQ) {
-			IVL_PQ valIvlPq = (IVL_PQ) val;
-			if (valIvlPq.getLow() != null) {
-				if ("".equals(valIvlPq.getLow().getUnit()))
-					valIvlPq.getLow().setUnit(null);
+		if (val instanceof IVLPQ) {
+			var valIvlPq = (IVLPQ) val;
+
+			Map<String, PQ> elements = value.getPqElement(valIvlPq);
+
+			if (elements.get("low") != null && !elements.get("low").getUnit().isEmpty()) {
+					elements.get("low").setUnit(null);
 			}
-			if (valIvlPq.getHigh() != null) {
-				if ("".equals(valIvlPq.getHigh().getUnit()))
-					valIvlPq.getHigh().setUnit(null);
+			if (elements.get("high") != null && !elements.get("high").getUnit().isEmpty()) {
+					elements.get("high").setUnit(null);
 			}
 		}
 		mObsR.setValue(val);

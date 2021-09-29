@@ -49,7 +49,8 @@ public class Name {
 	 *            <div class="it"></div>
 	 */
 	public Name(ON organizationName) {
-		mPn = Util.createPnFromOn(organizationName);
+		mPn = DatatypesFactory.eINSTANCE.createPN();
+		mPn.addText(organizationName.getText());
 	}
 
 	/**
@@ -186,7 +187,7 @@ public class Name {
 	 * @return das suffix Objekt
 	 */
 	public String getAllFamilyNames() {
-		return Util.joinEListStr(mPn.getFamilies());
+		return mPn.getFamilies().toString();
 	}
 
 	/**
@@ -196,7 +197,7 @@ public class Name {
 	 * @return Vornamen
 	 */
 	public String getAllGivenNames() {
-		return Util.joinEListStr(mPn.getGivens());
+		return mPn.getGivens().toString();
 	}
 
 	/**
@@ -287,7 +288,7 @@ public class Name {
 	 * @return das prefix Objekt
 	 */
 	public String getPrefixes() {
-		return Util.joinEListStr(mPn.getPrefixes());
+		return mPn.getPrefixes().toString();
 	}
 
 	/**
@@ -298,7 +299,7 @@ public class Name {
 	 * @return das suffix Objekt
 	 */
 	public String getSuffixes() {
-		return Util.joinEListStr(mPn.getSuffixes());
+		return mPn.getSuffixes().toString();
 	}
 
 	/**

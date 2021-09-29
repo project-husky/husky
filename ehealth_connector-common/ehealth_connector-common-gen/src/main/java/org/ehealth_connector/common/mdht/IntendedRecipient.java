@@ -17,13 +17,20 @@
 package org.ehealth_connector.common.mdht;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.common.Address;
+import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.Organization;
+import org.ehealth_connector.common.Person;
+import org.ehealth_connector.common.Telecom;
+import org.ehealth_connector.common.hl7cdar2.AD;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040IntendedRecipient;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Person;
+import org.ehealth_connector.common.hl7cdar2.TEL;
 import org.ehealth_connector.common.utils.Util;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.ihe.lab.LABFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 
 /**
  * The Class IntendedRecipient. This element contains information about a
@@ -32,15 +39,13 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
 public class IntendedRecipient {
 
 	/** The MDHT intended recipient object. */
-	private org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient mIntendedRecipient;
+	private POCDMT000040IntendedRecipient mIntendedRecipient;
 
 	/**
 	 * Standard constructor.
 	 */
 	public IntendedRecipient() {
-		this.setIntendedRecipient(LABFactory.eINSTANCE.createIntendedRecipient().init());
-		this.getIntendedRecipient()
-				.setIntendedRecipient(CDAFactory.eINSTANCE.createIntendedRecipient());
+		this.setIntendedRecipient(new POCDMT000040IntendedRecipient());
 	}
 
 	/**
@@ -57,9 +62,10 @@ public class IntendedRecipient {
 	 * @param telecoms
 	 *            the telecoms
 	 */
-	public IntendedRecipient(Name name, Identificator id, Address address, Telecoms telecoms) {
+	public IntendedRecipient(Name name, Identificator id, Address address, List<Telecom> telecoms) {
 		this();
-		final Person p = new Person(name);
+		final var p = new Person();
+		p.addName(name);
 		setInformationRecipient(p);
 		addId(id);
 		addAddress(address);
@@ -72,7 +78,7 @@ public class IntendedRecipient {
 	 * @param mdht
 	 *            the mdht object
 	 */
-	public IntendedRecipient(org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient mdht) {
+	public IntendedRecipient(POCDMT000040IntendedRecipient mdht) {
 		this.setIntendedRecipient(mdht);
 	}
 
@@ -90,21 +96,20 @@ public class IntendedRecipient {
 	 */
 	public IntendedRecipient(Organization organization) {
 		this();
-		final org.openhealthtools.mdht.uml.cda.Organization mdht = organization
-				.copyMdhtOrganization();
-		if (!mdht.getAddrs().isEmpty()) {
-			getIntendedRecipient().getIntendedRecipient().getAddrs().addAll(mdht.getAddrs());
+		final var mdht = organization.getHl7CdaR2Pocdmt000040Organization();
+		if (!mdht.getAddr().isEmpty()) {
+			getIntendedRecipient().getAddr().addAll(mdht.getAddr());
 		}
-		if (!mdht.getIds().isEmpty()) {
-			getIntendedRecipient().getIntendedRecipient().getIds().addAll(mdht.getIds());
+		if (!mdht.getId().isEmpty()) {
+			getIntendedRecipient().getId().addAll(mdht.getId());
 		}
-		if (!mdht.getTelecoms().isEmpty()) {
-			getIntendedRecipient().getIntendedRecipient().getTelecoms().addAll(mdht.getTelecoms());
+		if (!mdht.getTelecom().isEmpty()) {
+			getIntendedRecipient().getTelecom().addAll(mdht.getTelecom());
 		}
-		if (!mdht.getNames().isEmpty()) {
-			final org.openhealthtools.mdht.uml.cda.Person p = CDAFactory.eINSTANCE.createPerson();
-			p.getNames().add(Util.createPnFromOn(mdht.getNames().get(0)));
-			getIntendedRecipient().getIntendedRecipient().setInformationRecipient(p);
+		if (!mdht.getName().isEmpty()) {
+			final var p = new POCDMT000040Person();
+			p.getName().add(Util.createPnFromOn(mdht.getName().get(0)));
+			getIntendedRecipient().setInformationRecipient(p);
 		}
 		setOrganization(organization);
 	}
@@ -116,7 +121,7 @@ public class IntendedRecipient {
 	 *            the post address
 	 */
 	public void addAddress(Address address) {
-		getIntendedRecipient().getIntendedRecipient().getAddrs().add(address.copyMdhtAdress());
+		getIntendedRecipient().getAddr().add(address.getHl7CdaR2Ad());
 	}
 
 	/**
@@ -126,16 +131,7 @@ public class IntendedRecipient {
 	 *            the id
 	 */
 	public void addId(Identificator identificator) {
-		getIntendedRecipient().getIntendedRecipient().getIds().add(identificator.getIi());
-	}
-
-	/**
-	 * Returns a copy of the underlying mdht element.
-	 *
-	 * @return the copy of the mdht element
-	 */
-	public org.openhealthtools.mdht.uml.cda.IntendedRecipient copy() {
-		return EcoreUtil.copy(getIntendedRecipient().getIntendedRecipient());
+		getIntendedRecipient().getId().add(identificator.getHl7CdaR2Ii());
 	}
 
 	/**
@@ -145,10 +141,9 @@ public class IntendedRecipient {
 	 * @return <div class="en">the addresses</div>
 	 */
 	public List<Address> getAddresses() {
-		final List<Address> al = new ArrayList<Address>();
-		for (final AD mAddress : getIntendedRecipient().getIntendedRecipient().getAddrs()) {
-			final Address address = new Address(mAddress);
-			al.add(address);
+		final List<Address> al = new ArrayList<>();
+		for (final AD mAddress : getIntendedRecipient().getAddr()) {
+			al.add(new Address(mAddress));
 		}
 		return al;
 	}
@@ -160,7 +155,7 @@ public class IntendedRecipient {
 	 * @return <div class="en">the ids</div>
 	 */
 	public List<Identificator> getIds() {
-		return Util.convertIds(getIntendedRecipient().getIntendedRecipient().getIds());
+		return Util.convertIds(getIntendedRecipient().getId());
 	}
 
 	/**
@@ -168,7 +163,7 @@ public class IntendedRecipient {
 	 *
 	 * @return the intendedRecipient
 	 */
-	public org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient getIntendedRecipient() {
+	public POCDMT000040IntendedRecipient getIntendedRecipient() {
 		return mIntendedRecipient;
 	}
 
@@ -178,7 +173,7 @@ public class IntendedRecipient {
 	 * @return the person
 	 */
 	public Person getMdhtInformationRecipient() {
-		return new Person(getIntendedRecipient().getIntendedRecipient().getInformationRecipient());
+		return new Person(getIntendedRecipient().getInformationRecipient());
 	}
 
 	/**
@@ -186,7 +181,7 @@ public class IntendedRecipient {
 	 *
 	 * @return the mdht element
 	 */
-	public org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient getMdhtIntendedRecipient() {
+	public POCDMT000040IntendedRecipient getMdhtIntendedRecipient() {
 		return this.getIntendedRecipient();
 	}
 
@@ -202,9 +197,8 @@ public class IntendedRecipient {
 	 *         <div class="it"></div>
 	 */
 	public Organization getOrganization() {
-		final Organization o = new Organization(
-				getIntendedRecipient().getIntendedRecipient().getReceivedOrganization());
-		return o;
+		return new Organization(
+				getIntendedRecipient().getReceivedOrganization());
 	}
 
 	/**
@@ -213,8 +207,15 @@ public class IntendedRecipient {
 	 *
 	 * @return Telecoms <div class="en">the telecoms</div>
 	 */
-	public Telecoms getTelecoms() {
-		return new Telecoms(getIntendedRecipient().getIntendedRecipient().getTelecoms());
+	public List<Telecom> getTelecoms() {
+		List<Telecom> telecoms = new LinkedList<>();
+
+		for (TEL tel : getIntendedRecipient().getTelecom()) {
+			if (tel != null) {
+				telecoms.add(new Telecom(tel));
+			}
+		}
+		return telecoms;
 	}
 
 	/**
@@ -224,8 +225,8 @@ public class IntendedRecipient {
 	 *            the person
 	 */
 	public void setInformationRecipient(Person person) {
-		getIntendedRecipient().getIntendedRecipient()
-				.setInformationRecipient(person.copyMdhtPerson());
+		getIntendedRecipient()
+				.setInformationRecipient(person.getHl7CdaPerson());
 	}
 
 	/**
@@ -235,7 +236,7 @@ public class IntendedRecipient {
 	 *            the intendedRecipient to set
 	 */
 	public void setIntendedRecipient(
-			org.openhealthtools.mdht.uml.cda.ihe.lab.IntendedRecipient intendedRecipient) {
+			POCDMT000040IntendedRecipient intendedRecipient) {
 		mIntendedRecipient = intendedRecipient;
 	}
 
@@ -252,8 +253,8 @@ public class IntendedRecipient {
 	 *            <div class="it"></div>
 	 */
 	public void setOrganization(Organization organization) {
-		getIntendedRecipient().getIntendedRecipient()
-				.setReceivedOrganization(organization.copyMdhtOrganization());
+		getIntendedRecipient()
+				.setReceivedOrganization(organization.getHl7CdaR2Pocdmt000040Organization());
 	}
 
 	/**
@@ -265,8 +266,11 @@ public class IntendedRecipient {
 	 *            neue telecoms.</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
-	public void setTelecoms(Telecoms telecoms) {
-		getIntendedRecipient().getIntendedRecipient().getTelecoms()
-				.addAll(EcoreUtil.copyAll(telecoms.getMdhtTelecoms()));
+	public void setTelecoms(List<Telecom> telecoms) {
+		for (Telecom telecom : telecoms) {
+			if (telecom != null) {
+				getIntendedRecipient().getTelecom().add(telecom.getHl7CdaR2Tel());
+			}
+		}
 	}
 }

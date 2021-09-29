@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.common.mdht.enums;
 
-import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Code;
 
 /**
  * @since Sep 22, 2015 10:00:45 AM
@@ -28,5 +28,5 @@ public interface CodedMetadataEnumInterface {
 	 *
 	 * @return the enum as codedMetadataType
 	 */
-	public CodedMetadataType getCodedMetadataType();
+	public Code getIpfCode();
 }

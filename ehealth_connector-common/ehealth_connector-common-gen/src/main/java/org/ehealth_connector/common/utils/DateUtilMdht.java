@@ -491,12 +491,13 @@ public class DateUtilMdht {
 	 *
 	 * @return the ivl ts
 	 */
-	public static IVL_TS createUnknownLowHighTimeNullFlavor() {
-		final IVL_TS effectiveTime = DatatypesFactory.eINSTANCE.createIVL_TS();
-		effectiveTime.setLow(Util.createNullFlavorUnknown());
-		effectiveTime.setHigh(Util.createNullFlavorUnknown());
-		return effectiveTime;
-	}
+	/*
+	 * public static IVL_TS createUnknownLowHighTimeNullFlavor() { final IVL_TS
+	 * effectiveTime = DatatypesFactory.eINSTANCE.createIVL_TS();
+	 * effectiveTime.setLow(Util.createNullFlavorUnknown());
+	 * effectiveTime.setHigh(Util.createNullFlavorUnknown()); return effectiveTime;
+	 * }
+	 */
 
 	/**
 	 * <div class="en">Creates the unknown time.</div> <div class="de"></div>

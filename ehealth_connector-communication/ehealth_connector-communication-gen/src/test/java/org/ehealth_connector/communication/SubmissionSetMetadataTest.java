@@ -20,14 +20,14 @@ package org.ehealth_connector.communication;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.ehealth_connector.cda.testhelper.TestUtils;
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.communication.SubmissionSetMetadata;
-import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.communication.testhelper.TestUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.openhealthtools.ihe.xds.metadata.AvailabilityStatusType;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
 
-public class SubmissionSetMetadataTest extends TestUtils {
+class SubmissionSetMetadataTest extends TestUtils {
 
 	private SubmissionSetMetadata s;
 
@@ -48,50 +48,50 @@ public class SubmissionSetMetadataTest extends TestUtils {
 		// Convenience API Types
 		code1 = createCode1();
 		code2 = createCode2();
-		loincCode = new Code("2.16.840.1.113883.6.1", numS1);
+		loincCode = new Code("2.16.840.1.113883.6.1", numS1, null);
 
 		author1 = createAuthor1();
 		id1 = createIdentificator1();
 	}
 
 	@Test
-	public void testAuthor() {
+	void testAuthor() {
 		s.setAuthor(author1);
-		assertTrue(isEqual(author1, s.getAuthor()));
+		assertTrue(isEqual(author1, s.getAuthor().get(0)));
 	}
 
 	@Test
-	public void testAvailabilityStatus() {
-		s.setAvailabilityStatus(AvailabilityStatusType.DEPRECATED_LITERAL);
-		assertEquals(AvailabilityStatusType.DEPRECATED_LITERAL, s.getAvailabilityStatus());
+	void testAvailabilityStatus() {
+		s.setAvailabilityStatus(AvailabilityStatus.DEPRECATED);
+		assertEquals(AvailabilityStatus.DEPRECATED, s.getAvailabilityStatus());
 	}
 
 	@Test
-	public void testComments() {
+	void testComments() {
 		s.setComments(ts1);
 		assertEquals(ts1, s.getComments());
 	}
 
 	@Test
-	public void testContentType() {
+	void testContentType() {
 		s.setContentTypeCode(code1);
 		assertTrue(isEqual(code1, s.getContentTypeCode()));
 	}
 
 	@Test
-	public void testPatientId() {
+	void testPatientId() {
 		s.setDestinationPatientId(id1);
 		assertTrue(isEqual(id1, s.getPatientId()));
 	}
 
 	@Test
-	public void testSourceId() {
+	void testSourceId() {
 		s.setSourceId(numS2);
 		assertEquals(numS2, s.getSourceId());
 	}
 
 	@Test
-	public void testTitle() {
+	void testTitle() {
 		s.setTitle(ts2);
 		assertEquals(ts2, s.getTitle());
 	}

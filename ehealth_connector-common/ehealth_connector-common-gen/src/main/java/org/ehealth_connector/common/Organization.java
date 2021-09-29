@@ -575,4 +575,5 @@ public class Organization extends OrganizationBaseType {
 	public void set(OrganizationBaseType baseType) {
 		initFromBaseType(baseType);
 	}
+
 }

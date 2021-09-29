@@ -20,15 +20,14 @@ package org.ehealth_connector.common.mdht;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.enums.CodeSystems;
-import org.ehealth_connector.common.mdht.enums.Isco08;
 import org.ehealth_connector.common.mdht.enums.NullFlavor;
 import org.ehealth_connector.common.utils.DateUtilMdht;
-import org.ehealth_connector.common.utils.Util;
 //import org.openhealthtools.ihe.xds.metadata.AuthorType;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
@@ -64,7 +63,7 @@ public class Author {
 		mAuthor.setAssignedAuthor(asAuthor);
 
 		// add functionCode and time
-		mAuthor.setFunctionCode(Isco08.MEDICAL_DOCTORS.getCE());
+		// mAuthor.setFunctionCode(Isco08.MEDICAL_DOCTORS.getCE());
 		mAuthor.setTime(DateUtilMdht.nowAsTS());
 
 		setTime(null);
@@ -191,8 +190,7 @@ public class Author {
 	public Author(Organization organizationAsAuthor) {
 		mAuthor = CDAFactory.eINSTANCE.createAuthor();
 		if (organizationAsAuthor.getMdhtOrganization() != null) {
-			org.openhealthtools.mdht.uml.cda.AssignedAuthor asAuthor = Util
-					.createAssignedAuthorFromOrganization(organizationAsAuthor);
+			org.openhealthtools.mdht.uml.cda.AssignedAuthor asAuthor = CDAFactory.eINSTANCE.createAssignedAuthor();
 			mAuthor.setAssignedAuthor(asAuthor);
 		}
 		setTime(null);
@@ -444,7 +442,7 @@ public class Author {
 	 * @return <div class="en">the ids</div>
 	 */
 	public List<Identificator> getIds() {
-		return Util.convertIds(mAuthor.getAssignedAuthor().getIds());
+		return new LinkedList<>();
 	}
 
 	public EList<TEL> getMdhtTelecoms() {
@@ -650,7 +648,7 @@ public class Author {
 		if (mAuthor.getAssignedAuthor() == null) {
 			mAuthor.setAssignedAuthor(CDAFactory.eINSTANCE.createAssignedAuthor());
 		}
-		mAuthor.getAssignedAuthor().setAssignedAuthoringDevice(device.copy());
+		// mAuthor.getAssignedAuthor().setAssignedAuthoringDevice(device.copy());
 		if (mAuthor.getAssignedAuthor().getAssignedPerson() != null) {
 			mAuthor.getAssignedAuthor()
 					.eUnset(mAuthor.getAssignedAuthor().getAssignedPerson().eContainingFeature());

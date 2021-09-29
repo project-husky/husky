@@ -16,9 +16,8 @@
  */
 package org.ehealth_connector.common.mdht.enums;
 
-import org.ehealth_connector.common.mdht.Code;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.hl7cdar2.CE;
 
 /**
  * The Enum ConfidentialityCode contains the codes of the HL7 Vocabulary.
@@ -141,7 +140,7 @@ public enum ConfidentialityCode {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CE getCE() {
-		final CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final CE ce = new CE();
 		ce.setCodeSystem(oid);
 		ce.setCode(code);
 		ce.setDisplayName(displayName);
@@ -155,7 +154,7 @@ public enum ConfidentialityCode {
 	 * @return <div class="en">the code</div>
 	 */
 	public Code getCode() {
-		final Code ehcCode = new Code(oid, code, displayName);
+		final Code ehcCode = new Code(code, oid, displayName);
 		return ehcCode;
 	}
 

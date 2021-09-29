@@ -17,21 +17,29 @@
 
 package org.ehealth_connector.common.mdht;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.ehealth_connector.common.Address;
+import org.ehealth_connector.common.Author;
+import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.Organization;
+import org.ehealth_connector.common.Person;
+import org.ehealth_connector.common.Telecom;
+import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.enums.CodeSystems;
-import org.ehealth_connector.common.utils.DateUtilMdht;
+import org.ehealth_connector.common.hl7cdar2.AD;
+import org.ehealth_connector.common.hl7cdar2.II;
+import org.ehealth_connector.common.hl7cdar2.IVLTS;
+import org.ehealth_connector.common.hl7cdar2.PN;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Performer2;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Person;
+import org.ehealth_connector.common.hl7cdar2.TEL;
+import org.ehealth_connector.common.utils.DateUtil;
 import org.ehealth_connector.common.utils.Util;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.II;
-import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
-import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
 
 /**
  * A Person or Organization performing an action
@@ -39,17 +47,17 @@ import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
  */
 public class Performer {
 
-	private final org.openhealthtools.mdht.uml.cda.Performer2 mPerfomer;
-	private final org.openhealthtools.mdht.uml.cda.AssignedEntity mAsEntity;
-	private org.openhealthtools.mdht.uml.cda.Person mPerson;
+	private final POCDMT000040Performer2 mPerfomer;
+	private final POCDMT000040AssignedEntity mAsEntity;
+	private POCDMT000040Person mPerson;
 
 	/**
 	 * Instantiates a new performer.
 	 */
 	public Performer() {
-		mPerfomer = CDAFactory.eINSTANCE.createPerformer2();
-		mAsEntity = CDAFactory.eINSTANCE.createAssignedEntity();
-		mPerson = CDAFactory.eINSTANCE.createPerson();
+		mPerfomer = new POCDMT000040Performer2();
+		mAsEntity = new POCDMT000040AssignedEntity();
+		mPerson = new POCDMT000040Person();
 
 		mAsEntity.setAssignedPerson(mPerson);
 		mPerfomer.setAssignedEntity(mAsEntity);
@@ -67,15 +75,14 @@ public class Performer {
 	public Performer(Author author) {
 		this();
 		addName(author.getName());
-		for (Identificator id : author.getIds()) {
-			mAsEntity.getIds().add(id.getIi());
+		for (org.ehealth_connector.common.Identificator id : author.getIds()) {
+			mAsEntity.getId().add(id.getHl7CdaR2Ii());
 		}
 
 		// add time
 		setTimeValue(author.getTimeAsDate());
 
 		if (author.getOrganization() != null)
-			if (author.getOrganization().getMdhtOrganization() != null)
 				setOrganization(author.getOrganization());
 	}
 
@@ -103,11 +110,11 @@ public class Performer {
 		this(name);
 
 		// Create and fill Person Name and GLN
-		final II id = DatatypesFactory.eINSTANCE.createII();
+		final var id = new II();
 		id.setRoot(CodeSystems.GLN.getCodeSystemId());
 		id.setExtension(gln);
 
-		mAsEntity.getIds().add(id);
+		mAsEntity.getId().add(id);
 	}
 
 	/**
@@ -117,7 +124,7 @@ public class Performer {
 	 * @param performerMdht
 	 *            the MDHT Performer Object
 	 */
-	public Performer(org.openhealthtools.mdht.uml.cda.Performer2 performerMdht) {
+	public Performer(POCDMT000040Performer2 performerMdht) {
 		mPerfomer = performerMdht;
 		mAsEntity = performerMdht.getAssignedEntity();
 		mPerson = performerMdht.getAssignedEntity().getAssignedPerson();
@@ -129,16 +136,22 @@ public class Performer {
 	 * @param organization
 	 *            the organization of the performer
 	 */
-	public Performer(Organization organization) {
-		mPerfomer = CDAFactory.eINSTANCE.createPerformer2();
-		mAsEntity = CDAFactory.eINSTANCE.createAssignedEntity();
+	public Performer(org.ehealth_connector.common.Organization organization) {
+		mPerfomer = new POCDMT000040Performer2();
+		mAsEntity = new POCDMT000040AssignedEntity();
 		mPerfomer.setAssignedEntity(mAsEntity);
 
 		// add time
 		setTimeValue(new Date());
 
 		setOrganization(organization);
-		mAsEntity.getIds().addAll(organization.copyMdhtOrganization().getIds());
+
+		for (IdentificatorBaseType idBaseType : organization.getIdentificatorList()) {
+			if (idBaseType != null) {
+				mAsEntity.getId().add(new org.ehealth_connector.common.Identificator(idBaseType).getHl7CdaR2Ii());
+			}
+		}
+
 	}
 
 	/**
@@ -159,7 +172,7 @@ public class Performer {
 	 *            Die Postadresse des Autors
 	 */
 	public void addAddress(Address address) {
-		mAsEntity.getAddrs().add(address.copyMdhtAdress());
+		mAsEntity.getAddr().add(address.getHl7CdaR2Ad());
 	}
 
 	/**
@@ -169,8 +182,8 @@ public class Performer {
 	 *            Kombination von eigentlicher ID und der OID der verwaltenden
 	 *            Domäne
 	 */
-	public void addId(Identificator identificator) {
-		mAsEntity.getIds().add(identificator.getIi());
+	public void addId(org.ehealth_connector.common.Identificator identificator) {
+		mAsEntity.getId().add(identificator.getHl7CdaR2Ii());
 	}
 
 	/**
@@ -181,7 +194,7 @@ public class Performer {
 	 *            name
 	 */
 	public void addName(Name name) {
-		mAsEntity.getAssignedPerson().getNames().add(name.getMdhtPn());
+		mAsEntity.getAssignedPerson().getName().add(name.getHl7CdaR2Pn());
 	}
 
 	/**
@@ -190,8 +203,8 @@ public class Performer {
 	 *
 	 * @return the org.openhealthtools.mdht.uml.cda. performer 2
 	 */
-	public org.openhealthtools.mdht.uml.cda.Performer2 copyMdhtPerfomer() {
-		return EcoreUtil.copy(mPerfomer);
+	public POCDMT000040Performer2 getHl7Cdar2Perfomer() {
+		return mPerfomer;
 	}
 
 	/**
@@ -201,8 +214,7 @@ public class Performer {
 	 * @return <div class="en">the address</div>
 	 */
 	public Address getAddress() {
-		final Address address = new Address(mAsEntity.getAddrs().get(0));
-		return address;
+		return new Address(mAsEntity.getAddr().get(0));
 	}
 
 	/**
@@ -212,10 +224,9 @@ public class Performer {
 	 * @return <div class="en">the addresses</div>
 	 */
 	public List<Address> getAddresses() {
-		final List<Address> al = new ArrayList<Address>();
-		for (final AD mAddress : mAsEntity.getAddrs()) {
-			final Address address = new Address(mAddress);
-			al.add(address);
+		final List<Address> al = new ArrayList<>();
+		for (final AD mAddress : mAsEntity.getAddr()) {
+			al.add(new Address(mAddress));
 		}
 		return al;
 	}
@@ -230,17 +241,17 @@ public class Performer {
 	public String getCompleteName() {
 		// Search for the performer name. If it isn´t there, try to use the
 		// organisation name.
-		String retVal = "";
+		var retVal = "";
 		if ((mAsEntity != null) && (mAsEntity.getAssignedPerson() != null)) {
-			if (mAsEntity.getAssignedPerson().getNames() != null) {
-				final Name name = new Name(mAsEntity.getAssignedPerson().getNames().get(0));
-				retVal = name.getCompleteName();
+			if (mAsEntity.getAssignedPerson().getName() != null) {
+				final var name = new Name(mAsEntity.getAssignedPerson().getName().get(0));
+				retVal = name.getFullName();
 			} else {
-				if ((mAsEntity.getRepresentedOrganizations().get(0) != null)
-						&& (mAsEntity.getRepresentedOrganizations().get(0).getNames() != null)) {
-					final Name name = new Name(
-							mAsEntity.getRepresentedOrganizations().get(0).getNames().get(0));
-					retVal = name.getCompleteName();
+				if ((mAsEntity.getRepresentedOrganization() != null)
+						&& (mAsEntity.getRepresentedOrganization().getName() != null)) {
+					final var name = new Name(
+							mAsEntity.getRepresentedOrganization().getName().get(0));
+					retVal = name.getFullName();
 				}
 			}
 		}
@@ -255,9 +266,13 @@ public class Performer {
 	 * @return <div class="en">the gln</div>
 	 */
 	public String getGln() {
-		final Identificator gln = Identificator.getIdentificator(mAsEntity.getIds(),
-				CodeSystems.GLN.getCodeSystemId());
-		return gln.getExtension();
+		for (II id : mAsEntity.getId()) {
+			if (id != null && CodeSystems.GLN.getCodeSystemId().equalsIgnoreCase(id.getRoot())) {
+				return id.getExtension();
+			}
+		}
+
+		return null;
 	}
 
 	/**
@@ -267,10 +282,9 @@ public class Performer {
 	 *
 	 * @return <div class="en">the gln as identificator</div>
 	 */
-	public Identificator getGlnAsIdentificator() {
-		final II ii = mAsEntity.getIds().get(0);
-		final Identificator id = new Identificator(ii);
-		return id;
+	public org.ehealth_connector.common.Identificator getGlnAsIdentificator() {
+		final var ii = mAsEntity.getId().get(0);
+		return new org.ehealth_connector.common.Identificator(ii);
 	}
 
 	/**
@@ -280,8 +294,8 @@ public class Performer {
 	 *
 	 * @return <div class="en">the ids</div>
 	 */
-	public List<Identificator> getIds() {
-		return Util.convertIds(mAsEntity.getIds());
+	public List<org.ehealth_connector.common.Identificator> getIds() {
+		return Util.convertIds(mAsEntity.getId());
 	}
 
 	/**
@@ -292,8 +306,7 @@ public class Performer {
 	 * @return <div class="en">the name</div>
 	 */
 	public Name getName() {
-		final Name name = new Name(mAsEntity.getAssignedPerson().getNames().get(0));
-		return name;
+		return new Name(mAsEntity.getAssignedPerson().getName().get(0));
 	}
 
 	/**
@@ -303,10 +316,9 @@ public class Performer {
 	 * @return <div class="en">the names</div>
 	 */
 	public List<Name> getNames() {
-		final List<Name> nl = new ArrayList<Name>();
-		for (final PN mName : mAsEntity.getAssignedPerson().getNames()) {
-			final Name name = new Name(mName);
-			nl.add(name);
+		final List<Name> nl = new ArrayList<>();
+		for (final PN mName : mAsEntity.getAssignedPerson().getName()) {
+			nl.add(new Name(mName));
 		}
 		return nl;
 	}
@@ -323,19 +335,7 @@ public class Performer {
 	 *         <div class="it"></div>
 	 */
 	public Organization getOrganization() {
-		final Organization o = new Organization(mAsEntity.getRepresentedOrganizations().get(0));
-		return o;
-	}
-
-	/**
-	 * <div class="en">Gets the performer mdht.</div> <div class="de">Liefert
-	 * performer mdht.</div> <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @return org.openhealthtools.mdht.uml.cda.Performer2 <div class="en">the
-	 *         performer mdht</div>
-	 */
-	public org.openhealthtools.mdht.uml.cda.Performer2 getPerformerMdht() {
-		return EcoreUtil.copy(mPerfomer);
+		return new Organization(mAsEntity.getRepresentedOrganization());
 	}
 
 	/**
@@ -344,8 +344,15 @@ public class Performer {
 	 *
 	 * @return Telecoms <div class="en">the telecoms</div>
 	 */
-	public Telecoms getTelecoms() {
-		final Telecoms telecoms = new Telecoms(mAsEntity.getTelecoms());
+	public List<Telecom> getTelecoms() {
+		List<Telecom> telecoms = new LinkedList<>();
+
+		for (TEL tel : mAsEntity.getTelecom()) {
+			if (tel != null) {
+				telecoms.add(new Telecom(tel));
+			}
+		}
+
 		return telecoms;
 	}
 
@@ -359,13 +366,10 @@ public class Performer {
 	 *         <div class="de">die Zeit für den Performer.</div>
 	 *         <div class="fr"></div> <div class="it"></div>
 	 */
-	public IVL_TS getTimeAsIVL_TS() {
-		IVL_TS retVal = null;
+	public IVLTS getTimeAsIVLTS() {
+		IVLTS retVal = null;
 		if (mPerfomer.getTime() != null) {
-			try {
-				retVal = DateUtilMdht.createIVL_TSFromHL7Date(mPerfomer.getTime().getValue());
-			} catch (final ParseException e) {
-			}
+			retVal = DateUtil.date2IvltsTzon(DateUtil.parseHl7Timestamp(mPerfomer.getTime().getValue()));
 		}
 		return retVal;
 	}
@@ -380,7 +384,7 @@ public class Performer {
 	 *            gln.</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setGln(String gln) {
-		addId(new Identificator(CodeSystems.GLN.getCodeSystemId(), gln));
+		addId(new org.ehealth_connector.common.Identificator(CodeSystems.GLN.getCodeSystemId(), gln));
 	}
 
 	/**
@@ -395,9 +399,8 @@ public class Performer {
 	 *            neue Organisation</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
-	public void setOrganization(Organization organization) {
-		mAsEntity.getRepresentedOrganizations().clear();
-		mAsEntity.getRepresentedOrganizations().add(organization.copyMdhtOrganization());
+	public void setOrganization(org.ehealth_connector.common.Organization organization) {
+		mAsEntity.setRepresentedOrganization(organization.getHl7CdaR2Pocdmt000040Organization());
 	}
 
 	/**
@@ -409,8 +412,8 @@ public class Performer {
 	 *            neue telecoms.</div> <div class="fr"></div>
 	 *            <div class="it"></div>
 	 */
-	public void setTelecoms(Telecoms telecoms) {
-		mAsEntity.getTelecoms().addAll(telecoms.getMdhtTelecoms());
+	public void setTelecoms(List<TEL> telecoms) {
+		mAsEntity.getTelecom().addAll(telecoms);
 	}
 
 	/**
@@ -420,11 +423,7 @@ public class Performer {
 	 *            the date
 	 */
 	public void setTimeValue(Date eurDate) {
-		try {
-			mPerfomer.setTime(DateUtilMdht.createIVL_TSFromEuroDate(eurDate));
-		} catch (final ParseException e) {
-			e.printStackTrace();
-		}
+		mPerfomer.setTime(DateUtil.date2IvltsTzon(eurDate));
 	}
 
 }

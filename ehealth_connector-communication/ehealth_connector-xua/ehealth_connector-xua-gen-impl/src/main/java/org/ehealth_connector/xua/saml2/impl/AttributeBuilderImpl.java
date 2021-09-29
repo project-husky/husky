@@ -18,13 +18,13 @@ package org.ehealth_connector.xua.saml2.impl;
 
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.ehealth_connector.xua.hl7v3.InstanceIdentifier;
-import org.ehealth_connector.xua.hl7v3.PurposeOfUse;
-import org.ehealth_connector.xua.hl7v3.Role;
-import org.ehealth_connector.xua.saml2.Attribute;
-import org.ehealth_connector.xua.saml2.AttributeBuilder;
 import org.ehealth_connector.xua.hl7v3.OpenSamlInstanceIdentifier;
 import org.ehealth_connector.xua.hl7v3.OpenSamlPurposeOfUse;
 import org.ehealth_connector.xua.hl7v3.OpenSamlRole;
+import org.ehealth_connector.xua.hl7v3.PurposeOfUse;
+import org.ehealth_connector.xua.hl7v3.Role;
+import org.ehealth_connector.xua.saml2.AttributeBuilder;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeType;
 import org.opensaml.core.xml.schema.XSAny;
 import org.opensaml.core.xml.schema.XSString;
 import org.opensaml.core.xml.schema.impl.XSAnyBuilder;
@@ -40,10 +40,11 @@ import org.opensaml.saml.saml2.core.AttributeValue;
  * <!-- @formatter:on -->
  */
 public class AttributeBuilderImpl implements AttributeBuilder,
-		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Attribute, Attribute> {
+		SecurityObjectBuilder<org.opensaml.saml.saml2.core.Attribute, AttributeType> {
 
 	/** The attribute. */
 	private org.opensaml.saml.saml2.core.Attribute attribute;
+	private AttributeImpl attributeImpl;
 
 	/**
 	 *
@@ -67,8 +68,9 @@ public class AttributeBuilderImpl implements AttributeBuilder,
 	 * @see org.ehealth_connector.xua.saml2.AttributeBuilder#create()
 	 */
 	@Override
-	public Attribute create() {
-		return new AttributeImpl(attribute);
+	public AttributeType create() {
+		this.attributeImpl = new AttributeImpl(attribute);
+		return this.attributeImpl;
 	}
 
 	/**
@@ -78,8 +80,9 @@ public class AttributeBuilderImpl implements AttributeBuilder,
 	 * @see org.ehealth_connector.xua.core.SecurityObjectBuilder#create(java.lang.Object)
 	 */
 	@Override
-	public Attribute create(org.opensaml.saml.saml2.core.Attribute aInternalObject) {
-		return new AttributeImpl(aInternalObject);
+	public AttributeType create(org.opensaml.saml.saml2.core.Attribute aInternalObject) {
+		this.attributeImpl = new AttributeImpl(aInternalObject);
+		return this.attributeImpl;
 	}
 
 	/**
@@ -154,5 +157,34 @@ public class AttributeBuilderImpl implements AttributeBuilder,
 		}
 
 		return this;
+	}
+
+	public InstanceIdentifier getValueAsInstanceIdentifier() {
+		if (this.attributeImpl != null) {
+			return attributeImpl.getValueAsInstanceIdentifier();
+		}
+
+		return null;
+	}
+
+	public PurposeOfUse getValueAsPurposeOfUse() {
+		if (this.attributeImpl != null) {
+			return attributeImpl.getValueAsPurposeOfUse();
+		}
+		return null;
+	}
+
+	public Role getValueAsRole() {
+		if (this.attributeImpl != null) {
+			return attributeImpl.getValueAsRole();
+		}
+		return null;
+	}
+
+	public String getValueAsString() {
+		if (this.attributeImpl != null) {
+			return attributeImpl.getValueAsString();
+		}
+		return "";
 	}
 }

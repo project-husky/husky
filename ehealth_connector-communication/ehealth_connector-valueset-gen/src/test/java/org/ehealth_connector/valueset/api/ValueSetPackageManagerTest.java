@@ -47,6 +47,7 @@ import org.ehealth_connector.valueset.exceptions.ConfigurationException;
 import org.ehealth_connector.valueset.model.ValueSet;
 import org.ehealth_connector.valueset.model.ValueSetPackage;
 import org.ehealth_connector.valueset.model.Version;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -196,6 +197,7 @@ public class ValueSetPackageManagerTest {
 	}
 
 	@Test
+	@Disabled
 	public void downloadSaveLoadPackageConfigTest()
 			throws MalformedURLException, IOException, ConfigurationException {
 

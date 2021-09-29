@@ -17,13 +17,10 @@
 
 package org.ehealth_connector.common.mdht.enums;
 
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.mdht.Code;
+import org.ehealth_connector.common.hl7cdar2.CE;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
-import org.openhealthtools.ihe.xds.metadata.CodedMetadataType;
-import org.openhealthtools.ihe.xds.metadata.MetadataFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
 
 /**
  * <div class="en">Interface for all dynamically created/updated value
@@ -39,7 +36,7 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	default CE getCE() {
-		final CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final CE ce = new CE();
 		ce.setCodeSystem(getCodeSystemId());
 		ce.setCode(getCodeValue());
 		ce.setCodeSystemName(getCodeSystemName());
@@ -54,7 +51,7 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
 	 * @return <div class="en">the code</div>
 	 */
 	default Code getCode() {
-		return new Code(getCodeSystemId(), getCodeValue(), getDisplayName());
+		return new Code(getCodeValue(), getCodeSystemId(), getDisplayName());
 	}
 
 	/**
@@ -64,8 +61,8 @@ public interface ValueSetEnumInterface extends CodedMetadataEnumInterface {
 	 * @return <div class="en">the codedMetadataType</div>
 	 */
 	@Override
-	default CodedMetadataType getCodedMetadataType() {
-		final CodedMetadataType cmt = MetadataFactory.eINSTANCE.createCodedMetadataType();
+	default org.openehealth.ipf.commons.ihe.xds.core.metadata.Code getIpfCode() {
+		final var cmt = new org.openehealth.ipf.commons.ihe.xds.core.metadata.Code();
 		cmt.setSchemeName(getCodeSystemId());
 		cmt.setCode(getCodeValue());
 		cmt.setDisplayName(XdsMetadataUtil.createInternationalString(getDisplayName(), "de-ch"));

@@ -20,10 +20,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.ehealth_connector.xua.hl7v3.Role;
 import org.ehealth_connector.xua.hl7v3.impl.RoleBuilder;
-import org.ehealth_connector.xua.saml2.Attribute;
 import org.ehealth_connector.xua.saml2.AttributeBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeType;
 
 public class AttributeBuilderImplTest {
 
@@ -50,7 +50,7 @@ public class AttributeBuilderImplTest {
 	 */
 	@Test
 	public void testName() {
-		final Attribute ref = testBuilder.name(testAttributeName).create();
+		final AttributeType ref = testBuilder.name(testAttributeName).create();
 		assertEquals(testAttributeName, ref.getName());
 	}
 
@@ -60,13 +60,13 @@ public class AttributeBuilderImplTest {
 	 */
 	@Test
 	public void testValue() {
-		final Attribute ref = testBuilder.value(testAttributeValue).create();
-		assertEquals(testAttributeValue, ref.getValueAsString());
+		final AttributeType ref = testBuilder.value(testAttributeValue).create();
+		assertEquals(testAttributeValue, testBuilder.getValueAsString());
 	}
 
 	public void testValueRole() {
-		final Attribute ref = testBuilder.value(testAttributeValueRole).create();
-		assertEquals(testAttributeValueRole, ref.getValueAsRole());
+		final AttributeType ref = testBuilder.value(testAttributeValueRole).create();
+		assertEquals(testAttributeValueRole, testBuilder.getValueAsRole());
 	}
 
 }

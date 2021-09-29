@@ -19,9 +19,9 @@ package org.ehealth_connector.xua.saml2.impl;
 import java.util.Calendar;
 
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
-import org.ehealth_connector.xua.saml2.AuthnStatement;
 import org.ehealth_connector.xua.saml2.AuthnStatementBuilder;
 import org.joda.time.DateTime;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AuthnStatementType;
 import org.opensaml.saml.saml2.core.AuthnContextClassRef;
 
 /**
@@ -33,7 +33,7 @@ import org.opensaml.saml.saml2.core.AuthnContextClassRef;
  * <!-- @formatter:on -->
  */
 public class AuthnStatementBuilderImpl implements AuthnStatementBuilder,
-		SecurityObjectBuilder<org.opensaml.saml.saml2.core.AuthnStatement, AuthnStatement> {
+		SecurityObjectBuilder<org.opensaml.saml.saml2.core.AuthnStatement, AuthnStatementType> {
 
 	private AuthnContextClassRef authnContextClassRef;
 	private org.opensaml.saml.saml2.core.AuthnStatement wrappedObject;
@@ -66,12 +66,12 @@ public class AuthnStatementBuilderImpl implements AuthnStatementBuilder,
 	}
 
 	@Override
-	public org.ehealth_connector.xua.saml2.AuthnStatement create() {
+	public AuthnStatementType create() {
 		return new AuthnStatementImpl(wrappedObject);
 	}
 
 	@Override
-	public AuthnStatement create(org.opensaml.saml.saml2.core.AuthnStatement aAuthnStatement) {
+	public AuthnStatementType create(org.opensaml.saml.saml2.core.AuthnStatement aAuthnStatement) {
 		return new AuthnStatementImpl(aAuthnStatement);
 	}
 

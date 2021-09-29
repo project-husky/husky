@@ -21,10 +21,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Calendar;
 import java.util.UUID;
 
-import org.ehealth_connector.xua.saml2.AuthnStatement;
 import org.ehealth_connector.xua.saml2.AuthnStatementBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AuthnStatementType;
+import org.opensaml.saml.saml2.core.impl.AuthnContextClassRefImpl;
 
 public class AuthnStatementBuilderImplTest {
 
@@ -53,8 +54,10 @@ public class AuthnStatementBuilderImplTest {
 	 */
 	@Test
 	public void testAuthnContextClassRef() {
-		final AuthnStatement ref = builder.authnContextClassRef(testAuthnContextClassRef).create();
-		assertEquals(testAuthnContextClassRef, ref.getAuthnContextClassRef());
+		final AuthnStatementType ref = builder.authnContextClassRef(testAuthnContextClassRef).create();
+		assertEquals(testAuthnContextClassRef,
+				((AuthnContextClassRefImpl) ref.getAuthnContext().getContent().get(0).getValue())
+						.getAuthnContextClassRef());
 	}
 
 	/**
@@ -63,8 +66,9 @@ public class AuthnStatementBuilderImplTest {
 	 */
 	@Test
 	public void testAuthnInstant() {
-		final AuthnStatement ref = builder.authnInstant(testAuthnInstance).create();
-		assertEquals(testAuthnInstance, ref.getAuthnInstant());
+		final AuthnStatementType ref = builder.authnInstant(testAuthnInstance).create();
+		assertEquals(testAuthnInstance.getTimeInMillis(),
+				ref.getAuthnInstant().toGregorianCalendar().getTimeInMillis());
 	}
 
 	/**
@@ -73,7 +77,7 @@ public class AuthnStatementBuilderImplTest {
 	 */
 	@Test
 	public void testSessionIndex() {
-		final AuthnStatement ref = builder.sessionIndex(testSessionIndex).create();
+		final AuthnStatementType ref = builder.sessionIndex(testSessionIndex).create();
 		assertEquals(testSessionIndex, ref.getSessionIndex());
 	}
 
@@ -83,8 +87,9 @@ public class AuthnStatementBuilderImplTest {
 	 */
 	@Test
 	public void testSessionNotOnOrAfter() {
-		final AuthnStatement ref = builder.sessionNotOnOrAfter(testSessionNotOnOrAfter).create();
-		assertEquals(testSessionNotOnOrAfter, ref.getSessionNotOnOrAfter());
+		final AuthnStatementType ref = builder.sessionNotOnOrAfter(testSessionNotOnOrAfter).create();
+		assertEquals(testSessionNotOnOrAfter.getTimeInMillis(),
+				ref.getSessionNotOnOrAfter().toGregorianCalendar().getTimeInMillis());
 	}
 
 }

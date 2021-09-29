@@ -311,6 +311,10 @@
 						<groupId>org.apache.tomcat.embed</groupId>
 						<artifactId>tomcat-embed-websocket</artifactId>
 					</exclusion>
+					<exclusion>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-starter-logging</artifactId>
+					</exclusion>
 				</exclusions>
 			</dependency>
 
@@ -322,6 +326,10 @@
 					<exclusion>
 						<groupId>org.apache.tomcat.embed</groupId>
 						<artifactId>tomcat-embed-websocket</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-starter-logging</artifactId>
 					</exclusion>
 				</exclusions>
 			</dependency>
@@ -335,7 +343,17 @@
 						<groupId>org.apache.tomcat.embed</groupId>
 						<artifactId>tomcat-embed-websocket</artifactId>
 					</exclusion>
+					<exclusion>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-starter-logging</artifactId>
+					</exclusion>
 				</exclusions>
+			</dependency>
+
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-log4j2</artifactId>
+				<version>${spring.boot.version}</version>
 			</dependency>
 
 			<dependency>
@@ -346,6 +364,10 @@
 					<exclusion>
 						<groupId>org.apache.tomcat.embed</groupId>
 						<artifactId>tomcat-embed-websocket</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-starter-logging</artifactId>
 					</exclusion>
 				</exclusions>
 				<scope>test</scope>
@@ -360,6 +382,10 @@
 					<exclusion>
 						<groupId>junit</groupId>
 						<artifactId>junit</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-starter-logging</artifactId>
 					</exclusion>
 				</exclusions>
 			</dependency>
@@ -710,11 +736,6 @@
 			</dependency>
 
 			<dependency>
-				<groupId>log4j</groupId>
-				<artifactId>log4j</artifactId>
-				<version>1.2.17</version>
-			</dependency>
-			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-api</artifactId>
 				<version>${slf4j.version}</version>
@@ -853,11 +874,8 @@
 			<artifactId>junit-jupiter-api</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- <dependency>
-			<groupId>org.apache.maven.surefire</groupId>
-			<artifactId>surefire-junit-platform</artifactId>
-			<scope>test</scope>
-		</dependency> -->
+		<!-- <dependency> <groupId>org.apache.maven.surefire</groupId> <artifactId>surefire-junit-platform</artifactId> 
+			<scope>test</scope> </dependency> -->
 	</dependencies>
 
 	<repositories>

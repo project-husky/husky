@@ -17,8 +17,8 @@
 package org.ehealth_connector.communication.xd.xdm;
 
 import org.ehealth_connector.common.communication.DocumentMetadata;
-import org.openhealthtools.ihe.xds.document.XDSDocument;
-import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
+import org.openehealth.ipf.commons.ihe.xds.core.metadata.DocumentEntry;
 
 /**
  * The Class DocumentAndMetadata represents a Document together with the
@@ -27,10 +27,10 @@ import org.openhealthtools.ihe.xds.metadata.DocumentEntryType;
 public class DocumentContentAndMetadata {
 
 	/** The xds document. */
-	private XDSDocument xdsDocument;
+	private Document xdsDocument;
 
 	/** The doc entry. */
-	private DocumentEntryType docEntry;
+	private DocumentEntry docEntry;
 
 	/**
 	 * Instantiates a new document and metadata.
@@ -40,7 +40,7 @@ public class DocumentContentAndMetadata {
 	 * @param docEntry
 	 *            the doc entry
 	 */
-	public DocumentContentAndMetadata(XDSDocument xdsDocument, DocumentEntryType docEntry) {
+	public DocumentContentAndMetadata(Document xdsDocument, DocumentEntry docEntry) {
 		this.xdsDocument = xdsDocument;
 		this.docEntry = docEntry;
 	}
@@ -59,7 +59,7 @@ public class DocumentContentAndMetadata {
 	 *
 	 * @return the doc entry as OHT document entry type
 	 */
-	public DocumentEntryType getDocEntryAsOhtDocumentEntryType() {
+	public DocumentEntry getDocEntryAsOhtDocumentEntryType() {
 		return docEntry;
 	}
 
@@ -68,7 +68,7 @@ public class DocumentContentAndMetadata {
 	 *
 	 * @return the xds document
 	 */
-	public XDSDocument getXdsDocument() {
+	public Document getXdsDocument() {
 		return xdsDocument;
 	}
 
@@ -78,7 +78,7 @@ public class DocumentContentAndMetadata {
 	 * @param docEntry
 	 *            the new doc entry
 	 */
-	public void setDocEntry(DocumentEntryType docEntry) {
+	public void setDocEntry(DocumentEntry docEntry) {
 		this.docEntry = docEntry;
 	}
 
@@ -88,7 +88,7 @@ public class DocumentContentAndMetadata {
 	 * @param xdsDocument
 	 *            the new xds document
 	 */
-	public void setXdsDocument(XDSDocument xdsDocument) {
+	public void setXdsDocument(Document xdsDocument) {
 		this.xdsDocument = xdsDocument;
 	}
 }

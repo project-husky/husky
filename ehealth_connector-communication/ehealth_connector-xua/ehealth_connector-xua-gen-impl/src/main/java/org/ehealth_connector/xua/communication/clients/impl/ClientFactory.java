@@ -16,8 +16,6 @@
  */
 package org.ehealth_connector.xua.communication.clients.impl;
 
-import javax.jms.IllegalStateException;
-
 import org.ehealth_connector.xua.communication.clients.IdpClient;
 import org.ehealth_connector.xua.communication.clients.XuaClient;
 import org.ehealth_connector.xua.communication.config.IdpClientConfig;
@@ -37,8 +35,7 @@ import org.ehealth_connector.xua.communication.config.impl.IdpClientViaHttpProxy
  */
 public class ClientFactory {
 	
-	protected ClientFactory() throws IllegalStateException {
-		throw new IllegalStateException("This is a factory class!");
+	protected ClientFactory() {
 	}
 	
 	public static IdpClient getIdpClient(IdpClientConfig clientConfiguration) {

@@ -21,12 +21,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.ehealth_connector.common.mdht.enums.AdministrativeGender;
 import org.ehealth_connector.common.utils.DateUtilMdht;
-import org.ehealth_connector.common.utils.Util;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
 import org.openhealthtools.mdht.uml.cda.PatientRole;
 import org.openhealthtools.mdht.uml.cda.RecordTarget;
@@ -131,7 +131,7 @@ public class Patient extends Person {
 
 		// Create and fill gender
 		if (sex != null) {
-			mPatient.setAdministrativeGenderCode(sex.getCE());
+			// mPatient.setAdministrativeGenderCode(sex.getCE());
 		}
 
 		// Fill Patient Name
@@ -380,7 +380,7 @@ public class Patient extends Person {
 	 * @return <div class="en">the ids</div>
 	 */
 	public List<Identificator> getIds() {
-		return Util.convertIds(mPatientRole.getIds());
+		return new LinkedList<>();
 	}
 
 	/**
@@ -532,7 +532,7 @@ public class Patient extends Person {
 	 *            <div class="fr"></div> <div class="it"></div>
 	 */
 	public void setAdministrativeGender(AdministrativeGender sex) {
-		mPatient.setAdministrativeGenderCode(sex.getCE());
+		// mPatient.setAdministrativeGenderCode();
 	}
 
 	/**

@@ -30,7 +30,6 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
 import java.lang.management.ManagementFactory;
-import java.lang.management.RuntimeMXBean;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -41,6 +40,7 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
@@ -49,6 +49,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -68,7 +70,6 @@ import org.apache.commons.lang3.SystemUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.URIConverter;
@@ -80,9 +81,40 @@ import org.eclipse.emf.ecore.xmi.XMLResource;
 import org.eclipse.emf.ecore.xmi.impl.GenericXMLResourceFactoryImpl;
 import org.eclipse.emf.ecore.xml.type.AnyType;
 import org.eclipse.emf.ecore.xml.type.XMLTypeDocumentRoot;
+import org.ehealth_connector.common.Address;
+import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.Name;
+import org.ehealth_connector.common.Organization;
+import org.ehealth_connector.common.Telecom;
+import org.ehealth_connector.common.basetypes.AddressBaseType;
+import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
+import org.ehealth_connector.common.basetypes.NameBaseType;
+import org.ehealth_connector.common.basetypes.OrganizationBaseType;
+import org.ehealth_connector.common.basetypes.TelecomBaseType;
 import org.ehealth_connector.common.enums.TelecomAddressUse;
-import org.ehealth_connector.common.mdht.Identificator;
-import org.ehealth_connector.common.mdht.Organization;
+import org.ehealth_connector.common.hl7cdar2.AD;
+import org.ehealth_connector.common.hl7cdar2.AdxpCity;
+import org.ehealth_connector.common.hl7cdar2.AdxpPostalCode;
+import org.ehealth_connector.common.hl7cdar2.CD;
+import org.ehealth_connector.common.hl7cdar2.CE;
+import org.ehealth_connector.common.hl7cdar2.ED;
+import org.ehealth_connector.common.hl7cdar2.ENXP;
+import org.ehealth_connector.common.hl7cdar2.II;
+import org.ehealth_connector.common.hl7cdar2.IVLPQ;
+import org.ehealth_connector.common.hl7cdar2.IVLTS;
+import org.ehealth_connector.common.hl7cdar2.IVXBTS;
+import org.ehealth_connector.common.hl7cdar2.ON;
+import org.ehealth_connector.common.hl7cdar2.PN;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedAuthor;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040AssignedEntity;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Authenticator;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Author;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040CustodianOrganization;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040LegalAuthenticator;
+import org.ehealth_connector.common.hl7cdar2.ST;
+import org.ehealth_connector.common.hl7cdar2.TEL;
+import org.ehealth_connector.common.hl7cdar2.XActRelationshipEntryRelationship;
 import org.ehealth_connector.common.mdht.Participant;
 import org.ehealth_connector.common.mdht.ParticipantRole;
 import org.ehealth_connector.common.mdht.PlayingEntity;
@@ -90,30 +122,10 @@ import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
 import org.ehealth_connector.common.mdht.enums.Signature;
 import org.openhealthtools.mdht.uml.cda.AssignedAuthor;
 import org.openhealthtools.mdht.uml.cda.AssignedEntity;
-import org.openhealthtools.mdht.uml.cda.Authenticator;
 import org.openhealthtools.mdht.uml.cda.Author;
 import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.CustodianOrganization;
 import org.openhealthtools.mdht.uml.cda.EntryRelationship;
-import org.openhealthtools.mdht.uml.cda.LegalAuthenticator;
 import org.openhealthtools.mdht.uml.cda.StrucDocText;
-import org.openhealthtools.mdht.uml.hl7.datatypes.AD;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CS;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ENXP;
-import org.openhealthtools.mdht.uml.hl7.datatypes.II;
-import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
-import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_TS;
-import org.openhealthtools.mdht.uml.hl7.datatypes.IVXB_TS;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ON;
-import org.openhealthtools.mdht.uml.hl7.datatypes.PN;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
-import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
-import org.openhealthtools.mdht.uml.hl7.vocab.EntityNameUse;
-import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 import org.openhealthtools.mdht.uml.hl7.vocab.x_ActRelationshipEntryRelationship;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -179,6 +191,9 @@ public class Util {
 	 */
 	public static final String TELECOMS_WEBSITE_PREFIX = "http";
 
+	/** HL7v3 namespace. */
+	public static final String NAMESPACE_HL7_V3 = "urn:hl7-org:v3";
+
 	private static Random rand;
 
 	/**
@@ -204,11 +219,10 @@ public class Util {
 	 *            the list to convert
 	 * @return </div> <div class="de"></div> <div class="fr"></div>
 	 */
-	public static List<Identificator> convertIds(EList<II> mII) {
+	public static List<Identificator> convertIds(List<org.ehealth_connector.common.hl7cdar2.II> mII) {
 		final List<Identificator> il = new ArrayList<>();
-		for (final II mId : mII) {
-			final Identificator id = new Identificator(mId);
-			il.add(id);
+		for (final org.ehealth_connector.common.hl7cdar2.II mId : mII) {
+			il.add(new Identificator(mId));
 		}
 		return il;
 	}
@@ -278,18 +292,28 @@ public class Util {
 	 * @return HL7 AD Object
 	 */
 	public static AD createAddress(String zip, String city, PostalAddressUse usage) {
-		final AD ad = DatatypesFactory.eINSTANCE.createAD();
+		final var retVal = new AD();
+
+		if (city != null) {
+			var obj = new AdxpCity();
+			obj.xmlContent = city;
+			retVal.getContent()
+					.add(new JAXBElement<AdxpCity>(new QName(NAMESPACE_HL7_V3, "city"), AdxpCity.class, obj));
+		}
 
 		if (zip != null) {
-			ad.addPostalCode(zip);
+			var obj = new AdxpPostalCode();
+			obj.xmlContent = zip;
+			retVal.getContent().add(new JAXBElement<AdxpPostalCode>(new QName(NAMESPACE_HL7_V3, "postalCode"),
+					AdxpPostalCode.class, obj));
 		}
-		if (city != null) {
-			ad.addCity(city);
-		}
+
 		if (usage != null) {
-			ad.getUses().add(usage.getAddressUseAsPostalAddressUse());
+			retVal.getUse().clear();
+			retVal.getUse().add(usage.getCodeValue());
 		}
-		return ad;
+
+		return retVal;
 	}
 
 	/**
@@ -331,49 +355,48 @@ public class Util {
 	 *            the organization
 	 * @return the assigned author
 	 */
-	public static AssignedAuthor createAssignedAuthorFromOrganization(Organization organization) {
-		final org.openhealthtools.mdht.uml.cda.Organization o = organization.getMdhtOrganization();
-		final AssignedAuthor a = CDAFactory.eINSTANCE.createAssignedAuthor();
-		if (!o.getAddrs().isEmpty()) {
-			a.getAddrs().addAll(EcoreUtil.copyAll(o.getAddrs()));
+	public static POCDMT000040AssignedAuthor createAssignedAuthorFromOrganization(org.ehealth_connector.common.Organization organization) {
+		final var o = organization.getHl7CdaR2Pocdmt000040Organization();
+		final var a = new POCDMT000040AssignedAuthor();
+		if (!o.getAddr().isEmpty()) {
+			a.getAddr().addAll(o.getAddr());
 		}
-		if (!o.getTelecoms().isEmpty()) {
-			a.getTelecoms().addAll(EcoreUtil.copyAll(o.getTelecoms()));
+		if (!o.getTelecom().isEmpty()) {
+			a.getTelecom().addAll(o.getTelecom());
 		}
-		if (!o.getIds().isEmpty()) {
-			a.getIds().addAll(EcoreUtil.copyAll(o.getIds()));
+		if (!o.getId().isEmpty()) {
+			a.getId().addAll(o.getId());
 		}
 		return a;
 	}
 
 	/**
-	 * Creates an MDHT assignedEntity object from an MDHT AssignedAuthor object.
+	 * Creates an assignedEntity object from an AssignedAuthor object.
 	 *
-	 * @param a
-	 *            the assignedAuthor
+	 * @param a the assignedAuthor
 	 * @return the assignedEntity
 	 */
-	public static AssignedEntity createAssignedEntityFromAssignedAuthor(AssignedAuthor a) {
-		final AssignedEntity asEnt = CDAFactory.eINSTANCE.createAssignedEntity();
+	public static POCDMT000040AssignedEntity createAssignedEntityFromAssignedAuthor(POCDMT000040AssignedAuthor a) {
+		final var asEnt = new POCDMT000040AssignedEntity();
 		// Copy Addresses
-		if (a.getAddrs() != null) {
-			asEnt.getAddrs().addAll(EcoreUtil.copyAll(a.getAddrs()));
+		if (a.getAddr() != null) {
+			asEnt.getAddr().addAll(a.getAddr());
 		}
 		// Copy Ids
-		if (a.getIds() != null) {
-			asEnt.getIds().addAll(EcoreUtil.copyAll(a.getIds()));
+		if (a.getId() != null) {
+			asEnt.getId().addAll(a.getId());
 		}
 		// Copy Telecoms
-		if (a.getTelecoms() != null) {
-			asEnt.getTelecoms().addAll(EcoreUtil.copyAll(a.getTelecoms()));
+		if (a.getTelecom() != null) {
+			asEnt.getTelecom().addAll(a.getTelecom());
 		}
 		// Copy Represented Organization
 		if (a.getRepresentedOrganization() != null) {
-			asEnt.getRepresentedOrganizations().add(EcoreUtil.copy(a.getRepresentedOrganization()));
+			asEnt.setRepresentedOrganization(a.getRepresentedOrganization());
 		}
 		// Set Assigned Person
 		if (a.getAssignedPerson() != null) {
-			asEnt.setAssignedPerson(EcoreUtil.copy(a.getAssignedPerson()));
+			asEnt.setAssignedPerson(a.getAssignedPerson());
 		}
 
 		return asEnt;
@@ -386,17 +409,17 @@ public class Util {
 	 *            the organization
 	 * @return the assigned entity
 	 */
-	public static AssignedEntity createAssignedEntityFromOrganization(Organization organization) {
-		final org.openhealthtools.mdht.uml.cda.Organization o = organization.getMdhtOrganization();
-		final AssignedEntity a = CDAFactory.eINSTANCE.createAssignedEntity();
-		if (!o.getAddrs().isEmpty()) {
-			a.getAddrs().addAll(EcoreUtil.copyAll(o.getAddrs()));
+	public static POCDMT000040AssignedEntity createAssignedEntityFromOrganization(Organization organization) {
+		final var o = organization.getHl7CdaR2Pocdmt000040Organization();
+		final var a = new POCDMT000040AssignedEntity();
+		if (!o.getAddr().isEmpty()) {
+			a.getAddr().addAll(o.getAddr());
 		}
-		if (!o.getTelecoms().isEmpty()) {
-			a.getTelecoms().addAll(EcoreUtil.copyAll(o.getTelecoms()));
+		if (!o.getTelecom().isEmpty()) {
+			a.getTelecom().addAll(o.getTelecom());
 		}
-		if (!o.getIds().isEmpty()) {
-			a.getIds().addAll(EcoreUtil.copyAll(o.getIds()));
+		if (!o.getId().isEmpty()) {
+			a.getId().addAll(o.getId());
 		}
 		return a;
 	}
@@ -408,19 +431,19 @@ public class Util {
 	 *            the author
 	 * @return the authenticator
 	 */
-	public static Authenticator createAuthenticatorFromAuthor(
-			org.ehealth_connector.common.mdht.Author author) {
-		final org.openhealthtools.mdht.uml.cda.Author a = author.copyMdhtAuthor();
-		final Authenticator mdhtAuth = CDAFactory.eINSTANCE.createAuthenticator();
-		mdhtAuth.setAssignedEntity(createAssignedEntityFromAssignedAuthor(a.getAssignedAuthor()));
+	public static POCDMT000040Authenticator createAuthenticatorFromAuthor(
+			org.ehealth_connector.common.Author author) {
+		final POCDMT000040Author a = author.getAuthorMdht();
+		final POCDMT000040Authenticator auth = new POCDMT000040Authenticator();
+		auth.setAssignedEntity(createAssignedEntityFromAssignedAuthor(a.getAssignedAuthor()));
 
 		// Set signature Code to 's'
-		final CS cs = Signature.SIGNED.getCS();
-		mdhtAuth.setSignatureCode(cs);
+		final var cs = Signature.SIGNED.getCS();
+		auth.setSignatureCode(cs);
 		// Copy Time
-		mdhtAuth.setTime(a.getTime());
+		auth.setTime(a.getTime());
 
-		return mdhtAuth;
+		return auth;
 	}
 
 	/**
@@ -471,8 +494,9 @@ public class Util {
 	 * @return the CE
 	 */
 	public static CE createCENullFlavorNASK() {
-		final CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setNullFlavor(NullFlavor.NASK);
+		final var ce = new CE();
+		ce.nullFlavor = new LinkedList<>();
+		ce.getNullFlavor().add(org.ehealth_connector.common.enums.NullFlavor.NOT_ASKED_CODE);
 		return ce;
 	}
 
@@ -482,8 +506,9 @@ public class Util {
 	 * @return the CE
 	 */
 	public static CE createCENullFlavorUNK() {
-		final CE ce = DatatypesFactory.eINSTANCE.createCE();
-		ce.setNullFlavor(NullFlavor.UNK);
+		final var ce = new CE();
+		ce.nullFlavor = new LinkedList<>();
+		ce.getNullFlavor().add(org.ehealth_connector.common.enums.NullFlavor.UNKNOWN_CODE);
 		return ce;
 	}
 
@@ -493,8 +518,9 @@ public class Util {
 	 * @return the CD
 	 */
 	public static CD createCodeNullFlavorNA() {
-		final CD code = DatatypesFactory.eINSTANCE.createCD();
-		code.setNullFlavor(NullFlavor.NA);
+		final var code = new CD();
+		code.nullFlavor = new LinkedList<>();
+		code.getNullFlavor().add(org.ehealth_connector.common.enums.NullFlavor.NOT_APPLICABLE_CODE);
 		return code;
 	}
 
@@ -504,8 +530,9 @@ public class Util {
 	 * @return the CD
 	 */
 	public static CD createCodeNullFlavorUNK() {
-		final CD code = DatatypesFactory.eINSTANCE.createCD();
-		code.setNullFlavor(NullFlavor.UNK);
+		final var code = new CD();
+		code.nullFlavor = new LinkedList<>();
+		code.getNullFlavor().add(org.ehealth_connector.common.enums.NullFlavor.UNKNOWN_CODE);
 		return code;
 	}
 
@@ -517,43 +544,43 @@ public class Util {
 	 *            the Organization
 	 * @return CustodianOrganization the CustodianOrganization
 	 */
-	public static CustodianOrganization createCustodianOrganizationFromOrganization(
+	public static POCDMT000040CustodianOrganization createCustodianOrganizationFromOrganization(
 			Organization organization) {
 		// create and set the mdht RepresentedCustodianOrganization Object
 		if (organization != null) {
-			final CustodianOrganization mdhtCustOrg = CDAFactory.eINSTANCE
-					.createCustodianOrganization();
+			final var mdhtCustOrg = new POCDMT000040CustodianOrganization();
 
-			final ON on = DatatypesFactory.eINSTANCE.createON();
-			on.addText(organization.getName());
-			if (!organization.getMdhtOrganization().getNames().isEmpty()) {
-				if (organization.getMdhtOrganization().getNames().get(0).getUses() != null) {
-					on.getUses().clear();
-					for (EntityNameUse item : organization.getMdhtOrganization().getNames().get(0)
-							.getUses()) {
-						on.getUses().add(item);
+			final var on = new ON();
+			on.xmlContent = organization.getPrimaryName().getFullName();
+
+			if (!organization.getHl7CdaR2Pocdmt000040Organization().getName().isEmpty()) {
+				if (organization.getHl7CdaR2Pocdmt000040Organization().getName().get(0).getUse() != null) {
+					on.getUse().clear();
+					for (String item : organization.getHl7CdaR2Pocdmt000040Organization().getName().get(0)
+							.getUse()) {
+						on.getUse().add(item);
 					}
 				}
 			}
 			mdhtCustOrg.setName(on);
 
 			// take the first address and set it as CustodianAdress
-			if (organization.getMdhtOrganization().getAddrs().size() > 0) {
-				mdhtCustOrg.setAddr(
-						EcoreUtil.copy(organization.getMdhtOrganization().getAddrs().get(0)));
+			if (!organization.getHl7CdaR2Pocdmt000040Organization().getAddr().isEmpty()) {
+				mdhtCustOrg.setAddr(organization.getHl7CdaR2Pocdmt000040Organization().getAddr().get(0));
 				// Somehow PostalAddressUse is not copied by the MDHT function.
 				// We have
 				// to do it manually.
-				mdhtCustOrg.getAddr().getUses()
-						.addAll(organization.getMdhtOrganization().getAddrs().get(0).getUses());
+				mdhtCustOrg.getAddr().getUse()
+						.addAll(organization.getHl7CdaR2Pocdmt000040Organization().getAddr().get(0).getUse());
 			}
 
 			// take the first telecom and set it as CustodianTelecom
-			if (organization.getMdhtOrganization().getTelecoms().size() > 0) {
-				mdhtCustOrg.setTelecom(
-						EcoreUtil.copy(organization.getMdhtOrganization().getTelecoms().get(0)));
-				mdhtCustOrg.getTelecom().getUses().add(
-						organization.getMdhtOrganization().getTelecoms().get(0).getUses().get(0));
+			if (!organization.getHl7CdaR2Pocdmt000040Organization().getTelecom().isEmpty()) {
+				mdhtCustOrg.setTelecom(organization.getHl7CdaR2Pocdmt000040Organization().getTelecom().get(0));
+				mdhtCustOrg.getTelecom().getUse()
+						.add(
+								organization.getHl7CdaR2Pocdmt000040Organization().getTelecom().get(0).getUse()
+										.get(0));
 			}
 			return mdhtCustOrg;
 		}
@@ -569,8 +596,9 @@ public class Util {
 	 * @return the ED
 	 */
 	public static ED createEd(String text) {
-		final ED ed = DatatypesFactory.eINSTANCE.createED();
-		return (ed.addText(text));
+		final var ed = new ED();
+		ed.xmlContent = text;
+		return ed;
 	}
 
 	/**
@@ -578,9 +606,10 @@ public class Util {
 	 *
 	 * @return the ivl ts
 	 */
-	public static IVL_TS createEffectiveTimeNullFlavorUnk() {
-		final IVL_TS ivlts = DatatypesFactory.eINSTANCE.createIVL_TS();
-		ivlts.setNullFlavor(NullFlavor.UNK);
+	public static IVLTS createEffectiveTimeNullFlavorUnk() {
+		final var ivlts = new IVLTS();
+		ivlts.nullFlavor = new LinkedList<>();
+		ivlts.getNullFlavor().add(org.ehealth_connector.common.enums.NullFlavor.UNKNOWN_CODE);
 		return ivlts;
 	}
 
@@ -596,8 +625,8 @@ public class Util {
 	 * @return the tel
 	 */
 	public static TEL createEMail(String eMail, TelecomAddressUse usage) {
-		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
+		final var tel = new TEL();
+		tel.getUse().add(usage.getAddressUseAsTelecommunicationAddressUse().getLiteral());
 		tel.setValue(TELECOMS_EMAIL_PREFIX + eMail);
 		return tel;
 	}
@@ -612,9 +641,8 @@ public class Util {
 	 * @return the string
 	 */
 	public static String createEurDateStrFromTS(String hl7Stimestamp) {
-		final String eurDateStr = hl7Stimestamp.substring(6, 8) + "."
+		return hl7Stimestamp.substring(6, 8) + "."
 				+ hl7Stimestamp.substring(4, 6) + "." + hl7Stimestamp.substring(0, 4);
-		return eurDateStr;
 	}
 
 	/**
@@ -629,8 +657,8 @@ public class Util {
 	 * @return the tel
 	 */
 	public static TEL createFax(String faxNr, TelecomAddressUse usage) {
-		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
+		final var tel = new TEL();
+		tel.getUse().add(usage.getAddressUseAsTelecommunicationAddressUse().getLiteral());
 		tel.setValue(TELECOMS_FAX_PREFIX + faxNr);
 		return tel;
 	}
@@ -640,9 +668,10 @@ public class Util {
 	 *
 	 * @return the IVL_PQ
 	 */
-	public static IVL_PQ createIVL_PQNullFlavorNA() {
-		final IVL_PQ ivlpq = DatatypesFactory.eINSTANCE.createIVL_PQ();
-		ivlpq.setNullFlavor(NullFlavor.NA);
+	public static IVLPQ createIVL_PQNullFlavorNA() {
+		final var ivlpq = new IVLPQ();
+		ivlpq.nullFlavor = new LinkedList<>();
+		ivlpq.getNullFlavor().add(org.ehealth_connector.common.enums.NullFlavor.NOT_APPLICABLE_CODE);
 		return ivlpq;
 	}
 
@@ -651,9 +680,10 @@ public class Util {
 	 *
 	 * @return the IVL_PQ
 	 */
-	public static IVL_PQ createIVL_PQNullFlavorNASK() {
-		final IVL_PQ ivlpq = DatatypesFactory.eINSTANCE.createIVL_PQ();
-		ivlpq.setNullFlavor(NullFlavor.NASK);
+	public static IVLPQ createIVL_PQNullFlavorNASK() {
+		final var ivlpq = new IVLPQ();
+		ivlpq.nullFlavor = new LinkedList<>();
+		ivlpq.getNullFlavor().add(org.ehealth_connector.common.enums.NullFlavor.NOT_ASKED_CODE);
 		return ivlpq;
 	}
 
@@ -662,9 +692,10 @@ public class Util {
 	 *
 	 * @return the IVL_PQ
 	 */
-	public static IVL_PQ createIVL_PQNullFlavorUNK() {
-		final IVL_PQ ivlpq = DatatypesFactory.eINSTANCE.createIVL_PQ();
-		ivlpq.setNullFlavor(NullFlavor.UNK);
+	public static IVLPQ createIVL_PQNullFlavorUNK() {
+		final var ivlpq = new IVLPQ();
+		ivlpq.nullFlavor = new LinkedList<>();
+		ivlpq.getNullFlavor().add(org.ehealth_connector.common.enums.NullFlavor.UNKNOWN_CODE);
 		return ivlpq;
 	}
 
@@ -677,15 +708,15 @@ public class Util {
 	 *            <div class="de">the author</div>
 	 * @return the legal authenticator
 	 */
-	public static LegalAuthenticator createLegalAuthenticatorFromAuthor(
-			org.ehealth_connector.common.mdht.Author author) {
-		final org.openhealthtools.mdht.uml.cda.Author a = author.copyMdhtAuthor();
-		final LegalAuthenticator mdhtLegAuth = CDAFactory.eINSTANCE.createLegalAuthenticator();
+	public static POCDMT000040LegalAuthenticator createLegalAuthenticatorFromAuthor(
+			org.ehealth_connector.common.Author author) {
+		final POCDMT000040Author a = author.getAuthorMdht();
+		final var mdhtLegAuth = new POCDMT000040LegalAuthenticator();
 		mdhtLegAuth
 				.setAssignedEntity(createAssignedEntityFromAssignedAuthor(a.getAssignedAuthor()));
 
 		// Set signature Code to 's'
-		final CS cs = Signature.SIGNED.getCS();
+		final var cs = Signature.SIGNED.getCS();
 		mdhtLegAuth.setSignatureCode(cs);
 		// Copy Time
 		mdhtLegAuth.setTime(a.getTime());
@@ -722,9 +753,10 @@ public class Util {
 	 *
 	 * @return the ivxb ts
 	 */
-	public static IVXB_TS createNullFlavorUnknown() {
-		final IVXB_TS ts = DatatypesFactory.eINSTANCE.createIVXB_TS();
-		ts.setNullFlavor(NullFlavor.UNK);
+	public static IVXBTS createNullFlavorUnknown() {
+		final IVXBTS ts = new IVXBTS();
+		ts.nullFlavor = new LinkedList<>();
+		ts.nullFlavor.add(org.ehealth_connector.common.enums.NullFlavor.UNKNOWN_CODE);
 		return ts;
 	}
 
@@ -736,8 +768,8 @@ public class Util {
 	 * @return the on
 	 */
 	private static ON createOnFromPn(PN pn) {
-		final ON on = DatatypesFactory.eINSTANCE.createON();
-		on.addText(pn.getText());
+		final var on = new ON();
+		on.xmlContent = pn.xmlContent;
 		return on;
 	}
 
@@ -748,26 +780,25 @@ public class Util {
 	 *            the mdht CO
 	 * @return the org.openhealthtools.mdht.uml.cda. organization
 	 */
-	public static org.openhealthtools.mdht.uml.cda.Organization createOrganizationFromCustodianOrganization(
-			CustodianOrganization mdhtCO) {
-		final org.openhealthtools.mdht.uml.cda.Organization o = CDAFactory.eINSTANCE
-				.createOrganization();
+	public static POCDMT000040CustodianOrganization createOrganizationFromCustodianOrganization(
+			POCDMT000040CustodianOrganization mdhtCO) {
+		final POCDMT000040CustodianOrganization o = new POCDMT000040CustodianOrganization();
 		if (mdhtCO != null) {
 			// Name
 			if (mdhtCO.getName() != null) {
-				o.getNames().add(EcoreUtil.copy(mdhtCO.getName()));
+				o.setName(mdhtCO.getName());
 			}
 			// Ids
-			if (!mdhtCO.getIds().isEmpty()) {
-				o.getIds().addAll(EcoreUtil.copyAll(mdhtCO.getIds()));
+			if (!mdhtCO.getId().isEmpty()) {
+				o.getId().addAll(mdhtCO.getId());
 			}
 			// Addr
-			if ((mdhtCO.getAddr() != null) && !mdhtCO.getAddrs().isEmpty()) {
-				o.getAddrs().addAll(EcoreUtil.copyAll(mdhtCO.getAddrs()));
+			if (mdhtCO.getAddr() != null) {
+				o.setAddr(mdhtCO.getAddr());
 			}
 			// Telecoms
-			if (!mdhtCO.getTelecoms().isEmpty()) {
-				o.getTelecoms().addAll(EcoreUtil.copyAll(mdhtCO.getTelecoms()));
+			if (mdhtCO.getTelecom() != null) {
+				o.setTelecom(mdhtCO.getTelecom());
 			}
 		}
 		return o;
@@ -781,20 +812,32 @@ public class Util {
 	 * @return the organization
 	 */
 	public static Organization createOrganizationFromParticipant(Participant p) {
-		final Organization o = new Organization();
+		final Organization o = new Organization(new OrganizationBaseType());
 
 		// id, addrs, names, telecoms
-		o.getMdhtOrganization().getIds()
-				.addAll(EcoreUtil.copyAll(p.getMdht().getParticipantRole().getIds()));
-		o.getMdhtOrganization().getAddrs()
-				.addAll(EcoreUtil.copyAll(p.getMdht().getParticipantRole().getAddrs()));
-		if ((p.getMdht().getParticipantRole().getPlayingEntity().getNames() != null)
-				&& !p.getMdht().getParticipantRole().getPlayingEntity().getNames().isEmpty()) {
-			o.getMdhtOrganization().getNames().add(EcoreUtil.copy(createOnFromPn(
-					p.getMdht().getParticipantRole().getPlayingEntity().getNames().get(0))));
+
+		for (II id : p.getMdht().getParticipantRole().getId()) {
+			if (id != null) {
+				o.getHl7CdaR2Pocdmt000040Organization().getId().add(id);
+			}
 		}
-		o.getMdhtOrganization().getTelecoms()
-				.addAll(p.getMdht().getParticipantRole().getTelecoms());
+
+		for (AD ad : p.getMdht().getParticipantRole().getAddr()) {
+			if (ad != null) {
+				o.getHl7CdaR2Pocdmt000040Organization().getAddr().add(ad);
+			}
+		}
+
+		if ((p.getMdht().getParticipantRole().getPlayingEntity().getName() != null)
+				&& !p.getMdht().getParticipantRole().getPlayingEntity().getName().isEmpty()) {
+			for (PN pn : p.getMdht().getParticipantRole().getPlayingEntity().getName()) {
+				o.getHl7CdaR2Pocdmt000040Organization().getName().add(createOnFromPn(pn));
+			}
+		}
+
+		for (TEL tel : p.getMdht().getParticipantRole().getTelecom()) {
+			o.getHl7CdaR2Pocdmt000040Organization().getTelecom().add(tel);
+		}
 
 		return o;
 	}
@@ -807,24 +850,38 @@ public class Util {
 	 * @return the participant
 	 */
 	public static Participant createParticipantFromOrganization(Organization o) {
-		final PlayingEntity pe = new PlayingEntity();
-		final ParticipantRole pr = new ParticipantRole();
+		final var pe = new PlayingEntity();
+		final var pr = new ParticipantRole();
 		pr.setPlayingEntity(pe);
-		final Participant p = new Participant();
+		final var p = new Participant();
 		p.setParticipantRole(pr);
 
 		// id, addrs, names, telecoms
-		p.getMdht().getParticipantRole().getIds()
-				.addAll(EcoreUtil.copyAll(o.getMdhtOrganization().getIds()));
-		p.getMdht().getParticipantRole().getAddrs()
-				.addAll(EcoreUtil.copyAll(o.getMdhtOrganization().getAddrs()));
-		if ((o.getMdhtOrganization().getNames() != null)
-				&& !o.getMdhtOrganization().getNames().isEmpty()) {
-			p.getMdht().getParticipantRole().getPlayingEntity().getNames()
-					.add(EcoreUtil.copy(createPnFromOn(o.getMdhtOrganization().getNames().get(0))));
+
+		for (IdentificatorBaseType id : o.getIdentificatorList()) {
+			p.getMdht().getParticipantRole().getId().add(new Identificator(id).getHl7CdaR2Ii());
 		}
-		p.getMdht().getParticipantRole().getTelecoms()
-				.addAll(o.getMdhtOrganization().getTelecoms());
+
+		for (AddressBaseType address : o.getAddressList()) {
+			if (address != null) {
+				p.getMdht().getParticipantRole().getAddr().add(new Address(address).getHl7CdaR2Ad());
+			}
+		}
+
+		if ((o.getNameList() != null) && !o.getNameList().isEmpty()) {
+			for(NameBaseType nameType: o.getNameList()) {
+				if(nameType != null) {
+					p.getMdht().getParticipantRole().getPlayingEntity().getName()
+							.add(new Name(nameType).getHl7CdaR2Pn());
+				}
+			}
+		}
+
+		if (o.getTelecomList() != null) {
+			for (TelecomBaseType telecom : o.getTelecomList()) {
+				p.getMdht().getParticipantRole().getTelecom().add(new Telecom(telecom).getHl7CdaR2Tel());
+			}
+		}
 
 		return p;
 	}
@@ -836,9 +893,9 @@ public class Util {
 	 *            the on
 	 * @return the pn
 	 */
-	public static PN createPnFromOn(ON on) {
-		final PN pn = DatatypesFactory.eINSTANCE.createPN();
-		pn.addText(on.getText());
+	public static PN createPnFromOn(org.ehealth_connector.common.hl7cdar2.ON on) {
+		final var pn = new org.ehealth_connector.common.hl7cdar2.PN();
+		pn.xmlContent = on.xmlContent;
 		return pn;
 	}
 
@@ -853,9 +910,9 @@ public class Util {
 	 * @return the MDHT ED
 	 */
 	public static ED createReference(ED existingText, String reference) {
-		ED ed = existingText;
+		var ed = existingText;
 		if (ed == null)
-			ed = DatatypesFactory.eINSTANCE.createED();
+			ed = new ED();
 		ed.setReference(createReferenceTel(reference));
 		return ed;
 	}
@@ -872,11 +929,11 @@ public class Util {
 	 * @return the ed
 	 */
 	public static ED createReference(int contentId, String prefix) {
-		final ED text = DatatypesFactory.eINSTANCE.createED();
-		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		final var text = new ED();
+		final var tel = new TEL();
 
 		// Dirty BugFix for missing addReference method.
-		tel.setValue("#" + prefix + String.valueOf(contentId));
+		tel.setValue("#" + prefix + contentId);
 		text.setReference(tel);
 		return text;
 	}
@@ -890,7 +947,7 @@ public class Util {
 	 * @return the MDHT ED
 	 */
 	public static ED createReference(String reference) {
-		ED ed = DatatypesFactory.eINSTANCE.createED();
+		ED ed = new ED();
 		ed.setReference(createReferenceTel(reference));
 		return ed;
 	}
@@ -905,10 +962,10 @@ public class Util {
 	 * @return the MDHT ED
 	 */
 	public static ED createReference(String url, String narrativeText) {
-		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
-		final ED ed = DatatypesFactory.eINSTANCE.createED();
+		final var tel = new TEL();
+		final var ed = new ED();
 		tel.setValue(url);
-		ed.addText(narrativeText);
+		ed.xmlContent = narrativeText;
 		ed.setReference(tel);
 		return ed;
 	}
@@ -921,7 +978,7 @@ public class Util {
 	 * @return the tel
 	 */
 	public static TEL createReferenceTel(String value) {
-		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		final var tel = new TEL();
 		if (!value.startsWith("#")) {
 			value = "#" + value;
 		}
@@ -941,9 +998,9 @@ public class Util {
 	 * @return the tel
 	 */
 	public static TEL createTel(String telNr, TelecomAddressUse usage) {
-		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		final var tel = new TEL();
 		if (usage != null) {
-			tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
+			tel.getUse().add(usage.getAddressUseAsTelecommunicationAddressUse().getLiteral());
 		}
 		tel.setValue(TELECOMS_PHONE_PREFIX + telNr.replaceAll("\\s+", ""));
 		return tel;
@@ -964,9 +1021,10 @@ public class Util {
 	 * @return the tel
 	 */
 	public static TEL createUnknownTel(String endpointIdentifier, TelecomAddressUse usage) {
-		final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+		final var tel = new TEL();
 		if (usage != null) {
-			tel.getUses().add(usage.getAddressUseAsTelecommunicationAddressUse());
+			tel.getUse().clear();
+			tel.getUse().add(usage.getAddressUseAsTelecommunicationAddressUse().getLiteral());
 		}
 		tel.setValue(endpointIdentifier);
 		return tel;
@@ -1102,7 +1160,10 @@ public class Util {
 		final String documentOid = org.openhealthtools.ihe.utils.OID
 				.createOIDGivenRoot("ehealthconnctor");
 		// Creates a random extension ID to identify the document
-		final II id = DatatypesFactory.eINSTANCE.createII(documentOid, String.valueOf(rand.nextInt()));
+
+		final var id = new II();
+		id.setRoot(documentOid);
+		id.setExtension(String.valueOf(rand.nextInt()));
 		return id;
 	}
 
@@ -1121,7 +1182,7 @@ public class Util {
 			baos = new ByteArrayOutputStream();
 			oos = new ObjectOutputStream(baos);
 			oos.writeObject(object);
-			MessageDigest md = MessageDigest.getInstance("MD5");
+			var md = MessageDigest.getInstance("MD5");
 			byte[] thedigest = md.digest(baos.toByteArray());
 			retVal = java.util.Arrays.hashCode(thedigest);
 		} catch (IOException | NoSuchAlgorithmException e) {
@@ -1138,12 +1199,12 @@ public class Util {
 	 *            the EntryRelationship list
 	 * @return the reference to the comment
 	 */
-	public static String getCommentRef(EList<EntryRelationship> e) {
-		for (final EntryRelationship er : e) {
-			if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
+	public static String getCommentRef(List<POCDMT000040EntryRelationship> e) {
+		for (final POCDMT000040EntryRelationship er : e) {
+			if (er.getTypeCode().equals(XActRelationshipEntryRelationship.SUBJ)) {
 				// Get the ed and update it with the reference
 				if (er.getAct().getText() != null) {
-					final ED ed = er.getAct().getText();
+					final var ed = er.getAct().getText();
 					if (ed.getReference() != null) {
 						return ed.getReference().getValue();
 					}
@@ -1161,12 +1222,12 @@ public class Util {
 	 *            the EntryRelationship list
 	 * @return the tet of the comment
 	 */
-	public static String getCommentText(EList<EntryRelationship> e) {
-		for (final EntryRelationship er : e) {
-			if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
+	public static String getCommentText(List<POCDMT000040EntryRelationship> e) {
+		for (final POCDMT000040EntryRelationship er : e) {
+			if (er.getTypeCode().equals(XActRelationshipEntryRelationship.SUBJ)) {
 				// Get the ed and update it with the reference
-				final ED ed = er.getAct().getText();
-				return ed.getText();
+				final var ed = er.getAct().getText();
+				return ed.xmlContent;
 			}
 		}
 		return null;
@@ -1182,13 +1243,13 @@ public class Util {
 	 *            the content id for the text reference
 	 * @return the tet of the comment
 	 */
-	public static String getCommentText(EList<EntryRelationship> e, String contentId) {
-		for (final EntryRelationship er : e) {
-			if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)) {
+	public static String getCommentText(List<POCDMT000040EntryRelationship> e, String contentId) {
+		for (final POCDMT000040EntryRelationship er : e) {
+			if (er.getTypeCode().equals(XActRelationshipEntryRelationship.SUBJ)) {
 				// Get the ed and update it with the reference
-				final ED ed = er.getAct().getText();
+				final var ed = er.getAct().getText();
 				ed.setReference(Util.createReferenceTel(contentId));
-				return ed.getText();
+				return ed.xmlContent;
 			}
 		}
 		return null;
@@ -1200,8 +1261,8 @@ public class Util {
 	 * @return the current directory
 	 */
 	public static String getCurrentDirectory() {
-		String retVal = "";
-		File temp = new File(retVal);
+		var retVal = "";
+		var temp = new File(retVal);
 		if (temp != null)
 			retVal = temp.getAbsolutePath();
 
@@ -1255,7 +1316,7 @@ public class Util {
 	 * @return the platform specific line break
 	 */
 	public static String getPlatformSpecificLineBreak() {
-		String retVal = "\n";
+		var retVal = "\n";
 		if (Util.isWindows())
 			retVal = "\r\n";
 		return retVal;
@@ -1276,7 +1337,7 @@ public class Util {
 					+ FileUtil.getPlatformSpecificPathSeparator() + ".."
 					+ FileUtil.getPlatformSpecificPathSeparator() + "rsc";
 
-		final RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
+		final var runtimeMxBean = ManagementFactory.getRuntimeMXBean();
 		final List<String> vmArgs = runtimeMxBean.getInputArguments();
 		for (final String vmArg : vmArgs) {
 			if (vmArg.toLowerCase().startsWith("-drscdir=")) {
@@ -1301,7 +1362,7 @@ public class Util {
 	 * @return <div class="en">the system fonts paths</div>
 	 */
 	public static List<String> getSystemFontsPaths() {
-		List<String> result = new ArrayList<String>();
+		List<String> result = new ArrayList<>();
 		if (SystemUtils.IS_OS_WINDOWS) {
 			String path = System.getenv("WINDIR");
 			result.add(path + "\\" + "Fonts");
@@ -1343,8 +1404,8 @@ public class Util {
 		for (final TEL tel : telecoms) {
 			if (tel.getValue().toLowerCase().contains(type)) {
 				tl.put(tel.getValue(),
-						(tel.getUses().size() > 0
-								? TelecomAddressUse.getEnum(tel.getUses().get(0).getName())
+						(!tel.getUse().isEmpty()
+								? TelecomAddressUse.getEnum(tel.getUse().get(0))
 								: null));
 			}
 		}
@@ -1448,7 +1509,7 @@ public class Util {
 	 */
 	public static InputStream getUtf8InputStream(FileInputStream fis) {
 		try {
-			return IOUtils.toInputStream(IOUtils.toString(new InputStreamReader(fis, "UTF-8")),
+			return IOUtils.toInputStream(IOUtils.toString(new InputStreamReader(fis, Charsets.UTF_8)),
 					Charsets.UTF_8);
 		} catch (IOException e) {
 			return null;
@@ -1464,7 +1525,7 @@ public class Util {
 	 */
 	public static InputStream getUtf8InputStream(InputStream is) {
 		try {
-			return IOUtils.toInputStream(IOUtils.toString(new InputStreamReader(is, "UTF-8")),
+			return IOUtils.toInputStream(IOUtils.toString(new InputStreamReader(is, Charsets.UTF_8)),
 					Charsets.UTF_8);
 		} catch (IOException e) {
 			return null;
@@ -1520,8 +1581,7 @@ public class Util {
 	 * @return <div class="en">the webside</div>
 	 */
 	public static Map<String, TelecomAddressUse> getWebsites(List<TEL> telecoms) {
-		final Map<String, TelecomAddressUse> h = getTelecomType(telecoms, TELECOMS_WEBSITE_PREFIX);
-		return h;
+		return getTelecomType(telecoms, TELECOMS_WEBSITE_PREFIX);
 	}
 
 	/**
@@ -1533,7 +1593,7 @@ public class Util {
 	 * @return the II
 	 */
 	public static II ii(String root) {
-		final II ii = DatatypesFactory.eINSTANCE.createII();
+		final var ii = new II();
 		ii.setRoot(root);
 		return ii;
 	}
@@ -1565,7 +1625,7 @@ public class Util {
 	public static void initLogger(String rscDir, Class myClass) throws MalformedURLException {
 		// Init
 		String log4jConfigFn = null;
-		final RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
+		final var runtimeMxBean = ManagementFactory.getRuntimeMXBean();
 		final List<String> vmArgs = runtimeMxBean.getInputArguments();
 		for (final String vmArg : vmArgs) {
 			if (vmArg.toLowerCase().startsWith("-dlog4j.configuration=")) {
@@ -1629,12 +1689,8 @@ public class Util {
 	 * @return true if the EntryRelationship is a comment, false otherwise
 	 */
 	public static boolean isComment(EntryRelationship er) {
-		if (er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ)
-				&& er.getInversionInd())
-			return true;
-		else {
-			return false;
-		}
+		return er.getTypeCode().equals(x_ActRelationshipEntryRelationship.SUBJ) && er.getInversionInd() != null
+				&& er.getInversionInd().booleanValue();
 	}
 
 	/**
@@ -1681,7 +1737,7 @@ public class Util {
 
 		return ((System.getProperty("os.name").toLowerCase().indexOf("nix") >= 0)
 				|| (System.getProperty("os.name").toLowerCase().indexOf("nux") >= 0)
-				|| (System.getProperty("os.name").toLowerCase().indexOf("aix") > 0));
+				|| (System.getProperty("os.name").toLowerCase().indexOf("aix") >= 0));
 
 	}
 
@@ -1713,7 +1769,7 @@ public class Util {
 			return "";
 		}
 
-		final StringBuilder builder = new StringBuilder();
+		final var builder = new StringBuilder();
 		final Iterator<String> iter = nameList.iterator();
 		// String string = iter.next();
 		// if ("".equals(string)) {
@@ -1722,7 +1778,7 @@ public class Util {
 		// builder = new StringBuilder(iter.next());
 		// }
 		while (iter.hasNext()) {
-			final String string = iter.next();
+			final var string = iter.next();
 			if (builder.length() > 0) {
 				builder.append(delimiter).append(string);
 			} else {
@@ -1741,15 +1797,15 @@ public class Util {
 	 *            <div class="en">the list</div>
 	 * @return the string
 	 */
-	public static String joinEListStr(EList<ENXP> list) {
-		if (list.size() == 0) {
+	public static String joinEListStr(List<ENXP> list) {
+		if (list.isEmpty()) {
 			return "";
 		}
-		final String names = list.get(0).getText();
+		final String names = list.get(0).xmlContent;
 		if (list.size() > 1) {
 			final List<String> nameList = new ArrayList<>();
-			for (int i = 0; i < list.size(); i++) {
-				nameList.add(list.get(i).getText());
+			for (var i = 0; i < list.size(); i++) {
+				nameList.add(list.get(i).xmlContent);
 			}
 			return Util.join(nameList, " ");
 		}
@@ -1806,8 +1862,8 @@ public class Util {
 	 * @return the st
 	 */
 	public static ST st(String text) {
-		final ST value = DatatypesFactory.eINSTANCE.createST();
-		value.addText(text);
+		final var value = new ST();
+		value.xmlContent = text;
 		return value;
 	}
 

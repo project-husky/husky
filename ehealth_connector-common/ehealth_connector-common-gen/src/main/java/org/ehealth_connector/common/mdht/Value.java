@@ -19,32 +19,38 @@ package org.ehealth_connector.common.mdht;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
+
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.enums.NullFlavor;
+import org.ehealth_connector.common.hl7cdar2.ANY;
+import org.ehealth_connector.common.hl7cdar2.BL;
+import org.ehealth_connector.common.hl7cdar2.CD;
+import org.ehealth_connector.common.hl7cdar2.ED;
+import org.ehealth_connector.common.hl7cdar2.INT;
+import org.ehealth_connector.common.hl7cdar2.IVLINT;
+import org.ehealth_connector.common.hl7cdar2.IVLPQ;
+import org.ehealth_connector.common.hl7cdar2.IVXBINT;
+import org.ehealth_connector.common.hl7cdar2.IVXBPQ;
+import org.ehealth_connector.common.hl7cdar2.PQ;
+import org.ehealth_connector.common.hl7cdar2.QTY;
+import org.ehealth_connector.common.hl7cdar2.RTO;
+import org.ehealth_connector.common.hl7cdar2.ST;
+import org.ehealth_connector.common.hl7cdar2.TEL;
 import org.ehealth_connector.common.mdht.enums.Ucum;
 import org.ehealth_connector.common.utils.Util;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ANY;
-import org.openhealthtools.mdht.uml.hl7.datatypes.BL;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ED;
-import org.openhealthtools.mdht.uml.hl7.datatypes.INT;
-import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_INT;
-import org.openhealthtools.mdht.uml.hl7.datatypes.IVL_PQ;
-import org.openhealthtools.mdht.uml.hl7.datatypes.IVXB_INT;
-import org.openhealthtools.mdht.uml.hl7.datatypes.IVXB_PQ;
-import org.openhealthtools.mdht.uml.hl7.datatypes.PQ;
-import org.openhealthtools.mdht.uml.hl7.datatypes.QTY;
-import org.openhealthtools.mdht.uml.hl7.datatypes.RTO;
-import org.openhealthtools.mdht.uml.hl7.datatypes.ST;
-import org.openhealthtools.mdht.uml.hl7.datatypes.TEL;
-import org.openhealthtools.mdht.uml.hl7.datatypes.impl.PQImpl;
-import org.openhealthtools.mdht.uml.hl7.vocab.NullFlavor;
 
 /**
  * Ein Wert bestehend aus eigentlichem Wert und der zugehörigen Einheit.
  */
 public class Value {
+
+	private static final String NAMESPACE_HL7_V3 = "urn:hl7-org:v3";
 
 	/**
 	 * The m value.
@@ -52,78 +58,77 @@ public class Value {
 	private final ANY mValue;
 
 	/**
-	 * <div class="en">Instantiates a new value with a given MDHT ANY
-	 * Objekt</div> <div class="de">Instantiiert ein neues Value Objekt. Value
-	 * repräsentiert den Wert z.B. zu einer Beobachtung oder Diagnose. Mit
-	 * diesem Konstruktor wird ein Value Objekt auf Basis eines MDHT ANY
-	 * Datenobjekts initialisiert.</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Instantiates a new value with a given MDHT ANY Objekt</div>
+	 * <div class="de">Instantiiert ein neues Value Objekt. Value repräsentiert den
+	 * Wert z.B. zu einer Beobachtung oder Diagnose. Mit diesem Konstruktor wird ein
+	 * Value Objekt auf Basis eines MDHT ANY Datenobjekts initialisiert.</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @param value
-	 *            <br>
-	 *            <div class="de"> value</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 * @param value <br>
+	 *              <div class="de"> value</div> <div class="fr"></div>
+	 *              <div class="it"></div>
 	 */
 	public Value(ANY value) {
 		mValue = value;
 	}
 
 	/**
-	 * <div class="en">Instantiates a new value with a given MDHT ANY Objekt and
-	 * an nullFlavor</div> <div class="de">Instantiiert ein neues Value Objekt.
-	 * Value repräsentiert den Wert z.B. zu einer Beobachtung oder Diagnose. Mit
-	 * diesem Konstruktor wird ein Value Objekt auf Basis eines MDHT ANY
-	 * Datenobjekts und einem NullFlavor initialisiert.</div>
-	 * <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Instantiates a new value with a given MDHT ANY Objekt and an
+	 * nullFlavor</div> <div class="de">Instantiiert ein neues Value Objekt. Value
+	 * repräsentiert den Wert z.B. zu einer Beobachtung oder Diagnose. Mit diesem
+	 * Konstruktor wird ein Value Objekt auf Basis eines MDHT ANY Datenobjekts und
+	 * einem NullFlavor initialisiert.</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
-	 * @param value
-	 *            <br>
-	 *            <div class="de"> value</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 * @param value <br>
+	 *              <div class="de"> value</div> <div class="fr"></div>
+	 *              <div class="it"></div>
 	 */
 	public Value(ANY value, NullFlavor nullFlavor) {
 		mValue = value;
-		value.setNullFlavor(nullFlavor);
+
+		if (nullFlavor != null) {
+			mValue.nullFlavor = List.of(nullFlavor.getCodeValue());
+		}
 	}
 
 	/**
 	 * Creates a new BigDecimal value.
 	 *
-	 * @param value
-	 *            The value
+	 * @param value The value
 	 */
 	public Value(BigDecimal value) {
-		this(DatatypesFactory.eINSTANCE.createPQ());
-		final PQ pq = (PQ) mValue;
-		pq.setValue(value);
+		this(new PQ());
+		final var pq = (PQ) mValue;
+		pq.setValue(value.toString());
 	}
 
 	/**
 	 * <div class="en">Instantiates a new value with the parameters for a MDHT
 	 * IVL_PQ Objekt with two PQ Values (A low and high bound of physical
-	 * quantities).</div> <div class="de">Instantiiert eine neues Value MDHT
-	 * IVL_PQ Objekt mit zwei PQ Werten (entspricht zwei Grenzen von
-	 * physikalischen Messgrößen).</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * quantities).</div> <div class="de">Instantiiert eine neues Value MDHT IVL_PQ
+	 * Objekt mit zwei PQ Werten (entspricht zwei Grenzen von physikalischen
+	 * Messgrößen).</div> <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @param low
-	 *            The lower bound
+	 * @param low  The lower bound
 	 *
-	 * @param high
-	 *            The upper bound
+	 * @param high The upper bound
 	 */
 	public Value(BigDecimal low, BigDecimal high) {
-		final IVL_PQ ivlPq = DatatypesFactory.eINSTANCE.createIVL_PQ();
-		final IVXB_PQ mlow = DatatypesFactory.eINSTANCE.createIVXB_PQ();
-		final IVXB_PQ mhigh = DatatypesFactory.eINSTANCE.createIVXB_PQ();
+		final var ivlPq = new IVLPQ();
+		final var mlow = new IVXBPQ();
+		final var mhigh = new IVXBPQ();
 
-		mlow.setValue(low);
-		mlow.setUnit("");
-		ivlPq.setLow(mlow);
+		if (low != null && high != null) {
 
-		mhigh.setValue(high);
-		mhigh.setUnit("");
-		ivlPq.setHigh(mhigh);
+			mlow.setValue(low.toString());
+			mlow.setUnit("");
+			ivlPq.getRest().add(new JAXBElement<>(new QName(NAMESPACE_HL7_V3, "low", ""), IVXBPQ.class, mlow));
+
+			mhigh.setValue(high.toString());
+			mhigh.setUnit("");
+			ivlPq.getRest().add(new JAXBElement<>(new QName(NAMESPACE_HL7_V3, "high", ""), IVXBPQ.class, mhigh));
+		}
 
 		mValue = ivlPq;
 	}
@@ -131,29 +136,28 @@ public class Value {
 	/**
 	 * <div class="en">Instantiates a new value with the parameters for a MDHT
 	 * IVL_PQ Objekt with two PQ Values (A low and high bound of physical
-	 * quantities).</div> <div class="de">Instantiiert eine neues Value MDHT
-	 * IVL_PQ Objekt mit zwei PQ Werten (entspricht zwei Grenzen von
-	 * physikalischen Messgrößen).</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * quantities).</div> <div class="de">Instantiiert eine neues Value MDHT IVL_PQ
+	 * Objekt mit zwei PQ Werten (entspricht zwei Grenzen von physikalischen
+	 * Messgrößen).</div> <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @param low
-	 *            The lower bound
+	 * @param low  The lower bound
 	 *
-	 * @param high
-	 *            The upper bound
+	 * @param high The upper bound
 	 */
 	public Value(BigDecimal low, String lowUnit, BigDecimal high, String highUnit) {
-		final IVL_PQ ivlPq = DatatypesFactory.eINSTANCE.createIVL_PQ();
-		final IVXB_PQ mlow = DatatypesFactory.eINSTANCE.createIVXB_PQ();
-		final IVXB_PQ mhigh = DatatypesFactory.eINSTANCE.createIVXB_PQ();
+		final var ivlPq = new IVLPQ();
+		final var mlow = new IVXBPQ();
+		final var mhigh = new IVXBPQ();
 
-		mlow.setValue(low);
-		mlow.setUnit(lowUnit);
-		ivlPq.setLow(mlow);
+		if (low != null && high != null) {
+			mlow.setValue(low.toString());
+			mlow.setUnit(lowUnit);
+			ivlPq.getRest().add(new JAXBElement<>(new QName(NAMESPACE_HL7_V3, "low", ""), IVXBPQ.class, mlow));
 
-		mhigh.setValue(high);
-		mhigh.setUnit(highUnit);
-		ivlPq.setHigh(mhigh);
+			mhigh.setValue(high.toString());
+			mhigh.setUnit(highUnit);
+			ivlPq.getRest().add(new JAXBElement<>(new QName(NAMESPACE_HL7_V3, "high", ""), IVXBPQ.class, mhigh));
+		}
 
 		mValue = ivlPq;
 	}
@@ -165,78 +169,71 @@ public class Value {
 	/**
 	 * <div class="en">Instantiates a new value with the parameters for a MDHT
 	 * IVL_INT Objekt with two INT Values (A low and high bound of the
-	 * interval).</div> <div class="de">Instantiiert eine neues Value MDHT
-	 * IVL_INT Objekt mit zwei INT Werten (entspricht dem unteren und dem oberen
-	 * Ende des Intervalls).</div> <div class="fr"></div> <div class="it"></div>
+	 * interval).</div> <div class="de">Instantiiert eine neues Value MDHT IVL_INT
+	 * Objekt mit zwei INT Werten (entspricht dem unteren und dem oberen Ende des
+	 * Intervalls).</div> <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @param low
-	 *            The lower bound
+	 * @param low  The lower bound
 	 *
-	 * @param high
-	 *            The upper bound
+	 * @param high The upper bound
 	 */
 	public Value(BigInteger low, BigInteger high) {
-		final IVL_INT ivlInt = DatatypesFactory.eINSTANCE.createIVL_INT();
-		final IVXB_INT mlow = DatatypesFactory.eINSTANCE.createIVXB_INT();
-		final IVXB_INT mhigh = DatatypesFactory.eINSTANCE.createIVXB_INT();
+		final var ivlInt = new IVLINT();
+		final var mlow = new IVXBINT();
+		final var mhigh = new IVXBINT();
 
-		mlow.setValue(low);
-		ivlInt.setLow(mlow);
+		if (low != null && high != null) {
+			mlow.setValue(low);
+			ivlInt.getRest().add(new JAXBElement<>(new QName(NAMESPACE_HL7_V3, "low", ""), IVXBINT.class, mlow));
 
-		mhigh.setValue(high);
-		ivlInt.setHigh(mhigh);
+			mhigh.setValue(high);
+			ivlInt.getRest().add(new JAXBElement<>(new QName(NAMESPACE_HL7_V3, "high", ""), IVXBINT.class, mhigh));
+		}
 
 		mValue = ivlInt;
 	}
 
 	/**
-	 * <div class="en">Instantiates a new value with a given boolean
-	 * Object.</div> <div class="de">Instantiiert eine neues Value Objekt. Value
-	 * repräsentiert den Wert z.B. zu einer Beobachtung oder Diagnose. Mit
-	 * diesem Konstruktor wird ein Value Objekt auf Basis eines Java boolean
-	 * initialisiert (CDA Datentyp: BL)</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Instantiates a new value with a given boolean Object.</div>
+	 * <div class="de">Instantiiert eine neues Value Objekt. Value repräsentiert den
+	 * Wert z.B. zu einer Beobachtung oder Diagnose. Mit diesem Konstruktor wird ein
+	 * Value Objekt auf Basis eines Java boolean initialisiert (CDA Datentyp:
+	 * BL)</div> <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @param bl
-	 *            <div class="en">the boolean value</div> <div class="de">der
-	 *            boolean Wert</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 * @param bl <div class="en">the boolean value</div> <div class="de">der boolean
+	 *           Wert</div> <div class="fr"></div> <div class="it"></div>
 	 */
 	public Value(BL bl) {
 		mValue = bl;
 	}
 
 	/**
-	 * <div class="en">Instantiates a new value with a given boolean
-	 * Object.</div> <div class="de">Instantiiert eine neues Value Objekt. Value
-	 * repräsentiert den Wert z.B. zu einer Beobachtung oder Diagnose. Mit
-	 * diesem Konstruktor wird ein Value Objekt auf Basis eines Java boolean
-	 * initialisiert (CDA Datentyp: BL)</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Instantiates a new value with a given boolean Object.</div>
+	 * <div class="de">Instantiiert eine neues Value Objekt. Value repräsentiert den
+	 * Wert z.B. zu einer Beobachtung oder Diagnose. Mit diesem Konstruktor wird ein
+	 * Value Objekt auf Basis eines Java boolean initialisiert (CDA Datentyp:
+	 * BL)</div> <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 * @param code <br>
+	 *             <div class="de"> code</div> <div class="fr"></div>
+	 *             <div class="it"></div>
 	 */
 	public Value(boolean code) {
-		final BL bl = DatatypesFactory.eINSTANCE.createBL();
+		final var bl = new BL();
 		bl.setValue(code);
 		mValue = bl;
 	}
 
 	/**
-	 * <div class="en">Instantiates a new value with a give MDHT CD
-	 * Objekt.</div> <div class="de">Instantiiert eine neues Value Objekt. Value
-	 * repräsentiert den Wert z.B. zu einer Beobachtung oder Diagnose. Mit
-	 * diesem Konstruktor wird ein Value Objekt auf Basis eines MDHT CD (Code)
-	 * Datenobjekts initialisiert.</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Instantiates a new value with a give MDHT CD Objekt.</div>
+	 * <div class="de">Instantiiert eine neues Value Objekt. Value repräsentiert den
+	 * Wert z.B. zu einer Beobachtung oder Diagnose. Mit diesem Konstruktor wird ein
+	 * Value Objekt auf Basis eines MDHT CD (Code) Datenobjekts initialisiert.</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @param cd
-	 *            <br>
-	 *            <div class="de"> cd</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 * @param cd <br>
+	 *           <div class="de"> cd</div> <div class="fr"></div>
+	 *           <div class="it"></div>
 	 */
 	public Value(CD cd) {
 		mValue = cd;
@@ -244,58 +241,55 @@ public class Value {
 
 	/**
 	 * <div class="en">Instantiates a new value with a given Code Object.</div>
-	 * <div class="de">Instantiiert eine neues Value Objekt. Value repräsentiert
-	 * den Wert z.B. zu einer Beobachtung oder Diagnose. Mit diesem Konstruktor
-	 * wird ein Value Objekt auf Basis eines Convenience API Code Datenobjekts
+	 * <div class="de">Instantiiert eine neues Value Objekt. Value repräsentiert den
+	 * Wert z.B. zu einer Beobachtung oder Diagnose. Mit diesem Konstruktor wird ein
+	 * Value Objekt auf Basis eines Convenience API Code Datenobjekts
 	 * initialisiert.</div> <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 * @param code <br>
+	 *             <div class="de"> code</div> <div class="fr"></div>
+	 *             <div class="it"></div>
 	 */
 	public Value(Code code) {
-		mValue = code.getCD();
+		mValue = code.getHl7CdaR2Cd();
 	}
 
 	/**
 	 * Erstellt einen neuen Wert double.
 	 *
-	 * @param value
-	 *            Der eigentliche Wert
+	 * @param value Der eigentliche Wert
 	 */
 	public Value(Double value) {
-		this(DatatypesFactory.eINSTANCE.createPQ());
-		final PQ pq = (PQ) mValue;
-		pq.setValue(Double.valueOf(value));
+		this(new PQ());
+		final var pq = (PQ) mValue;
+		pq.setValue(value.toString());
 	}
 
 	/**
 	 * <div class="en">Instantiates a new value with the parameters for a MDHT
 	 * IVL_PQ Objekt with two PQ Values (A low and high bound of physical
-	 * quantities).</div> <div class="de">Instantiiert eine neues Value MDHT
-	 * IVL_PQ Objekt mit zwei PQ Werten (entspricht zwei Grenzen von
-	 * physikalischen Messgrößen).</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * quantities).</div> <div class="de">Instantiiert eine neues Value MDHT IVL_PQ
+	 * Objekt mit zwei PQ Werten (entspricht zwei Grenzen von physikalischen
+	 * Messgrößen).</div> <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @param low
-	 *            The lower bound
+	 * @param low  The lower bound
 	 *
-	 * @param high
-	 *            The upper bound
+	 * @param high The upper bound
 	 */
 	public Value(Double low, Double high) {
-		final IVL_PQ ivlPq = DatatypesFactory.eINSTANCE.createIVL_PQ();
-		final IVXB_PQ mlow = DatatypesFactory.eINSTANCE.createIVXB_PQ();
-		final IVXB_PQ mhigh = DatatypesFactory.eINSTANCE.createIVXB_PQ();
+		final var ivlPq = new IVLPQ();
+		final var mlow = new IVXBPQ();
+		final var mhigh = new IVXBPQ();
 
-		mlow.setValue(low);
-		mlow.setUnit("");
-		ivlPq.setLow(mlow);
+		if (low != null && high != null) {
+			mlow.setValue(low.toString());
+			mlow.setUnit("");
+			ivlPq.getRest().add(new JAXBElement<>(new QName(NAMESPACE_HL7_V3, "low", ""), IVXBPQ.class, mlow));
 
-		mhigh.setValue(high);
-		mhigh.setUnit("");
-		ivlPq.setHigh(mhigh);
+			mhigh.setValue(high.toString());
+			mhigh.setUnit("");
+			ivlPq.getRest().add(new JAXBElement<>(new QName(NAMESPACE_HL7_V3, "high", ""), IVXBPQ.class, mhigh));
+		}
 
 		mValue = ivlPq;
 	}
@@ -303,60 +297,55 @@ public class Value {
 	/**
 	 * <div class="en">Instantiates a new value with the parameters for a MDHT
 	 * IVL_PQ Objekt with two PQ Values (A low and high bound of physical
-	 * quantities).</div> <div class="de">Instantiiert eine neues Value MDHT
-	 * IVL_PQ Objekt mit zwei PQ Werten (entspricht zwei Grenzen von
-	 * physikalischen Messgrößen).</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * quantities).</div> <div class="de">Instantiiert eine neues Value MDHT IVL_PQ
+	 * Objekt mit zwei PQ Werten (entspricht zwei Grenzen von physikalischen
+	 * Messgrößen).</div> <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @param low
-	 *            The lower bound
-	 * @param high
-	 *            The upper bound
-	 * @param unit
-	 *            the unit
+	 * @param low  The lower bound
+	 * @param high The upper bound
+	 * @param unit the unit
 	 */
 	public Value(Double low, Double high, String unit) {
-		final IVL_PQ ivlPq = DatatypesFactory.eINSTANCE.createIVL_PQ();
-		final IVXB_PQ mlow = DatatypesFactory.eINSTANCE.createIVXB_PQ();
-		final IVXB_PQ mhigh = DatatypesFactory.eINSTANCE.createIVXB_PQ();
+		final var ivlPq = new IVLPQ();
+		final var mlow = new IVXBPQ();
+		final var mhigh = new IVXBPQ();
 
-		mlow.setValue(low);
-		mlow.setUnit(unit);
-		ivlPq.setLow(mlow);
+		if (low != null && high != null) {
+			mlow.setValue(low.toString());
+			mlow.setUnit(unit);
+			ivlPq.getRest().add(new JAXBElement<>(new QName(NAMESPACE_HL7_V3, "low", ""), IVXBPQ.class, mlow));
 
-		mhigh.setValue(high);
-		mhigh.setUnit(unit);
-		ivlPq.setHigh(mhigh);
+			mhigh.setValue(high.toString());
+			mhigh.setUnit(unit);
+			ivlPq.getRest().add(new JAXBElement<>(new QName(NAMESPACE_HL7_V3, "high", ""), IVXBPQ.class, mhigh));
+		}
 
 		mValue = ivlPq;
 	}
 
 	/**
-	 * <div class="en">Instantiates a new value with the parameters for a MDHT
-	 * RTO Objekt (A quantity constructed as the quotient of a numerator
-	 * quantity divided by a denominator quantity.).</div>
-	 * <div class="de">Instantiiert eine neues Value RTO Objekt. Dieses wird
-	 * häufig für die Angabe von Titer verwendet. Mit diesem Konstruktor wird
-	 * ein Value Objekt auf Basis eines MDHT RTO Datenobjekts
-	 * initialisiert.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Instantiates a new value with the parameters for a MDHT RTO
+	 * Objekt (A quantity constructed as the quotient of a numerator quantity
+	 * divided by a denominator quantity.).</div> <div class="de">Instantiiert eine
+	 * neues Value RTO Objekt. Dieses wird häufig für die Angabe von Titer
+	 * verwendet. Mit diesem Konstruktor wird ein Value Objekt auf Basis eines MDHT
+	 * RTO Datenobjekts initialisiert.</div> <div class="fr"></div>
+	 * <div class="it"></div>
 	 *
-	 * @param numerator
-	 *            The nominator value (nominator/denominator)
+	 * @param numerator   The nominator value (nominator/denominator)
 	 *
-	 * @param denominator
-	 *            The denominator value (nominator/denominator)
-	 * @param ucumUnit
-	 *            the UCUM Unit
+	 * @param denominator The denominator value (nominator/denominator)
+	 * @param ucumUnit    the UCUM Unit
 	 */
 	public Value(Double numerator, Double denominator, Ucum ucumUnit) {
-		final RTO rto = DatatypesFactory.eINSTANCE.createRTO();
+		final var rto = new RTO();
 
-		final PQ pq1 = DatatypesFactory.eINSTANCE.createPQ();
+		final var pq1 = new PQ();
 		pq1.setUnit(ucumUnit.getCodeValue());
-		pq1.setValue(numerator);
-		final PQ pq2 = DatatypesFactory.eINSTANCE.createPQ();
+		pq1.setValue(numerator.toString());
+		final var pq2 = new PQ();
 		pq2.setUnit(ucumUnit.getCodeValue());
-		pq2.setValue(denominator);
+		pq2.setValue(denominator.toString());
 
 		rto.setNumerator(pq1);
 		rto.setDenominator(pq2);
@@ -370,37 +359,33 @@ public class Value {
 	/**
 	 * Erstellt einen neuen Wert (INT).
 	 *
-	 * @param value
-	 *            Der eigentliche Wert
+	 * @param value Der eigentliche Wert
 	 */
 	public Value(int value) {
-		this(DatatypesFactory.eINSTANCE.createINT());
+		this(new INT());
 		setIntValue(value);
 	}
 
 	/**
 	 * Creates a new INT value.
 	 *
-	 * @param value
-	 *            The value.
+	 * @param value The value.
 	 */
 	public Value(Integer value) {
-		this(DatatypesFactory.eINSTANCE.createINT());
+		this(new INT());
 		setIntValue(value);
 	}
 
 	/**
-	 * <div class="en">Instantiates a new value.</div>
-	 * <div class="de">Instantiiert eine neues Value Objekt. Value repräsentiert
-	 * den Wert z.B. zu einer Beobachtung oder Diagnose. Mit diesem Konstruktor
-	 * wird ein Value Objekt auf Basis eines MDHT PQ (Physical Quantity)
-	 * Datenobjekts initialisiert.</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * <div class="en">Instantiates a new value.</div> <div class="de">Instantiiert
+	 * eine neues Value Objekt. Value repräsentiert den Wert z.B. zu einer
+	 * Beobachtung oder Diagnose. Mit diesem Konstruktor wird ein Value Objekt auf
+	 * Basis eines MDHT PQ (Physical Quantity) Datenobjekts initialisiert.</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @param pq
-	 *            <br>
-	 *            <div class="de"> pq</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 * @param pq <br>
+	 *           <div class="de"> pq</div> <div class="fr"></div>
+	 *           <div class="it"></div>
 	 */
 	public Value(PQ pq) {
 		mValue = pq;
@@ -409,14 +394,12 @@ public class Value {
 	/**
 	 * <div class="en">Instantiates a new value with a give MDHT RTO Objekt (A
 	 * quantity constructed as the quotient of a numerator quantity divided by a
-	 * denominator quantity.).</div> <div class="de">Instantiiert eine neues
-	 * Value RTO Objekt. Dieses wird häufig für die Angabe von Titer verwendet.
-	 * Mit diesem Konstruktor wird ein Value Objekt auf Basis eines MDHT RTO
-	 * Datenobjekts initialisiert.</div> <div class="fr"></div>
-	 * <div class="it"></div>
+	 * denominator quantity.).</div> <div class="de">Instantiiert eine neues Value
+	 * RTO Objekt. Dieses wird häufig für die Angabe von Titer verwendet. Mit diesem
+	 * Konstruktor wird ein Value Objekt auf Basis eines MDHT RTO Datenobjekts
+	 * initialisiert.</div> <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @param rto
-	 *            The RTO object
+	 * @param rto The RTO object
 	 */
 	public Value(RTO rto) {
 		mValue = rto;
@@ -425,8 +408,7 @@ public class Value {
 	/**
 	 * Erstellt einen neuen Wert (ST).
 	 *
-	 * @param value
-	 *            Der eigentliche Wert
+	 * @param value Der eigentliche Wert
 	 */
 	public Value(ST value) {
 		mValue = value;
@@ -437,21 +419,18 @@ public class Value {
 	}
 
 	/**
-	 * <div class="en">Instantiates a new value.</div>
-	 * <div class="de">Instantiiert eine neues Value Objekt. Value repräsentiert
-	 * den Wert z.B. zu einer Beobachtung oder Diagnose. Mit diesem Konstruktor
-	 * wird ein Value Objekt auf Basis eines MDHT ED Objektes mit einem text
-	 * oder einer Referenz initalisiert. initialisiert.</div>
-	 * <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Instantiates a new value.</div> <div class="de">Instantiiert
+	 * eine neues Value Objekt. Value repräsentiert den Wert z.B. zu einer
+	 * Beobachtung oder Diagnose. Mit diesem Konstruktor wird ein Value Objekt auf
+	 * Basis eines MDHT ED Objektes mit einem text oder einer Referenz initalisiert.
+	 * initialisiert.</div> <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @param value
-	 *            <br>
-	 *            <div class="de"> code system</div> <div class="fr"></div>
-	 *            <div class="it"></div>
-	 * @param isText
-	 *            indicates, if the given value is a text (/value will be
-	 *            created) or a reference (/value/reference[@value] will be
-	 *            created)
+	 * @param value  <br>
+	 *               <div class="de"> code system</div> <div class="fr"></div>
+	 *               <div class="it"></div>
+	 * @param isText indicates, if the given value is a text (/value will be
+	 *               created) or a reference (/value/reference[@value] will be
+	 *               created)
 	 */
 	public Value(String value, boolean isText) {
 		final ED ed;
@@ -464,23 +443,21 @@ public class Value {
 	}
 
 	/**
-	 * <div class="en">Instantiates a new value.</div>
-	 * <div class="de">Instantiiert eine neues Value Objekt. Value repräsentiert
-	 * den Wert z.B. zu einer Beobachtung oder Diagnose. Mit diesem Konstruktor
-	 * wird ein Value Objekt auf Basis von einem CodeSytem und einem Code
-	 * initialisiert.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Instantiates a new value.</div> <div class="de">Instantiiert
+	 * eine neues Value Objekt. Value repräsentiert den Wert z.B. zu einer
+	 * Beobachtung oder Diagnose. Mit diesem Konstruktor wird ein Value Objekt auf
+	 * Basis von einem CodeSytem und einem Code initialisiert.</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 *
-	 * @param codeSystem
-	 *            <br>
-	 *            <div class="de"> code system</div> <div class="fr"></div>
-	 *            <div class="it"></div>
-	 * @param code
-	 *            <br>
-	 *            <div class="de"> code</div> <div class="fr"></div>
-	 *            <div class="it"></div>
+	 * @param codeSystem <br>
+	 *                   <div class="de"> code system</div> <div class="fr"></div>
+	 *                   <div class="it"></div>
+	 * @param code       <br>
+	 *                   <div class="de"> code</div> <div class="fr"></div>
+	 *                   <div class="it"></div>
 	 */
 	public Value(String codeSystem, String code) {
-		final CD cd = DatatypesFactory.eINSTANCE.createCD();
+		final var cd = new CD();
 		cd.setCodeSystem(codeSystem);
 		cd.setCode(code);
 		mValue = cd;
@@ -489,53 +466,13 @@ public class Value {
 	/**
 	 * Erstellt einen neuen Wert.
 	 *
-	 * @param value
-	 *            Der eigentliche Wert
-	 * @param unit
-	 *            Die Einheit
+	 * @param value Der eigentliche Wert
+	 * @param unit  Die Einheit
 	 */
 	public Value(String value, Ucum unit) {
-		this(DatatypesFactory.eINSTANCE.createPQ());
+		this(new PQ());
 		setPqValue(value);
 		setUcumUnit(unit);
-	}
-
-	/**
-	 * Method to copy the BL value
-	 *
-	 * @return BL representing the value
-	 */
-	public BL copyMdhtBl() {
-		return EcoreUtil.copy((BL) mValue);
-	}
-
-	/**
-	 * <div class="en">Copy mdht code.</div> <div class="de"></div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @return CD the MDHT CD object
-	 */
-	public CD copyMdhtCode() {
-		return EcoreUtil.copy((CD) mValue);
-	}
-
-	/**
-	 * <div class="en">Copy mdht physical quantity.</div> <div class="de"></div>
-	 * <div class="fr"></div> <div class="it"></div>
-	 *
-	 * @return PQ the PQ object
-	 */
-	public PQ copyMdhtPhysicalQuantity() {
-		return EcoreUtil.copy((PQ) mValue);
-	}
-
-	/**
-	 * Method to copy the RTO value
-	 *
-	 * @return RTO represeting the value
-	 */
-	public RTO copyMdhtRto() {
-		return EcoreUtil.copy((RTO) mValue);
 	}
 
 	/**
@@ -545,9 +482,9 @@ public class Value {
 	 */
 	public String getBlText() {
 		if (isBl()) {
-			final BL bl = (BL) mValue;
-			if (bl.getValue() != null)
-				return bl.getValue().toString();
+			final var bl = (BL) mValue;
+			if (bl.isValue() != null)
+				return bl.isValue().toString();
 		}
 		return null;
 	}
@@ -560,8 +497,8 @@ public class Value {
 	 */
 	public boolean getBoolean() {
 		if (isBl()) {
-			final BL bl = (BL) mValue;
-			return bl.getValue();
+			final var bl = (BL) mValue;
+			return bl.isValue();
 		}
 		return false;
 	}
@@ -573,8 +510,7 @@ public class Value {
 	 * @return Code <div class="en">the convenience API Code object</div>
 	 */
 	public Code getCode() {
-		final Code code = new Code((CD) mValue);
-		return code;
+		return new Code((CD) mValue);
 	}
 
 	/**
@@ -584,7 +520,7 @@ public class Value {
 	 */
 	public String getEdReferenceValue() {
 		if (isEd()) {
-			final ED ed = (ED) mValue;
+			final var ed = (ED) mValue;
 			return ed.getReference().getValue();
 		}
 		return null;
@@ -597,8 +533,8 @@ public class Value {
 	 */
 	public String getEdText() {
 		if (isEd()) {
-			final ED ed = (ED) mValue;
-			return ed.getText();
+			final var ed = (ED) mValue;
+			return ed.xmlContent;
 		}
 		return null;
 	}
@@ -618,8 +554,8 @@ public class Value {
 	}
 
 	public String getOriginalTextReference() {
-		final Code code = new Code((CD) mValue);
-		return code.getOriginalTextReference();
+		final var code = new Code((CD) mValue);
+		return code.getOriginalText();
 	}
 
 	/**
@@ -633,17 +569,55 @@ public class Value {
 
 	/**
 	 * <div class="en">Returns the higher bound of an interval of physical
-	 * measurements</div> Gibt den oberen Wert eines Intervals physikalischer
-	 * Größen zurück.
+	 * measurements</div> Gibt den oberen Wert eines Intervals physikalischer Größen
+	 * zurück.
 	 *
 	 * @return the measurement
 	 */
 	public BigDecimal getPhysicalQuantityIntervalHighValue() {
 		if (isPhysicalQuantityInterval()) {
-			final IVL_PQ ivlPq = (IVL_PQ) mValue;
-			return ivlPq.getHigh().getValue();
+			final var ivlPq = (IVLPQ) mValue;
+
+			Map<String, PQ> elements = getPqElement(ivlPq);
+			return new BigDecimal(elements.get("high").getValue());
 		}
 		return null;
+	}
+
+	/**
+	 * extracts all {@link PQ} elements of passed {@link IVLPQ}. Extracted elements
+	 * are stored in a map, where key is element name like "high" and value is
+	 * extracted {@link PQ}.
+	 *
+	 * @param range to be extracted
+	 *
+	 * @return map of element name and value
+	 */
+	public Map<String, PQ> getPqElement(IVLPQ range) {
+		Map<String, PQ> pqElements = new HashMap<>();
+		if (range != null) {
+			for (JAXBElement<? extends QTY> pq : range.getRest()) {
+				var value = new PQ();
+				var elementName = "";
+				if (pq != null && PQ.class.equals(pq.getDeclaredType()) && pq.getValue() != null) {
+					value = (PQ) pq.getValue();
+				}
+
+				if (pq != null && IVXBPQ.class.equals(pq.getDeclaredType()) && pq.getValue() != null) {
+					value = (IVXBPQ) pq.getValue();
+				}
+
+				if (pq != null && pq.getName() != null) {
+					elementName = pq.getName().getLocalPart();
+				}
+
+				if (value != null && elementName != null) {
+					pqElements.put(elementName, value);
+				}
+			}
+		}
+
+		return pqElements;
 	}
 
 	/**
@@ -655,8 +629,10 @@ public class Value {
 	 */
 	public BigDecimal getPhysicalQuantityIntervalLowValue() {
 		if (isPhysicalQuantityInterval()) {
-			final IVL_PQ ivlPq = (IVL_PQ) mValue;
-			return ivlPq.getLow().getValue();
+			final var ivlPq = (IVLPQ) mValue;
+
+			Map<String, PQ> elements = getPqElement(ivlPq);
+			return new BigDecimal(elements.get("low").getValue());
 		}
 		return null;
 	}
@@ -668,7 +644,7 @@ public class Value {
 	 */
 	public String getPhysicalQuantityUnit() {
 		if (isPhysicalQuantity()) {
-			final PQ pq = (PQ) mValue;
+			final var pq = (PQ) mValue;
 			return pq.getUnit();
 		} else {
 			return null;
@@ -682,7 +658,7 @@ public class Value {
 	 */
 	public String getPhysicalQuantityValue() {
 		if (isPhysicalQuantity()) {
-			final PQ pq = (PQ) mValue;
+			final var pq = (PQ) mValue;
 			return String.valueOf(pq.getValue());
 		}
 		return null;
@@ -695,28 +671,25 @@ public class Value {
 	 */
 	public String getRtoUnitText() {
 		if (isRto()) {
-			final RTO rto = (RTO) mValue;
-			String retVal = "";
-			String numeratorUnit = "";
-			String denominatorUnit = "";
+			final var rto = (RTO) mValue;
+			var retVal = "";
+			var numeratorUnit = "";
+			var denominatorUnit = "";
 
 			if (rto != null) {
 				QTY numerator = rto.getNumerator();
 				QTY denominator = rto.getDenominator();
-				if (numerator != null) {
-					if (numerator instanceof PQ) {
-						numeratorUnit = ((PQ) numerator).getUnit();
-					}
+				if (numerator instanceof PQ) {
+					numeratorUnit = ((PQ) numerator).getUnit();
 				}
-				if (denominator != null) {
-					if (denominator instanceof PQ) {
-						denominatorUnit = ((PQ) denominator).getUnit();
-					}
+
+				if (denominator instanceof PQ) {
+					denominatorUnit = ((PQ) denominator).getUnit();
 				}
 			}
-			if (!"".equals(numeratorUnit))
+			if (!numeratorUnit.isEmpty())
 				numeratorUnit = " " + numeratorUnit;
-			if (!"".equals(denominatorUnit))
+			if (!denominatorUnit.isEmpty())
 				denominatorUnit = " " + denominatorUnit;
 
 			if (numeratorUnit.equals(denominatorUnit))
@@ -736,26 +709,24 @@ public class Value {
 	 */
 	public String getRtoValueText() {
 		if (isRto()) {
-			final RTO rto = (RTO) mValue;
-			String retVal = "";
-			String numeratorValue = "";
-			String denominatorValue = "";
+			final var rto = (RTO) mValue;
+			var retVal = "";
+			var numeratorValue = "";
+			var denominatorValue = "";
 
 			if (rto != null) {
 				QTY numerator = rto.getNumerator();
 				QTY denominator = rto.getDenominator();
-				if (numerator != null) {
 					if (numerator instanceof PQ) {
-						numeratorValue = ((PQ) numerator).getValue().toString();
+						numeratorValue = ((PQ) numerator).getValue();
 					} else
 						numeratorValue = "*** TODO: This is not yet implemented value type...";
-				}
-				if (denominator != null) {
+
 					if (denominator instanceof PQ) {
-						denominatorValue = ((PQ) denominator).getValue().toString();
+						denominatorValue = ((PQ) denominator).getValue();
 					} else
 						denominatorValue = "*** TODO: This is not yet implemented value type...";
-				}
+
 			}
 			retVal = numeratorValue + " / " + denominatorValue;
 			return retVal;
@@ -764,15 +735,12 @@ public class Value {
 	}
 
 	/**
-	 * <div class="en">Gets the value.</div> <div class="de">Liefert
-	 * value.</div> <div class="fr"></div> <div class="it"></div>
+	 * <div class="en">Gets the value.</div> <div class="de">Liefert value.</div>
+	 * <div class="fr"></div> <div class="it"></div>
 	 *
 	 * @return ANY <div class="en">the value as MDHT ANY object</div>
 	 */
 	public ANY getValue() {
-		if (mValue == null) {
-			mValue.setNullFlavor(NullFlavor.UNK);
-		}
 		return mValue;
 	}
 
@@ -827,12 +795,12 @@ public class Value {
 	}
 
 	private boolean isPhysicalQuantityInterval() {
-		return (mValue instanceof IVL_PQ);
+		return (mValue instanceof IVLPQ);
 	}
 
 	/**
-	 * Checks if the Value object is a RTO (A quantity constructed as the
-	 * quotient of a numerator quantity divided by a denominator quantity.).
+	 * Checks if the Value object is a RTO (A quantity constructed as the quotient
+	 * of a numerator quantity divided by a denominator quantity.).
 	 *
 	 * @return boolean true, if it is physical quantity, false otherwise
 	 */
@@ -851,16 +819,16 @@ public class Value {
 
 	private void setIntValue(int value) {
 		INT i = (INT) mValue;
-		i.setValue(value);
+		i.setValue(BigInteger.valueOf(value));
 	}
 
 	public void setOriginalTextReference(String originalText) {
 		if (mValue instanceof CD) {
-			final Code code = new Code((CD) mValue);
-			code.setOriginalTextReference(originalText);
+			final var code = new Code((CD) mValue);
+			code.setOriginalText(originalText);
 		}
 		if (mValue instanceof ED) {
-			final TEL tel = DatatypesFactory.eINSTANCE.createTEL();
+			final var tel = new TEL();
 			if (!originalText.startsWith("#")) {
 				originalText = "#" + originalText;
 			}
@@ -870,21 +838,21 @@ public class Value {
 	}
 
 	private void setPqValue(String value) {
-		if (mValue instanceof PQImpl) {
-			final PQ pq = (PQ) mValue;
-			pq.setValue(Double.valueOf(value));
+		if (mValue instanceof PQ) {
+			final var pq = (PQ) mValue;
+			pq.setValue(value);
 		}
 	}
 
 	public void setUcumUnit(String unit) {
-		if (mValue instanceof PQImpl) {
-			final PQ pq = (PQ) mValue;
+		if (mValue instanceof PQ) {
+			final var pq = (PQ) mValue;
 			pq.setUnit(unit);
 		}
 	}
 
 	private void setUcumUnit(Ucum unit) {
-		final PQ pq = (PQ) mValue;
+		final var pq = (PQ) mValue;
 		pq.setUnit(unit.getCodeValue());
 	}
 
@@ -896,7 +864,7 @@ public class Value {
 	@Override
 	public String toString() {
 		// Resultat
-		String resultText = "";
+		var resultText = "";
 		if (isCode()) {
 			if (getCode().getOriginalText() != null)
 				resultText = getCode().getOriginalText();

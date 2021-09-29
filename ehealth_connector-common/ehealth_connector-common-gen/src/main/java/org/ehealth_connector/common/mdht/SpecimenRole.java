@@ -18,8 +18,9 @@ package org.ehealth_connector.common.mdht;
 
 import java.util.List;
 
+import org.ehealth_connector.common.Identificator;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040SpecimenRole;
 import org.ehealth_connector.common.utils.Util;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
 
 /**
  * The Class SpecimenRole.
@@ -27,14 +28,14 @@ import org.openhealthtools.mdht.uml.cda.CDAFactory;
 public class SpecimenRole extends PlayingEntity {
 
 	/** The MDHT specimen role. */
-	private org.openhealthtools.mdht.uml.cda.SpecimenRole mSpecimenRole;
+	private POCDMT000040SpecimenRole mSpecimenRole;
 
 	/**
 	 * Instantiates a new specimen role.
 	 */
 	public SpecimenRole() {
 		super();
-		setSpecimenRole(CDAFactory.eINSTANCE.createSpecimenRole());
+		setSpecimenRole(new POCDMT000040SpecimenRole());
 		getSpecimenRole().setSpecimenPlayingEntity(getPlayingEntity());
 	}
 
@@ -44,7 +45,7 @@ public class SpecimenRole extends PlayingEntity {
 	 * @param mdht
 	 *            the mdht
 	 */
-	public SpecimenRole(org.openhealthtools.mdht.uml.cda.SpecimenRole mdht) {
+	public SpecimenRole(POCDMT000040SpecimenRole mdht) {
 		super(mdht.getSpecimenPlayingEntity());
 		setSpecimenRole(mdht);
 	}
@@ -56,7 +57,7 @@ public class SpecimenRole extends PlayingEntity {
 	 *            the id
 	 */
 	public void addId(Identificator id) {
-		getSpecimenRole().getIds().add(id.getIi());
+		getSpecimenRole().getId().add(id.getHl7CdaR2Ii());
 	}
 
 	/**
@@ -65,7 +66,7 @@ public class SpecimenRole extends PlayingEntity {
 	 * @return the id list
 	 */
 	public List<Identificator> getIdList() {
-		return Util.convertIds(getSpecimenRole().getIds());
+		return Util.convertIds(getSpecimenRole().getId());
 	}
 
 	/**
@@ -73,7 +74,7 @@ public class SpecimenRole extends PlayingEntity {
 	 *
 	 * @return the specimenRole
 	 */
-	public org.openhealthtools.mdht.uml.cda.SpecimenRole getSpecimenRole() {
+	public POCDMT000040SpecimenRole getSpecimenRole() {
 		return mSpecimenRole;
 	}
 
@@ -83,7 +84,7 @@ public class SpecimenRole extends PlayingEntity {
 	 * @param specimenRole
 	 *            the specimenRole to set
 	 */
-	public void setSpecimenRole(org.openhealthtools.mdht.uml.cda.SpecimenRole specimenRole) {
+	public void setSpecimenRole(POCDMT000040SpecimenRole specimenRole) {
 		mSpecimenRole = specimenRole;
 	}
 }

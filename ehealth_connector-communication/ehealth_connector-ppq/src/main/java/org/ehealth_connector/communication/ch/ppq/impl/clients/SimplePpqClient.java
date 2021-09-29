@@ -16,39 +16,27 @@
  */
 package org.ehealth_connector.communication.ch.ppq.impl.clients;
 
-import java.io.IOException;
-import java.util.UUID;
+import java.util.GregorianCalendar;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactoryConfigurationError;
-import javax.xml.xpath.XPathExpressionException;
+import javax.xml.bind.JAXBElement;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.namespace.QName;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
+import org.ehealth_connector.communication.CamelService;
 import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQuery;
+import org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQueryResponse;
 import org.ehealth_connector.communication.ch.ppq.api.clients.PpqClient;
 import org.ehealth_connector.communication.ch.ppq.api.config.PpClientConfig;
-import org.ehealth_connector.communication.ch.ppq.impl.serialization.PrivacyPolicyQuerySerializerImpl;
-import org.ehealth_connector.xua.communication.clients.impl.AbstractSoapClient;
-import org.ehealth_connector.xua.communication.soap.impl.WsaHeaderValue;
+import org.ehealth_connector.communication.ch.ppq.impl.PrivacyPolicyQueryResponseBuilderImpl;
 import org.ehealth_connector.xua.core.SecurityHeaderElement;
-import org.ehealth_connector.xua.exceptions.ClientSendException;
-import org.ehealth_connector.xua.exceptions.SerializeException;
-import org.ehealth_connector.xua.saml2.Assertion;
-import org.ehealth_connector.xua.saml2.EncryptedAssertion;
-import org.ehealth_connector.xua.saml2.Response;
-import org.ehealth_connector.xua.saml2.impl.ResponseBuilderImpl;
-import org.ehealth_connector.xua.serialization.impl.AssertionSerializerImpl;
-import org.ehealth_connector.xua.serialization.impl.EncryptedAssertionSerializerImpl;
-import org.opensaml.core.xml.io.MarshallingException;
-import org.opensaml.core.xml.io.UnmarshallingException;
-import org.opensaml.saml.common.xml.SAMLConstants;
-import org.opensaml.saml.saml2.core.impl.ResponseUnmarshaller;
+import org.herasaf.xacml.core.policy.impl.IdReferenceType;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.NameIDType;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.protocol.ResponseType;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.xacml20.saml.protocol.XACMLPolicyQueryType;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.w3c.dom.Element;
-import org.xml.sax.SAXException;
 
 /**
  * <!-- @formatter:off -->
@@ -58,88 +46,78 @@ import org.xml.sax.SAXException;
  * <div class="it"></div>
  * <!-- @formatter:on -->
  */
-public class SimplePpqClient extends AbstractSoapClient<Response> implements PpqClient {
+public class SimplePpqClient extends CamelService implements PpqClient {
+
+	/** The SLF4J logger instance. */
+	private static Logger log = LoggerFactory.getLogger(SimplePpqClient.class);
 
 	// private static final String EHS_2015_POLYADMIN =
 	// "urn:e-health-suisse:2015:policy-administration:";
 
+	private PpClientConfig config;
+
 	public SimplePpqClient(PpClientConfig clientConfiguration) {
-		setLogger(LoggerFactory.getLogger(getClass()));
-		setConfig(clientConfiguration);
+		this.config = clientConfiguration;
 	}
 
-	private HttpEntity getSoapEntity(SecurityHeaderElement aSecurityHeaderElement,
-			PrivacyPolicyQuery query, WsaHeaderValue wsHeaders) throws ParserConfigurationException,
-			SerializeException, TransformerException, MarshallingException {
-		final Element envelopElement = createEnvelope();
+	public PrivacyPolicyQueryResponse send(SecurityHeaderElement aAssertion, PrivacyPolicyQuery query) {
 
-		Element headerAssertionElement = null;
-		if (aSecurityHeaderElement instanceof Assertion) {
-			headerAssertionElement = new AssertionSerializerImpl()
-					.toXmlElement((Assertion) aSecurityHeaderElement);
-		} else if (aSecurityHeaderElement instanceof EncryptedAssertion) {
-			headerAssertionElement = new EncryptedAssertionSerializerImpl()
-					.toXmlElement((EncryptedAssertion) aSecurityHeaderElement);
-		}
-		createHeader(headerAssertionElement, wsHeaders, envelopElement);
-
-		final Element policyElement = new PrivacyPolicyQuerySerializerImpl().toXmlElement(query);
-
-		createBody(policyElement, envelopElement);
-
-		final String body = createXmlString(envelopElement);
-
-		getLogger().debug("SOAP Message\n" + body);
-
-		// add string as body to httpentity
-		final StringEntity stringEntity = new StringEntity(body, "UTF-8");
-		stringEntity.setChunked(false);
-
-		return stringEntity;
-	}
-
-	@Override
-	protected Response parseResponse(String httpResponse) throws ClientSendException {
 		try {
-			// "urn:oasis:names:tc:SAML:2.0:protocol", "Response"
-			final Element reponseElement = getResponseElement(httpResponse,
-					SAMLConstants.SAML20P_NS,
-					org.opensaml.saml.saml2.core.Response.DEFAULT_ELEMENT_LOCAL_NAME);
+			if (query != null) {
+				XACMLPolicyQueryType requestToSend = convertPrivacyPolicyQuery(query);
 
-			final org.opensaml.saml.saml2.core.Response response = (org.opensaml.saml.saml2.core.Response) new ResponseUnmarshaller()
-					.unmarshall(reponseElement);
+				final var serverInLogger = "#serverInLogger";
+				final var serverOutLogger = "#serverOutLogger";
+				final var endpoint = String.format(
+						"ch-ppq2://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
+						config.getUrl().replace("https://", ""), serverInLogger, serverInLogger, serverOutLogger,
+						serverOutLogger, true);
 
-			return new ResponseBuilderImpl().create(response);
-		} catch (UnsupportedOperationException | IOException | TransformerFactoryConfigurationError
-				| ParserConfigurationException | SAXException | UnmarshallingException
-				| XPathExpressionException e) {
-			throw new ClientSendException(e);
+				final var exchange = send(endpoint, requestToSend, aAssertion, null);
+
+				var response = exchange.getMessage().getBody(ResponseType.class);
+				return new PrivacyPolicyQueryResponseBuilderImpl().create(response);
+
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
 		}
+
+		return null;
 	}
 
-	/**
-	 *
-	 * {@inheritDoc}
-	 *
-	 * @see org.ehealth_connector.communication.ch.ppq.api.clients.PpqClient#send(org.ehealth_connector.xua.core.SecurityHeaderElement,
-	 *      org.ehealth_connector.communication.ch.ppq.api.PrivacyPolicyQuery)
-	 */
-	@Override
-	public Response send(SecurityHeaderElement aAssertion, PrivacyPolicyQuery query)
-			throws ClientSendException {
+	private XACMLPolicyQueryType convertPrivacyPolicyQuery(PrivacyPolicyQuery query) {
+		var request = new XACMLPolicyQueryType();
+
+		request.setConsent(query.getConsent());
+		request.setDestination(query.getDestination());
+		request.setID(query.getId());
+
+		XMLGregorianCalendar xmlGregCal = null;
 		try {
-			final HttpPost post = getHttpPost();
-
-			final WsaHeaderValue wsHeaders = new WsaHeaderValue(
-					"urn:uuid:" + UUID.randomUUID().toString(),
-					"urn:e-health-suisse:2015:policy-administration:PolicyQuery", null);
-
-			post.setEntity(getSoapEntity(aAssertion, query, wsHeaders));
-
-			return execute(post);
-		} catch (final Throwable t) {
-			throw new ClientSendException(t);
+			final var retVal = new GregorianCalendar();
+			retVal.setTimeInMillis(query.getIssueInstant().getTimeInMillis());
+			xmlGregCal = DatatypeFactory.newInstance().newXMLGregorianCalendar(retVal);
+			request.setIssueInstant(xmlGregCal);
+		} catch (DatatypeConfigurationException e) {
+			log.error(e.getMessage(), e);
 		}
+
+		var nameIdType = new NameIDType();
+		nameIdType.setValue(query.getIssuer());
+		request.setIssuer(nameIdType);
+
+		request.setVersion(query.getVersion());
+
+		var id = new IdReferenceType();
+		id.setValue(query.getInstanceIdentifier().getExtension());
+
+		request.getRequestOrPolicySetIdReferenceOrPolicyIdReference()
+				.add(new JAXBElement<>(new QName("urn:oasis:names:tc:xacml:2.0:policy:schema:os", "IdReferenceType"),
+						IdReferenceType.class, id));
+
+		return request;
+
 	}
 
 }

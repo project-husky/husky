@@ -22,10 +22,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import java.util.UUID;
 
 import org.ehealth_connector.xua.saml2.AssertionBuilder;
-import org.ehealth_connector.xua.saml2.Attribute;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AssertionType;
+import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeType;
 
 public class AssertionBuilderImplTest {
 
@@ -50,7 +50,7 @@ public class AssertionBuilderImplTest {
 	 */
 	@Test
 	public void testAddAttribute() {
-		final Attribute attribute = new AttributeBuilderImpl().name(testAttributeName)
+		final AttributeType attribute = new AttributeBuilderImpl().name(testAttributeName)
 				.value(testAttributeValue).create();
 		final AssertionType ref = testBuilder.addAttribute(attribute).create();
 		assertNotNull(ref);

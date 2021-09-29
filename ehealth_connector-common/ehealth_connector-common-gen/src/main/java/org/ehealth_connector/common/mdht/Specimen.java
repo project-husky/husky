@@ -16,8 +16,7 @@
  */
 package org.ehealth_connector.common.mdht;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Specimen;
 
 /**
  * The Class Specimen.
@@ -25,14 +24,14 @@ import org.openhealthtools.mdht.uml.cda.CDAFactory;
 public class Specimen extends SpecimenRole {
 
 	/** The MDHT specimen. */
-	private org.openhealthtools.mdht.uml.cda.Specimen mSpecimen;
+	private POCDMT000040Specimen mSpecimen;
 
 	/**
 	 * Instantiates a new specimen.
 	 */
 	public Specimen() {
 		super();
-		mSpecimen = CDAFactory.eINSTANCE.createSpecimen();
+		mSpecimen = new POCDMT000040Specimen();
 		mSpecimen.setSpecimenRole(getSpecimenRole());
 	}
 
@@ -42,18 +41,9 @@ public class Specimen extends SpecimenRole {
 	 * @param mdht
 	 *            the mdht
 	 */
-	public Specimen(org.openhealthtools.mdht.uml.cda.Specimen mdht) {
+	public Specimen(POCDMT000040Specimen mdht) {
 		super(mdht.getSpecimenRole());
 		mSpecimen = mdht;
-	}
-
-	/**
-	 * Copy.
-	 *
-	 * @return the org.openhealthtools.mdht.uml.cda. specimen
-	 */
-	public org.openhealthtools.mdht.uml.cda.Specimen copy() {
-		return EcoreUtil.copy(mSpecimen);
 	}
 
 	/**
@@ -61,7 +51,7 @@ public class Specimen extends SpecimenRole {
 	 *
 	 * @return the mdht
 	 */
-	public org.openhealthtools.mdht.uml.cda.Specimen getMdht() {
+	public POCDMT000040Specimen getMdht() {
 		return mSpecimen;
 	}
 }

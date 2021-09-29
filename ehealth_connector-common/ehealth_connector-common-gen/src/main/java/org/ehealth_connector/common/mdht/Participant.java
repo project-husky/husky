@@ -16,14 +16,11 @@
  */
 package org.ehealth_connector.common.mdht;
 
-import java.text.ParseException;
 import java.util.Date;
+import java.util.List;
 
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.ehealth_connector.common.utils.DateUtilMdht;
-import org.openhealthtools.mdht.uml.cda.CDAFactory;
-import org.openhealthtools.mdht.uml.cda.Participant2;
-import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
+import org.ehealth_connector.common.hl7cdar2.POCDMT000040Participant2;
+import org.ehealth_connector.common.utils.DateUtil;
 
 /**
  * The Class Participant. E.g. employer and school informational contacts MAY be
@@ -32,13 +29,13 @@ import org.openhealthtools.mdht.uml.hl7.vocab.ParticipationType;
 public class Participant {
 
 	/** The MDHT participant object. */
-	private Participant2 mParticipant;
+	private POCDMT000040Participant2 mParticipant;
 
 	/**
 	 * Standard constructor.
 	 */
 	public Participant() {
-		mParticipant = CDAFactory.eINSTANCE.createParticipant2();
+		mParticipant = new POCDMT000040Participant2();
 	}
 
 	/**
@@ -47,17 +44,8 @@ public class Participant {
 	 * @param mdht
 	 *            the mdht object
 	 */
-	public Participant(Participant2 mdht) {
+	public Participant(POCDMT000040Participant2 mdht) {
 		this.mParticipant = mdht;
-	}
-
-	/**
-	 * Returns a copy of the underlying mdht element.
-	 *
-	 * @return the copy of the mdht element
-	 */
-	public Participant2 copy() {
-		return EcoreUtil.copy(mParticipant);
 	}
 
 	/**
@@ -65,7 +53,7 @@ public class Participant {
 	 *
 	 * @return the mdht element
 	 */
-	public Participant2 getMdht() {
+	public POCDMT000040Participant2 getMdht() {
 		return this.mParticipant;
 	}
 
@@ -86,7 +74,7 @@ public class Participant {
 	 */
 	public Date getTime() {
 		if (mParticipant.getTime() != null) {
-			return DateUtilMdht.parseIVL_TSVDateTimeValue(mParticipant.getTime());
+			return DateUtil.parseHl7Timestamp(mParticipant.getTime());
 		}
 		return null;
 	}
@@ -96,7 +84,7 @@ public class Participant {
 	 *
 	 * @return the participationTypeCode
 	 */
-	public ParticipationType getTypeCode() {
+	public List<String> getTypeCode() {
 		return mParticipant.getTypeCode();
 	}
 
@@ -107,7 +95,7 @@ public class Participant {
 	 *            the participantRole
 	 */
 	public void setParticipantRole(org.ehealth_connector.common.mdht.ParticipantRole p) {
-		mParticipant.setParticipantRole(p.copy());
+		mParticipant.setParticipantRole(p.getMdht());
 	}
 
 	/**
@@ -117,11 +105,7 @@ public class Participant {
 	 *            the date
 	 */
 	public void setTime(Date date) {
-		try {
-			mParticipant.setTime(DateUtilMdht.createIVL_TSFromEuroDate(date));
-		} catch (final ParseException e) {
-			e.printStackTrace();
-		}
+		mParticipant.setTime(DateUtil.date2IvltsTzon(date));
 	}
 
 	/**
@@ -130,7 +114,8 @@ public class Participant {
 	 * @param typeCode
 	 *            the typeCode
 	 */
-	public void setTypeCode(ParticipationType typeCode) {
-		mParticipant.setTypeCode(typeCode);
+	public void setTypeCode(String typeCode) {
+		mParticipant.getTypeCode().clear();
+		mParticipant.getTypeCode().add(typeCode);
 	}
 }
