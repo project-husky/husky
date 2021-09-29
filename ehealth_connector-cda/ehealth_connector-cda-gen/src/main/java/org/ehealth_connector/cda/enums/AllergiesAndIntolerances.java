@@ -17,8 +17,7 @@
 package org.ehealth_connector.cda.enums;
 
 import org.ehealth_connector.common.Code;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CD;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.ehealth_connector.common.hl7cdar2.CD;
 
 /*
  *<div class="de">Dieses Subset ist eine empfohlene Auswahl für den vorliegenden Implementierungsleitfaden. Andere Codes aus HL7 ActCode dürfen ebenfalls verwendet werden. (Quelle für Subset: [IHE PCC TF-2], 6.3.4.15.4)</div>
@@ -146,7 +145,7 @@ public enum AllergiesAndIntolerances {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CD getCD() {
-		final CD cd = DatatypesFactory.eINSTANCE.createCD();
+		final CD cd = new CD();
 		cd.setCodeSystem(CODE_SYSTEM_OID);
 		cd.setCodeSystemName(CODE_SYSTEM_NAME);
 		cd.setCode(code);

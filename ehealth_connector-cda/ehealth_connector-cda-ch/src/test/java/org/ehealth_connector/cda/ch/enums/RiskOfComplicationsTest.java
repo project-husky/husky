@@ -19,8 +19,8 @@ package org.ehealth_connector.cda.ch.enums;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.enums.LanguageCode;
-import org.ehealth_connector.common.mdht.Code;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

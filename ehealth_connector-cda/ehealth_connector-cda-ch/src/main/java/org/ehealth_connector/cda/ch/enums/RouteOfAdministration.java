@@ -16,9 +16,8 @@
  */
 package org.ehealth_connector.cda.ch.enums;
 
-import org.ehealth_connector.common.mdht.Code;
-import org.openhealthtools.mdht.uml.hl7.datatypes.CE;
-import org.openhealthtools.mdht.uml.hl7.datatypes.DatatypesFactory;
+import org.ehealth_connector.common.Code;
+import org.ehealth_connector.common.hl7cdar2.CE;
 
 /*
  *<div class="de">Dieses Subset ist eine empfohlene Auswahl für den vorliegenden Implementierungsleitfaden. Andere Codes aus HL7 RouteOfAdministration dürfen ebenfalls verwendet werden.Hinweis: Für Impfungen relevante Einträge sind fett markiert.</div>
@@ -162,7 +161,7 @@ public enum RouteOfAdministration {
 	 * @return <div class="en">The MDHT Code</div>
 	 */
 	public CE getCE() {
-		final CE ce = DatatypesFactory.eINSTANCE.createCE();
+		final CE ce = new CE();
 		ce.setCodeSystem(CODE_SYSTEM_OID);
 		ce.setCodeSystemName(CODE_SYSTEM_NAME);
 		ce.setCode(code);

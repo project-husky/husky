@@ -98,6 +98,7 @@ import org.ehealth_connector.common.hl7cdar2.StrucDocText;
 import org.ehealth_connector.common.hl7cdar2.TEL;
 import org.ehealth_connector.common.hl7cdar2.TS;
 import org.ehealth_connector.common.utils.Hl7CdaR2Util;
+import org.ehealth_connector.common.utils.UUID;
 import org.w3c.dom.Comment;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
@@ -961,7 +962,7 @@ public class CdaUtil {
 		Identificator docId = newDocId;
 		if (docId == null)
 			docId = new Identificator(Identificator.builder()
-					.withRoot(org.openhealthtools.ihe.utils.UUID.generate()).build());
+					.withRoot(UUID.generate()).build());
 		doc.setId(docId.getHl7CdaR2Ii());
 		setCdaDocVersion(doc, docId, 1);
 	}
@@ -1353,6 +1354,20 @@ public class CdaUtil {
 		// complete section
 		comp3.setSection(section);
 		structuredBody.getComponent().add(comp3);
+	}
+
+	/**
+	 * Adds a copy of a given section to a given structured body.
+	 *
+	 * @param sb the StructuredBody
+	 * @param s  the Section
+	 */
+	public static void addSectionToStructuredBody(POCDMT000040StructuredBody sb, POCDMT000040Section s) {
+		if ((sb != null) && (s != null)) {
+			final POCDMT000040Component3 c = new POCDMT000040Component3();
+			c.setSection(s);
+			sb.getComponent().add(c);
+		}
 	}
 
 }

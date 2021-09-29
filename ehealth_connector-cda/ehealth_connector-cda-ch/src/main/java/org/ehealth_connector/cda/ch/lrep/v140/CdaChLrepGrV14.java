@@ -443,7 +443,7 @@ public class CdaChLrepGrV14
 		Identificator docId = newDocId;
 		if (docId == null)
 			docId = new Identificator(Identificator.builder()
-					.withRoot(org.openhealthtools.ihe.utils.UUID.generate()).build());
+					.withRoot(org.ehealth_connector.common.utils.UUID.generate()).build());
 		super.setId(docId.getHl7CdaR2Ii());
 		setVersion(docId, 1);
 	}
