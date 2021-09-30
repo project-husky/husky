@@ -195,7 +195,7 @@ public class XdmContents {
 			try (var is = xdsDoc.getDataHandler().getInputStream()) {
 				docEntry = xdsDoc.getDocumentEntry();
 
-				hash = DigestUtils.sha1Hex(xdsDoc.getDataHandler().getInputStream());
+				hash = DigestUtils.sha512Hex(xdsDoc.getDataHandler().getInputStream());
 				docEntry.setHash(hash);
 
 				size = Long.valueOf(IOUtils.toByteArray(is).length);
@@ -302,7 +302,7 @@ public class XdmContents {
 				docMetadata = doc.getDocumentEntry();
 
 				try {
-					docHash = DigestUtils.sha1Hex(doc.getDataHandler().getInputStream());
+					docHash = DigestUtils.sha512Hex(doc.getDataHandler().getInputStream());
 					docSize = IOUtils.toByteArray(doc.getDataHandler().getInputStream()).length;
 				} catch (final IOException e) {
 					log.error("IO Exception during zip document integrity check. ", e);

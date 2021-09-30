@@ -331,7 +331,7 @@ public class PdfValidator {
 					pdfValidationResult.setIsDone();
 					pdfValidationResult.add(failure);
 				}
-				if (pdfStrB64.length() == 0) {
+				if (pdfStrB64 != null && pdfStrB64.length() == 0) {
 					PdfValidationResultEntry failure = new PdfValidationResultEntry();
 					failure.setErrMsg("Base64 input string is empty", Severity.Error);
 					pdfValidationResult.setIsDone();

@@ -238,8 +238,9 @@ public class ConvenienceCommunication extends CamelService {
 			if (e.getCause() != null)
 				message = e.getCause().getMessage() + ": " + message;
 			lastError = "Error adding document from inputstream: " + message;
-			if (Util.isDebug())
-				e.printStackTrace();
+			if (Util.isDebug()) {
+				log.error(e.getMessage(), e);
+			}
 		}
 		if (retVal != null)
 			retVal.setDocumentDescriptor(desc);

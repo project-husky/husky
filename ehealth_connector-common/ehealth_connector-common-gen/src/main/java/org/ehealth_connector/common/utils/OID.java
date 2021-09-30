@@ -19,6 +19,7 @@ package org.ehealth_connector.common.utils;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.Random;
 
 /**
  *
@@ -37,7 +38,7 @@ public class OID {
 	 */
 	static int sequence = 0;
 
-	static final String rootPrefix = "1.2.820";
+	static final String ROOT_PREFIX = "1.2.820";
 
 	public static final int OID_MAX_LENGTH_DEFAULT = 256;
 
@@ -82,7 +83,7 @@ public class OID {
 	public static String createOID(String organization) {
 		sequence++;
 
-		byte[] hostip = new byte[4];
+		var hostip = new byte[4];
 		try {
 			InetAddress localhost;
 			localhost = InetAddress.getLocalHost();
@@ -99,19 +100,20 @@ public class OID {
 
 		// to the the "fake" MAC address, munch this real MAC
 		// with the host IP address as follows..
-		for (int i = 0; i < mac.length; i++)
-			mac[i] = (int) ((hostip[i % hostip.length] - mac[i]) * Math.random());
+		for (var i = 0; i < mac.length; i++)
+			mac[i] = ((hostip[i % hostip.length] - mac[i]) * (new Random()).nextInt());
 
-		String macString = "";
-		for (int i = 0; i < mac.length; i++)
-			macString = macString + format(mac[i]);
+		var macString = new StringBuilder();
+		for (var i = 0; i < mac.length; i++) {
+			macString.append(format(mac[i]));
+		}
 
 		// macString is now mac.length*3 bytes or 18bytes long!
 
 		if (organization == null) {
 			organization = "99999";
 		}
-		String root = rootPrefix + "." + Integer.parseInt(organization);
+		String root = ROOT_PREFIX + "." + Integer.parseInt(organization);
 		String suffix = macString + "." + System.currentTimeMillis() + "." + sequence;
 		int maxSuffix = 64 - 9; // allow room for "urn:UUID:"
 		if (suffix.length() > maxSuffix)
@@ -153,7 +155,7 @@ public class OID {
 
 		sequence++;
 
-		byte[] hostip = new byte[4];
+		var hostip = new byte[4];
 		try {
 			InetAddress localhost;
 			localhost = InetAddress.getLocalHost();
@@ -170,12 +172,14 @@ public class OID {
 
 		// to the the "fake" MAC address, munch this real MAC
 		// with the host IP address as follows..
-		for (int i = 0; i < mac.length; i++)
-			mac[i] = (int) ((hostip[i % hostip.length] - mac[i]) * Math.random());
+		for (var i = 0; i < mac.length; i++) {
+			mac[i] = ((hostip[i % hostip.length] - mac[i]) * (new Random().nextInt()));
+		}
 
-		String macString = "";
-		for (int i = 0; i < mac.length; i++)
-			macString = macString + format(mac[i]);
+		var macString = new StringBuilder();
+		for (var i = 0; i < mac.length; i++) {
+			macString.append(format(mac[i]));
+		}
 		// macString is now mac.length*3 bytes or 18bytes long!
 
 		String root = rootOid;
@@ -197,41 +201,6 @@ public class OID {
 	}
 
 	/**
-	 * Returns the byte as a three character String, with any leader zeros added. Negative values are made positive. Range: 0-127
-	 * 
-	 * @param b
-	 * @return
-	 */
-	// private static String format(byte b)
-	// {
-	// StringBuffer sb= new StringBuffer();
-	// if (b < 0) b = (byte)(b * -1);
-	// if ( b < 10 ) {
-	// sb.append("00");
-	// }
-	// else if ( b < 100)
-	// {
-	// sb.append('0');
-	// }
-	// sb.append(b);
-	// return sb.toString();
-	// }
-
-	public static void main(String argv[]) {
-
-		System.out.println("         1         2         3         4         5         6   x");
-		System.out.println("123456789_123456789_123456789_123456789_123456789_123456789_123456789_123456789_");
-		for (int i = 0; i < 15; i++)
-			System.out.println(OID.createOID(null));
-		System.out.println();
-
-		System.out.println("123456789_123456789_123456789_123456789_123456789_123456789_123456789_123456789_");
-		for (int i = 0; i < 15; i++)
-			System.out.println(OID.createOIDGivenRoot("2.16.840.1.113883.3.18", 36));
-
-	}
-
-	/**
 	 * Returns a String of lenght 3, with the value of i between 0 and 255, and 0 prefixed if needed. negative i's are made positive. i's > 255
 	 * are reduced to 255. range: 0-255
 	 * 
@@ -240,7 +209,7 @@ public class OID {
 	 */
 	private static String format(int i) {
 		i = Math.abs(i);
-		StringBuffer sb = new StringBuffer(3);
+		var sb = new StringBuilder(3);
 		if (i < 10)
 			sb.append("0");
 		if (i < 100)

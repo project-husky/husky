@@ -37,7 +37,7 @@ public class IdentificatorComparator implements Comparator<Identificator> {
 	public int compare(Identificator a, Identificator b) {
 		int retVal = a.getRoot().compareTo(b.getRoot());
 		if (retVal == 0)
-			a.getExtension().compareTo(b.getExtension());
+			retVal = a.getExtension().compareTo(b.getExtension());
 		return retVal;
 	}
 }

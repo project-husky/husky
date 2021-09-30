@@ -46,7 +46,6 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
@@ -71,6 +70,8 @@ import org.ehealth_connector.valueset.model.Designation;
 import org.ehealth_connector.valueset.model.ValueSet;
 import org.ehealth_connector.valueset.model.ValueSetEntry;
 import org.ehealth_connector.valueset.model.Version;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -89,6 +90,9 @@ import net.minidev.json.JSONArray;
  * von einer URL, Speichern in und Laden aus einer Datei.</div>
  */
 public class ValueSetManager {
+
+	/** The SLF4J logger instance. */
+	private static Logger log = LoggerFactory.getLogger(ValueSetManager.class);
 
 	/**
 	 * <div class="en">The JSONPath path to extract a value set from the JSON
@@ -234,8 +238,8 @@ public class ValueSetManager {
 	private NodeList evaluateXpathExprAsNodeList(Document xmlDoc, String xpathExpr) {
 		NodeList retVal = null;
 
-		XPathFactory xpathFactory = XPathFactory.newInstance();
-		XPath xpath = xpathFactory.newXPath();
+		var xpathFactory = XPathFactory.newInstance();
+		var xpath = xpathFactory.newXPath();
 		XPathExpression expr;
 
 		try {
@@ -243,7 +247,7 @@ public class ValueSetManager {
 			retVal = (NodeList) expr.evaluate(xmlDoc, XPathConstants.NODESET);
 
 		} catch (XPathExpressionException e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 
 		return retVal;

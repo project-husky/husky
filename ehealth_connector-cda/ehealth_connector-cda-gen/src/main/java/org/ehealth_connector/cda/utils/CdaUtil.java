@@ -26,8 +26,8 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
-import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 import javax.xml.bind.Binder;
@@ -37,11 +37,9 @@ import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.namespace.QName;
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -99,8 +97,8 @@ import org.ehealth_connector.common.hl7cdar2.TEL;
 import org.ehealth_connector.common.hl7cdar2.TS;
 import org.ehealth_connector.common.utils.Hl7CdaR2Util;
 import org.ehealth_connector.common.utils.UUID;
-import org.w3c.dom.Comment;
-import org.w3c.dom.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -113,19 +111,19 @@ import org.w3c.dom.NodeList;
  */
 public class CdaUtil {
 
+	/** The SLF4J logger instance. */
+	private static Logger log = LoggerFactory.getLogger(CdaUtil.class);
+
 	/**
-	 * <div class="en">Completes the given original representation section with
-	 * the PDF as observation media.</div>
+	 * <div class="en">Completes the given original representation section with the
+	 * PDF as observation media.</div>
 	 *
 	 * <div class="de">Vervollständigt die angegebene original representation
 	 * section mit dem PDF als observation media.</div>
 	 *
-	 * @param doc
-	 *            the doc
-	 * @param section
-	 *            the section
-	 * @param pdf
-	 *            the pdf
+	 * @param doc     the doc
+	 * @param section the section
+	 * @param pdf     the pdf
 	 */
 	public static void completeOriginalRepresentationSection(
 			org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument doc,
@@ -148,14 +146,13 @@ public class CdaUtil {
 		obsMedia.getClassCode().add("OBS");
 		obsMedia.getMoodCode().add("EVN");
 		obsMedia.setIDAttr(id);
-		obsMedia.getTemplateId()
-				.add(new Identificator("2.16.756.5.30.1.1.10.4.83").getHl7CdaR2Ii());
+		obsMedia.getTemplateId().add(new Identificator("2.16.756.5.30.1.1.10.4.83").getHl7CdaR2Ii());
 		obsMedia.setLanguageCode(doc.getLanguageCode());
 
 		String valueString = null;
 		try {
-			valueString = new String(IOUtils.toByteArray(
-					new ByteArrayInputStream(DatatypeConverter.printBase64Binary(pdf).getBytes())));
+			valueString = new String(
+					IOUtils.toByteArray(new ByteArrayInputStream(DatatypeConverter.printBase64Binary(pdf).getBytes())));
 		} catch (IOException e) {
 			// DO nothing
 		}
@@ -166,8 +163,8 @@ public class CdaUtil {
 
 		StrucDocText strucDocText = null;
 		if (languageCode == LanguageCode.FRENCH)
-			strucDocText = CdaUtil.createHl7CdaR2StrucDocText(
-					"Représentation de la vue originale signée par le signataire légal:\n");
+			strucDocText = CdaUtil
+					.createHl7CdaR2StrucDocText("Représentation de la vue originale signée par le signataire légal:\n");
 		if (languageCode == LanguageCode.GERMAN)
 			strucDocText = CdaUtil.createHl7CdaR2StrucDocText(
 					"Darstellung der ursprünglichen Ansicht, die vom rechtsgültigen Unterzeichner unterzeichnet wurde:\n");
@@ -178,15 +175,15 @@ public class CdaUtil {
 			strucDocText = CdaUtil.createHl7CdaR2StrucDocText(
 					"Representation of the original view which has been signed by the legal authenticator:\n");
 
-		StrucDocRenderMultiMedia renderMultimedia = factory.createStrucDocRenderMultiMedia();
-		renderMultimedia.getReferencedObject().add(obsMedia);
-		strucDocText.getContent()
-				.add(new JAXBElement<StrucDocRenderMultiMedia>(
-						new QName("urn:hl7-org:v3", "renderMultiMedia"),
-						StrucDocRenderMultiMedia.class, renderMultimedia));
+		if (strucDocText != null) {
+			StrucDocRenderMultiMedia renderMultimedia = factory.createStrucDocRenderMultiMedia();
+			renderMultimedia.getReferencedObject().add(obsMedia);
+			strucDocText.getContent().add(new JAXBElement<StrucDocRenderMultiMedia>(
+					new QName("urn:hl7-org:v3", "renderMultiMedia"), StrucDocRenderMultiMedia.class, renderMultimedia));
 
-		section.getEntry().get(0).setObservationMedia(obsMedia);
-		section.setText(strucDocText);
+			section.getEntry().get(0).setObservationMedia(obsMedia);
+			section.setText(strucDocText);
+		}
 
 		POCDMT000040StructuredBody structuredBody = CdaUtil.getHl7CdaR2StructuredBody(doc);
 		POCDMT000040Component3 comp3 = factory.createPOCDMT000040Component3();
@@ -197,14 +194,13 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
-	 * corresponding to the given argument.</div>
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type corresponding
+	 * to the given argument.</div>
 	 *
-	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher
-	 * dem angegebenen Argument entspricht.</div>
+	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher dem
+	 * angegebenen Argument entspricht.</div>
 	 *
-	 * @param value
-	 *            the value
+	 * @param value the value
 	 * @return an instance of the HL7 CDA R2 data type BL
 	 */
 	public static BL createHl7CdaR2Bl(boolean value) {
@@ -215,16 +211,14 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
-	 * corresponding to the given arguments.</div>
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type corresponding
+	 * to the given arguments.</div>
 	 *
-	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher
-	 * den angegebenen Argumenten entspricht.</div>
+	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher den
+	 * angegebenen Argumenten entspricht.</div>
 	 *
-	 * @param code
-	 *            the code
-	 * @param codeSystem
-	 *            the code system
+	 * @param code       the code
+	 * @param codeSystem the code system
 	 * @return an instance of the HL7 CDA R2 data type CE
 	 */
 	public static CE createHl7CdaR2Ce(String code, String codeSystem) {
@@ -236,14 +230,13 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
-	 * corresponding to the given argument.</div>
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type corresponding
+	 * to the given argument.</div>
 	 *
-	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher
-	 * dem angegebenen Argument entspricht.</div>
+	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher dem
+	 * angegebenen Argument entspricht.</div>
 	 *
-	 * @param value
-	 *            the value
+	 * @param value the value
 	 * @return an instance of the HL7 CDA R2 data type CE
 	 */
 	public static CS createHl7CdaR2Cs(String value) {
@@ -254,14 +247,13 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
-	 * corresponding to the given argument.</div>
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type corresponding
+	 * to the given argument.</div>
 	 *
-	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher
-	 * dem angegebenen Argument entspricht.</div>
+	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher dem
+	 * angegebenen Argument entspricht.</div>
 	 *
-	 * @param value
-	 *            the value
+	 * @param value the value
 	 * @return an instance of the HL7 CDA R2 data type ED
 	 */
 	public static ED createHl7CdaR2Ed(String value) {
@@ -272,16 +264,14 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
-	 * corresponding to the given argument.</div>
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type corresponding
+	 * to the given argument.</div>
 	 *
-	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher
-	 * dem angegebenen Argument entspricht.</div>
+	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher dem
+	 * angegebenen Argument entspricht.</div>
 	 *
-	 * @param value
-	 *            the value
-	 * @param ref
-	 *            the reference to the narrative text (without #)
+	 * @param value the value
+	 * @param ref   the reference to the narrative text (without #)
 	 * @return an instance of the HL7 CDA R2 data type ED
 	 */
 	public static ED createHl7CdaR2Ed(String value, String ref) {
@@ -299,14 +289,13 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
-	 * corresponding to the given argument.</div>
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type corresponding
+	 * to the given argument.</div>
 	 *
-	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher
-	 * dem angegebenen Argument entspricht.</div>
+	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher dem
+	 * angegebenen Argument entspricht.</div>
 	 *
-	 * @param value
-	 *            the value
+	 * @param value the value
 	 * @return an instance of the HL7 CDA R2 data type EN
 	 */
 	public static EN createHl7CdaR2En(NullFlavor value) {
@@ -318,14 +307,13 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
-	 * corresponding to the given argument.</div>
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type corresponding
+	 * to the given argument.</div>
 	 *
-	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher
-	 * dem angegebenen Argument entspricht.</div>
+	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher dem
+	 * angegebenen Argument entspricht.</div>
 	 *
-	 * @param value
-	 *            the value
+	 * @param value the value
 	 * @return an instance of the HL7 CDA R2 data type EN
 	 */
 	public static EN createHl7CdaR2En(String value) {
@@ -336,14 +324,13 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
-	 * corresponding to the given argument.</div>
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type corresponding
+	 * to the given argument.</div>
 	 *
-	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher
-	 * dem angegebenen Argument entspricht.</div>
+	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher dem
+	 * angegebenen Argument entspricht.</div>
 	 *
-	 * @param i
-	 *            the i
+	 * @param i the i
 	 * @return an instance of the HL7 CDA R2 data type INT
 	 */
 	public static INT createHl7CdaR2Int(int i) {
@@ -354,16 +341,14 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
-	 * corresponding to the given arguments.</div>
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type corresponding
+	 * to the given arguments.</div>
 	 *
-	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher
-	 * den angegebenen Argumenten entspricht.</div>
+	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher den
+	 * angegebenen Argumenten entspricht.</div>
 	 *
-	 * @param lowValue
-	 *            the low value
-	 * @param highValue
-	 *            the high value
+	 * @param lowValue  the low value
+	 * @param highValue the high value
 	 * @return the ivlint
 	 */
 	public static IVLINT createHl7CdaR2IvlInt(Integer lowValue, Integer highValue) {
@@ -386,24 +371,20 @@ public class CdaUtil {
 			intHigh.setValue(BigInteger.valueOf(highValue));
 		}
 
-		retVal.getRest()
-				.add(new JAXBElement<INT>(new QName("urn:hl7-org:v3", "low"), INT.class, intLow));
-		retVal.getRest()
-				.add(new JAXBElement<INT>(new QName("urn:hl7-org:v3", "high"), INT.class, intHigh));
+		retVal.getRest().add(new JAXBElement<INT>(new QName("urn:hl7-org:v3", "low"), INT.class, intLow));
+		retVal.getRest().add(new JAXBElement<INT>(new QName("urn:hl7-org:v3", "high"), INT.class, intHigh));
 		return retVal;
 	}
 
 	/**
-	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
-	 * corresponding to the given arguments.</div>
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type corresponding
+	 * to the given arguments.</div>
 	 *
-	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher
-	 * den angegebenen Argumenten entspricht.</div>
+	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher den
+	 * angegebenen Argumenten entspricht.</div>
 	 *
-	 * @param lowValue
-	 *            the low value
-	 * @param highValue
-	 *            the high value
+	 * @param lowValue  the low value
+	 * @param highValue the high value
 	 * @return the ivlint
 	 */
 	public static IVLINT createHl7CdaR2IvlInt(String lowValue, String highValue) {
@@ -417,14 +398,13 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
-	 * corresponding to the given arguments.</div>
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type corresponding
+	 * to the given arguments.</div>
 	 *
-	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher
-	 * den angegebenen Argumenten entspricht.</div>
+	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher den
+	 * angegebenen Argumenten entspricht.</div>
 	 *
-	 * @param nullFlavor
-	 *            the null flavor
+	 * @param nullFlavor the null flavor
 	 * @return the ivlpq
 	 */
 	public static IVLPQ createHl7CdaR2Ivlpq(NullFlavor nullFlavor) {
@@ -439,16 +419,14 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
-	 * corresponding to the given arguments.</div>
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type corresponding
+	 * to the given arguments.</div>
 	 *
-	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher
-	 * den angegebenen Argumenten entspricht.</div>
+	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher den
+	 * angegebenen Argumenten entspricht.</div>
 	 *
-	 * @param centerValue
-	 *            the center value
-	 * @param unit
-	 *            the unit
+	 * @param centerValue the center value
+	 * @param unit        the unit
 	 * @return the ivlpq
 	 */
 	public static IVLPQ createHl7CdaR2Ivlpq(String centerValue, String unit) {
@@ -465,24 +443,20 @@ public class CdaUtil {
 			pqCenter.setValue(centerValue);
 		}
 
-		retVal.getRest().add(
-				new JAXBElement<PQ>(new QName("urn:hl7-org:v3", "center"), PQ.class, pqCenter));
+		retVal.getRest().add(new JAXBElement<PQ>(new QName("urn:hl7-org:v3", "center"), PQ.class, pqCenter));
 		return retVal;
 	}
 
 	/**
-	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
-	 * corresponding to the given arguments.</div>
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type corresponding
+	 * to the given arguments.</div>
 	 *
-	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher
-	 * den angegebenen Argumenten entspricht.</div>
+	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher den
+	 * angegebenen Argumenten entspricht.</div>
 	 *
-	 * @param lowValue
-	 *            the low value
-	 * @param highValue
-	 *            the high value
-	 * @param unit
-	 *            the unit
+	 * @param lowValue  the low value
+	 * @param highValue the high value
+	 * @param unit      the unit
 	 * @return the ivlpq
 	 */
 	public static IVLPQ createHl7CdaR2Ivlpq(String lowValue, String highValue, String unit) {
@@ -507,24 +481,21 @@ public class CdaUtil {
 			pqHigh.setValue(highValue);
 		}
 
-		retVal.getRest()
-				.add(new JAXBElement<PQ>(new QName("urn:hl7-org:v3", "low"), PQ.class, pqLow));
-		retVal.getRest()
-				.add(new JAXBElement<PQ>(new QName("urn:hl7-org:v3", "high"), PQ.class, pqHigh));
+		retVal.getRest().add(new JAXBElement<PQ>(new QName("urn:hl7-org:v3", "low"), PQ.class, pqLow));
+		retVal.getRest().add(new JAXBElement<PQ>(new QName("urn:hl7-org:v3", "high"), PQ.class, pqHigh));
 		return retVal;
 	}
 
 	/**
-	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
-	 * corresponding to the return type, having nullFlavor set. A null
-	 * nullFlavor arg will produce nullFlavor=UNK.</div>
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type corresponding
+	 * to the return type, having nullFlavor set. A null nullFlavor arg will produce
+	 * nullFlavor=UNK.</div>
 	 *
 	 * <div class="de">Erstellt eine Instanz des Datentyps HL7 CDA R2, der dem
 	 * Rückgabetyp entspricht, wobei nullFlavor gesetzt ist. Ein null
 	 * nullFlavor-Argument erzeugt nullFlavor = UNK.</div>
 	 *
-	 * @param nullFlavor
-	 *            the desired nullFlavor value
+	 * @param nullFlavor the desired nullFlavor value
 	 * @return the ad
 	 */
 	public static AD createHl7CdaR2NullFlavorAddress(NullFlavor nullFlavor) {
@@ -545,8 +516,8 @@ public class CdaUtil {
 		} else {
 			postalCode.nullFlavor.add(nullFlavor.getCodeValue());
 		}
-		addr.getContent().add(new JAXBElement<AdxpPostalCode>(
-				new QName("urn:hl7-org:v3", "postalCode"), AdxpPostalCode.class, postalCode));
+		addr.getContent().add(new JAXBElement<AdxpPostalCode>(new QName("urn:hl7-org:v3", "postalCode"),
+				AdxpPostalCode.class, postalCode));
 
 		AdxpCity city = factory.createAdxpCity();
 		city.nullFlavor = new ArrayList<String>();
@@ -555,8 +526,7 @@ public class CdaUtil {
 		} else {
 			city.nullFlavor.add(nullFlavor.getCodeValue());
 		}
-		addr.getContent().add(new JAXBElement<AdxpCity>(new QName("urn:hl7-org:v3", "city"),
-				AdxpCity.class, city));
+		addr.getContent().add(new JAXBElement<AdxpCity>(new QName("urn:hl7-org:v3", "city"), AdxpCity.class, city));
 
 		AdxpCountry country = factory.createAdxpCountry();
 		country.nullFlavor = new ArrayList<String>();
@@ -565,24 +535,23 @@ public class CdaUtil {
 		} else {
 			country.nullFlavor.add(nullFlavor.getCodeValue());
 		}
-		addr.getContent().add(new JAXBElement<AdxpCountry>(new QName("urn:hl7-org:v3", "country"),
-				AdxpCountry.class, country));
+		addr.getContent()
+				.add(new JAXBElement<AdxpCountry>(new QName("urn:hl7-org:v3", "country"), AdxpCountry.class, country));
 
 		return addr;
 
 	}
 
 	/**
-	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
-	 * corresponding to the return type, having nullFlavor set. A null
-	 * nullFlavor arg will produce nullFlavor=UNK.</div>
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type corresponding
+	 * to the return type, having nullFlavor set. A null nullFlavor arg will produce
+	 * nullFlavor=UNK.</div>
 	 *
 	 * <div class="de">Erstellt eine Instanz des Datentyps HL7 CDA R2, der dem
 	 * Rückgabetyp entspricht, wobei nullFlavor gesetzt ist. Ein null
 	 * nullFlavor-Argument erzeugt nullFlavor = UNK.</div>
 	 *
-	 * @param nullFlavor
-	 *            the desired nullFlavor value
+	 * @param nullFlavor the desired nullFlavor value
 	 * @return an instance of the HL7 CDA R2 data type INT
 	 */
 	public static INT createHl7CdaR2NullFlavorInt(NullFlavor nullFlavor) {
@@ -598,16 +567,15 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
-	 * corresponding to the return type, having nullFlavor set. A null
-	 * nullFlavor arg will produce nullFlavor=UNK.</div>
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type corresponding
+	 * to the return type, having nullFlavor set. A null nullFlavor arg will produce
+	 * nullFlavor=UNK.</div>
 	 *
 	 * <div class="de">Erstellt eine Instanz des Datentyps HL7 CDA R2, der dem
 	 * Rückgabetyp entspricht, wobei nullFlavor gesetzt ist. Ein null
 	 * nullFlavor-Argument erzeugt nullFlavor = UNK.</div>
 	 *
-	 * @param nullFlavor
-	 *            the desired nullFlavor value
+	 * @param nullFlavor the desired nullFlavor value
 	 * @return the pq
 	 */
 	public static PQ createHl7CdaR2NullFlavorPq(NullFlavor nullFlavor) {
@@ -623,16 +591,15 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
-	 * corresponding to the return type, having nullFlavor set. A null
-	 * nullFlavor arg will produce nullFlavor=UNK.</div>
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type corresponding
+	 * to the return type, having nullFlavor set. A null nullFlavor arg will produce
+	 * nullFlavor=UNK.</div>
 	 *
 	 * <div class="de">Erstellt eine Instanz des Datentyps HL7 CDA R2, der dem
 	 * Rückgabetyp entspricht, wobei nullFlavor gesetzt ist. Ein null
 	 * nullFlavor-Argument erzeugt nullFlavor = UNK.</div>
 	 *
-	 * @param nullFlavor
-	 *            the desired nullFlavor value
+	 * @param nullFlavor the desired nullFlavor value
 	 * @return the ts
 	 */
 	public static TS createHl7CdaR2NullFlavorTs(NullFlavor nullFlavor) {
@@ -648,14 +615,13 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
-	 * corresponding to the given argument.</div>
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type corresponding
+	 * to the given argument.</div>
 	 *
-	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher
-	 * dem angegebenen Argument entspricht.</div>
+	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher dem
+	 * angegebenen Argument entspricht.</div>
 	 *
-	 * @param value
-	 *            the value
+	 * @param value the value
 	 * @return the st
 	 */
 	public static ST createHl7CdaR2St(String value) {
@@ -666,14 +632,13 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
-	 * corresponding to the given argument.</div>
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type corresponding
+	 * to the given argument.</div>
 	 *
-	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher
-	 * dem angegebenen Argument entspricht.</div>
+	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher dem
+	 * angegebenen Argument entspricht.</div>
 	 *
-	 * @param value
-	 *            the value
+	 * @param value the value
 	 * @return the struc doc text
 	 */
 	public static StrucDocText createHl7CdaR2StrucDocText(String value) {
@@ -681,22 +646,18 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Creates an instance of the HL7 CDA R2 data type
-	 * corresponding to the given arguments.</div>
+	 * <div class="en">Creates an instance of the HL7 CDA R2 data type corresponding
+	 * to the given arguments.</div>
 	 *
-	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher
-	 * den angegebenen Argumenten entspricht.</div>
+	 * <div class="de">Erstellt eine Instanz des HL7 CDA R2 Datentyps, welcher den
+	 * angegebenen Argumenten entspricht.</div>
 	 *
-	 * @param id
-	 *            the id
-	 * @param languageCode
-	 *            the language code
-	 * @param value
-	 *            the value
+	 * @param id           the id
+	 * @param languageCode the language code
+	 * @param value        the value
 	 * @return the struc doc text
 	 */
-	public static StrucDocText createHl7CdaR2StrucDocText(String id, LanguageCode languageCode,
-			String value) {
+	public static StrucDocText createHl7CdaR2StrucDocText(String id, LanguageCode languageCode, String value) {
 		ObjectFactory factory = new ObjectFactory();
 		StrucDocText retVal = factory.createStrucDocText();
 		if (id != null)
@@ -709,8 +670,8 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Generate the version string to be placed in the XML
-	 * header of generated CDA documents.</div>
+	 * <div class="en">Generate the version string to be placed in the XML header of
+	 * generated CDA documents.</div>
 	 *
 	 * <div class="de">Generiert die Versionszeichenfolge, die im XML-Header der
 	 * generierten CDA-Dokumente platziert wird.</div>
@@ -718,20 +679,17 @@ public class CdaUtil {
 	 * @return the string
 	 */
 	public static String generateVersionForCdaXmlHeaderComment() {
-		return "Document based on CDA R2 generated by "
-				+ EhcVersions.getCurrentVersion().getSystemVersionName() + ", Release Date "
-				+ EhcVersions.getCurrentVersion().getReleaseDate();
+		return "Document based on CDA R2 generated by " + EhcVersions.getCurrentVersion().getSystemVersionName()
+				+ ", Release Date " + EhcVersions.getCurrentVersion().getReleaseDate();
 	}
 
 	/**
-	 * <div class="en">Gets the full name of the given HL7 CDA R2 name
-	 * object.</div>
+	 * <div class="en">Gets the full name of the given HL7 CDA R2 name object.</div>
 	 *
 	 * <div class="de">Ruft den vollständigen Namen des angegebenen HL7 CDA
 	 * R2-Namensobjekts ab.</div>
 	 *
-	 * @param value
-	 *            the value
+	 * @param value the value
 	 * @return the full name
 	 */
 	public static String getFullName(EN value) {
@@ -740,14 +698,12 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Gets the full name of the given HL7 CDA R2 name
-	 * object.</div>
+	 * <div class="en">Gets the full name of the given HL7 CDA R2 name object.</div>
 	 *
 	 * <div class="de">Ruft den vollständigen Namen des angegebenen HL7 CDA
 	 * R2-Namensobjekts ab.</div>
 	 *
-	 * @param value
-	 *            the value
+	 * @param value the value
 	 * @return the full name
 	 */
 	public static String getFullName(SC value) {
@@ -755,20 +711,16 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Gets a list of HL7 CDA R2 data type instances
-	 * corresponding to the return type, that are contained in the given
-	 * section.</div>
+	 * <div class="en">Gets a list of HL7 CDA R2 data type instances corresponding
+	 * to the return type, that are contained in the given section.</div>
 	 *
-	 * <div class="de">Ruft eine Liste der HL7 CDA R2-Datentypinstanzen ab, die
-	 * dem Rückgabetyp entsprechen und im angegebenen Abschnitt enthalten
-	 * sind.</div>
+	 * <div class="de">Ruft eine Liste der HL7 CDA R2-Datentypinstanzen ab, die dem
+	 * Rückgabetyp entsprechen und im angegebenen Abschnitt enthalten sind.</div>
 	 *
-	 * @param section
-	 *            the section
+	 * @param section the section
 	 * @return the HL7 CDA R2 laboratory batteries
 	 */
-	public static ArrayList<POCDMT000040Organizer> getHl7CdaR2LaboratoryBatteries(
-			POCDMT000040Section section) {
+	public static ArrayList<POCDMT000040Organizer> getHl7CdaR2LaboratoryBatteries(POCDMT000040Section section) {
 		ArrayList<POCDMT000040Organizer> retVal = new ArrayList<POCDMT000040Organizer>();
 		for (POCDMT000040Entry entry : section.getEntry()) {
 			if (entry.getAct() != null) {
@@ -782,20 +734,16 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Gets a list of HL7 CDA R2 data type instances
-	 * corresponding to the return type, that are contained in the given
-	 * battery.</div>
+	 * <div class="en">Gets a list of HL7 CDA R2 data type instances corresponding
+	 * to the return type, that are contained in the given battery.</div>
 	 *
-	 * <div class="de">Ruft eine Liste der HL7 CDA R2-Datentypinstanzen ab, die
-	 * dem Rückgabetyp entsprechen und in der angegebenen Batterie enthalten
-	 * sind.</div>
+	 * <div class="de">Ruft eine Liste der HL7 CDA R2-Datentypinstanzen ab, die dem
+	 * Rückgabetyp entsprechen und in der angegebenen Batterie enthalten sind.</div>
 	 *
-	 * @param battery
-	 *            the battery
+	 * @param battery the battery
 	 * @return the laboratory observations
 	 */
-	public static ArrayList<POCDMT000040Observation> getHl7CdaR2LaboratoryObservations(
-			POCDMT000040Organizer battery) {
+	public static ArrayList<POCDMT000040Observation> getHl7CdaR2LaboratoryObservations(POCDMT000040Organizer battery) {
 		ArrayList<POCDMT000040Observation> retVal = new ArrayList<POCDMT000040Observation>();
 		for (POCDMT000040Component4 comp : battery.getComponent()) {
 			if (comp.getObservation() != null)
@@ -805,20 +753,18 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Gets a list of HL7 CDA R2 data type instances
-	 * corresponding to the return type, that are contained in the given
-	 * document (structured body).</div>
+	 * <div class="en">Gets a list of HL7 CDA R2 data type instances corresponding
+	 * to the return type, that are contained in the given document (structured
+	 * body).</div>
 	 *
-	 * <div class="de">Ruft eine Liste der HL7 CDA R2-Datentypinstanzen ab, die
-	 * dem Rückgabetyp entsprechen und im angegebenen Dokument (structured body)
+	 * <div class="de">Ruft eine Liste der HL7 CDA R2-Datentypinstanzen ab, die dem
+	 * Rückgabetyp entsprechen und im angegebenen Dokument (structured body)
 	 * enthalten sind.</div>
 	 *
-	 * @param structuredBody
-	 *            the structured body
+	 * @param structuredBody the structured body
 	 * @return the sections
 	 */
-	public static ArrayList<POCDMT000040Section> getHl7CdaR2Sections(
-			POCDMT000040StructuredBody structuredBody) {
+	public static ArrayList<POCDMT000040Section> getHl7CdaR2Sections(POCDMT000040StructuredBody structuredBody) {
 		ArrayList<POCDMT000040Section> retVal = new ArrayList<POCDMT000040Section>();
 		for (POCDMT000040Component3 comp3 : structuredBody.getComponent()) {
 			retVal.add(comp3.getSection());
@@ -827,30 +773,30 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Gets the HL7 CDA R2 data type instance 'structured body'
-	 * in the given CDA document.</div>
+	 * <div class="en">Gets the HL7 CDA R2 data type instance 'structured body' in
+	 * the given CDA document.</div>
 	 *
-	 * <div class="de">Gets the HL7 CDA R2 data type instance 'structured body'
-	 * in the given CDA document.</div>
+	 * <div class="de">Gets the HL7 CDA R2 data type instance 'structured body' in
+	 * the given CDA document.</div>
 	 *
-	 * @param doc
-	 *            the doc
+	 * @param doc the doc
 	 * @return the structured body
 	 */
 	public static POCDMT000040StructuredBody getHl7CdaR2StructuredBody(
 			org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument doc) {
 		POCDMT000040StructuredBody retVal = null;
 
-		if (doc != null)
+		if (doc != null) {
 			if (doc.getComponent() != null)
 				retVal = doc.getComponent().getStructuredBody();
 
-		if (retVal == null) {
-			ObjectFactory factory = new ObjectFactory();
-			POCDMT000040Component2 comp2 = factory.createPOCDMT000040Component2();
-			retVal = factory.createPOCDMT000040StructuredBody();
-			comp2.setStructuredBody(retVal);
-			doc.setComponent(comp2);
+			if (retVal == null) {
+				ObjectFactory factory = new ObjectFactory();
+				POCDMT000040Component2 comp2 = factory.createPOCDMT000040Component2();
+				retVal = factory.createPOCDMT000040StructuredBody();
+				comp2.setStructuredBody(retVal);
+				doc.setComponent(comp2);
+			}
 		}
 
 		return retVal;
@@ -860,11 +806,10 @@ public class CdaUtil {
 	 * <div class="en">Gets a simple data type instance of the given HL7 CDA R2
 	 * object.</div>
 	 *
-	 * <div class="de">Ruft eine Instanz eines einfache Datentyps vom
-	 * angegebenen HL7 CDA R2-Objekt ab.</div>
+	 * <div class="de">Ruft eine Instanz eines einfache Datentyps vom angegebenen
+	 * HL7 CDA R2-Objekt ab.</div>
 	 *
-	 * @param value
-	 *            the value
+	 * @param value the value
 	 * @return an instance of the HL7 CDA R2 data type INT
 	 */
 	public static Integer getInt(INT value) {
@@ -878,8 +823,7 @@ public class CdaUtil {
 	 * <div class="de">Ruft das Beobachtungsergebnis der angegebenen HL7 CDA
 	 * R2-Beobachtung als String ab.</div>
 	 *
-	 * @param obs
-	 *            the HL7 CDA R2 observation
+	 * @param obs the HL7 CDA R2 observation
 	 * @return the observation result as String
 	 */
 	public static String getLaboratoryObservationResult(POCDMT000040Observation obs) {
@@ -931,11 +875,10 @@ public class CdaUtil {
 	 * <div class="en">Gets the number of sections in the given CDA structured
 	 * body.</div>
 	 *
-	 * <div class="de">Ruft die Anzahl der Abschnitte im angegebenen CDA
-	 * structured body ab.</div>
+	 * <div class="de">Ruft die Anzahl der Abschnitte im angegebenen CDA structured
+	 * body ab.</div>
 	 *
-	 * @param structuredBody
-	 *            the structured body
+	 * @param structuredBody the structured body
 	 * @return the section count
 	 */
 	public static int getSectionCount(POCDMT000040StructuredBody structuredBody) {
@@ -947,37 +890,32 @@ public class CdaUtil {
 	}
 
 	/**
-	 * <div class="en">Sets the version number to 1 and makes sure the setId is
-	 * the same as the document id.</div>
+	 * <div class="en">Sets the version number to 1 and makes sure the setId is the
+	 * same as the document id.</div>
 	 *
-	 * <div class="de">Setzt die Versionsnummer auf 1 und stellt sicher, dass
-	 * die setId mit der Dokument-ID übereinstimmt.</div>
+	 * <div class="de">Setzt die Versionsnummer auf 1 und stellt sicher, dass die
+	 * setId mit der Dokument-ID übereinstimmt.</div>
 	 *
-	 * @param doc
-	 *            the doc
-	 * @param newDocId
-	 *            the new doc id
+	 * @param doc      the doc
+	 * @param newDocId the new doc id
 	 */
 	public static void initFirstVersion(POCDMT000040ClinicalDocument doc, Identificator newDocId) {
 		Identificator docId = newDocId;
 		if (docId == null)
-			docId = new Identificator(Identificator.builder()
-					.withRoot(UUID.generate()).build());
+			docId = new Identificator(Identificator.builder().withRoot(UUID.generate()).build());
 		doc.setId(docId.getHl7CdaR2Ii());
 		setCdaDocVersion(doc, docId, 1);
 	}
 
 	/**
-	 * <div class="en">Increases the version number by one and makes sure the
-	 * setId remains the same as previously.</div>
+	 * <div class="en">Increases the version number by one and makes sure the setId
+	 * remains the same as previously.</div>
 	 *
-	 * <div class="de">Erhöht die Versionsnummer um eins und stellt sicher, dass
-	 * die setId unverändert bleibt.</div>
+	 * <div class="de">Erhöht die Versionsnummer um eins und stellt sicher, dass die
+	 * setId unverändert bleibt.</div>
 	 *
-	 * @param doc
-	 *            the doc
-	 * @param newDocId
-	 *            the new doc id
+	 * @param doc      the doc
+	 * @param newDocId the new doc id
 	 */
 	public static void initNextVersion(POCDMT000040ClinicalDocument doc, Identificator newDocId) {
 		org.ehealth_connector.common.hl7cdar2.II setId = doc.getSetId();
@@ -995,23 +933,18 @@ public class CdaUtil {
 	 *
 	 * <div class="de">Lädt das CDA-Dokument aus einer Datei.</div>
 	 *
-	 * @param inputFile
-	 *            the source file.
+	 * @param inputFile the source file.
 	 * @return an instance of the HL7 CDA R2 data type ClinicalDocument
-	 * @throws JAXBException
-	 *             the JAXB exception
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 * @throws JAXBException the JAXB exception
+	 * @throws IOException   Signals that an I/O exception has occurred.
 	 */
-	public static POCDMT000040ClinicalDocument loadCdaFromFile(File inputFile)
-			throws JAXBException, IOException {
+	public static POCDMT000040ClinicalDocument loadCdaFromFile(File inputFile) throws JAXBException, IOException {
 		POCDMT000040ClinicalDocument retVal;
 		JAXBContext context = JAXBContext.newInstance(POCDMT000040ClinicalDocument.class);
 		Unmarshaller mar = context.createUnmarshaller();
 		Reader rdr = new InputStreamReader(new FileInputStream(inputFile), "UTF-8");
 		StreamSource source = new StreamSource(rdr);
-		JAXBElement<POCDMT000040ClinicalDocument> root = mar.unmarshal(source,
-				POCDMT000040ClinicalDocument.class);
+		JAXBElement<POCDMT000040ClinicalDocument> root = mar.unmarshal(source, POCDMT000040ClinicalDocument.class);
 		retVal = root.getValue();
 		return retVal;
 	}
@@ -1021,16 +954,12 @@ public class CdaUtil {
 	 *
 	 * <div class="de">Lädt das CDA-Dokument aus einer Datei.</div>
 	 *
-	 * @param inputFileName
-	 *            the full path and filename of the sourcefile.
+	 * @param inputFileName the full path and filename of the sourcefile.
 	 * @return the CDA document
-	 * @throws JAXBException
-	 *             the JAXB exception
-	 * @throws IOException
-	 *             Signals that an I/O exception has occurred.
+	 * @throws JAXBException the JAXB exception
+	 * @throws IOException   Signals that an I/O exception has occurred.
 	 */
-	public static POCDMT000040ClinicalDocument loadCdaFromFile(String inputFileName)
-			throws JAXBException, IOException {
+	public static POCDMT000040ClinicalDocument loadCdaFromFile(String inputFileName) throws JAXBException, IOException {
 		return loadCdaFromFile(new File(inputFileName));
 	}
 
@@ -1041,106 +970,71 @@ public class CdaUtil {
 	 * <div class="de">Gibt die XML-Repräsentation des Dokuments auf der Konsole
 	 * aus</div>.
 	 *
-	 * @param cdaDoc
-	 *            the CDA document
-	 * @throws JAXBException
-	 *             the JAXB exception
-	 * @throws ParserConfigurationException
-	 *             the parser configuration exception
-	 * @throws TransformerException
-	 *             the transformer exception
+	 * @param cdaDoc the CDA document
+	 * @throws JAXBException                the JAXB exception
+	 * @throws ParserConfigurationException the parser configuration exception
+	 * @throws TransformerException         the transformer exception
 	 */
-	public static void printCdaToConsole(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument cdaDoc)
+	public static void printCdaToConsole(org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument cdaDoc)
 			throws JAXBException, ParserConfigurationException, TransformerException {
-		org.ehealth_connector.cda.utils.CdaUtil.saveJaxbObjectToStream(cdaDoc, System.out, null,
-				null);
+		org.ehealth_connector.cda.utils.CdaUtil.saveJaxbObjectToStream(cdaDoc, System.out, null, null);
 	}
 
 	/**
 	 * <div class="en">Saves the given CDA document to file.</div>
 	 *
-	 * <div class="de">Speichert das angegebene CDA-Dokument in einer
-	 * Datei.</div>
+	 * <div class="de">Speichert das angegebene CDA-Dokument in einer Datei.</div>
 	 *
-	 * @param doc
-	 *            the CDA document
-	 * @param outputFile
-	 *            the destination file.
-	 * @param xsl
-	 *            the path and filename or url to the rendering stylesheet
-	 * @param css
-	 *            the path and filename or url to the rendering css
-	 * @throws JAXBException
-	 *             the JAXB exception
-	 * @throws ParserConfigurationException
-	 *             the parser configuration exception
-	 * @throws TransformerException
-	 *             the transformer exception
-	 * @throws FileNotFoundException
-	 *             the file not found exception
+	 * @param doc        the CDA document
+	 * @param outputFile the destination file.
+	 * @param xsl        the path and filename or url to the rendering stylesheet
+	 * @param css        the path and filename or url to the rendering css
+	 * @throws JAXBException                the JAXB exception
+	 * @throws ParserConfigurationException the parser configuration exception
+	 * @throws TransformerException         the transformer exception
+	 * @throws FileNotFoundException        the file not found exception
 	 */
-	public static void saveCdaToFile(POCDMT000040ClinicalDocument doc, File outputFile, String xsl,
-			String css) throws JAXBException, ParserConfigurationException, TransformerException,
-			FileNotFoundException {
+	public static void saveCdaToFile(POCDMT000040ClinicalDocument doc, File outputFile, String xsl, String css)
+			throws JAXBException, ParserConfigurationException, TransformerException, FileNotFoundException {
 		CdaUtil.saveJaxbObjectToFile(doc, outputFile, xsl, css);
 	}
 
 	/**
 	 * <div class="en">Saves the given CDA document to file.</div>
 	 *
-	 * <div class="de">Speichert das angegebene CDA-Dokument in einer
-	 * Datei.</div>
+	 * <div class="de">Speichert das angegebene CDA-Dokument in einer Datei.</div>
 	 *
-	 * @param doc
-	 *            the doc
-	 * @param outputFileName
-	 *            the full path and filename of the destination file.
-	 * @param xsl
-	 *            the path and filename or url to the rendering stylesheet
-	 * @param css
-	 *            the path and filename or url to the rendering css
-	 * @throws JAXBException
-	 *             the JAXB exception
-	 * @throws ParserConfigurationException
-	 *             the parser configuration exception
-	 * @throws TransformerException
-	 *             the transformer exception
-	 * @throws FileNotFoundException
-	 *             the file not found exception
+	 * @param doc            the doc
+	 * @param outputFileName the full path and filename of the destination file.
+	 * @param xsl            the path and filename or url to the rendering
+	 *                       stylesheet
+	 * @param css            the path and filename or url to the rendering css
+	 * @throws JAXBException                the JAXB exception
+	 * @throws ParserConfigurationException the parser configuration exception
+	 * @throws TransformerException         the transformer exception
+	 * @throws FileNotFoundException        the file not found exception
 	 */
-	public static void saveCdaToFile(POCDMT000040ClinicalDocument doc, String outputFileName,
-			String xsl, String css) throws JAXBException, ParserConfigurationException,
-			TransformerException, FileNotFoundException {
+	public static void saveCdaToFile(POCDMT000040ClinicalDocument doc, String outputFileName, String xsl, String css)
+			throws JAXBException, ParserConfigurationException, TransformerException, FileNotFoundException {
 		saveCdaToFile(doc, new File(outputFileName), xsl, css);
 	}
 
 	/**
 	 * <div class="en">Saves the given JAXB object to file.</div>
 	 *
-	 * <div class="de">Speichert das angegebene JAXB object in einer
-	 * Datei.</div>
+	 * <div class="de">Speichert das angegebene JAXB object in einer Datei.</div>
 	 *
-	 * @param jaxbObject
-	 *            the jaxb object
-	 * @param outputFile
-	 *            the output file
-	 * @param xsl
-	 *            the xsl
-	 * @param css
-	 *            the css
-	 * @throws JAXBException
-	 *             the JAXB exception
-	 * @throws ParserConfigurationException
-	 *             the parser configuration exception
-	 * @throws TransformerException
-	 *             the transformer exception
-	 * @throws FileNotFoundException
-	 *             the file not found exception
+	 * @param jaxbObject the jaxb object
+	 * @param outputFile the output file
+	 * @param xsl        the xsl
+	 * @param css        the css
+	 * @throws JAXBException                the JAXB exception
+	 * @throws ParserConfigurationException the parser configuration exception
+	 * @throws TransformerException         the transformer exception
+	 * @throws FileNotFoundException        the file not found exception
 	 */
-	public static void saveJaxbObjectToFile(Object jaxbObject, File outputFile, String xsl,
-			String css) throws JAXBException, ParserConfigurationException, TransformerException,
-			FileNotFoundException {
+	public static void saveJaxbObjectToFile(Object jaxbObject, File outputFile, String xsl, String css)
+			throws JAXBException, ParserConfigurationException, TransformerException, FileNotFoundException {
 		saveJaxbObjectToStream(jaxbObject, new FileOutputStream(outputFile), xsl, css);
 
 	}
@@ -1148,77 +1042,58 @@ public class CdaUtil {
 	/**
 	 * <div class="en">Saves the given JAXB object to file.</div>
 	 *
-	 * <div class="de">Speichert das angegebene JAXB object in einer
-	 * Datei.</div>
+	 * <div class="de">Speichert das angegebene JAXB object in einer Datei.</div>
 	 *
-	 * @param jaxbObject
-	 *            the jaxb object
-	 * @param outputFileName
-	 *            the output file name
-	 * @param xsl
-	 *            the xsl
-	 * @param css
-	 *            the css
-	 * @throws JAXBException
-	 *             the JAXB exception
-	 * @throws ParserConfigurationException
-	 *             the parser configuration exception
-	 * @throws TransformerException
-	 *             the transformer exception
-	 * @throws FileNotFoundException
-	 *             the file not found exception
+	 * @param jaxbObject     the jaxb object
+	 * @param outputFileName the output file name
+	 * @param xsl            the xsl
+	 * @param css            the css
+	 * @throws JAXBException                the JAXB exception
+	 * @throws ParserConfigurationException the parser configuration exception
+	 * @throws TransformerException         the transformer exception
+	 * @throws FileNotFoundException        the file not found exception
 	 */
-	public static void saveJaxbObjectToFile(Object jaxbObject, String outputFileName, String xsl,
-			String css) throws JAXBException, ParserConfigurationException, TransformerException,
-			FileNotFoundException {
+	public static void saveJaxbObjectToFile(Object jaxbObject, String outputFileName, String xsl, String css)
+			throws JAXBException, ParserConfigurationException, TransformerException, FileNotFoundException {
 		saveJaxbObjectToFile(jaxbObject, new File(outputFileName), xsl, css);
 	}
 
 	/**
 	 * <div class="en">Saves the given JAXB object to stream.</div>
 	 *
-	 * <div class="de">Speichert das angegebene JAXB object in einen
-	 * Stream.</div>
+	 * <div class="de">Speichert das angegebene JAXB object in einen Stream.</div>
 	 *
-	 * @param jaxbObject
-	 *            the jaxb object
-	 * @param outputStream
-	 *            the output stream
-	 * @param xsl
-	 *            the xsl
-	 * @param css
-	 *            the css
-	 * @throws JAXBException
-	 *             the JAXB exception
-	 * @throws ParserConfigurationException
-	 *             the parser configuration exception
-	 * @throws TransformerException
-	 *             the transformer exception
+	 * @param jaxbObject   the jaxb object
+	 * @param outputStream the output stream
+	 * @param xsl          the xsl
+	 * @param css          the css
+	 * @throws JAXBException                the JAXB exception
+	 * @throws ParserConfigurationException the parser configuration exception
+	 * @throws TransformerException         the transformer exception
 	 */
-	public static void saveJaxbObjectToStream(Object jaxbObject, OutputStream outputStream,
-			String xsl, String css)
+	public static void saveJaxbObjectToStream(Object jaxbObject, OutputStream outputStream, String xsl, String css)
 			throws JAXBException, ParserConfigurationException, TransformerException {
-		final JAXBContext context = JAXBContext.newInstance(jaxbObject.getClass());
-		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		final DocumentBuilder builder = factory.newDocumentBuilder();
-		final Document doc = builder.getDOMImplementation().createDocument(null, null, null);
+		final var context = JAXBContext.newInstance(jaxbObject.getClass());
+		final var factory = DocumentBuilderFactory.newInstance();
+		final var builder = factory.newDocumentBuilder();
+		final var doc = builder.getDOMImplementation().createDocument(null, null, null);
 
 		final Binder<Node> binder = context.createBinder();
-		final Comment comment = doc.createComment(CdaUtil.generateVersionForCdaXmlHeaderComment());
+		final var comment = doc.createComment(CdaUtil.generateVersionForCdaXmlHeaderComment());
 		doc.appendChild(comment);
 		if (css != null) {
-			doc.appendChild(doc.createProcessingInstruction("xml-stylesheet",
-					"type=\"text/css\" href=\"" + css + "\""));
+			doc.appendChild(
+					doc.createProcessingInstruction("xml-stylesheet", "type=\"text/css\" href=\"" + css + "\""));
 		}
 		if (xsl != null) {
-			doc.appendChild(doc.createProcessingInstruction("xml-stylesheet",
-					"type=\"text/xsl\" href=\"" + xsl + "\""));
+			doc.appendChild(
+					doc.createProcessingInstruction("xml-stylesheet", "type=\"text/xsl\" href=\"" + xsl + "\""));
 		}
 
 		binder.marshal(jaxbObject, doc);
 
 		// Remove empty text nodes in order to well format the serialized output
-		XPathFactory xpathFactory = XPathFactory.newInstance();
+		var xpathFactory = XPathFactory.newInstance();
 		// XPath to find empty text nodes.
 		XPathExpression xpathExp;
 		try {
@@ -1226,28 +1101,23 @@ public class CdaUtil {
 			NodeList emptyTextNodes = (NodeList) xpathExp.evaluate(doc, XPathConstants.NODESET);
 
 			// Remove each empty text node from document.
-			for (int i = 0; i < emptyTextNodes.getLength(); i++) {
-				Node emptyTextNode = emptyTextNodes.item(i);
+			for (var i = 0; i < emptyTextNodes.getLength(); i++) {
+				var emptyTextNode = emptyTextNodes.item(i);
 				emptyTextNode.getParentNode().removeChild(emptyTextNode);
 			}
 		} catch (XPathExpressionException e) {
 			// Do nothing
 		}
 
-		final DOMSource domSource = new DOMSource(doc);
-		OutputStreamWriter sw;
-		try {
-			sw = new OutputStreamWriter(outputStream, "UTF-8");
-			final StreamResult streamResult = new StreamResult(sw);
-			final TransformerFactory tf = TransformerFactory.newInstance();
-			final Transformer transformer = tf.newTransformer();
-			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
-			transformer.transform(domSource, streamResult);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+		final var domSource = new DOMSource(doc);
+		var sw = new OutputStreamWriter(outputStream, StandardCharsets.UTF_8);
+		final var streamResult = new StreamResult(sw);
+		final var tf = TransformerFactory.newInstance();
+		final var transformer = tf.newTransformer();
+		transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+		transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+		transformer.transform(domSource, streamResult);
 
 	}
 
@@ -1257,15 +1127,11 @@ public class CdaUtil {
 	 * <div class="de">Weist dem Dokument eine Set Id und eine Versionsnummer
 	 * zu.</div>
 	 *
-	 * @param doc
-	 *            the CDA document
-	 * @param idVersion1
-	 *            the set Id (if null, the document ID will be used)
-	 * @param version
-	 *            the version of the document
+	 * @param doc        the CDA document
+	 * @param idVersion1 the set Id (if null, the document ID will be used)
+	 * @param version    the version of the document
 	 */
-	public static void setCdaDocVersion(POCDMT000040ClinicalDocument doc, Identificator idVersion1,
-			int version) {
+	public static void setCdaDocVersion(POCDMT000040ClinicalDocument doc, Identificator idVersion1, int version) {
 		doc.setSetId(idVersion1.getHl7CdaR2Ii());
 		doc.setVersionNumber(Hl7CdaR2Util.createHl7CdaR2Int(version));
 	}
@@ -1277,44 +1143,33 @@ public class CdaUtil {
 	 * <div class="de">Setzt die angegebene substance als ingredient auf den
 	 * angegebenen ingredient.</div>
 	 *
-	 * @param ingredient
-	 *            the ingredient
-	 * @param substance
-	 *            the substance
+	 * @param ingredient the ingredient
+	 * @param substance  the substance
 	 */
-	public static void setIngredientSubstance(COCTMT230100UVIngredient ingredient,
-			COCTMT230100UVSubstance substance) {
+	public static void setIngredientSubstance(COCTMT230100UVIngredient ingredient, COCTMT230100UVSubstance substance) {
 
 		ingredient.setIngredient(
-				new JAXBElement<COCTMT230100UVSubstance>(new QName("urn:ihe:pharm", "ingredient"),
-						COCTMT230100UVSubstance.class, substance));
+				new JAXBElement<>(new QName("urn:ihe:pharm", "ingredient"),
+				COCTMT230100UVSubstance.class, substance));
 	}
 
 	/**
 	 * <div class="en">Sets the given text to the given section.</div>
 	 *
-	 * <div class="de">Setzt den angegebenen Text im angegebenen
-	 * Abschnitt.</div>
+	 * <div class="de">Setzt den angegebenen Text im angegebenen Abschnitt.</div>
 	 *
 	 * Sets the section text.
 	 *
-	 * @param structuredBody
-	 *            the structured body
-	 * @param section
-	 *            the section
-	 * @param languageCode
-	 *            the language code
-	 * @param value
-	 *            the value
-	 * @param contentIdCounter
-	 *            the content id counter
+	 * @param structuredBody   the structured body
+	 * @param section          the section
+	 * @param languageCode     the language code
+	 * @param value            the value
+	 * @param contentIdCounter the content id counter
 	 */
-	public static void setSectionText(POCDMT000040StructuredBody structuredBody,
-			POCDMT000040Section section, LanguageCode languageCode, String value,
-			int contentIdCounter) {
-		String temp = "section"
-				+ ("000" + Integer.toString(CdaUtil.getSectionCount(structuredBody) + 1)).substring(
-						Integer.toString(CdaUtil.getSectionCount(structuredBody) + 1).length());
+	public static void setSectionText(POCDMT000040StructuredBody structuredBody, POCDMT000040Section section,
+			LanguageCode languageCode, String value, int contentIdCounter) {
+		String temp = "section" + ("000" + Integer.toString(CdaUtil.getSectionCount(structuredBody) + 1))
+				.substring(Integer.toString(CdaUtil.getSectionCount(structuredBody) + 1).length());
 		StrucDocText strucDocText = CdaUtil.createHl7CdaR2StrucDocText(temp, languageCode, value);
 		ObjectFactory factory = new ObjectFactory();
 		StrucDocContent contentId = factory.createStrucDocContent();
@@ -1322,8 +1177,8 @@ public class CdaUtil {
 		if (contentIdCounter > 0)
 			contentIdStr += Integer.toString(contentIdCounter);
 		contentId.setID(contentIdStr);
-		strucDocText.getContent().add(new JAXBElement<StrucDocContent>(
-				new QName("urn:hl7-org:v3", "content"), StrucDocContent.class, contentId));
+		strucDocText.getContent().add(new JAXBElement<StrucDocContent>(new QName("urn:hl7-org:v3", "content"),
+				StrucDocContent.class, contentId));
 		section.setText(strucDocText);
 	}
 
@@ -1333,27 +1188,25 @@ public class CdaUtil {
 	 * <div class="de">Setzt den angegebenen Text und Titel im angegebenen
 	 * Abschnitt.</div>
 	 *
-	 * @param doc
-	 *            the doc
-	 * @param title
-	 *            the title
-	 * @param text
-	 *            the text
+	 * @param doc   the doc
+	 * @param title the title
+	 * @param text  the text
 	 */
-	public static void setSectionTitleText(
-			org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument doc, String title,
-			String text) {
+	public static void setSectionTitleText(org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument doc,
+			String title, String text) {
 		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Section section = factory
-				.createPOCDMT000040Section();
+		org.ehealth_connector.common.hl7cdar2.POCDMT000040Section section = factory.createPOCDMT000040Section();
 		section.setTitle(CdaUtil.createHl7CdaR2St(title));
 		section.setText(CdaUtil.createHl7CdaR2StrucDocText(text));
 		POCDMT000040StructuredBody structuredBody = CdaUtil.getHl7CdaR2StructuredBody(doc);
-		POCDMT000040Component3 comp3 = factory.createPOCDMT000040Component3();
 
-		// complete section
-		comp3.setSection(section);
-		structuredBody.getComponent().add(comp3);
+		if (structuredBody != null) {
+			POCDMT000040Component3 comp3 = factory.createPOCDMT000040Component3();
+
+			// complete section
+			comp3.setSection(section);
+			structuredBody.getComponent().add(comp3);
+		}
 	}
 
 	/**

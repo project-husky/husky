@@ -76,6 +76,7 @@ import org.hl7.fhir.exceptions.FHIRException;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.hl7.fhir.utilities.xhtml.XhtmlNode;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.context.FhirVersionEnum;
@@ -89,6 +90,9 @@ public class FhirCommon {
 	public enum SaveMode {
 		FILE, LOG, NONE
 	}
+
+	/** The SLF4J logger instance. */
+	private static Logger log = LoggerFactory.getLogger(FhirCommon.class);
 
 	/** The Constant DEMO_COMMUNITY_OID. */
 	public static final String DEMO_COMMUNITY_OID = "2.16.756.5.37";
@@ -2007,12 +2011,12 @@ public class FhirCommon {
 					sb.append(line);
 				}
 			} catch (final IOException e) {
-				e.printStackTrace();
+				log.error(e.getMessage(), e);
 			}
 		} catch (final FileNotFoundException | UnsupportedEncodingException e1) {
-			e1.printStackTrace();
+			log.error(e1.getMessage(), e1);
 		} catch (IOException e2) {
-			e2.printStackTrace();
+			log.error(e2.getMessage(), e2);
 		}
 		return sb.toString();
 	}

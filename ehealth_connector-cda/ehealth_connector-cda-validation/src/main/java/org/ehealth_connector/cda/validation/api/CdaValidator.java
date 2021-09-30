@@ -913,8 +913,10 @@ public class CdaValidator {
 				configuration.getWorkDir(), cdaStream, out, null);
 		if (svrlReport != null) {
 			retVal = createSchematronOutput(new ByteArrayInputStream(svrlReport));
-			retVal.setRuleSet(ruleSet);
-			retVal.setSourceFile(null);
+			if (retVal != null) {
+				retVal.setRuleSet(ruleSet);
+				retVal.setSourceFile(null);
+			}
 		}
 
 		return retVal;
@@ -1028,15 +1030,18 @@ public class CdaValidator {
 		if (errorMsg == null) {
 			try {
 				final Schema schema = loadSchema(configuration.getCdaDocumentSchema());
-				final Validator validator = schema.newValidator();
 
-				// make sure we read the stream from the beginning
-				InputStream is = cdaStream.getInputStream();
-				if (is != null)
-					cdaStream.getInputStream().reset();
-				validator.validate(cdaStream);
-				xsdValRes.setXsdValid(true);
-				xsdValRes.setXsdValidationMsg("XSD Valid");
+				if (schema != null) {
+					final Validator validator = schema.newValidator();
+
+					// make sure we read the stream from the beginning
+					InputStream is = cdaStream.getInputStream();
+					if (is != null)
+						cdaStream.getInputStream().reset();
+					validator.validate(cdaStream);
+					xsdValRes.setXsdValid(true);
+					xsdValRes.setXsdValidationMsg("XSD Valid");
+				}
 			} catch (SAXException | IOException | ConfigurationException e) {
 				xsdValRes.setXsdValid(false);
 				xsdValRes.setXsdValidationMsg(e.getClass().getName() + ":" + e.getMessage());

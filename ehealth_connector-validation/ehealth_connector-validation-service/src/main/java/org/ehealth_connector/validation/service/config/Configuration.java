@@ -277,11 +277,11 @@ public class Configuration {
 			factor = 1024;
 		} else if (minimalMemory.toLowerCase().endsWith("m")) {
 			tempValue = tempValue.substring(0, minimalMemory.length() - 1);
-			factor = 1024 * 1024;
+			factor = 1024 * 1024L;
 
 		} else if (minimalMemory.toLowerCase().endsWith("g")) {
 			tempValue = tempValue.substring(0, minimalMemory.length() - 1);
-			factor = 1024 * 1024 * 1024;
+			factor = 1024 * 1024 * 1024L;
 		}
 
 		try {

@@ -134,7 +134,7 @@ public class WsaHeaderSoapHandler implements SOAPHandler<SOAPMessageContext> {
 
 		} catch (final Exception t) {
 			mLogger.error("error handling inout stuff", t);
-			return true;
+			return false;
 		}
 		return true;
 	}

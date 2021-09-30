@@ -108,6 +108,7 @@ import org.ehealth_connector.common.mdht.ParticipantRole;
 import org.ehealth_connector.common.mdht.PlayingEntity;
 import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
 import org.ehealth_connector.common.mdht.enums.Signature;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -117,6 +118,9 @@ import org.xml.sax.SAXException;
  * Helper methods for the eHealth Connector and CDA.
  */
 public class Util {
+
+	/** The SLF4J logger instance. */
+	private static org.slf4j.Logger log = LoggerFactory.getLogger(Util.class);
 
 	/**
 	 * The StreamGobbler is a helper for the runExternalCommand method.
@@ -1060,7 +1064,7 @@ public class Util {
 
 			input.close();
 		} catch (final IOException e1) {
-			e1.printStackTrace();
+			log.error(e1.getMessage(), e1);
 		}
 
 		return targetPath;
@@ -1120,11 +1124,11 @@ public class Util {
 			baos = new ByteArrayOutputStream();
 			oos = new ObjectOutputStream(baos);
 			oos.writeObject(object);
-			var md = MessageDigest.getInstance("MD5");
+			var md = MessageDigest.getInstance("SHA-512");
 			byte[] thedigest = md.digest(baos.toByteArray());
 			retVal = java.util.Arrays.hashCode(thedigest);
 		} catch (IOException | NoSuchAlgorithmException e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 		return retVal;
 	}

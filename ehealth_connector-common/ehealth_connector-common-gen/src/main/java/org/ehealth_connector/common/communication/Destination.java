@@ -23,7 +23,7 @@ import java.net.URI;
  * The Class Destination. Describes an Endpoint for a transmission or
  * communication.
  */
-public class Destination {
+public class Destination implements Cloneable {
 
 	/**
 	 * <div class="en">The key store for TLS</div>
@@ -218,24 +218,6 @@ public class Destination {
 		this.trustStorePassword = trustStorePassword;
 		this.trustStoreType = trustStoreType;
 		setKeyStore();
-	}
-
-	@Override
-	public Destination clone() throws CloneNotSupportedException {
-		final Destination clone = new Destination();
-		clone.keyStore = this.keyStore;
-		clone.keyStorePassword = this.keyStorePassword;
-		clone.keyStoreType = this.keyStoreType;
-		clone.receiverApplicationOid = this.receiverApplicationOid;
-		clone.receiverFacilityOid = this.receiverFacilityOid;
-		clone.senderApplicationOid = this.senderApplicationOid;
-		clone.senderFacilityOid = this.senderFacilityOid;
-		clone.senderOrganizationalOid = this.senderOrganizationalOid;
-		clone.trustStore = this.trustStore;
-		clone.trustStorePassword = this.trustStorePassword;
-		clone.trustStoreType = this.trustStoreType;
-		clone.uri = this.uri;
-		return clone;
 	}
 
 	/**

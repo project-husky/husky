@@ -175,7 +175,7 @@ public class ValueSetPackageManagerTest {
 	}
 
 	@Test
-	public void dateMissingTest() {
+	public void dateMissingTest() throws IOException {
 		// Timestamp in validFrom does not exist -> invalid
 		ValueSetPackageManager valueSetPackageManager = new ValueSetPackageManager();
 		try {
@@ -186,8 +186,6 @@ public class ValueSetPackageManagerTest {
 			final File testFile = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
 			valueSetPackageManager.loadValueSetPackageConfig(testFile);
 			fail("dateMissingTest: This configuration must not load, because it does not contaion a validFrom timestamp");
-		} catch (IOException e) {
-			fail("dateMissingTest: IOException");
 		} catch (ConfigurationException e) {
 			// All ok here.
 			// This configuration must not load, because it does
@@ -426,7 +424,7 @@ public class ValueSetPackageManagerTest {
 	}
 
 	@Test
-	public void versionMissingTest() {
+	public void versionMissingTest() throws IOException {
 		// Timestamp in validFrom nicht vorhanden -> ungültig
 		ValueSetPackageManager valueSetPackageManager = new ValueSetPackageManager();
 		try {
@@ -437,8 +435,6 @@ public class ValueSetPackageManagerTest {
 			final File testFile = new File(URLDecoder.decode(test1Url.getPath(), "UTF-8"));
 			valueSetPackageManager.loadValueSetPackageConfig(testFile);
 			fail("dateMissingTest: This configuration must not load, because it does not contain a version element");
-		} catch (IOException e) {
-			fail("versionMissingTest: IOException");
 		} catch (ConfigurationException e) {
 			// All ok here.
 			// This configuration must not load, because it does

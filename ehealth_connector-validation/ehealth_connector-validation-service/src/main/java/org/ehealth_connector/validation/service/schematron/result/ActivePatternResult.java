@@ -150,7 +150,7 @@ public class ActivePatternResult {
 	 * @return a list of fired-rules with failed-assert or successful-report
 	 */
 	public List<FiredRuleResult> getFiredRulesSuccessFailed() {
-		final List<FiredRuleResult> firedRulesresults = new ArrayList<FiredRuleResult>();
+		final List<FiredRuleResult> firedRulesresults = new ArrayList<>();
 		final Iterator<Object> apcIter = apChilds.iterator();
 		FiredRuleResult tempFR = null;
 		Object prevObject = null;
@@ -162,7 +162,7 @@ public class ActivePatternResult {
 				tempFR = new FiredRuleResult((FiredRule) tempObj);
 				prevObject = tempFR;
 				continue;
-			} else {
+			} else if (tempFR != null) {
 				if (tempObj instanceof FailedAssert) {
 					tempFR.getFailedAssert().add((FailedAssert) tempObj);
 					prevObject = tempObj;
@@ -175,7 +175,7 @@ public class ActivePatternResult {
 				}
 			}
 			if ((tempObj instanceof FiredRule) && !(prevObject instanceof FiredRule)) {
-				if (!(tempFR.getFailedAssert().isEmpty() && tempFR.getSuccessfulReport().isEmpty()))
+				if (tempFR != null && !(tempFR.getFailedAssert().isEmpty() && tempFR.getSuccessfulReport().isEmpty()))
 					firedRulesresults.add(tempFR);
 				tempFR = new FiredRuleResult((FiredRule) tempObj);
 				prevObject = tempFR;

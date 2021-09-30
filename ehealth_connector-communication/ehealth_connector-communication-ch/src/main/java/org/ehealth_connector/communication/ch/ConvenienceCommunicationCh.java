@@ -44,6 +44,7 @@ import org.openehealth.ipf.commons.ihe.xds.core.metadata.Document;
 import org.openehealth.ipf.commons.ihe.xds.core.requests.query.QueryReturnType;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.QueryResponse;
 import org.openehealth.ipf.commons.ihe.xds.core.responses.Response;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -51,6 +52,9 @@ import org.openehealth.ipf.commons.ihe.xds.core.responses.Response;
  *
  */
 public class ConvenienceCommunicationCh extends ConvenienceCommunication {
+
+	/** The SLF4J logger instance. */
+	private static org.slf4j.Logger log = LoggerFactory.getLogger(ConvenienceCommunicationCh.class);
 
 	/**
 	 * Default constructor to instanciate the object
@@ -121,7 +125,7 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 			try {
 				throw new DocumentNotAccessibleException();
 			} catch (final DocumentNotAccessibleException e) {
-				e.printStackTrace();
+				log.error(e.getMessage(), e);
 			}
 		var doc = new Document();
 		try {
@@ -135,7 +139,7 @@ public class ConvenienceCommunicationCh extends ConvenienceCommunication {
 			doc.setDataHandler(new DataHandler(dataSource));
 			retVal = new DocumentMetadataCh(addXdsDocument(doc, desc, doc4Metadata));
 		} catch (final IOException e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 		if (retVal != null)
 			retVal.setDocumentDescriptor(desc);

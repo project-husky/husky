@@ -79,8 +79,12 @@ public class StylesheetURIResolver implements URIResolver {
 	@Override
 	public Source resolve(String href, String base) throws TransformerException {
 		final Source source = getSource(href);
-		final Object[] values = { href, source.getSystemId() };
-		log.trace("Resolving href=\"{}\" to '{}'", values);
+
+		if (source != null) {
+			final Object[] values = { href, source.getSystemId() };
+			log.trace("Resolving href=\"{}\" to '{}'", values);
+		}
+
 		return source;
 	}
 

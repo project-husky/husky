@@ -23,13 +23,16 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.*;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
@@ -94,9 +97,15 @@ public class XmlUtil {
 	 */
 	public static void writeXmlDocumentToFile(Document fDoc, File out) throws Exception {
 		// if file doesnt exists, then create it
-		if (out.exists())
-			out.delete();
-		out.createNewFile();
+		boolean exists = false;
+		if (out.exists()) {
+			exists = !Files.deleteIfExists(out.toPath());
+		}
+
+		if (!exists) {
+			exists = out.createNewFile();
+		}
+
 		writeXmlDocumentToOutputStream(fDoc, new FileOutputStream(out));
 	}
 

@@ -24,15 +24,17 @@ import org.ehealth_connector.common.Person;
 import org.ehealth_connector.common.mdht.enums.DateTimeRangeAttributes;
 import org.ehealth_connector.common.utils.XdsMetadataUtil;
 import org.openehealth.ipf.commons.ihe.xds.core.metadata.AvailabilityStatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Represents a query to find documents in an XDS Registry (XDS
  * FindDocumentsQuery)
  */
-public class FindDocumentsQuery /* implements StoredQueryInterface */ extends AbstractStoredQuery {
-	// private
-	// org.openhealthtools.ihe.xds.consumer.storedquery.FindDocumentsQuery
-	// ohtStoredQuery;
+public class FindDocumentsQuery extends AbstractStoredQuery {
+
+	/** The SLF4J logger instance. */
+	private static Logger log = LoggerFactory.getLogger(FindDocumentsQuery.class);
 
 	/**
 	 * Constructs a FindDocuments Query
@@ -128,7 +130,7 @@ public class FindDocumentsQuery /* implements StoredQueryInterface */ extends Ab
 					.getConfidentialityCodes().getOuterList()
 					.add(XdsMetadataUtil.convertEhcCodeToCode(confidentialityCodes));
 		} catch (final ClassCastException e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 	}
 }
