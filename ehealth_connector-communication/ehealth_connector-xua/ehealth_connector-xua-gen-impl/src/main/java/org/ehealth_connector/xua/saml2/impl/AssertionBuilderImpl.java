@@ -22,7 +22,6 @@ import java.util.List;
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.ehealth_connector.xua.saml2.Assertion;
 import org.ehealth_connector.xua.saml2.AssertionBuilder;
-import org.joda.time.DateTime;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AttributeType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.ConditionsType;
 import org.opensaml.saml.common.SAMLVersion;
@@ -127,8 +126,7 @@ public class AssertionBuilderImpl implements AssertionBuilder,
 	@Override
 	public AssertionBuilder issueInstant(Calendar aIssueInstant) {
 		if (aIssueInstant != null) {
-			final var dateTime = new DateTime(aIssueInstant.getTimeInMillis());
-			wrappedObject.setIssueInstant(dateTime);
+			wrappedObject.setIssueInstant(aIssueInstant.toInstant());
 		}
 		return this;
 	}

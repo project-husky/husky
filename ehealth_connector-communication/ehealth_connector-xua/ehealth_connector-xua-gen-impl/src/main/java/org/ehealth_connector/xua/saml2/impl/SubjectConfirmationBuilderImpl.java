@@ -20,7 +20,6 @@ import java.util.Calendar;
 
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.ehealth_connector.xua.saml2.SubjectConfirmationBuilder;
-import org.joda.time.DateTime;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.SubjectConfirmationType;
 
 /**
@@ -120,8 +119,7 @@ public class SubjectConfirmationBuilderImpl implements SubjectConfirmationBuilde
 	@Override
 	public SubjectConfirmationBuilder notBefore(Calendar aNotBefore) {
 		if (aNotBefore != null) {
-			final var dateTime = new DateTime(aNotBefore.getTimeInMillis());
-			subjectConfirmationData.setNotBefore(dateTime);
+			subjectConfirmationData.setNotBefore(aNotBefore.toInstant());
 		}
 		return this;
 	}
@@ -134,8 +132,7 @@ public class SubjectConfirmationBuilderImpl implements SubjectConfirmationBuilde
 	@Override
 	public SubjectConfirmationBuilder notOnOrAfter(Calendar aNotOnOrAfter) {
 		if (aNotOnOrAfter != null) {
-			final var dateTime = new DateTime(aNotOnOrAfter.getTimeInMillis());
-			subjectConfirmationData.setNotOnOrAfter(dateTime);
+			subjectConfirmationData.setNotOnOrAfter(aNotOnOrAfter.toInstant());
 		}
 		return this;
 	}

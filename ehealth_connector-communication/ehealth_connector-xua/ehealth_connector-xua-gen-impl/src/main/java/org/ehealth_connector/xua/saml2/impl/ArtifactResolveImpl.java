@@ -20,7 +20,6 @@ import java.util.Calendar;
 
 import org.ehealth_connector.xua.core.SecurityObject;
 import org.ehealth_connector.xua.saml2.ArtifactResolve;
-import org.joda.time.DateTime;
 
 /**
  * <!-- @formatter:off -->
@@ -54,9 +53,8 @@ public class ArtifactResolveImpl
 
 	@Override
 	public Calendar getIssueInstant() {
-		final DateTime instant = wrappedObject.getIssueInstant();
 		final var retVal = Calendar.getInstance();
-		retVal.setTimeInMillis(instant.getMillis());
+		retVal.setTimeInMillis(wrappedObject.getIssueInstant().toEpochMilli());
 		return retVal;
 	}
 

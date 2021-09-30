@@ -31,9 +31,7 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.transform.ErrorListener;
 import javax.xml.transform.Source;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
@@ -355,24 +353,22 @@ public class CdaValidator {
 		log.debug("Building rule-set transformer ...");
 
 		final Processor processor = new Processor(false);
-
-		processor.getUnderlyingConfiguration().setErrorListener(new ErrorListener() {
-			@Override
-			public void error(TransformerException exception) throws TransformerException {
-				throw new TransformerException(exception);
-			}
-
-			@Override
-			public void fatalError(TransformerException exception) throws TransformerException {
-				throw new TransformerException(exception);
-			}
-
-			@Override
-			public void warning(TransformerException exception) throws TransformerException {
-				// Do nothing (suppress warnings)
-				log.warn("XSLT TransformerException:" + exception.getMessage());
-			}
-		});
+		
+		/*
+		 * ErrorReporter reporter = new ErrorReporter() {
+		 * 
+		 * @Override public void report(XmlProcessingError exception) { if
+		 * (exception.isStaticError() || exception.isTypeError()) { throw new
+		 * TransformerException(exception.getMessage()); } else if
+		 * (exception.isWarning()) { // Do nothing (suppress warnings)
+		 * log.warn("XSLT TransformerException:" + exception.getMessage()); }
+		 * 
+		 * } };
+		 * 
+		 * processor.getUnderlyingConfiguration().setErrorReporterFactory(c ->
+		 * c.makeErrorReporter());
+		 */
+		
 		final RuleSetTransformer factory = new RuleSetTransformer(processor);
 		return new Validators(factory);
 	}

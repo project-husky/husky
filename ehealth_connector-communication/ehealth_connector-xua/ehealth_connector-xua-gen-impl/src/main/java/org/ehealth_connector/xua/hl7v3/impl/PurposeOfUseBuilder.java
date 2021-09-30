@@ -16,7 +16,7 @@
  */
 package org.ehealth_connector.xua.hl7v3.impl;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.ehealth_connector.xua.hl7v3.OpenSamlPurposeOfUse;
 import org.ehealth_connector.xua.hl7v3.PurposeOfUse;
 import org.opensaml.core.xml.AbstractXMLObjectBuilder;

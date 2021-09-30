@@ -13,12 +13,6 @@
 
 
 	<dependencies>
-
-		<!-- <dependency>
-			<groupId>org.ehealth_connector.cda</groupId>
-			<artifactId>ehealth_connector-cda-gen</artifactId>
-			<version>2.0-ALPHA</version>
-		</dependency> -->
 		<dependency>
 			<groupId>org.ehealth_connector.fhir.structures</groupId>
 			<artifactId>ehealth_connector-fhir-structures-gen</artifactId>
@@ -30,34 +24,6 @@
 			<version>2.0-ALPHA</version>
 		</dependency>
 
-		<!-- axis2 -->
-		<dependency>
-			<groupId>org.apache.axis2</groupId>
-			<artifactId>axis2-kernel</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.axis2</groupId>
-			<artifactId>axis2-java2wsdl</artifactId>
-		</dependency>
-		<!-- <dependency> <groupId>org.apache.axis2</groupId> <artifactId>axis2-saaj</artifactId> 
-			</dependency> -->
-		<dependency>
-			<groupId>org.apache.axis2</groupId>
-			<artifactId>axis2-adb-codegen</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.axis2</groupId>
-			<artifactId>addressing</artifactId>
-			<!--type>mar</type -->
-		</dependency>
-
-		<!-- <dependency> <groupId>org.apache.ws.commons.axiom</groupId> <artifactId>axiom-impl</artifactId> 
-			</dependency> -->
-		<dependency>
-			<groupId>xerces</groupId>
-			<artifactId>xercesImpl</artifactId>
-		</dependency>
-
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpcore</artifactId>
@@ -67,10 +33,9 @@
 			<artifactId>httpcore-nio</artifactId>
 		</dependency>
 
-
 		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>commons-codec</groupId>
@@ -91,15 +56,20 @@
 			<artifactId>jakarta.annotation-api</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+		</dependency>
+
 		<!-- ipf stuff -->
 		<dependency>
 			<groupId>org.openehealth.ipf.boot</groupId>
 			<artifactId>ipf-xds-spring-boot-starter</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.openehealth.ipf.boot</groupId>
-        <artifactId>ipf-hl7v3-spring-boot-starter</artifactId>
+			<artifactId>ipf-hl7v3-spring-boot-starter</artifactId>
 		</dependency>
 
 		<dependency>
@@ -136,12 +106,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-
-		<!--<dependency> <groupId>org.apache.camel</groupId> <artifactId>camel-test-spring</artifactId> 
-			<scope>compile</scope> </dependency> -->
-
-
 	</dependencies>
 
 	<build>

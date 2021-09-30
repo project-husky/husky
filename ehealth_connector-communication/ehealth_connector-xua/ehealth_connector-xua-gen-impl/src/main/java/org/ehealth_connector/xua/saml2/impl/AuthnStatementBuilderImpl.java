@@ -20,7 +20,6 @@ import java.util.Calendar;
 
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.ehealth_connector.xua.saml2.AuthnStatementBuilder;
-import org.joda.time.DateTime;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AuthnStatementType;
 import org.opensaml.saml.saml2.core.AuthnContextClassRef;
 
@@ -59,8 +58,7 @@ public class AuthnStatementBuilderImpl implements AuthnStatementBuilder,
 	@Override
 	public AuthnStatementBuilder authnInstant(Calendar aAuthnInstant) {
 		if (aAuthnInstant != null) {
-			final var dateTime = new DateTime(aAuthnInstant.getTimeInMillis());
-			wrappedObject.setAuthnInstant(dateTime);
+			wrappedObject.setAuthnInstant(aAuthnInstant.toInstant());
 		}
 		return this;
 	}
@@ -86,8 +84,7 @@ public class AuthnStatementBuilderImpl implements AuthnStatementBuilder,
 	@Override
 	public AuthnStatementBuilder sessionNotOnOrAfter(Calendar aSessionNotOnOrAfter) {
 		if (aSessionNotOnOrAfter != null) {
-			final var dateTime = new DateTime(aSessionNotOnOrAfter.getTimeInMillis());
-			wrappedObject.setSessionNotOnOrAfter(dateTime);
+			wrappedObject.setSessionNotOnOrAfter(aSessionNotOnOrAfter.toInstant());
 		}
 		return this;
 	}

@@ -41,7 +41,7 @@
 			<groupId>org.opensaml</groupId>
 			<artifactId>opensaml-saml-impl</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.opensaml</groupId>
 			<artifactId>opensaml-xacml-saml-impl</artifactId>
@@ -67,11 +67,11 @@
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpmime</artifactId>
 		</dependency>
-		
+
 		<dependency>
-				<groupId>org.apache.httpcomponents</groupId>
-				<artifactId>httpclient</artifactId>
-			</dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>commons-logging</groupId>
@@ -98,9 +98,14 @@
 		</dependency>
 
 		<dependency>
-				<groupId>org.openehealth.ipf.platform-camel</groupId>
+			<groupId>org.openehealth.ipf.platform-camel</groupId>
 			<artifactId>ipf-platform-camel-ihe-xacml20</artifactId>
-			</dependency>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+		</dependency>
 
 
 		<!-- test stuff -->

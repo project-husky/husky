@@ -18,12 +18,11 @@ package org.ehealth_connector.xua.authentication.impl;
 
 import java.util.Calendar;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.ehealth_connector.xua.authentication.AuthnRequest;
 import org.ehealth_connector.xua.authentication.AuthnRequestBuilder;
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.ehealth_connector.xua.saml2.Subject;
-import org.joda.time.DateTime;
 import org.opensaml.saml.common.SAMLVersion;
 import org.opensaml.saml.saml2.core.IDPList;
 import org.opensaml.saml.saml2.core.Issuer;
@@ -207,8 +206,7 @@ public class AuthnRequestBuilderImpl implements AuthnRequestBuilder,
 	@Override
 	public AuthnRequestBuilder issueInstant(Calendar aIssueInstant) {
 		if (aIssueInstant != null) {
-			final var dateTime = new DateTime(aIssueInstant.getTimeInMillis());
-			authnRequest.setIssueInstant(dateTime);
+			authnRequest.setIssueInstant(aIssueInstant.toInstant());
 		}
 		return this;
 	}

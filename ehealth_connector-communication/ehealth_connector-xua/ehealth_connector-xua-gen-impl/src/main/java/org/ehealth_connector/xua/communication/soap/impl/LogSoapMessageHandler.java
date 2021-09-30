@@ -20,19 +20,21 @@ import java.io.StringWriter;
 import java.util.Collections;
 import java.util.Set;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.xml.XMLConstants;
 import javax.xml.namespace.QName;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import javax.xml.ws.handler.MessageContext;
-import javax.xml.ws.handler.soap.SOAPHandler;
-import javax.xml.ws.handler.soap.SOAPMessageContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
+import jakarta.xml.soap.SOAPMessage;
+import jakarta.xml.ws.handler.MessageContext;
+import jakarta.xml.ws.handler.soap.SOAPHandler;
+import jakarta.xml.ws.handler.soap.SOAPMessageContext;
 
 /**
  * <!-- @formatter:off -->
@@ -97,7 +99,7 @@ public class LogSoapMessageHandler implements SOAPHandler<SOAPMessageContext> {
 	@Override
 	public boolean handleFault(SOAPMessageContext context) {
 		try {
-			final javax.xml.soap.SOAPMessage soapMsg = context.getMessage();
+			final SOAPMessage soapMsg = context.getMessage();
 			mLogger.debug("SOAP Message: {}", soapMsg);
 		} catch (final Exception ex) {
 			mLogger.debug("Error in soap logging", ex);
@@ -126,7 +128,7 @@ public class LogSoapMessageHandler implements SOAPHandler<SOAPMessageContext> {
 				inout = "Response : ";
 			}
 
-			final javax.xml.soap.SOAPMessage soapMsg = context.getMessage();
+			final SOAPMessage soapMsg = context.getMessage();
 			context.put("soapMsg", soapMsg);
 			context.setScope("soapMsg", MessageContext.Scope.APPLICATION);
 

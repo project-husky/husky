@@ -16,6 +16,8 @@
  */
 package org.ehealth_connector.xua.saml2.impl;
 
+import java.time.Instant;
+import java.time.temporal.ChronoField;
 import java.util.GregorianCalendar;
 
 import javax.xml.bind.JAXBElement;
@@ -25,7 +27,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.namespace.QName;
 
 import org.ehealth_connector.xua.core.SecurityObject;
-import org.joda.time.DateTime;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AuthnContextType;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.saml20.assertion.AuthnStatementType;
 import org.opensaml.saml.saml2.core.AuthnContextClassRef;
@@ -90,9 +91,9 @@ public class AuthnStatementImpl
 	 */
 	@Override
 	public XMLGregorianCalendar getAuthnInstant() {
-		final DateTime instant = authnStatement.getAuthnInstant();
+		final Instant instant = authnStatement.getAuthnInstant();
 		final var retVal = new GregorianCalendar();
-		retVal.setTimeInMillis(instant.getMillis());
+		retVal.setTimeInMillis(instant.getLong(ChronoField.MILLI_OF_SECOND));
 
 		XMLGregorianCalendar xmlGregCal = null;
 		try {
@@ -125,9 +126,9 @@ public class AuthnStatementImpl
 	 */
 	@Override
 	public XMLGregorianCalendar getSessionNotOnOrAfter() {
-		final DateTime instant = authnStatement.getSessionNotOnOrAfter();
+		final Instant instant = authnStatement.getSessionNotOnOrAfter();
 		final var retVal = new GregorianCalendar();
-		retVal.setTimeInMillis(instant.getMillis());
+		retVal.setTimeInMillis(instant.getLong(ChronoField.MILLI_OF_SECOND));
 
 		XMLGregorianCalendar xmlGregCal = null;
 		try {

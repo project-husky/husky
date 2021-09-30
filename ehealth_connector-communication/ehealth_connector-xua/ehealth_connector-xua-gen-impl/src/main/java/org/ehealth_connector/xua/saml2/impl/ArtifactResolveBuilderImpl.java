@@ -21,7 +21,6 @@ import java.util.Calendar;
 import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.ehealth_connector.xua.saml2.ArtifactResolve;
 import org.ehealth_connector.xua.saml2.ArtifactResolveBuilder;
-import org.joda.time.DateTime;
 import org.opensaml.saml.common.SAMLVersion;
 import org.opensaml.saml.saml2.core.Issuer;
 import org.opensaml.saml.saml2.core.impl.IssuerBuilder;
@@ -79,8 +78,7 @@ public class ArtifactResolveBuilderImpl implements ArtifactResolveBuilder,
 	@Override
 	public ArtifactResolveBuilderImpl issueInstant(Calendar aIssueInstant) {
 		if (aIssueInstant != null) {
-			final var dateTime = new DateTime(aIssueInstant.getTimeInMillis());
-			wrappedObject.setIssueInstant(dateTime);
+			wrappedObject.setIssueInstant(aIssueInstant.toInstant());
 		}
 		return this;
 	}
