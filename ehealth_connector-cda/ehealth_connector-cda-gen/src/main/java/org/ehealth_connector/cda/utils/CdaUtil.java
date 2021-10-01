@@ -29,13 +29,13 @@ import java.io.Reader;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.Binder;
 import javax.xml.bind.DatatypeConverter;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.namespace.QName;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -54,7 +54,7 @@ import org.apache.commons.io.IOUtils;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.Identificator;
 import org.ehealth_connector.common.Name;
-import org.ehealth_connector.common.basetypes.NameBaseType;
+import org.ehealth_connector.common.basetypes.IdentificatorBaseType;
 import org.ehealth_connector.common.enums.EhcVersions;
 import org.ehealth_connector.common.enums.LanguageCode;
 import org.ehealth_connector.common.enums.NullFlavor;
@@ -77,13 +77,11 @@ import org.ehealth_connector.common.hl7cdar2.IVLINT;
 import org.ehealth_connector.common.hl7cdar2.IVLPQ;
 import org.ehealth_connector.common.hl7cdar2.ObjectFactory;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040Component2;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Component3;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Component4;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Entry;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040EntryRelationship;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Observation;
-import org.ehealth_connector.common.hl7cdar2.POCDMT000040ObservationMedia;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Organizer;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040Section;
 import org.ehealth_connector.common.hl7cdar2.POCDMT000040StructuredBody;
@@ -93,7 +91,6 @@ import org.ehealth_connector.common.hl7cdar2.ST;
 import org.ehealth_connector.common.hl7cdar2.StrucDocContent;
 import org.ehealth_connector.common.hl7cdar2.StrucDocRenderMultiMedia;
 import org.ehealth_connector.common.hl7cdar2.StrucDocText;
-import org.ehealth_connector.common.hl7cdar2.TEL;
 import org.ehealth_connector.common.hl7cdar2.TS;
 import org.ehealth_connector.common.utils.Hl7CdaR2Util;
 import org.ehealth_connector.common.utils.UUID;
@@ -129,9 +126,9 @@ public class CdaUtil {
 			org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument doc,
 			org.ehealth_connector.common.hl7cdar2.POCDMT000040Section section, byte[] pdf) {
 
-		final String id = "originalrepresentationpdf";
-		ObjectFactory factory = new ObjectFactory();
-		LanguageCode languageCode = LanguageCode.getEnum(doc.getLanguageCode().getCode());
+		final var id = "originalrepresentationpdf";
+		var factory = new ObjectFactory();
+		var languageCode = LanguageCode.getEnum(doc.getLanguageCode().getCode());
 
 		if (languageCode == LanguageCode.FRENCH)
 			section.setTitle(CdaUtil.createHl7CdaR2St("Représentation originale"));
@@ -142,7 +139,7 @@ public class CdaUtil {
 		if (languageCode == LanguageCode.ENGLISH)
 			section.setTitle(CdaUtil.createHl7CdaR2St("Original representation"));
 
-		POCDMT000040ObservationMedia obsMedia = factory.createPOCDMT000040ObservationMedia();
+		var obsMedia = factory.createPOCDMT000040ObservationMedia();
 		obsMedia.getClassCode().add("OBS");
 		obsMedia.getMoodCode().add("EVN");
 		obsMedia.setIDAttr(id);
@@ -156,7 +153,7 @@ public class CdaUtil {
 		} catch (IOException e) {
 			// DO nothing
 		}
-		ED value = CdaUtil.createHl7CdaR2Ed(valueString);
+		var value = CdaUtil.createHl7CdaR2Ed(valueString);
 		value.setMediaType("application/pdf");
 		value.setRepresentation(BinaryDataEncoding.B_64);
 		obsMedia.setValue(value);
@@ -176,7 +173,7 @@ public class CdaUtil {
 					"Representation of the original view which has been signed by the legal authenticator:\n");
 
 		if (strucDocText != null) {
-			StrucDocRenderMultiMedia renderMultimedia = factory.createStrucDocRenderMultiMedia();
+			var renderMultimedia = factory.createStrucDocRenderMultiMedia();
 			renderMultimedia.getReferencedObject().add(obsMedia);
 			strucDocText.getContent().add(new JAXBElement<StrucDocRenderMultiMedia>(
 					new QName("urn:hl7-org:v3", "renderMultiMedia"), StrucDocRenderMultiMedia.class, renderMultimedia));
@@ -186,7 +183,7 @@ public class CdaUtil {
 		}
 
 		POCDMT000040StructuredBody structuredBody = CdaUtil.getHl7CdaR2StructuredBody(doc);
-		POCDMT000040Component3 comp3 = factory.createPOCDMT000040Component3();
+		var comp3 = factory.createPOCDMT000040Component3();
 
 		// complete section
 		comp3.setSection(section);
@@ -204,8 +201,8 @@ public class CdaUtil {
 	 * @return an instance of the HL7 CDA R2 data type BL
 	 */
 	public static BL createHl7CdaR2Bl(boolean value) {
-		ObjectFactory factory = new ObjectFactory();
-		BL retVal = factory.createBL();
+		var factory = new ObjectFactory();
+		var retVal = factory.createBL();
 		retVal.setValue(value);
 		return retVal;
 	}
@@ -222,8 +219,8 @@ public class CdaUtil {
 	 * @return an instance of the HL7 CDA R2 data type CE
 	 */
 	public static CE createHl7CdaR2Ce(String code, String codeSystem) {
-		ObjectFactory factory = new ObjectFactory();
-		CE retVal = factory.createCE();
+		var factory = new ObjectFactory();
+		var retVal = factory.createCE();
 		retVal.setCode(code);
 		retVal.setCodeSystem(codeSystem);
 		return retVal;
@@ -240,8 +237,8 @@ public class CdaUtil {
 	 * @return an instance of the HL7 CDA R2 data type CE
 	 */
 	public static CS createHl7CdaR2Cs(String value) {
-		ObjectFactory factory = new ObjectFactory();
-		CS retVal = factory.createCS();
+		var factory = new ObjectFactory();
+		var retVal = factory.createCS();
 		retVal.setCode(value);
 		return retVal;
 	}
@@ -257,8 +254,8 @@ public class CdaUtil {
 	 * @return an instance of the HL7 CDA R2 data type ED
 	 */
 	public static ED createHl7CdaR2Ed(String value) {
-		ObjectFactory factory = new ObjectFactory();
-		ED retVal = factory.createED();
+		var factory = new ObjectFactory();
+		var retVal = factory.createED();
 		retVal.xmlContent = value;
 		return retVal;
 	}
@@ -275,11 +272,11 @@ public class CdaUtil {
 	 * @return an instance of the HL7 CDA R2 data type ED
 	 */
 	public static ED createHl7CdaR2Ed(String value, String ref) {
-		ObjectFactory factory = new ObjectFactory();
-		ED retVal = factory.createED();
+		var factory = new ObjectFactory();
+		var retVal = factory.createED();
 
 		// Add the text including the reference to the narrative text
-		TEL reference = factory.createTEL();
+		var reference = factory.createTEL();
 		reference.setValue("#" + ref);
 
 		retVal.setReference(reference);
@@ -299,8 +296,8 @@ public class CdaUtil {
 	 * @return an instance of the HL7 CDA R2 data type EN
 	 */
 	public static EN createHl7CdaR2En(NullFlavor value) {
-		ObjectFactory factory = new ObjectFactory();
-		EN retVal = factory.createEN();
+		var factory = new ObjectFactory();
+		var retVal = factory.createEN();
 		retVal.nullFlavor = new ArrayList<String>();
 		retVal.nullFlavor.add(value.getCodeValue());
 		return retVal;
@@ -317,8 +314,8 @@ public class CdaUtil {
 	 * @return an instance of the HL7 CDA R2 data type EN
 	 */
 	public static EN createHl7CdaR2En(String value) {
-		ObjectFactory factory = new ObjectFactory();
-		EN retVal = factory.createEN();
+		var factory = new ObjectFactory();
+		var retVal = factory.createEN();
 		retVal.xmlContent = value;
 		return retVal;
 	}
@@ -334,8 +331,8 @@ public class CdaUtil {
 	 * @return an instance of the HL7 CDA R2 data type INT
 	 */
 	public static INT createHl7CdaR2Int(int i) {
-		ObjectFactory factory = new ObjectFactory();
-		INT retVal = factory.createINT();
+		var factory = new ObjectFactory();
+		var retVal = factory.createINT();
 		retVal.setValue(BigInteger.valueOf(i));
 		return retVal;
 	}
@@ -352,8 +349,8 @@ public class CdaUtil {
 	 * @return the ivlint
 	 */
 	public static IVLINT createHl7CdaR2IvlInt(Integer lowValue, Integer highValue) {
-		ObjectFactory factory = new ObjectFactory();
-		IVLINT retVal = factory.createIVLINT();
+		var factory = new ObjectFactory();
+		var retVal = factory.createIVLINT();
 
 		INT intLow = null;
 		if (lowValue == null) {
@@ -371,8 +368,8 @@ public class CdaUtil {
 			intHigh.setValue(BigInteger.valueOf(highValue));
 		}
 
-		retVal.getRest().add(new JAXBElement<INT>(new QName("urn:hl7-org:v3", "low"), INT.class, intLow));
-		retVal.getRest().add(new JAXBElement<INT>(new QName("urn:hl7-org:v3", "high"), INT.class, intHigh));
+		retVal.getRest().add(new JAXBElement<>(new QName("urn:hl7-org:v3", "low"), INT.class, intLow));
+		retVal.getRest().add(new JAXBElement<>(new QName("urn:hl7-org:v3", "high"), INT.class, intHigh));
 		return retVal;
 	}
 
@@ -408,11 +405,11 @@ public class CdaUtil {
 	 * @return the ivlpq
 	 */
 	public static IVLPQ createHl7CdaR2Ivlpq(NullFlavor nullFlavor) {
-		String nullFlavorString = "UNK";
+		var nullFlavorString = "UNK";
 		if (nullFlavor != null)
 			nullFlavorString = nullFlavor.getCodeValue();
-		ObjectFactory factory = new ObjectFactory();
-		IVLPQ retVal = factory.createIVLPQ();
+		var factory = new ObjectFactory();
+		var retVal = factory.createIVLPQ();
 		retVal.getNullFlavor().clear();
 		retVal.getNullFlavor().add(nullFlavorString);
 		return retVal;
@@ -430,8 +427,8 @@ public class CdaUtil {
 	 * @return the ivlpq
 	 */
 	public static IVLPQ createHl7CdaR2Ivlpq(String centerValue, String unit) {
-		ObjectFactory factory = new ObjectFactory();
-		IVLPQ retVal = factory.createIVLPQ();
+		var factory = new ObjectFactory();
+		var retVal = factory.createIVLPQ();
 		if (unit != null)
 			retVal.setUnit(unit);
 
@@ -443,7 +440,7 @@ public class CdaUtil {
 			pqCenter.setValue(centerValue);
 		}
 
-		retVal.getRest().add(new JAXBElement<PQ>(new QName("urn:hl7-org:v3", "center"), PQ.class, pqCenter));
+		retVal.getRest().add(new JAXBElement<>(new QName("urn:hl7-org:v3", "center"), PQ.class, pqCenter));
 		return retVal;
 	}
 
@@ -460,8 +457,8 @@ public class CdaUtil {
 	 * @return the ivlpq
 	 */
 	public static IVLPQ createHl7CdaR2Ivlpq(String lowValue, String highValue, String unit) {
-		ObjectFactory factory = new ObjectFactory();
-		IVLPQ retVal = factory.createIVLPQ();
+		var factory = new ObjectFactory();
+		var retVal = factory.createIVLPQ();
 		if (unit != null)
 			retVal.setUnit(unit);
 
@@ -481,8 +478,8 @@ public class CdaUtil {
 			pqHigh.setValue(highValue);
 		}
 
-		retVal.getRest().add(new JAXBElement<PQ>(new QName("urn:hl7-org:v3", "low"), PQ.class, pqLow));
-		retVal.getRest().add(new JAXBElement<PQ>(new QName("urn:hl7-org:v3", "high"), PQ.class, pqHigh));
+		retVal.getRest().add(new JAXBElement<>(new QName("urn:hl7-org:v3", "low"), PQ.class, pqLow));
+		retVal.getRest().add(new JAXBElement<>(new QName("urn:hl7-org:v3", "high"), PQ.class, pqHigh));
 		return retVal;
 	}
 
@@ -500,8 +497,8 @@ public class CdaUtil {
 	 */
 	public static AD createHl7CdaR2NullFlavorAddress(NullFlavor nullFlavor) {
 
-		ObjectFactory factory = new ObjectFactory();
-		AD addr = factory.createAD();
+		var factory = new ObjectFactory();
+		var addr = factory.createAD();
 		addr.nullFlavor = new ArrayList<String>();
 		if (nullFlavor == null) {
 			addr.nullFlavor.add(NullFlavor.UNKNOWN.getCodeValue());
@@ -509,7 +506,7 @@ public class CdaUtil {
 			addr.nullFlavor.add(nullFlavor.getCodeValue());
 		}
 
-		AdxpPostalCode postalCode = factory.createAdxpPostalCode();
+		var postalCode = factory.createAdxpPostalCode();
 		postalCode.nullFlavor = new ArrayList<String>();
 		if (nullFlavor == null) {
 			postalCode.nullFlavor.add(NullFlavor.UNKNOWN.getCodeValue());
@@ -519,7 +516,7 @@ public class CdaUtil {
 		addr.getContent().add(new JAXBElement<AdxpPostalCode>(new QName("urn:hl7-org:v3", "postalCode"),
 				AdxpPostalCode.class, postalCode));
 
-		AdxpCity city = factory.createAdxpCity();
+		var city = factory.createAdxpCity();
 		city.nullFlavor = new ArrayList<String>();
 		if (nullFlavor == null) {
 			city.nullFlavor.add(NullFlavor.UNKNOWN.getCodeValue());
@@ -528,7 +525,7 @@ public class CdaUtil {
 		}
 		addr.getContent().add(new JAXBElement<AdxpCity>(new QName("urn:hl7-org:v3", "city"), AdxpCity.class, city));
 
-		AdxpCountry country = factory.createAdxpCountry();
+		var country = factory.createAdxpCountry();
 		country.nullFlavor = new ArrayList<String>();
 		if (nullFlavor == null) {
 			country.nullFlavor.add(NullFlavor.UNKNOWN.getCodeValue());
@@ -555,8 +552,8 @@ public class CdaUtil {
 	 * @return an instance of the HL7 CDA R2 data type INT
 	 */
 	public static INT createHl7CdaR2NullFlavorInt(NullFlavor nullFlavor) {
-		ObjectFactory factory = new ObjectFactory();
-		final INT i = factory.createINT();
+		var factory = new ObjectFactory();
+		final var i = factory.createINT();
 		i.nullFlavor = new ArrayList<String>();
 		if (nullFlavor == null) {
 			i.nullFlavor.add(NullFlavor.UNKNOWN.getCodeValue());
@@ -579,8 +576,8 @@ public class CdaUtil {
 	 * @return the pq
 	 */
 	public static PQ createHl7CdaR2NullFlavorPq(NullFlavor nullFlavor) {
-		ObjectFactory factory = new ObjectFactory();
-		final PQ pq = factory.createPQ();
+		var factory = new ObjectFactory();
+		final var pq = factory.createPQ();
 		pq.nullFlavor = new ArrayList<String>();
 		if (nullFlavor == null) {
 			pq.nullFlavor.add(NullFlavor.UNKNOWN.getCodeValue());
@@ -603,8 +600,8 @@ public class CdaUtil {
 	 * @return the ts
 	 */
 	public static TS createHl7CdaR2NullFlavorTs(NullFlavor nullFlavor) {
-		ObjectFactory factory = new ObjectFactory();
-		final TS ts = factory.createTS();
+		var factory = new ObjectFactory();
+		final var ts = factory.createTS();
 		ts.nullFlavor = new ArrayList<String>();
 		if (nullFlavor == null) {
 			ts.nullFlavor.add(NullFlavor.UNKNOWN.getCodeValue());
@@ -625,8 +622,8 @@ public class CdaUtil {
 	 * @return the st
 	 */
 	public static ST createHl7CdaR2St(String value) {
-		ObjectFactory factory = new ObjectFactory();
-		ST retVal = factory.createST();
+		var factory = new ObjectFactory();
+		var retVal = factory.createST();
 		retVal.xmlContent = value;
 		return retVal;
 	}
@@ -658,8 +655,8 @@ public class CdaUtil {
 	 * @return the struc doc text
 	 */
 	public static StrucDocText createHl7CdaR2StrucDocText(String id, LanguageCode languageCode, String value) {
-		ObjectFactory factory = new ObjectFactory();
-		StrucDocText retVal = factory.createStrucDocText();
+		var factory = new ObjectFactory();
+		var retVal = factory.createStrucDocText();
 		if (id != null)
 			retVal.setID(id);
 		if (languageCode != null)
@@ -693,7 +690,7 @@ public class CdaUtil {
 	 * @return the full name
 	 */
 	public static String getFullName(EN value) {
-		NameBaseType nameBt = Name.createNameBaseType(value);
+		var nameBt = Name.createNameBaseType(value);
 		return nameBt.getFullName();
 	}
 
@@ -720,8 +717,8 @@ public class CdaUtil {
 	 * @param section the section
 	 * @return the HL7 CDA R2 laboratory batteries
 	 */
-	public static ArrayList<POCDMT000040Organizer> getHl7CdaR2LaboratoryBatteries(POCDMT000040Section section) {
-		ArrayList<POCDMT000040Organizer> retVal = new ArrayList<POCDMT000040Organizer>();
+	public static List<POCDMT000040Organizer> getHl7CdaR2LaboratoryBatteries(POCDMT000040Section section) {
+		List<POCDMT000040Organizer> retVal = new ArrayList<>();
 		for (POCDMT000040Entry entry : section.getEntry()) {
 			if (entry.getAct() != null) {
 				for (POCDMT000040EntryRelationship er : entry.getAct().getEntryRelationship()) {
@@ -743,8 +740,8 @@ public class CdaUtil {
 	 * @param battery the battery
 	 * @return the laboratory observations
 	 */
-	public static ArrayList<POCDMT000040Observation> getHl7CdaR2LaboratoryObservations(POCDMT000040Organizer battery) {
-		ArrayList<POCDMT000040Observation> retVal = new ArrayList<POCDMT000040Observation>();
+	public static List<POCDMT000040Observation> getHl7CdaR2LaboratoryObservations(POCDMT000040Organizer battery) {
+		List<POCDMT000040Observation> retVal = new ArrayList<>();
 		for (POCDMT000040Component4 comp : battery.getComponent()) {
 			if (comp.getObservation() != null)
 				retVal.add(comp.getObservation());
@@ -764,8 +761,8 @@ public class CdaUtil {
 	 * @param structuredBody the structured body
 	 * @return the sections
 	 */
-	public static ArrayList<POCDMT000040Section> getHl7CdaR2Sections(POCDMT000040StructuredBody structuredBody) {
-		ArrayList<POCDMT000040Section> retVal = new ArrayList<POCDMT000040Section>();
+	public static List<POCDMT000040Section> getHl7CdaR2Sections(POCDMT000040StructuredBody structuredBody) {
+		ArrayList<POCDMT000040Section> retVal = new ArrayList<>();
 		for (POCDMT000040Component3 comp3 : structuredBody.getComponent()) {
 			retVal.add(comp3.getSection());
 		}
@@ -791,8 +788,8 @@ public class CdaUtil {
 				retVal = doc.getComponent().getStructuredBody();
 
 			if (retVal == null) {
-				ObjectFactory factory = new ObjectFactory();
-				POCDMT000040Component2 comp2 = factory.createPOCDMT000040Component2();
+				var factory = new ObjectFactory();
+				var comp2 = factory.createPOCDMT000040Component2();
 				retVal = factory.createPOCDMT000040StructuredBody();
 				comp2.setStructuredBody(retVal);
 				doc.setComponent(comp2);
@@ -827,10 +824,10 @@ public class CdaUtil {
 	 * @return the observation result as String
 	 */
 	public static String getLaboratoryObservationResult(POCDMT000040Observation obs) {
-		String retVal = "";
+		var retVal = new StringBuilder();
 		for (ANY value : obs.getValue()) {
-			String tempOneValue = "";
-			String tempOneUnit = "";
+			var tempOneValue = "";
+			var tempOneUnit = "";
 			if (value != null) {
 				if (value instanceof PQ) {
 					tempOneValue = ((PQ) value).getValue();
@@ -861,14 +858,21 @@ public class CdaUtil {
 				} else
 					tempOneValue = value.getClass().getName() + " not supported yet for printing";
 			}
-			if (!"".equals(retVal))
-				retVal = retVal + "<br />";
-			if (!"".equals(tempOneValue) && !"".equals(tempOneUnit))
-				retVal = tempOneValue + " " + tempOneUnit;
-			else
-				retVal = tempOneValue + tempOneUnit;
+			if (!retVal.isEmpty()) {
+				retVal.append("<br />");
+			}
+
+			if (!"".equals(tempOneValue) && !"".equals(tempOneUnit)) {
+				retVal.append(tempOneValue);
+				retVal.append(" ");
+				retVal.append(tempOneUnit);
+			} else {
+				retVal.append(tempOneValue);
+				retVal.append(tempOneUnit);
+			}
+
 		}
-		return retVal;
+		return retVal.toString();
 	}
 
 	/**
@@ -882,10 +886,11 @@ public class CdaUtil {
 	 * @return the section count
 	 */
 	public static int getSectionCount(POCDMT000040StructuredBody structuredBody) {
-		int retVal = 0;
-		if (structuredBody != null)
-			if (structuredBody.getComponent() != null)
-				retVal = structuredBody.getComponent().size();
+		var retVal = 0;
+		if (structuredBody != null && structuredBody.getComponent() != null) {
+			retVal = structuredBody.getComponent().size();
+		}
+
 		return retVal;
 	}
 
@@ -902,7 +907,7 @@ public class CdaUtil {
 	public static void initFirstVersion(POCDMT000040ClinicalDocument doc, Identificator newDocId) {
 		Identificator docId = newDocId;
 		if (docId == null)
-			docId = new Identificator(Identificator.builder().withRoot(UUID.generate()).build());
+			docId = new Identificator(IdentificatorBaseType.builder().withRoot(UUID.generate()).build());
 		doc.setId(docId.getHl7CdaR2Ii());
 		setCdaDocVersion(doc, docId, 1);
 	}
@@ -940,10 +945,10 @@ public class CdaUtil {
 	 */
 	public static POCDMT000040ClinicalDocument loadCdaFromFile(File inputFile) throws JAXBException, IOException {
 		POCDMT000040ClinicalDocument retVal;
-		JAXBContext context = JAXBContext.newInstance(POCDMT000040ClinicalDocument.class);
-		Unmarshaller mar = context.createUnmarshaller();
-		Reader rdr = new InputStreamReader(new FileInputStream(inputFile), "UTF-8");
-		StreamSource source = new StreamSource(rdr);
+		var context = JAXBContext.newInstance(POCDMT000040ClinicalDocument.class);
+		var mar = context.createUnmarshaller();
+		Reader rdr = new InputStreamReader(new FileInputStream(inputFile), StandardCharsets.UTF_8);
+		var source = new StreamSource(rdr);
 		JAXBElement<POCDMT000040ClinicalDocument> root = mar.unmarshal(source, POCDMT000040ClinicalDocument.class);
 		retVal = root.getValue();
 		return retVal;
@@ -1170,10 +1175,10 @@ public class CdaUtil {
 			LanguageCode languageCode, String value, int contentIdCounter) {
 		String temp = "section" + ("000" + Integer.toString(CdaUtil.getSectionCount(structuredBody) + 1))
 				.substring(Integer.toString(CdaUtil.getSectionCount(structuredBody) + 1).length());
-		StrucDocText strucDocText = CdaUtil.createHl7CdaR2StrucDocText(temp, languageCode, value);
-		ObjectFactory factory = new ObjectFactory();
-		StrucDocContent contentId = factory.createStrucDocContent();
-		String contentIdStr = "dummy";
+		var strucDocText = CdaUtil.createHl7CdaR2StrucDocText(temp, languageCode, value);
+		var factory = new ObjectFactory();
+		var contentId = factory.createStrucDocContent();
+		var contentIdStr = "dummy";
 		if (contentIdCounter > 0)
 			contentIdStr += Integer.toString(contentIdCounter);
 		contentId.setID(contentIdStr);
@@ -1194,14 +1199,14 @@ public class CdaUtil {
 	 */
 	public static void setSectionTitleText(org.ehealth_connector.common.hl7cdar2.POCDMT000040ClinicalDocument doc,
 			String title, String text) {
-		ObjectFactory factory = new ObjectFactory();
-		org.ehealth_connector.common.hl7cdar2.POCDMT000040Section section = factory.createPOCDMT000040Section();
+		var factory = new ObjectFactory();
+		var section = factory.createPOCDMT000040Section();
 		section.setTitle(CdaUtil.createHl7CdaR2St(title));
 		section.setText(CdaUtil.createHl7CdaR2StrucDocText(text));
 		POCDMT000040StructuredBody structuredBody = CdaUtil.getHl7CdaR2StructuredBody(doc);
 
 		if (structuredBody != null) {
-			POCDMT000040Component3 comp3 = factory.createPOCDMT000040Component3();
+			var comp3 = factory.createPOCDMT000040Component3();
 
 			// complete section
 			comp3.setSection(section);
@@ -1217,7 +1222,7 @@ public class CdaUtil {
 	 */
 	public static void addSectionToStructuredBody(POCDMT000040StructuredBody sb, POCDMT000040Section s) {
 		if ((sb != null) && (s != null)) {
-			final POCDMT000040Component3 c = new POCDMT000040Component3();
+			final var c = new POCDMT000040Component3();
 			c.setSection(s);
 			sb.getComponent().add(c);
 		}

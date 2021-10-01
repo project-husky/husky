@@ -118,7 +118,7 @@ public class MasterPatientIndexQuery {
 	 * @return the query object
 	 */
 	public MasterPatientIndexQuery addPatientIdentificator(Identificator identificator) {
-		Identifier id = new Identifier();
+		var id = new Identifier();
 		id.setSystem(identificator.getRoot());
 		id.setValue(identificator.getExtension());
 		v3PdqQuery.addPatientIdentifier(id);

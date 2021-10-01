@@ -20,6 +20,10 @@ import org.ehealth_connector.common.enums.DocumentDescriptor;
 
 public class DocDescriptor {
 
+	private DocDescriptor() {
+		throw new IllegalStateException("This is a utility class!");
+	}
+
 	public static String getFileExtension(DocumentDescriptor documentDescriptor) {
 		if (documentDescriptor.equals(DocumentDescriptor.CCR)
 				|| documentDescriptor.equals(DocumentDescriptor.CDA_R1)

@@ -47,19 +47,11 @@ import org.openehealth.ipf.commons.ihe.xacml20.herasaf.types.IiDataTypeAttribute
  * <!-- @formatter:on -->
  */
 public class DataTypeAttributeBuilderImpl
-		implements SimpleBuilder<DataTypeAttribute>, SecurityObjectBuilder<String, DataTypeAttribute> {
-
-	private String wrappedObject;
-
-	public DataTypeAttributeBuilderImpl() {
-		wrappedObject = "";
-	}
+		implements SimpleBuilder<DataTypeAttribute<?>>, SecurityObjectBuilder<String, DataTypeAttribute<?>> {
 
 	@Override
-	public DataTypeAttribute create(String aInternalObject) {
-		wrappedObject = aInternalObject;
-		
-		DataTypeAttribute function = null;
+	public DataTypeAttribute<?> create(String aInternalObject) {
+		DataTypeAttribute<?> function = null;
 		if ("http://www.w3.org/2001/XMLSchema#anyURI".equalsIgnoreCase(aInternalObject)) {
 			function = new AnyURIDataTypeAttribute();
 		} else if ("http://www.w3.org/2001/XMLSchema#base64Binary".equalsIgnoreCase(aInternalObject)) {
@@ -113,7 +105,7 @@ public class DataTypeAttributeBuilderImpl
 	}
 
 	@Override
-	public DataTypeAttribute create() {
+	public DataTypeAttribute<?> create() {
 		return new AnyURIDataTypeAttribute();
 	}
 

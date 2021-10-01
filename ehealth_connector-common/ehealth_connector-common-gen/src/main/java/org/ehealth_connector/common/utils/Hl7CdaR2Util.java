@@ -30,6 +30,10 @@ import org.ehealth_connector.common.hl7cdar2.ST;
  */
 public class Hl7CdaR2Util {
 
+	private Hl7CdaR2Util() {
+		throw new IllegalStateException("This is a utility class!");
+	}
+
 	/**
 	 * <div class="en">Converts the given value to a HL7 CDA R2 INT.</div>
 	 *
@@ -43,7 +47,7 @@ public class Hl7CdaR2Util {
 	public static INT createHl7CdaR2Int(BigInteger value) {
 		INT retVal = null;
 		if (value != null) {
-			ObjectFactory factory = new ObjectFactory();
+			var factory = new ObjectFactory();
 			retVal = factory.createINT();
 			retVal.setValue(value);
 		}
@@ -75,8 +79,8 @@ public class Hl7CdaR2Util {
 	 * @return the st
 	 */
 	public static ST createHl7CdaR2St(String value) {
-		ObjectFactory factory = new ObjectFactory();
-		ST retVal = factory.createST();
+		var factory = new ObjectFactory();
+		var retVal = factory.createST();
 		retVal.xmlContent = value;
 		return retVal;
 	}

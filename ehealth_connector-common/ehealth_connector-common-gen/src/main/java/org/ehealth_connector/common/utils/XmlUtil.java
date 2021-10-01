@@ -27,12 +27,12 @@ import java.nio.file.Files;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
@@ -41,6 +41,10 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 public class XmlUtil {
+
+	private XmlUtil() {
+		throw new IllegalStateException("This is a utility class!");
+	}
 
 	/**
 	 * Creates a JAXBElement from the given parameters. This method is provided,
@@ -75,11 +79,11 @@ public class XmlUtil {
 	 */
 	public static Document getXmlDocument(InputStream inputStream)
 			throws ParserConfigurationException, SAXException, IOException {
-		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-		DocumentBuilder builder = factory.newDocumentBuilder();
+		var factory = DocumentBuilderFactory.newInstance();
+		var builder = factory.newDocumentBuilder();
 
-		InputStreamReader inputReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
-		InputSource inputSource = new InputSource(inputReader);
+		var inputReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+		var inputSource = new InputSource(inputReader);
 		inputSource.setEncoding("UTF-8");
 
 		return builder.parse(inputSource);
@@ -97,7 +101,7 @@ public class XmlUtil {
 	 */
 	public static void writeXmlDocumentToFile(Document fDoc, File out) throws Exception {
 		// if file doesnt exists, then create it
-		boolean exists = false;
+		var exists = false;
 		if (out.exists()) {
 			exists = !Files.deleteIfExists(out.toPath());
 		}
@@ -112,24 +116,22 @@ public class XmlUtil {
 	/**
 	 * Writes the given document as xml to the given output stream.
 	 *
-	 * @param fDoc
-	 *            the f doc
-	 * @param out
-	 *            the out
-	 * @throws Exception
-	 *             the exception
+	 * @param fDoc the f doc
+	 * @param out  the out
+	 * @throws TransformerFactoryConfigurationError
+	 * @throws TransformerException
+	 * @throws IOException
+	 * @throws Exception                            the exception
 	 */
 	public static void writeXmlDocumentToOutputStream(Document fDoc, OutputStream out)
-			throws Exception {
+			throws TransformerFactoryConfigurationError, TransformerException, IOException {
 		fDoc.setXmlStandalone(true);
-		DOMSource docSource = new DOMSource(fDoc);
-		Transformer transformer = TransformerFactory.newInstance().newTransformer();
+		var docSource = new DOMSource(fDoc);
+		var transformer = TransformerFactory.newInstance().newTransformer();
 		transformer.setOutputProperty(OutputKeys.METHOD, "xml");
 		transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 		transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
 		transformer.setOutputProperty(OutputKeys.INDENT, "no");
-		// out.write("<?xml version=\"1.0\"
-		// encoding=\"UTF-8\"?>".getBytes("UTF-8"));
 		transformer.transform(docSource, new StreamResult(out));
 		out.flush();
 		out.close();

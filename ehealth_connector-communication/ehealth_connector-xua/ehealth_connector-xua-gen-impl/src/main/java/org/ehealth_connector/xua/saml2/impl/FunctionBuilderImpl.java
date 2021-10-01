@@ -62,16 +62,8 @@ import org.openehealth.ipf.commons.ihe.xacml20.herasaf.functions.IiEqualFunction
 public class FunctionBuilderImpl
 		implements SimpleBuilder<Function>, SecurityObjectBuilder<String, Function> {
 
-	private String wrappedObject;
-
-	public FunctionBuilderImpl() {
-		wrappedObject = "";
-	}
-
 	@Override
 	public Function create(String aInternalObject) {
-		wrappedObject = aInternalObject;
-		
 		Function function = null;
 		if ("urn:hl7-org:v3:function:CV-equal".equalsIgnoreCase(aInternalObject)) {
 			function = new CvEqualFunction();

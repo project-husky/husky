@@ -30,8 +30,6 @@ import javax.activation.DataHandler;
 import javax.mail.util.ByteArrayDataSource;
 
 import org.apache.camel.CamelContext;
-import org.apache.cxf.binding.soap.interceptor.SoapOutInterceptor;
-import org.apache.cxf.interceptor.AttachmentOutInterceptor;
 import org.ehealth_connector.common.Code;
 import org.ehealth_connector.common.communication.AffinityDomain;
 import org.ehealth_connector.common.communication.AtnaConfig;
@@ -144,8 +142,6 @@ public class ConvenienceCommunication extends CamelService {
 		super();
 		this.affinityDomain = null;
 		this.atnaConfigMode = AtnaConfigMode.UNSECURE;
-		// CustomHttpsTLSv11v12SocketFactory.setup();
-		// AbstractAxis2Util.initAxis2Config();
 	}
 
 	/**
@@ -157,8 +153,6 @@ public class ConvenienceCommunication extends CamelService {
 	public ConvenienceCommunication(AffinityDomain affinityDomain) {
 		this.affinityDomain = affinityDomain;
 		this.atnaConfigMode = AtnaConfigMode.UNSECURE;
-		// CustomHttpsTLSv11v12SocketFactory.setup();
-		// AbstractAxis2Util.initAxis2Config();
 	}
 
 	/**
@@ -188,8 +182,6 @@ public class ConvenienceCommunication extends CamelService {
 		this.atnaConfigMode = atnaConfigMode;
 		this.documentMetadataExtractionMode = documentMetadataExtractionMode;
 		this.submissionSetMetadataExtractionMode = submissionSetMetadataExtractionMode;
-		// CustomHttpsTLSv11v12SocketFactory.setup();
-		// AbstractAxis2Util.initAxis2Config();
 	}
 
 	/**
@@ -283,8 +275,7 @@ public class ConvenienceCommunication extends CamelService {
 	 * @param folderEntryUUID   the entry uuid of the folder
 	 */
 	public void addDocumentToFolder(String documentEntryUUID, String folderEntryUUID) {
-		
-		Folder folder = new Folder();
+		var folder = new Folder();
 		folder.setEntryUuid(folderEntryUUID);
 		folder.setLogicalUuid(documentEntryUUID);
 		txnData.getFolders().add(folder);
@@ -301,7 +292,7 @@ public class ConvenienceCommunication extends CamelService {
 			txnData = new ProvideAndRegisterDocumentSet();
 		}
 
-		Folder folder = new Folder();
+		var folder = new Folder();
 		folder.assignEntryUuid();
 
 		if (folder.getUniqueId() == null) {
@@ -661,7 +652,7 @@ public class ConvenienceCommunication extends CamelService {
 	 */
 	public AffinityDomain getAffinityDomain() {
 		if (affinityDomain == null)
-			affinityDomain = new AffinityDomain(null, null, new ArrayList<Destination>());
+			affinityDomain = new AffinityDomain(null, null, new ArrayList<>());
 		return affinityDomain;
 	}
 
@@ -767,29 +758,11 @@ public class ConvenienceCommunication extends CamelService {
 	public QueryResponse queryDocumentQuery(AbstractStoredQuery query, SecurityHeaderElement securityHeader,
 			QueryReturnType returnType, boolean secure)
 			throws Exception {
-		/*
-		 * lastError = "";
-		 * setDefaultKeystoreTruststore(affinityDomain.getRegistryDestination()); final
-		 * B_Consumer consumer = new B_Consumer(
-		 * affinityDomain.getRegistryDestination().getUri());
-		 * 
-		 * try { return consumer.invokeStoredQuery(query.getOhtStoredQuery(), false); }
-		 * catch (final Exception e) { log.error("Exception", e); String message =
-		 * e.getMessage(); if (e.getCause() != null) message = e.getCause().getMessage()
-		 * + ": " + message; lastError = "Query for documents failed: " + message; if
-		 * (Util.isDebug()) e.printStackTrace();
-		 * 
-		 * }
-		 */
-
 		final var queryRegistry = new QueryRegistry(query.getIpfQuery());
 		queryRegistry.setReturnType(returnType);
 
 		final var serverInLogger = "#serverInLogger";
 		final var serverOutLogger = "#serverOutLogger";
-		final var attachmentOutInterceptor = "#AttachmentOutInterceptor";
-		AttachmentOutInterceptor interceptor = new AttachmentOutInterceptor();
-		SoapOutInterceptor soapOutInterceptor = new SoapOutInterceptor(null);
 
 		final var endpoint = String.format(
 				"xds-iti18://%s?inInterceptors=%s&inFaultInterceptors=%s&outInterceptors=%s&outFaultInterceptors=%s&secure=%s",
@@ -797,15 +770,6 @@ public class ConvenienceCommunication extends CamelService {
 				serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
 				secure);
 		log.info("Sending request to '{}' endpoint", endpoint);
-
-		/*
-		 * Map<String, String> outgoingHeaders = new HashMap<>();
-		 * outgoingHeaders.put("Accept", "application/soap+xml");
-		 * outgoingHeaders.put("transfer-encoding", "chunked");
-		 * outgoingHeaders.put("Content-Type",
-		 * "application/soap+xml; charset=UTF-8; action=\"urn:ihe:iti:2007:RegistryStoredQuery\""
-		 * ); outgoingHeaders.put("Force MTOM", "false");
-		 */
 
 		final var exchange = send(endpoint, queryRegistry, securityHeader, null);
 
@@ -828,20 +792,6 @@ public class ConvenienceCommunication extends CamelService {
 	 */
 	public QueryResponse queryDocumentsReferencesOnly(AbstractStoredQuery query, SecurityHeaderElement securityHeader)
 			throws Exception {
-		/*
-		 * lastError = "";
-		 * setDefaultKeystoreTruststore(affinityDomain.getRegistryDestination()); final
-		 * B_Consumer consumer = new B_Consumer(
-		 * affinityDomain.getRegistryDestination().getUri());
-		 * 
-		 * try { return consumer.invokeStoredQuery(query.getOhtStoredQuery(), true); }
-		 * catch (final Exception e) { log.error("Exception", e); String message =
-		 * e.getMessage(); if (e.getCause() != null) message = e.getCause().getMessage()
-		 * + ": " + message; lastError = "Query for document references failed: " +
-		 * message; if (Util.isDebug()) e.printStackTrace();
-		 * 
-		 * } return null;
-		 */
 
 		final var queryRegistry = new QueryRegistry(query.getIpfQuery());
 
@@ -912,14 +862,6 @@ public class ConvenienceCommunication extends CamelService {
 				serverInLogger, serverInLogger, serverOutLogger, serverOutLogger,
 				secure);
 		log.info("Sending request to '{}' endpoint", endpoint);
-
-		/*
-		 * Map<String, String> outgoingHeaders = new HashMap<>();
-		 * outgoingHeaders.put("Accept", "application/soap+xml");
-		 * outgoingHeaders.put("Content-Type",
-		 * "application/soap+xml; charset=UTF-8; action=\"urn:ihe:iti:2007:RetrieveDocumentSet\""
-		 * );
-		 */
 
 		final var exchange = send(endpoint, retrieveDocumentSet, securityHeader, null);
 

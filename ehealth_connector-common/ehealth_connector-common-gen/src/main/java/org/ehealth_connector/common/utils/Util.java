@@ -66,6 +66,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.SystemUtils;
+import org.apache.commons.text.StringEscapeUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
@@ -109,9 +110,7 @@ import org.ehealth_connector.common.mdht.PlayingEntity;
 import org.ehealth_connector.common.mdht.enums.PostalAddressUse;
 import org.ehealth_connector.common.mdht.enums.Signature;
 import org.slf4j.LoggerFactory;
-import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 /**
@@ -121,6 +120,10 @@ public class Util {
 
 	/** The SLF4J logger instance. */
 	private static org.slf4j.Logger log = LoggerFactory.getLogger(Util.class);
+
+	private Util() {
+		throw new IllegalStateException("This is a utility class!");
+	}
 
 	/**
 	 * The StreamGobbler is a helper for the runExternalCommand method.
@@ -189,12 +192,8 @@ public class Util {
 	 * @return false if l is null, if l.size() smaller 1 or if l.get(0) is null.
 	 *         Otherwise, return true.
 	 */
-	@SuppressWarnings("rawtypes")
-	public static boolean atLeastOne(List l) {
-		if ((l == null) || (l.size() < 1) || (l.get(0) == null)) {
-			return false;
-		}
-		return true;
+	public static boolean atLeastOne(List<?> l) {
+		return l != null && !l.isEmpty() && l.get(0) != null;
 	}
 
 	/**
@@ -221,13 +220,12 @@ public class Util {
 	 */
 	public static InputStream convertNonAsciiText2Unicode(InputStream inputStream) {
 		InputStream retVal = null;
-		DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+		var docBuilderFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder docBuilder;
-		try {
+		try (var outputStream = new ByteArrayOutputStream()) {
 			docBuilder = docBuilderFactory.newDocumentBuilder();
-			Document document = docBuilder.parse(inputStream);
+			var document = docBuilder.parse(inputStream);
 			convertNonAsciiText2Unicode(document.getDocumentElement());
-			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 			Source xmlSource = new DOMSource(document);
 			Result outputTarget = new StreamResult(outputStream);
 			TransformerFactory.newInstance().newTransformer().transform(xmlSource, outputTarget);
@@ -245,19 +243,17 @@ public class Util {
 	 * @param node
 	 *            the node to be escaped
 	 */
-	@SuppressWarnings("deprecation")
 	public static void convertNonAsciiText2Unicode(Node node) {
 		if (node.getFirstChild() != null) {
 			String nodeValue = node.getFirstChild().getNodeValue();
 			if (nodeValue != null) {
 				nodeValue = nodeValue.replace("\n", "").replace("\t", "");
-				node.getFirstChild().setNodeValue(
-						org.apache.commons.lang3.StringEscapeUtils.escapeJava(nodeValue));
+				node.getFirstChild().setNodeValue(StringEscapeUtils.escapeJava(nodeValue));
 			}
 		}
-		NodeList nodeList = node.getChildNodes();
-		for (int i = 0; i < nodeList.getLength(); i++) {
-			Node currentNode = nodeList.item(i);
+		var nodeList = node.getChildNodes();
+		for (var i = 0; i < nodeList.getLength(); i++) {
+			var currentNode = nodeList.item(i);
 			if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
 				// calls this method for all the children which is Element
 				convertNonAsciiText2Unicode(currentNode);
@@ -309,7 +305,7 @@ public class Util {
 	 * @return the assignedEntity
 	 */
 	public static POCDMT000040AssignedAuthor createAssignedAuthorFromAssignedEntity(POCDMT000040AssignedEntity a) {
-		final POCDMT000040AssignedAuthor asAut = new POCDMT000040AssignedAuthor();
+		final var asAut = new POCDMT000040AssignedAuthor();
 		// Copy Addresses
 		if (a.getAddr() != null) {
 			asAut.getAddr().addAll(a.getAddr());
@@ -417,7 +413,7 @@ public class Util {
 	public static POCDMT000040Authenticator createAuthenticatorFromAuthor(
 			org.ehealth_connector.common.Author author) {
 		final POCDMT000040Author a = author.getAuthorMdht();
-		final POCDMT000040Authenticator auth = new POCDMT000040Authenticator();
+		final var auth = new POCDMT000040Authenticator();
 		auth.setAssignedEntity(createAssignedEntityFromAssignedAuthor(a.getAssignedAuthor()));
 
 		// Set signature Code to 's'
@@ -439,7 +435,7 @@ public class Util {
 	 */
 	public static POCDMT000040Author createAuthorFromAuthenticator(
 			POCDMT000040Authenticator authenticator) {
-		final POCDMT000040Author a = new POCDMT000040Author();
+		final var a = new POCDMT000040Author();
 
 		a.setAssignedAuthor(
 				createAssignedAuthorFromAssignedEntity(authenticator.getAssignedEntity()));
@@ -459,7 +455,7 @@ public class Util {
 	 * @return the Author
 	 */
 	public static POCDMT000040Author createAuthorFromLegalAuthenticator(POCDMT000040LegalAuthenticator authenticator) {
-		final POCDMT000040Author a = new POCDMT000040Author();
+		final var a = new POCDMT000040Author();
 
 		a.setAssignedAuthor(
 				createAssignedAuthorFromAssignedEntity(authenticator.getAssignedEntity()));
@@ -535,14 +531,13 @@ public class Util {
 			final var on = new ON();
 			on.xmlContent = organization.getPrimaryName().getFullName();
 
-			if (!organization.getHl7CdaR2Pocdmt000040Organization().getName().isEmpty()) {
-				if (organization.getHl7CdaR2Pocdmt000040Organization().getName().get(0).getUse() != null) {
+			if (!organization.getHl7CdaR2Pocdmt000040Organization().getName().isEmpty()
+					&& organization.getHl7CdaR2Pocdmt000040Organization().getName().get(0).getUse() != null) {
 					on.getUse().clear();
 					for (String item : organization.getHl7CdaR2Pocdmt000040Organization().getName().get(0)
 							.getUse()) {
 						on.getUse().add(item);
 					}
-				}
 			}
 			mdhtCustOrg.setName(on);
 
@@ -650,7 +645,7 @@ public class Util {
 	 *
 	 * @return the IVL_PQ
 	 */
-	public static IVLPQ createIVL_PQNullFlavorNA() {
+	public static IVLPQ createIVLPQNullFlavorNA() {
 		final var ivlpq = new IVLPQ();
 		ivlpq.nullFlavor = new LinkedList<>();
 		ivlpq.getNullFlavor().add(org.ehealth_connector.common.enums.NullFlavor.NOT_APPLICABLE_CODE);
@@ -662,7 +657,7 @@ public class Util {
 	 *
 	 * @return the IVL_PQ
 	 */
-	public static IVLPQ createIVL_PQNullFlavorNASK() {
+	public static IVLPQ createIVLPQNullFlavorNASK() {
 		final var ivlpq = new IVLPQ();
 		ivlpq.nullFlavor = new LinkedList<>();
 		ivlpq.getNullFlavor().add(org.ehealth_connector.common.enums.NullFlavor.NOT_ASKED_CODE);
@@ -674,7 +669,7 @@ public class Util {
 	 *
 	 * @return the IVL_PQ
 	 */
-	public static IVLPQ createIVL_PQNullFlavorUNK() {
+	public static IVLPQ createIVLPQNullFlavorUNK() {
 		final var ivlpq = new IVLPQ();
 		ivlpq.nullFlavor = new LinkedList<>();
 		ivlpq.getNullFlavor().add(org.ehealth_connector.common.enums.NullFlavor.UNKNOWN_CODE);
@@ -712,7 +707,7 @@ public class Util {
 	 * @return the ivxb ts
 	 */
 	public static IVXBTS createNullFlavorUnknown() {
-		final IVXBTS ts = new IVXBTS();
+		final var ts = new IVXBTS();
 		ts.nullFlavor = new LinkedList<>();
 		ts.nullFlavor.add(org.ehealth_connector.common.enums.NullFlavor.UNKNOWN_CODE);
 		return ts;
@@ -740,7 +735,7 @@ public class Util {
 	 */
 	public static POCDMT000040CustodianOrganization createOrganizationFromCustodianOrganization(
 			POCDMT000040CustodianOrganization mdhtCO) {
-		final POCDMT000040CustodianOrganization o = new POCDMT000040CustodianOrganization();
+		final var o = new POCDMT000040CustodianOrganization();
 		if (mdhtCO != null) {
 			// Name
 			if (mdhtCO.getName() != null) {
@@ -770,7 +765,7 @@ public class Util {
 	 * @return the organization
 	 */
 	public static Organization createOrganizationFromParticipant(Participant p) {
-		final Organization o = new Organization(new OrganizationBaseType());
+		final var o = new Organization(new OrganizationBaseType());
 
 		// id, addrs, names, telecoms
 
@@ -905,7 +900,7 @@ public class Util {
 	 * @return the MDHT ED
 	 */
 	public static ED createReference(String reference) {
-		ED ed = new ED();
+		var ed = new ED();
 		ed.setReference(createReferenceTel(reference));
 		return ed;
 	}
@@ -1002,7 +997,7 @@ public class Util {
 		while (allAppenders.hasMoreElements()) {
 			Object nextElement = allAppenders.nextElement();
 			if (nextElement instanceof org.apache.log4j.FileAppender) {
-				org.apache.log4j.FileAppender fileAppender = (org.apache.log4j.FileAppender) nextElement;
+				var fileAppender = (org.apache.log4j.FileAppender) nextElement;
 				fileAppender.setImmediateFlush(true);
 			}
 		}
@@ -1010,7 +1005,7 @@ public class Util {
 		while (allAppenders.hasMoreElements()) {
 			Object nextElement = allAppenders.nextElement();
 			if (nextElement instanceof org.apache.log4j.FileAppender) {
-				org.apache.log4j.FileAppender fileAppender = (org.apache.log4j.FileAppender) nextElement;
+				var fileAppender = (org.apache.log4j.FileAppender) nextElement;
 				fileAppender.setImmediateFlush(true);
 			}
 		}
@@ -1205,8 +1200,7 @@ public class Util {
 	public static String getCurrentDirectory() {
 		var retVal = "";
 		var temp = new File(retVal);
-		if (temp != null)
-			retVal = temp.getAbsolutePath();
+		retVal = temp.getAbsolutePath();
 
 		if (!retVal.endsWith(FileUtil.getPlatformSpecificPathSeparator()))
 			retVal += FileUtil.getPlatformSpecificPathSeparator();
@@ -1321,7 +1315,7 @@ public class Util {
 
 			for (int i = pathsToCheck.length - 1; i >= 0; i--) {
 				String path = pathsToCheck[i];
-				File tmp = new File(path);
+				var tmp = new File(path);
 				if (tmp.exists() && tmp.isDirectory() && tmp.canRead()) {
 					resultList.add(path);
 				}
@@ -1365,10 +1359,10 @@ public class Util {
 	 *         <div class="fr"></div>
 	 */
 	public static String getTempDirectory() {
-		final String envVariable = "eHCTempPath";
+		final var envVariable = "eHCTempPath";
 		String tempDirectoryPath = null;
 
-		final Logger log = LogManager.getLogger(Util.class);
+		final var log = LogManager.getLogger(Util.class);
 
 		try {
 			final String env = System.getenv(envVariable);
@@ -1380,7 +1374,7 @@ public class Util {
 				tempDirectoryPath = FileUtil.getPlatformSpecificPathSeparator() + "temp";
 				log.debug("Trying to use hardcoded temp folder: " + tempDirectoryPath);
 			}
-			final File uniqueFile = File.createTempFile("eHC", ".tmp", new File(tempDirectoryPath));
+			final var uniqueFile = File.createTempFile("eHC", ".tmp", new File(tempDirectoryPath));
 			FileUtils.writeStringToFile(uniqueFile, "write check");
 			FileUtils.deleteQuietly(uniqueFile);
 		} catch (final Exception e) {
@@ -1587,17 +1581,17 @@ public class Util {
 			res = logConfig.toURI().toURL();
 		}
 		if (res == null) {
-			System.out.print("***ERROR: No valid log4j config selected\n\n");
+			log.error("***ERROR: No valid log4j config selected\n\n");
 		} else {
 			log4jConfigFn = res.getFile();
 			DOMConfigurator.configure(res);
 
 			Util.enableImmediateLogging(LogManager.getLogger(myClass));
-			System.out.print("log4j config: " + log4jConfigFn + "\n");
+			log.info("log4j config: {}\n", log4jConfigFn);
 		}
 
 		if (LogManager.getLogger(myClass) == null)
-			System.out.print("***ERROR: No valid log4j config selected\n\n");
+			log.error("***ERROR: No valid log4j config selected\n\n");
 
 	}
 
@@ -1764,7 +1758,7 @@ public class Util {
 		// String homeDirectory = System.getProperty("user.home");
 		Process process;
 		process = Runtime.getRuntime().exec(cmd);
-		StreamGobbler streamGobbler = new StreamGobbler(process.getInputStream(),
+		var streamGobbler = new StreamGobbler(process.getInputStream(),
 				System.out::println);
 		final ExecutorService ex = Executors.newSingleThreadExecutor();
 		ex.submit(streamGobbler);

@@ -34,12 +34,6 @@ public class StatementBuilderImpl
 		implements SimpleBuilder<XACMLPolicyStatementType>,
 		SecurityObjectBuilder<org.opensaml.xacml.profile.saml.XACMLPolicyStatementType, XACMLPolicyStatementType> {
 
-	private org.opensaml.xacml.profile.saml.XACMLPolicyStatementType wrappedObject;
-
-	public StatementBuilderImpl() {
-		wrappedObject = new org.opensaml.xacml.profile.saml.impl.XACMLPolicyStatementTypeImplBuilder().buildObject();
-	}
-
 	@Override
 	public XACMLPolicyStatementType create() {
 		return new XACMLPolicyStatementType();

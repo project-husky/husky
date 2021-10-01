@@ -20,7 +20,6 @@ import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.ehealth_connector.xua.saml2.SimpleBuilder;
 import org.herasaf.xacml.core.policy.impl.EffectType;
 import org.herasaf.xacml.core.policy.impl.ObligationType;
-import org.opensaml.xacml.policy.impl.ObligationTypeImplBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -34,25 +33,16 @@ public class ObligationBuilderImpl
 		implements SimpleBuilder<ObligationType>,
 		SecurityObjectBuilder<org.opensaml.xacml.policy.ObligationType, ObligationType> {
 
-	private org.opensaml.xacml.policy.ObligationType wrappedObject;
-
-	public ObligationBuilderImpl() {
-		wrappedObject = new ObligationTypeImplBuilder().buildObject();
-	}
-
 	@Override
 	public ObligationType create(org.opensaml.xacml.policy.ObligationType aInternalObject) {
-		wrappedObject = aInternalObject;
 		var retVal = new ObligationType();
 		retVal.setObligationId(aInternalObject.getObligationId());
 
 		EffectType effectType = null;
 
-		switch (aInternalObject.getFulfillOn()) {
-		case Permit:
+		if (org.opensaml.xacml.policy.EffectType.Permit.equals(aInternalObject.getFulfillOn())) {
 			effectType = EffectType.PERMIT;
-			break;
-		case Deny:
+		} else if (org.opensaml.xacml.policy.EffectType.Deny.equals(aInternalObject.getFulfillOn())) {
 			effectType = EffectType.DENY;
 		}
 

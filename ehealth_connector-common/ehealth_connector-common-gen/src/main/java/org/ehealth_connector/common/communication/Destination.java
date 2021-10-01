@@ -19,11 +19,18 @@ package org.ehealth_connector.common.communication;
 
 import java.net.URI;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * The Class Destination. Describes an Endpoint for a transmission or
  * communication.
  */
-public class Destination implements Cloneable {
+public class Destination {
+
+	/** The SLF4J logger instance. */
+	private static Logger log = LoggerFactory.getLogger(Destination.class);
+
 
 	/**
 	 * <div class="en">The key store for TLS</div>
@@ -217,6 +224,26 @@ public class Destination implements Cloneable {
 		this.trustStore = trustStore;
 		this.trustStorePassword = trustStorePassword;
 		this.trustStoreType = trustStoreType;
+		setKeyStore();
+	}
+
+	/**
+	 * Clones existing Communication Endpoint
+	 *
+	 * @param origin existing communication Endpoint
+	 */
+	public Destination(Destination origin) {
+		this(origin.getSenderOrganizationalOid(), origin.getUri());
+		this.receiverApplicationOid = origin.getReceiverApplicationOid();
+		this.receiverFacilityOid = origin.getReceiverFacilityOid();
+		this.senderApplicationOid = origin.getSenderApplicationOid();
+		this.senderFacilityOid = origin.getSenderFacilityOid();
+		this.keyStore = origin.getKeyStore();
+		this.keyStorePassword = origin.getKeyStorePassword();
+		this.keyStoreType = origin.getKeyStoreType();
+		this.trustStore = origin.getTrustStore();
+		this.trustStorePassword = origin.getTrustStorePassword();
+		this.trustStoreType = origin.getTrustStoreType();
 		setKeyStore();
 	}
 
@@ -444,5 +471,6 @@ public class Destination implements Cloneable {
 	public void setUri(URI uri) {
 		this.uri = uri;
 	}
+
 
 }

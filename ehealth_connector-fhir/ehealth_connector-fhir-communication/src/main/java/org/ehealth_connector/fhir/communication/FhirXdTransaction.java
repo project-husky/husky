@@ -360,7 +360,7 @@ public class FhirXdTransaction {
 				retVal.setAvailabilityStatus(availabilityStatus);
 
 				final List<org.hl7.fhir.dstu3.model.Extension> extensions = fhirObject
-						.getExtensionsByUrl(FhirCommon.urnUseAsComment);
+						.getExtensionsByUrl(FhirCommon.URN_USE_AS_COMMENT);
 				if (!extensions.isEmpty())
 					retVal.setComments(((StringType) extensions.get(0).getValue()).getValueAsString());
 

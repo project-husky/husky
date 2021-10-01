@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Random;
@@ -38,6 +39,10 @@ import org.slf4j.LoggerFactory;
 public class FileUtil {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(FileUtil.class.getName());
+	
+	private FileUtil() {
+		throw new IllegalStateException("This is a utility class!");
+	}
 
 	/**
 	 * Returns a combined Path of path1 and path2.
@@ -103,7 +108,11 @@ public class FileUtil {
 	 */
 	public static void saveString2File(String outputString, String outputFileName) {
 		var outputFile = new File(outputFileName);
-		outputFile.delete();
+		try {
+			Files.deleteIfExists(outputFile.toPath());
+		} catch (IOException e) {
+			LOGGER.error(e.getMessage(), e);
+		}
 		try (Writer out = new BufferedWriter(
 				new OutputStreamWriter(new FileOutputStream(outputFileName), StandardCharsets.UTF_8))) {
 			out.write(outputString);

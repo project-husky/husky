@@ -564,22 +564,6 @@ public class Author {
 		return null;
 	}
 
-	// /*
-	// * (non-Javadoc)
-	// *
-	// * @see java.lang.Object#hashCode()
-	// */
-	// @Override
-	// public int hashCode() {
-	// final int prime = 31;
-	// int result = 1;
-	// result = (prime * result) + ((asAuthor == null) ? 0 :
-	// asAuthor.hashCode());
-	// result = (prime * result) + ((mAuthor == null) ? 0 : mAuthor.hashCode());
-	// result = (prime * result) + ((person == null) ? 0 : person.hashCode());
-	// return result;
-	// }
-	//
 	/**
 	 * Checks if is author patient.
 	 *

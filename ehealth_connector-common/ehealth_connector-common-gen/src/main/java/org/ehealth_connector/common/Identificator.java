@@ -58,7 +58,7 @@ public class Identificator extends IdentificatorBaseType {
 			retVal = new org.ehealth_connector.common.hl7cdar2.II();
 			String value;
 
-			NullFlavor nf = baseType.getNullFlavor();
+			var nf = baseType.getNullFlavor();
 			if (nf != null) {
 				if (retVal.nullFlavor == null)
 					retVal.nullFlavor = new ArrayList<String>();
@@ -104,12 +104,11 @@ public class Identificator extends IdentificatorBaseType {
 	 */
 	public static IdentificatorBaseType createIdentificatorBaseType(
 			org.ehealth_connector.common.hl7cdar2.II hl7CdaR2Value) {
-		IdentificatorBaseType retVal = new IdentificatorBaseType();
+		var retVal = new IdentificatorBaseType();
 
 		if (hl7CdaR2Value != null) {
 			String nullFlavor = null;
-			if (hl7CdaR2Value.nullFlavor != null)
-				if (hl7CdaR2Value.nullFlavor.size() > 0)
+			if (hl7CdaR2Value.nullFlavor != null && !hl7CdaR2Value.nullFlavor.isEmpty())
 					nullFlavor = hl7CdaR2Value.nullFlavor.get(0);
 			if (nullFlavor != null)
 				retVal.setNullFlavor(NullFlavor.getEnum(nullFlavor));

@@ -43,7 +43,7 @@ public class AudienceRestrictionImpl extends AudienceRestrictionType implements
 
 	public List<String> getAudiences() {		
 		final List<org.opensaml.saml.saml2.core.Audience> internal = wrappedObject.getAudiences();		
-		internal.forEach(c -> getAudience().add(c.getAudienceURI()));		
+		internal.forEach(c -> getAudience().add(c.getURI()));
 		return getAudience();
 	}
 

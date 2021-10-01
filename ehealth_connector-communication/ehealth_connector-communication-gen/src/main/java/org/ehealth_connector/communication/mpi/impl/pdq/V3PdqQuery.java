@@ -162,7 +162,7 @@ public class V3PdqQuery implements MpiQuery {
 	@Override
 	public MpiQuery addPatientIdentifier(Identifier identifier) {
 		if (identifier != null && identifier.getSystem() != null && identifier.getSystem().length() > 8
-				&& identifier.getSystem().startsWith(FhirCommon.oidUrn)) {
+				&& identifier.getSystem().startsWith(FhirCommon.OID_URN)) {
 			final String oid = FhirCommon.removeUrnOidPrefix(identifier.getSystem());
 			v3PdqConsumerQuery.addPatientID(oid, identifier.getValue(), "");
 		} else if (identifier != null) {

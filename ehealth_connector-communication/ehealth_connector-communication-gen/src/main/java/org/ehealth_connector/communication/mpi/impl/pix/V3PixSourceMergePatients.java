@@ -347,7 +347,6 @@ public class V3PixSourceMergePatients extends V3Message {
 	 * @param namespace
 	 */
 	public void setObsoletePatientID(String extension, String root, String namespace) {
-		// patientId = root + "^" + extension;
 		final var idString = new StringBuilder();
 		idString.append(extension) //
 				.append("^^^");
@@ -357,8 +356,7 @@ public class V3PixSourceMergePatients extends V3Message {
 		idString.append("&") //
 				.append(root) //
 				.append("&ISO");
-		patientId = idString.toString();// extension + "^^^" + namespace + "&" +
-										// root + "&ISO";
+		patientId = idString.toString();
 
 		// add a replacement of
 		var replacementOf = new MFMIMT700701UV01ReplacementOf();
@@ -515,6 +513,7 @@ public class V3PixSourceMergePatients extends V3Message {
 				.setSender(PixPdqV3Utils.createMCCIMT000100UV01Sender(applicationOID, facilityOID));
 	}
 
+	@Override
 	public II getMessageId() {
 		return messageId;
 	}

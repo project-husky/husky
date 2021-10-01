@@ -28,7 +28,6 @@ import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.ValidationEvent;
 import javax.xml.bind.util.ValidationEventCollector;
 import javax.xml.transform.Source;
@@ -76,7 +75,7 @@ public class ConfigurationParser {
 	} // End of class ValidationHandler
 
 	/** The name of the XML schema file. */
-	private static final String schemaName = "/configuration.xsd";
+	private static final String SCHEMA_NAME = "/configuration.xsd";
 
 	/** The SLF4J logger instance. */
 	private final Logger log = LoggerFactory.getLogger(getClass());
@@ -106,28 +105,22 @@ public class ConfigurationParser {
 	 * Creates and returns the schema instance.
 	 *
 	 * @return a new {@link Schema} from the parsed schema.
-	 * @throws FileNotFoundException
-	 *             if no schema resource is found.
-	 * @throws SAXException
-	 *             if a SAX error occurs during parsing the schema.
-	 * @throws IllegalArgumentException
-	 *             if no implementation of the schema language is available.
+	 * @throws SAXException             if a SAX error occurs during parsing the
+	 *                                  schema.
+	 * @throws IOException
+	 * @throws IllegalArgumentException if no implementation of the schema language
+	 *                                  is available.
 	 */
-	protected Schema createSchema() throws SAXException, FileNotFoundException {
-		final InputStream in = getClass().getResourceAsStream(schemaName);
-		if (in == null) {
-			throw new FileNotFoundException("Could not find schema as resource: " + schemaName);
-		}
-		try {
+	protected Schema createSchema() throws SAXException, IOException {
+		try (InputStream in = getClass().getResourceAsStream(SCHEMA_NAME)) {
+			if (in == null) {
+				throw new FileNotFoundException("Could not find schema as resource: " + SCHEMA_NAME);
+			}
+
 			final Source schemaSource = new StreamSource(in);
-			final SchemaFactory schemaFactory = SchemaFactory
+			final var schemaFactory = SchemaFactory
 					.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 			return schemaFactory.newSchema(schemaSource);
-		} finally {
-			try {
-				in.close();
-			} catch (final IOException e) {
-			}
 		}
 	}
 
@@ -166,22 +159,11 @@ public class ConfigurationParser {
 	 */
 	public ConfigurationType parse() throws ConfigurationException {
 		log.info("Parsing configuration file: '{}'", getConfigFile());
-		InputStream in = null;
-		try {
-
-			// in = new
-			// BufferedInputStream(getClass().getResourceAsStream(getConfigFile().getPath()));
-			in = new BufferedInputStream(new FileInputStream(getConfigFile()));
+		try (InputStream in = new BufferedInputStream(new FileInputStream(getConfigFile()))) {
 			return unmarshal(ConfigurationType.class, in);
 		} catch (final Exception e) {
 			throw new ConfigurationException(e);
 		} finally {
-			if (in != null) {
-				try {
-					in.close();
-				} catch (final IOException e) {
-				}
-			}
 			processValidationEvents();
 		}
 	}
@@ -206,18 +188,16 @@ public class ConfigurationParser {
 			final int line = event.getLocator().getLineNumber();
 			final int column = event.getLocator().getColumnNumber();
 
-			final StringBuilder sb = new StringBuilder();
+			final var sb = new StringBuilder();
 			sb.append(getConfigFile() + ":");
 			if ((line != -1) && (column != -1)) {
 				sb.append(line + ":" + column + ": ");
 			}
 
-			switch (event.getSeverity()) {
-			case ValidationEvent.WARNING:
-				log.warn(sb.toString() + event.getMessage());
-				break;
-			case ValidationEvent.ERROR:
-			case ValidationEvent.FATAL_ERROR:
+			if (ValidationEvent.WARNING == event.getSeverity()) {
+				log.warn("{}{}", sb, event.getMessage());
+			} else if (ValidationEvent.ERROR == event.getSeverity()
+					|| ValidationEvent.FATAL_ERROR == event.getSeverity()) {
 				throw new ConfigurationException(sb.toString() + "Invalid configuration entry",
 						event.getLinkedException());
 			}
@@ -225,35 +205,32 @@ public class ConfigurationParser {
 	}
 
 	/**
-	 * Generic XML unmarshal method. Besides of unmarshalling the root element,
-	 * this method performs a validation against the XML schema and collects all
+	 * Generic XML unmarshal method. Besides of unmarshalling the root element, this
+	 * method performs a validation against the XML schema and collects all
 	 * validation events.
 	 *
-	 * @param <T>
-	 *            the type of the XML element to unmarshal.
-	 * @param docClass
-	 *            the class of the XML element to unmarshal.
-	 * @param in
-	 *            the input stream from where the XML is read.
+	 * @param <T>      the type of the XML element to unmarshal.
+	 * @param docClass the class of the XML element to unmarshal.
+	 * @param in       the input stream from where the XML is read.
 	 * @return the unmarshalled instance of the specified XML element.
-	 * @throws JAXBException
-	 *             if an error was encountered while creating the
-	 *             <tt>JAXBContext</tt> or the <tt>Unmarshaller</tt> object, or
-	 *             if an error was encountered while setting the event handler,
-	 *             or if any unexpected errors occur while unmarshalling.
-	 * @throws FileNotFoundException
-	 *             if no schema resource is found.
-	 * @throws SAXException
-	 *             if a SAX error occurs during parsing the schema.
-	 * @throws IllegalArgumentException
-	 *             if no implementation of the schema language is available.
+	 * @throws JAXBException            if an error was encountered while creating
+	 *                                  the <tt>JAXBContext</tt> or the
+	 *                                  <tt>Unmarshaller</tt> object, or if an error
+	 *                                  was encountered while setting the event
+	 *                                  handler, or if any unexpected errors occur
+	 *                                  while unmarshalling.
+	 * @throws SAXException             if a SAX error occurs during parsing the
+	 *                                  schema.
+	 * @throws IOException
+	 * @throws IllegalArgumentException if no implementation of the schema language
+	 *                                  is available.
 	 */
 	@SuppressWarnings("unchecked")
 	private <T> T unmarshal(Class<T> docClass, InputStream in)
-			throws JAXBException, SAXException, FileNotFoundException {
+			throws JAXBException, SAXException, IOException {
 		final String packageName = docClass.getPackage().getName();
-		final JAXBContext jc = JAXBContext.newInstance(packageName);
-		final Unmarshaller u = jc.createUnmarshaller();
+		final var jc = JAXBContext.newInstance(packageName);
+		final var u = jc.createUnmarshaller();
 		u.setEventHandler(getValidationHandler());
 		u.setSchema(createSchema());
 		final JAXBElement<T> doc = (JAXBElement<T>) u.unmarshal(in);

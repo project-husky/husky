@@ -33,6 +33,11 @@ import java.util.Random;
  * @author <a href="seknoop@us.ibm.com">Sarah Knoop </a>
  */
 public class OID {
+
+	private OID() {
+		throw new IllegalStateException("This is a utility class!");
+	}
+
 	/**
 	 * Monotoniclaly increasing sequence number
 	 */

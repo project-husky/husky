@@ -55,7 +55,7 @@ public class ArtifactResolveBuilderImpl implements ArtifactResolveBuilder,
 	@Override
 	public ArtifactResolveBuilderImpl artifact(String aArtifact) {
 		if (aArtifact != null) {
-			artifact.setArtifact(aArtifact);
+			artifact.setValue(aArtifact);
 		}
 		return this;
 	}

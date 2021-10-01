@@ -20,7 +20,6 @@ import org.ehealth_connector.xua.core.SecurityObjectBuilder;
 import org.ehealth_connector.xua.saml2.SimpleBuilder;
 import org.herasaf.xacml.core.policy.impl.ActionAttributeDesignatorType;
 import org.herasaf.xacml.core.policy.impl.ActionMatchType;
-import org.opensaml.xacml.policy.impl.ActionMatchTypeImplBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -34,15 +33,8 @@ public class ActionMatchBuilderImpl
 		implements SimpleBuilder<ActionMatchType>,
 		SecurityObjectBuilder<org.opensaml.xacml.policy.ActionMatchType, ActionMatchType> {
 
-	private org.opensaml.xacml.policy.ActionMatchType wrappedObject;
-
-	public ActionMatchBuilderImpl() {
-		wrappedObject = new ActionMatchTypeImplBuilder().buildObject();
-	}
-
 	@Override
 	public ActionMatchType create(org.opensaml.xacml.policy.ActionMatchType aInternalObject) {
-		wrappedObject = aInternalObject;
 		var retVal = new ActionMatchType();
 		var actionAttrDesType = new ActionAttributeDesignatorType();
 		actionAttrDesType.setAttributeId(aInternalObject.getActionAttributeDesignator().getAttributeId());

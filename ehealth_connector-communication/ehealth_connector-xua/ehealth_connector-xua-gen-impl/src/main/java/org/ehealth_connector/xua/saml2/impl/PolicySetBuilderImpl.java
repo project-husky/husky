@@ -31,7 +31,6 @@ import org.herasaf.xacml.core.policy.impl.EvaluatableIDImpl;
 import org.herasaf.xacml.core.policy.impl.IdReferenceType;
 import org.herasaf.xacml.core.policy.impl.ObligationsType;
 import org.herasaf.xacml.core.policy.impl.PolicySetType;
-import org.opensaml.xacml.policy.impl.PolicySetTypeImplBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -45,15 +44,8 @@ public class PolicySetBuilderImpl
 		implements SimpleBuilder<PolicySetType>,
 		SecurityObjectBuilder<org.opensaml.xacml.policy.PolicySetType, PolicySetType> {
 
-	private org.opensaml.xacml.policy.PolicySetType wrappedObject;
-
-	public PolicySetBuilderImpl() {
-		wrappedObject = new PolicySetTypeImplBuilder().buildObject();
-	}
-
 	@Override
 	public PolicySetType create(org.opensaml.xacml.policy.PolicySetType aInternalObject) {
-		this.wrappedObject = aInternalObject;
 		var policySet = new PolicySetType();
 		policySet.setVersion(aInternalObject.getVersion());
 

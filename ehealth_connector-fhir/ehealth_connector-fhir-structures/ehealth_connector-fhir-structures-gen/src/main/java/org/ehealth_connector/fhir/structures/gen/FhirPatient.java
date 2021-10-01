@@ -140,7 +140,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 	 * @param gender the gender
 	 * @return the administrative gender enum
 	 */
-	static public org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender convertGender(
+	public static org.hl7.fhir.dstu3.model.Enumerations.AdministrativeGender convertGender(
 			AdministrativeGender gender) {
 		if (gender != null) {
 			if (gender.equals(AdministrativeGender.FEMALE)) {
@@ -630,7 +630,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 		final var patient = new Patient(patientName, patientGender, patientBirthdate);
 		for (final Identifier identDt : getIdentifier()) {
 			var oid = "";
-			if (identDt.getSystem().startsWith(FhirCommon.oidUrn)) {
+			if (identDt.getSystem().startsWith(FhirCommon.OID_URN)) {
 				oid = FhirCommon.removeUrnOidPrefix(identDt.getSystem());
 			}
 			final String id = identDt.getValue();
@@ -656,7 +656,7 @@ public class FhirPatient extends org.hl7.fhir.dstu3.model.Patient {
 
 			if ((org != null) && (org.getIdentifierFirstRep() != null)
 					&& (org.getIdentifierFirstRep().getSystem() != null)
-					&& org.getIdentifierFirstRep().getSystem().startsWith(FhirCommon.oidUrn)) {
+					&& org.getIdentifierFirstRep().getSystem().startsWith(FhirCommon.OID_URN)) {
 				var oid = "";
 				oid = org.getIdentifierFirstRep().getSystem().substring(8);
 				organization.getIdentificatorList().add(new Identificator(oid, org.getIdentifierFirstRep().getValue()));

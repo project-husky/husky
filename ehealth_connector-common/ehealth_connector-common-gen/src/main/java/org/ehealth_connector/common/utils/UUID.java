@@ -39,6 +39,10 @@ import java.util.GregorianCalendar;
  */
 public class UUID {
 
+	private UUID() {
+		throw new IllegalStateException("This is a utility class!");
+	}
+
 	/**
 	 * Holds the time this alogorithm was last run
 	 */

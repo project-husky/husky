@@ -126,30 +126,44 @@ public class XdmTestUtils extends TestUtils {
 				.collect(Collectors.toList()).get(0).getDocumentEntry();
 
 		// Calculate integrity values of the imported documents
-		try {
+		try (var is = doc1.getDataHandler().getInputStream()) {
 			// Hash
-			final String doc1Hash = DigestUtils.sha1Hex(doc1.getDataHandler().getInputStream());
-			final String doc2Hash = DigestUtils.sha1Hex(doc2.getDataHandler().getInputStream());
+			final String doc1Hash = DigestUtils.sha1Hex(is);
+
 			// Size
 			@SuppressWarnings("resource")
-			final long doc1Size = IOUtils.toByteArray(doc1.getDataHandler().getInputStream()).length;
-			@SuppressWarnings("resource")
-			final long doc2Size = IOUtils.toByteArray(doc2.getDataHandler().getInputStream()).length;
+			final long doc1Size = IOUtils.toByteArray(is).length;
 
 			// Compare Hash
 			if (!doc1Hash.equals(doc1Metadata.getHash()))
 				return false;
-			if (!doc2Hash.equals(doc2Metadata.getHash()))
-				return false;
 			// Compare Size
 			if (doc1Size != doc1Metadata.getSize())
 				return false;
+		} catch (final IOException e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		// Calculate integrity values of the imported documents
+		try (var is = doc2.getDataHandler().getInputStream()) {
+			// Hash
+			final String doc2Hash = DigestUtils.sha1Hex(is);
+			// Size
+			@SuppressWarnings("resource")
+			final long doc2Size = IOUtils.toByteArray(is).length;
+
+			// Compare Hash
+			if (!doc2Hash.equals(doc2Metadata.getHash()))
+				return false;
+			// Compare Size
 			if (doc2Size != doc2Metadata.getSize())
 				return false;
 		} catch (final IOException e) {
 			e.printStackTrace();
 			return false;
 		}
+
 		return true;
 	}
 

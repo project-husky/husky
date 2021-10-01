@@ -539,7 +539,7 @@ public class PixPdqV3QueryBase extends CamelService {
 
 		if ((organization != null) && (!organization.getIdentifier().isEmpty())) {
 			final Identifier organizationId = organization.getIdentifier().get(0);
-			if (organizationId.getSystem().startsWith(FhirCommon.oidUrn)) {
+			if (organizationId.getSystem().startsWith(FhirCommon.OID_URN)) {
 				organizationOid = FhirCommon.removeUrnOidPrefix(organizationId.getSystem());
 			}
 		}

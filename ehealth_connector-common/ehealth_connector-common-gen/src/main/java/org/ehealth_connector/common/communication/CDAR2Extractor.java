@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
@@ -82,7 +83,7 @@ public class CDAR2Extractor {
 	 * string representations and values are corresponding HL7v2.5 gender code
 	 * values as strings.
 	 */
-	public static final Map<String, String> ADMIN_GENDER_TABLE_001;
+	private static final Map<String, String> ADMIN_GENDER_TABLE_001;
 	static {
 		ADMIN_GENDER_TABLE_001 = new HashMap<>();
 		ADMIN_GENDER_TABLE_001.put(AdministrativeGender.MALE_CODE, "M");
@@ -400,7 +401,7 @@ public class CDAR2Extractor {
 	 */
 	public List<Code> extractConfidentialityCodes() {
 		if (cda.getConfidentialityCode() == null) {
-			return null;
+			return new LinkedList<>();
 		}
 
 		var code = map(cda.getConfidentialityCode());
@@ -442,7 +443,7 @@ public class CDAR2Extractor {
 		logger.info("DocumentEntry.entryUUID "
 				+ "is an XDS specific attribute and outside the scope of any CDA R2 document. \nThus, it cannot be"
 				+ " extracted.");
-		return null;
+		return "";
 	}
 
 	/**
@@ -455,7 +456,7 @@ public class CDAR2Extractor {
 	public List<Code> extractEventCodes() {
 		logger.info("This extraction routine, at this point,"
 				+ "does not attempt to extract event code metadata from a generic CDA R2 document.");
-		return null;
+		return new LinkedList<>();
 	}
 
 	/**
@@ -496,7 +497,7 @@ public class CDAR2Extractor {
 		logger.info("DocumentEntry.hash "
 				+ "is a comptuted value and outside the scope of any CDA R2 document. \nThus, it cannot be"
 				+ " extracted.");
-		return null;
+		return "";
 	}
 
 	/**
@@ -1238,9 +1239,8 @@ public class CDAR2Extractor {
 		}
 
 		String gender = docCode.getCode();
-		String value = ADMIN_GENDER_TABLE_001.get(gender);
 
-		return value;
+		return ADMIN_GENDER_TABLE_001.get(gender);
 	}
 
 	/**
@@ -1250,14 +1250,8 @@ public class CDAR2Extractor {
 	 * @return false if l is null, if l.size() < 1 or if l.get(0) is null.
 	 *         Otherwise, return true.
 	 */
-	protected boolean atLeastOne(List l) {
-		if (l == null)
-			return false;
-		if (l.isEmpty())
-			return false;
-		if (l.get(0) == null)
-			return false;
-		return true;
+	protected boolean atLeastOne(List<?> l) {
+		return l != null && !l.isEmpty() && l.get(0) != null;
 	}
 
 	/**

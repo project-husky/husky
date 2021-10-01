@@ -71,19 +71,19 @@ public class FhirCdaChLrqc /* extends AbstractFhirCdaCh */ {
 
 		/** The comment. */
 		@Child(name = "comment")
-		@Extension(url = FhirCommon.urnUseAsComment, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_COMMENT, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "comment")
 		private Reference comment;
 
 		/** The custodian. */
 		@Child(name = "custodian")
-		@Extension(url = FhirCommon.urnUseAsCustodian, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_CUSTODIAN, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "custodian")
 		private Reference custodian;
 
 		/** The doc author. */
 		@Child(name = "docAuthor")
-		@Extension(url = FhirCommon.urnUseAsAuthor, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_AUTHOR, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "author")
 		private Reference docAuthor;
 
@@ -95,7 +95,7 @@ public class FhirCdaChLrqc /* extends AbstractFhirCdaCh */ {
 
 		/** The doc type. */
 		@Child(name = "docType")
-		@Extension(url = FhirCommon.urnUseAsDocType, definedLocally = false, isModifier = false)
+		@Extension(url = FhirCommon.URN_USE_AS_DOC_TYPE, definedLocally = false, isModifier = false)
 		@Description(shortDefinition = "docType")
 		private Reference docType;
 

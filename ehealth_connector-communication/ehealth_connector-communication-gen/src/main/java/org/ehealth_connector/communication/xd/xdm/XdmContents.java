@@ -301,9 +301,9 @@ public class XdmContents {
 			for (final Document doc : txnData.get(i).getDocuments()) {
 				docMetadata = doc.getDocumentEntry();
 
-				try {
-					docHash = DigestUtils.sha512Hex(doc.getDataHandler().getInputStream());
-					docSize = IOUtils.toByteArray(doc.getDataHandler().getInputStream()).length;
+				try (var is = doc.getDataHandler().getInputStream()) {
+					docHash = DigestUtils.sha512Hex(is);
+					docSize = IOUtils.toByteArray(is).length;
 				} catch (final IOException e) {
 					log.error("IO Exception during zip document integrity check. ", e);
 				}

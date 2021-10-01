@@ -50,7 +50,7 @@ public class AuthnStatementBuilderImpl implements AuthnStatementBuilder,
 	@Override
 	public AuthnStatementBuilder authnContextClassRef(String aAuthnContextClassRef) {
 		if (aAuthnContextClassRef != null) {
-			authnContextClassRef.setAuthnContextClassRef(aAuthnContextClassRef);
+			authnContextClassRef.setURI(aAuthnContextClassRef);
 		}
 		return this;
 	}

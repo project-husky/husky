@@ -83,7 +83,7 @@ public class StatusBuilderImpl implements StatusBuilder,
 	 */
 	@Override
 	public StatusBuilder statusMessage(String aStatusMessage) {
-		statusMessage.setMessage(aStatusMessage);
+		statusMessage.setValue(aStatusMessage);
 		return this;
 	}
 

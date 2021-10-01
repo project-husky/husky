@@ -32,7 +32,6 @@ import org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.CV;
 import org.openehealth.ipf.commons.ihe.xacml20.stub.hl7v3.II;
 import org.opensaml.core.xml.XMLObject;
 import org.opensaml.core.xml.schema.impl.XSAnyImpl;
-import org.opensaml.xacml.policy.impl.ResourceMatchTypeImplBuilder;
 
 /**
  * <!-- @formatter:off -->
@@ -45,15 +44,8 @@ import org.opensaml.xacml.policy.impl.ResourceMatchTypeImplBuilder;
 public class ResourceMatchBuilderImpl implements SimpleBuilder<ResourceMatchType>,
 		SecurityObjectBuilder<org.opensaml.xacml.policy.ResourceMatchType, ResourceMatchType> {
 
-	private org.opensaml.xacml.policy.ResourceMatchType wrappedObject;
-
-	public ResourceMatchBuilderImpl() {
-		wrappedObject = new ResourceMatchTypeImplBuilder().buildObject();
-	}
-
 	@Override
 	public ResourceMatchType create(org.opensaml.xacml.policy.ResourceMatchType aInternalObject) {
-		wrappedObject = aInternalObject;
 		var retVal = new ResourceMatchType();
 
 		if (aInternalObject.getAttributeSelector() != null) {
@@ -78,7 +70,7 @@ public class ResourceMatchBuilderImpl implements SimpleBuilder<ResourceMatchType
 
 						if (anyImpl.getElementQName() != null
 								&& "CodedValue".equalsIgnoreCase(anyImpl.getElementQName().getLocalPart())) {
-							CV cv = new CV();
+							var cv = new CV();
 
 							for (Entry<QName, String> entry : anyImpl.getUnknownAttributes().entrySet()) {
 								if (entry != null && entry.getKey() != null

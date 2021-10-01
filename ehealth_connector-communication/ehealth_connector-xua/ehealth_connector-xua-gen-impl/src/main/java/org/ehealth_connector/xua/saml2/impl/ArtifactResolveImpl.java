@@ -41,7 +41,7 @@ public class ArtifactResolveImpl
 	@Override
 	public String getArtifact() {
 		if (wrappedObject.getArtifact() != null) {
-			return wrappedObject.getArtifact().getArtifact();
+			return wrappedObject.getArtifact().getValue();
 		}
 		return "";
 	}
